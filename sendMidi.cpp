@@ -71,7 +71,7 @@ void sendMidi(byte m, byte c, byte d1, byte d2) // Custom function to send MIDI 
     t_midiMsg;          // We call this structure 't_midiMsg'
 
     t_midiMsg msg;
-    msg.status = m & 0xF;
+    msg.status = (m>>4) & 0xF;
     msg.channel = c & 0xF; // channels are 0-based
     msg.data1 = d1 & 0x7F;
     msg.data2 = d2 & 0x7F;
@@ -118,7 +118,7 @@ void sendMidi(byte m, byte c, int d1) // Custom function to send MIDI messages: 
     t_midiMsg;          // We call this structure 't_midiMsg'
 
     t_midiMsg msg;
-    msg.status = m & 0xF;
+    msg.status = (m>>4) & 0xF;
     msg.channel = c & 0xF; // channels are 0-based
     msg.data = d1 & 0x7F;
     Serial.write((uint8_t *)&msg, sizeof(msg));  // Send the MIDI message.
