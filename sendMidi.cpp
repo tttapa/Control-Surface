@@ -55,11 +55,11 @@ void sendMidi(byte m, byte c, byte d1, byte d2) // Custom function to send MIDI 
 #if defined (CORE_TEENSY)  //only include these lines when compiling for a Teensy board
     usb_midi_write_packed(((m>>4) & 0xF) | (((m | c) & 0xFF) << 8)
 		  | ((d1 & 0x7F) << 16) | ((d2 & 0x7F) << 24));
-#elif defined(USBCON)  //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has no USB connection in the main MCU and is not a Teensy
+#elif defined(USBCON)  //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has USB connection in the main MCU but is not a Teensy
     midiEventPacket_t msg = {(m>>4)&0xF, (m | c)&0xFF, d1&0x7F, d2&0x7F};
     MidiUSB.sendMIDI(msg);
     MidiUSB.flush();
-#else // If you're compiling for an Arduino that has USB connection in the main MCU
+#else // If you're compiling for an Arduino that has no USB connection in the main MCU
 
     //* The format of the message to send via serial. We create a new data structure, that can store 3 bytes at once.  This will be easier to send as MIDI. */
     typedef struct {
@@ -103,11 +103,11 @@ void sendMidi(byte m, byte c, int d1) // Custom function to send MIDI messages: 
 #if defined (CORE_TEENSY)  //only include these lines when compiling for a Teensy board
     usb_midi_write_packed(((m>>4) & 0xF) | (((m | c) & 0xFF) << 8)
 		  | ((d1 & 0x7F) << 16));
-#elif defined(USBCON)  //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has no USB connection in the main MCU and is not a Teensy
+#elif defined(USBCON)  //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has USB connection in the main MCU but is not a Teensy
     midiEventPacket_t msg = {(m>>4)&0xF, (m | c)&0xFF, d1&0x7F, 0};
     MidiUSB.sendMIDI(msg);
     MidiUSB.flush();
-#else // If you're compiling for an Arduino that has USB connection in the main MCU
+#else // If you're compiling for an Arduino that has no USB connection in the main MCU
 
     //* The format of the message to send via serial. We create a new data structure, that can store 2 bytes at once.  This will be easier to send as MIDI. */
     typedef struct {
