@@ -56,7 +56,7 @@ void sendMidi(byte m, byte c, byte d1, byte d2) // Custom function to send MIDI 
 		  | ((d1 & 0x7F) << 16) | ((d2 & 0x7F) << 24));
 #elif defined(USBCON)  //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has no USB connection in the main MCU and is not a Teensy
     midiEventPacket_t msg = {(m>>4)&0xF, (m | c)&0xFF, d1&0x7F, d2&0x7F};
-    MIDIUSB.sendMIDI(msg);
+    MidiUSB.sendMIDI(msg);
 #else // If you're compiling for an Arduino that has USB connection in the main MCU
 
     //* The format of the message to send via serial. We create a new data structure, that can store 3 bytes at once.  This will be easier to send as MIDI. */
@@ -102,7 +102,7 @@ void sendMidi(byte m, byte c, int d1) // Custom function to send MIDI messages: 
 		  | ((d1 & 0x7F) << 16));
 #elif defined(USBCON)  //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has no USB connection in the main MCU and is not a Teensy
     midiEventPacket_t msg = {(m>>4)&0xF, (m | c)&0xFF, d1&0x7F, 0};
-    MIDIUSB.sendMIDI(msg);
+    MidiUSB.sendMIDI(msg);
 #else // If you're compiling for an Arduino that has USB connection in the main MCU
 
     //* The format of the message to send via serial. We create a new data structure, that can store 2 bytes at once.  This will be easier to send as MIDI. */
