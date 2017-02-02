@@ -29,7 +29,6 @@
 #define RotaryEncoder_h_
 
 #include "sendMidi.h"
-//#define CC 0xB0
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
@@ -78,63 +77,43 @@ class RotaryEncoder
 public:
   RotaryEncoder(byte p, byte p2, byte n, byte c, int sp, byte pps, byte m) // first pin, second pin, controller number, channel, speed multiplier, pulses  per step.
   { 
-    validPin = true;
-#if defined (__AVR_ATmega328P__) // if you're compiling for Arduino Uno
-    if(p != 2 && p != 3){ //If the user enters an invalid pin number. (ie no interrupt pin) 
-      validPin = false;
-    }
-    if(p2 != 2 && p2 != 3){ //If the user enters an invalid pin number. (ie no interrupt pin) 
-      validPin = false;
-    }
-#endif
-
-#if defined (__AVR_ATmega32U4__) // if you're compiling for Arduino Leonardo
-    if( p != 0 && p != 1 && p != 2 && p != 3 ){ //If the user enters an invalid pin number (ie no interrupt pin)
-      validPin = false;
-    }
-    if( p2 != 0 && p2 != 1 && p2 != 2 && p2 != 3 ){ //If the user enters an invalid pin number (ie no interrupt pin)
-      validPin = false;
-    }
-#endif
-    if(validPin){
-      pin1 = p; 
-      pin2 = p2;
-      controller = n; 
-      channel = c;
-      speedMultiply = sp;
-      oldVal = 0;
-      pulsesPerStep = pps;
-      count = pps-1;
-      mode = m;
-      
+    pin1 = p; 
+    pin2 = p2;
+    controller = n; 
+    channel = c;
+    speedMultiply = sp;
+    oldVal = 0;
+    pulsesPerStep = pps;
+    count = pps-1;
+    mode = m;
+    
 #ifdef INPUT_PULLUP
-      pinMode(pin1, INPUT_PULLUP);
-      pinMode(pin2, INPUT_PULLUP);
+    pinMode(pin1, INPUT_PULLUP);
+    pinMode(pin2, INPUT_PULLUP);
 #else
-      pinMode(pin1, INPUT);
-      digitalWrite(pin1, HIGH);
-      pinMode(pin2, INPUT);
-      digitalWrite(pin2, HIGH);
+    pinMode(pin1, INPUT);
+    digitalWrite(pin1, HIGH);
+    pinMode(pin2, INPUT);
+    digitalWrite(pin2, HIGH);
 #endif
-      encoder.pin1_register = PIN_TO_BASEREG(pin1);
-      encoder.pin1_bitmask = PIN_TO_BITMASK(pin1);
-      encoder.pin2_register = PIN_TO_BASEREG(pin2);
-      encoder.pin2_bitmask = PIN_TO_BITMASK(pin2);
-      encoder.position = 0;
-      // allow time for a passive R-C filter to charge
-      // through the pullup resistors, before reading
-      // the initial state
-      delayMicroseconds(2000);
-      uint8_t s = 0;
-      if (DIRECT_PIN_READ(encoder.pin1_register, encoder.pin1_bitmask)) s |= 1;
-      if (DIRECT_PIN_READ(encoder.pin2_register, encoder.pin2_bitmask)) s |= 2;
-      encoder.state = s;
+    encoder.pin1_register = PIN_TO_BASEREG(pin1);
+    encoder.pin1_bitmask = PIN_TO_BITMASK(pin1);
+    encoder.pin2_register = PIN_TO_BASEREG(pin2);
+    encoder.pin2_bitmask = PIN_TO_BITMASK(pin2);
+    encoder.position = 0;
+    // allow time for a passive R-C filter to charge
+    // through the pullup resistors, before reading
+    // the initial state
+    delayMicroseconds(2000);
+    uint8_t s = 0;
+    if (DIRECT_PIN_READ(encoder.pin1_register, encoder.pin1_bitmask)) s |= 1;
+    if (DIRECT_PIN_READ(encoder.pin2_register, encoder.pin2_bitmask)) s |= 2;
+    encoder.state = s;
 #ifdef ENCODER_USE_INTERRUPTS
-      interrupts_in_use = attach_interrupt(pin1, &encoder);
-      interrupts_in_use += attach_interrupt(pin2, &encoder);
+    interrupts_in_use = attach_interrupt(pin1, &encoder);
+    interrupts_in_use += attach_interrupt(pin2, &encoder);
 #endif
-      //update_finishup();  // to force linker to include the code (does not work)
-    }
+    //update_finishup();  // to force linker to include the code (does not work)
   }
 
 private:
@@ -173,55 +152,34 @@ private:
 
 public: 
   void refresh(){
-    if(validPin){
-      int msgVal;
-      value = read();
-      difference = (value - oldVal)/pulsesPerStep;
-      if(difference > 63) difference = 63;
-      if(difference < -63) difference = -63;
-      if(difference != 0){
-        //if(value%pulsesPerStep == 0){ // if the absolute value of the encoder devides by the number of pulses per step, this means a whole step has passed.
-          count = 0;
-          if(difference < 0){
-            if(mode == 1){
-              msgVal = 63 + difference * speedMultiply;
-            } else if(mode == 2){
-              msgVal = bit(6) - difference * speedMultiply; // bit(6) gives 64, this is the sign bit
-            } else if(mode == 3){
-              msgVal = 128 + difference * speedMultiply;
-            }
-            //if(msgVal > 127) msgVal = 127;
-            //if(msgVal < 0) msgVal = 0;
-            sendMidi(CC, channel, controller, msgVal);
-          } 
-          else if ( difference > 0){
-            if(mode == 1){
-              msgVal = 63 + difference * speedMultiply;
-            } else if(mode == 2){
-              msgVal = difference * speedMultiply;
-            } else if(mode == 3){
-              msgVal = 0 + difference * speedMultiply;
-            }
-            //if(msgVal > 127) msgVal = 127;
-            //if(msgVal < 0) msgVal = 0;
-            sendMidi(CC, channel, controller, msgVal);
+    int msgVal;
+    value = read();
+    difference = (value - oldVal)/pulsesPerStep;
+    if(difference > 63) difference = 63;
+    if(difference < -63) difference = -63;
+    if(difference != 0){
+        count = 0;
+        if(difference < 0){
+          if(mode == 1){
+            msgVal = 63 + difference * speedMultiply;
+          } else if(mode == 2){
+            msgVal = bit(6) - difference * speedMultiply; // bit(6) gives 64, this is the sign bit
+          } else if(mode == 3){
+            msgVal = 128 + difference * speedMultiply;
           }
-        //} 
-        //else {
-        //  count ++;
-        //}
-        oldVal = value;
-
-      }
-    } 
-    else {
-      pinMode(13,OUTPUT);
-      for(;;){ // forever 
-        digitalWrite(13, 1); // blink led on 13 @1Hz
-        delay(500);
-        digitalWrite(13, 0);
-        delay(500);
-      }
+          sendMidi(CC, channel, controller, msgVal);
+        } 
+        else if ( difference > 0){
+          if(mode == 1){
+            msgVal = 63 + difference * speedMultiply;
+          } else if(mode == 2){
+            msgVal = difference * speedMultiply;
+          } else if(mode == 3){
+            msgVal = 0 + difference * speedMultiply;
+          }
+          sendMidi(CC, channel, controller, msgVal);
+        }
+      oldVal = value;
     }
   }
 
@@ -1136,7 +1094,6 @@ private:
 private: 
   byte pin1, pin2, controller, channel, pulsesPerStep, mode;
   int speedMultiply, count;
-  boolean validPin;
   long value, oldVal, difference;
 
 };
