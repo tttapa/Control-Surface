@@ -12,7 +12,6 @@ public:
   void detachBank();
 private:
   byte pin, note, channel, value, oldVal, velocity, bankPin, newNote, newChannel;
-  boolean validPin;
   boolean bankTrue;
 };
 
