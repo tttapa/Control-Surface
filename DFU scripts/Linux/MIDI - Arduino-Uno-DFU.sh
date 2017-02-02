@@ -1,7 +1,6 @@
 #!/bin/bash
 
-parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
-cd "$parent_path"
+cd "$(dirname "${BASH_SOURCE}")"
 
 read -p "Are you sure you want to flash your ATmega16U2 with the HIDuino MIDI firmware? [Y/n]: " confirm
 if [ "$confirm" = y ] || [ "$confirm" = Y ]
