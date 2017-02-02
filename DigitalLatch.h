@@ -11,8 +11,8 @@ public:
   void bank(byte bPin, byte newN, byte newC);
   void detachBank();
 private:
- byte pin, note, channel, value, oldVal, velocity, bankPin, newNote, newChannel;
-  boolean offSent, validPin;
+  byte pin, note, channel, value, oldVal, velocity, bankPin, newNote, newChannel;
+  boolean offSent;
   boolean bankTrue;
   int latch;
   unsigned long time;
