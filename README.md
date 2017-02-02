@@ -15,11 +15,11 @@ The MIDI\_controller library depends on the [PJRC Encoder library](https://www.p
 To install this library, download the [.ZIP file](https://github.com/tttapa/MIDI_controller/archive/master.zip). Then open the Arduino IDE, go to Sketch > Include Library > Add .ZIP library, and open the .ZIP file you just downloaded.
 ### Installing Atmel Flip (Uno and Mega only)
 The Arduino Uno and Mega don't have native USB support, so they need extra firmware to be installed to the USB-to-Serial chip in order to work as a MIDI device. To flash this firmware, you have to install a DFU programmer. On Windows, you can use [Atmel Flip](http://www.atmel.com/tools/flip.aspx).
-On OSX and Linux, install *dfu-programmer*.
-**Mac:**
+On OSX and Linux, install *dfu-programmer*. 
+**Mac:** 
 ```sudo port install dfu-programmer```
-**Linux:**
-```sudo apt-get install dfu-programmer```
+**Linux:** 
+```sudo apt-get install dfu-programmer``` 
 
 More information can be found [here](https://www.arduino.cc/en/Hacking/DFUProgramming8U2).
 
@@ -39,9 +39,9 @@ TODO
 #### OSX
 TODO (probably just transcoding the Linux Bash scripts to OSX Bash)
 #### Linux
-Go to the folder where you installed this library (usually ~/Arduino/libraries/MIDI_controller) and go to 'DFU scripts/Linux' and open it in a terminal. Then allow executing of the scripts:
+Go to the folder where you installed this library (usually ~/Arduino/libraries/MIDI_controller) and go to 'DFU scripts/Linux' and open it in a terminal. Then allow executing of the scripts: 
 ```chmod +x *```
-And run the script to flash the MIDI firmware:
+And run the script to flash the MIDI firmware: 
 ```./MIDI*```
 Type 'y' to confirm, and enter your root password if necessary.
 The script will download and install the firmware to the Arduino.
