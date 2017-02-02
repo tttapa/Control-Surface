@@ -17,9 +17,9 @@ To install this library, download the [.ZIP file](https://github.com/tttapa/MIDI
 The Arduino Uno and Mega don't have native USB support, so they need extra firmware to be installed to the USB-to-Serial chip in order to work as a MIDI device. To flash this firmware, you have to install a DFU programmer. On Windows, you can use [Atmel Flip](http://www.atmel.com/tools/flip.aspx).
 On OSX and Linux, install *dfu-programmer*. 
 **Mac:** 
-```sudo port install dfu-programmer```
+``` sudo port install dfu-programmer ```
 **Linux:** 
-```sudo apt-get install dfu-programmer``` 
+``` sudo apt-get install dfu-programmer ``` 
 
 More information can be found [here](https://www.arduino.cc/en/Hacking/DFUProgramming8U2).
 
@@ -40,15 +40,16 @@ TODO
 TODO (probably just transcoding the Linux Bash scripts to OSX Bash)
 #### Linux
 Go to the folder where you installed this library (usually ~/Arduino/libraries/MIDI_controller) and go to 'DFU scripts/Linux' and open it in a terminal. Then allow executing of the scripts: 
-```chmod +x *```
-And run the script to flash the MIDI firmware: 
-```./MIDI*```
+``` chmod +x * ```
+
+And run the script to flash the MIDI firmware:
+``` ./MIDI* ```
 Type 'y' to confirm, and enter your root password if necessary.
 The script will download and install the firmware to the Arduino.
 When the script is finished, unplug the Arduino and plug it back in: your computer should now recognize it as a MIDI device.
 
 Now that the MIDI firmware is running on the USB-to-Serial converter, you can't upload new sketches to the Arduino.
 To upload a new sketch, install the Arduino Serial firmware again: put the Arduino into DFU mode again, by connecting the reset pin to ground, and run the second script in the 'DFU scripts/Linux' folder:
-```./Serial*```
+``` ./Serial* ```
 This script will download the Arduino Serial firmware and install it to the Arduino. When it's finished, unplug the Arduino, plug it back in, and upload your new sketch. 
 Then you can install the MIDI firmware again.
