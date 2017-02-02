@@ -1,6 +1,10 @@
 #include "Arduino.h"
 #include "sendMidi.h"
 
+#if defined (USBCON)
+#include "MIDIUSB.h"
+#endif
+
 int Delay;
 byte pin;
 bool Blink;
