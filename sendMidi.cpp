@@ -12,7 +12,7 @@ bool Debug;
 
 void setupMidi(byte p, int d, bool db){
 //#if defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined (__AVR_ATmega2560__) // Only include these lines when compiling for Arduino Uno or Arduino Mega (that have an ATmega16U2 for serial communication)
-#if !defined(USBCON) // If you're compiling for an Arduino that has USB connection in the main MCU
+#if ! (defined(USBCON) || defined (CORE_TEENSY)) // If you're compiling for an Arduino that has USB connection in the main MCU
   if(db)
     Serial.begin(9600); // a baud rate supported by the computer, for debugging
   else
