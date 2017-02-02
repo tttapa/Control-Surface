@@ -17,6 +17,6 @@ const static byte PITCH_BEND = 0xE0;
 
 void sendMidi(byte m, byte c, byte d1, byte d2);
 void sendMidi(byte m, byte c, int d1);
-void setupMidi(byte p, int d, bool db);
+void setupMidi(byte p, int d, bool db = false);
 
 #endif
