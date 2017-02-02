@@ -38,6 +38,7 @@ void setupMidi(byte p, int d, bool db){
 
 void sendMidi(byte m, byte c, byte d1, byte d2) // Custom function to send MIDI messages: message, channel, data1, data2
 {
+    c--; // Channels are zero-based
   if(Blink) digitalWrite(pin,1);
   
   if(Debug){
@@ -87,6 +88,7 @@ void sendMidi(byte m, byte c, byte d1, byte d2) // Custom function to send MIDI 
 
 void sendMidi(byte m, byte c, int d1) // Custom function to send MIDI messages: message, channel, data1
 {
+  c--; // Channels are zero-based
  if(Blink) digitalWrite(pin,1);
   
   if(Debug){
