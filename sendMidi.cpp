@@ -16,7 +16,7 @@ void setupMidi(byte p, int d, bool db){
   if(db)
     Serial.begin(9600); // a baud rate supported by the computer, for debugging
   else
-    Serial.begin(31250); // Start communication with ATmega16U2 @31250 baud (for MIDI firmware: )
+    Serial.begin(31250); // Start communication with ATmega16U2 @31250 baud (for MIDI firmware: Hiduino: https://github.com/ddiakopoulos/hiduino)
 #else 
   if(db)
     Serial.begin(9600); // a baud rate supported by the computer, for debugging
