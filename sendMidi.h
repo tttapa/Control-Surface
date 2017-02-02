@@ -2,7 +2,6 @@
 #define sendMidi_h_
 
 #include "Arduino.h"
-#include "debug.h"
 
 #if defined (CORE_TEENSY) && ! (defined (USB_MIDI_AUDIO_SERIAL) || defined (USB_MIDI) || defined (USB_MIDI_SERIAL))
 #error Please select a MIDI option in the 'Tools > USB Type' menu.
