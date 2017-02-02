@@ -55,3 +55,8 @@ To upload a new sketch, install the Arduino Serial firmware again: put the Ardui
 `./Serial*`  
 This script will download the Arduino Serial firmware and install it to the Arduino. When it's finished, unplug the Arduino, plug it back in, and upload your new sketch.  
 Then you can install the MIDI firmware again.
+
+## Tested boards
+I have tested this library with an Arduino Uno, an Arduino Leonardo and a Teensy 3.2.  
+If you try this library with a different board, please let me know whether it works or not.
+If it doesn't, please open an issue. Thanks!
