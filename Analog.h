@@ -13,7 +13,6 @@ public:
 private:
   byte analogPin, controller, channel, digitalPin, newController, newChannel, value, oldVal, resolution;
   boolean bankTrue;
-  boolean validPin;
 };
 
 #endif
