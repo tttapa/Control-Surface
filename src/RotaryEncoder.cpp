@@ -12,7 +12,7 @@ RotaryEncoder::RotaryEncoder(byte p, byte p2, byte n, byte c, int sp, byte pps, 
   mode = m;
 }
 void RotaryEncoder::refresh() {
-  int msgVal;
+  int msgVal = 0;
   value = enc.read();
   difference = (value - oldVal) / pulsesPerStep;
   if (difference > 63) difference = 63;
