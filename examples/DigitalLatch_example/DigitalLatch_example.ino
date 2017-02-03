@@ -7,13 +7,17 @@ Map these in your DAW or DJ software as mute of channels 1-4. (Or set control su
 If you flip the switch to 'on', the appropriate channel will be muted, if you turn the switch 'off' again, the channel will be
 un-muted.
 
-If you are using an Arduino Leonardo, make sure you have Teensyduino and TeeOnArdu installed, 
-that you are using the Arduino IDE version 1.0.6, and board type is set to TeeOnArdu in MIDI mode.
-If you are using an Arduino Uno, use the HIDUINO firmware for the ATmega16U2.
+The difference between the Digital and DigitalLatch classes, is that the Digital class is to be used with momentary pushbuttons, while DigitalLatch can be used with toggle switches.
+When a momentary pushbutton (Digital) is pressed, a 'note on' event is sent. When it's released, a 'note off' event is sent.
+When a toggle switch (DigitalLatch) is turned on, a 'note on' event is sent, then after a certain amount of milliseconds (defined in latchTime), a 'note off' event is sent.
+The same thing happens when the toggle switch is turned off.
 
-This library and these examples are part of the Instructable
+If you are using a Teensy, make sure you have the USB type set to MIDI.
+If you are using an Arduino Uno or Mega, use the HIDUINO firmware for the ATmega16U2.
 
-Written by tttapa, 28/08/2015
+
+Written by tttapa, 21/08/2015
+https://github.com/tttapa/MIDI_controller
 */
 
 #include <MIDI_controller.h> // include the library

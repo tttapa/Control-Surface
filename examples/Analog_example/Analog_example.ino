@@ -1,15 +1,14 @@
 /*
 This is an example of the "Analog" class of the MIDI_controller library.
-Connect 4 faders or potentiometers to A0-A3. These will be MIDI channel volumes of channel 1-4.
+Connect 4 faders or potentiometers to A0-A3. These will be MIDI channel volumes of channels 1-4.
 Map these in your DAW or DJ software.
 
-If you are using an Arduino Leonardo, make sure you have Teensyduino and TeeOnArdu installed, 
-that you are using the Arduino IDE version 1.0.6, and board type is set to TeeOnArdu in MIDI mode.
-If you are using an Arduino Uno, use the HIDUINO firmware for the ATmega16U2.
+If you are using a Teensy, make sure you have the USB type set to MIDI.
+If you are using an Arduino Uno or Mega, use the HIDUINO firmware for the ATmega16U2.
 
-This library and these examples are part of the Instructable
 
 Written by tttapa, 21/08/2015
+https://github.com/tttapa/MIDI_controller
 */
 
 #include <MIDI_controller.h> // include the library

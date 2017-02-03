@@ -1,6 +1,6 @@
 /*
 This is an example of the bank function of the "Digital" class of the MIDI_controller library. 
-Connect 2 switches to pin 2 and 3. Connect the other pin of the switch to the ground, 
+Connect 2 switches (toggle switch or similar, but not a momentary pushbutton, that's what the Digital class is for) to pins 2 and 3. Connect the other pin of the switch to the ground, 
 a pull-up resistor is not necessary, since the internal ones will be used. These switches will be MIDI notes E0, F0, F#0 and G0.
 Map these in your DAW or DJ software as mute of channels 1-4. (Or set control surface to Mackie Control Universal).
 Connect a switch (toggle switch or similar) to digital pin 12.
@@ -13,26 +13,31 @@ This allows you to create 'banks' of switches, and switch between them.
 The number of switches is only limited by the number of inputs.
 The number of banks is limited to 2, but the code in DigitalLatch.h and DigitalLatch.cpp can easily be modified if you need more.
 
-If you are using an Arduino Leonardo, make sure you have Teensyduino and TeeOnArdu installed, 
-that you are using the Arduino IDE version 1.0.6, and board type is set to TeeOnArdu in MIDI mode.
-If you are using an Arduino Uno, use the HIDUINO firmware for the ATmega16U2.
+The difference between the Digital and DigitalLatch classes, is that the Digital class is to be used with momentary pushbuttons, while DigitalLatch can be used with toggle switches.
+When a momentary pushbutton (Digital) is pressed, a 'note on' event is sent. When it's released, a 'note off' event is sent.
+When a toggle switch (DigitalLatch) is turned on, a 'note on' event is sent, then after a certain amount of milliseconds (defined in latchTime), a 'note off' event is sent.
+The same thing happens when the toggle switch is turned off.
 
-This library and these examples are part of the Instructable
+If you are using a Teensy, make sure you have the USB type set to MIDI.
+If you are using an Arduino Uno or Mega, use the HIDUINO firmware for the ATmega16U2.
 
-Written by tttapa, 28/08/2015
+
+Written by tttapa, 21/08/2015
+https://github.com/tttapa/MIDI_controller
 */
 
 #include <MIDI_controller.h> // include the library
 
 const static byte velocity = 127; // the maximum velocity, since MIDI uses a 7-bit number for velocity.
 const static byte E0 = 16; // note number 60 is defined as middle C in the MIDI implementation, so 16 is E0.
+const static int latchTime = 100; // How long a note will be held on, in DigitalLatch mode.
 
 const static byte switchPin = 12; // the switch is connected to pin 12.
 
 //________________________________________________________________________________________________________________________________
 
-Digital switch1(2, E0  , 1, velocity); // Create a new member of the class 'Digital', called 'button1', on pin 2, that sends MIDI messages with note 'C4' (60) on channel 1, with velocity 127).
-Digital switch2(3, E0+1, 1, velocity);
+DigitalLatch switch1(2, E0  , 1, velocity, latchTime); // Create a new member of the class 'Digital', called 'switch1', on pin 2, that sends MIDI messages with note 'E0' (16) on channel 1, with velocity 127), for a duration of 100ms.
+DigitalLatch switch2(3, E0+1, 1, velocity, latchTime);
 
 //________________________________________________________________________________________________________________________________
 

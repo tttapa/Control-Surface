@@ -7,16 +7,15 @@ When the switch on pin 11 is turned on, this program should play a piece of the 
 
 Volume1 controls the volume of the piano, Volume2 the volume of the bass line, and Volume10 the volume of the bass drum.
 Chorus1 controls the chorus effect of the piano, Chorus2 controls the chorus effect on the bass. I think this is specific to Roland synthesisers. It doesn't work with software synths.
-Reverb1 controls the reverb effect of the piano, Chorus2 controls the reverb effect on the bass (if you uncomment lines 65 and 86).
+Reverb1 controls the reverb effect of the piano, Reverb2 controls the reverb effect on the bass (if you uncomment lines 64 and 85).
 I think this is specific to Roland synthesisers. It doesn't work with software synths.
 
-If you are using an Arduino Leonardo, make sure you have Teensyduino and TeeOnArdu installed, 
-that you are using the Arduino IDE version 1.0.6, and board type is set to TeeOnArdu in MIDI mode.
-If you are using an Arduino Uno, use the HIDUINO firmware for the ATmega16U2.
+If you are using a Teensy, make sure you have the USB type set to MIDI.
+If you are using an Arduino Uno or Mega, use the HIDUINO firmware for the ATmega16U2.
 
-This library and these examples are part of the Instructable
 
-Written by tttapa, 28/08/2015
+Written by tttapa, 21/08/2015
+https://github.com/tttapa/MIDI_controller
 */
 
 #include <MIDI_controller.h>

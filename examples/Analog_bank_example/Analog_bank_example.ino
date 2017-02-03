@@ -1,6 +1,6 @@
 /*
 This is an example of the bank function of the "Analog" class of the MIDI_controller library. 
-Connect 2 faders or potentiometers to A0&A1. These will be MIDI channel volumes of channel 1-4.
+Connect 2 faders or potentiometers to A0 and A1. These will be MIDI channel volumes of channel 1-4.
 Map these in your DAW or DJ software. Connect a switch (toggle switch or similar) to digital pin 12.
 Connect the other pin of the switch to the ground, a pull-up resistor is not necessary, since the 
 internal ones will be used.
@@ -11,13 +11,12 @@ This allows you to create 'banks' of faders, and switch between them.
 The number of faders is only limited by the number of inputs.
 The number of banks is limited to 2, but the code in Analog.h and Analog.cpp can easily be modified if you need more.
 
-If you are using an Arduino Leonardo, make sure you have Teensyduino and TeeOnArdu installed, 
-that you are using the Arduino IDE version 1.0.6, and board type is set to TeeOnArdu in MIDI mode.
-If you are using an Arduino Uno, use the HIDUINO firmware for the ATmega16U2.
+If you are using a Teensy, make sure you have the USB type set to MIDI.
+If you are using an Arduino Uno or Mega, use the HIDUINO firmware for the ATmega16U2.
 
-This library and these examples are part of the Instructable
 
 Written by tttapa, 21/08/2015
+https://github.com/tttapa/MIDI_controller
 */
 
 #include <MIDI_controller.h> // include the library

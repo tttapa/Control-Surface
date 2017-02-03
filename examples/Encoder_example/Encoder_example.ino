@@ -1,21 +1,20 @@
 /*
 This is an example of the "RotaryEncoder" class of the MIDI_controller library. 
-Connect the A & B pins of the encoder to 2 interrupt pins (2&3). It's recommended to use 100nF capacitors between the A & B pins and ground.
-Connect the common C pin to the ground. Pull-up resistors are not ncessary, since the internal ones will be used.
-Map the control change message 0x14 to the right control in your software.
+Connect the A and B pins of the encoder to 2 interrupt pins (2 and 3). It's recommended to use 100nF capacitors between the A and B pins and ground.
+Connect the common (C) pin to the ground. Pull-up resistors are not necessary, since the internal ones will be used.
+Map the control change message 0x14 to the right control in your DJ or DAW software, and select 'relative' instead of 'absolute'.
 
-If you are using a jog wheel use JOG, if you are using a normal encoder, for normal controls, like scrolling etc. use NORMAL_ENCODER.
-If you have strange results in your software, try another mode: ADD_64, SIGN_BIT or POS1_NEG127.
-If the control works, but it goes in the wrong direction, swap the pins A&B of the encoder (physically, or when creating the 
+If you are using a jog wheel, use JOG, if you are using a normal encoder (for normal controls like EQ or volume etc.) use NORMAL_ENCODER.
+If you have strange results in your software, try another relative mode: ADD_64, SIGN_BIT or POS1_NEG127.
+If the control works, but it goes in the wrong direction, swap the pins A and B of the encoder (physically, or when creating the 
 RotaryEncoder member).
 
-If you are using an Arduino Leonardo, make sure you have Teensyduino and TeeOnArdu installed, 
-that you are using the Arduino IDE version 1.0.6, and board type is set to TeeOnArdu in MIDI mode.
-If you are using an Arduino Uno, use the HIDUINO firmware for the ATmega16U2.
+If you are using a Teensy, make sure you have the USB type set to MIDI.
+If you are using an Arduino Uno or Mega, use the HIDUINO firmware for the ATmega16U2.
 
-This library and these examples are part of the Instructable
 
-Written by tttapa, 28/08/2015
+Written by tttapa, 21/08/2015
+https://github.com/tttapa/MIDI_controller
 */
 
 #include <MIDI_controller.h>
