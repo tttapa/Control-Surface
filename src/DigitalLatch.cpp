@@ -18,29 +18,29 @@ void DigitalLatch::refresh(){
   if(value != oldVal){
     if(offSent){  // If the note is turned off
       if(bankTrue && !digitalRead(bankPin)){
-        sendMidi(NOTE_ON, newChannel, newNote, velocity);
+        s.sendMidi(NOTE_ON, newChannel, newNote, velocity);
       } 
       else 
       {
-        sendMidi(NOTE_ON, channel, note, velocity);
+        s.sendMidi(NOTE_ON, channel, note, velocity);
       }
       time = millis();  // store the time of the note on message
       offSent = false; // The note is turned on
     } 
     else { // If the button is switched again, before latch time is reached
       if(bankTrue && !digitalRead(bankPin)){
-        sendMidi(NOTE_OFF, newChannel, newNote, velocity);  // Turn off the note 
+        s.sendMidi(NOTE_OFF, newChannel, newNote, velocity);  // Turn off the note 
       } 
       else 
       {
-        sendMidi(NOTE_OFF, channel, note, velocity);  // Turn off the note 
+        s.sendMidi(NOTE_OFF, channel, note, velocity);  // Turn off the note 
       }
       if(bankTrue && !digitalRead(bankPin)){
-        sendMidi(NOTE_ON, newChannel, newNote, velocity);   // Turn the note on again
+        s.sendMidi(NOTE_ON, newChannel, newNote, velocity);   // Turn the note on again
       } 
       else 
       {
-        sendMidi(NOTE_ON, channel, note, velocity);   // Turn the note on again
+        s.sendMidi(NOTE_ON, channel, note, velocity);   // Turn the note on again
       }
       time = millis();  // store the time of the note on message
     }
@@ -48,11 +48,11 @@ void DigitalLatch::refresh(){
   }
   if(millis() - time > latch && !offSent){  // if the elapsed time since the note on message is greater than the latch time, and if the note is still not turned off
     if(bankTrue && !digitalRead(bankPin)){
-      sendMidi(NOTE_OFF, newChannel, newNote, velocity);  // Turn off the note 
+      s.sendMidi(NOTE_OFF, newChannel, newNote, velocity);  // Turn off the note 
     } 
     else 
     {
-      sendMidi(NOTE_OFF, channel, note, velocity);  // Turn off the note 
+      s.sendMidi(NOTE_OFF, channel, note, velocity);  // Turn off the note 
     }      
     offSent = true; // The note is turned off
   }

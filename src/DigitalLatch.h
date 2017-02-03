@@ -7,7 +7,7 @@ class DigitalLatch // See instructable on how to use classes
 {
 public:
   DigitalLatch(byte p, byte n, byte c, byte v, int l); // pin, controller number, channel, latch time (ms)
-  void refresh();
+  void refresh(MIDISender& s);
   void bank(byte bPin, byte newN, byte newC);
   void detachBank();
 private:

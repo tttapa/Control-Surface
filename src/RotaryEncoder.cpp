@@ -27,7 +27,7 @@ void RotaryEncoder::refresh() {
       } else if (mode == 3) {
         msgVal = 128 + difference * speedMultiply;
       }
-      sendMidi(CC, channel, controller, msgVal);
+      s.sendMidi(CC, channel, controller, msgVal);
     }
     else if ( difference > 0) {
       if (mode == 1) {
@@ -37,7 +37,7 @@ void RotaryEncoder::refresh() {
       } else if (mode == 3) {
         msgVal = 0 + difference * speedMultiply;
       }
-      sendMidi(CC, channel, controller, msgVal);
+      s.sendMidi(CC, channel, controller, msgVal);
     }
     oldVal = value;
   }

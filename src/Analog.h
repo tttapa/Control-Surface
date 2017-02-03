@@ -7,7 +7,7 @@ class Analog // See instructable on how to use classes
 {
 public:
   Analog(byte p, byte n, byte c, byte r); // pin, controller number, channel, resolution  
-  void refresh();
+  void refresh(MIDISender& s);
   void bank(byte dPin, byte newN, byte newC); // digital pin, new controller number, new channel
   void detachBank();
 private:

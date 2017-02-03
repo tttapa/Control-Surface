@@ -12,23 +12,23 @@ Digital::Digital(byte p, byte n, byte c, byte v){ // pin, controller number, cha
   bankTrue = false;
 }    
 
-void Digital::refresh(){
+void Digital::refresh(MIDISender& s){
   value = digitalRead(pin);
   if(value != oldVal){
     if(value == 0){  // If the button is pressed
       if(bankTrue && !digitalRead(bankPin)){
-        sendMidi(NOTE_ON, newChannel, newNote, velocity);
+        s.sendMidi(NOTE_ON, newChannel, newNote, velocity);
       } 
       else  {
-        sendMidi(NOTE_ON, channel, note, velocity);
+        s.sendMidi(NOTE_ON, channel, note, velocity);
       }          
     } 
     else {  // If the button is not pressed
       if(bankTrue && !digitalRead(bankPin)){
-        sendMidi(NOTE_OFF, newChannel, newNote, velocity);
+        s.sendMidi(NOTE_OFF, newChannel, newNote, velocity);
       } 
       else {
-        sendMidi(NOTE_OFF, channel, note, velocity);
+        s.sendMidi(NOTE_OFF, channel, note, velocity);
       }
     }
     oldVal = value;

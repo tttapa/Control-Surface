@@ -16,7 +16,7 @@ class RotaryEncoder
 {
 public:
   RotaryEncoder(byte p, byte p2, byte n, byte c, int sp, byte pps, byte m); // first pin, second pin, controller number, channel, speed multiplier, pulses  per step.
-  void refresh();
+  void refresh(MIDISender& s);
 private: 
   byte controller, channel, pulsesPerStep, mode;
   int speedMultiply, count;

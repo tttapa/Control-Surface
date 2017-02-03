@@ -15,7 +15,7 @@ Analog::Analog(byte p, byte n, byte c, byte r) // pin, controller number, channe
 
 }
 
-void Analog::refresh()
+void Analog::refresh(MIDISender& s)
 {
   value = map(analogRead(analogPin),0,1024, 0, resolution);
   value = map(value, 0, resolution-1, 0, 127);
@@ -23,10 +23,10 @@ void Analog::refresh()
   {
     if(bankTrue && !digitalRead(digitalPin))
     {
-      sendMidi(CC, newChannel, newController, value);
+      s.sendMidi(CC, newChannel, newController, value);
     } 
     else {
-      sendMidi(CC, channel, controller, value);
+      s.sendMidi(CC, channel, controller, value);
     }
     oldVal = value;
   }
