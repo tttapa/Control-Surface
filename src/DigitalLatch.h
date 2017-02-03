@@ -2,6 +2,7 @@
 #define DIGLAT_h_
 
 #include "Arduino.h"
+#include "sendMidi.h"
 
 class DigitalLatch // See instructable on how to use classes
 {

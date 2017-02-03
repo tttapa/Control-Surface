@@ -2,6 +2,7 @@
 #define DIG_h_
 
 #include "Arduino.h"
+#include "sendMidi.h"
 
 class Digital // See instructable on how to use classes
 {

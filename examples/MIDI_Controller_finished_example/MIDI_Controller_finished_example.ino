@@ -57,6 +57,8 @@ DigitalLatch switch4(7, 63, 1, VELOCITY, LATCHTIME);
 
 RotaryEncoder enc1(1,0,0x2F,1,SPEED_MULTIPLY, NORMAL_ENCODER, POS1_NEG127); // Create a new member of class 'RotaryEncoder' called enc1, on pins 1 and 0, controller number 0x2F, on MIDI channel 1, at normal speed, using a normal encoder (4 pulses per click/step), using the POS1_NEG127 sign option
 
+MIDISender MIDI(13,10);    // start the MIDI communication, flash the LED on pin 13 whenever you send a MIDI message, and wait 10ms between every message.
+  
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
 void setup()
@@ -80,9 +82,7 @@ void setup()
   switch2.bank(11, 61, 2);
   switch3.bank(11, 62, 2);
   switch4.bank(11, 63, 2);
-    
-  setupMidi(13,10);    // start the MIDI communication, flash the LED on pin 13 whenever you send a MIDI message, and wait 10ms between every message.
-  
+
   delay(1000);         // Wait a second...
 }
 
@@ -90,26 +90,26 @@ void setup()
 
 void loop() // Refresh all inputs
 {
-  fader1.refresh();
-  fader2.refresh();
-  fader3.refresh();
-  fader4.refresh();
+  fader1.refresh(MIDI);
+  fader2.refresh(MIDI);
+  fader3.refresh(MIDI);
+  fader4.refresh(MIDI);
 
-  potTop1.refresh();
-  potTop2.refresh();
-  potTop3.refresh();
-  potTop4.refresh();
+  potTop1.refresh(MIDI);
+  potTop2.refresh(MIDI);
+  potTop3.refresh(MIDI);
+  potTop4.refresh(MIDI);
   
-  potSide1.refresh();
-  potSide2.refresh();
-  potSide3.refresh();
-  potSide4.refresh();
+  potSide1.refresh(MIDI);
+  potSide2.refresh(MIDI);
+  potSide3.refresh(MIDI);
+  potSide4.refresh(MIDI);
 
-  switch1.refresh();
-  switch2.refresh();
-  switch3.refresh();
-  switch4.refresh();
+  switch1.refresh(MIDI);
+  switch2.refresh(MIDI);
+  switch3.refresh(MIDI);
+  switch4.refresh(MIDI);
   
-  enc1.refresh();
+  enc1.refresh(MIDI);
 }
 
