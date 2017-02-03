@@ -5,14 +5,8 @@
 #include "MIDIUSB.h"
 #endif
 
-#define MIDI_BAUD 31250
-
-MIDISender::MIDISender(byte p, int d, Stream& s) {
-#if ! (defined(USBCON) || defined (CORE_TEENSY))
-  midiStream = s == null ? Serial : s;
-#else 
-  midiStream = s;
-#endif
+MIDISender::MIDISender(byte p, int d) : pin{p}, delayTime{d}, midiStream{Serial}{
+  USB = true;
 //#if defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined (__AVR_ATmega2560__) // Only include these lines when compiling for Arduino Uno or Arduino Mega (that have an ATmega16U2 for serial communication)
 #if ! (defined(USBCON) || defined (CORE_TEENSY)) // If you're compiling for an Arduino that has USB connection in the main MCU
     midiStream.begin(MIDI_BAUD); // Start communication with ATmega16U2 @31250 baud (for MIDI firmware: Hiduino: https://github.com/ddiakopoulos/hiduino)
@@ -26,82 +20,88 @@ MIDISender::MIDISender(byte p, int d, Stream& s) {
   }
 #endif
   
-  pin = p;
   if(blink) 
     pinMode(p,OUTPUT);  // The pin with the LED connected is set to output.
   
-  delay = d;
 }
 
+MIDISender::MIDISender(byte p, int d, Stream& s, unsigned long baud) : pin{p}, delayTime{d}, midiStream{s}{
+  USB = false;
+//#if defined (__AVR_ATmega328P__) || defined (__AVR_ATmega1280__) || defined (__AVR_ATmega2560__) // Only include these lines when compiling for Arduino Uno or Arduino Mega (that have an ATmega16U2 for serial communication)
+#if ! (defined(USBCON) || defined (CORE_TEENSY)) // If you're compiling for an Arduino that has USB connection in the main MCU
+    midiStream.begin(baud); // Start communication with ATmega16U2 @31250 baud (for MIDI firmware: Hiduino: https://github.com/ddiakopoulos/hiduino)
+#endif 
 
+  if(pin != NO_BLINK)
+    blink = true;  
+#if !defined(USBCON) // If you're compiling for an Arduino that has no USB connection in the main MCU
+  if(pin == 0 || pin == 1){ // If the user enters an invalid pin number (pins 0 and 1 are used for Serial communication) 
+    blink = false;
+  }
+#endif
+  
+  if(blink) 
+    pinMode(pin, OUTPUT);  // The pin with the LED connected is set to output.
+}
 
-void sendMidi(byte m, byte c, byte d1, byte d2) // Custom function to send MIDI messages: message, channel, data1, data2
+void MIDISender::sendMidi(byte m, byte c, byte d1, byte d2) // Custom function to send MIDI messages: message, channel, data1, data2
 {
   c--; // Channels are zero-based
 
-  if(Blink)
+  if(blink)
     digitalWrite(pin,1);
-    
+  if(USB) {
 #if defined (CORE_TEENSY)  //only include these lines when compiling for a Teensy board
-  if(midiStream == null){
     usb_midi_write_packed(((m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16) | ((d2 & 0x7F) << 24));
-  } else {
-    serialMidi(m, c, d1, d2, midiStream);
-  }  
 #elif defined(USBCON)  //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has USB connection in the main MCU but is not a Teensy
-  if(midiStream == null){
     midiEventPacket_t msg = {(m>>4)&0xF, (m | c)&0xFF, d1&0x7F, d2&0x7F};
     MidiUSB.sendMIDI(msg);
     MidiUSB.flush();
+#else // If you're compiling for an Arduino that has no USB connection in the main MCU
+    serialMidi(m, c, d1, d2, midiStream);
+#endif
   } else {
     serialMidi(m, c, d1, d2, midiStream);
   }
-#else // If you're compiling for an Arduino that has no USB connection in the main MCU
-  serialMidi(m, c, d1, d2, midiStream);
-#endif
 
-  if(Delay != 0){
-    delay(Delay); // Prevent an overflow of MIDI messages. Increase to increase stability, decrease to achieve faster response.
+  if(delayTime != 0){
+    delay(delayTime); // Prevent an overflow of MIDI messages. Increase to increase stability, decrease to achieve faster response.
   }
-  if(Blink)
+  if(blink)
     digitalWrite(pin,0);
 }
 
 
 
-void sendMidi(byte m, byte c, int d1) // Custom function to send MIDI messages: message, channel, data1
+void MIDISender::sendMidi(byte m, byte c, byte d1) // Custom function to send MIDI messages: message, channel, data1
 {
   c--; // Channels are zero-based
 
-  if(Blink)
+  if(blink)
     digitalWrite(pin,1);
     
+if(USB) {
 #if defined (CORE_TEENSY)  //only include these lines when compiling for a Teensy board
-  if(midiStream == null){
     usb_midi_write_packed(((m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16));
-  } else {
-    serialMidi(m, c, d1, midiStream);
-  }  
 #elif defined(USBCON)  //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has USB connection in the main MCU but is not a Teensy
-  if(midiStream == null){
     midiEventPacket_t msg = {(m>>4)&0xF, (m | c)&0xFF, d1&0x7F, 0};
     MidiUSB.sendMIDI(msg);
     MidiUSB.flush();
+#else // If you're compiling for an Arduino that has no USB connection in the main MCU
+    serialMidi(m, c, d1, midiStream);
+#endif
   } else {
     serialMidi(m, c, d1, midiStream);
   }
-#else // If you're compiling for an Arduino that has no USB connection in the main MCU
-  serialMidi(m, c, d1, midiStream);
-#endif
 
-  if(Delay != 0){
-    delay(Delay); // Prevent an overflow of MIDI messages. Increase to increase stability, decrease to achieve faster response.
+  if(delayTime != 0){
+    delay(delayTime); // Prevent an overflow of MIDI messages. Increase to increase stability, decrease to achieve faster response.
   }
-  if(Blink)
+  if(blink)
     digitalWrite(pin,0);
 }
 
-MIDISender::serialMidi(byte m, byte c, byte d1, byte d2, Stream& s) {
+void MIDISender::serialMidi(byte m, byte c, byte d1, byte d2, Stream& s) {
   //* The format of the message to send via serial. We create a new data structure, that can store 3 bytes at once.  This will be easier to send as MIDI. */
   typedef struct {
     unsigned int channel : 4;   // second nibble : midi channel (0-15) (channel and status are swapped, because Arduino is Little Endian)
@@ -118,7 +118,7 @@ MIDISender::serialMidi(byte m, byte c, byte d1, byte d2, Stream& s) {
   s.write((uint8_t *)&msg, sizeof(msg));  // Send the MIDI message.
 }
 
-MIDISender::serialMidi(byte m, byte c, byte d1, Stream& s) {
+void MIDISender::serialMidi(byte m, byte c, byte d1, Stream& s) {
   //* The format of the message to send via serial. We create a new data structure, that can store 2 bytes at once.  This will be easier to send as MIDI. */
   typedef struct {
     unsigned int channel : 4;   // second nibble : midi channel (0-15) (channel and status are swapped, because Arduino is Little Endian)
@@ -133,7 +133,7 @@ MIDISender::serialMidi(byte m, byte c, byte d1, Stream& s) {
   s.write((uint8_t *)&msg, sizeof(msg));  // Send the MIDI message.
 }
 
-
+/*
 MIDIDebug::MIDIDebug(byte p, int d, Stream& ds, unsigned long baud) {
   debugStream = ds;
   debugStream.begin(baud);
@@ -149,13 +149,13 @@ MIDIDebug::MIDIDebug(byte p, int d, Stream& ds, unsigned long baud) {
   if(blink) 
     pinMode(p,OUTPUT);  // The pin with the LED connected is set to output.
   
-  delay = d;
+  delayTime = d;
 }
 
 void MIDIDebug::sendMidi(byte m, byte c, byte d1, byte d2) {
   c--; // Channels are zero-based
 
-  if(Blink)
+  if(blink)
     digitalWrite(pin,1);
 
   debugStream.print((m>>4)&0xF, HEX); 
@@ -167,17 +167,17 @@ void MIDIDebug::sendMidi(byte m, byte c, byte d1, byte d2) {
   debugStream.print(d2, HEX); 
   debugStream.print('\n');
 
-  if(Delay != 0){
-    delay(Delay); // Prevent an overflow of MIDI messages. Increase to increase stability, decrease to achieve faster response.
+  if(delayTime != 0){
+    delay(delayTime); // Prevent an overflow of MIDI messages. Increase to increase stability, decrease to achieve faster response.
   }
-  if(Blink)
+  if(blink)
     digitalWrite(pin,0);
 }
 
 void MIDIDebug::sendMidi(byte m, byte c, byte d1) {
   c--; // Channels are zero-based
 
-  if(Blink)
+  if(blink)
     digitalWrite(pin,1);
 
   debugStream.print((m>>4)&0xF, HEX); 
@@ -187,9 +187,10 @@ void MIDIDebug::sendMidi(byte m, byte c, byte d1) {
   debugStream.print(d1, HEX); 
   debugStream.print('\n');
   
-  if(Delay != 0){
-    delay(Delay); // Prevent an overflow of MIDI messages. Increase to increase stability, decrease to achieve faster response.
+  if(delayTime != 0){
+    delay(delayTime); // Prevent an overflow of MIDI messages. Increase to increase stability, decrease to achieve faster response.
   }
-  if(Blink)
+  if(blink)
     digitalWrite(pin,0);
 }
+*/

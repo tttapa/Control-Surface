@@ -13,7 +13,7 @@ DigitalLatch::DigitalLatch(byte p, byte n, byte c, byte v, int l){ // pin, contr
   offSent = true;
 }  
 
-void DigitalLatch::refresh(){
+void DigitalLatch::refresh(MIDISender& s){
   value = digitalRead(pin);
   if(value != oldVal){
     if(offSent){  // If the note is turned off

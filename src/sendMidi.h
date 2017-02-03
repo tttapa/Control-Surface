@@ -7,6 +7,8 @@
 #error Please select a MIDI option in the 'Tools > USB Type' menu.
 #endif
 
+#define MIDI_BAUD 31250
+
 const static byte NO_BLINK = 255;
 const static byte NO_DELAY = 0;
 
@@ -20,30 +22,31 @@ const static byte PITCH_BEND = 0xE0;
 
 class MIDISender
 {
-private:
-    int delay;
+private:    
     byte pin;
-    bool blink;
-    Stream midiStream;
+    int delayTime;
+    bool blink, USB;
+    Stream& midiStream;
 public:
-    MIDISender(byte p, int d, Stream& s = null); // blink pin, delay, MIDI stream, debug stream, debug baud
+    MIDISender(byte p, int d);
+    MIDISender(byte p, int d, Stream& s, unsigned long baud = MIDI_BAUD); // blink pin, delay, MIDI stream, debug stream, debug baud
     void sendMidi(byte m, byte c, byte d1, byte d2); // message, channel, data 1, data 2
     void sendMidi(byte m, byte c, byte d1); // message, channel, data 1
     void serialMidi(byte m, byte c, byte d1, byte d2, Stream& s);
     void serialMidi(byte m, byte c, byte d1, Stream& s);
 };
-
+/*
 class MIDIDebug
 {
 private:
     int delay;
     byte pin;
     bool blink;
-    Stream debugStream;
+    Stream& debugStream;
 public:
-    MIDIDebug(byte p, int d, Stream& ds = null, unsigned long baud = 9600); // blink pin, delay, MIDI stream, debug stream, debug baud
+    MIDIDebug(byte p, int d, Stream& ds, unsigned long baud = 9600); // blink pin, delay, MIDI stream, debug stream, debug baud
     void sendMidi(byte m, byte c, byte d1, byte d2); // message, channel, data 1, data 2
     void sendMidi(byte m, byte c, byte d1); // message, channel, data 1
 };
-
+*/
 #endif
