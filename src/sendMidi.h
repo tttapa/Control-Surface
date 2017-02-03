@@ -26,11 +26,11 @@ private:
     bool blink;
     Stream midiStream;
 public:
-    MIDISender(byte p, int d, Stream s = null); // blink pin, delay, MIDI stream, debug stream, debug baud
+    MIDISender(byte p, int d, Stream& s = null); // blink pin, delay, MIDI stream, debug stream, debug baud
     void sendMidi(byte m, byte c, byte d1, byte d2); // message, channel, data 1, data 2
     void sendMidi(byte m, byte c, byte d1); // message, channel, data 1
-    void serialMidi(byte m, byte c, byte d1, byte d2, Stream s);
-    void serialMidi(byte m, byte c, byte d1, Stream s);
+    void serialMidi(byte m, byte c, byte d1, byte d2, Stream& s);
+    void serialMidi(byte m, byte c, byte d1, Stream& s);
 };
 
 class MIDIDebug
@@ -41,7 +41,7 @@ private:
     bool blink;
     Stream debugStream;
 public:
-    MIDIDebug(byte p, int d, Stream ds = null, unsigned long baud = 9600); // blink pin, delay, MIDI stream, debug stream, debug baud
+    MIDIDebug(byte p, int d, Stream& ds = null, unsigned long baud = 9600); // blink pin, delay, MIDI stream, debug stream, debug baud
     void sendMidi(byte m, byte c, byte d1, byte d2); // message, channel, data 1, data 2
     void sendMidi(byte m, byte c, byte d1); // message, channel, data 1
 };

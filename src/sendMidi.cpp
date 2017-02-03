@@ -7,7 +7,7 @@
 
 #define MIDI_BAUD 31250
 
-MIDISender::MIDISender(byte p, int d, Stream s) {
+MIDISender::MIDISender(byte p, int d, Stream& s) {
 #if ! (defined(USBCON) || defined (CORE_TEENSY))
   midiStream = s == null ? Serial : s;
 #else 
@@ -101,7 +101,7 @@ void sendMidi(byte m, byte c, int d1) // Custom function to send MIDI messages: 
     digitalWrite(pin,0);
 }
 
-MIDISender::serialMidi(byte m, byte c, byte d1, byte d2, Stream s) {
+MIDISender::serialMidi(byte m, byte c, byte d1, byte d2, Stream& s) {
   //* The format of the message to send via serial. We create a new data structure, that can store 3 bytes at once.  This will be easier to send as MIDI. */
   typedef struct {
     unsigned int channel : 4;   // second nibble : midi channel (0-15) (channel and status are swapped, because Arduino is Little Endian)
@@ -118,7 +118,7 @@ MIDISender::serialMidi(byte m, byte c, byte d1, byte d2, Stream s) {
   s.write((uint8_t *)&msg, sizeof(msg));  // Send the MIDI message.
 }
 
-MIDISender::serialMidi(byte m, byte c, byte d1, Stream s) {
+MIDISender::serialMidi(byte m, byte c, byte d1, Stream& s) {
   //* The format of the message to send via serial. We create a new data structure, that can store 2 bytes at once.  This will be easier to send as MIDI. */
   typedef struct {
     unsigned int channel : 4;   // second nibble : midi channel (0-15) (channel and status are swapped, because Arduino is Little Endian)
@@ -134,7 +134,7 @@ MIDISender::serialMidi(byte m, byte c, byte d1, Stream s) {
 }
 
 
-MIDIDebug::MIDIDebug(byte p, int d, Stream ds, unsigned long baud) {
+MIDIDebug::MIDIDebug(byte p, int d, Stream& ds, unsigned long baud) {
   debugStream = ds;
   debugStream.begin(baud);
   if(p != NO_BLINK)
