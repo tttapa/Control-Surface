@@ -8,7 +8,7 @@ It uses a MIDI-over-USB connection to connect to your computer, and can be used 
 ## Installation
 ### Dependencies
 If you are using an Arduino with native USB support, like the Leonardo, Due, Zero, Micro ... you'll need to install the MIDIUSB library.
-Install it using the Arduino IDE's library manager (Sketch > Include Library > Manage Libraries). Search for 'MIDIUSB', and install it. Alternatively, downoad the library from [GitHub](https://github.com/arduino-libraries/MIDIUSB).  
+Install it using the Arduino IDE's library manager (Sketch > Include Library > Manage Libraries). Search for 'MIDIUSB', and install it. Alternatively, download the library from [GitHub](https://github.com/arduino-libraries/MIDIUSB).  
 If you're using a Teensy board, you have to install the Arduino core for Teensy (aka *Teensyduino*). Download it [here](https://www.pjrc.com/teensy/td_download.html), if you haven't already.  
 The MIDI\_controller library depends on the [PJRC Encoder library](https://www.pjrc.com/teensy/td_libs_Encoder.html)  for using rotary encoders and jog wheels. Download and install it first.
 ### Installing the MIDI_controller library
