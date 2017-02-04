@@ -25,7 +25,8 @@ class MIDISender
 private:    
     byte pin;
     int delayTime;
-    bool blink, USB;
+    bool blink = false;
+    bool USB;
     Stream& midiStream;
 public:
     MIDISender(byte p, int d);
