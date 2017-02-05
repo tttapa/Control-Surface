@@ -1,5 +1,5 @@
-#ifndef sendMidi_h_
-#define sendMidi_h_
+#ifndef USBMidi_h_
+#define USBMidi_h_
 
 #include "Arduino.h"
 
