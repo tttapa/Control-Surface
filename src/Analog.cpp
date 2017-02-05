@@ -23,10 +23,10 @@ void Analog::refresh(MIDISender& s)
   {
     if(bankTrue && !digitalRead(digitalPin))
     {
-      s.sendMidi(CC, newChannel, newController, value);
+      USB.send(CC, newChannel, newController, value);
     } 
     else {
-      s.sendMidi(CC, channel, controller, value);
+      USB.send(CC, channel, controller, value);
     }
     oldVal = value;
   }

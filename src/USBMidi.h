@@ -18,11 +18,19 @@ const static byte CHANNEL_PRESSURE = 0xD0;
 const static byte PITCH_BEND = 0xE0;
 
 class USBMidi
-{    
+{
+private:
+    bool blinkEn = false;
+    byte blinkPin;
+    int blinkDelay = 0;
 public:
-    USBMidi();
-    void send(byte m, byte c, byte d1, byte d2);
-    void send(byte m, byte c, byte d1);
+    USBMidi(); // constructor
+    ~USBMidi(); // destructor
+    void send(byte m, byte c, byte d1, byte d2); // message, channel, data 1, data 2
+    void send(byte m, byte c, byte d1); // message, channel, data 1
+    void setDelay(int d); // delay between messages
+    void blink(byte p); // pin
+    void noBlink();
 };
 
 extern USBMidi USB;
