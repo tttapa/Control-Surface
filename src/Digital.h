@@ -8,7 +8,7 @@ class Digital // See instructable on how to use classes
 {
 public:
   Digital(byte p, byte n, byte c, byte v); // pin, controller number, channel, velocity
-  void refresh(MIDISender& s);
+  void refresh();
   void bank(byte bPin, byte newN, byte newC); // digital bank pin, new controller number, new channel
   void detachBank();
 private:
