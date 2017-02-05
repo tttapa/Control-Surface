@@ -1,7 +1,7 @@
 #ifndef RotaryEncoder_h_
 #define RotaryEncoder_h_
 
-#include "sendMidi.h"
+#include "USBMidi.h"
 #include "Arduino.h"
 #include "Encoder.h"
 

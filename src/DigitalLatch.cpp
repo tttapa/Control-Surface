@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "DigitalLatch.h"
-#include "sendMidi.h"
+#include "USBMidi.h"
 
 DigitalLatch::DigitalLatch(byte p, byte n, byte c, byte v, int l){ // pin, controller number, channel, latch time (ms)
   pinMode(p, INPUT_PULLUP);

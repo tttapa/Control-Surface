@@ -1,5 +1,5 @@
 #include "Digital.h"
-#include "sendMidi.h"
+#include "USBMidi.h"
 #include "Arduino.h"
 
 Digital::Digital(byte p, byte n, byte c, byte v){ // pin, controller number, channel, velocity

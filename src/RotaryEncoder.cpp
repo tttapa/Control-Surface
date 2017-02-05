@@ -1,5 +1,6 @@
 #include "RotaryEncoder.h"
 #include "Encoder.h"
+#include "USBMidi.h"
 
 RotaryEncoder::RotaryEncoder(byte p, byte p2, byte n, byte c, int sp, byte pps, byte m) : enc(p,p2) // first pin, second pin, controller number, channel, speed multiplier, pulses  per step.
 {

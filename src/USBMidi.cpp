@@ -21,8 +21,6 @@ USBMidi::~USBMidi(void) {
   }   
 }
 
-USBMidi USB;
-
 void USBMidi::send(byte m, byte c, byte d1, byte d2) {
   c--; // Channels are zero-based
 
@@ -100,4 +98,4 @@ void USBMidi::noBlink() {
   }    
 }
 
-
+USBMidi USB;

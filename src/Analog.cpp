@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "Analog.h"
-#include "sendMidi.h"
+#include "USBMidi.h"
 
 Analog::Analog(byte p, byte n, byte c, byte r) // pin, controller number, channel, resolution
 { 
