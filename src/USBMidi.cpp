@@ -24,6 +24,9 @@ USBMidi::~USBMidi(void) {
 void USBMidi::send(byte m, byte c, byte d1, byte d2) {
   c--; // Channels are zero-based
 
+  if (blinkEn)
+    digitalWrite(blinkPin,HIGH);
+
 #if defined (CORE_TEENSY)  //only include these lines when compiling for a Teensy board
   usb_midi_write_packed(((m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16) | ((d2 & 0x7F) << 24));
 #elif defined(USBCON)  //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has USB connection in the main MCU but is not a Teensy
@@ -46,6 +49,11 @@ void USBMidi::send(byte m, byte c, byte d1, byte d2) {
   msg.data2 = d2 & 0x7F;
   Serial.write((uint8_t *)&msg, sizeof(msg));  // Send the MIDI message.
 #endif
+
+  if(blinkDelay != 0)
+    delay(blinkDelay);
+  if (blinkEn)
+    digitalWrite(blinkPin,LOW);
 }
 
 void USBMidi::send(byte m, byte c, byte d1) {
