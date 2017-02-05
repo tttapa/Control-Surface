@@ -11,7 +11,7 @@ RotaryEncoder::RotaryEncoder(byte p, byte p2, byte n, byte c, int sp, byte pps, 
   count = pps - 1;
   mode = m;
 }
-void RotaryEncoder::refresh(MIDISender& s) {
+void RotaryEncoder::refresh() {
   int msgVal = 0;
   value = enc.read();
   difference = (value - oldVal) / pulsesPerStep;

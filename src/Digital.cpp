@@ -12,7 +12,7 @@ Digital::Digital(byte p, byte n, byte c, byte v){ // pin, controller number, cha
   bankTrue = false;
 }    
 
-void Digital::refresh(MIDISender& s){
+void Digital::refresh(){
   value = digitalRead(pin);
   if(value != oldVal){
     if(value == 0){  // If the button is pressed
