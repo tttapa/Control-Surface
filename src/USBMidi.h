@@ -33,5 +33,5 @@ public:
     void noBlink();
 };
 
-extern USBMidi USB;
+extern USBMidi USBMidiController;
 #endif

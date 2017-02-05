@@ -28,7 +28,7 @@ void RotaryEncoder::refresh() {
       } else if (mode == 3) {
         msgVal = 128 + difference * speedMultiply;
       }
-      USB.send(CC, channel, controller, msgVal);
+      USBMidiController.send(CC, channel, controller, msgVal);
     }
     else if ( difference > 0) {
       if (mode == 1) {
@@ -38,7 +38,7 @@ void RotaryEncoder::refresh() {
       } else if (mode == 3) {
         msgVal = 0 + difference * speedMultiply;
       }
-      USB.send(CC, channel, controller, msgVal);
+      USBMidiController.send(CC, channel, controller, msgVal);
     }
     oldVal = value;
   }

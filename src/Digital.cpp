@@ -17,18 +17,18 @@ void Digital::refresh(){
   if(value != oldVal){
     if(value == 0){  // If the button is pressed
       if(bankTrue && !digitalRead(bankPin)){
-        USB.send(NOTE_ON, newChannel, newNote, velocity);
+        USBMidiController.send(NOTE_ON, newChannel, newNote, velocity);
       } 
       else  {
-        USB.send(NOTE_ON, channel, note, velocity);
+        USBMidiController.send(NOTE_ON, channel, note, velocity);
       }          
     } 
     else {  // If the button is not pressed
       if(bankTrue && !digitalRead(bankPin)){
-        USB.send(NOTE_OFF, newChannel, newNote, velocity);
+        USBMidiController.send(NOTE_OFF, newChannel, newNote, velocity);
       } 
       else {
-        USB.send(NOTE_OFF, channel, note, velocity);
+        USBMidiController.send(NOTE_OFF, channel, note, velocity);
       }
     }
     oldVal = value;

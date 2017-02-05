@@ -106,4 +106,4 @@ void USBMidi::noBlink() {
   }    
 }
 
-USBMidi USB;
+USBMidi USBMidiController;
