@@ -69,7 +69,8 @@ Analog volume10(A2, channelVolume, 10, 128);
 //_______________________________________________________________________________________________________________________________
 
 void setup(){
-  setupMidi(13,NO_DELAY); // We don't want a delay after each message, because otherwise two notes that should play simultaneously will have this delay between them, resulting in a strange, unwanted effect.
+  USBMidiController.blink(13);  // flash the LED on pin 13 on every message
+  USBMidiController.setDelay(0);  // wait 15 ms after each message not to flood the connection // We don't want a delay after each message, because otherwise two notes that should play simultaneously will have this delay between them, resulting in a strange, unwanted effect.
   pinMode(11,INPUT_PULLUP);
   while(digitalRead(11) == 1); // Wait untill the switch is turned on.
 }
@@ -77,7 +78,7 @@ void setup(){
 //_______________________________________________________________________________________________________________________________
 
 void loop(){
-  sendMidi(PROGRAM_CHANGE,2,33); // channel 2 is now instrument 33 (bass)
+  USBMidiController.send(PROGRAM_CHANGE,2,33); // channel 2 is now instrument 33 (bass)
   for(int i = 0; i<32; i++){
     chorus1.refresh();
     chorus2.refresh();
@@ -88,20 +89,20 @@ void loop(){
     volume10.refresh();
     for(int j = 0; j<8; j++){
       if(off[j][i] != 0){
-        sendMidi(NOTE_OFF, chan[j], off[j][i], 0);
+        USBMidiController.send(NOTE_OFF, chan[j], off[j][i], 0);
       }
       while(digitalRead(11) == 1){ // wait for the switch to be on
         if(!allOffSent){
-          sendMidi(CC, 1, 123, 0);  // all notes off channel 1
-          sendMidi(CC, 2, 123, 0);  // all notes off channel 2
-          sendMidi(CC, 10, 123, 0); // all notes off channel 10
+          USBMidiController.send(CC, 1, 123, 0);  // all notes off channel 1
+          USBMidiController.send(CC, 2, 123, 0);  // all notes off channel 2
+          USBMidiController.send(CC, 10, 123, 0); // all notes off channel 10
           allOffSent = true;
         }
       }
       allOffSent = false;
         
       if(on[j][i] != 0){
-        sendMidi(NOTE_ON, chan[j], on[j][i], vel[j]);
+        USBMidiController.send(NOTE_ON, chan[j], on[j][i], vel[j]);
       }
     }
     delay(115);

@@ -42,7 +42,8 @@ DigitalLatch switch2(3, E0+1, 1, velocity, latchTime);
 //________________________________________________________________________________________________________________________________
 
 void setup(){
-  setupMidi(13, 10); // Setup the MIDI communication, with an LED on pin 13, and a delay of 10ms after every message.
+  USBMidiController.blink(13);  // flash the LED on pin 13 on every message
+  USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
   delay(1000); // Wait a second...
   switch1.bank(switchPin, E0+2, 1); // Enable the bank functionality. If switchPin is low (=switch on) the message will be note F#0 instead of E0.
   switch2.bank(switchPin, E0+3, 1);

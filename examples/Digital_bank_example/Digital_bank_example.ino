@@ -36,7 +36,8 @@ Digital button2(3, C4+1, 1, velocity); // C4 + 1 = C#4
 //________________________________________________________________________________________________________________________________
 
 void setup(){
-  setupMidi(13, 10); // Setup the MIDI communication, with an LED on pin 13, and a delay of 10ms after every message.
+  USBMidiController.blink(13);  // flash the LED on pin 13 on every message
+  USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
   delay(1000); // Wait a second...
   button1.bank(switchPin, C4+2, 1); // Enable the bank functionality. If switchPin is low (=switch on) the message will be note D4 instead of C4 (still on channel 1)
   button2.bank(switchPin, C4+3, 1); // C4 + 3 = D#4
