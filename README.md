@@ -36,41 +36,41 @@ When the upload is complete, take a ballpoint pen (or anything conductive) and r
 
 #### Windows
 To install and use Atmel Flip on Windows (tested on Vista, 8 and 10):
-1.  Download the latest Java Runtime Environment from the [Java site](https://java.com/en/download/manual.jsp).
-2.  Run the java installer.
-3.  Click 'install'.
-4.  Close the installer when finished.
-5.  Download 'Flip' from the [Atmel site](http://www.atmel.com/tools/FLIP.aspx).
-6.  Run the installer.
-7.  Click 'next'.
-8.  Accept the terms in the License agreement and click 'next'.
-9.  Click 'next'.
-10.  Click 'install'.
-11.  Click 'next' when completed.
-12.  Click 'finished'.
+1.  Download the latest Java Runtime Environment from the [Java site](https://java.com/en/download/manual.jsp).  
+2.  Run the java installer.  
+3.  Click 'install'.  
+4.  Close the installer when finished.  
+5.  Download 'Flip' from the [Atmel site](http://www.atmel.com/tools/FLIP.aspx).  
+6.  Run the installer.  
+7.  Click 'next'.  
+8.  Accept the terms in the License agreement and click 'next'.  
+9.  Click 'next'.  
+10.  Click 'install'.  
+11.  Click 'next' when completed.  
+12.  Click 'finished'.  
 13.  Now, connect the Arduino to your computer, and use a small screwdriver to connect the reset pin of the second ICSP header to the ground. This is the 6-pin ICSP header close to the USB port. (see image)  
-    The ATmega16U2 is now in DFU mode (Device Firmware Update). Read more [here.](https://www.arduino.cc/en/Hacking/DFUProgramming8U2)
-14.  Go to the Control Panel in Windows. Click 'Hardware and Sound'.
-15.  Under 'Devices and Printers', click 'Device Manager'.
-16.  In Device Manager, there is a category 'Other devices'. In this category, there should be something like 'Arduino Uno DFU' or 'ATmega16U2 DFU'. Right click the device, and select 'Update Driver Software'.
-17.  Choose 'Browse my computer for driver software'
-18.  Then hit 'Browse...' and browse to C:\Program Files\Atmel\Flip 3.4.7\usb in the new window.
-19.  Make sure 'Include subfolders' is checked, then click 'Next'.
-20.  In the Windows Security window that pops up, click 'Install'.
-21.  You should get a notification that Windows has successfully updated the driver software for 'AT90USB162'.
-22.  Download the Arduino firmware from the [Arduino GitHub page](https://github.com/arduino/Arduino/blob/master/hardware/arduino/avr/firmwares/atmegaxxu2/arduino-usbserial/Arduino-usbserial-atmega16u2-Uno-Rev3.hex) by clicking 'RAW' and then CTRL+S to save.
-23.  Change the location to your Downloads folder, delete the .txt extension, and choose 'All files' (keep the .hex extension). Then hit 'Save'.
-24.  Download [Dimitri Diakopoulos's](http://www.dimitridiakopoulos.com/hiduino.html) HIDUINO firmware from [his GitHub page](https://github.com/ddiakopoulos/hiduino/blob/master/compiled_firmwares/arduino_midi.hex). Again, hit 'RAW', CTRL+S, delete the .txt extension, choose 'All files' and save it. Or just download it directly: ([arduino_midi.hex](https://raw.githubusercontent.com/ddiakopoulos/hiduino/master/compiled_firmwares/arduino_midi.hex)
-25.  Open the Flip software.
-26.  Hit CTRL+S to select a device, choose 'ATmega16U2', and click 'OK'.
-27.  Hit CTRL+U, and click 'Open' to open the USB connection.
-28.  Hit CTRL+L to load a HEX file.
-29.  Browse to your Downloads folder and load the 'arduino_midi.hex' file you downloaded in step 24\.
-30.  Make sure all 4 boxes on the left hand side are checked, and click 'Run'.
-31.  Once this is finished, you can unplug the Arduino. Now it is no longer in DFU mode.
-32.  Go back to the Device Manager, and check if the Arduino shows up as a MIDI device, under 'Sound, video and game controllers'.
-33.  Now your Arduino is a working MIDI controller!
-34.	To upload a new program, just repeat steps 25 - 31 again, but use the Arduino firmware you downloaded in step 23.
+    The ATmega16U2 is now in DFU mode (Device Firmware Update). Read more [here.](https://www.arduino.cc/en/Hacking/DFUProgramming8U2)  
+14.  Go to the Control Panel in Windows. Click 'Hardware and Sound'.  
+15.  Under 'Devices and Printers', click 'Device Manager'.  
+16.  In Device Manager, there is a category 'Other devices'. In this category, there should be something like 'Arduino Uno DFU' or 'ATmega16U2 DFU'. Right click the device, and select 'Update Driver Software'.  
+17.  Choose 'Browse my computer for driver software'  
+18.  Then hit 'Browse...' and browse to C:\Program Files\Atmel\Flip 3.4.7\usb in the new window.  
+19.  Make sure 'Include subfolders' is checked, then click 'Next'.  
+20.  In the Windows Security window that pops up, click 'Install'.  
+21.  You should get a notification that Windows has successfully updated the driver software for   'AT90USB162'.  
+22.  Download the Arduino firmware from the [Arduino GitHub page](https://github.com/arduino/Arduino/blob/master/hardware/arduino/avr/firmwares/atmegaxxu2/arduino-usbserial/Arduino-usbserial-atmega16u2-Uno-Rev3.hex) by clicking 'RAW' and then CTRL+S to save.  
+23.  Change the location to your Downloads folder, delete the .txt extension, and choose 'All files' (keep the .hex extension). Then hit 'Save'.  
+24.  Download [Dimitri Diakopoulos's](http://www.dimitridiakopoulos.com/hiduino.html) HIDUINO firmware from [his GitHub page](https://github.com/ddiakopoulos/hiduino/blob/master/compiled_firmwares/arduino_midi.hex). Again, hit 'RAW', CTRL+S, delete the .txt extension, choose 'All files' and save it. Or just download it directly: ([arduino_midi.hex](https://raw.githubusercontent.com/ddiakopoulos/hiduino/master/compiled_firmwares/arduino_midi.hex)  
+25.  Open the Flip software.  
+26.  Hit CTRL+S to select a device, choose 'ATmega16U2', and click 'OK'.  
+27.  Hit CTRL+U, and click 'Open' to open the USB connection.  
+28.  Hit CTRL+L to load a HEX file.  
+29.  Browse to your Downloads folder and load the 'arduino_midi.hex' file you downloaded in step 24.  
+30.  Make sure all 4 boxes on the left hand side are checked, and click 'Run'.  
+31.  Once this is finished, you can unplug the Arduino. Now it is no longer in DFU mode.  
+32.  Go back to the Device Manager, and check if the Arduino shows up as a MIDI device, under 'Sound, video and game controllers'.  
+33.  Now your Arduino is a working MIDI controller!  
+34.	To upload a new program, just repeat steps 25 - 31 again, but use the Arduino firmware you downloaded in step 23.  
 #### OSX
 ==TODO==  
 (probably just transcoding the Linux Bash scripts to OSX Bash)
