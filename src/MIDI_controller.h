@@ -7,6 +7,6 @@
 #include "Digital.h"
 #include "DigitalLatch.h"
 #include "RotaryEncoder.h"
-#include "sendMidi.h"
+#include "USBMidi.h"
 
 #endif

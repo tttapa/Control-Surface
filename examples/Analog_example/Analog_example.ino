@@ -18,7 +18,7 @@ const static byte Channel_Volume = 0x7; // controller number 7 is defined as Cha
 
 //________________________________________________________________________________________________________________________________
 
-Analog fader1(A0, Channel_Volume, 1, resolution); // Create a new member of the class 'Analog, called 'fader1', on pin A0, that sends MIDI messages with controller 7 (channel volume) on channel 1. The resolution of the analog input is 128 (7-bit). 
+Analog fader1(A0, Channel_Volume, 1, resolution); // Create a new instance of the class 'Analog, called 'fader1', on pin A0, that sends MIDI messages with controller 7 (channel volume) on channel 1. The resolution of the analog input is 128 (7-bit). 
 Analog fader2(A1, Channel_Volume, 2, resolution);
 Analog fader3(A2, Channel_Volume, 3, resolution);
 Analog fader4(A3, Channel_Volume, 4, resolution);
@@ -26,7 +26,8 @@ Analog fader4(A3, Channel_Volume, 4, resolution);
 //________________________________________________________________________________________________________________________________
 
 void setup(){
-  setupMidi(13, 10); // Setup the MIDI communication, with an LED on pin 13, and a delay of 10ms after every message.
+  USBMidiController.blink(13);  // flash the LED on pin 13 on every message
+  USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
   delay(1000); // Wait a second...
 }
 

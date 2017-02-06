@@ -1,5 +1,6 @@
 #include "RotaryEncoder.h"
 #include "Encoder.h"
+#include "USBMidi.h"
 
 RotaryEncoder::RotaryEncoder(byte p, byte p2, byte n, byte c, int sp, byte pps, byte m) : enc(p,p2) // first pin, second pin, controller number, channel, speed multiplier, pulses  per step.
 {
@@ -27,7 +28,7 @@ void RotaryEncoder::refresh() {
       } else if (mode == 3) {
         msgVal = 128 + difference * speedMultiply;
       }
-      sendMidi(CC, channel, controller, msgVal);
+      USBMidiController.send(CC, channel, controller, msgVal);
     }
     else if ( difference > 0) {
       if (mode == 1) {
@@ -37,7 +38,7 @@ void RotaryEncoder::refresh() {
       } else if (mode == 3) {
         msgVal = 0 + difference * speedMultiply;
       }
-      sendMidi(CC, channel, controller, msgVal);
+      USBMidiController.send(CC, channel, controller, msgVal);
     }
     oldVal = value;
   }

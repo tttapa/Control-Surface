@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "Analog.h"
-#include "sendMidi.h"
+#include "USBMidi.h"
 
 Analog::Analog(byte p, byte n, byte c, byte r) // pin, controller number, channel, resolution
 { 
@@ -23,10 +23,10 @@ void Analog::refresh()
   {
     if(bankTrue && !digitalRead(digitalPin))
     {
-      sendMidi(CC, newChannel, newController, value);
+      USBMidiController.send(CC, newChannel, newController, value);
     } 
     else {
-      sendMidi(CC, channel, controller, value);
+      USBMidiController.send(CC, channel, controller, value);
     }
     oldVal = value;
   }

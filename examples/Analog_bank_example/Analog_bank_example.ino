@@ -28,13 +28,14 @@ const static byte switchPin = 12; // the switch is connected to pin 12.
 
 //________________________________________________________________________________________________________________________________
 
-Analog fader1(A0, Channel_Volume, 1, resolution); // Create a new member of the class 'Analog, called 'fader1', on pin A0, that sends MIDI messages with controller 7 (channel volume) on channel 1. The resolution of the analog input is 128 (7-bit). 
+Analog fader1(A0, Channel_Volume, 1, resolution); // Create a new instance of the class 'Analog, called 'fader1', on pin A0, that sends MIDI messages with controller 7 (channel volume) on channel 1. The resolution of the analog input is 128 (7-bit). 
 Analog fader2(A1, Channel_Volume, 2, resolution);
 
 //________________________________________________________________________________________________________________________________
 
 void setup(){
-  setupMidi(13, 10); // Setup the MIDI communication, with an LED on pin 13, and a delay of 10ms after every message.
+  USBMidiController.blink(13);  // flash the LED on pin 13 on every message
+  USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
   delay(1000); // Wait a second...
   fader1.bank(switchPin, Channel_Volume, 3); // Enable the bank functionality. If switchPin is low (=switch on) the message will be sent on channel 3 instead of channel 1
   fader2.bank(switchPin, Channel_Volume, 4);

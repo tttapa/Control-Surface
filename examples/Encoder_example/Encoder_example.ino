@@ -24,12 +24,13 @@ const static byte Controller = 0x14;
 
 //________________________________________________________________________________________________________________________________
 
-RotaryEncoder enc(2,3,Controller,Channel,1,JOG,POS1_NEG127); // Create a new member of the class 'RotaryEncoder', called 'enc', on pin 2 and 3, controller number 0x14, on channel1, no change in speed (speed is multiplied by 1), it's used as a Jog wheel, and the mode is set to POS1_NEG127.
+RotaryEncoder enc(2,3,Controller,Channel,1,JOG,POS1_NEG127); // Create a new instance of the class 'RotaryEncoder', called 'enc', on pin 2 and 3, controller number 0x14, on channel1, no change in speed (speed is multiplied by 1), it's used as a Jog wheel, and the mode is set to POS1_NEG127.
 
 //________________________________________________________________________________________________________________________________
 
 void setup(){
-  setupMidi(13, 10); // Setup the MIDI communication, with an LED on pin 13, and a delay of 10ms after every message.
+  USBMidiController.blink(13);  // flash the LED on pin 13 on every message
+  USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
   delay(1000); // Wait a second...
 }
 

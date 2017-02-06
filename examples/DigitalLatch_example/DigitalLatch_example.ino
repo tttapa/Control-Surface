@@ -28,7 +28,7 @@ const static byte E0 = 16; // note number 60 is defined as middle C in the MIDI 
 
 //________________________________________________________________________________________________________________________________
 
-DigitalLatch switch1(2, E0,   1, velocity, latchTime); // Create a new member of the class 'Digital', called 'button1', on pin 2, that sends MIDI messages with note 'C4' (60) on channel 1, with velocity 127).
+DigitalLatch switch1(2, E0,   1, velocity, latchTime); // Create a new instance of the class 'Digital', called 'button1', on pin 2, that sends MIDI messages with note 'C4' (60) on channel 1, with velocity 127).
 DigitalLatch switch2(3, E0+1, 1, velocity, latchTime);
 DigitalLatch switch3(4, E0+2, 1, velocity, latchTime);
 DigitalLatch switch4(5, E0+3, 1, velocity, latchTime);
@@ -36,7 +36,8 @@ DigitalLatch switch4(5, E0+3, 1, velocity, latchTime);
 //________________________________________________________________________________________________________________________________
 
 void setup(){
-  setupMidi(13, 10); // Setup the MIDI communication, with an LED on pin 13, and a delay of 10ms after every message.
+  USBMidiController.blink(13);  // flash the LED on pin 13 on every message
+  USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
   delay(1000); // Wait a second...
 }
 

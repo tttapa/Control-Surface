@@ -27,6 +27,11 @@ Digital button4(5, C4+3, 1, velocity); // C4 + 3 = D#4
 //________________________________________________________________________________________________________________________________
 
 void setup(){
+  button1.invert = true; // invert all button inputs (i.e. send a note off when pressed, and a note on when released)
+  button2.invert = true;
+  button3.invert = true;
+  button4.invert = true;
+
   USBMidiController.blink(13);  // flash the LED on pin 13 on every message
   USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
   delay(1000); // Wait a second...

@@ -2,6 +2,7 @@
 #define ANALOG_h_
 
 #include "Arduino.h"
+#include "USBMidi.h"
 
 class Analog // See instructable on how to use classes
 {

@@ -1,5 +1,5 @@
 #include "Digital.h"
-#include "sendMidi.h"
+#include "USBMidi.h"
 #include "Arduino.h"
 
 Digital::Digital(byte p, byte n, byte c, byte v){ // pin, controller number, channel, velocity
@@ -13,37 +13,37 @@ Digital::Digital(byte p, byte n, byte c, byte v){ // pin, controller number, cha
 }    
 
 void Digital::refresh(){
-  value = digitalRead(pin);
+  value = digitalRead(pin) ^ invert;
   if(value != oldVal){
     if(value == 0){  // If the button is pressed
       if(bankTrue && !digitalRead(bankPin)){
-        sendMidi(NOTE_ON, newChannel, newNote, velocity);
+        USBMidiController.send(NOTE_ON, newChannel, newNote, velocity);
       } 
       else  {
-        sendMidi(NOTE_ON, channel, note, velocity);
+        USBMidiController.send(NOTE_ON, channel, note, velocity);
       }          
     } 
     else {  // If the button is not pressed
       if(bankTrue && !digitalRead(bankPin)){
-        sendMidi(NOTE_OFF, newChannel, newNote, velocity);
+        USBMidiController.send(NOTE_OFF, newChannel, newNote, velocity);
       } 
       else {
-        sendMidi(NOTE_OFF, channel, note, velocity);
+        USBMidiController.send(NOTE_OFF, channel, note, velocity);
       }
     }
     oldVal = value;
   }  
 }
 
-  void Digital::bank(byte bPin, byte newN, byte newC) // bank pin, new controller or note number, new channel
-  { 
-    bankTrue = true;
+void Digital::bank(byte bPin, byte newN, byte newC) // bank pin, new controller or note number, new channel
+{ 
+  bankTrue = true;
 
-    bankPin = bPin;
-    pinMode(bankPin, INPUT_PULLUP);
-    newNote = newN; 
-    newChannel = newC;
-  }
+  bankPin = bPin;
+  pinMode(bankPin, INPUT_PULLUP);
+  newNote = newN; 
+  newChannel = newC;
+}
 
 void Digital::detachBank()
 {
