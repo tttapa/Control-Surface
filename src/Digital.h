@@ -11,6 +11,7 @@ public:
   void refresh();
   void bank(byte bPin, byte newN, byte newC); // digital bank pin, new controller number, new channel
   void detachBank();
+  boolean invert = false;
 private:
   byte pin, note, channel, value, oldVal, velocity, bankPin, newNote, newChannel;
   boolean bankTrue;

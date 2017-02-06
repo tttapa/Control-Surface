@@ -13,7 +13,7 @@ Digital::Digital(byte p, byte n, byte c, byte v){ // pin, controller number, cha
 }    
 
 void Digital::refresh(){
-  value = digitalRead(pin);
+  value = digitalRead(pin) ^ invert;
   if(value != oldVal){
     if(value == 0){  // If the button is pressed
       if(bankTrue && !digitalRead(bankPin)){
@@ -35,15 +35,15 @@ void Digital::refresh(){
   }  
 }
 
-  void Digital::bank(byte bPin, byte newN, byte newC) // bank pin, new controller or note number, new channel
-  { 
-    bankTrue = true;
+void Digital::bank(byte bPin, byte newN, byte newC) // bank pin, new controller or note number, new channel
+{ 
+  bankTrue = true;
 
-    bankPin = bPin;
-    pinMode(bankPin, INPUT_PULLUP);
-    newNote = newN; 
-    newChannel = newC;
-  }
+  bankPin = bPin;
+  pinMode(bankPin, INPUT_PULLUP);
+  newNote = newN; 
+  newChannel = newC;
+}
 
 void Digital::detachBank()
 {
