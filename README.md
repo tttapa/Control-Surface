@@ -36,6 +36,7 @@ When the upload is complete, take a ballpoint pen (or anything conductive) and r
 
 #### Windows
 To install and use Atmel Flip on Windows (tested on Vista, 8 and 10):
+
 1.  Download the latest Java Runtime Environment from the [Java site](https://java.com/en/download/manual.jsp).  
 2.  Run the java installer.  
 3.  Click 'install'.  
