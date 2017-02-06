@@ -28,7 +28,7 @@ const static byte switchPin = 12; // the switch is connected to pin 12.
 
 //________________________________________________________________________________________________________________________________
 
-Analog fader1(A0, Channel_Volume, 1, resolution); // Create a new member of the class 'Analog, called 'fader1', on pin A0, that sends MIDI messages with controller 7 (channel volume) on channel 1. The resolution of the analog input is 128 (7-bit). 
+Analog fader1(A0, Channel_Volume, 1, resolution); // Create a new instance of the class 'Analog, called 'fader1', on pin A0, that sends MIDI messages with controller 7 (channel volume) on channel 1. The resolution of the analog input is 128 (7-bit). 
 Analog fader2(A1, Channel_Volume, 2, resolution);
 
 //________________________________________________________________________________________________________________________________

@@ -35,27 +35,27 @@
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
-Analog fader1(A0, 0x10, 1 , RESOLUTION);                 // Create a new member of class 'Analog' called 'fader1', on pin A0, controller number 0x10, on MIDI channel 1, with resolution 64
+Analog fader1(A0, 0x10, 1 , RESOLUTION);                 // Create a new instance of class 'Analog' called 'fader1', on pin A0, controller number 0x10, on MIDI channel 1, with resolution 64
 Analog fader2(A1, 0x11, 1 , RESOLUTION);
 Analog fader3(A2, 0x12, 1 , RESOLUTION);
 Analog fader4(A3, 0x13, 1 , RESOLUTION);
 
-Analog potTop1(A4, 0x14, 1 , RESOLUTION);                // Create a new member of class 'Analog' called 'potTop1', on pin A4, controller number 0x14, on MIDI channel 1, with resolution 64
+Analog potTop1(A4, 0x14, 1 , RESOLUTION);                // Create a new instance of class 'Analog' called 'potTop1', on pin A4, controller number 0x14, on MIDI channel 1, with resolution 64
 Analog potTop2(A5, 0x15, 1 , RESOLUTION);
 Analog potTop3(A6, 0x16, 1 , RESOLUTION);
 Analog potTop4(A7, 0x17, 1 , RESOLUTION);
 
-Analog potSide1(A8, 0x18, 1 , RESOLUTION);               // Create a new member of class 'Analog' called 'potSide1', on pin A8, controller number 0x18, on MIDI channel 1, with resolution 64
+Analog potSide1(A8, 0x18, 1 , RESOLUTION);               // Create a new instance of class 'Analog' called 'potSide1', on pin A8, controller number 0x18, on MIDI channel 1, with resolution 64
 Analog potSide2(A9, 0x19, 1 , RESOLUTION);
 Analog potSide3(A10, 0x1A, 1 , RESOLUTION);
 Analog potSide4(A11, 0x1B, 1 , RESOLUTION);
 
-DigitalLatch switch1(2, 60, 1, VELOCITY, LATCHTIME);    // Create a new member of class 'DigitalLatch' called 'switch1', on pin 0, note number 60 on MIDI channel 1, with a predefined latch time
+DigitalLatch switch1(2, 60, 1, VELOCITY, LATCHTIME);    // Create a new instance of class 'DigitalLatch' called 'switch1', on pin 0, note number 60 on MIDI channel 1, with a predefined latch time
 DigitalLatch switch2(3, 61, 1, VELOCITY, LATCHTIME);
 DigitalLatch switch3(5, 62, 1, VELOCITY, LATCHTIME);
 DigitalLatch switch4(7, 63, 1, VELOCITY, LATCHTIME);
 
-RotaryEncoder enc1(1, 0, 0x2F, 1, SPEED_MULTIPLY, NORMAL_ENCODER, POS1_NEG127); // Create a new member of class 'RotaryEncoder' called enc1, on pins 1 and 0, controller number 0x2F, on MIDI channel 1, at normal speed, using a normal encoder (4 pulses per click/step), using the POS1_NEG127 sign option
+RotaryEncoder enc1(1, 0, 0x2F, 1, SPEED_MULTIPLY, NORMAL_ENCODER, POS1_NEG127); // Create a new instance of class 'RotaryEncoder' called enc1, on pins 1 and 0, controller number 0x2F, on MIDI channel 1, at normal speed, using a normal encoder (4 pulses per click/step), using the POS1_NEG127 sign option
 
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________

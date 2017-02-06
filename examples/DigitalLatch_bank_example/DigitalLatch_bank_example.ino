@@ -36,7 +36,7 @@ const static byte switchPin = 12; // the switch is connected to pin 12.
 
 //________________________________________________________________________________________________________________________________
 
-DigitalLatch switch1(2, E0  , 1, velocity, latchTime); // Create a new member of the class 'Digital', called 'switch1', on pin 2, that sends MIDI messages with note 'E0' (16) on channel 1, with velocity 127), for a duration of 100ms.
+DigitalLatch switch1(2, E0  , 1, velocity, latchTime); // Create a new instance of the class 'Digital', called 'switch1', on pin 2, that sends MIDI messages with note 'E0' (16) on channel 1, with velocity 127), for a duration of 100ms.
 DigitalLatch switch2(3, E0+1, 1, velocity, latchTime);
 
 //________________________________________________________________________________________________________________________________

@@ -24,7 +24,7 @@ const static byte Controller = 0x14;
 
 //________________________________________________________________________________________________________________________________
 
-RotaryEncoder enc(2,3,Controller,Channel,1,JOG,POS1_NEG127); // Create a new member of the class 'RotaryEncoder', called 'enc', on pin 2 and 3, controller number 0x14, on channel1, no change in speed (speed is multiplied by 1), it's used as a Jog wheel, and the mode is set to POS1_NEG127.
+RotaryEncoder enc(2,3,Controller,Channel,1,JOG,POS1_NEG127); // Create a new instance of the class 'RotaryEncoder', called 'enc', on pin 2 and 3, controller number 0x14, on channel1, no change in speed (speed is multiplied by 1), it's used as a Jog wheel, and the mode is set to POS1_NEG127.
 
 //________________________________________________________________________________________________________________________________
 

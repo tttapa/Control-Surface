@@ -19,7 +19,7 @@ const static byte C4 = 60; // note number 60 is defined as middle C in the MIDI 
 
 //________________________________________________________________________________________________________________________________
 
-Digital button1(2, C4, 1, velocity); // Create a new member of the class 'Digital', called 'button1', on pin 2, that sends MIDI messages with note 'C4' (60) on channel 1, with velocity 127).
+Digital button1(2, C4, 1, velocity); // Create a new instance of the class 'Digital', called 'button1', on pin 2, that sends MIDI messages with note 'C4' (60) on channel 1, with velocity 127).
 Digital button2(3, C4+1, 1, velocity); // C4 + 1 = C#4
 Digital button3(4, C4+2, 1, velocity); // C4 + 2 = D4
 Digital button4(5, C4+3, 1, velocity); // C4 + 3 = D#4
