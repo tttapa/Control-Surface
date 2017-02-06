@@ -6,6 +6,7 @@ RotaryEncoder	KEYWORD1
 USBMidiController   KEYWORD1
 refresh	KEYWORD2
 bank	KEYWORD2
+invert	KEYWORD2
 detachBank	KEYWORD2
 send	KEYWORD2
 setDelay    KEYWORD2
