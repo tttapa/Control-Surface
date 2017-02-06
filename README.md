@@ -61,7 +61,7 @@ To install and use Atmel Flip on Windows (tested on Vista, 8 and 10):
 21.  You should get a notification that Windows has successfully updated the driver software for   'AT90USB162'.  
 22.  Download the Arduino firmware from the [Arduino GitHub page](https://github.com/arduino/Arduino/blob/master/hardware/arduino/avr/firmwares/atmegaxxu2/arduino-usbserial/Arduino-usbserial-atmega16u2-Uno-Rev3.hex) by clicking 'RAW' and then CTRL+S to save.  
 23.  Change the location to your Downloads folder, delete the .txt extension, and choose 'All files' (keep the .hex extension). Then hit 'Save'.  
-24.  Download [Dimitri Diakopoulos's](http://www.dimitridiakopoulos.com/hiduino.html) HIDUINO firmware from [his GitHub page](https://github.com/ddiakopoulos/hiduino/blob/master/compiled_firmwares/arduino_midi.hex). Again, hit 'RAW', CTRL+S, delete the .txt extension, choose 'All files' and save it. Or just download it directly: ([arduino_midi.hex](https://raw.githubusercontent.com/ddiakopoulos/hiduino/master/compiled_firmwares/arduino_midi.hex)  
+24.  Download [Dimitri Diakopoulos's](http://www.dimitridiakopoulos.com/hiduino.html) HIDUINO firmware from [his GitHub page](https://github.com/ddiakopoulos/hiduino/blob/master/compiled_firmwares/arduino_midi.hex). Again, hit 'RAW', CTRL+S, delete the .txt extension, choose 'All files' and save it. Or just download it directly: [arduino_midi.hex](https://raw.githubusercontent.com/ddiakopoulos/hiduino/master/compiled_firmwares/arduino_midi.hex)  
 25.  Open the Flip software.  
 26.  Hit CTRL+S to select a device, choose 'ATmega16U2', and click 'OK'.  
 27.  Hit CTRL+U, and click 'Open' to open the USB connection.  
@@ -72,9 +72,11 @@ To install and use Atmel Flip on Windows (tested on Vista, 8 and 10):
 32.  Go back to the Device Manager, and check if the Arduino shows up as a MIDI device, under 'Sound, video and game controllers'.  
 33.  Now your Arduino is a working MIDI controller!  
 34.	To upload a new program, just repeat steps 25 - 31 again, but use the Arduino firmware you downloaded in step 23.  
+
 #### OSX
 ==TODO==  
 (probably just transcoding the Linux Bash scripts to OSX Bash)
+
 #### Linux
 Go to the folder where you installed this library (usually ~/Arduino/libraries/MIDI_controller) and go to 'DFU scripts/Linux' and open it in a terminal. Then allow executing of the scripts:  
 `chmod +x *`
