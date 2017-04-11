@@ -26,7 +26,7 @@ void Analog::average(size_t len) {
   if(len == 0 || len == 1 || av)
     return;
   avValues = malloc(len*sizeof(unsigned int));
-  memset(avValues, 0, av);
+  memset(avValues, 0, len*sizeof(unsigned int));
   av = len;
 }
 
@@ -76,6 +76,6 @@ unsigned int Analog::runningAverage(int M) { // http://playground.arduino.cc/Mai
     avIndex++;
     avIndex = avIndex % av;
     if (avCount < av) avCount++;
-    
+
     return avSum / avCount;
   }
