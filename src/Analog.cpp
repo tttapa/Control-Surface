@@ -14,14 +14,28 @@ Analog::Analog(byte p, byte n, byte c, byte r) // pin, controller number, channe
   Analog(p,n,c);
 }
 
+Analog::~Analog()
+{
+  free(avValues);
+  if(bankTrue){
+    pinMode(digitalPin, INPUT); // make it a normal input again, without the internal pullup resistor.
+  }
+}
+
+void Analog::average(size_t len) {
+  if(len == 0 || len == 1 || av)
+    return;
+  avValues = malloc(len*sizeof(unsigned int));
+  memset(avValues, 0, av);
+  av = len;
+}
+
 void Analog::refresh()
 {
-  int input = analogRead(analogPin);
-#ifdef ANALOG_AVERAGE
-  input = runningAverage(input);
-  Serial.println(input);
-  Serial.flush();
-#endif // ANALOG_AVERAGE
+  unsigned int input = analogRead(analogPin);
+  if(av) {
+    input = runningAverage(input);
+  }  
   value = input >> 3;
   if(value != oldVal)
   {
@@ -48,6 +62,20 @@ void Analog::bank(byte dPin, byte newN, byte newC)  // digital pin, new controll
 
 void Analog::detachBank()
 {
-  bankTrue = false;
-  pinMode(digitalPin, INPUT); // make it a normal input again, without the internal pullup resistor.
+  if(bankTrue){
+    bankTrue = false;
+    pinMode(digitalPin, INPUT); // make it a normal input again, without the internal pullup resistor.
+  }
 }
+
+unsigned int Analog::runningAverage(int M) { // http://playground.arduino.cc/Main/RunningAverage
+    // keep sum updated to improve speed.
+    avSum -= avValues[avIndex];
+    avValues[avIndex] = M;
+    avSum += avValues[avIndex];
+    avIndex++;
+    avIndex = avIndex % av;
+    if (avCount < av) avCount++;
+    
+    return avSum / avCount;
+  }

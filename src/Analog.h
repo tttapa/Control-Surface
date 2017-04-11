@@ -9,29 +9,20 @@ class Analog // See instructable on how to use classes
 public:
   Analog(byte p, byte n, byte c); // pin, controller number, channel
   Analog(byte p, byte n, byte c, byte r); // pin, controller number, channel, (resolution) for compatibility only, will be removed in next revision  
+  ~Analog();
+  void average(size_t len); // length of array of samples
   void refresh();
   void bank(byte dPin, byte newN, byte newC); // digital pin, new controller number, new channel
   void detachBank();
 private:
   byte analogPin, controller, channel, digitalPin, newController, newChannel, value, oldVal;
   boolean bankTrue = false;
-#ifdef ANALOG_AVERAGE
-  int avValues[ANALOG_AVERAGE];
+  size_t av = 0;
+  unsigned int* avValues;
   byte avIndex = 0;
-  long avSum = 0;
+  unsigned long avSum = 0;
   byte avCount = 0;
-  long runningAverage(int M) { // http://playground.arduino.cc/Main/RunningAverage
-    // keep sum updated to improve speed.
-    avSum -= avValues[avIndex];
-    avValues[avIndex] = M;
-    avSum += avValues[avIndex];
-    avIndex++;
-    avIndex = avIndex % ANALOG_AVERAGE;
-    if (avCount < ANALOG_AVERAGE) avCount++;
-
-    return avSum / avCount;
-  }
-#endif // ANALOG_AVERAGE
+  unsigned int runningAverage(int M); // http://playground.arduino.cc/Main/RunningAverage
 };
 
 #endif // ANALOG_h_
