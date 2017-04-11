@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 
-#if defined (CORE_TEENSY) && ! (defined (USB_MIDI_AUDIO_SERIAL) || defined (USB_MIDI) || defined (USB_MIDI_SERIAL))
+#if defined (CORE_TEENSY) && ! (defined (USB_MIDI_AUDIO_SERIAL) || defined (USB_MIDI) || defined (USB_MIDI_SERIAL) || defined (DEBUG))
 #error Please select a MIDI option in the 'Tools > USB Type' menu.
 #endif
 

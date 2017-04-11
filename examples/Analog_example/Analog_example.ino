@@ -13,15 +13,14 @@ https://github.com/tttapa/MIDI_controller
 
 #include <MIDI_controller.h> // include the library
 
-const static byte resolution = 128; // the maximum analog resolution that can be sent over MIDI(7-bit, 0-127)
 const static byte Channel_Volume = 0x7; // controller number 7 is defined as Channel Volume in the MIDI implementation.
 
 //________________________________________________________________________________________________________________________________
 
-Analog fader1(A0, Channel_Volume, 1, resolution); // Create a new instance of the class 'Analog, called 'fader1', on pin A0, that sends MIDI messages with controller 7 (channel volume) on channel 1. The resolution of the analog input is 128 (7-bit). 
-Analog fader2(A1, Channel_Volume, 2, resolution);
-Analog fader3(A2, Channel_Volume, 3, resolution);
-Analog fader4(A3, Channel_Volume, 4, resolution);
+Analog fader1(A0, Channel_Volume, 1); // Create a new instance of the class 'Analog, called 'fader1', on pin A0, that sends MIDI messages with controller 7 (channel volume) on channel 1.
+Analog fader2(A1, Channel_Volume, 2);
+Analog fader3(A2, Channel_Volume, 3);
+Analog fader4(A3, Channel_Volume, 4);
 
 //________________________________________________________________________________________________________________________________
 
