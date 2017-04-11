@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include "USBMidi.h"
 
-#define DEBUG Serial
+//#define DEBUG Serial
 
 #if defined (USBCON) && ! defined (DEBUG)
 #include "MIDIUSB.h"
