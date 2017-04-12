@@ -14,7 +14,7 @@ https://github.com/tttapa/MIDI_controller
 #include <MIDI_controller.h> // include the library
 
 const static byte Channel_Volume = 0x7; // controller number 7 is defined as Channel Volume in the MIDI implementation.
-
+const static size_t analogAverage = 8; // Use the average of 8 samples to get smooth transitions and prevent noise
 //________________________________________________________________________________________________________________________________
 
 Analog fader1(A0, Channel_Volume, 1); // Create a new instance of the class 'Analog, called 'fader1', on pin A0, that sends MIDI messages with controller 7 (channel volume) on channel 1.
@@ -28,6 +28,10 @@ void setup(){
   USBMidiController.blink(13);  // flash the LED on pin 13 on every message
   USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
   delay(1000); // Wait a second...
+  fader1.average(analogAverage); // Use the average of 8 samples to get smooth transitions and prevent noise
+  fader2.average(analogAverage);
+  fader3.average(analogAverage);
+  fader4.average(analogAverage);
 }
 
 //________________________________________________________________________________________________________________________________
