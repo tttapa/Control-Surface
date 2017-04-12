@@ -28,27 +28,24 @@
 #define PULSES_PER_STEP   4           // This is the number of pulses the encoder outputs when you turn it one step (or click) further. Use 4 for a normal rotary encoder, and 1 for a jogwheel.
 // If you set it to 1, this uses the maximum resolution. If it is set to 4, one message will be sent per click of the encoder. 1 click matches 1 unit in the software. This is more logical for most usages (except jogwheels).
 
-/* Resolution of the analog values. Min = 2, Max = 128, Default = 128. 2 gives either 0 or 127, 128 gives a value between 0 and 127 (= 128 possible values).
-  Limited to 128 due to the fact that it's converted to a 7-bit number in the MIDI message.
-  Increase to enhance precision. Decrease to (try to) remove noise. */
-#define RESOLUTION     64
+#define ANALOG_AVERAGE    8           // Use the average of 8 samples to get smooth transitions and prevent noise
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
-Analog fader1(A0, 0x10, 1 , RESOLUTION);                 // Create a new instance of class 'Analog' called 'fader1', on pin A0, controller number 0x10, on MIDI channel 1, with resolution 64
-Analog fader2(A1, 0x11, 1 , RESOLUTION);
-Analog fader3(A2, 0x12, 1 , RESOLUTION);
-Analog fader4(A3, 0x13, 1 , RESOLUTION);
+Analog fader1(A0, 0x10, 1);                 // Create a new instance of class 'Analog' called 'fader1', on pin A0, controller number 0x10, on MIDI channel 1.
+Analog fader2(A1, 0x11, 1);
+Analog fader3(A2, 0x12, 1);
+Analog fader4(A3, 0x13, 1);
 
-Analog potTop1(A4, 0x14, 1 , RESOLUTION);                // Create a new instance of class 'Analog' called 'potTop1', on pin A4, controller number 0x14, on MIDI channel 1, with resolution 64
-Analog potTop2(A5, 0x15, 1 , RESOLUTION);
-Analog potTop3(A6, 0x16, 1 , RESOLUTION);
-Analog potTop4(A7, 0x17, 1 , RESOLUTION);
+Analog potTop1(A4, 0x14, 1);                // Create a new instance of class 'Analog' called 'potTop1', on pin A4, controller number 0x14, on MIDI channel 1.
+Analog potTop2(A5, 0x15, 1);
+Analog potTop3(A6, 0x16, 1);
+Analog potTop4(A7, 0x17, 1);
 
-Analog potSide1(A8, 0x18, 1 , RESOLUTION);               // Create a new instance of class 'Analog' called 'potSide1', on pin A8, controller number 0x18, on MIDI channel 1, with resolution 64
-Analog potSide2(A9, 0x19, 1 , RESOLUTION);
-Analog potSide3(A10, 0x1A, 1 , RESOLUTION);
-Analog potSide4(A11, 0x1B, 1 , RESOLUTION);
+Analog potSide1(A8, 0x18, 1);               // Create a new instance of class 'Analog' called 'potSide1', on pin A8, controller number 0x18, on MIDI channel 1.
+Analog potSide2(A9, 0x19, 1);
+Analog potSide3(A10, 0x1A, 1);
+Analog potSide4(A11, 0x1B, 1);
 
 DigitalLatch switch1(2, 60, 1, VELOCITY, LATCHTIME);    // Create a new instance of class 'DigitalLatch' called 'switch1', on pin 0, note number 60 on MIDI channel 1, with a predefined latch time
 DigitalLatch switch2(3, 61, 1, VELOCITY, LATCHTIME);
@@ -81,6 +78,21 @@ void setup()
   switch2.bank(11, 61, 2);
   switch3.bank(11, 62, 2);
   switch4.bank(11, 63, 2);
+
+  fader1.average(ANALOG_AVERAGE);        // Use the average of 8 samples to get smooth transitions and prevent noise
+  fader2.average(ANALOG_AVERAGE);
+  fader3.average(ANALOG_AVERAGE);
+  fader4.average(ANALOG_AVERAGE);
+
+  potTop1.average(ANALOG_AVERAGE);
+  potTop2.average(ANALOG_AVERAGE);
+  potTop3.average(ANALOG_AVERAGE);
+  potTop4.average(ANALOG_AVERAGE);
+
+  potSide1.average(ANALOG_AVERAGE);
+  potSide2.average(ANALOG_AVERAGE);
+  potSide3.average(ANALOG_AVERAGE);
+  potSide4.average(ANALOG_AVERAGE);
 
   USBMidiController.blink(13);  // flash the LED on pin 13 on every message
   USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
