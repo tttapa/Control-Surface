@@ -2,7 +2,7 @@
 #include "DigitalLatch.h"
 #include "USBMidi.h"
 
-DigitalLatch::DigitalLatch(byte p, byte n, byte c, byte v, int l){ // pin, controller number, channel, latch time (ms)
+DigitalLatch::DigitalLatch(byte p, byte n, byte c, byte v, unsigned int l){ // pin, controller number, channel, latch time (ms)
   pinMode(p, INPUT_PULLUP);
   pin = p; 
   note = n; 
