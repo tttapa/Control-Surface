@@ -25,7 +25,7 @@ Analog::~Analog()
 void Analog::average(size_t len) {
   if(len == 0 || len == 1 || av)
     return;
-  avValues = malloc(len*sizeof(unsigned int));
+  avValues = (unsigned int *) malloc(len*sizeof(unsigned int));
   memset(avValues, 0, len*sizeof(unsigned int));
   av = len;
 }
