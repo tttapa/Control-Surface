@@ -21,21 +21,21 @@ void RotaryEncoder::refresh() {
   if (difference != 0) {
     count = 0;
     if (difference < 0) {
-      if (mode == 1) {
-        msgVal = 63 + difference * speedMultiply;
-      } else if (mode == 2) {
+      if (mode == ADD_64) {
+        msgVal = 64 + difference * speedMultiply;
+      } else if (mode == SIGN_BIT) {
         msgVal = bit(6) - difference * speedMultiply; // bit(6) gives 64, this is the sign bit
-      } else if (mode == 3) {
+      } else if (mode == POS1_NEG127) {
         msgVal = 128 + difference * speedMultiply;
       }
       USBMidiController.send(CC, channel, controller, msgVal);
     }
     else if ( difference > 0) {
-      if (mode == 1) {
-        msgVal = 63 + difference * speedMultiply;
-      } else if (mode == 2) {
+      if (mode == ADD_64) {
+        msgVal = 64 + difference * speedMultiply;
+      } else if (mode == SIGN_BIT) {
         msgVal = difference * speedMultiply;
-      } else if (mode == 3) {
+      } else if (mode == POS1_NEG127) {
         msgVal = 0 + difference * speedMultiply;
       }
       USBMidiController.send(CC, channel, controller, msgVal);
