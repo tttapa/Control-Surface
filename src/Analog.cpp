@@ -32,7 +32,7 @@ void Analog::average(size_t len) {
 
 void Analog::refresh()
 {
-  unsigned int input = analogRead(analogPin);
+  unsigned int input = analogMap(analogRead(analogPin));
   if(av) {
     input = runningAverage(input);
   }  
@@ -48,6 +48,10 @@ void Analog::refresh()
     }
     oldVal = value;
   }
+}
+
+void Analog::map(TmapFunction fn) {
+  analogMap = fn;
 }
 
 void Analog::bank(byte dPin, byte newN, byte newC)  // digital pin, new controller number, new channel
