@@ -7,6 +7,7 @@
 #include "Digital.h"
 #include "DigitalLatch.h"
 #include "RotaryEncoder.h"
+#include "ControlChange.h"
 #include "USBMidi.h"
 
 #endif
