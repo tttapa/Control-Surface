@@ -7,6 +7,7 @@ This example demonstrates the use of the Analog::map() function to map the value
 of the analog input to the desired range. It takes a function as a parameter.
 This function should take the analog value as argument, and return an int between
 0 and 1023. 
+You can use lambda (anonymous) functions if you want to.
 
 If you are using a Teensy, make sure you have the USB type set to MIDI.
 If you are using an Arduino Uno or Mega, use the HIDUINO firmware for the ATmega16U2.
