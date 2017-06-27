@@ -50,7 +50,7 @@ void Analog::refresh()
   }
 }
 
-void Analog::map(TmapFunction fn) {
+void Analog::map(int (*fn)(int)) {
   analogMap = fn;
 }
 

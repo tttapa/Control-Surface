@@ -3,9 +3,6 @@
 
 #include "Arduino.h"
 #include "USBMidi.h"
-#include <functional>
-
-typedef std::function<int(int)> TmapFunction;
 
 class Analog // See instructable on how to use classes
 {
@@ -15,13 +12,13 @@ public:
   ~Analog();
   void average(size_t len); // length of array of samples
   void refresh();
-  void map(TmapFunction fn);
+  void map(int (*fn)(int));
   void bank(byte dPin, byte newN, byte newC); // digital pin, new controller number, new channel
   void detachBank();
 private:
   byte analogPin, controller, channel, digitalPin, newController, newChannel, value, oldVal;
   boolean bankTrue = false;
-  TmapFunction analogMap = [](int x){return x;};
+  int (*analogMap)(int) = [](int x){return x;};
   size_t av = 0;
   unsigned int* avValues;
   byte avIndex = 0;
