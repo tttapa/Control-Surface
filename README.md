@@ -25,7 +25,9 @@ Digital inputs can be mapped to controls like transport control (**play/pause/st
 ### Rotary encoders
 Another way to input continuous values is by using **rotary encoders** or **jog wheels**. Unlike potentiometers, they can turn indefinitely, and allow for more precise controls.  
 The library has many settings for **accuracy and speed**.  
-Different MIDI modes are available for **compatibility** with a huge range of music production, DJ or DAW software.
+Different MIDI modes are available for **compatibility** with a huge range of music production, DJ or DAW software.  
+
+Rotary encoders can be mapped to controls like **volume**, **balance**, **effect parameters**, **EQ**, **jog wheels**, **timeline scrolling**, **library scrolling** ...
 
 ### MIDI over USB
 The library will automatically detect what kind of Arduino-compatible board you are using, and it will use the USB connection for MIDI communication (if available). This means that you can just plug it into your computer or tablet (PC, Mac, Linux, iOS, Android ...), it will be automatically detected as a MIDI device, and you can start playing right away.  
