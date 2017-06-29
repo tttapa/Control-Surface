@@ -29,7 +29,6 @@ void setup(){
   delay(1000); // Wait a second...
   fader.average(analogAverage); // Use the average of 8 samples to get smooth transitions and prevent noise
   // fader.map([](int value){return (int)((unsigned long)value*value/16383);}); // Map to a quadratic curve
-
 }
 
 //________________________________________________________________________________________________________________________________
