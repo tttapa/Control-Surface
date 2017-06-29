@@ -124,6 +124,16 @@ To upload a new sketch, install the Arduino Serial firmware again: put the Ardui
 This script will download the Arduino Serial firmware and install it to the Arduino. When it's finished, unplug the Arduino, plug it back in, and upload your new sketch.  
 Then you can install the MIDI firmware again.
 
+### Documentation
+You can find the entire library documentation with a description of all available functions in the [Wiki](https://github.com/tttapa/MIDI_controller/wiki/Library-documentation).  
+
+### Hardware
+In the [Wiki](https://github.com/tttapa/MIDI_controller/wiki/Hardware), you can also find a page that explains how to connect the hardware, like pusbuttons, potentiometers and rotary encoders.  
+
+### Examples
+The library includes a whole lot of example sketches that demonstrate the usage of the library. You can find them under File > Examples > Examples from custom libraries > MIDI Controller or in the [examples folder](https://github.com/tttapa/MIDI_controller/tree/master/examples) on GitHub.
+
+
 ## Tested boards
 I have tested this library with an Arduino Uno, an Arduino Leonardo and a Teensy 3.2.  
 Other users have successfully used the library with an Arduino Mega 2560 and an Arduino Micro.
