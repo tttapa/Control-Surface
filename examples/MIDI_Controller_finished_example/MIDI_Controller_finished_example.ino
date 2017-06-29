@@ -13,7 +13,7 @@
   If you are using an Arduino Uno or Mega, use the HIDUINO firmware for the ATmega16U2.
 
 
-  Written by tttapa, 21/08/2015
+  Written by tttapa, 29-06-2017
   https://github.com/tttapa/MIDI_controller
 */
 
@@ -32,10 +32,10 @@
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
-Analog fader1(A0, 0x10, 1);                 // Create a new instance of class 'Analog' called 'fader1', on pin A0, controller number 0x10, on MIDI channel 1.
-Analog fader2(A1, 0x11, 1);
-Analog fader3(A2, 0x12, 1);
-Analog fader4(A3, 0x13, 1);
+AnalogHiRes fader1(A0, 1);                  // Create a new instance of class 'AnalogHiRes' called 'fader1', on pin A0, on MIDI channel 1.
+AnalogHiRes fader2(A1, 2);
+AnalogHiRes fader3(A2, 3);
+AnalogHiRes fader4(A3, 4);
 
 Analog potTop1(A4, 0x14, 1);                // Create a new instance of class 'Analog' called 'potTop1', on pin A4, controller number 0x14, on MIDI channel 1.
 Analog potTop2(A5, 0x15, 1);
@@ -59,17 +59,17 @@ RotaryEncoder enc1(1, 0, 0x2F, 1, SPEED_MULTIPLY, NORMAL_ENCODER, POS1_NEG127); 
 
 void setup()
 {
-  fader1.bank(11, 0x10, 2);        // if pin 11 is pulled low (by a switch) fader1 will be controller number 0x10, on channel 2, if the switch is off (i.e. 1) it will keep the settings declared in the section above.
-  fader2.bank(11, 0x11, 2);
-  fader3.bank(11, 0x12, 2);
-  fader4.bank(11, 0x13, 2);
+  fader1.bank(11, 5);             // if pin 11 is pulled low (by a switch) fader1 will operate on channel 5, if the switch is off (i.e. 1) it will keep the settings declared in the section above.
+  fader2.bank(11, 6);
+  fader3.bank(11, 7);
+  fader4.bank(11, 8);
 
   //potTop1.bank(11, 0x14, 2);    // you could add these pots to the same bank if you wanted to
   //potTop2.bank(11, 0x15, 2);
   //potTop3.bank(11, 0x16, 2);
   //potTop4.bank(11, 0x17, 2);
 
-  potSide1.bank(11, 0x18, 2);
+  potSide1.bank(11, 0x18, 2);     // if pin 11 is pulled low (by a switch) potSide1 will be controller number 0x18, on channel 2, if the switch is off (i.e. 1) it will keep the settings declared in the section above.
   potSide2.bank(11, 0x19, 2);
   potSide3.bank(11, 0x1A, 2);
   potSide4.bank(11, 0x1B, 2);
@@ -95,7 +95,7 @@ void setup()
   potSide4.average(ANALOG_AVERAGE);
 
   USBMidiController.blink(LED_BUILTIN);  // flash the built-in LED (pin 13 on most boards) on every message
-  USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
+  USBMidiController.setDelay(5);  // wait 5 ms after each message not to flood the connection
 
   delay(1000);         // Wait a second...
 }
