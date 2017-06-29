@@ -19,7 +19,7 @@ https://github.com/tttapa/MIDI_controller
 const static size_t analogAverage = 8; // Use the average of 8 samples to get smooth transitions and prevent noise
 //________________________________________________________________________________________________________________________________
 
-AnalogHiRes fader(A0, 1); // Create a new instance of the class 'Analog, called 'fader', on pin A0, that sends MIDI messages with controller 7 (channel volume) on channel 1.
+AnalogHiRes fader(A0, 1); // Create a new instance of the class 'Analog, called 'fader', on pin A0, that sends MIDI Pitch Bend messages on channel 1.
 
 //________________________________________________________________________________________________________________________________
 
