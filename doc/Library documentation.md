@@ -2,7 +2,7 @@
 First add the library to your sketch by simply typing this line at the top of your file:  
 `#include <MIDI_controller.h>`
 
-The library currently has 4 classes: Analog, Digital, DigitalLatch, and Encoder.
+The library currently has 6 classes: Analog, AnalogHiRes, ControlChange, Digital, DigitalLatch, and Encoder. There's also a USBMidiController object that you can use to send MIDI over USB.
 
 Each class has a set of functions, and a set of variables. Some are private, and are used inside the class, others are public, and can be called from outside of the class. More on classes [here](https://www.arduino.cc/en/Hacking/LibraryTutorial).
 
@@ -19,11 +19,11 @@ For explanation of what the functions do and what they are made for, read follow
 # Library Reference
 
 ## Analog
-The analog class is meant for analog inputs, like potentiometers and faders (or analog sensors that output a value between 0 and 5V). 
+The analog class is meant for analog inputs, like potentiometers and faders (or analog sensors that output a value between 0 and 5V/3.3V). 
 
 ### Creating an instance
 
-`Analog (byte pin, byte controller, byte channel, byte resolution);`
+`Analog (byte pin, byte controller, byte channel);`
 
 **pin** is the analog pin to read from. It's connected to the wiper of the potentiometer.
 
@@ -31,9 +31,13 @@ The analog class is meant for analog inputs, like potentiometers and faders (or 
 
 **channel** is the MIDI channel (1-15).
 
-**resolution** is the resolution of the analog reading. A resolution of 2 would give only 2 possible values (0 and 127), a resolution of 3 would give 3 possible values (0, 63 and 127). A resolution of 128 gives 128 possible values (0-127), this is the default, because it's all 7-bit numbers. (MIDI uses 7-bit numbers for sending values) Use a value lower than 128, like 64, if there's a lot of noise on your input, for example if the controller keeps on sending 0,1,0,1,0,1,0,1, ... Use 128 if you want to use the maximum available resolution.
-
 ### Functions
+
+`average(size_t samples);`
+
+This enables averaging of the analog input to get smoother controls and to minimize noise. 
+
+**samples** is the length of the ring buffer, in other words, the number of samples that are used to calculate the average value. 8 samples seems to work fine on an Arduino UNO / Leonardo, you may want to increase the buffer length on faster boards, like Teensies. Keep in mind that longer buffers use more RAM and add latency.  
 
 `refresh();`
 
@@ -54,6 +58,12 @@ This function enables you to use one analog input (together with a switch) for m
 This function disables the bank functionality that was set up with the bank function. The controller and channel will be ones that were defined during instance creation, regardless of the state of the switch.
 The pin of the switch defined in the bank function will be set as an input without pull-up resistor again.
 
+`map(int (*function)(int));`
+
+This function allows you to have more control over the mapping between the raw analog input value, and the value that is sent over MIDI. 
+
+**function** is a pointer to a function that takes an int as an argument (this is the analog value, between 0 and 1023) and returns an int (this is the new analog value, that will be sent over MIDI, it's a number between 0 and 1023 as well). You can use a normal function, or a lambda expression (anonymous function).
+
 ### Constants
 
 None.
@@ -61,7 +71,106 @@ None.
 ### Examples
 
 Analog\_example  
-Analog\_bank\_example
+Analog\_bank\_example  
+Analog\_array\_example  
+Analog\_map\_example  
+
+## AnalogHiRes
+This class is very similar to the Analog class, but the difference is that a normal "Analog" input has 7 bits of accuracy, an "AnalogHiRes" input has up to 14 bits of accuracy. (14 bits on Teensy 3, 12 bits on Arduino Due, 10 bits on a normal AVR board)
+You can only have one AnalogHiRes controller per MIDI channel (compared to 119 Analog controllers per MIDI channel).
+
+### Creating an instance
+
+`Analog (byte pin, byte channel);`
+
+**pin** is the analog pin to read from. It's connected to the wiper of the potentiometer.
+
+**channel** is the MIDI channel (1-16).
+
+### Functions
+
+`average(size_t samples);`
+
+This enables averaging of the analog input to get smoother controls and to minimize noise. 
+
+**samples** is the length of the ring buffer, in other words, the number of samples that are used to calculate the average value. 8 samples seems to work fine on an Arduino UNO / Leonardo, you may want to increase the buffer length on faster boards, like Teensies. Keep in mind that longer buffers use more RAM and add latency.  
+
+`refresh();`
+
+This function checks the input, and if it has changed since last time refresh was called, it sends the new value over MIDI (on the predefined channel).
+
+`bank(byte pin, byte channel);`
+
+This function enables you to use one analog input (together with a switch) for multiple controls. If the switch is in the OFF position, it will use the default channel (that was defined in the constructor), if the switch is in the ON position, it will use the new channel.
+
+**pin** is the digital pin with the switch connected. The internal pull-up resistor will be enabled.
+
+**channel** is the channel to use when the switch is on.
+
+`detachBank();`
+
+This function disables the bank functionality that was set up with the bank function. The  channel will be the one that was defined during instance creation, regardless of the state of the switch.
+The pin of the switch defined in the bank function will be set as an input without pull-up resistor again.
+
+`map(uint16_t (*function)(uint16_t));`
+
+This function allows you to have more control over the mapping between the raw analog input value, and the value that is sent over MIDI. 
+
+**function** is a pointer to a function that takes a uint16_t as an argument (this is the 14-bit analog value, between 0 and 16383) and returns a uint16_t (this is the new analog value, that will be sent over MIDI, it's a number between 0 and 16383 as well). You can use a normal function, or a lambda expression (anonymous function).
+
+### Constants
+
+None.
+
+### Examples
+
+AnalogHiRes\_example
+
+## ControlChange
+The ControlChange class is very similar to the Analog class, but instead of taking input from an analog pin, you can provide the input yourself. This means that you can use data from digital sensors or analog multiplexers, for example.
+
+### Creating an instance
+
+`ControlChange (byte controller, byte channel);`
+
+**controller** is the MIDI controller number (data 1 in the MIDI message). This is how it will appear in your MIDI software, like a unique address.
+
+**channel** is the MIDI channel (1-15).
+
+### Functions
+
+`average(size_t samples);`
+
+This enables averaging of the input values to get smoother controls and to minimize noise. 
+
+**samples** is the length of the ring buffer, in other words, the number of samples that are used to calculate the average value. 8 samples seems to work fine on an Arduino UNO / Leonardo, you may want to increase the buffer length on faster boards, like Teensies. Keep in mind that longer buffers use more RAM and add latency.  
+
+`refresh(byte input);`  
+`refresh(float input);`
+
+This function checks the input, and if it has changed since last time refresh was called, it sends the new value over MIDI (on the predefined controller number and channel).
+
+byte **input** is a 7-bit unsigned integer (from 0 to 127) that can be sent over MIDI directly.  
+float **input** is a floating point number between 0.0 and 1.0. (It will be mapped to a 7-bit number before sending over MIDI.)
+
+`bank(byte pin, byte controller, byte channel);`
+
+This function enables you to use one analog input (together with a switch) for multiple controls. If the switch is in the OFF position, the controller and channel will be those that were defined during instance creation, if the switch is in the ON position, the controller and channel will be those that were entered as arguments of this function.
+
+**pin** is the digital pin with the switch connected. The internal pull-up resistor will be enabled.
+
+**controller** is the controller to use when the switch is on.
+
+**channel** is the channel to use when the switch is on.
+
+`detachBank();`
+
+This function disables the bank functionality that was set up with the bank function. The controller and channel will be ones that were defined during instance creation, regardless of the state of the switch.
+The pin of the switch defined in the bank function will be set as an input without pull-up resistor again.
+
+### Examples
+
+ControlChange\_example
 
 ## Digital
 The Digital class is meant for use with momentary pushbuttons. It sends a noteOn message when the button is pressed, and a noteOff message when the button is released. Connect your buttons between the input pin and the ground, the internal pull-up resistors will be used.
@@ -277,7 +386,7 @@ Message type: 0xB0 (Control Change), use to send analog values, like values from
 Message type: 0xC0 (Program Change), use to set the instrument of a certain channel. (Channel 10 is percussion).
 
 `PITCH_BEND`  
-Message type: 0xE0 (Pitch Bend), use to send large analog values.
+Message type: 0xE0 (Pitch Bend), used to send large (14-bit) analog values.
 
 ### Examples
 
