@@ -12,6 +12,7 @@ It supports **averaging** the inputs, to get smooth transitions and to reduce no
 You have full control over the value **mapping**, control curves, and the range of the inputs.  
 You can create **banks** of analog inputs, based on the state of a switch. For example, if you have 4 faders connected, you can set them up so that they control the volume of channels 1-4 when the bank select switch is turned off, and channels 5-8 when the bank select switch is on.  
 Using the _ControlChange_ class, you can use data from **digital sensors** or from different interfaces as well.  
+**Accuracy up to 14 bits** supported using pitch bend events. 
 
 Analog inputs can be mapped to controls like **volume**, **balance**, **effect parameters**, **EQ** ...
 
@@ -31,7 +32,7 @@ Rotary encoders can be mapped to controls like **volume**, **balance**, **effect
 
 ### MIDI over USB
 The library will automatically detect what kind of Arduino-compatible board you are using, and it will use the USB connection for MIDI communication (if available). This means that you can just plug it into your computer or tablet (PC, Mac, Linux, iOS, Android ...), it will be automatically detected as a MIDI device, and you can start playing right away.  
-If your board doesn't support MIDI over USB, it will default to the Serial protocol.  
+If your board doesn't support MIDI over USB, it will default to the Serial interface.  
 
 For maximum flexibility, you can use the **MIDI functions** to send your own custom MIDI events, without having to worry about compatibility issues between different boards.  
 
