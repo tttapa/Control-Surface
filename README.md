@@ -109,7 +109,7 @@ To install and use Atmel Flip on Windows (tested on Vista, 8 and 10):
 (probably just transcoding the Linux Bash scripts to OSX Bash)
 
 #### Linux
-Go to the folder where you installed this library (usually ~/Arduino/libraries/MIDI_controller) and go to 'DFU scripts/Linux' and open it in a terminal. Then allow executing of the scripts:  
+Go to the folder where you installed this library (usually ~/Arduino/libraries/MIDI_controller) and go to 'DFU scripts/Linux' and open it in a terminal. Then allow execution of the scripts:  
 `chmod +x *`
 
 And run the script to flash the MIDI firmware:  
