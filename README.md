@@ -125,5 +125,7 @@ Then you can install the MIDI firmware again.
 
 ## Tested boards
 I have tested this library with an Arduino Uno, an Arduino Leonardo and a Teensy 3.2.  
+Other users have successfully used the library with an Arduino Mega 2560 and an Arduino Micro.
+Boards that use an FTDI USB-to-Serial chip (like the Nano and some older boards) do not support MIDI over USB, but can still use Serial MIDI.
 If you try this library with a different board, please let me know whether it works or not.
 If it doesn't, please open an issue. Thanks!
