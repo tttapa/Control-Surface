@@ -22,7 +22,7 @@ Analog fader(A0, Channel_Volume, 1); // Create a new instance of the class 'Anal
 //________________________________________________________________________________________________________________________________
 
 void setup(){
-  USBMidiController.blink(13);  // flash the LED on pin 13 on every message
+  USBMidiController.blink(LED_BUILTIN);  // flash the built-in LED (pin 13 on most boards) on every message
   USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
   delay(1000); // Wait a second...
   fader.average(analogAverage); // Use the average of 8 samples to get smooth transitions and prevent noise

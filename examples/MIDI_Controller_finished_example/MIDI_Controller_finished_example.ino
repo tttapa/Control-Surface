@@ -94,7 +94,7 @@ void setup()
   potSide3.average(ANALOG_AVERAGE);
   potSide4.average(ANALOG_AVERAGE);
 
-  USBMidiController.blink(13);  // flash the LED on pin 13 on every message
+  USBMidiController.blink(LED_BUILTIN);  // flash the built-in LED (pin 13 on most boards) on every message
   USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
 
   delay(1000);         // Wait a second...

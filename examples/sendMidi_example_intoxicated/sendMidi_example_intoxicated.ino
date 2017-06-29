@@ -69,7 +69,7 @@ Analog volume10(A2, channelVolume, 10, 128);
 //_______________________________________________________________________________________________________________________________
 
 void setup(){
-  USBMidiController.blink(13);  // flash the LED on pin 13 on every message
+  USBMidiController.blink(LED_BUILTIN);  // flash the built-in LED (pin 13 on most boards) on every message
   USBMidiController.setDelay(0);  // wait 15 ms after each message not to flood the connection // We don't want a delay after each message, because otherwise two notes that should play simultaneously will have this delay between them, resulting in a strange, unwanted effect.
   pinMode(11,INPUT_PULLUP);
   while(digitalRead(11) == 1); // Wait untill the switch is turned on.
