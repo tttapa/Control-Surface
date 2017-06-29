@@ -14,7 +14,7 @@ Potentiometers and faders are hooked up as simple voltage dividers. You can read
 On the schematic of a voltage divider above, there are two resistors. R1 is the resistance between the right pin of the potentiometer and the wiper (center pin), and R2 is the resistance between the left pin and the wiper. The sum of R1 and R2 is fixed. This is the value of the potentiometer, for a 50kΩ potentiometer, R1 + R2 = 50kΩ.  
 R1 and R2 vary from 0Ω to 50kΩ, depending on the position of the wiper.
 To calculate the voltage on the wiper, the following formula is used:  
-![Voltage divider formula](https://wikimedia.org/api/rest_v1/media/math/render/svg/5d55415f24b63635bc017c3287b406c480a54472)
+![Voltage divider formula](https://wikimedia.org/api/rest_v1/media/math/render/svg/5d55415f24b63635bc017c3287b406c480a54472)  
 As R2 varies from 0Ω to 50kΩ, the fraction varies from 0 to 1, and V<sub>out</sub> varies from 0V to V<sub>in</sub>. There's a linear relation between V<sub>out</sub> and the position of the wiper. So by measuring V<sub>out</sub>, the Arduino can determine the wiper position.  
 
 Connect the left pin of the potentiometer to ground, the right pin to 5V (3.3V), and the center pin (wiper) to an analog input on the Arduino:  
