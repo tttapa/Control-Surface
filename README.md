@@ -5,6 +5,34 @@ The library works on pretty much all Arduino and Teensy boards, like the Arduino
 
 It uses a MIDI-over-USB connection to connect to your computer, and can be used in your favourite DJ or DAW software.
 
+## Features
+### Analog inputs
+The library can take input from a variety of analog devices, such as variable resistors, **potentiometers**, linear faders, light **sensors** ...  
+It supports **averaging** the inputs, to get smooth transitions and to reduce noise.  
+You have full control over the value **mapping**, control curves, and the range of the inputs.  
+You can create **banks** of analog inputs, based on the state of a switch. For example, if you have 4 faders connected, you can set them up so that they control the volume of channels 1-4 when the bank select switch is turned off, and channels 5-8 when the bank select switch is on.  
+Using the _ControlChange_ class, you can use data from **digital sensors** or from different interfaces as well.  
+
+Analog inputs can be mapped to controls like **volume**, **balance**, **effect parameters**, **EQ** ...
+
+### Digital inputs
+The library can be used with a wide range of digital inputs as well, like **pushbuttons**, latching **switches**, footswitches ...
+Just like analog inputs, digital inputs can be arranged in **banks**, to control a large number of controls, with a limited number of physical buttons.  
+Buttons can be **inverted** if necessary.
+
+Digital inputs can be mapped to controls like transport control (**play/pause/stop/cue/...** buttons), **mute/solo/rec** buttons, **effect enable/disable**, **looping options**, **sample triggers** ... 
+
+### Rotary encoders
+Another way to input continuous values is by using **rotary encoders** or **jog wheels**. Unlike potentiometers, they can turn indefinitely, and allow for more precise controls.  
+The library has many settings for **accuracy and speed**.  
+Different MIDI modes are available for **compatibility** with a huge range of music production, DJ or DAW software.
+
+### MIDI over USB
+The library will automatically detect what kind of Arduino-compatible board you are using, and it will use the USB connection for MIDI communication (if available). This means that you can just plug it into your computer or tablet (PC, Mac, Linux, iOS, Android ...), it will be automatically detected as a MIDI device, and you can start playing right away.  
+If your board doesn't support MIDI over USB, it will default to the Serial protocol.  
+
+For maximum flexibility, you can use the **MIDI functions** to send your own custom MIDI events, without having to worry about compatibility issues between different boards.  
+
 ## Installation
 ### Dependencies
 If you are using an Arduino with native USB support, like the Leonardo, Due, Zero, Micro ... you'll need to install the MIDIUSB library.
