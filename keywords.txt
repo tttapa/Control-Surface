@@ -1,5 +1,6 @@
 MIDI_controller	KEYWORD1
 Analog	KEYWORD1
+AnalogHiRes	KEYWORD1
 Digital	KEYWORD1
 DigitalLatch	KEYWORD1
 RotaryEncoder	KEYWORD1

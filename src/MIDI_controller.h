@@ -4,6 +4,7 @@
 #include "Arduino.h"
 
 #include "Analog.h"
+#include "AnalogHiRes.h"
 #include "Digital.h"
 #include "DigitalLatch.h"
 #include "RotaryEncoder.h"
