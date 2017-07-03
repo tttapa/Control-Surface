@@ -8,7 +8,6 @@ class Analog // See instructable on how to use classes
 {
 public:
   Analog(byte p, byte n, byte c); // pin, controller number, channel
-  Analog(byte p, byte n, byte c, byte r); // pin, controller number, channel, (resolution) for compatibility only, will be removed in next revision  
   ~Analog();
   void average(size_t len); // length of array of samples
   void refresh();

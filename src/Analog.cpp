@@ -9,10 +9,6 @@ Analog::Analog(byte p, byte n, byte c) // pin, controller number, channel
   channel = c;
   oldVal = -1;
 }
-Analog::Analog(byte p, byte n, byte c, byte r) // pin, controller number, channel, (resolution) for compatibility only, will be removed in next revision
-{
-  Analog(p,n,c);
-}
 
 Analog::~Analog()
 {

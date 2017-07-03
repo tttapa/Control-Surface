@@ -5,6 +5,16 @@
 #include "MIDIUSB.h"
 #endif
 
+const char *MIDI_STATUS_NAMES[] = {
+    "Note Off\t",
+    "Note On\t\t",
+    "Key Pressure\t",
+    "Control Change\t",
+    "Program Change\t",
+    "Channel Pressure",
+    "Pitch Bend\t",
+    "Unknown\t"};
+
 USBMidi::USBMidi() {}
 
 void USBMidi::begin(unsigned long baud, bool debug)
@@ -46,13 +56,13 @@ void USBMidi::send(byte m, byte c, byte d1, byte d2)
 
   if (_debug)
   {
-    Serial.print(m, HEX);
-    Serial.print('\t');
-    Serial.print(c, HEX);
-    Serial.print('\t');
-    Serial.print(d1, HEX);
-    Serial.print('\t');
-    Serial.print(d2, HEX);
+    Serial.print(MIDI_STATUS_NAMES[min((m >> 4) - 8, 7)]);
+    Serial.print("\tChannel: ");
+    Serial.print((c & 0xF) + 1);
+    Serial.print("\tData 1: ");
+    Serial.print(d1 & 0x7F);
+    Serial.print("\tData 2: ");
+    Serial.print(d2 & 0x7F);
     Serial.print("\r\n");
     //Serial.print((unsigned long) (m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16) | ((d2 & 0x7F) << 24), HEX);
   }
@@ -98,11 +108,11 @@ void USBMidi::send(byte m, byte c, byte d1)
 
   if (_debug)
   {
-    Serial.print(m, HEX);
-    Serial.print('\t');
-    Serial.print(c, HEX);
-    Serial.print('\t');
-    Serial.print(d1, HEX);
+    Serial.print(MIDI_STATUS_NAMES[min((m >> 4) - 8, 7)]);
+    Serial.print("\tChannel: ");
+    Serial.print((c & 0xF) + 1);
+    Serial.print("\tData 1: ");
+    Serial.print(d1 & 0x7F);
     Serial.print("\r\n");
     //Serial.print((unsigned long) ((m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16), HEX);
   }
