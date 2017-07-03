@@ -3,6 +3,8 @@
 
 #include "Arduino.h"
 
+//#define DEBUG_PORT Serial
+
 #if defined (CORE_TEENSY) && ! (defined (USB_MIDI_AUDIO_SERIAL) || defined (USB_MIDI) || defined (USB_MIDI_SERIAL) || defined (DEBUG))
 #error Please select a MIDI option in the 'Tools > USB Type' menu.
 #endif
@@ -23,9 +25,11 @@ private:
     bool blinkEn = false;
     byte blinkPin;
     int blinkDelay = 0;
+    bool debug = false;
 public:
     USBMidi(); // constructor
     ~USBMidi(); // destructor
+    void begin(unsigned long baud, &Stream MIDI, bool debug = false);
     void send(byte m, byte c, byte d1, byte d2); // message, channel, data 1, data 2
     void send(byte m, byte c, byte d1); // message, channel, data 1
     void setDelay(int d); // delay between messages

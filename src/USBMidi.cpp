@@ -1,23 +1,27 @@
 #include "Arduino.h"
 #include "USBMidi.h"
 
-//#define DEBUG Serial
-
-#if defined (USBCON) && ! defined (DEBUG)
+#if defined (USBCON) && ! defined (DEBUG_PORT)
 #include "MIDIUSB.h"
 #endif
 
-USBMidi::USBMidi(void) {
-#ifdef DEBUG
-  DEBUG.begin(115200);
-#elif ! (defined(USBCON) || defined (CORE_TEENSY)) // If you're compiling for an Arduino that has USB connection in the main MCU
+//#undef DEBUG_PORT
+
+USBMidi::USBMidi() {}
+
+USBMidi::begin(unsigned long baud, Stream& port = Serial, bool debug = false) {
+  debug
+#ifdef DEBUG_PORT
+  DEBUG_PORT.begin(115200);
+  DEBUG_PORT.println("MIDI DEBUG_PORT MODE");
+#elif !(defined(USBCON) || defined (CORE_TEENSY)) // If you're compiling for an Arduino that has USB connection in the main MCU
   Serial.begin(MIDI_BAUD); // Start communication with ATmega16U2 @31250 baud (for MIDI firmware: Hiduino: https://github.com/ddiakopoulos/hiduino)
 #endif 
 }
 
-USBMidi::~USBMidi(void) {
-#ifdef DEBUG
-  DEBUG.end();
+USBMidi::~USBMidi() {
+#ifdef DEBUG_PORT
+  DEBUG_PORT.end();
 #elif ! (defined(USBCON) || defined (CORE_TEENSY)) // If you're compiling for an Arduino that has USB connection in the main MCU
    Serial.end();
 #endif 
@@ -33,16 +37,16 @@ void USBMidi::send(byte m, byte c, byte d1, byte d2) {
   if (blinkEn)
     digitalWrite(blinkPin,HIGH);
 
-#ifdef DEBUG
-  DEBUG.print(m,HEX);
-  DEBUG.print('\t');
-  DEBUG.print(c,HEX);
-  DEBUG.print('\t');
-  DEBUG.print(d1,HEX);
-  DEBUG.print('\t');
-  DEBUG.print(d2,HEX);
-  DEBUG.print("\r\n");
-  //DEBUG.print((unsigned long) (m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16) | ((d2 & 0x7F) << 24), HEX);
+#ifdef DEBUG_PORT
+  DEBUG_PORT.print(m,HEX);
+  DEBUG_PORT.print('\t');
+  DEBUG_PORT.print(c,HEX);
+  DEBUG_PORT.print('\t');
+  DEBUG_PORT.print(d1,HEX);
+  DEBUG_PORT.print('\t');
+  DEBUG_PORT.print(d2,HEX);
+  DEBUG_PORT.print("\r\n");
+  //DEBUG_PORT.print((unsigned long) (m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16) | ((d2 & 0x7F) << 24), HEX);
 #elif defined (CORE_TEENSY)  //only include these lines when compiling for a Teensy board
   usb_midi_write_packed(((m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16) | ((d2 & 0x7F) << 24));
 #elif defined(USBCON)  //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has USB connection in the main MCU but is not a Teensy
@@ -78,14 +82,14 @@ void USBMidi::send(byte m, byte c, byte d1) {
   if (blinkEn)
     digitalWrite(blinkPin,HIGH);
 
-#ifdef DEBUG
-  DEBUG.print(m,HEX);
-  DEBUG.print('\t');
-  DEBUG.print(c,HEX);
-  DEBUG.print('\t');
-  DEBUG.print(d1,HEX);
-  DEBUG.print("\r\n");
-  //DEBUG.print((unsigned long) ((m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16), HEX);
+#ifdef DEBUG_PORT
+  DEBUG_PORT.print(m,HEX);
+  DEBUG_PORT.print('\t');
+  DEBUG_PORT.print(c,HEX);
+  DEBUG_PORT.print('\t');
+  DEBUG_PORT.print(d1,HEX);
+  DEBUG_PORT.print("\r\n");
+  //DEBUG_PORT.print((unsigned long) ((m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16), HEX);
 #elif defined (CORE_TEENSY)  //only include these lines when compiling for a Teensy board
   usb_midi_write_packed(((m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16));
 #elif defined(USBCON)  //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has USB connection in the main MCU but is not a Teensy
