@@ -3,9 +3,7 @@
 
 #include "Arduino.h"
 
-//#define DEBUG_PORT Serial
-
-#if defined (CORE_TEENSY) && ! (defined (USB_MIDI_AUDIO_SERIAL) || defined (USB_MIDI) || defined (USB_MIDI_SERIAL) || defined (DEBUG))
+#if defined (CORE_TEENSY) && ! (defined (USB_MIDI_AUDIO_SERIAL) || defined (USB_MIDI) || defined (USB_MIDI_SERIAL))
 #error Please select a MIDI option in the 'Tools > USB Type' menu.
 #endif
 
