@@ -35,6 +35,12 @@ The library will automatically detect what kind of Arduino-compatible board you 
 If your board doesn't support MIDI over USB, it will default to the Serial interface.  
 
 For maximum flexibility, you can use the **MIDI functions** to send your own custom MIDI events, without having to worry about compatibility issues between different boards.  
+The **debug mode** allows you to print the MIDI events in the serial monitor for easier developing, testing and debugging.  
+
+## New in version 2.0.0
+- Easier access to debug mode using `USBMidiController.begin(baud, true);`  
+- More examples  
+- Minor bug fixes  
 
 ## Installation
 ### Dependencies
