@@ -22,14 +22,14 @@ const static byte PITCH_BEND = 0xE0;
 class USBMidi
 {
 private:
-    bool blinkEn = false;
-    byte blinkPin;
-    int blinkDelay = 0;
-    bool debug = false;
+    bool _blinkEn = false;
+    uint8_t _blinkPin;
+    int _blinkDelay = 0;
+    bool _debug = false;
 public:
     USBMidi(); // constructor
     ~USBMidi(); // destructor
-    void begin(unsigned long baud, &Stream MIDI, bool debug = false);
+    void begin(unsigned long baud = MIDI_BAUD, bool debug = false);
     void send(byte m, byte c, byte d1, byte d2); // message, channel, data 1, data 2
     void send(byte m, byte c, byte d1); // message, channel, data 1
     void setDelay(int d); // delay between messages

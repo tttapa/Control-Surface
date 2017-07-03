@@ -27,6 +27,7 @@ Analog fader4(A3, Channel_Volume, 4);
 void setup(){
   USBMidiController.blink(LED_BUILTIN);  // flash the built-in LED (pin 13 on most boards) on every message
   USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
+  USBMidiController.begin();  // Initialise the USB MIDI connection
   delay(1000); // Wait a second...
   fader1.average(analogAverage); // Use the average of 8 samples to get smooth transitions and prevent noise
   fader2.average(analogAverage);

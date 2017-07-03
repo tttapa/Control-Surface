@@ -35,6 +35,7 @@ Analog fader2(A1, Channel_Volume, 2);
 void setup(){
   USBMidiController.blink(LED_BUILTIN);  // flash the built-in LED (pin 13 on most boards) on every message
   USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
+  USBMidiController.begin();  // Initialise the USB MIDI connection
   delay(1000); // Wait a second...
   fader1.bank(switchPin, Channel_Volume, 3); // Enable the bank functionality. If switchPin is low (=switch on) the message will be sent on channel 3 instead of channel 1
   fader2.bank(switchPin, Channel_Volume, 4);

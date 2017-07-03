@@ -24,6 +24,7 @@ Analog* potentiometers[NUM_ANALOG_INPUTS]; // create an empty array of pointers 
 void setup(){
   USBMidiController.blink(LED_BUILTIN);  // flash the built-in LED (pin 13 on most boards) on every message
   USBMidiController.setDelay(15);  // wait 15 ms after each message not to flood the connection
+  USBMidiController.begin();  // Initialise the USB MIDI connection
   delay(1000); // Wait a second...
   for(int i = 0; i < NUM_ANALOG_INPUTS; i++) {
     potentiometers[i] = new Analog(A0+i, i, 1); // create a new Analog object and store it in the array
