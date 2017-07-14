@@ -333,6 +333,20 @@ You don't have to create one, you can just use the readily available `USBMidiCon
 
 ### Functions
 
+`begin();`
+
+Initializes the MIDI connection. 
+
+`begin(unsigned long baud = MIDI_BAUD, bool debug = false);`
+
+Initializes the MIDI connection, allows to change the baud rate and enable debug output.
+
+**baud** is the baud rate for the serial MIDI connection. By default, this is the official MIDI hardware baud rate of 31250. It only has effect when using an Arduino Uno, Mega, Nano ... or when **debug** is set to `true`.  
+It can be used to make the library compatible with the Hairless MIDI<->Serial bridge. For Hairless, use `USBMidiController.begin(115200);`.
+
+**debug** when set to `true`, the library will output human-readable debug MIDI messages instead of real MIDI packets. Use the Serial Monitor (`CTRL+SHIFT+M`) to read them.  
+You can enable the debug mode by calling `USBMidiController.begin(baud, true);` where baud is the Serial baud rate, 115200, for example.
+
 `send(byte message, byte channel, byte data1, byte data2);`
 
 Sends a 3-byte MIDI message over USB.
@@ -361,7 +375,7 @@ Sets the delay between two messages, to prevent an overflow of data on the conne
 
 **delay** is the delay in milliseconds.
 
-`blink(byte pin)`
+`blink(byte pin);`
 
 Blinks the LED on every MIDI message. Helps for debuggin, and is aesthetically pleasing.
 
