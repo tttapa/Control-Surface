@@ -42,6 +42,8 @@ The **debug mode** allows you to print the MIDI events in the serial monitor for
 - More examples  
 - Minor bug fixes  
 
+***
+
 ## Installation
 ### Dependencies
 If you are using an Arduino with native USB support, like the Leonardo, Due, Zero, Micro ... you'll need to install the MIDIUSB library.
@@ -60,6 +62,8 @@ On OSX and Linux, install *dfu-programmer*.
 `sudo apt-get install dfu-programmer` 
 
 More information can be found [here](https://www.arduino.cc/en/Hacking/DFUProgramming8U2).
+
+***
 
 ## Using the library
 ### Arduino boards with native USB support
@@ -130,6 +134,9 @@ To upload a new sketch, install the Arduino Serial firmware again: put the Ardui
 This script will download the Arduino Serial firmware and install it to the Arduino. When it's finished, unplug the Arduino, plug it back in, and upload your new sketch.  
 Then you can install the MIDI firmware again.
 
+### MIDI over USB
+Read more on how different boards use differents methods to send MIDI over USB in the [Wiki](https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB).
+
 ### Documentation
 You can find the entire library documentation with a description of all available functions in the [Wiki](https://github.com/tttapa/MIDI_controller/wiki/Library-documentation).  
 
@@ -145,4 +152,4 @@ I have tested this library with an Arduino Uno, an Arduino Leonardo and a Teensy
 Other users have successfully used the library with an Arduino Mega 2560 and an Arduino Micro.
 Boards that use an FTDI USB-to-Serial chip (like the Nano and some older boards) do not support MIDI over USB, but can still use Serial MIDI.
 If you try this library with a different board, please let me know whether it works or not.
-If it doesn't, please open an issue. Thanks!
+If it doesn't, please open an [issue](https://github.com/tttapa/MIDI_controller/issues). Thanks!
