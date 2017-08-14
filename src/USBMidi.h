@@ -7,7 +7,7 @@
 #error Please select a MIDI option in the 'Tools > USB Type' menu.
 #endif
 
-#define MIDI_BAUD 31250
+#define MIDI_BAUD 31250  // MIDI hardware baud rate (for use with HIDUINO or 5 pin DIN MIDI connector)
 
 const uint8_t NOTE_OFF = 0x80;
 const uint8_t NOTE_ON = 0x90;
@@ -25,13 +25,13 @@ private:
     int _blinkDelay = 0;
     bool _debug = false;
 public:
-    USBMidi(); // constructor
-    ~USBMidi(); // destructor
+    USBMidi();  // constructor
+    ~USBMidi();  // destructor
     void begin(unsigned long baud = MIDI_BAUD, bool debug = false);
-    void send(byte m, byte c, byte d1, byte d2); // message, channel, data 1, data 2
-    void send(byte m, byte c, byte d1); // message, channel, data 1
-    void setDelay(int d); // delay between messages
-    void blink(byte p); // pin
+    void send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2);  // message, channel, data 1, data 2
+    void send(uint8_t m, uint8_t c, uint8_t d1);  // message, channel, data 1
+    void setDelay(int d);  // delay between messages
+    void blink(uint8_t p);  // pin
     void noBlink();
 };
 
