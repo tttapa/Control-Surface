@@ -1,45 +1,47 @@
 #include "RotaryEncoder.h"
-#include "Encoder.h"
-#include "USBMidi.h"
 
-RotaryEncoder::RotaryEncoder(byte p, byte p2, byte n, byte c, int sp, byte pps, byte m) : enc(p,p2) // first pin, second pin, controller number, channel, speed multiplier, pulses  per step.
+RotaryEncoder::RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply, uint8_t pulsesPerStep, relativeCCmode mode) : enc(pinA, pinB) // Constructor
 {
-  controller = n;
-  channel = c;
-  speedMultiply = sp;
-  oldVal = 0;
-  pulsesPerStep = pps;
-  count = pps - 1;
-  mode = m;
+  this->controllerNumber = controllerNumber;
+  this->channel = channel;
+  this->speedMultiply = speedMultiply;
+  this->pulsesPerStep = pulsesPerStep;
+  this->mode = mode;
 }
-void RotaryEncoder::refresh() {
-  int msgVal = 0;
+
+void RotaryEncoder::refresh() // Check if the encoder position has changed since last time, if so, send the relative movement over MIDI
+{
   value = enc.read();
-  difference = (value - oldVal) / pulsesPerStep;
-  if (difference > 63) difference = 63;
-  if (difference < -63) difference = -63;
-  if (difference != 0) {
-    count = 0;
-    if (difference < 0) {
-      if (mode == ADD_64) {
-        msgVal = 64 + difference * speedMultiply;
-      } else if (mode == SIGN_BIT) {
-        msgVal = bit(6) - difference * speedMultiply; // bit(6) gives 64, this is the sign bit
-      } else if (mode == POS1_NEG127) {
-        msgVal = 128 + difference * speedMultiply;
-      }
-      USBMidiController.send(CC, channel, controller, msgVal);
-    }
-    else if ( difference > 0) {
-      if (mode == ADD_64) {
-        msgVal = 64 + difference * speedMultiply;
-      } else if (mode == SIGN_BIT) {
-        msgVal = difference * speedMultiply;
-      } else if (mode == POS1_NEG127) {
-        msgVal = 0 + difference * speedMultiply;
-      }
-      USBMidiController.send(CC, channel, controller, msgVal);
-    }
+  long difference = (value - oldVal) / pulsesPerStep;
+  if (difference > 63)
+    difference = 63;
+  if (difference < -63)
+    difference = -63;
+  if (difference != 0)
+  {
+    uint8_t msgVal = mapRelativeCC(difference * speedMultiply, mode);
+    USBMidiController.send(CC, channel, controllerNumber, msgVal);
     oldVal = value;
   }
+}
+
+uint8_t RotaryEncoder::twosComplement7bit(int8_t value) // Convert an 8-bit two's complement integer to a 7-bit two's complement integer
+{
+  return (value & 0b10111111) - (value & 0b01000000);
+}
+
+uint8_t RotaryEncoder::twosComplementTo7bitSignedMagnitude(uint8_t value) // Convert an 8-bit two's complement integer to sign-magnitude format
+{
+  return ((value + (value >> 7)) ^ (value >> 7)) | ((value & 0b10000000) >> 1);
+}
+
+uint8_t RotaryEncoder::mapRelativeCC(int8_t value, relativeCCmode mode) // Convert an 8-bit two's complement integer to a 7-bit value to send over MIDI
+{
+  if (mode == TWOS_COMPLEMENT)
+    return twosComplement7bit(value);
+  if (mode == BINARY_OFFSET)
+    return value + 64;
+  if (mode == SIGN_MAGNITUDE)
+    return twosComplementTo7bitSignedMagnitude(value);
+  return 0;
 }
