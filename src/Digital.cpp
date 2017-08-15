@@ -22,15 +22,11 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
   if (value != oldVal)                    // if the state changed since last time
   {
     if (value == LOW) // If the button is pressed
-    {
       sendNote(NOTE_ON);
-    }
+    else // If the button is not pressed
+      sendNote(NOTE_OFF);
+    oldVal = value;
   }
-  else // If the button is not pressed
-  {
-    sendNote(NOTE_OFF);
-  }
-  oldVal = value;
 }
 
 void Digital::bank(uint8_t bankPin, uint8_t altNote, uint8_t altChannel) // Enable the bank mode. When bank switch is turned on, send alternative MIDI channel and controller numbers
@@ -52,7 +48,7 @@ void Digital::detachBank() // Disable the bank mode
   }
 }
 
-void Digital::sendNote(uint8_t noteOnOrOff) // turn on or off a note, select the channel and note number based on the bank mode and bank switch state 
+void Digital::sendNote(uint8_t noteOnOrOff) // turn on or off a note, select the channel and note number based on the bank mode and bank switch state
 {
   if (bankEnabled && !digitalRead(bankPin))                             // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
     USBMidiController.send(noteOnOrOff, altChannel, altNote, velocity); // send a Note On or Off MIDI event with the 'alternative' channel and note number
