@@ -27,24 +27,26 @@ void AnalogHiRes::refresh() // read the analog value, update the average, map it
 {
 #if defined(CORE_TEENSY) || defined(__arm__) // Teensy boards and Arduino Due support higher resolutions than AVR boards
   analogReadResolution(14);
+  analogRead(analogPin);
   uint16_t input = analogRead(analogPin);
   analogReadResolution(10);
 #else // Analog resolution is only 10 bits
+  analogRead(analogPin);
   uint16_t input = analogRead(analogPin) << 4; // make it a 14-bit number (pad with 4 zeros)
 #endif
 
-  input = analogMap(input); // apply the analogMap function to the value (identity function f(x) = x by default)
+  uint16_t value = analogMap(input); // apply the analogMap function to the value (identity function f(x) = x by default)
 
   if (avLen)
   {                                // if averaging is enabled
-    input = runningAverage(input); // update the running average with the new value
+    value = runningAverage(value); // update the running average with the new value
   }
 
   if (value != oldVal) // if the value changed since last time
   {
-    if (bankEnabled && !digitalRead(bankPin))                          // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
+    if (bankEnabled && !digitalRead(bankPin))                            // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
       USBMidiController.send(PITCH_BEND, altChannel, value, value >> 7); // send a Pitch Bend MIDI event on the 'alternative' channel
-    else                                                               // if the bank mode is disabled, or the bank switch is in the normal position
+    else                                                                 // if the bank mode is disabled, or the bank switch is in the normal position
       USBMidiController.send(PITCH_BEND, channel, value, value >> 7);    // send a Pitch Bend MIDI event on the original channel
     oldVal = value;
   }

@@ -17,7 +17,6 @@ public:
 
 private:
   uint8_t analogPin, channel, bankPin, altChannel;
-  uint16_t value;
   uint16_t oldVal = -1;
   bool bankEnabled = false;
   uint16_t (*analogMap)(uint16_t) = [](uint16_t x) { return x; }; // function pointer to identity function f(x) → x
