@@ -56,7 +56,6 @@ DigitalLatch switch4(7, 63, 1, VELOCITY, LATCHTIME);
 
 RotaryEncoder enc1(1, 0, 0x2F, 1, SPEED_MULTIPLY, NORMAL_ENCODER, POS1_NEG127); // Create a new instance of class 'RotaryEncoder' called enc1, on pins 1 and 0, controller number 0x2F, on MIDI channel 1, at normal speed, using a normal encoder (4 pulses per click/step), using the POS1_NEG127 sign option
 
-
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
 void setup()

@@ -23,7 +23,7 @@ enum relativeCCmode
 #define SIGN_BIT SIGN_MAGNITUDE
 
 const uint8_t NORMAL_ENCODER = 4; // A normal rotary encoder sends four pulses per physical 'click'
-const uint8_t JOG = 1; // For jog wheels, you want the highest possible resolution
+const uint8_t JOG = 1;            // For jog wheels, you want the highest possible resolution
 
 class RotaryEncoder
 {
@@ -38,8 +38,8 @@ private:
   long value, oldVal = 0;
   Encoder enc;
 
-  uint8_t twosComplement7bit(int8_t value);                 // Convert an 8-bit two's complement integer to a 7-bit two's complement integer
-  uint8_t twosComplementTo7bitSignedMagnitude(uint8_t v);   // Convert an 8-bit two's complement integer to sign-magnitude format
-  uint8_t mapRelativeCC(int8_t value, relativeCCmode type); // Convert an 8-bit two's complement integer to a 7-bit value to send over MIDI
+  uint8_t twosComplement7bit(int8_t value);                  // Convert an 8-bit two's complement integer to a 7-bit two's complement integer
+  uint8_t twosComplementTo7bitSignedMagnitude(int8_t value); // Convert an 8-bit two's complement integer to 7-bit sign-magnitude format
+  uint8_t mapRelativeCC(int8_t value, relativeCCmode type);  // Convert an 8-bit two's complement integer to a 7-bit value to send over MIDI
 };
 #endif
