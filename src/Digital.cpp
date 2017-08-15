@@ -16,7 +16,7 @@ Digital::~Digital() // Deconstructor
     pinMode(bankPin, INPUT); // make make the bank switch pin a normal input again, without the internal pullup resistor.
 }
 
-void Digital::refresh()
+void Digital::refresh() // Check if the button state changed, and send a MIDI Note On or Off accordingly
 {
   bool value = digitalRead(pin) ^ invert; // read the button state and invert it if "invert" is true
   if (value != oldVal)                    // if the state changed since last time
