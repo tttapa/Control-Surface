@@ -11,17 +11,21 @@ RotaryEncoder::RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumbe
 
 void RotaryEncoder::refresh() // Check if the encoder position has changed since last time, if so, send the relative movement over MIDI
 {
-  value = enc.read();
+  long value = enc.read();
   long difference = (value - oldVal) / pulsesPerStep;
-  if (difference > 63)
-    difference = 63;
-  if (difference < -63)
-    difference = -63;
-  if (difference != 0)
+  while (difference != 0)
   {
+    if (difference > 15)
+      difference = 15;
+    if (difference < -15)
+      difference = -15;
+
     uint8_t msgVal = mapRelativeCC(difference * speedMultiply, mode);
     USBMidiController.send(CC, channel, controllerNumber, msgVal);
-    oldVal = value;
+    oldVal += difference * pulsesPerStep;
+
+    value = enc.read();
+    difference = (value - oldVal) / pulsesPerStep;
   }
 }
 

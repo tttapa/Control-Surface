@@ -35,7 +35,7 @@ private:
   uint8_t controllerNumber, channel, pulsesPerStep;
   relativeCCmode mode;
   int speedMultiply;
-  long value, oldVal = 0;
+  long oldVal = 0;
   Encoder enc;
 
   uint8_t twosComplement7bit(int8_t value);                  // Convert an 8-bit two's complement integer to a 7-bit two's complement integer
