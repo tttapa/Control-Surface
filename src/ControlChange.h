@@ -11,28 +11,28 @@
    * Split the controller up in banks (send 
      different controller messages or channels 
      depending on the state of a bank switch)
-*/ 
+*/
 
 class ControlChange
 {
 public:
-  ControlChange(uint8_t n, uint8_t c); // Constructor (MIDI controller number, MIDI channel)
-  ~ControlChange(); // deconstructor
-  void average(size_t len); // length of array of samples
-  void refresh(uint8_t input); // update the object with new value, send if value changed (value between 0 and 127 (0x7F))
-  void refresh(float input); // update the object with new value, send if value changed (value between 0.0 and 1.0)
-  void bank(uint8_t bPin, uint8_t newN, uint8_t newC); // set up a bank ((digital) bank pin, new controller number, new channel)
-  void detachBank(); // disable the bank
+  ControlChange(uint8_t controllerNumber, uint8_t channel);              // Constructor
+  ~ControlChange();                                                      // Deconstructor
+  void average(size_t len);                                              // length of array of samples
+  void refresh(uint8_t value);                                           // Update the controller with a new value between 0 and 127, update the average, check if the MIDI value changed since last time, if so, send a Control Change message over MIDI
+  void refresh(float input);                                             // Overload of the refresh() method that takes a float between 0.0 and 1.0 instead of an int between 0 and 127
+  void bank(uint8_t bankPin, uint8_t altController, uint8_t altChannel); // Enable the bank mode. When bank switch is turned on, send alternative MIDI channel and controller numbers
+  void detachBank();                                                     // disable the bank
+
 private:
-  uint8_t controller, channel, bankPin, newController, newChannel, value;
-  int oldVal;
+  uint8_t controllerNumber, channel, bankPin, altController, altChannel, value, oldVal = -1;
   bool bankEnabled = false;
-  size_t av = 0;
-  unsigned int* avValues;
+  size_t avLen = 0;
+  unsigned int *avValues;
   uint8_t avIndex = 0;
   unsigned long avSum = 0;
   uint8_t avCount = 0;
-  unsigned int runningAverage(int M); // http://playground.arduino.cc/Main/RunningAverage
+  unsigned int runningAverage(unsigned int value); // http://playground.arduino.cc/Main/RunningAverage
 };
 
 #endif // ControlChange_h_
