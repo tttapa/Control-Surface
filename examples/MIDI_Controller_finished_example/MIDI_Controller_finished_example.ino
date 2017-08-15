@@ -61,10 +61,10 @@ RotaryEncoder enc1(1, 0, 0x2F, 1, SPEED_MULTIPLY, NORMAL_ENCODER, POS1_NEG127); 
 
 void setup()
 {
-  fader1.bank(11, 5);             // if pin 11 is pulled low (by a switch) fader1 will operate on channel 5, if the switch is off (i.e. 1) it will keep the channel specified in the section above.
-  fader2.bank(11, 6);
-  fader3.bank(11, 7);
-  fader4.bank(11, 8);
+  fader1.bank(11, channelVolume, 5);  // if pin 11 is pulled low (by a switch) fader1 will operate on channel 5, if the switch is off (i.e. 1) it will keep the channel specified in the section above.
+  fader2.bank(11, channelVolume, 6);
+  fader3.bank(11, channelVolume, 7);
+  fader4.bank(11, channelVolume, 8);
 
   // potTop1.bank(11, 0x14, 2);   // you could add these pots to the same bank if you wanted to
   // potTop2.bank(11, 0x15, 2);
