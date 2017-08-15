@@ -62,7 +62,7 @@ void DigitalLatch::detachBank() // Disable the bank mode
   }
 }
 
-void DigitalLatch::sendNote(uint8_t noteOnOrOff)
+void DigitalLatch::sendNote(uint8_t noteOnOrOff) // turn on or off a note, select the channel and note number based on the bank mode and bank switch state 
 {
   if (bankEnabled && !digitalRead(bankPin))                             // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
     USBMidiController.send(noteOnOrOff, altChannel, altNote, velocity); // send a Note On or Off MIDI event with the 'alternative' channel and note number

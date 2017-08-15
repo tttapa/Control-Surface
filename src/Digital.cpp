@@ -23,18 +23,12 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
   {
     if (value == LOW) // If the button is pressed
     {
-      if (bankEnabled && !digitalRead(bankPin))                         // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
-        USBMidiController.send(NOTE_ON, altChannel, altNote, velocity); // send a Note On MIDI event with the 'alternative' channel and note number
-      else                                                              // if the bank mode is disabled, or the bank switch is in the normal position
-        USBMidiController.send(NOTE_ON, channel, note, velocity);       // send a Note On MIDI event with the normal, original channel and note number
+      sendNote(NOTE_ON);
     }
   }
   else // If the button is not pressed
   {
-    if (bankEnabled && !digitalRead(bankPin))                          // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
-      USBMidiController.send(NOTE_OFF, altChannel, altNote, velocity); // send a Note Off MIDI event with the 'alternative' channel and note number
-    else                                                               // if the bank mode is disabled, or the bank switch is in the normal position
-      USBMidiController.send(NOTE_OFF, channel, note, velocity);       // send a Note Off MIDI event with the normal, original channel and note number
+    sendNote(NOTE_OFF);
   }
   oldVal = value;
 }
@@ -56,4 +50,12 @@ void Digital::detachBank() // Disable the bank mode
     bankEnabled = false;
     pinMode(bankPin, INPUT); // make it a normal input again, without the internal pullup resistor
   }
+}
+
+void Digital::sendNote(uint8_t noteOnOrOff) // turn on or off a note, select the channel and note number based on the bank mode and bank switch state 
+{
+  if (bankEnabled && !digitalRead(bankPin))                             // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
+    USBMidiController.send(noteOnOrOff, altChannel, altNote, velocity); // send a Note On or Off MIDI event with the 'alternative' channel and note number
+  else                                                                  // if the bank mode is disabled, or the bank switch is in the normal position
+    USBMidiController.send(noteOnOrOff, channel, note, velocity);       // send a Note On or Off MIDI event with the normal, original channel and note number
 }

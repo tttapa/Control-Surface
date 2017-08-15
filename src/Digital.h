@@ -16,6 +16,8 @@ public:
 private:
   uint8_t pin, note, channel, velocity, bankPin, altNote, altChannel, oldVal = -1;
   bool bankEnabled = false;
+
+  void sendNote(uint8_t noteOnOrOff); // turn on or off a note, select the channel and note number based on the bank mode and bank switch state
 };
 
 #endif

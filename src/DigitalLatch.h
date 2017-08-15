@@ -20,7 +20,7 @@ private:
   unsigned long latchTime;
   unsigned long noteOnTime;
 
-  void sendNote(uint8_t noteOnOrOff);
+  void sendNote(uint8_t noteOnOrOff); // turn on or off a note, select the channel and note number based on the bank mode and bank switch state 
 };
 
 #endif
