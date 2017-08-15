@@ -15,14 +15,16 @@ void RotaryEncoder::refresh() // Check if the encoder position has changed since
   long difference = (value - oldVal) / pulsesPerStep;
   while (difference != 0)
   {
-    if (difference > 15)
+    if (difference > 15) // constrain relative movement to +/-15 for Mackie Control Universal compatibility
       difference = 15;
     if (difference < -15)
       difference = -15;
 
     uint8_t msgVal = mapRelativeCC(difference * speedMultiply, mode);
     USBMidiController.send(CC, channel, controllerNumber, msgVal);
-    oldVal += difference * pulsesPerStep;
+
+    oldVal += difference * pulsesPerStep; // If difference was in [-15, 15], difference * pulsesPerStep == value,
+    // otherwise difference * pulsesPerStep == the value on the computer (after receiving the MIDI event above)
 
     value = enc.read();
     difference = (value - oldVal) / pulsesPerStep;
