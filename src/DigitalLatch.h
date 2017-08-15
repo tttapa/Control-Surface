@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include "USBMidi.h"
 
-class DigitalLatch // See instructable on how to use classes
+class DigitalLatch
 {
 public:
   DigitalLatch(uint8_t pin, uint8_t note, uint8_t channel, uint8_t velocity, unsigned long latchTime); // Constructor

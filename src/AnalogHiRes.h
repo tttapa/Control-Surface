@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include "USBMidi.h"
 
-class AnalogHiRes // See instructable on how to use classes
+class AnalogHiRes
 {
 public:
   AnalogHiRes(uint8_t analogPin, uint8_t channel); // Constructor
