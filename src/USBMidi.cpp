@@ -134,7 +134,7 @@ void USBMidi::sendMIDIUSB(uint8_t m, uint8_t c, uint8_t d1) // Send a 2-byte MID
   MidiUSB.flush();
 #else                 // If the main MCU doesn't have a USB connection
   Serial.write(m | c); // Send the MIDI message over Serial.
-  Serial.write(d);
+  Serial.write(d1);
   Serial.flush();
 #endif
 }
