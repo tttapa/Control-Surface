@@ -1,81 +1,80 @@
 #include "Arduino.h"
 #include "Analog.h"
-#include "USBMidi.h"
 
-Analog::Analog(byte p, byte n, byte c) // pin, controller number, channel
-{ 
-  analogPin = p; 
-  controller = n; 
-  channel = c;
-  oldVal = -1;
-}
-
-Analog::~Analog()
+Analog::Analog(uint8_t analogPin, uint8_t controllerNumber, uint8_t channel) // Constructor
 {
-  free(avValues);
-  if(bankTrue){
-    pinMode(digitalPin, INPUT); // make it a normal input again, without the internal pullup resistor.
-  }
+  this->analogPin = analogPin;
+  this->controllerNumber = controllerNumber;
+  this->channel = channel;
 }
 
-void Analog::average(size_t len) {
-  if(len == 0 || len == 1 || av)
+Analog::~Analog() // Deconstructor
+{
+  free(avValues);            // free the sample buffer malloc'ed in Analog::average
+  if (bankEnabled)           // if bank mode was used
+    pinMode(bankPin, INPUT); // make make the bank switch pin a normal input again, without the internal pullup resistor.
+}
+
+void Analog::average(size_t length) // use the average of multiple samples of analog readings
+{
+  if (length == 0 || length == 1 || avLen) // the average of 0 or 1 samples is meaningless, if "av" already exists, don't allocate new memory
     return;
-  avValues = (unsigned int *) malloc(len*sizeof(unsigned int));
-  memset(avValues, 0, len*sizeof(unsigned int));
-  av = len;
+  avValues = (unsigned int *)malloc(length * sizeof(unsigned int)); // allocate memory for the sample buffer
+  memset(avValues, 0, length * sizeof(unsigned int));               // set all values in the buffer to zero
+  avLen = length;
 }
 
-void Analog::refresh()
+void Analog::refresh() // read the analog value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
 {
-  unsigned int input = analogMap(analogRead(analogPin));
-  if(av) {
-    input = runningAverage(input);
-  }  
-  value = input >> 3;
-  if(value != oldVal)
+  unsigned int input = analogRead(analogPin); // read the raw analog input value
+  input = analogMap(input);                   // apply the analogMap function to the value (identity function f(x) = x by default)
+  if (avLen)
+  {                                // if averaging is enabled
+    input = runningAverage(input); // update the running average with the new value
+  }
+  value = input >> 3;  // map from the 10-bit analog input value [0, 1023] to the 7-bit MIDI value [0, 127]
+  if (value != oldVal) // if the value changed since last time
   {
-    if(bankTrue && !digitalRead(digitalPin))
-    {
-      USBMidiController.send(CC, newChannel, newController, value);
-    } 
-    else {
-      USBMidiController.send(CC, channel, controller, value);
-    }
+    if (bankEnabled && !digitalRead(bankPin))                       // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
+      USBMidiController.send(CC, altChannel, altController, value); // send a Control Change MIDI event with the 'alternative' channel and controller number
+    else                                                            // if the bank mode is disabled, or the bank switch is in the normal position
+      USBMidiController.send(CC, channel, controllerNumber, value); // send a Control Change MIDI event with the normal, original channel and controller number
     oldVal = value;
   }
 }
 
-void Analog::map(int (*fn)(int)) {
+void Analog::map(int (*fn)(int)) // change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
+{
   analogMap = fn;
 }
 
-void Analog::bank(byte dPin, byte newN, byte newC)  // digital pin, new controller number, new channel
-{
-  bankTrue = true;
-  
-  digitalPin = dPin;
-  pinMode(digitalPin, INPUT_PULLUP);
-  newController = newN; 
-  newChannel = newC;
+void Analog::bank(uint8_t bankPin, uint8_t altController, uint8_t altChannel) // Enable the bank mode. When bank switch is turned on, send alternative MIDI channel and controller numbers
+{                                                                             // bankPin = digital pin with toggle switch connected
+  bankEnabled = true;
+
+  this->bankPin = bankPin;
+  pinMode(bankPin, INPUT_PULLUP);
+  this->altController = altController;
+  this->altChannel = altChannel;
 }
 
-void Analog::detachBank()
+void Analog::detachBank() // Disable the bank mode
 {
-  if(bankTrue){
-    bankTrue = false;
-    pinMode(digitalPin, INPUT); // make it a normal input again, without the internal pullup resistor.
+  if (bankEnabled) // only defined if bank mode is enabled
+  {
+    bankEnabled = false;
+    pinMode(bankPin, INPUT); // make it a normal input again, without the internal pullup resistor.
   }
 }
 
-unsigned int Analog::runningAverage(int M) { // http://playground.arduino.cc/Main/RunningAverage
-    // keep sum updated to improve speed.
-    avSum -= avValues[avIndex];
-    avValues[avIndex] = M;
-    avSum += avValues[avIndex];
-    avIndex++;
-    avIndex = avIndex % av;
-    if (avCount < av) avCount++;
-
-    return avSum / avCount;
-  }
+unsigned int Analog::runningAverage(unsigned int value) // http://playground.arduino.cc/Main/RunningAverage
+{
+  avSum -= avValues[avIndex];
+  avValues[avIndex] = value;
+  avSum += value;
+  avIndex++;
+  avIndex = avIndex % avLen;
+  if (avCount < avLen)
+    avCount++;
+  return avSum / avCount;
+}

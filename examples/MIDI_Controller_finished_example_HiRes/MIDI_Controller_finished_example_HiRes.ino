@@ -2,8 +2,8 @@
   This is the code I used for my specific MIDI controller.
   I used an Arduino Leonardo with 4 faders on A0-A3, 8 potentiometers on A4-A11, a rotary encoder on pin 0&1, 4 toggle switches on pins 2, 3, 5 and 7, a toggle switch (for bank select) on pin 11, and an LED on pin 13.
 
-  When bank select is 0, faders 1-4 are channel volumes 1-4, potSide 1-4 are pan/balance of channel 1-4, switches 1-4 are mute channel 5-8.
-  When bank select is 1, faders 1-4 are channel volumes 5-8, potSide 1-4 are pan/balance of channel 5-8, switches 1-4 are mute channel 1-4.
+  When bank select is 0, faders 1-4 are Pitch Bends on channels 1-4, potSide 1-4 are pan/balance of channel 1-4, switches 1-4 are mute channel 5-8.
+  When bank select is 1, faders 1-4 are Pitch Bends on 5-8, potSide 1-4 are pan/balance of channel 5-8, switches 1-4 are mute channel 1-4.
   PotTop 1-4 are not in the bank, because I use them as effect or EQ parameters, and they are channel independent.
   Enc1 is used for scrolling.
 
@@ -30,14 +30,12 @@
 
 #define ANALOG_AVERAGE    8           // Use the average of 8 samples to get smooth transitions and prevent noise
 
-const uint8_t channelVolume = 0x07;   // Controller 7 is defined as MIDI channel volume
-
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
-Analog fader1(A0, channelVolume, 1);        // Create a new instance of class 'Analog' called 'fader1', on pin A0, controller number 0x07 (channel volume), on MIDI channel 1.
-Analog fader2(A1, channelVolume, 2);
-Analog fader3(A2, channelVolume, 3);
-Analog fader4(A3, channelVolume, 4);
+AnalogHiRes fader1(A0, 1);                  // Create a new instance of class 'AnalogHiRes' called 'fader1', on pin A0, on MIDI channel 1.
+AnalogHiRes fader2(A1, 2);
+AnalogHiRes fader3(A2, 3);
+AnalogHiRes fader4(A3, 4);
 
 Analog potTop1(A4, 0x14, 1);                // Create a new instance of class 'Analog' called 'potTop1', on pin A4, controller number 0x14, on MIDI channel 1.
 Analog potTop2(A5, 0x15, 1);
@@ -56,14 +54,15 @@ DigitalLatch switch4(7, 63, 1, VELOCITY, LATCHTIME);
 
 RotaryEncoder enc1(1, 0, 0x2F, 1, SPEED_MULTIPLY, NORMAL_ENCODER, POS1_NEG127); // Create a new instance of class 'RotaryEncoder' called enc1, on pins 1 and 0, controller number 0x2F, on MIDI channel 1, at normal speed, using a normal encoder (4 pulses per click/step), using the POS1_NEG127 sign option
 
+
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
 void setup()
 {
-  fader1.bank(11, channelVolume, 5);  // if pin 11 is pulled low (by a switch) fader1 will operate on channel 5, if the switch is off (i.e. 1) it will keep the channel specified in the section above.
-  fader2.bank(11, channelVolume, 6);
-  fader3.bank(11, channelVolume, 7);
-  fader4.bank(11, channelVolume, 8);
+  fader1.bank(11, 5);             // if pin 11 is pulled low (by a switch) fader1 will operate on channel 5, if the switch is off (i.e. 1) it will keep the channel specified in the section above.
+  fader2.bank(11, 6);
+  fader3.bank(11, 7);
+  fader4.bank(11, 8);
 
   // potTop1.bank(11, 0x14, 2);   // you could add these pots to the same bank if you wanted to
   // potTop2.bank(11, 0x15, 2);
@@ -80,12 +79,12 @@ void setup()
   switch3.bank(11, 62, 2);
   switch4.bank(11, 63, 2);
 
-  fader1.average(ANALOG_AVERAGE);         // Use the average of 8 samples to get smooth transitions and prevent noise
-  fader2.average(ANALOG_AVERAGE);
-  fader3.average(ANALOG_AVERAGE);
-  fader4.average(ANALOG_AVERAGE);
+  fader1.average(ANALOG_AVERAGE * 8);      // Use the average of 64 samples to get smooth transitions and prevent noise (HiRes inputs are more susceptable to noise)
+  fader2.average(ANALOG_AVERAGE * 8);
+  fader3.average(ANALOG_AVERAGE * 8);
+  fader4.average(ANALOG_AVERAGE * 8);
 
-  potTop1.average(ANALOG_AVERAGE); 
+  potTop1.average(ANALOG_AVERAGE);         // Use the average of 8 samples to get smooth transitions and prevent noise
   potTop2.average(ANALOG_AVERAGE);
   potTop3.average(ANALOG_AVERAGE);
   potTop4.average(ANALOG_AVERAGE);
@@ -96,7 +95,7 @@ void setup()
   potSide4.average(ANALOG_AVERAGE);
 
   USBMidiController.blink(LED_BUILTIN);  // flash the built-in LED (pin 13 on most boards) on every message
-  USBMidiController.setDelay(5);  // wait 5 ms after each message not to flood the connection
+  USBMidiController.setDelay(0);  // When using HiRes faders with large average buffers, it's best to minimize the delay after each message
   USBMidiController.begin();  // Initialise the USB MIDI connection
 
   delay(1000);         // Wait a second...

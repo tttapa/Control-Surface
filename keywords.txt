@@ -1,3 +1,6 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
 MIDI_controller	KEYWORD1
 Analog	KEYWORD1
 AnalogHiRes	KEYWORD1
@@ -6,6 +9,11 @@ DigitalLatch	KEYWORD1
 RotaryEncoder	KEYWORD1
 ControlChange	KEYWORD1
 USBMidiController	KEYWORD1
+relativeCCmode	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
 refresh	KEYWORD2
 average	KEYWORD2
 map	KEYWORD2
@@ -16,6 +24,10 @@ send	KEYWORD2
 setDelay	KEYWORD2
 blink	KEYWORD2
 noBlink KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
 NOTE_ON	LITERAL1
 NOTE_OFF	LITERAL1
 KEY_PRESSURE	LITERAL1
@@ -28,3 +40,11 @@ JOG	LITERAL1
 ADD_64	LITERAL1
 SIGN_BIT	LITERAL1
 POS1_NEG127	LITERAL1
+TWOS_COMPLEMENT	LITERAL1
+BINARY_OFFSET	LITERAL1
+SIGN_MAGNITUDE	LITERAL1
+REAPER_RELATIVE_1	LITERAL1
+REAPER_RELATIVE_2	LITERAL1
+REAPER_RELATIVE_3	LITERAL1
+TRACKTION_RELATIVE	LITERAL1
+MACKIE_CONTROL_RELATIVE	LITERAL1

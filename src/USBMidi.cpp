@@ -1,9 +1,4 @@
-#include "Arduino.h"
 #include "USBMidi.h"
-
-#if defined(USBCON) && !defined(DEBUG)
-#include "MIDIUSB.h"
-#endif
 
 const char *MIDI_STATUS_NAMES[] = {
     "Note Off\t",
@@ -15,156 +10,159 @@ const char *MIDI_STATUS_NAMES[] = {
     "Pitch Bend\t",
     "Unknown\t"};
 
-USBMidi::USBMidi() {}
+USBMidi::USBMidi() {} // Constructor
 
-void USBMidi::begin(unsigned long baud, bool debug)
+USBMidi::~USBMidi() // Deconstructor
+{
+  if (debug)
+    Serial.end();
+#if !(defined(USBCON) || defined(CORE_TEENSY)) // If the main MCU doesn't have a USB connection
+  else
+    Serial.end();
+#endif
+  if (blinkEnabled)
+    pinMode(blinkPin, INPUT);
+}
+
+void USBMidi::begin(unsigned long baud, bool debug) // If the main MCU doesn't have a USB connection or if debug mode is enabled, start the Serial connection at the desired baud rate
 {
   if (debug)
   {
-    _debug = true;
+    this->debug = true;
     Serial.begin(baud);
     Serial.println("MIDI DEBUG MODE");
   }
-#if !(defined(USBCON) || defined(CORE_TEENSY)) // If you're compiling for an Arduino that has no USB connection in the main MCU
+#if !(defined(USBCON) || defined(CORE_TEENSY)) // If the main MCU doesn't have a USB connection
   else
   {
-    Serial.begin(baud); // Start communication with ATmega16U2 @31250 baud (for MIDI firmware: Hiduino: https://github.com/ddiakopoulos/hiduino)
+    Serial.begin(baud); // Start serial communication with ATmega16U2
   }
 #endif
 }
 
-USBMidi::~USBMidi()
-{
-  if (_debug)
-    Serial.end();
-#if !(defined(USBCON) || defined(CORE_TEENSY)) // If you're compiling for an Arduino that has USB connection in the main MCU
-  Serial.end();
-#endif
-  if (_blinkEn)
-  {
-    pinMode(_blinkPin, INPUT);
-    _blinkEn = false;
-  }
-}
-
-void USBMidi::send(byte m, byte c, byte d1, byte d2)
+void USBMidi::send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) // Send a 3-byte MIDI packet over USB (or Serial or debug Serial)
 {
   c--; // Channels are zero-based
 
-  if (_blinkEn)
-    digitalWrite(_blinkPin, HIGH);
+  m &= 0xF0;       // bitmask high nibble
+  m |= 0b10000000; // set msb
+  c &= 0xF;        // bitmask low nibble
+  d1 &= 0x7F;      // clear msb
+  d2 &= 0x7F;      // clear msb
 
-  if (_debug)
-  {
-    Serial.print(MIDI_STATUS_NAMES[min((m >> 4) - 8, 7)]);
-    Serial.print("\tChannel: ");
-    Serial.print((c & 0xF) + 1);
-    Serial.print("\tData 1: ");
-    Serial.print(d1 & 0x7F);
-    Serial.print("\tData 2: ");
-    Serial.print(d2 & 0x7F);
-    Serial.print("\r\n");
-    //Serial.print((unsigned long) (m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16) | ((d2 & 0x7F) << 24), HEX);
-  }
+  if (blinkEnabled)
+    digitalWrite(blinkPin, HIGH);
+
+  if (debug)
+    sendMIDIDebug(m, c, d1, d2);
   else
-  {
-#if defined(CORE_TEENSY) //only include these lines when compiling for a Teensy board
-    usb_midi_write_packed(((m >> 4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16) | ((d2 & 0x7F) << 24));
-#elif defined(USBCON) //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has USB connection in the main MCU but is not a Teensy
-    midiEventPacket_t msg = {(m >> 4) & 0xF, (m | c) & 0xFF, d1 & 0x7F, d2 & 0x7F};
-    MidiUSB.sendMIDI(msg);
-    MidiUSB.flush();
-#else                 // If you're compiling for an Arduino that has no USB connection in the main MCU
-    //* The format of the message to send via serial. We create a new data structure, that can store 3 bytes at once.  This will be easier to send as MIDI. */
-    typedef struct
-    {
-      unsigned int channel : 4; // second nibble : midi channel (0-15) (channel and status are swapped, because Arduino is Little Endian)
-      unsigned int status : 4;  // first  nibble : status message (NOTE_ON, NOTE_OFF or CC (controlchange)
-      uint8_t data1;            // second byte   : first value (0-127), controller number or note number
-      uint8_t data2;            // third  byte   : second value (0-127), controller value or velocity
-    } t_midiMsg;                // We call this structure 't_midiMsg'
+    sendMIDIUSB(m, c, d1, d2);
 
-    t_midiMsg msg;
-    msg.status = (m >> 4) & 0xF;
-    msg.channel = c & 0xF;
-    msg.data1 = d1 & 0x7F;
-    msg.data2 = d2 & 0x7F;
-    Serial.write((uint8_t *)&msg, sizeof(msg)); // Send the MIDI message.
-#endif
-  }
-
-  if (_blinkDelay != 0)
-    delay(_blinkDelay);
-  if (_blinkEn)
-    digitalWrite(_blinkPin, LOW);
+  if (blinkDelay != 0)
+    delay(blinkDelay);
+  if (blinkEnabled)
+    digitalWrite(blinkPin, LOW);
 }
 
-void USBMidi::send(byte m, byte c, byte d1)
+void USBMidi::send(uint8_t m, uint8_t c, uint8_t d1) // Send a 2-byte MIDI packet over USB (or Serial or debug Serial)
 {
   c--; // Channels are zero-based
 
-  if (_blinkEn)
-    digitalWrite(_blinkPin, HIGH);
+  m &= 0xF0;       // bitmask high nibble
+  m |= 0b10000000; // set msb
+  c &= 0xF;        // bitmask low nibble
+  d1 &= 0x7F;      // clear msb
 
-  if (_debug)
-  {
-    Serial.print(MIDI_STATUS_NAMES[min((m >> 4) - 8, 7)]);
-    Serial.print("\tChannel: ");
-    Serial.print((c & 0xF) + 1);
-    Serial.print("\tData 1: ");
-    Serial.print(d1 & 0x7F);
-    Serial.print("\r\n");
-    //Serial.print((unsigned long) ((m>>4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16), HEX);
-  }
+  if (blinkEnabled)
+    digitalWrite(blinkPin, HIGH);
+
+  if (debug)
+    sendMIDIDebug(m, c, d1);
   else
-  {
-#if defined(CORE_TEENSY) //only include these lines when compiling for a Teensy board
-    usb_midi_write_packed(((m >> 4) & 0xF) | (((m | c) & 0xFF) << 8) | ((d1 & 0x7F) << 16));
-#elif defined(USBCON) //only include these lines when compiling for an Arduino if you're compiling for an Arduino that has USB connection in the main MCU but is not a Teensy
-    midiEventPacket_t msg = {(m >> 4) & 0xF, (m | c) & 0xFF, d1 & 0x7F, 0};
-    MidiUSB.sendMIDI(msg);
-    MidiUSB.flush();
-#else                 // If you're compiling for an Arduino that has no USB connection in the main MCU
-    //* The format of the message to send via serial. We create a new data structure, that can store 2 bytes at once.  This will be easier to send as MIDI. */
-    typedef struct
-    {
-      unsigned int channel : 4; // second nibble : midi channel (0-15) (channel and status are swapped, because Arduino is Little Endian)
-      unsigned int status : 4;  // first  nibble : status message
-      uint8_t data;             // second byte   : data  (0-127)
-    } t_midiMsg;                // We call this structure 't_midiMsg'
+    sendMIDIUSB(m, c, d1);
 
-    t_midiMsg msg;
-    msg.status = (m >> 4) & 0xF;
-    msg.channel = c & 0xF;
-    msg.data = d1 & 0x7F;
-    Serial.write((uint8_t *)&msg, sizeof(msg)); // Send the MIDI message.
+  if (blinkDelay != 0)
+    delay(blinkDelay);
+  if (blinkEnabled)
+    digitalWrite(blinkPin, LOW);
+}
+
+void USBMidi::setDelay(int blinkDelay) // Set a delay between messages to prevent flooding the connection
+{
+  this->blinkDelay = blinkDelay;
+}
+
+void USBMidi::blink(uint8_t blinkPin) // Blink an LED on the specified pin on each MIDI message
+{
+  this->blinkPin = blinkPin;
+  pinMode(blinkPin, OUTPUT);
+  blinkEnabled = true;
+}
+
+void USBMidi::noBlink() // Stop blinking the LED on each MIDI message
+{
+  if (blinkEnabled)
+  {
+    pinMode(blinkPin, INPUT);
+    blinkEnabled = false;
+  }
+}
+
+void USBMidi::sendMIDIUSB(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) // Send a 3-byte MIDI packet over USB or Serial (as a binary MIDI packet)
+{
+#if defined(CORE_TEENSY) // If it's a Teensy board
+  usb_midi_write_packed((m >> 4) | ((m | c) << 8) | (d1 << 16) | (d2 << 24));
+#elif defined(USBCON) // If the main MCU has a USB connection but is not a Teensy
+  midiEventPacket_t msg = {m >> 4, m | c, d1, d2};
+  MidiUSB.sendMIDI(msg);
+  MidiUSB.flush();
+#else                 // If the main MCU doesn't have a USB connection
+  Serial.write(m | c); // Send the MIDI message over Serial.
+  Serial.write(d1);
+  Serial.write(d2);
+  Serial.flush();
 #endif
-  }
-  if (_blinkDelay != 0)
-    delay(_blinkDelay);
-  if (_blinkEn)
-    digitalWrite(_blinkPin, LOW);
 }
 
-void USBMidi::setDelay(int d)
+void USBMidi::sendMIDIUSB(uint8_t m, uint8_t c, uint8_t d1) // Send a 2-byte MIDI packet over USB or Serial (as a binary MIDI packet)
 {
-  _blinkDelay = d;
+#if defined(CORE_TEENSY) // If it's a Teensy board
+  usb_midi_write_packed((m >> 4) | ((m | c) << 8) | (d1 << 16));
+#elif defined(USBCON) // If the main MCU has a USB connection but is not a Teensy
+  midiEventPacket_t msg = {m >> 4, m | c, d1, 0};
+  MidiUSB.sendMIDI(msg);
+  MidiUSB.flush();
+#else                 // If the main MCU doesn't have a USB connection
+  Serial.write(m | c); // Send the MIDI message over Serial.
+  Serial.write(d1);
+  Serial.flush();
+#endif
 }
 
-void USBMidi::blink(byte p)
-{ // pin
-  _blinkPin = p;
-  pinMode(_blinkPin, OUTPUT);
-  _blinkEn = true;
-}
-
-void USBMidi::noBlink()
+void USBMidi::sendMIDIDebug(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) // Print debug information about a 3-byte MIDI event to the Serial port
 {
-  if (_blinkEn)
-  {
-    pinMode(_blinkPin, INPUT);
-    _blinkEn = false;
-  }
+  Serial.print(MIDI_STATUS_NAMES[min((m >> 4) - 8, 7)]);
+  Serial.print("\tChannel: ");
+  Serial.print(c + 1);
+  Serial.print("\tData 1: ");
+  Serial.print(d1, HEX);
+  Serial.print("\tData 2: ");
+  Serial.print(d2, HEX);
+  Serial.print("\r\n");
+  // Serial.print((unsigned long)(m >> 4) | ((m | c) << 8) | (d1 << 16) | (d2 << 24), HEX);
+  Serial.flush();
+}
+
+void USBMidi::sendMIDIDebug(uint8_t m, uint8_t c, uint8_t d1) // Print debug information about a 2-byte MIDI event to the Serial port
+{
+  Serial.print(MIDI_STATUS_NAMES[min((m >> 4) - 8, 7)]);
+  Serial.print("\tChannel: ");
+  Serial.print(c + 1);
+  Serial.print("\tData 1: ");
+  Serial.print(d1);
+  Serial.print("\r\n");
+  // Serial.print((unsigned long)(m >> 4) | ((m | c) << 8) | (d1 << 16), HEX);
+  Serial.flush();
 }
 
 USBMidi USBMidiController;
