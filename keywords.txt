@@ -10,6 +10,7 @@ RotaryEncoder	KEYWORD1
 ControlChange	KEYWORD1
 USBMidiController	KEYWORD1
 relativeCCmode	KEYWORD1
+
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################

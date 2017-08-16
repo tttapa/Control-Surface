@@ -40,7 +40,7 @@ void USBMidi::begin(unsigned long baud, bool debug) // If the main MCU doesn't h
 #endif
 }
 
-void USBMidi::send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) // Send a 3-uint8_t MIDI packet over USB (or Serial or debug Serial)
+void USBMidi::send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) // Send a 3-byte MIDI packet over USB (or Serial or debug Serial)
 {
   c--; // Channels are zero-based
 
@@ -64,7 +64,7 @@ void USBMidi::send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) // Send a 3-uin
     digitalWrite(blinkPin, LOW);
 }
 
-void USBMidi::send(uint8_t m, uint8_t c, uint8_t d1) // Send a 2-uint8_t MIDI packet over USB (or Serial or debug Serial)
+void USBMidi::send(uint8_t m, uint8_t c, uint8_t d1) // Send a 2-byte MIDI packet over USB (or Serial or debug Serial)
 {
   c--; // Channels are zero-based
 
