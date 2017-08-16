@@ -87,19 +87,19 @@ void USBMidi::send(uint8_t m, uint8_t c, uint8_t d1) // Send a 2-byte MIDI packe
     digitalWrite(blinkPin, LOW);
 }
 
-void USBMidi::setDelay(int d) // d = delay in milliseconds after each MIDI message
+void USBMidi::setDelay(int blinkDelay) // Set a delay between messages to prevent flooding the connection
 {
-  blinkDelay = d;
+  this->blinkDelay = blinkDelay;
 }
 
-void USBMidi::blink(uint8_t p) // p = pin with an LED connected to blink on each MIDI message
+void USBMidi::blink(uint8_t blinkPin) // Blink an LED on the specified pin on each MIDI message
 {
-  blinkPin = p;
+  this->blinkPin = blinkPin;
   pinMode(blinkPin, OUTPUT);
   blinkEnabled = true;
 }
 
-void USBMidi::noBlink()
+void USBMidi::noBlink() // Stop blinking the LED on each MIDI message
 {
   if (blinkEnabled)
   {

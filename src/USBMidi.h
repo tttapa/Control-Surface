@@ -40,8 +40,8 @@ public:
   void begin(unsigned long baud = MIDI_BAUD, bool debug = false); // If the main MCU doesn't have a USB connection or if debug mode is enabled, start the Serial connection at the desired baud rate
   void send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2);        // Send a 3-byte MIDI packet over USB (or Serial or debug Serial)
   void send(uint8_t m, uint8_t c, uint8_t d1);                    // Send a 2-byte MIDI packet over USB (or Serial or debug Serial)
-  void setDelay(int d);                                           // Set a delay between messages to prevent flooding the connection
-  void blink(uint8_t p);                                          // Blink an LED on the specified pin on each MIDI message
+  void setDelay(int blinkDelay);                                  // Set a delay between messages to prevent flooding the connection
+  void blink(uint8_t blinkPin);                                   // Blink an LED on the specified pin on each MIDI message
   void noBlink();                                                 // Stop blinking the LED on each MIDI message
 };
 
