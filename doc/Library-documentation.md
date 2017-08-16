@@ -288,7 +288,7 @@ Connect the common pin of the encoder to the ground, the internal pull-up resist
 
 **channel** is the MIDI channel.
 
-**speedMultiply** is the value that will be multiplied with the relative displacement, if the encoder is not fast enough in your software. If, for example, speedMultiply is set to 5, and the encoder were to send a '+1' message, a '+5' message will now be sent. Default is 1.
+**speedMultiply** is the value that will be multiplied with the relative displacement, if the encoder is not fast enough in your software. If, for example, speedMultiply is set to 5, and the encoder were to send a '+1' message, a '+5' message will be sent instead. Default is 1.
 
 **pulsesPerStep** is the number of pulses the encoder outputs when you turn it one step or click. On a normal rotary encoder, this is 4. When you set it to 4, it will change 1 unit in your software per click you turn, instead of 4. This is mostly more logical. For jog wheels however, you may want to set it to 1, to take advantage of the full resolution of the wheel. Use 'NORMAL_ENCODER' or 'JOG' as argument.
 
@@ -302,26 +302,44 @@ See the 'Constants' section for more information.
 
 This function checks the encoder position, and if it has changed since last time, the relative change is sent over MIDI.
 
+`bank(byte pin, byte controller, byte channel);`
+
+This function enables you to use one rotary encoder (together with a switch) for multiple controls. If the switch is in the OFF position, the controller and channel will be those that were defined during instance creation, if the switch is in the ON position, the controller and channel will be those that were entered as arguments of this function.
+
+**pin** is the digital pin with the switch connected. The internal pull-up resistor will be enabled.
+
+**controller** is the controller to use when the switch is on.
+
+**channel** is the channel to use when the switch is on.
+
+`detachBank();`
+
+This function disables the bank functionality that was set up with the bank function. The controller and channel will be ones that were defined during instance creation, regardless of the state of the switch.
+The pin of the switch defined in the bank function will be set as an input without pull-up resistor again.
+
 ### Constants
 
 `NORMAL_ENCODER`  
-set pulsesPerStep to 4, for normal rotary encoders.
+set pulsesPerStep to 4, for normal rotary encoders that send four pulses per physical 'click'.
 
 `JOG`  
 set pulsesPerStep to 1, for jog wheels.
 
-`ADD_64`  
-First mode for relative MIDI messages. This is probably the simplest one. This basically maps 0 to 64 (which is 128/2). For example, if I want to send -1, I add 64, = 63 and I send it. If I want to send +1, I also add 64, = 65. If I just send 64, the computer will do nothing, because it knows it's a displacement of 0. (On the computer side, they just subtract 64, and you can use the result like nothing ever happened.)
+`BINARY_OFFSET`  
+Mode for relative MIDI messages. This is probably the simplest one. It adds 64 to the value to map [-64, 63] to [0, 128]. (+1 → 0b01000001, -1 → 0b00111111)  
+Aliases: `REAPER_RELATIVE_2`, (`ADD_64`)
 
-`SIGN_BIT`  
-Second mode for relative MIDI messages. On computers, signed values are mostly saved with a sign bit. The sign bit is the most significant bit. When it's 0, the number defined by the other bits is positive, when it's 1, the number is negative. In a MIDI message, this is bit 6 (the 7th bit, since it's 0 based). For example: +4 would be 0b00000100, and -4 would be 0b01000100.
+`SIGN_MAGNITUDE`  
+Mode for relative MIDI messages. Signed magnitude representation. The sign bit is the most significant bit. When it's 0, the number defined by the other bits is positive, when it's 1, the number is negative. In a MIDI message, this is bit 6 (the 7th bit, since it's 0 based). (+1 → 0b00000001, -1 → 0b01000001)  
+Aliases: `REAPER_RELATIVE_3`, `MACKIE_CONTROL_RELATIVE`, (`SIGN_BIT`)
 
-`POS1_NEG127`  
-Third mode for relative MIDI messages. Define +1 as 1, and -1 as 127. We can continue this: +2 = 2, and -2 = 126, etc. until +63 = 63, and -63 = 65.
-
+`TWOS_COMPLEMENT`  
+Mode for relative MIDI messages. The number will be represented as 7-bit two's complement. (+1 → 0b00000001, -1 → 0b01111111)  
+Aliases: `REAPER_RELATIVE_1`, `TRACKTION_RELATIVE`, (`POS1_NEG127`)
 ### Examples
 
 Encoder_example
+Encoder_bank_example
 
 ## USBMidi
 This is the class for MIDI communication.
