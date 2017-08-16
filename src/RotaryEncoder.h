@@ -31,10 +31,14 @@ class RotaryEncoder
 {
 public:
   RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply, uint8_t pulsesPerStep, relativeCCmode mode); // Constructor
+  ~RotaryEncoder();                                                                                                                                    // Deconstructor
   void refresh();                                                                                                                                      // Check if the encoder position has changed since last time, if so, send the relative movement over MIDI
+  void bank(uint8_t bankPin, uint8_t altController, uint8_t altChannel);                                                                               // Enable the bank mode. When bank switch is turned on, send alternative MIDI channel and controller numbers
+  void detachBank();                                                                                                                                   // Disable the bank mode
 
 private:
-  uint8_t controllerNumber, channel, pulsesPerStep;
+  uint8_t controllerNumber, channel, altController, altChannel, pulsesPerStep, bankPin;
+  bool bankEnabled = false;
   relativeCCmode mode;
   int speedMultiply;
   long oldVal = 0;
