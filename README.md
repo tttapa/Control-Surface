@@ -4,7 +4,9 @@ It enables you to easily create MIDI controllers or instruments with very few li
 The library works on pretty much all Arduino and Teensy boards, like the Arduino Uno, Mega, Zero, Due, Leonardo, Micro, Teensy 3.2, ...
 
 It uses a MIDI-over-USB connection to connect to your computer, and can be used in your favourite DJ or DAW software.
-
+## Download
+Download the latest stable version [here](https://github.com/tttapa/MIDI_controller/releases/latest).  
+([Installation instructions](#installation))
 ## Features
 ### Analog inputs
 The library can take input from a variety of analog devices, such as variable resistors, **potentiometers**, linear faders, light **sensors** ...  
@@ -37,6 +39,10 @@ If your board doesn't support MIDI over USB, it will default to the Serial inter
 For maximum flexibility, you can use the **MIDI functions** to send your own custom MIDI events, without having to worry about compatibility issues between different boards.  
 The **debug mode** allows you to print the MIDI events in the serial monitor for easier developing, testing and debugging.  
 
+## New in versioin 2.1.0
+- Cleaner and more efficient code
+- Bank functionality for rotary encoders
+- Minor bug fixes
 ## New in version 2.0.0
 - Easier access to debug mode using `USBMidiController.begin(baud, true);`  
 - More examples  
