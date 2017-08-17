@@ -20,9 +20,9 @@ enum relativeCCmode
 
 #define MACKIE_CONTROL_RELATIVE SIGN_MAGNITUDE
 
-#define POS1_NEG127 TWOS_COMPLEMENT
-#define ADD_64 BINARY_OFFSET
-#define SIGN_BIT SIGN_MAGNITUDE
+#define POS1_NEG127 _Pragma ("GCC warning \"'POS1_NEG127' macro is deprecated, use 'TWOS_COMPLEMENT' instead\"") TWOS_COMPLEMENT
+#define ADD_64 _Pragma ("GCC warning \"'ADD_64' macro is deprecated, use 'BINARY_OFFSET' instead\"") BINARY_OFFSET
+#define SIGN_BIT _Pragma ("GCC warning \"'SIGN_BIT' macro is deprecated, use 'SIGN_MAGNITUDE' instead\"") SIGN_MAGNITUDE
 
 const uint8_t NORMAL_ENCODER = 4; // A normal rotary encoder sends four pulses per physical 'click'
 const uint8_t JOG = 1;            // For jog wheels, you want the highest possible resolution
