@@ -39,7 +39,7 @@ If your board doesn't support MIDI over USB, it will default to the Serial inter
 For maximum flexibility, you can use the **MIDI functions** to send your own custom MIDI events, without having to worry about compatibility issues between different boards.  
 The **debug mode** allows you to print the MIDI events in the serial monitor for easier developing, testing and debugging.  
 
-## New in versioin 2.1.0
+## New in version 2.1.0
 - Cleaner and more efficient code
 - Bank functionality for rotary encoders
 - Minor bug fixes
