@@ -3,8 +3,9 @@
 
 #include "Arduino.h"
 #include "USBMidi.h"
+#include "MIDI_Control_Element.h"
 
-class Analog
+class Analog : public MIDI_Control_Element
 {
 public:
   Analog(uint8_t analogPin, uint8_t controllerNumber, uint8_t channel);  // Constructor
