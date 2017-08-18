@@ -6,9 +6,6 @@
 
 #define EXT_PIN(x) (x + NUM_DIGITAL_PINS)
 
-using pin_t = unsigned int;
-using analog_t = int;
-
 struct ExtendedIOListNode
 {
     ExtendedIOListNode *next;

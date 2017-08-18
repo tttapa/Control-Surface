@@ -9,5 +9,6 @@
 #include "RotaryEncoder.h"
 #include "USBMidi.h"
 #include "Bank.h"
+#include "BankSelector.h"
 
 #endif
