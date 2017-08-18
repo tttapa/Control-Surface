@@ -168,13 +168,9 @@ public:
       : bank(bank), switchPins(switchPins), ledPins(ledPins), nb_banks(N)
   {
     if (M == 1)
-    {
       mode = INCREMENT_LEDS;
-    }
     else if (M == 2)
-    {
       mode = INCREMENT_DECREMENT_LEDS;
-    }
     else
     {
       mode = MULTIPLE_BUTTONS_LEDS;
@@ -185,13 +181,9 @@ public:
       : bank(bank), switchPins(switchPins.begin()), ledPins(ledPins.begin()), nb_banks(ledPins.size())
   {
     if (switchPins.size() == 1)
-    {
       mode = INCREMENT_LEDS;
-    }
     else if (switchPins.size() == 2)
-    {
       mode = INCREMENT_DECREMENT_LEDS;
-    }
     else
     {
       mode = MULTIPLE_BUTTONS_LEDS;
