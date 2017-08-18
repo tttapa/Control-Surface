@@ -52,3 +52,13 @@ void Bank::setChannel(uint8_t channel)
         element = element->next;
     }
 }
+
+void Bank::average(size_t length)
+{
+    element_node *element = firstElement;
+    while (element != nullptr)
+    {
+        element->element->average(length);
+        element = element->next;
+    }
+}

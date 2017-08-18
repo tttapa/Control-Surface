@@ -18,6 +18,7 @@ public:
   void add(MIDI_Control_Element *element);
   void refresh();
   void setChannel(uint8_t channel);
+  void average(size_t length);
 
 private:
   element_node *firstElement = nullptr;

@@ -78,3 +78,8 @@ unsigned int Analog::runningAverage(unsigned int value) // http://playground.ard
     avCount++;
   return avSum / avCount;
 }
+
+void Analog::setChannel(uint8_t channel) // setter for the MIDI channel
+{
+  this->channel = channel;
+}

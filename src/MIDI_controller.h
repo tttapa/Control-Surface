@@ -8,5 +8,6 @@
 #include "DigitalLatch.h"
 #include "RotaryEncoder.h"
 #include "USBMidi.h"
+#include "Bank.h"
 
 #endif
