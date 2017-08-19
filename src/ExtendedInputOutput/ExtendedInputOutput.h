@@ -22,6 +22,7 @@ class ExtendedInputOutput
     int digitalRead(pin_t pin);
 
     void add(ExtendedIOElement &IOel);
+    void add(ExtendedIOElement *IOel);
 
     // private:
     pin_t pinOffset = NUM_DIGITAL_PINS;

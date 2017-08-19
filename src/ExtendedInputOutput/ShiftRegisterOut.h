@@ -20,9 +20,9 @@ class ShiftRegisterOut : public ExtendedIOElement
     pin_t red(pin_t id);
     pin_t blue(pin_t id);
 
-    uint8_t redBit = 0;
-    uint8_t greenBit = 1;
-    uint8_t blueBit = 2;
+    const uint8_t redBit = 0;
+    const uint8_t greenBit = 1;
+    const uint8_t blueBit = 2;
 
   private:
     pin_t dataPin, clockPin, latchPin;

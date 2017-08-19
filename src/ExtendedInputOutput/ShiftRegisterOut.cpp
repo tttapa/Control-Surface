@@ -9,6 +9,7 @@ ShiftRegisterOut::ShiftRegisterOut(pin_t dataPin, pin_t clockPin, pin_t latchPin
     this->length = length;
     bufferLength = (length + 7) / 8;
     stateBuffer = (uint8_t *)malloc(bufferLength);
+    ExtendedIO.add(this);
 }
 ShiftRegisterOut::~ShiftRegisterOut()
 {

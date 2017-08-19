@@ -2,13 +2,18 @@
 
 void ExtendedInputOutput::add(ExtendedIOElement &IOel)
 {
-    pin_t length = IOel.getLength();
-    IOel.setOffset(pinOffset);
+    add(&IOel);
+}
+
+void ExtendedInputOutput::add(ExtendedIOElement *IOel)
+{
+    pin_t length = IOel->getLength();
+    IOel->setOffset(pinOffset);
 
     if (firstExtIOLN == nullptr)
     {
         firstExtIOLN = new ExtendedIOListNode;
-        firstExtIOLN->element = &IOel;
+        firstExtIOLN->element = IOel;
         firstExtIOLN->start = pinOffset;
         firstExtIOLN->end = pinOffset + length;
         firstExtIOLN->next = nullptr;
@@ -17,14 +22,14 @@ void ExtendedInputOutput::add(ExtendedIOElement &IOel)
     else
     {
         ExtendedIOListNode *newLN = new ExtendedIOListNode;
-        newLN->element = &IOel;
+        newLN->element = IOel;
         newLN->start = pinOffset;
         newLN->end = pinOffset + length;
         newLN->next = nullptr;
         lastExtIOLN->next = newLN;
         lastExtIOLN = newLN;
     }
-    pinOffset += IOel.getLength();
+    pinOffset += IOel->getLength();
 }
 
 void ExtendedInputOutput::pinMode(pin_t pin, uint8_t mode)
