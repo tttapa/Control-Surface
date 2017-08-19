@@ -34,13 +34,13 @@ void BankSelector::init()
         pinMode(switchPins[1], INPUT_PULLUP);
         break;
     case INCREMENT_DECREMENT_LEDS:
-        pinMode(switchPins[0], INPUT_PULLUP);
-        pinMode(switchPins[1], INPUT_PULLUP);
+        ExtIO::pinMode(switchPins[0], INPUT_PULLUP);
+        ExtIO::pinMode(switchPins[1], INPUT_PULLUP);
         for (uint8_t i = 0; i < nb_banks; i++)
         {
-            pinMode(ledPins[i], OUTPUT);
+            ExtIO::pinMode(ledPins[i], OUTPUT);
         }
-        digitalWrite(ledPins[0], HIGH);
+        ExtIO::digitalWrite(ledPins[0], HIGH);
         break;
     case INCREMENT:
         pinMode(switchPins[0], INPUT_PULLUP);
@@ -208,19 +208,6 @@ const char *BankSelector::getMode()
     return "";
 }
 
-void BankSelector::setPinModeExt(void (*fn)(uint8_t, uint8_t))
-{
-    pinModeExt = fn;
-}
-void BankSelector::setDigitalWriteExt(void (*fn)(uint8_t, uint8_t))
-{
-    digitalWriteExt = fn;
-}
-void BankSelector::setDigitalReadExt(int (*fn)(uint8_t))
-{
-    digitalReadExt = fn;
-}
-
 void BankSelector::setChannelChangeEvent(void (*fn)(uint8_t))
 {
     channelChangeEvent = fn;
@@ -233,7 +220,7 @@ void BankSelector::refreshLEDs(uint8_t newChannel)
     case SINGLE_SWITCH_LED:
     case SINGLE_BUTTON_LED:
     {
-        digitalWrite(ledPin, newChannel - 1);
+        ExtIO::digitalWrite(ledPin, newChannel - 1);
     }
     break;
 
@@ -241,32 +228,9 @@ void BankSelector::refreshLEDs(uint8_t newChannel)
     case INCREMENT_DECREMENT_LEDS:
     case INCREMENT_LEDS:
     {
-        digitalWrite(ledPins[channel - 1], LOW);
-        digitalWrite(ledPins[newChannel - 1], HIGH);
+        ExtIO::digitalWrite(ledPins[channel - 1], LOW);
+        ExtIO::digitalWrite(ledPins[newChannel - 1], HIGH);
     }
     break;
     }
-}
-
-void BankSelector::pinMode(uint8_t pin, uint8_t mode)
-{
-    if (pin < NUM_DIGITAL_PINS)
-        ::pinMode(pin, mode);
-    else if (pinModeExt != nullptr)
-        pinModeExt(pin - NUM_DIGITAL_PINS, mode);
-}
-void BankSelector::digitalWrite(uint8_t pin, uint8_t val)
-{
-    if (pin < NUM_DIGITAL_PINS)
-        ::digitalWrite(pin, val);
-    else if (digitalWriteExt != nullptr)
-        digitalWriteExt(pin - NUM_DIGITAL_PINS, val);
-}
-int BankSelector::digitalRead(uint8_t pin)
-{
-    if (pin < NUM_DIGITAL_PINS)
-        return ::digitalRead(pin);
-    if (digitalReadExt != nullptr)
-        return digitalReadExt(pin - NUM_DIGITAL_PINS);
-    return 0;
 }

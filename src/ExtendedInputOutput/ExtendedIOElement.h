@@ -49,7 +49,7 @@ class ExtendedIOElement
     uint8_t *stateBuffer = nullptr;
     analog_t *analogBuffer = nullptr;
 
-    pin_t offset;
+    pin_t offset = NUM_DIGITAL_PINS;
 
     int8_t pinToBufferIndex(pin_t pin)
     {

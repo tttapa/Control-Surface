@@ -42,4 +42,6 @@ extern void digitalWrite(pin_t pin, uint8_t val);
 extern void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val);
 }
 
+#include "ExtendedInputOutput/ShiftRegisterOut.h"
+
 #endif // EXTENDEDINPUTOUTPUT_H_

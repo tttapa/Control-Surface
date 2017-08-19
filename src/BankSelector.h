@@ -4,9 +4,6 @@
 #include "Arduino.h"
 #include "Bank.h"
 #include "ExtendedInputOutput/ExtendedInputOutput.h"
-#include "ExtendedInputOutput/ShiftRegisterOut.h"
-
-//using namespace ExtIO;
 
 #ifdef __AVR__
 #include "initializer_list.h"
@@ -222,9 +219,6 @@ public:
 
   const char *getMode();
 
-  void setPinModeExt(void (*fn)(uint8_t, uint8_t));
-  void setDigitalWriteExt(void (*fn)(uint8_t, uint8_t));
-  void setDigitalReadExt(int (*fn)(uint8_t));
   void setChannelChangeEvent(void (*fn)(uint8_t));
 
 private:
@@ -245,10 +239,6 @@ private:
   const int8_t falling = LOW - HIGH;
   const int8_t rising = HIGH - LOW;
 
-  void (*pinModeExt)(uint8_t, uint8_t) = nullptr;
-  void (*digitalWriteExt)(uint8_t, uint8_t) = nullptr;
-  int (*digitalReadExt)(uint8_t) = nullptr;
-
   void (*channelChangeEvent)(uint8_t) = nullptr;
 
   enum BankSelectorMode
@@ -266,10 +256,6 @@ private:
   } mode;
 
   void refreshLEDs(uint8_t newChannel);
-
-  void pinMode(uint8_t pin, uint8_t mode);
-  void digitalWrite(uint8_t pin, uint8_t val);
-  int digitalRead(uint8_t pin);
 };
 
 #endif // BANKSELECTOR_H_
