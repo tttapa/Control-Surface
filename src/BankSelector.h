@@ -1,5 +1,13 @@
+#ifndef BANKSELECTOR_H_
+#define BANKSELECTOR_H_
+
 #include "Arduino.h"
 #include "Bank.h"
+#include "ExtendedInputOutput/ExtendedInputOutput.h"
+#include "ExtendedInputOutput/ShiftRegisterOut.h"
+
+//using namespace ExtIO;
+
 #ifdef __AVR__
 #include "initializer_list.h"
 #else
@@ -263,3 +271,5 @@ private:
   void digitalWrite(uint8_t pin, uint8_t val);
   int digitalRead(uint8_t pin);
 };
+
+#endif // BANKSELECTOR_H_

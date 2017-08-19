@@ -69,4 +69,4 @@ class ExtendedIOElement
     const int8_t INVALID_PIN = -1;
 };
 
-#endif
+#endif // EXTENDEDIOELEMENT_H_

@@ -1,5 +1,7 @@
 #include "BankSelector.h"
 
+using namespace ExtIO;
+
 void BankSelector::init()
 {
     switch (mode)

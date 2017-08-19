@@ -1,4 +1,7 @@
-#include "../ExtendedIOElement.h"
+#ifndef SHIFTREGISTEROUT_H_
+#define SHIFTREGISTEROUT_H_
+
+#include "ExtendedIOElement.h"
 
 class ShiftRegisterOut : public ExtendedIOElement
 {
@@ -115,3 +118,5 @@ class ShiftRegisterOut : public ExtendedIOElement
     pin_t dataPin, clockPin, latchPin;
     uint8_t bitOrder, bufferLength;
 };
+
+#endif // SHIFTREGISTEROUT_H_
