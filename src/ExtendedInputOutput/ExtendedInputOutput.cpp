@@ -31,7 +31,7 @@ void ExtendedInputOutput::pinMode(pin_t pin, uint8_t mode)
 {
     if (pin < NUM_DIGITAL_PINS)
     {
-        // ::pinMode(pin, mode);
+        ::pinMode(pin, mode);
         Serial.print("::pinMode(");
         Serial.print(pin);
         Serial.print(", ");
