@@ -2,16 +2,11 @@
 #define EXTENDEDIOELEMENT_H_
 
 #include "Arduino.h"
-// #include "ExtendedInputOutput.h"
-// using namespace ExtIO;
 
 // #define DEBUG
 
 typedef unsigned int pin_t;
 typedef int analog_t;
-
-using pin_t = unsigned int;
-using analog_t = int;
 
 class ExtendedIOElement
 {

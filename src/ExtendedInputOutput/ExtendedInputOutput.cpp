@@ -85,12 +85,43 @@ ExtendedInputOutput ExtendedIO;
 
 namespace ExtIO
 {
+#define DEBUG
+
 void pinMode(pin_t pin, uint8_t mode)
 {
+#ifdef DEBUG
+    Serial.print("ExtIO::pinMode(");
+    Serial.print(pin);
+    Serial.print(", ");
+    Serial.print(mode);
+    Serial.print(");\r\n");
+#endif
     ExtendedIO.pinMode(pin, mode);
 }
 void digitalWrite(pin_t pin, uint8_t val)
 {
+#ifdef DEBUG
+    Serial.print("ExtIO::digitalWrite(");
+    Serial.print(pin);
+    Serial.print(", ");
+    Serial.print(val);
+    Serial.print(");\r\n");
+#endif
     ExtendedIO.digitalWrite(pin, val);
+}
+void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val)
+{
+    uint8_t i;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (bitOrder == LSBFIRST)
+            digitalWrite(dataPin, !!(val & (1 << i)));
+        else
+            digitalWrite(dataPin, !!(val & (1 << (7 - i))));
+
+        digitalWrite(clockPin, HIGH);
+        digitalWrite(clockPin, LOW);
+    }
 }
 }
