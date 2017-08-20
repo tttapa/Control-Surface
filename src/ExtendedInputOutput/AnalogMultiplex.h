@@ -13,7 +13,7 @@ class AnalogMultiplex : public ExtendedIOElement
 {
   public:
     template <size_t N>
-    AnalogMultiplex(pin_t analogPin, pin_t (&addressPins)[N])
+    AnalogMultiplex(pin_t analogPin, const pin_t (&addressPins)[N])
         : analogPin(analogPin), addressPins(addressPins), nb_addressPins(N), nb_addresses(1 << nb_addressPins),
           ExtendedIOElement(nb_addresses)
     {
