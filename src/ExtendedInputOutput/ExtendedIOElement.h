@@ -8,78 +8,68 @@ typedef int analog_t;
 
 class ExtendedIOElement
 {
-  public:
-    ExtendedIOElement(pin_t length)
+public:
+  ExtendedIOElement(pin_t length)
       : length(length)
+  {
+    if (first == nullptr)
+      first = this;
+    previous = last;
+    if (previous != nullptr)
+      previous->next = this;
+    last = this;
+    next = nullptr;
+
+    start = offset;
+    end = offset + length;
+    offset = end;
+  }
+  ~ExtendedIOElement()
+  {
+    if (previous != nullptr)
     {
-      if (first == nullptr)
-        first = this;
-      previous = last;
-      if (previous != nullptr)
-        previous->next = this;
-      last = this;
-      next = nullptr;
-
-      start = offset;
-      end = offset + length;
-      offset = end;
-    };
-    ~ExtendedIOElement() {
-      if (previous != nullptr) {
-        previous->next = next;
-      }
-      if (this == last) {
-        last = previous;
-      }
-      if (next != nullptr) {
-        next->previous = previous;
-      }
-      if (this == first) {
-        first = next;
-      }
-    };
-
-    virtual void pinMode(pin_t pin, uint8_t mode) {};
-    virtual void digitalWrite(pin_t pin, uint8_t mode) {};
-    virtual int digitalRead(pin_t pin) {};
-    virtual analog_t analogRead(pin_t pin) {};
-    virtual void analogWrite(pin_t pin, analog_t val) {};
-
-    virtual void begin() {};
-    virtual void refresh() {};
-    virtual void reset() {};
-    virtual void print() {};
-
-    pin_t pin(pin_t p)
+      previous->next = next;
+    }
+    if (this == last)
     {
-      return p + start;
+      last = previous;
     }
-
-    pin_t getEnd()
+    if (next != nullptr)
     {
-      return end;
+      next->previous = previous;
     }
-
-    pin_t getStart() {
-      return start;
+    if (this == first)
+    {
+      first = next;
     }
+  }
 
-    ExtendedIOElement *getNext() {
-      return next;
-    }
-    static ExtendedIOElement *getFirst() {
-      return first;
-    }
+  virtual void pinMode(pin_t pin, uint8_t mode){};
+  virtual void digitalWrite(pin_t pin, uint8_t mode){};
+  virtual int digitalRead(pin_t pin){};
+  virtual analog_t analogRead(pin_t pin){};
+  virtual void analogWrite(pin_t pin, analog_t val){};
 
+  virtual void begin(){};
+  virtual void refresh(){};
+  virtual void reset(){};
+  virtual void print(){};
 
-  protected:
-    pin_t length, start, end;
+  pin_t pin(pin_t p);
+  pin_t getEnd();
+  pin_t getStart();
 
-    ExtendedIOElement *next = nullptr, *previous = nullptr;
+  ExtendedIOElement *getNext();
+  static ExtendedIOElement *getFirst();
 
-    static pin_t offset;
-    static ExtendedIOElement *last;
-    static ExtendedIOElement *first;
+protected:
+  pin_t length, start, end;
+
+  ExtendedIOElement *next = nullptr, *previous = nullptr;
+
+  static pin_t offset;
+  static ExtendedIOElement *last;
+  static ExtendedIOElement *first;
 };
 
 #endif // EXTENDEDIOELEMENT_H_
