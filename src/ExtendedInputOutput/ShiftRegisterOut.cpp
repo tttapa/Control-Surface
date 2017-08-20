@@ -43,15 +43,25 @@ void ShiftRegisterOut::digitalWrite(pin_t pin, uint8_t val)
     refresh();
 }
 
-void ShiftRegisterOut::pinMode(pin_t pin, uint8_t mode)
+int ShiftRegisterOut::digitalRead(pin_t pin)
 {
-    //#ifdef DEBUG
-    Serial.print("ShiftRegPinMode(");
+#ifdef DEBUG
+    Serial.print("Shift Registar Out:\tdigitalRead(");
     Serial.print(pin);
-    Serial.print(", ");
-    Serial.print(mode);
     Serial.print(");\r\n");
-    //#endif
+#endif
+
+    int8_t bufferIndex = pinToBufferIndex(pin);
+#ifdef DEBUG_F
+    Serial.print("bufferIndex: ");
+    Serial.println(bufferIndex);
+    Serial.print("pinToBitMask: ");
+    Serial.println(pinToBitMask(pin), BIN);
+#endif
+
+    if (bufferIndex == INVALID_PIN)
+        return 0;
+    return !!(stateBuffer[bufferIndex] & pinToBitMask(pin));
 }
 
 void ShiftRegisterOut::begin()

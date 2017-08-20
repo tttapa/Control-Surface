@@ -37,11 +37,13 @@ void ExtendedInputOutput::pinMode(pin_t pin, uint8_t mode)
     if (pin < NUM_DIGITAL_PINS)
     {
         ::pinMode(pin, mode);
+#ifdef DEBUG
         Serial.print("::pinMode(");
         Serial.print(pin);
         Serial.print(", ");
         Serial.print(mode);
         Serial.print(");\r\n");
+#endif
     }
     else
     {
@@ -81,8 +83,17 @@ int ExtendedInputOutput::digitalRead(pin_t pin)
 {
     if (pin < NUM_DIGITAL_PINS)
         return ::digitalRead(pin);
-    // if (digitalReadExt != nullptr)
-    //     return digitalReadExt(pin - NUM_DIGITAL_PINS);
+
+    ExtendedIOListNode *ListNode = firstExtIOLN;
+    while (ListNode != nullptr)
+    {
+        if (pin >= ListNode->start && pin < ListNode->end)
+        {
+            if (ListNode->element != nullptr)
+                return ListNode->element->digitalRead(pin - ListNode->start);
+        }
+        ListNode = ListNode->next;
+    }
     return 0;
 }
 
@@ -90,7 +101,7 @@ ExtendedInputOutput ExtendedIO;
 
 namespace ExtIO
 {
-#define DEBUG
+// #define DEBUG
 
 void pinMode(pin_t pin, uint8_t mode)
 {
@@ -113,6 +124,15 @@ void digitalWrite(pin_t pin, uint8_t val)
     Serial.print(");\r\n");
 #endif
     ExtendedIO.digitalWrite(pin, val);
+}
+int digitalRead(pin_t pin)
+{
+#ifdef DEBUG
+    Serial.print("ExtIO::digitalRead(");
+    Serial.print(pin);
+    Serial.print(");\r\n");
+#endif
+    return ExtendedIO.digitalRead(pin);
 }
 void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val)
 {

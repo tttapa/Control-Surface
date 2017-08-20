@@ -33,13 +33,11 @@ class ExtendedInputOutput
 
 extern ExtendedInputOutput ExtendedIO;
 
-typedef unsigned int pin_t;
-typedef int analog_t;
-
 namespace ExtIO
 {
 extern void pinMode(pin_t pin, uint8_t mode);
 extern void digitalWrite(pin_t pin, uint8_t val);
+extern int digitalRead(pin_t pin);
 extern void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val);
 }
 

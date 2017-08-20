@@ -11,7 +11,7 @@ class ShiftRegisterOut : public ExtendedIOElement
     ~ShiftRegisterOut();
 
     void digitalWrite(pin_t pin, uint8_t val);
-    void pinMode(pin_t pin, uint8_t mode);
+    int digitalRead(pin_t pin);
     void begin();
     void refresh();
     void reset();
