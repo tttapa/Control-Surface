@@ -34,13 +34,13 @@ void BankSelector::init()
         pinMode(switchPins[1], INPUT_PULLUP);
         break;
     case INCREMENT_DECREMENT_LEDS:
-        ExtIO::pinMode(switchPins[0], INPUT_PULLUP);
-        ExtIO::pinMode(switchPins[1], INPUT_PULLUP);
+        pinMode(switchPins[0], INPUT_PULLUP);
+        pinMode(switchPins[1], INPUT_PULLUP);
         for (uint8_t i = 0; i < nb_banks; i++)
         {
-            ExtIO::pinMode(ledPins[i], OUTPUT);
+            pinMode(ledPins[i], OUTPUT);
         }
-        ExtIO::digitalWrite(ledPins[0], HIGH);
+        digitalWrite(ledPins[0], HIGH);
         break;
     case INCREMENT:
         pinMode(switchPins[0], INPUT_PULLUP);
@@ -220,7 +220,7 @@ void BankSelector::refreshLEDs(uint8_t newChannel)
     case SINGLE_SWITCH_LED:
     case SINGLE_BUTTON_LED:
     {
-        ExtIO::digitalWrite(ledPin, newChannel - 1);
+        digitalWrite(ledPin, newChannel - 1);
     }
     break;
 
@@ -228,8 +228,8 @@ void BankSelector::refreshLEDs(uint8_t newChannel)
     case INCREMENT_DECREMENT_LEDS:
     case INCREMENT_LEDS:
     {
-        ExtIO::digitalWrite(ledPins[channel - 1], LOW);
-        ExtIO::digitalWrite(ledPins[newChannel - 1], HIGH);
+        digitalWrite(ledPins[channel - 1], LOW);
+        digitalWrite(ledPins[newChannel - 1], HIGH);
     }
     break;
     }
