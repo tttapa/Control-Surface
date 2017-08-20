@@ -150,12 +150,28 @@ public:
   BankSelector(Bank &bank, pin_t switchPin, ButtonType buttonType = MOMENTARY) // One switch or button, no LEDs
       : bank(bank), switchPin(switchPin)
   {
-    mode = buttonType == TOGGLE ? SINGLE_SWITCH : SINGLE_BUTTON;
+    if (buttonType == TOGGLE)
+    {
+      mode = SINGLE_SWITCH;
+    }
+    else
+    {
+      dbButton1.pin = switchPin;
+      mode = SINGLE_BUTTON;
+    }
   }
   BankSelector(Bank &bank, pin_t switchPin, pin_t ledPin, ButtonType buttonType = MOMENTARY) // One switch or button, one LED
       : bank(bank), switchPin(switchPin), ledPin(ledPin)
   {
-    mode = buttonType == TOGGLE ? SINGLE_SWITCH_LED : SINGLE_BUTTON_LED;
+    if (buttonType == TOGGLE)
+    {
+      mode = SINGLE_SWITCH_LED;
+    }
+    else
+    {
+      dbButton1.pin = switchPin;
+      mode = SINGLE_BUTTON_LED;
+    }
   }
   template <size_t N>
   BankSelector(Bank &bank, const pin_t (&switchPins)[N]) // Multiple buttons, no LEDs
@@ -176,9 +192,16 @@ public:
       : bank(bank), switchPins(switchPins), ledPins(ledPins), nb_banks(N)
   {
     if (M == 1)
+    {
+      dbButton1.pin = this->switchPins[0];
       mode = INCREMENT_LEDS;
+    }
     else if (M == 2)
+    {
+      dbButton1.pin = this->switchPins[0];
+      dbButton2.pin = this->switchPins[1];
       mode = INCREMENT_DECREMENT_LEDS;
+    }
     else
     {
       mode = MULTIPLE_BUTTONS_LEDS;
@@ -196,9 +219,16 @@ public:
     this->ledPins = ledPinsStorage;
 
     if (switchPins.size() == 1)
+    {
+      dbButton1.pin = this->switchPins[0];
       mode = INCREMENT_LEDS;
+    }
     else if (switchPins.size() == 2)
+    {
+      dbButton1.pin = this->switchPins[0];
+      dbButton2.pin = this->switchPins[1];
       mode = INCREMENT_DECREMENT_LEDS;
+    }
     else
     {
       mode = MULTIPLE_BUTTONS_LEDS;
@@ -208,11 +238,14 @@ public:
   BankSelector(Bank &bank, const pin_t (&switchPins)[2], pin_t nb_banks) // Two buttons (+1, -1), no LEDs
       : bank(bank), switchPins(switchPins), nb_banks(nb_banks)
   {
+    dbButton1.pin = switchPins[0];
+    dbButton2.pin = switchPins[1];
     mode = INCREMENT_DECREMENT;
   }
   BankSelector(Bank &bank, const pin_t (&switchPins)[1], pin_t nb_banks) // One button (+1), no LEDs
       : bank(bank), switchPins(switchPins), nb_banks(nb_banks)
   {
+    dbButton1.pin = switchPins[0];
     mode = INCREMENT;
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins, pin_t nb_banks) // One or two buttons (+1, (-1)), no LEDs
@@ -221,7 +254,17 @@ public:
     switchPinsStorage = (pin_t *)malloc(sizeof(pin_t) * switchPins.size());
     memcpy(switchPinsStorage, switchPins.begin(), sizeof(pin_t) * switchPins.size());
     this->switchPins = switchPinsStorage;
-    mode = switchPins.size() > 1 ? INCREMENT_DECREMENT : INCREMENT;
+    if (switchPins.size() == 1)
+    {
+      dbButton1.pin = this->switchPins[0];
+      mode = INCREMENT;
+    }
+    else if (switchPins.size() == 2)
+    {
+      dbButton1.pin = this->switchPins[0];
+      dbButton2.pin = this->switchPins[1];
+      mode = INCREMENT_DECREMENT;
+    }
   }
 
   ~BankSelector()
@@ -249,10 +292,12 @@ private:
   uint8_t nb_banks;
 
   unsigned long prevBounceTime = 0;
-  bool prevIncrementState = HIGH;
-  bool prevDecrementState = HIGH;
 
-  bool prevToggleState = HIGH;
+  struct debouncedButton
+  {
+    pin_t pin;
+    bool prevState = HIGH;
+  } dbButton1, dbButton2;
 
   const unsigned long debounceTime = 25;
 
@@ -276,6 +321,7 @@ private:
   } mode;
 
   void refreshLEDs(uint8_t newChannel);
+  bool debounceButton(debouncedButton &button);
 };
 
 #endif // BANKSELECTOR_H_

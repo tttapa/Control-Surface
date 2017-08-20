@@ -3,7 +3,7 @@
 
 namespace ExtIO
 {
-#define DEBUG
+// #define DEBUG
 
 ExtendedIOElement *getIOElementOfPin(pin_t pin)
 {

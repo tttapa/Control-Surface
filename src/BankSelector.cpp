@@ -71,23 +71,8 @@ void BankSelector::refresh()
     case SINGLE_BUTTON:
     case SINGLE_BUTTON_LED:
     {
-        bool ToggleState = digitalRead(switchPin);
-
-        int8_t stateChangeToggle = ToggleState - prevToggleState;
-
-        if (stateChangeToggle == falling)
-        { // Button is pushed
-            if (millis() - prevBounceTime > debounceTime)
-            {
-                newChannel = !(channel - 1) + 1; // Toggle channel between 1 and 2
-                prevBounceTime = millis();
-            }
-        }
-        if (stateChangeToggle == rising)
-        { // Button is released
-            prevBounceTime = millis();
-        }
-        prevToggleState = ToggleState;
+        if (debounceButton(dbButton1))
+            newChannel = !(channel - 1) + 1; // Toggle channel between 1 and 2
     }
     break;
 
@@ -108,57 +93,18 @@ void BankSelector::refresh()
     case INCREMENT_DECREMENT_LEDS:
     case INCREMENT_DECREMENT:
     {
-        bool IncrementState = digitalRead(switchPins[0]);
-        bool DecrementState = digitalRead(switchPins[1]);
-
-        int8_t stateChangeIncrement = IncrementState - prevIncrementState;
-        int8_t stateChangeDecrement = DecrementState - prevDecrementState;
-
-        if (stateChangeIncrement == falling)
-        { // Increment button is pushed
-            if (millis() - prevBounceTime > debounceTime)
-            {
-                newChannel = channel == nb_banks ? 1 : channel + 1; // Increment channel number or wrap around
-                prevBounceTime = millis();
-            }
-        }
-        if (stateChangeDecrement == falling)
-        { // Decrement button is pushed
-            if (millis() - prevBounceTime > debounceTime)
-            {
-                newChannel = channel == 1 ? nb_banks : channel - 1; // Decrement channel number or wrap around
-                prevBounceTime = millis();
-            }
-        }
-        if (stateChangeIncrement == rising || stateChangeDecrement == rising)
-        { // One of the buttons is released
-            prevBounceTime = millis();
-        }
-        prevIncrementState = IncrementState;
-        prevDecrementState = DecrementState;
+        if (debounceButton(dbButton1))
+            newChannel = channel == nb_banks ? 1 : channel + 1; // Increment channel number or wrap around
+        if (debounceButton(dbButton2))
+            newChannel = channel == 1 ? nb_banks : channel - 1; // Decrement channel number or wrap around
     }
     break;
 
     case INCREMENT_LEDS:
     case INCREMENT:
     {
-        bool IncrementState = digitalRead(switchPins[0]);
-
-        int8_t stateChangeIncrement = IncrementState - prevIncrementState;
-
-        if (stateChangeIncrement == falling)
-        { // Increment button is pushed
-            if (millis() - prevBounceTime > debounceTime)
-            {
-                newChannel = channel == nb_banks ? 1 : channel + 1; // Increment channel number or wrap around
-                prevBounceTime = millis();
-            }
-        }
-        if (stateChangeIncrement == rising)
-        { // Increment button is released
-            prevBounceTime = millis();
-        }
-        prevIncrementState = IncrementState;
+        if (debounceButton(dbButton1))
+            newChannel = channel == nb_banks ? 1 : channel + 1; // Increment channel number or wrap around
     }
     break;
     }
@@ -233,4 +179,27 @@ void BankSelector::refreshLEDs(uint8_t newChannel)
     }
     break;
     }
+}
+
+bool BankSelector::debounceButton(debouncedButton &button)
+{
+    bool pressed = false;
+    bool state = digitalRead(button.pin);
+
+    int8_t stateChange = state - button.prevState;
+
+    if (stateChange == falling)
+    { // Button is pushed
+        if (millis() - prevBounceTime > debounceTime)
+        {
+            pressed = true;
+            prevBounceTime = millis();
+        }
+    }
+    if (stateChange == rising)
+    { // Button is released
+        prevBounceTime = millis();
+    }
+    button.prevState = state;
+    return pressed;
 }
