@@ -16,10 +16,8 @@ analog_t AnalogMultiplex::analogRead(pin_t pin)
 void AnalogMultiplex::begin()
 {
     ExtIO::pinMode(analogPin, INPUT);
-    for (uint8_t i = 0; i < nb_addressPins; i++) {
-        Serial.println(addressPins[i]);
+    for (uint8_t i = 0; i < nb_addressPins; i++)
         ExtIO::pinMode(addressPins[i], OUTPUT);
-    }
 }
 
 uint8_t AnalogMultiplex::pinToMuxAddress(pin_t pin)
@@ -28,13 +26,6 @@ uint8_t AnalogMultiplex::pinToMuxAddress(pin_t pin)
 }
 void AnalogMultiplex::setMuxAddress(uint8_t address)
 {
-    Serial.print("Address: ");
-    Serial.println(address, BIN);
-    for (uint8_t i = 0; i < nb_addressPins; i++) {
+    for (uint8_t i = 0; i < nb_addressPins; i++)
         ExtIO::digitalWrite(addressPins[i], address & (1 << i));
-        Serial.print("\ti = ");
-        Serial.println(i);
-        Serial.print("\taddress & (1 << i) = ");
-        Serial.println(address & (1 << i), BIN);
-    }
 }
