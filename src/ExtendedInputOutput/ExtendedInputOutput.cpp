@@ -97,4 +97,21 @@ void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val)
 {
     shiftOut((pin_t)dataPin, (pin_t)clockPin, bitOrder, val);
 }
+analog_t analogRead(pin_t pin)
+{
+#ifdef DEBUG_READ
+    Serial.print("ExtIO::analogRead(");
+    Serial.print(pin);
+    Serial.print(");\r\n");
+#endif
+    if (pin < NUM_DIGITAL_PINS)
+        return ::analogRead(pin);
+    else
+    {
+        ExtendedIOElement *el = getIOElementOfPin(pin);
+        if (el != nullptr)
+            return el->analogRead(pin - el->getStart());
+    }
+    return 0;
 }
+};
