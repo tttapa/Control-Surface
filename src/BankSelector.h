@@ -147,29 +147,32 @@ public:
     on the input will therefore be HIGH (because of the pull-up resistor)
   */
 
-  BankSelector(Bank &bank, uint8_t switchPin, ButtonType buttonType = MOMENTARY) // One switch or button, no LEDs
+  BankSelector(Bank &bank, pin_t switchPin, ButtonType buttonType = MOMENTARY) // One switch or button, no LEDs
       : bank(bank), switchPin(switchPin)
   {
     mode = buttonType == TOGGLE ? SINGLE_SWITCH : SINGLE_BUTTON;
   }
-  BankSelector(Bank &bank, uint8_t switchPin, uint8_t ledPin, ButtonType buttonType = MOMENTARY) // One switch or button, one LED
+  BankSelector(Bank &bank, pin_t switchPin, pin_t ledPin, ButtonType buttonType = MOMENTARY) // One switch or button, one LED
       : bank(bank), switchPin(switchPin), ledPin(ledPin)
   {
     mode = buttonType == TOGGLE ? SINGLE_SWITCH_LED : SINGLE_BUTTON_LED;
   }
   template <size_t N>
-  BankSelector(Bank &bank, const uint8_t (&switchPins)[N]) // Multiple buttons, no LEDs
+  BankSelector(Bank &bank, const pin_t (&switchPins)[N]) // Multiple buttons, no LEDs
       : bank(bank), switchPins(switchPins), nb_banks(N)
   {
     mode = MULTIPLE_BUTTONS;
   }
-  BankSelector(Bank &bank, std::initializer_list<uint8_t> switchPins) // Multiple buttons, no LEDs
-      : bank(bank), switchPins(switchPins.begin()), nb_banks(switchPins.size())
+  BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins) // Multiple buttons, no LEDs
+      : bank(bank), freeSwitchPins(true), nb_banks(switchPins.size())
   {
+    switchPinsStorage = (pin_t *)malloc(sizeof(pin_t) * switchPins.size());
+    memcpy(switchPinsStorage, switchPins.begin(), sizeof(pin_t) * switchPins.size());
+    this->switchPins = switchPinsStorage;
     mode = MULTIPLE_BUTTONS;
   }
   template <size_t M, size_t N>
-  BankSelector(Bank &bank, const uint8_t (&switchPins)[M], const uint8_t (&ledPins)[N]) // One or multiple buttons, multiple LEDs
+  BankSelector(Bank &bank, const pin_t (&switchPins)[M], const pin_t (&ledPins)[N]) // One or multiple buttons, multiple LEDs
       : bank(bank), switchPins(switchPins), ledPins(ledPins), nb_banks(N)
   {
     if (M == 1)
@@ -182,9 +185,16 @@ public:
       nb_banks = N < M ? N : M;
     }
   }
-  BankSelector(Bank &bank, std::initializer_list<uint8_t> switchPins, std::initializer_list<uint8_t> ledPins) // One or multiple buttons, multiple LEDs
-      : bank(bank), switchPins(switchPins.begin()), ledPins(ledPins.begin()), nb_banks(ledPins.size())
+  BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins, std::initializer_list<pin_t> ledPins) // One or multiple buttons, multiple LEDs
+      : bank(bank), freeSwitchPins(true), freeLedPins(true), nb_banks(ledPins.size())
   {
+    switchPinsStorage = (pin_t *)malloc(sizeof(pin_t) * switchPins.size());
+    memcpy(switchPinsStorage, switchPins.begin(), sizeof(pin_t) * switchPins.size());
+    this->switchPins = switchPinsStorage;
+    ledPinsStorage = (pin_t *)malloc(sizeof(pin_t) * ledPins.size());
+    memcpy(ledPinsStorage, ledPins.begin(), sizeof(pin_t) * ledPins.size());
+    this->ledPins = ledPinsStorage;
+
     if (switchPins.size() == 1)
       mode = INCREMENT_LEDS;
     else if (switchPins.size() == 2)
@@ -195,20 +205,29 @@ public:
       nb_banks = switchPins.size() < ledPins.size() ? switchPins.size() : ledPins.size();
     }
   }
-  BankSelector(Bank &bank, const uint8_t (&switchPins)[2], uint8_t nb_banks) // Two buttons (+1, -1), no LEDs
+  BankSelector(Bank &bank, const pin_t (&switchPins)[2], pin_t nb_banks) // Two buttons (+1, -1), no LEDs
       : bank(bank), switchPins(switchPins), nb_banks(nb_banks)
   {
     mode = INCREMENT_DECREMENT;
   }
-  BankSelector(Bank &bank, const uint8_t (&switchPins)[1], uint8_t nb_banks) // One button (+1), no LEDs
+  BankSelector(Bank &bank, const pin_t (&switchPins)[1], pin_t nb_banks) // One button (+1), no LEDs
       : bank(bank), switchPins(switchPins), nb_banks(nb_banks)
   {
     mode = INCREMENT;
   }
-  BankSelector(Bank &bank, std::initializer_list<uint8_t> switchPins, uint8_t nb_banks) // One or two buttons (+1, (-1)), no LEDs
-      : bank(bank), switchPins(switchPins.begin()), nb_banks(nb_banks)
+  BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins, pin_t nb_banks) // One or two buttons (+1, (-1)), no LEDs
+      : bank(bank), freeSwitchPins(true), nb_banks(nb_banks)
   {
+    switchPinsStorage = (pin_t *)malloc(sizeof(pin_t) * switchPins.size());
+    memcpy(switchPinsStorage, switchPins.begin(), sizeof(pin_t) * switchPins.size());
+    this->switchPins = switchPinsStorage;
     mode = switchPins.size() > 1 ? INCREMENT_DECREMENT : INCREMENT;
+  }
+
+  ~BankSelector()
+  {
+    free(ledPinsStorage);
+    free(switchPinsStorage);
   }
 
   void init();
@@ -224,9 +243,12 @@ public:
 private:
   Bank &bank;
   uint8_t channel = 1;
-  uint8_t switchPin, ledPin;
-  const uint8_t *switchPins, *ledPins;
+  pin_t switchPin, ledPin;
+  const pin_t *switchPins, *ledPins;
+  pin_t *switchPinsStorage = nullptr, *ledPinsStorage = nullptr;
   uint8_t nb_banks;
+  bool freeSwitchPins = false;
+  bool freeLedPins = false;
 
   unsigned long prevBounceTime = 0;
   bool prevIncrementState = HIGH;
