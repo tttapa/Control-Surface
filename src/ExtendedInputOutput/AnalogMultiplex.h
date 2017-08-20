@@ -17,7 +17,7 @@ public:
       : analogPin(analogPin), addressPins(addressPins), nb_addressPins(N), nb_addresses(1 << nb_addressPins),
         ExtendedIOElement(1 << N)
   {
-    ;
+    begin();
   }
   AnalogMultiplex(pin_t analogPin, std::initializer_list<pin_t> addressPins)
       : analogPin(analogPin), nb_addressPins(addressPins.size()), nb_addresses(1 << addressPins.size()),
@@ -26,6 +26,7 @@ public:
     addressPinsStorage = (pin_t *)malloc(sizeof(pin_t) * addressPins.size());
     memcpy(addressPinsStorage, addressPins.begin(), sizeof(pin_t) * addressPins.size());
     this->addressPins = addressPinsStorage;
+    begin();
   }
   ~AnalogMultiplex()
   {
