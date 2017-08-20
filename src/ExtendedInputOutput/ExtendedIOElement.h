@@ -3,65 +3,83 @@
 
 #include "Arduino.h"
 
-// #define DEBUG
-
 typedef unsigned int pin_t;
 typedef int analog_t;
 
 class ExtendedIOElement
 {
   public:
-    ExtendedIOElement(){};
-    ~ExtendedIOElement(){};
+    ExtendedIOElement(pin_t length)
+      : length(length)
+    {
+      if (first == nullptr)
+        first = this;
+      previous = last;
+      if (previous != nullptr)
+        previous->next = this;
+      last = this;
+      next = nullptr;
 
-    virtual void pinMode(pin_t pin, uint8_t mode){};
-    virtual void digitalWrite(pin_t pin, uint8_t mode){};
-    virtual int digitalRead(pin_t pin){};
-    virtual analog_t analogRead(pin_t pin){};
-    virtual void analogWrite(pin_t pin, analog_t val){};
+      start = offset;
+      end = offset + length;
+      offset = end;
+    };
+    ~ExtendedIOElement() {
+      if (previous != nullptr) {
+        previous->next = next;
+      }
+      if (this == last) {
+        last = previous;
+      }
+      if (next != nullptr) {
+        next->previous = previous;
+      }
+      if (this == first) {
+        first = next;
+      }
+    };
 
-    virtual void begin(){};
-    virtual void refresh(){};
-    virtual void reset(){};
+    virtual void pinMode(pin_t pin, uint8_t mode) {};
+    virtual void digitalWrite(pin_t pin, uint8_t mode) {};
+    virtual int digitalRead(pin_t pin) {};
+    virtual analog_t analogRead(pin_t pin) {};
+    virtual void analogWrite(pin_t pin, analog_t val) {};
+
+    virtual void begin() {};
+    virtual void refresh() {};
+    virtual void reset() {};
+    virtual void print() {};
 
     pin_t pin(pin_t p)
     {
-        return p + offset;
+      return p + start;
     }
 
-    void setOffset(pin_t offset)
+    pin_t getEnd()
     {
-        this->offset = offset;
+      return end;
     }
 
-    pin_t getLastPin()
-    {
-        return offset + length;
+    pin_t getStart() {
+      return start;
     }
 
-    pin_t getLength()
-    {
-        return length;
+    ExtendedIOElement *getNext() {
+      return next;
     }
+    static ExtendedIOElement *getFirst() {
+      return first;
+    }
+
 
   protected:
-    pin_t length;
-    uint8_t *stateBuffer = nullptr;
-    analog_t *analogBuffer = nullptr;
+    pin_t length, start, end;
 
-    pin_t offset = NUM_DIGITAL_PINS;
+    ExtendedIOElement *next = nullptr, *previous = nullptr;
 
-    int8_t pinToBufferIndex(pin_t pin)
-    {
-        if (pin >= length)
-            return INVALID_PIN;
-        return pin >> 3; // pin / 8;
-    }
-    uint8_t pinToBitMask(pin_t pin)
-    {
-        return 1 << (pin & 7); // 1 << (pin % 8);
-    }
-    const int8_t INVALID_PIN = -1;
+    static pin_t offset;
+    static ExtendedIOElement *last;
+    static ExtendedIOElement *first;
 };
 
 #endif // EXTENDEDIOELEMENT_H_

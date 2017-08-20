@@ -1,107 +1,17 @@
 #include "ExtendedInputOutput.h"
-
-void ExtendedInputOutput::add(ExtendedIOElement &IOel)
-{
-    add(&IOel);
-}
-
-void ExtendedInputOutput::add(ExtendedIOElement *IOel)
-{
-    pin_t length = IOel->getLength();
-    IOel->setOffset(pinOffset);
-
-    if (firstExtIOLN == nullptr)
-    {
-        firstExtIOLN = new ExtendedIOListNode;
-        firstExtIOLN->element = IOel;
-        firstExtIOLN->start = pinOffset;
-        firstExtIOLN->end = pinOffset + length;
-        firstExtIOLN->next = nullptr;
-        lastExtIOLN = firstExtIOLN;
-    }
-    else
-    {
-        ExtendedIOListNode *newLN = new ExtendedIOListNode;
-        newLN->element = IOel;
-        newLN->start = pinOffset;
-        newLN->end = pinOffset + length;
-        newLN->next = nullptr;
-        lastExtIOLN->next = newLN;
-        lastExtIOLN = newLN;
-    }
-    pinOffset += IOel->getLength();
-}
-
-void ExtendedInputOutput::pinMode(pin_t pin, uint8_t mode)
-{
-    if (pin < NUM_DIGITAL_PINS)
-    {
-        ::pinMode(pin, mode);
-#ifdef DEBUG
-        Serial.print("::pinMode(");
-        Serial.print(pin);
-        Serial.print(", ");
-        Serial.print(mode);
-        Serial.print(");\r\n");
-#endif
-    }
-    else
-    {
-        ExtendedIOListNode *ListNode = firstExtIOLN;
-        while (ListNode != nullptr)
-        {
-            if (pin >= ListNode->start && pin < ListNode->end)
-            {
-                if (ListNode->element != nullptr)
-                    ListNode->element->pinMode(pin - ListNode->start, mode);
-                return;
-            }
-            ListNode = ListNode->next;
-        }
-    }
-}
-void ExtendedInputOutput::digitalWrite(pin_t pin, uint8_t val)
-{
-    if (pin < NUM_DIGITAL_PINS)
-        ::digitalWrite(pin, val);
-    else
-    {
-        ExtendedIOListNode *ListNode = firstExtIOLN;
-        while (ListNode != nullptr)
-        {
-            if (pin >= ListNode->start && pin < ListNode->end)
-            {
-                if (ListNode->element != nullptr)
-                    ListNode->element->digitalWrite(pin - ListNode->start, val);
-                return;
-            }
-            ListNode = ListNode->next;
-        }
-    }
-}
-int ExtendedInputOutput::digitalRead(pin_t pin)
-{
-    if (pin < NUM_DIGITAL_PINS)
-        return ::digitalRead(pin);
-
-    ExtendedIOListNode *ListNode = firstExtIOLN;
-    while (ListNode != nullptr)
-    {
-        if (pin >= ListNode->start && pin < ListNode->end)
-        {
-            if (ListNode->element != nullptr)
-                return ListNode->element->digitalRead(pin - ListNode->start);
-        }
-        ListNode = ListNode->next;
-    }
-    return 0;
-}
-
-ExtendedInputOutput ExtendedIO;
+#include "ExtendedIOElement.h"
 
 namespace ExtIO
 {
-// #define DEBUG
+#define DEBUG
+
+ExtendedIOElement *getIOElementOfPin(pin_t pin)
+{
+    for (ExtendedIOElement *el = ExtendedIOElement::getFirst(); el != nullptr; el = el->getNext())
+        if (pin >= el->getStart() && pin < el->getEnd())
+            return el;
+    return nullptr;
+}
 
 void pinMode(pin_t pin, uint8_t mode)
 {
@@ -112,7 +22,14 @@ void pinMode(pin_t pin, uint8_t mode)
     Serial.print(mode);
     Serial.print(");\r\n");
 #endif
-    ExtendedIO.pinMode(pin, mode);
+    if (pin < NUM_DIGITAL_PINS)
+        ::pinMode(pin, mode);
+    else
+    {
+        ExtendedIOElement *el = getIOElementOfPin(pin);
+        if (el != nullptr)
+            el->pinMode(pin - el->getStart(), mode);
+    }
 }
 void pinMode(int pin, uint8_t mode)
 {
@@ -127,7 +44,14 @@ void digitalWrite(pin_t pin, uint8_t val)
     Serial.print(val);
     Serial.print(");\r\n");
 #endif
-    ExtendedIO.digitalWrite(pin, val);
+    if (pin < NUM_DIGITAL_PINS)
+        ::digitalWrite(pin, val);
+    else
+    {
+        ExtendedIOElement *el = getIOElementOfPin(pin);
+        if (el != nullptr)
+            el->digitalWrite(pin - el->getStart(), val);
+    }
 }
 void digitalWrite(int pin, uint8_t val)
 {
@@ -135,12 +59,20 @@ void digitalWrite(int pin, uint8_t val)
 }
 int digitalRead(pin_t pin)
 {
-#ifdef DEBUG
+#ifdef DEBUG_READ
     Serial.print("ExtIO::digitalRead(");
     Serial.print(pin);
     Serial.print(");\r\n");
 #endif
-    return ExtendedIO.digitalRead(pin);
+    if (pin < NUM_DIGITAL_PINS)
+        return ::digitalRead(pin);
+    else
+    {
+        ExtendedIOElement *el = getIOElementOfPin(pin);
+        if (el != nullptr)
+            return el->digitalRead(pin - el->getStart());
+    }
+    return 0;
 }
 int digitalRead(int pin)
 {

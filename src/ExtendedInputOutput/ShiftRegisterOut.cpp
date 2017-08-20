@@ -4,12 +4,11 @@
 using namespace ExtIO;
 
 ShiftRegisterOut::ShiftRegisterOut(pin_t dataPin, pin_t clockPin, pin_t latchPin, uint8_t bitOrder, pin_t length)
-    : dataPin(dataPin), clockPin(clockPin), latchPin(latchPin), bitOrder(bitOrder)
+    : dataPin(dataPin), clockPin(clockPin), latchPin(latchPin), bitOrder(bitOrder), ExtendedIOElement(length)
 {
     this->length = length;
     bufferLength = (length + 7) / 8;
     stateBuffer = (uint8_t *)malloc(bufferLength);
-    ExtendedIO.add(this);
 }
 ShiftRegisterOut::~ShiftRegisterOut()
 {
@@ -107,13 +106,24 @@ void ShiftRegisterOut::reset()
 
 pin_t ShiftRegisterOut::green(pin_t id)
 {
-    return 3 * id + greenBit + offset;
+    return 3 * id + greenBit + start;
 }
 pin_t ShiftRegisterOut::red(pin_t id)
 {
-    return 3 * id + redBit + offset;
+    return 3 * id + redBit + start;
 }
 pin_t ShiftRegisterOut::blue(pin_t id)
 {
-    return 3 * id + blueBit + offset;
+    return 3 * id + blueBit + start;
+}
+
+int8_t ShiftRegisterOut::pinToBufferIndex(pin_t pin)
+{
+    if (pin >= length)
+        return INVALID_PIN;
+    return pin >> 3; // pin / 8;
+}
+uint8_t ShiftRegisterOut::pinToBitMask(pin_t pin)
+{
+    return 1 << (pin & 7); // 1 << (pin % 8);
 }

@@ -6,35 +6,9 @@
 
 #define EXT_PIN(x) (x + NUM_DIGITAL_PINS)
 
-struct ExtendedIOListNode
-{
-    ExtendedIOListNode *next;
-    pin_t start;
-    pin_t end;
-    ExtendedIOElement *element = nullptr;
-};
-
-class ExtendedInputOutput
-{
-  public:
-    void pinMode(pin_t pin, uint8_t mode);
-    void digitalWrite(pin_t pin, uint8_t val);
-    int digitalRead(pin_t pin);
-
-    void add(ExtendedIOElement &IOel);
-    void add(ExtendedIOElement *IOel);
-
-    // private:
-    pin_t pinOffset = NUM_DIGITAL_PINS;
-
-    ExtendedIOListNode *firstExtIOLN = nullptr;
-    ExtendedIOListNode *lastExtIOLN = nullptr;
-};
-
-extern ExtendedInputOutput ExtendedIO;
-
 namespace ExtIO
 {
+extern ExtendedIOElement *getIOElementOfPin(pin_t pin);
 extern void pinMode(pin_t pin, uint8_t mode);
 extern void pinMode(int pin, uint8_t mode);
 extern void digitalWrite(pin_t pin, uint8_t val);
@@ -44,7 +18,5 @@ extern int digitalRead(int pin);
 extern void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val);
 extern void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val);
 }
-
-#include "ExtendedInputOutput/ShiftRegisterOut.h"
 
 #endif // EXTENDEDINPUTOUTPUT_H_
