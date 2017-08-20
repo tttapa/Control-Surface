@@ -11,4 +11,7 @@
 #include "Bank.h"
 #include "BankSelector.h"
 
+#include "ExtendedInputOutput/ShiftRegisterOut.h"
+#include "ExtendedInputOutput/AnalogMultiplex.h"
+
 #endif
