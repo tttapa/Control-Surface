@@ -11,8 +11,6 @@
 #include <initializer_list>
 #endif
 
-#define EXT_PIN(x) (x + NUM_DIGITAL_PINS)
-
 class BankSelector
 {
 public:
