@@ -114,6 +114,10 @@ void pinMode(pin_t pin, uint8_t mode)
 #endif
     ExtendedIO.pinMode(pin, mode);
 }
+void pinMode(int pin, uint8_t mode)
+{
+    pinMode((pin_t)pin, mode);
+}
 void digitalWrite(pin_t pin, uint8_t val)
 {
 #ifdef DEBUG
@@ -125,6 +129,10 @@ void digitalWrite(pin_t pin, uint8_t val)
 #endif
     ExtendedIO.digitalWrite(pin, val);
 }
+void digitalWrite(int pin, uint8_t val)
+{
+    digitalWrite((pin_t)pin, val);
+}
 int digitalRead(pin_t pin)
 {
 #ifdef DEBUG
@@ -133,6 +141,10 @@ int digitalRead(pin_t pin)
     Serial.print(");\r\n");
 #endif
     return ExtendedIO.digitalRead(pin);
+}
+int digitalRead(int pin)
+{
+    return digitalRead((pin_t)pin);
 }
 void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val)
 {
@@ -148,5 +160,9 @@ void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val)
         digitalWrite(clockPin, HIGH);
         digitalWrite(clockPin, LOW);
     }
+}
+void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val)
+{
+    shiftOut((pin_t)dataPin, (pin_t)clockPin, bitOrder, val);
 }
 }

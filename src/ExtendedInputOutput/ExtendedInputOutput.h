@@ -36,9 +36,13 @@ extern ExtendedInputOutput ExtendedIO;
 namespace ExtIO
 {
 extern void pinMode(pin_t pin, uint8_t mode);
+extern void pinMode(int pin, uint8_t mode);
 extern void digitalWrite(pin_t pin, uint8_t val);
+extern void digitalWrite(int pin, uint8_t val);
 extern int digitalRead(pin_t pin);
+extern int digitalRead(int pin);
 extern void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val);
+extern void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val);
 }
 
 #include "ExtendedInputOutput/ShiftRegisterOut.h"
