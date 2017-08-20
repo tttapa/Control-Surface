@@ -18,22 +18,7 @@ ShiftRegisterOut::~ShiftRegisterOut()
 
 void ShiftRegisterOut::digitalWrite(pin_t pin, uint8_t val)
 {
-#ifdef DEBUG
-    Serial.print("digitalWrite(");
-    Serial.print(pin);
-    Serial.print(", ");
-    Serial.print(val);
-    Serial.print(");\r\n");
-#endif
-
     int8_t bufferIndex = pinToBufferIndex(pin);
-#ifdef DEBUG_F
-    Serial.print("bufferIndex: ");
-    Serial.println(bufferIndex);
-    Serial.print("pinToBitMask: ");
-    Serial.println(pinToBitMask(pin));
-#endif
-
     if (bufferIndex == INVALID_PIN)
         return;
     if (val)
@@ -45,20 +30,7 @@ void ShiftRegisterOut::digitalWrite(pin_t pin, uint8_t val)
 
 int ShiftRegisterOut::digitalRead(pin_t pin)
 {
-#ifdef DEBUG
-    Serial.print("Shift Registar Out:\tdigitalRead(");
-    Serial.print(pin);
-    Serial.print(");\r\n");
-#endif
-
     int8_t bufferIndex = pinToBufferIndex(pin);
-#ifdef DEBUG_F
-    Serial.print("bufferIndex: ");
-    Serial.println(bufferIndex);
-    Serial.print("pinToBitMask: ");
-    Serial.println(pinToBitMask(pin), BIN);
-#endif
-
     if (bufferIndex == INVALID_PIN)
         return 0;
     return !!(stateBuffer[bufferIndex] & pinToBitMask(pin));
@@ -66,26 +38,14 @@ int ShiftRegisterOut::digitalRead(pin_t pin)
 
 void ShiftRegisterOut::begin()
 {
-#ifdef DEBUG
-    Serial.println("ShiftOut\tBegin");
-#endif
     ExtIO::pinMode(dataPin, OUTPUT);
     ExtIO::pinMode(clockPin, OUTPUT);
     ExtIO::pinMode(latchPin, OUTPUT);
     reset();
-#ifdef DEBUG_F
-    Serial.print("length: ");
-    Serial.println(length);
-    Serial.print("bufferLength: ");
-    Serial.println(bufferLength);
-#endif
 }
 
 void ShiftRegisterOut::refresh()
 {
-#ifdef DEBUG
-    Serial.println("ShiftOut\tRefresh");
-#endif
     ExtIO::digitalWrite(latchPin, LOW);
     if (bitOrder == LSBFIRST)
         for (uint8_t i = 0; i < bufferLength; i++)
@@ -98,9 +58,6 @@ void ShiftRegisterOut::refresh()
 
 void ShiftRegisterOut::reset()
 {
-#ifdef DEBUG
-    Serial.println("ShiftOut\tReset");
-#endif
     memset(stateBuffer, 0, bufferLength);
     refresh();
 }
