@@ -20,9 +20,9 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
   if (value != oldVal)                    // if the state changed since last time
   {
     if (value == LOW) // If the button is pressed
-      USBMidiController.send(NOTE_ON, channel, note, velocity);
+      USBMidiController.send(NOTE_ON, channel + channelOffset, note + addressOffset, velocity);
     else // If the button is not pressed
-      USBMidiController.send(NOTE_OFF, channel, note, velocity);
+      USBMidiController.send(NOTE_OFF, channel + channelOffset, note + addressOffset, velocity);
     oldVal = value;
   }
 }
