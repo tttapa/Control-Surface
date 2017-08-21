@@ -9,7 +9,7 @@ class DigitalLatch : public MIDI_Control_Element
 {
 public:
   DigitalLatch(uint8_t pin, uint8_t note, uint8_t channel, uint8_t velocity, unsigned long latchTime); // Constructor
-  ~DigitalLatch();                                                                                     // Deconstructor
+  ~DigitalLatch();                                                                                     // Destructor
   void refresh();                                                                                      // Check if the button state changed, if so, send a MIDI Note On, after a non-blocking delay of "latchTime", send a Note Off
 
 private:

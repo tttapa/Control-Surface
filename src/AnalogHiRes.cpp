@@ -7,7 +7,7 @@ AnalogHiRes::AnalogHiRes(uint8_t analogPin, uint8_t channel) // Constructor
   this->channel = channel;
 }
 
-AnalogHiRes::~AnalogHiRes() // Deconstructor
+AnalogHiRes::~AnalogHiRes() // Destructor
 {
   free(avValues); // free the sample buffer malloc'ed in Analog::average
 }

@@ -9,10 +9,9 @@ RotaryEncoder::RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumbe
   this->mode = mode;
 }
 
-RotaryEncoder::~RotaryEncoder() // Deconstructor
+RotaryEncoder::~RotaryEncoder() // Destructor
 {
-  if (bankEnabled)           // if bank mode was used
-    pinMode(bankPin, INPUT); // make make the bank switch pin a normal input again, without the internal pullup resistor
+  ;
 }
 
 void RotaryEncoder::refresh() // Check if the encoder position has changed since last time, if so, send the relative movement over MIDI
@@ -27,35 +26,13 @@ void RotaryEncoder::refresh() // Check if the encoder position has changed since
       difference = -15;
 
     uint8_t msgVal = mapRelativeCC(difference * speedMultiply, mode);
-    if (bankEnabled && !digitalRead(bankPin))                        // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
-      USBMidiController.send(CC, altChannel, altController, msgVal); // send a Control Change MIDI event with the 'alternative' channel and controller number
-    else                                                             // if the bank mode is disabled, or the bank switch is in the normal position
-      USBMidiController.send(CC, channel, controllerNumber, msgVal); // send a Control Change MIDI event with the normal, original channel and controller number
+    USBMidiController.send(CC, channel + channelOffset, controllerNumber + addressOffset, msgVal); // send a Control Change MIDI event
 
     oldVal += difference * pulsesPerStep; // If difference was in [-15, 15], difference * pulsesPerStep == value,
     // otherwise difference * pulsesPerStep == the value on the computer (after receiving the MIDI event above)
 
     value = enc.read();
     difference = (value - oldVal) / pulsesPerStep;
-  }
-}
-
-void RotaryEncoder::bank(uint8_t bankPin, uint8_t altController, uint8_t altChannel) // Enable the bank mode. When bank switch is turned on, send alternative MIDI channel and controller numbers
-{                                                                                    // bankPin = digital pin with toggle switch connected
-  bankEnabled = true;
-
-  this->bankPin = bankPin;
-  pinMode(bankPin, INPUT_PULLUP);
-  this->altController = altController;
-  this->altChannel = altChannel;
-}
-
-void RotaryEncoder::detachBank() // Disable the bank mode
-{
-  if (bankEnabled) // only defined if bank mode is enabled
-  {
-    bankEnabled = false;
-    pinMode(bankPin, INPUT); // make it a normal input again, without the internal pullup resistor.
   }
 }
 

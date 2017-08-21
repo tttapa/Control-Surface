@@ -4,6 +4,7 @@
 #include "USBMidi.h"
 #include "Arduino.h"
 #include "Encoder.h"
+#include "MIDI_Control_Element.h"
 
 enum relativeCCmode
 {
@@ -27,18 +28,15 @@ enum relativeCCmode
 const uint8_t NORMAL_ENCODER = 4; // A normal rotary encoder sends four pulses per physical 'click'
 const uint8_t JOG = 1;            // For jog wheels, you want the highest possible resolution
 
-class RotaryEncoder
+class RotaryEncoder : public MIDI_Control_Element
 {
 public:
   RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply, uint8_t pulsesPerStep, relativeCCmode mode); // Constructor
-  ~RotaryEncoder();                                                                                                                                    // Deconstructor
-  void refresh();                                                                                                                                      // Check if the encoder position has changed since last time, if so, send the relative movement over MIDI
-  void bank(uint8_t bankPin, uint8_t altController, uint8_t altChannel);                                                                               // Enable the bank mode. When bank switch is turned on, send alternative MIDI channel and controller numbers
-  void detachBank();                                                                                                                                   // Disable the bank mode
+  ~RotaryEncoder();                                                                                                                                    // Destructor
+  void refresh();        
 
 private:
-  uint8_t controllerNumber, channel, altController, altChannel, pulsesPerStep, bankPin;
-  bool bankEnabled = false;
+  uint8_t controllerNumber, channel, pulsesPerStep;
   relativeCCmode mode;
   int speedMultiply;
   long oldVal = 0;

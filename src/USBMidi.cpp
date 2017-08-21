@@ -12,7 +12,7 @@ const char *MIDI_STATUS_NAMES[] = {
 
 USBMidi::USBMidi() {} // Constructor
 
-USBMidi::~USBMidi() // Deconstructor
+USBMidi::~USBMidi() // Destructor
 {
   if (debug)
     Serial.end();

@@ -8,7 +8,7 @@ class Bank
 {
 public:
   Bank();  // Constructor
-  ~Bank(); // Deconstructor
+  ~Bank(); // Destructor
   enum bankType
   {
     CHANGE_CHANNEL,

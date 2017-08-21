@@ -17,7 +17,7 @@ class ControlChange
 {
 public:
   ControlChange(uint8_t controllerNumber, uint8_t channel);              // Constructor
-  ~ControlChange();                                                      // Deconstructor
+  ~ControlChange();                                                      // Destructor
   void average(size_t len);                                              // length of array of samples
   void refresh(uint8_t value);                                           // Update the controller with a new value between 0 and 127, update the average, check if the MIDI value changed since last time, if so, send a Control Change message over MIDI
   void refresh(float input);                                             // Overload of the refresh() method that takes a float between 0.0 and 1.0 instead of an int between 0 and 127

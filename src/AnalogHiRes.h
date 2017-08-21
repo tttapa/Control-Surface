@@ -11,7 +11,7 @@ class AnalogHiRes : public MIDI_Control_Element
 {
 public:
   AnalogHiRes(uint8_t analogPin, uint8_t channel); // Constructor
-  ~AnalogHiRes();                                  // Deconstructor
+  ~AnalogHiRes();                                  // Destructor
   void average(size_t length);                     // Use the average of multiple samples of analog readings
   void refresh();                                  // Read the analog input value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Pitch Bend message over MIDI
   void map(int (*fn)(int));                        // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()

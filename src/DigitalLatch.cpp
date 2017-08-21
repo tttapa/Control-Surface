@@ -10,7 +10,7 @@ DigitalLatch::DigitalLatch(uint8_t pin, uint8_t note, uint8_t channel, uint8_t v
   this->latchTime = latchTime;
 }
 
-DigitalLatch::~DigitalLatch() // Deconstructor
+DigitalLatch::~DigitalLatch() // Destructor
 {
   pinMode(pin, INPUT); // make it a normal input again, without the internal pullup resistor.
 }

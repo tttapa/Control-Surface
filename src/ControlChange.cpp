@@ -6,7 +6,7 @@ ControlChange::ControlChange(uint8_t controllerNumber, uint8_t channel) // Const
   this->channel = channel;
 }
 
-ControlChange::~ControlChange() // Deconstructor
+ControlChange::~ControlChange() // Destructor
 {
   free(avValues);            // free the sample buffer malloc'ed in Analog::average
   if (bankEnabled)           // if bank mode was used
