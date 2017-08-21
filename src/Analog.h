@@ -9,7 +9,7 @@ class Analog : public MIDI_Control_Element
 {
 public:
   Analog(uint8_t analogPin, uint8_t controllerNumber, uint8_t channel); // Constructor
-  ~Analog();                                                            // Deconstructor
+  ~Analog();                                                            // Destructor
   void average(size_t length);                                          // Use the average of multiple samples of analog readings
   void refresh();                                                       // Read the analog input value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
   void map(int (*fn)(int));                                             // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()

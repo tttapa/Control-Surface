@@ -48,7 +48,7 @@ void Bank::setBankSetting(uint8_t bankSetting)
     bank_element *element = firstElement;
     while (element != nullptr)
     {
-        if (element->type == BANK_CHANNEL)
+        if (element->type == CHANGE_CHANNEL)
             element->element->setChannelOffset(bankSetting);
         else
             element->element->setAddressOffset(bankSetting);
