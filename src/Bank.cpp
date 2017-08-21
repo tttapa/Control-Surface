@@ -5,29 +5,29 @@ Bank::Bank() {}
 
 Bank::~Bank()
 {
-    element_node *element = firstElement;
+    bank_element *element = firstElement;
     while (element != nullptr)
     {
-        element_node *next = element->next;
+        bank_element *next = element->next;
         delete element;
         element = next;
     }
 }
 
-void Bank::add(MIDI_Control_Element *element)
+void Bank::add(MIDI_Control_Element *element, bankType type)
 {
+    bank_element *newElement = new bank_element;
+    newElement->element = element;
+    newElement->next = nullptr;
+    newElement->type = type;
     if (firstElement == nullptr)
     {
-        firstElement = new element_node;
-        firstElement->element = element;
-        firstElement->next = nullptr;
+        firstElement = newElement;
         lastElement = firstElement;
     }
     else
     {
-        element_node *newElement = new element_node;
-        newElement->element = element;
-        newElement->next = nullptr;
+
         lastElement->next = newElement;
         lastElement = newElement;
     }
@@ -35,7 +35,7 @@ void Bank::add(MIDI_Control_Element *element)
 
 void Bank::refresh()
 {
-    element_node *element = firstElement;
+    bank_element *element = firstElement;
     while (element != nullptr)
     {
         element->element->refresh();
@@ -43,19 +43,22 @@ void Bank::refresh()
     }
 }
 
-void Bank::setChannel(uint8_t channel)
+void Bank::setBankSetting(uint8_t bankSetting)
 {
-    element_node *element = firstElement;
+    bank_element *element = firstElement;
     while (element != nullptr)
     {
-        element->element->setChannel(channel);
+        if (element->type == BANK_CHANNEL)
+            element->element->setChannelOffset(bankSetting);
+        else
+            element->element->setAddressOffset(bankSetting);
         element = element->next;
     }
 }
 
 void Bank::average(size_t length)
 {
-    element_node *element = firstElement;
+    bank_element *element = firstElement;
     while (element != nullptr)
     {
         element->element->average(length);

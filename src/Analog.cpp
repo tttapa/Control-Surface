@@ -8,7 +8,7 @@ Analog::Analog(uint8_t analogPin, uint8_t controllerNumber, uint8_t channel) // 
   this->channel = channel;
 }
 
-Analog::~Analog() // Deconstructor
+Analog::~Analog() // Destructor
 {
   free(avValues);            // free the sample buffer malloc'ed in Analog::average
   if (bankEnabled)           // if bank mode was used
@@ -36,9 +36,9 @@ void Analog::refresh() // read the analog value, update the average, map it to a
   if (value != oldVal) // if the value changed since last time
   {
     if (bankEnabled && !digitalRead(bankPin))                       // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
-      USBMidiController.send(CC, altChannel, altController, value); // send a Control Change MIDI event with the 'alternative' channel and controller number
+      USBMidiController.send(CC, altChannel + channelOffset, altController + addressOffset, value); // send a Control Change MIDI event with the 'alternative' channel and controller number
     else                                                            // if the bank mode is disabled, or the bank switch is in the normal position
-      USBMidiController.send(CC, channel, controllerNumber, value); // send a Control Change MIDI event with the normal, original channel and controller number
+      USBMidiController.send(CC, channel + channelOffset, controllerNumber + addressOffset, value); // send a Control Change MIDI event with the normal, original channel and controller number
     oldVal = value;
   }
 }
@@ -77,9 +77,4 @@ unsigned int Analog::runningAverage(unsigned int value) // http://playground.ard
   if (avCount < avLen)
     avCount++;
   return avSum / avCount;
-}
-
-void Analog::setChannel(uint8_t channel) // setter for the MIDI channel
-{
-  this->channel = channel;
 }

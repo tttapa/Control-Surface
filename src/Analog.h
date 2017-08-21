@@ -16,8 +16,6 @@ public:
   void bank(uint8_t bankPin, uint8_t altController, uint8_t altChannel); // Enable the bank mode. When bank switch is turned on, send alternative MIDI channel and controller numbers
   void detachBank();                                                     // Disable the bank mode
 
-  void setChannel(uint8_t channel); // setter for the MIDI channel
-
 private:
   uint8_t analogPin, controllerNumber, channel, bankPin, altController, altChannel, value, oldVal = -1;
   bool bankEnabled = false;

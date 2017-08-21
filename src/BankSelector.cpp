@@ -16,13 +16,13 @@ void BankSelector::init()
         pinMode(ledPin, OUTPUT);
         break;
     case MULTIPLE_BUTTONS:
-        for (uint8_t i = 0; i < nb_banks; i++)
+        for (uint8_t i = 0; i < nb_settings; i++)
         {
             pinMode(switchPins[i], INPUT_PULLUP);
         }
         break;
     case MULTIPLE_BUTTONS_LEDS:
-        for (uint8_t i = 0; i < nb_banks; i++)
+        for (uint8_t i = 0; i < nb_settings; i++)
         {
             pinMode(switchPins[i], INPUT_PULLUP);
             pinMode(ledPins[i], OUTPUT);
@@ -36,7 +36,7 @@ void BankSelector::init()
     case INCREMENT_DECREMENT_LEDS:
         pinMode(switchPins[0], INPUT_PULLUP);
         pinMode(switchPins[1], INPUT_PULLUP);
-        for (uint8_t i = 0; i < nb_banks; i++)
+        for (uint8_t i = 0; i < nb_settings; i++)
         {
             pinMode(ledPins[i], OUTPUT);
         }
@@ -47,7 +47,7 @@ void BankSelector::init()
         break;
     case INCREMENT_LEDS:
         pinMode(switchPins[0], INPUT_PULLUP);
-        for (uint8_t i = 0; i < nb_banks; i++)
+        for (uint8_t i = 0; i < nb_settings; i++)
         {
             pinMode(ledPins[i], OUTPUT);
         }
@@ -58,13 +58,13 @@ void BankSelector::init()
 
 void BankSelector::refresh()
 {
-    uint8_t newChannel = channel;
+    uint8_t newBankSetting = bankSetting;
     switch (mode)
     {
     case SINGLE_SWITCH:
     case SINGLE_SWITCH_LED:
     {
-        newChannel = (uint8_t)(!digitalRead(switchPin)) + 1;
+        newBankSetting = (uint8_t)(!digitalRead(switchPin));
     }
     break;
 
@@ -72,18 +72,18 @@ void BankSelector::refresh()
     case SINGLE_BUTTON_LED:
     {
         if (debounceButton(dbButton1))
-            newChannel = !(channel - 1) + 1; // Toggle channel between 1 and 2
+            newBankSetting = !bankSetting; // Toggle bankSetting between 0 and 1
     }
     break;
 
     case MULTIPLE_BUTTONS:
     case MULTIPLE_BUTTONS_LEDS:
     {
-        for (uint8_t i = 0; i < nb_banks; i++)
+        for (uint8_t i = 0; i < nb_settings; i++)
         {
             if (digitalRead(switchPins[i]) == LOW)
             {
-                newChannel = i + 1;
+                newBankSetting = i;
                 break;
             }
         }
@@ -94,9 +94,9 @@ void BankSelector::refresh()
     case INCREMENT_DECREMENT:
     {
         if (debounceButton(dbButton1))
-            newChannel = channel == nb_banks ? 1 : channel + 1; // Increment channel number or wrap around
+            newBankSetting = bankSetting < nb_settings - 1 ? bankSetting + 1 : 0; // Increment bankSetting number or wrap around
         if (debounceButton(dbButton2))
-            newChannel = channel == 1 ? nb_banks : channel - 1; // Decrement channel number or wrap around
+            newBankSetting = bankSetting == 0 ? nb_settings - 1 : bankSetting - 1; // Decrement bankSetting number or wrap around
     }
     break;
 
@@ -104,29 +104,30 @@ void BankSelector::refresh()
     case INCREMENT:
     {
         if (debounceButton(dbButton1))
-            newChannel = channel == nb_banks ? 1 : channel + 1; // Increment channel number or wrap around
+            newBankSetting = bankSetting < nb_settings - 1 ? bankSetting + 1 : 0; // Increment bankSetting number or wrap around
     }
     break;
     }
-    if (newChannel != channel)
+
+    if (newBankSetting != bankSetting)
     {
-        if (channelChangeEvent != nullptr)
-            channelChangeEvent(newChannel);
-        refreshLEDs(newChannel);
-        channel = newChannel;
-        bank.setChannel(channel);
+        if (bankSettingChangeEvent != nullptr)
+            bankSettingChangeEvent(newBankSetting);
+        refreshLEDs(newBankSetting);
+        bankSetting = newBankSetting;
+        bank.setBankSetting(bankSetting);
     }
     bank.refresh();
 }
 
-uint8_t BankSelector::getChannel()
+uint8_t BankSelector::getBankSetting()
 {
-    return channel;
+    return bankSetting;
 }
-void BankSelector::setChannel(uint8_t newChannel)
+void BankSelector::setBankSetting(uint8_t newBankSetting)
 {
-    refreshLEDs(newChannel);
-    this->channel = newChannel;
+    refreshLEDs(newBankSetting);
+    this->bankSetting = newBankSetting;
 }
 
 const char *BankSelector::getMode()
@@ -154,19 +155,19 @@ const char *BankSelector::getMode()
     return "";
 }
 
-void BankSelector::setChannelChangeEvent(void (*fn)(uint8_t))
+void BankSelector::setBankSettingChangeEvent(void (*fn)(uint8_t))
 {
-    channelChangeEvent = fn;
+    bankSettingChangeEvent = fn;
 }
 
-void BankSelector::refreshLEDs(uint8_t newChannel)
+void BankSelector::refreshLEDs(uint8_t newBankSetting)
 {
     switch (mode)
     {
     case SINGLE_SWITCH_LED:
     case SINGLE_BUTTON_LED:
     {
-        digitalWrite(ledPin, newChannel - 1);
+        digitalWrite(ledPin, newBankSetting);
     }
     break;
 
@@ -174,8 +175,8 @@ void BankSelector::refreshLEDs(uint8_t newChannel)
     case INCREMENT_DECREMENT_LEDS:
     case INCREMENT_LEDS:
     {
-        digitalWrite(ledPins[channel - 1], LOW);
-        digitalWrite(ledPins[newChannel - 1], HIGH);
+        digitalWrite(ledPins[bankSetting], LOW);
+        digitalWrite(ledPins[newBankSetting], HIGH);
     }
     break;
     }

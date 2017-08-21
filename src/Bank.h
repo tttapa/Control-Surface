@@ -4,25 +4,30 @@
 #include "Arduino.h"
 #include "MIDI_Control_Element.h"
 
-struct element_node
-{
-  MIDI_Control_Element *element;
-  element_node *next;
-};
-
 class Bank
 {
 public:
   Bank();  // Constructor
   ~Bank(); // Deconstructor
-  void add(MIDI_Control_Element *element);
+  enum bankType
+  {
+    BANK_CHANNEL,
+    BANK_ADDRESS
+  };
+  void add(MIDI_Control_Element *element, bankType type = BANK_CHANNEL);
   void refresh();
-  void setChannel(uint8_t channel);
+  void setBankSetting(uint8_t bankSetting);
   void average(size_t length);
 
 private:
-  element_node *firstElement = nullptr;
-  element_node *lastElement = nullptr;
+  struct bank_element
+  {
+    MIDI_Control_Element *element;
+    bank_element *next;
+    bankType type;
+  };
+  bank_element *firstElement = nullptr;
+  bank_element *lastElement = nullptr;
 };
 
 #endif // BANK_h_
