@@ -3,17 +3,13 @@ This is an example of the "Analog" class of the MIDI_controller library.
 Connect a potentiometer to analog pin A0. This will be the MIDI channel volume of channel 1.
 Map it in your DAW or DJ software.
 
-If you are using a Teensy, make sure you have the USB type set to MIDI.
-If you are using an Arduino Uno or Mega, use the HIDUINO firmware for the ATmega16U2.
-
-
 Written by Pieter P, 22-08-2017
 https://github.com/tttapa/MIDI_controller
 */
 
 #include <MIDI_controller.h> // Include the library
 
-const uint8_t Channel_Volume = 0x7; // Controller number 7 is defined as Channel Volume in the MIDI implementation
+const uint8_t Channel_Volume = 0x7; // Controller number 7 is defined as Channel Volume in the MIDI specification
 const uint8_t MIDI_Channel = 1;     // Send Control Change messages on MIDI channel 1
 
 const size_t analogAverage = 8; // Use the average of 8 samples to get smooth transitions and prevent noise
@@ -32,5 +28,6 @@ void setup()
 
 void loop()
 {
-  potentiometer.refresh(); // refresh the potentiometer (check whether the input has changed since last time, if so, send the new value over MIDI)
+  // Refresh the potentiometer (check whether the input has changed since last time, if so, send the new value over MIDI)
+  potentiometer.refresh();
 }
