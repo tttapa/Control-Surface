@@ -9,9 +9,7 @@ AnalogHiRes::AnalogHiRes(uint8_t analogPin, uint8_t channel) // Constructor
 
 AnalogHiRes::~AnalogHiRes() // Deconstructor
 {
-  free(avValues);            // free the sample buffer malloc'ed in Analog::average
-  if (bankEnabled)           // if bank mode was used
-    pinMode(bankPin, INPUT); // make make the bank switch pin a normal input again, without the internal pullup resistor.
+  free(avValues); // free the sample buffer malloc'ed in Analog::average
 }
 
 void AnalogHiRes::average(size_t length) // use the average of multiple samples of analog readings
@@ -25,7 +23,7 @@ void AnalogHiRes::average(size_t length) // use the average of multiple samples 
 
 void AnalogHiRes::refresh() // read the analog value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
 {
-#if defined(CORE_TEENSY) || defined(__arm__) // Teensy boards and Arduino Due support higher resolutions than AVR boards
+#if defined(PITCH_BEND_RESOLUTION_14_BITS) && (defined(CORE_TEENSY) || defined(__arm__)) // Teensy boards and Arduino Due support higher resolutions than AVR boards
   analogReadResolution(14);
   analogRead(analogPin);
   uint16_t input = analogRead(analogPin);
@@ -44,35 +42,14 @@ void AnalogHiRes::refresh() // read the analog value, update the average, map it
 
   if (value != oldVal) // if the value changed since last time
   {
-    if (bankEnabled && !digitalRead(bankPin))                            // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
-      USBMidiController.send(PITCH_BEND, altChannel, value, value >> 7); // send a Pitch Bend MIDI event on the 'alternative' channel
-    else                                                                 // if the bank mode is disabled, or the bank switch is in the normal position
-      USBMidiController.send(PITCH_BEND, channel, value, value >> 7);    // send a Pitch Bend MIDI event on the original channel
+    USBMidiController.send(PITCH_BEND, channel + channelOffset, value, value >> 7); // send a Pitch Bend MIDI event
     oldVal = value;
   }
 }
 
-void AnalogHiRes::map(uint16_t (*fn)(uint16_t)) // change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
+void AnalogHiRes::map(int (*fn)(int)) // change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
 {
   analogMap = fn;
-}
-
-void AnalogHiRes::bank(uint8_t bankPin, uint8_t altChannel) // digital pin, new channel
-{                                                           // bankPin = digital pin with toggle switch connected
-  bankEnabled = true;
-
-  this->bankPin = bankPin;
-  pinMode(bankPin, INPUT_PULLUP);
-  this->altChannel = altChannel;
-}
-
-void AnalogHiRes::detachBank() // Disable the bank mode
-{
-  if (bankEnabled) // only defined if bank mode is enabled
-  {
-    bankEnabled = false;
-    pinMode(bankPin, INPUT); // make it a normal input again, without the internal pullup resistor.
-  }
 }
 
 unsigned int AnalogHiRes::runningAverage(unsigned int value) // http://playground.arduino.cc/Main/RunningAverage

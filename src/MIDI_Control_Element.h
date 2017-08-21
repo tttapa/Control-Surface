@@ -3,8 +3,6 @@
 
 class MIDI_Control_Element
 {
-  friend class Bank;
-
 public:
   MIDI_Control_Element() {}              // Constructor
   virtual void refresh() {}              // Check if the state or value of the control has changed since last refresh, if so, send MIDI event
