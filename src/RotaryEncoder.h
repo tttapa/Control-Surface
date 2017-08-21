@@ -31,7 +31,7 @@ const uint8_t JOG = 1;            // For jog wheels, you want the highest possib
 class RotaryEncoder : public MIDI_Control_Element
 {
 public:
-  RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply, uint8_t pulsesPerStep, relativeCCmode mode); // Constructor
+  RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply = 1, uint8_t pulsesPerStep = NORMAL_ENCODER, relativeCCmode mode = TWOS_COMPLEMENT); // Constructor
   ~RotaryEncoder();                                                                                                                                    // Destructor
   void refresh();        
 
