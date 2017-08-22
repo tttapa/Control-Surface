@@ -2,7 +2,6 @@
 #define ANALOG_h_
 
 #include "Arduino.h"
-#include "USBMidi.h"
 #include "MIDI_Control_Element.h"
 
 class Analog : public MIDI_Control_Element

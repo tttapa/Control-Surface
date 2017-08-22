@@ -2,7 +2,7 @@
 #define ControlChange_h_
 
 #include "Arduino.h"
-#include "USBMidi.h"
+
 
 /* Class for sending control change MIDI messages.
    Features:

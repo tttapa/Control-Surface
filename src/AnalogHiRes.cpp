@@ -1,5 +1,6 @@
 #include "Arduino.h"
 #include "AnalogHiRes.h"
+#include "MIDIOutput.h"
 
 AnalogHiRes::AnalogHiRes(uint8_t analogPin, uint8_t channel) // Constructor
 {
@@ -42,7 +43,7 @@ void AnalogHiRes::refresh() // read the analog value, update the average, map it
 
   if (value != oldVal) // if the value changed since last time
   {
-    USBMidiController.send(PITCH_BEND, channel + channelOffset, value, value >> 7); // send a Pitch Bend MIDI event
+    sendMIDI(PITCH_BEND, channel + channelOffset, value, value >> 7); // send a Pitch Bend MIDI event
     oldVal = value;
   }
 }

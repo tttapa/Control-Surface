@@ -1,4 +1,5 @@
 #include "Digital.h"
+#include "MIDIOutput.h"
 
 Digital::Digital(uint8_t pin, uint8_t note, uint8_t channel, uint8_t velocity) // Constructor
 {
@@ -20,9 +21,9 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
   if (value != oldVal)                    // if the state changed since last time
   {
     if (value == LOW) // If the button is pressed
-      USBMidiController.send(NOTE_ON, channel + channelOffset, note + addressOffset, velocity);
+      sendMIDI(NOTE_ON, channel + channelOffset, note + addressOffset, velocity);
     else // If the button is not pressed
-      USBMidiController.send(NOTE_OFF, channel + channelOffset, note + addressOffset, velocity);
+      sendMIDI(NOTE_OFF, channel + channelOffset, note + addressOffset, velocity);
     oldVal = value;
   }
 }

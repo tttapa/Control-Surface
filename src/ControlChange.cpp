@@ -1,4 +1,5 @@
 #include "ControlChange.h"
+#include "MIDIOutput.h"
 
 ControlChange::ControlChange(uint8_t controllerNumber, uint8_t channel) // Constructor
 {
@@ -29,9 +30,9 @@ void ControlChange::refresh(uint8_t value) // Update the controller with a new v
   if (value != oldVal)             // if the value changed since last time
   {
     if (bankEnabled && !digitalRead(bankPin))                       // if the bank mode is enabled, and the bank switch is in the 'alternative' position (i.e. if the switch is on (LOW))
-      USBMidiController.send(CC, altChannel, altController, value); // send a Control Change MIDI event with the 'alternative' channel and controller number
+      sendMIDI(CC, altChannel, altController, value); // send a Control Change MIDI event with the 'alternative' channel and controller number
     else                                                            // if the bank mode is disabled, or the bank switch is in the normal position
-      USBMidiController.send(CC, channel, controllerNumber, value); // send a Control Change MIDI event with the normal, original channel and controller number
+      sendMIDI(CC, channel, controllerNumber, value); // send a Control Change MIDI event with the normal, original channel and controller number
     oldVal = value;
   }
 }

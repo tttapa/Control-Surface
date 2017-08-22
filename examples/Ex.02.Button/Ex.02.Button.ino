@@ -1,7 +1,7 @@
 /*
 This is an example of the "Digital" class of the MIDI_controller library.
 Connect a push buttons to digital pin 2. Connect the other pin of the button to the ground, 
-a pull-up resistor is not necessary, since the internal one will be used. 
+a pull-up resistor is not necessary, because the internal one will be used. 
 This button will play MIDI note C4 when pressed.
 Map it in your DAW or DJ software.
 
@@ -11,6 +11,8 @@ https://github.com/tttapa/MIDI_controller
 
 #include <MIDI_controller.h> // Include the library
 
+USBMIDIOutput midiout; // Instantiate a USB MIDI output
+
 const uint8_t velocity = 0b1111111; // Maximum velocity (0b1111111 = 0x7F = 127)
 const uint8_t C4 = 60;              // Note number 60 is defined as middle C in the MIDI specification
 
@@ -19,9 +21,7 @@ Digital button(2, C4, 1, velocity);
 
 void setup()
 {
-  USBMidiController.blink(LED_BUILTIN); // Blink the built-in LED (pin 13 on most boards) on every MIDI message
-  USBMidiController.setDelay(5);        // Wait 5 ms after each message for stability
-  USBMidiController.begin();            // Initialise the USB MIDI connection
+  startMIDI(); // Initialise the MIDI output connection
 }
 
 void loop()

@@ -80,7 +80,7 @@ void setup(){
 //_______________________________________________________________________________________________________________________________
 
 void loop(){
-  USBMidiController.send(PROGRAM_CHANGE,2,33); // channel 2 is now instrument 33 (bass)
+  sendMIDI(PROGRAM_CHANGE,2,33); // channel 2 is now instrument 33 (bass)
   for(int i = 0; i<32; i++){
     chorus1.refresh();
     chorus2.refresh();
@@ -91,20 +91,20 @@ void loop(){
     volume10.refresh();
     for(int j = 0; j<8; j++){
       if(off[j][i] != 0){
-        USBMidiController.send(NOTE_OFF, chan[j], off[j][i], 0);
+        sendMIDI(NOTE_OFF, chan[j], off[j][i], 0);
       }
       while(digitalRead(11) == 1){ // wait for the switch to be on
         if(!allOffSent){
-          USBMidiController.send(CC, 1, 123, 0);  // all notes off channel 1
-          USBMidiController.send(CC, 2, 123, 0);  // all notes off channel 2
-          USBMidiController.send(CC, 10, 123, 0); // all notes off channel 10
+          sendMIDI(CC, 1, 123, 0);  // all notes off channel 1
+          sendMIDI(CC, 2, 123, 0);  // all notes off channel 2
+          sendMIDI(CC, 10, 123, 0); // all notes off channel 10
           allOffSent = true;
         }
       }
       allOffSent = false;
         
       if(on[j][i] != 0){
-        USBMidiController.send(NOTE_ON, chan[j], on[j][i], vel[j]);
+        sendMIDI(NOTE_ON, chan[j], on[j][i], vel[j]);
       }
     }
     delay(115);

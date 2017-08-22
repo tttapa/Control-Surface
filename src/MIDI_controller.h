@@ -7,9 +7,14 @@
 #include "Digital.h"
 #include "DigitalLatch.h"
 #include "RotaryEncoder.h"
-#include "USBMidi.h"
+
 #include "Bank.h"
 #include "BankSelector.h"
+
+#include "MIDIOutput.h"
+#include <USBMIDIOutput.h>
+#include <SerialMIDIOutput.h>
+#include <DebugMIDIOutput.h>
 
 #include "ExtendedInputOutput/ShiftRegisterOut.h"
 #include "ExtendedInputOutput/AnalogMultiplex.h"
