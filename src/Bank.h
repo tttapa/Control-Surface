@@ -15,6 +15,7 @@ public:
     CHANGE_ADDRESS
   };
   void add(MIDI_Control_Element *element, bankType type = CHANGE_CHANNEL);
+  void add(MIDI_Control_Element &element, bankType type = CHANGE_CHANNEL);
   void refresh();
   void setBankSetting(uint8_t bankSetting);
   void average(size_t length);

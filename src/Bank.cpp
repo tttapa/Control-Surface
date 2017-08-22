@@ -32,7 +32,10 @@ void Bank::add(MIDI_Control_Element *element, bankType type)
         lastElement = newElement;
     }
 }
-
+void Bank::add(MIDI_Control_Element &element, bankType type)
+{
+    add(&element, type);
+}
 void Bank::refresh()
 {
     bank_element *element = firstElement;
