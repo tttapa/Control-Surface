@@ -14,7 +14,14 @@ public:
   boolean invert = false;                                                // invert the button state (send Note On event when released, Note Off when pressed)
 
 private:
-  uint8_t pin, note, channel, velocity, oldVal = -1;
+  uint8_t pin, note, channel, velocity;
+  bool prevState = HIGH, buttonState = HIGH;
+  unsigned long prevBounceTime = 0;
+
+  const unsigned long debounceTime = 25;
+
+  const int8_t falling = LOW - HIGH;
+  const int8_t rising = HIGH - LOW;
 };
 
 #endif

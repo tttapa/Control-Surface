@@ -17,13 +17,27 @@ Digital::~Digital() // Destructor
 
 void Digital::refresh() // Check if the button state changed, and send a MIDI Note On or Off accordingly
 {
-  bool value = digitalRead(pin) ^ invert; // read the button state and invert it if "invert" is true
-  if (value != oldVal)                    // if the state changed since last time
+  bool state = digitalRead(pin) ^ invert; // read the button state and invert it if "invert" is true
+
+  if (millis() - prevBounceTime > debounceTime)
   {
-    if (value == LOW) // If the button is pressed
+    int8_t stateChange = state - buttonState;
+
+    if (stateChange == falling)
+    { // Button is pushed
+      buttonState = state;
       sendMIDI(NOTE_ON, channel + channelOffset, note + addressOffset, velocity);
-    else // If the button is not pressed
+    }
+
+    if (stateChange == rising)
+    { // Button is released
+      buttonState = state;
       sendMIDI(NOTE_OFF, channel + channelOffset, note + addressOffset, velocity);
-    oldVal = value;
+    }
+  }
+  if (state != prevState)
+  {
+    prevBounceTime = millis();
+    prevState = state;
   }
 }
