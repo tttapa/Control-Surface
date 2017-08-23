@@ -134,35 +134,34 @@ MIDI_Input MIDI_In;
 
 class MIDI_Input_Element {
   public:
-    template <size_t M, size_t N>
-    MIDI_Input_Element(uint8_t (&addresses)[M], uint8_t (&channels)[N])
-      : addresses(addresses), channels(channels), nb_addresses(M), nb_channels(N) {};
-
-    MIDI_Input_Element(uint8_t addresses[], uint8_t channels[], size_t nb_addresses, size_t nb_channels)
-      : addresses(addresses), channels(channels), nb_addresses(nb_addresses), nb_channels(nb_channels) {};
+    MIDI_Input_Element(uint8_t address, uint8_t channel, size_t nb_addresses, size_t nb_channels)
+      : address(address), channel(channel), nb_addresses(nb_addresses), nb_channels(nb_channels) {};
     virtual void init() {};
     virtual bool update(uint8_t header, uint8_t data1, uint8_t data2) {};
+    virtual void refresh() {};
 
     void setChannelOffset(uint8_t offset) // Set the channel offset
     {
-      channelOffset = offset;
+      channelOffset = offset % nb_channels;
+      refresh();
     }
     void setAddressOffset(uint8_t offset) // Set the address (note or controller number) offset
     {
-      addressOffset = offset;
+      addressOffset = offset % nb_addresses;
+      refresh();
     }
 
   protected:
     uint8_t channelOffset = 0;
     uint8_t addressOffset = 0;
-    uint8_t *channels, *addresses;
+    uint8_t channel, address;
     const size_t nb_channels, nb_addresses;
 };
 
 class MIDI_Input_LED : public MIDI_Input_Element {
   public:
-    template <size_t M, size_t N>
-    MIDI_Input_LED(pin_t pin, uint8_t (&addresses)[M], uint8_t (&channels)[N]) : MIDI_Input_Element(addresses, channels, M, N), pin(pin) {
+    MIDI_Input_LED(pin_t pin, uint8_t address, uint8_t channel, size_t nb_addresses = 1, size_t nb_channels = 1)
+      : MIDI_Input_Element(address, channel, nb_addresses, nb_channels), pin(pin) {
       states = (uint8_t*)malloc((nb_channels * nb_addresses + 7) / 8);
     }
     ~MIDI_Input_LED() {
@@ -172,44 +171,25 @@ class MIDI_Input_LED : public MIDI_Input_Element {
       pinMode(pin, OUTPUT);
     }
     bool update(uint8_t header, uint8_t data1, uint8_t data2) {
-      uint8_t channel = (header & 0b1111) + 1;
-      uint8_t address = data1;
-      uint8_t addressIndex;
-      uint8_t channelIndex;
-      bool found = false;
-      for (uint8_t i = 0; i < nb_channels; i++) {
-        if (channel == channels[i]) {
-          found = true;
-          channelIndex = i;
-          break;
-        }
-      }
-      if (!found) {
-        Serial.println("Channel not found");
-        return false;
-      }
-
-      found = false;
-      for (uint8_t i = 0; i < nb_addresses; i++) {
-        if (address == addresses[i]) {
-          found = true;
-          addressIndex = i;
-          break;
-        }
-      }
-      if (!found) {
+      uint8_t targetChannel = (header & 0b1111) + 1;
+      uint8_t targetAddress = data1;
+      if (targetAddress < this->address || targetAddress >= this->address + nb_addresses) {
         Serial.println("Address not found");
         return false;
       }
-
-
+      if (targetChannel < this->channel || targetChannel >= this->channel + nb_channels) {
+        Serial.println("Channel not found");
+        return false;
+      }
+      uint8_t addressIndex = targetAddress - this->address;
+      uint8_t channelIndex = targetChannel - this->channel;
       if (header == NOTE_OFF || (header == NOTE_ON && data2 == 0)) {
         states[(channelIndex + nb_channels * addressIndex) / 8] &= ~(1 << ((channelIndex + nb_channels * addressIndex) % 8));
       } else if (header == NOTE_ON) {
         states[(channelIndex + nb_channels * addressIndex) / 8] |= 1 << ((channelIndex + nb_channels * addressIndex) % 8);
       } else {
         Serial.println("Wrong message type");
-        return true; // not a Note On or Note Off event, but channel and address match
+        return false; // not a Note On or Note Off event, but channel and address match
       }
       refresh();
       return true;
@@ -219,16 +199,8 @@ class MIDI_Input_LED : public MIDI_Input_Element {
     }
 
     void print() {
-      Serial.print("Channels:\t");
-      for (uint8_t i = 0; i < nb_channels; i++) {
-        Serial.print(channels[i]); Serial.print(' ');
-      }
-      Serial.println();
-      Serial.print("Addresses:\t");
-      for (uint8_t i = 0; i < nb_addresses; i++) {
-        Serial.print(addresses[i]); Serial.print(' ');
-      }
-      Serial.println();
+      Serial.printf("Channels:\t%d - %d\r\n", channel, channel + nb_channels - 1);
+      Serial.printf("Addresses:\t%d - %d\r\n", address, address + nb_addresses - 1);
     }
   private:
     pin_t pin;
@@ -290,17 +262,10 @@ class MIDI_InputHandler {
 
 };
 
-uint8_t ledChannels[] = {1};
-uint8_t ledControllers[] = {  MUTE,
-                              MUTE + 1,
-                              MUTE + 2,
-                              MUTE + 3,
-                              MUTE + 4,
-                              MUTE + 5,
-                              MUTE + 6,
-                              MUTE + 7
-                           };
-MIDI_Input_LED ledinput(14, ledControllers, ledChannels);
+
+MIDI_Input_LED muteled(14, MUTE, 1, 8, 1);
+MIDI_Input_LED sololed(15, SOLO, 1, 8, 1);
+
 MIDI_InputHandler inputhandler;
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -318,9 +283,11 @@ void setup()
   usbMIDI.setHandleNoteOff(OnNoteOff);
   usbMIDI.setHandleNoteOn(OnNoteOn);
 
-  ledinput.print();
+  muteled.print();
+  sololed.print();
 
-  inputhandler.add(ledinput);
+  inputhandler.add(muteled);
+  inputhandler.add(sololed);
   inputhandler.init();
 
   for (uint8_t i = 0; i < nb_channelButtons; i++)
@@ -350,8 +317,10 @@ void loop()
 void settingChange(uint8_t newSetting) {
   Serial.print("New setting:\t");
   Serial.println(newSetting);
-  ledinput.setAddressOffset(newSetting);
-  ledinput.refresh();
+  muteled.setAddressOffset(newSetting);
+  muteled.refresh();
+  sololed.setAddressOffset(newSetting);
+  sololed.refresh();
 }
 
 void printMidi(uint8_t* midi) {
