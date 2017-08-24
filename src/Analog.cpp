@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "Analog.h"
-#include "MIDIOutput.h"
+#include "MIDI_Interface.h"
 
 Analog::Analog(uint8_t analogPin, uint8_t controllerNumber, uint8_t channel) // Constructor
 {

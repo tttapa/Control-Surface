@@ -1,5 +1,5 @@
 #include "DigitalLatch.h"
-#include "MIDIOutput.h"
+#include "MIDI_Interface.h"
 
 DigitalLatch::DigitalLatch(uint8_t pin, uint8_t note, uint8_t channel, uint8_t velocity, unsigned long latchTime) // Constructor
 {

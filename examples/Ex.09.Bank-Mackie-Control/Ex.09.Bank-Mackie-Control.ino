@@ -24,14 +24,14 @@ const uint8_t ledPin = LED_BUILTIN;
 
 const uint8_t REC_RDY = 0;
 const uint8_t SOLO = 8;
-const uint8_t MUTE = 16;
-const uint8_t SELECT = 24;
+const uint8_t MUTE = 0x10;
+const uint8_t SELECT = 0x18;
 
-const uint8_t PAN = 42;
-const uint8_t PLUGIN = 43;
-const uint8_t VPOT_SW = 32;
+const uint8_t PAN = 0x2A;
+const uint8_t PLUGIN = 0x2B;
+const uint8_t VPOT_SW = 0x20;
 
-const uint8_t VPOT = 16;
+const uint8_t VPOT = 0x10;
 
 
 Digital channelButtons[] = {
@@ -66,155 +66,15 @@ RotaryEncoder encoder(0, 1, VPOT, 1, 1, NORMAL_ENCODER, MACKIE_CONTROL_RELATIVE)
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-#include "usb_dev.h"
-#include "usb_midi.h"
-
-const size_t bufferSize = 64;
-
-size_t mod(size_t a, size_t b) {
-  return ((a % b) + b) % b;
-}
-
-class MIDI_Input {
-  public:
-    size_t available() {
-      return mod((writeIndex - readIndex), bufferSize);
-    }
-    void refresh() {
-      if (rx_packet == nullptr) {
-        if (!usb_configuration) return;
-        rx_packet = usb_rx(MIDI_RX_ENDPOINT);
-        if (rx_packet == nullptr) return;
-        if (rx_packet->len == 0) {
-          usb_free(rx_packet);
-          rx_packet = nullptr;
-          return;
-        }
-      }
-      size_t index = rx_packet->index;
-
-      uint32_t n = *(uint32_t *)(rx_packet->buf + index);
-      uint8_t* address = rx_packet->buf + index;
-
-      index += 4;
-      if (index < rx_packet->len) {
-        rx_packet->index = index;
-      } else {
-        usb_free(rx_packet);
-        rx_packet = usb_rx(MIDI_RX_ENDPOINT);
-      }
-
-      uint8_t type1 = (n & 0b1111) << 4;
-      uint8_t type2 = (n >> 8) & 0b11110000;
-
-      if (type1 != type2)
-        return;
-
-      if (!(type1 == NOTE_ON || type1 == NOTE_OFF || type1 == CC || type1 == PITCH_BEND))
-        return;
-
-      memcpy(&ringbuffer[writeIndex * 3], address + 1, 3);
-      writeIndex = writeIndex < bufferSize - 1 ? writeIndex + 1 : 0;
-    }
-    uint8_t* read() {
-      if (writeIndex == readIndex)
-        return nullptr;
-      uint8_t *packet = ringbuffer + readIndex * 3;
-      readIndex = readIndex < bufferSize - 1 ? readIndex + 1 : 0;
-      return packet;
-    }
-  private:
-    usb_packet_t *rx_packet = nullptr;
-    uint8_t ringbuffer[bufferSize * 3];
-    size_t writeIndex = 0, readIndex = 0;
-
-};
-
-MIDI_Input MIDI_In;
-
-class MIDI_Input_Element {
-  public:
-    MIDI_Input_Element(uint8_t address, uint8_t channel, size_t nb_addresses, size_t nb_channels)
-      : address(address), channel(channel), nb_addresses(nb_addresses), nb_channels(nb_channels) {};
-    virtual void init() {};
-    virtual bool update(uint8_t header, uint8_t data1, uint8_t data2) {};
-    virtual void refresh() {};
-
-    void setChannelOffset(uint8_t offset) // Set the channel offset
-    {
-      channelOffset = offset % nb_channels;
-      refresh();
-    }
-    void setAddressOffset(uint8_t offset) // Set the address (note or controller number) offset
-    {
-      addressOffset = offset % nb_addresses;
-      refresh();
-    }
-
-  protected:
-    uint8_t channelOffset = 0;
-    uint8_t addressOffset = 0;
-    uint8_t channel, address;
-    const size_t nb_channels, nb_addresses;
-};
-
-class MIDI_Input_LED : public MIDI_Input_Element {
-  public:
-    MIDI_Input_LED(pin_t pin, uint8_t address, uint8_t channel, size_t nb_addresses = 1, size_t nb_channels = 1)
-      : MIDI_Input_Element(address, channel, nb_addresses, nb_channels), pin(pin) {
-      states = (uint8_t*)malloc((nb_channels * nb_addresses + 7) / 8);
-    }
-    ~MIDI_Input_LED() {
-      free (states);
-    }
-    void init() {
-      pinMode(pin, OUTPUT);
-    }
-    bool update(uint8_t header, uint8_t data1, uint8_t data2) {
-      uint8_t targetChannel = (header & 0b1111) + 1;
-      uint8_t targetAddress = data1;
-      if (targetAddress < this->address || targetAddress >= this->address + nb_addresses) {
-        Serial.println("Address not found");
-        return false;
-      }
-      if (targetChannel < this->channel || targetChannel >= this->channel + nb_channels) {
-        Serial.println("Channel not found");
-        return false;
-      }
-      uint8_t addressIndex = targetAddress - this->address;
-      uint8_t channelIndex = targetChannel - this->channel;
-      if (header == NOTE_OFF || (header == NOTE_ON && data2 == 0)) {
-        states[(channelIndex + nb_channels * addressIndex) / 8] &= ~(1 << ((channelIndex + nb_channels * addressIndex) % 8));
-      } else if (header == NOTE_ON) {
-        states[(channelIndex + nb_channels * addressIndex) / 8] |= 1 << ((channelIndex + nb_channels * addressIndex) % 8);
-      } else {
-        Serial.println("Wrong message type");
-        return false; // not a Note On or Note Off event, but channel and address match
-      }
-      refresh();
-      return true;
-    }
-    void refresh() {
-      digitalWrite(pin, states[(channelOffset + nb_channels * addressOffset) / 8] & (1 << ((channelOffset + nb_channels * addressOffset) % 8)));
-    }
-
-    void print() {
-      Serial.printf("Channels:\t%d - %d\r\n", channel, channel + nb_channels - 1);
-      Serial.printf("Addresses:\t%d - %d\r\n", address, address + nb_addresses - 1);
-    }
-  private:
-    pin_t pin;
-    uint8_t *states = nullptr;
-};
 
 class MIDI_InputHandler {
   public:
-    struct input_ll {
-      input_ll* next = nullptr;
+    struct input_element {
+      input_element* next = nullptr;
       MIDI_Input_Element* element;
     };
     void init() {
-      for (input_ll *node = firstElement; node != nullptr; node = node->next) {
+      for (input_element *node = firstInputElement; node != nullptr; node = node->next) {
         node->element->init();
       }
     };
@@ -227,9 +87,9 @@ class MIDI_InputHandler {
         uint8_t data1 = midimsg[1];
         uint8_t data2 = midimsg[2];
         Serial.print("New midi message:\t");
-        Serial.printf("%02X %02X %02x\r\n", header, data1, data2, NOTE_ON);
+        Serial.printf("%02X %02X %02x\r\n", header, data1, data2);
         if (((header & 0b11110000) == NOTE_ON) || ((header & 0b11110000) == NOTE_OFF)) {
-          for (input_ll *node = firstElement; node != nullptr; node = node->next) {
+          for (input_element *node = firstInputElement; node != nullptr; node = node->next) {
             if (node->element->update(header, data1, data2)) {
               Serial.println("Match");
               break;
@@ -238,27 +98,27 @@ class MIDI_InputHandler {
         }
       } while (MIDI_In.available() > 0);
     };
-    void add(MIDI_Input_LED& element) {
+    void add(MIDI_Input_Element& element) {
       add(&element);
     };
-    void add(MIDI_Input_LED* element) {
-      input_ll *newElement = new input_ll;
+    void add(MIDI_Input_Element* element) {
+      input_element *newElement = new input_element;
       newElement->element = element;
       newElement->next = nullptr;
-      if (firstElement == nullptr)
+      if (firstInputElement == nullptr)
       {
-        firstElement = newElement;
-        lastElement = firstElement;
+        firstInputElement = newElement;
+        lastInputElement = firstInputElement;
       }
       else
       {
 
-        lastElement->next = newElement;
-        lastElement = newElement;
+        lastInputElement->next = newElement;
+        lastInputElement = newElement;
       }
     };
   private:
-    input_ll* firstElement = nullptr, *lastElement = nullptr;
+    input_element* firstInputElement = nullptr, *lastInputElement = nullptr;
 
 };
 

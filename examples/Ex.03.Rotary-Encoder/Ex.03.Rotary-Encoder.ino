@@ -19,7 +19,7 @@
 
 #include <MIDI_controller.h>
 
-USBMIDIOutput midiout; // Instantiate a USB MIDI output
+USBMIDI_Interface midiout; // Instantiate a USB MIDI output
 
 const uint8_t Channel = 1;       // MIDI channel 1
 const uint8_t Controller = 0x14; // MIDI Control Change controller number

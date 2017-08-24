@@ -1,5 +1,5 @@
 #include "Digital.h"
-#include "MIDIOutput.h"
+#include "MIDI_Interface.h"
 
 Digital::Digital(uint8_t pin, uint8_t note, uint8_t channel, uint8_t velocity) // Constructor
 {

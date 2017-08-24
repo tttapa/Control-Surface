@@ -1,5 +1,5 @@
 #include "ControlChange.h"
-#include "MIDIOutput.h"
+#include "MIDI_Interface.h"
 
 ControlChange::ControlChange(uint8_t controllerNumber, uint8_t channel) // Constructor
 {

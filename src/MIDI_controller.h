@@ -11,10 +11,12 @@
 #include "Bank.h"
 #include "BankSelector.h"
 
-#include "MIDIOutput.h"
-#include <USBMIDIOutput.h>
-#include <SerialMIDIOutput.h>
-#include <DebugMIDIOutput.h>
+#include "MIDI_Interface.h"
+#include "USBMIDI_Interface.h"
+#include "SerialMIDI_Interface.h"
+#include "DebugMIDI_Interface.h"
+
+#include "MIDI_Input_LED.h"
 
 #include "ExtendedInputOutput/ShiftRegisterOut.h"
 #include "ExtendedInputOutput/AnalogMultiplex.h"

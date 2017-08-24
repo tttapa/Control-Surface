@@ -11,7 +11,7 @@ https://github.com/tttapa/MIDI_controller
 
 #include <MIDI_controller.h> // Include the library
 
-USBMIDIOutput midiout; // Instantiate a USB MIDI output
+USBMIDI_Interface midiout; // Instantiate a USB MIDI output
 
 const uint8_t velocity = 0b1111111; // Maximum velocity (0b1111111 = 0x7F = 127)
 const uint8_t C4 = 60;              // Note number 60 is defined as middle C in the MIDI specification

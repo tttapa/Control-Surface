@@ -1,6 +1,6 @@
-#ifndef DEBUGMIDIOUTPUT_H_
-#define DEBUGMIDIOUTPUT_H_
-#include "MIDIOutput.h"
+#ifndef DEBUGMIDI_INTERFACE_H_
+#define DEBUGMIDI_INTERFACE_H_
+#include "MIDI_Interface.h"
 
 const char *MIDI_STATUS_TYPE_NAMES[] = {"Note Off\t",
                                         "Note On\t\t",
@@ -10,10 +10,10 @@ const char *MIDI_STATUS_TYPE_NAMES[] = {"Note Off\t",
                                         "Channel Pressure",
                                         "Pitch Bend\t"};
 
-class StreamDebugMIDIOutput : public MIDIOutput
+class StreamDebugMIDI_Interface : public MIDI_Interface
 {
   public:
-    StreamDebugMIDIOutput(Stream &stream) : stream(stream) {}
+    StreamDebugMIDI_Interface(Stream &stream) : stream(stream) {}
 
   protected:
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2)
@@ -52,10 +52,10 @@ class StreamDebugMIDIOutput : public MIDIOutput
 };
 
 template <typename T>
-class SerialDebugMIDIOutput : public StreamDebugMIDIOutput
+class SerialDebugMIDI_Interface : public StreamDebugMIDI_Interface
 {
   public:
-    SerialDebugMIDIOutput(T &serial, unsigned long baud) : serial(serial), baud(baud), StreamDebugMIDIOutput(serial) {}
+    SerialDebugMIDI_Interface(T &serial, unsigned long baud) : serial(serial), baud(baud), StreamDebugMIDI_Interface(serial) {}
     void begin()
     {
         serial.begin(baud);
@@ -66,48 +66,48 @@ class SerialDebugMIDIOutput : public StreamDebugMIDIOutput
     const unsigned long baud;
 };
 
-class HardwareSerialDebugMIDIOutput : public SerialDebugMIDIOutput<HardwareSerial>
+class HardwareSerialDebugMIDI_Interface : public SerialDebugMIDI_Interface<HardwareSerial>
 {
   public:
-    HardwareSerialDebugMIDIOutput(HardwareSerial &serial, unsigned long baud) : SerialDebugMIDIOutput(serial, baud) {}
+    HardwareSerialDebugMIDI_Interface(HardwareSerial &serial, unsigned long baud) : SerialDebugMIDI_Interface(serial, baud) {}
 };
 
 // The Serial USB connection
 // (Why do I have to do this, why don't they all inherit from one single class?)
 
 #if !(defined(USBCON) || defined(CORE_TEENSY)) // Boards without a USB connection (UNO, MEGA, Nano ...)
-class USBDebugMIDIOutput : public HardwareSerialDebugMIDIOutput
+class USBDebugMIDI_Interface : public HardwareSerialDebugMIDI_Interface
 {
   public:
-    USBDebugMIDIOutput(unsigned long baud) : HardwareSerialDebugMIDIOutput(Serial, baud) {}
+    USBDebugMIDI_Interface(unsigned long baud) : HardwareSerialDebugMIDI_Interface(Serial, baud) {}
 };
 #elif defined(CORE_TEENSY)      // Teensies
-class USBDebugMIDIOutput : public SerialDebugMIDIOutput<usb_serial_class>
+class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<usb_serial_class>
 {
   public:
-    USBDebugMIDIOutput(unsigned long baud) : SerialDebugMIDIOutput(Serial, baud) {}
+    USBDebugMIDI_Interface(unsigned long baud) : SerialDebugMIDI_Interface(Serial, baud) {}
 };
 #elif defined(ARDUINO_ARCH_SAM) // Arduino DUE
-class USBDebugMIDIOutput : public SerialDebugMIDIOutput<UARTClass>
+class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<UARTClass>
 {
   public:
-    USBDebugMIDIOutput(unsigned long baud) : SerialDebugMIDIOutput(Serial, baud) {}
+    USBDebugMIDI_Interface(unsigned long baud) : SerialDebugMIDI_Interface(Serial, baud) {}
 };
 #else                           // Others (Leonardo, Micro ... )
-class USBDebugMIDIOutput : public SerialDebugMIDIOutput<Serial_>
+class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<Serial_>
 {
   public:
-    USBDebugMIDIOutput(unsigned long baud) : SerialDebugMIDIOutput(Serial, baud) {}
+    USBDebugMIDI_Interface(unsigned long baud) : SerialDebugMIDI_Interface(Serial, baud) {}
 };
 #endif
 
 #if defined(__AVR__) || defined(CORE_TEENSY)
 #include <SoftwareSerial.h>
-class SoftwarSerialDebugMIDIOutput : public SerialDebugMIDIOutput<SoftwareSerial>
+class SoftwarSerialDebugMIDI_Interface : public SerialDebugMIDI_Interface<SoftwareSerial>
 {
   public:
-    SoftwarSerialDebugMIDIOutput(SoftwareSerial &serial, unsigned long baud) : SerialDebugMIDIOutput(serial, baud) {}
+    SoftwarSerialDebugMIDI_Interface(SoftwareSerial &serial, unsigned long baud) : SerialDebugMIDI_Interface(serial, baud) {}
 };
 #endif
 
-#endif // DEBUGMIDIOUTPUT_H_
+#endif // DEBUGMIDI_INTERFACE_H_

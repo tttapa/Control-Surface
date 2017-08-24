@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "AnalogHiRes.h"
-#include "MIDIOutput.h"
+#include "MIDI_Interface.h"
 
 AnalogHiRes::AnalogHiRes(uint8_t analogPin, uint8_t channel) // Constructor
 {

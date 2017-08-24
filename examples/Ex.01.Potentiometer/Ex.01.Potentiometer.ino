@@ -9,7 +9,7 @@ https://github.com/tttapa/MIDI_controller
 
 #include <MIDI_controller.h> // Include the library
 
-USBMIDIOutput midiout; // Instantiate a USB MIDI output
+USBMIDI_Interface midiout; // Instantiate a USB MIDI output
 
 const uint8_t Channel_Volume = 0x7; // Controller number 7 is defined as Channel Volume in the MIDI specification
 const uint8_t MIDI_Channel = 1;     // Send Control Change messages on MIDI channel 1
