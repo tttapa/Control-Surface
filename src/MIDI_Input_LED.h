@@ -2,6 +2,9 @@
 #define MIDI_INPUT_LED_H_
 
 #include "MIDI_Input_Element.h"
+#include "ExtendedInputOutput/ExtendedInputOutput.h"
+
+using namespace ExtIO;
 
 class MIDI_Input_LED : public MIDI_Input_Element {
   public:
