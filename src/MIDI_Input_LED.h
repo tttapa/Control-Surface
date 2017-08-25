@@ -11,6 +11,7 @@ class MIDI_Input_LED : public MIDI_Input_Element {
     MIDI_Input_LED(pin_t pin, uint8_t address, uint8_t channel, size_t nb_addresses = 1, size_t nb_channels = 1)
       : MIDI_Input_Element(address, channel, nb_addresses, nb_channels), pin(pin) {
       states = (uint8_t*)malloc((nb_channels * nb_addresses + 7) / 8);
+      memset(states, 0, (nb_channels * nb_addresses + 7) / 8);
       pinMode(pin, OUTPUT);
     }
     ~MIDI_Input_LED() {
