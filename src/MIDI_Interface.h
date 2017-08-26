@@ -21,18 +21,15 @@ struct MIDI_event
   uint8_t data2;
 };
 
-extern char stringToPrint[256];
-
 class MIDI_Interface
 {
 public:
   MIDI_Interface()
   {
     DefaultMIDI_Interface = this;
-    strcat(stringToPrint, "Constructor MIDI_Interface\r\n");
   }
   virtual void begin();
-  virtual void refresh();
+  virtual bool refresh();
   void send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2); // Send a 3-byte MIDI packet
   void send(uint8_t m, uint8_t c, uint8_t d1);             // Send a 2-byte MIDI packet
   MIDI_event *read();
@@ -56,7 +53,7 @@ protected:
 extern void sendMIDI(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2);
 extern void sendMIDI(uint8_t m, uint8_t c, uint8_t d1);
 extern void startMIDI();
-extern void refreshMIDI();
+extern bool refreshMIDI();
 extern size_t availableMIDI();
 extern MIDI_event *readMIDI();
 

@@ -22,7 +22,7 @@ class USBMIDI_Interface : public MIDI_Interface
   public:
     USBMIDI_Interface()
     {
-        strcat(stringToPrint, "Constructor USBMIDI_Interface\r\n");
+        ;
     }
 
   protected:
@@ -42,21 +42,21 @@ class USBMIDI_Interface : public MIDI_Interface
     }
 
   public:
-    void refresh()
+    bool refresh()
     {
 #if defined(CORE_TEENSY)          // If it's a Teensy board
         if (rx_packet == nullptr) // If there's no previous packet
         {
             if (!usb_configuration) // Check USB configuration
-                return;
+                return false;
             rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer
             if (rx_packet == nullptr)             // If there's no new packet, return
-                return;
+                return false;
             if (rx_packet->len == 0) // If the lenght is zero
             {
                 usb_free(rx_packet); // Free the packet
                 rx_packet = nullptr; // Read new packet on next refresh
-                return;
+                return true;
             }
         }
 
@@ -85,33 +85,33 @@ class USBMIDI_Interface : public MIDI_Interface
         midievent.data2 = (n >> 24) & 0xFF;
 
         if (type1 != type2) // Both message types should match if it's a valid MIDI message
-            return;
+            return true;
 
         if (!(type1 == NOTE_ON || type1 == NOTE_OFF || type1 == CC || type1 == PITCH_BEND)) // Only save Note events, Control Change and Pitch bends
-            return;
+            return true;
 
-        memcpy(&ringbuffer[writeIndex], address + 1, 3);               // Copy the 3-byte MIDI message to the ring buffer
+        memcpy(&ringbuffer[writeIndex], address + 1, 3); // Copy the 3-byte MIDI message to the ring buffer
         // ringbuffer[writeIndex] = midievent;
         writeIndex = writeIndex < bufferSize - 1 ? writeIndex + 1 : 0; // Increment the ring buffer write index
 
+        return true;
 
 #elif defined(USBCON) // If the main MCU has a USB connection but is not a Teensy
         midiEventPacket_t rx;
-        do
-        {
-            rx = MidiUSB.read();
-            if (rx.header != 0)
-            { // TODO
-                Serial.print("Received: ");
-                Serial.print(rx.header, HEX);
-                Serial.print("-");
-                Serial.print(rx.byte1, HEX);
-                Serial.print("-");
-                Serial.print(rx.byte2, HEX);
-                Serial.print("-");
-                Serial.println(rx.byte3, HEX);
-            }
-        } while (rx.header != 0);
+        rx = MidiUSB.read();
+        if (rx.header != 0)
+        { // TODO
+            Serial.print("Received: ");
+            Serial.print(rx.header, HEX);
+            Serial.print("-");
+            Serial.print(rx.byte1, HEX);
+            Serial.print("-");
+            Serial.print(rx.byte2, HEX);
+            Serial.print("-");
+            Serial.println(rx.byte3, HEX);
+            return true;
+        }
+        return false;
 #endif
     }
 #if defined(CORE_TEENSY)

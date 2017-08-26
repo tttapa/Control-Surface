@@ -15,31 +15,21 @@ public:
     CHANGE_CHANNEL,
     CHANGE_ADDRESS
   };
-  void add(MIDI_Control_Element *element, bankType type = CHANGE_CHANNEL);
-  void add(MIDI_Control_Element &element, bankType type = CHANGE_CHANNEL);
-  void add(MIDI_Input_Element *element, bankType type = CHANGE_CHANNEL);
-  void add(MIDI_Input_Element &element, bankType type = CHANGE_CHANNEL);
-  void refresh();
+  void add(MIDI_Element *element, bankType type = CHANGE_CHANNEL);
+  void add(MIDI_Element &element, bankType type = CHANGE_CHANNEL);
   void setBankSetting(uint8_t bankSetting);
   void average(size_t length);
+  void map(int (*fn)(int));
 
 private:
-  struct control_element
+  struct MIDI_Element_list_node
   {
-    MIDI_Control_Element *element;
-    control_element *next = nullptr;
+    MIDI_Element *element;
+    MIDI_Element_list_node *next;
     bankType type;
   };
-  struct input_element
-  {
-    MIDI_Input_Element *element;
-    input_element *next = nullptr;
-    bankType type;
-  };
-  control_element *firstControlElement = nullptr;
-  control_element *lastControlElement = nullptr;
-  input_element *firstInputElement = nullptr;
-  input_element *lastInputElement = nullptr;
+  MIDI_Element_list_node *firstMIDI_Element = nullptr;
+  MIDI_Element_list_node *lastMIDI_Element = nullptr;
 
   void updateMidiInput();
 };

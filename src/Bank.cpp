@@ -5,102 +5,49 @@ Bank::Bank() {}
 
 Bank::~Bank()
 {
-    control_element *element = firstControlElement;
+    MIDI_Element_list_node *element = firstMIDI_Element;
     while (element != nullptr)
     {
-        control_element *next = element->next;
+        MIDI_Element_list_node *next = element->next;
         delete element;
         element = next;
     }
 }
 
-void Bank::add(MIDI_Control_Element *element, bankType type)
+void Bank::add(MIDI_Element *element, bankType type)
 {
-    control_element *newElement = new control_element;
+    MIDI_Element_list_node *newElement = new MIDI_Element_list_node;
     newElement->element = element;
     newElement->next = nullptr;
     newElement->type = type;
-    if (firstControlElement == nullptr)
-    {
-        firstControlElement = newElement;
-        lastControlElement = firstControlElement;
-    }
+    if (firstMIDI_Element == nullptr)
+        firstMIDI_Element = newElement;
     else
-    {
-
-        lastControlElement->next = newElement;
-        lastControlElement = newElement;
-    }
+        lastMIDI_Element->next = newElement;
+    lastMIDI_Element = newElement;
 }
-void Bank::add(MIDI_Control_Element &element, bankType type)
+
+void Bank::add(MIDI_Element &element, bankType type)
 {
     add(&element, type);
-}
-
-void Bank::add(MIDI_Input_Element *element, bankType type)
-{
-    input_element *newElement = new input_element;
-    newElement->element = element;
-    newElement->next = nullptr;
-    newElement->type = type;
-    if (firstInputElement == nullptr)
-    {
-        firstInputElement = newElement;
-        lastInputElement = firstInputElement;
-    }
-    else
-    {
-
-        lastInputElement->next = newElement;
-        lastInputElement = newElement;
-    }
-}
-void Bank::add(MIDI_Input_Element &element, bankType type)
-{
-    add(&element, type);
-}
-
-void Bank::refresh()
-{
-    control_element *element = firstControlElement;
-    while (element != nullptr)
-    {
-        element->element->refresh();
-        element = element->next;
-    }
-    refreshMIDI();
-    updateMidiInput();
 }
 
 void Bank::setBankSetting(uint8_t bankSetting)
 {
+    MIDI_Element_list_node *element = firstMIDI_Element;
+    while (element != nullptr)
     {
-        control_element *element = firstControlElement;
-        while (element != nullptr)
-        {
-            if (element->type == CHANGE_CHANNEL)
-                element->element->setChannelOffset(bankSetting);
-            else
-                element->element->setAddressOffset(bankSetting);
-            element = element->next;
-        }
-    }
-    {
-        input_element *element = firstInputElement;
-        while (element != nullptr)
-        {
-            if (element->type == CHANGE_CHANNEL)
-                element->element->setChannelOffset(bankSetting);
-            else
-                element->element->setAddressOffset(bankSetting);
-            element = element->next;
-        }
+        if (element->type == CHANGE_CHANNEL)
+            element->element->setChannelOffset(bankSetting);
+        else
+            element->element->setAddressOffset(bankSetting);
+        element = element->next;
     }
 }
 
 void Bank::average(size_t length)
 {
-    control_element *element = firstControlElement;
+    MIDI_Element_list_node *element = firstMIDI_Element;
     while (element != nullptr)
     {
         element->element->average(length);
@@ -108,25 +55,12 @@ void Bank::average(size_t length)
     }
 }
 
-void Bank::updateMidiInput()
+void Bank::map(int (*fn)(int))
 {
-    if (availableMIDI() == 0)
-        return;
-    do
+    MIDI_Element_list_node *element = firstMIDI_Element;
+    while (element != nullptr)
     {
-        MIDI_event *midimsg = readMIDI();
-        Serial.print("New midi message:\t");
-        Serial.printf("%02X %02X %02x\r\n", midimsg->header, midimsg->data1, midimsg->data2);
-        // if (((midimsg->header & 0b11110000) == NOTE_ON) || ((midimsg->header & 0b11110000) == NOTE_OFF))
-        // {
-        for (input_element *node = firstInputElement; node != nullptr; node = node->next)
-        {
-            if (node->element->update(midimsg->header, midimsg->data1, midimsg->data2))
-            {
-                Serial.println("\tMatch");
-                break;
-            }
-        }
-        //  }
-    } while (availableMIDI() > 0);
+        element->element->map(fn);
+        element = element->next;
+    }
 }

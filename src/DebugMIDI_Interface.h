@@ -46,18 +46,18 @@ protected:
     // stream.print((unsigned long)(m >> 4) | ((m | c) << 8) | (d1 << 16), HEX);
     stream.flush();
   }
-  void refresh()
+  bool refresh()
   {
     if (stream.available() <= 0)
-      return;
+      return false;
     char data = stream.read();
 
     if (isHexChar(toLowerCase(data)))
     {
       data = toLowerCase(data);
-      if (firstChar == NULL)
+      if (firstChar == '\0')
         firstChar = data;
-      else if (secondChar == NULL)
+      else if (secondChar == '\0')
         secondChar = data;
       else
       {
@@ -130,9 +130,10 @@ protected:
           }
         }
       }
-      firstChar = NULL;
-      secondChar = NULL;
+      firstChar = '\0';
+      secondChar = '\0';
     }
+    return true;
   }
 
 private:

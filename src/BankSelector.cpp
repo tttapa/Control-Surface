@@ -117,7 +117,6 @@ void BankSelector::refresh()
         bankSetting = newBankSetting;
         bank.setBankSetting(bankSetting);
     }
-    bank.refresh();
 }
 
 uint8_t BankSelector::getBankSetting()

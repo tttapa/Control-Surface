@@ -203,7 +203,7 @@ public:
     else
     {
       mode = MULTIPLE_BUTTONS_LEDS;
-      nb_settings = N < M ? N : M;
+      nb_settings = N < M ? N : M; // min(N, M)
     }
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins, std::initializer_list<pin_t> ledPins) // One or multiple buttons, multiple LEDs
@@ -230,7 +230,7 @@ public:
     else
     {
       mode = MULTIPLE_BUTTONS_LEDS;
-      nb_settings = switchPins.size() < ledPins.size() ? switchPins.size() : ledPins.size();
+      nb_settings = switchPins.size() < ledPins.size() ? switchPins.size() : ledPins.size(); // min(ledPins.size(), switchPins.size())
     }
   }
   BankSelector(Bank &bank, const pin_t (&switchPins)[2], pin_t nb_settings) // Two buttons (+1, -1), no LEDs

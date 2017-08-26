@@ -5,7 +5,7 @@ void MIDI_Interface::begin()
     ;
 }
 
-void MIDI_Interface::refresh()
+bool MIDI_Interface::refresh()
 {
     ;
 }
@@ -82,10 +82,11 @@ void startMIDI()
         MIDI_Interface::getDefault()->begin();
 }
 
-void refreshMIDI()
+bool refreshMIDI()
 {
     if (MIDI_Interface::getDefault() != nullptr)
-        MIDI_Interface::getDefault()->refresh();
+        return MIDI_Interface::getDefault()->refresh();
+    return false;
 }
 
 size_t availableMIDI()
@@ -101,5 +102,3 @@ MIDI_event *readMIDI()
         return MIDI_Interface::getDefault()->read();
     return nullptr;
 }
-
-char stringToPrint[256] = {0};
