@@ -42,7 +42,7 @@ public:
   }
 
 protected:
-  uint8_t channel, address;
+  const uint8_t channel, address;
   const size_t nb_channels, nb_addresses;
 
   MIDI_Input_Element *next = nullptr, *previous = nullptr;

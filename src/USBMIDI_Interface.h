@@ -87,7 +87,7 @@ class USBMIDI_Interface : public MIDI_Interface
         if (type1 != type2) // Both message types should match if it's a valid MIDI message
             return true;
 
-        if (!(type1 == NOTE_ON || type1 == NOTE_OFF || type1 == CC || type1 == PITCH_BEND)) // Only save Note events, Control Change and Pitch bends
+        if (!(type1 == NOTE_ON || type1 == NOTE_OFF || type1 == CC || type1 == PITCH_BEND || type1 == CHANNEL_PRESSURE)) // Only save Note events, Control Change and Pitch bends
             return true;
 
         memcpy(&ringbuffer[writeIndex], address + 1, 3); // Copy the 3-byte MIDI message to the ring buffer

@@ -42,7 +42,7 @@ BankSelector bs(bank, { 8, 9 }, {
   SR.red(7),
 });
 
-VU vu(SR_VU.pin(0), 8);
+VU vu(SR_VU.pin(0), 6, 0, 8);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -50,8 +50,8 @@ void setup() {
   Serial.begin(115200);
   while (!Serial);
   delay(500);
-  Serial.print(stringToPrint);
   startMIDI();
+  
   SR.begin();
   SR_VU.begin();
 
@@ -67,11 +67,7 @@ void setup() {
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 void loop() {
-  if(Serial.available()){
-    vu.setValue(Serial.read() - '0');
-  }
-  vu.refresh();
-  bs.refresh();
+  MIDI_ControllerInstance.refresh();
 }
 
 
