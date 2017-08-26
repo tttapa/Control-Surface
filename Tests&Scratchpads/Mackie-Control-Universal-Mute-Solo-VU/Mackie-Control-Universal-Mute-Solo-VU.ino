@@ -30,8 +30,9 @@ Digital mutebutton(2, MUTE, 1, 127);
 Digital solobutton(3, SOLO, 1, 127);
 
 Bank bank;
+Bank bankVU;
 
-BankSelector bs(bank, { 8, 9 }, {
+BankSelector bs(bank, { 9, 8 }, {
   SR.red(0),
   SR.red(1),
   SR.red(2),
@@ -42,7 +43,18 @@ BankSelector bs(bank, { 8, 9 }, {
   SR.red(7),
 });
 
-VU vu(SR_VU.pin(0), 6, 0, 8);
+BankSelector bsVU(bankVU, { 6, 5 }, {
+  SR.blue(0),
+  SR.blue(1),
+  SR.blue(2),
+  SR.blue(3),
+  SR.blue(4),
+  SR.blue(5),
+  SR.blue(6),
+  SR.blue(7),
+});
+
+VU vu(SR_VU.pin(0), 6, SR_VU.pin(6), 0, 8);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -61,7 +73,10 @@ void setup() {
   bank.add(mutebutton, Bank::CHANGE_ADDRESS);
   bank.add(solobutton, Bank::CHANGE_ADDRESS);
 
+  bankVU.add(vu, Bank::CHANGE_ADDRESS);
+
   bs.init();
+  bsVU.init();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
