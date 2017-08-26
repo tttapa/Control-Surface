@@ -35,6 +35,7 @@ public:
   void refresh()
   {
     refreshControls();
+    refreshBankSelectors();
     while (refreshMIDI())
       ;
     updateMidiInput();
@@ -82,8 +83,17 @@ private:
       element = element->getNext();
     }
   }
+  void refreshBankSelectors()
+  {
+    BankSelector *element = BankSelector::getFirst();
+    while (element != nullptr)
+    {
+      element->refresh();
+      element = element->getNext();
+    }
+  }
 };
 
-MIDI_Controller& MIDI_ControllerInstance = MIDI_Controller::getInstance();
+MIDI_Controller &MIDI_ControllerInstance = MIDI_Controller::getInstance();
 
 #endif // MIDIctrl_h_

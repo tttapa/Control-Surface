@@ -157,6 +157,7 @@ public:
       dbButton1.pin = switchPin;
       mode = SINGLE_BUTTON;
     }
+    addToLinkedList();
   }
   BankSelector(Bank &bank, pin_t switchPin, pin_t ledPin, ButtonType buttonType = MOMENTARY) // One switch or button, one LED
       : bank(bank), switchPin(switchPin), ledPin(ledPin)
@@ -170,12 +171,14 @@ public:
       dbButton1.pin = switchPin;
       mode = SINGLE_BUTTON_LED;
     }
+    addToLinkedList();
   }
   template <size_t N>
   BankSelector(Bank &bank, const pin_t (&switchPins)[N]) // Multiple buttons, no LEDs
       : bank(bank), switchPins(switchPins), nb_settings(N)
   {
     mode = MULTIPLE_BUTTONS;
+    addToLinkedList();
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins) // Multiple buttons, no LEDs
       : bank(bank), nb_settings(switchPins.size())
@@ -184,6 +187,7 @@ public:
     memcpy(switchPinsStorage, switchPins.begin(), sizeof(pin_t) * switchPins.size());
     this->switchPins = switchPinsStorage;
     mode = MULTIPLE_BUTTONS;
+    addToLinkedList();
   }
   template <size_t M, size_t N>
   BankSelector(Bank &bank, const pin_t (&switchPins)[M], const pin_t (&ledPins)[N]) // One or multiple buttons, multiple LEDs
@@ -205,6 +209,7 @@ public:
       mode = MULTIPLE_BUTTONS_LEDS;
       nb_settings = N < M ? N : M; // min(N, M)
     }
+    addToLinkedList();
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins, std::initializer_list<pin_t> ledPins) // One or multiple buttons, multiple LEDs
       : bank(bank), nb_settings(ledPins.size())
@@ -232,6 +237,7 @@ public:
       mode = MULTIPLE_BUTTONS_LEDS;
       nb_settings = switchPins.size() < ledPins.size() ? switchPins.size() : ledPins.size(); // min(ledPins.size(), switchPins.size())
     }
+    addToLinkedList();
   }
   BankSelector(Bank &bank, const pin_t (&switchPins)[2], pin_t nb_settings) // Two buttons (+1, -1), no LEDs
       : bank(bank), switchPins(switchPins), nb_settings(nb_settings)
@@ -239,12 +245,14 @@ public:
     dbButton1.pin = switchPins[0];
     dbButton2.pin = switchPins[1];
     mode = INCREMENT_DECREMENT;
+    addToLinkedList();
   }
   BankSelector(Bank &bank, const pin_t (&switchPins)[1], pin_t nb_settings) // One button (+1), no LEDs
       : bank(bank), switchPins(switchPins), nb_settings(nb_settings)
   {
     dbButton1.pin = switchPins[0];
     mode = INCREMENT;
+    addToLinkedList();
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins, pin_t nb_settings) // One or two buttons (+1, (-1)), no LEDs
       : bank(bank), nb_settings(nb_settings)
@@ -263,13 +271,23 @@ public:
       dbButton2.pin = this->switchPins[1];
       mode = INCREMENT_DECREMENT;
     }
+    addToLinkedList();
   }
 
   ~BankSelector()
   {
     free(ledPinsStorage);
     free(switchPinsStorage);
+    if (previous != nullptr)
+      previous->next = next;
+    if (this == last)
+      last = previous;
+    if (next != nullptr)
+      next->previous = previous;
+    if (this == first)
+      first = next;
   }
+  void addToLinkedList();
 
   void init();
   void refresh();
@@ -280,6 +298,15 @@ public:
   const char *getMode();
 
   void setBankSettingChangeEvent(void (*fn)(uint8_t));
+
+  BankSelector *getNext()
+  {
+    return next;
+  }
+  static BankSelector *getFirst()
+  {
+    return first;
+  }
 
 private:
   Bank &bank;
@@ -320,6 +347,11 @@ private:
 
   void refreshLEDs(uint8_t newBankSetting);
   bool debounceButton(debouncedButton &button);
+
+  BankSelector *next = nullptr, *previous = nullptr;
+
+  static BankSelector *last;
+  static BankSelector *first;
 };
 
 #endif // BANKSELECTOR_H_
