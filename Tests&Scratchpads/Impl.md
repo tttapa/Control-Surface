@@ -12,10 +12,16 @@
         - Digital
         - DigitalLatch
         - RotaryEncoder
-    - MIDI_Input_Element
+    - MIDI_Input_Element_CC
+        - MIDI_Input_7seg_Display
+        - MIDI_Input_LED_Ring      ==TODO==
+    - MIDI_Input_Element_Note
         - MIDI_Input_LED
-        - MIDI_Input_VU           (TODO)
-        - MIDI_Input_PotRing      (TODO)
+    - MIDI_Input_Element_ChannelPressure
+        - MIDI_Input_VU
+    - MIDI_Input_Element_PitchBend
+        - MIDI_Input_Fader	==TODO==
+    - MIDI_Input_Element_SysEx	==TODO==
 
 - Bank 
 

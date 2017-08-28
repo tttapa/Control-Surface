@@ -59,28 +59,57 @@ private:
       return;
     do
     {
-      MIDI_event *midimsg = readMIDI();
+      uint8_t header = MIDI_Interface::getDefault()->getNextHeader();
+      if (!header)
+        return;
+      uint8_t messageType = header & 0xF0;
+      uint8_t targetChannel = header & 0x0F;
+      uint8_t targetAddress = MIDI_Interface::getDefault()->read();
 
       Serial.print("New midi message:\t");
-      Serial.printf("%02X %02X %02x\r\n", midimsg->header, midimsg->data1, midimsg->data2);
+      Serial.printf("%02X %02X\r\n", header, targetAddress);
 
-      for (MIDI_Input_Element *element = MIDI_Input_Element::getFirst(); element != nullptr; element = element->getNext())
+      if ((header & 0xF0) == CC)
       {
-        if (element->update(midimsg->header, midimsg->data1, midimsg->data2))
+        for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
         {
-          Serial.println("\tMatch");
-          break;
+          if (element->update(targetAddress, targetChannel))
+          {
+            Serial.println("\tMatch");
+            break;
+          }
+        }
+      }
+      else if (messageType == NOTE_OFF || messageType == NOTE_ON)
+      {
+        for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
+        {
+          if (element->update(messageType, targetAddress, targetChannel))
+          {
+            Serial.println("\tMatch");
+            break;
+          }
         }
       }
     } while (availableMIDI() > 0);
   }
   void refreshInputs()
   {
-    MIDI_Input_Element *element = MIDI_Input_Element::getFirst();
-    while (element != nullptr)
     {
-      element->refresh();
-      element = element->getNext();
+      MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst();
+      while (element != nullptr)
+      {
+        element->refresh();
+        element = element->getNext();
+      }
+    }
+    {
+      MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst();
+      while (element != nullptr)
+      {
+        element->refresh();
+        element = element->getNext();
+      }
     }
   }
   void refreshBankSelectors()

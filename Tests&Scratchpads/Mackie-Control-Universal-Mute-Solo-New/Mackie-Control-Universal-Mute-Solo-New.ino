@@ -1,0 +1,61 @@
+#include <MIDI_controller.h>
+
+using namespace ExtIO;
+
+#define DEBUG
+
+const uint8_t clockPin = 10;
+const uint8_t latchPin = 11;
+const uint8_t dataPin = 12;
+
+const uint8_t SOLO = 0x08;
+const uint8_t MUTE = 0x10;
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+USBDebugMIDI_Interface dbg(115200); // Instantiate a USB Debug output
+
+ShiftRegisterOut SR(dataPin, clockPin, latchPin, LSBFIRST, 24);
+
+MIDI_Input_LED muteled(14, MUTE, 1, 8, 1);
+MIDI_Input_LED sololed(15, SOLO, 1, 8, 1);
+
+Digital mutebutton(2, MUTE, 1, 127);
+Digital solobutton(3, SOLO, 1, 127);
+
+Bank bank;
+
+BankSelector bs(bank, { 8, 9 }, {
+  SR.red(0),
+  SR.red(1),
+  SR.red(2),
+  SR.red(3),
+  SR.red(4),
+  SR.red(5),
+  SR.red(6),
+  SR.red(7),
+});
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial);
+  delay(500);
+  startMIDI();
+  SR.begin();
+
+  bank.add(muteled, Bank::CHANGE_ADDRESS);
+  bank.add(sololed, Bank::CHANGE_ADDRESS);
+
+  bank.add(mutebutton, Bank::CHANGE_ADDRESS);
+  bank.add(solobutton, Bank::CHANGE_ADDRESS);
+
+  bs.init();
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+void loop() {
+  MIDI_ControllerInstance.refresh();
+}

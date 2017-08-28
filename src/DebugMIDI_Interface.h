@@ -92,9 +92,10 @@ protected:
           {
             Serial.println("Second data byte");
             thirdByte = false;
-            ringbuffer[writeIndex].data2 = binaryByte;
-            writeIndex = writeIndex < bufferSize - 1 ? writeIndex + 1 : 0; // Increment the ring buffer write index
+            ringbuffer[writeIndex + 2] = binaryByte;
+            incrementWriteIndex(3);
             Serial.println("Message finished");
+            availableMIDIevents++;
           }
           else
           {
@@ -107,16 +108,18 @@ protected:
             {
               Serial.println("First data byte (of two)");
               thirdByte = true;
-              ringbuffer[writeIndex].header = runningStatusBuffer;
-              ringbuffer[writeIndex].data1 = binaryByte;
+              ringbuffer[writeIndex] = runningStatusBuffer;
+              ringbuffer[(writeIndex + 1) % bufferSize] = binaryByte;
             }
             else if (runningStatusBuffer < 0xE0) // Program Change or Channel Pressure
             {
               Serial.println("First data byte");
-              ringbuffer[writeIndex].header = runningStatusBuffer;
-              ringbuffer[writeIndex].data1 = binaryByte;
-              writeIndex = writeIndex < bufferSize - 1 ? writeIndex + 1 : 0; // Increment the ring buffer write index
+              ringbuffer[writeIndex] = runningStatusBuffer;
+              incrementWriteIndex(1);
+              ringbuffer[writeIndex] = binaryByte;
+              incrementWriteIndex(1);
               Serial.println("Message finished");
+              availableMIDIevents++;
             }
             else if (runningStatusBuffer == 0xF0)
             {

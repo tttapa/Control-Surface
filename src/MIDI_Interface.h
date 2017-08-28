@@ -14,6 +14,8 @@ const uint8_t PROGRAM_CHANGE = 0xC0;
 const uint8_t CHANNEL_PRESSURE = 0xD0;
 const uint8_t PITCH_BEND = 0xE0;
 
+const uint8_t SysExEnd = 0xF0;
+
 struct MIDI_event
 {
   uint8_t header;
@@ -32,12 +34,18 @@ public:
   virtual bool refresh();
   void send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2); // Send a 3-byte MIDI packet
   void send(uint8_t m, uint8_t c, uint8_t d1);             // Send a 2-byte MIDI packet
-  MIDI_event *read();
+  uint8_t read();
+  uint8_t peek();
+  uint8_t getNextHeader();
   size_t available();
 
   static MIDI_Interface *getDefault()
   {
     return DefaultMIDI_Interface;
+  }
+
+  void setDefault() {
+    DefaultMIDI_Interface = this;
   }
 
 protected:
@@ -46,8 +54,12 @@ protected:
   size_t mod(size_t a, size_t b); // modulo operator that works on negative numbers
   static MIDI_Interface *DefaultMIDI_Interface;
   const static size_t bufferSize = 64;
-  MIDI_event ringbuffer[bufferSize];
-  size_t writeIndex = 0, readIndex = 0;
+  uint8_t ringbuffer[bufferSize];
+  size_t writeIndex = 0, readIndex = 0, availableMIDIevents = 0;
+  
+  void incrementWriteIndex(size_t incr);
+  void incrementReadIndex(size_t incr);
+  inline bool isHeader(uint8_t data);
 };
 
 extern void sendMIDI(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2);
@@ -55,6 +67,6 @@ extern void sendMIDI(uint8_t m, uint8_t c, uint8_t d1);
 extern void startMIDI();
 extern bool refreshMIDI();
 extern size_t availableMIDI();
-extern MIDI_event *readMIDI();
+extern uint8_t readMIDI();
 
 #endif // MIDI_INTERFACE_H_
