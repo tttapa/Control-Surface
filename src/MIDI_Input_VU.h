@@ -69,6 +69,15 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         }
     }
 
+    uint8_t getValue()
+    {
+        return getValue(addressOffset);
+    }
+    uint8_t getOverload()
+    {
+        return getOverload(addressOffset);
+    }
+
   protected:
     const uint8_t length;
     const uint8_t address;
