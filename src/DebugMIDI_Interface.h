@@ -73,7 +73,7 @@ protected:
         Serial.printf("New byte:\t%02Xh\r\n", binaryByte);
         if (binaryByte & (1 << 7)) // If it's a header byte
         {
-          if (binaryByte & 0xF8 == 0xF8) // If it's a Real-Time message // TODO
+          if ((binaryByte & 0xF8) == 0xF8) // If it's a Real-Time message // TODO
           {
             ; // Handle Real-Time stuff
             Serial.println("Real-Time");

@@ -64,16 +64,16 @@ private:
         return;
       uint8_t messageType = header & 0xF0;
       uint8_t targetChannel = header & 0x0F;
-      uint8_t targetAddress = MIDI_Interface::getDefault()->read();
+      uint8_t data1 = MIDI_Interface::getDefault()->read();
 
       Serial.print("New midi message:\t");
-      Serial.printf("%02X %02X\r\n", header, targetAddress);
+      Serial.printf("%02X %02X\r\n", header, data1);
 
-      if ((header & 0xF0) == CC)
+      if (messageType == CC)
       {
         for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
         {
-          if (element->update(targetAddress, targetChannel))
+          if (element->update(data1, targetChannel))
           {
             Serial.println("\tMatch");
             break;
@@ -84,7 +84,18 @@ private:
       {
         for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
         {
-          if (element->update(messageType, targetAddress, targetChannel))
+          if (element->update(messageType, data1, targetChannel))
+          {
+            Serial.println("\tMatch");
+            break;
+          }
+        }
+      }
+      else if (messageType == CHANNEL_PRESSURE)
+      {
+        for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
+        {
+          if (element->update(targetChannel, data1))
           {
             Serial.println("\tMatch");
             break;
@@ -105,6 +116,14 @@ private:
     }
     {
       MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst();
+      while (element != nullptr)
+      {
+        element->refresh();
+        element = element->getNext();
+      }
+    }
+    {
+      MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst();
       while (element != nullptr)
       {
         element->refresh();
