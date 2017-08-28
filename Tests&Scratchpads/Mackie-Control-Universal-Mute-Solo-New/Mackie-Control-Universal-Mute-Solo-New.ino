@@ -2,18 +2,22 @@
 
 using namespace ExtIO;
 
-#define DEBUG
+// #define DEBUG
 
 const uint8_t clockPin = 10;
 const uint8_t latchPin = 11;
 const uint8_t dataPin = 12;
 
-const uint8_t SOLO = 0x08;
+const uint8_t SOLO = 8;
 const uint8_t MUTE = 0x10;
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
+#ifdef DEBUG
 USBDebugMIDI_Interface dbg(115200); // Instantiate a USB Debug output
+#else
+USBMIDI_Interface midi; // Instantiate a USB MIDI output
+#endif
 
 ShiftRegisterOut SR(dataPin, clockPin, latchPin, LSBFIRST, 24);
 
