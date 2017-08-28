@@ -9,27 +9,11 @@ using namespace ExtIO;
 class MCU_VU : public MIDI_Input_Element_ChannelPressure
 {
   public:
-    MCU_VU(pin_t start, uint8_t length, uint8_t address, uint8_t nb_addresses, bool decay = true)
-        : MIDI_Input_Element_ChannelPressure(1, 1), start(start), overloadpin(0), length(length < 12 ? length : 12),
+    MCU_VU(uint8_t address, uint8_t nb_addresses, bool decay = true, unsigned int decayTime = 300)
+        : MIDI_Input_Element_ChannelPressure(1, 1),
           address(address), nb_addresses(nb_addresses),
-          overload(false), decayTime(1800 / length), decay(decay)
+          decay(decay), decayTime(decayTime)
     {
-        for (pin_t pin = 0; pin < length; pin++)
-        {
-            pinMode(start + pin, OUTPUT);
-        }
-        initBuffer();
-    }
-    MCU_VU(pin_t start, uint8_t length, pin_t overloadpin, uint8_t address, uint8_t nb_addresses, bool decay = true)
-        : MIDI_Input_Element_ChannelPressure(1, 1), start(start), length(length < 12 ? length : 12), 
-          overloadpin(overloadpin), address(address), nb_addresses(nb_addresses),
-          overload(true), decayTime(1800 / length), decay(decay)
-    {
-        for (pin_t pin = 0; pin < length; pin++)
-        {
-            pinMode(start + pin, OUTPUT);
-        }
-        pinMode(overloadpin, OUTPUT);
         initBuffer();
     }
 
@@ -37,6 +21,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     {
         free(values);
     }
+
     bool updateImpl(uint8_t targetChannel, uint8_t data1)
     {
         uint8_t targetAddress = data1 >> 4;
@@ -51,7 +36,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         else if (data == 0xD) // not implemented
             ; 
         else // new peak value
-            setValue(targetAddress, data * length / 12);
+            setValue(targetAddress, data);
 
         display();
         return true;
@@ -79,13 +64,10 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     }
 
   protected:
-    const uint8_t length;
     const uint8_t address;
     const uint8_t nb_addresses;
     uint8_t *values = nullptr;
-    const pin_t start, overloadpin;
     const bool decay;
-    const bool overload;
     const unsigned long decayTime;
     unsigned long prevDecayTime = 0;
 
@@ -93,14 +75,14 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     {
         if (values != nullptr)
             return;
-        values = (uint8_t *)malloc(sizeof(uint8_t) * length);
-        memset(values, 0, sizeof(uint8_t) * length);
+        values = (uint8_t *)malloc(sizeof(uint8_t) * nb_addresses);
+        memset(values, 0, sizeof(uint8_t) * nb_addresses);
     }
 
     void setValue(uint8_t address, uint8_t value)
     {
         values[address] &= 0xF0;
-        values[address] |= value < length ? value : length;
+        values[address] |= value;
         prevDecayTime = millis();
     }
     uint8_t getValue(uint8_t address)
@@ -125,12 +107,43 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
            (targetAddress >= this->address) 
         && (targetAddress < this->address + nb_addresses);
     }
+};
+
+//----------------------------------------------------------------------------------------------------------------------------------------//
+
+class MCU_VU_LED : public MCU_VU
+{
+  public:
+    MCU_VU_LED(pin_t start, uint8_t length, uint8_t address, uint8_t nb_addresses, bool decay = true)
+        : MCU_VU(address, nb_addresses, decay), start(start), overloadpin(0), length(length < 12 ? length : 12),
+          overload(false)
+    {
+        for (pin_t pin = 0; pin < length; pin++)
+        {
+            pinMode(start + pin, OUTPUT);
+        }
+    }
+    MCU_VU_LED(pin_t start, uint8_t length, pin_t overloadpin, uint8_t address, uint8_t nb_addresses, bool decay = true)
+        : MCU_VU(address, nb_addresses, decay), start(start), length(length < 12 ? length : 12), 
+          overloadpin(overloadpin), overload(true)
+    {
+        for (pin_t pin = 0; pin < length; pin++)
+        {
+            pinMode(start + pin, OUTPUT);
+        }
+        pinMode(overloadpin, OUTPUT);
+    }
+
+  protected:
+    const uint8_t length;
+    const pin_t start, overloadpin;
+    const bool overload;
 
     void display()
     {
-        for (uint8_t pin = 0; pin < getValue(addressOffset); pin++)
+        for (uint8_t pin = 0; pin < getValue(addressOffset) * length / 12; pin++)
             digitalWrite(start + pin, HIGH);
-        for (uint8_t pin = getValue(addressOffset); pin < length; pin++)
+        for (uint8_t pin = getValue(addressOffset) * length / 12; pin < length; pin++)
             digitalWrite(start + pin, LOW);
         if (overload)
             digitalWrite(overloadpin, getOverload(addressOffset));

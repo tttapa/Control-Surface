@@ -1,6 +1,5 @@
 #include <MIDI_controller.h>
-#include "MIDI_Input_VU.h"
-#include "MIDI_Input_7SegmentDisplay.h"
+#include "MIDI_Input_V-Pot_Ring.h"
 
 using namespace ExtIO;
 
@@ -21,26 +20,23 @@ USBDebugMIDI_Interface dbg(115200); // Instantiate a USB Debug output
 USBMIDI_Interface midi; // Instantiate a USB MIDI output
 #endif
 
-ShiftRegisterOut SR(dataPin, clockPin, latchPin, LSBFIRST, 24);
-ShiftRegisterOut SR_VU(dataPin, clockPin, 16, LSBFIRST, 8);
+ShiftRegisterOut SR_BS(dataPin, clockPin, latchPin, LSBFIRST, 24);
+ShiftRegisterOut SR(dataPin, clockPin, 16, LSBFIRST, 8);
 
-MCU_TimeDisplay tdisp;
-MCU_AssignmentDisplay adisp;
+Bank bank;
 
-Bank bankVU;
-
-BankSelector bsVU(bankVU, { 6, 5 }, {
-  SR.blue(0),
-  SR.blue(1),
-  SR.blue(2),
-  SR.blue(3),
-  SR.blue(4),
-  SR.blue(5),
-  SR.blue(6),
-  SR.blue(7),
+BankSelector bs(bank, { 6, 5 }, {
+  SR_BS.green(0),
+  SR_BS.green(1),
+  SR_BS.green(2),
+  SR_BS.green(3),
+  SR_BS.green(4),
+  SR_BS.green(5),
+  SR_BS.green(6),
+  SR_BS.green(7),
 });
 
-MCU_VU_LED vu(SR_VU.pin(0), 6, SR_VU.pin(7), 0, 8);
+MCU_VPot_Ring_LED ring(SR.pin(0), 7, SR.pin(7), 0, 8);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -53,11 +49,11 @@ void setup() {
   startMIDI();
 
   SR.begin();
-  SR_VU.begin();
+  SR_BS.begin();
 
-  bankVU.add(vu, Bank::CHANGE_ADDRESS);
+  bank.add(ring, Bank::CHANGE_ADDRESS);
 
-  bsVU.init();
+  bs.init();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
