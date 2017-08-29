@@ -3,7 +3,7 @@
 
 using namespace ExtIO;
 
-// #define DEBUG
+#define DEBUG
 
 const uint8_t clockPin = 10;
 const uint8_t latchPin = 11;
@@ -26,6 +26,17 @@ ShiftRegisterOut SR(dataPin, clockPin, 16, LSBFIRST, 8);
 Bank bank;
 
 BankSelector bs(bank, { 6, 5 }, {
+  SR_BS.blue(0),
+  SR_BS.blue(1),
+  SR_BS.blue(2),
+  SR_BS.blue(3),
+  SR_BS.blue(4),
+  SR_BS.blue(5),
+  SR_BS.blue(6),
+  SR_BS.blue(7),
+});
+
+const pin_t ledring[11] = {
   SR_BS.green(0),
   SR_BS.green(1),
   SR_BS.green(2),
@@ -34,9 +45,12 @@ BankSelector bs(bank, { 6, 5 }, {
   SR_BS.green(5),
   SR_BS.green(6),
   SR_BS.green(7),
-});
+  SR.pin(0),
+  SR.pin(1),
+  SR.pin(2),
+};
 
-MCU_VPot_Ring_LED ring(SR.pin(0), 7, SR.pin(7), 0, 8);
+MCU_VPot_Ring_LED ring(ledring, SR.pin(7), 0, 8);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 

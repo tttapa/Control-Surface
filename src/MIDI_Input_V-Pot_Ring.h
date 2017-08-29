@@ -81,97 +81,96 @@ class MCU_VPot_Ring : public MIDI_Input_Element_CC
 class MCU_VPot_Ring_LED : public MCU_VPot_Ring
 {
   public:
-    MCU_VPot_Ring_LED(pin_t start, uint8_t length, uint8_t address, uint8_t nb_addresses)
-        : MCU_VPot_Ring(address, nb_addresses), start(start), centerLEDpin(0), length(length < 12 ? length : 12),
-          centerLED(false)
+    MCU_VPot_Ring_LED(const pin_t (&LEDs)[11], uint8_t address, uint8_t nb_addresses)
+        : MCU_VPot_Ring(address, nb_addresses), LEDs(LEDs), centerLEDpin(0), centerLED(false)
     {
-        for (pin_t pin = 0; pin < length; pin++)
-            pinMode(start + pin, OUTPUT);
+        for (pin_t pin = 0; pin < 11; pin++)
+            pinMode(LEDs[pin], OUTPUT);
     }
-    MCU_VPot_Ring_LED(pin_t start, uint8_t length, pin_t centerLEDpin, uint8_t address, uint8_t nb_addresses)
-        : MCU_VPot_Ring(address, nb_addresses), start(start), length(length < 12 ? length : 12),
+    MCU_VPot_Ring_LED(const pin_t (&LEDs)[11], pin_t centerLEDpin, uint8_t address, uint8_t nb_addresses)
+        : MCU_VPot_Ring(address, nb_addresses), LEDs(LEDs),
           centerLEDpin(centerLEDpin), centerLED(true)
     {
-        for (pin_t pin = 0; pin < length; pin++)
-            pinMode(start + pin, OUTPUT);
+        for (pin_t pin = 0; pin < 11; pin++)
+            pinMode(LEDs[pin], OUTPUT);
         pinMode(centerLEDpin, OUTPUT);
     }
     ~MCU_VPot_Ring_LED()
     {
-        for (pin_t pin = 0; pin < length; pin++)
+        for (pin_t pin = 0; pin < 11; pin++)
         {
-            pinMode(start + pin, INPUT);
+            pinMode(LEDs[pin], INPUT);
         }
         if (centerLED)
             pinMode(centerLEDpin, INPUT);
     }
 
   protected:
-    const uint8_t length;
-    const pin_t start, centerLEDpin;
+    const pin_t *LEDs, centerLEDpin;
     const bool centerLED;
 
     void display()
     {
-        uint8_t value = getPosition(addressOffset) * length / 12 + 1;
-
         if (centerLED)
             digitalWrite(centerLEDpin, getCenterLED(addressOffset));
-        if (value == 0)
+        if (getPosition(addressOffset) == 0)
         {
-            for (uint8_t pin = 0; pin < length; pin++)
-                digitalWrite(start + pin, LOW);
+            for (uint8_t pin = 0; pin < 11; pin++)
+                digitalWrite(LEDs[pin], LOW);
             return;
         }
+        uint8_t value = getPosition(addressOffset) - 1;
+        Serial.printf("Display: %d", value);
+
         switch (getMode(addressOffset))
         {
         case 0:
         {
-            for (uint8_t pin = 0; pin < length; pin++)
-                digitalWrite(start + pin, LOW);
-            digitalWrite(start + value - 1, HIGH);
+            for (uint8_t pin = 0; pin < 11; pin++)
+                digitalWrite(LEDs[pin], LOW);
+            digitalWrite(LEDs[value], HIGH);
         }
         break;
         case 1:
         {
-            uint8_t startOn = min(value, length / 2) - 1;
-            uint8_t startOff = max(value, length / 2);
+            uint8_t startOn = min(value, 5);
+            uint8_t startOff = max(value, 5) + 1;
             for (uint8_t pin = 0; pin < startOn; pin++)
-                digitalWrite(start + pin, LOW);
+                digitalWrite(LEDs[pin], LOW);
             for (uint8_t pin = startOn; pin < startOff; pin++)
-                digitalWrite(start + pin, HIGH);
-            for (uint8_t pin = startOff; pin < length; pin++)
-                digitalWrite(start + pin, LOW);
+                digitalWrite(LEDs[pin], HIGH);
+            for (uint8_t pin = startOff; pin < 11; pin++)
+                digitalWrite(LEDs[pin], LOW);
         }
         break;
         case 2:
         {
-            for (uint8_t pin = 0; pin < value; pin++)
-                digitalWrite(start + pin, HIGH);
-            for (uint8_t pin = value; pin < length; pin++)
-                digitalWrite(start + pin, LOW);
+            for (uint8_t pin = 0; pin <= value; pin++)
+                digitalWrite(LEDs[pin], HIGH);
+            for (uint8_t pin = value + 1; pin < 11; pin++)
+                digitalWrite(LEDs[pin], LOW);
         }
         break;
         case 3:
         {
-            uint8_t startOn = max(length / 2 - value, 0) + 1;
-            uint8_t startOff = min(length / 2 + value, length);
+            uint8_t startOn = max(5 - value, 0);
+            uint8_t startOff = min(6 + value, 11);
             for (uint8_t pin = 0; pin < startOn; pin++)
-                digitalWrite(start + pin, LOW);
+                digitalWrite(LEDs[pin], LOW);
             for (uint8_t pin = startOn; pin < startOff; pin++)
-                digitalWrite(start + pin, HIGH);
-            for (uint8_t pin = startOff; pin < length; pin++)
-                digitalWrite(start + pin, LOW);
+                digitalWrite(LEDs[pin], HIGH);
+            for (uint8_t pin = startOff; pin < 11; pin++)
+                digitalWrite(LEDs[pin], LOW);
         }
         break;
         }
     }
 
-    uint8_t min(uint8_t a, uint8_t b)
+    int8_t min(int8_t a, int8_t b)
     {
         return a > b ? b : a;
     }
-    uint8_t max(uint8_t a, uint8_t b)
+    int8_t max(int8_t a, int8_t b)
     {
         return a < b ? b : a;
     }
