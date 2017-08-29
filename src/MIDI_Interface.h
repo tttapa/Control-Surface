@@ -51,9 +51,9 @@ public:
 protected:
   virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2);
   virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1);
-  size_t mod(size_t a, size_t b); // modulo operator that works on negative numbers
+  size_t mod(int a, int b); // modulo operator that works on negative numbers
   static MIDI_Interface *DefaultMIDI_Interface;
-  const static size_t bufferSize = 64;
+  const static size_t bufferSize = 1024;
   uint8_t ringbuffer[bufferSize];
   size_t writeIndex = 0, readIndex = 0, availableMIDIevents = 0;
   

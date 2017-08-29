@@ -1,5 +1,5 @@
 #ifndef MCU_VPOT_RING_H_
-#define MCU_VPOT_RING_H
+#define MCU_VPOT_RING_H_
 
 #include "MIDI_Input_Element.h"
 #include "ExtendedInputOutput/ExtendedInputOutput.h"

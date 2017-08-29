@@ -95,7 +95,7 @@ inline bool MIDI_Interface::isHeader(uint8_t data)
     return (data & (1 << 7)) && data != SysExEnd;
 }
 
-size_t MIDI_Interface::mod(size_t a, size_t b)
+size_t MIDI_Interface::mod(int a, int b)
 {
     return ((a % b) + b) % b;
 }

@@ -73,7 +73,11 @@ class USBMIDI_Interface : public MIDI_Interface
   public:
     bool refresh()
     {
-#if defined(CORE_TEENSY)          // If it's a Teensy board
+#if defined(CORE_TEENSY) // If it's a Teensy board
+
+        if (mod(readIndex - writeIndex, bufferSize) < 3)
+            ; // return false;
+
         if (rx_packet == nullptr) // If there's no previous packet
         {
             if (!usb_configuration) // Check USB configuration

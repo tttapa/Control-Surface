@@ -14,6 +14,7 @@ class MIDI_Element
     {
         ;
     }
+    virtual void reset() {}                // Reset to default value (currently only used for VU meters)
     virtual void display() {}
     virtual void refresh() {}              // Check if the state or value of the control has changed since last refresh, if so, send MIDI event, refresh MIDI_Input_Element (write buffer to output etc.)
     virtual void average(size_t length) {} // Use the average of multiple samples of analog readings

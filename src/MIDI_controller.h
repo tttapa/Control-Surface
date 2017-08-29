@@ -66,39 +66,57 @@ private:
       uint8_t targetChannel = header & 0x0F;
       uint8_t data1 = MIDI_Interface::getDefault()->read();
 
-      Serial.print("New midi message:\t");
-      Serial.printf("%02X %02X\r\n", header, data1);
-
-      if (messageType == CC)
+      if (messageType == CC && data1 == 0x79) // Reset All Controllers
       {
+        Serial.println("Reset All Controllers");
         for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
-        {
-          if (element->update(data1, targetChannel))
-          {
-            Serial.println("\tMatch");
-            break;
-          }
-        }
-      }
-      else if (messageType == NOTE_OFF || messageType == NOTE_ON)
-      {
-        for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
-        {
-          if (element->update(messageType, data1, targetChannel))
-          {
-            Serial.println("\tMatch");
-            break;
-          }
-        }
-      }
-      else if (messageType == CHANNEL_PRESSURE)
-      {
+          element->reset();
         for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
+          element->reset();
+      }
+      else if (messageType == CC && data1 == 0x7B) // All Notes off
+      {
+        Serial.println("All Notes Off");
+        for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
+          element->reset();
+      }
+      else
+      {
+
+        Serial.print("New midi message:\t");
+        Serial.printf("%02X %02X\r\n", header, data1);
+
+        if (messageType == CC)
         {
-          if (element->update(targetChannel, data1))
+          for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
           {
-            Serial.println("\tMatch");
-            break;
+            if (element->update(data1, targetChannel))
+            {
+              Serial.println("\tMatch");
+              break;
+            }
+          }
+        }
+        else if (messageType == NOTE_OFF || messageType == NOTE_ON)
+        {
+          for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
+          {
+            if (element->update(messageType, data1, targetChannel))
+            {
+              Serial.println("\tMatch");
+              break;
+            }
+          }
+        }
+        else if (messageType == CHANNEL_PRESSURE)
+        {
+          for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
+          {
+            if (element->update(targetChannel, data1))
+            {
+              Serial.println("\tMatch");
+              break;
+            }
           }
         }
       }

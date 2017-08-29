@@ -21,6 +21,15 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     {
         free(values);
     }
+    void reset()
+    {
+        for (uint8_t i = 0; i < nb_addresses; i++)
+        {
+            setValue(i, 0);
+            clearOverload(i);
+        }
+        display();
+    }
 
     bool updateImpl(uint8_t targetChannel, uint8_t data1)
     {
@@ -34,7 +43,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         else if (data == 0xE) // set overload
             setOverload(targetAddress);
         else if (data == 0xD) // not implemented
-            ; 
+            ;
         else // new peak value
             setValue(targetAddress, data);
 
@@ -103,9 +112,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     }
     inline bool match(uint8_t targetAddress)
     {
-        return 
-           (targetAddress >= this->address) 
-        && (targetAddress < this->address + nb_addresses);
+        return (targetAddress >= this->address) && (targetAddress < this->address + nb_addresses);
     }
 };
 
@@ -124,7 +131,7 @@ class MCU_VU_LED : public MCU_VU
         }
     }
     MCU_VU_LED(pin_t start, uint8_t length, pin_t overloadpin, uint8_t address, uint8_t nb_addresses, bool decay = true)
-        : MCU_VU(address, nb_addresses, decay), start(start), length(length < 12 ? length : 12), 
+        : MCU_VU(address, nb_addresses, decay), start(start), length(length < 12 ? length : 12),
           overloadpin(overloadpin), overload(true)
     {
         for (pin_t pin = 0; pin < length; pin++)
@@ -148,7 +155,5 @@ class MCU_VU_LED : public MCU_VU
         if (overload)
             digitalWrite(overloadpin, getOverload(addressOffset));
     }
-
-
 };
 #endif // MIDI_Input_VU_H_
