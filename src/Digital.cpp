@@ -1,5 +1,5 @@
 #include "Digital.h"
-#include "MIDI_Interface.h"
+#include "MIDI_controller.h"
 
 Digital::Digital(uint8_t pin, uint8_t note, uint8_t channel, uint8_t velocity) // Constructor
 {
@@ -26,13 +26,13 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
     if (stateChange == falling)
     { // Button is pushed
       buttonState = state;
-      MIDI_Controller.MIDI->send(NOTE_ON, channel + channelOffset, note + addressOffset, velocity);
+      MIDI_Controller.MIDI()->send(NOTE_ON, channel + channelOffset, note + addressOffset, velocity);
     }
 
     if (stateChange == rising)
     { // Button is released
       buttonState = state;
-      MIDI_Controller.MIDI->send(NOTE_OFF, channel + channelOffset, note + addressOffset, velocity);
+      MIDI_Controller.MIDI()->send(NOTE_OFF, channel + channelOffset, note + addressOffset, velocity);
     }
   }
   if (state != prevState)

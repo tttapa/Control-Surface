@@ -5,7 +5,7 @@
 ### General
 - MIDI_Controller
 
-- MIDI_Element 
+- MIDI_Element
     - MIDI_Control_Element
         - Analog
         - AnalogHiRes
@@ -52,7 +52,6 @@
 
 ### UNO & MEGA:
 - MIDI_Interface
-    - USBMIDI_Interface
     - StreamMIDI_Interface
         - StreamDebugMIDI_Interface
             - SerialDebugMIDI_Interface
@@ -62,6 +61,7 @@
         - SerialMIDI_Interface
             - HardwareSerialMIDI_Interface
                 - USBSerialMIDI_Interface
+                    - USBMIDI_Interface
                     - HairlessMIDI_Interface
             - SoftwarSerialMIDI_Interface
 
