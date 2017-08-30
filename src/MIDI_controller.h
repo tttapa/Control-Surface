@@ -68,7 +68,9 @@ private:
 
       if (messageType == CC && data1 == 0x79) // Reset All Controllers
       {
+#ifdef DEBUG
         Serial.println("Reset All Controllers");
+#endif
         for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
           element->reset();
         for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
@@ -76,7 +78,9 @@ private:
       }
       else if (messageType == CC && data1 == 0x7B) // All Notes off
       {
+#ifdef DEBUG
         Serial.println("All Notes Off");
+#endif
         for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
           element->reset();
       }
@@ -91,7 +95,9 @@ private:
           {
             if (element->update(data1, targetChannel))
             {
+#ifdef DEBUG
               Serial.println("\tMatch");
+#endif
               break;
             }
           }
@@ -102,7 +108,9 @@ private:
           {
             if (element->update(messageType, data1, targetChannel))
             {
+#ifdef DEBUG
               Serial.println("\tMatch");
+#endif
               break;
             }
           }
@@ -113,7 +121,9 @@ private:
           {
             if (element->update(targetChannel, data1))
             {
+#ifdef DEBUG
               Serial.println("\tMatch");
+#endif
               break;
             }
           }
@@ -131,6 +141,7 @@ private:
 #endif
             data1 = MIDI_Interface::getDefault()->read();
           }
+#ifdef DEBUG
           if (MIDI_Interface::getDefault()->available() == 0 && data1 != SysExEnd)
           {
             Serial.println("\r\nReached end of buffer without SysExEnd");
@@ -139,6 +150,7 @@ private:
           {
             Serial.println("\tSysExEnd");
           }
+#endif
         }
       }
     } while (MIDI_Interface::getDefault()->available() > 0);

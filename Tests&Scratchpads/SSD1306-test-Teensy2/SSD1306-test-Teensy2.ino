@@ -7,8 +7,8 @@
 
 using namespace ExtIO;
 
-#define DEBUG
-// #define SERIAL_MIDI
+// #define DEBUG
+#define SERIAL_MIDI
 
 const uint8_t clockPin = 10;
 const uint8_t latchPin = 11;
