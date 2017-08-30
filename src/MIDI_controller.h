@@ -21,178 +21,28 @@
 #include "ExtendedInputOutput/ShiftRegisterOut.h"
 #include "ExtendedInputOutput/AnalogMultiplex.h"
 
-class MIDI_Controller
+class MIDI_Controller_
 {
 public:
-  static MIDI_Controller &getInstance()
-  {
-    static MIDI_Controller instance;
-    return instance;
-  }
-  MIDI_Controller(MIDI_Controller const &) = delete;
-  void operator=(MIDI_Controller const &) = delete;
+  static MIDI_Controller_ &getInstance();
+  MIDI_Controller_(MIDI_Controller_ const &) = delete;
+  void operator=(MIDI_Controller_ const &) = delete;
+  ~MIDI_Controller_();
 
-  void refresh()
-  {
-    refreshControls();
-    refreshBankSelectors();
-    while (refreshMIDI())
-      ;
-    updateMidiInput();
-    refreshInputs();
-  }
+  void begin();
+  void refresh();
+  MIDI_Interface *MIDI();
 
 private:
-  MIDI_Controller() {}
-  void refreshControls()
-  {
-    MIDI_Control_Element *element = MIDI_Control_Element::getFirst();
-    while (element != nullptr)
-    {
-      element->refresh();
-      element = element->getNext();
-    }
-  }
-  void updateMidiInput()
-  {
-    if (MIDI_Interface::getDefault()->available() == 0) // if there are no MIDI messages in the buffer
-      return;
-    do
-    {
-      uint8_t header = MIDI_Interface::getDefault()->getNextHeader();
-      if (!header)
-        return;
-      uint8_t messageType = header & 0xF0;
-      uint8_t targetChannel = header & 0x0F;
-      uint8_t data1 = MIDI_Interface::getDefault()->read(); // this is allowed, because all messages have at least 1 data byte
-
-      if (messageType == CC && data1 == 0x79) // Reset All Controllers
-      {
-#ifdef DEBUG
-        Serial.println("Reset All Controllers");
-#endif
-        for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
-          element->reset();
-        for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
-          element->reset();
-      }
-      else if (messageType == CC && data1 == 0x7B) // All Notes off
-      {
-#ifdef DEBUG
-        Serial.println("All Notes Off");
-#endif
-        for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
-          element->reset();
-      }
-      else
-      {
-#ifdef DEBUG
-        Serial.printf("New midi message:\t%02X %02X\r\n", header, data1);
-#endif
-        if (messageType == CC)
-        {
-          for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
-          {
-            if (element->update(data1, targetChannel))
-            {
-#ifdef DEBUG
-              Serial.println("\tMatch");
-#endif
-              break;
-            }
-          }
-        }
-        else if (messageType == NOTE_OFF || messageType == NOTE_ON)
-        {
-          for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
-          {
-            if (element->update(messageType, data1, targetChannel))
-            {
-#ifdef DEBUG
-              Serial.println("\tMatch");
-#endif
-              break;
-            }
-          }
-        }
-        else if (messageType == CHANNEL_PRESSURE)
-        {
-          for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
-          {
-            if (element->update(targetChannel, data1))
-            {
-#ifdef DEBUG
-              Serial.println("\tMatch");
-#endif
-              break;
-            }
-          }
-        }
-        else if (header == SysExStart) // System Exclusive
-        {
-#ifdef DEBUG
-          Serial.print("System Exclusive:");
-#endif
-          while (data1 != SysExEnd && MIDI_Interface::getDefault()->available() > 0) // TODO: any status byte should end SysEx (MIDI 1.0 Detailed Specification 4.2 p.29)
-          {
-#ifdef DEBUG
-            Serial.print(' ');
-            Serial.print(data1, HEX);
-#endif
-            data1 = MIDI_Interface::getDefault()->read();
-          }
-#ifdef DEBUG
-          if (MIDI_Interface::getDefault()->available() == 0 && data1 != SysExEnd)
-          {
-            Serial.println("\r\nReached end of buffer without SysExEnd");
-          }
-          else
-          {
-            Serial.println("\tSysExEnd");
-          }
-#endif
-        }
-      }
-    } while (MIDI_Interface::getDefault()->available() > 0);
-  }
-  void refreshInputs()
-  {
-    {
-      MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst();
-      while (element != nullptr)
-      {
-        element->refresh();
-        element = element->getNext();
-      }
-    }
-    {
-      MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst();
-      while (element != nullptr)
-      {
-        element->refresh();
-        element = element->getNext();
-      }
-    }
-    {
-      MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst();
-      while (element != nullptr)
-      {
-        element->refresh();
-        element = element->getNext();
-      }
-    }
-  }
-  void refreshBankSelectors()
-  {
-    BankSelector *element = BankSelector::getFirst();
-    while (element != nullptr)
-    {
-      element->refresh();
-      element = element->getNext();
-    }
-  }
+  MIDI_Controller_() {}
+  MIDI_Interface *new_midi = nullptr;
+  MIDI_Interface *midi = nullptr;
+  void refreshControls();
+  void updateMidiInput();
+  void refreshInputs();
+  void refreshBankSelectors();
 };
 
-MIDI_Controller &MIDI_ControllerInstance = MIDI_Controller::getInstance();
+extern MIDI_Controller_ &MIDI_Controller;
 
 #endif // MIDIctrl_h_

@@ -43,7 +43,7 @@ void AnalogHiRes::refresh() // read the analog value, update the average, map it
 
   if (value != oldVal) // if the value changed since last time
   {
-    sendMIDI(PITCH_BEND, channel + channelOffset, value, value >> 7); // send a Pitch Bend MIDI event
+    MIDI_Controller.MIDI->send(PITCH_BEND, channel + channelOffset, value, value >> 7); // send a Pitch Bend MIDI event
     oldVal = value;
   }
 }

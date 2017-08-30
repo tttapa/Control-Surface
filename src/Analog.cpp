@@ -34,7 +34,7 @@ void Analog::refresh() // read the analog value, update the average, map it to a
   uint8_t value = input >> 3; // map from the 10-bit analog input value [0, 1023] to the 7-bit MIDI value [0, 127]
   if (value != oldVal)        // if the value changed since last time
   {
-    sendMIDI(CC, channel + channelOffset, controllerNumber + addressOffset, value); // send a Control Change MIDI event
+    MIDI_Controller.MIDI->send(CC, channel + channelOffset, controllerNumber + addressOffset, value); // send a Control Change MIDI event
     oldVal = value;
   }
 }

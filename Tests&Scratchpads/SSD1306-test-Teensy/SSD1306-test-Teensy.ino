@@ -119,7 +119,7 @@ void loop() {
   display.print(1000/loopTime);
   
   display.display();
-  MIDI_ControllerInstance.refresh();
+  MIDI_Controller.refresh();
 }
 
 

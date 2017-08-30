@@ -8,7 +8,7 @@
 using namespace ExtIO;
 
 // #define DEBUG
-#define SERIAL_MIDI
+// #define SERIAL_MIDI
 
 const uint8_t clockPin = 10;
 const uint8_t latchPin = 11;
@@ -83,7 +83,6 @@ void setup()   {
   Wire.setClock(1800000); // 1.8 MHz (set F_CPU to 96 MHz)
   display.clearDisplay();
   display.display();
-  startMIDI();
 #ifdef DEBUG
   while (!Serial);
   delay(500);
@@ -130,7 +129,7 @@ void loop() {
   display.print(1000 / loopTime);
 
   display.display();
-  MIDI_ControllerInstance.refresh();
+  MIDI_Controller.refresh();
 }
 
 
