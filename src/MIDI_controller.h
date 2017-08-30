@@ -55,7 +55,7 @@ private:
   }
   void updateMidiInput()
   {
-    if (availableMIDI() == 0)
+    if (MIDI_Interface::getDefault()->available() == 0) // if there are no MIDI messages in the buffer
       return;
     do
     {
@@ -64,7 +64,7 @@ private:
         return;
       uint8_t messageType = header & 0xF0;
       uint8_t targetChannel = header & 0x0F;
-      uint8_t data1 = MIDI_Interface::getDefault()->read();
+      uint8_t data1 = MIDI_Interface::getDefault()->read(); // this is allowed, because all messages have at least 1 data byte
 
       if (messageType == CC && data1 == 0x79) // Reset All Controllers
       {

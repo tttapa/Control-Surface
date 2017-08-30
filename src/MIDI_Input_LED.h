@@ -32,8 +32,6 @@ public:
     if ((messageType == NOTE_OFF  && velocity != 0) || (messageType == NOTE_ON && velocity == 0))
     {
       states[statesIndex] &= ~(1 << statesBit);
-      if (targetAddress == 0x10)
-        Serial.println("\t\t\t\t\t\t\t\t\t\tTurned off MUTE channel 1");
     }
     else if (messageType == NOTE_ON)
     {

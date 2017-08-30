@@ -48,93 +48,42 @@ protected:
   }
   bool refresh()
   {
-    if (stream.available() <= 0)
-      return false;
-    char data = stream.read();
-
-    if (isHexChar(toLowerCase(data)))
+    if (handlePreviousByte)
     {
-      data = toLowerCase(data);
-      if (firstChar == '\0')
-        firstChar = data;
-      else if (secondChar == '\0')
-        secondChar = data;
-      else
-      {
-        firstChar = secondChar;
-        secondChar = data;
-      }
+      if (parseSingleMIDIByte(midiByte))
+        handlePreviousByte = false;
     }
-    else
     {
-      if (isWhiteSpace(data) && firstChar && secondChar) // if we received two hex characters followed by whitespace
+      if (stream.available() <= 0)
+        return false;
+
+      char data = stream.read();
+
+      if (isHexChar(toLowerCase(data)))
       {
-        uint8_t binaryByte = hexCharToNibble(firstChar) << 4 | hexCharToNibble(secondChar);
-        Serial.printf("New byte:\t%02Xh\r\n", binaryByte);
-        if (binaryByte & (1 << 7)) // If it's a header byte
+        data = toLowerCase(data);
+        if (firstChar == '\0')
+          firstChar = data;
+        else if (secondChar == '\0')
+          secondChar = data;
+        else
         {
-          if ((binaryByte & 0xF8) == 0xF8) // If it's a Real-Time message // TODO
-          {
-            ; // Handle Real-Time stuff
-            Serial.println("Real-Time");
-          }
-          else // Normal header
-          {
-            ; // End of Exclusive
-            Serial.println("Normal Header");
-            runningStatusBuffer = binaryByte;
-            thirdByte = false;
-          }
-        }
-        else // If it's a data byte
-        {
-          if (thirdByte)
-          {
-            Serial.println("Second data byte");
-            thirdByte = false;
-            ringbuffer[writeIndex + 2] = binaryByte;
-            incrementWriteIndex(3);
-            Serial.println("Message finished");
-            availableMIDIevents++;
-          }
-          else
-          {
-            if (runningStatusBuffer == 0)
-            {
-              Serial.println("Error: No header");
-              ; // Ignore
-            }
-            else if (runningStatusBuffer < 0xC0 || runningStatusBuffer == 0xE0) // Note, Aftertouch, CC or Pitch Bend
-            {
-              Serial.println("First data byte (of two)");
-              thirdByte = true;
-              ringbuffer[writeIndex] = runningStatusBuffer;
-              ringbuffer[(writeIndex + 1) % bufferSize] = binaryByte;
-            }
-            else if (runningStatusBuffer < 0xE0) // Program Change or Channel Pressure
-            {
-              Serial.println("First data byte");
-              ringbuffer[writeIndex] = runningStatusBuffer;
-              incrementWriteIndex(1);
-              ringbuffer[writeIndex] = binaryByte;
-              incrementWriteIndex(1);
-              Serial.println("Message finished");
-              availableMIDIevents++;
-            }
-            else if (runningStatusBuffer == 0xF0)
-            {
-              ; // add data to SysEx buffer
-              Serial.println("SysEx data byte");
-            }
-            else
-            {
-              Serial.println("Data byte ignored");
-            }
-          }
+          firstChar = secondChar;
+          secondChar = data;
         }
       }
-      firstChar = '\0';
-      secondChar = '\0';
+      else if (isWhiteSpace(data) && firstChar && secondChar) // if we received two hex characters followed by whitespace
+      {
+        uint8_t midiByte = hexCharToNibble(firstChar) << 4 | hexCharToNibble(secondChar);
+        Serial.printf("New byte:\t%02Xh\r\n", midiByte);
+        firstChar = '\0';
+        secondChar = '\0';
+        if (!parseSingleMIDIByte(midiByte)) // if the MIDI buffer is full
+        {
+          handlePreviousByte = true; // handle this byte next time (after emptying the buffer), before reading the next byte
+          return false;
+        }
+      }
     }
     return true;
   }
@@ -145,6 +94,8 @@ private:
   char firstChar;
   char secondChar;
   uint8_t runningStatusBuffer = 0;
+  uint8_t midiByte = 0;
+  bool handlePreviousByte = false;
 
   bool isHexChar(char hex) // check if a given character is a hexadecimal number (0-9 or a-f)
   {
@@ -161,6 +112,75 @@ private:
   bool isWhiteSpace(char x)
   {
     return x == ' ' || x == '\r' || x == '\n';
+  }
+
+  bool parseSingleMIDIByte(uint8_t midiByte)
+  {
+    if (midiByte & (1 << 7)) // If it's a header byte (first byte)
+    {
+      if ((midiByte & 0xF8) == 0xF8) // If it's a Real-Time message (not implemented)
+      {
+        ; // Handle Real-Time stuff
+        Serial.println("Real-Time");
+      }
+      else // Normal header
+      {
+        ; // End of Exclusive
+        Serial.println("Normal Header");
+        runningStatusBuffer = midiByte;
+        thirdByte = false;
+      }
+    }
+    else // If it's a data byte
+    {
+      if (thirdByte) // third data byte of three
+      {
+        Serial.println("Second data byte");
+        if (!addToMessage(midiByte)) // if the buffer is full
+          return false;              // return, but read same byte again next time (after emptying the buffer)
+        finishMessage();
+        Serial.println("Message finished");
+        thirdByte = false;
+      }
+      else // second byte or SysEx data
+      {
+        if (runningStatusBuffer == 0)
+        {
+          Serial.println("Error: No header");
+          ; // Ignore
+        }
+        else if (runningStatusBuffer < 0xC0 || runningStatusBuffer == 0xE0) // Note, Aftertouch, CC or Pitch Bend
+        {
+          Serial.println("First data byte (of two)");
+          thirdByte = true;
+          if (!hasSpaceLeft(2))              // if the buffer is full
+            return false;                    // return, but read same byte again next time (after emptying the buffer)
+          addToMessage(runningStatusBuffer); // add the header to the buffer
+          addToMessage(midiByte);            // add the first data byte to the buffer
+          ;                                  // message is not finished yet
+        }
+        else if (runningStatusBuffer < 0xE0) // Program Change or Channel Pressure
+        {
+          Serial.println("First data byte");
+          if (!hasSpaceLeft(2))              // if the buffer is full
+            return false;                    // return, but read same byte again next time (after emptying the buffer)
+          addToMessage(runningStatusBuffer); // add the header to the buffer
+          addToMessage(midiByte);            // add the data byte to the buffer
+          Serial.println("Message finished");
+          finishMessage();
+        }
+        else if (runningStatusBuffer == 0xF0) // SysEx data byte
+        {
+          ; // add data to SysEx buffer
+          Serial.println("SysEx data byte");
+        }
+        else
+        {
+          Serial.println("Data byte ignored");
+        }
+      }
+    }
+    return true; // successfully added to buffer, continue with next MIDI byte
   }
 };
 
