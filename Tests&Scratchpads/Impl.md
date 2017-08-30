@@ -19,7 +19,7 @@
         - MIDI_Input_LED
     - MIDI_Input_Element_ChannelPressure
         - MIDI_Input_VU
-    - MIDI_Input_Element_PitchBend
+    - MIDI_Input_Element_PitchBend ==TODO==
         - MIDI_Input_Fader	==TODO==
     - MIDI_Input_Element_SysEx	==TODO==
 
@@ -38,31 +38,31 @@
 ### Teensy & Leonardo:
 - MIDI_Interface
     - USBMIDI_Interface
-    - StreamDebugMIDI_Interface
-        - SerialDebugMIDI_Interface
-            - HardwareSerialDebugMIDI_Interface
-            - USBDebugMIDI_Interface
-            - SoftwarSerialDebugMIDI_Interface
     - StreamMIDI_Interface
+         - StreamDebugMIDI_Interface
+             - SerialDebugMIDI_Interface
+                 - HardwareSerialDebugMIDI_Interface
+                 - USBDebugMIDI_Interface
+                 - SoftwarSerialDebugMIDI_Interface
         - SerialMIDI_Interface
-            - HardwareSerialMIDI_Interface
-            - USBSerialMIDI_Interface
-                - HairlessMIDI_Interface
-            - SoftwarSerialMIDI_Interface
-            
+             - HardwareSerialMIDI_Interface
+             - USBSerialMIDI_Interface
+                 - HairlessMIDI_Interface
+             - SoftwarSerialMIDI_Interface
+
 ### UNO & MEGA:
 - MIDI_Interface
     - USBMIDI_Interface
-    - StreamDebugMIDI_Interface
-        - SerialDebugMIDI_Interface
-            - HardwareSerialDebugMIDI_Interface
-            	- USBDebugMIDI_Interface
-            - SoftwarSerialDebugMIDI_Interface
     - StreamMIDI_Interface
+        - StreamDebugMIDI_Interface
+            - SerialDebugMIDI_Interface
+                - HardwareSerialDebugMIDI_Interface
+                    - USBDebugMIDI_Interface
+            - SoftwarSerialDebugMIDI_Interface
         - SerialMIDI_Interface
             - HardwareSerialMIDI_Interface
-            	- USBSerialMIDI_Interface
-                	- HairlessMIDI_Interface
+                - USBSerialMIDI_Interface
+                    - HairlessMIDI_Interface
             - SoftwarSerialMIDI_Interface
 
 

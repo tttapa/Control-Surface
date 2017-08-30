@@ -2,17 +2,6 @@
 
 using namespace ExtIO;
 
-void BankSelector::addToLinkedList()
-{
-    if (first == nullptr)
-        first = this;
-    previous = last;
-    if (previous != nullptr)
-        previous->next = this;
-    last = this;
-    next = nullptr;
-}
-
 BankSelector *BankSelector::last = nullptr;
 BankSelector *BankSelector::first = nullptr;
 
