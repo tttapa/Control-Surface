@@ -120,8 +120,9 @@ class MCU_VPot_Ring_LED : public MCU_VPot_Ring
             return;
         }
         uint8_t value = getPosition(addressOffset) - 1;
+#ifdef DEBUG
         Serial.printf("Display: %d", value);
-
+#endif
         switch (getMode(addressOffset))
         {
         case 0:

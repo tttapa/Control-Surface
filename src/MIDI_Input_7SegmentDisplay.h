@@ -28,7 +28,9 @@ class MCU_7SegmentDisplay : public MIDI_Input_Element_CC
         bool decimalPt = data2 & 0x40;
         data2 &= 0x3F;
         char character = data2 >= 0x20 ? data2 : data2 + 0x40;
-        // Serial.printf("\t%d\t%c%c\r\n", charIndex, character, decimalPt ? '.' : '\0');
+#ifdef DEBUG
+        Serial.printf("\t%d\t%c%c\r\n", charIndex, character, decimalPt ? '.' : '\0');
+#endif
         textBuffer[charIndex] = character;
         print();
         refresh();
@@ -51,11 +53,13 @@ class MCU_TimeDisplay : public MCU_7SegmentDisplay
     }
     void print()
     {
+#ifdef DEBUG
         char barStr[5], beatStr[3], frameStr[4];
         getBars(barStr);
         getBeats(beatStr);
         getFrames(frameStr);
         Serial.printf("Bar: %s\tBeat: %s\tFrame: %s\r\n", barStr, beatStr, frameStr);
+#endif
     }
     void getBars(char *buff)
     {
@@ -105,9 +109,11 @@ class MCU_AssignmentDisplay : public MCU_7SegmentDisplay
     }
     void print()
     {
+#ifdef DEBUG
         char str[3];
         getText(str);
         Serial.printf("Assignment: %s\r\n", str);
+#endif
     }
 
     void getText(char *buff)

@@ -82,10 +82,9 @@ private:
       }
       else
       {
-
-        Serial.print("New midi message:\t");
-        Serial.printf("%02X %02X\r\n", header, data1);
-
+#ifdef DEBUG
+        Serial.printf("New midi message:\t%02X %02X\r\n", header, data1);
+#endif
         if (messageType == CC)
         {
           for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
@@ -121,11 +120,15 @@ private:
         }
         else if (header == SysExStart) // System Exclusive
         {
+#ifdef DEBUG
           Serial.print("System Exclusive:");
+#endif
           while (data1 != SysExEnd && MIDI_Interface::getDefault()->available() > 0) // TODO: any status byte should end SysEx (MIDI 1.0 Detailed Specification 4.2 p.29)
           {
+#ifdef DEBUG
             Serial.print(' ');
             Serial.print(data1, HEX);
+#endif
             data1 = MIDI_Interface::getDefault()->read();
           }
           if (MIDI_Interface::getDefault()->available() == 0 && data1 != SysExEnd)

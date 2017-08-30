@@ -43,7 +43,9 @@ class USBMIDI_Interface : public MIDI_Interface
 
     bool parseUSBMIDIpacket(uint8_t *packet)
     {
+#ifdef DEBUG
         Serial.printf("\t\t\t\t\t\tMIDIUSB packet:\t%02X %02X %02X %02X\tSysEx length:\t%lu\r\n", packet[0], packet[1], packet[2], packet[3], SysExLength);
+#endif
 
         uint8_t CIN = (uint8_t)packet[0] << 4; // MIDI USB cable index number
 
@@ -73,15 +75,19 @@ class USBMIDI_Interface : public MIDI_Interface
             }
             else if (SysExLength == 0) // If we haven't received a SysExStart
             {
+#ifdef DEBUG
                 Serial.println("No SysExStart received");
-                return true;           // ignore the data
+#endif
+                return true; // ignore the data
             }
 
             SysExLength += 3;
             if (SysExLength > bufferSize) // SysEx is larger than the buffer
             {
-                startMessage(); // Discard message
+#ifdef DEBUG
                 Serial.println("SysEx is larger than buffer");
+#endif
+                startMessage(); // Discard message
                 SysExLength = 0;
                 return true;
             }
@@ -105,8 +111,10 @@ class USBMIDI_Interface : public MIDI_Interface
             SysExLength += 1;
             if (SysExLength > bufferSize) // SysEx is larger than the buffer
             {
-                startMessage(); // Discard message
+#ifdef DEBUG
                 Serial.println("SysEx is larger than buffer");
+#endif
+                startMessage(); // Discard message
                 SysExLength = 0;
                 return true;
             }
@@ -126,8 +134,10 @@ class USBMIDI_Interface : public MIDI_Interface
             SysExLength += 2;
             if (SysExLength > bufferSize) // SysEx is larger than the buffer
             {
-                startMessage(); // Discard message
+#ifdef DEBUG
                 Serial.println("SysEx is larger than buffer");
+#endif
+                startMessage(); // Discard message
                 SysExLength = 0;
                 return true;
             }
@@ -150,8 +160,10 @@ class USBMIDI_Interface : public MIDI_Interface
             SysExLength += 3;
             if (SysExLength > bufferSize) // SysEx is larger than the buffer
             {
-                startMessage(); // Discard message
+#ifdef DEBUG
                 Serial.println("SysEx is larger than buffer");
+#endif
+                startMessage(); // Discard message
                 SysExLength = 0;
                 return true;
             }

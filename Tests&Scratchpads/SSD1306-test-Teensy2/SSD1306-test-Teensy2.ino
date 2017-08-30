@@ -7,7 +7,8 @@
 
 using namespace ExtIO;
 
-// #define DEBUG
+#define DEBUG
+// #define SERIAL_MIDI
 
 const uint8_t clockPin = 10;
 const uint8_t latchPin = 11;
@@ -30,6 +31,8 @@ const uint8_t PLAY = 0x5E;
 
 #ifdef DEBUG
 USBDebugMIDI_Interface dbg(115200); // Instantiate a USB Debug output
+#elif defined (SERIAL_MIDI)
+USBSerialMIDI_Interface smidi(115200);
 #else
 USBMIDI_Interface midi; // Instantiate a USB MIDI output
 #endif

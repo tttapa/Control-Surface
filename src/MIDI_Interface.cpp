@@ -67,11 +67,14 @@ bool MIDI_Interface::addToMessage(uint8_t data) // add a byte to the current mes
 
 bool MIDI_Interface::hasSpaceLeft(size_t bytes) // check if the buffer has at least 'bytes' bytes of free space available
 {
-    // return messages == 0 || mod(readIndex - writeIndex, bufferSize) >= bytes; // if the buffer is empty, or if the write index is at least 'bytes' places before the read index
+#ifdef DEBUG
     bool avail = messages == 0 || mod(readIndex - writeIndex, bufferSize) >= bytes; // if the buffer is empty, or if the write index is at least 'bytes' places before the read index
     if (!avail)
         Serial.println("Buffer full");
     return avail;
+#else
+    return messages == 0 || mod(readIndex - writeIndex, bufferSize) >= bytes; // if the buffer is empty, or if the write index is at least 'bytes' places before the read index
+#endif
 }
 
 void MIDI_Interface::finishMessage() // finish the message

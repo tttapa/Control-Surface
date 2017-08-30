@@ -1,19 +1,19 @@
 #ifndef DEBUGMIDI_INTERFACE_H_
 #define DEBUGMIDI_INTERFACE_H_
-#include "MIDI_Interface.h"
+#include "SerialMIDI_Interface.h"
 
-const char *MIDI_STATUS_TYPE_NAMES[] = {"Note Off\t",
-                                        "Note On\t\t",
-                                        "Key Pressure\t",
-                                        "Control Change\t",
-                                        "Program Change\t",
-                                        "Channel Pressure",
-                                        "Pitch Bend\t"};
+const static char *MIDI_STATUS_TYPE_NAMES[] = {"Note Off\t",
+                                               "Note On\t\t",
+                                               "Key Pressure\t",
+                                               "Control Change\t",
+                                               "Program Change\t",
+                                               "Channel Pressure",
+                                               "Pitch Bend\t"};
 
-class StreamDebugMIDI_Interface : public MIDI_Interface
+class StreamDebugMIDI_Interface : public StreamMIDI_Interface
 {
 public:
-  StreamDebugMIDI_Interface(Stream &stream) : stream(stream) {}
+  StreamDebugMIDI_Interface(Stream &stream) : StreamMIDI_Interface(stream) {}
 
 protected:
   void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2)
@@ -54,49 +54,45 @@ protected:
       handlePreviousByte = false;
     }
 
+    if (stream.available() <= 0)
+      return false;
+
+    char data = stream.read();
+
+    if (isHexChar(toLowerCase(data)))
     {
-      if (stream.available() <= 0)
-        return false;
-
-      char data = stream.read();
-
-      if (isHexChar(toLowerCase(data)))
+      data = toLowerCase(data);
+      if (firstChar == '\0')
+        firstChar = data;
+      else if (secondChar == '\0')
+        secondChar = data;
+      else
       {
-        data = toLowerCase(data);
-        if (firstChar == '\0')
-          firstChar = data;
-        else if (secondChar == '\0')
-          secondChar = data;
-        else
-        {
-          firstChar = secondChar;
-          secondChar = data;
-        }
-      }
-      else if (isWhiteSpace(data) && firstChar && secondChar) // if we received two hex characters followed by whitespace
-      {
-        midiByte = hexCharToNibble(firstChar) << 4 | hexCharToNibble(secondChar);
-        Serial.printf("New byte:\t%02Xh\r\n", midiByte);
-        firstChar = '\0';
-        secondChar = '\0';
-        if (!parseSingleMIDIByte(midiByte)) // if the MIDI buffer is full
-        {
-          handlePreviousByte = true; // handle this byte next time (after emptying the buffer), before reading the next byte
-          return false;
-        }
+        firstChar = secondChar;
+        secondChar = data;
       }
     }
+    else if (isWhiteSpace(data) && firstChar && secondChar) // if we received two hex characters followed by whitespace
+    {
+      midiByte = hexCharToNibble(firstChar) << 4 | hexCharToNibble(secondChar);
+#ifdef DEBUG
+      Serial.printf("New byte:\t%02Xh\r\n", midiByte);
+#endif
+      firstChar = '\0';
+      secondChar = '\0';
+      if (!parseSingleMIDIByte(midiByte)) // if the MIDI buffer is full
+      {
+        handlePreviousByte = true; // handle this byte next time (after emptying the buffer), before reading the next byte
+        return false;
+      }
+    }
+
     return true;
   }
 
 private:
-  Stream &stream;
-  bool thirdByte = false;
   char firstChar;
   char secondChar;
-  uint8_t runningStatusBuffer = 0;
-  uint8_t midiByte = 0;
-  bool handlePreviousByte = false;
 
   bool isHexChar(char hex) // check if a given character is a hexadecimal number (0-9 or a-f)
   {
@@ -113,106 +109,6 @@ private:
   bool isWhiteSpace(char x)
   {
     return x == ' ' || x == '\r' || x == '\n';
-  }
-
-  bool parseSingleMIDIByte(uint8_t midiByte)
-  {
-    if (midiByte & (1 << 7)) // If it's a header byte (first byte)
-    {
-      if ((midiByte & 0xF8) == 0xF8) // If it's a Real-Time message (not implemented)
-      {
-        ; // Handle Real-Time stuff
-        Serial.println("Real-Time");
-      }
-      else // Normal header
-      {
-        if (runningStatusBuffer == SysExStart) // if we're currently receiving a SysEx message
-        {
-          Serial.println("SysExEnd");
-          if (SysExLength >= bufferSize) // SysEx is larger than the buffer
-          {
-            startMessage(); // Discard message
-            Serial.println("SysEx is larger than buffer");
-            runningStatusBuffer = SysExEnd;
-            return true; // ignore byte
-          }
-          if (!addToMessage(SysExEnd)) // add SysExEnd byte to buffer
-            return false;              // if it failed, return, buffer is full, try same byte again after parsing the buffer
-          finishMessage();
-        }
-        Serial.println("Header");
-        runningStatusBuffer = midiByte;
-        thirdByte = false;
-        if (runningStatusBuffer == SysExStart) // if the first byte of a SysEx message
-        {
-          Serial.println("SysExStart");
-          startMessage();
-          if (!addToMessage(SysExStart)) // if the buffer is full
-            return false;                // return, but read same byte again next time (after emptying the buffer)
-          SysExLength = 1;
-        }
-      }
-    }
-    else // If it's a data byte
-    {
-      if (thirdByte) // third data byte of three
-      {
-        Serial.println("Second data byte");
-        if (!addToMessage(midiByte)) // if the buffer is full
-          return false;              // return, but read same byte again next time (after emptying the buffer)
-        finishMessage();
-        Serial.println("Message finished");
-        thirdByte = false;
-      }
-      else // second byte or SysEx data
-      {
-        if (runningStatusBuffer == 0)
-        {
-          Serial.println("Error: No header");
-          ; // Ignore
-        }
-        else if (runningStatusBuffer < 0xC0 || runningStatusBuffer == 0xE0) // Note, Aftertouch, CC or Pitch Bend
-        {
-          Serial.println("First data byte (of two)");
-
-          if (!hasSpaceLeft(2))              // if the buffer is full
-            return false;                    // return, but read same byte again next time (after emptying the buffer)
-          addToMessage(runningStatusBuffer); // add the header to the buffer
-          addToMessage(midiByte);            // add the first data byte to the buffer
-          thirdByte = true;                  // message is not finished yet
-        }
-        else if (runningStatusBuffer < 0xE0) // Program Change or Channel Pressure
-        {
-          Serial.println("First data byte");
-          if (!hasSpaceLeft(2))              // if the buffer is full
-            return false;                    // return, but read same byte again next time (after emptying the buffer)
-          addToMessage(runningStatusBuffer); // add the header to the buffer
-          addToMessage(midiByte);            // add the data byte to the buffer
-          Serial.println("Message finished");
-          finishMessage();
-        }
-        else if (runningStatusBuffer == SysExStart) // SysEx data byte
-        {
-          ; // add data to SysEx buffer
-          Serial.println("SysEx data byte");
-
-          if (SysExLength >= bufferSize) // SysEx is larger than the buffer
-          {
-            startMessage(); // Discard message
-            Serial.println("SysEx is larger than buffer");
-            return true;
-          }
-          if (!addToMessage(midiByte)) // add data byte to buffer
-            return false;              // if it failed, return, buffer is full, parse same byte again after parsing the buffer
-          SysExLength += 1;
-        }
-        else
-        {
-          Serial.println("Data byte ignored");
-        }
-      }
-    }
-    return true; // successfully added to buffer, continue with next MIDI byte
   }
 };
 
