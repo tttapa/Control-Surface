@@ -50,9 +50,10 @@ protected:
   {
     if (handlePreviousByte)
     {
-      if (parseSingleMIDIByte(midiByte))
-        handlePreviousByte = false;
+      parseSingleMIDIByte(midiByte);
+      handlePreviousByte = false;
     }
+
     {
       if (stream.available() <= 0)
         return false;
@@ -74,7 +75,7 @@ protected:
       }
       else if (isWhiteSpace(data) && firstChar && secondChar) // if we received two hex characters followed by whitespace
       {
-        uint8_t midiByte = hexCharToNibble(firstChar) << 4 | hexCharToNibble(secondChar);
+        midiByte = hexCharToNibble(firstChar) << 4 | hexCharToNibble(secondChar);
         Serial.printf("New byte:\t%02Xh\r\n", midiByte);
         firstChar = '\0';
         secondChar = '\0';
@@ -125,10 +126,31 @@ private:
       }
       else // Normal header
       {
-        ; // End of Exclusive
-        Serial.println("Normal Header");
+        if (runningStatusBuffer == SysExStart) // if we're currently receiving a SysEx message
+        {
+          Serial.println("SysExEnd");
+          if (SysExLength >= bufferSize) // SysEx is larger than the buffer
+          {
+            startMessage(); // Discard message
+            Serial.println("SysEx is larger than buffer");
+            runningStatusBuffer = SysExEnd;
+            return true; // ignore byte
+          }
+          if (!addToMessage(SysExEnd)) // add SysExEnd byte to buffer
+            return false;              // if it failed, return, buffer is full, try same byte again after parsing the buffer
+          finishMessage();
+        }
+        Serial.println("Header");
         runningStatusBuffer = midiByte;
         thirdByte = false;
+        if (runningStatusBuffer == SysExStart) // if the first byte of a SysEx message
+        {
+          Serial.println("SysExStart");
+          startMessage();
+          if (!addToMessage(SysExStart)) // if the buffer is full
+            return false;                // return, but read same byte again next time (after emptying the buffer)
+          SysExLength = 1;
+        }
       }
     }
     else // If it's a data byte
@@ -152,12 +174,12 @@ private:
         else if (runningStatusBuffer < 0xC0 || runningStatusBuffer == 0xE0) // Note, Aftertouch, CC or Pitch Bend
         {
           Serial.println("First data byte (of two)");
-          thirdByte = true;
+
           if (!hasSpaceLeft(2))              // if the buffer is full
             return false;                    // return, but read same byte again next time (after emptying the buffer)
           addToMessage(runningStatusBuffer); // add the header to the buffer
           addToMessage(midiByte);            // add the first data byte to the buffer
-          ;                                  // message is not finished yet
+          thirdByte = true;                  // message is not finished yet
         }
         else if (runningStatusBuffer < 0xE0) // Program Change or Channel Pressure
         {
@@ -169,10 +191,20 @@ private:
           Serial.println("Message finished");
           finishMessage();
         }
-        else if (runningStatusBuffer == 0xF0) // SysEx data byte
+        else if (runningStatusBuffer == SysExStart) // SysEx data byte
         {
           ; // add data to SysEx buffer
           Serial.println("SysEx data byte");
+
+          if (SysExLength >= bufferSize) // SysEx is larger than the buffer
+          {
+            startMessage(); // Discard message
+            Serial.println("SysEx is larger than buffer");
+            return true;
+          }
+          if (!addToMessage(midiByte)) // add data byte to buffer
+            return false;              // if it failed, return, buffer is full, parse same byte again after parsing the buffer
+          SysExLength += 1;
         }
         else
         {

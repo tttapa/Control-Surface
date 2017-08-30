@@ -43,7 +43,7 @@ class USBMIDI_Interface : public MIDI_Interface
 
     bool parseUSBMIDIpacket(uint8_t *packet)
     {
-        Serial.printf("\t\t\t\t\t\tMIDIUSB packet:\t%02X %02X %02X %02X\tSysEx length:\t%lu\r\n", packet[0], packet[1], packet[2], packet[3], SysExLength   );
+        Serial.printf("\t\t\t\t\t\tMIDIUSB packet:\t%02X %02X %02X %02X\tSysEx length:\t%lu\r\n", packet[0], packet[1], packet[2], packet[3], SysExLength);
 
         uint8_t CIN = (uint8_t)packet[0] << 4; // MIDI USB cable index number
 
@@ -72,13 +72,17 @@ class USBMIDI_Interface : public MIDI_Interface
                 SysExLength = 0;
             }
             else if (SysExLength == 0) // If we haven't received a SysExStart
+            {
+                Serial.println("No SysExStart received");
                 return true;           // ignore the data
+            }
 
             SysExLength += 3;
             if (SysExLength > bufferSize) // SysEx is larger than the buffer
             {
                 startMessage(); // Discard message
                 Serial.println("SysEx is larger than buffer");
+                SysExLength = 0;
                 return true;
             }
             if (!hasSpaceLeft(3)) // If there's no more free space in the buffer for three bytes
@@ -103,6 +107,7 @@ class USBMIDI_Interface : public MIDI_Interface
             {
                 startMessage(); // Discard message
                 Serial.println("SysEx is larger than buffer");
+                SysExLength = 0;
                 return true;
             }
             if (!addToMessage(SysExEnd)) // add SysExEnd to buffer
@@ -123,6 +128,7 @@ class USBMIDI_Interface : public MIDI_Interface
             {
                 startMessage(); // Discard message
                 Serial.println("SysEx is larger than buffer");
+                SysExLength = 0;
                 return true;
             }
             if (!hasSpaceLeft(2)) // If there's no more free space in the buffer for two bytes
@@ -146,6 +152,7 @@ class USBMIDI_Interface : public MIDI_Interface
             {
                 startMessage(); // Discard message
                 Serial.println("SysEx is larger than buffer");
+                SysExLength = 0;
                 return true;
             }
             if (!hasSpaceLeft(3)) // If there's no more free space in the buffer for three bytes

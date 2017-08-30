@@ -119,8 +119,26 @@ private:
             }
           }
         }
+        else if (header == SysExStart) // System Exclusive
+        {
+          Serial.print("System Exclusive:");
+          while (data1 != SysExEnd && MIDI_Interface::getDefault()->available() > 0) // TODO: any status byte should end SysEx (MIDI 1.0 Detailed Specification 4.2 p.29)
+          {
+            Serial.print(' ');
+            Serial.print(data1, HEX);
+            data1 = MIDI_Interface::getDefault()->read();
+          }
+          if (MIDI_Interface::getDefault()->available() == 0 && data1 != SysExEnd)
+          {
+            Serial.println("\r\nReached end of buffer without SysExEnd");
+          }
+          else
+          {
+            Serial.println("\tSysExEnd");
+          }
+        }
       }
-    } while (availableMIDI() > 0);
+    } while (MIDI_Interface::getDefault()->available() > 0);
   }
   void refreshInputs()
   {
