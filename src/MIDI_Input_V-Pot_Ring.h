@@ -166,14 +166,17 @@ class MCU_VPot_Ring_LED : public MCU_VPot_Ring
         break;
         }
     }
-
+#ifndef min
     int8_t min(int8_t a, int8_t b)
     {
         return a > b ? b : a;
     }
+#endif
+#ifndef max
     int8_t max(int8_t a, int8_t b)
     {
         return a < b ? b : a;
     }
+#endif
 };
 #endif // MCU_VPOT_RING_H_

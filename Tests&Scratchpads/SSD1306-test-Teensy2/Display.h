@@ -14,7 +14,7 @@ Adafruit_SSD1306 display;
 #endif
 
 #if (F_CPU != 96000000)
-#error("Set processor speed to 96 MHz!");
+//#error("Set processor speed to 96 MHz!");
 #endif
 
 void drawGoodCircle(Adafruit_SSD1306 &display, int16_t x0, int16_t y0, int radius, uint8_t color = WHITE) { // draws the outline of a circle

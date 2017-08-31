@@ -201,9 +201,6 @@ class USBMIDI_Interface : public MIDI_Interface
     {
 #if defined(CORE_TEENSY) // If it's a Teensy board
 
-        if (mod(readIndex - writeIndex, bufferSize) < 3)
-            ; // return false;
-
         if (rx_packet == nullptr) // If there's no previous packet
         {
             if (!usb_configuration) // Check USB configuration
@@ -240,26 +237,26 @@ class USBMIDI_Interface : public MIDI_Interface
         return true;
 
 #elif defined(USBCON) // If the main MCU has a USB connection but is not a Teensy
-        midiEventPacket_t rx;
-        rx = MidiUSB.read();
-        if (rx.header != 0)
-        { // TODO
-            Serial.print("Received: ");
-            Serial.print(rx.header, HEX);
-            Serial.print("-");
-            Serial.print(rx.byte1, HEX);
-            Serial.print("-");
-            Serial.print(rx.byte2, HEX);
-            Serial.print("-");
-            Serial.println(rx.byte3, HEX);
-            return true;
+        if (rx_packet == 0)
+        {
+            rx_packet = *(uint32_t*) &MidiUSB.read();
+            if (rx_packet == 0)
+                return false;
         }
-        return false;
+        if (!parseUSBMIDIpacket((uint8_t*)&rx_packet)) // add the packet to the MIDI buffer
+            return false;              // if it fails, return false, it means that the buffer is full, so parse the messages in the buffer first, don't throw away the USB packet just yet
+        rx_packet = 0;
+        return true;
 #endif
     }
-#if defined(CORE_TEENSY)
+
   private:
+#if defined(CORE_TEENSY)
     usb_packet_t *rx_packet = nullptr;
+#elif defined(USBCON) // If the main MCU has a USB connection but is not a Teensy
+    uint32_t rx_packet = 0;
+#else
+    ;
 #endif
 };
 
