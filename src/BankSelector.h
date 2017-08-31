@@ -158,6 +158,7 @@ public:
       dbButton1.pin = switchPin;
       mode = SINGLE_BUTTON;
     }
+    init();
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, pin_t switchPin, pin_t ledPin, ButtonType buttonType = MOMENTARY) // One switch or button, one LED
@@ -172,6 +173,7 @@ public:
       dbButton1.pin = switchPin;
       mode = SINGLE_BUTTON_LED;
     }
+    init();
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   template <size_t N>
@@ -179,6 +181,7 @@ public:
       : bank(bank), switchPins(switchPins), nb_settings(N)
   {
     mode = MULTIPLE_BUTTONS;
+    init();
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins) // Multiple buttons, no LEDs
@@ -188,6 +191,7 @@ public:
     memcpy(switchPinsStorage, switchPins.begin(), sizeof(pin_t) * switchPins.size());
     this->switchPins = switchPinsStorage;
     mode = MULTIPLE_BUTTONS;
+    init();
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   template <size_t M, size_t N>
@@ -210,6 +214,7 @@ public:
       mode = MULTIPLE_BUTTONS_LEDS;
       nb_settings = N < M ? N : M; // min(N, M)
     }
+    init();
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins, std::initializer_list<pin_t> ledPins) // One or multiple buttons, multiple LEDs
@@ -238,6 +243,7 @@ public:
       mode = MULTIPLE_BUTTONS_LEDS;
       nb_settings = switchPins.size() < ledPins.size() ? switchPins.size() : ledPins.size(); // min(ledPins.size(), switchPins.size())
     }
+    init();
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, const pin_t (&switchPins)[2], pin_t nb_settings) // Two buttons (+1, -1), no LEDs
@@ -246,6 +252,7 @@ public:
     dbButton1.pin = switchPins[0];
     dbButton2.pin = switchPins[1];
     mode = INCREMENT_DECREMENT;
+    init();
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, const pin_t (&switchPins)[1], pin_t nb_settings) // One button (+1), no LEDs
@@ -253,6 +260,7 @@ public:
   {
     dbButton1.pin = switchPins[0];
     mode = INCREMENT;
+    init();
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins, pin_t nb_settings) // One or two buttons (+1, (-1)), no LEDs
@@ -272,6 +280,7 @@ public:
       dbButton2.pin = this->switchPins[1];
       mode = INCREMENT_DECREMENT;
     }
+    init();
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
 
