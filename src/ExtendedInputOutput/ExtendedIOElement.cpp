@@ -26,4 +26,4 @@ ExtendedIOElement *ExtendedIOElement::getFirst()
 
 ExtendedIOElement *ExtendedIOElement::first = nullptr;
 ExtendedIOElement *ExtendedIOElement::last = nullptr;
-pin_t ExtendedIOElement::offset = NUM_DIGITAL_PINS;
+pin_t ExtendedIOElement::offset = NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS;

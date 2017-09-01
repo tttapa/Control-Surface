@@ -93,7 +93,7 @@ void setup()   {
   bank.add(solo, Bank::CHANGE_ADDRESS);
   bank.add(recrdy, Bank::CHANGE_ADDRESS);
 
-  bs.init();
+  MIDI_Controller.begin();
 }
 
 void loop() {
