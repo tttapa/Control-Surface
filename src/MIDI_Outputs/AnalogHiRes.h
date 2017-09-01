@@ -4,8 +4,6 @@
 #include "Arduino.h"
 #include "MIDI_Control_Element.h"
 
-// #define PITCH_BEND_RESOLUTION_14_BITS // use true 14-bit resolution instead of 10-bit resolution padded with four zeros. (only on boards that support it, e.g. Teensy and Arduino Due)
-
 class AnalogHiRes : public MIDI_Control_Element
 {
 public:

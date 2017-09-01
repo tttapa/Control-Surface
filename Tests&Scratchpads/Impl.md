@@ -82,3 +82,8 @@ Return singleton instance
 	- Update all MIDI_Input_Elements
 - Refresh all MIDI_Input_Elements
 - Update all BankSelectors
+
+## Memory:
+Finished example: 
+ 	- 2.1.0 : 	1581B
+ 	- inheritance:	970B

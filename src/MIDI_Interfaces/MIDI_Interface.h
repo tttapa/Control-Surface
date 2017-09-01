@@ -3,6 +3,8 @@
 
 #include "Arduino.h"
 
+#include "Settings/Settings.h"
+
 #define MIDI_BAUD 31250
 #define HAIRLESS_BAUD 115200
 
@@ -28,6 +30,7 @@ public:
   void send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2); // Send a 3-byte MIDI packet
   void send(uint8_t m, uint8_t c, uint8_t d1);             // Send a 2-byte MIDI packet
 
+#ifndef NO_MIDI_INPUT
   virtual bool refresh();              // Virtual function that is implemented by child classes,
                                        // it should take MIDI data from the UART or USB buffer and add it to the MIDI buffer,
                                        // returns true as long as there's data to read, returns false if UART/USB buffer is empty or if MIDI buffer is full
@@ -40,16 +43,17 @@ public:
   uint8_t peek();          // read a byte without incrementing the read index
   uint8_t getNextHeader(); // read until the first header byte and return it if it exists, otherwise, return zero
   size_t available();      // returns the number of MIDI messages in the buffer
+#endif                     // #ifndef NO_MIDI_INPUT
 
   static MIDI_Interface *getDefault(); // static function that returns the default interface (doesn't depend on a particular MIDI interface instance )
-
-  void setDefault(); // Set this MIDI interface as the default interface
+  void setDefault();                   // Set this MIDI interface as the default interface
 
 protected:
   virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) {}
   virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1) {}
 
-  const static size_t bufferSize = 128; // max SysEx for Mackie Control Universal is 120 bytes
+#ifndef NO_MIDI_INPUT
+  const static size_t bufferSize = MIDI_BUFFER_SIZE; // max SysEx for Mackie Control Universal is 120 bytes
   uint8_t buffer[bufferSize];
   size_t writeIndex = 0, readIndex = 0, messageStartIndex = 0;
   size_t messages = 0;
@@ -59,15 +63,9 @@ protected:
   void incrementWriteIndex();
   void incrementReadIndex();
   inline bool isHeader(); // returns true if the read index points to a MIDI header byte and not to a SysExEnd byte or data byte
+#endif                    // #ifndef NO_MIDI_INPUT
 
   static MIDI_Interface *DefaultMIDI_Interface; // static pointer that points to the default MIDI interface instance
 };
-
-extern void sendMIDI(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) __attribute__((deprecated));
-extern void sendMIDI(uint8_t m, uint8_t c, uint8_t d1) __attribute__((deprecated));
-extern void startMIDI() __attribute__((deprecated));
-extern bool refreshMIDI() __attribute__((deprecated));
-extern size_t availableMIDI() __attribute__((deprecated));
-extern uint8_t readMIDI() __attribute__((deprecated));
 
 #endif // MIDI_INTERFACE_H_

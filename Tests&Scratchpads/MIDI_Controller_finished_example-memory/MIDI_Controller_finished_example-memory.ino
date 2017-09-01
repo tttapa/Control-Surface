@@ -19,6 +19,7 @@
 
 
 #include <MIDI_controller.h>
+#include "MemoryFree.h"
 
 #define VELOCITY          0b01111111  // The velocity of the buttons (0b01111111 = 127 = 100%)
 #define LATCHTIME         100         // How long a note will be held on, in DigitalLatch mode (in milliseconds).
@@ -88,6 +89,13 @@ void setup()
 void loop() // Refresh all inputs
 {
   MIDI_Controller.refresh();
+
+  static unsigned long time = 0;
+  if (millis() - time > 500) {
+    Serial.print("freeMemory() = ");
+    Serial.println(freeMemory());
+    time = millis();
+  }
 }
 
 

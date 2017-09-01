@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include "ExtendedIOElement.h"
 
-#define EXT_PIN(x) (x + NUM_DIGITAL_PINS)
+#define EXT_PIN(x) (x + NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
 
 namespace ExtIO
 {

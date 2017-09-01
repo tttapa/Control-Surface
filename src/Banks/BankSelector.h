@@ -2,12 +2,12 @@
 #define BANKSELECTOR_H_
 
 #include "Arduino.h"
-#include "Bank.h"
-#include "Linked_List.h"
-#include "ExtendedInputOutput/ExtendedInputOutput.h"
+#include "./Bank.h"
+#include "../Helpers/Linked_List.h"
+#include "../ExtendedInputOutput/ExtendedInputOutput.h"
 
 #ifdef __AVR__
-#include "initializer_list.h"
+#include "../Helpers/initializer_list.h"
 #else
 #include <initializer_list>
 #endif
@@ -288,14 +288,7 @@ public:
   {
     free(ledPinsStorage);
     free(switchPinsStorage);
-    if (previous != nullptr)
-      previous->next = next;
-    if (this == last)
-      last = previous;
-    if (next != nullptr)
-      next->previous = previous;
-    if (this == first)
-      first = next;
+    DELETE_FROM_LINKED_LIST(this, first, last);
   }
 
   void init();
@@ -304,7 +297,9 @@ public:
   uint8_t getBankSetting();
   void setBankSetting(uint8_t newBankSetting);
 
+#ifdef DEBUG
   const char *getMode();
+#endif
 
   void setBankSettingChangeEvent(void (*fn)(uint8_t));
 
@@ -335,8 +330,8 @@ private:
 
   const unsigned long debounceTime = 25;
 
-  const int8_t falling = LOW - HIGH;
-  const int8_t rising = HIGH - LOW;
+  const static int8_t falling = LOW - HIGH;
+  const static int8_t rising = HIGH - LOW;
 
   void (*bankSettingChangeEvent)(uint8_t) = nullptr;
 

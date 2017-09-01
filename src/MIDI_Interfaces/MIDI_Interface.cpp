@@ -1,3 +1,5 @@
+#include "../Settings/Settings.h"
+
 #include "MIDI_Interface.h"
 
 MIDI_Interface::MIDI_Interface() // Constructor (make this the default MIDI interface)
@@ -43,6 +45,8 @@ void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1)
 
     sendImpl(m, c, d1);
 }
+
+#ifndef NO_MIDI_INPUT
 
 //---------------------------------------------ADDING-TO-BUFFER---------------------------------------------//
 
@@ -156,39 +160,4 @@ bool MIDI_Interface::isHeader() // returns true if the read index points to a MI
 
 //===================================================================================================//
 
-void sendMIDI(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2)
-{
-    if (MIDI_Interface::getDefault() != nullptr)
-        MIDI_Interface::getDefault()->send(m, c, d1, d2);
-}
-void sendMIDI(uint8_t m, uint8_t c, uint8_t d1)
-{
-    if (MIDI_Interface::getDefault() != nullptr)
-        MIDI_Interface::getDefault()->send(m, c, d1);
-}
-void startMIDI()
-{
-    if (MIDI_Interface::getDefault() != nullptr)
-        MIDI_Interface::getDefault()->begin();
-}
-
-bool refreshMIDI()
-{
-    if (MIDI_Interface::getDefault() != nullptr)
-        return MIDI_Interface::getDefault()->refresh();
-    return false;
-}
-
-size_t availableMIDI()
-{
-    if (MIDI_Interface::getDefault() != nullptr)
-        return MIDI_Interface::getDefault()->available();
-    return 0;
-}
-
-uint8_t readMIDI()
-{
-    if (MIDI_Interface::getDefault() != nullptr)
-        return MIDI_Interface::getDefault()->read();
-    return 0;
-}
+#endif // ifndef NO_MIDI_INPUT

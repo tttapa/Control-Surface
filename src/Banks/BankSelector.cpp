@@ -132,6 +132,7 @@ void BankSelector::setBankSetting(uint8_t newBankSetting)
     this->bankSetting = newBankSetting;
 }
 
+#ifdef DEBUG
 const char *BankSelector::getMode()
 {
     if (mode == SINGLE_BUTTON)
@@ -156,6 +157,7 @@ const char *BankSelector::getMode()
         return "INCREMENT_LEDS";
     return "";
 }
+#endif
 
 void BankSelector::setBankSettingChangeEvent(void (*fn)(uint8_t))
 {

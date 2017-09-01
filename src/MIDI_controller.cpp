@@ -1,8 +1,5 @@
 #include "MIDI_controller.h"
 
-#include "MIDI_Interface.h"
-#include "USBMIDI_Interface.h"
-
 // public:
 
 MIDI_Controller_ &MIDI_Controller_::getInstance()
@@ -32,10 +29,13 @@ void MIDI_Controller_::refresh()
 {
     refreshControls();
     refreshBankSelectors();
-    while (refreshMIDI())
+
+#ifndef NO_MIDI_INPUT
+    while (midi->refresh())
         ;
     updateMidiInput();
     refreshInputs();
+#endif
 }
 
 MIDI_Interface *MIDI_Controller_::MIDI()
@@ -53,6 +53,14 @@ void MIDI_Controller_::refreshControls()
         element->refresh();
 }
 
+void MIDI_Controller_::refreshBankSelectors()
+{
+    for (BankSelector *element = BankSelector::getFirst(); element != nullptr; element = element->getNext())
+        element->refresh();
+}
+
+#ifndef NO_MIDI_INPUT
+
 void MIDI_Controller_::updateMidiInput()
 {
     if (midi->available() == 0) // if there are no MIDI messages in the buffer
@@ -64,7 +72,6 @@ void MIDI_Controller_::updateMidiInput()
             return;
 
         uint8_t messageType = header & 0xF0;
-        uint8_t targetChannel = header & 0x0F;
         uint8_t data1 = midi->read(); // this is allowed, because all messages have at least 1 data byte
 
         if (messageType == CC && data1 == 0x79) // Reset All Controllers
@@ -93,19 +100,19 @@ void MIDI_Controller_::updateMidiInput()
             if (messageType == CC) // Control Change
                 for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
                 {
-                    if (element->update(data1, targetChannel)) // TODO parameter order
+                    if (element->update(header, data1))
                         break;
                 }
             else if (messageType == NOTE_OFF || messageType == NOTE_ON) // Note
                 for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
                 {
-                    if (element->update(messageType, data1, targetChannel))
+                    if (element->update(header, data1))
                         break;
                 }
             else if (messageType == CHANNEL_PRESSURE) // Channel Pressure
                 for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
                 {
-                    if (element->update(targetChannel, data1)) // TODO parameter order
+                    if (element->update(header, data1))
                         break;
                 }
             else if (header == SysExStart) // System Exclusive
@@ -144,10 +151,6 @@ void MIDI_Controller_::refreshInputs()
     for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
 }
-void MIDI_Controller_::refreshBankSelectors()
-{
-    for (BankSelector *element = BankSelector::getFirst(); element != nullptr; element = element->getNext())
-        element->refresh();
-}
+#endif // ifndef NO_MIDI_INPUT
 
 MIDI_Controller_ &MIDI_Controller = MIDI_Controller_::getInstance();

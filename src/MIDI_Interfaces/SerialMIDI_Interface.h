@@ -8,6 +8,7 @@ class StreamMIDI_Interface : public MIDI_Interface
 public:
   StreamMIDI_Interface(Stream &stream) : stream(stream) {}
 
+#ifndef NO_MIDI_INPUT
   virtual bool refresh()
   {
     if (handlePreviousByte)
@@ -31,6 +32,7 @@ public:
 
     return true;
   }
+#endif // #ifndef NO_MIDI_INPUT
 
 protected:
   virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2)
@@ -49,6 +51,8 @@ protected:
 
 protected:
   Stream &stream;
+
+#ifndef NO_MIDI_INPUT
 
   uint8_t runningStatusBuffer = 0;
   uint8_t midiByte = 0;
@@ -105,7 +109,7 @@ protected:
             return false;                // return, but read same byte again next time (after emptying the buffer)
           SysExLength = 1;
         }
-#endif
+#endif // IGNORE_SYSEX
       }
     }
     else // If it's a data byte
@@ -187,6 +191,8 @@ protected:
     }
     return true; // successfully added to buffer, continue with next MIDI byte
   }
+
+#endif // #ifndef NO_MIDI_INPUT
 };
 
 template <typename T>

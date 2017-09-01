@@ -22,7 +22,7 @@ void pinMode(pin_t pin, uint8_t mode)
     Serial.print(mode);
     Serial.print(");\r\n");
 #endif
-    if (pin < NUM_DIGITAL_PINS)
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
         ::pinMode(pin, mode);
     else
     {
@@ -44,7 +44,7 @@ void digitalWrite(pin_t pin, uint8_t val)
     Serial.print(val);
     Serial.print(");\r\n");
 #endif
-    if (pin < NUM_DIGITAL_PINS)
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
         ::digitalWrite(pin, val);
     else
     {
@@ -64,7 +64,7 @@ int digitalRead(pin_t pin)
     Serial.print(pin);
     Serial.print(");\r\n");
 #endif
-    if (pin < NUM_DIGITAL_PINS)
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
         return ::digitalRead(pin);
     else
     {
@@ -104,7 +104,7 @@ analog_t analogRead(pin_t pin)
     Serial.print(pin);
     Serial.print(");\r\n");
 #endif
-    if (pin < NUM_DIGITAL_PINS)
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
         return ::analogRead(pin);
     else
     {

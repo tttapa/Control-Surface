@@ -1,5 +1,6 @@
 #ifndef DEBUGMIDI_INTERFACE_H_
 #define DEBUGMIDI_INTERFACE_H_
+
 #include "SerialMIDI_Interface.h"
 
 const static char *MIDI_STATUS_TYPE_NAMES[] = {"Note Off\t",
@@ -46,6 +47,9 @@ protected:
     // stream.print((unsigned long)(m >> 4) | ((m | c) << 8) | (d1 << 16), HEX);
     stream.flush();
   }
+
+#ifndef NO_MIDI_INPUT
+
   bool refresh()
   {
     if (handlePreviousByte)
@@ -106,10 +110,12 @@ private:
   {
     return hex < 'a' ? hex - '0' : hex - 'a' + 10;
   }
-  bool isWhiteSpace(char x)
+  inline bool isWhiteSpace(char x)
   {
     return x == ' ' || x == '\r' || x == '\n';
   }
+
+#endif // #ifndef NO_MIDI_INPUT
 };
 
 template <typename T>

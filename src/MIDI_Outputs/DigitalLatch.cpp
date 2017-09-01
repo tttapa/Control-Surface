@@ -23,21 +23,21 @@ void DigitalLatch::refresh() // Check if the button state changed, if so, send a
   {
     if (noteOffSent) // If the note is turned off
     {
-      MIDI_Controller.MIDI()->send(NOTE_ON, channel + channelOffset, note + addressOffset, velocity); // Turn on the note
+      MIDI_Controller.MIDI()->send(NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity); // Turn on the note
       noteOnTime = millis();                                                                    // store the time of the note on message
       noteOffSent = false;                                                                      // The note is turned on
     }
     else // If the button is switched again, before latch time is reached
     {
-      MIDI_Controller.MIDI()->send(NOTE_OFF, channel + channelOffset, note + addressOffset, velocity); // Turn off the note
-      MIDI_Controller.MIDI()->send(NOTE_ON, channel + channelOffset, note + addressOffset, velocity);  // Immediately turn the note on again
+      MIDI_Controller.MIDI()->send(NOTE_OFF, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity); // Turn off the note
+      MIDI_Controller.MIDI()->send(NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);  // Immediately turn the note on again
       noteOnTime = millis();                                                                     // store the time of the note on message
     }
     oldState = state;
   }
   if (millis() - noteOnTime > latchTime && !noteOffSent) // if the time elapsed since the Note On event is greater than the latch time, and if the note is still on
   {
-    MIDI_Controller.MIDI()->send(NOTE_OFF, channel + channelOffset, note + addressOffset, velocity); // Turn off the note
+    MIDI_Controller.MIDI()->send(NOTE_OFF, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity); // Turn off the note
     noteOffSent = true;                                                                        // The note is turned off
   }
 }

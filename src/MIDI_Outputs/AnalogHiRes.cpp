@@ -1,4 +1,3 @@
-#include "Arduino.h"
 #include "AnalogHiRes.h"
 #include "MIDI_controller.h"
 

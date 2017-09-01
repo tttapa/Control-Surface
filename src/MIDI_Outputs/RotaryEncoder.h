@@ -4,7 +4,7 @@
 
 #include "Arduino.h"
 #include "Encoder.h"
-#include "MIDI_Control_Element.h"
+#include "./MIDI_Control_Element.h"
 
 enum relativeCCmode
 {

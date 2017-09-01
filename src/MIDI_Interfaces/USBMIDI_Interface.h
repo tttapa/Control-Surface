@@ -41,6 +41,8 @@ class USBMIDI_Interface : public MIDI_Interface
         sendImpl(m, c, d1, 0);
     }
 
+#ifndef NO_MIDI_INPUT
+
     bool parseUSBMIDIpacket(uint8_t *packet)
     {
 #ifdef DEBUG
@@ -239,12 +241,12 @@ class USBMIDI_Interface : public MIDI_Interface
 #elif defined(USBCON) // If the main MCU has a USB connection but is not a Teensy
         if (rx_packet == 0)
         {
-            rx_packet = *(uint32_t*) &MidiUSB.read();
+            rx_packet = *(uint32_t *)&MidiUSB.read();
             if (rx_packet == 0)
                 return false;
         }
-        if (!parseUSBMIDIpacket((uint8_t*)&rx_packet)) // add the packet to the MIDI buffer
-            return false;              // if it fails, return false, it means that the buffer is full, so parse the messages in the buffer first, don't throw away the USB packet just yet
+        if (!parseUSBMIDIpacket((uint8_t *)&rx_packet)) // add the packet to the MIDI buffer
+            return false;                               // if it fails, return false, it means that the buffer is full, so parse the messages in the buffer first, don't throw away the USB packet just yet
         rx_packet = 0;
         return true;
 #endif
@@ -258,6 +260,8 @@ class USBMIDI_Interface : public MIDI_Interface
 #else
     ;
 #endif
+
+#endif // #ifndef NO_MIDI_INPUT
 };
 
 #else // If the main MCU doesn't have a USB connection
