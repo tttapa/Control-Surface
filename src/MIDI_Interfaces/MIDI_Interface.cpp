@@ -46,14 +46,14 @@ void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1)
     sendImpl(m, c, d1);
 }
 
-#ifndef NO_MIDI_INPUT
-
 //---------------------------------------------ADDING-TO-BUFFER---------------------------------------------//
 
 bool MIDI_Interface::refresh() // Virtual function that is implemented by child classes,
 {                              // it should take MIDI data from the UART or USB buffer and add it to the MIDI buffer,
     return false;              // returns true as long as there's data to read, returns false if UART/USB buffer is empty or if MIDI buffer is full
 }
+
+#ifndef NO_MIDI_INPUT
 
 void MIDI_Interface::startMessage() // start adding a new message to the buffer
 {
