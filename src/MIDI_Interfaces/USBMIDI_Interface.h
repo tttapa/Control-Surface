@@ -267,7 +267,7 @@ class USBMIDI_Interface : public MIDI_Interface
 #if defined(CORE_TEENSY) // If it's a Teensy board
         if (!usb_configuration) // Check USB configuration
             return false;
-        usb_packet_t rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer
+        usb_packet_t *rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer
         if (rx_packet == nullptr)                          // If there's no new packet, return
             return false;
 
