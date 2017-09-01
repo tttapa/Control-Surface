@@ -124,8 +124,8 @@ void MCU_VPot_Ring_LED::display()
     break;
     case 1:
     {
-        uint8_t startOn = min(value, 5);
-        uint8_t startOff = max(value, 5) + 1;
+        uint8_t startOn = minimum(value, 5);
+        uint8_t startOff = maximum(value, 5) + 1;
         for (uint8_t pin = 0; pin < startOn; pin++)
             digitalWrite(LEDs[pin], LOW);
         for (uint8_t pin = startOn; pin < startOff; pin++)
@@ -144,8 +144,8 @@ void MCU_VPot_Ring_LED::display()
     break;
     case 3:
     {
-        uint8_t startOn = max(5 - value, 0);
-        uint8_t startOff = min(6 + value, 11);
+        uint8_t startOn = maximum(5 - value, 0);
+        uint8_t startOff = minimum(6 + value, 11);
         for (uint8_t pin = 0; pin < startOn; pin++)
             digitalWrite(LEDs[pin], LOW);
         for (uint8_t pin = startOn; pin < startOff; pin++)
@@ -156,17 +156,14 @@ void MCU_VPot_Ring_LED::display()
     break;
     }
 }
-#ifndef min
-inline int8_t MCU_VPot_Ring_LED::min(int8_t a, int8_t b)
+
+inline int8_t MCU_VPot_Ring_LED::minimum(int8_t a, int8_t b)
 {
     return a > b ? b : a;
 }
-#endif
-#ifndef max
-inline int8_t MCU_VPot_Ring_LED::max(int8_t a, int8_t b)
+inline int8_t MCU_VPot_Ring_LED::maximum(int8_t a, int8_t b)
 {
     return a < b ? b : a;
 }
-#endif
 
 #endif // #ifndef NO_MIDI_INPUT

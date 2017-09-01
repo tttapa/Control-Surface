@@ -3,7 +3,7 @@
 
 // #define IGNORE_SYSEX
 
-#define NO_MIDI_INPUT
+// #define NO_MIDI_INPUT
 
 #define SINGLE_BYTE_AVERAGE
 
