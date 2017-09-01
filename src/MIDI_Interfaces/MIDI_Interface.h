@@ -30,10 +30,13 @@ public:
   void send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2); // Send a 3-byte MIDI packet
   void send(uint8_t m, uint8_t c, uint8_t d1);             // Send a 2-byte MIDI packet
 
+  virtual bool refresh(); // Virtual function that is implemented by child classes,
+// it should take MIDI data from the UART or USB buffer and add it to the MIDI buffer,
+// returns true as long as there's data to read, returns false if UART/USB buffer is empty or if MIDI buffer is full
+// if MIDI input is disabled, it should just ignore all incoming data, but clear the USB buffer, otherwise the 
+// software on the computer will wait for the messages to arrive, causing it to hang
+
 #ifndef NO_MIDI_INPUT
-  virtual bool refresh();              // Virtual function that is implemented by child classes,
-                                       // it should take MIDI data from the UART or USB buffer and add it to the MIDI buffer,
-                                       // returns true as long as there's data to read, returns false if UART/USB buffer is empty or if MIDI buffer is full
   void startMessage();                 // start adding a new message to the buffer
   bool addToMessage(uint8_t data);     // add a byte to the current message (and increment write index)
   bool hasSpaceLeft(size_t bytes = 1); // check if the buffer has at least 'bytes' bytes of free space available

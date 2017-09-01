@@ -1,6 +1,6 @@
-#ifndef NO_MIDI_INPUT
-
 #include "../MIDI_controller.h"
+
+#ifndef NO_MIDI_INPUT
 
 using namespace ExtIO;
 

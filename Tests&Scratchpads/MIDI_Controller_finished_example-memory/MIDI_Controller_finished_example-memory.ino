@@ -74,6 +74,8 @@ BankSelector bankselector(bank, 11, LED_BUILTIN, BankSelector::TOGGLE);
 
 void setup()
 {
+  Serial.begin(115200);
+  while(!Serial);
   bank.add(faders, Bank::CHANGE_CHANNEL);
   bank.add(knobsSide, Bank::CHANGE_CHANNEL);
   bank.add(switches, Bank::CHANGE_ADDRESS);
@@ -88,14 +90,13 @@ void setup()
 
 void loop() // Refresh all inputs
 {
-  MIDI_Controller.refresh();
-
   static unsigned long time = 0;
-  if (millis() - time > 500) {
+  if (time == 0 || millis() - time > 500) {
     Serial.print("freeMemory() = ");
     Serial.println(freeMemory());
     time = millis();
   }
+  MIDI_Controller.refresh();
 }
 
 

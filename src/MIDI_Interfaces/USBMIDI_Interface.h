@@ -257,9 +257,26 @@ class USBMIDI_Interface : public MIDI_Interface
     usb_packet_t *rx_packet = nullptr;
 #elif defined(USBCON) // If the main MCU has a USB connection but is not a Teensy
     uint32_t rx_packet = 0;
-#else
-    ;
 #endif
+
+#else                    // #ifndef NO_MIDI_INPUT
+
+  public:
+    bool refresh() // Ignore MIDI input
+    {
+#if defined(CORE_TEENSY) // If it's a Teensy board
+        if (!usb_configuration) // Check USB configuration
+            return false;
+        usb_packet_t rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer
+        if (rx_packet == nullptr)                          // If there's no new packet, return
+            return false;
+
+        usb_free(rx_packet); // Free the packet
+        return true;         // repeat
+#elif defined(USBCON)    // If the main MCU has a USB connection but is not a Teensy
+        return MidiUSB.read().header != 0; // if there's a packet to read, discard it, and read again next time
+#endif
+    }
 
 #endif // #ifndef NO_MIDI_INPUT
 };

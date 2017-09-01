@@ -30,9 +30,9 @@ void MIDI_Controller_::refresh()
     refreshControls();
     refreshBankSelectors();
 
-#ifndef NO_MIDI_INPUT
     while (midi->refresh())
         ;
+#ifndef NO_MIDI_INPUT
     updateMidiInput();
     refreshInputs();
 #endif
