@@ -26,7 +26,7 @@ const uint8_t PLAY = 0x5E;
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 #ifdef DEBUG
-USBDebugMIDI_Interface dbg(115200); // Instantiate a USB Debug output
+// USBDebugMIDI_Interface dbg(115200); // Instantiate a USB Debug output
 #elif defined (SERIAL_MIDI)
 USBSerialMIDI_Interface smidi(115200);
 #else

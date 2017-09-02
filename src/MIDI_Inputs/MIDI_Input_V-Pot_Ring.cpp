@@ -18,10 +18,10 @@ MCU_VPot_Ring::~MCU_VPot_Ring()
     free(values);
 }
 
-bool MCU_VPot_Ring::updateImpl(uint8_t targetAddress, uint8_t targetChannel)
+bool MCU_VPot_Ring::updateImpl(uint8_t header, uint8_t data1)
 {
     uint8_t data2 = MIDI_Controller.MIDI()->read();
-    uint8_t index = targetAddress - 0x30;
+    uint8_t index = data1 - 0x30;
     index = index < nb_addresses ? index : nb_addresses - 1;
     setValue(index, data2);
 

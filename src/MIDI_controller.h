@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 
-#include "Settings/Settings.h"
+#include "./Settings/Settings.h"
 
 #include "./MIDI_Element.h"
 

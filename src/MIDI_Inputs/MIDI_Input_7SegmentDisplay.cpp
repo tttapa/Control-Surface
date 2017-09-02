@@ -17,9 +17,9 @@ MCU_7SegmentDisplay::~MCU_7SegmentDisplay()
 {
     free(textBuffer);
 }
-bool MCU_7SegmentDisplay::updateImpl(uint8_t targetAddress, uint8_t targetChannel)
+bool MCU_7SegmentDisplay::updateImpl(uint8_t header, uint8_t data1)
 {
-    uint8_t charIndex = length - 1 - (targetAddress - address);
+    uint8_t charIndex = length - 1 - (data1 - address);
     charIndex = charIndex < length ? charIndex : length - 1;
     uint8_t data2 = MIDI_Controller.MIDI()->read();
     bool decimalPt = data2 & 0x40;

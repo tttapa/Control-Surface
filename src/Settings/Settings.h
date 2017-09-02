@@ -1,5 +1,5 @@
 
-// #define DEBUG
+#define DEBUG
 
 // #define IGNORE_SYSEX
 

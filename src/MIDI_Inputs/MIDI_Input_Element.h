@@ -23,7 +23,7 @@ protected:
   bool matchAddress(uint8_t targetAddress);
   bool matchChannel(uint8_t targetChannel);
 
-  virtual bool updateImpl(uint8_t targetAddress, uint8_t targetChannel) { return false; }
+  virtual bool updateImpl(uint8_t header, uint8_t data1) { return false; }
 
   const uint8_t channel, address;
   const uint8_t nb_channels, nb_addresses;

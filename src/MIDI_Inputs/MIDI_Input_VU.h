@@ -33,21 +33,21 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         display();
     }
 
-    bool updateImpl(uint8_t targetChannel, uint8_t data1)
+    bool updateImpl(uint8_t header, uint8_t data1)
     {
-        uint8_t targetAddress = data1 >> 4;
-        if (!match(targetAddress))
+        uint8_t targetID = data1 >> 4;
+        if (!matchID(targetID))
             return false;
 
         uint8_t data = data1 & 0xF;
         if (data == 0xF) // clear overload
-            clearOverload(targetAddress);
+            clearOverload(targetID);
         else if (data == 0xE) // set overload
-            setOverload(targetAddress);
+            setOverload(targetID);
         else if (data == 0xD) // not implemented
             ;
         else // new peak value
-            setValue(targetAddress, data);
+            setValue(targetID, data);
 
         display();
         return true;
@@ -112,9 +112,14 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     {
         return values[address] & 0xF0;
     }
-    inline bool match(uint8_t targetAddress)
+    bool matchID(uint8_t targetID)
     {
-        return (targetAddress >= this->address) && (targetAddress < this->address + nb_addresses);
+        for (uint8_t id = this->address; id < this->address + nb_addresses * channelsPerBank; id += channelsPerBank)
+        {
+            if (id == targetID)
+                return true;
+        }
+        return false;
     }
 };
 

@@ -15,9 +15,11 @@ MIDI_Input_Note_Buffer::~MIDI_Input_Note_Buffer()
 {
     free(states);
 }
-bool MIDI_Input_Note_Buffer::updateImpl(uint8_t messageType, uint8_t targetAddress, uint8_t targetChannel)
+bool MIDI_Input_Note_Buffer::updateImpl(uint8_t header, uint8_t data1)
 {
-    uint8_t addressIndex = targetAddress - this->address;
+    uint8_t messageType = header & 0xF0;
+    uint8_t targetChannel = header & 0x0F;
+    uint8_t addressIndex = data1 - this->address;
     uint8_t channelIndex = targetChannel - this->channel;
     uint8_t ledIndex = channelIndex + nb_channels * addressIndex;
 

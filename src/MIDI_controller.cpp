@@ -27,6 +27,7 @@ void MIDI_Controller_::begin()
 }
 void MIDI_Controller_::refresh()
 {
+    MIDI();
     refreshControls();
     refreshBankSelectors();
 
