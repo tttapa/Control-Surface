@@ -70,7 +70,7 @@ protected:
 class MIDI_Input_Element_ChannelPressure : public MIDI_Input_Element
 {
 public:
-  MIDI_Input_Element_ChannelPressure(uint8_t channel, uint8_t nb_channels);
+  MIDI_Input_Element_ChannelPressure(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels);
   ~MIDI_Input_Element_ChannelPressure();
 
   static MIDI_Input_Element_ChannelPressure *getFirst();

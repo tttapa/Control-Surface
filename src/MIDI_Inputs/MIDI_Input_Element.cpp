@@ -5,7 +5,7 @@
 //----------------------------------------------------------------------------------------------------------------------------------------//
 
 MIDI_Input_Element::MIDI_Input_Element(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels)
-: address(address), channel(channel - 1), nb_addresses(nb_addresses), nb_channels(nb_channels) { }
+    : address(address), channel(channel - 1), nb_addresses(nb_addresses), nb_channels(nb_channels) {}
 
 bool MIDI_Input_Element::update(uint8_t header, uint8_t data1)
 {
@@ -103,8 +103,8 @@ MIDI_Input_Element_Note *MIDI_Input_Element_Note::first = nullptr;
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
 
-MIDI_Input_Element_ChannelPressure::MIDI_Input_Element_ChannelPressure(uint8_t channel, uint8_t nb_channels)
-    : MIDI_Input_Element(0, channel, 1, nb_channels)
+MIDI_Input_Element_ChannelPressure::MIDI_Input_Element_ChannelPressure(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels)
+    : MIDI_Input_Element(address, channel, nb_addresses, nb_channels)
 {
     INSERT_INTO_LINKED_LIST(this, first, last);
 }

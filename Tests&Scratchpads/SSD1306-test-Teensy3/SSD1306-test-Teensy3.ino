@@ -36,17 +36,17 @@ USBMIDI_Interface midi; // Instantiate a USB MIDI output
 ShiftRegisterOut SR_BS(dataPin, clockPin, latchPin, LSBFIRST, 24);
 ShiftRegisterOut SR(dataPin, clockPin, 16, LSBFIRST, 8);
 
-Bank bank;
+Bank bank(2);
 
 BankSelector bs(bank, { 6, 5 }, {
   SR_BS.blue(0),
   SR_BS.blue(1),
   SR_BS.blue(2),
   SR_BS.blue(3),
-  SR_BS.blue(4),
+  /*SR_BS.blue(4),
   SR_BS.blue(5),
   SR_BS.blue(6),
-  SR_BS.blue(7),
+  SR_BS.blue(7),*/
 });
 
 Digital channelButtons[] = {

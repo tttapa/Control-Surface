@@ -12,8 +12,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
 {
   public:
     MCU_VU(uint8_t address, uint8_t nb_addresses, bool decay = true, unsigned int decayTime = 300)
-        : MIDI_Input_Element_ChannelPressure(1, 1),
-          address(address), nb_addresses(nb_addresses),
+        : MIDI_Input_Element_ChannelPressure(address, 1, nb_addresses, 1),
           decay(decay), decayTime(decayTime)
     {
         initBuffer();
@@ -36,18 +35,21 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     bool updateImpl(uint8_t header, uint8_t data1)
     {
         uint8_t targetID = data1 >> 4;
+
         if (!matchID(targetID))
             return false;
 
+        uint8_t index = (targetID - this->address) / channelsPerBank;
+
         uint8_t data = data1 & 0xF;
         if (data == 0xF) // clear overload
-            clearOverload(targetID);
+            clearOverload(index);
         else if (data == 0xE) // set overload
-            setOverload(targetID);
+            setOverload(index);
         else if (data == 0xD) // not implemented
             ;
         else // new peak value
-            setValue(targetID, data);
+            setValue(index, data);
 
         display();
         return true;
@@ -75,8 +77,6 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     }
 
   protected:
-    const uint8_t address;
-    const uint8_t nb_addresses;
     uint8_t *values = nullptr;
     const bool decay;
     const unsigned long decayTime;

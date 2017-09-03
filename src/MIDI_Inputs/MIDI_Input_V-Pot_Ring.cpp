@@ -21,7 +21,7 @@ MCU_VPot_Ring::~MCU_VPot_Ring()
 bool MCU_VPot_Ring::updateImpl(uint8_t header, uint8_t data1)
 {
     uint8_t data2 = MIDI_Controller.MIDI()->read();
-    uint8_t index = data1 - 0x30;
+    uint8_t index = (data1 - 0x30) / channelsPerBank;
     index = index < nb_addresses ? index : nb_addresses - 1;
     setValue(index, data2);
 

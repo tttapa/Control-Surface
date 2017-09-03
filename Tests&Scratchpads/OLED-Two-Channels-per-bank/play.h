@@ -1,0 +1,4 @@
+#define play_width 7
+#define play_height 7
+const static uint8_t play_bits[] = {
+   0x01, 0x07, 0x1f, 0x7f, 0x1f, 0x07, 0x01 };
