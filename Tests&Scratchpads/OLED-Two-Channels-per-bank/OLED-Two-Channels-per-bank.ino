@@ -14,7 +14,7 @@ using namespace ExtIO;
 
 // #define FPS
 
-#define DEBUG_MIDI
+// #define DEBUG_MIDI
 // #define SERIAL_MIDI
 
 const uint8_t clockPin = 10;
