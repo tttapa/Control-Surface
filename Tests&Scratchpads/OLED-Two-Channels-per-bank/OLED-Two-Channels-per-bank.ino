@@ -14,7 +14,7 @@ using namespace ExtIO;
 
 // #define FPS
 
-// #define DEBUG_MIDI
+#define DEBUG_MIDI
 // #define SERIAL_MIDI
 
 const uint8_t clockPin = 10;
@@ -79,8 +79,8 @@ MIDI_Input_Note_Buffer soloB(SOLO + 1, 1, 8, 1);
 MIDI_Input_Note_Buffer recrdyA(REC_RDY + 0, 1, 8, 1);
 MIDI_Input_Note_Buffer recrdyB(REC_RDY + 1, 1, 8, 1);
 
-MCU_VU vuA(0, 8, false);
-MCU_VU vuB(1, 8, false);
+MCU_VU vuA(0, 8, true, 150);
+MCU_VU vuB(1, 8, true, 150);
 VUPeak vuPA(vuA);
 VUPeak vuPB(vuB);
 
