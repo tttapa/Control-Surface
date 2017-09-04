@@ -5,21 +5,11 @@
 
 #include "./Settings/Settings.h"
 
-#include "./MIDI_Element.h"
-
 #include "./MIDI_Outputs/Analog.h"
 #include "./MIDI_Outputs/AnalogHiRes.h"
 #include "./MIDI_Outputs/Digital.h"
 #include "./MIDI_Outputs/DigitalLatch.h"
 #include "./MIDI_Outputs/RotaryEncoder.h"
-
-#ifndef NO_MIDI_INPUT
-#include "./MIDI_Inputs/MIDI_Input_Element.h"
-#include "./MIDI_Inputs/MIDI_Input_LED.h"
-#include "./MIDI_Inputs/MIDI_Input_V-Pot_Ring.h"
-#include "./MIDI_Inputs/MIDI_Input_VU.h"
-#include "./MIDI_Inputs/MIDI_Input_7SegmentDisplay.h"
-#endif
 
 #include "./Banks/Bank.h"
 #include "./Banks/BankSelector.h"
@@ -50,10 +40,6 @@ private:
   MIDI_Interface *new_midi = nullptr;
   MIDI_Interface *midi = nullptr;
   void refreshControls();
-#ifndef NO_MIDI_INPUT
-  void updateMidiInput();
-  void refreshInputs();
-#endif
   void refreshBankSelectors();
 };
 

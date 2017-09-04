@@ -86,9 +86,13 @@ Return singleton instance
 ## Memory:
 Finished example - Arduino Leonardo: 
 		
-				Free RAM	Flash used
- 	- 2.1.0 : 	1581B
- 	- New:  	972B 		13340B	(normal)
- 	- New:  	1208B		13218B	(single byte average)
- 	- New:  	1114B		12094B	(no midi input)
- 	- New:  	1350B		11972B	(no midi input, single byte average)
+			Free RAM	Flash used
+ 	- 2.1.0 :  	1581B
+    - New (MC):	1138B		12050B	(normal)
+    - New (MC):	1374B		11928B	(single byte average)
+
+
+ 	- New (CS):	972B 		13340B	(normal)
+ 	- New (CS):	1208B		13218B	(single byte average)
+ 	- New (CS):	1114B		12094B	(no midi input)
+ 	- New (CS):	1350B		11972B	(no midi input, single byte average)

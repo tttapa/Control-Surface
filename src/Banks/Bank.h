@@ -2,7 +2,7 @@
 #define BANK_h_
 
 #include "Arduino.h"
-#include "MIDI_Element.h"
+#include "../MIDI_Outputs/MIDI_Control_Element.h"
 
 class Bank
 {
@@ -14,8 +14,8 @@ public:
     CHANGE_CHANNEL,
     CHANGE_ADDRESS
   };
-  void add(MIDI_Element *element, bankType type = CHANGE_ADDRESS);
-  void add(MIDI_Element &element, bankType type = CHANGE_ADDRESS);
+  void add(MIDI_Control_Element *element, bankType type = CHANGE_ADDRESS);
+  void add(MIDI_Control_Element &element, bankType type = CHANGE_ADDRESS);
   template <class T, size_t N>
   void add(T (&arr)[N], bankType type = CHANGE_ADDRESS)
   {
@@ -33,7 +33,8 @@ private:
   const uint8_t channelsPerBank;
   struct MIDI_Element_list_node
   {
-    MIDI_Element *element;
+    #include "Arduino.h"
+    MIDI_Control_Element *element;
     MIDI_Element_list_node *next;
     bankType type;
   };

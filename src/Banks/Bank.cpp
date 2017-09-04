@@ -14,7 +14,7 @@ Bank::~Bank()
     }
 }
 
-void Bank::add(MIDI_Element *element, bankType type)
+void Bank::add(MIDI_Control_Element *element, bankType type)
 {
     element->setChannelsPerBank(channelsPerBank);
 
@@ -29,7 +29,7 @@ void Bank::add(MIDI_Element *element, bankType type)
     lastMIDI_Element = newElement;
 }
 
-void Bank::add(MIDI_Element &element, bankType type)
+void Bank::add(MIDI_Control_Element &element, bankType type)
 {
     add(&element, type);
 }
