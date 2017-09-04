@@ -62,9 +62,14 @@ void fillGoodCircle(Adafruit_SSD1306 &display, int16_t x0, int16_t y0, int radiu
   }
 }
 
-void drawVPotSegment(Adafruit_SSD1306 &display, uint8_t value, uint8_t x, uint8_t y, uint8_t radius, uint8_t color = WHITE) {
-  drawGoodCircle(display, x, y, radius / 4);
+void drawVPotSegment(Adafruit_SSD1306 &display, MCU_VPot_Ring &vpot, uint8_t x, uint8_t y, uint8_t radius, uint8_t color = WHITE) {
+  if (vpot.getCenterLED())
+    fillGoodCircle(display, x, y, radius / 4);
+  else
+    drawGoodCircle(display, x, y, radius / 4);
 
+  uint8_t value = vpot.getPosition();
+  
   if (value == 0)
     return;
 

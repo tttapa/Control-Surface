@@ -64,7 +64,7 @@ const uint8_t CYCLE                  = 0x56; // In Out
 const uint8_t DROP                   = 0x57; // In Out
 const uint8_t REPLACE                = 0x58; // In Out
 const uint8_t CLICK                  = 0x59; // In Out
-const uint8_t SOLO                   = 0x5A; // In Out
+const uint8_t SOLO_G                 = 0x5A; // In Out
 
 const uint8_t REWIND                 = 0x5B; // In Out
 const uint8_t FAST_FWD               = 0x5C; // In Out
