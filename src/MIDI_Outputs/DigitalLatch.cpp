@@ -1,6 +1,8 @@
 #include "DigitalLatch.h"
 #include "MIDI_controller.h"
 
+using namespace ExtIO;
+
 DigitalLatch::DigitalLatch(uint8_t pin, uint8_t note, uint8_t channel, uint8_t velocity, unsigned long latchTime) // Constructor
 {
   pinMode(pin, INPUT_PULLUP); // Enable the internal pull-up resistor on the pin with the button/switch

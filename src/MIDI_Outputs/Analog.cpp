@@ -2,6 +2,8 @@
 #include "Analog.h"
 #include "MIDI_controller.h"
 
+using namespace ExtIO;
+
 Analog::Analog(uint8_t analogPin, uint8_t controllerNumber, uint8_t channel) // Constructor
 {
   this->analogPin = analogPin;

@@ -1,6 +1,8 @@
 #include "AnalogHiRes.h"
 #include "MIDI_controller.h"
 
+using namespace ExtIO;
+
 AnalogHiRes::AnalogHiRes(uint8_t analogPin, uint8_t channel) // Constructor
 {
   this->analogPin = analogPin;
