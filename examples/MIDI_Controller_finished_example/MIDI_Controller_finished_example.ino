@@ -13,74 +13,71 @@
   If you are using an Arduino Uno or Mega, use the HIDUINO firmware for the ATmega16U2.
 
 
-  Written by tttapa, 29-06-2017
+  Written by tttapa, 07-09-2017
   https://github.com/tttapa/MIDI_controller
 */
 
-
 #include <MIDI_controller.h>
 
-#define VELOCITY          0b01111111  // The velocity of the buttons (0b01111111 = 127 = 100%)
-#define LATCHTIME         100         // How long a note will be held on, in DigitalLatch mode (in milliseconds).
+#define VELOCITY 0b01111111 // The velocity of the buttons (0b01111111 = 127 = 100%)
+#define LATCHTIME 100       // How long a note will be held on, in DigitalLatch mode (in milliseconds).
 
-#define SPEED_MULTIPLY    1           // If the jog wheels or other encoders are too slow in your software, increase this value 
-// (it will be multiplied with the actual speed of the encoder, as the name implies.) Default is 1.
-#define PULSES_PER_STEP   4           // This is the number of pulses the encoder outputs when you turn it one step (or click) further. Use 4 for a normal rotary encoder, and 1 for a jogwheel.
-// If you set it to 1, this uses the maximum resolution. If it is set to 4, one message will be sent per click of the encoder. 1 click matches 1 unit in the software. This is more logical for most usages (except jogwheels).
+#define SPEED_MULTIPLY 1  // If the jog wheels or other encoders are too slow in your software, increase this value
+                          // (it will be multiplied with the actual speed of the encoder, as the name implies.) Default is 1.
 
-#define ANALOG_AVERAGE    8           // Use the average of 8 samples to get smooth transitions and prevent noise
+#define ANALOG_AVERAGE 8 // Use the average of 8 analog samples to get smooth transitions and prevent noise
 
-const uint8_t channelVolume = 0x07;   // Controller 7 is defined as MIDI channel volume
-const uint8_t pan = 0x0A;             // Controller 10 is defined as MIDI pan
+const uint8_t channelVolume = 0x07; // Controller 7 is defined as MIDI channel volume
+const uint8_t pan = 0x0A;           // Controller 10 is defined as MIDI pan
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
 Analog faders[] = {
-  {A0, channelVolume, 1},        // Create a new instance of class 'Analog' on pin A0, controller number 0x07 (channel volume), on MIDI channel 1.
-  {A1, channelVolume, 2},
-  {A2, channelVolume, 3},
-  {A3, channelVolume, 4},
+    {A0, channelVolume, 1}, // Create a new instance of class 'Analog' on pin A0, controller number 0x07 (channel volume), on MIDI channel 1.
+    {A1, channelVolume, 2},
+    {A2, channelVolume, 3},
+    {A3, channelVolume, 4},
 };
 
 Analog knobsTop[] = {
-  {A4, 0x14, 1},                // Create a new instance of class 'Analog' on pin A4, controller number 0x14, on MIDI channel 1.
-  {A5, 0x15, 1},
-  {A6, 0x16, 1},
-  {A7, 0x17, 1},
+    {A4, 0x10, 1}, // Create a new instance of class 'Analog' on pin A4, controller number 0x10 (General Purpose Controller 1), on MIDI channel 1.
+    {A5, 0x11, 1},
+    {A6, 0x12, 1},
+    {A7, 0x13, 1},
 };
 
 Analog knobsSide[] = {
-  {A8,  pan, 1},               // Create a new instance of class 'Analog' called 'potSide1', on pin A8, controller number 0x18, on MIDI channel 1.
-  {A9,  pan, 2},
-  {A10, pan, 3},
-  {A11, pan, 4},
+    {A8,  pan, 1}, // Create a new instance of class 'Analog' called 'potSide1', on pin A8, controller number 0x0A (pan), on MIDI channel 1.
+    {A9,  pan, 2},
+    {A10, pan, 3},
+    {A11, pan, 4},
 };
 
 DigitalLatch switches[] = {
-  {2, 0x10, 1, VELOCITY, LATCHTIME},    // Create a new instance of class 'DigitalLatch' on pin 0, note number 16 on MIDI channel 1, with a predefined latch time
-  {3, 0x11, 1, VELOCITY, LATCHTIME},
-  {5, 0x12, 1, VELOCITY, LATCHTIME},
-  {7, 0x13, 1, VELOCITY, LATCHTIME},
+    {2, 0x10, 1, VELOCITY, LATCHTIME}, // Create a new instance of class 'DigitalLatch' on pin 0, note number 16 (mute) on MIDI channel 1, with a predefined latch time
+    {3, 0x11, 1, VELOCITY, LATCHTIME},
+    {5, 0x12, 1, VELOCITY, LATCHTIME},
+    {7, 0x13, 1, VELOCITY, LATCHTIME},
 };
 
-RotaryEncoder enc1 = {1, 0, 0x2F, 1, SPEED_MULTIPLY, NORMAL_ENCODER, POS1_NEG127}; // Create a new instance of class 'RotaryEncoder' called enc1, on pins 1 and 0, controller number 0x2F, on MIDI channel 1, at normal speed, using a normal encoder (4 pulses per click/step), using the POS1_NEG127 sign option
+RotaryEncoder enc = {1, 0, 0x2F, 1, SPEED_MULTIPLY, NORMAL_ENCODER, TWOS_COMPLEMENT}; // Create a new instance of class 'RotaryEncoder' called enc, on pins 1 and 0, controller number 0x2F, on MIDI channel 1, at normal speed, using a normal encoder (4 pulses per click/step), using the TWOS_COMPLEMENT sign option
 
-Bank bank(4);
+Bank bank(4); // A bank with four channels
 
-BankSelector bankselector(bank, 11, LED_BUILTIN, BankSelector::TOGGLE);
+BankSelector bankselector(bank, 11, LED_BUILTIN, BankSelector::TOGGLE); // A bank selector with a single toggle switch on pin 11 and an LED for feedback on pin 13
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
 void setup()
 {
-  bank.add(faders, Bank::CHANGE_CHANNEL);
+  bank.add(faders, Bank::CHANGE_CHANNEL); // Add the control elements to the bank
   bank.add(knobsSide, Bank::CHANGE_CHANNEL);
   bank.add(switches, Bank::CHANGE_ADDRESS);
 
-  bank.average(ANALOG_AVERAGE);
-  for (uint8_t i = 0; i < sizeof(knobsTop) / sizeof(knobsTop[0]); i++) {
+  bank.average(ANALOG_AVERAGE); // Average all control elements in the bank
+
+  for (uint8_t i = 0; i < sizeof(knobsTop) / sizeof(knobsTop[0]); i++) // Average the other Analog elements (that aren't in the bank)
     knobsTop[i].average(ANALOG_AVERAGE);
-  }
 }
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
@@ -89,6 +86,3 @@ void loop() // Refresh all inputs
 {
   MIDI_Controller.refresh();
 }
-
-
-

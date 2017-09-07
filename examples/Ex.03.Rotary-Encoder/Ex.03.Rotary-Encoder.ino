@@ -19,8 +19,6 @@
 
 #include <MIDI_controller.h>
 
-USBMIDI_Interface midiout; // Instantiate a USB MIDI output
-
 const uint8_t Channel = 1;       // MIDI channel 1
 const uint8_t Controller = 0x14; // MIDI Control Change controller number
 const int speedMultiply = 1;     // No change in speed of the encoder (number of steps is multiplied by 1)
@@ -31,13 +29,11 @@ RotaryEncoder encoder(2, 3, Controller, Channel, speedMultiply, JOG, TWOS_COMPLE
 
 //________________________________________________________________________________________________________________________________
 
-void setup() {
- startMIDI(); // Initialise the MIDI output connection
-}
+void setup() {}
 
 //________________________________________________________________________________________________________________________________
 
 void loop() {
   // Refresh the encoder (check whether the position has changed since last time, if so, send the difference over MIDI)
-  encoder.refresh();
+  MIDI_Controller.refresh();
 }

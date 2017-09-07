@@ -33,7 +33,6 @@ private:
   const uint8_t channelsPerBank;
   struct MIDI_Element_list_node
   {
-    #include "Arduino.h"
     MIDI_Control_Element *element;
     MIDI_Element_list_node *next;
     bankType type;

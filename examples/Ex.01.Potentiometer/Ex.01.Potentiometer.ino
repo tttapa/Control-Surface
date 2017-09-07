@@ -12,7 +12,7 @@ https://github.com/tttapa/MIDI_controller
 const uint8_t Channel_Volume = 0x7; // Controller number 7 is defined as Channel Volume in the MIDI specification
 const uint8_t MIDI_Channel = 1;     // Send Control Change messages on MIDI channel 1
 
-const size_t analogAverage = 8; // Use the average of 8 samples to get smooth transitions and prevent noise
+const size_t analogAverage = 8; // Use the average of 8 analog samples to get smooth transitions and prevent noise
 
 // Create a new instance of the class 'Analog, called 'potentiometer', on pin A0, 
 // that sends MIDI messages with controller 7 (channel volume) on channel 1
@@ -21,7 +21,7 @@ Analog potentiometer(A0, Channel_Volume, 1);
 //________________________________________________________________________________________________________________________________
 
 void setup() {
-  potentiometer.average(analogAverage); // Use the average of analog 8 samples to get smooth transitions and prevent noise
+  potentiometer.average(analogAverage); // Use the average of 8 analog samples to get smooth transitions and prevent noise
 }
 
 //________________________________________________________________________________________________________________________________

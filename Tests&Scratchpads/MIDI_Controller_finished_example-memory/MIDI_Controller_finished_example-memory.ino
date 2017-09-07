@@ -75,7 +75,7 @@ BankSelector bankselector(bank, 11, LED_BUILTIN, BankSelector::TOGGLE);
 void setup()
 {
   Serial.begin(115200);
-  while(!Serial);
+  // while(!Serial);
   bank.add(faders, Bank::CHANGE_CHANNEL);
   bank.add(knobsSide, Bank::CHANGE_CHANNEL);
   bank.add(switches, Bank::CHANGE_ADDRESS);
