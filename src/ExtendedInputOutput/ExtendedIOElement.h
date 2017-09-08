@@ -2,6 +2,7 @@
 #define EXTENDEDIOELEMENT_H_
 
 #include "Arduino.h"
+#include "../Helpers/Linked_List.h"
 
 typedef unsigned int pin_t;
 typedef int analog_t;
@@ -20,7 +21,7 @@ public:
   }
   ~ExtendedIOElement()
   {
-    DELETE_FROM_LINKED_LIST(this, first, last)
+    DELETE_FROM_LINKED_LIST(this, first, last);
   }
 
   virtual void pinMode(pin_t pin, uint8_t mode){};
