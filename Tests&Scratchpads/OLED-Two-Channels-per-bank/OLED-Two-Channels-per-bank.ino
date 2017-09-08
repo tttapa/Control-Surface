@@ -6,7 +6,7 @@
 #include "solo.h"
 #include "record10.h"
 
-#include <MIDI_controller.h>
+#include <MIDI_Controller.h>
 #include <MCU/MCU_Notes.h>
 
 using namespace MCU;

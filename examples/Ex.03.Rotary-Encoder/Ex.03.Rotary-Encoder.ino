@@ -17,7 +17,7 @@
   https://github.com/tttapa/MIDI_controller
 */
 
-#include <MIDI_controller.h>
+#include <MIDI_Controller.h>
 
 const uint8_t Channel = 1;       // MIDI channel 1
 const uint8_t Controller = 0x14; // MIDI Control Change controller number

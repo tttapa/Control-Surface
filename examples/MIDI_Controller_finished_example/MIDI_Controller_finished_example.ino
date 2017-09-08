@@ -17,7 +17,7 @@
   https://github.com/tttapa/MIDI_controller
 */
 
-#include <MIDI_controller.h>
+#include <MIDI_Controller.h>
 
 #define VELOCITY 0b01111111 // The velocity of the buttons (0b01111111 = 127 = 100%)
 #define LATCHTIME 100       // How long a note will be held on, in DigitalLatch mode (in milliseconds).

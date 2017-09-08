@@ -11,7 +11,7 @@ Written by tttapa, 21/08/2015
 https://github.com/tttapa/MIDI_controller
 */
 
-#include <MIDI_controller.h> // include the library
+#include <MIDI_Controller.h> // include the library
 
 const static byte Channel_Volume = 0x7; // controller number 7 is defined as Channel Volume in the MIDI implementation.
 const static size_t analogAverage = 8; // Use the average of 8 samples to get smooth transitions and prevent noise

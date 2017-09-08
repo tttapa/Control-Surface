@@ -1,4 +1,4 @@
-#include "MIDI_controller.h"
+#include "MIDI_Controller.h"
 
 // public:
 

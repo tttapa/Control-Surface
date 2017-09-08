@@ -11,7 +11,7 @@ Written by tttapa, 29-06-2017
 https://github.com/tttapa/MIDI_controller
 */
 
-#include <MIDI_controller.h> // include the library
+#include <MIDI_Controller.h> // include the library
 
 const static size_t analogAverage = 8; // Use the average of 8 samples to get smooth transitions and prevent noise
 

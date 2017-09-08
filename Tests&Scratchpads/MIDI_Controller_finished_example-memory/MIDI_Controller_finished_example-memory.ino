@@ -18,7 +18,7 @@
 */
 
 
-#include <MIDI_controller.h>
+#include <MIDI_Controller.h>
 #include "MemoryFree.h"
 
 #define VELOCITY          0b01111111  // The velocity of the buttons (0b01111111 = 127 = 100%)

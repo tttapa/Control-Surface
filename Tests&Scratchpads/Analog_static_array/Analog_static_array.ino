@@ -1,4 +1,4 @@
-#include <MIDI_controller.h> // include the library
+#include <MIDI_Controller.h> // include the library
 
 const size_t analogAverage = 8; // Use the average of 8 samples to get smooth transitions and prevent noise
 const uint8_t channel = 1; // MIDI channel 1

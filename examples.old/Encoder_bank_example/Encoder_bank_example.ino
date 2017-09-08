@@ -24,7 +24,7 @@
   https://github.com/tttapa/MIDI_controller
 */
 
-#include <MIDI_controller.h>
+#include <MIDI_Controller.h>
 
 const byte Channel = 1;
 const byte Controller = 0x14;

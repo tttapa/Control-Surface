@@ -18,7 +18,7 @@ Written by tttapa, 21/08/2015
 https://github.com/tttapa/MIDI_controller
 */
 
-#include <MIDI_controller.h>
+#include <MIDI_Controller.h>
 
 
 const int on[8][32]  = { // the array with note on events, 8 bars of 4 beats

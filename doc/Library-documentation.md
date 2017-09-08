@@ -1,6 +1,6 @@
 # Using the MIDI controller library
 First add the library to your sketch by simply typing this line at the top of your file:  
-`#include <MIDI_controller.h>`
+`#include <MIDI_Controller.h>`
 
 The library currently has 6 classes: Analog, AnalogHiRes, ControlChange, Digital, DigitalLatch, and Encoder. There's also a USBMidiController object that you can use to send MIDI over USB.
 

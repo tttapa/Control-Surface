@@ -26,7 +26,7 @@ Written by tttapa, 21/08/2015
 https://github.com/tttapa/MIDI_controller
 */
 
-#include <MIDI_controller.h> // include the library
+#include <MIDI_Controller.h> // include the library
 
 const static byte velocity = 127; // the maximum velocity, since MIDI uses a 7-bit number for velocity.
 const static byte E0 = 16; // note number 60 is defined as middle C in the MIDI implementation, so 16 is E0.

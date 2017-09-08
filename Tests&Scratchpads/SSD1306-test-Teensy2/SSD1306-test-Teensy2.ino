@@ -1,5 +1,5 @@
 #include "Display.h"
-#include <MIDI_controller.h>
+#include <MIDI_Controller.h>
 
 using namespace ExtIO;
 

@@ -1,5 +1,5 @@
 #include "Display.h"
-#include <MIDI_controller.h>
+#include <MIDI_Controller.h>
 #include "MIDI_Input_V-Pot_Ring.h"
 #include "MIDI_Input_VU.h"
 #include "MIDI_Input_7SegmentDisplay.h"

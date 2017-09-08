@@ -1,7 +1,7 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include <MIDI_controller.h>
+#include <MIDI_Controller.h>
 
 Adafruit_SSD1306 display;
 

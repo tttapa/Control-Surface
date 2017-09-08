@@ -1,14 +1,12 @@
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-MIDI_controller	KEYWORD1
+MIDI_Controller	KEYWORD1
 Analog	KEYWORD1
 AnalogHiRes	KEYWORD1
 Digital	KEYWORD1
 DigitalLatch	KEYWORD1
 RotaryEncoder	KEYWORD1
-ControlChange	KEYWORD1
-USBMidiController	KEYWORD1
 relativeCCmode	KEYWORD1
 
 #######################################
@@ -21,9 +19,6 @@ bank	KEYWORD2
 invert	KEYWORD2
 detachBank	KEYWORD2
 send	KEYWORD2
-setDelay	KEYWORD2
-blink	KEYWORD2
-noBlink KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
@@ -32,6 +27,7 @@ NOTE_ON	LITERAL1
 NOTE_OFF	LITERAL1
 KEY_PRESSURE	LITERAL1
 CC	LITERAL1
+CONTROL_CHANGE	LITERAL1
 PROGRAM_CHANGE	LITERAL1
 CHANNEL_PRESSURE	LITERAL1
 PITCH_BEND	LITERAL1
