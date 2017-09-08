@@ -4,11 +4,12 @@
 #include "Arduino.h"
 #include "../Settings/Settings.h"
 #include "MIDI_Control_Element.h"
+#include "../ExtendedInputOutput/ExtendedInputOutput.h"
 
 class Analog : public MIDI_Control_Element
 {
 public:
-  Analog(uint8_t analogPin, uint8_t controllerNumber, uint8_t channel); // Constructor
+  Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel); // Constructor
   ~Analog();                                                            // Destructor
 #ifdef SINGLE_BYTE_AVERAGE
   void average(uint8_t length); // Use the average of multiple samples of analog readings
@@ -20,7 +21,8 @@ public:
 private:
   void refresh();           // Read the analog input value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
   
-  uint8_t analogPin, controllerNumber, channel, oldVal = -1;
+  pin_t analogPin; 
+  uint8_t controllerNumber, channel, oldVal = -1;
   bool bankEnabled = false;
   int (*analogMap)(int) = identity; // function pointer to identity function f(x) → x
 

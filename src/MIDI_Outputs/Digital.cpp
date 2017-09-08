@@ -3,7 +3,7 @@
 
 using namespace ExtIO;
 
-Digital::Digital(uint8_t pin, uint8_t note, uint8_t channel, uint8_t velocity) // Constructor
+Digital::Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity) // Constructor
 {
   pinMode(pin, INPUT_PULLUP); // Enable the internal pull-up resistor on the pin with the button/switch
   this->pin = pin;

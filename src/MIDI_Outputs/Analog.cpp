@@ -4,7 +4,7 @@
 
 using namespace ExtIO;
 
-Analog::Analog(uint8_t analogPin, uint8_t controllerNumber, uint8_t channel) // Constructor
+Analog::Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel) // Constructor
 {
   this->analogPin = analogPin;
   this->controllerNumber = controllerNumber;

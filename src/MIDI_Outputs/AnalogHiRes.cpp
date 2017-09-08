@@ -3,7 +3,7 @@
 
 using namespace ExtIO;
 
-AnalogHiRes::AnalogHiRes(uint8_t analogPin, uint8_t channel) // Constructor
+AnalogHiRes::AnalogHiRes(pin_t analogPin, uint8_t channel) // Constructor
 {
   this->analogPin = analogPin;
   this->channel = channel;
@@ -25,22 +25,12 @@ void AnalogHiRes::average(size_t length) // use the average of multiple samples 
 
 void AnalogHiRes::refresh() // read the analog value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
 {
-#if defined(PITCH_BEND_RESOLUTION_14_BITS) && (defined(CORE_TEENSY) || defined(__arm__)) // Teensy boards and Arduino Due support higher resolutions than AVR boards
-  analogReadResolution(14);
-  analogRead(analogPin);
-  uint16_t input = analogRead(analogPin);
-  analogReadResolution(10);
-#else // Analog resolution is only 10 bits
-  analogRead(analogPin);
-  uint16_t input = analogRead(analogPin) << 4; // make it a 14-bit number (pad with 4 zeros)
-#endif
+  analogRead(analogPin); // throw away first analog reading
+  analog_t input = analogRead(analogPin);
+  uint16_t value = analogMap(input) << 4; // apply the analogMap function to the value (identity function f(x) = x by default) and make it a 14-bit number (pad with 4 zeros)
 
-  uint16_t value = analogMap(input); // apply the analogMap function to the value (identity function f(x) = x by default)
-
-  if (avLen)
-  {                                // if averaging is enabled
+  if (avLen)                       // if averaging is enabled
     value = runningAverage(value); // update the running average with the new value
-  }
 
   if (value != oldVal) // if the value changed since last time
   {
