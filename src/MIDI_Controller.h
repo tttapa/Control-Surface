@@ -23,6 +23,9 @@
 #include "./ExtendedInputOutput/ShiftRegisterOut.h"
 #include "./ExtendedInputOutput/AnalogMultiplex.h"
 
+#include "./MIDI_Constants/MCU_Notes.h"
+#include "./MIDI_Constants/Control_Change.h"
+
 class MIDI_Controller_
 {
 public:
