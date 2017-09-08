@@ -1,10 +1,51 @@
 namespace MCU {
 
-const uint8_t REC_RDY                = 0x00; // In Out
-const uint8_t SOLO                   = 0x08; // In Out
-const uint8_t MUTE                   = 0x10; // In Out
-const uint8_t SELECT                 = 0x18; // In Out
-const uint8_t V_POT_SELECT           = 0x20; //    Out
+// Notes
+
+const uint8_t REC_RDY_1              = 0x00; // In Out
+const uint8_t REC_RDY_2              = 0x01; // In Out
+const uint8_t REC_RDY_3              = 0x02; // In Out
+const uint8_t REC_RDY_4              = 0x03; // In Out
+const uint8_t REC_RDY_5              = 0x04; // In Out
+const uint8_t REC_RDY_6              = 0x05; // In Out
+const uint8_t REC_RDY_7              = 0x06; // In Out
+const uint8_t REC_RDY_8              = 0x07; // In Out
+
+const uint8_t SOLO_1                 = 0x08; // In Out
+const uint8_t SOLO_2                 = 0x09; // In Out
+const uint8_t SOLO_3                 = 0x0A; // In Out
+const uint8_t SOLO_4                 = 0x0B; // In Out
+const uint8_t SOLO_5                 = 0x0C; // In Out
+const uint8_t SOLO_6                 = 0x0D; // In Out
+const uint8_t SOLO_7                 = 0x0E; // In Out
+const uint8_t SOLO_8                 = 0x0F; // In Out
+
+const uint8_t MUTE_1                 = 0x10; // In Out
+const uint8_t MUTE_2                 = 0x11; // In Out
+const uint8_t MUTE_3                 = 0x12; // In Out
+const uint8_t MUTE_4                 = 0x13; // In Out
+const uint8_t MUTE_5                 = 0x14; // In Out
+const uint8_t MUTE_6                 = 0x15; // In Out
+const uint8_t MUTE_7                 = 0x16; // In Out
+const uint8_t MUTE_8                 = 0x17; // In Out
+
+const uint8_t SELECT_1               = 0x18; // In Out
+const uint8_t SELECT_2               = 0x19; // In Out
+const uint8_t SELECT_3               = 0x1A; // In Out
+const uint8_t SELECT_4               = 0x1B; // In Out
+const uint8_t SELECT_5               = 0x1C; // In Out
+const uint8_t SELECT_6               = 0x1D; // In Out
+const uint8_t SELECT_7               = 0x1E; // In Out
+const uint8_t SELECT_8               = 0x1F; // In Out
+
+const uint8_t V_POT_SELECT_1         = 0x20; // In Out
+const uint8_t V_POT_SELECT_2         = 0x21; // In Out
+const uint8_t V_POT_SELECT_3         = 0x22; // In Out
+const uint8_t V_POT_SELECT_4         = 0x23; // In Out
+const uint8_t V_POT_SELECT_5         = 0x24; // In Out
+const uint8_t V_POT_SELECT_6         = 0x25; // In Out
+const uint8_t V_POT_SELECT_7         = 0x26; // In Out
+const uint8_t V_POT_SELECT_8         = 0x27; // In Out
 
 const uint8_t ASSIGN_TRACK           = 0x28; // In Out
 const uint8_t ASSIGN_SEND            = 0x29; // In Out
@@ -64,7 +105,7 @@ const uint8_t CYCLE                  = 0x56; // In Out
 const uint8_t DROP                   = 0x57; // In Out
 const uint8_t REPLACE                = 0x58; // In Out
 const uint8_t CLICK                  = 0x59; // In Out
-const uint8_t SOLO_G                 = 0x5A; // In Out
+const uint8_t SOLO                   = 0x5A; // In Out
 
 const uint8_t REWIND                 = 0x5B; // In Out
 const uint8_t FAST_FWD               = 0x5C; // In Out
@@ -92,5 +133,16 @@ const uint8_t BEATS                  = 0x72; // In
 const uint8_t RUDE_SOLO              = 0x73; // In
 
 const uint8_t RELAY                  = 0x76; // In
+
+// Control Change
+
+const uint8_t V_POT_1  = 0x10; // In Out
+const uint8_t V_POT_2  = 0x11; // In Out
+const uint8_t V_POT_3  = 0x12; // In Out
+const uint8_t V_POT_4  = 0x13; // In Out
+const uint8_t V_POT_5  = 0x14; // In Out
+const uint8_t V_POT_6  = 0x15; // In Out
+const uint8_t V_POT_7  = 0x16; // In Out
+const uint8_t V_POT_8  = 0x17; // In Out
 
 };
