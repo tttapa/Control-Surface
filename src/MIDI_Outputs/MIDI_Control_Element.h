@@ -7,6 +7,8 @@
 
 class MIDI_Control_Element
 {
+  friend class MIDI_Controller_;
+
 public:
   MIDI_Control_Element() // Constructor
   {
@@ -16,7 +18,7 @@ public:
   {
     DELETE_FROM_LINKED_LIST(this, first, last);
   }
-  virtual void refresh() {}              // Check if the state or value of the control has changed since last refresh, if so, send MIDI event
+
   virtual void average(size_t length) {} // Use the average of multiple samples of analog readings
   virtual void map(int (*fn)(int)) {}    // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
 
@@ -34,10 +36,13 @@ public:
   }
 
 protected:
+  virtual void refresh() {} // Check if the state or value of the control has changed since last refresh, if so, send MIDI event
+
   uint8_t channelOffset = 0;
   uint8_t addressOffset = 0;
   uint8_t channelsPerBank = 1;
 
+private:
   MIDI_Control_Element *next = nullptr, *previous = nullptr;
 
   static MIDI_Control_Element *last;

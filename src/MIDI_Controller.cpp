@@ -22,12 +22,14 @@ void MIDI_Controller_::begin()
             new_midi = new USBMIDI_Interface; // create a new USB MIDI interface
             midi = new_midi;
         }
+        midi->begin(); // initialize the MIDI interface
     }
-    midi->begin(); // initialize the MIDI interface
 }
 void MIDI_Controller_::refresh()
 {
-    MIDI();                 // make sure that midi != nullptr
+    if (midi == nullptr)
+        begin(); // make sure that midi != nullptr
+
     refreshControls();      // refresh all control elements (Analog, AnalogHiRes, Digital, DigitalLatch, RotaryEncoder)
     refreshBankSelectors(); // refresh all bank selectors
 
@@ -37,8 +39,6 @@ void MIDI_Controller_::refresh()
 
 MIDI_Interface *MIDI_Controller_::MIDI()
 {
-    if (midi == nullptr) // is this overly defensive?
-        begin();
     return midi;
 }
 

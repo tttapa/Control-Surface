@@ -2,11 +2,16 @@
 # Datatypes (KEYWORD1)
 #######################################
 MIDI_Controller	KEYWORD1
+
 Analog	KEYWORD1
 AnalogHiRes	KEYWORD1
 Digital	KEYWORD1
 DigitalLatch	KEYWORD1
 RotaryEncoder	KEYWORD1
+
+Bank	KEYWORD1
+BankSelector	KEYWORD1
+
 relativeCCmode	KEYWORD1
 
 #######################################
@@ -15,7 +20,6 @@ relativeCCmode	KEYWORD1
 refresh	KEYWORD2
 average	KEYWORD2
 map	KEYWORD2
-bank	KEYWORD2
 invert	KEYWORD2
 detachBank	KEYWORD2
 send	KEYWORD2

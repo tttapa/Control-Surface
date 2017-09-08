@@ -1,7 +1,6 @@
 #ifndef RotaryEncoder_h_
 #define RotaryEncoder_h_
 
-
 #include "Arduino.h"
 #include "Encoder.h"
 #include "./MIDI_Control_Element.h"
@@ -32,10 +31,11 @@ class RotaryEncoder : public MIDI_Control_Element
 {
 public:
   RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply = 1, uint8_t pulsesPerStep = NORMAL_ENCODER, relativeCCmode mode = TWOS_COMPLEMENT); // Constructor
-  ~RotaryEncoder();                                                                                                                                    // Destructor
-  void refresh();        
+  ~RotaryEncoder();                                                                                                                                                                           // Destructor
 
 private:
+  void refresh(); // Check if the encoder position has changed since last time, if so, send the relative movement over MIDI
+
   uint8_t controllerNumber, channel, pulsesPerStep;
   relativeCCmode mode;
   int speedMultiply;
