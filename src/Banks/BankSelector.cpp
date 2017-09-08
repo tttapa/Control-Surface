@@ -5,60 +5,6 @@ using namespace ExtIO;
 BankSelector *BankSelector::last = nullptr;
 BankSelector *BankSelector::first = nullptr;
 
-void BankSelector::init()
-{
-    switch (mode)
-    {
-    case SINGLE_SWITCH:
-    case SINGLE_BUTTON:
-        pinMode(switchPin, INPUT_PULLUP);
-        break;
-    case SINGLE_SWITCH_LED:
-    case SINGLE_BUTTON_LED:
-        pinMode(switchPin, INPUT_PULLUP);
-        pinMode(ledPin, OUTPUT);
-        break;
-    case MULTIPLE_BUTTONS:
-        for (uint8_t i = 0; i < nb_settings; i++)
-        {
-            pinMode(switchPins[i], INPUT_PULLUP);
-        }
-        break;
-    case MULTIPLE_BUTTONS_LEDS:
-        for (uint8_t i = 0; i < nb_settings; i++)
-        {
-            pinMode(switchPins[i], INPUT_PULLUP);
-            pinMode(ledPins[i], OUTPUT);
-        }
-        digitalWrite(ledPins[0], HIGH);
-        break;
-    case INCREMENT_DECREMENT:
-        pinMode(switchPins[0], INPUT_PULLUP);
-        pinMode(switchPins[1], INPUT_PULLUP);
-        break;
-    case INCREMENT_DECREMENT_LEDS:
-        pinMode(switchPins[0], INPUT_PULLUP);
-        pinMode(switchPins[1], INPUT_PULLUP);
-        for (uint8_t i = 0; i < nb_settings; i++)
-        {
-            pinMode(ledPins[i], OUTPUT);
-        }
-        digitalWrite(ledPins[0], HIGH);
-        break;
-    case INCREMENT:
-        pinMode(switchPins[0], INPUT_PULLUP);
-        break;
-    case INCREMENT_LEDS:
-        pinMode(switchPins[0], INPUT_PULLUP);
-        for (uint8_t i = 0; i < nb_settings; i++)
-        {
-            pinMode(ledPins[i], OUTPUT);
-        }
-        digitalWrite(ledPins[0], HIGH);
-        break;
-    }
-}
-
 void BankSelector::refresh()
 {
     uint8_t newBankSetting = bankSetting;
@@ -114,8 +60,6 @@ void BankSelector::refresh()
 
     if (newBankSetting != bankSetting)
     {
-        if (bankSettingChangeEvent != nullptr)
-            bankSettingChangeEvent(newBankSetting);
         refreshLEDs(newBankSetting);
         bankSetting = newBankSetting;
         bank.setBankSetting(bankSetting);
@@ -158,11 +102,6 @@ const char *BankSelector::getMode()
     return "";
 }
 #endif
-
-void BankSelector::setBankSettingChangeEvent(void (*fn)(uint8_t))
-{
-    bankSettingChangeEvent = fn;
-}
 
 void BankSelector::refreshLEDs(uint8_t newBankSetting)
 {

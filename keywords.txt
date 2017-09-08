@@ -13,16 +13,28 @@ Bank	KEYWORD1
 BankSelector	KEYWORD1
 
 relativeCCmode	KEYWORD1
+bankType	KEYWORD1
+buttonType	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 refresh	KEYWORD2
+
 average	KEYWORD2
 map	KEYWORD2
 invert	KEYWORD2
-detachBank	KEYWORD2
+
 send	KEYWORD2
+send	KEYWORD2
+send	KEYWORD2
+
+add	KEYWORD2
+setBankSetting	KEYWORD2
+getBankSetting	KEYWORD2
+add	KEYWORD2
+add	KEYWORD2
+add	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
@@ -48,3 +60,9 @@ REAPER_RELATIVE_2	LITERAL1
 REAPER_RELATIVE_3	LITERAL1
 TRACKTION_RELATIVE	LITERAL1
 MACKIE_CONTROL_RELATIVE	LITERAL1
+
+CHANGE_CHANNEL	LITERAL1
+CHANGE_ADDRESS	LITERAL1
+
+TOGGLE	LITERAL1
+MOMENTARY	LITERAL1
