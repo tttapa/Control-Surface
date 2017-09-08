@@ -12,13 +12,7 @@ public:
   ExtendedIOElement(pin_t length)
       : length(length)
   {
-    if (first == nullptr)
-      first = this;
-    previous = last;
-    if (previous != nullptr)
-      previous->next = this;
-    last = this;
-    next = nullptr;
+    INSERT_INTO_LINKED_LIST(this, first, last);
 
     start = offset;
     end = offset + length;
@@ -26,22 +20,7 @@ public:
   }
   ~ExtendedIOElement()
   {
-    if (previous != nullptr)
-    {
-      previous->next = next;
-    }
-    if (this == last)
-    {
-      last = previous;
-    }
-    if (next != nullptr)
-    {
-      next->previous = previous;
-    }
-    if (this == first)
-    {
-      first = next;
-    }
+    DELETE_FROM_LINKED_LIST(this, first, last)
   }
 
   virtual void pinMode(pin_t pin, uint8_t mode){};
