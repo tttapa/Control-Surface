@@ -60,9 +60,9 @@ void setup() {
 
 void loop() {
   if (digitalRead(bankSwitchPin) == LOW) // if the bank switch is switched on
-    bank.setBankSetting(1);
+    bank.setBankSetting(1); // select tracks 3 and 4
   else
-    bank.setBankSetting(0);
+    bank.setBankSetting(0); // select tracks 1 and 2
 
   // Refresh the MIDI controller (check whether the inputs have changed since last time, if so, send the new value over MIDI)
   MIDI_Controller.refresh();
