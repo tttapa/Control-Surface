@@ -25,18 +25,13 @@
 #define SPEED_MULTIPLY 1  // If the jog wheels or other encoders are too slow in your software, increase this value
                           // (it will be multiplied with the actual speed of the encoder, as the name implies.) Default is 1.
 
-#define ANALOG_AVERAGE 8 // Use the average of 8 analog samples to get smooth transitions and prevent noise
-
-const uint8_t channelVolume = 0x07; // Controller 7 is defined as MIDI channel volume
-const uint8_t pan = 0x0A;           // Controller 10 is defined as MIDI pan
-
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
 Analog faders[] = {
-    {A0, channelVolume, 1}, // Create a new instance of class 'Analog' on pin A0, controller number 0x07 (channel volume), on MIDI channel 1.
-    {A1, channelVolume, 2},
-    {A2, channelVolume, 3},
-    {A3, channelVolume, 4},
+    {A0, MIDI_CC::Channel_Volume, 1}, // Create a new instance of class 'Analog' on pin A0, controller number 0x07 (channel volume), on MIDI channel 1.
+    {A1, MIDI_CC::Channel_Volume, 2},
+    {A2, MIDI_CC::Channel_Volume, 3},
+    {A3, MIDI_CC::Channel_Volume, 4},
 };
 
 Analog knobsTop[] = {
@@ -47,10 +42,10 @@ Analog knobsTop[] = {
 };
 
 Analog knobsSide[] = {
-    {A8,  pan, 1}, // Create a new instance of class 'Analog' called 'potSide1', on pin A8, controller number 0x0A (pan), on MIDI channel 1.
-    {A9,  pan, 2},
-    {A10, pan, 3},
-    {A11, pan, 4},
+    {A8,  MIDI_CC::Pan, 1}, // Create a new instance of class 'Analog' called 'potSide1', on pin A8, controller number 0x0A (pan), on MIDI channel 1.
+    {A9,  MIDI_CC::Pan, 2},
+    {A10, MIDI_CC::Pan, 3},
+    {A11, MIDI_CC::Pan, 4},
 };
 
 DigitalLatch switches[] = {
@@ -73,11 +68,6 @@ void setup()
   bank.add(faders, Bank::CHANGE_CHANNEL); // Add the control elements to the bank
   bank.add(knobsSide, Bank::CHANGE_CHANNEL);
   bank.add(switches, Bank::CHANGE_ADDRESS);
-
-  bank.average(ANALOG_AVERAGE); // Average all control elements in the bank
-
-  for (uint8_t i = 0; i < sizeof(knobsTop) / sizeof(knobsTop[0]); i++) // Average the other Analog elements (that aren't in the bank)
-    knobsTop[i].average(ANALOG_AVERAGE);
 }
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
