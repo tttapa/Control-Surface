@@ -27,11 +27,7 @@ const int speedMultiply = 1;     // No change in speed of the encoder (number of
 // no change in speed (speed is multiplied by 1), it's used as a jog wheel, and the sign mode is set to two's complement.
 RotaryEncoder encoder(2, 3, Controller, Channel, speedMultiply, JOG, TWOS_COMPLEMENT);
 
-//________________________________________________________________________________________________________________________________
-
 void setup() {}
-
-//________________________________________________________________________________________________________________________________
 
 void loop() {
   // Refresh the encoder (check whether the position has changed since last time, if so, send the difference over MIDI)

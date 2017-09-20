@@ -19,8 +19,7 @@ public:
     DELETE_FROM_LINKED_LIST(this, first, last);
   }
 
-  virtual void average(size_t length) {} // Use the average of multiple samples of analog readings
-  virtual void map(int (*fn)(int)) {}    // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
+  virtual void map(int (*fn)(int)) {} // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
 
   void setChannelOffset(uint8_t offset);     // Set the channel offset
   void setAddressOffset(uint8_t offset);     // Set the address (note or controller number) offset

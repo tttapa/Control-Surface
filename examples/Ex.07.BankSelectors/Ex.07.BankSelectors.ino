@@ -6,29 +6,29 @@
   Connect push buttons to pins 11 and 12, and 4 LEDs (+ current limiting resitors) to pins 4, 5, 6 and 7).
 
   When bank 1 is selected:
-    Potentiometer A is channel volume of channel 1    (Controller number 0x07, MIDI channel 1)
-    Potentiometer B is channel volume of channel 2    (Controller number 0x07, MIDI channel 2)
+    Potentiometer A is channel volume of track 1      (Controller number 0x07, MIDI channel 1)
+    Potentiometer B is channel volume of track 2      (Controller number 0x07, MIDI channel 2)
     Mute button A is the mute button for track 1      (Note number 0x10, MIDI channel 1)
     Mute button B is the mute button for track 2      (Note number 0x11, MIDI channel 1)
     The LED on pin 4 lights up.
 
   When bank 2 is selected:
-    Potentiometer A is channel volume of channel 3    (Controller number 0x07, MIDI channel 3)
-    Potentiometer B is channel volume of channel 4    (Controller number 0x07, MIDI channel 4)
+    Potentiometer A is channel volume of track 3      (Controller number 0x07, MIDI channel 3)
+    Potentiometer B is channel volume of track 4      (Controller number 0x07, MIDI channel 4)
     Mute button A is the mute button for track 3      (Note number 0x12, MIDI channel 1)
     Mute button B is the mute button for track 4      (Note number 0x13, MIDI channel 1)
     The LED on pin 5 lights up.
 
   When bank 3 is selected:
-    Potentiometer A is channel volume of channel 5    (Controller number 0x07, MIDI channel 5)
-    Potentiometer B is channel volume of channel 6    (Controller number 0x07, MIDI channel 6)
+    Potentiometer A is channel volume of track 5      (Controller number 0x07, MIDI channel 5)
+    Potentiometer B is channel volume of track 6      (Controller number 0x07, MIDI channel 6)
     Mute button A is the mute button for track 5      (Note number 0x14, MIDI channel 1)
     Mute button B is the mute button for track 6      (Note number 0x15, MIDI channel 1)
     The LED on pin 6 lights up.
 
   When bank 4 is selected:
-    Potentiometer A is channel volume of channel 7    (Controller number 0x07, MIDI channel 7)
-    Potentiometer B is channel volume of channel 8    (Controller number 0x07, MIDI channel 8)
+    Potentiometer A is channel volume of track 7      (Controller number 0x07, MIDI channel 7)
+    Potentiometer B is channel volume of track 8      (Controller number 0x07, MIDI channel 8)
     Mute button A is the mute button for track 7      (Note number 0x16, MIDI channel 1)
     Mute button B is the mute button for track 8      (Note number 0x17, MIDI channel 1)
     The LED on pin 7 lights up.
@@ -77,10 +77,6 @@ void setup() {
   bank.add(potentiometer_B, Bank::CHANGE_CHANNEL);
   bank.add(muteButton_A, Bank::CHANGE_ADDRESS); // When the bank setting is changed, change the address (note number) of the mute button
   bank.add(muteButton_B, Bank::CHANGE_ADDRESS);
-
-  // Use the average of 8 analog samples to get smooth transitions and prevent noise.
-  // It will be applied to all Analog and AnalogHiRes objects in the bank
-  bank.average(8);
 }
 
 /*_______________________________________________________________________________________________________________________________________*/
@@ -91,128 +87,128 @@ void loop() {
   MIDI_Controller.refresh();
 }
 
-  /*
-  Different Bank Select modes:
+/*
+Different Bank Select modes:
 
-  - One toggle switch (latching switch)
+- One toggle switch (latching switch)
 
-      When the switch is in the 'off' position, bankSetting 1 is selected
-      When the switch is in the 'on' position, bankSetting 2 is selected
+    When the switch is in the 'off' position, bankSetting 1 is selected
+    When the switch is in the 'on' position, bankSetting 2 is selected
 
-      BankSelector(bank, switch pin, BankSelector::TOGGLE);
-
-
-  - One toggle switch (latching switch) and one LED
-
-      When the switch is in the 'off' position, bankSetting 1 is selected and the LED is off
-      When the switch is in the 'on' position, bankSetting 2 is selected and the LED is on
-
-          Note: this mode is pretty useless, you can just connect the LED to the switch directly,
-                without wasting a digital output pin on it.
-
-      BankSelector(bank, switch pin, led pin, BankSelector::TOGGLE);
+    BankSelector(bank, switch pin, BankSelector::TOGGLE);
 
 
-  - One momentary switch (push button)
+- One toggle switch (latching switch) and one LED
 
-      Pressing the button switches the bankSetting:
-      When starting the program, bankSetting 1 is selected,
-      When the button is pressed, bankSetting 2 is selected,
-      When the button is pressed again, bankSetting 1 is selected, 
-      and so on.
+    When the switch is in the 'off' position, bankSetting 1 is selected and the LED is off
+    When the switch is in the 'on' position, bankSetting 2 is selected and the LED is on
 
-      BankSelector(bank, button pin);
-      BankSelector(bank, button pin, BankSelector::MOMENTARY);
+        Note: this mode is pretty useless, you can just connect the LED to the switch directly,
+            without wasting a digital output pin on it.
 
-
-  - One momentary switch (push button) and one LED
-
-      Pressing the button switches the bankSetting and toggles the LED:
-      When starting the program, bankSetting 1 is selected and the LED is off,
-      When the button is pressed, bankSetting 2 is selected and the LED turns on,
-      When the button is pressed again, bankSetting 1 is selected and the LED is turned off,
-      and so on.
-
-      BankSelector(bank, button pin, led pin);
-      BankSelector(bank, button pin, led pin, BankSelector::MOMENTARY);
+    BankSelector(bank, switch pin, led pin, BankSelector::TOGGLE);
 
 
-  - Multiple momentary switches (push buttons)
+- One momentary switch (push button)
 
-      Pressing one of the buttons selects the respective output:
-      When starting the program, bankSetting 1 is selected,
-      When the second button is pressed, bankSetting 2 is selected,
-      When the n-th button is pressed, bankSetting n is selected.
+    Pressing the button switches the bankSetting:
+    When starting the program, bankSetting 1 is selected,
+    When the button is pressed, bankSetting 2 is selected,
+    When the button is pressed again, bankSetting 1 is selected, 
+    and so on.
 
-      BankSelector(bank, { button 1 pin, button 2 pin, ... , button n pin } );
-
-
-  - Multiple momentary switches (push buttons) and multiple LEDs
-
-      Pressing one of the buttons selects the respective output and enables the respective LED:
-      When starting the program, bankSetting 1 is selected and LED 1 is on,
-      When the second button is pressed, bankSetting 2 is selected, LED 1 turns off and LED 2 turns on,
-      When the n-th button is pressed, bankSetting n is selected, LED n turns on, and all other LEDs are off.
-
-      BankSelector(bank, { button 1 pin, button 2 pin, ... , button n pin }, { led 1 pin, led 2 pin, ... , led n pin } );
-
-      
-  - Two momentary switches (push buttons)
-
-      Pressing the first button increments the bankSetting number,
-      pressing the second button decrements the bankSetting number: 
-      When starting the program, bankSetting 1 is selected,
-      When the first button is pressed, bankSetting 2 is selected, 
-      When the first button is pressed again, bankSetting 3 is selected,
-      When the last bankSetting is selected, and the first button is pressed again,
-      bankSetting 1 is selected.
-      When the second button is pressed, the last bankSetting (n) is selected,
-      When the second button is pressed again, bankSetting (n-1) is selected,
-      and so on.
-
-      BankSelector(bank, { button increment pin, button decrement pin }, number of bankSettings);
+    BankSelector(bank, button pin);
+    BankSelector(bank, button pin, BankSelector::MOMENTARY);
 
 
-  - Two momentary switches (push buttons) and multiple LEDs
+- One momentary switch (push button) and one LED
 
-      Pressing the first button increments the bankSetting number and turns on the respective LED,
-      pressing the second button decrements the bankSetting number and turns on the respective LED: 
-      When starting the program, bankSetting 1 is selected and LED 1 is on,
-      When the first button is pressed, bankSetting 2 is selected, LED 1 turns off and LED 2 turns on,
-      When the first button is pressed again, bankSetting 3 is selected, LED 2 turns off and LED 3 turns on.
-      When the last bankSetting is selected, and the first button is pressed,
-      bankSetting 1 is selected, the last LED turns off and LED 1 turns on.
-      When the second button is pressed, the last bankSetting (n) is selected, LED 1 turns off and LED n turns on,
-      When the second button is pressed again, bankSetting (n-1) is selected, LED n turns off and LED n-1 turns on,
-      and so on.
+    Pressing the button switches the bankSetting and toggles the LED:
+    When starting the program, bankSetting 1 is selected and the LED is off,
+    When the button is pressed, bankSetting 2 is selected and the LED turns on,
+    When the button is pressed again, bankSetting 1 is selected and the LED is turned off,
+    and so on.
 
-      BankSelector(bank, { button increment pin, button decrement pin }, { led 1 pin, led 2 pin, ... , led n pin });
+    BankSelector(bank, button pin, led pin);
+    BankSelector(bank, button pin, led pin, BankSelector::MOMENTARY);
 
 
-  - One momentary switch (push button)
+- Multiple momentary switches (push buttons)
 
-      Pressing the button increments the bankSetting number,
-      When starting the program, bankSetting 1 is selected,
-      When the button is pressed, bankSetting 2 is selected, 
-      When the button is pressed again, bankSetting 3 is selected,
-      When the last bankSetting is selected, and the button is pressed again,
-      bankSetting 1 is selected.
+    Pressing one of the buttons selects the respective output:
+    When starting the program, bankSetting 1 is selected,
+    When the second button is pressed, bankSetting 2 is selected,
+    When the n-th button is pressed, bankSetting n is selected.
 
-      BankSelector(bank, { button increment pin }, number of bankSettings);
+    BankSelector(bank, { button 1 pin, button 2 pin, ... , button n pin } );
 
 
-  - One momentary switch (push button) and multiple LEDs
+- Multiple momentary switches (push buttons) and multiple LEDs
 
-      Pressing the button increments the bankSetting number and turns on the respective LED,
-      When starting the program, bankSetting 1 is selected and LED 1 is on,
-      When the button is pressed, bankSetting 2 is selected, LED 1 turns off and LED 2 turns on,
-      When the button is pressed again, bankSetting 3 is selected, LED 2 turns off and LED 3 turns on.
-      When the last bankSetting is selected, and the button is pressed,
-      bankSetting 1 is selected, the last LED turns off and LED 1 turns on.
-      
-      BankSelector(bank, { button increment pin }, { led 1 pin, led 2 pin, ... , led n pin });
+    Pressing one of the buttons selects the respective output and enables the respective LED:
+    When starting the program, bankSetting 1 is selected and LED 1 is on,
+    When the second button is pressed, bankSetting 2 is selected, LED 1 turns off and LED 2 turns on,
+    When the n-th button is pressed, bankSetting n is selected, LED n turns on, and all other LEDs are off.
+
+    BankSelector(bank, { button 1 pin, button 2 pin, ... , button n pin }, { led 1 pin, led 2 pin, ... , led n pin } );
+
+    
+- Two momentary switches (push buttons)
+
+    Pressing the first button increments the bankSetting number,
+    pressing the second button decrements the bankSetting number: 
+    When starting the program, bankSetting 1 is selected,
+    When the first button is pressed, bankSetting 2 is selected, 
+    When the first button is pressed again, bankSetting 3 is selected,
+    When the last bankSetting is selected, and the first button is pressed again,
+    bankSetting 1 is selected.
+    When the second button is pressed, the last bankSetting (n) is selected,
+    When the second button is pressed again, bankSetting (n-1) is selected,
+    and so on.
+
+    BankSelector(bank, { button increment pin, button decrement pin }, number of bankSettings);
 
 
-    Note: a switch is 'off' or 'released' when it doesn't conduct. The digital value 
-    on the input will therefore be HIGH (because of the pull-up resistor)
-  */
+- Two momentary switches (push buttons) and multiple LEDs
+
+    Pressing the first button increments the bankSetting number and turns on the respective LED,
+    pressing the second button decrements the bankSetting number and turns on the respective LED: 
+    When starting the program, bankSetting 1 is selected and LED 1 is on,
+    When the first button is pressed, bankSetting 2 is selected, LED 1 turns off and LED 2 turns on,
+    When the first button is pressed again, bankSetting 3 is selected, LED 2 turns off and LED 3 turns on.
+    When the last bankSetting is selected, and the first button is pressed,
+    bankSetting 1 is selected, the last LED turns off and LED 1 turns on.
+    When the second button is pressed, the last bankSetting (n) is selected, LED 1 turns off and LED n turns on,
+    When the second button is pressed again, bankSetting (n-1) is selected, LED n turns off and LED n-1 turns on,
+    and so on.
+
+    BankSelector(bank, { button increment pin, button decrement pin }, { led 1 pin, led 2 pin, ... , led n pin });
+
+
+- One momentary switch (push button)
+
+    Pressing the button increments the bankSetting number,
+    When starting the program, bankSetting 1 is selected,
+    When the button is pressed, bankSetting 2 is selected, 
+    When the button is pressed again, bankSetting 3 is selected,
+    When the last bankSetting is selected, and the button is pressed again,
+    bankSetting 1 is selected.
+
+    BankSelector(bank, { button increment pin }, number of bankSettings);
+
+
+- One momentary switch (push button) and multiple LEDs
+
+    Pressing the button increments the bankSetting number and turns on the respective LED,
+    When starting the program, bankSetting 1 is selected and LED 1 is on,
+    When the button is pressed, bankSetting 2 is selected, LED 1 turns off and LED 2 turns on,
+    When the button is pressed again, bankSetting 3 is selected, LED 2 turns off and LED 3 turns on.
+    When the last bankSetting is selected, and the button is pressed,
+    bankSetting 1 is selected, the last LED turns off and LED 1 turns on.
+    
+    BankSelector(bank, { button increment pin }, { led 1 pin, led 2 pin, ... , led n pin });
+
+
+Note: a switch is 'off' or 'released' when it doesn't conduct. The digital value 
+on the input will therefore be HIGH (because of the pull-up resistor)
+*/

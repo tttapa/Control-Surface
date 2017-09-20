@@ -13,13 +13,7 @@ https://github.com/tttapa/MIDI_controller
 // that sends MIDI Pitch Bend messages on channel 1
 AnalogHiRes potentiometer(A0, 1);
 
-//________________________________________________________________________________________________________________________________
-
-void setup() {
-  potentiometer.average(16); // Use the average of 16 analog samples to get smooth transitions and prevent noise
-}
-
-//________________________________________________________________________________________________________________________________
+void setup() {}
 
 void loop() {
   // Refresh the MIDI controller (check whether the potentiometer's input has changed since last time, if so, send the new value over MIDI)

@@ -13,13 +13,7 @@ https://github.com/tttapa/MIDI_controller
 // that sends MIDI messages with controller 7 (channel volume) on channel 1
 Analog potentiometer(A0, MIDI_CC::Channel_Volume, 1);
 
-//________________________________________________________________________________________________________________________________
-
-void setup() {
-  potentiometer.average(8); // Use the average of 8 analog samples to get smooth transitions and prevent noise
-}
-
-//________________________________________________________________________________________________________________________________
+void setup() {}
 
 void loop() {
   // Refresh the MIDI controller (check whether the potentiometer's input has changed since last time, if so, send the new value over MIDI)

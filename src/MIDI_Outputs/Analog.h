@@ -10,12 +10,6 @@ class Analog : public MIDI_Control_Element
 {
 public:
   Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel); // Constructor
-  ~Analog();                                                            // Destructor
-#ifdef SINGLE_BYTE_AVERAGE
-  void average(uint8_t length); // Use the average of multiple samples of analog readings
-#else
-  void average(size_t length);                     // Use the average of multiple samples of analog readings
-#endif
   void map(int (*fn)(int)); // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
 
 private:
@@ -33,15 +27,13 @@ private:
 
 #ifdef SINGLE_BYTE_AVERAGE
   uint8_t runningAverage(uint8_t value); // http://playground.arduino.cc/Main/RunningAverage
-  uint8_t avLen = 0;
-  uint8_t *avValues = nullptr;
+  uint8_t avValues[ANALOG_AVERAGE] = {};
   uint8_t avIndex = 0;
   unsigned int avSum = 0;
   uint8_t avCount = 0;
 #else
   unsigned int runningAverage(unsigned int value); // http://playground.arduino.cc/Main/RunningAverage
-  size_t avLen = 0;
-  unsigned int *avValues = nullptr;
+  unsigned int avValues[ANALOG_AVERAGE] = {};
   size_t avIndex = 0;
   unsigned long avSum = 0;
   size_t avCount = 0;

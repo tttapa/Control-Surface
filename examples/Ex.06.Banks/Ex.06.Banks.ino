@@ -6,14 +6,14 @@
   Connect a toggle switch to pin 11.
 
   When the toggle switch is turned off:
-    Potentiometer A is channel volume of channel 1    (Controller number 0x07, MIDI channel 1)
-    Potentiometer B is channel volume of channel 2    (Controller number 0x07, MIDI channel 2)
+    Potentiometer A is channel volume of track 1    (Controller number 0x07, MIDI channel 1)
+    Potentiometer B is channel volume of track 2    (Controller number 0x07, MIDI channel 2)
     Mute button A is the mute button for track 1      (Note number 0x10, MIDI channel 1)
     Mute button B is the mute button for track 2      (Note number 0x11, MIDI channel 1)
 
   When the toggle switch is turned on:
-    Potentiometer A is channel volume of channel 3    (Controller number 0x07, MIDI channel 3)
-    Potentiometer B is channel volume of channel 4    (Controller number 0x07, MIDI channel 4)
+    Potentiometer A is channel volume of track 3    (Controller number 0x07, MIDI channel 3)
+    Potentiometer B is channel volume of track 4    (Controller number 0x07, MIDI channel 4)
     Mute button A is the mute button for track 3      (Note number 0x12, MIDI channel 1)
     Mute button B is the mute button for track 4      (Note number 0x13, MIDI channel 1)
 
@@ -52,10 +52,6 @@ void setup() {
   bank.add(potentiometer_B, Bank::CHANGE_CHANNEL);
   bank.add(muteButton_A, Bank::CHANGE_ADDRESS); // When the bank setting is changed, change the address (note number) of the mute button
   bank.add(muteButton_B, Bank::CHANGE_ADDRESS);
-
-  // Use the average of 8 analog samples to get smooth transitions and prevent noise.
-  // It will be applied to all Analog and AnalogHiRes objects in the bank
-  bank.average(8);
 
   pinMode(bankSwitchPin, INPUT_PULLUP);
 }

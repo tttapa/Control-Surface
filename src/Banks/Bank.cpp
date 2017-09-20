@@ -47,16 +47,6 @@ void Bank::setBankSetting(uint8_t bankSetting)
     }
 }
 
-void Bank::average(size_t length)
-{
-    MIDI_Element_list_node *element = firstMIDI_Element;
-    while (element != nullptr)
-    {
-        element->element->average(length);
-        element = element->next;
-    }
-}
-
 void Bank::map(int (*fn)(int))
 {
     MIDI_Element_list_node *element = firstMIDI_Element;

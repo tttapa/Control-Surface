@@ -26,7 +26,6 @@ public:
   }
 
   void setBankSetting(uint8_t bankSetting);
-  void average(size_t length);
   void map(int (*fn)(int));
 
 private:
