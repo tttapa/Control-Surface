@@ -1,20 +1,46 @@
 # Using the MIDI controller library
+## 1. Add the library to your sketch
 First add the library to your sketch by simply typing this line at the top of your file:  
 `#include <MIDI_Controller.h>`
 
-The library currently has 6 classes: Analog, AnalogHiRes, ControlChange, Digital, DigitalLatch, and Encoder. There's also a USBMidiController object that you can use to send MIDI over USB.
+## 2. Add a MIDI interface (optional)
 
-Each class has a set of functions, and a set of variables. Some are private, and are used inside the class, others are public, and can be called from outside of the class. More on classes [here](https://www.arduino.cc/en/Hacking/LibraryTutorial).
+## 3. Add Extended IO elements (optional)
 
-The first step in using a class is creating an instance of the class. This is mostly done before the setup, so you can use the instance everywhere in the program.
+## 4. Add MIDI control elements
+Next, add some MIDI control elements, like buttons, potentiometers, rotarty encoders ...
+Instantiate MIDI control element objects from the classes `Analog`, `AnalogHiRes`, `Digital`, `DigitalLatch` and `RotaryEncoder`.
 
-For example, let's add an instance 'potentiometer' of the class Analog:  
-`Analog potentiometer(foo, bar, ... );` (Just ignore the foo-bar for now)
+### Analog
+`Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel);`  
+Analog control elements send the value of an analog input as a 7-bit MIDI Control Change event.  
+It can be used for potentiometers, linear faders, analog sensors ...
+and can be mapped to controls like volume, balance, effect parameters, EQ ...  
+`analogPin`: the analog input pin to read the value from  
+`controllerNumber`:  the [MIDI Control Change controller number](https://www.midi.org/specifications/item/table-3-control-change-messages-data-bytes-2) [0, 119]
+`channel`: the MIDI channel [1, 16]
+The analog input value will be averaged over 8 samples.
 
-Now that the instance is created, we can use the functions of Analog on it, for example, the refresh function:  
-`potentiometer.refresh();`  
+### AnalogHiRes
+`AnalogHiRes(pin_t analogPin, uint8_t channel);`
+Analog control elements send the value of an analog input as a 14-bit MIDI Pitch Bend event.  
+It can be used for potentiometers, linear faders, analog sensors ...
+and can be mapped to controls like volume, balance, effect parameters, EQ ...  
+`analogPin`: the analog input pin to read the value from  
+`channel`: the MIDI channel [1, 16]  
+The analog input value will be averaged over 16 samples.
+The actual resolution is only 10 bits. The 10-bit value is padded with 4 zeros to fit in a 14-bit Pitch Bend event.
 
-For explanation of what the functions do and what they are made for, read following reference.
+### Digital
+`Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity = 127);`
+Digital control elements send the state of a push button as MIDI Note On and Note Off events.
+When the button is pushed, a Note On event is sent, when it is released, a Note Off event is sent.
+It can be used for momentary push buttons and other momentary digital inputs.
+It can be mapped to controls like transport control (play/pause/stop/cue/... buttons), mute/solo/rec buttons, effect enable/disable, looping options, sample triggers ...  
+`pin`: the digital input pin to read the state from, the internal pull-up resistor will be enabled  
+`note`: the [MIDI note number](http://www.electronics.dit.ie/staff/tscarff/Music_technology/midi/midi_note_numbers_for_octaves.htm) [0, 127]  
+`channel`: the MIDI channel [1, 16]  
+`velocity`: the MIDI velocity of the Note events [1, 127], how hard the key/button is struck  
 
 # Library Reference
 
