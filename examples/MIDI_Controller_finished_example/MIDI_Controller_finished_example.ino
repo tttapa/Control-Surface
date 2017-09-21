@@ -19,11 +19,11 @@
 
 #include <MIDI_Controller.h>
 
-#define VELOCITY 0b01111111 // The velocity of the buttons (0b01111111 = 127 = 100%)
-#define LATCHTIME 100       // How long a note will be held on, in DigitalLatch mode (in milliseconds).
+const uint8_t velocity = 0b01111111; // The velocity of the buttons (0b01111111 = 127 = 100%)
+const unsigned int latchTime = 100;  // How long a note will be held on, in DigitalLatch mode (in milliseconds).
 
-#define SPEED_MULTIPLY 1  // If the jog wheels or other encoders are too slow in your software, increase this value
-                          // (it will be multiplied with the actual speed of the encoder, as the name implies.) Default is 1.
+const int speedMultiply = 1; // If the jog wheels or other encoders are too slow in your software, increase this value
+                             // (it will be multiplied with the actual speed of the encoder, as the name implies.) Default is 1.
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
@@ -49,13 +49,13 @@ Analog knobsSide[] = {
 };
 
 DigitalLatch switches[] = {
-    {2, 0x10, 1, VELOCITY, LATCHTIME}, // Create a new instance of class 'DigitalLatch' on pin 0, note number 16 (mute) on MIDI channel 1, with a predefined latch time
-    {3, 0x11, 1, VELOCITY, LATCHTIME},
-    {5, 0x12, 1, VELOCITY, LATCHTIME},
-    {7, 0x13, 1, VELOCITY, LATCHTIME},
+    {2, 0x10, 1, velocity, latchTime}, // Create a new instance of class 'DigitalLatch' on pin 0, note number 16 (mute) on MIDI channel 1, with a predefined latch time
+    {3, 0x11, 1, velocity, latchTime},
+    {5, 0x12, 1, velocity, latchTime},
+    {7, 0x13, 1, velocity, latchTime},
 };
 
-RotaryEncoder enc = {1, 0, 0x2F, 1, SPEED_MULTIPLY, NORMAL_ENCODER, TWOS_COMPLEMENT}; // Create a new instance of class 'RotaryEncoder' called enc, on pins 1 and 0, controller number 0x2F, on MIDI channel 1, at normal speed, using a normal encoder (4 pulses per click/step), using the TWOS_COMPLEMENT sign option
+RotaryEncoder enc = {1, 0, 0x2F, 1, speedMultiply, NORMAL_ENCODER, TWOS_COMPLEMENT}; // Create a new instance of class 'RotaryEncoder' called enc, on pins 1 and 0, controller number 0x2F, on MIDI channel 1, at normal speed, using a normal encoder (4 pulses per click/step), using the TWOS_COMPLEMENT sign option
 
 Bank bank(4); // A bank with four channels
 
@@ -65,14 +65,14 @@ BankSelector bankselector(bank, 11, LED_BUILTIN, BankSelector::TOGGLE); // A ban
 
 void setup()
 {
-  bank.add(faders, Bank::CHANGE_CHANNEL); // Add the control elements to the bank
-  bank.add(knobsSide, Bank::CHANGE_CHANNEL);
-  bank.add(switches, Bank::CHANGE_ADDRESS);
+    bank.add(faders, Bank::CHANGE_CHANNEL); // Add the control elements to the bank
+    bank.add(knobsSide, Bank::CHANGE_CHANNEL);
+    bank.add(switches, Bank::CHANGE_ADDRESS);
 }
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
 void loop() // Refresh all inputs
 {
-  MIDI_Controller.refresh();
+    MIDI_Controller.refresh();
 }
