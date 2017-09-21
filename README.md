@@ -120,9 +120,11 @@ Install the drivers for the ATmega16U2:
 7.  Make sure 'Include subfolders' is checked, then click 'Next'.  
 8.  In the Windows Security window that pops up, click 'Install'.  
 9.  You should get a notification that Windows has successfully updated the driver software for   'AT90USB162'.  
+
 Download the ATmega16U2 firmware:
 1.  Download the Arduino firmware from the [Arduino GitHub page](https://github.com/arduino/Arduino/blob/master/hardware/arduino/avr/firmwares/atmegaxxu2/arduino-usbserial/): [Arduino-usbserial-atmega16u2-Uno-Rev3.hex](https://raw.githubusercontent.com/arduino/Arduino/master/hardware/arduino/avr/firmwares/atmegaxxu2/arduino-usbserial/Arduino-usbserial-atmega16u2-Uno-Rev3.hex) or [Arduino-usbserial-atmega16u2-Mega2560-Rev3.hex](https://raw.githubusercontent.com/arduino/Arduino/master/hardware/arduino/avr/firmwares/atmegaxxu2/arduino-usbserial/Arduino-usbserial-atmega16u2-Mega2560-Rev3.hex)  
 2.  Download [Dimitri Diakopoulos's](http://www.dimitridiakopoulos.com/hiduino.html) HIDUINO firmware from [his GitHub page](https://github.com/ddiakopoulos/hiduino/blob/master/compiled_firmwares/arduino_midi.hex): [arduino_midi.hex](https://raw.githubusercontent.com/ddiakopoulos/hiduino/master/compiled_firmwares/arduino_midi.hex)  
+
 Flash the MIDI firmware:
 1.  Open the Flip software.  
 2.  Hit CTRL+S to select a device, choose 'ATmega16U2', and click 'OK'.  
