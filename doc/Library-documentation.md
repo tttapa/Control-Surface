@@ -23,7 +23,7 @@ There are many MIDI interfaces to choose from:
 `HairlessMIDI_Interface`  
 `SoftwarSerialMIDI_Interface(SoftwareSerial &serial, unsigned long baud)`  
 
-There's also a MIDI debug mode, that can be used on these same serial interfaces:  
+There's also a MIDI debug mode, that can be used on these same Stream or Serial interfaces:  
 `StreamDebugMIDI_Interface(Stream &stream)`  
 `SerialDebugMIDI_Interface(Serial_t &serial, unsigned long baud)`  
 `HardwareSerialDebugMIDI_Interface(HardwareSerial &serial, unsigned long baud)`  
@@ -123,7 +123,7 @@ RotaryEncoder control elements send the relative change of the position of a qua
 You can use one of the following aliases as well: `REAPER_RELATIVE_1`, `REAPER_RELATIVE_2`, `REAPER_RELATIVE_3`, `TRACKTION_RELATIVE`, `MACKIE_CONTROL_RELATIVE`  
 
 ## 5. Add Banks (optional)
-`Bank(uint8_t channelsPerBank = 1);`  
+`Bank(uint8_t channelsPerBank = 1)`  
 Using banks, you can group control elements together, and it allows you to change the MIDI channel and controller or note numbers of these elements.  
 For example, if you have four volume control sliders for tracks 1, 2, 3 and 4, you can add them to a bank. If you set te bank to setting 0, the sliders will control the volume of tracks 1, 2, 3 and 4, if you set the bank to setting 1, the sliders will instead control the volume of tracks 5, 6, 7 and 8, set it to 2, and it will affect tracks 9, 10, 11 and 12, etc.  
 This allows you to control a large number of tracks or controls, with only a limited number of physical knobs and buttons.  
@@ -176,7 +176,7 @@ If you are doing other things in the loop, make sure that they are non-blocking,
       When the switch is in the 'off' position, bankSetting 1 is selected  
       When the switch is in the 'on' position, bankSetting 2 is selected  
 
-      `BankSelector(bank, switch pin, BankSelector::TOGGLE);`    
+      `BankSelector(bank, switch pin, BankSelector::TOGGLE)`    
 
 
   - One toggle switch (latching switch) and one LED  
@@ -186,7 +186,7 @@ If you are doing other things in the loop, make sure that they are non-blocking,
 
       _Note: this mode is pretty useless, you can just connect the LED to the switch directly, without wasting a digital output pin on it._  
 
-      `BankSelector(bank, switch pin, led pin, BankSelector::TOGGLE);`  
+      `BankSelector(bank, switch pin, led pin, BankSelector::TOGGLE)`  
 
 
   - One momentary switch (push button)  
@@ -197,8 +197,8 @@ If you are doing other things in the loop, make sure that they are non-blocking,
       When the button is pressed again, bankSetting 1 is selected,
       and so on.  
 
-      `BankSelector(bank, button pin);`  
-      `BankSelector(bank, button pin, BankSelector::MOMENTARY);`  
+      `BankSelector(bank, button pin)`  
+      `BankSelector(bank, button pin, BankSelector::MOMENTARY)`  
 
 
   - One momentary switch (push button) and one LED   
@@ -209,8 +209,8 @@ If you are doing other things in the loop, make sure that they are non-blocking,
       When the button is pressed again, bankSetting 1 is selected and the LED is turned off,
       and so on.
 
-      `BankSelector(bank, button pin, led pin);`  
-      `BankSelector(bank, button pin, led pin, BankSelector::MOMENTARY);`  
+      `BankSelector(bank, button pin, led pin)`  
+      `BankSelector(bank, button pin, led pin, BankSelector::MOMENTARY)`  
 
 
   - Multiple momentary switches (push buttons)  
@@ -220,7 +220,7 @@ If you are doing other things in the loop, make sure that they are non-blocking,
       When the second button is pressed, bankSetting 2 is selected,  
       When the n-th button is pressed, bankSetting n is selected.  
 
-      `BankSelector(bank, { button 1 pin, button 2 pin, ... , button n pin } );`  
+      `BankSelector(bank, { button 1 pin, button 2 pin, ... , button n pin } )`  
 
 
   - Multiple momentary switches (push buttons) and multiple LEDs  
@@ -230,7 +230,7 @@ If you are doing other things in the loop, make sure that they are non-blocking,
       When the second button is pressed, bankSetting 2 is selected, LED 1 turns off and LED 2 turns on,  
       When the n-th button is pressed, bankSetting n is selected, LED n turns on, and all other LEDs are off.  
 
-      `BankSelector(bank, { button 1 pin, button 2 pin, ... , button n pin }, { led 1 pin, led 2 pin, ... , led n pin } );`
+      `BankSelector(bank, { button 1 pin, button 2 pin, ... , button n pin }, { led 1 pin, led 2 pin, ... , led n pin } )`
 
       
   - Two momentary switches (push buttons)  
@@ -246,7 +246,7 @@ If you are doing other things in the loop, make sure that they are non-blocking,
       When the second button is pressed again, bankSetting (n-1) is selected,
       and so on.  
 
-      `BankSelector(bank, { button increment pin, button decrement pin }, number of bankSettings);`  
+      `BankSelector(bank, { button increment pin, button decrement pin }, number of bankSettings)`  
 
 
   - Two momentary switches (push buttons) and multiple LEDs  
@@ -262,7 +262,7 @@ If you are doing other things in the loop, make sure that they are non-blocking,
       When the second button is pressed again, bankSetting (n-1) is selected, LED n turns off and LED n-1 turns on,
       and so on.  
 
-      `BankSelector(bank, { button increment pin, button decrement pin }, { led 1 pin, led 2 pin, ... , led n pin } );`  
+      `BankSelector(bank, { button increment pin, button decrement pin }, { led 1 pin, led 2 pin, ... , led n pin } )`  
 
 
   - One momentary switch (push button)  
@@ -274,7 +274,7 @@ If you are doing other things in the loop, make sure that they are non-blocking,
       When the last bankSetting is selected, and the button is pressed again,
       bankSetting 1 is selected.  
 
-      `BankSelector(bank, { button increment pin }, number of bankSettings);`  
+      `BankSelector(bank, { button increment pin }, number of bankSettings)`  
 
 
   - One momentary switch (push button) and multiple LEDs  
@@ -286,7 +286,7 @@ If you are doing other things in the loop, make sure that they are non-blocking,
       When the last bankSetting is selected, and the button is pressed,
       bankSetting 1 is selected, the last LED turns off and LED 1 turns on.  
       
-      `BankSelector(bank, { button increment pin }, { led 1 pin, led 2 pin, ... , led n pin } );`  
+      `BankSelector(bank, { button increment pin }, { led 1 pin, led 2 pin, ... , led n pin } )`  
 
 
 _Note: a switch is 'off' or 'released' when it doesn't conduct. The digital value
