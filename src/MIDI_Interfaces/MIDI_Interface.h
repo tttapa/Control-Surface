@@ -32,18 +32,18 @@ public:
 
   virtual bool refresh(); // Virtual function that is implemented by child classes,
                           // it should discard MIDI data from the UART or USB buffer
-                          // returns true as long as there's data to read, returns false if UART/USB buffer is empty 
+                          // returns true as long as there's data to read, returns false if UART/USB buffer is empty
                           // it should just ignore all incoming data, but clear the USB buffer, otherwise the
                           // software on the computer will wait for the messages to arrive, causing it to hang
 
-    static MIDI_Interface *getDefault(); // static function that returns the default interface (doesn't depend on a particular MIDI interface instance )
-    void setDefault();                   // Set this MIDI interface as the default interface
+  static MIDI_Interface *getDefault(); // static function that returns the default interface (doesn't depend on a particular MIDI interface instance )
+  void setDefault();                   // Set this MIDI interface as the default interface
 
-  protected:
-    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) {}
-    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1) {}
+protected:
+  virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) {}
+  virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1) {}
 
-    static MIDI_Interface *DefaultMIDI_Interface; // static pointer that points to the default MIDI interface instance
-  };
+  static MIDI_Interface *DefaultMIDI_Interface; // static pointer that points to the default MIDI interface instance
+};
 
 #endif // MIDI_INTERFACE_H_

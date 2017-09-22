@@ -4,6 +4,31 @@ First add the library to your sketch by simply typing this line at the top of yo
 `#include <MIDI_Controller.h>`
 
 ## 2. Add a MIDI interface (optional)
+If you don't explicitly instantiate a MIDI interface, the MIDI Controller library will
+instantiate a MIDI interface that sends MIDI messages over the USB connection (`USBMIDI_Interface`).
+
+If you do explicitly instantiate a MIDI interface,
+it will be used as MIDI output by the MIDI Controller library.  
+
+If you instantiate more than one MIDI interfaces, the interface that's the last
+one to be instantiated will be the default output, unless you specify a default interface using  
+`MIDI_Interface::setDefault();`  
+
+There are many MIDI interfaces to choose from:  
+`USBMIDI_Interface`
+`StreamMIDI_Interface(Stream &stream)`  
+`SerialMIDI_Interface(Serial_t &serial, unsigned long baud)`
+`HardwareSerialMIDI_Interface(HardwareSerial &serial, unsigned long baud)`
+`USBSerialMIDI_Interface(unsigned long baud)`
+`HairlessMIDI_Interface`
+`SoftwarSerialMIDI_Interface(SoftwareSerial &serial, unsigned long baud)`
+
+There's also a MIDI debug mode, that can be used on these same serial interfaces:  
+`StreamDebugMIDI_Interface(Stream &stream)`
+`SerialDebugMIDI_Interface(Serial_t &serial, unsigned long baud)`
+`HardwareSerialDebugMIDI_Interface(HardwareSerial &serial, unsigned long baud)`
+`USBDebugMIDI_Interface(unsigned long baud)`
+`SoftwarSerialDebugMIDI_Interface(SoftwareSerial &serial, unsigned long baud)`
 
 ## 3. Add Extended IO elements (optional)
 
@@ -12,7 +37,7 @@ Next, add some MIDI control elements, like buttons, potentiometers, rotarty enco
 Instantiate MIDI control element objects from the classes `Analog`, `AnalogHiRes`, `Digital`, `DigitalLatch` and `RotaryEncoder`.
 
 ### Analog
-`Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel);`  
+`Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel)`  
 Analog control elements send the value of an analog input as a 7-bit MIDI Control Change event.  
 It can be used for potentiometers, linear faders, analog sensors ...
 and can be mapped to controls like volume, balance, effect parameters, EQ ...  
@@ -22,7 +47,7 @@ and can be mapped to controls like volume, balance, effect parameters, EQ ...
 The analog input value will be averaged over 8 samples.
 
 ### AnalogHiRes
-`AnalogHiRes(pin_t analogPin, uint8_t channel);`  
+`AnalogHiRes(pin_t analogPin, uint8_t channel)`  
 AnalogHiRes control elements send the value of an analog input as a 14-bit MIDI Pitch Bend event.  
 It can be used for potentiometers, linear faders, analog sensors ...
 and can be mapped to controls like volume, balance, effect parameters, EQ ...  
@@ -32,7 +57,7 @@ The analog input value will be averaged over 16 samples.
 The actual resolution is only 10 bits. The 10-bit value is padded with 4 zeros in order to fit in a 14-bit Pitch Bend event.
 
 ### Digital
-`Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity = 127);`  
+`Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity = 127)`  
 Digital control elements send the state of a push button as MIDI Note On and Note Off events.  
 When the button is pushed, a Note On event is sent, when it is released, a Note Off event is sent.
 It can be used for momentary push buttons and other momentary digital inputs.
@@ -44,7 +69,7 @@ It can be mapped to controls like transport control (play/pause/stop/cue/... but
 The button is debounced in software. The default debounce time is 25 ms.
 
 ### DigitalLatch
-`DigitalLatch(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity, unsigned long latchTime);`
+`DigitalLatch(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity, unsigned long latchTime)`  
 DigitalLatch control elements are similar to Digital elements, but they send a MIDI Note On and a Note Off event every time the input state changes. This allows you to use toggle switches or other types of latching switches.
 When the switch is turned on, a Note On event is sent, then, some time later, a Note Off event is sent. When the switch is turned off, the same happens (a Note On event is sent, then, some time later, a Note Off event is sent).  
 It can be mapped to controls like mute/solo/rec buttons, effect enable/disable, looping options ...  
@@ -56,14 +81,14 @@ It can be mapped to controls like mute/solo/rec buttons, effect enable/disable, 
 The switch is not debounced in software.
 
 ### RotaryEncoder
-`RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply = 1, uint8_t pulsesPerStep = NORMAL_ENCODER, relativeCCmode mode = TWOS_COMPLEMENT);`
+`RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply = 1, uint8_t pulsesPerStep = NORMAL_ENCODER, relativeCCmode mode = TWOS_COMPLEMENT)`  
 RotaryEncoder control elements send the relative change of the position of a quadrature encoder using MIDI Control Change events.  
 `pinA`: the first pin of the encoder's quadrature output, the internal pull-up resistor will be enabled  
 `pinB`: the second pin of the encoder's quadrature output, the internal pull-up resistor will be enabled  
 `controllerNumber`:  the [MIDI Control Change controller number](https://www.midi.org/specifications/item/table-3-control-change-messages-data-bytes-2) [0, 119]  
 `channel`: the MIDI channel [1, 16]  
 `speedMultiply`: a factor that is multiplied with the position change to make the control move faster, default is 1  
-`pulsesPerStep`: a factor that the position change is divided by to make the control move slower and to have finer control: in the case of a normal rotary encoder, there are 4 pulses between two detents, so setting the number of pulses per step to 4 (using the constant `NORMAL_ENCODER`) ensures that moving the encoder one click results in a value change of one, instead of four,  default is 4  
+`pulsesPerStep`: a factor that the position change is divided by to make the control move slower and to have finer control: in the case of a normal rotary encoder, there are 4 pulses between two detents, so setting the number of pulses per step to 4 (using the constant `NORMAL_ENCODER`) ensures that moving the encoder one click results in a value change of one, instead of four,  default is 4, for a jog wheel (without detents), use the constant `JOG`  
 `mode`: the mode to encode negative position changes: MIDI Control Change events have a 7-bit unsigned integer as value byte. To represent negative numbers, you can either use 7-bit two's complement (`TWOS_COMPLEMENT`), 7-bit signed magnitude (`SIGN_MAGNITUDE`), or add a constant offset of 64 to the value (`BINARY_OFFSET`), default is `TWOS_COMPLEMENT`  
 You can use one of the following aliases as well: `REAPER_RELATIVE_1`, `REAPER_RELATIVE_2`, `REAPER_RELATIVE_3`, `TRACKTION_RELATIVE`, `MACKIE_CONTROL_RELATIVE`  
 
