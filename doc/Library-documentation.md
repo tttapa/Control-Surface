@@ -3,7 +3,7 @@
 First add the library to your sketch by simply typing this line at the top of your file:  
 `#include <MIDI_Controller.h>`
 
-## 2. Add a MIDI interface (optional)
+## 2. Add a MIDI Interface (optional)
 If you don't explicitly instantiate a MIDI interface, the MIDI Controller library will
 instantiate a MIDI interface that sends MIDI messages over the USB connection (`USBMIDI_Interface`).
 
@@ -15,22 +15,52 @@ one to be instantiated will be the default output, unless you specify a default 
 `MIDI_Interface::setDefault();`  
 
 There are many MIDI interfaces to choose from:  
-`USBMIDI_Interface`
+`USBMIDI_Interface`  
 `StreamMIDI_Interface(Stream &stream)`  
-`SerialMIDI_Interface(Serial_t &serial, unsigned long baud)`
-`HardwareSerialMIDI_Interface(HardwareSerial &serial, unsigned long baud)`
-`USBSerialMIDI_Interface(unsigned long baud)`
-`HairlessMIDI_Interface`
-`SoftwarSerialMIDI_Interface(SoftwareSerial &serial, unsigned long baud)`
+`SerialMIDI_Interface(Serial_t &serial, unsigned long baud)`  
+`HardwareSerialMIDI_Interface(HardwareSerial &serial, unsigned long baud)`  
+`USBSerialMIDI_Interface(unsigned long baud)`  
+`HairlessMIDI_Interface`  
+`SoftwarSerialMIDI_Interface(SoftwareSerial &serial, unsigned long baud)`  
 
 There's also a MIDI debug mode, that can be used on these same serial interfaces:  
-`StreamDebugMIDI_Interface(Stream &stream)`
-`SerialDebugMIDI_Interface(Serial_t &serial, unsigned long baud)`
-`HardwareSerialDebugMIDI_Interface(HardwareSerial &serial, unsigned long baud)`
-`USBDebugMIDI_Interface(unsigned long baud)`
-`SoftwarSerialDebugMIDI_Interface(SoftwareSerial &serial, unsigned long baud)`
+`StreamDebugMIDI_Interface(Stream &stream)`  
+`SerialDebugMIDI_Interface(Serial_t &serial, unsigned long baud)`  
+`HardwareSerialDebugMIDI_Interface(HardwareSerial &serial, unsigned long baud)`  
+`USBDebugMIDI_Interface(unsigned long baud)`  
+`SoftwarSerialDebugMIDI_Interface(SoftwareSerial &serial, unsigned long baud)`  
 
 ## 3. Add Extended IO elements (optional)
+If you need many potentiometers, buttons or LEDs, you'll run out of IO pins rather quickly. To get around this, you can use Extended IO elements to use multiplexers or shift registers as normal inputs or outputs.  
+
+### Analog Multiplexers
+`AnalogMultiplex(pin_t analogPin, { pin_t addressPin1, addressPin2, ... addressPinN } )`  
+`analogPin`: the analog input pin connected to the output of the multiplexer  
+`addressPin#`: the digital output pins connected to the address lines of the multiplexer  
+
+### Shift Registers
+`ShiftRegisterOut(pin_t dataPin, pin_t clockPin, pin_t latchPin, uint8_t bitOrder, pin_t length = 8)`  
+`dataPin`: the digital output pin connected to the serial data input of the shift register  
+`clockPin`: the digital output pin connected to the clock input of the shift register (SH_CP)  
+`latchPin`: the digital output pin connected to the latch input of the shift register (ST_CP)  
+`bitOrder`: either `MSBFIRST` or `LSBFIRST`  
+`length`: the number of outputs  (8 for one 8-bit shift register, 16 for two 8-bit shift registers)  
+
+To get the n-th pin of an extended IO element, you can use  
+`pin_t ExtendedIOElement::pin(pin_t p)`  
+Returns the global pin number that maps to the given pin of the element  
+`p`: the pin number of the extended IO element
+
+These classes of the MIDI Controller library currently support extended IO pin numbers: Analog, AnalogHiRes, Digital, DigitalLatch, BankSelector.
+
+To use the default Arduino pin functions with extended IO elements in your own program, add this line at the top of the sketch  
+`using namespace ExtIO;`  
+You can then use the pin functions:  
+`void pinMode(pin_t pin, uint8_t mode);`  
+`void digitalWrite(pin_t pin, uint8_t val);`  
+`int digitalRead(pin_t pin);`  
+`void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val);`  
+`analog_t analogRead(pin_t pin);`  
 
 ## 4. Add MIDI Control Elements
 Next, add some MIDI control elements, like buttons, potentiometers, rotarty encoders ...
@@ -101,7 +131,7 @@ This allows you to control a large number of tracks or controls, with only a lim
 
 ## 6. Add Bank Selectors (optional)
 You could select the setting of a bank manually, using  
-`Bank::setBankSetting(uint8_t bankSetting);`  
+`void Bank::setBankSetting(uint8_t bankSetting);`  
 `bankSetting`: the bank to select (zero-based)  
 
 However, it's much easier to use a BankSelector object to set the bank setting for you. A Bank Selector takes input from buttons or switches, updates the bank setting accordingly, and can provide visual feedback using LEDs.  
@@ -110,10 +140,10 @@ All possible modes are explained in [Appendix A](#appendix-a-bankselector-modes)
 
 ## 7. Add Control Elements to the Banks (optional)
 You can add MIDI Control Elements to a Bank using  
-`Bank::add(MIDI_Control_Element *element, bankType type = CHANGE_ADDRESS);`  
-`Bank::add(MIDI_Control_Element &element, bankType type = CHANGE_ADDRESS);`  
-`Bank::add(MIDI_Control_Element* arr[N], bankType type = CHANGE_ADDRESS);`  
-`Bank::add(MIDI_Control_Element& arr[N], bankType type = CHANGE_ADDRESS);`  
+`void Bank::add(MIDI_Control_Element *element, bankType type = CHANGE_ADDRESS);`  
+`void Bank::add(MIDI_Control_Element &element, bankType type = CHANGE_ADDRESS);`  
+`void Bank::add(MIDI_Control_Element* arr[N], bankType type = CHANGE_ADDRESS);`  
+`void Bank::add(MIDI_Control_Element& arr[N], bankType type = CHANGE_ADDRESS);`  
 `element`: either a pointer or a reference to a MIDI Control Element    
 `arr`: an array of pointers or references to MIDI Control Elements  
 `type`: determines the behavior of the bank: if it is set to `Bank::CHANGE_ADDRESS`, the bank setting will alter the address (note number or controller number) of the control element, if type is set to `Bank::CHANGE_CHANNEL`, the bank setting will alter the MIDI channel of the control element, default is `CHANGE_ADDRESS`  
@@ -121,15 +151,15 @@ You can add MIDI Control Elements to a Bank using
 ## 8. Set analog map functions and invert buttons (optional)
 There may be situations where you want more control over the analog input values before they are sent over MIDI. For example, if you use logarithmic taper potentiometers, you may want to map it to a linear curve first, or if the potentiometer reads 1010 in the maximum position, instead of 1023, you may want to calibrate it.  
 You can write your own function that performs this mapping or calibration, and add it to an Analog or AnalogHiRes control element using  
-`Analog::map(int (*fn)(int));` or `AnalogHiRes::map(int (*fn)(int));`  
+`void Analog::map(int (*fn)(int));` or `AnalogHiRes::map(int (*fn)(int));`  
 `fn`: a function (or pointer to a function) that takes one integer argument, i.e. the raw analog value [0, 1023], and returns an integer, the mapped value [0, 1023]  
 You can apply the same mapping function to all Analog and AnalogHiRes control elements in the same bank using  
 `Bank::map(int (*fn)(int));`
 
 When using normal buttons, they are connected between an input pin with the internal pull-up resistor enabled, and ground. This means that when they are pressed, the input reads low, and when they are released, the input reads high. There may be cases where you want the input to be high when the button is pressed, and low when it's released. To do this, you can use  
-`Digital::invert();`
+`void Digital::invert();`
 You can invert all Digital control elements in the same bank using  
-`Bank::invert();`  
+`void Bank::invert();`  
 
 ## 9. Refresh the MIDI Controller
 In the loop, refresh the MIDI Controller using  
@@ -261,3 +291,235 @@ If you are doing other things in the loop, make sure that they are non-blocking,
 
 _Note: a switch is 'off' or 'released' when it doesn't conduct. The digital value
 on the input will therefore be HIGH (because of the pull-up resistor)_
+
+## Appendix B: MIDI address constants
+To make your code more readable, it's recommended to keep magic numbers to a minimum. Therefore, the MIDI Controller library has constants for MIDI Control Change controller numbers and for the MIDI note numbers specified in the Mackie Control Universal protocol.  
+To use these constants, add `using namespace MIDI_CC;` and `using namespace MCU;` to the top of your sketch respectively.  
+
+You can then use the following constants:
+
+### MIDI_CC
+`Bank_Select`  
+`Modulation_Wheel`  
+`Breath_Controller`  
+`Foot_Controller`  
+`Portamento_Time`  
+`Data_Entry_MSB`  
+`Channel_Volume`  
+`Balance`  
+`Pan`  
+`Expression_Controller`  
+`Effect_Control_1`  
+`Effect_Control_2`  
+`General_Purpose_Controller_1`  
+`General_Purpose_Controller_2`  
+`General_Purpose_Controller_3`  
+`General_Purpose_Controller_4`  
+
+`Bank_Select_LSB`  
+`Modulation_Wheel_LSB`  
+`Breath_Controller_LSB`  
+`Foot_Controller_LSB`  
+`Portamento_Time_LSB`  
+`Data_Entry_MSB_LSB`  
+`Channel_Volume_LSB`  
+`Balance_LSB`  
+`Pan_LSB`  
+`Expression_Controller_LSB`  
+`Effect_Control_1_LSB`  
+`Effect_Control_2_LSB`  
+`General_Purpose_Controller_1_LSB`  
+`General_Purpose_Controller_2_LSB`  
+`General_Purpose_Controller_3_LSB`  
+`General_Purpose_Controller_4_LSB`  
+
+`Damper_Pedal`  
+`Portamento`  
+`Sostenuto`  
+`Soft_Pedal`  
+`Legato_Footswitch`  
+`Hold_2`  
+`Sound_Controller_1`  
+`Sound_Controller_2`  
+`Sound_Controller_3`  
+`Sound_Controller_4`  
+`Sound_Controller_5`  
+`Sound_Controller_6`  
+`Sound_Controller_7`  
+`Sound_Controller_8`  
+`Sound_Controller_9`  
+`Sound_Controller_10`  
+`General_Purpose_Controller_5`  
+`General_Purpose_Controller_6`  
+`General_Purpose_Controller_7`  
+`General_Purpose_Controller_8`  
+`Portamento_Control`  
+
+`High_Resolution_Velocity_Prefix`  
+
+`Effects_1`  
+`Effects_2`  
+`Effects_3`  
+`Effects_4`  
+`Effects_5`  
+
+`Data_Increment`  
+`Data_Decrement`  
+
+`NRPN_LSB`  
+`NRPN_MSB`  
+`RPN_LSB`  
+`RPN_MSB`  
+
+`All_Sound_Off`  
+`Reset_All_Controllers`  
+`Local_Control`  
+`All_Notes_Off`  
+`Omni_Mode_Off`  
+`Omni_Mode_On`  
+`Mono_Mode_On`  
+`Poly_Mode_On`  
+
+### MCU
+#### Notes
+`REC_RDY_1`  
+`REC_RDY_2`  
+`REC_RDY_3`  
+`REC_RDY_4`  
+`REC_RDY_5`  
+`REC_RDY_6`  
+`REC_RDY_7`  
+`REC_RDY_8`  
+
+`SOLO_1`  
+`SOLO_2`  
+`SOLO_3`  
+`SOLO_4`  
+`SOLO_5`  
+`SOLO_6`  
+`SOLO_7`  
+`SOLO_8`  
+
+`MUTE_1`  
+`MUTE_2`  
+`MUTE_3`  
+`MUTE_4`  
+`MUTE_5`  
+`MUTE_6`  
+`MUTE_7`  
+`MUTE_8`  
+
+`SELECT_1`  
+`SELECT_2`  
+`SELECT_3`  
+`SELECT_4`  
+`SELECT_5`  
+`SELECT_6`  
+`SELECT_7`  
+`SELECT_8`  
+
+`V_POT_SELECT_1`  
+`V_POT_SELECT_2`  
+`V_POT_SELECT_3`  
+`V_POT_SELECT_4`  
+`V_POT_SELECT_5`  
+`V_POT_SELECT_6`  
+`V_POT_SELECT_7`  
+`V_POT_SELECT_8`  
+
+`ASSIGN_TRACK`  
+`ASSIGN_SEND`  
+`ASSIGN_PAN`  
+`ASSIGN_PLUGIN`  
+`ASSIGN_EQ`  
+`ASSIGN_INSTR`  
+
+`BANK_LEFT`  
+`BANK_RIGHT`  
+`CHANNEL_LEFT`  
+`CHANNEL_RIGHT`  
+
+`FLIP`  
+`GLOBAL_VIEW`  
+`NAME_VALUE`  
+`SMPTE_BEATS`  
+
+`F1`  
+`F2`  
+`F3`  
+`F4`  
+`F5`  
+`F6`  
+`F7`  
+`F8`  
+
+`VIEW_MIDI`  
+`VIEW_INPUTS`  
+`VIEW_AUDIO`  
+`VIEW_INSTR`  
+`VIEW_AUX`  
+`VIEW_BUSSES`  
+`VIEW_OUTPUTS`  
+`VIEW_USER`  
+
+`SHIFT`  
+`OPTION`  
+`CONTROL`  
+`CMD_ALT`  
+
+`AUTOMATION_READ_OFF`  
+`AUTOMATION_WRITE`  
+`AUTOMATION_TRIM`  
+`AUTOMATION_TOUCH`  
+`AUTOMATION_LATCH`  
+
+`GROUP`  
+`SAVE`  
+`UNDO`  
+`CANCEL`  
+`ENTER`  
+
+`MARKER`  
+`NUDGE`  
+`CYCLE`  
+`DROP`  
+`REPLACE`  
+`CLICK`  
+`SOLO`  
+
+`REWIND`  
+`FAST_FWD`  
+`STOP`  
+`PLAY`  
+`RECORD`  
+
+`UP`  
+`DOWN`  
+`LEFT`  
+`RIGHT`  
+
+`ZOOM`  
+`SCRUB`  
+
+`USER_SWITCH_A`  
+`USER_SWITCH_B`  
+
+`FADER_TOUCH`  
+`FADER_TOUCH_MASTER`  
+
+`SMPTE`  
+`BEATS`  
+
+`RUDE_SOLO`  
+
+`RELAY`  
+
+#### Control Change
+`V_POT_1`  
+`V_POT_2`  
+`V_POT_3`  
+`V_POT_4`  
+`V_POT_5`  
+`V_POT_6`  
+`V_POT_7`  
+`V_POT_8`  
