@@ -44,7 +44,7 @@ If you need many potentiometers, buttons or LEDs, you'll run out of IO pins rath
 `clockPin`: the digital output pin connected to the clock input of the shift register (SH_CP)  
 `latchPin`: the digital output pin connected to the latch input of the shift register (ST_CP)  
 `bitOrder`: either `MSBFIRST` or `LSBFIRST`  
-`length`: the number of outputs  (8 for one 8-bit shift register, 16 for two 8-bit shift registers)  
+`length`: the number of outputs  (8 for one 8-bit shift register, 16 for two 8-bit shift registers, etc.)  
 
 To get the n-th pin of an extended IO element, you can use  
 `pin_t ExtendedIOElement::pin(pin_t p)`  
