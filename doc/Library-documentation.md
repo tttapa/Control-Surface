@@ -136,7 +136,7 @@ You could select the setting of a bank manually, using
 
 However, it's much easier to use a BankSelector object to set the bank setting for you. A Bank Selector takes input from buttons or switches, updates the bank setting accordingly, and can provide visual feedback using LEDs.  
 There are many different bank selector modes, for example: one button to increment the bank setting, another to decrement it, or one button for each bank, with LEDs or without ...  
-All possible modes are explained in [Appendix A](#appendix-a-bankselector-modes).
+All possible modes are explained in [Appendix A](#appendix-a-bankselector-modes).  
 
 ## 7. Add Control Elements to the Banks (optional)
 You can add MIDI Control Elements to a Bank using  
@@ -144,7 +144,7 @@ You can add MIDI Control Elements to a Bank using
 `void Bank::add(MIDI_Control_Element &element, bankType type = CHANGE_ADDRESS);`  
 `void Bank::add(MIDI_Control_Element* arr[N], bankType type = CHANGE_ADDRESS);`  
 `void Bank::add(MIDI_Control_Element& arr[N], bankType type = CHANGE_ADDRESS);`  
-`element`: either a pointer or a reference to a MIDI Control Element    
+`element`: either a pointer or a reference to a MIDI Control Element  
 `arr`: an array of pointers or references to MIDI Control Elements  
 `type`: determines the behavior of the bank: if it is set to `Bank::CHANGE_ADDRESS`, the bank setting will alter the address (note number or controller number) of the control element, if type is set to `Bank::CHANGE_CHANNEL`, the bank setting will alter the MIDI channel of the control element, default is `CHANGE_ADDRESS`  
 
@@ -154,17 +154,17 @@ You can write your own function that performs this mapping or calibration, and a
 `void Analog::map(int (*fn)(int));` or `AnalogHiRes::map(int (*fn)(int));`  
 `fn`: a function (or pointer to a function) that takes one integer argument, i.e. the raw analog value [0, 1023], and returns an integer, the mapped value [0, 1023]  
 You can apply the same mapping function to all Analog and AnalogHiRes control elements in the same bank using  
-`Bank::map(int (*fn)(int));`
+`Bank::map(int (*fn)(int));`  
 
 When using normal buttons, they are connected between an input pin with the internal pull-up resistor enabled, and ground. This means that when they are pressed, the input reads low, and when they are released, the input reads high. There may be cases where you want the input to be high when the button is pressed, and low when it's released. To do this, you can use  
-`void Digital::invert();`
+`void Digital::invert();`  
 You can invert all Digital control elements in the same bank using  
 `void Bank::invert();`  
 
 ## 9. Refresh the MIDI Controller
 In the loop, refresh the MIDI Controller using  
 `MIDI_Controller.refresh();`  
-If you are doing other things in the loop, make sure that they are non-blocking, or use a timer interrupt.
+If you are doing other things in the loop, make sure that they are non-blocking, or use a timer interrupt.  
 
 
 ***
