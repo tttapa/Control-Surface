@@ -10,14 +10,13 @@ class Analog : public MIDI_Control_Element
 {
 public:
   Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel); // Constructor
-  void map(int (*fn)(int)); // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
+  void map(int (*fn)(int));                                           // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
 
 private:
-  void refresh();           // Read the analog input value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
-  
-  pin_t analogPin; 
+  void refresh(); // Read the analog input value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
+
+  pin_t analogPin;
   uint8_t controllerNumber, channel, oldVal = -1;
-  bool bankEnabled = false;
   int (*analogMap)(int) = identity; // function pointer to identity function f(x) → x
 
   static int identity(int x)

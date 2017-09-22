@@ -7,7 +7,7 @@ First add the library to your sketch by simply typing this line at the top of yo
 
 ## 3. Add Extended IO elements (optional)
 
-## 4. Add MIDI control elements
+## 4. Add MIDI Control Elements
 Next, add some MIDI control elements, like buttons, potentiometers, rotarty encoders ...
 Instantiate MIDI control element objects from the classes `Analog`, `AnalogHiRes`, `Digital`, `DigitalLatch` and `RotaryEncoder`.
 
@@ -17,23 +17,23 @@ Analog control elements send the value of an analog input as a 7-bit MIDI Contro
 It can be used for potentiometers, linear faders, analog sensors ...
 and can be mapped to controls like volume, balance, effect parameters, EQ ...  
 `analogPin`: the analog input pin to read the value from  
-`controllerNumber`:  the [MIDI Control Change controller number](https://www.midi.org/specifications/item/table-3-control-change-messages-data-bytes-2) [0, 119]
+`controllerNumber`:  the [MIDI Control Change controller number](https://www.midi.org/specifications/item/table-3-control-change-messages-data-bytes-2) [0, 119]  
 `channel`: the MIDI channel [1, 16]
 The analog input value will be averaged over 8 samples.
 
 ### AnalogHiRes
-`AnalogHiRes(pin_t analogPin, uint8_t channel);`
-Analog control elements send the value of an analog input as a 14-bit MIDI Pitch Bend event.  
+`AnalogHiRes(pin_t analogPin, uint8_t channel);`  
+AnalogHiRes control elements send the value of an analog input as a 14-bit MIDI Pitch Bend event.  
 It can be used for potentiometers, linear faders, analog sensors ...
 and can be mapped to controls like volume, balance, effect parameters, EQ ...  
 `analogPin`: the analog input pin to read the value from  
 `channel`: the MIDI channel [1, 16]  
 The analog input value will be averaged over 16 samples.
-The actual resolution is only 10 bits. The 10-bit value is padded with 4 zeros to fit in a 14-bit Pitch Bend event.
+The actual resolution is only 10 bits. The 10-bit value is padded with 4 zeros in order to fit in a 14-bit Pitch Bend event.
 
 ### Digital
-`Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity = 127);`
-Digital control elements send the state of a push button as MIDI Note On and Note Off events.
+`Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity = 127);`  
+Digital control elements send the state of a push button as MIDI Note On and Note Off events.  
 When the button is pushed, a Note On event is sent, when it is released, a Note Off event is sent.
 It can be used for momentary push buttons and other momentary digital inputs.
 It can be mapped to controls like transport control (play/pause/stop/cue/... buttons), mute/solo/rec buttons, effect enable/disable, looping options, sample triggers ...  
@@ -41,411 +41,191 @@ It can be mapped to controls like transport control (play/pause/stop/cue/... but
 `note`: the [MIDI note number](http://www.electronics.dit.ie/staff/tscarff/Music_technology/midi/midi_note_numbers_for_octaves.htm) [0, 127]  
 `channel`: the MIDI channel [1, 16]  
 `velocity`: the MIDI velocity of the Note events [1, 127], how hard the key/button is struck  
+The button is debounced in software. The default debounce time is 25 ms.
 
-# Library Reference
+### DigitalLatch
+`DigitalLatch(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity, unsigned long latchTime);`
+DigitalLatch control elements are similar to Digital elements, but they send a MIDI Note On and a Note Off event every time the input state changes. This allows you to use toggle switches or other types of latching switches.
+When the switch is turned on, a Note On event is sent, then, some time later, a Note Off event is sent. When the switch is turned off, the same happens (a Note On event is sent, then, some time later, a Note Off event is sent).  
+It can be mapped to controls like mute/solo/rec buttons, effect enable/disable, looping options ...  
+`pin`: the digital input pin to read the state from, the internal pull-up resistor will be enabled  
+`note`: the [MIDI note number](http://www.electronics.dit.ie/staff/tscarff/Music_technology/midi/midi_note_numbers_for_octaves.htm) [0, 127]  
+`channel`: the MIDI channel [1, 16]  
+`velocity`: the MIDI velocity of the Note events [1, 127], how hard the key/button is struck  
+`latchTime`: the time between the Note On and the Note Off events  
+The switch is not debounced in software.
 
-## Analog
-The analog class is meant for analog inputs, like potentiometers and faders (or analog sensors that output a value between 0 and 5V/3.3V). 
+### RotaryEncoder
+`RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply = 1, uint8_t pulsesPerStep = NORMAL_ENCODER, relativeCCmode mode = TWOS_COMPLEMENT);`
+RotaryEncoder control elements send the relative change of the position of a quadrature encoder using MIDI Control Change events.  
+`pinA`: the first pin of the encoder's quadrature output, the internal pull-up resistor will be enabled  
+`pinB`: the second pin of the encoder's quadrature output, the internal pull-up resistor will be enabled  
+`controllerNumber`:  the [MIDI Control Change controller number](https://www.midi.org/specifications/item/table-3-control-change-messages-data-bytes-2) [0, 119]  
+`channel`: the MIDI channel [1, 16]  
+`speedMultiply`: a factor that is multiplied with the position change to make the control move faster, default is 1  
+`pulsesPerStep`: a factor that the position change is divided by to make the control move slower and to have finer control: in the case of a normal rotary encoder, there are 4 pulses between two detents, so setting the number of pulses per step to 4 (using the constant `NORMAL_ENCODER`) ensures that moving the encoder one click results in a value change of one, instead of four,  default is 4  
+`mode`: the mode to encode negative position changes: MIDI Control Change events have a 7-bit unsigned integer as value byte. To represent negative numbers, you can either use 7-bit two's complement (`TWOS_COMPLEMENT`), 7-bit signed magnitude (`SIGN_MAGNITUDE`), or add a constant offset of 64 to the value (`BINARY_OFFSET`), default is `TWOS_COMPLEMENT`  
+You can use one of the following aliases as well: `REAPER_RELATIVE_1`, `REAPER_RELATIVE_2`, `REAPER_RELATIVE_3`, `TRACKTION_RELATIVE`, `MACKIE_CONTROL_RELATIVE`  
 
-### Creating an instance
+## 5. Add Banks (optional)
+`Bank(uint8_t channelsPerBank = 1);`  
+Using banks, you can group control elements together, and it allows you to change the MIDI channel and controller or note numbers of these elements.  
+For example, if you have four volume control sliders for tracks 1, 2, 3 and 4, you can add them to a bank. If you set te bank to setting 0, the sliders will control the volume of tracks 1, 2, 3 and 4, if you set the bank to setting 1, the sliders will instead control the volume of tracks 5, 6, 7 and 8, set it to 2, and it will affect tracks 9, 10, 11 and 12, etc.  
+This allows you to control a large number of tracks or controls, with only a limited number of physical knobs and buttons.  
+`channelsPerBank`: the number of channels/tracks each bank can control at one instant, e.g. in the example above, there are four sliders, so they can control four tracks at once  
 
-`Analog (byte pin, byte controller, byte channel);`
+## 6. Add Bank Selectors (optional)
 
-**pin** is the analog pin to read from. It's connected to the wiper of the potentiometer.
+## 7. Add Control Elements to the Banks (optional)
+You can add MIDI Control Elements to a Bank using  
+`Bank::add(MIDI_Control_Element *element, bankType type = CHANGE_ADDRESS);`  
+`Bank::add(MIDI_Control_Element &element, bankType type = CHANGE_ADDRESS);`  
+`Bank::add(MIDI_Control_Element* arr[N], bankType type = CHANGE_ADDRESS);`  
+`Bank::add(MIDI_Control_Element& arr[N], bankType type = CHANGE_ADDRESS);`  
+`element`: either a pointer or a reference to a MIDI Control Element    
+`arr`: an array of pointers or references to MIDI Control Elements  
+`type`: determines the behavior of the bank: if it is set to `Bank::CHANGE_ADDRESS`, the bank setting will alter the address (note number or controller number) of the control element, if type is set to `Bank::CHANGE_CHANNEL`, the bank setting will alter the MIDI channel of the control element, default is `CHANGE_ADDRESS`  
 
-**controller** is the MIDI controller number (data 1 in the MIDI message). This is how it will appear in your MIDI software, like a unique address.
+## 8. Set analog map functions and invert buttons (optional)
+There may be situations where you want more control over the analog input values before they are sent over MIDI. For example, if you use logarithmic taper potentiometers, you may want to map it to a linear curve first, or if the potentiometer reads 1010 in the maximum position, instead of 1023, you may want to calibrate it.  
+You can write your own function that performs this mapping or calibration, and add it to an Analog or AnalogHiRes control element using  
+`Analog::map(int (*fn)(int));` or `AnalogHiRes::map(int (*fn)(int));`  
+`fn`: a function (or pointer to a function) that takes one integer argument, i.e. the raw analog value [0, 1023], and returns an integer, the mapped value [0, 1023]  
+You can apply the same mapping function to all Analog and AnalogHiRes control elements in the same bank using  
+`Bank::map(int (*fn)(int));`
 
-**channel** is the MIDI channel (1-15).
+When using normal buttons, they are connected between an input pin with the internal pull-up resistor enabled, and ground. This means that when they are pressed, the input reads low, and when they are released, the input reads high. There may be cases where you want the input to be high when the button is pressed, and low when it's released. To do this, you can use  
+`Digital::invert();`
+You can invert all Digital control elements in the same bank using  
+`Bank::invert();`  
 
-### Functions
+## 9. Refresh the MIDI Controller
+In the loop, refresh the MIDI Controller using  
+`MIDI_Controller.refresh();`  
+If you are doing other things in the loop, make sure that they are non-blocking, or use a timer interrupt.
 
-`average(size_t samples);`
 
-This enables averaging of the analog input to get smoother controls and to minimize noise. 
+***
 
-**samples** is the length of the ring buffer, in other words, the number of samples that are used to calculate the average value. 8 samples seems to work fine on an Arduino UNO / Leonardo, you may want to increase the buffer length on faster boards, like Teensies. Keep in mind that longer buffers use more RAM and add latency.  
 
-`refresh();`
+## Appendix A: BankSelector modes
+  - One toggle switch (latching switch)  
 
-This function checks the input, and if it has changed since last time refresh was called, it sends the new value over MIDI (on the predefined controller number and channel).
+      When the switch is in the 'off' position, bankSetting 1 is selected  
+      When the switch is in the 'on' position, bankSetting 2 is selected  
 
-`bank(byte pin, byte controller, byte channel);`
+      `BankSelector(bank, switch pin, BankSelector::TOGGLE);`    
 
-This function enables you to use one analog input (together with a switch) for multiple controls. If the switch is in the OFF position, the controller and channel will be those that were defined during instance creation, if the switch is in the ON position, the controller and channel will be those that were entered as arguments of this function.
 
-**pin** is the digital pin with the switch connected. The internal pull-up resistor will be enabled.
+  - One toggle switch (latching switch) and one LED  
 
-**controller** is the controller to use when the switch is on.
+      When the switch is in the 'off' position, bankSetting 1 is selected and the LED is off  
+      When the switch is in the 'on' position, bankSetting 2 is selected and the LED is on  
 
-**channel** is the channel to use when the switch is on.
+      Note: this mode is pretty useless, you can just connect the LED to the switch directly, without wasting a digital output pin on it.  
 
-`detachBank();`
+      `BankSelector(bank, switch pin, led pin, BankSelector::TOGGLE);`  
 
-This function disables the bank functionality that was set up with the bank function. The controller and channel will be ones that were defined during instance creation, regardless of the state of the switch.
-The pin of the switch defined in the bank function will be set as an input without pull-up resistor again.
 
-`map(int (*function)(int));`
+  - One momentary switch (push button)  
 
-This function allows you to have more control over the mapping between the raw analog input value, and the value that is sent over MIDI. 
+      Pressing the button switches the bankSetting:  
+      When starting the program, bankSetting 1 is selected,  
+      When the button is pressed, bankSetting 2 is selected,  
+      When the button is pressed again, bankSetting 1 is selected,
+      and so on.  
 
-**function** is a pointer to a function that takes an int as an argument (this is the analog value, between 0 and 1023) and returns an int (this is the new analog value, that will be sent over MIDI, it's a number between 0 and 1023 as well). You can use a normal function, or a lambda expression (anonymous function).
+      `BankSelector(bank, button pin);`  
+      `BankSelector(bank, button pin, BankSelector::MOMENTARY);`  
 
-### Constants
 
-None.
+  - One momentary switch (push button) and one LED   
 
-### Examples
+      Pressing the button switches the bankSetting and toggles the LED:  
+      When starting the program, bankSetting 1 is selected and the LED is off,  
+      When the button is pressed, bankSetting 2 is selected and the LED turns on,  
+      When the button is pressed again, bankSetting 1 is selected and the LED is turned off,
+      and so on.
 
-Analog\_example  
-Analog\_bank\_example  
-Analog\_array\_example  
-Analog\_map\_example  
+      `BankSelector(bank, button pin, led pin);`  
+      `BankSelector(bank, button pin, led pin, BankSelector::MOMENTARY);`  
 
-## AnalogHiRes
-This class is very similar to the Analog class, but the difference is that a normal "Analog" input has 7 bits of accuracy, an "AnalogHiRes" input has up to 14 bits of accuracy. (14 bits on Teensy 3, 12 bits on Arduino Due, 10 bits on a normal AVR board)
-You can only have one AnalogHiRes controller per MIDI channel (compared to 119 Analog controllers per MIDI channel).
 
-### Creating an instance
+  - Multiple momentary switches (push buttons)  
 
-`Analog (byte pin, byte channel);`
+      Pressing one of the buttons selects the respective output:  
+      When starting the program, bankSetting 1 is selected,  
+      When the second button is pressed, bankSetting 2 is selected,  
+      When the n-th button is pressed, bankSetting n is selected.  
 
-**pin** is the analog pin to read from. It's connected to the wiper of the potentiometer.
+      `BankSelector(bank, { button 1 pin, button 2 pin, ... , button n pin } );`  
 
-**channel** is the MIDI channel (1-16).
 
-### Functions
+  - Multiple momentary switches (push buttons) and multiple LEDs  
 
-`average(size_t samples);`
+      Pressing one of the buttons selects the respective output and enables the respective LED:  
+      When starting the program, bankSetting 1 is selected and LED 1 is on,  
+      When the second button is pressed, bankSetting 2 is selected, LED 1 turns off and LED 2 turns on,  
+      When the n-th button is pressed, bankSetting n is selected, LED n turns on, and all other LEDs are off.  
 
-This enables averaging of the analog input to get smoother controls and to minimize noise. 
+      `BankSelector(bank, { button 1 pin, button 2 pin, ... , button n pin }, { led 1 pin, led 2 pin, ... , led n pin } );`
 
-**samples** is the length of the ring buffer, in other words, the number of samples that are used to calculate the average value. 8 samples seems to work fine on an Arduino UNO / Leonardo, you may want to increase the buffer length on faster boards, like Teensies. Keep in mind that longer buffers use more RAM and add latency.  
+      
+  - Two momentary switches (push buttons)  
 
-`refresh();`
+      Pressing the first button increments the bankSetting number,  
+      pressing the second button decrements the bankSetting number:  
+      When starting the program, bankSetting 1 is selected,  
+      When the first button is pressed, bankSetting 2 is selected,  
+      When the first button is pressed again, bankSetting 3 is selected,  
+      When the last bankSetting is selected, and the first button is pressed again,
+      bankSetting 1 is selected.  
+      When the second button is pressed, the last bankSetting (n) is selected,  
+      When the second button is pressed again, bankSetting (n-1) is selected,
+      and so on.  
 
-This function checks the input, and if it has changed since last time refresh was called, it sends the new value over MIDI (on the predefined channel).
+      `BankSelector(bank, { button increment pin, button decrement pin }, number of bankSettings);`  
 
-`bank(byte pin, byte channel);`
 
-This function enables you to use one analog input (together with a switch) for multiple controls. If the switch is in the OFF position, it will use the default channel (that was defined in the constructor), if the switch is in the ON position, it will use the new channel.
+  - Two momentary switches (push buttons) and multiple LEDs  
 
-**pin** is the digital pin with the switch connected. The internal pull-up resistor will be enabled.
+      Pressing the first button increments the bankSetting number and turns on the respective LED,  
+      pressing the second button decrements the bankSetting number and turns on the respective LED:  
+      When starting the program, bankSetting 1 is selected and LED 1 is on,  
+      When the first button is pressed, bankSetting 2 is selected, LED 1 turns off and LED 2 turns on,  
+      When the first button is pressed again, bankSetting 3 is selected, LED 2 turns off and LED 3 turns on.  
+      When the last bankSetting is selected, and the first button is pressed,
+      bankSetting 1 is selected, the last LED turns off and LED 1 turns on.  
+      When the second button is pressed, the last bankSetting (n) is selected, LED 1 turns off and LED n turns on,  
+      When the second button is pressed again, bankSetting (n-1) is selected, LED n turns off and LED n-1 turns on,
+      and so on.  
 
-**channel** is the channel to use when the switch is on.
+      `BankSelector(bank, { button increment pin, button decrement pin }, { led 1 pin, led 2 pin, ... , led n pin } );`  
 
-`detachBank();`
 
-This function disables the bank functionality that was set up with the bank function. The  channel will be the one that was defined during instance creation, regardless of the state of the switch.
-The pin of the switch defined in the bank function will be set as an input without pull-up resistor again.
+  - One momentary switch (push button)  
 
-`map(uint16_t (*function)(uint16_t));`
+      Pressing the button increments the bankSetting number,  
+      When starting the program, bankSetting 1 is selected,  
+      When the button is pressed, bankSetting 2 is selected,  
+      When the button is pressed again, bankSetting 3 is selected,  
+      When the last bankSetting is selected, and the button is pressed again,
+      bankSetting 1 is selected.  
 
-This function allows you to have more control over the mapping between the raw analog input value, and the value that is sent over MIDI. 
+      `BankSelector(bank, { button increment pin }, number of bankSettings);`  
 
-**function** is a pointer to a function that takes a uint16_t as an argument (this is the 14-bit analog value, between 0 and 16383) and returns a uint16_t (this is the new analog value, that will be sent over MIDI, it's a number between 0 and 16383 as well). You can use a normal function, or a lambda expression (anonymous function).
 
-### Constants
+  - One momentary switch (push button) and multiple LEDs  
 
-None.
+      Pressing the button increments the bankSetting number and turns on the respective LED,  
+      When starting the program, bankSetting 1 is selected and LED 1 is on,  
+      When the button is pressed, bankSetting 2 is selected, LED 1 turns off and LED 2 turns on,  
+      When the button is pressed again, bankSetting 3 is selected, LED 2 turns off and LED 3 turns on.  
+      When the last bankSetting is selected, and the button is pressed,
+      bankSetting 1 is selected, the last LED turns off and LED 1 turns on.  
+      
+      `BankSelector(bank, { button increment pin }, { led 1 pin, led 2 pin, ... , led n pin } );`  
 
-### Examples
 
-AnalogHiRes\_example
-
-## ControlChange
-The ControlChange class is very similar to the Analog class, but instead of taking input from an analog pin, you can provide the input yourself. This means that you can use data from digital sensors or analog multiplexers, for example.
-
-### Creating an instance
-
-`ControlChange (byte controller, byte channel);`
-
-**controller** is the MIDI controller number (data 1 in the MIDI message). This is how it will appear in your MIDI software, like a unique address.
-
-**channel** is the MIDI channel (1-15).
-
-### Functions
-
-`average(size_t samples);`
-
-This enables averaging of the input values to get smoother controls and to minimize noise. 
-
-**samples** is the length of the ring buffer, in other words, the number of samples that are used to calculate the average value. 8 samples seems to work fine on an Arduino UNO / Leonardo, you may want to increase the buffer length on faster boards, like Teensies. Keep in mind that longer buffers use more RAM and add latency.  
-
-`refresh(byte input);`  
-`refresh(float input);`
-
-This function checks the input, and if it has changed since last time refresh was called, it sends the new value over MIDI (on the predefined controller number and channel).
-
-byte **input** is a 7-bit unsigned integer (from 0 to 127) that can be sent over MIDI directly.  
-float **input** is a floating point number between 0.0 and 1.0. (It will be mapped to a 7-bit number before sending over MIDI.)
-
-`bank(byte pin, byte controller, byte channel);`
-
-This function enables you to use one analog input (together with a switch) for multiple controls. If the switch is in the OFF position, the controller and channel will be those that were defined during instance creation, if the switch is in the ON position, the controller and channel will be those that were entered as arguments of this function.
-
-**pin** is the digital pin with the switch connected. The internal pull-up resistor will be enabled.
-
-**controller** is the controller to use when the switch is on.
-
-**channel** is the channel to use when the switch is on.
-
-`detachBank();`
-
-This function disables the bank functionality that was set up with the bank function. The controller and channel will be ones that were defined during instance creation, regardless of the state of the switch.
-The pin of the switch defined in the bank function will be set as an input without pull-up resistor again.
-
-### Examples
-
-ControlChange\_example
-
-## Digital
-The Digital class is meant for use with momentary pushbuttons. It sends a noteOn message when the button is pressed, and a noteOff message when the button is released. Connect your buttons between the input pin and the ground, the internal pull-up resistors will be used.
-
-### Creating an instance
-
-`Digital (byte pin, byte note, byte channel, byte velocity);`
-
-**pin** is the digital pin with the button connected.
-
-**note** is the MIDI note to send. 60 is middle C, and every half note is plus or minus one. You can compare this to the controller number in Analog.
-
-**channel** is the MIDI channel.
-
-**velocity** is how hard the note is hit. This doesn't matter for a normal button, as long as it's not 0. (It does matter however for touch sensitive pads for example.)
-
-### Functions
-
-`refresh();`
-
-This function checks the input, and if it has changed since last time refresh was called, it sends the appropriate message: noteOn when the button is pressed, noteOff when the button is released.
-
-`bank(byte pin, byte note, byte channel);`
-
-This function enables you to use one button (together with a switch) for multiple controls. If the switch is in the OFF position, the note and channel will be those that were defined during instance creation, if the switch is in the ON position, the note and channel will be those that were entered as arguments of this function.
-
-**pin** is the digital pin with the switch connected. The internal pull-up resistor will be enabled.
-
-**note** is the note to use when the switch is on.
-
-**channel** is the channel to use when the switch is on.
-
-`detachBank();`
-
-This function disables the bank functionality that was set up with the bank function. The note and channel will be the ones that were defined during instance creation, regardless of the state of the switch. The pin of the switch defined in the bank function will be set as an input without pull-up resistor again.
-
-### Variables
-
-`bool invert`
-
-False by default. If you set it to `true`, a digital high (switch open) will send a note on message, and a digital low (switch closed) will send a note off message.
-
-### Constants
-
-None.
-
-### Examples
-
-Digital\_example  
-Digital\_bank\_example  
-Digital\_example\_invert
-
-## DigitalLatch
-The DigitalLatch class is meant to be used with toggle switches, that are not momentary. It sends both a noteOn and a noteOff message, every time the state changes. The delay between the on and off message can be set. If the state changes before the delay has finished, the noteOff message is sent anyway, and another 'pulse' is started: another noteOn message is sent, and after the set delay, the noteOff message is sent as well.
-This class is useful if you want to use the 'mute' or 'solo' buttons in your software with non-momentary toggle switches. If you switch on the switch, the appropriate track is muted, when you switch the switch off again, the track will be un-muted, for example. 
-Connect your switches between the input pin and the ground, the internal pull-up resistors will be used. 
-
-### Creating an instance
-
-`DigitalLatch (byte pin, byte note, byte channel, byte velocity, int delay);`
-
-**pin** is the digital pin with the switch connected. The internal pull-up resistor will be enabled.
-
-**note** is the MIDI note to send. 60 is middle C, and every half note is plus or minus one. You can compare this to the controller number in Analog.
-
-**channel** is the MIDI channel.
-
-**velocity** is how hard the note is hit. This doesn't matter for a normal switch, as long as it's not 0.
-
-**delay** is the delay between the noteOn and noteOff messages, in milliseconds. 100ms works great.
-
-### Functions
-
-`refresh();`
-
-This function checks the input, and it sends the appropriate message, as explained in the description off this class. (Note: the noteOff message is not sent, if this function isn't called again, after sending the noteOn message. If you just put this in your loop, however, you should be fine, but don't use `delay()` or other blocking functions.)
-
-`bank(byte pin, byte note, byte channel);`
-
-This function enables you to use one switch (together with a bank switch) for multiple controls. If the bank switch is in the OFF position, the note and channel will be those that were defined during instance creation, if the bank switch is in the ON position, the note and channel will be those that were entered as arguments of this function.
-
-**pin** is the digital pin with the switch connected. The internal pull-up resistor will be enabled.
-
-**note** is the note to use when the switch is on.
-
-**channel** is the channel to use when the switch is on.
-
-`detachBank();`
-
-This function disables the bank functionality that was set up with the bank function. The note and channel will be the ones that were defined during instance creation, regardless of the state of the switch. The pin of the switch defined in the bank function will be set as an input without pull-up resistor again.
-
-### Constants
-
-None.
-
-### Examples
-
-DigitalLatch_example  
-DigitalLatch_bank_example
-
-## RotaryEncoder
-This library is meant to use with a quadrature encoder. It requires [PJRC's Encoder library](https://www.pjrc.com/teensy/td_libs_Encoder.html)  to be installed.  
-It sends relative messages. The way negative values are handled can be changed, because it depends on the software you're using.  
-Connect the common pin of the encoder to the ground, the internal pull-up resistors will be used.
-
-### Creating an instance
-
-`RotaryEncoder(byte pin1, byte pin2, byte controller, byte channel, int speedMultiply, byte pulsesPerStep, byte mode);`
-
-**pin1** is the first interrupt pin with the encoder connected.
-
-**pin2** is the second interrupt pin with the encoder connected.
-
-**controller** is the MIDI controller number (data 1 in the MIDI message). This is how it will appear in your MIDI software, like a unique address.
-
-**channel** is the MIDI channel.
-
-**speedMultiply** is the value that will be multiplied with the relative displacement, if the encoder is not fast enough in your software. If, for example, speedMultiply is set to 5, and the encoder were to send a '+1' message, a '+5' message will be sent instead. Default is 1.
-
-**pulsesPerStep** is the number of pulses the encoder outputs when you turn it one step or click. On a normal rotary encoder, this is 4. When you set it to 4, it will change 1 unit in your software per click you turn, instead of 4. This is mostly more logical. For jog wheels however, you may want to set it to 1, to take advantage of the full resolution of the wheel. Use 'NORMAL_ENCODER' or 'JOG' as argument.
-
-**mode** is the way the MIDI message is sent in order to make it a signed number. There are 3 modes available. Use 'ADD_64', 'SIGN_BIT' or 'POS1_NEG127' as argument.
-
-See the 'Constants' section for more information.
-
-### Functions
-
-`refresh();`
-
-This function checks the encoder position, and if it has changed since last time, the relative change is sent over MIDI.
-
-`bank(byte pin, byte controller, byte channel);`
-
-This function enables you to use one rotary encoder (together with a switch) for multiple controls. If the switch is in the OFF position, the controller and channel will be those that were defined during instance creation, if the switch is in the ON position, the controller and channel will be those that were entered as arguments of this function.
-
-**pin** is the digital pin with the switch connected. The internal pull-up resistor will be enabled.
-
-**controller** is the controller to use when the switch is on.
-
-**channel** is the channel to use when the switch is on.
-
-`detachBank();`
-
-This function disables the bank functionality that was set up with the bank function. The controller and channel will be ones that were defined during instance creation, regardless of the state of the switch.
-The pin of the switch defined in the bank function will be set as an input without pull-up resistor again.
-
-### Constants
-
-`NORMAL_ENCODER`  
-set pulsesPerStep to 4, for normal rotary encoders that send four pulses per physical 'click'.
-
-`JOG`  
-set pulsesPerStep to 1, for jog wheels.
-
-`BINARY_OFFSET`  
-Mode for relative MIDI messages. This is probably the simplest one. It adds 64 to the value to map [-64, 63] to [0, 128]. (+1 → 0b01000001, -1 → 0b00111111)  
-Aliases: `REAPER_RELATIVE_2`, (`ADD_64`)
-
-`SIGN_MAGNITUDE`  
-Mode for relative MIDI messages. Signed magnitude representation. The sign bit is the most significant bit. When it's 0, the number defined by the other bits is positive, when it's 1, the number is negative. In a MIDI message, this is bit 6 (the 7th bit, since it's 0 based). (+1 → 0b00000001, -1 → 0b01000001)  
-Aliases: `REAPER_RELATIVE_3`, `MACKIE_CONTROL_RELATIVE`, (`SIGN_BIT`)
-
-`TWOS_COMPLEMENT`  
-Mode for relative MIDI messages. The number will be represented as 7-bit two's complement. (+1 → 0b00000001, -1 → 0b01111111)  
-Aliases: `REAPER_RELATIVE_1`, `TRACKTION_RELATIVE`, (`POS1_NEG127`)
-### Examples
-
-Encoder_example
-Encoder_bank_example
-
-## USBMidi
-This is the class for MIDI communication.
-It automatically finds out what Arduino you are using, and chooses the right settings to send a MIDI message over USB. 
-
-### Creating an instance
-
-You don't have to create one, you can just use the readily available `USBMidiController` object.
-
-### Functions
-
-`begin();`
-
-Initializes the MIDI connection. 
-
-`begin(unsigned long baud = MIDI_BAUD, bool debug = false);`
-
-Initializes the MIDI connection, allows to change the baud rate and enable debug output.
-
-**baud** is the baud rate for the serial MIDI connection. By default, this is the official MIDI hardware baud rate of 31250. It only has effect when using an Arduino Uno, Mega, Nano ... or when **debug** is set to `true`.  
-It can be used to make the library compatible with the Hairless MIDI<->Serial bridge. For Hairless, use `USBMidiController.begin(115200);`.
-
-**debug** when set to `true`, the library will output human-readable debug MIDI messages instead of real MIDI packets. Use the Serial Monitor (`CTRL+SHIFT+M`) to read them.  
-You can enable the debug mode by calling `USBMidiController.begin(baud, true);` where baud is the Serial baud rate, 115200, for example.
-
-`send(byte message, byte channel, byte data1, byte data2);`
-
-Sends a 3-byte MIDI message over USB.
-
-**message** is the first nibble of the message: the MIDI voice message (e.g. 0x90 for note on)
-
-**channel** is the MIDI channel, a number from 1 to 16.
-
-**data1** is the first data byte (7-bits)
-
-**data2** is the second data byte (7-bits)
-
-`send(byte message, byte channel, byte data);`
-
-Sends a 2-byte MIDI message over USB.
-
-**message** is the first nibble of the message: the MIDI voice message (e.g. 0xC0 for program change)
-
-**channel** is the MIDI channel, a number from 1 to 16.
-
-**data** is the data byte (7-bits)
-
-`setDelay(int delay);`
-
-Sets the delay between two messages, to prevent an overflow of data on the connection, and to get a nice blinking effect of the LED. 10-20ms works fine.
-
-**delay** is the delay in milliseconds.
-
-`blink(byte pin);`
-
-Blinks the LED on every MIDI message. Helps for debuggin, and is aesthetically pleasing.
-
-**pin** is the digital pin with the LED connected (pin 13 on most boards).
-
-`noBlink();`
-
-Disables the blinking effect. You don't need to call this function explicitly, the blinking is disabled by default.
-
-### Constants
-
-`NOTE_ON`  
-Message type: 0x90, use to turn on a note. Use NOTE_OFF or send again with velocity = 0 to turn off again.
-
-`NOTE_OFF`  
-Message type: 0x80, use to turn off a note.
-
-`CC`  
-Message type: 0xB0 (Control Change), use to send analog values, like values from a potentiometers.
-
-`PROGRAM_CHANGE`  
-Message type: 0xC0 (Program Change), use to set the instrument of a certain channel. (Channel 10 is percussion).
-
-`PITCH_BEND`  
-Message type: 0xE0 (Pitch Bend), used to send large (14-bit) analog values.
-
-### Examples
-
-sendMidi_example_intoxicated
+_Note: a switch is 'off' or 'released' when it doesn't conduct. The digital value
+on the input will therefore be HIGH (because of the pull-up resistor)_

@@ -17,9 +17,14 @@ Digital::~Digital() // Destructor
   pinMode(pin, INPUT); // make it a normal input again, without the internal pullup resistor.
 }
 
+void Digital::invert() // Invert the button state (send Note On event when released, Note Off when pressed)
+{
+  invertState = true;
+}
+
 void Digital::refresh() // Check if the button state changed, and send a MIDI Note On or Off accordingly
 {
-  bool state = digitalRead(pin) ^ invert; // read the button state and invert it if "invert" is true
+  bool state = digitalRead(pin) ^ invertState; // read the button state and invert it if "invert" is true
 
   if (millis() - prevBounceTime > debounceTime)
   {
