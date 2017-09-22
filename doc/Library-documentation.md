@@ -18,7 +18,7 @@ It can be used for potentiometers, linear faders, analog sensors ...
 and can be mapped to controls like volume, balance, effect parameters, EQ ...  
 `analogPin`: the analog input pin to read the value from  
 `controllerNumber`:  the [MIDI Control Change controller number](https://www.midi.org/specifications/item/table-3-control-change-messages-data-bytes-2) [0, 119]  
-`channel`: the MIDI channel [1, 16]
+`channel`: the MIDI channel [1, 16]  
 The analog input value will be averaged over 8 samples.
 
 ### AnalogHiRes
@@ -75,6 +75,13 @@ This allows you to control a large number of tracks or controls, with only a lim
 `channelsPerBank`: the number of channels/tracks each bank can control at one instant, e.g. in the example above, there are four sliders, so they can control four tracks at once  
 
 ## 6. Add Bank Selectors (optional)
+You could select the setting of a bank manually, using  
+`Bank::setBankSetting(uint8_t bankSetting);`  
+`bankSetting`: the bank to select (zero-based)  
+
+However, it's much easier to use a BankSelector object to set the bank setting for you. A Bank Selector takes input from buttons or switches, updates the bank setting accordingly, and can provide visual feedback using LEDs.  
+There are many different bank selector modes, for example: one button to increment the bank setting, another to decrement it, or one button for each bank, with LEDs or without ...  
+All possible modes are explained in [Appendix A](#appendix-a-bankselector-modes).
 
 ## 7. Add Control Elements to the Banks (optional)
 You can add MIDI Control Elements to a Bank using  
@@ -122,7 +129,7 @@ If you are doing other things in the loop, make sure that they are non-blocking,
       When the switch is in the 'off' position, bankSetting 1 is selected and the LED is off  
       When the switch is in the 'on' position, bankSetting 2 is selected and the LED is on  
 
-      Note: this mode is pretty useless, you can just connect the LED to the switch directly, without wasting a digital output pin on it.  
+      _Note: this mode is pretty useless, you can just connect the LED to the switch directly, without wasting a digital output pin on it._  
 
       `BankSelector(bank, switch pin, led pin, BankSelector::TOGGLE);`  
 
