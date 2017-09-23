@@ -30,3 +30,8 @@ It's important to use interrupt pins, otherwise, the performance will be very po
 On an Arduino Uno, the only interrupt pins are 2 & 3.  
 On a Leonardo or Micro, you can use 0, 1, 2, 3 or 7.  
 On an Arduino Due or on a Teensy 3, you can use any two pins.  
+
+## Button matrices
+Connect the push buttons in a matrix as follows:
+![Button matrix](https://raw.githubusercontent.com/tttapa/MIDI_controller/master/doc/Images/Button-matrix.svg)
+If you don't need to register multiple key presses at once, you can leave out the diodes.
