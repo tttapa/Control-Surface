@@ -3,10 +3,13 @@
 
 #include "Arduino.h"
 
+#include "./MIDI_Controller/MIDI_Controller_Class.h"
+
 #include "./Settings/Settings.h"
 
 #include "./MIDI_Outputs/Analog.h"
 #include "./MIDI_Outputs/AnalogHiRes.h"
+#include "./MIDI_Outputs/ButtonMatrix.h"
 #include "./MIDI_Outputs/Digital.h"
 #include "./MIDI_Outputs/DigitalLatch.h"
 #include "./MIDI_Outputs/RotaryEncoder.h"
@@ -25,27 +28,5 @@
 
 #include "./MIDI_Constants/MCU.h"
 #include "./MIDI_Constants/Control_Change.h"
-
-class MIDI_Controller_
-{
-public:
-  static MIDI_Controller_ &getInstance();
-  MIDI_Controller_(MIDI_Controller_ const &) = delete;
-  void operator=(MIDI_Controller_ const &) = delete;
-  ~MIDI_Controller_();
-
-  void begin();
-  void refresh();
-  MIDI_Interface *MIDI();
-
-private:
-  MIDI_Controller_() {}
-  MIDI_Interface *new_midi = nullptr;
-  MIDI_Interface *midi = nullptr;
-  void refreshControls();
-  void refreshBankSelectors();
-};
-
-extern MIDI_Controller_ &MIDI_Controller;
 
 #endif // MIDIctrl_h_

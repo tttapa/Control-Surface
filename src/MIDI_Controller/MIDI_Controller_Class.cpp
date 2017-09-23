@@ -1,4 +1,6 @@
-#include "MIDI_Controller.h"
+#include "MIDI_Controller_Class.h"
+#include "./MIDI_Outputs/MIDI_Control_Element.h"
+#include "./Banks/BankSelector.h"
 
 // public:
 
