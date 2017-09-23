@@ -12,6 +12,9 @@ ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const pin_t (&rowPins)[nb_rows], co
     memcpy(this->rowPins, rowPins, sizeof(rowPins[0]) * nb_rows);
     memcpy(this->colPins, colPins, sizeof(colPins[0]) * nb_cols);
     init();
+    // note: this copies the data of rowPins and colPins, regardless of whether it's static or temporary.
+    // This means that using global const arrays to initialize ButtonMatrix is slightly less memory efficient than using brace-enclosed initializer lists.
+    // There are ways around this, but it's not really pretty: https://stackoverflow.com/questions/46382034/template-class-with-variable-array-size-initialize-with-array-reference-or-brac?noredirect=1#comment79722325_46382034 
 }
 
 template <size_t nb_rows, size_t nb_cols>
@@ -25,7 +28,7 @@ template <size_t nb_rows, size_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::refresh()
 {
     unsigned long now = millis();
-    if (now - prevRefresh < 20)
+    if (now - prevRefresh < 20) // only refresh every 20 ms (crude software debounce)
         return;
     prevRefresh = now;
 

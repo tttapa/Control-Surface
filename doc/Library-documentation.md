@@ -64,7 +64,7 @@ You can then use the pin functions:
 
 ## 4. Add MIDI Control Elements
 Next, add some MIDI control elements, like buttons, potentiometers, rotarty encoders ...
-Instantiate MIDI control element objects from the classes `Analog`, `AnalogHiRes`, `Digital`, `DigitalLatch` and `RotaryEncoder`.
+Instantiate MIDI control element objects from the classes `Analog`, `AnalogHiRes`, `ButtonMatrix`, `Digital`, `DigitalLatch` and `RotaryEncoder`.
 
 ### Analog
 `Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel)`  
@@ -85,6 +85,20 @@ and can be mapped to controls like volume, balance, effect parameters, EQ ...
 `channel`: the MIDI channel [1, 16]  
 The analog input value will be averaged over 16 samples.
 The actual resolution is only 10 bits. The 10-bit value is padded with 4 zeros in order to fit in a 14-bit Pitch Bend event.
+
+### ButtonMatrix
+`ButtonMatrix<nb_rows, nb_cols>(const pin_t (&rowPins)[nb_rows], const pin_t (&colPins)[nb_cols], const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel, uint8_t velocity = 127)`  
+ButtonMatrix control elements send the state of many buttons arranged in a matrix as MIDI Note On and Note Off events.  
+When a button is pushed, a Note On event is sent, when it is released, a Note Off event is sent.
+It can be used for momentary push buttons and other momentary digital inputs.
+It can be mapped to controls like transport control (play/pause/stop/cue/... buttons), mute/solo/rec buttons, effect enable/disable, looping options, sample triggers ...  
+`nb_rows`: the number of rows in the button matrix  
+`nb_cols`: the number of columns in the button matrix  
+`rowPins`: a list of the pin numbers connected to the rows of the button matrix, these pins will be used as outputs (this can either be a reference to an array of pin numbers, or a brace-enclosed initializer list of pin numbers)  
+`colPins`: a list of the pin numbers connected to the columns of the button matrix, these pins will be used as inputs, with internal pull-up resistors enabled (this can either be a reference to an array of pin numbers, or a brace-enclosed initializer list of pin numbers)  
+`addresses`: a two-dimensional array containing the [MIDI note numbers](http://www.electronics.dit.ie/staff/tscarff/Music_technology/midi/midi_note_numbers_for_octaves.htm) [0, 127] that the buttons in the button matrix will be mapped to  
+`channel`: the MIDI channel [1, 16]  
+`velocity`: the MIDI velocity of the Note events [1, 127], how hard the key/button is struck 
 
 ### Digital
 `Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity = 127)`  

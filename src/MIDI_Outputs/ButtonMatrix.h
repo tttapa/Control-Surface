@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 #include "./MIDI_Control_Element.h"
-#include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../ExtendedInputOutput/ExtendedInputOutput.h" // for pin_t
 
 template <size_t nb_rows, size_t nb_cols>
 class ButtonMatrix : public MIDI_Control_Element
@@ -32,6 +32,6 @@ class ButtonMatrix : public MIDI_Control_Element
     const uint8_t channel, velocity;
 };
 
-#include "./ButtonMatrix.cpp"
+#include "./ButtonMatrix.cpp" // Because it's a template class
 
 #endif // BUTTONMATRIX_H_
