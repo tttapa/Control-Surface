@@ -13,118 +13,66 @@
   If you are using an Arduino Uno or Mega, use the HIDUINO firmware for the ATmega16U2.
 
 
-  Written by tttapa, 29-06-2017
+  Written by tttapa, 07-09-2017
   https://github.com/tttapa/MIDI_controller
 */
 
+#include <MIDI_Controller.h>
 
-#include <MIDI_controller.h>
+const uint8_t velocity = 0b01111111; // The velocity of the buttons (0b01111111 = 127 = 100%)
+const unsigned int latchTime = 100;  // How long a note will be held on, in DigitalLatch mode (in milliseconds).
 
-#define VELOCITY          0b01111111  // The velocity of the buttons (0b01111111 = 127 = 100%)
-#define LATCHTIME         100         // How long a note will be held on, in DigitalLatch mode (in milliseconds).
-
-#define SPEED_MULTIPLY    1           // If the jog wheels or other encoders are too slow in your software, increase this value 
-// (it will be multiplied with the actual speed of the encoder, as the name implies.) Default is 1.
-#define PULSES_PER_STEP   4           // This is the number of pulses the encoder outputs when you turn it one step (or click) further. Use 4 for a normal rotary encoder, and 1 for a jogwheel.
-// If you set it to 1, this uses the maximum resolution. If it is set to 4, one message will be sent per click of the encoder. 1 click matches 1 unit in the software. This is more logical for most usages (except jogwheels).
-
-#define ANALOG_AVERAGE    8           // Use the average of 8 samples to get smooth transitions and prevent noise
-
-const uint8_t channelVolume = 0x07;   // Controller 7 is defined as MIDI channel volume
+const int speedMultiply = 1; // If the jog wheels or other encoders are too slow in your software, increase this value
+                             // (it will be multiplied with the actual speed of the encoder, as the name implies.) Default is 1.
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
-Analog fader1(A0, channelVolume, 1);        // Create a new instance of class 'Analog' called 'fader1', on pin A0, controller number 0x07 (channel volume), on MIDI channel 1.
-Analog fader2(A1, channelVolume, 2);
-Analog fader3(A2, channelVolume, 3);
-Analog fader4(A3, channelVolume, 4);
+Analog faders[] = {
+    {A0, MIDI_CC::Channel_Volume, 1}, // Create a new instance of class 'Analog' on pin A0, controller number 0x07 (channel volume), on MIDI channel 1.
+    {A1, MIDI_CC::Channel_Volume, 2},
+    {A2, MIDI_CC::Channel_Volume, 3},
+    {A3, MIDI_CC::Channel_Volume, 4},
+};
 
-Analog potTop1(A4, 0x14, 1);                // Create a new instance of class 'Analog' called 'potTop1', on pin A4, controller number 0x14, on MIDI channel 1.
-Analog potTop2(A5, 0x15, 1);
-Analog potTop3(A6, 0x16, 1);
-Analog potTop4(A7, 0x17, 1);
+Analog knobsTop[] = {
+    {A4, 0x10, 1}, // Create a new instance of class 'Analog' on pin A4, controller number 0x10 (General Purpose Controller 1), on MIDI channel 1.
+    {A5, 0x11, 1},
+    {A6, 0x12, 1},
+    {A7, 0x13, 1},
+};
 
-Analog potSide1(A8, 0x18, 1);               // Create a new instance of class 'Analog' called 'potSide1', on pin A8, controller number 0x18, on MIDI channel 1.
-Analog potSide2(A9, 0x19, 1);
-Analog potSide3(A10, 0x1A, 1);
-Analog potSide4(A11, 0x1B, 1);
+Analog knobsSide[] = {
+    {A8,  MIDI_CC::Pan, 1}, // Create a new instance of class 'Analog' called 'potSide1', on pin A8, controller number 0x0A (pan), on MIDI channel 1.
+    {A9,  MIDI_CC::Pan, 2},
+    {A10, MIDI_CC::Pan, 3},
+    {A11, MIDI_CC::Pan, 4},
+};
 
-DigitalLatch switch1(2, 60, 1, VELOCITY, LATCHTIME);    // Create a new instance of class 'DigitalLatch' called 'switch1', on pin 0, note number 60 on MIDI channel 1, with a predefined latch time
-DigitalLatch switch2(3, 61, 1, VELOCITY, LATCHTIME);
-DigitalLatch switch3(5, 62, 1, VELOCITY, LATCHTIME);
-DigitalLatch switch4(7, 63, 1, VELOCITY, LATCHTIME);
+DigitalLatch switches[] = {
+    {2, 0x10, 1, velocity, latchTime}, // Create a new instance of class 'DigitalLatch' on pin 0, note number 16 (mute) on MIDI channel 1, with a predefined latch time
+    {3, 0x11, 1, velocity, latchTime},
+    {5, 0x12, 1, velocity, latchTime},
+    {7, 0x13, 1, velocity, latchTime},
+};
 
-RotaryEncoder enc1(1, 0, 0x2F, 1, SPEED_MULTIPLY, NORMAL_ENCODER, POS1_NEG127); // Create a new instance of class 'RotaryEncoder' called enc1, on pins 1 and 0, controller number 0x2F, on MIDI channel 1, at normal speed, using a normal encoder (4 pulses per click/step), using the POS1_NEG127 sign option
+RotaryEncoder enc = {1, 0, 0x2F, 1, speedMultiply, NORMAL_ENCODER, TWOS_COMPLEMENT}; // Create a new instance of class 'RotaryEncoder' called enc, on pins 1 and 0, controller number 0x2F, on MIDI channel 1, at normal speed, using a normal encoder (4 pulses per click/step), using the TWOS_COMPLEMENT sign option
+
+Bank bank(4); // A bank with four channels
+
+BankSelector bankselector(bank, 11, LED_BUILTIN, BankSelector::TOGGLE); // A bank selector with a single toggle switch on pin 11 and an LED for feedback on pin 13
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
 void setup()
 {
-  fader1.bank(11, channelVolume, 5);  // if pin 11 is pulled low (by a switch) fader1 will operate on channel 5, if the switch is off (i.e. 1) it will keep the channel specified in the section above.
-  fader2.bank(11, channelVolume, 6);
-  fader3.bank(11, channelVolume, 7);
-  fader4.bank(11, channelVolume, 8);
-
-  // potTop1.bank(11, 0x14, 2);   // you could add these pots to the same bank if you wanted to
-  // potTop2.bank(11, 0x15, 2);
-  // potTop3.bank(11, 0x16, 2);
-  // potTop4.bank(11, 0x17, 2);
-
-  potSide1.bank(11, 0x18, 2);     // if pin 11 is pulled low (by a switch) potSide1 will be controller number 0x18, on channel 2, if the switch is off (i.e. 1) it will keep the settings declared in the section above.
-  potSide2.bank(11, 0x19, 2);
-  potSide3.bank(11, 0x1A, 2);
-  potSide4.bank(11, 0x1B, 2);
-
-  switch1.bank(11, 60, 2);
-  switch2.bank(11, 61, 2);
-  switch3.bank(11, 62, 2);
-  switch4.bank(11, 63, 2);
-
-  fader1.average(ANALOG_AVERAGE);         // Use the average of 8 samples to get smooth transitions and prevent noise
-  fader2.average(ANALOG_AVERAGE);
-  fader3.average(ANALOG_AVERAGE);
-  fader4.average(ANALOG_AVERAGE);
-
-  potTop1.average(ANALOG_AVERAGE); 
-  potTop2.average(ANALOG_AVERAGE);
-  potTop3.average(ANALOG_AVERAGE);
-  potTop4.average(ANALOG_AVERAGE);
-
-  potSide1.average(ANALOG_AVERAGE);
-  potSide2.average(ANALOG_AVERAGE);
-  potSide3.average(ANALOG_AVERAGE);
-  potSide4.average(ANALOG_AVERAGE);
-
-  USBMidiController.blink(LED_BUILTIN);  // flash the built-in LED (pin 13 on most boards) on every message
-  USBMidiController.setDelay(5);  // wait 5 ms after each message not to flood the connection
-  USBMidiController.begin();  // Initialise the USB MIDI connection
-
-  delay(1000);         // Wait a second...
+    bank.add(faders, Bank::CHANGE_CHANNEL); // Add the control elements to the bank
+    bank.add(knobsSide, Bank::CHANGE_CHANNEL);
+    bank.add(switches, Bank::CHANGE_ADDRESS);
 }
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
 void loop() // Refresh all inputs
 {
-  fader1.refresh();
-  fader2.refresh();
-  fader3.refresh();
-  fader4.refresh();
-
-  potTop1.refresh();
-  potTop2.refresh();
-  potTop3.refresh();
-  potTop4.refresh();
-
-  potSide1.refresh();
-  potSide2.refresh();
-  potSide3.refresh();
-  potSide4.refresh();
-
-  switch1.refresh();
-  switch2.refresh();
-  switch3.refresh();
-  switch4.refresh();
-
-  enc1.refresh();
+    MIDI_Controller.refresh();
 }

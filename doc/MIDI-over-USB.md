@@ -23,13 +23,18 @@ You can flash the [HIDUINO](https://github.com/ddiakopoulos/hiduino) firmware by
 Because you need the ATmega16U2 for uploading new programs to the Arduino, you have to upload your program first, and then flash the MIDI firmware. If you want to change your program, you have to flash the default Serial firmware again, then upload your new program, and finally flash the MIDI firmware.  
 That's quite a cumbersome process, especially if you're just trying different settings, tweaking some values or trying to debug your code.  
 #### Debug mode
-To make this process a little easier, the MIDI Controller library has a debug mode, that prints the MIDI events to the serial monitor. This means that you don't need the MIDI firmware to see if it's sending the right MIDI messages.  
-You can enable the debug mode by calling `USBMidiController.begin(baud, true);` where `baud` is the Serial baud rate, 115200, for example.
+To make this process a little easier, the MIDI Controller library has a debug MIDI interface, that prints the MIDI events to the serial monitor (or other Stream outputs). This means that you don't need the MIDI firmware to see if it's sending the right MIDI messages.  
+You can enable the debug mode by instantiating a DebugMIDI_Interface:  
+`StreamDebugMIDI_Interface(Stream &stream)`  
+`SerialDebugMIDI_Interface(Serial_t &serial, unsigned long baud)`  
+`HardwareSerialDebugMIDI_Interface(HardwareSerial &serial, unsigned long baud)`  
+`USBDebugMIDI_Interface(unsigned long baud)`  
+`SoftwarSerialDebugMIDI_Interface(SoftwareSerial &serial, unsigned long baud)` 
 #### Hairless MIDI
 Once that's working, you can try it out with real MIDI messages, by using a software tool called [Hairless MIDI<->Serial bridge](http://projectgus.github.io/hairless-midiserial/). This application takes MIDI messages from the serial port, and sends them to a virtual MIDI port on your computer, so you can access it in your DAW or DJ program.  
-Hairless operates at a baud rate of 115200, so use `USBMidiController.begin(115200);` in the setup of your sketch.  
+To use the MIDI Controller library, instantiate a `HairlessMIDI_Interface` at the top of your sketch.    
 #### HIDUINO MIDI over USB
-Finally, when you know that everything is working fine, you can change the baud rate to the official MIDI baud rate of 31250, by calling `USBMidiController.begin();` (the MIDI baud rate is the default setting), uploading the sketch, and flashing the HIDUINO MIDI firmware using Flip or dfu-programmer.  
+Finally, when you know that everything is working fine, you can change the baud rate to the official MIDI baud rate of 31250, by using the default `USBMIDI_Interface` (don't explicitly instantiate any interfaces) uploading the sketch, and flashing the HIDUINO MIDI firmware using Flip or dfu-programmer.  
 You can now just plug it into your computer, and it will be recognized as a MIDI device, you don't need to run Hairless anymore.  
 
 ## Boards with a single-purpose USB-to-TTL chip  
@@ -37,5 +42,5 @@ _Arduino Nano, Arduino Duemilanove, Chinese Uno & Mega clones ..._
 ***
 Whereas the ATmega16U2 chip is programmable, most other USB-to-TTL chips are single-purpose, so you can't flash them with the HIDUINO MIDI firmware.  
 These chips include FTDI chips (Nano and Duemilanove) and the CH340G or CP2102 (both very popular on Chinese "Arduino" clones).  
-While MIDI over USB is not supported on these boards, you can still use Hairless. Just use `USBMidiController.begin(115200);` in the setup of your sketch.  
+While MIDI over USB is not supported on these boards, you can still use Hairless. Just instantiate a `HairlessMIDI_Interface` at the top of your sketch.    
 
