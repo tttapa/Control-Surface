@@ -12,7 +12,7 @@ wget --quiet "https://raw.githubusercontent.com/arduino/Arduino/master/hardware/
 fi
 echo "Erasing ..."
 sudo dfu-programmer atmega16u2 erase
-echo "Flashing arduino_midi.hex ..."
+echo "Flashing Arduino-usbserial-atmega16u2-Uno-Rev3.hex ..."
 sudo dfu-programmer atmega16u2 flash Arduino-usbserial-atmega16u2-Uno-Rev3.hex
 echo "Resetting ..."
 sudo dfu-programmer atmega16u2 reset
