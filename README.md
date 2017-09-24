@@ -49,6 +49,7 @@ Use **analog multiplexers** and **shift registers** to save IO pins. Using the E
 ## New in version 3.0.0
 - Completely reworked library structure
 - Added more MIDI interface options
+- Added ButtonMatrix control element
 - Added debounce for buttons
 - Automatically average analog inputs
 - Added Bank and BankSelector classes instead of bank() method per class
