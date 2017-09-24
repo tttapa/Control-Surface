@@ -12,8 +12,10 @@
 #include <initializer_list>
 #endif
 
+using namespace ExtIO;
+
 class BankSelector
-{
+{  
 public:
   enum buttonType
   {
@@ -223,15 +225,19 @@ public:
       for (uint8_t i = 0; i < nb_settings; i++)
       {
         pinMode(switchPins[i], INPUT_PULLUP);
-        pinMode(ledPins[i], OUTPUT);
       }
-      digitalWrite(ledPins[0], HIGH);
     }
+    for (uint8_t i = 0; i < nb_settings; i++)
+    {
+      pinMode(this->ledPins[i], OUTPUT);
+    }
+    digitalWrite(ledPins[0], HIGH);
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, std::initializer_list<pin_t> switchPins, std::initializer_list<pin_t> ledPins) // One or multiple buttons, multiple LEDs
       : bank(bank), nb_settings(ledPins.size())
   {
+
     ledPinsStorage = (pin_t *)malloc(sizeof(pin_t) * ledPins.size());
     memcpy(ledPinsStorage, ledPins.begin(), sizeof(pin_t) * ledPins.size());
     this->ledPins = ledPinsStorage;
@@ -260,10 +266,13 @@ public:
       for (uint8_t i = 0; i < nb_settings; i++)
       {
         pinMode(this->switchPins[i], INPUT_PULLUP);
-        pinMode(this->ledPins[i], OUTPUT);
       }
-      digitalWrite(this->ledPins[0], HIGH);
     }
+    for (uint8_t i = 0; i < nb_settings; i++)
+    {
+      pinMode(this->ledPins[i], OUTPUT);
+    }
+    digitalWrite(this->ledPins[0], HIGH);
     INSERT_INTO_LINKED_LIST(this, first, last);
   }
   BankSelector(Bank &bank, const pin_t (&switchPins)[2], pin_t nb_settings) // Two buttons (+1, -1), no LEDs

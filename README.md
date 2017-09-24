@@ -26,7 +26,7 @@ Digital inputs can be mapped to controls like transport control (**play/pause/st
 
 ### Button matrices
 There is support for matrices of buttons as well. This allows you to use a very large number of buttons with only a limited number of IO pins.  
-Just like with the Digital inputs, these buttons can be mapped to controls like transport control (**play/pause/stop/cue/...** buttons), **mute/solo/rec** buttons, **effect enable/disable**, **looping options**, **sample triggers** ...  
+Just like with Digital inputs, these buttons can be mapped to controls like transport control (**play/pause/stop/cue/...** buttons), **mute/solo/rec** buttons, **effect enable/disable**, **looping options**, **sample triggers** ...  
 
 ### Rotary encoders
 Another way to input continuous values is by using **rotary encoders** or **jog wheels**. Unlike potentiometers, they can turn indefinitely, and allow for more precise controls.  
