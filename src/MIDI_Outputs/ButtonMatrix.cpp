@@ -14,7 +14,8 @@ ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const pin_t (&rowPins)[nb_rows], co
     init();
     // note: this copies the data of rowPins and colPins, regardless of whether it's static or temporary.
     // This means that using global const arrays to initialize ButtonMatrix is slightly less memory efficient than using brace-enclosed initializer lists.
-    // There are ways around this, but it's not really pretty: https://stackoverflow.com/questions/46382034/template-class-with-variable-array-size-initialize-with-array-reference-or-brac?noredirect=1#comment79722325_46382034
+    // There are ways around this, but it's not really pretty: 
+    // https://stackoverflow.com/questions/46382034/template-class-with-variable-array-size-initialize-with-array-reference-or-brac
 }
 
 template <size_t nb_rows, size_t nb_cols>
@@ -61,7 +62,7 @@ void ButtonMatrix<nb_rows, nb_cols>::init()
     }
     for (int row = 0; row < nb_rows; row++)
     {
-        pinMode(rowPins[row], INPUT);  // make all columns Hi-Z
+        pinMode(rowPins[row], INPUT);  // make all rows Hi-Z
         digitalWrite(rowPins[row], 0); // disable the internal pull-up resistors
     }
 }
