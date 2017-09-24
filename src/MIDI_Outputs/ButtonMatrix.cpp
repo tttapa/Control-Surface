@@ -6,7 +6,7 @@
 
 // public:
 template <size_t nb_rows, size_t nb_cols>
-ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const pin_t (&rowPins)[nb_rows], const pin_t (&colPins)[nb_cols], const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel, uint8_t velocity = 127)
+ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const pin_t (&rowPins)[nb_rows], const pin_t (&colPins)[nb_cols], const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel, uint8_t velocity)
     : addresses(addresses), channel(channel), velocity(velocity)
 {
     memcpy(this->rowPins, rowPins, sizeof(rowPins[0]) * nb_rows);

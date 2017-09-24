@@ -32,6 +32,8 @@ class ButtonMatrix : public MIDI_Control_Element
     const uint8_t channel, velocity;
 };
 
+#ifdef __AVR__
 #include "./ButtonMatrix.cpp" // Because it's a template class
+#endif
 
 #endif // BUTTONMATRIX_H_

@@ -5,15 +5,10 @@
 
 #ifdef CORE_TEENSY
 #include <usb_dev.h>
-#include <usb_midi.h>
 #endif
 
 #if defined(USBCON) && !defined(CORE_TEENSY) // If the main MCU has a USB connection but is not a Teensy
 #include "MIDIUSB.h"
-#endif
-
-#if defined(CORE_TEENSY) && !(defined(USB_MIDI_AUDIO_SERIAL) || defined(USB_MIDI) || defined(USB_MIDI_SERIAL))
-#error Please select a MIDI option in the 'Tools > USB Type' menu.
 #endif
 
 #if defined(USBCON) || defined(CORE_TEENSY) // If the main MCU has a USB connection (or is a Teensy)
