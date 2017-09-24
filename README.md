@@ -7,7 +7,7 @@ It uses a MIDI-over-USB connection to connect to your computer, and can be used 
 
 ## Download
 Download the latest stable version [here](https://github.com/tttapa/MIDI_controller/releases/latest).  
-Please read the [installation instructions](#installation) first.
+Please read the [installation instructions](#installation) first.  
 
 ## Features
 ### Analog inputs
@@ -19,17 +19,21 @@ You have full control over the value **mapping**, control curves, and the range 
 Analog inputs can be mapped to controls like **volume**, **balance**, **effect parameters**, **EQ** ...
 
 ### Digital inputs
-The library can be used with a wide range of digital inputs as well, like **pushbuttons**, latching **switches**, footswitches ...
+The library can be used with a wide range of digital inputs as well, like **pushbuttons**, latching **switches**, footswitches ...  
 Buttons can be **inverted** if necessary.
 
-Digital inputs can be mapped to controls like transport control (**play/pause/stop/cue/...** buttons), **mute/solo/rec** buttons, **effect enable/disable**, **looping options**, **sample triggers** ... 
+Digital inputs can be mapped to controls like transport control (**play/pause/stop/cue/...** buttons), **mute/solo/rec** buttons, **effect enable/disable**, **looping options**, **sample triggers** ...  
+
+### Button matrices
+There is support for matrices of buttons as well. This allows you to use a very large number of buttons with only a limited number of IO pins.  
+Just like with the Digital inputs, these buttons can be mapped to controls like transport control (**play/pause/stop/cue/...** buttons), **mute/solo/rec** buttons, **effect enable/disable**, **looping options**, **sample triggers** ...  
 
 ### Rotary encoders
 Another way to input continuous values is by using **rotary encoders** or **jog wheels**. Unlike potentiometers, they can turn indefinitely, and allow for more precise controls.  
 The library has many settings for **accuracy and speed**.  
 Different MIDI modes are available for **compatibility** with a huge range of music production, DJ or DAW software.  
 
-Rotary encoders can be mapped to controls like **volume**, **balance**, **effect parameters**, **EQ**, **jog wheels**, **timeline scrolling**, **library scrolling** ...
+Rotary encoders can be mapped to controls like **volume**, **balance**, **effect parameters**, **EQ**, **jog wheels**, **timeline scrolling**, **library scrolling** ...  
 
 ### MIDI over USB
 The library will automatically detect what kind of Arduino-compatible board you are using, and it will use the USB connection for MIDI communication (if available). This means that you can just plug it into your computer or tablet (PC, Mac, Linux, iOS, Android ...), it will be automatically detected as a MIDI device, and you can start playing right away.  

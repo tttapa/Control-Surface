@@ -25,7 +25,7 @@ const uint8_t addresses[4][3] = {   // the note numbers corresponding to the but
   { 10, 11, 12 }
 };
 
-// Create a new instance of the class 'ButtonMatrix', called 'buttonmatrix', with dimensions 4 × 3, with the rows connected to pins 2, 3, 4 and 5
+// Create a new instance of the class 'ButtonMatrix', called 'buttonmatrix', with dimensions 4 rows and 3 columns, with the rows connected to pins 2, 3, 4 and 5
 // and the columns connected to pins 6, 7 and 8, that sends MIDI messages with the notes specified in 'addresses' on MIDI channel 1, with velocity 127
 ButtonMatrix<4, 3> buttonmatrix({2, 3, 4, 5}, {6, 7, 8}, addresses, 1, velocity);
 

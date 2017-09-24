@@ -98,7 +98,8 @@ It can be mapped to controls like transport control (play/pause/stop/cue/... but
 `colPins`: a list of the pin numbers connected to the columns of the button matrix, these pins will be used as inputs, with internal pull-up resistors enabled (this can either be a reference to an array of pin numbers, or a brace-enclosed initializer list of pin numbers)  
 `addresses`: a two-dimensional array containing the [MIDI note numbers](http://www.electronics.dit.ie/staff/tscarff/Music_technology/midi/midi_note_numbers_for_octaves.htm) [0, 127] that the buttons in the button matrix will be mapped to  
 `channel`: the MIDI channel [1, 16]  
-`velocity`: the MIDI velocity of the Note events [1, 127], how hard the key/button is struck 
+`velocity`: the MIDI velocity of the Note events [1, 127], how hard the key/button is struck  
+The matrix configuration is the most efficient if `nb_cols` and `nb_rows` are closest to the the square root of the number of buttons.  
 
 ### Digital
 `Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity = 127)`  
