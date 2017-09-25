@@ -69,7 +69,7 @@ Use **analog multiplexers** and **shift registers** to save IO pins. Using the E
 
 ## Installation
 ### Installing the MIDI_controller library
-To install this library, download the [.ZIP file](https://github.com/tttapa/MIDI_controller/archive/master.zip). Then open the Arduino IDE, go to Sketch > Include Library > Add .ZIP library, and open the .ZIP file you just downloaded.
+To install this library, download the [latest version](https://github.com/tttapa/MIDI_controller/releases/latest) as a .ZIP file. Then open the Arduino IDE, go to Sketch > Include Library > Add .ZIP library, and open the .ZIP file you just downloaded.
 ### Dependencies
 The MIDI\_controller library depends on the [PJRC Encoder library](https://www.pjrc.com/teensy/td_libs_Encoder.html) for using rotary encoders and jog wheels. Download the .ZIP library from [GitHub](https://github.com/PaulStoffregen/Encoder) and install it.  
 
