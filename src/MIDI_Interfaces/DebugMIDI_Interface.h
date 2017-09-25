@@ -47,6 +47,75 @@ protected:
     // stream.print((unsigned long)(m >> 4) | ((m | c) << 8) | (d1 << 16), HEX);
     stream.flush();
   }
+
+#ifndef NO_MIDI_INPUT
+
+  bool refresh()
+  {
+    if (handlePreviousByte)
+    {
+      parseSingleMIDIByte(midiByte);
+      handlePreviousByte = false;
+    }
+
+    if (stream.available() <= 0)
+      return false;
+
+    char data = stream.read();
+
+    if (isHexChar(toLowerCase(data)))
+    {
+      data = toLowerCase(data);
+      if (firstChar == '\0')
+        firstChar = data;
+      else if (secondChar == '\0')
+        secondChar = data;
+      else
+      {
+        firstChar = secondChar;
+        secondChar = data;
+      }
+    }
+    else if (isWhiteSpace(data) && firstChar && secondChar) // if we received two hex characters followed by whitespace
+    {
+      midiByte = hexCharToNibble(firstChar) << 4 | hexCharToNibble(secondChar);
+#ifdef DEBUG
+      Serial.printf("New byte:\t%02Xh\r\n", midiByte);
+#endif
+      firstChar = '\0';
+      secondChar = '\0';
+      if (!parseSingleMIDIByte(midiByte)) // if the MIDI buffer is full
+      {
+        handlePreviousByte = true; // handle this byte next time (after emptying the buffer), before reading the next byte
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+private:
+  char firstChar;
+  char secondChar;
+
+  bool isHexChar(char hex) // check if a given character is a hexadecimal number (0-9 or a-f)
+  {
+    return (hex >= '0' && hex <= '9') || (hex >= 'a' && hex <= 'f');
+  }
+  char toLowerCase(char x) // convert a given letter to lower case, no effect if it's a digit (0 - 9) or if it's already lower case
+  {
+    return x | 0b0100000;
+  }
+  uint8_t hexCharToNibble(char hex) // convert a hexadecimal character to a 4-bit nibble
+  {
+    return hex < 'a' ? hex - '0' : hex - 'a' + 10;
+  }
+  inline bool isWhiteSpace(char x)
+  {
+    return x == ' ' || x == '\r' || x == '\n';
+  }
+
+#endif // #ifndef NO_MIDI_INPUT
 };
 
 template <typename T>

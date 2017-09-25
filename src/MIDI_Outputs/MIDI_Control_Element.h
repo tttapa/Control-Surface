@@ -1,30 +1,37 @@
 #ifndef MIDI_CONTROL_ELEMENT_h
 #define MIDI_CONTROL_ELEMENT_h
 
-#include "Arduino.h"
-#include "../Helpers/Linked_List.h"
-#include "../Settings/Settings.h"
+#include "MIDI_Element.h"
 
-class MIDI_Control_Element
+class MIDI_Control_Element : public MIDI_Element
 {
   friend class MIDI_Controller_;
 
 public:
   MIDI_Control_Element() // Constructor
   {
-    INSERT_INTO_LINKED_LIST(this, first, last);
+    if (first == nullptr)
+      first = this;
+    previous = last;
+    if (previous != nullptr)
+      previous->next = this;
+    last = this;
+    next = nullptr;
   }
-  ~MIDI_Control_Element() // Destructor
+  ~MIDI_Control_Element()
   {
-    DELETE_FROM_LINKED_LIST(this, first, last);
+    if (previous != nullptr)
+      previous->next = next;
+    if (this == last)
+      last = previous;
+    if (next != nullptr)
+      next->previous = previous;
+    if (this == first)
+      first = next;
   }
 
   virtual void map(int (*fn)(int)) {} // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh() and AnalogHiRes::refresh()
   virtual void invert() {}            // Invert the button state (send Note On event when released, Note Off when pressed). It will be applied in Digital::refresh()
-
-  void setChannelOffset(uint8_t offset);     // Set the channel offset
-  void setAddressOffset(uint8_t offset);     // Set the address (note or controller number) offset
-  void setChannelsPerBank(uint8_t channels); // Set the number of channels per bank
 
   MIDI_Control_Element *getNext()
   {
