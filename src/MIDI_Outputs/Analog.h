@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 #include "../Settings/Settings.h"
-#include "MIDI_Control_Element.h"
+#include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 
 class Analog : public MIDI_Control_Element

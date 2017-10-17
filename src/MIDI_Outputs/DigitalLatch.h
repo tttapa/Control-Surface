@@ -2,7 +2,7 @@
 #define DIGLAT_h_
 
 #include "Arduino.h"
-#include "MIDI_Control_Element.h"
+#include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 
 class DigitalLatch : public MIDI_Control_Element

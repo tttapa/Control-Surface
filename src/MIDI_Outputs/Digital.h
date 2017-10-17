@@ -2,7 +2,7 @@
 #define DIG_h_
 
 #include "Arduino.h"
-#include "MIDI_Control_Element.h"
+#include "./MIDI_Control_Element.h"
 #include "../Settings/Settings.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 

@@ -1,7 +1,7 @@
 #ifndef MIDI_CONTROL_ELEMENT_h
 #define MIDI_CONTROL_ELEMENT_h
 
-#include "MIDI_Element.h"
+#include "../MIDI_Element.h"
 
 class MIDI_Control_Element : public MIDI_Element
 {
