@@ -1,5 +1,5 @@
 #include "MIDI_Input_LED.h"
-#include "../MIDI_controller.h"
+#include "../Control_Surface.h"
 
 #ifndef NO_MIDI_INPUT
 
@@ -26,7 +26,7 @@ bool MIDI_Input_Note_Buffer::updateImpl(uint8_t header, uint8_t data1)
     uint8_t statesIndex = ledIndex >> 3;  // ledIndex / 8
     uint8_t statesBit = ledIndex & 0b111; // ledIndex % 8
     
-    uint8_t velocity = MIDI_Controller.MIDI()->read();
+    uint8_t velocity = Control_Surface.MIDI()->read();
     if ((messageType == NOTE_OFF && velocity != 0) || (messageType == NOTE_ON && velocity == 0))
     {
         states[statesIndex] &= ~(1 << statesBit);

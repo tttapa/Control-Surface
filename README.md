@@ -6,7 +6,7 @@ The library works on pretty much all Arduino and Teensy boards, like the Arduino
 It uses a MIDI-over-USB connection to connect to your computer, and can be used in your favourite DJ or DAW software.
 
 ## Download
-Download the latest stable version [here](https://github.com/tttapa/MIDI_controller/releases/latest).  
+Download the latest stable version [here](https://github.com/tttapa/Control_Surface/releases/latest).  
 Please read the [installation instructions](#installation) first.  
 
 ## Features
@@ -37,7 +37,7 @@ Rotary encoders can be mapped to controls like **volume**, **balance**, **effect
 
 ### MIDI over USB
 The library will automatically detect what kind of Arduino-compatible board you are using, and it will use the USB connection for MIDI communication (if available). This means that you can just plug it into your computer or tablet (PC, Mac, Linux, iOS, Android ...), it will be automatically detected as a MIDI device, and you can start playing right away.  
-If your board doesn't support MIDI over USB, it will default to the Serial USB interface. More information on the [MIDI over USB Wiki page](https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB).  
+If your board doesn't support MIDI over USB, it will default to the Serial USB interface. More information on the [MIDI over USB Wiki page](https://github.com/tttapa/Control_Surface/wiki/MIDI-over-USB).  
 
 For maximum flexibility, you can use the **MIDI functions** to send your own custom MIDI events, without having to worry about compatibility issues between different boards.  
 The **debug mode** allows you to print the MIDI events in the serial monitor for easier developing, testing and debugging.  
@@ -68,8 +68,8 @@ Use **analog multiplexers** and **shift registers** to save IO pins. Using the E
 ***
 
 ## Installation
-### Installing the MIDI_controller library
-To install this library, download the [latest version](https://github.com/tttapa/MIDI_controller/releases/latest) as a .ZIP file. Then open the Arduino IDE, go to Sketch > Include Library > Add .ZIP library, and open the .ZIP file you just downloaded.
+### Installing the Control_Surface library
+To install this library, download the [latest version](https://github.com/tttapa/Control_Surface/releases/latest) as a .ZIP file. Then open the Arduino IDE, go to Sketch > Include Library > Add .ZIP library, and open the .ZIP file you just downloaded.
 ### Dependencies
 The MIDI\_controller library depends on the [PJRC Encoder library](https://www.pjrc.com/teensy/td_libs_Encoder.html) for using rotary encoders and jog wheels. Download the .ZIP library from [GitHub](https://github.com/PaulStoffregen/Encoder) and install it.  
 
@@ -147,7 +147,7 @@ When the upload is complete, take a ballpoint pen (or anything conductive) and r
 (probably just transcoding the Linux Bash scripts to OSX Bash)
 
 #### Linux
-Go to the folder where you installed this library (usually ~/Arduino/libraries/MIDI_controller) and go to 'DFU scripts/Linux' and open it in a terminal. Then allow execution of the scripts:  
+Go to the folder where you installed this library (usually ~/Arduino/libraries/Control_Surface) and go to 'DFU scripts/Linux' and open it in a terminal. Then allow execution of the scripts:  
 `chmod +x *`
 
 And run the script to flash the MIDI firmware:  
@@ -163,16 +163,16 @@ This script will download the Arduino Serial firmware and install it to the Ardu
 Then you can install the MIDI firmware again.
 
 ### MIDI over USB
-Read more on how different boards use differents methods to send MIDI over USB in the [Wiki](https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB).
+Read more on how different boards use differents methods to send MIDI over USB in the [Wiki](https://github.com/tttapa/Control_Surface/wiki/MIDI-over-USB).
 
 ### Documentation
-You can find the entire library documentation with a description of all available functions in the [Wiki](https://github.com/tttapa/MIDI_controller/wiki/Library-documentation).  
+You can find the entire library documentation with a description of all available functions in the [Wiki](https://github.com/tttapa/Control_Surface/wiki/Library-documentation).  
 
 ### Hardware
-In the [Wiki](https://github.com/tttapa/MIDI_controller/wiki/Hardware), you can also find a page that explains how to connect the hardware, like pusbuttons, potentiometers and rotary encoders.  
+In the [Wiki](https://github.com/tttapa/Control_Surface/wiki/Hardware), you can also find a page that explains how to connect the hardware, like pusbuttons, potentiometers and rotary encoders.  
 
 ### Examples
-The library includes a whole lot of example sketches that demonstrate the usage of the library. You can find them under File > Examples > Examples from custom libraries > MIDI Controller or in the [examples folder](https://github.com/tttapa/MIDI_controller/tree/master/examples) on GitHub.
+The library includes a whole lot of example sketches that demonstrate the usage of the library. You can find them under File > Examples > Examples from custom libraries > MIDI Controller or in the [examples folder](https://github.com/tttapa/Control_Surface/tree/master/examples) on GitHub.
 
 
 ## Tested boards
@@ -182,4 +182,4 @@ Other users have successfully used the library with an Arduino Mega 2560 and an 
 Boards that use an FTDI USB-to-Serial chip (like the Nano and some older boards) do not support MIDI over USB, but can still use Serial MIDI.  
 
 If you try this library with a different board, please let me know whether it works or not.
-If it doesn't, please open an [issue](https://github.com/tttapa/MIDI_controller/issues). Thanks!
+If it doesn't, please open an [issue](https://github.com/tttapa/Control_Surface/issues). Thanks!

@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "Analog.h"
-#include "MIDI_Controller.h"
+#include "Control_Surface.h"
 
 using namespace ExtIO;
 
@@ -26,7 +26,7 @@ void Analog::refresh() // read the analog value, update the average, map it to a
 #endif
   if (value != oldVal) // if the value changed since last time
   {
-    MIDI_Controller.MIDI()->send(CC, channel + channelOffset * channelsPerBank, controllerNumber + addressOffset * channelsPerBank, value); // send a Control Change MIDI event
+    Control_Surface.MIDI()->send(CC, channel + channelOffset * channelsPerBank, controllerNumber + addressOffset * channelsPerBank, value); // send a Control Change MIDI event
     oldVal = value;
   }
 }

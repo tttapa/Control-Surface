@@ -1,15 +1,15 @@
 /*
-  This is an example of the "AnalogMultiplex" class of the MIDI_controller library.
+  This is an example of the "AnalogMultiplex" class of the Control_Surface library.
   Connect an analog multiplexer to analog pin A0. Connect the address lines to pins 2, 3 and 4.
   Connect 8 potentiometers to the inputs of the multiplexer. These will be the channel volumes
   of MIDI channels 1 through 8.
   Map accordingly in your DAW or DJ software.
 
   Written by Pieter P, 20-09-2017
-  https://github.com/tttapa/MIDI_controller
+  https://github.com/tttapa/Control_Surface
 */
 
-#include <MIDI_Controller.h> // Include the library
+#include <Control_Surface.h> // Include the library
 
 // Create an instance of 'AnalogMultiplex' with the output pin of the multiplexer connected to
 // analog input pin A0 and the address pins connected to pins 2, 3 and 4.
@@ -32,5 +32,5 @@ void setup() {}
 
 void loop() {
   // Refresh the MIDI controller (check whether the potentiometer's input has changed since last time, if so, send the new value over MIDI)
-  MIDI_Controller.refresh();
+  Control_Surface.refresh();
 }

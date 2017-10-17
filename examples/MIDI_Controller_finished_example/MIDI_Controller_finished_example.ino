@@ -14,10 +14,10 @@
 
 
   Written by tttapa, 07-09-2017
-  https://github.com/tttapa/MIDI_controller
+  https://github.com/tttapa/Control_Surface
 */
 
-#include <MIDI_Controller.h>
+#include <Control_Surface.h>
 
 const uint8_t velocity = 0b01111111; // The velocity of the buttons (0b01111111 = 127 = 100%)
 const unsigned int latchTime = 100;  // How long a note will be held on, in DigitalLatch mode (in milliseconds).
@@ -74,5 +74,5 @@ void setup()
 
 void loop() // Refresh all inputs
 {
-    MIDI_Controller.refresh();
+    Control_Surface.refresh();
 }

@@ -1,5 +1,5 @@
 /*
-  This is an example of the "Bank" class of the MIDI_controller library.
+  This is an example of the "Bank" class of the Control_Surface library.
   Connect a potentiometer to analog pins A0.
 
   Connect push buttons to pins 2 and 3, and a shift register to pins 10 (ST_CP), 11 (DS) and 13 (SH_CP).
@@ -12,10 +12,10 @@
   Map accordingly in your DAW or DJ software.
 
   Written by Pieter P, 08-09-2017
-  https://github.com/tttapa/MIDI_controller
+  https://github.com/tttapa/Control_Surface
 */
 
-#include <MIDI_Controller.h> // Include the library
+#include <Control_Surface.h> // Include the library
 
 const pin_t dataPin  = 11; //Pin connected to DS of 74HC595
 const pin_t clockPin = 13; //Pin connected to SH_CP of 74HC595
@@ -75,5 +75,5 @@ void setup() {
 void loop() {
   // Refresh the MIDI controller (check whether the inputs have changed since last time, if so, send the new value over MIDI)
   // It also refreshes the bank selector
-  MIDI_Controller.refresh();
+  Control_Surface.refresh();
 }

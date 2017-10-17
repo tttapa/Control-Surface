@@ -1,20 +1,20 @@
-#include "MIDI_Controller_Class.h"
+#include "Control_Surface_Class.h"
 #include "./MIDI_Outputs/MIDI_Control_Element.h"
 #include "./Banks/BankSelector.h"
 
 // public:
 
-MIDI_Controller_ &MIDI_Controller_::getInstance()
+Control_Surface_ &Control_Surface_::getInstance()
 {
-    static MIDI_Controller_ instance;
+    static Control_Surface_ instance;
     return instance;
 }
-MIDI_Controller_::~MIDI_Controller_()
+Control_Surface_::~Control_Surface_()
 {
     delete new_midi;
 }
 
-void MIDI_Controller_::begin()
+void Control_Surface_::begin()
 {
     if (midi == nullptr) // if this is the first time that begin is executed
     {
@@ -27,7 +27,7 @@ void MIDI_Controller_::begin()
         midi->begin(); // initialize the MIDI interface
     }
 }
-void MIDI_Controller_::refresh()
+void Control_Surface_::refresh()
 {
     if (midi == nullptr)
         begin(); // make sure that midi != nullptr
@@ -43,20 +43,20 @@ void MIDI_Controller_::refresh()
 #endif
 }
 
-MIDI_Interface *MIDI_Controller_::MIDI()
+MIDI_Interface *Control_Surface_::MIDI()
 {
     return midi;
 }
 
 // private:
 
-void MIDI_Controller_::refreshControls()
+void Control_Surface_::refreshControls()
 {
     for (MIDI_Control_Element *element = MIDI_Control_Element::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
 }
 
-void MIDI_Controller_::refreshBankSelectors()
+void Control_Surface_::refreshBankSelectors()
 {
     for (BankSelector *element = BankSelector::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
@@ -64,7 +64,7 @@ void MIDI_Controller_::refreshBankSelectors()
 
 #ifndef NO_MIDI_INPUT
 
-void MIDI_Controller_::updateMidiInput()
+void Control_Surface_::updateMidiInput()
 {
     if (midi->available() == 0) // if there are no MIDI messages in the buffer
         return;
@@ -145,7 +145,7 @@ void MIDI_Controller_::updateMidiInput()
         }
     } while (midi->available() > 0);
 }
-void MIDI_Controller_::refreshInputs()
+void Control_Surface_::refreshInputs()
 {
     for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
@@ -156,4 +156,4 @@ void MIDI_Controller_::refreshInputs()
 }
 #endif // ifndef NO_MIDI_INPUT
 
-MIDI_Controller_ &MIDI_Controller = MIDI_Controller_::getInstance();
+Control_Surface_ &Control_Surface = Control_Surface_::getInstance();

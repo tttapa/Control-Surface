@@ -1,7 +1,7 @@
 # Using the MIDI controller library
 ## 1. Add the library to your sketch
 First add the library to your sketch by simply typing this line at the top of your file:  
-`#include <MIDI_Controller.h>`
+`#include <Control_Surface.h>`
 
 ## 2. Add a MIDI Interface (optional)
 If you don't explicitly instantiate a MIDI interface, the MIDI Controller library will
@@ -178,7 +178,7 @@ You can invert all Digital control elements in the same bank using
 
 ## 9. Refresh the MIDI Controller
 In the loop, refresh the MIDI Controller using  
-`MIDI_Controller.refresh();`  
+`Control_Surface.refresh();`  
 If you are doing other things in the loop, make sure that they are non-blocking, or use a timer interrupt.  
 
 

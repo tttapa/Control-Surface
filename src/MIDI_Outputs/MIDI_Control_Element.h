@@ -5,7 +5,7 @@
 
 class MIDI_Control_Element : public MIDI_Element
 {
-  friend class MIDI_Controller_;
+  friend class Control_Surface_;
 
 public:
   MIDI_Control_Element() // Constructor

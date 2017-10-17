@@ -1,4 +1,4 @@
-#include "../MIDI_controller.h"
+#include "../Control_Surface.h"
 
 #ifndef NO_MIDI_INPUT
 
@@ -21,7 +21,7 @@ bool MCU_7SegmentDisplay::updateImpl(uint8_t header, uint8_t data1)
 {
     uint8_t charIndex = length - 1 - (data1 - address);
     charIndex = charIndex < length ? charIndex : length - 1;
-    uint8_t data2 = MIDI_Controller.MIDI()->read();
+    uint8_t data2 = Control_Surface.MIDI()->read();
     bool decimalPt = data2 & 0x40;
     data2 &= 0x3F;
     char character = data2 >= 0x20 ? data2 : data2 + 0x40;

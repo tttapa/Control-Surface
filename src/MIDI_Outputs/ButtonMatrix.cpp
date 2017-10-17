@@ -2,7 +2,7 @@
 #define BUTTONMATRIX_CPP_
 
 #include "./ButtonMatrix.h"
-#include "../MIDI_Controller/MIDI_Controller_Class.h"
+#include "../Control_Surface/Control_Surface_Class.h"
 
 // public:
 template <size_t nb_rows, size_t nb_cols>
@@ -43,7 +43,7 @@ void ButtonMatrix<nb_rows, nb_cols>::refresh()
             {
                 // send it over MIDI
                 uint8_t note = addresses[col][row];
-                MIDI_Controller.MIDI()->send(state ? NOTE_OFF : NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
+                Control_Surface.MIDI()->send(state ? NOTE_OFF : NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
                 setPrevState(col, row, state); // remember the state
             }
         }

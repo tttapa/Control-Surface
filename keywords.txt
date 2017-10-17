@@ -1,7 +1,7 @@
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-MIDI_Controller	KEYWORD1
+Control_Surface	KEYWORD1
 
 MIDI_Interface	KEYWORD1
 StreamMIDI_Interface	KEYWORD1

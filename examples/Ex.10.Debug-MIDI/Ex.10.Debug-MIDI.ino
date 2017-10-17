@@ -1,5 +1,5 @@
 /*
-  This is an example of the debug functionality of the MIDI_controller library.
+  This is an example of the debug functionality of the Control_Surface library.
   Connect a potentiometer to analog pin A0. This will be the MIDI channel volume of channel 1.
 
   Open the Serial Monitor in the Arduino IDE (CTRL+SHIFT+M) and move the potentiometer.
@@ -9,10 +9,10 @@
   Control Change    Channel: 1  Data 1: 0x7  Data 2: 0x3
 
   Written by Pieter P, 20-09-2017
-  https://github.com/tttapa/MIDI_controller
+  https://github.com/tttapa/Control_Surface
 */
 
-#include <MIDI_Controller.h> // Include the library
+#include <Control_Surface.h> // Include the library
 
 // Instantiate a MIDI interface that sends debug messages to the USB Serial port (Serial Monitor)
 USBDebugMIDI_Interface midiInterface(115200);
@@ -25,7 +25,7 @@ void setup() {}
 
 void loop() {
   // Refresh the MIDI controller (check whether the potentiometer's input has changed since last time, if so, send the new value over MIDI)
-  MIDI_Controller.refresh();
+  Control_Surface.refresh();
 }
 
 /*

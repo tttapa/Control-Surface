@@ -6,7 +6,7 @@
 #include "solo.h"
 #include "record10.h"
 
-#include <MIDI_controller.h>
+#include <Control_Surface.h>
 #include <MCU/MCU_Notes.h>
 
 using namespace MCU;
@@ -114,7 +114,7 @@ void setup()   {
   bank.add(soloB, Bank::CHANGE_ADDRESS);
   bank.add(recrdyB, Bank::CHANGE_ADDRESS);
 
-  MIDI_Controller.begin();
+  Control_Surface.begin();
 
   display.setTextColor(WHITE);
 }
@@ -182,7 +182,7 @@ void loop() {
 
 
   display.display();
-  MIDI_Controller.refresh();
+  Control_Surface.refresh();
 }
 
 

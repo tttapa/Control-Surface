@@ -1,5 +1,5 @@
 #include "Digital.h"
-#include "MIDI_Controller.h"
+#include "Control_Surface.h"
 
 using namespace ExtIO;
 
@@ -33,13 +33,13 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
     if (stateChange == falling)
     { // Button is pushed
       buttonState = state;
-      MIDI_Controller.MIDI()->send(NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
+      Control_Surface.MIDI()->send(NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
     }
 
     if (stateChange == rising)
     { // Button is released
       buttonState = state;
-      MIDI_Controller.MIDI()->send(NOTE_OFF, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
+      Control_Surface.MIDI()->send(NOTE_OFF, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
     }
   }
   if (state != prevState)

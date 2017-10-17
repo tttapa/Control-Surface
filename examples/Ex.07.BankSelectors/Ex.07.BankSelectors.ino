@@ -1,5 +1,5 @@
 /*
-  This is an example of the "Bank" class of the MIDI_controller library.
+  This is an example of the "Bank" class of the Control_Surface library.
   Connect two potentiometers to analog pins A0 and A1,
   and two pushbuttons to pins 2 and 3.
 
@@ -38,10 +38,10 @@
   Map accordingly in your DAW or DJ software.
 
   Written by Pieter P, 08-09-2017
-  https://github.com/tttapa/MIDI_controller
+  https://github.com/tttapa/Control_Surface
 */
 
-#include <MIDI_Controller.h> // Include the library
+#include <Control_Surface.h> // Include the library
 
 // Create a two new instances of the class 'Analog', on pins A0 and A1,
 // that send MIDI messages with controller 7 (channel volume) on channels 1 and 2
@@ -84,7 +84,7 @@ void setup() {
 void loop() {
   // Refresh the MIDI controller (check whether the inputs have changed since last time, if so, send the new value over MIDI)
   // It also refreshes the bank selector
-  MIDI_Controller.refresh();
+  Control_Surface.refresh();
 }
 
 /*

@@ -3,7 +3,7 @@
 ## Class structure
 
 ### General
-- MIDI_Controller
+- Control_Surface
 
 - MIDI_Element
     - MIDI_Control_Element
@@ -71,7 +71,7 @@
 
 ## Class descriptions
 
-### MIDI_Controller
+### Control_Surface
 
 #### getInstance()
 Return singleton instance

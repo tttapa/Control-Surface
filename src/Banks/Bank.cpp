@@ -1,5 +1,5 @@
 #include "Bank.h"
-#include "../MIDI_Controller.h"
+#include "../Control_Surface.h"
 
 Bank::Bank(uint8_t channelsPerBank) : channelsPerBank(channelsPerBank) {}
 

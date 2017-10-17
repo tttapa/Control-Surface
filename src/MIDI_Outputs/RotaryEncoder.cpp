@@ -1,6 +1,6 @@
 #include "RotaryEncoder.h"
 
-#include "../MIDI_Controller.h"
+#include "../Control_Surface.h"
 #include "../MIDI_Interfaces/MIDI_Interface.h"
 
 RotaryEncoder::RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply, uint8_t pulsesPerStep, relativeCCmode mode) : enc(pinA, pinB) // Constructor
@@ -29,7 +29,7 @@ void RotaryEncoder::refresh() // Check if the encoder position has changed since
       difference = -15;
 
     uint8_t msgVal = mapRelativeCC(difference * speedMultiply, mode);
-    MIDI_Controller.MIDI()->send(CC, channel + channelOffset * channelsPerBank, controllerNumber + addressOffset * channelsPerBank, msgVal); // send a Control Change MIDI event
+    Control_Surface.MIDI()->send(CC, channel + channelOffset * channelsPerBank, controllerNumber + addressOffset * channelsPerBank, msgVal); // send a Control Change MIDI event
 
     oldVal += difference * pulsesPerStep; // If difference was in [-15, 15], difference * pulsesPerStep == value,
     // otherwise difference * pulsesPerStep == the value on the computer (after receiving the MIDI event above)

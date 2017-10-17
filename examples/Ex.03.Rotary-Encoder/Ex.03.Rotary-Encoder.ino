@@ -1,5 +1,5 @@
 /*
-  This is an example of the "RotaryEncoder" class of the MIDI_controller library.
+  This is an example of the "RotaryEncoder" class of the Control_Surface library.
   Connect the A and B pins of the encoder to 2 interrupt pins (2 and 3). 
   It's recommended to use 100nF capacitors between the A and B pins and ground (hardware debounce).
   Connect the common (C) pin to the ground. Pull-up resistors are not necessary, since the internal ones will be used.
@@ -14,10 +14,10 @@
   (either physically, or by swapping the pin numbers in the RotaryEncoder constructor).
 
   Written by Pieter P, 22-08-2017
-  https://github.com/tttapa/MIDI_controller
+  https://github.com/tttapa/Control_Surface
 */
 
-#include <MIDI_Controller.h>
+#include <Control_Surface.h>
 
 const uint8_t Channel = 1;       // MIDI channel 1
 const uint8_t Controller = 0x14; // MIDI Control Change controller number
@@ -31,5 +31,5 @@ void setup() {}
 
 void loop() {
   // Refresh the encoder (check whether the position has changed since last time, if so, send the difference over MIDI)
-  MIDI_Controller.refresh();
+  Control_Surface.refresh();
 }

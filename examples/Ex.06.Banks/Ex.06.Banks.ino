@@ -1,5 +1,5 @@
 /*
-  This is an example of the "Bank" class of the MIDI_controller library.
+  This is an example of the "Bank" class of the Control_Surface library.
   Connect two potentiometers to analog pins A0 and A1,
   and two pushbuttons to pins 2 and 3.
 
@@ -24,10 +24,10 @@
   Note: It is recommended to use a BankSelector (See Ex.07.BankSelectors) instead of changing the bank setting manually.
 
   Written by Pieter P, 08-09-2017
-  https://github.com/tttapa/MIDI_controller
+  https://github.com/tttapa/Control_Surface
 */
 
-#include <MIDI_Controller.h> // Include the library
+#include <Control_Surface.h> // Include the library
 
 const pin_t bankSwitchPin = 11; // The pin with the bank selection switch connected
 
@@ -65,7 +65,7 @@ void loop() {
     bank.setBankSetting(0); // select tracks 1 and 2
 
   // Refresh the MIDI controller (check whether the inputs have changed since last time, if so, send the new value over MIDI)
-  MIDI_Controller.refresh();
+  Control_Surface.refresh();
 }
 
 /*

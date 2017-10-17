@@ -7,7 +7,7 @@
 #error Please select a 'Serial + MIDI' option in the 'Tools > USB Type' menu.
 #endif
 
-#include "./MIDI_Controller/MIDI_Controller_Class.h"
+#include "./Control_Surface/Control_Surface_Class.h"
 
 #include "./Settings/Settings.h"
 
