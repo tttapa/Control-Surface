@@ -1,5 +1,6 @@
 #include "Control_Surface_Class.h"
 #include "./MIDI_Outputs/MIDI_Control_Element.h"
+#include "./MIDI_Inputs/MIDI_Input_Element.h"
 #include "./Banks/BankSelector.h"
 
 // public:

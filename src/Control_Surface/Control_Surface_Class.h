@@ -2,6 +2,7 @@
 #define Control_Surface_CLASS_H
 
 #include "../MIDI_Interfaces/USBMIDI_Interface.h"
+// #include "../Settings/Settings.h"
 
 class Control_Surface_
 {
@@ -21,6 +22,10 @@ private:
   MIDI_Interface *midi = nullptr;
   void refreshControls();
   void refreshBankSelectors();
+#ifndef NO_MIDI_INPUT
+  void updateMidiInput();
+  void refreshInputs();
+#endif
 };
 
 extern Control_Surface_ &Control_Surface;

@@ -7,7 +7,6 @@
 #include "record10.h"
 
 #include <Control_Surface.h>
-#include <MCU/MCU_Notes.h>
 
 using namespace MCU;
 using namespace ExtIO;
@@ -50,11 +49,11 @@ BankSelector bs(bank, { 6, 5 }, {
 });
 
 Digital channelButtons[] = {
-  {2, MUTE, 1, 127},
-  {3, SOLO, 1, 127},
-  {4, REC_RDY, 1, 127},
-  {8, MUTE + 1, 1, 127},
-  {9, SOLO + 1, 1, 127},
+  {2, MUTE_1, 1, 127},
+  {3, SOLO_1, 1, 127},
+  {4, REC_RDY_1, 1, 127},
+  {8, MUTE_2, 1, 127},
+  {9, SOLO_2, 1, 127},
 };
 
 Digital playButton =   {7, PLAY, 1, 127};
@@ -70,14 +69,14 @@ MIDI_Input_Note_Buffer record(RECORD, 1, 1, 1);
 
 MIDI_Input_Note_Buffer rudeSolo(RUDE_SOLO, 1, 1, 1);
 
-MIDI_Input_Note_Buffer muteA(MUTE + 0, 1, 8, 1);
-MIDI_Input_Note_Buffer muteB(MUTE + 1, 1, 8, 1);
+MIDI_Input_Note_Buffer muteA(MUTE_1, 1, 8, 1);
+MIDI_Input_Note_Buffer muteB(MUTE_2, 1, 8, 1);
 
-MIDI_Input_Note_Buffer soloA(SOLO + 0, 1, 8, 1);
-MIDI_Input_Note_Buffer soloB(SOLO + 1, 1, 8, 1);
+MIDI_Input_Note_Buffer soloA(SOLO_1, 1, 8, 1);
+MIDI_Input_Note_Buffer soloB(SOLO_2, 1, 8, 1);
 
-MIDI_Input_Note_Buffer recrdyA(REC_RDY + 0, 1, 8, 1);
-MIDI_Input_Note_Buffer recrdyB(REC_RDY + 1, 1, 8, 1);
+MIDI_Input_Note_Buffer recrdyA(REC_RDY_1, 1, 8, 1);
+MIDI_Input_Note_Buffer recrdyB(REC_RDY_2, 1, 8, 1);
 
 MCU_VU vuA(0, 8, true, 150);
 MCU_VU vuB(1, 8, true, 150);
@@ -184,5 +183,4 @@ void loop() {
   display.display();
   Control_Surface.refresh();
 }
-
 

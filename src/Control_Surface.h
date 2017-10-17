@@ -1,5 +1,5 @@
-#ifndef MIDIctrl_h_
-#define MIDIctrl_h_
+#ifndef Control_Surface_H
+#define Control_Surface_H
 
 #include "Arduino.h"
 
@@ -43,4 +43,4 @@
 #include "./MIDI_Constants/MCU.h"
 #include "./MIDI_Constants/Control_Change.h"
 
-#endif // MIDIctrl_h_
+#endif // Control_Surface_H
