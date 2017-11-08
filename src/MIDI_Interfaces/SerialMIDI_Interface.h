@@ -100,6 +100,7 @@ public:
 // Class for Hairless MIDI
 class HairlessMIDI_Interface : public USBSerialMIDI_Interface
 {
+public:
   HairlessMIDI_Interface() : USBSerialMIDI_Interface(HAIRLESS_BAUD){};
 };
 
