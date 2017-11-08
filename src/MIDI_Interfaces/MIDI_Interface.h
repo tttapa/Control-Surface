@@ -12,7 +12,6 @@
 #include "../MIDI_Parsers/MIDI_Parser.h"
 
 #define MIDI_BAUD 31250
-#define HAIRLESS_BAUD 115200
 
 // #define IGNORE_SYSEX
 

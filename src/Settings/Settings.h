@@ -12,6 +12,7 @@
 
 #define SYSEX_BUFFER_SIZE 128
 
+#define HAIRLESS_BAUD 115200
 
 // ---- Tests on PC ---- //
 #ifndef ARDUINO
