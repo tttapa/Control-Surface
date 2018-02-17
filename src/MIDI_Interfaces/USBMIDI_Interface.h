@@ -39,144 +39,94 @@ class USBMIDI_Interface : public MIDI_Interface
 
 #ifndef NO_MIDI_INPUT
 
-    bool parseUSBMIDIpacket(uint8_t *packet)
+    MIDI_read_t parseUSBMIDIpacket(uint8_t *packet)
     {
 #ifdef DEBUG
-        DEBUG << "\t\t\t\t\t\tMIDIUSB packet:\t" 
-          << hex << packet[0] << ' ' << packet[1] << ' ' << packet[2] << ' ' << packet[3] << dec << endl;
+        DEBUG << "\t\t\t\t\t\tMIDIUSB packet:\t"
+              << hex << packet[0] << ' ' << packet[1] << ' ' << packet[2] << ' ' << packet[3] << dec << endl;
 #endif
 
         uint8_t CIN = (uint8_t)packet[0] << 4; // MIDI USB cable index number
 
         if (CIN >= NOTE_OFF && CIN <= PITCH_BEND) // 2- or 3-byte MIDI event
         {
-            uint8_t header = packet[1];
-            uint8_t type = header & 0xF0;
+            midimsg.header = packet[1];
+            uint8_t type = midimsg.header & 0xF0;
 
             // if (CIN != type) // invalid MIDI USB packet
             //    return true;
 
-            startMessage();                                        // start a new message (overwrite previous unfinished message)
-            if (!addToMessage(header) || !addToMessage(packet[2])) // add header and data1 to buffer
-                return false;                                      // if that fails, return, and don't increment USB buffer pointer
-            if (CIN != PROGRAM_CHANGE && CIN != CHANNEL_PRESSURE)  // if it's a 3-byte MIDI event
-                if (!addToMessage(packet[3]))                      // add data2 to buffer
-                    return false;                                  // if that fails, return, and don't increment USB buffer pointer
-            finishMessage();                                       // successfully added message to buffer, finish it
+            midimsg.data1 = packet[2];
+            midimsg.data2 = packet[3];
+            return CHANNEL_MESSAGE;
         }
 #ifndef IGNORE_SYSEX
         else if (CIN == 0x40) // SysEx starts or continues (3 bytes)
         {
             if (packet[1] == SysExStart)
             {
-                startMessage(); // start a new message (overwrite previous unfinished message)
-                SysExLength = 0;
+                startSysEx(); // start a new message (overwrite previous unfinished message)
+                addSysExByte(packet[2]);
+                addSysExByte(packet[3]);
             }
             else if (SysExLength == 0) // If we haven't received a SysExStart
             {
 #ifdef DEBUG
                 Serial.println("No SysExStart received");
 #endif
-                return true; // ignore the data
+                ; // ignore the data
             }
-
-            SysExLength += 3;
-            if (SysExLength > bufferSize) // SysEx is larger than the buffer
+            else // SysEx continues
             {
-#ifdef DEBUG
-                Serial.println("SysEx is larger than buffer");
-#endif
-                startMessage(); // Discard message
-                SysExLength = 0;
-                return true;
+                addSysExByte(packet[1]); // add three data bytes to buffer
+                addSysExByte(packet[2]);
+                addSysExByte(packet[3]);
             }
-            if (!hasSpaceLeft(3)) // If there's no more free space in the buffer for three bytes
-            {
-                SysExLength -= 3;
-                return false; // return, and don't increment USB buffer pointer
-            }
-            addToMessage(packet[1]); // add three data bytes to buffer
-            addToMessage(packet[2]);
-            addToMessage(packet[3]);
         }
         else if (CIN == 0x50) // SysEx ends with following single byte (or Single-byte System Common Message, not implemented)
         {
-            if (packet[1] != SysExEnd) // System Common (not implemented)
-                return true;
-
-            if (SysExLength == 0) // If we haven't received a SysExStart
-                return true;      // ignore the data
-
-            SysExLength += 1;
-            if (SysExLength > bufferSize) // SysEx is larger than the buffer
+            if (packet[1] == SysExEnd) // System Common (not implemented)
+            {
+                ;
+            }
+            else if (SysExLength == 0) // If we haven't received a SysExStart
             {
 #ifdef DEBUG
-                Serial.println("SysEx is larger than buffer");
+                Serial.println("No SysExStart received");
 #endif
-                startMessage(); // Discard message
-                SysExLength = 0;
-                return true;
             }
-            if (!addToMessage(SysExEnd)) // add SysExEnd to buffer
+            else
             {
-                SysExLength -= 1;
-                return false; // if that fails, return, and don't increment USB buffer pointer
+                addSysExByte(SysExEnd);
+                return SYSEX_MESSAGE;
             }
-            finishMessage(); // successfully added SysEx message to buffer, finish it
-            SysExLength = 0;
         }
         else if (CIN == 0x60) // SysEx ends with following two bytes
         {
             if (SysExLength == 0) // If we haven't received a SysExStart
-                return true;      // ignore the data
-
-            SysExLength += 2;
-            if (SysExLength > bufferSize) // SysEx is larger than the buffer
             {
-#ifdef DEBUG
-                Serial.println("SysEx is larger than buffer");
-#endif
-                startMessage(); // Discard message
-                SysExLength = 0;
-                return true;
+                ; // ignore the data
             }
-            if (!hasSpaceLeft(2)) // If there's no more free space in the buffer for two bytes
+            else
             {
-                SysExLength -= 2;
-                return false; // return, and don't increment USB buffer pointer
+                addSysExByte(packet[1]); // add two data bytes to buffer
+                addSysExByte(SysExEnd);
+                return SYSEX_MESSAGE;
             }
-
-            addToMessage(packet[1]); // add two data bytes to buffer
-            addToMessage(SysExEnd);
-            finishMessage(); // successfully added SysEx message to buffer, finish it
-            SysExLength = 0;
         }
         else if (CIN == 0x70) // SysEx ends with following three bytes
         {
             if (SysExLength == 0) // If we haven't received a SysExStart
-                return true;      // ignore the data
-
-            SysExLength += 3;
-            if (SysExLength > bufferSize) // SysEx is larger than the buffer
             {
-#ifdef DEBUG
-                Serial.println("SysEx is larger than buffer");
-#endif
-                startMessage(); // Discard message
-                SysExLength = 0;
-                return true;
+                ; // ignore the data
             }
-            if (!hasSpaceLeft(3)) // If there's no more free space in the buffer for three bytes
+            else
             {
-                SysExLength -= 3;
-                return false; // return, and don't increment USB buffer pointer
+                addSysExByte(packet[1]); // add three data bytes to buffer
+                addSysExByte(packet[2]);
+                addSysExByte(SysExEnd);
+                return SYSEX_MESSAGE;
             }
-
-            addToMessage(packet[1]); // add three data bytes to buffer
-            addToMessage(packet[2]);
-            addToMessage(SysExEnd);
-            finishMessage(); // successfully added SysEx message to buffer, finish it
-            SysExLength = 0;
         }
 #endif // IGNORE_SYSEX
         /*
@@ -192,60 +142,60 @@ class USBMIDI_Interface : public MIDI_Interface
             ;
         */
 
-        return true; // return, increment USB buffer pointer
+        return NO_MESSAGE; // return, increment USB buffer pointer
     }
 
   public:
-    bool refresh()
+    MIDI_read_t read()
     {
 #if defined(CORE_TEENSY) // If it's a Teensy board
-
-        if (rx_packet == nullptr) // If there's no previous packet
+        while (1)
         {
-            if (!usb_configuration) // Check USB configuration
-                return false;
-            rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer
-            if (rx_packet == nullptr)             // If there's no new packet, return
-                return false;
-            if (rx_packet->len < 4) // If the lenght is less than 4, it's not a valid MIDI USB packet
+            if (rx_packet == nullptr) // If there's no previous packet
             {
-                usb_free(rx_packet); // Free the packet
-                rx_packet = nullptr; // Read new packet on next refresh
-                return true;
+                if (!usb_configuration) // Check USB configuration
+                    return NO_MESSAGE;
+                rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer
+                if (rx_packet == nullptr)             // If there's no new packet, return
+                    return NO_MESSAGE;
+                if (rx_packet->len < 4) // If the lenght is less than 4, it's not a valid MIDI USB packet
+                {
+                    usb_free(rx_packet); // Free the packet
+                    rx_packet = nullptr; // Read new packet next time around
+                    continue;
+                }
+            }
+
+            size_t index = rx_packet->index;
+
+            uint8_t *data = rx_packet->buf + index; // A pointer to this packet
+
+            MIDI_read_t parseResult = parseUSBMIDIpacket(data);
+            if (parseResult != NO_MESSAGE)
+                return parseResult;
+
+            index += 4;
+            if (index < rx_packet->len) // If the packet is longer than 4 bytes
+            {
+                rx_packet->index = index; // Change the index and read the next four bytes on next read
+            }
+            else // If the packet was only 4 bytes long
+            {
+                usb_free(rx_packet);                  // Free the packet
+                rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read the next packet
             }
         }
 
-        size_t index = rx_packet->index;
-
-        uint8_t *data = rx_packet->buf + index; // A pointer to this packet
-
-        if (!parseUSBMIDIpacket(data)) // add the packet to the MIDI buffer
-            return false;              // if it fails, return false, it means that the buffer is full, so parse the messages in the buffer first, don't throw away the USB packet just yet
-
-        index += 4;
-        if (index < rx_packet->len) // If the packet is longer than 4 bytes
-        {
-            rx_packet->index = index; // Change the index and read the next four bytes on next refresh
-        }
-        else // If the packet was only 4 bytes long
-        {
-            usb_free(rx_packet);                  // Free the packet
-            rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read the next packet
-        }
-
-        return true;
-
 #elif defined(USBCON) // If the main MCU has a USB connection but is not a Teensy
-        if (rx_packet == 0)
+        while (1)
         {
             rx_packet = *(uint32_t *)&MidiUSB.read();
             if (rx_packet == 0)
-                return false;
+                return NO_MESSAGE;
+            MIDI_read_t parseResult = parseUSBMIDIpacket((uint8_t *)&rx_packet);
+            if (parseResult != NO_MESSAGE)
+                return parseResult;
         }
-        if (!parseUSBMIDIpacket((uint8_t *)&rx_packet)) // add the packet to the MIDI buffer
-            return false;                               // if it fails, return false, it means that the buffer is full, so parse the messages in the buffer first, don't throw away the USB packet just yet
-        rx_packet = 0;
-        return true;
 #endif
     }
 
@@ -259,13 +209,15 @@ class USBMIDI_Interface : public MIDI_Interface
 #else                    // #ifndef NO_MIDI_INPUT
 
   public:
+  /*
+  TODO
     bool refresh() // Ignore MIDI input
     {
 #if defined(CORE_TEENSY) // If it's a Teensy board
         if (!usb_configuration) // Check USB configuration
             return false;
         usb_packet_t *rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer
-        if (rx_packet == nullptr)                          // If there's no new packet, return
+        if (rx_packet == nullptr)                           // If there's no new packet, return
             return false;
 
         usb_free(rx_packet); // Free the packet
@@ -274,6 +226,7 @@ class USBMIDI_Interface : public MIDI_Interface
         return MidiUSB.read().header != 0; // if there's a packet to read, discard it, and read again next time
 #endif
     }
+    */
 
 #endif // #ifndef NO_MIDI_INPUT
 };
