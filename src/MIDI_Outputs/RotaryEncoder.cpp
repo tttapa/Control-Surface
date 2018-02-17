@@ -41,7 +41,7 @@ void RotaryEncoder::refresh() // Check if the encoder position has changed since
 
 uint8_t RotaryEncoder::twosComplement7bit(int8_t value) // Convert an 8-bit two's complement integer to a 7-bit two's complement integer
 {
-  return (value & 0b10111111) - (value & 0b01000000);
+  return value & 0b01111111;
 }
 
 uint8_t RotaryEncoder::twosComplementTo7bitSignedMagnitude(int8_t value) // Convert an 8-bit two's complement integer to 7-bit sign-magnitude format

@@ -33,6 +33,10 @@ public:
   RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply = 1, uint8_t pulsesPerStep = NORMAL_ENCODER, relativeCCmode mode = TWOS_COMPLEMENT); // Constructor
   ~RotaryEncoder();                                                                                                                                                                           // Destructor
 
+  static uint8_t twosComplement7bit(int8_t value);                  // Convert an 8-bit two's complement integer to a 7-bit two's complement integer
+  static uint8_t twosComplementTo7bitSignedMagnitude(int8_t value); // Convert an 8-bit two's complement integer to 7-bit sign-magnitude format
+  static uint8_t mapRelativeCC(int8_t value, relativeCCmode type);  // Convert an 8-bit two's complement integer to a 7-bit value to send over MIDI
+
 private:
   void refresh(); // Check if the encoder position has changed since last time, if so, send the relative movement over MIDI
 
@@ -41,9 +45,5 @@ private:
   int speedMultiply;
   long oldVal = 0;
   Encoder enc;
-
-  uint8_t twosComplement7bit(int8_t value);                  // Convert an 8-bit two's complement integer to a 7-bit two's complement integer
-  uint8_t twosComplementTo7bitSignedMagnitude(int8_t value); // Convert an 8-bit two's complement integer to 7-bit sign-magnitude format
-  uint8_t mapRelativeCC(int8_t value, relativeCCmode type);  // Convert an 8-bit two's complement integer to a 7-bit value to send over MIDI
 };
 #endif
