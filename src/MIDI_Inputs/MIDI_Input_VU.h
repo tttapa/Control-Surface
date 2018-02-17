@@ -11,8 +11,8 @@ using namespace ExtIO;
 class MCU_VU : public MIDI_Input_Element_ChannelPressure
 {
   public:
-    MCU_VU(uint8_t address, uint8_t nb_addresses, bool decay = true, unsigned int decayTime = 300)
-        : MIDI_Input_Element_ChannelPressure(address, 1, nb_addresses, 1),
+    MCU_VU(uint8_t track, uint8_t nb_tracks = 1, bool decay = true, unsigned int decayTime = 300)
+        : MIDI_Input_Element_ChannelPressure(track - 1, 1, nb_tracks, 1),
           decay(decay), decayTime(decayTime)
     {
         initBuffer();
@@ -24,7 +24,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     }
     void reset()
     {
-        for (uint8_t i = 0; i < nb_addresses; i++)
+        for (uint8_t i = 0; i < this->nb_addresses; i++)
         {
             setValue(i, 0);
             clearOverload(i);
@@ -32,16 +32,16 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         display();
     }
 
-    bool updateImpl(uint8_t header, uint8_t data1)
+    bool updateImpl(MIDI_message *midimsg)
     {
-        uint8_t targetID = data1 >> 4;
+        uint8_t targetID = midimsg->data1 >> 4;
 
         if (!matchID(targetID))
             return false;
 
         uint8_t index = (targetID - this->address) / channelsPerBank;
 
-        uint8_t data = data1 & 0xF;
+        uint8_t data = midimsg->data1 & 0xF;
         if (data == 0xF) // clear overload
             clearOverload(index);
         else if (data == 0xE) // set overload
@@ -114,7 +114,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     }
     bool matchID(uint8_t targetID)
     {
-        for (uint8_t id = this->address; id < this->address + nb_addresses * channelsPerBank; id += channelsPerBank)
+        for (uint8_t id = this->address; id < this->address + this->nb_addresses * channelsPerBank; id += channelsPerBank)
         {
             if (id == targetID)
                 return true;
@@ -153,11 +153,13 @@ class MCU_VU_LED : public MCU_VU
     const pin_t start, overloadpin;
     const bool overload;
 
+    const static uint8_t floorCorrection = 5;
+
     void display()
     {
-        for (uint8_t pin = 0; pin < getValue(addressOffset) * length / 12; pin++)
+        for (uint8_t pin = 0; pin < (getValue(addressOffset) * length + floorCorrection) / 12; pin++)
             digitalWrite(start + pin, HIGH);
-        for (uint8_t pin = getValue(addressOffset) * length / 12; pin < length; pin++)
+        for (uint8_t pin = (getValue(addressOffset) * length + floorCorrection) / 12; pin < length; pin++)
             digitalWrite(start + pin, LOW);
         if (overload)
             digitalWrite(overloadpin, getOverload(addressOffset));

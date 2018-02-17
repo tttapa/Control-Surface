@@ -71,7 +71,7 @@ Return singleton instance
 - If it's the first time, call `begin()`
 - Refresh all MIDI\_Control\_Elements
 - Update all BankSelectors
-- Read and discard MIDI input
+- Read MIDI input
 
 ... 
 

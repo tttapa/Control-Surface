@@ -31,7 +31,7 @@
 #include "./Banks/Bank.h"
 #include "./Banks/BankSelector.h"
 
-#include "./MIDI_Interfaces/MIDI_Interface.h"
+// #include "./MIDI_Interfaces/MIDI_Interface.h"
 #include "./MIDI_Interfaces/USBMIDI_Interface.h"
 #include "./MIDI_Interfaces/SerialMIDI_Interface.h"
 #include "./MIDI_Interfaces/DebugMIDI_Interface.h"
@@ -42,5 +42,7 @@
 
 #include "./MIDI_Constants/MCU.h"
 #include "./MIDI_Constants/Control_Change.h"
+
+#include "./Helpers/StreamOut.h"
 
 #endif // Control_Surface_H

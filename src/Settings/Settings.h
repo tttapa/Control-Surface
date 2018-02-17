@@ -1,5 +1,5 @@
 
-// #define DEBUG // Print debug messages to Serial. (Not compatible with AVR, because it uses Serial.printf)
+#define DEBUG Serial // Print debug messages to Serial.
 
 #define ANALOG_AVERAGE 8 // Use the average of 8 samples for the Analog class
 #define ANALOG_HI_RES_AVERAGE 16 // Use the average of 8 samples for the AnalogHiRes class

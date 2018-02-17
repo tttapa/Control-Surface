@@ -9,7 +9,7 @@ class MCU_7SegmentDisplay : public MIDI_Input_Element_CC
     MCU_7SegmentDisplay(uint8_t address, uint8_t length);
     ~MCU_7SegmentDisplay();
 
-    bool updateImpl(uint8_t header, uint8_t data1);
+    bool updateImpl(MIDI_message *midimsg);
     virtual void print() {}
 
   protected:

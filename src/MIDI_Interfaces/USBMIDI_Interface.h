@@ -2,6 +2,7 @@
 #define USBMIDI_INTERFACE_H_
 
 #include "MIDI_Interface.h"
+#include "../Helpers/StreamOut.h"
 
 #ifdef CORE_TEENSY
 #include <usb_dev.h>
@@ -41,7 +42,8 @@ class USBMIDI_Interface : public MIDI_Interface
     bool parseUSBMIDIpacket(uint8_t *packet)
     {
 #ifdef DEBUG
-        Serial.printf("\t\t\t\t\t\tMIDIUSB packet:\t%02X %02X %02X %02X\tSysEx length:\t%lu\r\n", packet[0], packet[1], packet[2], packet[3], SysExLength);
+        DEBUG << "\t\t\t\t\t\tMIDIUSB packet:\t" 
+          << hex << packet[0] << ' ' << packet[1] << ' ' << packet[2] << ' ' << packet[3] << dec << endl;
 #endif
 
         uint8_t CIN = (uint8_t)packet[0] << 4; // MIDI USB cable index number

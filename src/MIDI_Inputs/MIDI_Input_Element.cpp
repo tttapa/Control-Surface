@@ -7,13 +7,11 @@
 MIDI_Input_Element::MIDI_Input_Element(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels)
     : address(address), channel(channel - 1), nb_addresses(nb_addresses), nb_channels(nb_channels) {}
 
-bool MIDI_Input_Element::update(uint8_t header, uint8_t data1)
+bool MIDI_Input_Element::update(uint8_t targetChannel, uint8_t targetAddress)
 {
-    uint8_t targetChannel = header & 0x0F;
-    uint8_t targetAddress = data1;
     if (!match(targetAddress, targetChannel))
         return false;
-    if (!updateImpl(header, data1))
+    if (!updateImpl(Control_Surface.MIDI()->ChannelMessage))
         return false;
     return true;
 }
@@ -31,6 +29,8 @@ bool MIDI_Input_Element::matchAddress(uint8_t targetAddress)
             return true;
     }
     return false;
+
+    // TODO: return (targetAddress >= this->address) && (targetAddress < this->address + nb_addresses * channelsPerBank) && ((targetAddress - this->address) % channelsPerBank == 0);
 }
 bool MIDI_Input_Element::matchChannel(uint8_t targetChannel)
 {

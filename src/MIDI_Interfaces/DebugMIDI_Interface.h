@@ -50,48 +50,40 @@ protected:
 
 #ifndef NO_MIDI_INPUT
 
-  bool refresh()
+  virtual MIDI_read_t read()
   {
-    if (handlePreviousByte)
+    while (stream.available() > 0)
     {
-      parseSingleMIDIByte(midiByte);
-      handlePreviousByte = false;
-    }
+      char data = stream.read();
 
-    if (stream.available() <= 0)
-      return false;
-
-    char data = stream.read();
-
-    if (isHexChar(toLowerCase(data)))
-    {
-      data = toLowerCase(data);
-      if (firstChar == '\0')
-        firstChar = data;
-      else if (secondChar == '\0')
-        secondChar = data;
-      else
+      if (isHexChar(toLowerCase(data)))
       {
-        firstChar = secondChar;
-        secondChar = data;
+        data = toLowerCase(data);
+        if (firstChar == '\0')
+          firstChar = data;
+        else if (secondChar == '\0')
+          secondChar = data;
+        else
+        {
+          firstChar = secondChar;
+          secondChar = data;
+        }
       }
-    }
-    else if (isWhiteSpace(data) && firstChar && secondChar) // if we received two hex characters followed by whitespace
-    {
-      midiByte = hexCharToNibble(firstChar) << 4 | hexCharToNibble(secondChar);
+      else if (isWhiteSpace(data) && firstChar && secondChar) // if we received two hex characters followed by whitespace
+      {
+        uint8_t midiByte = hexCharToNibble(firstChar) << 4 | hexCharToNibble(secondChar);
 #ifdef DEBUG
-      Serial.printf("New byte:\t%02Xh\r\n", midiByte);
+        Serial.print("New byte:\t");
+        Serial.println(midiByte, HEX);
 #endif
-      firstChar = '\0';
-      secondChar = '\0';
-      if (!parseSingleMIDIByte(midiByte)) // if the MIDI buffer is full
-      {
-        handlePreviousByte = true; // handle this byte next time (after emptying the buffer), before reading the next byte
-        return false;
+        firstChar = '\0';
+        secondChar = '\0';
+        MIDI_read_t parseResult = parseSingleMIDIByte(midiByte);
+        if (parseResult != NO_MESSAGE)
+          return parseResult;
       }
     }
-
-    return true;
+    return NO_MESSAGE;
   }
 
 private:
@@ -123,7 +115,7 @@ class SerialDebugMIDI_Interface : public StreamDebugMIDI_Interface
 {
 public:
   SerialDebugMIDI_Interface(T &serial, unsigned long baud) : serial(serial), baud(baud), StreamDebugMIDI_Interface(serial) {}
-  void begin()
+  virtual void begin()
   {
     serial.begin(baud);
   }

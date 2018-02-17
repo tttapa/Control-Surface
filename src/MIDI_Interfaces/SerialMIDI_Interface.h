@@ -9,28 +9,20 @@ public:
   StreamMIDI_Interface(Stream &stream) : stream(stream) {}
 
 #ifndef NO_MIDI_INPUT
-  virtual bool refresh()
+  virtual MIDI_read_t read()
   {
-    if (handlePreviousByte)
+    while (stream.available() > 0)
     {
-      parseSingleMIDIByte(midiByte);
-      handlePreviousByte = false;
-    }
-
-    if (stream.available() <= 0)
-      return false;
-
-    midiByte = stream.read();
+      uint8_t midiByte = stream.read();
 #ifdef DEBUG
-    Serial.printf("New byte:\t%02Xh\r\n", midiByte);
+      Serial.print("New byte:\t");
+      Serial.println(midiByte, HEX);
 #endif
-    if (!parseSingleMIDIByte(midiByte)) // if the MIDI buffer is full
-    {
-      handlePreviousByte = true; // handle this byte next time (after emptying the buffer), before reading the next byte
-      return false;
+      MIDI_read_t parseResult = parseSingleMIDIByte(midiByte);
+      if (parseResult != NO_MESSAGE)
+        return parseResult;
     }
-
-    return true;
+    return NO_MESSAGE;
   }
 #endif // #ifndef NO_MIDI_INPUT
 
@@ -54,12 +46,9 @@ protected:
 
 #ifndef NO_MIDI_INPUT
 
-  uint8_t runningStatusBuffer = 0;
-  uint8_t midiByte = 0;
   bool thirdByte = false;
-  bool handlePreviousByte = false;
 
-  bool parseSingleMIDIByte(uint8_t midiByte)
+  MIDI_read_t parseSingleMIDIByte(uint8_t midiByte)
   {
     if (midiByte & (1 << 7)) // If it's a header byte (first byte)
     {
@@ -73,112 +62,79 @@ protected:
       else // Normal header
       {
 #ifndef IGNORE_SYSEX
-        if (runningStatusBuffer == SysExStart) // if we're currently receiving a SysEx message
+        if (midimsg.header == SysExStart) // if we're currently receiving a SysEx message
         {
 #ifdef DEBUG
           Serial.println("SysExEnd");
 #endif
-          if (SysExLength >= bufferSize) // SysEx is larger than the buffer
-          {
-            startMessage(); // Discard message
-#ifdef DEBUG
-            Serial.println("SysEx is larger than buffer");
-#endif
-            runningStatusBuffer = SysExEnd;
-            return true; // ignore byte
-          }
-          if (!addToMessage(SysExEnd)) // add SysExEnd byte to buffer
-            return false;              // if it failed, return, buffer is full, try same byte again after parsing the buffer
-          finishMessage();
+          midimsg.header = SysExEnd;
+          if (addSysExByte(SysExEnd)) // add SysExEnd byte to buffer
+            return SYSEX_MESSAGE;
         }
 #endif
 #ifdef DEBUG
         Serial.println("Header");
 #endif
-        runningStatusBuffer = midiByte;
+        midimsg.header = midiByte;
         thirdByte = false;
 
 #ifndef IGNORE_SYSEX
-        if (runningStatusBuffer == SysExStart) // if the first byte of a SysEx message
+        if (midimsg.header == SysExStart) // if the first byte of a SysEx message
         {
 #ifdef DEBUG
           Serial.println("SysExStart");
 #endif
-          startMessage();
-          if (!addToMessage(SysExStart)) // if the buffer is full
-            return false;                // return, but read same byte again next time (after emptying the buffer)
-          SysExLength = 1;
+          startSysEx();
         }
 #endif // IGNORE_SYSEX
       }
     }
     else // If it's a data byte
     {
-      if (thirdByte) // third data byte of three
+      if (midimsg.header == 0)
+      {
+#ifdef DEBUG
+        Serial.println("Error: No header");
+#endif
+        ; // Ignore
+      }
+      else if (thirdByte) // third byte of three
       {
 #ifdef DEBUG
         Serial.println("Second data byte");
 #endif
-        if (!addToMessage(midiByte)) // if the buffer is full
-          return false;              // return, but read same byte again next time (after emptying the buffer)
-        finishMessage();
+        midimsg.data2 = midiByte;
 #ifdef DEBUG
         Serial.println("Message finished");
 #endif
         thirdByte = false;
+        return CHANNEL_MESSAGE;
       }
       else // second byte or SysEx data
       {
-        if (runningStatusBuffer == 0)
-        {
-#ifdef DEBUG
-          Serial.println("Error: No header");
-#endif
-          ; // Ignore
-        }
-        else if (runningStatusBuffer < 0xC0 || runningStatusBuffer == 0xE0) // Note, Aftertouch, CC or Pitch Bend
+        if (midimsg.header < 0xC0 || midimsg.header == 0xE0) // Note, Aftertouch, CC or Pitch Bend
         {
 #ifdef DEBUG
           Serial.println("First data byte (of two)");
 #endif
-
-          if (!hasSpaceLeft(2))              // if the buffer is full
-            return false;                    // return, but read same byte again next time (after emptying the buffer)
-          addToMessage(runningStatusBuffer); // add the header to the buffer
-          addToMessage(midiByte);            // add the first data byte to the buffer
-          thirdByte = true;                  // message is not finished yet
+          midimsg.data1 = midiByte;
+          thirdByte = true;
         }
-        else if (runningStatusBuffer < 0xE0) // Program Change or Channel Pressure
+        else if (midimsg.header < 0xE0) // Program Change or Channel Pressure
         {
 #ifdef DEBUG
           Serial.println("First data byte");
 #endif
-          if (!hasSpaceLeft(2))              // if the buffer is full
-            return false;                    // return, but read same byte again next time (after emptying the buffer)
-          addToMessage(runningStatusBuffer); // add the header to the buffer
-          addToMessage(midiByte);            // add the data byte to the buffer
-#ifdef DEBUG
-          Serial.println("Message finished");
-#endif
-          finishMessage();
+          midimsg.data1 = midiByte;
+          return CHANNEL_MESSAGE;
         }
 #ifndef IGNORE_SYSEX
-        else if (runningStatusBuffer == SysExStart) // SysEx data byte
+        else if (midimsg.header == SysExStart) // SysEx data byte
         {
 #ifdef DEBUG
           Serial.println("SysEx data byte");
 #endif
-          if (SysExLength >= bufferSize) // SysEx is larger than the buffer
-          {
-            startMessage(); // Discard message
-#ifdef DEBUG
-            Serial.println("SysEx is larger than buffer");
-#endif
-            return true;
-          }
-          if (!addToMessage(midiByte)) // add data byte to buffer
-            return false;              // if it failed, return, buffer is full, parse same byte again after parsing the buffer
-          SysExLength += 1;
+          addSysExByte(midiByte);
         }
 #endif // IGNORE_SYSEX
 #ifdef DEBUG
@@ -189,7 +145,7 @@ protected:
 #endif
       }
     }
-    return true; // successfully added to buffer, continue with next MIDI byte
+    return NO_MESSAGE;
   }
 
 #endif // #ifndef NO_MIDI_INPUT
@@ -200,7 +156,7 @@ class SerialMIDI_Interface : public StreamMIDI_Interface
 {
 public:
   SerialMIDI_Interface(T &serial, unsigned long baud) : serial(serial), baud(baud), StreamMIDI_Interface(serial) {}
-  void begin()
+  virtual void begin()
   {
     serial.begin(baud);
   }
