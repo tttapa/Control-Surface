@@ -14,7 +14,6 @@
 #include "./MIDI_Element.h"
 
 #include "./MIDI_Outputs/Analog.h"
-#include "./MIDI_Outputs/AnalogHiRes.h"
 #include "./MIDI_Outputs/ButtonMatrix.h"
 #include "./MIDI_Outputs/Digital.h"
 #include "./MIDI_Outputs/DigitalLatch.h"

@@ -3,40 +3,59 @@
 
 #include "Arduino.h"
 #include "../Settings/Settings.h"
+#include "../Helpers/AnalogFilter.h"
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 
-class Analog : public MIDI_Control_Element
+class AnalogBase : public MIDI_Control_Element
 {
 public:
-  Analog(pin_t analogPin, uint8_t controllerNumber, uint8_t channel); // Constructor
-  void map(int (*fn)(int));                                           // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
+  AnalogBase(pin_t analogPin); // Constructor
+  void map(int (*fn)(int));    // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
 
 private:
   void refresh(); // Read the analog input value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
 
   pin_t analogPin;
-  uint8_t controllerNumber, channel, oldVal = -1;
-  int (*analogMap)(int) = identity; // function pointer to identity function f(x) → x
+  uint8_t controllerNumber, channel;
+  int (*mapFn)(int) = identity; // function pointer to identity function f(x) → x
 
-  static int identity(int x)
-  { // identity function f(x) → x
+  static int identity(int x) // identity function f(x) → x
+  {
     return x;
   }
+  AnalogFilter<ANALOG_FILTER_SHIFT_FACTOR> filter;
 
-#ifdef SINGLE_BYTE_AVERAGE
-  uint8_t runningAverage(uint8_t value); // http://playground.arduino.cc/Main/RunningAverage
-  uint8_t avValues[ANALOG_AVERAGE] = {};
-  uint8_t avIndex = 0;
-  unsigned int avSum = 0;
-  uint8_t avCount = 0;
-#else
-  unsigned int runningAverage(unsigned int value); // http://playground.arduino.cc/Main/RunningAverage
-  unsigned int avValues[ANALOG_AVERAGE] = {};
-  size_t avIndex = 0;
-  unsigned long avSum = 0;
-  size_t avCount = 0;
-#endif
+protected:
+  virtual void send(unsigned int value) = 0;
+};
+
+#define Analog _Pragma ("GCC warning \"'Analog' is deprecated\"") AnalogCC
+
+class AnalogCC : public AnalogBase
+{
+public:
+  AnalogCC(pin_t analogPin, uint8_t controller, uint8_t channel)
+      : AnalogBase(analogPin), controller(controller), channel(channel) {}
+
+protected:
+  virtual void send(unsigned int value);
+  uint8_t oldVal = -1;
+
+  uint8_t controller, channel;
+};
+
+class AnalogPB : public AnalogBase
+{
+public:
+  AnalogPB(pin_t analogPin, uint8_t channel)
+      : AnalogBase(analogPin), channel(channel) {}
+
+protected:
+  virtual void send(unsigned int value);
+  uint16_t oldVal = -1;
+
+  uint8_t channel;
 };
 
 #endif // ANALOG_h_
