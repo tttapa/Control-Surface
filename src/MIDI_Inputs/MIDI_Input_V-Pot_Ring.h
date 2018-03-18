@@ -9,7 +9,7 @@ class MCU_VPot_Ring : public MIDI_Input_Element_CC
     MCU_VPot_Ring(uint8_t address, uint8_t nb_addresses);
     ~MCU_VPot_Ring();
 
-    bool updateImpl(MIDI_message *midimsg);
+    bool updateImpl(const MIDI_message *midimsg);
 
     uint8_t getPosition();
     uint8_t getCenterLED();

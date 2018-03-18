@@ -15,7 +15,7 @@ MIDI_Input_Note_Buffer::~MIDI_Input_Note_Buffer()
 {
     free(states);
 }
-bool MIDI_Input_Note_Buffer::updateImpl(MIDI_message *midimsg)
+bool MIDI_Input_Note_Buffer::updateImpl(const MIDI_message *midimsg)
 {
     uint8_t messageType = midimsg->header & 0xF0;
     uint8_t targetChannel = midimsg->header & 0x0F;

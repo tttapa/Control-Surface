@@ -17,7 +17,7 @@ MCU_7SegmentDisplay::~MCU_7SegmentDisplay()
 {
     free(textBuffer);
 }
-bool MCU_7SegmentDisplay::updateImpl(MIDI_message *midimsg)
+bool MCU_7SegmentDisplay::updateImpl(const MIDI_message *midimsg)
 {
     uint8_t data1 = midimsg->data1;
     uint8_t data2 = midimsg->data2;

@@ -1,4 +1,7 @@
 #include "StreamOut.h"
 
-const char *endl = "\r\n";
+#ifdef ARDUINO
+const char *endl = "\r\n"; // TODO: should endl flush?
+#endif
+
 char tab = '\t';

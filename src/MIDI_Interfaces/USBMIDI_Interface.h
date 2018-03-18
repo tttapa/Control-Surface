@@ -2,6 +2,7 @@
 #define USBMIDI_INTERFACE_H_
 
 #include "MIDI_Interface.h"
+#include "../MIDI_Parsers/USBMIDI_Parser.h"
 #include "../Helpers/StreamOut.h"
 
 #ifdef CORE_TEENSY
@@ -16,12 +17,13 @@
 class USBMIDI_Interface : public MIDI_Interface
 {
   public:
-    USBMIDI_Interface()
+    USBMIDI_Interface() : MIDI_Interface(parser)
     {
         ;
     }
 
   protected:
+    USBMIDI_Parser parser;
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2)
     {
 #if defined(CORE_TEENSY) // If it's a Teensy board
@@ -37,132 +39,34 @@ class USBMIDI_Interface : public MIDI_Interface
         sendImpl(m, c, d1, 0);
     }
 
-#ifndef NO_MIDI_INPUT
-
-    MIDI_read_t parseUSBMIDIpacket(uint8_t *packet)
-    {
-#ifdef DEBUG
-        DEBUG << "\t\t\t\t\t\tMIDIUSB packet:\t"
-              << hex << packet[0] << ' ' << packet[1] << ' ' << packet[2] << ' ' << packet[3] << dec << endl;
-#endif
-
-        uint8_t CIN = (uint8_t)packet[0] << 4; // MIDI USB cable index number
-
-        if (CIN >= NOTE_OFF && CIN <= PITCH_BEND) // 2- or 3-byte MIDI event
-        {
-            midimsg.header = packet[1];
-            uint8_t type = midimsg.header & 0xF0;
-
-            // if (CIN != type) // invalid MIDI USB packet
-            //    return true;
-
-            midimsg.data1 = packet[2];
-            midimsg.data2 = packet[3];
-            return CHANNEL_MESSAGE;
-        }
-#ifndef IGNORE_SYSEX
-        else if (CIN == 0x40) // SysEx starts or continues (3 bytes)
-        {
-            if (packet[1] == SysExStart)
-            {
-                startSysEx(); // start a new message (overwrite previous unfinished message)
-                addSysExByte(packet[2]);
-                addSysExByte(packet[3]);
-            }
-            else if (SysExLength == 0) // If we haven't received a SysExStart
-            {
-#ifdef DEBUG
-                Serial.println("No SysExStart received");
-#endif
-                ; // ignore the data
-            }
-            else // SysEx continues
-            {
-                addSysExByte(packet[1]); // add three data bytes to buffer
-                addSysExByte(packet[2]);
-                addSysExByte(packet[3]);
-            }
-        }
-        else if (CIN == 0x50) // SysEx ends with following single byte (or Single-byte System Common Message, not implemented)
-        {
-            if (packet[1] == SysExEnd) // System Common (not implemented)
-            {
-                ;
-            }
-            else if (SysExLength == 0) // If we haven't received a SysExStart
-            {
-#ifdef DEBUG
-                Serial.println("No SysExStart received");
-#endif
-            }
-            else
-            {
-                addSysExByte(SysExEnd);
-                return SYSEX_MESSAGE;
-            }
-        }
-        else if (CIN == 0x60) // SysEx ends with following two bytes
-        {
-            if (SysExLength == 0) // If we haven't received a SysExStart
-            {
-                ; // ignore the data
-            }
-            else
-            {
-                addSysExByte(packet[1]); // add two data bytes to buffer
-                addSysExByte(SysExEnd);
-                return SYSEX_MESSAGE;
-            }
-        }
-        else if (CIN == 0x70) // SysEx ends with following three bytes
-        {
-            if (SysExLength == 0) // If we haven't received a SysExStart
-            {
-                ; // ignore the data
-            }
-            else
-            {
-                addSysExByte(packet[1]); // add three data bytes to buffer
-                addSysExByte(packet[2]);
-                addSysExByte(SysExEnd);
-                return SYSEX_MESSAGE;
-            }
-        }
-#endif // IGNORE_SYSEX
-        /*
-        else if (CIN == 0x00) // Miscellaneous function codes. Reserved for future extensions. (not implemented)
-            ;
-        else if (CIN == 0x10) // Cable events. Reserved for future expansion. (not implemented)
-            ;
-        else if (CIN == 0x20) // Two-byte System Common message (not implemented)
-            ;
-        else if (CIN == 0x30) // Three-byte System Common message (not implemented)
-            ;
-        else if (CIN == 0xF0) // Single Byte (not implemented)
-            ;
-        */
-
-        return NO_MESSAGE; // return, increment USB buffer pointer
-    }
-
   public:
     MIDI_read_t read()
     {
 #if defined(CORE_TEENSY) // If it's a Teensy board
         while (1)
         {
+#ifdef DEBUG
+            // DEBUG << "while (1) USB" << endl;
+#endif
             if (rx_packet == nullptr) // If there's no previous packet
             {
                 if (!usb_configuration) // Check USB configuration
                     return NO_MESSAGE;
                 rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer
-                if (rx_packet == nullptr)             // If there's no new packet, return
+                if (rx_packet == nullptr) {            // If there's no new packet, return
+#ifdef DEBUG
+                    // DEBUG << "No USB packets" << endl;
+#endif
                     return NO_MESSAGE;
+                }
                 if (rx_packet->len < 4) // If the lenght is less than 4, it's not a valid MIDI USB packet
                 {
                     usb_free(rx_packet); // Free the packet
                     rx_packet = nullptr; // Read new packet next time around
-                    continue;
+#ifdef DEBUG
+                    DEBUG << "rx_packet->len < 4" << endl;
+#endif
+                    return NO_MESSAGE;
                 }
             }
 
@@ -170,9 +74,15 @@ class USBMIDI_Interface : public MIDI_Interface
 
             uint8_t *data = rx_packet->buf + index; // A pointer to this packet
 
-            MIDI_read_t parseResult = parseUSBMIDIpacket(data);
-            if (parseResult != NO_MESSAGE)
-                return parseResult;
+#ifdef DEBUG
+            DEBUG << "Parsing ..." << endl;
+#endif
+
+            MIDI_read_t parseResult = parser.parse(data);
+
+#ifdef DEBUG
+            DEBUG << "parseResult = " << parseResult << endl;
+#endif
 
             index += 4;
             if (index < rx_packet->len) // If the packet is longer than 4 bytes
@@ -183,7 +93,15 @@ class USBMIDI_Interface : public MIDI_Interface
             {
                 usb_free(rx_packet);                  // Free the packet
                 rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read the next packet
+#ifdef DEBUG
+                DEBUG << "Free USB packet" << endl;
+#endif
             }
+            if (parseResult != NO_MESSAGE)
+                return parseResult;
+#ifdef DEBUG
+            DEBUG << "loop USB MIDI" << endl;
+#endif
         }
 
 #elif defined(USBCON) // If the main MCU has a USB connection but is not a Teensy
@@ -192,7 +110,7 @@ class USBMIDI_Interface : public MIDI_Interface
             rx_packet = *(uint32_t *)&MidiUSB.read();
             if (rx_packet == 0)
                 return NO_MESSAGE;
-            MIDI_read_t parseResult = parseUSBMIDIpacket((uint8_t *)&rx_packet);
+            MIDI_read_t parseResult = parser.parse((uint8_t *)&rx_packet);
             if (parseResult != NO_MESSAGE)
                 return parseResult;
         }
@@ -205,30 +123,6 @@ class USBMIDI_Interface : public MIDI_Interface
 #elif defined(USBCON) // If the main MCU has a USB connection but is not a Teensy
     uint32_t rx_packet = 0;
 #endif
-
-#else                    // #ifndef NO_MIDI_INPUT
-
-  public:
-  /*
-  TODO
-    bool refresh() // Ignore MIDI input
-    {
-#if defined(CORE_TEENSY) // If it's a Teensy board
-        if (!usb_configuration) // Check USB configuration
-            return false;
-        usb_packet_t *rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer
-        if (rx_packet == nullptr)                           // If there's no new packet, return
-            return false;
-
-        usb_free(rx_packet); // Free the packet
-        return true;         // repeat
-#elif defined(USBCON)    // If the main MCU has a USB connection but is not a Teensy
-        return MidiUSB.read().header != 0; // if there's a packet to read, discard it, and read again next time
-#endif
-    }
-    */
-
-#endif // #ifndef NO_MIDI_INPUT
 };
 
 #else // If the main MCU doesn't have a USB connection

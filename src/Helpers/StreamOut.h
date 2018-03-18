@@ -1,21 +1,33 @@
-#ifndef STREAMOUT_H_
-#define STREAMOUT_H_
+#ifndef STREAMOUT_H
+#define STREAMOUT_H
 
-#include "Arduino.h"
+#ifdef ARDUINO
+
+#include <Arduino.h>
 #include "is_integral.h"
 
 enum StreamOut_format_t
 {
-    dec,
-    hex,
-    bin,
+    dec = 10,
+    hex = 16, 
+    bin = 2,
+};
+enum StreamOut_leadingZeros_t
+{
+    noLeadingZeros = 0,
+    leadingZeros = 1,
 };
 
 static StreamOut_format_t streamOutFormat = dec;
-
+static StreamOut_leadingZeros_t streamOutLeadingZeros = noLeadingZeros;
 inline Print &operator<<(Print &printer, StreamOut_format_t format)
 {
     streamOutFormat = format;
+    return printer;
+}
+inline Print &operator<<(Print &printer, StreamOut_leadingZeros_t zeros)
+{
+    streamOutLeadingZeros = zeros;
     return printer;
 }
 template <class T>
@@ -42,21 +54,20 @@ void printInt(Print &printer, T printable)
     switch (streamOutFormat)
     {
     case dec:
-    {
         printer.print(printable);
         break;
-    }
     case hex:
-    {
         printHex(printable, printer);
         break;
-    }
     case bin:
-    {
-        printBin(printable, printer);
+        printBin(printable, printer);  
         break;
     }
-    }
+}
+
+static char nibble_to_hex(uint8_t nibble) {  // convert a 4-bit nibble to a hexadecimal character
+  nibble &= 0xF;
+  return nibble > 9 ? nibble - 10 + 'A' : nibble + '0';
 }
 
 #if __BYTE_ORDER != __LITTLE_ENDIAN
@@ -65,31 +76,50 @@ void printInt(Print &printer, T printable)
 template <class T>
 void printHex(T val, Print &printer = Serial)
 {
+    bool nonZero = false;
     for (int i = sizeof(val) - 1; i >= 0; i--)
     {
-        printer.print(((uint8_t *)&val)[i] >> 4, HEX);
-        printer.print(((uint8_t *)&val)[i] & 0xF, HEX);
-        if (i)
-            printer.print(' ');
+        uint8_t currByte = ((uint8_t *)&val)[i];
+        if (currByte != 0 || i == 0)
+            nonZero = true;
+        if (streamOutLeadingZeros == leadingZeros || nonZero) {
+            printer.print(nibble_to_hex(currByte >> 4));
+            printer.print(nibble_to_hex(currByte));
+            if (i)
+                printer.print(' ');
+        }
     }
 }
 
 template <class T>
 void printBin(T val, Print &printer = Serial)
 {
+    bool nonZero = false;
     for (int i = sizeof(val) - 1; i >= 0; i--)
     {
-        uint8_t currByte = ((uint8_t *)&val)[i];
-        for (int j = 7; j >= 0; j--)
-        {
-            printer.print(currByte & (1 << j) ? '1' : '0');
+        uint8_t currByte = ((uint8_t *)&val)[i]; 
+        if (currByte != 0 || i == 0)
+            nonZero = true;
+        if (streamOutLeadingZeros == leadingZeros || nonZero) {
+            for (int j = 7; j >= 0; j--)
+            {
+                printer.print(currByte & (1 << j) ? '1' : '0');
+            }
+            if (i)
+                printer.print(' ');
         }
-        if (i)
-            printer.print(' ');
     }
 }
 
 extern const char *endl;
+
+#else // Tests without Arduino
+
+#include <iostream>
+using namespace std;
+
+#endif
+
 extern char tab;
 
-#endif // STREAMOUT_H_
+#endif // STREAMOUT_H

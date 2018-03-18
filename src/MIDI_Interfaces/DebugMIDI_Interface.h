@@ -78,7 +78,7 @@ protected:
 #endif
         firstChar = '\0';
         secondChar = '\0';
-        MIDI_read_t parseResult = parseSingleMIDIByte(midiByte);
+        MIDI_read_t parseResult = parser.parse(midiByte);
         if (parseResult != NO_MESSAGE)
           return parseResult;
       }

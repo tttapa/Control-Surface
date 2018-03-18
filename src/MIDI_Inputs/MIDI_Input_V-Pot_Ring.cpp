@@ -18,7 +18,7 @@ MCU_VPot_Ring::~MCU_VPot_Ring()
     free(values);
 }
 
-bool MCU_VPot_Ring::updateImpl(MIDI_message *midimsg)
+bool MCU_VPot_Ring::updateImpl(const MIDI_message *midimsg)
 {
     uint8_t index = (midimsg->data1 - 0x30) / channelsPerBank;
     index = index < nb_addresses ? index : nb_addresses - 1;

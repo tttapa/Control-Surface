@@ -8,17 +8,21 @@
 
 #include <Control_Surface.h>
 
-using namespace MCU;
+using namespace MCU;  
 using namespace ExtIO;
 
-// #define FPS
+#define FPS
 
-#define DEBUG_MIDI
+// #define DEBUG_MIDI
 // #define SERIAL_MIDI
 
 const uint8_t clockPin = 10;
 const uint8_t latchPin = 11;
 const uint8_t dataPin = 12;
+
+const uint8_t blinkPin = LED_BUILTIN;
+
+const unsigned long blinkInterval = 500;
 
 const uint8_t VPOT = 0x10;
 
@@ -36,7 +40,7 @@ ShiftRegisterOut SR_BS(dataPin, clockPin, latchPin, LSBFIRST, 24);
 ShiftRegisterOut SR(dataPin, clockPin, 16, LSBFIRST, 8);
 
 Bank bank(2); // two channels per bank
-
+  
 BankSelector bs(bank, { 6, 5 }, {
   SR_BS.blue(0),
   SR_BS.blue(1),
@@ -98,6 +102,11 @@ void setup()   {
   while (!Serial);
   delay(500);
 #endif
+
+  pinMode(blinkPin, OUTPUT);
+
+  /*
+  
   bank.add(channelButtons, Bank::CHANGE_ADDRESS);
 
   bank.add(encoder, Bank::CHANGE_ADDRESS);
@@ -112,13 +121,20 @@ void setup()   {
   bank.add(muteB, Bank::CHANGE_ADDRESS);
   bank.add(soloB, Bank::CHANGE_ADDRESS);
   bank.add(recrdyB, Bank::CHANGE_ADDRESS);
-
+  */
   Control_Surface.begin();
 
   display.setTextColor(WHITE);
 }
 
 void loop() {
+  static unsigned long previousBlink = millis();
+
+  if (millis() - previousBlink >= blinkInterval) {
+    digitalWrite(blinkPin, !digitalRead(blinkPin));
+    previousBlink += blinkInterval;
+  }
+  
   static unsigned long start = 0;
   unsigned int loopTime = millis() - start;
   start = millis();
@@ -182,5 +198,7 @@ void loop() {
 
   display.display();
   Control_Surface.refresh();
+
+//  delay(100);
 }
 

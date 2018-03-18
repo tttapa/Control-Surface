@@ -32,7 +32,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         display();
     }
 
-    bool updateImpl(MIDI_message *midimsg)
+    bool updateImpl(const MIDI_message *midimsg)
     {
         uint8_t targetID = midimsg->data1 >> 4;
 

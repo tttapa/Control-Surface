@@ -11,7 +11,8 @@ bool MIDI_Input_Element::update(uint8_t targetChannel, uint8_t targetAddress)
 {
     if (!match(targetAddress, targetChannel))
         return false;
-    if (!updateImpl(Control_Surface.MIDI()->ChannelMessage))
+    MIDI_message midimsg = Control_Surface.MIDI()->getChannelMessage();
+    if (!updateImpl(&midimsg)) // TODO: use reference
         return false;
     return true;
 }

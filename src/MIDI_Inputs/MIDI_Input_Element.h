@@ -20,7 +20,7 @@ public:
   void setAddressOffset(uint8_t offset); // Set the address (note or controller number) offset
 
 protected:
-  virtual bool updateImpl(MIDI_message *midimsg)=0;
+  virtual bool updateImpl(const MIDI_message *midimsg)=0;
   virtual inline bool match(uint8_t targetAddress, uint8_t targetChannel);
   bool matchAddress(uint8_t targetAddress);
   bool matchChannel(uint8_t targetChannel);
