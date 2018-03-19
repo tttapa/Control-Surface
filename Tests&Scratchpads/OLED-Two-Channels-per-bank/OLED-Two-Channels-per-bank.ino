@@ -191,7 +191,7 @@ void loop() {
 
 #ifdef FPS
   display.setTextSize(1);
-  display.setCursor(5, 64 - 8);
+  display.setCursor(10, 64 - 8);
   display.print(1000 / loopTime);
 #endif
 
