@@ -6,6 +6,7 @@
 #else 
 #include <stdint.h>
 #include <cstddef>
+#include <cstdlib>
 #endif
 
 #include "../Settings/Settings.h"

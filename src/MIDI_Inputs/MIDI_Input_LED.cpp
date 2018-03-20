@@ -1,5 +1,6 @@
 #include "MIDI_Input_LED.h"
-#include "../Control_Surface.h"
+// #include "../Control_Surface.h"
+#include <cstring>
 
 using namespace ExtIO;
 
@@ -13,18 +14,19 @@ MIDI_Input_Note_Buffer::~MIDI_Input_Note_Buffer()
 {
     free(states);
 }
-bool MIDI_Input_Note_Buffer::updateImpl(const MIDI_message *midimsg)
+bool MIDI_Input_Note_Buffer::updateImpl(const MIDI_message_matcher &midimsg)
 {
-    uint8_t messageType = midimsg->header & 0xF0;
-    uint8_t targetChannel = midimsg->header & 0x0F;
-    uint8_t addressIndex = (midimsg->data1 - this->address) / channelsPerBank;
+    uint8_t messageType = midimsg.type;
+    uint8_t targetChannel = midimsg.channel;
+
+    uint8_t addressIndex = (midimsg.data1 - this->address) / channelsPerBank;
     uint8_t channelIndex = (targetChannel - this->channel) / channelsPerBank;
     uint8_t ledIndex = channelIndex + nb_channels * addressIndex;
 
     uint8_t statesIndex = ledIndex >> 3;  // ledIndex / 8
     uint8_t statesBit = ledIndex & 0b111; // ledIndex % 8
     
-    uint8_t velocity = midimsg->data2;
+    uint8_t velocity = midimsg.data2;
     if ((messageType == NOTE_OFF && velocity != 0) || (messageType == NOTE_ON && velocity == 0))
     {
         states[statesIndex] &= ~(1 << statesBit);

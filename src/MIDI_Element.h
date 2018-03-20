@@ -1,7 +1,13 @@
 #ifndef MIDI_ELEMENT_h
 #define MIDI_ELEMENT_h
 
+#ifdef ARDUINO
 #include <Arduino.h>
+#else 
+#include <stdint.h>
+#include <cstddef>
+#include <cstdlib>
+#endif
 
 class MIDI_Element
 {
@@ -26,7 +32,7 @@ class MIDI_Element
     {
         addressOffset = offset;
     }
-    void setChannelsPerBank(uint8_t channels) // Set the number of channels per bank
+    virtual void setChannelsPerBank(uint8_t channels) // Set the number of channels per bank
     {
         channelsPerBank = channels;
     }

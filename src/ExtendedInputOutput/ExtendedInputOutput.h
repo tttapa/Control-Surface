@@ -1,17 +1,26 @@
 #ifndef EXTENDEDINPUTOUTPUT_H_
 #define EXTENDEDINPUTOUTPUT_H_
 
-#include <Arduino.h>
 #include "ExtendedIOElement.h"
 
 #define EXT_PIN(x) (x + NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
 
+#ifdef HIGH
 #undef HIGH
+#endif
+#ifdef LOW
 #undef LOW
+#endif
 
+#ifdef INPUT
 #undef INPUT
+#endif
+#ifdef OUTPUT
 #undef OUTPUT
+#endif
+#ifdef INPUT_PULLUP
 #undef INPUT_PULLUP
+#endif
 
 const uint8_t HIGH = 0x1;
 const uint8_t LOW = 0x0;

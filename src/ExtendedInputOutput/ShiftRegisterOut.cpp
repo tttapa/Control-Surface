@@ -1,5 +1,6 @@
 #include "ShiftRegisterOut.h"
 #include "ExtendedInputOutput.h"
+#include <cstring>
 
 using namespace ExtIO;
 

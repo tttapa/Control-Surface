@@ -12,7 +12,7 @@ class MIDI_Input_Note_Buffer : public MIDI_Input_Element_Note
 public:
   MIDI_Input_Note_Buffer(uint8_t address, uint8_t channel, size_t nb_addresses = 1, size_t nb_channels = 1);
   ~MIDI_Input_Note_Buffer();
-  bool updateImpl(const MIDI_message *midimsg);
+  bool updateImpl(const MIDI_message_matcher &midimsg);
   bool getState();
 
 protected:

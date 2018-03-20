@@ -3,6 +3,7 @@
 
 #include "MIDI_Input_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include <cstring>
 
 using namespace ExtIO;
 
@@ -30,16 +31,16 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         display();
     }
 
-    bool updateImpl(const MIDI_message *midimsg)
+    bool updateImpl(const MIDI_message_matcher &midimsg)
     {
-        uint8_t targetID = midimsg->data1 >> 4;
+        uint8_t targetID = midimsg.data1 >> 4;
 
         if (!matchID(targetID))
             return false;
 
         uint8_t index = (targetID - this->address) / channelsPerBank;
 
-        uint8_t data = midimsg->data1 & 0xF;
+        uint8_t data = midimsg.data1 & 0xF;
         if (data == 0xF) // clear overload
             clearOverload(index);
         else if (data == 0xE) // set overload

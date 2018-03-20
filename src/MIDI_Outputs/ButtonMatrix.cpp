@@ -3,6 +3,7 @@
 
 #include "./ButtonMatrix.h"
 #include "../Control_Surface/Control_Surface_Class.h"
+#include <cstring>
 
 // public:
 template <size_t nb_rows, size_t nb_cols>

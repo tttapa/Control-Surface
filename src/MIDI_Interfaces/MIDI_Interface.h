@@ -1,7 +1,12 @@
 #ifndef MIDI_INTERFACE_H_
 #define MIDI_INTERFACE_H_
 
-#include <Arduino.h>
+// #ifdef ARDUINO
+// #include <Arduino.h>
+// #else 
+// #include <stdint.h>
+// #include <cstddef>
+// #endif
 
 #include "../Settings/Settings.h"
 #include "../MIDI_Parsers/MIDI_Parser.h"

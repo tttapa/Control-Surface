@@ -1,4 +1,7 @@
-#include "../Control_Surface.h"
+// #include "../ExtendedInputOutput/ExtendedInputOutput.h"
+// #include "./MIDI_message_matcher.h"
+#include "./MIDI_Input_V-Pot_Ring.h"
+#include <cstring>
 
 using namespace ExtIO;
 
@@ -16,11 +19,11 @@ MCU_VPot_Ring::~MCU_VPot_Ring()
     free(values);
 }
 
-bool MCU_VPot_Ring::updateImpl(const MIDI_message *midimsg)
+bool MCU_VPot_Ring::updateImpl(const MIDI_message_matcher &midimsg)
 {
-    uint8_t index = (midimsg->data1 - 0x30) / channelsPerBank;
+    uint8_t index = (midimsg.data1 - 0x30) / channelsPerBank;
     index = index < nb_addresses ? index : nb_addresses - 1;
-    setValue(index, midimsg->data2);
+    setValue(index, midimsg.data2);
 
     display();
     return true;

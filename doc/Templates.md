@@ -1,7 +1,6 @@
 ### MIDI output
 
 ```cpp
-#include <Arduino.h>
 #include "../Settings/Settings.h"
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"

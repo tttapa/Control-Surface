@@ -1,4 +1,6 @@
-#include "../Control_Surface.h"
+// #include "../Control_Surface.h"
+#include "./MIDI_Input_7SegmentDisplay.h"
+#include <cstring>
 
 using namespace ExtIO;
 
@@ -15,10 +17,10 @@ MCU_7SegmentDisplay::~MCU_7SegmentDisplay()
 {
     free(textBuffer);
 }
-bool MCU_7SegmentDisplay::updateImpl(const MIDI_message *midimsg)
+bool MCU_7SegmentDisplay::updateImpl(const MIDI_message_matcher &midimsg)
 {
-    uint8_t data1 = midimsg->data1;
-    uint8_t data2 = midimsg->data2;
+    uint8_t data1 = midimsg.data1;
+    uint8_t data2 = midimsg.data2;
     uint8_t charIndex = length - 1 - (data1 - address);
     charIndex = charIndex < length ? charIndex : length - 1;
     bool decimalPt = data2 & 0x40;

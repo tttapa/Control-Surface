@@ -1,7 +1,7 @@
 #ifndef ANALOG_h_
 #define ANALOG_h_
 
-#include <Arduino.h>
+// #include <Arduino.h>
 #include "../Settings/Settings.h"
 #include "../Helpers/AnalogFilter.h"
 #include "./MIDI_Control_Element.h"

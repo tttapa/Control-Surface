@@ -1,7 +1,6 @@
 #ifndef ANALOGMULTIPLEX_H_
 #define ANALOGMULTIPLEX_H_
 
-#include <Arduino.h>
 #include "ExtendedIOElement.h"
 #ifdef __AVR__
 #include "../Helpers/initializer_list.h"
