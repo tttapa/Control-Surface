@@ -1,7 +1,7 @@
 #ifndef SHIFTREGISTEROUT_H_
 #define SHIFTREGISTEROUT_H_
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "ExtendedIOElement.h"
 
 class ShiftRegisterOut : public ExtendedIOElement

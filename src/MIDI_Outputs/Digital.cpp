@@ -1,5 +1,5 @@
 #include "Digital.h"
-#include "Control_Surface.h"
+#include "../Control_Surface.h"
 
 using namespace ExtIO;
 

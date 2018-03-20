@@ -1,7 +1,7 @@
 #ifndef BANKSELECTOR_H_
 #define BANKSELECTOR_H_
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "./Bank.h"
 #include "../Helpers/Linked_List.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"

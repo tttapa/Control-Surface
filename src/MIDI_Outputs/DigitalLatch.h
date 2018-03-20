@@ -1,7 +1,7 @@
 #ifndef DIGLAT_h_
 #define DIGLAT_h_
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 

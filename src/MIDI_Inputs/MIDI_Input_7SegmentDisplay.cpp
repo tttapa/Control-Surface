@@ -1,7 +1,5 @@
 #include "../Control_Surface.h"
 
-#ifndef NO_MIDI_INPUT
-
 using namespace ExtIO;
 
 // public:
@@ -118,5 +116,3 @@ void MCU_AssignmentDisplay::getText(char *buff)
 {
     strncpy(buff, &textBuffer[0], 3);
 }
-
-#endif // ifndef NO_MIDI_INPUT

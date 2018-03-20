@@ -48,8 +48,6 @@ protected:
     stream.flush();
   }
 
-#ifndef NO_MIDI_INPUT
-
   virtual MIDI_read_t read()
   {
     while (stream.available() > 0)
@@ -106,8 +104,6 @@ private:
   {
     return x == ' ' || x == '\r' || x == '\n';
   }
-
-#endif // #ifndef NO_MIDI_INPUT
 };
 
 template <typename T>

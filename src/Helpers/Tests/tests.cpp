@@ -1,5 +1,7 @@
 // g++ -Wall -std=c++11 -o tests -I/home/pieter/lib/Catch2/single_include *.cpp && ./tests
 
+#ifndef ARDUINO
+
 #define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this in one cpp file
 #include <catch.hpp>
 using Catch::Matchers::Equals;
@@ -245,3 +247,5 @@ TEST_CASE("Move down the only element","[MOVE]")
     REQUIRE(node.next == nullptr);
     REQUIRE(node.previous == nullptr);
 }
+
+#endif // ifndef ARDUINO

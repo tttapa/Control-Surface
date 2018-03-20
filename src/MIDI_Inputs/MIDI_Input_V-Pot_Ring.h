@@ -1,7 +1,7 @@
 #ifndef MCU_VPOT_RING_H_
 #define MCU_VPOT_RING_H_
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 class MCU_VPot_Ring : public MIDI_Input_Element_CC
 {

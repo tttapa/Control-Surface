@@ -1,8 +1,6 @@
 #include "MIDI_Input_LED.h"
 #include "../Control_Surface.h"
 
-#ifndef NO_MIDI_INPUT
-
 using namespace ExtIO;
 
 MIDI_Input_Note_Buffer::MIDI_Input_Note_Buffer(uint8_t address, uint8_t channel, size_t nb_addresses, size_t nb_channels)
@@ -59,5 +57,3 @@ void MIDI_LED::display()
 {
     digitalWrite(pin, getState());
 }
-
-#endif // #ifndef NO_MIDI_INPUT

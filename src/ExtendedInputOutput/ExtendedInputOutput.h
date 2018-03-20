@@ -1,10 +1,24 @@
 #ifndef EXTENDEDINPUTOUTPUT_H_
 #define EXTENDEDINPUTOUTPUT_H_
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "ExtendedIOElement.h"
 
 #define EXT_PIN(x) (x + NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
+
+#undef HIGH
+#undef LOW
+
+#undef INPUT
+#undef OUTPUT
+#undef INPUT_PULLUP
+
+const uint8_t HIGH = 0x1;
+const uint8_t LOW = 0x0;
+
+const uint8_t INPUT = 0x0;
+const uint8_t OUTPUT = 0x1;
+const uint8_t INPUT_PULLUP = 0x2;
 
 namespace ExtIO
 {
@@ -12,6 +26,7 @@ extern ExtendedIOElement *getIOElementOfPin(pin_t pin);
 extern void pinMode(pin_t pin, uint8_t mode);
 extern void pinMode(int pin, uint8_t mode);
 extern void digitalWrite(pin_t pin, uint8_t val);
+// extern void digitalWrite(pin_t pin, bool val);
 extern void digitalWrite(int pin, uint8_t val);
 extern int digitalRead(pin_t pin);
 extern int digitalRead(int pin);

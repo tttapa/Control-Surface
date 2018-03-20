@@ -1,7 +1,7 @@
 #ifndef BUTTONMATRIX_H_
 #define BUTTONMATRIX_H_
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h" // for pin_t
 

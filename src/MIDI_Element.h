@@ -1,7 +1,7 @@
 #ifndef MIDI_ELEMENT_h
 #define MIDI_ELEMENT_h
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 class MIDI_Element
 {

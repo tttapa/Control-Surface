@@ -7,8 +7,6 @@
 
 // #define IGNORE_SYSEX // TODO: seems to fail
 
-// #define NO_MIDI_INPUT
-
 #define MIDI_BUFFER_SIZE 128
 
 ;

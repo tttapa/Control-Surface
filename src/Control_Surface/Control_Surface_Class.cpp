@@ -1,7 +1,7 @@
 #include "Control_Surface_Class.h"
-#include "./MIDI_Outputs/MIDI_Control_Element.h"
-#include "./MIDI_Inputs/MIDI_Input_Element.h"
-#include "./Banks/BankSelector.h"
+#include "../MIDI_Outputs/MIDI_Control_Element.h"
+#include "../MIDI_Inputs/MIDI_Input_Element.h"
+#include "../Banks/BankSelector.h"
 #include "../Helpers/StreamOut.h"
 
 // public:
@@ -60,8 +60,6 @@ void Control_Surface_::refreshBankSelectors()
     for (BankSelector *element = BankSelector::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
 }
-
-#ifndef NO_MIDI_INPUT
 
 void Control_Surface_::updateMidiInput()
 {
@@ -168,6 +166,5 @@ void Control_Surface_::refreshInputs()
     for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
 }
-#endif // ifndef NO_MIDI_INPUT
 
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();

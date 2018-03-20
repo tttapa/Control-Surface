@@ -49,8 +49,6 @@ void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1)
 
     //----------------------------------------PARSER------------------------------------------//
 
-#ifndef NO_MIDI_INPUT
-
 MIDI_message MIDI_Interface::getChannelMessage() {
     return parser.getChannelMessage();
 }
@@ -62,5 +60,3 @@ const uint8_t *MIDI_Interface::getSysExBuffer() {
 size_t MIDI_Interface::getSysExLength() {
     return parser.getSysExLength();
 }
-
-#endif // ifndef NO_MIDI_INPUT

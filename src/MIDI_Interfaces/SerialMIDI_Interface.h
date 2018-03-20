@@ -9,7 +9,6 @@ class StreamMIDI_Interface : public MIDI_Interface
 public:
   StreamMIDI_Interface(Stream &stream) : MIDI_Interface(parser), stream(stream) {}
 
-#ifndef NO_MIDI_INPUT
   virtual MIDI_read_t read()
   {
     while (stream.available() > 0)
@@ -25,7 +24,6 @@ public:
     }
     return NO_MESSAGE;
   }
-#endif // #ifndef NO_MIDI_INPUT
 
 protected:
   SerialMIDI_Parser parser;

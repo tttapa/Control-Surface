@@ -1,7 +1,11 @@
-#include "DigitalLatch.h"
-#include "Control_Surface.h"
+#include "./DigitalLatch.h"
+#include "../Control_Surface.h"
 
 using namespace ExtIO;
+
+#ifdef INPUT_PULLUP
+#error
+#endif
 
 DigitalLatch::DigitalLatch(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity, unsigned long latchTime) // Constructor
 {

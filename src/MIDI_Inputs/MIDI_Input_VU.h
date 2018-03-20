@@ -1,8 +1,6 @@
 #ifndef MIDI_Input_VU_H_
 #define MIDI_Input_VU_H_
 
-#ifndef NO_MIDI_INPUT
-
 #include "MIDI_Input_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 
@@ -165,7 +163,5 @@ class MCU_VU_LED : public MCU_VU
             digitalWrite(overloadpin, getOverload(addressOffset));
     }
 };
-
-#endif // #ifndef NO_MIDI_INPUT
 
 #endif // MIDI_Input_VU_H_

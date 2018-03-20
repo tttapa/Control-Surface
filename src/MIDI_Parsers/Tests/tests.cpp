@@ -1,5 +1,7 @@
 // g++ -Wall -std=c++11 -o tests -I/home/pieter/lib/Catch2/single_include *.cpp ../*.cpp && ./tests
 
+#ifndef ARDUINO
+
 #define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this in one cpp file
 #include <catch.hpp>
 using Catch::Matchers::Equals;
@@ -315,3 +317,5 @@ TEST_CASE("Serial: SysEx ends without starting 3B", "[SYSEX_MESSAGE][Serial]")
     REQUIRE(sparser.parse(0x53) == NO_MESSAGE);
     REQUIRE(sparser.parse(0xF7) == NO_MESSAGE);
 }
+
+#endif // ifndef ARDUINO

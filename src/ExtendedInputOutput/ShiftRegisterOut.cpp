@@ -38,22 +38,22 @@ int ShiftRegisterOut::digitalRead(pin_t pin)
 
 void ShiftRegisterOut::begin()
 {
-    ExtIO::pinMode(dataPin, OUTPUT);
-    ExtIO::pinMode(clockPin, OUTPUT);
-    ExtIO::pinMode(latchPin, OUTPUT);
+    pinMode(dataPin, OUTPUT);
+    pinMode(clockPin, OUTPUT);
+    pinMode(latchPin, OUTPUT);
     reset();
 }
 
 void ShiftRegisterOut::refresh()
 {
-    ExtIO::digitalWrite(latchPin, LOW);
+    digitalWrite(latchPin, LOW);
     if (bitOrder == LSBFIRST)
         for (uint8_t i = 0; i < bufferLength; i++)
-            ExtIO::shiftOut(dataPin, clockPin, LSBFIRST, stateBuffer[i]);
+            shiftOut(dataPin, clockPin, LSBFIRST, stateBuffer[i]);
     else
         for (int8_t i = bufferLength - 1; i >= 0; i--)
-            ExtIO::shiftOut(dataPin, clockPin, MSBFIRST, stateBuffer[i]);
-    ExtIO::digitalWrite(latchPin, HIGH);
+            shiftOut(dataPin, clockPin, MSBFIRST, stateBuffer[i]);
+    digitalWrite(latchPin, HIGH);
 }
 
 void ShiftRegisterOut::reset()

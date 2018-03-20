@@ -1,7 +1,7 @@
 #ifndef EXTENDEDIOELEMENT_H_
 #define EXTENDEDIOELEMENT_H_
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "../Helpers/Linked_List.h"
 
 typedef unsigned int pin_t;

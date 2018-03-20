@@ -1,14 +1,14 @@
-#include "Arduino.h"
-#include "Analog.h"
-#include "Control_Surface.h"
+#include <Arduino.h>
+#include "./Analog.h"
+#include "../Control_Surface.h"
 
 AnalogBase::AnalogBase(pin_t analogPin) : analogPin(analogPin) {} // Constructor
 
 void AnalogBase::refresh() // read the analog value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
 {
-  unsigned int input = ExtIO::analogRead(analogPin); // read the raw analog input value
-  input = mapFn(input);                              // apply the map function to the value (identity function f(x) = x by default)
-  input = filter.filter(input);                      // apply a low-pass EMA filter
+  unsigned int input = analogRead(analogPin); // read the raw analog input value
+  input = mapFn(input);                       // apply the map function to the value (identity function f(x) = x by default)
+  input = filter.filter(input);               // apply a low-pass EMA filter
 
   send(input);
 }

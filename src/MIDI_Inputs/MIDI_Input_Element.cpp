@@ -1,5 +1,3 @@
-#ifndef NO_MIDI_INPUT
-
 #include "MIDI_Input_Element.h"
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
@@ -132,5 +130,3 @@ MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::last = n
 MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::first = nullptr;
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
-
-#endif // #ifndef NO_MIDI_INPUT
