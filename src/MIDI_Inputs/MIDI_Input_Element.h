@@ -1,7 +1,7 @@
 #ifndef MIDI_INPUT_ELEMENT_H_
 #define MIDI_INPUT_ELEMENT_H_
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "../MIDI_Element.h"
 #include "../Control_Surface/Control_Surface_Class.h"
 #include "../Helpers/Linked_List.h"
@@ -27,6 +27,13 @@ protected:
 
   const uint8_t channel, address;
   const uint8_t nb_channels, nb_addresses;
+  
+  template <class Node>
+  friend void LinkedList::append(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::moveDown(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
@@ -42,9 +49,14 @@ public:
 
 protected:
   MIDI_Input_Element_CC *next = nullptr, *previous = nullptr;
-
   static MIDI_Input_Element_CC *last;
   static MIDI_Input_Element_CC *first;
+  template <class Node>
+  friend void LinkedList::append(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::moveDown(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
@@ -60,9 +72,14 @@ public:
 
 protected:
   MIDI_Input_Element_Note *next = nullptr, *previous = nullptr;
-
   static MIDI_Input_Element_Note *last;
   static MIDI_Input_Element_Note *first;
+  template <class Node>
+  friend void LinkedList::append(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::moveDown(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
@@ -80,9 +97,14 @@ protected:
   inline bool match(uint8_t targetAddress, uint8_t targetChannel);
 
   MIDI_Input_Element_ChannelPressure *next = nullptr, *previous = nullptr;
-
   static MIDI_Input_Element_ChannelPressure *last;
   static MIDI_Input_Element_ChannelPressure *first;
+  template <class Node>
+  friend void LinkedList::append(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::moveDown(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------//

@@ -1,8 +1,8 @@
 #ifndef RotaryEncoder_h_
 #define RotaryEncoder_h_
 
-#include "Arduino.h"
-#include "Encoder.h"
+#include <Arduino.h>
+#include <Encoder.h>
 #include "./MIDI_Control_Element.h"
 
 enum relativeCCmode

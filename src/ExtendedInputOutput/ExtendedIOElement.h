@@ -13,7 +13,7 @@ public:
   ExtendedIOElement(pin_t length)
       : length(length)
   {
-    INSERT_INTO_LINKED_LIST(this, first, last);
+    LinkedList::append(this, first, last);
 
     start = offset;
     end = offset + length;
@@ -21,7 +21,7 @@ public:
   }
   ~ExtendedIOElement()
   {
-    DELETE_FROM_LINKED_LIST(this, first, last);
+    LinkedList::remove(this, first, last);
   }
 
   virtual void pinMode(pin_t pin, uint8_t mode){};
@@ -44,12 +44,17 @@ public:
 
 protected:
   pin_t length, start, end;
+  static pin_t offset;
 
   ExtendedIOElement *next = nullptr, *previous = nullptr;
-
-  static pin_t offset;
   static ExtendedIOElement *last;
   static ExtendedIOElement *first;
+  template <class Node>
+  friend void LinkedList::append(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::moveDown(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
 
 #endif // EXTENDEDIOELEMENT_H_

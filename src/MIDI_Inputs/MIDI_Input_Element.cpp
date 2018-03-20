@@ -59,11 +59,11 @@ void MIDI_Input_Element::setAddressOffset(uint8_t offset) // Set the address (no
 MIDI_Input_Element_CC::MIDI_Input_Element_CC(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels)
     : MIDI_Input_Element(address, channel, nb_addresses, nb_channels)
 {
-    INSERT_INTO_LINKED_LIST(this, first, last);
+    LinkedList::append(this, first, last);
 }
 MIDI_Input_Element_CC::~MIDI_Input_Element_CC()
 {
-    DELETE_FROM_LINKED_LIST(this, first, last);
+    LinkedList::remove(this, first, last);
 }
 
 MIDI_Input_Element_CC *MIDI_Input_Element_CC::getFirst()
@@ -83,11 +83,11 @@ MIDI_Input_Element_CC *MIDI_Input_Element_CC::first = nullptr;
 MIDI_Input_Element_Note::MIDI_Input_Element_Note(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels)
     : MIDI_Input_Element(address, channel, nb_addresses, nb_channels)
 {
-    INSERT_INTO_LINKED_LIST(this, first, last);
+    LinkedList::append(this, first, last);
 }
 MIDI_Input_Element_Note::~MIDI_Input_Element_Note()
 {
-    DELETE_FROM_LINKED_LIST(this, first, last);
+    LinkedList::remove(this, first, last);
 }
 
 MIDI_Input_Element_Note *MIDI_Input_Element_Note::getFirst()
@@ -107,11 +107,11 @@ MIDI_Input_Element_Note *MIDI_Input_Element_Note::first = nullptr;
 MIDI_Input_Element_ChannelPressure::MIDI_Input_Element_ChannelPressure(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels)
     : MIDI_Input_Element(address, channel, nb_addresses, nb_channels)
 {
-    INSERT_INTO_LINKED_LIST(this, first, last);
+    LinkedList::append(this, first, last);
 }
 MIDI_Input_Element_ChannelPressure::~MIDI_Input_Element_ChannelPressure()
 {
-    DELETE_FROM_LINKED_LIST(this, first, last);
+    LinkedList::remove(this, first, last);
 }
 
 inline bool MIDI_Input_Element_ChannelPressure::match(uint8_t targetAddress, uint8_t targetChannel)

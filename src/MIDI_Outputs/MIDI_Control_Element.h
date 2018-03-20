@@ -11,11 +11,11 @@ class MIDI_Control_Element : public MIDI_Element
 public:
   MIDI_Control_Element() // Constructor
   {
-    INSERT_INTO_LINKED_LIST(this, first, last);
+    LinkedList::append(this, first, last);
   }
   ~MIDI_Control_Element()
   {
-    DELETE_FROM_LINKED_LIST(this, first, last);
+    LinkedList::remove(this, first, last);
   }
   
   MIDI_Control_Element *getNext()
@@ -29,9 +29,14 @@ public:
 
 private:
   MIDI_Control_Element *next = nullptr, *previous = nullptr;
-
   static MIDI_Control_Element *last;
   static MIDI_Control_Element *first;
+  template <class Node>
+  friend void LinkedList::append(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::moveDown(Node *, Node *&, Node *&);
+  template <class Node>
+  friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
 
 #endif // MIDI_CONTROL_ELEMENT_h
