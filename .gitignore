@@ -1,4 +1,10 @@
+*
+!/**/
+!*.*
+
+!Makefile
 *.hex
 .vscode/*
 TODO.txt
 .~lock*
+*.o
