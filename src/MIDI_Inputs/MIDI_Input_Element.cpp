@@ -21,23 +21,13 @@ inline bool MIDI_Input_Element::match(const MIDI_message_matcher &midimsg)
 
 bool MIDI_Input_Element::matchAddress(uint8_t targetAddress)
 {
-    for (uint8_t address = this->address; address < this->address + nb_addresses * channelsPerBank; address += channelsPerBank)
-    {
-        if (address == targetAddress)
-            return true;
-    }
-    return false;
-
-    // TODO: return (targetAddress >= this->address) && (targetAddress < this->address + nb_addresses * channelsPerBank) && ((targetAddress - this->address) % channelsPerBank == 0);
+    int8_t addressDiff = targetAddress - this->address;
+    return (addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0);
 }
 bool MIDI_Input_Element::matchChannel(uint8_t targetChannel)
 {
-    for (uint8_t channel = this->channel; channel < this->channel + nb_channels * channelsPerBank; channel += channelsPerBank)
-    {
-        if (channel == targetChannel)
-            return true;
-    }
-    return false;
+    int8_t channelDiff = targetChannel - this->channel;
+    return (channelDiff >= 0) && (channelDiff < nb_channels * channelsPerBank) && (channelDiff % channelsPerBank == 0);
 }
 
 void MIDI_Input_Element::setChannelOffset(uint8_t offset) // Set the channel offset
