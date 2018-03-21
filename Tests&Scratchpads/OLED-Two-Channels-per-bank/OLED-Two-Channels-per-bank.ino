@@ -11,7 +11,7 @@
 using namespace MCU;  
 using namespace ExtIO;
 
-#define FPS
+// #define FPS
 // #define SERIAL_FPS
 
 // #define DEBUG_MIDI
@@ -74,26 +74,26 @@ MIDI_Input_Note_Buffer record(RECORD, 1, 1, 1);
 
 MIDI_Input_Note_Buffer rudeSolo(RUDE_SOLO, 1, 1, 1);
 
-MIDI_LED muteA(SR_BS.red(7), MUTE_1, 1, 8, 1);
-MIDI_LED muteB(SR_BS.red(6), MUTE_2, 1, 8, 1);
-// MIDI_Input_Note_Buffer muteA(MUTE_1, 1, 8, 1);
-// MIDI_Input_Note_Buffer muteB(MUTE_2, 1, 8, 1);
+MIDI_LED muteA(SR_BS.red(7), MUTE_1, 1, 4, 1);
+MIDI_LED muteB(SR_BS.red(6), MUTE_2, 1, 4, 1);
+// MIDI_Input_Note_Buffer muteA(MUTE_1, 1, 4, 1);
+// MIDI_Input_Note_Buffer muteB(MUTE_2, 1, 4, 1);
 
-MIDI_LED soloA(SR_BS.green(7), SOLO_1, 1, 8, 1);
-MIDI_LED soloB(SR_BS.green(6), SOLO_2, 1, 8, 1);
-// MIDI_Input_Note_Buffer soloA(SOLO_1, 1, 8, 1);
-// MIDI_Input_Note_Buffer soloB(SOLO_2, 1, 8, 1);
+MIDI_LED soloA(SR_BS.green(7), SOLO_1, 1, 4, 1);
+MIDI_LED soloB(SR_BS.green(6), SOLO_2, 1, 4, 1);
+// MIDI_Input_Note_Buffer soloA(SOLO_1, 1, 4, 1);
+// MIDI_Input_Note_Buffer soloB(SOLO_2, 1, 4, 1);
 
-MIDI_Input_Note_Buffer recrdyA(REC_RDY_1, 1, 8, 1);
-MIDI_Input_Note_Buffer recrdyB(REC_RDY_2, 1, 8, 1);
+MIDI_Input_Note_Buffer recrdyA(REC_RDY_1, 1, 4, 1);
+MIDI_Input_Note_Buffer recrdyB(REC_RDY_2, 1, 4, 1);
 
-MCU_VU vuA(1, 8, true, 150);
-MCU_VU vuB(2, 8, true, 150);
+MCU_VU vuA(1, 4, true, 150);
+MCU_VU vuB(2, 4, true, 150);
 VUPeak vuPA(vuA);
 VUPeak vuPB(vuB);
 
-MCU_VPot_Ring ringA(1, 8);
-MCU_VPot_Ring ringB(2, 8);
+MCU_VPot_Ring ringA(1, 4);
+MCU_VPot_Ring ringB(2, 4);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
