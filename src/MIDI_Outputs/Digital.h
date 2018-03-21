@@ -27,6 +27,12 @@ private:
 
   const static int8_t falling = LOW - HIGH;
   const static int8_t rising = HIGH - LOW;
+
+  void setChannelOffset(uint8_t offset);
+  void setAddressOffset(uint8_t offset);
+
+  uint8_t newAddressOffset = addressOffset;
+  uint8_t newChannelOffset = channelOffset;
 };
 
 #endif
