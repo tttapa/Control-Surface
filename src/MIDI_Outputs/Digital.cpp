@@ -56,10 +56,14 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
 
 void Digital::setChannelOffset(uint8_t offset) // Set the channel offset
 {
-    newChannelOffset = offset;
+  if (buttonState == HIGH) // Button isn't pressed
+    channelOffset = offset;
+  newChannelOffset = offset;
 }
 
 void Digital::setAddressOffset(uint8_t offset) // Set the address (note or controller number) offset
 {
-    newAddressOffset = offset;
+  if (buttonState == HIGH) // Button isn't pressed
+    addressOffset = offset;
+  newAddressOffset = offset;
 }
