@@ -11,6 +11,7 @@ bool MIDI_Input_Element::update(const MIDI_message_matcher &midimsg)
         return false;
     if (!updateImpl(midimsg))
         return false;
+    moveDown(); // Most frequently updated inputs sink to the bottom for performance improvements
     return true;
 }
 
@@ -57,9 +58,16 @@ MIDI_Input_Element_CC *MIDI_Input_Element_CC::getFirst()
 {
     return first;
 }
+MIDI_Input_Element_CC *MIDI_Input_Element_CC::getLast()
+{
+    return last;
+}
 MIDI_Input_Element_CC *MIDI_Input_Element_CC::getNext()
 {
     return next;
+}
+void MIDI_Input_Element_CC::moveDown() {
+    LinkedList::moveDown(this, first, last);
 }
 
 MIDI_Input_Element_CC *MIDI_Input_Element_CC::last = nullptr;
@@ -81,9 +89,16 @@ MIDI_Input_Element_Note *MIDI_Input_Element_Note::getFirst()
 {
     return first;
 }
+MIDI_Input_Element_Note *MIDI_Input_Element_Note::getLast()
+{
+    return last;
+}
 MIDI_Input_Element_Note *MIDI_Input_Element_Note::getNext()
 {
     return next;
+}
+void MIDI_Input_Element_Note::moveDown() {
+    LinkedList::moveDown(this, first, last);
 }
 
 MIDI_Input_Element_Note *MIDI_Input_Element_Note::last = nullptr;
@@ -110,9 +125,16 @@ MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::getFirst
 {
     return first;
 }
+MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::getLast()
+{
+    return last;
+}
 MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::getNext()
 {
     return next;
+}
+void MIDI_Input_Element_ChannelPressure::moveDown() {
+    LinkedList::moveDown(this, first, last);
 }
 
 MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::last = nullptr;

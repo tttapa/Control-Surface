@@ -27,6 +27,8 @@ protected:
 
   const uint8_t address, channel;
   const uint8_t nb_addresses, nb_channels;
+
+  virtual void moveDown() {}
   
   template <class Node>
   friend void LinkedList::append(Node *, Node *&, Node *&);
@@ -45,12 +47,16 @@ public:
   ~MIDI_Input_Element_CC();
 
   static MIDI_Input_Element_CC *getFirst();
+  static MIDI_Input_Element_CC *getLast();
   MIDI_Input_Element_CC *getNext();
 
 protected:
   MIDI_Input_Element_CC *next = nullptr, *previous = nullptr;
   static MIDI_Input_Element_CC *last;
   static MIDI_Input_Element_CC *first;
+
+  void moveDown();
+
   template <class Node>
   friend void LinkedList::append(Node *, Node *&, Node *&);
   template <class Node>
@@ -68,12 +74,16 @@ public:
   ~MIDI_Input_Element_Note();
 
   static MIDI_Input_Element_Note *getFirst();
+  static MIDI_Input_Element_Note *getLast();
   MIDI_Input_Element_Note *getNext();
 
 protected:
   MIDI_Input_Element_Note *next = nullptr, *previous = nullptr;
   static MIDI_Input_Element_Note *last;
   static MIDI_Input_Element_Note *first;
+
+  void moveDown();
+
   template <class Node>
   friend void LinkedList::append(Node *, Node *&, Node *&);
   template <class Node>
@@ -91,6 +101,7 @@ public:
   ~MIDI_Input_Element_ChannelPressure();
 
   static MIDI_Input_Element_ChannelPressure *getFirst();
+  static MIDI_Input_Element_ChannelPressure *getLast();
   MIDI_Input_Element_ChannelPressure *getNext();
 
   inline bool match(const MIDI_message_matcher &midimsg);
@@ -99,6 +110,9 @@ protected:
   MIDI_Input_Element_ChannelPressure *next = nullptr, *previous = nullptr;
   static MIDI_Input_Element_ChannelPressure *last;
   static MIDI_Input_Element_ChannelPressure *first;
+
+  void moveDown();
+  
   template <class Node>
   friend void LinkedList::append(Node *, Node *&, Node *&);
   template <class Node>
