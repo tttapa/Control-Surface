@@ -20,6 +20,12 @@ private:
   bool noteOffSent = true;
   unsigned long latchTime;
   unsigned long noteOnTime;
+
+  void setChannelOffset(uint8_t offset);
+  void setAddressOffset(uint8_t offset);
+
+  uint8_t newAddressOffset = addressOffset;
+  uint8_t newChannelOffset = channelOffset;
 };
 
 #endif
