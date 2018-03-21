@@ -5,7 +5,7 @@
 
 #define BUTTON_DEBOUNCE_TIME 25 // The debounce time for momentary push buttons
 
-#define IGNORE_SYSEX // TODO: seems to fail
+// #define IGNORE_SYSEX // TODO: seems to fail
 
 #define MIDI_BUFFER_SIZE 128
 
