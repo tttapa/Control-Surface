@@ -126,6 +126,11 @@ extern const char *endl;
 #include <iostream>
 using namespace std;
 
+#ifdef DEBUG
+#undef DEBUG
+#define DEBUG cout
+#endif
+
 #endif
 
 extern char tab;
