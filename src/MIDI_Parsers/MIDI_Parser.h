@@ -9,6 +9,8 @@
 #include <cstdlib>
 #endif
 
+#include "../Settings/Settings.h"
+
 const uint8_t NOTE_OFF = 0x80;
 const uint8_t NOTE_ON = 0x90;
 const uint8_t KEY_PRESSURE = 0xA0;
@@ -45,7 +47,7 @@ class MIDI_Parser {
     size_t getSysExLength();
 
   protected:
-    const static size_t bufferSize = 128; // max SysEx for Mackie Control Universal is 120 bytes
+    const static size_t bufferSize = SYSEX_BUFFER_SIZE; // max SysEx for Mackie Control Universal is 120 bytes
     uint8_t SysExBuffer[bufferSize];
     size_t SysExLength = 0;
     bool receivingSysEx = false;

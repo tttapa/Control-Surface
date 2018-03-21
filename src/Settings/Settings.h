@@ -10,7 +10,7 @@
 
 // #define IGNORE_SYSEX // TODO: seems to fail
 
-#define MIDI_BUFFER_SIZE 128
+#define SYSEX_BUFFER_SIZE 128
 
 
 // ---- Tests on PC ---- //

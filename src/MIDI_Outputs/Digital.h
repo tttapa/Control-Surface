@@ -23,10 +23,10 @@ private:
 
   bool invertState = false;
 
-  const unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
+  const static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
 
-  const int8_t falling = LOW - HIGH;
-  const int8_t rising = HIGH - LOW;
+  const static int8_t falling = LOW - HIGH;
+  const static int8_t rising = HIGH - LOW;
 };
 
 #endif
