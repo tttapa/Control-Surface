@@ -6,19 +6,19 @@ using namespace ExtIO;
 int AnalogMultiplex::digitalRead(pin_t pin)
 {
     setMuxAddress(pinToMuxAddress(pin));
-    return digitalRead(analogPin);
+    return ExtIO::digitalRead(analogPin);
 }
 analog_t AnalogMultiplex::analogRead(pin_t pin)
 {
     setMuxAddress(pinToMuxAddress(pin));
-    analogRead(analogPin);
-    return analogRead(analogPin);
+    ExtIO::analogRead(analogPin);
+    return ExtIO::analogRead(analogPin);
 }
 void AnalogMultiplex::begin()
 {
-    pinMode(analogPin, INPUT);
+    ExtIO::pinMode(analogPin, INPUT);
     for (uint8_t i = 0; i < nb_addressPins; i++)
-        pinMode(addressPins[i], OUTPUT);
+        ExtIO::pinMode(addressPins[i], OUTPUT);
 }
 
 uint8_t AnalogMultiplex::pinToMuxAddress(pin_t pin)
@@ -28,5 +28,5 @@ uint8_t AnalogMultiplex::pinToMuxAddress(pin_t pin)
 void AnalogMultiplex::setMuxAddress(uint8_t address)
 {
     for (uint8_t i = 0; i < nb_addressPins; i++)
-        digitalWrite(addressPins[i], address & (1 << i));
+        ExtIO::digitalWrite(addressPins[i], address & (1 << i));
 }

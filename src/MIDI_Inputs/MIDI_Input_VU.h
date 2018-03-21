@@ -3,6 +3,7 @@
 
 #include "MIDI_Input_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Helpers/StreamOut.h"
 #include <cstring>
 
 using namespace ExtIO;
@@ -49,6 +50,14 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
             ;
         else // new peak value
             setValue(index, data);
+
+#ifdef DEBUG
+        DEBUG << "address = " << this->address << endl;
+        DEBUG << "index = " << index << endl;
+        DEBUG << "targetID = " << targetID << endl;
+        DEBUG << "VU value: " << getValue(index) << endl;
+        DEBUG << "addressOffset = " << addressOffset << endl;
+#endif
 
         display();
         return true;
@@ -113,12 +122,12 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     }
     bool matchID(uint8_t targetID)
     {
-        for (uint8_t id = this->address; id < this->address + this->nb_addresses * channelsPerBank; id += channelsPerBank)
-        {
-            if (id == targetID)
-                return true;
-        }
-        return false;
+        int8_t addressDiff = targetID - this->address;
+#ifdef DEBUG
+        DEBUG << "VU meter target ID: " << targetID << endl 
+        << (((addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0)) ? "match" : "no match")<< endl;
+#endif
+        return (addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0);
     }
 };
 

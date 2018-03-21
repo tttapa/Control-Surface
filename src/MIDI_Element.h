@@ -9,6 +9,8 @@
 #include <cstdlib>
 #endif
 
+#include "./Settings/Settings.h"
+
 class MIDI_Element
 {
   public:

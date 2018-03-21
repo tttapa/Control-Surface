@@ -1,5 +1,5 @@
 
-// #define DEBUG Serial // Print debug messages to Serial.
+#define DEBUG Serial // Print debug messages to Serial.
 
 #define ANALOG_FILTER_SHIFT_FACTOR 4
 

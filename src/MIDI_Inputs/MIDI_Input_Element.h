@@ -93,7 +93,7 @@ public:
   static MIDI_Input_Element_ChannelPressure *getFirst();
   MIDI_Input_Element_ChannelPressure *getNext();
 
-  inline bool match(uint8_t targetAddress, uint8_t targetChannel);
+  inline bool match(const MIDI_message_matcher &midimsg);
 
 protected:
   MIDI_Input_Element_ChannelPressure *next = nullptr, *previous = nullptr;

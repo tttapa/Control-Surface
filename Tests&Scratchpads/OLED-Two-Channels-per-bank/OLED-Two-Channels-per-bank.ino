@@ -82,13 +82,13 @@ MIDI_Input_Note_Buffer soloB(SOLO_2, 1, 8, 1);
 MIDI_Input_Note_Buffer recrdyA(REC_RDY_1, 1, 8, 1);
 MIDI_Input_Note_Buffer recrdyB(REC_RDY_2, 1, 8, 1);
 
-MCU_VU vuA(0, 8, true, 150);
-MCU_VU vuB(1, 8, true, 150);
+MCU_VU vuA(1, 8, true, 150);
+MCU_VU vuB(2, 8, true, 150);
 VUPeak vuPA(vuA);
 VUPeak vuPB(vuB);
 
-MCU_VPot_Ring ringA(0, 8);
-MCU_VPot_Ring ringB(1, 8);
+MCU_VPot_Ring ringA(1, 8);
+MCU_VPot_Ring ringB(2, 8);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -104,8 +104,6 @@ void setup()   {
 #endif
 
   pinMode(blinkPin, OUTPUT);
-
-  /*
   
   bank.add(channelButtons, Bank::CHANGE_ADDRESS);
 
@@ -121,7 +119,7 @@ void setup()   {
   bank.add(muteB, Bank::CHANGE_ADDRESS);
   bank.add(soloB, Bank::CHANGE_ADDRESS);
   bank.add(recrdyB, Bank::CHANGE_ADDRESS);
-  */
+
   Control_Surface.begin();
 
   display.setTextColor(WHITE);

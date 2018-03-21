@@ -8,7 +8,7 @@ using namespace ExtIO;
 //  public:
 
 MCU_VPot_Ring::MCU_VPot_Ring(uint8_t address, uint8_t nb_addresses)
-    : MIDI_Input_Element_CC(address + 0x30, 1, nb_addresses, 1),
+    : MIDI_Input_Element_CC(address + 0x30 - 1, 1, nb_addresses, 1),
       address(address), nb_addresses(nb_addresses)
 {
     initBuffer();

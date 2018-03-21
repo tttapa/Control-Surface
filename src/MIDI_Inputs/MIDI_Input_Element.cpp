@@ -101,9 +101,9 @@ MIDI_Input_Element_ChannelPressure::~MIDI_Input_Element_ChannelPressure()
     LinkedList::remove(this, first, last);
 }
 
-inline bool MIDI_Input_Element_ChannelPressure::match(uint8_t targetAddress, uint8_t targetChannel)
+inline bool MIDI_Input_Element_ChannelPressure::match(const MIDI_message_matcher &midimsg)
 {
-    return matchChannel(targetChannel);
+    return matchChannel(midimsg.channel);
 }
 
 MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::getFirst()

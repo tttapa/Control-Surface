@@ -1,5 +1,7 @@
 // #include "../Control_Surface.h"
 #include "./MIDI_Input_7SegmentDisplay.h"
+#include "../Helpers/StreamOut.h"
+
 #include <cstring>
 
 using namespace ExtIO;
