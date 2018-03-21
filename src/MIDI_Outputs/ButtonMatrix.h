@@ -22,6 +22,10 @@ class ButtonMatrix : public MIDI_Control_Element
     inline uint8_t bitsToBitmask(uint8_t bits);
     bool getPrevState(uint8_t col, uint8_t row);
     void setPrevState(uint8_t col, uint8_t row, bool state);
+    bool allReleased();
+
+    void setChannelOffset(uint8_t offset);
+    void setAddressOffset(uint8_t offset);
 
     unsigned long prevRefresh = 0;
     uint8_t *prevStates = nullptr;
@@ -30,6 +34,9 @@ class ButtonMatrix : public MIDI_Control_Element
 
     const uint8_t (&addresses)[nb_rows][nb_cols];
     const uint8_t channel, velocity;
+
+    uint8_t newAddressOffset = addressOffset;
+    uint8_t newChannelOffset = channelOffset;
 };
 
 #ifdef __AVR__
