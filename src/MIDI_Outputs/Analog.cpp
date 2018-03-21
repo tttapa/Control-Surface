@@ -35,9 +35,10 @@ void AnalogPB::send(unsigned int input)
 {
   if (input != oldVal)
   {
+    oldVal = input;
+    input <<= 4; // Convert from 10 bit to 14-bit Pitch Bend data
     Control_Surface.MIDI()->send(PITCH_BEND,
                                  channel + channelOffset * channelsPerBank,
                                  input, input >> 7); // send a Pitch Bend MIDI event
-    oldVal = input;
   }
 }

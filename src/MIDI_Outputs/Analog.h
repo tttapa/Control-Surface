@@ -45,6 +45,8 @@ protected:
   uint8_t controller, channel;
 };
 
+#define AnalogHiRes _Pragma ("GCC warning \"'AnalogHiRes' is deprecated\"") AnalogPB
+
 class AnalogPB : public AnalogBase
 {
 public:
