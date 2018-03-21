@@ -1,8 +1,7 @@
 #ifndef BANK_h_
 #define BANK_h_
 
-#include "Arduino.h"
-#include "MIDI_Element.h"
+#include "../MIDI_Element.h"
 
 class Bank
 {

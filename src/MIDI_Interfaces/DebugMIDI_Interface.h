@@ -48,8 +48,6 @@ protected:
     stream.flush();
   }
 
-#ifndef NO_MIDI_INPUT
-
   virtual MIDI_read_t read()
   {
     while (stream.available() > 0)
@@ -78,7 +76,7 @@ protected:
 #endif
         firstChar = '\0';
         secondChar = '\0';
-        MIDI_read_t parseResult = parseSingleMIDIByte(midiByte);
+        MIDI_read_t parseResult = parser.parse(midiByte);
         if (parseResult != NO_MESSAGE)
           return parseResult;
       }
@@ -106,8 +104,6 @@ private:
   {
     return x == ' ' || x == '\r' || x == '\n';
   }
-
-#endif // #ifndef NO_MIDI_INPUT
 };
 
 template <typename T>

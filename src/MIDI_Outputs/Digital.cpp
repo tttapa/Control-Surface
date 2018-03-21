@@ -1,5 +1,5 @@
 #include "Digital.h"
-#include "Control_Surface.h"
+#include "../Control_Surface.h"
 
 using namespace ExtIO;
 
@@ -40,6 +40,11 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
     { // Button is released
       buttonState = state;
       Control_Surface.MIDI()->send(NOTE_OFF, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
+      if (newChannelOffset != channelOffset || newAddressOffset != addressOffset)
+      {
+        channelOffset = newChannelOffset;
+        addressOffset = newAddressOffset;
+      }
     }
   }
   if (state != prevState)
@@ -47,4 +52,18 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
     prevBounceTime = millis();
     prevState = state;
   }
+}
+
+void Digital::setChannelOffset(uint8_t offset) // Set the channel offset
+{
+  if (buttonState == HIGH) // Button isn't pressed
+    channelOffset = offset;
+  newChannelOffset = offset;
+}
+
+void Digital::setAddressOffset(uint8_t offset) // Set the address (note or controller number) offset
+{
+  if (buttonState == HIGH) // Button isn't pressed
+    addressOffset = offset;
+  newAddressOffset = offset;
 }

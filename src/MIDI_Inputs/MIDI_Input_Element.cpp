@@ -1,45 +1,39 @@
-#ifndef NO_MIDI_INPUT
-
 #include "MIDI_Input_Element.h"
+#include "../Helpers/StreamOut.h"
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
 
 MIDI_Input_Element::MIDI_Input_Element(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels)
     : address(address), channel(channel - 1), nb_addresses(nb_addresses), nb_channels(nb_channels) {}
 
-bool MIDI_Input_Element::update(uint8_t targetChannel, uint8_t targetAddress)
+bool MIDI_Input_Element::update(const MIDI_message_matcher &midimsg)
 {
-    if (!match(targetAddress, targetChannel))
+    if (!match(midimsg))
         return false;
-    if (!updateImpl(Control_Surface.MIDI()->ChannelMessage))
+    if (!updateImpl(midimsg))
         return false;
+#ifdef DEBUG
+    DEBUG << "Match: \r\n\taddress = " << hex << this->address << 
+    "\r\n\tchannel = " << this->channel << dec << endl;
+#endif
+    moveDown(); // Most frequently updated inputs sink to the bottom for performance improvements
     return true;
 }
 
-inline bool MIDI_Input_Element::match(uint8_t targetAddress, uint8_t targetChannel)
+inline bool MIDI_Input_Element::match(const MIDI_message_matcher &midimsg)
 {
-    return matchAddress(targetAddress) && matchChannel(targetChannel);
+    return matchAddress(midimsg.data1) && matchChannel(midimsg.channel);
 }
 
 bool MIDI_Input_Element::matchAddress(uint8_t targetAddress)
 {
-    for (uint8_t address = this->address; address < this->address + nb_addresses * channelsPerBank; address += channelsPerBank)
-    {
-        if (address == targetAddress)
-            return true;
-    }
-    return false;
-
-    // TODO: return (targetAddress >= this->address) && (targetAddress < this->address + nb_addresses * channelsPerBank) && ((targetAddress - this->address) % channelsPerBank == 0);
+    int8_t addressDiff = targetAddress - this->address;
+    return (addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0);
 }
 bool MIDI_Input_Element::matchChannel(uint8_t targetChannel)
 {
-    for (uint8_t channel = this->channel; channel < this->channel + nb_channels * channelsPerBank; channel += channelsPerBank)
-    {
-        if (channel == targetChannel)
-            return true;
-    }
-    return false;
+    int8_t channelDiff = targetChannel - this->channel;
+    return (channelDiff >= 0) && (channelDiff < nb_channels * channelsPerBank) && (channelDiff % channelsPerBank == 0);
 }
 
 void MIDI_Input_Element::setChannelOffset(uint8_t offset) // Set the channel offset
@@ -58,20 +52,27 @@ void MIDI_Input_Element::setAddressOffset(uint8_t offset) // Set the address (no
 MIDI_Input_Element_CC::MIDI_Input_Element_CC(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels)
     : MIDI_Input_Element(address, channel, nb_addresses, nb_channels)
 {
-    INSERT_INTO_LINKED_LIST(this, first, last);
+    LinkedList::append(this, first, last);
 }
 MIDI_Input_Element_CC::~MIDI_Input_Element_CC()
 {
-    DELETE_FROM_LINKED_LIST(this, first, last);
+    LinkedList::remove(this, first, last);
 }
 
 MIDI_Input_Element_CC *MIDI_Input_Element_CC::getFirst()
 {
     return first;
 }
+MIDI_Input_Element_CC *MIDI_Input_Element_CC::getLast()
+{
+    return last;
+}
 MIDI_Input_Element_CC *MIDI_Input_Element_CC::getNext()
 {
     return next;
+}
+void MIDI_Input_Element_CC::moveDown() {
+    LinkedList::moveDown(this, first, last);
 }
 
 MIDI_Input_Element_CC *MIDI_Input_Element_CC::last = nullptr;
@@ -82,20 +83,27 @@ MIDI_Input_Element_CC *MIDI_Input_Element_CC::first = nullptr;
 MIDI_Input_Element_Note::MIDI_Input_Element_Note(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels)
     : MIDI_Input_Element(address, channel, nb_addresses, nb_channels)
 {
-    INSERT_INTO_LINKED_LIST(this, first, last);
+    LinkedList::append(this, first, last);
 }
 MIDI_Input_Element_Note::~MIDI_Input_Element_Note()
 {
-    DELETE_FROM_LINKED_LIST(this, first, last);
+    LinkedList::remove(this, first, last);
 }
 
 MIDI_Input_Element_Note *MIDI_Input_Element_Note::getFirst()
 {
     return first;
 }
+MIDI_Input_Element_Note *MIDI_Input_Element_Note::getLast()
+{
+    return last;
+}
 MIDI_Input_Element_Note *MIDI_Input_Element_Note::getNext()
 {
     return next;
+}
+void MIDI_Input_Element_Note::moveDown() {
+    LinkedList::moveDown(this, first, last);
 }
 
 MIDI_Input_Element_Note *MIDI_Input_Element_Note::last = nullptr;
@@ -106,30 +114,35 @@ MIDI_Input_Element_Note *MIDI_Input_Element_Note::first = nullptr;
 MIDI_Input_Element_ChannelPressure::MIDI_Input_Element_ChannelPressure(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels)
     : MIDI_Input_Element(address, channel, nb_addresses, nb_channels)
 {
-    INSERT_INTO_LINKED_LIST(this, first, last);
+    LinkedList::append(this, first, last);
 }
 MIDI_Input_Element_ChannelPressure::~MIDI_Input_Element_ChannelPressure()
 {
-    DELETE_FROM_LINKED_LIST(this, first, last);
+    LinkedList::remove(this, first, last);
 }
 
-inline bool MIDI_Input_Element_ChannelPressure::match(uint8_t targetAddress, uint8_t targetChannel)
+inline bool MIDI_Input_Element_ChannelPressure::match(const MIDI_message_matcher &midimsg)
 {
-    return matchChannel(targetChannel);
+    return matchChannel(midimsg.channel);
 }
 
 MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::getFirst()
 {
     return first;
 }
+MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::getLast()
+{
+    return last;
+}
 MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::getNext()
 {
     return next;
+}
+void MIDI_Input_Element_ChannelPressure::moveDown() {
+    LinkedList::moveDown(this, first, last);
 }
 
 MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::last = nullptr;
 MIDI_Input_Element_ChannelPressure *MIDI_Input_Element_ChannelPressure::first = nullptr;
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
-
-#endif // #ifndef NO_MIDI_INPUT

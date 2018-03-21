@@ -1,15 +1,15 @@
 #ifndef DIGLAT_h_
 #define DIGLAT_h_
 
-#include "Arduino.h"
+// #include <Arduino.h>
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 
 class DigitalLatch : public MIDI_Control_Element
 {
 public:
-  DigitalLatch(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity, unsigned long latchTime); // Constructor
-  ~DigitalLatch();                                                                                     // Destructor
+  DigitalLatch(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity = 0x7F, unsigned long latchTime = 100); // Constructor
+  ~DigitalLatch();                                                                                                // Destructor
 
 private:
   void refresh(); // Check if the button state changed, if so, send a MIDI Note On, after a non-blocking delay of "latchTime", send a Note Off
@@ -20,6 +20,12 @@ private:
   bool noteOffSent = true;
   unsigned long latchTime;
   unsigned long noteOnTime;
+
+  void setChannelOffset(uint8_t offset);
+  void setAddressOffset(uint8_t offset);
+
+  uint8_t newAddressOffset = addressOffset;
+  uint8_t newChannelOffset = channelOffset;
 };
 
 #endif

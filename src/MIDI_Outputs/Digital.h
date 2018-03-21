@@ -1,7 +1,7 @@
 #ifndef DIG_h_
 #define DIG_h_
 
-#include "Arduino.h"
+// #include <Arduino.h>
 #include "./MIDI_Control_Element.h"
 #include "../Settings/Settings.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
@@ -23,10 +23,16 @@ private:
 
   bool invertState = false;
 
-  const unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
+  const static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
 
-  const int8_t falling = LOW - HIGH;
-  const int8_t rising = HIGH - LOW;
+  const static int8_t falling = LOW - HIGH;
+  const static int8_t rising = HIGH - LOW;
+
+  void setChannelOffset(uint8_t offset);
+  void setAddressOffset(uint8_t offset);
+
+  uint8_t newAddressOffset = addressOffset;
+  uint8_t newChannelOffset = channelOffset;
 };
 
 #endif

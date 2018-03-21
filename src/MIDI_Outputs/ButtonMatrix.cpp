@@ -3,6 +3,7 @@
 
 #include "./ButtonMatrix.h"
 #include "../Control_Surface/Control_Surface_Class.h"
+#include <string.h>
 
 // public:
 template <size_t nb_rows, size_t nb_cols>
@@ -14,7 +15,7 @@ ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const pin_t (&rowPins)[nb_rows], co
     init();
     // note: this copies the data of rowPins and colPins, regardless of whether it's static or temporary.
     // This means that using global const arrays to initialize ButtonMatrix is slightly less memory efficient than using brace-enclosed initializer lists.
-    // There are ways around this, but it's not really pretty: 
+    // There are ways around this, but it's not really pretty:
     // https://stackoverflow.com/questions/46382034/template-class-with-variable-array-size-initialize-with-array-reference-or-brac
 }
 
@@ -42,9 +43,14 @@ void ButtonMatrix<nb_rows, nb_cols>::refresh()
             if (state != getPrevState(col, row))    // if the state changed since last time
             {
                 // send it over MIDI
-                uint8_t note = addresses[col][row];
+                uint8_t note = addresses[row][col];
                 Control_Surface.MIDI()->send(state ? NOTE_OFF : NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
                 setPrevState(col, row, state); // remember the state
+                if (state == HIGH && (newChannelOffset != channelOffset || newAddressOffset != addressOffset) && allReleased())
+                {
+                    channelOffset = newChannelOffset;
+                    addressOffset = newAddressOffset;
+                }
             }
         }
         pinMode(rowPins[row], INPUT); // make the current row Hi-Z again
@@ -100,6 +106,33 @@ void ButtonMatrix<nb_rows, nb_cols>::setPrevState(uint8_t col, uint8_t row, bool
         prevStates[bitsToIndex(bits)] |= bitsToBitmask(bits);
     else
         prevStates[bitsToIndex(bits)] &= ~bitsToBitmask(bits);
+}
+
+template <size_t nb_rows, size_t nb_cols>
+bool ButtonMatrix<nb_rows, nb_cols>::allReleased()
+{
+    size_t nb_bytes = (nb_cols * nb_rows + 7) / 8;
+    for (size_t i = 0; i < nb_bytes; i++)
+    {
+        if (prevStates[i] != 0xFF)
+            return false;
+    }
+    return true;
+}
+
+template <size_t nb_rows, size_t nb_cols>
+void ButtonMatrix<nb_rows, nb_cols>::setChannelOffset(uint8_t offset) // Set the channel offset
+{
+    if (allReleased())
+        channelOffset = offset;
+    newChannelOffset = offset;
+}
+template <size_t nb_rows, size_t nb_cols>
+void ButtonMatrix<nb_rows, nb_cols>::setAddressOffset(uint8_t offset) // Set the address (note or controller number) offset
+{
+    if (allReleased())
+        addressOffset = offset;
+    newAddressOffset = offset;
 }
 
 #endif // BUTTONMATRIX_CPP_

@@ -1,7 +1,7 @@
 #ifndef Control_Surface_H
 #define Control_Surface_H
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 #if defined(CORE_TEENSY) && !(defined(USB_MIDI_AUDIO_SERIAL) || defined(USB_MIDI_SERIAL))
 #error Please select a 'Serial + MIDI' option in the 'Tools > USB Type' menu.
@@ -14,19 +14,16 @@
 #include "./MIDI_Element.h"
 
 #include "./MIDI_Outputs/Analog.h"
-#include "./MIDI_Outputs/AnalogHiRes.h"
 #include "./MIDI_Outputs/ButtonMatrix.h"
 #include "./MIDI_Outputs/Digital.h"
 #include "./MIDI_Outputs/DigitalLatch.h"
 #include "./MIDI_Outputs/RotaryEncoder.h"
 
-#ifndef NO_MIDI_INPUT
 #include "./MIDI_Inputs/MIDI_Input_Element.h"
 #include "./MIDI_Inputs/MIDI_Input_LED.h"
 #include "./MIDI_Inputs/MIDI_Input_V-Pot_Ring.h"
 #include "./MIDI_Inputs/MIDI_Input_VU.h"
 #include "./MIDI_Inputs/MIDI_Input_7SegmentDisplay.h"
-#endif
 
 #include "./Banks/Bank.h"
 #include "./Banks/BankSelector.h"

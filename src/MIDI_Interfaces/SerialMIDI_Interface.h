@@ -2,13 +2,13 @@
 #define SERIALMIDI_INTERFACE_H_
 
 #include "MIDI_Interface.h"
+#include "../MIDI_Parsers/SerialMIDI_Parser.h"
 
 class StreamMIDI_Interface : public MIDI_Interface
 {
 public:
-  StreamMIDI_Interface(Stream &stream) : stream(stream) {}
+  StreamMIDI_Interface(Stream &stream) : MIDI_Interface(parser), stream(stream) {}
 
-#ifndef NO_MIDI_INPUT
   virtual MIDI_read_t read()
   {
     while (stream.available() > 0)
@@ -18,15 +18,16 @@ public:
       Serial.print("New byte:\t");
       Serial.println(midiByte, HEX);
 #endif
-      MIDI_read_t parseResult = parseSingleMIDIByte(midiByte);
+      MIDI_read_t parseResult = parser.parse(midiByte);
       if (parseResult != NO_MESSAGE)
         return parseResult;
     }
     return NO_MESSAGE;
   }
-#endif // #ifndef NO_MIDI_INPUT
 
 protected:
+  SerialMIDI_Parser parser;
+
   virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2)
   {
     stream.write(m | c); // Send the MIDI message over the stream
@@ -44,111 +45,6 @@ protected:
 protected:
   Stream &stream;
 
-#ifndef NO_MIDI_INPUT
-
-  bool thirdByte = false;
-
-  MIDI_read_t parseSingleMIDIByte(uint8_t midiByte)
-  {
-    if (midiByte & (1 << 7)) // If it's a header byte (first byte)
-    {
-      if ((midiByte & 0xF8) == 0xF8) // If it's a Real-Time message (not implemented)
-      {
-        ; // Handle Real-Time stuff
-#ifdef DEBUG
-        Serial.println("Real-Time");
-#endif
-      }
-      else // Normal header
-      {
-#ifndef IGNORE_SYSEX
-        if (midimsg.header == SysExStart) // if we're currently receiving a SysEx message
-        {
-#ifdef DEBUG
-          Serial.println("SysExEnd");
-#endif
-          midimsg.header = SysExEnd;
-          if (addSysExByte(SysExEnd)) // add SysExEnd byte to buffer
-            return SYSEX_MESSAGE;
-        }
-#endif
-#ifdef DEBUG
-        Serial.println("Header");
-#endif
-        midimsg.header = midiByte;
-        thirdByte = false;
-
-#ifndef IGNORE_SYSEX
-        if (midimsg.header == SysExStart) // if the first byte of a SysEx message
-        {
-#ifdef DEBUG
-          Serial.println("SysExStart");
-#endif
-          startSysEx();
-        }
-#endif // IGNORE_SYSEX
-      }
-    }
-    else // If it's a data byte
-    {
-      if (midimsg.header == 0)
-      {
-#ifdef DEBUG
-        Serial.println("Error: No header");
-#endif
-        ; // Ignore
-      }
-      else if (thirdByte) // third byte of three
-      {
-#ifdef DEBUG
-        Serial.println("Second data byte");
-#endif
-        midimsg.data2 = midiByte;
-#ifdef DEBUG
-        Serial.println("Message finished");
-#endif
-        thirdByte = false;
-        return CHANNEL_MESSAGE;
-      }
-      else // second byte or SysEx data
-      {
-        if (midimsg.header < 0xC0 || midimsg.header == 0xE0) // Note, Aftertouch, CC or Pitch Bend
-        {
-#ifdef DEBUG
-          Serial.println("First data byte (of two)");
-#endif
-          midimsg.data1 = midiByte;
-          thirdByte = true;
-        }
-        else if (midimsg.header < 0xE0) // Program Change or Channel Pressure
-        {
-#ifdef DEBUG
-          Serial.println("First data byte");
-#endif
-          midimsg.data1 = midiByte;
-          return CHANNEL_MESSAGE;
-        }
-#ifndef IGNORE_SYSEX
-        else if (midimsg.header == SysExStart) // SysEx data byte
-        {
-#ifdef DEBUG
-          Serial.println("SysEx data byte");
-#endif
-          addSysExByte(midiByte);
-        }
-#endif // IGNORE_SYSEX
-#ifdef DEBUG
-        else
-        {
-          Serial.println("Data byte ignored");
-        }
-#endif
-      }
-    }
-    return NO_MESSAGE;
-  }
-
-#endif // #ifndef NO_MIDI_INPUT
 };
 
 template <typename T>
@@ -204,6 +100,7 @@ public:
 // Class for Hairless MIDI
 class HairlessMIDI_Interface : public USBSerialMIDI_Interface
 {
+public:
   HairlessMIDI_Interface() : USBSerialMIDI_Interface(HAIRLESS_BAUD){};
 };
 

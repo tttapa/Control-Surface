@@ -3,7 +3,7 @@
 #include "MIDI_Interface.h"
 #include "../Helpers/StreamOut.h"
 
-MIDI_Interface::MIDI_Interface() // Constructor (make this the default MIDI interface)
+MIDI_Interface::MIDI_Interface(MIDI_Parser &parser) : parser(parser)// Constructor (make this the default MIDI interface)
 {
     setDefault();
 }
@@ -47,40 +47,16 @@ void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1)
     sendImpl(m, c, d1);
 }
 
-    //----------------------------------------ADDING-TO-SYSEX-BUFFER------------------------------------------//
+    //----------------------------------------PARSER------------------------------------------//
 
-#ifndef NO_MIDI_INPUT
-
-void MIDI_Interface::startSysEx() // start adding a new SysEx message to the buffer
-{
-    SysExLength = 0; // if the previous message wasn't finished, overwrite it
-#ifdef DEBUG
-    DEBUG << "SysExLength = 0" << endl;
-#endif
+MIDI_message MIDI_Interface::getChannelMessage() {
+    return parser.getChannelMessage();
 }
 
-bool MIDI_Interface::addSysExByte(uint8_t data) // add a byte to the current SysEx message
-{
-    if (!hasSpaceLeft()) // if the buffer is full
-        return false;
-    SysExBuffer[SysExLength] = data; // add the data to the buffer
-    SysExLength++;
-#ifdef DEBUG
-    DEBUG << "SysEx data byte: " << hex << data << dec << tab << "SysExLength = " << SysExLength << endl; // BUG: data is not printed as hex
-#endif
-    return true;
+const uint8_t *MIDI_Interface::getSysExBuffer() {
+    return parser.getSysExBuffer();
 }
 
-bool MIDI_Interface::hasSpaceLeft() // check if the buffer has at least 1 byte of free space available
-{
-#ifdef DEBUG
-    bool avail = SysExLength < bufferSize;
-    if (!avail)
-        Serial.println("Buffer full");
-    return avail;
-#else
-    return SysExLength < bufferSize;
-#endif
+size_t MIDI_Interface::getSysExLength() {
+    return parser.getSysExLength();
 }
-
-#endif // ifndef NO_MIDI_INPUT

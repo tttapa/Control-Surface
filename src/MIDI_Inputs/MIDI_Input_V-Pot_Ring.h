@@ -1,7 +1,9 @@
 #ifndef MCU_VPOT_RING_H_
 #define MCU_VPOT_RING_H_
 
-#include "Arduino.h"
+#include "MIDI_Input_Element.h"
+#include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Helpers/StreamOut.h"
 
 class MCU_VPot_Ring : public MIDI_Input_Element_CC
 {
@@ -9,7 +11,7 @@ class MCU_VPot_Ring : public MIDI_Input_Element_CC
     MCU_VPot_Ring(uint8_t address, uint8_t nb_addresses);
     ~MCU_VPot_Ring();
 
-    bool updateImpl(MIDI_message *midimsg);
+    bool updateImpl(const MIDI_message_matcher &midimsg);
 
     uint8_t getPosition();
     uint8_t getCenterLED();

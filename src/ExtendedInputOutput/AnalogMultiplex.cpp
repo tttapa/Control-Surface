@@ -1,5 +1,6 @@
 #include "AnalogMultiplex.h"
 #include "ExtendedInputOutput.h"
+
 using namespace ExtIO;
 
 int AnalogMultiplex::digitalRead(pin_t pin)

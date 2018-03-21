@@ -1,7 +1,7 @@
 #include "Control_Surface_Class.h"
-#include "./MIDI_Outputs/MIDI_Control_Element.h"
-#include "./MIDI_Inputs/MIDI_Input_Element.h"
-#include "./Banks/BankSelector.h"
+#include "../MIDI_Outputs/MIDI_Control_Element.h"
+#include "../MIDI_Inputs/MIDI_Input_Element.h"
+#include "../Banks/BankSelector.h"
 #include "../Helpers/StreamOut.h"
 
 // public:
@@ -37,12 +37,8 @@ void Control_Surface_::refresh()
     refreshControls();      // refresh all control elements (Analog, AnalogHiRes, Digital, DigitalLatch, RotaryEncoder)
     refreshBankSelectors(); // refresh all bank selectors
 
-#ifdef NO_MIDI_INPUT
-    MIDI()->ignoreInput();
-#else
     updateMidiInput();
     refreshInputs();
-#endif
 }
 
 MIDI_Interface *Control_Surface_::MIDI()
@@ -64,75 +60,97 @@ void Control_Surface_::refreshBankSelectors()
         element->refresh();
 }
 
-#ifndef NO_MIDI_INPUT
-
 void Control_Surface_::updateMidiInput()
 {
+#ifdef DEBUG
+//DEBUG << "updateMidiInput()" << endl;
+#endif
     MIDI_read_t midiReadResult = midi->read();
-
-    if (midiReadResult == CHANNEL_MESSAGE)
+    while (midiReadResult != NO_MESSAGE)
     {
-        uint8_t header = midi->ChannelMessage->header;
-        uint8_t messageType = header & 0xF0;
-        uint8_t channel = header & 0x0F;
-        uint8_t data1 = midi->ChannelMessage->data1;
-        uint8_t data2 = midi->ChannelMessage->data2;
+#ifdef DEBUG
+        if (midiReadResult != NO_MESSAGE)
+            DEBUG << "after midi->read()" << endl
+                  << "Result: " << midiReadResult << endl;
+        DEBUG.flush();
+#endif
 
-        if (messageType == CC && data1 == 0x79) // Reset All Controllers
+        // return; // TODO
+
+        if (midiReadResult == CHANNEL_MESSAGE)
         {
 #ifdef DEBUG
-            Serial.println("Reset All Controllers");
+            DEBUG << "MIDI Channel message received" << endl;
 #endif
-            for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
-                element->reset();
-            for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
-                element->reset();
-        }
-        else if (messageType == CC && data1 == 0x7B) // All Notes off
-        {
+            MIDI_message_matcher midimsg(midi->getChannelMessage());
+
+            if (midimsg.type == CC && midimsg.data1 == 0x79) // Reset All Controllers
+            {
 #ifdef DEBUG
-            DEBUG << "All Notes Off" << endl;
+                DEBUG << "Reset All Controllers" << endl;
 #endif
-            for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
-                element->reset();
-        }
-        else
-        {
-#ifdef DEBUG
-            DEBUG << "New midi message:\t" << hex << header << ' ' << data1  << ' ' << data2 << dec << endl;
-#endif
-            if (messageType == CC) // Control Change
                 for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
-                {
-                    if (element->update(channel, data1))
-                        break;
-                }
-            else if (messageType == NOTE_OFF || messageType == NOTE_ON) // Note
-                for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
-                {
-                    if (element->update(channel, data1))
-                        break;
-                }
-            else if (messageType == CHANNEL_PRESSURE) // Channel Pressure
+                    element->reset();
                 for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
-                {
-                    if (element->update(channel, data1))
-                        break;
-                }
-        }
-    }
-    else if (midiReadResult == SYSEX_MESSAGE) // System Exclusive
-    {
+                    element->reset();
+            }
+            else if (midimsg.type == CC && midimsg.data1 == 0x7B) // All Notes off
+            {
 #ifdef DEBUG
-        DEBUG << "System Exclusive:" << tab;
-        uint8_t data;
-        size_t index = 0;
-        do {
-            data = midi->SysEx[index++];
-            DEBUG << hex << data << ' ' << dec;
-        } while (data != SysExEnd);
-        DEBUG << endl;
+                DEBUG << "All Notes Off" << endl;
 #endif
+                for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
+                    element->reset();
+            }
+            else
+            {
+#ifdef DEBUG
+                DEBUG << "New midi message:\t" << hex << midimsg.type << ' ' << midimsg.channel << ' ' << midimsg.data1 << ' ' << midimsg.data2 << dec << endl;
+#endif
+                if (midimsg.type == CC) // Control Change
+                    for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
+                    {
+#ifdef DEBUG
+                        DEBUG << "updating CC elements" << endl;
+#endif
+                        if (element->update(midimsg))
+                            break;
+                    }
+                else if (midimsg.type == NOTE_OFF || midimsg.type == NOTE_ON) // Note
+                    for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
+                    {
+#ifdef DEBUG
+                        DEBUG << "updating note elements" << endl;
+#endif
+
+                        if (element->update(midimsg))
+                            break;
+                    }
+                else if (midimsg.type == CHANNEL_PRESSURE) // Channel Pressure
+                    for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
+                    {
+#ifdef DEBUG
+                        DEBUG << "updating channel pressure elements" << endl;
+#endif
+                        if (element->update(midimsg))
+                            break;
+                    }
+            }
+        }
+        else if (midiReadResult == SYSEX_MESSAGE) // System Exclusive
+        {
+#ifdef DEBUG
+            DEBUG << "System Exclusive:" << tab;
+            const uint8_t *data = midi->getSysExBuffer();
+            size_t len = midi->getSysExLength();
+            for (size_t i = 0; i < len; i++)
+            {
+                DEBUG << hex << data[i] << ' ' << dec;
+            }
+            DEBUG << endl;
+#endif
+        }
+        midiReadResult = midi->read();
     }
 }
 void Control_Surface_::refreshInputs()
@@ -144,6 +162,5 @@ void Control_Surface_::refreshInputs()
     for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
 }
-#endif // ifndef NO_MIDI_INPUT
 
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();

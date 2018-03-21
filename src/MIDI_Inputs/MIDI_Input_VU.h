@@ -1,10 +1,10 @@
 #ifndef MIDI_Input_VU_H_
 #define MIDI_Input_VU_H_
 
-#ifndef NO_MIDI_INPUT
-
 #include "MIDI_Input_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Helpers/StreamOut.h"
+#include <string.h>
 
 using namespace ExtIO;
 
@@ -32,16 +32,16 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         display();
     }
 
-    bool updateImpl(MIDI_message *midimsg)
+    bool updateImpl(const MIDI_message_matcher &midimsg)
     {
-        uint8_t targetID = midimsg->data1 >> 4;
+        uint8_t targetID = midimsg.data1 >> 4;
 
         if (!matchID(targetID))
             return false;
 
         uint8_t index = (targetID - this->address) / channelsPerBank;
 
-        uint8_t data = midimsg->data1 & 0xF;
+        uint8_t data = midimsg.data1 & 0xF;
         if (data == 0xF) // clear overload
             clearOverload(index);
         else if (data == 0xE) // set overload
@@ -50,6 +50,14 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
             ;
         else // new peak value
             setValue(index, data);
+
+#ifdef DEBUG
+        DEBUG << "address = " << this->address << endl;
+        DEBUG << "index = " << index << endl;
+        DEBUG << "targetID = " << targetID << endl;
+        DEBUG << "VU value: " << getValue(index) << endl;
+        DEBUG << "addressOffset = " << addressOffset << endl;
+#endif
 
         display();
         return true;
@@ -114,12 +122,12 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     }
     bool matchID(uint8_t targetID)
     {
-        for (uint8_t id = this->address; id < this->address + this->nb_addresses * channelsPerBank; id += channelsPerBank)
-        {
-            if (id == targetID)
-                return true;
-        }
-        return false;
+        int8_t addressDiff = targetID - this->address;
+#ifdef DEBUG
+        DEBUG << "VU meter target ID: " << targetID << endl 
+        << (((addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0)) ? "match" : "no match")<< endl;
+#endif
+        return (addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0);
     }
 };
 
@@ -165,7 +173,5 @@ class MCU_VU_LED : public MCU_VU
             digitalWrite(overloadpin, getOverload(addressOffset));
     }
 };
-
-#endif // #ifndef NO_MIDI_INPUT
 
 #endif // MIDI_Input_VU_H_

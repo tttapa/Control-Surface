@@ -8,17 +8,22 @@
 
 #include <Control_Surface.h>
 
-using namespace MCU;
+using namespace MCU;  
 using namespace ExtIO;
 
 // #define FPS
+// #define SERIAL_FPS
 
-#define DEBUG_MIDI
+// #define DEBUG_MIDI
 // #define SERIAL_MIDI
 
 const uint8_t clockPin = 10;
 const uint8_t latchPin = 11;
 const uint8_t dataPin = 12;
+
+const uint8_t blinkPin = LED_BUILTIN;
+
+const unsigned long blinkInterval = 500;
 
 const uint8_t VPOT = 0x10;
 
@@ -36,7 +41,7 @@ ShiftRegisterOut SR_BS(dataPin, clockPin, latchPin, LSBFIRST, 24);
 ShiftRegisterOut SR(dataPin, clockPin, 16, LSBFIRST, 8);
 
 Bank bank(2); // two channels per bank
-
+  
 BankSelector bs(bank, { 6, 5 }, {
   SR_BS.blue(0),
   SR_BS.blue(1),
@@ -69,22 +74,26 @@ MIDI_Input_Note_Buffer record(RECORD, 1, 1, 1);
 
 MIDI_Input_Note_Buffer rudeSolo(RUDE_SOLO, 1, 1, 1);
 
-MIDI_Input_Note_Buffer muteA(MUTE_1, 1, 8, 1);
-MIDI_Input_Note_Buffer muteB(MUTE_2, 1, 8, 1);
+MIDI_LED muteA(SR_BS.red(7), MUTE_1, 1, 4, 1);
+MIDI_LED muteB(SR_BS.red(6), MUTE_2, 1, 4, 1);
+// MIDI_Input_Note_Buffer muteA(MUTE_1, 1, 4, 1);
+// MIDI_Input_Note_Buffer muteB(MUTE_2, 1, 4, 1);
 
-MIDI_Input_Note_Buffer soloA(SOLO_1, 1, 8, 1);
-MIDI_Input_Note_Buffer soloB(SOLO_2, 1, 8, 1);
+MIDI_LED soloA(SR_BS.green(7), SOLO_1, 1, 4, 1);
+MIDI_LED soloB(SR_BS.green(6), SOLO_2, 1, 4, 1);
+// MIDI_Input_Note_Buffer soloA(SOLO_1, 1, 4, 1);
+// MIDI_Input_Note_Buffer soloB(SOLO_2, 1, 4, 1);
 
-MIDI_Input_Note_Buffer recrdyA(REC_RDY_1, 1, 8, 1);
-MIDI_Input_Note_Buffer recrdyB(REC_RDY_2, 1, 8, 1);
+MIDI_LED recrdyA(SR_BS.red(5), REC_RDY_1, 1, 4, 1);
+MIDI_LED recrdyB(SR_BS.red(4), REC_RDY_2, 1, 4, 1);
 
-MCU_VU vuA(0, 8, true, 150);
-MCU_VU vuB(1, 8, true, 150);
+MCU_VU vuA(1, 4, true, 150);
+MCU_VU vuB(2, 4, true, 150);
 VUPeak vuPA(vuA);
 VUPeak vuPB(vuB);
 
-MCU_VPot_Ring ringA(0, 8);
-MCU_VPot_Ring ringB(1, 8);
+MCU_VPot_Ring ringA(1, 4);
+MCU_VPot_Ring ringB(2, 4);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -98,6 +107,9 @@ void setup()   {
   while (!Serial);
   delay(500);
 #endif
+
+  pinMode(blinkPin, OUTPUT);
+  
   bank.add(channelButtons, Bank::CHANGE_ADDRESS);
 
   bank.add(encoder, Bank::CHANGE_ADDRESS);
@@ -119,6 +131,13 @@ void setup()   {
 }
 
 void loop() {
+  static unsigned long previousBlink = millis();
+
+  if (millis() - previousBlink >= blinkInterval) {
+    digitalWrite(blinkPin, !digitalRead(blinkPin));
+    previousBlink += blinkInterval;
+  }
+  
   static unsigned long start = 0;
   unsigned int loopTime = millis() - start;
   start = millis();
@@ -175,12 +194,18 @@ void loop() {
 
 #ifdef FPS
   display.setTextSize(1);
-  display.setCursor(5, 64 - 8);
+  display.setCursor(10, 64 - 8);
   display.print(1000 / loopTime);
+#endif
+#ifdef SERIAL_FPS
+    Serial.println(1000 / loopTime);
+    Serial.flush();
 #endif
 
 
   display.display();
   Control_Surface.refresh();
+
+//  delay(100);
 }
 

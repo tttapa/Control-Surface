@@ -57,6 +57,10 @@ void digitalWrite(int pin, uint8_t val)
 {
     digitalWrite((pin_t)pin, val);
 }
+// void digitalWrite(pin_t pin, bool val)
+// {
+//     digitalWrite(pin, (uint8_t) val);
+// }
 int digitalRead(pin_t pin)
 {
 #ifdef DEBUG_READ
