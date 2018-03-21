@@ -5,7 +5,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)
 {
 #ifdef DEBUG
   DEBUG << "MIDIUSB packet:\t" << hex
-        << (int)packet[0] << ' ' << (int)packet[1] << ' ' << (int)packet[2] << ' ' << (int)packet[3] << dec << endl;
+        << packet[0] << ' ' << packet[1] << ' ' << packet[2] << ' ' << packet[3] << dec << endl;
 #endif
 
   uint8_t CIN = (uint8_t)packet[0] << 4; // MIDI USB cable index number

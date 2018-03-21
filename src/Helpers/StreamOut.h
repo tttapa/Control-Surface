@@ -18,8 +18,8 @@ enum StreamOut_leadingZeros_t
     leadingZeros = 1,
 };
 
-static StreamOut_format_t streamOutFormat = dec;
-static StreamOut_leadingZeros_t streamOutLeadingZeros = noLeadingZeros;
+extern StreamOut_format_t streamOutFormat;
+extern StreamOut_leadingZeros_t streamOutLeadingZeros;
 inline Print &operator<<(Print &printer, StreamOut_format_t format)
 {
     streamOutFormat = format;
@@ -31,25 +31,33 @@ inline Print &operator<<(Print &printer, StreamOut_leadingZeros_t zeros)
     return printer;
 }
 template <class T>
-inline Print &operator<<(Print &printer, T printable)
+inline Print &operator<<(Print &printer, const T printable)
 {
-    if (is_integral_type<T>())
+    if (is_integral_type<T>())  {
         printInt(printer, printable);
-    else
+        // printer.print("<int:");
+        // printer.print(streamOutFormat);
+        // printer.print("> ");
+    }
+    else 
+    {
         print(printer, printable);
+        // printer.print("<non-int> ");
+    }
+
     return printer;
 }
 
 // For all types except integral types:
 template <typename T>
-void print(Print &printer, T printable)
+void print(Print &printer, const T printable)
 {
     printer.print(printable);
 }
 
 // For integral types only:
 template <class T>
-void printInt(Print &printer, T printable)
+void printInt(Print &printer, const T printable)
 {
     switch (streamOutFormat)
     {
