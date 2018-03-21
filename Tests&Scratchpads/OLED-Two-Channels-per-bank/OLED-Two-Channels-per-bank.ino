@@ -12,6 +12,7 @@ using namespace MCU;
 using namespace ExtIO;
 
 #define FPS
+// #define SERIAL_FPS
 
 // #define DEBUG_MIDI
 // #define SERIAL_MIDI
@@ -73,11 +74,15 @@ MIDI_Input_Note_Buffer record(RECORD, 1, 1, 1);
 
 MIDI_Input_Note_Buffer rudeSolo(RUDE_SOLO, 1, 1, 1);
 
-MIDI_Input_Note_Buffer muteA(MUTE_1, 1, 8, 1);
-MIDI_Input_Note_Buffer muteB(MUTE_2, 1, 8, 1);
+MIDI_LED muteA(SR_BS.red(7), MUTE_1, 1, 8, 1);
+MIDI_LED muteB(SR_BS.red(6), MUTE_2, 1, 8, 1);
+// MIDI_Input_Note_Buffer muteA(MUTE_1, 1, 8, 1);
+// MIDI_Input_Note_Buffer muteB(MUTE_2, 1, 8, 1);
 
-MIDI_Input_Note_Buffer soloA(SOLO_1, 1, 8, 1);
-MIDI_Input_Note_Buffer soloB(SOLO_2, 1, 8, 1);
+MIDI_LED soloA(SR_BS.green(7), SOLO_1, 1, 8, 1);
+MIDI_LED soloB(SR_BS.green(6), SOLO_2, 1, 8, 1);
+// MIDI_Input_Note_Buffer soloA(SOLO_1, 1, 8, 1);
+// MIDI_Input_Note_Buffer soloB(SOLO_2, 1, 8, 1);
 
 MIDI_Input_Note_Buffer recrdyA(REC_RDY_1, 1, 8, 1);
 MIDI_Input_Note_Buffer recrdyB(REC_RDY_2, 1, 8, 1);
@@ -191,6 +196,10 @@ void loop() {
   display.setTextSize(1);
   display.setCursor(10, 64 - 8);
   display.print(1000 / loopTime);
+#endif
+#ifdef SERIAL_FPS
+    Serial.println(1000 / loopTime);
+    Serial.flush();
 #endif
 
 
