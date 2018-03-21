@@ -2,7 +2,7 @@
 #include "./MIDI_Input_7SegmentDisplay.h"
 #include "../Helpers/StreamOut.h"
 
-#include <cstring>
+#include <string.h>
 
 using namespace ExtIO;
 

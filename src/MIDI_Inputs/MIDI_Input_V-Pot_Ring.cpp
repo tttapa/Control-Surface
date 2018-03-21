@@ -1,7 +1,7 @@
 // #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 // #include "./MIDI_message_matcher.h"
 #include "./MIDI_Input_V-Pot_Ring.h"
-#include <cstring>
+#include <string.h>
 
 using namespace ExtIO;
 

@@ -4,7 +4,7 @@
 #include "MIDI_Input_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 #include "../Helpers/StreamOut.h"
-#include <cstring>
+#include <string.h>
 
 using namespace ExtIO;
 

@@ -1,7 +1,7 @@
 #ifndef ANALOG_FILTER_H_
 #define ANALOG_FILTER_H_
 
-#include <cstdint>
+#include <Arduino.h>
 
 template <uint8_t shiftFac>
 class AnalogFilter
