@@ -4,6 +4,7 @@ tests=($(find -type d -name Tests))
 for test in "${tests[@]}"
 do
     # test=$( dirname "$test")
+    echo
     echo "Building and running tests from $test"
-    make -C "$test"
+    make --silent -C "$test"
 done
