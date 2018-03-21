@@ -1,7 +1,6 @@
 #include <Control_Surface.h>
 
 const uint8_t velocity = 0b1111111;
-const uint8_t C4 = 60;
 
 Digital button1(2, MCU::MUTE_1, 1, velocity);
 Digital button2(3, MCU::MUTE_2, 1, velocity);
