@@ -4,7 +4,7 @@
 using namespace ExtIO;
 
 #ifdef INPUT_PULLUP
-#error
+#error // Should be a constant, not a macro
 #endif
 
 DigitalLatch::DigitalLatch(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity, unsigned long latchTime) // Constructor
@@ -55,10 +55,14 @@ void DigitalLatch::refresh() // Check if the button state changed, if so, send a
 
 void DigitalLatch::setChannelOffset(uint8_t offset) // Set the channel offset
 {
+  if (noteOffSent)
+    channelOffset = offset;
   newChannelOffset = offset;
 }
 
 void DigitalLatch::setAddressOffset(uint8_t offset) // Set the address (note or controller number) offset
 {
+  if (noteOffSent)
+    addressOffset = offset;
   newAddressOffset = offset;
 }

@@ -9,7 +9,7 @@ template <size_t nb_rows, size_t nb_cols>
 class ButtonMatrix : public MIDI_Control_Element
 {
   public:
-    ButtonMatrix(const pin_t (&rowPins)[nb_rows], const pin_t (&colPins)[nb_cols], const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel, uint8_t velocity = 127);
+    ButtonMatrix(const pin_t (&rowPins)[nb_rows], const pin_t (&colPins)[nb_cols], const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel, uint8_t velocity = 0x7F);
     ~ButtonMatrix();
 
   private:

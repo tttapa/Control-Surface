@@ -43,17 +43,17 @@ void ButtonMatrix<nb_rows, nb_cols>::refresh()
             if (state != getPrevState(col, row))    // if the state changed since last time
             {
                 // send it over MIDI
-                uint8_t note = addresses[col][row];
+                uint8_t note = addresses[row][col];
                 Control_Surface.MIDI()->send(state ? NOTE_OFF : NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
                 setPrevState(col, row, state); // remember the state
+                if (state == HIGH && (newChannelOffset != channelOffset || newAddressOffset != addressOffset) && allReleased())
+                {
+                    channelOffset = newChannelOffset;
+                    addressOffset = newAddressOffset;
+                }
             }
         }
         pinMode(rowPins[row], INPUT); // make the current row Hi-Z again
-    }
-    if ((newChannelOffset != channelOffset || newAddressOffset != addressOffset) && allReleased())
-    {
-        channelOffset = newChannelOffset;
-        addressOffset = newAddressOffset;
     }
 }
 
@@ -123,11 +123,15 @@ bool ButtonMatrix<nb_rows, nb_cols>::allReleased()
 template <size_t nb_rows, size_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::setChannelOffset(uint8_t offset) // Set the channel offset
 {
+    if (allReleased())
+        channelOffset = offset;
     newChannelOffset = offset;
 }
 template <size_t nb_rows, size_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::setAddressOffset(uint8_t offset) // Set the address (note or controller number) offset
 {
+    if (allReleased())
+        addressOffset = offset;
     newAddressOffset = offset;
 }
 
