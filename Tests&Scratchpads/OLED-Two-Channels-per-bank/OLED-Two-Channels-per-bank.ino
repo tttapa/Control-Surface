@@ -84,8 +84,8 @@ MIDI_LED soloB(SR_BS.green(6), SOLO_2, 1, 4, 1);
 // MIDI_Input_Note_Buffer soloA(SOLO_1, 1, 4, 1);
 // MIDI_Input_Note_Buffer soloB(SOLO_2, 1, 4, 1);
 
-MIDI_Input_Note_Buffer recrdyA(REC_RDY_1, 1, 4, 1);
-MIDI_Input_Note_Buffer recrdyB(REC_RDY_2, 1, 4, 1);
+MIDI_LED recrdyA(SR_BS.red(5), REC_RDY_1, 1, 4, 1);
+MIDI_LED recrdyB(SR_BS.red(4), REC_RDY_2, 1, 4, 1);
 
 MCU_VU vuA(1, 4, true, 150);
 MCU_VU vuB(2, 4, true, 150);
