@@ -9,8 +9,6 @@
 #include <cstdlib>
 #endif
 
-#include "../Settings/Settings.h"
-
 const uint8_t NOTE_OFF = 0x80;
 const uint8_t NOTE_ON = 0x90;
 const uint8_t KEY_PRESSURE = 0xA0;
