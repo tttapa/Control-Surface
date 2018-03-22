@@ -1,6 +1,9 @@
 *
 !/**/
 !*.*
+doc/Doxygen/*
+
+!doc/Doxygen/Doxyfile
 
 !Makefile
 *.hex
