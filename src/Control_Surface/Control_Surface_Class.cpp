@@ -1,7 +1,7 @@
 #include "Control_Surface_Class.h"
 #include "../MIDI_Outputs/MIDI_Control_Element.h"
 #include "../MIDI_Inputs/MIDI_Input_Element.h"
-#include "../Banks/Selector.h"
+#include "../Banks/BankSelector.h"
 #include "../Helpers/StreamOut.h"
 
 // public:
@@ -34,7 +34,7 @@ void Control_Surface_::refresh()
     if (midi == nullptr)
         begin(); // make sure that midi != nullptr
 
-    refreshControls();      // refresh all control elements (Analog, AnalogHiRes, Digital, DigitalLatch, RotaryEncoder)
+    refreshControls();  // refresh all control elements
     refreshSelectors(); // refresh all bank selectors
 
     updateMidiInput();

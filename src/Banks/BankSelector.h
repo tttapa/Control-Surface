@@ -2,7 +2,7 @@
 #define BANKSELECTOR_H_
 
 #include "./Bank.h"
-#include "./Selector.h"
+#include "../Selectors/Selector.h"
 
 class BankSelector : public Selector
 {  
