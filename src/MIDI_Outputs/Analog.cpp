@@ -1,13 +1,16 @@
-// #include <Arduino.h>
 #include "./Analog.h"
-#include "../Control_Surface.h"
+#include "../Control_Surface/Control_Surface_Class.h"
+
+// AnalogBase
+// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
 
 AnalogBase::AnalogBase(pin_t analogPin) : analogPin(analogPin) {} // Constructor
 
 void AnalogBase::refresh() // read the analog value, update the average, map it to a MIDI value, check if it changed since last time, if so, send Control Change message over MIDI
 {
   unsigned int input = analogRead(analogPin); // read the raw analog input value
-  input = mapFn(input);                       // apply the map function to the value (identity function f(x) = x by default)
+  if (mapFn != nullptr)                       // if a map function is specified
+    input = mapFn(input);                     // apply the map function to the value
   input = filter.filter(input);               // apply a low-pass EMA filter
 
   send(input);
@@ -17,6 +20,9 @@ void AnalogBase::map(int (*fn)(int)) // change the function pointer for analogMa
 {
   mapFn = fn;
 }
+
+// AnalogCC
+// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
 
 void AnalogCC::send(unsigned int input)
 {
@@ -30,6 +36,9 @@ void AnalogCC::send(unsigned int input)
     oldVal = value;
   }
 }
+
+// AnalogPB
+// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
 
 void AnalogPB::send(unsigned int input)
 {

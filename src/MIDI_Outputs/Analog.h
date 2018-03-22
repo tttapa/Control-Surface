@@ -7,6 +7,13 @@
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 
+/**
+ * A pure virtual class for MIDI_Control_Element%s that read from an analog input.
+ * 
+ * The analog input value is filtered using an exponential moving average filter. The settings for this filter can be changed in Settings.h.
+ * A map function can be applied to the analog value (e.g. to compensate for logarithmic taper potentiometers or to calibrate the range).
+ * No specific function for sending the value as a MIDI message is implemented. Classes that inherit from this class should implement the send function.
+ */
 class AnalogBase : public MIDI_Control_Element
 {
 public:
@@ -18,12 +25,7 @@ private:
 
   pin_t analogPin;
   uint8_t controllerNumber, channel;
-  int (*mapFn)(int) = identity; // function pointer to identity function f(x) → x
-
-  static int identity(int x) // identity function f(x) → x
-  {
-    return x;
-  }
+  int (*mapFn)(int) = nullptr;
   AnalogFilter<ANALOG_FILTER_SHIFT_FACTOR> filter;
 
 protected:
