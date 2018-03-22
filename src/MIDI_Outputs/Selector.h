@@ -14,7 +14,9 @@ class SelectorPC : public Selector
         init(addresses);
     }
     // initializer_lists are not supported with variadic templates, so overload them manually
-    SelectorPC(std::initializer_list<uint8_t> addresses, std::initializer_list<pin_t> switchPins, std::initializer_list<pin_t> ledPins) : Selector(switchPins, ledPins), nb_addresses(addresses.size()) {}
+    SelectorPC(std::initializer_list<uint8_t> addresses, std::initializer_list<pin_t> switchPins, std::initializer_list<pin_t> ledPins) : Selector(switchPins, ledPins), nb_addresses(addresses.size()) {
+        static_assert(addresses.size() == ledPins.size(), "Error");
+    }
     // SelectorPC(Bank &bank, std::initializer_list<pin_t> switchPins) : Selector(switchPins), bank(bank) {}
     // SelectorPC(Bank &bank, std::initializer_list<pin_t> switchPins, pin_t nb_settings) : Selector(switchPins, nb_settings), bank(bank) {}
 

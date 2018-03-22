@@ -15,7 +15,7 @@ void Selector::refresh()
     case SINGLE_SWITCH:
     case SINGLE_SWITCH_LED:
     {
-        newSetting = (uint8_t)(!digitalRead(switchPin));
+        newSetting = (uint8_t)(!digitalRead(dbButton1.pin));
     }
     break;
 
@@ -75,10 +75,11 @@ uint8_t Selector::getSetting()
 void Selector::setSetting(uint8_t newSetting)
 {
     refreshLEDs(newSetting);
-    this->Setting = newSetting;
+    Setting = newSetting;
+    refreshImpl(Setting);
 }
 
-#ifdef DEBUG
+// #ifdef DEBUG
 const char *Selector::getMode()
 {
     if (mode == SINGLE_BUTTON)
@@ -103,7 +104,7 @@ const char *Selector::getMode()
         return "INCREMENT_LEDS";
     return "";
 }
-#endif
+// #endif
 
 void Selector::refreshLEDs(uint8_t newSetting)
 {
