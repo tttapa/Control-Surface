@@ -5,10 +5,35 @@
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h" // for pin_t
 
+/**
+ * @brief A MIDI_Control_Element that reads the states of a button matrix and sends it over MIDI as a series of Note events.
+ * 
+ * @tparam  nb_rows 
+ *          The number of rows in the button matrix.
+ * @tparam  nb_cols 
+ *          The number of columns in the button matrix.
+ */
 template <size_t nb_rows, size_t nb_cols>
 class ButtonMatrix : public MIDI_Control_Element
 {
   public:
+    /**
+     * @brief Construct a new ButtonMatrix object.
+     * 
+     * @param rowPins
+     *        A list of pin numbers connected to the rows of the button matrix.
+     * @param colPins
+     *        A list of pin numbers connected to the columns of the button matrix.
+     * @param addresses
+     *        A matrix containing the address for each button.
+     * @param channel 
+     *        The MIDI channel [1, 16].
+     * @param velocity 
+     *        The velocity of the MIDI Note events [1, 127].
+     * 
+     * @note The lists of pins are copied.  
+     * The list of addresses is not copied. It should be a reference to a 2-dimensional array.
+     */
     ButtonMatrix(const pin_t (&rowPins)[nb_rows], const pin_t (&colPins)[nb_cols], const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel, uint8_t velocity = 0x7F);
     ~ButtonMatrix();
 
