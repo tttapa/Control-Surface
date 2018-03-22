@@ -66,6 +66,11 @@ void Selector::refresh()
         Setting = newSetting;
         refreshImpl(Setting);
     }
+    else if (firstRefresh)
+    {
+        refreshImpl(Setting);
+        firstRefresh = false;
+    }
 }
 
 uint8_t Selector::getSetting()

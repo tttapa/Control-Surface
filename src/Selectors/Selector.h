@@ -151,6 +151,7 @@ public:
   */
 
   Selector(pin_t switchPin, buttonType buttonType = MOMENTARY) // One switch or button, no LEDs
+      : nb_settings(2)
   {
     dbButton1.pin = switchPin;
     if (buttonType == TOGGLE)
@@ -162,7 +163,7 @@ public:
   }
 
   Selector(pin_t switchPin, pin_t ledPin, buttonType buttonType = MOMENTARY) // One switch or button, one LED
-      : ledPin(ledPin)
+      : ledPin(ledPin), nb_settings(2)
   {
     dbButton1.pin = switchPin;
     if (buttonType == TOGGLE)
@@ -224,7 +225,7 @@ public:
   Selector(const pin_t (&switchPins)[N], pin_t nb_settings) // Two buttons (+1, -1), no LEDs
       : nb_settings(nb_settings)
   {
-    static_assert(N <= 2, "Error: maximum number of buttons in the increment/decrement configuration is 2. "); 
+    static_assert(N <= 2, "Error: maximum number of buttons in the increment/decrement configuration is 2. ");
     if (N == 1)
     {
       dbButton1.pin = switchPins[0];
@@ -276,12 +277,14 @@ public:
 
 protected:
   uint8_t Setting = 0;
+  uint8_t nb_settings;
   virtual void refreshImpl(uint8_t newSetting) {}
 
 private:
   pin_t switchPin, ledPin;
   pin_t *switchPins, *ledPins;
-  uint8_t nb_settings;
+
+  bool firstRefresh = true;
 
   unsigned long prevBounceTime = 0;
 
