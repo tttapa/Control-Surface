@@ -34,6 +34,7 @@ public:
 
   int digitalRead(pin_t pin);
   analog_t analogRead(pin_t pin);
+  void pinMode(pin_t, uint8_t mode);
   void begin();
 
 private:
