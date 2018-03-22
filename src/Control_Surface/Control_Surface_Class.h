@@ -21,7 +21,7 @@ private:
   MIDI_Interface *new_midi = nullptr;
   MIDI_Interface *midi = nullptr;
   void refreshControls();
-  void refreshBankSelectors();
+  void refreshSelectors();
   void updateMidiInput();
   void refreshInputs();
 };
