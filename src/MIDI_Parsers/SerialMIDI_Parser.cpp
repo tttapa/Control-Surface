@@ -9,7 +9,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
     {
       ; // Handle Real-Time stuff
 #ifdef DEBUG
-      DEBUG << "Real-Time" << endl;
+      DEBUG_OUT << "Real-Time" << endl;
 #endif
     }
     else // Normal header
@@ -18,7 +18,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
       if (midimsg.header == SysExStart) // if we're currently receiving a SysEx message
       {
 #ifdef DEBUG
-        DEBUG << "SysExEnd" << endl;
+        DEBUG_OUT << "SysExEnd" << endl;
 #endif
         midimsg.header = SysExEnd;
         if (addSysExByte(SysExEnd)) // add SysExEnd byte to buffer
@@ -26,7 +26,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
       }
 #endif
 #ifdef DEBUG
-      DEBUG << "Header" << endl;
+      DEBUG_OUT << "Header" << endl;
 #endif
       midimsg.header = midiByte;
       thirdByte = false;
@@ -35,7 +35,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
       if (midimsg.header == SysExStart) // if the first byte of a SysEx message
       {
 #ifdef DEBUG
-        DEBUG << "SysExStart" << endl;
+        DEBUG_OUT << "SysExStart" << endl;
 #endif
         startSysEx();
         addSysExByte(SysExStart);
@@ -48,18 +48,18 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
     if (midimsg.header == 0)
     {
 #ifdef DEBUG
-      DEBUG << "Error: No header" << endl;
+      DEBUG_OUT << "Error: No header" << endl;
 #endif
       ; // Ignore
     }
     else if (thirdByte) // third byte of three
     {
 #ifdef DEBUG
-      DEBUG << "Second data byte" << endl;
+      DEBUG_OUT << "Second data byte" << endl;
 #endif
       midimsg.data2 = midiByte;
 #ifdef DEBUG
-      DEBUG << "Message finished" << endl;
+      DEBUG_OUT << "Message finished" << endl;
 #endif
       thirdByte = false;
       return CHANNEL_MESSAGE;
@@ -69,7 +69,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
       if (midimsg.header < 0xC0 || midimsg.header == 0xE0) // Note, Aftertouch, CC or Pitch Bend
       {
 #ifdef DEBUG
-        DEBUG << "First data byte (of two)" << endl;
+        DEBUG_OUT << "First data byte (of two)" << endl;
 #endif
         midimsg.data1 = midiByte;
         thirdByte = true;
@@ -77,7 +77,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
       else if (midimsg.header < 0xE0) // Program Change or Channel Pressure
       {
 #ifdef DEBUG
-        DEBUG << "First data byte" << endl;
+        DEBUG_OUT << "First data byte" << endl;
 #endif
         midimsg.data1 = midiByte;
         return CHANNEL_MESSAGE;
@@ -86,7 +86,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
       else if (midimsg.header == SysExStart) // SysEx data byte
       {
 #ifdef DEBUG
-        DEBUG << "SysEx data byte" << endl;
+        DEBUG_OUT << "SysEx data byte" << endl;
 #endif
         addSysExByte(midiByte);
       }
@@ -94,7 +94,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
 #ifdef DEBUG
       else
       {
-        DEBUG << "Data byte ignored" << endl;
+        DEBUG_OUT << "Data byte ignored" << endl;
       }
 #endif
     }

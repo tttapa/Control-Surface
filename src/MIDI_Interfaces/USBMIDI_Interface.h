@@ -46,7 +46,7 @@ class USBMIDI_Interface : public MIDI_Interface
         while (1)
         {
 #ifdef DEBUG
-            // DEBUG << "while (1) USB" << endl;
+            // DEBUG_OUT << "while (1) USB" << endl;
 #endif
             if (rx_packet == nullptr) // If there's no previous packet
             {
@@ -55,7 +55,7 @@ class USBMIDI_Interface : public MIDI_Interface
                 rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer
                 if (rx_packet == nullptr) {            // If there's no new packet, return
 #ifdef DEBUG
-                    // DEBUG << "No USB packets" << endl;
+                    // DEBUG_OUT << "No USB packets" << endl;
 #endif
                     return NO_MESSAGE;
                 }
@@ -64,7 +64,7 @@ class USBMIDI_Interface : public MIDI_Interface
                     usb_free(rx_packet); // Free the packet
                     rx_packet = nullptr; // Read new packet next time around
 #ifdef DEBUG
-                    DEBUG << "rx_packet->len < 4" << endl;
+                    DEBUG_OUT << "rx_packet->len < 4" << endl;
 #endif
                     return NO_MESSAGE;
                 }
@@ -75,13 +75,13 @@ class USBMIDI_Interface : public MIDI_Interface
             uint8_t *data = rx_packet->buf + index; // A pointer to this packet
 
 #ifdef DEBUG
-            DEBUG << "Parsing ..." << endl;
+            DEBUG_OUT << "Parsing ..." << endl;
 #endif
 
             MIDI_read_t parseResult = parser.parse(data);
 
 #ifdef DEBUG
-            DEBUG << "parseResult = " << parseResult << endl;
+            DEBUG_OUT << "parseResult = " << parseResult << endl;
 #endif
 
             index += 4;
@@ -94,13 +94,13 @@ class USBMIDI_Interface : public MIDI_Interface
                 usb_free(rx_packet);                  // Free the packet
                 rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read the next packet
 #ifdef DEBUG
-                DEBUG << "Free USB packet" << endl;
+                DEBUG_OUT << "Free USB packet" << endl;
 #endif
             }
             if (parseResult != NO_MESSAGE)
                 return parseResult;
 #ifdef DEBUG
-            DEBUG << "loop USB MIDI" << endl;
+            DEBUG_OUT << "loop USB MIDI" << endl;
 #endif
         }
 

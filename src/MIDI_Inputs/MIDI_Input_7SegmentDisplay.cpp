@@ -29,7 +29,7 @@ bool MCU_7SegmentDisplay::updateImpl(const MIDI_message_matcher &midimsg)
     data2 &= 0x3F;
     char character = data2 >= 0x20 ? data2 : data2 + 0x40;
 #ifdef DEBUG
-    DEBUG << "\tCharacter: " << charIndex << tab << character << (decimalPt ? '.' : ' ') << endl;
+    DEBUG_OUT << "\tCharacter: " << charIndex << tab << character << (decimalPt ? '.' : ' ') << endl;
 #endif
     textBuffer[charIndex] = character;
     print();
@@ -54,7 +54,7 @@ void MCU_TimeDisplay::print() // TODO: add support for 5-digit bar counts
     getBars(barStr);
     getBeats(beatStr);
     getFrames(frameStr);
-    DEBUG << "Bar: " << barStr << "\tBeat: " << beatStr << "\tFrame: " << frameStr << endl;
+    DEBUG_OUT << "Bar: " << barStr << "\tBeat: " << beatStr << "\tFrame: " << frameStr << endl;
 #endif
 }
 void MCU_TimeDisplay::getText(char *buff)
@@ -112,7 +112,7 @@ void MCU_AssignmentDisplay::print()
 #ifdef DEBUG
     char str[3];
     getText(str);
-    DEBUG << "Assignment: " << str << endl;
+    DEBUG_OUT << "Assignment: " << str << endl;
 #endif
 }
 

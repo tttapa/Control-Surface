@@ -110,7 +110,7 @@ void MCU_VPot_Ring_LED::display()
     }
     uint8_t value = getPosition() - 1;
 #ifdef DEBUG
-    DEBUG << "Display: " << value << endl;
+    DEBUG_OUT << "Display: " << value << endl;
 #endif
     switch (getMode())
     {

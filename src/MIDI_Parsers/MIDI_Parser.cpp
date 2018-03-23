@@ -7,7 +7,7 @@ void MIDI_Parser::startSysEx() // start adding a new SysEx message to the buffer
   SysExLength = 0; // if the previous message wasn't finished, overwrite it
   receivingSysEx = true;
 #ifdef DEBUG
-  DEBUG << "Start SysEx" << endl
+  DEBUG_OUT << "Start SysEx" << endl
         << "SysExLength = 0" << endl;
 #endif
 }
@@ -16,7 +16,7 @@ void MIDI_Parser::endSysEx() // stop receiving SysEx message
 {
   receivingSysEx = false;
 #ifdef DEBUG
-  DEBUG << "End SysEx" << endl;
+  DEBUG_OUT << "End SysEx" << endl;
 #endif
 }
 
@@ -27,7 +27,7 @@ bool MIDI_Parser::addSysExByte(uint8_t data) // add a byte to the current SysEx 
   SysExBuffer[SysExLength] = data; // add the data to the buffer
   SysExLength++;
 #ifdef DEBUG
-  DEBUG << "SysEx data byte: " << hex << data << dec << tab << "SysExLength = " << SysExLength << endl; // TODO: BUG: data is not printed as hex
+  DEBUG_OUT << "SysEx data byte: " << hex << data << dec << tab << "SysExLength = " << SysExLength << endl; // TODO: BUG: data is not printed as hex
 #endif
   return true;
 }
@@ -37,7 +37,7 @@ bool MIDI_Parser::hasSpaceLeft() // check if the buffer has at least 1 byte of f
 #ifdef DEBUG
   bool avail = SysExLength < bufferSize;
   if (!avail)
-    DEBUG << "Buffer full" << endl;
+    DEBUG_OUT << "Buffer full" << endl;
   return avail;
 #else
   return SysExLength < bufferSize;

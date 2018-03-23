@@ -13,7 +13,7 @@ bool MIDI_Input_Element::update(const MIDI_message_matcher &midimsg)
     if (!updateImpl(midimsg))
         return false;
 #ifdef DEBUG
-    DEBUG << "Match: " << endl
+    DEBUG_OUT << "Match: " << endl
           << tab << "address = " << hex << this->address << endl
           << tab << "channel = " << this->channel << dec << endl;
 #endif

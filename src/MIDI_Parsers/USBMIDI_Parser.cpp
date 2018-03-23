@@ -5,7 +5,7 @@
 MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)
 {
 #ifdef DEBUG
-  DEBUG << "MIDIUSB packet:\t" << hex
+  DEBUG_OUT << "MIDIUSB packet:\t" << hex
         << packet[0] << ' ' << packet[1] << ' ' << packet[2] << ' ' << packet[3] << dec << endl;
 #endif
 
@@ -30,7 +30,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)
     else if (!receivingSysEx) // If we haven't received a SysExStart
     {
 #ifdef DEBUG
-      DEBUG << "Error: No SysExStart received" << endl;
+      DEBUG_OUT << "Error: No SysExStart received" << endl;
 #endif
       return NO_MESSAGE; // ignore the data
     }
@@ -49,7 +49,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)
     else if (!receivingSysEx) // If we haven't received a SysExStart
     {
 #ifdef DEBUG
-      DEBUG << "Error: No SysExStart received" << endl;
+      DEBUG_OUT << "Error: No SysExStart received" << endl;
 #endif
       return NO_MESSAGE; // ignore the data
     }
@@ -69,7 +69,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)
     else if (!receivingSysEx) // If we haven't received a SysExStart
     {
 #ifdef DEBUG
-      DEBUG << "Error: No SysExStart received" << endl;
+      DEBUG_OUT << "Error: No SysExStart received" << endl;
 #endif
       return NO_MESSAGE; // ignore the data
     }
@@ -90,7 +90,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)
     else if (!receivingSysEx) // If we haven't received a SysExStart
     {
 #ifdef DEBUG
-      DEBUG << "Error: No SysExStart received" << endl;
+      DEBUG_OUT << "Error: No SysExStart received" << endl;
 #endif
       return NO_MESSAGE; // ignore the data
     }

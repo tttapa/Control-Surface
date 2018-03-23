@@ -9,10 +9,6 @@
 
 #include "./Control_Surface/Control_Surface_Class.h"
 
-#include "./Settings/Settings.h"
-
-#include "./MIDI_Element.h"
-
 #include "./MIDI_Outputs/Analog.h"
 #include "./MIDI_Outputs/ButtonMatrix.h"
 #include "./MIDI_Outputs/Digital.h"
@@ -28,7 +24,8 @@
 #include "./Banks/Bank.h"
 #include "./Banks/BankSelector.h"
 
-// #include "./MIDI_Interfaces/MIDI_Interface.h"
+#include "./Selectors/SelectorPC.h"
+
 #include "./MIDI_Interfaces/USBMIDI_Interface.h"
 #include "./MIDI_Interfaces/SerialMIDI_Interface.h"
 #include "./MIDI_Interfaces/DebugMIDI_Interface.h"

@@ -8,10 +8,10 @@
 
 #include <Control_Surface.h>
 
-using namespace MCU;  
+using namespace MCU;
 using namespace ExtIO;
 
-// #define FPS
+#define FPS
 // #define SERIAL_FPS
 
 // #define DEBUG_MIDI
@@ -87,8 +87,8 @@ MIDI_LED soloB(SR_BS.green(6), SOLO_2, 1, 4, 1);
 MIDI_LED recrdyA(SR_BS.red(5), REC_RDY_1, 1, 4, 1);
 MIDI_LED recrdyB(SR_BS.red(4), REC_RDY_2, 1, 4, 1);
 
-MCU_VU vuA(1, 4, true, 150);
-MCU_VU vuB(2, 4, true, 150);
+MCU_VU vuA(1, 4, false, 150);
+MCU_VU vuB(2, 4, false, 150);
 VUPeak vuPA(vuA);
 VUPeak vuPB(vuB);
 
@@ -158,9 +158,9 @@ void loop() {
 
   display.setTextSize(2);
   display.setCursor(0 , 50);
-  display.print(bs.getBankSetting() * 2 + 1);
+  display.print(bs.getSetting() * 2 + 1);
   display.setCursor(64, 50);
-  display.print(bs.getBankSetting() * 2 + 2);
+  display.print(bs.getSetting() * 2 + 2);
 
 
   drawGoodCircle(display,                       16     , 16 + 10, 14);

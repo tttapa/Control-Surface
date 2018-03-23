@@ -4,6 +4,7 @@
 #include "MIDI_Input_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 #include "../Helpers/StreamOut.h"
+#include "../Helpers/Copy.hpp"
 #include <string.h>
 
 using namespace ExtIO;
@@ -52,12 +53,13 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
             setValue(index, data);
 
 #ifdef DEBUG
-        DEBUG << "address = " << this->address << endl;
-        DEBUG << "index = " << index << endl;
-        DEBUG << "targetID = " << targetID << endl;
-        DEBUG << "VU value: " << getValue(index) << endl;
-        DEBUG << "addressOffset = " << addressOffset << endl;
+        DEBUG_OUT << "address = " << this->address << endl;
+        DEBUG_OUT << "index = " << index << endl;
+        DEBUG_OUT << "targetID = " << targetID << endl;
+        DEBUG_OUT << "VU value: " << getValue(index) << endl;
+        DEBUG_OUT << "addressOffset = " << addressOffset << endl;
 #endif
+        DEBUG_OUT << "<< " << hex << (midimsg.channel | midimsg.type) << ' ' << midimsg.data1 << dec << tab << millis() << endl;
 
         display();
         return true;
@@ -124,8 +126,8 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     {
         int8_t addressDiff = targetID - this->address;
 #ifdef DEBUG
-        DEBUG << "VU meter target ID: " << targetID << endl 
-        << (((addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0)) ? "match" : "no match")<< endl;
+        DEBUG_OUT << "VU meter target ID: " << targetID << endl
+              << (((addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0)) ? "match" : "no match") << endl;
 #endif
         return (addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0);
     }
@@ -136,15 +138,17 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
 class MCU_VU_LED : public MCU_VU
 {
   public:
-    MCU_VU_LED(pin_t start, uint8_t length, uint8_t address, uint8_t nb_addresses, bool decay = true)
-        : MCU_VU(address, nb_addresses, decay), start(start), overloadpin(0), length(length < 12 ? length : 12),
-          overload(false)
+    template <size_t N>
+    MCU_VU_LED(const pin_t (&LEDs)[N], uint8_t address, uint8_t nb_addresses, bool decay = true)
+        : MCU_VU(address, nb_addresses, decay), overloadpin(0), length(N), overload(false)
     {
+        static_assert(N <= 12, "Error: the maximum number of LEDs in the VU meter is 12. ");
+        this->LEDs = new pin_t[length];
+        copy(this->LEDs, LEDs);
         for (pin_t pin = 0; pin < length; pin++)
-        {
-            pinMode(start + pin, OUTPUT);
-        }
+            ExtIO::pinMode(LEDs[pin], OUTPUT);
     }
+    /*
     MCU_VU_LED(pin_t start, uint8_t length, pin_t overloadpin, uint8_t address, uint8_t nb_addresses, bool decay = true)
         : MCU_VU(address, nb_addresses, decay), start(start), length(length < 12 ? length : 12),
           overloadpin(overloadpin), overload(true)
@@ -155,10 +159,16 @@ class MCU_VU_LED : public MCU_VU
         }
         pinMode(overloadpin, OUTPUT);
     }
+    */
+    ~MCU_VU_LED()
+    {
+        delete[] LEDs;
+    }
 
   protected:
     const uint8_t length;
-    const pin_t start, overloadpin;
+    const pin_t overloadpin;
+    pin_t *LEDs;
     const bool overload;
 
     const static uint8_t floorCorrection = 5;
@@ -166,9 +176,9 @@ class MCU_VU_LED : public MCU_VU
     void display()
     {
         for (uint8_t pin = 0; pin < (getValue(addressOffset) * length + floorCorrection) / 12; pin++)
-            digitalWrite(start + pin, HIGH);
+            digitalWrite(LEDs[pin], HIGH);
         for (uint8_t pin = (getValue(addressOffset) * length + floorCorrection) / 12; pin < length; pin++)
-            digitalWrite(start + pin, LOW);
+            digitalWrite(LEDs[pin], LOW);
         if (overload)
             digitalWrite(overloadpin, getOverload(addressOffset));
     }

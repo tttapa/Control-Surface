@@ -2,8 +2,9 @@
 #define SETTINGS_H
 
 
-#define DEBUG Serial // Print debug messages to Serial.
-
+// #define DEBUG // Print debug messages to Serial.
+#define DEBUG_MIDI_PACKETS
+#define DEBUG_OUT Serial1
 #define ANALOG_FILTER_SHIFT_FACTOR 4
 
 #define BUTTON_DEBOUNCE_TIME 25 // The debounce time for momentary push buttons
