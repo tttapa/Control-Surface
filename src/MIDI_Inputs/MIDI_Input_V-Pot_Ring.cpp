@@ -1,28 +1,29 @@
 // #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 // #include "./MIDI_message_matcher.h"
 #include "./MIDI_Input_V-Pot_Ring.h"
+#include "../Helpers/Copy.hpp"
 #include <string.h>
 
 using namespace ExtIO;
 
 //  public:
 
-MCU_VPot_Ring::MCU_VPot_Ring(uint8_t address, uint8_t nb_addresses)
-    : MIDI_Input_Element_CC(address + 0x30 - 1, 1, nb_addresses, 1),
-      address(address), nb_addresses(nb_addresses)
+MCU_VPot_Ring::MCU_VPot_Ring(uint8_t track, uint8_t nb_tracks)
+    : MIDI_Input_Element_CC(track + 0x30 - 1, 1, nb_tracks, 1),
+      track(track), nb_tracks(nb_tracks)
 {
-    initBuffer();
+    values = new uint8_t[nb_tracks];
+    memset(values, 0, sizeof(uint8_t) * nb_tracks);
 }
 
 MCU_VPot_Ring::~MCU_VPot_Ring()
 {
-    free(values);
+    delete[] values;
 }
 
 bool MCU_VPot_Ring::updateImpl(const MIDI_message_matcher &midimsg)
 {
-    uint8_t index = (midimsg.data1 - 0x30) / channelsPerBank;
-    index = index < nb_addresses ? index : nb_addresses - 1;
+    uint8_t index = (midimsg.data1 - address) / channelsPerBank;
     setValue(index, midimsg.data2);
 
     display();
@@ -42,15 +43,7 @@ uint8_t MCU_VPot_Ring::getMode()
     return getMode(addressOffset);
 }
 
-// protected:
-
-void MCU_VPot_Ring::initBuffer()
-{
-    if (values != nullptr)
-        return;
-    values = (uint8_t *)malloc(sizeof(uint8_t) * nb_addresses);
-    memset(values, 0, sizeof(uint8_t) * nb_addresses);
-}
+// private:
 
 void MCU_VPot_Ring::setValue(uint8_t address, uint8_t value)
 {
@@ -73,16 +66,22 @@ uint8_t MCU_VPot_Ring::getMode(uint8_t address)
 
 // public:
 
-MCU_VPot_Ring_LED::MCU_VPot_Ring_LED(const pin_t (&LEDs)[11], uint8_t address, uint8_t nb_addresses)
-    : MCU_VPot_Ring(address, nb_addresses), LEDs(LEDs), centerLEDpin(0), centerLED(false)
+// TODO: replace address with track
+
+// TODO: Should outputs be reset to input mode in destructor?
+
+MCU_VPot_Ring_LED::MCU_VPot_Ring_LED(const pin_t (&LEDs)[11], uint8_t track, uint8_t nb_tracks)
+    : MCU_VPot_Ring(track, nb_tracks), centerLEDpin(0), centerLED(false)
 {
+    copy(this->LEDs, LEDs);
     for (pin_t pin = 0; pin < 11; pin++)
         ExtIO::pinMode(LEDs[pin], OUTPUT);
 }
-MCU_VPot_Ring_LED::MCU_VPot_Ring_LED(const pin_t (&LEDs)[11], pin_t centerLEDpin, uint8_t address, uint8_t nb_addresses)
-    : MCU_VPot_Ring(address, nb_addresses), LEDs(LEDs),
+MCU_VPot_Ring_LED::MCU_VPot_Ring_LED(const pin_t (&LEDs)[11], pin_t centerLEDpin, uint8_t track, uint8_t nb_tracks)
+    : MCU_VPot_Ring(track, nb_tracks),
       centerLEDpin(centerLEDpin), centerLED(true)
 {
+    copy(this->LEDs, LEDs);
     for (pin_t pin = 0; pin < 11; pin++)
         ExtIO::pinMode(LEDs[pin], OUTPUT);
     ExtIO::pinMode(centerLEDpin, OUTPUT);
@@ -102,18 +101,18 @@ MCU_VPot_Ring_LED::~MCU_VPot_Ring_LED()
 void MCU_VPot_Ring_LED::display()
 {
     if (centerLED)
-        ExtIO::digitalWrite(centerLEDpin, getCenterLED(addressOffset));
-    if (getPosition(addressOffset) == 0)
+        ExtIO::digitalWrite(centerLEDpin, getCenterLED());
+    if (getPosition() == 0)
     {
         for (uint8_t pin = 0; pin < 11; pin++)
             ExtIO::digitalWrite(LEDs[pin], LOW);
         return;
     }
-    uint8_t value = getPosition(addressOffset) - 1;
+    uint8_t value = getPosition() - 1;
 #ifdef DEBUG
     DEBUG << "Display: " << value << endl;
 #endif
-    switch (getMode(addressOffset))
+    switch (getMode())
     {
     case 0:
     {
@@ -157,6 +156,7 @@ void MCU_VPot_Ring_LED::display()
     }
 }
 
+// TODO: why can't I use the min/max macros on Teensy?
 inline int8_t MCU_VPot_Ring_LED::minimum(int8_t a, int8_t b)
 {
     return a > b ? b : a;

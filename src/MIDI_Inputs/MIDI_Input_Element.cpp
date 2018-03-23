@@ -13,8 +13,9 @@ bool MIDI_Input_Element::update(const MIDI_message_matcher &midimsg)
     if (!updateImpl(midimsg))
         return false;
 #ifdef DEBUG
-    DEBUG << "Match: \r\n\taddress = " << hex << this->address << 
-    "\r\n\tchannel = " << this->channel << dec << endl;
+    DEBUG << "Match: " << endl
+          << tab << "address = " << hex << this->address << endl
+          << tab << "channel = " << this->channel << dec << endl;
 #endif
     moveDown(); // Most frequently updated inputs sink to the bottom for performance improvements
     return true;
