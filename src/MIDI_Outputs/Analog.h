@@ -3,7 +3,7 @@
 
 // #include <Arduino.h>
 #include "../Settings/Settings.h"
-#include "../Helpers/AnalogFilter.h"
+#include "../Helpers/EMA.h"
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 
@@ -43,7 +43,7 @@ private:
   pin_t analogPin;
   uint8_t controllerNumber, channel;
   int (*mapFn)(int) = nullptr;
-  AnalogFilter<ANALOG_FILTER_SHIFT_FACTOR> filter;
+  EMA<ANALOG_FILTER_SHIFT_FACTOR> filter;
 
 protected:
   /**
