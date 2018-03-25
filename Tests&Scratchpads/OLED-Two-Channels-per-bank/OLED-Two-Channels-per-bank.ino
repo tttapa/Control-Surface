@@ -141,6 +141,8 @@ void loop() {
   static unsigned long start = 0;
   unsigned int loopTime = millis() - start;
   start = millis();
+  static EMA64<4> averageLoopTime;
+  unsigned int avglt = averageLoopTime.filter(loopTime);
 
   display.clearDisplay();
 
@@ -195,10 +197,10 @@ void loop() {
 #ifdef FPS
   display.setTextSize(1);
   display.setCursor(10, 64 - 8);
-  display.print(1000 / loopTime);
+  display.print(1000 / avglt);
 #endif
 #ifdef SERIAL_FPS
-    Serial.println(1000 / loopTime);
+    Serial.println(1000 / avglt);
     Serial.flush();
 #endif
 

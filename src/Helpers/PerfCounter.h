@@ -18,22 +18,35 @@ class PerfCounter
     {
         unsigned long duration = micros() - startTime;
         unsigned long avg = averageDuration.filter(duration);
+        counter++;
 #ifdef DEBUG_TIME
-        if (name == nullptr) {
-            DEBUG_OUT << "PerfCounter:";
-        } else {
-            DEBUG_OUT << name;
+        if (counter >= 100)
+        {
+            buffIndex += snprintf(&buff[buffIndex], maxBuffLen - buffIndex, "%s\tduration = %lu\taverage = %lu\r\n", name, duration, avg);
+            counter = 0;
         }
-        DEBUG_OUT << tab << "duration = " << duration 
-                  << tab << "average = " << avg << endl;
-        return duration;
 #endif
+        return duration;
+    }
+
+    static void print()
+    {
+#ifdef DEBUG_TIME
+        DEBUG_OUT << buff << (buff[0] == '\0' ? "" : endl);
+#endif
+        buff[0] = '\0';
+        buffIndex = 0;
     }
 
   private:
     unsigned long startTime = 0;
     const char *name = nullptr;
     EMA64<4> averageDuration;
+    size_t counter = 0;
+
+    static char buff[32768];
+    const static size_t maxBuffLen = sizeof(buff) / sizeof(buff[0]) - 1;
+    static size_t buffIndex;
 };
 
 #endif // PERFCOUNTER_H

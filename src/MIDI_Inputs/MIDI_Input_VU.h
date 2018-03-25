@@ -59,7 +59,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         DEBUG_OUT << "VU value: " << getValue(index) << endl;
         DEBUG_OUT << "addressOffset = " << addressOffset << endl;
 #endif
-        DEBUG_OUT << "<< " << hex << (midimsg.channel | midimsg.type) << ' ' << midimsg.data1 << dec << tab << millis() << endl;
+        // DEBUG_OUT << "<< " << hex << (midimsg.channel | midimsg.type) << ' ' << midimsg.data1 << dec << tab << millis() << endl;
 
         display();
         return true;

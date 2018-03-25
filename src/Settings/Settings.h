@@ -3,7 +3,7 @@
 
 
 // #define DEBUG // Print debug messages to Serial.
-#define DEBUG_MIDI_PACKETS
+// #define DEBUG_MIDI_PACKETS
 #define DEBUG_TIME
 #define DEBUG_OUT Serial1
 #define ANALOG_FILTER_SHIFT_FACTOR 4

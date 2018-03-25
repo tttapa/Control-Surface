@@ -44,7 +44,7 @@ void Control_Surface_::refresh()
     updateMidiInput();
     refreshInputs();
 #ifdef DEBUG_TIME
-    DEBUG_OUT << endl;
+    PerfCounter::print();
 #endif
 }
 
