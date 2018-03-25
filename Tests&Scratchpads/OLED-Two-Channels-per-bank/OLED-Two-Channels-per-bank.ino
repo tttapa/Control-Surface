@@ -196,7 +196,7 @@ void loop() {
 
 #ifdef FPS
   display.setTextSize(1);
-  display.setCursor(10, 64 - 8);
+  display.setCursor(115, 0);
   display.print(1000 / avglt);
 #endif
 #ifdef SERIAL_FPS

@@ -1,9 +1,8 @@
-#ifndef DIG_h_
-#define DIG_h_
+#ifndef DIGITAL_H
+#define DIGITAL_H
 
-// #include <Arduino.h>
 #include "./MIDI_Control_Element.h"
-#include "../Settings/Settings.h"
+#include "../Settings/SettingsWrapper.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 
 class Digital : public MIDI_Control_Element
@@ -23,7 +22,7 @@ private:
 
   bool invertState = false;
 
-  const static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
+  const static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;  // Edit this in ../Settings/Settings.h
 
   const static int8_t falling = LOW - HIGH;
   const static int8_t rising = HIGH - LOW;
@@ -35,4 +34,4 @@ private:
   uint8_t newChannelOffset = channelOffset;
 };
 
-#endif
+#endif // DIGITAL_H

@@ -1,4 +1,4 @@
-#include "../Settings/Settings.h"
+#include "../Settings/SettingsWrapper.h"
 
 #include "MIDI_Interface.h"
 #include "../Helpers/StreamOut.h"

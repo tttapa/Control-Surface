@@ -2,7 +2,7 @@
 #define SELECTOR_OUT_H
 
 // #include <Arduino.h>
-#include "../Settings/Settings.h"
+#include "../Settings/SettingsWrapper.h"
 #include "./Selector.h"
 #include "../Control_Surface/Control_Surface_Class.h"
 #include "../Helpers/Copy.hpp"

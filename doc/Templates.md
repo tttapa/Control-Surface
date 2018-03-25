@@ -1,7 +1,7 @@
 ### MIDI output
 
 ```cpp
-#include "../Settings/Settings.h"
+#include "../Settings/SettingsWrapper.h"
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 

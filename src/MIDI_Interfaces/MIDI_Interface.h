@@ -8,7 +8,7 @@
 // #include <cstddef>
 // #endif
 
-#include "../Settings/Settings.h"
+#include "../Settings/SettingsWrapper.h"
 #include "../MIDI_Parsers/MIDI_Parser.h"
 
 #define MIDI_BAUD 31250

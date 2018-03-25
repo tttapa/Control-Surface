@@ -2,7 +2,7 @@
 #define ANALOG_h_
 
 // #include <Arduino.h>
-#include "../Settings/Settings.h"
+#include "../Settings/SettingsWrapper.h"
 #include "../Helpers/EMA.h"
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"

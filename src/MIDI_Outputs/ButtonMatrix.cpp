@@ -30,7 +30,7 @@ template <size_t nb_rows, size_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::refresh()
 {
     unsigned long now = millis();
-    if (now - prevRefresh < 20) // only refresh every 20 ms (crude software debounce)
+    if (now - prevRefresh < BUTTON_DEBOUNCE_TIME) // only refresh every 25 ms (crude software debounce). Edit this in ../Settings/Settings.h
         return;
     prevRefresh = now;
 

@@ -9,7 +9,7 @@
 #include <cstdlib>
 #endif
 
-#include "./Settings/Settings.h"
+#include "./Settings/SettingsWrapper.h"
 
 class MIDI_Element
 {

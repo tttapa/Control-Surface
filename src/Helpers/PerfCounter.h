@@ -2,7 +2,7 @@
 #define PERFCOUNTER_H
 
 #include "./EMA.h"
-#include "../Settings/Settings.h"
+#include "../Settings/SettingsWrapper.h"
 #include "./StreamOut.h"
 #include <Arduino.h>
 

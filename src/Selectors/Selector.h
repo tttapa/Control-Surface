@@ -6,6 +6,7 @@
 #include "../Helpers/Linked_List.h"
 #include "../Helpers/Copy.hpp"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Settings/SettingsWrapper.h"
 
 #ifdef __AVR__
 #include "../Helpers/initializer_list.h"
@@ -294,7 +295,7 @@ private:
     bool prevState = HIGH;
   } dbButton1, dbButton2;
 
-  const unsigned long debounceTime = 25;
+  const unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;  // Edit this in ../Settings/Settings.h
 
   const static int8_t falling = LOW - HIGH;
   const static int8_t rising = HIGH - LOW;

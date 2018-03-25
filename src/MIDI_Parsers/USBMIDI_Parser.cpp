@@ -1,5 +1,5 @@
 #include "USBMIDI_Parser.h"
-#include "../Settings/Settings.h"
+#include "../Settings/SettingsWrapper.h"
 #include "../Helpers/StreamOut.h"
 
 MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)

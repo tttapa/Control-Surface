@@ -1,5 +1,5 @@
 #include "MIDI_Parser.h"
-#include "../Settings/Settings.h"
+#include "../Settings/SettingsWrapper.h"
 #include "../Helpers/StreamOut.h"
 
 void MIDI_Parser::startSysEx() // start adding a new SysEx message to the buffer
