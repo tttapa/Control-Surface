@@ -23,7 +23,8 @@ MCU_VPot_Ring::~MCU_VPot_Ring()
 bool MCU_VPot_Ring::updateImpl(const MIDI_message_matcher &midimsg)
 {
     uint8_t index = (midimsg.data1 - address) / channelsPerBank;
-    setValue(index, midimsg.data2);
+    uint8_t data2 = (midimsg.data2 & 0xF0) | ((midimsg.data2 & 0x0F) < 0x0C ? midimsg.data2 : 0xB);
+    setValue(index, data2);
 
     display();
     return true;
