@@ -8,6 +8,7 @@
 #include "record10.h"
 
 #include <Control_Surface.h>
+#include <Display/Display.hpp>
 
 #include <Wire.h>
 
@@ -17,7 +18,7 @@ using namespace ExtIO;
 #define FPS
 // #define SERIAL_FPS
 
-// #define DEBUG_MIDI
+#define DEBUG_MIDI
 // #define SERIAL_MIDI
 
 const uint8_t clockPin = 10;
@@ -92,11 +93,15 @@ MIDI_LED recrdyB(SR_BS.red(4), REC_RDY_2, 1, 4, 1);
 
 MCU_VU vuA(1, 4, false, 150);
 MCU_VU vuB(2, 4, false, 150);
-VUPeak vuPA(vuA);
-VUPeak vuPB(vuB);
+
+VUDisplay vuDisp_A(display, vuA, 32 + 11,      60, 16, 3, 1, WHITE);
+VUDisplay vuDisp_B(display, vuB, 32 + 11 + 64, 60, 16, 3, 1, WHITE);
 
 MCU_VPot_Ring ringA(1, 4);
 MCU_VPot_Ring ringB(2, 4);
+
+VPotDisplay vpotDisp_A(display, ringA, 0,  10);
+VPotDisplay vpotDisp_B(display, ringB, 64, 10);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -168,15 +173,11 @@ void loop() {
   display.print(bs.getSetting() * 2 + 2);
 
 
-  drawGoodCircle(display,                       16     , 16 + 10, 14);
-  drawVPotSegment(display, ringA, 16     , 16 + 10, 12);
+  vpotDisp_A.draw();
+  vpotDisp_B.draw();
 
-  drawGoodCircle(display,                       16 + 64, 16 + 10, 14);
-  drawVPotSegment(display, ringB, 16 + 64, 16 + 10, 12);
-
-
-  drawVUPeak(display, vuPA, 32      + 11, 60, 16, 3);
-  drawVUPeak(display, vuPB, 32 + 64 + 11, 60, 16, 3);
+  vuDisp_A.draw();
+  vuDisp_B.draw();
 
   /*
     drawCharacter(display, muteA,   'M', 1, 12,      49);

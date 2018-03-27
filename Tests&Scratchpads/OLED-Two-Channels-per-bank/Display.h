@@ -12,7 +12,7 @@ Adafruit_SSD1306 display;
 //#error("Set processor speed to 96 MHz!");
 #endif
 
-void drawGoodCircle(Adafruit_SSD1306 &display, int16_t x0, int16_t y0, int radius, uint8_t color = WHITE) { // draws the outline of a circle
+void drawGoodCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, int radius, uint8_t color = WHITE) { // draws the outline of a circle
   // https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
   int x = radius;
   int y = 0;
@@ -39,7 +39,7 @@ void drawGoodCircle(Adafruit_SSD1306 &display, int16_t x0, int16_t y0, int radiu
   }
 }
 
-void fillGoodCircle(Adafruit_SSD1306 &display, int16_t x0, int16_t y0, int radius, uint8_t color = WHITE) { // draws a solid, filled circle
+void fillGoodCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, int radius, uint8_t color = WHITE) { // draws a solid, filled circle
   int x = radius;
   int y = 0;
   int err = 0;
@@ -61,7 +61,7 @@ void fillGoodCircle(Adafruit_SSD1306 &display, int16_t x0, int16_t y0, int radiu
   }
 }
 
-void drawVPotSegment(Adafruit_SSD1306 &display, MCU_VPot_Ring &vpot, uint8_t x, uint8_t y, uint8_t radius, uint8_t color = WHITE) {
+void drawVPotSegment(Adafruit_GFX &display, MCU_VPot_Ring &vpot, uint8_t x, uint8_t y, uint8_t radius, uint8_t color = WHITE) {
   if (vpot.getCenterLED())
     fillGoodCircle(display, x, y, radius / 4);
   else
@@ -84,7 +84,7 @@ void drawVPotSegment(Adafruit_SSD1306 &display, MCU_VPot_Ring &vpot, uint8_t x, 
 
 
 
-void drawVU(Adafruit_SSD1306 &display, MCU_VU& vu, uint8_t x, uint8_t y, uint8_t width, uint8_t blockheight = 2, uint8_t spacing = 1, uint8_t color = WHITE) {
+void drawVU(Adafruit_GFX &display, MCU_VU& vu, uint8_t x, uint8_t y, uint8_t width, uint8_t blockheight = 2, uint8_t spacing = 1, uint8_t color = WHITE) {
   uint8_t value = vu.getValue();
   for (uint8_t i = 0; i < value; i++) {
     display.fillRect(x, y - i * (blockheight + spacing), width, blockheight, color);
@@ -98,7 +98,7 @@ struct VUPeak {
   unsigned long previousDecay = 0;
 };
 
-void drawVUPeak(Adafruit_SSD1306 &display, VUPeak& vu, uint8_t x, uint8_t y, uint8_t width, uint8_t blockheight = 2, uint8_t spacing = 1, uint8_t color = WHITE, unsigned int decayTime = 350) {
+void drawVUPeak(Adafruit_GFX &display, VUPeak& vu, uint8_t x, uint8_t y, uint8_t width, uint8_t blockheight = 2, uint8_t spacing = 1, uint8_t color = WHITE, unsigned int decayTime = 350) {
   uint8_t value = vu.VU.getValue();
   if (value >= vu.peak) {
     vu.peak = value;
@@ -116,7 +116,7 @@ void drawVUPeak(Adafruit_SSD1306 &display, VUPeak& vu, uint8_t x, uint8_t y, uin
   }
 }
 
-void drawTimeDisplay(Adafruit_SSD1306 &display, MCU_TimeDisplay& tdisp, uint8_t x, uint8_t y, uint8_t color = WHITE) {
+void drawTimeDisplay(Adafruit_GFX &display, MCU_TimeDisplay& tdisp, uint8_t x, uint8_t y, uint8_t color = WHITE) {
   display.setTextSize(1);
   display.setTextColor(color);
   display.setCursor(x, y);
@@ -131,7 +131,7 @@ void drawTimeDisplay(Adafruit_SSD1306 &display, MCU_TimeDisplay& tdisp, uint8_t 
   display.print(frameStr);
 }
 
-void drawCharacter(Adafruit_SSD1306 &display, MIDI_Input_Note_Buffer &nb, char character, uint8_t size, uint8_t x, uint8_t y, uint8_t color = WHITE) {
+void drawCharacter(Adafruit_GFX &display, MIDI_Input_Note_Buffer &nb, char character, uint8_t size, uint8_t x, uint8_t y, uint8_t color = WHITE) {
   if (nb.getState()) {
     display.setTextSize(size);
     display.setTextColor(color);
