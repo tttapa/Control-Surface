@@ -7,6 +7,8 @@
 #else
 #include <initializer_list>
 #endif
+#include <stdlib.h>
+#include <string.h>
 
 class AnalogMultiplex : public ExtendedIOElement
 {

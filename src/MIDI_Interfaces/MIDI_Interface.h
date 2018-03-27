@@ -1,19 +1,9 @@
 #ifndef MIDI_INTERFACE_H_
 #define MIDI_INTERFACE_H_
 
-// #ifdef ARDUINO
-// #include <Arduino.h>
-// #else 
-// #include <stdint.h>
-// #include <cstddef>
-// #endif
-
-#include "../Settings/SettingsWrapper.h"
 #include "../MIDI_Parsers/MIDI_Parser.h"
 
 #define MIDI_BAUD 31250
-
-// #define IGNORE_SYSEX
 
 class MIDI_Interface
 {

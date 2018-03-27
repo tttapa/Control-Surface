@@ -1,7 +1,7 @@
 #ifndef EMA_H_
 #define EMA_H_
 
-#include <Arduino.h>
+#include <stdint.h>
 
 template <uint8_t shiftFac>
 class EMA

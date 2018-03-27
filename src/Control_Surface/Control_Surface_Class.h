@@ -2,7 +2,6 @@
 #define Control_Surface_CLASS_H
 
 #include "../MIDI_Interfaces/USBMIDI_Interface.h"
-// #include "../Settings/SettingsWrapper.h"
 
 class Control_Surface_
 {

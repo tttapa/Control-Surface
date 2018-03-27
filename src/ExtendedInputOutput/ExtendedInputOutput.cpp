@@ -1,9 +1,9 @@
 #include "ExtendedInputOutput.h"
 #include "ExtendedIOElement.h"
+#include <Arduino.h>
 
 namespace ExtIO
 {
-// #define DEBUG
 
 ExtendedIOElement *getIOElementOfPin(pin_t pin)
 {
@@ -15,13 +15,6 @@ ExtendedIOElement *getIOElementOfPin(pin_t pin)
 
 void pinMode(pin_t pin, uint8_t mode)
 {
-#ifdef DEBUG
-    Serial.print("ExtIO::pinMode(");
-    Serial.print(pin);
-    Serial.print(", ");
-    Serial.print(mode);
-    Serial.print(");\r\n");
-#endif
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
         ::pinMode(pin, mode);
     else
@@ -37,13 +30,7 @@ void pinMode(int pin, uint8_t mode)
 }
 void digitalWrite(pin_t pin, uint8_t val)
 {
-#ifdef DEBUG
-    Serial.print("ExtIO::digitalWrite(");
-    Serial.print(pin);
-    Serial.print(", ");
-    Serial.print(val);
-    Serial.print(");\r\n");
-#endif
+
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
         ::digitalWrite(pin, val);
     else
@@ -63,11 +50,6 @@ void digitalWrite(int pin, uint8_t val)
 // }
 int digitalRead(pin_t pin)
 {
-#ifdef DEBUG_READ
-    Serial.print("ExtIO::digitalRead(");
-    Serial.print(pin);
-    Serial.print(");\r\n");
-#endif
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
         return ::digitalRead(pin);
     else
@@ -103,11 +85,6 @@ void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val)
 }
 analog_t analogRead(pin_t pin)
 {
-#ifdef DEBUG_READ
-    Serial.print("ExtIO::analogRead(");
-    Serial.print(pin);
-    Serial.print(");\r\n");
-#endif
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
         return ::analogRead(pin);
     else

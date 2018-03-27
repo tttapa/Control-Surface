@@ -2,7 +2,6 @@
 #define MIDI_INPUT_ELEMENT_H_
 
 #include "../MIDI_Element.h"
-// #include "../Control_Surface/Control_Surface_Class.h"
 #include "../Helpers/Linked_List.h"
 #include "./MIDI_message_matcher.h"
 

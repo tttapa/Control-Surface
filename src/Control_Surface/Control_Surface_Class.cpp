@@ -192,16 +192,6 @@ void Control_Surface_::updateMidiInput()
         }
         else if (midiReadResult == SYSEX_MESSAGE) // System Exclusive
         {
-#ifdef DEBUG
-            DEBUG_OUT << "System Exclusive:" << tab;
-            const uint8_t *data = midi->getSysExBuffer();
-            size_t len = midi->getSysExLength();
-            for (size_t i = 0; i < len; i++)
-            {
-                DEBUG_OUT << hex << data[i] << ' ' << dec;
-            }
-            DEBUG_OUT << endl;
-#endif
 #ifdef DEBUG_MIDI_PACKETS
             const uint8_t *data = midi->getSysExBuffer();
             size_t len = midi->getSysExLength();

@@ -1,4 +1,5 @@
 #include "Display.h"
+
 #include "play.h"
 #include "record.h"
 #include "mute10.h"
@@ -7,6 +8,8 @@
 #include "record10.h"
 
 #include <Control_Surface.h>
+
+#include <Wire.h>
 
 using namespace MCU;
 using namespace ExtIO;

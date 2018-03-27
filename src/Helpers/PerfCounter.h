@@ -4,7 +4,6 @@
 #include "./EMA.h"
 #include "../Settings/SettingsWrapper.h"
 #include "./StreamOut.h"
-#include <Arduino.h>
 
 class PerfCounter
 {

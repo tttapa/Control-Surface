@@ -1,6 +1,5 @@
-// #include "../ExtendedInputOutput/ExtendedInputOutput.h"
-// #include "./MIDI_message_matcher.h"
 #include "./MIDI_Input_V-Pot_Ring.h"
+#include "../Helpers/StreamOut.h"
 #include "../Helpers/Copy.hpp"
 #include <string.h>
 

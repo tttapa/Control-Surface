@@ -3,6 +3,8 @@
 
 #include "MIDI_Interface.h"
 #include "../MIDI_Parsers/SerialMIDI_Parser.h"
+#include "../Settings/SettingsWrapper.h"
+#include <Arduino.h> // Stream
 
 class StreamMIDI_Interface : public MIDI_Interface
 {

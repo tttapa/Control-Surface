@@ -1,11 +1,6 @@
 #ifndef MIDI_MESSAGE_MATCHER_H
 #define MIDI_MESSAGE_MATCHER_H
 
-#ifdef ARDUINO
-#include <Arduino.h>
-#else
-#include <cstdint>
-#endif
 #include "../MIDI_Parsers/MIDI_Parser.h"
 
 struct MIDI_message_matcher

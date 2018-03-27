@@ -1,13 +1,9 @@
 #ifndef MIDI_PARSER_H
 #define MIDI_PARSER_H
 
-#ifdef ARDUINO
-#include <Arduino.h>
-#else 
 #include <stdint.h>
-#include <cstddef>
-#include <cstdlib>
-#endif
+#include <stddef.h>
+#include <stdlib.h>
 
 #include "../Settings/SettingsWrapper.h"
 

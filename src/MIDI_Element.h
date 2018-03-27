@@ -1,13 +1,8 @@
 #ifndef MIDI_ELEMENT_h
 #define MIDI_ELEMENT_h
 
-#ifdef ARDUINO
-#include <Arduino.h>
-#else 
-#include <stdint.h>
-#include <cstddef>
-#include <cstdlib>
-#endif
+#include <stdint.h> // uint8_t
+#include <stddef.h> // size_t
 
 #include "./Settings/SettingsWrapper.h"
 

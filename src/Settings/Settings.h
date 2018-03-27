@@ -6,13 +6,13 @@
 // ======================================================================= //
 
 /* Print all debug messages */
-// #define DEBUG
+#define DEBUG
 
 /* Print all incoming MIDI messages */
-// #define DEBUG_MIDI_PACKETS
+#define DEBUG_MIDI_PACKETS
 
 /* Print timing/profiling information */
-// #define DEBUG_TIME
+#define DEBUG_TIME
 
 /* The default debug output */
 #define DEBUG_OUT Serial1

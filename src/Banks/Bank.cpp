@@ -1,5 +1,4 @@
 #include "Bank.h"
-#include "../Control_Surface.h"
 
 Bank::Bank(uint8_t channelsPerBank) : channelsPerBank(channelsPerBank) {}
 

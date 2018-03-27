@@ -1,6 +1,6 @@
 #include "RotaryEncoder.h"
 
-#include "../Control_Surface.h"
+#include "../Control_Surface/Control_Surface_Class.h"
 #include "../MIDI_Interfaces/MIDI_Interface.h"
 
 RotaryEncoder::RotaryEncoder(uint8_t pinA, uint8_t pinB, uint8_t controllerNumber, uint8_t channel, int speedMultiply, uint8_t pulsesPerStep, relativeCCmode mode) : enc(pinA, pinB) // Constructor

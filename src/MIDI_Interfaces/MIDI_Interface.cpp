@@ -1,7 +1,4 @@
-#include "../Settings/SettingsWrapper.h"
-
 #include "MIDI_Interface.h"
-#include "../Helpers/StreamOut.h"
 
 MIDI_Interface::MIDI_Interface(MIDI_Parser &parser) : parser(parser)// Constructor (make this the default MIDI interface)
 {

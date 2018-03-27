@@ -3,7 +3,6 @@
 
 #include "MIDI_Input_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
-#include "../Helpers/StreamOut.h"
 
 class MCU_VPot_Ring : public MIDI_Input_Element_CC
 {

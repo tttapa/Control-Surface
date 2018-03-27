@@ -1,4 +1,5 @@
 #include "ExtendedIOElement.h"
+#include <Arduino.h>
 
 pin_t ExtendedIOElement::pin(pin_t p)
 {

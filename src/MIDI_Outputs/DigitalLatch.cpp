@@ -1,5 +1,5 @@
 #include "./DigitalLatch.h"
-#include "../Control_Surface.h"
+#include "../Control_Surface/Control_Surface_Class.h"
 
 using namespace ExtIO;
 

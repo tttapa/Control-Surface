@@ -1,5 +1,4 @@
 #include "MIDI_Input_LED.h"
-// #include "../Control_Surface.h"
 #include <string.h>
 
 using namespace ExtIO;

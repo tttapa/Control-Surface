@@ -3,7 +3,7 @@
 
 #ifdef ARDUINO
 
-#include <Arduino.h>
+#include <Arduino.h> // for Print
 #include "is_integral.h"
 
 enum StreamOut_format_t
