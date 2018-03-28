@@ -16,18 +16,18 @@ class VPotDisplay : public DisplayElement
 
 public:
   VPotDisplay(Adafruit_GFX &display, MCU_VPot_Ring &vpot,
-              int16_t x = 0, int16_t y = 0,
-              uint16_t radius = 16, uint16_t innerRadius = 14, uint16_t color = WHITE)
+              int16_t x, int16_t y,
+              uint16_t radius, uint16_t innerRadius, uint16_t color)
       : DisplayElement(display), vpot(vpot),
         x(x + radius), y(y + radius),
         radius(radius), innerRadius(innerRadius), color(color) {}
   void draw()
   {
-    drawCircle(display, x, y, radius);
+    drawCircle(display, x, y, radius, color);
     if (vpot.getCenterLED())
-      fillGoodCircle(display, x, y, innerRadius / 4);
+      fillCircle(display, x, y, innerRadius / 4, color);
     else
-      drawGoodCircle(display, x, y, innerRadius / 4);
+      drawCircle(display, x, y, innerRadius / 4, color);
 
     uint8_t value = vpot.getPosition();
     if (value == 0)
@@ -68,11 +68,8 @@ public:
 private:
   MCU_VPot_Ring &vpot;
 
-  int16_t x;
-  int16_t y;
-  uint16_t radius;
-  uint16_t innerRadius;
-  uint16_t color;
+  int16_t x, y;
+  uint16_t radius, innerRadius, color;
 
   const static float angleSpacing;
 
@@ -100,9 +97,9 @@ class VUDisplay : public DisplayElement
 {
 public:
   VUDisplay(Adafruit_GFX &display, MCU_VU &vu,
-            int16_t x = 0, int16_t y = 0, uint16_t width = 16,
-            uint8_t blockheight = 3, uint8_t spacing = 1,
-            uint16_t color = WHITE)
+            int16_t x, int16_t y, uint16_t width,
+            uint8_t blockheight, uint8_t spacing,
+            uint16_t color)
       : DisplayElement(display), vu(vu),
         x(x), y(y), width(width),
         blockheight(blockheight), spacing(spacing),
@@ -143,11 +140,9 @@ public:
 private:
   MCU_VU &vu;
 
-  int16_t x;
-  int16_t y;
+  int16_t x, y;
   uint16_t width;
-  uint8_t blockheight;
-  uint8_t spacing;
+  uint8_t blockheight, spacing;
   uint16_t color;
 
   unsigned long peak = 0;
@@ -173,8 +168,8 @@ class NoteDisplay : public DisplayElement
 {
 public:
   NoteDisplay(Adafruit_GFX &display, MIDI_Input_Note_Buffer &notebuffer,
-              const XBitmap &xbm, int16_t x = 0, int16_t y = 0,
-              uint16_t color = WHITE)
+              const XBitmap &xbm, int16_t x, int16_t y,
+              uint16_t color)
       : DisplayElement(display), notebuffer(notebuffer),
         xbm(xbm), x(x), y(y), color(color) {}
 
@@ -187,8 +182,32 @@ public:
 private:
   MIDI_Input_Note_Buffer &notebuffer;
   const XBitmap &xbm;
-  int16_t x;
-  int16_t y;
+  int16_t x, y;
+  uint16_t color;
+};
+
+// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
+
+class SelectorDisplay : public DisplayElement
+{
+public:
+  SelectorDisplay(Adafruit_GFX &display, Selector &selector,
+                  int16_t offset, int16_t multiplier,
+                  int16_t x, int16_t y,
+                  uint8_t size, uint16_t color)
+      : DisplayElement(display), selector(selector),
+        offset(offset), multiplier(multiplier),
+        x(x), y(y),
+        size(size), color(color) {}
+  void draw() {
+    display.setTextSize(size);
+    display.setCursor(x, y);
+    display.print(selector.getSetting() * multiplier + offset);
+  }
+  private:
+  Selector &selector;
+  int16_t offset, multiplier, x, y;
+  uint8_t size;
   uint16_t color;
 };
 

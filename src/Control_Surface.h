@@ -39,4 +39,9 @@
 
 #include "./Helpers/StreamOut.h"
 
+#ifdef DISPLAY_GFX
+#include "./Display/DisplayElements.hpp"
+#include "./Display/Bitmaps/XBitmaps.h"
+#endif
+
 #endif // Control_Surface_H

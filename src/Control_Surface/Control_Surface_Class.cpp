@@ -33,20 +33,6 @@ void Control_Surface_::begin()
     DEBUG_OUT.begin(115200);
 #endif
 }
-void Control_Surface_::refresh()
-{
-    if (midi == nullptr)
-        begin(); // make sure that midi != nullptr
-
-    refreshControls();  // refresh all control elements
-    refreshSelectors(); // refresh all bank selectors
-
-    updateMidiInput();
-    refreshInputs();
-#ifdef DEBUG_TIME
-    PerfCounter::print();
-#endif
-}
 
 MIDI_Interface *Control_Surface_::MIDI()
 {

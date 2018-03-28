@@ -7,18 +7,13 @@
 class Display
 {
 public:
-  Display(Adafruit_GFX &display) : display(display)
+  Display()
   {
-    LinkedList::append(this, first, last); // TODO: can be singly linked list
+    LinkedList::append(this, first, last);
   }
-  // No destructor (intentional memory leak)
-
-  static void add(Adafruit_GFX &display)
+  ~Display() 
   {
-    for (Display *el = getFirst(); el != nullptr; el->getNext())
-      if (&display == &(el->display))
-        return;
-    new Display(display);
+    LinkedList::remove(this, first, last);
   }
   static Display *getFirst()
   {
@@ -29,7 +24,8 @@ public:
     return next;
   }
 
-  Adafruit_GFX &display;
+  virtual void display() = 0;
+  virtual void clearDisplay() = 0;
 
 private:
   Display *next;
@@ -56,7 +52,7 @@ public:
       : display(display)
   {
     LinkedList::append(this, first, last);
-    Display::add(display);
+    // Display::add(display); // Doesn't work because Adafruit_GFX has no virtual clearDisplay and display functions
   }
   ~DisplayElement()
   {
@@ -71,9 +67,9 @@ public:
   {
     return next;
   }
+  virtual void draw() = 0;
 
 protected:
-  virtual void draw() = 0;
   Adafruit_GFX &display;
 
   DisplayElement *next;

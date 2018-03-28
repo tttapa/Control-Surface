@@ -1,9 +1,7 @@
-#include "Display.h"
-
+#define DISPLAY_GFX
 #include <Control_Surface.h>
-#include <Display/DisplayElements.hpp>
-#include <Display/Bitmaps/XBitmaps.h>
 
+#include <Adafruit_SSD1306.h>
 #include <Wire.h>
 
 using namespace MCU;
@@ -14,6 +12,25 @@ using namespace ExtIO;
 
 #define DEBUG_MIDI
 // #define SERIAL_MIDI
+
+Adafruit_SSD1306 display;
+
+class SSD1306_Display : public Display {
+  public:
+    SSD1306_Display(Adafruit_SSD1306 &display)
+      : disp(display) {}
+    void display() {
+      disp.display();
+    }
+    void clearDisplay() {
+      disp.clearDisplay();
+      disp.drawLine(1, 8, 126, 8, WHITE);
+    }
+  private:
+    Adafruit_SSD1306 &disp;
+};
+
+SSD1306_Display d(display);
 
 const uint8_t clockPin = 10;
 const uint8_t latchPin = 11;
@@ -37,7 +54,7 @@ ShiftRegisterOut SR_BS(dataPin, clockPin, latchPin, LSBFIRST, 24);
 ShiftRegisterOut SR(dataPin, clockPin, 16, LSBFIRST, 8);
 
 Bank bank(2); // two channels per bank
-  
+
 BankSelector bs(bank, { 6, 5 }, {
   SR_BS.blue(0),
   SR_BS.blue(1),
@@ -109,8 +126,12 @@ VUDisplay vuDisp_B(display, vuB, 32 + 11 + 64, 60, 16, 3, 1, WHITE);
 MCU_VPot_Ring ringA(1, 4);
 MCU_VPot_Ring ringB(2, 4);
 
-VPotDisplay vpotDisp_A(display, ringA, 0,  10);
-VPotDisplay vpotDisp_B(display, ringB, 64, 10);
+VPotDisplay vpotDisp_A(display, ringA, 0,  10, 16, 14, WHITE);
+VPotDisplay vpotDisp_B(display, ringB, 64, 10, 16, 14, WHITE);
+
+// Bank selector
+SelectorDisplay bsA(display, bs, 1, 2, 0,  50, 2, WHITE); // first track of the bank (1), two tracks per bank (2), location (0, 50), font size (2)
+SelectorDisplay bsB(display, bs, 2, 2, 64, 50, 2, WHITE); // second track of the bank (2), two tracks per bank (2), location (64, 50), font size (2)
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -126,7 +147,7 @@ void setup()   {
 #endif
 
   pinMode(blinkPin, OUTPUT);
-  
+
   bank.add(channelButtons, Bank::CHANGE_ADDRESS);
 
   bank.add(encoder, Bank::CHANGE_ADDRESS);
@@ -154,60 +175,63 @@ void loop() {
     digitalWrite(blinkPin, !digitalRead(blinkPin));
     previousBlink += blinkInterval;
   }
-  
+
   static unsigned long start = 0;
   unsigned int loopTime = millis() - start;
   start = millis();
   static EMA64<4> averageLoopTime;
   unsigned int avglt = averageLoopTime.filter(loopTime);
 
-  display.clearDisplay();
+  // display.clearDisplay();
 
-  drawTimeDisplay(display, tdisp, 0, 0);
-    
-  display.drawLine(1, 8, 126, 8, WHITE);
+  // drawTimeDisplay(display, tdisp, 0, 0);
 
-  display.setTextSize(2);
-  display.setCursor(0 , 50);
-  display.print(bs.getSetting() * 2 + 1);
-  display.setCursor(64, 50);
-  display.print(bs.getSetting() * 2 + 2);
+  // display.drawLine(1, 8, 126, 8, WHITE);
+
+  // display.setTextSize(2);
+  // display.setCursor(0 , 50);
+  // display.print(bs.getSetting() * 2 + 1);
+  // display.setCursor(64, 50);
+  // display.print(bs.getSetting() * 2 + 2);
 
 
-  vpotDisp_A.draw();
-  vpotDisp_B.draw();
+  /*
+    vpotDisp_A.draw();
+    vpotDisp_B.draw();
 
-  vuDisp_A.draw();
-  vuDisp_B.draw();
+    vuDisp_A.draw();
+    vuDisp_B.draw();
 
-  muteDispA.draw();
-  muteDispB.draw();
+    muteDispA.draw();
+    muteDispB.draw();
 
-  soloDispA.draw();
-  soloDispB.draw();
+    soloDispA.draw();
+    soloDispB.draw();
 
-  rudeSoloDisp.draw();
+    rudeSoloDisp.draw();
 
-  playDisp.draw();
-  recordDisp.draw();
+    playDisp.draw();
+    recordDisp.draw();
 
-  recrdyDispA.draw();
-  recrdyDispB.draw();
-  
+    recrdyDispA.draw();
+    recrdyDispB.draw();
+  */
+
+/*
 #ifdef FPS
   display.setTextSize(1);
   display.setCursor(115, 0);
   display.print(1000 / avglt);
 #endif
 #ifdef SERIAL_FPS
-    Serial.println(1000 / avglt);
-    Serial.flush();
+  Serial.println(1000 / avglt);
+  Serial.flush();
 #endif
+*/
 
-
-  display.display();
+  // display.display();
   Control_Surface.refresh();
 
-//  delay(100);
+  //  delay(100);
 }
 

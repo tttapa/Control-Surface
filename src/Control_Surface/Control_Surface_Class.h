@@ -3,6 +3,10 @@
 
 #include "../MIDI_Interfaces/USBMIDI_Interface.h"
 
+#ifdef DISPLAY_GFX
+#include "../Display/Display.hpp"
+#endif
+
 class Control_Surface_
 {
 public:
@@ -12,7 +16,7 @@ public:
   ~Control_Surface_();
 
   void begin();
-  void refresh();
+  // void refresh(); // (see below)
   MIDI_Interface *MIDI();
 
 private:
@@ -23,6 +27,44 @@ private:
   void refreshSelectors();
   void updateMidiInput();
   void refreshInputs();
+#ifdef DISPLAY_GFX
+  // void refreshDisplays(); // (see below)
+#endif
+
+public:
+  void refresh()
+  {
+    if (midi == nullptr)
+      begin(); // make sure that midi != nullptr
+
+    refreshControls();  // refresh all control elements
+    refreshSelectors(); // refresh all bank selectors
+
+    updateMidiInput();
+    refreshInputs();
+#ifdef DEBUG_TIME
+    PerfCounter::print();
+#endif
+#ifdef DISPLAY_GFX
+    refreshDisplays();
+#endif
+  }
+
+private:
+#ifdef DISPLAY_GFX
+  void refreshDisplays()
+  {
+    for (Display *display = Display::getFirst(); display != nullptr; display = display->getNext())
+      display->clearDisplay();
+    
+    for (DisplayElement *de = DisplayElement::getFirst(); de != nullptr; de = de->getNext())
+      de->draw();
+    
+    for (Display *display = Display::getFirst(); display != nullptr; display = display->getNext())
+      display->display();
+      
+  }
+#endif
 };
 
 extern Control_Surface_ &Control_Surface;

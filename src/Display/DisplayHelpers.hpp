@@ -3,7 +3,7 @@
 
 #include <Adafruit_GFX.h>
 
-void drawCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, int radius, uint8_t color = WHITE) { // draws the outline of a circle
+void drawCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, int radius, uint8_t color) { // draws the outline of a circle
   // https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
   int x = radius;
   int y = 0;
@@ -30,7 +30,7 @@ void drawCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, int radius, uint8
   }
 }
 
-void fillCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, uint16_t radius, uint16_t color = WHITE) { // draws a solid, filled circle
+void fillCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, uint16_t radius, uint16_t color) { // draws a solid, filled circle
   // https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
   int x = radius;
   int y = 0;
