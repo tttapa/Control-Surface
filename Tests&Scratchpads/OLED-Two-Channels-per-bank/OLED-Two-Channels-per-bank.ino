@@ -10,7 +10,7 @@ using namespace ExtIO;
 #define FPS
 // #define SERIAL_FPS
 
-#define DEBUG_MIDI
+// #define DEBUG_MIDI
 // #define SERIAL_MIDI
 
 Adafruit_SSD1306 display;
@@ -132,6 +132,9 @@ VPotDisplay vpotDisp_B(display, ringB, 64, 10, 16, 14, WHITE);
 // Bank selector
 SelectorDisplay bsA(display, bs, 1, 2, 0,  50, 2, WHITE); // first track of the bank (1), two tracks per bank (2), location (0, 50), font size (2)
 SelectorDisplay bsB(display, bs, 2, 2, 64, 50, 2, WHITE); // second track of the bank (2), two tracks per bank (2), location (64, 50), font size (2)
+
+// Time display
+TimeDisplay timeDisp(display, tdisp, 0, 0, 1, WHITE);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
