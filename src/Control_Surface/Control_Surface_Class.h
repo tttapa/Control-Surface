@@ -54,6 +54,12 @@ private:
 #ifdef DISPLAY_GFX
   void refreshDisplays()
   {
+    static unsigned long previousRefresh = millis();
+
+    if (millis() - previousRefresh < 1000 / MAX_FPS)
+      return;
+    previousRefresh += 1000 / MAX_FPS;
+    
     for (Display *display = Display::getFirst(); display != nullptr; display = display->getNext())
       display->clearDisplay();
     
