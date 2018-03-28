@@ -1,15 +1,8 @@
 #include "Display.h"
 
-#include "play.h"
-#include "record.h"
-// #include "mute10.h"
-#include "solo10.h"
-#include "solo.h"
-#include "record10.h"
-
 #include <Control_Surface.h>
 #include <Display/Display.hpp>
-#include <Display/Bitmaps/Bitmap-Mute.h>
+#include <Display/Bitmaps/XBitmaps.h>
 
 #include <Wire.h>
 
@@ -19,7 +12,7 @@ using namespace ExtIO;
 #define FPS
 // #define SERIAL_FPS
 
-// #define DEBUG_MIDI
+#define DEBUG_MIDI
 // #define SERIAL_MIDI
 
 const uint8_t clockPin = 10;
@@ -29,8 +22,6 @@ const uint8_t dataPin = 12;
 const uint8_t blinkPin = LED_BUILTIN;
 
 const unsigned long blinkInterval = 500;
-
-const uint8_t VPOT = 0x10;
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -68,39 +59,53 @@ Digital channelButtons[] = {
 
 Digital playButton =   {7, PLAY, 1, 127};
 
-RotaryEncoder encoder(0, 1, VPOT, 1, 1, NORMAL_ENCODER, MACKIE_CONTROL_RELATIVE);
+RotaryEncoder encoder(0, 1, V_POT_1, 1, 1, NORMAL_ENCODER, MACKIE_CONTROL_RELATIVE);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
+// Time display
 MCU_TimeDisplay tdisp;
-MIDI_Input_Note_Buffer play(PLAY, 1, 1, 1);
 
+// Play / Record
+MIDI_Input_Note_Buffer play(PLAY, 1, 1, 1);
 MIDI_Input_Note_Buffer record(RECORD, 1, 1, 1);
+
+NoteDisplay playDisp  (display, play,   XBM::play7,  16 + 64, 0, WHITE);
+NoteDisplay recordDisp(display, record, XBM::record7, 26 + 64, 0, WHITE);
+
+// Mute
+MIDI_LED muteA(SR_BS.red(7), MUTE_1, 1, 4, 1);
+MIDI_LED muteB(SR_BS.red(6), MUTE_2, 1, 4, 1);
+
+NoteDisplay muteDispA(display, muteA, XBM::mute10, 14,      50, WHITE);
+NoteDisplay muteDispB(display, muteB, XBM::mute10, 14 + 64, 50, WHITE);
+
+// Solo
+MIDI_LED soloA(SR_BS.green(7), SOLO_1, 1, 4, 1);
+MIDI_LED soloB(SR_BS.green(6), SOLO_2, 1, 4, 1);
 
 MIDI_Input_Note_Buffer rudeSolo(RUDE_SOLO, 1, 1, 1);
 
-MIDI_LED muteA(SR_BS.red(7), MUTE_1, 1, 4, 1);
-MIDI_LED muteB(SR_BS.red(6), MUTE_2, 1, 4, 1);
-// MIDI_Input_Note_Buffer muteA(MUTE_1, 1, 4, 1);
-// MIDI_Input_Note_Buffer muteB(MUTE_2, 1, 4, 1);
+NoteDisplay soloDispA(display, soloA, XBM::solo10, 14,      50, WHITE);
+NoteDisplay soloDispB(display, soloB, XBM::solo10, 14 + 64, 50, WHITE);
 
-NoteDisplay muteDispA(display, muteA, mute10, 14,      50, WHITE);
-NoteDisplay muteDispB(display, muteB, mute10, 14 + 64, 50, WHITE);
+NoteDisplay rudeSoloDisp(display, rudeSolo, XBM::solo7, 36 + 64, 0, WHITE);
 
-MIDI_LED soloA(SR_BS.green(7), SOLO_1, 1, 4, 1);
-MIDI_LED soloB(SR_BS.green(6), SOLO_2, 1, 4, 1);
-// MIDI_Input_Note_Buffer soloA(SOLO_1, 1, 4, 1);
-// MIDI_Input_Note_Buffer soloB(SOLO_2, 1, 4, 1);
-
+// Record arm / ready
 MIDI_LED recrdyA(SR_BS.red(5), REC_RDY_1, 1, 4, 1);
 MIDI_LED recrdyB(SR_BS.red(4), REC_RDY_2, 1, 4, 1);
 
+NoteDisplay recrdyDispA(display, recrdyA, XBM::recordRdy10, 14 + 14,      50, WHITE);
+NoteDisplay recrdyDispB(display, recrdyB, XBM::recordRdy10, 14 + 14 + 64, 50, WHITE);
+
+// VU meters
 MCU_VU vuA(1, 4, false, 150);
 MCU_VU vuB(2, 4, false, 150);
 
 VUDisplay vuDisp_A(display, vuA, 32 + 11,      60, 16, 3, 1, WHITE);
 VUDisplay vuDisp_B(display, vuB, 32 + 11 + 64, 60, 16, 3, 1, WHITE);
 
+// VPot rings
 MCU_VPot_Ring ringA(1, 4);
 MCU_VPot_Ring ringB(2, 4);
 
@@ -159,14 +164,6 @@ void loop() {
   display.clearDisplay();
 
   drawTimeDisplay(display, tdisp, 0, 0);
-
-  if (play.getState())
-    display.drawXBitmap(64 + 16, 0, play_bits, play_width, play_height, WHITE);
-  if (record.getState())
-    display.drawXBitmap(64 + 16 + 10, 0, record_bits, record_width, record_height, WHITE);
-
-  if (rudeSolo.getState())
-    display.drawXBitmap(64 + 16 + 20, 0, solo_bits, solo_width, solo_height, WHITE);
     
   display.drawLine(1, 8, 126, 8, WHITE);
 
@@ -183,28 +180,20 @@ void loop() {
   vuDisp_A.draw();
   vuDisp_B.draw();
 
-  /*
-    drawCharacter(display, muteA,   'M', 1, 12,      49);
-    drawCharacter(display, soloA,   'S', 1, 12,      49);
-    drawCharacter(display, recrdyA, 'R', 1, 12 + 16, 49);
-  */
-  // if (muteA.getState())
-  //  display.drawXBitmap(14, 50, mute10_bits, mute10_width, mute10_height, WHITE);
   muteDispA.draw();
-  
-  if (soloA.getState())
-    display.drawXBitmap(14, 50, solo10_bits, solo10_width, solo10_height, WHITE);
-  if (recrdyA.getState())
-    display.drawXBitmap(14 + 14, 50, record10_bits, record10_width, record10_height, WHITE);
-
-  // if (muteB.getState())
-  //   display.drawXBitmap(64 + 14, 50, mute10_bits, mute10_width, mute10_height, WHITE);
   muteDispB.draw();
-  if (soloB.getState())
-    display.drawXBitmap(64 + 14, 50, solo10_bits, solo10_width, solo10_height, WHITE);
-  if (recrdyB.getState())
-    display.drawXBitmap(64 + 14 + 12, 50, record10_bits, record10_width, record10_height, WHITE);
 
+  soloDispA.draw();
+  soloDispB.draw();
+
+  rudeSoloDisp.draw();
+
+  playDisp.draw();
+  recordDisp.draw();
+
+  recrdyDispA.draw();
+  recrdyDispB.draw();
+  
 #ifdef FPS
   display.setTextSize(1);
   display.setCursor(115, 0);
