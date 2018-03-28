@@ -49,7 +49,7 @@ MakeXBitmap(recordRdy10);
 
 #define solo7_width 7
 #define solo7_height 7
-const static uint8_t solo7_bits[] = {
+const static uint8_t solo7_bits[] PROGMEM = {
     0x1c, 0x22, 0x02, 0x1c, 0x20, 0x22, 0x1c};
 
 MakeXBitmap(solo7);

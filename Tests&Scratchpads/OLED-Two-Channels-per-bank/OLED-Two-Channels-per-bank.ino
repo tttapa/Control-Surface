@@ -1,7 +1,7 @@
 #include "Display.h"
 
 #include <Control_Surface.h>
-#include <Display/Display.hpp>
+#include <Display/DisplayElements.hpp>
 #include <Display/Bitmaps/XBitmaps.h>
 
 #include <Wire.h>
