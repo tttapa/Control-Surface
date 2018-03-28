@@ -2,13 +2,14 @@
 
 #include "play.h"
 #include "record.h"
-#include "mute10.h"
+// #include "mute10.h"
 #include "solo10.h"
 #include "solo.h"
 #include "record10.h"
 
 #include <Control_Surface.h>
 #include <Display/Display.hpp>
+#include <Display/Bitmaps/Bitmap-Mute.h>
 
 #include <Wire.h>
 
@@ -18,7 +19,7 @@ using namespace ExtIO;
 #define FPS
 // #define SERIAL_FPS
 
-#define DEBUG_MIDI
+// #define DEBUG_MIDI
 // #define SERIAL_MIDI
 
 const uint8_t clockPin = 10;
@@ -82,6 +83,9 @@ MIDI_LED muteA(SR_BS.red(7), MUTE_1, 1, 4, 1);
 MIDI_LED muteB(SR_BS.red(6), MUTE_2, 1, 4, 1);
 // MIDI_Input_Note_Buffer muteA(MUTE_1, 1, 4, 1);
 // MIDI_Input_Note_Buffer muteB(MUTE_2, 1, 4, 1);
+
+NoteDisplay muteDispA(display, muteA, mute10, 14,      50, WHITE);
+NoteDisplay muteDispB(display, muteB, mute10, 14 + 64, 50, WHITE);
 
 MIDI_LED soloA(SR_BS.green(7), SOLO_1, 1, 4, 1);
 MIDI_LED soloB(SR_BS.green(6), SOLO_2, 1, 4, 1);
@@ -184,16 +188,19 @@ void loop() {
     drawCharacter(display, soloA,   'S', 1, 12,      49);
     drawCharacter(display, recrdyA, 'R', 1, 12 + 16, 49);
   */
-  if (muteA.getState())
-    display.drawXBitmap(14, 50, mute10_bits, mute10_width, mute10_height, WHITE);
-  else if (soloA.getState())
+  // if (muteA.getState())
+  //  display.drawXBitmap(14, 50, mute10_bits, mute10_width, mute10_height, WHITE);
+  muteDispA.draw();
+  
+  if (soloA.getState())
     display.drawXBitmap(14, 50, solo10_bits, solo10_width, solo10_height, WHITE);
   if (recrdyA.getState())
     display.drawXBitmap(14 + 14, 50, record10_bits, record10_width, record10_height, WHITE);
 
-  if (muteB.getState())
-    display.drawXBitmap(64 + 14, 50, mute10_bits, mute10_width, mute10_height, WHITE);
-  else if (soloB.getState())
+  // if (muteB.getState())
+  //   display.drawXBitmap(64 + 14, 50, mute10_bits, mute10_width, mute10_height, WHITE);
+  muteDispB.draw();
+  if (soloB.getState())
     display.drawXBitmap(64 + 14, 50, solo10_bits, solo10_width, solo10_height, WHITE);
   if (recrdyB.getState())
     display.drawXBitmap(64 + 14 + 12, 50, record10_bits, record10_width, record10_height, WHITE);

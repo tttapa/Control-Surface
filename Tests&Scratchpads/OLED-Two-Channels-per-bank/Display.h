@@ -3,6 +3,10 @@
 #include <Control_Surface.h>
 
 Adafruit_SSD1306 display;
+Adafruit_SSD1306 display2;
+
+static_assert(&display != &display2, "Err, displays are equal");
+static_assert(&display == &display, "Err, displays are not equal");
 
 #if (SSD1306_LCDHEIGHT != 64)
 #error("Height incorrect, please fix Adafruit_SSD1306.h!");

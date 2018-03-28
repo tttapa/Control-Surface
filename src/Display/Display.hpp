@@ -41,8 +41,6 @@ public:
     uint8_t value = vpot.getPosition();
     if (value == 0)
       return;
-    Serial.print("Position: ");
-    Serial.println(value);
     value--;
     switch (vpot.getMode())
     {
@@ -170,5 +168,40 @@ private:
 };
 
 const unsigned long VUDisplay::decayTime = 350;
+
+// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
+
+struct XBitmap
+{
+  XBitmap(uint16_t width, uint16_t height, const uint8_t bits[])
+      : width(width), height(height), bits(bits) {}
+  uint16_t width;
+  uint16_t height;
+  const uint8_t *bits;
+};
+
+class NoteDisplay : public DisplayElement
+{
+public:
+  NoteDisplay(Adafruit_GFX &display, MIDI_Input_Note_Buffer &notebuffer,
+              const XBitmap &xbm, int16_t x = 0, int16_t y = 0,
+              uint16_t color = WHITE)
+      : display(display), notebuffer(notebuffer),
+        xbm(xbm), x(x), y(y), color(color) {}
+
+  void draw()
+  {
+    if (notebuffer.getState())
+      display.drawXBitmap(x, y, xbm.bits, xbm.width, xbm.height, color);
+  }
+
+private:
+  Adafruit_GFX &display;
+  MIDI_Input_Note_Buffer &notebuffer;
+  const XBitmap &xbm;
+  int16_t x;
+  int16_t y;
+  uint16_t color;
+};
 
 #endif // DISPLAY_HPP
