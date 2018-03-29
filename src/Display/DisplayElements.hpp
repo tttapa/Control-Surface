@@ -201,6 +201,7 @@ public:
         size(size), color(color) {}
   void draw()
   {
+    display.setTextColor(color);
     display.setTextSize(size);
     display.setCursor(x, y);
     display.print(selector.getSetting() * multiplier + offset);
@@ -226,6 +227,7 @@ public:
         size(size), color(color) {}
   void draw()
   {
+    display.setTextColor(color);
     display.setTextSize(size);
     display.setCursor(x, y);
     char barStr[5], beatStr[3], frameStr[4]; // TODO: use tdisp pointers directly

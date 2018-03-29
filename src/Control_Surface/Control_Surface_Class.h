@@ -59,14 +59,14 @@ private:
     if (millis() - previousRefresh < 1000 / MAX_FPS)
       return;
     previousRefresh += 1000 / MAX_FPS;
-    
-    for (Display *display = Display::getFirst(); display != nullptr; display = display->getNext())
+
+    for (DisplayInterface *display = DisplayInterface::getFirst(); display != nullptr; display = display->getNext())
       display->clearDisplay();
     
     for (DisplayElement *de = DisplayElement::getFirst(); de != nullptr; de = de->getNext())
       de->draw();
     
-    for (Display *display = Display::getFirst(); display != nullptr; display = display->getNext())
+    for (DisplayInterface *display = DisplayInterface::getFirst(); display != nullptr; display = display->getNext())
       display->display();
       
   }

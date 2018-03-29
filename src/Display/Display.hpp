@@ -4,22 +4,22 @@
 #include "../Helpers/Linked_List.h"
 #include "./DisplayHelpers.hpp"
 
-class Display
+class DisplayInterface
 {
 public:
-  Display()
+  DisplayInterface()
   {
     LinkedList::append(this, first, last);
   }
-  ~Display() 
+  ~DisplayInterface() 
   {
     LinkedList::remove(this, first, last);
   }
-  static Display *getFirst()
+  static DisplayInterface *getFirst()
   {
     return first;
   }
-  Display *getNext()
+  DisplayInterface *getNext()
   {
     return next;
   }
@@ -28,11 +28,11 @@ public:
   virtual void clearDisplay() = 0;
 
 private:
-  Display *next;
-  Display *previous;
+  DisplayInterface *next;
+  DisplayInterface *previous;
 
-  static Display *first;
-  static Display *last;
+  static DisplayInterface *first;
+  static DisplayInterface *last;
 
   template <class Node>
   friend void LinkedList::append(Node *, Node *&, Node *&);
@@ -42,8 +42,8 @@ private:
   friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
 
-Display *Display::first = nullptr;
-Display *Display::last = nullptr;
+DisplayInterface *DisplayInterface::first = nullptr;
+DisplayInterface *DisplayInterface::last = nullptr;
 
 class DisplayElement
 {
@@ -52,7 +52,6 @@ public:
       : display(display)
   {
     LinkedList::append(this, first, last);
-    // Display::add(display); // Doesn't work because Adafruit_GFX has no virtual clearDisplay and display functions
   }
   ~DisplayElement()
   {
