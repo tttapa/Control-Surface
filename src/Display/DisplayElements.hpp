@@ -11,15 +11,21 @@
 #undef min
 #define min(a, b) ((a) < (b) ? (a) : (b))
 
+struct Location 
+{
+  int16_t x;
+  int16_t y;
+};
+
 class VPotDisplay : public DisplayElement
 {
 
 public:
   VPotDisplay(Adafruit_GFX &display, MCU_VPot_Ring &vpot,
-              int16_t x, int16_t y,
+              Location loc,
               uint16_t radius, uint16_t innerRadius, uint16_t color)
       : DisplayElement(display), vpot(vpot),
-        x(x + radius), y(y + radius),
+        x(loc.x + radius), y(loc.y + radius),
         radius(radius), innerRadius(innerRadius), color(color) {}
   void draw()
   {
@@ -97,11 +103,11 @@ class VUDisplay : public DisplayElement
 {
 public:
   VUDisplay(Adafruit_GFX &display, MCU_VU &vu,
-            int16_t x, int16_t y, uint16_t width,
+            Location loc, uint16_t width,
             uint8_t blockheight, uint8_t spacing,
             uint16_t color)
       : DisplayElement(display), vu(vu),
-        x(x), y(y), width(width),
+        x(loc.x), y(loc.y), width(width),
         blockheight(blockheight), spacing(spacing),
         color(color) {}
   void draw()
@@ -168,10 +174,10 @@ class NoteDisplay : public DisplayElement
 {
 public:
   NoteDisplay(Adafruit_GFX &display, MIDI_Input_Note_Buffer &notebuffer,
-              const XBitmap &xbm, int16_t x, int16_t y,
+              const XBitmap &xbm, Location loc,
               uint16_t color)
       : DisplayElement(display), notebuffer(notebuffer),
-        xbm(xbm), x(x), y(y), color(color) {}
+        xbm(xbm), x(loc.x), y(loc.y), color(color) {}
 
   void draw()
   {
@@ -193,11 +199,11 @@ class SelectorDisplay : public DisplayElement
 public:
   SelectorDisplay(Adafruit_GFX &display, Selector &selector,
                   int16_t offset, int16_t multiplier,
-                  int16_t x, int16_t y,
+                  Location loc,
                   uint8_t size, uint16_t color)
       : DisplayElement(display), selector(selector),
         offset(offset), multiplier(multiplier),
-        x(x), y(y),
+        x(loc.x), y(loc.y),
         size(size), color(color) {}
   void draw()
   {
@@ -220,10 +226,10 @@ class TimeDisplay : public DisplayElement
 {
 public:
   TimeDisplay(Adafruit_GFX &display, MCU_TimeDisplay &tdisp,
-              int16_t x, int16_t y,
+              Location loc,
               uint8_t size, uint16_t color)
       : DisplayElement(display), tdisp(tdisp),
-        x(x), y(y),
+        x(loc.x), y(loc.y),
         size(size), color(color) {}
   void draw()
   {

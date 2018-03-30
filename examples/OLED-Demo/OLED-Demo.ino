@@ -111,37 +111,37 @@ MCU_VPot_Ring ring_B (2, 4);
 /* =========================== */
 
 // Time display
-TimeDisplay timeDisp(display, tdisp, 0, 0, 1, WHITE); // position (0, 0), font size (1)
+TimeDisplay timeDisp(display, tdisp, {0, 0}, 1, WHITE); // position (0, 0), font size (1)
 
 // Play / Record
-NoteDisplay playDisp   (display, play,   XBM::play7,  16 + 64, 0, WHITE);
-NoteDisplay recordDisp (display, record, XBM::record7, 26 + 64, 0, WHITE);
+NoteDisplay playDisp   (display, play,   XBM::play7,   {16 + 64, 0}, WHITE);
+NoteDisplay recordDisp (display, record, XBM::record7, {26 + 64, 0}, WHITE);
 
 // Mute
-NoteDisplay muteDisp_A (display, mute_A, XBM::mute10, 14,      50, WHITE);
-NoteDisplay muteDisp_B (display, mute_B, XBM::mute10, 14 + 64, 50, WHITE);
+NoteDisplay muteDisp_A (display, mute_A, XBM::mute10, {14,      50}, WHITE);
+NoteDisplay muteDisp_B (display, mute_B, XBM::mute10, {14 + 64, 50}, WHITE);
 
 // Solo
-NoteDisplay soloDisp_A (display, solo_A, XBM::solo10, 14,      50, WHITE);
-NoteDisplay soloDisp_B (display, solo_B, XBM::solo10, 14 + 64, 50, WHITE);
+NoteDisplay soloDisp_A (display, solo_A, XBM::solo10, {14,      50}, WHITE);
+NoteDisplay soloDisp_B (display, solo_B, XBM::solo10, {14 + 64, 50}, WHITE);
 
-NoteDisplay rudeSoloDisp (display, rudeSolo, XBM::solo7, 36 + 64, 0, WHITE);
+NoteDisplay rudeSoloDisp (display, rudeSolo, XBM::solo7, {36 + 64, 0}, WHITE);
 
 // Record arm / ready
-NoteDisplay recrdyDisp_A (display, recrdy_A, XBM::recordRdy10, 14 + 14,      50, WHITE);
-NoteDisplay recrdyDisp_B (display, recrdy_B, XBM::recordRdy10, 14 + 14 + 64, 50, WHITE);
+NoteDisplay recrdyDisp_A (display, recrdy_A, XBM::recordRdy10, {14 + 14,      50}, WHITE);
+NoteDisplay recrdyDisp_B (display, recrdy_B, XBM::recordRdy10, {14 + 14 + 64, 50}, WHITE);
 
 // VU meters
-VUDisplay vuDisp_A (display, vu_A, 32 + 11,      60, 16, 3, 1, WHITE);  // position (32+11, 60), width (16), bar height (3) px, bar spacing (1) px
-VUDisplay vuDisp_B (display, vu_B, 32 + 11 + 64, 60, 16, 3, 1, WHITE);
+VUDisplay vuDisp_A (display, vu_A, {32 + 11,      60}, 16, 3, 1, WHITE);  // position (32+11, 60), width (16), bar height (3) px, bar spacing (1) px
+VUDisplay vuDisp_B (display, vu_B, {32 + 11 + 64, 60}, 16, 3, 1, WHITE);
 
 // VPot rings
-VPotDisplay vpotDisp_A (display, ring_A, 0,  10, 16, 13, WHITE);  // position (0, 10), outer radius (16) px, inner radius (13) px
-VPotDisplay vpotDisp_B (display, ring_B, 64, 10, 16, 13, WHITE);
+VPotDisplay vpotDisp_A (display, ring_A, {0,  10}, 16, 13, WHITE);  // position (0, 10), outer radius (16) px, inner radius (13) px
+VPotDisplay vpotDisp_B (display, ring_B, {64, 10}, 16, 13, WHITE);
 
 // Bank selector
-SelectorDisplay bsDisp_A (display, bs, 1, 2, 0,  50, 2, WHITE);  // first track of the bank (1), two tracks per bank (2), position (0, 50), font size (2)
-SelectorDisplay bsDisp_B (display, bs, 2, 2, 64, 50, 2, WHITE);
+SelectorDisplay bsDisp_A (display, bs, 1, 2, {0,  50}, 2, WHITE);  // first track of the bank (1), two tracks per bank (2), position (0, 50), font size (2)
+SelectorDisplay bsDisp_B (display, bs, 2, 2, {64, 50}, 2, WHITE);
 
 
 /* ---------- Setup ---------- */
