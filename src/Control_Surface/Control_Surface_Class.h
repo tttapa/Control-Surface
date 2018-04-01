@@ -5,6 +5,7 @@
 
 #ifdef DISPLAY_GFX
 #include "../Display/Display.hpp"
+#include "../Display/DisplayElement.hpp"
 #endif
 
 class Control_Surface_

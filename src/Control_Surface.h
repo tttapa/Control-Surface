@@ -40,7 +40,11 @@
 #include "./Helpers/StreamOut.h"
 
 #ifdef DISPLAY_GFX
-#include "./Display/DisplayElements.hpp"
+#include "./Display/NoteDisplay.hpp"
+#include "./Display/SelectorDisplay.hpp"
+#include "./Display/TimeDisplay.hpp"
+#include "./Display/VPotDisplay.hpp"
+#include "./Display/VUDisplay.hpp"
 #include "./Display/Bitmaps/XBitmaps.h"
 #endif
 

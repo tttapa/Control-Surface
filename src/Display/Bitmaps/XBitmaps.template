@@ -1,0 +1,27 @@
+#ifndef XBITMAPS_H
+#define XBITMAPS_H
+
+#include "../Display.hpp"
+
+
+struct XBitmap
+{
+  XBitmap(uint16_t width, uint16_t height, const uint8_t bits[])
+      : width(width), height(height), bits(bits) {}
+  uint16_t width;
+  uint16_t height;
+  const uint8_t *bits;
+};
+
+namespace XBM
+{
+
+#define MakeXBitmap(name) \
+    XBitmap name = \
+         { name##_width, name##_height, name##_bits }
+
+// =========================================================================== //
+
+:contents};
+
+#endif // XBITMAPS_H

@@ -1,0 +1,4 @@
+#define play_8_width 8
+#define play_8_height 7
+static unsigned char play_8_bits[] = {
+   0x03, 0x0f, 0x3f, 0xff, 0x3f, 0x0f, 0x03 };

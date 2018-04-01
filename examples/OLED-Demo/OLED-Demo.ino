@@ -114,22 +114,22 @@ MCU_VPot_Ring ring_B (2, 4);
 TimeDisplay timeDisp(display, tdisp, {0, 0}, 1, WHITE); // position (0, 0), font size (1)
 
 // Play / Record
-NoteDisplay playDisp   (display, play,   XBM::play7,   {16 + 64, 0}, WHITE);
-NoteDisplay recordDisp (display, record, XBM::record7, {26 + 64, 0}, WHITE);
+NoteDisplay playDisp   (display, play,   XBM::play_7,   {16 + 64, 0}, WHITE);
+NoteDisplay recordDisp (display, record, XBM::record_7, {26 + 64, 0}, WHITE);
 
 // Mute
-NoteDisplay muteDisp_A (display, mute_A, XBM::mute10, {14,      50}, WHITE);
-NoteDisplay muteDisp_B (display, mute_B, XBM::mute10, {14 + 64, 50}, WHITE);
+NoteDisplay muteDisp_A (display, mute_A, XBM::mute_10B, {14,      50}, WHITE);
+NoteDisplay muteDisp_B (display, mute_B, XBM::mute_10B, {14 + 64, 50}, WHITE);
 
 // Solo
-NoteDisplay soloDisp_A (display, solo_A, XBM::solo10, {14,      50}, WHITE);
-NoteDisplay soloDisp_B (display, solo_B, XBM::solo10, {14 + 64, 50}, WHITE);
+NoteDisplay soloDisp_A (display, solo_A, XBM::solo_10B, {14,      50}, WHITE);
+NoteDisplay soloDisp_B (display, solo_B, XBM::solo_10B, {14 + 64, 50}, WHITE);
 
-NoteDisplay rudeSoloDisp (display, rudeSolo, XBM::solo7, {36 + 64, 0}, WHITE);
+NoteDisplay rudeSoloDisp (display, rudeSolo, XBM::solo_7, {36 + 64, 0}, WHITE);
 
 // Record arm / ready
-NoteDisplay recrdyDisp_A (display, recrdy_A, XBM::recordRdy10, {14 + 14,      50}, WHITE);
-NoteDisplay recrdyDisp_B (display, recrdy_B, XBM::recordRdy10, {14 + 14 + 64, 50}, WHITE);
+NoteDisplay recrdyDisp_A (display, recrdy_A, XBM::rec_rdy_10B, {14 + 14,      50}, WHITE);
+NoteDisplay recrdyDisp_B (display, recrdy_B, XBM::rec_rdy_10B, {14 + 14 + 64, 50}, WHITE);
 
 // VU meters
 VUDisplay vuDisp_A (display, vu_A, {32 + 11,      60}, 16, 3, 1, WHITE);  // position (32+11, 60), width (16), bar height (3) px, bar spacing (1) px

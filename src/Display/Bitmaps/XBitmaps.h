@@ -1,4 +1,17 @@
+#ifndef XBITMAPS_H
+#define XBITMAPS_H
+
 #include "../Display.hpp"
+
+
+struct XBitmap
+{
+  XBitmap(uint16_t width, uint16_t height, const uint8_t bits[])
+      : width(width), height(height), bits(bits) {}
+  uint16_t width;
+  uint16_t height;
+  const uint8_t *bits;
+};
 
 namespace XBM
 {
@@ -9,78 +22,104 @@ namespace XBM
 
 // =========================================================================== //
 
-#define mute10_width 10
-#define mute10_height 10
-const static PROGMEM uint8_t mute10_bits[]  = {
-    0x01, 0x00, 0x89, 0x00, 0xd9, 0x00, 0xa9, 0x00, 0x89, 0x00, 0x89, 0x00,
-    0x89, 0x00, 0x01, 0x00, 0x01, 0x00, 0xff, 0x03};
-
+#include "mute_10B.arduinoxbm"
 /**
- * A 'M' mute symbol with left and bottom border of 10 px wide and 10 px high. 
+ * XBitmap&emsp;<b>mute_10B</b>&emsp;(10px × 10px)
+ * <img src="mute_10B.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:7.5em;border:1px solid #ccc">
  */
-MakeXBitmap(mute10);
+MakeXBitmap(mute_10B);
 
-// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
-
-#define play7_width 7
-#define play7_height 7
-const static PROGMEM uint8_t play7_bits[]  = {
-    0x01, 0x07, 0x1f, 0x7f, 0x1f, 0x07, 0x01};
-
+#include "mute_14B.arduinoxbm"
 /**
- * A play arrow ▶ symbol of 7 px wide and 7 px high.
+ * XBitmap&emsp;<b>mute_14B</b>&emsp;(14px × 14px)
+ * <img src="mute_14B.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:10.5em;border:1px solid #ccc">
  */
-MakeXBitmap(play7);
+MakeXBitmap(mute_14B);
 
-// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
-
-#define record7_width 7
-#define record7_height 7
-const static PROGMEM uint8_t record7_bits[]  = {
-    0x1c, 0x3e, 0x7f, 0x7f, 0x7f, 0x3e, 0x1c};
-
+#include "mute_7.arduinoxbm"
 /**
- * A record ⏺ symbol of 7 px wide and 7 px high.
+ * XBitmap&emsp;<b>mute_7</b>&emsp;(7px × 7px)
+ * <img src="mute_7.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:5.25em;border:1px solid #ccc">
  */
-MakeXBitmap(record7);
+MakeXBitmap(mute_7);
 
-// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
-
-#define recordRdy10_width 10
-#define recordRdy10_height 10
-const static PROGMEM uint8_t recordRdy10_bits[]  = {
-    0x01, 0x00, 0x79, 0x00, 0x89, 0x00, 0x89, 0x00, 0x79, 0x00, 0x29, 0x00,
-    0x49, 0x00, 0x89, 0x00, 0x01, 0x00, 0xff, 0x03};
-
+#include "play_10x9.arduinoxbm"
 /**
- * A 'R' record ready/arm symbol with left and bottom border of 10 px wide and 10 px high. 
+ * XBitmap&emsp;<b>play_10x9</b>&emsp;(10px × 9px)
+ * <img src="play_10x9.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:7.5em;border:1px solid #ccc">
  */
-MakeXBitmap(recordRdy10);
+MakeXBitmap(play_10x9);
 
-// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
-
-#define solo7_width 7
-#define solo7_height 7
-const static PROGMEM uint8_t solo7_bits[]  = {
-    0x1c, 0x22, 0x02, 0x1c, 0x20, 0x22, 0x1c};
-
+#include "play_7.arduinoxbm"
 /**
- * A 'S' solo symbol of 7 px wide and 7 px high. 
+ * XBitmap&emsp;<b>play_7</b>&emsp;(7px × 7px)
+ * <img src="play_7.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:5.25em;border:1px solid #ccc">
  */
-MakeXBitmap(solo7);
+MakeXBitmap(play_7);
 
-// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
-
-#define solo10_width 10
-#define solo10_height 10
-const static PROGMEM uint8_t solo10_bits[]  = {
-    0x01, 0x00, 0x71, 0x00, 0x89, 0x00, 0x09, 0x00, 0x71, 0x00, 0x81, 0x00,
-    0x89, 0x00, 0x71, 0x00, 0x01, 0x00, 0xff, 0x03};
-
+#include "play_8x7.arduinoxbm"
 /**
- * A 'S' solo symbol with left and bottom border of 10 px wide and 10 px high. 
+ * XBitmap&emsp;<b>play_8x7</b>&emsp;(8px × 7px)
+ * <img src="play_8x7.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:6.0em;border:1px solid #ccc">
  */
-MakeXBitmap(solo10);
+MakeXBitmap(play_8x7);
 
-// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
+#include "rec_rdy_10B.arduinoxbm"
+/**
+ * XBitmap&emsp;<b>rec_rdy_10B</b>&emsp;(10px × 10px)
+ * <img src="rec_rdy_10B.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:7.5em;border:1px solid #ccc">
+ */
+MakeXBitmap(rec_rdy_10B);
+
+#include "rec_rdy_14B.arduinoxbm"
+/**
+ * XBitmap&emsp;<b>rec_rdy_14B</b>&emsp;(14px × 14px)
+ * <img src="rec_rdy_14B.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:10.5em;border:1px solid #ccc">
+ */
+MakeXBitmap(rec_rdy_14B);
+
+#include "rec_rdy_7.arduinoxbm"
+/**
+ * XBitmap&emsp;<b>rec_rdy_7</b>&emsp;(7px × 7px)
+ * <img src="rec_rdy_7.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:5.25em;border:1px solid #ccc">
+ */
+MakeXBitmap(rec_rdy_7);
+
+#include "record_7.arduinoxbm"
+/**
+ * XBitmap&emsp;<b>record_7</b>&emsp;(7px × 7px)
+ * <img src="record_7.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:5.25em;border:1px solid #ccc">
+ */
+MakeXBitmap(record_7);
+
+#include "record_9.arduinoxbm"
+/**
+ * XBitmap&emsp;<b>record_9</b>&emsp;(9px × 9px)
+ * <img src="record_9.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:6.75em;border:1px solid #ccc">
+ */
+MakeXBitmap(record_9);
+
+#include "solo_10B.arduinoxbm"
+/**
+ * XBitmap&emsp;<b>solo_10B</b>&emsp;(10px × 10px)
+ * <img src="solo_10B.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:7.5em;border:1px solid #ccc">
+ */
+MakeXBitmap(solo_10B);
+
+#include "solo_14B.arduinoxbm"
+/**
+ * XBitmap&emsp;<b>solo_14B</b>&emsp;(14px × 14px)
+ * <img src="solo_14B.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:10.5em;border:1px solid #ccc">
+ */
+MakeXBitmap(solo_14B);
+
+#include "solo_7.arduinoxbm"
+/**
+ * XBitmap&emsp;<b>solo_7</b>&emsp;(7px × 7px)
+ * <img src="solo_7.png" alt="" style="image-rendering:pixelated;margin-right:100%;width:5.25em;border:1px solid #ccc">
+ */
+MakeXBitmap(solo_7);
+
 };
+
+#endif // XBITMAPS_H

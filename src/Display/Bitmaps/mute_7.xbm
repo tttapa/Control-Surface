@@ -1,0 +1,4 @@
+#define mute7_width 7
+#define mute7_height 7
+static unsigned char mute7_bits[] = {
+   0x22, 0x36, 0x2a, 0x22, 0x22, 0x22, 0x22 };

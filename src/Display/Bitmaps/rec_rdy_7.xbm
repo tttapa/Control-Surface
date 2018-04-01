@@ -1,0 +1,4 @@
+#define recordRdy7_width 7
+#define recordRdy7_height 7
+static unsigned char recordRdy7_bits[] = {
+   0x1e, 0x22, 0x22, 0x1e, 0x0a, 0x12, 0x22 };
