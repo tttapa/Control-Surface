@@ -77,7 +77,7 @@ for bm in bitmaps:
     width = bm[1]
     height = bm[2]
     XBitmaps += '#include "{}"\r\n'.format(id + '.arduinoxbm') # TODO: multiline string
-    XBitmaps += '/**\r\n * XBitmap&emsp;<b>{}</b>&emsp;({}px × {}px)\r\n * <img src="{}" alt="" style="image-rendering:pixelated;margin-right:100%;width:{}em;border:1px solid #ccc">\r\n */\r\n'.format(id, width, height, id + '.png', float(width)*0.75)
+    XBitmaps += '/**\r\n * const XBitmap&emsp;<b>{}</b>&emsp;({}px × {}px)\r\n * <img src="{}" alt="" style="image-rendering:pixelated;image-rendering:-moz-crisp-edges;width:{}em;border:1px solid #ccc">\r\n */\r\n'.format(id, width, height, id + '.png', float(width)*0.75)
     XBitmaps += 'MakeXBitmap({});\r\n\r\n'.format(id)
 
 with open(os.path.join(dirnm, 'XBitmaps.template'), 'r') as template:
