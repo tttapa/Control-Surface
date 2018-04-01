@@ -17,7 +17,7 @@ namespace XBM
 {
 
 #define MakeXBitmap(name) \
-    XBitmap name = \
+    const XBitmap name = \
          { name##_width, name##_height, name##_bits }
 
 // =========================================================================== //
