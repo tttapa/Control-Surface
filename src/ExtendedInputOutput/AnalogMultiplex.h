@@ -2,36 +2,23 @@
 #define ANALOGMULTIPLEX_H_
 
 #include "ExtendedIOElement.h"
-#ifdef __AVR__
-#include "../Helpers/initializer_list.h"
-#else
-#include <initializer_list>
-#endif
 #include <stdlib.h>
-#include <string.h>
+#include "../Helpers/Copy.hpp"
 
 class AnalogMultiplex : public ExtendedIOElement
 {
 public:
-  template <size_t N>
-  AnalogMultiplex(pin_t analogPin, const pin_t (&addressPins)[N])
-      : analogPin(analogPin), addressPins(addressPins), nb_addressPins(N), nb_addresses(1 << nb_addressPins),
-        ExtendedIOElement(1 << N)
+  template <class P, size_t N>
+  AnalogMultiplex(pin_t analogPin, const P (&addressPins)[N])
+      : ExtendedIOElement(1 << N), analogPin(analogPin), nb_addressPins(N), nb_addresses(1 << nb_addressPins)
   {
-    begin();
-  }
-  AnalogMultiplex(pin_t analogPin, std::initializer_list<pin_t> addressPins)
-      : analogPin(analogPin), nb_addressPins(addressPins.size()), nb_addresses(1 << addressPins.size()),
-        ExtendedIOElement(1 << addressPins.size())
-  {
-    addressPinsStorage = (pin_t *)malloc(sizeof(pin_t) * addressPins.size());
-    memcpy(addressPinsStorage, addressPins.begin(), sizeof(pin_t) * addressPins.size());
-    this->addressPins = addressPinsStorage;
+    this->addressPins = new pin_t[N];
+    copy(this->addressPins, addressPins);
     begin();
   }
   ~AnalogMultiplex()
   {
-    free(addressPinsStorage);
+    free(addressPins);
   }
 
   int digitalRead(pin_t pin);
@@ -40,8 +27,7 @@ public:
 
 private:
   const pin_t analogPin;
-  const pin_t *addressPins;
-  pin_t *addressPinsStorage = nullptr;
+  pin_t *addressPins = nullptr;
   const size_t nb_addressPins, nb_addresses;
 
   uint8_t pinToMuxAddress(pin_t pin);
