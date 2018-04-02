@@ -20,16 +20,18 @@
 // ---------------------------- User Settings ---------------------------- //
 // ======================================================================= //
 
-/** The factor for the analog filter: 
-    Difference equation: y[n] = k*x[n] + (1-k)*y[n-1]  
-    where k = 0.5 ^ ANALOG_FILTER_SHIFT_FACTOR */
+/** The factor for the analog filter: <br>
+    Difference equation: \f$ y[n] = k*x[n] + (1-k)*y[n-1] \f$
+    where \f$ k = \left(\frac{1}{2}\right)^{ANALOG\_FILTER\_SHIFT\_FACTOR} \f$ */
 #define ANALOG_FILTER_SHIFT_FACTOR 4
 
 /** The debounce time for momentary push buttons in milliseconds */
 #define BUTTON_DEBOUNCE_TIME 25
 
-/** Don't parse System Exclusive messages (@TODO) */
-// #define IGNORE_SYSEX
+/** Don't parse System Exclusive messages 
+ * @todo Make sure that this is implemented everywhere.
+*/
+#define IGNORE_SYSEX
 
 /** The length of the maximum System Exclusive message 
     that can be received. The maximum length sent by

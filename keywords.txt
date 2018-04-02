@@ -36,8 +36,6 @@ relativeCCmode	KEYWORD1
 bankType	KEYWORD1
 buttonType	KEYWORD1
 
-initializer_list	KEYWORD1
-
 MCU	KEYWORD1
 MIDI_CC	KEYWORD1
 

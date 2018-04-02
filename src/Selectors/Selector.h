@@ -8,12 +8,6 @@
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 #include "../Settings/SettingsWrapper.h"
 
-#ifdef __AVR__
-#include "../Helpers/initializer_list.h"
-#else
-#include <initializer_list>
-#endif
-
 using namespace ExtIO;
 
 class Selector
