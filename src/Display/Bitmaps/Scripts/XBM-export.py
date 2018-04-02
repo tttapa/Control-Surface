@@ -56,9 +56,14 @@ for filename in sorted(os.listdir(inputdir)):
         with open(os.path.join(inputdir, filename), 'r') as file:
             contents = file.read()
         identifier = os.path.splitext(filename)[0]
-        contents = re.sub(r'(#define )[a-zA-Z_][a-zA-Z0-9_]*((?:(_width)|(_height)) +\d+)',r'\1{}\2'.format(identifier),contents)
-        contents = re.sub(r'static unsigned char [a-zA-Z_][a-zA-Z0-9_]*(_bits\[\] *= *{ *(?:0x[0-9a-fA-F]{2}, *)*}?;?) *',r'static const PROGMEM uint8_t {}\1'.format(identifier),contents)
-        m = re.search(r'#define [a-zA-Z\d_]+_width\s+(?P<width>\d+)[\r\n\s]+#define [a-zA-Z\d_]+_height\s+(?P<height>\d+)', contents)
+        contents = re.sub(r'(#define )[a-zA-Z_][a-zA-Z0-9_]*((?:(_width)|(_height)) +\d+)',
+                          r'\1{}\2'.format(identifier),
+                          contents)
+        contents = re.sub(r'static unsigned char [a-zA-Z_][a-zA-Z0-9_]*(_bits\[\] *= *{ *(?:0x[0-9a-fA-F]{2}, *)*}?;?) *',
+                          r'static const PROGMEM uint8_t {}\1'.format(identifier),
+                          contents)
+        m = re.search(r'#define [a-zA-Z\d_]+_width\s+(?P<width>\d+)[\r\n\s]+#define [a-zA-Z\d_]+_height\s+(?P<height>\d+)', 
+                      contents)
         if m:
             width, height = m.group('width', 'height')
             print('\t({}px × {}px)'.format(width, height))
