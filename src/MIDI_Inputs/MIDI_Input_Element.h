@@ -17,7 +17,7 @@ public:
 
   void setChannelOffset(uint8_t offset); // Set the channel offset
   void setAddressOffset(uint8_t offset); // Set the address (note or controller number) offset
-  virtual inline bool match(const MIDI_message_matcher &midimsg);
+  virtual bool match(const MIDI_message_matcher &midimsg);
 
 protected:
   virtual bool updateImpl(const MIDI_message_matcher &midimsg) {return true;}
@@ -103,7 +103,7 @@ public:
   static MIDI_Input_Element_ChannelPressure *getLast();
   MIDI_Input_Element_ChannelPressure *getNext();
 
-  inline bool match(const MIDI_message_matcher &midimsg);
+  bool match(const MIDI_message_matcher &midimsg);
 
 protected:
   MIDI_Input_Element_ChannelPressure *next = nullptr, *previous = nullptr;

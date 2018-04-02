@@ -24,11 +24,11 @@ public:
     LinkedList::remove(this, first, last);
   }
 
-  virtual void pinMode(pin_t pin, uint8_t mode){};
-  virtual void digitalWrite(pin_t pin, uint8_t mode){};
-  virtual int digitalRead(pin_t pin){};
-  virtual analog_t analogRead(pin_t pin){};
-  virtual void analogWrite(pin_t pin, analog_t val){};
+  virtual void pinMode(pin_t pin, uint8_t mode){}
+  virtual void digitalWrite(pin_t pin, uint8_t mode){}
+  virtual int digitalRead(pin_t pin){return 0;} // TODO: should these be pure virtual?
+  virtual analog_t analogRead(pin_t pin){return 0;}
+  virtual void analogWrite(pin_t pin, analog_t val){}
 
   virtual void begin(){};
   virtual void refresh(){};

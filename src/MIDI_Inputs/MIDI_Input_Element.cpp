@@ -21,7 +21,7 @@ bool MIDI_Input_Element::update(const MIDI_message_matcher &midimsg)
     return true;
 }
 
-inline bool MIDI_Input_Element::match(const MIDI_message_matcher &midimsg)
+bool MIDI_Input_Element::match(const MIDI_message_matcher &midimsg)
 {
     return matchAddress(midimsg.data1) && matchChannel(midimsg.channel);
 }
@@ -122,7 +122,7 @@ MIDI_Input_Element_ChannelPressure::~MIDI_Input_Element_ChannelPressure()
     LinkedList::remove(this, first, last);
 }
 
-inline bool MIDI_Input_Element_ChannelPressure::match(const MIDI_message_matcher &midimsg)
+bool MIDI_Input_Element_ChannelPressure::match(const MIDI_message_matcher &midimsg)
 {
     return matchChannel(midimsg.channel);
 }

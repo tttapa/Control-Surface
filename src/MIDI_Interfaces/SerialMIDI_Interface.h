@@ -53,7 +53,7 @@ template <typename T>
 class SerialMIDI_Interface : public StreamMIDI_Interface
 {
 public:
-  SerialMIDI_Interface(T &serial, unsigned long baud) : serial(serial), baud(baud), StreamMIDI_Interface(serial) {}
+  SerialMIDI_Interface(T &serial, unsigned long baud) : StreamMIDI_Interface(serial), serial(serial), baud(baud) {}
   virtual void begin()
   {
     serial.begin(baud);

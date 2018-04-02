@@ -276,14 +276,11 @@ public:
     return first;
   }
 
-protected:
-  uint8_t Setting = 0;
-  uint8_t nb_settings;
-  virtual void refreshImpl(uint8_t newSetting) {}
-
 private:
-  pin_t switchPin, ledPin;
-  pin_t *switchPins, *ledPins;
+  pin_t switchPin = 0;
+  pin_t ledPin = 0;
+  pin_t *switchPins = nullptr;
+  pin_t *ledPins = nullptr;
 
   bool firstRefresh = true;
 
@@ -295,7 +292,7 @@ private:
     bool prevState = HIGH;
   } dbButton1, dbButton2;
 
-  const unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;  // Edit this in ../Settings/Settings.h
+  const unsigned long debounceTime = BUTTON_DEBOUNCE_TIME; // Edit this in ../Settings/Settings.h
 
   const static int8_t falling = LOW - HIGH;
   const static int8_t rising = HIGH - LOW;
@@ -326,6 +323,11 @@ private:
   friend void LinkedList::moveDown(Node *, Node *&, Node *&);
   template <class Node>
   friend void LinkedList::remove(Node *, Node *&, Node *&);
-};
+
+protected:
+  uint8_t Setting = 0;
+  uint8_t nb_settings = 1;
+  virtual void refreshImpl(uint8_t newSetting) {}
+  };
 
 #endif // SELECTOR_H_

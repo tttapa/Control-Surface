@@ -55,6 +55,8 @@ protected:
   virtual void send(unsigned int value) = 0;
 };
 
+// =========================================================================================== //
+
 #define Analog _Pragma("GCC warning \"'Analog' is deprecated\"") AnalogCC
 
 /**
@@ -90,6 +92,8 @@ protected:
 
   uint8_t controller, channel;
 };
+
+// =========================================================================================== //
 
 #define AnalogHiRes _Pragma("GCC warning \"'AnalogHiRes' is deprecated\"") AnalogPB
 

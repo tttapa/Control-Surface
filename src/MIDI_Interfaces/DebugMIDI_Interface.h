@@ -110,7 +110,7 @@ template <typename T>
 class SerialDebugMIDI_Interface : public StreamDebugMIDI_Interface
 {
 public:
-  SerialDebugMIDI_Interface(T &serial, unsigned long baud) : serial(serial), baud(baud), StreamDebugMIDI_Interface(serial) {}
+  SerialDebugMIDI_Interface(T &serial, unsigned long baud) : StreamDebugMIDI_Interface(serial), serial(serial), baud(baud) {}
   virtual void begin()
   {
     serial.begin(baud);
