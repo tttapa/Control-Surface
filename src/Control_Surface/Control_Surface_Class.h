@@ -43,9 +43,6 @@ public:
 
     updateMidiInput();
     refreshInputs();
-#ifdef DEBUG_TIME
-    PerfCounter::print();
-#endif
 #ifdef DISPLAY_GFX
     refreshDisplays();
 #endif

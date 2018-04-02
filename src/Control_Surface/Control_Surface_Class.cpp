@@ -3,7 +3,6 @@
 #include "../MIDI_Inputs/MIDI_Input_Element.h"
 #include "../Banks/BankSelector.h"
 #include "../Helpers/StreamOut.h"
-#include "../Helpers/PerfCounter.h"
 
 Control_Surface_ &Control_Surface_::getInstance()
 {
@@ -39,33 +38,22 @@ MIDI_Interface *Control_Surface_::MIDI()
 
 void Control_Surface_::refreshControls()
 {
-    static PerfCounter pc("Refreshing control elements");
-    pc.start();
     for (MIDI_Control_Element *element = MIDI_Control_Element::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
-    pc.stop();
 }
 
 void Control_Surface_::refreshSelectors()
 {
-    static PerfCounter pc("Refreshing selectors");
-    pc.start();
     for (Selector *element = Selector::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
-    pc.stop();
 }
 
 void Control_Surface_::updateMidiInput()
 {
-    static PerfCounter pc("Updating MIDI input");
-    pc.start();
 #ifdef DEBUG
 //DEBUG_OUT << "updateMidiInput()" << endl;
 #endif
-    static PerfCounter pcmr("\tMIDI read");
-    pcmr.start();
     MIDI_read_t midiReadResult = midi->read();
-    // pcmr.stop();
 #ifdef DEBUG_TIME
     // DEBUG_OUT << "midiReadResult = " << midiReadResult << endl;
 #endif
@@ -103,24 +91,18 @@ void Control_Surface_::updateMidiInput()
 #ifdef DEBUG
                 DEBUG_OUT << "Reset All Controllers" << endl;
 #endif
-                static PerfCounter pcreset("\t\tResetting CC and Channel Pressure input elements");
-                pcreset.start();
                 for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
                     element->reset();
                 for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
                     element->reset();
-                pcreset.stop();
             }
             else if (midimsg.type == CC && midimsg.data1 == 0x7B) // All Notes off
             {
 #ifdef DEBUG
                 DEBUG_OUT << "All Notes Off" << endl;
 #endif
-                static PerfCounter pcnoteoff("\t\tTurning all notes off");
-                pcnoteoff.start();
                 for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
                     element->reset();
-                pcnoteoff.stop();
             }
             else
             {
@@ -129,8 +111,6 @@ void Control_Surface_::updateMidiInput()
 #endif
                 if (midimsg.type == CC) // Control Change
                 {
-                    static PerfCounter pcCC("\t\tUpdating and matching CC");
-                    pcCC.start();
                     for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
                     {
 #ifdef DEBUG
@@ -139,12 +119,9 @@ void Control_Surface_::updateMidiInput()
                         if (element->update(midimsg))
                             break;
                     }
-                    pcCC.stop();
                 }
                 else if (midimsg.type == NOTE_OFF || midimsg.type == NOTE_ON) // Note
                 {
-                    static PerfCounter pcN("\t\tUpdating and matching Note");
-                    pcN.start();
                     for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
                     {
 #ifdef DEBUG
@@ -154,12 +131,9 @@ void Control_Surface_::updateMidiInput()
                         if (element->update(midimsg))
                             break;
                     }
-                    pcN.stop();
                 }
                 else if (midimsg.type == CHANNEL_PRESSURE) // Channel Pressure
                 {
-                    static PerfCounter pcCP("\t\tUpdating and matching Channel Pressure");
-                    pcCP.start();
                     for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
                     {
 #ifdef DEBUG
@@ -168,7 +142,6 @@ void Control_Surface_::updateMidiInput()
                         if (element->update(midimsg))
                             break;
                     }
-                    pcCP.stop();
                 }
             }
         }
@@ -184,29 +157,17 @@ void Control_Surface_::updateMidiInput()
             DEBUG_OUT << dec << endl;
 #endif
         }
-        pcmr.start();
         midiReadResult = midi->read();
-        pcmr.stop();
     }
-    pc.stop();
 }
 void Control_Surface_::refreshInputs()
 {
-    static PerfCounter pcCC("Refreshing input elements CC");
-    pcCC.start();
     for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
-    pcCC.stop();
-    static PerfCounter pcN("Refreshing input elements Note");
-    pcN.start();
     for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
-    pcN.stop();
-    static PerfCounter pcCP("Refreshing input elements Channel Pressure");
-    pcCP.start();
     for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
         element->refresh();
-    pcCP.stop();
 }
 
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();
