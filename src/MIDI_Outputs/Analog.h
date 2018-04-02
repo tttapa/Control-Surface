@@ -43,7 +43,7 @@ private:
   pin_t analogPin;
   uint8_t controllerNumber, channel;
   int (*mapFn)(int) = nullptr;
-  EMA<ANALOG_FILTER_SHIFT_FACTOR> filter;
+  EMA<ANALOG_FILTER_SHIFT_FACTOR, int32_t> filter;
 
 protected:
   /**

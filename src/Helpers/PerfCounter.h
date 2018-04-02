@@ -40,7 +40,7 @@ class PerfCounter
   private:
     unsigned long startTime = 0;
     const char *name = nullptr;
-    EMA64<4> averageDuration;
+    EMA<4, int64_t> averageDuration;
     size_t counter = 0;
 
     static char buff[32768];
