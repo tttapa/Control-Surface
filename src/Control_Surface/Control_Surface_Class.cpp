@@ -5,8 +5,6 @@
 #include "../Helpers/StreamOut.h"
 #include "../Helpers/PerfCounter.h"
 
-// public:
-
 Control_Surface_ &Control_Surface_::getInstance()
 {
     static Control_Surface_ instance;
@@ -38,8 +36,6 @@ MIDI_Interface *Control_Surface_::MIDI()
 {
     return midi;
 }
-
-// private:
 
 void Control_Surface_::refreshControls()
 {

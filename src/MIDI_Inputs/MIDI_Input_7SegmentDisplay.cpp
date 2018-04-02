@@ -6,8 +6,6 @@
 
 using namespace ExtIO;
 
-// public:
-
 MCU_7SegmentDisplay::MCU_7SegmentDisplay(uint8_t address, uint8_t length)
     : MIDI_Input_Element_CC(address, 1, length, 1), length(length)
 {
@@ -25,7 +23,7 @@ bool MCU_7SegmentDisplay::updateImpl(const MIDI_message_matcher &midimsg)
     uint8_t data2 = midimsg.data2;
     uint8_t charIndex = length - 1 - (data1 - address);
     charIndex = charIndex < length ? charIndex : length - 1;
-    bool decimalPt = data2 & 0x40;
+    // bool decimalPt = data2 & 0x40; // TODO: use decimalPt
     data2 &= 0x3F;
     char character = data2 >= 0x20 ? data2 : data2 + 0x40;
 #ifdef DEBUG
@@ -38,8 +36,6 @@ bool MCU_7SegmentDisplay::updateImpl(const MIDI_message_matcher &midimsg)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
-
-// public:
 
 MCU_TimeDisplay::MCU_TimeDisplay() : MCU_7SegmentDisplay(0x40, 0xA) {}
 
@@ -99,8 +95,6 @@ void MCU_TimeDisplay::getFrames(char *buff)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
-
-// public:
 
 MCU_AssignmentDisplay::MCU_AssignmentDisplay() : MCU_7SegmentDisplay(0x4A, 0x2) {}
 void refresh()

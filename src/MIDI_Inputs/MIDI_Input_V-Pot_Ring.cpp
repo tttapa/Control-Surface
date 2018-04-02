@@ -43,8 +43,6 @@ uint8_t MCU_VPot_Ring::getMode()
     return getMode(addressOffset);
 }
 
-// private:
-
 void MCU_VPot_Ring::setValue(uint8_t address, uint8_t value)
 {
     values[address] = value;
@@ -63,10 +61,6 @@ uint8_t MCU_VPot_Ring::getMode(uint8_t address)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
-
-// public:
-
-// TODO: replace address with track
 
 // TODO: Should outputs be reset to input mode in destructor?
 
@@ -88,12 +82,14 @@ MCU_VPot_Ring_LED::MCU_VPot_Ring_LED(const pin_t (&LEDs)[11], pin_t centerLEDpin
 }
 MCU_VPot_Ring_LED::~MCU_VPot_Ring_LED()
 {
+    /*
     for (pin_t pin = 0; pin < 11; pin++)
     {
         ExtIO::pinMode(LEDs[pin], INPUT);
     }
     if (centerLED)
         ExtIO::pinMode(centerLEDpin, INPUT);
+    */
 }
 
 // protected:

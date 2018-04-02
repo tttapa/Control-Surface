@@ -5,7 +5,6 @@
 #include "../Control_Surface/Control_Surface_Class.h"
 #include <string.h>
 
-// public:
 template <size_t nb_rows, size_t nb_cols>
 ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const pin_t (&rowPins)[nb_rows], const pin_t (&colPins)[nb_cols], const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel, uint8_t velocity)
     : addresses(addresses), channel(channel), velocity(velocity)
@@ -25,7 +24,6 @@ ButtonMatrix<nb_rows, nb_cols>::~ButtonMatrix()
     delete[] prevStates;
 }
 
-// private:
 template <size_t nb_rows, size_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::refresh()
 {
