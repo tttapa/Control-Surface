@@ -1,0 +1,20 @@
+<svg 
+    version="1.1"
+    baseProfile="full"
+    xmlns="http://www.w3.org/2000/svg"
+    width="160" height="160">
+    <circle id="circle" cx="56" cy="108" r="24" stroke="none" fill="blue"/>
+    <rect id="rect" x="28" y="80" width="104" height="56" rx="28" ry="28" stroke-width="3" stroke="rgba(0,0,0,1)" fill="rgba(0,0,0,0)" style="cursor: pointer"/>
+    <text id="setting" x="80" y="56" font-family="Verdana" font-size="28" text-anchor="middle">1</text>
+    <script>
+        let circle = document.getElementById("circle");
+        let rect   = document.getElementById("rect");
+        let setting = document.getElementById("setting");
+        let buttonstate = false;
+        rect.onclick = function() {
+            circle.setAttribute("cx", buttonstate ? "56" : "104");
+            setting.textContent = buttonstate ? "1" : "2" ;
+            buttonstate = !buttonstate;
+        }
+    </script>
+</svg>

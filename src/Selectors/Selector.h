@@ -40,6 +40,8 @@ public:
  *
  * Selector ( switchPin, Selector::TOGGLE );
 
+<img src="selector-one-toggle-switch.svg" type="image/svg+xml"></img>
+
  * <h3>One momentary switch (push button)</h3>
  *
  * Pressing the button switches the Setting:  
@@ -51,6 +53,8 @@ public:
  * Selector ( buttonPin );  
  * Selector ( buttonPin, Selector::MOMENTARY );
  
+<img src="selector-one-momentary-switch.svg" type="image/svg+xml"></img>
+
  * @param switchPin The pin with the switch connected. The built-in pull-up resistor will be enabled.
  * @param switchType The type of switch. (See Selector::SwitchType)
  */
@@ -78,6 +82,8 @@ public:
  *
  * Selector ( pin_t switchPin, pin_t ledPin, Selector::TOGGLE );
 
+<img src="selector-one-toggle-switch-LED.svg" type="image/svg+xml"></img>
+
  * <h3>One momentary switch (push button) and one LED</h3>
  *
  * Pressing the button switches the Setting and toggles the LED:  
@@ -88,6 +94,8 @@ public:
  *
  * Selector ( buttonPin, ledPin );  
  * Selector ( buttonPin, ledPin, Selector::MOMENTARY );
+
+<img src="selector-one-momentary-switch-LED.svg" type="image/svg+xml"></img>
 
  * @param switchPin The pin with the switch connected. The built-in pull-up resistor will be enabled.
  * @param ledPin The pin with the LED connected.
@@ -247,7 +255,7 @@ public:
   Selector(const pin_t (&switchPins)[N], uint8_t nb_settings) // Two buttons (+1, -1), no LEDs
       : nb_settings(nb_settings)
   {
-    static_assert(N > 0, "Error: no switch pins specified. ");
+    static_assert(N > 0, "Error: no switch pins specified. ");  // TODO: can this ever happen?
     static_assert(N <= 2, "Error: maximum number of buttons in the increment/decrement configuration is 2. ");
     if (N == 1)
     {

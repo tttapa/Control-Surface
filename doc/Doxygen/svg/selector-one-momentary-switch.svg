@@ -1,0 +1,17 @@
+<svg 
+    version="1.1"
+    baseProfile="full"
+    xmlns="http://www.w3.org/2000/svg"
+    width="160" height="160">
+    <rect id="button" x="52" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <text id="setting" x="80" y="56" font-family="Verdana" font-size="28" text-anchor="middle">1</text>
+    <script>
+        let button   = document.getElementById("button");
+        let setting = document.getElementById("setting");
+        let buttonstate = false;
+        button.onclick = function() {
+            setting.textContent = buttonstate ? "1" : "2" ;
+            buttonstate = !buttonstate;
+        }
+    </script>
+</svg>
