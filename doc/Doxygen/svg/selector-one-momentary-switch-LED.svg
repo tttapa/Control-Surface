@@ -3,6 +3,7 @@
     baseProfile="full"
     xmlns="http://www.w3.org/2000/svg"
     width="160" height="220">
+    <text x="12" y="16" font-family="Verdana" font-size="16">Try it:</text>
     <rect id="button" x="52" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
     <text id="setting" x="80" y="56" font-family="Verdana" font-size="28" text-anchor="middle">1</text>
     <circle id="led" cx="80" cy="180" r="16" stroke-width="3" stroke="black" fill="white"/>

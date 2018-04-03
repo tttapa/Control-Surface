@@ -1,0 +1,22 @@
+<svg 
+    version="1.1"
+    baseProfile="full"
+    xmlns="http://www.w3.org/2000/svg"
+    width="496" height="160">
+    <text x="12" y="16" font-family="Verdana" font-size="16">Try it:</text>
+    <rect id="button1" x="52" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <rect id="button2" x="136" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <rect id="button3" x="220" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <rect id="button4" x="304" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <rect id="button5" x="388" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue" style="cursor: pointer"/>
+    <text id="setting" x="248" y="56" font-family="Verdana" font-size="28" text-anchor="middle">1</text>
+    <script>
+        let setting = document.getElementById("setting");
+        for (let i = 1; i &lt;= 5; i++) {
+            let button = document.getElementById("button"+i);
+            button.onclick = function() {
+                setting.textContent = i;
+            }
+        }
+    </script>
+</svg>

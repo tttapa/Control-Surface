@@ -126,6 +126,8 @@ public:
  *
  * Selector( { buttonPin1, buttonPin2, ... , buttonPinN } );
 
+<img src="selector-multiple-momentary-switches.svg" type="image/svg+xml"></img>
+
  * @tparam N The number of buttons.
  * @param switchPins A list of pin numbers with the buttons connected.
  */
@@ -152,6 +154,8 @@ public:
  * When the N-th button is pressed, Setting N is selected, the N-th LED turns on, and all other LEDs are off.
  *
  * Selector( { buttonPin1, buttonPin2, ... , buttonPinN }, { ledPin1, ledPin2, ... , ledPinN } );
+
+<img src="selector-multiple-momentary-switches-LED.svg" type="image/svg+xml"></img>
 
  * <h3>Two momentary switches (push buttons) and multiple LEDs (increment / decrement)</h3>
  *

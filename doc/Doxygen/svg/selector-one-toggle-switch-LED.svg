@@ -3,6 +3,7 @@
     baseProfile="full"
     xmlns="http://www.w3.org/2000/svg"
     width="160" height="220">
+    <text x="12" y="16" font-family="Verdana" font-size="16">Try it:</text>
     <circle id="circle" cx="56" cy="108" r="24" stroke="none" fill="blue"/>
     <rect id="rect" x="28" y="80" width="104" height="56" rx="28" ry="28" stroke-width="3" stroke="black" fill="rgba(0,0,0,0)" style="cursor: pointer"/>
     <text id="setting" x="80" y="56" font-family="Verdana" font-size="28" text-anchor="middle">1</text>
