@@ -13,155 +13,91 @@ using namespace ExtIO;
 class Selector
 {
 public:
-  enum buttonType
+  /**
+ * @brief The type of switch the Selector will be used with.
+ * 
+ */
+  enum SwitchType
   {
+    /**
+     * @brief A toggle switch that remains in the set position.   
+     */
     TOGGLE,
+    /**
+     * @brief A momentary push button that returns to the 'off'
+     *        position when released
+     */
     MOMENTARY
   };
 
-  /*
-  Different  Select modes:
+/**
+ * @brief Construct a Selector object with one switch.
 
-  - One toggle switch (latching switch)
+ * <h3>One toggle switch (latching switch)</h3>
+ * 
+ * When the switch is in the 'off' position, Setting 1 is selected  
+ * When the switch is in the 'on' position, Setting 2 is selected
+ *
+ * Selector ( switchPin, Selector::TOGGLE );
 
-      When the switch is in the 'off' position, Setting 1 is selected
-      When the switch is in the 'on' position, Setting 2 is selected
-
-      Selector(, switch pin, Selector::TOGGLE);
-
-
-  - One toggle switch (latching switch) and one LED
-
-      When the switch is in the 'off' position, Setting 1 is selected and the LED is off
-      When the switch is in the 'on' position, Setting 2 is selected and the LED is on
-
-          Note: this mode is pretty useless, you can just connect the LED to the switch directly,
-                without wasting a digital output pin on it.
-
-      Selector(, switch pin, led pin, Selector::TOGGLE);
-
-
-  - One momentary switch (push button)
-
-      Pressing the button switches the Setting:
-      When starting the program, Setting 1 is selected,
-      When the button is pressed, Setting 2 is selected,
-      When the button is pressed again, Setting 1 is selected, 
-      and so on.
-
-      Selector(, button pin);
-      Selector(, button pin, Selector::MOMENTARY);
-
-
-  - One momentary switch (push button) and one LED
-
-      Pressing the button switches the Setting and toggles the LED:
-      When starting the program, Setting 1 is selected and the LED is off,
-      When the button is pressed, Setting 2 is selected and the LED turns on,
-      When the button is pressed again, Setting 1 is selected and the LED is turned off,
-      and so on.
-
-      Selector(, button pin, led pin);
-      Selector(, button pin, led pin, Selector::MOMENTARY);
-
-
-  - Multiple momentary switches (push buttons)
-
-      Pressing one of the buttons selects the respective output:
-      When starting the program, Setting 1 is selected,
-      When the second button is pressed, Setting 2 is selected,
-      When the n-th button is pressed, Setting n is selected.
-
-      Selector(, { button 1 pin, button 2 pin, ... , button n pin } );
-
-
-  - Multiple momentary switches (push buttons) and multiple LEDs
-
-      Pressing one of the buttons selects the respective output and enables the respective LED:
-      When starting the program, Setting 1 is selected and LED 1 is on,
-      When the second button is pressed, Setting 2 is selected, LED 1 turns off and LED 2 turns on,
-      When the n-th button is pressed, Setting n is selected, LED n turns on, and all other LEDs are off.
-
-      Selector(, { button 1 pin, button 2 pin, ... , button n pin }, { led 1 pin, led 2 pin, ... , led n pin } );
-
-      
-  - Two momentary switches (push buttons)
-
-      Pressing the first button increments the Setting number,
-      pressing the second button decrements the Setting number: 
-      When starting the program, Setting 1 is selected,
-      When the first button is pressed, Setting 2 is selected, 
-      When the first button is pressed again, Setting 3 is selected,
-      When the last Setting is selected, and the first button is pressed again,
-      Setting 1 is selected.
-      When the second button is pressed, the last Setting (n) is selected,
-      When the second button is pressed again, Setting (n-1) is selected,
-      and so on.
-
-      Selector(, { button increment pin, button decrement pin }, number of Settings);
-
-
-  - Two momentary switches (push buttons) and multiple LEDs
-
-      Pressing the first button increments the Setting number and turns on the respective LED,
-      pressing the second button decrements the Setting number and turns on the respective LED: 
-      When starting the program, Setting 1 is selected and LED 1 is on,
-      When the first button is pressed, Setting 2 is selected, LED 1 turns off and LED 2 turns on,
-      When the first button is pressed again, Setting 3 is selected, LED 2 turns off and LED 3 turns on.
-      When the last Setting is selected, and the first button is pressed,
-      Setting 1 is selected, the last LED turns off and LED 1 turns on.
-      When the second button is pressed, the last Setting (n) is selected, LED 1 turns off and LED n turns on,
-      When the second button is pressed again, Setting (n-1) is selected, LED n turns off and LED n-1 turns on,
-      and so on.
-
-      Selector(, { button increment pin, button decrement pin }, { led 1 pin, led 2 pin, ... , led n pin });
-
-
-  - One momentary switch (push button)
-
-      Pressing the button increments the Setting number,
-      When starting the program, Setting 1 is selected,
-      When the button is pressed, Setting 2 is selected, 
-      When the button is pressed again, Setting 3 is selected,
-      When the last Setting is selected, and the button is pressed again,
-      Setting 1 is selected.
-
-      Selector(, { button increment pin }, number of Settings);
-
-
-  - One momentary switch (push button) and multiple LEDs
-
-      Pressing the button increments the Setting number and turns on the respective LED,
-      When starting the program, Setting 1 is selected and LED 1 is on,
-      When the button is pressed, Setting 2 is selected, LED 1 turns off and LED 2 turns on,
-      When the button is pressed again, Setting 3 is selected, LED 2 turns off and LED 3 turns on.
-      When the last Setting is selected, and the button is pressed,
-      Setting 1 is selected, the last LED turns off and LED 1 turns on.
-      
-      Selector(, { button increment pin }, { led 1 pin, led 2 pin, ... , led n pin });
-
-
-    Note: a switch is 'off' or 'released' when it doesn't conduct. The digital value 
-    on the input will therefore be HIGH (because of the pull-up resistor)
-  */
-
-  Selector(pin_t switchPin, buttonType buttonType = MOMENTARY) // One switch or button, no LEDs
+ * <h3>One momentary switch (push button)</h3>
+ *
+ * Pressing the button switches the Setting:  
+ * When starting the program, Setting 1 is selected,  
+ * When the button is pressed, Setting 2 is selected,  
+ * When the button is pressed again, Setting 1 is selected,  
+ * and so on.
+ *
+ * Selector ( buttonPin );  
+ * Selector ( buttonPin, Selector::MOMENTARY );
+ 
+ * @param switchPin The pin with the switch connected. The built-in pull-up resistor will be enabled.
+ * @param switchType The type of switch. (See Selector::SwitchType)
+ */
+  Selector(pin_t switchPin, SwitchType switchType = MOMENTARY) // One switch or button, no LEDs
       : nb_settings(2)
   {
     dbButton1.pin = switchPin;
-    if (buttonType == TOGGLE)
+    if (switchType == TOGGLE)
       mode = SINGLE_SWITCH;
     else
       mode = SINGLE_BUTTON;
     pinMode(switchPin, INPUT_PULLUP);
     LinkedList::append(this, first, last);
   }
+/**
+ * @brief Construct a Selector object with one switch and one LED.
+ 
+ * <h3>One toggle switch (latching switch) and one LED</h3>
+ *
+ * When the switch is in the 'off' position, Setting 1 is selected and the LED is off  
+ * When the switch is in the 'on' position, Setting 2 is selected and the LED is on
+ *
+ * \note This mode is pretty useless, you can just connect the LED to the switch directly,
+ *       without wasting a digital output pin on it.
+ *
+ * Selector ( pin_t switchPin, pin_t ledPin, Selector::TOGGLE );
 
-  Selector(pin_t switchPin, pin_t ledPin, buttonType buttonType = MOMENTARY) // One switch or button, one LED
+ * <h3>One momentary switch (push button) and one LED</h3>
+ *
+ * Pressing the button switches the Setting and toggles the LED:  
+ * When starting the program, Setting 1 is selected and the LED is off,  
+ * When the button is pressed, Setting 2 is selected and the LED turns on,  
+ * When the button is pressed again, Setting 1 is selected and the LED is turned off,  
+ * and so on.
+ *
+ * Selector ( buttonPin, ledPin );  
+ * Selector ( buttonPin, ledPin, Selector::MOMENTARY );
+
+ * @param switchPin The pin with the switch connected. The built-in pull-up resistor will be enabled.
+ * @param ledPin The pin with the LED connected.
+ * @param switchType The type of switch. (See Selector::SwitchType)
+ */
+  Selector(pin_t switchPin, pin_t ledPin, SwitchType switchType = MOMENTARY) // One switch or button, one LED
       : ledPin(ledPin), nb_settings(2)
   {
     dbButton1.pin = switchPin;
-    if (buttonType == TOGGLE)
+    if (switchType == TOGGLE)
       mode = SINGLE_SWITCH_LED;
     else
       mode = SINGLE_BUTTON_LED;
@@ -170,6 +106,21 @@ public:
     LinkedList::append(this, first, last);
   }
 
+/**
+ * @brief Construct a Selector object with multiple buttons.
+
+ * <h3>Multiple momentary switches (push buttons)</h3>
+ *
+ * Pressing one of the buttons selects the respective output:  
+ * When starting the program, Setting 1 is selected,  
+ * When the second button is pressed, Setting 2 is selected,  
+ * When the N-th button is pressed, Setting N is selected.
+ *
+ * Selector( { buttonPin1, buttonPin2, ... , buttonPinN } );
+
+ * @tparam N The number of buttons.
+ * @param switchPins A list of pin numbers with the buttons connected.
+ */
   template <size_t N>
   Selector(const pin_t (&switchPins)[N]) // Multiple buttons, no LEDs
       : nb_settings(N)
@@ -182,7 +133,49 @@ public:
       pinMode(this->switchPins[i], INPUT_PULLUP);
     LinkedList::append(this, first, last);
   }
+/**
+ * @brief Construct a new Selector object
 
+ * <h3>Multiple momentary switches (push buttons) and multiple LEDs</h3>
+ *
+ * Pressing one of the buttons selects the respective output and enables the respective LED:  
+ * When starting the program, Setting 1 is selected and LED 1 is on,  
+ * When the second button is pressed, Setting 2 is selected, LED 1 turns off and LED 2 turns on,  
+ * When the N-th button is pressed, Setting N is selected, the N-th LED turns on, and all other LEDs are off.
+ *
+ * Selector( { buttonPin1, buttonPin2, ... , buttonPinN }, { ledPin1, ledPin2, ... , ledPinN } );
+
+ * <h3>Two momentary switches (push buttons) and multiple LEDs (increment / decrement)</h3>
+ *
+ * Pressing the first button increments the Setting number and turns on the respective LED,  
+ * pressing the second button decrements the Setting number and turns on the respective LED:  
+ * When starting the program, Setting 1 is selected and LED 1 is on,  
+ * When the first button is pressed, Setting 2 is selected, LED 1 turns off and LED 2 turns on,  
+ * When the first button is pressed again, Setting 3 is selected, LED 2 turns off and LED 3 turns on.  
+ * When the last Setting is selected, and the first button is pressed, 
+ * Setting 1 is selected, the last LED turns off and LED 1 turns on.  
+ * When the second button is pressed, the last Setting (M) is selected, LED 1 turns off and LED M turns on,  
+ * When the second button is pressed again, Setting (M-1) is selected, LED M turns off and LED M-1 turns on,  
+ * and so on.
+ *
+ * Selector( { incrementButtonPin, decrementButtonPin }, { ledPin1, ledPin2, ... , ledPinM });
+
+ * <h3>One momentary switch (push button) and multiple LEDs (increment)</h3>
+ *
+ * Pressing the button increments the Setting number and turns on the respective LED,  
+ * When starting the program, Setting 1 is selected and LED 1 is on,  
+ * When the button is pressed, Setting 2 is selected, LED 1 turns off and LED 2 turns on,  
+ * When the button is pressed again, Setting 3 is selected, LED 2 turns off and LED 3 turns on.  
+ * When the M-th Setting is selected, and the button is pressed, 
+ * Setting 1 is selected, the M-th LED turns off and LED 1 turns on.
+ * 
+ * Selector( { incrementButtonPin }, { ledPin1, ledPin2, ... , ledPinM });
+
+ * @tparam N The number of buttons.
+ * @tparam M The number of LEDs.
+ * @param switchPins A list of pin numbers with the buttons connected.
+ * @param ledPins A list of pin numbers with the LEDs connected.
+ */
   template <size_t N, size_t M>
   Selector(const pin_t (&switchPins)[N], const pin_t (&ledPins)[M]) // One or multiple buttons, multiple LEDs
       : nb_settings(M)
@@ -216,10 +209,45 @@ public:
     initLEDs();
     LinkedList::append(this, first, last);
   }
+
+/**
+ * @brief Construct a Selector object with increment / decrement buttons.
+
+ * <h3>One momentary switch (push button) (increment)</h3>
+ *
+ * Pressing the button increments the Setting number,  
+ * When starting the program, Setting 1 is selected,  
+ * When the button is pressed, Setting 2 is selected,  
+ * When the button is pressed again, Setting 3 is selected,  
+ * When the last Setting is selected, and the button is pressed again, 
+ * Setting 1 is selected.
+ *
+ * Selector( { incrementButtonPin }, nb_settings );
+      
+ * <h3>Two momentary switches (push buttons) (increment / decrement)</h3>
+ *
+ * Pressing the first button increments the Setting number,  
+ * pressing the second button decrements the Setting number:  
+ * When starting the program, Setting 1 is selected,  
+ * When the first button is pressed, Setting 2 is selected,  
+ * When the first button is pressed again, Setting 3 is selected,  
+ * When the last Setting is selected, and the first button is pressed again, 
+ * Setting 1 is selected.  
+ * When the second button is pressed, the last Setting (nb_settings) is selected,  
+ * When the second button is pressed again, the previous Setting (nb_settings-1) is selected,  
+ * and so on.
+ *
+ * Selector ( { incrementButtonPin, decrementButtonPin }, nb_settings );
+
+ * @tparam N The number of buttons [1, 2].
+ * @param switchPins A list of pin numbers with the buttons connected.
+ * @param nb_settings The number of settings to cycle through.
+ */
   template <size_t N>
-  Selector(const pin_t (&switchPins)[N], pin_t nb_settings) // Two buttons (+1, -1), no LEDs
+  Selector(const pin_t (&switchPins)[N], uint8_t nb_settings) // Two buttons (+1, -1), no LEDs
       : nb_settings(nb_settings)
   {
+    static_assert(N > 0, "Error: no switch pins specified. ");
     static_assert(N <= 2, "Error: maximum number of buttons in the increment/decrement configuration is 2. ");
     if (N == 1)
     {
@@ -322,6 +350,6 @@ protected:
   uint8_t Setting = 0;
   uint8_t nb_settings = 1;
   virtual void refreshImpl(uint8_t newSetting) {}
-  };
+};
 
 #endif // SELECTOR_H_
