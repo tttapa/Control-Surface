@@ -144,7 +144,7 @@ public:
     LinkedList::append(this, first, last);
   }
 /**
- * @brief Construct a new Selector object
+ * @brief Construct a Selector object with multiple buttons and multiple LEDs.
 
  * <h3>Multiple momentary switches (push buttons) and multiple LEDs</h3>
  *
@@ -172,6 +172,8 @@ public:
  *
  * Selector( { incrementButtonPin, decrementButtonPin }, { ledPin1, ledPin2, ... , ledPinM });
 
+<img src="selector-increment-decrement-LED.svg" type="image/svg+xml"></img>
+
  * <h3>One momentary switch (push button) and multiple LEDs (increment)</h3>
  *
  * Pressing the button increments the Setting number and turns on the respective LED,  
@@ -182,6 +184,8 @@ public:
  * Setting 1 is selected, the M-th LED turns off and LED 1 turns on.
  * 
  * Selector( { incrementButtonPin }, { ledPin1, ledPin2, ... , ledPinM });
+
+<img src="selector-increment-LED.svg" type="image/svg+xml"></img>
 
  * @tparam N The number of buttons.
  * @tparam M The number of LEDs.
@@ -235,7 +239,9 @@ public:
  * Setting 1 is selected.
  *
  * Selector( { incrementButtonPin }, nb_settings );
-      
+
+<img src="selector-increment-decrement.svg" type="image/svg+xml"></img>
+
  * <h3>Two momentary switches (push buttons) (increment / decrement)</h3>
  *
  * Pressing the first button increments the Setting number,  
@@ -250,6 +256,8 @@ public:
  * and so on.
  *
  * Selector ( { incrementButtonPin, decrementButtonPin }, nb_settings );
+
+<img src="selector-increment.svg" type="image/svg+xml"></img>
 
  * @tparam N The number of buttons [1, 2].
  * @param switchPins A list of pin numbers with the buttons connected.

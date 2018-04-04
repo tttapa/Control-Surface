@@ -1,0 +1,22 @@
+<svg 
+    version="1.1"
+    baseProfile="full"
+    xmlns="http://www.w3.org/2000/svg"
+    width="160" height="160">
+    <text x="12" y="16" font-family="Verdana" font-size="16">Try it:</text>
+    <rect id="incr_bg" x="52" y="80" width="56" height="56" rx="4" ry="4" stroke-width="3" stroke="rgba(0,0,0,1)" fill="blue"/>
+    <text x="80" y="117" font-family="Verdana" font-size="28" text-anchor="middle">+</text>
+    <rect id="incr" x="52" y="80" width="56" height="56" rx="4" ry="4" fill="rgba(0,0,0,0)" style="cursor: pointer"/>
+    <text id="setting" x="80" y="56" font-family="Verdana" font-size="28" text-anchor="middle">1</text>
+    <script>
+        let prevSetting = 1;
+        let setting = document.getElementById("setting");
+        let incr = document.getElementById("incr");
+        incr.onclick = function() {
+            prevSetting++;
+            if (prevSetting == 6)
+                prevSetting = 1;
+            setting.textContent = prevSetting;
+        }
+    </script>
+</svg>
