@@ -30,8 +30,8 @@ void AnalogCC::send(unsigned int input)
   if (value != oldVal)        // if the value changed since last time
   {
     Control_Surface.MIDI()->send(CC,
-                                 channel + channelOffset * channelsPerBank,
-                                 controller + addressOffset * channelsPerBank,
+                                 channel + channelOffset * tracksPerBank,
+                                 controller + addressOffset * tracksPerBank,
                                  value); // send a Control Change MIDI event
     oldVal = value;
   }
@@ -47,7 +47,7 @@ void AnalogPB::send(unsigned int input)
     oldVal = input;
     input <<= 4; // Convert from 10 bit to 14-bit Pitch Bend data
     Control_Surface.MIDI()->send(PITCH_BEND,
-                                 channel + channelOffset * channelsPerBank,
+                                 channel + channelOffset * tracksPerBank,
                                  input, input >> 7); // send a Pitch Bend MIDI event
   }
 }

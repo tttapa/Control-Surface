@@ -42,7 +42,7 @@ void ButtonMatrix<nb_rows, nb_cols>::refresh()
             {
                 // send it over MIDI
                 uint8_t note = addresses[row][col];
-                Control_Surface.MIDI()->send(state ? NOTE_OFF : NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
+                Control_Surface.MIDI()->send(state ? NOTE_OFF : NOTE_ON, channel + channelOffset * tracksPerBank, note + addressOffset * tracksPerBank, velocity);
                 setPrevState(col, row, state); // remember the state
                 if (state == HIGH && (newChannelOffset != channelOffset || newAddressOffset != addressOffset) && allReleased())
                 {

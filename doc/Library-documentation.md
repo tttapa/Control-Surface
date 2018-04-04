@@ -138,11 +138,11 @@ RotaryEncoder control elements send the relative change of the position of a qua
 You can use one of the following aliases as well: `REAPER_RELATIVE_1`, `REAPER_RELATIVE_2`, `REAPER_RELATIVE_3`, `TRACKTION_RELATIVE`, `MACKIE_CONTROL_RELATIVE`  
 
 ## 5. Add Banks (optional)
-`Bank(uint8_t channelsPerBank = 1)`  
+`Bank(uint8_t tracksPerBank = 1)`  
 Using banks, you can group control elements together, and it allows you to change the MIDI channel and controller or note numbers of these elements.  
 For example, if you have four volume control sliders for tracks 1, 2, 3 and 4, you can add them to a bank. If you set te bank to setting 0, the sliders will control the volume of tracks 1, 2, 3 and 4, if you set the bank to setting 1, the sliders will instead control the volume of tracks 5, 6, 7 and 8, set it to 2, and it will affect tracks 9, 10, 11 and 12, etc.  
 This allows you to control a large number of tracks or controls, with only a limited number of physical knobs and buttons.  
-`channelsPerBank`: the number of channels/tracks each bank can control at one instant, e.g. in the example above, there are four sliders, so they can control four tracks at once  
+`tracksPerBank`: the number of channels/tracks each bank can control at one instant, e.g. in the example above, there are four sliders, so they can control four tracks at once  
 
 ## 6. Add Bank Selectors (optional)
 You could select the setting of a bank manually, using  

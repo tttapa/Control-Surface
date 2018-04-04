@@ -29,12 +29,12 @@ bool MIDI_Input_Element::match(const MIDI_message_matcher &midimsg)
 bool MIDI_Input_Element::matchAddress(uint8_t targetAddress)
 {
     int8_t addressDiff = targetAddress - this->address;
-    return (addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0);
+    return (addressDiff >= 0) && (addressDiff < nb_addresses * tracksPerBank) && (addressDiff % tracksPerBank == 0);
 }
 bool MIDI_Input_Element::matchChannel(uint8_t targetChannel)
 {
     int8_t channelDiff = targetChannel - this->channel;
-    return (channelDiff >= 0) && (channelDiff < nb_channels * channelsPerBank) && (channelDiff % channelsPerBank == 0);
+    return (channelDiff >= 0) && (channelDiff < nb_channels * tracksPerBank) && (channelDiff % tracksPerBank == 0);
 }
 
 void MIDI_Input_Element::setChannelOffset(uint8_t offset) // Set the channel offset

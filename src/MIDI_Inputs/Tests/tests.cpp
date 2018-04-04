@@ -25,7 +25,7 @@ TEST_CASE("Matching addresses: tracks per bank = 4", "[MATCH]")
 {
     // address 0x10, channel 1, 4 addresses, 1 channel
     MIDI_Input_Element_CC mie(0x10, 1, 4, 1); 
-    mie.setChannelsPerBank(4);
+    mie.settracksPerBank(4);
     REQUIRE(!mie.update({CONTROL_CHANGE, 0, 0x00, 0x40}));
     REQUIRE(!mie.update({CONTROL_CHANGE, 0, 0x01, 0x40}));
     REQUIRE(!mie.update({CONTROL_CHANGE, 0, 0x02, 0x40}));
@@ -82,7 +82,7 @@ TEST_CASE("Matching channels: tracks per bank = 3", "[MATCH]")
 {
     // address 0x10, channel 1, 1 address, 4 channels
     MIDI_Input_Element_CC mie(0x10, 2, 1, 4); 
-    mie.setChannelsPerBank(3);
+    mie.settracksPerBank(3);
     REQUIRE(!mie.update({CONTROL_CHANGE, 0x0, 0x10, 0x40}));
     REQUIRE( mie.update({CONTROL_CHANGE, 0x1, 0x10, 0x40}));
     REQUIRE(!mie.update({CONTROL_CHANGE, 0x2, 0x10, 0x40}));

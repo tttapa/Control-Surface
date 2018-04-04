@@ -18,8 +18,8 @@ bool MIDI_Input_Note_Buffer::updateImpl(const MIDI_message_matcher &midimsg)
     uint8_t messageType = midimsg.type;
     uint8_t targetChannel = midimsg.channel;
 
-    uint8_t addressIndex = (midimsg.data1 - this->address) / channelsPerBank;
-    uint8_t channelIndex = (targetChannel - this->channel) / channelsPerBank;
+    uint8_t addressIndex = (midimsg.data1 - this->address) / tracksPerBank;
+    uint8_t channelIndex = (targetChannel - this->channel) / tracksPerBank;
     uint8_t ledIndex = channelIndex + nb_channels * addressIndex;
 
     uint8_t statesIndex = ledIndex >> 3;  // ledIndex / 8

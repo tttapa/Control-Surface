@@ -29,7 +29,7 @@ void RotaryEncoder::refresh() // Check if the encoder position has changed since
       difference = -15;
 
     uint8_t msgVal = mapRelativeCC(difference * speedMultiply, mode);
-    Control_Surface.MIDI()->send(CC, channel + channelOffset * channelsPerBank, controllerNumber + addressOffset * channelsPerBank, msgVal); // send a Control Change MIDI event
+    Control_Surface.MIDI()->send(CC, channel + channelOffset * tracksPerBank, controllerNumber + addressOffset * tracksPerBank, msgVal); // send a Control Change MIDI event
 
     oldVal += difference * pulsesPerStep; // If difference was in [-15, 15], difference * pulsesPerStep == value,
     // otherwise difference * pulsesPerStep == the value on the computer (after receiving the MIDI event above)

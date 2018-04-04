@@ -33,13 +33,13 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
     if (stateChange == falling)
     { // Button is pushed
       buttonState = state;
-      Control_Surface.MIDI()->send(NOTE_ON, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
+      Control_Surface.MIDI()->send(NOTE_ON, channel + channelOffset * tracksPerBank, note + addressOffset * tracksPerBank, velocity);
     }
 
     if (stateChange == rising)
     { // Button is released
       buttonState = state;
-      Control_Surface.MIDI()->send(NOTE_OFF, channel + channelOffset * channelsPerBank, note + addressOffset * channelsPerBank, velocity);
+      Control_Surface.MIDI()->send(NOTE_OFF, channel + channelOffset * tracksPerBank, note + addressOffset * tracksPerBank, velocity);
       if (newChannelOffset != channelOffset || newAddressOffset != addressOffset)
       {
         channelOffset = newChannelOffset;

@@ -29,15 +29,15 @@ class MIDI_Element
     {
         addressOffset = offset;
     }
-    virtual void setChannelsPerBank(uint8_t channels) // Set the number of channels per bank
+    virtual void settracksPerBank(uint8_t channels) // Set the number of channels per bank
     {
-        channelsPerBank = channels;
+        tracksPerBank = channels;
     }
 
   protected:
     uint8_t channelOffset = 0;
     uint8_t addressOffset = 0;
-    uint8_t channelsPerBank = 1;
+    uint8_t tracksPerBank = 1;
 };
 
 #endif // MIDI_ELEMENT_h

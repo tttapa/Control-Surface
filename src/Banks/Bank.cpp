@@ -1,6 +1,6 @@
 #include "Bank.h"
 
-Bank::Bank(uint8_t channelsPerBank) : channelsPerBank(channelsPerBank) {}
+Bank::Bank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {}
 
 Bank::~Bank()
 {
@@ -15,7 +15,7 @@ Bank::~Bank()
 
 void Bank::add(MIDI_Element *element, bankType type)
 {
-    element->setChannelsPerBank(channelsPerBank);
+    element->settracksPerBank(tracksPerBank);
 
     MIDI_Element_list_node *newElement = new MIDI_Element_list_node;
     newElement->element = element;

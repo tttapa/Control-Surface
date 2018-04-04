@@ -40,7 +40,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         if (!matchID(targetID))
             return false;
 
-        uint8_t index = (targetID - this->address) / channelsPerBank;
+        uint8_t index = (targetID - this->address) / tracksPerBank;
 
         uint8_t data = midimsg.data1 & 0xF;
         if (data == 0xF) // clear overload
@@ -127,9 +127,9 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         int8_t addressDiff = targetID - this->address;
 #ifdef DEBUG
         DEBUG_OUT << "VU meter target ID: " << targetID << endl
-              << (((addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0)) ? "match" : "no match") << endl;
+              << (((addressDiff >= 0) && (addressDiff < nb_addresses * tracksPerBank) && (addressDiff % tracksPerBank == 0)) ? "match" : "no match") << endl;
 #endif
-        return (addressDiff >= 0) && (addressDiff < nb_addresses * channelsPerBank) && (addressDiff % channelsPerBank == 0);
+        return (addressDiff >= 0) && (addressDiff < nb_addresses * tracksPerBank) && (addressDiff % tracksPerBank == 0);
     }
 };
 
