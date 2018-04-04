@@ -196,6 +196,8 @@ public:
   Selector(const pin_t (&switchPins)[N], const pin_t (&ledPins)[M]) // One or multiple buttons, multiple LEDs
       : nb_settings(M)
   {
+    static_assert(N > 0, "Error: no switch pins specified. ");  // TODO: can this ever happen?
+    static_assert(M > 0, "Error: no LED pins specified. ");  // TODO: can this ever happen?
     static_assert(N <= 2 || N == M, "Error: number of LEDs should be the same as the number of buttons. ");
 
     this->ledPins = new pin_t[M];
@@ -229,19 +231,6 @@ public:
 /**
  * @brief Construct a Selector object with increment / decrement buttons.
 
- * <h3>One momentary switch (push button) (increment)</h3>
- *
- * Pressing the button increments the Setting number,  
- * When starting the program, Setting 1 is selected,  
- * When the button is pressed, Setting 2 is selected,  
- * When the button is pressed again, Setting 3 is selected,  
- * When the last Setting is selected, and the button is pressed again, 
- * Setting 1 is selected.
- *
- * Selector( { incrementButtonPin }, nb_settings );
-
-<img src="selector-increment-decrement.svg" type="image/svg+xml"></img>
-
  * <h3>Two momentary switches (push buttons) (increment / decrement)</h3>
  *
  * Pressing the first button increments the Setting number,  
@@ -256,6 +245,19 @@ public:
  * and so on.
  *
  * Selector ( { incrementButtonPin, decrementButtonPin }, nb_settings );
+
+<img src="selector-increment-decrement.svg" type="image/svg+xml"></img>
+
+ * <h3>One momentary switch (push button) (increment)</h3>
+ *
+ * Pressing the button increments the Setting number,  
+ * When starting the program, Setting 1 is selected,  
+ * When the button is pressed, Setting 2 is selected,  
+ * When the button is pressed again, Setting 3 is selected,  
+ * When the last Setting is selected, and the button is pressed again, 
+ * Setting 1 is selected.
+ *
+ * Selector( { incrementButtonPin }, nb_settings );
 
 <img src="selector-increment.svg" type="image/svg+xml"></img>
 
