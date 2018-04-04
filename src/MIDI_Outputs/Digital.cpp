@@ -3,13 +3,10 @@
 
 using namespace ExtIO;
 
-Digital::Digital(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity) // Constructor
+Digital::Digital(pin_t pin, uint8_t address, uint8_t channel, uint8_t velocity, MessageType messageType) // Constructor
+  : pin(pin), address(address), channel(channel), velocity(velocity), messageType(messageType)
 {
   pinMode(pin, INPUT_PULLUP); // Enable the internal pull-up resistor on the pin with the button/switch
-  this->pin = pin;
-  this->note = note;
-  this->channel = channel;
-  this->velocity = velocity;
 }
 
 Digital::~Digital() // Destructor
@@ -21,25 +18,32 @@ void Digital::invert() // Invert the button state (send Note On event when relea
 {
   invertState = true;
 }
+bool Digital::invertState = false;
 
 void Digital::refresh() // Check if the button state changed, and send a MIDI Note On or Off accordingly
 {
-  bool state = digitalRead(pin) ^ invertState; // read the button state and invert it if "invert" is true
+  bool state = digitalRead(pin) ^ invertState; // read the button state and invert it if "invertState" is true
 
   if (millis() - prevBounceTime > debounceTime)
   {
     int8_t stateChange = state - buttonState;
 
-    if (stateChange == falling)
-    { // Button is pushed
+    if (stateChange == falling) // Button is pushed
+    {
       buttonState = state;
-      Control_Surface.MIDI()->send(NOTE_ON, channel + channelOffset * tracksPerBank, note + addressOffset * tracksPerBank, velocity);
+      Control_Surface.MIDI()->send(messageType == NOTE ? NOTE_ON : CONTROL_CHANGE, 
+                                   channel + channelOffset * tracksPerBank, 
+                                   address + addressOffset * tracksPerBank, 
+                                   velocity);
     }
 
-    if (stateChange == rising)
-    { // Button is released
+    if (stateChange == rising) // Button is released
+    {
       buttonState = state;
-      Control_Surface.MIDI()->send(NOTE_OFF, channel + channelOffset * tracksPerBank, note + addressOffset * tracksPerBank, velocity);
+      Control_Surface.MIDI()->send(messageType == NOTE ? NOTE_OFF : CONTROL_CHANGE,
+                                   channel + channelOffset * tracksPerBank, 
+                                   address + addressOffset * tracksPerBank, 
+                                   messageType == NOTE ? velocity : 0);
       if (newChannelOffset != channelOffset || newAddressOffset != addressOffset)
       {
         channelOffset = newChannelOffset;
@@ -47,7 +51,7 @@ void Digital::refresh() // Check if the button state changed, and send a MIDI No
       }
     }
   }
-  if (state != prevState)
+  if (state != prevState) // Button is pushed, released or bounces
   {
     prevBounceTime = millis();
     prevState = state;

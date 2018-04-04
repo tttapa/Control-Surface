@@ -1,7 +1,6 @@
 #ifndef BUTTONMATRIX_H_
 #define BUTTONMATRIX_H_
 
-// #include <Arduino.h>
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h" // for pin_t
 
@@ -21,18 +20,19 @@ class ButtonMatrix : public MIDI_Control_Element
      * @brief Construct a new ButtonMatrix object.
      * 
      * @param rowPins
-     *        A list of pin numbers connected to the rows of the button matrix.
+     *        A list of pin numbers connected to the rows of the button matrix. These pins will be driven LOW (Lo-Z).
      * @param colPins
-     *        A list of pin numbers connected to the columns of the button matrix.
+     *        A list of pin numbers connected to the columns of the button matrix. These pins will be used as inputs, and the internal pull-up resistor will be enabled.
      * @param addresses
-     *        A matrix containing the address for each button.
+     *        A 2D array of dimensions (nb_rows × nb_cols) containing the address for each button.
      * @param channel 
      *        The MIDI channel [1, 16].
      * @param velocity 
      *        The velocity of the MIDI Note events [1, 127].
      * 
-     * @note The lists of pins are copied.  
-     * The list of addresses is not copied. It should be a reference to a 2-dimensional array.
+     * @note  The lists of pins are copied.  
+     *        The list of addresses is not copied. It should be a reference to a 2-dimensional array.  
+     *        This means that initializing \c addresses with a brace-enclosed initializer list is not allowed.
      */
     ButtonMatrix(const pin_t (&rowPins)[nb_rows], const pin_t (&colPins)[nb_cols], const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel, uint8_t velocity = 0x7F);
     ~ButtonMatrix();
@@ -64,8 +64,6 @@ class ButtonMatrix : public MIDI_Control_Element
     uint8_t newChannelOffset = channelOffset;
 };
 
-#ifdef __AVR__
 #include "./ButtonMatrix.cpp" // Because it's a template class
-#endif
 
 #endif // BUTTONMATRIX_H_

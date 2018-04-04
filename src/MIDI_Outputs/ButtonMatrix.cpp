@@ -32,10 +32,10 @@ void ButtonMatrix<nb_rows, nb_cols>::refresh()
         return;
     prevRefresh = now;
 
-    for (int row = 0; row < nb_rows; row++) // scan through all rows
+    for (size_t row = 0; row < nb_rows; row++) // scan through all rows
     {
         pinMode(rowPins[row], OUTPUT);          // make the current row Lo-Z 0V
-        for (int col = 0; col < nb_cols; col++) // scan through all columns
+        for (size_t col = 0; col < nb_cols; col++) // scan through all columns
         {
             bool state = digitalRead(colPins[col]); // read the state
             if (state != getPrevState(col, row))    // if the state changed since last time
@@ -60,11 +60,11 @@ void ButtonMatrix<nb_rows, nb_cols>::init()
 {
     prevStates = new uint8_t[(nb_cols * nb_rows + 7) / 8]; // an array of bytes where each bit represents the state of one of the buttons
     memset(prevStates, 0xFF, (nb_cols * nb_rows + 7) / 8);
-    for (int i = 0; i < nb_cols; i++)
+    for (size_t i = 0; i < nb_cols; i++)
     {
         pinMode(colPins[i], INPUT_PULLUP); // make all columns input pins and enable the internal pull-up resistors
     }
-    for (int row = 0; row < nb_rows; row++)
+    for (size_t row = 0; row < nb_rows; row++)
     {
         pinMode(rowPins[row], INPUT);  // make all rows Hi-Z
         digitalWrite(rowPins[row], 0); // disable the internal pull-up resistors
@@ -121,6 +121,8 @@ bool ButtonMatrix<nb_rows, nb_cols>::allReleased()
 template <size_t nb_rows, size_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::setChannelOffset(uint8_t offset) // Set the channel offset
 {
+    // This only has effect when all buttons are released.
+    // Otherwise, Note Off messages would be sent on the wrong channel.
     if (allReleased())
         channelOffset = offset;
     newChannelOffset = offset;
@@ -128,6 +130,8 @@ void ButtonMatrix<nb_rows, nb_cols>::setChannelOffset(uint8_t offset) // Set the
 template <size_t nb_rows, size_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::setAddressOffset(uint8_t offset) // Set the address (note or controller number) offset
 {
+    // This only has effect when all buttons are released.
+    // Otherwise, Note Off messages would be sent with the wrong note number.
     if (allReleased())
         addressOffset = offset;
     newAddressOffset = offset;
