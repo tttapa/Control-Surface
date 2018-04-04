@@ -15,7 +15,6 @@ class Selector
 public:
   /**
  * @brief The type of switch the Selector will be used with.
- * 
  */
   enum SwitchType
   {
@@ -40,7 +39,7 @@ public:
  *
  * Selector ( switchPin, Selector::TOGGLE );
 
-<img src="selector-one-toggle-switch.svg" type="image/svg+xml"></img>
+@image html "selector-one-toggle-switch.svg"
 
  * <h3>One momentary switch (push button)</h3>
  *
@@ -52,8 +51,8 @@ public:
  *
  * Selector ( buttonPin );  
  * Selector ( buttonPin, Selector::MOMENTARY );
- 
-<img src="selector-one-momentary-switch.svg" type="image/svg+xml"></img>
+
+@image html "selector-one-momentary-switch.svg"
 
  * @param switchPin The pin with the switch connected. The built-in pull-up resistor will be enabled.
  * @param switchType The type of switch. (See Selector::SwitchType)
@@ -82,7 +81,7 @@ public:
  *
  * Selector ( pin_t switchPin, pin_t ledPin, Selector::TOGGLE );
 
-<img src="selector-one-toggle-switch-LED.svg" type="image/svg+xml"></img>
+@image html "selector-one-toggle-switch-LED.svg"
 
  * <h3>One momentary switch (push button) and one LED</h3>
  *
@@ -95,7 +94,7 @@ public:
  * Selector ( buttonPin, ledPin );  
  * Selector ( buttonPin, ledPin, Selector::MOMENTARY );
 
-<img src="selector-one-momentary-switch-LED.svg" type="image/svg+xml"></img>
+@image html "selector-one-momentary-switch-LED.svg"
 
  * @param switchPin The pin with the switch connected. The built-in pull-up resistor will be enabled.
  * @param ledPin The pin with the LED connected.
@@ -126,7 +125,7 @@ public:
  *
  * Selector( { buttonPin1, buttonPin2, ... , buttonPinN } );
 
-<img src="selector-multiple-momentary-switches.svg" type="image/svg+xml"></img>
+@image html "selector-multiple-momentary-switches.svg"
 
  * @tparam N The number of buttons.
  * @param switchPins A list of pin numbers with the buttons connected.
@@ -155,7 +154,7 @@ public:
  *
  * Selector( { buttonPin1, buttonPin2, ... , buttonPinN }, { ledPin1, ledPin2, ... , ledPinN } );
 
-<img src="selector-multiple-momentary-switches-LED.svg" type="image/svg+xml"></img>
+@image html "selector-multiple-momentary-switches-LED.svg"
 
  * <h3>Two momentary switches (push buttons) and multiple LEDs (increment / decrement)</h3>
  *
@@ -172,7 +171,7 @@ public:
  *
  * Selector( { incrementButtonPin, decrementButtonPin }, { ledPin1, ledPin2, ... , ledPinM });
 
-<img src="selector-increment-decrement-LED.svg" type="image/svg+xml"></img>
+@image html "selector-increment-decrement-LED.svg"
 
  * <h3>One momentary switch (push button) and multiple LEDs (increment)</h3>
  *
@@ -185,7 +184,7 @@ public:
  * 
  * Selector( { incrementButtonPin }, { ledPin1, ledPin2, ... , ledPinM });
 
-<img src="selector-increment-LED.svg" type="image/svg+xml"></img>
+@image html "selector-increment-LED.svg"
 
  * @tparam N The number of buttons.
  * @tparam M The number of LEDs.
@@ -246,7 +245,7 @@ public:
  *
  * Selector ( { incrementButtonPin, decrementButtonPin }, nb_settings );
 
-<img src="selector-increment-decrement.svg" type="image/svg+xml"></img>
+@image html "selector-increment-decrement.svg"
 
  * <h3>One momentary switch (push button) (increment)</h3>
  *
@@ -259,7 +258,7 @@ public:
  *
  * Selector( { incrementButtonPin }, nb_settings );
 
-<img src="selector-increment.svg" type="image/svg+xml"></img>
+@image html "selector-increment.svg"
 
  * @tparam N The number of buttons [1, 2].
  * @param switchPins A list of pin numbers with the buttons connected.
