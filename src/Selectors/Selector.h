@@ -294,21 +294,41 @@ public:
     delete[] ledPins;
     LinkedList::remove(this, first, last);
   }
-  void initLEDs()
-  {
-    for (uint8_t i = 0; i < nb_settings; i++)
-      pinMode(ledPins[i], OUTPUT);
-    digitalWrite(ledPins[0], HIGH);
-  }
-
+  /**
+   * @brief Refresh the Selector: read all buttons and update the setting if necessary.
+   * 
+   * The LEDs will be updated, and Selector::refreshImpl will be called.
+   */
   void refresh();
 
+  /**
+   * @brief Get the selected setting.
+   * 
+   * The setting is zero-based.
+   * 
+   * @return uint8_t The selected setting.
+   */
   uint8_t getSetting();
+
+  /**
+   * @brief Select a given setting.
+   * 
+   * The setting is zero-based.
+   * 
+   * The LEDs will be updated, and Selector::refreshImpl will be called.
+   * 
+   * @param newSetting The new setting to select.
+   */
   void setSetting(uint8_t newSetting);
 
-  // #ifdef DEBUG
+  /**
+   * @brief Get the Selector Mode.
+   * 
+   * The mode can be either one of the SelectorMode enumerations.
+   * 
+   * @return const char* The mode as a string.
+   */
   const char *getMode();
-  // #endif
 
   Selector *getNext()
   {
@@ -354,6 +374,7 @@ private:
     INCREMENT_LEDS
   } mode;
 
+  void initLEDs();
   void refreshLEDs(uint8_t newSetting);
   bool debounceButton(debouncedButton &button);
 
@@ -370,6 +391,11 @@ private:
 protected:
   uint8_t Setting = 0;
   uint8_t nb_settings = 1;
+  /**
+   * @brief A virtual function that gets called every time the setting changes.
+   * 
+   * @param newSetting The new setting that will be selected after the function call to refreshImpl.
+   */
   virtual void refreshImpl(uint8_t newSetting) {}
 };
 

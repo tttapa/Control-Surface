@@ -84,7 +84,6 @@ void Selector::setSetting(uint8_t newSetting)
     refreshImpl(Setting);
 }
 
-// #ifdef DEBUG
 const char *Selector::getMode()
 {
     if (mode == SINGLE_BUTTON)
@@ -109,7 +108,13 @@ const char *Selector::getMode()
         return "INCREMENT_LEDS";
     return "";
 }
-// #endif
+
+void Selector::initLEDs()
+{
+    for (uint8_t i = 0; i < nb_settings; i++)
+        pinMode(ledPins[i], OUTPUT);
+    digitalWrite(ledPins[0], HIGH);
+}
 
 void Selector::refreshLEDs(uint8_t newSetting)
 {
@@ -129,6 +134,8 @@ void Selector::refreshLEDs(uint8_t newSetting)
         digitalWrite(ledPins[Setting], LOW);
         digitalWrite(ledPins[newSetting], HIGH);
     }
+    break;
+    default:
     break;
     }
 }

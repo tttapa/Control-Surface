@@ -3,7 +3,9 @@
 
 #include "../Display.hpp"
 
-
+/**
+ * @brief A struct containing X Bitmap width, height and data.
+ */
 struct XBitmap
 {
   XBitmap(uint16_t width, uint16_t height, const uint8_t bits[])
@@ -13,9 +15,18 @@ struct XBitmap
   const uint8_t *bits;
 };
 
+/**
+ * @brief A namespace containing XBitmap definitions.
+ *
+ * @note Don't edit this file directly, place your XBM image 
+ *       in the ./XBM folder, and run the python script in ./Scripts.
+ */
 namespace XBM
 {
 
+/**
+ * A macro to generate an XBitmap object based on the identifier/filename.
+ */
 #define MakeXBitmap(name) \
     const XBitmap name = \
          { name##_width, name##_height, name##_bits }
