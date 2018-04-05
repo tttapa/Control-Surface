@@ -7,8 +7,6 @@
  * and for each of the 8 first tracks, it displays:
  * mute, solo, record ready, pan, and VU level meter with peak indicator.
  * 
- * @image html "OLED-Demo.png"
- * 
  * Using a BankSelector, it displays two channels at once, and you can
  * cycle through four banks to display all 8 tracks.
  * 
@@ -188,6 +186,8 @@ void setup()   {
   initializeDisplay();  // Start the OLED display
 
   Control_Surface.begin();  // Initialize Control Surface
+
+  pinMode(20, INPUT_PULLUP);
 }
 
 /* ---------- Loop ----------- */
@@ -196,6 +196,7 @@ void setup()   {
 void loop() {
   Control_Surface.refresh();  // Refresh all elements
   if (digitalRead(20) == LOW) {
-    screenshot("OLED-Demo");
+    screenshot("OLED_Demo");
+    delay(1000);
   }
 }
