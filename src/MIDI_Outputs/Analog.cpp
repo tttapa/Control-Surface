@@ -1,6 +1,8 @@
 #include "./Analog.h"
 #include "../Control_Surface/Control_Surface_Class.h"
 
+using namespace ExtIO;
+
 // AnalogBase
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- //
 
