@@ -16,11 +16,12 @@
 
 #include <Control_Surface.h> // Include the library
 
+HairlessMIDI_Interface hmi;
+
 // Patch Selector selecting patches 1, 2, 3 or 4, 
 // increment patch number with button connected to pin 11, 
-// decrement patch number with button connected to pin 12,
-// 4 patches in total
-SelectorPC sel( { 1, 2, 3, 4 }, { 11, 12 }, 4 ); 
+// decrement patch number with button connected to pin 12
+SelectorPC sel( { 1, 2, 3, 4 }, { 11, 12 } ); 
 
 
 void setup() {} // Nothing to set up
