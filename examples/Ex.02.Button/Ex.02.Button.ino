@@ -1,12 +1,15 @@
-/*
-This is an example of the "Digital" class of the Control_Surface library.
-Connect a push buttons to digital pin 2. Connect the other pin of the button to the ground, 
-a pull-up resistor is not necessary, because the internal one will be used. 
-This button will play MIDI note C4 when pressed.
-Map it in your DAW or DJ software.
-
-Written by tttapa, 08/09/2017
-https://github.com/tttapa/Control_Surface
+/**
+ * @example Ex.02.Button.ino
+ * 
+ * This is an example of the Digital class of the Control_Surface library.
+ * 
+ * Connect a push buttons to digital pin 2. Connect the other pin of the button to the ground, 
+ * a pull-up resistor is not necessary, because the internal one will be used.  
+ * This button will play MIDI note C4 when pressed.  
+ * Map it in your DAW or DJ software.
+ * 
+ * Written by tttapa, 08/09/2017  
+ * https://github.com/tttapa/Control_Surface
 */
 
 #include <Control_Surface.h> // Include the library

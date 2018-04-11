@@ -1,12 +1,16 @@
-/*
-  This is an example of the "AnalogMultiplex" class of the Control_Surface library.
-  Connect an analog multiplexer to analog pin A0. Connect the address lines to pins 2, 3 and 4.
-  Connect 8 potentiometers to the inputs of the multiplexer. These will be the channel volumes
-  of MIDI channels 1 through 8.
-  Map accordingly in your DAW or DJ software.
-
-  Written by Pieter P, 20-09-2017
-  https://github.com/tttapa/Control_Surface
+/**
+ * @example Ex.12.AnalogMultiplex.ino
+ * 
+ * This is an example of the AnalogMultiplex class of the Control_Surface library.
+ * 
+ * Connect an analog multiplexer to analog pin A0. Connect the address lines to pins 2, 3 and 4.  
+ * Connect 8 potentiometers to the inputs of the multiplexer.  
+ * These will be the channel volumes
+ * of MIDI channels 1 through 8.  
+ * Map accordingly in your DAW or DJ software.
+ *
+ * Written by Pieter P, 20-09-2017  
+ * https://github.com/tttapa/Control_Surface
 */
 
 #include <Control_Surface.h> // Include the library

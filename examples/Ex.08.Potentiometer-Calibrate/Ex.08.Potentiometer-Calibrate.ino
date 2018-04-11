@@ -1,15 +1,18 @@
-/*
-This is an example of the "Analog" class of the Control_Surface library.
-Connect a potentiometer to analog pin A0. This will be the MIDI channel volume of channel 1.
-
-Map it in your DAW or DJ software.
-
-Set 'minimumValue' to the analog value read when the potentiometer is in the minimum position.
-Set 'maximumValue' to the analog value read when the potentiometer is in the maximum position.
-
-Written by Pieter P, 20-09-2017
-https://github.com/tttapa/Control_Surface
-*/
+/**
+ * @example Ex.08.Potentiometer-Calibrate.ino
+ * 
+ * This is an example of the AnalogCC and AnalogPB classes of the Control_Surface library.
+ * 
+ * Connect a potentiometer to analog pin A0. This will be the MIDI channel volume of channel 1.
+ * 
+ * Map it in your DAW or DJ software.
+ * 
+ * Set 'minimumValue' to the analog value read when the potentiometer is in the minimum position.  
+ * Set 'maximumValue' to the analog value read when the potentiometer is in the maximum position.
+ * 
+ * Written by Pieter P, 20-09-2017  
+ * https://github.com/tttapa/Control_Surface
+ */
 
 #include <Control_Surface.h> // Include the library
 
@@ -27,6 +30,9 @@ int mapCalibrated(int value) {
 
 void setup() {
   potentiometer.map(mapCalibrated); // apply the 'mapCalibrated' function on the analog input of 'potentiometer'
+                                    // If you add all potentiometers to a bank, you can use Bank::map to apply
+                                    // the same mapping function to all AnalogCC and AnalogPB elements in the bank
+                                    // (see Ex.09.Bank-Calibrate.ino)
 }
 
 void loop() {

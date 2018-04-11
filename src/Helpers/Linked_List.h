@@ -57,4 +57,4 @@ void moveDown(Node *nodeC, Node *&first, Node *&last)
 }
  
 };
-#endif // LinkedList::append
+#endif // LINKED_LIST_H

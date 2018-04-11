@@ -1,7 +1,8 @@
 /**
  * @example OLED-Demo.ino
- * @brief An extensive example demonstrating the use of DisplayElement%s 
- *        to display information from the DAW on a small OLED display.
+ * 
+ * An extensive example demonstrating the use of DisplayElement%s 
+ * to display information from the DAW on a small OLED display.
  *        
  * The example displays the cursor time location, play and record status,
  * and for each of the 8 first tracks, it displays:

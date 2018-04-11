@@ -2,6 +2,12 @@
 #error "Do not include this file directly, use the wrapper!"
 #endif
 
+/**
+ * @file Settings.h
+ * 
+ * @brief All user settings and debugging options can be changed here.
+ */
+
 // ---------------------------- Debug Settings --------------------------- //
 // ======================================================================= //
 
@@ -21,8 +27,8 @@
 // ======================================================================= //
 
 /** The factor for the analog filter: <br>
-    Difference equation: \f$ y[n] = k*x[n] + (1-k)*y[n-1] \f$
-    where \f$ k = \left(\frac{1}{2}\right)^{ANALOG\_FILTER\_SHIFT\_FACTOR} \f$ */
+    Difference equation: @f$ y[n] = k*x[n] + (1-k)*y[n-1] @f$
+    where @f$ k = \left(\frac{1}{2}\right)^{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ */
 #define ANALOG_FILTER_SHIFT_FACTOR 4
 
 /** The debounce time for momentary push buttons in milliseconds */

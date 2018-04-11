@@ -1,12 +1,15 @@
-/*
-This is an example of the "DigitalLatch" class of the Control_Surface library.
-Connect a toggle switch to digital pin 2. Connect the other pin of the switch to the ground, 
-a pull-up resistor is not necessary, because the internal one will be used. 
-The switch will briefly play MIDI note C4 when fliplled.
-Map it in your DAW or DJ software.
-
-Written by tttapa, 08/09/2017
-https://github.com/tttapa/Control_Surface
+/**
+ * @example Ex.04.Switch.ino
+ * 
+ * This is an example of the DigitalLatch class of the Control_Surface library.
+ * 
+ * Connect a toggle switch to digital pin 2. Connect the other pin of the switch to the ground, 
+ * a pull-up resistor is not necessary, because the internal one will be used.  
+ * The switch will briefly play MIDI note C4 when flipped.  
+ * Map it in your DAW or DJ software.
+ * 
+ * Written by tttapa, 08/09/2017  
+ * https://github.com/tttapa/Control_Surface
 */
 
 #include <Control_Surface.h> // Include the library

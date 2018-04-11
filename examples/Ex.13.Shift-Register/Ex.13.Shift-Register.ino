@@ -1,19 +1,23 @@
-/*
-  This is an example of the "Bank" class of the Control_Surface library.
-  Connect a potentiometer to analog pins A0.
-
-  Connect push buttons to pins 2 and 3, and a shift register to pins 10 (ST_CP), 11 (DS) and 13 (SH_CP).
-  Connect LEDs (+ current limiting resistors) to the 8 outputs of the shift register.
-
-  Pins 2 and 3 increment or decrement the bank setting, and the LEDs display the bank setting.
-  
-  This allows you to control multiple tracks with only a limited amount of physical potentiometers and buttons
-
-  Map accordingly in your DAW or DJ software.
-
-  Written by Pieter P, 08-09-2017
-  https://github.com/tttapa/Control_Surface
-*/
+/**
+ * @example Ex.13.Shift-Register.ino
+ * 
+ * This is an example of the ShiftRegisterOut class of the Control_Surface library.
+ * 
+ * Connect a potentiometer to analog pins A0.  
+ * Connect push buttons to pins 2 and 3, and a shift register to pins 10 (ST_CP), 11 (DS) and 13 (SH_CP).  
+ * Connect LEDs (+ current limiting resistors) to the 8 outputs of the shift register.
+ *
+ * Pins 2 and 3 increment or decrement the bank setting, and the LEDs display the bank setting.
+ * 
+ * This allows you to control multiple tracks with only a limited amount of physical potentiometers and buttons.
+ * 
+ * Depending on the bank setting, the potentiometer will send MIDI Control Change 
+ * as the channel volume of channels 1 through 8.  
+ * Map accordingly in your DAW or DJ software.
+ *
+ * Written by Pieter P, 08-09-2017  
+ * https://github.com/tttapa/Control_Surface
+ */
 
 #include <Control_Surface.h> // Include the library
 
@@ -45,23 +49,6 @@ BankSelector bankSelector(bank, { 2, 3 }, {
   ShiftReg.pin(6), 
   ShiftReg.pin(7)
 });
-
-/* Alternatively, you could use arrays for the pin numbers:
-
-   const pin_t buttonPins[] = { 2, 3 };
-   const pin_t ledPins[] = { 
-     ShiftReg.pin(0), 
-     ShiftReg.pin(1), 
-     ShiftReg.pin(2), 
-     ShiftReg.pin(3), 
-     ShiftReg.pin(4), 
-     ShiftReg.pin(5), 
-     ShiftReg.pin(6), 
-     ShiftReg.pin(7)
-   };
-
-   BankSelector bankSelector(bank, buttonPins, ledPins);
-*/
 
 /*_______________________________________________________________________________________________________________________________________*/
 

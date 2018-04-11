@@ -1,20 +1,23 @@
-/*
-  This is an example of the "RotaryEncoder" class of the Control_Surface library.
-  Connect the A and B pins of the encoder to 2 interrupt pins (2 and 3). 
-  It's recommended to use 100nF capacitors between the A and B pins and ground (hardware debounce).
-  Connect the common (C) pin to the ground. Pull-up resistors are not necessary, since the internal ones will be used.
-  Map the control change message 0x14 to the right control in your DJ or DAW software, 
-  and select 'relative' instead of 'absolute'.
-
-  If you are using a jog wheel, use JOG, if you are using a normal encoder 
-  (for normal controls like EQ or volume etc.) use NORMAL_ENCODER.
-  If you have strange results in your software, try a different relative mode: 
-  TWOS_COMPLEMENT, BINARY_OFFSET or SIGN_MAGNITUDE.
-  If the control works, but it goes in the wrong direction, swap the pins A and B of the encoder 
-  (either physically, or by swapping the pin numbers in the RotaryEncoder constructor).
-
-  Written by Pieter P, 22-08-2017
-  https://github.com/tttapa/Control_Surface
+/**
+ * @example Ex.03.Rotary-Encoder.ino
+ * 
+ * This is an example of the RotaryEncoder class of the Control_Surface library.
+ * 
+ * Connect the A and B pins of the encoder to 2 interrupt pins (2 and 3).  
+ * It's recommended to use 100nF capacitors between the A and B pins and ground (hardware debounce).  
+ * Connect the common (C) pin to the ground. Pull-up resistors are not necessary, since the internal ones will be used.  
+ * Map the control change message 0x14 to the right control in your DJ or DAW software, 
+ * and select 'relative' instead of 'absolute'.
+ *
+ * If you are using a jog wheel, use JOG, if you are using a normal encoder 
+ * (for normal controls like EQ or volume etc.) use NORMAL_ENCODER.  
+ * If you have strange results in your software, try a different relative mode: 
+ * TWOS_COMPLEMENT, BINARY_OFFSET or SIGN_MAGNITUDE.  
+ * If the control works, but it goes in the wrong direction, swap the pins A and B of the encoder 
+ * (either physically, or by swapping the pin numbers in the RotaryEncoder constructor).
+ *
+ * Written by Pieter P, 22-08-2017  
+ * https://github.com/tttapa/Control_Surface
 */
 
 #include <Control_Surface.h>

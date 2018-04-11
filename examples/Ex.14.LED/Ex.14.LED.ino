@@ -1,4 +1,22 @@
-#include <Control_Surface.h>
+/**
+ * @example Ex.14.LED.ino
+ * 
+ * This is an example of the MIDI_LED class of the Control_Surface librar.
+ * 
+ * Connect two push buttons to pins 2 and 3. Pull-up resistors are not necessary, 
+ * because the internal ones will be used.  
+ * Connect two LEDs (+ current limiting resistors) to pins 12 and 13.
+ * 
+ * The buttons will mute and un-mute tracks 1 and 2 respectively. The LEDs will 
+ * indicate whether the channel is muted or not.
+ * 
+ * Configure as a MCU-compatible Control Surface (Mackie Control Universal) in your DAW.
+ * 
+ * Written by Pieter P, 2018-04-11  
+ * https://github.com/tttapa/Control_Surface
+ */
+
+#include <Control_Surface.h>  // Include the library
 
 const uint8_t velocity = 0b1111111;
 
