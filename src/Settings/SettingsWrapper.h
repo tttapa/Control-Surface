@@ -14,6 +14,7 @@
 #undef DEBUG
 #define DEBUG cout
 #endif
+#undef IGNORE_SYSEX
 #endif
 
 #endif // SETTINGSWRAPPER_H
