@@ -196,7 +196,4 @@ void setup()   {
 
 void loop() {
   Control_Surface.refresh();  // Refresh all elements
-  if (digitalRead(20) == LOW) {
-    screenshot("OLED-Demo");
-  }
 }
