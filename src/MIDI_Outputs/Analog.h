@@ -90,7 +90,8 @@ protected:
   virtual void send(unsigned int value);
   uint8_t oldVal = -1;
 
-  uint8_t controller, channel;
+  const uint8_t controller;
+  const uint8_t channel;
 };
 
 // =========================================================================================== //
@@ -126,7 +127,7 @@ protected:
   virtual void send(unsigned int value);
   uint16_t oldVal = -1;
 
-  uint8_t channel;
+  const uint8_t channel;
 };
 
 #endif // ANALOG_h_
