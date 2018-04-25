@@ -1,9 +1,9 @@
 #ifndef ANALOG_h_
 #define ANALOG_h_
 
-// #include <Arduino.h>
 #include "../Settings/SettingsWrapper.h"
 #include "../Helpers/EMA.h"
+#include "../Helpers/Hysteresis.h"
 #include "./MIDI_Control_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
 
@@ -92,6 +92,8 @@ protected:
 
   const uint8_t controller;
   const uint8_t channel;
+
+  Hysteresis hysteresis;
 };
 
 // =========================================================================================== //

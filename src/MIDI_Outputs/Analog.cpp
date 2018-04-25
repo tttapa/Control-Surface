@@ -28,7 +28,7 @@ void AnalogBase::map(int (*fn)(int)) // change the function pointer for analogMa
 
 void AnalogCC::send(unsigned int input)
 {
-  uint8_t value = input >> 3; // map from the 10-bit analog input value [0, 1023] to the 7-bit MIDI value [0, 127]
+  uint8_t value = hysteresis.getOutputLevel(input); // map from the 10-bit analog input value [0, 1023] to the 7-bit MIDI value [0, 127]
   if (value != oldVal)        // if the value changed since last time
   {
     Control_Surface.MIDI()->send(CC,
