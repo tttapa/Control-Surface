@@ -17,7 +17,7 @@
  * (either physically, or by swapping the pin numbers in the RotaryEncoder constructor).
  *
  * Written by Pieter P, 22-08-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
 */
 
 #include <Control_Surface.h>

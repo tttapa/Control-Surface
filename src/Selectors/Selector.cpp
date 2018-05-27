@@ -62,9 +62,7 @@ void Selector::refresh()
 
     if (newSetting != Setting)
     {
-        refreshLEDs(newSetting);
-        Setting = newSetting;
-        refreshImpl(Setting);
+        setSetting(newSetting);
     }
     else if (firstRefresh)
     {

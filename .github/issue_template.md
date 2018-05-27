@@ -1,4 +1,4 @@
-Before opening a new issue, please read the [installation instructions](https://github.com/tttapa/Control_Surface#installation) in the README. Also check if your question is answered in the [Wiki](https://github.com/tttapa/Control_Surface/wiki) or in a [previous issue](https://github.com/tttapa/Control_Surface/issues?q=is%3Aissue).   
+Before opening a new issue, please read the [installation instructions](https://github.com/tttapa/Control-Surface#installation) in the README. Also check if your question is answered in the [Wiki](https://github.com/tttapa/Control-Surface/wiki) or in a [previous issue](https://github.com/tttapa/Control-Surface/issues?q=is%3Aissue).   
 If you do create a new issue, please follow the template below.  
 --- (delete these first lines) ---
 

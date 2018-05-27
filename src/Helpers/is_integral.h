@@ -32,7 +32,8 @@ template<> constexpr bool is_integral_type<int64_t>() {
   return true;
 }
 #elif defined(CORE_TEENSY)
-template<class T> constexpr bool is_integral_type() {
+template<class T>
+constexpr bool is_integral_type() {
   return false;
 }
 template<> constexpr bool is_integral_type<int>() {

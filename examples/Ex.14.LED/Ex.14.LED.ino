@@ -13,7 +13,7 @@
  * Configure as a MCU-compatible Control Surface (Mackie Control Universal) in your DAW.
  * 
  * Written by Pieter P, 2018-04-11  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
  */
 
 #include <Control_Surface.h>  // Include the library

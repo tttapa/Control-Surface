@@ -11,7 +11,7 @@
  * MIDI Program Change event is sent.
  * 
  * Written by Pieter P, 11-04-2018   
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
 */
 
 #include <Control_Surface.h> // Include the library

@@ -25,6 +25,7 @@
 #include "./Banks/BankSelector.h"
 
 #include "./Selectors/SelectorPC.h"
+#include "./Selectors/Transposer.h"
 
 #include "./MIDI_Interfaces/USBMIDI_Interface.h"
 #include "./MIDI_Interfaces/SerialMIDI_Interface.h"

@@ -10,7 +10,7 @@
  * Map accordingly in your DAW or DJ software.
  *
  * Written by Pieter P, 20-09-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
 */
 
 #include <Control_Surface.h> // Include the library

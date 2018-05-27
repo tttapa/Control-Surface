@@ -24,6 +24,8 @@ RotaryEncoder	KEYWORD1
 
 Bank	KEYWORD1
 BankSelector	KEYWORD1
+Transposer	KEYWORD1
+SelectorPC	KEYWORD1
 
 ExtIO	KEYWORD1
 ExtendedIOElement	KEYWORD1
@@ -52,12 +54,11 @@ map	KEYWORD2
 invert	KEYWORD2
 
 send	KEYWORD2
-send	KEYWORD2
-send	KEYWORD2
 
 add	KEYWORD2
 setBankSetting	KEYWORD2
 getBankSetting	KEYWORD2
+getTransposition	KEYWORD2
 
 begin	KEYWORD2
 reset	KEYWORD2

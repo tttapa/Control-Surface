@@ -9,7 +9,7 @@
  * Map it in your DAW or DJ software.
  * 
  * Written by tttapa, 08/09/2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
 */
 
 /**
@@ -25,7 +25,7 @@
  * MIDI Program Change event is sent.
  * 
  * Written by Pieter P, 11-04-2018   
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
 */
 
 /**
@@ -37,7 +37,7 @@
  * Map it in your DAW or DJ software.
  * 
  * Written by Pieter P, 08-09-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -49,7 +49,7 @@
  * Map it in your DAW or DJ software.
  * 
  * Written by Pieter P, 08-09-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -84,7 +84,7 @@
  * Note: It is recommended to use a BankSelector (See Ex.07.BankSelectors) instead of changing the bank setting manually.
  *
  * Written by Pieter P, 20-09-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -107,7 +107,7 @@
  * `80 3C 7F` (note off, note 0x3C, velocity 0x7F) should turn off the built-in LED.
  *
  * Written by Pieter P, 20-09-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -122,7 +122,7 @@
  * Map accordingly in your DAW or DJ software.
  *
  * Written by Pieter P, 20-09-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
 */
 
 /**
@@ -138,7 +138,7 @@
  * Set 'maximumValue' to the analog value read when the potentiometer is in the maximum position.
  * 
  * Written by Pieter P, 20-09-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -184,7 +184,7 @@
  * Map accordingly in your DAW or DJ software.
  *
  * Written by Pieter P, 08-09-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
 */
 
 /**
@@ -235,7 +235,7 @@
       - The address won't change.
 
  * Written by Pieter P, 08-09-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -256,7 +256,7 @@
  * Map accordingly in your DAW or DJ software.
  *
  * Written by Pieter P, 08-09-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -270,8 +270,24 @@
  * Map it in your DAW or DJ software.
  * 
  * Written by tttapa, 08/09/2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
 */
+
+/**
+ * @example Ex.17.Transposer.ino
+ * 
+ * @brief An example demonstrating the transpose function.
+ * 
+ * Connect 8 buttons to pins 2 - 9, to use as piano keys 
+ * and two buttons to pins 10 - 11 to transpose the notes.
+ * 
+ * Pressing button 10 once raises the pitch by one semitone,
+ * if you press it again, the pitch is two semitones higher, etc.
+ * Pressing button 11 lowers the pitch by one semitone at a time.
+ * 
+ * Written by Pieter P, 27-05-2018   
+ * https://github.com/tttapa/Control-Surface
+ */
 
 /**
  * @example Ex.14.LED.ino
@@ -288,7 +304,7 @@
  * Configure as a MCU-compatible Control Surface (Mackie Control Universal) in your DAW.
  * 
  * Written by Pieter P, 2018-04-11  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -330,7 +346,7 @@
  * (either physically, or by swapping the pin numbers in the RotaryEncoder constructor).
  *
  * Written by Pieter P, 22-08-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
 */
 
 /**
@@ -361,7 +377,7 @@
  * Configure as a MCU-compatible Control Surface (Mackie Control Universal) in your DAW.
  *
  * Written by Pieter P, 22-03-2018  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -382,6 +398,6 @@
  * Map accordingly in your DAW or DJ software.
  * 
  * Written by tttapa, 24/09/2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
 */
 

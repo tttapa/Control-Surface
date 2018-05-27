@@ -18,7 +18,7 @@
  * `80 3C 7F` (note off, note 0x3C, velocity 0x7F) should turn off the built-in LED.
  *
  * Written by Pieter P, 20-09-2017  
- * https://github.com/tttapa/Control_Surface
+ * https://github.com/tttapa/Control-Surface
  */
 
 #include <Control_Surface.h> // Include the library
