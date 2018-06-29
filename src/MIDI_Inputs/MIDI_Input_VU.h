@@ -65,7 +65,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         return true;
     }
 
-    void refresh()
+    void update()
     {
         if (decay && ((millis() - prevDecayTime) > decayTime))
         {

@@ -12,23 +12,24 @@ void Button::invert() // Invert the button state (send Note On event when releas
 {
     invertState = true;
 }
+
 bool Button::invertState = false;
 
-void Button::refresh() // Check if the button state changed
+Button::State Button::getState() // Check if the button state changed
 {
+    State rstate;
     bool state = ExtIO::digitalRead(pin) ^ invertState; // read the button state and invert it if "invertState" is true
-    if (millis() - prevBounceTime > debounceTime)
+    if (millis() - prevBounceTime > debounceTime) // wait for state to stabilize
     {
-        int8_t stateChange = state - buttonState;
+        rstate = static_cast<State>((buttonState << 1) | state);
         buttonState = state;
-        if (stateChange == falling) // Button is pressed
-            press();
-        else if (stateChange == rising) // Button is released
-            release();
+    } else {
+        rstate = static_cast<State>(buttonState << 1 | buttonState);
     }
     if (state != prevState) // Button is pressed, released or bounces
     {
         prevBounceTime = millis();
         prevState = state;
     }
+    return rstate;
 }

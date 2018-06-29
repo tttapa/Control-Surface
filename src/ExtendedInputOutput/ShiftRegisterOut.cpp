@@ -25,7 +25,7 @@ void ShiftRegisterOut::digitalWrite(pin_t pin, uint8_t val)
         stateBuffer[bufferIndex] |= pinToBitMask(pin);
     else
         stateBuffer[bufferIndex] &= ~pinToBitMask(pin);
-    refresh();
+    update();
 }
 
 int ShiftRegisterOut::digitalRead(pin_t pin)
@@ -44,7 +44,7 @@ void ShiftRegisterOut::begin()
     reset();
 }
 
-void ShiftRegisterOut::refresh()
+void ShiftRegisterOut::update()
 {
     ExtIO::digitalWrite(latchPin, LOW);
     if (bitOrder == LSBFIRST)
@@ -59,7 +59,7 @@ void ShiftRegisterOut::refresh()
 void ShiftRegisterOut::reset()
 {
     memset(stateBuffer, 0, bufferLength);
-    refresh();
+    update();
 }
 
 pin_t ShiftRegisterOut::green(pin_t id)

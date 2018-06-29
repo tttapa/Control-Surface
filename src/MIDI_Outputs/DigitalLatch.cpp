@@ -18,7 +18,7 @@ DigitalLatch::~DigitalLatch() // Destructor
   pinMode(pin, INPUT); // make it a normal input again, without the internal pullup resistor.
 }
 
-void DigitalLatch::refresh() // Check if the button state changed, if so, send a MIDI Note On, after a non-blocking delay of "latchTime", send a Note Off
+void DigitalLatch::update() // Check if the button state changed, if so, send a MIDI Note On, after a non-blocking delay of "latchTime", send a Note Off
 {
   bool state = digitalRead(pin); // read the button state
   if (state != oldState)         // If the switch changed position

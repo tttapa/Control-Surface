@@ -36,7 +36,7 @@ private:
   int8_t settingToSemitones(uint8_t setting) {
       return setting + minimumSemitones;
   }
-  void refreshImpl(uint8_t newSetting)
+  void updateImpl(uint8_t newSetting)
   {
     bank.setBankSetting(settingToSemitones(newSetting));
   }

@@ -17,7 +17,7 @@ RotaryEncoder::~RotaryEncoder() // Destructor
   ;
 }
 
-void RotaryEncoder::refresh() // Check if the encoder position has changed since last time, if so, send the relative movement over MIDI
+void RotaryEncoder::update() // Check if the encoder position has changed since last time, if so, send the relative movement over MIDI
 {
   long value = enc.read();
   long difference = (value - oldVal) / pulsesPerStep;

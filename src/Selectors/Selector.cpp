@@ -7,7 +7,7 @@ using namespace ExtIO;
 Selector *Selector::last = nullptr;
 Selector *Selector::first = nullptr;
 
-void Selector::refresh()
+void Selector::update()
 {
     uint8_t newSetting = Setting;
     switch (mode)
@@ -66,7 +66,7 @@ void Selector::refresh()
     }
     else if (firstRefresh)
     {
-        refreshImpl(Setting);
+        updateImpl(Setting);
         firstRefresh = false;
     }
 }
@@ -77,9 +77,9 @@ uint8_t Selector::getSetting()
 }
 void Selector::setSetting(uint8_t newSetting)
 {
-    refreshLEDs(newSetting);
+    updateLEDs(newSetting);
     Setting = newSetting;
-    refreshImpl(Setting);
+    updateImpl(Setting);
 }
 
 const char *Selector::getMode()
@@ -114,7 +114,7 @@ void Selector::initLEDs()
     digitalWrite(ledPins[0], HIGH);
 }
 
-void Selector::refreshLEDs(uint8_t newSetting)
+void Selector::updateLEDs(uint8_t newSetting)
 {
     switch (mode)
     {

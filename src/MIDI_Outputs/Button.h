@@ -21,18 +21,24 @@ public:
    */
   static void invert();
 
-  bool isPressed() {
-    return buttonState;
-  }
-
-protected:
-  virtual void press() = 0;
-  virtual void release() = 0;
+  enum State {
+    Pressed = 0b00,
+    Released = 0b11,
+    Falling = 0b10,
+    Rising = 0b01
+  };
+  /**
+   * @brief Get the state of the button
+   * 
+   * @return State 
+   *         The state of the button, either Button::PRESSED, Button::RELEASED, Button::FALLING or Button::RISING.
+   *         The button is debounced, the debounce time can be set in ../Settings/Settings.h
+   */
+  State getState(); // Check if the button state changed
 
 private:
-  void refresh(); // Check if the button state changed, and send a MIDI Note On or Off accordingly
-
   const pin_t pin;
+
   bool prevState = HIGH;
   bool buttonState = HIGH;
   unsigned long prevBounceTime = 0;
@@ -40,9 +46,6 @@ private:
   static bool invertState;
 
   constexpr static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME; // Edit this in ../Settings/Settings.h
-
-  constexpr static int8_t falling = LOW - HIGH;
-  constexpr static int8_t rising = HIGH - LOW;
 };
 
 #endif // CONTROL_SURFACE_MIDI_OUTPUTS_BUTTON_H_

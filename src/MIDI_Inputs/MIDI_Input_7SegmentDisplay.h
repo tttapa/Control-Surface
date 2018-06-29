@@ -25,7 +25,7 @@ class MCU_TimeDisplay : public MCU_7SegmentDisplay
   public:
     MCU_TimeDisplay();
 
-    void refresh();
+    void update();
     void print();
     void getText(char *buff);
     void getBars(char *buff);
@@ -40,7 +40,7 @@ class MCU_AssignmentDisplay : public MCU_7SegmentDisplay
   public:
     MCU_AssignmentDisplay();
 
-    void refresh();
+    void update();
     void print();
     void getText(char *buff);
 };

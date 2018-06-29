@@ -28,7 +28,7 @@ public:
   ~DigitalLatch();                                                                                                // Destructor
 
 private:
-  void refresh(); // Check if the button state changed, if so, send a MIDI Note On, after a non-blocking delay of "latchTime", send a Note Off
+  void update(); // Check if the button state changed, if so, send a MIDI Note On, after a non-blocking delay of "latchTime", send a Note Off
 
   const pin_t pin;
   const uint8_t note;

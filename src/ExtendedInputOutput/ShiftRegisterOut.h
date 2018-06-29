@@ -13,7 +13,7 @@ public:
   void digitalWrite(pin_t pin, uint8_t val);
   int digitalRead(pin_t pin);
   void begin();
-  void refresh();
+  void update();
   void reset();
 
   pin_t green(pin_t id);

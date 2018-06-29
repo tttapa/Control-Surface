@@ -36,16 +36,16 @@ MIDI_Interface *Control_Surface_::MIDI()
     return midi;
 }
 
-void Control_Surface_::refreshControls()
+void Control_Surface_::updateControls()
 {
     for (MIDI_Control_Element *element = MIDI_Control_Element::getFirst(); element != nullptr; element = element->getNext())
-        element->refresh();
+        element->update();
 }
 
-void Control_Surface_::refreshSelectors()
+void Control_Surface_::updateSelectors()
 {
     for (Selector *element = Selector::getFirst(); element != nullptr; element = element->getNext())
-        element->refresh();
+        element->update();
 }
 
 void Control_Surface_::updateMidiInput()
@@ -160,14 +160,14 @@ void Control_Surface_::updateMidiInput()
         midiReadResult = midi->read();
     }
 }
-void Control_Surface_::refreshInputs()
+void Control_Surface_::updateInputs()
 {
     for (MIDI_Input_Element_CC *element = MIDI_Input_Element_CC::getFirst(); element != nullptr; element = element->getNext())
-        element->refresh();
+        element->update();
     for (MIDI_Input_Element_Note *element = MIDI_Input_Element_Note::getFirst(); element != nullptr; element = element->getNext())
-        element->refresh();
+        element->update();
     for (MIDI_Input_Element_ChannelPressure *element = MIDI_Input_Element_ChannelPressure::getFirst(); element != nullptr; element = element->getNext())
-        element->refresh();
+        element->update();
 }
 
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();

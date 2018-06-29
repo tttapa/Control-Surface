@@ -297,9 +297,9 @@ public:
   /**
    * @brief Refresh the Selector: read all buttons and update the setting if necessary.
    * 
-   * The LEDs will be updated, and Selector::refreshImpl will be called.
+   * The LEDs will be updated, and Selector::updateImpl will be called.
    */
-  void refresh();
+  void update();
 
   /**
    * @brief Get the selected setting.
@@ -315,7 +315,7 @@ public:
    * 
    * The setting is zero-based.
    * 
-   * The LEDs will be updated, and Selector::refreshImpl will be called.
+   * The LEDs will be updated, and Selector::updateImpl will be called.
    * 
    * @param newSetting The new setting to select.
    */
@@ -375,7 +375,7 @@ private:
   } mode;
 
   void initLEDs();
-  void refreshLEDs(uint8_t newSetting);
+  void updateLEDs(uint8_t newSetting);
   bool debounceButton(debouncedButton &button);
 
   Selector *next = nullptr, *previous = nullptr;
@@ -394,9 +394,9 @@ protected:
   /**
    * @brief A virtual function that gets called every time the setting changes.
    * 
-   * @param newSetting The new setting that will be selected after the function call to refreshImpl.
+   * @param newSetting The new setting that will be selected after the function call to updateImpl.
    */
-  virtual void refreshImpl(uint8_t newSetting) {}
+  virtual void updateImpl(uint8_t newSetting) {}
 };
 
 #endif // SELECTOR_H_

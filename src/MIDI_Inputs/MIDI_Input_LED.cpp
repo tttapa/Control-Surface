@@ -48,13 +48,13 @@ bool MIDI_Input_Note_Buffer::getState()
 MIDI_LED::MIDI_LED(pin_t pin, uint8_t address, uint8_t channel, size_t nb_addresses, size_t nb_channels)
     : MIDI_Input_Note_Buffer(address, channel, nb_addresses, nb_channels), pin(pin)
 {
-    pinMode(pin, OUTPUT);
+    ExtIO::pinMode(pin, OUTPUT);
 }
 MIDI_LED::~MIDI_LED()
 {
-    pinMode(pin, INPUT);
+    ExtIO::pinMode(pin, INPUT);
 }
 void MIDI_LED::display()
 {
-    digitalWrite(pin, getState());
+    ExtIO::digitalWrite(pin, getState());
 }

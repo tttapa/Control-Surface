@@ -31,7 +31,7 @@ public:
 
 private:
   Bank &bank;
-  void refreshImpl(uint8_t newSetting)
+  void updateImpl(uint8_t newSetting)
   {
     bank.setBankSetting(newSetting);
   }

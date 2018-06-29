@@ -38,7 +38,7 @@ class ButtonMatrix : public MIDI_Control_Element
     ~ButtonMatrix();
 
   private:
-    void refresh();
+    void update();
 
     void init();
 

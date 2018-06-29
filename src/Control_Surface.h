@@ -9,9 +9,10 @@
 
 #include "./Control_Surface/Control_Surface_Class.h"
 
-#include "./MIDI_Outputs/Analog.h"
+#include "./MIDI_Outputs/CCPotentiometer.hpp"
 #include "./MIDI_Outputs/ButtonMatrix.h"
-#include "./MIDI_Outputs/Digital.h"
+#include "./MIDI_Outputs/CCButton.hpp"
+#include "./MIDI_Outputs/NoteButton.hpp"
 #include "./MIDI_Outputs/DigitalLatch.h"
 #include "./MIDI_Outputs/RotaryEncoder.h"
 

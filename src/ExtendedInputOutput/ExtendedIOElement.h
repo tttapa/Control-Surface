@@ -31,7 +31,7 @@ public:
   virtual void analogWrite(pin_t pin, analog_t val){}
 
   virtual void begin(){};
-  virtual void refresh(){};
+  virtual void update(){};
   virtual void reset(){};
   virtual void print(){};
 

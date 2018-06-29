@@ -17,40 +17,40 @@ public:
   ~Control_Surface_();
 
   void begin();
-  // void refresh(); // (see below)
+  // void update(); // (see below)
   MIDI_Interface *MIDI();
 
 private:
   Control_Surface_() {}
   MIDI_Interface *new_midi = nullptr;
   MIDI_Interface *midi = nullptr;
-  void refreshControls();
-  void refreshSelectors();
+  void updateControls();
+  void updateSelectors();
   void updateMidiInput();
-  void refreshInputs();
+  void updateInputs();
 #ifdef DISPLAY_GFX
-  // void refreshDisplays(); // (see below)
+  // void updateDisplays(); // (see below)
 #endif
 
 public:
-  void refresh()
+  void update()
   {
     if (midi == nullptr)
       begin(); // make sure that midi != nullptr
 
-    refreshControls();  // refresh all control elements
-    refreshSelectors(); // refresh all bank selectors
+    updateControls();  // update all control elements
+    updateSelectors(); // update all bank selectors
 
     updateMidiInput();
-    refreshInputs();
+    updateInputs();
 #ifdef DISPLAY_GFX
-    refreshDisplays();
+    updateDisplays();
 #endif
   }
 
 private:
 #ifdef DISPLAY_GFX
-  void refreshDisplays()
+  void updateDisplays()
   {
     static unsigned long previousRefresh = millis();
 

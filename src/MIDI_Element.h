@@ -18,8 +18,8 @@ class MIDI_Element
         ;
     }
     virtual void reset() {}                // Reset to default value (currently only used for VU meters)
-    virtual void refresh() {}              // Check if the state or value of the control has changed since last refresh, if so, send MIDI event, refresh MIDI_Input_Element (write buffer to output etc.)
-    virtual void map(int (*fn)(int)) {}    // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::refresh()
+    virtual void update() = 0;             // Check if the state or value of the control has changed since last update, if so, send MIDI event, update MIDI_Input_Element (write buffer to output etc.)
+    virtual void map(int (*fn)(int)) {}    // Change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in Analog::update()
 
     virtual void setChannelOffset(uint8_t offset) // Set the channel offset
     {

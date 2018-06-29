@@ -31,7 +31,7 @@ bool MCU_7SegmentDisplay::updateImpl(const MIDI_message_matcher &midimsg)
 #endif
     textBuffer[charIndex] = character;
     print();
-    refresh();
+    update();
     return true;
 }
 
@@ -39,7 +39,7 @@ bool MCU_7SegmentDisplay::updateImpl(const MIDI_message_matcher &midimsg)
 
 MCU_TimeDisplay::MCU_TimeDisplay() : MCU_7SegmentDisplay(0x40, 0xA) {}
 
-void MCU_TimeDisplay::refresh()
+void MCU_TimeDisplay::update()
 {
     ;
 }
@@ -97,7 +97,7 @@ void MCU_TimeDisplay::getFrames(char *buff)
 //----------------------------------------------------------------------------------------------------------------------------------------//
 
 MCU_AssignmentDisplay::MCU_AssignmentDisplay() : MCU_7SegmentDisplay(0x4A, 0x2) {}
-void refresh()
+void MCU_AssignmentDisplay::update()
 {
     ;
 }

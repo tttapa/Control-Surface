@@ -45,7 +45,7 @@ class SelectorPC : public Selector
     }
 
   private:
-    void refreshImpl(uint8_t newSetting)
+    void updateImpl(uint8_t newSetting)
     {
         Control_Surface.MIDI()->send(PROGRAM_CHANGE,
                                      channel,
