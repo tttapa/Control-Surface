@@ -6,7 +6,7 @@
 MIDI_Input_Element::MIDI_Input_Element(uint8_t address, uint8_t channel, uint8_t nb_addresses, uint8_t nb_channels)
     : address(address), channel(channel - 1), nb_addresses(nb_addresses), nb_channels(nb_channels) {}
 
-bool MIDI_Input_Element::update(const MIDI_message_matcher &midimsg)
+bool MIDI_Input_Element::updateWith(const MIDI_message_matcher &midimsg)
 {
     if (!match(midimsg))
         return false;

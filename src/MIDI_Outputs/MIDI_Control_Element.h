@@ -17,7 +17,7 @@ public:
   {
     LinkedList::remove(this, first, last);
   }
-  
+
   MIDI_Control_Element *getNext()
   {
     return next;

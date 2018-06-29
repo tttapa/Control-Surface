@@ -17,7 +17,6 @@ public:
   ~Control_Surface_();
 
   void begin();
-  // void update(); // (see below)
   MIDI_Interface *MIDI();
 
 private:

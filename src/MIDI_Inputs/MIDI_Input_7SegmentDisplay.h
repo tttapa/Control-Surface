@@ -25,12 +25,14 @@ class MCU_TimeDisplay : public MCU_7SegmentDisplay
   public:
     MCU_TimeDisplay();
 
-    void update();
-    void print();
+    void print() override;
     void getText(char *buff);
     void getBars(char *buff);
     void getBeats(char *buff);
     void getFrames(char *buff);
+    
+  protected:    
+    void update() override;
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
@@ -39,10 +41,11 @@ class MCU_AssignmentDisplay : public MCU_7SegmentDisplay
 {
   public:
     MCU_AssignmentDisplay();
-
-    void update();
-    void print();
+    void print() override;
     void getText(char *buff);
+
+  protected:
+    void update() override;
 };
 
 #endif // MIDI_Input_7SegmentDisplay_H_

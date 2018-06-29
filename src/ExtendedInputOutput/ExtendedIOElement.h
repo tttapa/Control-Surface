@@ -30,10 +30,9 @@ public:
   virtual analog_t analogRead(pin_t pin){return 0;}
   virtual void analogWrite(pin_t pin, analog_t val){}
 
-  virtual void begin(){};
-  virtual void update(){};
-  virtual void reset(){};
-  virtual void print(){};
+  virtual void begin() = 0;
+  virtual void update() = 0;
+  virtual void reset() = 0;
 
   pin_t pin(pin_t p);
   pin_t getEnd();

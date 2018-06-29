@@ -65,18 +65,6 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
         return true;
     }
 
-    void update()
-    {
-        if (decay && ((millis() - prevDecayTime) > decayTime))
-        {
-            for (uint8_t i = 0; i < nb_addresses; i++)
-                if (getValue(i) > 0)
-                    setValue(i, getValue(i) - 1);
-            prevDecayTime = millis();
-            display();
-        }
-    }
-
     uint8_t getValue()
     {
         return getValue(addressOffset);
@@ -91,6 +79,18 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     const bool decay;
     const unsigned long decayTime;
     unsigned long prevDecayTime = 0;
+
+    void update() override
+    {
+        if (decay && ((millis() - prevDecayTime) > decayTime))
+        {
+            for (uint8_t i = 0; i < nb_addresses; i++)
+                if (getValue(i) > 0)
+                    setValue(i, getValue(i) - 1);
+            prevDecayTime = millis();
+            display();
+        }
+    }
 
     void initBuffer()
     {

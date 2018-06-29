@@ -26,7 +26,7 @@ class DigitalCCOut : public MIDI_Control_Element
     virtual void refresh() = 0;
 
   private:
-    void update(); // Check if the button state changed, and send a MIDI event accordingly
+    void update() override; // Check if the button state changed, and send a MIDI event accordingly
 
     const uint8_t address;
     const uint8_t channel;
@@ -60,9 +60,9 @@ class CCOut : public MIDI_Control_Element
   protected:
     void send(uint8_t value);
     virtual void refresh() = 0;
+    void update() override; // Read the new continuous value
 
   private:
-    void update(); // Read the new continuous value
 
     const uint8_t address;
     const uint8_t channel;

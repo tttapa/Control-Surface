@@ -27,9 +27,10 @@ public:
   DigitalLatch(pin_t pin, uint8_t note, uint8_t channel, uint8_t velocity = 0x7F, unsigned long latchTime = 100); // Constructor
   ~DigitalLatch();                                                                                                // Destructor
 
-private:
-  void update(); // Check if the button state changed, if so, send a MIDI Note On, after a non-blocking delay of "latchTime", send a Note Off
+protected:
+  void update() override; // Check if the button state changed, if so, send a MIDI Note On, after a non-blocking delay of "latchTime", send a Note Off
 
+private:
   const pin_t pin;
   const uint8_t note;
   const uint8_t channel;

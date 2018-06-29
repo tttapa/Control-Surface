@@ -116,7 +116,7 @@ void Control_Surface_::updateMidiInput()
 #ifdef DEBUG
                         DEBUG_OUT << "updating CC elements" << endl;
 #endif
-                        if (element->update(midimsg))
+                        if (element->updateWith(midimsg))
                             break;
                     }
                 }
@@ -128,7 +128,7 @@ void Control_Surface_::updateMidiInput()
                         DEBUG_OUT << "updating note elements" << endl;
 #endif
 
-                        if (element->update(midimsg))
+                        if (element->updateWith(midimsg))
                             break;
                     }
                 }
@@ -139,7 +139,7 @@ void Control_Surface_::updateMidiInput()
 #ifdef DEBUG
                         DEBUG_OUT << "updating channel pressure elements" << endl;
 #endif
-                        if (element->update(midimsg))
+                        if (element->updateWith(midimsg))
                             break;
                     }
                 }

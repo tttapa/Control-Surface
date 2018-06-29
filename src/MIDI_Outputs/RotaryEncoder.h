@@ -38,7 +38,7 @@ public:
   static uint8_t mapRelativeCC(int8_t value, relativeCCmode type);  // Convert an 8-bit two's complement integer to a 7-bit value to send over MIDI
 
 private:
-  void update(); // Check if the encoder position has changed since last time, if so, send the relative movement over MIDI
+  void update() override; // Check if the encoder position has changed since last time, if so, send the relative movement over MIDI
 
   uint8_t controllerNumber, channel, pulsesPerStep;
   relativeCCmode mode;

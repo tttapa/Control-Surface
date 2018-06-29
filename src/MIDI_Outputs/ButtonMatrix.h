@@ -37,9 +37,10 @@ class ButtonMatrix : public MIDI_Control_Element
     ButtonMatrix(const pin_t (&rowPins)[nb_rows], const pin_t (&colPins)[nb_cols], const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel, uint8_t velocity = 0x7F);
     ~ButtonMatrix();
 
-  private:
-    void update();
+  protected:
+    void update() override;
 
+  private:
     void init();
 
     inline uint8_t positionToBits(uint8_t col, uint8_t row);
