@@ -31,7 +31,7 @@ void NoteOut::sendOn()
 }
 void NoteOut::sendOff()
 {
-    Control_Surface.MIDI()->send(NOTE_ON,
+    Control_Surface.MIDI()->send(NOTE_OFF,
                                  channel + channelOffset * tracksPerBank,
                                  address + addressOffset * tracksPerBank,
                                  velocity);

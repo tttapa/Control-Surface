@@ -89,7 +89,7 @@ class USBMIDI_Interface : public MIDI_Interface
         {
             midiEventPacket_t midipacket = MidiUSB.read();
             rx_packet = reinterpret_cast<uint8_t*>(&midipacket);
-            if (rx_packet == nullptr)
+            if (!midipacket.header)
                 return NO_MESSAGE;
             MIDI_read_t parseResult = parser.parse(rx_packet);
             if (parseResult != NO_MESSAGE)

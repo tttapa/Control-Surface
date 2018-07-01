@@ -7,6 +7,8 @@
 #error Please select a 'Serial + MIDI' option in the 'Tools > USB Type' menu.
 #endif
 
+#include <Arduino.h> // For VSCode errors in examples
+
 #include "./Control_Surface/Control_Surface_Class.h"
 
 #include "./MIDI_Outputs/CCPotentiometer.hpp"
@@ -15,7 +17,7 @@
 #include "./MIDI_Outputs/NoteButtonLatching.hpp"
 #include "./MIDI_Outputs/CCButton.hpp"
 #include "./MIDI_Outputs/CCButtonLatching.hpp"
-#include "./MIDI_Outputs/RotaryEncoder.h"
+#include "./MIDI_Outputs/RotaryEncoder.hpp"
 
 #include "./MIDI_Inputs/MIDI_Input_Element.h"
 #include "./MIDI_Inputs/MIDI_Input_LED.h"
