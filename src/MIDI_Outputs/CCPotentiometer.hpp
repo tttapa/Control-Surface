@@ -19,7 +19,7 @@ class CCPotentiometer : public CCOut
             send(filteredAnalog.getValue());
     }
 
-    FilteredAnalog filteredAnalog;
+    FilteredAnalog<3> filteredAnalog;
 };
 
 #endif // CONTROL_SURFACE_MIDI_OUTPUTS_CCPOTENTIOMETER_HPP_

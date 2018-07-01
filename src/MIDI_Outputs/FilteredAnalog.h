@@ -12,6 +12,7 @@
  * A map function can be applied to the analog value (e.g. to compensate for logarithmic taper potentiometers or to calibrate the range).  
  * The analog input value is filtered using an exponential moving average filter. The settings for this filter can be changed in Settings.h.  
  */
+template <uint8_t HYSTERESIS_BITS>
 class FilteredAnalog
 {
 public:
@@ -51,9 +52,43 @@ private:
   const pin_t analogPin;
   int (*mapFn)(int) = nullptr;
   EMA<ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE> filter;
-  Hysteresis hysteresis;
+  Hysteresis<HYSTERESIS_BITS> hysteresis;
 
   uint8_t value = 0xFF;
 };
+
+// ------------------------ Implementations ------------------------ //
+
+#include "../Control_Surface/Control_Surface_Class.h"
+
+using namespace ExtIO;
+
+template <uint8_t HYSTERESIS_BITS>
+FilteredAnalog<HYSTERESIS_BITS>::FilteredAnalog(pin_t analogPin) : analogPin(analogPin) {} // Constructor
+
+template <uint8_t HYSTERESIS_BITS>
+bool FilteredAnalog<HYSTERESIS_BITS>::update()
+{
+  unsigned int input = ExtIO::analogRead(analogPin);   // read the raw analog input value
+  if (mapFn != nullptr)                                // if a map function is specified
+    input = mapFn(input);                              // apply the map function to the value
+  input = filter.filter(input);                        // apply a low-pass EMA filter
+  uint8_t newValue = hysteresis.getOutputLevel(input); // map from the 10-bit analog input value [0, 1023] to the 7-bit MIDI value [0, 127]
+  bool changed = newValue != value;
+  value = newValue;
+  return changed;
+}
+
+template <uint8_t HYSTERESIS_BITS>
+uint8_t FilteredAnalog<HYSTERESIS_BITS>::getValue()
+{
+  return value;
+}
+
+template <uint8_t HYSTERESIS_BITS>
+void FilteredAnalog<HYSTERESIS_BITS>::map(int (*fn)(int)) // change the function pointer for analogMap to a new function. It will be applied to the raw analog input value in FilteredAnalog::update()
+{
+  mapFn = fn;
+}
 
 #endif // FILTEREDANALOG_H_

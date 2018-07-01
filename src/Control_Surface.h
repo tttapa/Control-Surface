@@ -17,7 +17,9 @@
 #include "./MIDI_Outputs/NoteButtonLatching.hpp"
 #include "./MIDI_Outputs/CCButton.hpp"
 #include "./MIDI_Outputs/CCButtonLatching.hpp"
+#ifdef Encoder_h_
 #include "./MIDI_Outputs/RotaryEncoder.hpp"
+#endif
 
 #include "./MIDI_Inputs/MIDI_Input_Element.h"
 #include "./MIDI_Inputs/MIDI_Input_LED.h"
