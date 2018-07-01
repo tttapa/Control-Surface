@@ -11,9 +11,10 @@
 
 #include "./MIDI_Outputs/CCPotentiometer.hpp"
 #include "./MIDI_Outputs/ButtonMatrix.h"
-#include "./MIDI_Outputs/CCButton.hpp"
 #include "./MIDI_Outputs/NoteButton.hpp"
-#include "./MIDI_Outputs/DigitalLatch.h"
+#include "./MIDI_Outputs/NoteButtonLatching.hpp"
+#include "./MIDI_Outputs/CCButton.hpp"
+#include "./MIDI_Outputs/CCButtonLatching.hpp"
 #include "./MIDI_Outputs/RotaryEncoder.h"
 
 #include "./MIDI_Inputs/MIDI_Input_Element.h"
