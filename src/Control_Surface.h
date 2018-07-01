@@ -12,6 +12,7 @@
 #include "./Control_Surface/Control_Surface_Class.h"
 
 #include "./MIDI_Outputs/CCPotentiometer.hpp"
+#include "./MIDI_Outputs/PBPotentiometer.hpp"
 #include "./MIDI_Outputs/ButtonMatrix.h"
 #include "./MIDI_Outputs/NoteButton.hpp"
 #include "./MIDI_Outputs/NoteButtonLatching.hpp"
