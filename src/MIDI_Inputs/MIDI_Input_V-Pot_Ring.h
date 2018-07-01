@@ -42,8 +42,6 @@ protected:
   const bool centerLED;
 
   void display();
-  inline int8_t minimum(int8_t a, int8_t b);
-  inline int8_t maximum(int8_t a, int8_t b);
 };
 
 #endif // MCU_VPOT_RING_H_

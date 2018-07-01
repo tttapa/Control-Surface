@@ -2,6 +2,16 @@
 #include "../Helpers/Copy.hpp"
 #include <string.h>
 
+// TODO: why can't I use the min/max macros on Teensy?
+inline int8_t minimum(int8_t a, int8_t b)
+{
+    return a > b ? b : a;
+}
+inline int8_t maximum(int8_t a, int8_t b)
+{
+    return a < b ? b : a;
+}
+
 using namespace ExtIO;
 
 //  public:
@@ -147,14 +157,4 @@ void MCU_VPot_Ring_LED::display()
     }
     break;
     }
-}
-
-// TODO: why can't I use the min/max macros on Teensy?
-inline int8_t MCU_VPot_Ring_LED::minimum(int8_t a, int8_t b)
-{
-    return a > b ? b : a;
-}
-inline int8_t MCU_VPot_Ring_LED::maximum(int8_t a, int8_t b)
-{
-    return a < b ? b : a;
 }

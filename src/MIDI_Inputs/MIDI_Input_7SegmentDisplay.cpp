@@ -22,7 +22,7 @@ bool MCU_7SegmentDisplay::updateImpl(const MIDI_message_matcher &midimsg)
     uint8_t data2 = midimsg.data2;
     uint8_t charIndex = length - 1 - (data1 - address);
     charIndex = charIndex < length ? charIndex : length - 1;
-    // bool decimalPt = data2 & 0x40; // TODO: use decimalPt
+    bool decimalPt = data2 & 0x40; // TODO: use decimalPt
     data2 &= 0x3F;
     char character = data2 >= 0x20 ? data2 : data2 + 0x40;
     DEBUGREF("\tCharacter: " << charIndex << '\t' << character << (decimalPt ? '.' : ' '));

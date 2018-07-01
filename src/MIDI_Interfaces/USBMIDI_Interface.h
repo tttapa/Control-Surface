@@ -30,7 +30,8 @@ class USBMIDI_Interface : public MIDI_Interface
     }
 #elif defined(USBCON) // If the main MCU has a USB connection but is not a Teensy
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2)
-        midiEventPacket_t msg = {m >> 4, m | c, d1, d2};
+    {
+        midiEventPacket_t msg = {(uint8_t)(m >> 4), (uint8_t)(m | c), d1, d2};
         MidiUSB.sendMIDI(msg);
         MidiUSB.flush();
     }
@@ -87,7 +88,7 @@ class USBMIDI_Interface : public MIDI_Interface
         while (1)
         {
             midiEventPacket_t midipacket = MidiUSB.read();
-            rx_packet = reinterpret_cast<char*>(&midipacket);
+            rx_packet = reinterpret_cast<uint8_t*>(&midipacket);
             if (rx_packet == nullptr)
                 return NO_MESSAGE;
             MIDI_read_t parseResult = parser.parse(rx_packet);
