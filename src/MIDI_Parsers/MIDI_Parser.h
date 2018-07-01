@@ -36,8 +36,6 @@ enum MIDI_read_t
 
 class MIDI_Parser {
   public:
-    // virtual MIDI_read_t parse(uint8_t *packet) { return NO_MESSAGE; }
-    // virtual MIDI_read_t parse(uint8_t midibyte) { return NO_MESSAGE; }
     MIDI_message getChannelMessage();
     const uint8_t *getSysExBuffer();
     size_t getSysExLength();

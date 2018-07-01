@@ -6,14 +6,11 @@
 
 #include "./Settings.h"
 
-// ---- Tests on PC ---- //
+// ------- Debug ------- //
 // ===================== //
+#include "../Helpers/Debug.hpp"
 
 #ifndef ARDUINO
-#ifdef DEBUG
-#undef DEBUG
-#define DEBUG cout
-#endif
 #undef IGNORE_SYSEX
 #endif
 

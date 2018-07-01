@@ -1,6 +1,6 @@
 CXX := g++
 CXXFLAGS := -Wall -std=c++11
-SRCS=../MIDI_Input_Element.cpp ../../Helpers/StreamOut.cpp
+SRCS=../MIDI_Input_Element.cpp
 
 test: tests.o source tests-main.o
 	g++ *.o -o tests && ./tests

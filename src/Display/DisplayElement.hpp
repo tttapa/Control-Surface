@@ -2,7 +2,7 @@
 #define DISPLAYELEMENTS_HPP
 
 #include "./DisplayHelpers.hpp"
-#include "../Helpers/Linked_List.h"
+#include "../Helpers/LinkedList.h"
 
 struct Location 
 {

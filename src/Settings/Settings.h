@@ -11,17 +11,8 @@
 // ---------------------------- Debug Settings --------------------------- //
 // ======================================================================= //
 
-/* Print all debug messages */
-// #define DEBUG
-
-/* Print all incoming MIDI messages */
-// #define DEBUG_MIDI_PACKETS
-
-/* Print timing/profiling information */
-// #define DEBUG_TIME
-
-/* The default debug output */
-#define DEBUG_OUT Serial1
+/* The debug output */
+// #define DEBUG_OUT Serial1
 
 // ---------------------------- User Settings ---------------------------- //
 // ======================================================================= //

@@ -1,6 +1,6 @@
 CXX := g++
 CXXFLAGS := -Wall -std=c++11
-SRCS=$(wildcard ../*.cpp) ../../Helpers/StreamOut.cpp
+SRCS=$(wildcard ../*.cpp)
 
 test: tests.o source tests-main.o
 	g++ *.o -o tests && ./tests

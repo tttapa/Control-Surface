@@ -1,7 +1,7 @@
 #ifndef DISPLAY_HPP
 #define DISPLAY_HPP
 
-#include "../Helpers/Linked_List.h"
+#include "../Helpers/LinkedList.h"
 
 class DisplayInterface
 {

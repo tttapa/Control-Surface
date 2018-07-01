@@ -1,5 +1,4 @@
 #include "./MIDI_Input_V-Pot_Ring.h"
-#include "../Helpers/StreamOut.h"
 #include "../Helpers/Copy.hpp"
 #include <string.h>
 
@@ -105,9 +104,7 @@ void MCU_VPot_Ring_LED::display()
         return;
     }
     uint8_t value = getPosition() - 1;
-#ifdef DEBUG
-    DEBUG_OUT << "Display: " << value << endl;
-#endif
+    DEBUGREF("Ring value: " << value);
     switch (getMode())
     {
     case 0:

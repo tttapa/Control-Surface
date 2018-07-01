@@ -1,14 +1,10 @@
 #include "USBMIDI_Parser.h"
 #include "../Settings/SettingsWrapper.h"
-#include "../Helpers/StreamOut.h"
 
 MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)
 {
-#ifdef DEBUG
-  DEBUG_OUT << "MIDIUSB packet:\t" << hex
-        << packet[0] << ' ' << packet[1] << ' ' << packet[2] << ' ' << packet[3] << dec << endl;
-#endif
-
+  DEBUGREF("MIDIUSB packet:\t" << hex
+        << packet[0] << ' ' << packet[1] << ' ' << packet[2] << ' ' << packet[3] << dec);
   uint8_t CIN = (uint8_t)packet[0] << 4; // MIDI USB cable index number
 
   if (CIN >= NOTE_OFF && CIN <= PITCH_BEND) // 2- or 3-byte MIDI event
@@ -29,9 +25,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)
       startSysEx(); // start a new message (overwrite previous unfinished message)
     else if (!receivingSysEx) // If we haven't received a SysExStart
     {
-#ifdef DEBUG
-      DEBUG_OUT << "Error: No SysExStart received" << endl;
-#endif
+      DEBUGREF(F("Error: No SysExStart received"));
       return NO_MESSAGE; // ignore the data
     }
     addSysExByte(packet[1]) && // add three data bytes to buffer
@@ -48,9 +42,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)
     }
     else if (!receivingSysEx) // If we haven't received a SysExStart
     {
-#ifdef DEBUG
-      DEBUG_OUT << "Error: No SysExStart received" << endl;
-#endif
+      DEBUGFN("Error: No SysExStart received");
       return NO_MESSAGE; // ignore the data
     }
     if (
@@ -68,9 +60,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)
       startSysEx(); // start a new message (overwrite previous unfinished message)
     else if (!receivingSysEx) // If we haven't received a SysExStart
     {
-#ifdef DEBUG
-      DEBUG_OUT << "Error: No SysExStart received" << endl;
-#endif
+      DEBUGFN("Error: No SysExStart received");
       return NO_MESSAGE; // ignore the data
     }
     if (  // add two data bytes to buffer
@@ -89,9 +79,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet)
       startSysEx(); // start a new message (overwrite previous unfinished message)
     else if (!receivingSysEx) // If we haven't received a SysExStart
     {
-#ifdef DEBUG
-      DEBUG_OUT << "Error: No SysExStart received" << endl;
-#endif
+      DEBUGFN("Error: No SysExStart received");
       return NO_MESSAGE; // ignore the data
     }
     if ( // add three data bytes to buffer

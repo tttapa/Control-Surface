@@ -1,6 +1,5 @@
 // #include "../Control_Surface.h"
 #include "./MIDI_Input_7SegmentDisplay.h"
-#include "../Helpers/StreamOut.h"
 
 #include <string.h>
 
@@ -26,9 +25,7 @@ bool MCU_7SegmentDisplay::updateImpl(const MIDI_message_matcher &midimsg)
     // bool decimalPt = data2 & 0x40; // TODO: use decimalPt
     data2 &= 0x3F;
     char character = data2 >= 0x20 ? data2 : data2 + 0x40;
-#ifdef DEBUG
-    DEBUG_OUT << "\tCharacter: " << charIndex << tab << character << (decimalPt ? '.' : ' ') << endl;
-#endif
+    DEBUGREF("\tCharacter: " << charIndex << '\t' << character << (decimalPt ? '.' : ' '));
     textBuffer[charIndex] = character;
     print();
     update();
@@ -45,13 +42,11 @@ void MCU_TimeDisplay::update()
 }
 void MCU_TimeDisplay::print() // TODO: add support for 5-digit bar counts
 {
-#ifdef DEBUG
     char barStr[5], beatStr[3], frameStr[4];
     getBars(barStr);
     getBeats(beatStr);
     getFrames(frameStr);
-    DEBUG_OUT << "Bar: " << barStr << "\tBeat: " << beatStr << "\tFrame: " << frameStr << endl;
-#endif
+    DEBUG("Bar: " << barStr << "\tBeat: " << beatStr << "\tFrame: " << frameStr);
 }
 void MCU_TimeDisplay::getText(char *buff)
 {
@@ -103,11 +98,9 @@ void MCU_AssignmentDisplay::update()
 }
 void MCU_AssignmentDisplay::print()
 {
-#ifdef DEBUG
     char str[3];
     getText(str);
-    DEBUG_OUT << "Assignment: " << str << endl;
-#endif
+    DEBUG("Assignment: " << str);
 }
 
 void MCU_AssignmentDisplay::getText(char *buff)

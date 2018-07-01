@@ -39,8 +39,6 @@
 #include "./MIDI_Constants/MCU.h"
 #include "./MIDI_Constants/Control_Change.h"
 
-#include "./Helpers/StreamOut.h"
-
 #ifdef DISPLAY_GFX
 #include "./Display/NoteDisplay.hpp"
 #include "./Display/SelectorDisplay.hpp"

@@ -8,7 +8,7 @@ using Catch::Matchers::Equals;
 #include <iostream>
 using namespace std;
 
-#include "../Linked_List.h"
+#include "../LinkedList.h"
 
 struct Node
 {

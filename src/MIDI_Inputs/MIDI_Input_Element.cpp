@@ -1,5 +1,4 @@
 #include "MIDI_Input_Element.h"
-#include "../Helpers/StreamOut.h"
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -12,11 +11,9 @@ bool MIDI_Input_Element::updateWith(const MIDI_message_matcher &midimsg)
         return false;
     if (!updateImpl(midimsg))
         return false;
-#ifdef DEBUG
-    DEBUG_OUT << "Match: " << endl
-          << tab << "address = " << hex << this->address << endl
-          << tab << "channel = " << this->channel << dec << endl;
-#endif
+    DEBUGFN("Match: " << endl
+          << '\t' << "address = " << hex << this->address << endl
+          << '\t' << "channel = " << this->channel << dec);
     moveDown(); // Most frequently updated inputs sink to the bottom for performance improvements
     return true;
 }

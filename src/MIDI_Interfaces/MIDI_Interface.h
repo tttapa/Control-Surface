@@ -9,14 +9,11 @@ class MIDI_Interface
 {
 public:
   MIDI_Interface(MIDI_Parser &parser); // Constructor (make this the default MIDI interface)
+  virtual ~MIDI_Interface() {}
 
   virtual void begin() {}
   void send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2); // Send a 3-byte MIDI packet
   void send(uint8_t m, uint8_t c, uint8_t d1);             // Send a 2-byte MIDI packet
-
-  /* virtual bool ignoreInput() = 0; // Virtual function that is implemented by child classes,
-  // if MIDI input is disabled, it should just ignore all incoming data, but clear the USB buffer, otherwise the
-  // software on the computer will wait for the messages to arrive, causing it to hang */
 
   virtual MIDI_read_t read() = 0; // try to read a MIDI message and return what type of message is ready to read
 

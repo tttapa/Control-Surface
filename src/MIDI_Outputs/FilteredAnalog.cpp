@@ -7,7 +7,7 @@ FilteredAnalog::FilteredAnalog(pin_t analogPin) : analogPin(analogPin) {} // Con
 
 bool FilteredAnalog::update()
 {
-  unsigned int input = analogRead(analogPin);          // read the raw analog input value
+  unsigned int input = ExtIO::analogRead(analogPin);   // read the raw analog input value
   if (mapFn != nullptr)                                // if a map function is specified
     input = mapFn(input);                              // apply the map function to the value
   input = filter.filter(input);                        // apply a low-pass EMA filter

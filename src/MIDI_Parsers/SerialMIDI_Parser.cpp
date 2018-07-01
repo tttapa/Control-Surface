@@ -1,5 +1,4 @@
 #include "SerialMIDI_Parser.h"
-#include "../Helpers/StreamOut.h"
 
 MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
 {
@@ -7,26 +6,17 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
   {
     if ((midiByte & 0xF8) == 0xF8) // If it's a Real-Time message (not implemented)
     {
-      ; // Handle Real-Time stuff
-#ifdef DEBUG
-      DEBUG_OUT << "Real-Time" << endl;
-#endif
+      ; // Handle Real-Time stuff (not implemented)
     }
     else // Normal header
     {
 #ifndef IGNORE_SYSEX
       if (midimsg.header == SysExStart) // if we're currently receiving a SysEx message
       {
-#ifdef DEBUG
-        DEBUG_OUT << "SysExEnd" << endl;
-#endif
         midimsg.header = SysExEnd;
         if (addSysExByte(SysExEnd)) // add SysExEnd byte to buffer
           return SYSEX_MESSAGE;
       }
-#endif
-#ifdef DEBUG
-      DEBUG_OUT << "Header" << endl;
 #endif
       midimsg.header = midiByte;
       thirdByte = false;
@@ -34,9 +24,6 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
 #ifndef IGNORE_SYSEX
       if (midimsg.header == SysExStart) // if the first byte of a SysEx message
       {
-#ifdef DEBUG
-        DEBUG_OUT << "SysExStart" << endl;
-#endif
         startSysEx();
         addSysExByte(SysExStart);
       }
@@ -47,20 +34,12 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
   {
     if (midimsg.header == 0)
     {
-#ifdef DEBUG
-      DEBUG_OUT << "Error: No header" << endl;
-#endif
+      DEBUGFN("Error: No header");
       ; // Ignore
     }
     else if (thirdByte) // third byte of three
     {
-#ifdef DEBUG
-      DEBUG_OUT << "Second data byte" << endl;
-#endif
       midimsg.data2 = midiByte;
-#ifdef DEBUG
-      DEBUG_OUT << "Message finished" << endl;
-#endif
       thirdByte = false;
       return CHANNEL_MESSAGE;
     }
@@ -68,35 +47,24 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte)
     {
       if (midimsg.header < 0xC0 || midimsg.header == 0xE0) // Note, Aftertouch, CC or Pitch Bend
       {
-#ifdef DEBUG
-        DEBUG_OUT << "First data byte (of two)" << endl;
-#endif
         midimsg.data1 = midiByte;
         thirdByte = true;
       }
       else if (midimsg.header < 0xE0) // Program Change or Channel Pressure
       {
-#ifdef DEBUG
-        DEBUG_OUT << "First data byte" << endl;
-#endif
         midimsg.data1 = midiByte;
         return CHANNEL_MESSAGE;
       }
 #ifndef IGNORE_SYSEX
       else if (midimsg.header == SysExStart) // SysEx data byte
       {
-#ifdef DEBUG
-        DEBUG_OUT << "SysEx data byte" << endl;
-#endif
         addSysExByte(midiByte);
       }
 #endif // IGNORE_SYSEX
-#ifdef DEBUG
       else
       {
-        DEBUG_OUT << "Data byte ignored" << endl;
+        DEBUGFN("Data byte ignored");
       }
-#endif
     }
   }
   return NO_MESSAGE;

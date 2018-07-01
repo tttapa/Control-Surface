@@ -1,8 +1,8 @@
 #ifndef MIDI_INPUT_ELEMENT_H_
 #define MIDI_INPUT_ELEMENT_H_
 
+#include "../Helpers/LinkedList.h"
 #include "../MIDI_Element.h"
-#include "../Helpers/Linked_List.h"
 #include "./MIDI_message_matcher.h"
 
 //----------------------------------------------------------------------------------------------------------------------------------------//

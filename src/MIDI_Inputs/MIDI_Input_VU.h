@@ -3,7 +3,6 @@
 
 #include "MIDI_Input_Element.h"
 #include "../ExtendedInputOutput/ExtendedInputOutput.h"
-#include "../Helpers/StreamOut.h"
 #include "../Helpers/Copy.hpp"
 #include <string.h>
 
@@ -51,16 +50,7 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
             ;
         else // new peak value
             setValue(index, data);
-
-#ifdef DEBUG
-        DEBUG_OUT << "address = " << this->address << endl;
-        DEBUG_OUT << "index = " << index << endl;
-        DEBUG_OUT << "targetID = " << targetID << endl;
-        DEBUG_OUT << "VU value: " << getValue(index) << endl;
-        DEBUG_OUT << "addressOffset = " << addressOffset << endl;
-#endif
-        // DEBUG_OUT << "<< " << hex << (midimsg.channel | midimsg.type) << ' ' << midimsg.data1 << dec << tab << millis() << endl;
-
+        
         display();
         return true;
     }
@@ -125,10 +115,6 @@ class MCU_VU : public MIDI_Input_Element_ChannelPressure
     bool matchID(uint8_t targetID)
     {
         int8_t addressDiff = targetID - this->address;
-#ifdef DEBUG
-        DEBUG_OUT << "VU meter target ID: " << targetID << endl
-              << (((addressDiff >= 0) && (addressDiff < nb_addresses * tracksPerBank) && (addressDiff % tracksPerBank == 0)) ? "match" : "no match") << endl;
-#endif
         return (addressDiff >= 0) && (addressDiff < nb_addresses * tracksPerBank) && (addressDiff % tracksPerBank == 0);
     }
 };

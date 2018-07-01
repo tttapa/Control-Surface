@@ -17,6 +17,7 @@ public:
   ~Control_Surface_();
 
   void begin();
+  void update();
   MIDI_Interface *MIDI();
 
 private:
@@ -27,30 +28,11 @@ private:
   void updateSelectors();
   void updateMidiInput();
   void updateInputs();
-#ifdef DISPLAY_GFX
-  // void updateDisplays(); // (see below)
-#endif
-
-public:
-  void update()
-  {
-    if (midi == nullptr)
-      begin(); // make sure that midi != nullptr
-
-    updateControls();  // update all control elements
-    updateSelectors(); // update all bank selectors
-
-    updateMidiInput();
-    updateInputs();
-#ifdef DISPLAY_GFX
-    updateDisplays();
-#endif
-  }
 
 private:
-#ifdef DISPLAY_GFX
   void updateDisplays()
   {
+#ifdef DISPLAY_GFX
     static unsigned long previousRefresh = millis();
 
     if (millis() - previousRefresh < 1000 / MAX_FPS)
@@ -64,10 +46,9 @@ private:
       de->draw();
     
     for (DisplayInterface *display = DisplayInterface::getFirst(); display != nullptr; display = display->getNext())
-      display->display();
-      
-  }
+      display->display(); 
 #endif
+  }
 };
 
 extern Control_Surface_ &Control_Surface;

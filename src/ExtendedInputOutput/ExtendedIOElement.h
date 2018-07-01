@@ -2,7 +2,7 @@
 #define EXTENDEDIOELEMENT_H_
 
 #include <stdint.h> // uint8_t 
-#include "../Helpers/Linked_List.h"
+#include "../Helpers/LinkedList.h"
 
 typedef unsigned int pin_t;
 typedef int analog_t;
