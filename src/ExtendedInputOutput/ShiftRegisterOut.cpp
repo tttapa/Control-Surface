@@ -4,7 +4,7 @@
 using namespace ExtIO;
 
 ShiftRegisterOut::ShiftRegisterOut(pin_t dataPin, pin_t clockPin, pin_t latchPin, uint8_t bitOrder, pin_t length)
-    : dataPin(dataPin), clockPin(clockPin), latchPin(latchPin), bitOrder(bitOrder), ExtendedIOElement(length)
+    : ExtendedIOElement(length), dataPin(dataPin), clockPin(clockPin), latchPin(latchPin), bitOrder(bitOrder)
 {
     this->length = length;
     bufferLength = (length + 7) / 8;
