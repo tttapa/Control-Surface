@@ -1,20 +1,18 @@
 #ifndef SERIALMIDI_INTERFACE_H_
 #define SERIALMIDI_INTERFACE_H_
 
-#include "MIDI_Interface.h"
 #include "../MIDI_Parsers/SerialMIDI_Parser.h"
 #include "../Settings/SettingsWrapper.h"
+#include "MIDI_Interface.h"
 #include <Arduino.h> // Stream
 
-class StreamMIDI_Interface : public MIDI_Interface
-{
+class StreamMIDI_Interface : public MIDI_Interface {
 public:
-  StreamMIDI_Interface(Stream &stream) : MIDI_Interface(parser), stream(stream) {}
+  StreamMIDI_Interface(Stream &stream)
+      : MIDI_Interface(parser), stream(stream) {}
 
-  virtual MIDI_read_t read()
-  {
-    while (stream.available() > 0)
-    {
+  virtual MIDI_read_t read() {
+    while (stream.available() > 0) {
       uint8_t midiByte = stream.read();
 #ifdef DEBUG
       Serial.print("New byte:\t");
@@ -30,88 +28,89 @@ public:
 protected:
   SerialMIDI_Parser parser;
 
-  virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2)
-  {
+  virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) {
     stream.write(m | c); // Send the MIDI message over the stream
     stream.write(d1);
     stream.write(d2);
-    stream.flush();
+    stream.flush(); // TODO
   }
-  virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1)
-  {
+  virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1) {
     stream.write(m | c); // Send the MIDI message over the stream
     stream.write(d1);
-    stream.flush();
+    stream.flush(); // TODO
   }
 
 protected:
   Stream &stream;
-
 };
 
-template <typename T>
-class SerialMIDI_Interface : public StreamMIDI_Interface
-{
+template <typename T> class SerialMIDI_Interface : public StreamMIDI_Interface {
 public:
-  SerialMIDI_Interface(T &serial, unsigned long baud) : StreamMIDI_Interface(serial), serial(serial), baud(baud) {}
-  virtual void begin()
-  {
-    serial.begin(baud);
-  }
+  SerialMIDI_Interface(T &serial, unsigned long baud)
+      : StreamMIDI_Interface(serial), serial(serial), baud(baud) {}
+  virtual void begin() { serial.begin(baud); }
 
 private:
   T &serial;
   const unsigned long baud;
 };
 
-class HardwareSerialMIDI_Interface : public SerialMIDI_Interface<HardwareSerial>
-{
+class HardwareSerialMIDI_Interface
+    : public SerialMIDI_Interface<HardwareSerial> {
 public:
-  HardwareSerialMIDI_Interface(HardwareSerial &serial, unsigned long baud) : SerialMIDI_Interface(serial, baud) {}
+  HardwareSerialMIDI_Interface(HardwareSerial &serial, unsigned long baud)
+      : SerialMIDI_Interface(serial, baud) {}
 };
 
 // The Serial USB connection
 // (Why do I have to do this, why don't they all inherit from one single class?)
 
-#if !(defined(USBCON) || defined(CORE_TEENSY)) // Boards without a USB connection (UNO, MEGA, Nano ...)
-class USBSerialMIDI_Interface : public HardwareSerialMIDI_Interface
-{
+// Boards without a USB connection (UNO, MEGA, Nano ...)
+#if !(defined(USBCON) || defined(CORE_TEENSY))
+class USBSerialMIDI_Interface : public HardwareSerialMIDI_Interface {
 public:
-  USBSerialMIDI_Interface(unsigned long baud) : HardwareSerialMIDI_Interface(Serial, baud) {}
+  USBSerialMIDI_Interface(unsigned long baud)
+      : HardwareSerialMIDI_Interface(Serial, baud) {}
 };
-#elif defined(CORE_TEENSY)      // Teensies
-class USBSerialMIDI_Interface : public SerialMIDI_Interface<usb_serial_class>
-{
+
+// Teensies
+#elif defined(CORE_TEENSY)
+class USBSerialMIDI_Interface : public SerialMIDI_Interface<usb_serial_class> {
 public:
-  USBSerialMIDI_Interface(unsigned long baud) : SerialMIDI_Interface(Serial, baud) {}
+  USBSerialMIDI_Interface(unsigned long baud)
+      : SerialMIDI_Interface(Serial, baud) {}
 };
-#elif defined(ARDUINO_ARCH_SAM) // Arduino DUE
-class USBSerialMIDI_Interface : public SerialMIDI_Interface<UARTClass>
-{
+
+// Arduino DUE
+#elif defined(ARDUINO_ARCH_SAM)
+class USBSerialMIDI_Interface : public SerialMIDI_Interface<UARTClass> {
 public:
-  USBSerialMIDI_Interface(unsigned long baud) : SerialMIDI_Interface(Serial, baud) {}
+  USBSerialMIDI_Interface(unsigned long baud)
+      : SerialMIDI_Interface(Serial, baud) {}
 };
-#else                           // Others (Leonardo, Micro ... )
-class USBSerialMIDI_Interface : public SerialMIDI_Interface<Serial_>
-{
+
+// Others (Leonardo, Micro ... )
+#else
+class USBSerialMIDI_Interface : public SerialMIDI_Interface<Serial_> {
 public:
-  USBSerialMIDI_Interface(unsigned long baud) : SerialMIDI_Interface(Serial, baud) {}
+  USBSerialMIDI_Interface(unsigned long baud)
+      : SerialMIDI_Interface(Serial, baud) {}
 };
 #endif
 
 // Class for Hairless MIDI
-class HairlessMIDI_Interface : public USBSerialMIDI_Interface
-{
+class HairlessMIDI_Interface : public USBSerialMIDI_Interface {
 public:
-  HairlessMIDI_Interface() : USBSerialMIDI_Interface(HAIRLESS_BAUD){};
+  HairlessMIDI_Interface() : USBSerialMIDI_Interface(HAIRLESS_BAUD) {};
 };
 
 #if defined(__AVR__) || defined(CORE_TEENSY)
 #include <SoftwareSerial.h>
-class SoftwarSerialMIDI_Interface : public SerialMIDI_Interface<SoftwareSerial>
-{
+class SoftwareSerialMIDI_Interface
+    : public SerialMIDI_Interface<SoftwareSerial> {
 public:
-  SoftwarSerialMIDI_Interface(SoftwareSerial &serial, unsigned long baud) : SerialMIDI_Interface(serial, baud) {}
+  SoftwareSerialMIDI_Interface(SoftwareSerial &serial, unsigned long baud)
+      : SerialMIDI_Interface(serial, baud) {}
 };
 #endif
 

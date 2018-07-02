@@ -1,36 +1,23 @@
 #ifndef DISPLAYELEMENTS_HPP
 #define DISPLAYELEMENTS_HPP
 
-#include "./DisplayHelpers.hpp"
 #include "../Helpers/LinkedList.h"
+#include "./DisplayHelpers.hpp"
 
-struct Location 
-{
+struct Location {
   int16_t x;
   int16_t y;
 };
 
-class DisplayElement
-{
+class DisplayElement {
 public:
-  DisplayElement(Adafruit_GFX &display)
-      : display(display)
-  {
+  DisplayElement(Adafruit_GFX &display) : display(display) {
     LinkedList::append(this, first, last);
   }
-  ~DisplayElement()
-  {
-    LinkedList::remove(this, first, last);
-  }
+  ~DisplayElement() { LinkedList::remove(this, first, last); }
 
-  static DisplayElement *getFirst()
-  {
-    return first;
-  }
-  DisplayElement *getNext()
-  {
-    return next;
-  }
+  static DisplayElement *getFirst() { return first; }
+  DisplayElement *getNext() { return next; }
   virtual void draw() = 0;
 
 protected:

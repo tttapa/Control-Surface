@@ -4,17 +4,13 @@
 #include "../MIDI_Inputs/MIDI_Input_7SegmentDisplay.h"
 #include "./DisplayElement.hpp"
 
-class TimeDisplay : public DisplayElement
-{
+class TimeDisplay : public DisplayElement {
 public:
-  TimeDisplay(Adafruit_GFX &display, MCU_TimeDisplay &tdisp,
-              Location loc,
+  TimeDisplay(Adafruit_GFX &display, MCU_TimeDisplay &tdisp, Location loc,
               uint8_t size, uint16_t color)
-      : DisplayElement(display), tdisp(tdisp),
-        x(loc.x), y(loc.y),
-        size(size), color(color) {}
-  void draw()
-  {
+      : DisplayElement(display), tdisp(tdisp), x(loc.x), y(loc.y), size(size),
+        color(color) {}
+  void draw() {
     display.setTextColor(color);
     display.setTextSize(size);
     display.setCursor(x, y);

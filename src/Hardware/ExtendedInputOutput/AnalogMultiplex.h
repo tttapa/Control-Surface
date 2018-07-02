@@ -1,25 +1,21 @@
 #ifndef ANALOGMULTIPLEX_H_
 #define ANALOGMULTIPLEX_H_
 
+#include "../../Helpers/Copy.hpp"
 #include "ExtendedIOElement.h"
 #include <stdlib.h>
-#include "../../Helpers/Copy.hpp"
 
-class AnalogMultiplex : public ExtendedIOElement
-{
+class AnalogMultiplex : public ExtendedIOElement {
 public:
   template <class P, size_t N>
   AnalogMultiplex(pin_t analogPin, const P (&addressPins)[N])
-      : ExtendedIOElement(1 << N), analogPin(analogPin), nb_addressPins(N), nb_addresses(1 << nb_addressPins)
-  {
+      : ExtendedIOElement(1 << N), analogPin(analogPin), nb_addressPins(N),
+        nb_addresses(1 << nb_addressPins) {
     this->addressPins = new pin_t[N];
     copy(this->addressPins, addressPins);
     begin();
   }
-  ~AnalogMultiplex()
-  {
-    free(addressPins);
-  }
+  ~AnalogMultiplex() { delete[] addressPins; }
 
   int digitalRead(pin_t pin);
   analog_t analogRead(pin_t pin);

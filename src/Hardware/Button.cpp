@@ -2,21 +2,16 @@
 
 using namespace ExtIO;
 
-Button::Button(pin_t pin) // Constructor
-    : pin(pin) {
+Button::Button(pin_t pin) : pin(pin) {
   ExtIO::pinMode(pin, INPUT_PULLUP); // Enable the internal pull-up resistor on
                                      // the pin with the button/switch
 }
 
-void Button::invert() { // Invert the button state (send Note On event when
-                        // released, Note Off when pressed)
-  invertState = true;
-}
+void Button::invert() { invertState = true; }
 
 bool Button::invertState = false;
 
-Button::State Button::getState() // Check if the button state changed
-{
+Button::State Button::getState() {
   State rstate;
   bool state =
       ExtIO::digitalRead(pin) ^ invertState; // read the button state and invert

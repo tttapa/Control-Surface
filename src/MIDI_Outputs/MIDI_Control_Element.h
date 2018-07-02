@@ -1,11 +1,10 @@
 #ifndef MIDI_CONTROL_ELEMENT_h
 #define MIDI_CONTROL_ELEMENT_h
 
-#include "../MIDI_Element.h"
 #include "../Helpers/LinkedList.h"
+#include "../MIDI_Element.h"
 
-class MIDI_Control_Element : public MIDI_Element
-{
+class MIDI_Control_Element : public MIDI_Element {
   friend class Control_Surface_;
 
 public:
@@ -13,19 +12,10 @@ public:
   {
     LinkedList::append(this, first, last);
   }
-  ~MIDI_Control_Element()
-  {
-    LinkedList::remove(this, first, last);
-  }
+  ~MIDI_Control_Element() { LinkedList::remove(this, first, last); }
 
-  MIDI_Control_Element *getNext()
-  {
-    return next;
-  }
-  static MIDI_Control_Element *getFirst()
-  {
-    return first;
-  }
+  MIDI_Control_Element *getNext() { return next; }
+  static MIDI_Control_Element *getFirst() { return first; }
 
 private:
   MIDI_Control_Element *next = nullptr, *previous = nullptr;

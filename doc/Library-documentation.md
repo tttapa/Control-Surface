@@ -21,14 +21,14 @@ There are many MIDI interfaces to choose from:
 `HardwareSerialMIDI_Interface(HardwareSerial &serial, unsigned long baud)`  
 `USBSerialMIDI_Interface(unsigned long baud)`  
 `HairlessMIDI_Interface`  
-`SoftwarSerialMIDI_Interface(SoftwareSerial &serial, unsigned long baud)`  
+`SoftwareSerialMIDI_Interface(SoftwareSerial &serial, unsigned long baud)`  
 
 There's also a MIDI debug mode, that can be used on these same Stream or Serial interfaces:  
 `StreamDebugMIDI_Interface(Stream &stream)`  
 `SerialDebugMIDI_Interface(Serial_t &serial, unsigned long baud)`  
 `HardwareSerialDebugMIDI_Interface(HardwareSerial &serial, unsigned long baud)`  
 `USBDebugMIDI_Interface(unsigned long baud)`  
-`SoftwarSerialDebugMIDI_Interface(SoftwareSerial &serial, unsigned long baud)`  
+`SoftwareSerialDebugMIDI_Interface(SoftwareSerial &serial, unsigned long baud)`  
 
 ## 3. Add Extended IO elements (optional)
 If you need many potentiometers, buttons or LEDs, you'll run out of IO pins rather quickly. To get around this, you can use Extended IO elements to use multiplexers or shift registers as normal inputs or outputs.  

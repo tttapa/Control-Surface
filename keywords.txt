@@ -13,7 +13,7 @@ StreamDebugMIDI_Interface	KEYWORD1
 SerialDebugMIDI_Interface	KEYWORD1
 HardwareSerialDebugMIDI_Interface	KEYWORD1
 USBDebugMIDI_Interface	KEYWORD1
-SoftwarSerialDebugMIDI_Interface	KEYWORD1
+SoftwareSerialDebugMIDI_Interface	KEYWORD1
 HairlessMIDI_Interface	KEYWORD1
 
 Analog	KEYWORD1

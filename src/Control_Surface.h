@@ -1,13 +1,11 @@
 #ifndef Control_Surface_H
 #define Control_Surface_H
 
-#include <Arduino.h>
+#include <Arduino.h> // For VSCode errors in examples
 
 #if defined(CORE_TEENSY) && !(defined(USB_MIDI_AUDIO_SERIAL) || defined(USB_MIDI_SERIAL))
 #error Please select a 'Serial + MIDI' option in the 'Tools > USB Type' menu.
 #endif
-
-#include <Arduino.h> // For VSCode errors in examples
 
 #include "./Control_Surface/Control_Surface_Class.h"
 

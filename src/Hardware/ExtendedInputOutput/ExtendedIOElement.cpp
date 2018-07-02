@@ -1,29 +1,14 @@
 #include "ExtendedIOElement.h"
 #include <Arduino.h>
 
-pin_t ExtendedIOElement::pin(pin_t p)
-{
-    return p + start;
-}
+pin_t ExtendedIOElement::pin(pin_t p) { return p + start; }
 
-pin_t ExtendedIOElement::getEnd()
-{
-    return end;
-}
+pin_t ExtendedIOElement::getEnd() { return end; }
 
-pin_t ExtendedIOElement::getStart()
-{
-    return start;
-}
+pin_t ExtendedIOElement::getStart() { return start; }
 
-ExtendedIOElement *ExtendedIOElement::getNext()
-{
-    return next;
-}
-ExtendedIOElement *ExtendedIOElement::getFirst()
-{
-    return first;
-}
+ExtendedIOElement *ExtendedIOElement::getNext() { return next; }
+ExtendedIOElement *ExtendedIOElement::getFirst() { return first; }
 
 ExtendedIOElement *ExtendedIOElement::first = nullptr;
 ExtendedIOElement *ExtendedIOElement::last = nullptr;

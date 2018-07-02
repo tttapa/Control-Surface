@@ -3,25 +3,13 @@
 
 #include "../Helpers/LinkedList.h"
 
-class DisplayInterface
-{
+class DisplayInterface {
 public:
-  DisplayInterface()
-  {
-    LinkedList::append(this, first, last);
-  }
-  ~DisplayInterface() 
-  {
-    LinkedList::remove(this, first, last);
-  }
-  static DisplayInterface *getFirst()
-  {
-    return first;
-  }
-  DisplayInterface *getNext()
-  {
-    return next;
-  }
+  DisplayInterface() { LinkedList::append(this, first, last); }
+  ~DisplayInterface() { LinkedList::remove(this, first, last); }
+  
+  static DisplayInterface *getFirst() { return first; }
+  DisplayInterface *getNext() { return next; }
 
   virtual void display() = 0;
   virtual void clearDisplay() = 0;

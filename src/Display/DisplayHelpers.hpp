@@ -3,8 +3,12 @@
 
 #include <Adafruit_GFX.h>
 
-void drawCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, int radius, uint8_t color) { // draws the outline of a circle
-  // https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
+/**
+ * @brief Draws the outline of a circle
+ * https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
+ */
+void drawCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, uint16_t radius,
+                uint16_t color) {
   int x = radius;
   int y = 0;
   int err = 0;
@@ -30,21 +34,20 @@ void drawCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, int radius, uint8
   }
 }
 
-void fillCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, uint16_t radius, uint16_t color) { // draws a solid, filled circle
-  // https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
+/**
+ * @brief Fills a circle
+ */
+void fillCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, uint16_t radius,
+                uint16_t color) {
   int x = radius;
   int y = 0;
   int err = 0;
 
   while (x >= y) {
-    display.drawFastHLine(x0 - x, y0 + y, 2*x, color);
-    // display.drawLine(x0 + x, y0 + y, x0 - x, y0 + y, color);
-    display.drawFastHLine(x0 - y, y0 + x, 2*y, color);
-    // display.drawLine(x0 + y, y0 + x, x0 - y, y0 + x, color);
-    display.drawFastHLine(x0 - y, y0 - x, 2*y, color);
-    // display.drawLine(x0 + y, y0 - x, x0 - y, y0 - x, color);
-    display.drawFastHLine(x0 - x, y0 - y, 2*x, color);
-    // display.drawLine(x0 + x, y0 - y, x0 - x, y0 - y, color);
+    display.drawFastHLine(x0 - x, y0 + y, 2 * x, color);
+    display.drawFastHLine(x0 - y, y0 + x, 2 * y, color);
+    display.drawFastHLine(x0 - y, y0 - x, 2 * y, color);
+    display.drawFastHLine(x0 - x, y0 - y, 2 * x, color);
 
     if (err <= 0) {
       y++;

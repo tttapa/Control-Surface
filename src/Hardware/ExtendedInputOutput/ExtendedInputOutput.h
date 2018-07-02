@@ -30,20 +30,19 @@ const uint8_t INPUT = 0x0;
 const uint8_t OUTPUT = 0x1;
 const uint8_t INPUT_PULLUP = 0x2;
 
-namespace ExtIO
-{
+namespace ExtIO {
 extern ExtendedIOElement *getIOElementOfPin(pin_t pin);
 extern void pinMode(pin_t pin, uint8_t mode);
 extern void pinMode(int pin, uint8_t mode);
 extern void digitalWrite(pin_t pin, uint8_t val);
-// extern void digitalWrite(pin_t pin, bool val);
 extern void digitalWrite(int pin, uint8_t val);
 extern int digitalRead(pin_t pin);
 extern int digitalRead(int pin);
-extern void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val);
+extern void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder,
+                     uint8_t val);
 extern void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val);
 extern analog_t analogRead(pin_t pin);
 extern analog_t analogRead(int pin);
-}
+} // namespace ExtIO
 
 #endif // EXTENDEDINPUTOUTPUT_H_

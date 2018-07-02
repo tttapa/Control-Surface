@@ -29,7 +29,7 @@ You can enable the debug mode by instantiating a DebugMIDI_Interface:
 `SerialDebugMIDI_Interface(Serial_t &serial, unsigned long baud)`  
 `HardwareSerialDebugMIDI_Interface(HardwareSerial &serial, unsigned long baud)`  
 `USBDebugMIDI_Interface(unsigned long baud)`  
-`SoftwarSerialDebugMIDI_Interface(SoftwareSerial &serial, unsigned long baud)` 
+`SoftwareSerialDebugMIDI_Interface(SoftwareSerial &serial, unsigned long baud)` 
 #### Hairless MIDI
 Once that's working, you can try it out with real MIDI messages, by using a software tool called [Hairless MIDI<->Serial bridge](http://projectgus.github.io/hairless-midiserial/). This application takes MIDI messages from the serial port, and sends them to a virtual MIDI port on your computer, so you can access it in your DAW or DJ program.  
 To use the MIDI Controller library, instantiate a `HairlessMIDI_Interface` at the top of your sketch.    

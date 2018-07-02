@@ -43,12 +43,12 @@
              - SerialDebugMIDI_Interface
                  - HardwareSerialDebugMIDI_Interface
                  - USBDebugMIDI_Interface
-                 - SoftwarSerialDebugMIDI_Interface
+                 - SoftwareSerialDebugMIDI_Interface
         - SerialMIDI_Interface
              - HardwareSerialMIDI_Interface
              - USBSerialMIDI_Interface
                  - HairlessMIDI_Interface
-             - SoftwarSerialMIDI_Interface
+             - SoftwareSerialMIDI_Interface
 
 ### UNO & MEGA:
 - MIDI_Interface
@@ -57,13 +57,13 @@
             - SerialDebugMIDI_Interface
                 - HardwareSerialDebugMIDI_Interface
                     - USBDebugMIDI_Interface
-            - SoftwarSerialDebugMIDI_Interface
+            - SoftwareSerialDebugMIDI_Interface
         - SerialMIDI_Interface
             - HardwareSerialMIDI_Interface
                 - USBSerialMIDI_Interface
                     - USBMIDI_Interface
                     - HairlessMIDI_Interface
-            - SoftwarSerialMIDI_Interface
+            - SoftwareSerialMIDI_Interface
 
 
 ***

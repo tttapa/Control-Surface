@@ -3,10 +3,10 @@
 
 #include "ExtendedIOElement.h"
 
-class ShiftRegisterOut : public ExtendedIOElement
-{
+class ShiftRegisterOut : public ExtendedIOElement {
 public:
-  ShiftRegisterOut(pin_t dataPin, pin_t clockPin, pin_t latchPin, uint8_t bitOrder, pin_t length = 8);
+  ShiftRegisterOut(pin_t dataPin, pin_t clockPin, pin_t latchPin,
+                   uint8_t bitOrder, pin_t length = 8);
   ~ShiftRegisterOut();
 
   void digitalWrite(pin_t pin, uint8_t val);
