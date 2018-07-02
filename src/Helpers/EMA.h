@@ -13,6 +13,7 @@ private:
 };
 
 // ------------ Implementation ------------ //
+
 template <uint8_t shiftFac, class int_t>
 int_t EMA<shiftFac, int_t>::filter(int_t value) {
   value = value << (shiftFac * 2);

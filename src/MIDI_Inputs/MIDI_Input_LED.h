@@ -2,7 +2,7 @@
 #define MIDI_INPUT_LED_H_
 
 #include "../MIDI_Interfaces/MIDI_Interface.h"
-#include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 #include "../MIDI_Inputs/MIDI_Input_Element.h"
 
 using namespace ExtIO;

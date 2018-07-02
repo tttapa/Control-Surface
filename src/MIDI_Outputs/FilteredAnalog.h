@@ -4,7 +4,7 @@
 #include "../Settings/SettingsWrapper.h"
 #include "../Helpers/EMA.h"
 #include "../Helpers/Hysteresis.h"
-#include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 
 /**
  * A class that reads and filters an analog input.

@@ -2,7 +2,7 @@
 #define BUTTONMATRIX_H_
 
 #include "./MIDI_Control_Element.h"
-#include "../ExtendedInputOutput/ExtendedInputOutput.h" // for pin_t
+#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h" // for pin_t
 
 /**
  * @brief A MIDI_Control_Element that reads the states of a button matrix and sends it over MIDI as a series of Note events.

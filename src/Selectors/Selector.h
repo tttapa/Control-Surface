@@ -5,7 +5,7 @@
 
 #include "../Helpers/LinkedList.h"
 #include "../Helpers/Copy.hpp"
-#include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 #include "../Settings/SettingsWrapper.h"
 
 using namespace ExtIO;

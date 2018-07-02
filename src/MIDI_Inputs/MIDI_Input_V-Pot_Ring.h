@@ -2,7 +2,7 @@
 #define MCU_VPOT_RING_H_
 
 #include "MIDI_Input_Element.h"
-#include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 
 class MCU_VPot_Ring : public MIDI_Input_Element_CC
 {

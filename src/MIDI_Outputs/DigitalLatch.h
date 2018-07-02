@@ -2,7 +2,7 @@
 #define DIGLAT_h_
 
 #include "./MIDI_Control_Element.h"
-#include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 
 /**
  * @brief A class for MIDI_Control_Element%s that read from a digital input

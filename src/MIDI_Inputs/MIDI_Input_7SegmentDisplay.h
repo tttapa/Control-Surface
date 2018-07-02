@@ -2,7 +2,7 @@
 #define MIDI_Input_7SegmentDisplay_H_
 
 #include "MIDI_Input_Element.h"
-#include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 
 class MCU_7SegmentDisplay : public MIDI_Input_Element_CC
 {

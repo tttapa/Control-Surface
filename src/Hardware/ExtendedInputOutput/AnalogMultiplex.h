@@ -3,7 +3,7 @@
 
 #include "ExtendedIOElement.h"
 #include <stdlib.h>
-#include "../Helpers/Copy.hpp"
+#include "../../Helpers/Copy.hpp"
 
 class AnalogMultiplex : public ExtendedIOElement
 {

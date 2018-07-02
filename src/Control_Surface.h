@@ -38,9 +38,9 @@
 #include "./MIDI_Interfaces/SerialMIDI_Interface.h"
 #include "./MIDI_Interfaces/DebugMIDI_Interface.h"
 
-#include "./ExtendedInputOutput/ExtendedInputOutput.h"
-#include "./ExtendedInputOutput/ShiftRegisterOut.h"
-#include "./ExtendedInputOutput/AnalogMultiplex.h"
+#include "./Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
+#include "./Hardware/ExtendedInputOutput/ShiftRegisterOut.h"
+#include "./Hardware/ExtendedInputOutput/AnalogMultiplex.h"
 
 #include "./MIDI_Constants/MCU.h"
 #include "./MIDI_Constants/Control_Change.h"

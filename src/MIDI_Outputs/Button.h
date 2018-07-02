@@ -2,7 +2,7 @@
 #define CONTROL_SURFACE_MIDI_OUTPUTS_BUTTON_H_
 
 #include "../Settings/SettingsWrapper.h"
-#include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 
 class Button
 {
@@ -22,10 +22,10 @@ public:
   static void invert();
 
   enum State {
-    Pressed = 0b00,
+    Pressed  = 0b00,
     Released = 0b11,
-    Falling = 0b10,
-    Rising = 0b01
+    Falling  = 0b10,
+    Rising  = 0b01
   };
   /**
    * @brief Get the state of the button

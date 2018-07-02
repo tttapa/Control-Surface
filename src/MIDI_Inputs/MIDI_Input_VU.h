@@ -2,7 +2,7 @@
 #define MIDI_Input_VU_H_
 
 #include "MIDI_Input_Element.h"
-#include "../ExtendedInputOutput/ExtendedInputOutput.h"
+#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 #include "../Helpers/Copy.hpp"
 #include <string.h>
 
