@@ -1,7 +1,7 @@
 #ifndef CONTROL_SURFACE_MIDI_OUTPUTS_PBPOTENTIOMETER_HPP_
 #define CONTROL_SURFACE_MIDI_OUTPUTS_PBPOTENTIOMETER_HPP_
 
-#include "FilteredAnalog.h"
+#include "../Hardware/FilteredAnalog.h"
 #include "PBOut.h"
 
 class PBPotentiometer : public PBOut {

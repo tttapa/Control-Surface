@@ -2,7 +2,7 @@
 #define CONTROL_SURFACE_MIDI_OUTPUTS_NOTEBUTTONLATCHING_HPP_
 
 #include "NoteOut.h"
-#include "Button.h"
+#include "../Hardware/Button.h"
 
 class NoteButtonLatching : public NoteOut
 {
