@@ -2,7 +2,7 @@
 #define CONTROL_SURFACE_MIDI_OUTPUTS_CCBUTTONLATCHING_HPP_
 
 #include "../Hardware/Button.h"
-#include "CCOut.h"
+#include "Abstract/CCOut.h"
 
 class CCButtonLatch : public DigitalCCOut {
     CCButtonLatch(pin_t pin, uint8_t address, uint8_t channel,

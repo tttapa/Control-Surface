@@ -2,7 +2,7 @@
 #define CONTROL_SURFACE_MIDI_OUTPUTS_NOTEBUTTON_HPP_
 
 #include "../Hardware/Button.h"
-#include "NoteOut.h"
+#include "Abstract/NoteOut.h"
 
 class NoteButton : public NoteOut {
   public:

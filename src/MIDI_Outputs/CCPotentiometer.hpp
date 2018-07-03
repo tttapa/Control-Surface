@@ -2,7 +2,7 @@
 #define CONTROL_SURFACE_MIDI_OUTPUTS_CCPOTENTIOMETER_HPP_
 
 #include "../Hardware/FilteredAnalog.h"
-#include "CCOut.h"
+#include "Abstract/CCOut.h"
 
 class CCPotentiometer : public CCOut {
   public:

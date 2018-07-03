@@ -1,5 +1,5 @@
 #include "RelativeCCOut.h"
-#include "../Control_Surface/Control_Surface_Class.h"
+#include "../../Control_Surface/Control_Surface_Class.h"
 
 RelativeCCOut::RelativeCCOut(uint8_t controllerNumber, uint8_t channel,
                              relativeCCmode mode)

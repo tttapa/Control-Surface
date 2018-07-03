@@ -1,8 +1,8 @@
 #ifndef CONTROL_SURFACE_MIDI_OUTPUTS_NOTEOUT_H_
 #define CONTROL_SURFACE_MIDI_OUTPUTS_NOTEOUT_H_
 
-#include "../Settings/SettingsWrapper.h"
-#include "./MIDI_Control_Element.h"
+#include "../../Settings/SettingsWrapper.h"
+#include "../MIDI_Control_Element.h"
 /**
  * @brief
  * A class for MIDI_Control_Element%s that send MIDI notes.

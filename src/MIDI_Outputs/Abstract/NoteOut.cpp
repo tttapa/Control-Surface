@@ -1,5 +1,5 @@
 #include "NoteOut.h"
-#include "../Control_Surface/Control_Surface_Class.h"
+#include "../../Control_Surface/Control_Surface_Class.h"
 
 NoteOut::NoteOut(uint8_t address, uint8_t channel,
                  uint8_t velocity) // Constructor

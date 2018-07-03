@@ -1,8 +1,8 @@
 #ifndef CONTROL_SURFACE_MIDI_OUTPUTS_PBOUT_H_
 #define CONTROL_SURFACE_MIDI_OUTPUTS_PBOUT_H_
 
-#include "../Settings/SettingsWrapper.h"
-#include "./MIDI_Control_Element.h"
+#include "../../Settings/SettingsWrapper.h"
+#include "../MIDI_Control_Element.h"
 
 /**
  * @brief

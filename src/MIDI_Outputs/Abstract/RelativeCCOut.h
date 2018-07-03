@@ -1,7 +1,7 @@
 #ifndef CONTROL_SURFACE_MIDI_OUTPUTS_RELATIVECCOUT_H_
 #define CONTROL_SURFACE_MIDI_OUTPUTS_RELATIVECCOUT_H_
 
-#include "MIDI_Control_Element.h"
+#include "../MIDI_Control_Element.h"
 
 enum relativeCCmode { TWOS_COMPLEMENT, BINARY_OFFSET, SIGN_MAGNITUDE };
 

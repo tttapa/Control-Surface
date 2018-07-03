@@ -2,7 +2,7 @@
 #define CONTROL_SURFACE_MIDI_OUTPUTS_PBPOTENTIOMETER_HPP_
 
 #include "../Hardware/FilteredAnalog.h"
-#include "PBOut.h"
+#include "Abstract/PBOut.h"
 
 class PBPotentiometer : public PBOut {
   public:

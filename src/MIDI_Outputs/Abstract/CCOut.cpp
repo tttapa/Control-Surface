@@ -1,5 +1,5 @@
 #include "CCOut.h"
-#include "../Control_Surface/Control_Surface_Class.h"
+#include "../../Control_Surface/Control_Surface_Class.h"
 
 DigitalCCOut::DigitalCCOut(uint8_t address, uint8_t channel, uint8_t offValue,
                            uint8_t onValue)

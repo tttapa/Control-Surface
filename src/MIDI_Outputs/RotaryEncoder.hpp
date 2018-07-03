@@ -6,7 +6,7 @@
     "PJRC Encoder library required (https://github.com/PaulStoffregen/Encoder)"
 #endif
 
-#include "RelativeCCOut.h"
+#include "Abstract/RelativeCCOut.h"
 
 /** A normal rotary encoder sends four pulses per physical 'click'. */
 const uint8_t NORMAL_ENCODER = 4;
