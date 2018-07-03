@@ -1,5 +1,4 @@
-#ifndef SELECTOR_OUT_H
-#define SELECTOR_OUT_H
+#pragma once
 
 // #include <Arduino.h>
 #include "../Control_Surface/Control_Surface_Class.h"
@@ -57,5 +56,3 @@ class SelectorPC : public Selector {
     uint8_t *addresses = nullptr;
     const uint8_t channel;
 };
-
-#endif // SELECTOR_OUT_H

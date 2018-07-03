@@ -1,5 +1,4 @@
-#ifndef MIDI_Input_7SegmentDisplay_H_
-#define MIDI_Input_7SegmentDisplay_H_
+#pragma once
 
 #include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 #include "MIDI_Input_Element.h"
@@ -46,5 +45,3 @@ class MCU_AssignmentDisplay : public MCU_7SegmentDisplay {
   protected:
     void update() override;
 };
-
-#endif // MIDI_Input_7SegmentDisplay_H_

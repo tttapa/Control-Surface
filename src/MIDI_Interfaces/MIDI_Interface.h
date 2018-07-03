@@ -1,5 +1,4 @@
-#ifndef MIDI_INTERFACE_H_
-#define MIDI_INTERFACE_H_
+#pragma once
 
 #include "../MIDI_Parsers/MIDI_Parser.h"
 
@@ -39,5 +38,3 @@ public:
   size_t getSysExLength();
   const uint8_t *getSysExBuffer();
 };
-
-#endif // MIDI_INTERFACE_H_

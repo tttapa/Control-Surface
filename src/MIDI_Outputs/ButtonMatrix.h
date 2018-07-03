@@ -1,5 +1,4 @@
-#ifndef BUTTONMATRIX_H_
-#define BUTTONMATRIX_H_
+#pragma once
 
 #include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h" // for pin_t
 #include "./MIDI_Control_Element.h"
@@ -73,6 +72,4 @@ class ButtonMatrix : public MIDI_Control_Element {
     uint8_t newChannelOffset = channelOffset;
 };
 
-#include "./ButtonMatrix.cpp" // Because it's a template class
-
-#endif // BUTTONMATRIX_H_
+#include "ButtonMatrix.tpp" // Template implementations

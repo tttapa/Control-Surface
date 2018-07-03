@@ -1,5 +1,4 @@
-#ifndef SERIALMIDI_INTERFACE_H_
-#define SERIALMIDI_INTERFACE_H_
+#pragma once
 
 #include "../MIDI_Parsers/SerialMIDI_Parser.h"
 #include "../Settings/SettingsWrapper.h"
@@ -110,5 +109,3 @@ class SoftwareSerialMIDI_Interface
         : SerialMIDI_Interface(serial, baud) {}
 };
 #endif
-
-#endif // SERIALMIDI_INTERFACE_H_

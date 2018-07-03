@@ -1,5 +1,4 @@
-#ifndef Control_Surface_H
-#define Control_Surface_H
+#pragma once
 
 #include <Arduino.h> // For VSCode errors in examples
 
@@ -51,5 +50,3 @@
 #include "./Display/VUDisplay.hpp"
 #include "./Display/Bitmaps/XBitmaps.h"
 #endif
-
-#endif // Control_Surface_H

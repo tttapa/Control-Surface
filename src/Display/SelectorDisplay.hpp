@@ -1,5 +1,4 @@
-#ifndef SELECTORDISPLAY_HPP
-#define SELECTORDISPLAY_HPP
+#pragma once
 
 #include "../Selectors/Selector.h"
 #include "./DisplayElement.hpp"
@@ -24,5 +23,3 @@ private:
   uint8_t size;
   uint16_t color;
 };
-
-#endif // SELECTORDISPLAY_HPP

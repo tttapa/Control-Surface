@@ -1,5 +1,4 @@
-#ifndef BANKSELECTOR_H_
-#define BANKSELECTOR_H_
+#pragma once
 
 #include "../Selectors/Selector.h"
 #include "./Bank.h"
@@ -45,5 +44,3 @@ private:
   Bank &bank;
   void updateImpl(uint8_t newSetting) { bank.setBankSetting(newSetting); }
 };
-
-#endif // BANKSELECTOR_H_

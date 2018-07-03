@@ -1,5 +1,4 @@
-#ifndef DEBUGMIDI_INTERFACE_H_
-#define DEBUGMIDI_INTERFACE_H_
+#pragma once
 
 #include "SerialMIDI_Interface.h"
 
@@ -164,5 +163,3 @@ class SoftwareSerialDebugMIDI_Interface
         : SerialDebugMIDI_Interface(serial, baud) {}
 };
 #endif
-
-#endif // DEBUGMIDI_INTERFACE_H_

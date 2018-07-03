@@ -1,5 +1,4 @@
-#ifndef Control_Surface_CLASS_H
-#define Control_Surface_CLASS_H
+#pragma once
 
 #include "../MIDI_Interfaces/USBMIDI_Interface.h"
 
@@ -59,5 +58,3 @@ class Control_Surface_ {
 };
 
 extern Control_Surface_ &Control_Surface;
-
-#endif // Control_Surface_CLASS_H

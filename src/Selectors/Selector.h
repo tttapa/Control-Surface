@@ -1,5 +1,4 @@
-#ifndef SELECTOR_H_
-#define SELECTOR_H_
+#pragma once
 
 #include <string.h>
 
@@ -425,5 +424,3 @@ class Selector {
      */
     virtual void updateImpl(uint8_t newSetting) {}
 };
-
-#endif // SELECTOR_H_

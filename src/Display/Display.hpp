@@ -1,5 +1,4 @@
-#ifndef DISPLAY_HPP
-#define DISPLAY_HPP
+#pragma once
 
 #include "../Helpers/LinkedList.h"
 
@@ -31,5 +30,3 @@ private:
 
 DisplayInterface *DisplayInterface::first = nullptr;
 DisplayInterface *DisplayInterface::last = nullptr;
-
-#endif // DISPLAY_HPP

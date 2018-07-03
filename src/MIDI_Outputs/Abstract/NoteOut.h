@@ -1,5 +1,4 @@
-#ifndef CONTROL_SURFACE_MIDI_OUTPUTS_NOTEOUT_H_
-#define CONTROL_SURFACE_MIDI_OUTPUTS_NOTEOUT_H_
+#pragma once
 
 #include "../../Settings/SettingsWrapper.h"
 #include "../MIDI_Control_Element.h"
@@ -47,5 +46,3 @@ class NoteOut : public MIDI_Control_Element {
     uint8_t newAddressOffset = addressOffset;
     uint8_t newChannelOffset = channelOffset;
 };
-
-#endif // CONTROL_SURFACE_MIDI_OUTPUTS_NOTEOUT_H_

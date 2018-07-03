@@ -1,7 +1,6 @@
 // https://github.com/tttapa/Arduino-PrintStream/blob/6a9e0d365be0b3d84187daa2a8a7bda8d541472e/src/PrintStream.h
 
-#ifndef PrintStream_h
-#define PrintStream_h
+#pragma once
 
 #ifdef ARDUINO
 #include <Arduino.h>
@@ -71,5 +70,3 @@ using std::showbase;
 using std::noshowbase;
 
 #endif
-
-#endif // PrintStream_h

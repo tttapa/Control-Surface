@@ -1,5 +1,4 @@
-#ifndef MCU_VPOT_RING_H_
-#define MCU_VPOT_RING_H_
+#pragma once
 
 #include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 #include "MIDI_Input_Element.h"
@@ -45,5 +44,3 @@ class MCU_VPot_Ring_LED : public MCU_VPot_Ring {
 
     void display();
 };
-
-#endif // MCU_VPOT_RING_H_

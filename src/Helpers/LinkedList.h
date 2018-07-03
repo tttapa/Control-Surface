@@ -1,5 +1,4 @@
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
+#pragma once
 
 namespace LinkedList {
 
@@ -53,4 +52,3 @@ void moveDown(Node *nodeC, Node *&first, Node *&last) {
 }
 
 };     // namespace LinkedList
-#endif // LINKED_LIST_H

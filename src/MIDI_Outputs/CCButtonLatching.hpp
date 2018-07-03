@@ -1,5 +1,4 @@
-#ifndef CONTROL_SURFACE_MIDI_OUTPUTS_CCBUTTONLATCHING_HPP_
-#define CONTROL_SURFACE_MIDI_OUTPUTS_CCBUTTONLATCHING_HPP_
+#pragma once
 
 #include "../Hardware/Button.h"
 #include "Abstract/CCOut.h"
@@ -20,5 +19,3 @@ class CCButtonLatch : public DigitalCCOut {
 
     Button button;
 };
-
-#endif // CONTROL_SURFACE_MIDI_OUTPUTS_CCBUTTONLATCHING_HPP_

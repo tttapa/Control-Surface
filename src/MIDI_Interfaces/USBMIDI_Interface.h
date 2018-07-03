@@ -1,5 +1,4 @@
-#ifndef USBMIDI_INTERFACE_H_
-#define USBMIDI_INTERFACE_H_
+#pragma once
 
 #include "../MIDI_Parsers/USBMIDI_Parser.h"
 #include "MIDI_Interface.h"
@@ -118,5 +117,3 @@ class USBMIDI_Interface : public USBSerialMIDI_Interface {
 };
 
 #endif
-
-#endif // USBMIDI_INTERFACE_H_

@@ -1,5 +1,4 @@
-#ifndef CONTROL_SURFACE_MIDI_OUTPUTS_NOTEBUTTON_HPP_
-#define CONTROL_SURFACE_MIDI_OUTPUTS_NOTEBUTTON_HPP_
+#pragma once
 
 #include "../Hardware/Button.h"
 #include "Abstract/NoteOut.h"
@@ -21,5 +20,3 @@ class NoteButton : public NoteOut {
 
     Button button;
 };
-
-#endif // CONTROL_SURFACE_MIDI_OUTPUTS_NOTEBUTTON_HPP_

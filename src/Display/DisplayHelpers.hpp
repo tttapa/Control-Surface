@@ -1,5 +1,4 @@
-#ifndef DISPLAYHELPERS_HPP
-#define DISPLAYHELPERS_HPP
+#pragma once
 
 #include <Adafruit_GFX.h>
 
@@ -59,5 +58,3 @@ void fillCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, uint16_t radius,
     }
   }
 }
-
-#endif // DISPLAYHELPERS_HPP

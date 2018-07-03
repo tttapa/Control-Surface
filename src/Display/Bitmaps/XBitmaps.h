@@ -1,5 +1,4 @@
-#ifndef XBITMAPS_H
-#define XBITMAPS_H
+#pragma once
 
 #include "../Display.hpp"
 
@@ -132,5 +131,3 @@ MakeXBitmap(solo_14B);
 MakeXBitmap(solo_7);
 
 };
-
-#endif // XBITMAPS_H

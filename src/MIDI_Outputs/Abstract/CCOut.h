@@ -1,5 +1,4 @@
-#ifndef CONTROL_SURFACE_MIDI_OUTPUTS_CCOUT_H_
-#define CONTROL_SURFACE_MIDI_OUTPUTS_CCOUT_H_
+#pragma once
 
 #include "../../Settings/SettingsWrapper.h"
 #include "../MIDI_Control_Element.h"
@@ -78,5 +77,3 @@ class CCOut : public MIDI_Control_Element {
     const uint8_t address;
     const uint8_t channel;
 };
-
-#endif // CONTROL_SURFACE_MIDI_OUTPUTS_CCOUT_H_

@@ -1,5 +1,4 @@
-#ifndef VPOTDISPLAY_HPP
-#define VPOTDISPLAY_HPP
+#pragma once
 
 #include "../MIDI_Inputs/MIDI_Input_V-Pot_Ring.h"
 #include "./DisplayElement.hpp"
@@ -82,5 +81,3 @@ protected:
 };
 
 const float VPotDisplay::angleSpacing = 0.4887; // 28°
-
-#endif // VPOTDISPLAY_HPP

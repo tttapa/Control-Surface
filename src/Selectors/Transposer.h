@@ -1,5 +1,4 @@
-#ifndef TRANSPOSER_H_
-#define TRANSPOSER_H_
+#pragma once
 
 #include "../Banks/Bank.h"
 #include "./Selector.h"
@@ -39,5 +38,3 @@ class Transposer : public Selector {
         bank.setBankSetting(settingToSemitones(newSetting));
     }
 };
-
-#endif // TRANSPOSER_H_

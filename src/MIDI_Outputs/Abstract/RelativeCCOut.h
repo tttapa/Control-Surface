@@ -1,5 +1,4 @@
-#ifndef CONTROL_SURFACE_MIDI_OUTPUTS_RELATIVECCOUT_H_
-#define CONTROL_SURFACE_MIDI_OUTPUTS_RELATIVECCOUT_H_
+#pragma once
 
 #include "../MIDI_Control_Element.h"
 
@@ -39,5 +38,3 @@ class RelativeCCOut : public MIDI_Control_Element {
     uint8_t controllerNumber, channel;
     relativeCCmode mode;
 };
-
-#endif // CONTROL_SURFACE_MIDI_OUTPUTS_RELATIVECCOUT_H_

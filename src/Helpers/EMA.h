@@ -1,5 +1,4 @@
-#ifndef EMA_H_
-#define EMA_H_
+#pragma once
 
 #include <stdint.h>
 
@@ -22,5 +21,3 @@ int_t EMA<shiftFac, int_t>::filter(int_t value) {
     filtered = filtered + (difference >> shiftFac);
     return (filtered + fixedPointAHalf) >> (shiftFac * 2);
 }
-
-#endif // EMA_H_

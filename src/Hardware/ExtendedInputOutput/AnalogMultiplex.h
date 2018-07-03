@@ -1,5 +1,4 @@
-#ifndef ANALOGMULTIPLEX_H_
-#define ANALOGMULTIPLEX_H_
+#pragma once
 
 #include "../../Helpers/Copy.hpp"
 #include "ExtendedIOElement.h"
@@ -30,5 +29,3 @@ class AnalogMultiplex : public ExtendedIOElement {
     uint8_t pinToMuxAddress(pin_t pin);
     void setMuxAddress(uint8_t address);
 };
-
-#endif // ANALOGMULTIPLEX_H_

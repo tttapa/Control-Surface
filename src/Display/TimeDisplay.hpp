@@ -1,5 +1,4 @@
-#ifndef TIMEDISPLAY_HPP
-#define TIMEDISPLAY_HPP
+#pragma once
 
 #include "../MIDI_Inputs/MIDI_Input_7SegmentDisplay.h"
 #include "./DisplayElement.hpp"
@@ -31,5 +30,3 @@ private:
   uint8_t size;
   uint16_t color;
 };
-
-#endif // TIMEDISPLAY_HPP

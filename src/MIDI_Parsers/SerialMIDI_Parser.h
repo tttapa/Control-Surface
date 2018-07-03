@@ -1,5 +1,4 @@
-#ifndef SERIALMIDI_PARSER_H
-#define SERIALMIDI_PARSER_H
+#pragma once
 
 #include "MIDI_Parser.h"
 
@@ -10,5 +9,3 @@ class SerialMIDI_Parser : public MIDI_Parser {
   private:
     bool thirdByte = false;
 };
-
-#endif // SERIALMIDI_PARSER_H

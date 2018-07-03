@@ -1,5 +1,4 @@
-#ifndef VUDISPLAY_HPP
-#define VUDISPLAY_HPP
+#pragma once
 
 #include "../MIDI_Inputs/MIDI_Input_VU.h"
 #include "./DisplayElement.hpp"
@@ -47,5 +46,3 @@ private:
 
   constexpr static unsigned long decayTime = 350;
 };
-
-#endif // VUDISPLAY_HPP

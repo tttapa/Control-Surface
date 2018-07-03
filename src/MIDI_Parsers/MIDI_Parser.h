@@ -1,5 +1,4 @@
-#ifndef MIDI_PARSER_H
-#define MIDI_PARSER_H
+#pragma once
 
 #include <stddef.h>
 #include <stdint.h>
@@ -61,5 +60,3 @@ class MIDI_Parser {
     /** Check if the given byte is a MIDI header byte. */
     static bool isHeader(uint8_t data);
 };
-
-#endif // MIDI_PARSER_H

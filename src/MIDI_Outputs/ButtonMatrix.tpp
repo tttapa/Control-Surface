@@ -1,6 +1,3 @@
-#ifndef BUTTONMATRIX_CPP_
-#define BUTTONMATRIX_CPP_
-
 #include "./ButtonMatrix.h"
 #include "../Control_Surface/Control_Surface_Class.h"
 #include "../Helpers/Copy.hpp"
@@ -134,5 +131,3 @@ void ButtonMatrix<nb_rows, nb_cols>::setAddressOffset(
     uint8_t offset) { // Set the address (note or controller number) offset
   newAddressOffset = offset;
 }
-
-#endif // BUTTONMATRIX_CPP_

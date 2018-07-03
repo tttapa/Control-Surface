@@ -1,5 +1,4 @@
-#ifndef MIDI_MESSAGE_MATCHER_H
-#define MIDI_MESSAGE_MATCHER_H
+#pragma once
 
 #include "../MIDI_Parsers/MIDI_Parser.h"
 
@@ -20,5 +19,3 @@ struct MIDI_message_matcher
     uint8_t data1;
     uint8_t data2;
 };
-
-#endif // MIDI_MESSAGE_MATCHER_H

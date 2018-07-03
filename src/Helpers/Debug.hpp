@@ -1,4 +1,4 @@
-#ifndef DEBUG
+#pragma once
 
 #ifdef ARDUINO
 
@@ -78,7 +78,5 @@ using std::uppercase;
 #define DEBUG(x)
 #define DEBUGREF(x)
 #define DEBUGFN(x)
-
-#endif
 
 #endif

@@ -1,5 +1,4 @@
-#ifndef SHIFTREGISTEROUT_H_
-#define SHIFTREGISTEROUT_H_
+#pragma once
 
 #include "ExtendedIOElement.h"
 
@@ -33,5 +32,3 @@ class ShiftRegisterOut : public ExtendedIOElement {
     uint8_t pinToBitMask(pin_t pin);
     constexpr static int8_t INVALID_PIN = -1;
 };
-
-#endif // SHIFTREGISTEROUT_H_

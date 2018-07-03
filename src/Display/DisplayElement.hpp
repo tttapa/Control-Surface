@@ -1,5 +1,4 @@
-#ifndef DISPLAYELEMENTS_HPP
-#define DISPLAYELEMENTS_HPP
+#pragma once
 
 #include "../Helpers/LinkedList.h"
 #include "./DisplayHelpers.hpp"
@@ -39,5 +38,3 @@ protected:
 
 DisplayElement *DisplayElement::first = nullptr;
 DisplayElement *DisplayElement::last = nullptr;
-
-#endif // DISPLAYELEMENTS_HPP

@@ -1,5 +1,4 @@
-#ifndef CONTROL_SURFACE_MIDI_OUTPUTS_ROTARYENCODER_HPP_
-#define CONTROL_SURFACE_MIDI_OUTPUTS_ROTARYENCODER_HPP_
+#pragma once
 
 #ifndef Encoder_h_
 #error                                                                         \
@@ -39,4 +38,3 @@ class RotaryEncoder : public RelativeCCOut {
     Encoder enc;
     long previousPosition = 0;
 };
-#endif // CONTROL_SURFACE_MIDI_OUTPUTS_ROTARYENCODER_HPP_

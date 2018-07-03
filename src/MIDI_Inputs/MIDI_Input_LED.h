@@ -1,5 +1,4 @@
-#ifndef MIDI_INPUT_LED_H_
-#define MIDI_INPUT_LED_H_
+#pragma once
 
 #include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 #include "../MIDI_Inputs/MIDI_Input_Element.h"
@@ -29,4 +28,3 @@ class MIDI_LED : public MIDI_Input_Note_Buffer {
   protected:
     pin_t pin;
 };
-#endif // MIDI_INPUT_LED_H_

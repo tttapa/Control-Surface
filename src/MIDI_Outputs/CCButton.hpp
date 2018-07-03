@@ -1,5 +1,4 @@
-#ifndef CONTROL_SURFACE_MIDI_OUTPUTS_CCBUTTON_HPP_
-#define CONTROL_SURFACE_MIDI_OUTPUTS_CCBUTTON_HPP_
+#pragma once
 
 #include "../Hardware/Button.h"
 #include "Abstract/CCOut.h"
@@ -21,5 +20,3 @@ class CCButton : public DigitalCCOut {
 
     Button button;
 };
-
-#endif // CONTROL_SURFACE_MIDI_OUTPUTS_CCBUTTON_HPP_

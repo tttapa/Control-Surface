@@ -1,5 +1,4 @@
-#ifndef EXTENDEDIOELEMENT_H_
-#define EXTENDEDIOELEMENT_H_
+#pragma once
 
 #include "../../Helpers/LinkedList.h"
 #include <stdint.h> // uint8_t
@@ -51,5 +50,3 @@ class ExtendedIOElement {
     template <class Node>
     friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
-
-#endif // EXTENDEDIOELEMENT_H_

@@ -1,5 +1,4 @@
-#ifndef MIDI_CONTROL_ELEMENT_h
-#define MIDI_CONTROL_ELEMENT_h
+#pragma once
 
 #include "../Helpers/LinkedList.h"
 #include "../MIDI_Element.h"
@@ -25,5 +24,3 @@ class MIDI_Control_Element : public MIDI_Element {
     template <class Node>
     friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
-
-#endif // MIDI_CONTROL_ELEMENT_h

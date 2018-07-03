@@ -1,5 +1,4 @@
-#ifndef CONTROL_SURFACE_MIDI_OUTPUTS_PBOUT_H_
-#define CONTROL_SURFACE_MIDI_OUTPUTS_PBOUT_H_
+#pragma once
 
 #include "../../Settings/SettingsWrapper.h"
 #include "../MIDI_Control_Element.h"
@@ -27,5 +26,3 @@ class PBOut : public MIDI_Control_Element {
   private:
     const uint8_t channel;
 };
-
-#endif // CONTROL_SURFACE_MIDI_OUTPUTS_PBOUT_H_

@@ -1,5 +1,4 @@
-#ifndef NOTEDISPLAY_HPP
-#define NOTEDISPLAY_HPP
+#pragma once
 
 #include "../MIDI_Inputs/MIDI_Input_LED.h"
 #include "./Bitmaps/XBitmaps.h"
@@ -23,5 +22,3 @@ private:
   int16_t x, y;
   uint16_t color;
 };
-
-#endif // NOTEDISPLAY_HPP

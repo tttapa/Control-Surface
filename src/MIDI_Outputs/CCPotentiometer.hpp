@@ -1,5 +1,4 @@
-#ifndef CONTROL_SURFACE_MIDI_OUTPUTS_CCPOTENTIOMETER_HPP_
-#define CONTROL_SURFACE_MIDI_OUTPUTS_CCPOTENTIOMETER_HPP_
+#pragma once
 
 #include "../Hardware/FilteredAnalog.h"
 #include "Abstract/CCOut.h"
@@ -17,5 +16,3 @@ class CCPotentiometer : public CCOut {
 
     FilteredAnalog<7> filteredAnalog; // 7 bits of precision
 };
-
-#endif // CONTROL_SURFACE_MIDI_OUTPUTS_CCPOTENTIOMETER_HPP_

@@ -1,5 +1,4 @@
-#ifndef MIDI_ELEMENT_h
-#define MIDI_ELEMENT_h
+#pragma once
 
 #include <stddef.h> // size_t
 #include <stdint.h> // uint8_t
@@ -51,5 +50,3 @@ protected:
   uint8_t addressOffset = 0;
   uint8_t tracksPerBank = 1;
 };
-
-#endif // MIDI_ELEMENT_h

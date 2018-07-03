@@ -1,5 +1,4 @@
-#ifndef FILTEREDANALOG_H_
-#define FILTEREDANALOG_H_
+#pragma once
 
 #include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 #include "../Helpers/EMA.h"
@@ -99,5 +98,3 @@ template <uint8_t PRECISION>
 void FilteredAnalog<PRECISION>::map(int (*fn)(int)) {
     mapFn = fn;
 }
-
-#endif // FILTEREDANALOG_H_

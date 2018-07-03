@@ -1,5 +1,4 @@
-#ifndef BANK_h_
-#define BANK_h_
+#pragma once
 
 #include "../MIDI_Element.h"
 
@@ -125,5 +124,3 @@ private:
   MIDI_Element_list_node *firstMIDI_Element = nullptr;
   MIDI_Element_list_node *lastMIDI_Element = nullptr;
 };
-
-#endif // BANK_h_

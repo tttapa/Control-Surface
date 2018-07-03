@@ -1,5 +1,4 @@
-#ifndef CONTROL_SURFACE_MIDI_OUTPUTS_PBPOTENTIOMETER_HPP_
-#define CONTROL_SURFACE_MIDI_OUTPUTS_PBPOTENTIOMETER_HPP_
+#pragma once
 
 #include "../Hardware/FilteredAnalog.h"
 #include "Abstract/PBOut.h"
@@ -19,5 +18,3 @@ class PBPotentiometer : public PBOut {
         filteredAnalog; // 8 bits of precision (i.e. 2 least significant bits
                         // are used for filtering)
 };
-
-#endif // CONTROL_SURFACE_MIDI_OUTPUTS_PBPOTENTIOMETER_HPP_

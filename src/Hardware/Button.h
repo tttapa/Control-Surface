@@ -1,5 +1,4 @@
-#ifndef CONTROL_SURFACE_MIDI_OUTPUTS_BUTTON_H_
-#define CONTROL_SURFACE_MIDI_OUTPUTS_BUTTON_H_
+#pragma once
 
 #include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 #include "../Settings/SettingsWrapper.h"
@@ -69,5 +68,3 @@ class Button {
     constexpr static unsigned long debounceTime =
         BUTTON_DEBOUNCE_TIME; // Edit this in ../Settings/Settings.h
 };
-
-#endif // CONTROL_SURFACE_MIDI_OUTPUTS_BUTTON_H_

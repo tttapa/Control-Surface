@@ -1,5 +1,4 @@
-#ifndef MIDI_INPUT_ELEMENT_H_
-#define MIDI_INPUT_ELEMENT_H_
+#pragma once
 
 #include "../Helpers/LinkedList.h"
 #include "../MIDI_Element.h"
@@ -130,5 +129,3 @@ protected:
   template <class Node>
   friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
-
-#endif // MIDI_INPUT_ELEMENT_H_
