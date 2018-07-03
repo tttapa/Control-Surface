@@ -11,16 +11,18 @@
 #include <Arduino.h>
 typedef Print &manipulator(Print &);
 inline Print &endl(Print &printer) {
-  printer.println();
-  printer.flush();
-  return printer;
+    printer.println();
+    printer.flush();
+    return printer;
 }
-template <class T> inline Print &operator<<(Print &printer, const T printable) {
-  printer.print(printable);
-  return printer;
+template <class T>
+inline Print &operator<<(Print &printer, const T printable) {
+    printer.print(printable);
+    return printer;
 }
-template <> inline Print &operator<<(Print &printer, manipulator pf) {
-  return pf(printer);
+template <>
+inline Print &operator<<(Print &printer, manipulator pf) {
+    return pf(printer);
 }
 #endif
 
@@ -49,7 +51,7 @@ using std::uppercase;
 #define STR(x) STR_HELPER(x)
 
 #define FUNC_LOCATION                                                          \
-  '[' << __PRETTY_FUNCTION__ << F(" @ line " STR(__LINE__) "]:\t")
+    '[' << __PRETTY_FUNCTION__ << F(" @ line " STR(__LINE__) "]:\t")
 #define LOCATION "[" __FILE__ ":" STR(__LINE__) "]:\t"
 
 #ifdef DEBUG_OUT
@@ -57,19 +59,19 @@ using std::uppercase;
 #pragma message("Debugging enabled on output " STR(DEBUG_OUT))
 
 #define DEBUG(x)                                                               \
-  do {                                                                         \
-    DEBUG_OUT << x << endl;                                                    \
-  } while (0)
+    do {                                                                       \
+        DEBUG_OUT << x << endl;                                                \
+    } while (0)
 
 #define DEBUGREF(x)                                                            \
-  do {                                                                         \
-    DEBUG_OUT << F(LOCATION) << x << endl;                                     \
-  } while (0)
+    do {                                                                       \
+        DEBUG_OUT << F(LOCATION) << x << endl;                                 \
+    } while (0)
 
 #define DEBUGFN(x)                                                             \
-  do {                                                                         \
-    DEBUG_OUT << FUNC_LOCATION << x << endl;                                   \
-  } while (0)
+    do {                                                                       \
+        DEBUG_OUT << FUNC_LOCATION << x << endl;                               \
+    } while (0)
 
 #else
 

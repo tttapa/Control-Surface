@@ -3,8 +3,7 @@
 
 // ---- User Settings ---- //
 // ======================= //
-
-#include "./Settings.h"
+#include "Settings.h"
 
 // ------- Debug ------- //
 // ===================== //

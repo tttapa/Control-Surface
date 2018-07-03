@@ -17,10 +17,10 @@ Button::State Button::getState() {
       ExtIO::digitalRead(pin) ^ invertState; // read the button state and invert
                                              // it if "invertState" is true
   if (millis() - prevBounceTime > debounceTime) { // wait for state to stabilize
-    rstate = static_cast<State>((buttonState << 1) | state);
-    buttonState = state;
+    rstate = static_cast<State>((debouncedState << 1) | state);
+    debouncedState = state;
   } else {
-    rstate = static_cast<State>(buttonState << 1 | buttonState);
+    rstate = static_cast<State>(debouncedState << 1 | debouncedState);
   }
   if (state != prevState) { // Button is pressed, released or bounces
     prevBounceTime = millis();

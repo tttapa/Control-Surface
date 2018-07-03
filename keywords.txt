@@ -16,6 +16,8 @@ USBDebugMIDI_Interface	KEYWORD1
 SoftwareSerialDebugMIDI_Interface	KEYWORD1
 HairlessMIDI_Interface	KEYWORD1
 
+Button	KEYWORD1
+
 Analog	KEYWORD1
 AnalogHiRes	KEYWORD1
 Digital	KEYWORD1
@@ -78,6 +80,8 @@ redBit	KEYWORD2
 greenBit	KEYWORD2
 blueBit	KEYWORD2
 
+getState	KEYWORD2
+
 #######################################
 # Constants (LITERAL1)
 #######################################
@@ -109,6 +113,12 @@ CHANGE_ADDRESS	LITERAL1
 TOGGLE	LITERAL1
 MOMENTARY	LITERAL1
 
+Rising	LITERAL1
+Falling	LITERAL1
+Pressed	LITERAL1
+Released	LITERAL1
+
+State	LITERAL1
 
 # MCU
 ######################################

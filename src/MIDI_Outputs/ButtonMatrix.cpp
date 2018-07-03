@@ -3,6 +3,7 @@
 
 #include "./ButtonMatrix.h"
 #include "../Control_Surface/Control_Surface_Class.h"
+#include "../Helpers/Copy.hpp"
 #include <string.h>
 
 using namespace ExtIO;
@@ -13,10 +14,10 @@ ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(
     const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel,
     uint8_t velocity)
     : addresses(addresses), channel(channel), velocity(velocity) {
-  memcpy(this->rowPins, rowPins, sizeof(rowPins[0]) * nb_rows);
-  memcpy(this->colPins, colPins, sizeof(colPins[0]) * nb_cols);
+  copy(this->rowPins, rowPins);
+  copy(this->colPins, colPins);
   init();
-  // note: this copies the data of rowPins and colPins, regardless of whether
+  // Note: this copies the data of rowPins and colPins, regardless of whether
   // it's static or temporary. This means that using global const arrays to
   // initialize ButtonMatrix is slightly less memory efficient than using
   // brace-enclosed initializer lists. There are ways around this, but it's not
@@ -31,6 +32,10 @@ ButtonMatrix<nb_rows, nb_cols>::~ButtonMatrix() {
 
 template <size_t nb_rows, size_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::update() {
+  if (allReleased()) {
+    channelOffset = newChannelOffset;
+    addressOffset = newAddressOffset;
+  }
   unsigned long now = millis();
   // only update every 25 ms (crude software
   // debounce). Edit this in ../Settings/Settings.h
@@ -53,13 +58,6 @@ void ButtonMatrix<nb_rows, nb_cols>::update() {
             state ? NOTE_OFF : NOTE_ON, channel + channelOffset * tracksPerBank,
             note + addressOffset * tracksPerBank, velocity);
         setPrevState(col, row, state); // remember the state
-        if (state == HIGH &&
-            (newChannelOffset != channelOffset ||
-             newAddressOffset != addressOffset) &&
-            allReleased()) {
-          channelOffset = newChannelOffset;
-          addressOffset = newAddressOffset;
-        }
       }
     }
     pinMode(rowPins[row], INPUT); // make the current row Hi-Z again
@@ -68,13 +66,14 @@ void ButtonMatrix<nb_rows, nb_cols>::update() {
 
 template <size_t nb_rows, size_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::init() {
-  prevStates = new uint8_t[(nb_cols * nb_rows + 7) /
-                           8]; // an array of bytes where each bit represents
-                               // the state of one of the buttons
+  // Create an array of bytes where each bit represents
+  // the state of one of the buttons
+  prevStates = new uint8_t[(nb_cols * nb_rows + 7) / 8];
   memset(prevStates, 0xFF, (nb_cols * nb_rows + 7) / 8);
   for (size_t i = 0; i < nb_cols; i++) {
-    pinMode(colPins[i], INPUT_PULLUP); // make all columns input pins and enable
-                                       // the internal pull-up resistors
+    // make all columns input pins and enable
+    // the internal pull-up resistors
+    pinMode(colPins[i], INPUT_PULLUP);
   }
   for (size_t row = 0; row < nb_rows; row++) {
     pinMode(rowPins[row], INPUT);  // make all rows Hi-Z
@@ -85,8 +84,8 @@ void ButtonMatrix<nb_rows, nb_cols>::init() {
 template <size_t nb_rows, size_t nb_cols>
 inline uint8_t ButtonMatrix<nb_rows, nb_cols>::positionToBits(uint8_t col,
                                                               uint8_t row) {
-  return col * nb_rows +
-         row; // map from a 2D array of bits to a flat array of bits
+  // map from a 2D array of bits to a flat array of bits
+  return col * nb_rows + row;
 }
 
 template <size_t nb_rows, size_t nb_cols>
@@ -127,22 +126,12 @@ bool ButtonMatrix<nb_rows, nb_cols>::allReleased() {
 
 template <size_t nb_rows, size_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::setChannelOffset(
-    uint8_t offset) // Set the channel offset
-{
-  // This only has effect when all buttons are released.
-  // Otherwise, Note Off messages would be sent on the wrong channel.
-  if (allReleased())
-    channelOffset = offset;
+    uint8_t offset) { // Set the channel offset
   newChannelOffset = offset;
 }
 template <size_t nb_rows, size_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::setAddressOffset(
-    uint8_t offset) // Set the address (note or controller number) offset
-{
-  // This only has effect when all buttons are released.
-  // Otherwise, Note Off messages would be sent with the wrong note number.
-  if (allReleased())
-    addressOffset = offset;
+    uint8_t offset) { // Set the address (note or controller number) offset
   newAddressOffset = offset;
 }
 

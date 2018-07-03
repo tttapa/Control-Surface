@@ -1,40 +1,48 @@
 #ifndef BUTTONMATRIX_H_
 #define BUTTONMATRIX_H_
 
-#include "./MIDI_Control_Element.h"
 #include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h" // for pin_t
+#include "./MIDI_Control_Element.h"
 
 /**
- * @brief A MIDI_Control_Element that reads the states of a button matrix and sends it over MIDI as a series of Note events.
- * 
- * @tparam  nb_rows 
+ * @brief   A MIDI_Control_Element that reads the states of a button matrix and
+ *          sends it over MIDI as a series of Note events.
+ *
+ * @tparam  nb_rows
  *          The number of rows in the button matrix.
- * @tparam  nb_cols 
+ * @tparam  nb_cols
  *          The number of columns in the button matrix.
  */
 template <size_t nb_rows, size_t nb_cols>
-class ButtonMatrix : public MIDI_Control_Element
-{
+class ButtonMatrix : public MIDI_Control_Element {
   public:
     /**
-     * @brief Construct a new ButtonMatrix object.
-     * 
-     * @param rowPins
-     *        A list of pin numbers connected to the rows of the button matrix. These pins will be driven LOW (Lo-Z).
-     * @param colPins
-     *        A list of pin numbers connected to the columns of the button matrix. These pins will be used as inputs, and the internal pull-up resistor will be enabled.
-     * @param addresses
-     *        A 2D array of dimensions (nb_rows × nb_cols) containing the address for each button.
-     * @param channel 
-     *        The MIDI channel [1, 16].
-     * @param velocity 
-     *        The velocity of the MIDI Note events [1, 127].
-     * 
-     * @note  The lists of pins are copied.  
-     *        The list of addresses is not copied. It should be a reference to a 2-dimensional array.  
-     *        This means that initializing \c addresses with a brace-enclosed initializer list is not allowed.
+     * @brief   Construct a new ButtonMatrix object.
+     *
+     * @param   rowPins
+     *          A list of pin numbers connected to the rows of the button
+     *          matrix. These pins will be driven LOW (Lo-Z).
+     * @param   colPins
+     *          A list of pin numbers connected to the columns of the button
+     *          matrix. These pins will be used as inputs, and the internal
+     *          pull-up resistor will be enabled.
+     * @param   addresses
+     *          A 2D array of dimensions (nb_rows × nb_cols) containing the
+     *          address for each button.
+     * @param   channel
+     *          The MIDI channel [1, 16].
+     * @param   velocity
+     *          The velocity of the MIDI Note events [1, 127].
+     *
+     * @note    The lists of pins are copied.
+     *          The list of addresses is not copied. It should be a reference to
+     *          a 2-dimensional array. This means that initializing \c addresses
+     *          with a brace-enclosed initializer list is not allowed.
      */
-    ButtonMatrix(const pin_t (&rowPins)[nb_rows], const pin_t (&colPins)[nb_cols], const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel, uint8_t velocity = 0x7F);
+    ButtonMatrix(const pin_t (&rowPins)[nb_rows],
+                 const pin_t (&colPins)[nb_cols],
+                 const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel,
+                 uint8_t velocity = 0x7F);
     ~ButtonMatrix();
 
   protected:

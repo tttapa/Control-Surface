@@ -5,7 +5,7 @@
 #include "../MIDI_Element.h"
 #include "./MIDI_message_matcher.h"
 
-//----------------------------------------------------------------------------------------------------------------------------------------//
+// -------------------------------------------------------------------------- //
 
 class MIDI_Input_Element : public MIDI_Element {
   friend class Control_Surface_;
@@ -38,7 +38,7 @@ protected:
   friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
 
-//----------------------------------------------------------------------------------------------------------------------------------------//
+// -------------------------------------------------------------------------- //
 
 class MIDI_Input_Element_CC : public MIDI_Input_Element {
   friend class Control_Surface_;
@@ -69,7 +69,7 @@ protected:
   friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
 
-//----------------------------------------------------------------------------------------------------------------------------------------//
+// -------------------------------------------------------------------------- //
 
 class MIDI_Input_Element_Note : public MIDI_Input_Element {
   friend class Control_Surface_;
@@ -100,7 +100,7 @@ protected:
   friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
 
-//----------------------------------------------------------------------------------------------------------------------------------------//
+// -------------------------------------------------------------------------- //
 
 class MIDI_Input_Element_ChannelPressure : public MIDI_Input_Element {
   friend class Control_Surface_;
@@ -130,7 +130,5 @@ protected:
   template <class Node>
   friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
-
-//----------------------------------------------------------------------------------------------------------------------------------------//
 
 #endif // MIDI_INPUT_ELEMENT_H_
