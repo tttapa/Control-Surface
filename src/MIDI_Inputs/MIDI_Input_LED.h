@@ -26,5 +26,6 @@ class MIDI_LED : public MIDI_Input_Note_Buffer {
     void display();
 
   protected:
+    void update() override;
     pin_t pin;
 };

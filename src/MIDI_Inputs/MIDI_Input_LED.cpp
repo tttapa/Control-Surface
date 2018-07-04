@@ -48,3 +48,4 @@ MIDI_LED::MIDI_LED(pin_t pin, uint8_t address, uint8_t channel,
 }
 MIDI_LED::~MIDI_LED() { ExtIO::pinMode(pin, INPUT); }
 void MIDI_LED::display() { ExtIO::digitalWrite(pin, getState()); }
+void MIDI_LED::update() {}

@@ -3,6 +3,10 @@
 #include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 #include "MIDI_Input_Element.h"
 
+/** 
+ * @todo    Make Printable
+ */
+
 // -------------------------------------------------------------------------- //
 
 class MCU_7SegmentDisplay : public MIDI_Input_Element_CC {

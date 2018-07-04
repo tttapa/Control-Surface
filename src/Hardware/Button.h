@@ -6,12 +6,13 @@
 class Button {
   public:
     /**
-     * @brief Construct a new Button object.
+     * @brief   Construct a new Button object.
      *
-     * @param pin The digital pin to read from. The internal pull-up resistor
-     * will be enabled.
+     * @param   pin
+     *          The digital pin to read from. The internal pull-up resistor
+     *          will be enabled.
      */
-    Button(pin_t pin); // Constructor
+    Button(pin_t pin);
 
     /**
      * @brief Invert the state of all buttons (button pressed is HIGH instead of
@@ -30,31 +31,32 @@ class Button {
     /**
      * @brief Get the state of the button.
      *
-     * <pre>
-  Debounce time: ├────┤
-
-  Raw input:
-    HIGH  ──────┐      ┌──────┐ ┌─┐      ┌─┐ ┌──────┐ ┌────────
-    LOW         └──────┘      └─┘ └──────┘ └─┘      └─┘
-                ├────┤        ├─┼─┼────┤ ├─┼─┼────┤ ├─┼────┤
-
-  Debounced output:
-    HIGH  ──────┐      ┌──────┐          ┌──────────┐      ┌───
-    LOW         └──────┘      └──────────┘          └──────┘
-  </pre>
-     * <pre>
-    HIGH  ────────────────┐                  ┌─────────────────
-    LOW                   └──────────────────┘
-            RELEASED   FALLING   PRESSED   RISING
-  </pre>
+     * The button is debounced, the debounce time can be set in
+     * ../Settings/Settings.h.
+     * 
+     * ```
+     * Debounce time: ├────┤
+     * 
+     * Raw input:
+     *    HIGH  ──────┐      ┌──────┐ ┌─┐      ┌─┐ ┌──────┐ ┌────────
+     *    LOW         └──────┘      └─┘ └──────┘ └─┘      └─┘
+     *                ├────┤        ├─┼─┼────┤ ├─┼─┼────┤ ├─┼────┤
+     * 
+     * Debounced output:
+     *    HIGH  ──────┐      ┌──────┐          ┌──────────┐      ┌───
+     *    LOW         └──────┘      └──────────┘          └──────┘
      *
+     * States:
+     *    HIGH  ────────────────┐                  ┌─────────────────
+     *    LOW                   └──────────────────┘
+     *            RELEASED   FALLING   PRESSED   RISING
+     * ```  
+     * 
      * @return State
      *         The state of the button, either Button::PRESSED,
-  Button::RELEASED, Button::FALLING or Button::RISING.
-     *         The button is debounced, the debounce time can be set in
-  ../Settings/Settings.h
+     *         Button::RELEASED, Button::FALLING or Button::RISING.
      */
-    State getState(); // Check if the button state changed
+    State getState();
 
   private:
     const pin_t pin;

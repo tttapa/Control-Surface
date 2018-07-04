@@ -10,7 +10,7 @@
  * optimization by using a factor of two as the pole location (this means
  * that no division or floating point operations are required).
  *
- * Difference equation: @f$ y[n] = \alpha\cdot x[n]+(1-\alpha)\cdot y[n-1] @f$
+ * Difference equation: @f$ y[n] = \alpha·x[n]+(1-\alpha)·y[n-1] @f$
  * where @f$ \alpha = \left(\frac{1}{2}\right)^{K} @f$, @f$ x @f$ is the
  * input sequence, and @f$ y @f$ is the output sequence.
  *
@@ -33,19 +33,27 @@
 template <uint8_t K, class int_t>
 class EMA {
   public:
-    int_t filter(int_t value);
+    /**
+     * @brief   Filter the input: Given @f$ x[n] @f$, calculate @f$ y[n] @f$.
+     *
+     * @param   input
+     *          The new raw input value.
+     * @return  int_t
+     *          The new filtered output value.
+     */
+    int_t filter(int_t input);
 
   private:
     int_t filtered = 0;
-    const static int_t fixedPointAHalf = 1 << ((K * 2) - 1);
+    constexpr static int_t fixedPointAHalf = 1 << ((K * 2) - 1);
 };
 
 // ------------ Implementation ------------ //
 
 template <uint8_t K, class int_t>
-int_t EMA<K, int_t>::filter(int_t value) {
-    value = value << (K * 2);
-    int_t difference = value - filtered;
+int_t EMA<K, int_t>::filter(int_t input) {
+    input = input << (K * 2);
+    int_t difference = input - filtered;
     filtered = filtered + (difference >> K);
     return (filtered + fixedPointAHalf) >> (K * 2);
 }
