@@ -45,7 +45,8 @@ class ShiftRegisterOut : public ExtendedIOElement {
      * @brief   The pinMode function is not implemented because the mode is
      *          `OUTPUT` by definition.
      */
-    void pinMode(pin_t pin, uint8_t mode) __attribute__ ((deprecated)) {}
+    void pinMode(pin_t pin, uint8_t mode) override __attribute__((deprecated)) {}
+
     /**
      * @brief   Set the state of a given output pin.
      * 
@@ -55,35 +56,41 @@ class ShiftRegisterOut : public ExtendedIOElement {
      *          The value to set the pin to.
      *          (Either `HIGH` (1) or `LOW` (0))
      */
-    void digitalWrite(pin_t pin, uint8_t val);
+    void digitalWrite(pin_t pin, uint8_t val) override;
+
     /**
      * @brief   Get the current state of a given output pin.
      * 
      * @param   pin
      *          The pin to read.
      */
-    int digitalRead(pin_t pin);
+    int digitalRead(pin_t pin) override;
+
     /**
      * @brief   The analogRead function is not implemented because a shift
      *          is always digital.
      */
-    analog_t analogRead(pin_t pin) __attribute__ ((deprecated)) {}
+    analog_t analogRead(pin_t pin) override __attribute__((deprecated)) {}
+
     /**
      * @brief   The analogWrite function is not implemented because a shift
      *          is always digital.
      */
-    void analogWrite(pin_t pin, analog_t val) __attribute__ ((deprecated)) {}
+    void analogWrite(pin_t pin, analog_t val) override __attribute__((deprecated)) {}
+
 
     /**
      * @brief   Initialize the shift register.  
      *          Set the data and clock pins to output mode, 
      *          and set all shift register outputs to `LOW`.
      */
-    void begin();
+    void begin() override;
+
     /**
      * @brief   Write the state buffer to the physical outputs.
      */
-    void update();
+    void update() override;
+
     /**
      * @brief   Set all shift register outputs to `LOW`.
      */

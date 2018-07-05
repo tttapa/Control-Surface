@@ -32,20 +32,6 @@ class AnalogMultiplex : public ExtendedIOElement {
     ~AnalogMultiplex() { delete[] addressPins; }
 
     /**
-     * @brief   Read the digital state of the given input.
-     * 
-     * @param   pin
-     *          The multiplexer's pin number to read from.
-     */
-    int digitalRead(pin_t pin) override;
-    /**
-     * @brief   Read the analog value of the given input.
-     * 
-     * @param   pin
-     *          The multiplexer's pin number to read from.
-     */
-    analog_t analogRead(pin_t pin) override;
-    /**
      * @brief   Set the pin mode of the analog input pin.  
      *          This allows you to enable the internal pull-up resistor, for
      *          use with buttons or open-collector outputs.
@@ -60,10 +46,41 @@ class AnalogMultiplex : public ExtendedIOElement {
      *          either INPUT or INPUT_PULLUP.
      */
     void pinMode(pin_t, uint8_t mode) override;
+
+    /**
+     * @brief   The digitalWrite function is not implemented because writing an
+     *          output to a multiplexer is not useful.
+     */
+    void digitalWrite(pin_t pin, uint8_t val) override __attribute__((deprecated)) {}
+
+    /**
+     * @brief   Read the digital state of the given input.
+     * 
+     * @param   pin
+     *          The multiplexer's pin number to read from.
+     */
+    int digitalRead(pin_t pin) override;
+
+    /**
+     * @brief   Read the analog value of the given input.
+     * 
+     * @param   pin
+     *          The multiplexer's pin number to read from.
+     */
+    analog_t analogRead(pin_t pin) override;
+
+    /**
+     * @brief   The analogWrite function is not implemented because writing an
+     *          output to a multiplexer is not useful.
+     */
+    void analogWrite(pin_t pin, analog_t val) override __attribute__((deprecated)) {}
+
     /**
      * @brief   Initialize the multiplexer.
      */
     void begin() override;
+
+    void update() override;
 
   private:
     const pin_t analogPin;

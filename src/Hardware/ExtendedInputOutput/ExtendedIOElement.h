@@ -42,7 +42,7 @@ typedef int analog_t;
  *          translated to `mux1.digitalRead(7)`.
  * 
  *          The number of extended IO elements is limited only by the size of 
- *          pin_t. However, looking up the extended IO element for a given
+ *          #pin_t. However, looking up the extended IO element for a given
  *          extended IO pin number uses linear search, so that might add
  *          some noticable overhead for large pin numbers.
  */
@@ -67,7 +67,6 @@ class ExtendedIOElement {
      *          or read the physical state into the input buffers.
      */
     virtual void update() = 0;
-    virtual void reset() = 0;
 
     /**
      * @brief   Get the extended IO pin number of a given physical pin of this

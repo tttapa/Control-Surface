@@ -14,47 +14,47 @@
 #error Please select a 'Serial + MIDI' option in the 'Tools > USB Type' menu.
 #endif
 
-#include "./Control_Surface/Control_Surface_Class.h"
+#include "Control_Surface/Control_Surface_Class.h"
 
-#include "./MIDI_Outputs/CCPotentiometer.hpp"
-#include "./MIDI_Outputs/PBPotentiometer.hpp"
-#include "./MIDI_Outputs/ButtonMatrix.h"
-#include "./MIDI_Outputs/NoteButton.hpp"
-#include "./MIDI_Outputs/NoteButtonLatching.hpp"
-#include "./MIDI_Outputs/CCButton.hpp"
-#include "./MIDI_Outputs/CCButtonLatching.hpp"
+#include "MIDI_Outputs/CCPotentiometer.hpp"
+#include "MIDI_Outputs/PBPotentiometer.hpp"
+#include "MIDI_Outputs/ButtonMatrix.h"
+#include "MIDI_Outputs/NoteButton.hpp"
+#include "MIDI_Outputs/NoteButtonLatching.hpp"
+#include "MIDI_Outputs/CCButton.hpp"
+#include "MIDI_Outputs/CCButtonLatching.hpp"
 #ifdef Encoder_h_
-#include "./MIDI_Outputs/RotaryEncoder.hpp"
+#include "/MIDI_Outputs/RotaryEncoder.hpp"
 #endif
 
-#include "./MIDI_Inputs/MIDI_Input_Element.h"
-#include "./MIDI_Inputs/MIDI_Input_LED.h"
-#include "./MIDI_Inputs/MIDI_Input_V-Pot_Ring.h"
-#include "./MIDI_Inputs/MIDI_Input_VU.h"
-#include "./MIDI_Inputs/MIDI_Input_7SegmentDisplay.h"
+#include "MIDI_Inputs/MIDI_Input_Element.h"
+#include "MIDI_Inputs/MIDI_Input_LED.h"
+#include "MIDI_Inputs/MIDI_Input_V-Pot_Ring.h"
+#include "MIDI_Inputs/MIDI_Input_VU.h"
+#include "MIDI_Inputs/MIDI_Input_7SegmentDisplay.h"
 
-#include "./Banks/Bank.h"
-#include "./Banks/BankSelector.h"
+#include "Banks/Bank.h"
+#include "Banks/BankSelector.h"
 
-#include "./Selectors/ProgramSelector.h"
-#include "./Selectors/Transposer.h"
+#include "Selectors/ProgramSelector.h"
+#include "Selectors/Transposer.h"
 
-#include "./MIDI_Interfaces/USBMIDI_Interface.h"
-#include "./MIDI_Interfaces/SerialMIDI_Interface.h"
-#include "./MIDI_Interfaces/DebugMIDI_Interface.h"
+#include "MIDI_Interfaces/USBMIDI_Interface.h"
+#include "MIDI_Interfaces/SerialMIDI_Interface.h"
+#include "MIDI_Interfaces/DebugMIDI_Interface.h"
 
-#include "./Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
-#include "./Hardware/ExtendedInputOutput/ShiftRegisterOut.h"
-#include "./Hardware/ExtendedInputOutput/AnalogMultiplex.h"
+#include "Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
+#include "Hardware/ExtendedInputOutput/ShiftRegisterOut.h"
+#include "Hardware/ExtendedInputOutput/AnalogMultiplex.h"
 
-#include "./MIDI_Constants/MCU.h"
-#include "./MIDI_Constants/Control_Change.h"
+#include "MIDI_Constants/MCU.h"
+#include "MIDI_Constants/Control_Change.h"
 
 #ifdef DISPLAY_GFX
-#include "./Display/NoteDisplay.hpp"
-#include "./Display/SelectorDisplay.hpp"
-#include "./Display/TimeDisplay.hpp"
-#include "./Display/VPotDisplay.hpp"
-#include "./Display/VUDisplay.hpp"
-#include "./Display/Bitmaps/XBitmaps.h"
+#include "Display/NoteDisplay.hpp"
+#include "Display/SelectorDisplay.hpp"
+#include "Display/TimeDisplay.hpp"
+#include "Display/VPotDisplay.hpp"
+#include "Display/VUDisplay.hpp"
+#include "Display/Bitmaps/XBitmaps.h"
 #endif
