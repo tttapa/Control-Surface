@@ -29,13 +29,13 @@ class ButtonMatrix : public MIDI_Control_Element {
      *          A 2D array of dimensions (nb_rows × nb_cols) containing the
      *          address for each button.
      * @param   channel
-     *          The MIDI channel [1, 16].
+     *          The MIDI channel. [1, 16]
      * @param   velocity
-     *          The velocity of the MIDI Note events [1, 127].
+     *          The velocity of the MIDI Note events. [1, 127]
      *
      * @note    The lists of pins are copied.
      *          The list of addresses is not copied. It should be a reference to
-     *          a 2-dimensional array. This means that initializing \c addresses
+     *          a 2-dimensional array. This means that initializing `addresses`
      *          with a brace-enclosed initializer list is not allowed.
      */
     ButtonMatrix(const pin_t (&rowPins)[nb_rows],
@@ -44,11 +44,9 @@ class ButtonMatrix : public MIDI_Control_Element {
                  uint8_t velocity = 0x7F);
     ~ButtonMatrix();
 
-  protected:
-    void update() override;
-
   private:
     void init();
+    void update() override;
 
     inline uint8_t positionToBits(uint8_t col, uint8_t row);
     inline uint8_t bitsToIndex(uint8_t bits);
@@ -72,4 +70,4 @@ class ButtonMatrix : public MIDI_Control_Element {
     uint8_t newChannelOffset = channelOffset;
 };
 
-#include "ButtonMatrix.tpp" // Template implementations
+#include "ButtonMatrix.ipp" // Template implementations
