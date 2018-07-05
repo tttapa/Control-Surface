@@ -51,12 +51,12 @@ void remove(Node *node, Node *&first, Node *&last) {
 /**
  * @brief   Move down the given node in a linked list.
  * 
- * For example: moving down node `B`:
+ * For example: moving down node `C`:
  * ```
  * Before:  ... → A → B → C → D → ...
  * After:   ... → A → C → B → D → ...
  * ```
- * @param   node
+ * @param   nodeC
  *          A pointer to the node to be moved down.
  * @param   first
  *          The pointer to the first node of the linked list.

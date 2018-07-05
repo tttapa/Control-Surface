@@ -7,41 +7,54 @@
 #include <usb_dev.h>
 #endif
 
-#if defined(USBCON) && !defined(CORE_TEENSY) // If the main MCU has a USB
-                                             // connection but is not a Teensy
+// If the main MCU has a USB connection but is not a Teensy
+#if defined(USBCON) && !defined(CORE_TEENSY)
 #include "MIDIUSB.h"
 #endif
 
-// If the main MCU has a USB connection (or is a Teensy)
+// If the main MCU has a USB connection or is a Teensy
 #if defined(USBCON) || defined(CORE_TEENSY)
+/**
+ * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI
+ *          connection.
+ * 
+ * @note    See the [MIDI over USB Wiki]
+ *          (https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB)
+ *          for more information. 
+ */
 class USBMIDI_Interface : public MIDI_Interface {
   public:
-    USBMIDI_Interface() : MIDI_Interface(parser) { ; }
+    /**
+     * @brief   Construct a new USBMIDI_Interface.
+     */
+    USBMIDI_Interface() : MIDI_Interface(parser) {}
 
-  protected:
+  private:
     USBMIDI_Parser parser;
 
 // If it's a Teensy board
 #if defined(CORE_TEENSY)
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
         usb_midi_write_packed((m >> 4) | ((m | c) << 8) | (d1 << 16) |
                               (d2 << 24));
     }
 
 // If the main MCU has a USB connection but is not a Teensy
 #elif defined(USBCON)
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
         midiEventPacket_t msg = {(uint8_t)(m >> 4), (uint8_t)(m | c), d1, d2};
         MidiUSB.sendMIDI(msg);
         MidiUSB.flush();
     }
 #endif
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1) { sendImpl(m, c, d1, 0); }
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1) override {
+        sendImpl(m, c, d1, 0);
+    }
 
   public:
 // If it's a Teensy board
 #if defined(CORE_TEENSY)
-    MIDI_read_t read() {
+    MIDI_read_t read() override {
         while (1) {
             if (rx_packet == nullptr) { // If there's no previous packet
                 if (!usb_configuration) // Check USB configuration
@@ -82,7 +95,7 @@ class USBMIDI_Interface : public MIDI_Interface {
 
 // If the main MCU has a USB connection but is not a Teensy →  MIDIUSB library
 #elif defined(USBCON)
-    MIDI_read_t read() {
+    MIDI_read_t read() override {
         while (1) {
             midiEventPacket_t midipacket = MidiUSB.read();
             rx_packet = reinterpret_cast<uint8_t *>(&midipacket);
@@ -106,13 +119,26 @@ class USBMIDI_Interface : public MIDI_Interface {
 #endif
 };
 
-// If the main MCU doesn't have a USB connection
+// If the main MCU doesn't have a USB connection:
+// Fall back on Serial connection at the hardware MIDI baud rate.
+// (Can be used with HIDUINO or USBMidiKliK.)
 #else
 
 #include "SerialMIDI_Interface.h"
 
+/**
+ * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI
+ *          connection.
+ * 
+ * @note    See the [MIDI over USB Wiki]
+ *          (https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB)
+ *          for more information. 
+ */
 class USBMIDI_Interface : public USBSerialMIDI_Interface {
   public:
+    /**
+     * @brief   Construct a new USBMIDI_Interface.
+     */
     USBMIDI_Interface() : USBSerialMIDI_Interface(MIDI_BAUD){};
 };
 

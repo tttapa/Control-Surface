@@ -39,6 +39,7 @@ class MIDI_Input_Element : public MIDI_Element {
      *          for an element that does match it.
      */
     virtual bool updateWith(const MIDI_message_matcher &midimsg);
+
     /**
      * @brief   Write the internal of the element to its output.
      *
@@ -48,6 +49,7 @@ class MIDI_Input_Element : public MIDI_Element {
      *          MIDI_Input_Element::update).
      */
     virtual void display() = 0;
+
     /**
      * @brief   Check if the given incoming MIDI message matches the channel
      *          and address of this element.
@@ -63,6 +65,7 @@ class MIDI_Input_Element : public MIDI_Element {
      *          channel/address combination that this element is listening on.
      */
     virtual bool match(const MIDI_message_matcher &midimsg);
+
     /**
      * @brief   This function is executed when an incoming MIDI message matches
      *          this element, and it should update the internal state of this
@@ -81,6 +84,7 @@ class MIDI_Input_Element : public MIDI_Element {
      *          the internal state is not updated.
      */
     virtual bool updateImpl(const MIDI_message_matcher &midimsg) = 0;
+
     /**
      * @brief   Check if the given target address matches one of the addresses
      *          that this element is listening on.
@@ -93,6 +97,7 @@ class MIDI_Input_Element : public MIDI_Element {
      *          This element doesn't listen on the given target address.
      */
     bool matchAddress(uint8_t targetAddress);
+    
     /**
      * @brief   Check if the given target channel matches one of the channels
      *          that this element is listening on.
