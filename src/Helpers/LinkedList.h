@@ -1,7 +1,20 @@
 #pragma once
 
+/** 
+ * @brief   A namespace with linked list utility functions.
+ */
 namespace LinkedList {
 
+/**
+ * @brief   Append a node to a linked list.
+ * 
+ * @param   node
+ *          A pointer to the node to be appended.
+ * @param   first
+ *          The pointer to the first node of the linked list.
+ * @param   last
+ *          The pointer to the last node of the linked list.
+ */
 template <class Node>
 void append(Node *node, Node *&first, Node *&last) {
     if (first == nullptr)
@@ -13,6 +26,16 @@ void append(Node *node, Node *&first, Node *&last) {
     node->next = nullptr;
 }
 
+/**
+ * @brief   Remove a node from a linked list.
+ * 
+ * @param   node
+ *          A pointer to the node to be removed.
+ * @param   first
+ *          The pointer to the first node of the linked list.
+ * @param   last
+ *          The pointer to the last node of the linked list.
+ */
 template <class Node>
 void remove(Node *node, Node *&first, Node *&last) {
     if (node->previous != nullptr)
@@ -25,12 +48,23 @@ void remove(Node *node, Node *&first, Node *&last) {
         first = node->next;
 }
 
+/**
+ * @brief   Move down the given node in a linked list.
+ * 
+ * For example: moving down node `B`:
+ * ```
+ * Before:  ... → A → B → C → D → ...
+ * After:   ... → A → C → B → D → ...
+ * ```
+ * @param   node
+ *          A pointer to the node to be moved down.
+ * @param   first
+ *          The pointer to the first node of the linked list.
+ * @param   last
+ *          The pointer to the last node of the linked list.
+ */
 template <class Node>
 void moveDown(Node *nodeC, Node *&first, Node *&last) {
-    /*
-        Before: ... → A → B → C → D → ...
-        After:  ... → A → C → B → D → ...
-    */
     Node *nodeB = nodeC->previous;
     if (nodeB == nullptr) // Can't move first node further down
         return;
@@ -51,4 +85,4 @@ void moveDown(Node *nodeC, Node *&first, Node *&last) {
         last = nodeB;
 }
 
-};     // namespace LinkedList
+};

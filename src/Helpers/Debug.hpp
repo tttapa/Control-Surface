@@ -52,22 +52,43 @@ using std::uppercase;
 
 #define FUNC_LOCATION                                                          \
     '[' << __PRETTY_FUNCTION__ << F(" @ line " STR(__LINE__) "]:\t")
-#define LOCATION "[" __FILE__ ":" STR(__LINE__) "]:\t"
+#define LOCATION F("[" __FILE__ ":" STR(__LINE__) "]:\t")
 
 #ifdef DEBUG_OUT
 
 #pragma message("Debugging enabled on output " STR(DEBUG_OUT))
 
+/**
+ * @brief   If debugging is enabled, print the given data to the 
+ *          debug output stream.
+ * 
+ * @param   x
+ *          The data to be printed.
+ */
 #define DEBUG(x)                                                               \
     do {                                                                       \
         DEBUG_OUT << x << endl;                                                \
     } while (0)
 
+/**
+ * @brief   If debugging is enabled, print the filename and line number to the 
+ *          debug output stream, followed by the given data.
+ * 
+ * @param   x
+ *          The data to be printed.
+ */
 #define DEBUGREF(x)                                                            \
     do {                                                                       \
-        DEBUG_OUT << F(LOCATION) << x << endl;                                 \
+        DEBUG_OUT << LOCATION << x << endl;                                    \
     } while (0)
 
+/**
+ * @brief   If debugging is enabled, print the function name and line number to
+ *          the debug output stream, followed by the given data.
+ * 
+ * @param   x
+ *          The data to be printed.
+ */
 #define DEBUGFN(x)                                                             \
     do {                                                                       \
         DEBUG_OUT << FUNC_LOCATION << x << endl;                               \

@@ -29,9 +29,9 @@ const pin_t latchPin = 10; //Pin connected to ST_CP of 74HC595
 // There are 8 outputs in total
 ShiftRegisterOut ShiftReg(dataPin, clockPin, latchPin, MSBFIRST, 8);
 
-// Create a new instance of the class 'Analog', on pin A0,
+// Create a new instance of the class `CCPotentiometer`, on pin A0,
 // that sends MIDI messages with controller 7 (channel volume) on MIDI channel 1
-Analog potentiometer(A0, MIDI_CC::Channel_Volume, 1);
+CCPotentiometer potentiometer(A0, MIDI_CC::Channel_Volume, 1);
 
 // Create a new bank that has one track per bank
 Bank bank(1);
@@ -60,7 +60,7 @@ void setup() {
 /*_______________________________________________________________________________________________________________________________________*/
 
 void loop() {
-  // Refresh the MIDI controller (check whether the inputs have changed since last time, if so, send the new value over MIDI)
+  // Update the MIDI controller (check whether the inputs have changed since last time, if so, send the new value over MIDI)
   // It also refreshes the bank selector
-  Control_Surface.refresh();
+  Control_Surface.update();
 }

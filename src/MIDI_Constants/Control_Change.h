@@ -1,3 +1,7 @@
+
+/**
+ * @brief   Names and values for all MIDI Control Change Controller Numbers.
+ */
 namespace MIDI_CC {
 
 const uint8_t Bank_Select                       = 0x00;
@@ -96,6 +100,5 @@ const uint8_t Omni_Mode_Off                     = 0x7C;
 const uint8_t Omni_Mode_On                      = 0x7D;
 const uint8_t Mono_Mode_On                      = 0x7E;
 const uint8_t Poly_Mode_On                      = 0x7F;
-
 
 };

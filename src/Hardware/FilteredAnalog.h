@@ -25,14 +25,15 @@ class FilteredAnalog {
      *        The analog pin to read from.
      */
     FilteredAnalog(pin_t analogPin); // Constructor
+    
     /**
-     * @brief Specify a mapping function that is applied to the raw analog value
-     * before sending.
+     * @brief   Specify a mapping function that is applied to the raw 
+     *          analog value before sending.
      *
-     * @param fn
-     *        A function pointer to the mapping function. This function should
-     * take the 10-bit analog value as a parameter, and should return a 10-bit
-     * value.
+     * @param   fn
+     *          A function pointer to the mapping function. This function 
+     *          should take the 10-bit analog value as a parameter, and 
+     *          should return a 10-bit value.
      */
     void map(int (*fn)(int));
 
@@ -48,11 +49,11 @@ class FilteredAnalog {
     bool update();
 
     /**
-     * @brief Get the filtered value of the analog input.
+     * @brief   Get the filtered value of the analog input.
      *
-     * @return uint8_t
-     *         The filtered value of the analog input, as a 7-bit number. [0,
-     * 127] 0xFF if the update() has not been called yet.
+     * @return  The filtered value of the analog input, as a 7-bit number. 
+     *          [0, 127] 
+     * @return  0xFF if the update() has not been called yet.
      */
     uint8_t getValue();
 

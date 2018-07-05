@@ -55,9 +55,8 @@ class Button {
      *            RELEASED   FALLING   PRESSED   RISING
      * ```
      *
-     * @return State
-     *         The state of the button, either Button::PRESSED,
-     *         Button::RELEASED, Button::FALLING or Button::RISING.
+     * @return  The state of the button, either Button::PRESSED,
+     *          Button::RELEASED, Button::FALLING or Button::RISING.
      */
     State getState();
 

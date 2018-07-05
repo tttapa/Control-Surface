@@ -16,6 +16,8 @@
  *
  * [An in-depth explanation of the EMA filter]
  * (https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential%20Moving%20Average/)
+ * 
+ * Fixed-point integer arithmetic with a precision of @f$ 2K @f$ is used.
  *
  * @tparam  K
  *          The amount of bits to shift by. This determines the location
@@ -38,8 +40,7 @@ class EMA {
      *
      * @param   input
      *          The new raw input value.
-     * @return  int_t
-     *          The new filtered output value.
+     * @return  The new filtered output value.
      */
     int_t filter(int_t input);
 

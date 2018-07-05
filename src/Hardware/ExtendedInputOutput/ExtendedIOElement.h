@@ -74,8 +74,7 @@ class ExtendedIOElement {
      *          extended IO element.
      * @param   pin
      *          The zero-based physical pin number of this IO element.
-     * @return  pin_t
-     *          The global, unique extended IO pin number for the given pin.
+     * @return  The global, unique extended IO pin number for the given pin.
      */
     pin_t pin(pin_t pin);
     /**
