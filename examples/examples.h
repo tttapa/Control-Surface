@@ -13,9 +13,9 @@
 */
 
 /**
- * @example Ex.16.SelectorPC.ino
+ * @example Ex.16.ProgramSelector.ino
  * 
- * This is an example of the SelectorPC class of the Control_Surface library.
+ * This is an example of the ProgramSelector class of the Control_Surface library.
  * 
  * Connect two push buttons between pins 11 and 12 and ground,
  * pull-up resistors are not necessary, because the internal ones will be used.

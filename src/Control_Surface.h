@@ -1,3 +1,11 @@
+/**
+ * @brief   The main header file that includes all Control-Surface header files.
+ * 
+ * @file    Control_Surface.h
+ * @author  Pieter Pas
+ * @date    2018-07-04
+ */
+
 #pragma once
 
 #include <Arduino.h> // For VSCode errors in examples
@@ -28,7 +36,7 @@
 #include "./Banks/Bank.h"
 #include "./Banks/BankSelector.h"
 
-#include "./Selectors/SelectorPC.h"
+#include "./Selectors/ProgramSelector.h"
 #include "./Selectors/Transposer.h"
 
 #include "./MIDI_Interfaces/USBMIDI_Interface.h"

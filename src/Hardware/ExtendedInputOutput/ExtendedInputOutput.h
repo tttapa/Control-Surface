@@ -29,7 +29,19 @@ const uint8_t INPUT = 0x0;
 const uint8_t OUTPUT = 0x1;
 const uint8_t INPUT_PULLUP = 0x2;
 
+/**
+ * @brief   A namespace with alternatives to the standard Arduino IO functions
+ *          that can be used with extended IO pin numbers.
+ */
 namespace ExtIO {
+/**
+ * @brief   Find the IO element of a given extended IO pin number. 
+ * 
+ * @param   pin
+ *          The extended IO pin number to find the IO element of.
+ * @return  ExtendedIOElement *
+ *          A pointer to the extended IO element that the given pin belongs to.
+ */
 extern ExtendedIOElement *getIOElementOfPin(pin_t pin);
 extern void pinMode(pin_t pin, uint8_t mode);
 extern void pinMode(int pin, uint8_t mode);

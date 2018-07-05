@@ -40,9 +40,10 @@ class FilteredAnalog {
      * @brief Read the analog input value, apply the mapping function, and
      * update the average.
      *
-     * @return bool
-     *         True if the value changed since last time it was updated, false
-     * otherwise.
+     * @return  true
+     *          The value changed since last time it was updated.
+     * @return  false
+     *          Otherwise.
      */
     bool update();
 
@@ -83,7 +84,8 @@ bool FilteredAnalog<PRECISION>::update() {
     input = filter.filter(input);     // apply a low-pass EMA filter
     uint8_t newValue =
         hysteresis.getOutputLevel(input); // map from the 10-bit analog input
-                                          // value to the 7-bit MIDI value
+                                          // value to the 7-bit MIDI value,
+                                          // applying hysteresis
     bool changed = newValue != value;
     value = newValue;
     return changed;

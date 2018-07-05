@@ -1,6 +1,18 @@
 #include "ExtendedIOElement.h"
 #include <Arduino.h>
 
+ExtendedIOElement::ExtendedIOElement(pin_t length) : length(length) {
+    LinkedList::append(this, first, last);
+
+    start = offset;
+    end = offset + length;
+    offset = end;
+}
+
+ExtendedIOElement::~ExtendedIOElement() {
+    LinkedList::remove(this, first, last);
+}
+
 pin_t ExtendedIOElement::pin(pin_t p) { return p + start; }
 
 pin_t ExtendedIOElement::getEnd() { return end; }

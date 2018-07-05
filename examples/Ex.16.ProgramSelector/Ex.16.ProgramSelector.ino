@@ -1,7 +1,7 @@
 /**
- * @example Ex.16.SelectorPC.ino
+ * @example Ex.16.ProgramSelector.ino
  * 
- * This is an example of the SelectorPC class of the Control_Surface library.
+ * This is an example of the ProgramSelector class of the Control_Surface library.
  * 
  * Connect two push buttons between pins 11 and 12 and ground,
  * pull-up resistors are not necessary, because the internal ones will be used.
@@ -20,12 +20,12 @@ const uint8_t channel = 1;
 // Patch Selector selecting patches 1, 2, 3 or 4 on MIDI channel 1,
 // increment patch number with button connected to pin 11, 
 // decrement patch number with button connected to pin 12
-SelectorPC sel( { 1, 2, 3, 4 }, channel, { 11, 12 } ); 
+ProgramSelector sel( { 1, 2, 3, 4 }, channel, { 11, 12 } ); 
 
 void setup() {} // Nothing to set up
 
 void loop() {
-  // Refresh the control surface, send a Program Change 
+  // Update the control surface, send a Program Change 
   // event when the patch number changes
-  Control_Surface.refresh(); 
+  Control_Surface.update(); 
 }

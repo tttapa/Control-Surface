@@ -13,6 +13,7 @@ ShiftRegisterOut::ShiftRegisterOut(pin_t dataPin, pin_t clockPin,
     stateBuffer = (uint8_t *)malloc(bufferLength);
     begin();
 }
+
 ShiftRegisterOut::~ShiftRegisterOut() { free(stateBuffer); }
 
 void ShiftRegisterOut::digitalWrite(pin_t pin, uint8_t val) {
@@ -65,6 +66,7 @@ int8_t ShiftRegisterOut::pinToBufferIndex(pin_t pin) {
         return INVALID_PIN;
     return pin >> 3; // pin / 8;
 }
+
 uint8_t ShiftRegisterOut::pinToBitMask(pin_t pin) {
     return 1 << (pin & 7); // 1 << (pin % 8);
 }

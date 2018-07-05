@@ -9,7 +9,7 @@
  * If blue LEDs light up when red ones should, either flip all the LEDs, or change the 
  * bit order in the ShiftRegisterOut constructor to 'MSBFIRST' instead fo 'LSBFIRST'.
  * 
- * <pre>
+ * ```
  * 10 >──────────────┬─────────────────────────────┬─────────────────────────────┐            
  *        ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓
  *        ┃        SH_CP         ┃      ┃        SH_CP         ┃      ┃        SH_CP         ┃
@@ -17,8 +17,7 @@
  *        ┃        ST_CP         ┃      ┃        ST_CP         ┃      ┃        ST_CP         ┃
  *        ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛
  * 11 >──────────────┴─────────────────────────────┴─────────────────────────────┘            
- * </pre>
- * 
+ * ```
  * The 8 LEDs represent 8 channels. A red LED indicates that the channel is muted, 
  * a green LED indicates that solo is enabled, and a blue LED indicates that the 
  * channel is armed for recording.

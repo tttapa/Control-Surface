@@ -60,7 +60,7 @@ for filename in sorted(os.listdir(inputdir)):
                           r'\1{}\2'.format(identifier),
                           contents)
         contents = re.sub(r'static unsigned char [a-zA-Z_][a-zA-Z0-9_]*(_bits\[\] *= *{ *(?:0x[0-9a-fA-F]{2}, *)*}?;?) *',
-                          r'static const PROGMEM uint8_t {}\1'.format(identifier),
+                          r'static const PROGMEM uint8_t {}\1'.format(identifier),  # @todo  should these be static?
                           contents)
         m = re.search(r'#define [a-zA-Z\d_]+_width\s+(?P<width>\d+)[\r\n\s]+#define [a-zA-Z\d_]+_height\s+(?P<height>\d+)', 
                       contents)

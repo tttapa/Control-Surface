@@ -9,6 +9,10 @@
 
 class Control_Surface_ {
   public:
+    /**
+     * @brief   Return the static Control_Surface_ instance.
+     *          (Control_Surface_ is a singleton.)
+     */
     static Control_Surface_ &getInstance();
     Control_Surface_(Control_Surface_ const &) = delete;
     void operator=(Control_Surface_ const &) = delete;
@@ -22,13 +26,28 @@ class Control_Surface_ {
      * @brief Update all MIDI elements, send MIDI events and read MIDI input.
      */
     void update();
+    /**
+     * @brief   Get the MIDI interface of the Control Surface.
+     * 
+     * @return  A pointer to the Control Surface's MIDI interface.
+     */
     MIDI_Interface *MIDI();
 
   private:
+    /**
+     * @brief   Control_Surface_ is a singleton, so the constructor is private.
+     */
     Control_Surface_() {}
     MIDI_Interface *new_midi = nullptr;
     MIDI_Interface *midi = nullptr;
+    /**
+     * @brief   Update all MIDI_Control_Element%s.
+     */
     void updateControls();
+    /**
+     * @brief   Update all Selector%s (BankSelector%s, Transposer%s, 
+     *          ProgramSelector%s).
+     */
     void updateSelectors();
     void updateMidiInput();
     void updateInputs();

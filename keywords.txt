@@ -27,7 +27,7 @@ RotaryEncoder	KEYWORD1
 Bank	KEYWORD1
 BankSelector	KEYWORD1
 Transposer	KEYWORD1
-SelectorPC	KEYWORD1
+ProgramSelector	KEYWORD1
 
 ExtIO	KEYWORD1
 ExtendedIOElement	KEYWORD1

@@ -3,6 +3,9 @@
 #include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
 #include "../Settings/SettingsWrapper.h"
 
+/**
+ * @brief   A class for reading and debouncing buttons and switches.
+ */
 class Button {
   public:
     /**
@@ -18,7 +21,7 @@ class Button {
      * @brief Invert the state of all buttons (button pressed is HIGH instead of
      * LOW).
      *
-     * @note This impacts **all** Button objects.
+     * @note This affects **all** Button objects.
      */
     static void invert();
 
@@ -32,16 +35,16 @@ class Button {
      * @brief Get the state of the button.
      *
      * The button is debounced, the debounce time can be set in
-     * ../Settings/Settings.h.
-     * 
+     * Settings.h: #BUTTON_DEBOUNCE_TIME.
+     *
      * ```
      * Debounce time: ├────┤
-     * 
+     *
      * Raw input:
      *    HIGH  ──────┐      ┌──────┐ ┌─┐      ┌─┐ ┌──────┐ ┌────────
      *    LOW         └──────┘      └─┘ └──────┘ └─┘      └─┘
-     *                ├────┤        ├─┼─┼────┤ ├─┼─┼────┤ ├─┼────┤
-     * 
+     *                ├────┤ ├────┤ ├─┼─┼────┤ ├─┼─┼────┤ ├─┼────┤
+     *
      * Debounced output:
      *    HIGH  ──────┐      ┌──────┐          ┌──────────┐      ┌───
      *    LOW         └──────┘      └──────────┘          └──────┘
@@ -50,8 +53,8 @@ class Button {
      *    HIGH  ────────────────┐                  ┌─────────────────
      *    LOW                   └──────────────────┘
      *            RELEASED   FALLING   PRESSED   RISING
-     * ```  
-     * 
+     * ```
+     *
      * @return State
      *         The state of the button, either Button::PRESSED,
      *         Button::RELEASED, Button::FALLING or Button::RISING.
@@ -67,6 +70,6 @@ class Button {
 
     static bool invertState;
 
-    constexpr static unsigned long debounceTime =
-        BUTTON_DEBOUNCE_TIME; // Edit this in ../Settings/Settings.h
+    // Edit this in ../Settings/Settings.h
+    constexpr static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
 };
