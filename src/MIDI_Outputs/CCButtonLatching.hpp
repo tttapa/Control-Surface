@@ -12,6 +12,7 @@
  * @see     Button
  */
 class CCButtonLatching : public DigitalCCOut {
+  public:
     /**
      * @brief   Construct a new CCButtonLatching.
      * 
@@ -30,7 +31,7 @@ class CCButtonLatching : public DigitalCCOut {
      *          [0, 127]
      */
     CCButtonLatching(pin_t pin, uint8_t address, uint8_t channel,
-                  uint8_t offValue = 0, uint8_t onValue = 127)
+                     uint8_t offValue = 0, uint8_t onValue = 127)
         : DigitalCCOut(address, channel, offValue, onValue), button{pin} {}
 
   private:
