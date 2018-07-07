@@ -91,9 +91,9 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
      * 
      * @param   hex
      *          The hexadecimal character to check.
-     * @param   true
+     * @return  true
      *          The character is a lowercase hexadecimal digit.
-     * @param   false
+     * @return  false
      *          The character is not a lowercase hexadecimal digit.
      */
     bool isHexChar(char hex) {

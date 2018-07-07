@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Hardware/Button.h"
-#include "Abstract/NoteOut.h"
+#include "../Control_Surface/Control_Surface_Class.h"
+#include "Abstract/MIDIButton.hpp"
 
 /**
  * @brief   A class for momentary push buttons that send MIDI Note events.
@@ -10,7 +10,7 @@
  * 
  * @see     Button
  */
-class NoteButton : public NoteOut {
+class NoteButton : public MIDIButton {
   public:
     /**
      * @brief   Construct a new NoteButton.
@@ -27,16 +27,22 @@ class NoteButton : public NoteOut {
      */
     NoteButton(pin_t pin, uint8_t address, uint8_t channel,
                uint8_t velocity = 127)
-        : NoteOut(address, channel, velocity), button{pin} {}
+        : MIDIButton(pin), address(address), channel(channel),
+          velocity(velocity) {}
 
   private:
-    void refresh() {
-        Button::State state = button.getState();
-        if (state == Button::Falling)
-            sendOn();
-        else if (state == Button::Rising)
-            sendOff();
+    void sendOn() const override {
+        Control_Surface.MIDI()->send(
+            NOTE_ON, channel + channelOffset * tracksPerBank,
+            address + addressOffset * tracksPerBank, velocity);
+    }
+    void sendOff() const override {
+        Control_Surface.MIDI()->send(
+            NOTE_OFF, channel + channelOffset * tracksPerBank,
+            address + addressOffset * tracksPerBank, velocity);
     }
 
-    Button button;
+    const uint8_t address;
+    const uint8_t channel;
+    uint8_t velocity;
 };

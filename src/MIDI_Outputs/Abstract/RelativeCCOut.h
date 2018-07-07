@@ -15,7 +15,7 @@ enum relativeCCmode { TWOS_COMPLEMENT, BINARY_OFFSET, SIGN_MAGNITUDE };
 class RelativeCCOut : public MIDI_Control_Element {
   public:
     RelativeCCOut(uint8_t controllerNumber, uint8_t channel,
-                  relativeCCmode mode = TWOS_COMPLEMENT); // Constructor
+                  relativeCCmode mode = TWOS_COMPLEMENT);
 
     /** Convert an 8-bit two's complement integer to a 7-bit two's complement
      *  integer. */
@@ -28,13 +28,11 @@ class RelativeCCOut : public MIDI_Control_Element {
     static uint8_t mapRelativeCC(int8_t value, relativeCCmode mode);
 
   protected:
-    virtual void refresh() = 0;
     void send(long delta);
 
   private:
-    /** Check if the encoder position has changed since last
-     *  time, if so, send the relative movement over MIDI. */
-    void update() override;
+    virtual void refresh() = 0;
+    void update() final override;
     uint8_t controllerNumber, channel;
     relativeCCmode mode;
 };

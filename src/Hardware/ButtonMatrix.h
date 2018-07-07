@@ -4,7 +4,7 @@
 
 /**
  * @brief   A MIDI_Control_Element that reads the states of a button matrix and
- *          sends it over MIDI as a series of Note events.
+ *          sends it over MIDI.
  *
  * @tparam  nb_rows
  *          The number of rows in the button matrix.

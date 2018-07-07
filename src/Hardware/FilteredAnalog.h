@@ -51,19 +51,21 @@ class FilteredAnalog {
     /**
      * @brief   Get the filtered value of the analog input.
      *
-     * @return  The filtered value of the analog input, as a 7-bit number. 
-     *          [0, 127] 
-     * @return  0xFF if the update() has not been called yet.
+     * @return  The filtered value of the analog input, as a number
+     *          of `PRECISION` bits wide. 
+     * @return  0xFFFF if the update() has not been called yet.
      */
-    uint8_t getValue();
+    uint16_t getValue();
 
   private:
     const pin_t analogPin;
+
     int (*mapFn)(int) = nullptr;
+
     EMA<ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE> filter;
     Hysteresis<ADC_BITS - PRECISION> hysteresis;
 
-    uint8_t value = 0xFF;
+    uint16_t value = 0xFFFF;
 };
 
 // ------------------------ Implementations ------------------------ //
@@ -83,7 +85,7 @@ bool FilteredAnalog<PRECISION>::update() {
     if (mapFn != nullptr)             // if a map function is specified
         input = mapFn(input);         // apply the map function to the value
     input = filter.filter(input);     // apply a low-pass EMA filter
-    uint8_t newValue =
+    uint16_t newValue =
         hysteresis.getOutputLevel(input); // map from the 10-bit analog input
                                           // value to the 7-bit MIDI value,
                                           // applying hysteresis
@@ -93,7 +95,7 @@ bool FilteredAnalog<PRECISION>::update() {
 }
 
 template <uint8_t PRECISION>
-uint8_t FilteredAnalog<PRECISION>::getValue() {
+uint16_t FilteredAnalog<PRECISION>::getValue() {
     return value;
 }
 

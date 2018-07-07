@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Hardware/Button.h"
-#include "Abstract/NoteOut.h"
+#include "../Control_Surface/Control_Surface_Class.h"
+#include "Abstract/MIDIButtonLatching.hpp"
 
 /**
  * @brief   A class for latching buttons and switches that send MIDI Note 
@@ -11,7 +11,7 @@
  * 
  * @see     Button
  */
-class NoteButtonLatching : public NoteOut {
+class NoteButtonLatching : public MIDIButtonLatching {
   public:
     /**
      * @brief   Construct a new NoteButtonLatching.
@@ -28,16 +28,22 @@ class NoteButtonLatching : public NoteOut {
      */
     NoteButtonLatching(pin_t pin, uint8_t address, uint8_t channel,
                        uint8_t velocity = 127)
-        : NoteOut(address, channel, velocity), button{pin} {}
+        : MIDIButtonLatching(pin), address(address), channel(channel),
+          velocity(velocity) {}
 
   private:
-    void refresh() {
-        Button::State state = button.getState();
-        if (state == Button::Falling || state == Button::Rising) {
-            sendOn();
-            sendOff();
-        }
+    void sendOn() const override {
+        Control_Surface.MIDI()->send(
+            NOTE_ON, channel + channelOffset * tracksPerBank,
+            address + addressOffset * tracksPerBank, velocity);
+    }
+    void sendOff() const override {
+        Control_Surface.MIDI()->send(
+            NOTE_OFF, channel + channelOffset * tracksPerBank,
+            address + addressOffset * tracksPerBank, velocity);
     }
 
-    Button button;
+    const uint8_t address;
+    const uint8_t channel;
+    uint8_t velocity;
 };

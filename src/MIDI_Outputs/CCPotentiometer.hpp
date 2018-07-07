@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Hardware/FilteredAnalog.h"
-#include "Abstract/CCOut.h"
+#include "../Control_Surface/Control_Surface_Class.h"
+#include "Abstract/MIDIFilteredAnalog.hpp"
 
 /**
  * @brief   A class for potentiometers and faders that send 7-bit MIDI
@@ -11,7 +11,7 @@
  * 
  * @see     FilteredAnalog
  */
-class CCPotentiometer : public CCOut {
+class CCPotentiometer : public MIDIFilteredAnalog<7> {
   public:
     /**
      * @brief   Construct a new CCPotentiometer.
@@ -25,13 +25,15 @@ class CCPotentiometer : public CCOut {
      *          The MIDI Channel. [1, 16]
      */
     CCPotentiometer(pin_t analogPin, uint8_t address, uint8_t channel)
-        : CCOut(address, channel), filteredAnalog{analogPin} {}
+        : MIDIFilteredAnalog(analogPin), address(address), channel(channel) {}
 
   private:
-    void refresh() {
-        if (filteredAnalog.update())
-            send(filteredAnalog.getValue());
+    void send(uint16_t value) const final override {
+        Control_Surface.MIDI()->send(
+            CONTROL_CHANGE, channel + channelOffset * tracksPerBank,
+            address + addressOffset * tracksPerBank, value);
     }
 
-    FilteredAnalog<7> filteredAnalog; // 7 bits of precision
+    const uint8_t address;
+    const uint8_t channel;
 };

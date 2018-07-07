@@ -7,9 +7,6 @@
  * A class for MIDI_Control_Element%s that send MIDI notes.
  */
 class DigitalMIDIOut : public MIDI_Control_Element {
-  public:
-    void setVelocity(uint8_t velocity);
-
   private:
     /**
      * @brief   Update the channel and address offset and refresh the subclass

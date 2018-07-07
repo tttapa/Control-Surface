@@ -1,24 +1,20 @@
 #pragma once
 
-#include "../Hardware/ButtonMatrix.h"
-#include "../Settings/SettingsWrapper.h"
-#include "Abstract/DigitalMIDIOut.h"
+#include "Abstract/MIDIButtonMatrix.hpp"
 
 /**
- * @brief   A class for MIDI_Control_Element%s that send MIDI notes on many
- *          different note numbers.
+ * @brief   A class for button matrices that send MIDI Note events.
  * 
  * @tparam  nb_rows
- *          The number of rows in the note matrix.
+ *          The number of rows in the button matrix.
  * @tparam  nb_cols
- *          The number of columns in the note matrix.
+ *          The number of columns in the button matrix.
  */
 template <size_t nb_rows, size_t nb_cols>
-class MatrixNoteOut : public DigitalMIDIOut,
-                      public ButtonMatrix<nb_rows, nb_cols> {
+class NoteButtonMatrix : public MIDIButtonMatrix<nb_rows, nb_cols> {
   public:
     /**
-     * @brief   Construct a new MatrixNoteOut object.
+     * @brief   Construct a new NoteButtonMatrix object.
      * 
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
@@ -40,19 +36,15 @@ class MatrixNoteOut : public DigitalMIDIOut,
      * @param   velocity
      *          The MIDI Note velocity. [1, 127]
      */
-    MatrixNoteOut(const pin_t (&rowPins)[nb_rows],
-                  const pin_t (&colPins)[nb_cols],
-                  const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel,
-                  uint8_t velocity = 0x7F); // Constructor
-
-    void setVelocity(uint8_t velocity);
-
-  protected:
-    void send(uint8_t row, uint8_t col, bool state);
-    void refresh() override;
+    NoteButtonMatrix(const pin_t (&rowPins)[nb_rows],
+                     const pin_t (&colPins)[nb_cols],
+                     const uint8_t (&addresses)[nb_rows][nb_cols],
+                     uint8_t channel, uint8_t velocity = 0x7F)
+        : MIDIButtonMatrix<nb_rows, nb_cols>(rowPins, colPins, addresses, channel),
+          velocity(velocity) {}
 
   private:
-    bool isActive() const override;
+    void send(uint8_t address, bool state) const final override {}
 
     uint8_t velocity;
 };

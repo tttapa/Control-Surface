@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Hardware/Button.h"
-#include "Abstract/CCOut.h"
+#include "../Control_Surface/Control_Surface_Class.h"
+#include "Abstract/MIDIButtonLatching.hpp"
 
 /**
  * @brief   A class for latching buttons and switches that send MIDI Controller 
@@ -11,7 +11,7 @@
  * 
  * @see     Button
  */
-class CCButtonLatching : public DigitalCCOut {
+class CCButtonLatching : public MIDIButtonLatching {
   public:
     /**
      * @brief   Construct a new CCButtonLatching.
@@ -32,16 +32,24 @@ class CCButtonLatching : public DigitalCCOut {
      */
     CCButtonLatching(pin_t pin, uint8_t address, uint8_t channel,
                      uint8_t offValue = 0, uint8_t onValue = 127)
-        : DigitalCCOut(address, channel, offValue, onValue), button{pin} {}
+        : MIDIButtonLatching(pin), address(address), channel(channel),
+          offValue(offValue), onValue(onValue) {}
 
   private:
-    void refresh() {
-        Button::State state = button.getState();
-        if (state == Button::Falling || state == Button::Rising) {
-            sendOn();
-            sendOff();
-        }
+    void sendOn() const override {
+        Control_Surface.MIDI()->send(
+            CONTROL_CHANGE, channel + channelOffset * tracksPerBank,
+            address + addressOffset * tracksPerBank, onValue);
     }
 
-    Button button;
+    void sendOff() const override {
+        Control_Surface.MIDI()->send(
+            CONTROL_CHANGE, channel + channelOffset * tracksPerBank,
+            address + addressOffset * tracksPerBank, onValue);
+    }
+
+    const uint8_t address;
+    const uint8_t channel;
+    const uint8_t offValue;
+    const uint8_t onValue;
 };

@@ -4,7 +4,7 @@
 
 using namespace ExtIO;
 
-template <size_t nb_rows, size_t nb_cols>
+template <uint8_t nb_rows, uint8_t nb_cols>
 ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const pin_t (&rowPins)[nb_rows],
                                              const pin_t (&colPins)[nb_cols]) {
     // Note: this copies the data of rowPins and colPins, regardless of whether
@@ -18,13 +18,13 @@ ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const pin_t (&rowPins)[nb_rows],
     init();
 }
 
-template <size_t nb_rows, size_t nb_cols>
+template <uint8_t nb_rows, uint8_t nb_cols>
 ButtonMatrix<nb_rows, nb_cols>::~ButtonMatrix() {
     delete[] prevStates;
 }
 
-template <size_t nb_rows, size_t nb_cols>
-void ButtonMatrix<nb_rows, nb_cols>::update() {
+template <uint8_t nb_rows, uint8_t nb_cols>
+void ButtonMatrix<nb_rows, nb_cols>::refresh() {
     unsigned long now = millis();
     // only update every 25 ms (crude software
     // debounce). Edit this in ../Settings/Settings.h
@@ -50,7 +50,7 @@ void ButtonMatrix<nb_rows, nb_cols>::update() {
     }
 }
 
-template <size_t nb_rows, size_t nb_cols>
+template <uint8_t nb_rows, uint8_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::init() {
     // Create an array of bytes where each bit represents
     // the state of one of the buttons
@@ -66,30 +66,30 @@ void ButtonMatrix<nb_rows, nb_cols>::init() {
         pinMode(rowPin, INPUT);
 }
 
-template <size_t nb_rows, size_t nb_cols>
+template <uint8_t nb_rows, uint8_t nb_cols>
 inline uint8_t ButtonMatrix<nb_rows, nb_cols>::positionToBits(uint8_t col,
                                                               uint8_t row) {
     // map from a 2D array of bits to a flat array of bits
     return col * nb_rows + row;
 }
 
-template <size_t nb_rows, size_t nb_cols>
+template <uint8_t nb_rows, uint8_t nb_cols>
 inline uint8_t ButtonMatrix<nb_rows, nb_cols>::bitsToIndex(uint8_t bits) {
     return bits >> 3; // bits / 8
 }
 
-template <size_t nb_rows, size_t nb_cols>
+template <uint8_t nb_rows, uint8_t nb_cols>
 inline uint8_t ButtonMatrix<nb_rows, nb_cols>::bitsToBitmask(uint8_t bits) {
     return 1 << (bits & 7); // bits % 8
 }
 
-template <size_t nb_rows, size_t nb_cols>
+template <uint8_t nb_rows, uint8_t nb_cols>
 bool ButtonMatrix<nb_rows, nb_cols>::getPrevState(uint8_t col, uint8_t row) {
     uint8_t bits = positionToBits(col, row);
     return !!(prevStates[bitsToIndex(bits)] & bitsToBitmask(bits));
 }
 
-template <size_t nb_rows, size_t nb_cols>
+template <uint8_t nb_rows, uint8_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::setPrevState(uint8_t col, uint8_t row,
                                                   bool state) {
     uint8_t bits = positionToBits(col, row);
@@ -99,7 +99,7 @@ void ButtonMatrix<nb_rows, nb_cols>::setPrevState(uint8_t col, uint8_t row,
         prevStates[bitsToIndex(bits)] &= ~bitsToBitmask(bits);
 }
 
-template <size_t nb_rows, size_t nb_cols>
+template <uint8_t nb_rows, uint8_t nb_cols>
 bool ButtonMatrix<nb_rows, nb_cols>::allReleased() {
     size_t nb_bytes = (nb_cols * nb_rows + 7) / 8;
     for (size_t i = 0; i < nb_bytes; i++) {
@@ -109,7 +109,7 @@ bool ButtonMatrix<nb_rows, nb_cols>::allReleased() {
     return true;
 }
 
-template <size_t nb_rows, size_t nb_cols>
-bool ButtonMatrix<nb_rows, nb_cols>::isActive() {
+template <uint8_t nb_rows, uint8_t nb_cols>
+bool ButtonMatrix<nb_rows, nb_cols>::isActive() const {
     return this->active;
 }

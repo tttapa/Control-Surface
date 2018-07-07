@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Hardware/FilteredAnalog.h"
-#include "Abstract/PBOut.h"
+#include "../Control_Surface/Control_Surface_Class.h"
+#include "Abstract/MIDIFilteredAnalog.hpp"
 
 /**
  * @brief   A class for potentiometers and faders that send 14-bit MIDI
@@ -16,7 +16,7 @@
  * 
  * @see     FilteredAnalog
  */
-class PBPotentiometer : public PBOut {
+class PBPotentiometer : public MIDIFilteredAnalog<8> {
   public:
     /**
      * @brief   Construct a new PBPotentiometer.
@@ -28,13 +28,15 @@ class PBPotentiometer : public PBOut {
      *          The MIDI Channel. [1, 16]
      */
     PBPotentiometer(pin_t analogPin, uint8_t channel)
-        : PBOut(channel), filteredAnalog{analogPin} {}
+        : MIDIFilteredAnalog(analogPin), channel(channel) {}
 
   private:
-    void refresh() {
-        if (filteredAnalog.update())
-            send(filteredAnalog.getValue() << 6);
+    void send(uint16_t value) const final override {
+        value = (value << (14-8)) | (value >> (8-(14-8))); // Convert from 8-bit to 14-bit number
+        Control_Surface.MIDI()->send(PITCH_BEND,
+                                     channel + channelOffset * tracksPerBank,
+                                     value & 0x7F, value >> 7);
     }
 
-    FilteredAnalog<8> filteredAnalog; // 8 bits of precision
+    const uint8_t channel;
 };
