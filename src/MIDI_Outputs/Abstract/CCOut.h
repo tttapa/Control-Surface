@@ -1,16 +1,15 @@
 #pragma once
 
 #include "../../Settings/SettingsWrapper.h"
-#include "../MIDI_Control_Element.h"
+#include "DigitalMIDIOut.h"
 
 /**
- * @brief
- * A class for MIDI_Control_Element%s that send MIDI Control Change
- * on/off values.
+ * @brief   A class for MIDI_Control_Element%s that send MIDI Control Change
+ *          on/off values.
  *
- * @see NoteOut
+ * @see     NoteOut
  */
-class DigitalCCOut : public MIDI_Control_Element {
+class DigitalCCOut : public DigitalMIDIOut {
   public:
     /**
      * @brief   Construct a new DigitalCCOut object.
@@ -27,27 +26,21 @@ class DigitalCCOut : public MIDI_Control_Element {
      *          (default = 127)
      */
     DigitalCCOut(uint8_t address, uint8_t channel, uint8_t offValue = 0,
-                 uint8_t onValue = 127); // Constructor
+                 uint8_t onValue = 127);
 
   protected:
     void sendOn();
     void sendOff();
-    virtual void refresh() = 0;
 
   private:
-    void update() override;
+    bool isActive() const final override;
 
     const uint8_t address;
     const uint8_t channel;
     const uint8_t offValue;
     const uint8_t onValue;
 
-    void setChannelOffset(uint8_t offset) override;
-    void setAddressOffset(uint8_t offset) override;
-
     bool active = false;
-    uint8_t newAddressOffset = addressOffset;
-    uint8_t newChannelOffset = channelOffset;
 };
 
 // -------------------------------------------------------------------------- //

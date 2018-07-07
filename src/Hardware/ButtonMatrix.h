@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h" // for pin_t
-#include "./MIDI_Control_Element.h"
 
 /**
  * @brief   A MIDI_Control_Element that reads the states of a button matrix and
@@ -12,8 +11,8 @@
  * @tparam  nb_cols
  *          The number of columns in the button matrix.
  */
-template <size_t nb_rows, size_t nb_cols>
-class ButtonMatrix : public MIDI_Control_Element {
+template <uint8_t nb_rows, uint8_t nb_cols>
+class ButtonMatrix {
   public:
     /**
      * @brief   Construct a new ButtonMatrix object.
@@ -25,28 +24,24 @@ class ButtonMatrix : public MIDI_Control_Element {
      *          A list of pin numbers connected to the columns of the button
      *          matrix. These pins will be used as inputs, and the internal
      *          pull-up resistor will be enabled.
-     * @param   addresses
-     *          A 2D array of dimensions (nb_rows × nb_cols) containing the
-     *          address for each button.
-     * @param   channel
-     *          The MIDI channel. [1, 16]
-     * @param   velocity
-     *          The velocity of the MIDI Note events. [1, 127]
-     *
-     * @note    The lists of pins are copied.
-     *          The list of addresses is not copied. It should be a reference to
-     *          a 2-dimensional array. This means that initializing `addresses`
-     *          with a brace-enclosed initializer list is not allowed.
+     * @note    The lists of pins are copied. This means that they can be 
+     *          initialized with a brace-enclosed initializer list.
      */
     ButtonMatrix(const pin_t (&rowPins)[nb_rows],
-                 const pin_t (&colPins)[nb_cols],
-                 const uint8_t (&addresses)[nb_rows][nb_cols], uint8_t channel,
-                 uint8_t velocity = 0x7F);
+                 const pin_t (&colPins)[nb_cols]);
+    /**
+     * @brief   Destructor.
+     */
     ~ButtonMatrix();
+
+  protected:
+    bool isActive() const;
 
   private:
     void init();
-    void update() override;
+    void refresh();
+
+    virtual void onButtonChanged(uint8_t row, uint8_t col, bool state) = 0;
 
     inline uint8_t positionToBits(uint8_t col, uint8_t row);
     inline uint8_t bitsToIndex(uint8_t bits);
@@ -55,19 +50,13 @@ class ButtonMatrix : public MIDI_Control_Element {
     void setPrevState(uint8_t col, uint8_t row, bool state);
     bool allReleased();
 
-    void setChannelOffset(uint8_t offset);
-    void setAddressOffset(uint8_t offset);
+    bool active;
 
     unsigned long prevRefresh = 0;
     uint8_t *prevStates = nullptr;
 
-    pin_t rowPins[nb_rows], colPins[nb_cols];
-
-    const uint8_t (&addresses)[nb_rows][nb_cols];
-    const uint8_t channel, velocity;
-
-    uint8_t newAddressOffset = addressOffset;
-    uint8_t newChannelOffset = channelOffset;
+    pin_t rowPins[nb_rows];
+    pin_t colPins[nb_cols];
 };
 
 #include "ButtonMatrix.ipp" // Template implementations

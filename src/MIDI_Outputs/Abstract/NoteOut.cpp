@@ -1,21 +1,10 @@
 #include "NoteOut.h"
 #include "../../Control_Surface/Control_Surface_Class.h"
 
-NoteOut::NoteOut(uint8_t address, uint8_t channel,
-                 uint8_t velocity) // Constructor
+NoteOut::NoteOut(uint8_t address, uint8_t channel, uint8_t velocity)
     : address(address), channel(channel), velocity(velocity) {}
 
 void NoteOut::setVelocity(uint8_t velocity) { this->velocity = velocity; }
-
-// Check if the button state changed, and send a MIDI
-// event accordingly
-void NoteOut::update() {
-    if (!active) {
-        addressOffset = newAddressOffset;
-        channelOffset = newChannelOffset;
-    }
-    refresh();
-}
 
 void NoteOut::sendOn() {
     Control_Surface.MIDI()->send(
@@ -31,10 +20,4 @@ void NoteOut::sendOff() {
     this->active = false;
 }
 
-void NoteOut::setChannelOffset(uint8_t offset) {
-    this->newChannelOffset = offset;
-}
-
-void NoteOut::setAddressOffset(uint8_t offset) {
-    this->newAddressOffset = offset;
-}
+bool NoteOut::isActive() const { return this->active; }
