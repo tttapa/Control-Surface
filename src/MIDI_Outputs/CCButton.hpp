@@ -45,7 +45,7 @@ class CCButton : public MIDIButton {
     void sendOff() const override {
         Control_Surface.MIDI()->send(
             CONTROL_CHANGE, channel + channelOffset * tracksPerBank,
-            address + addressOffset * tracksPerBank, onValue);
+            address + addressOffset * tracksPerBank, offValue);
     }
 
     const uint8_t address;

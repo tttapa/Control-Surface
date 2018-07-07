@@ -25,7 +25,7 @@ class CCPotentiometer : public MIDIFilteredAnalog<7> {
      *          The MIDI Channel. [1, 16]
      */
     CCPotentiometer(pin_t analogPin, uint8_t address, uint8_t channel)
-        : MIDIFilteredAnalog(analogPin), address(address), channel(channel) {}
+        : MIDIFilteredAnalog<7>(analogPin), address(address), channel(channel) {}
 
   private:
     void send(uint16_t value) const final override {

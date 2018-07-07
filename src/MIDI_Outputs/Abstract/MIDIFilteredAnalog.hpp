@@ -38,7 +38,7 @@ class MIDIFilteredAnalog : public MIDI_Control_Element {
     
     void update() final override {
         if (filteredAnalog.update())
-            send(filteredAnalog.getValue() << 6);
+            send(filteredAnalog.getValue());
     }
 
     FilteredAnalog<PRECISION> filteredAnalog;
