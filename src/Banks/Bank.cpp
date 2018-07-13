@@ -8,18 +8,22 @@ Bank::Bank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
     }
 }
 
-void Bank::add(Bankable *bankable, bankType type) const {
-    add(*bankable, type);
-}
+void Bank::add(Bankable *bankable, bankType type) { add(*bankable, type); }
 
-void Bank::add(Bankable &bankable, bankType type) const {
+void Bank::add(Bankable &bankable, bankType type) {
+    LinkedList::append(&bankable, first, last);
     bankable.setBank(this, type);
 }
 
 void Bank::setBankSetting(uint8_t bankSetting) {
     this->bankSetting = bankSetting;
+    first->onBankSettingChangeAll();
 }
 
 uint8_t Bank::getBankSetting() const { return bankSetting; }
 
 uint8_t Bank::getTracksPerBank() const { return tracksPerBank; }
+
+void Bank::remove(Bankable *bankable) {
+    LinkedList::remove(bankable, first, last);
+}

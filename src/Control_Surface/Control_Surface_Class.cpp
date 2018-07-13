@@ -22,6 +22,9 @@ void Control_Surface_::begin() {
     }
 #if defined(DEBUG_OUT)
     DEBUG_OUT.begin(115200);
+    #if defined(PrintStream_h) && defined(ARDUINO)
+    DEBUG_OUT << leadingzeros;
+    #endif
 #endif
 }
 

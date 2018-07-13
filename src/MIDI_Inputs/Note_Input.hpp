@@ -71,5 +71,7 @@ class Note_Input_Bankable : public virtual Note_Input_Base, public Bankable {
                                       NUMBER_OF_BANKS);
     }
 
+    void onBankSettingChange() const override { display(); }
+
     uint8_t values[NUMBER_OF_BANKS] = {};
 };

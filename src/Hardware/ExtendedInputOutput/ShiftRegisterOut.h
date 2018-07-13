@@ -45,7 +45,8 @@ class ShiftRegisterOut : public ExtendedIOElement {
      * @brief   The pinMode function is not implemented because the mode is
      *          `OUTPUT` by definition.
      */
-    void pinMode(pin_t pin, uint8_t mode) override __attribute__((deprecated)) {}
+    void pinMode(pin_t pin, uint8_t mode) override __attribute__((deprecated)) {
+    }
 
     /**
      * @brief   Set the state of a given output pin.
@@ -67,17 +68,19 @@ class ShiftRegisterOut : public ExtendedIOElement {
     int digitalRead(pin_t pin) override;
 
     /**
-     * @brief   The analogRead function is not implemented because a shift
+     * @brief   The analogRead function is deprecated because a shift
      *          is always digital.
      */
-    analog_t analogRead(pin_t pin) override __attribute__((deprecated)) {}
+    analog_t analogRead(pin_t pin) override __attribute__((deprecated)) {
+        return digitalRead(pin);
+    }
 
     /**
      * @brief   The analogWrite function is not implemented because a shift
      *          is always digital.
      */
-    void analogWrite(pin_t pin, analog_t val) override __attribute__((deprecated)) {}
-
+    void analogWrite(pin_t pin, analog_t val) override
+        __attribute__((deprecated)) {}
 
     /**
      * @brief   Initialize the shift register.  

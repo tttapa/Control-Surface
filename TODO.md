@@ -12,4 +12,5 @@
 - Add motorized faders.
 - Make constructors of abstract classes protected.
 - Make destructors virtual if necessary.
+- GitHub template
 - Find and list all TODO's throughout the source code.

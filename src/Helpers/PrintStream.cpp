@@ -6,16 +6,16 @@
 
  /* #define OCT 8 */
 
-static uint8_t formatPrintStream = DEC;
-static bool boolalphaPrintStream = false;
-static bool leadingZerosPrintStream = true;
-static uint8_t precisionPrintStream = 2;
-static char byteSeparatorPrintStream = '\0';
+uint8_t formatPrintStream = DEC;
+bool boolalphaPrintStream = false;
+bool leadingZerosPrintStream = true;
+uint8_t precisionPrintStream = 2;
+char byteSeparatorPrintStream = '\0';
 enum : char{
     LOWERCASE = 0x7F,
     UPPERCASE = 0x5F
-} static casePrintStream = LOWERCASE;
-static bool showbasePrintStream = false;
+} casePrintStream = LOWERCASE;
+bool showbasePrintStream = false;
 
 template <class T>
 Print &printIntegral(Print &printer, T i);

@@ -22,31 +22,36 @@ RotaryEncoder enc               = {2, 3, 0x20,  1, speedMultiply, NORMAL_ENCODER
 
 Bank bank(4); // A bank with four channels
 BankSelector bankselector(bank, A2, LED_BUILTIN, BankSelector::MOMENTARY);
-
+  
 //-----------------------------------------------------------------------------------------------------
 
 Note_Input_Bankable_LED<2> note = { 0x10, 1, A3 };
 
-void setup() {
+void setup() { 
   // // bank.add(pbpot,      Bank::CHANGE_CHANNEL);
   // // bank.add(noteButton, Bank::CHANGE_ADDRESS);
   bank.add(note, Bank::CHANGE_ADDRESS);
   
   Control_Surface.begin();
   while(!Serial);
-  DEBUG(F("Size of CCPotentiometer =       ") << sizeof(CCPotentiometer)       << F(" bytes"));
-  DEBUG(F("Size of PBPotentiometer =       ") << sizeof(PBPotentiometer)       << F(" bytes"));
-  DEBUG(F("Size of NoteButton =            ") << sizeof(NoteButton)            << F(" bytes"));
-  DEBUG(F("Size of NoteButtonLatching =    ") << sizeof(NoteButtonLatching)    << F(" bytes"));
-  DEBUG(F("Size of CCButton =              ") << sizeof(CCButton)              << F(" bytes"));
-  DEBUG(F("Size of CCButtonLatching =      ") << sizeof(CCButtonLatching)      << F(" bytes"));
-  DEBUG(F("Size of RotaryEncoder =         ") << sizeof(RotaryEncoder)         << F(" bytes"));
-  DEBUG(F("Size of CCButtonMatrix<4,4> =   ") << sizeof(CCButtonMatrix<4,4>)   << F(" bytes"));
-  DEBUG(F("Size of NoteButtonMatrix<4,4> = ") << sizeof(NoteButtonMatrix<4,4>) << F(" bytes"));
+  DEBUG(F("Size of CCPotentiometer =             ") << sizeof(CCPotentiometer)            << F(" bytes"));
+  DEBUG(F("Size of PBPotentiometer =             ") << sizeof(PBPotentiometer)            << F(" bytes"));
+  DEBUG(F("Size of NoteButton =                  ") << sizeof(NoteButton)                 << F(" bytes"));
+  DEBUG(F("Size of NoteButtonLatching =          ") << sizeof(NoteButtonLatching)         << F(" bytes"));
+  DEBUG(F("Size of CCButton =                    ") << sizeof(CCButton)                   << F(" bytes"));
+  DEBUG(F("Size of CCButtonLatching =            ") << sizeof(CCButtonLatching)           << F(" bytes"));
+  DEBUG(F("Size of RotaryEncoder =               ") << sizeof(RotaryEncoder)              << F(" bytes"));
+  DEBUG(F("Size of CCButtonMatrix<4,4> =         ") << sizeof(CCButtonMatrix<4,4>)        << F(" bytes"));
+  DEBUG(F("Size of NoteButtonMatrix<4,4> =       ") << sizeof(NoteButtonMatrix<4,4>)      << F(" bytes"));
+  DEBUG("");     
+  DEBUG(F("Size of Bank =                        ") << sizeof(Bank)                       << F(" bytes"));
+  DEBUG(F("Size of BankSelector =                ") << sizeof(BankSelector)               << F(" bytes"));
   DEBUG("");
-  DEBUG(F("Size of Bank =                  ") << sizeof(Bank)                  << F(" bytes"));
-  DEBUG(F("Size of BankSelector =          ") << sizeof(BankSelector)          << F(" bytes"));
-  DEBUG(F("--------------------------------"                                      "--------") << endl);
+  DEBUG(F("Size of Note_Input_Bankable_LED<2> =  ") << sizeof(Note_Input_Bankable_LED<2>) << F(" bytes"));
+  DEBUG(F("Size of Note_Input_Bankable<2> =      ") << sizeof(Note_Input_Bankable<2>)     << F(" bytes"));
+  DEBUG(F("Size of Note_Input_LED =              ") << sizeof(Note_Input_LED)             << F(" bytes"));
+  DEBUG(F("Size of Note_Input =                  ") << sizeof(Note_Input)                 << F(" bytes"));
+  DEBUG(F("--------------------------------------"                                           "--------") << endl);
 }
 
 //-----------------------------------------------------------------------------------------------------

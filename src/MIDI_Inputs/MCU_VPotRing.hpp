@@ -31,6 +31,7 @@ class MCU_VPotRing_Base : public MIDI_Input_CC {
         case 3:
             return maximum(5 - value, 0);
         }
+        return 0; // Shouldn't happen, just keeps the compiler happy.
     }
 
     uint8_t getStartOff() const {
@@ -45,6 +46,7 @@ class MCU_VPotRing_Base : public MIDI_Input_CC {
         case 3:
             return minimum(6 + value, 11);
         }
+        return 0; // Shouldn't happen, just keeps the compiler happy.
     }
 
   protected:
@@ -108,5 +110,6 @@ class MCU_VPotRing_Bankable : public virtual MCU_VPotRing_Base,
         return values[getBankSetting() % NUMBER_OF_BANKS];
     }
 
+    void onBankSettingChange() const override { display(); }
     uint8_t values[NUMBER_OF_BANKS] = {};
 };

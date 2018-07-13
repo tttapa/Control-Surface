@@ -1,7 +1,8 @@
 #pragma once
 
-#include <stdint.h>
+#include "../Helpers/LinkedList.h"
 #include <stddef.h>
+#include <stdint.h>
 
 class Bankable;
 
@@ -93,7 +94,7 @@ class Bank {
      * @param   type
      *          Either change the MIDI channel or the address.
      */
-    void add(Bankable *bankable, bankType type = CHANGE_ADDRESS) const;
+    void add(Bankable *bankable, bankType type = CHANGE_ADDRESS);
 
     /**
      * @brief   Add a Bankable to the bank.
@@ -103,7 +104,7 @@ class Bank {
      * @param   type
      *          Either change the MIDI channel or the address.
      */
-    void add(Bankable &bankable, bankType type = CHANGE_ADDRESS) const;
+    void add(Bankable &bankable, bankType type = CHANGE_ADDRESS);
 
     /**
      * @brief   Add an array of Bankable%s to the bank.
@@ -121,7 +122,7 @@ class Bank {
      * @todo    Do I need the T template paramter?
      */
     template <class T, size_t N>
-    void add(T (&bankables)[N], bankType type = CHANGE_ADDRESS) const {
+    void add(T (&bankables)[N], bankType type = CHANGE_ADDRESS) {
         for (Bankable &bankable : bankables)
             add(bankable, type);
     }
@@ -138,7 +139,16 @@ class Bank {
 
     uint8_t getTracksPerBank() const;
 
+    void remove(Bankable *bankable);
+
   private:
     const uint8_t tracksPerBank;
     uint8_t bankSetting = 0;
+    Bankable *first = nullptr;
+    Bankable *last = nullptr;
+
+    template <class Node>
+    friend void LinkedList::append(Node *, Node *&, Node *&);
+    template <class Node>
+    friend void LinkedList::remove(Node *, Node *&, Node *&);
 };

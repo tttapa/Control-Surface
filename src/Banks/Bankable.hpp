@@ -5,6 +5,8 @@
 
 class Bankable {
   public:
+    virtual ~Bankable() { bank->remove(this); }
+
     uint8_t getChannel(uint8_t baseChannel) const {
         return baseChannel + getChannelsPerBank() * getBankSetting();
     }
@@ -17,7 +19,7 @@ class Bankable {
 
     uint8_t getChannelsPerBank() const { return channelsPerBank; }
 
-    void setBank(const Bank *bank, Bank::bankType type) {
+    void setBank(Bank *bank, Bank::bankType type) {
         if (this->bank != nullptr) {
             DEBUGFN(F("Error: This Bankable already has a Bank."));
             ERROR(return );
@@ -56,6 +58,11 @@ class Bankable {
 
     uint8_t getBankSetting() const { return bank->getBankSetting(); }
 
+    void onBankSettingChangeAll() const {
+        for (const Bankable *e = this; e; e = e->next)
+            e->onBankSettingChange();
+    }
+
   protected:
     bool matchAddress(uint8_t targetAddress, uint8_t baseAddress,
                       uint8_t numberOfBanks) const {
@@ -84,7 +91,16 @@ class Bankable {
     }
 
   private:
-    const Bank *bank = nullptr;
+    Bank *bank = nullptr;
+    Bankable *next = nullptr;
+    Bankable *previous = nullptr;
     uint8_t channelsPerBank = 0;
     uint8_t addressesPerBank = 0;
+
+    virtual void onBankSettingChange() const {}
+
+    template <class Node>
+    friend void LinkedList::append(Node *, Node *&, Node *&);
+    template <class Node>
+    friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
