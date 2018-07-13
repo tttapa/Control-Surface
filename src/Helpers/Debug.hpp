@@ -64,8 +64,6 @@ using std::uppercase;
 
 #ifdef DEBUG_OUT
 
-#pragma message("Debugging enabled on output " STR(DEBUG_OUT))
-
 /**
  * @brief   If debugging is enabled, print the given data to the 
  *          debug output stream.
