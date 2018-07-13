@@ -59,7 +59,7 @@ class MCU_7SegmentDisplay : public MIDI_Input_CC, public Printable {
         if (end > LENGTH)
             end = LENGTH;
         for (uint8_t i = offset; i < end; i++)
-            buffer[i] = getCharacterAt(index);
+            buffer[i] = getCharacterAt(i);
         buffer[end] = '\0';
     }
 
