@@ -87,8 +87,8 @@ bool FilteredAnalog<PRECISION>::update() {
     input = filter.filter(input);     // apply a low-pass EMA filter
     uint16_t newValue =
         hysteresis.getOutputLevel(input); // map from the 10-bit analog input
-                                          // value to the 7-bit MIDI value,
-                                          // applying hysteresis
+                                          // value to a value of `PRECISION` 
+                                          // bits wide, applying hysteresis
     bool changed = newValue != value;
     value = newValue;
     return changed;

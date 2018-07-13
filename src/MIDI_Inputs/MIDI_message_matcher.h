@@ -2,8 +2,7 @@
 
 #include "../MIDI_Parsers/MIDI_Parser.h"
 
-struct MIDI_message_matcher
-{
+struct MIDI_message_matcher {
     MIDI_message_matcher(uint8_t type, uint8_t channel, uint8_t data1, uint8_t data2)
         : type(type),
           channel(channel),

@@ -1,47 +1,25 @@
 #include "Bank.h"
+#include "Bankable.hpp"
 
-Bank::Bank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {}
-
-Bank::~Bank() {
-  MIDI_Element_list_node *element = firstMIDI_Element;
-  while (element != nullptr) {
-    MIDI_Element_list_node *next = element->next;
-    delete element;
-    element = next;
-  }
+Bank::Bank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
+    if (tracksPerBank == 0) {
+        DEBUGFN(F("Error: A Bank must have a non-zero number of tracks."));
+        FATAL_ERROR;
+    }
 }
 
-void Bank::add(MIDI_Element *element, bankType type) {
-  element->settracksPerBank(tracksPerBank);
-
-  MIDI_Element_list_node *newElement = new MIDI_Element_list_node;
-  newElement->element = element;
-  newElement->next = nullptr;
-  newElement->type = type;
-  if (firstMIDI_Element == nullptr)
-    firstMIDI_Element = newElement;
-  else
-    lastMIDI_Element->next = newElement;
-  lastMIDI_Element = newElement;
+void Bank::add(Bankable *bankable, bankType type) const {
+    add(*bankable, type);
 }
 
-void Bank::add(MIDI_Element &element, bankType type) { add(&element, type); }
+void Bank::add(Bankable &bankable, bankType type) const {
+    bankable.setBank(this, type);
+}
 
 void Bank::setBankSetting(uint8_t bankSetting) {
-  MIDI_Element_list_node *element = firstMIDI_Element;
-  while (element != nullptr) {
-    if (element->type == CHANGE_CHANNEL)
-      element->element->setChannelOffset(bankSetting);
-    else
-      element->element->setAddressOffset(bankSetting);
-    element = element->next;
-  }
+    this->bankSetting = bankSetting;
 }
 
-void Bank::map(int (*fn)(int)) {
-  MIDI_Element_list_node *element = firstMIDI_Element;
-  while (element != nullptr) {
-    element->element->map(fn);
-    element = element->next;
-  }
-}
+uint8_t Bank::getBankSetting() const { return bankSetting; }
+
+uint8_t Bank::getTracksPerBank() const { return tracksPerBank; }

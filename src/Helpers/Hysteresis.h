@@ -10,14 +10,14 @@
  *
  * <b>An example for `BITS` = 7 and an input from 0 to 1023</b>
  * ```
- *    7                                                 ┌───◄───┬──────
- * o  6                                         ┌───◄───┼───►───┘
- * u  5                                 ┌───◄───┼───►───┘
- * t  4                         ┌───◄───┼───►───┘
- * p  3                 ┌───◄───┼───►───┘
- * u  2         ┌───◄───┼───►───┘
- * t  1 ┌───◄───┼───►───┘
- *    0 └───►───┘
+ *    7                                                     ┌───◄───┬───
+ * o  6                                             ┌───◄───┼───►───┘
+ * u  5                                     ┌───◄───┼───►───┘
+ * t  4                             ┌───◄───┼───►───┘
+ * p  3                     ┌───◄───┼───►───┘
+ * u  2             ┌───◄───┼───►───┘
+ * t  1     ┌───◄───┼───►───┘
+ *    0 ────┴───►───┘
  *      0      128     256     384     512     640     768     896    1023
  *                                i n p u t
  * ```
@@ -41,15 +41,16 @@ class Hysteresis {
   private:
     uint8_t previousLevel = 0;
     constexpr static uint8_t margin = (1 << BITS) - 1;
+    constexpr static uint8_t offset = 1 << (BITS - 1);
 };
 
-// ------------ Implementation ------------ //
+// ----------------------------- Implementation ----------------------------- //
 
 template <uint8_t BITS>
 inline uint16_t Hysteresis<BITS>::getOutputLevel(uint16_t inputLevel) {
-    uint16_t previousLevelFull = (uint16_t)previousLevel << BITS;
+    uint16_t previousLevelFull = ((uint16_t)previousLevel << BITS) | offset;
     uint16_t lowerbound = previousLevelFull;
-    if (lowerbound > 0)
+    if (previousLevel > 0)
         lowerbound -= margin;
     uint16_t upperbound = previousLevelFull + margin;
     if (inputLevel < lowerbound || inputLevel > upperbound)

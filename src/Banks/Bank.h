@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../MIDI_Element.h"
+#include <stdint.h>
+#include <stddef.h>
+
+class Bankable;
 
 /**
  * @brief   A class that groups MIDI_Element%s and allows the user to change
@@ -70,57 +73,59 @@ class Bank {
      */
     Bank(uint8_t tracksPerBank = 1);
 
-    /**
-     * @brief   Destructor.
-     */
-    ~Bank();
     enum bankType {
-    /**
-     * @brief   Change the offset of the channel number of the MIDI_Element.
-     */
+        /**
+         * @brief   Change the offset of the channel number of the Bankable.
+         */
         CHANGE_CHANNEL,
-    /**
-     * @brief   Change the offset of the address (i.e. Controller number or 
-     *          Note number) of the MIDI_Element.
-     */
+        /**
+         * @brief   Change the offset of the address (i.e. Controller number or 
+         *          Note number) of the MIDI_Element.
+         */
         CHANGE_ADDRESS
     };
+
     /**
-     * @brief   Add a MIDI_Element to the bank.
+     * @brief   Add a Bankable to the bank.
      *
-     * @param   element
-     *          A pointer to the MIDI_Element to be added.
+     * @param   bankable
+     *          A pointer to the Bankable to be added.
      * @param   type
      *          Either change the MIDI channel or the address.
      */
-    void add(MIDI_Element *element, bankType type = CHANGE_ADDRESS);
+    void add(Bankable *bankable, bankType type = CHANGE_ADDRESS) const;
+
     /**
-     * @brief   Add a MIDI_Element to the bank.
+     * @brief   Add a Bankable to the bank.
      *
-     * @param   element
-     *          The MIDI_Element to be added.
+     * @param   bankable
+     *          The Bankable to be added.
      * @param   type
      *          Either change the MIDI channel or the address.
      */
-    void add(MIDI_Element &element, bankType type = CHANGE_ADDRESS);
+    void add(Bankable &bankable, bankType type = CHANGE_ADDRESS) const;
+
     /**
-     * @brief   Add an array of MIDI_Element%s to the bank.
+     * @brief   Add an array of Bankable%s to the bank.
      *
      * @tparam  T
-     *          The type of the MIDI_Element%s.
+     *          The type of the Bankable%s.
      * @tparam  N
-     *          The number of MIDI_Element%s in the array.
+     *          The number of Bankable%s in the array.
      *
-     * @param   elements
-     *          An array of MIDI_Element%s to be added.
+     * @param   bankables
+     *          An array of Bankable%s to be added.
      * @param   type
-     *          Either change the MIDI channel or the address of the elements.
+     *          Either change the MIDI channel or the address of the bankables.
+     * 
+     * @todo    Do I need the T template paramter?
      */
     template <class T, size_t N>
-    void add(T (&elements)[N], bankType type = CHANGE_ADDRESS) {
-        for (size_t i = 0; i < N; i++)
-            add(elements[i], type);
+    void add(T (&bankables)[N], bankType type = CHANGE_ADDRESS) const {
+        for (Bankable &bankable : bankables)
+            add(bankable, type);
     }
+
     /**
      * @brief   Set the Bank Setting
      *
@@ -128,26 +133,12 @@ class Bank {
      *          The new Bank Setting.
      */
     void setBankSetting(uint8_t bankSetting);
-    /**
-     * @brief   Apply a mapping function to all Potentiometer elements
-     *          (CCPotentiometer and PBPotentiometer) in the bank.
-     * 
-     * @see     FilteredAnalog::map
-     *
-     * @param   fn
-     *          A pointer to the mapping function to be applied.
-     */
-    void map(int (*fn)(int));
+
+    uint8_t getBankSetting() const;
+
+    uint8_t getTracksPerBank() const;
 
   private:
     const uint8_t tracksPerBank;
-
-    struct MIDI_Element_list_node {
-        MIDI_Element *element;
-        MIDI_Element_list_node *next;
-        bankType type;
-    };
-
-    MIDI_Element_list_node *firstMIDI_Element = nullptr;
-    MIDI_Element_list_node *lastMIDI_Element = nullptr;
+    uint8_t bankSetting = 0;
 };

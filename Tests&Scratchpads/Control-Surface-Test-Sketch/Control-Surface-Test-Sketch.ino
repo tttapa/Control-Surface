@@ -11,23 +11,27 @@ const int speedMultiply = 1;
 PBPotentiometer pbpot           = {A0,          1};
 CCPotentiometer ccpot           = {A1,   0x00,  1};
 
-NoteButton noteButton           = {2,    0x10,  1};
-NoteButtonLatching noteSwitch   = {3,    0x11,  1};
-CCButton ccButton               = {5,    0x12,  1};
-CCButtonLatching ccSwitch       = {7,    0x13,  1};
+NoteButton noteButton           = {5,    0x10,  1};
+NoteButtonLatching noteSwitch   = {6,    0x11,  1};
+CCButton ccButton               = {7,    0x12,  1};
+CCButtonLatching ccSwitch       = {8,    0x13,  1};
 
-RotaryEncoder enc               = {1, 0, 0x20,  1, speedMultiply, NORMAL_ENCODER, TWOS_COMPLEMENT};
+RotaryEncoder enc               = {2, 3, 0x20,  1, speedMultiply, NORMAL_ENCODER, TWOS_COMPLEMENT};
 
 //-----------------------------------------------------------------------------------------------------
 
 Bank bank(4); // A bank with four channels
-BankSelector bankselector(bank, 11, LED_BUILTIN, BankSelector::TOGGLE);
+BankSelector bankselector(bank, A2, LED_BUILTIN, BankSelector::MOMENTARY);
 
 //-----------------------------------------------------------------------------------------------------
 
+Note_Input_Bankable_LED<2> note = { 0x10, 1, A3 };
+
 void setup() {
-  bank.add(pbpot,      Bank::CHANGE_CHANNEL);
-  bank.add(noteButton, Bank::CHANGE_ADDRESS);
+  // // bank.add(pbpot,      Bank::CHANGE_CHANNEL);
+  // // bank.add(noteButton, Bank::CHANGE_ADDRESS);
+  bank.add(note, Bank::CHANGE_ADDRESS);
+  
   Control_Surface.begin();
   while(!Serial);
   DEBUG(F("Size of CCPotentiometer =       ") << sizeof(CCPotentiometer)       << F(" bytes"));
@@ -48,5 +52,5 @@ void setup() {
 //-----------------------------------------------------------------------------------------------------
 
 void loop() {
-  Control_Surface.update();
+  Control_Surface.loop();
 }

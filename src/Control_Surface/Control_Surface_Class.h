@@ -25,7 +25,7 @@ class Control_Surface_ {
     /**
      * @brief Update all MIDI elements, send MIDI events and read MIDI input.
      */
-    void update();
+    void loop();
     /**
      * @brief   Get the MIDI interface of the Control Surface.
      * 

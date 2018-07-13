@@ -30,6 +30,7 @@ inline Print &operator<<(Print &printer, manipulator pf) {
 
 #include <iomanip>
 #include <iostream>
+
 using std::boolalpha;
 using std::cout;
 using std::dec;
@@ -45,7 +46,7 @@ using std::showbase;
 using std::uppercase;
 #define F(x) x
 
-#endif
+#endif // Arduino
 
 #define STR_HELPER(x) #x
 #define STR(x) STR_HELPER(x)
@@ -101,3 +102,24 @@ using std::uppercase;
 #define DEBUGFN(x)
 
 #endif
+
+#ifdef FATAL_ERRORS
+
+#define ERROR(x)                                                               \
+    do {                                                                       \
+        exit(1);                                                               \
+    } while (0)
+
+#else
+
+#define ERROR(x)                                                               \
+    do {                                                                       \
+        x;                                                                     \
+    } while (0)
+
+#endif
+
+#define FATAL_ERROR                                                            \
+    do {                                                                       \
+        exit(1);                                                               \
+    } while (0)

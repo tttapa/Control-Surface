@@ -10,4 +10,6 @@
 - Extension consistency.
 - Malloc → new.
 - Add motorized faders.
+- Make constructors of abstract classes protected.
+- Make destructors virtual if necessary.
 - Find and list all TODO's throughout the source code.
