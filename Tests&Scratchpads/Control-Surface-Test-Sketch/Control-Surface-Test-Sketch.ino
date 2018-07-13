@@ -4,7 +4,16 @@
 USBDebugMIDI_Interface udmi(115200);
 // USBMIDI_Interface umi;
 
-const int speedMultiply = 1;
+//-----------------------------------------------------------------------------------------------------
+
+const pin_t dataPin  = 11; //Pin connected to DS of 74HC595
+const pin_t clockPin = 13; //Pin connected to SH_CP of 74HC595
+const pin_t latchPin = 10; //Pin connected to ST_CP of 74HC595
+
+ShiftRegisterOut sr(dataPin, clockPin, latchPin, MSBFIRST, 8*3);
+const uint8_t ShiftRegisterOut::redBit = 2;
+const uint8_t ShiftRegisterOut::greenBit = 1;
+const uint8_t ShiftRegisterOut::blueBit = 0;
 
 //-----------------------------------------------------------------------------------------------------
 
@@ -16,24 +25,34 @@ NoteButtonLatching noteSwitch   = {6,    0x11,  1};
 CCButton ccButton               = {7,    0x12,  1};
 CCButtonLatching ccSwitch       = {8,    0x13,  1};
 
+const int speedMultiply = 1;
+
 RotaryEncoder enc               = {2, 3, 0x20,  1, speedMultiply, NORMAL_ENCODER, TWOS_COMPLEMENT};
 
 //-----------------------------------------------------------------------------------------------------
 
 Bank bank(4); // A bank with four channels
-BankSelector bankselector(bank, A2, LED_BUILTIN, BankSelector::MOMENTARY);
+BankSelector bankselector(bank, A2, 9, BankSelector::MOMENTARY);
   
 //-----------------------------------------------------------------------------------------------------
 
-Note_Input_Bankable_LED<2> note = { 0x10, 1, A3 };
+Note_Input_Bankable_LED<2> note = { 0x10, 1, sr.red(0) };
 
-void setup() { 
+void setup() {
   // // bank.add(pbpot,      Bank::CHANGE_CHANNEL);
   // // bank.add(noteButton, Bank::CHANGE_ADDRESS);
   bank.add(note, Bank::CHANGE_ADDRESS);
   
   Control_Surface.begin();
   while(!Serial);
+  DEBUG(F("Compiled at " __DATE__));
+  DEBUG(F("From " __FILE__));
+  DEBUG("");
+  DEBUG(F("Size of void * =                      ") << sizeof(void *)                     << F(" bytes"));
+  DEBUG(F("Size of int =                         ") << sizeof(int)                        << F(" bytes"));
+  DEBUG(F("Size of long =                        ") << sizeof(long)                       << F(" bytes"));
+  DEBUG(F("Size of double =                      ") << sizeof(double)                     << F(" bytes"));
+  DEBUG("");
   DEBUG(F("Size of CCPotentiometer =             ") << sizeof(CCPotentiometer)            << F(" bytes"));
   DEBUG(F("Size of PBPotentiometer =             ") << sizeof(PBPotentiometer)            << F(" bytes"));
   DEBUG(F("Size of NoteButton =                  ") << sizeof(NoteButton)                 << F(" bytes"));
@@ -47,10 +66,11 @@ void setup() {
   DEBUG(F("Size of Bank =                        ") << sizeof(Bank)                       << F(" bytes"));
   DEBUG(F("Size of BankSelector =                ") << sizeof(BankSelector)               << F(" bytes"));
   DEBUG("");
-  DEBUG(F("Size of Note_Input_Bankable_LED<2> =  ") << sizeof(Note_Input_Bankable_LED<2>) << F(" bytes"));
+  DEBUG(F("Size of Note_Input =                  ") << sizeof(Note_Input)                 << F(" bytes"));
   DEBUG(F("Size of Note_Input_Bankable<2> =      ") << sizeof(Note_Input_Bankable<2>)     << F(" bytes"));
   DEBUG(F("Size of Note_Input_LED =              ") << sizeof(Note_Input_LED)             << F(" bytes"));
-  DEBUG(F("Size of Note_Input =                  ") << sizeof(Note_Input)                 << F(" bytes"));
+  DEBUG(F("Size of Note_Input_Bankable_LED<2> =  ") << sizeof(Note_Input_Bankable_LED<2>) << F(" bytes"));
+  DEBUG("");
   DEBUG(F("--------------------------------------"                                           "--------") << endl);
 }
 

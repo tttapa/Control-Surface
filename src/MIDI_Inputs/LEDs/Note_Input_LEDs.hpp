@@ -12,7 +12,7 @@ class Note_Input_LED_Base : public virtual Note_Input_Base {
   private:
     void display() const override {
         DEBUGFN("");
-        ExtIO::digitalWrite(ledPin, getValue());
+        ExtIO::digitalWrite(ledPin, getValue() >= 64);
     }
 
   private:

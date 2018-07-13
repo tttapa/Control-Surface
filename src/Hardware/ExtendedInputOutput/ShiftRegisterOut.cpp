@@ -70,3 +70,7 @@ int8_t ShiftRegisterOut::pinToBufferIndex(pin_t pin) {
 uint8_t ShiftRegisterOut::pinToBitMask(pin_t pin) {
     return 1 << (pin & 7); // 1 << (pin % 8);
 }
+
+const uint8_t ShiftRegisterOut::redBit __attribute__((weak)) = 0;
+const uint8_t ShiftRegisterOut::greenBit __attribute__((weak))  = 1;
+const uint8_t ShiftRegisterOut::blueBit __attribute__((weak)) = 2;
