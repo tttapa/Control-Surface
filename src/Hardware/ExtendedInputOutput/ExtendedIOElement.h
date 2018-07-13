@@ -90,8 +90,10 @@ class ExtendedIOElement {
     ExtendedIOElement *getNext();
     static ExtendedIOElement *getFirst();
 
-  protected:
-    pin_t length, start, end;
+  private:
+    const pin_t length;
+    const pin_t start;
+    const pin_t end;
     static pin_t offset;
 
     ExtendedIOElement *next = nullptr, *previous = nullptr;

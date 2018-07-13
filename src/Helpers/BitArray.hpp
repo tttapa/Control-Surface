@@ -1,10 +1,13 @@
 #pragma once
 
+#include "Debug.hpp"
 #include <stdint.h>
 
 class BitArray {
   public:
-    BitArray(uint8_t size) { buffer = new uint8_t[(size + 7) / 8](); }
+    BitArray(uint8_t size) : bufferLength((size + 7) / 8) {
+        buffer = new uint8_t[bufferLength]();
+    }
 
     ~BitArray() { delete[] buffer; }
 
@@ -27,12 +30,34 @@ class BitArray {
             clear(bitIndex);
     }
 
+    uint8_t safeIndex(uint8_t byteIndex) const {
+        if (byteIndex >= getBufferLength()) {
+            DEBUGFN(F("Error: index out of bounds (")
+                    << (unsigned int)byteIndex << F(", length is ")
+                    << (unsigned int)getBufferLength() << ')');
+            ERROR(return getBufferLength() - 1);
+        }
+        return byteIndex;
+    }
+
+    inline uint8_t getByte(uint8_t byteIndex) const {
+        return buffer[byteIndex];
+        // return buffer[safeIndex(byteIndex)];
+    }
+
+    uint8_t getBufferLength() const { return bufferLength; }
+
   private:
-    inline uint8_t getBufferIndex(uint8_t bitIndex) { return bitIndex >> 3; }
-    inline uint8_t getBufferBit(uint8_t bitIndex) { return bitIndex & 0b111; }
-    inline uint8_t getBufferMask(uint8_t bitIndex) {
+    inline uint8_t getBufferIndex(uint8_t bitIndex) const {
+        return safeIndex(bitIndex >> 3); // bitIndex / 8
+    }
+    inline uint8_t getBufferBit(uint8_t bitIndex) const {
+        return bitIndex & 0b111; // bitIndex % 8
+    }
+    inline uint8_t getBufferMask(uint8_t bitIndex) const {
         return 1 << getBufferBit(bitIndex);
     }
 
-    uint8_t *buffer = nullptr;
+    const uint8_t bufferLength;
+    uint8_t *buffer;
 };

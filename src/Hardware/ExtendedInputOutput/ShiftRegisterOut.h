@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../Helpers/BitArray.hpp"
 #include "ExtendedIOElement.h"
 
 /**
@@ -36,10 +37,6 @@ class ShiftRegisterOut : public ExtendedIOElement {
      */
     ShiftRegisterOut(pin_t dataPin, pin_t clockPin, pin_t latchPin,
                      uint8_t bitOrder, pin_t length = 8);
-    /** 
-     * @brief   Destructor.
-     */
-    ~ShiftRegisterOut();
 
     /**
      * @brief   The pinMode function is not implemented because the mode is
@@ -76,11 +73,13 @@ class ShiftRegisterOut : public ExtendedIOElement {
     }
 
     /**
-     * @brief   The analogWrite function is not implemented because a shift
+     * @brief   The analogWrite function is not deprecated because a shift
      *          is always digital.
      */
     void analogWrite(pin_t pin, analog_t val) override
-        __attribute__((deprecated)) {}
+        __attribute__((deprecated)) {
+        digitalWrite(pin, val > 127);
+    }
 
     /**
      * @brief   Initialize the shift register.  
@@ -138,12 +137,10 @@ class ShiftRegisterOut : public ExtendedIOElement {
     const static uint8_t blueBit; // = 2;
 
   private:
-    pin_t dataPin, clockPin, latchPin;
-    uint8_t bitOrder, bufferLength;
+    const pin_t dataPin;
+    const pin_t clockPin;
+    const pin_t latchPin;
+    const uint8_t bitOrder;
 
-    uint8_t *stateBuffer = nullptr;
-
-    int8_t pinToBufferIndex(pin_t pin);
-    uint8_t pinToBitMask(pin_t pin);
-    constexpr static int8_t INVALID_PIN = -1;
+    BitArray buffer;
 };

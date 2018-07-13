@@ -5,6 +5,8 @@
 // #define DEBUG_OUT Serial // Uncomment this line to override Arduino IDE debug
 // level
 
+#include "../Settings/SettingsWrapper.h"
+
 #ifndef PRINTSTREAM_FALLBACK
 #include "PrintStream.h"
 #else
