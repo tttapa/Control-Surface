@@ -48,6 +48,11 @@ using std::showbase;
 using std::uppercase;
 #define F(x) x
 
+#ifdef DEBUG_OUT
+#undef DEBUG_OUT
+#define DEBUG_OUT cout
+#endif
+
 #endif // Arduino
 
 #define STR_HELPER(x) #x
