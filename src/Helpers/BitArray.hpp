@@ -1,15 +1,24 @@
 #pragma once
 
+#if defined(CORE_TEENSY) // || ... // TODO
+#define USE_UNIQUE_PTR // No extra memory usage on Teensy 3.2 using TD 1.41
+#endif
+
 #include "Debug.hpp"
 #include <stdint.h>
+#ifdef USE_UNIQUE_PTR
+#include <memory>
+#endif
 
 class BitArray {
   public:
-    BitArray(uint8_t size) : bufferLength((size + 7) / 8) {
-        buffer = new uint8_t[bufferLength]();
-    }
+    BitArray(uint8_t size)
+        : bufferLength{(uint8_t)((size + 7) / 8)},
+          buffer{new uint8_t[bufferLength]()} {}
 
+#ifndef USE_UNIQUE_PTR
     ~BitArray() { delete[] buffer; }
+#endif
 
     bool get(uint8_t bitIndex) {
         return buffer[getBufferIndex(bitIndex)] & getBufferMask(bitIndex);
@@ -59,5 +68,9 @@ class BitArray {
     }
 
     const uint8_t bufferLength;
+#ifdef USE_UNIQUE_PTR
+    std::unique_ptr<uint8_t[]> buffer;
+#else
     uint8_t *buffer;
+#endif
 };
