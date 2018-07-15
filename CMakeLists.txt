@@ -33,6 +33,7 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
 
 include_directories(${CMAKE_BINARY_DIR}/googletest-src/googlemock/include)
 
+include(GoogleTest)
 enable_testing()
 
 # Arduino Core files
@@ -51,4 +52,6 @@ add_library(Control_Surface STATIC ${SOURCES})
 file(GLOB_RECURSE TESTS "test/*.cpp")
 add_executable(tests ${TESTS})
 target_link_libraries(tests gtest_main gmock Control_Surface ArduinoMock)
-add_test(NAME tests_tests COMMAND tests)
+# add_test(NAME tests_tests COMMAND tests)
+gtest_discover_tests(tests)
+add_test(NAME Tests COMMAND tests)
