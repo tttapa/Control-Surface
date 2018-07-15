@@ -67,7 +67,7 @@ class Bankable {
     bool matchAddress(uint8_t targetAddress, uint8_t baseAddress,
                       uint8_t numberOfBanks) const {
         DEBUGFN(F("target address = ")
-                << hex << targetAddress << F(", base address = ") << baseAddress
+                << hex << +targetAddress << F(", base address = ") << +baseAddress
                 << dec << F(", number of banks = ") << numberOfBanks);
         if (getAddressesPerBank() == 0)
             return targetAddress == baseAddress;

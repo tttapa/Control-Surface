@@ -62,11 +62,11 @@ void Control_Surface_::updateMidiInput() {
 #ifdef DEBUG_MIDI_PACKETS
             if (midimsg.type != PROGRAM_CHANGE &&
                 midimsg.type != CHANNEL_PRESSURE)
-                DEBUG(">>> " << hex << midi->getChannelMessage().header << ' '
-                             << midimsg.data1 << ' ' << midimsg.data2);
+                DEBUG(">>> " << hex << +midi->getChannelMessage().header << ' '
+                             << +midimsg.data1 << ' ' << +midimsg.data2);
             else
-                DEBUG(">>> " << hex << midi->getChannelMessage().header << ' '
-                             << midimsg.data1);
+                DEBUG(">>> " << hex << +midi->getChannelMessage().header << ' '
+                             << +midimsg.data1);
 #endif
 
             if (midimsg.type == CC && midimsg.data1 == 0x79) {

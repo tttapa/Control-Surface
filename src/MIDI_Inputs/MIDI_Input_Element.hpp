@@ -8,7 +8,7 @@ class MIDI_Input_Element {
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDI_Input_Element(uint8_t baseChannel) : baseChannel(baseChannel) {}
+    MIDI_Input_Element(uint8_t baseChannel) : baseChannel(baseChannel - 1) {}
 
     /**
      * @brief   Update the display of the input element.
@@ -25,8 +25,10 @@ class MIDI_Input_Element {
      * @brief   Receive a new MIDI message and update the internal state.
      */
     bool updateWith(const MIDI_message_matcher &midimsg) {
+        DEBUGFN("");
         if (!matchChannel(midimsg.channel))
             return false;
+        DEBUGFN("Channel matched");
         if (!updateImpl(midimsg))
             return false;
         moveDown();

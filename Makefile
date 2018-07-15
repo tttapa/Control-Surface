@@ -649,33 +649,6 @@ src/Helpers/PrintStream.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/PrintStream.cpp.s
 .PHONY : src/Helpers/PrintStream.cpp.s
 
-src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.o: src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.o
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.o
-
-# target to build an object file
-src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.o
-.PHONY : src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.o
-
-src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.i: src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.i
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.i
-
-# target to preprocess a source file
-src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.i
-.PHONY : src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.i
-
-src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.s: src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.s
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.s
-
-# target to generate assembly for a file
-src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.s
-.PHONY : src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.s
-
 src/MIDI_Inputs/MIDI_Input_CC.o: src/MIDI_Inputs/MIDI_Input_CC.cpp.o
 
 .PHONY : src/MIDI_Inputs/MIDI_Input_CC.o
@@ -703,59 +676,32 @@ src/MIDI_Inputs/MIDI_Input_CC.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_CC.cpp.s
 .PHONY : src/MIDI_Inputs/MIDI_Input_CC.cpp.s
 
-src/MIDI_Inputs/MIDI_Input_Element.o: src/MIDI_Inputs/MIDI_Input_Element.cpp.o
+src/MIDI_Inputs/MIDI_Input_ChannelPressure.o: src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.o
 
-.PHONY : src/MIDI_Inputs/MIDI_Input_Element.o
-
-# target to build an object file
-src/MIDI_Inputs/MIDI_Input_Element.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_Element.cpp.o
-.PHONY : src/MIDI_Inputs/MIDI_Input_Element.cpp.o
-
-src/MIDI_Inputs/MIDI_Input_Element.i: src/MIDI_Inputs/MIDI_Input_Element.cpp.i
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_Element.i
-
-# target to preprocess a source file
-src/MIDI_Inputs/MIDI_Input_Element.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_Element.cpp.i
-.PHONY : src/MIDI_Inputs/MIDI_Input_Element.cpp.i
-
-src/MIDI_Inputs/MIDI_Input_Element.s: src/MIDI_Inputs/MIDI_Input_Element.cpp.s
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_Element.s
-
-# target to generate assembly for a file
-src/MIDI_Inputs/MIDI_Input_Element.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_Element.cpp.s
-.PHONY : src/MIDI_Inputs/MIDI_Input_Element.cpp.s
-
-src/MIDI_Inputs/MIDI_Input_LED.o: src/MIDI_Inputs/MIDI_Input_LED.cpp.o
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_LED.o
+.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.o
 
 # target to build an object file
-src/MIDI_Inputs/MIDI_Input_LED.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_LED.cpp.o
-.PHONY : src/MIDI_Inputs/MIDI_Input_LED.cpp.o
+src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.o
+.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.o
 
-src/MIDI_Inputs/MIDI_Input_LED.i: src/MIDI_Inputs/MIDI_Input_LED.cpp.i
+src/MIDI_Inputs/MIDI_Input_ChannelPressure.i: src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.i
 
-.PHONY : src/MIDI_Inputs/MIDI_Input_LED.i
+.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.i
 
 # target to preprocess a source file
-src/MIDI_Inputs/MIDI_Input_LED.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_LED.cpp.i
-.PHONY : src/MIDI_Inputs/MIDI_Input_LED.cpp.i
+src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.i
+.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.i
 
-src/MIDI_Inputs/MIDI_Input_LED.s: src/MIDI_Inputs/MIDI_Input_LED.cpp.s
+src/MIDI_Inputs/MIDI_Input_ChannelPressure.s: src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.s
 
-.PHONY : src/MIDI_Inputs/MIDI_Input_LED.s
+.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.s
 
 # target to generate assembly for a file
-src/MIDI_Inputs/MIDI_Input_LED.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_LED.cpp.s
-.PHONY : src/MIDI_Inputs/MIDI_Input_LED.cpp.s
+src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.s
+.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.s
 
 src/MIDI_Inputs/MIDI_Input_Note.o: src/MIDI_Inputs/MIDI_Input_Note.cpp.o
 
@@ -783,33 +729,6 @@ src/MIDI_Inputs/MIDI_Input_Note.s: src/MIDI_Inputs/MIDI_Input_Note.cpp.s
 src/MIDI_Inputs/MIDI_Input_Note.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_Note.cpp.s
 .PHONY : src/MIDI_Inputs/MIDI_Input_Note.cpp.s
-
-src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.o: src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.o
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.o
-
-# target to build an object file
-src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.o
-.PHONY : src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.o
-
-src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.i: src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.i
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.i
-
-# target to preprocess a source file
-src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.i
-.PHONY : src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.i
-
-src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.s: src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.s
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.s
-
-# target to generate assembly for a file
-src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.s
-.PHONY : src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.s
 
 src/MIDI_Interfaces/MIDI_Interface.o: src/MIDI_Interfaces/MIDI_Interface.cpp.o
 
@@ -1108,32 +1027,32 @@ test/Helpers/tests-linked-list.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/tests-linked-list.cpp.s
 .PHONY : test/Helpers/tests-linked-list.cpp.s
 
-test/MIDI_Inputs/tests.o: test/MIDI_Inputs/tests.cpp.o
+test/MIDI_Inputs/tests-MCU_VU.o: test/MIDI_Inputs/tests-MCU_VU.cpp.o
 
-.PHONY : test/MIDI_Inputs/tests.o
+.PHONY : test/MIDI_Inputs/tests-MCU_VU.o
 
 # target to build an object file
-test/MIDI_Inputs/tests.cpp.o:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/tests.cpp.o
-.PHONY : test/MIDI_Inputs/tests.cpp.o
+test/MIDI_Inputs/tests-MCU_VU.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/tests-MCU_VU.cpp.o
+.PHONY : test/MIDI_Inputs/tests-MCU_VU.cpp.o
 
-test/MIDI_Inputs/tests.i: test/MIDI_Inputs/tests.cpp.i
+test/MIDI_Inputs/tests-MCU_VU.i: test/MIDI_Inputs/tests-MCU_VU.cpp.i
 
-.PHONY : test/MIDI_Inputs/tests.i
+.PHONY : test/MIDI_Inputs/tests-MCU_VU.i
 
 # target to preprocess a source file
-test/MIDI_Inputs/tests.cpp.i:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/tests.cpp.i
-.PHONY : test/MIDI_Inputs/tests.cpp.i
+test/MIDI_Inputs/tests-MCU_VU.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/tests-MCU_VU.cpp.i
+.PHONY : test/MIDI_Inputs/tests-MCU_VU.cpp.i
 
-test/MIDI_Inputs/tests.s: test/MIDI_Inputs/tests.cpp.s
+test/MIDI_Inputs/tests-MCU_VU.s: test/MIDI_Inputs/tests-MCU_VU.cpp.s
 
-.PHONY : test/MIDI_Inputs/tests.s
+.PHONY : test/MIDI_Inputs/tests-MCU_VU.s
 
 # target to generate assembly for a file
-test/MIDI_Inputs/tests.cpp.s:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/tests.cpp.s
-.PHONY : test/MIDI_Inputs/tests.cpp.s
+test/MIDI_Inputs/tests-MCU_VU.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/tests-MCU_VU.cpp.s
+.PHONY : test/MIDI_Inputs/tests-MCU_VU.cpp.s
 
 test/MIDI_Parsers/tests.o: test/MIDI_Parsers/tests.cpp.o
 
@@ -1252,24 +1171,15 @@ help:
 	@echo "... src/Helpers/PrintStream.o"
 	@echo "... src/Helpers/PrintStream.i"
 	@echo "... src/Helpers/PrintStream.s"
-	@echo "... src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.o"
-	@echo "... src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.i"
-	@echo "... src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.s"
 	@echo "... src/MIDI_Inputs/MIDI_Input_CC.o"
 	@echo "... src/MIDI_Inputs/MIDI_Input_CC.i"
 	@echo "... src/MIDI_Inputs/MIDI_Input_CC.s"
-	@echo "... src/MIDI_Inputs/MIDI_Input_Element.o"
-	@echo "... src/MIDI_Inputs/MIDI_Input_Element.i"
-	@echo "... src/MIDI_Inputs/MIDI_Input_Element.s"
-	@echo "... src/MIDI_Inputs/MIDI_Input_LED.o"
-	@echo "... src/MIDI_Inputs/MIDI_Input_LED.i"
-	@echo "... src/MIDI_Inputs/MIDI_Input_LED.s"
+	@echo "... src/MIDI_Inputs/MIDI_Input_ChannelPressure.o"
+	@echo "... src/MIDI_Inputs/MIDI_Input_ChannelPressure.i"
+	@echo "... src/MIDI_Inputs/MIDI_Input_ChannelPressure.s"
 	@echo "... src/MIDI_Inputs/MIDI_Input_Note.o"
 	@echo "... src/MIDI_Inputs/MIDI_Input_Note.i"
 	@echo "... src/MIDI_Inputs/MIDI_Input_Note.s"
-	@echo "... src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.o"
-	@echo "... src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.i"
-	@echo "... src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.s"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.o"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.i"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.s"
@@ -1303,9 +1213,9 @@ help:
 	@echo "... test/Helpers/tests-linked-list.o"
 	@echo "... test/Helpers/tests-linked-list.i"
 	@echo "... test/Helpers/tests-linked-list.s"
-	@echo "... test/MIDI_Inputs/tests.o"
-	@echo "... test/MIDI_Inputs/tests.i"
-	@echo "... test/MIDI_Inputs/tests.s"
+	@echo "... test/MIDI_Inputs/tests-MCU_VU.o"
+	@echo "... test/MIDI_Inputs/tests-MCU_VU.i"
+	@echo "... test/MIDI_Inputs/tests-MCU_VU.s"
 	@echo "... test/MIDI_Parsers/tests.o"
 	@echo "... test/MIDI_Parsers/tests.i"
 	@echo "... test/MIDI_Parsers/tests.s"

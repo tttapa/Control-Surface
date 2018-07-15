@@ -17,7 +17,7 @@ bool MIDI_Parser::addSysExByte(uint8_t data) {
         return false;
     SysExBuffer[SysExLength] = data; // add the data to the buffer
     SysExLength++;
-    DEBUG("SysEx data byte: " << hex << data << dec << '\t'
+    DEBUG("SysEx data byte: " << hex << +data << dec << '\t'
                               << "SysExLength = " << SysExLength);
     return true;
 }
