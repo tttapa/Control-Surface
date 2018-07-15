@@ -41,12 +41,12 @@ class Bankable {
     }
 
     uint8_t getChannelIndex(uint8_t targetChannel, uint8_t baseChannel) const {
-        if (getAddressesPerBank() == 0) {
+        if (getChannelsPerBank() == 0) {
             DEBUGFN(F("Error: This Bankable element is not banked with type "
                       "CHANGE_CHANNEL."));
             ERROR(return 0);
         }
-        return (targetChannel - baseChannel) / getAddressesPerBank();
+        return (targetChannel - baseChannel) / getChannelsPerBank();
     }
 
     uint8_t getIndex(uint8_t targetChannel, uint8_t targetAddress,

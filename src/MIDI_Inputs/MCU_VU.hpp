@@ -12,14 +12,14 @@ using namespace ExtIO;
 class MCU_VU_Base : public MIDI_Input_ChannelPressure {
   public:
     MCU_VU_Base(uint8_t track, uint8_t channel, unsigned int decayTime)
-        : MIDI_Input_ChannelPressure(channel), track(track - 1),
+        : MIDI_Input_ChannelPressure(channel), baseTrack(track - 1),
           decayTime(decayTime) {}
 
-    uint8_t getValue() const { return getRawValue() & 0x0F; }
-    bool getOverload() const { return getRawValue() & 0xF0; }
+    uint8_t getValue() const { return getValueHelper(getRawValue()); }
+    bool getOverload() const { return getOverloadHelper(getRawValue()); }
 
   private:
-    const uint8_t track;
+    const uint8_t baseTrack;
     const unsigned long decayTime;
     unsigned long prevDecayTime = 0;
 
@@ -36,7 +36,8 @@ class MCU_VU_Base : public MIDI_Input_ChannelPressure {
     virtual uint8_t getRawValue() const = 0;
 
   protected:
-    uint8_t getTrack() const { return track; }
+    uint8_t getBaseTrack() const { return baseTrack; }
+
     uint8_t setValueHelper(uint8_t rawValue, uint8_t newValue) {
         prevDecayTime = millis();
         newValue |= rawValue & 0xF0;
@@ -47,6 +48,12 @@ class MCU_VU_Base : public MIDI_Input_ChannelPressure {
     }
     static inline uint8_t clearOverloadHelper(uint8_t rawValue) {
         return rawValue &= 0x0F;
+    }
+    static inline uint8_t getValueHelper(uint8_t rawValue) {
+        return rawValue & 0x0F;
+    }
+    static inline bool getOverloadHelper(uint8_t rawValue) {
+        return rawValue & 0xF0;
     }
 };
 
@@ -83,13 +90,75 @@ class MCU_VU : virtual public MCU_VU_Base {
     uint8_t getRawValue() const override { return value; }
 
     inline bool matchTrack(uint8_t targetTrack) const {
-        return targetTrack == getTrack();
+        return targetTrack == getBaseTrack();
     }
     void setValue(uint8_t newValue) { value = setValueHelper(value, newValue); }
     void setOverload() { value = setOverloadHelper(value); }
     void clearOverload() { value = clearOverloadHelper(value); }
 
     uint8_t value = 0;
+};
+
+// -------------------------------------------------------------------------- //
+
+#include <Banks/Bankable.hpp>
+
+template <size_t NUMBER_OF_BANKS>
+class MCU_VU_Bankable : virtual public MCU_VU_Base, public Bankable {
+  public:
+    MCU_VU_Bankable(uint8_t track, uint8_t channel = 1,
+                    unsigned int decayTime = 300)
+        : MCU_VU_Base(track, channel, decayTime) {}
+
+    bool updateImpl(const MIDI_message_matcher &midimsg) {
+        uint8_t targetTrack = midimsg.data1 >> 4;
+        DEBUGFN("target track = " << +targetTrack);
+        if (!matchTrack(targetTrack))
+            return false;
+        uint8_t index = getIndex(midimsg.channel, targetTrack, getBaseChannel(),
+                                 getBaseTrack()) %
+                        NUMBER_OF_BANKS;
+        uint8_t data = midimsg.data1 & 0x0F;
+        switch (data) {
+            case 0xF: clearOverload(index); break;
+            case 0xE: setOverload(index); break;
+            case 0xD: break; // no meaning
+            default: setValue(index, data); break;
+        }
+        display();
+        return true;
+    }
+
+  private:
+    void decayAll() override {
+        for (uint8_t i = 0; i < NUMBER_OF_BANKS; i++)
+            if (getValueHelper(values[i]) > 0)
+                values[i]--;
+    }
+
+    uint8_t getRawValue() const override {
+        return values[getBankSetting() % NUMBER_OF_BANKS];
+    }
+
+    inline bool matchTrack(uint8_t targetTrack) const {
+        return Bankable::matchAddress(targetTrack, getBaseTrack(),
+                                      NUMBER_OF_BANKS);
+    }
+    inline bool matchChannel(uint8_t targetChannel) const override {
+        return Bankable::matchChannel(targetChannel, getBaseChannel(),
+                                      NUMBER_OF_BANKS);
+    }
+    void setValue(uint8_t index, uint8_t newValue) {
+        values[index] = setValueHelper(values[index], newValue);
+    }
+    void setOverload(uint8_t index) {
+        values[index] = setOverloadHelper(values[index]);
+    }
+    void clearOverload(uint8_t index) {
+        values[index] = clearOverloadHelper(values[index]);
+    }
+
+    uint8_t values[NUMBER_OF_BANKS] = {};
 };
 
 // -------------------------------------------------------------------------- //
