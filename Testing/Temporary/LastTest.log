@@ -1,0 +1,207 @@
+Start testing: Jul 15 15:02 CEST
+----------------------------------------------------------
+1/7 Testing: Example.Example
+1/7 Test: Example.Example
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Example.Example" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Example.Example" start time: Jul 15 15:02 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Example.Example
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Example
+[ RUN      ] Example.Example
+[       OK ] Example.Example (0 ms)
+[----------] 1 test from Example (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Example.Example" end time: Jul 15 15:02 CEST
+"Example.Example" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/7 Testing: millis.millis
+2/7 Test: millis.millis
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=millis.millis" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"millis.millis" start time: Jul 15 15:02 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = millis.millis
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from millis
+[ RUN      ] millis.millis
+[       OK ] millis.millis (0 ms)
+[----------] 1 test from millis (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"millis.millis" end time: Jul 15 15:02 CEST
+"millis.millis" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/7 Testing: Serial.write_byte
+3/7 Test: Serial.write_byte
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.write_byte" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Serial.write_byte" start time: Jul 15 15:02 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Serial.write_byte
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Serial
+[ RUN      ] Serial.write_byte
+[       OK ] Serial.write_byte (0 ms)
+[----------] 1 test from Serial (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Serial.write_byte" end time: Jul 15 15:02 CEST
+"Serial.write_byte" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/7 Testing: Serial.write_bytes
+4/7 Test: Serial.write_bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.write_bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Serial.write_bytes" start time: Jul 15 15:02 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Serial.write_bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Serial
+[ RUN      ] Serial.write_bytes
+[       OK ] Serial.write_bytes (0 ms)
+[----------] 1 test from Serial (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Serial.write_bytes" end time: Jul 15 15:02 CEST
+"Serial.write_bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/7 Testing: Serial.print_string
+5/7 Test: Serial.print_string
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.print_string" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Serial.print_string" start time: Jul 15 15:02 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Serial.print_string
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Serial
+[ RUN      ] Serial.print_string
+[       OK ] Serial.print_string (0 ms)
+[----------] 1 test from Serial (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Serial.print_string" end time: Jul 15 15:02 CEST
+"Serial.print_string" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/7 Testing: Serial.println_string
+6/7 Test: Serial.println_string
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.println_string" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Serial.println_string" start time: Jul 15 15:02 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Serial.println_string
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Serial
+[ RUN      ] Serial.println_string
+[       OK ] Serial.println_string (0 ms)
+[----------] 1 test from Serial (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Serial.println_string" end time: Jul 15 15:02 CEST
+"Serial.println_string" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/7 Testing: Tests
+7/7 Test: Tests
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Tests" start time: Jul 15 15:02 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+[==========] Running 6 tests from 3 test cases.
+[----------] Global test environment set-up.
+[----------] 1 test from Example
+[ RUN      ] Example.Example
+[       OK ] Example.Example (0 ms)
+[----------] 1 test from Example (0 ms total)
+
+[----------] 1 test from millis
+[ RUN      ] millis.millis
+[       OK ] millis.millis (0 ms)
+[----------] 1 test from millis (0 ms total)
+
+[----------] 4 tests from Serial
+[ RUN      ] Serial.write_byte
+[       OK ] Serial.write_byte (0 ms)
+[ RUN      ] Serial.write_bytes
+[       OK ] Serial.write_bytes (0 ms)
+[ RUN      ] Serial.print_string
+[       OK ] Serial.print_string (0 ms)
+[ RUN      ] Serial.println_string
+[       OK ] Serial.println_string (0 ms)
+[----------] 4 tests from Serial (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 3 test cases ran. (0 ms total)
+[  PASSED  ] 6 tests.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Tests" end time: Jul 15 15:02 CEST
+"Tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jul 15 15:02 CEST

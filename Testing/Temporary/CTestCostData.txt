@@ -1,0 +1,8 @@
+Example.Example 2 0.000712061
+millis.millis 2 0.000686556
+Serial.write_byte 2 0.000759899
+Serial.write_bytes 2 0.000752822
+Serial.print_string 2 0.000699738
+Serial.println_string 2 0.000748314
+Tests 2 0.000729081
+---
