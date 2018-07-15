@@ -43,8 +43,8 @@ include_directories("src")
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 add_library(Control_Surface STATIC ${SOURCES})
 
-# Now simply link against gtest or gtest_main as needed.
+# Tests
 file(GLOB_RECURSE TESTS "test/*.cpp")
 add_executable(tests ${TESTS})
-target_link_libraries(tests gtest_main Control_Surface ArduinoMock)
+target_link_libraries(tests gtest_main gmock Control_Surface ArduinoMock)
 add_test(NAME tests_tests COMMAND tests)
