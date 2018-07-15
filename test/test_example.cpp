@@ -41,3 +41,7 @@ TEST(Serial, println_string) {
     const char *str = "Test";
     Serial.println(str);
 }
+
+// TEST(Fail, fail) {
+//     EXPECT_TRUE(false);
+// }

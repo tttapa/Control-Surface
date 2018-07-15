@@ -1,10 +1,1411 @@
-Start testing: Jul 15 15:02 CEST
+Start testing: Jul 15 18:32 CEST
 ----------------------------------------------------------
-1/7 Testing: Example.Example
-1/7 Test: Example.Example
+1/55 Testing: Button.construct
+1/55 Test: Button.construct
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.construct" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Button.construct" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Button.construct
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Button
+[ RUN      ] Button.construct
+[       OK ] Button.construct (0 ms)
+[----------] 1 test from Button (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Button.construct" end time: Jul 15 18:32 CEST
+"Button.construct" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/55 Testing: Button.released
+2/55 Test: Button.released
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.released" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Button.released" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Button.released
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Button
+[ RUN      ] Button.released
+[       OK ] Button.released (0 ms)
+[----------] 1 test from Button (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Button.released" end time: Jul 15 18:32 CEST
+"Button.released" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/55 Testing: Button.falling
+3/55 Test: Button.falling
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.falling" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Button.falling" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Button.falling
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Button
+[ RUN      ] Button.falling
+[       OK ] Button.falling (0 ms)
+[----------] 1 test from Button (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Button.falling" end time: Jul 15 18:32 CEST
+"Button.falling" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/55 Testing: Button.pressed
+4/55 Test: Button.pressed
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.pressed" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Button.pressed" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Button.pressed
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Button
+[ RUN      ] Button.pressed
+[       OK ] Button.pressed (0 ms)
+[----------] 1 test from Button (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Button.pressed" end time: Jul 15 18:32 CEST
+"Button.pressed" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/55 Testing: Button.rising
+5/55 Test: Button.rising
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.rising" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Button.rising" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Button.rising
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Button
+[ RUN      ] Button.rising
+[       OK ] Button.rising (0 ms)
+[----------] 1 test from Button (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Button.rising" end time: Jul 15 18:32 CEST
+"Button.rising" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/55 Testing: Button.debouncePressed
+6/55 Test: Button.debouncePressed
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.debouncePressed" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Button.debouncePressed" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Button.debouncePressed
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Button
+[ RUN      ] Button.debouncePressed
+[       OK ] Button.debouncePressed (1 ms)
+[----------] 1 test from Button (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (1 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Button.debouncePressed" end time: Jul 15 18:32 CEST
+"Button.debouncePressed" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/55 Testing: Button.debounceReleased
+7/55 Test: Button.debounceReleased
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.debounceReleased" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"Button.debounceReleased" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = Button.debounceReleased
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Button
+[ RUN      ] Button.debounceReleased
+[       OK ] Button.debounceReleased (0 ms)
+[----------] 1 test from Button (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Button.debounceReleased" end time: Jul 15 18:32 CEST
+"Button.debounceReleased" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/55 Testing: BitArray.construct
+8/55 Test: BitArray.construct
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=BitArray.construct" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"BitArray.construct" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = BitArray.construct
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from BitArray
+[ RUN      ] BitArray.construct
+[       OK ] BitArray.construct (0 ms)
+[----------] 1 test from BitArray (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BitArray.construct" end time: Jul 15 18:32 CEST
+"BitArray.construct" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/55 Testing: BitArray.setClearGet
+9/55 Test: BitArray.setClearGet
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=BitArray.setClearGet" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"BitArray.setClearGet" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = BitArray.setClearGet
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from BitArray
+[ RUN      ] BitArray.setClearGet
+[       OK ] BitArray.setClearGet (0 ms)
+[----------] 1 test from BitArray (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BitArray.setClearGet" end time: Jul 15 18:32 CEST
+"BitArray.setClearGet" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/55 Testing: LinkedList.insertNode
+10/55 Test: LinkedList.insertNode
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.insertNode" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.insertNode" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.insertNode
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.insertNode
+[       OK ] LinkedList.insertNode (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.insertNode" end time: Jul 15 18:32 CEST
+"LinkedList.insertNode" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/55 Testing: LinkedList.loopForward
+11/55 Test: LinkedList.loopForward
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.loopForward" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.loopForward" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.loopForward
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.loopForward
+[       OK ] LinkedList.loopForward (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.loopForward" end time: Jul 15 18:32 CEST
+"LinkedList.loopForward" time elapsed: 00:00:00
+----------------------------------------------------------
+
+12/55 Testing: LinkedList.loopReversed
+12/55 Test: LinkedList.loopReversed
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.loopReversed" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.loopReversed" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.loopReversed
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.loopReversed
+[       OK ] LinkedList.loopReversed (0 ms)
+[----------] 1 test from LinkedList (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (1 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.loopReversed" end time: Jul 15 18:32 CEST
+"LinkedList.loopReversed" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/55 Testing: LinkedList.deleteNode
+13/55 Test: LinkedList.deleteNode
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.deleteNode" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.deleteNode" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.deleteNode
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.deleteNode
+[       OK ] LinkedList.deleteNode (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.deleteNode" end time: Jul 15 18:32 CEST
+"LinkedList.deleteNode" time elapsed: 00:00:00
+----------------------------------------------------------
+
+14/55 Testing: LinkedList.deleteFirstNode
+14/55 Test: LinkedList.deleteFirstNode
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.deleteFirstNode" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.deleteFirstNode" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.deleteFirstNode
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.deleteFirstNode
+[       OK ] LinkedList.deleteFirstNode (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.deleteFirstNode" end time: Jul 15 18:32 CEST
+"LinkedList.deleteFirstNode" time elapsed: 00:00:00
+----------------------------------------------------------
+
+15/55 Testing: LinkedList.deleteLastNode
+15/55 Test: LinkedList.deleteLastNode
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.deleteLastNode" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.deleteLastNode" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.deleteLastNode
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.deleteLastNode
+[       OK ] LinkedList.deleteLastNode (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.deleteLastNode" end time: Jul 15 18:32 CEST
+"LinkedList.deleteLastNode" time elapsed: 00:00:00
+----------------------------------------------------------
+
+16/55 Testing: LinkedList.moveDownNode
+16/55 Test: LinkedList.moveDownNode
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.moveDownNode" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.moveDownNode" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.moveDownNode
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.moveDownNode
+[       OK ] LinkedList.moveDownNode (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.moveDownNode" end time: Jul 15 18:32 CEST
+"LinkedList.moveDownNode" time elapsed: 00:00:00
+----------------------------------------------------------
+
+17/55 Testing: LinkedList.moveDownFirstNode
+17/55 Test: LinkedList.moveDownFirstNode
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.moveDownFirstNode" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.moveDownFirstNode" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.moveDownFirstNode
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.moveDownFirstNode
+[       OK ] LinkedList.moveDownFirstNode (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.moveDownFirstNode" end time: Jul 15 18:32 CEST
+"LinkedList.moveDownFirstNode" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/55 Testing: LinkedList.moveDownSecondNode
+18/55 Test: LinkedList.moveDownSecondNode
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.moveDownSecondNode" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.moveDownSecondNode" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.moveDownSecondNode
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.moveDownSecondNode
+[       OK ] LinkedList.moveDownSecondNode (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.moveDownSecondNode" end time: Jul 15 18:32 CEST
+"LinkedList.moveDownSecondNode" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/55 Testing: LinkedList.moveDownLastNode
+19/55 Test: LinkedList.moveDownLastNode
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.moveDownLastNode" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.moveDownLastNode" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.moveDownLastNode
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.moveDownLastNode
+[       OK ] LinkedList.moveDownLastNode (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.moveDownLastNode" end time: Jul 15 18:32 CEST
+"LinkedList.moveDownLastNode" time elapsed: 00:00:00
+----------------------------------------------------------
+
+20/55 Testing: LinkedList.moveDownOnlyElement
+20/55 Test: LinkedList.moveDownOnlyElement
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.moveDownOnlyElement" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.moveDownOnlyElement" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.moveDownOnlyElement
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.moveDownOnlyElement
+[       OK ] LinkedList.moveDownOnlyElement (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.moveDownOnlyElement" end time: Jul 15 18:32 CEST
+"LinkedList.moveDownOnlyElement" time elapsed: 00:00:00
+----------------------------------------------------------
+
+21/55 Testing: USBMIDIParser.noteOff
+21/55 Test: USBMIDIParser.noteOff
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.noteOff" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.noteOff" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.noteOff
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.noteOff
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ‚   
+[       OK ] USBMIDIParser.noteOff (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.noteOff" end time: Jul 15 18:32 CEST
+"USBMIDIParser.noteOff" time elapsed: 00:00:00
+----------------------------------------------------------
+
+22/55 Testing: USBMIDIParser.noteOn
+22/55 Test: USBMIDIParser.noteOn
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.noteOn" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.noteOn" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.noteOn
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.noteOn
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:		 “ * ~
+[       OK ] USBMIDIParser.noteOn (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (1 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.noteOn" end time: Jul 15 18:32 CEST
+"USBMIDIParser.noteOn" time elapsed: 00:00:00
+----------------------------------------------------------
+
+23/55 Testing: USBMIDIParser.sysEx2Bytes
+23/55 Test: USBMIDIParser.sysEx2Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx2Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.sysEx2Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.sysEx2Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.sysEx2Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð ÷ 
+
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: ÷	SysExLength = 2
+End SysEx
+[       OK ] USBMIDIParser.sysEx2Bytes (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.sysEx2Bytes" end time: Jul 15 18:32 CEST
+"USBMIDIParser.sysEx2Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+24/55 Testing: USBMIDIParser.sysEx3Bytes
+24/55 Test: USBMIDIParser.sysEx3Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx3Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.sysEx3Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.sysEx3Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.sysEx3Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð  ÷
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: 	SysExLength = 2
+SysEx data byte: ÷	SysExLength = 3
+End SysEx
+[       OK ] USBMIDIParser.sysEx3Bytes (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.sysEx3Bytes" end time: Jul 15 18:32 CEST
+"USBMIDIParser.sysEx3Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+25/55 Testing: USBMIDIParser.sysEx4Bytes
+25/55 Test: USBMIDIParser.sysEx4Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx4Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.sysEx4Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.sysEx4Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.sysEx4Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð  
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: 	SysExLength = 2
+SysEx data byte: 	SysExLength = 3
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ÷ 
+ 
+
+SysEx data byte: ÷	SysExLength = 4
+End SysEx
+[       OK ] USBMIDIParser.sysEx4Bytes (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.sysEx4Bytes" end time: Jul 15 18:32 CEST
+"USBMIDIParser.sysEx4Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+26/55 Testing: USBMIDIParser.sysEx5Bytes
+26/55 Test: USBMIDIParser.sysEx5Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx5Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.sysEx5Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.sysEx5Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.sysEx5Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð ! "
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: !	SysExLength = 2
+SysEx data byte: "	SysExLength = 3
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 # ÷ 
+
+SysEx data byte: #	SysExLength = 4
+SysEx data byte: ÷	SysExLength = 5
+End SysEx
+[       OK ] USBMIDIParser.sysEx5Bytes (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.sysEx5Bytes" end time: Jul 15 18:32 CEST
+"USBMIDIParser.sysEx5Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+27/55 Testing: USBMIDIParser.sysEx6Bytes
+27/55 Test: USBMIDIParser.sysEx6Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx6Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.sysEx6Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.sysEx6Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.sysEx6Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð 1 2
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: 1	SysExLength = 2
+SysEx data byte: 2	SysExLength = 3
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 3 4 ÷
+SysEx data byte: 3	SysExLength = 4
+SysEx data byte: 4	SysExLength = 5
+SysEx data byte: ÷	SysExLength = 6
+End SysEx
+[       OK ] USBMIDIParser.sysEx6Bytes (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.sysEx6Bytes" end time: Jul 15 18:32 CEST
+"USBMIDIParser.sysEx6Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+28/55 Testing: USBMIDIParser.sysEx7Bytes
+28/55 Test: USBMIDIParser.sysEx7Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx7Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.sysEx7Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.sysEx7Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.sysEx7Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð A B
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: A	SysExLength = 2
+SysEx data byte: B	SysExLength = 3
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 C D E
+SysEx data byte: C	SysExLength = 4
+SysEx data byte: D	SysExLength = 5
+SysEx data byte: E	SysExLength = 6
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ÷ 
+ 
+
+SysEx data byte: ÷	SysExLength = 7
+End SysEx
+[       OK ] USBMIDIParser.sysEx7Bytes (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.sysEx7Bytes" end time: Jul 15 18:32 CEST
+"USBMIDIParser.sysEx7Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+29/55 Testing: USBMIDIParser.sysEx12Bytes
+29/55 Test: USBMIDIParser.sysEx12Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx12Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.sysEx12Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.sysEx12Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.sysEx12Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð Q R
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: Q	SysExLength = 2
+SysEx data byte: R	SysExLength = 3
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 S T U
+SysEx data byte: S	SysExLength = 4
+SysEx data byte: T	SysExLength = 5
+SysEx data byte: U	SysExLength = 6
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 V W X
+SysEx data byte: V	SysExLength = 7
+SysEx data byte: W	SysExLength = 8
+SysEx data byte: X	SysExLength = 9
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 Y Z ÷
+SysEx data byte: Y	SysExLength = 10
+SysEx data byte: Z	SysExLength = 11
+SysEx data byte: ÷	SysExLength = 12
+End SysEx
+[       OK ] USBMIDIParser.sysEx12Bytes (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.sysEx12Bytes" end time: Jul 15 18:32 CEST
+"USBMIDIParser.sysEx12Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+30/55 Testing: USBMIDIParser.sysExContinueWithoutStarting
+30/55 Test: USBMIDIParser.sysExContinueWithoutStarting
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysExContinueWithoutStarting" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.sysExContinueWithoutStarting" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.sysExContinueWithoutStarting
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.sysExContinueWithoutStarting
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 3 4 ÷
+[MIDI_read_t USBMIDI_Parser::parse(uint8_t*) @ line 79]:	Error: No SysExStart received
+[       OK ] USBMIDIParser.sysExContinueWithoutStarting (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.sysExContinueWithoutStarting" end time: Jul 15 18:32 CEST
+"USBMIDIParser.sysExContinueWithoutStarting" time elapsed: 00:00:00
+----------------------------------------------------------
+
+31/55 Testing: USBMIDIParser.sysExEndsWithoutStarting1Byte
+31/55 Test: USBMIDIParser.sysExEndsWithoutStarting1Byte
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysExEndsWithoutStarting1Byte" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.sysExEndsWithoutStarting1Byte" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting1Byte
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.sysExEndsWithoutStarting1Byte
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ÷ 
+ 
+
+[MIDI_read_t USBMIDI_Parser::parse(uint8_t*) @ line 43]:	Error: No SysExStart received
+[       OK ] USBMIDIParser.sysExEndsWithoutStarting1Byte (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.sysExEndsWithoutStarting1Byte" end time: Jul 15 18:32 CEST
+"USBMIDIParser.sysExEndsWithoutStarting1Byte" time elapsed: 00:00:00
+----------------------------------------------------------
+
+32/55 Testing: USBMIDIParser.sysExEndsWithoutStarting2Bytes
+32/55 Test: USBMIDIParser.sysExEndsWithoutStarting2Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysExEndsWithoutStarting2Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.sysExEndsWithoutStarting2Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting2Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.sysExEndsWithoutStarting2Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	  ÷ 
+
+[MIDI_read_t USBMIDI_Parser::parse(uint8_t*) @ line 60]:	Error: No SysExStart received
+[       OK ] USBMIDIParser.sysExEndsWithoutStarting2Bytes (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.sysExEndsWithoutStarting2Bytes" end time: Jul 15 18:32 CEST
+"USBMIDIParser.sysExEndsWithoutStarting2Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+33/55 Testing: USBMIDIParser.sysExEndsWithoutStarting3Bytes
+33/55 Test: USBMIDIParser.sysExEndsWithoutStarting3Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysExEndsWithoutStarting3Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"USBMIDIParser.sysExEndsWithoutStarting3Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting3Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from USBMIDIParser
+[ RUN      ] USBMIDIParser.sysExEndsWithoutStarting3Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	   ÷
+[MIDI_read_t USBMIDI_Parser::parse(uint8_t*) @ line 79]:	Error: No SysExStart received
+[       OK ] USBMIDIParser.sysExEndsWithoutStarting3Bytes (0 ms)
+[----------] 1 test from USBMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBMIDIParser.sysExEndsWithoutStarting3Bytes" end time: Jul 15 18:32 CEST
+"USBMIDIParser.sysExEndsWithoutStarting3Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+34/55 Testing: SerialMIDIParser.noteOff
+34/55 Test: SerialMIDIParser.noteOff
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.noteOff" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.noteOff" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.noteOff
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.noteOff
+[       OK ] SerialMIDIParser.noteOff (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.noteOff" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.noteOff" time elapsed: 00:00:00
+----------------------------------------------------------
+
+35/55 Testing: SerialMIDIParser.noteOn
+35/55 Test: SerialMIDIParser.noteOn
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.noteOn" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.noteOn" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.noteOn
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.noteOn
+[       OK ] SerialMIDIParser.noteOn (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.noteOn" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.noteOn" time elapsed: 00:00:00
+----------------------------------------------------------
+
+36/55 Testing: SerialMIDIParser.noteOnRunningStatus
+36/55 Test: SerialMIDIParser.noteOnRunningStatus
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.noteOnRunningStatus" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.noteOnRunningStatus" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.noteOnRunningStatus
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.noteOnRunningStatus
+[       OK ] SerialMIDIParser.noteOnRunningStatus (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.noteOnRunningStatus" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.noteOnRunningStatus" time elapsed: 00:00:00
+----------------------------------------------------------
+
+37/55 Testing: SerialMIDIParser.afterTouch
+37/55 Test: SerialMIDIParser.afterTouch
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.afterTouch" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.afterTouch" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.afterTouch
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.afterTouch
+[       OK ] SerialMIDIParser.afterTouch (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.afterTouch" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.afterTouch" time elapsed: 00:00:00
+----------------------------------------------------------
+
+38/55 Testing: SerialMIDIParser.controlChange
+38/55 Test: SerialMIDIParser.controlChange
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.controlChange" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.controlChange" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.controlChange
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.controlChange
+[       OK ] SerialMIDIParser.controlChange (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.controlChange" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.controlChange" time elapsed: 00:00:00
+----------------------------------------------------------
+
+39/55 Testing: SerialMIDIParser.programChange
+39/55 Test: SerialMIDIParser.programChange
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.programChange" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.programChange" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.programChange
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.programChange
+[       OK ] SerialMIDIParser.programChange (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.programChange" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.programChange" time elapsed: 00:00:00
+----------------------------------------------------------
+
+40/55 Testing: SerialMIDIParser.programChangeRunningStatus
+40/55 Test: SerialMIDIParser.programChangeRunningStatus
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.programChangeRunningStatus" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.programChangeRunningStatus" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.programChangeRunningStatus
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.programChangeRunningStatus
+[       OK ] SerialMIDIParser.programChangeRunningStatus (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.programChangeRunningStatus" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.programChangeRunningStatus" time elapsed: 00:00:00
+----------------------------------------------------------
+
+41/55 Testing: SerialMIDIParser.channelPressure
+41/55 Test: SerialMIDIParser.channelPressure
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.channelPressure" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.channelPressure" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.channelPressure
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.channelPressure
+[       OK ] SerialMIDIParser.channelPressure (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.channelPressure" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.channelPressure" time elapsed: 00:00:00
+----------------------------------------------------------
+
+42/55 Testing: SerialMIDIParser.pitchBend
+42/55 Test: SerialMIDIParser.pitchBend
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.pitchBend" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.pitchBend" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.pitchBend
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.pitchBend
+[       OK ] SerialMIDIParser.pitchBend (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.pitchBend" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.pitchBend" time elapsed: 00:00:00
+----------------------------------------------------------
+
+43/55 Testing: SerialMIDIParser.sysEx2Bytes
+43/55 Test: SerialMIDIParser.sysEx2Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysEx2Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.sysEx2Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.sysEx2Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.sysEx2Bytes
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: ÷	SysExLength = 2
+[       OK ] SerialMIDIParser.sysEx2Bytes (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.sysEx2Bytes" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.sysEx2Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+44/55 Testing: SerialMIDIParser.sysEx3Bytes
+44/55 Test: SerialMIDIParser.sysEx3Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysEx3Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.sysEx3Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.sysEx3Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.sysEx3Bytes
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: 	SysExLength = 2
+SysEx data byte: ÷	SysExLength = 3
+[       OK ] SerialMIDIParser.sysEx3Bytes (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.sysEx3Bytes" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.sysEx3Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+45/55 Testing: SerialMIDIParser.sysEx7Bytes
+45/55 Test: SerialMIDIParser.sysEx7Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysEx7Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.sysEx7Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.sysEx7Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.sysEx7Bytes
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: A	SysExLength = 2
+SysEx data byte: B	SysExLength = 3
+SysEx data byte: C	SysExLength = 4
+SysEx data byte: D	SysExLength = 5
+SysEx data byte: E	SysExLength = 6
+SysEx data byte: ÷	SysExLength = 7
+[       OK ] SerialMIDIParser.sysEx7Bytes (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.sysEx7Bytes" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.sysEx7Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+46/55 Testing: SerialMIDIParser.sysExEndsWithoutStarting1Byte
+46/55 Test: SerialMIDIParser.sysExEndsWithoutStarting1Byte
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysExEndsWithoutStarting1Byte" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.sysExEndsWithoutStarting1Byte" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.sysExEndsWithoutStarting1Byte
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.sysExEndsWithoutStarting1Byte
+[       OK ] SerialMIDIParser.sysExEndsWithoutStarting1Byte (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.sysExEndsWithoutStarting1Byte" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.sysExEndsWithoutStarting1Byte" time elapsed: 00:00:00
+----------------------------------------------------------
+
+47/55 Testing: SerialMIDIParser.sysExEndsWithoutStarting2Bytes
+47/55 Test: SerialMIDIParser.sysExEndsWithoutStarting2Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysExEndsWithoutStarting2Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.sysExEndsWithoutStarting2Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.sysExEndsWithoutStarting2Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.sysExEndsWithoutStarting2Bytes
+[MIDI_read_t SerialMIDI_Parser::parse(uint8_t) @ line 33]:	Error: No header
+[       OK ] SerialMIDIParser.sysExEndsWithoutStarting2Bytes (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.sysExEndsWithoutStarting2Bytes" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.sysExEndsWithoutStarting2Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+48/55 Testing: SerialMIDIParser.sysExEndsWithoutStarting3Bytes
+48/55 Test: SerialMIDIParser.sysExEndsWithoutStarting3Bytes
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysExEndsWithoutStarting3Bytes" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"SerialMIDIParser.sysExEndsWithoutStarting3Bytes" start time: Jul 15 18:32 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = SerialMIDIParser.sysExEndsWithoutStarting3Bytes
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.sysExEndsWithoutStarting3Bytes
+[MIDI_read_t SerialMIDI_Parser::parse(uint8_t) @ line 33]:	Error: No header
+[MIDI_read_t SerialMIDI_Parser::parse(uint8_t) @ line 33]:	Error: No header
+[       OK ] SerialMIDIParser.sysExEndsWithoutStarting3Bytes (0 ms)
+[----------] 1 test from SerialMIDIParser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SerialMIDIParser.sysExEndsWithoutStarting3Bytes" end time: Jul 15 18:32 CEST
+"SerialMIDIParser.sysExEndsWithoutStarting3Bytes" time elapsed: 00:00:00
+----------------------------------------------------------
+
+49/55 Testing: Example.Example
+49/55 Test: Example.Example
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Example.Example" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Example.Example" start time: Jul 15 15:02 CEST
+"Example.Example" start time: Jul 15 18:32 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -23,15 +1424,15 @@ Note: Google Test filter = Example.Example
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Example.Example" end time: Jul 15 15:02 CEST
+"Example.Example" end time: Jul 15 18:32 CEST
 "Example.Example" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-2/7 Testing: millis.millis
-2/7 Test: millis.millis
+50/55 Testing: millis.millis
+50/55 Test: millis.millis
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=millis.millis" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"millis.millis" start time: Jul 15 15:02 CEST
+"millis.millis" start time: Jul 15 18:32 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -50,15 +1451,15 @@ Note: Google Test filter = millis.millis
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"millis.millis" end time: Jul 15 15:02 CEST
+"millis.millis" end time: Jul 15 18:32 CEST
 "millis.millis" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-3/7 Testing: Serial.write_byte
-3/7 Test: Serial.write_byte
+51/55 Testing: Serial.write_byte
+51/55 Test: Serial.write_byte
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.write_byte" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Serial.write_byte" start time: Jul 15 15:02 CEST
+"Serial.write_byte" start time: Jul 15 18:32 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -77,15 +1478,15 @@ Note: Google Test filter = Serial.write_byte
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Serial.write_byte" end time: Jul 15 15:02 CEST
+"Serial.write_byte" end time: Jul 15 18:32 CEST
 "Serial.write_byte" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-4/7 Testing: Serial.write_bytes
-4/7 Test: Serial.write_bytes
+52/55 Testing: Serial.write_bytes
+52/55 Test: Serial.write_bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.write_bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Serial.write_bytes" start time: Jul 15 15:02 CEST
+"Serial.write_bytes" start time: Jul 15 18:32 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -104,15 +1505,15 @@ Note: Google Test filter = Serial.write_bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Serial.write_bytes" end time: Jul 15 15:02 CEST
+"Serial.write_bytes" end time: Jul 15 18:32 CEST
 "Serial.write_bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-5/7 Testing: Serial.print_string
-5/7 Test: Serial.print_string
+53/55 Testing: Serial.print_string
+53/55 Test: Serial.print_string
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.print_string" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Serial.print_string" start time: Jul 15 15:02 CEST
+"Serial.print_string" start time: Jul 15 18:32 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -131,15 +1532,15 @@ Note: Google Test filter = Serial.print_string
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Serial.print_string" end time: Jul 15 15:02 CEST
+"Serial.print_string" end time: Jul 15 18:32 CEST
 "Serial.print_string" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-6/7 Testing: Serial.println_string
-6/7 Test: Serial.println_string
+54/55 Testing: Serial.println_string
+54/55 Test: Serial.println_string
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.println_string" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Serial.println_string" start time: Jul 15 15:02 CEST
+"Serial.println_string" start time: Jul 15 18:32 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -148,30 +1549,246 @@ Note: Google Test filter = Serial.println_string
 [----------] Global test environment set-up.
 [----------] 1 test from Serial
 [ RUN      ] Serial.println_string
-[       OK ] Serial.println_string (0 ms)
-[----------] 1 test from Serial (0 ms total)
+[       OK ] Serial.println_string (1 ms)
+[----------] 1 test from Serial (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test case ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Serial.println_string" end time: Jul 15 15:02 CEST
+"Serial.println_string" end time: Jul 15 18:32 CEST
 "Serial.println_string" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-7/7 Testing: Tests
-7/7 Test: Tests
+55/55 Testing: Tests
+55/55 Test: Tests
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Tests" start time: Jul 15 15:02 CEST
+"Tests" start time: Jul 15 18:32 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
-[==========] Running 6 tests from 3 test cases.
+[==========] Running 54 tests from 8 test cases.
 [----------] Global test environment set-up.
+[----------] 7 tests from Button
+[ RUN      ] Button.construct
+[       OK ] Button.construct (0 ms)
+[ RUN      ] Button.released
+[       OK ] Button.released (0 ms)
+[ RUN      ] Button.falling
+[       OK ] Button.falling (0 ms)
+[ RUN      ] Button.pressed
+[       OK ] Button.pressed (0 ms)
+[ RUN      ] Button.rising
+[       OK ] Button.rising (1 ms)
+[ RUN      ] Button.debouncePressed
+[       OK ] Button.debouncePressed (0 ms)
+[ RUN      ] Button.debounceReleased
+[       OK ] Button.debounceReleased (0 ms)
+[----------] 7 tests from Button (1 ms total)
+
+[----------] 2 tests from BitArray
+[ RUN      ] BitArray.construct
+[       OK ] BitArray.construct (0 ms)
+[ RUN      ] BitArray.setClearGet
+[       OK ] BitArray.setClearGet (0 ms)
+[----------] 2 tests from BitArray (0 ms total)
+
+[----------] 11 tests from LinkedList
+[ RUN      ] LinkedList.insertNode
+[       OK ] LinkedList.insertNode (0 ms)
+[ RUN      ] LinkedList.loopForward
+[       OK ] LinkedList.loopForward (0 ms)
+[ RUN      ] LinkedList.loopReversed
+[       OK ] LinkedList.loopReversed (0 ms)
+[ RUN      ] LinkedList.deleteNode
+[       OK ] LinkedList.deleteNode (0 ms)
+[ RUN      ] LinkedList.deleteFirstNode
+[       OK ] LinkedList.deleteFirstNode (0 ms)
+[ RUN      ] LinkedList.deleteLastNode
+[       OK ] LinkedList.deleteLastNode (0 ms)
+[ RUN      ] LinkedList.moveDownNode
+[       OK ] LinkedList.moveDownNode (0 ms)
+[ RUN      ] LinkedList.moveDownFirstNode
+[       OK ] LinkedList.moveDownFirstNode (0 ms)
+[ RUN      ] LinkedList.moveDownSecondNode
+[       OK ] LinkedList.moveDownSecondNode (0 ms)
+[ RUN      ] LinkedList.moveDownLastNode
+[       OK ] LinkedList.moveDownLastNode (0 ms)
+[ RUN      ] LinkedList.moveDownOnlyElement
+[       OK ] LinkedList.moveDownOnlyElement (0 ms)
+[----------] 11 tests from LinkedList (0 ms total)
+
+[----------] 13 tests from USBMIDIParser
+[ RUN      ] USBMIDIParser.noteOff
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ‚   
+[       OK ] USBMIDIParser.noteOff (0 ms)
+[ RUN      ] USBMIDIParser.noteOn
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:		 “ * ~
+[       OK ] USBMIDIParser.noteOn (0 ms)
+[ RUN      ] USBMIDIParser.sysEx2Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð ÷ 
+
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: ÷	SysExLength = 2
+End SysEx
+[       OK ] USBMIDIParser.sysEx2Bytes (0 ms)
+[ RUN      ] USBMIDIParser.sysEx3Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð  ÷
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: 	SysExLength = 2
+SysEx data byte: ÷	SysExLength = 3
+End SysEx
+[       OK ] USBMIDIParser.sysEx3Bytes (0 ms)
+[ RUN      ] USBMIDIParser.sysEx4Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð  
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: 	SysExLength = 2
+SysEx data byte: 	SysExLength = 3
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ÷ 
+ 
+
+SysEx data byte: ÷	SysExLength = 4
+End SysEx
+[       OK ] USBMIDIParser.sysEx4Bytes (0 ms)
+[ RUN      ] USBMIDIParser.sysEx5Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð ! "
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: !	SysExLength = 2
+SysEx data byte: "	SysExLength = 3
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 # ÷ 
+
+SysEx data byte: #	SysExLength = 4
+SysEx data byte: ÷	SysExLength = 5
+End SysEx
+[       OK ] USBMIDIParser.sysEx5Bytes (0 ms)
+[ RUN      ] USBMIDIParser.sysEx6Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð 1 2
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: 1	SysExLength = 2
+SysEx data byte: 2	SysExLength = 3
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 3 4 ÷
+SysEx data byte: 3	SysExLength = 4
+SysEx data byte: 4	SysExLength = 5
+SysEx data byte: ÷	SysExLength = 6
+End SysEx
+[       OK ] USBMIDIParser.sysEx6Bytes (0 ms)
+[ RUN      ] USBMIDIParser.sysEx7Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð A B
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: A	SysExLength = 2
+SysEx data byte: B	SysExLength = 3
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 C D E
+SysEx data byte: C	SysExLength = 4
+SysEx data byte: D	SysExLength = 5
+SysEx data byte: E	SysExLength = 6
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ÷ 
+ 
+
+SysEx data byte: ÷	SysExLength = 7
+End SysEx
+[       OK ] USBMIDIParser.sysEx7Bytes (0 ms)
+[ RUN      ] USBMIDIParser.sysEx12Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ð Q R
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: Q	SysExLength = 2
+SysEx data byte: R	SysExLength = 3
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 S T U
+SysEx data byte: S	SysExLength = 4
+SysEx data byte: T	SysExLength = 5
+SysEx data byte: U	SysExLength = 6
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 V W X
+SysEx data byte: V	SysExLength = 7
+SysEx data byte: W	SysExLength = 8
+SysEx data byte: X	SysExLength = 9
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 Y Z ÷
+SysEx data byte: Y	SysExLength = 10
+SysEx data byte: Z	SysExLength = 11
+SysEx data byte: ÷	SysExLength = 12
+End SysEx
+[       OK ] USBMIDIParser.sysEx12Bytes (0 ms)
+[ RUN      ] USBMIDIParser.sysExContinueWithoutStarting
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 3 4 ÷
+[MIDI_read_t USBMIDI_Parser::parse(uint8_t*) @ line 79]:	Error: No SysExStart received
+[       OK ] USBMIDIParser.sysExContinueWithoutStarting (0 ms)
+[ RUN      ] USBMIDIParser.sysExEndsWithoutStarting1Byte
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	 ÷ 
+ 
+
+[MIDI_read_t USBMIDI_Parser::parse(uint8_t*) @ line 43]:	Error: No SysExStart received
+[       OK ] USBMIDIParser.sysExEndsWithoutStarting1Byte (0 ms)
+[ RUN      ] USBMIDIParser.sysExEndsWithoutStarting2Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	  ÷ 
+
+[MIDI_read_t USBMIDI_Parser::parse(uint8_t*) @ line 60]:	Error: No SysExStart received
+[       OK ] USBMIDIParser.sysExEndsWithoutStarting2Bytes (0 ms)
+[ RUN      ] USBMIDIParser.sysExEndsWithoutStarting3Bytes
+[/home/pieter/GitHub/Control-Surface/src/MIDI_Parsers/USBMIDI_Parser.cpp:8]:	MIDIUSB packet:	   ÷
+[MIDI_read_t USBMIDI_Parser::parse(uint8_t*) @ line 79]:	Error: No SysExStart received
+[       OK ] USBMIDIParser.sysExEndsWithoutStarting3Bytes (0 ms)
+[----------] 13 tests from USBMIDIParser (0 ms total)
+
+[----------] 15 tests from SerialMIDIParser
+[ RUN      ] SerialMIDIParser.noteOff
+[       OK ] SerialMIDIParser.noteOff (0 ms)
+[ RUN      ] SerialMIDIParser.noteOn
+[       OK ] SerialMIDIParser.noteOn (0 ms)
+[ RUN      ] SerialMIDIParser.noteOnRunningStatus
+[       OK ] SerialMIDIParser.noteOnRunningStatus (0 ms)
+[ RUN      ] SerialMIDIParser.afterTouch
+[       OK ] SerialMIDIParser.afterTouch (0 ms)
+[ RUN      ] SerialMIDIParser.controlChange
+[       OK ] SerialMIDIParser.controlChange (0 ms)
+[ RUN      ] SerialMIDIParser.programChange
+[       OK ] SerialMIDIParser.programChange (0 ms)
+[ RUN      ] SerialMIDIParser.programChangeRunningStatus
+[       OK ] SerialMIDIParser.programChangeRunningStatus (0 ms)
+[ RUN      ] SerialMIDIParser.channelPressure
+[       OK ] SerialMIDIParser.channelPressure (0 ms)
+[ RUN      ] SerialMIDIParser.pitchBend
+[       OK ] SerialMIDIParser.pitchBend (0 ms)
+[ RUN      ] SerialMIDIParser.sysEx2Bytes
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: ÷	SysExLength = 2
+[       OK ] SerialMIDIParser.sysEx2Bytes (0 ms)
+[ RUN      ] SerialMIDIParser.sysEx3Bytes
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: 	SysExLength = 2
+SysEx data byte: ÷	SysExLength = 3
+[       OK ] SerialMIDIParser.sysEx3Bytes (0 ms)
+[ RUN      ] SerialMIDIParser.sysEx7Bytes
+Start SysEx
+SysEx data byte: ð	SysExLength = 1
+SysEx data byte: A	SysExLength = 2
+SysEx data byte: B	SysExLength = 3
+SysEx data byte: C	SysExLength = 4
+SysEx data byte: D	SysExLength = 5
+SysEx data byte: E	SysExLength = 6
+SysEx data byte: ÷	SysExLength = 7
+[       OK ] SerialMIDIParser.sysEx7Bytes (0 ms)
+[ RUN      ] SerialMIDIParser.sysExEndsWithoutStarting1Byte
+[       OK ] SerialMIDIParser.sysExEndsWithoutStarting1Byte (0 ms)
+[ RUN      ] SerialMIDIParser.sysExEndsWithoutStarting2Bytes
+[MIDI_read_t SerialMIDI_Parser::parse(uint8_t) @ line 58]:	Data byte ignored
+[       OK ] SerialMIDIParser.sysExEndsWithoutStarting2Bytes (0 ms)
+[ RUN      ] SerialMIDIParser.sysExEndsWithoutStarting3Bytes
+[MIDI_read_t SerialMIDI_Parser::parse(uint8_t) @ line 58]:	Data byte ignored
+[MIDI_read_t SerialMIDI_Parser::parse(uint8_t) @ line 58]:	Data byte ignored
+[       OK ] SerialMIDIParser.sysExEndsWithoutStarting3Bytes (0 ms)
+[----------] 15 tests from SerialMIDIParser (0 ms total)
+
 [----------] 1 test from Example
 [ RUN      ] Example.Example
 [       OK ] Example.Example (0 ms)
@@ -194,14 +1811,14 @@ Running main() from gtest_main.cc
 [----------] 4 tests from Serial (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 6 tests from 3 test cases ran. (0 ms total)
-[  PASSED  ] 6 tests.
+[==========] 54 tests from 8 test cases ran. (1 ms total)
+[  PASSED  ] 54 tests.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Tests" end time: Jul 15 15:02 CEST
+"Tests" end time: Jul 15 18:32 CEST
 "Tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Jul 15 15:02 CEST
+End testing: Jul 15 18:32 CEST

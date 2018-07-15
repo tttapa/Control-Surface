@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
-#include "../Settings/SettingsWrapper.h"
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Settings/SettingsWrapper.h>
 
 /**
  * @brief   A class for reading and debouncing buttons and switches.

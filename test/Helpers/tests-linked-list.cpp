@@ -1,14 +1,9 @@
-// g++ -Wall -std=c++11 -o tests -I/home/pieter/lib/Catch2/single_include *.cpp && ./tests
-
-#if !defined(ARDUINO) && !defined(GOOGLETEST)
-
-#include <catch.hpp>
-using Catch::Matchers::Equals;
+#include <gtest/gtest.h>
 
 #include <iostream>
 using namespace std;
 
-#include "../LinkedList.h"
+#include <Helpers/LinkedList.h>
 using namespace LinkedList;
 
 struct Node {
@@ -18,37 +13,36 @@ struct Node {
     Node *next = nullptr;
 };
 
-TEST_CASE("Insert some elements", "[INSERT]") {
+TEST(LinkedList, insertNode) {
     Node *first = nullptr;
     Node *last = nullptr;
     Node a(1);
     append(&a, first, last);
-    REQUIRE(first == &a);
-    REQUIRE(last == &a);
-    REQUIRE(a.previous == nullptr);
-    REQUIRE(a.next == nullptr);
+    EXPECT_EQ(first, &a);
+    EXPECT_EQ(last, &a);
+    EXPECT_EQ(a.previous, nullptr);
+    EXPECT_EQ(a.next, nullptr);
     Node b(2);
     append(&b, first, last);
-    REQUIRE(first == &a);
-    REQUIRE(last == &b);
-    REQUIRE(a.previous == nullptr);
-    REQUIRE(a.next == &b);
-    REQUIRE(b.previous == &a);
-    REQUIRE(b.next == nullptr);
+    EXPECT_EQ(first, &a);
+    EXPECT_EQ(last, &b);
+    EXPECT_EQ(a.previous, nullptr);
+    EXPECT_EQ(a.next, &b);
+    EXPECT_EQ(b.previous, &a);
+    EXPECT_EQ(b.next, nullptr);
     Node c(3);
     append(&c, first, last);
-    REQUIRE(first == &a);
-    REQUIRE(last == &c);
-    REQUIRE(a.previous == nullptr);
-    REQUIRE(a.next == &b);
-    REQUIRE(b.previous == &a);
-    REQUIRE(b.next == &c);
-    REQUIRE(c.previous == &b);
-    REQUIRE(c.next == nullptr);
+    EXPECT_EQ(first, &a);
+    EXPECT_EQ(last, &c);
+    EXPECT_EQ(a.previous, nullptr);
+    EXPECT_EQ(a.next, &b);
+    EXPECT_EQ(b.previous, &a);
+    EXPECT_EQ(b.next, &c);
+    EXPECT_EQ(c.previous, &b);
+    EXPECT_EQ(c.next, nullptr);
 }
 
-TEST_CASE("Insert some elements and read them back forwards",
-          "[INSERT][LOOP]") {
+TEST(LinkedList, loopForward) {
     Node *first = nullptr;
     Node *last = nullptr;
     Node *nodes[16];
@@ -59,7 +53,7 @@ TEST_CASE("Insert some elements and read them back forwards",
 
     int i = 0;
     for (Node *el = first; el != nullptr; el = el->next) {
-        REQUIRE(el->value == i);
+        EXPECT_EQ(el->value, i);
         i++;
     }
     for (Node *&node : nodes) {
@@ -67,8 +61,7 @@ TEST_CASE("Insert some elements and read them back forwards",
     }
 }
 
-TEST_CASE("Insert some elements and read them back backwards",
-          "[INSERT][LOOP]") {
+TEST(LinkedList, loopReversed) {
     Node *first = nullptr;
     Node *last = nullptr;
     Node *nodes[16];
@@ -78,7 +71,7 @@ TEST_CASE("Insert some elements and read them back backwards",
     }
     int i = 15;
     for (Node *el = last; el != nullptr; el = el->previous) {
-        REQUIRE(el->value == i);
+        EXPECT_EQ(el->value, i);
         i--;
     }
     for (Node *&node : nodes) {
@@ -86,7 +79,7 @@ TEST_CASE("Insert some elements and read them back backwards",
     }
 }
 
-TEST_CASE("Delete an element from the list", "[DELETE]") {
+TEST(LinkedList, deleteNode) {
     Node *first = nullptr;
     Node *last = nullptr;
     Node *nodes[5];
@@ -95,14 +88,14 @@ TEST_CASE("Delete an element from the list", "[DELETE]") {
         append(nodes[i], first, last);
     }
     remove(nodes[2], first, last);
-    REQUIRE(nodes[1]->next == nodes[3]);
-    REQUIRE(nodes[3]->previous == nodes[1]);
+    EXPECT_EQ(nodes[1]->next, nodes[3]);
+    EXPECT_EQ(nodes[3]->previous, nodes[1]);
     for (Node *&node : nodes) {
         delete node;
     }
 }
 
-TEST_CASE("Delete the first element from the list", "[DELETE]") {
+TEST(LinkedList, deleteFirstNode) {
     Node *first = nullptr;
     Node *last = nullptr;
     Node *nodes[5];
@@ -111,13 +104,13 @@ TEST_CASE("Delete the first element from the list", "[DELETE]") {
         append(nodes[i], first, last);
     }
     remove(nodes[0], first, last);
-    REQUIRE(nodes[1]->previous == nullptr);
-    REQUIRE(first == nodes[1]);
+    EXPECT_EQ(nodes[1]->previous, nullptr);
+    EXPECT_EQ(first, nodes[1]);
     for (Node *&node : nodes)
         delete node;
 }
 
-TEST_CASE("Delete the last element from the list", "[DELETE]") {
+TEST(LinkedList, deleteLastNode) {
     Node *first = nullptr;
     Node *last = nullptr;
     Node *nodes[5];
@@ -126,13 +119,13 @@ TEST_CASE("Delete the last element from the list", "[DELETE]") {
         append(nodes[i], first, last);
     }
     remove(nodes[4], first, last);
-    REQUIRE(nodes[3]->next == nullptr);
-    REQUIRE(last == nodes[3]);
+    EXPECT_EQ(nodes[3]->next, nullptr);
+    EXPECT_EQ(last, nodes[3]);
     for (Node *&node : nodes)
         delete node;
 }
 
-TEST_CASE("Move down an element", "[MOVE]") {
+TEST(LinkedList, moveDownNode) {
     Node *first = nullptr;
     Node *last = nullptr;
     Node *nodes[5];
@@ -141,19 +134,19 @@ TEST_CASE("Move down an element", "[MOVE]") {
         append(nodes[i], first, last);
     }
     moveDown(nodes[3], first, last);
-    REQUIRE(nodes[2]->next == nodes[4]);
-    REQUIRE(nodes[4]->previous == nodes[2]);
-    REQUIRE(nodes[3]->next == nodes[2]);
-    REQUIRE(nodes[2]->previous == nodes[3]);
-    REQUIRE(nodes[3]->previous == nodes[1]);
-    REQUIRE(nodes[1]->next == nodes[3]);
+    EXPECT_EQ(nodes[2]->next, nodes[4]);
+    EXPECT_EQ(nodes[4]->previous, nodes[2]);
+    EXPECT_EQ(nodes[3]->next, nodes[2]);
+    EXPECT_EQ(nodes[2]->previous, nodes[3]);
+    EXPECT_EQ(nodes[3]->previous, nodes[1]);
+    EXPECT_EQ(nodes[1]->next, nodes[3]);
     // for (Node *el = first; el != nullptr; el = el->next)
     //    cout << el->value << endl;
     for (Node *&node : nodes)
         delete node;
 }
 
-TEST_CASE("Move down the first element", "[MOVE]") {
+TEST(LinkedList, moveDownFirstNode) {
     Node *first = nullptr;
     Node *last = nullptr;
     Node *nodes[5];
@@ -162,17 +155,17 @@ TEST_CASE("Move down the first element", "[MOVE]") {
         append(nodes[i], first, last);
     }
     moveDown(nodes[0], first, last);
-    REQUIRE(first == nodes[0]);
-    REQUIRE(nodes[0]->previous == nullptr);
-    REQUIRE(nodes[0]->next == nodes[1]);
-    REQUIRE(nodes[1]->previous == nodes[0]);
+    EXPECT_EQ(first, nodes[0]);
+    EXPECT_EQ(nodes[0]->previous, nullptr);
+    EXPECT_EQ(nodes[0]->next, nodes[1]);
+    EXPECT_EQ(nodes[1]->previous, nodes[0]);
     // for (Node *el = first; el != nullptr; el = el->next)
     //     cout << el->value << endl;
     for (Node *&node : nodes)
         delete node;
 }
 
-TEST_CASE("Move down the second element", "[MOVE]") {
+TEST(LinkedList, moveDownSecondNode) {
     Node *first = nullptr;
     Node *last = nullptr;
     Node *nodes[5];
@@ -181,18 +174,18 @@ TEST_CASE("Move down the second element", "[MOVE]") {
         append(nodes[i], first, last);
     }
     moveDown(nodes[1], first, last);
-    REQUIRE(first == nodes[1]);
-    REQUIRE(nodes[0]->previous == nodes[1]);
-    REQUIRE(nodes[0]->next == nodes[2]);
-    REQUIRE(nodes[1]->previous == nullptr);
-    REQUIRE(nodes[1]->next == nodes[0]);
+    EXPECT_EQ(first, nodes[1]);
+    EXPECT_EQ(nodes[0]->previous, nodes[1]);
+    EXPECT_EQ(nodes[0]->next, nodes[2]);
+    EXPECT_EQ(nodes[1]->previous, nullptr);
+    EXPECT_EQ(nodes[1]->next, nodes[0]);
     // for (Node *el = first; el != nullptr; el = el->next)
     //     cout << el->value << endl;
     for (Node *&node : nodes)
         delete node;
 }
 
-TEST_CASE("Move down the last element", "[MOVE]") {
+TEST(LinkedList, moveDownLastNode) {
     Node *first = nullptr;
     Node *last = nullptr;
     Node *nodes[5];
@@ -201,27 +194,25 @@ TEST_CASE("Move down the last element", "[MOVE]") {
         append(nodes[i], first, last);
     }
     moveDown(nodes[4], first, last);
-    REQUIRE(last == nodes[3]);
-    REQUIRE(nodes[3]->previous == nodes[4]);
-    REQUIRE(nodes[3]->next == nullptr);
-    REQUIRE(nodes[4]->previous == nodes[2]);
-    REQUIRE(nodes[4]->next == nodes[3]);
+    EXPECT_EQ(last, nodes[3]);
+    EXPECT_EQ(nodes[3]->previous, nodes[4]);
+    EXPECT_EQ(nodes[3]->next, nullptr);
+    EXPECT_EQ(nodes[4]->previous, nodes[2]);
+    EXPECT_EQ(nodes[4]->next, nodes[3]);
     // for (Node *el = first; el != nullptr; el = el->next)
     //     cout << el->value << endl;
     for (Node *&node : nodes)
         delete node;
 }
 
-TEST_CASE("Move down the only element", "[MOVE]") {
+TEST(LinkedList, moveDownOnlyElement) {
     Node *first = nullptr;
     Node *last = nullptr;
     Node node(0);
     append(&node, first, last);
     moveDown(&node, first, last);
-    REQUIRE(first == &node);
-    REQUIRE(last == &node);
-    REQUIRE(node.next == nullptr);
-    REQUIRE(node.previous == nullptr);
+    EXPECT_EQ(first, &node);
+    EXPECT_EQ(last, &node);
+    EXPECT_EQ(node.next, nullptr);
+    EXPECT_EQ(node.previous, nullptr);
 }
-
-#endif // ifndef ARDUINO

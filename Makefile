@@ -649,114 +649,6 @@ src/Helpers/PrintStream.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/PrintStream.cpp.s
 .PHONY : src/Helpers/PrintStream.cpp.s
 
-src/Helpers/Tests/tests-bit-array.o: src/Helpers/Tests/tests-bit-array.cpp.o
-
-.PHONY : src/Helpers/Tests/tests-bit-array.o
-
-# target to build an object file
-src/Helpers/Tests/tests-bit-array.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests-bit-array.cpp.o
-.PHONY : src/Helpers/Tests/tests-bit-array.cpp.o
-
-src/Helpers/Tests/tests-bit-array.i: src/Helpers/Tests/tests-bit-array.cpp.i
-
-.PHONY : src/Helpers/Tests/tests-bit-array.i
-
-# target to preprocess a source file
-src/Helpers/Tests/tests-bit-array.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests-bit-array.cpp.i
-.PHONY : src/Helpers/Tests/tests-bit-array.cpp.i
-
-src/Helpers/Tests/tests-bit-array.s: src/Helpers/Tests/tests-bit-array.cpp.s
-
-.PHONY : src/Helpers/Tests/tests-bit-array.s
-
-# target to generate assembly for a file
-src/Helpers/Tests/tests-bit-array.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests-bit-array.cpp.s
-.PHONY : src/Helpers/Tests/tests-bit-array.cpp.s
-
-src/Helpers/Tests/tests-linked-list.o: src/Helpers/Tests/tests-linked-list.cpp.o
-
-.PHONY : src/Helpers/Tests/tests-linked-list.o
-
-# target to build an object file
-src/Helpers/Tests/tests-linked-list.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests-linked-list.cpp.o
-.PHONY : src/Helpers/Tests/tests-linked-list.cpp.o
-
-src/Helpers/Tests/tests-linked-list.i: src/Helpers/Tests/tests-linked-list.cpp.i
-
-.PHONY : src/Helpers/Tests/tests-linked-list.i
-
-# target to preprocess a source file
-src/Helpers/Tests/tests-linked-list.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests-linked-list.cpp.i
-.PHONY : src/Helpers/Tests/tests-linked-list.cpp.i
-
-src/Helpers/Tests/tests-linked-list.s: src/Helpers/Tests/tests-linked-list.cpp.s
-
-.PHONY : src/Helpers/Tests/tests-linked-list.s
-
-# target to generate assembly for a file
-src/Helpers/Tests/tests-linked-list.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests-linked-list.cpp.s
-.PHONY : src/Helpers/Tests/tests-linked-list.cpp.s
-
-src/Helpers/Tests/tests-main.o: src/Helpers/Tests/tests-main.cpp.o
-
-.PHONY : src/Helpers/Tests/tests-main.o
-
-# target to build an object file
-src/Helpers/Tests/tests-main.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests-main.cpp.o
-.PHONY : src/Helpers/Tests/tests-main.cpp.o
-
-src/Helpers/Tests/tests-main.i: src/Helpers/Tests/tests-main.cpp.i
-
-.PHONY : src/Helpers/Tests/tests-main.i
-
-# target to preprocess a source file
-src/Helpers/Tests/tests-main.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests-main.cpp.i
-.PHONY : src/Helpers/Tests/tests-main.cpp.i
-
-src/Helpers/Tests/tests-main.s: src/Helpers/Tests/tests-main.cpp.s
-
-.PHONY : src/Helpers/Tests/tests-main.s
-
-# target to generate assembly for a file
-src/Helpers/Tests/tests-main.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests-main.cpp.s
-.PHONY : src/Helpers/Tests/tests-main.cpp.s
-
-src/Helpers/Tests/tests.o: src/Helpers/Tests/tests.cpp.o
-
-.PHONY : src/Helpers/Tests/tests.o
-
-# target to build an object file
-src/Helpers/Tests/tests.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests.cpp.o
-.PHONY : src/Helpers/Tests/tests.cpp.o
-
-src/Helpers/Tests/tests.i: src/Helpers/Tests/tests.cpp.i
-
-.PHONY : src/Helpers/Tests/tests.i
-
-# target to preprocess a source file
-src/Helpers/Tests/tests.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests.cpp.i
-.PHONY : src/Helpers/Tests/tests.cpp.i
-
-src/Helpers/Tests/tests.s: src/Helpers/Tests/tests.cpp.s
-
-.PHONY : src/Helpers/Tests/tests.s
-
-# target to generate assembly for a file
-src/Helpers/Tests/tests.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Tests/tests.cpp.s
-.PHONY : src/Helpers/Tests/tests.cpp.s
-
 src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.o: src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.cpp.o
 
 .PHONY : src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.o
@@ -918,60 +810,6 @@ src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.s: src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.c
 src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.s
 .PHONY : src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.cpp.s
-
-src/MIDI_Inputs/Tests/tests-main.o: src/MIDI_Inputs/Tests/tests-main.cpp.o
-
-.PHONY : src/MIDI_Inputs/Tests/tests-main.o
-
-# target to build an object file
-src/MIDI_Inputs/Tests/tests-main.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/Tests/tests-main.cpp.o
-.PHONY : src/MIDI_Inputs/Tests/tests-main.cpp.o
-
-src/MIDI_Inputs/Tests/tests-main.i: src/MIDI_Inputs/Tests/tests-main.cpp.i
-
-.PHONY : src/MIDI_Inputs/Tests/tests-main.i
-
-# target to preprocess a source file
-src/MIDI_Inputs/Tests/tests-main.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/Tests/tests-main.cpp.i
-.PHONY : src/MIDI_Inputs/Tests/tests-main.cpp.i
-
-src/MIDI_Inputs/Tests/tests-main.s: src/MIDI_Inputs/Tests/tests-main.cpp.s
-
-.PHONY : src/MIDI_Inputs/Tests/tests-main.s
-
-# target to generate assembly for a file
-src/MIDI_Inputs/Tests/tests-main.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/Tests/tests-main.cpp.s
-.PHONY : src/MIDI_Inputs/Tests/tests-main.cpp.s
-
-src/MIDI_Inputs/Tests/tests.o: src/MIDI_Inputs/Tests/tests.cpp.o
-
-.PHONY : src/MIDI_Inputs/Tests/tests.o
-
-# target to build an object file
-src/MIDI_Inputs/Tests/tests.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/Tests/tests.cpp.o
-.PHONY : src/MIDI_Inputs/Tests/tests.cpp.o
-
-src/MIDI_Inputs/Tests/tests.i: src/MIDI_Inputs/Tests/tests.cpp.i
-
-.PHONY : src/MIDI_Inputs/Tests/tests.i
-
-# target to preprocess a source file
-src/MIDI_Inputs/Tests/tests.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/Tests/tests.cpp.i
-.PHONY : src/MIDI_Inputs/Tests/tests.cpp.i
-
-src/MIDI_Inputs/Tests/tests.s: src/MIDI_Inputs/Tests/tests.cpp.s
-
-.PHONY : src/MIDI_Inputs/Tests/tests.s
-
-# target to generate assembly for a file
-src/MIDI_Inputs/Tests/tests.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/Tests/tests.cpp.s
-.PHONY : src/MIDI_Inputs/Tests/tests.cpp.s
 
 src/MIDI_Interfaces/MIDI_Interface.o: src/MIDI_Interfaces/MIDI_Interface.cpp.o
 
@@ -1135,60 +973,6 @@ src/MIDI_Parsers/SerialMIDI_Parser.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Parsers/SerialMIDI_Parser.cpp.s
 .PHONY : src/MIDI_Parsers/SerialMIDI_Parser.cpp.s
 
-src/MIDI_Parsers/Tests/tests-main.o: src/MIDI_Parsers/Tests/tests-main.cpp.o
-
-.PHONY : src/MIDI_Parsers/Tests/tests-main.o
-
-# target to build an object file
-src/MIDI_Parsers/Tests/tests-main.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Parsers/Tests/tests-main.cpp.o
-.PHONY : src/MIDI_Parsers/Tests/tests-main.cpp.o
-
-src/MIDI_Parsers/Tests/tests-main.i: src/MIDI_Parsers/Tests/tests-main.cpp.i
-
-.PHONY : src/MIDI_Parsers/Tests/tests-main.i
-
-# target to preprocess a source file
-src/MIDI_Parsers/Tests/tests-main.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Parsers/Tests/tests-main.cpp.i
-.PHONY : src/MIDI_Parsers/Tests/tests-main.cpp.i
-
-src/MIDI_Parsers/Tests/tests-main.s: src/MIDI_Parsers/Tests/tests-main.cpp.s
-
-.PHONY : src/MIDI_Parsers/Tests/tests-main.s
-
-# target to generate assembly for a file
-src/MIDI_Parsers/Tests/tests-main.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Parsers/Tests/tests-main.cpp.s
-.PHONY : src/MIDI_Parsers/Tests/tests-main.cpp.s
-
-src/MIDI_Parsers/Tests/tests.o: src/MIDI_Parsers/Tests/tests.cpp.o
-
-.PHONY : src/MIDI_Parsers/Tests/tests.o
-
-# target to build an object file
-src/MIDI_Parsers/Tests/tests.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Parsers/Tests/tests.cpp.o
-.PHONY : src/MIDI_Parsers/Tests/tests.cpp.o
-
-src/MIDI_Parsers/Tests/tests.i: src/MIDI_Parsers/Tests/tests.cpp.i
-
-.PHONY : src/MIDI_Parsers/Tests/tests.i
-
-# target to preprocess a source file
-src/MIDI_Parsers/Tests/tests.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Parsers/Tests/tests.cpp.i
-.PHONY : src/MIDI_Parsers/Tests/tests.cpp.i
-
-src/MIDI_Parsers/Tests/tests.s: src/MIDI_Parsers/Tests/tests.cpp.s
-
-.PHONY : src/MIDI_Parsers/Tests/tests.s
-
-# target to generate assembly for a file
-src/MIDI_Parsers/Tests/tests.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Parsers/Tests/tests.cpp.s
-.PHONY : src/MIDI_Parsers/Tests/tests.cpp.s
-
 src/MIDI_Parsers/USBMIDI_Parser.o: src/MIDI_Parsers/USBMIDI_Parser.cpp.o
 
 .PHONY : src/MIDI_Parsers/USBMIDI_Parser.o
@@ -1242,6 +1026,141 @@ src/Selectors/Selector.s: src/Selectors/Selector.cpp.s
 src/Selectors/Selector.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Selectors/Selector.cpp.s
 .PHONY : src/Selectors/Selector.cpp.s
+
+test/Hardware/test-button.o: test/Hardware/test-button.cpp.o
+
+.PHONY : test/Hardware/test-button.o
+
+# target to build an object file
+test/Hardware/test-button.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Hardware/test-button.cpp.o
+.PHONY : test/Hardware/test-button.cpp.o
+
+test/Hardware/test-button.i: test/Hardware/test-button.cpp.i
+
+.PHONY : test/Hardware/test-button.i
+
+# target to preprocess a source file
+test/Hardware/test-button.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Hardware/test-button.cpp.i
+.PHONY : test/Hardware/test-button.cpp.i
+
+test/Hardware/test-button.s: test/Hardware/test-button.cpp.s
+
+.PHONY : test/Hardware/test-button.s
+
+# target to generate assembly for a file
+test/Hardware/test-button.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Hardware/test-button.cpp.s
+.PHONY : test/Hardware/test-button.cpp.s
+
+test/Helpers/tests-bit-array.o: test/Helpers/tests-bit-array.cpp.o
+
+.PHONY : test/Helpers/tests-bit-array.o
+
+# target to build an object file
+test/Helpers/tests-bit-array.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/tests-bit-array.cpp.o
+.PHONY : test/Helpers/tests-bit-array.cpp.o
+
+test/Helpers/tests-bit-array.i: test/Helpers/tests-bit-array.cpp.i
+
+.PHONY : test/Helpers/tests-bit-array.i
+
+# target to preprocess a source file
+test/Helpers/tests-bit-array.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/tests-bit-array.cpp.i
+.PHONY : test/Helpers/tests-bit-array.cpp.i
+
+test/Helpers/tests-bit-array.s: test/Helpers/tests-bit-array.cpp.s
+
+.PHONY : test/Helpers/tests-bit-array.s
+
+# target to generate assembly for a file
+test/Helpers/tests-bit-array.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/tests-bit-array.cpp.s
+.PHONY : test/Helpers/tests-bit-array.cpp.s
+
+test/Helpers/tests-linked-list.o: test/Helpers/tests-linked-list.cpp.o
+
+.PHONY : test/Helpers/tests-linked-list.o
+
+# target to build an object file
+test/Helpers/tests-linked-list.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/tests-linked-list.cpp.o
+.PHONY : test/Helpers/tests-linked-list.cpp.o
+
+test/Helpers/tests-linked-list.i: test/Helpers/tests-linked-list.cpp.i
+
+.PHONY : test/Helpers/tests-linked-list.i
+
+# target to preprocess a source file
+test/Helpers/tests-linked-list.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/tests-linked-list.cpp.i
+.PHONY : test/Helpers/tests-linked-list.cpp.i
+
+test/Helpers/tests-linked-list.s: test/Helpers/tests-linked-list.cpp.s
+
+.PHONY : test/Helpers/tests-linked-list.s
+
+# target to generate assembly for a file
+test/Helpers/tests-linked-list.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/tests-linked-list.cpp.s
+.PHONY : test/Helpers/tests-linked-list.cpp.s
+
+test/MIDI_Inputs/tests.o: test/MIDI_Inputs/tests.cpp.o
+
+.PHONY : test/MIDI_Inputs/tests.o
+
+# target to build an object file
+test/MIDI_Inputs/tests.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/tests.cpp.o
+.PHONY : test/MIDI_Inputs/tests.cpp.o
+
+test/MIDI_Inputs/tests.i: test/MIDI_Inputs/tests.cpp.i
+
+.PHONY : test/MIDI_Inputs/tests.i
+
+# target to preprocess a source file
+test/MIDI_Inputs/tests.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/tests.cpp.i
+.PHONY : test/MIDI_Inputs/tests.cpp.i
+
+test/MIDI_Inputs/tests.s: test/MIDI_Inputs/tests.cpp.s
+
+.PHONY : test/MIDI_Inputs/tests.s
+
+# target to generate assembly for a file
+test/MIDI_Inputs/tests.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/tests.cpp.s
+.PHONY : test/MIDI_Inputs/tests.cpp.s
+
+test/MIDI_Parsers/tests.o: test/MIDI_Parsers/tests.cpp.o
+
+.PHONY : test/MIDI_Parsers/tests.o
+
+# target to build an object file
+test/MIDI_Parsers/tests.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Parsers/tests.cpp.o
+.PHONY : test/MIDI_Parsers/tests.cpp.o
+
+test/MIDI_Parsers/tests.i: test/MIDI_Parsers/tests.cpp.i
+
+.PHONY : test/MIDI_Parsers/tests.i
+
+# target to preprocess a source file
+test/MIDI_Parsers/tests.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Parsers/tests.cpp.i
+.PHONY : test/MIDI_Parsers/tests.cpp.i
+
+test/MIDI_Parsers/tests.s: test/MIDI_Parsers/tests.cpp.s
+
+.PHONY : test/MIDI_Parsers/tests.s
+
+# target to generate assembly for a file
+test/MIDI_Parsers/tests.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Parsers/tests.cpp.s
+.PHONY : test/MIDI_Parsers/tests.cpp.s
 
 test/test_example.o: test/test_example.cpp.o
 
@@ -1333,18 +1252,6 @@ help:
 	@echo "... src/Helpers/PrintStream.o"
 	@echo "... src/Helpers/PrintStream.i"
 	@echo "... src/Helpers/PrintStream.s"
-	@echo "... src/Helpers/Tests/tests-bit-array.o"
-	@echo "... src/Helpers/Tests/tests-bit-array.i"
-	@echo "... src/Helpers/Tests/tests-bit-array.s"
-	@echo "... src/Helpers/Tests/tests-linked-list.o"
-	@echo "... src/Helpers/Tests/tests-linked-list.i"
-	@echo "... src/Helpers/Tests/tests-linked-list.s"
-	@echo "... src/Helpers/Tests/tests-main.o"
-	@echo "... src/Helpers/Tests/tests-main.i"
-	@echo "... src/Helpers/Tests/tests-main.s"
-	@echo "... src/Helpers/Tests/tests.o"
-	@echo "... src/Helpers/Tests/tests.i"
-	@echo "... src/Helpers/Tests/tests.s"
 	@echo "... src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.o"
 	@echo "... src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.i"
 	@echo "... src/MIDI_Inputs/MIDI_Input_7SegmentDisplay.s"
@@ -1363,12 +1270,6 @@ help:
 	@echo "... src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.o"
 	@echo "... src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.i"
 	@echo "... src/MIDI_Inputs/MIDI_Input_V-Pot_Ring.s"
-	@echo "... src/MIDI_Inputs/Tests/tests-main.o"
-	@echo "... src/MIDI_Inputs/Tests/tests-main.i"
-	@echo "... src/MIDI_Inputs/Tests/tests-main.s"
-	@echo "... src/MIDI_Inputs/Tests/tests.o"
-	@echo "... src/MIDI_Inputs/Tests/tests.i"
-	@echo "... src/MIDI_Inputs/Tests/tests.s"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.o"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.i"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.s"
@@ -1387,18 +1288,27 @@ help:
 	@echo "... src/MIDI_Parsers/SerialMIDI_Parser.o"
 	@echo "... src/MIDI_Parsers/SerialMIDI_Parser.i"
 	@echo "... src/MIDI_Parsers/SerialMIDI_Parser.s"
-	@echo "... src/MIDI_Parsers/Tests/tests-main.o"
-	@echo "... src/MIDI_Parsers/Tests/tests-main.i"
-	@echo "... src/MIDI_Parsers/Tests/tests-main.s"
-	@echo "... src/MIDI_Parsers/Tests/tests.o"
-	@echo "... src/MIDI_Parsers/Tests/tests.i"
-	@echo "... src/MIDI_Parsers/Tests/tests.s"
 	@echo "... src/MIDI_Parsers/USBMIDI_Parser.o"
 	@echo "... src/MIDI_Parsers/USBMIDI_Parser.i"
 	@echo "... src/MIDI_Parsers/USBMIDI_Parser.s"
 	@echo "... src/Selectors/Selector.o"
 	@echo "... src/Selectors/Selector.i"
 	@echo "... src/Selectors/Selector.s"
+	@echo "... test/Hardware/test-button.o"
+	@echo "... test/Hardware/test-button.i"
+	@echo "... test/Hardware/test-button.s"
+	@echo "... test/Helpers/tests-bit-array.o"
+	@echo "... test/Helpers/tests-bit-array.i"
+	@echo "... test/Helpers/tests-bit-array.s"
+	@echo "... test/Helpers/tests-linked-list.o"
+	@echo "... test/Helpers/tests-linked-list.i"
+	@echo "... test/Helpers/tests-linked-list.s"
+	@echo "... test/MIDI_Inputs/tests.o"
+	@echo "... test/MIDI_Inputs/tests.i"
+	@echo "... test/MIDI_Inputs/tests.s"
+	@echo "... test/MIDI_Parsers/tests.o"
+	@echo "... test/MIDI_Parsers/tests.i"
+	@echo "... test/MIDI_Parsers/tests.s"
 	@echo "... test/test_example.o"
 	@echo "... test/test_example.i"
 	@echo "... test/test_example.s"
