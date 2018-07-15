@@ -13,3 +13,11 @@ TODO.txt
 *.o
 *.geany
 __pycache__/
+
+googletest-*/
+*.pc
+bin/
+lib/
+CMakeFiles/
+*.cmake
+CMakeCache.txt
