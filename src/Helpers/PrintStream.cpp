@@ -88,11 +88,12 @@ Print &noleadingzeros(Print &printer) {
   leadingZerosPrintStream = false;
   return printer;
 }
-
+#ifdef ARDUINO
 Print &operator<<(Print &printer, const __FlashStringHelper *s) {
     printer.print(s);
     return printer;
 }
+#endif
 Print &operator<<(Print &printer, const String &s) {
     printer.print(s);
     return printer;

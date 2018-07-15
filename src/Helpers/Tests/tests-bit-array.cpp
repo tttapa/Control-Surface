@@ -1,6 +1,6 @@
 // g++ -Wall -std=c++11 -o tests -I/home/pieter/lib/Catch2/single_include *.cpp && ./tests
 
-#ifndef ARDUINO
+#if !defined(ARDUINO) && !defined(GOOGLETEST)
 
 #include <catch.hpp>
 

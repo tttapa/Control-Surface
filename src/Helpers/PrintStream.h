@@ -24,8 +24,9 @@ Print &nouppercase(Print &printer);
 Print &showbase(Print &printer);
 Print &noshowbase(Print &printer);
 
-
+#ifdef ARDUINO
 Print &operator<<(Print &printer, const __FlashStringHelper *s);
+#endif
 Print &operator<<(Print &printer, const String &s);
 Print &operator<<(Print &printer, const char s[]);
 Print &operator<<(Print &printer, char c);

@@ -46,7 +46,9 @@ using std::setbase;
 using std::setprecision;
 using std::showbase;
 using std::uppercase;
-#define F(x) x
+#ifndef Arduino_h
+#define F(x) (x)
+#endif
 
 #ifdef DEBUG_OUT
 #undef DEBUG_OUT
