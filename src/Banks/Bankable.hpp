@@ -4,6 +4,8 @@
 #include "Bank.h"
 
 class Bankable {
+    friend class Bank;
+
   public:
     virtual ~Bankable() { bank->remove(this); }
 
@@ -58,17 +60,13 @@ class Bankable {
 
     uint8_t getBankSetting() const { return bank->getBankSetting(); }
 
-    void onBankSettingChangeAll() const {
-        for (const Bankable *e = this; e; e = e->next)
-            e->onBankSettingChange();
-    }
-
   protected:
     bool matchAddress(uint8_t targetAddress, uint8_t baseAddress,
                       uint8_t numberOfBanks) const {
         DEBUGFN(F("target address = ")
-                << hex << +targetAddress << F(", base address = ") << +baseAddress
-                << dec << F(", number of banks = ") << numberOfBanks);
+                << hex << +targetAddress << F(", base address = ")
+                << +baseAddress << dec << F(", number of banks = ")
+                << numberOfBanks);
         if (getAddressesPerBank() == 0)
             return targetAddress == baseAddress;
         int8_t addressDiff = targetAddress - baseAddress;
@@ -98,6 +96,10 @@ class Bankable {
     uint8_t addressesPerBank = 0;
 
     virtual void onBankSettingChange() const {}
+    void onBankSettingChangeAll() const {
+        for (const Bankable *e = this; e; e = e->next)
+            e->onBankSettingChange();
+    }
 
     template <class Node>
     friend void LinkedList::append(Node *, Node *&, Node *&);
