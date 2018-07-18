@@ -33,7 +33,7 @@ class PBPotentiometer : public MIDIFilteredAnalog<8> {
   private:
     void send(uint16_t value) const final override {
         value = (value << (14-8)) | (value >> (8-(14-8))); // Convert from 8-bit to 14-bit number
-        Control_Surface.MIDI()->send(PITCH_BEND,
+        Control_Surface.MIDI().send(PITCH_BEND,
                                      channel + channelOffset * tracksPerBank,
                                      value & 0x7F, value >> 7);
     }

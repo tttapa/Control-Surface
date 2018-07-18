@@ -1,5 +1,6 @@
 #include "Bank.h"
 #include "Bankable.hpp"
+#include "BankableMIDIOutputAddressable.hpp"
 
 Bank::Bank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
     if (tracksPerBank == 0) {
@@ -15,6 +16,10 @@ void Bank::add(Bankable &bankable, bankType type) {
     bankable.setBank(this, type);
 }
 
+void Bank::add(BankableMIDIOutputAddressable &bankable, bankType type) {
+    bankable.setBank(this, type);
+}
+
 void Bank::setBankSetting(uint8_t bankSetting) {
     this->bankSetting = bankSetting;
     first->onBankSettingChangeAll();
@@ -25,5 +30,6 @@ uint8_t Bank::getBankSetting() const { return bankSetting; }
 uint8_t Bank::getTracksPerBank() const { return tracksPerBank; }
 
 void Bank::remove(Bankable *bankable) {
+    bankable->removeBank();
     LinkedList::remove(bankable, first, last);
 }

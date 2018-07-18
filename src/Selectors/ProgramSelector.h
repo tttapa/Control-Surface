@@ -49,7 +49,7 @@ class ProgramSelector : public Selector {
 
   private:
     void updateImpl(uint8_t newSetting) {
-        Control_Surface.MIDI()->send(PROGRAM_CHANGE, channel,
+        Control_Surface.MIDI().send(PROGRAM_CHANGE, channel,
                                      addresses[newSetting]);
     }
 

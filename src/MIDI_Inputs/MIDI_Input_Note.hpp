@@ -22,10 +22,22 @@ class MIDI_Input_Note : public MIDI_Input_Element_Addressable {
 
     /**
      * @brief   Update all MIDI_Input_Note elements.
+     * 
+     * @see     MIDI_Input_Note#update
      */
     static void updateAll() {
         for (MIDI_Input_Note *e = first; e; e = e->next)
             e->update();
+    }
+
+    /** 
+     * @brief   Reset all MIDI_Input_Note elements to their initial state.
+     * 
+     * @see     MIDI_Input_Note#reset
+     */
+    static void resetAll() {
+        for (MIDI_Input_Note *e = first; e; e = e->next)
+            e->reset();
     }
 
     /**

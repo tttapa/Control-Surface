@@ -28,6 +28,16 @@ class MIDI_Input_CC : public MIDI_Input_Element_Addressable {
             e->update();
     }
 
+    /** 
+     * @brief   Reset all MIDI_Input_CC elements to their initial state.
+     * 
+     * @see     MIDI_Input_CC#reset
+     */
+    static void resetAll() {
+        for (MIDI_Input_CC *e = first; e; e = e->next)
+            e->reset();
+    }
+
     /**
      * @brief   Update all MIDI_Input_CC elements with a new MIDI message.
      * 

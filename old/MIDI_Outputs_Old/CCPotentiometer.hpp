@@ -29,7 +29,7 @@ class CCPotentiometer : public MIDIFilteredAnalog<7> {
 
   private:
     void send(uint16_t value) const final override {
-        Control_Surface.MIDI()->send(
+        Control_Surface.MIDI().send(
             CONTROL_CHANGE, channel + channelOffset * tracksPerBank,
             address + addressOffset * tracksPerBank, value);
     }

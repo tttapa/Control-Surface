@@ -22,6 +22,17 @@ class MIDI_Input_ChannelPressure : public MIDI_Input_Element {
         LinkedList::remove(this, first, last);
     }
 
+    /** 
+     * @brief   Reset all MIDI_Input_ChannelPressure elements to their initial 
+     *          state.
+     * 
+     * @see     MIDI_Input_Note#reset
+     */
+    static void resetAll() {
+        for (MIDI_Input_ChannelPressure *e = first; e; e = e->next)
+            e->reset();
+    }
+
     /**
      * @brief   Update all MIDI_Input_ChannelPressure elements.
      */

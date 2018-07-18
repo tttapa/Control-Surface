@@ -33,12 +33,12 @@ class NoteButtonLatching : public MIDIButtonLatching {
 
   private:
     void sendOn() const override {
-        Control_Surface.MIDI()->send(
+        Control_Surface.MIDI().send(
             NOTE_ON, channel + channelOffset * tracksPerBank,
             address + addressOffset * tracksPerBank, velocity);
     }
     void sendOff() const override {
-        Control_Surface.MIDI()->send(
+        Control_Surface.MIDI().send(
             NOTE_OFF, channel + channelOffset * tracksPerBank,
             address + addressOffset * tracksPerBank, velocity);
     }

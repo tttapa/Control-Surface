@@ -16,6 +16,11 @@ class MIDI_Input_Element_Addressable {
      */
     virtual void display() const {}
 
+    /** 
+     * @brief   Reset the input element to its initial state.
+     */
+    virtual void reset() = 0;
+
     /**
      * @brief   Update the value of the input element.  
      *          Used for decaying VU meters etc.
@@ -60,7 +65,9 @@ class MIDI_Input_Element_Addressable {
      *          matches an address of this element.
      */
     virtual inline bool matchAddress(uint8_t targetAddress) const {
-        DEBUGFN(F("target address = ") << hex << targetAddress << F("base address = ") << getBaseAddress() << dec);
+        DEBUGFN(F("target address = ")
+                << hex << targetAddress << F("base address = ")
+                << getBaseAddress() << dec);
         return getBaseAddress() == targetAddress;
     }
 
@@ -69,7 +76,9 @@ class MIDI_Input_Element_Addressable {
      *          matches an channel of this element.
      */
     virtual inline bool matchChannel(uint8_t targetChannel) const {
-        DEBUGFN(F("target channel = ") << hex << targetChannel << F("base channel = ") << getBaseChannel() << dec);
+        DEBUGFN(F("target channel = ")
+                << hex << targetChannel << F("base channel = ")
+                << getBaseChannel() << dec);
         return getBaseChannel() == targetChannel;
     }
 

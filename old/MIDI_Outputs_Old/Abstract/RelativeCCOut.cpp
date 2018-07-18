@@ -33,7 +33,7 @@ void RelativeCCOut::send(long delta) {
         // Mackie Control Universal compatibility
         long thisDelta = constrain(delta, -15, 15);
         uint8_t msgVal = mapRelativeCC(thisDelta, mode);
-        Control_Surface.MIDI()->send(
+        Control_Surface.MIDI().send(
             CONTROL_CHANGE, // send a Control Change MIDI event
             channel + channelOffset * tracksPerBank,
             controllerNumber + addressOffset * tracksPerBank, msgVal);

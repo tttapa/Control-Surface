@@ -21,6 +21,11 @@ class MIDI_Input_Element {
      */
     virtual void update() {}
 
+    /** 
+     * @brief   Reset the input element to its initial state.
+     */
+    virtual void reset() = 0;
+
     /**
      * @brief   Receive a new MIDI message and update the internal state.
      */

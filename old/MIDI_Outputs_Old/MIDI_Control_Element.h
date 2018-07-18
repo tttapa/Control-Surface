@@ -10,15 +10,18 @@
  * so they can be updated all at once by simply looping over
  * the entire list.
  */
-class MIDI_Control_Element : public MIDI_Element {
-    friend class Control_Surface_;
+class MIDI_Control_Element {
 
   public:
     MIDI_Control_Element() { LinkedList::append(this, first, last); }
-    ~MIDI_Control_Element() { LinkedList::remove(this, first, last); }
+    virtual ~MIDI_Control_Element() { LinkedList::remove(this, first, last); }
 
-    MIDI_Control_Element *getNext() { return next; } // @todo   Make private?
-    static MIDI_Control_Element *getFirst() { return first; }
+    virtual void update() = 0;
+    
+    void updateAll() {
+        for (MIDI_Control_Element *el = first; el; el = el->next)
+            el->update();
+    }
 
   private:
     MIDI_Control_Element *next = nullptr;

@@ -40,9 +40,12 @@ enable_testing()
 include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googlemock/include)
 
 # Arduino Core files
-include_directories("mock")
-file(GLOB_RECURSE ARDUINO_SOURCES "mock/*.cpp")
+include_directories("ArduinoMock")
+file(GLOB_RECURSE ARDUINO_SOURCES "ArduinoMock/*.cpp")
 add_library(ArduinoMock STATIC ${ARDUINO_SOURCES})
+
+# Mock
+include_directories("mock")
 
 # add_definitions(-DANALOG_FILTER_SHIFT_FACTOR_OVERRIDE=2)
 

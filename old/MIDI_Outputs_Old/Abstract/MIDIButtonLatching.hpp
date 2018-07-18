@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../Hardware/Button.h"
-#include "DigitalMIDIOut.h"
+#include "DigitalMIDIOut.hpp"
+#include <Hardware/Button.h>
 
 /**
  * @brief   A class for latching buttons and switches that send MIDI events.
@@ -22,16 +22,6 @@ class MIDIButtonLatching : public DigitalMIDIOut {
     MIDIButtonLatching(pin_t pin) : button{pin} {}
 
   private:
-    /**
-     * @brief   Send the appropriate MIDI event for turning on the button.
-     */
-    virtual void sendOn() const = 0;
-
-    /**
-     * @brief   Send the appropriate MIDI event for turning off the button.
-     */
-    virtual void sendOff() const = 0;
-
     void refresh() final override {
         Button::State state = button.getState();
         if (state == Button::Falling || state == Button::Rising) {
@@ -39,8 +29,6 @@ class MIDIButtonLatching : public DigitalMIDIOut {
             sendOff();
         }
     }
-
-    bool isActive() const final override { return false; }
 
     Button button;
 };

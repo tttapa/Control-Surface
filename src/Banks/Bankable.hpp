@@ -21,18 +21,6 @@ class Bankable {
 
     uint8_t getChannelsPerBank() const { return channelsPerBank; }
 
-    void setBank(Bank *bank, Bank::bankType type) {
-        if (this->bank != nullptr) {
-            DEBUGFN(F("Error: This Bankable already has a Bank."));
-            ERROR(return );
-        }
-        this->bank = bank;
-        if (type == Bank::CHANGE_ADDRESS)
-            addressesPerBank = bank->getTracksPerBank();
-        else
-            channelsPerBank = bank->getTracksPerBank();
-    }
-
     uint8_t getAddressIndex(uint8_t targetAddress, uint8_t baseAddress) const {
         if (getAddressesPerBank() == 0) {
             DEBUGFN(F("Error: This Bankable element is not banked with type "
@@ -58,7 +46,13 @@ class Bankable {
                    : getChannelIndex(targetChannel, baseChannel);
     }
 
-    uint8_t getBankSetting() const { return bank->getBankSetting(); }
+    uint8_t getBankSetting() const {
+        if (bank == nullptr) {
+            DEBUGFN(F("Error: This Bankable element does not have a bank."));
+            ERROR(return 0);
+        }
+        return bank->getBankSetting();
+    }
 
   protected:
     bool matchAddress(uint8_t targetAddress, uint8_t baseAddress,
@@ -99,6 +93,24 @@ class Bankable {
     void onBankSettingChangeAll() const {
         for (const Bankable *e = this; e; e = e->next)
             e->onBankSettingChange();
+    }
+
+    void setBank(Bank *bank, Bank::bankType type) {
+        if (this->bank != nullptr) {
+            DEBUGFN(F("Error: This Bankable already has a Bank."));
+            ERROR(return );
+        }
+        this->bank = bank;
+        if (type == Bank::CHANGE_ADDRESS)
+            addressesPerBank = bank->getTracksPerBank();
+        else
+            channelsPerBank = bank->getTracksPerBank();
+    }
+
+    void removeBank() {
+        this->bank = nullptr;
+        addressesPerBank = 0;
+        channelsPerBank = 0;
     }
 
     template <class Node>

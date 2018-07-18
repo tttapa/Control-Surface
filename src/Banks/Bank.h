@@ -1,10 +1,11 @@
 #pragma once
 
-#include "../Helpers/LinkedList.h"
+#include <Helpers/LinkedList.h>
 #include <stddef.h>
 #include <stdint.h>
 
 class Bankable;
+class BankableMIDIOutputAddressable;
 
 /**
  * @brief   A class that groups MIDI_Element%s and allows the user to change
@@ -126,6 +127,12 @@ class Bank {
         for (Bankable &bankable : bankables)
             add(bankable, type);
     }
+
+    /** 
+     * @todo    Documentation.
+     */
+    void add(BankableMIDIOutputAddressable &bankable,
+             bankType type = CHANGE_ADDRESS);
 
     /**
      * @brief   Set the Bank Setting

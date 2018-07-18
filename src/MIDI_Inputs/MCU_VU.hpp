@@ -81,6 +81,8 @@ class MCU_VU : virtual public MCU_VU_Base {
         return true;
     }
 
+    void reset() override { value = 0; }
+
   private:
     void decayAll() override {
         if (getValue() > 0)
@@ -129,11 +131,16 @@ class MCU_VU_Bankable : virtual public MCU_VU_Base, public Bankable {
         return true;
     }
 
+    void reset() override {
+        for (uint8_t &value : values)
+            value = 0;
+    }
+
   private:
     void decayAll() override {
-        for (uint8_t i = 0; i < NUMBER_OF_BANKS; i++)
-            if (getValueHelper(values[i]) > 0)
-                values[i]--;
+        for (uint8_t &value : values)
+            if (getValueHelper(value) > 0)
+                value--;
     }
 
     uint8_t getRawValue() const override {

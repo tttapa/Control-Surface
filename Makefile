@@ -271,113 +271,113 @@ gtest_main/fast:
 	$(MAKE) -f googletest/googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make googletest/googletest-build/googlemock/gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
-mock/Arduino.o: mock/Arduino.cpp.o
+ArduinoMock/Arduino.o: ArduinoMock/Arduino.cpp.o
 
-.PHONY : mock/Arduino.o
-
-# target to build an object file
-mock/Arduino.cpp.o:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/Arduino.cpp.o
-.PHONY : mock/Arduino.cpp.o
-
-mock/Arduino.i: mock/Arduino.cpp.i
-
-.PHONY : mock/Arduino.i
-
-# target to preprocess a source file
-mock/Arduino.cpp.i:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/Arduino.cpp.i
-.PHONY : mock/Arduino.cpp.i
-
-mock/Arduino.s: mock/Arduino.cpp.s
-
-.PHONY : mock/Arduino.s
-
-# target to generate assembly for a file
-mock/Arduino.cpp.s:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/Arduino.cpp.s
-.PHONY : mock/Arduino.cpp.s
-
-mock/HardwareSerial0.o: mock/HardwareSerial0.cpp.o
-
-.PHONY : mock/HardwareSerial0.o
+.PHONY : ArduinoMock/Arduino.o
 
 # target to build an object file
-mock/HardwareSerial0.cpp.o:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/HardwareSerial0.cpp.o
-.PHONY : mock/HardwareSerial0.cpp.o
+ArduinoMock/Arduino.cpp.o:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/Arduino.cpp.o
+.PHONY : ArduinoMock/Arduino.cpp.o
 
-mock/HardwareSerial0.i: mock/HardwareSerial0.cpp.i
+ArduinoMock/Arduino.i: ArduinoMock/Arduino.cpp.i
 
-.PHONY : mock/HardwareSerial0.i
+.PHONY : ArduinoMock/Arduino.i
 
 # target to preprocess a source file
-mock/HardwareSerial0.cpp.i:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/HardwareSerial0.cpp.i
-.PHONY : mock/HardwareSerial0.cpp.i
+ArduinoMock/Arduino.cpp.i:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/Arduino.cpp.i
+.PHONY : ArduinoMock/Arduino.cpp.i
 
-mock/HardwareSerial0.s: mock/HardwareSerial0.cpp.s
+ArduinoMock/Arduino.s: ArduinoMock/Arduino.cpp.s
 
-.PHONY : mock/HardwareSerial0.s
+.PHONY : ArduinoMock/Arduino.s
 
 # target to generate assembly for a file
-mock/HardwareSerial0.cpp.s:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/HardwareSerial0.cpp.s
-.PHONY : mock/HardwareSerial0.cpp.s
+ArduinoMock/Arduino.cpp.s:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/Arduino.cpp.s
+.PHONY : ArduinoMock/Arduino.cpp.s
 
-mock/Print.o: mock/Print.cpp.o
+ArduinoMock/HardwareSerial0.o: ArduinoMock/HardwareSerial0.cpp.o
 
-.PHONY : mock/Print.o
+.PHONY : ArduinoMock/HardwareSerial0.o
 
 # target to build an object file
-mock/Print.cpp.o:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/Print.cpp.o
-.PHONY : mock/Print.cpp.o
+ArduinoMock/HardwareSerial0.cpp.o:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/HardwareSerial0.cpp.o
+.PHONY : ArduinoMock/HardwareSerial0.cpp.o
 
-mock/Print.i: mock/Print.cpp.i
+ArduinoMock/HardwareSerial0.i: ArduinoMock/HardwareSerial0.cpp.i
 
-.PHONY : mock/Print.i
+.PHONY : ArduinoMock/HardwareSerial0.i
 
 # target to preprocess a source file
-mock/Print.cpp.i:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/Print.cpp.i
-.PHONY : mock/Print.cpp.i
+ArduinoMock/HardwareSerial0.cpp.i:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/HardwareSerial0.cpp.i
+.PHONY : ArduinoMock/HardwareSerial0.cpp.i
 
-mock/Print.s: mock/Print.cpp.s
+ArduinoMock/HardwareSerial0.s: ArduinoMock/HardwareSerial0.cpp.s
 
-.PHONY : mock/Print.s
+.PHONY : ArduinoMock/HardwareSerial0.s
 
 # target to generate assembly for a file
-mock/Print.cpp.s:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/Print.cpp.s
-.PHONY : mock/Print.cpp.s
+ArduinoMock/HardwareSerial0.cpp.s:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/HardwareSerial0.cpp.s
+.PHONY : ArduinoMock/HardwareSerial0.cpp.s
 
-mock/WMath.o: mock/WMath.cpp.o
+ArduinoMock/Print.o: ArduinoMock/Print.cpp.o
 
-.PHONY : mock/WMath.o
+.PHONY : ArduinoMock/Print.o
 
 # target to build an object file
-mock/WMath.cpp.o:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/WMath.cpp.o
-.PHONY : mock/WMath.cpp.o
+ArduinoMock/Print.cpp.o:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/Print.cpp.o
+.PHONY : ArduinoMock/Print.cpp.o
 
-mock/WMath.i: mock/WMath.cpp.i
+ArduinoMock/Print.i: ArduinoMock/Print.cpp.i
 
-.PHONY : mock/WMath.i
+.PHONY : ArduinoMock/Print.i
 
 # target to preprocess a source file
-mock/WMath.cpp.i:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/WMath.cpp.i
-.PHONY : mock/WMath.cpp.i
+ArduinoMock/Print.cpp.i:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/Print.cpp.i
+.PHONY : ArduinoMock/Print.cpp.i
 
-mock/WMath.s: mock/WMath.cpp.s
+ArduinoMock/Print.s: ArduinoMock/Print.cpp.s
 
-.PHONY : mock/WMath.s
+.PHONY : ArduinoMock/Print.s
 
 # target to generate assembly for a file
-mock/WMath.cpp.s:
-	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/mock/WMath.cpp.s
-.PHONY : mock/WMath.cpp.s
+ArduinoMock/Print.cpp.s:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/Print.cpp.s
+.PHONY : ArduinoMock/Print.cpp.s
+
+ArduinoMock/WMath.o: ArduinoMock/WMath.cpp.o
+
+.PHONY : ArduinoMock/WMath.o
+
+# target to build an object file
+ArduinoMock/WMath.cpp.o:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/WMath.cpp.o
+.PHONY : ArduinoMock/WMath.cpp.o
+
+ArduinoMock/WMath.i: ArduinoMock/WMath.cpp.i
+
+.PHONY : ArduinoMock/WMath.i
+
+# target to preprocess a source file
+ArduinoMock/WMath.cpp.i:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/WMath.cpp.i
+.PHONY : ArduinoMock/WMath.cpp.i
+
+ArduinoMock/WMath.s: ArduinoMock/WMath.cpp.s
+
+.PHONY : ArduinoMock/WMath.s
+
+# target to generate assembly for a file
+ArduinoMock/WMath.cpp.s:
+	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/WMath.cpp.s
+.PHONY : ArduinoMock/WMath.cpp.s
 
 src/Banks/Bank.o: src/Banks/Bank.cpp.o
 
@@ -757,86 +757,32 @@ src/MIDI_Interfaces/MIDI_Interface.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Interfaces/MIDI_Interface.cpp.s
 .PHONY : src/MIDI_Interfaces/MIDI_Interface.cpp.s
 
-src/MIDI_Outputs/Abstract/DigitalMIDIOut.o: src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.o
+src/MIDI_Outputs/MIDI_Output.o: src/MIDI_Outputs/MIDI_Output.cpp.o
 
-.PHONY : src/MIDI_Outputs/Abstract/DigitalMIDIOut.o
-
-# target to build an object file
-src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.o
-.PHONY : src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.o
-
-src/MIDI_Outputs/Abstract/DigitalMIDIOut.i: src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.i
-
-.PHONY : src/MIDI_Outputs/Abstract/DigitalMIDIOut.i
-
-# target to preprocess a source file
-src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.i
-.PHONY : src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.i
-
-src/MIDI_Outputs/Abstract/DigitalMIDIOut.s: src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.s
-
-.PHONY : src/MIDI_Outputs/Abstract/DigitalMIDIOut.s
-
-# target to generate assembly for a file
-src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.s
-.PHONY : src/MIDI_Outputs/Abstract/DigitalMIDIOut.cpp.s
-
-src/MIDI_Outputs/Abstract/RelativeCCOut.o: src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.o
-
-.PHONY : src/MIDI_Outputs/Abstract/RelativeCCOut.o
+.PHONY : src/MIDI_Outputs/MIDI_Output.o
 
 # target to build an object file
-src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.o
-.PHONY : src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.o
+src/MIDI_Outputs/MIDI_Output.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/MIDI_Output.cpp.o
+.PHONY : src/MIDI_Outputs/MIDI_Output.cpp.o
 
-src/MIDI_Outputs/Abstract/RelativeCCOut.i: src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.i
+src/MIDI_Outputs/MIDI_Output.i: src/MIDI_Outputs/MIDI_Output.cpp.i
 
-.PHONY : src/MIDI_Outputs/Abstract/RelativeCCOut.i
-
-# target to preprocess a source file
-src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.i
-.PHONY : src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.i
-
-src/MIDI_Outputs/Abstract/RelativeCCOut.s: src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.s
-
-.PHONY : src/MIDI_Outputs/Abstract/RelativeCCOut.s
-
-# target to generate assembly for a file
-src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.s
-.PHONY : src/MIDI_Outputs/Abstract/RelativeCCOut.cpp.s
-
-src/MIDI_Outputs/MIDI_Control_Element.o: src/MIDI_Outputs/MIDI_Control_Element.cpp.o
-
-.PHONY : src/MIDI_Outputs/MIDI_Control_Element.o
-
-# target to build an object file
-src/MIDI_Outputs/MIDI_Control_Element.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/MIDI_Control_Element.cpp.o
-.PHONY : src/MIDI_Outputs/MIDI_Control_Element.cpp.o
-
-src/MIDI_Outputs/MIDI_Control_Element.i: src/MIDI_Outputs/MIDI_Control_Element.cpp.i
-
-.PHONY : src/MIDI_Outputs/MIDI_Control_Element.i
+.PHONY : src/MIDI_Outputs/MIDI_Output.i
 
 # target to preprocess a source file
-src/MIDI_Outputs/MIDI_Control_Element.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/MIDI_Control_Element.cpp.i
-.PHONY : src/MIDI_Outputs/MIDI_Control_Element.cpp.i
+src/MIDI_Outputs/MIDI_Output.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/MIDI_Output.cpp.i
+.PHONY : src/MIDI_Outputs/MIDI_Output.cpp.i
 
-src/MIDI_Outputs/MIDI_Control_Element.s: src/MIDI_Outputs/MIDI_Control_Element.cpp.s
+src/MIDI_Outputs/MIDI_Output.s: src/MIDI_Outputs/MIDI_Output.cpp.s
 
-.PHONY : src/MIDI_Outputs/MIDI_Control_Element.s
+.PHONY : src/MIDI_Outputs/MIDI_Output.s
 
 # target to generate assembly for a file
-src/MIDI_Outputs/MIDI_Control_Element.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/MIDI_Control_Element.cpp.s
-.PHONY : src/MIDI_Outputs/MIDI_Control_Element.cpp.s
+src/MIDI_Outputs/MIDI_Output.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/MIDI_Output.cpp.s
+.PHONY : src/MIDI_Outputs/MIDI_Output.cpp.s
 
 src/MIDI_Parsers/MIDI_Parser.o: src/MIDI_Parsers/MIDI_Parser.cpp.o
 
@@ -1054,6 +1000,60 @@ test/MIDI_Inputs/tests-MCU_VU.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/tests-MCU_VU.cpp.s
 .PHONY : test/MIDI_Inputs/tests-MCU_VU.cpp.s
 
+test/MIDI_Outputs/test-CCButton.o: test/MIDI_Outputs/test-CCButton.cpp.o
+
+.PHONY : test/MIDI_Outputs/test-CCButton.o
+
+# target to build an object file
+test/MIDI_Outputs/test-CCButton.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-CCButton.cpp.o
+.PHONY : test/MIDI_Outputs/test-CCButton.cpp.o
+
+test/MIDI_Outputs/test-CCButton.i: test/MIDI_Outputs/test-CCButton.cpp.i
+
+.PHONY : test/MIDI_Outputs/test-CCButton.i
+
+# target to preprocess a source file
+test/MIDI_Outputs/test-CCButton.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-CCButton.cpp.i
+.PHONY : test/MIDI_Outputs/test-CCButton.cpp.i
+
+test/MIDI_Outputs/test-CCButton.s: test/MIDI_Outputs/test-CCButton.cpp.s
+
+.PHONY : test/MIDI_Outputs/test-CCButton.s
+
+# target to generate assembly for a file
+test/MIDI_Outputs/test-CCButton.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-CCButton.cpp.s
+.PHONY : test/MIDI_Outputs/test-CCButton.cpp.s
+
+test/MIDI_Outputs/test-NoteButton.o: test/MIDI_Outputs/test-NoteButton.cpp.o
+
+.PHONY : test/MIDI_Outputs/test-NoteButton.o
+
+# target to build an object file
+test/MIDI_Outputs/test-NoteButton.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-NoteButton.cpp.o
+.PHONY : test/MIDI_Outputs/test-NoteButton.cpp.o
+
+test/MIDI_Outputs/test-NoteButton.i: test/MIDI_Outputs/test-NoteButton.cpp.i
+
+.PHONY : test/MIDI_Outputs/test-NoteButton.i
+
+# target to preprocess a source file
+test/MIDI_Outputs/test-NoteButton.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-NoteButton.cpp.i
+.PHONY : test/MIDI_Outputs/test-NoteButton.cpp.i
+
+test/MIDI_Outputs/test-NoteButton.s: test/MIDI_Outputs/test-NoteButton.cpp.s
+
+.PHONY : test/MIDI_Outputs/test-NoteButton.s
+
+# target to generate assembly for a file
+test/MIDI_Outputs/test-NoteButton.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-NoteButton.cpp.s
+.PHONY : test/MIDI_Outputs/test-NoteButton.cpp.s
+
 test/MIDI_Parsers/tests.o: test/MIDI_Parsers/tests.cpp.o
 
 .PHONY : test/MIDI_Parsers/tests.o
@@ -1129,18 +1129,18 @@ help:
 	@echo "... gmock"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... mock/Arduino.o"
-	@echo "... mock/Arduino.i"
-	@echo "... mock/Arduino.s"
-	@echo "... mock/HardwareSerial0.o"
-	@echo "... mock/HardwareSerial0.i"
-	@echo "... mock/HardwareSerial0.s"
-	@echo "... mock/Print.o"
-	@echo "... mock/Print.i"
-	@echo "... mock/Print.s"
-	@echo "... mock/WMath.o"
-	@echo "... mock/WMath.i"
-	@echo "... mock/WMath.s"
+	@echo "... ArduinoMock/Arduino.o"
+	@echo "... ArduinoMock/Arduino.i"
+	@echo "... ArduinoMock/Arduino.s"
+	@echo "... ArduinoMock/HardwareSerial0.o"
+	@echo "... ArduinoMock/HardwareSerial0.i"
+	@echo "... ArduinoMock/HardwareSerial0.s"
+	@echo "... ArduinoMock/Print.o"
+	@echo "... ArduinoMock/Print.i"
+	@echo "... ArduinoMock/Print.s"
+	@echo "... ArduinoMock/WMath.o"
+	@echo "... ArduinoMock/WMath.i"
+	@echo "... ArduinoMock/WMath.s"
 	@echo "... src/Banks/Bank.o"
 	@echo "... src/Banks/Bank.i"
 	@echo "... src/Banks/Bank.s"
@@ -1183,15 +1183,9 @@ help:
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.o"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.i"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.s"
-	@echo "... src/MIDI_Outputs/Abstract/DigitalMIDIOut.o"
-	@echo "... src/MIDI_Outputs/Abstract/DigitalMIDIOut.i"
-	@echo "... src/MIDI_Outputs/Abstract/DigitalMIDIOut.s"
-	@echo "... src/MIDI_Outputs/Abstract/RelativeCCOut.o"
-	@echo "... src/MIDI_Outputs/Abstract/RelativeCCOut.i"
-	@echo "... src/MIDI_Outputs/Abstract/RelativeCCOut.s"
-	@echo "... src/MIDI_Outputs/MIDI_Control_Element.o"
-	@echo "... src/MIDI_Outputs/MIDI_Control_Element.i"
-	@echo "... src/MIDI_Outputs/MIDI_Control_Element.s"
+	@echo "... src/MIDI_Outputs/MIDI_Output.o"
+	@echo "... src/MIDI_Outputs/MIDI_Output.i"
+	@echo "... src/MIDI_Outputs/MIDI_Output.s"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.o"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.i"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.s"
@@ -1216,6 +1210,12 @@ help:
 	@echo "... test/MIDI_Inputs/tests-MCU_VU.o"
 	@echo "... test/MIDI_Inputs/tests-MCU_VU.i"
 	@echo "... test/MIDI_Inputs/tests-MCU_VU.s"
+	@echo "... test/MIDI_Outputs/test-CCButton.o"
+	@echo "... test/MIDI_Outputs/test-CCButton.i"
+	@echo "... test/MIDI_Outputs/test-CCButton.s"
+	@echo "... test/MIDI_Outputs/test-NoteButton.o"
+	@echo "... test/MIDI_Outputs/test-NoteButton.i"
+	@echo "... test/MIDI_Outputs/test-NoteButton.s"
 	@echo "... test/MIDI_Parsers/tests.o"
 	@echo "... test/MIDI_Parsers/tests.i"
 	@echo "... test/MIDI_Parsers/tests.s"

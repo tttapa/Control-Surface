@@ -29,6 +29,8 @@ class Note_Input : public virtual Note_Input_Base {
 
     uint8_t getValue() const override { return value; }
 
+    void reset() override { value = 0; }
+
   private:
     bool updateImpl(const MIDI_message_matcher &midimsg) override {
         this->value = getValueFromMIDIMessage(midimsg);
@@ -50,6 +52,11 @@ class Note_Input_Bankable : public virtual Note_Input_Base, public Bankable {
 
     uint8_t getValue() const override {
         return values[getBankSetting() % NUMBER_OF_BANKS];
+    }
+
+    void reset() override {
+        for (uint8_t &value : values)
+            value = 0;
     }
 
   private:

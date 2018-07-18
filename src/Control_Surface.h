@@ -19,17 +19,19 @@
 #include "Control_Surface/Control_Surface_Class.h"
 
 // -------------------------------------------------------------------------- //
-#include "MIDI_Outputs/CCPotentiometer.hpp"
-#include "MIDI_Outputs/PBPotentiometer.hpp"
-#include "MIDI_Outputs/NoteButtonMatrix.hpp"
-#include "MIDI_Outputs/CCButtonMatrix.hpp"
-#include "MIDI_Outputs/NoteButton.hpp"
-#include "MIDI_Outputs/NoteButtonLatching.hpp"
-#include "MIDI_Outputs/CCButton.hpp"
-#include "MIDI_Outputs/CCButtonLatching.hpp"
+// #include "MIDI_Outputs/CCPotentiometer.hpp"
+// #include "MIDI_Outputs/PBPotentiometer.hpp"
+// #include "MIDI_Outputs/NoteButtonMatrix.hpp"
+// #include "MIDI_Outputs/CCButtonMatrix.hpp"
+// #include "MIDI_Outputs/NoteButton.hpp"
+// #include "MIDI_Outputs/NoteButtonLatching.hpp"
+// #include "MIDI_Outputs/CCButton.hpp"
+// #include "MIDI_Outputs/CCButtonLatching.hpp"
 #ifdef Encoder_h_
-#include "MIDI_Outputs/RotaryEncoder.hpp"
+// #include "MIDI_Outputs/RotaryEncoder.hpp"
 #endif
+
+#include "MIDI_Outputs/MIDIButton.hpp"
 
 // -------------------------------------------------------------------------- //
 #include "MIDI_Inputs/MCU_7SegmentDisplay.hpp"
