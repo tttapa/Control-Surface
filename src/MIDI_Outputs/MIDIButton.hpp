@@ -157,8 +157,8 @@ class MIDIButtons_Bankable : public BankableMIDIOutputAddressable {
                     (addressIncrement & 0xF)) {}
 
     void update() final override {
-        uint8_t channel = baseChannel;
-        uint8_t address = baseAddress;
+        uint8_t channel = getChannel(baseChannel);
+        uint8_t address = getAddress(baseAddress);
         uint8_t channelIncrement = getChannelIncrement();
         uint8_t addressIncrement = getAddressIncrement();
         for (Button &button : buttons) {
