@@ -757,32 +757,32 @@ src/MIDI_Interfaces/MIDI_Interface.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Interfaces/MIDI_Interface.cpp.s
 .PHONY : src/MIDI_Interfaces/MIDI_Interface.cpp.s
 
-src/MIDI_Outputs/MIDI_Output.o: src/MIDI_Outputs/MIDI_Output.cpp.o
+src/MIDI_Outputs/AbstractMIDIOutput.o: src/MIDI_Outputs/AbstractMIDIOutput.cpp.o
 
-.PHONY : src/MIDI_Outputs/MIDI_Output.o
+.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.o
 
 # target to build an object file
-src/MIDI_Outputs/MIDI_Output.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/MIDI_Output.cpp.o
-.PHONY : src/MIDI_Outputs/MIDI_Output.cpp.o
+src/MIDI_Outputs/AbstractMIDIOutput.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/AbstractMIDIOutput.cpp.o
+.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.cpp.o
 
-src/MIDI_Outputs/MIDI_Output.i: src/MIDI_Outputs/MIDI_Output.cpp.i
+src/MIDI_Outputs/AbstractMIDIOutput.i: src/MIDI_Outputs/AbstractMIDIOutput.cpp.i
 
-.PHONY : src/MIDI_Outputs/MIDI_Output.i
+.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.i
 
 # target to preprocess a source file
-src/MIDI_Outputs/MIDI_Output.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/MIDI_Output.cpp.i
-.PHONY : src/MIDI_Outputs/MIDI_Output.cpp.i
+src/MIDI_Outputs/AbstractMIDIOutput.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/AbstractMIDIOutput.cpp.i
+.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.cpp.i
 
-src/MIDI_Outputs/MIDI_Output.s: src/MIDI_Outputs/MIDI_Output.cpp.s
+src/MIDI_Outputs/AbstractMIDIOutput.s: src/MIDI_Outputs/AbstractMIDIOutput.cpp.s
 
-.PHONY : src/MIDI_Outputs/MIDI_Output.s
+.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.s
 
 # target to generate assembly for a file
-src/MIDI_Outputs/MIDI_Output.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/MIDI_Output.cpp.s
-.PHONY : src/MIDI_Outputs/MIDI_Output.cpp.s
+src/MIDI_Outputs/AbstractMIDIOutput.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/AbstractMIDIOutput.cpp.s
+.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.cpp.s
 
 src/MIDI_Parsers/MIDI_Parser.o: src/MIDI_Parsers/MIDI_Parser.cpp.o
 
@@ -1054,6 +1054,33 @@ test/MIDI_Outputs/test-NoteButton.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-NoteButton.cpp.s
 .PHONY : test/MIDI_Outputs/test-NoteButton.cpp.s
 
+test/MIDI_Outputs/test-NoteButtonLatching.o: test/MIDI_Outputs/test-NoteButtonLatching.cpp.o
+
+.PHONY : test/MIDI_Outputs/test-NoteButtonLatching.o
+
+# target to build an object file
+test/MIDI_Outputs/test-NoteButtonLatching.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-NoteButtonLatching.cpp.o
+.PHONY : test/MIDI_Outputs/test-NoteButtonLatching.cpp.o
+
+test/MIDI_Outputs/test-NoteButtonLatching.i: test/MIDI_Outputs/test-NoteButtonLatching.cpp.i
+
+.PHONY : test/MIDI_Outputs/test-NoteButtonLatching.i
+
+# target to preprocess a source file
+test/MIDI_Outputs/test-NoteButtonLatching.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-NoteButtonLatching.cpp.i
+.PHONY : test/MIDI_Outputs/test-NoteButtonLatching.cpp.i
+
+test/MIDI_Outputs/test-NoteButtonLatching.s: test/MIDI_Outputs/test-NoteButtonLatching.cpp.s
+
+.PHONY : test/MIDI_Outputs/test-NoteButtonLatching.s
+
+# target to generate assembly for a file
+test/MIDI_Outputs/test-NoteButtonLatching.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-NoteButtonLatching.cpp.s
+.PHONY : test/MIDI_Outputs/test-NoteButtonLatching.cpp.s
+
 test/MIDI_Parsers/tests.o: test/MIDI_Parsers/tests.cpp.o
 
 .PHONY : test/MIDI_Parsers/tests.o
@@ -1183,9 +1210,9 @@ help:
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.o"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.i"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.s"
-	@echo "... src/MIDI_Outputs/MIDI_Output.o"
-	@echo "... src/MIDI_Outputs/MIDI_Output.i"
-	@echo "... src/MIDI_Outputs/MIDI_Output.s"
+	@echo "... src/MIDI_Outputs/AbstractMIDIOutput.o"
+	@echo "... src/MIDI_Outputs/AbstractMIDIOutput.i"
+	@echo "... src/MIDI_Outputs/AbstractMIDIOutput.s"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.o"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.i"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.s"
@@ -1216,6 +1243,9 @@ help:
 	@echo "... test/MIDI_Outputs/test-NoteButton.o"
 	@echo "... test/MIDI_Outputs/test-NoteButton.i"
 	@echo "... test/MIDI_Outputs/test-NoteButton.s"
+	@echo "... test/MIDI_Outputs/test-NoteButtonLatching.o"
+	@echo "... test/MIDI_Outputs/test-NoteButtonLatching.i"
+	@echo "... test/MIDI_Outputs/test-NoteButtonLatching.s"
 	@echo "... test/MIDI_Parsers/tests.o"
 	@echo "... test/MIDI_Parsers/tests.i"
 	@echo "... test/MIDI_Parsers/tests.s"

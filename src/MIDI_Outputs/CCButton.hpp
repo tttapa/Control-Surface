@@ -6,6 +6,8 @@
 #include "MIDIButtons.hpp"
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
+// TODO: these are all in one file because I'm lazy
+
 class CCButton : public MIDIButton<DigitalCCSender> {
   public:
     CCButton(pin_t pin, uint8_t controller, uint8_t channel)

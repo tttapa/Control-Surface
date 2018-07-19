@@ -1,19 +1,21 @@
 #pragma once
 
-#include "Bankable/MIDIButton.hpp"
-#include "Bankable/MIDIButtons.hpp"
-#include "MIDIButton.hpp"
-#include "MIDIButtons.hpp"
+#include "Bankable/MIDIButtonLatching.hpp"
+//#include "Bankable/MIDIButtonsLatching.hpp"
+#include "MIDIButtonLatching.hpp"
+//#include "MIDIButtonsLatching.hpp"
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
 // TODO: these are all in one file because I'm lazy
 
-class NoteButton : public MIDIButton<DigitalNoteSender> {
+class NoteButtonLatching : public MIDIButtonLatching<DigitalNoteSender> {
   public:
-    NoteButton(pin_t pin, uint8_t note, uint8_t channel)
-        : MIDIButton(pin, note, channel) {}
+    NoteButtonLatching(pin_t pin, uint8_t note, uint8_t channel)
+        : MIDIButtonLatching(pin, note, channel) {}
 };
 
+/*
+TODO
 template <uint8_t NUMBER_OF_BUTTONS>
 class NoteButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalNoteSender> {
   public:
@@ -24,15 +26,18 @@ class NoteButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalNoteSender> {
               buttons, baseNote, baseChannel, noteIncrement, channelIncrement) {
     }
 };
+*/
 
 namespace BankableNS {
 
-class NoteButton : public MIDIButton<DigitalNoteSender> {
+class NoteButtonLatching : public MIDIButtonLatching<DigitalNoteSender> {
   public:
-    NoteButton(pin_t pin, uint8_t note, uint8_t channel)
-        : MIDIButton(pin, note, channel) {}
+    NoteButtonLatching(pin_t pin, uint8_t note, uint8_t channel)
+        : MIDIButtonLatching(pin, note, channel) {}
 };
 
+/*
+TODO
 template <uint8_t NUMBER_OF_BUTTONS>
 class NoteButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalNoteSender> {
   public:
@@ -43,5 +48,6 @@ class NoteButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalNoteSender> {
               buttons, baseNote, baseChannel, noteIncrement, channelIncrement) {
     }
 };
+*/
 
 } // namespace BankableNS
