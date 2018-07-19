@@ -154,4 +154,18 @@ TEST(NoteButtonBankable, pressAndChangeSettingAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F));
     button.update();
+
+    // Pressing again (with new bank setting)
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(5000));
+    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C + 4, 0x7F));
+    button.update();
+
+    // Releasing again (with new bank setting)
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(6000));
+    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C + 4, 0x7F));
+    button.update();
 }

@@ -153,3 +153,42 @@ TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x00));
     button.update();
 }
+
+// -------------------------------------------------------------------------- //
+
+TEST(CCButtons, pressAndRelease) {
+    MockMIDI_Interface midi;
+    Control_Surface.setMIDI_Interface(midi);
+
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
+    CCButtons<2> buttons = {{2, 3}, 0x3C, 7, 1, 2};
+
+/*
+    // Still released
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
+    buttons.update();
+
+    // Pressing
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
+    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x7F));
+    buttons.update();
+
+    // Still pressed
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(3000));
+    buttons.update();
+
+    // Releasing
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
+    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x00));
+    buttons.update();
+*/
+}

@@ -31,7 +31,10 @@ class BankableMIDIOutputAddressable
     }
 
   protected:
-    void lock() { lockedSetting = getRawBankSetting(); }
+    void lock() {
+        if (lockedSetting == UNLOCKED)
+            lockedSetting = getRawBankSetting();
+    }
 
     void unlock() { lockedSetting = UNLOCKED; }
 
