@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Abstract_MIDI_Output_Addressable.hpp"
 #include "MIDIButton.hpp"
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 

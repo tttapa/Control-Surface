@@ -22,10 +22,6 @@ class Abstract_MIDI_Output {
             el->update();
     }
 
-    virtual uint8_t getChannel(uint8_t baseChannel) const {
-        return baseChannel;
-    }
-
   private:
     Abstract_MIDI_Output *next = nullptr;
     Abstract_MIDI_Output *previous = nullptr;

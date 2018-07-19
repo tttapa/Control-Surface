@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Abstract_MIDI_Output_Addressable.hpp"
+#include "Abstract_MIDI_Output.hpp"
 #include <Hardware/Button.h>
 
 /**
@@ -11,7 +11,7 @@
  * @see     Button
  */
 template <class Sender>
-class MIDIButton : public Abstract_MIDI_Output_Addressable {
+class MIDIButton : public Abstract_MIDI_Output {
   public:
     /**
      * @brief   Construct a new MIDIButton.
@@ -50,7 +50,8 @@ class MIDIButton : public Abstract_MIDI_Output_Addressable {
  * @see     Button
  */
 template <class Sender>
-class MIDIButton_Bankable : public BankableMIDIOutputAddressable {
+class MIDIButton_Bankable : public BankableMIDIOutputAddressable,
+                            public Abstract_MIDI_Output {
   public:
     /**
      * @brief   Construct a new bankable MIDIButton.
@@ -91,7 +92,7 @@ class MIDIButton_Bankable : public BankableMIDIOutputAddressable {
  * @see     Button
  */
 template <uint8_t NUMBER_OF_BUTTONS, class Sender>
-class MIDIButtons : public Abstract_MIDI_Output_Addressable {
+class MIDIButtons : public Abstract_MIDI_Output {
   public:
     /**
      * @brief   Construct a new MIDIButtons.
@@ -142,7 +143,8 @@ class MIDIButtons : public Abstract_MIDI_Output_Addressable {
  * @see     Button
  */
 template <uint8_t NUMBER_OF_BUTTONS, class Sender>
-class MIDIButtons_Bankable : public BankableMIDIOutputAddressable {
+class MIDIButtons_Bankable : public BankableMIDIOutputAddressable,
+                             public Abstract_MIDI_Output {
   public:
     /**
      * @brief   Construct a new MIDIButtons_Bankable.

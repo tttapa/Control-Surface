@@ -1,16 +1,14 @@
 #include "Bank.h"
-#include <MIDI_Outputs/Abstract_MIDI_Output_Addressable.hpp>
 
-class BankableMIDIOutputAddressable
-    : public virtual Abstract_MIDI_Output_Addressable {
+class BankableMIDIOutputAddressable {
     friend class Bank;
 
   public:
-    uint8_t getChannel(uint8_t baseChannel) const override {
+    uint8_t getChannel(uint8_t baseChannel) const {
         return baseChannel + getChannelsPerBank() * getBankSetting();
     }
 
-    uint8_t getAddress(uint8_t baseAddress) const override {
+    uint8_t getAddress(uint8_t baseAddress) const {
         return baseAddress + getAddressesPerBank() * getBankSetting();
     }
 
