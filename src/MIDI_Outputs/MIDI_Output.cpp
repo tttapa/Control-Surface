@@ -1,4 +1,4 @@
-#include "Abstract_MIDI_Output.hpp"
+#include "AbstractMIDIOutput.hpp"
 
-Abstract_MIDI_Output *Abstract_MIDI_Output::last = nullptr;
-Abstract_MIDI_Output *Abstract_MIDI_Output::first = nullptr;
+AbstractMIDIOutput *AbstractMIDIOutput::last = nullptr;
+AbstractMIDIOutput *AbstractMIDIOutput::first = nullptr;

@@ -1,7 +1,10 @@
 #pragma once
 
-#include "AbstractMIDIOutput.hpp"
+#include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Hardware/Button.h>
+#include <MIDI_Outputs/AbstractMIDIOutput.hpp>
+
+namespace BankableNS {
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
@@ -11,10 +14,11 @@
  * @see     Button
  */
 template <class Sender>
-class MIDIButton : public AbstractMIDIOutput {
+class MIDIButton : public BankableMIDIOutputAddressable,
+                   public AbstractMIDIOutput {
   public:
     /**
-     * @brief   Construct a new MIDIButton.
+     * @brief   Construct a new bankable MIDIButton.
      * 
      * @param   pin
      *          The digital input pin with the button connected.  
@@ -26,9 +30,11 @@ class MIDIButton : public AbstractMIDIOutput {
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling) {
-            Sender::sendOn(baseChannel, baseAddress);
+            lock();
+            Sender::sendOn(getChannel(baseChannel), getAddress(baseAddress));
         } else if (state == Button::Rising) {
-            Sender::sendOff(baseChannel, baseAddress);
+            Sender::sendOff(getChannel(baseChannel), getAddress(baseAddress));
+            unlock();
         }
     }
 
@@ -37,3 +43,5 @@ class MIDIButton : public AbstractMIDIOutput {
     const uint8_t baseAddress;
     const uint8_t baseChannel;
 };
+
+} // namespace BankableNS

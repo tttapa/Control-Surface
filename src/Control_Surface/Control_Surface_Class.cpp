@@ -3,7 +3,7 @@
 #include <MIDI_Inputs/MIDI_Input_CC.hpp>
 #include <MIDI_Inputs/MIDI_Input_Note.hpp>
 #include <MIDI_Inputs/MIDI_Input_ChannelPressure.hpp>
-#include <MIDI_Outputs/Abstract_MIDI_Output.hpp>
+#include <MIDI_Outputs/AbstractMIDIOutput.hpp>
 
 Control_Surface_ &Control_Surface_::getInstance() {
     static Control_Surface_ instance;
@@ -49,7 +49,7 @@ void Control_Surface_::setMIDI_Interface(MIDI_Interface &midi) {
 }
 
 void Control_Surface_::updateControls() {
-    Abstract_MIDI_Output::updateAll();
+    AbstractMIDIOutput::updateAll();
 }
 
 void Control_Surface_::updateSelectors() {

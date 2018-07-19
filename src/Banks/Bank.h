@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Helpers/LinkedList.h>
+#include <Helpers/Debug.hpp>
 #include <stddef.h>
 #include <stdint.h>
 
