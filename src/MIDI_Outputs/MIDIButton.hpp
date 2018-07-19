@@ -10,7 +10,8 @@
  * 
  * @see     Button
  */
-class MIDIButton : public virtual Abstract_Digital_MIDI_Output_Addressable {
+template <class Sender>
+class MIDIButton : public Abstract_MIDI_Output_Addressable {
   public:
     /**
      * @brief   Construct a new MIDIButton.
@@ -25,9 +26,9 @@ class MIDIButton : public virtual Abstract_Digital_MIDI_Output_Addressable {
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling) {
-            sendOn(baseChannel, baseAddress);
+            Sender::sendOn(baseChannel, baseAddress);
         } else if (state == Button::Rising) {
-            sendOff(baseChannel, baseAddress);
+            Sender::sendOff(baseChannel, baseAddress);
         }
     }
 
@@ -48,9 +49,8 @@ class MIDIButton : public virtual Abstract_Digital_MIDI_Output_Addressable {
  * 
  * @see     Button
  */
-class MIDIButton_Bankable
-    : public virtual Abstract_Digital_MIDI_Output_Addressable,
-      public BankableMIDIOutputAddressable {
+template <class Sender>
+class MIDIButton_Bankable : public BankableMIDIOutputAddressable {
   public:
     /**
      * @brief   Construct a new bankable MIDIButton.
@@ -66,9 +66,9 @@ class MIDIButton_Bankable
         Button::State state = button.getState();
         if (state == Button::Falling) {
             lock();
-            sendOn(getChannel(baseChannel), getAddress(baseAddress));
+            Sender::sendOn(getChannel(baseChannel), getAddress(baseAddress));
         } else if (state == Button::Rising) {
-            sendOff(getChannel(baseChannel), getAddress(baseAddress));
+            Sender::sendOff(getChannel(baseChannel), getAddress(baseAddress));
             unlock();
         }
     }
@@ -81,6 +81,8 @@ class MIDIButton_Bankable
 
 // -------------------------------------------------------------------------- //
 
+#include <Helpers/ArrayWrapper.hpp>
+
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
  * 
@@ -88,20 +90,18 @@ class MIDIButton_Bankable
  * 
  * @see     Button
  */
-template <uint8_t NUMBER_OF_BUTTONS>
-class MIDIButtons_Bankable
-    : public virtual Abstract_Digital_MIDI_Output_Addressable,
-      public BankableMIDIOutputAddressable {
+template <uint8_t NUMBER_OF_BUTTONS, class Sender>
+class MIDIButtons : public Abstract_MIDI_Output_Addressable {
   public:
     /**
-     * @brief   Construct a new MIDIButtons_Bankable.
+     * @brief   Construct a new MIDIButtons.
      * 
      * @todo    Documentation
      */
-    MIDIButtons_Bankable(const Button (&buttons)[NUMBER_OF_BUTTONS],
-                         uint8_t baseAddress, uint8_t baseChannel,
-                         uint8_t addressIncrement, uint8_t channelIncrement)
-        : buttons(buttons), baseAddress(baseAddress), baseChannel(baseChannel),
+    MIDIButtons(const ArrayWrapper<Button, NUMBER_OF_BUTTONS> &buttons,
+                uint8_t baseAddress, uint8_t baseChannel,
+                uint8_t addressIncrement, uint8_t channelIncrement)
+        : buttons{buttons}, baseAddress(baseAddress), baseChannel(baseChannel),
           increment(((channelIncrement & 0xF) << 4) |
                     (addressIncrement & 0xF)) {}
 
@@ -110,15 +110,66 @@ class MIDIButtons_Bankable
         uint8_t address = baseAddress;
         uint8_t channelIncrement = getChannelIncrement();
         uint8_t addressIncrement = getAddressIncrement();
-        for (uint8_t i = 0; i < NUMBER_OF_BUTTONS; i++) {
-            Button::State state = buttons[i].getState();
+        for (Button &button : buttons) {
+            Button::State state = button.getState();
+            if (state == Button::Falling) {
+                Sender::sendOn(channel, address);
+            } else if (state == Button::Rising) {
+                Sender::sendOff(channel, address);
+            }
+            channel += channelIncrement;
+            address += addressIncrement;
+        }
+    }
+
+    uint8_t getChannelIncrement() const { return increment >> 4; }
+    uint8_t getAddressIncrement() const { return increment & 0xF; }
+
+  private:
+    ArrayWrapper<Button, NUMBER_OF_BUTTONS> buttons;
+    const uint8_t baseAddress;
+    const uint8_t baseChannel;
+    const uint8_t increment;
+};
+
+// -------------------------------------------------------------------------- //
+
+/**
+ * @brief   An abstract class for momentary push buttons that send MIDI events.
+ * 
+ * The buttons are debounced.
+ * 
+ * @see     Button
+ */
+template <uint8_t NUMBER_OF_BUTTONS, class Sender>
+class MIDIButtons_Bankable : public BankableMIDIOutputAddressable {
+  public:
+    /**
+     * @brief   Construct a new MIDIButtons_Bankable.
+     * 
+     * @todo    Documentation
+     */
+    MIDIButtons_Bankable(const ArrayWrapper<Button, NUMBER_OF_BUTTONS> &buttons,
+                         uint8_t baseAddress, uint8_t baseChannel,
+                         uint8_t addressIncrement, uint8_t channelIncrement)
+        : buttons{buttons}, baseAddress(baseAddress), baseChannel(baseChannel),
+          increment(((channelIncrement & 0xF) << 4) |
+                    (addressIncrement & 0xF)) {}
+
+    void update() final override {
+        uint8_t channel = baseChannel;
+        uint8_t address = baseAddress;
+        uint8_t channelIncrement = getChannelIncrement();
+        uint8_t addressIncrement = getAddressIncrement();
+        for (Button &button : buttons) {
+            Button::State state = button.getState();
             if (state == Button::Falling) {
                 if (!activeButtons)
                     lock(); // Don't allow changing of the bank setting
                 activeButtons++;
-                sendOn(channel, address);
+                Sender::sendOn(channel, address);
             } else if (state == Button::Rising) {
-                sendOff(channel, address);
+                Sender::sendOff(channel, address);
                 activeButtons--;
                 if (!activeButtons)
                     unlock();
@@ -132,59 +183,9 @@ class MIDIButtons_Bankable
     uint8_t getAddressIncrement() const { return increment & 0xF; }
 
   private:
-    Button buttons[NUMBER_OF_BUTTONS];
+    ArrayWrapper<Button, NUMBER_OF_BUTTONS> buttons;
     const uint8_t baseAddress;
     const uint8_t baseChannel;
     const uint8_t increment;
     uint8_t activeButtons = 0;
-};
-// -------------------------------------------------------------------------- //
-
-/**
- * @brief   An abstract class for momentary push buttons that send MIDI events.
- * 
- * The buttons are debounced.
- * 
- * @see     Button
- */
-template <uint8_t NUMBER_OF_BUTTONS>
-class MIDIButtons : public virtual Abstract_Digital_MIDI_Output_Addressable {
-  public:
-    /**
-     * @brief   Construct a new MIDIButtons.
-     * 
-     * @todo    Documentation
-     */
-    MIDIButtons(const Button (&buttons)[NUMBER_OF_BUTTONS], uint8_t baseAddress,
-                uint8_t baseChannel, uint8_t addressIncrement,
-                uint8_t channelIncrement)
-        : buttons(buttons), baseAddress(baseAddress), baseChannel(baseChannel),
-          increment(((channelIncrement & 0xF) << 4) |
-                    (addressIncrement & 0xF)) {}
-
-    void update() final override {
-        uint8_t channel = baseChannel;
-        uint8_t address = baseAddress;
-        uint8_t channelIncrement = getChannelIncrement();
-        uint8_t addressIncrement = getAddressIncrement();
-        for (uint8_t i = 0; i < NUMBER_OF_BUTTONS; i++) {
-            Button::State state = buttons[i].getState();
-            if (state == Button::Falling) {
-                sendOn(channel, address);
-            } else if (state == Button::Rising) {
-                sendOff(channel, address);
-            }
-            channel += channelIncrement;
-            address += addressIncrement;
-        }
-    }
-
-    uint8_t getChannelIncrement() const { return increment >> 4; }
-    uint8_t getAddressIncrement() const { return increment & 0xF; }
-
-  private:
-    Button buttons[NUMBER_OF_BUTTONS];
-    const uint8_t baseAddress;
-    const uint8_t baseChannel;
-    const uint8_t increment;
 };
