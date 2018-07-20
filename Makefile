@@ -919,6 +919,33 @@ test/Hardware/test-button.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Hardware/test-button.cpp.s
 .PHONY : test/Hardware/test-button.cpp.s
 
+test/Helpers/test-Array.o: test/Helpers/test-Array.cpp.o
+
+.PHONY : test/Helpers/test-Array.o
+
+# target to build an object file
+test/Helpers/test-Array.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/test-Array.cpp.o
+.PHONY : test/Helpers/test-Array.cpp.o
+
+test/Helpers/test-Array.i: test/Helpers/test-Array.cpp.i
+
+.PHONY : test/Helpers/test-Array.i
+
+# target to preprocess a source file
+test/Helpers/test-Array.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/test-Array.cpp.i
+.PHONY : test/Helpers/test-Array.cpp.i
+
+test/Helpers/test-Array.s: test/Helpers/test-Array.cpp.s
+
+.PHONY : test/Helpers/test-Array.s
+
+# target to generate assembly for a file
+test/Helpers/test-Array.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/test-Array.cpp.s
+.PHONY : test/Helpers/test-Array.cpp.s
+
 test/Helpers/tests-bit-array.o: test/Helpers/tests-bit-array.cpp.o
 
 .PHONY : test/Helpers/tests-bit-array.o
@@ -1026,6 +1053,33 @@ test/MIDI_Outputs/test-CCButton.s: test/MIDI_Outputs/test-CCButton.cpp.s
 test/MIDI_Outputs/test-CCButton.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-CCButton.cpp.s
 .PHONY : test/MIDI_Outputs/test-CCButton.cpp.s
+
+test/MIDI_Outputs/test-MIDIButtonMatrix.o: test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.o
+
+.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.o
+
+# target to build an object file
+test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.o
+.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.o
+
+test/MIDI_Outputs/test-MIDIButtonMatrix.i: test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.i
+
+.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.i
+
+# target to preprocess a source file
+test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.i
+.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.i
+
+test/MIDI_Outputs/test-MIDIButtonMatrix.s: test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.s
+
+.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.s
+
+# target to generate assembly for a file
+test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.s
+.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.s
 
 test/MIDI_Outputs/test-NoteButton.o: test/MIDI_Outputs/test-NoteButton.cpp.o
 
@@ -1228,6 +1282,9 @@ help:
 	@echo "... test/Hardware/test-button.o"
 	@echo "... test/Hardware/test-button.i"
 	@echo "... test/Hardware/test-button.s"
+	@echo "... test/Helpers/test-Array.o"
+	@echo "... test/Helpers/test-Array.i"
+	@echo "... test/Helpers/test-Array.s"
 	@echo "... test/Helpers/tests-bit-array.o"
 	@echo "... test/Helpers/tests-bit-array.i"
 	@echo "... test/Helpers/tests-bit-array.s"
@@ -1240,6 +1297,9 @@ help:
 	@echo "... test/MIDI_Outputs/test-CCButton.o"
 	@echo "... test/MIDI_Outputs/test-CCButton.i"
 	@echo "... test/MIDI_Outputs/test-CCButton.s"
+	@echo "... test/MIDI_Outputs/test-MIDIButtonMatrix.o"
+	@echo "... test/MIDI_Outputs/test-MIDIButtonMatrix.i"
+	@echo "... test/MIDI_Outputs/test-MIDIButtonMatrix.s"
 	@echo "... test/MIDI_Outputs/test-NoteButton.o"
 	@echo "... test/MIDI_Outputs/test-NoteButton.i"
 	@echo "... test/MIDI_Outputs/test-NoteButton.s"

@@ -10,7 +10,7 @@ ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const pin_t (&rowPins)[nb_rows],
     // Note: this copies the data of rowPins and colPins, regardless of whether
     // it's static or temporary. This means that using global const arrays to
     // initialize ButtonMatrix is slightly less memory efficient than using
-    // brace-enclosed initializer lists. There are ways around this, but it's 
+    // brace-enclosed initializer lists. There are ways around this, but it's
     // not really pretty:
     // https://stackoverflow.com/questions/46382034/template-class-with-variable-array-size-initialize-with-array-reference-or-brac
     copy(this->rowPins, rowPins);
@@ -43,7 +43,6 @@ void ButtonMatrix<nb_rows, nb_cols>::refresh() {
                 // execute the handler
                 onButtonChanged(row, col, state);
                 setPrevState(col, row, state); // remember the state
-                active = !allReleased();
             }
         }
         pinMode(rowPins[row], INPUT); // make the current row Hi-Z again
@@ -55,8 +54,7 @@ void ButtonMatrix<nb_rows, nb_cols>::init() {
     // Create an array of bytes where each bit represents
     // the state of one of the buttons
     prevStates = new uint8_t[(nb_cols * nb_rows + 7) / 8];
-    memset(prevStates, 0xFF, (nb_cols * nb_rows + 7) / 8);
-    active = false;
+    memset(prevStates, 0xFF, sizeof(uint8_t[(nb_cols * nb_rows + 7) / 8]));
     // make all columns input pins and enable
     // the internal pull-up resistors
     for (const pin_t &colPin : colPins)
@@ -99,6 +97,7 @@ void ButtonMatrix<nb_rows, nb_cols>::setPrevState(uint8_t col, uint8_t row,
         prevStates[bitsToIndex(bits)] &= ~bitsToBitmask(bits);
 }
 
+/*
 template <uint8_t nb_rows, uint8_t nb_cols>
 bool ButtonMatrix<nb_rows, nb_cols>::allReleased() {
     size_t nb_bytes = (nb_cols * nb_rows + 7) / 8;
@@ -108,8 +107,4 @@ bool ButtonMatrix<nb_rows, nb_cols>::allReleased() {
     }
     return true;
 }
-
-template <uint8_t nb_rows, uint8_t nb_cols>
-bool ButtonMatrix<nb_rows, nb_cols>::isActive() const {
-    return this->active;
-}
+*/

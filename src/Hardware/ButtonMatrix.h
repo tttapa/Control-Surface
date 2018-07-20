@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h" // for pin_t
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h> // for pin_t
+#include <Settings/SettingsWrapper.h>
 
 /**
  * @brief   A MIDI_Control_Element that reads the states of a button matrix and
@@ -24,7 +25,7 @@ class ButtonMatrix {
      *          A list of pin numbers connected to the columns of the button
      *          matrix. These pins will be used as inputs, and the internal
      *          pull-up resistor will be enabled.
-     * @note    The lists of pins are copied. This means that they can be 
+     * @note    The lists of pins are copied. This means that they can be
      *          initialized with a brace-enclosed initializer list.
      */
     ButtonMatrix(const pin_t (&rowPins)[nb_rows],
@@ -34,23 +35,19 @@ class ButtonMatrix {
      */
     ~ButtonMatrix();
 
-  protected:
-    bool isActive() const;
+    void refresh();
 
   private:
     void init();
-    void refresh();
 
     virtual void onButtonChanged(uint8_t row, uint8_t col, bool state) = 0;
 
-    inline uint8_t positionToBits(uint8_t col, uint8_t row);
-    inline uint8_t bitsToIndex(uint8_t bits);
-    inline uint8_t bitsToBitmask(uint8_t bits);
+    static inline uint8_t positionToBits(uint8_t col, uint8_t row);
+    static inline uint8_t bitsToIndex(uint8_t bits);
+    static inline uint8_t bitsToBitmask(uint8_t bits);
     bool getPrevState(uint8_t col, uint8_t row);
     void setPrevState(uint8_t col, uint8_t row, bool state);
-    bool allReleased();
-
-    bool active;
+    // bool allReleased();
 
     unsigned long prevRefresh = 0;
     uint8_t *prevStates = nullptr;
