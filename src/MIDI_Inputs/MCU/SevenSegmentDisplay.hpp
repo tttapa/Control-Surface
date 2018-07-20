@@ -1,17 +1,19 @@
 #pragma once
 
-#include "MIDI_Input_CC.hpp"
+#include <MIDI_Inputs/MIDI_Input_CC.hpp>
 #include <Print.h>
 #include <string.h>
 
+namespace MCU {
+
 template <uint8_t LENGTH>
-class MCU_7SegmentDisplay : public MIDI_Input_CC, public Printable {
+class SevenSegmentDisplay : public MIDI_Input_CC, public Printable {
   public:
     /**
     * @brief     Constructor.
     * @todo      Documentation.
     */
-    MCU_7SegmentDisplay(uint8_t baseChannel, uint8_t baseAddress)
+    SevenSegmentDisplay(uint8_t baseChannel, uint8_t baseAddress)
         : MIDI_Input_CC(baseChannel, baseAddress) {
         memset(text, ' ', LENGTH);
     }
@@ -27,9 +29,8 @@ class MCU_7SegmentDisplay : public MIDI_Input_CC, public Printable {
         uint8_t decimalPt = (midimsg.data2 & 0x40) << 1;
         uint8_t data2 = midimsg.data2 & 0x3F;
         uint8_t character = data2 >= 0x20 ? data2 : data2 + 0x40;
-        DEBUGREF(F("\tCharacter @")
-                 << getBaseAddress() << ':' << index << '\t' << character
-                 << (decimalPt ? '.' : ' '));
+        DEBUGREF(F("\tCharacter @") << getBaseAddress() << ':' << index << '\t'
+                                    << character << (decimalPt ? '.' : ' '));
         character |= decimalPt;
         text[index] = character;
         return true;
@@ -47,10 +48,10 @@ class MCU_7SegmentDisplay : public MIDI_Input_CC, public Printable {
   public:
     /**
      * @brief   Copy the ASCII text into the given buffer.
-     * 
+     *
      * @param   buffer
-     *          The destination to write the text to.  
-     *          Will be null-terminated.  
+     *          The destination to write the text to.
+     *          Will be null-terminated.
      *          Should have a size of at least `length`+1 bytes.
      */
     void getText(char *buffer, uint8_t offset = 0,
@@ -73,9 +74,9 @@ class MCU_7SegmentDisplay : public MIDI_Input_CC, public Printable {
 
     /**
      * @brief   Copy the decimal points into the given buffer.
-     * 
+     *
      * @param   buffer
-     *          The destination to write the decimal points to.  
+     *          The destination to write the decimal points to.
      *          Should have a size of at least `LENGTH` bytes.
      */
     void getDecimalPoints(bool *buffer) const {
@@ -107,3 +108,5 @@ class MCU_7SegmentDisplay : public MIDI_Input_CC, public Printable {
   private:
     char text[LENGTH];
 };
+
+} // namespace MCU

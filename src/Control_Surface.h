@@ -1,6 +1,6 @@
 /**
  * @brief   The main header file that includes all Control-Surface header files.
- * 
+ *
  * @file    Control_Surface.h
  * @author  Pieter Pas
  * @date    2018-07-04
@@ -34,14 +34,14 @@
 #include "MIDI_Outputs/MIDIButton.hpp"
 
 // -------------------------------------------------------------------------- //
-#include "MIDI_Inputs/MCU_7SegmentDisplay.hpp"
-#include "MIDI_Inputs/MCU_AssignmentDisplay.hpp"
-#include "MIDI_Inputs/MCU_VPotRing.hpp"
+#include "MIDI_Inputs/MCU/SevenSegmentDisplay.hpp"
+#include "MIDI_Inputs/MCU/AssignmentDisplay.hpp"
+#include "MIDI_Inputs/MCU/VPotRing.hpp"
 #include "MIDI_Inputs/Note_Input.hpp"
 // #include "MIDI_Inputs/MIDI_Input_VU.h" // TODO
 
 // -------------------------------------------------------------------------- //
-#include "MIDI_Inputs/LEDs/MCU_VPotRing_LEDs.hpp"
+#include "MIDI_Inputs/LEDs/MCU/VPotRing_LEDs.hpp"
 #include "MIDI_Inputs/LEDs/Note_Input_LEDs.hpp"
 
 // -------------------------------------------------------------------------- //

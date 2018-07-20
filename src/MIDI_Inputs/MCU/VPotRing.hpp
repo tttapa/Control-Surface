@@ -1,6 +1,8 @@
 #pragma once
 
-#include "MIDI_Input_CC.hpp"
+#include <MIDI_Inputs/MIDI_Input_CC.hpp>
+
+namespace MCU {
 
 constexpr static uint8_t VPotRingAddress = 0x30;
 
@@ -8,11 +10,11 @@ constexpr static uint8_t VPotRingAddress = 0x30;
 inline int8_t minimum(int8_t a, int8_t b) { return a > b ? b : a; }
 inline int8_t maximum(int8_t a, int8_t b) { return a < b ? b : a; }
 
-class MCU_VPotRing_Base : public MIDI_Input_CC {
+class VPotRing_Base : public MIDI_Input_CC {
   protected:
-    MCU_VPotRing_Base(); // unused, only for virtual inheritance
+    VPotRing_Base(); // unused, only for virtual inheritance
   public:
-    MCU_VPotRing_Base(uint8_t track, uint8_t channel = 1)
+    VPotRing_Base(uint8_t track, uint8_t channel = 1)
         : MIDI_Input_CC(channel, track + VPotRingAddress - 1) {}
 
     uint8_t getPosition() const { return getPosition(getValue()); }
@@ -58,10 +60,10 @@ class MCU_VPotRing_Base : public MIDI_Input_CC {
 
 // -------------------------------------------------------------------------- //
 
-class MCU_VPotRing : public virtual MCU_VPotRing_Base {
+class VPotRing : public virtual VPotRing_Base {
   public:
-    MCU_VPotRing(uint8_t track, uint8_t channel = 1)
-        : MCU_VPotRing_Base(track, channel) {}
+    VPotRing(uint8_t track, uint8_t channel = 1)
+        : VPotRing_Base(track, channel) {}
 
   private:
     bool updateImpl(const MIDI_message_matcher &midimsg) override {
@@ -81,11 +83,11 @@ class MCU_VPotRing : public virtual MCU_VPotRing_Base {
 namespace Bankable {
 
 template <uint8_t NUMBER_OF_BANKS>
-class MCU_VPotRing : public virtual MCU_VPotRing_Base,
-                     public BankableMIDIInputAddressable {
+class VPotRing : public virtual VPotRing_Base,
+                 public BankableMIDIInputAddressable {
   public:
-    MCU_VPotRing(uint8_t track, uint8_t channel = 1)
-        : MCU_VPotRing_Base(track, channel) {}
+    VPotRing(uint8_t track, uint8_t channel = 1)
+        : VPotRing_Base(track, channel) {}
 
   private:
     bool updateImpl(const MIDI_message_matcher &midimsg) override {
@@ -109,3 +111,5 @@ class MCU_VPotRing : public virtual MCU_VPotRing_Base,
 };
 
 } // namespace Bankable
+
+} // namespace MCU

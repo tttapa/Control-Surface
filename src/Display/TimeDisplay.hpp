@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../MIDI_Inputs/MIDI_Input_7SegmentDisplay.h"
+#include "../MIDI_Inputs/MIDI_Input_SevenSegmentDisplay.h"
 #include "./DisplayElement.hpp"
 
 class TimeDisplay : public DisplayElement {

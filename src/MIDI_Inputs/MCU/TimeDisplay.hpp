@@ -1,14 +1,16 @@
 #pragma once
 
-#include "MCU_7SegmentDisplay.hpp"
+#include "SevenSegmentDisplay.hpp"
+
+namespace MCU {
 
 constexpr static uint8_t TimeDisplayLength = 10;
 constexpr static uint8_t TimeDisplayAddress = 0x40;
 
-class MCU_TimeDisplay : public MCU_7SegmentDisplay<TimeDisplayLength> {
+class TimeDisplay : public SevenSegmentDisplay<TimeDisplayLength> {
   public:
-    MCU_TimeDisplay(uint8_t channel = 1)
-        : MCU_7SegmentDisplay<TimeDisplayLength>(channel, TimeDisplayAddress) {}
+    TimeDisplay(uint8_t channel = 1)
+        : SevenSegmentDisplay<TimeDisplayLength>(channel, TimeDisplayAddress) {}
     void
     print() { // TODO: add support for 5-digit bar counts, maybe using decimalPt?
         char barStr[5], beatStr[3], frameStr[4];
@@ -40,3 +42,5 @@ class MCU_TimeDisplay : public MCU_7SegmentDisplay<TimeDisplayLength> {
         }
     }
 };
+
+} // namespace MCU

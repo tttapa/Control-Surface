@@ -30,7 +30,7 @@ void ShiftRegisterOut::update() {
     const uint8_t bufferLength = buffer.getBufferLength();
     if (bitOrder == LSBFIRST) {
         for (uint8_t i = 0; i < bufferLength; i++)
-            shiftOut(dataPin, clockPin, LSBFIRST, buffer.getByte(i));
+            ExtIO::shiftOut(dataPin, clockPin, LSBFIRST, buffer.getByte(i));
     } else {
         for (int8_t i = bufferLength - 1; i >= 0; i--)
             ExtIO::shiftOut(dataPin, clockPin, MSBFIRST, buffer.getByte(i));

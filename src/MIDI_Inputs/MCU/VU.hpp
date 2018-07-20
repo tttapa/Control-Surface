@@ -1,17 +1,16 @@
 #pragma once
 
-#include "MIDI_Input_ChannelPressure.hpp"
+#include <Banks/BankableMIDIInputAddressable.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <Helpers/Copy.hpp>
+#include <MIDI_Inputs/MIDI_Input_ChannelPressure.hpp>
 #include <string.h>
 
-using namespace ExtIO;
+namespace MCU {
 
-// -------------------------------------------------------------------------- //
-
-class MCU_VU_Base : public MIDI_Input_ChannelPressure {
+class VU_Base : public MIDI_Input_ChannelPressure {
   public:
-    MCU_VU_Base(uint8_t track, uint8_t channel, unsigned int decayTime)
+    VU_Base(uint8_t track, uint8_t channel, unsigned int decayTime)
         : MIDI_Input_ChannelPressure(channel), baseTrack(track - 1),
           decayTime(decayTime) {}
 
@@ -59,10 +58,10 @@ class MCU_VU_Base : public MIDI_Input_ChannelPressure {
 
 // -------------------------------------------------------------------------- //
 
-class MCU_VU : virtual public MCU_VU_Base {
+class VU : virtual public VU_Base {
   public:
-    MCU_VU(uint8_t track, uint8_t channel = 1, unsigned int decayTime = 300)
-        : MCU_VU_Base(track, channel, decayTime) {}
+    VU(uint8_t track, uint8_t channel = 1, unsigned int decayTime = 300)
+        : VU_Base(track, channel, decayTime) {}
 
     bool updateImpl(const MIDI_message_matcher &midimsg) {
         uint8_t targetTrack = midimsg.data1 >> 4;
@@ -103,15 +102,13 @@ class MCU_VU : virtual public MCU_VU_Base {
 
 // -------------------------------------------------------------------------- //
 
-#include <Banks/BankableMIDIInputAddressable.hpp>
-
 namespace Bankable {
 
 template <size_t NUMBER_OF_BANKS>
-class MCU_VU : public virtual MCU_VU_Base, public BankableMIDIInputAddressable {
+class VU : public virtual VU_Base, public BankableMIDIInputAddressable {
   public:
-    MCU_VU(uint8_t track, uint8_t channel = 1, unsigned int decayTime = 300)
-        : MCU_VU_Base(track, channel, decayTime) {}
+    VU(uint8_t track, uint8_t channel = 1, unsigned int decayTime = 300)
+        : VU_Base(track, channel, decayTime) {}
 
     bool updateImpl(const MIDI_message_matcher &midimsg) {
         uint8_t targetTrack = midimsg.data1 >> 4;
@@ -173,12 +170,12 @@ class MCU_VU : public virtual MCU_VU_Base, public BankableMIDIInputAddressable {
 
 // -------------------------------------------------------------------------- //
 /*
-class MCU_VU_LED : public MCU_VU {
+class VU_LED : public VU {
   public:
     template <size_t N>
-    MCU_VU_LED(const pin_t (&LEDs)[N], uint8_t address, uint8_t nb_addresses,
+    VU_LED(const pin_t (&LEDs)[N], uint8_t address, uint8_t nb_addresses,
                bool decay = true)
-        : MCU_VU(address, nb_addresses, decay), overloadpin(0), length(N),
+        : VU(address, nb_addresses, decay), overloadpin(0), length(N),
           overload(false) {
         static_assert(
             N <= 12,
@@ -188,7 +185,7 @@ class MCU_VU_LED : public MCU_VU {
         for (pin_t pin = 0; pin < length; pin++)
             ExtIO::pinMode(LEDs[pin], OUTPUT);
     }
-    ~MCU_VU_LED() { delete[] LEDs; }
+    ~VU_LED() { delete[] LEDs; }
 
   protected:
     const uint8_t length;
@@ -212,3 +209,5 @@ class MCU_VU_LED : public MCU_VU {
     }
 };
 */
+
+} // namespace MCU

@@ -1,4 +1,5 @@
-#include <MIDI_Inputs/MCU_VU.hpp>
+#include <MIDI_Inputs/MCU/VU.hpp>
+#include <Banks/Bank.h>
 #include <gtest/gtest.h>
 
 using namespace ::testing;
@@ -8,7 +9,7 @@ using namespace ::testing;
 TEST(MCUVU, setValue) {
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
-    MCU_VU vu(track, channel);
+    MCU::VU vu(track, channel);
     MIDI_message_matcher midimsg = {CHANNEL_PRESSURE, channel - 1,
                                     (track - 1) << 4 | 0xA, 0};
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
@@ -19,7 +20,7 @@ TEST(MCUVU, setValue) {
 TEST(MCUVU, setOverload) {
     constexpr uint8_t channel = 2;
     constexpr uint8_t track = 6;
-    MCU_VU vu(track, channel);
+    MCU::VU vu(track, channel);
     MIDI_message_matcher midimsg = {CHANNEL_PRESSURE, channel - 1,
                                     (track - 1) << 4 | 0xE, 0};
     MIDI_Input_ChannelPressure::updateAllWith(midimsg);
@@ -30,7 +31,7 @@ TEST(MCUVU, setOverload) {
 TEST(MCUVU, clearOverload) {
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
-    MCU_VU vu(track, channel);
+    MCU::VU vu(track, channel);
     MIDI_message_matcher midimsgSet = {CHANNEL_PRESSURE, channel - 1,
                                        (track - 1) << 4 | 0xE, 0};
     MIDI_Input_ChannelPressure::updateAllWith(midimsgSet);
@@ -44,7 +45,7 @@ TEST(MCUVU, clearOverload) {
 TEST(MCUVU, retainValueAfterOverload) {
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
-    MCU_VU vu(track, channel);
+    MCU::VU vu(track, channel);
     MIDI_message_matcher midimsg = {CHANNEL_PRESSURE, channel - 1,
                                     (track - 1) << 4 | 0x6, 0};
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
@@ -65,7 +66,7 @@ TEST(MCUVU, decay) {
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
     constexpr unsigned int decayTime = 300;
-    MCU_VU vu(track, channel, decayTime);
+    MCU::VU vu(track, channel, decayTime);
     MIDI_message_matcher midimsg = {CHANNEL_PRESSURE, channel - 1,
                                     (track - 1) << 4 | 0xA, 0};
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
@@ -82,7 +83,7 @@ TEST(MCUVU, decay) {
 TEST(MCUVUBankable, setValueBankChangeAddress) {
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
-    Bankable::MCU_VU<2> vu(track, channel);
+    MCU::Bankable::VU<2> vu(track, channel);
     Bank bank(4);
     bank.add(vu, Bank::CHANGE_ADDRESS);
     MIDI_message_matcher midimsg = {CHANNEL_PRESSURE, channel - 1,
@@ -97,7 +98,7 @@ TEST(MCUVUBankable, setValueBankChangeAddress) {
 TEST(MCUVUBankable, setValueBankChangeChannel) {
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
-    Bankable::MCU_VU<3> vu(track, channel);
+    MCU::Bankable::VU<3> vu(track, channel);
     Bank bank(4);
     bank.add(vu, Bank::CHANGE_CHANNEL);
     MIDI_message_matcher midimsg1 = {CHANNEL_PRESSURE, channel + 4 - 1,
@@ -119,7 +120,7 @@ TEST(MCUVUBankable, setValueBankChangeChannel) {
 TEST(MCUVUBankable, overloadBankChangeAddress) {
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
-    Bankable::MCU_VU<2> vu(track, channel);
+    MCU::Bankable::VU<2> vu(track, channel);
     Bank bank(4);
     bank.add(vu, Bank::CHANGE_ADDRESS);
     EXPECT_FALSE(vu.getOverload());
@@ -145,7 +146,7 @@ TEST(MCUVUBankable, decay) {
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
     constexpr unsigned int decayTime = 300;
-    Bankable::MCU_VU<2> vu(track, channel, decayTime);
+    MCU::Bankable::VU<2> vu(track, channel, decayTime);
     Bank bank(4);
     bank.add(vu, Bank::CHANGE_ADDRESS);
     MIDI_message_matcher midimsg = {CHANNEL_PRESSURE, channel - 1,

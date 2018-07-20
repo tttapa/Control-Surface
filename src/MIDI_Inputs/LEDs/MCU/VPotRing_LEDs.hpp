@@ -1,12 +1,14 @@
 #pragma once
 
-#include "../../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
-#include "../../Helpers/Copy.hpp"
-#include "../MCU_VPotRing.hpp"
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Helpers/Copy.hpp>
+#include <MIDI_Inputs/MCU/VPotRing.hpp>
 
-class MCU_VPotRing_LEDs_Base : public virtual MCU_VPotRing_Base {
+namespace MCU {
+
+class VPotRing_LEDs_Base : public virtual VPotRing_Base {
   public:
-    MCU_VPotRing_LEDs_Base(const pin_t (&ledPins)[11]) {
+    VPotRing_LEDs_Base(const pin_t (&ledPins)[11]) {
         copy(this->ledPins, ledPins);
         for (const pin_t &pin : ledPins)
             ExtIO::pinMode(pin, OUTPUT);
@@ -30,11 +32,10 @@ class MCU_VPotRing_LEDs_Base : public virtual MCU_VPotRing_Base {
 
 // -------------------------------------------------------------------------- //
 
-class MCU_VPotRing_LEDs : public MCU_VPotRing, public MCU_VPotRing_LEDs_Base {
+class VPotRing_LEDs : public VPotRing, public VPotRing_LEDs_Base {
   public:
-    MCU_VPotRing_LEDs(uint8_t track, uint8_t channel,
-                      const pin_t (&ledPins)[11])
-        : MCU_VPotRing(track, channel), MCU_VPotRing_LEDs_Base(ledPins) {}
+    VPotRing_LEDs(uint8_t track, uint8_t channel, const pin_t (&ledPins)[11])
+        : VPotRing(track, channel), VPotRing_LEDs_Base(ledPins) {}
 };
 
 // -------------------------------------------------------------------------- //
@@ -42,13 +43,14 @@ class MCU_VPotRing_LEDs : public MCU_VPotRing, public MCU_VPotRing_LEDs_Base {
 namespace Bankable {
 
 template <uint8_t NUMBER_OF_BANKS>
-class MCU_VPotRing_LEDs : public MCU_VPotRing<NUMBER_OF_BANKS>,
-                          public MCU_VPotRing_LEDs_Base {
+class VPotRing_LEDs : public VPotRing<NUMBER_OF_BANKS>,
+                      public VPotRing_LEDs_Base {
   public:
-    MCU_VPotRing_LEDs(uint8_t track, uint8_t channel,
-                      const pin_t (&ledPins)[11])
-        : MCU_VPotRing<NUMBER_OF_BANKS>(track, channel),
-          MCU_VPotRing_LEDs_Base(ledPins) {}
+    VPotRing_LEDs(uint8_t track, uint8_t channel, const pin_t (&ledPins)[11])
+        : VPotRing<NUMBER_OF_BANKS>(track, channel),
+          VPotRing_LEDs_Base(ledPins) {}
 };
 
 } // namespace Bankable
+
+} // namespace MCU
