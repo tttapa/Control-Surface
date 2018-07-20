@@ -5,7 +5,7 @@
 #include <Helpers/Array.hpp>
 
 template <uint8_t nb_rows, uint8_t nb_cols>
-using AddressMatrix = Array<Array<uint8_t, nb_cols>, nb_rows>;
+using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
 
 /**
  * @brief   MIDIButtonMatrix

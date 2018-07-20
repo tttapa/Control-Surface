@@ -36,9 +36,6 @@ TEST(Array, rangeForConst) {
 
 // -------------------------------------------------------------------------- //
 
-template <class T, uint8_t nb_rows, uint8_t nb_cols>
-using Array2D = Array<Array<T, nb_cols>, nb_rows>;
-
 TEST(Array2D, initialize) {
     Array2D<int, 3, 2> arr = {{{0,1},{2,3},{4,5}}};
     EXPECT_EQ(arr[0][0], 0);
