@@ -34,15 +34,15 @@ using std::remove_reference;
 
 // -------------------------------------------------------------------------- //
 
-template <class T, size_t N> class ArrayWrapper {
+template <class T, size_t N> class Array {
 public:
   template <
       typename Arg, typename... Args,
       // SFINAE to allow the copy constructor to do its job
       typename = typename enable_if<!(
           sizeof...(Args) == 0 && is_same<typename remove_reference<Arg>::type,
-                                          ArrayWrapper>::value)>::type>
-  ArrayWrapper(Arg arg, Args &&... arguments) : data{arg, arguments...} {}
+                                          Array>::value)>::type>
+  Array(Arg arg, Args &&... arguments) : data{arg, arguments...} {}
   T &operator[](size_t index) { return data[index]; }
   T *begin() { return &data[0]; }
   T *end() { return &data[N]; }

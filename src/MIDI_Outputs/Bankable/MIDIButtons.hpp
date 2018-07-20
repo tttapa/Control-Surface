@@ -2,7 +2,7 @@
 
 #include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Hardware/Button.h>
-#include <Helpers/ArrayWrapper.hpp>
+#include <Helpers/Array.hpp>
 #include <MIDI_Outputs/AbstractMIDIOutput.hpp>
 
 namespace Bankable {
@@ -23,7 +23,7 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
      *
      * @todo    Documentation
      */
-    MIDIButtons(const ArrayWrapper<Button, NUMBER_OF_BUTTONS> &buttons,
+    MIDIButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 uint8_t baseAddress, uint8_t baseChannel,
                 uint8_t addressIncrement, uint8_t channelIncrement)
         : buttons{buttons}, baseAddress(baseAddress), baseChannel(baseChannel),
@@ -57,7 +57,7 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
     uint8_t getAddressIncrement() const { return increment & 0xF; }
 
   private:
-    ArrayWrapper<Button, NUMBER_OF_BUTTONS> buttons;
+    Array<Button, NUMBER_OF_BUTTONS> buttons;
     const uint8_t baseAddress;
     const uint8_t baseChannel;
     const uint8_t increment;
