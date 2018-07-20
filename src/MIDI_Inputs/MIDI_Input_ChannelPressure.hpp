@@ -22,10 +22,10 @@ class MIDI_Input_ChannelPressure : public MIDI_Input_Element {
         LinkedList::remove(this, first, last);
     }
 
-    /** 
-     * @brief   Reset all MIDI_Input_ChannelPressure elements to their initial 
+    /**
+     * @brief   Reset all MIDI_Input_ChannelPressure elements to their initial
      *          state.
-     * 
+     *
      * @see     MIDI_Input_Note#reset
      */
     static void resetAll() {
@@ -42,8 +42,9 @@ class MIDI_Input_ChannelPressure : public MIDI_Input_Element {
     }
 
     /**
-     * @brief   Update all MIDI_Input_ChannelPressure elements with a new MIDI message.
-     * 
+     * @brief   Update all MIDI_Input_ChannelPressure elements with a new MIDI
+     *          message.
+     *
      * @see     MIDI_Input_ChannelPressure#updateWith
      */
     static void updateAllWith(const MIDI_message_matcher &midimsg) {

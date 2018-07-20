@@ -1,13 +1,13 @@
 #pragma once
 
-#include "../Helpers/Debug.hpp"
 #include "Bank.h"
+#include <Helpers/Debug.hpp>
 
-class Bankable {
+class BankableMIDIInputAddressable {
     friend class Bank;
 
   public:
-    virtual ~Bankable() { bank->remove(this); }
+    virtual ~BankableMIDIInputAddressable() { bank->remove(this); }
 
     uint8_t getChannel(uint8_t baseChannel) const {
         return baseChannel + getChannelsPerBank() * getBankSetting();
@@ -84,14 +84,14 @@ class Bankable {
 
   private:
     Bank *bank = nullptr;
-    Bankable *next = nullptr;
-    Bankable *previous = nullptr;
+    BankableMIDIInputAddressable *next = nullptr;
+    BankableMIDIInputAddressable *previous = nullptr;
     uint8_t channelsPerBank = 0;
     uint8_t addressesPerBank = 0;
 
     virtual void onBankSettingChange() const {}
     void onBankSettingChangeAll() const {
-        for (const Bankable *e = this; e; e = e->next)
+        for (const BankableMIDIInputAddressable *e = this; e; e = e->next)
             e->onBankSettingChange();
     }
 

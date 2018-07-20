@@ -47,7 +47,7 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
     Control_Surface.setMIDI_Interface(midi);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    BankableNS::NoteButtonLatching button(2, 0x3C, 7);
+    Bankable::NoteButtonLatching button(2, 0x3C, 7);
 
     Bank bank(4);
     bank.add(button);
@@ -86,7 +86,7 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
     Control_Surface.setMIDI_Interface(midi);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    BankableNS::NoteButtonLatching button(2, 0x3C, 7);
+    Bankable::NoteButtonLatching button(2, 0x3C, 7);
 
     Bank bank(4);
     // Change bank setting
@@ -127,7 +127,7 @@ TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
     Control_Surface.setMIDI_Interface(midi);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    BankableNS::NoteButtonLatching button(2, 0x3C, 7);
+    Bankable::NoteButtonLatching button(2, 0x3C, 7);
 
     Bank bank(4);
     bank.add(button);

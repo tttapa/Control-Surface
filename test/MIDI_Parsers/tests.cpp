@@ -5,7 +5,7 @@
 
 typedef std::vector<uint8_t> SysExVector;
 
-// --------------------------- USB PARSER TESTS --------------------------- //
+// ---------------------------- USB PARSER TESTS ---------------------------- //
 
 USBMIDI_Parser uparser;
 
@@ -134,7 +134,7 @@ TEST(USBMIDIParser, sysExEndsWithoutStarting3Bytes) {
     EXPECT_EQ(uparser.parse(packet), NO_MESSAGE);
 }
 
-// --------------------------- SERIAL PARSER TESTS --------------------------- //
+// -------------------------- SERIAL PARSER TESTS --------------------------- //
 
 SerialMIDI_Parser sparser;
 

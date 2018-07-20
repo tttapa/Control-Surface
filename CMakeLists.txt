@@ -36,6 +36,8 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest/googletest-src
 include(GoogleTest)
 enable_testing()
 
+add_definitions("-g")
+
 #include Google Mock
 include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googlemock/include)
 
@@ -57,9 +59,9 @@ add_library(Control_Surface STATIC ${SOURCES})
 # Test executable compilation and linking
 file(GLOB_RECURSE TESTS "test/*.cpp")
 add_executable(tests ${TESTS})
-target_link_libraries(tests 
+target_link_libraries(tests
                       gtest_main
-                      gmock 
+                      gmock
                       Control_Surface
                       ArduinoMock)
 
@@ -68,5 +70,5 @@ gtest_discover_tests(tests)
 add_test(NAME Tests COMMAND tests)
 
 # Add documentation target
-add_custom_target(documentation doxygen 
+add_custom_target(documentation doxygen
                   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/doc/Doxygen")

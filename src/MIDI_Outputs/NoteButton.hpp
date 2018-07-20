@@ -25,7 +25,7 @@ class NoteButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalNoteSender> {
     }
 };
 
-namespace BankableNS {
+namespace Bankable {
 
 class NoteButton : public MIDIButton<DigitalNoteSender> {
   public:
@@ -44,4 +44,4 @@ class NoteButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalNoteSender> {
     }
 };
 
-} // namespace BankableNS
+} // namespace Bankable

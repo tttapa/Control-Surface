@@ -39,13 +39,16 @@ class MCU_VPotRing_LEDs : public MCU_VPotRing, public MCU_VPotRing_LEDs_Base {
 
 // -------------------------------------------------------------------------- //
 
+namespace Bankable {
+
 template <uint8_t NUMBER_OF_BANKS>
-class MCU_VPotRing_Bankable_LEDs
-    : public MCU_VPotRing_Bankable<NUMBER_OF_BANKS>,
-      public MCU_VPotRing_LEDs_Base {
+class MCU_VPotRing_LEDs : public MCU_VPotRing<NUMBER_OF_BANKS>,
+                          public MCU_VPotRing_LEDs_Base {
   public:
-    MCU_VPotRing_Bankable_LEDs(uint8_t track, uint8_t channel,
-                               const pin_t (&ledPins)[11])
-        : MCU_VPotRing_Bankable<NUMBER_OF_BANKS>(track, channel),
+    MCU_VPotRing_LEDs(uint8_t track, uint8_t channel,
+                      const pin_t (&ledPins)[11])
+        : MCU_VPotRing<NUMBER_OF_BANKS>(track, channel),
           MCU_VPotRing_LEDs_Base(ledPins) {}
 };
+
+} // namespace Bankable

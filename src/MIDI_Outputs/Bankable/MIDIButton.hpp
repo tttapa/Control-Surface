@@ -4,13 +4,13 @@
 #include <Hardware/Button.h>
 #include <MIDI_Outputs/AbstractMIDIOutput.hpp>
 
-namespace BankableNS {
+namespace Bankable {
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
- * 
+ *
  * The button is debounced.
- * 
+ *
  * @see     Button
  */
 template <class Sender>
@@ -19,9 +19,9 @@ class MIDIButton : public BankableMIDIOutputAddressable,
   public:
     /**
      * @brief   Construct a new bankable MIDIButton.
-     * 
+     *
      * @param   pin
-     *          The digital input pin with the button connected.  
+     *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      */
     MIDIButton(pin_t pin, uint8_t baseAddress, uint8_t baseChannel)
@@ -44,4 +44,4 @@ class MIDIButton : public BankableMIDIOutputAddressable,
     const uint8_t baseChannel;
 };
 
-} // namespace BankableNS
+} // namespace Bankable

@@ -1,5 +1,5 @@
 #include "Bank.h"
-#include "Bankable.hpp"
+#include "BankableMIDIInputAddressable.hpp"
 #include "BankableMIDIOutputAddressable.hpp"
 
 Bank::Bank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
@@ -9,9 +9,11 @@ Bank::Bank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
     }
 }
 
-void Bank::add(Bankable *bankable, bankType type) { add(*bankable, type); }
+void Bank::add(BankableMIDIInputAddressable *bankable, bankType type) {
+    add(*bankable, type);
+}
 
-void Bank::add(Bankable &bankable, bankType type) {
+void Bank::add(BankableMIDIInputAddressable &bankable, bankType type) {
     LinkedList::append(&bankable, first, last);
     bankable.setBank(this, type);
 }
@@ -29,7 +31,7 @@ uint8_t Bank::getBankSetting() const { return bankSetting; }
 
 uint8_t Bank::getTracksPerBank() const { return tracksPerBank; }
 
-void Bank::remove(Bankable *bankable) {
+void Bank::remove(BankableMIDIInputAddressable *bankable) {
     bankable->removeBank();
     LinkedList::remove(bankable, first, last);
 }

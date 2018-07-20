@@ -103,13 +103,14 @@ class MCU_VU : virtual public MCU_VU_Base {
 
 // -------------------------------------------------------------------------- //
 
-#include <Banks/Bankable.hpp>
+#include <Banks/BankableMIDIInputAddressable.hpp>
+
+namespace Bankable {
 
 template <size_t NUMBER_OF_BANKS>
-class MCU_VU_Bankable : virtual public MCU_VU_Base, public Bankable {
+class MCU_VU : public virtual MCU_VU_Base, public BankableMIDIInputAddressable {
   public:
-    MCU_VU_Bankable(uint8_t track, uint8_t channel = 1,
-                    unsigned int decayTime = 300)
+    MCU_VU(uint8_t track, uint8_t channel = 1, unsigned int decayTime = 300)
         : MCU_VU_Base(track, channel, decayTime) {}
 
     bool updateImpl(const MIDI_message_matcher &midimsg) {
@@ -148,12 +149,12 @@ class MCU_VU_Bankable : virtual public MCU_VU_Base, public Bankable {
     }
 
     inline bool matchTrack(uint8_t targetTrack) const {
-        return Bankable::matchAddress(targetTrack, getBaseTrack(),
-                                      NUMBER_OF_BANKS);
+        return BankableMIDIInputAddressable::matchAddress(
+            targetTrack, getBaseTrack(), NUMBER_OF_BANKS);
     }
     inline bool matchChannel(uint8_t targetChannel) const override {
-        return Bankable::matchChannel(targetChannel, getBaseChannel(),
-                                      NUMBER_OF_BANKS);
+        return BankableMIDIInputAddressable::matchChannel(
+            targetChannel, getBaseChannel(), NUMBER_OF_BANKS);
     }
     void setValue(uint8_t index, uint8_t newValue) {
         values[index] = setValueHelper(values[index], newValue);
@@ -167,6 +168,8 @@ class MCU_VU_Bankable : virtual public MCU_VU_Base, public Bankable {
 
     uint8_t values[NUMBER_OF_BANKS] = {};
 };
+
+} // namespace Bankable
 
 // -------------------------------------------------------------------------- //
 /*

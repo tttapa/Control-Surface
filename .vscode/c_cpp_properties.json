@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "clang-x64",
+            "includePath": [
+                "${default}",
+                "${workspaceFolder}/googletest/googletest-src/googlemock/include",
+                "${workspaceFolder}/mock",
+                "${workspaceFolder}/ArduinoMock",
+                "${workspaceFolder}/src"
+            ]
+        }
+    ],
+    "version": 4
+}

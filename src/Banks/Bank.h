@@ -1,11 +1,11 @@
 #pragma once
 
-#include <Helpers/LinkedList.h>
 #include <Helpers/Debug.hpp>
+#include <Helpers/LinkedList.h>
 #include <stddef.h>
 #include <stdint.h>
 
-class Bankable;
+class BankableMIDIInputAddressable;
 class BankableMIDIOutputAddressable;
 
 /**
@@ -55,12 +55,12 @@ class BankableMIDIOutputAddressable;
  * elements at the same time.
  *
  * ### In general
- * `Bank::CHANGE_CHANNEL`  
+ * `Bank::CHANGE_CHANNEL`
  * @f$ c = c_0 + t · s @f$ &emsp; where @f$c@f$ is the effective channel,
  * @f$c_0@f$ is the base channel of the MIDI_Element, @f$t@f$ is the number of
  * tracks per bank, and @f$s@f$ is the current bank setting.
- * 
- * `Bank::CHANGE_ADDRESS`  
+ *
+ * `Bank::CHANGE_ADDRESS`
  * @f$ a = a_0 + t · s @f$ &emsp; where @f$a@f$ is the effective address,
  * @f$a_0@f$ is the base address of the MIDI_Element, @f$t@f$ is the number of
  * tracks per bank, and @f$s@f$ is the current bank setting.
@@ -82,7 +82,7 @@ class Bank {
          */
         CHANGE_CHANNEL,
         /**
-         * @brief   Change the offset of the address (i.e. Controller number or 
+         * @brief   Change the offset of the address (i.e. Controller number or
          *          Note number) of the MIDI_Element.
          */
         CHANGE_ADDRESS
@@ -96,7 +96,8 @@ class Bank {
      * @param   type
      *          Either change the MIDI channel or the address.
      */
-    void add(Bankable *bankable, bankType type = CHANGE_ADDRESS);
+    void add(BankableMIDIInputAddressable *bankable,
+             bankType type = CHANGE_ADDRESS);
 
     /**
      * @brief   Add a Bankable to the bank.
@@ -106,7 +107,8 @@ class Bank {
      * @param   type
      *          Either change the MIDI channel or the address.
      */
-    void add(Bankable &bankable, bankType type = CHANGE_ADDRESS);
+    void add(BankableMIDIInputAddressable &bankable,
+             bankType type = CHANGE_ADDRESS);
 
     /**
      * @brief   Add an array of Bankable%s to the bank.
@@ -120,16 +122,16 @@ class Bank {
      *          An array of Bankable%s to be added.
      * @param   type
      *          Either change the MIDI channel or the address of the bankables.
-     * 
+     *
      * @todo    Do I need the T template paramter?
      */
     template <class T, size_t N>
     void add(T (&bankables)[N], bankType type = CHANGE_ADDRESS) {
-        for (Bankable &bankable : bankables)
+        for (BankableMIDIInputAddressable &bankable : bankables)
             add(bankable, type);
     }
 
-    /** 
+    /**
      * @todo    Documentation.
      */
     void add(BankableMIDIOutputAddressable &bankable,
@@ -147,13 +149,13 @@ class Bank {
 
     uint8_t getTracksPerBank() const;
 
-    void remove(Bankable *bankable);
+    void remove(BankableMIDIInputAddressable *bankable);
 
   private:
     const uint8_t tracksPerBank;
     uint8_t bankSetting = 0;
-    Bankable *first = nullptr;
-    Bankable *last = nullptr;
+    BankableMIDIInputAddressable *first = nullptr;
+    BankableMIDIInputAddressable *last = nullptr;
 
     template <class Node>
     friend void LinkedList::append(Node *, Node *&, Node *&);

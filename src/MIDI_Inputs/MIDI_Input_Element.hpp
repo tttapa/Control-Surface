@@ -16,12 +16,12 @@ class MIDI_Input_Element {
     virtual void display() {}
 
     /**
-     * @brief   Update the value of the input element.  
+     * @brief   Update the value of the input element.
      *          Used for decaying VU meters etc.
      */
     virtual void update() {}
 
-    /** 
+    /**
      * @brief   Reset the input element to its initial state.
      */
     virtual void reset() = 0;

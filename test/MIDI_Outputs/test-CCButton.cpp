@@ -43,7 +43,7 @@ TEST(CCButtonBankable, pressAndRelease) {
     Control_Surface.setMIDI_Interface(midi);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    BankableNS::CCButton button(2, 0x3C, 7);
+    Bankable::CCButton button(2, 0x3C, 7);
 
     Bank bank(4);
     bank.add(button);
@@ -80,7 +80,7 @@ TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
     Control_Surface.setMIDI_Interface(midi);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    BankableNS::CCButton button(2, 0x3C, 7);
+    Bankable::CCButton button(2, 0x3C, 7);
 
     Bank bank(4);
     // Change bank setting
@@ -119,7 +119,7 @@ TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
     Control_Surface.setMIDI_Interface(midi);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    BankableNS::CCButton button(2, 0x3C, 7);
+    Bankable::CCButton button(2, 0x3C, 7);
 
     Bank bank(4);
     bank.add(button);
@@ -247,7 +247,7 @@ TEST(CCButtonsBankable, pressChangeBankAndRelease) {
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
-    BankableNS::CCButtons<2> buttons = {{2, 3}, 0x3C, 7, 1, 2};
+    Bankable::CCButtons<2> buttons = {{2, 3}, 0x3C, 7, 1, 2};
 
     Bank bank(4);
     bank.add(buttons);
@@ -335,7 +335,7 @@ TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
-    BankableNS::CCButtons<2> buttons = {{2, 3}, 0x3C, 7, 1, 2};
+    Bankable::CCButtons<2> buttons = {{2, 3}, 0x3C, 7, 1, 2};
 
     Bank bank(4);
     bank.add(buttons);

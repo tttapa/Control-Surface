@@ -2,16 +2,16 @@
 
 #include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Hardware/Button.h>
-#include <MIDI_Outputs/AbstractMIDIOutput.hpp>
 #include <Helpers/ArrayWrapper.hpp>
+#include <MIDI_Outputs/AbstractMIDIOutput.hpp>
 
-namespace BankableNS {
+namespace Bankable {
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
- * 
+ *
  * The buttons are debounced.
- * 
+ *
  * @see     Button
  */
 template <uint8_t NUMBER_OF_BUTTONS, class Sender>
@@ -19,8 +19,8 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
                     public AbstractMIDIOutput {
   public:
     /**
-     * @brief   Construct a new MIDIButtons_Bankable.
-     * 
+     * @brief   Construct a new MIDIButtons.
+     *
      * @todo    Documentation
      */
     MIDIButtons(const ArrayWrapper<Button, NUMBER_OF_BUTTONS> &buttons,
@@ -64,4 +64,4 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
     uint8_t activeButtons = 0;
 };
 
-} // namespace BankableNS
+} // namespace Bankable

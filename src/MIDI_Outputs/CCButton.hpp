@@ -25,7 +25,7 @@ class CCButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalCCSender> {
               channelIncrement) {}
 };
 
-namespace BankableNS {
+namespace Bankable {
 
 class CCButton : public MIDIButton<DigitalCCSender> {
   public:
@@ -44,4 +44,4 @@ class CCButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalCCSender> {
               channelIncrement) {}
 };
 
-} // namespace BankableNS
+} // namespace Bankable

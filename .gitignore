@@ -7,7 +7,7 @@ doc/Doxygen/*
 !doc/Doxygen/svg
 !Makefile
 *.hex
-.vscode/
+# .vscode/
 TODO.txt
 .~lock*
 *.o

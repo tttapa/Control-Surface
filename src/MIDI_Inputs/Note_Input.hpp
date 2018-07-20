@@ -42,12 +42,15 @@ class Note_Input : public virtual Note_Input_Base {
 
 // -------------------------------------------------------------------------- //
 
-#include "../Banks/Bankable.hpp"
+#include <Banks/BankableMIDIInputAddressable.hpp>
+
+namespace Bankable {
 
 template <uint8_t NUMBER_OF_BANKS>
-class Note_Input_Bankable : public virtual Note_Input_Base, public Bankable {
+class Note_Input : public virtual Note_Input_Base,
+                   public BankableMIDIInputAddressable {
   public:
-    Note_Input_Bankable(uint8_t track, uint8_t channel = 1)
+    Note_Input(uint8_t track, uint8_t channel = 1)
         : Note_Input_Base(track, channel) {}
 
     uint8_t getValue() const override {
@@ -69,16 +72,18 @@ class Note_Input_Bankable : public virtual Note_Input_Base, public Bankable {
     }
 
     bool matchAddress(uint8_t targetAddress) const override {
-        return Bankable::matchAddress(targetAddress, getBaseAddress(),
-                                      NUMBER_OF_BANKS);
+        return BankableMIDIInputAddressable::matchAddress(
+            targetAddress, getBaseAddress(), NUMBER_OF_BANKS);
     }
 
     bool matchChannel(uint8_t targetChannel) const override {
-        return Bankable::matchChannel(targetChannel, getBaseChannel(),
-                                      NUMBER_OF_BANKS);
+        return BankableMIDIInputAddressable::matchChannel(
+            targetChannel, getBaseChannel(), NUMBER_OF_BANKS);
     }
 
     void onBankSettingChange() const override { display(); }
 
     uint8_t values[NUMBER_OF_BANKS] = {};
 };
+
+} // namespace Bankable

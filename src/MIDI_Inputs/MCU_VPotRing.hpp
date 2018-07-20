@@ -22,14 +22,10 @@ class MCU_VPotRing_Base : public MIDI_Input_CC {
     uint8_t getStartOn() const {
         int8_t value = (int8_t)getPosition() - (int8_t)1;
         switch (getMode()) {
-        case 0:
-            return value;
-        case 1:
-            return minimum(value, 5);
-        case 2:
-            return 0;
-        case 3:
-            return maximum(5 - value, 0);
+            case 0: return value;
+            case 1: return minimum(value, 5);
+            case 2: return 0;
+            case 3: return maximum(5 - value, 0);
         }
         return 0; // Shouldn't happen, just keeps the compiler happy.
     }
@@ -37,14 +33,10 @@ class MCU_VPotRing_Base : public MIDI_Input_CC {
     uint8_t getStartOff() const {
         int8_t value = (int8_t)getPosition() - (int8_t)1;
         switch (getMode()) {
-        case 0:
-            return value + 1;
-        case 1:
-            return maximum(value, 5) + 1;
-        case 2:
-            return value + 1;
-        case 3:
-            return minimum(6 + value, 11);
+            case 0: return value + 1;
+            case 1: return maximum(value, 5) + 1;
+            case 2: return value + 1;
+            case 3: return minimum(6 + value, 11);
         }
         return 0; // Shouldn't happen, just keeps the compiler happy.
     }
@@ -84,13 +76,15 @@ class MCU_VPotRing : public virtual MCU_VPotRing_Base {
 
 // -------------------------------------------------------------------------- //
 
-#include "../Banks/Bankable.hpp"
+#include <Banks/BankableMIDIInputAddressable.hpp>
+
+namespace Bankable {
 
 template <uint8_t NUMBER_OF_BANKS>
-class MCU_VPotRing_Bankable : public virtual MCU_VPotRing_Base,
-                              public Bankable {
+class MCU_VPotRing : public virtual MCU_VPotRing_Base,
+                     public BankableMIDIInputAddressable {
   public:
-    MCU_VPotRing_Bankable(uint8_t track, uint8_t channel = 1)
+    MCU_VPotRing(uint8_t track, uint8_t channel = 1)
         : MCU_VPotRing_Base(track, channel) {}
 
   private:
@@ -102,8 +96,8 @@ class MCU_VPotRing_Bankable : public virtual MCU_VPotRing_Base,
     }
 
     bool matchAddress(uint8_t targetAddress) const override {
-        return Bankable::matchAddress(targetAddress, getBaseAddress(),
-                                      NUMBER_OF_BANKS);
+        return BankableMIDIInputAddressable::matchAddress(
+            targetAddress, getBaseAddress(), NUMBER_OF_BANKS);
     }
 
     uint8_t getValue() const override {
@@ -113,3 +107,5 @@ class MCU_VPotRing_Bankable : public virtual MCU_VPotRing_Base,
     void onBankSettingChange() const override { display(); }
     uint8_t values[NUMBER_OF_BANKS] = {};
 };
+
+} // namespace Bankable

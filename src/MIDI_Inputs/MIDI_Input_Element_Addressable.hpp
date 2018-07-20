@@ -3,7 +3,7 @@
 #include "MIDI_message_matcher.h"
 
 class MIDI_Input_Element_Addressable {
-  public:
+  protected:
     /**
      * @brief   Constructor.
      * @todo    Documentation.
@@ -11,6 +11,7 @@ class MIDI_Input_Element_Addressable {
     MIDI_Input_Element_Addressable(uint8_t baseChannel, uint8_t baseAddress)
         : baseChannel(baseChannel - 1), baseAddress(baseAddress) {}
 
+  public:
     /**
      * @brief   Update the display of the input element.
      */
