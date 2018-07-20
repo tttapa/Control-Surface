@@ -36,6 +36,8 @@ TEST(NoteButton, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 // -------------------------------------------------------------------------- //
@@ -75,6 +77,8 @@ TEST(NoteButtonBankable, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(NoteButtonBankable, changeSettingAndPressAndRelease) {
@@ -114,6 +118,8 @@ TEST(NoteButtonBankable, changeSettingAndPressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C + 4, 0x7F));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(NoteButtonBankable, pressAndChangeSettingAndRelease) {
@@ -168,4 +174,6 @@ TEST(NoteButtonBankable, pressAndChangeSettingAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(6000));
     EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C + 4, 0x7F));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

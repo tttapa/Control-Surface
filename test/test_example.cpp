@@ -16,6 +16,8 @@ TEST(millis, millis) {
         .WillRepeatedly(Return(2));
     EXPECT_EQ(millis(), 1);
     EXPECT_EQ(millis(), 2);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(Serial, write_byte) {

@@ -15,6 +15,8 @@ TEST(MCUVU, setValue) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     MIDI_Input_ChannelPressure::updateAllWith(midimsg);
     EXPECT_EQ(vu.getValue(), 0xA);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(MCUVU, setOverload) {
@@ -26,6 +28,8 @@ TEST(MCUVU, setOverload) {
     MIDI_Input_ChannelPressure::updateAllWith(midimsg);
     EXPECT_EQ(vu.getValue(), 0);
     EXPECT_TRUE(vu.getOverload());
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(MCUVU, clearOverload) {
@@ -40,6 +44,8 @@ TEST(MCUVU, clearOverload) {
     MIDI_Input_ChannelPressure::updateAllWith(midimsgClr);
     EXPECT_EQ(vu.getValue(), 0);
     EXPECT_FALSE(vu.getOverload());
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(MCUVU, retainValueAfterOverload) {
@@ -60,6 +66,8 @@ TEST(MCUVU, retainValueAfterOverload) {
     MIDI_Input_ChannelPressure::updateAllWith(midimsgClr);
     EXPECT_EQ(vu.getValue(), 0x6);
     EXPECT_FALSE(vu.getOverload());
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(MCUVU, decay) {
@@ -76,6 +84,8 @@ TEST(MCUVU, decay) {
         .WillOnce(Return(decayTime));
     MIDI_Input_ChannelPressure::updateAll();
     EXPECT_EQ(vu.getValue(), 0x9);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 // -------------------------------------------------------------------------- //
@@ -93,6 +103,8 @@ TEST(MCUVUBankable, setValueBankChangeAddress) {
     EXPECT_EQ(vu.getValue(), 0x0);
     bank.setBankSetting(1);
     EXPECT_EQ(vu.getValue(), 0xA);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(MCUVUBankable, setValueBankChangeChannel) {
@@ -115,6 +127,8 @@ TEST(MCUVUBankable, setValueBankChangeChannel) {
     EXPECT_EQ(vu.getValue(), 0xA);
     bank.setBankSetting(2);
     EXPECT_EQ(vu.getValue(), 0xB);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(MCUVUBankable, overloadBankChangeAddress) {
@@ -140,6 +154,8 @@ TEST(MCUVUBankable, overloadBankChangeAddress) {
     EXPECT_FALSE(vu.getOverload());
     bank.setBankSetting(1);
     EXPECT_FALSE(vu.getOverload());
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(MCUVUBankable, decay) {
@@ -163,4 +179,6 @@ TEST(MCUVUBankable, decay) {
     EXPECT_EQ(vu.getValue(), 0x0);
     bank.setBankSetting(1);
     EXPECT_EQ(vu.getValue(), 0x9);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

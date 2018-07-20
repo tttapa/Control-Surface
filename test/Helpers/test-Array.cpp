@@ -40,6 +40,8 @@ TEST(Array2D, initialize) {
     Array2D<int, 3, 2> arr = {{{0,1},{2,3},{4,5}}};
     EXPECT_EQ(arr[0][0], 0);
     EXPECT_EQ(arr[0][1], 1);
+    EXPECT_EQ(arr[1][0], 2);
     EXPECT_EQ(arr[1][1], 3);
+    EXPECT_EQ(arr[2][0], 4);
     EXPECT_EQ(arr[2][1], 5);
 }

@@ -10,6 +10,8 @@ using namespace ::testing;
 TEST(Button, construct) {
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Button b(2);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 /**
  * If the pin state is always high, the button state should be `Released`.
@@ -25,6 +27,8 @@ TEST(Button, released) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_EQ(b.getState(), Button::Released);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 /**
@@ -38,6 +42,8 @@ TEST(Button, falling) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_EQ(b.getState(), Button::Falling);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 /**
@@ -54,6 +60,8 @@ TEST(Button, pressed) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_EQ(b.getState(), Button::Pressed);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 /**
@@ -75,6 +83,8 @@ TEST(Button, rising) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_EQ(b.getState(), Button::Rising);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 /**
@@ -125,6 +135,8 @@ TEST(Button, debouncePressed) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_EQ(b.getState(), Button::Released);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 /**
@@ -184,4 +196,6 @@ TEST(Button, debounceReleased) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_EQ(b.getState(), Button::Pressed);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

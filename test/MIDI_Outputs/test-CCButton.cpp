@@ -36,6 +36,8 @@ TEST(CCButton, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x00));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(CCButtonBankable, pressAndRelease) {
@@ -73,6 +75,8 @@ TEST(CCButtonBankable, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x00));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
@@ -112,6 +116,8 @@ TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C + 4, 0x00));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
@@ -152,6 +158,8 @@ TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x00));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 // -------------------------------------------------------------------------- //
@@ -237,6 +245,8 @@ TEST(CCButtons, pressAndRelease) {
         .Times(2)
         .WillRepeatedly(Return(7000));
     buttons.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 // -------------------------------------------------------------------------- //
@@ -327,6 +337,8 @@ TEST(CCButtonsBankable, pressChangeBankAndRelease) {
         .Times(2)
         .WillRepeatedly(Return(7000));
     buttons.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
@@ -437,4 +449,6 @@ TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
         .WillRepeatedly(Return(9000));
     EXPECT_CALL(midi, sendImpl(CC, 6 + 2, 0x3C + 1 + 4, 0x00));
     buttons.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

@@ -38,6 +38,8 @@ TEST(NoteButtonLatching, pressAndRelease) {
     EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F));
     EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 // -------------------------------------------------------------------------- //
@@ -79,6 +81,8 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
     EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F));
     EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
@@ -120,6 +124,8 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
     EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C + 4, 0x7F));
     EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C + 4, 0x7F));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
@@ -162,4 +168,6 @@ TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
     EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C + 4, 0x7F));
     EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C + 4, 0x7F));
     button.update();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
