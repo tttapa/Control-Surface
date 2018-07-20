@@ -1,11 +1,13 @@
 #pragma once
 
-#include "AbstractMIDIOutput.hpp"
+#include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Hardware/ButtonMatrix.h>
 #include <Helpers/Array.hpp>
+#include <MIDI_Outputs/AbstractMIDIOutput.hpp>
 
-template <uint8_t nb_rows, uint8_t nb_cols>
-using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
+#include <MIDI_Outputs/MIDIButtonMatrix.hpp> // For AddressMatrix
+
+namespace Bankable {
 
 /**
  * @brief   MIDIButtonMatrix
@@ -13,7 +15,8 @@ using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
  * @see     ButtonMatrix
  */
 template <class Sender, uint8_t nb_rows, uint8_t nb_cols>
-class MIDIButtonMatrix : public AbstractMIDIOutput,
+class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
+                         public AbstractMIDIOutput,
                          public ButtonMatrix<nb_rows, nb_cols> {
 
   public:
@@ -32,13 +35,23 @@ class MIDIButtonMatrix : public AbstractMIDIOutput,
 
   private:
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
-        uint8_t address = addresses[row][col];
-        if (state == LOW)
-            Sender::sendOn(baseChannel, address);
-        else
-            Sender::sendOff(baseChannel, address);
+        uint8_t address = getAddress(addresses[row][col]);
+        if (state == LOW) {
+            if (!activeButtons)
+                lock(); // Don't allow changing of the bank setting
+            activeButtons++;
+            Sender::sendOn(getChannel(baseChannel), address);
+        } else {
+            Sender::sendOff(getChannel(baseChannel), address);
+            activeButtons--;
+            if (!activeButtons)
+                unlock();
+        }
     }
 
     AddressMatrix<nb_rows, nb_cols> addresses;
     const uint8_t baseChannel;
+    uint8_t activeButtons = 0;
 };
+
+} // namespace Bankable

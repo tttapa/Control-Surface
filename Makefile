@@ -1054,33 +1054,6 @@ test/MIDI_Outputs/test-CCButton.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-CCButton.cpp.s
 .PHONY : test/MIDI_Outputs/test-CCButton.cpp.s
 
-test/MIDI_Outputs/test-MIDIButtonMatrix.o: test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.o
-
-.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.o
-
-# target to build an object file
-test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.o:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.o
-.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.o
-
-test/MIDI_Outputs/test-MIDIButtonMatrix.i: test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.i
-
-.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.i
-
-# target to preprocess a source file
-test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.i:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.i
-.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.i
-
-test/MIDI_Outputs/test-MIDIButtonMatrix.s: test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.s
-
-.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.s
-
-# target to generate assembly for a file
-test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.s:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.s
-.PHONY : test/MIDI_Outputs/test-MIDIButtonMatrix.cpp.s
-
 test/MIDI_Outputs/test-NoteButton.o: test/MIDI_Outputs/test-NoteButton.cpp.o
 
 .PHONY : test/MIDI_Outputs/test-NoteButton.o
@@ -1134,6 +1107,33 @@ test/MIDI_Outputs/test-NoteButtonLatching.s: test/MIDI_Outputs/test-NoteButtonLa
 test/MIDI_Outputs/test-NoteButtonLatching.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-NoteButtonLatching.cpp.s
 .PHONY : test/MIDI_Outputs/test-NoteButtonLatching.cpp.s
+
+test/MIDI_Outputs/test-NoteButtonMatrix.o: test/MIDI_Outputs/test-NoteButtonMatrix.cpp.o
+
+.PHONY : test/MIDI_Outputs/test-NoteButtonMatrix.o
+
+# target to build an object file
+test/MIDI_Outputs/test-NoteButtonMatrix.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-NoteButtonMatrix.cpp.o
+.PHONY : test/MIDI_Outputs/test-NoteButtonMatrix.cpp.o
+
+test/MIDI_Outputs/test-NoteButtonMatrix.i: test/MIDI_Outputs/test-NoteButtonMatrix.cpp.i
+
+.PHONY : test/MIDI_Outputs/test-NoteButtonMatrix.i
+
+# target to preprocess a source file
+test/MIDI_Outputs/test-NoteButtonMatrix.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-NoteButtonMatrix.cpp.i
+.PHONY : test/MIDI_Outputs/test-NoteButtonMatrix.cpp.i
+
+test/MIDI_Outputs/test-NoteButtonMatrix.s: test/MIDI_Outputs/test-NoteButtonMatrix.cpp.s
+
+.PHONY : test/MIDI_Outputs/test-NoteButtonMatrix.s
+
+# target to generate assembly for a file
+test/MIDI_Outputs/test-NoteButtonMatrix.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-NoteButtonMatrix.cpp.s
+.PHONY : test/MIDI_Outputs/test-NoteButtonMatrix.cpp.s
 
 test/MIDI_Parsers/tests.o: test/MIDI_Parsers/tests.cpp.o
 
@@ -1297,15 +1297,15 @@ help:
 	@echo "... test/MIDI_Outputs/test-CCButton.o"
 	@echo "... test/MIDI_Outputs/test-CCButton.i"
 	@echo "... test/MIDI_Outputs/test-CCButton.s"
-	@echo "... test/MIDI_Outputs/test-MIDIButtonMatrix.o"
-	@echo "... test/MIDI_Outputs/test-MIDIButtonMatrix.i"
-	@echo "... test/MIDI_Outputs/test-MIDIButtonMatrix.s"
 	@echo "... test/MIDI_Outputs/test-NoteButton.o"
 	@echo "... test/MIDI_Outputs/test-NoteButton.i"
 	@echo "... test/MIDI_Outputs/test-NoteButton.s"
 	@echo "... test/MIDI_Outputs/test-NoteButtonLatching.o"
 	@echo "... test/MIDI_Outputs/test-NoteButtonLatching.i"
 	@echo "... test/MIDI_Outputs/test-NoteButtonLatching.s"
+	@echo "... test/MIDI_Outputs/test-NoteButtonMatrix.o"
+	@echo "... test/MIDI_Outputs/test-NoteButtonMatrix.i"
+	@echo "... test/MIDI_Outputs/test-NoteButtonMatrix.s"
 	@echo "... test/MIDI_Parsers/tests.o"
 	@echo "... test/MIDI_Parsers/tests.i"
 	@echo "... test/MIDI_Parsers/tests.s"

@@ -6,7 +6,7 @@
 
 /**
  * @brief   A class for button matrices that send MIDI events.
- * 
+ *
  * @tparam  nb_rows
  *          The number of rows in the button matrix.
  * @tparam  nb_cols
@@ -18,7 +18,7 @@ class MIDIButtonMatrix : public DigitalMIDIOut,
   public:
     /**
      * @brief   Construct a new MIDIButtonMatrix object.
-     * 
+     *
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
      *          matrix. These pins will be driven LOW (Lo-Z).
@@ -26,7 +26,7 @@ class MIDIButtonMatrix : public DigitalMIDIOut,
      *          A list of pin numbers connected to the columns of the button
      *          matrix. These pins will be used as inputs, and the internal
      *          pull-up resistor will be enabled.
-     * @note    The lists of pins are copied. This means that they can be 
+     * @note    The lists of pins are copied. This means that they can be
      *          initialized with a brace-enclosed initializer list.
      * @param   addresses
      *          A 2D array of dimensions (nb_rows × nb_cols) containing the
@@ -47,7 +47,7 @@ class MIDIButtonMatrix : public DigitalMIDIOut,
   private:
     /**
      * @brief   Send the button state of the given address over MIDI.
-     * 
+     *
      * @param   address
      *          The address of the button of which the state changed.
      * @param   state

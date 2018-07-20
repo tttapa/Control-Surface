@@ -1,21 +1,19 @@
 #pragma once
 
-#include "Bankable/MIDIButton.hpp"
-#include "Bankable/MIDIButtons.hpp"
 #include "MIDIButton.hpp"
 #include "MIDIButtons.hpp"
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
 // TODO: these are all in one file because I'm lazy
 
-class CCButton : public MIDIButton<DigitalCCSender> {
+class CCButton : public ::MIDIButton<DigitalCCSender> {
   public:
     CCButton(pin_t pin, uint8_t controller, uint8_t channel)
         : MIDIButton<DigitalCCSender>(pin, controller, channel) {}
 };
 
 template <uint8_t NUMBER_OF_BUTTONS>
-class CCButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalCCSender> {
+class CCButtons : public ::MIDIButtons<NUMBER_OF_BUTTONS, DigitalCCSender> {
   public:
     CCButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
               uint8_t baseAddress, uint8_t baseChannel,
@@ -24,6 +22,9 @@ class CCButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalCCSender> {
               buttons, baseAddress, baseChannel, addressIncrement,
               channelIncrement) {}
 };
+
+#include "Bankable/MIDIButton.hpp"
+#include "Bankable/MIDIButtons.hpp"
 
 namespace Bankable {
 
