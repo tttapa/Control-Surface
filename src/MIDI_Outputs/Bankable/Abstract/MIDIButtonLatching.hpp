@@ -1,7 +1,10 @@
 #pragma once
 
-#include "AbstractMIDIOutput.hpp"
+#include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Hardware/Button.h>
+#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
+
+namespace Bankable {
 
 /**
  * @brief   A class for latching buttons and switches that send MIDI events.
@@ -11,7 +14,8 @@
  * @see     Button
  */
 template <class Sender>
-class MIDIButtonLatching : public AbstractMIDIOutput {
+class MIDIButtonLatching : public AbstractMIDIOutput,
+                           public BankableMIDIOutputAddressable {
   protected:
     /**
      * @brief   Construct a new MIDIButtonLatching.
@@ -27,8 +31,8 @@ class MIDIButtonLatching : public AbstractMIDIOutput {
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling || state == Button::Rising) {
-            Sender::sendOn(baseChannel, baseAddress);
-            Sender::sendOff(baseChannel, baseAddress);
+            Sender::sendOn(getChannel(baseChannel), getAddress(baseAddress));
+            Sender::sendOff(getChannel(baseChannel), getAddress(baseAddress));
         }
     }
 
@@ -37,3 +41,5 @@ class MIDIButtonLatching : public AbstractMIDIOutput {
     const uint8_t baseAddress;
     const uint8_t baseChannel;
 };
+
+} // namespace Bankable

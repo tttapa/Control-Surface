@@ -1,11 +1,8 @@
 #pragma once
 
-#include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
 #include <Hardware/Button.h>
 #include <Helpers/Array.hpp>
-#include <MIDI_Outputs/AbstractMIDIOutput.hpp>
-
-namespace Bankable {
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
@@ -15,8 +12,7 @@ namespace Bankable {
  * @see     Button
  */
 template <uint8_t NUMBER_OF_BUTTONS, class Sender>
-class MIDIButtons : public BankableMIDIOutputAddressable,
-                    public AbstractMIDIOutput {
+class MIDIButtons : public AbstractMIDIOutput {
   public:
     /**
      * @brief   Construct a new MIDIButtons.
@@ -31,22 +27,16 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
                     (addressIncrement & 0xF)) {}
 
     void update() final override {
-        uint8_t channel = getChannel(baseChannel);
-        uint8_t address = getAddress(baseAddress);
+        uint8_t channel = baseChannel;
+        uint8_t address = baseAddress;
         uint8_t channelIncrement = getChannelIncrement();
         uint8_t addressIncrement = getAddressIncrement();
         for (Button &button : buttons) {
             Button::State state = button.getState();
             if (state == Button::Falling) {
-                if (!activeButtons)
-                    lock(); // Don't allow changing of the bank setting
-                activeButtons++;
                 Sender::sendOn(channel, address);
             } else if (state == Button::Rising) {
                 Sender::sendOff(channel, address);
-                activeButtons--;
-                if (!activeButtons)
-                    unlock();
             }
             channel += channelIncrement;
             address += addressIncrement;
@@ -61,7 +51,4 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
     const uint8_t baseAddress;
     const uint8_t baseChannel;
     const uint8_t increment;
-    uint8_t activeButtons = 0;
 };
-
-} // namespace Bankable

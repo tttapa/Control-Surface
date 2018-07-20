@@ -1,4 +1,7 @@
 #include <MIDI_Outputs/NoteButton.hpp>
+#include <MIDI_Outputs/NoteButtons.hpp>
+#include <MIDI_Outputs/Bankable/NoteButton.hpp>
+#include <MIDI_Outputs/Bankable/NoteButtons.hpp>
 #include <MockMIDI_Interface.hpp>
 #include <gmock/gmock.h>
 

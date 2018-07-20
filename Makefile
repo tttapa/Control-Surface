@@ -757,32 +757,32 @@ src/MIDI_Interfaces/MIDI_Interface.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Interfaces/MIDI_Interface.cpp.s
 .PHONY : src/MIDI_Interfaces/MIDI_Interface.cpp.s
 
-src/MIDI_Outputs/AbstractMIDIOutput.o: src/MIDI_Outputs/AbstractMIDIOutput.cpp.o
+src/MIDI_Outputs/Abstract/AbstractMIDIOutput.o: src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.o
 
-.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.o
+.PHONY : src/MIDI_Outputs/Abstract/AbstractMIDIOutput.o
 
 # target to build an object file
-src/MIDI_Outputs/AbstractMIDIOutput.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/AbstractMIDIOutput.cpp.o
-.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.cpp.o
+src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.o
+.PHONY : src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.o
 
-src/MIDI_Outputs/AbstractMIDIOutput.i: src/MIDI_Outputs/AbstractMIDIOutput.cpp.i
+src/MIDI_Outputs/Abstract/AbstractMIDIOutput.i: src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.i
 
-.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.i
+.PHONY : src/MIDI_Outputs/Abstract/AbstractMIDIOutput.i
 
 # target to preprocess a source file
-src/MIDI_Outputs/AbstractMIDIOutput.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/AbstractMIDIOutput.cpp.i
-.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.cpp.i
+src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.i
+.PHONY : src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.i
 
-src/MIDI_Outputs/AbstractMIDIOutput.s: src/MIDI_Outputs/AbstractMIDIOutput.cpp.s
+src/MIDI_Outputs/Abstract/AbstractMIDIOutput.s: src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.s
 
-.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.s
+.PHONY : src/MIDI_Outputs/Abstract/AbstractMIDIOutput.s
 
 # target to generate assembly for a file
-src/MIDI_Outputs/AbstractMIDIOutput.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/AbstractMIDIOutput.cpp.s
-.PHONY : src/MIDI_Outputs/AbstractMIDIOutput.cpp.s
+src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.s
+.PHONY : src/MIDI_Outputs/Abstract/AbstractMIDIOutput.cpp.s
 
 src/MIDI_Parsers/MIDI_Parser.o: src/MIDI_Parsers/MIDI_Parser.cpp.o
 
@@ -1264,9 +1264,9 @@ help:
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.o"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.i"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.s"
-	@echo "... src/MIDI_Outputs/AbstractMIDIOutput.o"
-	@echo "... src/MIDI_Outputs/AbstractMIDIOutput.i"
-	@echo "... src/MIDI_Outputs/AbstractMIDIOutput.s"
+	@echo "... src/MIDI_Outputs/Abstract/AbstractMIDIOutput.o"
+	@echo "... src/MIDI_Outputs/Abstract/AbstractMIDIOutput.i"
+	@echo "... src/MIDI_Outputs/Abstract/AbstractMIDIOutput.s"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.o"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.i"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.s"

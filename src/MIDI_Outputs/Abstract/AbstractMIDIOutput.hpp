@@ -1,18 +1,20 @@
 #pragma once
 
-#include <stdint.h>
 #include <Helpers/LinkedList.h>
+#include <stdint.h>
 
 /**
  * @brief   A base class for all MIDI output elements.
- * 
+ *
  * All MIDI output elements are added to a linked list,
  * so they can be updated all at once by simply looping over
  * the entire list.
  */
 class AbstractMIDIOutput {
-  public:
+  protected:
     AbstractMIDIOutput() { LinkedList::append(this, first, last); }
+
+  public:
     virtual ~AbstractMIDIOutput() { LinkedList::remove(this, first, last); }
 
     virtual void update() = 0;
