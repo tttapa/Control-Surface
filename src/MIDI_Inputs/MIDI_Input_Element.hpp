@@ -3,12 +3,15 @@
 #include "MIDI_message_matcher.h"
 
 class MIDI_Input_Element {
-  public:
+  protected:
     /**
      * @brief   Constructor.
      * @todo    Documentation.
      */
     MIDI_Input_Element(uint8_t baseChannel) : baseChannel(baseChannel - 1) {}
+
+  public:
+    virtual ~MIDI_Input_Element() = default;
 
     /**
      * @brief   Update the display of the input element.
@@ -38,6 +41,7 @@ class MIDI_Input_Element {
             return false;
         moveDown();
         display();
+        return true;
     }
 
     inline uint8_t getBaseChannel() const { return baseChannel; }

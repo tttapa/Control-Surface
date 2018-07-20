@@ -12,6 +12,8 @@ class MIDI_Input_Element_Addressable {
         : baseChannel(baseChannel - 1), baseAddress(baseAddress) {}
 
   public:
+    virtual ~MIDI_Input_Element_Addressable() = default;
+
     /**
      * @brief   Update the display of the input element.
      */

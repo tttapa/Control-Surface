@@ -82,8 +82,8 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
     }
 
   private:
-    char firstChar;
-    char secondChar;
+    char firstChar = '\0';
+    char secondChar = '\0';
 
     /**
      * @brief   Check if a given character is a lowercase hexadecimal digit

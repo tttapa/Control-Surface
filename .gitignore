@@ -21,3 +21,8 @@ lib/
 CMakeFiles/
 *.cmake
 CMakeCache.txt
+
+.cproject
+.project
+language.settings.xml
+.settings/*

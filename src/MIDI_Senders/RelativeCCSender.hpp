@@ -36,6 +36,7 @@ class DigitalCCSender {
             case TWOS_COMPLEMENT: return toTwosComplement7bit(value);
             case BINARY_OFFSET: return toBinaryOffset7bit(value);
             case SIGN_MAGNITUDE: return toSignedMagnitude7bit(value);
+            default: return 0; // Keeps the compiler happy
         }
     }
 
