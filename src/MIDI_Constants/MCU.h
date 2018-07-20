@@ -1,3 +1,7 @@
+#pragma once
+
+#include <stdint.h>
+
 /**
  * @brief   Names and note and controller numbers for the
  *          Mackie Control Universal (MCU) protocol.

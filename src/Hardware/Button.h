@@ -69,6 +69,6 @@ class Button {
 
     static bool invertState;
 
-    // Edit this in ../Settings/Settings.h
+    // Edit this in Settings/Settings.h
     constexpr static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
 };

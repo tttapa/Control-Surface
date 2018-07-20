@@ -16,11 +16,14 @@
 
 #define DEBUG_MIDI_PACKETS
 
+/** Exit when encountering an error, instead of recovering. */
+#define FATAL_ERRORS
+
 // ---------------------------- User Settings ---------------------------- //
 // ======================================================================= //
 
 /** The factor for the analog filter: <br>
- *  Difference equation: 
+ *  Difference equation:
  *  @f$ y[n] = \alpha\cdot x[n] + (1-\alpha)\cdot y[n-1] @f$
  *  where
  *  @f$ \alpha = \left(\frac{1}{2}\right)^{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$

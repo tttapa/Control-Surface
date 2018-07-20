@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Selectors/Selector.h"
-#include "./DisplayElement.hpp"
+#include <Selectors/Selector.h>
+#include <Display/DisplayElement.hpp>
 
 class SelectorDisplay : public DisplayElement {
 public:

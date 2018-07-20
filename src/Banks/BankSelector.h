@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Selectors/Selector.h"
-#include "./Bank.h"
+#include <Selectors/Selector.h>
+#include <Banks/Bank.h>
 
 /**
  * @brief   A class for changing the setting of a Bank

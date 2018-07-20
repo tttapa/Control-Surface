@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../Helpers/LinkedList.h"
+#include <Helpers/LinkedList.h>
 
 class DisplayInterface {
 public:
   DisplayInterface() { LinkedList::append(this, first, last); }
   ~DisplayInterface() { LinkedList::remove(this, first, last); }
-  
+
   static DisplayInterface *getFirst() { return first; }
   DisplayInterface *getNext() { return next; }
 

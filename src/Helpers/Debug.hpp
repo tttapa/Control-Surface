@@ -5,7 +5,7 @@
 // #define DEBUG_OUT Serial // Uncomment this line to override Arduino IDE debug
 // level
 
-#include "../Settings/SettingsWrapper.h"
+#include <Settings/SettingsWrapper.h>
 
 #ifndef PRINTSTREAM_FALLBACK
 #include "PrintStream.h"
@@ -67,9 +67,9 @@ using std::uppercase;
 #ifdef DEBUG_OUT
 
 /**
- * @brief   If debugging is enabled, print the given data to the 
+ * @brief   If debugging is enabled, print the given data to the
  *          debug output stream.
- * 
+ *
  * @param   x
  *          The data to be printed.
  */
@@ -79,9 +79,9 @@ using std::uppercase;
     } while (0)
 
 /**
- * @brief   If debugging is enabled, print the filename and line number to the 
+ * @brief   If debugging is enabled, print the filename and line number to the
  *          debug output stream, followed by the given data.
- * 
+ *
  * @param   x
  *          The data to be printed.
  */
@@ -93,7 +93,7 @@ using std::uppercase;
 /**
  * @brief   If debugging is enabled, print the function name and line number to
  *          the debug output stream, followed by the given data.
- * 
+ *
  * @param   x
  *          The data to be printed.
  */
@@ -126,7 +126,7 @@ using std::uppercase;
 
 #endif
 
-#define FATAL_ERROR                                                            \
+#define FATAL_ERROR()                                                          \
     do {                                                                       \
         exit(1);                                                               \
     } while (0)

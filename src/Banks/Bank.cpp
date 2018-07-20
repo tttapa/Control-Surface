@@ -5,7 +5,7 @@
 Bank::Bank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
     if (tracksPerBank == 0) {
         DEBUGFN(F("Error: A Bank must have a non-zero number of tracks."));
-        FATAL_ERROR;
+        FATAL_ERROR();
     }
 }
 

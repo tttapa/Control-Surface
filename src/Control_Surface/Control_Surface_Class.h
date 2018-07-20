@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../MIDI_Interfaces/USBMIDI_Interface.h"
+#include <MIDI_Interfaces/USBMIDI_Interface.h>
 
 #ifdef DISPLAY_GFX
-#include "../Display/Display.hpp"
-#include "../Display/DisplayElement.hpp"
+#include <Display/Display.hpp>
+#include <Display/DisplayElement.hpp>
 #endif
 
 class Control_Surface_ {
@@ -28,13 +28,13 @@ class Control_Surface_ {
     void loop();
     /**
      * @brief   Get the MIDI interface of the Control Surface.
-     * 
+     *
      * @return  A reference to the Control Surface's MIDI interface.
      */
     MIDI_Interface &MIDI();
     /**
      * @brief   Set the given MIDI interface as the Control Surface's interface.
-     * 
+     *
      * @param   midi
      *          The MIDI interface to use for input and output of the Control
      *          surface.
@@ -53,7 +53,7 @@ class Control_Surface_ {
      */
     void updateControls();
     /**
-     * @brief   Update all Selector%s (BankSelector%s, Transposer%s, 
+     * @brief   Update all Selector%s (BankSelector%s, Transposer%s,
      *          ProgramSelector%s).
      */
     void updateSelectors();

@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../Display.hpp"
+#include <Display/Display.hpp>
+#include <stdint.h>
 
 /**
  * @brief A struct containing X Bitmap width, height and data.
@@ -17,7 +18,7 @@ struct XBitmap
 /**
  * @brief A namespace containing XBitmap definitions.
  *
- * @note Don't edit this file directly, place your XBM image 
+ * @note Don't edit this file directly, place your XBM image
  *       in the ./XBM folder, and run the python script in ./Scripts.
  */
 namespace XBM

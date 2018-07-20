@@ -1,4 +1,4 @@
-#include "../Helpers/Copy.hpp"
+#include <Helpers/Copy.hpp>
 #include "ButtonMatrix.h"
 #include <string.h>
 
@@ -7,6 +7,7 @@ using namespace ExtIO;
 template <uint8_t nb_rows, uint8_t nb_cols>
 ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const pin_t (&rowPins)[nb_rows],
                                              const pin_t (&colPins)[nb_cols]) {
+    // TODO
     // Note: this copies the data of rowPins and colPins, regardless of whether
     // it's static or temporary. This means that using global const arrays to
     // initialize ButtonMatrix is slightly less memory efficient than using
@@ -27,7 +28,7 @@ template <uint8_t nb_rows, uint8_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::refresh() {
     unsigned long now = millis();
     // only update every 25 ms (crude software
-    // debounce). Edit this in ../Settings/Settings.h
+    // debounce). Edit this in Settings/Settings.h
     if (now - prevRefresh < BUTTON_DEBOUNCE_TIME)
         return;
     prevRefresh = now;
@@ -96,15 +97,3 @@ void ButtonMatrix<nb_rows, nb_cols>::setPrevState(uint8_t col, uint8_t row,
     else
         prevStates[bitsToIndex(bits)] &= ~bitsToBitmask(bits);
 }
-
-/*
-template <uint8_t nb_rows, uint8_t nb_cols>
-bool ButtonMatrix<nb_rows, nb_cols>::allReleased() {
-    size_t nb_bytes = (nb_cols * nb_rows + 7) / 8;
-    for (size_t i = 0; i < nb_bytes; i++) {
-        if (prevStates[i] != 0xFF)
-            return false;
-    }
-    return true;
-}
-*/

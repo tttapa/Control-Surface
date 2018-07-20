@@ -1,3 +1,6 @@
+#pragma once
+
+#include <stdint.h>
 
 /**
  * @brief   Names and values for all MIDI Control Change Controller Numbers.

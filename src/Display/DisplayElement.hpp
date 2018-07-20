@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Helpers/LinkedList.h"
-#include "./DisplayHelpers.hpp"
+#include <Helpers/LinkedList.h>
+#include <Display/DisplayHelpers.hpp>
 
 struct Location {
   int16_t x;
