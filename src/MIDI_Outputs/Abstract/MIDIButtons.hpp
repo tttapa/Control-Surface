@@ -1,8 +1,8 @@
 #pragma once
 
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
 #include <Hardware/Button.h>
 #include <Helpers/Array.hpp>
+#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
@@ -13,7 +13,7 @@
  */
 template <uint8_t NUMBER_OF_BUTTONS, class Sender>
 class MIDIButtons : public AbstractMIDIOutput {
-  public:
+  protected:
     /**
      * @brief   Construct a new MIDIButtons.
      *
@@ -26,6 +26,7 @@ class MIDIButtons : public AbstractMIDIOutput {
           increment(((channelIncrement & 0xF) << 4) |
                     (addressIncrement & 0xF)) {}
 
+  public:
     void update() final override {
         uint8_t channel = baseChannel;
         uint8_t address = baseAddress;

@@ -19,7 +19,7 @@ class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
                          public AbstractMIDIOutput,
                          public ButtonMatrix<nb_rows, nb_cols> {
 
-  public:
+  protected:
     /**
      * @brief
      * @todo    Documentation
@@ -31,6 +31,7 @@ class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
         : ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
           addresses(addresses), baseChannel(channel) {}
 
+  public:
     void update() final override { ButtonMatrix<nb_rows, nb_cols>::refresh(); }
 
   private:

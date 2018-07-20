@@ -17,7 +17,7 @@ namespace Bankable {
 template <uint8_t NUMBER_OF_BUTTONS, class Sender>
 class MIDIButtons : public BankableMIDIOutputAddressable,
                     public AbstractMIDIOutput {
-  public:
+  protected:
     /**
      * @brief   Construct a new MIDIButtons.
      *
@@ -30,6 +30,7 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
           increment(((channelIncrement & 0xF) << 4) |
                     (addressIncrement & 0xF)) {}
 
+  public:
     void update() final override {
         uint8_t channel = getChannel(baseChannel);
         uint8_t address = getAddress(baseAddress);

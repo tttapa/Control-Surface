@@ -16,7 +16,7 @@ namespace Bankable {
 template <class Sender>
 class MIDIButton : public BankableMIDIOutputAddressable,
                    public AbstractMIDIOutput {
-  public:
+  protected:
     /**
      * @brief   Construct a new bankable MIDIButton.
      *
@@ -27,6 +27,7 @@ class MIDIButton : public BankableMIDIOutputAddressable,
     MIDIButton(pin_t pin, uint8_t baseAddress, uint8_t baseChannel)
         : button{pin}, baseAddress(baseAddress), baseChannel(baseChannel) {}
 
+  public:
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling) {

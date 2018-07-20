@@ -1,8 +1,8 @@
 #pragma once
 
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
 #include <Hardware/ButtonMatrix.h>
 #include <Helpers/Array.hpp>
+#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
 
 template <uint8_t nb_rows, uint8_t nb_cols>
 using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
@@ -16,7 +16,7 @@ template <class Sender, uint8_t nb_rows, uint8_t nb_cols>
 class MIDIButtonMatrix : public AbstractMIDIOutput,
                          public ButtonMatrix<nb_rows, nb_cols> {
 
-  public:
+  protected:
     /**
      * @brief
      * @todo    Documentation
@@ -28,6 +28,7 @@ class MIDIButtonMatrix : public AbstractMIDIOutput,
         : ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
           addresses(addresses), baseChannel(channel) {}
 
+  public:
     void update() final override { ButtonMatrix<nb_rows, nb_cols>::refresh(); }
 
   private:

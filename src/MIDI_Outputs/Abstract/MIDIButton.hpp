@@ -1,7 +1,7 @@
 #pragma once
 
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
 #include <Hardware/Button.h>
+#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
@@ -12,7 +12,7 @@
  */
 template <class Sender>
 class MIDIButton : public AbstractMIDIOutput {
-  public:
+  protected:
     /**
      * @brief   Construct a new MIDIButton.
      *
@@ -23,6 +23,7 @@ class MIDIButton : public AbstractMIDIOutput {
     MIDIButton(pin_t pin, uint8_t baseAddress, uint8_t baseChannel)
         : button{pin}, baseAddress(baseAddress), baseChannel(baseChannel) {}
 
+  public:
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling) {
