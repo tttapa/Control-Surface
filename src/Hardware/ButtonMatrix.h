@@ -2,6 +2,10 @@
 
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h> // for pin_t
 #include <Settings/SettingsWrapper.h>
+#include <Helpers/Array.hpp>
+
+template <size_t N>
+using PinList = Array<pin_t, N>;
 
 /**
  * @brief   A MIDI_Control_Element that reads the states of a button matrix and
@@ -28,8 +32,8 @@ class ButtonMatrix {
      * @note    The lists of pins are copied. This means that they can be
      *          initialized with a brace-enclosed initializer list.
      */
-    ButtonMatrix(const pin_t (&rowPins)[nb_rows],
-                 const pin_t (&colPins)[nb_cols]);
+    ButtonMatrix(const PinList<nb_rows> &rowPins,
+                 const PinList<nb_cols> &colPins);
     /**
      * @brief   Destructor.
      */
@@ -52,8 +56,8 @@ class ButtonMatrix {
     unsigned long prevRefresh = 0;
     uint8_t *prevStates = nullptr;
 
-    pin_t rowPins[nb_rows];
-    pin_t colPins[nb_cols];
+    const PinList<nb_rows> rowPins;
+    const PinList<nb_cols> colPins;
 };
 
 #include "ButtonMatrix.ipp" // Template implementations

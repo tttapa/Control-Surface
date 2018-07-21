@@ -1,21 +1,13 @@
-#include <Helpers/Copy.hpp>
 #include "ButtonMatrix.h"
+#include <Helpers/Copy.hpp>
 #include <string.h>
 
 using namespace ExtIO;
 
 template <uint8_t nb_rows, uint8_t nb_cols>
-ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const pin_t (&rowPins)[nb_rows],
-                                             const pin_t (&colPins)[nb_cols]) {
-    // TODO
-    // Note: this copies the data of rowPins and colPins, regardless of whether
-    // it's static or temporary. This means that using global const arrays to
-    // initialize ButtonMatrix is slightly less memory efficient than using
-    // brace-enclosed initializer lists. There are ways around this, but it's
-    // not really pretty:
-    // https://stackoverflow.com/questions/46382034/template-class-with-variable-array-size-initialize-with-array-reference-or-brac
-    copy(this->rowPins, rowPins);
-    copy(this->colPins, colPins);
+ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const PinList<nb_rows> &rowPins,
+                                             const PinList<nb_cols> &colPins)
+    : rowPins(rowPins), colPins(colPins) {
     init();
 }
 

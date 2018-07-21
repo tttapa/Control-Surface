@@ -21,8 +21,8 @@ class MIDIButtonMatrix : public AbstractMIDIOutput,
      * @brief
      * @todo    Documentation
      */
-    MIDIButtonMatrix(const pin_t (&rowPins)[nb_rows],
-                     const pin_t (&colPins)[nb_cols],
+    MIDIButtonMatrix(const PinList<nb_rows> &rowPins,
+                     const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
                      uint8_t channel)
         : ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),

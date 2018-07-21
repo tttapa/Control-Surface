@@ -8,8 +8,8 @@ template <uint8_t nb_rows, uint8_t nb_cols>
 class NoteButtonMatrix
     : public MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols> {
   public:
-    NoteButtonMatrix(const pin_t (&rowPins)[nb_rows],
-                     const pin_t (&colPins)[nb_cols],
+    NoteButtonMatrix(const PinList<nb_rows> &rowPins,
+                     const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
                      uint8_t channel)
         : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>(
@@ -22,8 +22,8 @@ template <uint8_t nb_rows, uint8_t nb_cols>
 class NoteButtonMatrix
     : public MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols> {
   public:
-    NoteButtonMatrix(const pin_t (&rowPins)[nb_rows],
-                     const pin_t (&colPins)[nb_cols],
+    NoteButtonMatrix(const PinList<nb_rows> &rowPins,
+                     const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
                      uint8_t channel)
         : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>(

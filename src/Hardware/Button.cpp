@@ -14,9 +14,8 @@ bool Button::invertState = false;
 
 Button::State Button::getState() {
     State rstate;
-    bool state = ExtIO::digitalRead(pin) ^
-                 invertState; // read the button state and invert
-                              // it if "invertState" is true
+    // read the button state and invert it if "invertState" is true
+    bool state = ExtIO::digitalRead(pin) ^ invertState;
     unsigned long now = millis();
     if (now - prevBounceTime > debounceTime) { // wait for state to stabilize
         rstate = static_cast<State>((debouncedState << 1) | state);
