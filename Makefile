@@ -865,6 +865,33 @@ src/MIDI_Parsers/USBMIDI_Parser.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Parsers/USBMIDI_Parser.cpp.s
 .PHONY : src/MIDI_Parsers/USBMIDI_Parser.cpp.s
 
+src/MIDI_Senders/RelativeCCSender.o: src/MIDI_Senders/RelativeCCSender.cpp.o
+
+.PHONY : src/MIDI_Senders/RelativeCCSender.o
+
+# target to build an object file
+src/MIDI_Senders/RelativeCCSender.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Senders/RelativeCCSender.cpp.o
+.PHONY : src/MIDI_Senders/RelativeCCSender.cpp.o
+
+src/MIDI_Senders/RelativeCCSender.i: src/MIDI_Senders/RelativeCCSender.cpp.i
+
+.PHONY : src/MIDI_Senders/RelativeCCSender.i
+
+# target to preprocess a source file
+src/MIDI_Senders/RelativeCCSender.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Senders/RelativeCCSender.cpp.i
+.PHONY : src/MIDI_Senders/RelativeCCSender.cpp.i
+
+src/MIDI_Senders/RelativeCCSender.s: src/MIDI_Senders/RelativeCCSender.cpp.s
+
+.PHONY : src/MIDI_Senders/RelativeCCSender.s
+
+# target to generate assembly for a file
+src/MIDI_Senders/RelativeCCSender.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Senders/RelativeCCSender.cpp.s
+.PHONY : src/MIDI_Senders/RelativeCCSender.cpp.s
+
 src/Selectors/Selector.o: src/Selectors/Selector.cpp.o
 
 .PHONY : src/Selectors/Selector.o
@@ -1053,6 +1080,33 @@ test/MIDI_Outputs/test-CCButton.s: test/MIDI_Outputs/test-CCButton.cpp.s
 test/MIDI_Outputs/test-CCButton.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-CCButton.cpp.s
 .PHONY : test/MIDI_Outputs/test-CCButton.cpp.s
+
+test/MIDI_Outputs/test-CCRotaryEncoder.o: test/MIDI_Outputs/test-CCRotaryEncoder.cpp.o
+
+.PHONY : test/MIDI_Outputs/test-CCRotaryEncoder.o
+
+# target to build an object file
+test/MIDI_Outputs/test-CCRotaryEncoder.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-CCRotaryEncoder.cpp.o
+.PHONY : test/MIDI_Outputs/test-CCRotaryEncoder.cpp.o
+
+test/MIDI_Outputs/test-CCRotaryEncoder.i: test/MIDI_Outputs/test-CCRotaryEncoder.cpp.i
+
+.PHONY : test/MIDI_Outputs/test-CCRotaryEncoder.i
+
+# target to preprocess a source file
+test/MIDI_Outputs/test-CCRotaryEncoder.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-CCRotaryEncoder.cpp.i
+.PHONY : test/MIDI_Outputs/test-CCRotaryEncoder.cpp.i
+
+test/MIDI_Outputs/test-CCRotaryEncoder.s: test/MIDI_Outputs/test-CCRotaryEncoder.cpp.s
+
+.PHONY : test/MIDI_Outputs/test-CCRotaryEncoder.s
+
+# target to generate assembly for a file
+test/MIDI_Outputs/test-CCRotaryEncoder.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Outputs/test-CCRotaryEncoder.cpp.s
+.PHONY : test/MIDI_Outputs/test-CCRotaryEncoder.cpp.s
 
 test/MIDI_Outputs/test-NoteButton.o: test/MIDI_Outputs/test-NoteButton.cpp.o
 
@@ -1276,6 +1330,9 @@ help:
 	@echo "... src/MIDI_Parsers/USBMIDI_Parser.o"
 	@echo "... src/MIDI_Parsers/USBMIDI_Parser.i"
 	@echo "... src/MIDI_Parsers/USBMIDI_Parser.s"
+	@echo "... src/MIDI_Senders/RelativeCCSender.o"
+	@echo "... src/MIDI_Senders/RelativeCCSender.i"
+	@echo "... src/MIDI_Senders/RelativeCCSender.s"
 	@echo "... src/Selectors/Selector.o"
 	@echo "... src/Selectors/Selector.i"
 	@echo "... src/Selectors/Selector.s"
@@ -1297,6 +1354,9 @@ help:
 	@echo "... test/MIDI_Outputs/test-CCButton.o"
 	@echo "... test/MIDI_Outputs/test-CCButton.i"
 	@echo "... test/MIDI_Outputs/test-CCButton.s"
+	@echo "... test/MIDI_Outputs/test-CCRotaryEncoder.o"
+	@echo "... test/MIDI_Outputs/test-CCRotaryEncoder.i"
+	@echo "... test/MIDI_Outputs/test-CCRotaryEncoder.s"
 	@echo "... test/MIDI_Outputs/test-NoteButton.o"
 	@echo "... test/MIDI_Outputs/test-NoteButton.i"
 	@echo "... test/MIDI_Outputs/test-NoteButton.s"

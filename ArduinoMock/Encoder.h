@@ -3,10 +3,19 @@
 
 #include "gmock/gmock.h"
 
+class EncoderMock {
+  public:
+    MOCK_CONST_METHOD0(read, long());
+};
+
 class Encoder {
   public:
-    Encoder(int, int) {}
-    MOCK_CONST_METHOD0(read, long());
+    Encoder(const EncoderMock &mock) : mock(mock) {}
+    Encoder(const Encoder &) = default;
+    long read() const { return mock.read(); }
+
+  private:
+    const EncoderMock &mock;
 };
 
 #endif

@@ -13,7 +13,7 @@ class StreamMIDI_Interface : public MIDI_Interface {
   public:
     /**
      * @brief   Construct a StreamMIDI_Interface on the given Stream.
-     * 
+     *
      * @param   stream
      *          The Stream interface.
      */
@@ -33,15 +33,14 @@ class StreamMIDI_Interface : public MIDI_Interface {
   protected:
     SerialMIDI_Parser parser;
 
-    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1,
-                          uint8_t d2) override {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
         stream.write(m | c); // Send the MIDI message over the stream
         stream.write(d1);
         stream.write(d2);
         stream.flush(); // TODO
     }
 
-    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1) override {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1) override {
         stream.write(m | c); // Send the MIDI message over the stream
         stream.write(d1);
         stream.flush(); // TODO
@@ -52,9 +51,9 @@ class StreamMIDI_Interface : public MIDI_Interface {
 };
 
 /**
- * @brief   A wrapper class for MIDI interfaces sending and receiving 
+ * @brief   A wrapper class for MIDI interfaces sending and receiving
  *          MIDI messages over a Serial port of class T.
- * 
+ *
  * @note    This is a template class because the class of the Serial object
  *          is completely different on different architectures, and they
  *          do not share a common super-class that has a `begin` method.
@@ -65,7 +64,7 @@ class SerialMIDI_Interface : public StreamMIDI_Interface {
     /**
      * @brief   Create a new MIDI Interface on the given Serial interface
      *          with the given baud rate.
-     * 
+     *
      * @param   serial
      *          The Serial interface.
      * @param   baud
@@ -84,16 +83,16 @@ class SerialMIDI_Interface : public StreamMIDI_Interface {
 };
 
 /**
- * @brief   A class for MIDI interfaces sending and receiving 
+ * @brief   A class for MIDI interfaces sending and receiving
  *          MIDI messages over a Serial port of class T.
  */
 class HardwareSerialMIDI_Interface
     : public SerialMIDI_Interface<HardwareSerial> {
   public:
     /**
-     * @brief   Construct a new MIDI Interface on the given HardwareSerial 
+     * @brief   Construct a new MIDI Interface on the given HardwareSerial
      *          interface with the given baud rate.
-     * 
+     *
      * @param   serial
      *          The HardwareSerial interface.
      * @param   baud
@@ -109,9 +108,9 @@ class HardwareSerialMIDI_Interface
 // Boards without a USB connection (UNO, MEGA, Nano ...)
 #if !(defined(USBCON) || defined(CORE_TEENSY))
 /**
- * @brief   A class for MIDI interfaces sending and receiving 
+ * @brief   A class for MIDI interfaces sending and receiving
  *          MIDI messages over the USB CDC connection.
- * 
+ *
  *          Boards without a native USB connection (UNO, MEGA, Nano ...)
  *          use HardwareSerial0 for USB communcication.
  */
@@ -119,7 +118,7 @@ class USBSerialMIDI_Interface : public HardwareSerialMIDI_Interface {
   public:
     /**
      * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
-     * 
+     *
      * @param   baud
      *          The baud rate to start the USB Serial connection with.
      */
@@ -130,9 +129,9 @@ class USBSerialMIDI_Interface : public HardwareSerialMIDI_Interface {
 // Teensies
 #elif defined(CORE_TEENSY)
 /**
- * @brief   A class for MIDI interfaces sending and receiving 
+ * @brief   A class for MIDI interfaces sending and receiving
  *          MIDI messages over the USB Serial CDC connection.
- * 
+ *
  *          The USB Serial connection `Serial` on Teensies is an instance of
  *          the `usb_serial_class`.
  */
@@ -140,7 +139,7 @@ class USBSerialMIDI_Interface : public SerialMIDI_Interface<usb_serial_class> {
   public:
     /**
      * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
-     * 
+     *
      * @param   baud
      *          The baud rate to start the USB Serial connection with.
      */
@@ -151,17 +150,17 @@ class USBSerialMIDI_Interface : public SerialMIDI_Interface<usb_serial_class> {
 // Arduino DUE
 #elif defined(ARDUINO_ARCH_SAM)
 /**
- * @brief   A class for MIDI interfaces sending and receiving 
+ * @brief   A class for MIDI interfaces sending and receiving
  *          MIDI messages over the USB Serial CDC connection.
- * 
- *          The USB Serial connection `Serial` on the Arduino DUE is an 
+ *
+ *          The USB Serial connection `Serial` on the Arduino DUE is an
  *          instance of the `UARTClass`.
  */
 class USBSerialMIDI_Interface : public SerialMIDI_Interface<UARTClass> {
   public:
     /**
      * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
-     * 
+     *
      * @param   baud
      *          The baud rate to start the USB Serial connection with.
      */
@@ -172,9 +171,9 @@ class USBSerialMIDI_Interface : public SerialMIDI_Interface<UARTClass> {
 // Others (Leonardo, Micro ... )
 #else
 /**
- * @brief   A class for MIDI interfaces sending and receiving 
+ * @brief   A class for MIDI interfaces sending and receiving
  *          MIDI messages over the USB Serial CDC connection.
- * 
+ *
  *          The USB Serial connection `Serial` on the Arduino Leonardo, Micro,
  *          etc. is an instance of the `Serial_` class.
  */
@@ -182,7 +181,7 @@ class USBSerialMIDI_Interface : public SerialMIDI_Interface<Serial_> {
   public:
     /**
      * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
-     * 
+     *
      * @param   baud
      *          The baud rate to start the USB Serial connection with.
      */
@@ -201,8 +200,8 @@ class HairlessMIDI_Interface : public USBSerialMIDI_Interface {
   public:
     /**
      * @brief   Construct a HairlessMIDI_Interface.
-     * 
-     * The default Hairless baud rate of 115200 baud is used. 
+     *
+     * The default Hairless baud rate of 115200 baud is used.
      * This can be changed in the Settings.h file.
      */
     HairlessMIDI_Interface() : USBSerialMIDI_Interface(HAIRLESS_BAUD){};
@@ -211,16 +210,16 @@ class HairlessMIDI_Interface : public USBSerialMIDI_Interface {
 #if defined(__AVR__) || defined(CORE_TEENSY)
 #include <SoftwareSerial.h>
 /**
- * @brief   A class for MIDI interfaces sending and receiving 
+ * @brief   A class for MIDI interfaces sending and receiving
  *          MIDI messages over a SoftwareSerial interface.
  */
 class SoftwareSerialMIDI_Interface
     : public SerialMIDI_Interface<SoftwareSerial> {
   public:
     /**
-     * @brief   Create a SoftwareSerialMIDI_Interface on the given 
+     * @brief   Create a SoftwareSerialMIDI_Interface on the given
      *          SoftwareSerial interface with the given baud rate.
-     * 
+     *
      * @param   serial
      *          The SoftwareSerial interface.
      * @param   baud

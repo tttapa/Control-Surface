@@ -12,7 +12,7 @@ enum relativeCCmode { TWOS_COMPLEMENT, BINARY_OFFSET, SIGN_MAGNITUDE };
 
 #define MACKIE_CONTROL_RELATIVE SIGN_MAGNITUDE
 
-class DigitalCCSender {
+class RelativeCCSender {
   public:
     /** Convert an 8-bit two's complement integer to a 7-bit two's complement
      *  integer. */
@@ -31,7 +31,7 @@ class DigitalCCSender {
     }
     /** Convert an 8-bit two's complement integer to a 7-bit value to send over
      *  MIDI. */
-    static uint8_t mapRelativeCC(int8_t value, relativeCCmode mode) {
+    static uint8_t mapRelativeCC(int8_t value) {
         switch (mode) {
             case TWOS_COMPLEMENT: return toTwosComplement7bit(value);
             case BINARY_OFFSET: return toBinaryOffset7bit(value);
@@ -40,16 +40,20 @@ class DigitalCCSender {
         }
     }
 
-    static void send(long delta, relativeCCmode mode, uint8_t channel,
-                     uint8_t address) {
+    static void send(long delta, uint8_t channel, uint8_t address) {
         while (delta != 0) {
             // Constrain relative movement to +/-15 for
             // Mackie Control Universal compatibility
             long thisDelta = constrain(delta, -15, 15);
-            uint8_t msgVal = mapRelativeCC(thisDelta, mode);
+            uint8_t msgVal = mapRelativeCC(thisDelta);
             // send a Control Change MIDI event
             Control_Surface.MIDI().send(CC, channel, address, msgVal);
             delta -= thisDelta;
         }
     }
+
+    static void setMode(relativeCCmode mode) { RelativeCCSender::mode = mode; }
+
+  private:
+    static relativeCCmode mode;
 };

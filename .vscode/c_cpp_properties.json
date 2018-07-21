@@ -2,7 +2,7 @@
     "configurations": [
         {
             "name": "Linux",
-            "defines": [],
+            "defines": ["IDE"],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
             "cppStandard": "c++11",

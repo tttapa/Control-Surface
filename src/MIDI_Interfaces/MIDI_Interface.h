@@ -11,9 +11,9 @@ class MIDI_Interface {
   public:
     /**
      * @brief   Construct a MIDI interface with the given parser.
-     * 
+     *
      *          Also set this interface as the default MIDI interface.
-     * 
+     *
      * @param   parser
      *          The MIDI parser to use for the interface.
      */
@@ -22,7 +22,7 @@ class MIDI_Interface {
     /**
      * @brief   Destructor.
      */
-    virtual ~MIDI_Interface() {}
+    virtual ~MIDI_Interface() = default;
 
     /**
      * @brief   Initialize the MIDI Interface.
@@ -30,7 +30,7 @@ class MIDI_Interface {
     virtual void begin() {}
     /**
      * @brief   Send a 3-byte MIDI packet.
-     * 
+     *
      * @param   m
      *          MIDI message type. [0x80, 0xE0]
      * @param   c
@@ -44,7 +44,7 @@ class MIDI_Interface {
 
     /**
      * @brief   Send a 2-byte MIDI packet.
-     * 
+     *
      * @param   m
      *          MIDI message type. [0x80, 0xE0]
      * @param   c
@@ -57,7 +57,7 @@ class MIDI_Interface {
     /**
      * @brief   Try to read a MIDI message and return what type of message
      *          has been read.
-     * 
+     *
      * @return  NO_MESSAGE
      *          No MIDI message is ready to be read.
      * @return  CHANNEL_MESSAGE
