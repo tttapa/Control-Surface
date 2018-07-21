@@ -10,12 +10,13 @@ class EncoderMock {
 
 class Encoder {
   public:
-    Encoder(const EncoderMock &mock) : mock(mock) {}
+    Encoder(int, int) : mock{nullptr} {}
+    Encoder(const EncoderMock &mock) : mock(&mock) {}
     Encoder(const Encoder &) = default;
-    long read() const { return mock.read(); }
+    long read() const { return mock ? mock->read() : 0; }
 
   private:
-    const EncoderMock &mock;
+    const EncoderMock *mock;
 };
 
 #endif

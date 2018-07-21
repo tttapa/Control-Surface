@@ -91,6 +91,7 @@ const char *Selector::getMode() {
     case INCREMENT_LEDS:
         return "INCREMENT_LEDS";
     }
+    return ""; // Keeps the compiler happy
 }
 
 void Selector::initLEDs() {

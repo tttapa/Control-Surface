@@ -41,12 +41,14 @@ class MIDI_Parser {
     size_t getSysExLength();
 
   protected:
-    const static size_t bufferSize =
-        SYSEX_BUFFER_SIZE; // Edit this in ../Settings/Settings.h
+    MIDI_message midimsg;
+
+#ifndef IGNORE_SYSEX
+    // Edit this in ../Settings/Settings.h
+    constexpr static size_t bufferSize = SYSEX_BUFFER_SIZE;
     uint8_t SysExBuffer[bufferSize];
     size_t SysExLength = 0;
     bool receivingSysEx = false;
-    MIDI_message midimsg;
 
     /** Start a new SysEx message. */
     void startSysEx();
@@ -56,6 +58,7 @@ class MIDI_Parser {
     bool addSysExByte(uint8_t data);
     /** Check if the buffer has at least 1 byte of free space available. */
     bool hasSpaceLeft();
+#endif
 
     /** Check if the given byte is a MIDI header byte. */
     static bool isHeader(uint8_t data);

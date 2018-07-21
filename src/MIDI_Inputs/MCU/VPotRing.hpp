@@ -1,6 +1,7 @@
 #pragma once
 
 #include <MIDI_Inputs/MIDI_Input_CC.hpp>
+#include <Banks/BankableMIDIInputAddressable.hpp>
 
 namespace MCU {
 
@@ -77,8 +78,6 @@ class VPotRing : public virtual VPotRing_Base {
 };
 
 // -------------------------------------------------------------------------- //
-
-#include <Banks/BankableMIDIInputAddressable.hpp>
 
 namespace Bankable {
 

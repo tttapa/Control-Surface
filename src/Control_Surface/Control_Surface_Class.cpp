@@ -21,7 +21,7 @@ void Control_Surface_::begin() {
         }
         midi->begin(); // initialize the MIDI interface
     }
-#if defined(PrintStream_h) && defined(ARDUINO)
+#if defined(PrintStream_h) && defined(ARDUINO) && defined(DEBUG_OUT)
     DEBUG_OUT.begin(115200);
     DEBUG_OUT << leadingzeros;
 #endif

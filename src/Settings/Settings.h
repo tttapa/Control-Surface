@@ -12,9 +12,9 @@
 // ======================================================================= //
 
 /** The debug output. */
-#define DEBUG_OUT Serial
+// #define DEBUG_OUT Serial
 
-#define DEBUG_MIDI_PACKETS
+// #define DEBUG_MIDI_PACKETS
 
 /** Exit when encountering an error, instead of recovering. */
 #define FATAL_ERRORS

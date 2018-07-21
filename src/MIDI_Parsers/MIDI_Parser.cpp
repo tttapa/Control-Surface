@@ -1,5 +1,6 @@
 #include "MIDI_Parser.h"
-#include "../Settings/SettingsWrapper.h"
+
+#ifndef IGNORE_SYSEX
 
 void MIDI_Parser::startSysEx() {
     SysExLength = 0; // if the previous message wasn't finished, overwrite it
@@ -29,8 +30,10 @@ bool MIDI_Parser::hasSpaceLeft() {
     return avail;
 }
 
-MIDI_message MIDI_Parser::getChannelMessage() { return midimsg; }
 const uint8_t *MIDI_Parser::getSysExBuffer() { return SysExBuffer; }
 size_t MIDI_Parser::getSysExLength() { return SysExLength; }
 
+#endif
+
 bool MIDI_Parser::isHeader(uint8_t data) { return data & (1 << 7); }
+MIDI_message MIDI_Parser::getChannelMessage() { return midimsg; }

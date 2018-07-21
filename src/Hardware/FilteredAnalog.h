@@ -7,6 +7,8 @@
 
 constexpr static uint8_t ADC_BITS = 10;
 
+using MappingFunction = int(*(int));
+
 /**
  * A class that reads and filters an analog input.
  *
@@ -25,17 +27,17 @@ class FilteredAnalog {
      *        The analog pin to read from.
      */
     FilteredAnalog(pin_t analogPin); // Constructor
-    
+
     /**
-     * @brief   Specify a mapping function that is applied to the raw 
-     *          analog value before sending.
+     * @brief   Specify a mapping function that is applied to the raw
+     *          analog value before filtering.
      *
      * @param   fn
-     *          A function pointer to the mapping function. This function 
-     *          should take the 10-bit analog value as a parameter, and 
+     *          A function pointer to the mapping function. This function
+     *          should take the 10-bit analog value as a parameter, and
      *          should return a 10-bit value.
      */
-    void map(int (*fn)(int));
+    void map(MappingFunction fn);
 
     /**
      * @brief Read the analog input value, apply the mapping function, and
@@ -52,7 +54,7 @@ class FilteredAnalog {
      * @brief   Get the filtered value of the analog input.
      *
      * @return  The filtered value of the analog input, as a number
-     *          of `PRECISION` bits wide. 
+     *          of `PRECISION` bits wide.
      * @return  0xFFFF if the update() has not been called yet.
      */
     uint16_t getValue();
@@ -87,7 +89,7 @@ bool FilteredAnalog<PRECISION>::update() {
     input = filter.filter(input);     // apply a low-pass EMA filter
     uint16_t newValue =
         hysteresis.getOutputLevel(input); // map from the 10-bit analog input
-                                          // value to a value of `PRECISION` 
+                                          // value to a value of `PRECISION`
                                           // bits wide, applying hysteresis
     bool changed = newValue != value;
     value = newValue;
@@ -100,6 +102,6 @@ uint16_t FilteredAnalog<PRECISION>::getValue() {
 }
 
 template <uint8_t PRECISION>
-void FilteredAnalog<PRECISION>::map(int (*fn)(int)) {
+void FilteredAnalog<PRECISION>::map(MappingFunction fn) {
     mapFn = fn;
 }

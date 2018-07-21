@@ -8,9 +8,12 @@
 
 #include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Encoder.h>
+#include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
 
 namespace Bankable {
+
+using EncoderPinList = Array<uint8_t, 2>;
 
 /**
  * @brief   An abstract class for rotary encoders that send MIDI events and that
@@ -25,11 +28,21 @@ class MIDIRotaryEncoder : public BankableMIDIOutputAddressable,
      *
      * @todo    Documentation
      */
+    MIDIRotaryEncoder(const EncoderPinList &pins, uint8_t baseAddress,
+                      uint8_t baseChannel, uint8_t speedMultiply,
+                      uint8_t pulsesPerStep)
+        : encoder{pins[0], pins[1]}, baseAddress(baseAddress),
+          baseChannel(baseChannel), speedMultiply(speedMultiply),
+          pulsesPerStep(pulsesPerStep) {}
+
+// For tests only
+#ifndef ARDUINO
     MIDIRotaryEncoder(const Encoder &encoder, uint8_t baseAddress,
                       uint8_t baseChannel, uint8_t speedMultiply,
                       uint8_t pulsesPerStep)
         : encoder{encoder}, baseAddress(baseAddress), baseChannel(baseChannel),
           speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep) {}
+#endif
 
   public:
     void update() final override {

@@ -2,7 +2,9 @@
     "configurations": [
         {
             "name": "Linux",
-            "defines": ["IDE"],
+            "defines": [
+                "IDE"
+            ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
             "cppStandard": "c++11",
@@ -12,7 +14,9 @@
                 "${workspaceFolder}/googletest/googletest-src/googlemock/include",
                 "${workspaceFolder}/mock",
                 "${workspaceFolder}/ArduinoMock",
-                "${workspaceFolder}/src"
+                "${workspaceFolder}/src",
+                "/usr/include",
+                "/usr/include/x86_64-linux-gnu/bits"
             ]
         }
     ],

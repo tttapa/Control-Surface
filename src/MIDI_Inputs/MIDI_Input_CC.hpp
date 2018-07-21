@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Helpers/LinkedList.h"
-#include "MIDI_Input_Element_Addressable.hpp"
+#include <Helpers/LinkedList.h>
+#include <MIDI_Inputs/MIDI_Input_Element_Addressable.hpp>
 
 class MIDI_Input_CC : public MIDI_Input_Element_Addressable {
   public:
@@ -28,9 +28,9 @@ class MIDI_Input_CC : public MIDI_Input_Element_Addressable {
             e->update();
     }
 
-    /** 
+    /**
      * @brief   Reset all MIDI_Input_CC elements to their initial state.
-     * 
+     *
      * @see     MIDI_Input_CC#reset
      */
     static void resetAll() {
@@ -40,7 +40,7 @@ class MIDI_Input_CC : public MIDI_Input_Element_Addressable {
 
     /**
      * @brief   Update all MIDI_Input_CC elements with a new MIDI message.
-     * 
+     *
      * @see     MIDI_Input_CC#updateWith
      */
     static void updateAllWith(const MIDI_message_matcher &midimsg) {

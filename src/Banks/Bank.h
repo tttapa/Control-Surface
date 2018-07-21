@@ -127,7 +127,7 @@ class Bank {
      */
     template <class T, size_t N>
     void add(T (&bankables)[N], bankType type = CHANGE_ADDRESS) {
-        for (BankableMIDIInputAddressable &bankable : bankables)
+        for (T &bankable : bankables)
             add(bankable, type);
     }
 
