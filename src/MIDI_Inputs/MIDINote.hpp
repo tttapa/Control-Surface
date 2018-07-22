@@ -1,12 +1,12 @@
 #pragma once
 
-#include "MIDI_Input_Note.hpp"
+#include "MIDIInputElementNote.hpp"
 
-class Note_Input_Base : public MIDI_Input_Note {
+class MIDINote_Base : public MIDIInputElementNote {
   protected:
-    Note_Input_Base(); // unused, only for virtual inheritance
-    Note_Input_Base(uint8_t track, uint8_t channel = 1)
-        : MIDI_Input_Note(channel, track) {}
+    MIDINote_Base(); // unused, only for virtual inheritance
+    MIDINote_Base(uint8_t track, uint8_t channel = 1)
+        : MIDIInputElementNote(channel, track) {}
 
   public:
     virtual uint8_t getValue() const = 0;
@@ -22,10 +22,10 @@ class Note_Input_Base : public MIDI_Input_Note {
 
 // -------------------------------------------------------------------------- //
 
-class Note_Input : public virtual Note_Input_Base {
+class MIDINote : public virtual MIDINote_Base {
   public:
-    Note_Input(uint8_t track, uint8_t channel = 1)
-        : Note_Input_Base(track, channel) {}
+    MIDINote(uint8_t track, uint8_t channel = 1)
+        : MIDINote_Base(track, channel) {}
 
     uint8_t getValue() const override { return value; }
 
@@ -47,11 +47,11 @@ class Note_Input : public virtual Note_Input_Base {
 namespace Bankable {
 
 template <uint8_t NUMBER_OF_BANKS>
-class Note_Input : public virtual Note_Input_Base,
+class MIDINote : public virtual MIDINote_Base,
                    public BankableMIDIInputAddressable {
   public:
-    Note_Input(uint8_t track, uint8_t channel = 1)
-        : Note_Input_Base(track, channel) {}
+    MIDINote(uint8_t track, uint8_t channel = 1)
+        : MIDINote_Base(track, channel) {}
 
     uint8_t getValue() const override {
         return values[getBankSetting() % NUMBER_OF_BANKS];

@@ -50,12 +50,12 @@
 #include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
 #include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
-#include <MIDI_Inputs/Note_Input.hpp>
+#include <MIDI_Inputs/MIDINote.hpp>
 // #include "MIDI_Inputs/MIDI_Input_VU.h" // TODO
 
 // -------------------------------------------------------------------------- //
-#include <MIDI_Inputs/LEDs/MCU/VPotRing_LEDs.hpp>
-#include <MIDI_Inputs/LEDs/Note_Input_LEDs.hpp>
+#include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
+#include <MIDI_Inputs/LEDs/MIDINoteLED.hpp>
 
 // -------------------------------------------------------------------------- //
 #include <Banks/Bank.h>

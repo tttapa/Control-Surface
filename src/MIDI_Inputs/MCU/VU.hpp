@@ -3,15 +3,15 @@
 #include <Banks/BankableMIDIInputAddressable.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <Helpers/Copy.hpp>
-#include <MIDI_Inputs/MIDI_Input_ChannelPressure.hpp>
+#include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <string.h>
 
 namespace MCU {
 
-class VU_Base : public MIDI_Input_ChannelPressure {
+class VU_Base : public MIDIInputElementChannelPressure {
   public:
     VU_Base(uint8_t track, uint8_t channel, unsigned int decayTime)
-        : MIDI_Input_ChannelPressure(channel), baseTrack(track - 1),
+        : MIDIInputElementChannelPressure(channel), baseTrack(track - 1),
           decayTime(decayTime) {}
 
     uint8_t getValue() const { return getValueHelper(getRawValue()); }

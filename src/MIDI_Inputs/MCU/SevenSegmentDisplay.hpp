@@ -1,20 +1,20 @@
 #pragma once
 
-#include <MIDI_Inputs/MIDI_Input_CC.hpp>
+#include <MIDI_Inputs/MIDIInputElementCC.hpp>
 #include <Print.h>
 #include <string.h>
 
 namespace MCU {
 
 template <uint8_t LENGTH>
-class SevenSegmentDisplay : public MIDI_Input_CC, public Printable {
+class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
   public:
     /**
     * @brief     Constructor.
     * @todo      Documentation.
     */
     SevenSegmentDisplay(uint8_t baseChannel, uint8_t baseAddress)
-        : MIDI_Input_CC(baseChannel, baseAddress) {
+        : MIDIInputElementCC(baseChannel, baseAddress) {
         memset(text, ' ', LENGTH);
     }
 

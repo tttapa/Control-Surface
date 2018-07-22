@@ -6,9 +6,9 @@
 
 namespace MCU {
 
-class VPotRing_LEDs_Base : public virtual VPotRing_Base {
+class VPotRingLEDs_Base : public virtual VPotRing_Base {
   public:
-    VPotRing_LEDs_Base(const pin_t (&ledPins)[11]) {
+    VPotRingLEDs_Base(const pin_t (&ledPins)[11]) {
         copy(this->ledPins, ledPins);
         for (const pin_t &pin : ledPins)
             ExtIO::pinMode(pin, OUTPUT);
@@ -16,6 +16,7 @@ class VPotRing_LEDs_Base : public virtual VPotRing_Base {
 
   private:
     void display() const {
+        DEBUGFN("");
         uint8_t startOn = getStartOn();
         uint8_t startOff = getStartOff();
         for (uint8_t pin = 0; pin < startOn; pin++)
@@ -32,10 +33,11 @@ class VPotRing_LEDs_Base : public virtual VPotRing_Base {
 
 // -------------------------------------------------------------------------- //
 
-class VPotRing_LEDs : public VPotRing, public VPotRing_LEDs_Base {
+class VPotRingLEDs : public VPotRing, public VPotRingLEDs_Base {
   public:
-    VPotRing_LEDs(uint8_t track, uint8_t channel, const pin_t (&ledPins)[11])
-        : VPotRing(track, channel), VPotRing_LEDs_Base(ledPins) {}
+    VPotRingLEDs(uint8_t track, uint8_t channel, const pin_t (&ledPins)[11])
+        : VPotRing_Base(track, channel), VPotRing(track, channel),
+          VPotRingLEDs_Base(ledPins) {}
 };
 
 // -------------------------------------------------------------------------- //
@@ -43,12 +45,13 @@ class VPotRing_LEDs : public VPotRing, public VPotRing_LEDs_Base {
 namespace Bankable {
 
 template <uint8_t NUMBER_OF_BANKS>
-class VPotRing_LEDs : public VPotRing<NUMBER_OF_BANKS>,
-                      public VPotRing_LEDs_Base {
+class VPotRingLEDs : public VPotRing<NUMBER_OF_BANKS>,
+                     public VPotRingLEDs_Base {
   public:
-    VPotRing_LEDs(uint8_t track, uint8_t channel, const pin_t (&ledPins)[11])
-        : VPotRing<NUMBER_OF_BANKS>(track, channel),
-          VPotRing_LEDs_Base(ledPins) {}
+    VPotRingLEDs(uint8_t track, uint8_t channel, const pin_t (&ledPins)[11])
+        : VPotRing_Base(track, channel), VPotRing<NUMBER_OF_BANKS>(track,
+                                                                   channel),
+          VPotRingLEDs_Base(ledPins) {}
 };
 
 } // namespace Bankable

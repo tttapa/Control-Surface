@@ -2,16 +2,16 @@
 
 #include "MIDI_message_matcher.h"
 
-class MIDI_Input_Element {
+class MIDIInputElement {
   protected:
     /**
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDI_Input_Element(uint8_t baseChannel) : baseChannel(baseChannel - 1) {}
+    MIDIInputElement(uint8_t baseChannel) : baseChannel(baseChannel - 1) {}
 
   public:
-    virtual ~MIDI_Input_Element() = default;
+    virtual ~MIDIInputElement() = default;
 
     /**
      * @brief   Update the display of the input element.

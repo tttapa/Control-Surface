@@ -2,17 +2,17 @@
 
 #include "MIDI_message_matcher.h"
 
-class MIDI_Input_Element_Addressable {
+class MIDIInputElementAddressable {
   protected:
     /**
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDI_Input_Element_Addressable(uint8_t baseChannel, uint8_t baseAddress)
+    MIDIInputElementAddressable(uint8_t baseChannel, uint8_t baseAddress)
         : baseChannel(baseChannel - 1), baseAddress(baseAddress) {}
 
   public:
-    virtual ~MIDI_Input_Element_Addressable() = default;
+    virtual ~MIDIInputElementAddressable() = default;
 
     /**
      * @brief   Update the display of the input element.

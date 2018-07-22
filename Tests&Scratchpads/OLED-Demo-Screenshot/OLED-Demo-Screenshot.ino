@@ -97,22 +97,22 @@ RotaryEncoder encoder_B (2, 3, V_POT_2, 1, 1, NORMAL_ENCODER, MACKIE_CONTROL_REL
 MCU_TimeDisplay tdisp;
 
 // Play / Record
-MIDI_Input_Note_Buffer play   (PLAY,   1, 1, 1); // channel (1), listen to this address only (1), listen to this channel only (1)
-MIDI_Input_Note_Buffer record (RECORD, 1, 1, 1);
+MIDIInputElementNote_Buffer play   (PLAY,   1, 1, 1); // channel (1), listen to this address only (1), listen to this channel only (1)
+MIDIInputElementNote_Buffer record (RECORD, 1, 1, 1);
 
 // Mute
-MIDI_Input_Note_Buffer mute_A (MUTE_1, 1, 4, 1); // channel (1), listen to (4) addresses in total, listen to this channel only (1)
-MIDI_Input_Note_Buffer mute_B (MUTE_2, 1, 4, 1);
+MIDIInputElementNote_Buffer mute_A (MUTE_1, 1, 4, 1); // channel (1), listen to (4) addresses in total, listen to this channel only (1)
+MIDIInputElementNote_Buffer mute_B (MUTE_2, 1, 4, 1);
 
 // Solo
-MIDI_Input_Note_Buffer solo_A (SOLO_1, 1, 4, 1);
-MIDI_Input_Note_Buffer solo_B (SOLO_2, 1, 4, 1);
+MIDIInputElementNote_Buffer solo_A (SOLO_1, 1, 4, 1);
+MIDIInputElementNote_Buffer solo_B (SOLO_2, 1, 4, 1);
 
-MIDI_Input_Note_Buffer rudeSolo (RUDE_SOLO, 1, 1, 1);
+MIDIInputElementNote_Buffer rudeSolo (RUDE_SOLO, 1, 1, 1);
 
 // Record arm / ready
-MIDI_Input_Note_Buffer recrdy_A (REC_RDY_1, 1, 4, 1);
-MIDI_Input_Note_Buffer recrdy_B (REC_RDY_2, 1, 4, 1);
+MIDIInputElementNote_Buffer recrdy_A (REC_RDY_1, 1, 4, 1);
+MIDIInputElementNote_Buffer recrdy_B (REC_RDY_2, 1, 4, 1);
 
 // VU meters
 MCU_VU vu_A (1, 4, false);  // track (1), listen to (4) tracks in total, don't decay automatically (false)

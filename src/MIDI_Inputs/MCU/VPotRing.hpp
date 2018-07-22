@@ -1,7 +1,7 @@
 #pragma once
 
-#include <MIDI_Inputs/MIDI_Input_CC.hpp>
 #include <Banks/BankableMIDIInputAddressable.hpp>
+#include <MIDI_Inputs/MIDIInputElementCC.hpp>
 
 namespace MCU {
 
@@ -11,12 +11,12 @@ constexpr static uint8_t VPotRingAddress = 0x30;
 inline int8_t minimum(int8_t a, int8_t b) { return a > b ? b : a; }
 inline int8_t maximum(int8_t a, int8_t b) { return a < b ? b : a; }
 
-class VPotRing_Base : public MIDI_Input_CC {
+class VPotRing_Base : public MIDIInputElementCC {
   protected:
     VPotRing_Base(); // unused, only for virtual inheritance
   public:
     VPotRing_Base(uint8_t track, uint8_t channel = 1)
-        : MIDI_Input_CC(channel, track + VPotRingAddress - 1) {}
+        : MIDIInputElementCC(channel, track + VPotRingAddress - 1) {}
 
     uint8_t getPosition() const { return getPosition(getValue()); }
     bool getCenterLed() const { return getCenterLed(getValue()); }
@@ -66,6 +66,8 @@ class VPotRing : public virtual VPotRing_Base {
     VPotRing(uint8_t track, uint8_t channel = 1)
         : VPotRing_Base(track, channel) {}
 
+    void reset() final override { value = 0; }
+
   private:
     bool updateImpl(const MIDI_message_matcher &midimsg) override {
         this->value = sanitizeValue(midimsg.data2);
@@ -87,6 +89,11 @@ class VPotRing : public virtual VPotRing_Base,
   public:
     VPotRing(uint8_t track, uint8_t channel = 1)
         : VPotRing_Base(track, channel) {}
+
+    void reset() final override {
+        for (uint8_t &value : values)
+            value = 0;
+    }
 
   private:
     bool updateImpl(const MIDI_message_matcher &midimsg) override {

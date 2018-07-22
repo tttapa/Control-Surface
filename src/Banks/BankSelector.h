@@ -10,7 +10,7 @@
  * Can be used for selecting fader banks,
  * changing the channel of MIDI_Control_Element%s,
  * transposing notes, displaying different tracks
- * for MIDI_Input_Element%s, etc.
+ * for MIDIInputElement%s, etc.
  *
  * Refer to the documentation of Selector for information
  * on the different modes of operation.

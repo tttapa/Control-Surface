@@ -649,86 +649,86 @@ src/Helpers/PrintStream.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/PrintStream.cpp.s
 .PHONY : src/Helpers/PrintStream.cpp.s
 
-src/MIDI_Inputs/MIDI_Input_CC.o: src/MIDI_Inputs/MIDI_Input_CC.cpp.o
+src/MIDI_Inputs/MIDIInputElementCC.o: src/MIDI_Inputs/MIDIInputElementCC.cpp.o
 
-.PHONY : src/MIDI_Inputs/MIDI_Input_CC.o
-
-# target to build an object file
-src/MIDI_Inputs/MIDI_Input_CC.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_CC.cpp.o
-.PHONY : src/MIDI_Inputs/MIDI_Input_CC.cpp.o
-
-src/MIDI_Inputs/MIDI_Input_CC.i: src/MIDI_Inputs/MIDI_Input_CC.cpp.i
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_CC.i
-
-# target to preprocess a source file
-src/MIDI_Inputs/MIDI_Input_CC.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_CC.cpp.i
-.PHONY : src/MIDI_Inputs/MIDI_Input_CC.cpp.i
-
-src/MIDI_Inputs/MIDI_Input_CC.s: src/MIDI_Inputs/MIDI_Input_CC.cpp.s
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_CC.s
-
-# target to generate assembly for a file
-src/MIDI_Inputs/MIDI_Input_CC.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_CC.cpp.s
-.PHONY : src/MIDI_Inputs/MIDI_Input_CC.cpp.s
-
-src/MIDI_Inputs/MIDI_Input_ChannelPressure.o: src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.o
-
-.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.o
+.PHONY : src/MIDI_Inputs/MIDIInputElementCC.o
 
 # target to build an object file
-src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.o
-.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.o
+src/MIDI_Inputs/MIDIInputElementCC.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDIInputElementCC.cpp.o
+.PHONY : src/MIDI_Inputs/MIDIInputElementCC.cpp.o
 
-src/MIDI_Inputs/MIDI_Input_ChannelPressure.i: src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.i
+src/MIDI_Inputs/MIDIInputElementCC.i: src/MIDI_Inputs/MIDIInputElementCC.cpp.i
 
-.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.i
+.PHONY : src/MIDI_Inputs/MIDIInputElementCC.i
 
 # target to preprocess a source file
-src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.i
-.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.i
+src/MIDI_Inputs/MIDIInputElementCC.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDIInputElementCC.cpp.i
+.PHONY : src/MIDI_Inputs/MIDIInputElementCC.cpp.i
 
-src/MIDI_Inputs/MIDI_Input_ChannelPressure.s: src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.s
+src/MIDI_Inputs/MIDIInputElementCC.s: src/MIDI_Inputs/MIDIInputElementCC.cpp.s
 
-.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.s
+.PHONY : src/MIDI_Inputs/MIDIInputElementCC.s
 
 # target to generate assembly for a file
-src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.s
-.PHONY : src/MIDI_Inputs/MIDI_Input_ChannelPressure.cpp.s
+src/MIDI_Inputs/MIDIInputElementCC.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDIInputElementCC.cpp.s
+.PHONY : src/MIDI_Inputs/MIDIInputElementCC.cpp.s
 
-src/MIDI_Inputs/MIDI_Input_Note.o: src/MIDI_Inputs/MIDI_Input_Note.cpp.o
+src/MIDI_Inputs/MIDIInputElementChannelPressure.o: src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.o
 
-.PHONY : src/MIDI_Inputs/MIDI_Input_Note.o
+.PHONY : src/MIDI_Inputs/MIDIInputElementChannelPressure.o
 
 # target to build an object file
-src/MIDI_Inputs/MIDI_Input_Note.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_Note.cpp.o
-.PHONY : src/MIDI_Inputs/MIDI_Input_Note.cpp.o
+src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.o
+.PHONY : src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.o
 
-src/MIDI_Inputs/MIDI_Input_Note.i: src/MIDI_Inputs/MIDI_Input_Note.cpp.i
+src/MIDI_Inputs/MIDIInputElementChannelPressure.i: src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.i
 
-.PHONY : src/MIDI_Inputs/MIDI_Input_Note.i
+.PHONY : src/MIDI_Inputs/MIDIInputElementChannelPressure.i
 
 # target to preprocess a source file
-src/MIDI_Inputs/MIDI_Input_Note.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_Note.cpp.i
-.PHONY : src/MIDI_Inputs/MIDI_Input_Note.cpp.i
+src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.i
+.PHONY : src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.i
 
-src/MIDI_Inputs/MIDI_Input_Note.s: src/MIDI_Inputs/MIDI_Input_Note.cpp.s
+src/MIDI_Inputs/MIDIInputElementChannelPressure.s: src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.s
 
-.PHONY : src/MIDI_Inputs/MIDI_Input_Note.s
+.PHONY : src/MIDI_Inputs/MIDIInputElementChannelPressure.s
 
 # target to generate assembly for a file
-src/MIDI_Inputs/MIDI_Input_Note.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDI_Input_Note.cpp.s
-.PHONY : src/MIDI_Inputs/MIDI_Input_Note.cpp.s
+src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.s
+.PHONY : src/MIDI_Inputs/MIDIInputElementChannelPressure.cpp.s
+
+src/MIDI_Inputs/MIDIInputElementNote.o: src/MIDI_Inputs/MIDIInputElementNote.cpp.o
+
+.PHONY : src/MIDI_Inputs/MIDIInputElementNote.o
+
+# target to build an object file
+src/MIDI_Inputs/MIDIInputElementNote.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDIInputElementNote.cpp.o
+.PHONY : src/MIDI_Inputs/MIDIInputElementNote.cpp.o
+
+src/MIDI_Inputs/MIDIInputElementNote.i: src/MIDI_Inputs/MIDIInputElementNote.cpp.i
+
+.PHONY : src/MIDI_Inputs/MIDIInputElementNote.i
+
+# target to preprocess a source file
+src/MIDI_Inputs/MIDIInputElementNote.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDIInputElementNote.cpp.i
+.PHONY : src/MIDI_Inputs/MIDIInputElementNote.cpp.i
+
+src/MIDI_Inputs/MIDIInputElementNote.s: src/MIDI_Inputs/MIDIInputElementNote.cpp.s
+
+.PHONY : src/MIDI_Inputs/MIDIInputElementNote.s
+
+# target to generate assembly for a file
+src/MIDI_Inputs/MIDIInputElementNote.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Inputs/MIDIInputElementNote.cpp.s
+.PHONY : src/MIDI_Inputs/MIDIInputElementNote.cpp.s
 
 src/MIDI_Interfaces/MIDI_Interface.o: src/MIDI_Interfaces/MIDI_Interface.cpp.o
 
@@ -1306,15 +1306,15 @@ help:
 	@echo "... src/Helpers/PrintStream.o"
 	@echo "... src/Helpers/PrintStream.i"
 	@echo "... src/Helpers/PrintStream.s"
-	@echo "... src/MIDI_Inputs/MIDI_Input_CC.o"
-	@echo "... src/MIDI_Inputs/MIDI_Input_CC.i"
-	@echo "... src/MIDI_Inputs/MIDI_Input_CC.s"
-	@echo "... src/MIDI_Inputs/MIDI_Input_ChannelPressure.o"
-	@echo "... src/MIDI_Inputs/MIDI_Input_ChannelPressure.i"
-	@echo "... src/MIDI_Inputs/MIDI_Input_ChannelPressure.s"
-	@echo "... src/MIDI_Inputs/MIDI_Input_Note.o"
-	@echo "... src/MIDI_Inputs/MIDI_Input_Note.i"
-	@echo "... src/MIDI_Inputs/MIDI_Input_Note.s"
+	@echo "... src/MIDI_Inputs/MIDIInputElementCC.o"
+	@echo "... src/MIDI_Inputs/MIDIInputElementCC.i"
+	@echo "... src/MIDI_Inputs/MIDIInputElementCC.s"
+	@echo "... src/MIDI_Inputs/MIDIInputElementChannelPressure.o"
+	@echo "... src/MIDI_Inputs/MIDIInputElementChannelPressure.i"
+	@echo "... src/MIDI_Inputs/MIDIInputElementChannelPressure.s"
+	@echo "... src/MIDI_Inputs/MIDIInputElementNote.o"
+	@echo "... src/MIDI_Inputs/MIDIInputElementNote.i"
+	@echo "... src/MIDI_Inputs/MIDIInputElementNote.s"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.o"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.i"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.s"

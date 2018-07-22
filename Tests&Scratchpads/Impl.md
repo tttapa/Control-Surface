@@ -12,16 +12,16 @@
         - Digital
         - DigitalLatch
         - RotaryEncoder
-    - MIDI_Input_Element_CC
+    - MIDIInputElement_CC
         - MIDI_Input_7seg_Display
         - MIDI_Input_LED_Ring      ==TODO==
-    - MIDI_Input_Element_Note
+    - MIDIInputElement_Note
         - MIDI_Input_LED
-    - MIDI_Input_Element_ChannelPressure
+    - MIDIInputElement_ChannelPressure
         - MIDI_Input_VU
-    - MIDI_Input_Element_PitchBend ==TODO==
+    - MIDIInputElement_PitchBend ==TODO==
         - MIDI_Input_Fader	==TODO==
-    - MIDI_Input_Element_SysEx	==TODO==
+    - MIDIInputElement_SysEx	==TODO==
 
 - Bank 
 
@@ -79,8 +79,8 @@ Return singleton instance
 #### refresh()
 - Refresh all MIDI_Control_Elements
 - Read MIDI input
-	- Update all MIDI_Input_Elements
-- Refresh all MIDI_Input_Elements
+	- Update all MIDIInputElements
+- Refresh all MIDIInputElements
 - Update all BankSelectors
 
 ## Memory:

@@ -6,7 +6,7 @@
 
 class NoteDisplay : public DisplayElement {
 public:
-  NoteDisplay(Adafruit_GFX &display, MIDI_Input_Note_Buffer &notebuffer,
+  NoteDisplay(Adafruit_GFX &display, MIDIInputElementNote_Buffer &notebuffer,
               const XBitmap &xbm, Location loc, uint16_t color)
       : DisplayElement(display), notebuffer(notebuffer), xbm(xbm), x(loc.x),
         y(loc.y), color(color) {}
@@ -17,7 +17,7 @@ public:
   }
 
 private:
-  MIDI_Input_Note_Buffer &notebuffer;
+  MIDIInputElementNote_Buffer &notebuffer;
   const XBitmap &xbm;
   int16_t x, y;
   uint16_t color;
