@@ -38,17 +38,17 @@ BankSelector bankselector(bank, A2, 9, BankSelector::MOMENTARY);
   
 //-----------------------------------------------------------------------------------------------------
 
-// Bankable::Note_Input_LED<2> note = { 0x10, 1, sr.red(0) };
+Bankable::NoteInputLED<2> note = { 0x10, 1, sr.red(0) };
 
 void setup() {
-  bank.add(pbpot,      Bank::CHANGE_CHANNEL);
+  bank.add(pbpot);
   bank.add(ccpot);
   bank.add(noteButton);
   bank.add(noteSwitch);
   bank.add(ccButton);
   bank.add(ccSwitch);
   bank.add(enc);
-  // bank.add(note, Bank::CHANGE_ADDRESS);
+  bank.add(note);
   
   Control_Surface.begin();
   while(!Serial);

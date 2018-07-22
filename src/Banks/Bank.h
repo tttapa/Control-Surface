@@ -7,6 +7,7 @@
 
 class BankableMIDIInputAddressable;
 class BankableMIDIOutputAddressable;
+class BankableMIDIOutput;
 
 /**
  * @brief   A class that groups MIDI_Element%s and allows the user to change
@@ -136,6 +137,14 @@ class Bank {
      */
     void add(BankableMIDIOutputAddressable &bankable,
              bankType type = CHANGE_ADDRESS);
+
+    /**
+     * @brief   Add a Bankable to the bank.
+     *
+     * @param   bankable
+     *          The Bankable to be added.
+     */
+    void add(BankableMIDIOutput &bankable);
 
     /**
      * @brief   Set the Bank Setting

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <Banks/BankableMIDIOutput.hpp>
 #include <Hardware/FilteredAnalog.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -72,7 +73,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
  * @see     FilteredAnalog
  */
 template <class Sender, uint8_t PRECISION>
-class MIDIFilteredAnalog : public MIDIOutputElement {
+class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
   protected:
     /**
      * @brief   Construct a new MIDIFilteredAnalog.
@@ -88,7 +89,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
   public:
     void update() final override {
         if (filteredAnalog.update())
-            Sender::send(filteredAnalog.getValue(), channel);
+            Sender::send(filteredAnalog.getValue(), getChannel(channel));
     }
 
     /**
