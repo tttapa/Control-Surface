@@ -8,7 +8,7 @@
 
 #include <Encoder.h>
 #include <Helpers/Array.hpp>
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 using EncoderPinList = Array<uint8_t, 2>;
 
@@ -16,7 +16,7 @@ using EncoderPinList = Array<uint8_t, 2>;
  * @brief   An abstract class for rotary encoders that send MIDI events.
  */
 template <class Sender>
-class MIDIRotaryEncoder : public AbstractMIDIOutput {
+class MIDIRotaryEncoder : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIRotaryEncoder.

@@ -29,8 +29,6 @@ class ButtonMatrix {
      *          A list of pin numbers connected to the columns of the button
      *          matrix. These pins will be used as inputs, and the internal
      *          pull-up resistor will be enabled.
-     * @note    The lists of pins are copied. This means that they can be
-     *          initialized with a brace-enclosed initializer list.
      */
     ButtonMatrix(const PinList<nb_rows> &rowPins,
                  const PinList<nb_cols> &colPins);

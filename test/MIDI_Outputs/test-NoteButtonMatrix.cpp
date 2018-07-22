@@ -77,6 +77,8 @@ TEST(NoteButtonMatrix, pressAndRelease) {
 
 // -------------------------------------------------------------------------- //
 
+#include <MIDI_Outputs/Bankable/NoteButtonMatrix.hpp>
+
 TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     MockMIDI_Interface midi;
     Control_Surface.setMIDI_Interface(midi);

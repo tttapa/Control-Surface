@@ -1,7 +1,9 @@
 #pragma once
 
-#include <MIDI_Outputs/Abstract/MIDIButtonMatrix.hpp>
+#include <MIDI_Outputs/Bankable/Abstract/MIDIButtonMatrix.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
+
+namespace Bankable {
 
 /**
  * @brief   A class of MIDIOutputElement%s that read the input from a matrix of
@@ -11,7 +13,7 @@
  *          event is sent when a button is released.  
  *          Crude software debouncing is implemented by limiting the refresh
  *          rate.  
- *          This version cannot be banked.  
+ *          This version can be banked.  
  *
  * @ingroup MIDIOutputElements
  * 
@@ -25,8 +27,8 @@ class NoteButtonMatrix
     : public MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols> {
   public:
     /**
-     * @brief   Create a new NoteButtonMatrix object with the given pins,
-     *          note numbers and channel.
+     * @brief   Create a new Bankable NoteButtonMatrix object with the given 
+     *          pins, note numbers and channel.
      *
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
@@ -43,8 +45,10 @@ class NoteButtonMatrix
      */
     NoteButtonMatrix(const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
-                     const AddressMatrix<nb_rows, nb_cols> &notes,
-                     uint8_t channel = 1)
+                     const AddressMatrix<nb_rows, nb_cols> &addresses,
+                     uint8_t channel)
         : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>(
-              rowPins, colPins, notes, channel) {}
+              rowPins, colPins, addresses, channel) {}
 };
+
+} // namespace Bankable

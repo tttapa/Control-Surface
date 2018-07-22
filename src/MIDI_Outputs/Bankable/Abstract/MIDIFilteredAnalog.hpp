@@ -2,7 +2,7 @@
 
 #include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Hardware/FilteredAnalog.h>
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 namespace Bankable {
 
@@ -18,11 +18,11 @@ namespace Bankable {
  * @see     FilteredAnalog
  */
 template <class Sender, uint8_t PRECISION>
-class MIDIFilteredAnalogAddressable : public AbstractMIDIOutput,
+class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
                                       public BankableMIDIOutputAddressable {
   protected:
     /**
-     * @brief   Construct a new MIDIFilteredAnalog.
+     * @brief   Construct a new MIDIFilteredAnalogAddressable.
      *
      * @param   analogPin
      *          The analog input pin with the wiper of the potentiometer
@@ -72,7 +72,7 @@ class MIDIFilteredAnalogAddressable : public AbstractMIDIOutput,
  * @see     FilteredAnalog
  */
 template <class Sender, uint8_t PRECISION>
-class MIDIFilteredAnalog : public AbstractMIDIOutput {
+class MIDIFilteredAnalog : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIFilteredAnalog.

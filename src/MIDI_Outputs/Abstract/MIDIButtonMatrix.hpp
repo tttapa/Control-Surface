@@ -2,7 +2,7 @@
 
 #include <Hardware/ButtonMatrix.h>
 #include <Helpers/Array.hpp>
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 template <uint8_t nb_rows, uint8_t nb_cols>
 using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
@@ -13,7 +13,7 @@ using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
  * @see     ButtonMatrix
  */
 template <class Sender, uint8_t nb_rows, uint8_t nb_cols>
-class MIDIButtonMatrix : public AbstractMIDIOutput,
+class MIDIButtonMatrix : public MIDIOutputElement,
                          public ButtonMatrix<nb_rows, nb_cols> {
 
   protected:

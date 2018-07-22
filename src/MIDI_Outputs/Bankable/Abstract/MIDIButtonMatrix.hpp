@@ -3,7 +3,7 @@
 #include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Hardware/ButtonMatrix.h>
 #include <Helpers/Array.hpp>
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 #include <MIDI_Outputs/Abstract/MIDIButtonMatrix.hpp> // For AddressMatrix
 
@@ -16,7 +16,7 @@ namespace Bankable {
  */
 template <class Sender, uint8_t nb_rows, uint8_t nb_cols>
 class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
-                         public AbstractMIDIOutput,
+                         public MIDIOutputElement,
                          public ButtonMatrix<nb_rows, nb_cols> {
 
   protected:

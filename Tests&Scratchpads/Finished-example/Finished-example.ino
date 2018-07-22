@@ -27,7 +27,7 @@ const int speedMultiply = 1; // If the jog wheels or other encoders are too slow
 
 //_____________________________________________________________________________________________________________________________________________________________________________________________
 
-Bankable::CCPotentiometer faders[] = {
+CCPotentiometer faders[] = {
     {A0, MIDI_CC::Channel_Volume, 1}, // Create a new instance of class 'Analog' on pin A0, controller number 0x07 (channel volume), on MIDI channel 1.
     {A1, MIDI_CC::Channel_Volume, 2},
     {A2, MIDI_CC::Channel_Volume, 3},
@@ -65,7 +65,7 @@ BankSelector bankselector(bank, 11, LED_BUILTIN, BankSelector::TOGGLE); // A ban
 
 void setup()
 {
-    bank.add(faders, Bank::CHANGE_CHANNEL); // Add the control elements to the bank
+    // bank.add(faders, Bank::CHANGE_CHANNEL); // Add the control elements to the bank
     bank.add(knobsSide, Bank::CHANGE_CHANNEL);
     bank.add(switches, Bank::CHANGE_ADDRESS);
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Hardware/Button.h>
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
@@ -11,7 +11,7 @@
  * @see     Button
  */
 template <class Sender>
-class MIDIButton : public AbstractMIDIOutput {
+class MIDIButton : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIButton.

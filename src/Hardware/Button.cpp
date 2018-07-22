@@ -3,8 +3,6 @@
 using namespace ExtIO;
 
 Button::Button(pin_t pin) : pin(pin) {
-    // Enable the internal pull-up resistor on
-    // the pin with the button/switch
     ExtIO::pinMode(pin, INPUT_PULLUP);
 }
 
@@ -21,7 +19,7 @@ Button::State Button::getState() {
         rstate = static_cast<State>((debouncedState << 1) | state);
         debouncedState = state;
     } else {
-        rstate = static_cast<State>(debouncedState << 1 | debouncedState);
+        rstate = static_cast<State>((debouncedState << 1) | debouncedState);
     }
     if (state != prevState) { // Button is pressed, released or bounces
         prevBounceTime = now;

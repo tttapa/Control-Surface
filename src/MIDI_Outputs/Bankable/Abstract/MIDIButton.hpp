@@ -2,7 +2,7 @@
 
 #include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Hardware/Button.h>
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 namespace Bankable {
 
@@ -15,7 +15,7 @@ namespace Bankable {
  */
 template <class Sender>
 class MIDIButton : public BankableMIDIOutputAddressable,
-                   public AbstractMIDIOutput {
+                   public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new bankable MIDIButton.

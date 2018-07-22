@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Hardware/Button.h>
 
 /**
@@ -11,7 +11,7 @@
  * @see     Button
  */
 template <class Sender>
-class MIDIButtonLatching : public AbstractMIDIOutput {
+class MIDIButtonLatching : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIButtonLatching.

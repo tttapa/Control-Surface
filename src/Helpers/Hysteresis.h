@@ -21,9 +21,9 @@
  *      0      128     256     384     512     640     768     896    1023
  *                                i n p u t
  * ```
- * 
+ *
  * @tparam  BITS
- *          The number of bits to decrease in resolution.  
+ *          The number of bits to decrease in resolution.
  *          Increasing this number will result in a decrease in fluctuations.
  */
 template <uint8_t BITS>

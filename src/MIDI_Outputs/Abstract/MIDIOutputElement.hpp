@@ -10,25 +10,25 @@
  * so they can be updated all at once by simply looping over
  * the entire list.
  */
-class AbstractMIDIOutput {
+class MIDIOutputElement {
   protected:
-    AbstractMIDIOutput() { LinkedList::append(this, first, last); }
+    MIDIOutputElement() { LinkedList::append(this, first, last); }
 
   public:
-    virtual ~AbstractMIDIOutput() { LinkedList::remove(this, first, last); }
+    virtual ~MIDIOutputElement() { LinkedList::remove(this, first, last); }
 
     virtual void update() = 0;
 
     static void updateAll() {
-        for (AbstractMIDIOutput *el = first; el; el = el->next)
+        for (MIDIOutputElement *el = first; el; el = el->next)
             el->update();
     }
 
   private:
-    AbstractMIDIOutput *next = nullptr;
-    AbstractMIDIOutput *previous = nullptr;
-    static AbstractMIDIOutput *last;
-    static AbstractMIDIOutput *first;
+    MIDIOutputElement *next = nullptr;
+    MIDIOutputElement *previous = nullptr;
+    static MIDIOutputElement *last;
+    static MIDIOutputElement *first;
 
     template <class Node>
     friend void LinkedList::append(Node *, Node *&, Node *&);

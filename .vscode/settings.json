@@ -28,7 +28,7 @@
     ],
     "files.defaultLanguage": "cpp",
     "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
+    "files.trimTrailingWhitespace": false,
     "search.exclude": {
         "**/node_modules": true,
         "**/bower_components": true,

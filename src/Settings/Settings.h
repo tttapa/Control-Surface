@@ -12,7 +12,7 @@
 // ======================================================================= //
 
 /** The debug output. */
-// #define DEBUG_OUT Serial
+#define DEBUG_OUT Serial
 
 // #define DEBUG_MIDI_PACKETS
 
@@ -43,7 +43,7 @@
 /** The interval between updating all inputs, in microseconds (µs).
  * @todo Implement
  */
-#define INPUT_UPDATE_INTERVAL 1000 // 1 ms
+#define INPUT_UPDATE_INTERVAL 1000 // 1000 µs = 1 ms = 0.001 s
 
 /** Don't parse incomming System Exclusive messages. */
 #define IGNORE_SYSEX

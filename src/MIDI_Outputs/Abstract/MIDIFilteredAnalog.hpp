@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Hardware/FilteredAnalog.h>
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 /**
  * @brief   A class for potentiometers and faders that send MIDI events.
@@ -14,7 +14,7 @@
  * @see     FilteredAnalog
  */
 template <class Sender, uint8_t PRECISION>
-class MIDIFilteredAnalogAddressable : public AbstractMIDIOutput {
+class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIFilteredAnalog.
@@ -65,7 +65,7 @@ class MIDIFilteredAnalogAddressable : public AbstractMIDIOutput {
  * @see     FilteredAnalog
  */
 template <class Sender, uint8_t PRECISION>
-class MIDIFilteredAnalog : public AbstractMIDIOutput {
+class MIDIFilteredAnalog : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIFilteredAnalog.

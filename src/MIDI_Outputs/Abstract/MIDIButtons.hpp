@@ -2,7 +2,7 @@
 
 #include <Hardware/Button.h>
 #include <Helpers/Array.hpp>
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
@@ -12,7 +12,7 @@
  * @see     Button
  */
 template <uint8_t NUMBER_OF_BUTTONS, class Sender>
-class MIDIButtons : public AbstractMIDIOutput {
+class MIDIButtons : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIButtons.

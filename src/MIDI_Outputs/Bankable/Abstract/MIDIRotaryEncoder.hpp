@@ -9,7 +9,7 @@
 #include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Encoder.h>
 #include <Helpers/Array.hpp>
-#include <MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 namespace Bankable {
 
@@ -21,7 +21,7 @@ using EncoderPinList = Array<uint8_t, 2>;
  */
 template <class Sender>
 class MIDIRotaryEncoder : public BankableMIDIOutputAddressable,
-                          public AbstractMIDIOutput {
+                          public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIRotaryEncoder.
