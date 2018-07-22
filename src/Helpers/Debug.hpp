@@ -102,6 +102,8 @@ using std::uppercase;
         DEBUG_OUT << FUNC_LOCATION << x << endl;                               \
     } while (0)
 
+#define DEBUGVAR(x) F(STR(x) " = ") << x
+
 #else
 
 #define DEBUG(x)

@@ -38,7 +38,7 @@ BankSelector bankselector(bank, A2, 9, BankSelector::MOMENTARY);
   
 //-----------------------------------------------------------------------------------------------------
 
-Bankable::NoteInputLED<2> note = { 0x10, 1, sr.red(0) };
+Bankable::MIDINoteLED<2> note = { 0x10, 1, sr.red(0) };
 
 void setup() {
   bank.add(pbpot);

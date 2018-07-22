@@ -60,6 +60,11 @@ class Button {
      */
     State getState();
 
+    /**
+     * @brief   Return the name of the state as a string.
+     */
+    static const char *getName(State state);
+
   private:
     const pin_t pin;
 

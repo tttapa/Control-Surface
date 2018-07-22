@@ -23,6 +23,8 @@ class VPotRing_Base : public MIDIInputElementCC {
     uint8_t getMode() const { return getMode(getValue()); }
 
     uint8_t getStartOn() const {
+        if (getPosition() == 0)
+            return 0;
         int8_t value = (int8_t)getPosition() - (int8_t)1;
         switch (getMode()) {
             case 0: return value;
@@ -34,12 +36,12 @@ class VPotRing_Base : public MIDIInputElementCC {
     }
 
     uint8_t getStartOff() const {
-        int8_t value = (int8_t)getPosition() - (int8_t)1;
+        uint8_t value = getPosition();
         switch (getMode()) {
-            case 0: return value + 1;
-            case 1: return maximum(value, 5) + 1;
-            case 2: return value + 1;
-            case 3: return minimum(6 + value, 11);
+            case 0: return value;
+            case 1: return maximum(value, 6);
+            case 2: return value;
+            case 3: return minimum(5 + value, 11);
         }
         return 0; // Shouldn't happen, just keeps the compiler happy.
     }
@@ -97,7 +99,8 @@ class VPotRing : public virtual VPotRing_Base,
 
   private:
     bool updateImpl(const MIDI_message_matcher &midimsg) override {
-        uint8_t index = getAddressIndex(midimsg.data1, getBaseAddress());
+        uint8_t index = getIndex(midimsg.channel, midimsg.data1,
+                                 getBaseChannel(), getBaseAddress());
         uint8_t value = sanitizeValue(midimsg.data2);
         values[index] = value;
         return true;
@@ -113,6 +116,7 @@ class VPotRing : public virtual VPotRing_Base,
     }
 
     void onBankSettingChange() const override { display(); }
+
     uint8_t values[NUMBER_OF_BANKS] = {};
 };
 

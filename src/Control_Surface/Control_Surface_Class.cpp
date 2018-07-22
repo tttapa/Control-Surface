@@ -1,16 +1,14 @@
 #include "Control_Surface_Class.h"
 #include <Banks/BankSelector.hpp>
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
-#include <MIDI_Inputs/MIDIInputElementNote.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
+#include <MIDI_Inputs/MIDIInputElementNote.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 Control_Surface_ &Control_Surface_::getInstance() {
     static Control_Surface_ instance;
     return instance;
 }
-
-Control_Surface_::~Control_Surface_() { delete new_midi; }
 
 void Control_Surface_::begin() {
     MIDI().begin(); // initialize the MIDI interface
@@ -21,9 +19,8 @@ void Control_Surface_::begin() {
 }
 
 void Control_Surface_::loop() {
-    updateControls();
+    MIDIOutputElement::updateAll();
     updateSelectors();
-
     updateMidiInput();
     updateInputs();
     updateDisplays();
@@ -36,10 +33,6 @@ MIDI_Interface &Control_Surface_::MIDI() {
         FATAL_ERROR();
     }
     return *midi;
-}
-
-void Control_Surface_::updateControls() {
-    MIDIOutputElement::updateAll();
 }
 
 void Control_Surface_::updateSelectors() {
@@ -114,13 +107,7 @@ void Control_Surface_::updateMidiInput() {
 void Control_Surface_::updateInputs() {
     MIDIInputElementCC::updateAll();
     MIDIInputElementNote::updateAll();
-    /*
-    for (MIDIInputElement_ChannelPressure *element =
-             MIDIInputElement_ChannelPressure::getFirst();
-         element != nullptr; element = element->getNext())
-        element->update();
-    */
-    // TODO
+    MIDIInputElementChannelPressure::updateAll();
 }
 
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();

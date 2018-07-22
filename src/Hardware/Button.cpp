@@ -27,3 +27,13 @@ Button::State Button::getState() {
     }
     return rstate;
 }
+
+const char *Button::getName(Button::State state) {
+    switch (state) {
+        case Button::Pressed: return "Pressed";
+        case Button::Released: return "Released";
+        case Button::Falling: return "Falling";
+        case Button::Rising: return "Rising";
+    }
+    return ""; // Keeps the compiler happy
+}

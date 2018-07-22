@@ -16,9 +16,11 @@ class VPotRingLEDs_Base : public virtual VPotRing_Base {
 
   private:
     void display() const {
-        DEBUGFN("");
         uint8_t startOn = getStartOn();
         uint8_t startOff = getStartOff();
+        DEBUGFN(DEBUGVAR(startOn));
+        DEBUGFN(DEBUGVAR(startOff));
+
         for (uint8_t pin = 0; pin < startOn; pin++)
             ExtIO::digitalWrite(ledPins[pin], LOW);
         for (uint8_t pin = startOn; pin < startOff; pin++)

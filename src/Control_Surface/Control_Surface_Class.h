@@ -16,16 +16,17 @@ class Control_Surface_ {
     static Control_Surface_ &getInstance();
     Control_Surface_(Control_Surface_ const &) = delete;
     void operator=(Control_Surface_ const &) = delete;
-    ~Control_Surface_();
 
     /**
-     * @brief Initialize the Control_Surface object.
+     * @brief   Initialize the Control_Surface.
      */
     void begin();
+
     /**
-     * @brief Update all MIDI elements, send MIDI events and read MIDI input.
+     * @brief   Update all MIDI elements, send MIDI events and read MIDI input.
      */
     void loop();
+
     /**
      * @brief   Get the MIDI interface of the Control Surface.
      *
@@ -37,22 +38,19 @@ class Control_Surface_ {
     /**
      * @brief   Control_Surface_ is a singleton, so the constructor is private.
      */
-    Control_Surface_() {}
-    MIDI_Interface *new_midi = nullptr;
-    MIDI_Interface *midi = nullptr;
-    /**
-     * @brief   Update all MIDI_Control_Element%s.
-     */
-    void updateControls();
+    Control_Surface_() = default;
+
+    
     /**
      * @brief   Update all Selector%s (BankSelector%s, Transposer%s,
      *          ProgramSelector%s).
      */
     void updateSelectors();
+    
     void updateMidiInput();
+    
     void updateInputs();
 
-  private:
     void updateDisplays() {
 #ifdef DISPLAY_GFX
         static unsigned long previousRefresh = millis();
