@@ -30,13 +30,23 @@ template <uint8_t BITS>
 class Hysteresis {
   public:
     /**
-     * @brief     Get the output level for a given input.
+     * @brief   Update the hysteresis output with a new input value.
      *
-     * @param     inputLevel
-     *            The input level to calculate the output level from.
-     * @return    The output level.
+     * @param   input
+     *          The input to calculate the output level from.
+     * @return  true
+     *          The output level has changed.
+     * @return  false
+     *          The output level is still the same.
      */
-    uint16_t getOutputLevel(uint16_t inputLevel);
+    bool update(uint16_t input);
+
+    /**
+     * @brief   Get the current output level.
+     * 
+     * @return  The output level.
+     */
+    uint8_t getValue() const;
 
   private:
     uint8_t previousLevel = 0;
@@ -47,13 +57,18 @@ class Hysteresis {
 // ----------------------------- Implementation ----------------------------- //
 
 template <uint8_t BITS>
-inline uint16_t Hysteresis<BITS>::getOutputLevel(uint16_t inputLevel) {
+bool Hysteresis<BITS>::update(uint16_t inputLevel) {
     uint16_t previousLevelFull = ((uint16_t)previousLevel << BITS) | offset;
-    uint16_t lowerbound = previousLevelFull;
-    if (previousLevel > 0)
-        lowerbound -= margin;
+    uint16_t lowerbound = previousLevel > 0 ? previousLevelFull - margin : 0;
     uint16_t upperbound = previousLevelFull + margin;
-    if (inputLevel < lowerbound || inputLevel > upperbound)
+    if (inputLevel < lowerbound || inputLevel > upperbound) {
         previousLevel = inputLevel >> BITS;
+        return true;
+    }
+    return false;
+}
+
+template <uint8_t BITS>
+uint8_t Hysteresis<BITS>::getValue() const {
     return previousLevel;
 }

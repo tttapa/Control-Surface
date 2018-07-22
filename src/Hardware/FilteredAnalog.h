@@ -46,7 +46,7 @@ class FilteredAnalog {
      * @return  true
      *          The value changed since last time it was updated.
      * @return  false
-     *          Otherwise.
+     *          The value is still the same.
      */
     bool update();
 
@@ -55,9 +55,8 @@ class FilteredAnalog {
      *
      * @return  The filtered value of the analog input, as a number
      *          of `PRECISION` bits wide.
-     * @return  0xFFFF if the update() has not been called yet.
      */
-    uint16_t getValue();
+    uint8_t getValue() const;
 
   private:
     const pin_t analogPin;
@@ -66,11 +65,9 @@ class FilteredAnalog {
 
     EMA<ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE> filter;
     Hysteresis<ADC_BITS - PRECISION> hysteresis;
-
-    uint16_t value = 0xFFFF;
 };
 
-// ------------------------ Implementations ------------------------ //
+// ----------------------------- Implementation ----------------------------- //
 
 #include "../Control_Surface/Control_Surface_Class.h"
 
@@ -87,18 +84,12 @@ bool FilteredAnalog<PRECISION>::update() {
     if (mapFn != nullptr)             // if a map function is specified
         input = mapFn(input);         // apply the map function to the value
     input = filter.filter(input);     // apply a low-pass EMA filter
-    uint16_t newValue =
-        hysteresis.getOutputLevel(input); // map from the 10-bit analog input
-                                          // value to a value of `PRECISION`
-                                          // bits wide, applying hysteresis
-    bool changed = newValue != value;
-    value = newValue;
-    return changed;
+    return hysteresis.update(input);  // apply hysteresis
 }
 
 template <uint8_t PRECISION>
-uint16_t FilteredAnalog<PRECISION>::getValue() {
-    return value;
+uint8_t FilteredAnalog<PRECISION>::getValue() const {
+    return hysteresis.getValue();
 }
 
 template <uint8_t PRECISION>
