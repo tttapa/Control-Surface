@@ -9,7 +9,6 @@ using namespace ::testing;
 
 TEST(CCButton, pressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     CCButton button(2, 0x3C, 7);
@@ -45,7 +44,7 @@ TEST(CCButton, pressAndRelease) {
 
 TEST(CCButtonBankable, pressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Bankable::CCButton button(2, 0x3C, 7);
@@ -84,7 +83,7 @@ TEST(CCButtonBankable, pressAndRelease) {
 
 TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Bankable::CCButton button(2, 0x3C, 7);
@@ -125,7 +124,7 @@ TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
 
 TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Bankable::CCButton button(2, 0x3C, 7);
@@ -169,7 +168,7 @@ TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
 
 TEST(CCButtons, pressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
@@ -256,7 +255,7 @@ TEST(CCButtons, pressAndRelease) {
 
 TEST(CCButtonsBankable, pressChangeBankAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
@@ -346,7 +345,7 @@ TEST(CCButtonsBankable, pressChangeBankAndRelease) {
 
 TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));

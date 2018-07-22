@@ -22,7 +22,7 @@ class MIDI_Interface {
     /**
      * @brief   Destructor.
      */
-    virtual ~MIDI_Interface() = default;
+    virtual ~MIDI_Interface();
 
     /**
      * @brief   Initialize the MIDI Interface.

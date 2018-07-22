@@ -6,7 +6,7 @@ using namespace ::testing;
 
 TEST(NoteButtonMatrix, pressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     constexpr uint8_t channel = 1;
     AddressMatrix<3, 2> addresses = {{
@@ -81,7 +81,7 @@ TEST(NoteButtonMatrix, pressAndRelease) {
 
 TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     constexpr uint8_t channel = 1;
     AddressMatrix<3, 2> addresses = {{

@@ -32,14 +32,6 @@ class Control_Surface_ {
      * @return  A reference to the Control Surface's MIDI interface.
      */
     MIDI_Interface &MIDI();
-    /**
-     * @brief   Set the given MIDI interface as the Control Surface's interface.
-     *
-     * @param   midi
-     *          The MIDI interface to use for input and output of the Control
-     *          surface.
-     */
-    void setMIDI_Interface(MIDI_Interface &midi);
 
   private:
     /**

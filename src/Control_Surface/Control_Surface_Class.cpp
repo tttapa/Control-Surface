@@ -13,14 +13,7 @@ Control_Surface_ &Control_Surface_::getInstance() {
 Control_Surface_::~Control_Surface_() { delete new_midi; }
 
 void Control_Surface_::begin() {
-    if (midi == nullptr) { // if this is the first time that `begin` is executed
-        midi = MIDI_Interface::getDefault();  // use the default MIDI interface
-        if (midi == nullptr) {                // if it doesn't exist
-            new_midi = new USBMIDI_Interface; // create a new USB MIDI interface
-            midi = new_midi;
-        }
-        midi->begin(); // initialize the MIDI interface
-    }
+    MIDI().begin(); // initialize the MIDI interface
 #if defined(PrintStream_h) && defined(ARDUINO) && defined(DEBUG_OUT)
     DEBUG_OUT.begin(115200);
     DEBUG_OUT << leadingzeros;
@@ -37,15 +30,12 @@ void Control_Surface_::loop() {
 }
 
 MIDI_Interface &Control_Surface_::MIDI() {
-    if (midi == nullptr)
-        begin(); // make sure that midi != nullptr
+    MIDI_Interface *midi = MIDI_Interface::getDefault();
+    if (midi == nullptr) {
+        DEBUGFN("Error: no default MIDI interface is selected.");
+        FATAL_ERROR();
+    }
     return *midi;
-}
-
-void Control_Surface_::setMIDI_Interface(MIDI_Interface &midi) {
-    delete new_midi;
-    new_midi = nullptr;
-    this->midi = &midi;
 }
 
 void Control_Surface_::updateControls() {
@@ -59,11 +49,12 @@ void Control_Surface_::updateSelectors() {
 }
 
 void Control_Surface_::updateMidiInput() {
-    MIDI_read_t midiReadResult = MIDI().read();
+    MIDI_Interface &midi = MIDI();
+    MIDI_read_t midiReadResult = midi.read();
 
     while (midiReadResult != NO_MESSAGE) {
         if (midiReadResult == CHANNEL_MESSAGE) {
-            MIDI_message midichmsg = midi->getChannelMessage();
+            MIDI_message midichmsg = midi.getChannelMessage();
             MIDI_message_matcher midimsg(midichmsg);
 
 #ifdef DEBUG_MIDI_PACKETS
@@ -108,15 +99,15 @@ void Control_Surface_::updateMidiInput() {
         } else if (midiReadResult == SYSEX_MESSAGE) {
             // System Exclusive
 #ifdef DEBUG_MIDI_PACKETS
-            const uint8_t *data = midi->getSysExBuffer();
-            size_t len = midi->getSysExLength();
+            const uint8_t *data = midi.getSysExBuffer();
+            size_t len = midi.getSysExLength();
             DEBUG_OUT << hex;
             for (size_t i = 0; i < len; i++)
                 DEBUG_OUT << data[i] << ' ';
             DEBUG_OUT << dec << endl;
 #endif
         }
-        midiReadResult = midi->read();
+        midiReadResult = midi.read();
     }
 }
 

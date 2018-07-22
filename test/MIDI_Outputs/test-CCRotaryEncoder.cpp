@@ -7,7 +7,7 @@ using namespace ::testing;
 
 TEST(CCRotaryEncoder, turnOneStep) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
@@ -20,7 +20,7 @@ TEST(CCRotaryEncoder, turnOneStep) {
 
 TEST(CCRotaryEncoder, turnFourHalfSteps) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
@@ -48,7 +48,7 @@ TEST(CCRotaryEncoder, turnFourHalfSteps) {
 
 TEST(CCRotaryEncoder, turnOneStepBackwards) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
@@ -61,7 +61,7 @@ TEST(CCRotaryEncoder, turnOneStepBackwards) {
 
 TEST(CCRotaryEncoder, turnSixteenSteps) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
@@ -76,7 +76,7 @@ TEST(CCRotaryEncoder, turnSixteenSteps) {
 
 TEST(CCRotaryEncoder, turnSixteenStepsBackwards) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
@@ -95,7 +95,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwards) {
 
 TEST(CCRotaryEncoderBankable, turnOneStepChangeSettingTurnOneStep) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EncoderMock encm;
     Bankable::CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};

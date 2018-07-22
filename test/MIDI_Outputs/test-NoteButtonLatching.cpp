@@ -7,7 +7,7 @@ using namespace ::testing;
 
 TEST(NoteButtonLatching, pressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     NoteButtonLatching button(2, 0x3C, 7);
@@ -47,7 +47,7 @@ TEST(NoteButtonLatching, pressAndRelease) {
 
 TEST(NoteButtonLatchingBankable, pressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Bankable::NoteButtonLatching button(2, 0x3C, 7);
@@ -88,7 +88,7 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
 
 TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Bankable::NoteButtonLatching button(2, 0x3C, 7);
@@ -131,7 +131,7 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
 
 TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.setMIDI_Interface(midi);
+
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Bankable::NoteButtonLatching button(2, 0x3C, 7);

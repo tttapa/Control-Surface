@@ -4,6 +4,11 @@ MIDI_Interface::MIDI_Interface(MIDI_Parser &parser) : parser(parser) {
     setDefault(); // Make this the default MIDI Interface
 }
 
+MIDI_Interface::~MIDI_Interface() {
+    if (getDefault() == this)
+        DefaultMIDI_Interface = nullptr;
+}
+
 MIDI_Interface *MIDI_Interface::DefaultMIDI_Interface = nullptr;
 
 void MIDI_Interface::setDefault() { DefaultMIDI_Interface = this; }
