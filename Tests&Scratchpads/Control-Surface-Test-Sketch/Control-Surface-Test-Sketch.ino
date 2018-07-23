@@ -17,39 +17,30 @@ const uint8_t ShiftRegisterOut::blueBit = 0;
 
 //-----------------------------------------------------------------------------------------------------
 
-Bankable::PBPotentiometer pbpot           = {A0,          1};
-Bankable::CCPotentiometer ccpot           = {A1,   0x00,  1};
+Bank bank(4); // A bank with four channels
+BankSelector bankselector(bank, A2, 9, BankSelector::MOMENTARY);
 
-Bankable::NoteButton noteButton           = {5,    0x10,  1};
-Bankable::NoteButtonLatching noteSwitch   = {6,    0x11,  1};
-Bankable::CCButton ccButton               = {7,    0x12,  1};
-Bankable::CCButtonLatching ccSwitch       = {8,    0x13,  1};
+//-----------------------------------------------------------------------------------------------------
+
+Bankable::PBPotentiometer pbpot           = {bank, A0,          1};
+Bankable::CCPotentiometer ccpot           = {bank, A1,   0x00,  1};
+
+Bankable::NoteButton noteButton           = {bank, 5,    0x10,  1};
+Bankable::NoteButtonLatching noteSwitch   = {bank, 6,    0x11,  1};
+Bankable::CCButton ccButton               = {bank, 7,    0x12,  1};
+Bankable::CCButtonLatching ccSwitch       = {bank, 8,    0x13,  1};
 
 const int speedMultiply = 1;
 
 const uint8_t NORMAL_ENCODER = 4; // TODO
 
-Bankable::CCRotaryEncoder enc             = {{2, 3}, 0x20,  1, speedMultiply, NORMAL_ENCODER};
-
-//-----------------------------------------------------------------------------------------------------
-
-Bank bank(4); // A bank with four channels
-BankSelector bankselector(bank, A2, 9, BankSelector::MOMENTARY);
+Bankable::CCRotaryEncoder enc             = {bank, {2, 3}, 0x20,  1, speedMultiply, NORMAL_ENCODER};
   
 //-----------------------------------------------------------------------------------------------------
 
-Bankable::MIDINoteLED<2> note = { 0x10, 1, sr.red(0) };
+Bankable::MIDINoteLED<2> note = { bank, 0x10, 1, sr.red(0) };
 
-void setup() {
-  bank.add(pbpot);
-  bank.add(ccpot);
-  bank.add(noteButton);
-  bank.add(noteSwitch);
-  bank.add(ccButton);
-  bank.add(ccSwitch);
-  bank.add(enc);
-  bank.add(note);
-  
+void setup() {  
   Control_Surface.begin();
   while(!Serial);
   

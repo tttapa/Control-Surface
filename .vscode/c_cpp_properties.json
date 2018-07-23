@@ -14,9 +14,7 @@
                 "${workspaceFolder}/googletest/googletest-src/googlemock/include",
                 "${workspaceFolder}/mock",
                 "${workspaceFolder}/ArduinoMock",
-                "${workspaceFolder}/src",
-                "/usr/include",
-                "/usr/include/x86_64-linux-gnu/bits"
+                "${workspaceFolder}/src"
             ]
         }
     ],

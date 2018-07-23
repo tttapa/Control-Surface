@@ -10,21 +10,8 @@ Bank::Bank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
     }
 }
 
-void Bank::add(BankableMIDIInputAddressable *bankable, bankType type) {
-    add(*bankable, type);
-}
-
-void Bank::add(BankableMIDIInputAddressable &bankable, bankType type) {
+void Bank::add(BankableMIDIInputAddressable &bankable) {
     LinkedList::append(&bankable, first, last);
-    bankable.setBank(this, type);
-}
-
-void Bank::add(BankableMIDIOutput &bankable) {
-    bankable.setBank(this);
-}
-
-void Bank::add(BankableMIDIOutputAddressable &bankable, bankType type) {
-    bankable.setBank(this, type);
 }
 
 void Bank::setBankSetting(uint8_t bankSetting) {
@@ -37,6 +24,5 @@ uint8_t Bank::getBankSetting() const { return bankSetting; }
 uint8_t Bank::getTracksPerBank() const { return tracksPerBank; }
 
 void Bank::remove(BankableMIDIInputAddressable *bankable) {
-    bankable->removeBank();
     LinkedList::remove(bankable, first, last);
 }

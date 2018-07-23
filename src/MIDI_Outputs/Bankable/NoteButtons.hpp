@@ -42,12 +42,13 @@ class NoteButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalNoteSender> {
      * @param   channelIncrement
      *          The number of channels to increment for each next button.
      */
-    NoteButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
+    NoteButtons(const BankConfigAddressable &config,
+                const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 uint8_t baseNote, uint8_t baseChannel = 1,
                 uint8_t noteIncrement = 1, uint8_t channelIncrement = 0)
         : MIDIButtons<NUMBER_OF_BUTTONS, DigitalNoteSender>(
-              buttons, baseNote, baseChannel, noteIncrement, channelIncrement) {
-    }
+              config, buttons, baseNote, baseChannel, noteIncrement,
+              channelIncrement) {}
 };
 
 } // namespace Bankable

@@ -18,7 +18,7 @@ namespace Bankable {
  */
 class NoteButton : public MIDIButton<DigitalNoteSender> {
   public:
-     /**
+    /**
      * @brief   Create a new Bankable NoteButton object with the given pin, note
      *          number and channel.
      * 
@@ -30,8 +30,9 @@ class NoteButton : public MIDIButton<DigitalNoteSender> {
      * @param   channel
      *          The MIDI channel. [1, 16]
      */
-    NoteButton(pin_t pin, uint8_t note, uint8_t channel = 1)
-        : MIDIButton(pin, note, channel) {}
+    NoteButton(const BankConfigAddressable &config, pin_t pin, uint8_t note,
+               uint8_t channel = 1)
+        : MIDIButton(config, pin, note, channel) {}
 };
 
 } // namespace Bankable

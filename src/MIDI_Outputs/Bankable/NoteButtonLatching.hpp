@@ -30,8 +30,9 @@ class NoteButtonLatching : public MIDIButtonLatching<DigitalNoteSender> {
      * @param   channel
      *          The MIDI channel. [1, 16]
      */
-    NoteButtonLatching(pin_t pin, uint8_t note, uint8_t channel)
-        : MIDIButtonLatching(pin, note, channel) {}
+    NoteButtonLatching(const BankConfigAddressable &config, pin_t pin,
+                       uint8_t note, uint8_t channel)
+        : MIDIButtonLatching(config, pin, note, channel) {}
 };
 
 } // namespace Bankable

@@ -31,8 +31,9 @@ class CCButton : public MIDIButton<DigitalCCSender> {
      * @param   channel
      *          The MIDI Channel. [1, 16]
      */
-    CCButton(pin_t pin, uint8_t controller, uint8_t channel)
-        : MIDIButton<DigitalCCSender>(pin, controller, channel) {}
+    CCButton(const BankConfigAddressable &config, pin_t pin, uint8_t controller,
+             uint8_t channel)
+        : MIDIButton<DigitalCCSender>(config, pin, controller, channel) {}
 };
 
 } // namespace Bankable

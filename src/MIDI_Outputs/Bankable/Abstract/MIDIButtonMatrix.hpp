@@ -24,11 +24,13 @@ class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
      * @brief
      * @todo    Documentation
      */
-    MIDIButtonMatrix(const PinList<nb_rows> &rowPins,
+    MIDIButtonMatrix(const BankConfigAddressable &config,
+                     const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
                      uint8_t channel)
-        : ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
+        : BankableMIDIOutputAddressable(config), ButtonMatrix<nb_rows, nb_cols>(
+                                                     rowPins, colPins),
           addresses(addresses), baseChannel(channel) {}
 
   public:

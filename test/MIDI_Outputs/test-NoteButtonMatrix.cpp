@@ -7,13 +7,8 @@ using namespace ::testing;
 TEST(NoteButtonMatrix, pressAndRelease) {
     MockMIDI_Interface midi;
 
-
     constexpr uint8_t channel = 1;
-    AddressMatrix<3, 2> addresses = {{
-        {1, 3},
-        {5, 7},
-        {9, 11}
-    }};
+    AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT));
@@ -82,13 +77,10 @@ TEST(NoteButtonMatrix, pressAndRelease) {
 TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     MockMIDI_Interface midi;
 
+    Bank bank(4);
 
     constexpr uint8_t channel = 1;
-    AddressMatrix<3, 2> addresses = {{
-        {1, 3},
-        {5, 7},
-        {9, 11}
-    }};
+    AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT));
@@ -98,10 +90,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(6, INPUT_PULLUP));
 
     Bankable::NoteButtonMatrix<3, 2> matrix = {
-        {2, 3, 4}, {5, 6}, addresses, channel};
-
-    Bank bank(4);
-    bank.add(matrix);
+        bank, {2, 3, 4}, {5, 6}, addresses, channel};
 
     // Press
 

@@ -107,8 +107,10 @@ namespace Bankable {
 template <size_t NUMBER_OF_BANKS>
 class VU : public virtual VU_Base, public BankableMIDIInputAddressable {
   public:
-    VU(uint8_t track, uint8_t channel = 1, unsigned int decayTime = 300)
-        : VU_Base(track, channel, decayTime) {}
+    VU(const BankConfigAddressable &config, uint8_t track, uint8_t channel = 1,
+       unsigned int decayTime = 300)
+        : VU_Base(track, channel, decayTime),
+          BankableMIDIInputAddressable(config) {}
 
     bool updateImpl(const MIDI_message_matcher &midimsg) {
         uint8_t targetTrack = midimsg.data1 >> 4;

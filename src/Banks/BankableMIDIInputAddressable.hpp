@@ -1,58 +1,43 @@
 #pragma once
 
 #include "Bank.h"
+#include "BankConfigAddressable.hpp"
 #include <Helpers/Debug.hpp>
 
 class BankableMIDIInputAddressable {
     friend class Bank;
 
+  protected:
+    BankableMIDIInputAddressable(Bank &bank, Bank::bankType type)
+        : bank(bank),
+          channelsOrAddressesPerBank(bank.getTracksPerBank() << type) {
+        bank.add(*this);
+    }
+
+    BankableMIDIInputAddressable(const BankConfigAddressable &config)
+        : BankableMIDIInputAddressable(config.bank, config.type) {}
+
   public:
-    virtual ~BankableMIDIInputAddressable() { bank->remove(this); }
-
-    uint8_t getChannel(uint8_t baseChannel) const {
-        return baseChannel + getChannelsPerBank() * getBankSetting();
+    virtual ~BankableMIDIInputAddressable() {
+        bank.remove(this);
     }
 
-    uint8_t getAddress(uint8_t baseAddress) const {
-        return baseAddress + getAddressesPerBank() * getBankSetting();
+    uint8_t getAddressesPerBank() const {
+        return channelsOrAddressesPerBank & 0xF;
     }
 
-    uint8_t getAddressesPerBank() const { return addressesPerBank; }
-
-    uint8_t getChannelsPerBank() const { return channelsPerBank; }
-
-    uint8_t getAddressIndex(uint8_t targetAddress, uint8_t baseAddress) const {
-        if (getAddressesPerBank() == 0) {
-            DEBUGFN(F("Error: This Bankable element is not banked with type "
-                      "CHANGE_ADDRESS."));
-            ERROR(return 0);
-        }
-        return (targetAddress - baseAddress) / getAddressesPerBank();
-    }
-
-    uint8_t getChannelIndex(uint8_t targetChannel, uint8_t baseChannel) const {
-        if (getChannelsPerBank() == 0) {
-            DEBUGFN(F("Error: This Bankable element is not banked with type "
-                      "CHANGE_CHANNEL."));
-            ERROR(return 0);
-        }
-        return (targetChannel - baseChannel) / getChannelsPerBank();
+    uint8_t getChannelsPerBank() const {
+        return channelsOrAddressesPerBank >> 4;
     }
 
     uint8_t getIndex(uint8_t targetChannel, uint8_t targetAddress,
                      uint8_t baseChannel, uint8_t baseAddress) const {
         return getAddressesPerBank()
-                   ? getAddressIndex(targetAddress, baseAddress)
-                   : getChannelIndex(targetChannel, baseChannel);
+                   ? (targetAddress - baseAddress) / getAddressesPerBank()
+                   : (targetChannel - baseChannel) / getChannelsPerBank();
     }
 
-    uint8_t getBankSetting() const {
-        if (bank == nullptr) {
-            DEBUGFN(F("Error: This Bankable element does not have a bank."));
-            ERROR(return 0);
-        }
-        return bank->getBankSetting();
-    }
+    uint8_t getBankSetting() const { return bank.getBankSetting(); }
 
   protected:
     bool matchAddress(uint8_t targetAddress, uint8_t baseAddress,
@@ -83,34 +68,15 @@ class BankableMIDIInputAddressable {
     }
 
   private:
-    Bank *bank = nullptr;
+    Bank &bank;
     BankableMIDIInputAddressable *next = nullptr;
     BankableMIDIInputAddressable *previous = nullptr;
-    uint8_t channelsPerBank = 0;
-    uint8_t addressesPerBank = 0;
+    const uint8_t channelsOrAddressesPerBank;
 
     virtual void onBankSettingChange() const {}
     void onBankSettingChangeAll() const {
         for (const BankableMIDIInputAddressable *e = this; e; e = e->next)
             e->onBankSettingChange();
-    }
-
-    void setBank(Bank *bank, Bank::bankType type) {
-        if (this->bank != nullptr) {
-            DEBUGFN(F("Error: This Bankable already has a Bank."));
-            ERROR(return );
-        }
-        this->bank = bank;
-        if (type == Bank::CHANGE_ADDRESS)
-            addressesPerBank = bank->getTracksPerBank();
-        else
-            channelsPerBank = bank->getTracksPerBank();
-    }
-
-    void removeBank() {
-        this->bank = nullptr;
-        addressesPerBank = 0;
-        channelsPerBank = 0;
     }
 
     template <class Node>

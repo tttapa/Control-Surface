@@ -50,9 +50,10 @@ template <uint8_t NUMBER_OF_BANKS>
 class VPotRingLEDs : public VPotRing<NUMBER_OF_BANKS>,
                      public VPotRingLEDs_Base {
   public:
-    VPotRingLEDs(uint8_t track, uint8_t channel, const pin_t (&ledPins)[11])
-        : VPotRing_Base(track, channel), VPotRing<NUMBER_OF_BANKS>(track,
-                                                                   channel),
+    VPotRingLEDs(const BankConfigAddressable &config, uint8_t track,
+                 uint8_t channel, const pin_t (&ledPins)[11])
+        : VPotRing_Base(track, channel), VPotRing<NUMBER_OF_BANKS>(
+                                             config, track, channel),
           VPotRingLEDs_Base(ledPins) {}
 };
 

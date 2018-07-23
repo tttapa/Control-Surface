@@ -1,9 +1,16 @@
 #pragma once
 
 #include "Bank.h"
+#include "BankConfigAddressable.hpp"
 
 class BankableMIDIOutputAddressable {
-    friend class Bank;
+  protected:
+    BankableMIDIOutputAddressable(const Bank &bank, Bank::bankType type)
+        : bank(bank),
+          channelsOrAddressesPerBank(bank.getTracksPerBank() << type) {}
+
+    BankableMIDIOutputAddressable(const BankConfigAddressable &config)
+        : BankableMIDIOutputAddressable(config.bank, config.type) {}
 
   public:
     uint8_t getChannel(uint8_t baseChannel) const {
@@ -14,17 +21,15 @@ class BankableMIDIOutputAddressable {
         return baseAddress + getAddressesPerBank() * getBankSetting();
     }
 
-    uint8_t getAddressesPerBank() const { return addressesPerBank; }
-
-    uint8_t getChannelsPerBank() const { return channelsPerBank; }
-
-    uint8_t getRawBankSetting() const {
-        if (bank == nullptr) {
-            DEBUGFN(F("Error: This Bankable element does not have a bank."));
-            ERROR(return 0);
-        }
-        return bank->getBankSetting();
+    uint8_t getAddressesPerBank() const {
+        return channelsOrAddressesPerBank & 0xF;
     }
+
+    uint8_t getChannelsPerBank() const {
+        return channelsOrAddressesPerBank >> 4;
+    }
+
+    uint8_t getRawBankSetting() const { return bank.getBankSetting(); }
 
     uint8_t getBankSetting() const {
         return lockedSetting == UNLOCKED ? getRawBankSetting() : lockedSetting;
@@ -39,27 +44,8 @@ class BankableMIDIOutputAddressable {
     void unlock() { lockedSetting = UNLOCKED; }
 
   private:
-    Bank *bank = nullptr;
-    uint8_t channelsPerBank = 0;
-    uint8_t addressesPerBank = 0;
-
-    void setBank(Bank *bank, Bank::bankType type) {
-        if (this->bank != nullptr) {
-            DEBUGFN(F("Error: This Bankable already has a Bank."));
-            ERROR(return );
-        }
-        this->bank = bank;
-        if (type == Bank::CHANGE_ADDRESS)
-            addressesPerBank = bank->getTracksPerBank();
-        else
-            channelsPerBank = bank->getTracksPerBank();
-    }
-
-    void removeBank() {
-        this->bank = nullptr;
-        addressesPerBank = 0;
-        channelsPerBank = 0;
-    }
+    const Bank &bank;
+    const uint8_t channelsOrAddressesPerBank;
 
     constexpr static uint8_t UNLOCKED = 0xFF;
     uint8_t lockedSetting = UNLOCKED;

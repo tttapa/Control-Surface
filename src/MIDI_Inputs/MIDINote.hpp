@@ -48,10 +48,11 @@ namespace Bankable {
 
 template <uint8_t NUMBER_OF_BANKS>
 class MIDINote : public virtual MIDINote_Base,
-                   public BankableMIDIInputAddressable {
+                 public BankableMIDIInputAddressable {
   public:
-    MIDINote(uint8_t track, uint8_t channel = 1)
-        : MIDINote_Base(track, channel) {}
+    MIDINote(const BankConfigAddressable &config, uint8_t track,
+             uint8_t channel = 1)
+        : MIDINote_Base(track, channel), BankableMIDIInputAddressable(config) {}
 
     uint8_t getValue() const override {
         return values[getBankSetting() % NUMBER_OF_BANKS];

@@ -24,8 +24,10 @@ class MIDIButtonLatching : public MIDIOutputElement,
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      */
-    MIDIButtonLatching(pin_t pin, uint8_t baseAddress, uint8_t baseChannel)
-        : button{pin}, baseAddress(baseAddress), baseChannel(baseChannel) {}
+    MIDIButtonLatching(const BankConfigAddressable &config, pin_t pin,
+                       uint8_t baseAddress, uint8_t baseChannel)
+        : BankableMIDIOutputAddressable(config), button{pin},
+          baseAddress(baseAddress), baseChannel(baseChannel) {}
 
   public:
     void update() final override {

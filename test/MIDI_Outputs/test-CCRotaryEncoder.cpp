@@ -8,7 +8,6 @@ using namespace ::testing;
 TEST(CCRotaryEncoder, turnOneStep) {
     MockMIDI_Interface midi;
 
-
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
 
@@ -20,7 +19,6 @@ TEST(CCRotaryEncoder, turnOneStep) {
 
 TEST(CCRotaryEncoder, turnFourHalfSteps) {
     MockMIDI_Interface midi;
-
 
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
@@ -49,7 +47,6 @@ TEST(CCRotaryEncoder, turnFourHalfSteps) {
 TEST(CCRotaryEncoder, turnOneStepBackwards) {
     MockMIDI_Interface midi;
 
-
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
 
@@ -61,7 +58,6 @@ TEST(CCRotaryEncoder, turnOneStepBackwards) {
 
 TEST(CCRotaryEncoder, turnSixteenSteps) {
     MockMIDI_Interface midi;
-
 
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
@@ -76,7 +72,6 @@ TEST(CCRotaryEncoder, turnSixteenSteps) {
 
 TEST(CCRotaryEncoder, turnSixteenStepsBackwards) {
     MockMIDI_Interface midi;
-
 
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
@@ -96,12 +91,10 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwards) {
 TEST(CCRotaryEncoderBankable, turnOneStepChangeSettingTurnOneStep) {
     MockMIDI_Interface midi;
 
+    Bank bank(4);
 
     EncoderMock encm;
-    Bankable::CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
-
-    Bank bank(4);
-    bank.add(ccenc);
+    Bankable::CCRotaryEncoder ccenc = {bank, encm, 0x20, 7, 2, 4};
 
     EXPECT_CALL(encm, read()).WillOnce(Return(4));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 2));

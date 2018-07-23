@@ -67,6 +67,8 @@ class BankableMIDIOutput;
  * tracks per bank, and @f$s@f$ is the current bank setting.
  */
 class Bank {
+    friend class BankableMIDIInputAddressable;
+
   public:
     /**
      * @brief   Construct a new Bank object.
@@ -81,70 +83,13 @@ class Bank {
         /**
          * @brief   Change the offset of the channel number of the Bankable.
          */
-        CHANGE_CHANNEL,
+        CHANGE_CHANNEL = 4,
         /**
          * @brief   Change the offset of the address (i.e. Controller number or
          *          Note number) of the MIDI_Element.
          */
-        CHANGE_ADDRESS
+        CHANGE_ADDRESS = 0
     };
-
-    /**
-     * @brief   Add a Bankable to the bank.
-     *
-     * @param   bankable
-     *          A pointer to the Bankable to be added.
-     * @param   type
-     *          Either change the MIDI channel or the address.
-     */
-    void add(BankableMIDIInputAddressable *bankable,
-             bankType type = CHANGE_ADDRESS);
-
-    /**
-     * @brief   Add a Bankable to the bank.
-     *
-     * @param   bankable
-     *          The Bankable to be added.
-     * @param   type
-     *          Either change the MIDI channel or the address.
-     */
-    void add(BankableMIDIInputAddressable &bankable,
-             bankType type = CHANGE_ADDRESS);
-
-    /**
-     * @brief   Add an array of Bankable%s to the bank.
-     *
-     * @tparam  T
-     *          The type of the Bankable%s.
-     * @tparam  N
-     *          The number of Bankable%s in the array.
-     *
-     * @param   bankables
-     *          An array of Bankable%s to be added.
-     * @param   type
-     *          Either change the MIDI channel or the address of the bankables.
-     *
-     * @todo    Do I need the T template paramter?
-     */
-    template <class T, size_t N>
-    void add(T (&bankables)[N], bankType type = CHANGE_ADDRESS) {
-        for (T &bankable : bankables)
-            add(bankable, type);
-    }
-
-    /**
-     * @todo    Documentation.
-     */
-    void add(BankableMIDIOutputAddressable &bankable,
-             bankType type = CHANGE_ADDRESS);
-
-    /**
-     * @brief   Add a Bankable to the bank.
-     *
-     * @param   bankable
-     *          The Bankable to be added.
-     */
-    void add(BankableMIDIOutput &bankable);
 
     /**
      * @brief   Set the Bank Setting
@@ -163,6 +108,15 @@ class Bank {
   private:
     const uint8_t tracksPerBank;
     uint8_t bankSetting = 0;
+
+    /**
+     * @brief   Add a Bankable to the bank.
+     *
+     * @param   bankable
+     *          The Bankable to be added.
+     */
+    void add(BankableMIDIInputAddressable &bankable);
+
     BankableMIDIInputAddressable *first = nullptr;
     BankableMIDIInputAddressable *last = nullptr;
 

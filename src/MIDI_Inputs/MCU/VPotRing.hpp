@@ -89,8 +89,9 @@ template <uint8_t NUMBER_OF_BANKS>
 class VPotRing : public virtual VPotRing_Base,
                  public BankableMIDIInputAddressable {
   public:
-    VPotRing(uint8_t track, uint8_t channel = 1)
-        : VPotRing_Base(track, channel) {}
+    VPotRing(const BankConfigAddressable &config, uint8_t track,
+             uint8_t channel = 1)
+        : VPotRing_Base(track, channel), BankableMIDIInputAddressable(config) {}
 
     void reset() final override {
         for (uint8_t &value : values)

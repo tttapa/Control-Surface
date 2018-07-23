@@ -23,12 +23,13 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
      *
      * @todo    Documentation
      */
-    MIDIButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
+    MIDIButtons(const BankConfigAddressable &config,
+                const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 uint8_t baseAddress, uint8_t baseChannel,
                 uint8_t addressIncrement, uint8_t channelIncrement)
-        : buttons{buttons}, baseAddress(baseAddress), baseChannel(baseChannel),
-          increment(((channelIncrement & 0xF) << 4) |
-                    (addressIncrement & 0xF)) {}
+        : BankableMIDIOutputAddressable(config), buttons{buttons},
+          baseAddress(baseAddress), baseChannel(baseChannel),
+          increment((channelIncrement << 4) | (addressIncrement & 0xF)) {}
 
   public:
     void update() final override {

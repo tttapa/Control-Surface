@@ -1,5 +1,5 @@
-#include <MIDI_Outputs/NoteButtonLatching.hpp>
 #include <MIDI_Outputs/Bankable/NoteButtonLatching.hpp>
+#include <MIDI_Outputs/NoteButtonLatching.hpp>
 #include <MockMIDI_Interface.hpp>
 #include <gmock/gmock.h>
 
@@ -7,7 +7,6 @@ using namespace ::testing;
 
 TEST(NoteButtonLatching, pressAndRelease) {
     MockMIDI_Interface midi;
-
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     NoteButtonLatching button(2, 0x3C, 7);
@@ -48,12 +47,10 @@ TEST(NoteButtonLatching, pressAndRelease) {
 TEST(NoteButtonLatchingBankable, pressAndRelease) {
     MockMIDI_Interface midi;
 
+    Bank bank(4);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    Bankable::NoteButtonLatching button(2, 0x3C, 7);
-
-    Bank bank(4);
-    bank.add(button);
+    Bankable::NoteButtonLatching button(bank, 2, 0x3C, 7);
 
     // Still released
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -89,14 +86,13 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
 TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
     MockMIDI_Interface midi;
 
+    Bank bank(4);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    Bankable::NoteButtonLatching button(2, 0x3C, 7);
+    Bankable::NoteButtonLatching button(bank, 2, 0x3C, 7);
 
-    Bank bank(4);
     // Change bank setting
     bank.setBankSetting(1);
-    bank.add(button);
 
     // Still released
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -132,12 +128,10 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
 TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
     MockMIDI_Interface midi;
 
+    Bank bank(4);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    Bankable::NoteButtonLatching button(2, 0x3C, 7);
-
-    Bank bank(4);
-    bank.add(button);
+    Bankable::NoteButtonLatching button(bank, 2, 0x3C, 7);
 
     // Still released
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))

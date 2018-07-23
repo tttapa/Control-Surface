@@ -44,12 +44,13 @@ class CCButtonMatrix
      * @param   channel
      *          The MIDI channel. [1, 16]
      */
-    CCButtonMatrix(const PinList<nb_rows> &rowPins,
-                     const PinList<nb_cols> &colPins,
-                     const AddressMatrix<nb_rows, nb_cols> &addresses,
-                     uint8_t channel)
+    CCButtonMatrix(const BankConfigAddressable &config,
+                   const PinList<nb_rows> &rowPins,
+                   const PinList<nb_cols> &colPins,
+                   const AddressMatrix<nb_rows, nb_cols> &addresses,
+                   uint8_t channel)
         : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>(
-              rowPins, colPins, addresses, channel) {}
+              config, rowPins, colPins, addresses, channel) {}
 };
 
 } // namespace Bankable

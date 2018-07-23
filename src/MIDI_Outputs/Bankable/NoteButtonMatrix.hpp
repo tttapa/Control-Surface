@@ -43,12 +43,13 @@ class NoteButtonMatrix
      * @param   channel
      *          The MIDI channel. [1, 16]
      */
-    NoteButtonMatrix(const PinList<nb_rows> &rowPins,
+    NoteButtonMatrix(const BankConfigAddressable &config,
+                     const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
                      uint8_t channel)
         : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>(
-              rowPins, colPins, addresses, channel) {}
+              config, rowPins, colPins, addresses, channel) {}
 };
 
 } // namespace Bankable

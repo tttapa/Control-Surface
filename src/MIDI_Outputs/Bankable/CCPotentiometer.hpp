@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MIDI_Outputs/Bankable/Abstract/MIDIFilteredAnalog.hpp> 
+#include <MIDI_Outputs/Bankable/Abstract/MIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/ContinuousCCSender.hpp>
 
 namespace Bankable {
@@ -30,9 +30,10 @@ class CCPotentiometer
      * @param   channel
      *          The MIDI channel. [1, 16]
      */
-    CCPotentiometer(pin_t analogPin, uint8_t controller, uint8_t channel = 1)
+    CCPotentiometer(const BankConfigAddressable &config, pin_t analogPin,
+                    uint8_t controller, uint8_t channel = 1)
         : MIDIFilteredAnalogAddressable<ContinuousCCSender, 7>(
-              analogPin, controller, channel) {}
+              config, analogPin, controller, channel) {}
 };
 
 } // namespace Bankable

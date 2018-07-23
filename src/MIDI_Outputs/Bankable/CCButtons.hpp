@@ -40,11 +40,12 @@ class CCButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalCCSender> {
      * @param   channelIncrement
      *          The number of channels to increment for each next button.
      */
-    CCButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
+    CCButtons(const BankConfigAddressable &config,
+              const Array<Button, NUMBER_OF_BUTTONS> &buttons,
               uint8_t baseAddress, uint8_t baseChannel = 1,
               uint8_t addressIncrement = 1, uint8_t channelIncrement = 0)
         : MIDIButtons<NUMBER_OF_BUTTONS, DigitalCCSender>(
-              buttons, baseAddress, baseChannel, addressIncrement,
+              config, buttons, baseAddress, baseChannel, addressIncrement,
               channelIncrement) {}
 };
 

@@ -48,12 +48,11 @@ TEST(NoteButton, pressAndRelease) {
 TEST(NoteButtonBankable, pressAndRelease) {
     MockMIDI_Interface midi;
 
+    Bank bank(4);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    Bankable::NoteButton button(2, 0x3C, 7);
 
-    Bank bank(4);
-    bank.add(button);
+    Bankable::NoteButton button(bank, 2, 0x3C, 7);
 
     // Still released
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -88,14 +87,14 @@ TEST(NoteButtonBankable, changeSettingAndPressAndRelease) {
     MockMIDI_Interface midi;
 
 
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    Bankable::NoteButton button(2, 0x3C, 7);
-
     Bank bank(4);
     // Change bank setting
     bank.setBankSetting(1);
-    bank.add(button);
 
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+
+    Bankable::NoteButton button(bank, 2, 0x3C, 7);
+ 
     // Still released
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
@@ -128,12 +127,11 @@ TEST(NoteButtonBankable, changeSettingAndPressAndRelease) {
 TEST(NoteButtonBankable, pressAndChangeSettingAndRelease) {
     MockMIDI_Interface midi;
 
+    Bank bank(4);
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
-    Bankable::NoteButton button(2, 0x3C, 7);
 
-    Bank bank(4);
-    bank.add(button);
+    Bankable::NoteButton button(bank, 2, 0x3C, 7);
 
     // Still released
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))

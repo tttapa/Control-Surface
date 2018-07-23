@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Banks/BankableMIDIOutput.hpp>
+#include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Hardware/FilteredAnalog.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -30,10 +30,11 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
      *          connected.
      * @todo    Documentation.
      */
-    MIDIFilteredAnalogAddressable(pin_t analogPin, uint8_t baseAddress,
+    MIDIFilteredAnalogAddressable(const BankConfigAddressable &config,
+                                  pin_t analogPin, uint8_t baseAddress,
                                   uint8_t baseChannel)
-        : filteredAnalog{analogPin}, baseAddress(baseAddress),
-          baseChannel(baseChannel) {}
+        : BankableMIDIOutputAddressable(config), filteredAnalog{analogPin},
+          baseAddress(baseAddress), baseChannel(baseChannel) {}
 
   public:
     void update() final override {
@@ -81,10 +82,11 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
      * @param   analogPin
      *          The analog input pin with the wiper of the potentiometer
      *          connected.
-     * @todo    Documentation.
+     * @todo    Bank Config
      */
-    MIDIFilteredAnalog(pin_t analogPin, uint8_t channel)
-        : filteredAnalog{analogPin}, channel(channel) {}
+    MIDIFilteredAnalog(const Bank &bank, pin_t analogPin, uint8_t channel)
+        : BankableMIDIOutput(bank), filteredAnalog{analogPin},
+          channel(channel) {}
 
   public:
     void update() final override {
