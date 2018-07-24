@@ -433,6 +433,33 @@ src/Control_Surface/Control_Surface_Class.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Control_Surface/Control_Surface_Class.cpp.s
 .PHONY : src/Control_Surface/Control_Surface_Class.cpp.s
 
+src/Display/MCU/VPotDisplay.o: src/Display/MCU/VPotDisplay.cpp.o
+
+.PHONY : src/Display/MCU/VPotDisplay.o
+
+# target to build an object file
+src/Display/MCU/VPotDisplay.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Display/MCU/VPotDisplay.cpp.o
+.PHONY : src/Display/MCU/VPotDisplay.cpp.o
+
+src/Display/MCU/VPotDisplay.i: src/Display/MCU/VPotDisplay.cpp.i
+
+.PHONY : src/Display/MCU/VPotDisplay.i
+
+# target to preprocess a source file
+src/Display/MCU/VPotDisplay.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Display/MCU/VPotDisplay.cpp.i
+.PHONY : src/Display/MCU/VPotDisplay.cpp.i
+
+src/Display/MCU/VPotDisplay.s: src/Display/MCU/VPotDisplay.cpp.s
+
+.PHONY : src/Display/MCU/VPotDisplay.s
+
+# target to generate assembly for a file
+src/Display/MCU/VPotDisplay.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Display/MCU/VPotDisplay.cpp.s
+.PHONY : src/Display/MCU/VPotDisplay.cpp.s
+
 src/Hardware/Button.o: src/Hardware/Button.cpp.o
 
 .PHONY : src/Hardware/Button.o
@@ -1282,6 +1309,9 @@ help:
 	@echo "... src/Control_Surface/Control_Surface_Class.o"
 	@echo "... src/Control_Surface/Control_Surface_Class.i"
 	@echo "... src/Control_Surface/Control_Surface_Class.s"
+	@echo "... src/Display/MCU/VPotDisplay.o"
+	@echo "... src/Display/MCU/VPotDisplay.i"
+	@echo "... src/Display/MCU/VPotDisplay.s"
 	@echo "... src/Hardware/Button.o"
 	@echo "... src/Hardware/Button.i"
 	@echo "... src/Hardware/Button.s"

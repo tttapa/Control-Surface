@@ -14,7 +14,8 @@
                 "${workspaceFolder}/googletest/googletest-src/googlemock/include",
                 "${workspaceFolder}/mock",
                 "${workspaceFolder}/ArduinoMock",
-                "${workspaceFolder}/src"
+                "${workspaceFolder}/src",
+                "/usr/include"
             ]
         }
     ],

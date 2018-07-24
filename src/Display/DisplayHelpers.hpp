@@ -6,7 +6,7 @@
  * @brief Draws the outline of a circle
  * https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
  */
-void drawCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, uint16_t radius,
+void drawGoodCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, uint16_t radius,
                 uint16_t color) {
   int x = radius;
   int y = 0;
@@ -36,7 +36,7 @@ void drawCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, uint16_t radius,
 /**
  * @brief Fills a circle
  */
-void fillCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, uint16_t radius,
+void fillGoodCircle(Adafruit_GFX &display, int16_t x0, int16_t y0, uint16_t radius,
                 uint16_t color) {
   int x = radius;
   int y = 0;

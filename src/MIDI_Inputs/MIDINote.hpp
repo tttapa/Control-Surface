@@ -10,6 +10,7 @@ class MIDINote_Base : public MIDIInputElementNote {
 
   public:
     virtual uint8_t getValue() const = 0;
+    bool getState() { return getValue() >= 64; }
 
   protected:
     uint8_t getValueFromMIDIMessage(const MIDI_message_matcher &midimsg) {

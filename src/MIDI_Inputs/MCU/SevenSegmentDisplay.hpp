@@ -15,7 +15,12 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
     */
     SevenSegmentDisplay(uint8_t baseChannel, uint8_t baseAddress)
         : MIDIInputElementCC(baseChannel, baseAddress) {
-        memset(text, ' ', LENGTH);
+        reset();
+    }
+
+    void reset() override {
+        for (char &c : text)
+            c = ' ';
     }
 
   private:

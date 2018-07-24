@@ -110,4 +110,6 @@ void Control_Surface_::updateInputs() {
     MIDIInputElementChannelPressure::updateAll();
 }
 
+void updateDisplays() __attribute__((weak));
+
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();

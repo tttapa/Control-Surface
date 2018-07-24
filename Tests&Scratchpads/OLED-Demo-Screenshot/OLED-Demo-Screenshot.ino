@@ -15,12 +15,19 @@
  * and a play and record button.
  */
 
+#include <Encoder.h>
 #define DISPLAY_GFX           // Enable display functions of the Control Surface library (requires Adafruit_GFX to be installed)
 #include <Control_Surface.h>  // Include the Control Surface library
 
 #include <Adafruit_SSD1306.h>  // Include the library for your specific display (it should inherit from Adafruit_GFX)
 #include <Wire.h>              // Include the I²C library for the display
 
+
+/* ------ MIDI Interface ----- */
+/* =========================== */
+
+USBMIDI_Interface midi;
+// USBDebugMIDI_Interface midi = 115200;
 
 /* ------ Display setup ------ */
 /* =========================== */
@@ -61,73 +68,72 @@ void initializeDisplay() {
 /* ------- Bank setup -------- */
 /* =========================== */
 
-Bank bank(2);  // Create a new bank with two tracks per bank (see Ex.06.Banks)
+Bank bank(2);  // Create a new bank with two tracks per bank
 
-BankSelector bs(bank, { 4, 5 }, 4);  // Create a new bank selector with four bank settings 
-                                     // and an increment button on pin 4 and a decrement button on pin 5
-                                     // (see Ex.07.BankSelectors)
+BankSelector bs(bank, { A2 }, 4);    // Create a new bank selector with four bank settings 
+                                     // and an increment button on pin A3
 
 /* -- MIDI Control Elements -- */
 /* =========================== */
 
-using namespace MCU; // Use MCU namespace for constants
+constexpr uint8_t channel = 1;
 
-// Instantiate the buttons (see Ex.02.Button)
-Digital channelButtons[] = {
-  {6,  MUTE_1,         1, 127},
-  {7,  SOLO_1,         1, 127},
-  {8,  REC_RDY_1,      1, 127},
-  {9,  V_POT_SELECT_1, 1, 127},  
-  {10, MUTE_2,         1, 127},
-  {11, SOLO_2,         1, 127},
-  {12, V_POT_SELECT_2, 1, 127},
+// Instantiate the buttons
+Bankable::NoteButton channelButtons[] = {
+  { bank, 4,  MCU::V_POT_SELECT_1, channel },
+  { bank, 5,  MCU::MUTE_1,         channel },
+  { bank, 6,  MCU::SOLO_1,         channel },
+  { bank, 7,  MCU::REC_RDY_1,      channel },
+  
+  // { bank, 10, MCU::MUTE_2,         channel },
+  // { bank, 11, MCU::SOLO_2,         channel },
+  // { bank, 12, MCU::V_POT_SELECT_2, channel },
 };
 
-Digital playButton   (14, PLAY,   1, 127);
-Digital recordButton (15, RECORD, 1, 127);
+Bankable::NoteButton playButton =   { bank, 8, MCU::PLAY,   channel };
+// Bankable::NoteButton recordButton = { bank, 15, MCU::RECORD, channel };
 
-RotaryEncoder encoder_A (0, 1, V_POT_1, 1, 1, NORMAL_ENCODER, MACKIE_CONTROL_RELATIVE);
-RotaryEncoder encoder_B (2, 3, V_POT_2, 1, 1, NORMAL_ENCODER, MACKIE_CONTROL_RELATIVE);
+// Bankable::CCRotaryEncoder encoder_A = { bank, {0, 1}, MCU::V_POT_1, channel, 1, 4 };
+Bankable::CCRotaryEncoder encoder_B = { bank, {2, 3}, MCU::V_POT_2, channel, 1, 4 };
 
 
 /* --- MIDI Input Elements --- */
 /* =========================== */
 
 // Time display
-MCU_TimeDisplay tdisp;
+MCU::TimeDisplay timedisplay = { channel };
 
 // Play / Record
-MIDIInputElementNote_Buffer play   (PLAY,   1, 1, 1); // channel (1), listen to this address only (1), listen to this channel only (1)
-MIDIInputElementNote_Buffer record (RECORD, 1, 1, 1);
+MIDINote play = { MCU::PLAY, channel };
+MIDINote record = { MCU::RECORD, channel };
 
 // Mute
-MIDIInputElementNote_Buffer mute_A (MUTE_1, 1, 4, 1); // channel (1), listen to (4) addresses in total, listen to this channel only (1)
-MIDIInputElementNote_Buffer mute_B (MUTE_2, 1, 4, 1);
+Bankable::MIDINote<4> mute_A = { bank, MCU::MUTE_1, channel };
+Bankable::MIDINote<4> mute_B = { bank, MCU::MUTE_2, channel };
 
 // Solo
-MIDIInputElementNote_Buffer solo_A (SOLO_1, 1, 4, 1);
-MIDIInputElementNote_Buffer solo_B (SOLO_2, 1, 4, 1);
+Bankable::MIDINote<4> solo_A = { bank, MCU::SOLO_1, channel };
+Bankable::MIDINote<4> solo_B = { bank, MCU::SOLO_2, channel };
 
-MIDIInputElementNote_Buffer rudeSolo (RUDE_SOLO, 1, 1, 1);
+MIDINote rudeSolo = { MCU::RUDE_SOLO, channel };
 
 // Record arm / ready
-MIDIInputElementNote_Buffer recrdy_A (REC_RDY_1, 1, 4, 1);
-MIDIInputElementNote_Buffer recrdy_B (REC_RDY_2, 1, 4, 1);
+Bankable::MIDINote<4> recrdy_A = { bank, MCU::REC_RDY_1, channel };
+Bankable::MIDINote<4> recrdy_B = { bank, MCU::REC_RDY_2, channel };
 
 // VU meters
-MCU_VU vu_A (1, 4, false);  // track (1), listen to (4) tracks in total, don't decay automatically (false)
-MCU_VU vu_B (2, 4, false);
+MCU::Bankable::VU<4> vu_A = { bank, 1, channel, 0 };
+MCU::Bankable::VU<4> vu_B = { bank, 2, channel, 0 };
 
 // VPot rings
-MCU_VPot_Ring ring_A (1, 4);  // track (1), listen to (4) tracks in total
-MCU_VPot_Ring ring_B (2, 4);
-
+MCU::Bankable::VPotRing<4> vpot_A = { bank, 1, channel };
+MCU::Bankable::VPotRing<4> vpot_B = { bank, 2, channel };
 
 /* ---- Display Elements ----- */
 /* =========================== */
 
 // Time display
-TimeDisplay timeDisp(display, tdisp, {0, 0}, 1, WHITE); // position (0, 0), font size (1)
+MCU::TimeDisplayDisplay timedisplaydisplay(display, timedisplay, {0, 0}, 1, WHITE); // position (0, 0), font size (1)
 
 // Play / Record
 NoteDisplay playDisp   (display, play,   XBM::play_7,   {16 + 64, 0}, WHITE);
@@ -148,12 +154,12 @@ NoteDisplay recrdyDisp_A (display, recrdy_A, XBM::rec_rdy_10B, {14 + 14,      50
 NoteDisplay recrdyDisp_B (display, recrdy_B, XBM::rec_rdy_10B, {14 + 14 + 64, 50}, WHITE);
 
 // VU meters
-VUDisplay vuDisp_A (display, vu_A, {32 + 11,      60}, 16, 3, 1, WHITE);  // position (32+11, 60), width (16), bar height (3) px, bar spacing (1) px
-VUDisplay vuDisp_B (display, vu_B, {32 + 11 + 64, 60}, 16, 3, 1, WHITE);
+MCU::VUDisplay vuDisp_A (display, vu_A, {32 + 11,      60}, 16, 3, 1, WHITE);  // position (32+11, 60), width (16), bar height (3) px, bar spacing (1) px
+MCU::VUDisplay vuDisp_B (display, vu_B, {32 + 11 + 64, 60}, 16, 3, 1, WHITE);
 
 // VPot rings
-VPotDisplay vpotDisp_A (display, ring_A, {0,  10}, 16, 13, WHITE);  // position (0, 10), outer radius (16) px, inner radius (13) px
-VPotDisplay vpotDisp_B (display, ring_B, {64, 10}, 16, 13, WHITE);
+MCU::VPotDisplay vpotDisp_A (display, vpot_A, {0,  10}, 16, 13, WHITE);  // position (0, 10), outer radius (16) px, inner radius (13) px
+MCU::VPotDisplay vpotDisp_B (display, vpot_B, {64, 10}, 16, 13, WHITE);
 
 // Bank selector
 SelectorDisplay bsDisp_A (display, bs, 1, 2, {0,  50}, 2, WHITE);  // first track of the bank (1), two tracks per bank (2), position (0, 50), font size (2)
@@ -164,39 +170,14 @@ SelectorDisplay bsDisp_B (display, bs, 2, 2, {64, 50}, 2, WHITE);
 /* =========================== */
 
 void setup()   {
-  // Add all channel input and control elements to the bank
-  
-  bank.add(channelButtons, Bank::CHANGE_ADDRESS);
-  
-  bank.add(encoder_A,      Bank::CHANGE_ADDRESS);
-  bank.add(encoder_B,      Bank::CHANGE_ADDRESS);
-
-  bank.add(ring_A,         Bank::CHANGE_ADDRESS);
-  bank.add(vu_A,           Bank::CHANGE_ADDRESS);
-  bank.add(mute_A,         Bank::CHANGE_ADDRESS);
-  bank.add(solo_A,         Bank::CHANGE_ADDRESS);
-  bank.add(recrdy_A,       Bank::CHANGE_ADDRESS);
-
-  bank.add(ring_B,         Bank::CHANGE_ADDRESS);
-  bank.add(vu_B,           Bank::CHANGE_ADDRESS);
-  bank.add(mute_B,         Bank::CHANGE_ADDRESS);
-  bank.add(solo_B,         Bank::CHANGE_ADDRESS);
-  bank.add(recrdy_B,       Bank::CHANGE_ADDRESS);
-
+  RelativeCCSender::setMode(MACKIE_CONTROL_RELATIVE);
   initializeDisplay();  // Start the OLED display
-
   Control_Surface.begin();  // Initialize Control Surface
-
-  pinMode(20, INPUT_PULLUP);
 }
 
 /* ---------- Loop ----------- */
 /* =========================== */
 
 void loop() {
-  Control_Surface.refresh();  // Refresh all elements
-  if (digitalRead(20) == LOW) {
-    screenshot("OLED_Demo");
-    delay(1000);
-  }
+  Control_Surface.loop();  // Refresh all elements
 }

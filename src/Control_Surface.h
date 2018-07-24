@@ -10,9 +10,20 @@
 
 #include <Arduino.h> // For VSCode errors in examples
 
-#if defined(CORE_TEENSY) && \
+#if defined(CORE_TEENSY) &&                                                    \
     !(defined(USB_MIDI_AUDIO_SERIAL) || defined(USB_MIDI_SERIAL))
 #error "Please select a 'Serial + MIDI' option in the 'Tools > USB Type' menu."
+#endif
+
+// -------------------------------------------------------------------------- //
+#ifdef DISPLAY_GFX
+#include "Display/Bitmaps/XBitmaps.h"
+#include "Display/MCU/TimeDisplay.hpp"
+#include "Display/MCU/VPotDisplay.hpp"
+#include "Display/MCU/VUDisplay.hpp"
+#include "Display/NoteDisplay.hpp"
+#include "Display/SelectorDisplay.hpp"
+#include "Display/UpdateDisplays.hpp"
 #endif
 
 // -------------------------------------------------------------------------- //
@@ -42,13 +53,13 @@
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
 
 #ifdef Encoder_h_
-#include <MIDI_Outputs/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
+#include <MIDI_Outputs/CCRotaryEncoder.hpp>
 #endif
 
 // -------------------------------------------------------------------------- //
-#include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
 #include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
+#include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 #include <MIDI_Inputs/MIDINote.hpp>
 // #include "MIDI_Inputs/MIDI_Input_VU.h" // TODO
@@ -66,25 +77,15 @@
 #include <Selectors/Transposer.h>
 
 // -------------------------------------------------------------------------- //
-#include <MIDI_Interfaces/USBMIDI_Interface.h>
-#include <MIDI_Interfaces/SerialMIDI_Interface.h>
 #include <MIDI_Interfaces/DebugMIDI_Interface.h>
+#include <MIDI_Interfaces/SerialMIDI_Interface.h>
+#include <MIDI_Interfaces/USBMIDI_Interface.h>
 
 // -------------------------------------------------------------------------- //
+#include <Hardware/ExtendedInputOutput/AnalogMultiplex.h>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <Hardware/ExtendedInputOutput/ShiftRegisterOut.h>
-#include <Hardware/ExtendedInputOutput/AnalogMultiplex.h>
 
 // -------------------------------------------------------------------------- //
-#include <MIDI_Constants/MCU.h>
 #include <MIDI_Constants/Control_Change.h>
-
-// -------------------------------------------------------------------------- //
-#ifdef DISPLAY_GFX
-#include "Display/NoteDisplay.hpp"
-#include "Display/SelectorDisplay.hpp"
-#include "Display/TimeDisplay.hpp"
-#include "Display/VPotDisplay.hpp"
-#include "Display/VUDisplay.hpp"
-#include "Display/Bitmaps/XBitmaps.h"
-#endif
+#include <MIDI_Constants/MCU.h>

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
-#include "../Helpers/EMA.h"
-#include "../Helpers/Hysteresis.h"
-#include "../Settings/SettingsWrapper.h"
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Helpers/EMA.h>
+#include <Helpers/Hysteresis.h>
+#include <Settings/SettingsWrapper.h>
 
 constexpr static uint8_t ADC_BITS = 10;
 
