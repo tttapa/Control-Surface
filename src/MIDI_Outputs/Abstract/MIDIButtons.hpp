@@ -27,6 +27,10 @@ class MIDIButtons : public MIDIOutputElement {
                     (addressIncrement & 0xF)) {}
 
   public:
+    void begin() final override {
+        for (Button &button : buttons)
+            button.begin();
+    }
     void update() final override {
         uint8_t channel = baseChannel;
         uint8_t address = baseAddress;

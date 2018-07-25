@@ -32,6 +32,10 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
           increment((channelIncrement << 4) | (addressIncrement & 0xF)) {}
 
   public:
+    void begin() final override {
+        for (Button &button : buttons)
+            button.begin();
+    }
     void update() final override {
         uint8_t channel = getChannel(baseChannel);
         uint8_t address = getAddress(baseAddress);

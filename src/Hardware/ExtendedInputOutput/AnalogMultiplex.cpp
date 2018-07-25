@@ -19,7 +19,6 @@ analog_t AnalogMultiplex::analogRead(pin_t pin) {
 }
 
 void AnalogMultiplex::begin() {
-    // ExtIO::pinMode(analogPin, INPUT);
     for (uint8_t i = 0; i < nb_addressPins; i++)
         ExtIO::pinMode(addressPins[i], OUTPUT);
 }

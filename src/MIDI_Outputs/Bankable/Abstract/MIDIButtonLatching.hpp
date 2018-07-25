@@ -30,6 +30,7 @@ class MIDIButtonLatching : public MIDIOutputElement,
           baseAddress(baseAddress), baseChannel(baseChannel) {}
 
   public:
+    void begin() final override { button.begin(); }
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling || state == Button::Rising) {

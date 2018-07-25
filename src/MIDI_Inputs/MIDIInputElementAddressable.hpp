@@ -14,6 +14,7 @@ class MIDIInputElementAddressable {
   public:
     virtual ~MIDIInputElementAddressable() = default;
 
+    virtual void begin() {}
     /**
      * @brief   Update the display of the input element.
      */

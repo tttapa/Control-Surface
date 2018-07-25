@@ -8,8 +8,9 @@ using namespace ::testing;
 TEST(NoteButtonLatching, pressAndRelease) {
     MockMIDI_Interface midi;
 
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     NoteButtonLatching button(2, 0x3C, 7);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    button.begin();
 
     // Still released
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -49,8 +50,9 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
 
     Bank bank(4);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Bankable::NoteButtonLatching button(bank, 2, 0x3C, 7);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    button.begin();
 
     // Still released
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -88,8 +90,9 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
 
     Bank bank(4);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Bankable::NoteButtonLatching button(bank, 2, 0x3C, 7);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    button.begin();
 
     // Change bank setting
     bank.setBankSetting(1);
@@ -130,8 +133,9 @@ TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
 
     Bank bank(4);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Bankable::NoteButtonLatching button(bank, 2, 0x3C, 7);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    button.begin();
 
     // Still released
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))

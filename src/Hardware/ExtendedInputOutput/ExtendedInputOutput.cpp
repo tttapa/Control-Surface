@@ -1,6 +1,7 @@
 #include "ExtendedInputOutput.h"
 #include "ExtendedIOElement.h"
 #include <Arduino.h>
+#include <Helpers/Debug.hpp>
 
 namespace ExtIO {
 
@@ -13,6 +14,7 @@ ExtendedIOElement *getIOElementOfPin(pin_t pin) {
 }
 
 void pinMode(pin_t pin, uint8_t mode) {
+    DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(mode));
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::pinMode(pin, mode);
     } else {
@@ -24,6 +26,7 @@ void pinMode(pin_t pin, uint8_t mode) {
 void pinMode(int pin, uint8_t mode) { pinMode((pin_t)pin, mode); }
 
 void digitalWrite(pin_t pin, uint8_t val) {
+    DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::digitalWrite(pin, val);
     } else {
@@ -35,6 +38,7 @@ void digitalWrite(pin_t pin, uint8_t val) {
 void digitalWrite(int pin, uint8_t val) { digitalWrite((pin_t)pin, val); }
 
 int digitalRead(pin_t pin) {
+    // DEBUGFN(DEBUGVAR(pin));
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         return ::digitalRead(pin);
     } else {

@@ -22,6 +22,11 @@ class MIDIInputElementChannelPressure : public MIDIInputElement {
         LinkedList::remove(this, first, last);
     }
 
+    static void beginAll() {
+        for (MIDIInputElementChannelPressure *el = first; el; el = el->next)
+            el->begin();
+    }
+
     /**
      * @brief   Reset all MIDIInputElementChannelPressure elements to their initial
      *          state.

@@ -8,8 +8,9 @@ using namespace ::testing;
  * Upon construction, the button pin should be set to `INPUT_PULLUP`.
  */
 TEST(Button, construct) {
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Button b(2);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    b.begin();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
@@ -17,8 +18,9 @@ TEST(Button, construct) {
  * If the pin state is always high, the button state should be `Released`.
  */
 TEST(Button, released) {
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Button b(2);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    b.begin();
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
@@ -36,8 +38,9 @@ TEST(Button, released) {
  * `Falling`.
  */
 TEST(Button, falling) {
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Button b(2);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    b.begin();
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
@@ -50,8 +53,9 @@ TEST(Button, falling) {
  * If two successive readings are low, the state should be `Pressed`.
  */
 TEST(Button, pressed) {
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Button b(2);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    b.begin();
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
@@ -69,8 +73,9 @@ TEST(Button, pressed) {
  * the state should be `Rising`.
  */
 TEST(Button, rising) {
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Button b(2);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    b.begin();
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
@@ -101,8 +106,9 @@ TEST(Button, rising) {
  * ```
  */
 TEST(Button, debouncePressed) {
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Button b(2);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    b.begin();
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
@@ -153,8 +159,9 @@ TEST(Button, debouncePressed) {
  * ```
  */
 TEST(Button, debounceReleased) {
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     Button b(2);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    b.begin();
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));

@@ -63,6 +63,9 @@ class ExtendedIOElement {
      * @brief   Initialize the extended IO element.
      */
     virtual void begin() = 0;
+
+    static void beginAll();
+
     /**
      * @brief   Update the extended IO element:
      *          write the internal state to the physical outputs,

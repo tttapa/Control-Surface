@@ -48,6 +48,7 @@ class MIDIRotaryEncoder : public BankableMIDIOutputAddressable,
 #endif
 
   public:
+    void begin() final override {}
     void update() final override {
         uint8_t channel = getChannel(baseChannel);
         uint8_t address = getAddress(baseAddress);

@@ -48,6 +48,10 @@ void ButtonMatrix<nb_rows, nb_cols>::init() {
     // the state of one of the buttons
     prevStates = new uint8_t[(nb_cols * nb_rows + 7) / 8];
     memset(prevStates, 0xFF, sizeof(uint8_t[(nb_cols * nb_rows + 7) / 8]));
+}
+
+template <uint8_t nb_rows, uint8_t nb_cols>
+void ButtonMatrix<nb_rows, nb_cols>::begin() {
     // make all columns input pins and enable
     // the internal pull-up resistors
     for (const pin_t &colPin : colPins)

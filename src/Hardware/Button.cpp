@@ -2,9 +2,9 @@
 
 using namespace ExtIO;
 
-Button::Button(pin_t pin) : pin(pin) {
-    ExtIO::pinMode(pin, INPUT_PULLUP);
-}
+Button::Button(pin_t pin) : pin(pin) {}
+
+void Button::begin() { ExtIO::pinMode(pin, INPUT_PULLUP); }
 
 void Button::invert() { invertState = true; }
 

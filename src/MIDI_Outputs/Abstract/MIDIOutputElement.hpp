@@ -17,6 +17,13 @@ class MIDIOutputElement {
   public:
     virtual ~MIDIOutputElement() { LinkedList::remove(this, first, last); }
 
+    virtual void begin() = 0;
+
+    static void beginAll() {
+        for (MIDIOutputElement *el = first; el; el = el->next)
+            el->begin();
+    }
+
     virtual void update() = 0;
 
     static void updateAll() {

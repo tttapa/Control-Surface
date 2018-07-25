@@ -20,6 +20,11 @@ class MIDIInputElementCC : public MIDIInputElementAddressable {
      */
     virtual ~MIDIInputElementCC() { LinkedList::remove(this, first, last); }
 
+    static void beginAll() {
+        for (MIDIInputElementCC *el = first; el; el = el->next)
+            el->begin();
+    }
+
     /**
      * @brief   Update all MIDIInputElementCC elements.
      */

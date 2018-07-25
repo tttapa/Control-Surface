@@ -34,6 +34,8 @@ class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
           addresses(addresses), baseChannel(channel) {}
 
   public:
+    void begin() final override { ButtonMatrix<nb_rows, nb_cols>::begin(); }
+
     void update() final override { ButtonMatrix<nb_rows, nb_cols>::refresh(); }
 
   private:

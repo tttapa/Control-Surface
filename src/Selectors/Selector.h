@@ -65,7 +65,6 @@ class Selector {
             mode = SINGLE_SWITCH;
         else
             mode = SINGLE_BUTTON;
-        pinMode(switchPin, INPUT_PULLUP);
         LinkedList::append(this, first, last);
     }
     /**
@@ -116,8 +115,6 @@ class Selector {
             mode = SINGLE_SWITCH_LED;
         else
             mode = SINGLE_BUTTON_LED;
-        pinMode(switchPin, INPUT_PULLUP);
-        pinMode(ledPin, OUTPUT);
         LinkedList::append(this, first, last);
     }
 
@@ -147,8 +144,6 @@ class Selector {
         this->switchPins = new pin_t[N];
         copy(this->switchPins, switchPins);
         mode = MULTIPLE_BUTTONS;
-        for (uint8_t i = 0; i < nb_settings; i++)
-            pinMode(this->switchPins[i], INPUT_PULLUP);
         LinkedList::append(this, first, last);
     }
     /**
@@ -237,21 +232,15 @@ class Selector {
         if (N == 1) {
             dbButton1.pin = switchPins[0];
             mode = INCREMENT_LEDS;
-            pinMode(dbButton1.pin, INPUT_PULLUP);
         } else if (N == 2) {
             dbButton1.pin = switchPins[0];
             dbButton2.pin = switchPins[1];
             mode = INCREMENT_DECREMENT_LEDS;
-            pinMode(dbButton1.pin, INPUT_PULLUP);
-            pinMode(dbButton2.pin, INPUT_PULLUP);
         } else {
             this->switchPins = new pin_t[N];
             copy(this->switchPins, switchPins);
             mode = MULTIPLE_BUTTONS_LEDS;
-            for (uint8_t i = 0; i < nb_settings; i++)
-                pinMode(switchPins[i], INPUT_PULLUP);
         }
-        initLEDs();
         LinkedList::append(this, first, last);
     }
 
@@ -306,16 +295,14 @@ class Selector {
         static_assert(N <= 2, "Error: maximum number of buttons in the "
                               "increment/decrement configuration is 2. ");
         if (N == 1) {
+            sprintf(pin, "%d", switchPins[0]); // TODO
             dbButton1.pin = switchPins[0];
             mode = INCREMENT;
-            pinMode(dbButton1.pin, INPUT_PULLUP);
             LinkedList::append(this, first, last);
         } else if (N == 2) {
             dbButton1.pin = switchPins[0];
             dbButton2.pin = switchPins[1];
             mode = INCREMENT_DECREMENT;
-            pinMode(dbButton1.pin, INPUT_PULLUP);
-            pinMode(dbButton2.pin, INPUT_PULLUP);
             LinkedList::append(this, first, last);
         }
     }
@@ -325,6 +312,11 @@ class Selector {
         delete[] ledPins;
         LinkedList::remove(this, first, last);
     }
+
+    void begin();
+
+    static void beginAll();
+
     /**
      * @brief   Refresh the Selector: read all buttons and update the setting
      *          if necessary.
@@ -379,7 +371,9 @@ class Selector {
     struct debouncedButton {
         pin_t pin;
         bool prevState = HIGH;
-    } dbButton1, dbButton2;
+    };
+    debouncedButton dbButton1;
+    debouncedButton dbButton2;
 
     // Edit this in ../Settings/Settings.h
     const unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
@@ -401,6 +395,7 @@ class Selector {
     } mode;
 
     void initLEDs();
+    void initSwitches();
     void updateLEDs(uint8_t newSetting);
     bool debounceButton(debouncedButton &button);
 
@@ -423,4 +418,7 @@ class Selector {
      *          function call to updateImpl.
      */
     virtual void updateImpl(uint8_t newSetting) {}
+
+    // TODO: remove
+    char pin[32] = {'\0'};
 };

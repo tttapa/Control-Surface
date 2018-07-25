@@ -11,12 +11,17 @@ Control_Surface_ &Control_Surface_::getInstance() {
 }
 
 void Control_Surface_::begin() {
-    MIDI().begin(); // initialize the MIDI interface
-    DisplayInterface::beginAll(); // initialize all displays
 #if defined(PrintStream_h) && defined(ARDUINO) && defined(DEBUG_OUT)
     DEBUG_OUT.begin(115200);
-    DEBUG_OUT << leadingzeros;
 #endif
+    ExtendedIOElement::beginAll();
+    MIDI().begin();               // initialize the MIDI interface
+    DisplayInterface::beginAll(); // initialize all displays
+    MIDIOutputElement::beginAll();
+    MIDIInputElementCC::beginAll();
+    MIDIInputElementChannelPressure::beginAll();
+    MIDIInputElementNote::beginAll();
+    Selector::beginAll();
 }
 
 void Control_Surface_::loop() {

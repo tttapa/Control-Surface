@@ -37,6 +37,7 @@ class ButtonMatrix {
      */
     ~ButtonMatrix();
 
+    void begin();
     void refresh();
 
   private:

@@ -37,6 +37,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
           baseAddress(baseAddress), baseChannel(baseChannel) {}
 
   public:
+    void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
             Sender::send(filteredAnalog.getValue(), getChannel(baseChannel),
@@ -89,6 +90,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
           channel(channel) {}
 
   public:
+    void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
             Sender::send(filteredAnalog.getValue(), getChannel(channel));

@@ -5,9 +5,9 @@
 
 class MIDINoteLED_Base : public virtual MIDINote_Base {
   public:
-    MIDINoteLED_Base(pin_t ledPin) : ledPin(ledPin) {
-        ExtIO::pinMode(ledPin, OUTPUT);
-    }
+    MIDINoteLED_Base(pin_t ledPin) : ledPin(ledPin) {}
+
+    void begin() override { ExtIO::pinMode(ledPin, OUTPUT); }
 
   private:
     void display() const override {

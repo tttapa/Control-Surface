@@ -13,6 +13,8 @@ class MIDIInputElement {
   public:
     virtual ~MIDIInputElement() = default;
 
+    virtual void begin() {}
+
     /**
      * @brief   Update the display of the input element.
      */

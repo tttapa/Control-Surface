@@ -7,50 +7,104 @@ using namespace ExtIO;
 Selector *Selector::last = nullptr;
 Selector *Selector::first = nullptr;
 
+void Selector::begin() {
+    initSwitches();
+    initLEDs();
+}
+
+void Selector::beginAll() {
+    for (Selector *el = first; el; el = el->next)
+        el->begin();
+}
+
+void Selector::initSwitches() {
+    switch (mode) {
+        case SINGLE_SWITCH_LED:
+        case SINGLE_BUTTON_LED: {
+            pinMode(ledPin, OUTPUT);
+        } // fall through
+        case SINGLE_SWITCH:
+        case SINGLE_BUTTON: {
+            pinMode(dbButton1.pin, INPUT_PULLUP);
+        } break;
+        case MULTIPLE_BUTTONS:
+        case MULTIPLE_BUTTONS_LEDS: {
+            for (uint8_t i = 0; i < nb_settings; i++)
+                pinMode(switchPins[i], INPUT_PULLUP);
+        } break;
+
+        case INCREMENT_DECREMENT_LEDS:
+        case INCREMENT_DECREMENT: {
+            pinMode(dbButton1.pin, INPUT_PULLUP);
+            pinMode(dbButton2.pin, INPUT_PULLUP);
+        } break;
+
+        case INCREMENT_LEDS:
+        case INCREMENT: {
+            DEBUGFN(DEBUGVAR(pin));
+            DEBUGFN(DEBUGVAR(dbButton1.pin));
+            pinMode(dbButton1.pin, INPUT_PULLUP);
+        } break;
+    }
+}
+
+void Selector::initLEDs() {
+    switch (mode) {
+        case INCREMENT_LEDS:
+        case INCREMENT_DECREMENT_LEDS:
+        case MULTIPLE_BUTTONS_LEDS: {
+            for (uint8_t i = 0; i < nb_settings; i++)
+                pinMode(ledPins[i], OUTPUT);
+            digitalWrite(ledPins[0], HIGH);
+        } break;
+    }
+}
+
 void Selector::update() {
     uint8_t newSetting = Setting;
     switch (mode) {
-    case SINGLE_SWITCH:
-    case SINGLE_SWITCH_LED: {
-        newSetting = (uint8_t)(!digitalRead(dbButton1.pin));
-    } break;
+        case SINGLE_SWITCH:
+        case SINGLE_SWITCH_LED: {
+            newSetting = (uint8_t)(!digitalRead(dbButton1.pin));
+        } break;
 
-    case SINGLE_BUTTON:
-    case SINGLE_BUTTON_LED: {
-        if (debounceButton(dbButton1))
-            newSetting = !Setting; // Toggle Setting between 0 and 1
-    } break;
+        case SINGLE_BUTTON:
+        case SINGLE_BUTTON_LED: {
+            if (debounceButton(dbButton1))
+                newSetting = !Setting; // Toggle Setting between 0 and 1
+        } break;
 
-    case MULTIPLE_BUTTONS:
-    case MULTIPLE_BUTTONS_LEDS: {
-        for (uint8_t i = 0; i < nb_settings; i++) {
-            if (digitalRead(switchPins[i]) == LOW) {
-                newSetting = i;
-                break;
+        case MULTIPLE_BUTTONS:
+        case MULTIPLE_BUTTONS_LEDS: {
+            for (uint8_t i = 0; i < nb_settings; i++) {
+                if (digitalRead(switchPins[i]) == LOW) {
+                    newSetting = i;
+                    break;
+                }
             }
-        }
-    } break;
+        } break;
 
-    case INCREMENT_DECREMENT_LEDS:
-    case INCREMENT_DECREMENT: {
-        if (debounceButton(dbButton1))
-            newSetting = Setting < nb_settings - 1
-                             ? Setting + 1
-                             : 0; // Increment Setting number or wrap around
-        if (debounceButton(dbButton2))
-            newSetting =
-                Setting == 0
-                    ? nb_settings - 1
-                    : Setting - 1; // Decrement Setting number or wrap around
-    } break;
+        case INCREMENT_DECREMENT_LEDS:
+        case INCREMENT_DECREMENT: {
+            if (debounceButton(dbButton1))
+                newSetting = Setting < nb_settings - 1
+                                 ? Setting + 1
+                                 : 0; // Increment Setting number or wrap around
+            if (debounceButton(dbButton2))
+                newSetting =
+                    Setting == 0
+                        ? nb_settings - 1
+                        : Setting -
+                              1; // Decrement Setting number or wrap around
+        } break;
 
-    case INCREMENT_LEDS:
-    case INCREMENT: {
-        if (debounceButton(dbButton1))
-            newSetting = Setting < nb_settings - 1
-                             ? Setting + 1
-                             : 0; // Increment Setting number or wrap around
-    } break;
+        case INCREMENT_LEDS:
+        case INCREMENT: {
+            if (debounceButton(dbButton1))
+                newSetting = Setting < nb_settings - 1
+                                 ? Setting + 1
+                                 : 0; // Increment Setting number or wrap around
+        } break;
     }
 
     if (newSetting != Setting) {
@@ -70,51 +124,34 @@ void Selector::setSetting(uint8_t newSetting) {
 
 const char *Selector::getMode() {
     switch (mode) {
-    case SINGLE_BUTTON:
-        return "SINGLE_BUTTON";
-    case SINGLE_BUTTON_LED:
-        return "SINGLE_BUTTON_LED";
-    case SINGLE_SWITCH:
-        return "SINGLE_SWITCH";
-    case SINGLE_SWITCH_LED:
-        return "SINGLE_SWITCH_LED";
-    case MULTIPLE_BUTTONS:
-        return "MULTIPLE_BUTTONS";
-    case MULTIPLE_BUTTONS_LEDS:
-        return "MULTIPLE_BUTTONS_LEDS";
-    case INCREMENT_DECREMENT:
-        return "INCREMENT_DECREMENT";
-    case INCREMENT_DECREMENT_LEDS:
-        return "INCREMENT_DECREMENT_LEDS";
-    case INCREMENT:
-        return "INCREMENT";
-    case INCREMENT_LEDS:
-        return "INCREMENT_LEDS";
+        case SINGLE_BUTTON: return "SINGLE_BUTTON";
+        case SINGLE_BUTTON_LED: return "SINGLE_BUTTON_LED";
+        case SINGLE_SWITCH: return "SINGLE_SWITCH";
+        case SINGLE_SWITCH_LED: return "SINGLE_SWITCH_LED";
+        case MULTIPLE_BUTTONS: return "MULTIPLE_BUTTONS";
+        case MULTIPLE_BUTTONS_LEDS: return "MULTIPLE_BUTTONS_LEDS";
+        case INCREMENT_DECREMENT: return "INCREMENT_DECREMENT";
+        case INCREMENT_DECREMENT_LEDS: return "INCREMENT_DECREMENT_LEDS";
+        case INCREMENT: return "INCREMENT";
+        case INCREMENT_LEDS: return "INCREMENT_LEDS";
     }
     return ""; // Keeps the compiler happy
 }
 
-void Selector::initLEDs() {
-    for (uint8_t i = 0; i < nb_settings; i++)
-        pinMode(ledPins[i], OUTPUT);
-    digitalWrite(ledPins[0], HIGH);
-}
-
 void Selector::updateLEDs(uint8_t newSetting) {
     switch (mode) {
-    case SINGLE_SWITCH_LED:
-    case SINGLE_BUTTON_LED: {
-        digitalWrite(ledPin, newSetting);
-    } break;
+        case SINGLE_SWITCH_LED:
+        case SINGLE_BUTTON_LED: {
+            digitalWrite(ledPin, newSetting);
+        } break;
 
-    case MULTIPLE_BUTTONS_LEDS:
-    case INCREMENT_DECREMENT_LEDS:
-    case INCREMENT_LEDS: {
-        digitalWrite(ledPins[Setting], LOW);
-        digitalWrite(ledPins[newSetting], HIGH);
-    } break;
-    default:
-        break;
+        case MULTIPLE_BUTTONS_LEDS:
+        case INCREMENT_DECREMENT_LEDS:
+        case INCREMENT_LEDS: {
+            digitalWrite(ledPins[Setting], LOW);
+            digitalWrite(ledPins[newSetting], HIGH);
+        } break;
+        default: break;
     }
 }
 

@@ -11,6 +11,11 @@ ExtendedIOElement::~ExtendedIOElement() {
     LinkedList::remove(this, first, last);
 }
 
+void ExtendedIOElement::beginAll() {
+    for (ExtendedIOElement *el = first; el; el = el->next)
+        el->begin();
+}
+
 pin_t ExtendedIOElement::pin(pin_t p) { return p + start; }
 
 pin_t ExtendedIOElement::getEnd() { return end; }

@@ -13,9 +13,11 @@ class Button {
      *
      * @param   pin
      *          The digital pin to read from. The internal pull-up resistor
-     *          will be enabled.
+     *          will be enabled when `begin` is called.
      */
     Button(pin_t pin);
+
+    void begin();
 
     /**
      * @brief Invert the state of all buttons (button pressed is HIGH instead of

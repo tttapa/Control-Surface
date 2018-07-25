@@ -9,6 +9,7 @@ TEST(NoteButtonMatrix, pressAndRelease) {
 
     constexpr uint8_t channel = 1;
     AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
+    NoteButtonMatrix<3, 2> matrix = {{2, 3, 4}, {5, 6}, addresses, channel};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT));
@@ -17,7 +18,7 @@ TEST(NoteButtonMatrix, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(5, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(6, INPUT_PULLUP));
 
-    NoteButtonMatrix<3, 2> matrix = {{2, 3, 4}, {5, 6}, addresses, channel};
+    matrix.begin();
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT));
@@ -82,6 +83,9 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     constexpr uint8_t channel = 1;
     AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
 
+    Bankable::NoteButtonMatrix<3, 2> matrix = {
+        bank, {2, 3, 4}, {5, 6}, addresses, channel};
+
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(4, INPUT));
@@ -89,8 +93,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(5, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(6, INPUT_PULLUP));
 
-    Bankable::NoteButtonMatrix<3, 2> matrix = {
-        bank, {2, 3, 4}, {5, 6}, addresses, channel};
+    matrix.begin();
 
     // Press
 

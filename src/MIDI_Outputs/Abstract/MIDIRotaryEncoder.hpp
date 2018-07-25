@@ -38,6 +38,7 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
 #endif
 
   public:
+    void begin() final override {}
     void update() final override {
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;

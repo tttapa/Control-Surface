@@ -10,6 +10,9 @@ class VPotRingLEDs_Base : public virtual VPotRing_Base {
   public:
     VPotRingLEDs_Base(const pin_t (&ledPins)[11]) {
         copy(this->ledPins, ledPins);
+    }
+
+    void begin() override {
         for (const pin_t &pin : ledPins)
             ExtIO::pinMode(pin, OUTPUT);
     }

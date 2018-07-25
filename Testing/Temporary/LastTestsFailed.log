@@ -1,2 +1,3 @@
-34:MCUTimeDisplay.getBarsGetBeatsGetFrames
-101:Tests
+66:NoteButtonMatrix.pressAndRelease
+67:NoteButtonMatrixBankable.pressChangeSettingRelease
+102:Tests
