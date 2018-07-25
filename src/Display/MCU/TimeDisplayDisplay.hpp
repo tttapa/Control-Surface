@@ -13,14 +13,19 @@ class TimeDisplayDisplay : public DisplayElement {
                        uint8_t size, uint16_t color)
         : DisplayElement(display), timedisplay(timedisplay), x(loc.x), y(loc.y),
           size(size), color(color) {}
-    void draw() {
+
+    void draw() override {
         display.setTextColor(color);
         display.setTextSize(size);
         display.setCursor(x, y);
+
         char barStr[5], beatStr[3], frameStr[4];
         timedisplay.getBars(barStr);
         timedisplay.getBeats(beatStr);
         timedisplay.getFrames(frameStr);
+        DEBUGFN(strlen(barStr) << " " << barStr);
+        DEBUGFN(strlen(beatStr) << " " << beatStr);
+        DEBUGFN(strlen(frameStr) << " " << frameStr);
         display.print(barStr);
         display.print(' ');
         display.print(beatStr);

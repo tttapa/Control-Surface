@@ -1121,6 +1121,33 @@ test/Helpers/tests-linked-list.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/tests-linked-list.cpp.s
 .PHONY : test/Helpers/tests-linked-list.cpp.s
 
+test/MIDI_Inputs/test-MCU_TimeDisplay.o: test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.o
+
+.PHONY : test/MIDI_Inputs/test-MCU_TimeDisplay.o
+
+# target to build an object file
+test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.o
+.PHONY : test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.o
+
+test/MIDI_Inputs/test-MCU_TimeDisplay.i: test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.i
+
+.PHONY : test/MIDI_Inputs/test-MCU_TimeDisplay.i
+
+# target to preprocess a source file
+test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.i
+.PHONY : test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.i
+
+test/MIDI_Inputs/test-MCU_TimeDisplay.s: test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.s
+
+.PHONY : test/MIDI_Inputs/test-MCU_TimeDisplay.s
+
+# target to generate assembly for a file
+test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.s
+.PHONY : test/MIDI_Inputs/test-MCU_TimeDisplay.cpp.s
+
 test/MIDI_Inputs/tests-MCU_VU.o: test/MIDI_Inputs/tests-MCU_VU.cpp.o
 
 .PHONY : test/MIDI_Inputs/tests-MCU_VU.o
@@ -1452,6 +1479,9 @@ help:
 	@echo "... test/Helpers/tests-linked-list.o"
 	@echo "... test/Helpers/tests-linked-list.i"
 	@echo "... test/Helpers/tests-linked-list.s"
+	@echo "... test/MIDI_Inputs/test-MCU_TimeDisplay.o"
+	@echo "... test/MIDI_Inputs/test-MCU_TimeDisplay.i"
+	@echo "... test/MIDI_Inputs/test-MCU_TimeDisplay.s"
 	@echo "... test/MIDI_Inputs/tests-MCU_VU.o"
 	@echo "... test/MIDI_Inputs/tests-MCU_VU.i"
 	@echo "... test/MIDI_Inputs/tests-MCU_VU.s"

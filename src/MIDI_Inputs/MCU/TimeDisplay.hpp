@@ -11,8 +11,8 @@ class TimeDisplay : public SevenSegmentDisplay<TimeDisplayLength> {
   public:
     TimeDisplay(uint8_t channel = 1)
         : SevenSegmentDisplay<TimeDisplayLength>(channel, TimeDisplayAddress) {}
-    void print()
-        const { // TODO: add support for 5-digit bar counts, maybe using decimalPt?
+    // TODO: add support for 5-digit bar counts
+    void print() const {
         char barStr[5], beatStr[3], frameStr[4];
         getBars(barStr);
         getBeats(beatStr);

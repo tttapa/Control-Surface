@@ -4,7 +4,11 @@
         "*.tcc": "cpp",
         "array": "cpp",
         "initializer_list": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp"
     },
     "files.exclude": {
         "**/.git": true,

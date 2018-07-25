@@ -29,7 +29,7 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
      */
     virtual bool updateImpl(const MIDI_message_matcher &midimsg) {
         uint8_t targetAddress = midimsg.data1;
-        uint8_t index = targetAddress - getBaseAddress();
+        uint8_t index = LENGTH - (targetAddress - getBaseAddress()) - 1;
         // decimal point → 0x80, no decimal point → 0x00
         uint8_t decimalPt = (midimsg.data2 & 0x40) << 1;
         uint8_t data2 = midimsg.data2 & 0x3F;
@@ -61,12 +61,14 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
      */
     void getText(char *buffer, uint8_t offset = 0,
                  uint8_t length = LENGTH) const {
-        uint8_t end = offset + length;
-        if (end > LENGTH)
-            end = LENGTH;
-        for (uint8_t i = offset; i < end; i++)
-            buffer[i] = getCharacterAt(i);
-        buffer[end] = '\0';
+        if (offset >= LENGTH)
+            offset = LENGTH - 1;
+        if (length > LENGTH - offset)
+            length = LENGTH - offset;
+        DEBUGFN(DEBUGVAR(offset) << '\t' << DEBUGVAR(length));
+        for (uint8_t i = 0; i < length; i++)
+            buffer[i] = getCharacterAt(i + offset);
+        buffer[length] = '\0';
     }
 
     /**
