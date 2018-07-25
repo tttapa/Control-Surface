@@ -12,6 +12,7 @@ Control_Surface_ &Control_Surface_::getInstance() {
 
 void Control_Surface_::begin() {
     MIDI().begin(); // initialize the MIDI interface
+    DisplayInterface::beginAll(); // initialize all displays
 #if defined(PrintStream_h) && defined(ARDUINO) && defined(DEBUG_OUT)
     DEBUG_OUT.begin(115200);
     DEBUG_OUT << leadingzeros;
@@ -110,6 +111,17 @@ void Control_Surface_::updateInputs() {
     MIDIInputElementChannelPressure::updateAll();
 }
 
-void updateDisplays() __attribute__((weak));
+void Control_Surface_::updateDisplays() {
+    static unsigned long previousRefresh = millis();
+
+    if (millis() - previousRefresh < 1000 / MAX_FPS)
+        return;
+    previousRefresh += 1000 / MAX_FPS;
+
+    DisplayInterface::clearAll();
+    DisplayInterface::drawAllBackgrounds();
+    DisplayElement::drawAll();
+    DisplayInterface::displayAll();
+}
 
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();

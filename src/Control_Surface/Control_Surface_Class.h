@@ -2,10 +2,8 @@
 
 #include <MIDI_Interfaces/USBMIDI_Interface.h>
 
-#ifdef DISPLAY_GFX
-#include <Display/Display.hpp>
 #include <Display/DisplayElement.hpp>
-#endif
+#include <Display/DisplayInterface.hpp>
 
 class Control_Surface_ {
   public:
@@ -49,8 +47,8 @@ class Control_Surface_ {
     void updateMidiInput();
 
     void updateInputs();
-};
 
-void updateDisplays();
+    void updateDisplays();
+};
 
 extern Control_Surface_ &Control_Surface;

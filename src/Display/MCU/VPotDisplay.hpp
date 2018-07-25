@@ -1,24 +1,26 @@
 #pragma once
 
 #include <Display/DisplayElement.hpp>
+#include <Display/DisplayInterface.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
+#include <math.h>
 
 namespace MCU {
 
 class VPotDisplay : public DisplayElement {
 
   public:
-    VPotDisplay(Adafruit_GFX &display, VPotRing_Base &vpot, Location loc,
+    VPotDisplay(DisplayInterface &display, VPotRing_Base &vpot, Location loc,
                 uint16_t radius, uint16_t innerRadius, uint16_t color)
         : DisplayElement(display), vpot(vpot), x(loc.x + radius),
           y(loc.y + radius), radius(radius), innerRadius(innerRadius),
           color(color) {}
     void draw() {
-        drawGoodCircle(display, x, y, radius, color);
+        display.drawCircle(x, y, radius, color);
         if (vpot.getCenterLed())
-            fillGoodCircle(display, x, y, innerRadius / 4, color);
+            display.fillCircle(x, y, innerRadius / 4, color);
         else
-            drawGoodCircle(display, x, y, innerRadius / 4, color);
+            display.drawCircle(x, y, innerRadius / 4, color);
         uint8_t startOn = vpot.getStartOn();
         uint8_t startOff = vpot.getStartOff();
         for (uint8_t segment = startOn; segment < startOff; segment++)
@@ -49,5 +51,3 @@ class VPotDisplay : public DisplayElement {
 };
 
 } // namespace MCU
-
-const float MCU::VPotDisplay::angleSpacing __attribute__((weak)) = 0.4887; // 28°

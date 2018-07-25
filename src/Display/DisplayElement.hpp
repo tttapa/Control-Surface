@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Display/DisplayHelpers.hpp>
+#include <Display/DisplayInterface.hpp>
 #include <Helpers/LinkedList.h>
 
 struct Location {
@@ -9,18 +9,23 @@ struct Location {
 };
 
 class DisplayElement {
-  public:
-    DisplayElement(Adafruit_GFX &display) : display(display) {
+  protected:
+    DisplayElement(DisplayInterface &display) : display(display) {
         LinkedList::append(this, first, last);
     }
-    ~DisplayElement() { LinkedList::remove(this, first, last); }
 
-    static DisplayElement *getFirst() { return first; }
-    DisplayElement *getNext() { return next; }
+  public:
+    virtual ~DisplayElement() { LinkedList::remove(this, first, last); }
+
     virtual void draw() = 0;
 
+    static void drawAll() {
+        for (DisplayElement *el = first; el; el = el->next)
+            el->draw();
+    }
+
   protected:
-    Adafruit_GFX &display;
+    DisplayInterface &display;
 
     DisplayElement *next;
     DisplayElement *previous;
@@ -31,10 +36,5 @@ class DisplayElement {
     template <class Node>
     friend void LinkedList::append(Node *, Node *&, Node *&);
     template <class Node>
-    friend void LinkedList::moveDown(Node *, Node *&, Node *&);
-    template <class Node>
     friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
-
-DisplayElement *DisplayElement::first = nullptr;
-DisplayElement *DisplayElement::last = nullptr;

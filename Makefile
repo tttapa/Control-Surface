@@ -181,19 +181,6 @@ documentation/fast:
 .PHONY : documentation/fast
 
 #=============================================================================
-# Target rules for targets named Control_Surface
-
-# Build rule for target.
-Control_Surface: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Control_Surface
-.PHONY : Control_Surface
-
-# fast build rule for target.
-Control_Surface/fast:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/build
-.PHONY : Control_Surface/fast
-
-#=============================================================================
 # Target rules for targets named tests
 
 # Build rule for target.
@@ -218,6 +205,32 @@ ArduinoMock: cmake_check_build_system
 ArduinoMock/fast:
 	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/build
 .PHONY : ArduinoMock/fast
+
+#=============================================================================
+# Target rules for targets named Control_Surface
+
+# Build rule for target.
+Control_Surface: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Control_Surface
+.PHONY : Control_Surface
+
+# fast build rule for target.
+Control_Surface/fast:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/build
+.PHONY : Control_Surface/fast
+
+#=============================================================================
+# Target rules for targets named xbm
+
+# Build rule for target.
+xbm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 xbm
+.PHONY : xbm
+
+# fast build rule for target.
+xbm/fast:
+	$(MAKE) -f CMakeFiles/xbm.dir/build.make CMakeFiles/xbm.dir/build
+.PHONY : xbm/fast
 
 #=============================================================================
 # Target rules for targets named gmock_main
@@ -432,6 +445,60 @@ src/Control_Surface/Control_Surface_Class.s: src/Control_Surface/Control_Surface
 src/Control_Surface/Control_Surface_Class.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Control_Surface/Control_Surface_Class.cpp.s
 .PHONY : src/Control_Surface/Control_Surface_Class.cpp.s
+
+src/Display/DisplayElement.o: src/Display/DisplayElement.cpp.o
+
+.PHONY : src/Display/DisplayElement.o
+
+# target to build an object file
+src/Display/DisplayElement.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Display/DisplayElement.cpp.o
+.PHONY : src/Display/DisplayElement.cpp.o
+
+src/Display/DisplayElement.i: src/Display/DisplayElement.cpp.i
+
+.PHONY : src/Display/DisplayElement.i
+
+# target to preprocess a source file
+src/Display/DisplayElement.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Display/DisplayElement.cpp.i
+.PHONY : src/Display/DisplayElement.cpp.i
+
+src/Display/DisplayElement.s: src/Display/DisplayElement.cpp.s
+
+.PHONY : src/Display/DisplayElement.s
+
+# target to generate assembly for a file
+src/Display/DisplayElement.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Display/DisplayElement.cpp.s
+.PHONY : src/Display/DisplayElement.cpp.s
+
+src/Display/DisplayInterface.o: src/Display/DisplayInterface.cpp.o
+
+.PHONY : src/Display/DisplayInterface.o
+
+# target to build an object file
+src/Display/DisplayInterface.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Display/DisplayInterface.cpp.o
+.PHONY : src/Display/DisplayInterface.cpp.o
+
+src/Display/DisplayInterface.i: src/Display/DisplayInterface.cpp.i
+
+.PHONY : src/Display/DisplayInterface.i
+
+# target to preprocess a source file
+src/Display/DisplayInterface.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Display/DisplayInterface.cpp.i
+.PHONY : src/Display/DisplayInterface.cpp.i
+
+src/Display/DisplayInterface.s: src/Display/DisplayInterface.cpp.s
+
+.PHONY : src/Display/DisplayInterface.s
+
+# target to generate assembly for a file
+src/Display/DisplayInterface.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Display/DisplayInterface.cpp.s
+.PHONY : src/Display/DisplayInterface.cpp.s
 
 src/Display/MCU/VPotDisplay.o: src/Display/MCU/VPotDisplay.cpp.o
 
@@ -1276,12 +1343,13 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... documentation"
 	@echo "... install/local"
+	@echo "... documentation"
 	@echo "... edit_cache"
-	@echo "... Control_Surface"
 	@echo "... tests"
 	@echo "... ArduinoMock"
+	@echo "... Control_Surface"
+	@echo "... xbm"
 	@echo "... test"
 	@echo "... rebuild_cache"
 	@echo "... install/strip"
@@ -1309,6 +1377,12 @@ help:
 	@echo "... src/Control_Surface/Control_Surface_Class.o"
 	@echo "... src/Control_Surface/Control_Surface_Class.i"
 	@echo "... src/Control_Surface/Control_Surface_Class.s"
+	@echo "... src/Display/DisplayElement.o"
+	@echo "... src/Display/DisplayElement.i"
+	@echo "... src/Display/DisplayElement.s"
+	@echo "... src/Display/DisplayInterface.o"
+	@echo "... src/Display/DisplayInterface.i"
+	@echo "... src/Display/DisplayInterface.s"
 	@echo "... src/Display/MCU/VPotDisplay.o"
 	@echo "... src/Display/MCU/VPotDisplay.i"
 	@echo "... src/Display/MCU/VPotDisplay.s"

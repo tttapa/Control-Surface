@@ -5,7 +5,7 @@
 
 class SelectorDisplay : public DisplayElement {
 public:
-  SelectorDisplay(Adafruit_GFX &display, Selector &selector, int16_t offset,
+  SelectorDisplay(DisplayInterface &display, Selector &selector, int16_t offset,
                   int16_t multiplier, Location loc, uint8_t size,
                   uint16_t color)
       : DisplayElement(display), selector(selector), offset(offset),

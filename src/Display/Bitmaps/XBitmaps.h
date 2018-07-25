@@ -1,8 +1,5 @@
 #pragma once
 
-#include <Display/Display.hpp>
-#include <stdint.h>
-
 /**
  * @brief A struct containing X Bitmap width, height and data.
  */
@@ -16,10 +13,10 @@ struct XBitmap
 };
 
 /**
- * @brief A namespace containing XBitmap definitions.
+ * @brief   A namespace containing XBitmap definitions.
  *
- * @note Don't edit this file directly, place your XBM image
- *       in the ./XBM folder, and run the python script in ./Scripts.
+ * @note    Don't edit this file directly, place your XBM image in the 
+ *          ./XBM folder, and run the python script in ./Scripts.
  */
 namespace XBM
 {
@@ -32,6 +29,8 @@ namespace XBM
          { name##_width, name##_height, name##_bits }
 
 // =========================================================================== //
+
+// Automatically generated file: do not edit
 
 #include "mute_10B.axbm"
 /**

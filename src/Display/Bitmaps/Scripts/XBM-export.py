@@ -85,7 +85,9 @@ for filename in sorted(os.listdir(inputdir)):
             print('Warning: invalid XBM width or height data')
         print()
 
-XBitmaps = ''
+XBitmaps = """// Automatically generated file: do not edit
+
+"""
 for bm in bitmaps:
     id = bm[0]
     width = bm[1]

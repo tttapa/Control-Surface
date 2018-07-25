@@ -16,15 +16,12 @@
 #endif
 
 // -------------------------------------------------------------------------- //
-#ifdef DISPLAY_GFX
 #include "Display/Bitmaps/XBitmaps.h"
-#include "Display/MCU/TimeDisplay.hpp"
+#include "Display/MCU/TimeDisplayDisplay.hpp"
 #include "Display/MCU/VPotDisplay.hpp"
 #include "Display/MCU/VUDisplay.hpp"
-#include "Display/NoteDisplay.hpp"
+#include "Display/NoteBitmapDisplay.hpp"
 #include "Display/SelectorDisplay.hpp"
-#include "Display/UpdateDisplays.hpp"
-#endif
 
 // -------------------------------------------------------------------------- //
 #include <Control_Surface/Control_Surface_Class.h>

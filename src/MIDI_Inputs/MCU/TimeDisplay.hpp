@@ -11,8 +11,8 @@ class TimeDisplay : public SevenSegmentDisplay<TimeDisplayLength> {
   public:
     TimeDisplay(uint8_t channel = 1)
         : SevenSegmentDisplay<TimeDisplayLength>(channel, TimeDisplayAddress) {}
-    void
-    print() { // TODO: add support for 5-digit bar counts, maybe using decimalPt?
+    void print()
+        const { // TODO: add support for 5-digit bar counts, maybe using decimalPt?
         char barStr[5], beatStr[3], frameStr[4];
         getBars(barStr);
         getBeats(beatStr);
@@ -20,21 +20,21 @@ class TimeDisplay : public SevenSegmentDisplay<TimeDisplayLength> {
         DEBUG("Bar: " << barStr << "\tBeat: " << beatStr
                       << "\tFrame: " << frameStr);
     }
-    void getBars(char *buff) {
+    void getBars(char *buff) const {
         if (getCharacterAt(5) == ' ') {
             getText(buff, 0, 3);
         } else {
             getText(buff, 0, 4);
         }
     }
-    void getBeats(char *buff) {
+    void getBeats(char *buff) const {
         if (getCharacterAt(5) == ' ') {
             getText(buff, 3, 2);
         } else {
             getText(buff, 4, 2);
         }
     }
-    void getFrames(char *buff) {
+    void getFrames(char *buff) const {
         if (getCharacterAt(5) == ' ') {
             getText(buff, 7, 3);
         } else {
