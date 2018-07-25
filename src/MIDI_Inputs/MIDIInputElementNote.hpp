@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Helpers/LinkedList.h"
+#include <Helpers/LinkedList.h>
 #include "MIDIInputElementAddressable.hpp"
 
 class MIDIInputElementNote : public MIDIInputElementAddressable {

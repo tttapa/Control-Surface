@@ -69,7 +69,7 @@ class FilteredAnalog {
 
 // ----------------------------- Implementation ----------------------------- //
 
-#include "../Control_Surface/Control_Surface_Class.h"
+#include <Control_Surface/Control_Surface_Class.h>
 
 using namespace ExtIO;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Helpers/BitArray.hpp"
+#include <Helpers/BitArray.hpp>
 #include "ExtendedIOElement.h"
 
 /**

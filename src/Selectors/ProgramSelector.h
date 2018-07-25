@@ -1,10 +1,10 @@
 #pragma once
 
 // #include <Arduino.h>
-#include "../Control_Surface/Control_Surface_Class.h"
-#include "../Helpers/Copy.hpp"
-#include "../Settings/SettingsWrapper.h"
-#include "./Selector.h"
+#include <Control_Surface/Control_Surface_Class.h>
+#include <Helpers/Copy.hpp>
+#include <Settings/SettingsWrapper.h>
+#include "Selector.h"
 
 class ProgramSelector : public Selector {
   public:

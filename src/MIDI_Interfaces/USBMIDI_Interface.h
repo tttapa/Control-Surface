@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../MIDI_Parsers/USBMIDI_Parser.h"
+#include <MIDI_Parsers/USBMIDI_Parser.h>
 #include "MIDI_Interface.h"
 
 #ifdef CORE_TEENSY

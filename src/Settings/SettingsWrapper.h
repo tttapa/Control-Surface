@@ -7,7 +7,7 @@
 
 // ------- Debug ------- //
 // ===================== //
-#include "../Helpers/Debug.hpp"
+#include <Helpers/Debug.hpp>
 
 #ifndef ARDUINO
 #undef IGNORE_SYSEX

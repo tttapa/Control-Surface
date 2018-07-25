@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../MIDI_Parsers/SerialMIDI_Parser.h"
-#include "../Settings/SettingsWrapper.h"
+#include <MIDI_Parsers/SerialMIDI_Parser.h>
+#include <Settings/SettingsWrapper.h>
 #include "MIDI_Interface.h"
 #include <Arduino.h> // Stream
 

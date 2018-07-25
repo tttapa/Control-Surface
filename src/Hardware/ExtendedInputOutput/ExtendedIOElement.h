@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Helpers/LinkedList.h"
+#include <Helpers/LinkedList.h>
 #include <stdint.h> // uint8_t
 
 typedef unsigned int pin_t;

@@ -2,10 +2,10 @@
 
 #include <string.h>
 
-#include "../Hardware/ExtendedInputOutput/ExtendedInputOutput.h"
-#include "../Helpers/Copy.hpp"
-#include "../Helpers/LinkedList.h"
-#include "../Settings/SettingsWrapper.h"
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Helpers/Copy.hpp>
+#include <Helpers/LinkedList.h>
+#include <Settings/SettingsWrapper.h>
 
 using namespace ExtIO;
 

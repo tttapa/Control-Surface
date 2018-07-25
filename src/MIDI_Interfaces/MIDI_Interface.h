@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../MIDI_Parsers/MIDI_Parser.h"
+#include <MIDI_Parsers/MIDI_Parser.h>
 
 #define MIDI_BAUD 31250
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Helpers/Copy.hpp"
+#include <Helpers/Copy.hpp>
 #include "ExtendedIOElement.h"
 #include <stdlib.h>
 

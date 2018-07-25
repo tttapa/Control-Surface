@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Banks/Bank.h"
-#include "./Selector.h"
+#include <Banks/Bank.h>
+#include "Selector.h"
 
 /**
  * @brief A class for transposing notes.
