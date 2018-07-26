@@ -73,6 +73,8 @@
 // #include <Selectors/Transposer.h> // TODO
 #include <Selectors/IncrementDecrementSelector.hpp>
 
+#include <Selectors/LEDs/IncrementDecrementSelectorLEDs.hpp>
+
 // -------------------------------------------------------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.h>
 #include <MIDI_Interfaces/SerialMIDI_Interface.h>

@@ -12,7 +12,7 @@ class IncrementDecrementSelector : public virtual Selector {
         : Selector(selectable, numberOfSettings), buttons(buttons), wrap(wrap) {
     }
 
-    void begin() override { buttons.begin(); }
+    void beginInput() override { buttons.begin(); }
 
     void update() override {
         switch (buttons.getState()) {

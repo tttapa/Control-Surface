@@ -46,6 +46,8 @@ void remove(Node *node, Node *&first, Node *&last) {
         node->next->previous = node->previous;
     if (node == first)
         first = node->next;
+    node->previous = nullptr;
+    node->next = nullptr;
 }
 
 /**
@@ -83,6 +85,11 @@ void moveDown(Node *nodeC, Node *&first, Node *&last) {
         nodeD->previous = nodeB;
     else
         last = nodeB;
+}
+
+template <class Node>
+bool contains(Node *node, Node *&first, Node *&last) {
+    return node == first || node->next != nullptr || node->previous != nullptr;
 }
 
 };

@@ -1,6 +1,7 @@
 #include "ButtonMatrix.h"
 #include <Helpers/Copy.hpp>
 #include <string.h>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 
 using namespace ExtIO;
 

@@ -1,11 +1,7 @@
 #pragma once
 
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h> // for pin_t
 #include <Settings/SettingsWrapper.h>
-#include <Helpers/Array.hpp>
-
-template <size_t N>
-using PinList = Array<pin_t, N>;
+#include <Def/Def.hpp>
 
 /**
  * @brief   A MIDI_Control_Element that reads the states of a button matrix and
@@ -35,7 +31,7 @@ class ButtonMatrix {
     /**
      * @brief   Destructor.
      */
-    ~ButtonMatrix();
+    virtual ~ButtonMatrix();
 
     void begin();
     void refresh();

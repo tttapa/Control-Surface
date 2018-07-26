@@ -13,8 +13,3 @@ struct Array {
     T *end() { return &data[N]; }
     const T *end() const { return &data[N]; }
 };
-
-// -------------------------------------------------------------------------- //
-
-template <class T, size_t nb_rows, size_t nb_cols>
-using Array2D = Array<Array<T, nb_cols>, nb_rows>;

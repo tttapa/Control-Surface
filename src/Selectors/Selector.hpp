@@ -6,6 +6,7 @@
 
 class Selector {
   protected:
+    Selector(); // Not used, only for virtual inheritance
     Selector(Selectable &selectable, setting_t numberOfSettings)
         : selectable(selectable), numberOfSettings(numberOfSettings) {
         LinkedList::append(this, first, last);
@@ -14,7 +15,13 @@ class Selector {
   public:
     virtual ~Selector() { LinkedList::remove(this, first, last); }
 
-    virtual void begin() = 0;
+    virtual void beginInput() = 0;
+    virtual void beginOutput() = 0;
+
+    void begin() {
+        beginInput();
+        beginOutput();
+    }
     static void beginAll() {
         for (Selector *sel = first; sel; sel = sel->next)
             sel->begin();
@@ -32,18 +39,15 @@ class Selector {
 
     void set(setting_t newSetting) {
         newSetting = validateSetting(newSetting);
-        onSettingChange(get(), newSetting);
-        updateDisplay(get(), newSetting);
+        selectable.select(newSetting);
+        updateOutput(get(), newSetting);
         setting = newSetting;
     }
 
     setting_t getNumberOfSettings() const { return numberOfSettings; }
 
   private:
-    virtual void onSettingChange(setting_t oldSetting, setting_t newSetting) {
-        selectable.select(newSetting);
-    }
-    virtual void updateDisplay(setting_t oldSetting, setting_t newSetting) {}
+    virtual void updateOutput(setting_t oldSetting, setting_t newSetting) {}
 
     setting_t validateSetting(setting_t setting) const {
         if (setting >= numberOfSettings) {

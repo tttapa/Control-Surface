@@ -1,10 +1,10 @@
-Start testing: Jul 26 18:08 CEST
+Start testing: Jul 26 23:12 CEST
 ----------------------------------------------------------
-1/106 Testing: Button.construct
-1/106 Test: Button.construct
+1/110 Testing: Button.construct
+1/110 Test: Button.construct
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.construct" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Button.construct" start time: Jul 26 18:08 CEST
+"Button.construct" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -23,15 +23,15 @@ Note: Google Test filter = Button.construct
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Button.construct" end time: Jul 26 18:08 CEST
+"Button.construct" end time: Jul 26 23:12 CEST
 "Button.construct" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-2/106 Testing: Button.released
-2/106 Test: Button.released
+2/110 Testing: Button.released
+2/110 Test: Button.released
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.released" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Button.released" start time: Jul 26 18:08 CEST
+"Button.released" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -50,15 +50,15 @@ Note: Google Test filter = Button.released
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Button.released" end time: Jul 26 18:08 CEST
+"Button.released" end time: Jul 26 23:12 CEST
 "Button.released" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-3/106 Testing: Button.falling
-3/106 Test: Button.falling
+3/110 Testing: Button.falling
+3/110 Test: Button.falling
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.falling" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Button.falling" start time: Jul 26 18:08 CEST
+"Button.falling" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -71,21 +71,21 @@ Note: Google Test filter = Button.falling
 [----------] 1 test from Button (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test case ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Button.falling" end time: Jul 26 18:08 CEST
+"Button.falling" end time: Jul 26 23:12 CEST
 "Button.falling" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-4/106 Testing: Button.pressed
-4/106 Test: Button.pressed
+4/110 Testing: Button.pressed
+4/110 Test: Button.pressed
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.pressed" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Button.pressed" start time: Jul 26 18:08 CEST
+"Button.pressed" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -104,15 +104,15 @@ Note: Google Test filter = Button.pressed
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Button.pressed" end time: Jul 26 18:08 CEST
+"Button.pressed" end time: Jul 26 23:12 CEST
 "Button.pressed" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-5/106 Testing: Button.rising
-5/106 Test: Button.rising
+5/110 Testing: Button.rising
+5/110 Test: Button.rising
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.rising" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Button.rising" start time: Jul 26 18:08 CEST
+"Button.rising" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -131,15 +131,15 @@ Note: Google Test filter = Button.rising
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Button.rising" end time: Jul 26 18:08 CEST
+"Button.rising" end time: Jul 26 23:12 CEST
 "Button.rising" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-6/106 Testing: Button.debouncePressed
-6/106 Test: Button.debouncePressed
+6/110 Testing: Button.debouncePressed
+6/110 Test: Button.debouncePressed
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.debouncePressed" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Button.debouncePressed" start time: Jul 26 18:08 CEST
+"Button.debouncePressed" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -152,21 +152,21 @@ Note: Google Test filter = Button.debouncePressed
 [----------] 1 test from Button (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test case ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Button.debouncePressed" end time: Jul 26 18:08 CEST
+"Button.debouncePressed" end time: Jul 26 23:12 CEST
 "Button.debouncePressed" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-7/106 Testing: Button.debounceReleased
-7/106 Test: Button.debounceReleased
+7/110 Testing: Button.debounceReleased
+7/110 Test: Button.debounceReleased
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Button.debounceReleased" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Button.debounceReleased" start time: Jul 26 18:08 CEST
+"Button.debounceReleased" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -185,15 +185,15 @@ Note: Google Test filter = Button.debounceReleased
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Button.debounceReleased" end time: Jul 26 18:08 CEST
+"Button.debounceReleased" end time: Jul 26 23:12 CEST
 "Button.debounceReleased" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-8/106 Testing: Array.initializeAndRetrieve
-8/106 Test: Array.initializeAndRetrieve
+8/110 Testing: Array.initializeAndRetrieve
+8/110 Test: Array.initializeAndRetrieve
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Array.initializeAndRetrieve" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Array.initializeAndRetrieve" start time: Jul 26 18:08 CEST
+"Array.initializeAndRetrieve" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -212,15 +212,15 @@ Note: Google Test filter = Array.initializeAndRetrieve
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Array.initializeAndRetrieve" end time: Jul 26 18:08 CEST
+"Array.initializeAndRetrieve" end time: Jul 26 23:12 CEST
 "Array.initializeAndRetrieve" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-9/106 Testing: Array.initializeAndRetrieveConst
-9/106 Test: Array.initializeAndRetrieveConst
+9/110 Testing: Array.initializeAndRetrieveConst
+9/110 Test: Array.initializeAndRetrieveConst
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Array.initializeAndRetrieveConst" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Array.initializeAndRetrieveConst" start time: Jul 26 18:08 CEST
+"Array.initializeAndRetrieveConst" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -239,15 +239,15 @@ Note: Google Test filter = Array.initializeAndRetrieveConst
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Array.initializeAndRetrieveConst" end time: Jul 26 18:08 CEST
+"Array.initializeAndRetrieveConst" end time: Jul 26 23:12 CEST
 "Array.initializeAndRetrieveConst" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-10/106 Testing: Array.write
-10/106 Test: Array.write
+10/110 Testing: Array.write
+10/110 Test: Array.write
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Array.write" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Array.write" start time: Jul 26 18:08 CEST
+"Array.write" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -266,15 +266,15 @@ Note: Google Test filter = Array.write
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Array.write" end time: Jul 26 18:08 CEST
+"Array.write" end time: Jul 26 23:12 CEST
 "Array.write" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-11/106 Testing: Array.rangeFor
-11/106 Test: Array.rangeFor
+11/110 Testing: Array.rangeFor
+11/110 Test: Array.rangeFor
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Array.rangeFor" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Array.rangeFor" start time: Jul 26 18:08 CEST
+"Array.rangeFor" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -283,25 +283,25 @@ Note: Google Test filter = Array.rangeFor
 [----------] Global test environment set-up.
 [----------] 1 test from Array
 [ RUN      ] Array.rangeFor
-[       OK ] Array.rangeFor (0 ms)
-[----------] 1 test from Array (0 ms total)
+[       OK ] Array.rangeFor (1 ms)
+[----------] 1 test from Array (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test case ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Array.rangeFor" end time: Jul 26 18:08 CEST
+"Array.rangeFor" end time: Jul 26 23:12 CEST
 "Array.rangeFor" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-12/106 Testing: Array.rangeForConst
-12/106 Test: Array.rangeForConst
+12/110 Testing: Array.rangeForConst
+12/110 Test: Array.rangeForConst
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Array.rangeForConst" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Array.rangeForConst" start time: Jul 26 18:08 CEST
+"Array.rangeForConst" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -320,15 +320,15 @@ Note: Google Test filter = Array.rangeForConst
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Array.rangeForConst" end time: Jul 26 18:08 CEST
+"Array.rangeForConst" end time: Jul 26 23:12 CEST
 "Array.rangeForConst" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-13/106 Testing: Array2D.initialize
-13/106 Test: Array2D.initialize
+13/110 Testing: Array2D.initialize
+13/110 Test: Array2D.initialize
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Array2D.initialize" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Array2D.initialize" start time: Jul 26 18:08 CEST
+"Array2D.initialize" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -347,15 +347,15 @@ Note: Google Test filter = Array2D.initialize
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Array2D.initialize" end time: Jul 26 18:08 CEST
+"Array2D.initialize" end time: Jul 26 23:12 CEST
 "Array2D.initialize" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-14/106 Testing: BitArray.construct
-14/106 Test: BitArray.construct
+14/110 Testing: BitArray.construct
+14/110 Test: BitArray.construct
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=BitArray.construct" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"BitArray.construct" start time: Jul 26 18:08 CEST
+"BitArray.construct" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -374,15 +374,15 @@ Note: Google Test filter = BitArray.construct
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"BitArray.construct" end time: Jul 26 18:08 CEST
+"BitArray.construct" end time: Jul 26 23:12 CEST
 "BitArray.construct" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-15/106 Testing: BitArray.setClearGet
-15/106 Test: BitArray.setClearGet
+15/110 Testing: BitArray.setClearGet
+15/110 Test: BitArray.setClearGet
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=BitArray.setClearGet" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"BitArray.setClearGet" start time: Jul 26 18:08 CEST
+"BitArray.setClearGet" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -401,15 +401,15 @@ Note: Google Test filter = BitArray.setClearGet
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"BitArray.setClearGet" end time: Jul 26 18:08 CEST
+"BitArray.setClearGet" end time: Jul 26 23:12 CEST
 "BitArray.setClearGet" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-16/106 Testing: LinkedList.insertNode
-16/106 Test: LinkedList.insertNode
+16/110 Testing: LinkedList.insertNode
+16/110 Test: LinkedList.insertNode
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.insertNode" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"LinkedList.insertNode" start time: Jul 26 18:08 CEST
+"LinkedList.insertNode" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -428,15 +428,15 @@ Note: Google Test filter = LinkedList.insertNode
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedList.insertNode" end time: Jul 26 18:08 CEST
+"LinkedList.insertNode" end time: Jul 26 23:12 CEST
 "LinkedList.insertNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-17/106 Testing: LinkedList.loopForward
-17/106 Test: LinkedList.loopForward
+17/110 Testing: LinkedList.loopForward
+17/110 Test: LinkedList.loopForward
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.loopForward" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"LinkedList.loopForward" start time: Jul 26 18:08 CEST
+"LinkedList.loopForward" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -455,15 +455,15 @@ Note: Google Test filter = LinkedList.loopForward
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedList.loopForward" end time: Jul 26 18:08 CEST
+"LinkedList.loopForward" end time: Jul 26 23:12 CEST
 "LinkedList.loopForward" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-18/106 Testing: LinkedList.loopReversed
-18/106 Test: LinkedList.loopReversed
+18/110 Testing: LinkedList.loopReversed
+18/110 Test: LinkedList.loopReversed
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.loopReversed" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"LinkedList.loopReversed" start time: Jul 26 18:08 CEST
+"LinkedList.loopReversed" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -482,15 +482,15 @@ Note: Google Test filter = LinkedList.loopReversed
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedList.loopReversed" end time: Jul 26 18:08 CEST
+"LinkedList.loopReversed" end time: Jul 26 23:12 CEST
 "LinkedList.loopReversed" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-19/106 Testing: LinkedList.deleteNode
-19/106 Test: LinkedList.deleteNode
+19/110 Testing: LinkedList.deleteNode
+19/110 Test: LinkedList.deleteNode
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.deleteNode" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"LinkedList.deleteNode" start time: Jul 26 18:08 CEST
+"LinkedList.deleteNode" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -509,15 +509,15 @@ Note: Google Test filter = LinkedList.deleteNode
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedList.deleteNode" end time: Jul 26 18:08 CEST
+"LinkedList.deleteNode" end time: Jul 26 23:12 CEST
 "LinkedList.deleteNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-20/106 Testing: LinkedList.deleteFirstNode
-20/106 Test: LinkedList.deleteFirstNode
+20/110 Testing: LinkedList.deleteFirstNode
+20/110 Test: LinkedList.deleteFirstNode
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.deleteFirstNode" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"LinkedList.deleteFirstNode" start time: Jul 26 18:08 CEST
+"LinkedList.deleteFirstNode" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -536,15 +536,15 @@ Note: Google Test filter = LinkedList.deleteFirstNode
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedList.deleteFirstNode" end time: Jul 26 18:08 CEST
+"LinkedList.deleteFirstNode" end time: Jul 26 23:12 CEST
 "LinkedList.deleteFirstNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-21/106 Testing: LinkedList.deleteLastNode
-21/106 Test: LinkedList.deleteLastNode
+21/110 Testing: LinkedList.deleteLastNode
+21/110 Test: LinkedList.deleteLastNode
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.deleteLastNode" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"LinkedList.deleteLastNode" start time: Jul 26 18:08 CEST
+"LinkedList.deleteLastNode" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -563,15 +563,15 @@ Note: Google Test filter = LinkedList.deleteLastNode
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedList.deleteLastNode" end time: Jul 26 18:08 CEST
+"LinkedList.deleteLastNode" end time: Jul 26 23:12 CEST
 "LinkedList.deleteLastNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-22/106 Testing: LinkedList.moveDownNode
-22/106 Test: LinkedList.moveDownNode
+22/110 Testing: LinkedList.moveDownNode
+22/110 Test: LinkedList.moveDownNode
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.moveDownNode" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"LinkedList.moveDownNode" start time: Jul 26 18:08 CEST
+"LinkedList.moveDownNode" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -590,15 +590,15 @@ Note: Google Test filter = LinkedList.moveDownNode
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedList.moveDownNode" end time: Jul 26 18:08 CEST
+"LinkedList.moveDownNode" end time: Jul 26 23:12 CEST
 "LinkedList.moveDownNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-23/106 Testing: LinkedList.moveDownFirstNode
-23/106 Test: LinkedList.moveDownFirstNode
+23/110 Testing: LinkedList.moveDownFirstNode
+23/110 Test: LinkedList.moveDownFirstNode
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.moveDownFirstNode" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"LinkedList.moveDownFirstNode" start time: Jul 26 18:08 CEST
+"LinkedList.moveDownFirstNode" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -617,15 +617,15 @@ Note: Google Test filter = LinkedList.moveDownFirstNode
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedList.moveDownFirstNode" end time: Jul 26 18:08 CEST
+"LinkedList.moveDownFirstNode" end time: Jul 26 23:12 CEST
 "LinkedList.moveDownFirstNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-24/106 Testing: LinkedList.moveDownSecondNode
-24/106 Test: LinkedList.moveDownSecondNode
+24/110 Testing: LinkedList.moveDownSecondNode
+24/110 Test: LinkedList.moveDownSecondNode
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.moveDownSecondNode" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"LinkedList.moveDownSecondNode" start time: Jul 26 18:08 CEST
+"LinkedList.moveDownSecondNode" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -644,15 +644,15 @@ Note: Google Test filter = LinkedList.moveDownSecondNode
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedList.moveDownSecondNode" end time: Jul 26 18:08 CEST
+"LinkedList.moveDownSecondNode" end time: Jul 26 23:12 CEST
 "LinkedList.moveDownSecondNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-25/106 Testing: LinkedList.moveDownLastNode
-25/106 Test: LinkedList.moveDownLastNode
+25/110 Testing: LinkedList.moveDownLastNode
+25/110 Test: LinkedList.moveDownLastNode
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.moveDownLastNode" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"LinkedList.moveDownLastNode" start time: Jul 26 18:08 CEST
+"LinkedList.moveDownLastNode" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -665,21 +665,21 @@ Note: Google Test filter = LinkedList.moveDownLastNode
 [----------] 1 test from LinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test case ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedList.moveDownLastNode" end time: Jul 26 18:08 CEST
+"LinkedList.moveDownLastNode" end time: Jul 26 23:12 CEST
 "LinkedList.moveDownLastNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-26/106 Testing: LinkedList.moveDownOnlyElement
-26/106 Test: LinkedList.moveDownOnlyElement
+26/110 Testing: LinkedList.moveDownOnlyElement
+26/110 Test: LinkedList.moveDownOnlyElement
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.moveDownOnlyElement" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"LinkedList.moveDownOnlyElement" start time: Jul 26 18:08 CEST
+"LinkedList.moveDownOnlyElement" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -698,15 +698,123 @@ Note: Google Test filter = LinkedList.moveDownOnlyElement
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"LinkedList.moveDownOnlyElement" end time: Jul 26 18:08 CEST
+"LinkedList.moveDownOnlyElement" end time: Jul 26 23:12 CEST
 "LinkedList.moveDownOnlyElement" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-27/106 Testing: MCUTimeDisplay.setFirstLetter
-27/106 Test: MCUTimeDisplay.setFirstLetter
+27/110 Testing: LinkedList.containsInsert
+27/110 Test: LinkedList.containsInsert
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.containsInsert" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.containsInsert" start time: Jul 26 23:12 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.containsInsert
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.containsInsert
+[       OK ] LinkedList.containsInsert (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.containsInsert" end time: Jul 26 23:12 CEST
+"LinkedList.containsInsert" time elapsed: 00:00:00
+----------------------------------------------------------
+
+28/110 Testing: LinkedList.containsDeleteFirst
+28/110 Test: LinkedList.containsDeleteFirst
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.containsDeleteFirst" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.containsDeleteFirst" start time: Jul 26 23:12 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.containsDeleteFirst
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.containsDeleteFirst
+[       OK ] LinkedList.containsDeleteFirst (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.containsDeleteFirst" end time: Jul 26 23:12 CEST
+"LinkedList.containsDeleteFirst" time elapsed: 00:00:00
+----------------------------------------------------------
+
+29/110 Testing: LinkedList.containsDeleteMiddle
+29/110 Test: LinkedList.containsDeleteMiddle
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.containsDeleteMiddle" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.containsDeleteMiddle" start time: Jul 26 23:12 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.containsDeleteMiddle
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.containsDeleteMiddle
+[       OK ] LinkedList.containsDeleteMiddle (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.containsDeleteMiddle" end time: Jul 26 23:12 CEST
+"LinkedList.containsDeleteMiddle" time elapsed: 00:00:00
+----------------------------------------------------------
+
+30/110 Testing: LinkedList.containsDeleteLast
+30/110 Test: LinkedList.containsDeleteLast
+Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=LinkedList.containsDeleteLast" "--gtest_also_run_disabled_tests"
+Directory: /home/pieter/GitHub/Control-Surface
+"LinkedList.containsDeleteLast" start time: Jul 26 23:12 CEST
+Output:
+----------------------------------------------------------
+Running main() from gtest_main.cc
+Note: Google Test filter = LinkedList.containsDeleteLast
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from LinkedList
+[ RUN      ] LinkedList.containsDeleteLast
+[       OK ] LinkedList.containsDeleteLast (0 ms)
+[----------] 1 test from LinkedList (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LinkedList.containsDeleteLast" end time: Jul 26 23:12 CEST
+"LinkedList.containsDeleteLast" time elapsed: 00:00:00
+----------------------------------------------------------
+
+31/110 Testing: MCUTimeDisplay.setFirstLetter
+31/110 Test: MCUTimeDisplay.setFirstLetter
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.setFirstLetter" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.setFirstLetter" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.setFirstLetter" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -725,15 +833,15 @@ Note: Google Test filter = MCUTimeDisplay.setFirstLetter
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.setFirstLetter" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.setFirstLetter" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.setFirstLetter" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-28/106 Testing: MCUTimeDisplay.getTextFull
-28/106 Test: MCUTimeDisplay.getTextFull
+32/110 Testing: MCUTimeDisplay.getTextFull
+32/110 Test: MCUTimeDisplay.getTextFull
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getTextFull" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getTextFull" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextFull" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -752,15 +860,15 @@ Note: Google Test filter = MCUTimeDisplay.getTextFull
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getTextFull" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextFull" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getTextFull" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-29/106 Testing: MCUTimeDisplay.getTextOffset
-29/106 Test: MCUTimeDisplay.getTextOffset
+33/110 Testing: MCUTimeDisplay.getTextOffset
+33/110 Test: MCUTimeDisplay.getTextOffset
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getTextOffset" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getTextOffset" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextOffset" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -779,15 +887,15 @@ Note: Google Test filter = MCUTimeDisplay.getTextOffset
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getTextOffset" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextOffset" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getTextOffset" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-30/106 Testing: MCUTimeDisplay.getTextOffsetLength
-30/106 Test: MCUTimeDisplay.getTextOffsetLength
+34/110 Testing: MCUTimeDisplay.getTextOffsetLength
+34/110 Test: MCUTimeDisplay.getTextOffsetLength
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getTextOffsetLength" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getTextOffsetLength" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextOffsetLength" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -806,15 +914,15 @@ Note: Google Test filter = MCUTimeDisplay.getTextOffsetLength
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getTextOffsetLength" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextOffsetLength" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getTextOffsetLength" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-31/106 Testing: MCUTimeDisplay.getTextOffsetLast
-31/106 Test: MCUTimeDisplay.getTextOffsetLast
+35/110 Testing: MCUTimeDisplay.getTextOffsetLast
+35/110 Test: MCUTimeDisplay.getTextOffsetLast
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getTextOffsetLast" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getTextOffsetLast" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextOffsetLast" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -833,15 +941,15 @@ Note: Google Test filter = MCUTimeDisplay.getTextOffsetLast
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getTextOffsetLast" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextOffsetLast" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getTextOffsetLast" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-32/106 Testing: MCUTimeDisplay.getTextOffsetTooBig
-32/106 Test: MCUTimeDisplay.getTextOffsetTooBig
+36/110 Testing: MCUTimeDisplay.getTextOffsetTooBig
+36/110 Test: MCUTimeDisplay.getTextOffsetTooBig
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getTextOffsetTooBig" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getTextOffsetTooBig" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextOffsetTooBig" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -860,15 +968,15 @@ Note: Google Test filter = MCUTimeDisplay.getTextOffsetTooBig
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getTextOffsetTooBig" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextOffsetTooBig" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getTextOffsetTooBig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-33/106 Testing: MCUTimeDisplay.getTextLengthTooBig
-33/106 Test: MCUTimeDisplay.getTextLengthTooBig
+37/110 Testing: MCUTimeDisplay.getTextLengthTooBig
+37/110 Test: MCUTimeDisplay.getTextLengthTooBig
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getTextLengthTooBig" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getTextLengthTooBig" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextLengthTooBig" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -887,15 +995,15 @@ Note: Google Test filter = MCUTimeDisplay.getTextLengthTooBig
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getTextLengthTooBig" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getTextLengthTooBig" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getTextLengthTooBig" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-34/106 Testing: MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit
-34/106 Test: MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit
+38/110 Testing: MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit
+38/110 Test: MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -914,15 +1022,15 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-35/106 Testing: MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits
-35/106 Test: MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits
+39/110 Testing: MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits
+39/110 Test: MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -941,15 +1049,15 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-36/106 Testing: MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits
-36/106 Test: MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits
+40/110 Testing: MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits
+40/110 Test: MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -968,15 +1076,15 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-37/106 Testing: MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits
-37/106 Test: MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits
+41/110 Testing: MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits
+41/110 Test: MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -995,15 +1103,15 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-38/106 Testing: MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits
-38/106 Test: MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits
+42/110 Testing: MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits
+42/110 Test: MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1022,15 +1130,15 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-39/106 Testing: MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly
-39/106 Test: MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly
+43/110 Testing: MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly
+43/110 Test: MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly" start time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1049,15 +1157,15 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly" end time: Jul 26 18:08 CEST
+"MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly" end time: Jul 26 23:12 CEST
 "MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-40/106 Testing: MCUVU.setValue
-40/106 Test: MCUVU.setValue
+44/110 Testing: MCUVU.setValue
+44/110 Test: MCUVU.setValue
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUVU.setValue" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUVU.setValue" start time: Jul 26 18:08 CEST
+"MCUVU.setValue" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1076,15 +1184,15 @@ Note: Google Test filter = MCUVU.setValue
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUVU.setValue" end time: Jul 26 18:08 CEST
+"MCUVU.setValue" end time: Jul 26 23:12 CEST
 "MCUVU.setValue" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-41/106 Testing: MCUVU.setOverload
-41/106 Test: MCUVU.setOverload
+45/110 Testing: MCUVU.setOverload
+45/110 Test: MCUVU.setOverload
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUVU.setOverload" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUVU.setOverload" start time: Jul 26 18:08 CEST
+"MCUVU.setOverload" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1094,24 +1202,24 @@ Note: Google Test filter = MCUVU.setOverload
 [----------] 1 test from MCUVU
 [ RUN      ] MCUVU.setOverload
 [       OK ] MCUVU.setOverload (0 ms)
-[----------] 1 test from MCUVU (1 ms total)
+[----------] 1 test from MCUVU (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test case ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUVU.setOverload" end time: Jul 26 18:08 CEST
+"MCUVU.setOverload" end time: Jul 26 23:12 CEST
 "MCUVU.setOverload" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-42/106 Testing: MCUVU.clearOverload
-42/106 Test: MCUVU.clearOverload
+46/110 Testing: MCUVU.clearOverload
+46/110 Test: MCUVU.clearOverload
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUVU.clearOverload" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUVU.clearOverload" start time: Jul 26 18:08 CEST
+"MCUVU.clearOverload" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1130,15 +1238,15 @@ Note: Google Test filter = MCUVU.clearOverload
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUVU.clearOverload" end time: Jul 26 18:08 CEST
+"MCUVU.clearOverload" end time: Jul 26 23:12 CEST
 "MCUVU.clearOverload" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-43/106 Testing: MCUVU.retainValueAfterOverload
-43/106 Test: MCUVU.retainValueAfterOverload
+47/110 Testing: MCUVU.retainValueAfterOverload
+47/110 Test: MCUVU.retainValueAfterOverload
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUVU.retainValueAfterOverload" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUVU.retainValueAfterOverload" start time: Jul 26 18:08 CEST
+"MCUVU.retainValueAfterOverload" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1157,15 +1265,15 @@ Note: Google Test filter = MCUVU.retainValueAfterOverload
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUVU.retainValueAfterOverload" end time: Jul 26 18:08 CEST
+"MCUVU.retainValueAfterOverload" end time: Jul 26 23:12 CEST
 "MCUVU.retainValueAfterOverload" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-44/106 Testing: MCUVU.decay
-44/106 Test: MCUVU.decay
+48/110 Testing: MCUVU.decay
+48/110 Test: MCUVU.decay
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUVU.decay" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUVU.decay" start time: Jul 26 18:08 CEST
+"MCUVU.decay" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1178,21 +1286,21 @@ Note: Google Test filter = MCUVU.decay
 [----------] 1 test from MCUVU (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test case ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUVU.decay" end time: Jul 26 18:08 CEST
+"MCUVU.decay" end time: Jul 26 23:12 CEST
 "MCUVU.decay" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-45/106 Testing: MCUVUBankable.setValueBankChangeAddress
-45/106 Test: MCUVUBankable.setValueBankChangeAddress
+49/110 Testing: MCUVUBankable.setValueBankChangeAddress
+49/110 Test: MCUVUBankable.setValueBankChangeAddress
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUVUBankable.setValueBankChangeAddress" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUVUBankable.setValueBankChangeAddress" start time: Jul 26 18:08 CEST
+"MCUVUBankable.setValueBankChangeAddress" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1211,15 +1319,15 @@ Note: Google Test filter = MCUVUBankable.setValueBankChangeAddress
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUVUBankable.setValueBankChangeAddress" end time: Jul 26 18:08 CEST
+"MCUVUBankable.setValueBankChangeAddress" end time: Jul 26 23:12 CEST
 "MCUVUBankable.setValueBankChangeAddress" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-46/106 Testing: MCUVUBankable.setValueBankChangeChannel
-46/106 Test: MCUVUBankable.setValueBankChangeChannel
+50/110 Testing: MCUVUBankable.setValueBankChangeChannel
+50/110 Test: MCUVUBankable.setValueBankChangeChannel
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUVUBankable.setValueBankChangeChannel" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUVUBankable.setValueBankChangeChannel" start time: Jul 26 18:08 CEST
+"MCUVUBankable.setValueBankChangeChannel" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1238,15 +1346,15 @@ Note: Google Test filter = MCUVUBankable.setValueBankChangeChannel
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUVUBankable.setValueBankChangeChannel" end time: Jul 26 18:08 CEST
+"MCUVUBankable.setValueBankChangeChannel" end time: Jul 26 23:12 CEST
 "MCUVUBankable.setValueBankChangeChannel" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-47/106 Testing: MCUVUBankable.overloadBankChangeAddress
-47/106 Test: MCUVUBankable.overloadBankChangeAddress
+51/110 Testing: MCUVUBankable.overloadBankChangeAddress
+51/110 Test: MCUVUBankable.overloadBankChangeAddress
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUVUBankable.overloadBankChangeAddress" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUVUBankable.overloadBankChangeAddress" start time: Jul 26 18:08 CEST
+"MCUVUBankable.overloadBankChangeAddress" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1265,15 +1373,15 @@ Note: Google Test filter = MCUVUBankable.overloadBankChangeAddress
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUVUBankable.overloadBankChangeAddress" end time: Jul 26 18:08 CEST
+"MCUVUBankable.overloadBankChangeAddress" end time: Jul 26 23:12 CEST
 "MCUVUBankable.overloadBankChangeAddress" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-48/106 Testing: MCUVUBankable.decay
-48/106 Test: MCUVUBankable.decay
+52/110 Testing: MCUVUBankable.decay
+52/110 Test: MCUVUBankable.decay
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=MCUVUBankable.decay" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"MCUVUBankable.decay" start time: Jul 26 18:08 CEST
+"MCUVUBankable.decay" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1292,15 +1400,15 @@ Note: Google Test filter = MCUVUBankable.decay
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MCUVUBankable.decay" end time: Jul 26 18:08 CEST
+"MCUVUBankable.decay" end time: Jul 26 23:12 CEST
 "MCUVUBankable.decay" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-49/106 Testing: CCButton.pressAndRelease
-49/106 Test: CCButton.pressAndRelease
+53/110 Testing: CCButton.pressAndRelease
+53/110 Test: CCButton.pressAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCButton.pressAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCButton.pressAndRelease" start time: Jul 26 18:08 CEST
+"CCButton.pressAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1319,15 +1427,15 @@ Note: Google Test filter = CCButton.pressAndRelease
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCButton.pressAndRelease" end time: Jul 26 18:08 CEST
+"CCButton.pressAndRelease" end time: Jul 26 23:12 CEST
 "CCButton.pressAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-50/106 Testing: CCButtonBankable.pressAndRelease
-50/106 Test: CCButtonBankable.pressAndRelease
+54/110 Testing: CCButtonBankable.pressAndRelease
+54/110 Test: CCButtonBankable.pressAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCButtonBankable.pressAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCButtonBankable.pressAndRelease" start time: Jul 26 18:08 CEST
+"CCButtonBankable.pressAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1340,21 +1448,21 @@ Note: Google Test filter = CCButtonBankable.pressAndRelease
 [----------] 1 test from CCButtonBankable (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test case ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCButtonBankable.pressAndRelease" end time: Jul 26 18:08 CEST
+"CCButtonBankable.pressAndRelease" end time: Jul 26 23:12 CEST
 "CCButtonBankable.pressAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-51/106 Testing: CCButtonBankable.changeSettingAndPressAndRelease
-51/106 Test: CCButtonBankable.changeSettingAndPressAndRelease
+55/110 Testing: CCButtonBankable.changeSettingAndPressAndRelease
+55/110 Test: CCButtonBankable.changeSettingAndPressAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCButtonBankable.changeSettingAndPressAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCButtonBankable.changeSettingAndPressAndRelease" start time: Jul 26 18:08 CEST
+"CCButtonBankable.changeSettingAndPressAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1363,25 +1471,25 @@ Note: Google Test filter = CCButtonBankable.changeSettingAndPressAndRelease
 [----------] Global test environment set-up.
 [----------] 1 test from CCButtonBankable
 [ RUN      ] CCButtonBankable.changeSettingAndPressAndRelease
-[       OK ] CCButtonBankable.changeSettingAndPressAndRelease (1 ms)
-[----------] 1 test from CCButtonBankable (1 ms total)
+[       OK ] CCButtonBankable.changeSettingAndPressAndRelease (0 ms)
+[----------] 1 test from CCButtonBankable (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test case ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCButtonBankable.changeSettingAndPressAndRelease" end time: Jul 26 18:08 CEST
+"CCButtonBankable.changeSettingAndPressAndRelease" end time: Jul 26 23:12 CEST
 "CCButtonBankable.changeSettingAndPressAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-52/106 Testing: CCButtonBankable.pressAndChangeSettingAndRelease
-52/106 Test: CCButtonBankable.pressAndChangeSettingAndRelease
+56/110 Testing: CCButtonBankable.pressAndChangeSettingAndRelease
+56/110 Test: CCButtonBankable.pressAndChangeSettingAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCButtonBankable.pressAndChangeSettingAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCButtonBankable.pressAndChangeSettingAndRelease" start time: Jul 26 18:08 CEST
+"CCButtonBankable.pressAndChangeSettingAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1400,15 +1508,15 @@ Note: Google Test filter = CCButtonBankable.pressAndChangeSettingAndRelease
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCButtonBankable.pressAndChangeSettingAndRelease" end time: Jul 26 18:08 CEST
+"CCButtonBankable.pressAndChangeSettingAndRelease" end time: Jul 26 23:12 CEST
 "CCButtonBankable.pressAndChangeSettingAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-53/106 Testing: CCButtons.pressAndRelease
-53/106 Test: CCButtons.pressAndRelease
+57/110 Testing: CCButtons.pressAndRelease
+57/110 Test: CCButtons.pressAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCButtons.pressAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCButtons.pressAndRelease" start time: Jul 26 18:08 CEST
+"CCButtons.pressAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1417,25 +1525,25 @@ Note: Google Test filter = CCButtons.pressAndRelease
 [----------] Global test environment set-up.
 [----------] 1 test from CCButtons
 [ RUN      ] CCButtons.pressAndRelease
-[       OK ] CCButtons.pressAndRelease (1 ms)
-[----------] 1 test from CCButtons (1 ms total)
+[       OK ] CCButtons.pressAndRelease (0 ms)
+[----------] 1 test from CCButtons (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test case ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCButtons.pressAndRelease" end time: Jul 26 18:08 CEST
+"CCButtons.pressAndRelease" end time: Jul 26 23:12 CEST
 "CCButtons.pressAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-54/106 Testing: CCButtonsBankable.pressChangeBankAndRelease
-54/106 Test: CCButtonsBankable.pressChangeBankAndRelease
+58/110 Testing: CCButtonsBankable.pressChangeBankAndRelease
+58/110 Test: CCButtonsBankable.pressChangeBankAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCButtonsBankable.pressChangeBankAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCButtonsBankable.pressChangeBankAndRelease" start time: Jul 26 18:08 CEST
+"CCButtonsBankable.pressChangeBankAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1454,15 +1562,15 @@ Note: Google Test filter = CCButtonsBankable.pressChangeBankAndRelease
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCButtonsBankable.pressChangeBankAndRelease" end time: Jul 26 18:08 CEST
+"CCButtonsBankable.pressChangeBankAndRelease" end time: Jul 26 23:12 CEST
 "CCButtonsBankable.pressChangeBankAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-55/106 Testing: CCButtonsBankable.pressChangeBankAndReleaseAndPress
-55/106 Test: CCButtonsBankable.pressChangeBankAndReleaseAndPress
+59/110 Testing: CCButtonsBankable.pressChangeBankAndReleaseAndPress
+59/110 Test: CCButtonsBankable.pressChangeBankAndReleaseAndPress
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCButtonsBankable.pressChangeBankAndReleaseAndPress" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCButtonsBankable.pressChangeBankAndReleaseAndPress" start time: Jul 26 18:08 CEST
+"CCButtonsBankable.pressChangeBankAndReleaseAndPress" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1475,21 +1583,21 @@ Note: Google Test filter = CCButtonsBankable.pressChangeBankAndReleaseAndPress
 [----------] 1 test from CCButtonsBankable (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test case ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCButtonsBankable.pressChangeBankAndReleaseAndPress" end time: Jul 26 18:08 CEST
+"CCButtonsBankable.pressChangeBankAndReleaseAndPress" end time: Jul 26 23:12 CEST
 "CCButtonsBankable.pressChangeBankAndReleaseAndPress" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-56/106 Testing: CCRotaryEncoder.turnOneStep
-56/106 Test: CCRotaryEncoder.turnOneStep
+60/110 Testing: CCRotaryEncoder.turnOneStep
+60/110 Test: CCRotaryEncoder.turnOneStep
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCRotaryEncoder.turnOneStep" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCRotaryEncoder.turnOneStep" start time: Jul 26 18:08 CEST
+"CCRotaryEncoder.turnOneStep" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1508,15 +1616,15 @@ Note: Google Test filter = CCRotaryEncoder.turnOneStep
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCRotaryEncoder.turnOneStep" end time: Jul 26 18:08 CEST
+"CCRotaryEncoder.turnOneStep" end time: Jul 26 23:12 CEST
 "CCRotaryEncoder.turnOneStep" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-57/106 Testing: CCRotaryEncoder.turnFourHalfSteps
-57/106 Test: CCRotaryEncoder.turnFourHalfSteps
+61/110 Testing: CCRotaryEncoder.turnFourHalfSteps
+61/110 Test: CCRotaryEncoder.turnFourHalfSteps
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCRotaryEncoder.turnFourHalfSteps" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCRotaryEncoder.turnFourHalfSteps" start time: Jul 26 18:08 CEST
+"CCRotaryEncoder.turnFourHalfSteps" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1525,25 +1633,25 @@ Note: Google Test filter = CCRotaryEncoder.turnFourHalfSteps
 [----------] Global test environment set-up.
 [----------] 1 test from CCRotaryEncoder
 [ RUN      ] CCRotaryEncoder.turnFourHalfSteps
-[       OK ] CCRotaryEncoder.turnFourHalfSteps (0 ms)
-[----------] 1 test from CCRotaryEncoder (0 ms total)
+[       OK ] CCRotaryEncoder.turnFourHalfSteps (1 ms)
+[----------] 1 test from CCRotaryEncoder (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test case ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCRotaryEncoder.turnFourHalfSteps" end time: Jul 26 18:08 CEST
+"CCRotaryEncoder.turnFourHalfSteps" end time: Jul 26 23:12 CEST
 "CCRotaryEncoder.turnFourHalfSteps" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-58/106 Testing: CCRotaryEncoder.turnOneStepBackwards
-58/106 Test: CCRotaryEncoder.turnOneStepBackwards
+62/110 Testing: CCRotaryEncoder.turnOneStepBackwards
+62/110 Test: CCRotaryEncoder.turnOneStepBackwards
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCRotaryEncoder.turnOneStepBackwards" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCRotaryEncoder.turnOneStepBackwards" start time: Jul 26 18:08 CEST
+"CCRotaryEncoder.turnOneStepBackwards" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1562,15 +1670,15 @@ Note: Google Test filter = CCRotaryEncoder.turnOneStepBackwards
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCRotaryEncoder.turnOneStepBackwards" end time: Jul 26 18:08 CEST
+"CCRotaryEncoder.turnOneStepBackwards" end time: Jul 26 23:12 CEST
 "CCRotaryEncoder.turnOneStepBackwards" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-59/106 Testing: CCRotaryEncoder.turnSixteenSteps
-59/106 Test: CCRotaryEncoder.turnSixteenSteps
+63/110 Testing: CCRotaryEncoder.turnSixteenSteps
+63/110 Test: CCRotaryEncoder.turnSixteenSteps
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCRotaryEncoder.turnSixteenSteps" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCRotaryEncoder.turnSixteenSteps" start time: Jul 26 18:08 CEST
+"CCRotaryEncoder.turnSixteenSteps" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1589,15 +1697,15 @@ Note: Google Test filter = CCRotaryEncoder.turnSixteenSteps
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCRotaryEncoder.turnSixteenSteps" end time: Jul 26 18:08 CEST
+"CCRotaryEncoder.turnSixteenSteps" end time: Jul 26 23:12 CEST
 "CCRotaryEncoder.turnSixteenSteps" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-60/106 Testing: CCRotaryEncoder.turnSixteenStepsBackwards
-60/106 Test: CCRotaryEncoder.turnSixteenStepsBackwards
+64/110 Testing: CCRotaryEncoder.turnSixteenStepsBackwards
+64/110 Test: CCRotaryEncoder.turnSixteenStepsBackwards
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCRotaryEncoder.turnSixteenStepsBackwards" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCRotaryEncoder.turnSixteenStepsBackwards" start time: Jul 26 18:08 CEST
+"CCRotaryEncoder.turnSixteenStepsBackwards" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1606,25 +1714,25 @@ Note: Google Test filter = CCRotaryEncoder.turnSixteenStepsBackwards
 [----------] Global test environment set-up.
 [----------] 1 test from CCRotaryEncoder
 [ RUN      ] CCRotaryEncoder.turnSixteenStepsBackwards
-[       OK ] CCRotaryEncoder.turnSixteenStepsBackwards (0 ms)
-[----------] 1 test from CCRotaryEncoder (0 ms total)
+[       OK ] CCRotaryEncoder.turnSixteenStepsBackwards (1 ms)
+[----------] 1 test from CCRotaryEncoder (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test case ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCRotaryEncoder.turnSixteenStepsBackwards" end time: Jul 26 18:08 CEST
+"CCRotaryEncoder.turnSixteenStepsBackwards" end time: Jul 26 23:12 CEST
 "CCRotaryEncoder.turnSixteenStepsBackwards" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-61/106 Testing: CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep
-61/106 Test: CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep
+65/110 Testing: CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep
+65/110 Test: CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep" start time: Jul 26 18:08 CEST
+"CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1643,15 +1751,15 @@ Note: Google Test filter = CCRotaryEncoderBankable.turnOneStepChangeSettingTurnO
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep" end time: Jul 26 18:08 CEST
+"CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep" end time: Jul 26 23:12 CEST
 "CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-62/106 Testing: NoteButton.pressAndRelease
-62/106 Test: NoteButton.pressAndRelease
+66/110 Testing: NoteButton.pressAndRelease
+66/110 Test: NoteButton.pressAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=NoteButton.pressAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"NoteButton.pressAndRelease" start time: Jul 26 18:08 CEST
+"NoteButton.pressAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1670,15 +1778,15 @@ Note: Google Test filter = NoteButton.pressAndRelease
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NoteButton.pressAndRelease" end time: Jul 26 18:08 CEST
+"NoteButton.pressAndRelease" end time: Jul 26 23:12 CEST
 "NoteButton.pressAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-63/106 Testing: NoteButtonBankable.pressAndRelease
-63/106 Test: NoteButtonBankable.pressAndRelease
+67/110 Testing: NoteButtonBankable.pressAndRelease
+67/110 Test: NoteButtonBankable.pressAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=NoteButtonBankable.pressAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"NoteButtonBankable.pressAndRelease" start time: Jul 26 18:08 CEST
+"NoteButtonBankable.pressAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1687,25 +1795,25 @@ Note: Google Test filter = NoteButtonBankable.pressAndRelease
 [----------] Global test environment set-up.
 [----------] 1 test from NoteButtonBankable
 [ RUN      ] NoteButtonBankable.pressAndRelease
-[       OK ] NoteButtonBankable.pressAndRelease (0 ms)
-[----------] 1 test from NoteButtonBankable (0 ms total)
+[       OK ] NoteButtonBankable.pressAndRelease (1 ms)
+[----------] 1 test from NoteButtonBankable (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test case ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NoteButtonBankable.pressAndRelease" end time: Jul 26 18:08 CEST
+"NoteButtonBankable.pressAndRelease" end time: Jul 26 23:12 CEST
 "NoteButtonBankable.pressAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-64/106 Testing: NoteButtonBankable.changeSettingAndPressAndRelease
-64/106 Test: NoteButtonBankable.changeSettingAndPressAndRelease
+68/110 Testing: NoteButtonBankable.changeSettingAndPressAndRelease
+68/110 Test: NoteButtonBankable.changeSettingAndPressAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=NoteButtonBankable.changeSettingAndPressAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"NoteButtonBankable.changeSettingAndPressAndRelease" start time: Jul 26 18:08 CEST
+"NoteButtonBankable.changeSettingAndPressAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1724,15 +1832,15 @@ Note: Google Test filter = NoteButtonBankable.changeSettingAndPressAndRelease
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NoteButtonBankable.changeSettingAndPressAndRelease" end time: Jul 26 18:08 CEST
+"NoteButtonBankable.changeSettingAndPressAndRelease" end time: Jul 26 23:12 CEST
 "NoteButtonBankable.changeSettingAndPressAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-65/106 Testing: NoteButtonBankable.pressAndChangeSettingAndRelease
-65/106 Test: NoteButtonBankable.pressAndChangeSettingAndRelease
+69/110 Testing: NoteButtonBankable.pressAndChangeSettingAndRelease
+69/110 Test: NoteButtonBankable.pressAndChangeSettingAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=NoteButtonBankable.pressAndChangeSettingAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"NoteButtonBankable.pressAndChangeSettingAndRelease" start time: Jul 26 18:08 CEST
+"NoteButtonBankable.pressAndChangeSettingAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1751,15 +1859,15 @@ Note: Google Test filter = NoteButtonBankable.pressAndChangeSettingAndRelease
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NoteButtonBankable.pressAndChangeSettingAndRelease" end time: Jul 26 18:08 CEST
+"NoteButtonBankable.pressAndChangeSettingAndRelease" end time: Jul 26 23:12 CEST
 "NoteButtonBankable.pressAndChangeSettingAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-66/106 Testing: NoteButtonLatching.pressAndRelease
-66/106 Test: NoteButtonLatching.pressAndRelease
+70/110 Testing: NoteButtonLatching.pressAndRelease
+70/110 Test: NoteButtonLatching.pressAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=NoteButtonLatching.pressAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"NoteButtonLatching.pressAndRelease" start time: Jul 26 18:08 CEST
+"NoteButtonLatching.pressAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1778,15 +1886,15 @@ Note: Google Test filter = NoteButtonLatching.pressAndRelease
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NoteButtonLatching.pressAndRelease" end time: Jul 26 18:08 CEST
+"NoteButtonLatching.pressAndRelease" end time: Jul 26 23:12 CEST
 "NoteButtonLatching.pressAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-67/106 Testing: NoteButtonLatchingBankable.pressAndRelease
-67/106 Test: NoteButtonLatchingBankable.pressAndRelease
+71/110 Testing: NoteButtonLatchingBankable.pressAndRelease
+71/110 Test: NoteButtonLatchingBankable.pressAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=NoteButtonLatchingBankable.pressAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"NoteButtonLatchingBankable.pressAndRelease" start time: Jul 26 18:08 CEST
+"NoteButtonLatchingBankable.pressAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1805,15 +1913,15 @@ Note: Google Test filter = NoteButtonLatchingBankable.pressAndRelease
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NoteButtonLatchingBankable.pressAndRelease" end time: Jul 26 18:08 CEST
+"NoteButtonLatchingBankable.pressAndRelease" end time: Jul 26 23:12 CEST
 "NoteButtonLatchingBankable.pressAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-68/106 Testing: NoteButtonLatchingBankable.changeSettingAndPressAndRelease
-68/106 Test: NoteButtonLatchingBankable.changeSettingAndPressAndRelease
+72/110 Testing: NoteButtonLatchingBankable.changeSettingAndPressAndRelease
+72/110 Test: NoteButtonLatchingBankable.changeSettingAndPressAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=NoteButtonLatchingBankable.changeSettingAndPressAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"NoteButtonLatchingBankable.changeSettingAndPressAndRelease" start time: Jul 26 18:08 CEST
+"NoteButtonLatchingBankable.changeSettingAndPressAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1832,15 +1940,15 @@ Note: Google Test filter = NoteButtonLatchingBankable.changeSettingAndPressAndRe
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NoteButtonLatchingBankable.changeSettingAndPressAndRelease" end time: Jul 26 18:08 CEST
+"NoteButtonLatchingBankable.changeSettingAndPressAndRelease" end time: Jul 26 23:12 CEST
 "NoteButtonLatchingBankable.changeSettingAndPressAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-69/106 Testing: NoteButtonLatchingBankable.pressAndChangeSettingAndRelease
-69/106 Test: NoteButtonLatchingBankable.pressAndChangeSettingAndRelease
+73/110 Testing: NoteButtonLatchingBankable.pressAndChangeSettingAndRelease
+73/110 Test: NoteButtonLatchingBankable.pressAndChangeSettingAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=NoteButtonLatchingBankable.pressAndChangeSettingAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"NoteButtonLatchingBankable.pressAndChangeSettingAndRelease" start time: Jul 26 18:08 CEST
+"NoteButtonLatchingBankable.pressAndChangeSettingAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1859,15 +1967,15 @@ Note: Google Test filter = NoteButtonLatchingBankable.pressAndChangeSettingAndRe
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NoteButtonLatchingBankable.pressAndChangeSettingAndRelease" end time: Jul 26 18:08 CEST
+"NoteButtonLatchingBankable.pressAndChangeSettingAndRelease" end time: Jul 26 23:12 CEST
 "NoteButtonLatchingBankable.pressAndChangeSettingAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-70/106 Testing: NoteButtonMatrix.pressAndRelease
-70/106 Test: NoteButtonMatrix.pressAndRelease
+74/110 Testing: NoteButtonMatrix.pressAndRelease
+74/110 Test: NoteButtonMatrix.pressAndRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=NoteButtonMatrix.pressAndRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"NoteButtonMatrix.pressAndRelease" start time: Jul 26 18:08 CEST
+"NoteButtonMatrix.pressAndRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1886,15 +1994,15 @@ Note: Google Test filter = NoteButtonMatrix.pressAndRelease
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NoteButtonMatrix.pressAndRelease" end time: Jul 26 18:08 CEST
+"NoteButtonMatrix.pressAndRelease" end time: Jul 26 23:12 CEST
 "NoteButtonMatrix.pressAndRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-71/106 Testing: NoteButtonMatrixBankable.pressChangeSettingRelease
-71/106 Test: NoteButtonMatrixBankable.pressChangeSettingRelease
+75/110 Testing: NoteButtonMatrixBankable.pressChangeSettingRelease
+75/110 Test: NoteButtonMatrixBankable.pressChangeSettingRelease
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=NoteButtonMatrixBankable.pressChangeSettingRelease" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"NoteButtonMatrixBankable.pressChangeSettingRelease" start time: Jul 26 18:08 CEST
+"NoteButtonMatrixBankable.pressChangeSettingRelease" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1913,15 +2021,15 @@ Note: Google Test filter = NoteButtonMatrixBankable.pressChangeSettingRelease
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"NoteButtonMatrixBankable.pressChangeSettingRelease" end time: Jul 26 18:08 CEST
+"NoteButtonMatrixBankable.pressChangeSettingRelease" end time: Jul 26 23:12 CEST
 "NoteButtonMatrixBankable.pressChangeSettingRelease" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-72/106 Testing: USBMIDIParser.noteOff
-72/106 Test: USBMIDIParser.noteOff
+76/110 Testing: USBMIDIParser.noteOff
+76/110 Test: USBMIDIParser.noteOff
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.noteOff" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.noteOff" start time: Jul 26 18:08 CEST
+"USBMIDIParser.noteOff" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1940,15 +2048,15 @@ Note: Google Test filter = USBMIDIParser.noteOff
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.noteOff" end time: Jul 26 18:08 CEST
+"USBMIDIParser.noteOff" end time: Jul 26 23:12 CEST
 "USBMIDIParser.noteOff" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-73/106 Testing: USBMIDIParser.noteOn
-73/106 Test: USBMIDIParser.noteOn
+77/110 Testing: USBMIDIParser.noteOn
+77/110 Test: USBMIDIParser.noteOn
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.noteOn" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.noteOn" start time: Jul 26 18:08 CEST
+"USBMIDIParser.noteOn" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1967,15 +2075,15 @@ Note: Google Test filter = USBMIDIParser.noteOn
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.noteOn" end time: Jul 26 18:08 CEST
+"USBMIDIParser.noteOn" end time: Jul 26 23:12 CEST
 "USBMIDIParser.noteOn" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-74/106 Testing: USBMIDIParser.sysEx2Bytes
-74/106 Test: USBMIDIParser.sysEx2Bytes
+78/110 Testing: USBMIDIParser.sysEx2Bytes
+78/110 Test: USBMIDIParser.sysEx2Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx2Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.sysEx2Bytes" start time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx2Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -1994,15 +2102,15 @@ Note: Google Test filter = USBMIDIParser.sysEx2Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.sysEx2Bytes" end time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx2Bytes" end time: Jul 26 23:12 CEST
 "USBMIDIParser.sysEx2Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-75/106 Testing: USBMIDIParser.sysEx3Bytes
-75/106 Test: USBMIDIParser.sysEx3Bytes
+79/110 Testing: USBMIDIParser.sysEx3Bytes
+79/110 Test: USBMIDIParser.sysEx3Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx3Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.sysEx3Bytes" start time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx3Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2021,15 +2129,15 @@ Note: Google Test filter = USBMIDIParser.sysEx3Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.sysEx3Bytes" end time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx3Bytes" end time: Jul 26 23:12 CEST
 "USBMIDIParser.sysEx3Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-76/106 Testing: USBMIDIParser.sysEx4Bytes
-76/106 Test: USBMIDIParser.sysEx4Bytes
+80/110 Testing: USBMIDIParser.sysEx4Bytes
+80/110 Test: USBMIDIParser.sysEx4Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx4Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.sysEx4Bytes" start time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx4Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2048,15 +2156,15 @@ Note: Google Test filter = USBMIDIParser.sysEx4Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.sysEx4Bytes" end time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx4Bytes" end time: Jul 26 23:12 CEST
 "USBMIDIParser.sysEx4Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-77/106 Testing: USBMIDIParser.sysEx5Bytes
-77/106 Test: USBMIDIParser.sysEx5Bytes
+81/110 Testing: USBMIDIParser.sysEx5Bytes
+81/110 Test: USBMIDIParser.sysEx5Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx5Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.sysEx5Bytes" start time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx5Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2075,15 +2183,15 @@ Note: Google Test filter = USBMIDIParser.sysEx5Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.sysEx5Bytes" end time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx5Bytes" end time: Jul 26 23:12 CEST
 "USBMIDIParser.sysEx5Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-78/106 Testing: USBMIDIParser.sysEx6Bytes
-78/106 Test: USBMIDIParser.sysEx6Bytes
+82/110 Testing: USBMIDIParser.sysEx6Bytes
+82/110 Test: USBMIDIParser.sysEx6Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx6Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.sysEx6Bytes" start time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx6Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2102,15 +2210,15 @@ Note: Google Test filter = USBMIDIParser.sysEx6Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.sysEx6Bytes" end time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx6Bytes" end time: Jul 26 23:12 CEST
 "USBMIDIParser.sysEx6Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-79/106 Testing: USBMIDIParser.sysEx7Bytes
-79/106 Test: USBMIDIParser.sysEx7Bytes
+83/110 Testing: USBMIDIParser.sysEx7Bytes
+83/110 Test: USBMIDIParser.sysEx7Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx7Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.sysEx7Bytes" start time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx7Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2123,21 +2231,21 @@ Note: Google Test filter = USBMIDIParser.sysEx7Bytes
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test case ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.sysEx7Bytes" end time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx7Bytes" end time: Jul 26 23:12 CEST
 "USBMIDIParser.sysEx7Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-80/106 Testing: USBMIDIParser.sysEx12Bytes
-80/106 Test: USBMIDIParser.sysEx12Bytes
+84/110 Testing: USBMIDIParser.sysEx12Bytes
+84/110 Test: USBMIDIParser.sysEx12Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysEx12Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.sysEx12Bytes" start time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx12Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2156,15 +2264,15 @@ Note: Google Test filter = USBMIDIParser.sysEx12Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.sysEx12Bytes" end time: Jul 26 18:08 CEST
+"USBMIDIParser.sysEx12Bytes" end time: Jul 26 23:12 CEST
 "USBMIDIParser.sysEx12Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-81/106 Testing: USBMIDIParser.sysExContinueWithoutStarting
-81/106 Test: USBMIDIParser.sysExContinueWithoutStarting
+85/110 Testing: USBMIDIParser.sysExContinueWithoutStarting
+85/110 Test: USBMIDIParser.sysExContinueWithoutStarting
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysExContinueWithoutStarting" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.sysExContinueWithoutStarting" start time: Jul 26 18:08 CEST
+"USBMIDIParser.sysExContinueWithoutStarting" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2177,21 +2285,21 @@ Note: Google Test filter = USBMIDIParser.sysExContinueWithoutStarting
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test case ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.sysExContinueWithoutStarting" end time: Jul 26 18:08 CEST
+"USBMIDIParser.sysExContinueWithoutStarting" end time: Jul 26 23:12 CEST
 "USBMIDIParser.sysExContinueWithoutStarting" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-82/106 Testing: USBMIDIParser.sysExEndsWithoutStarting1Byte
-82/106 Test: USBMIDIParser.sysExEndsWithoutStarting1Byte
+86/110 Testing: USBMIDIParser.sysExEndsWithoutStarting1Byte
+86/110 Test: USBMIDIParser.sysExEndsWithoutStarting1Byte
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysExEndsWithoutStarting1Byte" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.sysExEndsWithoutStarting1Byte" start time: Jul 26 18:08 CEST
+"USBMIDIParser.sysExEndsWithoutStarting1Byte" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2210,15 +2318,15 @@ Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting1Byte
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.sysExEndsWithoutStarting1Byte" end time: Jul 26 18:08 CEST
+"USBMIDIParser.sysExEndsWithoutStarting1Byte" end time: Jul 26 23:12 CEST
 "USBMIDIParser.sysExEndsWithoutStarting1Byte" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-83/106 Testing: USBMIDIParser.sysExEndsWithoutStarting2Bytes
-83/106 Test: USBMIDIParser.sysExEndsWithoutStarting2Bytes
+87/110 Testing: USBMIDIParser.sysExEndsWithoutStarting2Bytes
+87/110 Test: USBMIDIParser.sysExEndsWithoutStarting2Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysExEndsWithoutStarting2Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.sysExEndsWithoutStarting2Bytes" start time: Jul 26 18:08 CEST
+"USBMIDIParser.sysExEndsWithoutStarting2Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2237,15 +2345,15 @@ Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting2Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.sysExEndsWithoutStarting2Bytes" end time: Jul 26 18:08 CEST
+"USBMIDIParser.sysExEndsWithoutStarting2Bytes" end time: Jul 26 23:12 CEST
 "USBMIDIParser.sysExEndsWithoutStarting2Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-84/106 Testing: USBMIDIParser.sysExEndsWithoutStarting3Bytes
-84/106 Test: USBMIDIParser.sysExEndsWithoutStarting3Bytes
+88/110 Testing: USBMIDIParser.sysExEndsWithoutStarting3Bytes
+88/110 Test: USBMIDIParser.sysExEndsWithoutStarting3Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=USBMIDIParser.sysExEndsWithoutStarting3Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"USBMIDIParser.sysExEndsWithoutStarting3Bytes" start time: Jul 26 18:08 CEST
+"USBMIDIParser.sysExEndsWithoutStarting3Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2264,15 +2372,15 @@ Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting3Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"USBMIDIParser.sysExEndsWithoutStarting3Bytes" end time: Jul 26 18:08 CEST
+"USBMIDIParser.sysExEndsWithoutStarting3Bytes" end time: Jul 26 23:12 CEST
 "USBMIDIParser.sysExEndsWithoutStarting3Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-85/106 Testing: SerialMIDIParser.noteOff
-85/106 Test: SerialMIDIParser.noteOff
+89/110 Testing: SerialMIDIParser.noteOff
+89/110 Test: SerialMIDIParser.noteOff
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.noteOff" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.noteOff" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.noteOff" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2291,15 +2399,15 @@ Note: Google Test filter = SerialMIDIParser.noteOff
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.noteOff" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.noteOff" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.noteOff" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-86/106 Testing: SerialMIDIParser.noteOn
-86/106 Test: SerialMIDIParser.noteOn
+90/110 Testing: SerialMIDIParser.noteOn
+90/110 Test: SerialMIDIParser.noteOn
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.noteOn" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.noteOn" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.noteOn" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2318,15 +2426,15 @@ Note: Google Test filter = SerialMIDIParser.noteOn
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.noteOn" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.noteOn" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.noteOn" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-87/106 Testing: SerialMIDIParser.noteOnRunningStatus
-87/106 Test: SerialMIDIParser.noteOnRunningStatus
+91/110 Testing: SerialMIDIParser.noteOnRunningStatus
+91/110 Test: SerialMIDIParser.noteOnRunningStatus
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.noteOnRunningStatus" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.noteOnRunningStatus" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.noteOnRunningStatus" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2345,15 +2453,15 @@ Note: Google Test filter = SerialMIDIParser.noteOnRunningStatus
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.noteOnRunningStatus" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.noteOnRunningStatus" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.noteOnRunningStatus" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-88/106 Testing: SerialMIDIParser.afterTouch
-88/106 Test: SerialMIDIParser.afterTouch
+92/110 Testing: SerialMIDIParser.afterTouch
+92/110 Test: SerialMIDIParser.afterTouch
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.afterTouch" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.afterTouch" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.afterTouch" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2372,15 +2480,15 @@ Note: Google Test filter = SerialMIDIParser.afterTouch
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.afterTouch" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.afterTouch" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.afterTouch" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-89/106 Testing: SerialMIDIParser.controlChange
-89/106 Test: SerialMIDIParser.controlChange
+93/110 Testing: SerialMIDIParser.controlChange
+93/110 Test: SerialMIDIParser.controlChange
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.controlChange" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.controlChange" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.controlChange" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2399,15 +2507,15 @@ Note: Google Test filter = SerialMIDIParser.controlChange
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.controlChange" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.controlChange" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.controlChange" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-90/106 Testing: SerialMIDIParser.programChange
-90/106 Test: SerialMIDIParser.programChange
+94/110 Testing: SerialMIDIParser.programChange
+94/110 Test: SerialMIDIParser.programChange
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.programChange" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.programChange" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.programChange" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2426,15 +2534,15 @@ Note: Google Test filter = SerialMIDIParser.programChange
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.programChange" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.programChange" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.programChange" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-91/106 Testing: SerialMIDIParser.programChangeRunningStatus
-91/106 Test: SerialMIDIParser.programChangeRunningStatus
+95/110 Testing: SerialMIDIParser.programChangeRunningStatus
+95/110 Test: SerialMIDIParser.programChangeRunningStatus
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.programChangeRunningStatus" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.programChangeRunningStatus" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.programChangeRunningStatus" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2453,15 +2561,15 @@ Note: Google Test filter = SerialMIDIParser.programChangeRunningStatus
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.programChangeRunningStatus" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.programChangeRunningStatus" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.programChangeRunningStatus" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-92/106 Testing: SerialMIDIParser.channelPressure
-92/106 Test: SerialMIDIParser.channelPressure
+96/110 Testing: SerialMIDIParser.channelPressure
+96/110 Test: SerialMIDIParser.channelPressure
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.channelPressure" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.channelPressure" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.channelPressure" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2480,15 +2588,15 @@ Note: Google Test filter = SerialMIDIParser.channelPressure
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.channelPressure" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.channelPressure" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.channelPressure" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-93/106 Testing: SerialMIDIParser.pitchBend
-93/106 Test: SerialMIDIParser.pitchBend
+97/110 Testing: SerialMIDIParser.pitchBend
+97/110 Test: SerialMIDIParser.pitchBend
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.pitchBend" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.pitchBend" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.pitchBend" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2507,15 +2615,15 @@ Note: Google Test filter = SerialMIDIParser.pitchBend
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.pitchBend" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.pitchBend" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.pitchBend" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-94/106 Testing: SerialMIDIParser.sysEx2Bytes
-94/106 Test: SerialMIDIParser.sysEx2Bytes
+98/110 Testing: SerialMIDIParser.sysEx2Bytes
+98/110 Test: SerialMIDIParser.sysEx2Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysEx2Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.sysEx2Bytes" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysEx2Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2534,15 +2642,15 @@ Note: Google Test filter = SerialMIDIParser.sysEx2Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.sysEx2Bytes" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysEx2Bytes" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.sysEx2Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-95/106 Testing: SerialMIDIParser.sysEx3Bytes
-95/106 Test: SerialMIDIParser.sysEx3Bytes
+99/110 Testing: SerialMIDIParser.sysEx3Bytes
+99/110 Test: SerialMIDIParser.sysEx3Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysEx3Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.sysEx3Bytes" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysEx3Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2561,15 +2669,15 @@ Note: Google Test filter = SerialMIDIParser.sysEx3Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.sysEx3Bytes" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysEx3Bytes" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.sysEx3Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-96/106 Testing: SerialMIDIParser.sysEx7Bytes
-96/106 Test: SerialMIDIParser.sysEx7Bytes
+100/110 Testing: SerialMIDIParser.sysEx7Bytes
+100/110 Test: SerialMIDIParser.sysEx7Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysEx7Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.sysEx7Bytes" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysEx7Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2588,15 +2696,15 @@ Note: Google Test filter = SerialMIDIParser.sysEx7Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.sysEx7Bytes" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysEx7Bytes" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.sysEx7Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-97/106 Testing: SerialMIDIParser.sysExEndsWithoutStarting1Byte
-97/106 Test: SerialMIDIParser.sysExEndsWithoutStarting1Byte
+101/110 Testing: SerialMIDIParser.sysExEndsWithoutStarting1Byte
+101/110 Test: SerialMIDIParser.sysExEndsWithoutStarting1Byte
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysExEndsWithoutStarting1Byte" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.sysExEndsWithoutStarting1Byte" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysExEndsWithoutStarting1Byte" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2615,15 +2723,15 @@ Note: Google Test filter = SerialMIDIParser.sysExEndsWithoutStarting1Byte
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.sysExEndsWithoutStarting1Byte" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysExEndsWithoutStarting1Byte" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.sysExEndsWithoutStarting1Byte" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-98/106 Testing: SerialMIDIParser.sysExEndsWithoutStarting2Bytes
-98/106 Test: SerialMIDIParser.sysExEndsWithoutStarting2Bytes
+102/110 Testing: SerialMIDIParser.sysExEndsWithoutStarting2Bytes
+102/110 Test: SerialMIDIParser.sysExEndsWithoutStarting2Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysExEndsWithoutStarting2Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.sysExEndsWithoutStarting2Bytes" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysExEndsWithoutStarting2Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2642,15 +2750,15 @@ Note: Google Test filter = SerialMIDIParser.sysExEndsWithoutStarting2Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.sysExEndsWithoutStarting2Bytes" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysExEndsWithoutStarting2Bytes" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.sysExEndsWithoutStarting2Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-99/106 Testing: SerialMIDIParser.sysExEndsWithoutStarting3Bytes
-99/106 Test: SerialMIDIParser.sysExEndsWithoutStarting3Bytes
+103/110 Testing: SerialMIDIParser.sysExEndsWithoutStarting3Bytes
+103/110 Test: SerialMIDIParser.sysExEndsWithoutStarting3Bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=SerialMIDIParser.sysExEndsWithoutStarting3Bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"SerialMIDIParser.sysExEndsWithoutStarting3Bytes" start time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysExEndsWithoutStarting3Bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2669,15 +2777,15 @@ Note: Google Test filter = SerialMIDIParser.sysExEndsWithoutStarting3Bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"SerialMIDIParser.sysExEndsWithoutStarting3Bytes" end time: Jul 26 18:08 CEST
+"SerialMIDIParser.sysExEndsWithoutStarting3Bytes" end time: Jul 26 23:12 CEST
 "SerialMIDIParser.sysExEndsWithoutStarting3Bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-100/106 Testing: Example.Example
-100/106 Test: Example.Example
+104/110 Testing: Example.Example
+104/110 Test: Example.Example
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Example.Example" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Example.Example" start time: Jul 26 18:08 CEST
+"Example.Example" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2696,15 +2804,15 @@ Note: Google Test filter = Example.Example
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Example.Example" end time: Jul 26 18:08 CEST
+"Example.Example" end time: Jul 26 23:12 CEST
 "Example.Example" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-101/106 Testing: millis.millis
-101/106 Test: millis.millis
+105/110 Testing: millis.millis
+105/110 Test: millis.millis
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=millis.millis" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"millis.millis" start time: Jul 26 18:08 CEST
+"millis.millis" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2723,15 +2831,15 @@ Note: Google Test filter = millis.millis
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"millis.millis" end time: Jul 26 18:08 CEST
+"millis.millis" end time: Jul 26 23:12 CEST
 "millis.millis" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-102/106 Testing: Serial.write_byte
-102/106 Test: Serial.write_byte
+106/110 Testing: Serial.write_byte
+106/110 Test: Serial.write_byte
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.write_byte" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Serial.write_byte" start time: Jul 26 18:08 CEST
+"Serial.write_byte" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2750,15 +2858,15 @@ Note: Google Test filter = Serial.write_byte
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Serial.write_byte" end time: Jul 26 18:08 CEST
+"Serial.write_byte" end time: Jul 26 23:12 CEST
 "Serial.write_byte" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-103/106 Testing: Serial.write_bytes
-103/106 Test: Serial.write_bytes
+107/110 Testing: Serial.write_bytes
+107/110 Test: Serial.write_bytes
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.write_bytes" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Serial.write_bytes" start time: Jul 26 18:08 CEST
+"Serial.write_bytes" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2777,15 +2885,15 @@ Note: Google Test filter = Serial.write_bytes
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Serial.write_bytes" end time: Jul 26 18:08 CEST
+"Serial.write_bytes" end time: Jul 26 23:12 CEST
 "Serial.write_bytes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-104/106 Testing: Serial.print_string
-104/106 Test: Serial.print_string
+108/110 Testing: Serial.print_string
+108/110 Test: Serial.print_string
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.print_string" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Serial.print_string" start time: Jul 26 18:08 CEST
+"Serial.print_string" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2804,15 +2912,15 @@ Note: Google Test filter = Serial.print_string
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Serial.print_string" end time: Jul 26 18:08 CEST
+"Serial.print_string" end time: Jul 26 23:12 CEST
 "Serial.print_string" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-105/106 Testing: Serial.println_string
-105/106 Test: Serial.println_string
+109/110 Testing: Serial.println_string
+109/110 Test: Serial.println_string
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests" "--gtest_filter=Serial.println_string" "--gtest_also_run_disabled_tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Serial.println_string" start time: Jul 26 18:08 CEST
+"Serial.println_string" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
@@ -2831,23 +2939,23 @@ Note: Google Test filter = Serial.println_string
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"Serial.println_string" end time: Jul 26 18:08 CEST
+"Serial.println_string" end time: Jul 26 23:12 CEST
 "Serial.println_string" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-106/106 Testing: Tests
-106/106 Test: Tests
+110/110 Testing: Tests
+110/110 Test: Tests
 Command: "/home/pieter/GitHub/Control-Surface/bin/tests"
 Directory: /home/pieter/GitHub/Control-Surface
-"Tests" start time: Jul 26 18:08 CEST
+"Tests" start time: Jul 26 23:12 CEST
 Output:
 ----------------------------------------------------------
 Running main() from gtest_main.cc
-[==========] Running 105 tests from 25 test cases.
+[==========] Running 109 tests from 25 test cases.
 [----------] Global test environment set-up.
 [----------] 7 tests from Button
 [ RUN      ] Button.construct
-[       OK ] Button.construct (1 ms)
+[       OK ] Button.construct (0 ms)
 [ RUN      ] Button.released
 [       OK ] Button.released (0 ms)
 [ RUN      ] Button.falling
@@ -2860,7 +2968,7 @@ Running main() from gtest_main.cc
 [       OK ] Button.debouncePressed (0 ms)
 [ RUN      ] Button.debounceReleased
 [       OK ] Button.debounceReleased (0 ms)
-[----------] 7 tests from Button (1 ms total)
+[----------] 7 tests from Button (0 ms total)
 
 [----------] 5 tests from Array
 [ RUN      ] Array.initializeAndRetrieve
@@ -2873,7 +2981,7 @@ Running main() from gtest_main.cc
 [       OK ] Array.rangeFor (0 ms)
 [ RUN      ] Array.rangeForConst
 [       OK ] Array.rangeForConst (0 ms)
-[----------] 5 tests from Array (0 ms total)
+[----------] 5 tests from Array (1 ms total)
 
 [----------] 1 test from Array2D
 [ RUN      ] Array2D.initialize
@@ -2887,7 +2995,7 @@ Running main() from gtest_main.cc
 [       OK ] BitArray.setClearGet (0 ms)
 [----------] 2 tests from BitArray (0 ms total)
 
-[----------] 11 tests from LinkedList
+[----------] 15 tests from LinkedList
 [ RUN      ] LinkedList.insertNode
 [       OK ] LinkedList.insertNode (0 ms)
 [ RUN      ] LinkedList.loopForward
@@ -2910,7 +3018,15 @@ Running main() from gtest_main.cc
 [       OK ] LinkedList.moveDownLastNode (0 ms)
 [ RUN      ] LinkedList.moveDownOnlyElement
 [       OK ] LinkedList.moveDownOnlyElement (0 ms)
-[----------] 11 tests from LinkedList (0 ms total)
+[ RUN      ] LinkedList.containsInsert
+[       OK ] LinkedList.containsInsert (0 ms)
+[ RUN      ] LinkedList.containsDeleteFirst
+[       OK ] LinkedList.containsDeleteFirst (0 ms)
+[ RUN      ] LinkedList.containsDeleteMiddle
+[       OK ] LinkedList.containsDeleteMiddle (0 ms)
+[ RUN      ] LinkedList.containsDeleteLast
+[       OK ] LinkedList.containsDeleteLast (0 ms)
+[----------] 15 tests from LinkedList (0 ms total)
 
 [----------] 13 tests from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.setFirstLetter
@@ -2958,12 +3074,12 @@ Running main() from gtest_main.cc
 [ RUN      ] MCUVUBankable.setValueBankChangeAddress
 [       OK ] MCUVUBankable.setValueBankChangeAddress (0 ms)
 [ RUN      ] MCUVUBankable.setValueBankChangeChannel
-[       OK ] MCUVUBankable.setValueBankChangeChannel (1 ms)
+[       OK ] MCUVUBankable.setValueBankChangeChannel (0 ms)
 [ RUN      ] MCUVUBankable.overloadBankChangeAddress
 [       OK ] MCUVUBankable.overloadBankChangeAddress (0 ms)
 [ RUN      ] MCUVUBankable.decay
 [       OK ] MCUVUBankable.decay (0 ms)
-[----------] 4 tests from MCUVUBankable (1 ms total)
+[----------] 4 tests from MCUVUBankable (0 ms total)
 
 [----------] 1 test from CCButton
 [ RUN      ] CCButton.pressAndRelease
@@ -2981,15 +3097,15 @@ Running main() from gtest_main.cc
 
 [----------] 1 test from CCButtons
 [ RUN      ] CCButtons.pressAndRelease
-[       OK ] CCButtons.pressAndRelease (0 ms)
-[----------] 1 test from CCButtons (0 ms total)
+[       OK ] CCButtons.pressAndRelease (1 ms)
+[----------] 1 test from CCButtons (1 ms total)
 
 [----------] 2 tests from CCButtonsBankable
 [ RUN      ] CCButtonsBankable.pressChangeBankAndRelease
-[       OK ] CCButtonsBankable.pressChangeBankAndRelease (1 ms)
+[       OK ] CCButtonsBankable.pressChangeBankAndRelease (0 ms)
 [ RUN      ] CCButtonsBankable.pressChangeBankAndReleaseAndPress
 [       OK ] CCButtonsBankable.pressChangeBankAndReleaseAndPress (0 ms)
-[----------] 2 tests from CCButtonsBankable (1 ms total)
+[----------] 2 tests from CCButtonsBankable (0 ms total)
 
 [----------] 5 tests from CCRotaryEncoder
 [ RUN      ] CCRotaryEncoder.turnOneStep
@@ -3002,7 +3118,7 @@ Running main() from gtest_main.cc
 [       OK ] CCRotaryEncoder.turnSixteenSteps (0 ms)
 [ RUN      ] CCRotaryEncoder.turnSixteenStepsBackwards
 [       OK ] CCRotaryEncoder.turnSixteenStepsBackwards (0 ms)
-[----------] 5 tests from CCRotaryEncoder (0 ms total)
+[----------] 5 tests from CCRotaryEncoder (1 ms total)
 
 [----------] 1 test from CCRotaryEncoderBankable
 [ RUN      ] CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep
@@ -3016,12 +3132,12 @@ Running main() from gtest_main.cc
 
 [----------] 3 tests from NoteButtonBankable
 [ RUN      ] NoteButtonBankable.pressAndRelease
-[       OK ] NoteButtonBankable.pressAndRelease (1 ms)
+[       OK ] NoteButtonBankable.pressAndRelease (0 ms)
 [ RUN      ] NoteButtonBankable.changeSettingAndPressAndRelease
 [       OK ] NoteButtonBankable.changeSettingAndPressAndRelease (0 ms)
 [ RUN      ] NoteButtonBankable.pressAndChangeSettingAndRelease
 [       OK ] NoteButtonBankable.pressAndChangeSettingAndRelease (0 ms)
-[----------] 3 tests from NoteButtonBankable (1 ms total)
+[----------] 3 tests from NoteButtonBankable (0 ms total)
 
 [----------] 1 test from NoteButtonLatching
 [ RUN      ] NoteButtonLatching.pressAndRelease
@@ -3035,17 +3151,17 @@ Running main() from gtest_main.cc
 [       OK ] NoteButtonLatchingBankable.changeSettingAndPressAndRelease (0 ms)
 [ RUN      ] NoteButtonLatchingBankable.pressAndChangeSettingAndRelease
 [       OK ] NoteButtonLatchingBankable.pressAndChangeSettingAndRelease (0 ms)
-[----------] 3 tests from NoteButtonLatchingBankable (0 ms total)
+[----------] 3 tests from NoteButtonLatchingBankable (1 ms total)
 
 [----------] 1 test from NoteButtonMatrix
 [ RUN      ] NoteButtonMatrix.pressAndRelease
-[       OK ] NoteButtonMatrix.pressAndRelease (1 ms)
-[----------] 1 test from NoteButtonMatrix (1 ms total)
+[       OK ] NoteButtonMatrix.pressAndRelease (0 ms)
+[----------] 1 test from NoteButtonMatrix (0 ms total)
 
 [----------] 1 test from NoteButtonMatrixBankable
 [ RUN      ] NoteButtonMatrixBankable.pressChangeSettingRelease
-[       OK ] NoteButtonMatrixBankable.pressChangeSettingRelease (0 ms)
-[----------] 1 test from NoteButtonMatrixBankable (0 ms total)
+[       OK ] NoteButtonMatrixBankable.pressChangeSettingRelease (1 ms)
+[----------] 1 test from NoteButtonMatrixBankable (1 ms total)
 
 [----------] 13 tests from USBMIDIParser
 [ RUN      ] USBMIDIParser.noteOff
@@ -3131,14 +3247,14 @@ Running main() from gtest_main.cc
 [----------] 4 tests from Serial (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 105 tests from 25 test cases ran. (5 ms total)
-[  PASSED  ] 105 tests.
+[==========] 109 tests from 25 test cases ran. (5 ms total)
+[  PASSED  ] 109 tests.
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Tests" end time: Jul 26 18:08 CEST
+"Tests" end time: Jul 26 23:12 CEST
 "Tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Jul 26 18:08 CEST
+End testing: Jul 26 23:12 CEST

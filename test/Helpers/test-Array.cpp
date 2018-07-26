@@ -1,4 +1,5 @@
 #include <Helpers/Array.hpp>
+#include <Def/Def.hpp>
 #include <gtest/gtest.h>
 
 TEST(Array, initializeAndRetrieve) {

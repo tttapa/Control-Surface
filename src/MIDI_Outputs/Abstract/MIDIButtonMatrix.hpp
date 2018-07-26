@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Hardware/ButtonMatrix.h>
-#include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 template <uint8_t nb_rows, uint8_t nb_cols>

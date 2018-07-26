@@ -216,3 +216,74 @@ TEST(LinkedList, moveDownOnlyElement) {
     EXPECT_EQ(node.next, nullptr);
     EXPECT_EQ(node.previous, nullptr);
 }
+
+TEST(LinkedList, containsInsert) {
+    Node *first = nullptr;
+    Node *last = nullptr;
+    Node a(1);
+    EXPECT_FALSE(contains(&a, first, last));
+    append(&a, first, last);
+    EXPECT_TRUE(contains(&a, first, last));
+    Node b(2);
+    EXPECT_FALSE(contains(&b, first, last));
+    append(&b, first, last);
+    EXPECT_TRUE(contains(&a, first, last));
+    EXPECT_TRUE(contains(&b, first, last));
+    Node c(3);
+    EXPECT_FALSE(contains(&c, first, last));
+    append(&c, first, last);
+    EXPECT_TRUE(contains(&a, first, last));
+    EXPECT_TRUE(contains(&b, first, last));
+    EXPECT_TRUE(contains(&c, first, last));
+}
+
+TEST(LinkedList, containsDeleteFirst) {
+    Node *first = nullptr;
+    Node *last = nullptr;
+    Node a(1);
+    append(&a, first, last);
+    Node b(2);
+    append(&b, first, last);
+    Node c(3);
+    append(&c, first, last);
+
+    remove(&a, first, last);
+    EXPECT_FALSE(contains(&a, first, last));
+
+    append(&a, first, last);
+    EXPECT_TRUE(contains(&a, first, last));
+}
+
+TEST(LinkedList, containsDeleteMiddle) {
+    Node *first = nullptr;
+    Node *last = nullptr;
+    Node a(1);
+    append(&a, first, last);
+    Node b(2);
+    append(&b, first, last);
+    Node c(3);
+    append(&c, first, last);
+
+    remove(&b, first, last);
+    EXPECT_FALSE(contains(&b, first, last));
+
+    append(&b, first, last);
+    EXPECT_TRUE(contains(&b, first, last));
+}
+
+TEST(LinkedList, containsDeleteLast) {
+    Node *first = nullptr;
+    Node *last = nullptr;
+    Node a(1);
+    append(&a, first, last);
+    Node b(2);
+    append(&b, first, last);
+    Node c(3);
+    append(&c, first, last);
+
+    remove(&c, first, last);
+    EXPECT_FALSE(contains(&c, first, last));
+
+    append(&c, first, last);
+    EXPECT_TRUE(contains(&c, first, last));
+}

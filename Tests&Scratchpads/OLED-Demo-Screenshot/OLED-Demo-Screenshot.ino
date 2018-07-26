@@ -265,10 +265,9 @@ void setup() {
   // MCU rotary encoders
   initializeDisplay();     // Start the OLED display
   Serial.begin(115200);
-  while (!Serial);
-  delay(50);
+  // while (!Serial);
+  // delay(250);
   Control_Surface.begin(); // Initialize Control Surface
-  while(digitalRead(A2) == HIGH);
 }
 
 // ---------------------------------- Loop ---------------------------------- //

@@ -10,7 +10,11 @@
         "unordered_map": "cpp",
         "vector": "cpp",
         "typeinfo": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "functional": "cpp",
+        "future": "cpp",
+        "istream": "cpp",
+        "tuple": "cpp"
     },
     "files.exclude": {
         "**/.git": true,

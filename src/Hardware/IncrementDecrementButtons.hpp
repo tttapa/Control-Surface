@@ -2,11 +2,17 @@
 
 #include "Button.h"
 
-// TODO: move to settings
-constexpr unsigned long longPressDelay = 350;       // milliseconds
-constexpr unsigned long longPressRepeatDelay = 350; // milliseconds
-
 class IncrementDecrementButtons {
+    // TODO: move to settings
+    /** 
+     * @brief   Time after which the press is considered a long press.
+     */
+    static constexpr unsigned long longPressDelay = 450;       // milliseconds
+    /** 
+     * @brief   Time between increments/decrements during long press.
+     */
+    static constexpr unsigned long longPressRepeatDelay = 350; // milliseconds
+
   public:
     IncrementDecrementButtons(const Button &incrementButton,
                               const Button &decrementButton)

@@ -1,10 +1,7 @@
 #pragma once
 
 #include <Helpers/LinkedList.h>
-#include <stdint.h> // uint8_t
-
-typedef unsigned int pin_t;
-typedef int analog_t;
+#include <Def/Def.hpp>
 
 /**
  * @brief   A class for extended IO elements.
