@@ -14,11 +14,11 @@ class BankableMIDIOutputAddressable {
 
   public:
     uint8_t getChannel(uint8_t baseChannel) const {
-        return baseChannel + getChannelsPerBank() * getBankSetting();
+        return baseChannel + getChannelsPerBank() * getSelection();
     }
 
     uint8_t getAddress(uint8_t baseAddress) const {
-        return baseAddress + getAddressesPerBank() * getBankSetting();
+        return baseAddress + getAddressesPerBank() * getSelection();
     }
 
     uint8_t getAddressesPerBank() const {
@@ -29,9 +29,9 @@ class BankableMIDIOutputAddressable {
         return channelsOrAddressesPerBank >> 4;
     }
 
-    uint8_t getRawBankSetting() const { return bank.getBankSetting(); }
+    uint8_t getRawBankSetting() const { return bank.getSelection(); }
 
-    uint8_t getBankSetting() const {
+    uint8_t getSelection() const {
         return lockedSetting == UNLOCKED ? getRawBankSetting() : lockedSetting;
     }
 

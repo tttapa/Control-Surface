@@ -58,8 +58,8 @@ invert	KEYWORD2
 send	KEYWORD2
 
 add	KEYWORD2
-setBankSetting	KEYWORD2
-getBankSetting	KEYWORD2
+select	KEYWORD2
+getSelection	KEYWORD2
 getTransposition	KEYWORD2
 
 begin	KEYWORD2

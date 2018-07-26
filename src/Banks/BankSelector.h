@@ -57,5 +57,5 @@ class BankSelector : public Selector {
     /**
      * @brief   Update the bank setting with the new selector setting.
      */
-    void updateImpl(uint8_t newSetting) { bank.setBankSetting(newSetting); }
+    void updateImpl(uint8_t newSetting) { bank.select(newSetting); }
 };

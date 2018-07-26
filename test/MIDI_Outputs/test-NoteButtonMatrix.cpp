@@ -125,7 +125,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
 
     // Change bank setting
 
-    bank.setBankSetting(1);
+    bank.select(1);
 
     // Release
 

@@ -37,7 +37,7 @@ class BankableMIDIInputAddressable {
                    : (targetChannel - baseChannel) / getChannelsPerBank();
     }
 
-    uint8_t getBankSetting() const { return bank.getBankSetting(); }
+    uint8_t getSelection() const { return bank.getSelection(); }
 
   protected:
     bool matchAddress(uint8_t targetAddress, uint8_t baseAddress,

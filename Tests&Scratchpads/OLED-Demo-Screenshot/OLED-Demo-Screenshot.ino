@@ -30,8 +30,8 @@
    Instantiate a MIDI interface to use for the Control Surface.
 */
 
-// USBMIDI_Interface midi;
-USBDebugMIDI_Interface midi(115200);
+USBMIDI_Interface midi;
+// USBDebugMIDI_Interface midi(115200);
 
 // ----------------------------- Display setup ------------------------------ //
 // ========================================================================== //
@@ -126,7 +126,7 @@ Bank bank(2); // Create a new bank with two tracks per bank
 
 // Create a new bank selector with four bank settings and an increment button
 // on pin A2
-BankSelector bs(bank, {A2}, 4);
+IncrementDecrementSelector bankselector(bank, 4, {8, 9});
 
 // -------------------------- MIDI Output Elements -------------------------- //
 // ========================================================================== //
@@ -142,18 +142,18 @@ Bankable::NoteButton channelButtons[] = {
   {bank, 4, MCU::V_POT_SELECT_1, channel},
   {bank, 5, MCU::MUTE_1, channel},
   {bank, 6, MCU::SOLO_1, channel},
-  {bank, 7, MCU::REC_RDY_1, channel},
-
+  
+  // {bank, 7, MCU::REC_RDY_1, channel},
   // { bank, 12, MCU::V_POT_SELECT_2, channel },
   // { bank, 10, MCU::MUTE_2,         channel },
   // { bank, 11, MCU::SOLO_2,         channel },
 };
 
-NoteButton playButton = {8, MCU::PLAY, channel};
+NoteButton playButton = {7, MCU::PLAY, channel};
 // NoteButton recordButton = {15, MCU::RECORD, channel };
 
 // Bankable::CCRotaryEncoder encoder_A = { bank, {0, 1}, MCU::V_POT_1, channel, 1, 4 };
-Bankable::CCRotaryEncoder encoder_B = {bank,    {2, 3}, MCU::V_POT_2,
+Bankable::CCRotaryEncoder encoder_B = {bank,    {2, 3}, MCU::V_POT_1,
                                        channel, 1,      4
                                       };
 
@@ -201,9 +201,9 @@ MCU::Bankable::VPotRing<4> vpot_B = {bank, 2, channel};
 */
 
 // Time display
-// MCU::TimeDisplayDisplay timedisplaydisplay = {
-//   display, timedisplay, {0, 0}, 1, WHITE
-// };
+MCU::TimeDisplayDisplay timedisplaydisplay = {
+  display, timedisplay, {0, 0}, 1, WHITE
+};
 // position (0, 0), font size (1)
 
 // Play / Record
@@ -251,9 +251,9 @@ MCU::VPotDisplay vpotDisp_A = {display, vpot_A, {0, 10}, 16, 13, WHITE};
 MCU::VPotDisplay vpotDisp_B = {display, vpot_B, {64, 10}, 16, 13, WHITE};
 
 // Bank selector
-SelectorDisplay bsDisp_A = {display, bs, 1, 2, {0, 50}, 2, WHITE};
+SelectorDisplay bsDisp_A = {display, bankselector, 1, 2, {0, 50}, 2, WHITE};
 // first track of the bank (1), two tracks per bank (2), position (0, 50), font size (2)
-SelectorDisplay bsDisp_B = {display, bs, 2, 2, {64, 50}, 2, WHITE};
+SelectorDisplay bsDisp_B = {display, bankselector, 2, 2, {64, 50}, 2, WHITE};
 
 // --------------------------------- Setup ---------------------------------- //
 // ========================================================================== //

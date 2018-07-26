@@ -4,6 +4,7 @@
 #include <Helpers/LinkedList.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <Selectors/Selectable.hpp>
 
 class BankableMIDIInputAddressable;
 class BankableMIDIOutputAddressable;
@@ -33,7 +34,7 @@ class BankableMIDIOutput;
  * However, when the bank setting is changed, this is
  * no longer the case:
  * @code{.cpp}
- * bank.setBankSetting(1);
+ * bank.select(1);
  * @endcode
  * Now that the bank setting is set to one, the number of
  * tracks per bank is added to the channel of each element
@@ -66,7 +67,7 @@ class BankableMIDIOutput;
  * @f$a_0@f$ is the base address of the MIDI_Element, @f$t@f$ is the number of
  * tracks per bank, and @f$s@f$ is the current bank setting.
  */
-class Bank {
+class Bank : public Selectable {
     friend class BankableMIDIInputAddressable;
 
   public:
@@ -97,9 +98,9 @@ class Bank {
      * @param   bankSetting
      *          The new Bank Setting.
      */
-    void setBankSetting(uint8_t bankSetting);
+    void select(uint8_t bankSetting);
 
-    uint8_t getBankSetting() const;
+    uint8_t getSelection() const;
 
     uint8_t getTracksPerBank() const;
 

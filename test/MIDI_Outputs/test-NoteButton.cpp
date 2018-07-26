@@ -90,7 +90,7 @@ TEST(NoteButtonBankable, changeSettingAndPressAndRelease) {
 
     Bank bank(4);
     // Change bank setting
-    bank.setBankSetting(1);
+    bank.select(1);
 
     Bankable::NoteButton button(bank, 2, 0x3C, 7);
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
@@ -148,7 +148,7 @@ TEST(NoteButtonBankable, pressAndChangeSettingAndRelease) {
     button.update();
 
     // Change bank setting
-    bank.setBankSetting(1);
+    bank.select(1);
 
     // Still pressed
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))

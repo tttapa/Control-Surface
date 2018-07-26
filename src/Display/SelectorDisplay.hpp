@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Selectors/Selector.h>
+#include <Selectors/Selector.hpp>
 #include <Display/DisplayElement.hpp>
 
 class SelectorDisplay : public DisplayElement {
@@ -14,7 +14,7 @@ public:
     display.setTextColor(color);
     display.setTextSize(size);
     display.setCursor(x, y);
-    display.print(selector.getSetting() * multiplier + offset);
+    display.print(selector.get() * multiplier + offset);
   }
 
 private:

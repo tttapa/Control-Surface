@@ -37,3 +37,5 @@ const char *Button::getName(Button::State state) {
     }
     return ""; // Keeps the compiler happy
 }
+
+unsigned long Button::stableTime() { return millis() - prevBounceTime; }

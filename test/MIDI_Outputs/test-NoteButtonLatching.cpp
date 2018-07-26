@@ -95,7 +95,7 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
     button.begin();
 
     // Change bank setting
-    bank.setBankSetting(1);
+    bank.select(1);
 
     // Still released
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -152,7 +152,7 @@ TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
     button.update();
 
     // Change bank setting
-    bank.setBankSetting(1);
+    bank.select(1);
 
     // Still pressed
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))

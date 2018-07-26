@@ -56,7 +56,7 @@ class MIDINote : public virtual MIDINote_Base,
         : MIDINote_Base(track, channel), BankableMIDIInputAddressable(config) {}
 
     uint8_t getValue() const override {
-        return values[getBankSetting() % NUMBER_OF_BANKS];
+        return values[getSelection() % NUMBER_OF_BANKS];
     }
 
     void reset() override {

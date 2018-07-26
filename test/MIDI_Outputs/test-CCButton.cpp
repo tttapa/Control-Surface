@@ -91,7 +91,7 @@ TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
     button.begin();
 
     // Change bank setting
-    bank.setBankSetting(1);
+    bank.select(1);
 
     // Still released
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -145,7 +145,7 @@ TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
     button.update();
 
     // Change bank setting
-    bank.setBankSetting(1);
+    bank.select(1);
 
     // Still pressed
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -283,7 +283,7 @@ TEST(CCButtonsBankable, pressChangeBankAndRelease) {
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x7F));
     buttons.update();
 
-    bank.setBankSetting(1);
+    bank.select(1);
 
     // 2 still pressed & pressing 3
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -372,7 +372,7 @@ TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x7F));
     buttons.update();
 
-    bank.setBankSetting(1);
+    bank.select(1);
 
     // 2 still pressed & pressing 3
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))

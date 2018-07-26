@@ -9,7 +9,8 @@
         "forward_list": "cpp",
         "unordered_map": "cpp",
         "vector": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "chrono": "cpp"
     },
     "files.exclude": {
         "**/.git": true,

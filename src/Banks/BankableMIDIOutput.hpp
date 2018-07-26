@@ -11,14 +11,14 @@ class BankableMIDIOutput {
 
   public:
     uint8_t getChannel(uint8_t baseChannel) const {
-        return baseChannel + getChannelsPerBank() * getBankSetting();
+        return baseChannel + getChannelsPerBank() * getSelection();
     }
 
     uint8_t getChannelsPerBank() const { return channelsPerBank; }
 
-    uint8_t getRawBankSetting() const { return bank.getBankSetting(); }
+    uint8_t getRawBankSetting() const { return bank.getSelection(); }
 
-    uint8_t getBankSetting() const {
+    uint8_t getSelection() const {
         return lockedSetting == UNLOCKED ? getRawBankSetting() : lockedSetting;
     }
 

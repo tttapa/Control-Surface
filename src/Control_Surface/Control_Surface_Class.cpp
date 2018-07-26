@@ -1,9 +1,11 @@
 #include "Control_Surface_Class.h"
 #include <Banks/BankSelector.hpp>
+#include <Hardware/ExtendedInputOutput/ExtendedIOElement.h>
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <MIDI_Inputs/MIDIInputElementNote.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <Selectors/Selector.hpp>
 
 Control_Surface_ &Control_Surface_::getInstance() {
     static Control_Surface_ instance;
@@ -41,11 +43,7 @@ MIDI_Interface &Control_Surface_::MIDI() {
     return *midi;
 }
 
-void Control_Surface_::updateSelectors() {
-    for (Selector *element = Selector::getFirst(); element != nullptr;
-         element = element->getNext())
-        element->update();
-}
+void Control_Surface_::updateSelectors() { Selector::updateAll(); }
 
 void Control_Surface_::updateMidiInput() {
     MIDI_Interface &midi = MIDI();

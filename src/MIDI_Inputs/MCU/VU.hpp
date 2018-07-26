@@ -144,7 +144,7 @@ class VU : public virtual VU_Base, public BankableMIDIInputAddressable {
     }
 
     uint8_t getRawValue() const override {
-        return values[getBankSetting() % NUMBER_OF_BANKS];
+        return values[getSelection() % NUMBER_OF_BANKS];
     }
 
     inline bool matchTrack(uint8_t targetTrack) const {

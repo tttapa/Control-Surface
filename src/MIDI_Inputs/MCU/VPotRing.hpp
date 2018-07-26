@@ -113,7 +113,7 @@ class VPotRing : public virtual VPotRing_Base,
     }
 
     uint8_t getValue() const override {
-        return values[getBankSetting() % NUMBER_OF_BANKS];
+        return values[getSelection() % NUMBER_OF_BANKS];
     }
 
     void onBankSettingChange() const override { display(); }

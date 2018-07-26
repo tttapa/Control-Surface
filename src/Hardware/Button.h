@@ -27,12 +27,16 @@ class Button {
      */
     static void invert();
 
+    /**
+     * @brief   An enumeration of the different states a button can be in.
+     */
     enum State {
-        Pressed = 0b00,
-        Released = 0b11,
-        Falling = 0b10,
-        Rising = 0b01
+        Pressed = 0b00,  /** Input went from low to low   (0,0) */
+        Released = 0b11, /** Input went from high to high (1,1) */
+        Falling = 0b10,  /** Input went from high to low  (1,0) */
+        Rising = 0b01    /** Input went from low to high  (0,1) */
     };
+
     /**
      * @brief Get the state of the button.
      *
@@ -66,6 +70,12 @@ class Button {
      * @brief   Return the name of the state as a string.
      */
     static const char *getName(State state);
+
+    /** 
+     * @brief   Return the time in milliseconds that the button has been stable 
+     *          for.
+     */
+    unsigned long stableTime();
 
   private:
     const pin_t pin;

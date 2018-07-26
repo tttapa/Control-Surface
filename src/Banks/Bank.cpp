@@ -1,7 +1,7 @@
 #include "Bank.h"
 #include "BankableMIDIInputAddressable.hpp"
-#include "BankableMIDIOutputAddressable.hpp"
 #include "BankableMIDIOutput.hpp"
+#include "BankableMIDIOutputAddressable.hpp"
 
 Bank::Bank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
     if (tracksPerBank == 0) {
@@ -14,12 +14,12 @@ void Bank::add(BankableMIDIInputAddressable &bankable) {
     LinkedList::append(&bankable, first, last);
 }
 
-void Bank::setBankSetting(uint8_t bankSetting) {
+void Bank::select(uint8_t bankSetting) {
     this->bankSetting = bankSetting;
     first->onBankSettingChangeAll();
 }
 
-uint8_t Bank::getBankSetting() const { return bankSetting; }
+uint8_t Bank::getSelection() const { return bankSetting; }
 
 uint8_t Bank::getTracksPerBank() const { return tracksPerBank; }
 

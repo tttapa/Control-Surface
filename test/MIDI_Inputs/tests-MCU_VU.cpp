@@ -100,7 +100,7 @@ TEST(MCUVUBankable, setValueBankChangeAddress) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     MIDIInputElementChannelPressure::updateAllWith(midimsg);
     EXPECT_EQ(vu.getValue(), 0x0);
-    bank.setBankSetting(1);
+    bank.select(1);
     EXPECT_EQ(vu.getValue(), 0xA);
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -121,9 +121,9 @@ TEST(MCUVUBankable, setValueBankChangeChannel) {
     MIDIInputElementChannelPressure::updateAllWith(midimsg1);
     MIDIInputElementChannelPressure::updateAllWith(midimsg2);
     EXPECT_EQ(vu.getValue(), 0x0);
-    bank.setBankSetting(1);
+    bank.select(1);
     EXPECT_EQ(vu.getValue(), 0xA);
-    bank.setBankSetting(2);
+    bank.select(2);
     EXPECT_EQ(vu.getValue(), 0xB);
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -135,21 +135,21 @@ TEST(MCUVUBankable, overloadBankChangeAddress) {
     constexpr uint8_t track = 5;
     MCU::Bankable::VU<2> vu(bank, track, channel);
     EXPECT_FALSE(vu.getOverload());
-    bank.setBankSetting(1);
+    bank.select(1);
     EXPECT_FALSE(vu.getOverload());
     MIDI_message_matcher midimsgSet = {CHANNEL_PRESSURE, channel - 1,
                                        (track + 4 - 1) << 4 | 0xE, 0};
     MIDIInputElementChannelPressure::updateAllWith(midimsgSet);
-    bank.setBankSetting(0);
+    bank.select(0);
     EXPECT_FALSE(vu.getOverload());
-    bank.setBankSetting(1);
+    bank.select(1);
     EXPECT_TRUE(vu.getOverload());
     MIDI_message_matcher midimsgClr = {CHANNEL_PRESSURE, channel - 1,
                                        (track + 4 - 1) << 4 | 0xF, 0};
     MIDIInputElementChannelPressure::updateAllWith(midimsgClr);
-    bank.setBankSetting(0);
+    bank.select(0);
     EXPECT_FALSE(vu.getOverload());
-    bank.setBankSetting(1);
+    bank.select(1);
     EXPECT_FALSE(vu.getOverload());
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -166,14 +166,14 @@ TEST(MCUVUBankable, decay) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     MIDIInputElementChannelPressure::updateAllWith(midimsg);
     EXPECT_EQ(vu.getValue(), 0x0);
-    bank.setBankSetting(1);
+    bank.select(1);
     EXPECT_EQ(vu.getValue(), 0xA);
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .WillOnce(Return(decayTime));
     MIDIInputElementChannelPressure::updateAll();
-    bank.setBankSetting(0);
+    bank.select(0);
     EXPECT_EQ(vu.getValue(), 0x0);
-    bank.setBankSetting(1);
+    bank.select(1);
     EXPECT_EQ(vu.getValue(), 0x9);
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());

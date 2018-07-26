@@ -101,7 +101,7 @@ TEST(CCRotaryEncoderBankable, turnOneStepChangeSettingTurnOneStep) {
 
     ccenc.update();
 
-    bank.setBankSetting(1);
+    bank.select(1);
 
     EXPECT_CALL(encm, read()).WillOnce(Return(8));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20 + 4, 2));
