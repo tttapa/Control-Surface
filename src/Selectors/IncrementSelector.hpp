@@ -6,7 +6,7 @@
 class IncrementSelector : public virtual Selector {
   public:
     IncrementSelector(Selectable &selectable, setting_t numberOfSettings,
-                      const IncrementButton &buttons, bool wrap = true)
+                      const IncrementButton &button, bool wrap = true)
         : Selector(selectable, numberOfSettings), button(button), wrap(wrap) {}
 
     void beginInput() override { button.begin(); }

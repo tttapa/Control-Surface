@@ -74,6 +74,7 @@
 #include <Selectors/IncrementDecrementSelector.hpp>
 
 #include <Selectors/LEDs/IncrementDecrementSelectorLEDs.hpp>
+#include <Selectors/LEDs/IncrementSelectorLEDs.hpp>
 
 // -------------------------------------------------------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.h>

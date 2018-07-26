@@ -1,5 +1,4 @@
 #include "Control_Surface_Class.h"
-#include <Banks/BankSelector.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedIOElement.h>
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
@@ -28,7 +27,7 @@ void Control_Surface_::begin() {
 
 void Control_Surface_::loop() {
     MIDIOutputElement::updateAll();
-    updateSelectors();
+    Selector::updateAll();
     updateMidiInput();
     updateInputs();
     updateDisplays();
@@ -43,13 +42,14 @@ MIDI_Interface &Control_Surface_::MIDI() {
     return *midi;
 }
 
-void Control_Surface_::updateSelectors() { Selector::updateAll(); }
-
 void Control_Surface_::updateMidiInput() {
     MIDI_Interface &midi = MIDI();
     MIDI_read_t midiReadResult = midi.read();
 
     while (midiReadResult != NO_MESSAGE) {
+
+        // Dispatch of all incomming MIDI messages
+
         if (midiReadResult == CHANNEL_MESSAGE) {
             MIDI_message midichmsg = midi.getChannelMessage();
             MIDI_message_matcher midimsg(midichmsg);
@@ -58,10 +58,10 @@ void Control_Surface_::updateMidiInput() {
             if (midimsg.type != PROGRAM_CHANGE &&
                 midimsg.type != CHANNEL_PRESSURE)
                 DEBUG(">>> " << hex << +midichmsg.header << ' '
-                             << +midimsg.data1 << ' ' << +midimsg.data2);
+                             << +midimsg.data1 << ' ' << +midimsg.data2 << dec);
             else
                 DEBUG(">>> " << hex << +midichmsg.header << ' '
-                             << +midimsg.data1);
+                             << +midimsg.data1 << dec);
 #endif
 
             if (midimsg.type == CC && midimsg.data1 == 0x79) {

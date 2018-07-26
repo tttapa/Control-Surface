@@ -5,6 +5,10 @@
 #include <Display/DisplayElement.hpp>
 #include <Display/DisplayInterface.hpp>
 
+/** 
+ * @brief   This class ensures initialization, updating, and interaction between
+ *          all other classes, it's the glue that holds everything together.
+ */
 class Control_Surface_ {
   public:
     /**
@@ -29,6 +33,8 @@ class Control_Surface_ {
      * @brief   Get the MIDI interface of the Control Surface.
      *
      * @return  A reference to the Control Surface's MIDI interface.
+     * 
+     * @todo    This violate's the Law of Demeter
      */
     MIDI_Interface &MIDI();
 
@@ -37,12 +43,6 @@ class Control_Surface_ {
      * @brief   Control_Surface_ is a singleton, so the constructor is private.
      */
     Control_Surface_() = default;
-
-    /**
-     * @brief   Update all Selector%s (BankSelector%s, Transposer%s,
-     *          ProgramSelector%s).
-     */
-    void updateSelectors();
 
     void updateMidiInput();
 
