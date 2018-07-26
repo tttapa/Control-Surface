@@ -19,7 +19,7 @@ class TimeDisplayDisplay : public DisplayElement {
         display.setTextSize(size);
         display.setCursor(x, y);
 
-        char barStr[5], beatStr[3], frameStr[4];
+        char barStr[6], beatStr[3], frameStr[4];
         timedisplay.getBars(barStr);
         timedisplay.getBeats(beatStr);
         timedisplay.getFrames(frameStr);

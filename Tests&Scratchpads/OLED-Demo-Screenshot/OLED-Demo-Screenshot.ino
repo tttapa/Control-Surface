@@ -137,6 +137,8 @@ IncrementDecrementSelector bankselector(bank, 4, {8, 9});
 
 constexpr uint8_t channel = 1;
 
+PBPotentiometer masterVolume = { A1, 9 };
+
 // Instantiate the buttons
 Bankable::NoteButton channelButtons[] = {
   {bank, 4, MCU::V_POT_SELECT_1, channel},

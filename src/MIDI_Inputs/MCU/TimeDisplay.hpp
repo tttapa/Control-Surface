@@ -13,7 +13,7 @@ class TimeDisplay : public SevenSegmentDisplay<TimeDisplayLength> {
         : SevenSegmentDisplay<TimeDisplayLength>(channel, TimeDisplayAddress) {}
     // TODO: add support for 5-digit bar counts
     void print() const {
-        char barStr[5], beatStr[3], frameStr[4];
+        char barStr[6], beatStr[3], frameStr[4];
         getBars(barStr);
         getBeats(beatStr);
         getFrames(frameStr);
@@ -23,22 +23,28 @@ class TimeDisplay : public SevenSegmentDisplay<TimeDisplayLength> {
     void getBars(char *buff) const {
         if (getCharacterAt(5) == ' ') {
             getText(buff, 0, 3);
-        } else {
+        } else if (getCharacterAt(6) == ' ') {
             getText(buff, 0, 4);
+        } else {
+            getText(buff, 0, 5);
         }
     }
     void getBeats(char *buff) const {
         if (getCharacterAt(5) == ' ') {
             getText(buff, 3, 2);
-        } else {
+        } else if (getCharacterAt(6) == ' ') {
             getText(buff, 4, 2);
+        } else {
+            getText(buff, 5, 2);
         }
     }
     void getFrames(char *buff) const {
         if (getCharacterAt(5) == ' ') {
             getText(buff, 7, 3);
-        } else {
+        } else if (getCharacterAt(6) == ' ') {
             getText(buff, 8, 2);
+        } else {
+            getText(buff, 9, 1);
         }
     }
 };
