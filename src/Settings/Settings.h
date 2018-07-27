@@ -8,11 +8,13 @@
  * @brief All user settings and debugging options can be changed here.
  */
 
+#include <stddef.h>
+
 // ----------------------------- Debug Settings ----------------------------- //
 // ========================================================================== //
 
 /** The debug output. */
-// #define DEBUG_OUT Serial
+#define DEBUG_OUT Serial
 
 // #define DEBUG_MIDI_PACKETS
 
@@ -38,7 +40,13 @@
 #define ANALOG_FILTER_TYPE int16_t
 
 /** The debounce time for momentary push buttons in milliseconds. */
-#define BUTTON_DEBOUNCE_TIME 25
+constexpr unsigned long BUTTON_DEBOUNCE_TIME = 25; // milliseconds
+
+/** The time in millisecoonds before a press is registered as a long press. */
+constexpr unsigned long LONG_PRESS_DELAY = 450; // milliseconds
+
+/** The time between increments/decremnets during a long press. */
+constexpr unsigned long LONG_PRESS_REPEAT_DELAY = 200; // milliseconds
 
 /** The interval between updating all inputs, in microseconds (µs).
  * @todo Implement
@@ -52,7 +60,7 @@
  *  that can be received. The maximum length sent by
  *  the MCU protocol is 120 bytes.
  */
-#define SYSEX_BUFFER_SIZE 128
+constexpr size_t SYSEX_BUFFER_SIZE = 128;
 
 /** The baud rate to use for Hairless MIDI. */
 #define HAIRLESS_BAUD 115200

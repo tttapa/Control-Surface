@@ -79,7 +79,7 @@ FilteredAnalog<PRECISION>::FilteredAnalog(pin_t analogPin)
 
 template <uint8_t PRECISION>
 bool FilteredAnalog<PRECISION>::update() {
-    unsigned int input =
+    analog_t input =
         ExtIO::analogRead(analogPin); // read the raw analog input value
     if (mapFn != nullptr)             // if a map function is specified
         input = mapFn(input);         // apply the map function to the value

@@ -23,9 +23,6 @@ class TimeDisplayDisplay : public DisplayElement {
         timedisplay.getBars(barStr);
         timedisplay.getBeats(beatStr);
         timedisplay.getFrames(frameStr);
-        DEBUGFN(strlen(barStr) << " " << barStr);
-        DEBUGFN(strlen(beatStr) << " " << beatStr);
-        DEBUGFN(strlen(frameStr) << " " << frameStr);
         display.print(barStr);
         display.print(' ');
         display.print(beatStr);

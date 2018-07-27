@@ -3,10 +3,6 @@
 #include "Button.h"
 
 class IncrementButton {
-    // TODO: move to settings
-    static constexpr unsigned long longPressDelay = 450;       // milliseconds
-    static constexpr unsigned long longPressRepeatDelay = 350; // milliseconds
-
   public:
     IncrementButton(const Button &button) : button(button) {}
 
@@ -28,11 +24,11 @@ class IncrementButton {
             return Increment;
         } else { // if (incrState == Button::Pressed)
             if (longPressState == LongPress) {
-                if (millis() - longPressRepeat >= longPressRepeatDelay) {
-                    longPressRepeat += longPressRepeatDelay;
+                if (millis() - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
+                    longPressRepeat += LONG_PRESS_REPEAT_DELAY;
                     return Increment;
                 }
-            } else if (button.stableTime() >= longPressDelay) {
+            } else if (button.stableTime() >= LONG_PRESS_DELAY) {
                 longPressState = LongPress;
                 longPressRepeat = millis();
                 return Increment;

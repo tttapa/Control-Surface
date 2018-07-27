@@ -3,16 +3,6 @@
 #include "Button.h"
 
 class IncrementDecrementButtons {
-    // TODO: move to settings
-    /** 
-     * @brief   Time after which the press is considered a long press.
-     */
-    static constexpr unsigned long longPressDelay = 450;       // milliseconds
-    /** 
-     * @brief   Time between increments/decrements during long press.
-     */
-    static constexpr unsigned long longPressRepeatDelay = 350; // milliseconds
-
   public:
     IncrementDecrementButtons(const Button &incrementButton,
                               const Button &decrementButton)
@@ -69,11 +59,11 @@ class IncrementDecrementButtons {
                    incrState == Button::Pressed) {
             // Not reset and increment pressed → long press?
             if (longPressState == LongPress) {
-                if (millis() - longPressRepeat >= longPressRepeatDelay) {
-                    longPressRepeat += longPressRepeatDelay;
+                if (millis() - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
+                    longPressRepeat += LONG_PRESS_REPEAT_DELAY;
                     return Increment;
                 }
-            } else if (incrementButton.stableTime() >= longPressDelay) {
+            } else if (incrementButton.stableTime() >= LONG_PRESS_DELAY) {
                 longPressState = LongPress;
                 longPressRepeat = millis();
                 return Increment;
@@ -82,11 +72,11 @@ class IncrementDecrementButtons {
                    decrState == Button::Pressed) {
             // Not reset and decrement pressed → long press?
             if (longPressState == LongPress) {
-                if (millis() - longPressRepeat >= longPressRepeatDelay) {
-                    longPressRepeat += longPressRepeatDelay;
+                if (millis() - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
+                    longPressRepeat += LONG_PRESS_REPEAT_DELAY;
                     return Decrement;
                 }
-            } else if (decrementButton.stableTime() >= longPressDelay) {
+            } else if (decrementButton.stableTime() >= LONG_PRESS_DELAY) {
                 longPressState = LongPress;
                 longPressRepeat = millis();
                 return Decrement;

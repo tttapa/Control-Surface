@@ -1067,6 +1067,33 @@ test/Helpers/test-Array.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/test-Array.cpp.s
 .PHONY : test/Helpers/test-Array.cpp.s
 
+test/Helpers/test-EMA.o: test/Helpers/test-EMA.cpp.o
+
+.PHONY : test/Helpers/test-EMA.o
+
+# target to build an object file
+test/Helpers/test-EMA.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/test-EMA.cpp.o
+.PHONY : test/Helpers/test-EMA.cpp.o
+
+test/Helpers/test-EMA.i: test/Helpers/test-EMA.cpp.i
+
+.PHONY : test/Helpers/test-EMA.i
+
+# target to preprocess a source file
+test/Helpers/test-EMA.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/test-EMA.cpp.i
+.PHONY : test/Helpers/test-EMA.cpp.i
+
+test/Helpers/test-EMA.s: test/Helpers/test-EMA.cpp.s
+
+.PHONY : test/Helpers/test-EMA.s
+
+# target to generate assembly for a file
+test/Helpers/test-EMA.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/test-EMA.cpp.s
+.PHONY : test/Helpers/test-EMA.cpp.s
+
 test/Helpers/tests-bit-array.o: test/Helpers/tests-bit-array.cpp.o
 
 .PHONY : test/Helpers/tests-bit-array.o
@@ -1473,6 +1500,9 @@ help:
 	@echo "... test/Helpers/test-Array.o"
 	@echo "... test/Helpers/test-Array.i"
 	@echo "... test/Helpers/test-Array.s"
+	@echo "... test/Helpers/test-EMA.o"
+	@echo "... test/Helpers/test-EMA.i"
+	@echo "... test/Helpers/test-EMA.s"
 	@echo "... test/Helpers/tests-bit-array.o"
 	@echo "... test/Helpers/tests-bit-array.i"
 	@echo "... test/Helpers/tests-bit-array.s"

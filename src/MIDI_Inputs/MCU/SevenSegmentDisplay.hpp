@@ -65,7 +65,6 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
             offset = LENGTH - 1;
         if (length > LENGTH - offset)
             length = LENGTH - offset;
-        DEBUGFN(DEBUGVAR(offset) << '\t' << DEBUGVAR(length));
         for (uint8_t i = 0; i < length; i++)
             buffer[i] = getCharacterAt(i + offset);
         buffer[length] = '\0';
