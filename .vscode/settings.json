@@ -14,7 +14,8 @@
         "functional": "cpp",
         "future": "cpp",
         "istream": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "type_traits": "cpp"
     },
     "files.exclude": {
         "**/.git": true,

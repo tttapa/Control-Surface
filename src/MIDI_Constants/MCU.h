@@ -144,13 +144,26 @@ constexpr uint8_t RELAY                  = 0x76; // In
 
 // Control Change
 
-constexpr uint8_t V_POT_1  = 0x10; // In Out
-constexpr uint8_t V_POT_2  = 0x11; // In Out
-constexpr uint8_t V_POT_3  = 0x12; // In Out
-constexpr uint8_t V_POT_4  = 0x13; // In Out
-constexpr uint8_t V_POT_5  = 0x14; // In Out
-constexpr uint8_t V_POT_6  = 0x15; // In Out
-constexpr uint8_t V_POT_7  = 0x16; // In Out
-constexpr uint8_t V_POT_8  = 0x17; // In Out
+constexpr uint8_t V_POT_1  = 0x10; // Out
+constexpr uint8_t V_POT_2  = 0x11; // Out
+constexpr uint8_t V_POT_3  = 0x12; // Out
+constexpr uint8_t V_POT_4  = 0x13; // Out
+constexpr uint8_t V_POT_5  = 0x14; // Out
+constexpr uint8_t V_POT_6  = 0x15; // Out
+constexpr uint8_t V_POT_7  = 0x16; // Out
+constexpr uint8_t V_POT_8  = 0x17; // Out
+
+// Pitch Bend
+
+constexpr uint8_t VOLUME_1 = 0x1; // In Out
+constexpr uint8_t VOLUME_2 = 0x2; // In Out
+constexpr uint8_t VOLUME_3 = 0x3; // In Out
+constexpr uint8_t VOLUME_4 = 0x4; // In Out
+constexpr uint8_t VOLUME_5 = 0x5; // In Out
+constexpr uint8_t VOLUME_6 = 0x6; // In Out
+constexpr uint8_t VOLUME_7 = 0x7; // In Out
+constexpr uint8_t VOLUME_8 = 0x8; // In Out
+
+constexpr uint8_t MASTER_VOLUME = 0x9;
 
 };

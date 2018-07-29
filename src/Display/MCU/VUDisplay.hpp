@@ -10,8 +10,9 @@ class VUDisplay : public DisplayElement {
     VUDisplay(DisplayInterface &display, VU_Base &vu, Location loc,
               uint16_t width, uint8_t blockheight, uint8_t spacing,
               uint16_t color)
-        : DisplayElement(display), vu(vu), x(loc.x), y(loc.y), width(width),
-          blockheight(blockheight), spacing(spacing), color(color) {}
+        : DisplayElement(display), vu(vu), x(loc.x), y(loc.y - blockheight + 1),
+          width(width), blockheight(blockheight), spacing(spacing),
+          color(color) {}
     void draw() {
         uint8_t value = vu.getValue();
 

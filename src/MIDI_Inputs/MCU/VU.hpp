@@ -60,7 +60,7 @@ class VU_Base : public MIDIInputElementChannelPressure {
 
 class VU : virtual public VU_Base {
   public:
-    VU(uint8_t track, uint8_t channel = 1, unsigned int decayTime = 300)
+    VU(uint8_t track, uint8_t channel = 1, unsigned int decayTime = 150)
         : VU_Base(track, channel, decayTime) {}
 
     bool updateImpl(const MIDI_message_matcher &midimsg) {
@@ -108,7 +108,7 @@ template <size_t NUMBER_OF_BANKS>
 class VU : public virtual VU_Base, public BankableMIDIInputAddressable {
   public:
     VU(const BankConfigAddressable &config, uint8_t track, uint8_t channel = 1,
-       unsigned int decayTime = 300)
+       unsigned int decayTime = 150)
         : VU_Base(track, channel, decayTime),
           BankableMIDIInputAddressable(config) {}
 
