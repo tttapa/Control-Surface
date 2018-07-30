@@ -5,7 +5,7 @@
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
-#include <MIDI_Outputs/Abstract/MIDIButtonMatrix.hpp> // For AddressMatrix
+#include <Def/Def.hpp>
 
 namespace Bankable {
 
@@ -14,7 +14,8 @@ namespace Bankable {
  * @todo    Documentation.
  * @see     ButtonMatrix
  */
-template <class Sender, uint8_t nb_rows, uint8_t nb_cols>
+template <DigitalSendFunction sendOn, DigitalSendFunction sendOff,
+          uint8_t nb_rows, uint8_t nb_cols>
 class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
                          public MIDIOutputElement,
                          public ButtonMatrix<nb_rows, nb_cols> {
@@ -45,9 +46,9 @@ class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
             if (!activeButtons)
                 lock(); // Don't allow changing of the bank setting
             activeButtons++;
-            Sender::sendOn(getChannel(baseChannel), address);
+            sendOn(getChannel(baseChannel), address);
         } else {
-            Sender::sendOff(getChannel(baseChannel), address);
+            sendOff(getChannel(baseChannel), address);
             activeButtons--;
             if (!activeButtons)
                 unlock();

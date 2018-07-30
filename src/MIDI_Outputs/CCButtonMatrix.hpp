@@ -23,7 +23,8 @@
  */
 template <uint8_t nb_rows, uint8_t nb_cols>
 class CCButtonMatrix
-    : public MIDIButtonMatrix<DigitalCCSender, nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<DigitalCCSender::sendOn, DigitalCCSender::sendOff,
+                              nb_rows, nb_cols> {
   public:
     /**
      * @brief   Create a new CCButtonMatrix object with the given pins,
@@ -46,6 +47,7 @@ class CCButtonMatrix
                    const PinList<nb_cols> &colPins,
                    const AddressMatrix<nb_rows, nb_cols> &controllers,
                    uint8_t channel)
-        : MIDIButtonMatrix<DigitalCCSender, nb_rows, nb_cols>(
-              rowPins, colPins, controllers, channel) {}
+        : MIDIButtonMatrix<DigitalCCSender::sendOn, DigitalCCSender::sendOff,
+                           nb_rows, nb_cols>(rowPins, colPins, controllers,
+                                             channel) {}
 };

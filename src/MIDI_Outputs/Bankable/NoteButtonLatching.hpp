@@ -16,7 +16,9 @@ namespace Bankable {
  *
  * @ingroup MIDIOutputElements
  */
-class NoteButtonLatching : public MIDIButtonLatching<DigitalNoteSender> {
+class NoteButtonLatching
+    : public MIDIButtonLatching<DigitalNoteSender::sendOn,
+                                DigitalNoteSender::sendOff> {
   public:
     /**
      * @brief   Create a new Bankable NoteButtonLatching object with the given 
@@ -32,7 +34,9 @@ class NoteButtonLatching : public MIDIButtonLatching<DigitalNoteSender> {
      */
     NoteButtonLatching(const BankConfigAddressable &config, pin_t pin,
                        uint8_t note, uint8_t channel)
-        : MIDIButtonLatching(config, pin, note, channel) {}
+        : MIDIButtonLatching<DigitalNoteSender::sendOn,
+                             DigitalNoteSender::sendOff>(config, pin, note,
+                                                         channel) {}
 };
 
 } // namespace Bankable

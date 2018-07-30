@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <Def/Def.hpp>
 #include <Hardware/Button.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -13,7 +14,7 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <class Sender>
+template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
 class MIDIButtonLatching : public MIDIOutputElement,
                            public BankableMIDIOutputAddressable {
   protected:
@@ -34,8 +35,8 @@ class MIDIButtonLatching : public MIDIOutputElement,
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling || state == Button::Rising) {
-            Sender::sendOn(getChannel(baseChannel), getAddress(baseAddress));
-            Sender::sendOff(getChannel(baseChannel), getAddress(baseAddress));
+            sendOn(getChannel(baseChannel), getAddress(baseAddress));
+            sendOff(getChannel(baseChannel), getAddress(baseAddress));
         }
     }
 

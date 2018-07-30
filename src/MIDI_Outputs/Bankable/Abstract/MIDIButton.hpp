@@ -3,6 +3,7 @@
 #include <Banks/BankableMIDIOutputAddressable.hpp>
 #include <Hardware/Button.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <Def/Def.hpp>
 
 namespace Bankable {
 
@@ -13,7 +14,7 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <class Sender>
+template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
 class MIDIButton : public BankableMIDIOutputAddressable,
                    public MIDIOutputElement {
   protected:
@@ -35,9 +36,9 @@ class MIDIButton : public BankableMIDIOutputAddressable,
         Button::State state = button.getState();
         if (state == Button::Falling) {
             lock();
-            Sender::sendOn(getChannel(baseChannel), getAddress(baseAddress));
+            sendOn(getChannel(baseChannel), getAddress(baseAddress));
         } else if (state == Button::Rising) {
-            Sender::sendOff(getChannel(baseChannel), getAddress(baseAddress));
+            sendOff(getChannel(baseChannel), getAddress(baseAddress));
             unlock();
         }
     }

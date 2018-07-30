@@ -7,6 +7,7 @@
 #endif
 
 #include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <Def/Def.hpp>
 #include <Encoder.h>
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -19,7 +20,7 @@ using EncoderPinList = Array<uint8_t, 2>;
  * @brief   An abstract class for rotary encoders that send MIDI events and that
  *          can be added to a Bank.
  */
-template <class Sender>
+template <RelativeSendFunction send>
 class MIDIRotaryEncoder : public BankableMIDIOutputAddressable,
                           public MIDIOutputElement {
   protected:
@@ -55,7 +56,7 @@ class MIDIRotaryEncoder : public BankableMIDIOutputAddressable,
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         if (difference) {
-            Sender::send(difference * speedMultiply, channel, address);
+            send(difference * speedMultiply, channel, address);
             previousPosition += difference * pulsesPerStep;
         }
     }

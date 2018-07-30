@@ -9,13 +9,12 @@
 #include <Encoder.h>
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
-
-using EncoderPinList = Array<uint8_t, 2>;
+#include <Def/Def.hpp>
 
 /**
  * @brief   An abstract class for rotary encoders that send MIDI events.
  */
-template <class Sender>
+template <RelativeSendFunction send>
 class MIDIRotaryEncoder : public MIDIOutputElement {
   protected:
     /**
@@ -43,7 +42,7 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         if (difference) {
-            Sender::send(difference * speedMultiply, channel, address);
+            send(difference * speedMultiply, channel, address);
             previousPosition += difference * pulsesPerStep;
         }
     }

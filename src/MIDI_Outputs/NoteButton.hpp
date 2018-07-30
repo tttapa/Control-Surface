@@ -14,7 +14,8 @@
  *
  * @ingroup MIDIOutputElements
  */
-class NoteButton : public MIDIButton<DigitalNoteSender> {
+class NoteButton
+    : public MIDIButton<DigitalNoteSender::sendOn, DigitalNoteSender::sendOff> {
   public:
     /**
      * @brief   Create a new NoteButton object with the given pin, note number

@@ -24,7 +24,8 @@ namespace Bankable {
  */
 template <uint8_t nb_rows, uint8_t nb_cols>
 class NoteButtonMatrix
-    : public MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<DigitalNoteSender::sendOn,
+                              DigitalNoteSender::sendOff, nb_rows, nb_cols> {
   public:
     /**
      * @brief   Create a new Bankable NoteButtonMatrix object with the given 
@@ -48,7 +49,8 @@ class NoteButtonMatrix
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
                      uint8_t channel)
-        : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>(
+        : MIDIButtonMatrix<DigitalNoteSender::sendOn,
+                           DigitalNoteSender::sendOff, nb_rows, nb_cols>(
               config, rowPins, colPins, addresses, channel) {}
 };
 

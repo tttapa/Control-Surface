@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Def/Def.hpp>
 #include <Hardware/ButtonMatrix.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -11,7 +12,8 @@ using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
  * @todo    Documentation.
  * @see     ButtonMatrix
  */
-template <class Sender, uint8_t nb_rows, uint8_t nb_cols>
+template <DigitalSendFunction sendOn, DigitalSendFunction sendOff,
+          uint8_t nb_rows, uint8_t nb_cols>
 class MIDIButtonMatrix : public MIDIOutputElement,
                          public ButtonMatrix<nb_rows, nb_cols> {
 
@@ -36,9 +38,9 @@ class MIDIButtonMatrix : public MIDIOutputElement,
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
         uint8_t address = addresses[row][col];
         if (state == LOW)
-            Sender::sendOn(baseChannel, address);
+            sendOn(baseChannel, address);
         else
-            Sender::sendOff(baseChannel, address);
+            sendOff(baseChannel, address);
     }
 
     AddressMatrix<nb_rows, nb_cols> addresses;

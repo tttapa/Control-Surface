@@ -15,7 +15,7 @@
  * @ingroup MIDIOutputElements
  */
 class CCPotentiometer
-    : public MIDIFilteredAnalogAddressable<ContinuousCCSender, 7> {
+    : public MIDIFilteredAnalogAddressable<ContinuousCCSender::send, 7> {
   public:
     /** 
      * @brief   Create a new CCPotentiometer object with the given analog pin, 
@@ -29,6 +29,6 @@ class CCPotentiometer
      *          The MIDI channel. [1, 16]
      */
     CCPotentiometer(pin_t analogPin, uint8_t controller, uint8_t channel = 1)
-        : MIDIFilteredAnalogAddressable<ContinuousCCSender, 7>(
+        : MIDIFilteredAnalogAddressable<ContinuousCCSender::send, 7>(
               analogPin, controller, channel) {}
 };

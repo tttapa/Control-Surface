@@ -2,6 +2,7 @@
 
 #include <Hardware/Button.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <Def/Def.hpp>
 
 /**
  * @brief   A class for latching buttons and switches that send MIDI events.
@@ -10,7 +11,7 @@
  *
  * @see     Button
  */
-template <class Sender>
+template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
 class MIDIButtonLatching : public MIDIOutputElement {
   protected:
     /**
@@ -28,8 +29,8 @@ class MIDIButtonLatching : public MIDIOutputElement {
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling || state == Button::Rising) {
-            Sender::sendOn(baseChannel, baseAddress);
-            Sender::sendOff(baseChannel, baseAddress);
+            sendOn(baseChannel, baseAddress);
+            sendOff(baseChannel, baseAddress);
         }
     }
 

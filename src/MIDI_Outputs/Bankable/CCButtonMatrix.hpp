@@ -25,7 +25,8 @@ namespace Bankable {
  */
 template <uint8_t nb_rows, uint8_t nb_cols>
 class CCButtonMatrix
-    : public MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<DigitalNoteSender::sendOn,
+                              DigitalCCSender::sendOff, nb_rows, nb_cols> {
   public:
     /**
      * @brief   Create a new Bankable CCButtonMatrix object with the given pins,
@@ -49,8 +50,9 @@ class CCButtonMatrix
                    const PinList<nb_cols> &colPins,
                    const AddressMatrix<nb_rows, nb_cols> &addresses,
                    uint8_t channel)
-        : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>(
-              config, rowPins, colPins, addresses, channel) {}
+        : MIDIButtonMatrix<DigitalNoteSender::sendOn, DigitalCCSender::sendOff,
+                           nb_rows, nb_cols>(config, rowPins, colPins,
+                                             addresses, channel) {}
 };
 
 } // namespace Bankable

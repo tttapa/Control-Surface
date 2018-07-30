@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Def/Def.hpp>
 #include <Hardware/FilteredAnalog.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -13,7 +14,7 @@
  *
  * @see     FilteredAnalog
  */
-template <class Sender, uint8_t PRECISION>
+template <ContinuousSendFunction7Bit send, uint8_t PRECISION>
 class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
   protected:
     /**
@@ -32,7 +33,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            Sender::send(filteredAnalog.getValue(), channel, address);
+            send(filteredAnalog.getValue(), channel, address);
     }
 
     /**
@@ -65,7 +66,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
  *
  * @see     FilteredAnalog
  */
-template <class Sender, uint8_t PRECISION>
+template <ContinuousSendFunction14Bit send, uint8_t PRECISION>
 class MIDIFilteredAnalog : public MIDIOutputElement {
   protected:
     /**
@@ -83,7 +84,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            Sender::send(filteredAnalog.getValue(), channel);
+            send(filteredAnalog.getValue(), channel);
     }
 
     /**

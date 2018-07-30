@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Def/Def.hpp>
 #include <Hardware/Button.h>
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -11,7 +12,8 @@
  *
  * @see     Button
  */
-template <uint8_t NUMBER_OF_BUTTONS, class Sender>
+template <DigitalSendFunction sendOn, DigitalSendFunction sendOff,
+          uint8_t NUMBER_OF_BUTTONS>
 class MIDIButtons : public MIDIOutputElement {
   protected:
     /**
@@ -39,9 +41,9 @@ class MIDIButtons : public MIDIOutputElement {
         for (Button &button : buttons) {
             Button::State state = button.getState();
             if (state == Button::Falling) {
-                Sender::sendOn(channel, address);
+                sendOn(channel, address);
             } else if (state == Button::Rising) {
-                Sender::sendOff(channel, address);
+                sendOff(channel, address);
             }
             channel += channelIncrement;
             address += addressIncrement;

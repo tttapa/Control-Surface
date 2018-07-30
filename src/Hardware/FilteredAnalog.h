@@ -1,13 +1,12 @@
 #pragma once
 
+#include <Def/Def.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <Helpers/EMA.h>
 #include <Helpers/Hysteresis.h>
 #include <Settings/SettingsWrapper.h>
 
 constexpr static uint8_t ADC_BITS = 10;
-
-using MappingFunction = int(*(int));
 
 /**
  * A class that reads and filters an analog input.
@@ -81,9 +80,9 @@ template <uint8_t PRECISION>
 bool FilteredAnalog<PRECISION>::update() {
     analog_t input =
         ExtIO::analogRead(analogPin); // read the raw analog input value
+    input = filter.filter(input);     // apply a low-pass EMA filter
     if (mapFn != nullptr)             // if a map function is specified
         input = mapFn(input);         // apply the map function to the value
-    input = filter.filter(input);     // apply a low-pass EMA filter
     return hysteresis.update(input);  // apply hysteresis
 }
 

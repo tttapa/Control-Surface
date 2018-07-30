@@ -16,7 +16,8 @@
  *
  * @ingroup MIDIOutputElements
  */
-class CCButtonLatching : public MIDIButtonLatching<DigitalCCSender> {
+class CCButtonLatching : public MIDIButtonLatching<DigitalCCSender::sendOn,
+                                                   DigitalCCSender::sendOff> {
   public:
     /**
      * @brief   Create a new CCButtonLatching object with the given pin,

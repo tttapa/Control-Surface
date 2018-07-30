@@ -22,7 +22,8 @@
  */
 template <uint8_t nb_rows, uint8_t nb_cols>
 class NoteButtonMatrix
-    : public MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<DigitalNoteSender::sendOn,
+                              DigitalNoteSender::sendOff, nb_rows, nb_cols> {
   public:
     /**
      * @brief   Create a new NoteButtonMatrix object with the given pins,
@@ -45,6 +46,7 @@ class NoteButtonMatrix
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &notes,
                      uint8_t channel = 1)
-        : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>(
+        : MIDIButtonMatrix<DigitalNoteSender::sendOn,
+                           DigitalNoteSender::sendOff, nb_rows, nb_cols>(
               rowPins, colPins, notes, channel) {}
 };

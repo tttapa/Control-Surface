@@ -19,7 +19,9 @@
  *          The number of buttons in the collection.
  */
 template <uint8_t NUMBER_OF_BUTTONS>
-class CCButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalCCSender> {
+class CCButtons
+    : public MIDIButtons<DigitalCCSender::sendOn, DigitalCCSender::sendOff,
+                         NUMBER_OF_BUTTONS> {
   public:
     /**
      * @brief   Create a new CCButtons object with the given pins,
@@ -43,7 +45,7 @@ class CCButtons : public MIDIButtons<NUMBER_OF_BUTTONS, DigitalCCSender> {
     CCButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
               uint8_t baseAddress, uint8_t baseChannel = 1,
               uint8_t addressIncrement = 1, uint8_t channelIncrement = 0)
-        : MIDIButtons<NUMBER_OF_BUTTONS, DigitalCCSender>(
-              buttons, baseAddress, baseChannel, addressIncrement,
-              channelIncrement) {}
+        : MIDIButtons<DigitalCCSender::sendOn, DigitalCCSender::sendOff,
+                      NUMBER_OF_BUTTONS>(buttons, baseAddress, baseChannel,
+                                         addressIncrement, channelIncrement) {}
 };

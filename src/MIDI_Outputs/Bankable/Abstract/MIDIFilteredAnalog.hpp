@@ -2,6 +2,7 @@
 
 #include <Banks/BankableMIDIOutput.hpp>
 #include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <Def/Def.hpp>
 #include <Hardware/FilteredAnalog.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -18,7 +19,7 @@ namespace Bankable {
  *
  * @see     FilteredAnalog
  */
-template <class Sender, uint8_t PRECISION>
+template <ContinuousSendFunction7Bit send, uint8_t PRECISION>
 class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
                                       public BankableMIDIOutputAddressable {
   protected:
@@ -40,8 +41,8 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            Sender::send(filteredAnalog.getValue(), getChannel(baseChannel),
-                         getAddress(baseAddress));
+            send(filteredAnalog.getValue(), getChannel(baseChannel),
+                 getAddress(baseAddress));
     }
 
     /**
@@ -74,7 +75,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
  *
  * @see     FilteredAnalog
  */
-template <class Sender, uint8_t PRECISION>
+template <ContinuousSendFunction14Bit send, uint8_t PRECISION>
 class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
   protected:
     /**
@@ -93,7 +94,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            Sender::send(filteredAnalog.getValue(), getChannel(channel));
+            send(filteredAnalog.getValue(), getChannel(channel));
     }
 
     /**

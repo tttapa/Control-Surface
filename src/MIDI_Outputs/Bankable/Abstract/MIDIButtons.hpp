@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <Def/Def.hpp>
 #include <Hardware/Button.h>
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -14,7 +15,8 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <uint8_t NUMBER_OF_BUTTONS, class Sender>
+template <DigitalSendFunction sendOn, DigitalSendFunction sendOff,
+          uint8_t NUMBER_OF_BUTTONS>
 class MIDIButtons : public BankableMIDIOutputAddressable,
                     public MIDIOutputElement {
   protected:
@@ -47,9 +49,9 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
                 if (!activeButtons)
                     lock(); // Don't allow changing of the bank setting
                 activeButtons++;
-                Sender::sendOn(channel, address);
+                sendOn(channel, address);
             } else if (state == Button::Rising) {
-                Sender::sendOff(channel, address);
+                sendOff(channel, address);
                 activeButtons--;
                 if (!activeButtons)
                     unlock();

@@ -2,6 +2,7 @@
 
 #include <Hardware/Button.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <Def/Def.hpp>
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
@@ -10,7 +11,7 @@
  *
  * @see     Button
  */
-template <class Sender>
+template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
 class MIDIButton : public MIDIOutputElement {
   protected:
     /**
@@ -28,9 +29,9 @@ class MIDIButton : public MIDIOutputElement {
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling) {
-            Sender::sendOn(baseChannel, baseAddress);
+            sendOn(baseChannel, baseAddress);
         } else if (state == Button::Rising) {
-            Sender::sendOff(baseChannel, baseAddress);
+            sendOff(baseChannel, baseAddress);
         }
     }
 

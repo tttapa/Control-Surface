@@ -14,7 +14,8 @@
  *
  * @ingroup MIDIOutputElements
  */
-class CCButton : public MIDIButton<DigitalCCSender> {
+class CCButton
+    : public MIDIButton<DigitalCCSender::sendOn, DigitalCCSender::sendOff> {
   public:
     /**
      * @brief   Create a new CCButton object with the given pin,
@@ -29,5 +30,5 @@ class CCButton : public MIDIButton<DigitalCCSender> {
      *          The MIDI Channel. [1, 16]
      */
     CCButton(pin_t pin, uint8_t controller, uint8_t channel)
-        : MIDIButton<DigitalCCSender>(pin, controller, channel) {}
+        : MIDIButton(pin, controller, channel) {}
 };

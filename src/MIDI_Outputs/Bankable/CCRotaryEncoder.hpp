@@ -17,7 +17,7 @@ namespace Bankable {
  *
  * @ingroup MIDIOutputElements
  */
-class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
+class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender::send> {
   public:
     /**
      * @brief   Construct a new Bankable CCRotaryEncoder object with the given 
@@ -50,16 +50,17 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
                     const EncoderPinList &pins, uint8_t address,
                     uint8_t channel, uint8_t speedMultiply,
                     uint8_t pulsesPerStep)
-        : MIDIRotaryEncoder<RelativeCCSender>(config, pins, address, channel,
-                                              speedMultiply, pulsesPerStep) {}
+        : MIDIRotaryEncoder<RelativeCCSender::send>(
+              config, pins, address, channel, speedMultiply, pulsesPerStep) {}
 
 // For tests only
 #ifndef ARDUINO
     CCRotaryEncoder(const BankConfigAddressable &config, const Encoder &encoder,
                     uint8_t address, uint8_t channel, uint8_t speedMultiply,
                     uint8_t pulsesPerStep)
-        : MIDIRotaryEncoder<RelativeCCSender>(config, encoder, address, channel,
-                                              speedMultiply, pulsesPerStep) {}
+        : MIDIRotaryEncoder<RelativeCCSender::send>(
+              config, encoder, address, channel, speedMultiply, pulsesPerStep) {
+    }
 #endif
 };
 

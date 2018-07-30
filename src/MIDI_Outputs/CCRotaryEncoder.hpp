@@ -15,7 +15,7 @@
  *
  * @ingroup MIDIOutputElements
  */
-class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
+class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender::send> {
   public:
     /**
      * @brief   Construct a new CCRotaryEncoder object with the given pins, 
@@ -46,14 +46,14 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
     CCRotaryEncoder(const EncoderPinList &pins, uint8_t address,
                     uint8_t channel = 1, uint8_t speedMultiply = 1,
                     uint8_t pulsesPerStep = 4)
-        : MIDIRotaryEncoder<RelativeCCSender>(pins, address, channel,
+        : MIDIRotaryEncoder(pins, address, channel,
                                               speedMultiply, pulsesPerStep) {}
 
 // For tests only
 #ifndef ARDUINO
     CCRotaryEncoder(const Encoder &encoder, uint8_t address, uint8_t channel,
                     uint8_t speedMultiply, uint8_t pulsesPerStep)
-        : MIDIRotaryEncoder<RelativeCCSender>(encoder, address, channel,
+        : MIDIRotaryEncoder(encoder, address, channel,
                                               speedMultiply, pulsesPerStep) {}
 #endif
 };
