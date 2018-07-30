@@ -1,7 +1,7 @@
 #include "MIDI_Interface.h"
 
 MIDI_Interface::MIDI_Interface(MIDI_Parser &parser) : parser(parser) {
-    setDefault(); // Make this the default MIDI Interface
+    setAsDefault(); // Make this the default MIDI Interface
 }
 
 MIDI_Interface::~MIDI_Interface() {
@@ -11,11 +11,11 @@ MIDI_Interface::~MIDI_Interface() {
 
 MIDI_Interface *MIDI_Interface::DefaultMIDI_Interface = nullptr;
 
-void MIDI_Interface::setDefault() { DefaultMIDI_Interface = this; }
+void MIDI_Interface::setAsDefault() { DefaultMIDI_Interface = this; }
 
 MIDI_Interface *MIDI_Interface::getDefault() { return DefaultMIDI_Interface; }
 
-// ----------------------------------SENDING--------------------------------- //
+// -------------------------------- SENDING --------------------------------- //
 
 void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) {
     c--;             // Channels are zero-based
@@ -38,7 +38,7 @@ void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1) {
     sendImpl(m, c, d1);
 }
 
-// ----------------------------------PARSING--------------------------------- //
+// -------------------------------- PARSING --------------------------------- //
 
 MIDI_message MIDI_Interface::getChannelMessage() {
     return parser.getChannelMessage();

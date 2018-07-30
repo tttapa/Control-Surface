@@ -78,7 +78,7 @@ class MIDI_Interface {
     /**
      * @brief   Set this MIDI interface as the default interface.
      */
-    void setDefault();
+    void setAsDefault();
 
   protected:
     /**
