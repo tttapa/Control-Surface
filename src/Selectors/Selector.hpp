@@ -16,11 +16,12 @@ class Selector {
     virtual ~Selector() { LinkedList::remove(this, first, last); }
 
     virtual void beginInput() = 0;
-    virtual void beginOutput() = 0;
+    virtual void beginOutput() {}
 
     void begin() {
-        beginInput();
         beginOutput();
+        set(0);
+        beginInput();
     }
     static void beginAll() {
         for (Selector *sel = first; sel; sel = sel->next)

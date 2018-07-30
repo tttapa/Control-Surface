@@ -9,6 +9,10 @@ class IncrementSelector : public virtual Selector {
                       const IncrementButton &button, bool wrap = true)
         : Selector(selectable, numberOfSettings), button(button), wrap(wrap) {}
 
+    IncrementSelector(Selectable &selectable, setting_t numberOfSettings,
+                      const Button &button, bool wrap = true)
+        : Selector(selectable, numberOfSettings), button{button}, wrap(wrap) {}
+
     void beginInput() override { button.begin(); }
 
     void update() override {
@@ -20,7 +24,10 @@ class IncrementSelector : public virtual Selector {
         setting_t setting = get();
         setting++;
         if (setting == getNumberOfSettings())
-            setting = wrap ? 0 : setting - 1;
+            if (wrap)
+                setting = 0;
+            else
+                return;
         set(setting);
     }
 

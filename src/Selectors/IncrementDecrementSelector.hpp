@@ -27,14 +27,20 @@ class IncrementDecrementSelector : public virtual Selector {
         setting_t setting = get();
         setting++;
         if (setting == getNumberOfSettings())
-            setting = wrap ? 0 : setting - 1;
+            if (wrap)
+                setting = 0;
+            else
+                return;
         set(setting);
     }
 
     void decrement() {
         setting_t setting = get();
         if (setting == 0)
-            setting = wrap ? getNumberOfSettings() : 1;
+            if (wrap)
+                getNumberOfSettings();
+            else
+                return;
         setting--;
         set(setting);
     }

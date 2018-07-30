@@ -90,11 +90,6 @@ MCU::VU VUMeters[8] = {
 // ---------------------------- Display Elements ---------------------------- //
 // ========================================================================== //
 
-/*
- * Define all display elements that display the state of the input elements.
- * These are 8 VU meters, 8 mute indicators, and 8 solo indicators.
- */
-
 MCU::VUDisplay vuDisp[8] = {
   // Draw the first VU meter to the display, at position (2, 48),
   // (12) pixels wide, blocks of 3 pixels high, a spacing between 

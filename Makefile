@@ -1364,6 +1364,87 @@ test/MIDI_Parsers/tests.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Parsers/tests.cpp.s
 .PHONY : test/MIDI_Parsers/tests.cpp.s
 
+test/Selectors/test-IncrementDecrementSelector.o: test/Selectors/test-IncrementDecrementSelector.cpp.o
+
+.PHONY : test/Selectors/test-IncrementDecrementSelector.o
+
+# target to build an object file
+test/Selectors/test-IncrementDecrementSelector.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Selectors/test-IncrementDecrementSelector.cpp.o
+.PHONY : test/Selectors/test-IncrementDecrementSelector.cpp.o
+
+test/Selectors/test-IncrementDecrementSelector.i: test/Selectors/test-IncrementDecrementSelector.cpp.i
+
+.PHONY : test/Selectors/test-IncrementDecrementSelector.i
+
+# target to preprocess a source file
+test/Selectors/test-IncrementDecrementSelector.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Selectors/test-IncrementDecrementSelector.cpp.i
+.PHONY : test/Selectors/test-IncrementDecrementSelector.cpp.i
+
+test/Selectors/test-IncrementDecrementSelector.s: test/Selectors/test-IncrementDecrementSelector.cpp.s
+
+.PHONY : test/Selectors/test-IncrementDecrementSelector.s
+
+# target to generate assembly for a file
+test/Selectors/test-IncrementDecrementSelector.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Selectors/test-IncrementDecrementSelector.cpp.s
+.PHONY : test/Selectors/test-IncrementDecrementSelector.cpp.s
+
+test/Selectors/test-IncrementSelector.o: test/Selectors/test-IncrementSelector.cpp.o
+
+.PHONY : test/Selectors/test-IncrementSelector.o
+
+# target to build an object file
+test/Selectors/test-IncrementSelector.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Selectors/test-IncrementSelector.cpp.o
+.PHONY : test/Selectors/test-IncrementSelector.cpp.o
+
+test/Selectors/test-IncrementSelector.i: test/Selectors/test-IncrementSelector.cpp.i
+
+.PHONY : test/Selectors/test-IncrementSelector.i
+
+# target to preprocess a source file
+test/Selectors/test-IncrementSelector.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Selectors/test-IncrementSelector.cpp.i
+.PHONY : test/Selectors/test-IncrementSelector.cpp.i
+
+test/Selectors/test-IncrementSelector.s: test/Selectors/test-IncrementSelector.cpp.s
+
+.PHONY : test/Selectors/test-IncrementSelector.s
+
+# target to generate assembly for a file
+test/Selectors/test-IncrementSelector.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Selectors/test-IncrementSelector.cpp.s
+.PHONY : test/Selectors/test-IncrementSelector.cpp.s
+
+test/Selectors/test-ManyButtonsSelector.o: test/Selectors/test-ManyButtonsSelector.cpp.o
+
+.PHONY : test/Selectors/test-ManyButtonsSelector.o
+
+# target to build an object file
+test/Selectors/test-ManyButtonsSelector.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Selectors/test-ManyButtonsSelector.cpp.o
+.PHONY : test/Selectors/test-ManyButtonsSelector.cpp.o
+
+test/Selectors/test-ManyButtonsSelector.i: test/Selectors/test-ManyButtonsSelector.cpp.i
+
+.PHONY : test/Selectors/test-ManyButtonsSelector.i
+
+# target to preprocess a source file
+test/Selectors/test-ManyButtonsSelector.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Selectors/test-ManyButtonsSelector.cpp.i
+.PHONY : test/Selectors/test-ManyButtonsSelector.cpp.i
+
+test/Selectors/test-ManyButtonsSelector.s: test/Selectors/test-ManyButtonsSelector.cpp.s
+
+.PHONY : test/Selectors/test-ManyButtonsSelector.s
+
+# target to generate assembly for a file
+test/Selectors/test-ManyButtonsSelector.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Selectors/test-ManyButtonsSelector.cpp.s
+.PHONY : test/Selectors/test-ManyButtonsSelector.cpp.s
+
 test/test_example.o: test/test_example.cpp.o
 
 .PHONY : test/test_example.o
@@ -1533,6 +1614,15 @@ help:
 	@echo "... test/MIDI_Parsers/tests.o"
 	@echo "... test/MIDI_Parsers/tests.i"
 	@echo "... test/MIDI_Parsers/tests.s"
+	@echo "... test/Selectors/test-IncrementDecrementSelector.o"
+	@echo "... test/Selectors/test-IncrementDecrementSelector.i"
+	@echo "... test/Selectors/test-IncrementDecrementSelector.s"
+	@echo "... test/Selectors/test-IncrementSelector.o"
+	@echo "... test/Selectors/test-IncrementSelector.i"
+	@echo "... test/Selectors/test-IncrementSelector.s"
+	@echo "... test/Selectors/test-ManyButtonsSelector.o"
+	@echo "... test/Selectors/test-ManyButtonsSelector.i"
+	@echo "... test/Selectors/test-ManyButtonsSelector.s"
 	@echo "... test/test_example.o"
 	@echo "... test/test_example.i"
 	@echo "... test/test_example.s"

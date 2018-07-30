@@ -18,7 +18,7 @@ class ManyButtonsSelector : public virtual Selector {
 
     void update() override {
         for (setting_t i = 0; i < NUMBER_OF_BUTTONS; i++) {
-            if (ExtIO::digitalRead(pin) == LOW) // TODO: invert?
+            if (ExtIO::digitalRead(buttonPins[i]) == LOW) // TODO: invert?
                 set(i);
         }
     }
