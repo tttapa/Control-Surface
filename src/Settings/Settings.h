@@ -9,6 +9,7 @@
  */
 
 #include <stddef.h>
+#include <stdint.h>
 
 // ----------------------------- Debug Settings ----------------------------- //
 // ========================================================================== //
@@ -30,14 +31,14 @@
  *  where
  *  @f$ \alpha = \left(\frac{1}{2}\right)^{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$
  */
-#define ANALOG_FILTER_SHIFT_FACTOR 2
+constexpr uint8_t ANALOG_FILTER_SHIFT_FACTOR = 2;
 
 /** The signed integer type to use for analog inputs during filtering.
  * Should be at least @f$ 10+1+2·ANALOG\_FILTER\_SHIFT\_FACTOR @f$ bits wide.
  * (10 bits of ADC resolution, 1 sign bit, and 2·ANALOG_FILTER_SHIFT_FACTOR
  * bits of fixed point precision for intermediate filter calculations.
  */
-#define ANALOG_FILTER_TYPE int16_t
+typedef int16_t ANALOG_FILTER_TYPE;
 
 /** The debounce time for momentary push buttons in milliseconds. */
 constexpr unsigned long BUTTON_DEBOUNCE_TIME = 25; // milliseconds
@@ -51,7 +52,7 @@ constexpr unsigned long LONG_PRESS_REPEAT_DELAY = 200; // milliseconds
 /** The interval between updating all inputs, in microseconds (µs).
  * @todo Implement
  */
-#define INPUT_UPDATE_INTERVAL 1000 // 1000 µs = 1 ms = 0.001 s
+constexpr unsigned long INPUT_UPDATE_INTERVAL = 1000; // 1000 µs = 1 ms
 
 /** Don't parse incomming System Exclusive messages. */
 #define IGNORE_SYSEX
