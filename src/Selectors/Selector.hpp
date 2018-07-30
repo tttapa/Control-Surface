@@ -16,7 +16,7 @@ class Selector {
     virtual ~Selector() { LinkedList::remove(this, first, last); }
 
     virtual void beginInput() = 0;
-    virtual void beginOutput() {}
+    virtual void beginOutput() = 0;
 
     void begin() {
         beginOutput();
@@ -48,7 +48,7 @@ class Selector {
     setting_t getNumberOfSettings() const { return numberOfSettings; }
 
   private:
-    virtual void updateOutput(setting_t oldSetting, setting_t newSetting) {}
+    virtual void updateOutput(setting_t oldSetting, setting_t newSetting) = 0;
 
     setting_t validateSetting(setting_t setting) const {
         if (setting >= numberOfSettings) {

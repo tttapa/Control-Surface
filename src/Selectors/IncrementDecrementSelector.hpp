@@ -3,14 +3,11 @@
 #include "Selector.hpp"
 #include <Hardware/IncrementDecrementButtons.hpp>
 
-class IncrementDecrementSelector : public virtual Selector {
+class IncrementDecrementSelector_Base : public virtual Selector {
   public:
-    IncrementDecrementSelector(Selectable &selectable,
-                               setting_t numberOfSettings,
-                               const IncrementDecrementButtons &buttons,
-                               bool wrap = true)
-        : Selector(selectable, numberOfSettings), buttons(buttons), wrap(wrap) {
-    }
+    IncrementDecrementSelector_Base(const IncrementDecrementButtons &buttons,
+                                    bool wrap = true)
+        : buttons(buttons), wrap(wrap) {}
 
     void beginInput() override { buttons.begin(); }
 
@@ -26,21 +23,25 @@ class IncrementDecrementSelector : public virtual Selector {
     void increment() {
         setting_t setting = get();
         setting++;
-        if (setting == getNumberOfSettings())
-            if (wrap)
+        if (setting == getNumberOfSettings()) {
+            if (wrap) {
                 setting = 0;
-            else
+            } else {
                 return;
+            }
+        }
         set(setting);
     }
 
     void decrement() {
         setting_t setting = get();
-        if (setting == 0)
-            if (wrap)
+        if (setting == 0) {
+            if (wrap) {
                 getNumberOfSettings();
-            else
+            } else {
                 return;
+            }
+        }
         setting--;
         set(setting);
     }
@@ -48,4 +49,19 @@ class IncrementDecrementSelector : public virtual Selector {
   private:
     IncrementDecrementButtons buttons;
     bool wrap;
+};
+
+// -------------------------------------------------------------------------- //
+
+class IncrementDecrementSelector : public IncrementDecrementSelector_Base {
+  public:
+    IncrementDecrementSelector(Selectable &selectable,
+                               setting_t numberOfSettings,
+                               const IncrementDecrementButtons &buttons,
+                               bool wrap = true)
+        : Selector(selectable, numberOfSettings),
+          IncrementDecrementSelector_Base(buttons, wrap) {}
+
+    void beginOutput() override {}
+    void updateOutput(setting_t oldSetting, setting_t newSetting) override {}
 };

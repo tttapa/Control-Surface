@@ -4,7 +4,7 @@
 #include <Selectors/IncrementDecrementSelector.hpp>
 
 template <setting_t NUMBER_OF_LEDs>
-class IncrementDecrementSelectorLEDs : public IncrementDecrementSelector,
+class IncrementDecrementSelectorLEDs : public IncrementDecrementSelector_Base,
                                        public SelectorLEDs<NUMBER_OF_LEDs> {
   public:
     IncrementDecrementSelectorLEDs(Selectable &selectable,
@@ -12,6 +12,6 @@ class IncrementDecrementSelectorLEDs : public IncrementDecrementSelector,
                                    const PinList<NUMBER_OF_LEDs> &ledPins,
                                    bool wrap = true)
         : Selector(selectable, NUMBER_OF_LEDs),
-          IncrementDecrementSelector(selectable, NUMBER_OF_LEDs, buttons, wrap),
+          IncrementDecrementSelector_Base(buttons, wrap),
           SelectorLEDs<NUMBER_OF_LEDs>(ledPins) {}
 };
