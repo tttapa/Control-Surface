@@ -35,7 +35,8 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
 
     void drawBackground() override {
         disp.drawFastHLine(0, 52, 128, WHITE);
-        disp.drawFastHLine(0, 63, 128, WHITE);
+        // disp.drawFastHLine(0, 63, 128, WHITE);
+        disp.drawRect(0, 0, 128, 64, WHITE);
     }
 } display = ssd1306Display;
 
@@ -94,14 +95,14 @@ MCU::VUDisplay vuDisp[8] = {
   // Draw the first VU meter to the display, at position (2, 48),
   // (12) pixels wide, blocks of 3 pixels high, a spacing between 
   // blocks of (1) pixel, and draw in white.
-  { display, VUMeters[0], { 2 + 16 * 0, 48 }, 12, 3, 1, WHITE },
-  { display, VUMeters[1], { 2 + 16 * 1, 48 }, 12, 3, 1, WHITE },
-  { display, VUMeters[2], { 2 + 16 * 2, 48 }, 12, 3, 1, WHITE },
-  { display, VUMeters[3], { 2 + 16 * 3, 48 }, 12, 3, 1, WHITE },
-  { display, VUMeters[4], { 2 + 16 * 4, 48 }, 12, 3, 1, WHITE },
-  { display, VUMeters[5], { 2 + 16 * 5, 48 }, 12, 3, 1, WHITE },
-  { display, VUMeters[6], { 2 + 16 * 6, 48 }, 12, 3, 1, WHITE },
-  { display, VUMeters[7], { 2 + 16 * 7, 48 }, 12, 3, 1, WHITE },
+  { display, VUMeters[0], { 2 + 16 * 0, 50 }, 12, 3, 1, WHITE },
+  { display, VUMeters[1], { 2 + 16 * 1, 50 }, 12, 3, 1, WHITE },
+  { display, VUMeters[2], { 2 + 16 * 2, 50 }, 12, 3, 1, WHITE },
+  { display, VUMeters[3], { 2 + 16 * 3, 50 }, 12, 3, 1, WHITE },
+  { display, VUMeters[4], { 2 + 16 * 4, 50 }, 12, 3, 1, WHITE },
+  { display, VUMeters[5], { 2 + 16 * 5, 50 }, 12, 3, 1, WHITE },
+  { display, VUMeters[6], { 2 + 16 * 6, 50 }, 12, 3, 1, WHITE },
+  { display, VUMeters[7], { 2 + 16 * 7, 50 }, 12, 3, 1, WHITE },
 };
 
 NoteBitmapDisplay muteDisp[8] = {
