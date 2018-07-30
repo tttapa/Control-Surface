@@ -15,7 +15,10 @@
         "future": "cpp",
         "istream": "cpp",
         "tuple": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "optional": "cpp",
+        "ratio": "cpp",
+        "system_error": "cpp"
     },
     "files.exclude": {
         "**/.git": true,
