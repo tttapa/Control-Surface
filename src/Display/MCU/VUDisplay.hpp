@@ -12,23 +12,31 @@ class VUDisplay : public DisplayElement {
               uint16_t color)
         : DisplayElement(display), vu(vu), x(loc.x), y(loc.y - blockheight + 1),
           width(width), blockheight(blockheight), spacing(spacing),
-          color(color), decayTime(decayTimePerBlock / (blockheight + spacing)) {
-    }
+          color(color),
+          decayTime(VU_PEAK_SMOOTH_DECAY
+                        ? VU_PEAK_DECAY_TIME / (blockheight + spacing)
+                        : VU_PEAK_DECAY_TIME) {}
     void draw() {
         uint8_t value = vu.getValue();
 
-        int16_t newPeak = value * (blockheight + spacing);
+        int16_t newPeak = (int16_t)value * (blockheight + spacing);
         if (newPeak >= peak) {
             peak = newPeak;
             previousDecay = millis();
-        } else if (millis() - previousDecay > decayTime) {
+            decaying = false;
+        } else if (!decaying &&
+                   (millis() - previousDecay > VU_PEAK_HOLD_TIME)) {
+            decaying = true;
+            previousDecay += VU_PEAK_HOLD_TIME - VU_PEAK_DECAY_TIME;
+        } else if (decaying && (millis() - previousDecay > decayTime)) {
             if (peak > 0) {
-                peak--;
-                previousDecay = millis();
+                peak -= VU_PEAK_SMOOTH_DECAY ? 1 : (blockheight + spacing);
+                previousDecay += decayTime;
             }
         }
         if (peak > 0) {
-            display.drawFastHLine(x, y - spacing + blockheight - peak, width, color);
+            display.drawFastHLine(x, y - spacing + blockheight - peak, width,
+                                  color);
             for (uint8_t i = 0; i < value; i++)
                 display.fillRect(x, y - i * (blockheight + spacing), width,
                                  blockheight, color);
@@ -47,10 +55,9 @@ class VUDisplay : public DisplayElement {
 
     int16_t peak = 0;
     unsigned long previousDecay = 0;
+    bool decaying = false;
 
     unsigned long decayTime;
-
-    constexpr static unsigned long decayTimePerBlock = 350; // TODO: Settings.h
 };
 
 } // namespace MCU

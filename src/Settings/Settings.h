@@ -50,9 +50,21 @@ constexpr unsigned long LONG_PRESS_DELAY = 450; // milliseconds
 constexpr unsigned long LONG_PRESS_REPEAT_DELAY = 200; // milliseconds
 
 /** The interval between updating all inputs, in microseconds (µs).
- * @todo Implement
+ *  @todo Implement
  */
 constexpr unsigned long INPUT_UPDATE_INTERVAL = 1000; // 1000 µs = 1 ms
+
+/** The time in milliseconds it takes for the VU meter display peak bar to drop 
+ *  one unit (i.e. one twelfth of the complete scale). */
+constexpr unsigned long VU_PEAK_DECAY_TIME = 300; // milliseconds
+
+/** The time in milliseconds that a VU meter display peak bar stays at the peak
+ *  before decaying. */
+constexpr unsigned long VU_PEAK_HOLD_TIME = 400; // milliseconds
+
+/** If set to true, the VU meter display peak bars will decay smoothly (i.e. one
+ *  pixel at a time), if set to false, they will decay one unit at a time. */
+constexpr bool VU_PEAK_SMOOTH_DECAY = true;
 
 /** Don't parse incomming System Exclusive messages. */
 #define IGNORE_SYSEX
