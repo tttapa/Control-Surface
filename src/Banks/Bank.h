@@ -2,13 +2,31 @@
 
 #include <Helpers/Debug.hpp>
 #include <Helpers/LinkedList.h>
+#include <Selectors/Selectable.hpp>
 #include <stddef.h>
 #include <stdint.h>
-#include <Selectors/Selectable.hpp>
 
+template <setting_t N>
 class BankableMIDIInputAddressable;
+
 class BankableMIDIOutputAddressable;
 class BankableMIDIOutput;
+
+class OutputBank {
+  public:
+    OutputBank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
+        if (tracksPerBank == 0) {
+            DEBUGFN(F("Error: A Bank must have a non-zero number of tracks."));
+            FATAL_ERROR();
+        }
+    }
+    void select(setting_t setting) { bankSetting = setting; }
+    uint8_t getSelection() const { return bankSetting; }
+    uint8_t getTracksPerBank() const { return tracksPerBank; }
+
+    const uint8_t tracksPerBank;
+    uint8_t bankSetting = 0;
+};
 
 /**
  * @brief   A class that groups MIDI_Element%s and allows the user to change
@@ -67,8 +85,9 @@ class BankableMIDIOutput;
  * @f$a_0@f$ is the base address of the MIDI_Element, @f$t@f$ is the number of
  * tracks per bank, and @f$s@f$ is the current bank setting.
  */
-class Bank : public Selectable {
-    friend class BankableMIDIInputAddressable;
+template <setting_t N>
+class Bank : public Selectable<N>, public OutputBank {
+    friend class BankableMIDIInputAddressable<N>;
 
   public:
     /**
@@ -78,19 +97,7 @@ class Bank : public Selectable {
      *          The number of tracks (i.e. addresses or channels) that
      *          are skipped when the bank setting changes.
      */
-    Bank(uint8_t tracksPerBank = 1);
-
-    enum bankType {
-        /**
-         * @brief   Change the offset of the channel number of the Bankable.
-         */
-        CHANGE_CHANNEL = 4,
-        /**
-         * @brief   Change the offset of the address (i.e. Controller number or
-         *          Note number) of the MIDI_Element.
-         */
-        CHANGE_ADDRESS = 0
-    };
+    Bank(uint8_t tracksPerBank = 1) : OutputBank(tracksPerBank) {}
 
     /**
      * @brief   Set the Bank Setting
@@ -100,29 +107,24 @@ class Bank : public Selectable {
      */
     void select(uint8_t bankSetting);
 
-    uint8_t getSelection() const;
-
-    uint8_t getTracksPerBank() const;
-
-    void remove(BankableMIDIInputAddressable *bankable);
+    void remove(BankableMIDIInputAddressable<N> *bankable);
 
   private:
-    const uint8_t tracksPerBank;
-    uint8_t bankSetting = 0;
-
     /**
      * @brief   Add a Bankable to the bank.
      *
      * @param   bankable
      *          The Bankable to be added.
      */
-    void add(BankableMIDIInputAddressable &bankable);
+    void add(BankableMIDIInputAddressable<N> &bankable);
 
-    BankableMIDIInputAddressable *first = nullptr;
-    BankableMIDIInputAddressable *last = nullptr;
+    BankableMIDIInputAddressable<N> *first = nullptr;
+    BankableMIDIInputAddressable<N> *last = nullptr;
 
     template <class Node>
     friend void LinkedList::append(Node *, Node *&, Node *&);
     template <class Node>
     friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
+
+#include "Bank.ipp"

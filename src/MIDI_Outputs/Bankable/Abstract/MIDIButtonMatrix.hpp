@@ -38,7 +38,7 @@ class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
      * @param   channel
      *          The MIDI channel. [1, 16]
      */
-    MIDIButtonMatrix(const BankConfigAddressable &config,
+    MIDIButtonMatrix(const OutputBankConfigAddressable &config,
                      const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,

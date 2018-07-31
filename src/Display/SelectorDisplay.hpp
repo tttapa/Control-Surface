@@ -3,9 +3,10 @@
 #include <Selectors/Selector.hpp>
 #include <Display/DisplayElement.hpp>
 
+template <setting_t N>
 class SelectorDisplay : public DisplayElement {
 public:
-  SelectorDisplay(DisplayInterface &display, Selector &selector, int16_t offset,
+  SelectorDisplay(DisplayInterface &display, Selector<N> &selector, int16_t offset,
                   int16_t multiplier, Location loc, uint8_t size,
                   uint16_t color)
       : DisplayElement(display), selector(selector), offset(offset),
@@ -18,7 +19,7 @@ public:
   }
 
 private:
-  Selector &selector;
+  Selector<N> &selector;
   int16_t offset, multiplier, x, y;
   uint8_t size;
   uint16_t color;

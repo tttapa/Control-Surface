@@ -25,7 +25,7 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
      *
      * @todo    Documentation
      */
-    MIDIButtons(const BankConfigAddressable &config,
+    MIDIButtons(const OutputBankConfigAddressable &config,
                 const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 uint8_t baseAddress, uint8_t baseChannel,
                 uint8_t addressIncrement, uint8_t channelIncrement)

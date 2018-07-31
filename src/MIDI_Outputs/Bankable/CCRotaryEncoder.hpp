@@ -46,7 +46,7 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender::send> {
      *          increasing the number of pulsesPerStep will result in a slower
      *          speed.
      */
-    CCRotaryEncoder(const BankConfigAddressable &config,
+    CCRotaryEncoder(const OutputBankConfigAddressable &config,
                     const EncoderPinList &pins, uint8_t address,
                     uint8_t channel, uint8_t speedMultiply,
                     uint8_t pulsesPerStep)
@@ -55,7 +55,7 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender::send> {
 
 // For tests only
 #ifndef ARDUINO
-    CCRotaryEncoder(const BankConfigAddressable &config, const Encoder &encoder,
+    CCRotaryEncoder(const OutputBankConfigAddressable &config, const Encoder &encoder,
                     uint8_t address, uint8_t channel, uint8_t speedMultiply,
                     uint8_t pulsesPerStep)
         : MIDIRotaryEncoder<RelativeCCSender::send>(

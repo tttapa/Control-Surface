@@ -30,7 +30,7 @@ class CCPotentiometer
      * @param   channel
      *          The MIDI channel. [1, 16]
      */
-    CCPotentiometer(const BankConfigAddressable &config, pin_t analogPin,
+    CCPotentiometer(const OutputBankConfigAddressable &config, pin_t analogPin,
                     uint8_t controller, uint8_t channel = 1)
         : MIDIFilteredAnalogAddressable<ContinuousCCSender::send, 7>(
               config, analogPin, controller, channel) {}

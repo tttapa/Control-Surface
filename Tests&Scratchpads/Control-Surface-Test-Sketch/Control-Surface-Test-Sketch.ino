@@ -1,8 +1,8 @@
 #include <Encoder.h>
 #include <Control_Surface.h>
 
-USBDebugMIDI_Interface udmi(115200);
-// USBMIDI_Interface umi;
+// USBDebugMIDI_Interface udmi(115200);
+USBMIDI_Interface umi;
 
 //-----------------------------------------------------------------------------------------------------
 
@@ -17,8 +17,8 @@ const uint8_t ShiftRegisterOut::blueBit = 0;
 
 //-----------------------------------------------------------------------------------------------------
 
-Bank bank(4); // A bank with four channels
-BankSelector bankselector(bank, A2, 9, BankSelector::MOMENTARY);
+Bank<2> bank(4); // A bank with two bank settings and four tracks
+IncrementSelector<2> bankselector(bank, A2);
 
 //-----------------------------------------------------------------------------------------------------
 
@@ -38,10 +38,22 @@ Bankable::CCRotaryEncoder enc             = {bank, {2, 3}, 0x20,  1, speedMultip
   
 //-----------------------------------------------------------------------------------------------------
 
-Bankable::MIDINoteLED<2> note = { bank, 0x10, 1, sr.red(0) };
+Bankable::MIDINoteLED<2> mute[] = {
+  { bank, MCU::MUTE_1, 1, sr.red(0) },
+  { bank, MCU::MUTE_2, 1, sr.red(1) },
+  { bank, MCU::MUTE_3, 1, sr.red(2) },
+  { bank, MCU::MUTE_4, 1, sr.red(3) },
+};
+
+Bankable::MIDINoteLED<2> solo[] = {
+  { bank, MCU::SOLO_1, 1, sr.green(0) },
+  { bank, MCU::SOLO_2, 1, sr.green(1) },
+  { bank, MCU::SOLO_3, 1, sr.green(2) },
+  { bank, MCU::SOLO_4, 1, sr.green(3) },
+};
 
 void setup() {  
-  Control_Surface.begin();
+  Serial.begin(115200);
   while(!Serial);
   
   DEBUG(F("Compiled at " __DATE__));
@@ -62,8 +74,8 @@ void setup() {
   DEBUG(F("Size of CCButtonMatrix<4,4> =         ") << sizeof(CCButtonMatrix<4,4>)        << F(" bytes"));
   DEBUG(F("Size of NoteButtonMatrix<4,4> =       ") << sizeof(NoteButtonMatrix<4,4>)      << F(" bytes"));
   DEBUG("");     
-  DEBUG(F("Size of Bank =                        ") << sizeof(Bank)                       << F(" bytes"));
-  DEBUG(F("Size of BankSelector =                ") << sizeof(BankSelector)               << F(" bytes"));
+  DEBUG(F("Size of Bank<2> =                       ") << sizeof(Bank<2>)                    << F(" bytes"));
+  DEBUG(F("Size of IncrementSelector<2> =          ") << sizeof(IncrementSelector<2>)       << F(" bytes"));
  // DEBUG("");
  // DEBUG(F("Size of Note_Input =                  ") << sizeof(Note_Input)                 << F(" bytes"));
  // DEBUG(F("Size of Bankable::Note_Input<2> =     ") << sizeof(Bankable::Note_Input<2>)    << F(" bytes"));
@@ -71,6 +83,8 @@ void setup() {
  // DEBUG(F("Size of Bankable::Note_Input_LED<2> = ") << sizeof(Bankable::Note_Input_LED<2>)<< F(" bytes"));
   DEBUG("");
   DEBUG(F("--------------------------------------"                                           "--------") << endl);
+
+  Control_Surface.begin();
 }
 
 //-----------------------------------------------------------------------------------------------------

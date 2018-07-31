@@ -44,7 +44,7 @@ class NoteButtons
      * @param   channelIncrement
      *          The number of channels to increment for each next button.
      */
-    NoteButtons(const BankConfigAddressable &config,
+    NoteButtons(const OutputBankConfigAddressable &config,
                 const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 uint8_t baseNote, uint8_t baseChannel = 1,
                 uint8_t noteIncrement = 1, uint8_t channelIncrement = 0)

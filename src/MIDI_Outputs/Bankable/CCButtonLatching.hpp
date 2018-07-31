@@ -1,4 +1,4 @@
-#include <MIDI_Outputs/Bankable/Abstract/MIDIButton.hpp>
+#include <MIDI_Outputs/Bankable/Abstract/MIDIButtonLatching.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
 namespace Bankable {
@@ -16,8 +16,8 @@ namespace Bankable {
  *
  * @ingroup MIDIOutputElements
  */
-class CCButtonLatching
-    : public MIDIButton<DigitalCCSender::sendOn, DigitalCCSender::sendOff> {
+class CCButtonLatching : public MIDIButtonLatching<DigitalCCSender::sendOn,
+                                                   DigitalCCSender::sendOff> {
   public:
     /**
      * @brief   Create a new Bankable CCButtonLatching object with the given
@@ -31,9 +31,9 @@ class CCButtonLatching
      * @param   channel
      *          The MIDI Channel. [1, 16]
      */
-    CCButtonLatching(const BankConfigAddressable &config, pin_t pin,
+    CCButtonLatching(const OutputBankConfigAddressable &config, pin_t pin,
                      uint8_t controller, uint8_t channel)
-        : MIDIButton<DigitalCCSender::sendOn, DigitalCCSender::sendOff>(
+        : MIDIButtonLatching<DigitalCCSender::sendOn, DigitalCCSender::sendOff>(
               config, pin, controller, channel) {}
 };
 

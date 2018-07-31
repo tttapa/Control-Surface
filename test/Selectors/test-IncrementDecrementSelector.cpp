@@ -4,16 +4,16 @@
 using namespace ::testing;
 
 TEST(IncrementDecrementSelector, pressIncrementWrap) {
-    MockSelectable selectable;
+    MockSelectable<3> selectable;
 
-    IncrementDecrementSelector selector = {selectable, 3, {2, 3}, true};
+    IncrementDecrementSelector<3> selector = {selectable, {2, 3}, true};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
 
     EXPECT_CALL(selectable, select(0));
 
-    Selector::beginAll();
+    Updatable::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -23,7 +23,7 @@ TEST(IncrementDecrementSelector, pressIncrementWrap) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -35,7 +35,7 @@ TEST(IncrementDecrementSelector, pressIncrementWrap) {
 
     EXPECT_CALL(selectable, select(1));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -45,7 +45,7 @@ TEST(IncrementDecrementSelector, pressIncrementWrap) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -57,7 +57,7 @@ TEST(IncrementDecrementSelector, pressIncrementWrap) {
 
     EXPECT_CALL(selectable, select(2));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -67,7 +67,7 @@ TEST(IncrementDecrementSelector, pressIncrementWrap) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -79,22 +79,22 @@ TEST(IncrementDecrementSelector, pressIncrementWrap) {
 
     EXPECT_CALL(selectable, select(0));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(IncrementDecrementSelector, pressDecrementWrap) {
-    MockSelectable selectable;
+    MockSelectable<3> selectable;
 
-    IncrementDecrementSelector selector = {selectable, 3, {3, 2}, true};
+    IncrementDecrementSelector<3> selector = {selectable, {3, 2}, true};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
 
     EXPECT_CALL(selectable, select(0));
 
-    Selector::beginAll();
+    Updatable::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -104,7 +104,7 @@ TEST(IncrementDecrementSelector, pressDecrementWrap) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -116,7 +116,7 @@ TEST(IncrementDecrementSelector, pressDecrementWrap) {
 
     EXPECT_CALL(selectable, select(2));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -126,7 +126,7 @@ TEST(IncrementDecrementSelector, pressDecrementWrap) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -138,7 +138,7 @@ TEST(IncrementDecrementSelector, pressDecrementWrap) {
 
     EXPECT_CALL(selectable, select(1));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -148,7 +148,7 @@ TEST(IncrementDecrementSelector, pressDecrementWrap) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -160,22 +160,22 @@ TEST(IncrementDecrementSelector, pressDecrementWrap) {
 
     EXPECT_CALL(selectable, select(0));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(IncrementDecrementSelector, reset) {
-    MockSelectable selectable;
+    MockSelectable<10> selectable;
 
-    IncrementDecrementSelector selector = {selectable, 10, {2, 3}, true};
+    IncrementDecrementSelector<10> selector = {selectable, {2, 3}, true};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
 
     EXPECT_CALL(selectable, select(0));
 
-    Selector::beginAll();
+    Updatable::beginAll();
 
     EXPECT_CALL(selectable, select(5));
 
@@ -191,20 +191,20 @@ TEST(IncrementDecrementSelector, reset) {
 
     EXPECT_CALL(selectable, select(0));
 
-    selector.updateAll();
+    Updatable::updateAll();
 }
 
 TEST(IncrementDecrementSelector, pressIncrementNoWrap) {
-    MockSelectable selectable;
+    MockSelectable<3> selectable;
 
-    IncrementDecrementSelector selector = {selectable, 3, {2, 3}, false};
+    IncrementDecrementSelector<3> selector = {selectable, {2, 3}, false};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
 
     EXPECT_CALL(selectable, select(0));
 
-    Selector::beginAll();
+    Updatable::beginAll();
 
     EXPECT_CALL(selectable, select(1));
 
@@ -220,7 +220,7 @@ TEST(IncrementDecrementSelector, pressIncrementNoWrap) {
 
     EXPECT_CALL(selectable, select(2));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -230,7 +230,7 @@ TEST(IncrementDecrementSelector, pressIncrementNoWrap) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -240,22 +240,22 @@ TEST(IncrementDecrementSelector, pressIncrementNoWrap) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(IncrementDecrementSelector, pressDecrementNoWrap) {
-    MockSelectable selectable;
+    MockSelectable<3> selectable;
 
-    IncrementDecrementSelector selector = {selectable, 3, {3, 2}, false};
+    IncrementDecrementSelector<3> selector = {selectable, {3, 2}, false};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
 
     EXPECT_CALL(selectable, select(0));
 
-    Selector::beginAll();
+    Updatable::beginAll();
 
     EXPECT_CALL(selectable, select(1));
 
@@ -271,7 +271,7 @@ TEST(IncrementDecrementSelector, pressDecrementNoWrap) {
 
     EXPECT_CALL(selectable, select(0));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -281,7 +281,7 @@ TEST(IncrementDecrementSelector, pressDecrementNoWrap) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
@@ -291,7 +291,7 @@ TEST(IncrementDecrementSelector, pressDecrementNoWrap) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

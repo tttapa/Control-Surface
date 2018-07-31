@@ -4,7 +4,7 @@
 using namespace ::testing;
 
 TEST(ManyButtonsSelector, press) {
-    MockSelectable selectable;
+    MockSelectable<4> selectable;
 
     ManyButtonsSelector<4> selector = {selectable, {2, 3, 4, 5}};
 
@@ -15,7 +15,7 @@ TEST(ManyButtonsSelector, press) {
 
     EXPECT_CALL(selectable, select(0));
 
-    Selector::beginAll();
+    Updatable::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
@@ -28,7 +28,7 @@ TEST(ManyButtonsSelector, press) {
 
     EXPECT_CALL(selectable, select(1));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

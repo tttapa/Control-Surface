@@ -3,7 +3,8 @@
 #include "Selector.hpp"
 #include <Hardware/IncrementButton.hpp>
 
-class IncrementSelector_Base : public virtual Selector {
+template <setting_t N>
+class IncrementSelector_Base : public virtual Selector<N> {
   public:
     IncrementSelector_Base(const IncrementButton &button, bool wrap = true)
         : button(button), wrap(wrap) {}
@@ -19,16 +20,16 @@ class IncrementSelector_Base : public virtual Selector {
     }
 
     void increment() {
-        setting_t setting = get();
+        setting_t setting = this->get();
         setting++;
-        if (setting == getNumberOfSettings()) {
+        if (setting == N) {
             if (wrap) {
                 setting = 0;
             } else {
                 return;
             }
         }
-        set(setting);
+        this->set(setting);
     }
 
   private:
@@ -38,17 +39,16 @@ class IncrementSelector_Base : public virtual Selector {
 
 // -------------------------------------------------------------------------- //
 
-class IncrementSelector : public virtual IncrementSelector_Base {
+template <setting_t N>
+class IncrementSelector : public virtual IncrementSelector_Base<N> {
   public:
-    IncrementSelector(Selectable &selectable, setting_t numberOfSettings,
-                      const IncrementButton &button, bool wrap = true)
-        : Selector(selectable, numberOfSettings),
-          IncrementSelector_Base(button, wrap) {}
+    IncrementSelector(Selectable<N> &selectable, const IncrementButton &button,
+                      bool wrap = true)
+        : Selector<N>(selectable), IncrementSelector_Base<N>(button, wrap) {}
 
-    IncrementSelector(Selectable &selectable, setting_t numberOfSettings,
-                      const Button &button, bool wrap = true)
-        : Selector(selectable, numberOfSettings),
-          IncrementSelector_Base(button, wrap) {}
+    IncrementSelector(Selectable<N> &selectable, const Button &button,
+                      bool wrap = true)
+        : Selector<N>(selectable), IncrementSelector_Base<N>(button, wrap) {}
 
     void beginOutput() override {}
     void updateOutput(setting_t oldSetting, setting_t newSetting) override {}

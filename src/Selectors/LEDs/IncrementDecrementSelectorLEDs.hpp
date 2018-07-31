@@ -3,15 +3,16 @@
 #include "SelectorLEDs.hpp"
 #include <Selectors/IncrementDecrementSelector.hpp>
 
-template <setting_t NUMBER_OF_LEDs>
-class IncrementDecrementSelectorLEDs : public IncrementDecrementSelector_Base,
-                                       public SelectorLEDs<NUMBER_OF_LEDs> {
+template <setting_t N>
+class IncrementDecrementSelectorLEDs
+    : public IncrementDecrementSelector_Base<N>,
+      public SelectorLEDs<N> {
   public:
-    IncrementDecrementSelectorLEDs(Selectable &selectable,
+    IncrementDecrementSelectorLEDs(Selectable<N> &selectable,
                                    const IncrementDecrementButtons &buttons,
-                                   const PinList<NUMBER_OF_LEDs> &ledPins,
+                                   const PinList<N> &ledPins,
                                    bool wrap = true)
-        : Selector(selectable, NUMBER_OF_LEDs),
-          IncrementDecrementSelector_Base(buttons, wrap),
-          SelectorLEDs<NUMBER_OF_LEDs>(ledPins) {}
+        : Selector<N>(selectable),
+          IncrementDecrementSelector_Base<N>(buttons, wrap),
+          SelectorLEDs<N>(ledPins) {}
 };

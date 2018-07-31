@@ -49,7 +49,7 @@ TEST(NoteButton, pressAndRelease) {
 TEST(NoteButtonBankable, pressAndRelease) {
     MockMIDI_Interface midi;
 
-    Bank bank(4);
+    OutputBank bank(4);
 
     Bankable::NoteButton button(bank, 2, 0x3C, 7);
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
@@ -88,7 +88,7 @@ TEST(NoteButtonBankable, changeSettingAndPressAndRelease) {
     MockMIDI_Interface midi;
 
 
-    Bank bank(4);
+    OutputBank bank(4);
     // Change bank setting
     bank.select(1);
 
@@ -128,7 +128,7 @@ TEST(NoteButtonBankable, changeSettingAndPressAndRelease) {
 TEST(NoteButtonBankable, pressAndChangeSettingAndRelease) {
     MockMIDI_Interface midi;
 
-    Bank bank(4);
+    OutputBank bank(4);
 
     Bankable::NoteButton button(bank, 2, 0x3C, 7);
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));

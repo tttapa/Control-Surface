@@ -31,7 +31,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
      *          connected.
      * @todo    Documentation.
      */
-    MIDIFilteredAnalogAddressable(const BankConfigAddressable &config,
+    MIDIFilteredAnalogAddressable(const OutputBankConfigAddressable &config,
                                   pin_t analogPin, uint8_t baseAddress,
                                   uint8_t baseChannel)
         : BankableMIDIOutputAddressable(config), filteredAnalog{analogPin},
@@ -86,7 +86,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
      *          connected.
      * @todo    Bank Config
      */
-    MIDIFilteredAnalog(const Bank &bank, pin_t analogPin, uint8_t channel)
+    MIDIFilteredAnalog(const OutputBank &bank, pin_t analogPin, uint8_t channel)
         : BankableMIDIOutput(bank), filteredAnalog{analogPin},
           channel(channel) {}
 

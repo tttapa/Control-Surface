@@ -37,7 +37,7 @@ pin_t	KEYWORD1
 analog_t	KEYWORD1
 
 relativeCCmode	KEYWORD1
-bankType	KEYWORD1
+BankType	KEYWORD1
 buttonType	KEYWORD1
 
 MCU	KEYWORD1

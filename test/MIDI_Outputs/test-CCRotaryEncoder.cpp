@@ -91,7 +91,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwards) {
 TEST(CCRotaryEncoderBankable, turnOneStepChangeSettingTurnOneStep) {
     MockMIDI_Interface midi;
 
-    Bank bank(4);
+    OutputBank bank(4);
 
     EncoderMock encm;
     Bankable::CCRotaryEncoder ccenc = {bank, encm, 0x20, 7, 2, 4};

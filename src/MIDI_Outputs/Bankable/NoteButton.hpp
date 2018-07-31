@@ -31,7 +31,7 @@ class NoteButton
      * @param   channel
      *          The MIDI channel. [1, 16]
      */
-    NoteButton(const BankConfigAddressable &config, pin_t pin, uint8_t note,
+    NoteButton(const OutputBankConfigAddressable &config, pin_t pin, uint8_t note,
                uint8_t channel = 1)
         : MIDIButton<DigitalNoteSender::sendOn, DigitalNoteSender::sendOff>(
               config, pin, note, channel) {}

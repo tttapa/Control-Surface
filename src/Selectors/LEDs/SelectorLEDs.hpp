@@ -4,15 +4,15 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <Selectors/Selector.hpp>
 
-template <setting_t NUMBER_OF_LEDS>
-class SelectorLEDs : public virtual Selector {
+template <setting_t N>
+class SelectorLEDs : public virtual Selector<N> {
   public:
-    SelectorLEDs(const PinList<NUMBER_OF_LEDS> &ledPins) : ledPins(ledPins) {}
+    SelectorLEDs(const PinList<N> &ledPins) : ledPins(ledPins) {}
 
     void beginOutput() override {
         for (const pin_t &pin : ledPins)
             ExtIO::pinMode(pin, OUTPUT);
-        ExtIO::digitalWrite(ledPins[get()], HIGH);
+        ExtIO::digitalWrite(ledPins[this->get()], HIGH);
     }
 
     void updateOutput(setting_t oldSetting, setting_t newSetting) override {
@@ -21,5 +21,5 @@ class SelectorLEDs : public virtual Selector {
     }
 
   private:
-    const PinList<NUMBER_OF_LEDS> ledPins;
+    const PinList<N> ledPins;
 };

@@ -3,10 +3,8 @@
 #include "Bank.h"
 
 class BankableMIDIOutput {
-    friend class Bank;
-
   protected:
-    BankableMIDIOutput(const Bank &bank)
+    BankableMIDIOutput(const OutputBank &bank)
         : bank(bank), channelsPerBank(bank.getTracksPerBank()) {}
 
   public:
@@ -31,7 +29,7 @@ class BankableMIDIOutput {
     void unlock() { lockedSetting = UNLOCKED; }
 
   private:
-    const Bank &bank;
+    const OutputBank &bank;
     const uint8_t channelsPerBank;
 
     constexpr static uint8_t UNLOCKED = 0xFF;

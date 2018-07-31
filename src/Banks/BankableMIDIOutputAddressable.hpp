@@ -5,12 +5,12 @@
 
 class BankableMIDIOutputAddressable {
   protected:
-    BankableMIDIOutputAddressable(const Bank &bank, Bank::bankType type)
+    BankableMIDIOutputAddressable(const OutputBank &bank, BankType type)
         : bank(bank),
           channelsOrAddressesPerBank(bank.getTracksPerBank() << type) {}
 
-    BankableMIDIOutputAddressable(const BankConfigAddressable &config)
-        : BankableMIDIOutputAddressable(config.bank, config.type) {}
+    BankableMIDIOutputAddressable(const OutputBankConfigAddressable &config)
+         : BankableMIDIOutputAddressable(config.bank, config.type) {}
 
   public:
     uint8_t getChannel(uint8_t baseChannel) const {
@@ -44,7 +44,7 @@ class BankableMIDIOutputAddressable {
     void unlock() { lockedSetting = UNLOCKED; }
 
   private:
-    const Bank &bank;
+    const OutputBank &bank;
     const uint8_t channelsOrAddressesPerBank;
 
     constexpr static uint8_t UNLOCKED = 0xFF;

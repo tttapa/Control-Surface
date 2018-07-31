@@ -29,7 +29,7 @@ class MIDIRotaryEncoder : public BankableMIDIOutputAddressable,
      *
      * @todo    Documentation
      */
-    MIDIRotaryEncoder(const BankConfigAddressable &config,
+    MIDIRotaryEncoder(const OutputBankConfigAddressable &config,
                       const EncoderPinList &pins, uint8_t baseAddress,
                       uint8_t baseChannel, uint8_t speedMultiply,
                       uint8_t pulsesPerStep)
@@ -39,7 +39,7 @@ class MIDIRotaryEncoder : public BankableMIDIOutputAddressable,
 
 // For tests only
 #ifndef ARDUINO
-    MIDIRotaryEncoder(const BankConfigAddressable &config,
+    MIDIRotaryEncoder(const OutputBankConfigAddressable &config,
                       const Encoder &encoder, uint8_t baseAddress,
                       uint8_t baseChannel, uint8_t speedMultiply,
                       uint8_t pulsesPerStep)

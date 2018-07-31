@@ -4,21 +4,21 @@
 using namespace ::testing;
 
 TEST(IncrementSelector, pressWrap) {
-    MockSelectable selectable;
+    MockSelectable<3> selectable;
 
-    IncrementSelector selector = {selectable, 3, IncrementButton(2), true};
+    IncrementSelector<3> selector = {selectable, IncrementButton(2), true};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
 
     EXPECT_CALL(selectable, select(0));
 
-    Selector::beginAll();
+    Updatable::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -26,13 +26,13 @@ TEST(IncrementSelector, pressWrap) {
 
     EXPECT_CALL(selectable, select(1));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(3000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -40,13 +40,13 @@ TEST(IncrementSelector, pressWrap) {
 
     EXPECT_CALL(selectable, select(2));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(5000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(6000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -54,27 +54,27 @@ TEST(IncrementSelector, pressWrap) {
 
     EXPECT_CALL(selectable, select(0));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(IncrementSelector, pressNoWrap) {
-    MockSelectable selectable;
+    MockSelectable<3> selectable;
 
-    IncrementSelector selector = {selectable, 3, IncrementButton(2), false};
+    IncrementSelector<3> selector = {selectable, IncrementButton(2), false};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
 
     EXPECT_CALL(selectable, select(0));
 
-    Selector::beginAll();
+    Updatable::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -82,13 +82,13 @@ TEST(IncrementSelector, pressNoWrap) {
 
     EXPECT_CALL(selectable, select(1));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(3000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -96,19 +96,19 @@ TEST(IncrementSelector, pressNoWrap) {
 
     EXPECT_CALL(selectable, select(2));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(5000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(6000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
 
-    selector.updateAll();
+    Updatable::updateAll();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

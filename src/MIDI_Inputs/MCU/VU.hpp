@@ -104,22 +104,22 @@ class VU : virtual public VU_Base {
 
 namespace Bankable {
 
-template <size_t NUMBER_OF_BANKS>
-class VU : public virtual VU_Base, public BankableMIDIInputAddressable {
+template <size_t N>
+class VU : public virtual VU_Base, public BankableMIDIInputAddressable<N> {
   public:
-    VU(const BankConfigAddressable &config, uint8_t track, uint8_t channel = 1,
-       unsigned int decayTime = 150)
-        : VU_Base(track, channel, decayTime),
-          BankableMIDIInputAddressable(config) {}
+    VU(const BankConfigAddressable<N> &config, uint8_t track,
+       uint8_t channel = 1, unsigned int decayTime = 150)
+        : VU_Base(track, channel, decayTime), BankableMIDIInputAddressable<N>(
+                                                  config) {}
 
     bool updateImpl(const MIDI_message_matcher &midimsg) {
         uint8_t targetTrack = midimsg.data1 >> 4;
         DEBUGFN("target track = " << +targetTrack);
         if (!matchTrack(targetTrack))
             return false;
-        uint8_t index = getIndex(midimsg.channel, targetTrack, getBaseChannel(),
-                                 getBaseTrack()) %
-                        NUMBER_OF_BANKS;
+        uint8_t index = this->getIndex(midimsg.channel, targetTrack,
+                                       getBaseChannel(), getBaseTrack()) %
+                        N;
         uint8_t data = midimsg.data1 & 0x0F;
         switch (data) {
             case 0xF: clearOverload(index); break;
@@ -144,16 +144,16 @@ class VU : public virtual VU_Base, public BankableMIDIInputAddressable {
     }
 
     uint8_t getRawValue() const override {
-        return values[getSelection() % NUMBER_OF_BANKS];
+        return values[this->getSelection() % N]; // TODO: N
     }
 
     inline bool matchTrack(uint8_t targetTrack) const {
-        return BankableMIDIInputAddressable::matchAddress(
-            targetTrack, getBaseTrack(), NUMBER_OF_BANKS);
+        return BankableMIDIInputAddressable<N>::matchAddress(targetTrack,
+                                                             getBaseTrack(), N);
     }
     inline bool matchChannel(uint8_t targetChannel) const override {
-        return BankableMIDIInputAddressable::matchChannel(
-            targetChannel, getBaseChannel(), NUMBER_OF_BANKS);
+        return BankableMIDIInputAddressable<N>::matchChannel(
+            targetChannel, getBaseChannel(), N);
     }
     void setValue(uint8_t index, uint8_t newValue) {
         values[index] = setValueHelper(values[index], newValue);
@@ -165,7 +165,7 @@ class VU : public virtual VU_Base, public BankableMIDIInputAddressable {
         values[index] = clearOverloadHelper(values[index]);
     }
 
-    uint8_t values[NUMBER_OF_BANKS] = {};
+    uint8_t values[N] = {};
 };
 
 } // namespace Bankable

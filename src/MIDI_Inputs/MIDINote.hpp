@@ -47,16 +47,17 @@ class MIDINote : public virtual MIDINote_Base {
 
 namespace Bankable {
 
-template <uint8_t NUMBER_OF_BANKS>
+template <uint8_t N>
 class MIDINote : public virtual MIDINote_Base,
-                 public BankableMIDIInputAddressable {
+                 public BankableMIDIInputAddressable<N> {
   public:
-    MIDINote(const BankConfigAddressable &config, uint8_t track,
+    MIDINote(const BankConfigAddressable<N> &config, uint8_t track,
              uint8_t channel = 1)
-        : MIDINote_Base(track, channel), BankableMIDIInputAddressable(config) {}
+        : MIDINote_Base(track, channel), BankableMIDIInputAddressable<N>(
+                                             config) {}
 
     uint8_t getValue() const override {
-        return values[getSelection() % NUMBER_OF_BANKS];
+        return values[this->getSelection() % N]; // TODO: N
     }
 
     void reset() override {
@@ -66,26 +67,26 @@ class MIDINote : public virtual MIDINote_Base,
 
   private:
     bool updateImpl(const MIDI_message_matcher &midimsg) override {
-        uint8_t index = getIndex(midimsg.channel, midimsg.data1,
-                                 getBaseChannel(), getBaseAddress());
+        uint8_t index = this->getIndex(midimsg.channel, midimsg.data1,
+                                       getBaseChannel(), getBaseAddress());
         uint8_t value = getValueFromMIDIMessage(midimsg);
         this->values[index] = value;
         return true;
     }
 
     bool matchAddress(uint8_t targetAddress) const override {
-        return BankableMIDIInputAddressable::matchAddress(
-            targetAddress, getBaseAddress(), NUMBER_OF_BANKS);
+        return BankableMIDIInputAddressable<N>::matchAddress(
+            targetAddress, getBaseAddress(), N);
     }
 
     bool matchChannel(uint8_t targetChannel) const override {
-        return BankableMIDIInputAddressable::matchChannel(
-            targetChannel, getBaseChannel(), NUMBER_OF_BANKS);
+        return BankableMIDIInputAddressable<N>::matchChannel(
+            targetChannel, getBaseChannel(), N);
     }
 
     void onBankSettingChange() const override { display(); }
 
-    uint8_t values[NUMBER_OF_BANKS] = {};
+    uint8_t values[N] = {};
 };
 
 } // namespace Bankable

@@ -4,8 +4,8 @@
 #include <Def/Def.hpp>
 #include <Selectors/Selectable.hpp>
 
-template <size_t N>
-class ProgramChanger : public Selectable {
+template <setting_t N>
+class ProgramChanger : public Selectable<N> {
   public:
     ProgramChanger(const Array<uint8_t, N> &programs, uint8_t channel)
         : programs(programs), channel(channel) {}

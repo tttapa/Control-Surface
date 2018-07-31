@@ -4,18 +4,19 @@
 #include "BankConfigAddressable.hpp"
 #include <Helpers/Debug.hpp>
 
+template <setting_t N>
 class BankableMIDIInputAddressable {
-    friend class Bank;
+    friend class Bank<N>;
 
   protected:
-    BankableMIDIInputAddressable(Bank &bank, Bank::bankType type)
+    BankableMIDIInputAddressable(Bank<N> &bank, BankType type)
         : bank(bank),
           channelsOrAddressesPerBank(bank.getTracksPerBank() << type) {
         bank.add(*this);
     }
 
-    BankableMIDIInputAddressable(const BankConfigAddressable &config)
-        : BankableMIDIInputAddressable(config.bank, config.type) {}
+    BankableMIDIInputAddressable(const BankConfigAddressable<N> &config)
+        : BankableMIDIInputAddressable<N>(config.bank, config.type) {}
 
   public:
     virtual ~BankableMIDIInputAddressable() {
@@ -68,14 +69,14 @@ class BankableMIDIInputAddressable {
     }
 
   private:
-    Bank &bank;
-    BankableMIDIInputAddressable *next = nullptr;
-    BankableMIDIInputAddressable *previous = nullptr;
+    Bank<N> &bank;
+    BankableMIDIInputAddressable<N> *next = nullptr;
+    BankableMIDIInputAddressable<N> *previous = nullptr;
     const uint8_t channelsOrAddressesPerBank;
 
     virtual void onBankSettingChange() const {}
     void onBankSettingChangeAll() const {
-        for (const BankableMIDIInputAddressable *e = this; e; e = e->next)
+        for (const BankableMIDIInputAddressable<N> *e = this; e; e = e->next)
             e->onBankSettingChange();
     }
 

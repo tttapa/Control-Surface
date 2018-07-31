@@ -392,33 +392,6 @@ ArduinoMock/WMath.cpp.s:
 	$(MAKE) -f CMakeFiles/ArduinoMock.dir/build.make CMakeFiles/ArduinoMock.dir/ArduinoMock/WMath.cpp.s
 .PHONY : ArduinoMock/WMath.cpp.s
 
-src/Banks/Bank.o: src/Banks/Bank.cpp.o
-
-.PHONY : src/Banks/Bank.o
-
-# target to build an object file
-src/Banks/Bank.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Banks/Bank.cpp.o
-.PHONY : src/Banks/Bank.cpp.o
-
-src/Banks/Bank.i: src/Banks/Bank.cpp.i
-
-.PHONY : src/Banks/Bank.i
-
-# target to preprocess a source file
-src/Banks/Bank.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Banks/Bank.cpp.i
-.PHONY : src/Banks/Bank.cpp.i
-
-src/Banks/Bank.s: src/Banks/Bank.cpp.s
-
-.PHONY : src/Banks/Bank.s
-
-# target to generate assembly for a file
-src/Banks/Bank.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Banks/Bank.cpp.s
-.PHONY : src/Banks/Bank.cpp.s
-
 src/Control_Surface/Control_Surface_Class.o: src/Control_Surface/Control_Surface_Class.cpp.o
 
 .PHONY : src/Control_Surface/Control_Surface_Class.o
@@ -743,6 +716,33 @@ src/Helpers/PrintStream.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/PrintStream.cpp.s
 .PHONY : src/Helpers/PrintStream.cpp.s
 
+src/Helpers/Updatable.o: src/Helpers/Updatable.cpp.o
+
+.PHONY : src/Helpers/Updatable.o
+
+# target to build an object file
+src/Helpers/Updatable.cpp.o:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Updatable.cpp.o
+.PHONY : src/Helpers/Updatable.cpp.o
+
+src/Helpers/Updatable.i: src/Helpers/Updatable.cpp.i
+
+.PHONY : src/Helpers/Updatable.i
+
+# target to preprocess a source file
+src/Helpers/Updatable.cpp.i:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Updatable.cpp.i
+.PHONY : src/Helpers/Updatable.cpp.i
+
+src/Helpers/Updatable.s: src/Helpers/Updatable.cpp.s
+
+.PHONY : src/Helpers/Updatable.s
+
+# target to generate assembly for a file
+src/Helpers/Updatable.cpp.s:
+	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Helpers/Updatable.cpp.s
+.PHONY : src/Helpers/Updatable.cpp.s
+
 src/MIDI_Inputs/MIDIInputElementCC.o: src/MIDI_Inputs/MIDIInputElementCC.cpp.o
 
 .PHONY : src/MIDI_Inputs/MIDIInputElementCC.o
@@ -851,33 +851,6 @@ src/MIDI_Interfaces/MIDI_Interface.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Interfaces/MIDI_Interface.cpp.s
 .PHONY : src/MIDI_Interfaces/MIDI_Interface.cpp.s
 
-src/MIDI_Outputs/Abstract/MIDIOutputElement.o: src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.o
-
-.PHONY : src/MIDI_Outputs/Abstract/MIDIOutputElement.o
-
-# target to build an object file
-src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.o
-.PHONY : src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.o
-
-src/MIDI_Outputs/Abstract/MIDIOutputElement.i: src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.i
-
-.PHONY : src/MIDI_Outputs/Abstract/MIDIOutputElement.i
-
-# target to preprocess a source file
-src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.i
-.PHONY : src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.i
-
-src/MIDI_Outputs/Abstract/MIDIOutputElement.s: src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.s
-
-.PHONY : src/MIDI_Outputs/Abstract/MIDIOutputElement.s
-
-# target to generate assembly for a file
-src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.s
-.PHONY : src/MIDI_Outputs/Abstract/MIDIOutputElement.cpp.s
-
 src/MIDI_Parsers/MIDI_Parser.o: src/MIDI_Parsers/MIDI_Parser.cpp.o
 
 .PHONY : src/MIDI_Parsers/MIDI_Parser.o
@@ -985,33 +958,6 @@ src/MIDI_Senders/RelativeCCSender.s: src/MIDI_Senders/RelativeCCSender.cpp.s
 src/MIDI_Senders/RelativeCCSender.cpp.s:
 	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/MIDI_Senders/RelativeCCSender.cpp.s
 .PHONY : src/MIDI_Senders/RelativeCCSender.cpp.s
-
-src/Selectors/Selector.o: src/Selectors/Selector.cpp.o
-
-.PHONY : src/Selectors/Selector.o
-
-# target to build an object file
-src/Selectors/Selector.cpp.o:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Selectors/Selector.cpp.o
-.PHONY : src/Selectors/Selector.cpp.o
-
-src/Selectors/Selector.i: src/Selectors/Selector.cpp.i
-
-.PHONY : src/Selectors/Selector.i
-
-# target to preprocess a source file
-src/Selectors/Selector.cpp.i:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Selectors/Selector.cpp.i
-.PHONY : src/Selectors/Selector.cpp.i
-
-src/Selectors/Selector.s: src/Selectors/Selector.cpp.s
-
-.PHONY : src/Selectors/Selector.s
-
-# target to generate assembly for a file
-src/Selectors/Selector.cpp.s:
-	$(MAKE) -f CMakeFiles/Control_Surface.dir/build.make CMakeFiles/Control_Surface.dir/src/Selectors/Selector.cpp.s
-.PHONY : src/Selectors/Selector.cpp.s
 
 test/Hardware/test-button.o: test/Hardware/test-button.cpp.o
 
@@ -1506,9 +1452,6 @@ help:
 	@echo "... ArduinoMock/WMath.o"
 	@echo "... ArduinoMock/WMath.i"
 	@echo "... ArduinoMock/WMath.s"
-	@echo "... src/Banks/Bank.o"
-	@echo "... src/Banks/Bank.i"
-	@echo "... src/Banks/Bank.s"
 	@echo "... src/Control_Surface/Control_Surface_Class.o"
 	@echo "... src/Control_Surface/Control_Surface_Class.i"
 	@echo "... src/Control_Surface/Control_Surface_Class.s"
@@ -1545,6 +1488,9 @@ help:
 	@echo "... src/Helpers/PrintStream.o"
 	@echo "... src/Helpers/PrintStream.i"
 	@echo "... src/Helpers/PrintStream.s"
+	@echo "... src/Helpers/Updatable.o"
+	@echo "... src/Helpers/Updatable.i"
+	@echo "... src/Helpers/Updatable.s"
 	@echo "... src/MIDI_Inputs/MIDIInputElementCC.o"
 	@echo "... src/MIDI_Inputs/MIDIInputElementCC.i"
 	@echo "... src/MIDI_Inputs/MIDIInputElementCC.s"
@@ -1557,9 +1503,6 @@ help:
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.o"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.i"
 	@echo "... src/MIDI_Interfaces/MIDI_Interface.s"
-	@echo "... src/MIDI_Outputs/Abstract/MIDIOutputElement.o"
-	@echo "... src/MIDI_Outputs/Abstract/MIDIOutputElement.i"
-	@echo "... src/MIDI_Outputs/Abstract/MIDIOutputElement.s"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.o"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.i"
 	@echo "... src/MIDI_Parsers/MIDI_Parser.s"
@@ -1572,9 +1515,6 @@ help:
 	@echo "... src/MIDI_Senders/RelativeCCSender.o"
 	@echo "... src/MIDI_Senders/RelativeCCSender.i"
 	@echo "... src/MIDI_Senders/RelativeCCSender.s"
-	@echo "... src/Selectors/Selector.o"
-	@echo "... src/Selectors/Selector.i"
-	@echo "... src/Selectors/Selector.s"
 	@echo "... test/Hardware/test-button.o"
 	@echo "... test/Hardware/test-button.i"
 	@echo "... test/Hardware/test-button.s"

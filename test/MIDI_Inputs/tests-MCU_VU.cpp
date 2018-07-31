@@ -91,7 +91,7 @@ TEST(MCUVU, decay) {
 // -------------------------------------------------------------------------- //
 
 TEST(MCUVUBankable, setValueBankChangeAddress) {
-    Bank bank(4);
+    Bank<2> bank(4);
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
     MCU::Bankable::VU<2> vu(bank, track, channel);
@@ -107,10 +107,10 @@ TEST(MCUVUBankable, setValueBankChangeAddress) {
 }
 
 TEST(MCUVUBankable, setValueBankChangeChannel) {
-    Bank bank(4);
+    Bank<3> bank(4);
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
-    MCU::Bankable::VU<3> vu({bank, Bank::CHANGE_CHANNEL}, track, channel);
+    MCU::Bankable::VU<3> vu({bank, CHANGE_CHANNEL}, track, channel);
     MIDI_message_matcher midimsg1 = {CHANNEL_PRESSURE, channel + 4 - 1,
                                      (track - 1) << 4 | 0xA, 0};
     MIDI_message_matcher midimsg2 = {CHANNEL_PRESSURE, channel + 8 - 1,
@@ -130,7 +130,7 @@ TEST(MCUVUBankable, setValueBankChangeChannel) {
 }
 
 TEST(MCUVUBankable, overloadBankChangeAddress) {
-    Bank bank(4);
+    Bank<2> bank(4);
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
     MCU::Bankable::VU<2> vu(bank, track, channel);
@@ -156,7 +156,7 @@ TEST(MCUVUBankable, overloadBankChangeAddress) {
 }
 
 TEST(MCUVUBankable, decay) {
-    Bank bank(4);
+    Bank<2> bank(4);
     constexpr uint8_t channel = 3;
     constexpr uint8_t track = 5;
     constexpr unsigned int decayTime = 300;

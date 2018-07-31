@@ -25,7 +25,7 @@ class MIDIButton : public BankableMIDIOutputAddressable,
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      */
-    MIDIButton(const BankConfigAddressable &config, pin_t pin,
+    MIDIButton(const OutputBankConfigAddressable &config, pin_t pin,
                uint8_t baseAddress, uint8_t baseChannel)
         : BankableMIDIOutputAddressable(config), button{pin},
           baseAddress(baseAddress), baseChannel(baseChannel) {}

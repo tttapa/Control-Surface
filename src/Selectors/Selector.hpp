@@ -3,35 +3,22 @@
 #include "Selectable.hpp"
 #include <Helpers/Debug.hpp>
 #include <Helpers/LinkedList.h>
+#include <Helpers/Updatable.hpp>
 
-class Selector {
+template <setting_t N>
+class Selector : public Updatable {
   protected:
     Selector(); // Not used, only for virtual inheritance
-    Selector(Selectable &selectable, setting_t numberOfSettings)
-        : selectable(selectable), numberOfSettings(numberOfSettings) {
-        LinkedList::append(this, first, last);
-    }
+    Selector(Selectable<N> &selectable) : selectable(selectable) {}
 
   public:
-    virtual ~Selector() { LinkedList::remove(this, first, last); }
-
     virtual void beginInput() = 0;
     virtual void beginOutput() = 0;
 
-    void begin() {
+    void begin() final override {
         beginOutput();
         set(0);
         beginInput();
-    }
-    static void beginAll() {
-        for (Selector *sel = first; sel; sel = sel->next)
-            sel->begin();
-    }
-
-    virtual void update() = 0;
-    static void updateAll() {
-        for (Selector *sel = first; sel; sel = sel->next)
-            sel->update();
     }
 
     virtual void reset() { set(0); }
@@ -45,7 +32,7 @@ class Selector {
         setting = newSetting;
     }
 
-    setting_t getNumberOfSettings() const { return numberOfSettings; }
+    constexpr setting_t getNumberOfSettings() const { return N; }
 
   private:
     virtual void updateOutput(setting_t oldSetting, setting_t newSetting) = 0;
@@ -53,27 +40,16 @@ class Selector {
     setting_t validateSetting(setting_t setting) const {
         static_assert(setting_t(-1) > setting_t(0),
                       "Error: setting_t should be an unsigned integer type.");
-        if (setting >= numberOfSettings) {
+        if (setting >= getNumberOfSettings()) {
             DEBUGFN(F("Error: Setting ")
                     << setting
                     << F(" is not less than the total number of settings (")
-                    << numberOfSettings << ')');
-            ERROR(return numberOfSettings - 1);
+                    << getNumberOfSettings() << ')');
+            ERROR(return getNumberOfSettings() - 1);
         }
         return setting;
     }
 
-    Selectable &selectable;
-    const setting_t numberOfSettings;
+    Selectable<N> &selectable;
     setting_t setting = 0;
-
-    Selector *next = nullptr;
-    Selector *previous = nullptr;
-    static Selector *last;
-    static Selector *first;
-
-    template <class Node>
-    friend void LinkedList::append(Node *, Node *&, Node *&);
-    template <class Node>
-    friend void LinkedList::remove(Node *, Node *&, Node *&);
 };

@@ -18,16 +18,18 @@ void Control_Surface_::begin() {
     ExtendedIOElement::beginAll();
     MIDI().begin();               // initialize the MIDI interface
     DisplayInterface::beginAll(); // initialize all displays
-    MIDIOutputElement::beginAll();
+    // MIDIOutputElement::beginAll();
     MIDIInputElementCC::beginAll();
     MIDIInputElementChannelPressure::beginAll();
     MIDIInputElementNote::beginAll();
-    Selector::beginAll();
+    // Selector::beginAll();
+    Updatable::beginAll();
 }
 
 void Control_Surface_::loop() {
-    MIDIOutputElement::updateAll();
-    Selector::updateAll();
+    // MIDIOutputElement::updateAll(); // TODO
+    // Selector::updateAll();
+    Updatable::updateAll();
     updateMidiInput();
     updateInputs();
     updateDisplays();

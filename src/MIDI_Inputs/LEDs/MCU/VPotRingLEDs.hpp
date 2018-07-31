@@ -49,13 +49,13 @@ class VPotRingLEDs : public VPotRing, public VPotRingLEDs_Base {
 
 namespace Bankable {
 
-template <uint8_t NUMBER_OF_BANKS>
-class VPotRingLEDs : public VPotRing<NUMBER_OF_BANKS>,
+template <uint8_t N>
+class VPotRingLEDs : public VPotRing<N>,
                      public VPotRingLEDs_Base {
   public:
-    VPotRingLEDs(const BankConfigAddressable &config, uint8_t track,
+    VPotRingLEDs(const BankConfigAddressable<N> &config, uint8_t track,
                  uint8_t channel, const pin_t (&ledPins)[11])
-        : VPotRing_Base(track, channel), VPotRing<NUMBER_OF_BANKS>(
+        : VPotRing_Base(track, channel), VPotRing<N>(
                                              config, track, channel),
           VPotRingLEDs_Base(ledPins) {}
 };

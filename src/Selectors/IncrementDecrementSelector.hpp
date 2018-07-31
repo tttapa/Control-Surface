@@ -3,7 +3,8 @@
 #include "Selector.hpp"
 #include <Hardware/IncrementDecrementButtons.hpp>
 
-class IncrementDecrementSelector_Base : public virtual Selector {
+template <setting_t N>
+class IncrementDecrementSelector_Base : public virtual Selector<N> {
   public:
     IncrementDecrementSelector_Base(const IncrementDecrementButtons &buttons,
                                     bool wrap = true)
@@ -15,35 +16,35 @@ class IncrementDecrementSelector_Base : public virtual Selector {
         switch (buttons.getState()) {
             case IncrementDecrementButtons::Increment: increment(); break;
             case IncrementDecrementButtons::Decrement: decrement(); break;
-            case IncrementDecrementButtons::Reset: reset(); break;
+            case IncrementDecrementButtons::Reset: this->reset(); break;
             default: break;
         }
     }
 
     void increment() {
-        setting_t setting = get();
+        setting_t setting = this->get();
         setting++;
-        if (setting == getNumberOfSettings()) {
+        if (setting == N) {
             if (wrap) {
                 setting = 0;
             } else {
                 return;
             }
         }
-        set(setting);
+        this->set(setting);
     }
 
     void decrement() {
-        setting_t setting = get();
+        setting_t setting = this->get();
         if (setting == 0) {
             if (wrap) {
-                setting = getNumberOfSettings();
+                setting = N;
             } else {
                 return;
             }
         }
         setting--;
-        set(setting);
+        this->set(setting);
     }
 
   private:
@@ -53,14 +54,14 @@ class IncrementDecrementSelector_Base : public virtual Selector {
 
 // -------------------------------------------------------------------------- //
 
-class IncrementDecrementSelector : public IncrementDecrementSelector_Base {
+template <setting_t N>
+class IncrementDecrementSelector : public IncrementDecrementSelector_Base<N> {
   public:
-    IncrementDecrementSelector(Selectable &selectable,
-                               setting_t numberOfSettings,
+    IncrementDecrementSelector(Selectable<N> &selectable,
                                const IncrementDecrementButtons &buttons,
                                bool wrap = true)
-        : Selector(selectable, numberOfSettings),
-          IncrementDecrementSelector_Base(buttons, wrap) {}
+        : Selector<N>(selectable), IncrementDecrementSelector_Base<N>(buttons,
+                                                                      wrap) {}
 
     void beginOutput() override {}
     void updateOutput(setting_t oldSetting, setting_t newSetting) override {}

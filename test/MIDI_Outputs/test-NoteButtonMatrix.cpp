@@ -78,7 +78,7 @@ TEST(NoteButtonMatrix, pressAndRelease) {
 TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     MockMIDI_Interface midi;
 
-    Bank bank(4);
+    OutputBank bank(4);
 
     constexpr uint8_t channel = 1;
     AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};

@@ -42,7 +42,7 @@ class CCButtons
      * @param   channelIncrement
      *          The number of channels to increment for each next button.
      */
-    CCButtons(const BankConfigAddressable &config,
+    CCButtons(const OutputBankConfigAddressable &config,
               const Array<Button, NUMBER_OF_BUTTONS> &buttons,
               uint8_t baseAddress, uint8_t baseChannel = 1,
               uint8_t addressIncrement = 1, uint8_t channelIncrement = 0)

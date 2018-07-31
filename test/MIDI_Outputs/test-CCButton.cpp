@@ -46,7 +46,7 @@ TEST(CCButton, pressAndRelease) {
 TEST(CCButtonBankable, pressAndRelease) {
     MockMIDI_Interface midi;
 
-    Bank bank(4);
+    OutputBank bank(4);
 
     Bankable::CCButton button(bank, 2, 0x3C, 7);
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
@@ -84,7 +84,7 @@ TEST(CCButtonBankable, pressAndRelease) {
 TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
     MockMIDI_Interface midi;
 
-    Bank bank(4);
+    OutputBank bank(4);
 
     Bankable::CCButton button(bank, 2, 0x3C, 7);
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
@@ -125,7 +125,7 @@ TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
 TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
     MockMIDI_Interface midi;
 
-    Bank bank(4);
+    OutputBank bank(4);
 
     Bankable::CCButton button(bank, 2, 0x3C, 7);
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
@@ -255,7 +255,7 @@ TEST(CCButtons, pressAndRelease) {
 TEST(CCButtonsBankable, pressChangeBankAndRelease) {
     MockMIDI_Interface midi;
 
-    Bank bank(4);
+    OutputBank bank(4);
 
     Bankable::CCButtons<2> buttons = {bank, {2, 3}, 0x3C, 7, 1, 2};
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
@@ -344,7 +344,7 @@ TEST(CCButtonsBankable, pressChangeBankAndRelease) {
 TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
     MockMIDI_Interface midi;
 
-    Bank bank(4);
+    OutputBank bank(4);
 
     Bankable::CCButtons<2> buttons = {bank, {2, 3}, 0x3C, 7, 1, 2};
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));

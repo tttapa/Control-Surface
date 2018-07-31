@@ -85,13 +85,13 @@ class VPotRing : public virtual VPotRing_Base {
 
 namespace Bankable {
 
-template <uint8_t NUMBER_OF_BANKS>
+template <uint8_t N>
 class VPotRing : public virtual VPotRing_Base,
-                 public BankableMIDIInputAddressable {
+                 public BankableMIDIInputAddressable<N> {
   public:
-    VPotRing(const BankConfigAddressable &config, uint8_t track,
+    VPotRing(const BankConfigAddressable<N> &config, uint8_t track,
              uint8_t channel = 1)
-        : VPotRing_Base(track, channel), BankableMIDIInputAddressable(config) {}
+        : VPotRing_Base(track, channel), BankableMIDIInputAddressable<N>(config) {}
 
     void reset() final override {
         for (uint8_t &value : values)
@@ -108,17 +108,17 @@ class VPotRing : public virtual VPotRing_Base,
     }
 
     bool matchAddress(uint8_t targetAddress) const override {
-        return BankableMIDIInputAddressable::matchAddress(
-            targetAddress, getBaseAddress(), NUMBER_OF_BANKS);
+        return BankableMIDIInputAddressable<N>::matchAddress(
+            targetAddress, getBaseAddress(), N); // TODO: N is known
     }
 
     uint8_t getValue() const override {
-        return values[getSelection() % NUMBER_OF_BANKS];
+        return values[this->getSelection() % N]; // TODO: N
     }
 
     void onBankSettingChange() const override { display(); }
 
-    uint8_t values[NUMBER_OF_BANKS] = {};
+    uint8_t values[N] = {};
 };
 
 } // namespace Bankable

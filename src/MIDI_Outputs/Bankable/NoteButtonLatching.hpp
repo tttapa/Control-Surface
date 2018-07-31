@@ -32,7 +32,7 @@ class NoteButtonLatching
      * @param   channel
      *          The MIDI channel. [1, 16]
      */
-    NoteButtonLatching(const BankConfigAddressable &config, pin_t pin,
+    NoteButtonLatching(const OutputBankConfigAddressable &config, pin_t pin,
                        uint8_t note, uint8_t channel)
         : MIDIButtonLatching<DigitalNoteSender::sendOn,
                              DigitalNoteSender::sendOff>(config, pin, note,
