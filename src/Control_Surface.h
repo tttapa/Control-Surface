@@ -69,7 +69,6 @@
 #include <Banks/Bank.h>
 
 // -------------------------------------------------------------------------- //
-// #include <Selectors/ProgramSelector.h> // TODO
 // #include <Selectors/Transposer.h> // TODO
 #include <Selectors/IncrementDecrementSelector.hpp>
 #include <Selectors/IncrementSelector.hpp>
@@ -78,6 +77,8 @@
 #include <Selectors/LEDs/IncrementDecrementSelectorLEDs.hpp>
 #include <Selectors/LEDs/IncrementSelectorLEDs.hpp>
 #include <Selectors/LEDs/ManyButtonsSelectorLEDs.hpp>
+
+#include <Selectors/ProgramChanger.hpp>
 
 // -------------------------------------------------------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.h>

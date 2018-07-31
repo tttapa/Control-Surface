@@ -51,6 +51,8 @@ class Selector {
     virtual void updateOutput(setting_t oldSetting, setting_t newSetting) = 0;
 
     setting_t validateSetting(setting_t setting) const {
+        static_assert(setting_t(-1) > setting_t(0),
+                      "Error: setting_t should be an unsigned integer type.");
         if (setting >= numberOfSettings) {
             DEBUGFN(F("Error: Setting ")
                     << setting

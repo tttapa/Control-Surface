@@ -37,7 +37,7 @@ class IncrementDecrementSelector_Base : public virtual Selector {
         setting_t setting = get();
         if (setting == 0) {
             if (wrap) {
-                getNumberOfSettings();
+                setting = getNumberOfSettings();
             } else {
                 return;
             }
