@@ -34,10 +34,12 @@ class CCButtonMatrix
      *
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
-     *          matrix. These pins will be driven LOW (Lo-Z).
+     *          matrix.  
+     *          **⚠** These pins will be driven LOW (Lo-Z).
      * @param   colPins
      *          A list of pin numbers connected to the columns of the button
-     *          matrix. These pins will be used as inputs (Hi-Z), and the
+     *          matrix.  
+     *          These pins will be used as inputs (Hi-Z), and the
      *          internal pull-up resistor will be enabled.
      * @param   controllers
      *          A 2-dimensional array of the same dimensions as the button

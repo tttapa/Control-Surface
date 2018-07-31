@@ -1,11 +1,10 @@
 #pragma once
 
 #include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <Def/Def.hpp>
 #include <Hardware/ButtonMatrix.h>
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
-
-#include <Def/Def.hpp>
 
 namespace Bankable {
 
@@ -22,8 +21,22 @@ class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
 
   protected:
     /**
-     * @brief
-     * @todo    Documentation
+     * @brief   Create a new Bankable MIDIButtonMatrix.
+     * 
+     * @param   rowPins
+     *          A list of pin numbers connected to the rows of the button
+     *          matrix.  
+     *          **⚠** These pins will be driven LOW (Lo-Z).
+     * @param   colPins
+     *          A list of pin numbers connected to the columns of the button
+     *          matrix.  
+     *          These pins will be used as inputs (Hi-Z), and the
+     *          internal pull-up resistor will be enabled.
+     * @param   addresses
+     *          A 2-dimensional array of the same dimensions as the button
+     *          matrix that contains the MIDI address of each button. [0, 127]
+     * @param   channel
+     *          The MIDI channel. [1, 16]
      */
     MIDIButtonMatrix(const BankConfigAddressable &config,
                      const PinList<nb_rows> &rowPins,
