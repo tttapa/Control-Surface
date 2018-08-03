@@ -91,7 +91,8 @@ class VPotRing : public virtual VPotRing_Base,
   public:
     VPotRing(const BankConfigAddressable<N> &config, uint8_t track,
              uint8_t channel = 1)
-        : VPotRing_Base(track, channel), BankableMIDIInputAddressable<N>(config) {}
+        : VPotRing_Base(track, channel), BankableMIDIInputAddressable<N>(
+                                             config) {}
 
     void reset() final override {
         for (uint8_t &value : values)
@@ -100,20 +101,20 @@ class VPotRing : public virtual VPotRing_Base,
 
   private:
     bool updateImpl(const MIDI_message_matcher &midimsg) override {
-        uint8_t index = getIndex(midimsg.channel, midimsg.data1,
-                                 getBaseChannel(), getBaseAddress());
+        uint8_t index = this->getIndex(midimsg.channel, midimsg.data1,
+                                       getBaseChannel(), getBaseAddress());
         uint8_t value = sanitizeValue(midimsg.data2);
         values[index] = value;
         return true;
     }
 
     bool matchAddress(uint8_t targetAddress) const override {
-        return BankableMIDIInputAddressable<N>::matchAddress(
-            targetAddress, getBaseAddress(), N); // TODO: N is known
+        return BankableMIDIInputAddressable<N>::matchAddress(targetAddress,
+                                                             getBaseAddress());
     }
 
     uint8_t getValue() const override {
-        return values[this->getSelection() % N]; // TODO: N
+        return values[this->getSelection()]; // TODO: N
     }
 
     void onBankSettingChange() const override { display(); }

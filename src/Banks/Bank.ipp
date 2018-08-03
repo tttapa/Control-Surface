@@ -2,6 +2,7 @@
 #include "BankableMIDIInputAddressable.hpp"
 #include "BankableMIDIOutput.hpp"
 #include "BankableMIDIOutputAddressable.hpp"
+#include <Selectors/Selector.hpp>
 
 template <setting_t N>
 void Bank<N>::add(BankableMIDIInputAddressable<N> &bankable) {
@@ -9,7 +10,8 @@ void Bank<N>::add(BankableMIDIInputAddressable<N> &bankable) {
 }
 
 template <setting_t N>
-void Bank<N>::select(uint8_t bankSetting) {
+void Bank<N>::select(setting_t bankSetting) {
+    bankSetting = this->validateSetting(bankSetting);
     OutputBank::select(bankSetting);
     first->onBankSettingChangeAll();
 }

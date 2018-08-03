@@ -153,6 +153,10 @@ constexpr uint8_t V_POT_6                = 0x15; //    Out
 constexpr uint8_t V_POT_7                = 0x16; //    Out
 constexpr uint8_t V_POT_8                = 0x17; //    Out
 
+constexpr uint8_t EXTERNAL_CONTROLLER    = 0x2E; //    Out
+
+constexpr uint8_t JOG_WHEEL              = 0x3C; //    Out
+
 // Pitch Bend
 
 constexpr uint8_t VOLUME_1               = 0x01; // In Out

@@ -21,7 +21,7 @@ class OutputBank {
         }
     }
     void select(setting_t setting) { bankSetting = setting; }
-    uint8_t getSelection() const { return bankSetting; }
+    virtual uint8_t getSelection() const { return bankSetting; }
     uint8_t getTracksPerBank() const { return tracksPerBank; }
 
     const uint8_t tracksPerBank;
@@ -37,6 +37,7 @@ class OutputBank {
  * `volume_A` has controller 0x07 on MIDI channel 1, and
  * `volume_B` has controller 0x07 on MIDI channel 2.
  * Let's add them to a bank with 2 tracks per bank.
+ * @todo    Example
  * @code{.cpp}
  * AnalogCC volume_A(A0, MIDI_CC::Channel_Volume, 1);
  * AnalogCC volume_B(A1, MIDI_CC::Channel_Volume, 2);
@@ -97,7 +98,8 @@ class Bank : public Selectable<N>, public OutputBank {
      *          The number of tracks (i.e. addresses or channels) that
      *          are skipped when the bank setting changes.
      */
-    Bank(uint8_t tracksPerBank = 1) : OutputBank(tracksPerBank) {}
+    Bank(uint8_t tracksPerBank = 1, uint8_t initialSelection = 0)
+        : Selectable<N>(initialSelection), OutputBank(tracksPerBank) {}
 
     /**
      * @brief   Set the Bank Setting
@@ -105,7 +107,7 @@ class Bank : public Selectable<N>, public OutputBank {
      * @param   bankSetting
      *          The new Bank Setting.
      */
-    void select(uint8_t bankSetting);
+    void select(uint8_t bankSetting) override;
 
     void remove(BankableMIDIInputAddressable<N> *bankable);
 

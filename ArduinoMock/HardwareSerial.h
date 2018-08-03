@@ -31,7 +31,7 @@
 #undef F
 #endif
 
-#include "gmock/gmock.h"
+#include <gmock/gmock.h>
 
 class HardwareSerial : public Stream {
   public:

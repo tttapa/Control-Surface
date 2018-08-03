@@ -10,7 +10,7 @@ class MIDINote_Base : public MIDIInputElementNote {
 
   public:
     virtual uint8_t getValue() const = 0;
-    bool getState() { return getValue() >= 64; }
+    bool getState() { return getValue() >= NOTE_VELOCITY_THRESHOLD; }
 
   protected:
     uint8_t getValueFromMIDIMessage(const MIDI_message_matcher &midimsg) {
@@ -57,7 +57,7 @@ class MIDINote : public virtual MIDINote_Base,
                                              config) {}
 
     uint8_t getValue() const override {
-        return values[this->getSelection() % N]; // TODO: N
+        return values[this->getSelection()]; // TODO: N
     }
 
     void reset() override {
@@ -75,13 +75,13 @@ class MIDINote : public virtual MIDINote_Base,
     }
 
     bool matchAddress(uint8_t targetAddress) const override {
-        return BankableMIDIInputAddressable<N>::matchAddress(
-            targetAddress, getBaseAddress(), N);
+        return BankableMIDIInputAddressable<N>::matchAddress(targetAddress,
+                                                             getBaseAddress());
     }
 
     bool matchChannel(uint8_t targetChannel) const override {
-        return BankableMIDIInputAddressable<N>::matchChannel(
-            targetChannel, getBaseChannel(), N);
+        return BankableMIDIInputAddressable<N>::matchChannel(targetChannel,
+                                                             getBaseChannel());
     }
 
     void onBankSettingChange() const override { display(); }

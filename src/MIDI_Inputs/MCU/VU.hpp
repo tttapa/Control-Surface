@@ -144,16 +144,16 @@ class VU : public virtual VU_Base, public BankableMIDIInputAddressable<N> {
     }
 
     uint8_t getRawValue() const override {
-        return values[this->getSelection() % N]; // TODO: N
+        return values[this->getSelection()]; // TODO: N
     }
 
     inline bool matchTrack(uint8_t targetTrack) const {
         return BankableMIDIInputAddressable<N>::matchAddress(targetTrack,
-                                                             getBaseTrack(), N);
+                                                             getBaseTrack());
     }
     inline bool matchChannel(uint8_t targetChannel) const override {
-        return BankableMIDIInputAddressable<N>::matchChannel(
-            targetChannel, getBaseChannel(), N);
+        return BankableMIDIInputAddressable<N>::matchChannel(targetChannel,
+                                                             getBaseChannel());
     }
     void setValue(uint8_t index, uint8_t newValue) {
         values[index] = setValueHelper(values[index], newValue);

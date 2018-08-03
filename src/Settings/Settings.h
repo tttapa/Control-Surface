@@ -15,7 +15,7 @@
 // ========================================================================== //
 
 /** The debug output. */
-#define DEBUG_OUT Serial
+// #define DEBUG_OUT Serial
 
 // #define DEBUG_MIDI_PACKETS
 
@@ -65,6 +65,9 @@ constexpr unsigned long VU_PEAK_HOLD_TIME = 400; // milliseconds
 /** If set to true, the VU meter display peak bars will decay smoothly (i.e. one
  *  pixel at a time), if set to false, they will decay one unit at a time. */
 constexpr bool VU_PEAK_SMOOTH_DECAY = true;
+
+/** Determines when a note input should be interpreted as 'on'. */
+constexpr uint8_t NOTE_VELOCITY_THRESHOLD = 1;
 
 /** Don't parse incomming System Exclusive messages. */
 #define IGNORE_SYSEX

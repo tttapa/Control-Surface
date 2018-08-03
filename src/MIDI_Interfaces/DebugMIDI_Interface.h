@@ -21,35 +21,6 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
      */
     StreamDebugMIDI_Interface(Stream &stream) : StreamMIDI_Interface(stream) {}
 
-  protected:
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
-        uint8_t messageType = (m >> 4) - 8;
-        if (messageType >= 7)
-            return;
-        stream.print(MIDI_STATUS_TYPE_NAMES[messageType]);
-        stream.print("\tChannel: ");
-        stream.print(c + 1);
-        stream.print("\tData 1: 0x");
-        stream.print(d1, HEX);
-        stream.print("\tData 2: 0x");
-        stream.print(d2, HEX);
-        stream.print("\r\n");
-        stream.flush();
-    }
-
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1) override {
-        uint8_t messageType = (m >> 4) - 8;
-        if (messageType >= 7)
-            return;
-        stream.print(MIDI_STATUS_TYPE_NAMES[messageType]);
-        stream.print("\tChannel: ");
-        stream.print(c + 1);
-        stream.print("\tData 1: 0x");
-        stream.print(d1, HEX);
-        stream.print("\r\n");
-        stream.flush();
-    }
-
     virtual MIDI_read_t read() override {
         while (stream.available() > 0) {
             char data = stream.read();
@@ -79,6 +50,35 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
             }
         }
         return NO_MESSAGE;
+    }
+
+  protected:
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
+        uint8_t messageType = (m >> 4) - 8;
+        if (messageType >= 7)
+            return;
+        stream.print(MIDI_STATUS_TYPE_NAMES[messageType]);
+        stream.print("\tChannel: ");
+        stream.print(c + 1);
+        stream.print("\tData 1: 0x");
+        stream.print(d1, HEX);
+        stream.print("\tData 2: 0x");
+        stream.print(d2, HEX);
+        stream.print("\r\n");
+        stream.flush();
+    }
+
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1) override {
+        uint8_t messageType = (m >> 4) - 8;
+        if (messageType >= 7)
+            return;
+        stream.print(MIDI_STATUS_TYPE_NAMES[messageType]);
+        stream.print("\tChannel: ");
+        stream.print(c + 1);
+        stream.print("\tData 1: 0x");
+        stream.print(d1, HEX);
+        stream.print("\r\n");
+        stream.flush();
     }
 
   private:

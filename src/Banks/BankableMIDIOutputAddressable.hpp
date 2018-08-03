@@ -47,6 +47,6 @@ class BankableMIDIOutputAddressable {
     const OutputBank &bank;
     const uint8_t channelsOrAddressesPerBank;
 
-    constexpr static uint8_t UNLOCKED = 0xFF;
+    constexpr static uint8_t UNLOCKED = 0x80; // TODO: is this safe?
     uint8_t lockedSetting = UNLOCKED;
 };

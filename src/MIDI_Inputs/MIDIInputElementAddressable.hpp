@@ -70,7 +70,7 @@ class MIDIInputElementAddressable {
      */
     virtual inline bool matchAddress(uint8_t targetAddress) const {
         DEBUGFN(F("target address = ")
-                << hex << targetAddress << F("base address = ")
+                << hex << targetAddress << F(", base address = ")
                 << getBaseAddress() << dec);
         return getBaseAddress() == targetAddress;
     }
@@ -81,7 +81,7 @@ class MIDIInputElementAddressable {
      */
     virtual inline bool matchChannel(uint8_t targetChannel) const {
         DEBUGFN(F("target channel = ")
-                << hex << targetChannel << F("base channel = ")
+                << hex << targetChannel << F(", base channel = ")
                 << getBaseChannel() << dec);
         return getBaseChannel() == targetChannel;
     }
