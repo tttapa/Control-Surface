@@ -13,38 +13,13 @@ class IncrementDecrementSelector_Base : public virtual Selector<N> {
     void beginInput() override { buttons.begin(); }
 
     void update() override {
+        using IncrDecrButtons = IncrementDecrementButtons;
         switch (buttons.getState()) {
-            case IncrementDecrementButtons::Increment: increment(); break;
-            case IncrementDecrementButtons::Decrement: decrement(); break;
-            case IncrementDecrementButtons::Reset: this->reset(); break;
+            case IncrDecrButtons::Increment: this->increment(wrap); break;
+            case IncrDecrButtons::Decrement: this->decrement(wrap); break;
+            case IncrDecrButtons::Reset: this->reset(); break;
             default: break;
         }
-    }
-
-    void increment() {
-        setting_t setting = this->get();
-        setting++;
-        if (setting == N) {
-            if (wrap) {
-                setting = 0;
-            } else {
-                return;
-            }
-        }
-        this->set(setting);
-    }
-
-    void decrement() {
-        setting_t setting = this->get();
-        if (setting == 0) {
-            if (wrap) {
-                setting = N;
-            } else {
-                return;
-            }
-        }
-        setting--;
-        this->set(setting);
     }
 
   private:

@@ -7,9 +7,7 @@
 template <int8_t MINIMUM_SEMITONES, int8_t MAXIMUM_SEMITONES>
 class Transposer : public Bank<MAXIMUM_SEMITONES - MINIMUM_SEMITONES + 1> {
   public:
-    Transposer(int8_t step = 1)
-        : Bank<MAXIMUM_SEMITONES - MINIMUM_SEMITONES + 1>(step,
-                                                          -MINIMUM_SEMITONES) {
+    Transposer(int8_t step = 1) : Bank<N>(step, -MINIMUM_SEMITONES) {
         static_assert(MINIMUM_SEMITONES <= 0,
                       "Error: the minimum transposition must be negative");
         static_assert(MAXIMUM_SEMITONES >= 0,
@@ -29,4 +27,6 @@ class Transposer : public Bank<MAXIMUM_SEMITONES - MINIMUM_SEMITONES + 1> {
         return Bank<MAXIMUM_SEMITONES - MINIMUM_SEMITONES + 1>::getSelection() +
                MINIMUM_SEMITONES;
     }
+
+    static constexpr setting_t N = MAXIMUM_SEMITONES - MINIMUM_SEMITONES + 1;
 };

@@ -73,6 +73,11 @@
 #include <Selectors/IncrementSelector.hpp>
 #include <Selectors/ManyButtonsSelector.hpp>
 
+#ifdef Encoder_h_
+#include <Selectors/EncoderSelector.hpp>
+#include <Selectors/LEDs/EncoderSelectorLEDs.hpp>
+#endif
+
 #include <Selectors/LEDs/IncrementDecrementSelectorLEDs.hpp>
 #include <Selectors/LEDs/IncrementSelectorLEDs.hpp>
 #include <Selectors/LEDs/ManyButtonsSelectorLEDs.hpp>

@@ -95,6 +95,7 @@
 ### Selectors
 - Switch
 - Latching
+- Encoder
 - ✔ Increment
 - ✔ Increment/Decrement
 - ✔ Many Buttons

@@ -16,20 +16,7 @@ class IncrementSelector_Base : public virtual Selector<N> {
 
     void update() override {
         if (button.getState() == IncrementButton::Increment)
-            increment();
-    }
-
-    void increment() {
-        setting_t setting = this->get();
-        setting++;
-        if (setting == N) {
-            if (wrap) {
-                setting = 0;
-            } else {
-                return;
-            }
-        }
-        this->set(setting);
+            this->increment(wrap);
     }
 
   private:

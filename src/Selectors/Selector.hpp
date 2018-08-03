@@ -32,6 +32,32 @@ class Selector : public Updatable {
         setting = newSetting;
     }
 
+    void increment(bool wrap) {
+        setting_t setting = this->get();
+        setting++;
+        if (setting == N) {
+            if (wrap) {
+                setting = 0;
+            } else {
+                return;
+            }
+        }
+        this->set(setting);
+    }
+
+    void decrement(bool wrap) {
+        setting_t setting = this->get();
+        if (setting == 0) {
+            if (wrap) {
+                setting = N;
+            } else {
+                return;
+            }
+        }
+        setting--;
+        this->set(setting);
+    }
+
   private:
     virtual void updateOutput(setting_t oldSetting, setting_t newSetting) = 0;
 

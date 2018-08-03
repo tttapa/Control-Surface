@@ -7,12 +7,15 @@
 typedef uint16_t pin_t;
 typedef int16_t analog_t;
 
+constexpr pin_t NO_PIN = 0xFFFF;
+
 using MappingFunction = int (*)(int);
 
 template <size_t N>
 using PinList = Array<pin_t, N>;
 
 using EncoderPinList = Array<uint8_t, 2>;
+using EncoderSwitchPinList = Array<uint8_t, 3>;
 
 template <class T, size_t nb_rows, size_t nb_cols>
 using Array2D = Array<Array<T, nb_cols>, nb_rows>;

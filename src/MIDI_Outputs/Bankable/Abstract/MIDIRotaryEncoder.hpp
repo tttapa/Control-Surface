@@ -14,8 +14,6 @@
 
 namespace Bankable {
 
-using EncoderPinList = Array<uint8_t, 2>;
-
 /**
  * @brief   An abstract class for rotary encoders that send MIDI events and that
  *          can be added to a Bank.
