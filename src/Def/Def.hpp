@@ -11,6 +11,8 @@ constexpr pin_t NO_PIN = 0xFFFF;
 
 using MappingFunction = int (*)(int);
 
+constexpr uint8_t NO_ADDRESS = 0x80;
+
 template <size_t N>
 using PinList = Array<pin_t, N>;
 

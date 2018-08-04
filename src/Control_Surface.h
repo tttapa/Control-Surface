@@ -37,6 +37,7 @@
 #include <MIDI_Outputs/NoteButtonMatrix.hpp>
 #include <MIDI_Outputs/NoteButtons.hpp>
 #include <MIDI_Outputs/PBPotentiometer.hpp>
+#include <MIDI_Outputs/CCIncrementDecrementButtons.hpp>
 
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatching.hpp>
@@ -48,6 +49,7 @@
 #include <MIDI_Outputs/Bankable/NoteButtonMatrix.hpp>
 #include <MIDI_Outputs/Bankable/NoteButtons.hpp>
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
+// #include <MIDI_Outputs/Bankable/CCIncrementDecrementButtons.hpp> // TODO
 
 #ifdef Encoder_h_
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
@@ -98,3 +100,6 @@
 // -------------------------------------------------------------------------- //
 #include <MIDI_Constants/Control_Change.h>
 #include <MIDI_Constants/MCU.h>
+
+// -------------------------------------------------------------------------- //
+#include <Helpers/ArrayHelpers.hpp>

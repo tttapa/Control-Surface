@@ -60,7 +60,8 @@ void initializeDisplay() {
 
 class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
   public:
-    MySSD1306_DisplayInterface(Adafruit_SSD1306 &display) : SSD1306_DisplayInterface(display) {}
+    MySSD1306_DisplayInterface(Adafruit_SSD1306 &display) 
+        : SSD1306_DisplayInterface(display) {}
 
     void drawBackground() override {
       disp.drawLine(1, 8, 126, 8, WHITE);
