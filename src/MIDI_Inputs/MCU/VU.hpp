@@ -6,16 +6,24 @@
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <string.h>
 
+class IVU {
+  public:
+    virtual uint8_t getValue() = 0;
+    virtual bool getOverload() = 0;
+};
+
 namespace MCU {
 
-class VU_Base : public MIDIInputElementChannelPressure {
+class VU_Base : public MIDIInputElementChannelPressure, public IVU {
   public:
     VU_Base(uint8_t track, uint8_t channel, unsigned int decayTime)
         : MIDIInputElementChannelPressure(channel), baseTrack(track - 1),
           decayTime(decayTime) {}
 
-    uint8_t getValue() const { return getValueHelper(getRawValue()); }
-    bool getOverload() const { return getOverloadHelper(getRawValue()); }
+    uint8_t getValue() override { return getValueHelper(getRawValue()); }
+    bool getOverload() override {
+        return getOverloadHelper(getRawValue());
+    }
 
   private:
     const uint8_t baseTrack;
