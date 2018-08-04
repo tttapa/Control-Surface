@@ -58,3 +58,18 @@ int_t EMA<K, int_t>::filter(int_t input) {
     filtered = filtered + (difference >> K);
     return (filtered + fixedPointAHalf) >> (K * 2);
 }
+
+// -------------------------------------------------------------------------- //
+
+class EMA_f {
+  public:
+    EMA_f(float pole) : alpha(1 - pole) {}
+    float filter(float value) {
+      filtered = filtered + (value - filtered) * alpha;
+      return filtered;
+    }
+    float operator()(float value) { return filter(value); }
+  private:
+    const float alpha;
+    float filtered = 0;
+};

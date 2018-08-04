@@ -38,17 +38,17 @@ class Control_Surface_ {
      */
     MIDI_Interface &MIDI();
 
-  private:
-    /**
-     * @brief   Control_Surface_ is a singleton, so the constructor is private.
-     */
-    Control_Surface_() = default;
-
     void updateMidiInput();
 
     void updateInputs();
 
     void updateDisplays();
+    
+  private:
+    /**
+     * @brief   Control_Surface_ is a singleton, so the constructor is private.
+     */
+    Control_Surface_() = default;
 };
 
 extern Control_Surface_ &Control_Surface;
