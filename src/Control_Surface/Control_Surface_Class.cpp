@@ -15,6 +15,7 @@ void Control_Surface_::begin() {
 #if defined(PrintStream_h) && defined(ARDUINO) && defined(DEBUG_OUT)
     DEBUG_OUT.begin(115200);
 #endif
+    analogReadResolution(10);
     ExtendedIOElement::beginAll();
     MIDI().begin();               // initialize the MIDI interface
     DisplayInterface::beginAll(); // initialize all displays

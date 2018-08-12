@@ -4,6 +4,10 @@
 
 #ifdef ARDUINO
 
+#ifndef ARDUINO_ARCH_ESP32
+#define FLUSH
+#endif
+
  /* #define OCT 8 */
 
 uint8_t formatPrintStream = DEC;
@@ -22,7 +26,9 @@ Print &printIntegral(Print &printer, T i);
 
 Print &endl(Print &printer) {
   printer.println();
+#ifdef FLUSH
   printer.flush();
+#endif
   return printer;
 }
 
@@ -47,7 +53,9 @@ Print &noshowbase(Print &printer) {
 }
 
 Print &flush(Print &printer) {
+#ifdef FLUSH
   printer.flush();
+#endif
   return printer;
 }
 
