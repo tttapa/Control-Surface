@@ -1,48 +1,33 @@
 #pragma once
 
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
-#include <Helpers/Copy.hpp>
+#include <Hardware/LEDs/LEDs.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 
 namespace MCU {
 
 class VPotRingLEDs_Base : public virtual VPotRing_Base {
   public:
-    VPotRingLEDs_Base(const pin_t (&ledPins)[11]) {
-        copy(this->ledPins, ledPins);
-    }
+    VPotRingLEDs_Base(const LEDs<11> &leds) : leds(leds) {}
 
     void begin() override {
-        for (const pin_t &pin : ledPins)
-            ExtIO::pinMode(pin, OUTPUT);
+        leds.begin();
+    }
+
+    void display() const override {
+        leds.displayRange(getStartOn(), getStartOff());
     }
 
   private:
-    void display() const {
-        uint8_t startOn = getStartOn();
-        uint8_t startOff = getStartOff();
-        DEBUGFN(DEBUGVAR(startOn));
-        DEBUGFN(DEBUGVAR(startOff));
-
-        for (uint8_t pin = 0; pin < startOn; pin++)
-            ExtIO::digitalWrite(ledPins[pin], LOW);
-        for (uint8_t pin = startOn; pin < startOff; pin++)
-            ExtIO::digitalWrite(ledPins[pin], HIGH);
-        for (uint8_t pin = startOff; pin < 11; pin++)
-            ExtIO::digitalWrite(ledPins[pin], LOW);
-    }
-
-  private:
-    pin_t ledPins[11];
+    const LEDs<11> leds;
 };
 
 // -------------------------------------------------------------------------- //
 
 class VPotRingLEDs : public VPotRing, public VPotRingLEDs_Base {
   public:
-    VPotRingLEDs(uint8_t track, uint8_t channel, const pin_t (&ledPins)[11])
+    VPotRingLEDs(uint8_t track, uint8_t channel, const LEDs<11> &leds)
         : VPotRing_Base(track, channel), VPotRing(track, channel),
-          VPotRingLEDs_Base(ledPins) {}
+          VPotRingLEDs_Base(leds) {}
 };
 
 // -------------------------------------------------------------------------- //
@@ -54,10 +39,10 @@ class VPotRingLEDs : public VPotRing<N>,
                      public VPotRingLEDs_Base {
   public:
     VPotRingLEDs(const BankConfigAddressable<N> &config, uint8_t track,
-                 uint8_t channel, const pin_t (&ledPins)[11])
+                 uint8_t channel, const LEDs<11> &leds)
         : VPotRing_Base(track, channel), VPotRing<N>(
                                              config, track, channel),
-          VPotRingLEDs_Base(ledPins) {}
+          VPotRingLEDs_Base(leds) {}
 };
 
 } // namespace Bankable

@@ -12,7 +12,7 @@ class AudioVU : public IVU {
         if (!level.available())
             return 0;
         float peakLevel = level.read();
-        uint8_t value = filter(peakLevel) * gain * max;
+        uint8_t value = filter(peakLevel) * gain * (max + 1);
         if (value > max)
             value = max;
         return value;

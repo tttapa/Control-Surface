@@ -107,6 +107,7 @@
 
 // -------------------------------------------------------------------------- //
 #if defined(USB_MIDI_AUDIO_SERIAL) || defined(USB_MIDI16_AUDIO_SERIAL)
-#include <Audio/VU.hpp>
+#include <Audio/AudioVU.hpp>
+#include <Audio/AudioVULEDs.hpp>
 #include <Audio/VolumeControl.hpp>
 #endif
