@@ -5,6 +5,13 @@
 
 #define EXT_PIN(x) (x + NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
 
+const static uint8_t tmp_HIGH = HIGH;
+const static uint8_t tmp_LOW = LOW;
+const static uint8_t tmp_INPUT = INPUT;
+const static uint8_t tmp_OUTPUT = OUTPUT;
+const static uint8_t tmp_INPUT_PULLUP = INPUT_PULLUP;
+
+
 #ifdef HIGH
 #undef HIGH
 #endif
@@ -22,12 +29,12 @@
 #undef INPUT_PULLUP
 #endif
 
-const uint8_t HIGH = 0x1;
-const uint8_t LOW = 0x0;
+const uint8_t HIGH = tmp_HIGH;
+const uint8_t LOW = tmp_LOW;
 
-const uint8_t INPUT = 0x0;
-const uint8_t OUTPUT = 0x1;
-const uint8_t INPUT_PULLUP = 0x2;
+const uint8_t INPUT = tmp_INPUT;
+const uint8_t OUTPUT = tmp_OUTPUT;
+const uint8_t INPUT_PULLUP = tmp_INPUT_PULLUP;
 
 /**
  * @brief   A namespace with alternatives to the standard Arduino IO functions

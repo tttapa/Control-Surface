@@ -1148,6 +1148,33 @@ test/MIDI_Inputs/tests-MCU_VU.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Inputs/tests-MCU_VU.cpp.s
 .PHONY : test/MIDI_Inputs/tests-MCU_VU.cpp.s
 
+test/MIDI_Interfaces/test-BluetoothMIDI_Interface.o: test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.o
+
+.PHONY : test/MIDI_Interfaces/test-BluetoothMIDI_Interface.o
+
+# target to build an object file
+test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.o
+.PHONY : test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.o
+
+test/MIDI_Interfaces/test-BluetoothMIDI_Interface.i: test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.i
+
+.PHONY : test/MIDI_Interfaces/test-BluetoothMIDI_Interface.i
+
+# target to preprocess a source file
+test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.i
+.PHONY : test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.i
+
+test/MIDI_Interfaces/test-BluetoothMIDI_Interface.s: test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.s
+
+.PHONY : test/MIDI_Interfaces/test-BluetoothMIDI_Interface.s
+
+# target to generate assembly for a file
+test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.s
+.PHONY : test/MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp.s
+
 test/MIDI_Outputs/test-CCButton.o: test/MIDI_Outputs/test-CCButton.cpp.o
 
 .PHONY : test/MIDI_Outputs/test-CCButton.o
@@ -1536,6 +1563,9 @@ help:
 	@echo "... test/MIDI_Inputs/tests-MCU_VU.o"
 	@echo "... test/MIDI_Inputs/tests-MCU_VU.i"
 	@echo "... test/MIDI_Inputs/tests-MCU_VU.s"
+	@echo "... test/MIDI_Interfaces/test-BluetoothMIDI_Interface.o"
+	@echo "... test/MIDI_Interfaces/test-BluetoothMIDI_Interface.i"
+	@echo "... test/MIDI_Interfaces/test-BluetoothMIDI_Interface.s"
 	@echo "... test/MIDI_Outputs/test-CCButton.o"
 	@echo "... test/MIDI_Outputs/test-CCButton.i"
 	@echo "... test/MIDI_Outputs/test-CCButton.s"

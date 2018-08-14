@@ -35,5 +35,10 @@ size_t MIDI_Parser::getSysExLength() { return SysExLength; }
 
 #endif
 
-bool MIDI_Parser::isHeader(uint8_t data) { return data & (1 << 7); }
+bool MIDI_Parser::isHeader(uint8_t data) {
+    return data & (1 << 7); // TODO
+}
+
+bool MIDI_Parser::isData(uint8_t data) { return (data & (1 << 7)) == 0; }
+
 MIDI_message MIDI_Parser::getChannelMessage() { return midimsg; }

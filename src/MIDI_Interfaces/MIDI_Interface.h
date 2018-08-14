@@ -4,6 +4,20 @@
 
 #define MIDI_BAUD 31250
 
+class MIDI_Interface;
+
+/**
+ * @brief   A class for callbacks from MIDI input.
+ */
+class MIDI_Callbacks {
+    friend class MIDI_Interface;
+    virtual void onChannelMessage(MIDI_Interface &midi) {}
+    virtual void onSysExMessage(MIDI_Interface &midi) {}
+
+  public:
+    virtual ~MIDI_Callbacks() = default;
+};
+
 /**
  * @brief   An abstract class for MIDI interfaces.
  */
@@ -18,6 +32,8 @@ class MIDI_Interface {
      *          The MIDI parser to use for the interface.
      */
     MIDI_Interface(MIDI_Parser &parser);
+
+    void setCallbacks(MIDI_Callbacks *cb) { this->callbacks = cb; }
 
     /**
      * @brief   Destructor.
@@ -54,19 +70,10 @@ class MIDI_Interface {
      */
     void send(uint8_t m, uint8_t c, uint8_t d1);
 
+    void update();
+
     /**
-     * @brief   Try to read a MIDI message and return what type of message
-     *          has been read.
-     *
-     * @return  NO_MESSAGE
-     *          No MIDI message is ready to be read.
-     * @return  CHANNEL_MESSAGE
-     *          A MIDI channel message has been received
-     *          and is ready to be read using `getChannelMessage`.
-     * @return  SYSEX_MESSAGE
-     *          A MIDI system exclusive message has been received
-     *          and is ready to be read using `getSysExBuffer` and
-     *          `getSysExLength`.
+     * @todo    Documentation
      */
     virtual MIDI_read_t read() = 0;
 
@@ -80,7 +87,7 @@ class MIDI_Interface {
      */
     void setAsDefault();
 
-  protected:
+  private:
     /**
      * @brief   Low-level function for sending a 3-byte MIDI message.
      */
@@ -90,9 +97,15 @@ class MIDI_Interface {
      */
     virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1) = 0;
 
-    MIDI_Parser &parser;
+  protected:
+    void onChannelMessage();
+    void onSysExMessage();
 
+  private:
     static MIDI_Interface *DefaultMIDI_Interface;
+
+    MIDI_Parser &parser;
+    MIDI_Callbacks *callbacks = nullptr;
 
   public:
     /**

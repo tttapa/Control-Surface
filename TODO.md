@@ -11,7 +11,7 @@
 - ✔ Malloc → new.
 - Add motorized faders.
 - Make constructors of abstract classes protected.
-- Make destructors virtual if necessary.
+- Make destructors virtual if necessary. (e.g. callback classes)
 - GitHub template
 - Flashing LEDs
 - Find and list all TODO's throughout the source code.

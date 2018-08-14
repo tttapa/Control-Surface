@@ -2,6 +2,8 @@
 
 #include <Control_Surface/Control_Surface_Class.h>
 
+#include <Arduino.h> // for constrain
+
 enum relativeCCmode { TWOS_COMPLEMENT, BINARY_OFFSET, SIGN_MAGNITUDE };
 
 #define REAPER_RELATIVE_1 TWOS_COMPLEMENT

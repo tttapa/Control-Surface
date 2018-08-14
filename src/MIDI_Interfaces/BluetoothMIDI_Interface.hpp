@@ -1,26 +1,14 @@
 #pragma once
 
-#ifndef ARDUINO_ARCH_ESP32
-#error "MIDI over Bluetooth is only supported on ESP32 boards"
-#else
-
-#include "MIDI_Interface.h"
-
-#include <BLE2902.h>
-#include <BLEDevice.h>
-#include <BLEServer.h>
-#include <BLEUtils.h>
-
-constexpr const char *SERVICE_UUID = "03b80e5a-ede8-4b33-a751-6ce34ec4c700";
-constexpr const char *CHARACTERISTIC_UUID = "7772e5db-3868-4112-a1a9-f2669d106bf3";
-
-constexpr const char *BLE_MIDI_NAME = "Control Surface (BLE)";
-
-class EmptyParser : public MIDI_Parser {};
+#include "BLEMIDI.hpp"
+#include "SerialMIDI_Interface.h"
 
 class BluetoothMIDI_Interface : public MIDI_Interface,
                                 public BLEServerCallbacks,
                                 public BLECharacteristicCallbacks {
+
+    // BLE Callbacks
+
     void onConnect(BLEServer *pServer) override { DEBUGFN("Connected"); };
     void onDisconnect(BLEServer *pServer) override { DEBUGFN("Disonnected"); }
 
@@ -29,7 +17,10 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     }
     void onWrite(BLECharacteristic *pCharacteristic) override {
         DEBUGFN("Write");
-        // TODO
+        std::string value = bleMidi.getValue();
+        parse(reinterpret_cast<const uint8_t *const>(value.data()),
+              value.size());
+        // TODO: why can't I use a static cast?
     }
 
     constexpr static unsigned long MAX_MESSAGE_TIME = 10000; // microseconds
@@ -41,43 +32,26 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     uint8_t buffer[BUFFER_LENGTH] = {};
     size_t index = 0;
 
-    BLECharacteristic *pCharacteristic;
-    BLE2902 descriptor;
+    SerialMIDI_Parser parser;
 
-    EmptyParser parser;
+    BLEMIDI bleMidi;
 
     bool hasSpaceFor(size_t bytes) { return index + bytes < BUFFER_LENGTH; }
 
   public:
     BluetoothMIDI_Interface() : MIDI_Interface(parser) {}
 
+    void begin() override {
+        bleMidi.begin();
+        bleMidi.setServerCallbacks(this);
+        bleMidi.setCharacteristicsCallbacks(this);
+    }
+
     void publish() {
         if (index == 0)
             return;
-        pCharacteristic->setValue(buffer, index);
-        pCharacteristic->notify();
+        bleMidi.notifyValue(buffer, index);
         index = 0;
-    }
-
-    void begin() override {
-        BLEDevice::init(BLE_MIDI_NAME);
-        BLEServer *pServer = BLEDevice::createServer();
-        pServer->setCallbacks(this);
-
-        BLEService *pService = pServer->createService(BLEUUID(SERVICE_UUID));
-
-        pCharacteristic = pService->createCharacteristic(
-            BLEUUID(CHARACTERISTIC_UUID),
-            BLECharacteristic::PROPERTY_READ |
-                BLECharacteristic::PROPERTY_WRITE |
-                BLECharacteristic::PROPERTY_NOTIFY |
-                BLECharacteristic::PROPERTY_WRITE_NR);
-
-        pCharacteristic->setCallbacks(this);
-        pCharacteristic->addDescriptor(&descriptor);
-
-        pService->start();
-        pServer->getAdvertising()->start();
     }
 
     MIDI_read_t read() override {
@@ -95,11 +69,14 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
         if (!hasSpaceFor(len + 1 + first)) { // TODO
             DEBUGFN("Buffer full");
             publish();
+            if (!hasSpaceFor(len + 1 + first)) { // TODO
+                DEBUGFN("Message is larger than buffer");
+                ERROR(return );
+            }
         }
 
-        if (first) {
+        if (first)
             startTime = micros();
-        }
 
         if (first)
             buffer[index++] = 0x80; // header / timestamp msb
@@ -123,6 +100,35 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
         uint8_t msg[2] = {uint8_t(m | c), d1};
         addToBuffer(msg);
     }
-};
 
-#endif
+    void parse(const uint8_t *const data, const size_t len) {
+        if (len <= 1)
+            return;
+        if (MIDI_Parser::isData(data[0]))
+            return;
+        if (MIDI_Parser::isData(data[1]))
+            parse(data[1]);
+        bool prevWasTimestamp = true;
+        for (const uint8_t *d = data + 2; d < data + len; d++) {
+            if (MIDI_Parser::isData(*d)) {
+                parse(*d);
+                prevWasTimestamp = false;
+            } else {
+                if (prevWasTimestamp)
+                    parse(*d);
+                prevWasTimestamp = !prevWasTimestamp;
+            }
+        }
+    }
+
+    void parse(uint8_t data) {
+        MIDI_read_t result = parser.parse(data);
+        switch (result) {
+            case NO_MESSAGE: break;
+            case CHANNEL_MESSAGE: onChannelMessage(); break;
+            case SYSEX_MESSAGE: onSysExMessage(); break;
+        }
+    }
+
+    BLEMIDI &getBLEMIDI() { return bleMidi; }
+};

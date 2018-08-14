@@ -15,6 +15,32 @@ void MIDI_Interface::setAsDefault() { DefaultMIDI_Interface = this; }
 
 MIDI_Interface *MIDI_Interface::getDefault() { return DefaultMIDI_Interface; }
 
+// -------------------------------- READING --------------------------------- //
+
+void MIDI_Interface::update() {
+    if (callbacks == nullptr)
+        return;
+    bool repeat = true;
+    while (repeat) {
+        MIDI_read_t result = read();
+        switch (result) {
+            case NO_MESSAGE: repeat = false; break;
+            case CHANNEL_MESSAGE: onChannelMessage(); break;
+            case SYSEX_MESSAGE: onSysExMessage(); break;
+        }
+    }
+}
+
+void MIDI_Interface::onChannelMessage() {
+    if (callbacks)
+        callbacks->onChannelMessage(*this);
+}
+
+void MIDI_Interface::onSysExMessage() {
+    if (callbacks)
+        callbacks->onSysExMessage(*this);
+}
+
 // -------------------------------- SENDING --------------------------------- //
 
 void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) {

@@ -23,6 +23,15 @@ class MIDINoteLED_Base : public virtual MIDINote_Base {
 
 class MIDINoteLED : public MIDINote, public MIDINoteLED_Base {
   public:
+    /**
+     * @brief Construct a new MIDINoteLED object
+     * 
+     * @param note 
+     * @param channel 
+     * @param ledPin 
+     * 
+     * @todo    Parameter order
+     */
     MIDINoteLED(uint8_t note, uint8_t channel, pin_t ledPin)
         : MIDINote_Base(note, channel), MIDINote(note, channel),
           MIDINoteLED_Base(ledPin) {}

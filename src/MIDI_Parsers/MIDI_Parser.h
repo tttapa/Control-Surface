@@ -17,10 +17,21 @@ const uint8_t PITCH_BEND = 0xE0;
 const uint8_t SysExStart = 0xF0;
 const uint8_t SysExEnd = 0xF7;
 
+const uint8_t TuneRequest = 0xF6;
+
 struct MIDI_message {
-    uint8_t header = 0;
-    uint8_t data1 = 0;
-    uint8_t data2 = 0;
+    uint8_t header;
+    uint8_t data1;
+    uint8_t data2;
+
+    bool operator==(const MIDI_message &other) const {
+        return this->header == other.header && this->data1 == other.data1 &&
+               this->data2 == other.data2;
+    }
+
+    bool operator!=(const MIDI_message &other) const {
+        return !(*this == other);
+    }
 };
 
 enum MIDI_read_t {
@@ -29,7 +40,7 @@ enum MIDI_read_t {
     SYSEX_MESSAGE = 2,
 };
 
-// ------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------- //
 
 class MIDI_Parser {
   public:
@@ -41,7 +52,7 @@ class MIDI_Parser {
     size_t getSysExLength();
 
   protected:
-    MIDI_message midimsg;
+    MIDI_message midimsg = {};
 
 #ifndef IGNORE_SYSEX
     // Edit this in ../Settings/Settings.h
@@ -60,6 +71,9 @@ class MIDI_Parser {
     bool hasSpaceLeft();
 #endif
 
+  public:
     /** Check if the given byte is a MIDI header byte. */
     static bool isHeader(uint8_t data);
+    /** Check if the given byte is a MIDI data byte. */
+    static bool isData(uint8_t data);
 };

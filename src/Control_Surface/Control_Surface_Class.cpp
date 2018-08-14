@@ -6,6 +6,8 @@
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Selectors/Selector.hpp>
 
+#include <Arduino.h>
+
 Control_Surface_ &Control_Surface_::getInstance() {
     static Control_Surface_ instance;
     return instance;
@@ -15,9 +17,12 @@ void Control_Surface_::begin() {
 #if defined(PrintStream_h) && defined(ARDUINO) && defined(DEBUG_OUT)
     DEBUG_OUT.begin(115200);
 #endif
+#ifdef ARDUINO_ARCH_ESP32
     analogReadResolution(10);
+#endif
     ExtendedIOElement::beginAll();
-    MIDI().begin();               // initialize the MIDI interface
+    MIDI().begin(); // initialize the MIDI interface
+    MIDI().setCallbacks(this);
     DisplayInterface::beginAll(); // initialize all displays
     // MIDIOutputElement::beginAll();
     MIDIInputElementCC::beginAll();
@@ -47,68 +52,62 @@ MIDI_Interface &Control_Surface_::MIDI() {
 
 void Control_Surface_::updateMidiInput() {
     MIDI_Interface &midi = MIDI();
-    MIDI_read_t midiReadResult = midi.read();
+    midi.update();
+}
 
-    while (midiReadResult != NO_MESSAGE) {
-
-        // Dispatch of all incomming MIDI messages
-
-        if (midiReadResult == CHANNEL_MESSAGE) {
-            MIDI_message midichmsg = midi.getChannelMessage();
-            MIDI_message_matcher midimsg(midichmsg);
+void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
+    MIDI_message midichmsg = midi.getChannelMessage();
+    MIDI_message_matcher midimsg(midichmsg);
 
 #ifdef DEBUG_MIDI_PACKETS
-            if (midimsg.type != PROGRAM_CHANGE &&
-                midimsg.type != CHANNEL_PRESSURE)
-                DEBUG(">>> " << hex << +midichmsg.header << ' '
-                             << +midimsg.data1 << ' ' << +midimsg.data2 << dec);
-            else
-                DEBUG(">>> " << hex << +midichmsg.header << ' '
-                             << +midimsg.data1 << dec);
+    if (midimsg.type != PROGRAM_CHANGE && midimsg.type != CHANNEL_PRESSURE)
+        DEBUG(">>> " << hex << +midichmsg.header << ' ' << +midimsg.data1 << ' '
+                     << +midimsg.data2 << dec);
+    else
+        DEBUG(">>> " << hex << +midichmsg.header << ' ' << +midimsg.data1
+                     << dec);
 #endif
 
-            if (midimsg.type == CC && midimsg.data1 == 0x79) {
-                // Reset All Controllers
-                DEBUG("Reset All Controllers");
-                MIDIInputElementCC::resetAll();
-                MIDIInputElementChannelPressure::resetAll();
+    if (midimsg.type == CC && midimsg.data1 == 0x79) {
+        // Reset All Controllers
+        DEBUG("Reset All Controllers");
+        MIDIInputElementCC::resetAll();
+        MIDIInputElementChannelPressure::resetAll();
 
-            } else if (midimsg.type == CC && midimsg.data1 == 0x7B) {
-                MIDIInputElementNote::resetAll();
-            } else {
+    } else if (midimsg.type == CC && midimsg.data1 == 0x7B) {
+        MIDIInputElementNote::resetAll();
+    } else {
 
-                if (midimsg.type == CC) {
-                    // Control Change
-                    DEBUGFN(F("Updating CC elements with new MIDI message."));
-                    MIDIInputElementCC::updateAllWith(midimsg);
+        if (midimsg.type == CC) {
+            // Control Change
+            DEBUGFN(F("Updating CC elements with new MIDI message."));
+            MIDIInputElementCC::updateAllWith(midimsg);
 
-                } else if (midimsg.type == NOTE_OFF ||
-                           midimsg.type == NOTE_ON) {
-                    // Note
-                    DEBUGFN(F("Updating Note elements with new MIDI message."));
-                    MIDIInputElementNote::updateAllWith(midimsg);
+        } else if (midimsg.type == NOTE_OFF || midimsg.type == NOTE_ON) {
+            // Note
+            DEBUGFN(F("Updating Note elements with new MIDI message."));
+            MIDIInputElementNote::updateAllWith(midimsg);
 
-                } else if (midimsg.type == CHANNEL_PRESSURE) {
-                    // Channel Pressure
-                    DEBUGFN(F("Updating Channel Pressure elements with new "
-                              "MIDI message."));
-                    MIDIInputElementChannelPressure::updateAllWith(midimsg);
-                }
-            }
-
-        } else if (midiReadResult == SYSEX_MESSAGE) {
-            // System Exclusive
-#ifdef DEBUG_MIDI_PACKETS
-            const uint8_t *data = midi.getSysExBuffer();
-            size_t len = midi.getSysExLength();
-            DEBUG_OUT << hex;
-            for (size_t i = 0; i < len; i++)
-                DEBUG_OUT << data[i] << ' ';
-            DEBUG_OUT << dec << endl;
-#endif
+        } else if (midimsg.type == CHANNEL_PRESSURE) {
+            // Channel Pressure
+            DEBUGFN(F("Updating Channel Pressure elements with new "
+                      "MIDI message."));
+            MIDIInputElementChannelPressure::updateAllWith(midimsg);
         }
-        midiReadResult = midi.read();
     }
+}
+
+void Control_Surface_::onSysExMessage(MIDI_Interface &midi) {
+
+    // System Exclusive
+#ifdef DEBUG_MIDI_PACKETS
+    const uint8_t *data = midi.getSysExBuffer();
+    size_t len = midi.getSysExLength();
+    DEBUG_OUT << hex;
+    for (size_t i = 0; i < len; i++)
+        DEBUG_OUT << data[i] << ' ';
+    DEBUG_OUT << dec << endl;
+#endif
 }
 
 void Control_Surface_::updateInputs() {
