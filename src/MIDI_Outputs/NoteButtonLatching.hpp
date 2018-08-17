@@ -4,8 +4,8 @@
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
 /**
- * @brief   A class of MIDIOutputElement%s that read the input of a latching
- *          push button or toggle switch, and send out MIDI Note events.
+ * @brief   A class of MIDIOutputElement%s that read the input of a **latching
+ *          push button or toggle switch**, and send out MIDI **Note** events.
  * 
  *          When the switch changes state, two MIDI Note events are sent: first
  *          a Note On event, followed immediately by a Note Off event.  

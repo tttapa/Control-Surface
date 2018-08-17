@@ -6,9 +6,9 @@
 namespace Bankable {
 
 /**
- * @brief   A class of MIDIOutputElement%s that read the input from a matrix of
- *          momentary push buttons or switches, and send out MIDI Control Change
- *          events.
+ * @brief   A class of MIDIOutputElement%s that read the input from a **matrix
+ *          of momentary push buttons or switches**, and send out MIDI **Control
+ *          Change** events.
  * 
  *          A value of 0x7F is sent when a button is pressed, and a value of
  *          0x00 is sent when a button is released.  

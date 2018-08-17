@@ -5,8 +5,8 @@
 
 /**
  * @brief   A class of MIDIOutputElement%s that read the analog input from a
- *          potentiometer or fader, and send out 7-bit MIDI Control Change
- *          events.
+ *          **potentiometer or fader**, and send out 7-bit MIDI 
+ *          **Control Change** events.
  * 
  *          The analog input is filtered and hysteresis is applied for maximum
  *          stability.  

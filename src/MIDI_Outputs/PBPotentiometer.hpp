@@ -5,7 +5,7 @@
 
 /**
  * @brief   A class of MIDIOutputElement%s that read the analog input from a
- *          potentiometer or fader, and send out 14-bit MIDI Pitch Bend 
+ *          **potentiometer or fader**, and send out 14-bit MIDI **Pitch Bend** 
  *          events.
  * 
  *          The analog input is filtered and hysteresis is applied for maximum

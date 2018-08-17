@@ -6,8 +6,8 @@
 namespace Bankable {
 
 /**
- * @brief   A class of MIDIOutputElement%s that read the input of a collection 
- *          of momentary push buttons or switches, and send out MIDI Note 
+ * @brief   A class of MIDIOutputElement%s that read the input of a **collection 
+ *          of momentary push buttons or switches**, and send out MIDI **Note** 
  *          events.
  * 
  *          A Note On event is sent when a button is pressed, and a Note Off

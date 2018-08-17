@@ -4,9 +4,10 @@
 #include <MIDI_Senders/RelativeCCSender.hpp>
 
 /**
- * @brief   A class of MIDIOutputElement%s that read the input of a two
- *          momentary push buttons to increment or decrement a relative setting 
- *          using relative MIDI Control Change events.  
+ * @brief   A class of MIDIOutputElement%s that read the input of **two
+ *          momentary push buttons** to increment or decrement a **relative 
+ *          setting** using relative MIDI **Control Change** events.
+ * 
  *          An optional note number can be provided to reset the setting.
  * 
  *          This version cannot be banked.

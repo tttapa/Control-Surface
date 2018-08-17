@@ -4,8 +4,9 @@
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
 /**
- * @brief   A class of MIDIOutputElement%s that read the input from a matrix of
- *          momentary push buttons or switches, and send out MIDI Note events.
+ * @brief   A class of MIDIOutputElement%s that read the input from a **matrix
+ *          of momentary push buttons or switches**, and send out MIDI **Note**
+ *          events.
  * 
  *          A Note On event is sent when a button is pressed, and a Note Off
  *          event is sent when a button is released.  

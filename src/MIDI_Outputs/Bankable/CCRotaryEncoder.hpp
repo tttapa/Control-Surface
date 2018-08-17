@@ -6,8 +6,9 @@
 namespace Bankable {
 
 /**
- * @brief   A class of MIDIOutputElement%s that read the input of a quadrature
- *          (rotary) encoder and send out relative MIDI Control Change events.
+ * @brief   A class of MIDIOutputElement%s that read the input of a **quadrature
+ *          (rotary) encoder** and send out relative MIDI **Control Change**
+ *          events.
  * 
  *          This version can be banked.
  *
