@@ -211,6 +211,32 @@ TEST(BluetoothMIDIInterface, receiveSysEx) {
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
 
+TEST(BluetoothMIDIInterface, receiveSysEx2) {
+    MockMIDI_Callbacks cb;
+
+    BluetoothMIDI_Interface midi;
+    BLEMIDI &ble = midi.getBLEMIDI();
+    EXPECT_CALL(ble, begin());
+    EXPECT_CALL(ble, setServerCallbacks(&midi));
+    EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
+    midi.begin();
+    midi.setCallbacks(&cb);
+
+    uint8_t data[] = {
+        0x95, 0xED, 0xF0, 0x1, 0x2, 0x3, 0x4, 0xED, 0xF7
+    };
+    midi.parse(data, sizeof(data));
+
+    std::vector<uint8_t> expectedSysExMessages = {
+        0xF0, 0x01, 0x02, 0x03, 0x04, 0xF7
+    };
+    EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
+    EXPECT_EQ(cb.sysExCounter, 1);
+
+    std::vector<MIDI_message> expectedChannelMessages = {};
+    EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
+}
+
 TEST(BluetoothMIDIInterface, receiveSysExSplitAcrossPackets) {
     MockMIDI_Callbacks cb;
 

@@ -15,7 +15,7 @@
 // ========================================================================== //
 
 /** The debug output. */
-// #define DEBUG_OUT Serial
+#define DEBUG_OUT Serial
 
 // #define DEBUG_MIDI_PACKETS
 
@@ -52,7 +52,7 @@ constexpr unsigned long LONG_PRESS_REPEAT_DELAY = 200; // milliseconds
 /** The interval between updating all inputs, in microseconds (µs).
  *  @todo Implement
  */
-constexpr unsigned long INPUT_UPDATE_INTERVAL = 1000; // 1000 µs = 1 ms
+constexpr unsigned long INPUT_UPDATE_INTERVAL = 1000; // microseconds
 
 /** The time in milliseconds it takes for the VU meter display peak bar to drop 
  *  one unit (i.e. one twelfth of the complete scale). */
@@ -70,7 +70,7 @@ constexpr bool VU_PEAK_SMOOTH_DECAY = true;
 constexpr uint8_t NOTE_VELOCITY_THRESHOLD = 1;
 
 /** Don't parse incomming System Exclusive messages. */
-#define IGNORE_SYSEX
+// #define IGNORE_SYSEX
 
 /** The length of the maximum System Exclusive message
  *  that can be received. The maximum length sent by

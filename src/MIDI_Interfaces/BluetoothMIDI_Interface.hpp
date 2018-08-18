@@ -9,18 +9,35 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
 
     // BLE Callbacks
 
-    void onConnect(BLEServer *pServer) override { DEBUGFN("Connected"); };
-    void onDisconnect(BLEServer *pServer) override { DEBUGFN("Disonnected"); }
+    void onConnect(BLEServer *pServer) override {
+        DEBUGFN("Connected");
+        connected++;
+    };
+    void onDisconnect(BLEServer *pServer) override {
+        DEBUGFN("Disonnected");
+        if (!connected) {
+            DEBUGFN("Error: disconnect event, but was not connected");
+            ERROR(return );
+        }
+        connected--;
+    }
 
     void onRead(BLECharacteristic *pCharacteristic) override {
         DEBUGFN("Read");
+        pCharacteristic->setValue(nullptr, 0);
     }
     void onWrite(BLECharacteristic *pCharacteristic) override {
-        DEBUGFN("Write");
+        DEBUGFN("Write: ");
         std::string value = bleMidi.getValue();
-        parse(reinterpret_cast<const uint8_t *const>(value.data()),
-              value.size());
-        // TODO: why can't I use a static cast?
+        const uint8_t *const data =
+            reinterpret_cast<const uint8_t *const>(value.data());
+        size_t len = value.size();
+        for (size_t i = 0; i < len; i++) {
+            Serial.print(data[i], HEX);
+            Serial.print(' ');
+        }
+        Serial.println();
+        parse(data, len);
     }
 
     constexpr static unsigned long MAX_MESSAGE_TIME = 10000; // microseconds
@@ -36,6 +53,8 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
 
     BLEMIDI bleMidi;
 
+    uint8_t connected = 0;
+
     bool hasSpaceFor(size_t bytes) { return index + bytes < BUFFER_LENGTH; }
 
   public:
@@ -50,6 +69,10 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     void publish() {
         if (index == 0)
             return;
+        if (!connected) {
+            DEBUGFN("No connected BLE clients");
+            return;
+        }
         bleMidi.notifyValue(buffer, index);
         index = 0;
     }
@@ -71,7 +94,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
             publish();
             if (!hasSpaceFor(len + 1 + first)) { // TODO
                 DEBUGFN("Message is larger than buffer");
-                ERROR(return );
+                return;
             }
         }
 

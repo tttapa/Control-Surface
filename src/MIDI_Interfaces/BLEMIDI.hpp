@@ -6,8 +6,6 @@
 #error "MIDI over Bluetooth is only supported on ESP32 boards"
 #endif
 
-#include "MIDI_Interface.h"
-
 #include <BLE2902.h>
 #include <BLEDevice.h>
 #include <BLEServer.h>
@@ -21,6 +19,10 @@ constexpr const char *BLE_MIDI_NAME = "Control Surface (BLE)";
 
 class BLEMIDI {
   public:
+    ~BLEMIDI() {
+        // TODO
+    }
+
     /** 
      * @note    Must be called after begin.
      */
@@ -44,9 +46,10 @@ class BLEMIDI {
     }
 
     void begin() {
+        // DEBUGFN("");
         if (BLEDevice::getInitialized()) {
             DEBUGFN("Error: BLEDevice is initialized already");
-            ERROR(); // TODO: What to do here?
+            ERROR(return ); // TODO: What to do here?
         }
         BLEDevice::init(BLE_MIDI_NAME);
         pServer = BLEDevice::createServer();
@@ -56,10 +59,10 @@ class BLEMIDI {
         pCharacteristic = pService->createCharacteristic(
             BLEUUID(CHARACTERISTIC_UUID),
             BLECharacteristic::PROPERTY_READ |
-                BLECharacteristic::PROPERTY_WRITE |
-                BLECharacteristic::PROPERTY_NOTIFY |
-                BLECharacteristic::PROPERTY_WRITE_NR);
+                BLECharacteristic::PROPERTY_WRITE_NR |
+                BLECharacteristic::PROPERTY_NOTIFY);
 
+        descriptor.setNotifications(true);
         pCharacteristic->addDescriptor(&descriptor);
 
         pService->start();
@@ -85,7 +88,9 @@ class BLEMIDI {
 #include <string>
 
 class BLECharacteristic {
+  public:
     MOCK_METHOD0(getValue, std::string(void));
+    MOCK_METHOD2(setValue, void(uint8_t *data, size_t len));
 };
 
 class BLECharacteristicCallbacks {

@@ -76,6 +76,7 @@ using std::uppercase;
 #define DEBUG(x)                                                               \
     do {                                                                       \
         DEBUG_OUT << x << endl;                                                \
+        DEBUG_OUT.flush();                                                     \
     } while (0)
 
 /**
@@ -88,6 +89,7 @@ using std::uppercase;
 #define DEBUGREF(x)                                                            \
     do {                                                                       \
         DEBUG_OUT << LOCATION << x << endl;                                    \
+        DEBUG_OUT.flush();                                                     \
     } while (0)
 
 /**
@@ -100,6 +102,7 @@ using std::uppercase;
 #define DEBUGFN(x)                                                             \
     do {                                                                       \
         DEBUG_OUT << FUNC_LOCATION << x << endl;                               \
+        DEBUG_OUT.flush();                                                     \
     } while (0)
 
 #define DEBUGVAR(x) F(STR(x) " = ") << x
