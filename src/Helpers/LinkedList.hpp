@@ -1,14 +1,12 @@
 #pragma once
 
-template <class Node>
-class LinkedListForwardIterator;
-
-template <class Node>
-class LinkedListReverseIterator;
+#include <stdlib.h>
 
 template <class Node>
 class DoublyLinkedList {
   public:
+    DoublyLinkedList() = default;
+
     /**
      * @brief   Append a node to a linked list.
      * 
@@ -100,11 +98,66 @@ class DoublyLinkedList {
                         node->previous != nullptr);
     }
 
-    LinkedListForwardIterator<Node> begin() const { return {first}; }
-    LinkedListForwardIterator<Node> end() const { return {nullptr}; }
+    template <class INode>
+    class node_iterator_base {
+      public:
+        node_iterator_base(INode *node) : node(node) {}
 
-    LinkedListReverseIterator<Node> rbegin() const { return {last}; }
-    LinkedListReverseIterator<Node> rend() const { return {nullptr}; }
+        bool operator!=(const node_iterator_base &rhs) const {
+            return node != rhs.node;
+        }
+
+        INode &operator*() const {
+            // TODO: check node != nullptr
+            return *node;
+        }
+
+      protected:
+        INode *node;
+    };
+
+    template <class INode>
+    class node_iterator : public node_iterator_base<INode> {
+      public:
+        node_iterator(INode *node) : node_iterator_base<INode>(node) {}
+
+        /** Prefix increment operator */
+        node_iterator &operator++() {
+            // TODO: check node != nullptr
+            this->node = this->node->next;
+            return *this;
+        }
+    };
+
+    template <class INode>
+    class reverse_node_iterator : public node_iterator_base<INode> {
+      public:
+        reverse_node_iterator(INode *node) : node_iterator_base<INode>(node) {}
+
+        /** Prefix increment operator */
+        reverse_node_iterator &operator++() {
+            // TODO: check node != nullptr
+            this->node = this->node->previous;
+            return *this;
+        }
+    };
+
+    using iterator = node_iterator<Node>;
+    using const_iterator = node_iterator<const Node>;
+    using reverse_iterator = reverse_node_iterator<Node>;
+    using const_reverse_iterator = reverse_node_iterator<const Node>;
+
+    iterator begin() { return {first}; }
+    iterator end() { return {nullptr}; }
+
+    const_iterator begin() const { return {first}; }
+    const_iterator end() const { return {nullptr}; }
+
+    reverse_iterator rbegin() { return {last}; }
+    reverse_iterator rend() { return {nullptr}; }
+
+    const_reverse_iterator rbegin() const { return {last}; }
+    const_reverse_iterator rend() const { return {nullptr}; }
 
   private:
     Node *first = nullptr;
@@ -115,52 +168,6 @@ template <class Node>
 class DoublyLinkable {
   protected:
     friend class DoublyLinkedList<Node>;
-    friend class LinkedListForwardIterator<Node>;
-    friend class LinkedListReverseIterator<Node>;
     Node *next = nullptr;
     Node *previous = nullptr;
-};
-
-template <class Node>
-class LinkedListIterator {
-  public:
-    LinkedListIterator(Node *node) : node(node) {}
-
-    bool operator!=(const LinkedListIterator<Node> &rhs) const {
-        return node != rhs.node;
-    }
-
-    Node &operator*() const {
-        // TODO: check node != nullptr
-        return *node;
-    }
-
-  protected:
-    Node *node;
-};
-
-template <class Node>
-class LinkedListForwardIterator : public LinkedListIterator<Node> {
-  public:
-    LinkedListForwardIterator(Node *node) : LinkedListIterator<Node>(node) {}
-
-    /** Prefix increment operator */
-    LinkedListForwardIterator<Node> &operator++() {
-        // TODO: check node != nullptr
-        this->node = this->node->next;
-        return *this;
-    }
-};
-
-template <class Node>
-class LinkedListReverseIterator : public LinkedListIterator<Node> {
-  public:
-    LinkedListReverseIterator(Node *node) : LinkedListIterator<Node>(node) {}
-
-    /** Prefix increment operator */
-    LinkedListReverseIterator<Node> &operator++() {
-        // TODO: check node != nullptr
-        this->node = this->node->previous;
-        return *this;
-    }
 };

@@ -1013,6 +1013,33 @@ test/Helpers/test-Array.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/test-Array.cpp.s
 .PHONY : test/Helpers/test-Array.cpp.s
 
+test/Helpers/test-DoublyLinkedList.o: test/Helpers/test-DoublyLinkedList.cpp.o
+
+.PHONY : test/Helpers/test-DoublyLinkedList.o
+
+# target to build an object file
+test/Helpers/test-DoublyLinkedList.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/test-DoublyLinkedList.cpp.o
+.PHONY : test/Helpers/test-DoublyLinkedList.cpp.o
+
+test/Helpers/test-DoublyLinkedList.i: test/Helpers/test-DoublyLinkedList.cpp.i
+
+.PHONY : test/Helpers/test-DoublyLinkedList.i
+
+# target to preprocess a source file
+test/Helpers/test-DoublyLinkedList.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/test-DoublyLinkedList.cpp.i
+.PHONY : test/Helpers/test-DoublyLinkedList.cpp.i
+
+test/Helpers/test-DoublyLinkedList.s: test/Helpers/test-DoublyLinkedList.cpp.s
+
+.PHONY : test/Helpers/test-DoublyLinkedList.s
+
+# target to generate assembly for a file
+test/Helpers/test-DoublyLinkedList.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/Helpers/test-DoublyLinkedList.cpp.s
+.PHONY : test/Helpers/test-DoublyLinkedList.cpp.s
+
 test/Helpers/test-EMA.o: test/Helpers/test-EMA.cpp.o
 
 .PHONY : test/Helpers/test-EMA.o
@@ -1548,6 +1575,9 @@ help:
 	@echo "... test/Helpers/test-Array.o"
 	@echo "... test/Helpers/test-Array.i"
 	@echo "... test/Helpers/test-Array.s"
+	@echo "... test/Helpers/test-DoublyLinkedList.o"
+	@echo "... test/Helpers/test-DoublyLinkedList.i"
+	@echo "... test/Helpers/test-DoublyLinkedList.s"
 	@echo "... test/Helpers/test-EMA.o"
 	@echo "... test/Helpers/test-EMA.i"
 	@echo "... test/Helpers/test-EMA.s"
