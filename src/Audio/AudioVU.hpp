@@ -4,6 +4,12 @@
 #include <Helpers/EMA.h>
 #include <MIDI_Inputs/MCU/VU.hpp>
 
+/**
+ * @brief   A VU meter that reads from an Audio stream using the 
+ *          AudioAnalyzePeak class.
+ * 
+ * @ingroup Audio
+ */
 class AudioVU : public IVU {
   public:
     AudioVU(AudioAnalyzePeak &level, float gain = 1.0, uint8_t max = 12)

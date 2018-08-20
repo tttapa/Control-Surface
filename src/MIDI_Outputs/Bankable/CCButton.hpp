@@ -32,6 +32,8 @@ class CCButton
      *          The MIDI Controller number. [0, 119]
      * @param   channel
      *          The MIDI Channel. [1, 16]
+     * 
+     * @ingroup MIDIOutputElementConstructors
      */
     CCButton(const OutputBankConfigAddressable &config, pin_t pin, uint8_t controller,
              uint8_t channel)

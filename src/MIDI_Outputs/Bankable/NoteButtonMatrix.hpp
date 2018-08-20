@@ -46,6 +46,8 @@ class NoteButtonMatrix
      *          matrix that contains the note number of each button. [0, 127]
      * @param   channel
      *          The MIDI channel. [1, 16]
+     * 
+     * @ingroup MIDIOutputElementConstructors
      */
     NoteButtonMatrix(const OutputBankConfigAddressable &config,
                      const PinList<nb_rows> &rowPins,

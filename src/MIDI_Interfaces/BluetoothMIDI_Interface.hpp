@@ -3,6 +3,11 @@
 #include "BLEMIDI.hpp"
 #include "SerialMIDI_Interface.h"
 
+/**
+ * @brief   Bluetooth Low Energy MIDI Interface for the ESP32.
+ * 
+ * @ingroup MIDIInterfaces
+ */
 class BluetoothMIDI_Interface : public MIDI_Interface,
                                 public BLEServerCallbacks,
                                 public BLECharacteristicCallbacks {

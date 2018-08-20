@@ -1,14 +1,14 @@
 #pragma once
 
-#include <Helpers/LinkedList.h>
+#include <Helpers/LinkedList.hpp>
 #include <stddef.h>
 #include <Settings/SettingsWrapper.h>
 
-class Updatable : public Linkable<Updatable> {
+class Updatable : public DoublyLinkable<Updatable> {
   public:
-    Updatable() { append(this, first, last); }
+    Updatable() { updatables.append(this); }
 
-    virtual ~Updatable() { disable(); }
+    virtual ~Updatable() { updatables.remove(this); }
 
     virtual void update() = 0;
 
@@ -19,7 +19,7 @@ class Updatable : public Linkable<Updatable> {
             DEBUGFN(F("Error: This element is already enabled."));
             ERROR(return );
         }
-        append(this, first, last);
+        updatables.append(this);
     }
 
     void disable() {
@@ -27,19 +27,30 @@ class Updatable : public Linkable<Updatable> {
             DEBUGFN(F("Error: This element is already disabled."));
             ERROR(return );
         }
-        remove(this, first, last);
+        updatables.remove(this);
     }
 
-    bool isEnabled() { return contains(this, first, last); }
+    /**
+     * @brief 
+     * 
+     * @note    Assumes that the updatable is not added to a different linked 
+     *          list by the user.
+     * 
+     * @todo    Documentation
+     * 
+     * @return true 
+     * @return false 
+     */
+    bool isEnabled() { return updatables.couldContain(this); }
 
     static void beginAll() {
-        for (Updatable *el = first; el; el = el->next)
-            el->begin();
+        for (Updatable &el : updatables)
+            el.begin();
     }
 
     static void updateAll() {
-        for (Updatable *el = first; el; el = el->next)
-            el->update();
+        for (Updatable &el : updatables)
+            el.update();
     }
 
     static void enable(Updatable *element) { element->enable(); }
@@ -63,6 +74,5 @@ class Updatable : public Linkable<Updatable> {
     }
 
   private:
-    static Updatable *first;
-    static Updatable *last;
+    static DoublyLinkedList<Updatable> updatables;
 };

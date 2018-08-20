@@ -1,4 +1,3 @@
 #include "Updatable.hpp"
 
-Updatable *Updatable::first = nullptr;
-Updatable *Updatable::last = nullptr;
+DoublyLinkedList<Updatable> Updatable::updatables;

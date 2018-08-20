@@ -22,7 +22,7 @@ class MIDI_Callbacks {
  * @brief   An abstract class for MIDI interfaces.
  */
 class MIDI_Interface {
-  public:
+  protected:
     /**
      * @brief   Construct a MIDI interface with the given parser.
      *
@@ -33,6 +33,7 @@ class MIDI_Interface {
      */
     MIDI_Interface(MIDI_Parser &parser);
 
+  public:
     void setCallbacks(MIDI_Callbacks *cb) { this->callbacks = cb; }
 
     /**

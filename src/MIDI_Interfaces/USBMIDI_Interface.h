@@ -20,7 +20,9 @@
  * 
  * @note    See the [MIDI over USB Wiki]
  *          (https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB)
- *          for more information. 
+ *          for more information.
+ * 
+ * @ingroup MIDIInterfaces
  */
 class USBMIDI_Interface : public MIDI_Interface {
   public:
@@ -93,7 +95,7 @@ class USBMIDI_Interface : public MIDI_Interface {
         }
     }
 
-// If the main MCU has a USB connection but is not a Teensy →  MIDIUSB library
+// If the main MCU has a USB connection but is not a Teensy → MIDIUSB library
 #elif defined(USBCON)
     MIDI_read_t read() override {
         while (1) {
@@ -132,7 +134,9 @@ class USBMIDI_Interface : public MIDI_Interface {
  * 
  * @note    See the [MIDI over USB Wiki]
  *          (https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB)
- *          for more information. 
+ *          for more information.
+ * 
+ * @ingroup MIDIInterfaces
  */
 class USBMIDI_Interface : public USBSerialMIDI_Interface {
   public:

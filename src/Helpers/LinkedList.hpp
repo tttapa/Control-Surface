@@ -7,7 +7,7 @@ template <class Node>
 class LinkedListReverseIterator;
 
 template <class Node>
-class LinkedList {
+class DoublyLinkedList {
   public:
     /**
      * @brief   Append a node to a linked list.
@@ -112,9 +112,9 @@ class LinkedList {
 };
 
 template <class Node>
-class Linkable {
+class DoublyLinkable {
   protected:
-    friend class LinkedList<Node>;
+    friend class DoublyLinkedList<Node>;
     friend class LinkedListForwardIterator<Node>;
     friend class LinkedListReverseIterator<Node>;
     Node *next = nullptr;

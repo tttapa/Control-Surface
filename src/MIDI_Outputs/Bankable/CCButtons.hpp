@@ -41,6 +41,8 @@ class CCButtons
      *          button will send on address 10, button three on address 12, etc.
      * @param   channelIncrement
      *          The number of channels to increment for each next button.
+     * 
+     * @ingroup MIDIOutputElementConstructors
      */
     CCButtons(const OutputBankConfigAddressable &config,
               const Array<Button, NUMBER_OF_BUTTONS> &buttons,

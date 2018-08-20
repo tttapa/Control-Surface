@@ -30,6 +30,8 @@ class NoteButton
      *          The MIDI note number. [0, 127]
      * @param   channel
      *          The MIDI channel. [1, 16]
+     * 
+     * @ingroup MIDIOutputElementConstructors
      */
     NoteButton(const OutputBankConfigAddressable &config, pin_t pin, uint8_t note,
                uint8_t channel = 1)

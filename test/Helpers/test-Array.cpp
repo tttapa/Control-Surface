@@ -1,4 +1,4 @@
-#include <Helpers/Array.hpp>
+#include <Helpers/ArrayHelpers.hpp>
 #include <Def/Def.hpp>
 #include <gtest/gtest.h>
 
@@ -35,6 +35,18 @@ TEST(Array, rangeForConst) {
         EXPECT_EQ(el, i++);
 }
 
+TEST(Array, equality) {
+    Array<int, 5> a = {1, 2, 3, 4, 5};
+    Array<int, 5> b = {1, 2, 3, 4, 5};
+    Array<int, 5> c = {1, 2, 3, 4, 6};
+    EXPECT_EQ(a, b);
+    EXPECT_TRUE(a == b);
+    EXPECT_FALSE(a != b);
+    EXPECT_NE(a, c);
+    EXPECT_FALSE(a == c);
+    EXPECT_TRUE(a != c);
+}
+
 // -------------------------------------------------------------------------- //
 
 TEST(Array2D, initialize) {
@@ -45,4 +57,12 @@ TEST(Array2D, initialize) {
     EXPECT_EQ(arr[1][1], 3);
     EXPECT_EQ(arr[2][0], 4);
     EXPECT_EQ(arr[2][1], 5);
+}
+
+// -------------------------------------------------------------------------- //
+
+TEST(generateIncrementalArray, simple) {
+    auto x = generateIncrementalArray<unsigned int, 4>(2, 3);
+    Array<unsigned int, 4> y = {2, 5, 8, 11};
+    EXPECT_EQ(x, y);
 }

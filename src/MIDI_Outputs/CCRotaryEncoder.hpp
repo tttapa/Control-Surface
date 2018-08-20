@@ -43,6 +43,8 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender::send> {
      *          Whereas a greater speedMultiply factor will increase the speed,
      *          increasing the number of pulsesPerStep will result in a slower
      *          speed.
+     * 
+     * @ingroup MIDIOutputElementConstructors
      */
     CCRotaryEncoder(const EncoderPinList &pins, uint8_t address,
                     uint8_t channel = 1, uint8_t speedMultiply = 1,

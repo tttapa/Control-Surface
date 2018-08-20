@@ -43,6 +43,8 @@ class NoteButtons
      *          button will send on note 10, button three on note 12, etc.
      * @param   channelIncrement
      *          The number of channels to increment for each next button.
+     * 
+     * @ingroup MIDIOutputElementConstructors
      */
     NoteButtons(const OutputBankConfigAddressable &config,
                 const Array<Button, NUMBER_OF_BUTTONS> &buttons,

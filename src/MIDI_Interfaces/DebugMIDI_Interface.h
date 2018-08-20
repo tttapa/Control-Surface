@@ -10,6 +10,8 @@ const static char *MIDI_STATUS_TYPE_NAMES[] = { // @todo PROGMEM
 /**
  * @brief   A class for MIDI interfaces sending and receiving 
  *          human-readable MIDI messages over a Stream.
+ * 
+ * @ingroup MIDIInterfaces
  */
 class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
   public:
@@ -129,6 +131,8 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
  * @note    This is a template class because the class of the Serial object
  *          is completely different on different architectures, and they
  *          do not share a common super-class that has a `begin` method.
+ * 
+ * @ingroup MIDIInterfaces
  */
 template <typename T>
 class SerialDebugMIDI_Interface : public StreamDebugMIDI_Interface {
@@ -157,6 +161,8 @@ class SerialDebugMIDI_Interface : public StreamDebugMIDI_Interface {
 /**
  * @brief   A class for debug MIDI interfaces sending and receiving 
  *          human-readable MIDI messages over a HardwareSerial port.
+ * 
+ * @ingroup MIDIInterfaces
  */
 class HardwareSerialDebugMIDI_Interface
     : public SerialDebugMIDI_Interface<HardwareSerial> {
@@ -186,6 +192,8 @@ class HardwareSerialDebugMIDI_Interface
  * 
  *          Boards without a native USB connection (UNO, MEGA, Nano ...)
  *          use HardwareSerial0 for USB communcication.
+ * 
+ * @ingroup MIDIInterfaces
  */
 class USBDebugMIDI_Interface : public HardwareSerialDebugMIDI_Interface {
   public:
@@ -207,6 +215,8 @@ class USBDebugMIDI_Interface : public HardwareSerialDebugMIDI_Interface {
  * 
  *          The USB Serial connection `Serial` on Teensies is an instance of
  *          the `usb_serial_class`.
+ * 
+ * @ingroup MIDIInterfaces
  */
 class USBDebugMIDI_Interface
     : public SerialDebugMIDI_Interface<usb_serial_class> {
@@ -229,6 +239,8 @@ class USBDebugMIDI_Interface
  * 
  *          The USB Serial connection `Serial` on the Arduino DUE is an 
  *          instance of the `UARTClass`.
+ * 
+ * @ingroup MIDIInterfaces
  */
 class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<UARTClass> {
   public:
@@ -250,6 +262,8 @@ class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<UARTClass> {
  * 
  *          The USB Serial connection `Serial` on the Arduino Leonardo, Micro,
  *          etc. is an instance of the `Serial_` class.
+ * 
+ * @ingroup MIDIInterfaces
  */
 class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<Serial_> {
   public:
@@ -269,6 +283,8 @@ class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<Serial_> {
 /**
  * @brief   A class for debug MIDI interfaces sending and receiving 
  *          human-readable MIDI messages over a SoftwareSerial interface.
+ * 
+ * @ingroup MIDIInterfaces
  */
 class SoftwareSerialDebugMIDI_Interface
     : public SerialDebugMIDI_Interface<SoftwareSerial> {

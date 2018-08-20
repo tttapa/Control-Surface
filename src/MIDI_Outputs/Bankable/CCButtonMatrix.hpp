@@ -46,6 +46,8 @@ class CCButtonMatrix
      *          matrix that contains the address of each button. [0, 119]
      * @param   channel
      *          The MIDI channel. [1, 16]
+     * 
+     * @ingroup MIDIOutputElementConstructors
      */
     CCButtonMatrix(const OutputBankConfigAddressable &config,
                    const PinList<nb_rows> &rowPins,

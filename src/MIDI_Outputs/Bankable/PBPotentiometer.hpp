@@ -28,6 +28,8 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<8>::send, 8> {
      *          The analog input pin to read from.
      * @param   channel
      *          The MIDI channel. [1, 16]
+     * 
+     * @ingroup MIDIOutputElementConstructors
      */
     PBPotentiometer(const OutputBank &bank, pin_t analogPin,
                     uint8_t channel = 1)

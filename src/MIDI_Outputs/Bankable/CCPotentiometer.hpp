@@ -29,6 +29,8 @@ class CCPotentiometer
      *          The MIDI Controller number. [0, 119]
      * @param   channel
      *          The MIDI channel. [1, 16]
+     * 
+     * @ingroup MIDIOutputElementConstructors
      */
     CCPotentiometer(const OutputBankConfigAddressable &config, pin_t analogPin,
                     uint8_t controller, uint8_t channel = 1)

@@ -20,6 +20,8 @@ class CCIncrementDecrementButtons
     /**
      * @brief   
      * @todo    Documentation
+     * 
+     * @ingroup MIDIOutputElementConstructors
      */
     CCIncrementDecrementButtons(const IncrementDecrementButtons &buttons,
                                 uint8_t address, uint8_t channel = 1,
