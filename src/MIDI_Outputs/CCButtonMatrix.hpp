@@ -14,12 +14,12 @@
  *          rate.  
  *          This version cannot be banked.
  *
- * @ingroup MIDIOutputElements
- *
  * @tparam  nb_rows
  *          The number of rows of the matrix.
  * @tparam  nb_cols
  *          The number of columns of the matrix.
+ *
+ * @ingroup MIDIOutputElements
  */
 template <uint8_t nb_rows, uint8_t nb_cols>
 class CCButtonMatrix
@@ -41,7 +41,8 @@ class CCButtonMatrix
      *          internal pull-up resistor will be enabled.
      * @param   controllers
      *          A 2-dimensional array of the same dimensions as the button
-     *          matrix that contains the address of each button. [0, 119]
+     *          matrix that contains the MIDI Controller number of each button.
+     *          [0, 119]
      * @param   channel
      *          The MIDI channel. [1, 16]
      * 

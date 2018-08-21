@@ -52,11 +52,11 @@ class NoteButtonMatrix
     NoteButtonMatrix(const OutputBankConfigAddressable &config,
                      const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
-                     const AddressMatrix<nb_rows, nb_cols> &addresses,
+                     const AddressMatrix<nb_rows, nb_cols> &notes,
                      uint8_t channel)
         : MIDIButtonMatrix<DigitalNoteSender::sendOn,
                            DigitalNoteSender::sendOff, nb_rows, nb_cols>(
-              config, rowPins, colPins, addresses, channel) {}
+              config, rowPins, colPins, notes, channel) {}
 };
 
 } // namespace Bankable

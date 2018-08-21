@@ -44,12 +44,21 @@ enum MIDI_read_t {
 
 class MIDI_Parser {
   public:
-    /** Get the last MIDI channel message */
+    /** Get the latest MIDI channel message */
     MIDI_message getChannelMessage();
     /** Get the pointer to the SysEx data buffer. */
     const uint8_t *getSysExBuffer();
-    /** Get the length of the last SysEx message. */
+    /** Get the length of the latest SysEx message. */
     size_t getSysExLength();
+
+    /** A struct containing a pointer to a SysEx message and its length. */
+    struct SysExMessage {
+        const uint8_t *data;
+        size_t length;
+    };
+
+    /** Get the latest SysEx message. */
+    SysExMessage getSysExMessage();
 
   protected:
     MIDI_message midimsg = {};
@@ -73,7 +82,7 @@ class MIDI_Parser {
 
   public:
     /** Check if the given byte is a MIDI header byte. */
-    static bool isHeader(uint8_t data);
+    static bool isStatus(uint8_t data);
     /** Check if the given byte is a MIDI data byte. */
     static bool isData(uint8_t data);
 };

@@ -1,16 +1,21 @@
 #pragma once
 
-#include <Helpers/LinkedList.h>
 #include "MIDIInputElementAddressable.hpp"
+#include <Helpers/LinkedList.h>
 
+/**
+ * @brief   Class for objects that correspond to incoming MIDI Note events
+ * 
+ * @ingroup MIDIInputElements
+ */
 class MIDIInputElementNote : public MIDIInputElementAddressable {
   public:
     /**
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementNote(uint8_t baseChannel, uint8_t baseAddress)
-        : MIDIInputElementAddressable(baseChannel, baseAddress) {
+    MIDIInputElementNote(uint8_t baseChannel, uint8_t baseNote)
+        : MIDIInputElementAddressable(baseChannel, baseNote) {
         LinkedList::append(this, first, last);
     }
 

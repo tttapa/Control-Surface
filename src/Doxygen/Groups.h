@@ -12,6 +12,12 @@
  */
 
 /**
+ * @defgroup    MIDIInputElements   MIDI Input Elements
+ * @brief   All Elements that listen for incoming MIDI events.  
+ *          This includes LEDs, VU meters, ... (todo)
+ */
+
+/**
  * @defgroup    Audio Teensy Audio
  * @brief   All Elements that interact with Audio streams.
  */

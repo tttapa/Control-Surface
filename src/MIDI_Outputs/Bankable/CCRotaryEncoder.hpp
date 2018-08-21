@@ -22,19 +22,19 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender::send> {
   public:
     /**
      * @brief   Construct a new Bankable CCRotaryEncoder object with the given 
-     *          pins, address, channel, speed factor, and number of pulses per 
-     *          step.
+     *          pins, controller, channel, speed factor, and number of pulses
+     *          per step.
      * 
      * @param   pins
      *          A list of the two pins connected to the A and B outputs of the
      *          encoder.  
      *          The internal pull-up resistors will be enabled by the Encoder
      *          library.
-     * @param   address
+     * @param   controller
      *          The MIDI controller number. [0, 119]
      * @param   channel
      *          The MIDI channel. [1, 16]
-     * @param   speedMultiply
+     * @param   speedMultiplier
      *          A constant factor to increase the speed of the rotary encoder.
      *          The difference in position will just be multiplied by this 
      *          factor. 
@@ -43,27 +43,28 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender::send> {
      *          For a normal encoder, this is 4. If you want to increase the
      *          resolution, for the use of Jog wheels, for example, you can go
      *          as 1.  
-     *          Whereas a greater speedMultiply factor will increase the speed,
-     *          increasing the number of pulsesPerStep will result in a slower
-     *          speed.
+     *          Whereas a greater speedMultiplier factor will increase the 
+     *          speed, increasing the number of pulsesPerStep will result in a 
+     *          lower speed.
      * 
      * @ingroup MIDIOutputElementConstructors
      */
     CCRotaryEncoder(const OutputBankConfigAddressable &config,
-                    const EncoderPinList &pins, uint8_t address,
-                    uint8_t channel, uint8_t speedMultiply,
+                    const EncoderPinList &pins, uint8_t controller,
+                    uint8_t channel, uint8_t speedMultiplier,
                     uint8_t pulsesPerStep)
-        : MIDIRotaryEncoder<RelativeCCSender::send>(
-              config, pins, address, channel, speedMultiply, pulsesPerStep) {}
+        : MIDIRotaryEncoder<RelativeCCSender::send>(config, pins, controller,
+                                                    channel, speedMultiplier,
+                                                    pulsesPerStep) {}
 
-// For tests only
+// For tests only (PJRC Encoder library's copy constructor doesn't work)
 #ifndef ARDUINO
-    CCRotaryEncoder(const OutputBankConfigAddressable &config, const Encoder &encoder,
-                    uint8_t address, uint8_t channel, uint8_t speedMultiply,
-                    uint8_t pulsesPerStep)
-        : MIDIRotaryEncoder<RelativeCCSender::send>(
-              config, encoder, address, channel, speedMultiply, pulsesPerStep) {
-    }
+    CCRotaryEncoder(const OutputBankConfigAddressable &config,
+                    const Encoder &encoder, uint8_t controller, uint8_t channel,
+                    uint8_t speedMultiplier, uint8_t pulsesPerStep)
+        : MIDIRotaryEncoder<RelativeCCSender::send>(config, encoder, controller,
+                                                    channel, speedMultiplier,
+                                                    pulsesPerStep) {}
 #endif
 };
 

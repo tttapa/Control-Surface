@@ -1,8 +1,8 @@
 #include "SerialMIDI_Parser.h"
 
 MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
-    if (isHeader(midiByte)) {
-        // If it's a header byte (first byte)
+    if (isStatus(midiByte)) {
+        // If it's a status byte (first byte)
         if (midiByte >= 0xF8) {
             // If it's a Real-Time message (not implemented)
             ; // Handle Real-Time stuff (not implemented)

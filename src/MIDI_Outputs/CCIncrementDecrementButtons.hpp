@@ -6,8 +6,7 @@
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of **two
  *          momentary push buttons** to increment or decrement a **relative 
- *          setting** using relative MIDI **Control Change** events.
- * 
+ *          setting** using relative MIDI **Control Change** events.  
  *          An optional note number can be provided to reset the setting.
  * 
  *          This version cannot be banked.
@@ -18,15 +17,29 @@ class CCIncrementDecrementButtons
     : public MIDIIncrementDecrementButtons<RelativeCCSender::send> {
   public:
     /**
-     * @brief   
-     * @todo    Documentation
+     * @brief   Construct a new CCIncrementDecrementButtons object.
+     * 
+     * @param   buttons
+     *          The pins with the increment and decrement buttons connected.  
+     *          The internal pull-up resistors will be enabled.
+     * @param   controller
+     *          The MIDI Controller number for the relative events. [0, 119]
+     * @param   channel
+     *          The MIDI channel. [1, 16]
+     * @param   multiplier
+     *          The multiplier for the relative events. When setting it to 2,
+     *          it will scroll twice as fast.
+     * @param   resetNote
+     *          The MIDI note number to use to reset the setting. It will be 
+     *          triggered when the increment and decrement buttons are pressed
+     *          simultaneously. [0, 127]
      * 
      * @ingroup MIDIOutputElementConstructors
      */
     CCIncrementDecrementButtons(const IncrementDecrementButtons &buttons,
-                                uint8_t address, uint8_t channel = 1,
-                                uint8_t speedMultiply = 1,
-                                uint8_t resetAddress = NO_ADDRESS)
-        : MIDIIncrementDecrementButtons(buttons, address, channel,
-                                        speedMultiply, resetAddress) {}
+                                uint8_t controller, uint8_t channel = 1,
+                                uint8_t multiplier = 1,
+                                uint8_t resetNote = NO_ADDRESS)
+        : MIDIIncrementDecrementButtons(buttons, controller, channel,
+                                        multiplier, resetNote) {}
 };

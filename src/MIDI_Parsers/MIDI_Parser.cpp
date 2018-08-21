@@ -32,10 +32,13 @@ bool MIDI_Parser::hasSpaceLeft() {
 
 const uint8_t *MIDI_Parser::getSysExBuffer() { return SysExBuffer; }
 size_t MIDI_Parser::getSysExLength() { return SysExLength; }
+MIDI_Parser::SysExMessage MIDI_Parser::getSysExMessage() {
+    return {getSysExBuffer(), getSysExLength()};
+}
 
 #endif
 
-bool MIDI_Parser::isHeader(uint8_t data) {
+bool MIDI_Parser::isStatus(uint8_t data) {
     return data & (1 << 7); // TODO
 }
 
