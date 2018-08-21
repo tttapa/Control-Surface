@@ -42,22 +42,22 @@ add_definitions("-g")
 include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googlemock/include)
 
 # Arduino Core files
-include_directories("ArduinoMock")
-file(GLOB_RECURSE ARDUINO_SOURCES "ArduinoMock/*.cpp")
+include_directories("../ArduinoMock")
+file(GLOB_RECURSE ARDUINO_SOURCES "../ArduinoMock/*.cpp")
 add_library(ArduinoMock STATIC ${ARDUINO_SOURCES})
 
 # Mock
-include_directories("mock")
+include_directories("../mock")
 
 # add_definitions(-DANALOG_FILTER_SHIFT_FACTOR_OVERRIDE=2)
 
 # Control Surface library files
-include_directories("src")
-file(GLOB_RECURSE SOURCES "src/*.cpp")
+include_directories("../src")
+file(GLOB_RECURSE SOURCES "../src/*.cpp")
 add_library(Control_Surface STATIC ${SOURCES})
 
 # Test executable compilation and linking
-file(GLOB_RECURSE TESTS "test/*.cpp")
+file(GLOB_RECURSE TESTS "../test/*.cpp")
 add_executable(tests ${TESTS})
 target_link_libraries(tests
                       gtest_main
@@ -71,9 +71,9 @@ add_test(NAME Tests COMMAND tests)
 
 # Add documentation target
 add_custom_target(documentation "doxygen"
-                  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/doc/Doxygen")
+                  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/../doc/Doxygen")
 
 # Add XBM target
 
 add_custom_target(xbm python3 XBM-export.py
-                  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/src/Display/Bitmaps/Scripts/")
+                  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/../src/Display/Bitmaps/Scripts/")

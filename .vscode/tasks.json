@@ -6,7 +6,7 @@
         {
             "type": "shell",
             "label": "Make & Test",
-            "command": "make -j8 && make test",
+            "command": "cd build && make -j8 && make test",
             "problemMatcher": "$gcc",
             "group": {
                 "kind": "build",

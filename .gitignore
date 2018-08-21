@@ -21,6 +21,9 @@ lib/
 CMakeFiles/
 *.cmake
 CMakeCache.txt
+build/googletest/Makefile
+build/Makefile
+CTestCostData.txt
 
 .cproject
 .project

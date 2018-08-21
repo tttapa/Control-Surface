@@ -27,7 +27,6 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/googletest/": true
     },
     "editor.dragAndDrop": false,
     "editor.find.autoFindInSelection": true,
