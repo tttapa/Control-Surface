@@ -6,22 +6,36 @@
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <string.h>
 
+/** 
+ * @brief   An abstract interface for VU meters. It declares two methods:
+ *          `getValue` and `getOverload`.
+ */
 class IVU {
   public:
-    virtual uint8_t getValue() = 0;
-    virtual bool getOverload() = 0;
+    /** Return the VU meter value as an integer. */
+    virtual uint8_t getValue() const = 0;
+    /** Return the overload status. */
+    virtual bool getOverload() const = 0;
 };
 
 namespace MCU {
 
+/** 
+ * @brief   A MIDI input element that represents a Mackie Control Universal VU
+ *          meter.
+ *          This is a base class to both the Bankable and non-Bankable version.
+ */
 class VU_Base : public MIDIInputElementChannelPressure, public IVU {
   public:
+    VU_Base(); // Just for virtual inheritance
     VU_Base(uint8_t track, uint8_t channel, unsigned int decayTime)
         : MIDIInputElementChannelPressure(channel), baseTrack(track - 1),
           decayTime(decayTime) {}
 
-    uint8_t getValue() override { return getValueHelper(getRawValue()); }
-    bool getOverload() override {
+    /** Return the VU meter value as an integer in [0, 12]. */
+    uint8_t getValue() const override { return getValueHelper(getRawValue()); }
+    /** Return the overload status. */
+    bool getOverload() const override {
         return getOverloadHelper(getRawValue());
     }
 
@@ -38,27 +52,44 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
         }
     }
 
+    /** Automatically decay the VU meter value by one step (if it is greater
+     * than zero). */
     virtual void decayAll() = 0;
 
+    /** Return the raw value of the VU meter, this includes the actual VU value
+     * and the overload status in a single byte. */
     virtual uint8_t getRawValue() const = 0;
 
   protected:
+    /** Return the track number of this VU meter. (In the Bankable version,
+     * this is the track number of the first VU meter.) */
     uint8_t getBaseTrack() const { return baseTrack; }
 
+    /** Set the VU meter value.
+     * @todo    rawValue reference instead of return.
+     */
     uint8_t setValueHelper(uint8_t rawValue, uint8_t newValue) {
         prevDecayTime = millis();
         newValue |= rawValue & 0xF0;
         return newValue;
     }
+    /** Set the overload status.
+     * @todo    rawValue reference instead of return.
+     */
     static inline uint8_t setOverloadHelper(uint8_t rawValue) {
         return rawValue |= 0xF0;
     }
+    /** Clear the overload status.
+     * @todo    rawValue reference instead of return.
+     */
     static inline uint8_t clearOverloadHelper(uint8_t rawValue) {
         return rawValue &= 0x0F;
     }
+    /** Get the VU meter value from the raw value. */
     static inline uint8_t getValueHelper(uint8_t rawValue) {
         return rawValue & 0x0F;
     }
+    /** Get the overload status value from the raw value. */
     static inline bool getOverloadHelper(uint8_t rawValue) {
         return rawValue & 0xF0;
     }
@@ -66,12 +97,33 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
 
 // -------------------------------------------------------------------------- //
 
+/** 
+ * @brief   A MIDI input element that represents a Mackie Control Universal VU
+ *          meter.
+ *          This version cannot be banked.
+ */
 class VU : virtual public VU_Base {
   public:
+    /** 
+     * @brief   Construct a new VU object.
+     * 
+     * @param   track
+     *          The track of the VU meter. [1, 8]
+     * @param   channel
+     *          The MIDI channel. [1, 16]
+     * @param   decayTime
+     *          The time in milliseconds it takes for the value to decay one
+     *          step.  
+     *          The MCU protocol uses 300 ms per division, and two steps
+     *          per division, so the default is 150 ms per step.  
+     *          Some software doesn't work if the VU meter decays automatically, 
+     *          in that case, you can set the decay time to zero to disable 
+     *          the decay.
+     */
     VU(uint8_t track, uint8_t channel = 1, unsigned int decayTime = 150)
         : VU_Base(track, channel, decayTime) {}
 
-    bool updateImpl(const MIDI_message_matcher &midimsg) {
+    bool updateImpl(const MIDI_message_matcher &midimsg) override {
         uint8_t targetTrack = midimsg.data1 >> 4;
         DEBUGFN("target track = " << +targetTrack);
         if (!matchTrack(targetTrack))
@@ -84,7 +136,6 @@ class VU : virtual public VU_Base {
             case 0xD: break; // no meaning
             default: setValue(data); break;
         }
-        display();
         return true;
     }
 
@@ -112,9 +163,35 @@ class VU : virtual public VU_Base {
 
 namespace Bankable {
 
+/** 
+ * @brief   A MIDI input element that represents a Mackie Control Universal VU
+ *          meter.
+ *          This version can be banked.
+ * 
+ * @tparam  N 
+ *          The number of banks.
+ */
 template <size_t N>
 class VU : public virtual VU_Base, public BankableMIDIInputAddressable<N> {
   public:
+    /** 
+     * @brief   Construct a new Bankable VU object.
+     * 
+     * @param   config
+     *          The bank configuration to use.
+     * @param   track
+     *          The track of the VU meter. [1, 8]
+     * @param   channel
+     *          The MIDI channel. [1, 16]
+     * @param   decayTime
+     *          The time in milliseconds it takes for the value to decay one
+     *          step.  
+     *          The MCU protocol uses 300 ms per division, and two steps
+     *          per division, so the default is 150 ms per step.  
+     *          Some software doesn't work if the VU meter decays automatically, 
+     *          in that case, you can set the decay time to zero to disable 
+     *          the decay.
+     */
     VU(const BankConfigAddressable<N> &config, uint8_t track,
        uint8_t channel = 1, unsigned int decayTime = 150)
         : VU_Base(track, channel, decayTime), BankableMIDIInputAddressable<N>(
@@ -135,7 +212,6 @@ class VU : public virtual VU_Base, public BankableMIDIInputAddressable<N> {
             case 0xD: break; // no meaning
             default: setValue(index, data); break;
         }
-        display();
         return true;
     }
 
@@ -180,6 +256,7 @@ class VU : public virtual VU_Base, public BankableMIDIInputAddressable<N> {
 
 // -------------------------------------------------------------------------- //
 /*
+TODO: remove
 class VU_LED : public VU {
   public:
     template <size_t N>

@@ -30,3 +30,5 @@ using ContinuousSendFunction7Bit = void (*)(uint8_t, uint8_t, uint8_t);
 using ContinuousSendFunction14Bit = void (*)(uint16_t, uint8_t);
 // delta, channel, address
 using RelativeSendFunction = void (*)(long, uint8_t, uint8_t);
+
+using setting_t = uint8_t;

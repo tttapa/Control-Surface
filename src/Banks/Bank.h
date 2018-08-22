@@ -129,4 +129,21 @@ class Bank : public Selectable<N>, public OutputBank {
     friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
 
-#include "Bank.ipp"
+// ---------------------------- Implementations ----------------------------- //
+
+template <setting_t N>
+void Bank<N>::add(BankableMIDIInputAddressable<N> &bankable) {
+    LinkedList::append(&bankable, first, last);
+}
+
+template <setting_t N>
+void Bank<N>::select(setting_t bankSetting) {
+    bankSetting = this->validateSetting(bankSetting);
+    OutputBank::select(bankSetting);
+    first->onBankSettingChangeAll();
+}
+
+template <setting_t N>
+void Bank<N>::remove(BankableMIDIInputAddressable<N> *bankable) {
+    LinkedList::remove(bankable, first, last);
+}

@@ -1,9 +1,8 @@
 #pragma once
 
 #include <Helpers/Debug.hpp>
+#include <Def/Def.hpp>
 #include <stdint.h>
-
-using setting_t = uint8_t;
 
 template <setting_t N> // TODO: check bounds here?
 class Selectable {

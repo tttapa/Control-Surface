@@ -6,9 +6,9 @@
 namespace MCU {
 
 template <uint8_t N>
-class VULEDs_Base : public VU_Base {
+class VULEDs_Base : public virtual VU_Base {
   protected:
-    VULEDs_Base(const VULEDs<N> &leds) : leds(leds) {}
+    VULEDs_Base(const DotBarDisplayLEDs<N> &leds) : leds(leds) {}
 
   public:
     void begin() override { leds.begin(); }
@@ -20,7 +20,7 @@ class VULEDs_Base : public VU_Base {
     }
 
   private:
-    const VULEDs<N> leds;
+    const DotBarDisplayLEDs<N> leds;
 
     /** @see    doc/VU-LED-mapping.ods */
     constexpr static uint8_t FLOOR_CORRECTION = 5;
@@ -35,7 +35,7 @@ class VULEDs_Base : public VU_Base {
 template <uint8_t N>
 class VULEDs : public VU, public VULEDs_Base<N> {
   public:
-    VULEDs(uint8_t track, uint8_t channel, const VULEDs<N> &leds)
+    VULEDs(uint8_t track, uint8_t channel, const DotBarDisplayLEDs<N> &leds)
         : VU_Base(track, channel), VU(track, channel), VULEDs_Base<N>(leds) {}
 };
 
@@ -51,10 +51,14 @@ namespace Bankable {
 template <uint8_t M, uint8_t N>
 class VULEDs : public VU<M>, public VULEDs_Base<N> {
   public:
-    VULEDs(const BankConfigAddressable<N> &config, uint8_t track,
-           uint8_t channel, const VULEDs<N> &leds)
-        : VU_Base(track, channel), VU<M>(config, track, channel),
-          VULEDs_Base<N>(leds) {}
+    VULEDs(const BankConfigAddressable<M> &config,
+           const DotBarDisplayLEDs<N> &leds, uint8_t track, uint8_t channel = 1,
+           unsigned int decayTime = 150)
+        : VU_Base(track, channel, decayTime),
+          VU<M>(config, track, channel, decayTime), VULEDs_Base<N>(leds) {}
+
+  private:
+    void onBankSettingChange() const override { this->display(); }
 };
 
 } // namespace Bankable

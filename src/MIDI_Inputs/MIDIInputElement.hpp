@@ -18,7 +18,7 @@ class MIDIInputElement {
     /**
      * @brief   Update the display of the input element.
      */
-    virtual void display() {}
+    virtual void display() const {}
 
     /**
      * @brief   Update the value of the input element.

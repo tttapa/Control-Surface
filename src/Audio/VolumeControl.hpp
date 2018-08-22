@@ -5,6 +5,15 @@
 #include <Hardware/FilteredAnalog.h>
 #include <Audio.h>
 
+/** 
+ * @brief   A class for controlling the volume of AudioMixer4 objects using a 
+ *          potentiometer.
+ * 
+ * @tparam  N
+ *          The number of mixers.
+ * 
+ * @ingroup Audio
+ */
 template <uint8_t N>
 class VolumeControl : public Updatable {
   public:
