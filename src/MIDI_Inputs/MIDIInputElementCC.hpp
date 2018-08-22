@@ -1,9 +1,10 @@
 #pragma once
 
-#include <Helpers/LinkedList.h>
+#include <Helpers/LinkedList.hpp>
 #include <MIDI_Inputs/MIDIInputElementAddressable.hpp>
 
-class MIDIInputElementCC : public MIDIInputElementAddressable {
+class MIDIInputElementCC : public MIDIInputElementAddressable,
+                           public DoublyLinkable<MIDIInputElementCC> {
   public:
     /**
      * @brief   Constructor.
@@ -11,26 +12,26 @@ class MIDIInputElementCC : public MIDIInputElementAddressable {
      */
     MIDIInputElementCC(uint8_t baseChannel, uint8_t baseAddress)
         : MIDIInputElementAddressable(baseChannel, baseAddress) {
-        LinkedList::append(this, first, last);
+        elements.append(this);
     }
 
     /**
      * @brief   Destructor.
      * @todo    Documentation.
      */
-    virtual ~MIDIInputElementCC() { LinkedList::remove(this, first, last); }
+    virtual ~MIDIInputElementCC() { elements.remove(this); }
 
     static void beginAll() {
-        for (MIDIInputElementCC *el = first; el; el = el->next)
-            el->begin();
+        for (MIDIInputElementCC &e : elements)
+            e.begin();
     }
 
     /**
      * @brief   Update all MIDIInputElementCC elements.
      */
     static void updateAll() {
-        for (MIDIInputElementCC *e = first; e; e = e->next)
-            e->update();
+        for (MIDIInputElementCC &e : elements)
+            e.update();
     }
 
     /**
@@ -39,8 +40,8 @@ class MIDIInputElementCC : public MIDIInputElementAddressable {
      * @see     MIDIInputElementCC#reset
      */
     static void resetAll() {
-        for (MIDIInputElementCC *e = first; e; e = e->next)
-            e->reset();
+        for (MIDIInputElementCC &e : elements)
+            e.reset();
     }
 
     /**
@@ -49,22 +50,13 @@ class MIDIInputElementCC : public MIDIInputElementAddressable {
      * @see     MIDIInputElementCC#updateWith
      */
     static void updateAllWith(const MIDI_message_matcher &midimsg) {
-        for (MIDIInputElementCC *e = first; e; e = e->next)
-            if (e->updateWith(midimsg))
+        for (MIDIInputElementCC &e : elements)
+            if (e.updateWith(midimsg))
                 return;
     }
 
   private:
-    void moveDown() override { LinkedList::moveDown(this, first, last); }
+    void moveDown() override { elements.moveDown(this); }
 
-    MIDIInputElementCC *next = nullptr, *previous = nullptr;
-    static MIDIInputElementCC *last;
-    static MIDIInputElementCC *first;
-
-    template <class Node>
-    friend void LinkedList::append(Node *, Node *&, Node *&);
-    template <class Node>
-    friend void LinkedList::moveDown(Node *, Node *&, Node *&);
-    template <class Node>
-    friend void LinkedList::remove(Node *, Node *&, Node *&);
+    static DoublyLinkedList<MIDIInputElementCC> elements;
 };

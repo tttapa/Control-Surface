@@ -1,4 +1,3 @@
 #include "MIDIInputElementCC.hpp"
 
-MIDIInputElementCC *MIDIInputElementCC::first = nullptr;
-MIDIInputElementCC *MIDIInputElementCC::last = nullptr;
+DoublyLinkedList<MIDIInputElementCC> MIDIInputElementCC::elements;
