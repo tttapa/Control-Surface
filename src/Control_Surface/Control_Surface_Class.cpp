@@ -107,6 +107,8 @@ void Control_Surface_::onSysExMessage(MIDI_Interface &midi) {
     for (size_t i = 0; i < len; i++)
         DEBUG_OUT << data[i] << ' ';
     DEBUG_OUT << dec << endl;
+#else
+    (void)midi;
 #endif
 }
 

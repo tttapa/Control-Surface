@@ -11,8 +11,9 @@ class MIDI_Interface;
  */
 class MIDI_Callbacks {
     friend class MIDI_Interface;
-    virtual void onChannelMessage(MIDI_Interface &midi) {}
-    virtual void onSysExMessage(MIDI_Interface &midi) {}
+    virtual void onChannelMessage(__attribute__((unused))
+                                  MIDI_Interface &midi) {}
+    virtual void onSysExMessage(__attribute__((unused)) MIDI_Interface &midi) {}
 
   public:
     virtual ~MIDI_Callbacks() = default;

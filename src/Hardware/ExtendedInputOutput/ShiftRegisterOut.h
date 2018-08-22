@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Helpers/BitArray.hpp>
 #include "ExtendedIOElement.h"
+#include <Helpers/BitArray.hpp>
 
 /**
  * @brief   A class for serial-in/parallel-out shift registers, 
@@ -42,8 +42,9 @@ class ShiftRegisterOut : public ExtendedIOElement {
      * @brief   The pinMode function is not implemented because the mode is
      *          `OUTPUT` by definition.
      */
-    void pinMode(pin_t pin, uint8_t mode) override __attribute__((deprecated)) {
-    }
+    void pinMode(__attribute__((unused)) pin_t pin,
+                 __attribute__((unused)) uint8_t mode) override
+        __attribute__((deprecated)) {}
 
     /**
      * @brief   Set the state of a given output pin.

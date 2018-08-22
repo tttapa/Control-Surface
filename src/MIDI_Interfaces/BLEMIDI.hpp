@@ -96,8 +96,10 @@ class BLECharacteristic {
 class BLECharacteristicCallbacks {
   public:
     virtual ~BLECharacteristicCallbacks() = default;
-    virtual void onRead(BLECharacteristic *pCharacteristic) {}
-    virtual void onWrite(BLECharacteristic *pCharacteristic) {}
+    virtual void onRead(__attribute__((unused))
+                        BLECharacteristic *pCharacteristic) {}
+    virtual void onWrite(__attribute__((unused))
+                         BLECharacteristic *pCharacteristic) {}
 };
 
 class BLEServer {};
@@ -105,8 +107,8 @@ class BLEServer {};
 class BLEServerCallbacks {
   public:
     virtual ~BLEServerCallbacks() = default;
-    virtual void onConnect(BLEServer *pServer) {}
-    virtual void onDisconnect(BLEServer *pServer) {}
+    virtual void onConnect(__attribute__((unused)) BLEServer *pServer) {}
+    virtual void onDisconnect(__attribute__((unused)) BLEServer *pServer) {}
 };
 
 class BLEMIDI {

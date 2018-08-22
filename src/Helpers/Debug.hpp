@@ -6,6 +6,7 @@
 // level
 
 #include <Settings/SettingsWrapper.h>
+#include <stdlib.h>
 
 #ifndef PRINTSTREAM_FALLBACK
 #include "PrintStream.h"
@@ -133,5 +134,5 @@ using std::uppercase;
 
 #define FATAL_ERROR()                                                          \
     do {                                                                       \
-        exit(1);                                                               \
+        exit(EXIT_FAILURE);                                                    \
     } while (0)

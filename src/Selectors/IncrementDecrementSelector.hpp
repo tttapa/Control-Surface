@@ -39,5 +39,6 @@ class IncrementDecrementSelector : public IncrementDecrementSelector_Base<N> {
                                                                       wrap) {}
 
     void beginOutput() override {}
-    void updateOutput(setting_t oldSetting, setting_t newSetting) override {}
+    void updateOutput(__attribute__((unused)) setting_t oldSetting,
+                      __attribute__((unused)) setting_t newSetting) override {}
 };

@@ -14,11 +14,11 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
 
     // BLE Callbacks
 
-    void onConnect(BLEServer *pServer) override {
+    void onConnect(__attribute__((unused)) BLEServer *pServer) override {
         DEBUGFN("Connected");
         connected++;
     };
-    void onDisconnect(BLEServer *pServer) override {
+    void onDisconnect(__attribute__((unused)) BLEServer *pServer) override {
         DEBUGFN("Disonnected");
         if (!connected) {
             DEBUGFN("Error: disconnect event, but was not connected");
@@ -33,7 +33,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     }
     void onWrite(BLECharacteristic *pCharacteristic) override {
         DEBUGFN("Write: ");
-        std::string value = bleMidi.getValue();
+        std::string value = pCharacteristic->getValue();
         const uint8_t *const data =
             reinterpret_cast<const uint8_t *const>(value.data());
         size_t len = value.size();

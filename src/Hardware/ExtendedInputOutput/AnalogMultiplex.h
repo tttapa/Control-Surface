@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Helpers/Copy.hpp>
 #include "ExtendedIOElement.h"
+#include <Helpers/Copy.hpp>
 #include <stdlib.h>
 
 /**
@@ -51,7 +51,8 @@ class AnalogMultiplex : public ExtendedIOElement {
      * @brief   The digitalWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
-    void digitalWrite(pin_t pin, uint8_t val) override
+    void digitalWrite(__attribute__((unused)) pin_t pin,
+                      __attribute__((unused)) uint8_t val) override
         __attribute__((deprecated)) {}
 
     /**
@@ -74,7 +75,8 @@ class AnalogMultiplex : public ExtendedIOElement {
      * @brief   The analogWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
-    void analogWrite(pin_t pin, analog_t val) override
+    void analogWrite(__attribute__((unused)) pin_t pin,
+                     __attribute__((unused)) analog_t val) override
         __attribute__((deprecated)) {}
 
     /**

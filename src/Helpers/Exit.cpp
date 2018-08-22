@@ -1,3 +1,5 @@
+#ifdef ARDUINO
+
 #include <Arduino.h>
 
 void exit(int status) {
@@ -19,3 +21,5 @@ void exit(int status) {
   cli();
   while (1);
 }
+
+#endif
