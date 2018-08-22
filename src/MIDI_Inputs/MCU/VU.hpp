@@ -22,7 +22,7 @@ namespace MCU {
 
 /** 
  * @brief   A MIDI input element that represents a Mackie Control Universal VU
- *          meter.
+ *          meter.  
  *          This is a base class to both the Bankable and non-Bankable version.
  */
 class VU_Base : public MIDIInputElementChannelPressure, public IVU {
@@ -98,8 +98,8 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
 // -------------------------------------------------------------------------- //
 
 /** 
- * @brief   A MIDI input element that represents a Mackie Control Universal VU
- *          meter.
+ * @brief   A class for MIDI input elements that represent Mackie Control
+ *          Universal VU meters.  
  *          This version cannot be banked.
  */
 class VU : virtual public VU_Base {
@@ -164,8 +164,8 @@ class VU : virtual public VU_Base {
 namespace Bankable {
 
 /** 
- * @brief   A MIDI input element that represents a Mackie Control Universal VU
- *          meter.
+ * @brief   A class for MIDI input elements that represent Mackie Control
+ *          Universal VU meters.  
  *          This version can be banked.
  * 
  * @tparam  N 

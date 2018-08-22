@@ -7,21 +7,32 @@ namespace MCU {
 
 constexpr static uint8_t VPotRingAddress = 0x30;
 
-// TODO: why can't I use the min/max macros on Teensy?
 inline int8_t minimum(int8_t a, int8_t b) { return a > b ? b : a; }
 inline int8_t maximum(int8_t a, int8_t b) { return a < b ? b : a; }
 
+/** 
+ * @brief   An abstract class of MIDI input element that represent Mackie
+ *          Control Universal V-Pots.  
+ *          This is a base class to both the Bankable and non-Bankable version.
+ */
 class VPotRing_Base : public MIDIInputElementCC {
   protected:
     VPotRing_Base(); // unused, only for virtual inheritance
-  public:
+                     // keeps compiler happy, but gives a linker error if it is
+                     // accidentally used.
     VPotRing_Base(uint8_t track, uint8_t channel = 1)
         : MIDIInputElementCC(channel, track + VPotRingAddress - 1) {}
 
-    uint8_t getPosition() const { return getPosition(getValue()); }
-    bool getCenterLed() const { return getCenterLed(getValue()); }
-    uint8_t getMode() const { return getMode(getValue()); }
+  public:
+    /** Return the position of the V-Pot ring. [0, 11] */
+    uint8_t getPosition() const { return getPosition(getRawValue()); }
+    /** Return the status of the center LED of the V-Pot ring. */
+    bool getCenterLed() const { return getCenterLed(getRawValue()); }
+    /** Return the mode of the V-Pot ring: 0 = single dot, 1 = boost/cut, 
+     * 2 = wrap, 3 = spread */
+    uint8_t getMode() const { return getMode(getRawValue()); }
 
+    /** Get the first segment that should be on. */
     uint8_t getStartOn() const {
         if (getPosition() == 0)
             return 0;
@@ -35,6 +46,7 @@ class VPotRing_Base : public MIDIInputElementCC {
         return 0; // Shouldn't happen, just keeps the compiler happy.
     }
 
+    /** Get the first segment that should be off. */
     uint8_t getStartOff() const {
         uint8_t value = getPosition();
         switch (getMode()) {
@@ -47,28 +59,38 @@ class VPotRing_Base : public MIDIInputElementCC {
     }
 
   protected:
+    /** Make sure that the received value is valid and will not result in array
+     * out of bounds conditions. */
     static inline uint8_t sanitizeValue(uint8_t value) {
         return (value & 0x0F) < 0x0C ? value : ((value & 0xF0) | 0xB);
     }
 
   private:
-    virtual bool updateImpl(const MIDI_message_matcher &midimsg) = 0;
-
+    /** Extract the position from the raw value. */
     static inline uint8_t getPosition(uint8_t value) { return value & 0x0F; }
+    /** Extract the center LED state from the raw value. */
     static inline bool getCenterLed(uint8_t value) { return value & 0x40; }
+    /** Extract the mode from the raw value. */
     static inline uint8_t getMode(uint8_t value) { return (value & 0x30) >> 4; }
 
-    virtual uint8_t getValue() const = 0;
+    /** Return the raw value of the V-Pot. This contains the position, mode and
+     * center LED state. */
+    virtual uint8_t getRawValue() const = 0;
 };
 
 // -------------------------------------------------------------------------- //
 
+/** 
+ * @brief   A class for MIDI input elements that represent Mackie Control 
+ *          Universal V-Pots.  
+ *          This version cannot be banked.
+ */
 class VPotRing : public virtual VPotRing_Base {
   public:
     VPotRing(uint8_t track, uint8_t channel = 1)
         : VPotRing_Base(track, channel) {}
 
-    void reset() final override { value = 0; }
+    void reset() override { value = 0; }
 
   private:
     bool updateImpl(const MIDI_message_matcher &midimsg) override {
@@ -76,7 +98,7 @@ class VPotRing : public virtual VPotRing_Base {
         return true;
     }
 
-    uint8_t getValue() const override { return value; }
+    uint8_t getRawValue() const override { return value; }
 
     uint8_t value = 0;
 };
@@ -85,6 +107,14 @@ class VPotRing : public virtual VPotRing_Base {
 
 namespace Bankable {
 
+/** 
+ * @brief   A class for MIDI input elements that represent Mackie Control
+ *          Universal V-Pots.  
+ *          This version can be banked.
+ * 
+ * @tparam  N 
+ *          The number of banks.
+ */
 template <uint8_t N>
 class VPotRing : public virtual VPotRing_Base,
                  public BankableMIDIInputAddressable<N> {
@@ -113,11 +143,12 @@ class VPotRing : public virtual VPotRing_Base,
                                                              getBaseAddress());
     }
 
-    uint8_t getValue() const override {
-        return values[this->getSelection()]; // TODO: N
+    uint8_t getRawValue() const override {
+        return values[this->getSelection()]; // getSelection is guaranteed to be
+                                             // in [0, N)
     }
 
-    void onBankSettingChange() const override { display(); }
+    void onBankSettingChange() const override { display(); } // TODO: same in VU
 
     uint8_t values[N] = {};
 };

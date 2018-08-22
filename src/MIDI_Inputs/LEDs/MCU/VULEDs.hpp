@@ -40,6 +40,7 @@ class VULEDs : public VU, public VULEDs_Base<N> {
 };
 
 namespace Bankable {
+
 /**
  * @brief 
  * 
