@@ -21,6 +21,11 @@ class MIDIInputElementCC : public MIDIInputElementAddressable,
      */
     virtual ~MIDIInputElementCC() { elements.remove(this); }
 
+    /**
+     * @brief   Initialize all MIDIInputElementCC elements.
+     * 
+     * @see     MIDIInputElementCC#begin
+     */
     static void beginAll() {
         for (MIDIInputElementCC &e : elements)
             e.begin();
@@ -28,6 +33,8 @@ class MIDIInputElementCC : public MIDIInputElementAddressable,
 
     /**
      * @brief   Update all MIDIInputElementCC elements.
+     * 
+     * @see     MIDIInputElementCC#update
      */
     static void updateAll() {
         for (MIDIInputElementCC &e : elements)

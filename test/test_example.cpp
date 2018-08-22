@@ -4,11 +4,6 @@
 
 using namespace ::testing;
 
-TEST(Example, Example) {
-    int i = 10;
-    EXPECT_EQ(i, 10);
-}
-
 TEST(millis, millis) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)

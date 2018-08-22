@@ -17,12 +17,16 @@ class MIDIInputElement {
 
     /**
      * @brief   Update the display of the input element.
+     * 
+     * This should only be called when the state changes, not on each update.
      */
     virtual void display() const {}
 
     /**
      * @brief   Update the value of the input element.
      *          Used for decaying VU meters etc.
+     * 
+     * This function is called continuously by the Control_Surface_ class.
      */
     virtual void update() {}
 
@@ -46,6 +50,7 @@ class MIDIInputElement {
         return true;
     }
 
+    /** Return the (first) channel of this input element. */
     inline uint8_t getBaseChannel() const { return baseChannel; }
 
   private:
@@ -57,6 +62,9 @@ class MIDIInputElement {
     /**
      * @brief   Check if the channel of the incoming MIDI message
      *          matches an channel of this element.
+     * 
+     * This function is overridden by the Bankable subclasses, because
+     * they can multiple channels.
      */
     virtual inline bool matchChannel(uint8_t targetChannel) const {
         return getBaseChannel() == targetChannel;
@@ -65,7 +73,7 @@ class MIDIInputElement {
     /**
      * @brief   Move down this element in the linked list of elements.
      *          This means that the element will be checked earlier on the next
-     *          iteration.
+     *          iteration, speeding up the lookup process.
      */
     virtual void moveDown() = 0;
 

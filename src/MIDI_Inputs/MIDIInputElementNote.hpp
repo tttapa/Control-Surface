@@ -1,14 +1,15 @@
 #pragma once
 
 #include "MIDIInputElementAddressable.hpp"
-#include <Helpers/LinkedList.h>
+#include <Helpers/LinkedList.hpp>
 
 /**
  * @brief   Class for objects that correspond to incoming MIDI Note events
  * 
  * @ingroup MIDIInputElements
  */
-class MIDIInputElementNote : public MIDIInputElementAddressable {
+class MIDIInputElementNote : public MIDIInputElementAddressable,
+                             public DoublyLinkable<MIDIInputElementNote> {
   public:
     /**
      * @brief   Constructor.
@@ -16,18 +17,23 @@ class MIDIInputElementNote : public MIDIInputElementAddressable {
      */
     MIDIInputElementNote(uint8_t baseChannel, uint8_t baseNote)
         : MIDIInputElementAddressable(baseChannel, baseNote) {
-        LinkedList::append(this, first, last);
+        elements.append(this);
     }
 
     /**
      * @brief   Destructor.
      * @todo    Documentation.
      */
-    virtual ~MIDIInputElementNote() { LinkedList::remove(this, first, last); }
+    virtual ~MIDIInputElementNote() { elements.remove(this); }
 
+    /**
+     * @brief   Initialize all MIDIInputElementNote elements.
+     * 
+     * @see     MIDIInputElementNote#begin
+     */
     static void beginAll() {
-        for (MIDIInputElementNote *el = first; el; el = el->next)
-            el->begin();
+        for (MIDIInputElementNote &e : elements)
+            e.begin();
     }
 
     /**
@@ -36,8 +42,8 @@ class MIDIInputElementNote : public MIDIInputElementAddressable {
      * @see     MIDIInputElementNote#update
      */
     static void updateAll() {
-        for (MIDIInputElementNote *e = first; e; e = e->next)
-            e->update();
+        for (MIDIInputElementNote &e : elements)
+            e.update();
     }
 
     /** 
@@ -46,32 +52,24 @@ class MIDIInputElementNote : public MIDIInputElementAddressable {
      * @see     MIDIInputElementNote#reset
      */
     static void resetAll() {
-        for (MIDIInputElementNote *e = first; e; e = e->next)
-            e->reset();
+        for (MIDIInputElementNote &e : elements)
+            e.reset();
     }
 
     /**
-     * @brief   Update all MIDIInputElementNote elements with a new MIDI message.
+     * @brief   Update all MIDIInputElementNote elements with a new MIDI 
+     *          message.
      * 
      * @see     MIDIInputElementNote#updateWith
      */
     static void updateAllWith(const MIDI_message_matcher &midimsg) {
-        for (MIDIInputElementNote *e = first; e; e = e->next)
-            if (e->updateWith(midimsg))
+        for (MIDIInputElementNote &e : elements)
+            if (e.updateWith(midimsg))
                 return;
     }
 
   private:
-    void moveDown() override { LinkedList::moveDown(this, first, last); }
+    void moveDown() override { elements.moveDown(this); }
 
-    MIDIInputElementNote *next = nullptr, *previous = nullptr;
-    static MIDIInputElementNote *last;
-    static MIDIInputElementNote *first;
-
-    template <class Node>
-    friend void LinkedList::append(Node *, Node *&, Node *&);
-    template <class Node>
-    friend void LinkedList::moveDown(Node *, Node *&, Node *&);
-    template <class Node>
-    friend void LinkedList::remove(Node *, Node *&, Node *&);
+    static DoublyLinkedList<MIDIInputElementNote> elements;
 };
