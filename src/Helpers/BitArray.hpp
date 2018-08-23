@@ -1,10 +1,10 @@
 #pragma once
 
 #if defined(CORE_TEENSY) // || ... // TODO
-#define USE_UNIQUE_PTR // No extra memory usage on Teensy 3.2 using TD 1.41
+#define USE_UNIQUE_PTR   // No extra memory usage on Teensy 3.2 using TD 1.41
 #endif
 
-#include "Debug.hpp"
+#include <Helpers/Error.hpp>
 #include <stdint.h>
 #ifdef USE_UNIQUE_PTR
 #include <memory>
@@ -41,10 +41,10 @@ class BitArray {
 
     uint8_t safeIndex(uint8_t byteIndex) const {
         if (byteIndex >= getBufferLength()) {
-            DEBUGFN(F("Error: index out of bounds (")
-                    << (unsigned int)byteIndex << F(", length is ")
-                    << (unsigned int)getBufferLength() << ')');
-            ERROR(return getBufferLength() - 1);
+            ERROR(F("Error: index out of bounds (")
+                  << (unsigned int)byteIndex << F(", length is ")
+                  << (unsigned int)getBufferLength() << ')');
+            return getBufferLength() - 1;
         }
         return byteIndex;
     }

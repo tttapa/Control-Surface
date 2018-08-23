@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Helpers/Debug.hpp>
 #include <Def/Def.hpp>
+#include <Helpers/Error.hpp>
 #include <stdint.h>
 
 template <setting_t N> // TODO: check bounds here?
@@ -14,11 +14,10 @@ class Selectable {
         static_assert(setting_t(-1) > setting_t(0),
                       "Error: setting_t should be an unsigned integer type.");
         if (setting >= N) {
-            DEBUGFN(F("Error: Setting ")
-                    << setting
-                    << F(" is not less than the number of programs (") << N
-                    << ')');
-            ERROR(return N - 1);
+            ERROR(F("Error: Setting ")
+                  << setting << F(" is not less than the number of programs (")
+                  << N << ')');
+            return N - 1;
         }
         return setting;
     }

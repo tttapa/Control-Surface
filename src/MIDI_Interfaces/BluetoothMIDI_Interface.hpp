@@ -3,6 +3,8 @@
 #include "BLEMIDI.hpp"
 #include "SerialMIDI_Interface.h"
 
+#include <Helpers/Error.hpp>
+
 /**
  * @brief   Bluetooth Low Energy MIDI Interface for the ESP32.
  * 
@@ -21,8 +23,8 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     void onDisconnect(__attribute__((unused)) BLEServer *pServer) override {
         DEBUGFN("Disonnected");
         if (!connected) {
-            DEBUGFN("Error: disconnect event, but was not connected");
-            ERROR(return );
+            ERROR(F("Error: disconnect event, but was not connected"));
+            return;
         }
         connected--;
     }

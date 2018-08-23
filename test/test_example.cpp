@@ -50,6 +50,29 @@ TEST(Serial, println_string) {
     Mock::VerifyAndClear(&Serial);
 }
 
+#include <Helpers/Error.hpp>
+
+TEST(Error, exception) {
+    EXPECT_THROW(ERROR("An error occured"), ErrorException);
+}
+
+inline bool ends_with(std::string const &value, std::string const &ending) {
+    if (ending.size() > value.size())
+        return false;
+    return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
+}
+
+TEST(Error, exceptionWhat) {
+    try {
+        ERROR("An error occured");
+        FAIL();
+    } catch (ErrorException &e) {
+        std::string msg = e.what();
+        cout << msg << endl;
+        EXPECT_TRUE(ends_with(msg, "An error occured"));
+    }
+}
+
 // TEST(Fail, fail) {
 //     EXPECT_TRUE(false);
 // }

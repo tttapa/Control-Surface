@@ -108,31 +108,10 @@ using std::uppercase;
 
 #define DEBUGVAR(x) F(STR(x) " = ") << x
 
-#else
+#else // ifdef DEBUG_OUT
 
 #define DEBUG(x)
 #define DEBUGREF(x)
 #define DEBUGFN(x)
 
 #endif
-
-#ifdef FATAL_ERRORS
-
-#define ERROR(x)                                                               \
-    do {                                                                       \
-        exit(1);                                                               \
-    } while (0)
-
-#else
-
-#define ERROR(x)                                                               \
-    do {                                                                       \
-        x;                                                                     \
-    } while (0)
-
-#endif
-
-#define FATAL_ERROR()                                                          \
-    do {                                                                       \
-        exit(EXIT_FAILURE);                                                    \
-    } while (0)

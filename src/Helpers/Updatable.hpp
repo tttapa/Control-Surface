@@ -1,8 +1,9 @@
 #pragma once
 
+#include <Helpers/Error.hpp>
 #include <Helpers/LinkedList.hpp>
-#include <stddef.h>
 #include <Settings/SettingsWrapper.h>
+#include <stddef.h>
 
 class Updatable : public DoublyLinkable<Updatable> {
   public:
@@ -16,16 +17,16 @@ class Updatable : public DoublyLinkable<Updatable> {
 
     void enable() {
         if (isEnabled()) {
-            DEBUGFN(F("Error: This element is already enabled."));
-            ERROR(return );
+            ERROR(F("Error: This element is already enabled."));
+            return;
         }
         updatables.append(this);
     }
 
     void disable() {
         if (!isEnabled()) {
-            DEBUGFN(F("Error: This element is already disabled."));
-            ERROR(return );
+            ERROR(F("Error: This element is already disabled."));
+            return;
         }
         updatables.remove(this);
     }

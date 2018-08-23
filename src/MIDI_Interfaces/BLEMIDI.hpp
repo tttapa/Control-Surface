@@ -11,6 +11,8 @@
 #include <BLEServer.h>
 #include <BLEUtils.h>
 
+#include <Helpers/Error.hpp>
+
 // https://www.midi.org/specifications/item/bluetooth-le-midi
 const char *SERVICE_UUID = "03b80e5a-ede8-4b33-a751-6ce34ec4c700";
 const char *CHARACTERISTIC_UUID = "7772e5db-3868-4112-a1a9-f2669d106bf3";
@@ -28,8 +30,8 @@ class BLEMIDI {
      */
     void setServerCallbacks(BLEServerCallbacks *cb) {
         if (pServer == nullptr) {
-            DEBUGFN("Error: pServer has not been initialized");
-            ERROR(return );
+            ERROR(F("Error: pServer has not been initialized"));
+            return;
         }
         pServer->setCallbacks(cb);
     }
@@ -39,8 +41,8 @@ class BLEMIDI {
      */
     void setCharacteristicsCallbacks(BLECharacteristicCallbacks *cb) {
         if (pCharacteristic == nullptr) {
-            DEBUGFN("Error: Characteristic has not been initialized");
-            ERROR(return );
+            ERROR(F("Error: Characteristic has not been initialized"));
+            return;
         }
         pCharacteristic->setCallbacks(cb);
     }
@@ -48,8 +50,8 @@ class BLEMIDI {
     void begin() {
         // DEBUGFN("");
         if (BLEDevice::getInitialized()) {
-            DEBUGFN("Error: BLEDevice is initialized already");
-            ERROR(return ); // TODO: What to do here?
+            ERROR(F("Error: BLEDevice is initialized already"));
+            return; // TODO: What to do here?
         }
         BLEDevice::init(BLE_MIDI_NAME);
         pServer = BLEDevice::createServer();

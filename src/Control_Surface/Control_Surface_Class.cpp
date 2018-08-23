@@ -44,8 +44,7 @@ void Control_Surface_::loop() {
 MIDI_Interface &Control_Surface_::MIDI() {
     MIDI_Interface *midi = MIDI_Interface::getDefault();
     if (midi == nullptr) {
-        DEBUGFN("Error: no default MIDI interface is selected.");
-        FATAL_ERROR();
+        FATAL_ERROR(F("Error: no default MIDI interface is selected."));
     }
     return *midi;
 }
@@ -57,7 +56,7 @@ void Control_Surface_::updateMidiInput() {
 
 void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
     MIDI_message midichmsg = midi.getChannelMessage();
-    MIDI_message_matcher midimsg(midichmsg);
+    MIDI_message_matcher midimsg = {midichmsg};
 
 #ifdef DEBUG_MIDI_PACKETS
     if (midimsg.type != PROGRAM_CHANGE && midimsg.type != CHANNEL_PRESSURE)

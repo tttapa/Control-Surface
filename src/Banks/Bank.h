@@ -5,9 +5,7 @@
 #include <Selectors/Selectable.hpp>
 #include <stddef.h>
 #include <stdint.h>
-
-
-// TODO: <BOOKMARK>: linked list
+#include <Helpers/Error.hpp>
 
 template <setting_t N>
 class BankableMIDIInputAddressable;
@@ -19,8 +17,8 @@ class OutputBank {
   public:
     OutputBank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
         if (tracksPerBank == 0) {
-            DEBUGFN(F("Error: A Bank must have a non-zero number of tracks."));
-            FATAL_ERROR();
+            FATAL_ERROR(
+                F("Error: A Bank must have a non-zero number of tracks."));
         }
     }
     void select(setting_t setting) { bankSetting = setting; }
@@ -69,7 +67,6 @@ class Bank : public Selectable<N>, public OutputBank {
      *          The new Bank Setting.
      */
     void select(uint8_t bankSetting) override;
-
 
   private:
     /**
