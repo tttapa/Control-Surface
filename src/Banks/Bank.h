@@ -1,10 +1,13 @@
 #pragma once
 
 #include <Helpers/Debug.hpp>
-#include <Helpers/LinkedList.h>
+#include <Helpers/LinkedList.hpp>
 #include <Selectors/Selectable.hpp>
 #include <stddef.h>
 #include <stdint.h>
+
+
+// TODO: <BOOKMARK>: linked list
 
 template <setting_t N>
 class BankableMIDIInputAddressable;
@@ -32,48 +35,6 @@ class OutputBank {
  * @brief   A class that groups MIDI_Element%s and allows the user to change
  *          the MIDI addresses (Controller number or Note number) or the MIDI
  *          channels of these elements.
- *
- * Consider two controls: `volume_A` and `volume_B`:
- * `volume_A` has controller 0x07 on MIDI channel 1, and
- * `volume_B` has controller 0x07 on MIDI channel 2.
- * Let's add them to a bank with 2 tracks per bank.
- * @todo    Example
- * @code{.cpp}
- * AnalogCC volume_A(A0, MIDI_CC::Channel_Volume, 1);
- * AnalogCC volume_B(A1, MIDI_CC::Channel_Volume, 2);
- *
- * Bank bank(2);
- *
- * bank.add(volume_A, Bank::CHANGE_CHANNEL);
- * bank.add(volume_B, Bank::CHANGE_CHANNEL);
- * @endcode
- * By default, the bank setting is 0, so it has no impact:
- * `volume_A` still sends MIDI messages on channel 1, and
- * `volume_B` still sends MIDI messages on channel 2.
- * However, when the bank setting is changed, this is
- * no longer the case:
- * @code{.cpp}
- * bank.select(1);
- * @endcode
- * Now that the bank setting is set to one, the number of
- * tracks per bank is added to the channel of each element
- * in the bank:
- * `volume_A` now sends MIDI messages on channel 3, and
- * `volume_B` now sends MIDI messages on channel 4.
- *
- * When the bank setting is set to 2, `volume_A` will use
- * channel 5, and `volume_B` channel 6, etc.
- *
- * When using the bank type Bank::CHANGE_ADDRESS, the same
- * thing happens, but the address changes and the channel
- * stays the same.
- *
- * To change the bank setting, a BankSelector can be used.
- *
- * Apart from changing the address or channel of an element,
- * banks can also be used to apply a single map function
- * to many Potentiometer (CCPotentiometer or PBPotentiometer)
- * elements at the same time.
  *
  * ### In general
  * `Bank::CHANGE_CHANNEL`
@@ -109,7 +70,6 @@ class Bank : public Selectable<N>, public OutputBank {
      */
     void select(uint8_t bankSetting) override;
 
-    void remove(BankableMIDIInputAddressable<N> *bankable);
 
   private:
     /**
@@ -118,32 +78,29 @@ class Bank : public Selectable<N>, public OutputBank {
      * @param   bankable
      *          The Bankable to be added.
      */
-    void add(BankableMIDIInputAddressable<N> &bankable);
+    void add(BankableMIDIInputAddressable<N> *bankable);
 
-    BankableMIDIInputAddressable<N> *first = nullptr;
-    BankableMIDIInputAddressable<N> *last = nullptr;
+    void remove(BankableMIDIInputAddressable<N> *bankable);
 
-    template <class Node>
-    friend void LinkedList::append(Node *, Node *&, Node *&);
-    template <class Node>
-    friend void LinkedList::remove(Node *, Node *&, Node *&);
+    DoublyLinkedList<BankableMIDIInputAddressable<N>> inputBankables;
 };
 
 // ---------------------------- Implementations ----------------------------- //
 
 template <setting_t N>
-void Bank<N>::add(BankableMIDIInputAddressable<N> &bankable) {
-    LinkedList::append(&bankable, first, last);
+void Bank<N>::add(BankableMIDIInputAddressable<N> *bankable) {
+    inputBankables.append(bankable);
+}
+
+template <setting_t N>
+void Bank<N>::remove(BankableMIDIInputAddressable<N> *bankable) {
+    inputBankables.remove(bankable);
 }
 
 template <setting_t N>
 void Bank<N>::select(setting_t bankSetting) {
     bankSetting = this->validateSetting(bankSetting);
     OutputBank::select(bankSetting);
-    first->onBankSettingChangeAll();
-}
-
-template <setting_t N>
-void Bank<N>::remove(BankableMIDIInputAddressable<N> *bankable) {
-    LinkedList::remove(bankable, first, last);
+    for (BankableMIDIInputAddressable<N> &e : inputBankables)
+        e.onBankSettingChange();
 }

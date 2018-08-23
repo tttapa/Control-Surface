@@ -3,16 +3,18 @@
 #include "Bank.h"
 #include "BankConfigAddressable.hpp"
 #include <Helpers/Debug.hpp>
+#include <Helpers/LinkedList.hpp>
 
 template <setting_t N>
-class BankableMIDIInputAddressable {
+class BankableMIDIInputAddressable
+    : public DoublyLinkable<BankableMIDIInputAddressable<N>> {
     friend class Bank<N>;
 
   protected:
     BankableMIDIInputAddressable(Bank<N> &bank, BankType type)
         : bank(bank),
           channelsOrAddressesPerBank(bank.getTracksPerBank() << type) {
-        bank.add(*this);
+        bank.add(this);
     }
 
     BankableMIDIInputAddressable(const BankConfigAddressable<N> &config)
@@ -64,18 +66,7 @@ class BankableMIDIInputAddressable {
 
   private:
     Bank<N> &bank;
-    BankableMIDIInputAddressable<N> *next = nullptr;
-    BankableMIDIInputAddressable<N> *previous = nullptr;
     const uint8_t channelsOrAddressesPerBank;
 
     virtual void onBankSettingChange() const {}
-    void onBankSettingChangeAll() const {
-        for (const BankableMIDIInputAddressable<N> *e = this; e; e = e->next)
-            e->onBankSettingChange();
-    }
-
-    template <class Node>
-    friend void LinkedList::append(Node *, Node *&, Node *&);
-    template <class Node>
-    friend void LinkedList::remove(Node *, Node *&, Node *&);
 };
