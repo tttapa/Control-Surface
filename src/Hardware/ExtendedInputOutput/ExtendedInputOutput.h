@@ -60,4 +60,5 @@ extern void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder,
 extern void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val);
 extern analog_t analogRead(pin_t pin);
 extern analog_t analogRead(int pin);
+
 }

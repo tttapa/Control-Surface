@@ -79,4 +79,4 @@ analog_t analogRead(pin_t pin) {
 }
 analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
 
-}; // namespace ExtIO
+} // namespace ExtIO

@@ -5,10 +5,10 @@
             "defines": [
                 "IDE"
             ],
-            "compilerPath": "/usr/bin/clang",
+            "compilerPath": "/usr/bin/gcc",
             "cStandard": "c11",
             "cppStandard": "c++11",
-            "intelliSenseMode": "clang-x64",
+            "intelliSenseMode": "gcc-x64",
             "includePath": [
                 "${default}",
                 "${workspaceFolder}/build/googletest/googletest-src/googlemock/include",

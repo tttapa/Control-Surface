@@ -19,7 +19,8 @@
         "optional": "cpp",
         "ratio": "cpp",
         "system_error": "cpp",
-        "atomic": "cpp"
+        "atomic": "cpp",
+        "exception": "cpp"
     },
     "files.exclude": {
         "**/.git": true,

@@ -183,4 +183,4 @@ bool contains(Node *node, Node *&first, __attribute__((unused)) Node *&last) {
     return node == first || node->next != nullptr || node->previous != nullptr;
 }
 
-}; // namespace LinkedList
+} // namespace LinkedList
