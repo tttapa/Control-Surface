@@ -23,7 +23,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     void onDisconnect(__attribute__((unused)) BLEServer *pServer) override {
         DEBUGFN("Disonnected");
         if (!connected) {
-            ERROR(F("Error: disconnect event, but was not connected"));
+            ERROR(F("Error: disconnect event, but was not connected"), 0x7788);
             return;
         }
         connected--;

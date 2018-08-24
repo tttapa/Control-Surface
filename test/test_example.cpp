@@ -53,7 +53,7 @@ TEST(Serial, println_string) {
 #include <Helpers/Error.hpp>
 
 TEST(Error, exception) {
-    EXPECT_THROW(ERROR("An error occured"), ErrorException);
+    EXPECT_THROW(ERROR("An error occured", 12), ErrorException);
 }
 
 inline bool ends_with(std::string const &value, std::string const &ending) {
@@ -62,14 +62,15 @@ inline bool ends_with(std::string const &value, std::string const &ending) {
     return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
 }
 
-TEST(Error, exceptionWhat) {
+TEST(Error, exceptionWhatErrorCode) {
     try {
-        ERROR("An error occured");
+        ERROR("An error occured", 12);
         FAIL();
     } catch (ErrorException &e) {
         std::string msg = e.what();
         cout << msg << endl;
         EXPECT_TRUE(ends_with(msg, "An error occured"));
+        EXPECT_EQ(e.getErrorCode(), 12);
     }
 }
 

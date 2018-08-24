@@ -43,7 +43,7 @@ class BitArray {
         if (byteIndex >= getBufferLength()) {
             ERROR(F("Error: index out of bounds (")
                   << (unsigned int)byteIndex << F(", length is ")
-                  << (unsigned int)getBufferLength() << ')');
+                  << (unsigned int)getBufferLength() << ')', 0xFFFF);
             return getBufferLength() - 1;
         }
         return byteIndex;

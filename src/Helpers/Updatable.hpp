@@ -17,7 +17,7 @@ class Updatable : public DoublyLinkable<Updatable> {
 
     void enable() {
         if (isEnabled()) {
-            ERROR(F("Error: This element is already enabled."));
+            ERROR(F("Error: This element is already enabled."), 0x1212);
             return;
         }
         updatables.append(this);
@@ -25,7 +25,7 @@ class Updatable : public DoublyLinkable<Updatable> {
 
     void disable() {
         if (!isEnabled()) {
-            ERROR(F("Error: This element is already disabled."));
+            ERROR(F("Error: This element is already disabled."), 0x1213);
             return;
         }
         updatables.remove(this);

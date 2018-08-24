@@ -30,7 +30,7 @@ class BLEMIDI {
      */
     void setServerCallbacks(BLEServerCallbacks *cb) {
         if (pServer == nullptr) {
-            ERROR(F("Error: pServer has not been initialized"));
+            ERROR(F("Error: pServer has not been initialized"), 0x2020);
             return;
         }
         pServer->setCallbacks(cb);
@@ -41,7 +41,7 @@ class BLEMIDI {
      */
     void setCharacteristicsCallbacks(BLECharacteristicCallbacks *cb) {
         if (pCharacteristic == nullptr) {
-            ERROR(F("Error: Characteristic has not been initialized"));
+            ERROR(F("Error: Characteristic has not been initialized"), 0x2021);
             return;
         }
         pCharacteristic->setCallbacks(cb);
@@ -50,7 +50,7 @@ class BLEMIDI {
     void begin() {
         // DEBUGFN("");
         if (BLEDevice::getInitialized()) {
-            ERROR(F("Error: BLEDevice is initialized already"));
+            ERROR(F("Error: BLEDevice is initialized already"), 0x2022);
             return; // TODO: What to do here?
         }
         BLEDevice::init(BLE_MIDI_NAME);

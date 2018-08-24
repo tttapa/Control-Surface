@@ -44,7 +44,7 @@ void Control_Surface_::loop() {
 MIDI_Interface &Control_Surface_::MIDI() {
     MIDI_Interface *midi = MIDI_Interface::getDefault();
     if (midi == nullptr) {
-        FATAL_ERROR(F("Error: no default MIDI interface is selected."));
+        FATAL_ERROR(F("Error: no default MIDI interface is selected."), 0xDEAD);
     }
     return *midi;
 }

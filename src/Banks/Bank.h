@@ -1,11 +1,11 @@
 #pragma once
 
 #include <Helpers/Debug.hpp>
+#include <Helpers/Error.hpp>
 #include <Helpers/LinkedList.hpp>
 #include <Selectors/Selectable.hpp>
 #include <stddef.h>
 #include <stdint.h>
-#include <Helpers/Error.hpp>
 
 template <setting_t N>
 class BankableMIDIInputAddressable;
@@ -18,7 +18,8 @@ class OutputBank {
     OutputBank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
         if (tracksPerBank == 0) {
             FATAL_ERROR(
-                F("Error: A Bank must have a non-zero number of tracks."));
+                F("Error: A Bank must have a non-zero number of tracks."),
+                0x4573);
         }
     }
     void select(setting_t setting) { bankSetting = setting; }
