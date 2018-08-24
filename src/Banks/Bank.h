@@ -15,7 +15,8 @@ class BankableMIDIOutput;
 
 class OutputBank {
   public:
-    OutputBank(uint8_t tracksPerBank) : tracksPerBank(tracksPerBank) {
+    OutputBank(uint8_t tracksPerBank = 1, setting_t initialSelection = 0)
+        : tracksPerBank(tracksPerBank), bankSetting(initialSelection) {
         if (tracksPerBank == 0) {
             FATAL_ERROR(
                 F("Error: A Bank must have a non-zero number of tracks."),
@@ -23,11 +24,12 @@ class OutputBank {
         }
     }
     void select(setting_t setting) { bankSetting = setting; }
-    virtual uint8_t getSelection() const { return bankSetting; }
+    setting_t getSelection() const { return bankSetting; }
     uint8_t getTracksPerBank() const { return tracksPerBank; }
 
+  private:
     const uint8_t tracksPerBank;
-    uint8_t bankSetting = 0;
+    setting_t bankSetting;
 };
 
 /**
@@ -58,8 +60,9 @@ class Bank : public Selectable<N>, public OutputBank {
      *          The number of tracks (i.e. addresses or channels) that
      *          are skipped when the bank setting changes.
      */
-    Bank(uint8_t tracksPerBank = 1, uint8_t initialSelection = 0)
-        : Selectable<N>(initialSelection), OutputBank(tracksPerBank) {}
+    Bank(uint8_t tracksPerBank = 1, setting_t initialSelection = 0)
+        : Selectable<N>(initialSelection),
+          OutputBank(tracksPerBank, initialSelection) {}
 
     /**
      * @brief   Set the Bank Setting
@@ -67,7 +70,7 @@ class Bank : public Selectable<N>, public OutputBank {
      * @param   bankSetting
      *          The new Bank Setting.
      */
-    void select(uint8_t bankSetting) override;
+    void select(setting_t bankSetting) override;
 
   private:
     /**
@@ -84,6 +87,8 @@ class Bank : public Selectable<N>, public OutputBank {
 };
 
 // ---------------------------- Implementations ----------------------------- //
+
+#include <Banks/BankableMIDIInputAddressable.hpp>
 
 template <setting_t N>
 void Bank<N>::add(BankableMIDIInputAddressable<N> *bankable) {

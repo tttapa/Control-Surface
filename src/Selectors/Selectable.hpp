@@ -15,8 +15,8 @@ class Selectable {
                       "Error: setting_t should be an unsigned integer type.");
         if (setting >= N) {
             ERROR(F("Error: Setting ")
-                      << setting
-                      << F(" is not less than the number of programs (") << N
+                      << +setting
+                      << F(" is not less than the number of programs (") << +N
                       << ')',
                   0xFFFE);
             return N - 1;

@@ -73,7 +73,3 @@ TEST(Error, exceptionWhatErrorCode) {
         EXPECT_EQ(e.getErrorCode(), 12);
     }
 }
-
-// TEST(Fail, fail) {
-//     EXPECT_TRUE(false);
-// }
