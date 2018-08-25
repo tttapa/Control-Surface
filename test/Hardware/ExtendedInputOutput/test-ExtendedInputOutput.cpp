@@ -2,6 +2,7 @@
 
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <Helpers/Error.hpp>
+#include <type_traits>
 
 using namespace ::testing;
 using namespace ExtIO;
@@ -88,5 +89,15 @@ TEST(ExtendedInputOutput, nonExistentPinOfDeletedElement) {
         FAIL();
     } catch (ErrorException e) {
         EXPECT_EQ(e.getErrorCode(), 0x8888);
+    }
+}
+
+TEST(ExtendedInputOutput, outOfPinNumbers) {
+    pin_t max = std::numeric_limits<pin_t>::max();
+    try {
+        MockExtIOElement el_1 = {max};
+        FAIL();
+    } catch (ErrorException e) {
+        EXPECT_EQ(e.getErrorCode(), 0x00FF);
     }
 }

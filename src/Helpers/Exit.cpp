@@ -3,7 +3,7 @@
 #include "Error.hpp"
 #include <Arduino.h>
 
-void fatalErrorExit() __attribute__((noreturn)) {
+void fatalErrorExit() {
 #ifdef LED_BUILTIN
     pinMode(LED_BUILTIN, OUTPUT);
     while (1) {

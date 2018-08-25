@@ -48,7 +48,7 @@ namespace ExtIO {
  *          The extended IO pin number to find the IO element of.
  * @return  A pointer to the extended IO element that the given pin belongs to.
  */
-extern ExtendedIOElement *getIOElementOfPin(pin_t pin);
+extern ExtendedIOElement &getIOElementOfPin(pin_t pin);
 extern void pinMode(pin_t pin, uint8_t mode);
 extern void pinMode(int pin, uint8_t mode);
 extern void digitalWrite(pin_t pin, uint8_t val);
