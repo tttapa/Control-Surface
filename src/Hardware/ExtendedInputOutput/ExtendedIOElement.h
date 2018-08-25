@@ -4,19 +4,19 @@
 #include <Helpers/LinkedList.hpp>
 
 /**
- * @brief   A class for extended IO elements.
+ * @brief   An abstract base class for Extended Input/Output elements.
  *
  *          The limited number of IO pins of the Arduino can be extended by
- *          adding multiplexers, shift registers, IO expanders, etc.
+ *          adding multiplexers, shift registers, IO expanders, etc.  
  *          ExtendedIOElement serves as a base class for all these expanders.
  *
  *          The pins of each extended IO element are mapped to a pin number
- *          greater than the greatest Arduino pin number.
+ *          greater than the greatest Arduino pin number.  
  *          You can supply this pin number to the IO functions in the ExtIO
- *          namespace.
+ *          namespace.  
  *          If the pin number corresponds to an actual Arduino pin,
  *          the default Arduino IO function (digitalRead, digitalWrite, ...)
- *          will be called.
+ *          will be called.  
  *          If the pin is not an Arduino pin, it is an extended IO pin number,
  *          so the extended IO element that this pin belongs to is looked up,
  *          and the IO function for this element is executed with the correct
@@ -26,9 +26,9 @@
  *          Imagine an Arduino with 20 pins (e.g. the Arduino UNO).
  *          Pins 0 - 19 will correspond to the Arduino pins, and
  *          `ExtIO::digitalRead(pin)` will have the exact same effect as
- *          the standard `digitalRead(pin)` function.
+ *          the standard `digitalRead(pin)` function (albeit a little slower).  
  *          Now, we'll add two 8-channel analog multiplexers, let's call them
- *          `mux1` and `mux2`.
+ *          `mux1` and `mux2`.  
  *          The first pin (pin 0) of `mux1` will be extended IO pin number 20,
  *          the last pin (pin 7) of `mux1` will be extended IO pin number 27,
  *          etc.
@@ -77,24 +77,24 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
      *          The zero-based physical pin number of this IO element.
      * @return  The global, unique extended IO pin number for the given pin.
      */
-    pin_t pin(pin_t pin);
+    pin_t pin(pin_t pin) const;
     /**
      * @brief   Get the greatest global extended IO pin number that belongs to
      *          this extended IO element.
      */
-    pin_t getEnd();
+    pin_t getEnd() const;
     /**
      * @brief   Get the smallest global extended IO pin number that belongs to
      *          this extended IO element.
      */
-    pin_t getStart();
+    pin_t getStart() const;
 
     static DoublyLinkedList<ExtendedIOElement>& getAll();
 
   private:
     const pin_t length;
     const pin_t start;
-    const pin_t end; // TODO: implicit
+    const pin_t end;
     static pin_t offset;
 
     static DoublyLinkedList<ExtendedIOElement> elements;

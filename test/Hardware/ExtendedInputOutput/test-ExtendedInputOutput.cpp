@@ -63,3 +63,30 @@ TEST(ExtendedInputOutput, pinOutOfBoundsLt) {
         EXPECT_EQ(e.getErrorCode(), 0x4567);
     }
 }
+
+TEST(ExtendedInputOutput, nonExistentPin) {
+    MockExtIOElement el = {10};
+    pin_t pin = el.pin(9) + 1;
+    try {
+        digitalRead(pin);
+        FAIL();
+    } catch (ErrorException e) {
+        EXPECT_EQ(e.getErrorCode(), 0x8888);
+    }
+}
+
+TEST(ExtendedInputOutput, nonExistentPinOfDeletedElement) {
+    MockExtIOElement el_1 = {10};
+    pin_t pin;
+    {
+        MockExtIOElement el_2 = {10};
+        pin = el_2.pin(0);
+    }
+    MockExtIOElement el_3 = {10};
+    try {
+        digitalRead(pin);
+        FAIL();
+    } catch (ErrorException e) {
+        EXPECT_EQ(e.getErrorCode(), 0x8888);
+    }
+}

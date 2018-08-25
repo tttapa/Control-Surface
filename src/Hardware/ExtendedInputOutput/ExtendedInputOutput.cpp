@@ -1,7 +1,7 @@
 #include "ExtendedInputOutput.h"
 #include "ExtendedIOElement.h"
 #include <Arduino.h>
-#include <Helpers/Debug.hpp>
+#include <Helpers/Error.hpp>
 
 namespace ExtIO {
 
@@ -12,8 +12,14 @@ bool inRange(T target, T start, T end) {
 
 ExtendedIOElement *getIOElementOfPin(pin_t pin) {
     for (ExtendedIOElement &el : ExtendedIOElement::getAll())
-        if (inRange(pin, el.getStart(), el.getEnd()))
+        if (pin < el.getStart())
+            break;
+        else if (inRange(pin, el.getStart(), el.getEnd()))
             return &el;
+
+    ERROR(F("Error: the given pin does not correspond to an Extended IO "
+            "element."),
+          0x8888);
     return nullptr;
 }
 
