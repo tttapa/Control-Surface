@@ -1,6 +1,7 @@
 #include <gmock/gmock.h>
 
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Helpers/Error.hpp>
 
 using namespace ::testing;
 using namespace ExtIO;
@@ -39,4 +40,26 @@ TEST(ExtendedInputOutput, digitalRead) {
     digitalRead(el_2.pin(9));
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
+TEST(ExtendedInputOutput, pinOutOfBoundsGt) {
+    MockExtIOElement el = {10};
+    el.pin(9);
+    try {
+        el.pin(10);
+        FAIL();
+    } catch (ErrorException e) {
+        EXPECT_EQ(e.getErrorCode(), 0x4567);
+    }
+}
+
+TEST(ExtendedInputOutput, pinOutOfBoundsLt) {
+    MockExtIOElement el = {10};
+    el.pin(0);
+    try {
+        el.pin(-1);
+        FAIL();
+    } catch (ErrorException e) {
+        EXPECT_EQ(e.getErrorCode(), 0x4567);
+    }
 }

@@ -3,6 +3,7 @@
 #include <Def/Def.hpp>
 #include <Helpers/Error.hpp>
 #include <stdint.h>
+#include <Helpers/Helpers.hpp>
 
 template <setting_t N> // TODO: check bounds here?
 class Selectable {
@@ -11,7 +12,7 @@ class Selectable {
         : initialSelection(initialSelection) {}
     virtual void select(setting_t setting) = 0;
     static setting_t validateSetting(setting_t setting) {
-        static_assert(setting_t(-1) > setting_t(0),
+        static_assert(is_unsigned<setting_t>::value,
                       "Error: setting_t should be an unsigned integer type.");
         if (setting >= N) {
             ERROR(F("Error: Setting ")
