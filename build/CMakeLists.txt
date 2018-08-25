@@ -36,7 +36,7 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest/googletest-src
 include(GoogleTest)
 enable_testing()
 
-add_definitions("-g -Wall -Wextra -Wpedantic -fdiagnostics-show-option")
+add_definitions("-g -Og -Wall -Wextra -fdiagnostics-show-option")
 
 #include Google Mock
 include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googlemock/include)

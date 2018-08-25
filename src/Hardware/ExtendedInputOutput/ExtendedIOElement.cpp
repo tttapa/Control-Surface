@@ -3,17 +3,15 @@
 
 ExtendedIOElement::ExtendedIOElement(pin_t length)
     : length(length), start(offset), end(offset + length) {
-    LinkedList::append(this, first, last);
+    elements.append(this);
     offset = end;
 }
 
-ExtendedIOElement::~ExtendedIOElement() {
-    LinkedList::remove(this, first, last);
-}
+ExtendedIOElement::~ExtendedIOElement() { elements.remove(this); }
 
 void ExtendedIOElement::beginAll() {
-    for (ExtendedIOElement *el = first; el; el = el->next)
-        el->begin();
+    for (ExtendedIOElement &e : elements)
+        e.begin();
 }
 
 pin_t ExtendedIOElement::pin(pin_t p) { return p + start; }
@@ -22,9 +20,10 @@ pin_t ExtendedIOElement::getEnd() { return end; }
 
 pin_t ExtendedIOElement::getStart() { return start; }
 
-ExtendedIOElement *ExtendedIOElement::getNext() { return next; }
-ExtendedIOElement *ExtendedIOElement::getFirst() { return first; }
+DoublyLinkedList<ExtendedIOElement> &ExtendedIOElement::getAll() {
+    return elements;
+}
 
-ExtendedIOElement *ExtendedIOElement::first = nullptr;
-ExtendedIOElement *ExtendedIOElement::last = nullptr;
+DoublyLinkedList<ExtendedIOElement> ExtendedIOElement::elements;
+
 pin_t ExtendedIOElement::offset = NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS;

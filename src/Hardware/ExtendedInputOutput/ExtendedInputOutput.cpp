@@ -5,11 +5,15 @@
 
 namespace ExtIO {
 
+template <class T>
+bool inRange(T target, T start, T end) {
+    return target >= start && target < end;
+}
+
 ExtendedIOElement *getIOElementOfPin(pin_t pin) {
-    for (ExtendedIOElement *el = ExtendedIOElement::getFirst(); el != nullptr;
-         el = el->getNext())
-        if (pin >= el->getStart() && pin < el->getEnd())
-            return el;
+    for (ExtendedIOElement &el : ExtendedIOElement::getAll())
+        if (inRange(pin, el.getStart(), el.getEnd()))
+            return &el;
     return nullptr;
 }
 
@@ -38,7 +42,6 @@ void digitalWrite(pin_t pin, uint8_t val) {
 void digitalWrite(int pin, uint8_t val) { digitalWrite((pin_t)pin, val); }
 
 int digitalRead(pin_t pin) {
-    // DEBUGFN(DEBUGVAR(pin));
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         return ::digitalRead(pin);
     } else {

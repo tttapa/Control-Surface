@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Helpers/LinkedList.h>
 #include <Def/Def.hpp>
+#include <Helpers/LinkedList.hpp>
 
 /**
  * @brief   A class for extended IO elements.
@@ -43,7 +43,7 @@
  *          extended IO pin number uses linear search, so that might add
  *          some noticable overhead for large pin numbers.
  */
-class ExtendedIOElement {
+class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
   protected:
     ExtendedIOElement(pin_t length);
 
@@ -89,20 +89,13 @@ class ExtendedIOElement {
      */
     pin_t getStart();
 
-    ExtendedIOElement *getNext();
-    static ExtendedIOElement *getFirst();
+    static DoublyLinkedList<ExtendedIOElement>& getAll();
 
   private:
     const pin_t length;
     const pin_t start;
-    const pin_t end;
+    const pin_t end; // TODO: implicit
     static pin_t offset;
 
-    ExtendedIOElement *next = nullptr, *previous = nullptr;
-    static ExtendedIOElement *last;
-    static ExtendedIOElement *first;
-    template <class Node>
-    friend void LinkedList::append(Node *, Node *&, Node *&);
-    template <class Node>
-    friend void LinkedList::remove(Node *, Node *&, Node *&);
+    static DoublyLinkedList<ExtendedIOElement> elements;
 };
