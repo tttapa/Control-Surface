@@ -92,7 +92,6 @@ long random(long, long);
 void randomSeed(unsigned long);
 long map(long, long, long, long, long);
 
-
 // #include "pins_arduino.h"
 void cli();
 void sei();
@@ -116,6 +115,8 @@ class ArduinoMock {
 
     MOCK_METHOD0(millis, unsigned long());
     MOCK_METHOD0(micros, unsigned long());
+
+    virtual ~ArduinoMock() = default;
 };
 
 #endif

@@ -1,1 +1,5 @@
+2:Serial.write_byte
+3:Serial.write_bytes
+4:Serial.print_string
+5:Serial.println_string
 150:Tests

@@ -44,6 +44,8 @@ class HardwareSerial : public Stream {
 
     MOCK_METHOD1(write, size_t(uint8_t));
     MOCK_METHOD2(write, size_t(const uint8_t *, size_t));
+
+    virtual ~HardwareSerial() = default;
 };
 
 extern HardwareSerial Serial;

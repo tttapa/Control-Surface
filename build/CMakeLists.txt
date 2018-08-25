@@ -33,6 +33,8 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest/googletest-src
                  EXCLUDE_FROM_ALL)
 # </copy>
 
+set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+
 include(GoogleTest)
 enable_testing()
 
