@@ -16,7 +16,10 @@
 #error "Please select a 'Serial + MIDI' option in the 'Tools > USB Type' menu."
 #endif
 
-// -------------------------------------------------------------------------- //
+// ------------------------------- Main Logic ------------------------------- //
+#include <Control_Surface/Control_Surface_Class.h>
+
+// -------------------------------- Display --------------------------------- //
 #include "Display/Bitmaps/XBitmaps.h"
 #include "Display/MCU/TimeDisplayDisplay.hpp"
 #include "Display/MCU/VPotDisplay.hpp"
@@ -24,10 +27,7 @@
 #include "Display/NoteBitmapDisplay.hpp"
 #include "Display/SelectorDisplay.hpp"
 
-// -------------------------------------------------------------------------- //
-#include <Control_Surface/Control_Surface_Class.h>
-
-// -------------------------------------------------------------------------- //
+// ------------------------------ MIDI Outputs ------------------------------ //
 #include <MIDI_Outputs/CCButton.hpp>
 #include <MIDI_Outputs/CCButtonLatching.hpp>
 #include <MIDI_Outputs/CCButtonMatrix.hpp>
@@ -57,21 +57,17 @@
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
 #endif
 
-// -------------------------------------------------------------------------- //
+// ------------------------------ MIDI Inputs ------------------------------- //
 #include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
 #include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
 #include <MIDI_Inputs/MIDINote.hpp>
 
-// -------------------------------------------------------------------------- //
 #include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
 #include <MIDI_Inputs/LEDs/MIDINoteLED.hpp>
 
-// -------------------------------------------------------------------------- //
-#include <Banks/Bank.h>
-
-// -------------------------------------------------------------------------- //
+// ------------------------------- Selectors -------------------------------- //
 #include <Selectors/IncrementDecrementSelector.hpp>
 #include <Selectors/IncrementSelector.hpp>
 #include <Selectors/ManyButtonsSelector.hpp>
@@ -88,24 +84,24 @@
 #include <Selectors/ProgramChanger.hpp>
 #include <Selectors/Transposer.hpp>
 
-// -------------------------------------------------------------------------- //
+// ---------------------------- MIDI Interfaces ----------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.h>
 #include <MIDI_Interfaces/SerialMIDI_Interface.h>
 #include <MIDI_Interfaces/USBMIDI_Interface.h>
 
-// -------------------------------------------------------------------------- //
+// ------------------------- Extended Input Output -------------------------- //
 #include <Hardware/ExtendedInputOutput/AnalogMultiplex.h>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <Hardware/ExtendedInputOutput/ShiftRegisterOut.h>
 
-// -------------------------------------------------------------------------- //
+// ----------------------------- MIDI Constants ----------------------------- //
 #include <MIDI_Constants/Control_Change.h>
 #include <MIDI_Constants/MCU.h>
 
-// -------------------------------------------------------------------------- //
+// ----------------------------- Array Helpers ------------------------------ //
 #include <Helpers/ArrayHelpers.hpp>
 
-// -------------------------------------------------------------------------- //
+// --------------------------------- Audio ---------------------------------- //
 #if defined(USB_MIDI_AUDIO_SERIAL) || defined(USB_MIDI16_AUDIO_SERIAL)
 #include <Audio/AudioVU.hpp>
 #include <Audio/AudioVULEDs.hpp>
