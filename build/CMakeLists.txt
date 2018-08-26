@@ -40,6 +40,9 @@ enable_testing()
 
 add_definitions("-g -Og -Wall -Wextra -fdiagnostics-show-option")
 
+#include Google Test
+include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googletest/include)
+
 #include Google Mock
 include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googlemock/include)
 
