@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(CORE_TEENSY) // || ... // TODO
+#if !defined(__AVR__) // || ... // TODO
 #define USE_UNIQUE_PTR   // No extra memory usage on Teensy 3.2 using TD 1.41
 #endif
 
