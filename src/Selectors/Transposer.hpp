@@ -21,9 +21,9 @@ class Transposer : public Bank<MAXIMUM_SEMITONES - MINIMUM_SEMITONES + 1> {
      *          since the addition will just overflow and truncate, but
      *          it's not really clean.
      * 
-     * @return uint8_t 
+     * @return setting_t 
      */
-    uint8_t getSelection() const override {
+    setting_t getSelection() const override {
         return Bank<MAXIMUM_SEMITONES - MINIMUM_SEMITONES + 1>::getSelection() +
                MINIMUM_SEMITONES;
     }

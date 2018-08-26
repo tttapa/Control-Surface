@@ -24,7 +24,7 @@ class OutputBank {
         }
     }
     void select(setting_t setting) { bankSetting = setting; }
-    setting_t getSelection() const { return bankSetting; }
+    virtual setting_t getSelection() const { return bankSetting; }
     uint8_t getTracksPerBank() const { return tracksPerBank; }
 
   private:
