@@ -20,16 +20,16 @@
 #ifndef Arduino_h
 #define Arduino_h
 
-#include <stdlib.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <string.h>
 #include <math.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "binary.h"
 
 #define HIGH 0x1
-#define LOW  0x0
+#define LOW 0x0
 
 #define INPUT 0x0
 #define OUTPUT 0x1
@@ -61,12 +61,13 @@ typedef bool boolean;
 
 //#define min(a,b) ((a)<(b)?(a):(b))
 //#define max(a,b) ((a)>(b)?(a):(b))
-#define abs(x) ((x)>0?(x):-(x))
-#define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
-#define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
+#define abs(x) ((x) > 0 ? (x) : -(x))
+#define constrain(amt, low, high)                                              \
+    ((amt) < (low) ? (low) : ((amt) > (high) ? (high) : (amt)))
+#define round(x) ((x) >= 0 ? (long)((x) + 0.5) : (long)((x)-0.5))
 #define radians(deg) ((deg)*DEG_TO_RAD)
 #define degrees(rad) ((rad)*RAD_TO_DEG)
-#define sq(x) ((x)*(x))
+#define sq(x) ((x) * (x))
 
 #define interrupts() sei()
 #define noInterrupts() cli()
@@ -82,9 +83,8 @@ unsigned long micros(void);
 
 void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val);
 
-
-#include "WCharacter.h"
 #include "HardwareSerial.h"
+#include "WCharacter.h"
 
 // WMath prototypes
 long random(long);
@@ -96,27 +96,6 @@ long map(long, long, long, long, long);
 void cli();
 void sei();
 
-// -------------------------------------------------------------------------- //
-
-class ArduinoMock {
-  private:
-    ArduinoMock() {}
-
-  public:
-    static ArduinoMock &getInstance() {
-        static ArduinoMock instance;
-        return instance;
-    }
-    MOCK_METHOD2(pinMode, void(uint8_t, uint8_t));
-    MOCK_METHOD2(digitalWrite, void(uint8_t, uint8_t));
-    MOCK_METHOD1(digitalRead, int(uint8_t));
-    MOCK_METHOD1(analogRead, int(uint8_t));
-    MOCK_METHOD2(analogWrite, void(uint8_t, int));
-
-    MOCK_METHOD0(millis, unsigned long());
-    MOCK_METHOD0(micros, unsigned long());
-
-    virtual ~ArduinoMock() = default;
-};
+#include "ArduinoMock.hpp"
 
 #endif

@@ -65,7 +65,6 @@ add_library(Control_Surface STATIC ${SOURCES})
 file(GLOB_RECURSE TESTS "../test/*.cpp")
 add_executable(tests ${TESTS})
 target_link_libraries(tests
-                      gtest_main
                       gmock
                       Control_Surface
                       ArduinoMock)

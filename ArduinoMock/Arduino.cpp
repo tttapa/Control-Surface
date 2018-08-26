@@ -1,4 +1,5 @@
 #include "Arduino.h"
+#include "ArduinoMock.hpp"
 
 void sei() {}
 void cli() {}
@@ -23,10 +24,6 @@ void analogWrite(uint8_t pin, int value) {
     ArduinoMock::getInstance().analogWrite(pin, value);
 }
 
-unsigned long millis() {
-    return ArduinoMock::getInstance().millis();
-}
+unsigned long millis() { return ArduinoMock::getInstance().millis(); }
 
-unsigned long micros() {
-    return ArduinoMock::getInstance().micros();
-}
+unsigned long micros() { return ArduinoMock::getInstance().micros(); }
