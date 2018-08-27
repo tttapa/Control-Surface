@@ -1,11 +1,12 @@
 #pragma once
 
+#include <Settings/SettingsWrapper.h>
+
 #ifdef ARDUINO
 
 // #define DEBUG_OUT Serial // Uncomment this line to override Arduino IDE debug
 // level
 
-#include <Settings/SettingsWrapper.h>
 #include <stdlib.h>
 
 #ifndef PRINTSTREAM_FALLBACK
@@ -49,11 +50,6 @@ using std::showbase;
 using std::uppercase;
 #ifndef Arduino_h
 #define F(x) (x)
-#endif
-
-#ifdef DEBUG_OUT
-#undef DEBUG_OUT
-#define DEBUG_OUT cout
 #endif
 
 #endif // Arduino

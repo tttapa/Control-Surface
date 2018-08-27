@@ -11,11 +11,15 @@ bool inRange(T target, T start, T end) {
 }
 
 ExtendedIOElement &getIOElementOfPin(pin_t pin) {
-    for (ExtendedIOElement &el : ExtendedIOElement::getAll())
+    DEBUGFN(DEBUGVAR(pin));
+    for (ExtendedIOElement &el : ExtendedIOElement::getAll()) {
+        DEBUGFN(DEBUGVAR(el.getStart()));
+        DEBUGFN(DEBUGVAR(el.getEnd()));
         if (pin < el.getStart())
             break;
         else if (inRange(pin, el.getStart(), el.getEnd()))
             return el;
+    }
 
     FATAL_ERROR(F("Error: the given pin does not correspond to an Extended IO "
                   "element."),

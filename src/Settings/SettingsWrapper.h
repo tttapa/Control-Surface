@@ -5,12 +5,16 @@
 // ======================= //
 #include "Settings.h"
 
+#ifndef ARDUINO
+#undef IGNORE_SYSEX
+#ifdef DEBUG_OUT
+#undef DEBUG_OUT
+#endif
+#define DEBUG_OUT std::cout
+#endif
+
 // ------- Debug ------- //
 // ===================== //
 #include <Helpers/Debug.hpp>
-
-#ifndef ARDUINO
-#undef IGNORE_SYSEX
-#endif
 
 #endif // SETTINGSWRAPPER_H

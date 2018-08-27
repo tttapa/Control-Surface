@@ -5,15 +5,19 @@
 
 ExtendedIOElement::ExtendedIOElement(pin_t length)
     : length(length), start(offset), end(offset + length) {
-    elements.append(this);
+    DEBUGFN(DEBUGVAR(++instances));
     offset = end;
     if (end < start)
         FATAL_ERROR(F("Error: ExtIO ran out of pin numbers. Dynamically "
                       "creating new ExtendedIOElements is not recommended."),
                     0x00FF);
+    elements.append(this);
 }
 
-ExtendedIOElement::~ExtendedIOElement() { elements.remove(this); }
+ExtendedIOElement::~ExtendedIOElement() {
+    elements.remove(this);
+    DEBUGFN(DEBUGVAR(--instances));
+}
 
 void ExtendedIOElement::beginAll() {
     for (ExtendedIOElement &e : elements)
@@ -46,3 +50,5 @@ DoublyLinkedList<ExtendedIOElement> &ExtendedIOElement::getAll() {
 DoublyLinkedList<ExtendedIOElement> ExtendedIOElement::elements;
 
 pin_t ExtendedIOElement::offset = NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS;
+
+long ExtendedIOElement::instances = 0; // TODO: remove

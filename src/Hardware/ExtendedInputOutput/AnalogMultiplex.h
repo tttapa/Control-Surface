@@ -1,14 +1,19 @@
 #pragma once
 
 #include "ExtendedIOElement.h"
-#include <Helpers/Copy.hpp>
+#include "ExtendedInputOutput.h"
+#include <Helpers/Array.hpp>
 #include <stdlib.h>
 
 /**
  * @brief   A class for reading multiplexed analog inputs.
  * 
  *          Supports 74HC4067, 74HC4051, etc.
+ * 
+ * @tparam  N 
+ *          The number of address lines.
  */
+template <uint8_t N>
 class AnalogMultiplex : public ExtendedIOElement {
   public:
     /**
@@ -17,19 +22,16 @@ class AnalogMultiplex : public ExtendedIOElement {
      * @param   analogPin
      *          The analog input pin connected to the output of the multiplexer.
      * @param   addressPins
-     *          A list of the pins connected to the address lines of the
+     *          An array of the pins connected to the address lines of the
      *          multiplexer.
-     * @note    The list of address pins is copied. This means that it is safe
-     *          to initialize it using a brace-enclosed initializer list.
+     * @param   enablePin
+     *          The digital output pin connected to the enable pin of the
+     *          multiplexer.
      */
-    template <class P, size_t N>
-    AnalogMultiplex(pin_t analogPin, const P (&addressPins)[N])
-        : ExtendedIOElement(1 << N), analogPin(analogPin), nb_addressPins(N) {
-        this->addressPins = new pin_t[N];
-        copy(this->addressPins, addressPins);
-        begin();
-    }
-    ~AnalogMultiplex() { delete[] addressPins; }
+    AnalogMultiplex(pin_t analogPin, const Array<pin_t, N> &addressPins,
+                    pin_t enablePin = NO_PIN)
+        : ExtendedIOElement(1 << N), analogPin(analogPin),
+          addressPins(addressPins), enablePin(enablePin) {}
 
     /**
      * @brief   Set the pin mode of the analog input pin.  
@@ -84,15 +86,79 @@ class AnalogMultiplex : public ExtendedIOElement {
      */
     void begin() override;
 
-    void update() override;
+    void update() override {}
 
   private:
     const pin_t analogPin;
-    pin_t *addressPins = nullptr;
-    const size_t nb_addressPins;
+    const Array<pin_t, N> addressPins;
+    const pin_t enablePin;
+
     /**
      * @brief   Write the pin number/address to the address pins of the 
      *          multiplexer. 
      */
     void setMuxAddress(uint8_t address);
+
+    void prepareReading(uint8_t address);
+
+    void afterReading();
+
+    constexpr static uint8_t ENABLED = LOW;
+    constexpr static uint8_t DISABLED = HIGH;
 };
+
+// -------------------------------------------------------------------------- //
+
+template <uint8_t N>
+void AnalogMultiplex<N>::pinMode(pin_t, uint8_t mode) {
+    ExtIO::pinMode(analogPin, mode);
+}
+
+template <uint8_t N>
+int AnalogMultiplex<N>::digitalRead(pin_t pin) {
+    prepareReading(pin);
+    int result = ExtIO::digitalRead(analogPin);
+    afterReading();
+    return result;
+}
+
+template <uint8_t N>
+analog_t AnalogMultiplex<N>::analogRead(pin_t pin) {
+    prepareReading(pin);
+    ExtIO::analogRead(analogPin); // Discard first reading
+    analog_t result = ExtIO::analogRead(analogPin);
+    afterReading();
+    return result;
+}
+
+template <uint8_t N>
+void AnalogMultiplex<N>::begin() {
+    for (const pin_t &addressPin : addressPins)
+        ExtIO::pinMode(addressPin, OUTPUT);
+    if (enablePin != NO_PIN) {
+        ExtIO::pinMode(enablePin, OUTPUT);
+        ExtIO::digitalWrite(enablePin, DISABLED);
+    }
+}
+
+template <uint8_t N>
+void AnalogMultiplex<N>::setMuxAddress(uint8_t address) {
+    uint8_t mask = 1;
+    for (const pin_t &addressPin : addressPins) {
+        ExtIO::digitalWrite(addressPin, (address & mask) != 0);
+        mask <<= 1;
+    }
+}
+
+template <uint8_t N>
+void AnalogMultiplex<N>::prepareReading(uint8_t address) {
+    setMuxAddress(address);
+    if (enablePin != NO_PIN)
+        ExtIO::digitalWrite(enablePin, ENABLED);
+}
+
+template <uint8_t N>
+void AnalogMultiplex<N>::afterReading() {
+    if (enablePin != NO_PIN)
+        ExtIO::digitalWrite(enablePin, DISABLED);
+}

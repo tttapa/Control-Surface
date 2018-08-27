@@ -35,8 +35,10 @@ class VULEDs_Base : public virtual VU_Base {
 template <uint8_t N>
 class VULEDs : public VU, public VULEDs_Base<N> {
   public:
-    VULEDs(uint8_t track, uint8_t channel, const DotBarDisplayLEDs<N> &leds)
-        : VU_Base(track, channel), VU(track, channel), VULEDs_Base<N>(leds) {}
+    VULEDs(uint8_t track, uint8_t channel, const DotBarDisplayLEDs<N> &leds,
+           unsigned int decayTime = 150)
+        : VU_Base(track, channel, decayTime),
+          VU(track, channel), VULEDs_Base<N>(leds) {}
 };
 
 namespace Bankable {

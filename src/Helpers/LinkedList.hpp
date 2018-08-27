@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdlib.h>
+#include <Helpers/Debug.hpp>
 
 template <class Node>
 class DoublyLinkedList {
@@ -32,6 +33,8 @@ class DoublyLinkedList {
      *          A pointer to the node to be removed.
      */
     void remove(Node *node) {
+        DEBUGFN(DEBUGVAR((node == first)));
+        DEBUGFN(DEBUGVAR((node == last)));
         if (node->previous != nullptr)
             node->previous->next = node->next;
         if (node == last)
@@ -170,4 +173,5 @@ class DoublyLinkable {
     friend class DoublyLinkedList<Node>;
     Node *next = nullptr;
     Node *previous = nullptr;
+    virtual ~DoublyLinkable() = default;
 };

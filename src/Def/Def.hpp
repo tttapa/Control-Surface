@@ -7,11 +7,11 @@
 typedef uint16_t pin_t;
 typedef int16_t analog_t;
 
-constexpr pin_t NO_PIN = 0xFFFF;
+constexpr pin_t NO_PIN = {0x8000};
 
 using MappingFunction = int (*)(int);
 
-constexpr uint8_t NO_ADDRESS = 0x80;
+constexpr uint8_t NO_ADDRESS = {0x80};
 
 template <size_t N>
 using PinList = Array<pin_t, N>;
