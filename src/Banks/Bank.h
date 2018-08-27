@@ -58,14 +58,19 @@ class Bank : public Selectable<N>, public OutputBank {
      *
      * @param   tracksPerBank
      *          The number of tracks (i.e. addresses or channels) that
-     *          are skipped when the bank setting changes.
+     *          are skipped when the bank setting changes.  
+     *          Must be greater than zero.
+     * @param   initialSelection
+     *          The initial bank setting.
      */
     Bank(uint8_t tracksPerBank = 1, setting_t initialSelection = 0)
         : Selectable<N>(initialSelection),
           OutputBank(tracksPerBank, initialSelection) {}
 
     /**
-     * @brief   Set the Bank Setting
+     * @brief   Set the Bank Setting to the given value.
+     * 
+     * All BankableMIDIInputAddressable will be updated.
      *
      * @param   bankSetting
      *          The new Bank Setting.
@@ -74,13 +79,23 @@ class Bank : public Selectable<N>, public OutputBank {
 
   private:
     /**
-     * @brief   Add a Bankable to the bank.
+     * @brief   Add a BankableMIDIInputAddressable to the bank.
+     * 
+     * This method is called in the BankableMIDIInputAddressable constructor.
      *
      * @param   bankable
-     *          The Bankable to be added.
+     *          The BankableMIDIInputAddressable to be added.
      */
     void add(BankableMIDIInputAddressable<N> *bankable);
 
+    /**
+     * @brief   Remove a BankableMIDIInputAddressable from the bank.
+     * 
+     * This method is called in the BankableMIDIInputAddressable destructor.
+     *
+     * @param   bankable
+     *          The BankableMIDIInputAddressable to be removed.
+     */
     void remove(BankableMIDIInputAddressable<N> *bankable);
 
     DoublyLinkedList<BankableMIDIInputAddressable<N>> inputBankables;
