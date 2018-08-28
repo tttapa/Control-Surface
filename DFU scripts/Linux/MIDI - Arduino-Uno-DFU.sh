@@ -2,7 +2,7 @@
 
 cd "$(dirname "${BASH_SOURCE}")"
 
-read -p "Are you sure you want to flash your ATmega16U2 with the HIDuino MIDI firmware? [Y/n]: " confirm
+read -p "Are you sure you want to flash your ATmega16U2 with the HIDuino MIDI firmware? [y/N]: " confirm
 if [ "$confirm" = y ] || [ "$confirm" = Y ]
 then 
 if [ ! -e arduino_midi.hex ]
