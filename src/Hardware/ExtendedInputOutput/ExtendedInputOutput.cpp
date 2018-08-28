@@ -11,15 +11,11 @@ bool inRange(T target, T start, T end) {
 }
 
 ExtendedIOElement &getIOElementOfPin(pin_t pin) {
-    DEBUGFN(DEBUGVAR(pin));
-    for (ExtendedIOElement &el : ExtendedIOElement::getAll()) {
-        DEBUGFN(DEBUGVAR(el.getStart()));
-        DEBUGFN(DEBUGVAR(el.getEnd()));
+    for (ExtendedIOElement &el : ExtendedIOElement::getAll())
         if (pin < el.getStart())
             break;
         else if (inRange(pin, el.getStart(), el.getEnd()))
             return el;
-    }
 
     FATAL_ERROR(F("Error: the given pin does not correspond to an Extended IO "
                   "element."),
@@ -34,7 +30,7 @@ ExtendedIOElement &getIOElementOfPin(pin_t pin) {
 }
 
 void pinMode(pin_t pin, uint8_t mode) {
-    DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(mode));
+    // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(mode));
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::pinMode(pin, mode);
     } else {
@@ -45,7 +41,7 @@ void pinMode(pin_t pin, uint8_t mode) {
 void pinMode(int pin, uint8_t mode) { pinMode((pin_t)pin, mode); }
 
 void digitalWrite(pin_t pin, uint8_t val) {
-    DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
+    // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::digitalWrite(pin, val);
     } else {

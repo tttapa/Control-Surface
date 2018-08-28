@@ -98,6 +98,4 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
     static pin_t offset;
 
     static DoublyLinkedList<ExtendedIOElement> elements;
-
-    static long instances;
 };
