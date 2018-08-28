@@ -33,8 +33,6 @@ class DoublyLinkedList {
      *          A pointer to the node to be removed.
      */
     void remove(Node *node) {
-        DEBUGFN(DEBUGVAR((node == first)));
-        DEBUGFN(DEBUGVAR((node == last)));
         if (node->previous != nullptr)
             node->previous->next = node->next;
         if (node == last)
