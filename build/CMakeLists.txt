@@ -78,7 +78,7 @@ gtest_discover_tests(tests)
 add_test(NAME Tests COMMAND tests)
 
 # Add documentation target
-add_custom_target(documentation "doxygen"
+add_custom_target(documentation ./Scripts/examples.py && doxygen
                   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/../doc/Doxygen")
 
 # Add XBM target

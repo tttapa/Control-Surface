@@ -1,11 +1,13 @@
 *
 !/**/
 !*.*
-doc/Doxygen/*
+doc/Doxygen/html/
+doc/Doxygen/MathJax/
 
 !doc/Doxygen/Doxyfile
 !doc/Doxygen/svg
 !Makefile
+*.tmp
 *.hex
 # .vscode/
 TODO.txt
