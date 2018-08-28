@@ -59,6 +59,7 @@ add_library(ArduinoMock STATIC ${ARDUINO_SOURCES})
 include_directories("../mock")
 
 # add_definitions(-DANALOG_FILTER_SHIFT_FACTOR_OVERRIDE=2)
+add_definitions(-DNO_DEBUG_PRINTS)
 
 # Control Surface library files
 include_directories("../src")

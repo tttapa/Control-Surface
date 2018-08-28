@@ -10,7 +10,9 @@
 #ifdef DEBUG_OUT
 #undef DEBUG_OUT
 #endif
+#ifndef NO_DEBUG_PRINTS
 #define DEBUG_OUT std::cout
+#endif
 #endif
 
 // ------- Debug ------- //
