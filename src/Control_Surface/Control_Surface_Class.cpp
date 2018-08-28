@@ -31,6 +31,8 @@ void Control_Surface_::begin() {
     Updatable<Potentiometer>::beginAll();
     Updatable<MotorFader>::beginAll();
     Updatable<Display>::beginAll();
+    potentiometerTimer.begin();
+    displayTimer.begin();
 }
 
 void Control_Surface_::loop() {
