@@ -43,7 +43,6 @@ USBMIDI_Interface midi;
 // Instantiate a multiplexer with three address lines.
 AnalogMultiplex<3> mux = { 18, {19, 20, 21} };
 
-
 const pin_t latchPin = 10;  // Pin connected to ST_CP of 74HC595
 const pin_t dataPin  = 12;  // Pin connected to DS of 74HC595
 const pin_t clockPin = 13;  // Pin connected to SH_CP of 74HC595

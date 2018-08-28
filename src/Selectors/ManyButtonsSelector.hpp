@@ -5,7 +5,7 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 
 template <setting_t N>
-class ManyButtonsSelector_Base : public virtual Selector<N> {
+class ManyButtonsSelector_Base : virtual public Selector<N> {
   protected:
     ManyButtonsSelector_Base(const PinList<N> &buttonPins)
         : buttonPins(buttonPins) {}

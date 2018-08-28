@@ -6,7 +6,7 @@
 namespace MCU {
 
 template <uint8_t N>
-class VULEDs_Base : public virtual VU_Base {
+class VULEDs_Base : virtual public VU_Base {
   protected:
     VULEDs_Base(const DotBarDisplayLEDs<N> &leds) : leds(leds) {}
 

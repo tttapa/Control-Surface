@@ -172,7 +172,7 @@ namespace Bankable {
  *          The number of banks.
  */
 template <size_t N>
-class VU : public virtual VU_Base, public BankableMIDIInputAddressable<N> {
+class VU : virtual public VU_Base, public BankableMIDIInputAddressable<N> {
   public:
     /** 
      * @brief   Construct a new Bankable VU object.

@@ -25,6 +25,8 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
             } else if (midimsg.header == TuneRequest) {
                 ; // Tune request (not implemented)
             }
+#else
+            (void)previousHeader;
 #endif // IGNORE_SYSEX
         }
     } else {

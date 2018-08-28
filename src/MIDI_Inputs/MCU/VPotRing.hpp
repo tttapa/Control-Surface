@@ -85,7 +85,7 @@ class VPotRing_Base : public MIDIInputElementCC {
  *          Universal V-Pots.  
  *          This version cannot be banked.
  */
-class VPotRing : public virtual VPotRing_Base {
+class VPotRing : virtual public VPotRing_Base {
   public:
     VPotRing(uint8_t track, uint8_t channel = 1)
         : VPotRing_Base(track, channel) {}
@@ -116,7 +116,7 @@ namespace Bankable {
  *          The number of banks.
  */
 template <uint8_t N>
-class VPotRing : public virtual VPotRing_Base,
+class VPotRing : virtual public VPotRing_Base,
                  public BankableMIDIInputAddressable<N> {
   public:
     VPotRing(const BankConfigAddressable<N> &config, uint8_t track,

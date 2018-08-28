@@ -5,7 +5,7 @@
 
 namespace MCU {
 
-class VPotRingLEDs_Base : public virtual VPotRing_Base {
+class VPotRingLEDs_Base : virtual public VPotRing_Base {
   public:
     VPotRingLEDs_Base(const LEDs<11> &leds) : leds(leds) {}
 

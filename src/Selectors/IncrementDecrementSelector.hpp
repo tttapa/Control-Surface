@@ -4,7 +4,7 @@
 #include <Hardware/IncrementDecrementButtons.hpp>
 
 template <setting_t N>
-class IncrementDecrementSelector_Base : public virtual Selector<N> {
+class IncrementDecrementSelector_Base : virtual public Selector<N> {
   public:
     IncrementDecrementSelector_Base(const IncrementDecrementButtons &buttons,
                                     bool wrap = true)

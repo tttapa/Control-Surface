@@ -5,7 +5,7 @@
 #include <Selectors/Selector.hpp>
 
 template <setting_t N>
-class SelectorLEDs : public virtual Selector<N> {
+class SelectorLEDs : virtual public Selector<N> {
   public:
     SelectorLEDs(const PinList<N> &ledPins) : ledPins(ledPins) {}
 

@@ -3,23 +3,25 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <MIDI_Inputs/MIDINote.hpp>
 
-class MIDINoteLED_Base : public virtual MIDINote_Base {
-  public:
+/** A base class for MIDI note input LED display. */
+class MIDINoteLED_Base : virtual public MIDINote_Base {
+  protected:
     MIDINoteLED_Base(pin_t ledPin) : ledPin(ledPin) {}
 
+  public:
     void begin() override { ExtIO::pinMode(ledPin, OUTPUT); }
 
   private:
     void display() const override {
-        ExtIO::digitalWrite(ledPin, getValue() >= 64);
+        ExtIO::digitalWrite(ledPin, getState());
     }
 
-  private:
     const pin_t ledPin;
 };
 
 // -------------------------------------------------------------------------- //
 
+/** A class for MIDI note input LED display. */
 class MIDINoteLED : public MIDINote, public MIDINoteLED_Base {
   public:
     /**

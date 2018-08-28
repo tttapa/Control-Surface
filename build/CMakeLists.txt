@@ -33,10 +33,10 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest/googletest-src
                  EXCLUDE_FROM_ALL)
 # </copy>
 
-# SET (CMAKE_C_COMPILER "gcc")
-# SET (CMAKE_CXX_COMPILER "g++")
+# SET (CMAKE_C_COMPILER "clang")
+# SET (CMAKE_CXX_COMPILER "clang++")
 
-set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
+# set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
 
 include(GoogleTest)
 enable_testing()

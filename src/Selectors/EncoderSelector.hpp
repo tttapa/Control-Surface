@@ -11,7 +11,7 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 
 template <setting_t N>
-class EncoderSelector_Base : public virtual Selector<N> {
+class EncoderSelector_Base : virtual public Selector<N> {
   public:
     EncoderSelector_Base(const EncoderSwitchPinList &pins,
                          uint8_t pulsesPerStep = 4, bool wrap = true)

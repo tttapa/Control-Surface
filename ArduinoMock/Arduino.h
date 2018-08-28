@@ -81,6 +81,8 @@ void analogWrite(uint8_t, int);
 unsigned long millis(void);
 unsigned long micros(void);
 
+void delay(unsigned long);
+
 void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val);
 
 #include "HardwareSerial.h"

@@ -2,15 +2,16 @@
 
 #include "MIDIInputElementNote.hpp"
 
+/** An abstract base class for MIDI note input. */
 class MIDINote_Base : public MIDIInputElementNote {
   protected:
     MIDINote_Base(); // unused, only for virtual inheritance
-    MIDINote_Base(uint8_t note, uint8_t channel = 1)
+    MIDINote_Base(uint8_t note, uint8_t channel)
         : MIDIInputElementNote(channel, note) {}
 
   public:
     virtual uint8_t getValue() const = 0;
-    bool getState() { return getValue() >= NOTE_VELOCITY_THRESHOLD; }
+    bool getState() const { return getValue() >= NOTE_VELOCITY_THRESHOLD; }
 
   protected:
     uint8_t getValueFromMIDIMessage(const MIDI_message_matcher &midimsg) {
@@ -23,7 +24,8 @@ class MIDINote_Base : public MIDIInputElementNote {
 
 // -------------------------------------------------------------------------- //
 
-class MIDINote : public virtual MIDINote_Base {
+/** A class for MIDI note input. */
+class MIDINote : virtual public MIDINote_Base {
   public:
     MIDINote(uint8_t note, uint8_t channel = 1)
         : MIDINote_Base(note, channel) {}
@@ -47,8 +49,9 @@ class MIDINote : public virtual MIDINote_Base {
 
 namespace Bankable {
 
+/** A class for Bankable MIDI note input. */
 template <uint8_t N>
-class MIDINote : public virtual MIDINote_Base,
+class MIDINote : virtual public MIDINote_Base,
                  public BankableMIDIInputAddressable<N> {
   public:
     MIDINote(const BankConfigAddressable<N> &config, uint8_t note,
