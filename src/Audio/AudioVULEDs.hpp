@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Audio/AudioVU.hpp>
+#include <Def/Def.hpp>
 #include <Hardware/LEDs/VULEDs.hpp>
 
 /**
@@ -13,7 +14,7 @@
  * @ingroup Audio
  */
 template <uint8_t N>
-class AudioVULEDs : public AudioVU, public Updatable {
+class AudioVULEDs : public AudioVU, public Updatable<AudioVU> {
   public:
     AudioVULEDs(const DotBarDisplayLEDs<N> &vuleds, AudioAnalyzePeak &level,
                 float gain = 1.0)

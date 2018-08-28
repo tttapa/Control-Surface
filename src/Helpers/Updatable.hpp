@@ -5,7 +5,8 @@
 #include <Settings/SettingsWrapper.h>
 #include <stddef.h>
 
-class Updatable : public DoublyLinkable<Updatable> {
+template <class T>
+class Updatable : public DoublyLinkable<Updatable<T>> {
   public:
     Updatable() { updatables.append(this); }
 
@@ -58,22 +59,25 @@ class Updatable : public DoublyLinkable<Updatable> {
 
     static void enable(Updatable &element) { element.enable(); }
 
-    template <class T, size_t N>
-    static void enable(T (&array)[N]) {
-        for (T &el : array)
+    template <class U, size_t N>
+    static void enable(U (&array)[N]) {
+        for (U &el : array)
             enable(el);
     }
 
-    static void disable(Updatable *element) { element->disable(); }
+    static void disable(Updatable<T> *element) { element->disable(); }
 
-    static void disable(Updatable &element) { element.disable(); }
+    static void disable(Updatable<T> &element) { element.disable(); }
 
-    template <class T, size_t N>
-    static void disable(T (&array)[N]) {
-        for (T &el : array)
+    template <class U, size_t N>
+    static void disable(U (&array)[N]) {
+        for (U &el : array)
             disable(el);
     }
 
   private:
-    static DoublyLinkedList<Updatable> updatables;
+    static DoublyLinkedList<Updatable<T>> updatables;
 };
+
+template <class T>
+DoublyLinkedList<Updatable<T>> Updatable<T>::updatables;

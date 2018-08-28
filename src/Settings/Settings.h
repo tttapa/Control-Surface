@@ -49,10 +49,9 @@ constexpr unsigned long LONG_PRESS_DELAY = 450; // milliseconds
 /** The time between increments/decremnets during a long press. */
 constexpr unsigned long LONG_PRESS_REPEAT_DELAY = 200; // milliseconds
 
-/** The interval between updating all inputs, in microseconds (µs).
- *  @todo Implement
+/** The interval between updating filtered analog inputs, in microseconds (µs).
  */
-constexpr unsigned long INPUT_UPDATE_INTERVAL = 1000; // microseconds
+constexpr unsigned long FILTERED_INPUT_UPDATE_INTERVAL = 1000; // microseconds
 
 /** The time in milliseconds it takes for the VU meter display peak bar to drop 
  *  one unit (i.e. one twelfth of the complete scale). */
@@ -79,9 +78,9 @@ constexpr uint8_t NOTE_VELOCITY_THRESHOLD = 1;
 constexpr size_t SYSEX_BUFFER_SIZE = 128;
 
 /** The baud rate to use for Hairless MIDI. */
-#define HAIRLESS_BAUD 115200
+constexpr unsigned long HAIRLESS_BAUD = 115200;
 
 /** The maximum frame rate of the displays. */
-#define MAX_FPS 30
+constexpr uint8_t MAX_FPS = 30;
 
 // ========================================================================== //

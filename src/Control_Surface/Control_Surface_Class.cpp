@@ -14,7 +14,7 @@ Control_Surface_ &Control_Surface_::getInstance() {
 }
 
 void Control_Surface_::begin() {
-#if defined(PrintStream_h) && defined(ARDUINO) && defined(DEBUG_OUT)
+#if defined(ARDUINO) && defined(DEBUG_OUT)
     DEBUG_OUT.begin(115200);
 #endif
 #ifdef ARDUINO_ARCH_ESP32
@@ -24,28 +24,30 @@ void Control_Surface_::begin() {
     MIDI().begin(); // initialize the MIDI interface
     MIDI().setCallbacks(this);
     DisplayInterface::beginAll(); // initialize all displays
-    // MIDIOutputElement::beginAll();
     MIDIInputElementCC::beginAll();
     MIDIInputElementChannelPressure::beginAll();
     MIDIInputElementNote::beginAll();
-    // Selector::beginAll();
-    Updatable::beginAll();
+    Updatable<Normal>::beginAll();
+    Updatable<Potentiometer>::beginAll();
+    Updatable<MotorFader>::beginAll();
+    Updatable<Display>::beginAll();
 }
 
 void Control_Surface_::loop() {
-    // MIDIOutputElement::updateAll(); // TODO
-    // Selector::updateAll();
-    Updatable::updateAll();
+    Updatable<Normal>::updateAll();
+    if (potentiometerTimer)
+        Updatable<Potentiometer>::updateAll();
     updateMidiInput();
     updateInputs();
-    updateDisplays();
+    if (displayTimer)
+        updateDisplays();
 }
 
 MIDI_Interface &Control_Surface_::MIDI() {
     MIDI_Interface *midi = MIDI_Interface::getDefault();
-    if (midi == nullptr) {
+    if (midi == nullptr)
         FATAL_ERROR(F("Error: no default MIDI interface is selected."), 0xDEAD);
-    }
+
     return *midi;
 }
 
@@ -69,7 +71,7 @@ void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
 
     if (midimsg.type == CC && midimsg.data1 == 0x79) {
         // Reset All Controllers
-        DEBUG("Reset All Controllers");
+        DEBUG(F("Reset All Controllers"));
         MIDIInputElementCC::resetAll();
         MIDIInputElementChannelPressure::resetAll();
 
@@ -97,7 +99,6 @@ void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
 }
 
 void Control_Surface_::onSysExMessage(MIDI_Interface &midi) {
-
     // System Exclusive
 #ifdef DEBUG_MIDI_PACKETS
     const uint8_t *data = midi.getSysExBuffer();
@@ -118,12 +119,6 @@ void Control_Surface_::updateInputs() {
 }
 
 void Control_Surface_::updateDisplays() {
-    static unsigned long previousRefresh = millis();
-
-    if (millis() - previousRefresh < 1000 / MAX_FPS)
-        return;
-    previousRefresh += 1000 / MAX_FPS;
-
     DisplayInterface::clearAll();
     DisplayInterface::drawAllBackgrounds();
     DisplayElement::drawAll();

@@ -4,9 +4,10 @@
 #include <Helpers/Debug.hpp>
 #include <Helpers/LinkedList.h>
 #include <Helpers/Updatable.hpp>
+#include <Def/Def.hpp>
 
 template <setting_t N>
-class Selector : public Updatable {
+class Selector : public Updatable<Normal> {
   protected:
     Selector(); // Not used, only for virtual inheritance
     Selector(Selectable<N> &selectable) : selectable(selectable) {}

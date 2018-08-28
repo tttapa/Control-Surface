@@ -32,3 +32,9 @@ using ContinuousSendFunction14Bit = void (*)(uint16_t, uint8_t);
 using RelativeSendFunction = void (*)(long, uint8_t, uint8_t);
 
 using setting_t = uint8_t;
+
+// Updatable types:
+struct Normal {};
+struct Potentiometer {};
+struct MotorFader {};
+struct Display {};

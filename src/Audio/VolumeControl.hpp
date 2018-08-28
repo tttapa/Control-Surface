@@ -4,6 +4,7 @@
 #include <Helpers/Updatable.hpp>
 #include <Hardware/FilteredAnalog.h>
 #include <Audio.h>
+#include <Def/Def.hpp>
 
 /** 
  * @brief   A class for controlling the volume of AudioMixer4 objects using a 
@@ -15,7 +16,7 @@
  * @ingroup Audio
  */
 template <uint8_t N>
-class VolumeControl : public Updatable {
+class VolumeControl : public Updatable<Potentiometer> {
   public:
     VolumeControl(const Array<AudioMixer4*, N> &mixers, pin_t analogPin,
                   float maxGain = 1.0) 

@@ -4,6 +4,7 @@
 
 #include <Display/DisplayElement.hpp>
 #include <Display/DisplayInterface.hpp>
+#include <Helpers/MillisTimer.hpp>
 
 /** 
  * @brief   This class ensures initialization, updating, and interaction between
@@ -62,6 +63,9 @@ class Control_Surface_ : public MIDI_Callbacks {
      *          received.
      */
     void onSysExMessage(MIDI_Interface &midi) override;
+
+    Timer<micros> potentiometerTimer = {FILTERED_INPUT_UPDATE_INTERVAL};
+    Timer<micros> displayTimer = {1000000UL / MAX_FPS};
 };
 
 extern Control_Surface_ &Control_Surface;
