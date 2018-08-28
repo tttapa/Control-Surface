@@ -5,13 +5,13 @@
  * Connect 8 RGB LEDs (+ current limiting resistors) to the outputs of the shift registers.
  * 
  * ```
- * 10 >──────────────┬─────────────────────────────┬─────────────────────────────┐            
+ * 13 >──────────────┬─────────────────────────────┬─────────────────────────────┐            
  *        ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓
  *        ┃        SH_CP         ┃      ┃        SH_CP         ┃      ┃        SH_CP         ┃
  * 12 >───┨ Data in     Data out ┠──────┨ Data in     Data out ┠──────┨ Data in     Data out ┃
  *        ┃        ST_CP         ┃      ┃        ST_CP         ┃      ┃        ST_CP         ┃
  *        ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛
- * 11 >──────────────┴─────────────────────────────┴─────────────────────────────┘            
+ * 10 >──────────────┴─────────────────────────────┴─────────────────────────────┘            
  * ```
  * 
  * The order of the colors doesn't matter. You can change them in software using the
@@ -36,7 +36,7 @@
 
 using namespace ExtIO;
 
-const pin_t dataPin  = 11;  // Pin connected to DS of 74HC595
+const pin_t dataPin  = 12;  // Pin connected to DS of 74HC595
 const pin_t clockPin = 13;  // Pin connected to SH_CP of 74HC595
 const pin_t latchPin = 10;  // Pin connected to ST_CP of 74HC595
 

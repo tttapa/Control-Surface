@@ -7,13 +7,13 @@
  * Connect 8 RGB LEDs (+ current limiting resistors) to the outputs of the shift registers.
  * 
  * ```
- * 10 >──────────────┬─────────────────────────────┬─────────────────────────────┐            
+ * 13 >──────────────┬─────────────────────────────┬─────────────────────────────┐            
  *        ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓
  *        ┃        SH_CP         ┃      ┃        SH_CP         ┃      ┃        SH_CP         ┃
- * 12 >───┨ Data in     Data out ┠──────┨ Data in     Data out ┠──────┨ Data in     Data out ┃
+ * 11 >───┨ Data in     Data out ┠──────┨ Data in     Data out ┠──────┨ Data in     Data out ┃
  *        ┃        ST_CP         ┃      ┃        ST_CP         ┃      ┃        ST_CP         ┃
  *        ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛
- * 11 >──────────────┴─────────────────────────────┴─────────────────────────────┘            
+ * 10 >──────────────┴─────────────────────────────┴─────────────────────────────┘            
  * ```
  * 
  * The order of the colors doesn't matter. You can change them in software using the
@@ -31,6 +31,44 @@
  * same for the blue LEDs. This is repeated indefinitely.
  * 
  * Written by Pieter P, 13-07-2018  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   PushButtonsLEDsShiftRegMultiplex.ino
+ *
+ * @brief   This example demonstrates the use of push buttons and LEDs and how 
+ *          to use shift registers and analog multiplexers to save pins.  
+ * 
+ * Connections:  
+ * 
+ *   - 10: 74HC595 ST_CP
+ *   - 12: 74HC595 DS
+ *   - 13: 74HC595 SH_CP
+ *   - 18: 74HC4051 A (COM OUT/IN)
+ *   - 19: 74HC4051 S0
+ *   - 20: 74HC4051 S1
+ *   - 21: 74HC4051 S2
+ * 
+ * Connect eight momentary push buttons between the input pins of the 
+ * multiplexer and ground.  
+ * The internal pull-up resistor for the buttons will be enabled automatically.
+ * 
+ * Connect eight LEDs (and series resistors) between the eight outputs of the
+ * shift register and ground. 
+ * 
+ * Remember to connect the enable pins of both the multiplexer and the shift
+ * register to ground in order to enable them.
+ *  
+ * Pressing the first button will mute the first track, and will turn on the 
+ * first LED.  
+ * Pressing the second button will mute the second track, and will turn on the 
+ * second LED, and so on.
+ * 
+ * Map the Arduino as a Mackie Control Universal (MCU) or equivalent in your
+ * audio software.
+ * 
+ * Written by PieterP, 2018-08-28
  * https://github.com/tttapa/Control-Surface
  */
 
