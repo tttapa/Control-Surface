@@ -2,7 +2,7 @@
 
 import re
 import os
-from os.path import join, realpath
+from os.path import join, realpath, basename
 
 dirnm = os.path.dirname(os.path.realpath(__file__))
 doxydir = join(dirnm, '..')
@@ -39,14 +39,19 @@ for root, dirs, files in os.walk(exampledir):
         if file.endswith('.ino'):
             with open(join(root, file)) as example:
                 example_content = example.read()
-                m = re.search(r'/\*\*',example_content)
-                if m:
-                    print('Found documentation for', file)
-                    docstr = example_content.split("*/")[0]
+                s = example_content.split('/**',1)
+                if len(s) > 1:
+                    print('\t\033[0;32mFound documentation for', file, 
+                        '\033[0m')
+                    docstr = s[1].split('*/',1)[0]
+                    output += "/**\r\n * @example   "
+                    output += basename(file)
+                    output += "\r\n *"
                     output += docstr
                     output += "*/\r\n\r\n"
-
-print(output)
+                else:
+                    print('\t\033[0;33mWarning: no documentation for', file,
+                        '\033[0m')
 
 with open(outputfile, 'w') as f:
     f.write(output)

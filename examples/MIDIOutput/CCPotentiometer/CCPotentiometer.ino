@@ -1,7 +1,6 @@
 /**
- * @example CCPotentiometer.ino
- * 
- * This is an example of the `CCPotentiometer` class of the Control_Surface library.
+ * @brief   This is an example of the `CCPotentiometer` class of the 
+ *          Control_Surface library.
  * 
  * Connect a potentiometer to analog pin A0. This will be the MIDI channel volume of channel 1.  
  * Map it in your DAW or DJ software.
@@ -29,4 +28,3 @@ void loop() {
     // input has changed since last time, if so, send the new value over MIDI).
     Control_Surface.loop();
 }
-

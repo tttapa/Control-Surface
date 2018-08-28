@@ -1,13 +1,13 @@
 /**
-   Connections:
-
-   A0: wiper of a potentiometer to change the output volume
-   A1: wiper of a potentiometer to change the VU gain
-
-   9:  BCK (I²S)
-   11: SCK (I²S)
-   22: DIN (I²S)
-   23: LRCK (I²S)
+ * Connections:
+ *
+ * A0: wiper of a potentiometer to change the output volume
+ * A1: wiper of a potentiometer to change the VU gain
+ *
+ * 9:  BCK (I²S)
+ * 11: SCK (I²S)
+ * 22: DIN (I²S)
+ * 23: LRCK (I²S)
 */
 
 

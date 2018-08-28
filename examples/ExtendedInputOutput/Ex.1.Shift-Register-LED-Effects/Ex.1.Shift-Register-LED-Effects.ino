@@ -1,6 +1,4 @@
 /**
- * @example Ex.1.Shift-Register-LED-Effects.ino
- * 
  * This is an example of the ShiftRegisterOut class of the Control-Surface library.
  *
  * Connect three daisy-chained shift registersr to pins 11 (ST_CP), 12 (DS) and 10 (SH_CP).  
@@ -96,4 +94,3 @@ void loop() {
     delay(delayTime);
   }
 }
-

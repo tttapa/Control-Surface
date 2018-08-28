@@ -27,7 +27,8 @@ EncoderSelectorLEDs<transposer.N> sel = {
     generateIncrementalArray<pin_t, transposer.N>(sr.red(0), 3),
     {2, 3, 4},
     4,
-    false};
+    false
+};
 
 void setup() {
     Control_Surface.begin(); // Initialize Control Surface

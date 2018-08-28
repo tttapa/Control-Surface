@@ -1,7 +1,7 @@
 /**
-   @example OLED-Demo.ino
    @brief An extensive example demonstrating the use of DisplayElement%s
-          to display information from the DAW on a small OLED display.
+          to display information from the DAW on a small OLED display, and
+          the use of Audio elements to play USB audio.
 
    The example displays the cursor time location, play and record status,
    and for each of the 8 first tracks, it displays:
@@ -13,6 +13,9 @@
    There are two rotary encoders that control the pan of the selected
    tracks, two mute, solo, record, and select buttons for the tracks,
    and a play and record button.
+
+   The Teensy also acts as a USB audio interface, and it outputs the audio
+   over I²S.
 */
 
 #include <Encoder.h> // Include the Encoder library.

@@ -14,14 +14,23 @@ const uint8_t ShiftRegisterOut::greenBit = 1;
 const uint8_t ShiftRegisterOut::blueBit = 0;
 
 // Instantiate a transposer that transposes from -12 semitones to +12 semitones.
-Transposer <-4, +3> transposer;
+Transposer <-12, +12> transposer;
 
 // Instantiate a button on pin 5 sending note C3 (0x3C) on channel 1
 Bankable::NoteButton note = {transposer, 5, 0x3C, 1};
 
 // Instantiate an encoder selector with the encoder wired to pins 2 and 3 and
 // the switch pin connected to pin 4, with 4 pulses per step, without wrapping.
-EncoderSelectorLEDs<transposer.N> sel = { transposer, {sr.red(0), sr.red(1), sr.red(2), sr.red(3), sr.red(4), sr.red(5), sr.red(6), sr.red(7)}, {2, 3, 4}, 4, false };
+EncoderSelectorLEDs<transposer.N> sel = { 
+    transposer,
+    {
+        sr.red(0), sr.red(1), sr.red(2), sr.red(3), 
+        sr.red(4), sr.red(5), sr.red(6), sr.red(7)
+    }, 
+    {2, 3, 4},
+    4, 
+    false,
+};
 
 void setup() {
   Control_Surface.begin(); // Initialize Control Surface

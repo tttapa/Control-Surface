@@ -1,6 +1,6 @@
 /**
- * @example Ex.1.Shift-Register-LED-Effects.ino
- * 
+ * @example   Ex.1.Shift-Register-LED-Effects.ino
+ *
  * This is an example of the ShiftRegisterOut class of the Control-Surface library.
  *
  * Connect three daisy-chained shift registersr to pins 11 (ST_CP), 12 (DS) and 10 (SH_CP).  
@@ -35,9 +35,10 @@
  */
 
 /**
- * @example CCPotentiometer.ino
- * 
- * This is an example of the `CCPotentiometer` class of the Control_Surface library.
+ * @example   CCPotentiometer.ino
+ *
+ * @brief   This is an example of the `CCPotentiometer` class of the 
+ *          Control_Surface library.
  * 
  * Connect a potentiometer to analog pin A0. This will be the MIDI channel volume of channel 1.  
  * Map it in your DAW or DJ software.
@@ -47,9 +48,29 @@
  */
 
 /**
-   @example OLED-Demo.ino
+ * @example   OLED-Demo.ino
+ *
+ * @brief An extensive example demonstrating the use of DisplayElement%s
+ *        to display information from the DAW on a small OLED display.
+ *
+ * The example displays the cursor time location, play and record status,
+ * and for each of the 8 first tracks, it displays:
+ * mute, solo, record ready, pan, and VU level meter with peak indicator.
+ *
+ * Using a BankSelector, it displays two channels at once, and you can
+ * cycle through four banks to display all 8 tracks.
+ *
+ * There are two rotary encoders that control the pan of the selected
+ * tracks, two mute, solo, record, and select buttons for the tracks,
+ * and a play and record button.
+ */
+
+/**
+ * @example   OLED-Demo-Audio.ino
+ *
    @brief An extensive example demonstrating the use of DisplayElement%s
-          to display information from the DAW on a small OLED display.
+          to display information from the DAW on a small OLED display, and
+          the use of Audio elements to play USB audio.
 
    The example displays the cursor time location, play and record status,
    and for each of the 8 first tracks, it displays:
@@ -61,38 +82,28 @@
    There are two rotary encoders that control the pan of the selected
    tracks, two mute, solo, record, and select buttons for the tracks,
    and a play and record button.
+
+   The Teensy also acts as a USB audio interface, and it outputs the audio
+   over I²S.
 */
 
 /**
-   @example OLED-Demo.ino
-   @brief An extensive example demonstrating the use of DisplayElement%s
-          to display information from the DAW on a small OLED display.
-
-   The example displays the cursor time location, play and record status,
-   and for each of the 8 first tracks, it displays:
-   mute, solo, record ready, pan, and VU level meter with peak indicator.
-
-   Using a BankSelector, it displays two channels at once, and you can
-   cycle through four banks to display all 8 tracks.
-
-   There are two rotary encoders that control the pan of the selected
-   tracks, two mute, solo, record, and select buttons for the tracks,
-   and a play and record button.
+ * @example   VUMeterLEDs-USB-DAC.ino
+ *
+ * Connections:
+ *
+ * A0: wiper of a potentiometer to change the output volume
+ * A1: wiper of a potentiometer to change the VU gain
+ *
+ * 9:  BCK (I²S)
+ * 11: SCK (I²S)
+ * 22: DIN (I²S)
+ * 23: LRCK (I²S)
 */
 
 /**
-   Connections:
-
-   A0: wiper of a potentiometer to change the output volume
-   A1: wiper of a potentiometer to change the VU gain
-
-   9:  BCK (I²S)
-   11: SCK (I²S)
-   22: DIN (I²S)
-   23: LRCK (I²S)
-*/
-
-/**
+ * @example   VUMeterOLED-USB-DAC.ino
+ *
  * Connections:
  * 
  * A0: wiper of a potentiometer to change the output volume
