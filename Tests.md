@@ -17,9 +17,11 @@ cd build
 cmake .
 ```
 
-Normally, you don't have to run CMake if you make changes. Make will do that for
-you, it will automatically recompile files that have changed, and all new tests
-are automatically detected as well.
+Normally, you don't have to run CMake if you make changes. Make will will
+automatically recompile files that have changed, and all new tests in existing
+files are automatically detected as well.  
+If you add new implementation (`cpp`) files, Make will not be able to discover
+these automatically, so you'll have to run CMake again.
 
 ### 3. Build all libraries and the test executable
 ```sh
