@@ -93,6 +93,60 @@ TEST(AnalogMultiplex, analogReadEnable) {
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
+TEST(AnalogMultiplex, analogReadEnable3) {
+    AnalogMultiplex<3> mux = {A0, {2, 3, 4}, 6};
+
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(4, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(6, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, HIGH));
+    mux.begin();
+
+    ::testing::Sequence seq;
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(3, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(4, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, LOW))
+        .InSequence(seq);
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(A0))
+        .Times(2)
+        .InSequence(seq);
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, HIGH))
+        .InSequence(seq);
+    ExtIO::analogRead(mux.pin(0b111));
+
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(3, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(4, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, LOW))
+        .InSequence(seq);
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(A0))
+        .Times(2)
+        .InSequence(seq);
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, HIGH))
+        .InSequence(seq);
+    ExtIO::analogRead(mux.pin(0b000));
+
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(3, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(4, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, LOW))
+        .InSequence(seq);
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(A0))
+        .Times(2)
+        .InSequence(seq);
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, HIGH))
+        .InSequence(seq);
+    ExtIO::analogRead(mux.pin(0b110));
+
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
 TEST(AnalogMultiplex, digitalReadEnable) {
     AnalogMultiplex<4> mux = {A0, {2, 3, 4, 5}, 6};
 
