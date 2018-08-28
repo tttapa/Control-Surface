@@ -24,7 +24,7 @@ Bankable::NoteButton note = {transposer, 5, 0x3C, 1};
 // the switch pin connected to pin 4, with 4 pulses per step, without wrapping.
 EncoderSelectorLEDs<transposer.N> sel = {
     transposer,
-    generateIncrementalArray<pin_t, transposer.N>(sr.red(0), 3),
+    generateArray<pin_t, transposer.N>(sr.red(0), 3),
     {2, 3, 4},
     4,
     false

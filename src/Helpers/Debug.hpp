@@ -106,8 +106,14 @@ using std::uppercase;
 
 #else // ifdef DEBUG_OUT
 
-#define DEBUG(x) do {} while(0)
-#define DEBUGREF(x) do {} while(0)
-#define DEBUGFN(x) do {} while(0)
+#define DEBUG(x)                                                               \
+    do {                                                                       \
+    } while (0)
+#define DEBUGREF(x)                                                            \
+    do {                                                                       \
+    } while (0)
+#define DEBUGFN(x)                                                             \
+    do {                                                                       \
+    } while (0)
 
 #endif

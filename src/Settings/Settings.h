@@ -15,7 +15,7 @@
 // ========================================================================== //
 
 /** The debug output. */
-#define DEBUG_OUT Serial
+// #define DEBUG_OUT Serial
 
 // #define DEBUG_MIDI_PACKETS
 
@@ -69,7 +69,7 @@ constexpr bool VU_PEAK_SMOOTH_DECAY = true;
 constexpr uint8_t NOTE_VELOCITY_THRESHOLD = 1;
 
 /** Don't parse incomming System Exclusive messages. */
-// #define IGNORE_SYSEX
+#define IGNORE_SYSEX
 
 /** The length of the maximum System Exclusive message
  *  that can be received. The maximum length sent by

@@ -35,6 +35,31 @@
  */
 
 /**
+ * @example   PushButtonsLEDs.ino
+ *
+ * @brief   This example demonstrates the use of push buttons and LEDs.
+ * 
+ * Connections:
+ *  2:  momentary push button (to ground)
+ *  3:  momentary push button (to ground)
+ *  12: LED (+ series resistor, to ground)
+ *  13: LED (+ series resistor, to ground)
+ * 
+ * The internal pull-up resistors for the buttons will be enabled automatically.
+ *  
+ * Pressing the first button will mute the first track, and will turn on the 
+ * first LED.  
+ * Pressing the second button will solo the first track, and will turn on the 
+ * second LED.
+ * 
+ * Map the Arduino as a Mackie Control Universal (MCU) or equivalent in your
+ * audio software.
+ * 
+ * Written by PieterP, 2018-08-28
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   CCPotentiometer.ino
  *
  * @brief   This is an example of the `CCPotentiometer` class of the 

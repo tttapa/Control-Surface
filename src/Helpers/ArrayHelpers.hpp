@@ -41,7 +41,7 @@ class Incrementor {
  * 
  * For example:  
  * ```
- * auto x = generateIncrementalArray<unsigned int, 4>(2, 3);
+ * auto x = generateArray<unsigned int, 4>(2, 3);
  * ```
  * is equivalent to  
  * ```
@@ -62,7 +62,7 @@ class Incrementor {
  */
 template <class T, size_t N>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
-generateIncrementalArray(T start = 0, T increment = 1) {
+generateArray(T start = 0, T increment = 1) {
     Array<T, N> array = {};
     Incrementor<T> g(start, increment);
     generate(array.begin(), array.end(), g);

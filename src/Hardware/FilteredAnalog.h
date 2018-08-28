@@ -50,12 +50,22 @@ class FilteredAnalog {
     bool update();
 
     /**
-     * @brief   Get the filtered value of the analog input.
+     * @brief   Get the filtered value of the analog input with the mapping 
+     *          function applied.
      *
      * @return  The filtered value of the analog input, as a number
      *          of `PRECISION` bits wide.
      */
     uint8_t getValue() const;
+
+    /**
+     * @brief   Get the filtered value of the analog input without the mapping
+     *          function applied.
+     *
+     * @return  The filtered value of the analog input, as a number
+     *          of `PRECISION` bits wide.
+     */
+    uint8_t getRawValue() const;
 
   private:
     const pin_t analogPin;
@@ -81,13 +91,19 @@ bool FilteredAnalog<PRECISION>::update() {
     analog_t input =
         ExtIO::analogRead(analogPin); // read the raw analog input value
     input = filter.filter(input);     // apply a low-pass EMA filter
-    if (mapFn != nullptr)             // if a map function is specified
-        input = mapFn(input);         // apply the map function to the value
     return hysteresis.update(input);  // apply hysteresis
 }
 
 template <uint8_t PRECISION>
 uint8_t FilteredAnalog<PRECISION>::getValue() const {
+    uint8_t value = hysteresis.getValue();
+    if (mapFn != nullptr)             // if a map function is specified
+        value = mapFn(value);         // apply the map function to the value
+    return value;
+}
+
+template <uint8_t PRECISION>
+uint8_t FilteredAnalog<PRECISION>::getRawValue() const {
     return hysteresis.getValue();
 }
 

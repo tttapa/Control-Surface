@@ -5,8 +5,8 @@
 class MIDINote_Base : public MIDIInputElementNote {
   protected:
     MIDINote_Base(); // unused, only for virtual inheritance
-    MIDINote_Base(uint8_t track, uint8_t channel = 1)
-        : MIDIInputElementNote(channel, track) {}
+    MIDINote_Base(uint8_t note, uint8_t channel = 1)
+        : MIDIInputElementNote(channel, note) {}
 
   public:
     virtual uint8_t getValue() const = 0;
@@ -25,8 +25,8 @@ class MIDINote_Base : public MIDIInputElementNote {
 
 class MIDINote : public virtual MIDINote_Base {
   public:
-    MIDINote(uint8_t track, uint8_t channel = 1)
-        : MIDINote_Base(track, channel) {}
+    MIDINote(uint8_t note, uint8_t channel = 1)
+        : MIDINote_Base(note, channel) {}
 
     uint8_t getValue() const override { return value; }
 
@@ -51,10 +51,10 @@ template <uint8_t N>
 class MIDINote : public virtual MIDINote_Base,
                  public BankableMIDIInputAddressable<N> {
   public:
-    MIDINote(const BankConfigAddressable<N> &config, uint8_t track,
+    MIDINote(const BankConfigAddressable<N> &config, uint8_t note,
              uint8_t channel = 1)
-        : MIDINote_Base(track, channel), BankableMIDIInputAddressable<N>(
-                                             config) {}
+        : MIDINote_Base(note, channel), BankableMIDIInputAddressable<N>(
+                                            config) {}
 
     uint8_t getValue() const override {
         return values[this->getSelection()]; // TODO: N
