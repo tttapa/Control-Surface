@@ -12,13 +12,13 @@ TEST(IncrementSelector, pressWrap) {
 
     EXPECT_CALL(selectable, select(0));
 
-    Updatable<Normal>::beginAll();
+    Updatable<>::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -26,13 +26,13 @@ TEST(IncrementSelector, pressWrap) {
 
     EXPECT_CALL(selectable, select(1));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(3000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -40,13 +40,13 @@ TEST(IncrementSelector, pressWrap) {
 
     EXPECT_CALL(selectable, select(2));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(5000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(6000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -54,7 +54,7 @@ TEST(IncrementSelector, pressWrap) {
 
     EXPECT_CALL(selectable, select(0));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
@@ -68,13 +68,13 @@ TEST(IncrementSelector, pressNoWrap) {
 
     EXPECT_CALL(selectable, select(0));
 
-    Updatable<Normal>::beginAll();
+    Updatable<>::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -82,13 +82,13 @@ TEST(IncrementSelector, pressNoWrap) {
 
     EXPECT_CALL(selectable, select(1));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(3000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
@@ -96,19 +96,19 @@ TEST(IncrementSelector, pressNoWrap) {
 
     EXPECT_CALL(selectable, select(2));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(5000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(6000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

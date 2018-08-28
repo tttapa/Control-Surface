@@ -34,7 +34,7 @@ using RelativeSendFunction = void (*)(long, uint8_t, uint8_t);
 using setting_t = uint8_t;
 
 // Updatable types:
-struct Normal {};
+struct NormalUpdatable {};
 struct Potentiometer {};
 struct MotorFader {};
 struct Display {};

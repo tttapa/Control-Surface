@@ -7,7 +7,7 @@
 #include <Def/Def.hpp>
 
 template <setting_t N>
-class Selector : public Updatable<Normal> {
+class Selector : public Updatable<> {
   protected:
     Selector(); // Not used, only for virtual inheritance
     Selector(Selectable<N> &selectable) : selectable(selectable) {}

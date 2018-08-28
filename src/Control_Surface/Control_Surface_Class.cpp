@@ -27,7 +27,7 @@ void Control_Surface_::begin() {
     MIDIInputElementCC::beginAll();
     MIDIInputElementChannelPressure::beginAll();
     MIDIInputElementNote::beginAll();
-    Updatable<Normal>::beginAll();
+    Updatable<>::beginAll();
     Updatable<Potentiometer>::beginAll();
     Updatable<MotorFader>::beginAll();
     Updatable<Display>::beginAll();
@@ -36,7 +36,7 @@ void Control_Surface_::begin() {
 }
 
 void Control_Surface_::loop() {
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
     if (potentiometerTimer)
         Updatable<Potentiometer>::updateAll();
     updateMidiInput();

@@ -15,7 +15,7 @@ TEST(ManyButtonsSelector, press) {
 
     EXPECT_CALL(selectable, select(0));
 
-    Updatable<Normal>::beginAll();
+    Updatable<>::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
@@ -28,7 +28,7 @@ TEST(ManyButtonsSelector, press) {
 
     EXPECT_CALL(selectable, select(1));
 
-    Updatable<Normal>::updateAll();
+    Updatable<>::updateAll();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

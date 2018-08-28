@@ -4,8 +4,9 @@
 #include <Helpers/LinkedList.hpp>
 #include <Settings/SettingsWrapper.h>
 #include <stddef.h>
+#include <Def/Def.hpp>
 
-template <class T>
+template <class T = NormalUpdatable>
 class Updatable : public DoublyLinkable<Updatable<T>> {
   public:
     Updatable() { updatables.append(this); }
