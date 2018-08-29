@@ -18,11 +18,8 @@ HairlessMIDI_Interface	KEYWORD1
 
 Button	KEYWORD1
 
-Analog	KEYWORD1
-AnalogHiRes	KEYWORD1
-Digital	KEYWORD1
-DigitalLatch	KEYWORD1
-RotaryEncoder	KEYWORD1
+CCPotentiometer	KEYWORD1
+CCRotaryEncoder	KEYWORD1
 
 Bank	KEYWORD1
 BankSelector	KEYWORD1
@@ -32,6 +29,8 @@ ProgramSelector	KEYWORD1
 ExtIO	KEYWORD1
 ExtendedIOElement	KEYWORD1
 AnalogMultiplex	KEYWORD1
+CD74HC4051	KEYWORD1
+CD74HC4067	KEYWORD1
 ShiftRegisterOut	KEYWORD1
 pin_t	KEYWORD1
 analog_t	KEYWORD1
@@ -43,15 +42,16 @@ buttonType	KEYWORD1
 MCU	KEYWORD1
 MIDI_CC	KEYWORD1
 
+Array	KEYWORD1
+
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-refresh	KEYWORD2
+update	KEYWORD2
 
-setDefault
-getDefault
+setDefault	KEYWORD2
+getDefault	KEYWORD2
 
-average	KEYWORD2
 map	KEYWORD2
 invert	KEYWORD2
 
@@ -72,6 +72,8 @@ getStart	KEYWORD2
 getIOElementOfPin	KEYWORD2
 getFirst	KEYWORD2
 getNext	KEYWORD2
+
+generateArray	KEYWORD2
 
 red	KEYWORD2
 green	KEYWORD2

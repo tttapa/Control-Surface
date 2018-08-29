@@ -10,6 +10,14 @@ class Button {
   public:
     /**
      * @brief   Construct a new Button object.
+     * 
+     * This constructor sets the pin to zero, so it is not recommended.
+     * It is just a way to easily create arrays of buttons, and initializing
+     * them later.
+     */
+    Button() : pin(0) {}
+    /**
+     * @brief   Construct a new Button object.
      *
      * @param   pin
      *          The digital pin to read from. The internal pull-up resistor
@@ -78,7 +86,7 @@ class Button {
     unsigned long stableTime();
 
   private:
-    const pin_t pin;
+    pin_t pin;
 
     bool prevState = HIGH;
     bool debouncedState = HIGH;

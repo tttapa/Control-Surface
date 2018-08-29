@@ -7,9 +7,7 @@ ShiftRegisterOut::ShiftRegisterOut(pin_t dataPin, pin_t clockPin,
                                    pin_t latchPin, uint8_t bitOrder,
                                    pin_t length)
     : ExtendedIOElement(length), dataPin(dataPin), clockPin(clockPin),
-      latchPin(latchPin), bitOrder(bitOrder), buffer{(uint8_t)length} {
-    begin();
-}
+      latchPin(latchPin), bitOrder(bitOrder), buffer{(uint8_t)length} {}
 
 void ShiftRegisterOut::digitalWrite(pin_t pin, uint8_t val) {
     buffer.set(pin, val);
