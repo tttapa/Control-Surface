@@ -5,7 +5,9 @@
 
 /**
  * @brief   A class for serial-in/parallel-out shift registers, 
- *          like the 74HC595. 
+ *          like the 74HC595.
+ * 
+ * @ingroup ExtIO
  */
 class ShiftRegisterOut : public ExtendedIOElement {
   public:
@@ -14,26 +16,34 @@ class ShiftRegisterOut : public ExtendedIOElement {
      *          connected to the given pins, with a given bit order,
      *          and a given number of outputs.
      * 
-     * Multiple shift registers can be cascaded:
+     * Multiple shift registers can be cascaded by connecting the serial output
+     * of the first one to the input of the second one:
      * ```
-     * clockPin >──────────────┬─────────────────────────────┬─────────────────────────────┐            
-     *              ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓
-     *              ┃        SH_CP         ┃      ┃        SH_CP         ┃      ┃        SH_CP         ┃
-     * dataPin  >───┨ Data in     Data out ┠──────┨ Data in     Data out ┠──────┨ Data in     Data out ┃
-     *              ┃        ST_CP         ┃      ┃        ST_CP         ┃      ┃        ST_CP         ┃
-     *              ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛
-     * latchPin >──────────────┴─────────────────────────────┴─────────────────────────────┘            
+     * clockPin >───────────┬──────────────────────┬───────── ⋯
+     *              ┎━━━━━━━┷━━━━━━━┓      ┎━━━━━━━┷━━━━━━━┓ 
+     *              ┃     SH_CP     ┃      ┃     SH_CP     ┃ 
+     * dataPin  >───┨ DS        Q7S ┠──────┨ DS        Q7S ┠─ ⋯
+     *              ┃     ST_CP     ┃      ┃     ST_CP     ┃ 
+     *              ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛ 
+     * latchPin >───────────┴──────────────────────┴───────── ⋯
      * ```
      * 
      * @param   dataPin
-     *          The digital output pin connected to the serial data input (DS)
-     *          of the shift register.
+     *          The digital output pin connected to the serial data input (DS or
+     *          SER) of the shift register.
      * @param   clockPin
-     *          The digital output pin connected to the clock input (SH_CP)
-     *          of the shift register.
+     *          The digital output pin connected to the clock input (SH_CP or
+     *          SRCLK) of the shift register.
      * @param   latchPin
-     *          The digital output pin connected to the latch pin (ST_CP)
-     *          of the shift register.
+     *          The digital output pin connected to the latch pin (ST_CP or 
+     *          RCLK) of the shift register.
+     * @param   bitOrder
+     *          Either `MSBFIRST` (most significant bit first) or `LSBFIRST`
+     *          (least significant bit first).
+     * @param   length
+     *          The number of bits in total. Usually, shift registers (e.g. the
+     *          74HC595) have eight bits per chip, so `length = 8 * N` where `N`
+     *          is the number of cascaded chips.
      */
     ShiftRegisterOut(pin_t dataPin, pin_t clockPin, pin_t latchPin,
                      uint8_t bitOrder, pin_t length = 8);
@@ -61,25 +71,41 @@ class ShiftRegisterOut : public ExtendedIOElement {
      * @brief   Get the current state of a given output pin.
      * 
      * @param   pin
-     *          The pin to read.
+     *          The shift register pin to read from.
+     * @return  0
+     *          The state of the pin is `LOW`.
+     * @return  1
+     *          The state of the pin is `HIGH`.
      */
     int digitalRead(pin_t pin) override;
 
     /**
      * @brief   The analogRead function is deprecated because a shift
      *          is always digital.
+     * @param   pin
+     *          The shift register pin to read from.
+     * @return  0
+     *          The state of the pin is `LOW`.
+     * @return  1023
+     *          The state of the pin is `HIGH`.
      */
     analog_t analogRead(pin_t pin) override __attribute__((deprecated)) {
-        return digitalRead(pin);
+        return 1023 * digitalRead(pin);
     }
 
     /**
      * @brief   The analogWrite function is not deprecated because a shift
      *          is always digital.
+     * @param   pin
+     *          The shift register pin to set.
+     * @param   val
+     *          The value to set the pin to. A value greater or equal to 0x80
+     *          will set the pin to a `HIGH` state, a value less than 0x80 will
+     *          set the pin to a `LOW` state.
      */
     void analogWrite(pin_t pin, analog_t val) override
         __attribute__((deprecated)) {
-        digitalWrite(pin, val > 127);
+        digitalWrite(pin, val >= 0x80);
     }
 
     /**
@@ -93,11 +119,6 @@ class ShiftRegisterOut : public ExtendedIOElement {
      * @brief   Write the state buffer to the physical outputs.
      */
     void update() override;
-
-    /**
-     * @brief   Set all shift register outputs to `LOW`.
-     */
-    void reset();
 
     /**
      * @brief   Get the red output pin of the given LED.
@@ -144,4 +165,5 @@ class ShiftRegisterOut : public ExtendedIOElement {
     const uint8_t bitOrder;
 
     BitArray buffer;
+    bool dirty = true;
 };

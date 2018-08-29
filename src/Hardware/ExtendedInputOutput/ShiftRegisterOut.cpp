@@ -13,7 +13,8 @@ ShiftRegisterOut::ShiftRegisterOut(pin_t dataPin, pin_t clockPin,
 
 void ShiftRegisterOut::digitalWrite(pin_t pin, uint8_t val) {
     buffer.set(pin, val);
-    update();
+    dirty = true;
+    update(); // TODO: should I always update?
 }
 
 int ShiftRegisterOut::digitalRead(pin_t pin) { return buffer.get(pin); }
@@ -26,6 +27,8 @@ void ShiftRegisterOut::begin() {
 }
 
 void ShiftRegisterOut::update() {
+    if (!dirty)
+        return;
     ExtIO::digitalWrite(latchPin, LOW);
     const uint8_t bufferLength = buffer.getBufferLength();
     if (bitOrder == LSBFIRST) {
@@ -36,6 +39,7 @@ void ShiftRegisterOut::update() {
             ExtIO::shiftOut(dataPin, clockPin, MSBFIRST, buffer.getByte(i));
     }
     ExtIO::digitalWrite(latchPin, HIGH);
+    dirty = false;
 }
 
 pin_t ShiftRegisterOut::green(pin_t id) { return pin(3 * id + greenBit); }
