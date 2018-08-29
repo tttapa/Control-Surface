@@ -67,6 +67,11 @@ filtering analog inputs, and so on).
 - Adding more examples and adding comments to existing examples
 - Finishing the documentation
 
+## Getting Started
+
+See the [Getting Started](doc/Getting-Started.md) document to get started using
+the library.
+
 ## Documentation
 
 The automatically generated Doxygen documentation for this library can be found 

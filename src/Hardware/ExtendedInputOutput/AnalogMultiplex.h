@@ -96,7 +96,7 @@ class AnalogMultiplex : public ExtendedIOElement {
 
     /**
      * @brief   No periodic updating of the state is necessary, all actions are 
-     *          carried when the user calls analogRead or digitalRead.
+     *          carried out when the user calls analogRead or digitalRead.
      */
     void update() override {}
 
