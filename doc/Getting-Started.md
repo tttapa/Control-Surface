@@ -7,7 +7,7 @@ in [Installation.md](Installation.md).
 
 ## Creating a Basic MIDI Controller Sketch
 
-### 1. Including the library
+### 1. Include the library
 
 Include the library so that you have access to all the classes and functions.
 
@@ -63,13 +63,10 @@ know that it exists.
 USBMIDI_Interface midi;
 ```
 
-As a quick note: some interfaces require additional parameters, for example, 
-the `USBDebugMIDI_Interface` needs to know the baud rate.  
-In that case, you can instantiate it as follows:
-
-```cpp
-USBDebugMIDI_Interface midi = { 115200 };
-```
+> **Note**: some interfaces require additional parameters, for example, 
+> the `USBDebugMIDI_Interface` needs to know the baud rate.  
+> In that case, you can instantiate it as follows:  
+> `USBDebugMIDI_Interface midi = { 115200 };`
 
 ### 3. Add Extended Input/Output elements (optional)
 
