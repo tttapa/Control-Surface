@@ -98,6 +98,17 @@
  */
 
 /**
+ * @example   Getting-Started.ino
+ *
+ * This is the example used in the 'Getting Started' guide.
+ * Read the guide [here](
+ * https://github.com/tttapa/Control-Surface/blob/revision-4/doc/Getting-Started.md)
+ * 
+ * Written by PieterP, 29-08-2018
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   PushButtonsLEDsShiftRegMultiplex.ino
  *
  * @brief   This example demonstrates the use of push buttons and LEDs and how 

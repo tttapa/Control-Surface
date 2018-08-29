@@ -167,8 +167,8 @@ void loop() {
 }
 ```
 
-> **Note**: Using blocking code like delays in your code will interfere with the
-> Control Surface, so try to use [Blink Without Delay](
+> **Note**: Using blocking code like delays will interfere with the Control
+> Surface, so try to use [Blink Without Delay](
 https://www.arduino.cc/en/Tutorial/BlinkWithoutDelay) techniques instead.
 
 ### The finished sketch
