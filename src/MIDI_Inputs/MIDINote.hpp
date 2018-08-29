@@ -60,7 +60,8 @@ class MIDINote : virtual public MIDINote_Base,
                                             config) {}
 
     uint8_t getValue() const override {
-        return values[this->getSelection()]; // TODO: N
+        // getSelection will always be less than N
+        return values[this->getSelection()];
     }
 
     void reset() override {

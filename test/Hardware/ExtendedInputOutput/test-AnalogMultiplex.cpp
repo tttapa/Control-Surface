@@ -14,7 +14,7 @@ TEST(AnalogMultiplex, analogReadNoEnable) {
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(4, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(5, OUTPUT));
-    mux.begin();
+    ExtendedIOElement::beginAll();
 
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
@@ -53,7 +53,7 @@ TEST(AnalogMultiplex, digitalReadNoEnable) {
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(4, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(5, OUTPUT));
-    mux.begin();
+    ExtendedIOElement::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, 1));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(3, 1));
@@ -74,7 +74,7 @@ TEST(AnalogMultiplex, analogReadEnable) {
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(5, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(6, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, HIGH));
-    mux.begin();
+    ExtendedIOElement::beginAll();
 
     ::testing::Sequence seq;
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, 1));
@@ -101,7 +101,7 @@ TEST(AnalogMultiplex, analogReadEnable3) {
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(4, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(6, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, HIGH));
-    mux.begin();
+    ExtendedIOElement::beginAll();
 
     ::testing::Sequence seq;
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, 1));
@@ -156,7 +156,7 @@ TEST(AnalogMultiplex, digitalReadEnable) {
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(5, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(6, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, HIGH));
-    mux.begin();
+    ExtendedIOElement::beginAll();
 
     ::testing::Sequence seq;
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, 1));
@@ -182,7 +182,7 @@ TEST(AnalogMultiplex, pinMode) {
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(5, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(6, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, HIGH));
-    mux.begin();
+    ExtendedIOElement::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(A0, INPUT_PULLUP));
     ExtIO::pinMode(mux.pin(0b1111), INPUT_PULLUP);

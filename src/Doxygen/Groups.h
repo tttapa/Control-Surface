@@ -26,3 +26,9 @@
  * @defgroup    MIDIInterfaces MIDI Interfaces
  * @brief   All MIDI Interfaces that can send and receive MIDI events.
  */
+
+/**
+ * @defgroup    ExtIO Extended Input/Output
+ * @brief   All Elements that extend the number of IO pins of the Arduino: 
+ *          Currently only shift registers and multiplexers.
+ */

@@ -7,11 +7,15 @@
 
 /**
  * @brief   A class for reading multiplexed analog inputs.
- * 
  *          Supports 74HC4067, 74HC4051, etc.
+ * 
+ * You can use many multiplexers on the same address lines if each of the 
+ * multiplexers has a different enable line.
  * 
  * @tparam  N 
  *          The number of address lines.
+ * 
+ * @ingroup ExtIO
  */
 template <uint8_t N>
 class AnalogMultiplex : public ExtendedIOElement {
@@ -23,10 +27,12 @@ class AnalogMultiplex : public ExtendedIOElement {
      *          The analog input pin connected to the output of the multiplexer.
      * @param   addressPins
      *          An array of the pins connected to the address lines of the
-     *          multiplexer.
+     *          multiplexer. (Labeled S0, S1, S2 ... in the datasheet.)
      * @param   enablePin
      *          The digital output pin connected to the enable pin of the
-     *          multiplexer.
+     *          multiplexer. (Labeled Ē in the datasheet.)  
+     *          If you don't need the enable pin, you can use NO_PIN, which is 
+     *          the default.
      */
     AnalogMultiplex(pin_t analogPin, const Array<pin_t, N> &addressPins,
                     pin_t enablePin = NO_PIN)
@@ -39,12 +45,13 @@ class AnalogMultiplex : public ExtendedIOElement {
      *          use with buttons or open-collector outputs.
      * 
      * @note    This applies to all pins of this multiplexer.  
-     *          It is not possible to enable the pull-up resistor on some of
-     *          the inputs and not on others.  
+     *          This affects all pins of the multiplexer, because it has only
+     *          a single common pin.  
      * 
-     * @param   (unused)
+     * @param   pin
+     *          (Unused)
      * @param   mode
-     *          The new mode of the analog input pin: 
+     *          The new mode of the input pin: 
      *          either INPUT or INPUT_PULLUP.
      */
     void pinMode(pin_t, uint8_t mode) override;
@@ -82,10 +89,15 @@ class AnalogMultiplex : public ExtendedIOElement {
         __attribute__((deprecated)) {}
 
     /**
-     * @brief   Initialize the multiplexer.
+     * @brief   Initialize the multiplexer: set the pin mode of the address pins
+     *          and the enable pin to output mode.
      */
     void begin() override;
 
+    /**
+     * @brief   No periodic updating of the state is necessary, all actions are 
+     *          carried when the user calls analogRead or digitalRead.
+     */
     void update() override {}
 
   private:
@@ -95,17 +107,46 @@ class AnalogMultiplex : public ExtendedIOElement {
 
     /**
      * @brief   Write the pin number/address to the address pins of the 
-     *          multiplexer. 
+     *          multiplexer.
+     * 
+     * @param   address
+     *          The address to select.
      */
     void setMuxAddress(uint8_t address);
 
+    /**
+     * @brief   Select the correct address and enable the multiplexer.
+     * 
+     * @param   address
+     *          The address to select.
+     */
     void prepareReading(uint8_t address);
 
+    /**
+     * @brief   Disable the multiplexer.
+     */
     void afterReading();
 
+    // The enable pin is active low.
     constexpr static uint8_t ENABLED = LOW;
     constexpr static uint8_t DISABLED = HIGH;
 };
+
+/**
+ * @brief   An alias for AnalogMultiplex<4> to use with CD74HC4067 analog 
+ *          multiplexers.
+ * 
+ * @ingroup ExtIO
+ */
+using CD74HC4067 = AnalogMultiplex<4>;
+
+/**
+ * @brief   An alias for AnalogMultiplex<3> to use with CD74HC4051 analog 
+ *          multiplexers.
+ * 
+ * @ingroup ExtIO
+ */
+using CD74HC4051 = AnalogMultiplex<3>;
 
 // -------------------------------------------------------------------------- //
 
