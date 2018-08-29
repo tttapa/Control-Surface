@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Def/Def.hpp>
 #include <MIDI_Parsers/MIDI_Parser.h>
 
 #define MIDI_BAUD 31250
@@ -11,9 +12,8 @@ class MIDI_Interface;
  */
 class MIDI_Callbacks {
     friend class MIDI_Interface;
-    virtual void onChannelMessage(__attribute__((unused))
-                                  MIDI_Interface &midi) {}
-    virtual void onSysExMessage(__attribute__((unused)) MIDI_Interface &midi) {}
+    virtual void onChannelMessage(UNUSED_PARAM MIDI_Interface &midi) {}
+    virtual void onSysExMessage(UNUSED_PARAM MIDI_Interface &midi) {}
 
   public:
     virtual ~MIDI_Callbacks() = default;

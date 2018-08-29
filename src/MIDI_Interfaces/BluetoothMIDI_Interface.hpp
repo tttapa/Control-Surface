@@ -16,11 +16,11 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
 
     // BLE Callbacks
 
-    void onConnect(__attribute__((unused)) BLEServer *pServer) override {
+    void onConnect(UNUSED_PARAM BLEServer *pServer) override {
         DEBUGFN("Connected");
         connected++;
     };
-    void onDisconnect(__attribute__((unused)) BLEServer *pServer) override {
+    void onDisconnect(UNUSED_PARAM BLEServer *pServer) override {
         DEBUGFN("Disonnected");
         if (!connected) {
             ERROR(F("Error: disconnect event, but was not connected"), 0x7788);

@@ -60,8 +60,8 @@ class AnalogMultiplex : public ExtendedIOElement {
      * @brief   The digitalWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
-    void digitalWrite(__attribute__((unused)) pin_t pin,
-                      __attribute__((unused)) uint8_t val) override
+    void digitalWrite(UNUSED_PARAM pin_t pin,
+                      UNUSED_PARAM uint8_t val) override
         __attribute__((deprecated)) {}
 
     /**
@@ -84,8 +84,8 @@ class AnalogMultiplex : public ExtendedIOElement {
      * @brief   The analogWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
-    void analogWrite(__attribute__((unused)) pin_t pin,
-                     __attribute__((unused)) analog_t val) override
+    void analogWrite(UNUSED_PARAM pin_t pin,
+                     UNUSED_PARAM analog_t val) override
         __attribute__((deprecated)) {}
 
     /**

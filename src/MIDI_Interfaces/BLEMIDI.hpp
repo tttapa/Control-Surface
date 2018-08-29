@@ -86,6 +86,7 @@ class BLEMIDI {
 
 #else
 
+#include <Def/Def.hpp>
 #include <gmock/gmock.h>
 #include <string>
 
@@ -98,10 +99,8 @@ class BLECharacteristic {
 class BLECharacteristicCallbacks {
   public:
     virtual ~BLECharacteristicCallbacks() = default;
-    virtual void onRead(__attribute__((unused))
-                        BLECharacteristic *pCharacteristic) {}
-    virtual void onWrite(__attribute__((unused))
-                         BLECharacteristic *pCharacteristic) {}
+    virtual void onRead(UNUSED_PARAM BLECharacteristic *pCharacteristic) {}
+    virtual void onWrite(UNUSED_PARAM BLECharacteristic *pCharacteristic) {}
 };
 
 class BLEServer {};
@@ -109,8 +108,8 @@ class BLEServer {};
 class BLEServerCallbacks {
   public:
     virtual ~BLEServerCallbacks() = default;
-    virtual void onConnect(__attribute__((unused)) BLEServer *pServer) {}
-    virtual void onDisconnect(__attribute__((unused)) BLEServer *pServer) {}
+    virtual void onConnect(UNUSED_PARAM BLEServer *pServer) {}
+    virtual void onDisconnect(UNUSED_PARAM BLEServer *pServer) {}
 };
 
 class BLEMIDI {

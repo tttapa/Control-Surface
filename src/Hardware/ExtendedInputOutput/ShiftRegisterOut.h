@@ -52,8 +52,8 @@ class ShiftRegisterOut : public ExtendedIOElement {
      * @brief   The pinMode function is not implemented because the mode is
      *          `OUTPUT` by definition.
      */
-    void pinMode(__attribute__((unused)) pin_t pin,
-                 __attribute__((unused)) uint8_t mode) override
+    void pinMode(UNUSED_PARAM pin_t pin,
+                 UNUSED_PARAM uint8_t mode) override
         __attribute__((deprecated)) {}
 
     /**

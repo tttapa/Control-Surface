@@ -36,6 +36,6 @@ class ManyButtonsSelector : public ManyButtonsSelector_Base<N> {
         : Selector<N>(selectable), ManyButtonsSelector_Base<N>(buttonPins) {}
 
     void beginOutput() override {}
-    void updateOutput(__attribute__((unused)) setting_t oldSetting,
-                      __attribute__((unused)) setting_t newSetting) override {}
+    void updateOutput(UNUSED_PARAM setting_t oldSetting,
+                      UNUSED_PARAM setting_t newSetting) override {}
 };

@@ -38,6 +38,6 @@ class IncrementSelector : virtual public IncrementSelector_Base<N> {
         : Selector<N>(selectable), IncrementSelector_Base<N>(button, wrap) {}
 
     void beginOutput() override {}
-    void updateOutput(__attribute__((unused)) setting_t oldSetting,
-                      __attribute__((unused)) setting_t newSetting) override {}
+    void updateOutput(UNUSED_PARAM setting_t oldSetting,
+                      UNUSED_PARAM setting_t newSetting) override {}
 };

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Def/Def.hpp>
+
 template <class Node>
 class Linkable {
   protected:
@@ -179,7 +181,7 @@ void moveDown(Node *nodeC, Node *&first, Node *&last) {
 }
 
 template <class Node>
-bool contains(Node *node, Node *&first, __attribute__((unused)) Node *&last) {
+bool contains(Node *node, Node *&first, UNUSED_PARAM Node *&last) {
     return node == first || node->next != nullptr || node->previous != nullptr;
 }
 

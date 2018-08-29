@@ -38,3 +38,9 @@ struct NormalUpdatable {};
 struct Potentiometer {};
 struct MotorFader {};
 struct Display {};
+
+#ifdef DOXYGEN
+#define UNUSED_PARAM
+#else
+#define UNUSED_PARAM __attribute__((unused))
+#endif

@@ -68,7 +68,7 @@ OUTPUT_DIRECTORY       =
 # performance problems for the file system.
 # The default value is: NO.
 
-CREATE_SUBDIRS         = NO
+CREATE_SUBDIRS         = YES
 
 # If the ALLOW_UNICODE_NAMES tag is set to YES, doxygen will allow non-ASCII
 # characters to appear in the names of generated files. If set to NO, non-ASCII
@@ -2037,7 +2037,7 @@ INCLUDE_FILE_PATTERNS  = *.h *.hpp
 # recursively expanded use the := operator instead of the = operator.
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
-PREDEFINED             = ARDUINO CORE_TEENSY DISPLAY_GFX Encoder_h_
+PREDEFINED             = ARDUINO CORE_TEENSY DISPLAY_GFX Encoder_h_ DOXYGEN
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The
