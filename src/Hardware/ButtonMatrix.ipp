@@ -1,7 +1,7 @@
 #include "ButtonMatrix.h"
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <Helpers/Copy.hpp>
 #include <string.h>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 
 using namespace ExtIO;
 
@@ -9,12 +9,7 @@ template <uint8_t nb_rows, uint8_t nb_cols>
 ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const PinList<nb_rows> &rowPins,
                                              const PinList<nb_cols> &colPins)
     : rowPins(rowPins), colPins(colPins) {
-    init();
-}
-
-template <uint8_t nb_rows, uint8_t nb_cols>
-ButtonMatrix<nb_rows, nb_cols>::~ButtonMatrix() {
-    delete[] prevStates;
+    memset(prevStates, 0xFF, sizeof(prevStates));
 }
 
 template <uint8_t nb_rows, uint8_t nb_cols>
@@ -24,7 +19,6 @@ void ButtonMatrix<nb_rows, nb_cols>::refresh() {
     // debounce). Edit this in Settings/Settings.h
     if (now - prevRefresh < BUTTON_DEBOUNCE_TIME)
         return;
-    prevRefresh = now;
 
     for (size_t row = 0; row < nb_rows; row++) // scan through all rows
     {
@@ -37,18 +31,11 @@ void ButtonMatrix<nb_rows, nb_cols>::refresh() {
                 // execute the handler
                 onButtonChanged(row, col, state);
                 setPrevState(col, row, state); // remember the state
+                prevRefresh = now;
             }
         }
         pinMode(rowPins[row], INPUT); // make the current row Hi-Z again
     }
-}
-
-template <uint8_t nb_rows, uint8_t nb_cols>
-void ButtonMatrix<nb_rows, nb_cols>::init() {
-    // Create an array of bytes where each bit represents
-    // the state of one of the buttons
-    prevStates = new uint8_t[(nb_cols * nb_rows + 7) / 8];
-    memset(prevStates, 0xFF, sizeof(uint8_t[(nb_cols * nb_rows + 7) / 8]));
 }
 
 template <uint8_t nb_rows, uint8_t nb_cols>

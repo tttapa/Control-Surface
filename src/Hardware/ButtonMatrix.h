@@ -31,14 +31,12 @@ class ButtonMatrix {
     /**
      * @brief   Destructor.
      */
-    virtual ~ButtonMatrix();
+    virtual ~ButtonMatrix() = default;
 
     void begin();
     void refresh();
 
   private:
-    void init();
-
     virtual void onButtonChanged(uint8_t row, uint8_t col, bool state) = 0;
 
     static inline uint8_t positionToBits(uint8_t col, uint8_t row);
@@ -46,10 +44,9 @@ class ButtonMatrix {
     static inline uint8_t bitsToBitmask(uint8_t bits);
     bool getPrevState(uint8_t col, uint8_t row);
     void setPrevState(uint8_t col, uint8_t row, bool state);
-    // bool allReleased();
 
     unsigned long prevRefresh = 0;
-    uint8_t *prevStates = nullptr;
+    uint8_t prevStates[(nb_cols * nb_rows + 7) / 8];
 
     const PinList<nb_rows> rowPins;
     const PinList<nb_cols> colPins;

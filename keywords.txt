@@ -3,6 +3,9 @@
 #######################################
 Control_Surface	KEYWORD1
 
+# Audio 
+AudioVU	KEYWORD1
+
 MIDI_Interface	KEYWORD1
 StreamMIDI_Interface	KEYWORD1
 SerialMIDI_Interface	KEYWORD1
@@ -32,6 +35,7 @@ AnalogMultiplex	KEYWORD1
 CD74HC4051	KEYWORD1
 CD74HC4067	KEYWORD1
 ShiftRegisterOut	KEYWORD1
+SPIShiftRegisterOut	KEYWORD1
 pin_t	KEYWORD1
 analog_t	KEYWORD1
 

@@ -50,10 +50,10 @@
  *   - MOSI: 74HC595 DS
  *   - CLK:  74HC595 SH_CP
  * 
- * Connect an LEDs (and series resistor) between the first output of the
+ * Connect an LED (and series resistor) between the first output of the
  * shift register and ground. 
  * 
- * Remember to connect the enable pins the shift register to ground in order to 
+ * Remember to connect the enable pin the shift register to ground in order to 
  * enable it.  
  *  
  * This sketch will just blink the LED once a second.
@@ -113,10 +113,10 @@
  *   - 11: 74HC595 DS
  *   - 13: 74HC595 SH_CP
  * 
- * Connect an LEDs (and series resistor) between the first output of the
+ * Connect an LED (and series resistor) between the first output of the
  * shift register and ground. 
  * 
- * Remember to connect the enable pins the shift register to ground in order to 
+ * Remember to connect the enable pin the shift register to ground in order to 
  * enable it.  
  *  
  * This sketch will just blink the LED once a second.

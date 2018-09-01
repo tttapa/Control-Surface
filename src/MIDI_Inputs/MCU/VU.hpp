@@ -254,47 +254,4 @@ class VU : virtual public VU_Base, public BankableMIDIInputAddressable<N> {
 
 } // namespace Bankable
 
-// -------------------------------------------------------------------------- //
-/*
-TODO: remove
-class VU_LED : public VU {
-  public:
-    template <size_t N>
-    VU_LED(const pin_t (&LEDs)[N], uint8_t address, uint8_t nb_addresses,
-               bool decay = true)
-        : VU(address, nb_addresses, decay), overloadpin(0), length(N),
-          overload(false) {
-        static_assert(
-            N <= 12,
-            "Error: the maximum number of LEDs in the VU meter is 12. ");
-        this->LEDs = new pin_t[length];
-        copy(this->LEDs, LEDs);
-        for (pin_t pin = 0; pin < length; pin++)
-            ExtIO::pinMode(LEDs[pin], OUTPUT);
-    }
-    ~VU_LED() { delete[] LEDs; }
-
-  protected:
-    const uint8_t length;
-    const pin_t overloadpin;
-    pin_t *LEDs;
-    const bool overload;
-
-    constexpr static uint8_t floorCorrection = 5;
-
-    void display() {
-        for (uint8_t pin = 0;
-             pin < (getValue(addressOffset) * length + floorCorrection) / 12;
-             pin++)
-            digitalWrite(LEDs[pin], HIGH);
-        for (uint8_t pin =
-                 (getValue(addressOffset) * length + floorCorrection) / 12;
-             pin < length; pin++)
-            digitalWrite(LEDs[pin], LOW);
-        if (overload)
-            digitalWrite(overloadpin, (uint8_t)getOverload(addressOffset));
-    }
-};
-*/
-
 } // namespace MCU
