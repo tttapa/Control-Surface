@@ -1,9 +1,8 @@
 /**
- * This is the example used in the 'Getting Started' guide.
- * Read the guide [here](
- * https://github.com/tttapa/Control-Surface/blob/revision-4/doc/Getting-Started.md)
+ * This is the example used in the 'Getting Started' guide.  
+ * Read the guide: https://github.com/tttapa/Control-Surface/blob/revision-4/doc/Getting-Started.md
  * 
- * Written by PieterP, 29-08-2018
+ * Written by PieterP, 29-08-2018  
  * https://github.com/tttapa/Control-Surface
  */
 

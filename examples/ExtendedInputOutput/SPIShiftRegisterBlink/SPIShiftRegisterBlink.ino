@@ -4,9 +4,9 @@
  * 
  * Connections:  
  * 
- *   - 10: 74HC595 ST_CP
- *   - 11: 74HC595 DS
- *   - 13: 74HC595 SH_CP
+ *   - SS:   74HC595 ST_CP
+ *   - MOSI: 74HC595 DS
+ *   - CLK:  74HC595 SH_CP
  * 
  * Connect an LED (and series resistor) between the first output of the
  * shift register and ground. 
@@ -16,7 +16,7 @@
  *  
  * This sketch will just blink the LED once a second.
  * 
- * Written by PieterP, 2018-08-29
+ * Written by PieterP, 2018-09-01
  * https://github.com/tttapa/Control-Surface
  */
 
@@ -24,13 +24,9 @@
 
 using namespace ExtIO;
 
-const pin_t latchPin = 10;  // Pin connected to ST_CP of 74HC595
-const pin_t dataPin  = 11;  // Pin connected to DS of 74HC595
-const pin_t clockPin = 13;  // Pin connected to SH_CP of 74HC595
-
-/* Instantiate a shift register on the correct pins, most significant bit
- * first, and a total of 8 outputs. */
-ShiftRegisterOut sreg = { dataPin, clockPin, latchPin, MSBFIRST, 8 };
+/* Instantiate a shift register with the SPI slave select pin as latch pin, most
+ * significant bit first, and a total of 8 outputs. */
+SPIShiftRegisterOut sreg = { SS, MSBFIRST, 8 };
 
 const pin_t ledPin = sreg.pin(0); // first pin of the shift register
 

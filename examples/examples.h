@@ -1,36 +1,64 @@
 /**
  * @example   Ex.1.Shift-Register-LED-Effects.ino
  *
- * This is an example of the ShiftRegisterOut class of the Control-Surface library.
+ * @brief   This is an example of the ShiftRegisterOut class of the Control
+ *          Surface library. It creates light effects using three 8-bit shift
+ *          registers and some RGB LEDs.
  *
- * Connect three daisy-chained shift registersr to pins 11 (ST_CP), 12 (DS) and 10 (SH_CP).  
- * Connect 8 RGB LEDs (+ current limiting resistors) to the outputs of the shift registers.
+ * Connect three daisy-chained shift registers to pins 10 (ST_CP), 11 (DS) and 
+ * 13 (SH_CP).  
+ * Connect 8 RGB LEDs (+ current limiting resistors) to the outputs of the shift
+ * registers.
  * 
  * ```
- * 13 >──────────────┬─────────────────────────────┬─────────────────────────────┐            
- *        ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓
- *        ┃        SH_CP         ┃      ┃        SH_CP         ┃      ┃        SH_CP         ┃
- * 12 >───┨ Data in     Data out ┠──────┨ Data in     Data out ┠──────┨ Data in     Data out ┃
- *        ┃        ST_CP         ┃      ┃        ST_CP         ┃      ┃        ST_CP         ┃
- *        ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛
- * 10 >──────────────┴─────────────────────────────┴─────────────────────────────┘            
+ * 13  >───────────┬──────────────────────┬──────────────────────┐
+ *         ┎━━━━━━━┷━━━━━━━┓      ┎━━━━━━━┷━━━━━━━┓      ┎━━━━━━━┷━━━━━━━┓
+ *         ┃     SH_CP     ┃      ┃     SH_CP     ┃      ┃     SH_CP     ┃
+ * 11  >───┨ DS        Q7S ┠──────┨ DS        Q7S ┠──────┨ DS        Q7S ┃
+ *         ┃     ST_CP     ┃      ┃     ST_CP     ┃      ┃     ST_CP     ┃
+ *         ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛
+ * 10  >───────────┴──────────────────────┴──────────────────────┘
  * ```
  * 
- * The order of the colors doesn't matter. You can change them in software using the
- * `ShiftRegisterOut::redBit`, `ShiftRegisterOut::greenBit` and `ShiftRegisterOut::blueBit`
- * constants.
+ * The order of the colors doesn't matter. You can change them in software using
+ * the `ShiftRegisterOutBase::redBit`, `ShiftRegisterOutBase::greenBit` and 
+ * `ShiftRegisterOutBase::blueBit` constants.
  * 
- * If you wired the LEDs as RGB (red first, then green and then blue), the red bit is 0,
- * the green bit is 1 and the blue bit is 2.  
- * If you wired the LEDs as BGR (blue first, then green and then red), the red bit is 2,
- * the green bit is 1 and the blue bit is 0.  
+ * If you wired the LEDs as RGB (red first, then green and then blue), the red 
+ * bit is 0, the green bit is 1 and the blue bit is 2.  
+ * If you wired the LEDs as BGR (blue first, then green and then red), the red
+ * bit is 2, the green bit is 1 and the blue bit is 0.  
  * Other combinations are possible as well.
  * 
- * This example will turn on all red LEDs one by one, then turn them off one by one, 
- * next, it will turn on and off all green LEDs in the same manner, and finally the
- * same for the blue LEDs. This is repeated indefinitely.
+ * This example will turn on all red LEDs one by one, then turn them off one by
+ * one, next, it will turn on and off all green LEDs in the same manner, and
+ * finally the same for the blue LEDs. This is repeated indefinitely.
  * 
  * Written by Pieter P, 13-07-2018  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   SPIShiftRegisterBlink.ino
+ *
+ * @brief   This example demonstrates the use of shift registers as if they were
+ *          just normal IO pins.
+ * 
+ * Connections:  
+ * 
+ *   - SS:   74HC595 ST_CP
+ *   - MOSI: 74HC595 DS
+ *   - CLK:  74HC595 SH_CP
+ * 
+ * Connect an LEDs (and series resistor) between the first output of the
+ * shift register and ground. 
+ * 
+ * Remember to connect the enable pins the shift register to ground in order to 
+ * enable it.  
+ *  
+ * This sketch will just blink the LED once a second.
+ * 
+ * Written by PieterP, 2018-09-01
  * https://github.com/tttapa/Control-Surface
  */
 
@@ -82,7 +110,7 @@
  * Connections:  
  * 
  *   - 10: 74HC595 ST_CP
- *   - 12: 74HC595 DS
+ *   - 11: 74HC595 DS
  *   - 13: 74HC595 SH_CP
  * 
  * Connect an LEDs (and series resistor) between the first output of the
@@ -100,11 +128,10 @@
 /**
  * @example   Getting-Started.ino
  *
- * This is the example used in the 'Getting Started' guide.
- * Read the guide [here](
- * https://github.com/tttapa/Control-Surface/blob/revision-4/doc/Getting-Started.md)
+ * This is the example used in the 'Getting Started' guide.  
+ * Read the guide: https://github.com/tttapa/Control-Surface/blob/revision-4/doc/Getting-Started.md
  * 
- * Written by PieterP, 29-08-2018
+ * Written by PieterP, 29-08-2018  
  * https://github.com/tttapa/Control-Surface
  */
 
