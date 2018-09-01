@@ -7,8 +7,14 @@
  * @brief   A class for serial-in/parallel-out shift registers, 
  *          like the 74HC595.
  * 
+ * @tparam  N
+ *          The number of bits in total. Usually, shift registers (e.g. the
+ *          74HC595) have eight bits per chip, so `length = 8 * k` where `k`
+ *          is the number of cascaded chips.
+ * 
  * @ingroup ExtIO
  */
+template <uint8_t N>
 class ShiftRegisterOutBase : public ExtendedIOElement {
   protected:
     /**
@@ -21,12 +27,8 @@ class ShiftRegisterOutBase : public ExtendedIOElement {
      * @param   bitOrder
      *          Either `MSBFIRST` (most significant bit first) or `LSBFIRST`
      *          (least significant bit first).
-     * @param   length
-     *          The number of bits in total. Usually, shift registers (e.g. the
-     *          74HC595) have eight bits per chip, so `length = 8 * N` where `N`
-     *          is the number of cascaded chips.
      */
-    ShiftRegisterOutBase(pin_t latchPin, uint8_t bitOrder, pin_t length = 8);
+    ShiftRegisterOutBase(pin_t latchPin, uint8_t bitOrder);
 
   public:
     /**
@@ -110,26 +112,12 @@ class ShiftRegisterOutBase : public ExtendedIOElement {
      */
     pin_t blue(pin_t id);
 
-    /**
-     * @brief   The position of the red output pin for 3-color LEDs.  
-     *          For the usual RGB configuration, this is 0.
-     */
-    const static uint8_t redBit; // = 0;
-    /**
-     * @brief   The position of the green output pin for 3-color LEDs.  
-     *          For the usual RGB configuration, this is 1.
-     */
-    const static uint8_t greenBit; // = 1;
-    /**
-     * @brief   The position of the blue output pin for 3-color LEDs.  
-     *          For the usual RGB configuration, this is 2.
-     */
-    const static uint8_t blueBit; // = 2;
-
   protected:
     const pin_t latchPin;
     const uint8_t bitOrder;
 
-    BitArray buffer;
+    BitArray<N> buffer;
     bool dirty = true;
 };
+
+#include "ShiftRegisterOutBase.ipp"

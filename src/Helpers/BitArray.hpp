@@ -1,25 +1,11 @@
 #pragma once
 
-#if !defined(__AVR__) // || ... // TODO
-#define USE_UNIQUE_PTR   // No extra memory usage on Teensy 3.2 using TD 1.41
-#endif
-
 #include <Helpers/Error.hpp>
 #include <stdint.h>
-#ifdef USE_UNIQUE_PTR
-#include <memory>
-#endif
 
+template <uint8_t N>
 class BitArray {
   public:
-    BitArray(uint8_t size)
-        : bufferLength{(uint8_t)((size + 7) / 8)},
-          buffer{new uint8_t[bufferLength]()} {}
-
-#ifndef USE_UNIQUE_PTR
-    ~BitArray() { delete[] buffer; }
-#endif
-
     bool get(uint8_t bitIndex) {
         return buffer[getBufferIndex(bitIndex)] & getBufferMask(bitIndex);
     }
@@ -42,8 +28,9 @@ class BitArray {
     uint8_t safeIndex(uint8_t byteIndex) const {
         if (byteIndex >= getBufferLength()) {
             ERROR(F("Error: index out of bounds (")
-                  << (unsigned int)byteIndex << F(", length is ")
-                  << (unsigned int)getBufferLength() << ')', 0xFFFF);
+                      << +byteIndex << F(", length is ") << +getBufferLength()
+                      << ')',
+                  0xFFFF);
             return getBufferLength() - 1;
         }
         return byteIndex;
@@ -67,10 +54,6 @@ class BitArray {
         return 1 << getBufferBit(bitIndex);
     }
 
-    const uint8_t bufferLength;
-#ifdef USE_UNIQUE_PTR
-    std::unique_ptr<uint8_t[]> buffer;
-#else
-    uint8_t *buffer;
-#endif
+    constexpr static uint8_t bufferLength = (uint8_t)((N + 7) / 8);
+    uint8_t buffer[bufferLength] = {};
 };

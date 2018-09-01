@@ -26,7 +26,7 @@ using namespace ExtIO;
 
 /* Instantiate a shift register with the SPI slave select pin as latch pin, most
  * significant bit first, and a total of 8 outputs. */
-SPIShiftRegisterOut sreg = { SS, MSBFIRST, 8 };
+SPIShiftRegisterOut<8> sreg = { SS, MSBFIRST };
 
 const pin_t ledPin = sreg.pin(0); // first pin of the shift register
 

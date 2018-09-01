@@ -1,14 +1,14 @@
-#include <gtest/gtest.h>
 #include <Helpers/BitArray.hpp>
+#include <gtest/gtest.h>
 
 TEST(BitArray, construct) {
-    BitArray ba(16);
+    BitArray<16> ba;
     for (int i = 0; i < 16; i++)
         EXPECT_EQ(ba.get(i), false);
 }
 
 TEST(BitArray, setClearGet) {
-    BitArray ba(16);
+    BitArray<16> ba;
     ba.set(12);
     ba.set(7);
     for (int i = 0; i < 16; i++)

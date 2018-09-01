@@ -10,7 +10,7 @@
  * 
  * ```
  * 13  >───────────┬──────────────────────┬──────────────────────┐
- *         ┎━━━━━━━┷━━━━━━━┓      ┎━━━━━━━┷━━━━━━━┓      ┎━━━━━━━┷━━━━━━━┓
+ *         ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓
  *         ┃     SH_CP     ┃      ┃     SH_CP     ┃      ┃     SH_CP     ┃
  * 11  >───┨ DS        Q7S ┠──────┨ DS        Q7S ┠──────┨ DS        Q7S ┃
  *         ┃     ST_CP     ┃      ┃     ST_CP     ┃      ┃     ST_CP     ┃
@@ -19,8 +19,8 @@
  * ```
  * 
  * The order of the colors doesn't matter. You can change them in software using
- * the `ShiftRegisterOutBase::redBit`, `ShiftRegisterOutBase::greenBit` and 
- * `ShiftRegisterOutBase::blueBit` constants.
+ * the `ShiftRegisterOutRGB::redBit`, `ShiftRegisterOutRGB::greenBit` and 
+ * `ShiftRegisterOutRGB::blueBit` constants.
  * 
  * If you wired the LEDs as RGB (red first, then green and then blue), the red 
  * bit is 0, the green bit is 1 and the blue bit is 2.  
@@ -45,19 +45,19 @@ const pin_t dataPin  = 11;  // Pin connected to DS of 74HC595
 const pin_t clockPin = 13;  // Pin connected to SH_CP of 74HC595
 
 /* If you wired your LEDs as RGB */
-const uint8_t ShiftRegisterOutBase::redBit = 0;
-const uint8_t ShiftRegisterOutBase::greenBit = 1;
-const uint8_t ShiftRegisterOutBase::blueBit = 2;
+const uint8_t ShiftRegisterOutRGB::redBit = 0;
+const uint8_t ShiftRegisterOutRGB::greenBit = 1;
+const uint8_t ShiftRegisterOutRGB::blueBit = 2;
 
 /* If you wired your LEDs as BGR */
-// const uint8_t ShiftRegisterOutBase::redBit   = 2;
-// const uint8_t ShiftRegisterOutBase::greenBit = 1;
-// const uint8_t ShiftRegisterOutBase::blueBit  = 0;
+// const uint8_t ShiftRegisterOutRGB::redBit   = 2;
+// const uint8_t ShiftRegisterOutRGB::greenBit = 1;
+// const uint8_t ShiftRegisterOutRGB::blueBit  = 0;
 
 // Create a new shift register output connected to pins 11, 13 and 10,
 // shift the data out with the most significant bit first.
 // There are 24 (= 3·8) outputs in total.
-ShiftRegisterOut ShiftReg(dataPin, clockPin, latchPin, MSBFIRST, 24);
+ShiftRegisterOut<24> ShiftReg(dataPin, clockPin, latchPin, MSBFIRST);
 
 void setup() {
   // Initialize the shift registers

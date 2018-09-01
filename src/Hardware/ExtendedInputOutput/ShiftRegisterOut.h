@@ -10,7 +10,8 @@
  * 
  * @ingroup ExtIO
  */
-class ShiftRegisterOut : public ShiftRegisterOutBase {
+template <uint8_t N>
+class ShiftRegisterOut : public ShiftRegisterOutBase<N> {
   public:
     /**
      * @brief   Create a new ShiftRegisterOut object with a shift register
@@ -21,7 +22,7 @@ class ShiftRegisterOut : public ShiftRegisterOutBase {
      * of the first one to the input of the second one:
      * ```
      * clockPin >───────────┬──────────────────────┬───────── ⋯
-     *              ┎━━━━━━━┷━━━━━━━┓      ┎━━━━━━━┷━━━━━━━┓ 
+     *              ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓ 
      *              ┃     SH_CP     ┃      ┃     SH_CP     ┃ 
      * dataPin  >───┨ DS        Q7S ┠──────┨ DS        Q7S ┠─ ⋯
      *              ┃     ST_CP     ┃      ┃     ST_CP     ┃ 
@@ -41,13 +42,9 @@ class ShiftRegisterOut : public ShiftRegisterOutBase {
      * @param   bitOrder
      *          Either `MSBFIRST` (most significant bit first) or `LSBFIRST`
      *          (least significant bit first).
-     * @param   length
-     *          The number of bits in total. Usually, shift registers (e.g. the
-     *          74HC595) have eight bits per chip, so `length = 8 * N` where `N`
-     *          is the number of cascaded chips.
      */
     ShiftRegisterOut(pin_t dataPin, pin_t clockPin, pin_t latchPin,
-                     uint8_t bitOrder = MSBFIRST, pin_t length = 8);
+                     uint8_t bitOrder = MSBFIRST);
 
     /**
      * @brief   Initialize the shift register.  
@@ -65,3 +62,5 @@ class ShiftRegisterOut : public ShiftRegisterOutBase {
     const pin_t dataPin;
     const pin_t clockPin;
 };
+
+#include "ShiftRegisterOut.ipp"

@@ -30,7 +30,7 @@ const pin_t clockPin = 13;  // Pin connected to SH_CP of 74HC595
 
 /* Instantiate a shift register on the correct pins, most significant bit
  * first, and a total of 8 outputs. */
-ShiftRegisterOut sreg = { dataPin, clockPin, latchPin, MSBFIRST, 8 };
+ShiftRegisterOut<8> sreg = { dataPin, clockPin, latchPin, MSBFIRST };
 
 const pin_t ledPin = sreg.pin(0); // first pin of the shift register
 
