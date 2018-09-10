@@ -209,6 +209,7 @@ class USBDebugMIDI_Interface : public HardwareSerialDebugMIDI_Interface {
 
 // Teensies
 #elif defined(CORE_TEENSY)
+#if defined(TEENSY_SERIALUSB_ENABLED)
 /**
  * @brief   A class for debug MIDI interfaces sending and receiving 
  *          human-readable MIDI messages over the USB Serial CDC connection.
@@ -230,6 +231,7 @@ class USBDebugMIDI_Interface
     USBDebugMIDI_Interface(unsigned long baud)
         : SerialDebugMIDI_Interface(Serial, baud) {}
 };
+#endif
 
 // Arduino DUE
 #elif defined(ARDUINO_ARCH_SAM)

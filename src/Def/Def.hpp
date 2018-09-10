@@ -65,6 +65,11 @@ constexpr Frequency operator"" _MHz(unsigned long long mhz) {
     return Frequency{(unsigned long)(mhz * 1E6)};
 }
 
+struct PixelLocation {
+    int16_t x;
+    int16_t y;
+};
+
 #ifdef DOXYGEN
 #define UNUSED_PARAM
 #else

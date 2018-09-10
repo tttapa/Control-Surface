@@ -1,19 +1,23 @@
 #pragma once
 
-#include <MIDI_Parsers/USBMIDI_Parser.h>
 #include "MIDI_Interface.h"
+#include <MIDI_Parsers/USBMIDI_Parser.h>
+#include <Helpers/TeensyUSBTypes.hpp>
 
-#ifdef CORE_TEENSY
+#ifdef TEENSY_MIDIUSB_ENABLED
 #include <usb_dev.h>
+#else
+#warning                                                                       \
+    "Teensy: USB MIDI not enabled. Enable it from the Tools > USB Type menu."
 #endif
 
 // If the main MCU has a USB connection but is not a Teensy
-#if defined(USBCON) && !defined(CORE_TEENSY)
+#if defined(USBCON) && !defined(TEENSYDUINO)
 #include "MIDIUSB.h"
 #endif
 
-// If the main MCU has a USB connection or is a Teensy
-#if defined(USBCON) || defined(CORE_TEENSY)
+// If the main MCU has a USB connection or is a Teensy with MIDI USB type
+#if defined(USBCON) || defined(TEENSY_MIDIUSB_ENABLED)
 /**
  * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI
  *          connection.
@@ -35,7 +39,7 @@ class USBMIDI_Interface : public MIDI_Interface {
     USBMIDI_Parser parser;
 
 // If it's a Teensy board
-#if defined(CORE_TEENSY)
+#if defined(TEENSYDUINO)
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
         usb_midi_write_packed((m >> 4) | ((m | c) << 8) | (d1 << 16) |
                               (d2 << 24));
@@ -55,7 +59,7 @@ class USBMIDI_Interface : public MIDI_Interface {
 
   public:
 // If it's a Teensy board
-#if defined(CORE_TEENSY)
+#if defined(TEENSYDUINO)
     MIDI_read_t read() override {
         while (1) {
             if (rx_packet == nullptr) { // If there's no previous packet
@@ -112,7 +116,7 @@ class USBMIDI_Interface : public MIDI_Interface {
 
   private:
 // If it's a Teensy board
-#if defined(CORE_TEENSY)
+#if defined(TEENSYDUINO)
     usb_packet_t *rx_packet = nullptr;
 
 // If the main MCU has a USB connection but is not a Teensy
@@ -124,7 +128,7 @@ class USBMIDI_Interface : public MIDI_Interface {
 // If the main MCU doesn't have a USB connection:
 // Fall back on Serial connection at the hardware MIDI baud rate.
 // (Can be used with HIDUINO or USBMidiKliK.)
-#else
+#elif !defined(USBCON) && !defined(TEENSYDUINO)
 
 #include "SerialMIDI_Interface.h"
 

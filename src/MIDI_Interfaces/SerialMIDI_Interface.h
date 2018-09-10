@@ -1,9 +1,9 @@
 #pragma once
 
-#include <MIDI_Parsers/SerialMIDI_Parser.h>
-#include <Settings/SettingsWrapper.h>
 #include "MIDI_Interface.h"
 #include <Arduino.h> // Stream
+#include <MIDI_Parsers/SerialMIDI_Parser.h>
+#include <Settings/SettingsWrapper.h>
 
 /**
  * @brief   A class for MIDI interfaces sending and receiving MIDI messages
@@ -135,7 +135,8 @@ class USBSerialMIDI_Interface : public HardwareSerialMIDI_Interface {
 };
 
 // Teensies
-#elif defined(CORE_TEENSY)
+#elif defined(TEENSYDUINO)
+#if defined(TEENSY_SERIALUSB_ENABLED)
 /**
  * @brief   A class for MIDI interfaces sending and receiving
  *          MIDI messages over the USB Serial CDC connection.
@@ -156,6 +157,7 @@ class USBSerialMIDI_Interface : public SerialMIDI_Interface<usb_serial_class> {
     USBSerialMIDI_Interface(unsigned long baud)
         : SerialMIDI_Interface(Serial, baud) {}
 };
+#endif
 
 // Arduino DUE
 #elif defined(ARDUINO_ARCH_SAM)
@@ -204,6 +206,7 @@ class USBSerialMIDI_Interface : public SerialMIDI_Interface<Serial_> {
 };
 #endif
 
+#if defined(TEENSYDUINO) && defined(TEENSY_SERIALUSB_ENABLED)
 /**
  * @brief   A class for MIDI Interfaces sending and receiving
  *          data over the USB Serial CDC connection for the use
@@ -222,8 +225,9 @@ class HairlessMIDI_Interface : public USBSerialMIDI_Interface {
      */
     HairlessMIDI_Interface() : USBSerialMIDI_Interface(HAIRLESS_BAUD){};
 };
+#endif
 
-#if defined(__AVR__) || defined(CORE_TEENSY)
+#if defined(__AVR__) || defined(TEENSYDUINO)
 #include <SoftwareSerial.h>
 /**
  * @brief   A class for MIDI interfaces sending and receiving

@@ -121,8 +121,7 @@ void Control_Surface_::updateInputs() {
 }
 
 void Control_Surface_::updateDisplays() {
-    DisplayInterface::clearAll();
-    DisplayInterface::drawAllBackgrounds();
+    DisplayInterface::clearAllAndDrawAllBackgrounds();
     DisplayElement::drawAll();
     DisplayInterface::displayAll();
 }

@@ -9,7 +9,7 @@ namespace MCU {
 class TimeDisplayDisplay : public DisplayElement {
   public:
     TimeDisplayDisplay(DisplayInterface &display,
-                       const TimeDisplay &timedisplay, Location loc,
+                       const TimeDisplay &timedisplay, PixelLocation loc,
                        uint8_t size, uint16_t color)
         : DisplayElement(display), timedisplay(timedisplay), x(loc.x), y(loc.y),
           size(size), color(color) {}

@@ -24,7 +24,238 @@ ReversionWrapper<T> reverse(T &&iterable) {
     return {iterable};
 }
 
-// -------------------------------------------------------------------------- //
+// --------------------------------- Lists ---------------------------------- //
+
+TEST(DoublyLinkedList, insertNode) {
+    DoublyLinkedList<TestNode> list;
+    TestNode a(1);
+    list.append(a);
+    EXPECT_EQ(list.getFirst(), &a);
+    EXPECT_EQ(list.getLast(), &a);
+    EXPECT_EQ(a.getPrevious(), nullptr);
+    EXPECT_EQ(a.getNext(), nullptr);
+    TestNode b(2);
+    list.append(b);
+    EXPECT_EQ(list.getFirst(), &a);
+    EXPECT_EQ(list.getLast(), &b);
+    EXPECT_EQ(a.getPrevious(), nullptr);
+    EXPECT_EQ(a.getNext(), &b);
+    EXPECT_EQ(b.getPrevious(), &a);
+    EXPECT_EQ(b.getNext(), nullptr);
+    TestNode c(3);
+    list.append(c);
+    EXPECT_EQ(list.getFirst(), &a);
+    EXPECT_EQ(list.getLast(), &c);
+    EXPECT_EQ(a.getPrevious(), nullptr);
+    EXPECT_EQ(a.getNext(), &b);
+    EXPECT_EQ(b.getPrevious(), &a);
+    EXPECT_EQ(b.getNext(), &c);
+    EXPECT_EQ(c.getPrevious(), &b);
+    EXPECT_EQ(c.getNext(), nullptr);
+}
+
+TEST(DoublyLinkedList, deleteNode) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode *nodes[5];
+    for (int i = 0; i < 5; i++) {
+        nodes[i] = new TestNode(i);
+        list.append(nodes[i]);
+    }
+    list.remove(nodes[2]);
+    EXPECT_EQ(nodes[1]->getNext(), nodes[3]);
+    EXPECT_EQ(nodes[3]->getPrevious(), nodes[1]);
+    for (TestNode *&node : nodes) {
+        delete node;
+    }
+}
+
+TEST(DoublyLinkedList, deleteFirstNode) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode *nodes[5];
+    for (int i = 0; i < 5; i++) {
+        nodes[i] = new TestNode(i);
+        list.append(nodes[i]);
+    }
+    list.remove(nodes[0]);
+    EXPECT_EQ(nodes[1]->getPrevious(), nullptr);
+    EXPECT_EQ(list.getFirst(), nodes[1]);
+    for (TestNode *&node : nodes)
+        delete node;
+}
+
+TEST(DoublyLinkedList, deleteLastNode) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode *nodes[5];
+    for (int i = 0; i < 5; i++) {
+        nodes[i] = new TestNode(i);
+        list.append(nodes[i]);
+    }
+    list.remove(nodes[4]);
+    EXPECT_EQ(nodes[3]->getNext(), nullptr);
+    EXPECT_EQ(list.getLast(), nodes[3]);
+    for (TestNode *&node : nodes)
+        delete node;
+}
+
+TEST(DoublyLinkedList, moveDownNode) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode *nodes[5];
+    for (int i = 0; i < 5; i++) {
+        nodes[i] = new TestNode(i);
+        list.append(nodes[i]);
+    }
+   list.moveDown(nodes[3]);
+    EXPECT_EQ(nodes[2]->getNext(), nodes[4]);
+    EXPECT_EQ(nodes[4]->getPrevious(), nodes[2]);
+    EXPECT_EQ(nodes[3]->getNext(), nodes[2]);
+    EXPECT_EQ(nodes[2]->getPrevious(), nodes[3]);
+    EXPECT_EQ(nodes[3]->getPrevious(), nodes[1]);
+    EXPECT_EQ(nodes[1]->getNext(), nodes[3]);
+    for (TestNode *&node : nodes)
+        delete node;
+}
+
+TEST(DoublyLinkedList, moveDownFirstNode) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode *nodes[5];
+    for (int i = 0; i < 5; i++) {
+        nodes[i] = new TestNode(i);
+        list.append(nodes[i]);
+    }
+    list.moveDown(nodes[0]);
+    EXPECT_EQ(list.getFirst(), nodes[0]);
+    EXPECT_EQ(nodes[0]->getPrevious(), nullptr);
+    EXPECT_EQ(nodes[0]->getNext(), nodes[1]);
+    EXPECT_EQ(nodes[1]->getPrevious(), nodes[0]);
+    for (TestNode *&node : nodes)
+        delete node;
+}
+
+TEST(DoublyLinkedList, moveDownSecondNode) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode *nodes[5];
+    for (int i = 0; i < 5; i++) {
+        nodes[i] = new TestNode(i);
+        list.append(nodes[i]);
+    }
+    list.moveDown(nodes[1]);
+    EXPECT_EQ(list.getFirst(), nodes[1]);
+    EXPECT_EQ(nodes[0]->getPrevious(), nodes[1]);
+    EXPECT_EQ(nodes[0]->getNext(), nodes[2]);
+    EXPECT_EQ(nodes[1]->getPrevious(), nullptr);
+    EXPECT_EQ(nodes[1]->getNext(), nodes[0]);
+    for (TestNode *&node : nodes)
+        delete node;
+}
+
+TEST(DoublyLinkedList, moveDownLastNode) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode *nodes[5];
+    for (int i = 0; i < 5; i++) {
+        nodes[i] = new TestNode(i);
+        list.append(nodes[i]);
+    }
+    list.moveDown(nodes[4]);
+    EXPECT_EQ(list.getLast(), nodes[3]);
+    EXPECT_EQ(nodes[3]->getPrevious(), nodes[4]);
+    EXPECT_EQ(nodes[3]->getNext(), nullptr);
+    EXPECT_EQ(nodes[4]->getPrevious(), nodes[2]);
+    EXPECT_EQ(nodes[4]->getNext(), nodes[3]);
+    for (TestNode *&node : nodes)
+        delete node;
+}
+
+TEST(DoublyLinkedList, moveDownOnlyElement) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode node(0);
+    list.append(&node);
+    list.moveDown(&node);
+    EXPECT_EQ(list.getFirst(), &node);
+    EXPECT_EQ(list.getLast(), &node);
+    EXPECT_EQ(node.getNext(), nullptr);
+    EXPECT_EQ(node.getPrevious(), nullptr);
+}
+
+TEST(DoublyLinkedList, couldContainInsert) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode a(1);
+    EXPECT_FALSE(list.couldContain(&a));
+    list.append(a);
+    EXPECT_TRUE(list.couldContain(&a));
+    TestNode b(2);
+    EXPECT_FALSE(list.couldContain(&b));
+    list.append(&b);
+    EXPECT_TRUE(list.couldContain(&a));
+    EXPECT_TRUE(list.couldContain(&b));
+    TestNode c(3);
+    EXPECT_FALSE(list.couldContain(&c));
+    list.append(&c);
+    EXPECT_TRUE(list.couldContain(&a));
+    EXPECT_TRUE(list.couldContain(&b));
+    EXPECT_TRUE(list.couldContain(&c));
+}
+
+TEST(DoublyLinkedList, couldContainDeleteFirst) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode a(1);
+    list.append(&a);
+    TestNode b(2);
+    list.append(&b);
+    TestNode c(3);
+    list.append(&c);
+
+    list.remove(&a);
+    EXPECT_FALSE(list.couldContain(&a));
+
+    list.append(&a);
+    EXPECT_TRUE(list.couldContain(&a));
+}
+
+TEST(DoublyLinkedList, couldContainDeleteMiddle) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode a(1);
+    list.append(&a);
+    TestNode b(2);
+    list.append(&b);
+    TestNode c(3);
+    list.append(&c);
+
+    list.remove(&b);
+    EXPECT_FALSE(list.couldContain(&b));
+
+    list.append(&b);
+    EXPECT_TRUE(list.couldContain(&b));
+}
+
+TEST(DoublyLinkedList, couldContainDeleteLast) {
+    DoublyLinkedList<TestNode> list;
+    
+    TestNode a(1);
+    list.append(&a);
+    TestNode b(2);
+    list.append(&b);
+    TestNode c(3);
+    list.append(&c);
+
+    list.remove(&c);
+    EXPECT_FALSE(list.couldContain(&c));
+
+    list.append(&c);
+    EXPECT_TRUE(list.couldContain(&c));
+}
+
+// -------------------------------- Iterator -------------------------------- //
 
 TEST(DoublyLinkedList, iterator) {
     DoublyLinkedList<TestNode> ll;

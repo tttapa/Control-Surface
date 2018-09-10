@@ -1,40 +1,34 @@
 #pragma once
 
 #include <Display/DisplayInterface.hpp>
-#include <Helpers/LinkedList.h>
+#include <Helpers/LinkedList.hpp>
 
-struct Location {
-    int16_t x;
-    int16_t y;
-};
-
-class DisplayElement {
+class DisplayElement : public DoublyLinkable<DisplayElement> {
   protected:
     DisplayElement(DisplayInterface &display) : display(display) {
-        LinkedList::append(this, first, last);
+        elements.append(this);
     }
 
   public:
-    virtual ~DisplayElement() { LinkedList::remove(this, first, last); }
+    virtual ~DisplayElement() { elements.remove(this); }
 
+    /** 
+     * @brief   Draw this DisplayElement to the display buffer.
+     */
     virtual void draw() = 0;
 
+    /**
+     * @brief   Draw all DisplayElement%s to their display buffers.
+     * 
+     * @see     DisplayElement#draw
+     */
     static void drawAll() {
-        for (DisplayElement *el = first; el; el = el->next)
-            el->draw();
+        for (DisplayElement &el : elements)
+            el.draw();
     }
 
   protected:
     DisplayInterface &display;
 
-    DisplayElement *next;
-    DisplayElement *previous;
-
-    static DisplayElement *first;
-    static DisplayElement *last;
-
-    template <class Node>
-    friend void LinkedList::append(Node *, Node *&, Node *&);
-    template <class Node>
-    friend void LinkedList::remove(Node *, Node *&, Node *&);
+    static DoublyLinkedList<DisplayElement> elements;
 };

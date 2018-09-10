@@ -160,6 +160,9 @@ class DoublyLinkedList {
     const_reverse_iterator rbegin() const { return {last}; }
     const_reverse_iterator rend() const { return {nullptr}; }
 
+    Node *getFirst() const { return first; }
+    Node *getLast() const { return last; }
+
   private:
     Node *first = nullptr;
     Node *last = nullptr;

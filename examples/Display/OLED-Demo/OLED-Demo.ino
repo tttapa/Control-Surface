@@ -20,7 +20,7 @@
 #include <Control_Surface.h> // Include the Control Surface library
 // Include the display interface you'd like to use
 #include <Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp>
-#include <Wire.h>             // Include the I²C library for the display
+#include <Wire.h> // Include the I²C library for the display
 
 // ----------------------------- MIDI Interface ----------------------------- //
 // ========================================================================== //
@@ -42,10 +42,10 @@ USBMIDI_Interface midi;
 Adafruit_SSD1306 ssd1306Display; // Instantiate a display
 
 void initializeDisplay() {
-  // Initialize with the display with I²C address 0x3C
-  ssd1306Display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
-  Wire.setClock(1800000); // Set the I²C clock to 1.8 MHz for faster refresh 
-  ssd1306Display.setRotation(2); // Flip the display upside down
+    // Initialize with the display with I²C address 0x3C
+    ssd1306Display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+    Wire.setClock(1800000); // Set the I²C clock to 1.8 MHz for faster refresh
+    ssd1306Display.setRotation(2); // Flip the display upside down
 }
 
 // --------------------------- Display interface ---------------------------- //
@@ -59,12 +59,10 @@ void initializeDisplay() {
 
 class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
   public:
-    MySSD1306_DisplayInterface(Adafruit_SSD1306 &display) 
+    MySSD1306_DisplayInterface(Adafruit_SSD1306 &display)
         : SSD1306_DisplayInterface(display) {}
 
-    void drawBackground() override {
-      disp.drawLine(1, 8, 126, 8, WHITE);
-    }
+    void drawBackground() override { disp.drawLine(1, 8, 126, 8, WHITE); }
 } display = ssd1306Display;
 
 // ------------------------------- Bank setup ------------------------------- //
@@ -89,18 +87,18 @@ IncrementDecrementSelector<4> bankselector(bank, {8, 9});
 
 constexpr uint8_t channel = 1;
 
-PBPotentiometer masterVolume = { A1, 9 };
+PBPotentiometer masterVolume = {A1, 9};
 
 // Instantiate the buttons
 Bankable::NoteButton channelButtons[] = {
-  {bank, 4, MCU::V_POT_SELECT_1, channel},
-  {bank, 5, MCU::MUTE_1, channel},
-  {bank, 6, MCU::SOLO_1, channel},
-  
-  // {bank, 7, MCU::REC_RDY_1, channel},
-  // { bank, 12, MCU::V_POT_SELECT_2, channel },
-  // { bank, 10, MCU::MUTE_2,         channel },
-  // { bank, 11, MCU::SOLO_2,         channel },
+    {bank, 4, MCU::V_POT_SELECT_1, channel},
+    {bank, 5, MCU::MUTE_1, channel},
+    {bank, 6, MCU::SOLO_1, channel},
+
+    // {bank, 7, MCU::REC_RDY_1, channel},
+    // { bank, 12, MCU::V_POT_SELECT_2, channel },
+    // { bank, 10, MCU::MUTE_2,         channel },
+    // { bank, 11, MCU::SOLO_2,         channel },
 };
 
 NoteButton playButton = {7, MCU::PLAY, channel};
@@ -108,8 +106,7 @@ NoteButton playButton = {7, MCU::PLAY, channel};
 
 // Bankable::CCRotaryEncoder encoder_A = { bank, {0, 1}, MCU::V_POT_1, channel, 1, 4 };
 Bankable::CCRotaryEncoder encoder_B = {bank,    {2, 3}, MCU::V_POT_1,
-                                       channel, 1,      4
-                                      };
+                                       channel, 1,      4};
 
 // -------------------------- MIDI Input Elements --------------------------- //
 // ========================================================================== //
@@ -156,43 +153,34 @@ MCU::Bankable::VPotRing<4> vpot_B = {bank, 2, channel};
 
 // Time display
 MCU::TimeDisplayDisplay timedisplaydisplay = {
-  display, timedisplay, {0, 0}, 1, WHITE
-};
+    display, timedisplay, {0, 0}, 1, WHITE};
 // position (0, 0), font size (1)
 
 // Play / Record
 NoteBitmapDisplay playDisp = {display, play, XBM::play_7, {16 + 64, 0}, WHITE};
 NoteBitmapDisplay recordDisp = {
-  display, record, XBM::record_7, {26 + 64, 0}, WHITE
-};
+    display, record, XBM::record_7, {26 + 64, 0}, WHITE};
 
 // Mute
 NoteBitmapDisplay muteDisp_A = {
-  display, mute_A, XBM::mute_10B, {14, 50}, WHITE
-};
+    display, mute_A, XBM::mute_10B, {14, 50}, WHITE};
 NoteBitmapDisplay muteDisp_B = {
-  display, mute_B, XBM::mute_10B, {14 + 64, 50}, WHITE
-};
+    display, mute_B, XBM::mute_10B, {14 + 64, 50}, WHITE};
 
 // Solo
 NoteBitmapDisplay soloDisp_A = {
-  display, solo_A, XBM::solo_10B, {14, 50}, WHITE
-};
+    display, solo_A, XBM::solo_10B, {14, 50}, WHITE};
 NoteBitmapDisplay soloDisp_B = {
-  display, solo_B, XBM::solo_10B, {14 + 64, 50}, WHITE
-};
+    display, solo_B, XBM::solo_10B, {14 + 64, 50}, WHITE};
 
 NoteBitmapDisplay rudeSoloDisp = {
-  display, rudeSolo, XBM::solo_7, {36 + 64, 0}, WHITE
-};
+    display, rudeSolo, XBM::solo_7, {36 + 64, 0}, WHITE};
 
 // Record arm / ready
 NoteBitmapDisplay recrdyDisp_A = {
-  display, recrdy_A, XBM::rec_rdy_10B, {14 + 14, 50}, WHITE
-};
+    display, recrdy_A, XBM::rec_rdy_10B, {14 + 14, 50}, WHITE};
 NoteBitmapDisplay recrdyDisp_B = {
-  display, recrdy_B, XBM::rec_rdy_10B, {14 + 14 + 64, 50}, WHITE
-};
+    display, recrdy_B, XBM::rec_rdy_10B, {14 + 14 + 64, 50}, WHITE};
 
 // VU meters
 MCU::VUDisplay vuDisp_A = {display, vu_A, {32 + 11, 60}, 16, 3, 1, WHITE};
@@ -213,18 +201,15 @@ SelectorDisplay<4> bsDisp_B = {display, bankselector, 2, 2, {64, 50}, 2, WHITE};
 // ========================================================================== //
 
 void setup() {
-  RelativeCCSender::setMode(MACKIE_CONTROL_RELATIVE); // Correct mode for
-  // MCU rotary encoders
-  initializeDisplay();     // Start the OLED display
-  Serial.begin(115200);
-  // while (!Serial);
-  // delay(250);
-  Control_Surface.begin(); // Initialize Control Surface
+    RelativeCCSender::setMode(MACKIE_CONTROL_RELATIVE); // Correct mode for
+                                                        // MCU rotary encoders
+    initializeDisplay();     // Start the OLED display
+    Control_Surface.begin(); // Initialize Control Surface
 }
 
 // ---------------------------------- Loop ---------------------------------- //
 // ========================================================================== //
 
 void loop() {
-  Control_Surface.loop(); // Refresh all elements
+    Control_Surface.loop(); // Refresh all elements
 }

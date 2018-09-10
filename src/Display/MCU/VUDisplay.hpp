@@ -7,7 +7,7 @@ namespace MCU {
 
 class VUDisplay : public DisplayElement {
   public:
-    VUDisplay(DisplayInterface &display, IVU &vu, Location loc,
+    VUDisplay(DisplayInterface &display, IVU &vu, PixelLocation loc,
               uint16_t width, uint8_t blockheight, uint8_t spacing,
               uint16_t color)
         : DisplayElement(display), vu(vu), x(loc.x), y(loc.y - blockheight + 1),

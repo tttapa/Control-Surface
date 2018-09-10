@@ -7,7 +7,7 @@
 class NoteBitmapDisplay : public DisplayElement {
   public:
     NoteBitmapDisplay(DisplayInterface &display, MIDINote_Base &note,
-                      const XBitmap &xbm, Location loc, uint16_t color)
+                      const XBitmap &xbm, PixelLocation loc, uint16_t color)
         : DisplayElement(display), note(note), xbm(xbm), x(loc.x), y(loc.y),
           color(color) {}
 

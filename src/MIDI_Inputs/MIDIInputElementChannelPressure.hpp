@@ -1,9 +1,11 @@
 #pragma once
 
 #include "MIDIInputElement.hpp"
-#include <Helpers/LinkedList.h>
+#include <Helpers/LinkedList.hpp>
 
-class MIDIInputElementChannelPressure : public MIDIInputElement {
+class MIDIInputElementChannelPressure
+    : public MIDIInputElement,
+      public DoublyLinkable<MIDIInputElementChannelPressure> {
   public:
     /**
      * @brief   Constructor.
@@ -11,20 +13,18 @@ class MIDIInputElementChannelPressure : public MIDIInputElement {
      */
     MIDIInputElementChannelPressure(uint8_t baseChannel)
         : MIDIInputElement(baseChannel) {
-        LinkedList::append(this, first, last);
+        elements.append(this);
     }
 
     /**
      * @brief   Destructor.
      * @todo    Documentation.
      */
-    virtual ~MIDIInputElementChannelPressure() {
-        LinkedList::remove(this, first, last);
-    }
+    virtual ~MIDIInputElementChannelPressure() { elements.remove(this); }
 
     static void beginAll() {
-        for (MIDIInputElementChannelPressure *el = first; el; el = el->next)
-            el->begin();
+        for (MIDIInputElementChannelPressure &el : elements)
+            el.begin();
     }
 
     /**
@@ -34,16 +34,16 @@ class MIDIInputElementChannelPressure : public MIDIInputElement {
      * @see     MIDIInputElementNote#reset
      */
     static void resetAll() {
-        for (MIDIInputElementChannelPressure *e = first; e; e = e->next)
-            e->reset();
+        for (MIDIInputElementChannelPressure &el : elements)
+            el.reset();
     }
 
     /**
      * @brief   Update all MIDIInputElementChannelPressure elements.
      */
     static void updateAll() {
-        for (MIDIInputElementChannelPressure *e = first; e; e = e->next)
-            e->update();
+        for (MIDIInputElementChannelPressure &el : elements)
+            el.update();
     }
 
     /**
@@ -53,22 +53,13 @@ class MIDIInputElementChannelPressure : public MIDIInputElement {
      * @see     MIDIInputElementChannelPressure#updateWith
      */
     static void updateAllWith(const MIDI_message_matcher &midimsg) {
-        for (MIDIInputElementChannelPressure *e = first; e; e = e->next)
-            if (e->updateWith(midimsg))
+        for (MIDIInputElementChannelPressure &el : elements)
+            if (el.updateWith(midimsg))
                 return;
     }
 
   private:
-    void moveDown() override { LinkedList::moveDown(this, first, last); }
+    void moveDown() override { elements.moveDown(this); }
 
-    MIDIInputElementChannelPressure *next = nullptr, *previous = nullptr;
-    static MIDIInputElementChannelPressure *last;
-    static MIDIInputElementChannelPressure *first;
-
-    template <class Node>
-    friend void LinkedList::append(Node *, Node *&, Node *&);
-    template <class Node>
-    friend void LinkedList::moveDown(Node *, Node *&, Node *&);
-    template <class Node>
-    friend void LinkedList::remove(Node *, Node *&, Node *&);
+    static DoublyLinkedList<MIDIInputElementChannelPressure> elements;
 };

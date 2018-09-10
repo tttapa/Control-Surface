@@ -19,7 +19,6 @@ class Control_Surface_ : public MIDI_Callbacks {
     static Control_Surface_ &getInstance();
     Control_Surface_(Control_Surface_ const &) = delete;
     void operator=(Control_Surface_ const &) = delete;
-    ~Control_Surface_() = default;
 
     /**
      * @brief   Initialize the Control_Surface.
@@ -59,8 +58,8 @@ class Control_Surface_ : public MIDI_Callbacks {
     void onChannelMessage(MIDI_Interface &midi) override;
 
     /** 
-     * @brief   The callback to be called when a MIDI channel message is
-     *          received.
+     * @brief   The callback to be called when a MIDI System Exclusive message
+     *          is received.
      */
     void onSysExMessage(MIDI_Interface &midi) override;
 

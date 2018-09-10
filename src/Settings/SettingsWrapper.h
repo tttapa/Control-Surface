@@ -15,6 +15,15 @@
 #endif
 #endif
 
+#ifdef TEENSYDUINO
+#include <Helpers/TeensyUSBTypes.hpp>
+#if defined(DEBUG_OUT) && (DEBUG_OUT == Serial) &&     \
+    !defined(TEENSY_SERIALUSB_ENABLED)
+#error                                                                         \
+    "Debugging is enabled on the CDC Serial port, but the USB type doesn't support Serial"
+#endif
+#endif
+
 // ------- Debug ------- //
 // ===================== //
 #include <Helpers/Debug.hpp>

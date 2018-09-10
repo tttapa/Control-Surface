@@ -1,4 +1,4 @@
 #include "MIDIInputElementChannelPressure.hpp"
 
-MIDIInputElementChannelPressure *MIDIInputElementChannelPressure::last = nullptr;
-MIDIInputElementChannelPressure *MIDIInputElementChannelPressure::first = nullptr;
+DoublyLinkedList<MIDIInputElementChannelPressure>
+    MIDIInputElementChannelPressure::elements;
