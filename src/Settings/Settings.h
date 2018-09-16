@@ -8,8 +8,7 @@
  * @brief All user settings and debugging options can be changed here.
  */
 
-#include <stddef.h>
-#include <stdint.h>
+#include <Def/Def.hpp>
 
 // ----------------------------- Debug Settings ----------------------------- //
 // ========================================================================== //
@@ -82,5 +81,7 @@ constexpr unsigned long HAIRLESS_BAUD = 115200;
 
 /** The maximum frame rate of the displays. */
 constexpr uint8_t MAX_FPS = 30;
+
+constexpr static Frequency SPI_MAX_SPEED = 8_MHz;
 
 // ========================================================================== //

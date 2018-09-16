@@ -1,6 +1,6 @@
 #include <Control_Surface.h>
 
-USBDebugMIDI_Interface midi(115200);
+USBMIDI_Interface midi;
 
 Button enableButton = 2; // Momentary push button between pin 2 and ground
 PBPotentiometer masterVolume = { A0, 9 }; // Potentiometer to pin A0

@@ -21,8 +21,8 @@
  * ```
  * 
  * The order of the colors doesn't matter. You can change them in software using
- * the `ShiftRegisterOutBase::redBit`, `ShiftRegisterOutBase::greenBit` and 
- * `ShiftRegisterOutBase::blueBit` constants.
+ * the `ShiftRegisterOutRGB::redBit`, `ShiftRegisterOutRGB::greenBit` and 
+ * `ShiftRegisterOutRGB::blueBit` constants.
  * 
  * If you wired the LEDs as RGB (red first, then green and then blue), the red 
  * bit is 0, the green bit is 1 and the blue bit is 2.  
@@ -278,3 +278,4 @@
  * 22: DIN (I²S)
  * 23: LRCK (I²S)
  */
+

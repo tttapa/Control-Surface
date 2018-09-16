@@ -55,8 +55,6 @@ class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
      * @brief   Write the state buffer to the physical outputs.
      */
     void update() override;
-
-    constexpr static Frequency SPI_MAX_SPEED = 8_MHz;
 };
 
 #include "SPIShiftRegisterOut.ipp"
