@@ -27,7 +27,10 @@ class MIDICNChannelAddress {
         : addresses{1, (uint8_t)address, (uint8_t)channel,
                     (uint8_t)cableNumber} {
     } // Deliberate overflow for negative numbers
-    
+    /* MIDICNChannelAddress(uint8_t address, uint8_t channel = CHANNEL_1,
+                         uint8_t cableNumber = 0)
+        : addresses{1, address, channel, cableNumber} {} */
+
     MIDICNChannelAddress &operator+=(const MIDICNChannelAddress &rhs) {
         if (!this->isValid() || !rhs.isValid()) {
             this->addresses.valid = false;
@@ -41,14 +44,15 @@ class MIDICNChannelAddress {
 
     MIDICNChannelAddress operator+(const MIDICNChannelAddress &rhs) const {
         MIDICNChannelAddress copy = *this;
-        return copy += rhs;
+        copy += rhs;
+        return copy;
     }
 
     bool operator==(const MIDICNChannelAddress &rhs) const {
-        return this->addresses.valid == rhs.addresses.valid
-            && this->addresses.address == rhs.addresses.address
-            && this->addresses.channel == rhs.addresses.channel
-            && this->addresses.cableNumber == rhs.addresses.cableNumber;
+        return this->addresses.valid == rhs.addresses.valid &&
+               this->addresses.address == rhs.addresses.address &&
+               this->addresses.channel == rhs.addresses.channel &&
+               this->addresses.cableNumber == rhs.addresses.cableNumber;
     }
 
     bool operator!=(const MIDICNChannelAddress &rhs) const {

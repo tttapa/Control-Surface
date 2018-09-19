@@ -49,7 +49,7 @@ class NoteButtonMatrix
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    NoteButtonMatrix(const OutputBankConfigAddressable &config,
+    NoteButtonMatrix(const OutputBankConfig &config,
                      const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &notes,

@@ -4,10 +4,9 @@
 #include <stddef.h> // size_t
 #include <stdint.h> // uint8_t
 
-typedef uint16_t pin_t;
 typedef int16_t analog_t;
-
-constexpr pin_t NO_PIN = {0x8000};
+typedef uint16_t pin_t;
+constexpr pin_t NO_PIN = 1 << (8 * sizeof(pin_t) - 1);
 
 using MappingFunction = int (*)(int);
 
@@ -32,6 +31,7 @@ using ContinuousSendFunction14Bit = void (*)(uint16_t, uint8_t);
 using RelativeSendFunction = void (*)(long, uint8_t, uint8_t);
 
 using setting_t = uint8_t;
+constexpr setting_t NO_SETTING = 1 << (8 * sizeof(setting_t) - 1);
 
 // Updatable types:
 struct NormalUpdatable {};

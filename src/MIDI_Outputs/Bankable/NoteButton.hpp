@@ -33,10 +33,10 @@ class NoteButton
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    NoteButton(const OutputBankConfigAddressable &config, pin_t pin, uint8_t note,
+    NoteButton(const OutputBankConfig &config, pin_t pin, uint8_t note,
                uint8_t channel = 1)
         : MIDIButton<DigitalNoteSender::sendOn, DigitalNoteSender::sendOff>(
-              config, pin, note, channel) {}
+              config, pin, {note, channel}) {}
 };
 
 } // namespace Bankable

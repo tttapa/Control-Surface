@@ -22,6 +22,11 @@ class VULEDs_Base : virtual public VU_Base {
   private:
     const DotBarDisplayLEDs<N> leds;
 
+    MIDICNChannelAddress
+    getTarget(const MIDI_message_matcher &midimsg) const override {
+        return {0, midimsg.channel};
+    }
+
     /** @see    doc/VU-LED-mapping.ods */
     constexpr static uint8_t FLOOR_CORRECTION = 5;
 };
@@ -54,9 +59,8 @@ namespace Bankable {
 template <uint8_t M, uint8_t N>
 class VULEDs : public VU<M>, public VULEDs_Base<N> {
   public:
-    VULEDs(const BankConfigAddressable<M> &config,
-           const DotBarDisplayLEDs<N> &leds, uint8_t track, uint8_t channel = 1,
-           unsigned int decayTime = 150)
+    VULEDs(const BankConfig<M> &config, const DotBarDisplayLEDs<N> &leds,
+           uint8_t track, uint8_t channel = 1, unsigned int decayTime = 150)
         : VU_Base(track, channel, decayTime),
           VU<M>(config, track, channel, decayTime), VULEDs_Base<N>(leds) {}
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <Banks/BankableMIDIOutput.hpp>
+#include <Def/Def.hpp>
 #include <Hardware/Button.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
-#include <Def/Def.hpp>
 
 namespace Bankable {
 
@@ -15,8 +15,7 @@ namespace Bankable {
  * @see     Button
  */
 template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
-class MIDIButton : public BankableMIDIOutputAddressable,
-                   public MIDIOutputElement {
+class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new bankable MIDIButton.
@@ -25,28 +24,29 @@ class MIDIButton : public BankableMIDIOutputAddressable,
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      */
-    MIDIButton(const OutputBankConfigAddressable &config, pin_t pin,
-               uint8_t baseAddress, uint8_t baseChannel)
-        : BankableMIDIOutputAddressable(config), button{pin},
-          baseAddress(baseAddress), baseChannel(baseChannel) {}
+    MIDIButton(const OutputBankConfig &config, pin_t pin,
+               const MIDICNChannelAddress &address)
+        : BankableMIDIOutput(config), button{pin}, address(address) {}
 
   public:
     void begin() final override { button.begin(); }
     void update() final override {
         Button::State state = button.getState();
+        MIDICNChannelAddress sendAddress = address;
         if (state == Button::Falling) {
             lock();
-            sendOn(getChannel(baseChannel), getAddress(baseAddress));
+            sendAddress += getAddressOffset();
+            sendOn(sendAddress.getChannel(), sendAddress.getAddress());
         } else if (state == Button::Rising) {
-            sendOff(getChannel(baseChannel), getAddress(baseAddress));
+            sendAddress += getAddressOffset();
+            sendOff(sendAddress.getChannel(), sendAddress.getAddress());
             unlock();
         }
     }
 
   private:
     Button button;
-    const uint8_t baseAddress;
-    const uint8_t baseChannel;
+    const MIDICNChannelAddress address;
 };
 
 } // namespace Bankable

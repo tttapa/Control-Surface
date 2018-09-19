@@ -35,10 +35,10 @@ class CCButton
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    CCButton(const OutputBankConfigAddressable &config, pin_t pin, uint8_t controller,
+    CCButton(const OutputBankConfig &config, pin_t pin, uint8_t controller,
              uint8_t channel)
         : MIDIButton<DigitalCCSender::sendOn, DigitalCCSender::sendOff>(
-              config, pin, controller, channel) {}
+              config, pin, {controller, channel}) {}
 };
 
 } // namespace Bankable

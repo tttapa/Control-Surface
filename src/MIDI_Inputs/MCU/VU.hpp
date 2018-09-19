@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Banks/BankableMIDIInputAddressable.hpp>
+#include <Banks/BankableMIDIInput.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <Helpers/Copy.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
@@ -172,7 +172,7 @@ namespace Bankable {
  *          The number of banks.
  */
 template <size_t N>
-class VU : virtual public VU_Base, public BankableMIDIInputAddressable<N> {
+class VU : virtual public VU_Base, public BankableMIDIInput<N> {
   public:
     /** 
      * @brief   Construct a new Bankable VU object.
@@ -192,19 +192,14 @@ class VU : virtual public VU_Base, public BankableMIDIInputAddressable<N> {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(const BankConfigAddressable<N> &config, uint8_t track,
-       uint8_t channel = 1, unsigned int decayTime = 150)
-        : VU_Base(track, channel, decayTime), BankableMIDIInputAddressable<N>(
-                                                  config) {}
+    VU(const BankConfig<N> &config, uint8_t track, uint8_t channel = 1,
+       unsigned int decayTime = 150)
+        : VU_Base(track, channel, decayTime), BankableMIDIInput<N>(config) {}
 
     bool updateImpl(const MIDI_message_matcher &midimsg) {
         uint8_t targetTrack = midimsg.data1 >> 4;
-        DEBUGFN("target track = " << +targetTrack);
-        if (!matchTrack(targetTrack))
-            return false;
-        uint8_t index = this->getIndex(midimsg.channel, targetTrack,
-                                       getBaseChannel(), getBaseTrack()) %
-                        N;
+        MIDICNChannelAddress target = {targetTrack, midimsg.channel};
+        uint8_t index = this->getIndex(target, address) % N;
         uint8_t data = midimsg.data1 & 0x0F;
         switch (data) {
             case 0xF: clearOverload(index); break;
@@ -228,16 +223,15 @@ class VU : virtual public VU_Base, public BankableMIDIInputAddressable<N> {
     }
 
     uint8_t getRawValue() const override {
-        return values[this->getSelection()]; // TODO: N
+        return values[this->getSelection()];
     }
 
     inline bool matchTrack(uint8_t targetTrack) const {
-        return BankableMIDIInputAddressable<N>::matchAddress(targetTrack,
-                                                             getBaseTrack());
+        return BankableMIDIInput<N>::matchAddress(targetTrack, getBaseTrack());
     }
     inline bool matchChannel(uint8_t targetChannel) const override {
-        return BankableMIDIInputAddressable<N>::matchChannel(targetChannel,
-                                                             getBaseChannel());
+        return BankableMIDIInput<N>::matchChannel(targetChannel,
+                                                  getBaseChannel());
     }
     void setValue(uint8_t index, uint8_t newValue) {
         values[index] = setValueHelper(values[index], newValue);

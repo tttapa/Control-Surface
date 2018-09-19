@@ -34,11 +34,11 @@ class NoteButtonLatching
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    NoteButtonLatching(const OutputBankConfigAddressable &config, pin_t pin,
-                       uint8_t note, uint8_t channel)
+    NoteButtonLatching(const OutputBankConfig &config, pin_t pin, uint8_t note,
+                       uint8_t channel)
         : MIDIButtonLatching<DigitalNoteSender::sendOn,
-                             DigitalNoteSender::sendOff>(config, pin, note,
-                                                         channel) {}
+                             DigitalNoteSender::sendOff>(config, pin,
+                                                         {note, channel}) {}
 };
 
 } // namespace Bankable

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Banks/BankableMIDIInputAddressable.hpp>
+#include <Banks/BankableMIDIInput.hpp>
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
 
 namespace MCU {
@@ -117,11 +117,11 @@ namespace Bankable {
  */
 template <uint8_t N>
 class VPotRing : virtual public VPotRing_Base,
-                 public BankableMIDIInputAddressable<N> {
+                 public BankableMIDIInput<N> {
   public:
-    VPotRing(const BankConfigAddressable<N> &config, uint8_t track,
+    VPotRing(const BankConfig<N> &config, uint8_t track,
              uint8_t channel = 1)
-        : VPotRing_Base(track, channel), BankableMIDIInputAddressable<N>(
+        : VPotRing_Base(track, channel), BankableMIDIInput<N>(
                                              config) {}
 
     void reset() final override {
@@ -139,7 +139,7 @@ class VPotRing : virtual public VPotRing_Base,
     }
 
     bool matchAddress(uint8_t targetAddress) const override {
-        return BankableMIDIInputAddressable<N>::matchAddress(targetAddress,
+        return BankableMIDIInput<N>::matchAddress(targetAddress,
                                                              getBaseAddress());
     }
 

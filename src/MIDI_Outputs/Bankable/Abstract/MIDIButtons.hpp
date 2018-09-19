@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
 #include <Hardware/Button.h>
 #include <Helpers/Array.hpp>
@@ -17,20 +17,18 @@ namespace Bankable {
  */
 template <DigitalSendFunction sendOn, DigitalSendFunction sendOff,
           uint8_t NUMBER_OF_BUTTONS>
-class MIDIButtons : public BankableMIDIOutputAddressable,
-                    public MIDIOutputElement {
+class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIButtons.
      *
      * @todo    Documentation
      */
-    MIDIButtons(const OutputBankConfigAddressable &config,
+    MIDIButtons(const OutputBankConfig &config,
                 const Array<Button, NUMBER_OF_BUTTONS> &buttons,
-                uint8_t baseAddress, uint8_t baseChannel,
-                uint8_t addressIncrement, uint8_t channelIncrement)
-        : BankableMIDIOutputAddressable(config), buttons{buttons},
-          baseAddress(baseAddress), baseChannel(baseChannel),
+                const MIDICNChannelAddress &address, uint8_t addressIncrement,
+                uint8_t channelIncrement)
+        : BankableMIDIOutput(config), buttons{buttons}, address(address),
           increment((channelIncrement << 4) | (addressIncrement & 0xF)) {}
 
   public:
@@ -39,8 +37,10 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
             button.begin();
     }
     void update() final override {
-        uint8_t channel = getChannel(baseChannel);
-        uint8_t address = getAddress(baseAddress);
+        MIDICNChannelAddress sendAddress = this->address;
+        sendAddress += getAddressOffset();
+        uint8_t channel = sendAddress.getChannel();
+        uint8_t address = sendAddress.getAddress();
         uint8_t channelIncrement = getChannelIncrement();
         uint8_t addressIncrement = getAddressIncrement();
         for (Button &button : buttons) {
@@ -66,8 +66,7 @@ class MIDIButtons : public BankableMIDIOutputAddressable,
 
   private:
     Array<Button, NUMBER_OF_BUTTONS> buttons;
-    const uint8_t baseAddress;
-    const uint8_t baseChannel;
+    const MIDICNChannelAddress address;
     const uint8_t increment;
     uint8_t activeButtons = 0;
 };

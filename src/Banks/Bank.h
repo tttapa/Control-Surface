@@ -8,9 +8,9 @@
 #include <stdint.h>
 
 template <setting_t N>
-class BankableMIDIInputAddressable;
+class BankableMIDIInput;
 
-class BankableMIDIOutputAddressable;
+class BankableMIDIOutput;
 class BankableMIDIOutput;
 
 class OutputBank {
@@ -50,7 +50,7 @@ class OutputBank {
  */
 template <setting_t N>
 class Bank : public Selectable<N>, public OutputBank {
-    friend class BankableMIDIInputAddressable<N>;
+    friend class BankableMIDIInput<N>;
 
   public:
     /**
@@ -70,7 +70,7 @@ class Bank : public Selectable<N>, public OutputBank {
     /**
      * @brief   Set the Bank Setting to the given value.
      * 
-     * All BankableMIDIInputAddressable will be updated.
+     * All BankableMIDIInput will be updated.
      *
      * @param   bankSetting
      *          The new Bank Setting.
@@ -79,39 +79,39 @@ class Bank : public Selectable<N>, public OutputBank {
 
   private:
     /**
-     * @brief   Add a BankableMIDIInputAddressable to the bank.
+     * @brief   Add a BankableMIDIInput to the bank.
      * 
-     * This method is called in the BankableMIDIInputAddressable constructor.
+     * This method is called in the BankableMIDIInput constructor.
      *
      * @param   bankable
-     *          The BankableMIDIInputAddressable to be added.
+     *          The BankableMIDIInput to be added.
      */
-    void add(BankableMIDIInputAddressable<N> *bankable);
+    void add(BankableMIDIInput<N> *bankable);
 
     /**
-     * @brief   Remove a BankableMIDIInputAddressable from the bank.
+     * @brief   Remove a BankableMIDIInput from the bank.
      * 
-     * This method is called in the BankableMIDIInputAddressable destructor.
+     * This method is called in the BankableMIDIInput destructor.
      *
      * @param   bankable
-     *          The BankableMIDIInputAddressable to be removed.
+     *          The BankableMIDIInput to be removed.
      */
-    void remove(BankableMIDIInputAddressable<N> *bankable);
+    void remove(BankableMIDIInput<N> *bankable);
 
-    DoublyLinkedList<BankableMIDIInputAddressable<N>> inputBankables;
+    DoublyLinkedList<BankableMIDIInput<N>> inputBankables;
 };
 
 // ---------------------------- Implementations ----------------------------- //
 
-#include <Banks/BankableMIDIInputAddressable.hpp>
+#include <Banks/BankableMIDIInput.hpp>
 
 template <setting_t N>
-void Bank<N>::add(BankableMIDIInputAddressable<N> *bankable) {
+void Bank<N>::add(BankableMIDIInput<N> *bankable) {
     inputBankables.append(bankable);
 }
 
 template <setting_t N>
-void Bank<N>::remove(BankableMIDIInputAddressable<N> *bankable) {
+void Bank<N>::remove(BankableMIDIInput<N> *bankable) {
     inputBankables.remove(bankable);
 }
 
@@ -119,6 +119,6 @@ template <setting_t N>
 void Bank<N>::select(setting_t bankSetting) {
     bankSetting = this->validateSetting(bankSetting);
     OutputBank::select(bankSetting);
-    for (BankableMIDIInputAddressable<N> &e : inputBankables)
+    for (BankableMIDIInput<N> &e : inputBankables)
         e.onBankSettingChange();
 }

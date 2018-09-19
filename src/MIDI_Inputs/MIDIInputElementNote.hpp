@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MIDIInputElementAddressable.hpp"
+#include "MIDIInputElement.hpp"
 #include <Helpers/LinkedList.hpp>
 
 /**
@@ -8,7 +8,7 @@
  * 
  * @ingroup MIDIInputElements
  */
-class MIDIInputElementNote : public MIDIInputElementAddressable,
+class MIDIInputElementNote : public MIDIInputElement,
                              public DoublyLinkable<MIDIInputElementNote> {
   public:
     /**
@@ -16,7 +16,7 @@ class MIDIInputElementNote : public MIDIInputElementAddressable,
      * @todo    Documentation.
      */
     MIDIInputElementNote(uint8_t baseChannel, uint8_t baseNote)
-        : MIDIInputElementAddressable(baseChannel, baseNote) {
+        : MIDIInputElement{{baseChannel, baseNote}} {
         elements.append(this);
     }
 
