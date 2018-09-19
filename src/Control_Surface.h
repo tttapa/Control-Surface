@@ -90,6 +90,7 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <Hardware/ExtendedInputOutput/ShiftRegisterOut.h>
 #include <Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
+#include <Hardware/ExtendedInputOutput/MAX7219.hpp>
 
 // ----------------------------- MIDI Constants ----------------------------- //
 #include <MIDI_Constants/Control_Change.h>

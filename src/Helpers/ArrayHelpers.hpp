@@ -63,7 +63,7 @@ class Incrementor {
 template <class T, size_t N, class U>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
 generateArray(U start = 0, U increment = 1) {
-    Array<T, N> array = {};
+    Array<T, N> array;
     Incrementor<U> g(start, increment);
     generate(array.begin(), array.end(), g);
     return array;
