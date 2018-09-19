@@ -7,19 +7,7 @@ class MAX7219 : public MAX7219_Base, public ExtendedIOElement {
   public:
     MAX7219(pin_t loadPin) : MAX7219_Base(loadPin), ExtendedIOElement(8 * 8) {}
 
-    void begin() override {
-        init();
-    }
-
-    void setLED(uint8_t col, uint8_t row, bool val) {
-        if (val)
-            buffer[row] |= 1 << col;
-        else
-            buffer[row] &= ~(1 << col);
-        update();
-    }
-
-    bool getLED(uint8_t col, uint8_t row) { return buffer[row] & (1 << col); }
+    void begin() override { init(); }
 
     /**
      * @brief   The pinMode function is not implemented because the mode is
@@ -38,7 +26,8 @@ class MAX7219 : public MAX7219_Base, public ExtendedIOElement {
      *          (Either `HIGH` (1) or `LOW` (0))
      */
     void digitalWrite(pin_t pin, uint8_t val) override {
-        setLED(pin % 8, pin / 8, val);
+        buffer.set(pin, val);
+        update();
     }
 
     /**
@@ -51,7 +40,7 @@ class MAX7219 : public MAX7219_Base, public ExtendedIOElement {
      * @return  1
      *          The state of the output is `HIGH`.
      */
-    int digitalRead(pin_t pin) override { return getLED(pin % 8, pin / 8); }
+    int digitalRead(pin_t pin) override { return buffer.get(pin); }
 
     /**
      * @brief   The analogRead function is deprecated because a MAX7219
@@ -83,10 +72,10 @@ class MAX7219 : public MAX7219_Base, public ExtendedIOElement {
     }
 
     void update() override {
-        for (uint8_t i = 0; i < 8; i++)
-            sendRaw(i + 1, buffer[i]);
+        for (uint8_t i = 0; i < buffer.getBufferLength(); i++)
+            sendRaw(i + 1, buffer.getByte(i));
     }
 
   private:
-    uint8_t buffer[8] = {}; // TODO: use BitArray
+    BitArray<64> buffer;
 };

@@ -9,7 +9,7 @@
  *   |__G__|
  *   |     |
  * E |     | C
- *   |__D__|
+ *   |__D__|    o DP
  *
  */
 
@@ -47,6 +47,7 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
 
     /**
      * @brief   Display a long integer number to the display.
+     *          The number will be right-aligned.
      * 
      * @param   number
      *          The number to display.
@@ -54,9 +55,17 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
      *          The digit (zero-based, counting from the right) to start 
      *          printing the number.  
      *          Digits: 7 6 5 4 3 2 1 0
+     * @param   endDigit
+     *          The last digit (zero-based, counting from the right) that can 
+     *          be printed.
+     *          If the number is larger than `endDigit - startDigit`, the number
+     *          is truncated on the left. If the number is smaller than 
+     *          `endDigit - startDigit`, the leftmost digits including 
+     *          `endDigit` are cleared.
+     * @return  The number of digits that have been overwritten 
+     *          (`endDigit - startDigit`).
      */
     uint8_t display(long number, uint8_t startDigit = 0, uint8_t endDigit = 7) {
-        unsigned long start = micros();
         long anumber = abs(number);
         uint8_t i = startDigit + 1;
         endDigit++;
@@ -68,9 +77,7 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
             sendRaw(i++, 0b00000001); // minus sign
         while (i <= endDigit)
             sendRaw(i++, 0b00000000); // clear unused digits within range
-        unsigned long end = micros();
-        Serial.println(end - start);
-        return i;
+        return endDigit - startDigit;
     }
 
     uint8_t display(const char *text, uint8_t startPos = 0) {

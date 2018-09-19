@@ -6,7 +6,7 @@
 
 #ifdef TEENSY_MIDIUSB_ENABLED
 #include <usb_dev.h>
-#else
+#elif defined TEENSYDUINO
 #warning                                                                       \
     "Teensy: USB MIDI not enabled. Enable it from the Tools > USB Type menu."
 #endif

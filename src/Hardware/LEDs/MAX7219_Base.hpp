@@ -1,7 +1,7 @@
 #pragma once
 
-#include <SPI.h>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <SPI.h>
 
 class MAX7219_Base {
 
@@ -38,6 +38,10 @@ class MAX7219_Base {
         SPI.transfer(value);
         ExtIO::digitalWrite(loadPin, HIGH);
         SPI.endTransaction();
+    }
+
+    void setIntensity(uint8_t intensity) {
+        sendRaw(INTENSITY, intensity & 0xF);
     }
 
   private:

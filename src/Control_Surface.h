@@ -22,6 +22,7 @@
 #include "Display/MCU/VUDisplay.hpp"
 #include "Display/NoteBitmapDisplay.hpp"
 #include "Display/SelectorDisplay.hpp"
+#include <Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
 
 // ------------------------------ MIDI Outputs ------------------------------ //
 #include <MIDI_Outputs/CCButton.hpp>
