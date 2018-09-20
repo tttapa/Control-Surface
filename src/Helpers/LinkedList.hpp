@@ -1,12 +1,75 @@
 #pragma once
 
-#include <stdlib.h>
 #include <Helpers/Debug.hpp>
+#include <stdlib.h>
 
 template <class Node>
 class DoublyLinkedList {
   public:
     DoublyLinkedList() = default;
+
+    template <class INode>
+    class node_iterator_base {
+      public:
+        node_iterator_base(INode *node) : node(node) {}
+
+        bool operator!=(const node_iterator_base &rhs) const {
+            return node != rhs.node;
+        }
+
+        INode &operator*() const {
+            // TODO: check node != nullptr
+            return *node;
+        }
+
+      protected:
+        INode *node;
+    };
+
+    template <class INode>
+    class node_iterator : public node_iterator_base<INode> {
+      public:
+        node_iterator(INode *node) : node_iterator_base<INode>(node) {}
+
+        /** Prefix increment operator */
+        node_iterator &operator++() {
+            // TODO: check node != nullptr
+            this->node = this->node->next;
+            return *this;
+        }
+
+        /** Prefix decrement operator */
+        node_iterator &operator--() {
+            // TODO: check node != nullptr
+            this->node = this->node->previous;
+            return *this;
+        }
+    };
+
+    template <class INode>
+    class reverse_node_iterator : public node_iterator_base<INode> {
+      public:
+        reverse_node_iterator(INode *node) : node_iterator_base<INode>(node) {}
+
+        /** Prefix increment operator */
+        reverse_node_iterator &operator++() {
+            // TODO: check node != nullptr
+            this->node = this->node->previous;
+            return *this;
+        }
+
+        /** Prefix decrement operator */
+        reverse_node_iterator &operator--() {
+            // TODO: check node != nullptr
+            this->node = this->node->next;
+            return *this;
+        }
+    };
+
+    using iterator = node_iterator<Node>;
+    using const_iterator = node_iterator<const Node>;
+    using reverse_iterator = reverse_node_iterator<Node>;
+    using const_reverse_iterator = reverse_node_iterator<const Node>;
 
     /**
      * @brief   Append a node to a linked list.
@@ -25,6 +88,39 @@ class DoublyLinkedList {
     }
 
     void append(Node &node) { append(&node); }
+
+    void insertBefore(Node *toBeInserted, Node *before) {
+        if (before == first)
+            first = toBeInserted;
+        else
+            before->previous->next = toBeInserted;
+        toBeInserted->previous = before->previous;
+        toBeInserted->next = before;
+        before->previous = toBeInserted;
+    }
+
+    void insertBefore(Node &toBeInserted, Node &before) {
+        insertBefore(&toBeInserted, &before);
+    }
+
+    template <class Sorter>
+    void insertSorted(Node *node, Sorter sorter) {
+        iterator it = this->begin();
+        iterator end = this->end();
+        auto sortedNode = sorter(*node);
+        while (it != end) {
+            if (sorter(*it) > sortedNode) {
+                insertBefore(*node, *it);
+                return;
+            }
+            ++it;
+        }
+        append(node);
+    }
+
+    void insertSorted(Node *node) {
+        insertSorted(node, [](Node &node) { return node; });
+    }
 
     /**
      * @brief   Remove a node from a linked list.
@@ -98,55 +194,6 @@ class DoublyLinkedList {
         return node && (node == first || node->next != nullptr ||
                         node->previous != nullptr);
     }
-
-    template <class INode>
-    class node_iterator_base {
-      public:
-        node_iterator_base(INode *node) : node(node) {}
-
-        bool operator!=(const node_iterator_base &rhs) const {
-            return node != rhs.node;
-        }
-
-        INode &operator*() const {
-            // TODO: check node != nullptr
-            return *node;
-        }
-
-      protected:
-        INode *node;
-    };
-
-    template <class INode>
-    class node_iterator : public node_iterator_base<INode> {
-      public:
-        node_iterator(INode *node) : node_iterator_base<INode>(node) {}
-
-        /** Prefix increment operator */
-        node_iterator &operator++() {
-            // TODO: check node != nullptr
-            this->node = this->node->next;
-            return *this;
-        }
-    };
-
-    template <class INode>
-    class reverse_node_iterator : public node_iterator_base<INode> {
-      public:
-        reverse_node_iterator(INode *node) : node_iterator_base<INode>(node) {}
-
-        /** Prefix increment operator */
-        reverse_node_iterator &operator++() {
-            // TODO: check node != nullptr
-            this->node = this->node->previous;
-            return *this;
-        }
-    };
-
-    using iterator = node_iterator<Node>;
-    using const_iterator = node_iterator<const Node>;
-    using reverse_iterator = reverse_node_iterator<Node>;
-    using const_reverse_iterator = reverse_node_iterator<const Node>;
 
     iterator begin() { return {first}; }
     iterator end() { return {nullptr}; }

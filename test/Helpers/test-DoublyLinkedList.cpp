@@ -10,6 +10,9 @@ struct TestNode : DoublyLinkable<TestNode> {
     const int value;
     TestNode *getNext() { return next; }
     TestNode *getPrevious() { return previous; }
+    bool operator>(const TestNode &rhs) const {
+        return this->value > rhs.value;
+    }
 };
 
 template <class T>
@@ -26,7 +29,7 @@ ReversionWrapper<T> reverse(T &&iterable) {
 
 // --------------------------------- Lists ---------------------------------- //
 
-TEST(DoublyLinkedList, insertNode) {
+TEST(DoublyLinkedList, appendNode) {
     DoublyLinkedList<TestNode> list;
     TestNode a(1);
     list.append(a);
@@ -54,9 +57,89 @@ TEST(DoublyLinkedList, insertNode) {
     EXPECT_EQ(c.getNext(), nullptr);
 }
 
+TEST(DoublyLinkedList, insertNodeBeforeFirst) {
+    DoublyLinkedList<TestNode> list;
+    TestNode a(1);
+    list.append(a);
+    EXPECT_EQ(list.getFirst(), &a);
+    EXPECT_EQ(list.getLast(), &a);
+    EXPECT_EQ(a.getPrevious(), nullptr);
+    EXPECT_EQ(a.getNext(), nullptr);
+    TestNode b(2);
+    list.append(b);
+    EXPECT_EQ(list.getFirst(), &a);
+    EXPECT_EQ(list.getLast(), &b);
+    EXPECT_EQ(a.getPrevious(), nullptr);
+    EXPECT_EQ(a.getNext(), &b);
+    EXPECT_EQ(b.getPrevious(), &a);
+    EXPECT_EQ(b.getNext(), nullptr);
+    TestNode c(3);
+    list.insertBefore(c, a);
+    EXPECT_EQ(list.getFirst(), &c);
+    EXPECT_EQ(list.getLast(), &b);
+    EXPECT_EQ(a.getPrevious(), &c);
+    EXPECT_EQ(a.getNext(), &b);
+    EXPECT_EQ(b.getPrevious(), &a);
+    EXPECT_EQ(b.getNext(), nullptr);
+    EXPECT_EQ(c.getPrevious(), nullptr);
+    EXPECT_EQ(c.getNext(), &a);
+}
+
+TEST(DoublyLinkedList, insertNodeBeforeMiddle) {
+    DoublyLinkedList<TestNode> list;
+    TestNode a(1);
+    list.append(a);
+    EXPECT_EQ(list.getFirst(), &a);
+    EXPECT_EQ(list.getLast(), &a);
+    EXPECT_EQ(a.getPrevious(), nullptr);
+    EXPECT_EQ(a.getNext(), nullptr);
+    TestNode b(2);
+    list.append(b);
+    EXPECT_EQ(list.getFirst(), &a);
+    EXPECT_EQ(list.getLast(), &b);
+    EXPECT_EQ(a.getPrevious(), nullptr);
+    EXPECT_EQ(a.getNext(), &b);
+    EXPECT_EQ(b.getPrevious(), &a);
+    EXPECT_EQ(b.getNext(), nullptr);
+    TestNode c(3);
+    list.insertBefore(c, b);
+    EXPECT_EQ(list.getFirst(), &a);
+    EXPECT_EQ(list.getLast(), &b);
+    EXPECT_EQ(a.getPrevious(), nullptr);
+    EXPECT_EQ(a.getNext(), &c);
+    EXPECT_EQ(b.getPrevious(), &c);
+    EXPECT_EQ(b.getNext(), nullptr);
+    EXPECT_EQ(c.getPrevious(), &a);
+    EXPECT_EQ(c.getNext(), &b);
+}
+
+TEST(DoublyLinkedList, insertSorted) {
+    DoublyLinkedList<TestNode> list;
+    TestNode nodes[] = {5, 9, 6, 2, 8, 1, 3, 4, 7};
+    for (auto &node : nodes)
+        list.insertSorted(&node);
+    vector<int> result = {};
+    vector<int> expected = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    for (TestNode &node : list)
+        result.push_back(node.value);
+    EXPECT_EQ(result, expected);
+}
+
+TEST(DoublyLinkedList, insertSortedDoubles) {
+    DoublyLinkedList<TestNode> list;
+    TestNode nodes[] = {2, 5, 6, 9, 2, 2, 8, 1, 3, 2, 4, 7, 2};
+    for (auto &node : nodes)
+        list.insertSorted(&node);
+    vector<int> result = {};
+    vector<int> expected = {1, 2, 2, 2, 2, 2, 3, 4, 5, 6, 7, 8, 9};
+    for (TestNode &node : list)
+        result.push_back(node.value);
+    EXPECT_EQ(result, expected);
+}
+
 TEST(DoublyLinkedList, deleteNode) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode *nodes[5];
     for (int i = 0; i < 5; i++) {
         nodes[i] = new TestNode(i);
@@ -72,7 +155,7 @@ TEST(DoublyLinkedList, deleteNode) {
 
 TEST(DoublyLinkedList, deleteFirstNode) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode *nodes[5];
     for (int i = 0; i < 5; i++) {
         nodes[i] = new TestNode(i);
@@ -87,7 +170,7 @@ TEST(DoublyLinkedList, deleteFirstNode) {
 
 TEST(DoublyLinkedList, deleteLastNode) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode *nodes[5];
     for (int i = 0; i < 5; i++) {
         nodes[i] = new TestNode(i);
@@ -102,13 +185,13 @@ TEST(DoublyLinkedList, deleteLastNode) {
 
 TEST(DoublyLinkedList, moveDownNode) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode *nodes[5];
     for (int i = 0; i < 5; i++) {
         nodes[i] = new TestNode(i);
         list.append(nodes[i]);
     }
-   list.moveDown(nodes[3]);
+    list.moveDown(nodes[3]);
     EXPECT_EQ(nodes[2]->getNext(), nodes[4]);
     EXPECT_EQ(nodes[4]->getPrevious(), nodes[2]);
     EXPECT_EQ(nodes[3]->getNext(), nodes[2]);
@@ -121,7 +204,7 @@ TEST(DoublyLinkedList, moveDownNode) {
 
 TEST(DoublyLinkedList, moveDownFirstNode) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode *nodes[5];
     for (int i = 0; i < 5; i++) {
         nodes[i] = new TestNode(i);
@@ -138,7 +221,7 @@ TEST(DoublyLinkedList, moveDownFirstNode) {
 
 TEST(DoublyLinkedList, moveDownSecondNode) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode *nodes[5];
     for (int i = 0; i < 5; i++) {
         nodes[i] = new TestNode(i);
@@ -156,7 +239,7 @@ TEST(DoublyLinkedList, moveDownSecondNode) {
 
 TEST(DoublyLinkedList, moveDownLastNode) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode *nodes[5];
     for (int i = 0; i < 5; i++) {
         nodes[i] = new TestNode(i);
@@ -174,7 +257,7 @@ TEST(DoublyLinkedList, moveDownLastNode) {
 
 TEST(DoublyLinkedList, moveDownOnlyElement) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode node(0);
     list.append(&node);
     list.moveDown(&node);
@@ -186,7 +269,7 @@ TEST(DoublyLinkedList, moveDownOnlyElement) {
 
 TEST(DoublyLinkedList, couldContainInsert) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode a(1);
     EXPECT_FALSE(list.couldContain(&a));
     list.append(a);
@@ -206,7 +289,7 @@ TEST(DoublyLinkedList, couldContainInsert) {
 
 TEST(DoublyLinkedList, couldContainDeleteFirst) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode a(1);
     list.append(&a);
     TestNode b(2);
@@ -223,7 +306,7 @@ TEST(DoublyLinkedList, couldContainDeleteFirst) {
 
 TEST(DoublyLinkedList, couldContainDeleteMiddle) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode a(1);
     list.append(&a);
     TestNode b(2);
@@ -240,7 +323,7 @@ TEST(DoublyLinkedList, couldContainDeleteMiddle) {
 
 TEST(DoublyLinkedList, couldContainDeleteLast) {
     DoublyLinkedList<TestNode> list;
-    
+
     TestNode a(1);
     list.append(&a);
     TestNode b(2);
