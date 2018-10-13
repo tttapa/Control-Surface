@@ -30,7 +30,7 @@ class CCPotentiometer
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    CCPotentiometer(pin_t analogPin, uint8_t controller, uint8_t channel = 1)
-        : MIDIFilteredAnalogAddressable<ContinuousCCSender::send, 7>(
-              analogPin, controller, channel) {}
+    CCPotentiometer(pin_t analogPin, const MIDICNChannelAddress &address)
+        : MIDIFilteredAnalogAddressable<ContinuousCCSender::send, 7>(analogPin,
+                                                                     address) {}
 };

@@ -33,10 +33,10 @@ class CCButtonLatching : public MIDIButtonLatching<DigitalCCSender::sendOn,
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    CCButtonLatching(const OutputBankConfigAddressable &config, pin_t pin,
-                     uint8_t controller, uint8_t channel)
+    CCButtonLatching(const OutputBankConfig &config, pin_t pin,
+                     const MIDICNChannelAddress &address)
         : MIDIButtonLatching<DigitalCCSender::sendOn, DigitalCCSender::sendOff>(
-              config, pin, controller, channel) {}
+              config, pin, address) {}
 };
 
 } // namespace Bankable

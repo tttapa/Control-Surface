@@ -25,9 +25,9 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      *          connected.
      * @todo    Documentation.
      */
-    MIDIFilteredAnalogAddressable(pin_t analogPin, uint8_t address,
-                                  uint8_t channel)
-        : filteredAnalog{analogPin}, address(address), channel(channel) {}
+    MIDIFilteredAnalogAddressable(pin_t analogPin,
+                                  const MIDICNChannelAddress &address)
+        : filteredAnalog{analogPin}, address{address} {}
 
   public:
     void begin() final override {}
@@ -49,8 +49,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
 
   private:
     FilteredAnalog<PRECISION> filteredAnalog;
-    const uint8_t address;
-    const uint8_t channel;
+    const MIDICNChannelAddress address;
 };
 
 // -------------------------------------------------------------------------- //
@@ -77,7 +76,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      *          connected.
      * @todo    Documentation.
      */
-    MIDIFilteredAnalog(pin_t analogPin, uint8_t channel)
+    MIDIFilteredAnalog(pin_t analogPin, Channel channel)
         : filteredAnalog{analogPin}, channel(channel) {}
 
   public:
@@ -100,5 +99,5 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
 
   private:
     FilteredAnalog<PRECISION> filteredAnalog;
-    const uint8_t channel;
+    const Channel channel;
 };

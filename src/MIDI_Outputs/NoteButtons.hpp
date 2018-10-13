@@ -45,9 +45,9 @@ class NoteButtons
      * @ingroup MIDIOutputElementConstructors
      */
     NoteButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
-                uint8_t baseNote, uint8_t baseChannel = 1,
-                uint8_t noteIncrement = 1, uint8_t channelIncrement = 0)
+                const MIDICNChannelAddress &baseAddress,
+                const RelativeMIDICNChannelAddress &incrementAddress)
         : MIDIButtons<DigitalNoteSender::sendOn, DigitalNoteSender::sendOff,
-                      NUMBER_OF_BUTTONS>(buttons, baseNote, baseChannel,
-                                         noteIncrement, channelIncrement) {}
+                      NUMBER_OF_BUTTONS>(buttons, baseAddress,
+                                         incrementAddress) {}
 };

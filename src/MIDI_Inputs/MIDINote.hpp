@@ -6,8 +6,8 @@
 class MIDINote_Base : public MIDIInputElementNote {
   protected:
     MIDINote_Base(); // unused, only for virtual inheritance
-    MIDINote_Base(uint8_t note, uint8_t channel)
-        : MIDIInputElementNote(channel, note) {}
+    MIDINote_Base(const MIDICNChannelAddress &address)
+        : MIDIInputElementNote(address) {}
 
   public:
     virtual uint8_t getValue() const = 0;
@@ -17,9 +17,6 @@ class MIDINote_Base : public MIDIInputElementNote {
     uint8_t getValueFromMIDIMessage(const MIDI_message_matcher &midimsg) {
         return midimsg.type == NOTE_ON ? midimsg.data2 : 0;
     }
-
-  private:
-    virtual bool updateImpl(const MIDI_message_matcher &midimsg) = 0;
 };
 
 // -------------------------------------------------------------------------- //
@@ -27,15 +24,15 @@ class MIDINote_Base : public MIDIInputElementNote {
 /** A class for MIDI note input. */
 class MIDINote : virtual public MIDINote_Base {
   public:
-    MIDINote(uint8_t note, uint8_t channel = 1)
-        : MIDINote_Base(note, channel) {}
+    MIDINote(const MIDICNChannelAddress &address) : MIDINote_Base(address) {}
 
     uint8_t getValue() const override { return value; }
 
     void reset() override { value = 0; }
 
   private:
-    bool updateImpl(const MIDI_message_matcher &midimsg) override {
+    bool updateImpl(const MIDI_message_matcher &midimsg,
+                    UNUSED_PARAM const MIDICNChannelAddress &target) override {
         this->value = getValueFromMIDIMessage(midimsg);
         return true;
     }
@@ -45,19 +42,16 @@ class MIDINote : virtual public MIDINote_Base {
 
 // -------------------------------------------------------------------------- //
 
-#include <Banks/BankableMIDIInputAddressable.hpp>
+#include <Banks/BankableMIDIInput.hpp>
 
 namespace Bankable {
 
 /** A class for Bankable MIDI note input. */
 template <uint8_t N>
-class MIDINote : virtual public MIDINote_Base,
-                 public BankableMIDIInputAddressable<N> {
+class MIDINote : virtual public MIDINote_Base, public BankableMIDIInput<N> {
   public:
-    MIDINote(const BankConfigAddressable<N> &config, uint8_t note,
-             uint8_t channel = 1)
-        : MIDINote_Base(note, channel), BankableMIDIInputAddressable<N>(
-                                            config) {}
+    MIDINote(const BankConfig<N> &config, const MIDICNChannelAddress &address)
+        : MIDINote_Base(address), BankableMIDIInput<N>(config) {}
 
     uint8_t getValue() const override {
         // getSelection will always be less than N
@@ -70,22 +64,16 @@ class MIDINote : virtual public MIDINote_Base,
     }
 
   private:
-    bool updateImpl(const MIDI_message_matcher &midimsg) override {
-        uint8_t index = this->getIndex(midimsg.channel, midimsg.data1,
-                                       getBaseChannel(), getBaseAddress());
+    bool updateImpl(const MIDI_message_matcher &midimsg,
+                    const MIDICNChannelAddress &target) override {
+        uint8_t index = this->getIndex(target, address);
         uint8_t value = getValueFromMIDIMessage(midimsg);
         this->values[index] = value;
         return true;
     }
 
-    bool matchAddress(uint8_t targetAddress) const override {
-        return BankableMIDIInputAddressable<N>::matchAddress(targetAddress,
-                                                             getBaseAddress());
-    }
-
-    bool matchChannel(uint8_t targetChannel) const override {
-        return BankableMIDIInputAddressable<N>::matchChannel(targetChannel,
-                                                             getBaseChannel());
+    bool match(const MIDICNChannelAddress &target) const override {
+        return BankableMIDIInput<N>::matchBankable(target, address);
     }
 
     void onBankSettingChange() const override { display(); }

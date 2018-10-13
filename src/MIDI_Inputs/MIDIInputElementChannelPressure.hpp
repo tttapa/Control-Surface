@@ -11,8 +11,8 @@ class MIDIInputElementChannelPressure
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementChannelPressure(uint8_t baseChannel)
-        : MIDIInputElement(baseChannel) {
+    MIDIInputElementChannelPressure(const MIDICNChannelAddress &address)
+        : MIDIInputElement(address) {
         elements.append(this);
     }
 
@@ -28,8 +28,8 @@ class MIDIInputElementChannelPressure
     }
 
     /**
-     * @brief   Reset all MIDIInputElementChannelPressure elements to their initial
-     *          state.
+     * @brief   Reset all MIDIInputElementChannelPressure elements to their 
+     *          initial state.
      *
      * @see     MIDIInputElementNote#reset
      */
@@ -59,6 +59,12 @@ class MIDIInputElementChannelPressure
     }
 
   private:
+    MIDICNChannelAddress
+    getTarget(const MIDI_message_matcher &midimsg) const override {
+        return {0, Channel(midimsg.channel)};
+        // Channel Pressure doesn't have an address
+    }
+
     void moveDown() override { elements.moveDown(this); }
 
     static DoublyLinkedList<MIDIInputElementChannelPressure> elements;

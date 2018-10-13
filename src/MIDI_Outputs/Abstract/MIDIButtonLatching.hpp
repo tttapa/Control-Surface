@@ -21,21 +21,20 @@ class MIDIButtonLatching : public MIDIOutputElement {
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      */
-    MIDIButtonLatching(pin_t pin, uint8_t baseAddress, uint8_t baseChannel)
-        : button{pin}, baseAddress(baseAddress), baseChannel(baseChannel) {}
+    MIDIButtonLatching(pin_t pin, const MIDICNChannelAddress &address)
+        : button{pin}, address(address) {}
 
   public:
     void begin() final override { button.begin(); }
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling || state == Button::Rising) {
-            sendOn(baseChannel, baseAddress);
-            sendOff(baseChannel, baseAddress);
+            sendOn(address);
+            sendOff(address);
         }
     }
 
   private:
     Button button;
-    const uint8_t baseAddress;
-    const uint8_t baseChannel;
+    const MIDICNChannelAddress address;
 };

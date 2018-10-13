@@ -118,7 +118,7 @@ IncrementSelector<4> bankselector(bank, 8);
    Define all hardware that send out MIDI messages when changed.
 */
 
-constexpr uint8_t channel = 1;
+constexpr Channel channel = 1;
 
 PBPotentiometer masterVolume = { A1, 9 };
 

@@ -9,8 +9,9 @@ constexpr static uint8_t TimeDisplayAddress = 0x40;
 
 class TimeDisplay : public SevenSegmentDisplay<TimeDisplayLength> {
   public:
-    TimeDisplay(uint8_t channel = 1)
-        : SevenSegmentDisplay<TimeDisplayLength>(channel, TimeDisplayAddress) {}
+    TimeDisplay(Channel channel = CHANNEL_1)
+        : SevenSegmentDisplay<TimeDisplayLength>(
+              {TimeDisplayAddress, channel}) {}
     // TODO: add support for 5-digit bar counts
     void print() const {
         char barStr[6], beatStr[3], frameStr[4];

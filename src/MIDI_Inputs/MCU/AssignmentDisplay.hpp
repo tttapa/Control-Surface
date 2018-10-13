@@ -7,12 +7,11 @@ namespace MCU {
 constexpr static uint8_t AssignmentDisplayLength = 2;
 constexpr static uint8_t AssignmentDisplayAddress = 0x4A;
 
-class AssignmentDisplay
-    : public SevenSegmentDisplay<AssignmentDisplayLength> {
+class AssignmentDisplay : public SevenSegmentDisplay<AssignmentDisplayLength> {
   public:
-    AssignmentDisplay(uint8_t channel = 1)
+    AssignmentDisplay(Channel channel = CHANNEL_1)
         : SevenSegmentDisplay<AssignmentDisplayLength>(
-              channel, AssignmentDisplayAddress) {}
+              {AssignmentDisplayAddress, channel}) {}
 };
 
-}
+} // namespace MCU

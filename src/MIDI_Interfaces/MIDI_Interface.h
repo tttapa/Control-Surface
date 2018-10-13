@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Def/Def.hpp>
+#include <Helpers/MIDICNChannelAddress.hpp>
 #include <MIDI_Parsers/MIDI_Parser.h>
 
 #define MIDI_BAUD 31250
@@ -71,6 +72,12 @@ class MIDI_Interface {
      *          The first data byte. [0, 127]
      */
     void send(uint8_t m, uint8_t c, uint8_t d1);
+
+    void sendNoteOn(MIDICNChannelAddress address, uint8_t velocity);
+    void sendNoteOff(MIDICNChannelAddress address, uint8_t velocity);
+    void sendCC(MIDICNChannelAddress address, uint8_t value);
+    void sendPB(MIDICNChannelAddress address, uint16_t value);
+    void sendPB(Channel channel, uint16_t value);
 
     void update();
 

@@ -1,22 +1,31 @@
 #pragma once
 
 #include "Bank.h"
+#include "BankConfig.hpp"
+#include <Helpers/MIDICNChannelAddress.hpp>
 
 class BankableMIDIOutput {
   protected:
-    BankableMIDIOutput(const OutputBank &bank)
-        : bank(bank), channelsPerBank(bank.getTracksPerBank()) {}
+    BankableMIDIOutput(const OutputBank &bank, BankType type)
+        : bank(bank), type(type) {}
+
+    BankableMIDIOutput(const OutputBankConfig &config)
+        : BankableMIDIOutput(config.bank, config.type) {}
 
   public:
-    uint8_t getChannel(uint8_t baseChannel) const {
-        return baseChannel + getChannelsPerBank() * getSelection();
+    RelativeMIDICNChannelAddress getAddressOffset() const {
+        int8_t offset = getSelection() * bank.getTracksPerBank();
+        switch (type) {
+            case CHANGE_ADDRESS: return {offset, 0, 0};
+            case CHANGE_CHANNEL: return {0, offset, 0};
+            case CHANGE_CN: return {0, 0, offset};
+            default: return {};
+        }
     }
 
-    uint8_t getChannelsPerBank() const { return channelsPerBank; }
+    setting_t getRawBankSetting() const { return bank.getSelection(); }
 
-    uint8_t getRawBankSetting() const { return bank.getSelection(); }
-
-    uint8_t getSelection() const {
+    setting_t getSelection() const {
         return lockedSetting == UNLOCKED ? getRawBankSetting() : lockedSetting;
     }
 
@@ -30,8 +39,8 @@ class BankableMIDIOutput {
 
   private:
     const OutputBank &bank;
-    const uint8_t channelsPerBank;
+    const BankType type;
 
-    constexpr static uint8_t UNLOCKED = 0xFF;
-    uint8_t lockedSetting = UNLOCKED;
+    constexpr static setting_t UNLOCKED = NO_SETTING;
+    setting_t lockedSetting = UNLOCKED;
 };

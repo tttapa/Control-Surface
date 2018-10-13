@@ -12,9 +12,7 @@ class MIDINoteLED_Base : virtual public MIDINote_Base {
     void begin() override { ExtIO::pinMode(ledPin, OUTPUT); }
 
   private:
-    void display() const override {
-        ExtIO::digitalWrite(ledPin, getState());
-    }
+    void display() const override { ExtIO::digitalWrite(ledPin, getState()); }
 
     const pin_t ledPin;
 };
@@ -34,9 +32,8 @@ class MIDINoteLED : public MIDINote, public MIDINoteLED_Base {
      * @param   channel
      *          The MIDI channel. [1, 16] 
      */
-    MIDINoteLED(pin_t ledPin, uint8_t note, uint8_t channel = 1)
-        : MIDINote_Base(note, channel), MIDINote(note, channel),
-          MIDINoteLED_Base(ledPin) {}
+    MIDINoteLED(pin_t ledPin, const MIDICNChannelAddress &address)
+        : MIDINote_Base(address), MIDINote(address), MIDINoteLED_Base(ledPin) {}
 };
 
 // -------------------------------------------------------------------------- //
@@ -46,8 +43,8 @@ namespace Bankable {
 template <uint8_t N>
 class MIDINoteLED : public MIDINote<N>, public MIDINoteLED_Base {
   public:
-    MIDINoteLED(const BankConfigAddressable<N> &config, pin_t ledPin,
-                uint8_t note, uint8_t channel = 1)
+    MIDINoteLED(const BankConfig<N> &config, pin_t ledPin, uint8_t note,
+                uint8_t channel = 1)
         : MIDINote_Base(note, channel), MIDINote<N>(config, note, channel),
           MIDINoteLED_Base(ledPin) {}
 };

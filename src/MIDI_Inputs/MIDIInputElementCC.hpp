@@ -1,17 +1,17 @@
 #pragma once
 
 #include <Helpers/LinkedList.hpp>
-#include <MIDI_Inputs/MIDIInputElementAddressable.hpp>
+#include <MIDI_Inputs/MIDIInputElement.hpp>
 
-class MIDIInputElementCC : public MIDIInputElementAddressable,
+class MIDIInputElementCC : public MIDIInputElement,
                            public DoublyLinkable<MIDIInputElementCC> {
   public:
     /**
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementCC(uint8_t baseChannel, uint8_t baseAddress)
-        : MIDIInputElementAddressable(baseChannel, baseAddress) {
+    MIDIInputElementCC(const MIDICNChannelAddress &address)
+        : MIDIInputElement{address} {
         elements.append(this);
     }
 

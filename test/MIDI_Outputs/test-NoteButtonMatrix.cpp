@@ -7,7 +7,7 @@ using namespace ::testing;
 TEST(NoteButtonMatrix, pressAndRelease) {
     MockMIDI_Interface midi;
 
-    constexpr uint8_t channel = 1;
+    constexpr Channel channel = CHANNEL_1;
     AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
     NoteButtonMatrix<3, 2> matrix = {{2, 3, 4}, {5, 6}, addresses, channel};
 
@@ -80,7 +80,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
 
     OutputBank bank(4);
 
-    constexpr uint8_t channel = 1;
+    constexpr Channel channel = CHANNEL_1;
     AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
 
     Bankable::NoteButtonMatrix<3, 2> matrix = {

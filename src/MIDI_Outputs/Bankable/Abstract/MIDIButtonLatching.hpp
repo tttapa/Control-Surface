@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
 #include <Hardware/Button.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -15,8 +15,7 @@ namespace Bankable {
  * @see     Button
  */
 template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
-class MIDIButtonLatching : public MIDIOutputElement,
-                           public BankableMIDIOutputAddressable {
+class MIDIButtonLatching : public MIDIOutputElement, public BankableMIDIOutput {
   protected:
     /**
      * @brief   Construct a new MIDIButtonLatching.
@@ -25,25 +24,25 @@ class MIDIButtonLatching : public MIDIOutputElement,
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      */
-    MIDIButtonLatching(const OutputBankConfigAddressable &config, pin_t pin,
-                       uint8_t baseAddress, uint8_t baseChannel)
-        : BankableMIDIOutputAddressable(config), button{pin},
-          baseAddress(baseAddress), baseChannel(baseChannel) {}
+    MIDIButtonLatching(const OutputBankConfig &config, pin_t pin,
+                       const MIDICNChannelAddress &address)
+        : BankableMIDIOutput(config), button{pin}, address(address) {}
 
   public:
     void begin() final override { button.begin(); }
     void update() final override {
         Button::State state = button.getState();
+        MIDICNChannelAddress sendAddress = address;
+        sendAddress += getAddressOffset();
         if (state == Button::Falling || state == Button::Rising) {
-            sendOn(getChannel(baseChannel), getAddress(baseAddress));
-            sendOff(getChannel(baseChannel), getAddress(baseAddress));
+            sendOn(sendAddress);
+            sendOff(sendAddress);
         }
     }
 
   private:
     Button button;
-    const uint8_t baseAddress;
-    const uint8_t baseChannel;
+    const MIDICNChannelAddress address;
 };
 
 } // namespace Bankable

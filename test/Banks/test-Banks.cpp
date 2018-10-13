@@ -57,10 +57,10 @@ TEST(Bank, selectOutOfBounds) {
 }
 
 template <uint8_t N>
-class TestInputBankable : public BankableMIDIInputAddressable<N> {
+class TestInputBankable : public BankableMIDIInput<N> {
   public:
     TestInputBankable(Bank<N> &bank, BankType type)
-        : BankableMIDIInputAddressable<N>(bank, type) {}
+        : BankableMIDIInput<N>(bank, type) {}
 
     MOCK_CONST_METHOD0(onBankSettingChange, void());
 };

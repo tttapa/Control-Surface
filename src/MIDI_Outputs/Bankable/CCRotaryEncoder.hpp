@@ -49,22 +49,19 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender::send> {
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    CCRotaryEncoder(const OutputBankConfigAddressable &config,
-                    const EncoderPinList &pins, uint8_t controller,
-                    uint8_t channel, uint8_t speedMultiplier,
-                    uint8_t pulsesPerStep)
-        : MIDIRotaryEncoder<RelativeCCSender::send>(config, pins, controller,
-                                                    channel, speedMultiplier,
-                                                    pulsesPerStep) {}
+    CCRotaryEncoder(const OutputBankConfig &config, const EncoderPinList &pins,
+                    const MIDICNChannelAddress &address,
+                    uint8_t speedMultiplier, uint8_t pulsesPerStep)
+        : MIDIRotaryEncoder<RelativeCCSender::send>(
+              config, pins, address, speedMultiplier, pulsesPerStep) {}
 
 // For tests only (PJRC Encoder library's copy constructor doesn't work)
 #ifndef ARDUINO
-    CCRotaryEncoder(const OutputBankConfigAddressable &config,
-                    const Encoder &encoder, uint8_t controller, uint8_t channel,
+    CCRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
+                    const MIDICNChannelAddress &address,
                     uint8_t speedMultiplier, uint8_t pulsesPerStep)
-        : MIDIRotaryEncoder<RelativeCCSender::send>(config, encoder, controller,
-                                                    channel, speedMultiplier,
-                                                    pulsesPerStep) {}
+        : MIDIRotaryEncoder<RelativeCCSender::send>(
+              config, encoder, address, speedMultiplier, pulsesPerStep) {}
 #endif
 };
 

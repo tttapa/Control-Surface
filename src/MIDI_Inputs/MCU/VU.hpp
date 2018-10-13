@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Banks/BankableMIDIInputAddressable.hpp>
+#include <Banks/BankableMIDIInput.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
 #include <Helpers/Copy.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
@@ -28,8 +28,8 @@ namespace MCU {
 class VU_Base : public MIDIInputElementChannelPressure, public IVU {
   public:
     VU_Base(); // Just for virtual inheritance
-    VU_Base(uint8_t track, uint8_t channel, unsigned int decayTime)
-        : MIDIInputElementChannelPressure(channel), baseTrack(track - 1),
+    VU_Base(uint8_t track, Channel channel, unsigned int decayTime)
+        : MIDIInputElementChannelPressure({track - 1, channel}),
           decayTime(decayTime) {}
 
     /** Return the VU meter value as an integer in [0, 12]. */
@@ -40,7 +40,6 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     }
 
   private:
-    const uint8_t baseTrack;
     const unsigned long decayTime;
     unsigned long prevDecayTime = 0;
 
@@ -52,6 +51,11 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
         }
     }
 
+    MIDICNChannelAddress
+    getTarget(const MIDI_message_matcher &midimsg) const override {
+        return {int8_t(midimsg.data1 >> 4), Channel(midimsg.channel)};
+    }
+
     /** Automatically decay the VU meter value by one step (if it is greater
      * than zero). */
     virtual void decayAll() = 0;
@@ -61,10 +65,6 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     virtual uint8_t getRawValue() const = 0;
 
   protected:
-    /** Return the track number of this VU meter. (In the Bankable version,
-     * this is the track number of the first VU meter.) */
-    uint8_t getBaseTrack() const { return baseTrack; }
-
     /** Set the VU meter value.
      * @todo    rawValue reference instead of return.
      */
@@ -120,15 +120,11 @@ class VU : virtual public VU_Base {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(uint8_t track, uint8_t channel = 1, unsigned int decayTime = 150)
+    VU(uint8_t track, Channel channel = CHANNEL_1, unsigned int decayTime = 150)
         : VU_Base(track, channel, decayTime) {}
 
-    bool updateImpl(const MIDI_message_matcher &midimsg) override {
-        uint8_t targetTrack = midimsg.data1 >> 4;
-        DEBUGFN("target track = " << +targetTrack);
-        if (!matchTrack(targetTrack))
-            return false;
-
+    bool updateImpl(const MIDI_message_matcher &midimsg,
+                    UNUSED_PARAM const MIDICNChannelAddress &target) override {
         uint8_t data = midimsg.data1 & 0x0F;
         switch (data) {
             case 0xF: clearOverload(); break;
@@ -149,9 +145,6 @@ class VU : virtual public VU_Base {
 
     uint8_t getRawValue() const override { return value; }
 
-    inline bool matchTrack(uint8_t targetTrack) const {
-        return targetTrack == getBaseTrack();
-    }
     void setValue(uint8_t newValue) { value = setValueHelper(value, newValue); }
     void setOverload() { value = setOverloadHelper(value); }
     void clearOverload() { value = clearOverloadHelper(value); }
@@ -172,7 +165,7 @@ namespace Bankable {
  *          The number of banks.
  */
 template <size_t N>
-class VU : virtual public VU_Base, public BankableMIDIInputAddressable<N> {
+class VU : virtual public VU_Base, public BankableMIDIInput<N> {
   public:
     /** 
      * @brief   Construct a new Bankable VU object.
@@ -192,19 +185,14 @@ class VU : virtual public VU_Base, public BankableMIDIInputAddressable<N> {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(const BankConfigAddressable<N> &config, uint8_t track,
-       uint8_t channel = 1, unsigned int decayTime = 150)
-        : VU_Base(track, channel, decayTime), BankableMIDIInputAddressable<N>(
-                                                  config) {}
+    VU(const BankConfig<N> &config, uint8_t track, Channel channel = CHANNEL_1,
+       unsigned int decayTime = 150)
+        : VU_Base(track, channel, decayTime), BankableMIDIInput<N>(config) {}
 
-    bool updateImpl(const MIDI_message_matcher &midimsg) {
-        uint8_t targetTrack = midimsg.data1 >> 4;
-        DEBUGFN("target track = " << +targetTrack);
-        if (!matchTrack(targetTrack))
-            return false;
-        uint8_t index = this->getIndex(midimsg.channel, targetTrack,
-                                       getBaseChannel(), getBaseTrack()) %
-                        N;
+    bool updateImpl(const MIDI_message_matcher &midimsg,
+                    const MIDICNChannelAddress &target) override {
+        uint8_t index =
+            this->getIndex(target, address) % N; // Todo: modulo everywhere?
         uint8_t data = midimsg.data1 & 0x0F;
         switch (data) {
             case 0xF: clearOverload(index); break;
@@ -213,6 +201,10 @@ class VU : virtual public VU_Base, public BankableMIDIInputAddressable<N> {
             default: setValue(index, data); break;
         }
         return true;
+    }
+
+    bool match(const MIDICNChannelAddress &target) const override {
+        return BankableMIDIInput<N>::matchBankable(target, address);
     }
 
     void reset() override {
@@ -228,17 +220,9 @@ class VU : virtual public VU_Base, public BankableMIDIInputAddressable<N> {
     }
 
     uint8_t getRawValue() const override {
-        return values[this->getSelection()]; // TODO: N
+        return values[this->getSelection()];
     }
 
-    inline bool matchTrack(uint8_t targetTrack) const {
-        return BankableMIDIInputAddressable<N>::matchAddress(targetTrack,
-                                                             getBaseTrack());
-    }
-    inline bool matchChannel(uint8_t targetChannel) const override {
-        return BankableMIDIInputAddressable<N>::matchChannel(targetChannel,
-                                                             getBaseChannel());
-    }
     void setValue(uint8_t index, uint8_t newValue) {
         values[index] = setValueHelper(values[index], newValue);
     }

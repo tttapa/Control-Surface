@@ -6,7 +6,7 @@
     "library. (#include <Encoder.h>)"
 #endif
 
-#include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
 #include <Encoder.h>
 #include <Helpers/Array.hpp>
@@ -19,50 +19,46 @@ namespace Bankable {
  *          can be added to a Bank.
  */
 template <RelativeSendFunction send>
-class MIDIRotaryEncoder : public BankableMIDIOutputAddressable,
-                          public MIDIOutputElement {
+class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIRotaryEncoder.
      *
      * @todo    Documentation
      */
-    MIDIRotaryEncoder(const OutputBankConfigAddressable &config,
-                      const EncoderPinList &pins, uint8_t baseAddress,
-                      uint8_t baseChannel, uint8_t speedMultiply,
-                      uint8_t pulsesPerStep)
-        : BankableMIDIOutputAddressable(config), encoder{pins[0], pins[1]},
-          baseAddress(baseAddress), baseChannel(baseChannel),
-          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep) {}
+    MIDIRotaryEncoder(const OutputBankConfig &config,
+                      const EncoderPinList &pins,
+                      const MIDICNChannelAddress &address,
+                      uint8_t speedMultiply, uint8_t pulsesPerStep)
+        : BankableMIDIOutput(config), encoder{pins[0], pins[1]},
+          address(address), speedMultiply(speedMultiply),
+          pulsesPerStep(pulsesPerStep) {}
 
 // For tests only
 #ifndef ARDUINO
-    MIDIRotaryEncoder(const OutputBankConfigAddressable &config,
-                      const Encoder &encoder, uint8_t baseAddress,
-                      uint8_t baseChannel, uint8_t speedMultiply,
-                      uint8_t pulsesPerStep)
-        : BankableMIDIOutputAddressable(config), encoder{encoder},
-          baseAddress(baseAddress), baseChannel(baseChannel),
+    MIDIRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
+                      const MIDICNChannelAddress &address,
+                      uint8_t speedMultiply, uint8_t pulsesPerStep)
+        : BankableMIDIOutput(config), encoder{encoder}, address(address),
           speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep) {}
 #endif
 
   public:
     void begin() final override {}
     void update() final override {
-        uint8_t channel = getChannel(baseChannel);
-        uint8_t address = getAddress(baseAddress);
+        MIDICNChannelAddress sendAddress = address + getAddressOffset();
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
+        // I could do the division inside of the if statement for performance
         if (difference) {
-            send(difference * speedMultiply, channel, address);
+            send(difference * speedMultiply, sendAddress);
             previousPosition += difference * pulsesPerStep;
         }
     }
 
   private:
     Encoder encoder;
-    const uint8_t baseAddress;
-    const uint8_t baseChannel;
+    const MIDICNChannelAddress address;
     const uint8_t speedMultiply;
     const uint8_t pulsesPerStep;
 

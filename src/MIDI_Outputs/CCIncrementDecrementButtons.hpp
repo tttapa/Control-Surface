@@ -37,9 +37,9 @@ class CCIncrementDecrementButtons
      * @ingroup MIDIOutputElementConstructors
      */
     CCIncrementDecrementButtons(const IncrementDecrementButtons &buttons,
-                                uint8_t controller, uint8_t channel = 1,
+                                const MIDICNChannelAddress &address,
                                 uint8_t multiplier = 1,
-                                uint8_t resetNote = NO_ADDRESS)
-        : MIDIIncrementDecrementButtons(buttons, controller, channel,
-                                        multiplier, resetNote) {}
+                                const MIDICNChannelAddress &resetNote = {})
+        : MIDIIncrementDecrementButtons(buttons, address, multiplier,
+                                        resetNote) {}
 };

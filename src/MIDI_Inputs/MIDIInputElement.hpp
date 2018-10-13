@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MIDI_message_matcher.h"
+#include <Helpers/MIDICNChannelAddress.hpp>
 
 class MIDIInputElement {
   protected:
@@ -8,74 +9,84 @@ class MIDIInputElement {
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElement(uint8_t baseChannel) : baseChannel(baseChannel - 1) {}
+    MIDIInputElement(const MIDICNChannelAddress &address) : address(address) {}
 
   public:
     virtual ~MIDIInputElement() = default;
 
+    /**
+     * @brief   Initialize the input element.
+     */
     virtual void begin() {}
 
     /**
      * @brief   Update the display of the input element.
-     * 
-     * This should only be called when the state changes, not on each update.
      */
     virtual void display() const {}
 
-    /**
-     * @brief   Update the value of the input element.
-     *          Used for decaying VU meters etc.
-     * 
-     * This function is called continuously by the Control_Surface_ class.
-     */
-    virtual void update() {}
-
-    /**
+    /** 
      * @brief   Reset the input element to its initial state.
      */
     virtual void reset() = 0;
+
+    /**
+     * @brief   Update the value of the input element.  
+     *          Used for decaying VU meters etc.
+     */
+    virtual void update() {}
 
     /**
      * @brief   Receive a new MIDI message and update the internal state.
      */
     bool updateWith(const MIDI_message_matcher &midimsg) {
         DEBUGFN("");
-        if (!matchChannel(midimsg.channel))
+        MIDICNChannelAddress target = getTarget(midimsg);
+        if (!this->match(target))
             return false;
-        DEBUGFN("Channel matched");
-        if (!updateImpl(midimsg))
+        DEBUGFN(F("MIDI message matches"));
+        if (!updateImpl(midimsg, target))
             return false;
+        DEBUGFN(F("Updated"));
         moveDown();
         display();
         return true;
     }
 
-    /** Return the (first) channel of this input element. */
-    inline uint8_t getBaseChannel() const { return baseChannel; }
-
   private:
     /**
      * @brief   Update the internal state with the new MIDI message.
      */
-    virtual bool updateImpl(const MIDI_message_matcher &midimsg) = 0;
+    virtual bool updateImpl(const MIDI_message_matcher &midimsg,
+                            const MIDICNChannelAddress &target) = 0;
 
     /**
-     * @brief   Check if the channel of the incoming MIDI message
-     *          matches an channel of this element.
-     * 
-     * This function is overridden by the Bankable subclasses, because
-     * they can multiple channels.
+     * @brief   Extract the target address from a MIDI message.
+     * @note    This base version of the function is only valid for messages 
+     *          that use data1 as an address (i.e. Note On, Note Off, Polyphonic
+     *          Key Pressure and Control Change).
      */
-    virtual inline bool matchChannel(uint8_t targetChannel) const {
-        return getBaseChannel() == targetChannel;
+    virtual inline MIDICNChannelAddress
+    getTarget(const MIDI_message_matcher &midimsg) const {
+        return {int8_t(midimsg.data1), Channel(midimsg.channel)};
+    }
+
+    /**
+     * @brief   Check if the address and channel of the incoming MIDI message
+     *          match an address and channel of this element.
+     * @note    This base version of the function is only valid for non-Bankable
+     *          MIDI input elements.
+     */
+    virtual inline bool match(const MIDICNChannelAddress &target) const {
+        return this->address == target;
     }
 
     /**
      * @brief   Move down this element in the linked list of elements.
      *          This means that the element will be checked earlier on the next
-     *          iteration, speeding up the lookup process.
+     *          iteration.
      */
     virtual void moveDown() = 0;
 
-    const uint8_t baseChannel;
+  protected:
+    const MIDICNChannelAddress address;
 };

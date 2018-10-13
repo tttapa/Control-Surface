@@ -33,6 +33,6 @@ class CCButtonLatching : public MIDIButtonLatching<DigitalCCSender::sendOn,
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    CCButtonLatching(pin_t pin, uint8_t controller, uint8_t channel)
-        : MIDIButtonLatching(pin, controller, channel) {}
+    CCButtonLatching(pin_t pin, const MIDICNChannelAddress &address)
+        : MIDIButtonLatching(pin, address) {}
 };

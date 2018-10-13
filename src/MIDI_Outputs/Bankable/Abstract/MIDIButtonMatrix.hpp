@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Banks/BankableMIDIOutputAddressable.hpp>
+#include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
 #include <Hardware/ButtonMatrix.h>
 #include <Helpers/Array.hpp>
@@ -15,7 +15,7 @@ namespace Bankable {
  */
 template <DigitalSendFunction sendOn, DigitalSendFunction sendOff,
           uint8_t nb_rows, uint8_t nb_cols>
-class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
+class MIDIButtonMatrix : public BankableMIDIOutput,
                          public MIDIOutputElement,
                          public ButtonMatrix<nb_rows, nb_cols> {
 
@@ -38,13 +38,13 @@ class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
      * @param   channel
      *          The MIDI channel. [1, 16]
      */
-    MIDIButtonMatrix(const OutputBankConfigAddressable &config,
+    MIDIButtonMatrix(const OutputBankConfig &config,
                      const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
-                     uint8_t channel)
-        : BankableMIDIOutputAddressable(config), ButtonMatrix<nb_rows, nb_cols>(
-                                                     rowPins, colPins),
+                     Channel channel = CHANNEL_1)
+        : BankableMIDIOutput(config), ButtonMatrix<nb_rows, nb_cols>(rowPins,
+                                                                     colPins),
           addresses(addresses), baseChannel(channel) {}
 
   public:
@@ -54,14 +54,17 @@ class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
 
   private:
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
-        uint8_t address = getAddress(addresses[row][col]);
+        int8_t address = addresses[row][col];
+        MIDICNChannelAddress sendAddress = {address, baseChannel};
         if (state == LOW) {
             if (!activeButtons)
                 lock(); // Don't allow changing of the bank setting
+            sendAddress += getAddressOffset();
             activeButtons++;
-            sendOn(getChannel(baseChannel), address);
+            sendOn(sendAddress);
         } else {
-            sendOff(getChannel(baseChannel), address);
+            sendAddress += getAddressOffset();
+            sendOff(sendAddress);
             activeButtons--;
             if (!activeButtons)
                 unlock();
@@ -69,7 +72,7 @@ class MIDIButtonMatrix : public BankableMIDIOutputAddressable,
     }
 
     AddressMatrix<nb_rows, nb_cols> addresses;
-    const uint8_t baseChannel;
+    const Channel baseChannel;
     uint8_t activeButtons = 0;
 };
 
