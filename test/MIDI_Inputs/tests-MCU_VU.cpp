@@ -111,9 +111,9 @@ TEST(MCUVUBankable, setValueBankChangeChannel) {
     constexpr Channel channel = CHANNEL_3;
     constexpr uint8_t track = 5;
     MCU::Bankable::VU<3> vu({bank, CHANGE_CHANNEL}, track, channel);
-    MIDI_message_matcher midimsg1 = {CHANNEL_PRESSURE, channel + 4 - 1,
+    MIDI_message_matcher midimsg1 = {CHANNEL_PRESSURE, channel + 4,
                                      (track - 1) << 4 | 0xA, 0};
-    MIDI_message_matcher midimsg2 = {CHANNEL_PRESSURE, channel + 8 - 1,
+    MIDI_message_matcher midimsg2 = {CHANNEL_PRESSURE, channel + 8,
                                      (track - 1) << 4 | 0xB, 0};
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .WillOnce(Return(0))

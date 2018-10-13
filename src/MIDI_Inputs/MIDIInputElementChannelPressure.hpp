@@ -11,8 +11,8 @@ class MIDIInputElementChannelPressure
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementChannelPressure(Channel channel)
-        : MIDIInputElement({0, channel}) {
+    MIDIInputElementChannelPressure(const MIDICNChannelAddress &address)
+        : MIDIInputElement(address) {
         elements.append(this);
     }
 

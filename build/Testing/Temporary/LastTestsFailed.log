@@ -1,11 +1,3 @@
-82:MCUVU.setValue
-83:MCUVU.setOverload
-85:MCUVU.retainValueAfterOverload
-86:MCUVU.decay
-87:MCUVUBankable.setValueBankChangeAddress
-88:MCUVUBankable.setValueBankChangeChannel
-89:MCUVUBankable.overloadBankChangeAddress
-90:MCUVULEDsBankable.displayOnBankChange
 103:CCButtonBankable.changeSettingAndPressAndRelease
 107:CCButtonsBankable.pressChangeBankAndReleaseAndPress
 113:CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep

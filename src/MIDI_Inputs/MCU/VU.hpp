@@ -29,7 +29,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
   public:
     VU_Base(); // Just for virtual inheritance
     VU_Base(uint8_t track, Channel channel, unsigned int decayTime)
-        : MIDIInputElementChannelPressure(channel), baseTrack(track - 1),
+        : MIDIInputElementChannelPressure({track - 1, channel}),
           decayTime(decayTime) {}
 
     /** Return the VU meter value as an integer in [0, 12]. */
@@ -40,7 +40,6 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     }
 
   private:
-    const uint8_t baseTrack;
     const unsigned long decayTime;
     unsigned long prevDecayTime = 0;
 
@@ -66,10 +65,6 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     virtual uint8_t getRawValue() const = 0;
 
   protected:
-    /** Return the track number of this VU meter. (In the Bankable version,
-     * this is the track number of the first VU meter.) */
-    uint8_t getBaseTrack() const { return baseTrack; }
-
     /** Set the VU meter value.
      * @todo    rawValue reference instead of return.
      */

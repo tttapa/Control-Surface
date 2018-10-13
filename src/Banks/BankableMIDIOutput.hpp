@@ -14,11 +14,11 @@ class BankableMIDIOutput {
 
   public:
     RelativeMIDICNChannelAddress getAddressOffset() const {
-        int8_t selection = getSelection();
+        int8_t offset = getSelection() * bank.getTracksPerBank();
         switch (type) {
-            case CHANGE_ADDRESS: return {selection, 0, 0};
-            case CHANGE_CHANNEL: return {0, selection, 0};
-            case CHANGE_CN: return {0, 0, selection};
+            case CHANGE_ADDRESS: return {offset, 0, 0};
+            case CHANGE_CHANNEL: return {0, offset, 0};
+            case CHANGE_CN: return {0, 0, offset};
             default: return {};
         }
     }
