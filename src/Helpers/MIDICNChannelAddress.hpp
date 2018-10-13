@@ -2,11 +2,33 @@
 
 #include <Def/Def.hpp>
 
+struct __attribute__((packed)) RawMIDICNChannelAddress {
+    bool valid : 1;
+    uint8_t address : 7;
+    uint8_t channel : 4;
+    uint8_t cableNumber : 4;
+};
+
+class RelativeMIDICNChannelAddress {
+    friend class MIDICNChannelAddress;
+
+  public:
+    RelativeMIDICNChannelAddress() : addresses{0, 0, 0, 0} {}
+    RelativeMIDICNChannelAddress(int deltaAddress, int deltaChannel = 0,
+                                 int deltaCableNumber = 0)
+        : addresses{1, (uint8_t)deltaAddress, (uint8_t)deltaChannel,
+                    (uint8_t)deltaCableNumber} {}
+    bool isValid() const { return addresses.valid; }
+
+  private:
+    RawMIDICNChannelAddress addresses;
+};
+
 class MIDICNChannelAddress {
   public:
     MIDICNChannelAddress() : addresses{0, 0, 0, 0} {}
-    MIDICNChannelAddress(int8_t address, Channel channel = CHANNEL_1,
-                         int8_t cableNumber = 0)
+    MIDICNChannelAddress(int address, Channel channel = CHANNEL_1,
+                         int cableNumber = 0)
         : addresses{1, (uint8_t)address, (uint8_t)channel,
                     (uint8_t)cableNumber} {
     } // Deliberate overflow for negative numbers
@@ -17,7 +39,7 @@ class MIDICNChannelAddress {
                          uint8_t cableNumber = 0)
         : addresses{1, address, channel, cableNumber} {} */
 
-    MIDICNChannelAddress &operator+=(const MIDICNChannelAddress &rhs) {
+    MIDICNChannelAddress &operator+=(const RelativeMIDICNChannelAddress &rhs) {
         if (!this->isValid() || !rhs.isValid()) {
             this->addresses.valid = false;
         } else {
@@ -28,7 +50,8 @@ class MIDICNChannelAddress {
         return *this;
     }
 
-    MIDICNChannelAddress operator+(const MIDICNChannelAddress &rhs) const {
+    MIDICNChannelAddress
+    operator+(const RelativeMIDICNChannelAddress &rhs) const {
         MIDICNChannelAddress copy = *this;
         copy += rhs;
         return copy;
@@ -77,10 +100,5 @@ class MIDICNChannelAddress {
     }
 
   private:
-    struct __attribute__((packed)) {
-        bool valid : 1;
-        uint8_t address : 7;
-        uint8_t channel : 4;
-        uint8_t cableNumber : 4;
-    } addresses;
+    RawMIDICNChannelAddress addresses;
 };

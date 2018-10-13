@@ -79,10 +79,6 @@ class Channel {
 
     constexpr operator int8_t() const { return zeroBasedChannel; }
 
-    constexpr Channel operator-() const {
-        return Channel{int8_t(-int8_t(*this))};
-    }
-
     static constexpr Channel createChannel(int8_t oneBasedChannel) {
         return Channel{int8_t(oneBasedChannel - 1)};
     }

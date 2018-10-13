@@ -46,7 +46,7 @@ class NoteButtons
      */
     NoteButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 const MIDICNChannelAddress &baseAddress,
-                const MIDICNChannelAddress &incrementAddress)
+                const RelativeMIDICNChannelAddress &incrementAddress)
         : MIDIButtons<DigitalNoteSender::sendOn, DigitalNoteSender::sendOff,
                       NUMBER_OF_BUTTONS>(buttons, baseAddress,
                                          incrementAddress) {}

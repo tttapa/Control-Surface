@@ -32,7 +32,7 @@ class MIDINote : virtual public MIDINote_Base {
 
   private:
     bool updateImpl(const MIDI_message_matcher &midimsg,
-                    const MIDICNChannelAddress &target) override {
+                    UNUSED_PARAM const MIDICNChannelAddress &target) override {
         this->value = getValueFromMIDIMessage(midimsg);
         return true;
     }

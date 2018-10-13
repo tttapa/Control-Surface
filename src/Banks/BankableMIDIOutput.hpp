@@ -13,12 +13,12 @@ class BankableMIDIOutput {
         : BankableMIDIOutput(config.bank, config.type) {}
 
   public:
-    MIDICNChannelAddress getAddressOffset() const {
+    RelativeMIDICNChannelAddress getAddressOffset() const {
         int8_t selection = getSelection();
         switch (type) {
-            case CHANGE_ADDRESS: return {selection, Channel{0}, 0};
-            case CHANGE_CHANNEL: return {0, Channel{selection}, 0};
-            case CHANGE_CN: return {0, Channel{0}, selection};
+            case CHANGE_ADDRESS: return {selection, 0, 0};
+            case CHANGE_CHANNEL: return {0, selection, 0};
+            case CHANGE_CN: return {0, 0, selection};
             default: return {};
         }
     }

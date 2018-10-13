@@ -23,9 +23,9 @@ class MIDIButtons : public MIDIOutputElement {
      */
     MIDIButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 const MIDICNChannelAddress &baseAddress,
-                const MIDICNChannelAddress &addressIncrement = {1, Channel{0}})
+                const RelativeMIDICNChannelAddress &incrementAddress = {1, 0})
         : buttons{buttons}, baseAddress(baseAddress),
-          addressIncrement(addressIncrement) {}
+          incrementAddress(incrementAddress) {}
 
   public:
     void begin() final override {
@@ -41,12 +41,12 @@ class MIDIButtons : public MIDIOutputElement {
             } else if (state == Button::Rising) {
                 sendOff(address);
             }
-            address += addressIncrement;
+            address += incrementAddress;
         }
     }
 
   private:
     Array<Button, NUMBER_OF_BUTTONS> buttons;
     const MIDICNChannelAddress baseAddress;
-    const MIDICNChannelAddress addressIncrement;
+    const RelativeMIDICNChannelAddress incrementAddress;
 };

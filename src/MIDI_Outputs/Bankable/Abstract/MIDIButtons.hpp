@@ -27,7 +27,7 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
     MIDIButtons(const OutputBankConfig &config,
                 const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 const MIDICNChannelAddress &baseAddress,
-                const MIDICNChannelAddress &incrementAddress)
+                const RelativeMIDICNChannelAddress &incrementAddress)
         : BankableMIDIOutput(config), buttons{buttons},
           baseAddress(baseAddress), incrementAddress(incrementAddress) {}
 
@@ -60,7 +60,7 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
   private:
     Array<Button, NUMBER_OF_BUTTONS> buttons;
     const MIDICNChannelAddress baseAddress;
-    const MIDICNChannelAddress incrementAddress;
+    const RelativeMIDICNChannelAddress incrementAddress;
     uint8_t activeButtons = 0;
 };
 

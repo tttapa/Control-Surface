@@ -47,7 +47,7 @@ class CCButtons
     CCButtons(const OutputBankConfig &config,
               const Array<Button, NUMBER_OF_BUTTONS> &buttons,
               const MIDICNChannelAddress &baseAddress,
-              const MIDICNChannelAddress &incrementAddress)
+              const RelativeMIDICNChannelAddress &incrementAddress)
         : MIDIButtons<DigitalCCSender::sendOn, DigitalCCSender::sendOff,
                       NUMBER_OF_BUTTONS>(config, buttons, baseAddress,
                                          incrementAddress) {}
