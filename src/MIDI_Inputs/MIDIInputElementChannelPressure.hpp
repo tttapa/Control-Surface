@@ -11,8 +11,8 @@ class MIDIInputElementChannelPressure
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementChannelPressure(uint8_t baseChannel)
-        : MIDIInputElement({0, baseChannel}) {
+    MIDIInputElementChannelPressure(Channel channel)
+        : MIDIInputElement({0, channel}) {
         elements.append(this);
     }
 
@@ -61,7 +61,8 @@ class MIDIInputElementChannelPressure
   private:
     MIDICNChannelAddress
     getTarget(const MIDI_message_matcher &midimsg) const override {
-        return {0, midimsg.channel};
+        return {0, Channel(midimsg.channel)};
+        // Channel Pressure doesn't have an address
     }
 
     void moveDown() override { elements.moveDown(this); }

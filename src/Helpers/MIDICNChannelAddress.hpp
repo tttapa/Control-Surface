@@ -1,31 +1,17 @@
 #pragma once
 
-#include <stdint.h> // uint8_t
-
-constexpr uint8_t CHANNEL_1 = 0;
-constexpr uint8_t CHANNEL_2 = 1;
-constexpr uint8_t CHANNEL_3 = 2;
-constexpr uint8_t CHANNEL_4 = 3;
-constexpr uint8_t CHANNEL_5 = 4;
-constexpr uint8_t CHANNEL_6 = 5;
-constexpr uint8_t CHANNEL_7 = 6;
-constexpr uint8_t CHANNEL_8 = 7;
-constexpr uint8_t CHANNEL_9 = 8;
-constexpr uint8_t CHANNEL_10 = 9;
-constexpr uint8_t CHANNEL_11 = 10;
-constexpr uint8_t CHANNEL_12 = 11;
-constexpr uint8_t CHANNEL_13 = 12;
-constexpr uint8_t CHANNEL_14 = 13;
-constexpr uint8_t CHANNEL_15 = 14;
-constexpr uint8_t CHANNEL_16 = 15;
+#include <Def/Def.hpp>
 
 class MIDICNChannelAddress {
   public:
     MIDICNChannelAddress() : addresses{0, 0, 0, 0} {}
-    MIDICNChannelAddress(int8_t address, int8_t channel = CHANNEL_1,
+    MIDICNChannelAddress(int8_t address, Channel channel = CHANNEL_1,
                          int8_t cableNumber = 0)
         : addresses{1, (uint8_t)address, (uint8_t)channel,
                     (uint8_t)cableNumber} {
+    } // Deliberate overflow for negative numbers
+    MIDICNChannelAddress(Channel channel, int8_t cableNumber = 0)
+        : addresses{1, 0, (uint8_t)channel, (uint8_t)cableNumber} {
     } // Deliberate overflow for negative numbers
     /* MIDICNChannelAddress(uint8_t address, uint8_t channel = CHANNEL_1,
                          uint8_t cableNumber = 0)
@@ -49,23 +35,46 @@ class MIDICNChannelAddress {
     }
 
     bool operator==(const MIDICNChannelAddress &rhs) const {
-        return this->addresses.valid == rhs.addresses.valid &&
+        return this->addresses.valid && rhs.addresses.valid &&
                this->addresses.address == rhs.addresses.address &&
                this->addresses.channel == rhs.addresses.channel &&
                this->addresses.cableNumber == rhs.addresses.cableNumber;
     }
 
     bool operator!=(const MIDICNChannelAddress &rhs) const {
-        return !(*this == rhs);
+        return this->addresses.valid && rhs.addresses.valid &&
+               !(this->addresses.address == rhs.addresses.address &&
+                 this->addresses.channel == rhs.addresses.channel &&
+                 this->addresses.cableNumber == rhs.addresses.cableNumber);
     }
 
     uint8_t getAddress() const { return addresses.address; }
 
-    uint8_t getChannel() const { return addresses.channel; }
+    Channel getChannel() const { return Channel{int8_t(addresses.channel)}; }
 
     uint8_t getCableNumber() const { return addresses.cableNumber; }
 
     bool isValid() const { return addresses.valid; }
+
+    explicit operator bool() const { return isValid(); }
+
+    static bool matchSingle(const MIDICNChannelAddress &toMatch,
+                            const MIDICNChannelAddress &base) {
+        return base == toMatch;
+    }
+
+    static bool matchAddressInRange(const MIDICNChannelAddress &toMatch,
+                                    const MIDICNChannelAddress &base,
+                                    uint8_t length) {
+        bool valid = base.addresses.valid && toMatch.addresses.valid;
+        bool addressInRange =
+            base.addresses.address <= toMatch.addresses.address &&
+            base.addresses.address + length > toMatch.addresses.address;
+        bool equalChannelAndCN =
+            base.addresses.channel == toMatch.addresses.channel &&
+            base.addresses.cableNumber == toMatch.addresses.cableNumber;
+        return valid && addressInRange && equalChannelAndCN;
+    }
 
   private:
     struct __attribute__((packed)) {

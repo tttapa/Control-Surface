@@ -15,8 +15,8 @@ class MIDIInputElementNote : public MIDIInputElement,
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementNote(uint8_t baseChannel, uint8_t baseNote)
-        : MIDIInputElement{{baseChannel, baseNote}} {
+    MIDIInputElementNote(const MIDICNChannelAddress &address)
+        : MIDIInputElement{address} {
         elements.append(this);
     }
 

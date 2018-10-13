@@ -21,14 +21,16 @@ using EncoderSwitchPinList = Array<uint8_t, 3>;
 template <class T, size_t nb_rows, size_t nb_cols>
 using Array2D = Array<Array<T, nb_cols>, nb_rows>;
 
+class MIDICNChannelAddress;
+
 // channel, address
-using DigitalSendFunction = void (*)(uint8_t, uint8_t);
+using DigitalSendFunction = void (*)(MIDICNChannelAddress);
 // value, channel, address
-using ContinuousSendFunction7Bit = void (*)(uint8_t, uint8_t, uint8_t);
+using ContinuousSendFunction7Bit = void (*)(uint8_t, MIDICNChannelAddress);
 // value, channel
-using ContinuousSendFunction14Bit = void (*)(uint16_t, uint8_t);
+using ContinuousSendFunction14Bit = void (*)(uint16_t, MIDICNChannelAddress);
 // delta, channel, address
-using RelativeSendFunction = void (*)(long, uint8_t, uint8_t);
+using RelativeSendFunction = void (*)(long, MIDICNChannelAddress);
 
 using setting_t = uint8_t;
 constexpr setting_t NO_SETTING = 1 << (8 * sizeof(setting_t) - 1);
@@ -69,6 +71,46 @@ struct PixelLocation {
     int16_t x;
     int16_t y;
 };
+
+class Channel {
+  public:
+    explicit constexpr Channel(int8_t zeroBasedChannel)
+        : zeroBasedChannel(zeroBasedChannel) {}
+
+    constexpr operator int8_t() const { return zeroBasedChannel; }
+
+    constexpr Channel operator-() const {
+        return Channel{int8_t(-int8_t(*this))};
+    }
+
+    static constexpr Channel createChannel(int8_t oneBasedChannel) {
+        return Channel{int8_t(oneBasedChannel - 1)};
+    }
+
+  private:
+    int8_t zeroBasedChannel;
+};
+
+constexpr Channel operator"" _ch(unsigned long long ch) {
+    return Channel::createChannel(ch);
+}
+
+constexpr Channel CHANNEL_1 = 1_ch;
+constexpr Channel CHANNEL_2 = 2_ch;
+constexpr Channel CHANNEL_3 = 3_ch;
+constexpr Channel CHANNEL_4 = 4_ch;
+constexpr Channel CHANNEL_5 = 5_ch;
+constexpr Channel CHANNEL_6 = 6_ch;
+constexpr Channel CHANNEL_7 = 7_ch;
+constexpr Channel CHANNEL_8 = 8_ch;
+constexpr Channel CHANNEL_9 = 9_ch;
+constexpr Channel CHANNEL_10 = 10_ch;
+constexpr Channel CHANNEL_11 = 11_ch;
+constexpr Channel CHANNEL_12 = 12_ch;
+constexpr Channel CHANNEL_13 = 13_ch;
+constexpr Channel CHANNEL_14 = 14_ch;
+constexpr Channel CHANNEL_15 = 15_ch;
+constexpr Channel CHANNEL_16 = 16_ch;
 
 #ifdef DOXYGEN
 #define UNUSED_PARAM

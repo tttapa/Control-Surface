@@ -42,7 +42,7 @@ include(GoogleTest)
 enable_testing()
 
 # -Wsuggest-override
-add_definitions("-g -Og -Wall -Wextra -fdiagnostics-show-option")
+add_definitions("-g -O0 -Wall -Wextra -fdiagnostics-show-option")
 
 #include Google Test
 include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googletest/include)

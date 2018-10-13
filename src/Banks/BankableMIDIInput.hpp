@@ -40,29 +40,76 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
     }
 
   protected:
-    bool match(const MIDICNChannelAddress &target,
-               const MIDICNChannelAddress &base) const {
+    /**
+     * @note    Equivalent to `matchBankableInRange(toMatch, base, 1)`.
+     */
+    bool matchBankable(uint8_t toMatch, uint8_t base) const {
+        uint8_t diff = toMatch - base;
+        return toMatch >= base && diff <= N * bank.getTracksPerBank() &&
+               diff % bank.getTracksPerBank() == 0;
+    }
+
+    bool matchBankableInRange(uint8_t toMatch, uint8_t base,
+                              uint8_t length) const {
+        uint8_t diff = toMatch - base;
+        return toMatch >= base && diff <= N * bank.getTracksPerBank() &&
+               diff % bank.getTracksPerBank() < length;
+    }
+
+    static bool inRange(uint8_t toMatch, uint8_t base, uint8_t length) {
+        return (base <= toMatch) && (toMatch - base < length);
+    }
+
+    bool matchBankable(const MIDICNChannelAddress &toMatch,
+                       const MIDICNChannelAddress &base) const {
+        if (!toMatch.isValid() || !base.isValid())
+            return false;
         switch (type) {
             case CHANGE_ADDRESS: {
-                int8_t diff = target.getAddress() - base.getAddress();
-                return target.getChannel() == base.getChannel() &&
-                       target.getCableNumber() == base.getCableNumber() &&
-                       diff >= 0 && diff <= N * bank.getTracksPerBank() &&
-                       diff % bank.getTracksPerBank() == 0;
+                return toMatch.getChannel() == base.getChannel() &&
+                       toMatch.getCableNumber() == base.getCableNumber() &&
+                       matchBankable(toMatch.getAddress(), base.getAddress());
             }
             case CHANGE_CHANNEL: {
-                int8_t diff = target.getChannel() - base.getChannel();
-                return target.getAddress() == base.getAddress() &&
-                       target.getCableNumber() == base.getCableNumber() &&
-                       diff >= 0 && diff <= N * bank.getTracksPerBank() &&
-                       diff % bank.getTracksPerBank() == 0;
+                return toMatch.getAddress() == base.getAddress() &&
+                       toMatch.getCableNumber() == base.getCableNumber() &&
+                       matchBankable(int8_t(toMatch.getChannel()),
+                                     int8_t(base.getChannel()));
             }
             case CHANGE_CN: {
-                int8_t diff = target.getCableNumber() - base.getCableNumber();
-                return target.getAddress() == base.getAddress() &&
-                       target.getChannel() == base.getChannel() && diff >= 0 &&
-                       diff <= N * bank.getTracksPerBank() &&
-                       diff % bank.getTracksPerBank() == 0;
+                return toMatch.getAddress() == base.getAddress() &&
+                       toMatch.getChannel() == base.getChannel() &&
+                       matchBankable(toMatch.getCableNumber(),
+                                     base.getCableNumber());
+            }
+            default: return false;
+        }
+    }
+
+    bool matchBankableAddressInRange(const MIDICNChannelAddress &toMatch,
+                                     const MIDICNChannelAddress &base,
+                                     uint8_t length) const {
+        if (!toMatch.isValid() || !base.isValid())
+            return false;
+        switch (type) {
+            case CHANGE_ADDRESS: {
+                return toMatch.getChannel() == base.getChannel() &&
+                       toMatch.getCableNumber() == base.getCableNumber() &&
+                       matchBankableInRange(toMatch.getAddress(),
+                                            base.getAddress(), length);
+            }
+            case CHANGE_CHANNEL: {
+                return inRange(toMatch.getAddress(), base.getAddress(),
+                               length) &&
+                       toMatch.getCableNumber() == base.getCableNumber() &&
+                       matchBankable(toMatch.getChannel(), base.getChannel());
+            }
+            case CHANGE_CN: {
+                return inRange(toMatch.getAddress(), base.getAddress(),
+                               length) &&
+                       toMatch.getChannel() == base.getChannel() &&
+                       matchBankable(toMatch.getCableNumber(),
+                                     base.getCableNumber());
             }
             default: return false;
         }

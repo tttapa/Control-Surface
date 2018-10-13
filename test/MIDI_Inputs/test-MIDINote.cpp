@@ -3,18 +3,18 @@
 #include <MIDI_Inputs/MIDINote.hpp>
 
 TEST(MIDINote, NoteOnNoteOff) {
-    MIDINote mn = {0x3C, 5};
+    MIDINote mn = {{0x3C, CHANNEL_5}};
 
     EXPECT_EQ(mn.getValue(), 0);
     EXPECT_FALSE(mn.getState());
 
-    MIDI_message_matcher midimsg1 = {0x90, 4, 0x3C, 0x7E};
+    MIDI_message_matcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg1);
 
     EXPECT_EQ(mn.getValue(), 0x7E);
     EXPECT_TRUE(mn.getState());
 
-    MIDI_message_matcher midimsg2 = {0x80, 4, 0x3C, 0x7E};
+    MIDI_message_matcher midimsg2 = {0x80, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg2);
 
     EXPECT_EQ(mn.getValue(), 0);
@@ -22,12 +22,12 @@ TEST(MIDINote, NoteOnNoteOff) {
 }
 
 TEST(MIDINote, NoteOnNoteOnZeroVelocity) {
-    MIDINote mn = {0x3C, 5};
+    MIDINote mn = {{0x3C, CHANNEL_5}};
 
-    MIDI_message_matcher midimsg1 = {0x90, 4, 0x3C, 0x7E};
+    MIDI_message_matcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg1);
 
-    MIDI_message_matcher midimsg2 = {0x90, 4, 0x3C, 0x00};
+    MIDI_message_matcher midimsg2 = {0x90, CHANNEL_5, 0x3C, 0x00};
     MIDIInputElementNote::updateAllWith(midimsg2);
 
     EXPECT_EQ(mn.getValue(), 0);
@@ -37,7 +37,7 @@ TEST(MIDINote, NoteOnNoteOnZeroVelocity) {
 #include <MIDI_Inputs/LEDs/MIDINoteLED.hpp>
 
 TEST(MIDINoteLED, NoteOnNoteOff) {
-    MIDINoteLED mnl = {2, 0x3C, 5};
+    MIDINoteLED mnl = {2, {0x3C, CHANNEL_5}};
 
     ::testing::Sequence seq;
 
@@ -46,12 +46,12 @@ TEST(MIDINoteLED, NoteOnNoteOff) {
 
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, HIGH))
         .InSequence(seq);
-    MIDI_message_matcher midimsg1 = {0x90, 4, 0x3C, 0x7E};
+    MIDI_message_matcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg1);
 
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, LOW))
         .InSequence(seq);
-    MIDI_message_matcher midimsg2 = {0x80, 4, 0x3C, 0x7E};
+    MIDI_message_matcher midimsg2 = {0x80, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg2);
 
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());

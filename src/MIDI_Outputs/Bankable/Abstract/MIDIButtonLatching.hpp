@@ -35,8 +35,8 @@ class MIDIButtonLatching : public MIDIOutputElement, public BankableMIDIOutput {
         MIDICNChannelAddress sendAddress = address;
         sendAddress += getAddressOffset();
         if (state == Button::Falling || state == Button::Rising) {
-            sendOn(sendAddress.getChannel(), sendAddress.getAddress());
-            sendOff(sendAddress.getChannel(), sendAddress.getAddress());
+            sendOn(sendAddress);
+            sendOff(sendAddress);
         }
     }
 

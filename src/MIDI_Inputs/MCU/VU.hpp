@@ -28,7 +28,7 @@ namespace MCU {
 class VU_Base : public MIDIInputElementChannelPressure, public IVU {
   public:
     VU_Base(); // Just for virtual inheritance
-    VU_Base(uint8_t track, uint8_t channel, unsigned int decayTime)
+    VU_Base(uint8_t track, Channel channel, unsigned int decayTime)
         : MIDIInputElementChannelPressure(channel), baseTrack(track - 1),
           decayTime(decayTime) {}
 
@@ -50,6 +50,11 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
             decayAll();
             display();
         }
+    }
+
+    MIDICNChannelAddress
+    getTarget(const MIDI_message_matcher &midimsg) const override {
+        return {int8_t(midimsg.data1 >> 4), Channel(midimsg.channel)};
     }
 
     /** Automatically decay the VU meter value by one step (if it is greater
@@ -120,15 +125,11 @@ class VU : virtual public VU_Base {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(uint8_t track, uint8_t channel = 1, unsigned int decayTime = 150)
+    VU(uint8_t track, Channel channel = CHANNEL_1, unsigned int decayTime = 150)
         : VU_Base(track, channel, decayTime) {}
 
-    bool updateImpl(const MIDI_message_matcher &midimsg) override {
-        uint8_t targetTrack = midimsg.data1 >> 4;
-        DEBUGFN("target track = " << +targetTrack);
-        if (!matchTrack(targetTrack))
-            return false;
-
+    bool updateImpl(const MIDI_message_matcher &midimsg,
+                    UNUSED_PARAM const MIDICNChannelAddress &target) override {
         uint8_t data = midimsg.data1 & 0x0F;
         switch (data) {
             case 0xF: clearOverload(); break;
@@ -149,9 +150,6 @@ class VU : virtual public VU_Base {
 
     uint8_t getRawValue() const override { return value; }
 
-    inline bool matchTrack(uint8_t targetTrack) const {
-        return targetTrack == getBaseTrack();
-    }
     void setValue(uint8_t newValue) { value = setValueHelper(value, newValue); }
     void setOverload() { value = setOverloadHelper(value); }
     void clearOverload() { value = clearOverloadHelper(value); }
@@ -192,14 +190,14 @@ class VU : virtual public VU_Base, public BankableMIDIInput<N> {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(const BankConfig<N> &config, uint8_t track, uint8_t channel = 1,
+    VU(const BankConfig<N> &config, uint8_t track, Channel channel = CHANNEL_1,
        unsigned int decayTime = 150)
         : VU_Base(track, channel, decayTime), BankableMIDIInput<N>(config) {}
 
-    bool updateImpl(const MIDI_message_matcher &midimsg) {
-        uint8_t targetTrack = midimsg.data1 >> 4;
-        MIDICNChannelAddress target = {targetTrack, midimsg.channel};
-        uint8_t index = this->getIndex(target, address) % N;
+    bool updateImpl(const MIDI_message_matcher &midimsg,
+                    const MIDICNChannelAddress &target) override {
+        uint8_t index =
+            this->getIndex(target, address) % N; // Todo: modulo everywhere?
         uint8_t data = midimsg.data1 & 0x0F;
         switch (data) {
             case 0xF: clearOverload(index); break;
@@ -208,6 +206,10 @@ class VU : virtual public VU_Base, public BankableMIDIInput<N> {
             default: setValue(index, data); break;
         }
         return true;
+    }
+
+    bool match(const MIDICNChannelAddress &target) const override {
+        return BankableMIDIInput<N>::matchBankable(target, address);
     }
 
     void reset() override {
@@ -226,13 +228,6 @@ class VU : virtual public VU_Base, public BankableMIDIInput<N> {
         return values[this->getSelection()];
     }
 
-    inline bool matchTrack(uint8_t targetTrack) const {
-        return BankableMIDIInput<N>::matchAddress(targetTrack, getBaseTrack());
-    }
-    inline bool matchChannel(uint8_t targetChannel) const override {
-        return BankableMIDIInput<N>::matchChannel(targetChannel,
-                                                  getBaseChannel());
-    }
     void setValue(uint8_t index, uint8_t newValue) {
         values[index] = setValueHelper(values[index], newValue);
     }

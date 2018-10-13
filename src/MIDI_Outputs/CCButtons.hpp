@@ -45,10 +45,9 @@ class CCButtons
      * @ingroup MIDIOutputElementConstructors
      */
     CCButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
-              uint8_t baseController, uint8_t baseChannel = 1,
-              uint8_t controllerIncrement = 1, uint8_t channelIncrement = 0)
+              const MIDICNChannelAddress &baseAddress,
+              const MIDICNChannelAddress &incrementAddress)
         : MIDIButtons<DigitalCCSender::sendOn, DigitalCCSender::sendOff,
-                      NUMBER_OF_BUTTONS>(buttons, baseController, baseChannel,
-                                         controllerIncrement,
-                                         channelIncrement) {}
+                      NUMBER_OF_BUTTONS>(buttons, baseAddress,
+                                         incrementAddress) {}
 };

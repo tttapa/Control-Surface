@@ -32,6 +32,6 @@ class NoteButtonLatching
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    NoteButtonLatching(pin_t pin, uint8_t note, uint8_t channel = 1)
-        : MIDIButtonLatching(pin, note, channel) {}
+    NoteButtonLatching(pin_t pin, const MIDICNChannelAddress &address)
+        : MIDIButtonLatching(pin, address) {}
 };

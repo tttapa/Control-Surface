@@ -32,6 +32,6 @@ class CCButton
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    CCButton(pin_t pin, uint8_t controller, uint8_t channel)
-        : MIDIButton(pin, controller, channel) {}
+    CCButton(pin_t pin, const MIDICNChannelAddress &address)
+        : MIDIButton(pin, address) {}
 };

@@ -43,7 +43,7 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
 // -------------------------- MIDI Output Elements -------------------------- //
 // ========================================================================== //
 
-constexpr uint8_t channel = 1;
+constexpr Channel channel = 1;
 
 // A potentiometer that sets the master volume on analog pin A1
 PBPotentiometer masterVolume = { A1, MCU::MASTER_VOLUME };

@@ -18,11 +18,11 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
      * @todo    Documentation
      */
     MIDIIncrementDecrementButtons(const IncrementDecrementButtons &buttons,
-                                  uint8_t address, uint8_t channel = 1,
+                                  const MIDICNChannelAddress &address,
                                   uint8_t speedMultiply = 1,
-                                  uint8_t resetAddress = NO_ADDRESS)
-        : buttons(buttons), address(address), channel(channel),
-          speedMultiply(speedMultiply), resetAddress(resetAddress) {}
+                                  const MIDICNChannelAddress &resetAddress = {})
+        : buttons(buttons), address(address), speedMultiply(speedMultiply),
+          resetAddress(resetAddress) {}
 
   public:
     void begin() override { buttons.begin(); }
@@ -31,10 +31,10 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         using IncrDecrButtons = IncrementDecrementButtons;
         switch (buttons.getState()) {
             case IncrDecrButtons::Increment:
-                send(speedMultiply, channel, address);
+                send(speedMultiply, address);
                 break;
             case IncrDecrButtons::Decrement:
-                send(-speedMultiply, channel, address);
+                send(-speedMultiply, address);
                 break;
             case IncrDecrButtons::Reset: reset(); break;
             default: break;
@@ -42,18 +42,17 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
     }
 
     void reset() {
-        if (resetAddress != NO_ADDRESS) {
-            sendOn(channel, resetAddress);
-            sendOff(channel, resetAddress);
+        if (resetAddress) {
+            sendOn(resetAddress);
+            sendOff(resetAddress);
         }
     }
 
   private:
     IncrementDecrementButtons buttons;
-    const uint8_t address;
-    const uint8_t channel;
+    const MIDICNChannelAddress address;
     const uint8_t speedMultiply;
-    const uint8_t resetAddress;
+    const MIDICNChannelAddress resetAddress;
 
     constexpr static DigitalSendFunction sendOn = DigitalNoteSender::sendOn;
     constexpr static DigitalSendFunction sendOff = DigitalNoteSender::sendOff;

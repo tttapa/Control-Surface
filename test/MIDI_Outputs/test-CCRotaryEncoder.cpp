@@ -9,7 +9,7 @@ TEST(CCRotaryEncoder, turnOneStep) {
     MockMIDI_Interface midi;
 
     EncoderMock encm;
-    CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7}, 2, 4};
 
     EXPECT_CALL(encm, read()).WillOnce(Return(4));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 2));
@@ -21,7 +21,7 @@ TEST(CCRotaryEncoder, turnFourHalfSteps) {
     MockMIDI_Interface midi;
 
     EncoderMock encm;
-    CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7}, 2, 4};
 
     EXPECT_CALL(encm, read())
         .WillOnce(Return(2))
@@ -48,7 +48,7 @@ TEST(CCRotaryEncoder, turnOneStepBackwards) {
     MockMIDI_Interface midi;
 
     EncoderMock encm;
-    CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7}, 2, 4};
 
     EXPECT_CALL(encm, read()).WillOnce(Return(-4));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, (-2) & 0x7F));
@@ -60,7 +60,7 @@ TEST(CCRotaryEncoder, turnSixteenSteps) {
     MockMIDI_Interface midi;
 
     EncoderMock encm;
-    CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7}, 2, 4};
 
     // Should be send in packets of value 15 max
     EXPECT_CALL(encm, read()).WillOnce(Return(4 * 16));
@@ -74,7 +74,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwards) {
     MockMIDI_Interface midi;
 
     EncoderMock encm;
-    CCRotaryEncoder ccenc = {encm, 0x20, 7, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7}, 2, 4};
 
     // Should be send in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
@@ -94,7 +94,7 @@ TEST(CCRotaryEncoderBankable, turnOneStepChangeSettingTurnOneStep) {
     OutputBank bank(4);
 
     EncoderMock encm;
-    Bankable::CCRotaryEncoder ccenc = {bank, encm, 0x20, 7, 2, 4};
+    Bankable::CCRotaryEncoder ccenc = {bank, encm, {0x20, CHANNEL_7}, 2, 4};
 
     EXPECT_CALL(encm, read()).WillOnce(Return(4));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 2));

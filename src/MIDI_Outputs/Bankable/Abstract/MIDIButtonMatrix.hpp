@@ -42,7 +42,7 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
                      const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
-                     uint8_t channel)
+                     Channel channel = CHANNEL_1)
         : BankableMIDIOutput(config), ButtonMatrix<nb_rows, nb_cols>(rowPins,
                                                                      colPins),
           addresses(addresses), baseChannel(channel) {}
@@ -54,15 +54,17 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
 
   private:
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
-        MIDICNChannelAddress sendAddress = {addresses[row][col], baseChannel};
-        sendAddress += getAddressOffset();
+        int8_t address = addresses[row][col];
+        MIDICNChannelAddress sendAddress = {address, baseChannel};
         if (state == LOW) {
             if (!activeButtons)
                 lock(); // Don't allow changing of the bank setting
+            sendAddress += getAddressOffset();
             activeButtons++;
-            sendOn(sendAddress.getChannel(), sendAddress.getAddress());
+            sendOn(sendAddress);
         } else {
-            sendOff(sendAddress.getChannel(), sendAddress.getAddress());
+            sendAddress += getAddressOffset();
+            sendOff(sendAddress);
             activeButtons--;
             if (!activeButtons)
                 unlock();
@@ -70,7 +72,7 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
     }
 
     AddressMatrix<nb_rows, nb_cols> addresses;
-    const uint8_t baseChannel;
+    const Channel baseChannel;
     uint8_t activeButtons = 0;
 };
 

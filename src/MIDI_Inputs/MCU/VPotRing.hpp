@@ -20,8 +20,8 @@ class VPotRing_Base : public MIDIInputElementCC {
     VPotRing_Base(); // unused, only for virtual inheritance
                      // keeps compiler happy, but gives a linker error if it is
                      // accidentally used.
-    VPotRing_Base(uint8_t track, uint8_t channel = 1)
-        : MIDIInputElementCC(channel, track + VPotRingAddress - 1) {}
+    VPotRing_Base(const MIDICNChannelAddress &address)
+        : MIDIInputElementCC{address + (VPotRingAddress - 1)} {}
 
   public:
     /** Return the position of the V-Pot ring. [0, 11] */
@@ -87,13 +87,13 @@ class VPotRing_Base : public MIDIInputElementCC {
  */
 class VPotRing : virtual public VPotRing_Base {
   public:
-    VPotRing(uint8_t track, uint8_t channel = 1)
-        : VPotRing_Base(track, channel) {}
+    VPotRing(const MIDICNChannelAddress &address) : VPotRing_Base(address) {}
 
     void reset() override { value = 0; }
 
   private:
-    bool updateImpl(const MIDI_message_matcher &midimsg) override {
+    bool updateImpl(const MIDI_message_matcher &midimsg,
+                    UNUSED_PARAM const MIDICNChannelAddress &target) override {
         this->value = sanitizeValue(midimsg.data2);
         return true;
     }
@@ -116,13 +116,10 @@ namespace Bankable {
  *          The number of banks.
  */
 template <uint8_t N>
-class VPotRing : virtual public VPotRing_Base,
-                 public BankableMIDIInput<N> {
+class VPotRing : virtual public VPotRing_Base, public BankableMIDIInput<N> {
   public:
-    VPotRing(const BankConfig<N> &config, uint8_t track,
-             uint8_t channel = 1)
-        : VPotRing_Base(track, channel), BankableMIDIInput<N>(
-                                             config) {}
+    VPotRing(const BankConfig<N> &config, const MIDICNChannelAddress &address)
+        : VPotRing_Base(address), BankableMIDIInput<N>(config) {}
 
     void reset() final override {
         for (uint8_t &value : values)
@@ -130,17 +127,16 @@ class VPotRing : virtual public VPotRing_Base,
     }
 
   private:
-    bool updateImpl(const MIDI_message_matcher &midimsg) override {
-        uint8_t index = this->getIndex(midimsg.channel, midimsg.data1,
-                                       getBaseChannel(), getBaseAddress());
+    bool updateImpl(const MIDI_message_matcher &midimsg,
+                    const MIDICNChannelAddress &target) override {
+        uint8_t index = this->getIndex(target, address);
         uint8_t value = sanitizeValue(midimsg.data2);
         values[index] = value;
         return true;
     }
 
-    bool matchAddress(uint8_t targetAddress) const override {
-        return BankableMIDIInput<N>::matchAddress(targetAddress,
-                                                             getBaseAddress());
+    bool match(const MIDICNChannelAddress &target) const override {
+        return BankableMIDIInput<N>::matchBankable(target, address);
     }
 
     uint8_t getRawValue() const override {

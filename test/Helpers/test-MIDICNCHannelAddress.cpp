@@ -110,8 +110,7 @@ TEST(MIDICNChannelAddress, equals) {
     {
         MIDICNChannelAddress m;
         MIDICNChannelAddress n = {12, CHANNEL_10, 5};
-        EXPECT_NE(m, n);
-        EXPECT_TRUE(m != n);
+        EXPECT_FALSE(m != n);
         EXPECT_FALSE(m == n);
     }
 }

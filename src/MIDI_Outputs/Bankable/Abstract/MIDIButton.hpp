@@ -36,10 +36,10 @@ class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
         if (state == Button::Falling) {
             lock();
             sendAddress += getAddressOffset();
-            sendOn(sendAddress.getChannel(), sendAddress.getAddress());
+            sendOn(sendAddress);
         } else if (state == Button::Rising) {
             sendAddress += getAddressOffset();
-            sendOff(sendAddress.getChannel(), sendAddress.getAddress());
+            sendOff(sendAddress);
             unlock();
         }
     }

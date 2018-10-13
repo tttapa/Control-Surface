@@ -46,14 +46,12 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
   public:
     void begin() final override {}
     void update() final override {
-        MIDICNChannelAddress sendAddress = address;
-        sendAddress += getAddressOffset();
+        MIDICNChannelAddress sendAddress = address + getAddressOffset();
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         // I could do the division inside of the if statement for performance
         if (difference) {
-            send(difference * speedMultiply, sendAddress.getChannel(),
-                 sendAddress.getAddress());
+            send(difference * speedMultiply, sendAddress);
             previousPosition += difference * pulsesPerStep;
         }
     }

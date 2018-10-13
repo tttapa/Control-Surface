@@ -32,9 +32,8 @@ class MIDINoteLED : public MIDINote, public MIDINoteLED_Base {
      * @param   channel
      *          The MIDI channel. [1, 16] 
      */
-    MIDINoteLED(pin_t ledPin, uint8_t note, uint8_t channel = 1)
-        : MIDINote_Base(note, channel), MIDINote(note, channel),
-          MIDINoteLED_Base(ledPin) {}
+    MIDINoteLED(pin_t ledPin, const MIDICNChannelAddress &address)
+        : MIDINote_Base(address), MIDINote(address), MIDINoteLED_Base(ledPin) {}
 };
 
 // -------------------------------------------------------------------------- //

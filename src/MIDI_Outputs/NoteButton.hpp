@@ -31,6 +31,6 @@ class NoteButton
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    NoteButton(pin_t pin, uint8_t note, uint8_t channel = 1)
-        : MIDIButton(pin, note, channel) {}
+    NoteButton(pin_t pin, const MIDICNChannelAddress &address)
+        : MIDIButton(pin, address) {}
 };

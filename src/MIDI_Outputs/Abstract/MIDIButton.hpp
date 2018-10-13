@@ -1,8 +1,8 @@
 #pragma once
 
+#include <Def/Def.hpp>
 #include <Hardware/Button.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
-#include <Def/Def.hpp>
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
@@ -21,22 +21,21 @@ class MIDIButton : public MIDIOutputElement {
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      */
-    MIDIButton(pin_t pin, uint8_t baseAddress, uint8_t baseChannel)
-        : button{pin}, baseAddress(baseAddress), baseChannel(baseChannel) {}
+    MIDIButton(pin_t pin, const MIDICNChannelAddress &address)
+        : button{pin}, address{address} {}
 
   public:
     void begin() final override { button.begin(); }
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling) {
-            sendOn(baseChannel, baseAddress);
+            sendOn(address);
         } else if (state == Button::Rising) {
-            sendOff(baseChannel, baseAddress);
+            sendOff(address);
         }
     }
 
   private:
     Button button;
-    const uint8_t baseAddress;
-    const uint8_t baseChannel;
+    const MIDICNChannelAddress address;
 };

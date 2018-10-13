@@ -10,8 +10,8 @@ class MIDIInputElementCC : public MIDIInputElement,
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementCC(uint8_t baseChannel, uint8_t baseAddress)
-        : MIDIInputElement{{baseAddress, baseChannel}} {
+    MIDIInputElementCC(const MIDICNChannelAddress &address)
+        : MIDIInputElement{address} {
         elements.append(this);
     }
 
