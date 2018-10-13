@@ -157,6 +157,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
             case NO_MESSAGE: break;
             case CHANNEL_MESSAGE: onChannelMessage(); break;
             case SYSEX_MESSAGE: onSysExMessage(); break;
+            default: onRealtimeMessage(static_cast<uint8_t>(result)); break;
         }
     }
 

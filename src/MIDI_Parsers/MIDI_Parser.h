@@ -38,6 +38,16 @@ enum MIDI_read_t {
     NO_MESSAGE = 0,
     CHANNEL_MESSAGE = 1,
     SYSEX_MESSAGE = 2,
+
+    /* System Real-Time messages */
+    TIMING_CLOCK_MESSAGE = 0xF8,
+    UNDEFINED_REALTIME_MESSAGE_1 = 0xF9,
+    START_MESSAGE = 0xFA,
+    CONTINUE_MESSAGE = 0xFB,
+    STOP_MESSAGE = 0xFC,
+    UNDEFINED_REALTIME_MESSAGE_2 = 0xFD,
+    ACTIVE_SENSING_MESSAGE = 0xFE,
+    RESET_MESSAGE = 0xFF
 };
 
 // --------------------------------------------------------------------------- //

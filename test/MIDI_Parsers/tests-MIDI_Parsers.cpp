@@ -114,6 +114,11 @@ TEST(USBMIDIParser, sysEx12Bytes) {
     EXPECT_EQ(result, expected);
 }
 
+TEST(USBMIDIParser, Realtime) {
+    uint8_t packet[4] = {0x3F, 0xF8, 0x00, 0x00};
+    EXPECT_EQ(uparser.parse(packet), 0xF8);
+}
+
 TEST(USBMIDIParser, sysExContinueWithoutStarting) {
     uint8_t packet[4] = {0x07, 0x33, 0x34, 0xF7};
     EXPECT_EQ(uparser.parse(packet), NO_MESSAGE);
@@ -268,6 +273,22 @@ TEST(SerialMIDIParser, sysEx7Bytes) {
                              sparser.getSysExBuffer() + 7);
     const SysExVector expected = {0xF0, 0x41, 0x42, 0x43, 0x44, 0x45, 0xF7};
     EXPECT_EQ(result, expected);
+}
+
+TEST(SerialMIDIParser, RealTime) {
+    EXPECT_EQ(sparser.parse(0xF8), 0xF8);
+}
+
+TEST(SerialMIDIParser, noteOffInterruptedByRealTime) {
+    EXPECT_EQ(sparser.parse(0x82), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF8), 0xF8);
+    EXPECT_EQ(sparser.parse(0x20), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF9), 0xF9);
+    EXPECT_EQ(sparser.parse(0x7F), CHANNEL_MESSAGE);
+    MIDI_message msg = sparser.getChannelMessage();
+    EXPECT_EQ(msg.header, 0x82);
+    EXPECT_EQ(msg.data1, 0x20);
+    EXPECT_EQ(msg.data2, 0x7F);
 }
 
 TEST(SerialMIDIParser, sysExEndsWithoutStarting1Byte) {

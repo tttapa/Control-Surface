@@ -4,8 +4,8 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
     if (isStatus(midiByte)) {
         // If it's a status byte (first byte)
         if (midiByte >= 0xF8) {
-            // If it's a Real-Time message (not implemented)
-            ; // Handle Real-Time stuff (not implemented)
+            // If it's a Real-Time message
+            return static_cast<MIDI_read_t>(midiByte);
         } else {
             // Normal header
             uint8_t previousHeader = midimsg.header;

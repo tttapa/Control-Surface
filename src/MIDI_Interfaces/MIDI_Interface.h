@@ -15,6 +15,8 @@ class MIDI_Callbacks {
     friend class MIDI_Interface;
     virtual void onChannelMessage(UNUSED_PARAM MIDI_Interface &midi) {}
     virtual void onSysExMessage(UNUSED_PARAM MIDI_Interface &midi) {}
+    virtual void onRealtimeMessage(UNUSED_PARAM MIDI_Interface &midi,
+                                   UNUSED_PARAM uint8_t message) {}
 
   public:
     virtual ~MIDI_Callbacks() = default;
@@ -109,6 +111,7 @@ class MIDI_Interface {
   protected:
     void onChannelMessage();
     void onSysExMessage();
+    void onRealtimeMessage(uint8_t message);
 
   private:
     static MIDI_Interface *DefaultMIDI_Interface;

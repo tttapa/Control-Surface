@@ -27,8 +27,14 @@ void MIDI_Interface::update() {
             case NO_MESSAGE: repeat = false; break;
             case CHANNEL_MESSAGE: onChannelMessage(); break;
             case SYSEX_MESSAGE: onSysExMessage(); break;
+            default: onRealtimeMessage(static_cast<uint8_t>(result)); break;
         }
     }
+}
+
+void MIDI_Interface::onRealtimeMessage(uint8_t message) {
+    if (callbacks)
+        callbacks->onRealtimeMessage(*this, message);
 }
 
 void MIDI_Interface::onChannelMessage() {
