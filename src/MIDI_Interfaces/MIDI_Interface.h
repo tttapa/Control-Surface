@@ -113,6 +113,8 @@ class MIDI_Interface {
     void onSysExMessage();
     void onRealtimeMessage(uint8_t message);
 
+    bool dispatchMIDIEvent(MIDI_read_t event);
+
   private:
     static MIDI_Interface *DefaultMIDI_Interface;
 

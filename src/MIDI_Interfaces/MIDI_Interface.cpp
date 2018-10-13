@@ -22,13 +22,17 @@ void MIDI_Interface::update() {
         return;
     bool repeat = true;
     while (repeat) {
-        MIDI_read_t result = read();
-        switch (result) {
-            case NO_MESSAGE: repeat = false; break;
-            case CHANNEL_MESSAGE: onChannelMessage(); break;
-            case SYSEX_MESSAGE: onSysExMessage(); break;
-            default: onRealtimeMessage(static_cast<uint8_t>(result)); break;
-        }
+        MIDI_read_t event = read();
+        repeat = dispatchMIDIEvent(event);
+    }
+}
+
+bool MIDI_Interface::dispatchMIDIEvent(MIDI_read_t event) {
+    switch (event) {
+        case NO_MESSAGE: return false;
+        case CHANNEL_MESSAGE: onChannelMessage(); return true;
+        case SYSEX_MESSAGE: onSysExMessage(); return true;
+        default: onRealtimeMessage(static_cast<uint8_t>(event)); return true;
     }
 }
 
