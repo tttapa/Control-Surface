@@ -17,7 +17,7 @@ enum BankType {
      *          (experimental).
      * @todo    Implement
      */
-    CHANGE_CN = 2,
+    CHANGE_CABLENB = 2,
 };
 
 template <setting_t N>

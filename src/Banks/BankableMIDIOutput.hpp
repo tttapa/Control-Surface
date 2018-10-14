@@ -18,7 +18,7 @@ class BankableMIDIOutput {
         switch (type) {
             case CHANGE_ADDRESS: return {offset, 0, 0};
             case CHANGE_CHANNEL: return {0, offset, 0};
-            case CHANGE_CN: return {0, 0, offset};
+            case CHANGE_CABLENB: return {0, 0, offset};
             default: return {};
         }
     }

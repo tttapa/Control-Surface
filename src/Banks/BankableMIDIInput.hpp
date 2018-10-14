@@ -33,7 +33,7 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
                 return (target.getChannel().getRaw() -
                         base.getChannel().getRaw()) /
                        bank.getTracksPerBank();
-            case CHANGE_CN:
+            case CHANGE_CABLENB:
                 return (target.getCableNumber() - base.getCableNumber()) /
                        bank.getTracksPerBank();
             default: return 0;
@@ -77,7 +77,7 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
                        matchBankable(toMatch.getChannel().getRaw(),
                                      base.getChannel().getRaw());
             }
-            case CHANGE_CN: {
+            case CHANGE_CABLENB: {
                 return toMatch.getAddress() == base.getAddress() &&
                        toMatch.getChannel() == base.getChannel() &&
                        matchBankable(toMatch.getCableNumber(),
@@ -105,7 +105,7 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
                        toMatch.getCableNumber() == base.getCableNumber() &&
                        matchBankable(toMatch.getChannel(), base.getChannel());
             }
-            case CHANGE_CN: {
+            case CHANGE_CABLENB: {
                 return inRange(toMatch.getAddress(), base.getAddress(),
                                length) &&
                        toMatch.getChannel() == base.getChannel() &&
