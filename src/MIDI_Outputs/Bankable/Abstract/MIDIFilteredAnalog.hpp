@@ -19,7 +19,8 @@ namespace Bankable {
  * @see     FilteredAnalog
  */
 template <ContinuousSendFunction7Bit send, uint8_t PRECISION>
-class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
+class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
+                                      public BankableMIDIOutput {
   protected:
     /**
      * @brief   Construct a new MIDIFilteredAnalog.
@@ -29,8 +30,9 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
      *          connected.
      * @todo    Documentation.
      */
-    MIDIFilteredAnalog(const OutputBankConfig &config, pin_t analogPin,
-                       const MIDICNChannelAddress &baseAddress)
+    MIDIFilteredAnalogAddressable(const OutputBankConfig &config,
+                                  pin_t analogPin,
+                                  const MIDICNChannelAddress &baseAddress)
         : BankableMIDIOutput{config}, filteredAnalog{analogPin},
           baseAddress{baseAddress} {}
 
@@ -81,16 +83,16 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
      *          connected.
      * @todo    Bank Config
      */
-    MIDIFilteredAnalog(const OutputBank &bank, pin_t analogPin, Channel channel)
-        : BankableMIDIOutput(bank), filteredAnalog{analogPin}, channel{
-                                                                   channel} {}
+    MIDIFilteredAnalog(const OutputBankConfig &bank, pin_t analogPin,
+                       const MIDICNChannel &address)
+        : BankableMIDIOutput{bank}, filteredAnalog{analogPin}, address{
+                                                                   address} {}
 
   public:
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            send(filteredAnalog.getValue(),
-                 MIDICNChannelAddress{channel} + getAddressOffset());
+            send(filteredAnalog.getValue(), address + getAddressOffset());
     }
 
     /**
@@ -106,7 +108,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
 
   private:
     FilteredAnalog<PRECISION> filteredAnalog;
-    const Channel channel;
+    const MIDICNChannelAddress address;
 };
 
 } // namespace Bankable

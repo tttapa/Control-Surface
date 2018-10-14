@@ -118,15 +118,15 @@ IncrementSelector<4> bankselector(bank, 8);
    Define all hardware that send out MIDI messages when changed.
 */
 
-constexpr Channel channel = 1;
+constexpr Channel channel = CHANNEL_1;
 
-PBPotentiometer masterVolume = { A1, 9 };
+PBPotentiometer masterVolume = { A1, {CHANNEL_9}};
 
 // Instantiate the buttons
 Bankable::NoteButton channelButtons[] = {
-  {bank, 4, MCU::V_POT_SELECT_1, channel},
-  {bank, 5, MCU::MUTE_1, channel},
-  {bank, 6, MCU::SOLO_1, channel},
+  {bank, 4, {MCU::V_POT_SELECT_1, channel}},
+  {bank, 5, {MCU::MUTE_1, channel}},
+  {bank, 6, {MCU::SOLO_1, channel}},
   
   // {bank, 7, MCU::REC_RDY_1, channel},
   // { bank, 12, MCU::V_POT_SELECT_2, channel },
@@ -134,12 +134,12 @@ Bankable::NoteButton channelButtons[] = {
   // { bank, 11, MCU::SOLO_2,         channel },
 };
 
-NoteButton playButton = {7, MCU::PLAY, channel};
+NoteButton playButton = {7, {MCU::PLAY, channel}};
 // NoteButton recordButton = {15, MCU::RECORD, channel };
 
 // Bankable::CCRotaryEncoder encoder_A = { bank, {0, 1}, MCU::V_POT_1, channel, 1, 4 };
-Bankable::CCRotaryEncoder encoder_B = {bank,    {2, 3}, MCU::V_POT_1,
-                                       channel, 1,      4
+Bankable::CCRotaryEncoder encoder_B = {bank,    {2, 3}, {MCU::V_POT_1,
+                                       channel}, 1,      4
                                       };
 
 // -------------------------- MIDI Input Elements --------------------------- //
@@ -153,30 +153,30 @@ Bankable::CCRotaryEncoder encoder_B = {bank,    {2, 3}, MCU::V_POT_1,
 MCU::TimeDisplay timedisplay = {channel};
 
 // Play / Record
-MIDINote play = {MCU::PLAY, channel};
-MIDINote record = {MCU::RECORD, channel};
+MIDINote play = {{MCU::PLAY, channel}};
+MIDINote record = {{MCU::RECORD, channel}};
 
 // Mute
-Bankable::MIDINote<4> mute_A = {bank, MCU::MUTE_1, channel};
-Bankable::MIDINote<4> mute_B = {bank, MCU::MUTE_2, channel};
+Bankable::MIDINote<4> mute_A = {bank, {MCU::MUTE_1, channel}};
+Bankable::MIDINote<4> mute_B = {bank, {MCU::MUTE_2, channel}};
 
 // Solo
-Bankable::MIDINote<4> solo_A = {bank, MCU::SOLO_1, channel};
-Bankable::MIDINote<4> solo_B = {bank, MCU::SOLO_2, channel};
+Bankable::MIDINote<4> solo_A = {bank, {MCU::SOLO_1, channel}};
+Bankable::MIDINote<4> solo_B = {bank, {MCU::SOLO_2, channel}};
 
-MIDINote rudeSolo = {MCU::RUDE_SOLO, channel};
+MIDINote rudeSolo = {{MCU::RUDE_SOLO, channel}};
 
 // Record arm / ready
-Bankable::MIDINote<4> recrdy_A = {bank, MCU::REC_RDY_1, channel};
-Bankable::MIDINote<4> recrdy_B = {bank, MCU::REC_RDY_2, channel};
+Bankable::MIDINote<4> recrdy_A = {bank, {MCU::REC_RDY_1, channel}};
+Bankable::MIDINote<4> recrdy_B = {bank, {MCU::REC_RDY_2, channel}};
 
 // VU meters
-MCU::Bankable::VU<4> vu_A = {bank, 1, channel, 0};
-MCU::Bankable::VU<4> vu_B = {bank, 2, channel, 0};
+MCU::Bankable::VU<4> vu_A = {bank, {1, channel}, 0};
+MCU::Bankable::VU<4> vu_B = {bank, {2, channel}, 0};
 
 // VPot rings
-MCU::Bankable::VPotRing<4> vpot_A = {bank, 1, channel};
-MCU::Bankable::VPotRing<4> vpot_B = {bank, 2, channel};
+MCU::Bankable::VPotRing<4> vpot_A = {bank, {1, channel}};
+MCU::Bankable::VPotRing<4> vpot_B = {bank, {2, channel}};
 
 // ---------------------------- Display Elements ---------------------------- //
 // ========================================================================== //

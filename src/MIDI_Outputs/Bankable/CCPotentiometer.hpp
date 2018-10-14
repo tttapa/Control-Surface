@@ -32,10 +32,10 @@ class CCPotentiometer
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    CCPotentiometer(const OutputBankConfigAddressable &config, pin_t analogPin,
-                    uint8_t controller, uint8_t channel = 1)
+    CCPotentiometer(const OutputBankConfig &config, pin_t analogPin,
+                    const MIDICNChannelAddress &address)
         : MIDIFilteredAnalogAddressable<ContinuousCCSender::send, 7>(
-              config, analogPin, controller, channel) {}
+              config, analogPin, address) {}
 };
 
 } // namespace Bankable

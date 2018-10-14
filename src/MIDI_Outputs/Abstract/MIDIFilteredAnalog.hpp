@@ -33,7 +33,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            send(filteredAnalog.getValue(), channel, address);
+            send(filteredAnalog.getValue(), address);
     }
 
     /**
@@ -76,14 +76,14 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      *          connected.
      * @todo    Documentation.
      */
-    MIDIFilteredAnalog(pin_t analogPin, Channel channel)
-        : filteredAnalog{analogPin}, channel(channel) {}
+    MIDIFilteredAnalog(pin_t analogPin, const MIDICNChannel &address)
+        : filteredAnalog{analogPin}, address(address) {}
 
   public:
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            send(filteredAnalog.getValue(), channel);
+            send(filteredAnalog.getValue(), address);
     }
 
     /**
@@ -99,5 +99,5 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
 
   private:
     FilteredAnalog<PRECISION> filteredAnalog;
-    const Channel channel;
+    const MIDICNChannelAddress address;
 };

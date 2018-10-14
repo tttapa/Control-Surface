@@ -9,6 +9,18 @@ struct __attribute__((packed)) RawMIDICNChannelAddress {
     uint8_t cableNumber : 4;
 };
 
+class MIDICNChannel {
+    friend class MIDICNChannelAddress;
+
+  public:
+    MIDICNChannel() : addresses{0, 0, 0, 0} {}
+    MIDICNChannel(Channel channel, int cableNumber = 0)
+        : addresses{1, 0, uint8_t(channel.getRaw()), (uint8_t)cableNumber} {}
+
+  private:
+    RawMIDICNChannelAddress addresses;
+};
+
 class RelativeMIDICNChannelAddress {
     friend class MIDICNChannelAddress;
 
@@ -29,15 +41,17 @@ class MIDICNChannelAddress {
     MIDICNChannelAddress() : addresses{0, 0, 0, 0} {}
     MIDICNChannelAddress(int address, Channel channel = CHANNEL_1,
                          int cableNumber = 0)
-        : addresses{1, (uint8_t)address, (uint8_t)channel,
+        : addresses{1, (uint8_t)address, (uint8_t)channel.getRaw(),
                     (uint8_t)cableNumber} {
     } // Deliberate overflow for negative numbers
     MIDICNChannelAddress(Channel channel, int8_t cableNumber = 0)
-        : addresses{1, 0, (uint8_t)channel, (uint8_t)cableNumber} {
+        : addresses{1, 0, (uint8_t)channel.getRaw(), (uint8_t)cableNumber} {
     } // Deliberate overflow for negative numbers
     /* MIDICNChannelAddress(uint8_t address, uint8_t channel = CHANNEL_1,
                          uint8_t cableNumber = 0)
         : addresses{1, address, channel, cableNumber} {} */
+    MIDICNChannelAddress(const MIDICNChannel &address)
+        : addresses{address.addresses} {}
 
     MIDICNChannelAddress &operator+=(const RelativeMIDICNChannelAddress &rhs) {
         if (!this->isValid() || !rhs.isValid()) {
@@ -50,10 +64,28 @@ class MIDICNChannelAddress {
         return *this;
     }
 
+    MIDICNChannelAddress &operator-=(const RelativeMIDICNChannelAddress &rhs) {
+        if (!this->isValid() || !rhs.isValid()) {
+            this->addresses.valid = false;
+        } else {
+            this->addresses.address -= rhs.addresses.address;
+            this->addresses.channel -= rhs.addresses.channel;
+            this->addresses.cableNumber -= rhs.addresses.cableNumber;
+        }
+        return *this;
+    }
+
     MIDICNChannelAddress
     operator+(const RelativeMIDICNChannelAddress &rhs) const {
         MIDICNChannelAddress copy = *this;
         copy += rhs;
+        return copy;
+    }
+
+    MIDICNChannelAddress
+    operator-(const RelativeMIDICNChannelAddress &rhs) const {
+        MIDICNChannelAddress copy = *this;
+        copy -= rhs;
         return copy;
     }
 

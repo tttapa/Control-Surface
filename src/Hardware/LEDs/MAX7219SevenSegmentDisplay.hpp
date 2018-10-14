@@ -41,9 +41,7 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
   public:
     MAX7219SevenSegmentDisplay(pin_t loadPin) : MAX7219_Base(loadPin) {}
 
-    void begin() {
-        init();
-    }
+    void begin() { init(); }
 
     /**
      * @brief   Display a long integer number to the display.
@@ -96,11 +94,11 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
                     continue;
                 }
             } else if (c >= '@' && c <= '_')
-                d = SevenSegmentCharacters[c - '@'];
+                d = SevenSegmentCharacters[(uint8_t)c - '@'];
             else if (c >= '!' && c <= '?')
-                d = SevenSegmentCharacters[c];
+                d = SevenSegmentCharacters[(uint8_t)c];
             else if (c >= 'a' && c <= 'z')
-                d = SevenSegmentCharacters[c - 'a' + 'A' - '@'];
+                d = SevenSegmentCharacters[(uint8_t)c - 'a' + 'A' - '@'];
             sendRaw(i--, d);
             prevD = d;
         }
@@ -114,7 +112,8 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
         const uint8_t *const end_p = &characters[N];
         while (i && char_p < end_p) {
             uint8_t c = *char_p++;
-            sendRaw(i--, SevenSegmentCharacters[c & 0x3F] | ((c & 0x40) << 1));
+            sendRaw(i--, SevenSegmentCharacters[(uint8_t)c & 0x3F] |
+                             (((uint8_t)c & 0x40) << 1));
         }
         return 8 - i - startPos;
     }

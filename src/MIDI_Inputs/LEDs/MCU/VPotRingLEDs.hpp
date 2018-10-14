@@ -9,9 +9,7 @@ class VPotRingLEDs_Base : virtual public VPotRing_Base {
   public:
     VPotRingLEDs_Base(const LEDs<11> &leds) : leds(leds) {}
 
-    void begin() override {
-        leds.begin();
-    }
+    void begin() override { leds.begin(); }
 
     void display() const override {
         leds.displayRange(getStartOn(), getStartOff());
@@ -25,9 +23,8 @@ class VPotRingLEDs_Base : virtual public VPotRing_Base {
 
 class VPotRingLEDs : public VPotRing, public VPotRingLEDs_Base {
   public:
-    VPotRingLEDs(uint8_t track, uint8_t channel, const LEDs<11> &leds)
-        : VPotRing_Base(track, channel), VPotRing(track, channel),
-          VPotRingLEDs_Base(leds) {}
+    VPotRingLEDs(const MIDICNChannelAddress &address, const LEDs<11> &leds)
+        : VPotRing_Base(address), VPotRing(address), VPotRingLEDs_Base(leds) {}
 };
 
 // -------------------------------------------------------------------------- //
@@ -35,13 +32,11 @@ class VPotRingLEDs : public VPotRing, public VPotRingLEDs_Base {
 namespace Bankable {
 
 template <uint8_t N>
-class VPotRingLEDs : public VPotRing<N>,
-                     public VPotRingLEDs_Base {
+class VPotRingLEDs : public VPotRing<N>, public VPotRingLEDs_Base {
   public:
-    VPotRingLEDs(const BankConfigAddressable<N> &config, uint8_t track,
-                 uint8_t channel, const LEDs<11> &leds)
-        : VPotRing_Base(track, channel), VPotRing<N>(
-                                             config, track, channel),
+    VPotRingLEDs(const BankConfig<N> &config,
+                 const MIDICNChannelAddress &address, const LEDs<11> &leds)
+        : VPotRing_Base(address), VPotRing<N>(config, address),
           VPotRingLEDs_Base(leds) {}
 };
 

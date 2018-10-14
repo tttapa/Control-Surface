@@ -1,9 +1,7 @@
-103:CCButtonBankable.changeSettingAndPressAndRelease
-107:CCButtonsBankable.pressChangeBankAndReleaseAndPress
-113:CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep
-116:NoteButtonBankable.changeSettingAndPressAndRelease
-117:NoteButtonBankable.pressAndChangeSettingAndRelease
-120:NoteButtonLatchingBankable.changeSettingAndPressAndRelease
-121:NoteButtonLatchingBankable.pressAndChangeSettingAndRelease
-123:NoteButtonMatrixBankable.pressChangeSettingRelease
-167:Tests
+86:MCUVU.setValue
+87:MCUVU.setOverload
+89:MCUVU.retainValueAfterOverload
+91:MCUVUBankable.setValueBankChangeAddress
+92:MCUVUBankable.setValueBankChangeChannel
+93:MCUVUBankable.overloadBankChangeAddress
+174:Tests

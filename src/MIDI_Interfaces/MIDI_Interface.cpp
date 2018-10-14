@@ -76,20 +76,23 @@ void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1) {
 
 void MIDI_Interface::sendNoteOn(MIDICNChannelAddress address,
                                 uint8_t velocity) {
-    sendImpl(NOTE_ON, address.getChannel(), address.getAddress(), velocity);
+    sendImpl(NOTE_ON, address.getChannel().getRaw(), address.getAddress(),
+             velocity);
 }
 void MIDI_Interface::sendNoteOff(MIDICNChannelAddress address,
                                  uint8_t velocity) {
-    sendImpl(NOTE_OFF, address.getChannel(), address.getAddress(), velocity);
+    sendImpl(NOTE_OFF, address.getChannel().getRaw(), address.getAddress(),
+             velocity);
 }
 void MIDI_Interface::sendCC(MIDICNChannelAddress address, uint8_t value) {
-    sendImpl(CC, address.getChannel(), address.getAddress(), value);
+    sendImpl(CC, address.getChannel().getRaw(), address.getAddress(), value);
 }
 void MIDI_Interface::sendPB(MIDICNChannelAddress address, uint16_t value) {
-    sendImpl(PITCH_BEND, address.getChannel(), value & 0x7F, value >> 7);
+    sendImpl(PITCH_BEND, address.getChannel().getRaw(), value & 0x7F,
+             value >> 7);
 }
 void MIDI_Interface::sendPB(Channel channel, uint16_t value) {
-    sendImpl(PITCH_BEND, channel, value & 0x7F, value >> 7);
+    sendImpl(PITCH_BEND, channel.getRaw(), value & 0x7F, value >> 7);
 }
 
 // -------------------------------- PARSING --------------------------------- //

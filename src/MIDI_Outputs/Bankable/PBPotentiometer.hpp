@@ -31,10 +31,10 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<8>::send, 8> {
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    PBPotentiometer(const OutputBank &bank, pin_t analogPin,
-                    uint8_t channel = 1)
-        : MIDIFilteredAnalog<PitchBendSender<8>::send, 8>(bank, analogPin,
-                                                          channel) {}
+    PBPotentiometer(const OutputBankConfig &bank, pin_t analogPin,
+                    const MIDICNChannel &address)
+        : MIDIFilteredAnalog<PitchBendSender<8>::send, 8>{bank, analogPin,
+                                                          address} {}
 };
 
 } // namespace Bankable

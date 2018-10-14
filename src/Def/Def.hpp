@@ -77,10 +77,36 @@ class Channel {
     explicit constexpr Channel(int8_t zeroBasedChannel)
         : zeroBasedChannel(zeroBasedChannel) {}
 
-    constexpr operator int8_t() const { return zeroBasedChannel; }
+    constexpr int8_t getRaw() const { return zeroBasedChannel; }
 
     static constexpr Channel createChannel(int8_t oneBasedChannel) {
         return Channel{int8_t(oneBasedChannel - 1)};
+    }
+
+    constexpr bool operator==(const Channel &rhs) const {
+        return this->zeroBasedChannel == rhs.zeroBasedChannel;
+    }
+
+    Channel &operator+=(const int8_t rhs) {
+        this->zeroBasedChannel += rhs;
+        return *this;
+    }
+
+    Channel operator+(const int8_t rhs) const {
+        Channel copy = *this;
+        copy += rhs;
+        return copy;
+    }
+
+    Channel &operator-=(const int8_t rhs) {
+        this->zeroBasedChannel -= rhs;
+        return *this;
+    }
+
+    Channel operator-(const int8_t rhs) const {
+        Channel copy = *this;
+        copy -= rhs;
+        return copy;
     }
 
   private:

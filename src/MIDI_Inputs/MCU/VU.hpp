@@ -28,9 +28,8 @@ namespace MCU {
 class VU_Base : public MIDIInputElementChannelPressure, public IVU {
   public:
     VU_Base(); // Just for virtual inheritance
-    VU_Base(uint8_t track, Channel channel, unsigned int decayTime)
-        : MIDIInputElementChannelPressure({track - 1, channel}),
-          decayTime(decayTime) {}
+    VU_Base(const MIDICNChannelAddress &address, unsigned int decayTime)
+        : MIDIInputElementChannelPressure{address - 1}, decayTime(decayTime) {}
 
     /** Return the VU meter value as an integer in [0, 12]. */
     uint8_t getValue() const override { return getValueHelper(getRawValue()); }
@@ -120,8 +119,8 @@ class VU : virtual public VU_Base {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(uint8_t track, Channel channel = CHANNEL_1, unsigned int decayTime = 150)
-        : VU_Base(track, channel, decayTime) {}
+    VU(const MIDICNChannelAddress &address, unsigned int decayTime = 150)
+        : VU_Base(address, decayTime) {}
 
     bool updateImpl(const MIDI_message_matcher &midimsg,
                     UNUSED_PARAM const MIDICNChannelAddress &target) override {
@@ -185,9 +184,9 @@ class VU : virtual public VU_Base, public BankableMIDIInput<N> {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(const BankConfig<N> &config, uint8_t track, Channel channel = CHANNEL_1,
+    VU(const BankConfig<N> &config, const MIDICNChannelAddress &address,
        unsigned int decayTime = 150)
-        : VU_Base(track, channel, decayTime), BankableMIDIInput<N>(config) {}
+        : VU_Base(address, decayTime), BankableMIDIInput<N>(config) {}
 
     bool updateImpl(const MIDI_message_matcher &midimsg,
                     const MIDICNChannelAddress &target) override {
