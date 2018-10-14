@@ -1,4 +1,4 @@
-#include <Helpers/MIDICNChannelAddress.hpp>
+#include <Def/MIDICNChannelAddress.hpp>
 #include <gtest/gtest.h>
 
 TEST(MIDICNChannelAddress, init) {

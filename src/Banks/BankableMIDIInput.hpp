@@ -2,9 +2,9 @@
 
 #include "Bank.h"
 #include "BankConfig.hpp"
+#include <Def/MIDICNChannelAddress.hpp>
 #include <Helpers/Debug.hpp>
 #include <Helpers/LinkedList.hpp>
-#include <Helpers/MIDICNChannelAddress.hpp>
 
 template <setting_t N>
 class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {

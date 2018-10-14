@@ -27,7 +27,7 @@ class AudioVU : public IVU {
     void setGain(float gain) { this->gain = gain; }
 
   private:
-    mutable EMA_f filter = {0.6};
+    mutable EMA_f filter = {0.6}; // TODO: const-correctness?
     AudioAnalyzePeak &level;
     float gain;
     const uint8_t max;

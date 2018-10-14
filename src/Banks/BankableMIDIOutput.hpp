@@ -2,7 +2,7 @@
 
 #include "Bank.h"
 #include "BankConfig.hpp"
-#include <Helpers/MIDICNChannelAddress.hpp>
+#include <Def/MIDICNChannelAddress.hpp>
 
 class BankableMIDIOutput {
   protected:

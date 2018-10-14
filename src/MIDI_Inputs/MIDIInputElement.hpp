@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MIDI_message_matcher.h"
-#include <Helpers/MIDICNChannelAddress.hpp>
+#include <Def/MIDICNChannelAddress.hpp>
 
 class MIDIInputElement {
   protected:

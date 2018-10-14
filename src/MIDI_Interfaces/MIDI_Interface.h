@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Def/Def.hpp>
-#include <Helpers/MIDICNChannelAddress.hpp>
+#include <Def/MIDICNChannelAddress.hpp>
 #include <MIDI_Parsers/MIDI_Parser.h>
 
 #define MIDI_BAUD 31250
