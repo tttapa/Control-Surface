@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include <MIDI_Parsers/SerialMIDI_Parser.h>
-#include <MIDI_Parsers/USBMIDI_Parser.h>
+#include <MIDI_Parsers/SerialMIDI_Parser.hpp>
+#include <MIDI_Parsers/USBMIDI_Parser.hpp>
 
 typedef std::vector<uint8_t> SysExVector;
 

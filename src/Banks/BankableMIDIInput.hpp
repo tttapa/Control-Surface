@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Bank.h"
+#include "Bank.hpp"
 #include "BankConfig.hpp"
 #include <Def/MIDICNChannelAddress.hpp>
 #include <Helpers/Debug.hpp>

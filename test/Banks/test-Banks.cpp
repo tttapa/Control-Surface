@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 
-#include <Banks/Bank.h>
+#include <Banks/Bank.hpp>
 
 TEST(OutputBank, OutputBank) {
     OutputBank ob = {4};

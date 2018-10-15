@@ -2,7 +2,7 @@
 
 #include <Def/Def.hpp>
 #include <Def/MIDICNChannelAddress.hpp>
-#include <MIDI_Parsers/MIDI_Parser.h>
+#include <MIDI_Parsers/MIDI_Parser.hpp>
 
 #define MIDI_BAUD 31250
 

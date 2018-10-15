@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include <Hardware/ExtendedInputOutput/AnalogMultiplex.h>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Helpers/Debug.hpp>
 
 TEST(AnalogMultiplex, analogReadNoEnable) {

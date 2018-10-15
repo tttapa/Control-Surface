@@ -1,5 +1,5 @@
-#include "ButtonMatrix.h"
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include "ButtonMatrix.hpp"
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Helpers/Copy.hpp>
 #include <string.h>
 
@@ -16,7 +16,7 @@ template <uint8_t nb_rows, uint8_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::refresh() {
     unsigned long now = millis();
     // only update every 25 ms (crude software
-    // debounce). Edit this in Settings/Settings.h
+    // debounce). Edit this in Settings/Settings.hpp
     if (now - prevRefresh < BUTTON_DEBOUNCE_TIME)
         return;
 

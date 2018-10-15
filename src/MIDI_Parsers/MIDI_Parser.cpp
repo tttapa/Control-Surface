@@ -1,4 +1,4 @@
-#include "MIDI_Parser.h"
+#include "MIDI_Parser.hpp"
 
 #ifndef IGNORE_SYSEX
 

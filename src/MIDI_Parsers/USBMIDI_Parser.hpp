@@ -1,4 +1,4 @@
-#include "MIDI_Parser.h"
+#include "MIDI_Parser.hpp"
 
 class USBMIDI_Parser : public MIDI_Parser {
   public:

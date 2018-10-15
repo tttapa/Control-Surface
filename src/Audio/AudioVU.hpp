@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Audio.h>
-#include <Helpers/EMA.h>
+#include <Helpers/EMA.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
 
 /**

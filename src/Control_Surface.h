@@ -13,10 +13,10 @@
 #include <Helpers/TeensyUSBTypes.hpp>
 
 // ------------------------------- Main Logic ------------------------------- //
-#include <Control_Surface/Control_Surface_Class.h>
+#include <Control_Surface/Control_Surface_Class.hpp>
 
 // -------------------------------- Display --------------------------------- //
-#include "Display/Bitmaps/XBitmaps.h"
+#include "Display/Bitmaps/XBitmaps.hpp"
 #include "Display/MCU/TimeDisplayDisplay.hpp"
 #include "Display/MCU/VPotDisplay.hpp"
 #include "Display/MCU/VUDisplay.hpp"
@@ -82,20 +82,20 @@
 #include <Selectors/Transposer.hpp>
 
 // ---------------------------- MIDI Interfaces ----------------------------- //
-#include <MIDI_Interfaces/DebugMIDI_Interface.h>
-#include <MIDI_Interfaces/SerialMIDI_Interface.h>
-#include <MIDI_Interfaces/USBMIDI_Interface.h>
+#include <MIDI_Interfaces/DebugMIDI_Interface.hpp>
+#include <MIDI_Interfaces/SerialMIDI_Interface.hpp>
+#include <MIDI_Interfaces/USBMIDI_Interface.hpp>
 
 // ------------------------- Extended Input Output -------------------------- //
-#include <Hardware/ExtendedInputOutput/AnalogMultiplex.h>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
-#include <Hardware/ExtendedInputOutput/ShiftRegisterOut.h>
+#include <Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <Hardware/ExtendedInputOutput/ShiftRegisterOut.hpp>
 #include <Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
 #include <Hardware/ExtendedInputOutput/MAX7219.hpp>
 
 // ----------------------------- MIDI Constants ----------------------------- //
-#include <MIDI_Constants/Control_Change.h>
-#include <MIDI_Constants/MCU.h>
+#include <MIDI_Constants/Control_Change.hpp>
+#include <MIDI_Constants/MCU.hpp>
 
 // ----------------------------- Array Helpers ------------------------------ //
 #include <Helpers/ArrayHelpers.hpp>

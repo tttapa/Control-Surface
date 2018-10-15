@@ -1,5 +1,5 @@
-#include "Control_Surface_Class.h"
-#include <Hardware/ExtendedInputOutput/ExtendedIOElement.h>
+#include "Control_Surface_Class.hpp"
+#include <Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <MIDI_Inputs/MIDIInputElementNote.hpp>

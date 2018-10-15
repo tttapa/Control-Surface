@@ -1,4 +1,4 @@
-#include <Banks/Bank.h>
+#include <Banks/Bank.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
 #include <gtest/gtest.h>
 

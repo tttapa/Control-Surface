@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Display/Bitmaps/XBitmaps.h>
+#include <Display/Bitmaps/XBitmaps.hpp>
 #include <Display/DisplayElement.hpp>
 #include <MIDI_Inputs/MIDINote.hpp>
 

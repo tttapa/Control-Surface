@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Control_Surface/Control_Surface_Class.h>
+#include <Control_Surface/Control_Surface_Class.hpp>
 
 #include <Arduino.h> // for constrain
 

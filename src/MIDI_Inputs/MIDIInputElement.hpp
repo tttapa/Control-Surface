@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MIDI_message_matcher.h"
+#include "MIDI_message_matcher.hpp"
 #include <Def/MIDICNChannelAddress.hpp>
 
 class MIDIInputElement {

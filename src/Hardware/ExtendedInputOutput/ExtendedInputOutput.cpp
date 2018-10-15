@@ -1,5 +1,5 @@
-#include "ExtendedInputOutput.h"
-#include "ExtendedIOElement.h"
+#include "ExtendedInputOutput.hpp"
+#include "ExtendedIOElement.hpp"
 #include <Arduino.h>
 #include <Helpers/Error.hpp>
 

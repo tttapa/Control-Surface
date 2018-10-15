@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Banks/Bank.h>
-#include <Control_Surface/Control_Surface_Class.h>
+#include <Banks/Bank.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 
 template <int8_t MINIMUM_SEMITONES, int8_t MAXIMUM_SEMITONES>

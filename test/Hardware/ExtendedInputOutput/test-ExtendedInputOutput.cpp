@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Helpers/Error.hpp>
 #include <type_traits>
 

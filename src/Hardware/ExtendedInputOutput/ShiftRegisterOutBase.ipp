@@ -1,4 +1,4 @@
-#include "ExtendedInputOutput.h"
+#include "ExtendedInputOutput.hpp"
 #include "ShiftRegisterOutBase.hpp"
 #include "ShiftRegisterOutRGB.hpp"
 

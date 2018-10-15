@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MIDI_Parsers/MIDI_Parser.h>
+#include <MIDI_Parsers/MIDI_Parser.hpp>
 
 struct MIDI_message_matcher {
     MIDI_message_matcher(uint8_t type, Channel channel, uint8_t data1,

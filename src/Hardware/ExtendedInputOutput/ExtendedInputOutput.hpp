@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ExtendedIOElement.h"
+#include "ExtendedIOElement.hpp"
 #include <Arduino.h> // pin functions and constants
 
 #define EXT_PIN(x) (x + NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)

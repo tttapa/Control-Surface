@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <SPI.h>
 
 class MAX7219_Base {

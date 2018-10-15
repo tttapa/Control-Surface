@@ -1,5 +1,5 @@
-#include "ExtendedInputOutput.h"
-#include "ShiftRegisterOut.h"
+#include "ExtendedInputOutput.hpp"
+#include "ShiftRegisterOut.hpp"
 
 using namespace ExtIO;
 

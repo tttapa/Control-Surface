@@ -2,7 +2,7 @@
 
 #include <Helpers/Error.hpp>
 #include <Helpers/LinkedList.hpp>
-#include <Settings/SettingsWrapper.h>
+#include <Settings/SettingsWrapper.hpp>
 #include <stddef.h>
 #include <Def/Def.hpp>
 

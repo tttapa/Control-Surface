@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include <Settings/SettingsWrapper.h>
+#include <Settings/SettingsWrapper.hpp>
 
 const uint8_t NOTE_OFF = 0x80;
 const uint8_t NOTE_ON = 0x90;
@@ -74,7 +74,7 @@ class MIDI_Parser {
     MIDI_message midimsg = {};
 
 #ifndef IGNORE_SYSEX
-    // Edit this in ../Settings/Settings.h
+    // Edit this in ../Settings/Settings.hpp
     constexpr static size_t bufferSize = SYSEX_BUFFER_SIZE;
     uint8_t SysExBuffer[bufferSize];
     size_t SysExLength = 0;

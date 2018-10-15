@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Hardware/Button.h>
+#include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Def/Def.hpp>
 

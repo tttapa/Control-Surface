@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Settings/SettingsWrapper.h>
+#include <Settings/SettingsWrapper.hpp>
 
 #ifdef ARDUINO
 
@@ -10,7 +10,7 @@
 #include <stdlib.h>
 
 #ifndef PRINTSTREAM_FALLBACK
-#include "PrintStream.h"
+#include "PrintStream.hpp"
 #else
 #include <Arduino.h>
 typedef Print &manipulator(Print &);

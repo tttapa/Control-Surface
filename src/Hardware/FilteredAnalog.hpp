@@ -1,10 +1,10 @@
 #pragma once
 
 #include <Def/Def.hpp>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
-#include <Helpers/EMA.h>
-#include <Helpers/Hysteresis.h>
-#include <Settings/SettingsWrapper.h>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <Helpers/EMA.hpp>
+#include <Helpers/Hysteresis.hpp>
+#include <Settings/SettingsWrapper.hpp>
 
 constexpr static uint8_t ADC_BITS = 10;
 
@@ -14,7 +14,7 @@ constexpr static uint8_t ADC_BITS = 10;
  * A map function can be applied to the analog value (e.g. to compensate for
  * logarithmic taper potentiometers or to calibrate the range). The analog input
  * value is filtered using an exponential moving average filter. The settings
- * for this filter can be changed in Settings.h.
+ * for this filter can be changed in Settings.hpp.
  */
 template <uint8_t PRECISION>
 class FilteredAnalog {
@@ -78,7 +78,7 @@ class FilteredAnalog {
 
 // ----------------------------- Implementation ----------------------------- //
 
-#include <Control_Surface/Control_Surface_Class.h>
+#include <Control_Surface/Control_Surface_Class.hpp>
 
 using namespace ExtIO;
 

@@ -1,4 +1,4 @@
-#include "MIDI_Interface.h"
+#include "MIDI_Interface.hpp"
 
 MIDI_Interface::MIDI_Interface(MIDI_Parser &parser) : parser(parser) {
     setAsDefault(); // Make this the default MIDI Interface

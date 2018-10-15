@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BLEMIDI.hpp"
-#include "SerialMIDI_Interface.h"
+#include "SerialMIDI_Interface.hpp"
 
 #include <Helpers/Error.hpp>
 

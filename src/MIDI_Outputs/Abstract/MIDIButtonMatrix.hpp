@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Def/Def.hpp>
-#include <Hardware/ButtonMatrix.h>
+#include <Hardware/ButtonMatrix.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 template <uint8_t nb_rows, uint8_t nb_cols>

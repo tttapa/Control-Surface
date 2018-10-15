@@ -1,4 +1,4 @@
-#include <Hardware/Button.h>
+#include <Hardware/Button.hpp>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 

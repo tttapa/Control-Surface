@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
-#include <Settings/SettingsWrapper.h>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <Settings/SettingsWrapper.hpp>
 
 /**
  * @brief   A class for reading and debouncing buttons and switches.
@@ -49,7 +49,7 @@ class Button {
      * @brief Get the state of the button.
      *
      * The button is debounced, the debounce time can be set in
-     * Settings.h: #BUTTON_DEBOUNCE_TIME.
+     * Settings.hpp: #BUTTON_DEBOUNCE_TIME.
      *
      * ```
      * Debounce time: ├────┤
@@ -94,6 +94,6 @@ class Button {
 
     static bool invertState;
 
-    // Edit this in Settings/Settings.h
+    // Edit this in Settings/Settings.hpp
     constexpr static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
 };

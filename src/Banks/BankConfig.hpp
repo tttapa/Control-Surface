@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Bank.h"
+#include "Bank.hpp"
 
 enum BankType {
     /**

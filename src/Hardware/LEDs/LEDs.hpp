@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Def/Def.hpp>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 
 template <uint8_t N>
 class LEDs {

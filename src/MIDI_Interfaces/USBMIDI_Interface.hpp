@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MIDI_Interface.h"
-#include <MIDI_Parsers/USBMIDI_Parser.h>
+#include "MIDI_Interface.hpp"
+#include <MIDI_Parsers/USBMIDI_Parser.hpp>
 #include <Helpers/TeensyUSBTypes.hpp>
 
 #ifdef TEENSY_MIDIUSB_ENABLED
@@ -130,7 +130,7 @@ class USBMIDI_Interface : public MIDI_Interface {
 // (Can be used with HIDUINO or USBMidiKliK.)
 #elif !defined(USBCON) && !defined(TEENSYDUINO)
 
-#include "SerialMIDI_Interface.h"
+#include "SerialMIDI_Interface.hpp"
 
 /**
  * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI

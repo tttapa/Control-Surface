@@ -106,5 +106,5 @@ MakeXBitmap({id});
 with open(os.path.join(outputdir, 'XBitmaps.template'), 'r') as template:
     XBitmaps = re.sub(r':contents', XBitmaps, template.read())
 
-with open(os.path.join(outputdir, 'XBitmaps.h'), 'w') as XBitmapsFile:
+with open(os.path.join(outputdir, 'XBitmaps.hpp'), 'w') as XBitmapsFile:
     XBitmapsFile.write(XBitmaps)

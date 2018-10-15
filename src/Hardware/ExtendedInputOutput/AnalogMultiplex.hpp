@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ExtendedIOElement.h"
-#include "ExtendedInputOutput.h"
+#include "ExtendedIOElement.hpp"
+#include "ExtendedInputOutput.hpp"
 #include <Helpers/Array.hpp>
 #include <stdlib.h>
 

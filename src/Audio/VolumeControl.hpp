@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 #include <Helpers/Updatable.hpp>
-#include <Hardware/FilteredAnalog.h>
+#include <Hardware/FilteredAnalog.hpp>
 #include <Audio.h>
 #include <Def/Def.hpp>
 

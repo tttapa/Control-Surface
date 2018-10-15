@@ -1,4 +1,4 @@
-#include "SerialMIDI_Parser.h"
+#include "SerialMIDI_Parser.hpp"
 
 MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
     if (isStatus(midiByte)) {

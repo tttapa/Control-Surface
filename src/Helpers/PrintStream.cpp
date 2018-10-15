@@ -1,6 +1,6 @@
 // https://github.com/tttapa/Arduino-PrintStream/blob/6a9e0d365be0b3d84187daa2a8a7bda8d541472e/src/PrintStream.cpp
 
-#include "PrintStream.h"
+#include "PrintStream.hpp"
 
 #ifdef ARDUINO
 

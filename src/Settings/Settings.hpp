@@ -1,9 +1,9 @@
-#ifndef SETTINGSWRAPPER_H
+#ifndef SETTINGSWRAPPER_HPP
 #error "Do not include this file directly, use the wrapper!"
 #endif
 
 /**
- * @file Settings.h
+ * @file Settings.hpp
  *
  * @brief All user settings and debugging options can be changed here.
  */

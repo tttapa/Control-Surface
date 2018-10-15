@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SerialMIDI_Interface.h"
+#include "SerialMIDI_Interface.hpp"
 
 const static char *MIDI_STATUS_TYPE_NAMES[] = { // @todo PROGMEM
     "Note Off\t",       "Note On\t\t",      "Key Pressure\t",

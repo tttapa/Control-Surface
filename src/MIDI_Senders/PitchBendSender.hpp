@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Control_Surface/Control_Surface_Class.h>
+#include <Control_Surface/Control_Surface_Class.hpp>
 
 template <uint8_t INPUT_PRECISION_BITS>
 class PitchBendSender {

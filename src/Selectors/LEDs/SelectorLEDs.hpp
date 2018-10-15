@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Def/Def.hpp>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Selectors/Selector.hpp>
 
 template <setting_t N>

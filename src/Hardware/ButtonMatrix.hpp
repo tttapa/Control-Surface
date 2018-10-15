@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Settings/SettingsWrapper.h>
+#include <Settings/SettingsWrapper.hpp>
 #include <Def/Def.hpp>
 
 /**

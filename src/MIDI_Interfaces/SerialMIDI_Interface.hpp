@@ -1,9 +1,9 @@
 #pragma once
 
-#include "MIDI_Interface.h"
+#include "MIDI_Interface.hpp"
 #include <Arduino.h> // Stream
-#include <MIDI_Parsers/SerialMIDI_Parser.h>
-#include <Settings/SettingsWrapper.h>
+#include <MIDI_Parsers/SerialMIDI_Parser.hpp>
+#include <Settings/SettingsWrapper.hpp>
 
 /**
  * @brief   A class for MIDI interfaces sending and receiving MIDI messages
@@ -221,7 +221,7 @@ class HairlessMIDI_Interface : public USBSerialMIDI_Interface {
      * @brief   Construct a HairlessMIDI_Interface.
      *
      * The default Hairless baud rate of 115200 baud is used.
-     * This can be changed in the Settings.h file.
+     * This can be changed in the Settings.hpp file.
      */
     HairlessMIDI_Interface() : USBSerialMIDI_Interface(HAIRLESS_BAUD){};
 };

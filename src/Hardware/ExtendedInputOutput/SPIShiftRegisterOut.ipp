@@ -1,7 +1,7 @@
 #ifdef ARDUINO // I'm too lazy to mock the SPI library
 
 #include "SPIShiftRegisterOut.hpp"
-#include "ExtendedInputOutput.h"
+#include "ExtendedInputOutput.hpp"
 #include <SPI.h>
 
 using namespace ExtIO;

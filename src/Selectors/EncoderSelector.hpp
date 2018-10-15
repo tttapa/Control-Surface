@@ -8,7 +8,7 @@
 
 #include "Selector.hpp"
 #include <Def/Def.hpp>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 
 template <setting_t N>
 class EncoderSelector_Base : virtual public Selector<N> {

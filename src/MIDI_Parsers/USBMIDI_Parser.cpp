@@ -1,5 +1,5 @@
-#include "USBMIDI_Parser.h"
-#include <Settings/SettingsWrapper.h>
+#include "USBMIDI_Parser.hpp"
+#include <Settings/SettingsWrapper.hpp>
 
 // http://www.usb.org/developers/docs/devclass_docs/midi10.pdf
 MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {

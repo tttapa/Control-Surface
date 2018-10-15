@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <MIDI_Inputs/MIDINote.hpp>
 
 /** A base class for MIDI note input LED display. */

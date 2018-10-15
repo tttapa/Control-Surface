@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MIDI_Interfaces/MIDI_Interface.h>
+#include <MIDI_Interfaces/MIDI_Interface.hpp>
 
 #include <Display/DisplayElement.hpp>
 #include <Display/DisplayInterface.hpp>

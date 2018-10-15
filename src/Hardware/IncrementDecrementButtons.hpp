@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Button.h"
+#include "Button.hpp"
 
 class IncrementDecrementButtons {
   public:

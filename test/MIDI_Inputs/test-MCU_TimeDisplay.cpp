@@ -1,4 +1,4 @@
-#include <Banks/Bank.h>
+#include <Banks/Bank.hpp>
 #include <MIDI_Inputs/MCU/TimeDisplay.hpp>
 #include <gtest/gtest.h>
 

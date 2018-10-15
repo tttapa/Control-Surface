@@ -1,4 +1,4 @@
-#include "ExtendedIOElement.h"
+#include "ExtendedIOElement.hpp"
 #include <Arduino.h>
 #include <Helpers/Error.hpp>
 #include <Helpers/Helpers.hpp>

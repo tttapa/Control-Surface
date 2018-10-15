@@ -1,9 +1,9 @@
-#ifndef SETTINGSWRAPPER_H
-#define SETTINGSWRAPPER_H
+#ifndef SETTINGSWRAPPER_HPP
+#define SETTINGSWRAPPER_HPP
 
 // ---- User Settings ---- //
 // ======================= //
-#include "Settings.h"
+#include "Settings.hpp"
 
 #ifndef ARDUINO
 #undef IGNORE_SYSEX
@@ -28,4 +28,4 @@
 // ===================== //
 #include <Helpers/Debug.hpp>
 
-#endif // SETTINGSWRAPPER_H
+#endif // SETTINGSWRAPPER_HPP

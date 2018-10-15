@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MIDI_Parser.h"
+#include "MIDI_Parser.hpp"
 
 class SerialMIDI_Parser : public MIDI_Parser {
   public:

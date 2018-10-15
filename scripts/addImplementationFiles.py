@@ -14,7 +14,8 @@ def main():
             print(name)
             if (ext == '.hpp' or ext == '.h') \
                 and (not (name + '.cpp') in files) \
-                and (not (name + '.c') in files):
+                and (not (name + '.c') in files) \
+                and (basename(root) != 'Doxygen'):
                 impl_ext = '.cpp' if ext == '.hpp' else '.c'
                 with open(join(root, name + impl_ext), 'w') as cpp_file:
                     cpp_file.write('#include "{}"'.format(f))

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Banks/BankableMIDIInput.hpp>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.h>
+#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Helpers/Copy.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <string.h>
