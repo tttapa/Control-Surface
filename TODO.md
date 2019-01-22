@@ -14,6 +14,7 @@
 - Make destructors virtual if necessary. (e.g. callback classes)
 - GitHub template
 - Flashing LEDs
+- Keywords
 - Find and list all TODO's throughout the source code.
 
 ## Specific elements

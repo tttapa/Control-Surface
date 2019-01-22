@@ -1,7 +1,7 @@
 #include <MIDI_Outputs/Bankable/NoteButtonLatching.hpp>
 #include <MIDI_Outputs/NoteButtonLatching.hpp>
 #include <MockMIDI_Interface.hpp>
-#include <gmock/gmock.h>
+#include <gmock-wrapper.h>
 
 using namespace ::testing;
 

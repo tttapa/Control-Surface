@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include <gtest-wrapper.h>
 
 #include <MIDI_Inputs/MIDINote.hpp>
 

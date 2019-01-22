@@ -15,7 +15,7 @@ class VPotDisplay : public DisplayElement {
         : DisplayElement(display), vpot(vpot), x(loc.x + radius),
           y(loc.y + radius), radius(radius), innerRadius(innerRadius),
           color(color) {}
-    void draw() {
+    void draw() override {
         display.drawCircle(x, y, radius, color);
         if (vpot.getCenterLed())
             display.fillCircle(x, y, innerRadius / 4, color);

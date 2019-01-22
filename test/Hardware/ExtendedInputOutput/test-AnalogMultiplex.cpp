@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include <gtest-wrapper.h>
 
 #include <Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>

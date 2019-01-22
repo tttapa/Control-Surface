@@ -1,5 +1,5 @@
 #include <Helpers/BitArray.hpp>
-#include <gtest/gtest.h>
+#include <gtest-wrapper.h>
 
 TEST(BitArray, construct) {
     BitArray<16> ba;

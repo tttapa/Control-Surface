@@ -16,7 +16,7 @@ class VUDisplay : public DisplayElement {
           decayTime(VU_PEAK_SMOOTH_DECAY
                         ? VU_PEAK_DECAY_TIME / (blockheight + spacing)
                         : VU_PEAK_DECAY_TIME) {}
-    void draw() {
+    void draw() override {
         uint8_t value = vu.getValue();
 
         int16_t newPeak = (int16_t)value * (blockheight + spacing);

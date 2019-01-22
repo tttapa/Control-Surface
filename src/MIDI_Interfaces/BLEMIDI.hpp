@@ -87,7 +87,7 @@ class BLEMIDI {
 #else
 
 #include <Def/Def.hpp>
-#include <gmock/gmock.h>
+#include <gmock-wrapper.h>
 #include <string>
 
 class BLECharacteristic {

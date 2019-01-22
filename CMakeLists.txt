@@ -2,15 +2,13 @@ cmake_minimum_required(VERSION 3.10)
 
 set (CMAKE_CXX_STANDARD 11)
 
-SET(ENV{TMPDIR} "/mnt/tmpfs")
-
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # <copy>
 # Download and unpack googletest at configure time
-configure_file(CMakeLists.txt.in googletest/CMakeLists.txt)
+configure_file(cmake/CMakeLists.txt.in googletest/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
   RESULT_VARIABLE result
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest )
@@ -35,16 +33,15 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest/googletest-src
                  EXCLUDE_FROM_ALL)
 # </copy>
 
-# SET (CMAKE_C_COMPILER "clang")
-# SET (CMAKE_CXX_COMPILER "clang++")
+set (CMAKE_C_COMPILER "gcc-8")
+set (CMAKE_CXX_COMPILER "g++-8")
 
 # set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
 
 include(GoogleTest)
 enable_testing()
 
-# -Wsuggest-override
-add_definitions("-g -O0 -Wall -Wextra -fdiagnostics-show-option")
+add_definitions("-g3 -O1 -Wall -Wextra -fdiagnostics-show-option -Wsuggest-override")
 
 #include Google Test
 include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googletest/include)
@@ -53,23 +50,26 @@ include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googletest/inc
 include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googlemock/include)
 
 # Arduino Core files
-include_directories("../ArduinoMock")
-file(GLOB_RECURSE ARDUINO_SOURCES "../ArduinoMock/*.cpp")
+include_directories(ArduinoMock)
+file(GLOB_RECURSE ARDUINO_SOURCES ArduinoMock/*.cpp)
 add_library(ArduinoMock STATIC ${ARDUINO_SOURCES})
 
 # Mock
-include_directories("../mock")
+include_directories(mock)
+
+# Test
+include_directories(test)
 
 # add_definitions(-DANALOG_FILTER_SHIFT_FACTOR_OVERRIDE=2)
 add_definitions(-DNO_DEBUG_PRINTS)
 
 # Control Surface library files
-include_directories("../src")
-file(GLOB_RECURSE SOURCES "../src/*.cpp")
+include_directories(src)
+file(GLOB_RECURSE SOURCES src/*.cpp)
 add_library(Control_Surface STATIC ${SOURCES})
 
 # Test executable compilation and linking
-file(GLOB_RECURSE TESTS "../test/*.cpp")
+file(GLOB_RECURSE TESTS test/*.cpp)
 add_executable(tests ${TESTS})
 target_link_libraries(tests
                       gmock
@@ -82,22 +82,20 @@ add_test(NAME Tests COMMAND tests)
 
 # Add documentation target
 add_custom_target(documentation rm -r html && ./Scripts/examples.py && doxygen
-                  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/../doc/Doxygen")
+                  WORKING_DIRECTORY doc/Doxygen)
 
 # Add export documentation target
 add_custom_target(export_documentation ./Export.sh
-WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/../doc/Doxygen/Scripts")
+WORKING_DIRECTORY doc/Doxygen/Scripts)
 
 # Add XBM target
 
 add_custom_target(xbm python3 XBM-export.py
-                  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/../src/Display/Bitmaps/Scripts/")
+                  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../src/Display/Bitmaps/Scripts/)
 
 add_custom_target(check tests
-                  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/bin/"
+                  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin/
                   DEPENDS tests)
 
-
-
 add_custom_target(arduino ./build-arduino.sh
-                  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+                  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../scripts)

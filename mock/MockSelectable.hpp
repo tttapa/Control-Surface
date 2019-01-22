@@ -1,4 +1,4 @@
-#include <gmock/gmock.h>
+#include <gmock-wrapper.h>
 // Import GMock first because of F macro collisions
 #include <Selectors/Selectable.hpp>
 

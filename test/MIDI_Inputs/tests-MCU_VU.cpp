@@ -1,6 +1,6 @@
 #include <Banks/Bank.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
-#include <gtest/gtest.h>
+#include <gtest-wrapper.h>
 
 using namespace ::testing;
 

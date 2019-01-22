@@ -1,5 +1,5 @@
 #include <Def/MIDICNChannelAddress.hpp>
-#include <gtest/gtest.h>
+#include <gtest-wrapper.h>
 
 TEST(MIDICNChannelAddress, init) {
     MIDICNChannelAddress m = {12, CHANNEL_10, 4};

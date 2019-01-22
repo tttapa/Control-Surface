@@ -1,4 +1,4 @@
-#include <gmock/gmock.h>
+#include <gmock-wrapper.h>
 
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Helpers/Error.hpp>
@@ -49,7 +49,7 @@ TEST(ExtendedInputOutput, pinOutOfBoundsGt) {
     try {
         el.pin(10);
         FAIL();
-    } catch (ErrorException e) {
+    } catch (ErrorException &e) {
         EXPECT_EQ(e.getErrorCode(), 0x4567);
     }
 }
@@ -60,7 +60,7 @@ TEST(ExtendedInputOutput, pinOutOfBoundsLt) {
     try {
         el.pin(-1);
         FAIL();
-    } catch (ErrorException e) {
+    } catch (ErrorException &e) {
         EXPECT_EQ(e.getErrorCode(), 0x4567);
     }
 }
@@ -71,7 +71,7 @@ TEST(ExtendedInputOutput, nonExistentPin) {
     try {
         digitalRead(pin);
         FAIL();
-    } catch (ErrorException e) {
+    } catch (ErrorException &e) {
         EXPECT_EQ(e.getErrorCode(), 0x8888);
     }
 }
@@ -87,7 +87,7 @@ TEST(ExtendedInputOutput, nonExistentPinOfDeletedElement) {
     try {
         digitalRead(pin);
         FAIL();
-    } catch (ErrorException e) {
+    } catch (ErrorException &e) {
         EXPECT_EQ(e.getErrorCode(), 0x8888);
     }
 }
@@ -97,7 +97,7 @@ TEST(ExtendedInputOutput, outOfPinNumbers) {
     try {
         MockExtIOElement el_1 = {max};
         FAIL();
-    } catch (ErrorException e) {
+    } catch (ErrorException &e) {
         EXPECT_EQ(e.getErrorCode(), 0x00FF);
     }
 }

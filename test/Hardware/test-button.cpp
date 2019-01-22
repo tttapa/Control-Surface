@@ -1,6 +1,6 @@
 #include <Hardware/Button.hpp>
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
+#include <gmock-wrapper.h>
+#include <gtest-wrapper.h>
 
 using namespace ::testing;
 

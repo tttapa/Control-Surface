@@ -38,7 +38,7 @@ class ErrorException : public std::exception {
   public:
     ErrorException(const std::string message, int errorCode)
         : message(std::move(message)), errorCode(errorCode) {}
-    const char *what() const throw() { return message.c_str(); }
+    const char *what() const throw() override { return message.c_str(); }
     int getErrorCode() const { return errorCode; }
 
   private:

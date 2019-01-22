@@ -1,6 +1,6 @@
 #include <Helpers/ArrayHelpers.hpp>
 #include <Def/Def.hpp>
-#include <gtest/gtest.h>
+#include <gtest-wrapper.h>
 
 TEST(Array, initializeAndRetrieve) {
     Array<int, 6> arr = {0, 1, 2, 3, 4, 5};

@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include <gtest-wrapper.h>
 
 #include <MIDI_Parsers/SerialMIDI_Parser.hpp>
 #include <MIDI_Parsers/USBMIDI_Parser.hpp>

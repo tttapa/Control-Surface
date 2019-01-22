@@ -14,7 +14,7 @@ class MockMIDI_Callbacks : public MIDI_Callbacks {
     void onChannelMessage(MIDI_Interface &midi) override {
         channelMessages.push_back(midi.getChannelMessage());
     }
-    void onSysExMessage(MIDI_Interface &midi) {
+    void onSysExMessage(MIDI_Interface &midi) override {
         const uint8_t *data = midi.getSysExBuffer();
         size_t len = midi.getSysExLength();
         sysExMessages.insert(sysExMessages.end(), data, data + len);

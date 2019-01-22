@@ -20,6 +20,7 @@ do
         -core-api-version $version \
         -warnings all \
         -compile $file
+
     if [ $? -eq 0 ]; then
         echo -e "\e[1;32mDone ✔\e[0m\n"
     else

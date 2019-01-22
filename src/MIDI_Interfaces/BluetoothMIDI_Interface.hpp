@@ -37,7 +37,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
         DEBUGFN("Write: ");
         std::string value = pCharacteristic->getValue();
         const uint8_t *const data =
-            reinterpret_cast<const uint8_t *const>(value.data());
+            reinterpret_cast<const uint8_t *>(value.data());
         size_t len = value.size();
         for (size_t i = 0; i < len; i++) {
             Serial.print(data[i], HEX);

@@ -88,15 +88,7 @@ void delay(unsigned long);
 void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val);
 
 #include "HardwareSerial.h"
-#include "WCharacter.h"
 
-// WMath prototypes
-long random(long);
-long random(long, long);
-void randomSeed(unsigned long);
-long map(long, long, long, long, long);
-
-// #include "pins_arduino.h"
 void cli();
 void sei();
 

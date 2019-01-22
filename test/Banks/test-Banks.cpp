@@ -1,4 +1,4 @@
-#include <gmock/gmock.h>
+#include <gmock-wrapper.h>
 
 #include <Banks/Bank.hpp>
 
@@ -19,7 +19,7 @@ TEST(OutputBank, noTracks) {
         OutputBank ob = {0};
         (void)ob;
         FAIL();
-    } catch (ErrorException e) {
+    } catch (ErrorException &e) {
         EXPECT_EQ(e.getErrorCode(), 0x4573);
     }
 }
@@ -51,7 +51,7 @@ TEST(Bank, selectOutOfBounds) {
     try {
         bank.select(10);
         FAIL();
-    } catch (ErrorException e) {
+    } catch (ErrorException &e) {
         EXPECT_EQ(e.getErrorCode(), 0xFFFE);
     }
 }

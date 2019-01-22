@@ -11,7 +11,7 @@ class NoteBitmapDisplay : public DisplayElement {
         : DisplayElement(display), note(note), xbm(xbm), x(loc.x), y(loc.y),
           color(color) {}
 
-    void draw() {
+    void draw() override {
         if (note.getState())
             display.drawXBitmap(x, y, xbm.bits, xbm.width, xbm.height, color);
     }
