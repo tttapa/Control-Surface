@@ -44,7 +44,7 @@ const pin_t latchPin = 10;  // Pin connected to ST_CP of 74HC595
 // Create a new shift register output connected to pins 11, 13 and 10,
 // shift the data out with the most significant bit first.
 // There are 24 (= 3·8) outputs in total.
-ShiftRegisterOut ShiftReg(dataPin, clockPin, latchPin, MSBFIRST, 24);
+ShiftRegisterOut<24> ShiftReg(dataPin, clockPin, latchPin, MSBFIRST);
 
 // ------------------------------- VU Meters -------------------------------- //
 // ========================================================================== //
@@ -70,7 +70,8 @@ FilteredAnalog<7> gainKnob = A1;
 void setup() {
   AudioMemory(8);
   ShiftReg.begin();
-  Updatable::beginAll();
+  Updatable<AudioVU>::beginAll();
+  Updatable<Potentiometer>::beginAll();
 }
 
 // ---------------------------------- Loop ---------------------------------- //
@@ -79,7 +80,8 @@ void setup() {
 void loop() {
   static elapsedMillis frametime = 0;
   if (frametime >= 20) { // 50 fps
-    Updatable::updateAll();
+    Updatable<AudioVU>::updateAll();
+    Updatable<Potentiometer>::updateAll();
     frametime = 0;
     if (gainKnob.update()) {
       float gain = gainKnob.getValue() * maxGain / 127.0;

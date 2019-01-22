@@ -38,6 +38,8 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
         return getOverloadHelper(getRawValue());
     }
 
+    constexpr static unsigned int NO_DECAY = 0;
+
   private:
     const unsigned long decayTime;
     unsigned long prevDecayTime = 0;

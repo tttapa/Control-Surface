@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Bank.hpp"
+#include <Def/Def.hpp>
 
 enum BankType {
     /**
@@ -19,6 +19,10 @@ enum BankType {
      */
     CHANGE_CABLENB = 2,
 };
+
+class OutputBank;
+template <setting_t N>
+class Bank;
 
 template <setting_t N>
 class BankConfig {

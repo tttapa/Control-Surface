@@ -5,6 +5,7 @@
 #include <MIDI_Inputs/MIDIInputElementNote.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Selectors/Selector.hpp>
+#include <MIDI_Constants/Control_Change.hpp>
 
 #include <Arduino.h>
 
@@ -77,7 +78,7 @@ void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
         MIDIInputElementCC::resetAll();
         MIDIInputElementChannelPressure::resetAll();
 
-    } else if (midimsg.type == CC && midimsg.data1 == 0x7B) {
+    } else if (midimsg.type == CC && midimsg.data1 == MIDI_CC::All_Notes_Off) {
         MIDIInputElementNote::resetAll();
     } else {
 

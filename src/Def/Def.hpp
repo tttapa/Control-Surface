@@ -12,16 +12,18 @@ constexpr pin_t NO_PIN = 1 << (8 * sizeof(pin_t) - 1);
 
 using MappingFunction = int (*)(int);
 
+template <class T, size_t nb_rows, size_t nb_cols>
+using Array2D = Array<Array<T, nb_cols>, nb_rows>;
+
 constexpr uint8_t NO_ADDRESS = {0x80};
+template <uint8_t nb_rows, uint8_t nb_cols>
+using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
 
 template <size_t N>
 using PinList = Array<pin_t, N>;
 
 using EncoderPinList = Array<uint8_t, 2>;
 using EncoderSwitchPinList = Array<uint8_t, 3>;
-
-template <class T, size_t nb_rows, size_t nb_cols>
-using Array2D = Array<Array<T, nb_cols>, nb_rows>;
 
 class MIDICNChannelAddress;
 

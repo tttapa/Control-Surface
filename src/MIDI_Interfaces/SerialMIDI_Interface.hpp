@@ -2,6 +2,7 @@
 
 #include "MIDI_Interface.hpp"
 #include <Arduino.h> // Stream
+#include <Helpers/TeensyUSBTypes.hpp>
 #include <MIDI_Parsers/SerialMIDI_Parser.hpp>
 #include <Settings/SettingsWrapper.hpp>
 

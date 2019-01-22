@@ -43,49 +43,47 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
 // -------------------------- MIDI Output Elements -------------------------- //
 // ========================================================================== //
 
-constexpr Channel channel = 1;
-
 // A potentiometer that sets the master volume on analog pin A1
 PBPotentiometer masterVolume = { A1, MCU::MASTER_VOLUME };
 
 // A button to press play or pause on digital pin 7
-NoteButton playButton = {7, MCU::PLAY, channel};
+NoteButton playButton = {7, MCU::PLAY};
 
 // -------------------------- MIDI Input Elements --------------------------- //
 // ========================================================================== //
 
 MIDINote mute[8] = {
-  { MCU::MUTE_1, channel }, // The mute status of the first track
-  { MCU::MUTE_2, channel },
-  { MCU::MUTE_3, channel },
-  { MCU::MUTE_4, channel },
-  { MCU::MUTE_5, channel },
-  { MCU::MUTE_6, channel },
-  { MCU::MUTE_7, channel },
-  { MCU::MUTE_8, channel },
+  { MCU::MUTE_1 }, // The mute status of the first track
+  { MCU::MUTE_2 },
+  { MCU::MUTE_3 },
+  { MCU::MUTE_4 },
+  { MCU::MUTE_5 },
+  { MCU::MUTE_6 },
+  { MCU::MUTE_7 },
+  { MCU::MUTE_8 },
 };
 
 MIDINote solo[8] = {
-  { MCU::SOLO_1, channel }, // The solo status of the first track
-  { MCU::SOLO_2, channel },
-  { MCU::SOLO_3, channel },
-  { MCU::SOLO_4, channel },
-  { MCU::SOLO_5, channel },
-  { MCU::SOLO_6, channel },
-  { MCU::SOLO_7, channel },
-  { MCU::SOLO_8, channel },
+  { MCU::SOLO_1 }, // The solo status of the first track
+  { MCU::SOLO_2 },
+  { MCU::SOLO_3 },
+  { MCU::SOLO_4 },
+  { MCU::SOLO_5 },
+  { MCU::SOLO_6 },
+  { MCU::SOLO_7 },
+  { MCU::SOLO_8 },
 };
 
 // VU meters
 MCU::VU VUMeters[8] = {
-  { 1, channel, 0 }, // The VU meter for the first track, don't decay
-  { 2, channel, 0 },
-  { 3, channel, 0 },
-  { 4, channel, 0 },
-  { 5, channel, 0 },
-  { 6, channel, 0 },
-  { 7, channel, 0 },
-  { 8, channel, 0 },
+  { 1, MCU::VU::NO_DECAY }, // The VU meter for the first track, don't decay
+  { 2, MCU::VU::NO_DECAY },
+  { 3, MCU::VU::NO_DECAY },
+  { 4, MCU::VU::NO_DECAY },
+  { 5, MCU::VU::NO_DECAY },
+  { 6, MCU::VU::NO_DECAY },
+  { 7, MCU::VU::NO_DECAY },
+  { 8, MCU::VU::NO_DECAY },
 };
 
 // ---------------------------- Display Elements ---------------------------- //

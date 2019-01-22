@@ -48,7 +48,7 @@ const pin_t dataPin  = 12;  // Pin connected to DS of 74HC595
 const pin_t clockPin = 13;  // Pin connected to SH_CP of 74HC595
 
 // Instantiate a shift register.
-ShiftRegisterOut sreg = { dataPin, clockPin, latchPin, MSBFIRST };
+ShiftRegisterOut<8> sreg = { dataPin, clockPin, latchPin, MSBFIRST };
 
 // Instantiate the momentary push buttons that send out MIDI Note events.
 NoteButton buttons[] = {

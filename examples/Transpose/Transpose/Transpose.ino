@@ -7,7 +7,7 @@ USBMIDI_Interface midi;
 Transposer<-12, +12> transposer;
 
 // Instantiate a button on pin 4 sending note C3 (0x3C) on channel 1
-Bankable::NoteButton note = {transposer, 4, 0x3C, 1};
+Bankable::NoteButton note = {transposer, 4, {0x3C, CHANNEL_1}};
 
 IncrementDecrementSelector<transposer.N> sel = { transposer, {5, 6}, false };
 

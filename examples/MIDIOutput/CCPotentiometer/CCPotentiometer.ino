@@ -9,18 +9,20 @@
  * https://github.com/tttapa/Control-Surface
  */
 
-#include <Control_Surface.h> // Include the library
+// Include the Control Surface library
+#include <Control_Surface.h>
 
-// Instantiate a MIDI over USB interface
+// Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
 // Create a new instance of the class `CCPotentiometer`, called `potentiometer`,
 // on pin A0, that sends MIDI messages with controller 7 (channel volume)
-// on channel 1
-CCPotentiometer potentiometer(A0, MIDI_CC::Channel_Volume, 1);
+// on channel 1.
+CCPotentiometer potentiometer(A0, {MIDI_CC::Channel_Volume, CHANNEL_1});
 
 void setup() {
-  Control_Surface.begin();
+    // Initialize everything
+    Control_Surface.begin();
 }
 
 void loop() {

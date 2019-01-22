@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
+#include <Def/Channel.hpp>
 
 /**
  * @brief   Names and note and controller numbers for the
@@ -159,15 +159,15 @@ constexpr uint8_t JOG_WHEEL              = 0x3C; //    Out
 
 // Pitch Bend
 
-constexpr uint8_t VOLUME_1               = 0x01; // In Out
-constexpr uint8_t VOLUME_2               = 0x02; // In Out
-constexpr uint8_t VOLUME_3               = 0x03; // In Out
-constexpr uint8_t VOLUME_4               = 0x04; // In Out
-constexpr uint8_t VOLUME_5               = 0x05; // In Out
-constexpr uint8_t VOLUME_6               = 0x06; // In Out
-constexpr uint8_t VOLUME_7               = 0x07; // In Out
-constexpr uint8_t VOLUME_8               = 0x08; // In Out
+constexpr Channel VOLUME_1               = CHANNEL_1; // In Out
+constexpr Channel VOLUME_2               = CHANNEL_2; // In Out
+constexpr Channel VOLUME_3               = CHANNEL_3; // In Out
+constexpr Channel VOLUME_4               = CHANNEL_4; // In Out
+constexpr Channel VOLUME_5               = CHANNEL_5; // In Out
+constexpr Channel VOLUME_6               = CHANNEL_6; // In Out
+constexpr Channel VOLUME_7               = CHANNEL_7; // In Out
+constexpr Channel VOLUME_8               = CHANNEL_8; // In Out
 
-constexpr uint8_t MASTER_VOLUME          = 0x09; // In Out
+constexpr Channel MASTER_VOLUME          = CHANNEL_9; // In Out
 
 };

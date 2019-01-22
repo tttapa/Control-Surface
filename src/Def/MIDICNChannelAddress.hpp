@@ -51,7 +51,7 @@ class MIDICNChannelAddress {
                          uint8_t cableNumber = 0)
         : addresses{1, address, channel, cableNumber} {} */
     MIDICNChannelAddress(const MIDICNChannel &address)
-        : addresses{address.addresses} {}
+        : addresses(address.addresses) {}
 
     MIDICNChannelAddress &operator+=(const RelativeMIDICNChannelAddress &rhs) {
         if (!this->isValid() || !rhs.isValid()) {

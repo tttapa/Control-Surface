@@ -37,18 +37,19 @@
 
 #include <Control_Surface.h> // Include the Control Surface library.
 
-constexpr size_t n = 16;
-
 /* Instantiate a multiplexer with three address lines. */
 CD74HC4067 mux = { 18, {19, 20, 21, 22} };
+
+/* The number of buttons and LEDs */
+constexpr size_t n = 16;
 
 const pin_t latchPin = 10;  // Pin connected to ST_CP of 74HC595
 const pin_t dataPin  = 12;  // Pin connected to DS of 74HC595
 const pin_t clockPin = 13;  // Pin connected to SH_CP of 74HC595
 
-/** Instantiate a shift registers on the correct pins, most significant bit
+/* Instantiate a shift registers on the correct pins, most significant bit
  * first, and a total of 16 outputs (two eight-bit registers). */
-ShiftRegisterOut sreg = { dataPin, clockPin, latchPin, MSBFIRST, n };
+ShiftRegisterOut<n> sreg = { dataPin, clockPin, latchPin, MSBFIRST };
 
 /* Instantiate the momentary push buttons.
  * It generates an array of Buttons on pins:
@@ -63,7 +64,7 @@ void setup() { /* Initialize everything. */
 }
 
 void loop() { /* Check if a button is pressed, if so toggle the LED. */
-  for (uint8_t i = 0; i < n; i++)
+  for (uint8_t i = 0; i < n; ++i)
     if (buttons[i].getState() == Button::Falling)
       sreg.digitalWrite(i, !sreg.digitalRead(i));
 }

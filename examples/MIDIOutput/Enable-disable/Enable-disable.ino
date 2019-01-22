@@ -3,7 +3,7 @@
 USBMIDI_Interface midi;
 
 Button enableButton = 2; // Momentary push button between pin 2 and ground
-PBPotentiometer masterVolume = { A0, 9 }; // Potentiometer to pin A0
+PBPotentiometer masterVolume = { A0, CHANNEL_9 }; // Potentiometer to pin A0
 
 void setup() {
   enableButton.begin();

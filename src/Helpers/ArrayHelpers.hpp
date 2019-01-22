@@ -60,10 +60,10 @@ class Incrementor {
  * 
  * @return  The generated array.
  */
-template <class T, size_t N, class U>
+template <class T, size_t N, class U, class V = U>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
-generateArray(U start = 0, U increment = 1) {
-    Array<T, N> array;
+generateArray(U start = 0, V increment = 1) {
+    Array<T, N> array{};
     Incrementor<U> g(start, increment);
     generate(array.begin(), array.end(), g);
     return array;

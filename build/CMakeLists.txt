@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 
 set (CMAKE_CXX_STANDARD 11)
 
+SET(ENV{TMPDIR} "/mnt/tmpfs")
+
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -90,3 +92,12 @@ WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/../doc/Doxygen/Scripts")
 
 add_custom_target(xbm python3 XBM-export.py
                   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/../src/Display/Bitmaps/Scripts/")
+
+add_custom_target(check tests
+                  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/bin/"
+                  DEPENDS tests)
+
+
+
+add_custom_target(arduino ./build-arduino.sh
+                  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")

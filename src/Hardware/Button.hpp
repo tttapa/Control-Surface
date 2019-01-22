@@ -94,6 +94,6 @@ class Button {
 
     static bool invertState;
 
-    // Edit this in Settings/Settings.hpp
+    /// Edit this in Settings/Settings.hpp
     constexpr static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
 };

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <Arduino.h>
+#include <stdint.h>
+
 /**
  * @brief A struct containing X Bitmap width, height and data.
  */

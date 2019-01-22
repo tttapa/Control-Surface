@@ -29,15 +29,15 @@ USBMIDI_Interface midi;
 
 // Instantiate the momentary push buttons that send out MIDI Note events.
 NoteButton buttons[] = {
-    { 2, MCU::MUTE_1 }, // digital input pin, note number, [channel]
-    { 3, MCU::SOLO_1 },
+    {2, MCU::MUTE_1}, // digital input pin, note number, [channel]
+    {3, MCU::SOLO_1},
 };
 
 // Instantiate the LEDs that will display the state of the incoming MIDI Note
 // events.
 MIDINoteLED leds[] = {
-    { 12, MCU::MUTE_1 }, // digital output pin, note number, [channel]
-    { 13, MCU::SOLO_1 },
+    {12, MCU::MUTE_1}, // digital output pin, note number, [channel]
+    {13, MCU::SOLO_1},
 };
 
 void setup() {

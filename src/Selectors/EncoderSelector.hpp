@@ -2,8 +2,8 @@
 
 #if not defined(Encoder_h_) && not defined(IDE)
 #error                                                                         \
-    "The PJRC Encoder library should be included before the Control-Surface "  \
-    "library. (#include <Encoder.h>)"
+    "The PJRC Encoder library should be included before the Control-Surface    \
+     library. (#include <Encoder.h>)"
 #endif
 
 #include "Selector.hpp"
