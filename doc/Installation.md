@@ -7,7 +7,7 @@ necessary hardware support packages, such as Teensyduino.
 
 ### 1. Download
 Download the repository as a ZIP archive by going to the [home page of the 
-repository](https://github.com/tttapa/Control-Surface/tree/revision-4) and click
+repository](https://github.com/tttapa/Control-Surface) and click
 the green _Clone or download_ button on the top right.
 
 ### 2. Install the Library in the Arduino IDE
@@ -31,8 +31,7 @@ Open a terminal window and change the directory to your Arduino folder.
 Linux: `mkdir -p ~/Arduino/libraries && cd $_`
 
 ### 2. Clone the Library
-`git clone -b revision-4 --single-branch
-https://github.com/tttapa/Control-Surface`
+`git clone https://github.com/tttapa/Control-Surface`
 
 ## Dependencies
 If you are using an Arduino board with on-board USB capabilities, you need the
