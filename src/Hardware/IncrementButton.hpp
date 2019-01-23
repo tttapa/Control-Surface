@@ -37,6 +37,10 @@ class IncrementButton {
         return Nothing;
     }
 
+#ifdef INDIVIDUAL_BUTTON_INVERT
+    void invert() { button.invert(); }
+#endif
+
   private:
     Button button;
 

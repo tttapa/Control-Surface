@@ -22,6 +22,10 @@ class IncrementDecrementSelector_Base : virtual public Selector<N> {
         }
     }
 
+#ifdef INDIVIDUAL_BUTTON_INVERT
+    void invert() { buttons.invert(); }
+#endif
+
   private:
     IncrementDecrementButtons buttons;
     bool wrap;

@@ -44,6 +44,10 @@ class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
         }
     }
 
+#ifdef INDIVIDUAL_BUTTON_INVERT
+    void invert() { button.invert(); }
+#endif
+
   private:
     Button button;
     const MIDICNChannelAddress address;

@@ -15,6 +15,12 @@
 #endif
 #endif
 
+#ifdef INDIVIDUAL_BUTTON_INVERT
+#define INDIVIDUAL_BUTTON_INVERT_STATIC
+#else
+#define INDIVIDUAL_BUTTON_INVERT_STATIC static
+#endif
+
 #ifdef TEENSYDUINO
 #include <Helpers/TeensyUSBTypes.hpp>
 #if defined(DEBUG_OUT) && (DEBUG_OUT == Serial) &&     \

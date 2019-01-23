@@ -8,7 +8,9 @@ void Button::begin() { ExtIO::pinMode(pin, INPUT_PULLUP); }
 
 void Button::invert() { invertState = true; }
 
+#ifndef INDIVIDUAL_BUTTON_INVERT
 bool Button::invertState = false;
+#endif
 
 Button::State Button::getState() {
     State rstate;

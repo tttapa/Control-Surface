@@ -11,11 +11,11 @@ class Button {
     /**
      * @brief   Construct a new Button object.
      * 
-     * This constructor sets the pin to zero, so it is not recommended.
+     * **This constructor is not recommended.**
      * It is just a way to easily create arrays of buttons, and initializing
      * them later.
      */
-    Button() : pin(0) {}
+    Button() : pin(NO_PIN) {}
     /**
      * @brief   Construct a new Button object.
      *
@@ -33,7 +33,8 @@ class Button {
      *
      * @note This affects **all** Button objects.
      */
-    static void invert();
+    
+    INDIVIDUAL_BUTTON_INVERT_STATIC void invert();
 
     /**
      * @brief   An enumeration of the different states a button can be in.
@@ -92,7 +93,11 @@ class Button {
     bool debouncedState = HIGH;
     unsigned long prevBounceTime = 0;
 
+#ifdef INDIVIDUAL_BUTTON_INVERT // Edit this in Settings/Settings.hpp
+    bool invertState = false;
+#else 
     static bool invertState;
+#endif
 
     /// Edit this in Settings/Settings.hpp
     constexpr static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;

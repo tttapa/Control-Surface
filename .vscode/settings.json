@@ -94,4 +94,5 @@
     "search.smartCase": true,
     "C_Cpp.default.cppStandard": "c++11",
     "editor.scrollBeyondLastColumn": 0,
+    "terminal.integrated.cwd": "build",
 }

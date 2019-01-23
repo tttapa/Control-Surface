@@ -84,4 +84,8 @@ constexpr uint8_t MAX_FPS = 30;
 
 constexpr static Frequency SPI_MAX_SPEED = 8_MHz;
 
+/** Make it possible to invert individual push buttons.
+ *  Enabling this will increase memory usage. */
+#define INDIVIDUAL_BUTTON_INVERT
+
 // ========================================================================== //
