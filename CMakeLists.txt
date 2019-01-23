@@ -82,11 +82,11 @@ add_test(NAME Tests COMMAND tests)
 
 # Add documentation target
 add_custom_target(documentation rm -r html && ./Scripts/examples.py && doxygen
-                  WORKING_DIRECTORY doc/Doxygen)
+                  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../doc/Doxygen)
 
 # Add export documentation target
 add_custom_target(export_documentation ./Export.sh
-WORKING_DIRECTORY doc/Doxygen/Scripts)
+WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../doc/Doxygen/Scripts)
 
 # Add XBM target
 
