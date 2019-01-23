@@ -15,6 +15,7 @@
 - GitHub template
 - Flashing LEDs
 - Keywords
+- Fix firmware link DFU scripts https://raw.githubusercontent.com/arduino/ArduinoCore-avr/master/firmwares/atmegaxxu2/Arduino-COMBINED-dfu-usbserial-atmega16u2-Uno-Rev3.hex
 - Find and list all TODO's throughout the source code.
 
 ## Specific elements
