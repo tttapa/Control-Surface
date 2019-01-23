@@ -41,7 +41,7 @@ class Incrementor {
  * 
  * For example:  
  * ```
- * auto x = generateArray<unsigned int, 4>(2, 3);
+ * auto x = generateIncrementalArray<unsigned int, 4>(2, 3);
  * ```
  * is equivalent to  
  * ```
@@ -62,9 +62,33 @@ class Incrementor {
  */
 template <class T, size_t N, class U, class V = U>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
-generateArray(U start = 0, V increment = 1) {
+generateIncrementalArray(U start = 0, V increment = 1) {
     Array<T, N> array{};
     Incrementor<U> g(start, increment);
     generate(array.begin(), array.end(), g);
+    return array;
+}
+
+/**
+ * @brief   Generate an array using the given generator.
+ * 
+ * 
+ * @tparam  T 
+ *          The type of the elements in the array.
+ * @tparam  N 
+ *          The number of elements in the array.
+ * @tparam  G
+ *          The generator functor type.
+ * 
+ * @param   generator
+ *          A functor that will be called to create each element.
+ * 
+ * @return  The generated array.
+ */
+template <class T, size_t N, class G = T(*)(void)>
+USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
+generateArray(G generator = +[]{ return T{}; }) {
+    Array<T, N> array{};
+    generate(array.begin(), array.end(), generator);
     return array;
 }

@@ -39,6 +39,8 @@ class MIDIButton : public MIDIOutputElement {
     void invert() { button.invert(); }
 #endif
 
+    Button getButtonCopy() const { return button; }
+
   private:
     Button button;
     const MIDICNChannelAddress address;

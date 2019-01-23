@@ -77,7 +77,7 @@ getIOElementOfPin	KEYWORD2
 getFirst	KEYWORD2
 getNext	KEYWORD2
 
-generateArray	KEYWORD2
+generateIncrementalArray	KEYWORD2
 
 red	KEYWORD2
 green	KEYWORD2

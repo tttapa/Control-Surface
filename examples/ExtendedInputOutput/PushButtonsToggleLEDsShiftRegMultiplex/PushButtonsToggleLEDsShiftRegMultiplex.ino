@@ -54,7 +54,7 @@ ShiftRegisterOut<n> sreg = { dataPin, clockPin, latchPin, MSBFIRST };
 /* Instantiate the momentary push buttons.
  * It generates an array of Buttons on pins:
  * { mux.pin(0), mux.pin(1) ... mux.pin(15) } */
-auto buttons = generateArray<Button, n>(mux.pin(0));
+auto buttons = generateIncrementalArray<Button, n>(mux.pin(0));
 
 void setup() { /* Initialize everything. */
   mux.begin();

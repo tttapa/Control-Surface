@@ -61,8 +61,8 @@ TEST(Array2D, initialize) {
 
 // -------------------------------------------------------------------------- //
 
-TEST(generateArray, simple) {
-    auto x = generateArray<unsigned int, 4>(2, 3);
+TEST(generateIncrementalArray, simple) {
+    auto x = generateIncrementalArray<unsigned int, 4>(2, 3);
     Array<unsigned int, 4> y = {2, 5, 8, 11};
     EXPECT_EQ(x, y);
 }

@@ -23,4 +23,6 @@ struct Array {
     }
 
     bool operator!=(const Array<T, N> &rhs) const { return !(*this == rhs); }
+
+    constexpr static size_t length = N;
 };

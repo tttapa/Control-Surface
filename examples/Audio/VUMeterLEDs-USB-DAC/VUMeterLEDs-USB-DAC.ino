@@ -50,11 +50,11 @@ ShiftRegisterOut<24> ShiftReg(dataPin, clockPin, latchPin, MSBFIRST);
 // ========================================================================== //
 
 AudioVULEDs<12> vu_L = {
-  generateArray<pin_t, 12>(ShiftReg.pin(0), 1),
+  generateIncrementalArray<pin_t, 12>(ShiftReg.pin(0), 1),
   peak_L, 1.0
 };
 AudioVULEDs<12> vu_R = {
-  generateArray<pin_t, 12>(ShiftReg.pin(12), 1),
+  generateIncrementalArray<pin_t, 12>(ShiftReg.pin(12), 1),
   peak_R, 1.0
 };
 
