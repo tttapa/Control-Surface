@@ -31,6 +31,12 @@ class DoublyLinkedList {
       public:
         node_iterator(INode *node) : node_iterator_base<INode>(node) {}
 
+        using difference_type = void;
+        using value_type = INode;
+        using pointer = INode *;
+        using reference = INode &;
+        using iterator_category = std::bidirectional_iterator_tag;
+
         /** Prefix increment operator */
         node_iterator &operator++() {
             // TODO: check node != nullptr
@@ -50,6 +56,12 @@ class DoublyLinkedList {
     class reverse_node_iterator : public node_iterator_base<INode> {
       public:
         reverse_node_iterator(INode *node) : node_iterator_base<INode>(node) {}
+
+        using difference_type = void;
+        using value_type = INode;
+        using pointer = INode *;
+        using reference = INode &;
+        using iterator_category = std::bidirectional_iterator_tag;
 
         /** Prefix increment operator */
         reverse_node_iterator &operator++() {

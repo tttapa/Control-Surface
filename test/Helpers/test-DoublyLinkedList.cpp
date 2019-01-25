@@ -13,6 +13,7 @@ struct TestNode : DoublyLinkable<TestNode> {
     bool operator>(const TestNode &rhs) const {
         return this->value > rhs.value;
     }
+    operator int() const { return value; }
 };
 
 template <class T>
@@ -118,10 +119,9 @@ TEST(DoublyLinkedList, insertSorted) {
     TestNode nodes[] = {5, 9, 6, 2, 8, 1, 3, 4, 7};
     for (auto &node : nodes)
         list.insertSorted(&node);
-    vector<int> result = {};
     vector<int> expected = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    for (TestNode &node : list)
-        result.push_back(node.value);
+    vector<int> result(expected.size());
+    std::copy(list.begin(), list.end(), result.begin());
     EXPECT_EQ(result, expected);
 }
 
@@ -130,10 +130,9 @@ TEST(DoublyLinkedList, insertSortedDoubles) {
     TestNode nodes[] = {2, 5, 6, 9, 2, 2, 8, 1, 3, 2, 4, 7, 2};
     for (auto &node : nodes)
         list.insertSorted(&node);
-    vector<int> result = {};
     vector<int> expected = {1, 2, 2, 2, 2, 2, 3, 4, 5, 6, 7, 8, 9};
-    for (TestNode &node : list)
-        result.push_back(node.value);
+    vector<int> result(expected.size());
+    std::copy(list.begin(), list.end(), result.begin());
     EXPECT_EQ(result, expected);
 }
 
@@ -345,10 +344,9 @@ TEST(DoublyLinkedList, iterator) {
     TestNode nodes[] = {1, 2, 3, 4, 5};
     for (TestNode &node : nodes)
         ll.append(node);
-    vector<int> result = {};
     vector<int> expected = {1, 2, 3, 4, 5};
-    for (TestNode &node : ll)
-        result.push_back(node.value);
+    vector<int> result(expected.size());
+    std::copy(ll.begin(), ll.end(), result.begin());
     EXPECT_EQ(result, expected);
 }
 
@@ -357,11 +355,10 @@ TEST(DoublyLinkedList, const_iterator) {
     TestNode nodes[] = {1, 2, 3, 4, 5};
     for (TestNode &node : nodes)
         ll.append(node);
-    vector<int> result = {};
     vector<int> expected = {1, 2, 3, 4, 5};
     const DoublyLinkedList<TestNode> &lli = ll;
-    for (const TestNode &node : lli)
-        result.push_back(node.value);
+    vector<int> result(expected.size());
+    std::copy(lli.begin(), lli.end(), result.begin());
     EXPECT_EQ(result, expected);
 }
 
@@ -370,10 +367,9 @@ TEST(DoublyLinkedList, reverse_iterator) {
     TestNode nodes[] = {1, 2, 3, 4, 5};
     for (TestNode &node : nodes)
         ll.append(node);
-    vector<int> result = {};
     vector<int> expected = {5, 4, 3, 2, 1};
-    for (TestNode &node : reverse(ll))
-        result.push_back(node.value);
+    vector<int> result(expected.size());
+    std::copy(ll.rbegin(), ll.rend(), result.begin());
     EXPECT_EQ(result, expected);
 }
 
@@ -382,10 +378,9 @@ TEST(DoublyLinkedList, const_reverse_iterator) {
     TestNode nodes[] = {1, 2, 3, 4, 5};
     for (TestNode &node : nodes)
         ll.append(node);
-    vector<int> result = {};
     vector<int> expected = {5, 4, 3, 2, 1};
     const DoublyLinkedList<TestNode> &lli = ll;
-    for (const TestNode &node : reverse(lli))
-        result.push_back(node.value);
+    vector<int> result(expected.size());
+    std::copy(lli.rbegin(), lli.rend(), result.begin());
     EXPECT_EQ(result, expected);
 }
