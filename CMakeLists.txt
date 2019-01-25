@@ -61,7 +61,7 @@ include_directories(mock)
 include_directories(test)
 
 # add_definitions(-DANALOG_FILTER_SHIFT_FACTOR_OVERRIDE=2)
-add_definitions(-DNO_DEBUG_PRINTS)
+add_definitions(-DNO_DEBUG_PRINTS -DTEST_COMPILE_ALL_HEADERS_SEPARATELY)
 
 # Control Surface library files
 include_directories(src)
@@ -92,6 +92,8 @@ WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../doc/Doxygen/Scripts)
 
 add_custom_target(xbm python3 XBM-export.py
                   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../src/Display/Bitmaps/Scripts/)
+
+# Custom test targets
 
 add_custom_target(check tests
                   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin/
