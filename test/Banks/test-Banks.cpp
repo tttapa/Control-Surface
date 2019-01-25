@@ -56,6 +56,12 @@ TEST(Bank, selectOutOfBounds) {
     }
 }
 
+#if __GNUC__ >= 5
+// Disable GCC 5's -Wsuggest-override warnings in mock methods
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Wsuggest-override"
+#endif
+
 template <uint8_t N>
 class TestInputBankable : public BankableMIDIInput<N> {
   public:
@@ -64,6 +70,10 @@ class TestInputBankable : public BankableMIDIInput<N> {
 
     MOCK_CONST_METHOD0(onBankSettingChange, void());
 };
+
+#if __GNUC__ >= 5
+# pragma GCC diagnostic pop
+#endif
 
 TEST(Bank, onBankSettingChange) {
     Bank<10> bank = {4};

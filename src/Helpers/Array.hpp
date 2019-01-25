@@ -5,6 +5,7 @@
 template <class T, size_t N>
 struct Array {
     T data[N];
+    constexpr static size_t length = N;
 
     T &operator[](size_t index) { return data[index]; }
     const T &operator[](size_t index) const { return data[index]; }
@@ -24,5 +25,4 @@ struct Array {
 
     bool operator!=(const Array<T, N> &rhs) const { return !(*this == rhs); }
 
-    constexpr static size_t length = N;
 };

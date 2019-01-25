@@ -7,6 +7,12 @@
 using namespace ::testing;
 using namespace ExtIO;
 
+#if __GNUC__ >= 5
+// Disable GCC 5's -Wsuggest-override warnings in mock methods
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Wsuggest-override"
+#endif
+
 class MockExtIOElement : public ExtendedIOElement {
   public:
     MockExtIOElement(pin_t length) : ExtendedIOElement(length) {}
@@ -20,6 +26,10 @@ class MockExtIOElement : public ExtendedIOElement {
     MOCK_METHOD0(begin, void());
     MOCK_METHOD0(update, void());
 };
+
+#if __GNUC__ >= 5
+# pragma GCC diagnostic pop
+#endif
 
 TEST(ExtendedInputOutput, digitalRead) {
     MockExtIOElement el_1 = {10};

@@ -11,6 +11,12 @@ class EmptyParser : public MIDI_Parser {
     }
 };
 
+#if __GNUC__ >= 5
+// Disable GCC 5's -Wsuggest-override warnings in mock methods
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Wsuggest-override"
+#endif
+
 class MockMIDI_Interface : public MIDI_Interface {
   public:
     MockMIDI_Interface() : MIDI_Interface(EmptyParser::getInstance()) {}
@@ -18,3 +24,7 @@ class MockMIDI_Interface : public MIDI_Interface {
     MOCK_METHOD4(sendImpl, void(uint8_t, uint8_t, uint8_t, uint8_t));
     MOCK_METHOD3(sendImpl, void(uint8_t, uint8_t, uint8_t));
 };
+
+#if __GNUC__ >= 5
+# pragma GCC diagnostic pop
+#endif
