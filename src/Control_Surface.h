@@ -32,6 +32,7 @@
 #include <MIDI_Outputs/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/CCPotentiometer.hpp>
 #include <MIDI_Outputs/NoteButton.hpp>
+#include <MIDI_Outputs/NoteButtonLatched.hpp>
 #include <MIDI_Outputs/NoteButtonLatching.hpp>
 #include <MIDI_Outputs/NoteButtonMatrix.hpp>
 #include <MIDI_Outputs/NoteButtons.hpp>
@@ -89,9 +90,9 @@
 // ------------------------- Extended Input Output -------------------------- //
 #include <Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
-#include <Hardware/ExtendedInputOutput/ShiftRegisterOut.hpp>
-#include <Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
 #include <Hardware/ExtendedInputOutput/MAX7219.hpp>
+#include <Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
+#include <Hardware/ExtendedInputOutput/ShiftRegisterOut.hpp>
 
 // ----------------------------- MIDI Constants ----------------------------- //
 #include <MIDI_Constants/Control_Change.hpp>

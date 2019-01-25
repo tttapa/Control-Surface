@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Hardware/LEDs/MAX7219_Base.hpp>
+#include <Helpers/BitArray.hpp>
 
 class MAX7219 : public MAX7219_Base, public ExtendedIOElement {
 

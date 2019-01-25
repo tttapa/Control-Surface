@@ -29,33 +29,29 @@
 USBMIDI_Interface midi;
 
 // Instantiate the momentary push buttons that send out MIDI Note events.
-NoteButton buttons[] = {
-    {2, MCU::MUTE_1}, // digital input pin, note number, [channel]
+NoteButtonLatched buttons[] = {
+    {2, MCU::MUTE_1}, // digital input pin, note number
     {3, MCU::SOLO_1},
 };
 
 constexpr size_t numberOfButtons = sizeof(buttons) / sizeof(*buttons);
 
-// Instantiate the LEDs that will display the state of the incoming MIDI Note
-// events.
+// The pins of the LEDs that will display the state of the buttons
 pin_t ledPins[] = {
     12,
     13,
 };
 
 constexpr size_t numberOfLEDs = sizeof(ledPins) / sizeof(*ledPins);
-static_assert(numberOfButtons == numberOfLEDs, "Error: number of buttons is not the same "
-                                               "as the number of LEDs!");
-
-auto ledButtons = generateArray<Button, numberOfButtons>([&buttons, i = 0u] () mutable {
-  return buttons[i++].getButtonCopy(); 
-});
+static_assert(numberOfButtons == numberOfLEDs,
+              "Error: number of buttons is not "
+              "the same as the number of LEDs!");
 
 void setup() {
     // Initialize everything
     Control_Surface.begin();
-    
-    for (pin_t pin : ledPins)
+
+    for (pin_t &pin : ledPins)
         pinMode(pin, OUTPUT);
 }
 
@@ -63,8 +59,6 @@ void loop() {
     // Update the control surface: read new MIDI events, and read all inputs
     Control_Surface.loop();
 
-    for (uint8_t i = 0; i < ledButtons.length; ++i)
-        if (ledButtons[i].getState() == Button::Falling)
-            digitalWrite(ledPins[i], !digitalRead(ledPins[i]));
-    
+    for (uint8_t i = 0; i < numberOfLEDs; ++i)
+        digitalWrite(ledPins[i], buttons[i].getState());
 }

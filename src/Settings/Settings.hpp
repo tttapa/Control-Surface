@@ -24,6 +24,9 @@
 // ----------------------------- User Settings ------------------------------ //
 // ========================================================================== //
 
+/** The default baud rate for debug MIDI interfaces */
+constexpr unsigned long defaultBaudRate = 115200;
+
 /** The factor for the analog filter: <br>
  *  Difference equation:
  *  @f$ y[n] = \alpha\cdot x[n] + (1-\alpha)\cdot y[n-1] @f$
