@@ -33,6 +33,30 @@ class Incrementor {
 };
 
 /**
+ * @brief   Generate an array using the given generator.
+ * 
+ * 
+ * @tparam  T 
+ *          The type of the elements in the array.
+ * @tparam  N 
+ *          The number of elements in the array.
+ * @tparam  G
+ *          The generator functor type.
+ * 
+ * @param   generator
+ *          A functor that will be called to create each element.
+ * 
+ * @return  The generated array.
+ */
+template <class T, size_t N, class G>
+USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
+generateArray(G generator) {
+    Array<T, N> array{};
+    generate(array.begin(), array.end(), generator);
+    return array;
+}
+
+/**
  * @brief   Generate an array where the first value is given, and the subsequent
  *          values are calculated as the previous value incremented with a given
  *          value:  
@@ -63,32 +87,6 @@ class Incrementor {
 template <class T, size_t N, class U, class V = U>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
 generateIncrementalArray(U start = 0, V increment = 1) {
-    Array<T, N> array{};
     Incrementor<U> g(start, increment);
-    generate(array.begin(), array.end(), g);
-    return array;
-}
-
-/**
- * @brief   Generate an array using the given generator.
- * 
- * 
- * @tparam  T 
- *          The type of the elements in the array.
- * @tparam  N 
- *          The number of elements in the array.
- * @tparam  G
- *          The generator functor type.
- * 
- * @param   generator
- *          A functor that will be called to create each element.
- * 
- * @return  The generated array.
- */
-template <class T, size_t N, class G = T(*)(void)>
-USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
-generateArray(G generator = +[]{ return T{}; }) {
-    Array<T, N> array{};
-    generate(array.begin(), array.end(), generator);
-    return array;
+    return generateArray<T, N>(g);
 }

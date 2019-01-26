@@ -1,5 +1,5 @@
-#include <Helpers/ArrayHelpers.hpp>
 #include <Def/Def.hpp>
+#include <Helpers/ArrayHelpers.hpp>
 #include <gtest-wrapper.h>
 
 TEST(Array, initializeAndRetrieve) {
@@ -50,7 +50,7 @@ TEST(Array, equality) {
 // -------------------------------------------------------------------------- //
 
 TEST(Array2D, initialize) {
-    Array2D<int, 3, 2> arr = {{{0,1},{2,3},{4,5}}};
+    Array2D<int, 3, 2> arr = {{{0, 1}, {2, 3}, {4, 5}}};
     EXPECT_EQ(arr[0][0], 0);
     EXPECT_EQ(arr[0][1], 1);
     EXPECT_EQ(arr[1][0], 2);
@@ -64,5 +64,11 @@ TEST(Array2D, initialize) {
 TEST(generateIncrementalArray, simple) {
     auto x = generateIncrementalArray<unsigned int, 4>(2, 3);
     Array<unsigned int, 4> y = {2, 5, 8, 11};
+    EXPECT_EQ(x, y);
+}
+
+TEST(generateArray, simple) {
+    auto x = generateArray<unsigned int, 4>([i = 0u]() mutable { return i++; });
+    Array<unsigned int, 4> y = {0, 1, 2, 3};
     EXPECT_EQ(x, y);
 }

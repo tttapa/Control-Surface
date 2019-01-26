@@ -3,6 +3,10 @@
 #include <Helpers/Debug.hpp>
 #include <stdlib.h>
 
+#ifndef __AVR__
+#include <iterator>
+#endif
+
 template <class Node>
 class DoublyLinkedList {
   public:
@@ -31,11 +35,13 @@ class DoublyLinkedList {
       public:
         node_iterator(INode *node) : node_iterator_base<INode>(node) {}
 
+#ifndef __AVR__
         using difference_type = void;
         using value_type = INode;
         using pointer = INode *;
         using reference = INode &;
         using iterator_category = std::bidirectional_iterator_tag;
+#endif
 
         /** Prefix increment operator */
         node_iterator &operator++() {
@@ -57,11 +63,13 @@ class DoublyLinkedList {
       public:
         reverse_node_iterator(INode *node) : node_iterator_base<INode>(node) {}
 
+#ifndef __AVR__
         using difference_type = void;
         using value_type = INode;
         using pointer = INode *;
         using reference = INode &;
         using iterator_category = std::bidirectional_iterator_tag;
+#endif
 
         /** Prefix increment operator */
         reverse_node_iterator &operator++() {

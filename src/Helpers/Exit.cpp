@@ -17,7 +17,7 @@ void fatalErrorExit() {
         delay(850);
     }
 #endif
-    cli();
+    noInterrupts();
     while (1)
         ;
 }

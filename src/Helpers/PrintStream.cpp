@@ -4,7 +4,7 @@
 
 #ifdef ARDUINO
 
-#ifndef ARDUINO_ARCH_ESP32
+#if not defined(ARDUINO_ARCH_ESP32) && not defined(ARDUINO_ARCH_SAM)
 #define FLUSH
 #endif
 
