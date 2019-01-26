@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include "Array.hpp"
@@ -8,7 +10,7 @@
 #define USE_CONSTEXPR_ARRAY_HELPERS
 #endif
 
-// https://en.cppreference.com/w/cpp/algorithm/generate
+/// https://en.cppreference.com/w/cpp/algorithm/generate
 template <class ForwardIt, class Generator>
 USE_CONSTEXPR_ARRAY_HELPERS void generate(ForwardIt first, ForwardIt last,
                                           Generator g) {
@@ -16,10 +18,19 @@ USE_CONSTEXPR_ARRAY_HELPERS void generate(ForwardIt first, ForwardIt last,
         *first++ = g();
 }
 
-template <class T>
+/** 
+ * @brief   Utility class that acts as a functor to return incremental values.
+ * 
+ * @tparam  T
+ *          The type that will be returned by the functor, as well as the type
+ *          of the initial value.
+ * @tparam  V
+ *          The type of the object that is added to the value on each call.
+ */
+template <class T, class V>
 class Incrementor {
   public:
-    USE_CONSTEXPR_ARRAY_HELPERS Incrementor(T start = 0, T increment = 1)
+    USE_CONSTEXPR_ARRAY_HELPERS Incrementor(T start = 0, V increment = 1)
         : value(start), increment(increment) {}
     USE_CONSTEXPR_ARRAY_HELPERS T operator()() {
         T temp = value;
@@ -29,12 +40,11 @@ class Incrementor {
 
   private:
     T value;
-    const T increment;
+    const V increment;
 };
 
 /**
  * @brief   Generate an array using the given generator.
- * 
  * 
  * @tparam  T 
  *          The type of the elements in the array.
@@ -76,6 +86,10 @@ generateArray(G generator) {
  *          The type of the elements in the array.
  * @tparam  N 
  *          The number of elements in the array.
+ * @tparam  U 
+ *          The type of the initial value.
+ * @tparam  V
+ *          The type of the value that will be added to each subsequent element.
  * 
  * @param   start
  *          The first value in the array.
@@ -87,6 +101,6 @@ generateArray(G generator) {
 template <class T, size_t N, class U, class V = U>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
 generateIncrementalArray(U start = 0, V increment = 1) {
-    Incrementor<U> g(start, increment);
+    Incrementor<U, V> g(start, increment);
     return generateArray<T, N>(g);
 }

@@ -7,7 +7,7 @@ template <setting_t N>
 class IncrementDecrementSelector_Base : virtual public Selector<N> {
   public:
     IncrementDecrementSelector_Base(const IncrementDecrementButtons &buttons,
-                                    bool wrap = true)
+                                    Wrap wrap = Wrap::Wrap)
         : buttons(buttons), wrap(wrap) {}
 
     void beginInput() override { buttons.begin(); }
@@ -28,7 +28,7 @@ class IncrementDecrementSelector_Base : virtual public Selector<N> {
 
   private:
     IncrementDecrementButtons buttons;
-    bool wrap;
+    Wrap wrap;
 };
 
 // -------------------------------------------------------------------------- //
@@ -38,7 +38,7 @@ class IncrementDecrementSelector : public IncrementDecrementSelector_Base<N> {
   public:
     IncrementDecrementSelector(Selectable<N> &selectable,
                                const IncrementDecrementButtons &buttons,
-                               bool wrap = true)
+                               Wrap wrap = Wrap::Wrap)
         : Selector<N>(selectable), IncrementDecrementSelector_Base<N>(buttons,
                                                                       wrap) {}
 

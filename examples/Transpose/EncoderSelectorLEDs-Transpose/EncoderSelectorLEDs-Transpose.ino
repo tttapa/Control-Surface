@@ -40,7 +40,7 @@ EncoderSelectorLEDs<transposer.N> sel = {
         4,
     },
     4,
-    false,
+    Wrap::NoWrap,
 };
 
 void setup() {

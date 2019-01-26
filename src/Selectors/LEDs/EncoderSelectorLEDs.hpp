@@ -9,14 +9,14 @@ class EncoderSelectorLEDs : public EncoderSelector_Base<N>,
   public:
     EncoderSelectorLEDs(Selectable<N> &selectable, const PinList<N> &ledPins,
                         const EncoderPinList &pins, uint8_t pulsesPerStep = 4,
-                        bool wrap = true)
+                        Wrap wrap = Wrap::Wrap)
         : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
                                                            wrap),
           SelectorLEDs<N>(ledPins) {}
 
     EncoderSelectorLEDs(Selectable<N> &selectable, const PinList<N> &ledPins,
                         const EncoderSwitchPinList &pins,
-                        uint8_t pulsesPerStep = 4, bool wrap = true)
+                        uint8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
         : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
                                                            wrap),
           SelectorLEDs<N>(ledPins) {}

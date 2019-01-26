@@ -9,12 +9,14 @@ Transposer<-12, +12> transposer;
 // Instantiate a button on pin 4 sending note C3 (0x3C) on channel 1
 Bankable::NoteButton note = {transposer, 4, {0x3C, CHANNEL_1}};
 
-IncrementDecrementSelector<transposer.N> sel = { transposer, {5, 6}, false };
+IncrementDecrementSelector<transposer.N> sel = {
+    transposer,
+    {5, 6},
+    Wrap::NoWrap,
+};
 
 void setup() {
-  Control_Surface.begin(); // Initialize Control Surface
+    Control_Surface.begin(); // Initialize Control Surface
 }
 
-void loop() {
-  Control_Surface.loop();
-}
+void loop() { Control_Surface.loop(); }

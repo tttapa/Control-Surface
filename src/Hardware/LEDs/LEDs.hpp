@@ -22,12 +22,12 @@ class LEDs {
             ExtIO::digitalWrite(ledPins[pin], LOW);
     }
 
+    void displayDot(uint8_t led) const { displayRange(led, led + 1); }
+
     void clear() const {
         for (uint8_t pin = 0; pin < N; pin++)
             ExtIO::digitalWrite(ledPins[pin], LOW);
     }
-
-    void displayDot(uint8_t led) const { displayRange(led, led + 1); }
 
   private:
     const PinList<N> ledPins;

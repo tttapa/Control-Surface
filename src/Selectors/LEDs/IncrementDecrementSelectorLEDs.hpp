@@ -11,7 +11,7 @@ class IncrementDecrementSelectorLEDs
     IncrementDecrementSelectorLEDs(Selectable<N> &selectable,
                                    const IncrementDecrementButtons &buttons,
                                    const PinList<N> &ledPins,
-                                   bool wrap = true)
+                                   Wrap wrap = Wrap::Wrap)
         : Selector<N>(selectable),
           IncrementDecrementSelector_Base<N>(buttons, wrap),
           SelectorLEDs<N>(ledPins) {}

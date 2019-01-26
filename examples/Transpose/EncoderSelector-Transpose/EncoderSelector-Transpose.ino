@@ -13,12 +13,15 @@ Bankable::NoteButton note = {transposer, 5, {0x3C, CHANNEL_1}};
 
 // Instantiate an encoder selector with the encoder wired to pins 2 and 3 and
 // the switch pin connected to pin 4, with 4 pulses per step, without wrapping.
-EncoderSelector<transposer.N> sel = { transposer, {2, 3, 4}, 4, false };
+EncoderSelector<transposer.N> sel = {
+    transposer,
+    {2, 3, 4},
+    4,
+    Wrap::NoWrap,
+};
 
 void setup() {
-  Control_Surface.begin(); // Initialize Control Surface
+    Control_Surface.begin(); // Initialize Control Surface
 }
 
-void loop() {
-  Control_Surface.loop();
-}
+void loop() { Control_Surface.loop(); }

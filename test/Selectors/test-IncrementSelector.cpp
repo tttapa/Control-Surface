@@ -6,7 +6,8 @@ using namespace ::testing;
 TEST(IncrementSelector, pressWrap) {
     MockSelectable<3> selectable;
 
-    IncrementSelector<3> selector = {selectable, IncrementButton(2), true};
+    IncrementSelector<3> selector = {selectable, IncrementButton(2),
+                                     Wrap::Wrap};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
 
@@ -62,7 +63,8 @@ TEST(IncrementSelector, pressWrap) {
 TEST(IncrementSelector, pressNoWrap) {
     MockSelectable<3> selectable;
 
-    IncrementSelector<3> selector = {selectable, IncrementButton(2), false};
+    IncrementSelector<3> selector = {selectable, IncrementButton(2),
+                                     Wrap::NoWrap};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
 

@@ -32,3 +32,9 @@
  * @brief   All Elements that extend the number of IO pins of the Arduino: 
  *          Currently only shift registers and multiplexers.
  */
+
+/** 
+ * @defgroup    DisplayElements Display Elements
+ * @brief   All Elements that can be used to show the state of the Control 
+ *          Surface on the display.
+ */

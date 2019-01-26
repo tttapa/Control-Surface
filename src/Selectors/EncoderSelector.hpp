@@ -14,12 +14,12 @@ template <setting_t N>
 class EncoderSelector_Base : virtual public Selector<N> {
   public:
     EncoderSelector_Base(const EncoderSwitchPinList &pins,
-                         uint8_t pulsesPerStep = 4, bool wrap = true)
+                         uint8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
         : encoder{pins[0], pins[1]}, switchPin(pins[2]),
           pulsesPerStep(pulsesPerStep), wrap(wrap) {}
 
     EncoderSelector_Base(const EncoderPinList &pins, uint8_t pulsesPerStep = 4,
-                         bool wrap = true)
+                         Wrap wrap = Wrap::Wrap)
         : encoder{pins[0], pins[1]}, switchPin(NO_PIN),
           pulsesPerStep(pulsesPerStep), wrap(wrap) {}
 
@@ -55,7 +55,7 @@ class EncoderSelector_Base : virtual public Selector<N> {
     Encoder encoder;
     const pin_t switchPin;
     const uint8_t pulsesPerStep;
-    bool wrap;
+    Wrap wrap;
 
     long previousPosition = 0;
     bool previousSwitchState = HIGH;
@@ -67,12 +67,12 @@ template <setting_t N>
 class EncoderSelector : public EncoderSelector_Base<N> {
   public:
     EncoderSelector(Selectable<N> &selectable, const EncoderPinList &pins,
-                    uint8_t pulsesPerStep = 4, bool wrap = true)
+                    uint8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
         : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
                                                            wrap) {}
 
     EncoderSelector(Selectable<N> &selectable, const EncoderSwitchPinList &pins,
-                    uint8_t pulsesPerStep = 4, bool wrap = true)
+                    uint8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
         : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
                                                            wrap) {}
 

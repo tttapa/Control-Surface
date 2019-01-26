@@ -5,6 +5,11 @@
 #include <Helpers/Updatable.hpp>
 #include <Def/Def.hpp>
 
+enum class Wrap : bool {
+    NoWrap = false,
+    Wrap = true,
+};
+
 template <setting_t N>
 class Selector : public Updatable<> {
   protected:
@@ -32,11 +37,11 @@ class Selector : public Updatable<> {
         setting = newSetting;
     }
 
-    void increment(bool wrap) {
+    void increment(Wrap wrap) {
         setting_t setting = this->get();
         setting++;
         if (setting == N) {
-            if (wrap) {
+            if (wrap == Wrap::Wrap) {
                 setting = 0;
             } else {
                 return;
@@ -45,10 +50,10 @@ class Selector : public Updatable<> {
         this->set(setting);
     }
 
-    void decrement(bool wrap) {
+    void decrement(Wrap wrap) {
         setting_t setting = this->get();
         if (setting == 0) {
-            if (wrap) {
+            if (wrap == Wrap::Wrap) {
                 setting = N;
             } else {
                 return;

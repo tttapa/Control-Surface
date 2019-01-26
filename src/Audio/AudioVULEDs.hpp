@@ -29,7 +29,11 @@ class AudioVULEDs : public AudioVU, public Updatable<AudioVU> {
         }
     }
 
+    void setMode(DotBarMode mode) { vuleds.setMode(mode); }
+    void dotMode() { vuleds.dotMode(); }
+    void barMode() { vuleds.barMode(); }
+
   private:
-    const DotBarDisplayLEDs<N> vuleds;
+    DotBarDisplayLEDs<N> vuleds;
     uint8_t previousValue = 0;
 };

@@ -6,7 +6,7 @@ using namespace ::testing;
 TEST(IncrementDecrementSelector, pressIncrementWrap) {
     MockSelectable<3> selectable;
 
-    IncrementDecrementSelector<3> selector = {selectable, {2, 3}, true};
+    IncrementDecrementSelector<3> selector = {selectable, {2, 3}, Wrap::Wrap};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
@@ -87,7 +87,7 @@ TEST(IncrementDecrementSelector, pressIncrementWrap) {
 TEST(IncrementDecrementSelector, pressDecrementWrap) {
     MockSelectable<3> selectable;
 
-    IncrementDecrementSelector<3> selector = {selectable, {3, 2}, true};
+    IncrementDecrementSelector<3> selector = {selectable, {3, 2}, Wrap::Wrap};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
@@ -168,7 +168,7 @@ TEST(IncrementDecrementSelector, pressDecrementWrap) {
 TEST(IncrementDecrementSelector, reset) {
     MockSelectable<10> selectable;
 
-    IncrementDecrementSelector<10> selector = {selectable, {2, 3}, true};
+    IncrementDecrementSelector<10> selector = {selectable, {2, 3}, Wrap::Wrap};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
@@ -197,7 +197,7 @@ TEST(IncrementDecrementSelector, reset) {
 TEST(IncrementDecrementSelector, pressIncrementNoWrap) {
     MockSelectable<3> selectable;
 
-    IncrementDecrementSelector<3> selector = {selectable, {2, 3}, false};
+    IncrementDecrementSelector<3> selector = {selectable, {2, 3}, Wrap::NoWrap};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
@@ -248,7 +248,7 @@ TEST(IncrementDecrementSelector, pressIncrementNoWrap) {
 TEST(IncrementDecrementSelector, pressDecrementNoWrap) {
     MockSelectable<3> selectable;
 
-    IncrementDecrementSelector<3> selector = {selectable, {3, 2}, false};
+    IncrementDecrementSelector<3> selector = {selectable, {3, 2}, Wrap::NoWrap};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, INPUT_PULLUP));
