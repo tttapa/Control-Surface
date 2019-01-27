@@ -80,6 +80,7 @@ class MIDI_Interface {
     void sendCC(MIDICNChannelAddress address, uint8_t value);
     void sendPB(MIDICNChannelAddress address, uint16_t value);
     void sendPB(Channel channel, uint16_t value);
+    void sendPC(Channel channel, uint8_t value);
 
     void update();
 

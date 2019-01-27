@@ -22,7 +22,7 @@ class Selector : public Updatable<> {
 
     void begin() final override {
         beginOutput();
-        set(selectable.getInitialSelection());
+        reset();
         beginInput();
     }
 

@@ -94,6 +94,9 @@ void MIDI_Interface::sendPB(MIDICNChannelAddress address, uint16_t value) {
 void MIDI_Interface::sendPB(Channel channel, uint16_t value) {
     sendImpl(PITCH_BEND, channel.getRaw(), value & 0x7F, value >> 7);
 }
+void MIDI_Interface::sendPC(Channel channel, uint8_t value) {
+    sendImpl(PROGRAM_CHANGE, channel.getRaw(), value);
+}
 
 // -------------------------------- PARSING --------------------------------- //
 

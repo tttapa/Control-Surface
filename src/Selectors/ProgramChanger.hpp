@@ -7,15 +7,15 @@
 template <setting_t N>
 class ProgramChanger : public Selectable<N> {
   public:
-    ProgramChanger(const Array<uint8_t, N> &programs, uint8_t channel)
+    ProgramChanger(const Array<uint8_t, N> &programs, Channel channel)
         : programs(programs), channel(channel) {}
 
     void select(setting_t setting) override {
         setting = this->validateSetting(setting);
-        Control_Surface.MIDI().send(PROGRAM_CHANGE, channel, programs[setting]);
+        Control_Surface.MIDI().sendPC(channel, programs[setting]);
     }
 
   private:
     const Array<uint8_t, N> programs;
-    const uint8_t channel;
+    const Channel channel;
 };

@@ -13,9 +13,7 @@ ExtendedIOElement::ExtendedIOElement(pin_t length)
     elements.append(this);
 }
 
-ExtendedIOElement::~ExtendedIOElement() {
-    elements.remove(this);
-}
+ExtendedIOElement::~ExtendedIOElement() { elements.remove(this); }
 
 void ExtendedIOElement::beginAll() {
     for (ExtendedIOElement &e : elements)
@@ -36,6 +34,8 @@ pin_t ExtendedIOElement::pin(pin_t p) const {
     }
     return p + start;
 }
+
+pin_t ExtendedIOElement::operator[](pin_t p) const { return pin(p); }
 
 pin_t ExtendedIOElement::getEnd() const { return end; }
 

@@ -56,8 +56,8 @@ use in your final program.
 
 You can give the interface any name you want, here, I'll be very original and
 choose `midi`. It doesn't matter, and you don't need to use it afterwards, 
-defining the interface is enough, the Control Surface library will automatically
-know that it exists.
+just defining the interface is enough, the Control Surface library will 
+automatically detect and use it.
 
 ```cpp
 USBMIDI_Interface midi;
@@ -66,7 +66,7 @@ USBMIDI_Interface midi;
 > **Note**: some interfaces require additional parameters, for example, 
 > the `USBDebugMIDI_Interface` needs to know the baud rate.  
 > In that case, you can instantiate it as follows:  
-> `USBDebugMIDI_Interface midi = { 115200 };`
+> `USBDebugMIDI_Interface midi = {115200};`
 
 ### 3. Add Extended Input/Output elements (optional)
 
@@ -106,13 +106,19 @@ Change events.
 In the [documentation](
 https://tttapa.github.io/Control-Surface/Doc/Doxygen/db/d32/classCCPotentiometer.html),
 you'll find that the first argument for the `CCPotentiometer` class is the 
-analog pin number, the second is the MIDI controller number, and the third
-is the MIDI channel.  
+analog pin number, and the second is the MIDI address.  
+The MIDI address is a structure that consists of an address number, 
+the MIDI channel, and the cable number.  
+In this case, the address number is the controller number, which is a number
+from 0 to 120. The MIDI channel is a channel from `CHANNEL_1` until 
+`CHANNEL_16`. We'll ignore the cable number for now, if you don't specifically
+set it, it'll just use the default.  
+
 For the MIDI controller numbers, you can use the [predefined constants](
 https://tttapa.github.io/Control-Surface/Doc/Doxygen/d4/dbe/namespaceMIDI__CC.html).
 
 ```cpp
-CCPotentiometer potentiometer = { A1, MIDI_CC::Channel_Volume, 1 };
+CCPotentiometer potentiometer = { A0, {MIDI_CC::Channel_Volume, CHANNEL_1} };
 ```
 
 In our case, we don't want a single potentiometer, we want eight. It's much
@@ -124,16 +130,25 @@ defined in the previous step.
 
 ```cpp
 CCPotentiometer volumePotentiometers[] = {
-    { mux.pin(0), MIDI_CC::Channel_Volume, 1 },
-    { mux.pin(1), MIDI_CC::Channel_Volume, 2 },
-    { mux.pin(2), MIDI_CC::Channel_Volume, 3 },
-    { mux.pin(3), MIDI_CC::Channel_Volume, 4 },
-    { mux.pin(4), MIDI_CC::Channel_Volume, 5 },
-    { mux.pin(5), MIDI_CC::Channel_Volume, 6 },
-    { mux.pin(6), MIDI_CC::Channel_Volume, 7 },
-    { mux.pin(7), MIDI_CC::Channel_Volume, 8 },
+    { mux.pin(0), {MIDI_CC::Channel_Volume, CHANNEL_1} },
+    { mux.pin(1), {MIDI_CC::Channel_Volume, CHANNEL_2} },
+    { mux.pin(2), {MIDI_CC::Channel_Volume, CHANNEL_3} },
+    { mux.pin(3), {MIDI_CC::Channel_Volume, CHANNEL_4} },
+    { mux.pin(4), {MIDI_CC::Channel_Volume, CHANNEL_5} },
+    { mux.pin(5), {MIDI_CC::Channel_Volume, CHANNEL_6} },
+    { mux.pin(6), {MIDI_CC::Channel_Volume, CHANNEL_7} },
+    { mux.pin(7), {MIDI_CC::Channel_Volume, CHANNEL_8} },
 };
 ```
+
+> **Note**: Some other MIDI Control Elements might not need an address number,
+> or they might not need a channel. In that case, you just leave out the 
+> optional parts that you don't need.  
+> For example, a `PBPotentiometer` doesn't need an address number, just a 
+> channel, so you can intantiate it as follows:
+> ```cpp
+> PBPotentiometer potentiometer = { A0, CHANNEL_9 };
+> ```
 
 ### 5. Initialize the Control Surface
 
@@ -168,8 +183,8 @@ void loop() {
 ```
 
 > **Note**: Using blocking code like delays will interfere with the Control
-> Surface, so try to use [Blink Without Delay](
-https://www.arduino.cc/en/Tutorial/BlinkWithoutDelay) techniques instead.
+> Surface, so try to use [Blink Without Delay](https://www.arduino.cc/en/Tutorial/BlinkWithoutDelay) 
+> techniques instead.
 
 ### The finished sketch
 
