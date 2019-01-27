@@ -44,3 +44,22 @@ Whereas the ATmega16U2 chip is programmable, most other USB-to-TTL chips are sin
 These chips include FTDI chips (Nano and Duemilanove) and the CH340G or CP2102 (both very popular on Chinese "Arduino" clones).  
 While MIDI over USB is not supported on these boards, you can still use Hairless. Just instantiate a `HairlessMIDI_Interface` at the top of your sketch.    
 
+***
+
+## Conclusion
+I strongly recommend getting a Teensy 3.x for building a Control Surface. 
+MIDI over USB is supported right of the box, and it's the only platform that 
+currently supports USB audio output. 
+On top of that, it has plenty of memory to create large MIDI Controllers, and 
+drive lots of displays.
+
+If you just want a very small MIDI Controller, the Arduino Leonardo/Micro are 
+good choices as well, just keep in mind that they don't have a lot of RAM.
+
+The Arduino UNO and MEGA boards are just not fit for MIDI over USB, and I 
+wouldn't recommend them at all for this application.
+
+You don't have to worry too much about the number of IO pins a board has, since
+you can use multiplexers and GPIO expanders, using the ExtendedIO classes of the 
+library.
+Memory can be a much bigger problem, especially if you add a display.

@@ -25,7 +25,7 @@ There are many different MIDI interfaces to choose from:
 
 - `USBMIDI_Interface`: On boards that support MIDI over USB natively, this will
 do exactly what you'd expect. You just have to plug it into your computer, and
-it shows up as a MIDI device.  
+it shows up as a MIDI device. 
 On Arduinos without native USB capabilities (e.g. UNO or MEGA), you have to use 
 a custom firmware.
 - `HardwareSerialMIDI_Interface`: This interface will send and receive MIDI 
