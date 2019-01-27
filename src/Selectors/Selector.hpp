@@ -1,13 +1,19 @@
 #pragma once
 
 #include "Selectable.hpp"
+#include <Def/Def.hpp>
 #include <Helpers/Debug.hpp>
 #include <Helpers/Updatable.hpp>
-#include <Def/Def.hpp>
 
+/**
+ * @brief   An enumeration to set the behavior of selectors that are incremented
+ *          (decremented) beyond their maximum (minimum) setting.
+ */
 enum class Wrap : bool {
-    NoWrap = false,
-    Wrap = true,
+    NoWrap = false, ///< When the maximum (minimum) setting is reached,
+                    ///< clamp to the maximum (minimum) setting.
+    Wrap = true,    ///< When the maximum (minimum) setting is reached,
+                    ///< wrap around to the minimum (maximum) setting.
 };
 
 template <setting_t N>
@@ -41,11 +47,10 @@ class Selector : public Updatable<> {
         setting_t setting = this->get();
         setting++;
         if (setting == N) {
-            if (wrap == Wrap::Wrap) {
+            if (wrap == Wrap::Wrap)
                 setting = 0;
-            } else {
+            else
                 return;
-            }
         }
         this->set(setting);
     }
@@ -53,11 +58,10 @@ class Selector : public Updatable<> {
     void decrement(Wrap wrap) {
         setting_t setting = this->get();
         if (setting == 0) {
-            if (wrap == Wrap::Wrap) {
+            if (wrap == Wrap::Wrap)
                 setting = N;
-            } else {
+            else
                 return;
-            }
         }
         setting--;
         this->set(setting);
