@@ -273,6 +273,28 @@
  */
 
 /**
+ * @example   NoteButtonMatrixKeyboard.ino
+ * 
+ * @brief   This is an example to demonstrate the use of a ButtonMatrix.
+ * 
+ * ### Connections
+ *  
+ *  - A0-A3: The row pins of the button matrix (with the cathodes of the diodes)
+ *  - 2-13:  The column pins of the button matrix
+ *  - A4-A5: Two push buttons (to ground) to transpose the keyboard
+ * 
+ * The internal pull-up resistors will be used.
+ * 
+ * ### Behavior
+ * 
+ * The keys of the keyboard should note on/off events when pressed/released.
+ * The notes can be transposed by pressing the buttons connected to pins A4-A5.
+ * 
+ * Written by Pieter P, 27-01-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   OLED-Demo.ino
  *
  * @brief An extensive example demonstrating the use of DisplayElement%s

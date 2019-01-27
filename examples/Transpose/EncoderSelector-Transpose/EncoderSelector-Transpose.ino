@@ -9,7 +9,7 @@ USBMIDI_Interface midi;
 Transposer<-12, +12> transposer;
 
 // Instantiate a button on pin 5 sending note C3 (0x3C) on channel 1
-Bankable::NoteButton note = {transposer, 5, {0x3C, CHANNEL_1}};
+Bankable::NoteButton notebtn = {transposer, 5, {0x3C, CHANNEL_1}};
 
 // Instantiate an encoder selector with the encoder wired to pins 2 and 3 and
 // the switch pin connected to pin 4, with 4 pulses per step, without wrapping.
@@ -24,4 +24,6 @@ void setup() {
     Control_Surface.begin(); // Initialize Control Surface
 }
 
-void loop() { Control_Surface.loop(); }
+void loop() {
+    Control_Surface.loop(); // Update all elements
+}

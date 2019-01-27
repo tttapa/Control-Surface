@@ -97,6 +97,7 @@
 // ----------------------------- MIDI Constants ----------------------------- //
 #include <MIDI_Constants/Control_Change.hpp>
 #include <MIDI_Constants/MCU.hpp>
+#include <MIDI_Constants/Notes.hpp>
 
 // ----------------------------- Array Helpers ------------------------------ //
 #include <Helpers/ArrayHelpers.hpp>

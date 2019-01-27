@@ -13,8 +13,8 @@ void setup() {
 }
 
 void loop() {
-  static bool state = true;
   if (enableButton.getState() == Button::Falling) {
+    static bool state = true;
     state = !state;
     digitalWrite(LED_BUILTIN, state);
     state ? masterVolume.enable() : masterVolume.disable();
