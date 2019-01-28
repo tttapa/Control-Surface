@@ -287,10 +287,33 @@
  * 
  * ### Behavior
  * 
- * The keys of the keyboard should note on/off events when pressed/released.
+ * The keys of the keyboard should send note on/off events when 
+ * pressed/released.  
  * The notes can be transposed by pressing the buttons connected to pins A4-A5.
  * 
  * Written by Pieter P, 27-01-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   PushButtons.ino
+ *
+ * @brief   This example demonstrates the use of push buttons that send note 
+ *          events.
+ * 
+ * ### Connections
+ * 
+ *  - 2:  momentary push button (to ground)
+ *  - 3:  momentary push button (to ground)
+ * 
+ * The internal pull-up resistors for the buttons will be enabled automatically.
+ * 
+ * ### Behavior
+ * 
+ * Pressing the first button will send note on/off events on middle C.
+ * Pressing the second button will send note on/off events for middle C sharp.
+ * 
+ * Written by PieterP, 28-01-2019  
  * https://github.com/tttapa/Control-Surface
  */
 

@@ -1019,7 +1019,7 @@ VERBATIM_HEADERS       = YES
 # generated with the -Duse-libclang=ON option for CMake.
 # The default value is: NO.
 
-CLANG_ASSISTED_PARSING = NO
+CLANG_ASSISTED_PARSING = YES
 
 # If clang assisted parsing is enabled you can provide the compiler with command
 # line options that you would normally use when invoking the compiler. Note that
@@ -2432,3 +2432,6 @@ GENERATE_LEGEND        = YES
 # This tag requires that the tag HAVE_DOT is set to YES.
 
 DOT_CLEANUP            = YES
+
+# https://github.com/doxygen/doxygen/issues/6800
+TOC_INCLUDE_HEADINGS   = 0

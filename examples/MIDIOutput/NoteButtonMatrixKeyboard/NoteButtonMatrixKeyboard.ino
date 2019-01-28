@@ -11,7 +11,8 @@
  * 
  * ### Behavior
  * 
- * The keys of the keyboard should note on/off events when pressed/released.
+ * The keys of the keyboard should send note on/off events when 
+ * pressed/released.  
  * The notes can be transposed by pressing the buttons connected to pins A4-A5.
  * 
  * Written by Pieter P, 27-01-2019  
