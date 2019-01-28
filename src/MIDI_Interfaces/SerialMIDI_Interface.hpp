@@ -207,7 +207,8 @@ class USBSerialMIDI_Interface : public SerialMIDI_Interface<Serial_> {
 };
 #endif
 
-#if defined(TEENSYDUINO) && defined(TEENSY_SERIALUSB_ENABLED)
+#if !defined(TEENSYDUINO) ||                                                   \
+    (defined(TEENSYDUINO) && defined(TEENSY_SERIALUSB_ENABLED))
 /**
  * @brief   A class for MIDI Interfaces sending and receiving
  *          data over the USB Serial CDC connection for the use
