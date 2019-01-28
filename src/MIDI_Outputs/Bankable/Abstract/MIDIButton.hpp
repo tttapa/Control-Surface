@@ -16,7 +16,7 @@ namespace Bankable {
  */
 template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
 class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
-  protected:
+  public:
     /**
      * @brief   Construct a new bankable MIDIButton.
      *
@@ -28,7 +28,6 @@ class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
                const MIDICNChannelAddress &address)
         : BankableMIDIOutput(config), button{pin}, address(address) {}
 
-  public:
     void begin() final override { button.begin(); }
     void update() final override {
         Button::State state = button.getState();

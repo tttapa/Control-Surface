@@ -13,7 +13,7 @@
  */
 template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
 class MIDIButton : public MIDIOutputElement {
-  protected:
+  public:
     /**
      * @brief   Construct a new MIDIButton.
      *
@@ -24,7 +24,6 @@ class MIDIButton : public MIDIOutputElement {
     MIDIButton(pin_t pin, const MIDICNChannelAddress &address)
         : button{pin}, address{address} {}
 
-  public:
     void begin() final override { button.begin(); }
     void update() final override {
         Button::State state = button.getState();
