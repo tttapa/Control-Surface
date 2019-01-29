@@ -45,7 +45,7 @@ typedef int16_t ANALOG_FILTER_TYPE;
 /** The debounce time for momentary push buttons in milliseconds. */
 constexpr unsigned long BUTTON_DEBOUNCE_TIME = 25; // milliseconds
 
-/** The time in millisecoonds before a press is registered as a long press. */
+/** The time in milliseconds before a press is registered as a long press. */
 constexpr unsigned long LONG_PRESS_DELAY = 450; // milliseconds
 
 /** The time between increments/decremnets during a long press. */

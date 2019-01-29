@@ -63,6 +63,7 @@
 #include <MIDI_Inputs/MIDINote.hpp>
 
 #include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
+#include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>
 #include <MIDI_Inputs/LEDs/MIDINoteLED.hpp>
 
 // ------------------------------- Selectors -------------------------------- //
