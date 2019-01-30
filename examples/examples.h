@@ -136,6 +136,29 @@
  */
 
 /**
+ * @example   ProgramChanger.ino
+ *
+ * @brief   This is an example of the ProgramChanger and Selector classes.
+ * 
+ * ### Connections
+ *  - 5: A momentary push button (to ground)
+ *  - 6: A momentary push button (to ground)
+ *  
+ * The internal pull-up resistors will be enabled automatically
+ *  
+ * ### Behavior
+ * When you press the first button, the next program is selected.  
+ * When you press the second button, the previous program is selected.  
+ * When you press both buttons at once, it resets to the first program
+ * again.  
+ * If you keep pressin one of the buttons, it will cycle through the
+ * programs more quickly.
+ * 
+ * Written by Pieter P, 30-01-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   PushButtonsLEDsShiftRegMultiplex.ino
  *
  * @brief   This example demonstrates the use of push buttons and LEDs and how 

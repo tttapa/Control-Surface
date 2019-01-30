@@ -17,10 +17,13 @@ class ManyButtonsSelector_Base : virtual public Selector<N> {
     }
 
     void update() override {
-        for (setting_t i = 0; i < N; i++) {
-            if (ExtIO::digitalRead(buttonPins[i]) == LOW) // TODO: invert?
-                this->set(i);
-        }
+        for (setting_t i = 0; i < N; i++)
+            // TODO: invert?
+            if (ExtIO::digitalRead(buttonPins[i]) == LOW) {
+                if (this->get() != i)
+                    this->set(i);
+                break;
+            }
     }
 
   private:

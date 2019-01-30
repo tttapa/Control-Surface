@@ -20,15 +20,17 @@ TEST(ManyButtonsSelector, press) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
-        .WillOnce(Return(LOW));
+        .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(4))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(5))
-        .WillOnce(Return(HIGH));
+        .WillOnce(Return(LOW));
 
-    EXPECT_CALL(selectable, select(1));
+    EXPECT_CALL(selectable, select(3));
 
     Updatable<>::updateAll();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
+
+// TODO: add test for multiple buttons at the same time
