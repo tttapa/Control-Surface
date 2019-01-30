@@ -13,7 +13,7 @@ Bankable::NoteButton notebtn = {transposer, 5, {0x3C, CHANNEL_1}};
 
 // Instantiate an encoder selector with the encoder wired to pins 2 and 3 and
 // the switch pin connected to pin 4, with 4 pulses per step, without wrapping.
-EncoderSelector<transposer.N> sel = {
+EncoderButtonSelector<transposer.N> sel = {
     transposer,
     {2, 3, 4},
     4,

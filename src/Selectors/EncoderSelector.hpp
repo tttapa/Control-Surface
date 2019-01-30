@@ -70,12 +70,19 @@ class EncoderSelector : public EncoderSelector_Base<N> {
                     uint8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
         : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
                                                            wrap) {}
-    /** @todo */
-    /* EncoderSelector(Selectable<N> &selectable, const EncoderSwitchPinList &pins,
-                    uint8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
-        : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
-                                                           wrap) {} */
 
+    void beginOutput() override {}
+    void updateOutput(setting_t oldSetting, setting_t newSetting) override {}
+};
+
+template <setting_t N>
+class EncoderButtonSelector : public EncoderSelector_Base<N> {
+  public:
+    EncoderButtonSelector(Selectable<N> &selectable,
+                          const EncoderSwitchPinList &pins,
+                          uint8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
+        : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
+                                                           wrap) {}
 
     void beginOutput() override {}
     void updateOutput(setting_t oldSetting, setting_t newSetting) override {}
