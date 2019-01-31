@@ -78,7 +78,6 @@ target_link_libraries(tests
 
 # Add tests
 gtest_discover_tests(tests)
-add_test(NAME Tests COMMAND tests)
 
 # Add documentation target
 add_custom_target(documentation rm -r html && ./Scripts/examples.py && doxygen

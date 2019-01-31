@@ -58,7 +58,7 @@ class MAX7219 : public MAX7219_Base, public ExtendedIOElement {
     }
 
     /**
-     * @brief   The analogWrite function is not deprecated because a MAX7219
+     * @brief   The analogWrite function is deprecated because a MAX7219
      *          is always digital.
      * @param   pin
      *          The output to set.
@@ -66,6 +66,9 @@ class MAX7219 : public MAX7219_Base, public ExtendedIOElement {
      *          The value to set the output to. A value greater or equal to 0x80
      *          will set the output to a `HIGH` state, a value less than 0x80 
      *          will set the output to a `LOW` state.
+     * 
+     * @note    This function is just implemented for compatibility. Don't use
+     *          it in new code.
      */
     void analogWrite(pin_t pin, analog_t val) override
         __attribute__((deprecated)) {
@@ -78,5 +81,5 @@ class MAX7219 : public MAX7219_Base, public ExtendedIOElement {
     }
 
   private:
-    BitArray<64> buffer;
+    BitArray<8 * 8> buffer;
 };

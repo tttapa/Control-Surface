@@ -151,6 +151,13 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
      * @return  The global, unique extended IO pin number for the given pin.
      */
     pin_t operator[](pin_t pin) const;
+
+    /**
+     * @brief Get the number of pins this IO element has.
+     * 
+     * @return The number of pins this IO element has. 
+     */
+    pin_t getLength() const;
     
     /**
      * @brief   Get the largest global extended IO pin number that belongs to

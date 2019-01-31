@@ -37,6 +37,8 @@ pin_t ExtendedIOElement::pin(pin_t p) const {
 
 pin_t ExtendedIOElement::operator[](pin_t p) const { return pin(p); }
 
+pin_t ExtendedIOElement::getLength() const { return length; }
+
 pin_t ExtendedIOElement::getEnd() const { return end; }
 
 pin_t ExtendedIOElement::getStart() const { return start; }
