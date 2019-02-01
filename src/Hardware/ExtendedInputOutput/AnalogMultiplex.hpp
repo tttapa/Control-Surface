@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ExtendedIOElement.hpp"
 #include "ExtendedInputOutput.hpp"
+#include "StaticSizeExtendedIOElement.hpp"
 #include <Helpers/Array.hpp>
 #include <stdlib.h>
 
@@ -18,7 +18,7 @@
  * @ingroup ExtIO
  */
 template <uint8_t N>
-class AnalogMultiplex : public ExtendedIOElement {
+class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
   public:
     /**
      * @brief   Create a new AnalogMultiplex object on the given pins.
@@ -36,8 +36,8 @@ class AnalogMultiplex : public ExtendedIOElement {
      */
     AnalogMultiplex(pin_t analogPin, const Array<pin_t, N> &addressPins,
                     pin_t enablePin = NO_PIN)
-        : ExtendedIOElement(1 << N), analogPin(analogPin),
-          addressPins(addressPins), enablePin(enablePin) {}
+        : analogPin(analogPin), addressPins(addressPins), enablePin(enablePin) {
+    }
 
     /**
      * @brief   Set the pin mode of the analog input pin.  
@@ -60,8 +60,7 @@ class AnalogMultiplex : public ExtendedIOElement {
      * @brief   The digitalWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
-    void digitalWrite(UNUSED_PARAM pin_t pin,
-                      UNUSED_PARAM uint8_t val) override
+    void digitalWrite(UNUSED_PARAM pin_t pin, UNUSED_PARAM uint8_t val) override
         __attribute__((deprecated)) {}
 
     /**
@@ -84,8 +83,7 @@ class AnalogMultiplex : public ExtendedIOElement {
      * @brief   The analogWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
-    void analogWrite(UNUSED_PARAM pin_t pin,
-                     UNUSED_PARAM analog_t val) override
+    void analogWrite(UNUSED_PARAM pin_t pin, UNUSED_PARAM analog_t val) override
         __attribute__((deprecated)) {}
 
     /**

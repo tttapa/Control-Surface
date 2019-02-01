@@ -36,17 +36,6 @@ class OutputBank {
  * @brief   A class that groups MIDI_Element%s and allows the user to change
  *          the MIDI addresses (Controller number or Note number) or the MIDI
  *          channels of these elements.
- *
- * ### In general
- * `Bank::CHANGE_CHANNEL`
- * @f$ c = c_0 + t · s @f$ &emsp; where @f$c@f$ is the effective channel,
- * @f$c_0@f$ is the base channel of the MIDI_Element, @f$t@f$ is the number of
- * tracks per bank, and @f$s@f$ is the current bank setting.
- *
- * `Bank::CHANGE_ADDRESS`
- * @f$ a = a_0 + t · s @f$ &emsp; where @f$a@f$ is the effective address,
- * @f$a_0@f$ is the base address of the MIDI_Element, @f$t@f$ is the number of
- * tracks per bank, and @f$s@f$ is the current bank setting.
  */
 template <setting_t N>
 class Bank : public Selectable<N>, public OutputBank {

@@ -48,12 +48,11 @@ class NoteButtons
      */
     NoteButtons(const OutputBankConfig &config,
                 const Array<Button, NUMBER_OF_BUTTONS> &buttons,
-                uint8_t baseNote, uint8_t baseChannel = 1,
-                uint8_t noteIncrement = 1, uint8_t channelIncrement = 0)
+                const MIDICNChannelAddress &baseAddress,
+                const RelativeMIDICNChannelAddress &incrementAddress)
         : MIDIButtons<DigitalNoteSender::sendOn, DigitalNoteSender::sendOff,
-                      NUMBER_OF_BUTTONS>(config, buttons,
-                                         {baseNote, baseChannel}, noteIncrement,
-                                         channelIncrement) {}
+                      NUMBER_OF_BUTTONS>(config, buttons, baseAddress,
+                                         incrementAddress) {}
 };
 
 } // namespace Bankable

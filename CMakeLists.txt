@@ -41,7 +41,8 @@ set (CMAKE_CXX_COMPILER "g++-8")
 include(GoogleTest)
 enable_testing()
 
-add_definitions("-g3 -O1 -Wall -Wextra -fdiagnostics-show-option -Wsuggest-override")
+add_definitions("-g3 -O1 -Wall -Wextra -Werror \
+-fdiagnostics-show-option -Wsuggest-override")
 
 #include Google Test
 include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googletest/include)

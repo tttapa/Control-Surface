@@ -2,9 +2,12 @@
 
 #pragma once
 
+#include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+
+namespace Bankable {
 
 /**
  * @brief   A class for momentary buttons and switches that send MIDI events.
@@ -15,21 +18,24 @@
  * @see     Button
  */
 template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
-class MIDIButtonLatched : public MIDIOutputElement {
+class MIDIButtonLatched : public BankableMIDIOutput, public MIDIOutputElement {
   protected:
     /**
-     * @brief   Create a new MIDIButtonLatched object on the given pin and 
-     *          address.
+     * @brief   Create a new bankable MIDIButtonLatched object on the given pin
+     *          and address.
      * 
+     * @param   config
+     *          The bank to add this element to.
      * @param   pin
      *          The digital input pin to read from.  
      *          The internal pull-up resistor will be enabled.
      * @param   address
-     *          The MIDI address containing the note number [0, 127], channel
-     *          [1, 16], and optional cable number.
+     *          The MIDI address containing the note/controller number [0, 127],
+     *          channel [1, 16], and optional cable number [0, 15].
      */
-    MIDIButtonLatched(pin_t pin, const MIDICNChannelAddress &address)
-        : button{pin}, address{address} {}
+    MIDIButtonLatched(const OutputBankConfig &config, pin_t pin,
+                      const MIDICNChannelAddress &address)
+        : BankableMIDIOutput{config}, button{pin}, address{address} {}
 
   public:
     void begin() final override { button.begin(); }
@@ -46,7 +52,16 @@ class MIDIButtonLatched : public MIDIOutputElement {
     bool getState() const { return state; }
     void setState(bool state) {
         this->state = state;
-        state ? sendOn(address) : sendOff(address);
+        MIDICNChannelAddress sendAddress = address;
+        if (state) {
+            lock();
+            sendAddress += getAddressOffset();
+            sendOn(sendAddress);
+        } else {
+            sendAddress += getAddressOffset();
+            sendOff(sendAddress);
+            unlock();
+        }
     }
 
   private:
@@ -54,3 +69,5 @@ class MIDIButtonLatched : public MIDIOutputElement {
     const MIDICNChannelAddress address;
     bool state = false;
 };
+
+} // namespace Bankable

@@ -25,7 +25,7 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
     MIDIRotaryEncoder(const EncoderPinList &pins,
                       const MIDICNChannelAddress &address,
                       uint8_t speedMultiply, uint8_t pulsesPerStep)
-        : encoder{pins[0], pins[1]}, address(address),
+        : encoder{pins.A, pins.B}, address(address),
           speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep) {}
 
 // For tests only

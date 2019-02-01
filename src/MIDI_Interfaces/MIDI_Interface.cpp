@@ -74,6 +74,7 @@ void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1) {
     sendImpl(m, c, d1);
 }
 
+// TODO: check for invalid addresses
 void MIDI_Interface::sendNoteOn(MIDICNChannelAddress address,
                                 uint8_t velocity) {
     sendImpl(NOTE_ON, address.getChannel().getRaw(), address.getAddress(),

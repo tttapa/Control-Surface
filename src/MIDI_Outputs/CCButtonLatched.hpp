@@ -3,11 +3,12 @@
 #pragma once
 
 #include <MIDI_Outputs/Abstract/MIDIButtonLatched.hpp>
-#include <MIDI_Senders/DigitalNoteSender.hpp>
+#include <MIDI_Senders/DigitalCCSender.hpp>
 
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **momentary
- *          push button or toggle switch**, and send out MIDI **Note** events.
+ *          push button or toggle switch**, and send out MIDI **Controller 
+ *          Change** events.
  * 
  *          It latches the input, so press once to enable, press again to 
  *          disable (toggle).
@@ -17,22 +18,22 @@
  *
  * @ingroup MIDIOutputElements
  */
-class NoteButtonLatched : public MIDIButtonLatched<DigitalNoteSender::sendOn,
-                                                   DigitalNoteSender::sendOff> {
+class CCButtonLatched : public MIDIButtonLatched<DigitalCCSender::sendOn,
+                                                 DigitalCCSender::sendOff> {
   public:
     /**
-     * @brief   Create a new NoteButtonLatched object on the given pin and with 
+     * @brief   Create a new CCButtonLatched object on the given pin and with 
      *          address.
      * 
      * @param   pin
      *          The digital input pin to read from.  
      *          The internal pull-up resistor will be enabled.
      * @param   address
-     *          The MIDI address containing the note number [0, 127], channel
-     *          [1, 16], and optional cable number.
+     *          The MIDI address containing the controller number [0, 127], 
+     *          channel [1, 16], and optional cable number.
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    NoteButtonLatched(pin_t pin, const MIDICNChannelAddress &address)
+    CCButtonLatched(pin_t pin, const MIDICNChannelAddress &address)
         : MIDIButtonLatched{pin, address} {}
 };

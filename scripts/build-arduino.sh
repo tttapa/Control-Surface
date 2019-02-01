@@ -6,7 +6,9 @@ arduino=$HOME/opt/arduino-1.8.5
 version=10805
 libraries=$HOME/Arduino/libraries
 
-files=($(find ../examples -name '*.ino'))
+test_files=($(find ../test -name '*.ino'))
+example_files=($(find ../examples -name '*.ino'))
+files=("${test_files[@]}" "${example_files[@]}")
 
 for file in "${files[@]}"
 do 
@@ -29,6 +31,6 @@ do
         exit $result
     fi
 done
-echo -e "\e[1;32m=======================================\e[0m\n"
-echo -e "\e[1;32m   All examples built successfully ✔   \e[0m\n"
-echo -e "\e[1;32m=======================================\e[0m\n"
+echo -e "\e[1;32m=======================================\e[0m"
+echo -e "\e[1;32m   All examples built successfully ✔   \e[0m"
+echo -e "\e[1;32m=======================================\e[0m"

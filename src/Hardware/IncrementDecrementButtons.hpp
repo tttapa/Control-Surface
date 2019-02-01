@@ -13,6 +13,7 @@ class IncrementDecrementButtons {
         decrementButton.begin();
     }
 
+    // TODO: add states for initial press
     enum State { Nothing = 0, Increment, Decrement, Reset };
 
     State getState() {

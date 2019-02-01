@@ -1,12 +1,13 @@
 #pragma once
 
+#include "StaticSizeExtendedIOElement.hpp"
 #include <Hardware/LEDs/MAX7219_Base.hpp>
 #include <Helpers/BitArray.hpp>
 
-class MAX7219 : public MAX7219_Base, public ExtendedIOElement {
+class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
 
   public:
-    MAX7219(pin_t loadPin) : MAX7219_Base(loadPin), ExtendedIOElement(8 * 8) {}
+    MAX7219(pin_t loadPin) : MAX7219_Base(loadPin) {}
 
     void begin() override { init(); }
 

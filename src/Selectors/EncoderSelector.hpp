@@ -14,13 +14,8 @@ template <setting_t N>
 class EncoderSelector_Base : virtual public Selector<N> {
   public:
     EncoderSelector_Base(const EncoderSwitchPinList &pins,
-                         uint8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
-        : encoder{pins[0], pins[1]}, switchPin(pins[2]),
-          pulsesPerStep(pulsesPerStep), wrap(wrap) {}
-
-    EncoderSelector_Base(const EncoderPinList &pins, uint8_t pulsesPerStep = 4,
-                         Wrap wrap = Wrap::Wrap)
-        : encoder{pins[0], pins[1]}, switchPin(NO_PIN),
+                         int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
+        : encoder{pins.A, pins.B}, switchPin(pins.switchPin),
           pulsesPerStep(pulsesPerStep), wrap(wrap) {}
 
     void beginInput() override {
@@ -54,7 +49,7 @@ class EncoderSelector_Base : virtual public Selector<N> {
   private:
     Encoder encoder;
     const pin_t switchPin;
-    const uint8_t pulsesPerStep;
+    const int8_t pulsesPerStep;
     Wrap wrap;
 
     long previousPosition = 0;
@@ -66,21 +61,8 @@ class EncoderSelector_Base : virtual public Selector<N> {
 template <setting_t N>
 class EncoderSelector : public EncoderSelector_Base<N> {
   public:
-    EncoderSelector(Selectable<N> &selectable, const EncoderPinList &pins,
-                    uint8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
-        : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
-                                                           wrap) {}
-
-    void beginOutput() override {}
-    void updateOutput(setting_t oldSetting, setting_t newSetting) override {}
-};
-
-template <setting_t N>
-class EncoderButtonSelector : public EncoderSelector_Base<N> {
-  public:
-    EncoderButtonSelector(Selectable<N> &selectable,
-                          const EncoderSwitchPinList &pins,
-                          uint8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
+    EncoderSelector(Selectable<N> &selectable, const EncoderSwitchPinList &pins,
+                    int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
         : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
                                                            wrap) {}
 

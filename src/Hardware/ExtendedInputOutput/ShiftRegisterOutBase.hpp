@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ExtendedIOElement.hpp"
+#include "StaticSizeExtendedIOElement.hpp"
 #include <Helpers/BitArray.hpp>
 
 /**
@@ -15,7 +15,7 @@
  * @ingroup ExtIO
  */
 template <uint8_t N>
-class ShiftRegisterOutBase : public ExtendedIOElement {
+class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
   protected:
     /**
      * @brief   Create a new ShiftRegisterOutBase object with a given bit order,

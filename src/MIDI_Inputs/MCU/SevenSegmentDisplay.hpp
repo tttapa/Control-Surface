@@ -35,8 +35,6 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
         uint8_t decimalPt = (midimsg.data2 & 0x40) << 1;
         uint8_t data2 = midimsg.data2 & 0x3F;
         uint8_t character = data2 >= 0x20 ? data2 : data2 + 0x40;
-        DEBUGREF(F("\tCharacter @") << getBaseAddress() << ':' << index << '\t'
-                                    << character << (decimalPt ? '.' : ' '));
         character |= decimalPt;
         text[index] = character;
         return true;

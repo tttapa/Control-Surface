@@ -26,7 +26,7 @@ class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
      */
     MIDIButton(const OutputBankConfig &config, pin_t pin,
                const MIDICNChannelAddress &address)
-        : BankableMIDIOutput(config), button{pin}, address(address) {}
+        : BankableMIDIOutput{config}, button{pin}, address(address) {}
 
     void begin() final override { button.begin(); }
     void update() final override {

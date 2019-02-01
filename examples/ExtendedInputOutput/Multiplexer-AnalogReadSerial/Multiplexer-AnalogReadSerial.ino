@@ -13,7 +13,7 @@
  * lines and the same analog input. Otherwise, just connect the enable
  * pin to ground.
  * 
- * If you are using a 3-bit multiplexer, like the CD74HC4015, you can
+ * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
  * uncomment the code specific to this multiplexer, and only use three
  * address pins.
  *  
@@ -23,7 +23,7 @@
  * serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed
  * or plotted.
  * 
- * Written by Pieter P, 30-01-2019  
+ * Written by Pieter P, 31-01-2019  
  * https://github.com/tttapa/Control-Surface
  */
 

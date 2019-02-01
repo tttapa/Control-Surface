@@ -22,8 +22,16 @@ using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
 template <size_t N>
 using PinList = Array<pin_t, N>;
 
-using EncoderPinList = Array<uint8_t, 2>;
-using EncoderSwitchPinList = Array<uint8_t, 3>;
+struct EncoderSwitchPinList {
+    uint8_t A; 
+    uint8_t B;
+    pin_t switchPin = NO_PIN;
+};
+
+struct EncoderPinList {
+    uint8_t A; 
+    uint8_t B;
+};
 
 class MIDICNChannelAddress;
 

@@ -30,9 +30,8 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
                       const EncoderPinList &pins,
                       const MIDICNChannelAddress &address,
                       uint8_t speedMultiply, uint8_t pulsesPerStep)
-        : BankableMIDIOutput(config), encoder{pins[0], pins[1]},
-          address(address), speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep) {}
+        : BankableMIDIOutput(config), encoder{pins.A, pins.B}, address(address),
+          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep) {}
 
 // For tests only
 #ifndef ARDUINO
