@@ -1,7 +1,11 @@
+/* ✔ */
+
 #pragma once
 
 #include <Def/Def.hpp>
 
+/// A struct for saving a MIDI address consisting of a 7-bit address, a 4-bit
+/// channel, and a 4-bit cable number.
 struct __attribute__((packed)) RawMIDICNChannelAddress {
     bool valid : 1;
     uint8_t address : 7;
@@ -9,18 +13,21 @@ struct __attribute__((packed)) RawMIDICNChannelAddress {
     uint8_t cableNumber : 4;
 };
 
+/// A class for saving a MIDI channel and cable number.
 class MIDICNChannel {
     friend class MIDICNChannelAddress;
 
   public:
     MIDICNChannel() : addresses{0, 0, 0, 0} {}
     MIDICNChannel(Channel channel, int cableNumber = 0)
-        : addresses{1, 0, uint8_t(channel.getRaw()), (uint8_t)cableNumber} {}
+        : addresses{1, 0, (uint8_t)channel.getRaw(), (uint8_t)cableNumber} {}
 
   private:
     RawMIDICNChannelAddress addresses;
 };
 
+/// A class for saving an offset to a MIDI address.
+/// It can be added to a MIDICNChannelAddress.
 class RelativeMIDICNChannelAddress {
     friend class MIDICNChannelAddress;
 
@@ -36,6 +43,8 @@ class RelativeMIDICNChannelAddress {
     RawMIDICNChannelAddress addresses;
 };
 
+/// A type-safe utility class for saving a MIDI address consisting of a 7-bit 
+/// address, a 4-bit channel, and a 4-bit cable number.
 class MIDICNChannelAddress {
   public:
     MIDICNChannelAddress() : addresses{0, 0, 0, 0} {}
@@ -53,55 +62,19 @@ class MIDICNChannelAddress {
     MIDICNChannelAddress(const MIDICNChannel &address)
         : addresses(address.addresses) {}
 
-    MIDICNChannelAddress &operator+=(const RelativeMIDICNChannelAddress &rhs) {
-        if (!this->isValid() || !rhs.isValid()) {
-            this->addresses.valid = false;
-        } else {
-            this->addresses.address += rhs.addresses.address;
-            this->addresses.channel += rhs.addresses.channel;
-            this->addresses.cableNumber += rhs.addresses.cableNumber;
-        }
-        return *this;
-    }
+    MIDICNChannelAddress &operator+=(const RelativeMIDICNChannelAddress &rhs);
 
-    MIDICNChannelAddress &operator-=(const RelativeMIDICNChannelAddress &rhs) {
-        if (!this->isValid() || !rhs.isValid()) {
-            this->addresses.valid = false;
-        } else {
-            this->addresses.address -= rhs.addresses.address;
-            this->addresses.channel -= rhs.addresses.channel;
-            this->addresses.cableNumber -= rhs.addresses.cableNumber;
-        }
-        return *this;
-    }
+    MIDICNChannelAddress &operator-=(const RelativeMIDICNChannelAddress &rhs);
 
     MIDICNChannelAddress
-    operator+(const RelativeMIDICNChannelAddress &rhs) const {
-        MIDICNChannelAddress copy = *this;
-        copy += rhs;
-        return copy;
-    }
+    operator+(const RelativeMIDICNChannelAddress &rhs) const;
 
     MIDICNChannelAddress
-    operator-(const RelativeMIDICNChannelAddress &rhs) const {
-        MIDICNChannelAddress copy = *this;
-        copy -= rhs;
-        return copy;
-    }
+    operator-(const RelativeMIDICNChannelAddress &rhs) const;
 
-    bool operator==(const MIDICNChannelAddress &rhs) const {
-        return this->addresses.valid && rhs.addresses.valid &&
-               this->addresses.address == rhs.addresses.address &&
-               this->addresses.channel == rhs.addresses.channel &&
-               this->addresses.cableNumber == rhs.addresses.cableNumber;
-    }
+    bool operator==(const MIDICNChannelAddress &rhs) const;
 
-    bool operator!=(const MIDICNChannelAddress &rhs) const {
-        return this->addresses.valid && rhs.addresses.valid &&
-               !(this->addresses.address == rhs.addresses.address &&
-                 this->addresses.channel == rhs.addresses.channel &&
-                 this->addresses.cableNumber == rhs.addresses.cableNumber);
-    }
+    bool operator!=(const MIDICNChannelAddress &rhs) const;
 
     uint8_t getAddress() const { return addresses.address; }
 
@@ -114,22 +87,11 @@ class MIDICNChannelAddress {
     explicit operator bool() const { return isValid(); }
 
     static bool matchSingle(const MIDICNChannelAddress &toMatch,
-                            const MIDICNChannelAddress &base) {
-        return base == toMatch;
-    }
+                            const MIDICNChannelAddress &base);
 
     static bool matchAddressInRange(const MIDICNChannelAddress &toMatch,
                                     const MIDICNChannelAddress &base,
-                                    uint8_t length) {
-        bool valid = base.addresses.valid && toMatch.addresses.valid;
-        bool addressInRange =
-            base.addresses.address <= toMatch.addresses.address &&
-            base.addresses.address + length > toMatch.addresses.address;
-        bool equalChannelAndCN =
-            base.addresses.channel == toMatch.addresses.channel &&
-            base.addresses.cableNumber == toMatch.addresses.cableNumber;
-        return valid && addressInRange && equalChannelAndCN;
-    }
+                                    uint8_t length);
 
   private:
     RawMIDICNChannelAddress addresses;

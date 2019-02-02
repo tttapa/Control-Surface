@@ -26,7 +26,7 @@ class Selector : public Updatable<> {
     virtual void beginInput() = 0;
     virtual void beginOutput() = 0;
 
-    void begin() final override {
+    void begin() override {
         beginOutput();
         reset();
         beginInput();

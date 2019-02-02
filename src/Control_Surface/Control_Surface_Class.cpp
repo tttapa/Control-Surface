@@ -1,6 +1,7 @@
 #include "Control_Surface_Class.hpp"
 #include <Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
+#include <MIDI_Inputs/MIDIInputElementPC.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <MIDI_Inputs/MIDIInputElementNote.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -27,6 +28,7 @@ void Control_Surface_::begin() {
     MIDI().setCallbacks(this);
     DisplayInterface::beginAll(); // initialize all displays
     MIDIInputElementCC::beginAll();
+    MIDIInputElementPC::beginAll();
     MIDIInputElementChannelPressure::beginAll();
     MIDIInputElementNote::beginAll();
     Updatable<>::beginAll();
@@ -98,6 +100,11 @@ void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
             DEBUGFN(F("Updating Channel Pressure elements with new "
                       "MIDI message."));
             MIDIInputElementChannelPressure::updateAllWith(midimsg);
+        } else if (midimsg.type == PROGRAM_CHANGE) {
+            // Channel Pressure
+            DEBUGFN(F("Updating Program Change elements with new "
+                      "MIDI message."));
+            MIDIInputElementPC::updateAllWith(midimsg);
         }
     }
 }

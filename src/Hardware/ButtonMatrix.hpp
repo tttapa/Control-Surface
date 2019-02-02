@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include <Settings/SettingsWrapper.hpp>
@@ -20,10 +22,12 @@ class ButtonMatrix {
      *
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
-     *          matrix. These pins will be driven LOW (Lo-Z).
+     *          matrix.  
+     *          **⚠** These pins will be driven LOW (Lo-Z).
      * @param   colPins
      *          A list of pin numbers connected to the columns of the button
-     *          matrix. These pins will be used as inputs, and the internal
+     *          matrix.  
+     *          These pins will be used as inputs (Hi-Z), and the internal 
      *          pull-up resistor will be enabled.
      */
     ButtonMatrix(const PinList<nb_rows> &rowPins,
@@ -33,10 +37,29 @@ class ButtonMatrix {
      */
     virtual ~ButtonMatrix() = default;
 
+    /**
+     * @brief   Initialize (enable internal pull-up resistors on column pins).
+     */
     void begin();
+
+    /**
+     * @brief   Scan the matrix, read all button states, and call the
+     *          onButtonChanged callback.
+     */
     void refresh();
 
   private:
+    /**
+     * @brief   The callback function that is called whenever a button changes
+     *          state.
+     * 
+     * @param   row
+     *          The row of the button that changed state.
+     * @param   col
+     *          The column of the button that changed state.
+     * @param   state
+     *          The new state of the button.
+     */
     virtual void onButtonChanged(uint8_t row, uint8_t col, bool state) = 0;
 
     static inline uint8_t positionToBits(uint8_t col, uint8_t row);

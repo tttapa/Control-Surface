@@ -1,6 +1,5 @@
 #include "ButtonMatrix.hpp"
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
-#include <Helpers/Copy.hpp>
 #include <string.h>
 
 using namespace ExtIO;
@@ -15,17 +14,15 @@ ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const PinList<nb_rows> &rowPins,
 template <uint8_t nb_rows, uint8_t nb_cols>
 void ButtonMatrix<nb_rows, nb_cols>::refresh() {
     unsigned long now = millis();
-    // only update every 25 ms (crude software
-    // debounce). Edit this in Settings/Settings.hpp
+    // only update 25 ms after previous change (crude software debounce).
+    // Edit this in Settings/Settings.hpp
     if (now - prevRefresh < BUTTON_DEBOUNCE_TIME)
         return;
 
-    for (size_t row = 0; row < nb_rows; row++) // scan through all rows
-    {
-        pinMode(rowPins[row], OUTPUT); // make the current row Lo-Z 0V
-        for (size_t col = 0; col < nb_cols; col++) // scan through all columns
-        {
-            bool state = digitalRead(colPins[col]); // read the state
+    for (size_t row = 0; row < nb_rows; row++) { // scan through all rows
+        pinMode(rowPins[row], OUTPUT);           // make the current row Lo-Z 0V
+        for (size_t col = 0; col < nb_cols; col++) { // scan through all columns
+            bool state = digitalRead(colPins[col]);  // read the state
             if (state != getPrevState(col, row)) {
                 // if the state changed since last time
                 // execute the handler

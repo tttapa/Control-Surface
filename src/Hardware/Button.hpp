@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
@@ -11,11 +13,12 @@ class Button {
     /**
      * @brief   Construct a new Button object.
      * 
-     * **This constructor is not recommended.**
+     * **This constructor should not be used.**  
      * It is just a way to easily create arrays of buttons, and initializing
      * them later.
      */
     Button() : pin(NO_PIN) {}
+
     /**
      * @brief   Construct a new Button object.
      *
@@ -25,15 +28,20 @@ class Button {
      */
     Button(pin_t pin);
 
+    /**
+     * @brief   Initialize (enable the internal pull-up resistor).
+     */
     void begin();
 
     /**
-     * @brief Invert the state of all buttons (button pressed is HIGH instead of
-     * LOW).
+     * @brief   Invert the state of all buttons, or of this specific button 
+     *          (button pressed is `HIGH` instead of `LOW`).
      *
-     * @note This affects **all** Button objects.
+     * @note    This affects **all** Button objects if 
+     *          `INDIVIDUAL_BUTTON_INVERT` is not defined.
+     * 
+     * @see     INDIVIDUAL_BUTTON_INVERT
      */
-    
     INDIVIDUAL_BUTTON_INVERT_STATIC void invert();
 
     /**
@@ -81,8 +89,8 @@ class Button {
     static const char *getName(State state);
 
     /** 
-     * @brief   Return the time in milliseconds that the button has been stable 
-     *          for.
+     * @brief   Return the time (in milliseconds) that the button has been 
+     *          stable for.
      */
     unsigned long stableTime();
 
@@ -99,6 +107,7 @@ class Button {
     static bool invertState;
 #endif
 
-    /// Edit this in Settings/Settings.hpp
+    /// Edit this in Settings.hpp
+    /// @see    BUTTON_DEBOUNCE_TIME
     constexpr static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
 };

@@ -1,5 +1,6 @@
 #pragma once
 
+/// Type-safe class for frequency values.
 class Frequency {
   public:
     explicit constexpr Frequency(unsigned long hertz) : hertz(hertz) {}

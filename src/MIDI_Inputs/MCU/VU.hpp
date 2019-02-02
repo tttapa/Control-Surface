@@ -2,7 +2,6 @@
 
 #include <Banks/BankableMIDIInput.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
-#include <Helpers/Copy.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <string.h>
 
@@ -29,7 +28,8 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
   public:
     VU_Base(); // Just for virtual inheritance
     VU_Base(const MIDICNChannelAddress &address, unsigned int decayTime)
-        : MIDIInputElementChannelPressure{address - 1}, decayTime(decayTime) {}
+        : MIDIInputElementChannelPressure{address - 1}, // tracks are zero-based
+          decayTime(decayTime) {}
 
     /** Return the VU meter value as an integer in [0, 12]. */
     uint8_t getValue() const override { return getValueHelper(getRawValue()); }

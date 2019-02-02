@@ -31,7 +31,7 @@ class MIDIInputElementChannelPressure
      * @brief   Reset all MIDIInputElementChannelPressure elements to their 
      *          initial state.
      *
-     * @see     MIDIInputElementNote#reset
+     * @see     MIDIInputElementChannelPressure#reset
      */
     static void resetAll() {
         for (MIDIInputElementChannelPressure &el : elements)

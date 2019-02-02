@@ -1,92 +1,61 @@
+/* ✔ */
+
 #pragma once
 
 #include "Button.hpp"
 
+/**
+ * @brief   A class for buttons that increment and decrement some counter or 
+ *          setting.
+ * 
+ * It behaves the same way as a computer keyboard: when you press the increment
+ * (decrement) button, it increments (decrements) the counter once. 
+ * If you keep on pressing it for longer than a certain threshold, it keeps on 
+ * incrementing (decrementing) at a faster rate, until you release it.  
+ * If both the increment and the decrement button are pressed at once, it resets
+ * the counter.
+ */
 class IncrementDecrementButtons {
   public:
+    /** 
+     * @brief   Create a IncrementDecrementButtons object.
+     * 
+     * @param   incrementButton
+     *          The button to increment the counter.  
+     *          The button is copied.
+     * @param   decrementButton
+     *          The button to decrement the counter.  
+     *          The button is copied.
+     */
     IncrementDecrementButtons(const Button &incrementButton,
                               const Button &decrementButton)
         : incrementButton(incrementButton), decrementButton(decrementButton) {}
 
+    /// @see     Button::begin
     void begin() {
         incrementButton.begin();
         decrementButton.begin();
     }
 
-    // TODO: add states for initial press
-    enum State { Nothing = 0, Increment, Decrement, Reset };
+    /**
+     * @brief   An enumeration of the different actions to be performed by the
+     *          counter.
+     * @todo    Add states for initial press.
+     */
+    enum State {
+        Nothing = 0, ///< The counter must not be incremented.
+        Increment,   ///< The counter must be incremented.
+        Decrement,   ///< The counter must be decremented.
+        Reset,       ///< The counter must be reset to the initial value.
+    };
 
-    State getState() {
-        Button::State incrState = incrementButton.getState();
-        Button::State decrState = decrementButton.getState();
-
-        if (decrState == Button::Released && incrState == Button::Released) {
-            // Both released
-        } else if ((decrState == Button::Rising &&
-                    incrState == Button::Released) ||
-                   (incrState == Button::Rising &&
-                    decrState == Button::Released)) {
-            // One released, the other rising → nothing
-            // now both released, so go to initial state
-            longPressState = Initial;
-        } else if (incrState == Button::Falling &&
-                   decrState == Button::Falling) {
-            // Both falling → reset
-            // (rather unlikely, but just in case)
-            longPressState = AfterReset;
-            return Reset;
-        } else if (incrState == Button::Falling) {
-            if (decrState == Button::Pressed) {
-                // One pressed, the other falling → reset
-                longPressState = AfterReset;
-                return Reset;
-            } else {
-                // Increment falling, the other released → increment
-                return Increment;
-            }
-        } else if (decrState == Button::Falling) {
-            if (incrState == Button::Pressed) {
-                // One pressed, the other falling → reset
-                longPressState = AfterReset;
-                return Reset;
-            } else {
-                // Decrement falling, the other released → decrement
-                return Decrement;
-            }
-        } else if (incrState == Button::Pressed &&
-                   decrState == Button::Pressed) {
-            // Both pressed → nothing
-        } else if (longPressState != AfterReset &&
-                   incrState == Button::Pressed) {
-            // Not reset and increment pressed → long press?
-            if (longPressState == LongPress) {
-                if (millis() - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
-                    longPressRepeat += LONG_PRESS_REPEAT_DELAY;
-                    return Increment;
-                }
-            } else if (incrementButton.stableTime() >= LONG_PRESS_DELAY) {
-                longPressState = LongPress;
-                longPressRepeat = millis();
-                return Increment;
-            }
-        } else if (longPressState != AfterReset &&
-                   decrState == Button::Pressed) {
-            // Not reset and decrement pressed → long press?
-            if (longPressState == LongPress) {
-                if (millis() - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
-                    longPressRepeat += LONG_PRESS_REPEAT_DELAY;
-                    return Decrement;
-                }
-            } else if (decrementButton.stableTime() >= LONG_PRESS_DELAY) {
-                longPressState = LongPress;
-                longPressRepeat = millis();
-                return Decrement;
-            }
-        }
-        return Nothing;
-    }
+    /**
+     * @brief   Get the state of the increment button.
+     */
+    State getState();
 
 #ifdef INDIVIDUAL_BUTTON_INVERT
+    /// @see    Button::invert
     void invert() {
         incrementButton.invert();
         decrementButton.invert();

@@ -17,7 +17,7 @@ class Selectable {
         if (setting >= N) {
             ERROR(F("Error: Setting ")
                       << +setting
-                      << F(" is not less than the number of programs (") << +N
+                      << F(" is not less than the number of settings (") << +N
                       << ')',
                   0xFFFE);
             return N - 1;

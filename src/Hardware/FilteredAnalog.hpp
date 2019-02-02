@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include <Def/Def.hpp>
@@ -33,14 +35,20 @@ class FilteredAnalog {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the 10-bit analog value as a parameter, and
-     *          should return a 10-bit value.
+     *          should take the filtered value (of `PRECISION` bits wide) as a 
+     *          parameter, and should return a value of `PRECISION` bits.
+     * 
+     * @note    Applying the mapping function before filtering could result in
+     *          the noise being amplified to such an extent that filtering it
+     *          afterwards would be ineffective.  
+     *          That's why the mapping function is applied after filtering and
+     *          hysteresis.
      */
     void map(MappingFunction fn);
 
     /**
-     * @brief Read the analog input value, apply the mapping function, and
-     * update the average.
+     * @brief   Read the analog input value, apply the mapping function, and
+     *          update the average.
      *
      * @return  true
      *          The value changed since last time it was updated.
@@ -84,7 +92,7 @@ using namespace ExtIO;
 
 template <uint8_t PRECISION>
 FilteredAnalog<PRECISION>::FilteredAnalog(pin_t analogPin)
-    : analogPin(analogPin) {} // Constructor
+    : analogPin(analogPin) {}
 
 template <uint8_t PRECISION>
 bool FilteredAnalog<PRECISION>::update() {
@@ -96,9 +104,9 @@ bool FilteredAnalog<PRECISION>::update() {
 
 template <uint8_t PRECISION>
 uint8_t FilteredAnalog<PRECISION>::getValue() const {
-    uint8_t value = hysteresis.getValue();
-    if (mapFn != nullptr)             // if a map function is specified
-        value = mapFn(value);         // apply the map function to the value
+    uint8_t value = getRawValue();
+    if (mapFn != nullptr)     // if a map function is specified
+        value = mapFn(value); // apply the map function to the value
     return value;
 }
 

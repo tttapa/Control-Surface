@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include <MIDI_Interfaces/MIDI_Interface.hpp>
@@ -12,13 +14,15 @@
  */
 class Control_Surface_ : public MIDI_Callbacks {
   public:
+    // Copying is not allowed
+    Control_Surface_(Control_Surface_ const &) = delete;
+    void operator=(Control_Surface_ const &) = delete;
+
     /**
      * @brief   Return the static Control_Surface_ instance.
      *          (Control_Surface_ is a singleton.)
      */
     static Control_Surface_ &getInstance();
-    Control_Surface_(Control_Surface_ const &) = delete;
-    void operator=(Control_Surface_ const &) = delete;
 
     /**
      * @brief   Initialize the Control_Surface.
@@ -35,14 +39,23 @@ class Control_Surface_ : public MIDI_Callbacks {
      *
      * @return  A reference to the Control Surface's MIDI interface.
      * 
-     * @todo    This violate's the Law of Demeter
+     * @todo    This violate's the Law of Demeter.
      */
     MIDI_Interface &MIDI();
 
+    /** 
+     * @brief   Update all MIDI interfaces to receive new MIDI events.
+     */
     void updateMidiInput();
 
+    /**
+     * @brief   Update all MIDIInputElement#s.
+     */
     void updateInputs();
 
+    /** 
+     * @brief   Clear, draw and display all displays.
+     */
     void updateDisplays();
 
   private:
@@ -63,8 +76,11 @@ class Control_Surface_ : public MIDI_Callbacks {
      */
     void onSysExMessage(MIDI_Interface &midi) override;
 
+    /// A timer to know when to update the analog inputs.
     Timer<micros> potentiometerTimer = {FILTERED_INPUT_UPDATE_INTERVAL};
+    /// A timer to know when to refresh the displays.
     Timer<micros> displayTimer = {1000000UL / MAX_FPS};
 };
 
+/// A predefined instance of the Control Surface to use in the Arduino sketches.
 extern Control_Surface_ &Control_Surface;

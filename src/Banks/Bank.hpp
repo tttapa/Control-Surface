@@ -1,30 +1,56 @@
+/* ✔ */
+
 #pragma once
 
 #include <Helpers/Debug.hpp>
 #include <Helpers/Error.hpp>
 #include <Helpers/LinkedList.hpp>
 #include <Selectors/Selectable.hpp>
-#include <stddef.h>
-#include <stdint.h>
 
 template <setting_t N>
 class BankableMIDIInput;
 
 class BankableMIDIOutput;
-class BankableMIDIOutput;
 
+/**
+ * @brief   A class for changing the address of BankableMIDIOutput#s.
+ */
 class OutputBank {
   public:
+    /**
+     * @brief   Create a new OutputBank object.
+     * 
+     * @param   tracksPerBank
+     *          The number of addresses/tracks to skip for each bank setting.  
+     *          Must be strictly positive.
+     * @param   initialSelection
+     *          The initial bank setting.
+     */
     OutputBank(uint8_t tracksPerBank = 1, setting_t initialSelection = 0)
         : tracksPerBank(tracksPerBank), bankSetting(initialSelection) {
-        if (tracksPerBank == 0) {
+        if (tracksPerBank == 0)
             FATAL_ERROR(
                 F("Error: A Bank must have a non-zero number of tracks."),
                 0x4573);
-        }
     }
+
+    /**
+     * @brief   Select the given bank setting.
+     * 
+     * @param   setting
+     *          The new setting to select.
+     */
     void select(setting_t setting) { bankSetting = setting; }
+
+    /**
+     * @brief   Get the current bank setting.
+     */
     virtual setting_t getSelection() const { return bankSetting; }
+
+    /**
+     * @brief   Get the number of tracks per bank.
+     * This is the number of addresses/tracks to skip for each bank setting.
+     */
     uint8_t getTracksPerBank() const { return tracksPerBank; }
 
   private:
@@ -33,9 +59,12 @@ class OutputBank {
 };
 
 /**
- * @brief   A class that groups MIDI_Element%s and allows the user to change
- *          the MIDI addresses (Controller number or Note number) or the MIDI
- *          channels of these elements.
+ * @brief   A class that groups Bankable BankableMIDIOutput%s and 
+ *          BankableMIDIInput#s, and allows the user to change the addresses 
+ *          of these elements.
+ * 
+ * @tparam  N 
+ *          The number of banks.
  */
 template <setting_t N>
 class Bank : public Selectable<N>, public OutputBank {
@@ -46,9 +75,8 @@ class Bank : public Selectable<N>, public OutputBank {
      * @brief   Construct a new Bank object.
      *
      * @param   tracksPerBank
-     *          The number of tracks (i.e. addresses or channels) that
-     *          are skipped when the bank setting changes.  
-     *          Must be greater than zero.
+     *          The number of addresses/tracks to skip for each bank setting.  
+     *          Must be strictly positive.
      * @param   initialSelection
      *          The initial bank setting.
      */
@@ -57,12 +85,12 @@ class Bank : public Selectable<N>, public OutputBank {
           OutputBank(tracksPerBank, initialSelection) {}
 
     /**
-     * @brief   Set the Bank Setting to the given value.
+     * @brief   Select the given bank setting.
      * 
-     * All BankableMIDIInput will be updated.
+     * All BankableMIDIInput#s will be updated.
      *
      * @param   bankSetting
-     *          The new Bank Setting.
+     *          The new setting to select.
      */
     void select(setting_t bankSetting) override;
 
@@ -87,6 +115,14 @@ class Bank : public Selectable<N>, public OutputBank {
      */
     void remove(BankableMIDIInput<N> *bankable);
 
+    /**
+     * @brief   A linked list of all BankableMIDIInput elements that have been
+     *          added to this bank, and that should be updated when the bank
+     *          setting changes.
+     * 
+     * The list is updated automatically when BankableMIDIInput elements are
+     * created or destroyed.
+     */
     DoublyLinkedList<BankableMIDIInput<N>> inputBankables;
 };
 

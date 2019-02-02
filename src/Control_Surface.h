@@ -92,6 +92,8 @@
 #include <Selectors/ProgramChanger.hpp>
 #include <Selectors/Transposer.hpp>
 
+#include <MIDI_Inputs/ProgramChangeSelector.hpp>
+
 // ---------------------------- MIDI Interfaces ----------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.hpp>
 #include <MIDI_Interfaces/SerialMIDI_Interface.hpp>

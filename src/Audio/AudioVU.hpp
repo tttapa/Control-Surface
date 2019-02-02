@@ -18,11 +18,11 @@ class AudioVU : public IVU {
      * @brief   Create a new AudioVU object.
      * 
      * @param   level
-     *          The Teensy Audio peak analyzer object.
+     *          The Teensy Audio peak analyzer object.  
      *          Note that it is kept by reference, so it must outlive the 
      *          AudioVU instance.
      * @param   gain
-     *          A multiplier to correct the amplitude.
+     *          A multiplier to calibrate the VU meter.
      * @param   max
      *          The max output, or the length of the output scale:
      *          `getValue` will output a number in [0, max].

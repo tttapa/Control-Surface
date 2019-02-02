@@ -7,7 +7,7 @@
 /**
  * @brief   An enumeration type to set an LED display to either bar or dot mode.
  */
-enum class  DotBarMode : bool {
+enum class DotBarMode : bool {
     Bar = false, ///< Turn on a range of LEDs up to the active LED.
     Dot = true,  ///< Turn on only the active LED
 };
@@ -47,7 +47,7 @@ class DotBarDisplayLEDs : public LEDs<N> {
     void display(float value) const { display(uint8_t(value * (N + 1))); }
 
     /**
-     * @brief   Set the mode.
+     * @brief   Set the mode to either dot or bar mode.
      * 
      * @param   mode 
      *          The mode.
