@@ -4,7 +4,7 @@
 
 using timefunction = unsigned long (*)();
 
-template <timefunction time>
+template <timefunction time = micros>
 class Timer {
   public:
     Timer(unsigned long interval) : interval(interval) {}

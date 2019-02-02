@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include <stdint.h>
@@ -56,19 +58,57 @@ int_t EMA<K, int_t>::filter(int_t input) {
     input = input << (K * 2);
     int_t difference = input - filtered;
     filtered = filtered + (difference >> K);
+    // Left shift for division can result in an error of 1 for negative numbers
+    // however, it's not a problem in most cases.
     return (filtered + fixedPointAHalf) >> (K * 2);
 }
 
 // -------------------------------------------------------------------------- //
 
+/**
+ * @brief   A class for single-pole infinite impulse response filters
+ *          or exponential moving average filters.
+ * 
+ * This version uses floating point maths.
+ * 
+ * Difference equation: @f$ y[n] = \alpha·x[n]+(1-\alpha)·y[n-1] @f$
+ * @f$ x @f$ is the input sequence, and @f$ y @f$ is the output sequence.
+ *
+ * [An in-depth explanation of the EMA filter]
+ * (https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential%20Moving%20Average/)
+ */
 class EMA_f {
   public:
+    /**
+     * @brief   Create an exponential moving average filter with a pole at the
+     *          given location.
+     * 
+     * @param   pole
+     *          The pole of the filter (@f$1-\alpha@f$).
+     */
     EMA_f(float pole) : alpha(1 - pole) {}
+
+    /**
+     * @brief   Filter the input: Given @f$ x[n] @f$, calculate @f$ y[n] @f$.
+     *
+     * @param   value
+     *          The new raw input value.
+     * @return  The new filtered output value.
+     */
     float filter(float value) {
-      filtered = filtered + (value - filtered) * alpha;
-      return filtered;
+        filtered = filtered + (value - filtered) * alpha;
+        return filtered;
     }
+
+    /**
+     * @brief   Filter the input: Given @f$ x[n] @f$, calculate @f$ y[n] @f$.
+     *
+     * @param   value
+     *          The new raw input value.
+     * @return  The new filtered output value.
+     */
     float operator()(float value) { return filter(value); }
+
   private:
     const float alpha;
     float filtered = 0;

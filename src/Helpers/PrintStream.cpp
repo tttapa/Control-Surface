@@ -12,7 +12,7 @@
 
 uint8_t formatPrintStream = DEC;
 bool boolalphaPrintStream = false;
-bool leadingZerosPrintStream = true;
+bool leadingZerosPrintStream = false;
 uint8_t precisionPrintStream = 2;
 char byteSeparatorPrintStream = '\0';
 enum : char{

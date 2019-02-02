@@ -1,22 +1,40 @@
+/* ✔ */
+
 #pragma once
 
+#include <Def/Def.hpp>
 #include <Helpers/Error.hpp>
 #include <Helpers/LinkedList.hpp>
 #include <Settings/SettingsWrapper.hpp>
 #include <stddef.h>
-#include <Def/Def.hpp>
 
+/**
+ * @brief   A super class for object that have to be updated regularly.
+ * 
+ * All instances of this class are kept in a linked list, so it's easy to 
+ * iterate over all of them to update them.
+ */
 template <class T = NormalUpdatable>
 class Updatable : public DoublyLinkable<Updatable<T>> {
-  public:
+  protected:
+    /// Create an Updatabe and add it to the linked list of instances.
     Updatable() { updatables.append(this); }
 
-    virtual ~Updatable() { updatables.remove(this); }
+  public:
+    /// Destructor: remove the updatable from the linked list of instances.
+    virtual ~Updatable() {
+        if (isEnabled())
+            updatables.remove(this);
+    }
 
+    /// Update this updatable.
     virtual void update() = 0;
 
+    /// Initialize this updatable.
     virtual void begin() = 0;
 
+    /// Enable this updatable: insert it into the linked list of instances,
+    /// so it gets updated automatically
     void enable() {
         if (isEnabled()) {
             ERROR(F("Error: This element is already enabled."), 0x1212);
@@ -25,6 +43,8 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
         updatables.append(this);
     }
 
+    /// Disable this updatable: remove it from the linked list of instances,
+    /// so it no longer gets updated automatically
     void disable() {
         if (!isEnabled()) {
             ERROR(F("Error: This element is already disabled."), 0x1213);
@@ -34,23 +54,22 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
     }
 
     /**
-     * @brief 
+     * @brief   Check if this updatable is enabled.
      * 
      * @note    Assumes that the updatable is not added to a different linked 
      *          list by the user.
-     * 
-     * @todo    Documentation
-     * 
-     * @return true 
-     * @return false 
      */
     bool isEnabled() { return updatables.couldContain(this); }
 
+    /// Begin all enabled instances of this class
+    /// @see    begin()
     static void beginAll() {
         for (Updatable &el : updatables)
             el.begin();
     }
 
+    /// Update all enabled instances of this class
+    /// @see    update()
     static void updateAll() {
         for (Updatable &el : updatables)
             el.update();

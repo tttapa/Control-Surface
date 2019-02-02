@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include <stdint.h>
@@ -5,8 +7,8 @@
 /**
  * @brief   A class for applying hysteresis to a given input.
  *
- *          This reduces the noise by decreasing the resolution, and it prevents
- *          flipping back and forth between two values.
+ * This reduces the noise by decreasing the resolution, and it prevents flipping
+ * back and forth between two values.
  *
  * <b>An example for `BITS` = 7 and an input from 0 to 1023</b>
  * ```
@@ -19,7 +21,7 @@
  * t  1     ┌───◄───┼───►───┘
  *    0 ────┴───►───┘
  *      0      128     256     384     512     640     768     896    1023
- *                                i n p u t
+ *                                  i n p u t
  * ```
  *
  * @tparam  BITS

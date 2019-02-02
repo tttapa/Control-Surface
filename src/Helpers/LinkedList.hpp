@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include <Helpers/Debug.hpp>
@@ -7,11 +9,16 @@
 #include <iterator>
 #endif
 
+/**
+ * @brief   A class for doubly linked lists.
+ * 
+ * @tparam  Node
+ *          The type of the nodes of the list.
+ */
 template <class Node>
 class DoublyLinkedList {
   public:
-    DoublyLinkedList() = default;
-
+    /// Base class for doubly linked list iterators
     template <class INode>
     class node_iterator_base {
       public:
@@ -30,6 +37,7 @@ class DoublyLinkedList {
         INode *node;
     };
 
+    /// Forward bidirectional doubly linked list iterator
     template <class INode>
     class node_iterator : public node_iterator_base<INode> {
       public:
@@ -43,14 +51,14 @@ class DoublyLinkedList {
         using iterator_category = std::bidirectional_iterator_tag;
 #endif
 
-        /** Prefix increment operator */
+        /// Prefix increment operator
         node_iterator &operator++() {
             // TODO: check node != nullptr
             this->node = this->node->next;
             return *this;
         }
 
-        /** Prefix decrement operator */
+        /// Prefix decrement operator
         node_iterator &operator--() {
             // TODO: check node != nullptr
             this->node = this->node->previous;
@@ -58,6 +66,7 @@ class DoublyLinkedList {
         }
     };
 
+    /// Reverse bidirectional doubly linked list iterator
     template <class INode>
     class reverse_node_iterator : public node_iterator_base<INode> {
       public:
@@ -71,14 +80,14 @@ class DoublyLinkedList {
         using iterator_category = std::bidirectional_iterator_tag;
 #endif
 
-        /** Prefix increment operator */
+        /// Prefix increment operator
         reverse_node_iterator &operator++() {
             // TODO: check node != nullptr
             this->node = this->node->previous;
             return *this;
         }
 
-        /** Prefix decrement operator */
+        /// Prefix decrement operator
         reverse_node_iterator &operator--() {
             // TODO: check node != nullptr
             this->node = this->node->next;
@@ -107,8 +116,23 @@ class DoublyLinkedList {
         node->next = nullptr;
     }
 
+    /**
+     * @brief   Append a node to a linked list.
+     * 
+     * @param   node
+     *          A reference to the node to be appended.
+     */
     void append(Node &node) { append(&node); }
 
+    /**
+     * @brief   Insert a node before another node.
+     * 
+     * @param   toBeInserted
+     *          The new node to be inserted.
+     * @param   before
+     *          The node to insert the new node before. It must be in the list
+     *          already.
+     */
     void insertBefore(Node *toBeInserted, Node *before) {
         if (before == first)
             first = toBeInserted;
@@ -119,17 +143,27 @@ class DoublyLinkedList {
         before->previous = toBeInserted;
     }
 
+    /// @see    insertBefore(Node *, Node *)
     void insertBefore(Node &toBeInserted, Node &before) {
         insertBefore(&toBeInserted, &before);
     }
 
-    template <class Sorter>
-    void insertSorted(Node *node, Sorter sorter) {
+    /**
+     * @brief   Insert a new node at the correct location into a sorted list.
+     * 
+     * @param   node 
+     *          The new node to be inserted.
+     * @param   cmp
+     *          The function to order the nodes.
+     * @tparam  Compare
+     *          A functor that compares two Nodes and returns a boolean.
+     */
+    template <class Compare>
+    void insertSorted(Node *node, Compare cmp) {
         iterator it = this->begin();
         iterator end = this->end();
-        auto sortedNode = sorter(*node);
         while (it != end) {
-            if (sorter(*it) > sortedNode) {
+            if (cmp(*node, *it)) {
                 insertBefore(*node, *it);
                 return;
             }
@@ -138,12 +172,19 @@ class DoublyLinkedList {
         append(node);
     }
 
+    /**
+     * @brief   Insert a new node at the correct location into a sorted list, 
+     *          using `operator<`.
+     * 
+     * @param   node 
+     *          The new node to be inserted.
+     */
     void insertSorted(Node *node) {
-        insertSorted(node, [](Node &node) { return node; });
+        insertSorted(node, [](Node &lhs, Node& rhs) { return lhs < rhs; });
     }
 
     /**
-     * @brief   Remove a node from a linked list.
+     * @brief   Remove a node from the linked list.
      * 
      * @param   node
      *          A pointer to the node to be removed.
@@ -161,10 +202,16 @@ class DoublyLinkedList {
         node->next = nullptr;
     }
 
+    /**
+     * @brief   Remove a node from the linked list.
+     * 
+     * @param   node
+     *          A reference to the node to be removed.
+     */
     void remove(Node &node) { remove(&node); }
 
     /**
-     * @brief   Move down the given node in a linked list.
+     * @brief   Move down the given node in the linked list.
      * 
      * For example: moving down node `C`:
      * ```
@@ -227,7 +274,9 @@ class DoublyLinkedList {
     const_reverse_iterator rbegin() const { return {last}; }
     const_reverse_iterator rend() const { return {nullptr}; }
 
+    /// Get a pointer to the first node.
     Node *getFirst() const { return first; }
+    /// Get a pointer to the last node.
     Node *getLast() const { return last; }
 
   private:
@@ -235,6 +284,12 @@ class DoublyLinkedList {
     Node *last = nullptr;
 };
 
+/**
+ * @brief   A class that can be inherited from to allow inserting into a 
+ *          DoublyLinkedList.
+ * @tparam  Node
+ *          The type of the nodes of the list.
+ */
 template <class Node>
 class DoublyLinkable {
   protected:

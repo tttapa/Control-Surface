@@ -4,6 +4,8 @@
 
 #ifdef ARDUINO // ------------------------------------------------------ ARDUINO
 
+/// Function that executes and loops forever, blinking the LED when a fatal 
+/// error is encountered.
 extern void fatalErrorExit() __attribute__((noreturn));
 
 #ifdef FATAL_ERRORS

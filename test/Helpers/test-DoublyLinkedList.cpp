@@ -136,6 +136,18 @@ TEST(DoublyLinkedList, insertSortedDoubles) {
     EXPECT_EQ(result, expected);
 }
 
+TEST(DoublyLinkedList, insertSortedGreaterThan) {
+    DoublyLinkedList<TestNode> list;
+    TestNode nodes[] = {2, 5, 6, 9, 2, 2, 8, 1, 3, 2, 4, 7, 2};
+    for (auto &node : nodes)
+        list.insertSorted(
+            &node, [](TestNode &lhs, TestNode &rhs) { return lhs > rhs; });
+    vector<int> expected = {9, 8, 7, 6, 5, 4, 3, 2, 2, 2, 2, 2, 1};
+    vector<int> result(expected.size());
+    std::copy(list.begin(), list.end(), result.begin());
+    EXPECT_EQ(result, expected);
+}
+
 TEST(DoublyLinkedList, deleteNode) {
     DoublyLinkedList<TestNode> list;
 
