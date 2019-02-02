@@ -24,6 +24,7 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
     MAX7219(pin_t loadPin) : MAX7219_Base(loadPin) {}
 
     /// Initialize.
+    /// @see    MAX7219#init
     void begin() override { init(); }
 
     /**

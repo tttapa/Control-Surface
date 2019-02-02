@@ -2,18 +2,18 @@
 
 #include "MAX7219_Base.hpp"
 
-/*
- *    __A__
- *   |     |
- * F |     | B
- *   |__G__|
- *   |     |
- * E |     | C
- *   |__D__|    o DP
- *
+/**
+ * @brief   A lookup table for 7-segment characters, as specified by the Logic
+ *          Control manual.
+ * 
+ *       __A__
+ *      |     |
+ *    F |     | B
+ *      |__G__|
+ *      |     |
+ *    E |     | C
+ *      |__D__|    o DP
  */
-
-// Logic Control Specification for seven segment displays
 static constexpr uint8_t SevenSegmentCharacters[0x40] = {
     0b00000000, 0b01110111, 0b00011111, 0b01001110, // @ A B C
     0b00111101, 0b01001111, 0b01000111, 0b01011110, // D E F G
@@ -36,11 +36,21 @@ static constexpr uint8_t SevenSegmentCharacters[0x40] = {
 static constexpr const uint8_t *AlphaChars = &SevenSegmentCharacters[0x01];
 static constexpr const uint8_t *NumericChars = &SevenSegmentCharacters[0x30];
 
+/**
+ * @brief   A class for 8-digit 7-segment displays with a MAX7219 driver.
+ */
 class MAX7219SevenSegmentDisplay : public MAX7219_Base {
-
   public:
+    /**
+     * @brief   Create a MAX7219SevenSegmentDisplay.
+     * 
+     * @param   loadPin
+     *          The pin connected to the load pin (C̄S̄) of the MAX7219.
+     */
     MAX7219SevenSegmentDisplay(pin_t loadPin) : MAX7219_Base(loadPin) {}
 
+    /// Initialize.
+    /// @see    MAX7219#init
     void begin() { init(); }
 
     /**
@@ -78,6 +88,16 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
         return endDigit - startDigit;
     }
 
+    /**
+     * @brief   Display a string of text to the display.
+     * 
+     * Full stops are printed to the decimal point between characters.
+     * 
+     * @param   text 
+     *          The null-terminated string to display.
+     * @param   startPos
+     *          The position to start printing.
+     */
     uint8_t display(const char *text, uint8_t startPos = 0) {
         uint8_t i = 8 - startPos;
         char prevD = '\0';
@@ -105,6 +125,11 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
         return 8 - i - startPos;
     }
 
+    /**
+     * @brief   ?
+     * 
+     * @todo    Find out what this function does, and write documentation.
+     */
     template <uint8_t N>
     uint8_t display(const uint8_t (&characters)[N], uint8_t startPos = 0) {
         uint8_t i = 8 - startPos;
