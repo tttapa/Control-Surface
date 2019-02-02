@@ -1,14 +1,29 @@
+/* ✔ */
+
 #pragma once
 
 #include "StaticSizeExtendedIOElement.hpp"
 #include <Hardware/LEDs/MAX7219_Base.hpp>
 #include <Helpers/BitArray.hpp>
 
+/**
+ * @brief   A class for LED outputs using the MAX7219 LED display driver. 
+ * 
+ * The SPI interface is used.
+ * 
+ * @todo    Wiring diagram for SPI connection.
+ */
 class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
-
   public:
+    /**
+     * @brief   Create a MAX7219 ExtendedIOElement.
+     * 
+     * @param   loadPin
+     *          The pin connected to the load pin (C̄S̄) of the MAX7219.
+     */
     MAX7219(pin_t loadPin) : MAX7219_Base(loadPin) {}
 
+    /// Initialize.
     void begin() override { init(); }
 
     /**
@@ -76,6 +91,11 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
         digitalWrite(pin, val >= 0x80);
     }
 
+    /**
+     * @brief   Write the buffer to the display.
+     * 
+     * @todo    Does this really have to happen on each update?
+     */
     void update() override {
         for (uint8_t i = 0; i < buffer.getBufferLength(); i++)
             sendRaw(i + 1, buffer.getByte(i));

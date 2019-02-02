@@ -1,7 +1,12 @@
+/* ✔ */
+
 #pragma once
 
 #include <stdint.h>
 
+/**
+ * @brief   A struct for setting the RGB mode for RGB shift registers.
+ */
 struct ShiftRegisterOutRGB {
     /**
      * @brief   The position of the red output pin for 3-color LEDs.  

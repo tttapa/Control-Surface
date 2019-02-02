@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include "ExtendedIOElement.hpp"
@@ -49,16 +51,26 @@ namespace ExtIO {
  * @return  A pointer to the extended IO element that the given pin belongs to.
  */
 extern ExtendedIOElement &getIOElementOfPin(pin_t pin);
+/// An ExtIO version of the Arduino function
 extern void pinMode(pin_t pin, uint8_t mode);
+/// An ExtIO version of the Arduino function
 extern void pinMode(int pin, uint8_t mode);
+/// An ExtIO version of the Arduino function
 extern void digitalWrite(pin_t pin, uint8_t val);
+/// An ExtIO version of the Arduino function
 extern void digitalWrite(int pin, uint8_t val);
+/// An ExtIO version of the Arduino function
 extern int digitalRead(pin_t pin);
+/// An ExtIO version of the Arduino function
 extern int digitalRead(int pin);
+/// An ExtIO version of the Arduino function
 extern void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder,
                      uint8_t val);
+/// An ExtIO version of the Arduino function
 extern void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val);
+/// An ExtIO version of the Arduino function
 extern analog_t analogRead(pin_t pin);
+/// An ExtIO version of the Arduino function
 extern analog_t analogRead(int pin);
 
 }

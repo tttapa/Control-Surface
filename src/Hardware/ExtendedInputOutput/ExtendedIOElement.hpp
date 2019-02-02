@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include <Def/Def.hpp>
@@ -54,6 +56,12 @@
  */
 class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
   protected:
+    /**
+     * @brief   Create an ExtendedIOElement with the given number of pins.
+     * 
+     * @param   length
+     *          The number of pins this element has.
+     */
     ExtendedIOElement(pin_t length);
 
   public:
@@ -158,7 +166,7 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
      * @return The number of pins this IO element has. 
      */
     pin_t getLength() const;
-    
+
     /**
      * @brief   Get the largest global extended IO pin number that belongs to
      *          this extended IO element.
@@ -174,7 +182,7 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
     /**
      * @brief   Get the list of all Extended IO elements.
      */
-    static DoublyLinkedList<ExtendedIOElement>& getAll();
+    static DoublyLinkedList<ExtendedIOElement> &getAll();
 
   private:
     const pin_t length;

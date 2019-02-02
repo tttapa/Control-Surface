@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include "StaticSizeExtendedIOElement.hpp"
@@ -97,6 +99,12 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      *          The zero-based LED number.
      */
     pin_t red(pin_t id);
+
+    /**
+     * @brief   Get an array containing all pins with red LEDs.
+     */
+    Array<pin_t, N / 3> redPins();
+
     /**
      * @brief   Get the green output pin of the given LED.
      * 
@@ -104,6 +112,12 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      *          The zero-based LED number.
      */
     pin_t green(pin_t id);
+
+    /**
+     * @brief   Get an array containing all pins with green LEDs.
+     */
+    Array<pin_t, N / 3> greenPins();
+
     /**
      * @brief   Get the blue output pin of the given LED.
      * 
@@ -111,6 +125,11 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      *          The zero-based LED number.
      */
     pin_t blue(pin_t id);
+
+    /**
+     * @brief   Get an array containing all pins with blue LEDs.
+     */
+    Array<pin_t, N / 3> bluePins();
 
   protected:
     const pin_t latchPin;
