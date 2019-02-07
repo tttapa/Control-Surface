@@ -372,6 +372,19 @@
  */
 
 /**
+ * @example   LED.ino
+ *
+ * @brief   This example demonstrates the use of LEDs that respond to MIDI input.
+ * 
+ * If a MIDI Note On event for note 0x3C (middle C) is sent, the built-in LED
+ * will light up, if a Note Off event for that note is sent, the LED will turn
+ * off.
+ * 
+ * Written by PieterP, 07-02-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   OLED-Demo.ino
  *
  * @brief An extensive example demonstrating the use of DisplayElement%s

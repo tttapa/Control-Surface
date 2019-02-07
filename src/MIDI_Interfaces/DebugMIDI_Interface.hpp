@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SerialMIDI_Interface.hpp"
+#include <ctype.h>
 
 const static char *MIDI_STATUS_TYPE_NAMES[] = { // @todo PROGMEM
     "Note Off\t",       "Note On\t\t",      "Key Pressure\t",
@@ -27,8 +28,9 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
         while (stream.available() > 0) {
             char data = stream.read();
 
-            if (isHexChar(toLowerCase(data))) {
-                data = toLowerCase(data);
+            if (isxdigit(data)) {
+                // if we receive a hexadecimal digit
+                data = tolower(data);
                 if (firstChar == '\0') {
                     firstChar = data;
                 } else if (secondChar == '\0') {
@@ -37,7 +39,7 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
                     firstChar = secondChar;
                     secondChar = data;
                 }
-            } else if (isWhiteSpace(data) && firstChar && secondChar) {
+            } else if (isspace(data) && firstChar && secondChar) {
                 // if we received two hex characters followed by
                 // whitespace
                 uint8_t midiByte = hexCharToNibble(firstChar) << 4 |
@@ -48,7 +50,8 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
                 if (parseResult != NO_MESSAGE)
                     return parseResult;
             } else {
-                ; // Ignore any characters other than whitespace and hexadecimal digits
+                // Ignore any characters other than whitespace and hexadecimal
+                // digits
             }
         }
         return NO_MESSAGE;
@@ -88,39 +91,10 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
     char secondChar = '\0';
 
     /**
-     * @brief   Check if a given character is a lowercase hexadecimal digit
-     *          (0-9 or a-f).
-     * 
-     * @param   hex
-     *          The hexadecimal character to check.
-     * @return  true
-     *          The character is a lowercase hexadecimal digit.
-     * @return  false
-     *          The character is not a lowercase hexadecimal digit.
-     */
-    bool isHexChar(char hex) {
-        return (hex >= '0' && hex <= '9') || (hex >= 'a' && hex <= 'f');
-    }
-    /**
-     * @brief   Convert a given letter to lower case, no effect if
-     *          it's a digit (0 - 9) or if it's already lower case.
-     */
-    char toLowerCase(char x) { return x | 0b0100000; }
-    /**
      * @brief   Convert a hexadecimal character to a 4-bit nibble.
      */
     uint8_t hexCharToNibble(char hex) {
         return hex < 'a' ? hex - '0' : hex - 'a' + 10;
-    }
-    /**
-     * @brief   Check if the given character is whitespace (SP, CR or LF).
-     * 
-     * @return  true
-     *          The given character is either a space,
-     *          a carriage return or a line feed (SP, CR or LF).
-     */
-    inline bool isWhiteSpace(char x) {
-        return x == ' ' || x == '\r' || x == '\n';
     }
 };
 
@@ -138,8 +112,8 @@ template <typename T>
 class SerialDebugMIDI_Interface : public StreamDebugMIDI_Interface {
   public:
     /**
-     * @brief   Construct a new Debug MIDI Interface on the given Serial interface
-     *          with the given baud rate.
+     * @brief   Construct a new Debug MIDI Interface on the given Serial 
+     *          interface with the given baud rate.
      * 
      * @param   serial
      *          The Serial interface.
