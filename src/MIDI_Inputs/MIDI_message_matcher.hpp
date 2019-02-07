@@ -1,7 +1,10 @@
+/* ✔ */
+
 #pragma once
 
 #include <MIDI_Parsers/MIDI_Parser.hpp>
 
+/// Struct for easily matching MIDI messages.
 struct MIDI_message_matcher {
     MIDI_message_matcher(uint8_t type, Channel channel, uint8_t data1,
                          uint8_t data2)

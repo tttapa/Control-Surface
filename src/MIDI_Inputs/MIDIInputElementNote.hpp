@@ -4,7 +4,7 @@
 #include <Helpers/LinkedList.hpp>
 
 /**
- * @brief   Class for objects that correspond to incoming MIDI Note events
+ * @brief   Class for objects that listen for incoming MIDI Note events.
  * 
  * @ingroup MIDIInputElements
  */

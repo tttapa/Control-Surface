@@ -1,43 +1,41 @@
+/* ✔ */
+
 #pragma once
 
 #include "MIDI_message_matcher.hpp"
 #include <Def/MIDICNChannelAddress.hpp>
 
+/**
+ * @brief   A class for objects that listen for incoming MIDI events.
+ * 
+ * They can either update some kind of display, or they can just save the state.
+ */
 class MIDIInputElement {
   protected:
     /**
-     * @brief   Constructor.
-     * @todo    Documentation.
+     * @brief   Create a new MIDIInputElement that listens on the given address.
+     * 
+     * @param   address
+     *          The MIDI address to listen to.
      */
     MIDIInputElement(const MIDICNChannelAddress &address) : address(address) {}
 
   public:
     virtual ~MIDIInputElement() = default;
 
-    /**
-     * @brief   Initialize the input element.
-     */
+    /// Initialize the input element.
     virtual void begin() {}
 
-    /**
-     * @brief   Update the display of the input element.
-     */
+    /// Update the display of the input element.
     virtual void display() const {}
 
-    /** 
-     * @brief   Reset the input element to its initial state.
-     */
+    /// Reset the input element to its initial state.
     virtual void reset() = 0;
 
-    /**
-     * @brief   Update the value of the input element.  
-     *          Used for decaying VU meters etc.
-     */
+    /// Update the value of the input element. Used for decaying VU meters etc.
     virtual void update() {}
 
-    /**
-     * @brief   Receive a new MIDI message and update the internal state.
-     */
+    /// Receive a new MIDI message and update the internal state.
     bool updateWith(const MIDI_message_matcher &midimsg) {
         DEBUGFN("");
         MIDICNChannelAddress target = getTarget(midimsg);
@@ -53,9 +51,7 @@ class MIDIInputElement {
     }
 
   private:
-    /**
-     * @brief   Update the internal state with the new MIDI message.
-     */
+    /// Update the internal state with the new MIDI message.
     virtual bool updateImpl(const MIDI_message_matcher &midimsg,
                             const MIDICNChannelAddress &target) = 0;
 
@@ -71,8 +67,8 @@ class MIDIInputElement {
     }
 
     /**
-     * @brief   Check if the address and channel of the incoming MIDI message
-     *          match an address and channel of this element.
+     * @brief   Check if the address of the incoming MIDI message matches an 
+     *          address of this element.
      * @note    This base version of the function is only valid for non-Bankable
      *          MIDI input elements.
      */
@@ -82,8 +78,9 @@ class MIDIInputElement {
 
     /**
      * @brief   Move down this element in the linked list of elements.
-     *          This means that the element will be checked earlier on the next
-     *          iteration.
+     * 
+     * This means that the element will be checked earlier on the next
+     * iteration.
      */
     virtual void moveDown() = 0;
 

@@ -1,5 +1,10 @@
+/* ✔ */
+
 #pragma once
 
+/**
+ * @brief   MIDI note names.
+ */
 namespace MIDI_Notes {
 
 constexpr int8_t C = 0;
@@ -15,8 +20,10 @@ constexpr int8_t A = 9;
 constexpr int8_t Bb = 10;
 constexpr int8_t B = 11;
 
+/// Get the first MIDI note in the given octave.
 constexpr int8_t octave(int8_t numOctave) { return 12 * (numOctave + 1); }
 
+/// Get the MIDI note in the given octave.
 constexpr int8_t note(int8_t note, int8_t numOctave) {
     return note + octave(numOctave);
 }
