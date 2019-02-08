@@ -23,7 +23,7 @@ class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
     virtual void setTextSize(uint8_t size) = 0;
     virtual void setCursor(int16_t x, int16_t y) = 0;
 
-    virtual size_t write(uint8_t c) override = 0;
+    size_t write(uint8_t c) override = 0;
 
     virtual void drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1,
                           uint16_t color) = 0;

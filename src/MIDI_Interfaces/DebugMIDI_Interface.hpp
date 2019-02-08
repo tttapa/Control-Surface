@@ -24,7 +24,7 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
      */
     StreamDebugMIDI_Interface(Stream &stream) : StreamMIDI_Interface(stream) {}
 
-    virtual MIDI_read_t read() override {
+    MIDI_read_t read() override {
         while (stream.available() > 0) {
             char data = stream.read();
 
@@ -125,7 +125,7 @@ class SerialDebugMIDI_Interface : public StreamDebugMIDI_Interface {
     /**
      * @brief   Start the Serial interface at the predefined baud rate.
      */
-    virtual void begin() override { serial.begin(baud); }
+    void begin() override { serial.begin(baud); }
 
   private:
     T &serial;

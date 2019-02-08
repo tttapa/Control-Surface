@@ -23,7 +23,7 @@ class StreamMIDI_Interface : public MIDI_Interface {
     StreamMIDI_Interface(Stream &stream)
         : MIDI_Interface(parser), stream(stream) {}
 
-    virtual MIDI_read_t read() override {
+    MIDI_read_t read() override {
         while (stream.available() > 0) {
             uint8_t midiByte = stream.read();
             MIDI_read_t parseResult = parser.parse(midiByte);
@@ -80,7 +80,7 @@ class SerialMIDI_Interface : public StreamMIDI_Interface {
     /**
      * @brief   Start the Serial interface at the predefined baud rate.
      */
-    virtual void begin() override { serial.begin(baud); }
+    void begin() override { serial.begin(baud); }
 
   private:
     T &serial;
