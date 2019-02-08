@@ -79,6 +79,7 @@
 #include <Selectors/IncrementDecrementSelector.hpp>
 #include <Selectors/IncrementSelector.hpp>
 #include <Selectors/ManyButtonsSelector.hpp>
+#include <Selectors/SwitchSelector.hpp>
 
 #ifdef Encoder_h_
 #include <Selectors/EncoderSelector.hpp>
