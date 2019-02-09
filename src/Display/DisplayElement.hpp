@@ -6,7 +6,10 @@
 class DisplayElement : public DoublyLinkable<DisplayElement> {
   protected:
     DisplayElement(DisplayInterface &display) : display(display) {
-        elements.append(this);
+        elements.insertSorted(
+            this, [](const DisplayElement &lhs, const DisplayElement &rhs) {
+                return &lhs.getDisplay() < &rhs.getDisplay();
+            });
     }
 
   public:
@@ -17,15 +20,10 @@ class DisplayElement : public DoublyLinkable<DisplayElement> {
      */
     virtual void draw() = 0;
 
-    /**
-     * @brief   Draw all DisplayElement%s to their display buffers.
-     * 
-     * @see     DisplayElement#draw
-     */
-    static void drawAll() {
-        for (DisplayElement &el : elements)
-            el.draw();
-    }
+    DisplayInterface &getDisplay() { return display; }
+    const DisplayInterface &getDisplay() const { return display; }
+
+    static DoublyLinkedList<DisplayElement> &getAll() { return elements; }
 
   protected:
     DisplayInterface &display;

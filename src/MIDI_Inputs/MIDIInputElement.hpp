@@ -63,7 +63,7 @@ class MIDIInputElement {
      */
     virtual inline MIDICNChannelAddress
     getTarget(const MIDI_message_matcher &midimsg) const {
-        return {int8_t(midimsg.data1), Channel(midimsg.channel)};
+        return {int8_t(midimsg.data1), Channel(midimsg.channel), midimsg.CN};
     }
 
     /**
@@ -73,7 +73,7 @@ class MIDIInputElement {
      *          MIDI input elements.
      */
     virtual inline bool match(const MIDICNChannelAddress &target) const {
-        return this->address == target;
+        return MIDICNChannelAddress::matchSingle(this->address, target);
     }
 
     /**

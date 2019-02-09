@@ -129,12 +129,12 @@ class MIDI_Interface {
     MIDI_message getChannelMessage();
 
     /**
-     * @brief   Return the length of the received system exclusive message.
+     * @brief   Return the received system exclusive message.
      */
-    size_t getSysExLength();
+    SysExMessage getSysExMessage() const;
 
     /**
-     * @brief   Return a pointer to the received system exclusive message.
+     * @brief   Return the cable number of the received message.
      */
-    const uint8_t *getSysExBuffer();
+    uint8_t getCN() const;
 };

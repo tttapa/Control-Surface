@@ -44,9 +44,10 @@ class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
 
     static void beginAll();
 
-    static void clearAllAndDrawAllBackgrounds();
-
-    static void displayAll();
+    void clearAndDrawBackground() {
+        clear();
+        drawBackground();
+    }
 
   private:
     static DoublyLinkedList<DisplayInterface> elements;

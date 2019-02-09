@@ -60,15 +60,3 @@ void DisplayInterface::beginAll() {
     for (DisplayInterface &el : elements)
         el.begin();
 }
-
-void DisplayInterface::clearAllAndDrawAllBackgrounds() {
-    for (DisplayInterface &el : elements) {
-        el.clear();
-        el.drawBackground();
-    }
-}
-
-void DisplayInterface::displayAll() {
-    for (DisplayInterface &el : elements)
-        el.display();
-}

@@ -9,12 +9,13 @@ class EmptyParser : public MIDI_Parser {
         static EmptyParser instance;
         return instance;
     }
+    SysExMessage getSysEx() const override { return {nullptr, 0, 0}; }
 };
 
 #if __GNUC__ >= 5
 // Disable GCC 5's -Wsuggest-override warnings in mock methods
-# pragma GCC diagnostic push
-# pragma GCC diagnostic ignored "-Wsuggest-override"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsuggest-override"
 #endif
 
 class MockMIDI_Interface : public MIDI_Interface {
@@ -26,5 +27,5 @@ class MockMIDI_Interface : public MIDI_Interface {
 };
 
 #if __GNUC__ >= 5
-# pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif

@@ -4,7 +4,7 @@
 class Frequency {
   public:
     explicit constexpr Frequency(unsigned long hertz) : hertz(hertz) {}
-    operator unsigned long() const { return hertz; }
+    constexpr operator unsigned long() const { return hertz; }
 
   private:
     unsigned long hertz;

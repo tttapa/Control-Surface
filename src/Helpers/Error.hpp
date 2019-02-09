@@ -4,7 +4,7 @@
 
 #ifdef ARDUINO // ------------------------------------------------------ ARDUINO
 
-/// Function that executes and loops forever, blinking the LED when a fatal 
+/// Function that executes and loops forever, blinking the LED when a fatal
 /// error is encountered.
 extern void fatalErrorExit() __attribute__((noreturn));
 
@@ -12,7 +12,8 @@ extern void fatalErrorExit() __attribute__((noreturn));
 
 #define ERROR(x, e)                                                            \
     do {                                                                       \
-        DEBUGFN(x << " (" << e << ')');                                        \
+        DEBUGFN(x << " (0x" << hex << uppercase << e << dec << nouppercase     \
+                  << ')');                                                     \
         fatalErrorExit();                                                      \
     } while (0)
 
@@ -20,14 +21,16 @@ extern void fatalErrorExit() __attribute__((noreturn));
 
 #define ERROR(x, e)                                                            \
     do {                                                                       \
-        DEBUGFN(x << " (" << e << ')');                                        \
+        DEBUGFN(x << " (0x" << hex << uppercase << e << dec << nouppercase     \
+                  << ')');                                                     \
     } while (0)
 
 #endif
 
 #define FATAL_ERROR(x, e)                                                      \
     do {                                                                       \
-        DEBUGFN(x << " (" << e << ')');                                        \
+        DEBUGFN(x << " (0x" << hex << uppercase << e << dec << nouppercase     \
+                  << ')');                                                     \
         fatalErrorExit();                                                      \
     } while (0)
 

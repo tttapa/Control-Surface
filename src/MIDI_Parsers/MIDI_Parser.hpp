@@ -24,9 +24,11 @@ struct MIDI_message {
     uint8_t data1;
     uint8_t data2;
 
+    uint8_t CN = 0;
+
     bool operator==(const MIDI_message &other) const {
         return this->header == other.header && this->data1 == other.data1 &&
-               this->data2 == other.data2;
+               this->data2 == other.data2 && this->CN == other.CN;
     }
 
     bool operator!=(const MIDI_message &other) const {
@@ -34,7 +36,7 @@ struct MIDI_message {
     }
 };
 
-enum MIDI_read_t {
+enum MIDI_read_t : uint8_t {
     NO_MESSAGE = 0,
     CHANNEL_MESSAGE = 1,
     SYSEX_MESSAGE = 2,
@@ -50,45 +52,31 @@ enum MIDI_read_t {
     RESET_MESSAGE = 0xFF
 };
 
-// --------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------- //
+
+struct SysExMessage {
+    const uint8_t *data;
+    size_t length;
+    uint8_t CN;
+};
+
+// -------------------------------------------------------------------------- //
 
 class MIDI_Parser {
   public:
     /** Get the latest MIDI channel message */
     MIDI_message getChannelMessage();
-    /** Get the pointer to the SysEx data buffer. */
-    const uint8_t *getSysExBuffer();
-    /** Get the length of the latest SysEx message. */
-    size_t getSysExLength();
-
-    /** A struct containing a pointer to a SysEx message and its length. */
-    struct SysExMessage {
-        const uint8_t *data;
-        size_t length;
-    };
-
     /** Get the latest SysEx message. */
-    SysExMessage getSysExMessage();
+    virtual SysExMessage getSysEx() const = 0;
+    /** Get the pointer to the SysEx data. */
+    const uint8_t *getSysExBuffer() const { return getSysEx().data; }
+    /** Get the length of the SysEx message. */
+    size_t getSysExLength() const { return getSysEx().length; }
+    /** Get the cable number of the latests MIDI message */
+    virtual uint8_t getCN() const { return 0; };
 
   protected:
     MIDI_message midimsg = {};
-
-#ifndef IGNORE_SYSEX
-    // Edit this in ../Settings/Settings.hpp
-    constexpr static size_t bufferSize = SYSEX_BUFFER_SIZE;
-    uint8_t SysExBuffer[bufferSize];
-    size_t SysExLength = 0;
-    bool receivingSysEx = false;
-
-    /** Start a new SysEx message. */
-    void startSysEx();
-    /** Finish the current SysEx message. */
-    void endSysEx();
-    /** Add a byte to the current SysEx message. */
-    bool addSysExByte(uint8_t data);
-    /** Check if the buffer has at least 1 byte of free space available. */
-    bool hasSpaceLeft();
-#endif
 
   public:
     /** Check if the given byte is a MIDI header byte. */

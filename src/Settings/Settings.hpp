@@ -13,21 +13,21 @@
 // ----------------------------- Debug Settings ----------------------------- //
 // ========================================================================== //
 
-/** The debug output. */
+/// The debug output.
 // #define DEBUG_OUT Serial
 
 // #define DEBUG_MIDI_PACKETS
 
-/** Exit when encountering an error, instead of recovering. */
+/// Exit when encountering an error, instead of recovering.
 #define FATAL_ERRORS
 
 // ----------------------------- User Settings ------------------------------ //
 // ========================================================================== //
 
-/** The default baud rate for debug MIDI interfaces */
+/// The default baud rate for debug MIDI interfaces.
 constexpr unsigned long defaultBaudRate = 115200;
 
-/** The factor for the analog filter: <br>
+/** The factor for the analog filter:  
  *  Difference equation:
  *  @f$ y[n] = \alpha\cdot x[n] + (1-\alpha)\cdot y[n-1] @f$
  *  where
@@ -37,40 +37,39 @@ constexpr uint8_t ANALOG_FILTER_SHIFT_FACTOR = 2;
 
 /** The signed integer type to use for analog inputs during filtering.
  * Should be at least @f$ 10+1+2·ANALOG\_FILTER\_SHIFT\_FACTOR @f$ bits wide.
- * (10 bits of ADC resolution, 1 sign bit, and 2·ANALOG_FILTER_SHIFT_FACTOR
+ * (10 bits of ADC resolution, 1 sign bit, and 2·`ANALOG_FILTER_SHIFT_FACTOR`
  * bits of fixed point precision for intermediate filter calculations.
  */
 typedef int16_t ANALOG_FILTER_TYPE;
 
-/** The debounce time for momentary push buttons in milliseconds. */
+/// The debounce time for momentary push buttons in milliseconds.
 constexpr unsigned long BUTTON_DEBOUNCE_TIME = 25; // milliseconds
 
-/** The time in milliseconds before a press is registered as a long press. */
+/// The time in milliseconds before a press is registered as a long press.
 constexpr unsigned long LONG_PRESS_DELAY = 450; // milliseconds
 
-/** The time between increments/decremnets during a long press. */
+/// The time between increments/decremnets during a long press.
 constexpr unsigned long LONG_PRESS_REPEAT_DELAY = 200; // milliseconds
 
-/** The interval between updating filtered analog inputs, in microseconds (µs).
- */
+/// The interval between updating filtered analog inputs, in microseconds.
 constexpr unsigned long FILTERED_INPUT_UPDATE_INTERVAL = 1000; // microseconds
 
-/** The time in milliseconds it takes for the VU meter display peak bar to drop 
- *  one unit (i.e. one twelfth of the complete scale). */
+/// The time in milliseconds it takes for the VU meter display peak bar to drop 
+///  one unit (i.e. one twelfth of the complete scale).
 constexpr unsigned long VU_PEAK_DECAY_TIME = 300; // milliseconds
 
-/** The time in milliseconds that a VU meter display peak bar stays at the peak
- *  before decaying. */
+/// The time in milliseconds that a VU meter display peak bar stays at the peak
+/// before decaying.
 constexpr unsigned long VU_PEAK_HOLD_TIME = 400; // milliseconds
 
-/** If set to true, the VU meter display peak bars will decay smoothly (i.e. one
- *  pixel at a time), if set to false, they will decay one unit at a time. */
+/// If set to true, the VU meter display peak bars will decay smoothly (i.e. one
+/// pixel at a time), if set to false, they will decay one unit at a time. */
 constexpr bool VU_PEAK_SMOOTH_DECAY = true;
 
-/** Determines when a note input should be interpreted as 'on'. */
+/// Determines when a note input should be interpreted as 'on'.
 constexpr uint8_t NOTE_VELOCITY_THRESHOLD = 1;
 
-/** Don't parse incomming System Exclusive messages. */
+/// Don't parse incomming System Exclusive messages.
 #define IGNORE_SYSEX
 
 /** The length of the maximum System Exclusive message
@@ -79,16 +78,16 @@ constexpr uint8_t NOTE_VELOCITY_THRESHOLD = 1;
  */
 constexpr size_t SYSEX_BUFFER_SIZE = 128;
 
-/** The baud rate to use for Hairless MIDI. */
+/// The baud rate to use for Hairless MIDI.
 constexpr unsigned long HAIRLESS_BAUD = 115200;
 
-/** The maximum frame rate of the displays. */
+/// The maximum frame rate of the displays.
 constexpr uint8_t MAX_FPS = 30;
 
 constexpr static Frequency SPI_MAX_SPEED = 8_MHz;
 
-/** Make it possible to invert individual push buttons.
- *  Enabling this will increase memory usage. */
+/// Make it possible to invert individual push buttons.
+/// Enabling this will increase memory usage.
 #define INDIVIDUAL_BUTTON_INVERT
 
 // ========================================================================== //

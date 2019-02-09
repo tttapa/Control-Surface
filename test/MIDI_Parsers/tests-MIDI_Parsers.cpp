@@ -27,6 +27,16 @@ TEST(USBMIDIParser, noteOn) {
     EXPECT_EQ(msg.data2, 0x7E);
 }
 
+TEST(USBMIDIParser, noteOnCN) {
+    uint8_t packet[4] = {0x59, 0x93, 0x2A, 0x7E};
+    EXPECT_EQ(uparser.parse(packet), CHANNEL_MESSAGE);
+    MIDI_message msg = uparser.getChannelMessage();
+    EXPECT_EQ(msg.header, 0x93);
+    EXPECT_EQ(msg.data1, 0x2A);
+    EXPECT_EQ(msg.data2, 0x7E);
+    EXPECT_EQ(msg.CN, 0x05);
+}
+
 TEST(USBMIDIParser, sysEx2Bytes) {
     uint8_t packet[4] = {0x06, 0xF0, 0xF7, 0x00};
     EXPECT_EQ(uparser.parse(packet), SYSEX_MESSAGE);

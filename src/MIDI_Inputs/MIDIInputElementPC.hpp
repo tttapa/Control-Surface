@@ -60,7 +60,7 @@ class MIDIInputElementPC : public MIDIInputElement,
   private:
     MIDICNChannelAddress
     getTarget(const MIDI_message_matcher &midimsg) const override {
-        return {0, Channel(midimsg.channel)};
+        return {0, Channel(midimsg.channel), midimsg.CN};
         // Program Change doesn't have an address
     }
 

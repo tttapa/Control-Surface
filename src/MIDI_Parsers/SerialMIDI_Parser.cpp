@@ -15,8 +15,10 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
             if (previousHeader == SysExStart) {
                 // If we're currently receiving a SysEx message
                 // midimsg.header = SysExEnd; // TODO: why did I write this?
-                if (addSysExByte(SysExEnd)) // add SysExEnd byte to buffer
+                if (addSysExByte(SysExEnd)) { // add SysExEnd byte to buffer
+                    endSysEx();
                     return SYSEX_MESSAGE;
+                }
             }
             if (midimsg.header == SysExStart) {
                 // If the first byte of a SysEx message

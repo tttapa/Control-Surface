@@ -105,8 +105,8 @@ MIDI_message MIDI_Interface::getChannelMessage() {
     return parser.getChannelMessage();
 }
 
-const uint8_t *MIDI_Interface::getSysExBuffer() {
-    return parser.getSysExBuffer();
+SysExMessage MIDI_Interface::getSysExMessage() const {
+    return parser.getSysEx();
 }
 
-size_t MIDI_Interface::getSysExLength() { return parser.getSysExLength(); }
+uint8_t MIDI_Interface::getCN() const { return parser.getCN(); }

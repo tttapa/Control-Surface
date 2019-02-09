@@ -65,6 +65,7 @@ void Control_Surface_::updateMidiInput() {
 void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
     MIDI_message midichmsg = midi.getChannelMessage();
     MIDI_message_matcher midimsg = {midichmsg};
+    DEBUG(F("CN = ") << midimsg.CN);
 
 #ifdef DEBUG_MIDI_PACKETS
     if (midimsg.type != PROGRAM_CHANGE && midimsg.type != CHANNEL_PRESSURE)
@@ -80,11 +81,9 @@ void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
         DEBUG(F("Reset All Controllers"));
         MIDIInputElementCC::resetAll();
         MIDIInputElementChannelPressure::resetAll();
-
     } else if (midimsg.type == CC && midimsg.data1 == MIDI_CC::All_Notes_Off) {
         MIDIInputElementNote::resetAll();
     } else {
-
         if (midimsg.type == CC) {
             // Control Change
             DEBUGFN(F("Updating CC elements with new MIDI message."));
@@ -130,9 +129,19 @@ void Control_Surface_::updateInputs() {
 }
 
 void Control_Surface_::updateDisplays() {
-    DisplayInterface::clearAllAndDrawAllBackgrounds();
-    DisplayElement::drawAll();
-    DisplayInterface::displayAll();
+    DisplayInterface *previousDisplay = nullptr;
+    for (DisplayElement &displayElement : DisplayElement::getAll()) {
+        DisplayInterface *thisDisplay = &displayElement.getDisplay();
+        if (thisDisplay != previousDisplay) {
+            if (previousDisplay)
+                previousDisplay->display();
+            thisDisplay->clearAndDrawBackground();
+        }
+        displayElement.draw();
+        previousDisplay = thisDisplay;
+    }
+    if (previousDisplay)
+        previousDisplay->display();
 }
 
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();

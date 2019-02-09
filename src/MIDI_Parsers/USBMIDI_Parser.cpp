@@ -6,6 +6,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
     DEBUGREF("MIDIUSB packet:\t" << hex << +packet[0] << ' ' << +packet[1]
                                  << ' ' << +packet[2] << ' ' << +packet[3]
                                  << dec);
+    this->CN = (uint8_t)packet[0] >> 4;
     uint8_t CIN = (uint8_t)packet[0] << 4; // MIDI USB code index number
 
     if (CIN >= NOTE_OFF && CIN <= PITCH_BEND) {
@@ -17,6 +18,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
         midimsg.header = packet[1];
         midimsg.data1 = packet[2];
         midimsg.data2 = packet[3];
+        midimsg.CN = this->CN;
         return CHANNEL_MESSAGE;
     }
 
@@ -24,13 +26,14 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
     else if (CIN == 0x40) {
         // SysEx starts or continues (3 bytes)
         if (packet[1] == SysExStart)
-            startSysEx(); // start a new message (overwrite previous unfinished message)
-        else if (!receivingSysEx) { // If we haven't received a SysExStart
+            startSysEx(CN); // start a new message
+                            // (overwrite previous unfinished message)
+        else if (!receivingSysEx(CN)) { // If we haven't received a SysExStart
             DEBUGREF(F("Error: No SysExStart received"));
             return NO_MESSAGE; // ignore the data
         }
-        addSysExByte(packet[1]) && // add three data bytes to buffer
-            addSysExByte(packet[2]) && addSysExByte(packet[3]);
+        addSysExByte(CN, packet[1]) && // add three data bytes to buffer
+            addSysExByte(CN, packet[2]) && addSysExByte(CN, packet[3]);
         return NO_MESSAGE; // SysEx is not finished yet
     }
 
@@ -38,12 +41,12 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
         // SysEx ends with following single byte (or Single-byte System Common Message, not implemented)
         if (packet[1] != SysExEnd) { // System Common (not implemented)
             return NO_MESSAGE;
-        } else if (!receivingSysEx) { // If we haven't received a SysExStart
+        } else if (!receivingSysEx(CN)) { // If we haven't received a SysExStart
             DEBUGFN(F("Error: No SysExStart received"));
             return NO_MESSAGE; // ignore the data
         }
-        if (addSysExByte(SysExEnd)) {
-            endSysEx();
+        if (addSysExByte(CN, SysExEnd)) {
+            endSysEx(CN);
             return SYSEX_MESSAGE;
         } else
             return NO_MESSAGE; // Buffer full, ignore message
@@ -52,14 +55,15 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
     else if (CIN == 0x60) {
         // SysEx ends with following two bytes
         if (packet[1] == SysExStart)
-            startSysEx(); // start a new message (overwrite previous unfinished message)
-        else if (!receivingSysEx) { // If we haven't received a SysExStart
+            startSysEx(CN); // start a new message
+        // (overwrite previous unfinished message)
+        else if (!receivingSysEx(CN)) { // If we haven't received a SysExStart
             DEBUGFN(F("Error: No SysExStart received"));
             return NO_MESSAGE; // ignore the data
         }
         if ( // add two data bytes to buffer
-            addSysExByte(packet[1]) && addSysExByte(SysExEnd)) {
-            endSysEx();
+            addSysExByte(CN, packet[1]) && addSysExByte(CN, SysExEnd)) {
+            endSysEx(CN);
             return SYSEX_MESSAGE;
         } else
             return NO_MESSAGE; // Buffer full, ignore message
@@ -68,16 +72,16 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
     else if (CIN == 0x70) {
         // SysEx ends with following three bytes
         if (packet[1] == SysExStart)
-            startSysEx(); // start a new message (overwrite previous unfinished message)
-        else if (!receivingSysEx) // If we haven't received a SysExStart
-        {
+            startSysEx(CN); // start a new message
+                            // (overwrite previous unfinished message)
+        else if (!receivingSysEx(CN)) { // If we haven't received a SysExStart
             DEBUGFN(F("Error: No SysExStart received"));
             return NO_MESSAGE; // ignore the data
         }
         if ( // add three data bytes to buffer
-            addSysExByte(packet[1]) && addSysExByte(packet[2]) &&
-            addSysExByte(SysExEnd)) {
-            endSysEx();
+            addSysExByte(CN, packet[1]) && addSysExByte(CN, packet[2]) &&
+            addSysExByte(CN, SysExEnd)) {
+            endSysEx(CN);
             return SYSEX_MESSAGE;
         } else
             return NO_MESSAGE; // Buffer full, ignore message

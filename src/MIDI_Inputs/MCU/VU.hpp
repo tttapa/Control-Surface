@@ -54,7 +54,11 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
 
     MIDICNChannelAddress
     getTarget(const MIDI_message_matcher &midimsg) const override {
-        return {int8_t(midimsg.data1 >> 4), Channel(midimsg.channel)};
+        return {
+            int8_t(midimsg.data1 >> 4),
+            Channel(midimsg.channel),
+            midimsg.CN,
+        };
     }
 
     /** Automatically decay the VU meter value by one step (if it is greater
