@@ -385,6 +385,45 @@
  */
 
 /**
+ * @example   VU-Bridge-Dual-Display.ino
+ *
+ * @brief   This is an example on how to use multiple displays to display the 
+ *          VU meters of many tracks, by using the Arduino as a Mackie Control
+ *          Universal with extenders.
+ * 
+ * This example is currenty only supported using MIDI over USB on Teensy boards,
+ * due to limitations of the MIDIUSB library.
+ * 
+ * ### Connections
+ * This example drives two SSD1306 OLED displays over SPI
+ *  - SCK:  SSD1306 D0 (both of the displays)
+ *  - MOSI: SSD1306 D1 (both of the displays)
+ *  - 19:   SSD1306 DC (both of the displays)
+ *  - 17:   SSD1306 CS (of the first display)
+ *  - 18:   SSD1306 CS (of the second display)
+ * 
+ * Connect the reset pins of the two displays together, connect a capacitor from 
+ * reset to ground, and a resistor from reset to 3.3V. The values are not
+ * critical, 0.1µF and 10kΩ work fine.  
+ * You do need some way to reset the displays, without it, they won't work.  
+ * Alternatively, you can use an IO pin from the Teensy to reset the displays,
+ * but this just "wastes" a pin.
+ * 
+ * ### Behavior
+ * Select "MIDIx4" from the Tools > USB Type menu.  
+ * Map "Control Surface (1)" as a Mackie Control Universal unit in your DAW, 
+ * and map "Control Surface (2)" as a Mackie Control Universal Extender (XT).  
+ * If you have to manually set the track offset of the extender, choose 8.
+ * 
+ * The first display should now display the level meters and mute/solo states
+ * of the first 8 tracks, and the second display should display the ones of 
+ * tracks 9-16.
+ * 
+ * Written by PieterP, 09-02-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   OLED-Demo.ino
  *
  * @brief An extensive example demonstrating the use of DisplayElement%s

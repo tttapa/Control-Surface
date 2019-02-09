@@ -1,3 +1,40 @@
+/**
+ * @brief   This is an example on how to use multiple displays to display the 
+ *          VU meters of many tracks, by using the Arduino as a Mackie Control
+ *          Universal with extenders.
+ * 
+ * This example is currenty only supported using MIDI over USB on Teensy boards,
+ * due to limitations of the MIDIUSB library.
+ * 
+ * ### Connections
+ * This example drives two SSD1306 OLED displays over SPI
+ *  - SCK:  SSD1306 D0 (both of the displays)
+ *  - MOSI: SSD1306 D1 (both of the displays)
+ *  - 19:   SSD1306 DC (both of the displays)
+ *  - 17:   SSD1306 CS (of the first display)
+ *  - 18:   SSD1306 CS (of the second display)
+ * 
+ * Connect the reset pins of the two displays together, connect a capacitor from 
+ * reset to ground, and a resistor from reset to 3.3V. The values are not
+ * critical, 0.1µF and 10kΩ work fine.  
+ * You do need some way to reset the displays, without it, they won't work.  
+ * Alternatively, you can use an IO pin from the Teensy to reset the displays,
+ * but this just "wastes" a pin.
+ * 
+ * ### Behavior
+ * Select "MIDIx4" from the Tools > USB Type menu.  
+ * Map "Control Surface (1)" as a Mackie Control Universal unit in your DAW, 
+ * and map "Control Surface (2)" as a Mackie Control Universal Extender (XT).  
+ * If you have to manually set the track offset of the extender, choose 8.
+ * 
+ * The first display should now display the level meters and mute/solo states
+ * of the first 8 tracks, and the second display should display the ones of 
+ * tracks 9-16.
+ * 
+ * Written by PieterP, 09-02-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
 #include <Control_Surface.h> // Include the Control Surface library
 // Include the display interface you'd like to use
 #include <Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp>
@@ -31,13 +68,6 @@ Adafruit_SSD1306 ssd1306DisplayB = {
   &SPI, OLED_DC, OLED_reset, OLED_CSB, SPI_Frequency
 };
 
-void initializeDisplays() {
-  ssd1306DisplayA.begin();
-  ssd1306DisplayB.begin();
-  // ssd1306DisplayA.setRotation(2); // Flip the display upside down
-  // ssd1306DisplayB.setRotation(2); // Flip the display upside down
-}
-
 // --------------------------- Display interface ---------------------------- //
 // ========================================================================== //
 
@@ -47,25 +77,23 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
     MySSD1306_DisplayInterface(Adafruit_SSD1306 &display)
       : SSD1306_DisplayInterface(display) {}
 
+    void begin() override {
+        disp.begin();
+        SSD1306_DisplayInterface::begin(); // If you override the begin method,
+                                           // remember to call the super class
+                                           // method
+    }
+
     void drawBackground() override {
       disp.drawFastHLine(0, 52, 128, WHITE);
       disp.drawRect(0, 0, 128, 64, WHITE);
     }
 } displayA = ssd1306DisplayA, displayB = ssd1306DisplayB;
 
-// -------------------------- MIDI Output Elements -------------------------- //
-// ========================================================================== //
-
-// A potentiometer that sets the master volume on analog pin A1
-PBPotentiometer masterVolume = { A1, MCU::MASTER_VOLUME };
-
-// A button to press play or pause on digital pin 7
-NoteButton playButton = {7, MCU::PLAY};
-
 // -------------------------- MIDI Input Elements --------------------------- //
 // ========================================================================== //
 
-MIDINote mute[8] = {
+MIDINote mute[8] = {   // Main unit uses cable number 0x0
   {{ MCU::MUTE_1, CHANNEL_1, 0x0 }}, // The mute status of the first track
   {{ MCU::MUTE_2, CHANNEL_1, 0x0 }},
   {{ MCU::MUTE_3, CHANNEL_1, 0x0 }},
@@ -75,7 +103,7 @@ MIDINote mute[8] = {
   {{ MCU::MUTE_7, CHANNEL_1, 0x0 }},
   {{ MCU::MUTE_8, CHANNEL_1, 0x0 }},
 };
-MIDINote muteXT[8] = {
+MIDINote muteXT[8] = {   // First extender uses cable number 0x1
   {{ MCU::MUTE_1, CHANNEL_1, 0x1 }}, // The mute status of the first track
   {{ MCU::MUTE_2, CHANNEL_1, 0x1 }},
   {{ MCU::MUTE_3, CHANNEL_1, 0x1 }},
@@ -138,8 +166,8 @@ MCU::VU VUMetersXT[8] = {
 // ========================================================================== //
 
 MCU::VUDisplay vuDisp[8] = {
-  // Draw the first VU meter to the display, at position (2, 48),
-  // (12) pixels wide, blocks of 3 pixels high, a spacing between
+  // Draw the first VU meter to the display, at position (2, 50),
+  // (12) pixels wide, blocks of (3) pixels high, a spacing between
   // blocks of (1) pixel, and draw in white.
   { displayA, VUMeters[0], { 2 + 16 * 0, 50 }, 12, 3, 1, WHITE },
   { displayA, VUMeters[1], { 2 + 16 * 1, 50 }, 12, 3, 1, WHITE },
@@ -211,13 +239,12 @@ NoteBitmapDisplay soloDispXT[8] = {
 // ========================================================================== //
 
 void setup() {
-  initializeDisplays();     // Start the OLED display
-  Control_Surface.begin();  // Initialize Control Surface
+  Control_Surface.begin();  // Initialize everything
 }
 
 // ---------------------------------- Loop ---------------------------------- //
 // ========================================================================== //
 
 void loop() {
-  Control_Surface.loop(); // Refresh all elements
+  Control_Surface.loop();  // Refresh all elements
 }
