@@ -51,25 +51,39 @@ class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
      */
     size_t write(uint8_t c) override = 0;
 
+    /// Draw a line between two points.
     virtual void drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1,
                           uint16_t color) = 0;
+    /// Draw a vertical line.
     virtual void drawFastVLine(int16_t x, int16_t y, int16_t h,
                                uint16_t color) = 0;
+    /// Draw a horizontal line.
     virtual void drawFastHLine(int16_t x, int16_t y, int16_t w,
                                uint16_t color) = 0;
 
+    /// Draw a bitmap to the display.
     virtual void drawXBitmap(int16_t x, int16_t y, const uint8_t bitmap[],
                              int16_t w, int16_t h, uint16_t color) = 0;
 
+    /// Draw a filled rectangle.
     virtual void fillRect(int16_t x, int16_t y, int16_t w, int16_t h,
                           uint16_t color);
 
+    /// Draw a circle.
     virtual void drawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color);
 
+    /// Draw a disk (filled circle).
     virtual void fillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color);
 
+    /// Initialize all displays.
+    /// @see    begin
     static void beginAll();
 
+    /**
+     * @brief   Clear the frame buffer, and draw the custom background.
+     * @see    clear
+     * @see    drawBackground
+     */
     void clearAndDrawBackground() {
         clear();
         drawBackground();

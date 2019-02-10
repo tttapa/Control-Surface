@@ -31,6 +31,15 @@
  * of the first 8 tracks, and the second display should display the ones of 
  * tracks 9-16.
  * 
+ * ### Demo
+ * 
+ * @htmlonly
+ * <iframe width="560" height="315"
+ * src="https://www.youtube.com/embed/_NJh6LyJjU8?start=25" frameborder="0"
+ * allow="accelerometer; autoplay; encrypted-media; gyroscope;
+ * picture-in-picture" allowfullscreen></iframe>
+ * @endhtmlonly
+ * 
  * Written by PieterP, 09-02-2019  
  * https://github.com/tttapa/Control-Surface
  */
