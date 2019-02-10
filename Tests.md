@@ -10,8 +10,8 @@ git clone https://github.com/google/googletest.git
 By default, the build script will look in your home directory for the google 
 test repository.
 
-If you already have the `googletest` repository locally, or if you wish to use
-a different path, you can edit this in `Control-Surface/build/CMakeLists.txt.in`.
+If you already have the `googletest` repository locally, or if you wish to use a
+different path, you can edit this in `Control-Surface/build/CMakeLists.txt.in`.
 
 ### 2. Run CMake
 ```sh

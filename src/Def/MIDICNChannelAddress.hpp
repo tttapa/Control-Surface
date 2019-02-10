@@ -49,16 +49,13 @@ class MIDICNChannelAddress {
   public:
     MIDICNChannelAddress() : addresses{0, 0, 0, 0} {}
     MIDICNChannelAddress(int address, Channel channel = CHANNEL_1,
-                         int cableNumber = 0)
+                         int cableNumber = 0x0)
         : addresses{1, (uint8_t)address, (uint8_t)channel.getRaw(),
                     (uint8_t)cableNumber} {
     } // Deliberate overflow for negative numbers
-    MIDICNChannelAddress(Channel channel, int8_t cableNumber = 0)
+    MIDICNChannelAddress(Channel channel, int cableNumber = 0x0)
         : addresses{1, 0, (uint8_t)channel.getRaw(), (uint8_t)cableNumber} {
     } // Deliberate overflow for negative numbers
-    /* MIDICNChannelAddress(uint8_t address, uint8_t channel = CHANNEL_1,
-                         uint8_t cableNumber = 0)
-        : addresses{1, address, channel, cableNumber} {} */
     MIDICNChannelAddress(const MIDICNChannel &address)
         : addresses(address.addresses) {}
 
@@ -76,19 +73,28 @@ class MIDICNChannelAddress {
 
     bool operator!=(const MIDICNChannelAddress &rhs) const;
 
+    /// Get the address [0, 127].
     uint8_t getAddress() const { return addresses.address; }
 
+    /// Get the channel [1, 16]
     Channel getChannel() const { return Channel{int8_t(addresses.channel)}; }
 
+    /// Get the cable number [0, 15]
     uint8_t getCableNumber() const { return addresses.cableNumber; }
 
+    /// Check if the MIDI address is valid.
     bool isValid() const { return addresses.valid; }
 
+    /// Check if the MIDI address is valid.
+    /// @see    isValid
     explicit operator bool() const { return isValid(); }
 
+    /// Check if two addresses match.
     static bool matchSingle(const MIDICNChannelAddress &toMatch,
                             const MIDICNChannelAddress &base);
 
+    /// Check if an address falls within a range of addresses, starting with
+    /// address `base`, with a given length.
     static bool matchAddressInRange(const MIDICNChannelAddress &toMatch,
                                     const MIDICNChannelAddress &base,
                                     uint8_t length);

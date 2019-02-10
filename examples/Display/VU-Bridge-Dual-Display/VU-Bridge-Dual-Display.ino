@@ -136,7 +136,7 @@ MIDINote soloXT[8] = {
 };
 
 // const auto decay = MCU::VU::NO_DECAY;
-const auto decay = 75;
+const auto decay = 60;
 
 // VU meters
 MCU::VU VUMeters[8] = {
