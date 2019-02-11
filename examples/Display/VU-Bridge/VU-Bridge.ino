@@ -1,10 +1,59 @@
+/**
+ * @brief   This is an example on how to use an OLED display to display the 
+ *          VU meters and mute/solo states of the eight first tracks, by using 
+ *          the Arduino as a Mackie Control Universal.  
+ * 
+ * If you want to display more than eight tracks, have a look at the 
+ * @ref VU-Bridge-Dual-Display.ino example, that uses MCU Extenders to display 
+ * up to 32 tracks.
+ * 
+ * The OLED display uses a RAM frame buffer of 1 KiB (128×64 pixels / 8 pixels
+ * per byte). This is a significant amount for AVR boards like the Arduino UNO,
+ * Nano, Leonardo, etc. Keep in mind that you might run out of memory, and that
+ * you'll need a more powerful board.
+ * 
+ * ### Connections
+ * This example drives two SSD1306 OLED displays over SPI
+ *  - SCK:  SSD1306 D0
+ *  - MOSI: SSD1306 D1
+ *  - 19:   SSD1306 DC
+ *  - 18:   SSD1306 CS
+ * 
+ * Add a capacitor between the reset pin of the display and ground, and a 
+ * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
+ * work fine.  
+ * You do need some way to reset the display, without it, it won't work.  
+ * Alternatively, you could use an IO pin from the Arduino to reset the 
+ * display, but this just "wastes" a pin.
+ * 
+ * @note    Don't forget that most OLED displays are 3.3V only, so connecting 
+ *          a display to a 5V Arduino directly will destroy it!
+ * 
+ * ### Behavior
+ * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
+ * 
+ * The first display should now display the level meters and mute/solo states
+ * of the first 8 tracks.
+ * 
+ * @note    There seem to be some differences in the way some applications 
+ *          handle VU meters: some expect the hardware to decay automatically,
+ *          some don't.  
+ *          If you notice that the meters behave strangely, try both decay 
+ *          options of the MCU::VU class, or try a different decay time.
+ * 
+ * ### Demo
+ * 
+ * @htmlonly
+ * <iframe width="560" height="315"
+ * src="https://www.youtube.com/embed/_NJh6LyJjU8?start=25" frameborder="0"
+ * allow="accelerometer; autoplay; encrypted-media; gyroscope;
+ * picture-in-picture" allowfullscreen></iframe>
+ * @endhtmlonly
+ */
+
 #include <Control_Surface.h> // Include the Control Surface library
 // Include the display interface you'd like to use
 #include <Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp>
-
-
-#include <Adafruit_SSD1306.h> // Include the library for your specific display
-#include <Wire.h>             // Include the I²C library for the display
 
 // ----------------------------- MIDI Interface ----------------------------- //
 // ========================================================================== //
@@ -15,14 +64,20 @@ USBMIDI_Interface midi;
 // ----------------------------- Display setup ------------------------------ //
 // ========================================================================== //
 
-Adafruit_SSD1306 ssd1306Display; // Instantiate a display
+constexpr uint8_t SCREEN_WIDTH = 128;
+constexpr uint8_t SCREEN_HEIGHT = 64;
 
-void initializeDisplay() {
-  // Initialize with the display with I²C address 0x3C
-  ssd1306Display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
-  Wire.setClock(1800000); // Set the I²C clock to 1.8 MHz for faster refresh
-  ssd1306Display.setRotation(2); // Flip the display upside down
-}
+constexpr int8_t OLED_DC = 19;    // Data/Command pin of the displays
+constexpr int8_t OLED_reset = -1; // Use the external RC circuit for reset
+constexpr int8_t OLED_CS = 18;    // Chip Select pin of the first display
+
+constexpr uint32_t SPI_Frequency = SPI_MAX_SPEED;
+
+// Instantiate the displays
+Adafruit_SSD1306 ssd1306Display = {
+  SCREEN_WIDTH, SCREEN_HEIGHT,
+  &SPI, OLED_DC, OLED_reset, OLED_CS, SPI_Frequency
+};
 
 // --------------------------- Display interface ---------------------------- //
 // ========================================================================== //
@@ -33,21 +88,18 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
     MySSD1306_DisplayInterface(Adafruit_SSD1306 &display)
       : SSD1306_DisplayInterface(display) {}
 
+    void begin() override {
+        disp.begin();
+        SSD1306_DisplayInterface::begin(); // If you override the begin method,
+                                           // remember to call the super class
+                                           // method
+    }
+
     void drawBackground() override {
-        disp.drawFastHLine(0, 52, 128, WHITE);
-        // disp.drawFastHLine(0, 63, 128, WHITE);
-        disp.drawRect(0, 0, 128, 64, WHITE);
+      disp.drawFastHLine(0, 52, 128, WHITE);
+      disp.drawRect(0, 0, 128, 64, WHITE);
     }
 } display = ssd1306Display;
-
-// -------------------------- MIDI Output Elements -------------------------- //
-// ========================================================================== //
-
-// A potentiometer that sets the master volume on analog pin A1
-PBPotentiometer masterVolume = { A1, MCU::MASTER_VOLUME };
-
-// A button to press play or pause on digital pin 7
-NoteButton playButton = {7, MCU::PLAY};
 
 // -------------------------- MIDI Input Elements --------------------------- //
 // ========================================================================== //
@@ -74,16 +126,19 @@ MIDINote solo[8] = {
   { MCU::SOLO_8 },
 };
 
+// const auto decay = MCU::VU::NO_DECAY;
+const auto decay = 60;
+
 // VU meters
 MCU::VU VUMeters[8] = {
-  { 1, MCU::VU::NO_DECAY }, // The VU meter for the first track, don't decay
-  { 2, MCU::VU::NO_DECAY },
-  { 3, MCU::VU::NO_DECAY },
-  { 4, MCU::VU::NO_DECAY },
-  { 5, MCU::VU::NO_DECAY },
-  { 6, MCU::VU::NO_DECAY },
-  { 7, MCU::VU::NO_DECAY },
-  { 8, MCU::VU::NO_DECAY },
+  { 1, decay }, // The VU meter for the first track, don't decay
+  { 2, decay },
+  { 3, decay },
+  { 4, decay },
+  { 5, decay },
+  { 6, decay },
+  { 7, decay },
+  { 8, decay },
 };
 
 // ---------------------------- Display Elements ---------------------------- //
@@ -91,7 +146,7 @@ MCU::VU VUMeters[8] = {
 
 MCU::VUDisplay vuDisp[8] = {
   // Draw the first VU meter to the display, at position (2, 48),
-  // (12) pixels wide, blocks of 3 pixels high, a spacing between 
+  // (12) pixels wide, blocks of (3) pixels high, a spacing between 
   // blocks of (1) pixel, and draw in white.
   { display, VUMeters[0], { 2 + 16 * 0, 50 }, 12, 3, 1, WHITE },
   { display, VUMeters[1], { 2 + 16 * 1, 50 }, 12, 3, 1, WHITE },
@@ -133,7 +188,6 @@ NoteBitmapDisplay soloDisp[8] = {
 // ========================================================================== //
 
 void setup() {
-  initializeDisplay();     // Start the OLED display
   Control_Surface.begin(); // Initialize Control Surface
 }
 

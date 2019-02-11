@@ -1,7 +1,7 @@
 /**
  * @brief   This is an example on how to use multiple displays to display the 
  *          VU meters of many tracks, by using the Arduino as a Mackie Control
- *          Universal with extenders.
+ *          Universal with extenders.  
  * 
  * This example is currenty only supported using MIDI over USB on Teensy boards,
  * due to limitations of the MIDIUSB library.
@@ -18,8 +18,11 @@
  * reset to ground, and a resistor from reset to 3.3V. The values are not
  * critical, 0.1µF and 10kΩ work fine.  
  * You do need some way to reset the displays, without it, they won't work.  
- * Alternatively, you can use an IO pin from the Teensy to reset the displays,
+ * Alternatively, you could use an IO pin from the Teensy to reset the displays,
  * but this just "wastes" a pin.
+ * 
+ * @note    Don't forget that most OLED displays are 3.3V only, so connecting 
+ *          them to a 5V Arduino directly will destroy them!
  * 
  * ### Behavior
  * Select "MIDIx4" from the Tools > USB Type menu.  
@@ -31,14 +34,11 @@
  * of the first 8 tracks, and the second display should display the ones of 
  * tracks 9-16.
  * 
- * ### Demo
- * 
- * @htmlonly
- * <iframe width="560" height="315"
- * src="https://www.youtube.com/embed/_NJh6LyJjU8?start=25" frameborder="0"
- * allow="accelerometer; autoplay; encrypted-media; gyroscope;
- * picture-in-picture" allowfullscreen></iframe>
- * @endhtmlonly
+ * @note    There seem to be some differences in the way some applications 
+ *          handle VU meters: some expect the hardware to decay automatically,
+ *          some don't.  
+ *          If you notice that the meters behave strangely, try both decay 
+ *          options of the MCU::VU class, or try a different decay time.
  * 
  * Written by PieterP, 09-02-2019  
  * https://github.com/tttapa/Control-Surface
@@ -60,10 +60,10 @@ USBMIDI_Interface midi;
 constexpr uint8_t SCREEN_WIDTH = 128;
 constexpr uint8_t SCREEN_HEIGHT = 64;
 
-constexpr int8_t OLED_DC = 19;
-constexpr int8_t OLED_reset = -1;
-constexpr int8_t OLED_CSA = 17;
-constexpr int8_t OLED_CSB = 18;
+constexpr int8_t OLED_DC = 19;    // Data/Command pin of the displays
+constexpr int8_t OLED_reset = -1; // Use the external RC circuit for reset
+constexpr int8_t OLED_CSA = 17;   // Chip Select pin of the first display
+constexpr int8_t OLED_CSB = 18;   // Chip Select pin of the second display
 
 constexpr uint32_t SPI_Frequency = SPI_MAX_SPEED;
 

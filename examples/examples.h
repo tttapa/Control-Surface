@@ -389,7 +389,7 @@
  *
  * @brief   This is an example on how to use multiple displays to display the 
  *          VU meters of many tracks, by using the Arduino as a Mackie Control
- *          Universal with extenders.
+ *          Universal with extenders.  
  * 
  * This example is currenty only supported using MIDI over USB on Teensy boards,
  * due to limitations of the MIDIUSB library.
@@ -406,8 +406,11 @@
  * reset to ground, and a resistor from reset to 3.3V. The values are not
  * critical, 0.1µF and 10kΩ work fine.  
  * You do need some way to reset the displays, without it, they won't work.  
- * Alternatively, you can use an IO pin from the Teensy to reset the displays,
+ * Alternatively, you could use an IO pin from the Teensy to reset the displays,
  * but this just "wastes" a pin.
+ * 
+ * @note    Don't forget that most OLED displays are 3.3V only, so connecting 
+ *          them to a 5V Arduino directly will destroy them!
  * 
  * ### Behavior
  * Select "MIDIx4" from the Tools > USB Type menu.  
@@ -419,6 +422,61 @@
  * of the first 8 tracks, and the second display should display the ones of 
  * tracks 9-16.
  * 
+ * @note    There seem to be some differences in the way some applications 
+ *          handle VU meters: some expect the hardware to decay automatically,
+ *          some don't.  
+ *          If you notice that the meters behave strangely, try both decay 
+ *          options of the MCU::VU class, or try a different decay time.
+ * 
+ * Written by PieterP, 09-02-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   VU-Bridge.ino
+ *
+ * @brief   This is an example on how to use an OLED display to display the 
+ *          VU meters and mute/solo states of the eight first tracks, by using 
+ *          the Arduino as a Mackie Control Universal.  
+ * 
+ * If you want to display more than eight tracks, have a look at the 
+ * @ref VU-Bridge-Dual-Display.ino example, that uses MCU Extenders to display 
+ * up to 32 tracks.
+ * 
+ * The OLED display uses a RAM frame buffer of 1 KiB (128×64 pixels / 8 pixels
+ * per byte). This is a significant amount for AVR boards like the Arduino UNO,
+ * Nano, Leonardo, etc. Keep in mind that you might run out of memory, and that
+ * you'll need a more powerful board.
+ * 
+ * ### Connections
+ * This example drives two SSD1306 OLED displays over SPI
+ *  - SCK:  SSD1306 D0
+ *  - MOSI: SSD1306 D1
+ *  - 19:   SSD1306 DC
+ *  - 18:   SSD1306 CS
+ * 
+ * Add a capacitor between the reset pin of the display and ground, and a 
+ * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
+ * work fine.  
+ * You do need some way to reset the display, without it, it won't work.  
+ * Alternatively, you could use an IO pin from the Arduino to reset the 
+ * display, but this just "wastes" a pin.
+ * 
+ * @note    Don't forget that most OLED displays are 3.3V only, so connecting 
+ *          a display to a 5V Arduino directly will destroy it!
+ * 
+ * ### Behavior
+ * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
+ * 
+ * The first display should now display the level meters and mute/solo states
+ * of the first 8 tracks.
+ * 
+ * @note    There seem to be some differences in the way some applications 
+ *          handle VU meters: some expect the hardware to decay automatically,
+ *          some don't.  
+ *          If you notice that the meters behave strangely, try both decay 
+ *          options of the MCU::VU class, or try a different decay time.
+ * 
  * ### Demo
  * 
  * @htmlonly
@@ -427,9 +485,6 @@
  * allow="accelerometer; autoplay; encrypted-media; gyroscope;
  * picture-in-picture" allowfullscreen></iframe>
  * @endhtmlonly
- * 
- * Written by PieterP, 09-02-2019  
- * https://github.com/tttapa/Control-Surface
  */
 
 /**
