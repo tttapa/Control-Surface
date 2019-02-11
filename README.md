@@ -4,8 +4,7 @@ An Arduino library for MIDI control surfaces (input and output).
 
 ## UNDER CONSTRUCTION
 
-Should not be considered stable. API is bound to change in the near future. 
-Master might not even compile on some boards.
+Should not be considered stable. API is might change in the near future.
 
 ## Overview
 
@@ -63,14 +62,14 @@ filtering analog inputs, and so on).
 - Adding support for motorized faders
 - Cleaning up the display code
 - Cleaning up the MIDI over Bluetooth LE code
-- Adding more tests (currently at over 150 tests)
+- Adding more tests (currently at over 170 unit tests)
 - Adding more examples and adding comments to existing examples
 - Finishing the documentation
 
 ## Getting Started
 
-See the [Getting Started](doc/Getting-Started.md) document to get started using
-the library.
+See the [Getting Started](https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html)
+document to get started using the library.
 
 ## Documentation
 
