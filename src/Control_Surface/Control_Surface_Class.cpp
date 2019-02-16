@@ -68,6 +68,7 @@ void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
     DEBUG(F("CN = ") << midimsg.CN);
 
 #ifdef DEBUG_MIDI_PACKETS
+    // TODO: print CN   
     if (midimsg.type != PROGRAM_CHANGE && midimsg.type != CHANNEL_PRESSURE)
         DEBUG(">>> " << hex << +midichmsg.header << ' ' << +midimsg.data1 << ' '
                      << +midimsg.data2 << dec);
@@ -111,8 +112,9 @@ void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
 void Control_Surface_::onSysExMessage(MIDI_Interface &midi) {
     // System Exclusive
 #ifdef DEBUG_MIDI_PACKETS
-    const uint8_t *data = midi.getSysExBuffer();
-    size_t len = midi.getSysExLength();
+    const uint8_t *data = midi.getSysExMessage().data;
+    size_t len = midi.getSysExMessage().length;
+    // TODO: print CN
     DEBUG_OUT << hex;
     for (size_t i = 0; i < len; i++)
         DEBUG_OUT << data[i] << ' ';
