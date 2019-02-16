@@ -4,6 +4,7 @@
 #include <Display/DisplayElement.hpp>
 #include <MIDI_Inputs/MIDINote.hpp>
 
+/// A class that displays a bitmap depending on the state of a MIDINote.
 class NoteBitmapDisplay : public DisplayElement {
   public:
     NoteBitmapDisplay(DisplayInterface &display, MIDINote_Base &note,

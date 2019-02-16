@@ -24,10 +24,15 @@ Button	KEYWORD1
 CCPotentiometer	KEYWORD1
 CCRotaryEncoder	KEYWORD1
 
+CCButtonLatched	KEYWORD1
+
+Bankable	KEYWORD1
 Bank	KEYWORD1
-BankSelector	KEYWORD1
 Transposer	KEYWORD1
 ProgramSelector	KEYWORD1
+
+Selector	KEYWORD1
+SwitchSelector	KEYWORD1
 
 ExtIO	KEYWORD1
 ExtendedIOElement	KEYWORD1
@@ -125,6 +130,8 @@ Pressed	LITERAL1
 Released	LITERAL1
 
 State	LITERAL1
+
+MIDI_BAUD	LITERAL1
 
 # MCU
 ######################################

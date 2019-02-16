@@ -3,6 +3,13 @@
 #include <Display/DisplayElement.hpp>
 #include <Selectors/Selector.hpp>
 
+/**
+ * @brief   A class for displaying the setting of a Selector object.
+ * 
+ * @tparam  N 
+ *          The number of settings.
+ * @todo    Super class to Selector to remove template?
+ */
 template <setting_t N>
 class SelectorDisplay : public DisplayElement {
   public:
