@@ -72,3 +72,12 @@ TEST(generateArray, simple) {
     Array<unsigned int, 4> y = {0, 1, 2, 3};
     EXPECT_EQ(x, y);
 }
+
+// -------------------------------------------------------------------------- //
+
+TEST(Array, slice) {
+     Array<int, 5> a = {1, 2, 3, 4, 5};
+     Array<int, 3> result = a.slice<1, 4>();
+     Array<int, 3> expected = {2, 3, 4};
+     EXPECT_EQ(result, expected);
+}

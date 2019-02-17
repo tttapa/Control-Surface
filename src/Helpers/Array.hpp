@@ -104,6 +104,10 @@ struct Array {
      */
     template <size_t Start, size_t End = N>
     USE_CONSTEXPR_ARRAY_HELPERS Array<T, End - Start> slice() const {
+        static_assert(Start < N, "Start index out of bounds");
+        static_assert(End <= N, "End index out of bounds");
+        static_assert(Start < End,
+                      "Start index should be smaller than End index");
         Array<T, End - Start> result = {};
         for (size_t i = Start, j = 0; i < End; ++i, ++j)
             result[j] = (*this)[i];
