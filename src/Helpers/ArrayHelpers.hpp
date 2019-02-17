@@ -4,12 +4,6 @@
 
 #include "Array.hpp"
 
-#if __cplusplus >= 201400L
-#define USE_CONSTEXPR_ARRAY_HELPERS constexpr
-#else
-#define USE_CONSTEXPR_ARRAY_HELPERS
-#endif
-
 /// https://en.cppreference.com/w/cpp/algorithm/generate
 template <class ForwardIt, class Generator>
 USE_CONSTEXPR_ARRAY_HELPERS void generate(ForwardIt first, ForwardIt last,

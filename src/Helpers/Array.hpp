@@ -4,6 +4,12 @@
 
 #include <stddef.h>
 
+#if __cplusplus >= 201400L
+#define USE_CONSTEXPR_ARRAY_HELPERS constexpr
+#else
+#define USE_CONSTEXPR_ARRAY_HELPERS
+#endif
+
 /**
  * @brief   An array wrapper for easy copying, comparing, and iterating.
  * 
@@ -79,4 +85,28 @@ struct Array {
      *          The array to compare this array to.
      */
     bool operator!=(const Array<T, N> &rhs) const { return !(*this == rhs); }
+
+    /**
+     * @brief   Get a copy of a slice of the array.
+     * 
+     * @tparam  Start 
+     *          The index of the first element to copy.
+     * @tparam  End
+     *          The index of the first element not to copy, one index beyond the
+     *          end of the new array
+     * 
+     * For example:
+     * ```
+     * Array<int, 5> a = {1, 2, 3, 4, 5};
+     * Array<int, 3> b = a.slice<1, 4>();
+     * // b == {2, 3, 4}
+     * ```
+     */
+    template <size_t Start, size_t End = N>
+    USE_CONSTEXPR_ARRAY_HELPERS Array<T, End - Start> slice() const {
+        Array<T, End - Start> result = {};
+        for (size_t i = Start, j = 0; i < End; ++i, ++j)
+            result[j] = (*this)[i];
+        return result;
+    }
 };
