@@ -15,7 +15,7 @@
  * @see     FilteredAnalog
  */
 template <ContinuousSendFunction7Bit send, uint8_t PRECISION>
-class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
+class MIDIFilteredAnalogAddressable : public MIDIOutputElementPotentiometer {
   protected:
     /**
      * @brief   Construct a new MIDIFilteredAnalog.

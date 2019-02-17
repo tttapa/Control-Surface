@@ -2,20 +2,8 @@
 
 #include <Banks/BankableMIDIInput.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <MIDI_Inputs/DecayingVU.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
-#include <string.h>
-
-/** 
- * @brief   An abstract interface for VU meters. It declares two methods:
- *          `getValue` and `getOverload`.
- */
-class IVU {
-  public:
-    /** Return the VU meter value as an integer. */
-    virtual uint8_t getValue() const = 0;
-    /** Return the overload status. */
-    virtual bool getOverload() const = 0;
-};
 
 namespace MCU {
 
@@ -24,77 +12,60 @@ namespace MCU {
  *          meter.  
  *          This is a base class to both the Bankable and non-Bankable version.
  */
-class VU_Base : public MIDIInputElementChannelPressure, public IVU {
+class VU_Base : public MIDIInputElementChannelPressure,
+                public IVU,
+                public DecayingVU {
   public:
     VU_Base(); // Just for virtual inheritance
     VU_Base(const MIDICNChannelAddress &address, unsigned int decayTime)
         : MIDIInputElementChannelPressure{address - 1}, // tracks are zero-based
-          decayTime(decayTime) {}
+          DecayingVU(decayTime) {}
 
-    /** Return the VU meter value as an integer in [0, 12]. */
+    /// Return the VU meter value as an integer in [0, 12].
     uint8_t getValue() const override { return getValueHelper(getRawValue()); }
-    /** Return the overload status. */
+    /// Return the overload status.
     bool getOverload() const override {
         return getOverloadHelper(getRawValue());
     }
 
-    constexpr static unsigned int NO_DECAY = 0;
-
   private:
-    const unsigned long decayTime;
-    unsigned long prevDecayTime = 0;
-
-    void update() override {
-        if (decayTime && ((millis() - prevDecayTime) >= decayTime)) {
-            prevDecayTime += decayTime;
-            decayAll();
-            display();
-        }
-    }
+    void update() override { DecayingVU::update(); }
 
     MIDICNChannelAddress
     getTarget(const MIDI_message_matcher &midimsg) const override {
         return {
+            // The track number is the high nibble of the first data byte
             int8_t(midimsg.data1 >> 4),
             Channel(midimsg.channel),
             midimsg.CN,
         };
     }
 
-    /** Automatically decay the VU meter value by one step (if it is greater
-     * than zero). */
-    virtual void decayAll() = 0;
-
-    /** Return the raw value of the VU meter, this includes the actual VU value
-     * and the overload status in a single byte. */
+    /// Return the raw value of the VU meter, this includes the actual VU value
+    /// and the overload status in a single byte.
     virtual uint8_t getRawValue() const = 0;
 
   protected:
-    /** Set the VU meter value.
-     * @todo    rawValue reference instead of return.
-     */
-    uint8_t setValueHelper(uint8_t rawValue, uint8_t newValue) {
-        prevDecayTime = millis();
-        newValue |= rawValue & 0xF0;
-        return newValue;
+    /// Set the VU meter value.
+    inline void setValueHelper(uint8_t &rawValue, uint8_t newValue) {
+        resetDecayTimer();
+        newValue &= 0x0F;
+        rawValue &= 0xF0;
+        rawValue |= newValue;
     }
-    /** Set the overload status.
-     * @todo    rawValue reference instead of return.
-     */
-    static inline uint8_t setOverloadHelper(uint8_t rawValue) {
-        return rawValue |= 0xF0;
+    /// Set the overload status.
+    static inline void setOverloadHelper(uint8_t &rawValue) {
+        rawValue |= 0xF0;
     }
-    /** Clear the overload status.
-     * @todo    rawValue reference instead of return.
-     */
-    static inline uint8_t clearOverloadHelper(uint8_t rawValue) {
-        return rawValue &= 0x0F;
+    /// Clear the overload status.
+    static inline void clearOverloadHelper(uint8_t &rawValue) {
+        rawValue &= 0x0F;
     }
-    /** Get the VU meter value from the raw value. */
+    /// Get the VU meter value from the raw value.
     static inline uint8_t getValueHelper(uint8_t rawValue) {
         return rawValue & 0x0F;
     }
-    /** Get the overload status value from the raw value. */
+    /// Get the overload status value from the raw value.
     static inline bool getOverloadHelper(uint8_t rawValue) {
         return rawValue & 0xF0;
     }
@@ -112,10 +83,10 @@ class VU : virtual public VU_Base {
     /** 
      * @brief   Construct a new VU object.
      * 
-     * @param   track
-     *          The track of the VU meter. [1, 8]
-     * @param   channel
-     *          The MIDI channel. [1, 16]
+     * @param   address
+     *          The track of the VU meter. [1, 8]  
+     *          The MIDI channel. [1, 16]  
+     *          The MIDI Cable Number. [0x0, 0xF]
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
      *          step.  
@@ -143,6 +114,8 @@ class VU : virtual public VU_Base {
     void reset() override { value = 0; }
 
   private:
+    void display() const override {}
+
     void decayAll() override {
         if (getValue() > 0)
             value--;
@@ -150,9 +123,9 @@ class VU : virtual public VU_Base {
 
     uint8_t getRawValue() const override { return value; }
 
-    void setValue(uint8_t newValue) { value = setValueHelper(value, newValue); }
-    void setOverload() { value = setOverloadHelper(value); }
-    void clearOverload() { value = clearOverloadHelper(value); }
+    void setValue(uint8_t newValue) { setValueHelper(value, newValue); }
+    void setOverload() { setOverloadHelper(value); }
+    void clearOverload() { clearOverloadHelper(value); }
 
     uint8_t value = 0;
 };
@@ -177,10 +150,10 @@ class VU : virtual public VU_Base, public BankableMIDIInput<N> {
      * 
      * @param   config
      *          The bank configuration to use.
-     * @param   track
-     *          The track of the VU meter. [1, 8]
-     * @param   channel
-     *          The MIDI channel. [1, 16]
+     * @param   address
+     *          The track of the VU meter. [1, 8]  
+     *          The MIDI channel. [1, 16]  
+     *          The MIDI Cable Number. [0x0, 0xF]
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
      *          step.  
@@ -198,6 +171,8 @@ class VU : virtual public VU_Base, public BankableMIDIInput<N> {
                     const MIDICNChannelAddress &target) override {
         uint8_t index =
             this->getIndex(target, address) % N; // Todo: modulo everywhere?
+        // TODO: I don't think getIndex cannot return any number >= N,
+        // because otherwise, it wouldn't have matched, right?
         uint8_t data = midimsg.data1 & 0x0F;
         switch (data) {
             case 0xF: clearOverload(index); break;
@@ -218,6 +193,8 @@ class VU : virtual public VU_Base, public BankableMIDIInput<N> {
     }
 
   private:
+    void display() const override {}
+
     void decayAll() override {
         for (uint8_t &value : values)
             if (getValueHelper(value) > 0)
@@ -229,14 +206,10 @@ class VU : virtual public VU_Base, public BankableMIDIInput<N> {
     }
 
     void setValue(uint8_t index, uint8_t newValue) {
-        values[index] = setValueHelper(values[index], newValue);
+        setValueHelper(values[index], newValue);
     }
-    void setOverload(uint8_t index) {
-        values[index] = setOverloadHelper(values[index]);
-    }
-    void clearOverload(uint8_t index) {
-        values[index] = clearOverloadHelper(values[index]);
-    }
+    void setOverload(uint8_t index) { setOverloadHelper(values[index]); }
+    void clearOverload(uint8_t index) { clearOverloadHelper(values[index]); }
 
     uint8_t values[N] = {};
 };

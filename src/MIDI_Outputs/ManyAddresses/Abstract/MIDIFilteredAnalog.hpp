@@ -14,7 +14,7 @@ namespace ManyAddresses {
  * @see     FilteredAnalog
  */
 template <setting_t N, ContinuousSendFunction7Bit send, uint8_t PRECISION>
-class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
+class MIDIFilteredAnalogAddressable : public MIDIOutputElementPotentiometer,
                                       public ManyAddressesMIDIOutput<N> {
   protected:
     /**

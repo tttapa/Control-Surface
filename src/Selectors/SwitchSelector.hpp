@@ -3,7 +3,7 @@
 #include "Selector.hpp"
 #include <Hardware/Button.hpp>
 
-class SwitchSelector : virtual public Selector<2> {
+class SwitchSelector : public Selector<2> {
   public:
     SwitchSelector(Selectable<2> &selectable, const Button &button)
         : Selector<2>(selectable), button(button) {}
@@ -22,4 +22,22 @@ class SwitchSelector : virtual public Selector<2> {
 
   private:
     Button button;
+};
+
+/// @todo   Move to correct file
+class SwitchSelectorLEDs : public SwitchSelector {
+  public:
+    SwitchSelectorLEDs(Selectable<2> &selectable, pin_t ledPin,
+                       const Button &button)
+        : SwitchSelector(selectable, button), ledPin(ledPin) {}
+
+    void beginOutput() override { pinMode(ledPin, OUTPUT); }
+
+    void updateOutput(setting_t oldSetting, setting_t newSetting) override {
+        (void)oldSetting;
+        digitalWrite(ledPin, newSetting);
+    }
+
+  private:
+    const pin_t ledPin;
 };
