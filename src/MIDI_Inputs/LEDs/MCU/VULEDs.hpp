@@ -23,9 +23,11 @@ class VULEDs_Base : virtual public VU_Base {
   private:
     const DotBarDisplayLEDs<N> leds;
 
-    /** @see    doc/VU-LED-mapping.ods */
+    /// @see    doc/VU-LED-mapping.ods
     constexpr static uint8_t FLOOR_CORRECTION = 5;
 };
+
+// -------------------------------------------------------------------------- //
 
 class VULEDPWM_Base : virtual public VU_Base {
   protected:
@@ -44,6 +46,8 @@ class VULEDPWM_Base : virtual public VU_Base {
   private:
     const pin_t ledPin;
 };
+
+// -------------------------------------------------------------------------- //
 
 /**
  * @brief 
@@ -73,6 +77,8 @@ class VULEDPWM : public VU, public VULEDPWM_Base {
   private:
     void display() const override { VULEDPWM_Base::display(); }
 };
+
+// -------------------------------------------------------------------------- //
 
 namespace Bankable {
 
