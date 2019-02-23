@@ -43,9 +43,9 @@ namespace Bankable {
 template <uint8_t N>
 class MIDINoteLED : public MIDINote<N>, public MIDINoteLED_Base {
   public:
-    MIDINoteLED(const BankConfig<N> &config, pin_t ledPin, uint8_t note,
-                uint8_t channel = 1)
-        : MIDINote_Base(note, channel), MIDINote<N>(config, note, channel),
+    MIDINoteLED(const BankConfig<N> &config, pin_t ledPin,
+                const MIDICNChannelAddress &address)
+        : MIDINote_Base(address), MIDINote<N>(config, address),
           MIDINoteLED_Base(ledPin) {}
 };
 
