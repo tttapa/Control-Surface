@@ -3,6 +3,8 @@
 #include "Selector.hpp"
 #include <Hardware/Button.hpp>
 
+/// A class for selectors that select one of two settings, based on the state
+/// of a toggle switch.
 class SwitchSelector : virtual public Selector<2> {
   public:
     SwitchSelector(Selectable<2> &selectable, const Button &button)
