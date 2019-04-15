@@ -35,9 +35,15 @@ using PinList = Array<pin_t, N>;
 
 /// A struct for the pins of a rotary (quadrature) encoder with a switch.
 struct EncoderSwitchPinList {
+    // TODO: why do I need explicit constructors?
+    EncoderSwitchPinList(uint8_t A, uint8_t B, pin_t switchPin)
+        : A(A), B(B), switchPin(switchPin) {}
+    EncoderSwitchPinList(uint8_t A, uint8_t B)
+        : A(A), B(B), switchPin(NO_PIN) {}
+
     uint8_t A; ///< The pin connected to the A pin of the encoder.
     uint8_t B; ///< The pin connected to the B pin of the encoder.
-    pin_t switchPin = NO_PIN; ///< The pin connected to the switch pin of the 
+    pin_t switchPin = NO_PIN; ///< The pin connected to the switch pin of the
                               ///< encoder.
 };
 
