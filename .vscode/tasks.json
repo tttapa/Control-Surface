@@ -5,22 +5,38 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "Make & Test",
-            "command": "cd build && make -j$(nproc) && make test",
+            "label": "Make All",
+            "command": "make -j$[$(nproc) * 2]",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
             "problemMatcher": "$gcc",
             "group": {
                 "kind": "build",
-                "isDefault": true
-            }
+                "isDefault": true,
+            },
         },
         {
             "type": "shell",
-            "label": "Build examples",
+            "label": "Make Test",
+            "command": "make test",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "dependsOn": "Make All",
+            "problemMatcher": "$gcc",
+            "group": "test",
+        },
+        {
+            "type": "shell",
+            "label": "Make & Test & Build examples",
             "command": "./build-arduino.sh $[$(nproc) * 2]",
             "problemMatcher": "$gcc",
             "options": {
-                "cwd": "${workspaceFolder}/scripts"
-            }
+                "cwd": "${workspaceFolder}/scripts",
+            },
+            "dependsOn": "Make & Test",
+            "group": "test",
         }
     ]
 }
