@@ -313,6 +313,21 @@
  */
 
 /**
+ * @example   NoteChordButton.ino
+ *
+ * @brief   This is an example of the `NoteChordButton` class of the 
+ *          Control_Surface library.  
+ * 
+ * Connect 7 momentary push buttons between pins 2-8 and ground. These will play
+ * chords when pressed.
+ * 
+ * Connect a rotary encoder to pins 0 & 1. This will transpose the MIDI chords.
+ * 
+ * Written by Pieter P, 15-04-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   PushButtonsLEDs.ino
  *
  * @brief   This example demonstrates the use of push buttons and LEDs.

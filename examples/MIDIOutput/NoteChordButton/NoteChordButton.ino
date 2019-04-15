@@ -1,3 +1,16 @@
+/**
+ * @brief   This is an example of the `NoteChordButton` class of the 
+ *          Control_Surface library.  
+ * 
+ * Connect 7 momentary push buttons between pins 2-8 and ground. These will play
+ * chords when pressed.
+ * 
+ * Connect a rotary encoder to pins 0 & 1. This will transpose the MIDI chords.
+ * 
+ * Written by Pieter P, 15-04-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
 #include <Encoder.h> // Include the Encoder library.
 // This must be done before the Control Surface library.
 #include <Control_Surface.h> // Include the Control Surface library
