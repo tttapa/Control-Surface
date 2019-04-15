@@ -12,6 +12,15 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "type": "shell",
+            "label": "Build examples",
+            "command": "./build-arduino.sh $[$(nproc) * 2]",
+            "problemMatcher": "$gcc",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts"
+            }
         }
     ]
 }
