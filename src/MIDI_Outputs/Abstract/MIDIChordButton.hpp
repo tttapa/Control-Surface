@@ -1,13 +1,10 @@
 #pragma once
 
-#include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
 #include <Hardware/Button.hpp>
 #include <Helpers/unique_ptr.hpp>
 #include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
-
-namespace Bankable {
 
 /**
  * @brief   An abstract class for momentary push buttons that send multiple MIDI
@@ -18,12 +15,11 @@ namespace Bankable {
  * @see     Button
  */
 template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
-class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
+class MIDIChordButton : public MIDIOutputElement {
   public:
     /**
-     * @brief   Construct a new bankable MIDIChordButton.
+     * @brief   Construct a new MIDIChordButton.
      *
-     * @param   config
      * @param   pin
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
@@ -31,10 +27,9 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
      * @param   chord
      */
     template <uint8_t N>
-    MIDIChordButton(const OutputBankConfig &config, pin_t pin,
-                    const MIDICNChannelAddress &address, const Chord<N> &chord)
-        : BankableMIDIOutput{config}, button{pin}, address(address),
-          newChord(new Chord<N>(chord)) {}
+    MIDIChordButton(pin_t pin, const MIDICNChannelAddress &address,
+                    const Chord<N> &chord)
+        : button{pin}, address(address), newChord(new Chord<N>(chord)) {}
     // TODO: can I somehow get rid of the dynamic memory allocation here?
 
     void begin() final override { button.begin(); }
@@ -44,17 +39,13 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
         if (state == Button::Falling) {
             if (newChord)
                 chord = move(newChord);
-            lock();
-            sendAddress += getAddressOffset();
             sendOn(sendAddress);
             for (int8_t offset : *chord)
                 sendOn(sendAddress + offset);
         } else if (state == Button::Rising) {
-            sendAddress += getAddressOffset();
             sendOff(sendAddress);
             for (int8_t offset : *chord)
                 sendOff(sendAddress + offset);
-            unlock();
         }
     }
 
@@ -74,5 +65,3 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
     unique_ptr<const IChord> chord;
     unique_ptr<const IChord> newChord;
 };
-
-} // namespace Bankable

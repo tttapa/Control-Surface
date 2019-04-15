@@ -67,5 +67,8 @@ class EncoderSelector : public EncoderSelector_Base<N> {
                                                            wrap) {}
 
     void beginOutput() override {}
-    void updateOutput(setting_t oldSetting, setting_t newSetting) override {}
+    void updateOutput(setting_t oldSetting, setting_t newSetting) override {
+        (void) oldSetting;
+        (void) newSetting;
+    }
 };

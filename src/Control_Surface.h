@@ -39,6 +39,7 @@
 #include <MIDI_Outputs/NoteButtonLatching.hpp>
 #include <MIDI_Outputs/NoteButtonMatrix.hpp>
 #include <MIDI_Outputs/NoteButtons.hpp>
+#include <MIDI_Outputs/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/PBPotentiometer.hpp>
 

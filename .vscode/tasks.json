@@ -35,7 +35,7 @@
             "options": {
                 "cwd": "${workspaceFolder}/scripts",
             },
-            "dependsOn": "Make & Test",
+            "dependsOn": "Make Test",
             "group": "test",
         }
     ]
