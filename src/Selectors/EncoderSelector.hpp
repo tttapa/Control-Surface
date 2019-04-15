@@ -18,6 +18,11 @@ class EncoderSelector_Base : virtual public Selector<N> {
         : encoder{pins.A, pins.B}, switchPin(pins.switchPin),
           pulsesPerStep(pulsesPerStep), wrap(wrap) {}
 
+    EncoderSelector_Base(const EncoderPinList &pins, int8_t pulsesPerStep = 4,
+                         Wrap wrap = Wrap::Wrap)
+        : encoder{pins.A, pins.B}, switchPin(NO_PIN),
+          pulsesPerStep(pulsesPerStep), wrap(wrap) {}
+
     void beginInput() override {
         if (switchPin != NO_PIN)
             ExtIO::pinMode(switchPin, INPUT_PULLUP);
@@ -62,6 +67,11 @@ template <setting_t N>
 class EncoderSelector : public EncoderSelector_Base<N> {
   public:
     EncoderSelector(Selectable<N> &selectable, const EncoderSwitchPinList &pins,
+                    int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
+        : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
+                                                           wrap) {}
+
+    EncoderSelector(Selectable<N> &selectable, const EncoderPinList &pins,
                     int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
         : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
                                                            wrap) {}

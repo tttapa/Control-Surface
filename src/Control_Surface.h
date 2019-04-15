@@ -48,15 +48,16 @@
 #include <MIDI_Outputs/Bankable/CCButtonMatrix.hpp>
 #include <MIDI_Outputs/Bankable/CCButtons.hpp>
 
+#include <MIDI_Outputs/Bankable/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/Bankable/CCPotentiometer.hpp>
 #include <MIDI_Outputs/ManyAddresses/CCPotentiometer.hpp>
-#include <MIDI_Outputs/Bankable/CCIncrementDecrementButtons.hpp>
 
 #include <MIDI_Outputs/Bankable/NoteButton.hpp>
 #include <MIDI_Outputs/Bankable/NoteButtonLatched.hpp>
 #include <MIDI_Outputs/Bankable/NoteButtonLatching.hpp>
 #include <MIDI_Outputs/Bankable/NoteButtonMatrix.hpp>
 #include <MIDI_Outputs/Bankable/NoteButtons.hpp>
+#include <MIDI_Outputs/Bankable/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
 
@@ -109,6 +110,7 @@
 #include <Hardware/ExtendedInputOutput/ShiftRegisterOut.hpp>
 
 // ----------------------------- MIDI Constants ----------------------------- //
+#include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Constants/Control_Change.hpp>
 #include <MIDI_Constants/MCU.hpp>
 #include <MIDI_Constants/Notes.hpp>
