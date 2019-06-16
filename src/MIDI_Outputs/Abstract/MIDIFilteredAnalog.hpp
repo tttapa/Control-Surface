@@ -42,10 +42,22 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the analog value (`PRECISION` bits) as a parameter,
-     *          and should return a 10-bit value.
+     *          should take the filtered analog value of `PRECISION` bits as a 
+     *          parameter, and should return a value of `PRECISION` bits.
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
+
+    /**
+     * @brief   Get the raw value of the analog input (this is the value 
+     *          without applying the mapping function first).
+     */
+    uint8_t getRawValue() const { return filteredAnalog.getRawValue(); }
+
+    /**
+     * @brief   Get the value of the analog input (this is the value after first
+     *          applying the mapping function).
+     */
+    uint8_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
     FilteredAnalog<PRECISION> filteredAnalog;
@@ -92,10 +104,22 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the 10-bit analog value as a parameter, and
-     *          should return a 10-bit value.
+     *          should take the filtered analog value of `PRECISION` bits as a 
+     *          parameter, and should return a value of `PRECISION` bits.
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
+
+    /**
+     * @brief   Get the raw value of the analog input (this is the value 
+     *          without applying the mapping function first).
+     */
+    uint8_t getRawValue() const { return filteredAnalog.getRawValue(); }
+
+    /**
+     * @brief   Get the value of the analog input (this is the value after first
+     *          applying the mapping function).
+     */
+    uint8_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
     FilteredAnalog<PRECISION> filteredAnalog;
