@@ -44,6 +44,9 @@ for root, dirs, files in os.walk(exampledir):
                     print('\t\033[0;32mFound documentation for', file, 
                         '\033[0m')
                     docstr = s[1].split('*/',1)[0]
+                    # Add line break after brief
+                    docstr = re.sub(r'^\s*\*\s*$', r'\g<0><br>  ', docstr, 1, 
+                                    re.MULTILINE)
                     output += "/**\r\n * @example   "
                     output += basename(file)
                     output += "\r\n *"

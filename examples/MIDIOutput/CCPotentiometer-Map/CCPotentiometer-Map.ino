@@ -7,7 +7,7 @@
  * volume of channel 1.  
  * Map it in your DAW or DJ software.
  * 
- * Written by Pieter P, 28-08-2018  
+ * Written by Pieter P, 16-06-2019  
  * https://github.com/tttapa/Control-Surface
  */
 

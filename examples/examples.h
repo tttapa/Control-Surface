@@ -3,7 +3,7 @@
  *
  * @brief   This example demonstrates the use of push buttons and LEDs and how 
  *          to use shift registers and analog multiplexers to save pins.  
- * 
+ * <br>  
  * Connections:  
  * 
  *   - 10: 74HC595 ST_CP
@@ -42,7 +42,7 @@
  *
  * @brief   This example demonstrates the use of shift registers as if they were
  *          just normal IO pins.
- * 
+ * <br>  
  * Connections:  
  * 
  *   - 10: 74HC595 ST_CP
@@ -66,7 +66,7 @@
  *
  * @brief   This example demonstrates the use of shift registers as if they were
  *          just normal IO pins.
- * 
+ * <br>  
  * Connections:  
  * 
  *   - SS:   74HC595 ST_CP
@@ -91,7 +91,7 @@
  * @brief   This is an example of the ShiftRegisterOut class of the Control
  *          Surface library. It creates light effects using three 8-bit shift
  *          registers and some RGB LEDs.
- *
+ * <br>  
  * Connect three daisy-chained shift registers to pins 10 (ST_CP), 11 (DS) and 
  * 13 (SH_CP).  
  * Connect 8 RGB LEDs (+ current limiting resistors) to the outputs of the shift
@@ -129,7 +129,7 @@
  * @example   Multiplexer-AnalogReadSerial.ino
  *
  * @brief   This is an example of the AnalogMultiplex class.
- * 
+ * <br>  
  * ### Connections
  *  - 9:  CD74HC4067 address pin S0
  *  - 10: CD74HC4067 address pin S1
@@ -160,7 +160,7 @@
  * @example   LED.ino
  *
  * @brief   This example demonstrates the use of LEDs that respond to MIDI input.
- * 
+ * <br>  
  * If a MIDI Note On event for note 0x3C (middle C) is sent, the built-in LED
  * will light up, if a Note Off event for that note is sent, the LED will turn
  * off.
@@ -175,7 +175,7 @@
  * @brief   This is an example on how to use an OLED display to display the 
  *          VU meters and mute/solo states of the eight first tracks, by using 
  *          the Arduino as a Mackie Control Universal.  
- * 
+ * <br>  
  * If you want to display more than eight tracks, have a look at the 
  * @ref VU-Bridge-Dual-Display.ino example, that uses MCU Extenders to display 
  * up to 32 tracks.
@@ -229,7 +229,7 @@
  *
  * @brief An extensive example demonstrating the use of DisplayElement%s
  *        to display information from the DAW on a small OLED display.
- *
+ *<br>  
  * The example displays the cursor time location, play and record status,
  * and for each of the 8 first tracks, it displays:
  * mute, solo, record ready, pan, and VU level meter with peak indicator.
@@ -248,7 +248,7 @@
  * @brief   This is an example on how to use multiple displays to display the 
  *          VU meters of many tracks, by using the Arduino as a Mackie Control
  *          Universal with extenders.  
- * 
+ * <br>  
  * This example is currenty only supported using MIDI over USB on Teensy boards,
  * due to limitations of the MIDIUSB library.
  * 
@@ -295,7 +295,7 @@
  *
  * @brief   This example demonstrates the use of push buttons that send note 
  *          events.
- * 
+ * <br>  
  * ### Connections
  * 
  *  - 2:  momentary push button (to ground)
@@ -316,7 +316,7 @@
  * @example   PushButtonsLEDs.ino
  *
  * @brief   This example demonstrates the use of push buttons and LEDs.
- * 
+ * <br>  
  * Connections:
  *  2:  momentary push button (to ground)
  *  3:  momentary push button (to ground)
@@ -342,7 +342,7 @@
  *
  * @brief   This example demonstrates the use of push buttons and LEDs without
  *          feedback from the software.
- *
+ *<br>  
  * This means that the state of the LEDs could be wrong if you click the button
  * on your computer.
  *
@@ -368,7 +368,7 @@
  * 
  * This is an example that demonstrates the use of a rotary encoder that can 
  * be used for scrolling through a song list, tuning effects, etc.
- *
+ *<br>  
  * ### Connections
  * 
  *   - 2: pin A of the rotary encoder
@@ -399,7 +399,7 @@
  *
  * @brief   This is an example of the `CCPotentiometer` class of the 
  *          Control_Surface library.
- * 
+ * <br>  
  * Connect a potentiometer to analog pin A0. This will be the MIDI channel volume of channel 1.  
  * Map it in your DAW or DJ software.
  * 
@@ -411,7 +411,7 @@
  * @example   NoteButtonMatrixKeyboard.ino
  * 
  * @brief   This is an example to demonstrate the use of a ButtonMatrix.
- * 
+ * <br>  
  * ### Connections
  *  
  *  - A0-A3: The row pins of the button matrix (with the cathodes of the diodes)
@@ -436,12 +436,12 @@
  * @brief   This is an example of the `CCPotentiometer` class of the 
  *          Control_Surface library, and specifically, how to use the `map`
  *          function to account for non-linearities of the potentiometer.
- * 
+ * <br>  
  * Connect a potentiometer to analog pin A0. This will be the MIDI channel 
  * volume of channel 1.  
  * Map it in your DAW or DJ software.
  * 
- * Written by Pieter P, 28-08-2018  
+ * Written by Pieter P, 16-06-2019  
  * https://github.com/tttapa/Control-Surface
  */
 
@@ -451,7 +451,7 @@
  * This is an example that demonstrates the use of Increment and 
  * Decrement buttons that can be used for scrolling through a song
  * list, tuning effects, etc.
- *
+ *<br>  
  * ### Connections
  * 
  *   - 5: momentary push button (to ground)
@@ -485,7 +485,7 @@
  *
  * @brief   This example demonstrates the use of push buttons and LEDs and how 
  *          to use shift registers and analog multiplexers to save pins.  
- * 
+ * <br>  
  * Connections:  
  * 
  *   - 10: 74HC595 ST_CP
@@ -522,7 +522,7 @@
  * @example   ProgramChanger.ino
  *
  * @brief   This is an example of the ProgramChanger and Selector classes.
- * 
+ * <br>  
  * ### Connections
  *  - 5: A momentary push button (to ground)
  *  - 6: A momentary push button (to ground)
@@ -567,7 +567,7 @@
  * @example   VUMeterOLED-USB-DAC.ino
  *
  * Connections:
- * 
+ * <br>  
  * A0: wiper of a potentiometer to change the output volume
  * A1: wiper of a potentiometer to change the VU gain
  * 
@@ -581,7 +581,7 @@
  * @example   VUMeterLEDs-USB-DAC.ino
  *
  * Connections:
- *
+ *<br>  
  * A0: wiper of a potentiometer to change the output volume
  * A1: wiper of a potentiometer to change the VU gain
  *
@@ -596,7 +596,7 @@
  *
  * This is the example used in the 'Getting Started' guide.  
  * Read the guide: https://github.com/tttapa/Control-Surface/blob/revision-4/doc/Getting-Started.md
- * 
+ * <br>  
  * Written by PieterP, 29-08-2018  
  * https://github.com/tttapa/Control-Surface
  */
