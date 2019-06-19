@@ -91,7 +91,7 @@
  * @brief   This is an example of the ShiftRegisterOut class of the Control
  *          Surface library. It creates light effects using three 8-bit shift
  *          registers and some RGB LEDs.
- * <br>  
+ *<br>  
  * Connect three daisy-chained shift registers to pins 10 (ST_CP), 11 (DS) and 
  * 13 (SH_CP).  
  * Connect 8 RGB LEDs (+ current limiting resistors) to the outputs of the shift
