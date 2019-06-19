@@ -18,8 +18,6 @@
  *
  * [An in-depth explanation of the EMA filter]
  * (https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential%20Moving%20Average/)
- * 
- * Fixed-point integer arithmetic with a precision of @f$ 2K @f$ is used.
  *
  * @tparam  K
  *          The amount of bits to shift by. This determines the location
@@ -28,7 +26,7 @@
  * @tparam  int_t
  *          The (signed) integer type to use for the input, intermediate values
  *          and the output.
- *          Should be at least @f$ M+1+2K @f$ bits wide, where @f$ M @f$
+ *          Should be at least @f$ M+K @f$ bits wide, where @f$ M @f$
  *          is the maximum number of bits of the input.
  *          In case of the Arduino's built-in ADC,
  *          @f$ M = 10 = \log_2(1024) @f$.
@@ -48,19 +46,16 @@ class EMA {
 
   private:
     int_t filtered = 0;
-    constexpr static int_t fixedPointAHalf = 1 << ((K * 2) - 1);
 };
 
 // ------------ Implementation ------------ //
 
 template <uint8_t K, class int_t>
 int_t EMA<K, int_t>::filter(int_t input) {
-    input = input << (K * 2);
-    int_t difference = input - filtered;
-    filtered = filtered + (difference >> K);
-    // Left shift for division can result in an error of 1 for negative numbers
-    // however, it's not a problem in most cases.
-    return (filtered + fixedPointAHalf) >> (K * 2);
+    filtered += input;
+    int_t output = filtered >> K;
+    filtered -= output;
+    return output;
 }
 
 // -------------------------------------------------------------------------- //
