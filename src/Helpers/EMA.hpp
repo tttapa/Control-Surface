@@ -42,22 +42,17 @@ class EMA {
      *          The new raw input value.
      * @return  The new filtered output value.
      */
-    int_t filter(int_t input);
+    int_t filter(int_t input) {
+        filtered += input;
+        int_t output = (filtered + fixedPointAHalf) >> K;
+        filtered -= output;
+        return output;
+    }
 
   private:
     int_t filtered = 0;
     constexpr static int_t fixedPointAHalf = 1 << (K - 1);
 };
-
-// ------------ Implementation ------------ //
-
-template <uint8_t K, class int_t>
-int_t EMA<K, int_t>::filter(int_t input) {
-    filtered += input;
-    int_t output = (filtered + fixedPointAHalf) >> K;
-    filtered -= output;
-    return output;
-}
 
 // -------------------------------------------------------------------------- //
 
