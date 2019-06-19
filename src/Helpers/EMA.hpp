@@ -46,6 +46,7 @@ class EMA {
 
   private:
     int_t filtered = 0;
+    constexpr static int_t fixedPointAHalf = 1 << (K - 1);
 };
 
 // ------------ Implementation ------------ //
@@ -53,7 +54,7 @@ class EMA {
 template <uint8_t K, class int_t>
 int_t EMA<K, int_t>::filter(int_t input) {
     filtered += input;
-    int_t output = filtered >> K;
+    int_t output = (filtered + fixedPointAHalf) >> K;
     filtered -= output;
     return output;
 }
