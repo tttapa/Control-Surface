@@ -1,6 +1,7 @@
 #pragma once
 
-#ifdef ARDUINO
+#if 1
+// #ifdef ARDUINO
 
 #ifndef ARDUINO_ARCH_ESP32
 #error "MIDI over Bluetooth is only supported on ESP32 boards"
@@ -47,28 +48,44 @@ class BLEMIDI {
         pCharacteristic->setCallbacks(cb);
     }
 
-    void begin() {
-        // DEBUGFN("");
+    void begin(BLEServerCallbacks *serverCallbacks,
+               BLECharacteristicCallbacks *midiCallbacks) {
+        DEBUGFN("Initializing BLE MIDI Interface");
         if (BLEDevice::getInitialized()) {
             ERROR(F("Error: BLEDevice is initialized already"), 0x2022);
             return; // TODO: What to do here?
         }
-        BLEDevice::init(BLE_MIDI_NAME);
-        pServer = BLEDevice::createServer();
 
+        // Initialize the BLE device
+        BLEDevice::init(BLE_MIDI_NAME);
+
+        // Create the BLE server
+        pServer = BLEDevice::createServer();
+        setServerCallbacks(serverCallbacks);
+
+        // Create the BLE service
         BLEService *pService = pServer->createService(BLEUUID(SERVICE_UUID));
 
+        // Create a BLE characteristic
         pCharacteristic = pService->createCharacteristic(
             BLEUUID(CHARACTERISTIC_UUID),
             BLECharacteristic::PROPERTY_READ |
-                BLECharacteristic::PROPERTY_WRITE_NR |
-                BLECharacteristic::PROPERTY_NOTIFY);
+                BLECharacteristic::PROPERTY_WRITE |
+                BLECharacteristic::PROPERTY_NOTIFY |
+                BLECharacteristic::PROPERTY_WRITE_NR);
 
-        descriptor.setNotifications(true);
-        pCharacteristic->addDescriptor(&descriptor);
+        // Create a BLE descriptor
+        descriptor = new BLE2902();
+        pCharacteristic->addDescriptor(descriptor);
+        // descriptor.setNotifications(true);
 
+        // Start the service
         pService->start();
-        pServer->startAdvertising();
+
+        // Start advertising
+        BLEAdvertising *pAdvertising = pServer->getAdvertising();
+        pAdvertising->addServiceUUID(pService->getUUID());
+        pAdvertising->start();
     }
 
     void notifyValue(uint8_t *data, size_t len) {
@@ -81,7 +98,7 @@ class BLEMIDI {
   private:
     BLECharacteristic *pCharacteristic = nullptr;
     BLEServer *pServer = nullptr;
-    BLE2902 descriptor;
+    BLE2902 *descriptor;
 };
 
 #else

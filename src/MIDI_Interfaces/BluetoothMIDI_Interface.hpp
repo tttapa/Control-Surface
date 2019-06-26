@@ -51,7 +51,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
 
     unsigned long startTime = 0;
 
-    constexpr static size_t BUFFER_LENGTH = 128;
+    constexpr static size_t BUFFER_LENGTH = 1024;
 
     uint8_t buffer[BUFFER_LENGTH] = {};
     size_t index = 0;
@@ -68,9 +68,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     BluetoothMIDI_Interface() : MIDI_Interface(parser) {}
 
     void begin() override {
-        bleMidi.begin();
-        bleMidi.setServerCallbacks(this);
-        bleMidi.setCharacteristicsCallbacks(this);
+        bleMidi.begin(this, this);
     }
 
     void publish() {
