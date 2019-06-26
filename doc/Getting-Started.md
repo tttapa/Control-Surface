@@ -37,7 +37,7 @@ the [Hairless MIDI<->Serial Bridge](https://projectgus.github.io/hairless-midise
 In that case, you can use this MIDI interface. The default baud rate is 115200
 symbols per second.
 - `BluetoothMIDI_Interface`: If you have an ESP32, you can send and receive MIDI
-messages over Bluetooth Low Energie. This interface is still very much
+messages over Bluetooth Low Energy. This interface is still very much
 experimental, but it's pretty cool. If you know more about the MIDI BLE
 protocol, feel free to suggest some improvements.
 - `USBDebugMIDI_Interface`: Debugging MIDI Controllers can be very cumbersome. 
