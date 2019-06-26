@@ -52,6 +52,7 @@ MCU	KEYWORD1
 MIDI_CC	KEYWORD1
 
 Array	KEYWORD1
+Array2D	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)

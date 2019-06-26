@@ -128,8 +128,8 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
     void afterReading();
 
     // The enable pin is active low.
-    constexpr static uint8_t ENABLED = LOW;
-    constexpr static uint8_t DISABLED = HIGH;
+    constexpr static uint8_t MUX_ENABLED = LOW;
+    constexpr static uint8_t MUX_DISABLED = HIGH;
 };
 
 /**
@@ -178,7 +178,7 @@ void AnalogMultiplex<N>::begin() {
         ExtIO::pinMode(addressPin, OUTPUT);
     if (enablePin != NO_PIN) {
         ExtIO::pinMode(enablePin, OUTPUT);
-        ExtIO::digitalWrite(enablePin, DISABLED);
+        ExtIO::digitalWrite(enablePin, MUX_DISABLED);
     }
 }
 
@@ -195,11 +195,11 @@ template <uint8_t N>
 void AnalogMultiplex<N>::prepareReading(uint8_t address) {
     setMuxAddress(address);
     if (enablePin != NO_PIN)
-        ExtIO::digitalWrite(enablePin, ENABLED);
+        ExtIO::digitalWrite(enablePin, MUX_ENABLED);
 }
 
 template <uint8_t N>
 void AnalogMultiplex<N>::afterReading() {
     if (enablePin != NO_PIN)
-        ExtIO::digitalWrite(enablePin, DISABLED);
+        ExtIO::digitalWrite(enablePin, MUX_DISABLED);
 }

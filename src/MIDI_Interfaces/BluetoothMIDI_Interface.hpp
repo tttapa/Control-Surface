@@ -90,11 +90,11 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     }
 
     template <size_t N>
-    void addToBuffer(uint8_t (&data)[N]) {
+    void addToBuffer(const uint8_t (&data)[N]) {
         addToBuffer(&data[0], N);
     }
 
-    void addToBuffer(uint8_t *data, size_t len) {
+    void addToBuffer(const uint8_t *data, size_t len) {
         bool first = index == 0;
         if (!hasSpaceFor(len + 1 + first)) { // TODO
             DEBUGFN("Buffer full");
