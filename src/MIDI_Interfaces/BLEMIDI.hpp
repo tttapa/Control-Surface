@@ -1,7 +1,6 @@
 #pragma once
 
-#if 1
-// #ifdef ARDUINO
+#ifdef ARDUINO
 
 #ifndef ARDUINO_ARCH_ESP32
 #error "MIDI over Bluetooth is only supported on ESP32 boards"
@@ -134,7 +133,8 @@ class BLEMIDI {
     MOCK_METHOD1(setServerCallbacks, void(BLEServerCallbacks *));
     MOCK_METHOD1(setCharacteristicsCallbacks,
                  void(BLECharacteristicCallbacks *));
-    MOCK_METHOD0(begin, void(void));
+    MOCK_METHOD2(begin,
+                 void(BLEServerCallbacks *, BLECharacteristicCallbacks *));
     MOCK_METHOD2(notifyValue, void(uint8_t *data, size_t len));
     MOCK_METHOD0(getValue, std::string(void));
 };
