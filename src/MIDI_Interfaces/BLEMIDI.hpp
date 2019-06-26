@@ -70,7 +70,6 @@ class BLEMIDI {
         pCharacteristic = pService->createCharacteristic(
             BLEUUID(CHARACTERISTIC_UUID),
             BLECharacteristic::PROPERTY_READ |
-                BLECharacteristic::PROPERTY_WRITE |
                 BLECharacteristic::PROPERTY_NOTIFY |
                 BLECharacteristic::PROPERTY_WRITE_NR);
 
@@ -78,6 +77,7 @@ class BLEMIDI {
         descriptor = new BLE2902();
         pCharacteristic->addDescriptor(descriptor);
         // descriptor.setNotifications(true);
+        setCharacteristicsCallbacks(midiCallbacks);
 
         // Start the service
         pService->start();

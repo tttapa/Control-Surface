@@ -592,6 +592,57 @@
 */
 
 /**
+ * @example   Bluetooth-BLE-MIDI-NoteButton.ino
+ *
+ * @brief   This is an example of the `BluetoothMIDI_Interface` class of the 
+ *          Control_Surface library. (ESP32 only)
+ * <br>  
+ * Connect a momentary push button to pin 18.  
+ * Pressing it will send middle C MIDI Note events.
+ * 
+ * On Android, I used the MIDI BLE Connect and MIDI Scope apps by Mobileer Inc
+ * to test it.
+ *  
+ * Written by Pieter P, 26-06-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   Bluetooth-BLE-MIDI-NoteButton_Input.ino
+ *
+ * @brief   This is an example of the `BluetoothMIDI_Interface` class of the 
+ *          Control_Surface library. (ESP32 only)
+ * <br>  
+ * Connect a momentary push button to pin 18.  
+ * Pressing it will send middle C MIDI Note events.  
+ * Pressing the middle C key on the computer/phone turns on 
+ * the built-in LED of the ESP32.
+ * 
+ * On Android, I used the MIDI BLE Connect (Mobileer Inc)
+ * and MIDI Keyboard (Dreamhound Studios) apps to test it.
+ * 
+ * Written by Pieter P, 26-06-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   Bluetooth-BLE-MIDI-CCPotentiometer.ino
+ *
+ * @brief   This is an example of the `BluetoothMIDI_Interface` class of the 
+ *          Control_Surface library. (ESP32 only)
+ * <br>  
+ * Connect a potentiometer to analog pin 36. This will be the MIDI channel 
+ * volume of channel 1.  
+ * Map it in your DAW or DJ software.
+ * 
+ * On Android, I used the MIDI BLE Connect and MIDI Scope apps by Mobileer Inc
+ * to test it.
+ * 
+ * Written by Pieter P, 26-06-2019  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   Getting-Started.ino
  *
  * This is the example used in the 'Getting Started' guide.  

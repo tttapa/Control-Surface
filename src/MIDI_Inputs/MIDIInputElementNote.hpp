@@ -10,6 +10,9 @@
  */
 class MIDIInputElementNote : public MIDIInputElement,
                              public DoublyLinkable<MIDIInputElementNote> {
+  protected:
+    MIDIInputElementNote() {} // not used, only for virtual inheritance
+
   public:
     /**
      * @brief   Constructor.

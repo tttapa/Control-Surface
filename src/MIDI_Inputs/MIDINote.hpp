@@ -5,7 +5,7 @@
 /** An abstract base class for MIDI note input. */
 class MIDINote_Base : public MIDIInputElementNote {
   protected:
-    MIDINote_Base(); // unused, only for virtual inheritance
+    MIDINote_Base() {} // not, only for virtual inheritance
     MIDINote_Base(const MIDICNChannelAddress &address)
         : MIDIInputElementNote(address) {}
 
