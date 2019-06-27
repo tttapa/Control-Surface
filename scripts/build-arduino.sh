@@ -3,7 +3,7 @@ cd "$(dirname "$0")"
 
 ### Functions for parallel execution with FIFO
 
-open_sem(){
+open_sem() {
     mkfifo pipe-$$
     exec 3<>pipe-$$
     rm pipe-$$
@@ -15,22 +15,22 @@ open_sem(){
 
 failed=0
 
-build_with_lock(){
+build_with_lock() {
     local name=$(basename -- "$file")
     local result
-    read -u 3 -n 3 result # && ((0==result)) || return $result
+    read -u 3 -n 3 result
     echo -e "\e[1;94mBuilding Example: $name\e[0m"
     if [ $result -ne 0 ]; then failed=$[$failed + 1]; fi
     (
         ### Setup for arduino-builder
-        arduino=$HOME/opt/arduino-1.8.9
-        version=10809
-        libraries=$HOME/Arduino/libraries
+        local arduino=$HOME/opt/arduino-1.8.9
+        local version=10809
+        local libraries=$HOME/Arduino/libraries
 
         if grep -q "ESP32 only" "$file"; then
-            board=esp32:esp32:esp32thing:FlashFreq=80,PartitionScheme=default,UploadSpeed=921600,DebugLevel=none
+            local board=esp32:esp32:esp32thing:FlashFreq=80,PartitionScheme=default,UploadSpeed=921600,DebugLevel=none
         else
-            board=teensy:avr:teensy31:speed=96,usb=serialmidiaudio,opt=o2std,keys=en-us
+            local board=teensy:avr:teensy31:speed=96,usb=serialmidiaudio,opt=o2std,keys=en-us
         fi
 
         arduino-builder \
@@ -41,7 +41,8 @@ build_with_lock(){
             -core-api-version $version \
             -warnings all \
             -compile $file;
-        res=$?
+
+        local res=$?
         if [ $res == 0 ]
         then
             echo -e "\e[1;32mBuilt $name successfully! ✔\e[0m\n"
@@ -53,15 +54,15 @@ build_with_lock(){
     )&
 }
 
-get_failures(){
+get_failures() {
     local i=$1
     for((;i>0;i--)); do
         local result
-    read -u 3 -n 3 result
-    if [ $result -ne 0 ]
-    then
-       failed=$[$failed + 1]
-    fi
+        read -u 3 -n 3 result
+        if [ $result -ne 0 ]
+        then
+            failed=$[$failed + 1]
+        fi
     done
     return $failed
 }
