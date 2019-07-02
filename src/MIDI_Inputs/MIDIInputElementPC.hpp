@@ -3,6 +3,13 @@
 #include "MIDIInputElement.hpp"
 #include <Helpers/LinkedList.hpp>
 
+#if defined(ESP32)
+#include <mutex>
+#define GUARD_LIST_LOCK std::lock_guard<std::mutex> _guard(mutex)
+#else
+#define GUARD_LIST_LOCK
+#endif
+
 class MIDIInputElementPC : public MIDIInputElement,
                            public DoublyLinkable<MIDIInputElementPC> {
   public:
@@ -12,6 +19,7 @@ class MIDIInputElementPC : public MIDIInputElement,
      */
     MIDIInputElementPC(const MIDICNChannelAddress &address)
         : MIDIInputElement(address) {
+        GUARD_LIST_LOCK;
         elements.append(this);
     }
 
@@ -19,9 +27,13 @@ class MIDIInputElementPC : public MIDIInputElement,
      * @brief   Destructor.
      * @todo    Documentation.
      */
-    virtual ~MIDIInputElementPC() { elements.remove(this); }
+    virtual ~MIDIInputElementPC() {
+        GUARD_LIST_LOCK;
+        elements.remove(this);
+    }
 
     static void beginAll() {
+        GUARD_LIST_LOCK;
         for (MIDIInputElementPC &el : elements)
             el.begin();
     }
@@ -33,6 +45,7 @@ class MIDIInputElementPC : public MIDIInputElement,
      * @see     MIDIInputElementPC#reset
      */
     static void resetAll() {
+        GUARD_LIST_LOCK;
         for (MIDIInputElementPC &el : elements)
             el.reset();
     }
@@ -41,6 +54,7 @@ class MIDIInputElementPC : public MIDIInputElement,
      * @brief   Update all MIDIInputElementPC elements.
      */
     static void updateAll() {
+        GUARD_LIST_LOCK;
         for (MIDIInputElementPC &el : elements)
             el.update();
     }
@@ -55,6 +69,9 @@ class MIDIInputElementPC : public MIDIInputElement,
         for (MIDIInputElementPC &el : elements)
             if (el.updateWith(midimsg))
                 return;
+        // No mutex required:
+        // e.updateWith may alter the list, but if it does, it always returns
+        // true, and we stop iterating, so it doesn't matter.
     }
 
   private:
@@ -64,7 +81,15 @@ class MIDIInputElementPC : public MIDIInputElement,
         // Program Change doesn't have an address
     }
 
-    void moveDown() override { elements.moveDown(this); }
+    void moveDown() override {
+        GUARD_LIST_LOCK;
+        elements.moveDown(this);
+    }
 
     static DoublyLinkedList<MIDIInputElementPC> elements;
+#ifdef ESP32
+    static std::mutex mutex;
+#endif
 };
+
+#undef GUARD_LIST_LOCK
