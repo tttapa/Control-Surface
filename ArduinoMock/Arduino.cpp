@@ -4,6 +4,8 @@
 void sei() {}
 void cli() {}
 
+void yield() {}
+
 void pinMode(uint8_t pin, uint8_t mode) {
     ArduinoMock::getInstance().pinMode(pin, mode);
 }

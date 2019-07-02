@@ -22,8 +22,9 @@ class MockMIDI_Interface : public MIDI_Interface {
   public:
     MockMIDI_Interface() : MIDI_Interface(EmptyParser::getInstance()) {}
     MOCK_METHOD0(read, MIDI_read_t(void));
+    MOCK_METHOD5(sendImpl, void(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));
     MOCK_METHOD4(sendImpl, void(uint8_t, uint8_t, uint8_t, uint8_t));
-    MOCK_METHOD3(sendImpl, void(uint8_t, uint8_t, uint8_t));
+    MOCK_METHOD3(sendImpl, void(const uint8_t *, size_t, uint8_t));
 };
 
 #if __GNUC__ >= 5

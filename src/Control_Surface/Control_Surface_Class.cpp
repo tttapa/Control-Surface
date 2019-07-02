@@ -1,12 +1,12 @@
 #include "Control_Surface_Class.hpp"
 #include <Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
+#include <MIDI_Constants/Control_Change.hpp>
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
-#include <MIDI_Inputs/MIDIInputElementPC.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <MIDI_Inputs/MIDIInputElementNote.hpp>
+#include <MIDI_Inputs/MIDIInputElementPC.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Selectors/Selector.hpp>
-#include <MIDI_Constants/Control_Change.hpp>
 
 #include <Arduino.h>
 
@@ -17,7 +17,7 @@ Control_Surface_ &Control_Surface_::getInstance() {
 
 void Control_Surface_::begin() {
 #if defined(ARDUINO) && defined(DEBUG_OUT)
-    DEBUG_OUT.begin(115200);
+    DEBUG_OUT.begin(defaultBaudRate);
     delay(250);
 #endif
 #ifdef ARDUINO_ARCH_ESP32
@@ -65,10 +65,9 @@ void Control_Surface_::updateMidiInput() {
 void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
     MIDI_message midichmsg = midi.getChannelMessage();
     MIDI_message_matcher midimsg = {midichmsg};
-    DEBUG(F("CN = ") << midimsg.CN);
 
 #ifdef DEBUG_MIDI_PACKETS
-    // TODO: print CN   
+    // TODO: print CN
     if (midimsg.type != PROGRAM_CHANGE && midimsg.type != CHANNEL_PRESSURE)
         DEBUG(">>> " << hex << +midichmsg.header << ' ' << +midimsg.data1 << ' '
                      << +midimsg.data2 << dec);

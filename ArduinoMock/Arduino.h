@@ -92,6 +92,8 @@ void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val);
 void cli();
 void sei();
 
+void yield();
+
 #define PIN_A0   (14)
 #define PIN_A1   (15)
 #define PIN_A2   (16)

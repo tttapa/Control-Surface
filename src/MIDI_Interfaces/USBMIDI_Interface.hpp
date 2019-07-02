@@ -1,8 +1,8 @@
 #pragma once
 
 #include "MIDI_Interface.hpp"
-#include <MIDI_Parsers/USBMIDI_Parser.hpp>
 #include <Helpers/TeensyUSBTypes.hpp>
+#include <MIDI_Parsers/USBMIDI_Parser.hpp>
 
 #ifdef TEENSY_MIDIUSB_ENABLED
 #include <usb_dev.h>
@@ -40,21 +40,36 @@ class USBMIDI_Interface : public MIDI_Interface {
 
 // If it's a Teensy board
 #if defined(TEENSYDUINO)
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
-        usb_midi_write_packed((m >> 4) | ((m | c) << 8) | (d1 << 16) |
-                              (d2 << 24));
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                  uint8_t cn) override {
+        usb_midi_write_packed((cn << 4) | (m >> 4) | // CN|CIN
+                              ((m | c) << 8) |       // status
+                              (d1 << 16) |           // data 1
+                              (d2 << 24));           // data 2
     }
 
 // If the main MCU has a USB connection but is not a Teensy
 #elif defined(USBCON)
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
-        midiEventPacket_t msg = {(uint8_t)(m >> 4), (uint8_t)(m | c), d1, d2};
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                  uint8_t cn) override {
+        midiEventPacket_t msg = {
+            (uint8_t)(cn << 4) | (m >> 4),
+            (uint8_t)(m | c),
+            d1,
+            d2,
+        };
         MidiUSB.sendMIDI(msg);
         MidiUSB.flush();
     }
 #endif
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1) override {
-        sendImpl(m, c, d1, 0);
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
+        sendImpl(m, c, d1, 0, cn);
+    }
+
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
+        (void)data;
+        (void)length;
+        (void)cn; // TODO
     }
 
   public:

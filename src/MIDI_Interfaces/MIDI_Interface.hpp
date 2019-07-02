@@ -49,6 +49,7 @@ class MIDI_Interface {
      * @brief   Initialize the MIDI Interface.
      */
     virtual void begin() {}
+
     /**
      * @brief   Send a 3-byte MIDI packet.
      *
@@ -75,12 +76,42 @@ class MIDI_Interface {
      */
     void send(uint8_t m, uint8_t c, uint8_t d1);
 
+    /**
+     * @brief   Send a 3-byte MIDI packet with cable number.
+     *
+     * @param   m
+     *          MIDI message type. [0x80, 0xE0]
+     * @param   c
+     *          The MIDI channel. [1, 16]
+     * @param   d1
+     *          The first data byte. [0, 127]
+     * @param   d2
+     *          The second data byte. [0, 127]
+     * @param   cn
+     *          The MIDI Cable Number. [0, 15]
+     */
+    void sendCN(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2, uint8_t cn);
+
+    /**
+     * @brief   Send a 2-byte MIDI packet with cable number.
+     *
+     * @param   m
+     *          MIDI message type. [0x80, 0xE0]
+     * @param   c
+     *          The MIDI channel. [1, 16]
+     * @param   d1
+     *          The first data byte. [0, 127]
+     * @param   cn
+     *          The MIDI Cable Number. [0, 15]
+     */
+    void sendCN(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn);
+
     void sendNoteOn(MIDICNChannelAddress address, uint8_t velocity);
     void sendNoteOff(MIDICNChannelAddress address, uint8_t velocity);
     void sendCC(MIDICNChannelAddress address, uint8_t value);
     void sendPB(MIDICNChannelAddress address, uint16_t value);
-    void sendPB(Channel channel, uint16_t value);
-    void sendPC(Channel channel, uint8_t value);
+    void sendPB(MIDICNChannel address, uint16_t value);
+    void sendPC(MIDICNChannel address, uint8_t value);
 
     void update();
 
@@ -103,11 +134,17 @@ class MIDI_Interface {
     /**
      * @brief   Low-level function for sending a 3-byte MIDI message.
      */
-    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) = 0;
+    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                          uint8_t cn) = 0;
     /**
      * @brief   Low-level function for sending a 2-byte MIDI message.
      */
-    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1) = 0;
+    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) = 0;
+
+    /**
+     * @brief   Low-level function for sending a system exclusive MIDI message.
+     */
+    virtual void sendImpl(const uint8_t *data, size_t length, uint8_t cn) = 0;
 
   protected:
     void onChannelMessage();
