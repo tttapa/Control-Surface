@@ -22,9 +22,9 @@ class MIDIButtonMatrix : public MIDIOutputElement,
     MIDIButtonMatrix(const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
-                     Channel channel)
+                     MIDICNChannel channelCN)
         : ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
-          addresses(addresses), baseChannel(channel) {}
+          addresses(addresses), baseChannelCN(channelCN) {}
 
   public:
     void begin() final override { ButtonMatrix<nb_rows, nb_cols>::begin(); }
@@ -35,11 +35,11 @@ class MIDIButtonMatrix : public MIDIOutputElement,
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
         int8_t address = addresses[row][col];
         if (state == LOW)
-            sendOn({address, baseChannel});
+            sendOn({address, baseChannelCN});
         else
-            sendOff({address, baseChannel});
+            sendOff({address, baseChannelCN});
     }
 
     AddressMatrix<nb_rows, nb_cols> addresses;
-    const Channel baseChannel;
+    const MIDICNChannel baseChannelCN;
 };

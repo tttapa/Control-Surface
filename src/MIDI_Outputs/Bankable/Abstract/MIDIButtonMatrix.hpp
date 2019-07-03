@@ -35,17 +35,17 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
      * @param   addresses
      *          A 2-dimensional array of the same dimensions as the button
      *          matrix that contains the MIDI address of each button. [0, 127]
-     * @param   channel
-     *          The MIDI channel. [1, 16]
+     * @param   channelCN
+     *          The MIDI channel [1, 16] and Cable Number [0, 15].
      */
     MIDIButtonMatrix(const OutputBankConfig &config,
                      const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
-                     Channel channel = CHANNEL_1)
+                     MIDICNChannel channelCN)
         : BankableMIDIOutput(config), ButtonMatrix<nb_rows, nb_cols>(rowPins,
                                                                      colPins),
-          addresses(addresses), baseChannel(channel) {}
+          addresses(addresses), baseChannelCN(channelCN) {}
 
   public:
     void begin() final override { ButtonMatrix<nb_rows, nb_cols>::begin(); }
@@ -55,7 +55,7 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
   private:
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
         int8_t address = addresses[row][col];
-        MIDICNChannelAddress sendAddress = {address, baseChannel};
+        MIDICNChannelAddress sendAddress = {address, baseChannelCN};
         if (state == LOW) {
             if (!activeButtons)
                 lock(); // Don't allow changing of the bank setting
@@ -72,7 +72,7 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
     }
 
     AddressMatrix<nb_rows, nb_cols> addresses;
-    const Channel baseChannel;
+    const MIDICNChannel baseChannelCN;
     uint8_t activeButtons = 0;
 };
 

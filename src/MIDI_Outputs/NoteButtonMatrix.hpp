@@ -42,16 +42,18 @@ class NoteButtonMatrix
      * @param   notes
      *          A 2-dimensional array of the same dimensions as the button
      *          matrix that contains the note number of each button. [0, 127]
-     * @param   channel
-     *          The MIDI channel. [1, 16]
+     * @param   channelCN
+     *          The MIDI channel [1, 16] and Cable Number [0, 15].
+     * 
+     * @todo    Can I use \@copydetails here?
      * 
      * @ingroup MIDIOutputElementConstructors
      */
     NoteButtonMatrix(const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &notes,
-                     Channel channel = CHANNEL_1)
+                     MIDICNChannel channelCN = {CHANNEL_1, 0})
         : MIDIButtonMatrix<DigitalNoteSender::sendOn,
                            DigitalNoteSender::sendOff, nb_rows, nb_cols>(
-              rowPins, colPins, notes, channel) {}
+              rowPins, colPins, notes, channelCN) {}
 };

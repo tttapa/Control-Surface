@@ -67,9 +67,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
   public:
     BluetoothMIDI_Interface() : MIDI_Interface(parser) {}
 
-    void begin() override {
-        bleMidi.begin(this, this);
-    }
+    void begin() override { bleMidi.begin(this, this); }
 
     void publish() {
         if (index == 0)
@@ -120,13 +118,22 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
             publish();
     }
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                  uint8_t cn) override {
+        (void)cn;
         uint8_t msg[3] = {uint8_t(m | c), d1, d2};
         addToBuffer(msg);
     }
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1) override {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
+        (void)cn;
         uint8_t msg[2] = {uint8_t(m | c), d1};
         addToBuffer(msg);
+    }
+
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
+        (void)data;
+        (void)length;
+        (void)cn; // TODO
     }
 
     void parse(const uint8_t *const data, const size_t len) {

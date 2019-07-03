@@ -54,49 +54,65 @@ void MIDI_Interface::onSysExMessage() {
 // -------------------------------- SENDING --------------------------------- //
 
 void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) {
-    c--;             // Channels are zero-based
-    m &= 0xF0;       // bitmask high nibble
-    m |= 0b10000000; // set msb
-    c &= 0xF;        // bitmask low nibble
-    d1 &= 0x7F;      // clear msb
-    d2 &= 0x7F;      // clear msb
-
-    sendImpl(m, c, d1, d2);
+    sendCN(m, c, d1, d2, 0);
 }
 
 void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1) {
+    sendCN(m, c, d1, 0);
+}
+
+void MIDI_Interface::sendCN(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                            uint8_t cn) {
     c--;             // Channels are zero-based
     m &= 0xF0;       // bitmask high nibble
     m |= 0b10000000; // set msb
-    c &= 0xF;        // bitmask low nibble
+    c &= 0x0F;       // bitmask low nibble
     d1 &= 0x7F;      // clear msb
+    d2 &= 0x7F;      // clear msb
+    cn &= 0x0F;      // bitmask low nibble
+    sendImpl(m, c, d1, d2, cn);
+}
 
-    sendImpl(m, c, d1);
+void MIDI_Interface::sendCN(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) {
+    c--;             // Channels are zero-based
+    m &= 0xF0;       // bitmask high nibble
+    m |= 0b10000000; // set msb
+    c &= 0x0F;       // bitmask low nibble
+    d1 &= 0x7F;      // clear msb
+    cn &= 0x0F;      // bitmask low nibble
+    sendImpl(m, c, d1, cn);
 }
 
 // TODO: check for invalid addresses
 void MIDI_Interface::sendNoteOn(MIDICNChannelAddress address,
                                 uint8_t velocity) {
-    sendImpl(NOTE_ON, address.getChannel().getRaw(), address.getAddress(),
-             velocity);
+    if (address)
+        sendImpl(NOTE_ON, address.getChannel().getRaw(), address.getAddress(),
+                 velocity, address.getCableNumber());
 }
 void MIDI_Interface::sendNoteOff(MIDICNChannelAddress address,
                                  uint8_t velocity) {
-    sendImpl(NOTE_OFF, address.getChannel().getRaw(), address.getAddress(),
-             velocity);
+    if (address)
+        sendImpl(NOTE_OFF, address.getChannel().getRaw(), address.getAddress(),
+                 velocity, address.getCableNumber());
 }
 void MIDI_Interface::sendCC(MIDICNChannelAddress address, uint8_t value) {
-    sendImpl(CC, address.getChannel().getRaw(), address.getAddress(), value);
+    if (address)
+        sendImpl(CC, address.getChannel().getRaw(), address.getAddress(), value,
+                 address.getCableNumber());
 }
 void MIDI_Interface::sendPB(MIDICNChannelAddress address, uint16_t value) {
+    if (address)
+        sendImpl(PITCH_BEND, address.getChannel().getRaw(), value & 0x7F,
+                 value >> 7, address.getCableNumber());
+}
+void MIDI_Interface::sendPB(MIDICNChannel address, uint16_t value) {
     sendImpl(PITCH_BEND, address.getChannel().getRaw(), value & 0x7F,
-             value >> 7);
+             value >> 7, address.getCableNumber());
 }
-void MIDI_Interface::sendPB(Channel channel, uint16_t value) {
-    sendImpl(PITCH_BEND, channel.getRaw(), value & 0x7F, value >> 7);
-}
-void MIDI_Interface::sendPC(Channel channel, uint8_t value) {
-    sendImpl(PROGRAM_CHANGE, channel.getRaw(), value);
+void MIDI_Interface::sendPC(MIDICNChannel address, uint8_t value) {
+    sendImpl(PROGRAM_CHANGE, address.getChannel().getRaw(), value,
+             address.getCableNumber());
 }
 
 // -------------------------------- PARSING --------------------------------- //

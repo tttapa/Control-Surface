@@ -291,6 +291,51 @@
  */
 
 /**
+ * @example   VU-Bridge-ESP32.ino
+ *
+ * @brief   This is an example on how to use an OLED display to display the 
+ *          VU meters and mute/solo states of the eight first tracks, by using 
+ *          the Arduino as a Mackie Control Universal. This is an example 
+ *          modified to work with the ESP32 only, using MIDI over Bluetooth Low 
+ *          Energy.  
+ * <br>  
+ * ### Connections
+ * This example drives two SSD1306 OLED displays over SPI
+ *  - SCK:  SSD1306 D0
+ *  - MOSI: SSD1306 D1
+ *  - 15:   SSD1306 DC
+ *  - 2:    SSD1306 CS
+ * 
+ * Add a capacitor between the reset pin of the display and ground, and a 
+ * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
+ * work fine.  
+ * You do need some way to reset the display, without it, it won't work.  
+ * Alternatively, you could use an IO pin from the ESP32 to reset the 
+ * display, but this just "wastes" a pin.
+ * 
+ * ### Behavior
+ * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
+ * 
+ * The first display should now display the level meters and mute/solo states
+ * of the first 8 tracks.
+ * 
+ * @note    There seem to be some differences in the way some applications 
+ *          handle VU meters: some expect the hardware to decay automatically,
+ *          some don't.  
+ *          If you notice that the meters behave strangely, try both decay 
+ *          options of the MCU::VU class, or try a different decay time.
+ * 
+ * ### Demo
+ * 
+ * @htmlonly
+ * <iframe width="560" height="315"
+ * src="https://www.youtube.com/embed/_NJh6LyJjU8?start=25" frameborder="0"
+ * allow="accelerometer; autoplay; encrypted-media; gyroscope;
+ * picture-in-picture" allowfullscreen></iframe>
+ * @endhtmlonly
+ */
+
+/**
  * @example   PushButtons.ino
  *
  * @brief   This example demonstrates the use of push buttons that send note 

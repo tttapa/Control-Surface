@@ -58,7 +58,8 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
     }
 
   protected:
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                  uint8_t cn) override {
         uint8_t messageType = (m >> 4) - 8;
         if (messageType >= 7)
             return;
@@ -69,11 +70,13 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
         stream.print(d1, HEX);
         stream.print("\tData 2: 0x");
         stream.print(d2, HEX);
+        stream.print("\tCable: ");
+        stream.print(cn);
         stream.print("\r\n");
         stream.flush();
     }
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1) override {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
         uint8_t messageType = (m >> 4) - 8;
         if (messageType >= 7)
             return;
@@ -82,8 +85,16 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
         stream.print(c + 1);
         stream.print("\tData 1: 0x");
         stream.print(d1, HEX);
+        stream.print("\tCable: ");
+        stream.print(cn);
         stream.print("\r\n");
         stream.flush();
+    }
+
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
+        (void)data;
+        (void)length;
+        (void)cn; // TODO
     }
 
   private:

@@ -3,6 +3,13 @@
 #include "MIDIInputElement.hpp"
 #include <Helpers/LinkedList.hpp>
 
+#if defined(ESP32)
+#include <mutex>
+#define GUARD_LIST_LOCK std::lock_guard<std::mutex> _guard(mutex)
+#else
+#define GUARD_LIST_LOCK
+#endif
+
 class MIDIInputElementChannelPressure
     : public MIDIInputElement,
       public DoublyLinkable<MIDIInputElementChannelPressure> {
@@ -13,6 +20,7 @@ class MIDIInputElementChannelPressure
      */
     MIDIInputElementChannelPressure(const MIDICNChannelAddress &address)
         : MIDIInputElement(address) {
+        GUARD_LIST_LOCK;
         elements.append(this);
     }
 
@@ -20,9 +28,13 @@ class MIDIInputElementChannelPressure
      * @brief   Destructor.
      * @todo    Documentation.
      */
-    virtual ~MIDIInputElementChannelPressure() { elements.remove(this); }
+    virtual ~MIDIInputElementChannelPressure() {
+        GUARD_LIST_LOCK;
+        elements.remove(this);
+    }
 
     static void beginAll() {
+        GUARD_LIST_LOCK;
         for (MIDIInputElementChannelPressure &el : elements)
             el.begin();
     }
@@ -34,6 +46,7 @@ class MIDIInputElementChannelPressure
      * @see     MIDIInputElementChannelPressure#reset
      */
     static void resetAll() {
+        GUARD_LIST_LOCK;
         for (MIDIInputElementChannelPressure &el : elements)
             el.reset();
     }
@@ -42,6 +55,7 @@ class MIDIInputElementChannelPressure
      * @brief   Update all MIDIInputElementChannelPressure elements.
      */
     static void updateAll() {
+        GUARD_LIST_LOCK;
         for (MIDIInputElementChannelPressure &el : elements)
             el.update();
     }
@@ -56,6 +70,9 @@ class MIDIInputElementChannelPressure
         for (MIDIInputElementChannelPressure &el : elements)
             if (el.updateWith(midimsg))
                 return;
+        // No mutex required:
+        // e.updateWith may alter the list, but if it does, it always returns
+        // true, and we stop iterating, so it doesn't matter.
     }
 
   private:
@@ -65,7 +82,15 @@ class MIDIInputElementChannelPressure
         // Channel Pressure doesn't have an address
     }
 
-    void moveDown() override { elements.moveDown(this); }
+    void moveDown() override {
+        GUARD_LIST_LOCK;
+        elements.moveDown(this);
+    }
 
     static DoublyLinkedList<MIDIInputElementChannelPressure> elements;
+#ifdef ESP32
+    static std::mutex mutex;
+#endif
 };
+
+#undef GUARD_LIST_LOCK
