@@ -81,7 +81,7 @@ constexpr size_t SYSEX_BUFFER_SIZE = 128;
 constexpr unsigned long HAIRLESS_BAUD = 115200;
 
 /// The maximum frame rate of the displays.
-constexpr uint8_t MAX_FPS = 30;
+constexpr uint8_t MAX_FPS = 60;
 
 constexpr static Frequency SPI_MAX_SPEED = 8_MHz;
 

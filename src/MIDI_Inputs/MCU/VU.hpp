@@ -11,10 +11,16 @@
  */
 class IVU {
   public:
+    IVU(uint8_t max) : max(max) {}
     /** Return the VU meter value as an integer. */
     virtual uint8_t getValue() const = 0;
     /** Return the overload status. */
     virtual bool getOverload() const = 0;
+    /** Get the maximum value that this VU meter can return. */
+    uint8_t getMax() const { return max; }
+
+  protected:
+    const uint8_t max;
 };
 
 namespace MCU {
@@ -29,7 +35,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     VU_Base(); // Just for virtual inheritance
     VU_Base(const MIDICNChannelAddress &address, unsigned int decayTime)
         : MIDIInputElementChannelPressure{address - 1}, // tracks are zero-based
-          decayTime(decayTime) {}
+          IVU(12), decayTime(decayTime) {}
 
     /** Return the VU meter value as an integer in [0, 12]. */
     uint8_t getValue() const override { return getValueHelper(getRawValue()); }
