@@ -81,7 +81,8 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
       : SSD1306_DisplayInterface(display) {}
 
     void begin() override {
-        disp.begin();
+        if(!disp.begin())
+            FATAL_ERROR(F("SSD1306 allocation failed."), 0x1306);
         SSD1306_DisplayInterface::begin(); // If you override the begin method,
                                            // remember to call the super class
                                            // method
