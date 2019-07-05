@@ -29,8 +29,8 @@ extern void fatalErrorExit() __attribute__((noreturn));
 
 #define FATAL_ERROR(x, e)                                                      \
     do {                                                                       \
-        DEBUGFN(x << " (0x" << hex << uppercase << e << dec << nouppercase     \
-                  << ')');                                                     \
+        DEBUGFN(F("Fatal Error: ") << x << " (0x" << hex << uppercase << e     \
+                                   << dec << nouppercase << ')');              \
         fatalErrorExit();                                                      \
     } while (0)
 
