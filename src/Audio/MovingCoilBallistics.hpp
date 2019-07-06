@@ -30,11 +30,15 @@ class MovingCoilBallistics {
     }
 
     static MovingCoilBallistics officialVU() {
-        return MovingCoilBallistics(0.628, 0.080, 3.5e-3);
+        return MovingCoilBallistics(0.16025, 0.0215, 0.001);
     }
 
     static MovingCoilBallistics responsiveVU(float Tsfactor = 2.0) {
-        return MovingCoilBallistics(0.628, 0.080, 3.5e-3, Tsfactor / MAX_FPS);
+        return MovingCoilBallistics(0.16025, 0.0215, 0.001, Tsfactor / MAX_FPS);
+    }
+
+    static MovingCoilBallistics noOvershoot() {
+        return MovingCoilBallistics(1.05, 0.1, 0.002);
     }
 
   private:
