@@ -43,7 +43,11 @@ class MIDIInputCCValuePWMLED : public MIDIInputCCValue {
   private:
     const pin_t ledPin;
     void display() const override {
+#ifdef ESP32
+        // TODO: Use LEDC outputs
+#else
         analogWrite(ledPin, getValue() << 2 | getValue() >> 6);
+#endif
     }
 };
 

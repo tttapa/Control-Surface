@@ -40,7 +40,11 @@ class VULEDPWM_Base : virtual public VU_Base {
     void display() const override {
         constexpr static uint8_t lut[13] = {0,  1,  3,  5,   8,   14, 21,
                                             33, 50, 75, 113, 170, 255};
+#ifdef ESP32
+        // TODO: use LEDC
+#else
         analogWrite(ledPin, lut[this->getValue()]);
+#endif
     }
 
   private:

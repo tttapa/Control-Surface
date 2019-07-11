@@ -2,18 +2,6 @@
 
 #include <Arduino.h> // millis
 
-/** 
- * @brief   An abstract interface for VU meters. It declares two methods:
- *          `getValue` and `getOverload`.
- */
-class IVU {
-  public:
-    /** Return the VU meter value as an integer. */
-    virtual uint8_t getValue() const = 0;
-    /** Return the overload status. */
-    virtual bool getOverload() const = 0;
-};
-
 class DecayingVU {
   protected:
     DecayingVU(unsigned long decayTime) : decayTime(decayTime) {}
