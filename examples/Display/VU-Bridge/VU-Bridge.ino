@@ -67,9 +67,9 @@ USBMIDI_Interface midi;
 constexpr uint8_t SCREEN_WIDTH = 128;
 constexpr uint8_t SCREEN_HEIGHT = 64;
 
-constexpr int8_t OLED_DC = 19;    // Data/Command pin of the displays
+constexpr int8_t OLED_DC = 19;    // Data/Command pin of the display
 constexpr int8_t OLED_reset = -1; // Use the external RC circuit for reset
-constexpr int8_t OLED_CS = 18;    // Chip Select pin of the first display
+constexpr int8_t OLED_CS = 18;    // Chip Select pin of the display
 
 constexpr uint32_t SPI_Frequency = SPI_MAX_SPEED;
 
@@ -89,7 +89,8 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
       : SSD1306_DisplayInterface(display) {}
 
     void begin() override {
-        disp.begin();
+        if(!disp.begin())
+            FATAL_ERROR(F("SSD1306 allocation failed."), 0x1306);
         SSD1306_DisplayInterface::begin(); // If you override the begin method,
                                            // remember to call the super class
                                            // method

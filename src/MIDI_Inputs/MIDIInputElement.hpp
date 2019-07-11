@@ -12,6 +12,7 @@
  */
 class MIDIInputElement {
   protected:
+    MIDIInputElement() {} // not used, only for virtual inheritance
     /**
      * @brief   Create a new MIDIInputElement that listens on the given address.
      * 

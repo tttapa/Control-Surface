@@ -53,8 +53,7 @@ class Incrementor {
  * @return  The generated array.
  */
 template <class T, size_t N, class G>
-USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
-generateArray(G generator) {
+USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> generateArray(G generator) {
     Array<T, N> array{};
     generate(array.begin(), array.end(), generator);
     return array;
@@ -97,4 +96,31 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
 generateIncrementalArray(U start = 0, V increment = 1) {
     Incrementor<U, V> g(start, increment);
     return generateArray<T, N>(g);
+}
+
+/**
+ * @brief   Concatenate two arrays.
+ * 
+ * @tparam  T
+ *          The type of the elements in the array. 
+ * @tparam  M
+ *          The number of elements in the first array.
+ * @tparam  N 
+ *          The number of elements in the second array.
+ * @param   a 
+ *          The first array.
+ * @param   b 
+ *          The second array.
+ * @return  A new array containing the elements of both input arrays (in order). 
+ */
+template <class T, size_t M, size_t N>
+USE_CONSTEXPR_ARRAY_HELPERS Array<T, M + N> cat(const Array<T, M> &a,
+                                                const Array<T, N> &b) {
+    Array<T, M + N> result = {};
+    size_t r = 0;
+    for (size_t i = 0; i < M; ++i, ++r)
+        result[r] = a[i];
+    for (size_t i = 0; i < N; ++i, ++r)
+        result[r] = b[i];
+    return result;
 }

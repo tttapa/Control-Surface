@@ -57,11 +57,50 @@ display elements, using some minimal, high level code. All low level stuff is
 completely **reusable** (e.g. all MIDI operations, debouncing switches, 
 filtering analog inputs, and so on).
 
+## The Control Surface vs. The MIDI Controller library
+
+You might already have found my other Arduino MIDI library, [MIDI Controller](https://github.com/tttapa/MIDI_Controller), 
+and are wondering which one you should use for your project.
+
+First, some background:  
+I first started working on the MIDI Controller library way back in 2015, and it
+evolved a lot early on. The library seemed to be pretty popular, and it worked
+pretty well, so I couldn't just push breaking changes every couple of months.  
+Many people requested support for MIDI input, and I liked experimenting with it
+as well. The main problem was that the overall architecture of the library 
+needed a complete overhaul in order to add MIDI input support. Since I didn't 
+know if the MIDI input was going to work out, and I didn't want to break 
+compatibility with older versions of the library, I decided to fork it: Control
+Surface was born.  
+At the moment, I consider the MIDI Controller library "complete". I won't be 
+adding any groundbreaking new features, but I will still be fixing bugs and 
+providing support.  
+Control Surface, on the other hand, is where the active development takes place.
+
+The main difference between the two libraries is that Control Surface has much
+more features. MIDI Controller has everything you need for a working MIDI 
+controller with potentiometers, push buttons, rotary encoders, etc., while 
+Control Surface supports all of that, plus MIDI input, LEDs, VU meters, OLED 
+displays, MIDI over Bluetooth, Audio over USB, etc.  
+Another major difference is the documentation and tests. Control Surface tries
+to provide better documentation using Doxygen, and it has many unit tests to 
+make sure I don't introduce any bugs.
+
+For a new project, I would recommend Control Surface, because I think it has 
+some great features compared to MIDI Controller.  
+The only caveat is that this library is still under development. Master should 
+always be relatively stable, but I might change the API of some parts of the 
+library for future releases if necessary.  
+Another thing is that not everything is implemented yet, and many features are 
+not yet fully documented. If you have a specific feature request that is not yet
+fully implemented, feel free to open an issue, so I know where to focus on first.
+
 ## Work in progress
 
 - Adding support for motorized faders
 - Cleaning up the display code
 - Cleaning up the MIDI over Bluetooth LE code
+- Finish support for MIDI over USB cable numbers
 - Adding more tests (currently at over 170 unit tests)
 - Adding more examples and adding comments to existing examples
 - Finishing the documentation

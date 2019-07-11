@@ -5,13 +5,56 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "Make & Test",
-            "command": "cd build && make -j$(nproc) && make test",
+            "label": "Make All",
+            "command": "make -j$[$(nproc) * 2]",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
             "problemMatcher": "$gcc",
             "group": {
                 "kind": "build",
-                "isDefault": true
-            }
-        }
+                "isDefault": true,
+            },
+        },
+        {
+            "type": "shell",
+            "label": "Make Test",
+            "command": "make test",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "dependsOn": "Make All",
+            "problemMatcher": "$gcc",
+            "group": "test",
+        },
+        {
+            "type": "shell",
+            "label": "Make & Test & Build examples",
+            "command": "./build-arduino.sh $[$(nproc) * 2]",
+            "problemMatcher": "$gcc",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts",
+            },
+            "dependsOn": "Make Test",
+            "group": "test",
+        },
+        {
+            "type": "shell",
+            "label": "Generate Documentation",
+            "command": "make documentation",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "problemMatcher": [],
+        },
+        {
+            "type": "shell",
+            "label": "Export Documentation",
+            "command": "make export_documentation",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "problemMatcher": [],
+        },
     ]
 }

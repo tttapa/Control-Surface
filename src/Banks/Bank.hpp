@@ -29,9 +29,8 @@ class OutputBank {
     OutputBank(uint8_t tracksPerBank = 1, setting_t initialSelection = 0)
         : tracksPerBank(tracksPerBank), bankSetting(initialSelection) {
         if (tracksPerBank == 0)
-            FATAL_ERROR(
-                F("Error: A Bank must have a non-zero number of tracks."),
-                0x4573);
+            FATAL_ERROR(F("A Bank must have a non-zero number of tracks."),
+                        0x4573);
     }
 
     /**

@@ -31,3 +31,5 @@ CTestCostData.txt
 .project
 language.settings.xml
 .settings/*
+
+.vscode/ipch

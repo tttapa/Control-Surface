@@ -78,7 +78,7 @@ class FilteredAnalog {
   private:
     const pin_t analogPin;
 
-    int (*mapFn)(int) = nullptr;
+    MappingFunction mapFn = nullptr;
 
     EMA<ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE> filter;
     Hysteresis<ADC_BITS - PRECISION> hysteresis;

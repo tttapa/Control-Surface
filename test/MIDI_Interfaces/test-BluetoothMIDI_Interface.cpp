@@ -3,9 +3,9 @@
 TEST(BluetoothMIDIInterface, initializeBegin) {
     BluetoothMIDI_Interface midi;
     BLEMIDI &ble = midi.getBLEMIDI();
-    EXPECT_CALL(ble, begin());
-    EXPECT_CALL(ble, setServerCallbacks(&midi));
-    EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    // EXPECT_CALL(ble, setServerCallbacks(&midi));
+    // EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
     midi.begin();
 }
 
@@ -31,9 +31,9 @@ TEST(BluetoothMIDIInterface, receiveChannelMessage) {
 
     BluetoothMIDI_Interface midi;
     BLEMIDI &ble = midi.getBLEMIDI();
-    EXPECT_CALL(ble, begin());
-    EXPECT_CALL(ble, setServerCallbacks(&midi));
-    EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    // EXPECT_CALL(ble, setServerCallbacks(&midi));
+    // EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
     midi.begin();
     midi.setCallbacks(&cb);
 
@@ -55,9 +55,9 @@ TEST(BluetoothMIDIInterface, receiveMultipleChannelMessage) {
 
     BluetoothMIDI_Interface midi;
     BLEMIDI &ble = midi.getBLEMIDI();
-    EXPECT_CALL(ble, begin());
-    EXPECT_CALL(ble, setServerCallbacks(&midi));
-    EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    // EXPECT_CALL(ble, setServerCallbacks(&midi));
+    // EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
     midi.begin();
     midi.setCallbacks(&cb);
 
@@ -88,9 +88,9 @@ TEST(BluetoothMIDIInterface, receiveMultipleChannelMessageRunningStatus) {
 
     BluetoothMIDI_Interface midi;
     BLEMIDI &ble = midi.getBLEMIDI();
-    EXPECT_CALL(ble, begin());
-    EXPECT_CALL(ble, setServerCallbacks(&midi));
-    EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    // EXPECT_CALL(ble, setServerCallbacks(&midi));
+    // EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
     midi.begin();
     midi.setCallbacks(&cb);
 
@@ -121,9 +121,9 @@ TEST(BluetoothMIDIInterface,
 
     BluetoothMIDI_Interface midi;
     BLEMIDI &ble = midi.getBLEMIDI();
-    EXPECT_CALL(ble, begin());
-    EXPECT_CALL(ble, setServerCallbacks(&midi));
-    EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    // EXPECT_CALL(ble, setServerCallbacks(&midi));
+    // EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
     midi.begin();
     midi.setCallbacks(&cb);
 
@@ -154,9 +154,9 @@ TEST(BluetoothMIDIInterface, receiveMultipleTwoByteChannelMessage) {
 
     BluetoothMIDI_Interface midi;
     BLEMIDI &ble = midi.getBLEMIDI();
-    EXPECT_CALL(ble, begin());
-    EXPECT_CALL(ble, setServerCallbacks(&midi));
-    EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    // EXPECT_CALL(ble, setServerCallbacks(&midi));
+    // EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
     midi.begin();
     midi.setCallbacks(&cb);
 
@@ -187,9 +187,9 @@ TEST(BluetoothMIDIInterface, receiveSysEx) {
 
     BluetoothMIDI_Interface midi;
     BLEMIDI &ble = midi.getBLEMIDI();
-    EXPECT_CALL(ble, begin());
-    EXPECT_CALL(ble, setServerCallbacks(&midi));
-    EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    // EXPECT_CALL(ble, setServerCallbacks(&midi));
+    // EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
     midi.begin();
     midi.setCallbacks(&cb);
 
@@ -216,9 +216,9 @@ TEST(BluetoothMIDIInterface, receiveSysEx2) {
 
     BluetoothMIDI_Interface midi;
     BLEMIDI &ble = midi.getBLEMIDI();
-    EXPECT_CALL(ble, begin());
-    EXPECT_CALL(ble, setServerCallbacks(&midi));
-    EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    // EXPECT_CALL(ble, setServerCallbacks(&midi));
+    // EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
     midi.begin();
     midi.setCallbacks(&cb);
 
@@ -242,9 +242,9 @@ TEST(BluetoothMIDIInterface, receiveSysExSplitAcrossPackets) {
 
     BluetoothMIDI_Interface midi;
     BLEMIDI &ble = midi.getBLEMIDI();
-    EXPECT_CALL(ble, begin());
-    EXPECT_CALL(ble, setServerCallbacks(&midi));
-    EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    // EXPECT_CALL(ble, setServerCallbacks(&midi));
+    // EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
     midi.begin();
     midi.setCallbacks(&cb);
 
@@ -276,9 +276,9 @@ TEST(BluetoothMIDIInterface, receiveSysExAndRealTime) {
 
     BluetoothMIDI_Interface midi;
     BLEMIDI &ble = midi.getBLEMIDI();
-    EXPECT_CALL(ble, begin());
-    EXPECT_CALL(ble, setServerCallbacks(&midi));
-    EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    // EXPECT_CALL(ble, setServerCallbacks(&midi));
+    // EXPECT_CALL(ble, setCharacteristicsCallbacks(&midi));
     midi.begin();
     midi.setCallbacks(&cb);
 

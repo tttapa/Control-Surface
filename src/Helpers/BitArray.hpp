@@ -53,10 +53,7 @@ class BitArray {
      *          The value to set the bit to.
      */
     void set(uint8_t bitIndex, bool state) {
-        if (state)
-            set(bitIndex);
-        else
-            clear(bitIndex);
+        state ? set(bitIndex) : clear(bitIndex);
     }
 
     /**

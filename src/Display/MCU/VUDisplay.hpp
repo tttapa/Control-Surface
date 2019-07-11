@@ -60,4 +60,43 @@ class VUDisplay : public DisplayElement {
     unsigned long decayTime;
 };
 
+#include <Display/Helpers/Bresenham.hpp>
+
+class AnalogVUDisplay : public DisplayElement {
+  public:
+    AnalogVUDisplay(DisplayInterface &display, IVU &vu, PixelLocation loc,
+                    uint16_t radius, float theta_min, float theta_diff,
+                    uint16_t color)
+        : DisplayElement(display), vu(vu), x(loc.x), y(loc.y),
+          r_sq(radius * radius), theta_min(theta_min), theta_diff(theta_diff),
+          color(color) {}
+
+    void draw() override {
+        float value = (float)vu.getValue() / vu.getMax();
+        drawNeedle(theta_min + value * theta_diff);
+    }
+
+    void drawNeedle(float angle) {
+        BresenhamLine line = {{x, y}, angle};
+        BresenhamLine::Pixel p = line.next();
+        while (p.distanceSquared({x, y}) <= r_sq) {
+            display.drawPixel(p.x, p.y, color);
+            p = line.next();
+        }
+    }
+
+  private:
+    IVU &vu;
+
+    int16_t x;
+    int16_t y;
+    uint16_t r_sq;
+    float theta_min;
+    float theta_diff;
+    uint16_t color;
+
+    float theta_dot = 0;
+    float theta = 0;
+};
+
 } // namespace MCU

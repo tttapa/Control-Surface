@@ -35,15 +35,15 @@
 
 class SerialHelper {
   public:
-    virtual MOCK_METHOD1(begin, void(unsigned long));
-    virtual MOCK_METHOD0(end, void());
+    MOCK_METHOD1(begin, void(unsigned long));
+    MOCK_METHOD0(end, void());
 
-    virtual MOCK_METHOD0(available, int());
-    virtual MOCK_METHOD0(read, int());
-    virtual MOCK_METHOD0(peek, int());
+    MOCK_METHOD0(available, int());
+    MOCK_METHOD0(read, int());
+    MOCK_METHOD0(peek, int());
 
-    virtual MOCK_METHOD1(write, size_t(uint8_t));
-    virtual MOCK_METHOD2(write, size_t(const uint8_t *, size_t));
+    MOCK_METHOD1(write, size_t(uint8_t));
+    MOCK_METHOD2(write, size_t(const uint8_t *, size_t));
 
     virtual ~SerialHelper() = default;
 };

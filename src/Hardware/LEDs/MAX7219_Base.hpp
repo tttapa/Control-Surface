@@ -60,7 +60,7 @@ class MAX7219_Base {
      *          The value to set the row to.
      */
     void send(uint8_t digit, uint8_t value) {
-        sendRaw((digit & 0xF) + 1, value);
+        sendRaw((digit & 0x7) + 1, value);
     }
 
     /**

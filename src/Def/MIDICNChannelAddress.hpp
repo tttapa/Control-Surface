@@ -22,6 +22,15 @@ class MIDICNChannel {
     MIDICNChannel(Channel channel, int cableNumber = 0)
         : addresses{1, 0, (uint8_t)channel.getRaw(), (uint8_t)cableNumber} {}
 
+    /// Get the channel [1, 16].
+    Channel getChannel() const { return Channel{int8_t(addresses.channel)}; }
+
+    /// Get the channel as an integer [0, 15].
+    uint8_t getRawChannel() const { return addresses.channel; }
+
+    /// Get the cable number [0, 15].
+    uint8_t getCableNumber() const { return addresses.cableNumber; }
+
   private:
     RawMIDICNChannelAddress addresses;
 };
@@ -43,21 +52,41 @@ class RelativeMIDICNChannelAddress {
     RawMIDICNChannelAddress addresses;
 };
 
-/// A type-safe utility class for saving a MIDI address consisting of a 7-bit 
+/// A type-safe utility class for saving a MIDI address consisting of a 7-bit
 /// address, a 4-bit channel, and a 4-bit cable number.
 class MIDICNChannelAddress {
   public:
-    MIDICNChannelAddress() : addresses{0, 0, 0, 0} {}
+    MIDICNChannelAddress()
+        : addresses{
+              0,
+              0,
+              0,
+              0,
+          } {}
+    MIDICNChannelAddress(int address, MIDICNChannel channelCN)
+        : addresses{
+              1,
+              (uint8_t)address,
+              channelCN.getRawChannel(),
+              channelCN.getCableNumber(),
+          } {}
     MIDICNChannelAddress(int address, Channel channel = CHANNEL_1,
                          int cableNumber = 0x0)
-        : addresses{1, (uint8_t)address, (uint8_t)channel.getRaw(),
-                    (uint8_t)cableNumber} {
-    } // Deliberate overflow for negative numbers
+        : addresses{
+              1,
+              (uint8_t)address,
+              (uint8_t)channel.getRaw(),
+              (uint8_t)cableNumber,
+          } {} // Deliberate overflow for negative numbers
     MIDICNChannelAddress(Channel channel, int cableNumber = 0x0)
-        : addresses{1, 0, (uint8_t)channel.getRaw(), (uint8_t)cableNumber} {
-    } // Deliberate overflow for negative numbers
+        : addresses{
+              1,
+              0,
+              (uint8_t)channel.getRaw(),
+              (uint8_t)cableNumber,
+          } {} // Deliberate overflow for negative numbers
     MIDICNChannelAddress(const MIDICNChannel &address)
-        : addresses(address.addresses) {}
+        : addresses{address.addresses} {}
 
     MIDICNChannelAddress &operator+=(const RelativeMIDICNChannelAddress &rhs);
 

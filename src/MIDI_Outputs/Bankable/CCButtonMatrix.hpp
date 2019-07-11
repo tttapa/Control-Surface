@@ -45,8 +45,10 @@ class CCButtonMatrix
      *          A 2-dimensional array of the same dimensions as the button
      *          matrix that contains the MIDI Controller number of each button.
      *          [0, 119]
-     * @param   channel
-     *          The MIDI channel. [1, 16]
+     * @param   channelCN
+     *          The MIDI channel [1, 16] and Cable Number [0, 15].
+     * 
+     * @todo    Can I use \@copydetails here?
      * 
      * @ingroup MIDIOutputElementConstructors
      */
@@ -54,10 +56,10 @@ class CCButtonMatrix
                    const PinList<nb_rows> &rowPins,
                    const PinList<nb_cols> &colPins,
                    const AddressMatrix<nb_rows, nb_cols> &controllers,
-                   Channel channel)
+                   MIDICNChannel channelCN)
         : MIDIButtonMatrix<DigitalCCSender::sendOn, DigitalCCSender::sendOff,
                            nb_rows, nb_cols>(config, rowPins, colPins,
-                                             controllers, channel) {}
+                                             controllers, channelCN) {}
 };
 
 } // namespace Bankable

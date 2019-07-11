@@ -36,11 +36,10 @@ constexpr unsigned long defaultBaudRate = 115200;
 constexpr uint8_t ANALOG_FILTER_SHIFT_FACTOR = 2;
 
 /** The signed integer type to use for analog inputs during filtering.
- * Should be at least @f$ 10+1+2·ANALOG\_FILTER\_SHIFT\_FACTOR @f$ bits wide.
- * (10 bits of ADC resolution, 1 sign bit, and 2·`ANALOG_FILTER_SHIFT_FACTOR`
- * bits of fixed point precision for intermediate filter calculations.
+ * Should be at least @f$ 10+\text{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits wide.
+ * (10 bits of ADC resolution)
  */
-typedef int16_t ANALOG_FILTER_TYPE;
+typedef uint16_t ANALOG_FILTER_TYPE;
 
 /// The debounce time for momentary push buttons in milliseconds.
 constexpr unsigned long BUTTON_DEBOUNCE_TIME = 25; // milliseconds
@@ -82,7 +81,7 @@ constexpr size_t SYSEX_BUFFER_SIZE = 128;
 constexpr unsigned long HAIRLESS_BAUD = 115200;
 
 /// The maximum frame rate of the displays.
-constexpr uint8_t MAX_FPS = 30;
+constexpr uint8_t MAX_FPS = 60;
 
 constexpr static Frequency SPI_MAX_SPEED = 8_MHz;
 

@@ -17,7 +17,7 @@ constexpr pin_t NO_PIN = 1 << (8 * sizeof(pin_t) - 1);
 
 /// A function pointer to a mapping function to map analog values.
 /// @see    MIDIFilteredAnalog::map()
-using MappingFunction = int (*)(int);
+using MappingFunction = uint8_t (*)(uint8_t);
 
 /// An easy alias for two-dimensional Arrays.
 template <class T, size_t nb_rows, size_t nb_cols>
@@ -35,9 +35,15 @@ using PinList = Array<pin_t, N>;
 
 /// A struct for the pins of a rotary (quadrature) encoder with a switch.
 struct EncoderSwitchPinList {
+    // TODO: why do I need explicit constructors?
+    EncoderSwitchPinList(uint8_t A, uint8_t B, pin_t switchPin)
+        : A(A), B(B), switchPin(switchPin) {}
+    EncoderSwitchPinList(uint8_t A, uint8_t B)
+        : A(A), B(B), switchPin(NO_PIN) {}
+
     uint8_t A; ///< The pin connected to the A pin of the encoder.
     uint8_t B; ///< The pin connected to the B pin of the encoder.
-    pin_t switchPin = NO_PIN; ///< The pin connected to the switch pin of the 
+    pin_t switchPin = NO_PIN; ///< The pin connected to the switch pin of the
                               ///< encoder.
 };
 

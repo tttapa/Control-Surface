@@ -6,8 +6,9 @@
 ExtendedIOElement::ExtendedIOElement(pin_t length)
     : length(length), start(offset), end(offset + length) {
     if (end < start)
-        FATAL_ERROR(F("Error: ExtIO ran out of pin numbers. Dynamically "
-                      "creating new ExtendedIOElements is not recommended."),
+        FATAL_ERROR(F("ExtIO ran out of pin numbers. "
+                      "Dynamically creating new ExtendedIOElements is not "
+                      "recommended."),
                     0x00FF);
     offset = end;
     elements.append(this);

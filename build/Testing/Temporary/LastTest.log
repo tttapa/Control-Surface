@@ -8,7 +8,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = OutputBank.OutputBank
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from OutputBank
 [ RUN      ] OutputBank.OutputBank
@@ -16,10 +16,10 @@ Note: Google Test filter = OutputBank.OutputBank
 [----------] 1 test from OutputBank (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.00 sec
+Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
 "OutputBank.OutputBank" end time: Feb 23 12:11 CET
@@ -34,7 +34,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = OutputBank.initialSetting
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from OutputBank
 [ RUN      ] OutputBank.initialSetting
@@ -42,7 +42,7 @@ Note: Google Test filter = OutputBank.initialSetting
 [----------] 1 test from OutputBank (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -60,7 +60,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = OutputBank.noTracks
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from OutputBank
 [ RUN      ] OutputBank.noTracks
@@ -68,7 +68,7 @@ Note: Google Test filter = OutputBank.noTracks
 [----------] 1 test from OutputBank (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -86,7 +86,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = OutputBank.select
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from OutputBank
 [ RUN      ] OutputBank.select
@@ -94,7 +94,7 @@ Note: Google Test filter = OutputBank.select
 [----------] 1 test from OutputBank (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -112,7 +112,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Bank.Bank
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Bank
 [ RUN      ] Bank.Bank
@@ -120,7 +120,7 @@ Note: Google Test filter = Bank.Bank
 [----------] 1 test from Bank (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -138,7 +138,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Bank.select
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Bank
 [ RUN      ] Bank.select
@@ -164,7 +164,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Bank.selectOutOfBounds
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Bank
 [ RUN      ] Bank.selectOutOfBounds
@@ -172,7 +172,7 @@ Note: Google Test filter = Bank.selectOutOfBounds
 [----------] 1 test from Bank (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -190,7 +190,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Bank.onBankSettingChange
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Bank
 [ RUN      ] Bank.onBankSettingChange
@@ -198,7 +198,7 @@ Note: Google Test filter = Bank.onBankSettingChange
 [----------] 1 test from Bank (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -216,7 +216,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = AnalogMultiplex.analogReadNoEnable
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from AnalogMultiplex
 [ RUN      ] AnalogMultiplex.analogReadNoEnable
@@ -224,7 +224,7 @@ Note: Google Test filter = AnalogMultiplex.analogReadNoEnable
 [----------] 1 test from AnalogMultiplex (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -242,7 +242,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = AnalogMultiplex.digitalReadNoEnable
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from AnalogMultiplex
 [ RUN      ] AnalogMultiplex.digitalReadNoEnable
@@ -250,7 +250,7 @@ Note: Google Test filter = AnalogMultiplex.digitalReadNoEnable
 [----------] 1 test from AnalogMultiplex (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -268,7 +268,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = AnalogMultiplex.analogReadEnable
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from AnalogMultiplex
 [ RUN      ] AnalogMultiplex.analogReadEnable
@@ -294,7 +294,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = AnalogMultiplex.analogReadEnable3
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from AnalogMultiplex
 [ RUN      ] AnalogMultiplex.analogReadEnable3
@@ -320,7 +320,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = AnalogMultiplex.digitalReadEnable
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from AnalogMultiplex
 [ RUN      ] AnalogMultiplex.digitalReadEnable
@@ -328,7 +328,7 @@ Note: Google Test filter = AnalogMultiplex.digitalReadEnable
 [----------] 1 test from AnalogMultiplex (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.02 sec
@@ -346,7 +346,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = AnalogMultiplex.pinMode
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from AnalogMultiplex
 [ RUN      ] AnalogMultiplex.pinMode
@@ -372,7 +372,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = ExtendedInputOutput.digitalRead
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from ExtendedInputOutput
 [ RUN      ] ExtendedInputOutput.digitalRead
@@ -380,7 +380,7 @@ Note: Google Test filter = ExtendedInputOutput.digitalRead
 [----------] 1 test from ExtendedInputOutput (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -398,7 +398,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = ExtendedInputOutput.pinOutOfBoundsGt
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from ExtendedInputOutput
 [ RUN      ] ExtendedInputOutput.pinOutOfBoundsGt
@@ -406,7 +406,7 @@ Note: Google Test filter = ExtendedInputOutput.pinOutOfBoundsGt
 [----------] 1 test from ExtendedInputOutput (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -424,7 +424,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = ExtendedInputOutput.pinOutOfBoundsLt
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from ExtendedInputOutput
 [ RUN      ] ExtendedInputOutput.pinOutOfBoundsLt
@@ -432,7 +432,7 @@ Note: Google Test filter = ExtendedInputOutput.pinOutOfBoundsLt
 [----------] 1 test from ExtendedInputOutput (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -450,7 +450,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = ExtendedInputOutput.nonExistentPin
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from ExtendedInputOutput
 [ RUN      ] ExtendedInputOutput.nonExistentPin
@@ -458,7 +458,7 @@ Note: Google Test filter = ExtendedInputOutput.nonExistentPin
 [----------] 1 test from ExtendedInputOutput (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -476,7 +476,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = ExtendedInputOutput.nonExistentPinOfDeletedElement
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from ExtendedInputOutput
 [ RUN      ] ExtendedInputOutput.nonExistentPinOfDeletedElement
@@ -502,7 +502,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = ExtendedInputOutput.outOfPinNumbers
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from ExtendedInputOutput
 [ RUN      ] ExtendedInputOutput.outOfPinNumbers
@@ -528,7 +528,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Button.construct
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Button
 [ RUN      ] Button.construct
@@ -536,7 +536,7 @@ Note: Google Test filter = Button.construct
 [----------] 1 test from Button (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -554,7 +554,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Button.released
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Button
 [ RUN      ] Button.released
@@ -580,7 +580,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Button.falling
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Button
 [ RUN      ] Button.falling
@@ -588,7 +588,7 @@ Note: Google Test filter = Button.falling
 [----------] 1 test from Button (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -606,7 +606,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Button.pressed
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Button
 [ RUN      ] Button.pressed
@@ -614,7 +614,7 @@ Note: Google Test filter = Button.pressed
 [----------] 1 test from Button (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -632,7 +632,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Button.rising
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Button
 [ RUN      ] Button.rising
@@ -658,7 +658,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Button.debouncePressed
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Button
 [ RUN      ] Button.debouncePressed
@@ -684,7 +684,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Button.debounceReleased
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Button
 [ RUN      ] Button.debounceReleased
@@ -692,7 +692,7 @@ Note: Google Test filter = Button.debounceReleased
 [----------] 1 test from Button (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -710,7 +710,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Array.initializeAndRetrieve
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Array
 [ RUN      ] Array.initializeAndRetrieve
@@ -718,7 +718,7 @@ Note: Google Test filter = Array.initializeAndRetrieve
 [----------] 1 test from Array (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -736,7 +736,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Array.initializeAndRetrieveConst
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Array
 [ RUN      ] Array.initializeAndRetrieveConst
@@ -744,7 +744,7 @@ Note: Google Test filter = Array.initializeAndRetrieveConst
 [----------] 1 test from Array (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -762,7 +762,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Array.write
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Array
 [ RUN      ] Array.write
@@ -770,7 +770,7 @@ Note: Google Test filter = Array.write
 [----------] 1 test from Array (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -788,7 +788,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Array.rangeFor
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Array
 [ RUN      ] Array.rangeFor
@@ -796,7 +796,7 @@ Note: Google Test filter = Array.rangeFor
 [----------] 1 test from Array (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -814,7 +814,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Array.rangeForConst
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Array
 [ RUN      ] Array.rangeForConst
@@ -822,7 +822,7 @@ Note: Google Test filter = Array.rangeForConst
 [----------] 1 test from Array (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -840,7 +840,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Array.equality
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Array
 [ RUN      ] Array.equality
@@ -848,7 +848,7 @@ Note: Google Test filter = Array.equality
 [----------] 1 test from Array (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -892,7 +892,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Array2D.initialize
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Array2D
 [ RUN      ] Array2D.initialize
@@ -900,7 +900,7 @@ Note: Google Test filter = Array2D.initialize
 [----------] 1 test from Array2D (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -918,7 +918,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = generateIncrementalArray.simple
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from generateIncrementalArray
 [ RUN      ] generateIncrementalArray.simple
@@ -926,7 +926,7 @@ Note: Google Test filter = generateIncrementalArray.simple
 [----------] 1 test from generateIncrementalArray (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -944,7 +944,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = generateArray.simple
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from generateArray
 [ RUN      ] generateArray.simple
@@ -952,7 +952,7 @@ Note: Google Test filter = generateArray.simple
 [----------] 1 test from generateArray (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -970,7 +970,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.appendNode
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.appendNode
@@ -978,7 +978,7 @@ Note: Google Test filter = DoublyLinkedList.appendNode
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -996,7 +996,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.insertNodeBeforeFirst
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.insertNodeBeforeFirst
@@ -1004,7 +1004,7 @@ Note: Google Test filter = DoublyLinkedList.insertNodeBeforeFirst
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1022,7 +1022,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.insertNodeBeforeMiddle
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.insertNodeBeforeMiddle
@@ -1030,7 +1030,7 @@ Note: Google Test filter = DoublyLinkedList.insertNodeBeforeMiddle
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1048,7 +1048,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.insertSorted
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.insertSorted
@@ -1056,7 +1056,7 @@ Note: Google Test filter = DoublyLinkedList.insertSorted
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1074,7 +1074,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.insertSortedDoubles
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.insertSortedDoubles
@@ -1082,7 +1082,7 @@ Note: Google Test filter = DoublyLinkedList.insertSortedDoubles
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1100,7 +1100,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.insertSortedGreaterThan
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.insertSortedGreaterThan
@@ -1126,7 +1126,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.deleteNode
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.deleteNode
@@ -1152,7 +1152,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.deleteFirstNode
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.deleteFirstNode
@@ -1160,7 +1160,7 @@ Note: Google Test filter = DoublyLinkedList.deleteFirstNode
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1178,7 +1178,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.deleteLastNode
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.deleteLastNode
@@ -1204,7 +1204,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.moveDownNode
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.moveDownNode
@@ -1230,7 +1230,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.moveDownFirstNode
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.moveDownFirstNode
@@ -1238,7 +1238,7 @@ Note: Google Test filter = DoublyLinkedList.moveDownFirstNode
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1256,7 +1256,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.moveDownSecondNode
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.moveDownSecondNode
@@ -1282,7 +1282,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.moveDownLastNode
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.moveDownLastNode
@@ -1290,7 +1290,7 @@ Note: Google Test filter = DoublyLinkedList.moveDownLastNode
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1308,7 +1308,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.moveDownOnlyElement
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.moveDownOnlyElement
@@ -1316,7 +1316,7 @@ Note: Google Test filter = DoublyLinkedList.moveDownOnlyElement
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1334,7 +1334,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.couldContainInsert
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.couldContainInsert
@@ -1342,7 +1342,7 @@ Note: Google Test filter = DoublyLinkedList.couldContainInsert
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1360,7 +1360,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.couldContainDeleteFirst
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.couldContainDeleteFirst
@@ -1368,7 +1368,7 @@ Note: Google Test filter = DoublyLinkedList.couldContainDeleteFirst
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1386,7 +1386,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.couldContainDeleteMiddle
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.couldContainDeleteMiddle
@@ -1394,7 +1394,7 @@ Note: Google Test filter = DoublyLinkedList.couldContainDeleteMiddle
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1412,7 +1412,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.couldContainDeleteLast
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.couldContainDeleteLast
@@ -1420,7 +1420,7 @@ Note: Google Test filter = DoublyLinkedList.couldContainDeleteLast
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1438,7 +1438,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.iterator
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.iterator
@@ -1446,7 +1446,7 @@ Note: Google Test filter = DoublyLinkedList.iterator
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1464,7 +1464,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.const_iterator
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.const_iterator
@@ -1472,7 +1472,7 @@ Note: Google Test filter = DoublyLinkedList.const_iterator
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1490,7 +1490,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.reverse_iterator
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.reverse_iterator
@@ -1498,7 +1498,7 @@ Note: Google Test filter = DoublyLinkedList.reverse_iterator
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1516,7 +1516,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = DoublyLinkedList.const_reverse_iterator
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from DoublyLinkedList
 [ RUN      ] DoublyLinkedList.const_reverse_iterator
@@ -1524,7 +1524,7 @@ Note: Google Test filter = DoublyLinkedList.const_reverse_iterator
 [----------] 1 test from DoublyLinkedList (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1542,7 +1542,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = EMA.overflow
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from EMA
 [ RUN      ] EMA.overflow
@@ -1550,7 +1550,7 @@ Note: Google Test filter = EMA.overflow
 [----------] 1 test from EMA (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1568,7 +1568,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDICNChannelAddress.init
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDICNChannelAddress
 [ RUN      ] MIDICNChannelAddress.init
@@ -1576,7 +1576,7 @@ Note: Google Test filter = MIDICNChannelAddress.init
 [----------] 1 test from MIDICNChannelAddress (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1594,7 +1594,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDICNChannelAddress.invalid
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDICNChannelAddress
 [ RUN      ] MIDICNChannelAddress.invalid
@@ -1602,7 +1602,7 @@ Note: Google Test filter = MIDICNChannelAddress.invalid
 [----------] 1 test from MIDICNChannelAddress (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1620,7 +1620,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDICNChannelAddress.add
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDICNChannelAddress
 [ RUN      ] MIDICNChannelAddress.add
@@ -1628,7 +1628,7 @@ Note: Google Test filter = MIDICNChannelAddress.add
 [----------] 1 test from MIDICNChannelAddress (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1646,7 +1646,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDICNChannelAddress.incrAdd
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDICNChannelAddress
 [ RUN      ] MIDICNChannelAddress.incrAdd
@@ -1654,7 +1654,7 @@ Note: Google Test filter = MIDICNChannelAddress.incrAdd
 [----------] 1 test from MIDICNChannelAddress (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1672,7 +1672,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDICNChannelAddress.addNegativeAddress
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDICNChannelAddress
 [ RUN      ] MIDICNChannelAddress.addNegativeAddress
@@ -1698,7 +1698,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDICNChannelAddress.addNegativeChannel
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDICNChannelAddress
 [ RUN      ] MIDICNChannelAddress.addNegativeChannel
@@ -1706,7 +1706,7 @@ Note: Google Test filter = MIDICNChannelAddress.addNegativeChannel
 [----------] 1 test from MIDICNChannelAddress (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1724,7 +1724,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDICNChannelAddress.addNegativeCableNumber
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDICNChannelAddress
 [ RUN      ] MIDICNChannelAddress.addNegativeCableNumber
@@ -1732,7 +1732,7 @@ Note: Google Test filter = MIDICNChannelAddress.addNegativeCableNumber
 [----------] 1 test from MIDICNChannelAddress (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1750,7 +1750,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDICNChannelAddress.addInvalidLHS
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDICNChannelAddress
 [ RUN      ] MIDICNChannelAddress.addInvalidLHS
@@ -1758,7 +1758,7 @@ Note: Google Test filter = MIDICNChannelAddress.addInvalidLHS
 [----------] 1 test from MIDICNChannelAddress (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1776,7 +1776,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDICNChannelAddress.addInvalidRHS
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDICNChannelAddress
 [ RUN      ] MIDICNChannelAddress.addInvalidRHS
@@ -1784,7 +1784,7 @@ Note: Google Test filter = MIDICNChannelAddress.addInvalidRHS
 [----------] 1 test from MIDICNChannelAddress (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1802,7 +1802,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDICNChannelAddress.equals
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDICNChannelAddress
 [ RUN      ] MIDICNChannelAddress.equals
@@ -1828,7 +1828,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BitArray.construct
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BitArray
 [ RUN      ] BitArray.construct
@@ -1836,7 +1836,7 @@ Note: Google Test filter = BitArray.construct
 [----------] 1 test from BitArray (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1854,7 +1854,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BitArray.setClearGet
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BitArray
 [ RUN      ] BitArray.setClearGet
@@ -1862,7 +1862,7 @@ Note: Google Test filter = BitArray.setClearGet
 [----------] 1 test from BitArray (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1880,7 +1880,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.setFirstLetter
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.setFirstLetter
@@ -1888,7 +1888,7 @@ Note: Google Test filter = MCUTimeDisplay.setFirstLetter
 [----------] 1 test from MCUTimeDisplay (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1906,7 +1906,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getTextFull
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getTextFull
@@ -1932,15 +1932,15 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getTextOffset
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getTextOffset
 [       OK ] MCUTimeDisplay.getTextOffset (0 ms)
-[----------] 1 test from MCUTimeDisplay (0 ms total)
+[----------] 1 test from MCUTimeDisplay (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1958,7 +1958,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getTextOffsetLength
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getTextOffsetLength
@@ -1966,7 +1966,7 @@ Note: Google Test filter = MCUTimeDisplay.getTextOffsetLength
 [----------] 1 test from MCUTimeDisplay (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -1984,7 +1984,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getTextOffsetLast
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getTextOffsetLast
@@ -1992,7 +1992,7 @@ Note: Google Test filter = MCUTimeDisplay.getTextOffsetLast
 [----------] 1 test from MCUTimeDisplay (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2010,7 +2010,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getTextOffsetTooBig
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getTextOffsetTooBig
@@ -2018,7 +2018,7 @@ Note: Google Test filter = MCUTimeDisplay.getTextOffsetTooBig
 [----------] 1 test from MCUTimeDisplay (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2036,7 +2036,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getTextLengthTooBig
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getTextLengthTooBig
@@ -2044,7 +2044,7 @@ Note: Google Test filter = MCUTimeDisplay.getTextLengthTooBig
 [----------] 1 test from MCUTimeDisplay (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2062,7 +2062,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit
@@ -2070,7 +2070,7 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames1Digit
 [----------] 1 test from MCUTimeDisplay (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2088,7 +2088,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits
@@ -2096,7 +2096,7 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames2Digits
 [----------] 1 test from MCUTimeDisplay (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2114,7 +2114,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits
@@ -2122,7 +2122,7 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames3Digits
 [----------] 1 test from MCUTimeDisplay (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2140,7 +2140,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits
@@ -2148,7 +2148,7 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames4Digits
 [----------] 1 test from MCUTimeDisplay (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2166,7 +2166,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits
@@ -2174,7 +2174,7 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFrames5Digits
 [----------] 1 test from MCUTimeDisplay (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2192,7 +2192,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUTimeDisplay
 [ RUN      ] MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly
@@ -2200,7 +2200,7 @@ Note: Google Test filter = MCUTimeDisplay.getBarsGetBeatsGetFramesSpacesOnly
 [----------] 1 test from MCUTimeDisplay (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2218,7 +2218,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDINote.NoteOnNoteOff
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDINote
 [ RUN      ] MIDINote.NoteOnNoteOff
@@ -2244,15 +2244,15 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDINote.NoteOnNoteOnZeroVelocity
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDINote
 [ RUN      ] MIDINote.NoteOnNoteOnZeroVelocity
 [       OK ] MIDINote.NoteOnNoteOnZeroVelocity (0 ms)
-[----------] 1 test from MIDINote (0 ms total)
+[----------] 1 test from MIDINote (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2270,7 +2270,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MIDINoteLED.NoteOnNoteOff
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MIDINoteLED
 [ RUN      ] MIDINoteLED.NoteOnNoteOff
@@ -2278,7 +2278,7 @@ Note: Google Test filter = MIDINoteLED.NoteOnNoteOff
 [----------] 1 test from MIDINoteLED (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2296,15 +2296,15 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUVU.setValue
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUVU
 [ RUN      ] MCUVU.setValue
-[       OK ] MCUVU.setValue (0 ms)
-[----------] 1 test from MCUVU (0 ms total)
+[       OK ] MCUVU.setValue (1 ms)
+[----------] 1 test from MCUVU (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2322,7 +2322,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUVU.setOverload
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUVU
 [ RUN      ] MCUVU.setOverload
@@ -2330,7 +2330,7 @@ Note: Google Test filter = MCUVU.setOverload
 [----------] 1 test from MCUVU (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2348,7 +2348,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUVU.clearOverload
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUVU
 [ RUN      ] MCUVU.clearOverload
@@ -2374,7 +2374,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUVU.retainValueAfterOverload
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUVU
 [ RUN      ] MCUVU.retainValueAfterOverload
@@ -2382,7 +2382,7 @@ Note: Google Test filter = MCUVU.retainValueAfterOverload
 [----------] 1 test from MCUVU (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2400,7 +2400,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUVU.decay
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUVU
 [ RUN      ] MCUVU.decay
@@ -2408,7 +2408,7 @@ Note: Google Test filter = MCUVU.decay
 [----------] 1 test from MCUVU (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2426,7 +2426,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUVUBankable.setValueBankChangeAddress
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUVUBankable
 [ RUN      ] MCUVUBankable.setValueBankChangeAddress
@@ -2452,7 +2452,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUVUBankable.setValueBankChangeChannel
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUVUBankable
 [ RUN      ] MCUVUBankable.setValueBankChangeChannel
@@ -2460,7 +2460,7 @@ Note: Google Test filter = MCUVUBankable.setValueBankChangeChannel
 [----------] 1 test from MCUVUBankable (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2478,7 +2478,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUVUBankable.overloadBankChangeAddress
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUVUBankable
 [ RUN      ] MCUVUBankable.overloadBankChangeAddress
@@ -2486,7 +2486,7 @@ Note: Google Test filter = MCUVUBankable.overloadBankChangeAddress
 [----------] 1 test from MCUVUBankable (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2504,15 +2504,15 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = MCUVULEDsBankable.displayOnBankChange
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from MCUVULEDsBankable
 [ RUN      ] MCUVULEDsBankable.displayOnBankChange
-[       OK ] MCUVULEDsBankable.displayOnBankChange (0 ms)
-[----------] 1 test from MCUVULEDsBankable (0 ms total)
+[       OK ] MCUVULEDsBankable.displayOnBankChange (1 ms)
+[----------] 1 test from MCUVULEDsBankable (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2530,15 +2530,15 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BluetoothMIDIInterface.initializeBegin
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BluetoothMIDIInterface
 [ RUN      ] BluetoothMIDIInterface.initializeBegin
-[       OK ] BluetoothMIDIInterface.initializeBegin (0 ms)
-[----------] 1 test from BluetoothMIDIInterface (0 ms total)
+[       OK ] BluetoothMIDIInterface.initializeBegin (1 ms)
+[----------] 1 test from BluetoothMIDIInterface (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2556,7 +2556,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BluetoothMIDIInterface.receiveChannelMessage
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BluetoothMIDIInterface
 [ RUN      ] BluetoothMIDIInterface.receiveChannelMessage
@@ -2564,7 +2564,7 @@ Note: Google Test filter = BluetoothMIDIInterface.receiveChannelMessage
 [----------] 1 test from BluetoothMIDIInterface (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2582,7 +2582,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BluetoothMIDIInterface.receiveMultipleChannelMessage
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BluetoothMIDIInterface
 [ RUN      ] BluetoothMIDIInterface.receiveMultipleChannelMessage
@@ -2590,7 +2590,7 @@ Note: Google Test filter = BluetoothMIDIInterface.receiveMultipleChannelMessage
 [----------] 1 test from BluetoothMIDIInterface (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2608,7 +2608,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BluetoothMIDIInterface.receiveMultipleChannelMessageRunningStatus
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BluetoothMIDIInterface
 [ RUN      ] BluetoothMIDIInterface.receiveMultipleChannelMessageRunningStatus
@@ -2634,7 +2634,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BluetoothMIDIInterface.receiveMultipleChannelMessageRunningStatusRealTime
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BluetoothMIDIInterface
 [ RUN      ] BluetoothMIDIInterface.receiveMultipleChannelMessageRunningStatusRealTime
@@ -2660,7 +2660,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BluetoothMIDIInterface.receiveMultipleTwoByteChannelMessage
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BluetoothMIDIInterface
 [ RUN      ] BluetoothMIDIInterface.receiveMultipleTwoByteChannelMessage
@@ -2668,7 +2668,7 @@ Note: Google Test filter = BluetoothMIDIInterface.receiveMultipleTwoByteChannelM
 [----------] 1 test from BluetoothMIDIInterface (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2686,15 +2686,15 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BluetoothMIDIInterface.receiveSysEx
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BluetoothMIDIInterface
 [ RUN      ] BluetoothMIDIInterface.receiveSysEx
-[       OK ] BluetoothMIDIInterface.receiveSysEx (0 ms)
-[----------] 1 test from BluetoothMIDIInterface (0 ms total)
+[       OK ] BluetoothMIDIInterface.receiveSysEx (1 ms)
+[----------] 1 test from BluetoothMIDIInterface (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2712,7 +2712,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BluetoothMIDIInterface.receiveSysEx2
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BluetoothMIDIInterface
 [ RUN      ] BluetoothMIDIInterface.receiveSysEx2
@@ -2720,7 +2720,7 @@ Note: Google Test filter = BluetoothMIDIInterface.receiveSysEx2
 [----------] 1 test from BluetoothMIDIInterface (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2738,7 +2738,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BluetoothMIDIInterface.receiveSysExSplitAcrossPackets
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BluetoothMIDIInterface
 [ RUN      ] BluetoothMIDIInterface.receiveSysExSplitAcrossPackets
@@ -2764,7 +2764,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = BluetoothMIDIInterface.receiveSysExAndRealTime
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from BluetoothMIDIInterface
 [ RUN      ] BluetoothMIDIInterface.receiveSysExAndRealTime
@@ -2790,7 +2790,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCButton.pressAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCButton
 [ RUN      ] CCButton.pressAndRelease
@@ -2798,7 +2798,7 @@ Note: Google Test filter = CCButton.pressAndRelease
 [----------] 1 test from CCButton (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2816,7 +2816,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCButtonBankable.pressAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCButtonBankable
 [ RUN      ] CCButtonBankable.pressAndRelease
@@ -2824,7 +2824,7 @@ Note: Google Test filter = CCButtonBankable.pressAndRelease
 [----------] 1 test from CCButtonBankable (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2842,7 +2842,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCButtonBankable.changeSettingAndPressAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCButtonBankable
 [ RUN      ] CCButtonBankable.changeSettingAndPressAndRelease
@@ -2868,15 +2868,15 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCButtonBankable.pressAndChangeSettingAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCButtonBankable
 [ RUN      ] CCButtonBankable.pressAndChangeSettingAndRelease
-[       OK ] CCButtonBankable.pressAndChangeSettingAndRelease (0 ms)
-[----------] 1 test from CCButtonBankable (0 ms total)
+[       OK ] CCButtonBankable.pressAndChangeSettingAndRelease (1 ms)
+[----------] 1 test from CCButtonBankable (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2894,7 +2894,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCButtons.pressAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCButtons
 [ RUN      ] CCButtons.pressAndRelease
@@ -2920,7 +2920,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCButtonsBankable.pressChangeBankAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCButtonsBankable
 [ RUN      ] CCButtonsBankable.pressChangeBankAndRelease
@@ -2946,15 +2946,15 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCButtonsBankable.pressChangeBankAndReleaseAndPress
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCButtonsBankable
 [ RUN      ] CCButtonsBankable.pressChangeBankAndReleaseAndPress
-[       OK ] CCButtonsBankable.pressChangeBankAndReleaseAndPress (1 ms)
-[----------] 1 test from CCButtonsBankable (1 ms total)
+[       OK ] CCButtonsBankable.pressChangeBankAndReleaseAndPress (0 ms)
+[----------] 1 test from CCButtonsBankable (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -2972,7 +2972,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCRotaryEncoder.turnOneStep
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCRotaryEncoder
 [ RUN      ] CCRotaryEncoder.turnOneStep
@@ -2998,7 +2998,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCRotaryEncoder.turnFourHalfSteps
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCRotaryEncoder
 [ RUN      ] CCRotaryEncoder.turnFourHalfSteps
@@ -3006,7 +3006,7 @@ Note: Google Test filter = CCRotaryEncoder.turnFourHalfSteps
 [----------] 1 test from CCRotaryEncoder (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3024,7 +3024,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCRotaryEncoder.turnOneStepBackwards
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCRotaryEncoder
 [ RUN      ] CCRotaryEncoder.turnOneStepBackwards
@@ -3032,7 +3032,7 @@ Note: Google Test filter = CCRotaryEncoder.turnOneStepBackwards
 [----------] 1 test from CCRotaryEncoder (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3050,7 +3050,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCRotaryEncoder.turnSixteenSteps
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCRotaryEncoder
 [ RUN      ] CCRotaryEncoder.turnSixteenSteps
@@ -3058,7 +3058,7 @@ Note: Google Test filter = CCRotaryEncoder.turnSixteenSteps
 [----------] 1 test from CCRotaryEncoder (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3076,7 +3076,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCRotaryEncoder.turnSixteenStepsBackwards
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCRotaryEncoder
 [ RUN      ] CCRotaryEncoder.turnSixteenStepsBackwards
@@ -3084,7 +3084,7 @@ Note: Google Test filter = CCRotaryEncoder.turnSixteenStepsBackwards
 [----------] 1 test from CCRotaryEncoder (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3102,15 +3102,15 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CCRotaryEncoderBankable
 [ RUN      ] CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep
-[       OK ] CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep (0 ms)
-[----------] 1 test from CCRotaryEncoderBankable (0 ms total)
+[       OK ] CCRotaryEncoderBankable.turnOneStepChangeSettingTurnOneStep (1 ms)
+[----------] 1 test from CCRotaryEncoderBankable (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3128,7 +3128,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NoteButton.pressAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from NoteButton
 [ RUN      ] NoteButton.pressAndRelease
@@ -3154,7 +3154,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NoteButtonBankable.pressAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from NoteButtonBankable
 [ RUN      ] NoteButtonBankable.pressAndRelease
@@ -3162,7 +3162,7 @@ Note: Google Test filter = NoteButtonBankable.pressAndRelease
 [----------] 1 test from NoteButtonBankable (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3180,7 +3180,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NoteButtonBankable.changeSettingAndPressAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from NoteButtonBankable
 [ RUN      ] NoteButtonBankable.changeSettingAndPressAndRelease
@@ -3188,7 +3188,7 @@ Note: Google Test filter = NoteButtonBankable.changeSettingAndPressAndRelease
 [----------] 1 test from NoteButtonBankable (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3206,7 +3206,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NoteButtonBankable.pressAndChangeSettingAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from NoteButtonBankable
 [ RUN      ] NoteButtonBankable.pressAndChangeSettingAndRelease
@@ -3232,7 +3232,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NoteButtonLatching.pressAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from NoteButtonLatching
 [ RUN      ] NoteButtonLatching.pressAndRelease
@@ -3258,7 +3258,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NoteButtonLatchingBankable.pressAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from NoteButtonLatchingBankable
 [ RUN      ] NoteButtonLatchingBankable.pressAndRelease
@@ -3266,7 +3266,7 @@ Note: Google Test filter = NoteButtonLatchingBankable.pressAndRelease
 [----------] 1 test from NoteButtonLatchingBankable (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3284,7 +3284,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NoteButtonLatchingBankable.changeSettingAndPressAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from NoteButtonLatchingBankable
 [ RUN      ] NoteButtonLatchingBankable.changeSettingAndPressAndRelease
@@ -3310,7 +3310,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NoteButtonLatchingBankable.pressAndChangeSettingAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from NoteButtonLatchingBankable
 [ RUN      ] NoteButtonLatchingBankable.pressAndChangeSettingAndRelease
@@ -3318,7 +3318,7 @@ Note: Google Test filter = NoteButtonLatchingBankable.pressAndChangeSettingAndRe
 [----------] 1 test from NoteButtonLatchingBankable (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3336,7 +3336,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NoteButtonMatrix.pressAndRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from NoteButtonMatrix
 [ RUN      ] NoteButtonMatrix.pressAndRelease
@@ -3344,7 +3344,7 @@ Note: Google Test filter = NoteButtonMatrix.pressAndRelease
 [----------] 1 test from NoteButtonMatrix (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3362,7 +3362,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = NoteButtonMatrixBankable.pressChangeSettingRelease
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from NoteButtonMatrixBankable
 [ RUN      ] NoteButtonMatrixBankable.pressChangeSettingRelease
@@ -3370,7 +3370,7 @@ Note: Google Test filter = NoteButtonMatrixBankable.pressChangeSettingRelease
 [----------] 1 test from NoteButtonMatrixBankable (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (1 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3388,7 +3388,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.noteOff
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.noteOff
@@ -3396,7 +3396,7 @@ Note: Google Test filter = USBMIDIParser.noteOff
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3414,7 +3414,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.noteOn
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.noteOn
@@ -3422,7 +3422,7 @@ Note: Google Test filter = USBMIDIParser.noteOn
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3440,7 +3440,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.noteOnCN
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.noteOnCN
@@ -3466,7 +3466,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.sysEx2Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.sysEx2Bytes
@@ -3474,7 +3474,7 @@ Note: Google Test filter = USBMIDIParser.sysEx2Bytes
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3492,7 +3492,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.sysEx3Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.sysEx3Bytes
@@ -3500,7 +3500,7 @@ Note: Google Test filter = USBMIDIParser.sysEx3Bytes
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3518,7 +3518,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.sysEx4Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.sysEx4Bytes
@@ -3526,7 +3526,7 @@ Note: Google Test filter = USBMIDIParser.sysEx4Bytes
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3544,7 +3544,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.sysEx5Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.sysEx5Bytes
@@ -3552,7 +3552,7 @@ Note: Google Test filter = USBMIDIParser.sysEx5Bytes
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3570,7 +3570,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.sysEx6Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.sysEx6Bytes
@@ -3578,7 +3578,7 @@ Note: Google Test filter = USBMIDIParser.sysEx6Bytes
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3596,7 +3596,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.sysEx7Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.sysEx7Bytes
@@ -3604,7 +3604,7 @@ Note: Google Test filter = USBMIDIParser.sysEx7Bytes
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3622,7 +3622,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.sysEx12Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.sysEx12Bytes
@@ -3630,7 +3630,7 @@ Note: Google Test filter = USBMIDIParser.sysEx12Bytes
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3648,7 +3648,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.Realtime
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.Realtime
@@ -3656,7 +3656,7 @@ Note: Google Test filter = USBMIDIParser.Realtime
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3674,7 +3674,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.sysExContinueWithoutStarting
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.sysExContinueWithoutStarting
@@ -3682,7 +3682,7 @@ Note: Google Test filter = USBMIDIParser.sysExContinueWithoutStarting
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3700,7 +3700,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting1Byte
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.sysExEndsWithoutStarting1Byte
@@ -3708,7 +3708,7 @@ Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting1Byte
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3726,7 +3726,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting2Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.sysExEndsWithoutStarting2Bytes
@@ -3734,7 +3734,7 @@ Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting2Bytes
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3752,7 +3752,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting3Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from USBMIDIParser
 [ RUN      ] USBMIDIParser.sysExEndsWithoutStarting3Bytes
@@ -3760,7 +3760,7 @@ Note: Google Test filter = USBMIDIParser.sysExEndsWithoutStarting3Bytes
 [----------] 1 test from USBMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3778,7 +3778,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.noteOff
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.noteOff
@@ -3786,7 +3786,7 @@ Note: Google Test filter = SerialMIDIParser.noteOff
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3804,7 +3804,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.noteOn
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.noteOn
@@ -3830,7 +3830,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.noteOnRunningStatus
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.noteOnRunningStatus
@@ -3838,7 +3838,7 @@ Note: Google Test filter = SerialMIDIParser.noteOnRunningStatus
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3856,7 +3856,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.afterTouch
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.afterTouch
@@ -3864,7 +3864,7 @@ Note: Google Test filter = SerialMIDIParser.afterTouch
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3882,7 +3882,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.controlChange
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.controlChange
@@ -3890,7 +3890,7 @@ Note: Google Test filter = SerialMIDIParser.controlChange
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3908,7 +3908,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.programChange
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.programChange
@@ -3916,7 +3916,7 @@ Note: Google Test filter = SerialMIDIParser.programChange
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3934,7 +3934,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.programChangeRunningStatus
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.programChangeRunningStatus
@@ -3960,7 +3960,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.channelPressure
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.channelPressure
@@ -3968,7 +3968,7 @@ Note: Google Test filter = SerialMIDIParser.channelPressure
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -3986,7 +3986,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.pitchBend
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.pitchBend
@@ -4012,7 +4012,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.sysEx2Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.sysEx2Bytes
@@ -4020,7 +4020,7 @@ Note: Google Test filter = SerialMIDIParser.sysEx2Bytes
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4038,7 +4038,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.sysEx3Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.sysEx3Bytes
@@ -4046,7 +4046,7 @@ Note: Google Test filter = SerialMIDIParser.sysEx3Bytes
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4064,7 +4064,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.sysEx7Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.sysEx7Bytes
@@ -4072,7 +4072,7 @@ Note: Google Test filter = SerialMIDIParser.sysEx7Bytes
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4090,7 +4090,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.RealTime
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.RealTime
@@ -4116,7 +4116,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.noteOffInterruptedByRealTime
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.noteOffInterruptedByRealTime
@@ -4124,7 +4124,7 @@ Note: Google Test filter = SerialMIDIParser.noteOffInterruptedByRealTime
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4142,7 +4142,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.sysExEndsWithoutStarting1Byte
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.sysExEndsWithoutStarting1Byte
@@ -4168,7 +4168,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.sysExEndsWithoutStarting2Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.sysExEndsWithoutStarting2Bytes
@@ -4176,7 +4176,7 @@ Note: Google Test filter = SerialMIDIParser.sysExEndsWithoutStarting2Bytes
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4194,7 +4194,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = SerialMIDIParser.sysExEndsWithoutStarting3Bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from SerialMIDIParser
 [ RUN      ] SerialMIDIParser.sysExEndsWithoutStarting3Bytes
@@ -4202,7 +4202,7 @@ Note: Google Test filter = SerialMIDIParser.sysExEndsWithoutStarting3Bytes
 [----------] 1 test from SerialMIDIParser (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4220,7 +4220,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = IncrementDecrementSelector.pressIncrementWrap
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from IncrementDecrementSelector
 [ RUN      ] IncrementDecrementSelector.pressIncrementWrap
@@ -4246,7 +4246,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = IncrementDecrementSelector.pressDecrementWrap
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from IncrementDecrementSelector
 [ RUN      ] IncrementDecrementSelector.pressDecrementWrap
@@ -4254,7 +4254,7 @@ Note: Google Test filter = IncrementDecrementSelector.pressDecrementWrap
 [----------] 1 test from IncrementDecrementSelector (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4272,7 +4272,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = IncrementDecrementSelector.reset
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from IncrementDecrementSelector
 [ RUN      ] IncrementDecrementSelector.reset
@@ -4298,7 +4298,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = IncrementDecrementSelector.pressIncrementNoWrap
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from IncrementDecrementSelector
 [ RUN      ] IncrementDecrementSelector.pressIncrementNoWrap
@@ -4306,7 +4306,7 @@ Note: Google Test filter = IncrementDecrementSelector.pressIncrementNoWrap
 [----------] 1 test from IncrementDecrementSelector (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4324,7 +4324,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = IncrementDecrementSelector.pressDecrementNoWrap
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from IncrementDecrementSelector
 [ RUN      ] IncrementDecrementSelector.pressDecrementNoWrap
@@ -4332,7 +4332,7 @@ Note: Google Test filter = IncrementDecrementSelector.pressDecrementNoWrap
 [----------] 1 test from IncrementDecrementSelector (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4350,7 +4350,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = IncrementSelector.pressWrap
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from IncrementSelector
 [ RUN      ] IncrementSelector.pressWrap
@@ -4376,7 +4376,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = IncrementSelector.pressNoWrap
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from IncrementSelector
 [ RUN      ] IncrementSelector.pressNoWrap
@@ -4384,7 +4384,7 @@ Note: Google Test filter = IncrementSelector.pressNoWrap
 [----------] 1 test from IncrementSelector (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4402,15 +4402,15 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = ManyButtonsSelector.press
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from ManyButtonsSelector
 [ RUN      ] ManyButtonsSelector.press
-[       OK ] ManyButtonsSelector.press (0 ms)
-[----------] 1 test from ManyButtonsSelector (0 ms total)
+[       OK ] ManyButtonsSelector.press (1 ms)
+[----------] 1 test from ManyButtonsSelector (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4428,7 +4428,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = millis.millis
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from millis
 [ RUN      ] millis.millis
@@ -4436,7 +4436,7 @@ Note: Google Test filter = millis.millis
 [----------] 1 test from millis (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4454,7 +4454,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Serial.write_byte
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Serial
 [ RUN      ] Serial.write_byte
@@ -4462,7 +4462,7 @@ Note: Google Test filter = Serial.write_byte
 [----------] 1 test from Serial (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4480,7 +4480,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Serial.write_bytes
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Serial
 [ RUN      ] Serial.write_bytes
@@ -4506,7 +4506,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Serial.print_string
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Serial
 [ RUN      ] Serial.print_string
@@ -4514,7 +4514,7 @@ Note: Google Test filter = Serial.print_string
 [----------] 1 test from Serial (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4532,15 +4532,15 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Serial.println_string
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Serial
 [ RUN      ] Serial.println_string
-[       OK ] Serial.println_string (0 ms)
-[----------] 1 test from Serial (0 ms total)
+[       OK ] Serial.println_string (1 ms)
+[----------] 1 test from Serial (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4558,7 +4558,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Error.exception
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Error
 [ RUN      ] Error.exception
@@ -4566,7 +4566,7 @@ Note: Google Test filter = Error.exception
 [----------] 1 test from Error (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
@@ -4584,7 +4584,7 @@ Directory: /home/pieter/GitHub/Control-Surface/build
 Output:
 ----------------------------------------------------------
 Note: Google Test filter = Error.exceptionWhatErrorCode
-[==========] Running 1 test from 1 test case.
+[==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from Error
 [ RUN      ] Error.exceptionWhatErrorCode
@@ -4593,7 +4593,7 @@ Note: Google Test filter = Error.exceptionWhatErrorCode
 [----------] 1 test from Error (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.00 sec
