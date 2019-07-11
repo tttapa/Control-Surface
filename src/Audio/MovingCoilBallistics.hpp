@@ -37,8 +37,8 @@ class MovingCoilBallistics {
         return MovingCoilBallistics(0.16025, 0.0215, 0.001, Tsfactor / MAX_FPS);
     }
 
-    static MovingCoilBallistics noOvershoot() {
-        return MovingCoilBallistics(1.05, 0.1, 0.002);
+    static MovingCoilBallistics noOvershoot(float Tsfactor = 1.0) {
+        return MovingCoilBallistics(1.05, 0.1, 0.002, Tsfactor / MAX_FPS);
     }
 
   private:

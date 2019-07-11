@@ -8,7 +8,7 @@
 
 /**
  * @brief   A VU meter that reads from an Audio stream using the 
- *          AudioAnalyzePeak class.
+ *          Analyzer class.
  * 
  * @ingroup Audio
  */
@@ -18,7 +18,7 @@ class AudioVU : public IVU {
      * @brief   Create a new AudioVU object.
      * 
      * @param   level
-     *          The Teensy Audio peak analyzer object.  
+     *          The Teensy Audio peak or RMS analyzer object.  
      *          Note that it is kept by reference, so it must outlive the 
      *          AudioVU instance.
      * @param   gain
@@ -27,14 +27,15 @@ class AudioVU : public IVU {
      *          The max output, or the length of the output scale:
      *          `getValue` will output a number in [0, max].
      */
-    AudioVU(AudioAnalyzePeak &level, float gain = 1.0, uint8_t max = 100)
-        : IVU(max), level(level), gain(gain) {}
+    template <class T>
+    AudioVU(T &level, float gain = 1.0, uint8_t max = 100)
+        : IVU(max), level{level}, gain(gain) {}
 
     /** 
      * @brief   Create a new AudioVU object.
      * 
      * @param   level
-     *          The Teensy Audio peak analyzer object.  
+     *          The Teensy Audio peak or RMS analyzer object.  
      *          Note that it is kept by reference, so it must outlive the 
      *          AudioVU instance.
      * @param   ballistics
@@ -45,8 +46,9 @@ class AudioVU : public IVU {
      *          The max output, or the length of the output scale:
      *          `getValue` will output a number in [0, max].
      */
-    AudioVU(AudioAnalyzePeak &level, MovingCoilBallistics ballistics,
-            float gain = 1.0, uint8_t max = 100)
+    template <class T>
+    AudioVU(T &level, MovingCoilBallistics ballistics, float gain = 1.0,
+            uint8_t max = 100)
         : IVU(max), ballistics(ballistics), level(level), gain(gain) {}
 
     /** 
@@ -78,6 +80,45 @@ class AudioVU : public IVU {
   private:
     mutable MovingCoilBallistics ballistics =
         MovingCoilBallistics::responsiveVU();
-    AudioAnalyzePeak &level;
+
+    /**
+     * @brief   The `AudioAnalyzePeak` and `AudioAnalyzeRMS` classes don't 
+     *          implement a common interface, so we have to use our own RTTI 
+     *          wrapper to allow both classes to be used.
+     */
+    class Analyzer {
+      private:
+        enum { Peak, RMS } type;
+        void *analyzer;
+
+      public:
+        Analyzer(AudioAnalyzePeak &analyzer) //
+            : type(Peak), analyzer(&analyzer) {}
+        Analyzer(AudioAnalyzeRMS &analyzer) //
+            : type(RMS), analyzer(&analyzer) {}
+
+        float read() const {
+            switch (type) {
+                case Peak:
+                    return static_cast<AudioAnalyzePeak *>(analyzer)->read();
+                case RMS:
+                    return static_cast<AudioAnalyzeRMS *>(analyzer)->read();
+                default: ERROR("Error: Invalid type!", 0x1518); return 0;
+            }
+        }
+
+        bool available() const {
+            switch (type) {
+                case Peak:
+                    return static_cast<AudioAnalyzePeak *>(analyzer)
+                        ->available();
+                case RMS:
+                    return static_cast<AudioAnalyzeRMS *>(analyzer)
+                        ->available();
+                default: ERROR("Error: Invalid type!", 0x1519); return false;
+            }
+        }
+    } level;
+
     float gain;
 };
