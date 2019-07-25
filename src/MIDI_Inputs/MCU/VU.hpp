@@ -5,6 +5,10 @@
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <string.h>
 
+#ifdef max // TODO: provide permanent fix using Arduino.h wrapper
+#undef max
+#endif
+
 /** 
  * @brief   An abstract interface for VU meters. It declares two methods:
  *          `getValue` and `getOverload`.
