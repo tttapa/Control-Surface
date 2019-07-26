@@ -61,7 +61,7 @@ display elements, using some minimal, high level code. All low level stuff is
 completely **reusable** (e.g. all MIDI operations, debouncing switches, 
 filtering analog inputs, and so on).
 
-## The Control Surface vs. The MIDI Controller library
+## The Control Surface library vs. The MIDI Controller library
 
 You might already have found my other Arduino MIDI library, [MIDI Controller](https://github.com/tttapa/MIDI_Controller), 
 and are wondering which one you should use for your project.
