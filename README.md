@@ -2,9 +2,13 @@
 
 An Arduino library for MIDI control surfaces (input and output).
 
-## UNDER CONSTRUCTION
+## Under Construction
 
-Should not be considered stable. API is might change in the near future.
+The library is not yet finished, and some parts of the API could change in the future.  
+However, I believe that this is a useful library, even if not everything is 
+implemented yet.  
+If you'd like to help me with the development, please open an issue if you have requests 
+or if you encounter any problems.
 
 ## Overview
 
@@ -57,7 +61,7 @@ display elements, using some minimal, high level code. All low level stuff is
 completely **reusable** (e.g. all MIDI operations, debouncing switches, 
 filtering analog inputs, and so on).
 
-## The Control Surface vs. The MIDI Controller library
+## The Control Surface library vs. The MIDI Controller library
 
 You might already have found my other Arduino MIDI library, [MIDI Controller](https://github.com/tttapa/MIDI_Controller), 
 and are wondering which one you should use for your project.
@@ -113,8 +117,7 @@ document to get started using the library.
 ## Documentation
 
 The automatically generated Doxygen documentation for this library can be found 
-[here](https://tttapa.github.io/Control-Surface/Doc/Doxygen/index.html). 
-(incomplete)
+[here](https://tttapa.github.io/Control-Surface/Doc/Doxygen/index.html).
 
 ## Building and running the tests
 

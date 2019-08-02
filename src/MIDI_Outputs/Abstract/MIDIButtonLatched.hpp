@@ -49,6 +49,10 @@ class MIDIButtonLatched : public MIDIOutputElement {
         state ? sendOn(address) : sendOff(address);
     }
 
+#ifdef INDIVIDUAL_BUTTON_INVERT
+    void invert() { button.invert(); }
+#endif
+
   private:
     Button button;
     const MIDICNChannelAddress address;
