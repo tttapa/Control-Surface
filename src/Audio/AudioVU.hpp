@@ -1,3 +1,5 @@
+/* ✔ */
+
 #pragma once
 
 #include <Audio.h>
@@ -8,7 +10,7 @@
 
 /**
  * @brief   A VU meter that reads from an Audio stream using the 
- *          Analyzer class.
+ *          AudioAnalyzePeak or AudioAnalyzeRMS classes.
  * 
  * @ingroup Audio
  */
@@ -25,7 +27,12 @@ class AudioVU : public IVU {
      *          A multiplier to calibrate the VU meter.
      * @param   max
      *          The max output, or the length of the output scale:
-     *          `getValue` will output a number in [0, max].
+     *          `getValue` will output a number in [0, max].  
+     *          If you display the VU meter using LEDs, this is the number of 
+     *          LEDs you're using. If you're using a digital bar display, this
+     *          is the maximum number of bars that fit on your display. 
+     *          If you're using an analog style meter, just use the maximum 
+     *          value for maximum resolution.
      */
     template <class T>
     AudioVU(T &level, float gain = 1.0, uint8_t max = 100)
@@ -44,11 +51,16 @@ class AudioVU : public IVU {
      *          A multiplier to calibrate the VU meter.
      * @param   max
      *          The max output, or the length of the output scale:
-     *          `getValue` will output a number in [0, max].
+     *          `getValue` will output a number in [0, max].  
+     *          If you display the VU meter using LEDs, this is the number of 
+     *          LEDs you're using. If you're using a digital bar display, this
+     *          is the maximum number of bars that fit on your display. 
+     *          If you're using an analog style meter, just use the maximum 
+     *          value for maximum resolution.
      */
     template <class T>
     AudioVU(T &level, MovingCoilBallistics ballistics, float gain = 1.0,
-            uint8_t max = 100)
+            uint8_t max = 255)
         : IVU(max), ballistics(ballistics), level(level), gain(gain) {}
 
     /** 

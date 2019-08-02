@@ -2,6 +2,9 @@
 
 #include <Settings/SettingsWrapper.hpp>
 
+/**
+ * @todo    Use ZOH discretization instead of forward Euler.
+ */
 class MovingCoilBallistics {
   public:
     MovingCoilBallistics(float springConstant, float friction, float mass,

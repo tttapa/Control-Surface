@@ -13,7 +13,8 @@ class BankableMIDIInput;
 class BankableMIDIOutput;
 
 /**
- * @brief   A class for changing the address of BankableMIDIOutput#s.
+ * @brief   A class that groups Bankable BankableMIDIOutput%s, and allows the 
+ *          user to change the addresses of these elements. 
  */
 class OutputBank {
   public:
