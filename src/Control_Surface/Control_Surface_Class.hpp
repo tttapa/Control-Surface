@@ -76,10 +76,45 @@ class Control_Surface_ : public MIDI_Callbacks {
      */
     void onSysExMessage(MIDI_Interface &midi) override;
 
+    /** 
+     * @brief   The callback to be called when a MIDI Real-Time message is 
+     *          received.
+     */
+    void onRealtimeMessage(MIDI_Interface &midi, uint8_t message) override;
+
     /// A timer to know when to update the analog inputs.
     Timer<micros> potentiometerTimer = {FILTERED_INPUT_UPDATE_INTERVAL};
     /// A timer to know when to refresh the displays.
     Timer<micros> displayTimer = {1000000UL / MAX_FPS};
+
+  public:
+    /// Callback function type for channel messages. Return true if handling is
+    /// done in the user-provided callback, false if `Control_Surface`
+    /// should handle the message.
+    using ChannelMessageCallback = bool (*)(MIDI_message);
+    /// Callback function type for SysEx messages. Return true if handling is
+    /// done in the user-provided callback, false if `Control_Surface`
+    /// should handle the message.
+    using SysExMessageCallback = bool (*)(SysExMessage);
+    /// Callback function type for Real-Time messages. Return true if handling
+    /// is done in the user-provided callback, false if `Control_Surface`
+    /// should handle the message.
+    using RealTimeMessageCallback = bool (*)(uint8_t);
+
+    /// Set the MIDI input callbacks.
+    void
+    setMIDIInputCallbacks(ChannelMessageCallback channelMessageCallback,
+                          SysExMessageCallback sysExMessageCallback,
+                          RealTimeMessageCallback realTimeMessageCallback) {
+        this->channelMessageCallback = channelMessageCallback;
+        this->sysExMessageCallback = sysExMessageCallback;
+        this->realTimeMessageCallback = realTimeMessageCallback;
+    }
+
+  private:
+    ChannelMessageCallback channelMessageCallback = nullptr;
+    SysExMessageCallback sysExMessageCallback = nullptr;
+    RealTimeMessageCallback realTimeMessageCallback = nullptr;
 };
 
 /// A predefined instance of the Control Surface to use in the Arduino sketches.

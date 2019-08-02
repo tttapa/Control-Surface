@@ -76,6 +76,11 @@ void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
                      << dec);
 #endif
 
+    // If the Channel Message callback exists, call it to see if we have to
+    // continue handling it.
+    if (channelMessageCallback && channelMessageCallback(midichmsg))
+        return;
+
     if (midimsg.type == CC && midimsg.data1 == 0x79) {
         // Reset All Controllers
         DEBUG(F("Reset All Controllers"));
@@ -110,17 +115,31 @@ void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
 
 void Control_Surface_::onSysExMessage(MIDI_Interface &midi) {
     // System Exclusive
+    SysExMessage msg = midi.getSysExMessage();
 #ifdef DEBUG_MIDI_PACKETS
-    const uint8_t *data = midi.getSysExMessage().data;
-    size_t len = midi.getSysExMessage().length;
+    const uint8_t *data = msg.data;
+    size_t len = msg.length;
     // TODO: print CN
     DEBUG_OUT << hex;
     for (size_t i = 0; i < len; i++)
         DEBUG_OUT << data[i] << ' ';
     DEBUG_OUT << dec << endl;
-#else
-    (void)midi;
 #endif
+    // If the SysEx Message callback exists, call it to see if we have to
+    // continue handling it.
+    if (sysExMessageCallback && sysExMessageCallback(msg))
+        return;
+    // TODO: handle SysEx input
+}
+
+void Control_Surface_::onRealtimeMessage(MIDI_Interface &midi,
+                                         uint8_t message) {
+    // If the Real-Time Message callback exists, call it to see if we have to
+    // continue handling it.
+    if (realTimeMessageCallback && realTimeMessageCallback(message))
+        return;
+    // TODO: handle Real-Time input
+    (void)midi;
 }
 
 void Control_Surface_::updateInputs() {
