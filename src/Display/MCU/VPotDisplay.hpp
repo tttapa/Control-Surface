@@ -40,8 +40,8 @@ class VPotDisplay : public DisplayElement {
         // segment 5 (i.e. the sixth segment) = 0° (i.e. 12 o'clock)
         float angle = angleSpacing * (segment - 5);
 
-        uint16_t x_start = x + round((float)innerRadius * sin(angle) / 2.0);
-        uint16_t y_start = y - round((float)innerRadius * cos(angle) / 2.0);
+        uint16_t x_start = x + round((float)innerRadius * sin(angle) / 2);
+        uint16_t y_start = y - round((float)innerRadius * cos(angle) / 2);
 
         uint16_t x_end = x + round((float)innerRadius * sin(angle));
         uint16_t y_end = y - round((float)innerRadius * cos(angle));

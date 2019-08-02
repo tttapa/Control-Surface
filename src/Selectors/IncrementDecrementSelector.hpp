@@ -18,6 +18,7 @@ class IncrementDecrementSelector_Base : virtual public Selector<N> {
             case IncrDecrButtons::Increment: this->increment(wrap); break;
             case IncrDecrButtons::Decrement: this->decrement(wrap); break;
             case IncrDecrButtons::Reset: this->reset(); break;
+            case IncrDecrButtons::Nothing: break;
             default: break;
         }
     }

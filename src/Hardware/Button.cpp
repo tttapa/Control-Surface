@@ -36,8 +36,8 @@ const char *Button::getName(Button::State state) {
         case Button::Released: return "Released";
         case Button::Falling: return "Falling";
         case Button::Rising: return "Rising";
+        default: return ""; // Keeps the compiler happy
     }
-    return ""; // Keeps the compiler happy
 }
 
 unsigned long Button::stableTime() { return millis() - prevBounceTime; }

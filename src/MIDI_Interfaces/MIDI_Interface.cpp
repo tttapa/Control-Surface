@@ -27,6 +27,9 @@ void MIDI_Interface::update() {
     }
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wswitch-enum"
+
 bool MIDI_Interface::dispatchMIDIEvent(MIDI_read_t event) {
     switch (event) {
         case NO_MESSAGE: return false;
@@ -35,6 +38,8 @@ bool MIDI_Interface::dispatchMIDIEvent(MIDI_read_t event) {
         default: onRealtimeMessage(static_cast<uint8_t>(event)); return true;
     }
 }
+
+#pragma GCC diagnostic pop
 
 void MIDI_Interface::onRealtimeMessage(uint8_t message) {
     if (callbacks)

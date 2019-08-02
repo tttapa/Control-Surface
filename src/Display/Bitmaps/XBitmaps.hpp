@@ -6,8 +6,7 @@
 /**
  * @brief A struct containing X Bitmap width, height and data.
  */
-struct XBitmap
-{
+struct XBitmap {
   XBitmap(uint16_t width, uint16_t height, const uint8_t bits[])
       : width(width), height(height), bits(bits) {}
   uint16_t width;
@@ -133,4 +132,4 @@ MakeXBitmap(solo_14B);
  */
 MakeXBitmap(solo_7);
 
-};
+}

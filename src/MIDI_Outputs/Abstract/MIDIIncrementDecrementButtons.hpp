@@ -33,6 +33,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
             case IncrDecrButtons::Increment: send(multiplier, address); break;
             case IncrDecrButtons::Decrement: send(-multiplier, address); break;
             case IncrDecrButtons::Reset: reset(); break;
+            case IncrDecrButtons::Nothing: break;
             default: break;
         }
     }

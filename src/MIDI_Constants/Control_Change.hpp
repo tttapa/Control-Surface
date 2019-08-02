@@ -104,4 +104,4 @@ constexpr uint8_t Omni_Mode_On                      = 0x7D;
 constexpr uint8_t Mono_Mode_On                      = 0x7E;
 constexpr uint8_t Poly_Mode_On                      = 0x7F;
 
-};
+}

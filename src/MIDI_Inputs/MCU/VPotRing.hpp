@@ -42,8 +42,9 @@ class VPotRing_Base : public MIDIInputElementCC {
             case 1: return minimum(value, 5);
             case 2: return 0;
             case 3: return maximum(5 - value, 0);
+            // Shouldn't happen, just keeps the compiler happy:
+            default: return 0;
         }
-        return 0; // Shouldn't happen, just keeps the compiler happy.
     }
 
     /** Get the first segment that should be off. */
@@ -54,8 +55,9 @@ class VPotRing_Base : public MIDIInputElementCC {
             case 1: return maximum(value, 6);
             case 2: return value;
             case 3: return minimum(5 + value, 11);
+            // Shouldn't happen, just keeps the compiler happy:
+            default: return 0;
         }
-        return 0; // Shouldn't happen, just keeps the compiler happy.
     }
 
   protected:

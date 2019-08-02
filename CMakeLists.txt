@@ -33,16 +33,21 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest/googletest-src
                  EXCLUDE_FROM_ALL)
 # </copy>
 
-set (CMAKE_C_COMPILER "gcc-8")
-set (CMAKE_CXX_COMPILER "g++-8")
+set (CMAKE_C_COMPILER "gcc-9")
+set (CMAKE_CXX_COMPILER "g++-9")
 
 # set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
 
 include(GoogleTest)
 enable_testing()
 
-add_definitions("-g3 -O1 -Wall -Wextra -Werror \
--fdiagnostics-show-option -Wsuggest-override" )
+add_definitions("-g3 -O2 -Wall -Wextra -Werror \
+-fdiagnostics-show-option -Wsuggest-override \
+-Wdouble-promotion \
+-Wswitch-default -Wswitch-enum -Wimplicit-fallthrough=3 \
+-Wuninitialized \
+-pedantic -pedantic-errors \
+-Wmissing-include-dirs" )
 
 #include Google Test
 include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googletest/include)
@@ -89,12 +94,10 @@ add_custom_target(export_documentation ./Export.sh
 WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../doc/Doxygen/Scripts)
 
 # Add XBM target
-
 add_custom_target(xbm python3 XBM-export.py
                   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../src/Display/Bitmaps/Scripts/)
 
 # Custom test targets
-
 add_custom_target(check tests
                   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin/
                   DEPENDS tests)
