@@ -4,8 +4,6 @@
 #include "ExtendedInputOutput.hpp"
 #include <SPI.h>
 
-using namespace ExtIO;
-
 template <uint8_t N>
 SPIShiftRegisterOut<N>::SPIShiftRegisterOut(pin_t latchPin, uint8_t bitOrder)
     : ShiftRegisterOutBase<N>(latchPin, bitOrder) {}
