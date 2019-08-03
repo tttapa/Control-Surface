@@ -7,7 +7,7 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 proj_dir=`realpath "$dir"/..`
 build_dir=`realpath "$proj_dir"/build`
 
-dest=/tmp
+dest="$proj_dir"/doc/Coverage
 mkdir -p "$dest"/html
 
 rm -f "$dest"/*.info
