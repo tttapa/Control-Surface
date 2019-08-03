@@ -4,7 +4,7 @@
 
 #include <Audio/AudioVU.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/LEDs/VULEDs.hpp>
+#include <Hardware/LEDs/DotBarDisplayLEDs.hpp>
 
 /**
  * @brief   A VU meter that reads from an Audio stream using the 

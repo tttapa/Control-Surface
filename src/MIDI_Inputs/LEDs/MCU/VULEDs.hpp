@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Hardware/LEDs/VULEDs.hpp>
+#include <Hardware/LEDs/DotBarDisplayLEDs.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
 
 namespace MCU {

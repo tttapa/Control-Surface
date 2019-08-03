@@ -34,6 +34,30 @@ TEST(MIDINote, NoteOnNoteOnZeroVelocity) {
     EXPECT_FALSE(mn.getState());
 }
 
+TEST(MIDINote, reset) {
+    MIDINote mn = {{0x3C, CHANNEL_5}};
+
+    MIDI_message_matcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
+    MIDIInputElementNote::updateAllWith(midimsg1);
+
+    mn.reset();
+
+    EXPECT_EQ(mn.getValue(), 0);
+    EXPECT_FALSE(mn.getState());
+}
+
+TEST(MIDINote, resetAll) {
+    MIDINote mn = {{0x3C, CHANNEL_5}};
+
+    MIDI_message_matcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
+    MIDIInputElementNote::updateAllWith(midimsg1);
+
+    MIDIInputElementNote::resetAll();
+
+    EXPECT_EQ(mn.getValue(), 0);
+    EXPECT_FALSE(mn.getState());
+}
+
 #include <MIDI_Inputs/LEDs/MIDINoteLED.hpp>
 
 TEST(MIDINoteLED, NoteOnNoteOff) {
