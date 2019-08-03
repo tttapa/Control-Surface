@@ -2,70 +2,57 @@
 
 set -ex
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-build_dir=`realpath $DIR/../build`
+proj_dir=`realpath "$dir"/..`
+build_dir=`realpath "$proj_dir"/build`
 
-export LOCATION=/tmp
-mkdir -p $LOCATION/cov
+dest=/tmp
+mkdir -p "$dest"/html
 
-copy_cov_file() {
-    local dst_name=`echo $0 | sed 's/\.\///g; s/\//-/g'`
-    cp $0 "$LOCATION/cov/$dst_name"
-}
-export -f copy_cov_file
+rm -f "$dest"/*.info
+rm -rf "$dest"/html/*
 
-rm -f $LOCATION/cov_base.info $LOCATION/cov_test.info $LOCATION/cov_filtered.info $LOCATION/cov_total.info
-rm -rf "$LOCATION/cov/*"
+gcov_bin="gcov-8"
 
-cd "$DIR/../build"
-find . \
-    \( -name '*.gcno' -o -name '*.gcda' \) -type f \
-    -delete
-
-cd $build_dir
-make -j$((`nproc` * 2))
-
-cd "$DIR/../build/CMakeFiles/Control_Surface.dir/src"
-find . \
-    \( -name '*.gcno' -o -name '*.gcda' \) -type f \
-    -exec bash -c 'copy_cov_file "$0"' {} \;
-cd $LOCATION/cov
-gcov *
+cd "$proj_dir"
+pwd
 
 lcov \
-    --no-external --capture --initial --directory $LOCATION/cov \
-    --output-file $LOCATION/cov_base.info
+    --zerocounters \
+    --directory .
 
-cd $build_dir
-make test
-
-cd "$DIR/../build/CMakeFiles/Control_Surface.dir/src"
-find . \
-    \( -name '*.gcno' -o -name '*.gcda' \) -type f \
-    -exec bash -c 'copy_cov_file "$0"' {} \;
-cd $LOCATION/cov
-gcov *
+make -C "$build_dir" -j$((`nproc` * 2))
 
 lcov \
-    --no-external --capture --directory $LOCATION/cov \
-    --output-file $LOCATION/cov_test.info
+    --capture --initial --directory . \
+    --output-file "$dest"/cov_base.info \
+    --gcov-tool $gcov_bin
+
+make -C "$build_dir" check
 
 lcov \
-    --add-tracefile $LOCATION/cov_base.info \
-    --add-tracefile $LOCATION/cov_test.info \
-    --output-file $LOCATION/cov_total.info
+    --capture --directory . \
+    --output-file "$dest"/cov_test.info \
+    --gcov-tool $gcov_bin
 
 lcov \
-    --remove $LOCATION/cov_total.info \
+    --add-tracefile "$dest"/cov_base.info \
+    --add-tracefile "$dest"/cov_test.info \
+    --output-file "$dest"/cov_total.info \
+    --gcov-tool $gcov_bin
+
+lcov \
+    --remove "$dest"/cov_total.info \
     '/usr/include/*' '/usr/lib/*' \
-    -o $LOCATION/cov_filtered.info
-
-rm -rf $LOCATION/html
-mkdir $LOCATION/html
+    '*/ArduinoMock/*' '*/mock/*' \
+    '*/googletest/*' \
+    '*/test/*' \
+    --output-file "$dest"/cov_filtered.info \
+    --gcov-tool $gcov_bin
 
 genhtml \
-    --prefix `realpath "$DIR/.."` \
-    source $LOCATION/cov_filtered.info \
-    --legend --title `git rev-parse HEAD` \
-    --output-directory=$LOCATION/html
+    --prefix `realpath "$proj_dir"` \
+    "$dest"/cov_filtered.info \
+    --output-directory="$dest"/html \
+    --legend --title `cd "$proj_dir" && git rev-parse HEAD`
