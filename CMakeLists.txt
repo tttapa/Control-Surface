@@ -35,8 +35,8 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest/googletest-src
                  EXCLUDE_FROM_ALL)
 # </copy>
 
-set (CMAKE_C_COMPILER "gcc-8")
-set (CMAKE_CXX_COMPILER "g++-8")
+set (CMAKE_C_COMPILER "gcc-9")
+set (CMAKE_CXX_COMPILER "g++-9")
 
 # set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
 

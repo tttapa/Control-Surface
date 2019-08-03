@@ -13,7 +13,7 @@ mkdir -p "$dest"/html
 rm -f "$dest"/*.info
 rm -rf "$dest"/html/*
 
-gcov_bin="gcov-8"
+gcov_bin="gcov-9"
 
 cd "$proj_dir"
 pwd
@@ -26,33 +26,33 @@ make -C "$build_dir" -j$((`nproc` * 2))
 
 lcov \
     --capture --initial --directory . \
-    --output-file "$dest"/cov_base.info \
+    --output-file "$dest"/coverage_base.info \
     --gcov-tool $gcov_bin
 
 make -C "$build_dir" check
 
 lcov \
     --capture --directory . \
-    --output-file "$dest"/cov_test.info \
+    --output-file "$dest"/coverage_test.info \
     --gcov-tool $gcov_bin
 
 lcov \
-    --add-tracefile "$dest"/cov_base.info \
-    --add-tracefile "$dest"/cov_test.info \
-    --output-file "$dest"/cov_total.info \
+    --add-tracefile "$dest"/coverage_base.info \
+    --add-tracefile "$dest"/coverage_test.info \
+    --output-file "$dest"/coverage_total.info \
     --gcov-tool $gcov_bin
 
 lcov \
-    --remove "$dest"/cov_total.info \
+    --remove "$dest"/coverage_total.info \
     '/usr/include/*' '/usr/lib/*' \
     '*/ArduinoMock/*' '*/mock/*' \
     '*/googletest/*' \
     '*/test/*' \
-    --output-file "$dest"/cov_filtered.info \
+    --output-file "$dest"/coverage_filtered.info \
     --gcov-tool $gcov_bin
 
 genhtml \
     --prefix `realpath "$proj_dir"` \
-    "$dest"/cov_filtered.info \
+    "$dest"/coverage_filtered.info \
     --output-directory="$dest"/html \
     --legend --title `cd "$proj_dir" && git rev-parse HEAD`
