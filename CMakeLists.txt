@@ -6,6 +6,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
 # <copy>
 # Download and unpack googletest at configure time
 configure_file(cmake/CMakeLists.txt.in googletest/CMakeLists.txt)
@@ -33,21 +35,30 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest/googletest-src
                  EXCLUDE_FROM_ALL)
 # </copy>
 
-set (CMAKE_C_COMPILER "gcc-9")
-set (CMAKE_CXX_COMPILER "g++-9")
+set (CMAKE_C_COMPILER "gcc-8")
+set (CMAKE_CXX_COMPILER "g++-8")
 
 # set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
 
 include(GoogleTest)
 enable_testing()
 
-add_definitions("-g3 -O2 -Wall -Wextra -Werror \
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
+-g3 -O0 -Wall -Wextra -Werror \
 -fdiagnostics-show-option -Wsuggest-override \
 -Wdouble-promotion \
 -Wswitch-default -Wswitch-enum -Wimplicit-fallthrough=3 \
+-Wstrict-overflow=5 \
 -Wuninitialized \
 -pedantic -pedantic-errors \
--Wmissing-include-dirs" )
+-Wmissing-include-dirs")
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror")
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
+# set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 
 #include Google Test
 include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googletest/include)
