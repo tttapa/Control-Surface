@@ -1,5 +1,48 @@
 #pragma once
 
+template <class T>
+struct remove_reference {
+    typedef T type;
+};
+template <class T>
+struct remove_reference<T &> {
+    typedef T type;
+};
+template <class T>
+struct remove_reference<T &&> {
+    typedef T type;
+};
+
+template <class T>
+typename remove_reference<T>::type &&move(T &&t) {
+    return static_cast<typename remove_reference<T>::type &&>(t);
+}
+
+template <class T, T v>
+struct integral_constant {
+    constexpr static T value = v;
+};
+
+using true_type = integral_constant<bool, true>;
+using false_type = integral_constant<bool, false>;
+
+template <class T>
+struct is_lvalue_reference : false_type {};
+template <class T>
+struct is_lvalue_reference<T &> : true_type {};
+
+template <class T>
+inline T &&forward(typename std::remove_reference<T>::type &t) noexcept {
+    return static_cast<T &&>(t);
+}
+
+template <class T>
+inline T &&forward(typename std::remove_reference<T>::type &&t) noexcept {
+    static_assert(!is_lvalue_reference<T>::value,
+                  "Can not forward an rvalue as an lvalue.");
+    return static_cast<T &&>(t);
+}
+
 /**
  * @brief   Very basic smart pointer. Doesn't support array types.
  * 
@@ -9,7 +52,11 @@ template <class T>
 class unique_ptr {
   public:
     unique_ptr() = default;
-    unique_ptr(T *p) : p(p) {}
+    explicit unique_ptr(T *p) : p(p) {}
+    template <class U>
+    unique_ptr(unique_ptr<U> &&r) {
+        reset(r.release());
+    }
 
     ~unique_ptr() { delete p; }
 
@@ -44,20 +91,7 @@ class unique_ptr {
     T *p = nullptr;
 };
 
-template <class T>
-struct remove_reference {
-    typedef T type;
-};
-template <class T>
-struct remove_reference<T &> {
-    typedef T type;
-};
-template <class T>
-struct remove_reference<T &&> {
-    typedef T type;
-};
-
-template <class T>
-typename remove_reference<T>::type &&move(T &&t) {
-    return static_cast<typename remove_reference<T>::type &&>(t);
+template <typename T, typename... Args>
+unique_ptr<T> make_unique(Args &&... args) {
+    return unique_ptr<T>(new T(forward<Args>(args)...));
 }

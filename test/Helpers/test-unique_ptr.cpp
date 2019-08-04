@@ -50,7 +50,16 @@ TEST(uniquePtr, constructReset) {
 TEST(uniquePtr, constructAssign) {
     TestClass::reset();
     unique_ptr<TestClass> u(new TestClass(1));
-    u = new TestClass(2);
+    u = make_unique<TestClass>(2);
+    ASSERT_EQ(u->i, 2);
+    u.reset();
+    ASSERT_FALSE(TestClass::hasLeaks());
+}
+
+TEST(uniquePtr, constructAssignNew) {
+    TestClass::reset();
+    unique_ptr<TestClass> u(new TestClass(1));
+    u = unique_ptr<TestClass>(new TestClass(2));
     ASSERT_EQ(u->i, 2);
     u.reset();
     ASSERT_FALSE(TestClass::hasLeaks());
