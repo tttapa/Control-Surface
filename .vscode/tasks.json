@@ -49,6 +49,15 @@
         },
         {
             "type": "shell",
+            "label": "Generate Coverage Information",
+            "command": "make coverage",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "problemMatcher": [],
+        },
+        {
+            "type": "shell",
             "label": "Export Documentation",
             "command": "make export_documentation",
             "options": {

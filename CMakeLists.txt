@@ -104,6 +104,10 @@ add_custom_target(documentation rm -r html && ./Scripts/examples.py && doxygen
 add_custom_target(export_documentation ./Export.sh
 WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../doc/Doxygen/Scripts)
 
+# Add coverage target
+add_custom_target(coverage ./coverage.sh
+WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../scripts)
+
 # Add XBM target
 add_custom_target(xbm python3 XBM-export.py
                   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../src/Display/Bitmaps/Scripts/)
