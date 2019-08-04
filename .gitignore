@@ -6,6 +6,9 @@ doc/Doxygen/MathJax/
 
 !doc/Doxygen/Doxyfile
 !doc/Doxygen/svg
+
+doc/Coverage/
+
 !Makefile
 *.tmp
 *.hex
