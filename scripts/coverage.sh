@@ -14,7 +14,7 @@ rm -f "$dest"/*.info
 rm -rf "$dest"/html/*
 
 gcov_bin="gcov-9"
-branches=1
+branches=0
 
 cd "$proj_dir"
 pwd
