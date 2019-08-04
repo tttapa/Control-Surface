@@ -32,12 +32,12 @@ template <class T>
 struct is_lvalue_reference<T &> : true_type {};
 
 template <class T>
-inline T &&forward(typename std::remove_reference<T>::type &t) noexcept {
+inline T &&forward(typename remove_reference<T>::type &t) noexcept {
     return static_cast<T &&>(t);
 }
 
 template <class T>
-inline T &&forward(typename std::remove_reference<T>::type &&t) noexcept {
+inline T &&forward(typename remove_reference<T>::type &&t) noexcept {
     static_assert(!is_lvalue_reference<T>::value,
                   "Can not forward an rvalue as an lvalue.");
     return static_cast<T &&>(t);
