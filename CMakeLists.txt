@@ -1,47 +1,45 @@
 cmake_minimum_required(VERSION 3.10)
 
-set (CMAKE_CXX_STANDARD 14)
+project(Control_Surface)
+
+################################################################################
+# Add Google Test
+################################################################################
+
+add_subdirectory(googletest)
+include_directories(${gmock_SOURCE_DIR}/include)
+include_directories(${gtest_SOURCE_DIR}/include)
+
+include(GoogleTest)
+enable_testing()
+
+################################################################################
+# Set the C++ standard to C++14 and use GCC 9 if available
+################################################################################
+
+set(CMAKE_CXX_STANDARD 14)
+find_program(GCC_9_CMAKE_C_COMPILER "gcc-9")
+find_program(GCC_9_CMAKE_CXX_COMPILER "g++-9")
+
+if(NOT GCC_9_CMAKE_C_COMPILER OR NOT GCC_9_CMAKE_CXX_COMPILER)
+message(WARNING "GCC 9 not found")
+else()
+message(STATUS "GCC 9 found")
+set(CMAKE_C_COMPILER ${GCC_9_CMAKE_C_COMPILER})
+set(CMAKE_CXX_COMPILER ${GCC_9_CMAKE_CXX_COMPILER})
+endif()
+
+################################################################################
+# Change the default output directories
+################################################################################
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-
-# <copy>
-# Download and unpack googletest at configure time
-configure_file(cmake/CMakeLists.txt.in googletest/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest )
-if(result)
-  message(FATAL_ERROR "CMake step for googletest failed: ${result}")
-endif()
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest )
-if(result)
-  message(FATAL_ERROR "Build step for googletest failed: ${result}")
-endif()
-
-# Prevent overriding the parent project's compiler/linker
-# settings on Windows
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-
-# Add googletest directly to our build. This defines
-# the gtest and gtest_main targets.
-add_subdirectory(${CMAKE_BINARY_DIR}/googletest/googletest-src
-                 ${CMAKE_BINARY_DIR}/googletest/googletest-build
-                 EXCLUDE_FROM_ALL)
-# </copy>
-
-set (CMAKE_C_COMPILER "gcc-9")
-set (CMAKE_CXX_COMPILER "g++-9")
-
-# set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
-
-include(GoogleTest)
-enable_testing()
+################################################################################
+# Set the compiler options
+################################################################################
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
 -g3 -O0 -Wall -Wextra -Werror \
@@ -53,18 +51,23 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
 -pedantic -pedantic-errors \
 -Wmissing-include-dirs")
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
+-g3 -O0 -Wall -Wextra -Werror")
+
+set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
+
+################################################################################
+# Enable coverage information
+################################################################################
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
 # set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 
-#include Google Test
-include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googletest/include)
-
-#include Google Mock
-include_directories(${CMAKE_BINARY_DIR}/googletest/googletest-src/googlemock/include)
+################################################################################
+# Build the source files 
+################################################################################
 
 # Arduino Core files
 include_directories(ArduinoMock)
@@ -95,6 +98,10 @@ target_link_libraries(tests
 
 # Add tests
 gtest_discover_tests(tests)
+
+################################################################################
+# Custom targets for documentation 
+################################################################################
 
 # Add documentation target
 add_custom_target(documentation rm -r html && ./Scripts/examples.py && doxygen

@@ -5,19 +5,18 @@
             "defines": [
                 "IDE"
             ],
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "/usr/bin/env gcc-9",
             "cStandard": "c11",
-            "cppStandard": "c++11",
+            "cppStandard": "c++14",
             "intelliSenseMode": "gcc-x64",
             "includePath": [
                 "${default}",
-                "${workspaceFolder}/build/googletest/googletest-src/googlemock/include",
-                "${workspaceFolder}/build/googletest/googletest-src/googletest/include",
                 "${workspaceFolder}/mock",
                 "${workspaceFolder}/ArduinoMock",
                 "${workspaceFolder}/src",
-                "/usr/include",
-                "${workspaceFolder}/test"
+                "${workspaceFolder}/test",
+                "${workspaceFolder}/googletest/googlemock/include",
+                "${workspaceFolder}/googletest/googletest/include"
             ]
         }
     ],
