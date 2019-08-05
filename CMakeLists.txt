@@ -41,63 +41,44 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # Set the compiler options
 ################################################################################
 
+set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} \
+    -Wmissing-include-dirs")
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
--g3 -O0 -Wall -Wextra -Werror \
--fdiagnostics-show-option -Wsuggest-override \
--Wdouble-promotion \
--Wswitch-default -Wswitch-enum -Wimplicit-fallthrough=3 \
--Wstrict-overflow=5 \
--Wuninitialized \
--pedantic -pedantic-errors \
--Wmissing-include-dirs")
+    -g3 -O0 -Wall -Wextra -Werror \
+    -fdiagnostics-show-option -Wsuggest-override \
+    -Wdouble-promotion \
+    -Wswitch-default -Wswitch-enum -Wimplicit-fallthrough=3 \
+    -Wstrict-overflow=5 \
+    -Wuninitialized \
+    -pedantic -pedantic-errors")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
--g3 -O0 -Wall -Wextra -Werror")
+    -g3 -O0 -Wall -Wextra -Werror")
 
-set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
+# set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
 
 ################################################################################
 # Enable coverage information
 ################################################################################
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
-# set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
+    -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
+    -fprofile-arcs -ftest-coverage")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} \
+    -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 
 ################################################################################
-# Build the source files 
+# Build the source files and tests
 ################################################################################
 
-# Arduino Core files
-include_directories(ArduinoMock)
-file(GLOB_RECURSE ARDUINO_SOURCES ArduinoMock/*.cpp)
-add_library(ArduinoMock STATIC ${ARDUINO_SOURCES})
-
-# Mock
-include_directories(mock)
-
-# Test
-include_directories(test)
-
-# add_definitions(-DANALOG_FILTER_SHIFT_FACTOR_OVERRIDE=2)
-add_definitions(-DNO_DEBUG_PRINTS -DTEST_COMPILE_ALL_HEADERS_SEPARATELY)
-
-# Control Surface library files
-include_directories(src)
-file(GLOB_RECURSE SOURCES src/*.cpp)
-add_library(Control_Surface STATIC ${SOURCES})
-
-# Test executable compilation and linking
-file(GLOB_RECURSE TESTS test/*.cpp)
-add_executable(tests ${TESTS})
-target_link_libraries(tests
-                      gmock
-                      Control_Surface
-                      ArduinoMock)
-
-# Add tests
-gtest_discover_tests(tests)
+add_subdirectory(googletest-wrappers)
+add_subdirectory(ArduinoMock)
+add_subdirectory(src)
+add_subdirectory(mock)
+add_subdirectory(test)
 
 ################################################################################
 # Custom targets for documentation 
