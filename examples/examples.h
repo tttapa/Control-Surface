@@ -1,5 +1,5 @@
 /**
- * @example   PushButtonsToggleLEDsShiftRegMultiplex.ino
+ * @example   ExtendedInputOutput/PushButtonsToggleLEDsShiftRegMultiplex/PushButtonsToggleLEDsShiftRegMultiplex.ino
  *
  * @brief   This example demonstrates the use of push buttons and LEDs and how 
  *          to use shift registers and analog multiplexers to save pins.  
@@ -38,7 +38,7 @@
  */
 
 /**
- * @example   ShiftRegisterBlink.ino
+ * @example   ExtendedInputOutput/ShiftRegisterBlink/ShiftRegisterBlink.ino
  *
  * @brief   This example demonstrates the use of shift registers as if they were
  *          just normal IO pins.
@@ -62,7 +62,7 @@
  */
 
 /**
- * @example   SPIShiftRegisterBlink.ino
+ * @example   ExtendedInputOutput/SPIShiftRegisterBlink/SPIShiftRegisterBlink.ino
  *
  * @brief   This example demonstrates the use of shift registers as if they were
  *          just normal IO pins.
@@ -86,7 +86,7 @@
  */
 
 /**
- * @example   Ex.1.Shift-Register-LED-Effects.ino
+ * @example   ExtendedInputOutput/Ex.1.Shift-Register-LED-Effects/Ex.1.Shift-Register-LED-Effects.ino
  *
  * @brief   This is an example of the ShiftRegisterOut class of the Control
  *          Surface library. It creates light effects using three 8-bit shift
@@ -126,7 +126,7 @@
  */
 
 /**
- * @example   Multiplexer-AnalogReadSerial.ino
+ * @example   ExtendedInputOutput/Multiplexer-AnalogReadSerial/Multiplexer-AnalogReadSerial.ino
  *
  * @brief   This is an example of the AnalogMultiplex class.
  * <br>  
@@ -157,7 +157,7 @@
  */
 
 /**
- * @example   LED.ino
+ * @example   MIDIInput/LED/LED.ino
  *
  * @brief   This example demonstrates the use of LEDs that respond to MIDI input.
  * <br>  
@@ -170,7 +170,7 @@
  */
 
 /**
- * @example   VU-Bridge.ino
+ * @example   Display/VU-Bridge/VU-Bridge.ino
  *
  * @brief   This is an example on how to use an OLED display to display the 
  *          VU meters and mute/solo states of the eight first tracks, by using 
@@ -225,7 +225,7 @@
  */
 
 /**
- * @example   OLED-Demo.ino
+ * @example   Display/OLED-Demo/OLED-Demo.ino
  *
  * @brief An extensive example demonstrating the use of DisplayElement%s
  *        to display information from the DAW on a small OLED display.
@@ -243,7 +243,7 @@
  */
 
 /**
- * @example   VU-Bridge-Dual-Display.ino
+ * @example   Display/VU-Bridge-Dual-Display/VU-Bridge-Dual-Display.ino
  *
  * @brief   This is an example on how to use multiple displays to display the 
  *          VU meters of many tracks, by using the Arduino as a Mackie Control
@@ -291,7 +291,7 @@
  */
 
 /**
- * @example   VU-Bridge-ESP32.ino
+ * @example   ESP32/VU-Bridge-ESP32/VU-Bridge-ESP32.ino
  *
  * @brief   This is an example on how to use an OLED display to display the 
  *          VU meters and mute/solo states of the eight first tracks, by using 
@@ -336,7 +336,7 @@
  */
 
 /**
- * @example   PushButtons.ino
+ * @example   MIDIOutput/PushButtons/PushButtons.ino
  *
  * @brief   This example demonstrates the use of push buttons that send note 
  *          events.
@@ -358,7 +358,7 @@
  */
 
 /**
- * @example   PushButtonsLEDs.ino
+ * @example   MIDIOutput/PushButtonsLEDs/PushButtonsLEDs.ino
  *
  * @brief   This example demonstrates the use of push buttons and LEDs.
  * <br>  
@@ -383,7 +383,7 @@
  */
 
 /**
- * @example   PushButtonsLEDsNoMIDIFeedback.ino
+ * @example   MIDIOutput/PushButtonsLEDsNoMIDIFeedback/PushButtonsLEDsNoMIDIFeedback.ino
  *
  * @brief   This example demonstrates the use of push buttons and LEDs without
  *          feedback from the software.
@@ -409,7 +409,7 @@
  */
 
 /**
- * @example   CCRotaryEncoder.ino
+ * @example   MIDIOutput/CCRotaryEncoder/CCRotaryEncoder.ino
  * 
  * This is an example that demonstrates the use of a rotary encoder that can 
  * be used for scrolling through a song list, tuning effects, etc.
@@ -440,7 +440,7 @@
  */
 
 /**
- * @example   CCPotentiometer.ino
+ * @example   MIDIOutput/CCPotentiometer/CCPotentiometer.ino
  *
  * @brief   This is an example of the `CCPotentiometer` class of the 
  *          Control_Surface library.
@@ -453,7 +453,7 @@
  */
 
 /**
- * @example   NoteButtonMatrixKeyboard.ino
+ * @example   MIDIOutput/NoteButtonMatrixKeyboard/NoteButtonMatrixKeyboard.ino
  * 
  * @brief   This is an example to demonstrate the use of a ButtonMatrix.
  * <br>  
@@ -476,7 +476,7 @@
  */
 
 /**
- * @example   CCPotentiometer-Map.ino
+ * @example   MIDIOutput/CCPotentiometer-Map/CCPotentiometer-Map.ino
  *
  * @brief   This is an example of the `CCPotentiometer` class of the 
  *          Control_Surface library, and specifically, how to use the `map`
@@ -491,7 +491,7 @@
  */
 
 /**
- * @example   CCIncrementDecrementButtons.ino
+ * @example   MIDIOutput/CCIncrementDecrementButtons/CCIncrementDecrementButtons.ino
  * 
  * This is an example that demonstrates the use of Increment and 
  * Decrement buttons that can be used for scrolling through a song
@@ -526,7 +526,7 @@
  */
 
 /**
- * @example   PushButtonsLEDsShiftRegMultiplex.ino
+ * @example   MIDIOutput/PushButtonsLEDsShiftRegMultiplex/PushButtonsLEDsShiftRegMultiplex.ino
  *
  * @brief   This example demonstrates the use of push buttons and LEDs and how 
  *          to use shift registers and analog multiplexers to save pins.  
@@ -564,7 +564,7 @@
  */
 
 /**
- * @example   ProgramChanger.ino
+ * @example   ProgramChange/ProgramChanger/ProgramChanger.ino
  *
  * @brief   This is an example of the ProgramChanger and Selector classes.
  * <br>  
@@ -587,7 +587,7 @@
  */
 
 /**
- * @example   OLED-Demo-Audio.ino
+ * @example   Audio/OLED-Demo-Audio/OLED-Demo-Audio.ino
  *
    @brief An extensive example demonstrating the use of DisplayElement%s
           to display information from the DAW on a small OLED display, and
@@ -609,7 +609,7 @@
 */
 
 /**
- * @example   VUMeterOLED-USB-DAC.ino
+ * @example   Audio/VUMeterOLED-USB-DAC/VUMeterOLED-USB-DAC.ino
  *
  * Connections:
  * <br>  
@@ -623,7 +623,7 @@
  */
 
 /**
- * @example   VUMeterLEDs-USB-DAC.ino
+ * @example   Audio/VUMeterLEDs-USB-DAC/VUMeterLEDs-USB-DAC.ino
  *
  * Connections:
  *<br>  
@@ -637,7 +637,7 @@
 */
 
 /**
- * @example   Bluetooth-BLE-MIDI-NoteButton.ino
+ * @example   MIDI_Interfaces/Bluetooth-BLE-MIDI-NoteButton/Bluetooth-BLE-MIDI-NoteButton.ino
  *
  * @brief   This is an example of the `BluetoothMIDI_Interface` class of the 
  *          Control_Surface library. (ESP32 only)
@@ -653,7 +653,7 @@
  */
 
 /**
- * @example   Bluetooth-BLE-MIDI-NoteButton_Input.ino
+ * @example   MIDI_Interfaces/Bluetooth-BLE-MIDI-NoteButton_Input/Bluetooth-BLE-MIDI-NoteButton_Input.ino
  *
  * @brief   This is an example of the `BluetoothMIDI_Interface` class of the 
  *          Control_Surface library. (ESP32 only)
@@ -671,7 +671,7 @@
  */
 
 /**
- * @example   Bluetooth-BLE-MIDI-CCPotentiometer.ino
+ * @example   MIDI_Interfaces/Bluetooth-BLE-MIDI-CCPotentiometer/Bluetooth-BLE-MIDI-CCPotentiometer.ino
  *
  * @brief   This is an example of the `BluetoothMIDI_Interface` class of the 
  *          Control_Surface library. (ESP32 only)
@@ -688,7 +688,7 @@
  */
 
 /**
- * @example   Getting-Started.ino
+ * @example   Getting-Started/Getting-Started.ino
  *
  * This is the example used in the 'Getting Started' guide.  
  * Read the guide: https://github.com/tttapa/Control-Surface/blob/revision-4/doc/Getting-Started.md

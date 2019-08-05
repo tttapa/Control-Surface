@@ -29,6 +29,17 @@
         },
         {
             "type": "shell",
+            "label": "Make Check",
+            "command": "make check",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "dependsOn": "Make All",
+            "problemMatcher": "$gcc",
+            "group": "test",
+        },
+        {
+            "type": "shell",
             "label": "Make & Test & Build examples",
             "command": "./build-arduino.sh $[$(nproc) * 2]",
             "problemMatcher": "$gcc",

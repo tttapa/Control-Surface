@@ -3,6 +3,7 @@
 import re
 import os
 from os.path import join, realpath, basename
+from pathlib import Path
 
 dirnm = os.path.dirname(os.path.realpath(__file__))
 doxydir = join(dirnm, '..')
@@ -48,13 +49,14 @@ for root, dirs, files in os.walk(exampledir):
                     docstr = re.sub(r'^\s*\*\s*$', r'\g<0><br>  ', docstr, 1, 
                                     re.MULTILINE)
                     output += "/**\r\n * @example   "
-                    output += basename(file)
+                    output += str(Path(root).relative_to(exampledir) / file)
                     output += "\r\n *"
                     output += docstr
                     output += "*/\r\n\r\n"
                 else:
                     print('\t\033[0;33mWarning: no documentation for', file,
                         '\033[0m')
+                    print('\t       →', Path(root) / file)
 
 with open(outputfile, 'w') as f:
     f.write(output)

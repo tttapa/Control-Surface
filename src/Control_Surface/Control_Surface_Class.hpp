@@ -99,7 +99,7 @@ class Control_Surface_ : public MIDI_Callbacks {
     /// Callback function type for Real-Time messages. Return true if handling
     /// is done in the user-provided callback, false if `Control_Surface`
     /// should handle the message.
-    using RealTimeMessageCallback = bool (*)(uint8_t);
+    using RealTimeMessageCallback = bool (*)(RealTimeMessage);
 
     /// Set the MIDI input callbacks.
     void

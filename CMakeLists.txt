@@ -85,7 +85,7 @@ add_subdirectory(test)
 ################################################################################
 
 # Add documentation target
-add_custom_target(documentation rm -r html && ./Scripts/examples.py && doxygen
+add_custom_target(documentation rm -rf html && ./Scripts/examples.py && doxygen
                   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../doc/Doxygen)
 
 # Add export documentation target

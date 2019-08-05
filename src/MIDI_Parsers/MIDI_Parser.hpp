@@ -60,6 +60,11 @@ struct SysExMessage {
     uint8_t CN;
 };
 
+struct RealTimeMessage {
+    uint8_t message;
+    uint8_t CN;
+};
+
 // -------------------------------------------------------------------------- //
 
 class MIDI_Parser {
