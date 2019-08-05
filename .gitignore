@@ -1,34 +1,24 @@
-*
-!/**/
-!*.*
 doc/Doxygen/html/
-doc/Doxygen/MathJax/
-
-!doc/Doxygen/Doxyfile
-!doc/Doxygen/svg
+doc/Doxygen/MathJax
 
 doc/Coverage/
 
-!Makefile
 *.tmp
 *.hex
+
 # .vscode/
+tags
+
 TODO.txt
 .~lock*
 *.o
 *.geany
 __pycache__/
 
-googletest-*/
 *.pc
 bin/
 lib/
-CMakeFiles/
-*.cmake
-CMakeCache.txt
-build/googletest/Makefile
-build/Makefile
-CTestCostData.txt
+build/*
 
 .cproject
 .project
