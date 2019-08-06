@@ -19,23 +19,6 @@ const uint8_t SysExEnd = 0xF7;
 
 const uint8_t TuneRequest = 0xF6;
 
-struct ChannelMessage {
-    uint8_t header;
-    uint8_t data1;
-    uint8_t data2;
-
-    uint8_t CN = 0;
-
-    bool operator==(const ChannelMessage &other) const {
-        return this->header == other.header && this->data1 == other.data1 &&
-               this->data2 == other.data2 && this->CN == other.CN;
-    }
-
-    bool operator!=(const ChannelMessage &other) const {
-        return !(*this == other);
-    }
-};
-
 enum MIDI_read_t : uint8_t {
     NO_MESSAGE = 0,
     CHANNEL_MESSAGE = 1,
@@ -54,6 +37,23 @@ enum MIDI_read_t : uint8_t {
 
 // -------------------------------------------------------------------------- //
 
+struct ChannelMessage {
+    uint8_t header;
+    uint8_t data1;
+    uint8_t data2;
+
+    uint8_t CN = 0;
+
+    bool operator==(const ChannelMessage &other) const {
+        return this->header == other.header && this->data1 == other.data1 &&
+               this->data2 == other.data2 && this->CN == other.CN;
+    }
+
+    bool operator!=(const ChannelMessage &other) const {
+        return !(*this == other);
+    }
+};
+
 struct SysExMessage {
     const uint8_t *data;
     size_t length;
@@ -71,8 +71,12 @@ class MIDI_Parser {
   public:
     /** Get the latest MIDI channel message */
     ChannelMessage getChannelMessage();
+#ifndef IGNORE_SYSEX
     /** Get the latest SysEx message. */
     virtual SysExMessage getSysEx() const = 0;
+#else 
+    SysExMessage getSysEx() const { return {nullptr, 0, 0}; }
+#endif
     /** Get the pointer to the SysEx data. */
     const uint8_t *getSysExBuffer() const { return getSysEx().data; }
     /** Get the length of the SysEx message. */

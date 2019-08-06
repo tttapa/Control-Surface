@@ -285,8 +285,68 @@ TEST(SerialMIDIParser, sysEx7Bytes) {
     EXPECT_EQ(result, expected);
 }
 
+TEST(SerialMIDIParser, sysEx2BytesBeforeOther) {
+    {
+        EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF7), SYSEX_MESSAGE);
+        EXPECT_EQ(sparser.getSysExLength(), 2);
+        const SysExVector result(sparser.getSysExBuffer(),
+                                 sparser.getSysExBuffer() + 2);
+        const SysExVector expected = {0xF0, 0xF7};
+        EXPECT_EQ(result, expected);
+    }
+    {
+        EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x12), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF7), SYSEX_MESSAGE);
+        EXPECT_EQ(sparser.getSysExLength(), 3);
+        const SysExVector result(sparser.getSysExBuffer(),
+                                 sparser.getSysExBuffer() + 3);
+        const SysExVector expected = {0xF0, 0x12, 0xF7};
+        EXPECT_EQ(result, expected);
+    }
+}
+
+TEST(SerialMIDIParser, sysExDataAfterEnd) {
+    {
+        EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF7), SYSEX_MESSAGE);
+        EXPECT_EQ(sparser.getSysExLength(), 2);
+        const SysExVector result(sparser.getSysExBuffer(),
+                                 sparser.getSysExBuffer() + 2);
+        const SysExVector expected = {0xF0, 0xF7};
+        EXPECT_EQ(result, expected);
+    }
+    {
+        EXPECT_EQ(sparser.parse(0x12), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x13), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x14), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x15), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF7), SYSEX_MESSAGE);
+        EXPECT_EQ(sparser.getSysExLength(), 4);
+        const SysExVector result(sparser.getSysExBuffer(),
+                                 sparser.getSysExBuffer() + 4);
+        const SysExVector expected = {0xF0, 0x14, 0x15, 0xF7};
+        EXPECT_EQ(result, expected);
+    }
+    {
+        EXPECT_EQ(sparser.parse(0x16), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x17), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x18), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x19), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF7), SYSEX_MESSAGE);
+        EXPECT_EQ(sparser.getSysExLength(), 4);
+        const SysExVector result(sparser.getSysExBuffer(),
+                                 sparser.getSysExBuffer() + 4);
+        const SysExVector expected = {0xF0, 0x18, 0x19, 0xF7};
+        EXPECT_EQ(result, expected);
+    }
+}
+
 TEST(SerialMIDIParser, RealTime) {
-    EXPECT_EQ(sparser.parse(0xF8), 0xF8);
+    EXPECT_EQ(sparser.parse(0xF8), 0xF8); //
 }
 
 TEST(SerialMIDIParser, noteOffInterruptedByRealTime) {
@@ -301,12 +361,49 @@ TEST(SerialMIDIParser, noteOffInterruptedByRealTime) {
     EXPECT_EQ(msg.data2, 0x7F);
 }
 
+TEST(SerialMIDIParser, sysExInterruptedByRealTime) {
+    EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0x01), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0x02), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF8), 0xF8);
+    EXPECT_EQ(sparser.parse(0x03), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF7), SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExLength(), 5);
+    const SysExVector result(sparser.getSysExBuffer(),
+                             sparser.getSysExBuffer() + 5);
+    const SysExVector expected = {0xF0, 0x01, 0x02, 0x03, 0xF7};
+    EXPECT_EQ(result, expected);
+}
+
+TEST(SerialMIDIParser, sysExEndsByChannelMessage) {
+    EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0x01), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0x02), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0x03), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0x8F), SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExLength(), 5);
+    const SysExVector result(sparser.getSysExBuffer(),
+                             sparser.getSysExBuffer() + 5);
+    const SysExVector expected = {0xF0, 0x01, 0x02, 0x03, 0xF7};
+    EXPECT_EQ(result, expected);
+    EXPECT_EQ(sparser.parse(0x10), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0x12), CHANNEL_MESSAGE);
+    ChannelMessage msg = sparser.getChannelMessage();
+    EXPECT_EQ(msg.header, 0x8F);
+    EXPECT_EQ(msg.data1, 0x10);
+    EXPECT_EQ(msg.data2, 0x12);
+}
+
 TEST(SerialMIDIParser, sysExEndsWithoutStarting1Byte) {
+    EXPECT_EQ(sparser.parse(0xF7), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF7), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0xF7), NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysExEndsWithoutStarting2Bytes) {
     EXPECT_EQ(sparser.parse(0x51), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF7), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF7), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0xF7), NO_MESSAGE);
 }
 
@@ -314,4 +411,91 @@ TEST(SerialMIDIParser, sysExEndsWithoutStarting3Bytes) {
     EXPECT_EQ(sparser.parse(0x52), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x53), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0xF7), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF7), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF7), NO_MESSAGE);
+}
+
+TEST(SerialMIDIParser, sysExEndsMultipleTimesWithoutStarting) {
+    EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0x10), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF7), SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.parse(0x20), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF7), NO_MESSAGE);
+    EXPECT_EQ(sparser.parse(0xF7), NO_MESSAGE);
+}
+
+TEST(SerialMIDIParser, sysExStartsTwice) {
+    {
+        EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF0), SYSEX_MESSAGE);
+        EXPECT_EQ(sparser.getSysExLength(), 2);
+        const SysExVector result(sparser.getSysExBuffer(),
+                                 sparser.getSysExBuffer() + 2);
+        const SysExVector expected = {0xF0, 0xF7};
+        EXPECT_EQ(result, expected);
+    }
+    {
+        EXPECT_EQ(sparser.parse(0x20), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x30), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF7), SYSEX_MESSAGE);
+        EXPECT_EQ(sparser.getSysExLength(), 4);
+        const SysExVector result(sparser.getSysExBuffer(),
+                                 sparser.getSysExBuffer() + 4);
+        const SysExVector expected = {0xF0, 0x20, 0x30, 0xF7};
+        EXPECT_EQ(result, expected);
+    }
+}
+
+TEST(SerialMIDIParser, sysExEndsWithSysExStart) {
+    {
+        EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x10), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF0), SYSEX_MESSAGE);
+        EXPECT_EQ(sparser.getSysExLength(), 3);
+        const SysExVector result(sparser.getSysExBuffer(),
+                                 sparser.getSysExBuffer() + 3);
+        const SysExVector expected = {0xF0, 0x10, 0xF7};
+        EXPECT_EQ(result, expected);
+    }
+    {
+        EXPECT_EQ(sparser.parse(0x20), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x30), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF7), SYSEX_MESSAGE);
+        EXPECT_EQ(sparser.getSysExLength(), 4);
+        const SysExVector result(sparser.getSysExBuffer(),
+                                 sparser.getSysExBuffer() + 4);
+        const SysExVector expected = {0xF0, 0x20, 0x30, 0xF7};
+        EXPECT_EQ(result, expected);
+    }
+}
+
+TEST(SerialMIDIParser, sysExRecoverAfterBufferOverflow) {
+    {
+        EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+        SysExVector expected = {0xF0};
+        expected.resize(SYSEX_BUFFER_SIZE);
+        for (size_t i = 1; i < SYSEX_BUFFER_SIZE; ++i) {
+            EXPECT_EQ(sparser.parse(i / 2), NO_MESSAGE);
+            expected[i] = i / 2;
+        }
+        EXPECT_EQ(sparser.parse(0x7F), NO_MESSAGE); // Overflow
+        EXPECT_EQ(sparser.parse(0x7F), NO_MESSAGE); // Overflow
+        EXPECT_EQ(sparser.parse(0x7F), NO_MESSAGE); // Overflow
+        EXPECT_EQ(sparser.parse(0xF7), SYSEX_MESSAGE);
+        EXPECT_EQ(sparser.getSysExLength(), SYSEX_BUFFER_SIZE);
+        const SysExVector result(sparser.getSysExBuffer(),
+                                 sparser.getSysExBuffer() + SYSEX_BUFFER_SIZE);
+        EXPECT_EQ(result, expected);
+    }
+    {
+        EXPECT_EQ(sparser.parse(0xF0), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x20), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0x30), NO_MESSAGE);
+        EXPECT_EQ(sparser.parse(0xF7), SYSEX_MESSAGE);
+        EXPECT_EQ(sparser.getSysExLength(), 4);
+        const SysExVector result(sparser.getSysExBuffer(),
+                                 sparser.getSysExBuffer() + 4);
+        const SysExVector expected = {0xF0, 0x20, 0x30, 0xF7};
+        EXPECT_EQ(result, expected);
+    }
 }

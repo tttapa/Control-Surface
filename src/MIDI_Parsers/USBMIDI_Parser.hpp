@@ -15,9 +15,11 @@ class USBMIDI_Parser : public MIDI_Parser {
   public:
     MIDI_read_t parse(uint8_t *packet);
 
+#ifndef IGNORE_SYSEX
     SysExMessage getSysEx() const override {
         return {sysexbuffers[CN].getBuffer(), sysexbuffers[CN].getLength(), CN};
     }
+#endif
 
     uint8_t getCN() const override { return CN; }
 

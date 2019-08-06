@@ -27,15 +27,17 @@
 /// The default baud rate for debug MIDI interfaces.
 constexpr unsigned long defaultBaudRate = 115200;
 
-/** The factor for the analog filter:  
- *  Difference equation:
- *  @f$ y[n] = \alpha\cdot x[n] + (1-\alpha)\cdot y[n-1] @f$
- *  where
- *  @f$ \alpha = \left(\frac{1}{2}\right)^{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$
+/** 
+ * The factor for the analog filter:  
+ * Difference equation:
+ * @f$ y[n] = \alpha\cdot x[n] + (1-\alpha)\cdot y[n-1] @f$
+ * where
+ * @f$ \alpha = \left(\frac{1}{2}\right)^{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$
  */
 constexpr uint8_t ANALOG_FILTER_SHIFT_FACTOR = 2;
 
-/** The signed integer type to use for analog inputs during filtering.
+/** 
+ * The signed integer type to use for analog inputs during filtering.
  * Should be at least @f$ 10+\text{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits wide.
  * (10 bits of ADC resolution)
  */
@@ -68,7 +70,7 @@ constexpr bool VU_PEAK_SMOOTH_DECAY = true;
 /// Determines when a note input should be interpreted as 'on'.
 constexpr uint8_t NOTE_VELOCITY_THRESHOLD = 1;
 
-/// Don't parse incomming System Exclusive messages.
+/// Don't parse incoming System Exclusive messages.
 #define IGNORE_SYSEX
 
 /** The length of the maximum System Exclusive message
