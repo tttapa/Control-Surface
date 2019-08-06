@@ -63,8 +63,8 @@ void Control_Surface_::updateMidiInput() {
 }
 
 void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
-    MIDI_message midichmsg = midi.getChannelMessage();
-    MIDI_message_matcher midimsg = {midichmsg};
+    ChannelMessage midichmsg = midi.getChannelMessage();
+    ChannelMessageMatcher midimsg = {midichmsg};
 
 #ifdef DEBUG_MIDI_PACKETS
     // TODO: print CN

@@ -63,7 +63,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     }
 
     MIDICNChannelAddress
-    getTarget(const MIDI_message_matcher &midimsg) const override {
+    getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {
             int8_t(midimsg.data1 >> 4),
             Channel(midimsg.channel),
@@ -138,7 +138,7 @@ class VU : virtual public VU_Base {
     VU(const MIDICNChannelAddress &address, unsigned int decayTime = 150)
         : VU_Base(address, decayTime) {}
 
-    bool updateImpl(const MIDI_message_matcher &midimsg,
+    bool updateImpl(const ChannelMessageMatcher &midimsg,
                     UNUSED_PARAM const MIDICNChannelAddress &target) override {
         uint8_t data = midimsg.data1 & 0x0F;
         switch (data) {
@@ -204,7 +204,7 @@ class VU : virtual public VU_Base, public BankableMIDIInput<N> {
        unsigned int decayTime = 150)
         : VU_Base(address, decayTime), BankableMIDIInput<N>(config) {}
 
-    bool updateImpl(const MIDI_message_matcher &midimsg,
+    bool updateImpl(const ChannelMessageMatcher &midimsg,
                     const MIDICNChannelAddress &target) override {
         uint8_t index =
             this->getIndex(target, address) % N; // Todo: modulo everywhere?

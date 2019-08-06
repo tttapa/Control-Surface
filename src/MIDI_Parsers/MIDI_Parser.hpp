@@ -19,19 +19,19 @@ const uint8_t SysExEnd = 0xF7;
 
 const uint8_t TuneRequest = 0xF6;
 
-struct MIDI_message {
+struct ChannelMessage {
     uint8_t header;
     uint8_t data1;
     uint8_t data2;
 
     uint8_t CN = 0;
 
-    bool operator==(const MIDI_message &other) const {
+    bool operator==(const ChannelMessage &other) const {
         return this->header == other.header && this->data1 == other.data1 &&
                this->data2 == other.data2 && this->CN == other.CN;
     }
 
-    bool operator!=(const MIDI_message &other) const {
+    bool operator!=(const ChannelMessage &other) const {
         return !(*this == other);
     }
 };
@@ -70,7 +70,7 @@ struct RealTimeMessage {
 class MIDI_Parser {
   public:
     /** Get the latest MIDI channel message */
-    MIDI_message getChannelMessage();
+    ChannelMessage getChannelMessage();
     /** Get the latest SysEx message. */
     virtual SysExMessage getSysEx() const = 0;
     /** Get the pointer to the SysEx data. */
@@ -81,7 +81,7 @@ class MIDI_Parser {
     virtual uint8_t getCN() const { return 0; };
 
   protected:
-    MIDI_message midimsg = {};
+    ChannelMessage midimsg = {};
 
   public:
     /** Check if the given byte is a MIDI header byte. */

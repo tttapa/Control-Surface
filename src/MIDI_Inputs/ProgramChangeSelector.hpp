@@ -19,7 +19,7 @@ class ProgramChangeSelector_Base : public MIDIInputElementPC,
 
     void update() override {}
 
-    bool updateImpl(const MIDI_message_matcher &midimsg,
+    bool updateImpl(const ChannelMessageMatcher &midimsg,
                     const MIDICNChannelAddress &target) override {
         (void)target;
         uint8_t program = midimsg.data1;

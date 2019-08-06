@@ -14,7 +14,7 @@ class MIDINote_Base : public MIDIInputElementNote {
     bool getState() const { return getValue() >= NOTE_VELOCITY_THRESHOLD; }
 
   protected:
-    uint8_t getValueFromMIDIMessage(const MIDI_message_matcher &midimsg) {
+    uint8_t getValueFromMIDIMessage(const ChannelMessageMatcher &midimsg) {
         return midimsg.type == NOTE_ON ? midimsg.data2 : 0;
     }
 };
@@ -31,7 +31,7 @@ class MIDINote : virtual public MIDINote_Base {
     void reset() override { value = 0; }
 
   private:
-    bool updateImpl(const MIDI_message_matcher &midimsg,
+    bool updateImpl(const ChannelMessageMatcher &midimsg,
                     UNUSED_PARAM const MIDICNChannelAddress &target) override {
         this->value = getValueFromMIDIMessage(midimsg);
         return true;
@@ -64,7 +64,7 @@ class MIDINote : virtual public MIDINote_Base, public BankableMIDIInput<N> {
     }
 
   private:
-    bool updateImpl(const MIDI_message_matcher &midimsg,
+    bool updateImpl(const ChannelMessageMatcher &midimsg,
                     const MIDICNChannelAddress &target) override {
         uint8_t index = this->getIndex(target, address);
         uint8_t value = getValueFromMIDIMessage(midimsg);

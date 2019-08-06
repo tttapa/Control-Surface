@@ -21,7 +21,7 @@ class MockMIDI_Callbacks : public MIDI_Callbacks {
         sysExCounter++;
     }
 
-    std::vector<MIDI_message> channelMessages;
+    std::vector<ChannelMessage> channelMessages;
     std::vector<uint8_t> sysExMessages;
     size_t sysExCounter = 0;
 };
@@ -44,7 +44,7 @@ TEST(BluetoothMIDIInterface, receiveChannelMessage) {
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 0);
 
-    std::vector<MIDI_message> expectedChannelMessages = {
+    std::vector<ChannelMessage> expectedChannelMessages = {
         {0x90, 0x3C, 0x7F}
     };
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
@@ -75,7 +75,7 @@ TEST(BluetoothMIDIInterface, receiveMultipleChannelMessage) {
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 0);
 
-    std::vector<MIDI_message> expectedChannelMessages = {
+    std::vector<ChannelMessage> expectedChannelMessages = {
         {0x90, 0x3C, 0x7F},
         {0x80, 0x3D, 0x7E},
         {0xB1, 0x10, 0x40}
@@ -107,7 +107,7 @@ TEST(BluetoothMIDIInterface, receiveMultipleChannelMessageRunningStatus) {
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 0);
 
-    std::vector<MIDI_message> expectedChannelMessages = {
+    std::vector<ChannelMessage> expectedChannelMessages = {
         {0x90, 0x3C, 0x7F},
         {0x90, 0x3D, 0x7E},
         {0xB1, 0x10, 0x40}
@@ -141,7 +141,7 @@ TEST(BluetoothMIDIInterface,
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 0);
 
-    std::vector<MIDI_message> expectedChannelMessages = {
+    std::vector<ChannelMessage> expectedChannelMessages = {
         {0x90, 0x3C, 0x7F},
         {0x90, 0x3D, 0x7E},
         {0xB1, 0x10, 0x40}
@@ -174,7 +174,7 @@ TEST(BluetoothMIDIInterface, receiveMultipleTwoByteChannelMessage) {
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 0);
 
-    std::vector<MIDI_message> expectedChannelMessages = {
+    std::vector<ChannelMessage> expectedChannelMessages = {
         {0xD0, 0x3C, 0x00},
         {0xC0, 0x3D, 0x00},
         {0xB1, 0x10, 0x40}
@@ -207,7 +207,7 @@ TEST(BluetoothMIDIInterface, receiveSysEx) {
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 1);
 
-    std::vector<MIDI_message> expectedChannelMessages = {};
+    std::vector<ChannelMessage> expectedChannelMessages = {};
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
 
@@ -233,7 +233,7 @@ TEST(BluetoothMIDIInterface, receiveSysEx2) {
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 1);
 
-    std::vector<MIDI_message> expectedChannelMessages = {};
+    std::vector<ChannelMessage> expectedChannelMessages = {};
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
 
@@ -267,7 +267,7 @@ TEST(BluetoothMIDIInterface, receiveSysExSplitAcrossPackets) {
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 1);
 
-    std::vector<MIDI_message> expectedChannelMessages = {};
+    std::vector<ChannelMessage> expectedChannelMessages = {};
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
 
@@ -298,6 +298,6 @@ TEST(BluetoothMIDIInterface, receiveSysExAndRealTime) {
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 1);
 
-    std::vector<MIDI_message> expectedChannelMessages = {};
+    std::vector<ChannelMessage> expectedChannelMessages = {};
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }

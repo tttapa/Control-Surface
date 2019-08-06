@@ -12,7 +12,7 @@ USBMIDI_Parser uparser;
 TEST(USBMIDIParser, noteOff) {
     uint8_t packet[4] = {0x08, 0x82, 0x20, 0x7F};
     EXPECT_EQ(uparser.parse(packet), CHANNEL_MESSAGE);
-    MIDI_message msg = uparser.getChannelMessage();
+    ChannelMessage msg = uparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0x82);
     EXPECT_EQ(msg.data1, 0x20);
     EXPECT_EQ(msg.data2, 0x7F);
@@ -21,7 +21,7 @@ TEST(USBMIDIParser, noteOff) {
 TEST(USBMIDIParser, noteOn) {
     uint8_t packet[4] = {0x09, 0x93, 0x2A, 0x7E};
     EXPECT_EQ(uparser.parse(packet), CHANNEL_MESSAGE);
-    MIDI_message msg = uparser.getChannelMessage();
+    ChannelMessage msg = uparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0x93);
     EXPECT_EQ(msg.data1, 0x2A);
     EXPECT_EQ(msg.data2, 0x7E);
@@ -30,7 +30,7 @@ TEST(USBMIDIParser, noteOn) {
 TEST(USBMIDIParser, noteOnCN) {
     uint8_t packet[4] = {0x59, 0x93, 0x2A, 0x7E};
     EXPECT_EQ(uparser.parse(packet), CHANNEL_MESSAGE);
-    MIDI_message msg = uparser.getChannelMessage();
+    ChannelMessage msg = uparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0x93);
     EXPECT_EQ(msg.data1, 0x2A);
     EXPECT_EQ(msg.data2, 0x7E);
@@ -157,7 +157,7 @@ TEST(SerialMIDIParser, noteOff) {
     EXPECT_EQ(sparser.parse(0x82), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x20), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x7F), CHANNEL_MESSAGE);
-    MIDI_message msg = sparser.getChannelMessage();
+    ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0x82);
     EXPECT_EQ(msg.data1, 0x20);
     EXPECT_EQ(msg.data2, 0x7F);
@@ -167,7 +167,7 @@ TEST(SerialMIDIParser, noteOn) {
     EXPECT_EQ(sparser.parse(0x93), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x2A), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x7E), CHANNEL_MESSAGE);
-    MIDI_message msg = sparser.getChannelMessage();
+    ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0x93);
     EXPECT_EQ(msg.data1, 0x2A);
     EXPECT_EQ(msg.data2, 0x7E);
@@ -177,14 +177,14 @@ TEST(SerialMIDIParser, noteOnRunningStatus) {
     EXPECT_EQ(sparser.parse(0x9A), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x10), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x11), CHANNEL_MESSAGE);
-    MIDI_message msg1 = sparser.getChannelMessage();
+    ChannelMessage msg1 = sparser.getChannelMessage();
     EXPECT_EQ(msg1.header, 0x9A);
     EXPECT_EQ(msg1.data1, 0x10);
     EXPECT_EQ(msg1.data2, 0x11);
 
     EXPECT_EQ(sparser.parse(0x12), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x13), CHANNEL_MESSAGE);
-    MIDI_message msg2 = sparser.getChannelMessage();
+    ChannelMessage msg2 = sparser.getChannelMessage();
     EXPECT_EQ(msg2.header, 0x9A);
     EXPECT_EQ(msg2.data1, 0x12);
     EXPECT_EQ(msg2.data2, 0x13);
@@ -194,7 +194,7 @@ TEST(SerialMIDIParser, afterTouch) {
     EXPECT_EQ(sparser.parse(0xA1), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x01), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x02), CHANNEL_MESSAGE);
-    MIDI_message msg = sparser.getChannelMessage();
+    ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0xA1);
     EXPECT_EQ(msg.data1, 0x01);
     EXPECT_EQ(msg.data2, 0x02);
@@ -204,7 +204,7 @@ TEST(SerialMIDIParser, controlChange) {
     EXPECT_EQ(sparser.parse(0xBB), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x03), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x04), CHANNEL_MESSAGE);
-    MIDI_message msg = sparser.getChannelMessage();
+    ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0xBB);
     EXPECT_EQ(msg.data1, 0x03);
     EXPECT_EQ(msg.data2, 0x04);
@@ -213,7 +213,7 @@ TEST(SerialMIDIParser, controlChange) {
 TEST(SerialMIDIParser, programChange) {
     EXPECT_EQ(sparser.parse(0xC6), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x7A), CHANNEL_MESSAGE);
-    MIDI_message msg = sparser.getChannelMessage();
+    ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0xC6);
     EXPECT_EQ(msg.data1, 0x7A);
 }
@@ -221,12 +221,12 @@ TEST(SerialMIDIParser, programChange) {
 TEST(SerialMIDIParser, programChangeRunningStatus) {
     EXPECT_EQ(sparser.parse(0xC6), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x7B), CHANNEL_MESSAGE);
-    MIDI_message msg1 = sparser.getChannelMessage();
+    ChannelMessage msg1 = sparser.getChannelMessage();
     EXPECT_EQ(msg1.header, 0xC6);
     EXPECT_EQ(msg1.data1, 0x7B);
 
     EXPECT_EQ(sparser.parse(0x7C), CHANNEL_MESSAGE);
-    MIDI_message msg2 = sparser.getChannelMessage();
+    ChannelMessage msg2 = sparser.getChannelMessage();
     EXPECT_EQ(msg2.header, 0xC6);
     EXPECT_EQ(msg2.data1, 0x7C);
 }
@@ -234,7 +234,7 @@ TEST(SerialMIDIParser, programChangeRunningStatus) {
 TEST(SerialMIDIParser, channelPressure) {
     EXPECT_EQ(sparser.parse(0xD7), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x16), CHANNEL_MESSAGE);
-    MIDI_message msg = sparser.getChannelMessage();
+    ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0xD7);
     EXPECT_EQ(msg.data1, 0x16);
 }
@@ -243,7 +243,7 @@ TEST(SerialMIDIParser, pitchBend) {
     EXPECT_EQ(sparser.parse(0xE0), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x55), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0x66), CHANNEL_MESSAGE);
-    MIDI_message msg = sparser.getChannelMessage();
+    ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0xE0);
     EXPECT_EQ(msg.data1, 0x55);
     EXPECT_EQ(msg.data2, 0x66);
@@ -295,7 +295,7 @@ TEST(SerialMIDIParser, noteOffInterruptedByRealTime) {
     EXPECT_EQ(sparser.parse(0x20), NO_MESSAGE);
     EXPECT_EQ(sparser.parse(0xF9), 0xF9);
     EXPECT_EQ(sparser.parse(0x7F), CHANNEL_MESSAGE);
-    MIDI_message msg = sparser.getChannelMessage();
+    ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0x82);
     EXPECT_EQ(msg.data1, 0x20);
     EXPECT_EQ(msg.data2, 0x7F);

@@ -79,7 +79,7 @@ class MIDIInputElementNote : public MIDIInputElement,
      * 
      * @see     MIDIInputElementNote#updateWith
      */
-    static void updateAllWith(const MIDI_message_matcher &midimsg) {
+    static void updateAllWith(const ChannelMessageMatcher &midimsg) {
         for (MIDIInputElementNote &e : elements)
             if (e.updateWith(midimsg))
                 return;

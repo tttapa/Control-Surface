@@ -27,7 +27,7 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
     /**
      * @brief   Update a character.
      */
-    virtual bool updateImpl(const MIDI_message_matcher &midimsg,
+    virtual bool updateImpl(const ChannelMessageMatcher &midimsg,
                             const MIDICNChannelAddress &target) override {
         uint8_t index =
             LENGTH - (target.getAddress() - address.getAddress()) - 1;

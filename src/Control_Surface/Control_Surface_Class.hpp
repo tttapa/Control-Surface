@@ -91,7 +91,7 @@ class Control_Surface_ : public MIDI_Callbacks {
     /// Callback function type for channel messages. Return true if handling is
     /// done in the user-provided callback, false if `Control_Surface`
     /// should handle the message.
-    using ChannelMessageCallback = bool (*)(MIDI_message);
+    using ChannelMessageCallback = bool (*)(ChannelMessage);
     /// Callback function type for SysEx messages. Return true if handling is
     /// done in the user-provided callback, false if `Control_Surface`
     /// should handle the message.

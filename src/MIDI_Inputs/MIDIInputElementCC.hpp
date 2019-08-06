@@ -68,7 +68,7 @@ class MIDIInputElementCC : public MIDIInputElement,
 
     /// Update all MIDIInputElementCC elements with a new MIDI message.
     /// @see     MIDIInputElementCC#updateWith
-    static void updateAllWith(const MIDI_message_matcher &midimsg) {
+    static void updateAllWith(const ChannelMessageMatcher &midimsg) {
         for (MIDIInputElementCC &e : elements)
             if (e.updateWith(midimsg))
                 return;

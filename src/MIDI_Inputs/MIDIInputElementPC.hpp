@@ -65,7 +65,7 @@ class MIDIInputElementPC : public MIDIInputElement,
      *
      * @see     MIDIInputElementPC#updateWith
      */
-    static void updateAllWith(const MIDI_message_matcher &midimsg) {
+    static void updateAllWith(const ChannelMessageMatcher &midimsg) {
         for (MIDIInputElementPC &el : elements)
             if (el.updateWith(midimsg))
                 return;
@@ -76,7 +76,7 @@ class MIDIInputElementPC : public MIDIInputElement,
 
   private:
     MIDICNChannelAddress
-    getTarget(const MIDI_message_matcher &midimsg) const override {
+    getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {0, Channel(midimsg.channel), midimsg.CN};
         // Program Change doesn't have an address
     }

@@ -12,4 +12,4 @@ bool MIDI_Parser::isStatus(uint8_t data) {
 
 bool MIDI_Parser::isData(uint8_t data) { return (data & (1 << 7)) == 0; }
 
-MIDI_message MIDI_Parser::getChannelMessage() { return midimsg; }
+ChannelMessage MIDI_Parser::getChannelMessage() { return midimsg; }

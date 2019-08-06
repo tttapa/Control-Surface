@@ -122,7 +122,7 @@ void MIDI_Interface::sendPC(MIDICNChannel address, uint8_t value) {
 
 // -------------------------------- PARSING --------------------------------- //
 
-MIDI_message MIDI_Interface::getChannelMessage() {
+ChannelMessage MIDI_Interface::getChannelMessage() {
     return parser.getChannelMessage();
 }
 

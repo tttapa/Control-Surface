@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "MIDI_message_matcher.hpp"
+#include "ChannelMessageMatcher.hpp"
 #include <Def/MIDICNChannelAddress.hpp>
 
 /**
@@ -37,7 +37,7 @@ class MIDIInputElement {
     virtual void update() {}
 
     /// Receive a new MIDI message and update the internal state.
-    bool updateWith(const MIDI_message_matcher &midimsg) {
+    bool updateWith(const ChannelMessageMatcher &midimsg) {
         DEBUGFN("");
         MIDICNChannelAddress target = getTarget(midimsg);
         if (!this->match(target))
@@ -53,7 +53,7 @@ class MIDIInputElement {
 
   private:
     /// Update the internal state with the new MIDI message.
-    virtual bool updateImpl(const MIDI_message_matcher &midimsg,
+    virtual bool updateImpl(const ChannelMessageMatcher &midimsg,
                             const MIDICNChannelAddress &target) = 0;
 
     /**
@@ -63,7 +63,7 @@ class MIDIInputElement {
      *          Key Pressure and Control Change).
      */
     virtual inline MIDICNChannelAddress
-    getTarget(const MIDI_message_matcher &midimsg) const {
+    getTarget(const ChannelMessageMatcher &midimsg) const {
         return {int8_t(midimsg.data1), Channel(midimsg.channel), midimsg.CN};
     }
 

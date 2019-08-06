@@ -66,7 +66,7 @@ class MIDIInputElementChannelPressure
      *
      * @see     MIDIInputElementChannelPressure#updateWith
      */
-    static void updateAllWith(const MIDI_message_matcher &midimsg) {
+    static void updateAllWith(const ChannelMessageMatcher &midimsg) {
         for (MIDIInputElementChannelPressure &el : elements)
             if (el.updateWith(midimsg))
                 return;
@@ -77,7 +77,7 @@ class MIDIInputElementChannelPressure
 
   private:
     MIDICNChannelAddress
-    getTarget(const MIDI_message_matcher &midimsg) const override {
+    getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {0, Channel(midimsg.channel), midimsg.CN};
         // Channel Pressure doesn't have an address
     }

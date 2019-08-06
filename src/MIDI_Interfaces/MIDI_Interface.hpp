@@ -163,7 +163,7 @@ class MIDI_Interface {
     /**
      * @brief   Return the received channel message.
      */
-    MIDI_message getChannelMessage();
+    ChannelMessage getChannelMessage();
 
     /**
      * @brief   Return the received system exclusive message.
