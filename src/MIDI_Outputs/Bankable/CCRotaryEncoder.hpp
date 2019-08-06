@@ -18,7 +18,7 @@ namespace Bankable {
  *
  * @ingroup MIDIOutputElements
  */
-class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender::send> {
+class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
   public:
     /**
      * @brief   Construct a new Bankable CCRotaryEncoder object with the given 
@@ -51,17 +51,19 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender::send> {
      */
     CCRotaryEncoder(const OutputBankConfig &config, const EncoderPinList &pins,
                     const MIDICNChannelAddress &address,
-                    uint8_t speedMultiplier, uint8_t pulsesPerStep)
-        : MIDIRotaryEncoder<RelativeCCSender::send>(
-              config, pins, address, speedMultiplier, pulsesPerStep) {}
+                    uint8_t speedMultiplier, uint8_t pulsesPerStep,
+                    const RelativeCCSender &sender = {})
+        : MIDIRotaryEncoder(config, pins, address, speedMultiplier,
+                            pulsesPerStep, sender) {}
 
 // For tests only (PJRC Encoder library's copy constructor doesn't work)
 #ifndef ARDUINO
     CCRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
                     const MIDICNChannelAddress &address,
-                    uint8_t speedMultiplier, uint8_t pulsesPerStep)
-        : MIDIRotaryEncoder<RelativeCCSender::send>(
-              config, encoder, address, speedMultiplier, pulsesPerStep) {}
+                    uint8_t speedMultiplier = 1, uint8_t pulsesPerStep = 4,
+                    const RelativeCCSender &sender = {})
+        : MIDIRotaryEncoder(config, encoder, address, speedMultiplier,
+                            pulsesPerStep, sender) {}
 #endif
 };
 

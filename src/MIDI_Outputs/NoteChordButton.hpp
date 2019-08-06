@@ -14,8 +14,7 @@
  *
  * @ingroup MIDIOutputElements
  */
-class NoteChordButton : public MIDIChordButton<DigitalNoteSender::sendOn,
-                                               DigitalNoteSender::sendOff> {
+class NoteChordButton : public MIDIChordButton<DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new Bankable NoteChordButton object with the given pin, 
@@ -33,7 +32,6 @@ class NoteChordButton : public MIDIChordButton<DigitalNoteSender::sendOn,
      */
     template <uint8_t N>
     NoteChordButton(pin_t pin, const MIDICNChannelAddress &address,
-                    const Chord<N> &chord)
-        : MIDIChordButton<DigitalNoteSender::sendOn,
-                          DigitalNoteSender::sendOff>(pin, address, chord) {}
+                    const Chord<N> &chord, const DigitalNoteSender &sender)
+        : MIDIChordButton<DigitalNoteSender>(pin, address, chord, sender) {}
 };

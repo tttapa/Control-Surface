@@ -19,8 +19,7 @@ namespace Bankable {
  *
  * @ingroup MIDIOutputElements
  */
-class CCButtonLatched : public MIDIButtonLatched<DigitalCCSender::sendOn,
-                                                 DigitalCCSender::sendOff> {
+class CCButtonLatched : public MIDIButtonLatched<DigitalCCSender> {
   public:
     /**
      * @brief   Create a new bankable CCButtonLatched object on the given pin 
@@ -38,8 +37,9 @@ class CCButtonLatched : public MIDIButtonLatched<DigitalCCSender::sendOn,
      * @ingroup MIDIOutputElementConstructors
      */
     CCButtonLatched(const OutputBankConfig &config, pin_t pin,
-                    const MIDICNChannelAddress &address)
-        : MIDIButtonLatched{config, pin, address} {}
+                    const MIDICNChannelAddress &address,
+                    const DigitalCCSender &sender = {})
+        : MIDIButtonLatched{config, pin, address, sender} {}
 };
 
 } // namespace Bankable

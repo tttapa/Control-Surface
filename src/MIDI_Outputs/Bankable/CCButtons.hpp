@@ -19,9 +19,7 @@ namespace Bankable {
  *          The number of buttons in the collection.
  */
 template <uint8_t NUMBER_OF_BUTTONS>
-class CCButtons
-    : public MIDIButtons<DigitalCCSender::sendOn, DigitalCCSender::sendOff,
-                         NUMBER_OF_BUTTONS> {
+class CCButtons : public MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS> {
   public:
     /**
      * @brief   Create a new Bankable CCButtons object with the given pins,
@@ -47,10 +45,10 @@ class CCButtons
     CCButtons(const OutputBankConfig &config,
               const Array<Button, NUMBER_OF_BUTTONS> &buttons,
               const MIDICNChannelAddress &baseAddress,
-              const RelativeMIDICNChannelAddress &incrementAddress)
-        : MIDIButtons<DigitalCCSender::sendOn, DigitalCCSender::sendOff,
-                      NUMBER_OF_BUTTONS>(config, buttons, baseAddress,
-                                         incrementAddress) {}
+              const RelativeMIDICNChannelAddress &incrementAddress,
+              const DigitalCCSender &sender = {})
+        : MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS>(
+              config, buttons, baseAddress, incrementAddress, sender) {}
 };
 
 } // namespace Bankable

@@ -18,8 +18,7 @@
  *
  * @ingroup MIDIOutputElements
  */
-class CCButtonLatched : public MIDIButtonLatched<DigitalCCSender::sendOn,
-                                                 DigitalCCSender::sendOff> {
+class CCButtonLatched : public MIDIButtonLatched<DigitalCCSender> {
   public:
     /**
      * @brief   Create a new CCButtonLatched object on the given pin and with 
@@ -34,6 +33,7 @@ class CCButtonLatched : public MIDIButtonLatched<DigitalCCSender::sendOn,
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    CCButtonLatched(pin_t pin, const MIDICNChannelAddress &address)
-        : MIDIButtonLatched{pin, address} {}
+    CCButtonLatched(pin_t pin, const MIDICNChannelAddress &address,
+                    const DigitalCCSender &sender = {})
+        : MIDIButtonLatched{pin, address, sender} {}
 };

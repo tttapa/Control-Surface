@@ -1,5 +1,3 @@
-/* ✔ */
-
 #pragma once
 
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButtonLatched.hpp>
@@ -19,8 +17,7 @@ namespace Bankable {
  *
  * @ingroup MIDIOutputElements
  */
-class NoteButtonLatched : public MIDIButtonLatched<DigitalNoteSender::sendOn,
-                                                   DigitalNoteSender::sendOff> {
+class NoteButtonLatched : public MIDIButtonLatched<DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new bankable NoteButtonLatched object on the given pin 
@@ -38,8 +35,9 @@ class NoteButtonLatched : public MIDIButtonLatched<DigitalNoteSender::sendOn,
      * @ingroup MIDIOutputElementConstructors
      */
     NoteButtonLatched(const OutputBankConfig &config, pin_t pin,
-                      const MIDICNChannelAddress &address)
-        : MIDIButtonLatched{config, pin, address} {}
+                      const MIDICNChannelAddress &address,
+                      const DigitalNoteSender &sender = {})
+        : MIDIButtonLatched{config, pin, address, sender} {}
 };
 
 } // namespace Bankable

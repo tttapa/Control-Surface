@@ -14,7 +14,7 @@
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
+template <class Sender>
 class MIDIButtonLatched : public MIDIOutputElement {
   protected:
     /**
@@ -28,8 +28,9 @@ class MIDIButtonLatched : public MIDIOutputElement {
      *          The MIDI address containing the note number [0, 127], channel
      *          [1, 16], and optional cable number.
      */
-    MIDIButtonLatched(pin_t pin, const MIDICNChannelAddress &address)
-        : button{pin}, address{address} {}
+    MIDIButtonLatched(pin_t pin, const MIDICNChannelAddress &address,
+                      const Sender &sender)
+        : button{pin}, address{address}, sender{sender} {}
 
   public:
     void begin() final override { button.begin(); }
@@ -46,7 +47,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
     bool getState() const { return state; }
     void setState(bool state) {
         this->state = state;
-        state ? sendOn(address) : sendOff(address);
+        state ? sender.sendOn(address) : sender.sendOff(address);
     }
 
 #ifdef INDIVIDUAL_BUTTON_INVERT
@@ -56,5 +57,6 @@ class MIDIButtonLatched : public MIDIOutputElement {
   private:
     Button button;
     const MIDICNChannelAddress address;
+    Sender sender;
     bool state = false;
 };

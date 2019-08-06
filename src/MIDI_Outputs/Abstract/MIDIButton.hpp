@@ -11,7 +11,7 @@
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
+template <class Sender>
 class MIDIButton : public MIDIOutputElement {
   public:
     /**
@@ -21,16 +21,17 @@ class MIDIButton : public MIDIOutputElement {
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      */
-    MIDIButton(pin_t pin, const MIDICNChannelAddress &address)
-        : button{pin}, address{address} {}
+    MIDIButton(pin_t pin, const MIDICNChannelAddress &address,
+               const Sender &sender)
+        : button{pin}, address{address}, sender{sender} {}
 
     void begin() final override { button.begin(); }
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling) {
-            sendOn(address);
+            sender.sendOn(address);
         } else if (state == Button::Rising) {
-            sendOff(address);
+            sender.sendOff(address);
         }
     }
 
@@ -43,4 +44,5 @@ class MIDIButton : public MIDIOutputElement {
   private:
     Button button;
     const MIDICNChannelAddress address;
+    Sender sender;
 };

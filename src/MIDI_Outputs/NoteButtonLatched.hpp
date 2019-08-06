@@ -17,8 +17,7 @@
  *
  * @ingroup MIDIOutputElements
  */
-class NoteButtonLatched : public MIDIButtonLatched<DigitalNoteSender::sendOn,
-                                                   DigitalNoteSender::sendOff> {
+class NoteButtonLatched : public MIDIButtonLatched<DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new NoteButtonLatched object on the given pin and with 
@@ -33,6 +32,7 @@ class NoteButtonLatched : public MIDIButtonLatched<DigitalNoteSender::sendOn,
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    NoteButtonLatched(pin_t pin, const MIDICNChannelAddress &address)
-        : MIDIButtonLatched{pin, address} {}
+    NoteButtonLatched(pin_t pin, const MIDICNChannelAddress &address,
+                      const DigitalNoteSender &sender = {})
+        : MIDIButtonLatched{pin, address, sender} {}
 };

@@ -13,7 +13,7 @@ namespace ManyAddresses {
  *
  * @see     FilteredAnalog
  */
-template <setting_t N, ContinuousSendFunction7Bit send, uint8_t PRECISION>
+template <setting_t N, class Sender, uint8_t PRECISION>
 class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
                                       public ManyAddressesMIDIOutput<N> {
   protected:
@@ -29,15 +29,16 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
      */
     MIDIFilteredAnalogAddressable(
         const Bank<N> &bank, pin_t analogPin,
-        const Array<MIDICNChannelAddress, N> &addresses)
+        const Array<MIDICNChannelAddress, N> &addresses, const Sender &sender)
         : ManyAddressesMIDIOutput<N>{bank},
-          filteredAnalog{analogPin}, addresses{addresses} {}
+          filteredAnalog{analogPin}, addresses{addresses}, sender{sender} {}
 
   public:
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            send(filteredAnalog.getValue(), addresses[this->getSelection()]);
+            sender.send(filteredAnalog.getValue(),
+                        addresses[this->getSelection()]);
     }
 
     /**
@@ -66,6 +67,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
   private:
     FilteredAnalog<PRECISION> filteredAnalog;
     const Array<MIDICNChannelAddress, N> addresses;
+    Sender sender;
 };
 
 } // namespace ManyAddresses

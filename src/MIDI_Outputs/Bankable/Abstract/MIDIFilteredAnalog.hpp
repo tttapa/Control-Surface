@@ -18,7 +18,7 @@ namespace Bankable {
  *
  * @see     FilteredAnalog
  */
-template <ContinuousSendFunction7Bit send, uint8_t PRECISION>
+template <class Sender, uint8_t PRECISION>
 class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
                                       public BankableMIDIOutput {
   protected:
@@ -32,15 +32,17 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
      */
     MIDIFilteredAnalogAddressable(const OutputBankConfig &config,
                                   pin_t analogPin,
-                                  const MIDICNChannelAddress &baseAddress)
+                                  const MIDICNChannelAddress &baseAddress,
+                                  const Sender &sender)
         : BankableMIDIOutput{config}, filteredAnalog{analogPin},
-          baseAddress{baseAddress} {}
+          baseAddress{baseAddress}, sender{sender} {}
 
   public:
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            send(filteredAnalog.getValue(), baseAddress + getAddressOffset());
+            sender.send(filteredAnalog.getValue(),
+                        baseAddress + getAddressOffset());
     }
 
     /**
@@ -69,6 +71,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
   private:
     FilteredAnalog<PRECISION> filteredAnalog;
     const MIDICNChannelAddress baseAddress;
+    Sender sender;
 };
 
 // -------------------------------------------------------------------------- //
@@ -84,7 +87,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
  *
  * @see     FilteredAnalog
  */
-template <ContinuousSendFunction14Bit send, uint8_t PRECISION>
+template <class Sender, uint8_t PRECISION>
 class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
   protected:
     /**
@@ -96,15 +99,16 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
      * @todo    Bank Config
      */
     MIDIFilteredAnalog(const OutputBankConfig &bank, pin_t analogPin,
-                       const MIDICNChannel &address)
-        : BankableMIDIOutput{bank}, filteredAnalog{analogPin}, address{
-                                                                   address} {}
+                       const MIDICNChannel &address, const Sender &sender)
+        : BankableMIDIOutput{bank},
+          filteredAnalog{analogPin}, address{address}, sender{sender} {}
 
   public:
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            send(filteredAnalog.getValue(), address + getAddressOffset());
+            sender.send(filteredAnalog.getValue(),
+                        address + getAddressOffset());
     }
 
     /**
@@ -133,6 +137,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
   private:
     FilteredAnalog<PRECISION> filteredAnalog;
     const MIDICNChannelAddress address;
+    Sender sender;
 };
 
 } // namespace Bankable

@@ -16,7 +16,8 @@ namespace Bankable {
  * @ingroup MIDIOutputElements
  */
 class CCIncrementDecrementButtons
-    : public MIDIIncrementDecrementButtons<RelativeCCSender::send> {
+    : public MIDIIncrementDecrementButtons<RelativeCCSender,
+                                           DigitalNoteSender> {
   public:
     /**
      * @brief   Construct a new CCIncrementDecrementButtons object.
@@ -42,9 +43,12 @@ class CCIncrementDecrementButtons
                                 const IncrementDecrementButtons &buttons,
                                 const MIDICNChannelAddress &address,
                                 uint8_t multiplier = 1,
-                                const MIDICNChannelAddress &resetNote = {})
-        : MIDIIncrementDecrementButtons(config, buttons, address, multiplier,
-                                        resetNote) {}
+                                const MIDICNChannelAddress &resetNote = {},
+                                const RelativeCCSender &relativeSender = {},
+                                const DigitalNoteSender &resetSender = {})
+        : MIDIIncrementDecrementButtons<RelativeCCSender, DigitalNoteSender>(
+              config, buttons, address, multiplier, resetNote, relativeSender,
+              resetSender) {}
 };
 
-} // namespace Bankable 
+} // namespace Bankable

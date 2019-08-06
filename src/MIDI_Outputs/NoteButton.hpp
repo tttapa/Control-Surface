@@ -14,8 +14,7 @@
  *
  * @ingroup MIDIOutputElements
  */
-class NoteButton
-    : public MIDIButton<DigitalNoteSender::sendOn, DigitalNoteSender::sendOff> {
+class NoteButton : public MIDIButton<DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new NoteButton object with the given pin, note number
@@ -31,6 +30,7 @@ class NoteButton
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    NoteButton(pin_t pin, const MIDICNChannelAddress &address)
-        : MIDIButton(pin, address) {}
+    NoteButton(pin_t pin, const MIDICNChannelAddress &address,
+               const DigitalNoteSender &sender = {})
+        : MIDIButton(pin, address, sender) {}
 };

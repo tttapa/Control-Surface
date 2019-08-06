@@ -13,8 +13,7 @@ namespace Bankable {
  * @todo    Documentation.
  * @see     ButtonMatrix
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff,
-          uint8_t nb_rows, uint8_t nb_cols>
+template <class Sender, uint8_t nb_rows, uint8_t nb_cols>
 class MIDIButtonMatrix : public BankableMIDIOutput,
                          public MIDIOutputElement,
                          public ButtonMatrix<nb_rows, nb_cols> {
@@ -42,10 +41,10 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
                      const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
-                     MIDICNChannel channelCN)
+                     MIDICNChannel channelCN, const Sender &sender)
         : BankableMIDIOutput(config), ButtonMatrix<nb_rows, nb_cols>(rowPins,
                                                                      colPins),
-          addresses(addresses), baseChannelCN(channelCN) {}
+          addresses(addresses), baseChannelCN(channelCN), sender{sender} {}
 
   public:
     void begin() final override { ButtonMatrix<nb_rows, nb_cols>::begin(); }
@@ -61,10 +60,10 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
                 lock(); // Don't allow changing of the bank setting
             sendAddress += getAddressOffset();
             activeButtons++;
-            sendOn(sendAddress);
+            sender.sendOn(sendAddress);
         } else {
             sendAddress += getAddressOffset();
-            sendOff(sendAddress);
+            sender.sendOff(sendAddress);
             activeButtons--;
             if (!activeButtons)
                 unlock();
@@ -74,6 +73,7 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
     AddressMatrix<nb_rows, nb_cols> addresses;
     const MIDICNChannel baseChannelCN;
     uint8_t activeButtons = 0;
+    Sender sender;
 };
 
 } // namespace Bankable

@@ -1,5 +1,3 @@
-/* ✔ */
-
 #pragma once
 
 #include <Banks/BankableMIDIOutput.hpp>
@@ -17,7 +15,7 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
+template <class Sender>
 class MIDIButtonLatched : public BankableMIDIOutput, public MIDIOutputElement {
   protected:
     /**
@@ -34,8 +32,9 @@ class MIDIButtonLatched : public BankableMIDIOutput, public MIDIOutputElement {
      *          channel [1, 16], and optional cable number [0, 15].
      */
     MIDIButtonLatched(const OutputBankConfig &config, pin_t pin,
-                      const MIDICNChannelAddress &address)
-        : BankableMIDIOutput{config}, button{pin}, address{address} {}
+                      const MIDICNChannelAddress &address, const Sender &sender)
+        : BankableMIDIOutput{config}, button{pin}, address{address},
+          sender{sender} {}
 
   public:
     void begin() final override { button.begin(); }
@@ -56,10 +55,10 @@ class MIDIButtonLatched : public BankableMIDIOutput, public MIDIOutputElement {
         if (state) {
             lock();
             sendAddress += getAddressOffset();
-            sendOn(sendAddress);
+            sender.sendOn(sendAddress);
         } else {
             sendAddress += getAddressOffset();
-            sendOff(sendAddress);
+            sender.sendOff(sendAddress);
             unlock();
         }
     }
@@ -68,6 +67,7 @@ class MIDIButtonLatched : public BankableMIDIOutput, public MIDIOutputElement {
     Button button;
     const MIDICNChannelAddress address;
     bool state = false;
+    Sender sender;
 };
 
 } // namespace Bankable

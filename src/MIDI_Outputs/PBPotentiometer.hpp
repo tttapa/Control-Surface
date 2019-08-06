@@ -16,7 +16,7 @@
  *
  * @ingroup MIDIOutputElements
  */
-class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<8>::send, 8> {
+class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<8>, 8> {
   public:
     /** 
      * @brief   Create a new PBPotentiometer object with the given analog pin
@@ -29,6 +29,7 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<8>::send, 8> {
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    PBPotentiometer(pin_t analogPin, const MIDICNChannel &address)
-        : MIDIFilteredAnalog<PitchBendSender<8>::send, 8>(analogPin, address) {}
+    PBPotentiometer(pin_t analogPin, const MIDICNChannel &address,
+                    const PitchBendSender<8> &sender = {})
+        : MIDIFilteredAnalog(analogPin, address, sender) {}
 };

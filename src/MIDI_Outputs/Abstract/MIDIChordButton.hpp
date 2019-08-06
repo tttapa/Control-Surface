@@ -14,7 +14,7 @@
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
+template <class Sender>
 class MIDIChordButton : public MIDIOutputElement {
   public:
     /**
@@ -28,8 +28,9 @@ class MIDIChordButton : public MIDIOutputElement {
      */
     template <uint8_t N>
     MIDIChordButton(pin_t pin, const MIDICNChannelAddress &address,
-                    const Chord<N> &chord)
-        : button{pin}, address(address), newChord(new Chord<N>(chord)) {}
+                    const Chord<N> &chord, const Sender &sender)
+        : button{pin}, address(address),
+          newChord(make_unique<Chord<N>>(chord)), sender{sender} {}
     // TODO: can I somehow get rid of the dynamic memory allocation here?
 
     void begin() final override { button.begin(); }
@@ -39,13 +40,13 @@ class MIDIChordButton : public MIDIOutputElement {
         if (state == Button::Falling) {
             if (newChord)
                 chord = move(newChord);
-            sendOn(sendAddress);
+            sender.sendOn(sendAddress);
             for (int8_t offset : *chord)
-                sendOn(sendAddress + offset);
+                sender.sendOn(sendAddress + offset);
         } else if (state == Button::Rising) {
-            sendOff(sendAddress);
+            sender.sendOff(sendAddress);
             for (int8_t offset : *chord)
-                sendOff(sendAddress + offset);
+                sender.sendOff(sendAddress + offset);
         }
     }
 
@@ -61,7 +62,7 @@ class MIDIChordButton : public MIDIOutputElement {
   private:
     Button button;
     const MIDICNChannelAddress address;
-
     unique_ptr<const IChord> chord;
     unique_ptr<const IChord> newChord;
+    Sender sender;
 };

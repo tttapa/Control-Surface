@@ -4,7 +4,7 @@
 
 class ContinuousCCSender {
   public:
-    static void send(uint8_t value, MIDICNChannelAddress address) {
+    void send(uint8_t value, MIDICNChannelAddress address) {
         Control_Surface.MIDI().sendCC(address, value);
     }
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <MIDI_Outputs/Abstract/MIDIIncrementDecrementButtons.hpp>
+#include <MIDI_Senders/DigitalNoteSender.hpp>
 #include <MIDI_Senders/RelativeCCSender.hpp>
 
 /**
@@ -14,7 +15,8 @@
  * @ingroup MIDIOutputElements
  */
 class CCIncrementDecrementButtons
-    : public MIDIIncrementDecrementButtons<RelativeCCSender::send> {
+    : public MIDIIncrementDecrementButtons<RelativeCCSender,
+                                           DigitalNoteSender> {
   public:
     /**
      * @brief   Construct a new CCIncrementDecrementButtons object.
@@ -39,7 +41,9 @@ class CCIncrementDecrementButtons
     CCIncrementDecrementButtons(const IncrementDecrementButtons &buttons,
                                 const MIDICNChannelAddress &address,
                                 uint8_t multiplier = 1,
-                                const MIDICNChannelAddress &resetNote = {})
-        : MIDIIncrementDecrementButtons(buttons, address, multiplier,
-                                        resetNote) {}
+                                const MIDICNChannelAddress &resetNote = {},
+                                const RelativeCCSender &relativeSender = {},
+                                const DigitalNoteSender &resetSender = {})
+        : MIDIIncrementDecrementButtons(buttons, address, multiplier, resetNote,
+                                        relativeSender, resetSender) {}
 };

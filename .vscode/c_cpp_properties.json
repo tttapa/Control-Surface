@@ -16,7 +16,8 @@
                 "${workspaceFolder}/src",
                 "${workspaceFolder}/test",
                 "${workspaceFolder}/googletest/googlemock/include",
-                "${workspaceFolder}/googletest/googletest/include"
+                "${workspaceFolder}/googletest/googletest/include",
+                "${workspaceFolder}/googletest-wrappers"
             ]
         }
     ],

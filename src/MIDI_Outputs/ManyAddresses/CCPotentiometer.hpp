@@ -19,7 +19,7 @@ namespace ManyAddresses {
  */
 template <setting_t N>
 class CCPotentiometer
-    : public MIDIFilteredAnalogAddressable<N, ContinuousCCSender::send, 7> {
+    : public MIDIFilteredAnalogAddressable<N, ContinuousCCSender, 7> {
   public:
     /** 
      * @brief   Create a new CCPotentiometer object with the given 
@@ -35,9 +35,10 @@ class CCPotentiometer
      * @ingroup MIDIOutputElementConstructors
      */
     CCPotentiometer(const Bank<N> &bank, pin_t analogPin,
-                    const Array<MIDICNChannelAddress, N> &addresses)
-        : MIDIFilteredAnalogAddressable<N, ContinuousCCSender::send, 7>(
-              bank, analogPin, addresses) {}
+                    const Array<MIDICNChannelAddress, N> &addresses,
+                    const ContinuousCCSender &sender = {})
+        : MIDIFilteredAnalogAddressable<N, ContinuousCCSender, 7>(
+              bank, analogPin, addresses, sender) {}
 };
 
 } // namespace ManyAddresses

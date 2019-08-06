@@ -14,9 +14,7 @@
  *
  * @ingroup MIDIOutputElements
  */
-class NoteButtonLatching
-    : public MIDIButtonLatching<DigitalNoteSender::sendOn,
-                                DigitalNoteSender::sendOff> {
+class NoteButtonLatching : public MIDIButtonLatching<DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new NoteButtonLatching object with the given pin, note
@@ -32,6 +30,7 @@ class NoteButtonLatching
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    NoteButtonLatching(pin_t pin, const MIDICNChannelAddress &address)
-        : MIDIButtonLatching(pin, address) {}
+    NoteButtonLatching(pin_t pin, const MIDICNChannelAddress &address,
+                       const DigitalNoteSender &sender = {})
+        : MIDIButtonLatching(pin, address, sender) {}
 };

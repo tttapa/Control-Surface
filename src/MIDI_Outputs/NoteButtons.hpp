@@ -19,9 +19,7 @@
  *          The number of buttons in the collection.
  */
 template <uint8_t NUMBER_OF_BUTTONS>
-class NoteButtons
-    : public MIDIButtons<DigitalNoteSender::sendOn, DigitalNoteSender::sendOff,
-                         NUMBER_OF_BUTTONS> {
+class NoteButtons : public MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS> {
   public:
     /**
      * @brief   Create a new NoteButtons object with the given pins,
@@ -46,8 +44,8 @@ class NoteButtons
      */
     NoteButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 const MIDICNChannelAddress &baseAddress,
-                const RelativeMIDICNChannelAddress &incrementAddress)
-        : MIDIButtons<DigitalNoteSender::sendOn, DigitalNoteSender::sendOff,
-                      NUMBER_OF_BUTTONS>(buttons, baseAddress,
-                                         incrementAddress) {}
+                const RelativeMIDICNChannelAddress &incrementAddress,
+                const DigitalNoteSender &sender = {})
+        : MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS>(
+              buttons, baseAddress, incrementAddress, sender) {}
 };

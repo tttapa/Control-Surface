@@ -17,7 +17,7 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
+template <class Sender>
 class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
   public:
     /**
@@ -32,9 +32,10 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
      */
     template <uint8_t N>
     MIDIChordButton(const OutputBankConfig &config, pin_t pin,
-                    const MIDICNChannelAddress &address, const Chord<N> &chord)
+                    const MIDICNChannelAddress &address, const Chord<N> &chord,
+                    const Sender &sender)
         : BankableMIDIOutput{config}, button{pin}, address(address),
-          newChord(new Chord<N>(chord)) {}
+          newChord(make_unique<Chord<N>>(chord)), sender{sender} {}
     // TODO: can I somehow get rid of the dynamic memory allocation here?
 
     void begin() final override { button.begin(); }
@@ -46,14 +47,14 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
                 chord = move(newChord);
             lock();
             sendAddress += getAddressOffset();
-            sendOn(sendAddress);
+            sender.sendOn(sendAddress);
             for (int8_t offset : *chord)
-                sendOn(sendAddress + offset);
+                sender.sendOn(sendAddress + offset);
         } else if (state == Button::Rising) {
             sendAddress += getAddressOffset();
-            sendOff(sendAddress);
+            sender.sendOff(sendAddress);
             for (int8_t offset : *chord)
-                sendOff(sendAddress + offset);
+                sender.sendOff(sendAddress + offset);
             unlock();
         }
     }
@@ -70,9 +71,9 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
   private:
     Button button;
     const MIDICNChannelAddress address;
-
     unique_ptr<const IChord> chord;
     unique_ptr<const IChord> newChord;
+    Sender sender;
 };
 
 } // namespace Bankable

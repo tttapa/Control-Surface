@@ -14,7 +14,7 @@
  *
  * @see     FilteredAnalog
  */
-template <ContinuousSendFunction7Bit send, uint8_t PRECISION>
+template <class Sender, uint8_t PRECISION>
 class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
   protected:
     /**
@@ -26,14 +26,15 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      * @todo    Documentation.
      */
     MIDIFilteredAnalogAddressable(pin_t analogPin,
-                                  const MIDICNChannelAddress &address)
-        : filteredAnalog{analogPin}, address{address} {}
+                                  const MIDICNChannelAddress &address,
+                                  const Sender &sender)
+        : filteredAnalog{analogPin}, address{address}, sender{sender} {}
 
   public:
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            send(filteredAnalog.getValue(), address);
+            sender.send(filteredAnalog.getValue(), address);
     }
 
     /**
@@ -62,6 +63,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
   private:
     FilteredAnalog<PRECISION> filteredAnalog;
     const MIDICNChannelAddress address;
+    Sender sender;
 };
 
 // -------------------------------------------------------------------------- //
@@ -77,7 +79,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
  *
  * @see     FilteredAnalog
  */
-template <ContinuousSendFunction14Bit send, uint8_t PRECISION>
+template <class Sender, uint8_t PRECISION>
 class MIDIFilteredAnalog : public MIDIOutputElement {
   protected:
     /**
@@ -88,14 +90,15 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      *          connected.
      * @todo    Documentation.
      */
-    MIDIFilteredAnalog(pin_t analogPin, const MIDICNChannel &address)
-        : filteredAnalog{analogPin}, address(address) {}
+    MIDIFilteredAnalog(pin_t analogPin, const MIDICNChannel &address,
+                       const Sender &sender)
+        : filteredAnalog{analogPin}, address(address), sender{sender} {}
 
   public:
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            send(filteredAnalog.getValue(), address);
+            sender.send(filteredAnalog.getValue(), address);
     }
 
     /**
@@ -124,4 +127,5 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
   private:
     FilteredAnalog<PRECISION> filteredAnalog;
     const MIDICNChannelAddress address;
+    Sender sender;
 };

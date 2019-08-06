@@ -14,7 +14,7 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
+template <class Sender>
 class MIDIButtonLatching : public MIDIOutputElement, public BankableMIDIOutput {
   protected:
     /**
@@ -25,8 +25,10 @@ class MIDIButtonLatching : public MIDIOutputElement, public BankableMIDIOutput {
      *          The internal pull-up resistor will be enabled.
      */
     MIDIButtonLatching(const OutputBankConfig &config, pin_t pin,
-                       const MIDICNChannelAddress &address)
-        : BankableMIDIOutput(config), button{pin}, address(address) {}
+                       const MIDICNChannelAddress &address,
+                       const Sender &sender)
+        : BankableMIDIOutput{config}, button{pin}, address{address},
+          sender{sender} {}
 
   public:
     void begin() final override { button.begin(); }
@@ -35,14 +37,15 @@ class MIDIButtonLatching : public MIDIOutputElement, public BankableMIDIOutput {
         MIDICNChannelAddress sendAddress = address;
         sendAddress += getAddressOffset();
         if (state == Button::Falling || state == Button::Rising) {
-            sendOn(sendAddress);
-            sendOff(sendAddress);
+            sender.sendOn(sendAddress);
+            sender.sendOff(sendAddress);
         }
     }
 
   private:
     Button button;
     const MIDICNChannelAddress address;
+    Sender sender;
 };
 
 } // namespace Bankable

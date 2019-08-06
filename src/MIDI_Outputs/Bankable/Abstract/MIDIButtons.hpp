@@ -15,8 +15,7 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff,
-          uint8_t NUMBER_OF_BUTTONS>
+template <class Sender, uint8_t NUMBER_OF_BUTTONS>
 class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
   protected:
     /**
@@ -27,9 +26,11 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
     MIDIButtons(const OutputBankConfig &config,
                 const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 const MIDICNChannelAddress &baseAddress,
-                const RelativeMIDICNChannelAddress &incrementAddress)
+                const RelativeMIDICNChannelAddress &incrementAddress,
+                const Sender &sender)
         : BankableMIDIOutput(config), buttons{buttons},
-          baseAddress(baseAddress), incrementAddress(incrementAddress) {}
+          baseAddress(baseAddress),
+          incrementAddress(incrementAddress), sender{sender} {}
 
   public:
     void begin() final override {
@@ -45,10 +46,10 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
                     lock(); // Don't allow changing of the bank setting
                 MIDICNChannelAddress sendAddress = address + getAddressOffset();
                 activeButtons++;
-                sendOn(sendAddress);
+                sender.sendOn(sendAddress);
             } else if (state == Button::Rising) {
                 MIDICNChannelAddress sendAddress = address + getAddressOffset();
-                sendOff(sendAddress);
+                sender.sendOff(sendAddress);
                 activeButtons--;
                 if (!activeButtons)
                     unlock();
@@ -68,6 +69,7 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
     Array<Button, NUMBER_OF_BUTTONS> buttons;
     const MIDICNChannelAddress baseAddress;
     const RelativeMIDICNChannelAddress incrementAddress;
+    Sender sender;
     uint8_t activeButtons = 0;
 };
 

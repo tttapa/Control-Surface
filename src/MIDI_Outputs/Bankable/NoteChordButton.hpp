@@ -16,8 +16,7 @@ namespace Bankable {
  *
  * @ingroup MIDIOutputElements
  */
-class NoteChordButton : public MIDIChordButton<DigitalNoteSender::sendOn,
-                                               DigitalNoteSender::sendOff> {
+class NoteChordButton : public MIDIChordButton<DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new Bankable NoteChordButton object with the given pin, 
@@ -37,10 +36,10 @@ class NoteChordButton : public MIDIChordButton<DigitalNoteSender::sendOn,
      */
     template <uint8_t N>
     NoteChordButton(const OutputBankConfig &config, pin_t pin,
-                    const MIDICNChannelAddress &address, const Chord<N> &chord)
-        : MIDIChordButton<DigitalNoteSender::sendOn,
-                          DigitalNoteSender::sendOff>(config, pin, address,
-                                                      chord) {}
+                    const MIDICNChannelAddress &address, const Chord<N> &chord,
+                    const DigitalNoteSender &sender = {})
+        : MIDIChordButton<DigitalNoteSender>(config, pin, address, chord,
+                                             sender) {}
 };
 
 } // namespace Bankable
