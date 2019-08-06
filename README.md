@@ -119,9 +119,10 @@ document to get started using the library.
 The automatically generated Doxygen documentation for this library can be found 
 [here](https://tttapa.github.io/Control-Surface/Doc/Doxygen/index.html).
 
-## Building and running the tests
+## Information for developers
 
-For help compiling and running the tests, see [Tests.md](Tests.md).
+Information for people that would like to help improve the Control Surface library can be found here: <https://tttapa.github.io/Pages/Arduino/Control-Surface/Developers/index.html>  
+It covers installation instructions for developers, instructions for running the tests and generating documentation, a style guide, etc.
 
 ## Known problems
 
