@@ -1,21 +1,24 @@
 ## TODO
 
-- Make many protected functions private if 1) they are not needed in tests 2) they should not be called from within subclasses.
-- ✔ Automatic dependencies in Makefiles for tests.
+- Change template structure for senders
 - Fix and reorder examples.
 - Move Wikis to tttapa.github.io.
+- Add a getter for the button state, and rename `getState()` → update()
+- Cleanup structure of display elements.
+- Flashing LEDs
+- Add motorized faders.
+- Keywords
+- Make many protected functions private if 1) they are not needed in tests 2) 
+  they should not be called from within subclasses.
 - Make it easier to add custom bitmaps.
 - ✔ Cleanup structure of input elements.
-- Cleanup structure of display elements.
-- Extension consistency.
-- ✔ Malloc → new.
-- Add motorized faders.
+- ✔ Extension consistency.
+- ✔ Malloc → new + smart pointers.
 - Make constructors of abstract classes protected.
 - Make destructors virtual if necessary. (e.g. callback classes)
 - GitHub template
-- Flashing LEDs
-- Keywords
-- Fix firmware link DFU scripts https://raw.githubusercontent.com/arduino/ArduinoCore-avr/master/firmwares/atmegaxxu2/Arduino-COMBINED-dfu-usbserial-atmega16u2-Uno-Rev3.hex
+- ✔ Fix firmware link DFU scripts
+- Move DFU scripts → scripts
 - Find and list all TODO's throughout the source code.
 
 ## Specific elements
