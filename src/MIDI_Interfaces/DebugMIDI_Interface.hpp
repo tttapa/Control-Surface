@@ -3,11 +3,6 @@
 #include "SerialMIDI_Interface.hpp"
 #include <ctype.h>
 
-const static char *MIDI_STATUS_TYPE_NAMES[] = { // @todo PROGMEM
-    "Note Off\t",       "Note On\t\t",      "Key Pressure\t",
-    "Control Change\t", "Program Change\t", "Channel Pressure",
-    "Pitch Bend\t"};
-
 /**
  * @brief   A class for MIDI interfaces sending and receiving 
  *          human-readable MIDI messages over a Stream.
@@ -24,78 +19,15 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
      */
     StreamDebugMIDI_Interface(Stream &stream) : StreamMIDI_Interface(stream) {}
 
-    MIDI_read_t read() override {
-        while (stream.available() > 0) {
-            char data = stream.read();
-
-            if (isxdigit(data)) {
-                // if we receive a hexadecimal digit
-                data = tolower(data);
-                if (firstChar == '\0') {
-                    firstChar = data;
-                } else if (secondChar == '\0') {
-                    secondChar = data;
-                } else {
-                    firstChar = secondChar;
-                    secondChar = data;
-                }
-            } else if (isspace(data) && firstChar && secondChar) {
-                // if we received two hex characters followed by
-                // whitespace
-                uint8_t midiByte = hexCharToNibble(firstChar) << 4 |
-                                   hexCharToNibble(secondChar);
-                firstChar = '\0';
-                secondChar = '\0';
-                MIDI_read_t parseResult = parser.parse(midiByte);
-                if (parseResult != NO_MESSAGE)
-                    return parseResult;
-            } else {
-                // Ignore any characters other than whitespace and hexadecimal
-                // digits
-            }
-        }
-        return NO_MESSAGE;
-    }
+    MIDI_read_t read() override;
 
   protected:
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
-                  uint8_t cn) override {
-        uint8_t messageType = (m >> 4) - 8;
-        if (messageType >= 7)
-            return;
-        stream.print(MIDI_STATUS_TYPE_NAMES[messageType]);
-        stream.print("\tChannel: ");
-        stream.print(c + 1);
-        stream.print("\tData 1: 0x");
-        stream.print(d1, HEX);
-        stream.print("\tData 2: 0x");
-        stream.print(d2, HEX);
-        stream.print("\tCable: ");
-        stream.print(cn);
-        stream.print("\r\n");
-        stream.flush();
-    }
+                  uint8_t cn) override;
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
-        uint8_t messageType = (m >> 4) - 8;
-        if (messageType >= 7)
-            return;
-        stream.print(MIDI_STATUS_TYPE_NAMES[messageType]);
-        stream.print("\tChannel: ");
-        stream.print(c + 1);
-        stream.print("\tData 1: 0x");
-        stream.print(d1, HEX);
-        stream.print("\tCable: ");
-        stream.print(cn);
-        stream.print("\r\n");
-        stream.flush();
-    }
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override;
 
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        (void)data;
-        (void)length;
-        (void)cn; // TODO
-    }
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override;
 
   private:
     char firstChar = '\0';
@@ -104,7 +36,7 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
     /**
      * @brief   Convert a hexadecimal character to a 4-bit nibble.
      */
-    uint8_t hexCharToNibble(char hex) {
+    static uint8_t hexCharToNibble(char hex) {
         return hex < 'a' ? hex - '0' : hex - 'a' + 10;
     }
 };
