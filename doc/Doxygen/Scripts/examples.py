@@ -48,20 +48,19 @@ for root, dirs, files in os.walk(exampledir):
                           '\033[0m')
                     docstr = s[1].split('*/', 1)[0]
                     # Add line break after brief
-                    docstr = re.sub(r'^\s*\*\s*$', r'\g<0><br>  ', docstr, 1,
-                                    re.MULTILINE)
-                    pathname = str(Path(root).relative_to(exampledir) / file)
+                    # docstr = re.sub(r'^\s*\*\s*$', r'\g<0><br>  ', docstr, 1,
+                    #                 re.MULTILINE)
+                    # pathname = str(Path(root).relative_to(exampledir) / file)
+                    pathname = file
                     title = splitext(basename(file))[0]
                     underline = '=' * len(title)
                     output += """\
 /**
- * @example   {pathname}
+ * @example   "{pathname}"
  * 
  * {title}
  * {underline}
- *
-{docstr}
- */
+ *{docstr}*/
 
 """.format(pathname=pathname, title=title, underline=underline, docstr=docstr)
                 else:

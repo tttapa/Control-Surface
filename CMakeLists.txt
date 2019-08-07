@@ -1,18 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(Control_Surface)
-
-################################################################################
-# Add Google Test
-################################################################################
-
-add_subdirectory(googletest)
-include_directories(${gmock_SOURCE_DIR}/include)
-include_directories(${gtest_SOURCE_DIR}/include)
-
-include(GoogleTest)
-enable_testing()
-
 ################################################################################
 # Set the C++ standard to C++14 and use GCC 9 if available
 ################################################################################
@@ -28,6 +15,19 @@ message(STATUS "GCC 9 found")
 set(CMAKE_C_COMPILER ${GCC_9_CMAKE_C_COMPILER})
 set(CMAKE_CXX_COMPILER ${GCC_9_CMAKE_CXX_COMPILER})
 endif()
+
+project(Control_Surface)
+
+################################################################################
+# Add Google Test
+################################################################################
+
+add_subdirectory(googletest)
+include_directories(${gmock_SOURCE_DIR}/include)
+include_directories(${gtest_SOURCE_DIR}/include)
+
+include(GoogleTest)
+enable_testing()
 
 ################################################################################
 # Change the default output directories

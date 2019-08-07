@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef DOXYGEN
+
 template <class T>
 struct remove_reference {
     typedef T type;
@@ -42,6 +44,8 @@ inline T &&forward(typename remove_reference<T>::type &&t) noexcept {
                   "Can not forward an rvalue as an lvalue.");
     return static_cast<T &&>(t);
 }
+
+#endif
 
 /**
  * @brief   Very basic smart pointer. Doesn't support array types.
