@@ -23,13 +23,6 @@ struct XBitmap {
 namespace XBM
 {
 
-/**
- * A macro to generate an XBitmap object based on the identifier/filename.
- */
-#define MakeXBitmap(name) \
-    const XBitmap name = \
-         { name##_width, name##_height, name##_bits }
-
-// =========================================================================== //
+// ========================================================================== //
 
 :contents}

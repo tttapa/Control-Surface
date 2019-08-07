@@ -23,113 +23,106 @@ struct XBitmap {
 namespace XBM
 {
 
-/**
- * A macro to generate an XBitmap object based on the identifier/filename.
- */
-#define MakeXBitmap(name) \
-    const XBitmap name = \
-         { name##_width, name##_height, name##_bits }
-
-// =========================================================================== //
+// ========================================================================== //
 
 // Automatically generated file: do not edit
 
 #include "mute_10B.axbm"
 /**
- * const XBitmap&emsp;<b>mute_10B</b>&emsp;(10px × 10px)
+ * XBitmap&emsp;<b>mute_10B</b>&emsp;(10px × 10px)
  * <img src="mute_10B.png" alt="mute_10B" class="xbm" style="width:7.5em;">
  */
-MakeXBitmap(mute_10B);
+const XBitmap mute_10B = { mute_10B_width, mute_10B_height, mute_10B_bits };
 
 #include "mute_14B.axbm"
 /**
- * const XBitmap&emsp;<b>mute_14B</b>&emsp;(14px × 14px)
+ * XBitmap&emsp;<b>mute_14B</b>&emsp;(14px × 14px)
  * <img src="mute_14B.png" alt="mute_14B" class="xbm" style="width:10.5em;">
  */
-MakeXBitmap(mute_14B);
+const XBitmap mute_14B = { mute_14B_width, mute_14B_height, mute_14B_bits };
 
 #include "mute_7.axbm"
 /**
- * const XBitmap&emsp;<b>mute_7</b>&emsp;(7px × 7px)
+ * XBitmap&emsp;<b>mute_7</b>&emsp;(7px × 7px)
  * <img src="mute_7.png" alt="mute_7" class="xbm" style="width:5.25em;">
  */
-MakeXBitmap(mute_7);
+const XBitmap mute_7 = { mute_7_width, mute_7_height, mute_7_bits };
 
 #include "play_10x9.axbm"
 /**
- * const XBitmap&emsp;<b>play_10x9</b>&emsp;(10px × 9px)
+ * XBitmap&emsp;<b>play_10x9</b>&emsp;(10px × 9px)
  * <img src="play_10x9.png" alt="play_10x9" class="xbm" style="width:7.5em;">
  */
-MakeXBitmap(play_10x9);
+const XBitmap play_10x9 = { play_10x9_width, play_10x9_height, play_10x9_bits };
 
 #include "play_7.axbm"
 /**
- * const XBitmap&emsp;<b>play_7</b>&emsp;(7px × 7px)
+ * XBitmap&emsp;<b>play_7</b>&emsp;(7px × 7px)
  * <img src="play_7.png" alt="play_7" class="xbm" style="width:5.25em;">
  */
-MakeXBitmap(play_7);
+const XBitmap play_7 = { play_7_width, play_7_height, play_7_bits };
 
 #include "play_8x7.axbm"
 /**
- * const XBitmap&emsp;<b>play_8x7</b>&emsp;(8px × 7px)
+ * XBitmap&emsp;<b>play_8x7</b>&emsp;(8px × 7px)
  * <img src="play_8x7.png" alt="play_8x7" class="xbm" style="width:6.0em;">
  */
-MakeXBitmap(play_8x7);
+const XBitmap play_8x7 = { play_8x7_width, play_8x7_height, play_8x7_bits };
 
 #include "rec_rdy_10B.axbm"
 /**
- * const XBitmap&emsp;<b>rec_rdy_10B</b>&emsp;(10px × 10px)
+ * XBitmap&emsp;<b>rec_rdy_10B</b>&emsp;(10px × 10px)
  * <img src="rec_rdy_10B.png" alt="rec_rdy_10B" class="xbm" style="width:7.5em;">
  */
-MakeXBitmap(rec_rdy_10B);
+const XBitmap rec_rdy_10B = { rec_rdy_10B_width, rec_rdy_10B_height, rec_rdy_10B_bits };
 
 #include "rec_rdy_14B.axbm"
 /**
- * const XBitmap&emsp;<b>rec_rdy_14B</b>&emsp;(14px × 14px)
+ * XBitmap&emsp;<b>rec_rdy_14B</b>&emsp;(14px × 14px)
  * <img src="rec_rdy_14B.png" alt="rec_rdy_14B" class="xbm" style="width:10.5em;">
  */
-MakeXBitmap(rec_rdy_14B);
+const XBitmap rec_rdy_14B = { rec_rdy_14B_width, rec_rdy_14B_height, rec_rdy_14B_bits };
 
 #include "rec_rdy_7.axbm"
 /**
- * const XBitmap&emsp;<b>rec_rdy_7</b>&emsp;(7px × 7px)
+ * XBitmap&emsp;<b>rec_rdy_7</b>&emsp;(7px × 7px)
  * <img src="rec_rdy_7.png" alt="rec_rdy_7" class="xbm" style="width:5.25em;">
  */
-MakeXBitmap(rec_rdy_7);
+const XBitmap rec_rdy_7 = { rec_rdy_7_width, rec_rdy_7_height, rec_rdy_7_bits };
 
 #include "record_7.axbm"
 /**
- * const XBitmap&emsp;<b>record_7</b>&emsp;(7px × 7px)
+ * XBitmap&emsp;<b>record_7</b>&emsp;(7px × 7px)
  * <img src="record_7.png" alt="record_7" class="xbm" style="width:5.25em;">
  */
-MakeXBitmap(record_7);
+const XBitmap record_7 = { record_7_width, record_7_height, record_7_bits };
 
 #include "record_9.axbm"
 /**
- * const XBitmap&emsp;<b>record_9</b>&emsp;(9px × 9px)
+ * XBitmap&emsp;<b>record_9</b>&emsp;(9px × 9px)
  * <img src="record_9.png" alt="record_9" class="xbm" style="width:6.75em;">
  */
-MakeXBitmap(record_9);
+const XBitmap record_9 = { record_9_width, record_9_height, record_9_bits };
 
 #include "solo_10B.axbm"
 /**
- * const XBitmap&emsp;<b>solo_10B</b>&emsp;(10px × 10px)
+ * XBitmap&emsp;<b>solo_10B</b>&emsp;(10px × 10px)
  * <img src="solo_10B.png" alt="solo_10B" class="xbm" style="width:7.5em;">
  */
-MakeXBitmap(solo_10B);
+const XBitmap solo_10B = { solo_10B_width, solo_10B_height, solo_10B_bits };
 
 #include "solo_14B.axbm"
 /**
- * const XBitmap&emsp;<b>solo_14B</b>&emsp;(14px × 14px)
+ * XBitmap&emsp;<b>solo_14B</b>&emsp;(14px × 14px)
  * <img src="solo_14B.png" alt="solo_14B" class="xbm" style="width:10.5em;">
  */
-MakeXBitmap(solo_14B);
+const XBitmap solo_14B = { solo_14B_width, solo_14B_height, solo_14B_bits };
 
 #include "solo_7.axbm"
 /**
- * const XBitmap&emsp;<b>solo_7</b>&emsp;(7px × 7px)
+ * XBitmap&emsp;<b>solo_7</b>&emsp;(7px × 7px)
  * <img src="solo_7.png" alt="solo_7" class="xbm" style="width:5.25em;">
  */
-MakeXBitmap(solo_7);
+const XBitmap solo_7 = { solo_7_width, solo_7_height, solo_7_bits };
 
 }

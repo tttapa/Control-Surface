@@ -12,3 +12,6 @@ img.xbm {
 div.image {
     text-align: initial;
 }
+div.contents {
+    max-width: 70em;
+}

@@ -1,4 +1,6 @@
-#define play_8x7_width 8
-#define play_8x7_height 7
+#ifndef DOXYGEN
+constexpr size_t play_8x7_width = 8;
+constexpr size_t play_8x7_height = 7;
 static const PROGMEM uint8_t play_8x7_bits[] = {
    0x03, 0x0f, 0x3f, 0xff, 0x3f, 0x0f, 0x03 };
+#endif
