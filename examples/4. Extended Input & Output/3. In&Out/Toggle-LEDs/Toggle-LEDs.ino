@@ -1,6 +1,6 @@
 /**
- * @brief   This example demonstrates the use of push buttons and LEDs and how 
- *          to use shift registers and analog multiplexers to save pins.  
+ * This example demonstrates the use of push buttons and LEDs and how to use
+ * shift registers and analog multiplexers to save pins.
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  * 
@@ -68,7 +68,7 @@ SPIShiftRegisterOut<mux.length()> sreg = {SS, MSBFIRST};
 
 // Instantiate an array of momentary push buttons.
 // It generates an array of Buttons on pins:
-// { mux.pin(0), mux.pin(1) ... mux.pin(15) } 
+// { mux.pin(0), mux.pin(1) ... mux.pin(15) }
 // For each button it creates, it increments the pin number by 1,
 // and it starts counting from mux.pin(0)
 auto buttons = generateIncrementalArray<Button, mux.length()>(mux.pin(0));

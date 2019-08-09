@@ -1,9 +1,8 @@
 /**
- * @brief   This is an example on how to use an OLED display to display the 
- *          VU meters and mute/solo states of the eight first tracks, by using 
- *          the Arduino as a Mackie Control Universal. This is an example 
- *          modified to work with the ESP32 only, using MIDI over Bluetooth Low 
- *          Energy.  
+ * This is an example on how to use an OLED display to display the VU meters and
+ * mute/solo states of the eight first tracks, by using the Arduino as a Mackie
+ * Control Universal. This is an example modified to work with the ESP32 only, 
+ * using MIDI over Bluetooth Low Energy.  
  * 
  * @boards  ESP32
  * 

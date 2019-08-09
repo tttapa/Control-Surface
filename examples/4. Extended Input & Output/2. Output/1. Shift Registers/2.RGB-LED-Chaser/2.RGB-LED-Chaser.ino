@@ -1,7 +1,7 @@
 /**
- * @brief   This is an example of the ShiftRegisterOut class of the Control
- *          Surface library. It creates light effects using three 8-bit shift
- *          registers and some RGB LEDs.
+ * This is an example of the ShiftRegisterOut class of the Control Surface 
+ * library. It creates light effects using three 8-bit shift registers and some
+ * RGB LEDs.
  *
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  *

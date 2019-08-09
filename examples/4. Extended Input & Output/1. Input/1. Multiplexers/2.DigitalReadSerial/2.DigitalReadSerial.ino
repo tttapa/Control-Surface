@@ -1,7 +1,6 @@
 /**
- * @brief   This is an example of the AnalogMultiplex class. It prints the 
- *          states of all 16 switches connected to a multiplexers to the serial
- *          monitor.
+ * This is an example of the AnalogMultiplex class. It prints the states of all
+ * 16 switches connected to a multiplexers to the serial monitor.
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  * 

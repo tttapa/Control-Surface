@@ -1,6 +1,6 @@
 /**
- * @brief   This example demonstrates the use of LEDs that respond to incoming 
- *          MIDI note events.
+ * This example demonstrates the use of LEDs that respond to incoming  MIDI
+ * note events.
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  * 

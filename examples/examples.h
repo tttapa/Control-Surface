@@ -91,8 +91,8 @@
  * 1.First-Output
  * ==============
  *
- * @brief   This is the example used in the 'Getting Started' guide:
- *          https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
+ * This is the example used in the 'Getting Started' guide:
+ * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  *
@@ -106,9 +106,9 @@
  * 2.RGB-LED-Chaser
  * ================
  *
- * @brief   This is an example of the ShiftRegisterOut class of the Control
- *          Surface library. It creates light effects using three 8-bit shift
- *          registers and some RGB LEDs.
+ * This is an example of the ShiftRegisterOut class of the Control Surface 
+ * library. It creates light effects using three 8-bit shift registers and some
+ * RGB LEDs.
  *
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  *
@@ -171,10 +171,9 @@
  * 2.BitBang-Blink
  * ===============
  *
- * @brief   This example demonstrates the use of shift registers as if they were
- *          just normal IO pins. This version uses bit-banging to drive the 
- *          shift register. You should probably be using the SPI version 
- *          instead.
+ * This example demonstrates the use of shift registers as if they were just
+ * normal IO pins. This version uses bit-banging to drive the  shift register. 
+ * You should probably be using the SPI version instead.
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  * 
@@ -211,9 +210,8 @@
  * 1.SPI-Blink
  * ===========
  *
- * @brief   This example demonstrates the use of shift registers as if they were
- *          just normal IO pins. The SPI interface is used because it's easy and
- *          fast.
+ * This example demonstrates the use of shift registers as if they were just
+ * normal IO pins. The SPI interface is used because it's easy and fast.
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  * 
@@ -250,8 +248,8 @@
  * Toggle-LEDs
  * ===========
  *
- * @brief   This example demonstrates the use of push buttons and LEDs and how 
- *          to use shift registers and analog multiplexers to save pins.  
+ * This example demonstrates the use of push buttons and LEDs and how to use
+ * shift registers and analog multiplexers to save pins.
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  * 
@@ -303,8 +301,8 @@
  * 1.AnalogReadSerial
  * ==================
  *
- * @brief   This is an example of the AnalogMultiplex class. It prints the 
- *          values of all 16 inputs of a multiplexers to the serial monitor.
+ * This is an example of the AnalogMultiplex class. It prints the values of all
+ * 16 inputs of a multiplexers to the serial monitor.
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  * 
@@ -349,9 +347,8 @@
  * 2.DigitalReadSerial
  * ===================
  *
- * @brief   This is an example of the AnalogMultiplex class. It prints the 
- *          states of all 16 switches connected to a multiplexers to the serial
- *          monitor.
+ * This is an example of the AnalogMultiplex class. It prints the states of all
+ * 16 switches connected to a multiplexers to the serial monitor.
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  * 
@@ -398,8 +395,8 @@
  * 1.Note-LED
  * ==========
  *
- * @brief   This example demonstrates the use of LEDs that respond to incoming 
- *          MIDI note events.
+ * This example demonstrates the use of LEDs that respond to incoming  MIDI
+ * note events.
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  * 
@@ -463,11 +460,10 @@
  * VU-Meter-Bridge
  * ===============
  *
- * @brief   This is an example on how to use an OLED display to display the 
- *          VU meters and mute/solo states of the eight first tracks, by using 
- *          the Arduino as a Mackie Control Universal. This is an example 
- *          modified to work with the ESP32 only, using MIDI over Bluetooth Low 
- *          Energy.  
+ * This is an example on how to use an OLED display to display the VU meters and
+ * mute/solo states of the eight first tracks, by using the Arduino as a Mackie
+ * Control Universal. This is an example modified to work with the ESP32 only, 
+ * using MIDI over Bluetooth Low Energy.  
  * 
  * @boards  ESP32
  * 
