@@ -27,8 +27,8 @@
  * 
  * None.
  * 
- * Written by 
- * 
+ * Written by PieterP, 2019-08-09  
+ * https://github.com/tttapa/Control-Surface 
  */
 
 #include <Control_Surface.h> // Include the Control Surface library

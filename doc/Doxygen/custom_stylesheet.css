@@ -102,6 +102,9 @@ h2.memtitle, .memproto {
 .memdoc {
     border-radius: 0;
 }
+#MSearchResultsWindow {
+    margin-top: 8px;
+}
 
 /* --------------------- */
 

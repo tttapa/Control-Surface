@@ -86,6 +86,47 @@
  */
 
 /**
+ * @example   "MIDI-Controller-Finished-Example.ino"
+ * 
+ * MIDI-Controller-Finished-Example
+ * ================================
+ * 
+ * This is the code I used for my specific MIDI controller.  
+ * 
+ * @boards  Leonardo
+ * 
+ * Connections
+ * -----------
+ * 
+ * I used an Arduino Leonardo with:
+ * - 4 faders on A0-A3
+ * - 8 potentiometers on A4-A11
+ * - 1 rotary encoder on pins 0-1
+ * - 4 toggle switches on pins 2, 3, 5 and 7
+ * - 1 toggle switch (for bank select) on pin 11
+ * - 1 LED on pin 13
+ *
+ * Behavior
+ * --------
+ * 
+ * - When bank select is 0, faders 1-4 are channel volumes 1-4, potSide 1-4 are 
+ *   pan/balance of channel 1-4, switches 1-4 are mute channel 5-8.
+ * - When bank select is 1, faders 1-4 are channel volumes 5-8, potSide 1-4 are 
+ *   pan/balance of channel 5-8, switches 1-4 are mute channel 1-4.
+ * - PotTop 1-4 are not in the bank, because I use them as effect or EQ
+ *   parameters, and they are channel independent.
+ * - Enc1 is used for scrolling.
+ *
+ * Mapping
+ * -------
+ * 
+ * Create a custom mapping using the MIDI learn option in your DAW.
+ *
+ * Written by PieterP, 07-09-2017
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "1.First-Output.ino"
  * 
  * 1.First-Output
@@ -488,8 +529,8 @@
  * 
  * None.
  * 
- * Written by 
- * 
+ * Written by PieterP, 2019-08-09  
+ * https://github.com/tttapa/Control-Surface 
  */
 
 /**
@@ -547,5 +588,8 @@
  * allow="accelerometer; autoplay; encrypted-media; gyroscope;
  * picture-in-picture" allowfullscreen></iframe>
  * @endhtmlonly
+ * 
+ * Written by PieterP, 2019-08-09  
+ * https://github.com/tttapa/Control-Surface
  */
 
