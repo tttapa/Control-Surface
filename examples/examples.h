@@ -101,6 +101,71 @@
  */
 
 /**
+ * @example   "2.RGB-LED-Chaser.ino"
+ * 
+ * 2.RGB-LED-Chaser
+ * ================
+ *
+ * @brief   This is an example of the ShiftRegisterOut class of the Control
+ *          Surface library. It creates light effects using three 8-bit shift
+ *          registers and some RGB LEDs.
+ *
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ *
+ * Connections
+ * -----------
+ *
+ * Connect three daisy-chained shift registers to the SPI pins.  
+ * Connect 8 RGB LEDs (+ current limiting resistors) to the outputs of the shift
+ * registers.
+ * 
+ * ```
+ * CLK   >───────────┬──────────────────────┬──────────────────────┐
+ *           ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓
+ *           ┃     SH_CP     ┃      ┃     SH_CP     ┃      ┃     SH_CP     ┃
+ * MOSI  >───┨ DS        Q7S ┠──────┨ DS        Q7S ┠──────┨ DS        Q7S ┃
+ *           ┃     ST_CP     ┃      ┃     ST_CP     ┃      ┃     ST_CP     ┃
+ *           ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛
+ * SS    >───────────┴──────────────────────┴──────────────────────┘
+ * ```
+ * 
+ * The order of the colors doesn't matter. You can change them in software using
+ * the `ShiftRegisterOutRGB::redBit`, `ShiftRegisterOutRGB::greenBit` and 
+ * `ShiftRegisterOutRGB::blueBit` constants.
+ * 
+ * If you wired the LEDs as RGB (red first, then green and then blue), the red 
+ * bit is 0, the green bit is 1 and the blue bit is 2.  
+ * If you wired the LEDs as BGR (blue first, then green and then red), the red
+ * bit is 2, the green bit is 1 and the blue bit is 0.  
+ * Other combinations are possible as well.
+ * 
+ * Behavior
+ * --------
+ * 
+ * This example will turn on all red LEDs one by one, then turn them off one by
+ * one, next, it will turn on and off all green LEDs in the same manner, and
+ * finally the same for the blue LEDs. This is repeated indefinitely.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Demo
+ * ----
+ * 
+ * @htmlonly
+ * <iframe width="560" height="315"
+ * src="https://www.youtube.com/embed/7ywcTTdnseU?loop=1" frameborder="0"
+ * allow="accelerometer; autoplay; encrypted-media; gyroscope;
+ * picture-in-picture" allowfullscreen></iframe>
+ * @endhtmlonly
+ * 
+ * Written by Pieter P, 2018-07-13  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "2.BitBang-Blink.ino"
  * 
  * 2.BitBang-Blink
@@ -324,6 +389,40 @@
  * None.
  * 
  * Written by Pieter P, 2019-08-08   
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "1.Note-LED.ino"
+ * 
+ * 1.Note-LED
+ * ==========
+ *
+ * @brief   This example demonstrates the use of LEDs that respond to incoming 
+ *          MIDI note events.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * None.
+ * 
+ * Behavior
+ * --------
+ * 
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the built-in 
+ * LED will light up, if a Note Off event for that note is sent, the LED will 
+ * turn off.  
+ * (A Note On event with a velocity of zero also counts as a Note Off event.)
+ * 
+ * Mapping
+ * -------
+ * 
+ * Route the MIDI output of a MIDI keyboard to the Arduino's MIDI input. Then
+ * play a middle C on the keyboard.
+ * 
+ * Written by PieterP, 2019-02-07  
  * https://github.com/tttapa/Control-Surface
  */
 

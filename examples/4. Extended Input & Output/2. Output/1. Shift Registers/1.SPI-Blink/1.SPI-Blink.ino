@@ -42,13 +42,14 @@ SPIShiftRegisterOut<8> sreg = {SS, MSBFIRST};
 
 const pin_t ledPin = sreg.pin(0); // first pin of the shift register
 
-void setup() { // Initialize everything
-  sreg.begin();
+void setup() {
+  sreg.begin();            // Initialize the shift registers
   pinMode(ledPin, OUTPUT); // You don't even need this line, since
                            // shift registers are always outputs
 }
 
-void loop() { // Toggle the state of the LED every 1/2 second
+void loop() {
+  // Toggle the state of the LED every 1/2 second
   digitalWrite(ledPin, HIGH);
   delay(500);
   digitalWrite(ledPin, LOW);

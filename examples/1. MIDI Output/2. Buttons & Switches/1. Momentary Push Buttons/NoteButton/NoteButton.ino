@@ -36,6 +36,7 @@
 USBMIDI_Interface midi;
 
 using namespace MIDI_Notes;
+
 // Instantiate a NoteButton object
 NoteButton button = {
   5,                       // Push button on pin 5
