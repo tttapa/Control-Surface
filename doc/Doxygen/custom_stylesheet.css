@@ -94,6 +94,15 @@ ul.sm-dox {
 .directory td.desc {
     padding: 0.4em 0.5em 0.4em 0.5em;
 }
+h2.memtitle, .memproto {
+    background-color: #dde;
+    background-image: none;
+    border-radius: 0;
+}
+.memdoc {
+    border-radius: 0;
+}
+
 /* --------------------- */
 
 /* Portrait and Landscape */
