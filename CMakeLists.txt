@@ -45,7 +45,7 @@ set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} \
     -Wmissing-include-dirs")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
-    -g3 -O0 -Wall -Wextra -Werror \
+    -g3 -Og -Wall -Wextra -Werror \
     -fdiagnostics-show-option -Wsuggest-override \
     -Wdouble-promotion \
     -Wswitch-default -Wswitch-enum -Wimplicit-fallthrough=3 \
@@ -54,7 +54,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
     -pedantic -pedantic-errors")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
-    -g3 -O0 -Wall -Wextra -Werror")
+    -g3 -Og -Wall -Wextra -Werror")
 
 # set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
 
@@ -86,7 +86,7 @@ add_subdirectory(test)
 
 # Add documentation target
 add_custom_target(documentation rm -rf html && ./Scripts/examples.py && doxygen
-                  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../doc/Doxygen)
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../doc/Doxygen)
 
 # Add export documentation target
 add_custom_target(export_documentation ./Export.sh
@@ -98,12 +98,12 @@ WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../scripts)
 
 # Add XBM target
 add_custom_target(xbm python3 XBM-export.py
-                  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../src/Display/Bitmaps/Scripts/)
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../src/Display/Bitmaps/Scripts/)
 
 # Custom test targets
 add_custom_target(check tests
-                  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin/
-                  DEPENDS tests)
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin/
+    DEPENDS tests)
 
-add_custom_target(arduino ./build-arduino.sh
-                  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../scripts)
+add_custom_target(arduino ./build-arduino-examples.sh
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../scripts)

@@ -10,7 +10,7 @@
  * 
  * This class is to make it easier to get an array of all pins of the element.
  */
-template <pin_t N>
+template <uint16_t N>
 class StaticSizeExtendedIOElement : public ExtendedIOElement {
   protected:
     StaticSizeExtendedIOElement() : ExtendedIOElement{N} {}
@@ -22,4 +22,6 @@ class StaticSizeExtendedIOElement : public ExtendedIOElement {
     Array<pin_t, N> pins() const {
         return generateIncrementalArray<pin_t, N>(getStart());
     }
+
+    static constexpr uint16_t length() { return N; }
 };

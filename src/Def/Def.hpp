@@ -9,9 +9,10 @@
 #include <stdint.h> // uint8_t
 
 /// The type returned from analogRead and similar functions.
-typedef int16_t analog_t;
+using analog_t = int16_t;
 /// The type for Arduino pins (and ExtendedIOElement pins).
-typedef uint16_t pin_t;
+using pin_t = uint16_t;
+
 /// A special pin number that indicates an unused or invalid pin.
 constexpr pin_t NO_PIN = 1 << (8 * sizeof(pin_t) - 1);
 
@@ -52,20 +53,6 @@ struct EncoderPinList {
     uint8_t A; ///< The pin connected to the A pin of the encoder.
     uint8_t B; ///< The pin connected to the B pin of the encoder.
 };
-
-class MIDICNChannelAddress;
-
-/// A pointer to functions sending on/off MIDI events.
-using DigitalSendFunction = void (*)(MIDICNChannelAddress);
-/// A pointer to functions sending 7-bit continuous MIDI events.
-// value, address
-using ContinuousSendFunction7Bit = void (*)(uint8_t, MIDICNChannelAddress);
-/// A pointer to functions sending 14-bit continuous MIDI events.
-// value, address
-using ContinuousSendFunction14Bit = void (*)(uint16_t, MIDICNChannelAddress);
-/// A pointer to functions sending relative MIDI events.
-// delta, address
-using RelativeSendFunction = void (*)(long, MIDICNChannelAddress);
 
 /// The type used for Selector#s.
 using setting_t = uint8_t;

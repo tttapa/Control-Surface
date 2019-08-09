@@ -24,29 +24,29 @@ one MIDI interface. If you don't do that, you'll get an error when calling
 There are many different MIDI interfaces to choose from:
 
 - `USBMIDI_Interface`: On boards that support MIDI over USB natively, this will
-do exactly what you'd expect. You just have to plug it into your computer, and
-it shows up as a MIDI device. 
-On Arduinos without native USB capabilities (e.g. UNO or MEGA), you have to use 
-a custom firmware.
+  do exactly what you'd expect. You just have to plug it into your computer, and
+  it shows up as a MIDI device. 
+  On Arduinos without native USB capabilities (e.g. UNO or MEGA), you have to 
+  use custom firmware for the ATmega16U2.
 - `HardwareSerialMIDI_Interface`: This interface will send and receive MIDI 
-messages over a hardware UART. You can use it for MIDI over a 5-pin din 
-connector, for example.
+  messages over a hardware UART. You can use it for MIDI over a 5-pin DIN 
+  connector, for example.
 - `HairlessMIDI_Interface`: If you have an Arduino without native USB support, 
-an easy way to get the MIDI messages from your Arduino to your computer is 
-the [Hairless MIDI<->Serial Bridge](https://projectgus.github.io/hairless-midiserial/).
-In that case, you can use this MIDI interface. The default baud rate is 115200
-symbols per second.
+  an easy way to get the MIDI messages from your Arduino to your computer is 
+  the [Hairless MIDI<->Serial Bridge](https://projectgus.github.io/hairless-midiserial/).
+  In that case, you can use this MIDI interface. The default baud rate is 115200
+  symbols per second.
 - `BluetoothMIDI_Interface`: If you have an ESP32, you can send and receive MIDI
-messages over Bluetooth Low Energy. This interface is still very much
-experimental, but it's pretty cool. If you know more about the MIDI BLE
-protocol, feel free to suggest some improvements.
+  messages over Bluetooth Low Energy. This interface is still very much
+  experimental, but it's pretty cool. If you know more about the MIDI BLE
+  protocol, feel free to suggest some improvements.
 - `USBDebugMIDI_Interface`: Debugging MIDI Controllers can be very cumbersome. 
-There are MIDI monitors available, but you have to reconnect every time you 
-upload a new sketch, and sending MIDI to the Arduino is not always easy.  
-This interface is designed to help you with that. It prints outgoing MIDI
-messages to the Serial port in a readable format, and it allows you to enter 
-hexadecimal MIDI messages (as text) in the Serial monitor 
-(e.g. `90 3C 7F` to turn on middle C).
+  There are MIDI monitors available, but you have to reconnect every time you 
+  upload a new sketch, and sending MIDI to the Arduino is not always easy.  
+  This interface is designed to help you with that. It prints outgoing MIDI
+  messages to the Serial port in a readable format, and it allows you to enter 
+  hexadecimal MIDI messages (as text) in the Serial monitor 
+  (e.g. `90 3C 7F` to turn on middle C).
 
 A complete overview of the available MIDI interfaces can be found [here](
 https://tttapa.github.io/Control-Surface/Doc/Doxygen/dc/df0/group__MIDIInterfaces.html).
@@ -79,24 +79,24 @@ An overview of Extended Input/Output elements can be found [here](
 https://tttapa.github.io/Control-Surface/Doc/Doxygen/d1/d8e/group__ExtIO.html).
 
 In this example, we'll use an 8-channel CD74HC4051 analog multiplexer. This
-allows us to read eight analog inputs using only one analog pin on the Arduino,
+allows us to read eight analog inputs using just one analog pin on the Arduino,
 at the cost of only three digital output pins.
 
 Each of the eight analog inputs of the multiplexer can be connected to the wiper
 of one potentiometer.
 
 We'll connect the three address lines of the multiplexer (`S0`, `S1` and `S2`)
-to digital pins `10`, `11` and `12`. The output of the multiplexer goes to 
+to digital pins `3`, `4` and `5`. The output of the multiplexer goes to 
 analog pin `A0`. Connect the enable pin (`Ē`) to ground.
 
 ```cpp
-CD74HC4051 mux = { A0, {10, 11, 12} };
+CD74HC4051 mux = { A0, {3, 4, 5} };
 ```
 
 ### 4. Add MIDI Control Elements
 
-Now we can specify the objects that read the input of the from the 
-potentiometers and send out MIDI events.
+Now, we can specify the objects that read the input of the potentiometers and
+send out MIDI events accordingly.
 
 Again, I'll refer to the overview of MIDI Output Elements [here](
 https://tttapa.github.io/Control-Surface/Doc/Doxygen/d7/dcd/group__MIDIOutputElements.html).
@@ -110,15 +110,16 @@ analog pin number, and the second is the MIDI address.
 The MIDI address is a structure that consists of an address number, 
 the MIDI channel, and the cable number.  
 In this case, the address number is the controller number, which is a number
-from 0 to 120. The MIDI channel is a channel from `CHANNEL_1` until 
+from 0 to 119. The MIDI channel is a channel from `CHANNEL_1` until 
 `CHANNEL_16`. We'll ignore the cable number for now, if you don't specifically
-set it, it'll just use the default.  
+set it, it'll just use the default cable.  
 
 For the MIDI controller numbers, you can use the [predefined constants](
-https://tttapa.github.io/Control-Surface/Doc/Doxygen/d4/dbe/namespaceMIDI__CC.html).
+https://tttapa.github.io/Control-Surface/Doc/Doxygen/d4/dbe/namespaceMIDI__CC.html),
+or you can just use a number.
 
 ```cpp
-CCPotentiometer potentiometer = { A0, {MIDI_CC::Channel_Volume, CHANNEL_1} };
+CCPotentiometer potentiometer = { A1, {MIDI_CC::Channel_Volume, CHANNEL_1} };
 ```
 
 In our case, we don't want a single potentiometer, we want eight. It's much
@@ -145,17 +146,16 @@ CCPotentiometer volumePotentiometers[] = {
 > or they might not need a channel. In that case, you just leave out the 
 > optional parts that you don't need.  
 > For example, a `PBPotentiometer` doesn't need an address number, just a 
-> channel, so you can intantiate it as follows:
+> channel, so you can instantiate it as follows:
 > ```cpp
-> PBPotentiometer potentiometer = { A0, CHANNEL_9 };
+> PBPotentiometer potentiometer = { A1, CHANNEL_9 };
 > ```
 
 ### 5. Initialize the Control Surface
 
 There's a lot to be done in the `setup`: The MIDI interface has to be 
 initialized, all pins must be set to the correct mode, etc.  
-Luckily, the Control Surface Library
-handles most of it for you.
+Luckily, the Control Surface Library handles almost all of it for you.
 
 ```cpp
 void setup() {
@@ -168,13 +168,16 @@ void setup() {
 > Other errors will also be indicated this way.  
 > If you don't know why this happens, you should enable debug information in 
 > the `Control_Surface/src/Settings/Settings.h` file, and inspect the output
-> in the Serial Monitor.
+> in the Serial Monitor.  
+> Someday, I will add a "Troubleshooting" page. For now, if you have any 
+> problems, just [open an issue on GitHub](https://github.com/tttapa/Control-Surface/issues/new)
+> to remind me.
 
 ### 6. Continuously Update the Control Surface
 
 Now that everything is set up, you can just update the Control Surface forever.
-It will just refresh all inputs and send the appropriate MIDI messages if an
-input changes.
+It will refresh all inputs and send the appropriate MIDI messages if any of the
+inputs change.
 
 ```cpp
 void loop() {
@@ -189,7 +192,7 @@ void loop() {
 ### The finished sketch
 
 That's it!  
-Now you can just upload the sketch to your Arduino, open up your favourite audio
+Now you can just upload the sketch to your Arduino, open up your favorite audio
 software, map the potentiometers, and start playing!
 
 ```cpp

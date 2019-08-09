@@ -3,6 +3,7 @@
 - Change template structure for senders
 - Fix and reorder examples.
 - Move Wikis to tttapa.github.io.
+- Add FAQ and Troubleshooting pages
 - Add a getter for the button state, and rename `getState()` → update()
 - Cleanup structure of display elements.
 - Flashing LEDs

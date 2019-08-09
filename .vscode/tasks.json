@@ -41,7 +41,7 @@
         {
             "type": "shell",
             "label": "Make & Test & Build examples",
-            "command": "./build-arduino.sh $[$(nproc) * 2]",
+            "command": "./build-arduino-examples.sh $[$(nproc) * 2]",
             "problemMatcher": "$gcc",
             "options": {
                 "cwd": "${workspaceFolder}/scripts",

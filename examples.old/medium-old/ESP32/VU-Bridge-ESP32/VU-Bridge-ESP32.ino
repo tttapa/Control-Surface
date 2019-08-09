@@ -5,7 +5,11 @@
  *          modified to work with the ESP32 only, using MIDI over Bluetooth Low 
  *          Energy.  
  * 
- * ### Connections
+ * @boards  ESP32
+ * 
+ * Connections
+ * -----------
+ * 
  * This example drives two SSD1306 OLED displays over SPI
  *  - SCK:  SSD1306 D0
  *  - MOSI: SSD1306 D1
@@ -19,11 +23,16 @@
  * Alternatively, you could use an IO pin from the ESP32 to reset the 
  * display, but this just "wastes" a pin.
  * 
- * ### Behavior
- * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
+ * Behavior
+ * --------
  * 
  * The first display should now display the level meters and mute/solo states
  * of the first 8 tracks.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
  * 
  * @note    There seem to be some differences in the way some applications 
  *          handle VU meters: some expect the hardware to decay automatically,
@@ -31,7 +40,8 @@
  *          If you notice that the meters behave strangely, try both decay 
  *          options of the MCU::VU class, or try a different decay time.
  * 
- * ### Demo
+ * Demo
+ * ----
  * 
  * @htmlonly
  * <iframe width="560" height="315"
@@ -120,11 +130,12 @@ MIDINote solo[8] = {
 };
 
 const auto decay = MCU::VU::NO_DECAY;
+// Try this option if your DAW doesn't decay the VU meters automatically
 // const auto decay = 60;
 
 // VU meters
 MCU::VU VUMeters[8] = {
-  { 1, decay }, // The VU meter for the first track, don't decay
+  { 1, decay }, // The VU meter for the first track, decay time as specified ↑
   { 2, decay },
   { 3, decay },
   { 4, decay },
@@ -138,7 +149,7 @@ MCU::VU VUMeters[8] = {
 // ========================================================================== //
 
 MCU::VUDisplay vuDisp[8] = {
-  // Draw the first VU meter to the display, at position (2, 48),
+  // Draw the first VU meter to the display, at position (2, 50),
   // (12) pixels wide, blocks of (3) pixels high, a spacing between 
   // blocks of (1) pixel, and draw in white.
   { display, VUMeters[0], { 2 + 16 * 0, 50 }, 12, 3, 1, WHITE },
