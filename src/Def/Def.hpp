@@ -18,7 +18,7 @@ constexpr pin_t NO_PIN = 1 << (8 * sizeof(pin_t) - 1);
 
 /// A function pointer to a mapping function to map analog values.
 /// @see    MIDIFilteredAnalog::map()
-using MappingFunction = uint8_t (*)(uint8_t);
+using MappingFunction = analog_t (*)(analog_t);
 
 /// An easy alias for two-dimensional Arrays.
 template <class T, size_t nb_rows, size_t nb_cols>

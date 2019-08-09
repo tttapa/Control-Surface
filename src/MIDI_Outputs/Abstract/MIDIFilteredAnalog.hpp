@@ -43,8 +43,10 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the filtered analog value of `PRECISION` bits as a 
-     *          parameter, and should return a value of `PRECISION` bits.
+     *          should take the filtered analog value of 10 bits as a 
+     *          parameter, and should return a value of 10 bits.
+     * 
+     * @see     FilteredAnalog::map
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
 
@@ -107,8 +109,10 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the filtered analog value of `PRECISION` bits as a 
-     *          parameter, and should return a value of `PRECISION` bits.
+     *          should take the filtered analog value of 10 bits as a 
+     *          parameter, and should return a value of 10 bits.
+     * 
+     * @see     FilteredAnalog::map
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
 

@@ -455,6 +455,44 @@
  */
 
 /**
+ * @example   "1.Volume-Controlled-USB-DAC.ino"
+ * 
+ * 1.Volume-Controlled-USB-DAC
+ * ===========================
+ *
+ * This is an example of the VolumeControl class of the Control Surface library.
+ * 
+ * @boards Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer to change the output volume
+ * - 9:  BCK (I²S)
+ * - 11: SCK (I²S)
+ * - 22: DIN (I²S)
+ * - 23: LRCK (I²S)
+ * 
+ * Select a USB audio option from the Tools menu in the IDE.
+ * 
+ * Behavior
+ * --------
+ * 
+ * Upload the sketch, and select the Control Surface as the audio output of your
+ * computer. Connect the output of the DAC to a pair of headphones or powered
+ * speakers, and play some music.  
+ * You can now adjust the volume using the potentiometer.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by 
+ * 
+ */
+
+/**
  * @example   "VU-Meter-Bridge.ino"
  * 
  * VU-Meter-Bridge
