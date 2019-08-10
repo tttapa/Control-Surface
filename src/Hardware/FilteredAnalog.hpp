@@ -68,6 +68,15 @@ class FilteredAnalog {
     uint8_t getValue() const;
 
     /**
+     * @brief   Get the filtered value of the analog input with the mapping 
+     *          function applied as a floating point number from 0.0 to 1.0.
+     * 
+     * @return  The filtered value of the analog input, as a number
+     *          from 0.0 to 1.0.
+     */
+    float getFloatValue() const;
+
+    /**
      * @brief   Get the filtered value of the analog input any filtering or 
      *          mapping applied.
      *
@@ -108,6 +117,11 @@ bool FilteredAnalog<PRECISION>::update() {
 template <uint8_t PRECISION>
 uint8_t FilteredAnalog<PRECISION>::getValue() const {
     return hysteresis.getValue();
+}
+
+template <uint8_t PRECISION>
+float FilteredAnalog<PRECISION>::getFloatValue() const {
+    return getValue() * (1.0f / (ldexpf(1.0f, PRECISION) - 1.0f));
 }
 
 template <uint8_t PRECISION>

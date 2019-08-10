@@ -132,13 +132,28 @@
  * 1.First-Output
  * ==============
  *
- * This is the example used in the 'Getting Started' guide:
+ * This is the first example used in the 'Getting Started' guide:
  * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  *
  *  Written by PieterP, 2018-08-29  
  *  https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "2.First-Input.ino"
+ * 
+ * 2.First-Input
+ * =============
+ *
+ * This is the second example used in the 'Getting Started' guide:
+ * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ *
+ * Written by PieterP, 2018-08-29  
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -502,6 +517,7 @@
  * ===========================
  *
  * This is an example of the VolumeControl class of the Control Surface library.
+ * It acts as a USB Audio DAC (Digital-to-Analog Converter).
  * 
  * @boards Teensy 3.x
  * 
@@ -531,6 +547,71 @@
  * 
  * Written by PieterP, 2019-08-09  
  * https://github.com/tttapa/Control-Surface 
+ */
+
+/**
+ * @example   "2.VU-Meter-OLED-USB-DAC.ino"
+ * 
+ * 2.VU-Meter-OLED-USB-DAC
+ * =======================
+ *
+ * This example shows the usage of the AudioVU and AnalogVUDisplay classes of 
+ * the Control Surface library.  
+ * 
+ * It displays two analog-style VU meters on two 128×64 OLED displays.  
+ * The VU meters imitate the inertia and ballistics of real analog VU meters.
+ * 
+ * It acts as a USB Audio DAC (Digital-to-Analog Converter).
+ * 
+ * @boards  Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer to change the output volume
+ * - A1: wiper of a potentiometer to change the VU gain
+ * 
+ * - 9:  BCK (I²S)
+ * - 11: SCK (I²S)
+ * - 22: DIN (I²S)
+ * - 23: LRCK (I²S)
+ * 
+ * - 7:  OLED Data/D1 (SPI MOSI)
+ * - 13: OLED Clock/D0 (SPI CLK)
+ * - 17: OLED Data/Command
+ * - 10: Left OLED Cable Select
+ * - 18: Right OLED Cable Select
+ * 
+ * Add a capacitor between the reset pin of the display and ground, and a 
+ * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
+ * work fine.  
+ * You do need some way to reset the display, without it, it won't work.  
+ * Alternatively, you could use an IO pin from the Teensy to reset the 
+ * display, but this just "wastes" a pin.
+ * 
+ * Behavior
+ * --------
+ * 
+ * Upload the sketch, and select the Control Surface as the audio output of your
+ * computer. Connect the output of the DAC to a pair of headphones or powered
+ * speakers, and play some music.  
+ * You should see the VU meters come to life and jump around to the music.
+ * 
+ * You can now adjust the volume using the potentiometer on pin A0, and the 
+ * gain/sensitivity of the meters using the potentiometer on pin A1.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Demo
+ * ----
+ * 
+ * @todo Add a demo video.
+ * 
+ * Written by PieterP, 2019-08-09  
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**

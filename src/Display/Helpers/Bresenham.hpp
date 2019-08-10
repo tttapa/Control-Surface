@@ -29,10 +29,10 @@ class BresenhamLine {
           xinc(sgn(dx)), yinc(sgn(dy)), // increment steps for x and y
           steep(ady > adx) // whether to increment x or y on each iteration
     {
-        if (steep) // TODO: is this correct?
-            error = (adx - ady) / 2;
+        if (steep)
+            error = adx - ady + adx;
         else
-            error = (ady - adx) / 2;
+            error = ady - adx + ady;
     }
 
     BresenhamLine(Pixel start, float angle)

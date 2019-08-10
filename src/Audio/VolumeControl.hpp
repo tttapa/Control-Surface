@@ -41,7 +41,7 @@ class VolumeControl : public Updatable<Potentiometer> {
      */
     void update() override {
         if (filteredAnalog.update()) {
-            float gain = filteredAnalog.getValue() * maxGain / 127.0;
+            float gain = filteredAnalog.getFloatValue() * maxGain;
             for (AudioMixer4 *mixer : mixers)
                 for (uint8_t ch = 0; ch < 4; ch++)
                     mixer->gain(ch, gain);

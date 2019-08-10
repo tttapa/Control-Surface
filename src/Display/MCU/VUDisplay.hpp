@@ -72,7 +72,7 @@ class AnalogVUDisplay : public DisplayElement {
           color(color) {}
 
     void draw() override {
-        float value = (float)vu.getValue() / vu.getMax();
+        float value = vu.getFloatValue();
         drawNeedle(theta_min + value * theta_diff);
     }
 

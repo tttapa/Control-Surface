@@ -16,4 +16,5 @@ fi
     --default-board 'Teensy 3.x' \
     --directory ../examples \
     --parallel $p --jobs $j \
-    --board-options-file ../test/examples-board-options.txt
+    --board-options-file ../test/examples-board-options.txt \
+    # --print-successful

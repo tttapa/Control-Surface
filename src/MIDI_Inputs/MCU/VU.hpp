@@ -20,6 +20,8 @@ class IVU {
     virtual uint8_t getValue() const = 0;
     /** Return the overload status. */
     virtual bool getOverload() const = 0;
+    /** Get the VU meter value as a floating point number. */
+    virtual float getFloatValue() const { return (float)getValue() / getMax(); }
     /** Get the maximum value that this VU meter can return. */
     uint8_t getMax() const { return max; }
 

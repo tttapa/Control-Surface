@@ -53,8 +53,8 @@ class USBMIDI_Interface : public MIDI_Interface {
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
                   uint8_t cn) override {
         midiEventPacket_t msg = {
-            (uint8_t)(cn << 4) | (m >> 4),
-            (uint8_t)(m | c),
+            uint8_t((cn << 4) | (m >> 4)),
+            uint8_t(m | c),
             d1,
             d2,
         };

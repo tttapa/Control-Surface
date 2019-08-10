@@ -28,7 +28,7 @@ class AudioVU : public IVU {
      *          `getValue` will output a number in [0, max].
      */
     template <class T>
-    AudioVU(T &level, float gain = 1.0, uint8_t max = 100)
+    AudioVU(T &level, float gain = 1.0, uint8_t max = 255)
         : IVU(max), level{level}, gain(gain) {}
 
     /** 
@@ -48,7 +48,7 @@ class AudioVU : public IVU {
      */
     template <class T>
     AudioVU(T &level, MovingCoilBallistics ballistics, float gain = 1.0,
-            uint8_t max = 100)
+            uint8_t max = 255)
         : IVU(max), ballistics(ballistics), level(level), gain(gain) {}
 
     /** 
@@ -57,13 +57,22 @@ class AudioVU : public IVU {
      * @return  A value in [0, max]
      */
     uint8_t getValue() const override {
+        uint16_t value = getFloatValue() * max;
+        return value;
+    }
+
+    /** 
+     * @brief   Get the value of the VU meter.
+     * 
+     * @return  A value in [0.0, 1.0]
+     */
+    float getFloatValue() const override {
         if (!level.available())
             return 0;
         float peakLevel = level.read();
-        // TODO: should I round here?
-        uint8_t value = ballistics(peakLevel) * gain * (max + 1);
-        if (value > max)
-            value = max;
+        float value = ballistics(peakLevel) * gain;
+        if (value > 1.0f)
+            value = 1.0f;
         return value;
     }
 

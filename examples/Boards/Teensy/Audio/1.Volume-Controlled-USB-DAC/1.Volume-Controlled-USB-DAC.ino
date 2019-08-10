@@ -1,5 +1,6 @@
 /**
  * This is an example of the VolumeControl class of the Control Surface library.
+ * It acts as a USB Audio DAC (Digital-to-Analog Converter).
  * 
  * @boards Teensy 3.x
  * 
@@ -50,8 +51,8 @@ VolumeControl<2> volume = {{&mixer_L, &mixer_R}, A0, 1.0};
 void setup() {
   volume.begin();
   // Add a dead zone if you can't get the volume all the way to zero
-  // volume.map([](analog_t i) -> analog_t { 
-  //   return map(constrain(i, 10, 1013), 10, 1013, 0, 1023); 
+  // volume.map([](analog_t i) -> analog_t {
+  //   return map(constrain(i, 10, 1013), 10, 1013, 0, 1023);
   // });
   AudioMemory(6);
 }

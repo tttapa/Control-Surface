@@ -1,5 +1,5 @@
 /**
- * This is the example used in the 'Getting Started' guide:
+ * This is the first example used in the 'Getting Started' guide:
  * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
