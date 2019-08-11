@@ -15,12 +15,14 @@ class SwitchSelector : virtual public Selector<2> {
     void updateOutput(setting_t, setting_t) override {}
 
     void update() override {
-        Button::State state = button.getState();
+        Button::State state = button.update();
         if (state == Button::Falling)
             this->set(1);
         else if (state == Button::Rising)
             this->set(0);
     }
+
+    Button::State getButtonState() const { return button.getState(); }
 
   private:
     Button button;

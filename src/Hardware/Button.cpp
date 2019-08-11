@@ -12,23 +12,24 @@ void Button::invert() { invertState = true; }
 bool Button::invertState = false;
 #endif
 
-Button::State Button::getState() {
-    State rstate;
+Button::State Button::update() {
     // read the button state and invert it if "invertState" is true
-    bool state = ExtIO::digitalRead(pin) ^ invertState;
+    bool input = ExtIO::digitalRead(pin) ^ invertState;
+    bool prevState = debouncedState & 0b01;
     unsigned long now = millis();
     if (now - prevBounceTime > debounceTime) { // wait for state to stabilize
-        rstate = static_cast<State>((debouncedState << 1) | state);
-        debouncedState = state;
+        debouncedState = static_cast<State>((prevState << 1) | input);
     } else {
-        rstate = static_cast<State>((debouncedState << 1) | debouncedState);
+        debouncedState = static_cast<State>((prevState << 1) | prevState);
     }
-    if (state != prevState) { // Button is pressed, released or bounces
+    if (input != prevInput) { // Button is pressed, released or bounces
         prevBounceTime = now;
-        prevState = state;
+        prevInput = input;
     }
-    return rstate;
+    return debouncedState;
 }
+
+Button::State Button::getState() const { return debouncedState; }
 
 const char *Button::getName(Button::State state) {
     switch (state) {

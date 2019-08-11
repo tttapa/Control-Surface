@@ -28,12 +28,14 @@ class MIDIButtonLatching : public MIDIOutputElement {
   public:
     void begin() final override { button.begin(); }
     void update() final override {
-        Button::State state = button.getState();
+        Button::State state = button.update();
         if (state == Button::Falling || state == Button::Rising) {
             sender.sendOn(address);
             sender.sendOff(address);
         }
     }
+
+    Button::State getButtonState() const { return button.getState(); }
 
   private:
     Button button;

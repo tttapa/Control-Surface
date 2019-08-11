@@ -40,7 +40,7 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
 
     void begin() final override { button.begin(); }
     void update() final override {
-        Button::State state = button.getState();
+        Button::State state = button.update();
         MIDICNChannelAddress sendAddress = address;
         if (state == Button::Falling) {
             if (newChord)
@@ -62,6 +62,8 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }
 #endif
+
+    Button::State getButtonState() const { return button.getState(); }
 
     template <uint8_t N>
     void setChord(const Chord<N> &chord) {

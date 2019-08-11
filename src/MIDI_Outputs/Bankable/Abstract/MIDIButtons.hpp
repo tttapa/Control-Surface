@@ -40,7 +40,7 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
     void update() final override {
         MIDICNChannelAddress address = baseAddress;
         for (Button &button : buttons) {
-            Button::State state = button.getState();
+            Button::State state = button.update();
             if (state == Button::Falling) {
                 if (!activeButtons)
                     lock(); // Don't allow changing of the bank setting
@@ -64,6 +64,10 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
             button.invert();
     }
 #endif
+
+    Button::State getButtonState(size_t index) const {
+        return buttons[index].getState();
+    }
 
   private:
     Array<Button, NUMBER_OF_BUTTONS> buttons;

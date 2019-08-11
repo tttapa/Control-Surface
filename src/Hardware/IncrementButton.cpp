@@ -1,7 +1,7 @@
 #include "IncrementButton.hpp"
 
-IncrementButton::State IncrementButton::getState() {
-    Button::State incrState = button.getState();
+IncrementButton::State IncrementButton::updateImplementation() {
+    Button::State incrState = button.update();
 
     if (incrState == Button::Released) {
         // Button released, don't do anything

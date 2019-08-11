@@ -40,7 +40,7 @@ class MIDIIncrementDecrementButtons : public BankableMIDIOutput,
     void update() override {
         using IncrDecrButtons = IncrementDecrementButtons;
         MIDICNChannelAddress address = this->address + getAddressOffset();
-        switch (buttons.getState()) {
+        switch (buttons.update()) {
             case IncrDecrButtons::Increment: send(multiplier, address); break;
             case IncrDecrButtons::Decrement: send(-multiplier, address); break;
             case IncrDecrButtons::Reset: reset(); break;
@@ -64,6 +64,10 @@ class MIDIIncrementDecrementButtons : public BankableMIDIOutput,
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { buttons.invert(); }
 #endif
+
+    IncrementDecrementButtons::State getButtonsState() const {
+        return buttons.getState();
+    }
 
   private:
     IncrementDecrementButtons buttons;

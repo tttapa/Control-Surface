@@ -16,9 +16,11 @@ class IncrementSelector_Base : virtual public Selector<N> {
     void beginInput() override { button.begin(); }
 
     void update() override {
-        if (button.getState() == IncrementButton::Increment)
+        if (button.update() == IncrementButton::Increment)
             this->increment(wrap);
     }
+
+    IncrementButton::State getButtonState() const { return button.getState(); }
 
   private:
     IncrementButton button;

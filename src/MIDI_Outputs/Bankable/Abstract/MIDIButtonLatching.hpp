@@ -33,7 +33,7 @@ class MIDIButtonLatching : public MIDIOutputElement, public BankableMIDIOutput {
   public:
     void begin() final override { button.begin(); }
     void update() final override {
-        Button::State state = button.getState();
+        Button::State state = button.update();
         MIDICNChannelAddress sendAddress = address;
         sendAddress += getAddressOffset();
         if (state == Button::Falling || state == Button::Rising) {
@@ -41,6 +41,8 @@ class MIDIButtonLatching : public MIDIOutputElement, public BankableMIDIOutput {
             sender.sendOff(sendAddress);
         }
     }
+
+    Button::State getButtonState() const { return button.getState(); }
 
   private:
     Button button;

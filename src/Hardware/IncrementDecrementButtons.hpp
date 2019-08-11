@@ -51,8 +51,12 @@ class IncrementDecrementButtons {
 
     /**
      * @brief   Get the state of the increment button.
+     * 
+     * @todo    Add a getter that doesn't update the button.
      */
-    State getState();
+    State update() { return state = updateImplementation(); }
+
+    State getState() const { return state; }
 
 #ifdef INDIVIDUAL_BUTTON_INVERT
     /// @see    Button::invert
@@ -61,6 +65,9 @@ class IncrementDecrementButtons {
         decrementButton.invert();
     }
 #endif
+
+  protected:
+    State updateImplementation();
 
   private:
     Button incrementButton;
@@ -72,4 +79,5 @@ class IncrementDecrementButtons {
         AfterReset,
     } longPressState = Initial;
     unsigned long longPressRepeat;
+    State state = Nothing;
 };

@@ -14,7 +14,7 @@ class IncrementDecrementSelector_Base : virtual public Selector<N> {
 
     void update() override {
         using IncrDecrButtons = IncrementDecrementButtons;
-        switch (buttons.getState()) {
+        switch (buttons.update()) {
             case IncrDecrButtons::Increment: this->increment(wrap); break;
             case IncrDecrButtons::Decrement: this->decrement(wrap); break;
             case IncrDecrButtons::Reset: this->reset(); break;
@@ -26,6 +26,10 @@ class IncrementDecrementSelector_Base : virtual public Selector<N> {
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { buttons.invert(); }
 #endif
+
+    IncrementDecrementButtons::State getButtonsState() const {
+        return buttons.getState();
+    }
 
   private:
     IncrementDecrementButtons buttons;

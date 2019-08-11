@@ -55,7 +55,7 @@ class Button {
     };
 
     /**
-     * @brief Get the state of the button.
+     * @brief   Read the button and return its new state.
      *
      * The button is debounced, the debounce time can be set in
      * Settings.hpp: #BUTTON_DEBOUNCE_TIME.
@@ -81,7 +81,16 @@ class Button {
      * @return  The state of the button, either Button::PRESSED,
      *          Button::RELEASED, Button::FALLING or Button::RISING.
      */
-    State getState();
+    State update();
+
+    /**
+     * @brief   Get the state of the button, without updating it.
+     *          Returns the same value as the last call to @ref update.
+     *
+     * @return  The state of the button, either Button::PRESSED,
+     *          Button::RELEASED, Button::FALLING or Button::RISING.
+     */
+    State getState() const;
 
     /**
      * @brief   Return the name of the state as a string.
@@ -97,8 +106,8 @@ class Button {
   private:
     pin_t pin;
 
-    bool prevState = HIGH;
-    bool debouncedState = HIGH;
+    bool prevInput = HIGH;
+    State debouncedState = Released;
     unsigned long prevBounceTime = 0;
 
 #ifdef INDIVIDUAL_BUTTON_INVERT // Edit this in Settings/Settings.hpp
