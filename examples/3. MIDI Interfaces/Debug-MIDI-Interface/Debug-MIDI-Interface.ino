@@ -34,8 +34,8 @@
 
 #include <Control_Surface.h> // Include the Control Surface library
 
-// Instantiate a MIDI over USB interface.
-USBMIDI_Interface midi;
+// Instantiate a MIDI Debug interface at 115200 baud.
+USBDebugMIDI_Interface midi = 115200;
 
 using namespace MIDI_Notes;
 
