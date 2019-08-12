@@ -453,6 +453,45 @@
  */
 
 /**
+ * @example   "Debug-MIDI-Interface.ino"
+ * 
+ * Debug-MIDI-Interface
+ * ====================
+ * 
+ * This example demonstrates how to use the MIDI interface for debugging.
+ *
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Upload the sketch and open the Serial monitor.
+ * - Set the line ending to new line or new line and carriage return.
+ * - When the button on pin 5 is pressed, a MIDI Note On message is sent for
+ *   note C4, and you'll see that event printed in the Serial monitor.
+ * - When the button on pin 5 is released, a MIDI Note Off message is sent for 
+ *   note C4, and you'll also see that in the monitor.
+ * - When you type in "90 3C 7F" (without the quotes), and press enter, the 
+ *   built-in LED will light up.
+ * - When you type in "80 3C 7F", and press enter, the LED will turn off again.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2019-08-07  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "1.Note-LED.ino"
  * 
  * 1.Note-LED
