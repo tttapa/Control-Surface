@@ -8,7 +8,7 @@
  * Connections
  * -----------
  * 
- * - A0: wiper of a 10 potentiometer
+ * - A0: wiper of a potentiometer
  * 
  * Connect the left terminal of the potentiometer to ground, and the right one
  * to V<sub>CC</sub>.
@@ -37,7 +37,7 @@
 // Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
-// Instantiate a NoteButton object
+// Instantiate a CCPotentiometer object
 CCPotentiometer potentiometer = {
   A0,                                   // Analog pin connected to potentiometer
   {MIDI_CC::Channel_Volume, CHANNEL_1}, // Channel volume of channel 1
