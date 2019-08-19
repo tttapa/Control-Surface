@@ -69,7 +69,7 @@ address.footer > small {
     padding: 0.6em;
 }
 div#top {
-    position: sticky;
+    /* position: sticky; */
     top: 0;
     left: 0;
     width: 100%;
