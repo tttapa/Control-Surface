@@ -1,6 +1,6 @@
 #include "MIDI_Interface.hpp"
 
-MIDI_Interface::MIDI_Interface(MIDI_Parser &parser) : parser(parser) {
+MIDI_Interface::MIDI_Interface() {
     setAsDefault(); // Make this the default MIDI Interface
 }
 
@@ -14,47 +14,6 @@ MIDI_Interface *MIDI_Interface::DefaultMIDI_Interface = nullptr;
 void MIDI_Interface::setAsDefault() { DefaultMIDI_Interface = this; }
 
 MIDI_Interface *MIDI_Interface::getDefault() { return DefaultMIDI_Interface; }
-
-// -------------------------------- READING --------------------------------- //
-
-void MIDI_Interface::update() {
-    if (callbacks == nullptr)
-        return;
-    bool repeat = true;
-    while (repeat) {
-        MIDI_read_t event = read();
-        repeat = dispatchMIDIEvent(event);
-    }
-}
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wswitch-enum"
-
-bool MIDI_Interface::dispatchMIDIEvent(MIDI_read_t event) {
-    switch (event) {
-        case NO_MESSAGE: return false;
-        case CHANNEL_MESSAGE: onChannelMessage(); return true;
-        case SYSEX_MESSAGE: onSysExMessage(); return true;
-        default: onRealtimeMessage(static_cast<uint8_t>(event)); return true;
-    }
-}
-
-#pragma GCC diagnostic pop
-
-void MIDI_Interface::onRealtimeMessage(uint8_t message) {
-    if (callbacks)
-        callbacks->onRealtimeMessage(*this, message);
-}
-
-void MIDI_Interface::onChannelMessage() {
-    if (callbacks)
-        callbacks->onChannelMessage(*this);
-}
-
-void MIDI_Interface::onSysExMessage() {
-    if (callbacks)
-        callbacks->onSysExMessage(*this);
-}
 
 // -------------------------------- SENDING --------------------------------- //
 
@@ -121,13 +80,56 @@ void MIDI_Interface::sendPC(MIDICNChannel address, uint8_t value) {
 }
 
 // -------------------------------- PARSING --------------------------------- //
+Parsing_MIDI_Interface::Parsing_MIDI_Interface(MIDI_Parser &parser)
+    : parser(parser) {}
 
-ChannelMessage MIDI_Interface::getChannelMessage() {
+ChannelMessage Parsing_MIDI_Interface::getChannelMessage() {
     return parser.getChannelMessage();
 }
 
-SysExMessage MIDI_Interface::getSysExMessage() const {
+SysExMessage Parsing_MIDI_Interface::getSysExMessage() const {
     return parser.getSysEx();
 }
 
-uint8_t MIDI_Interface::getCN() const { return parser.getCN(); }
+uint8_t Parsing_MIDI_Interface::getCN() const { return parser.getCN(); }
+
+// -------------------------------- READING --------------------------------- //
+
+void Parsing_MIDI_Interface::update() {
+    if (callbacks == nullptr)
+        return;
+    bool repeat = true;
+    while (repeat) {
+        MIDI_read_t event = read();
+        repeat = dispatchMIDIEvent(event);
+    }
+}
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wswitch-enum"
+
+bool Parsing_MIDI_Interface::dispatchMIDIEvent(MIDI_read_t event) {
+    switch (event) {
+        case NO_MESSAGE: return false;
+        case CHANNEL_MESSAGE: onChannelMessage(); return true;
+        case SYSEX_MESSAGE: onSysExMessage(); return true;
+        default: onRealtimeMessage(static_cast<uint8_t>(event)); return true;
+    }
+}
+
+#pragma GCC diagnostic pop
+
+void Parsing_MIDI_Interface::onRealtimeMessage(uint8_t message) {
+    if (callbacks)
+        callbacks->onRealtimeMessage(*this, message);
+}
+
+void Parsing_MIDI_Interface::onChannelMessage() {
+    if (callbacks)
+        callbacks->onChannelMessage(*this);
+}
+
+void Parsing_MIDI_Interface::onSysExMessage() {
+    if (callbacks)
+        callbacks->onSysExMessage(*this);
+}

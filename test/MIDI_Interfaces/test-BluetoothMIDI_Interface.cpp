@@ -11,18 +11,23 @@ TEST(BluetoothMIDIInterface, initializeBegin) {
 
 class MockMIDI_Callbacks : public MIDI_Callbacks {
   public:
-    void onChannelMessage(MIDI_Interface &midi) override {
+    void onChannelMessage(Parsing_MIDI_Interface &midi) override {
         channelMessages.push_back(midi.getChannelMessage());
     }
-    void onSysExMessage(MIDI_Interface &midi) override {
+    void onSysExMessage(Parsing_MIDI_Interface &midi) override {
         SysExMessage msg = midi.getSysExMessage();
-        sysExMessages.insert(sysExMessages.end(), msg.data, 
-                                                  msg.data + msg.length);
+        sysExMessages.insert(sysExMessages.end(), msg.data,
+                             msg.data + msg.length);
         sysExCounter++;
+    }
+    void onRealtimeMessage(Parsing_MIDI_Interface &midi, uint8_t rtm) override {
+        (void)midi;
+        realtimeMessages.push_back(rtm);
     }
 
     std::vector<ChannelMessage> channelMessages;
     std::vector<uint8_t> sysExMessages;
+    std::vector<uint8_t> realtimeMessages;
     size_t sysExCounter = 0;
 };
 
@@ -44,9 +49,7 @@ TEST(BluetoothMIDIInterface, receiveChannelMessage) {
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 0);
 
-    std::vector<ChannelMessage> expectedChannelMessages = {
-        {0x90, 0x3C, 0x7F}
-    };
+    std::vector<ChannelMessage> expectedChannelMessages = {{0x90, 0x3C, 0x7F}};
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
 
@@ -61,14 +64,8 @@ TEST(BluetoothMIDIInterface, receiveMultipleChannelMessage) {
     midi.begin();
     midi.setCallbacks(&cb);
 
-    uint8_t data[] = {
-        0x80, 0x80, 
-        0x90, 0x3C, 0x7F,
-        0x80,
-        0x80, 0x3D, 0x7E,
-        0x80,
-        0xB1, 0x10, 0x40
-    };
+    uint8_t data[] = {0x80, 0x80, 0x90, 0x3C, 0x7F, 0x80, 0x80,
+                      0x3D, 0x7E, 0x80, 0xB1, 0x10, 0x40};
     midi.parse(data, sizeof(data));
 
     std::vector<uint8_t> expectedSysExMessages = {};
@@ -76,10 +73,7 @@ TEST(BluetoothMIDIInterface, receiveMultipleChannelMessage) {
     EXPECT_EQ(cb.sysExCounter, 0);
 
     std::vector<ChannelMessage> expectedChannelMessages = {
-        {0x90, 0x3C, 0x7F},
-        {0x80, 0x3D, 0x7E},
-        {0xB1, 0x10, 0x40}
-    };
+        {0x90, 0x3C, 0x7F}, {0x80, 0x3D, 0x7E}, {0xB1, 0x10, 0x40}};
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
 
@@ -94,13 +88,8 @@ TEST(BluetoothMIDIInterface, receiveMultipleChannelMessageRunningStatus) {
     midi.begin();
     midi.setCallbacks(&cb);
 
-    uint8_t data[] = {
-        0x80, 0x80, 
-        0x90, 0x3C, 0x7F,
-              0x3D, 0x7E,
-        0x80,
-        0xB1, 0x10, 0x40
-    };
+    uint8_t data[] = {0x80, 0x80, 0x90, 0x3C, 0x7F, 0x3D,
+                      0x7E, 0x80, 0xB1, 0x10, 0x40};
     midi.parse(data, sizeof(data));
 
     std::vector<uint8_t> expectedSysExMessages = {};
@@ -108,10 +97,7 @@ TEST(BluetoothMIDIInterface, receiveMultipleChannelMessageRunningStatus) {
     EXPECT_EQ(cb.sysExCounter, 0);
 
     std::vector<ChannelMessage> expectedChannelMessages = {
-        {0x90, 0x3C, 0x7F},
-        {0x90, 0x3D, 0x7E},
-        {0xB1, 0x10, 0x40}
-    };
+        {0x90, 0x3C, 0x7F}, {0x90, 0x3D, 0x7E}, {0xB1, 0x10, 0x40}};
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
 
@@ -127,14 +113,10 @@ TEST(BluetoothMIDIInterface,
     midi.begin();
     midi.setCallbacks(&cb);
 
-    uint8_t data[] = {
-        0x80, 0x80, 
-        0x90, 0x3C, 0x7F,
-        0x80, 0xF8, 0x80, // Real Time
-              0x3D, 0x7E, // Continuation of note on
-        0x80,
-        0xB1, 0x10, 0x40
-    };
+    uint8_t data[] = {0x80, 0x80, 0x90, 0x3C,
+                      0x7F, 0x80, 0xF8, 0x80, // Real Time
+                      0x3D, 0x7E,             // Continuation of note on
+                      0x80, 0xB1, 0x10, 0x40};
     midi.parse(data, sizeof(data));
 
     std::vector<uint8_t> expectedSysExMessages = {};
@@ -142,10 +124,7 @@ TEST(BluetoothMIDIInterface,
     EXPECT_EQ(cb.sysExCounter, 0);
 
     std::vector<ChannelMessage> expectedChannelMessages = {
-        {0x90, 0x3C, 0x7F},
-        {0x90, 0x3D, 0x7E},
-        {0xB1, 0x10, 0x40}
-    };
+        {0x90, 0x3C, 0x7F}, {0x90, 0x3D, 0x7E}, {0xB1, 0x10, 0x40}};
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
 
@@ -160,14 +139,8 @@ TEST(BluetoothMIDIInterface, receiveMultipleTwoByteChannelMessage) {
     midi.begin();
     midi.setCallbacks(&cb);
 
-    uint8_t data[] = {
-        0x80, 0x80, 
-        0xD0, 0x3C,
-        0x80,
-        0xC0, 0x3D,
-        0x80,
-        0xB1, 0x10, 0x40
-    };
+    uint8_t data[] = {0x80, 0x80, 0xD0, 0x3C, 0x80, 0xC0,
+                      0x3D, 0x80, 0xB1, 0x10, 0x40};
     midi.parse(data, sizeof(data));
 
     std::vector<uint8_t> expectedSysExMessages = {};
@@ -175,10 +148,7 @@ TEST(BluetoothMIDIInterface, receiveMultipleTwoByteChannelMessage) {
     EXPECT_EQ(cb.sysExCounter, 0);
 
     std::vector<ChannelMessage> expectedChannelMessages = {
-        {0xD0, 0x3C, 0x00},
-        {0xC0, 0x3D, 0x00},
-        {0xB1, 0x10, 0x40}
-    };
+        {0xD0, 0x3C, 0x00}, {0xC0, 0x3D, 0x00}, {0xB1, 0x10, 0x40}};
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
 
@@ -193,17 +163,11 @@ TEST(BluetoothMIDIInterface, receiveSysEx) {
     midi.begin();
     midi.setCallbacks(&cb);
 
-    uint8_t data[] = {
-        0x80, 0x80, 
-        0xF0, 0x01, 0x02, 0x03, 0x04, 
-        0x80,
-        0xF7
-    };
+    uint8_t data[] = {0x80, 0x80, 0xF0, 0x01, 0x02, 0x03, 0x04, 0x80, 0xF7};
     midi.parse(data, sizeof(data));
 
-    std::vector<uint8_t> expectedSysExMessages = {
-        0xF0, 0x01, 0x02, 0x03, 0x04, 0xF7
-    };
+    std::vector<uint8_t> expectedSysExMessages = {0xF0, 0x01, 0x02,
+                                                  0x03, 0x04, 0xF7};
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 1);
 
@@ -222,14 +186,11 @@ TEST(BluetoothMIDIInterface, receiveSysEx2) {
     midi.begin();
     midi.setCallbacks(&cb);
 
-    uint8_t data[] = {
-        0x95, 0xED, 0xF0, 0x1, 0x2, 0x3, 0x4, 0xED, 0xF7
-    };
+    uint8_t data[] = {0x95, 0xED, 0xF0, 0x1, 0x2, 0x3, 0x4, 0xED, 0xF7};
     midi.parse(data, sizeof(data));
 
-    std::vector<uint8_t> expectedSysExMessages = {
-        0xF0, 0x01, 0x02, 0x03, 0x04, 0xF7
-    };
+    std::vector<uint8_t> expectedSysExMessages = {0xF0, 0x01, 0x02,
+                                                  0x03, 0x04, 0xF7};
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 1);
 
@@ -248,22 +209,13 @@ TEST(BluetoothMIDIInterface, receiveSysExSplitAcrossPackets) {
     midi.begin();
     midi.setCallbacks(&cb);
 
-    uint8_t data1[] = {
-        0x80, 0x80, 
-        0xF0, 0x01, 0x02
-    };
-    uint8_t data2[] = {
-        0x80, 
-        0x03, 0x04, 
-        0x80,
-        0xF7
-    };
+    uint8_t data1[] = {0x80, 0x80, 0xF0, 0x01, 0x02};
+    uint8_t data2[] = {0x80, 0x03, 0x04, 0x80, 0xF7};
     midi.parse(data1, sizeof(data1));
     midi.parse(data2, sizeof(data2));
 
-    std::vector<uint8_t> expectedSysExMessages = {
-        0xF0, 0x01, 0x02, 0x03, 0x04, 0xF7
-    };
+    std::vector<uint8_t> expectedSysExMessages = {0xF0, 0x01, 0x02,
+                                                  0x03, 0x04, 0xF7};
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 1);
 
@@ -282,19 +234,13 @@ TEST(BluetoothMIDIInterface, receiveSysExAndRealTime) {
     midi.begin();
     midi.setCallbacks(&cb);
 
-    uint8_t data[] = {
-        0x80, 0x80, 
-        0xF0, 0x01, 0x02,
-        0x80, 0xF8, 0x80, // this is a system real time message
-        0x03, 0x04, 
-        0x80,
-        0xF7
-    };
+    uint8_t data[] = {0x80, 0x80, 0xF0, 0x01, 0x02,
+                      0x80, 0xF8, 0x80, // this is a system real time message
+                      0x03, 0x04, 0x80, 0xF7};
     midi.parse(data, sizeof(data));
 
-    std::vector<uint8_t> expectedSysExMessages = {
-        0xF0, 0x01, 0x02, 0x03, 0x04, 0xF7
-    };
+    std::vector<uint8_t> expectedSysExMessages = {0xF0, 0x01, 0x02,
+                                                  0x03, 0x04, 0xF7};
     EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
     EXPECT_EQ(cb.sysExCounter, 1);
 

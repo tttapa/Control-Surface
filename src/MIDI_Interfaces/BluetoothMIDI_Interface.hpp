@@ -10,7 +10,7 @@
  * 
  * @ingroup MIDIInterfaces
  */
-class BluetoothMIDI_Interface : public MIDI_Interface,
+class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
                                 public BLEServerCallbacks,
                                 public BLECharacteristicCallbacks {
 
@@ -65,7 +65,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     bool hasSpaceFor(size_t bytes) { return index + bytes < BUFFER_LENGTH; }
 
   public:
-    BluetoothMIDI_Interface() : MIDI_Interface(parser) {}
+    BluetoothMIDI_Interface() : Parsing_MIDI_Interface(parser) {}
 
     void begin() override { bleMidi.begin(this, this); }
 
@@ -113,7 +113,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
         update();
     }
 
-    void update() {
+    void update() override {
         if (micros() - startTime >= MAX_MESSAGE_TIME)
             publish();
     }

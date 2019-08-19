@@ -12,7 +12,7 @@
  * 
  * @ingroup MIDIInterfaces
  */
-class StreamMIDI_Interface : public MIDI_Interface {
+class StreamMIDI_Interface : public Parsing_MIDI_Interface {
   public:
     /**
      * @brief   Construct a StreamMIDI_Interface on the given Stream.
@@ -21,7 +21,7 @@ class StreamMIDI_Interface : public MIDI_Interface {
      *          The Stream interface.
      */
     StreamMIDI_Interface(Stream &stream)
-        : MIDI_Interface(parser), stream(stream) {}
+        : Parsing_MIDI_Interface(parser), stream(stream) {}
 
     MIDI_read_t read() override {
         while (stream.available() > 0) {
@@ -72,7 +72,7 @@ class StreamMIDI_Interface : public MIDI_Interface {
  * 
  * @ingroup MIDIInterfaces
  */
-template <typename T>
+template <class T>
 class SerialMIDI_Interface : public StreamMIDI_Interface {
   public:
     /**
@@ -118,45 +118,13 @@ class HardwareSerialMIDI_Interface
         : SerialMIDI_Interface(serial, baud) {}
 };
 
-// The Serial USB connection
-// (Why do I have to do this, why don't they all inherit from one single class?)
-
-// Boards without a USB connection (UNO, MEGA, Nano ...)
-#if !(defined(USBCON) || defined(CORE_TEENSY))
 /**
  * @brief   A class for MIDI interfaces sending and receiving
- *          MIDI messages over the USB CDC connection.
+ *          MIDI messages over the Serial port of the USB connection.
  *
- *          Boards without a native USB connection (UNO, MEGA, Nano ...)
- *          use HardwareSerial0 for USB communcication.
- * 
  * @ingroup MIDIInterfaces
  */
-class USBSerialMIDI_Interface : public HardwareSerialMIDI_Interface {
-  public:
-    /**
-     * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
-     *
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBSerialMIDI_Interface(unsigned long baud)
-        : HardwareSerialMIDI_Interface(Serial, baud) {}
-};
-
-// Teensies
-#elif defined(TEENSYDUINO)
-#if defined(TEENSY_SERIALUSB_ENABLED)
-/**
- * @brief   A class for MIDI interfaces sending and receiving
- *          MIDI messages over the USB Serial CDC connection.
- *
- *          The USB Serial connection `Serial` on Teensies is an instance of
- *          the `usb_serial_class`.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBSerialMIDI_Interface : public SerialMIDI_Interface<usb_serial_class> {
+class USBSerialMIDI_Interface : public SerialMIDI_Interface<decltype(Serial)> {
   public:
     /**
      * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
@@ -167,54 +135,6 @@ class USBSerialMIDI_Interface : public SerialMIDI_Interface<usb_serial_class> {
     USBSerialMIDI_Interface(unsigned long baud)
         : SerialMIDI_Interface(Serial, baud) {}
 };
-#endif
-
-// Arduino DUE
-#elif defined(ARDUINO_ARCH_SAM)
-/**
- * @brief   A class for MIDI interfaces sending and receiving
- *          MIDI messages over the USB Serial CDC connection.
- *
- *          The USB Serial connection `Serial` on the Arduino DUE is an
- *          instance of the `UARTClass`.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBSerialMIDI_Interface : public SerialMIDI_Interface<UARTClass> {
-  public:
-    /**
-     * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
-     *
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBSerialMIDI_Interface(unsigned long baud)
-        : SerialMIDI_Interface(Serial, baud) {}
-};
-
-// Others (Leonardo, Micro ... )
-#else
-/**
- * @brief   A class for MIDI interfaces sending and receiving
- *          MIDI messages over the USB Serial CDC connection.
- *
- *          The USB Serial connection `Serial` on the Arduino Leonardo, Micro,
- *          etc. is an instance of the `Serial_` class.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBSerialMIDI_Interface : public SerialMIDI_Interface<Serial_> {
-  public:
-    /**
-     * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
-     *
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBSerialMIDI_Interface(unsigned long baud)
-        : SerialMIDI_Interface(Serial, baud) {}
-};
-#endif
 
 #if !defined(TEENSYDUINO) ||                                                   \
     (defined(TEENSYDUINO) && defined(TEENSY_SERIALUSB_ENABLED))
