@@ -90,12 +90,11 @@ class MIDI_Interface {
     void sendPB(MIDICNChannel address, uint16_t value);
     void sendPC(MIDICNChannel address, uint8_t value);
 
-    virtual void update() = 0;
-
     /**
-     * @todo    Documentation
+     * @brief   Read the MIDI interface and call the callback if a message is
+     *          received.
      */
-    virtual MIDI_read_t read() = 0;
+    virtual void update() = 0;
 
     /**
      * @brief   Return the default MIDI interface.
@@ -114,9 +113,8 @@ class MIDI_Interface {
      * @param   cb
      *          A pointer to an object that implements the MIDI_Callbacks class.
      */
-    void setCallbacks(MIDI_Callbacks *cb) { this->callbacks = cb; }
+    virtual void setCallbacks(MIDI_Callbacks *cb) = 0;
 
-  private:
     /**
      * @brief   Low-level function for sending a 3-byte MIDI message.
      */
@@ -131,9 +129,6 @@ class MIDI_Interface {
      * @brief   Low-level function for sending a system exclusive MIDI message.
      */
     virtual void sendImpl(const uint8_t *data, size_t length, uint8_t cn) = 0;
-
-  protected:
-    MIDI_Callbacks *callbacks = nullptr;
 
   private:
     static MIDI_Interface *DefaultMIDI_Interface;
@@ -174,10 +169,17 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
 
     void update() override;
 
+    void setCallbacks(MIDI_Callbacks *cb) override { this->callbacks = cb; }
+
   protected:
     bool dispatchMIDIEvent(MIDI_read_t event);
 
   private:
+    /**
+     * @todo    Documentation
+     */
+    virtual MIDI_read_t read() = 0;
+
     void onRealtimeMessage(uint8_t message);
 
     void onChannelMessage();
@@ -186,6 +188,7 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
 
   private:
     MIDI_Parser &parser;
+    MIDI_Callbacks *callbacks = nullptr;
 };
 
 /**
