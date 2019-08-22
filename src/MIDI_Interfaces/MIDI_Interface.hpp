@@ -12,11 +12,13 @@ class MIDI_Callbacks;
  * @brief   An abstract class for MIDI interfaces.
  */
 class MIDI_Interface {
-  public:
+  protected:
     /**
      * @brief   Constructor.
      */
     MIDI_Interface();
+
+  public:
     /**
      * @brief   Destructor.
      */
