@@ -98,46 +98,17 @@ class HardwareSerialDebugMIDI_Interface
         : SerialDebugMIDI_Interface(serial, baud) {}
 };
 
-// The Serial USB connection
-// (Why do I have to do this, why don't they all inherit from one single class?)
-
-// Boards without a USB connection (UNO, MEGA, Nano ...)
-#if !(defined(USBCON) || defined(CORE_TEENSY))
 /**
  * @brief   A class for debug MIDI interfaces sending and receiving 
  *          human-readable MIDI messages over the USB CDC connection.
  * 
  *          Boards without a native USB connection (UNO, MEGA, Nano ...)
- *          use HardwareSerial0 for USB communcication.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBDebugMIDI_Interface : public HardwareSerialDebugMIDI_Interface {
-  public:
-    /**
-     * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.
-     * 
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBDebugMIDI_Interface(unsigned long baud = defaultBaudRate)
-        : HardwareSerialDebugMIDI_Interface(Serial, baud) {}
-};
-
-// Teensies
-#elif defined(CORE_TEENSY)
-#if defined(TEENSY_SERIALUSB_ENABLED)
-/**
- * @brief   A class for debug MIDI interfaces sending and receiving 
- *          human-readable MIDI messages over the USB Serial CDC connection.
- * 
- *          The USB Serial connection `Serial` on Teensies is an instance of
- *          the `usb_serial_class`.
+ *          use HardwareSerial0 for USB communication.
  * 
  * @ingroup MIDIInterfaces
  */
 class USBDebugMIDI_Interface
-    : public SerialDebugMIDI_Interface<usb_serial_class> {
+    : public SerialDebugMIDI_Interface<decltype(Serial)> {
   public:
     /**
      * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.
@@ -148,54 +119,6 @@ class USBDebugMIDI_Interface
     USBDebugMIDI_Interface(unsigned long baud = defaultBaudRate)
         : SerialDebugMIDI_Interface(Serial, baud) {}
 };
-#endif
-
-// Arduino DUE
-#elif defined(ARDUINO_ARCH_SAM)
-/**
- * @brief   A class for debug MIDI interfaces sending and receiving 
- *          human-readable MIDI messages over the USB Serial CDC connection.
- * 
- *          The USB Serial connection `Serial` on the Arduino DUE is an 
- *          instance of the `UARTClass`.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<UARTClass> {
-  public:
-    /**
-     * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.
-     * 
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBDebugMIDI_Interface(unsigned long baud = defaultBaudRate)
-        : SerialDebugMIDI_Interface(Serial, baud) {}
-};
-
-// Others (Leonardo, Micro ... )
-#else
-/**
- * @brief   A class for debug MIDI interfaces sending and receiving 
- *          human-readable MIDI messages over the USB Serial CDC connection.
- * 
- *          The USB Serial connection `Serial` on the Arduino Leonardo, Micro,
- *          etc. is an instance of the `Serial_` class.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<Serial_> {
-  public:
-    /**
-     * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.
-     * 
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBDebugMIDI_Interface(unsigned long baud = defaultBaudRate)
-        : SerialDebugMIDI_Interface(Serial, baud) {}
-};
-#endif
 
 #if defined(__AVR__) || defined(CORE_TEENSY)
 #include <SoftwareSerial.h>

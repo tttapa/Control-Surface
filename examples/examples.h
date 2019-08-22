@@ -1,4 +1,86 @@
 /**
+ * @example   "Multiple-Control-Change-Potentiometers.ino"
+ * 
+ * Multiple-Control-Change-Potentiometers
+ * ======================================
+ * 
+ * This example demonstrates the use of MIDI Control Change potentiometers that
+ * can be used for changing effect parameters, volumes, pan and balance
+ * controls, etc. It can control almost any knob in your DAW software. 
+ * This example shows how to define multiple potentiometers using an array.
+ *
+ * @boards  AVR, AVR USB, Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of the first potentiometer
+ * - A1: wiper of the second potentiometer
+ * - ...
+ * - A5: wiper of the sixth potentiometer
+ * 
+ * Connect the left terminal of the potentiometers to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When you turn a potentiometer, you should receive MIDI Control Change
+ *   events, with a value between 0 and 127.
+ * - The analog inputs are filtered, so there shouldn't be any noise on the 
+ *   position. If there is, check your wiring, and make sure that the resistance
+ *   of the potentiometers isn't too high (10 kΩ is ideal).
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the potentiometers to a function.
+ * 
+ * Written by PieterP, 2019-08-13  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Control-Change-Potentiometer.ino"
+ * 
+ * Control-Change-Potentiometer
+ * ============================
+ * 
+ * This example demonstrates the use of MIDI Control Change potentiometers that
+ * can be used for changing effect parameters, volumes, pan and balance
+ * controls, etc. It can control almost any knob in your DAW software.
+ *
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When you turn the potentiometer, you should receive MIDI Control Change
+ *   events, with a value between 0 and 127.
+ * - The analog input is filtered, so there shouldn't be any noise on the 
+ *   position. If there is, check your wiring, and make sure that the resistance
+ *   of the potentiometer isn't too high (10 kΩ is ideal).
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the potentiometer to a function.
+ * 
+ * Written by PieterP, 2019-08-13  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "NoteButton.ino"
  * 
  * NoteButton
@@ -151,6 +233,13 @@
  * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
  * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * @htmlonly
+ * <iframe width="560" height="315"
+ * src="https://www.youtube.com/embed/u1IbYXPT6mM?loop=1" frameborder="0"
+ * allow="accelerometer; autoplay; encrypted-media; gyroscope;
+ * picture-in-picture" allowfullscreen></iframe>
+ * @endhtmlonly
  *
  * Written by PieterP, 2018-08-29  
  * https://github.com/tttapa/Control-Surface
@@ -442,6 +531,82 @@
  * None.
  * 
  * Written by Pieter P, 2019-08-08   
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Debug-MIDI-Interface.ino"
+ * 
+ * Debug-MIDI-Interface
+ * ====================
+ * 
+ * This example demonstrates how to use the MIDI interface for debugging.
+ *
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Upload the sketch and open the Serial monitor.
+ * - Set the line ending to new line or new line and carriage return.
+ * - When the button on pin 5 is pressed, a MIDI Note On message is sent for
+ *   note C4, and you'll see that event printed in the Serial monitor.
+ * - When the button on pin 5 is released, a MIDI Note Off message is sent for 
+ *   note C4, and you'll also see that in the monitor.
+ * - When you type in "90 3C 7F" (without the quotes), and press enter, the 
+ *   built-in LED will light up.
+ * - When you type in "80 3C 7F", and press enter, the LED will turn off again.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2019-08-07  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Dual-MIDI-Interface.ino"
+ * 
+ * Dual-MIDI-Interface
+ * ===================
+ * 
+ * This example demonstrates how to group together two or more MIDI interfaces,
+ * so you can send the MIDI output over both MIDI USB and 5-pin DIN MIDI, for 
+ * example. MIDI input is received from all interfaces as well.
+ *
+ * @boards  AVR USB, Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When you turn the potentiometer, you should receive MIDI Control Change
+ *   events on both the Serial MIDI interface and the USB MIDI interface.
+ * - When a MIDI Note event for middle C is received on either MIDI interface,
+ *   the state of the built-in LED will change accordingly.
+ * 
+ * Mapping
+ * -------
+ * 
+ * - None
+ * 
+ * Written by PieterP, 2019-08-22  
  * https://github.com/tttapa/Control-Surface
  */
 

@@ -4,23 +4,9 @@
 #include <Def/MIDICNChannelAddress.hpp>
 #include <MIDI_Parsers/MIDI_Parser.hpp>
 
-#define MIDI_BAUD 31250
+constexpr auto MIDI_BAUD = 31250;
 
-class MIDI_Interface;
-
-/**
- * @brief   A class for callbacks from MIDI input.
- */
-class MIDI_Callbacks {
-    friend class MIDI_Interface;
-    virtual void onChannelMessage(UNUSED_PARAM MIDI_Interface &midi) {}
-    virtual void onSysExMessage(UNUSED_PARAM MIDI_Interface &midi) {}
-    virtual void onRealtimeMessage(UNUSED_PARAM MIDI_Interface &midi,
-                                   UNUSED_PARAM uint8_t message) {}
-
-  public:
-    virtual ~MIDI_Callbacks() = default;
-};
+class MIDI_Callbacks;
 
 /**
  * @brief   An abstract class for MIDI interfaces.
@@ -28,18 +14,11 @@ class MIDI_Callbacks {
 class MIDI_Interface {
   protected:
     /**
-     * @brief   Construct a MIDI interface with the given parser.
-     *
-     *          Also set this interface as the default MIDI interface.
-     *
-     * @param   parser
-     *          The MIDI parser to use for the interface.
+     * @brief   Constructor.
      */
-    MIDI_Interface(MIDI_Parser &parser);
+    MIDI_Interface();
 
   public:
-    void setCallbacks(MIDI_Callbacks *cb) { this->callbacks = cb; }
-
     /**
      * @brief   Destructor.
      */
@@ -113,12 +92,11 @@ class MIDI_Interface {
     void sendPB(MIDICNChannel address, uint16_t value);
     void sendPC(MIDICNChannel address, uint8_t value);
 
-    void update();
-
     /**
-     * @todo    Documentation
+     * @brief   Read the MIDI interface and call the callback if a message is
+     *          received.
      */
-    virtual MIDI_read_t read() = 0;
+    virtual void update() = 0;
 
     /**
      * @brief   Return the default MIDI interface.
@@ -130,7 +108,15 @@ class MIDI_Interface {
      */
     void setAsDefault();
 
-  private:
+    /**
+     * @brief   Set the callbacks that will be called when a MIDI message is 
+     *          received.
+     * 
+     * @param   cb
+     *          A pointer to an object that implements the MIDI_Callbacks class.
+     */
+    virtual void setCallbacks(MIDI_Callbacks *cb) = 0;
+
     /**
      * @brief   Low-level function for sending a 3-byte MIDI message.
      */
@@ -146,20 +132,28 @@ class MIDI_Interface {
      */
     virtual void sendImpl(const uint8_t *data, size_t length, uint8_t cn) = 0;
 
-  protected:
-    void onChannelMessage();
-    void onSysExMessage();
-    void onRealtimeMessage(uint8_t message);
-
-    bool dispatchMIDIEvent(MIDI_read_t event);
-
   private:
     static MIDI_Interface *DefaultMIDI_Interface;
+};
 
-    MIDI_Parser &parser;
-    MIDI_Callbacks *callbacks = nullptr;
+/**
+ * @brief   An abstract class for MIDI interfaces.
+ */
+class Parsing_MIDI_Interface : public MIDI_Interface {
+  protected:
+    /**
+     * @brief   Construct a MIDI interface with the given parser.
+     *
+     *          Also set this interface as the default MIDI interface.
+     *
+     * @param   parser
+     *          The MIDI parser to use for the interface.
+     */
+    Parsing_MIDI_Interface(MIDI_Parser &parser);
 
   public:
+    MIDI_Parser &getParser() { return parser; }
+
     /**
      * @brief   Return the received channel message.
      */
@@ -174,4 +168,40 @@ class MIDI_Interface {
      * @brief   Return the cable number of the received message.
      */
     uint8_t getCN() const;
+
+    void update() override;
+
+    void setCallbacks(MIDI_Callbacks *cb) override { this->callbacks = cb; }
+
+  protected:
+    bool dispatchMIDIEvent(MIDI_read_t event);
+
+  private:
+    /**
+     * @todo    Documentation
+     */
+    virtual MIDI_read_t read() = 0;
+
+    void onRealtimeMessage(uint8_t message);
+
+    void onChannelMessage();
+
+    void onSysExMessage();
+
+  private:
+    MIDI_Parser &parser;
+    MIDI_Callbacks *callbacks = nullptr;
+};
+
+/**
+ * @brief   A class for callbacks from MIDI input.
+ */
+class MIDI_Callbacks {
+  public:
+    virtual void onChannelMessage(UNUSED_PARAM Parsing_MIDI_Interface &midi) {}
+    virtual void onSysExMessage(UNUSED_PARAM Parsing_MIDI_Interface &midi) {}
+    virtual void onRealtimeMessage(UNUSED_PARAM Parsing_MIDI_Interface &midi,
+                                   UNUSED_PARAM uint8_t message) {}
+
+    virtual ~MIDI_Callbacks() = default;
 };

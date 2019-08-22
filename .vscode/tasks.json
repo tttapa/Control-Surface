@@ -76,5 +76,14 @@
             },
             "problemMatcher": [],
         },
+        {
+            "type": "shell",
+            "label": "Clear Build Directory and Run CMake",
+            "command": "rm -rf build/* && mkdir -p build && cd build && cmake ..",
+            "options": {
+                "cwd": "${workspaceFolder}",
+            },
+            "problemMatcher": [],
+        },
     ]
 }

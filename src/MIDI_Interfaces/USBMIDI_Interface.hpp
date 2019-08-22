@@ -28,12 +28,12 @@
  * 
  * @ingroup MIDIInterfaces
  */
-class USBMIDI_Interface : public MIDI_Interface {
+class USBMIDI_Interface : public Parsing_MIDI_Interface {
   public:
     /**
      * @brief   Construct a new USBMIDI_Interface.
      */
-    USBMIDI_Interface() : MIDI_Interface(parser) {}
+    USBMIDI_Interface() : Parsing_MIDI_Interface(parser) {}
 
   private:
     USBMIDI_Parser parser;

@@ -62,7 +62,7 @@ void Control_Surface_::updateMidiInput() {
     midi.update();
 }
 
-void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
+void Control_Surface_::onChannelMessage(Parsing_MIDI_Interface &midi) {
     ChannelMessage midichmsg = midi.getChannelMessage();
     ChannelMessageMatcher midimsg = {midichmsg};
 
@@ -113,7 +113,7 @@ void Control_Surface_::onChannelMessage(MIDI_Interface &midi) {
     }
 }
 
-void Control_Surface_::onSysExMessage(MIDI_Interface &midi) {
+void Control_Surface_::onSysExMessage(Parsing_MIDI_Interface &midi) {
     // System Exclusive
     SysExMessage msg = midi.getSysExMessage();
 #ifdef DEBUG_MIDI_PACKETS
@@ -132,7 +132,7 @@ void Control_Surface_::onSysExMessage(MIDI_Interface &midi) {
     // TODO: handle SysEx input
 }
 
-void Control_Surface_::onRealtimeMessage(MIDI_Interface &midi,
+void Control_Surface_::onRealtimeMessage(Parsing_MIDI_Interface &midi,
                                          uint8_t message) {
     RealTimeMessage rtMessage = {message, midi.getCN()};
     // If the Real-Time Message callback exists, call it to see if we have to
