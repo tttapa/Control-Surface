@@ -9,7 +9,7 @@
 #include <stdint.h> // uint8_t
 
 /// The type returned from analogRead and similar functions.
-using analog_t = int16_t;
+using analog_t = uint16_t;
 /// The type for Arduino pins (and ExtendedIOElement pins).
 using pin_t = uint16_t;
 

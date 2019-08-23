@@ -18,7 +18,7 @@ namespace Bankable {
  *
  * @ingroup MIDIOutputElements
  */
-class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<8>, 8> {
+class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>, 10> {
   public:
     /** 
      * @brief   Create a new Bankable PBPotentiometer object with the given 
@@ -33,7 +33,7 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<8>, 8> {
      */
     PBPotentiometer(const OutputBankConfig &bank, pin_t analogPin,
                     const MIDICNChannel &address,
-                    const PitchBendSender<8> &sender = {})
+                    const PitchBendSender<10> &sender = {})
         : MIDIFilteredAnalog{bank, analogPin, address, sender} {}
 };
 

@@ -109,8 +109,8 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the filtered analog value of 10 bits as a 
-     *          parameter, and should return a value of 10 bits.
+     *          should take the filtered analog value of 16 bits as a 
+     *          parameter, and should return a value of 16 bits.
      * 
      * @see     FilteredAnalog::map
      */
@@ -129,7 +129,8 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
     uint8_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<PRECISION> filteredAnalog;
+    FilteredAnalog<PRECISION, 6, ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
+        filteredAnalog;
     const MIDICNChannelAddress address;
     Sender sender;
 };
