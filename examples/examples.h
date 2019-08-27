@@ -42,6 +42,45 @@
  */
 
 /**
+ * @example   "Pitch-Bend-Potentiometer.ino"
+ * 
+ * Pitch-Bend-Potentiometer
+ * ========================
+ * 
+ * This example demonstrates the use of MIDI Pitch Bend potentiometers that
+ * can be used for changing effect parameters, volumes, pan and balance
+ * controls, etc. It can control almost any knob in your DAW software.
+ *
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When you turn the potentiometer, you should receive MIDI Pitch Bend
+ *   events on channel 1, with a value between -8192 and +8191.
+ * - The analog input is filtered, so there shouldn't be any noise on the 
+ *   position. If there is, check your wiring, and make sure that the resistance
+ *   of the potentiometer isn't too high (10 kΩ is ideal).
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the potentiometer to a function.
+ * 
+ * Written by PieterP, 2019-08-23  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "Control-Change-Potentiometer.ino"
  * 
  * Control-Change-Potentiometer
@@ -570,6 +609,43 @@
  * None.
  * 
  * Written by PieterP, 2019-08-07  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Dual-MIDI-Interface.ino"
+ * 
+ * Dual-MIDI-Interface
+ * ===================
+ * 
+ * This example demonstrates how to group together two or more MIDI interfaces,
+ * so you can send the MIDI output over both MIDI USB and 5-pin DIN MIDI, for 
+ * example. MIDI input is received from all interfaces as well.
+ *
+ * @boards  AVR USB, Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When you turn the potentiometer, you should receive MIDI Control Change
+ *   events on both the Serial MIDI interface and the USB MIDI interface.
+ * - When a MIDI Note event for middle C is received on either MIDI interface,
+ *   the state of the built-in LED will change accordingly.
+ * 
+ * Mapping
+ * -------
+ * 
+ * - None
+ * 
+ * Written by PieterP, 2019-08-22  
  * https://github.com/tttapa/Control-Surface
  */
 

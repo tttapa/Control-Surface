@@ -18,9 +18,9 @@ class EmptyParser : public MIDI_Parser {
 #pragma GCC diagnostic ignored "-Wsuggest-override"
 #endif
 
-class MockMIDI_Interface : public MIDI_Interface {
+class MockMIDI_Interface : public Parsing_MIDI_Interface {
   public:
-    MockMIDI_Interface() : MIDI_Interface(EmptyParser::getInstance()) {}
+    MockMIDI_Interface() : Parsing_MIDI_Interface(EmptyParser::getInstance()) {}
     MOCK_METHOD0(read, MIDI_read_t(void));
     MOCK_METHOD5(sendImpl, void(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));
     MOCK_METHOD4(sendImpl, void(uint8_t, uint8_t, uint8_t, uint8_t));

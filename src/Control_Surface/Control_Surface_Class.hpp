@@ -68,19 +68,20 @@ class Control_Surface_ : public MIDI_Callbacks {
      * @brief   The callback to be called when a MIDI channel message is
      *          received.
      */
-    void onChannelMessage(MIDI_Interface &midi) override;
+    void onChannelMessage(Parsing_MIDI_Interface &midi) override;
 
     /** 
      * @brief   The callback to be called when a MIDI System Exclusive message
      *          is received.
      */
-    void onSysExMessage(MIDI_Interface &midi) override;
+    void onSysExMessage(Parsing_MIDI_Interface &midi) override;
 
     /** 
      * @brief   The callback to be called when a MIDI Real-Time message is 
      *          received.
      */
-    void onRealtimeMessage(MIDI_Interface &midi, uint8_t message) override;
+    void onRealtimeMessage(Parsing_MIDI_Interface &midi,
+                           uint8_t message) override;
 
     /// A timer to know when to update the analog inputs.
     Timer<micros> potentiometerTimer = {FILTERED_INPUT_UPDATE_INTERVAL};
