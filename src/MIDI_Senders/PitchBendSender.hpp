@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Control_Surface/Control_Surface_Class.hpp>
+#include <Helpers/IncreaseBitDepth.hpp>
 
 template <uint8_t INPUT_PRECISION_BITS>
 class PitchBendSender {

@@ -140,7 +140,8 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
     uint8_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<PRECISION> filteredAnalog;
+    FilteredAnalog<PRECISION, 6, ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
+        filteredAnalog;
     const MIDICNChannelAddress address;
     Sender sender;
 };
