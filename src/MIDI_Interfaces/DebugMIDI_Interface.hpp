@@ -120,7 +120,10 @@ class USBDebugMIDI_Interface
         : SerialDebugMIDI_Interface(Serial, baud) {}
 };
 
-#if defined(__AVR__) || defined(CORE_TEENSY)
+// TODO: Teensy 4.0 SoftwareSerial bug
+#if defined(__AVR__) || (defined(TEENSYDUINO) && TEENSYDUINO != 147) ||        \
+    (defined(TEENSYDUINO) && !defined(__IMXRT1052__) &&                        \
+     !defined(__IMXRT1062__))
 #include <SoftwareSerial.h>
 /**
  * @brief   A class for debug MIDI interfaces sending and receiving 

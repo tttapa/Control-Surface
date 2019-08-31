@@ -158,7 +158,10 @@ class HairlessMIDI_Interface : public USBSerialMIDI_Interface {
 };
 #endif
 
-#if defined(__AVR__) || defined(TEENSYDUINO)
+// TODO: Teensy 4.0 SoftwareSerial bug
+#if defined(__AVR__) || (defined(TEENSYDUINO) && TEENSYDUINO != 147) ||        \
+    (defined(TEENSYDUINO) && !defined(__IMXRT1052__) &&                        \
+     !defined(__IMXRT1062__))
 #include <SoftwareSerial.h>
 /**
  * @brief   A class for MIDI interfaces sending and receiving
