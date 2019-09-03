@@ -24,6 +24,11 @@ class MultiMIDI_Interface : public MIDI_Interface {
     MultiMIDI_Interface(const Array<Parsing_MIDI_Interface *, N> &interfaces)
         : interfaces(interfaces) {}
 
+    void begin() override {
+        for (auto interface : interfaces)
+            interface->begin();
+    }
+
     void update() override {
         for (auto interface : interfaces)
             interface->update();
