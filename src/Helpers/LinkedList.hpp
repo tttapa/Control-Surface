@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #ifndef __AVR__
+#include <Helpers/MinMaxFix.hpp>
 #include <iterator>
 #endif
 
@@ -180,7 +181,7 @@ class DoublyLinkedList {
      *          The new node to be inserted.
      */
     void insertSorted(Node *node) {
-        insertSorted(node, [](Node &lhs, Node& rhs) { return lhs < rhs; });
+        insertSorted(node, [](Node &lhs, Node &rhs) { return lhs < rhs; });
     }
 
     /**
