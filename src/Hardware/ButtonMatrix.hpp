@@ -6,8 +6,7 @@
 #include <Def/Def.hpp>
 
 /**
- * @brief   A MIDI_Control_Element that reads the states of a button matrix and
- *          sends it over MIDI.
+ * @brief   A class that reads the states of a button matrix.
  *
  * @tparam  nb_rows
  *          The number of rows in the button matrix.
