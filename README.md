@@ -99,6 +99,15 @@ Another thing is that not everything is implemented yet, and many features are
 not yet fully documented. If you have a specific feature request that is not yet
 fully implemented, feel free to open an issue, so I know where to focus on first.
 
+## Recent Breaking Changes
+
+ - 31edaa6b76477fdf152c19fd34f7e4e8506561e6  
+   The mapping function is now applied before applying hysteresis. This means 
+   that the input and output values of the function should be 10 bits wide 
+   instead of 7. The signature of the mapping function is now 
+   `analog_t f(analog_t raw)`, where the return value and raw are both numbers
+   in [0, 1023].
+
 ## Work in progress
 
 - Adding support for motorized faders
