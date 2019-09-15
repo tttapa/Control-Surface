@@ -209,7 +209,7 @@ template <class T>
 void printHex(Print &printer, T val)
 {
     if (showbasePrintStream)
-        printer.print(F("0x"));
+        printer.print("0x");
     bool nonZero = false;
     for (int i = sizeof(val) - 1; i >= 0; i--)
     {
@@ -229,7 +229,7 @@ template <class T>
 void printBin(Print &printer, T val)
 {
     if (showbasePrintStream)
-        printer.print(F("0b"));
+        printer.print("0b");
     bool nonZero = false;
     for (int i = sizeof(val) - 1; i >= 0; i--)
     {

@@ -112,7 +112,7 @@ class AudioVU : public IVU {
                     return static_cast<AudioAnalyzePeak *>(analyzer)->read();
                 case RMS:
                     return static_cast<AudioAnalyzeRMS *>(analyzer)->read();
-                default: ERROR("Error: Invalid type!", 0x1518); return 0;
+                default: ERROR(F("Error: Invalid type!"), 0x1518); return 0;
             }
         }
 
@@ -124,7 +124,7 @@ class AudioVU : public IVU {
                 case RMS:
                     return static_cast<AudioAnalyzeRMS *>(analyzer)
                         ->available();
-                default: ERROR("Error: Invalid type!", 0x1519); return false;
+                default: ERROR(F("Error: Invalid type!"), 0x1519); return false;
             }
         }
     } level;
