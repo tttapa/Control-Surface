@@ -21,18 +21,25 @@
 // Instantiate a MIDI Interface to use
 USBMIDI_Interface midi;
 
-// Instantiate an analog multiplexer
-SPIShiftRegisterOut<8> sreg = {10, MSBFIRST};
+// Instantiate a shift register as output for the LEDs
+SPIShiftRegisterOut<8> sreg = {
+  10,       // Latch pin (ST_CP)
+  MSBFIRST, // Byte order
+};
 
 using namespace MIDI_Notes;
 
 // Create an array of LEDs that listen to MIDI Note messages, turning on and off
 // the LEDs connected to the eight input pins of the shift register
 MIDINoteLED leds[] = {
-  {sreg.pin(0), note(C, 4)}, {sreg.pin(1), note(D, 4)},
-  {sreg.pin(2), note(E, 4)}, {sreg.pin(3), note(F, 4)},
-  {sreg.pin(4), note(G, 4)}, {sreg.pin(5), note(A, 4)},
-  {sreg.pin(6), note(B, 4)}, {sreg.pin(7), note(C, 5)},
+  {sreg.pin(0), note(C, 4)}, // LED pin, address (note number, channel, cable)
+  {sreg.pin(1), note(D, 4)}, //
+  {sreg.pin(2), note(E, 4)}, //
+  {sreg.pin(3), note(F, 4)}, //
+  {sreg.pin(4), note(G, 4)}, //
+  {sreg.pin(5), note(A, 4)}, //
+  {sreg.pin(6), note(B, 4)}, //
+  {sreg.pin(7), note(C, 5)}, //
 };
 
 // Initialize the Control Surface

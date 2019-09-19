@@ -21,7 +21,7 @@
  * - 23: LRCK (I²S)
  * 
  * - 7:  OLED Data/D1 (SPI MOSI)
- * - 13: OLED Clock/D0 (SPI CLK)
+ * - 13: OLED Clock/D0 (SPI SCK)
  * - 17: OLED Data/Command
  * - 10: Left OLED Cable Select
  * - 18: Right OLED Cable Select

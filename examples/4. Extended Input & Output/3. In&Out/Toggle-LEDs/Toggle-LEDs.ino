@@ -9,7 +9,7 @@
  * 
  *   - SS:   74HC595 ST_CP
  *   - MOSI: 74HC595 DS
- *   - CLK:  74HC595 SH_CP
+ *   - SCK:  74HC595 SH_CP
  *   - 2: 74HC4067 A (COM OUT/IN)
  *   - 3: 74HC4067 S0
  *   - 4: 74HC4067 S1

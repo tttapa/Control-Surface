@@ -5,7 +5,7 @@
 Instructions on how to install the library and its dependencies can be found 
 on the page [Installation](@ref Installation.md).
 
-## Creating a Basic MIDI Controller Sketch
+## First Output: Creating a Basic MIDI Controller Sketch
 
 ### 1. Include the library
 
@@ -15,7 +15,7 @@ Include the library so that you have access to all the classes and functions.
 #include <Control_Surface.h>
 ```
 
-### 2. Instantiate a MIDI Interface
+### 2. Instantiate a MIDI Interface               {#first-output-midi-interface}
 
 If you want to send out or receive MIDI messages, you have to define at least 
 one MIDI interface. If you don't do that, you'll get an error when calling
@@ -68,7 +68,7 @@ USBMIDI_Interface midi;
 > In that case, you can instantiate it as follows:  
 > `USBDebugMIDI_Interface midi = {115200};`
 
-### 3. Add Extended Input/Output elements (optional)
+### 3. Add Extended Input/Output elements (optional)       {#first-output-extio}
 
 If your MIDI Controller requires many in- or outputs, you'll run out of IO pins
 really quickly. A solution is to use multiplexers or shift registers.  
@@ -105,7 +105,7 @@ Let's define a single potentiometer on pin `A1` that sends out MIDI Control
 Change events.  
 In the [documentation](
 https://tttapa.github.io/Control-Surface/Doc/Doxygen/db/d32/classCCPotentiometer.html),
-you'll find that the first argument for the `CCPotentiometer` class is the 
+you'll find that the first argument for the `CCPotentiometer` constructor is the 
 analog pin number, and the second is the MIDI address.  
 The MIDI address is a structure that consists of an address number, 
 the MIDI channel, and the cable number.  
@@ -151,7 +151,7 @@ CCPotentiometer volumePotentiometers[] = {
 > PBPotentiometer potentiometer = { A1, CHANNEL_9 };
 > ```
 
-### 5. Initialize the Control Surface
+### 5. Initialize the Control Surface                       {#first-output-init}
 
 There's a lot to be done in the `setup`: The MIDI interface has to be 
 initialized, all pins must be set to the correct mode, etc.  
@@ -173,7 +173,7 @@ void setup() {
 > problems, just [open an issue on GitHub](https://github.com/tttapa/Control-Surface/issues/new)
 > to remind me.
 
-### 6. Continuously Update the Control Surface
+### 6. Continuously Update the Control Surface              {#first-output-loop}
 
 Now that everything is set up, you can just update the Control Surface forever.
 It will refresh all inputs and send the appropriate MIDI messages if any of the
@@ -196,28 +196,206 @@ Now you can just upload the sketch to your Arduino, open up your favorite audio
 software, map the potentiometers, and start playing!
 
 ```cpp
+// Include the library
 #include <Control_Surface.h>
 
+// Instantiate a MIDI Interface to use
 USBMIDI_Interface midi;
 
-CD74HC4051 mux = { A0, {10, 11, 12} };
-
-CCPotentiometer volumePotentiometers[] = {
-    { mux.pin(0), {MIDI_CC::Channel_Volume, CHANNEL_1} },
-    { mux.pin(1), {MIDI_CC::Channel_Volume, CHANNEL_2} },
-    { mux.pin(2), {MIDI_CC::Channel_Volume, CHANNEL_3} },
-    { mux.pin(3), {MIDI_CC::Channel_Volume, CHANNEL_4} },
-    { mux.pin(4), {MIDI_CC::Channel_Volume, CHANNEL_5} },
-    { mux.pin(5), {MIDI_CC::Channel_Volume, CHANNEL_6} },
-    { mux.pin(6), {MIDI_CC::Channel_Volume, CHANNEL_7} },
-    { mux.pin(7), {MIDI_CC::Channel_Volume, CHANNEL_8} },
+// Instantiate an analog multiplexer
+CD74HC4051 mux = {
+  A0,       // Analog input pin
+  {3, 4, 5} // Address pins S0, S1, S2
 };
 
+// Create an array of potentiometers that send out
+// MIDI Control Change messages when you turn the
+// potentiometers connected to the eight input pins of
+// the multiplexer
+CCPotentiometer volumePotentiometers[] = {
+  {mux.pin(0), {MIDI_CC::Channel_Volume, CHANNEL_1}},
+  {mux.pin(1), {MIDI_CC::Channel_Volume, CHANNEL_2}},
+  {mux.pin(2), {MIDI_CC::Channel_Volume, CHANNEL_3}},
+  {mux.pin(3), {MIDI_CC::Channel_Volume, CHANNEL_4}},
+  {mux.pin(4), {MIDI_CC::Channel_Volume, CHANNEL_5}},
+  {mux.pin(5), {MIDI_CC::Channel_Volume, CHANNEL_6}},
+  {mux.pin(6), {MIDI_CC::Channel_Volume, CHANNEL_7}},
+  {mux.pin(7), {MIDI_CC::Channel_Volume, CHANNEL_8}},
+};
+
+// Initialize the Control Surface
 void setup() {
-    Control_Surface.begin();
+  Control_Surface.begin();
 }
 
+// Update the Control Surface
 void loop() {
-    Control_Surface.loop();
+  Control_Surface.loop();
+}
+```
+
+## First Input: Getting Feedback from the MIDI Software
+
+Unlike the MIDI Controller library, the Control Surface library does support
+MIDI input.  
+This example shows how to use the `MIDINoteLED` class to turn on and off LEDs
+when MIDI Note On/Off messages are received.  
+The example shows the use of a shift register to drive the LEDs, but you can of
+course use any pins you want.
+
+@htmlonly
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/u1IbYXPT6mM?loop=1" frameborder="0"
+allow="accelerometer; autoplay; encrypted-media; gyroscope;
+picture-in-picture" allowfullscreen></iframe>
+@endhtmlonly
+
+### 1. Include the library
+
+Include the library so that you have access to all the classes and functions.
+
+```cpp
+#include <Control_Surface.h>
+```
+
+### 2. Instantiate a MIDI Interface
+
+See @ref first-output-midi-interface "First Output: Instantiate a MIDI Interface".
+
+### 3. Add Extended Input/Output elements (optional)
+
+See @ref first-output-extio "First Output: Add Extended Input/Output elements".
+
+In this example, we'll use a 74HC595 8-bit serial in/parallel out shift 
+register. This allows us to drive eight LEDs using just the SPI bus and a single
+digital pin. You can daisy chain as many shift registers as you want, without
+requiring any more pins.
+
+Each of the eight outputs of the shift register can be connected to the anode of
+an LED. Connect the cathodes to ground through a current-limiting resistor.
+
+Connect the clock input (SH_CP or SRCLK) of the shift register to the Arduino's 
+SCK pin, the serial data input (DS or SER) of the shift register to the 
+Arduino's MOSI pin, and the latch pin (ST_CP or RCLK) of the shift register to
+digital pin 10 of the Arduino. Connect the Output Enable pin (OE) of the shift
+register to ground, and the Master Reset (MR) pin of the shift register to Vcc
+to enable it.
+
+```cpp
+SPIShiftRegisterOut<8> sreg = {
+  10,       // Latch pin (ST_CP)
+  MSBFIRST, // Bit order
+};
+```
+
+The `8` between angle brackets (`<>`) is the number of bits of the shift 
+register. If you would daisy chain two 8-bit shift registers together, you would
+use `16`, for example.  
+The bit order determines which pin of the shift register is the first pin in the
+program. 
+`MSBFIRST` means "most significant bit first". You can also use `LSBFIRST` 
+(least significant bit first).
+
+### 4. Add MIDI Control Elements
+
+Now, we can specify the objects that listen for MIDI input, and update the 
+status of the LEDs accordingly.
+
+I'll refer to the overview of MIDI Input Elements [here](
+https://tttapa.github.io/Control-Surface/Doc/Doxygen/d7/dcd/group__MIDIInputElements.html).
+
+Let's define a single LED on pin `13` that listens for MIDI Note events for
+a middle C on channel 1.  
+In the [documentation](https://tttapa.github.io/Control-Surface/Doc/Doxygen/d9/d0d/classMIDINoteLED.html),
+you'll find that the first argument for the `MIDINoteLED` constructor is the 
+number of the pin with the LED connected, and the second is the MIDI address.  
+The MIDI address is a structure that consists of an address number, 
+the MIDI channel, and the cable number.  
+In this case, the address number is the note number, which is a number
+from 0 to 127. The MIDI channel is a channel from `CHANNEL_1` until 
+`CHANNEL_16`. We'll ignore the cable number for now, if you don't specifically
+set it, it'll just use the default cable.  
+
+For the MIDI note numbers, you can use the note constants and the `note`
+function in the 
+[`MIDI_Notes` namespace](https://tttapa.github.io/Control-Surface/Doc/Doxygen/d7/d78/namespaceMIDI__Notes.html),
+or you can just use a number.
+
+```cpp
+using namespace MIDI_Notes;
+MIDINoteLED noteLed = { 13, {note(C, 4), CHANNEL_1} };  // C4 = middle C
+```
+
+In our case, we don't want a single LED, we want eight. It's much easier to 
+define them in an array.  
+Also note how we state that it should use the pins of the shift register we 
+defined in the previous step. We omit the channel here, so it'll just use the
+default channel, `CHANNEL_1`.
+
+> **Note**: The first pin is `pin(0)`, not `pin(1)`.
+
+```cpp
+MIDINoteLED leds[] = {
+  {sreg.pin(0), note(C, 4)},
+  {sreg.pin(1), note(D, 4)},
+  {sreg.pin(2), note(E, 4)},
+  {sreg.pin(3), note(F, 4)},
+  {sreg.pin(4), note(G, 4)},
+  {sreg.pin(5), note(A, 4)},
+  {sreg.pin(6), note(B, 4)},
+  {sreg.pin(7), note(C, 5)},
+};
+```
+
+### 5. Initialize the Control Surface
+
+See @ref first-output-init "First Output: Initialize the Control Surface".
+
+### 6. Continuously Update the Control Surface
+
+See @ref first-output-loop "First Output: Continuously Update the Control Surface".
+
+### The finished sketch
+
+That's it!  
+Now you can just upload the sketch to your Arduino, open up your favorite audio
+software, redirect the MIDI output to the Arduino, and start playing!
+
+```cpp
+// Include the library
+#include <Control_Surface.h>
+
+// Instantiate a MIDI Interface to use
+USBMIDI_Interface midi;
+
+// Instantiate a shift register as output for the LEDs
+SPIShiftRegisterOut<8> sreg = {
+  10,       // Latch pin (ST_CP)
+  MSBFIRST, // Byte order
+};
+
+using namespace MIDI_Notes;
+
+// Create an array of LEDs that listen to MIDI Note messages, turning on and off
+// the LEDs connected to the eight input pins of the shift register
+MIDINoteLED leds[] = {
+  {sreg.pin(0), note(C, 4)}, // LED pin, address (note number, channel, cable)
+  {sreg.pin(1), note(D, 4)}, //
+  {sreg.pin(2), note(E, 4)}, //
+  {sreg.pin(3), note(F, 4)}, //
+  {sreg.pin(4), note(G, 4)}, //
+  {sreg.pin(5), note(A, 4)}, //
+  {sreg.pin(6), note(B, 4)}, //
+  {sreg.pin(7), note(C, 5)}, //
+};
+
+// Initialize the Control Surface
+void setup() {
+  Control_Surface.begin();
+}
+
+// Update the Control Surface
+void loop() {
+  Control_Surface.loop();
 }
 ```

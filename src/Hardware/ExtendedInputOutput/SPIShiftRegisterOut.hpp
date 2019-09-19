@@ -28,7 +28,7 @@ class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
      * of the first one to the input of the second one:
      * 
      * ```
-     * CLK   >───────────┬──────────────────────┬───────── ⋯
+     * SCK   >───────────┬──────────────────────┬───────── ⋯
      *           ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓ 
      *           ┃     SH_CP     ┃      ┃     SH_CP     ┃ 
      * MOSI  >───┨ DS        Q7S ┠──────┨ DS        Q7S ┠─ ⋯

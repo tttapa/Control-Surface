@@ -131,7 +131,8 @@ The automatically generated Doxygen documentation for this library can be found
 ## Information for developers
 
 Information for people that would like to help improve the Control Surface library can be found here: <https://tttapa.github.io/Pages/Arduino/Control-Surface/Developers/index.html>  
-It covers installation instructions for developers, instructions for running the tests and generating documentation, a style guide, etc.
+It covers installation instructions for developers, instructions for running the
+tests and generating documentation, a style guide, etc.
 
 ## Known problems
 

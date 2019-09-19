@@ -9,7 +9,7 @@
  * 
  *   - SS:   74HC595 ST_CP
  *   - MOSI: 74HC595 DS
- *   - CLK:  74HC595 SH_CP
+ *   - SCK:  74HC595 SH_CP
  * 
  * Connect an LED (and series resistor) between the first output of the
  * shift register and ground.

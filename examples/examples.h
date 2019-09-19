@@ -304,7 +304,7 @@
  * registers.
  * 
  * ```
- * CLK   >───────────┬──────────────────────┬──────────────────────┐
+ * SCK   >───────────┬──────────────────────┬──────────────────────┐
  *           ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓
  *           ┃     SH_CP     ┃      ┃     SH_CP     ┃      ┃     SH_CP     ┃
  * MOSI  >───┨ DS        Q7S ┠──────┨ DS        Q7S ┠──────┨ DS        Q7S ┃
@@ -404,7 +404,7 @@
  * 
  *   - SS:   74HC595 ST_CP
  *   - MOSI: 74HC595 DS
- *   - CLK:  74HC595 SH_CP
+ *   - SCK:  74HC595 SH_CP
  * 
  * Connect an LED (and series resistor) between the first output of the
  * shift register and ground.
@@ -442,7 +442,7 @@
  * 
  *   - SS:   74HC595 ST_CP
  *   - MOSI: 74HC595 DS
- *   - CLK:  74HC595 SH_CP
+ *   - SCK:  74HC595 SH_CP
  *   - 2: 74HC4067 A (COM OUT/IN)
  *   - 3: 74HC4067 S0
  *   - 4: 74HC4067 S1
@@ -781,7 +781,7 @@
  * - 23: LRCK (I²S)
  * 
  * - 7:  OLED Data/D1 (SPI MOSI)
- * - 13: OLED Clock/D0 (SPI CLK)
+ * - 13: OLED Clock/D0 (SPI SCK)
  * - 17: OLED Data/Command
  * - 10: Left OLED Cable Select
  * - 18: Right OLED Cable Select
