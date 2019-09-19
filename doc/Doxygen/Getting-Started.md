@@ -1,11 +1,11 @@
 # Getting Started
 
-## Installation
+## Installation                                                  {#installation}
 
 Instructions on how to install the library and its dependencies can be found 
 on the page [Installation](@ref Installation.md).
 
-## First Output: Creating a Basic MIDI Controller Sketch
+## First Output: Creating a Basic MIDI Controller Sketch         #{first-output}
 
 ### 1. Include the library
 
@@ -234,7 +234,7 @@ void loop() {
 }
 ```
 
-## First Input: Getting Feedback from the MIDI Software
+## First Input: Getting Feedback from the MIDI Software           {#first-input}
 
 Unlike the MIDI Controller library, the Control Surface library does support
 MIDI input.  
