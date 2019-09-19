@@ -262,6 +262,10 @@ Include the library so that you have access to all the classes and functions.
 
 See @ref first-output-midi-interface "First Output: Instantiate a MIDI Interface".
 
+```cpp
+USBMIDI_Interface midi;
+```
+
 ### 3. Add Extended Input/Output elements (optional)
 
 See @ref first-output-extio "First Output: Add Extended Input/Output elements".
@@ -289,8 +293,8 @@ SPIShiftRegisterOut<8> sreg = {
 ```
 
 The `8` between angle brackets (`<>`) is the number of bits of the shift 
-register. If you would daisy chain two 8-bit shift registers together, you would
-use `16`, for example.  
+register. If you daisy chain two 8-bit shift registers together, you would use
+`16` instead of `8`, for example.  
 The bit order determines which pin of the shift register is the first pin in the
 program. 
 `MSBFIRST` means "most significant bit first". You can also use `LSBFIRST` 
@@ -351,9 +355,21 @@ MIDINoteLED leds[] = {
 
 See @ref first-output-init "First Output: Initialize the Control Surface".
 
+```cpp
+void setup() {
+  Control_Surface.begin();
+}
+```
+
 ### 6. Continuously Update the Control Surface
 
 See @ref first-output-loop "First Output: Continuously Update the Control Surface".
+
+```cpp
+void loop() {
+  Control_Surface.loop();
+}
+```
 
 ### The finished sketch
 
