@@ -1,11 +1,13 @@
 # Getting Started
 
+[TOC]
+
 ## Installation                                                  {#installation}
 
 Instructions on how to install the library and its dependencies can be found 
 on the page [Installation](@ref Installation.md).
 
-## First Output: Creating a Basic MIDI Controller Sketch         #{first-output}
+## First Output: Creating a Basic MIDI Controller Sketch         {#first-output}
 
 ### 1. Include the library
 

@@ -2434,4 +2434,4 @@ GENERATE_LEGEND        = YES
 DOT_CLEANUP            = YES
 
 # https://github.com/doxygen/doxygen/issues/6800
-TOC_INCLUDE_HEADINGS   = 0
+TOC_INCLUDE_HEADINGS   = 3

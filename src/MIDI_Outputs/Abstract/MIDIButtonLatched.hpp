@@ -26,7 +26,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
      *          The internal pull-up resistor will be enabled.
      * @param   address
      *          The MIDI address containing the note number [0, 127], channel
-     *          [1, 16], and optional cable number.
+     *          [CHANNEL_1, CHANNEL_16], and optional cable number [0, 15].
      */
     MIDIButtonLatched(pin_t pin, const MIDICNChannelAddress &address,
                       const Sender &sender)

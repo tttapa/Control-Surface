@@ -28,19 +28,17 @@ class CCButtons : public MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS> {
      * @param   buttons
      *          An list of digital input pins with the buttons connected.  
      *          The internal pull-up resistors will be enabled.
-     * @param   baseController
-     *          The MIDI Controller number of the first button. [0, 119]
-     * @param   baseChannel
-     *          The MIDI Channel of the first button. [1, 16]
-     * @param   controllerIncrement
+     * @param   baseAddress
+     *          The MIDI address of the first button, containing the controller
+     *          number [0, 119], channel [CHANNEL_1, CHANNEL_16], and optional 
+     *          cable number [0, 15].
+     * @param   incrementAddress
      *          The number of addresses to increment for each next button.  
-     *          E.g. if `baseController` is 8, and `controllerIncrement` is 2,
+     *          E.g. if `baseAddress` is 8, and `incrementAddress` is 2,
      *          then the first button will send on address 8, the second
      *          button will send on address 10, button three on address 12, etc.
-     * @param   channelIncrement
-     *          The number of channels to increment for each next button.
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     * @param   sender
+     *          The MIDI sender to use.
      */
     CCButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
               const MIDICNChannelAddress &baseAddress,

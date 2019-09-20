@@ -18,17 +18,20 @@ class NoteChordButton : public MIDIChordButton<DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new Bankable NoteChordButton object with the given pin, 
-     *          note number, channel and chord.
+     *          address and chord.
      * 
      * @param   pin
-     *          The digital input pin to read from.  
+     *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      * @param   address
-     *          The MIDI address, including the base note.
+     *          The MIDI address of the base note, containing the note
+     *          number [0, 127], channel [CHANNEL_1, CHANNEL_16], and optional 
+     *          cable number [0, 15].
      * @param   chord
-     *          The chord to play on top of the base note.
+     *          The chord containing the intervals of the other notes to play.
      * 
-     * @ingroup MIDIOutputElementConstructors
+     * @tparam  N
+     *          The number of notes in the chord.
      */
     template <uint8_t N>
     NoteChordButton(pin_t pin, const MIDICNChannelAddress &address,

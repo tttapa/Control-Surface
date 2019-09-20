@@ -8,15 +8,15 @@
  *          of momentary push buttons or switches**, and send out MIDI **Note** 
  *          events.
  * 
- *          A Note On event is sent when a button is pressed, and a Note Off
- *          event is sent when a button is released.  
- *          The buttons are debounced in software.  
- *          This version cannot be banked.
- *
- * @ingroup MIDIOutputElements
+ * A Note On event is sent when a button is pressed, and a Note Off event is
+ * sent when a button is released.  
+ * The buttons are debounced in software.  
+ * This version cannot be banked.
  * 
  * @tparam  NUMBER_OF_BUTTONS
  *          The number of buttons in the collection.
+ * 
+ * @ingroup MIDIOutputElements
  */
 template <uint8_t NUMBER_OF_BUTTONS>
 class NoteButtons : public MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS> {
@@ -28,19 +28,17 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS> {
      * @param   buttons
      *          An list of digital input pins with the buttons connected.  
      *          The internal pull-up resistors will be enabled.
-     * @param   baseNote
-     *          The MIDI Note number of the first button. [0, 127]
-     * @param   baseChannel
-     *          The MIDI Channel of the first button. [1, 16]
-     * @param   noteIncrement
-     *          The number of notes to increment for each next button.  
-     *          E.g. if `baseNote` is 8, and `noteIncrement` is 2,
-     *          then the first button will send on note 8, the second
-     *          button will send on note 10, button three on note 12, etc.
-     * @param   channelIncrement
-     *          The number of channels to increment for each next button.
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     * @param   baseAddress
+     *          The MIDI address of the first button, containing the note
+     *          number [0, 127], channel [CHANNEL_1, CHANNEL_16], and optional 
+     *          cable number [0, 15].
+     * @param   incrementAddress
+     *          The number of addresses to increment for each next button.  
+     *          E.g. if `baseAddress` is 8, and `incrementAddress` is 2,
+     *          then the first button will send on address 8, the second
+     *          button will send on address 10, button three on address 12, etc.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     NoteButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 const MIDICNChannelAddress &baseAddress,

@@ -43,11 +43,10 @@ class CCButtonMatrix
      *          matrix that contains the MIDI Controller number of each button.
      *          [0, 119]
      * @param   channelCN
-     *          The MIDI channel [1, 16] and Cable Number [0, 15].
-     * 
-     * @todo    Can I use \@copydetails here?
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
+     *          [0, 15].
+     * @param   sender
+     *          The MIDI sender to use.
      */
     CCButtonMatrix(const PinList<nb_rows> &rowPins,
                    const PinList<nb_cols> &colPins,

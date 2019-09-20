@@ -23,12 +23,12 @@ class NoteButton : public MIDIButton<DigitalNoteSender> {
      * @param   pin
      *          The digital input pin to read from.  
      *          The internal pull-up resistor will be enabled.
-     * @param   note
-     *          The MIDI note number. [0, 127]
-     * @param   channel
-     *          The MIDI channel. [1, 16]
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     * @param   address
+     *          The MIDI address containing the note number [0, 127], 
+     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          [0, 15].
+     * @param   sender
+     *          The MIDI sender to use.
      */
     NoteButton(pin_t pin, const MIDICNChannelAddress &address,
                const DigitalNoteSender &sender = {})

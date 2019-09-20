@@ -28,10 +28,11 @@ class CCButtonLatched : public MIDIButtonLatched<DigitalCCSender> {
      *          The digital input pin to read from.  
      *          The internal pull-up resistor will be enabled.
      * @param   address
-     *          The MIDI address containing the controller number [0, 127], 
-     *          channel [1, 16], and optional cable number.
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     *          The MIDI address containing the controller number [0, 119], 
+     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          [0, 15].
+     * @param   sender
+     *          The MIDI sender to use.
      */
     CCButtonLatched(pin_t pin, const MIDICNChannelAddress &address,
                     const DigitalCCSender &sender = {})

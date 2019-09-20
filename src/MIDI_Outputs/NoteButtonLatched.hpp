@@ -27,10 +27,11 @@ class NoteButtonLatched : public MIDIButtonLatched<DigitalNoteSender> {
      *          The digital input pin to read from.  
      *          The internal pull-up resistor will be enabled.
      * @param   address
-     *          The MIDI address containing the note number [0, 127], channel
-     *          [1, 16], and optional cable number.
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     *          The MIDI address containing the note number [0, 127], 
+     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          [0, 15].
+     * @param   sender
+     *          The MIDI sender to use.
      */
     NoteButtonLatched(pin_t pin, const MIDICNChannelAddress &address,
                       const DigitalNoteSender &sender = {})
