@@ -11,33 +11,39 @@ namespace Bankable {
  *          setting** using relative MIDI **Control Change** events.  
  *          An optional note number can be provided to reset the setting.
  * 
- *          This version cannot be banked.
+ * This version can be banked.
  *
- * @ingroup MIDIOutputElements
+ * @ingroup BankableMIDIOutputElements
  */
 class CCIncrementDecrementButtons
     : public MIDIIncrementDecrementButtons<RelativeCCSender,
                                            DigitalNoteSender> {
   public:
     /**
-     * @brief   Construct a new CCIncrementDecrementButtons object.
+     * @brief   Construct a new Bankable CCIncrementDecrementButtons object.
      * 
+     * @param   config
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
      * @param   buttons
      *          The pins with the increment and decrement buttons connected.  
      *          The internal pull-up resistors will be enabled.
-     * @param   controller
-     *          The MIDI Controller number for the relative events. [0, 119]
-     * @param   channel
-     *          The MIDI channel. [1, 16]
+     * @param   address
+     *          The address to use for the relative events, containing the 
+     *          controller number [0, 119], channel [CHANNEL_1, CHANNEL_16], and
+     *          optional cable number [0, 15].
      * @param   multiplier
      *          The multiplier for the relative events. When setting it to 2,
-     *          it will scroll twice as fast.
+     *          it will scroll twice as fast, for example.
      * @param   resetNote
-     *          The MIDI note number to use to reset the setting. It will be 
-     *          triggered when the increment and decrement buttons are pressed
-     *          simultaneously. [0, 127]
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     *          The MIDI address to use to reset the setting, containing the 
+     *          note number [0, 119], channel [CHANNEL_1, CHANNEL_16], and 
+     *          optional cable number [0, 15]. It will be triggered when the 
+     *          increment and decrement buttons are pressed simultaneously.
+     * @param   relativeSender
+     *          The MIDI sender to use for the relative events.
+     * @param   resetSender
+     *          The MIDI sender to use for reset events.
      */
     CCIncrementDecrementButtons(const OutputBankConfig &config,
                                 const IncrementDecrementButtons &buttons,

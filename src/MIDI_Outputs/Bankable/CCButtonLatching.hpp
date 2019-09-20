@@ -8,13 +8,13 @@ namespace Bankable {
  *          push button or toggle switch**, and send out MIDI **Control Change**
  *          events.
  * 
- *          When the switch changes state, two MIDI events are sent: the first
- *          one with a value of 0x7F, followed immediately by a second one with
- *          a value of 0x00.  
- *          The switch is debounced in software.  
- *          This version can be banked.
+ * When the switch changes state, two MIDI events are sent: the first
+ * one with a value of 0x7F, followed immediately by a second one with
+ * a value of 0x00.  
+ * The switch is debounced in software.  
+ * This version can be banked.
  *
- * @ingroup MIDIOutputElements
+ * @ingroup BankableMIDIOutputElements
  */
 class CCButtonLatching : public MIDIButtonLatching<DigitalCCSender> {
   public:
@@ -22,15 +22,18 @@ class CCButtonLatching : public MIDIButtonLatching<DigitalCCSender> {
      * @brief   Create a new Bankable CCButtonLatching object with the given
      *          pin, the given controller number and channel.
      *
+     * @param   config
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
      * @param   pin
      *          The digital input pin with the button connected.  
      *          The internal pull-up resistor will be enabled.
-     * @param   controller
-     *          The MIDI Controller number. [0, 119]
-     * @param   channel
-     *          The MIDI Channel. [1, 16]
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     * @param   address
+     *          The MIDI address containing the controller number [0, 119], 
+     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          [0, 15].
+     * @param   sender
+     *          The MIDI sender to use.
      */
     CCButtonLatching(const OutputBankConfig &config, pin_t pin,
                      const MIDICNChannelAddress &address,

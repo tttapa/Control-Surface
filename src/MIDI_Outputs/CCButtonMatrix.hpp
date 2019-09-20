@@ -8,11 +8,10 @@
  *          of momentary push buttons or switches**, and send out MIDI **Control
  *          Change** events.
  * 
- *          A value of 0x7F is sent when a button is pressed, and a value of
- *          0x00 is sent when a button is released.  
- *          Crude software debouncing is implemented by limiting the refresh
- *          rate.  
- *          This version cannot be banked.
+ * A value of 0x7F is sent when a button is pressed, and a value of 0x00 is sent
+ * when a button is released.  
+ * Crude software debouncing is implemented by limiting the refresh rate.  
+ * This version cannot be banked.
  *
  * @tparam  nb_rows
  *          The number of rows of the matrix.

@@ -8,7 +8,7 @@
  *          (rotary) encoder** and send out relative MIDI **Control Change**
  *          events.
  * 
- *          This version cannot be banked.
+ * This version cannot be banked.
  *
  * @note    To use this class, include the [PJRC Encoder library]
  *          (https://github.com/PaulStoffregen/Encoder) before the

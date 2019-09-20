@@ -10,7 +10,7 @@
  *          setting** using relative MIDI **Control Change** events.  
  *          An optional note number can be provided to reset the setting.
  * 
- *          This version cannot be banked.
+ * This version cannot be banked.
  *
  * @ingroup MIDIOutputElements
  */

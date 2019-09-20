@@ -8,11 +8,11 @@
  *          **potentiometer or fader**, and send out 14-bit MIDI **Pitch Bend** 
  *          events.
  * 
- *          The analog input is filtered and hysteresis is applied for maximum
- *          stability.  
- *          The actual precision is "only" 8 bits, because the built-in ADC
- *          is pretty noisy.  
- *          This version cannot be banked.
+ * The analog input is filtered and hysteresis is applied for maximum
+ * stability.  
+ * The actual precision is "only" 8 bits, because the built-in ADC
+ * is pretty noisy.  
+ * This version cannot be banked.
  *
  * @ingroup MIDIOutputElements
  */

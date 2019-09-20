@@ -9,12 +9,12 @@ namespace Bankable {
  * @brief   A class of MIDIOutputElement%s that read the input of a **momentary
  *          push button or switch**, and send out MIDI **Note** events.
  * 
- *          A Note On event is sent when the button is pressed, and a Note Off
- *          event is sent when the button is released.  
- *          The button is debounced in software.  
- *          This version can be banked.  
+ * A Note On event is sent when the button is pressed, and a Note Off
+ * event is sent when the button is released.  
+ * The button is debounced in software.  
+ * This version can be banked.  
  *
- * @ingroup MIDIOutputElements
+ * @ingroup BankableMIDIOutputElements
  */
 class NoteButton : public MIDIButton<DigitalNoteSender> {
   public:
@@ -22,15 +22,18 @@ class NoteButton : public MIDIButton<DigitalNoteSender> {
      * @brief   Create a new Bankable NoteButton object with the given pin, note
      *          number and channel.
      * 
+     * @param   config
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
      * @param   pin
      *          The digital input pin to read from.  
      *          The internal pull-up resistor will be enabled.
-     * @param   note
-     *          The MIDI note number. [0, 127]
-     * @param   channel
-     *          The MIDI channel. [1, 16]
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     * @param   address
+     *          The MIDI address containing the note number [0, 127], 
+     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          [0, 15].
+     * @param   sender
+     *          The MIDI sender to use.
      */
     NoteButton(const OutputBankConfig &config, pin_t pin,
                const MIDICNChannelAddress &address,

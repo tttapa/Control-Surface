@@ -2,13 +2,21 @@
  * @defgroup    MIDIOutputElements MIDI Output Elements
  * @brief   All Elements that send out MIDI events.  
  *          This includes potentiometers, faders, buttons, rotary encoders, 
- *          program selectors (todo).
+ *          program selectors.
+ */
+
+/**
+ * @ingroup MIDIOutputElements
+ * @defgroup    BankableMIDIOutputElements Bankable MIDI Output Elements
+ * @brief   All Elements that send out MIDI events, and that can be banked.  
+ *          This includes potentiometers, faders, buttons, rotary encoders, 
+ *          program selectors.
  */
 
 /**
  * @defgroup    MIDIInputElements   MIDI Input Elements
  * @brief   All Elements that listen for incoming MIDI events.  
- *          This includes LEDs, VU meters, ... (todo)
+ *          This includes LEDs, VU meters, ...
  */
 
 /**

@@ -9,11 +9,11 @@
  * @brief   A class of MIDIOutputElement%s that read the input of a **momentary
  *          push button or toggle switch**, and send out MIDI **Note** events.
  * 
- *          It latches the input, so press once to enable, press again to 
- *          disable (toggle).
+ * It latches the input, so press once to enable, press again to disable
+ * (toggle).
  * 
- *          The switch is debounced in software.  
- *          This version cannot be banked.  
+ * The switch is debounced in software.  
+ * This version cannot be banked.  
  *
  * @ingroup MIDIOutputElements
  */

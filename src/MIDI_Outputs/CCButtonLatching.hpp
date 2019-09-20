@@ -8,11 +8,11 @@
  *          push button or toggle switch**, and send out MIDI **Control Change**
  *          events.
  * 
- *          When the switch changes state, two MIDI events are sent: the first
- *          one with a value of 0x7F, followed immediately by a second one with
- *          a value of 0x00.  
- *          The switch is debounced in software.  
- *          This version cannot be banked.
+ * When the switch changes state, two MIDI events are sent: the first
+ * one with a value of 0x7F, followed immediately by a second one with
+ * a value of 0x00.  
+ * The switch is debounced in software.  
+ * This version cannot be banked.
  *
  * @ingroup MIDIOutputElements
  */

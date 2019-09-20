@@ -8,9 +8,9 @@
  *          **potentiometer or fader**, and send out 7-bit MIDI 
  *          **Control Change** events.
  * 
- *          The analog input is filtered and hysteresis is applied for maximum
- *          stability.  
- *          This version cannot be banked.
+ * The analog input is filtered and hysteresis is applied for maximum
+ * stability.  
+ * This version cannot be banked.
  *
  * @ingroup MIDIOutputElements
  */
