@@ -4,5 +4,5 @@
 #include <Def/MIDICNChannelAddress.hpp>
 #include <Helpers/Updatable.hpp>
 
-struct MIDIOutputElement : public Updatable<> {};
-struct MIDIOutputElementPotentiometer : public Updatable<Potentiometer> {};
+using MIDIOutputElement = Updatable<>;
+using MIDIOutputElementPotentiometer = Updatable<Potentiometer>;

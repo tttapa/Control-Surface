@@ -66,7 +66,7 @@ for root, dirs, files in os.walk(exampledir):
                 else:
                     print('\t\033[0;33mWarning: no documentation for', file,
                           '\033[0m')
-                    print('\t       →', Path(root) / file)
+                    print('\t       → "' + str(Path(root) / file) + '"')
 
 with open(outputfile, 'w') as f:
     f.write(output)
