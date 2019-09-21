@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButtonMatrix.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -62,3 +64,5 @@ class CCButtonMatrix
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

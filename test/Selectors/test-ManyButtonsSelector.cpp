@@ -2,6 +2,7 @@
 #include <Selectors/ManyButtonsSelector.hpp>
 
 using namespace ::testing;
+using namespace CS;
 
 TEST(ManyButtonsSelector, press) {
     MockSelectable<4> selectable;

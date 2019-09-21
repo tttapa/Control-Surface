@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Abstract/MIDIButtonLatching.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **latching
  *          push button or toggle switch**, and send out MIDI **Note** events.
@@ -34,3 +36,5 @@ class NoteButtonLatching : public MIDIButtonLatching<DigitalNoteSender> {
                        const DigitalNoteSender &sender = {})
         : MIDIButtonLatching(pin, address, sender) {}
 };
+
+END_CS_NAMESPACE

@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Bankable/Abstract/MIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/ContinuousCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -42,3 +44,5 @@ class CCPotentiometer
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

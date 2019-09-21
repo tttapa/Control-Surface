@@ -3,6 +3,8 @@
 #include <Banks/BankableMIDIInput.hpp>
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
 constexpr static uint8_t VPotRingAddress = 0x30;
@@ -154,3 +156,5 @@ class VPotRing : virtual public VPotRing_Base, public BankableMIDIInput<N> {
 } // namespace Bankable
 
 } // namespace MCU
+
+END_CS_NAMESPACE

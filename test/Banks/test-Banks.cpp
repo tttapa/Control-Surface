@@ -2,6 +2,8 @@
 
 #include <Banks/Bank.hpp>
 
+using namespace CS;
+
 TEST(OutputBank, OutputBank) {
     OutputBank ob = {4};
     EXPECT_EQ(ob.getSelection(), 0);

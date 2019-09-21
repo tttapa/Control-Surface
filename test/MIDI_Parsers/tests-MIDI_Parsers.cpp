@@ -3,6 +3,8 @@
 #include <MIDI_Parsers/SerialMIDI_Parser.hpp>
 #include <MIDI_Parsers/USBMIDI_Parser.hpp>
 
+using namespace CS;
+
 typedef std::vector<uint8_t> SysExVector;
 
 // ---------------------------- USB PARSER TESTS ---------------------------- //

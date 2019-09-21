@@ -10,6 +10,8 @@
 #define GUARD_LIST_LOCK
 #endif
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   Class for objects that listen for incoming MIDI Note events.
  * 
@@ -101,3 +103,5 @@ class MIDIInputElementNote : public MIDIInputElement,
 };
 
 #undef GUARD_LIST_LOCK
+
+END_CS_NAMESPACE

@@ -4,6 +4,8 @@
 #include <Print.h>
 #include <string.h>
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
 template <uint8_t LENGTH>
@@ -115,3 +117,5 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
 };
 
 } // namespace MCU
+
+END_CS_NAMESPACE

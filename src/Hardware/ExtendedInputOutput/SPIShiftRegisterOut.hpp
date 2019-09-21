@@ -6,6 +6,8 @@
 #include <Arduino.h> // MSBFIRST, SS
 #include <Helpers/BitArray.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for serial-in/parallel-out shift registers, 
  *          like the 74HC595 that are connected to the SPI bus.
@@ -58,5 +60,7 @@ class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
      */
     void update() override;
 };
+
+END_CS_NAMESPACE
 
 #include "SPIShiftRegisterOut.ipp"

@@ -4,6 +4,8 @@
 #include <Def/Def.hpp>
 #include <Selectors/Selectable.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <setting_t N>
 class ProgramChanger : public Selectable<N> {
   public:
@@ -19,3 +21,5 @@ class ProgramChanger : public Selectable<N> {
     const Array<uint8_t, N> programs;
     const Channel channel;
 };
+
+END_CS_NAMESPACE

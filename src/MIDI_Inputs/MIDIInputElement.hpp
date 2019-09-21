@@ -5,6 +5,8 @@
 #include "ChannelMessageMatcher.hpp"
 #include <Def/MIDICNChannelAddress.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for objects that listen for incoming MIDI events.
  * 
@@ -88,3 +90,5 @@ class MIDIInputElement {
   protected:
     const MIDICNChannelAddress address;
 };
+
+END_CS_NAMESPACE

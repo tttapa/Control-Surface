@@ -3,6 +3,8 @@
 #include <Arduino.h>
 #include <Helpers/Error.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace ExtIO {
 
 template <class T>
@@ -91,3 +93,5 @@ analog_t analogRead(pin_t pin) {
 analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
 
 } // namespace ExtIO
+
+END_CS_NAMESPACE

@@ -4,6 +4,8 @@
 
 #include <Hardware/LEDs/LEDs.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An enumeration type to set an LED display to either bar or dot mode.
  */
@@ -67,3 +69,5 @@ class DotBarDisplayLEDs : public LEDs<N> {
   private:
     DotBarMode mode = DotBarMode::Bar;
 };
+
+END_CS_NAMESPACE

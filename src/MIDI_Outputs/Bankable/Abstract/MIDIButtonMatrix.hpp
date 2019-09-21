@@ -6,6 +6,8 @@
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -77,3 +79,5 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

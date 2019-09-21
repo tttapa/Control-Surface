@@ -11,6 +11,8 @@
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An abstract class for rotary encoders that send MIDI events.
  */
@@ -59,3 +61,5 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
     Sender sender;
     long previousPosition = 0;
 };
+
+END_CS_NAMESPACE

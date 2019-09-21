@@ -4,6 +4,8 @@
 
 #include <Def/Def.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An enumeration of the different bank types.
  */
@@ -51,3 +53,5 @@ struct OutputBankConfig {
     OutputBank &bank;
     const BankType type;
 };
+
+END_CS_NAMESPACE

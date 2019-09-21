@@ -2,6 +2,8 @@
 
 #include <MIDI_Interfaces/MIDI_Interface.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for grouping multiple MIDI interfaces in parallel.
  *          Output is sent to all @c N interfaces, and incoming messages are 
@@ -59,3 +61,5 @@ class MultiMIDI_Interface : public MIDI_Interface {
   private:
     Array<Parsing_MIDI_Interface *, N> interfaces;
 };
+
+END_CS_NAMESPACE

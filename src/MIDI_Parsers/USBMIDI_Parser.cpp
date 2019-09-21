@@ -1,6 +1,8 @@
 #include "USBMIDI_Parser.hpp"
 #include <Settings/SettingsWrapper.hpp>
 
+BEGIN_CS_NAMESPACE
+
 // http://www.usb.org/developers/docs/devclass_docs/midi10.pdf
 MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
     DEBUGREF("MIDIUSB packet:\t" << hex << +packet[0] << ' ' << +packet[1]
@@ -103,3 +105,5 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
 
     return NO_MESSAGE;
 }
+
+END_CS_NAMESPACE

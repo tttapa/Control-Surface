@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Abstract/MIDIButton.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **momentary
  *          push button or switch**, and send out MIDI **Control Change**
@@ -35,3 +37,5 @@ class CCButton
     CCButton(pin_t pin, const MIDICNChannelAddress &address, const DigitalCCSender &sender = {})
         : MIDIButton(pin, address, sender) {}
 };
+
+END_CS_NAMESPACE

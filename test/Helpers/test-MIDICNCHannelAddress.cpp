@@ -1,6 +1,8 @@
 #include <Def/MIDICNChannelAddress.hpp>
 #include <gtest-wrapper.h>
 
+using namespace CS;
+
 TEST(MIDICNChannelAddress, init) {
     MIDICNChannelAddress m = {12, CHANNEL_10, 4};
     EXPECT_EQ(m.getAddress(), 12);

@@ -10,6 +10,8 @@
 #include <Def/Def.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <setting_t N>
 class EncoderSelector_Base : virtual public Selector<N> {
   public:
@@ -72,3 +74,5 @@ class EncoderSelector : public EncoderSelector_Base<N> {
         (void) newSetting;
     }
 };
+
+END_CS_NAMESPACE

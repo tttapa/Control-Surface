@@ -6,6 +6,8 @@
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for momentary buttons and switches that send MIDI events.
  *
@@ -60,3 +62,5 @@ class MIDIButtonLatched : public MIDIOutputElement {
     Sender sender;
     bool state = false;
 };
+
+END_CS_NAMESPACE

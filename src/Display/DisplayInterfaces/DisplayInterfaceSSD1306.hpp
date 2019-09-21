@@ -3,6 +3,8 @@
 #include <Adafruit_SSD1306.h>
 #include <Display/DisplayInterface.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   This class creates a mapping between the Adafruit_SSD1306 display 
  *          driver and the general display interface used by the Control Surface
@@ -48,3 +50,5 @@ class SSD1306_DisplayInterface : public DisplayInterface {
   protected:
     Adafruit_SSD1306 &disp;
 };
+
+END_CS_NAMESPACE

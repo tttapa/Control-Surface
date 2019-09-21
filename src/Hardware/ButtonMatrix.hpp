@@ -2,8 +2,9 @@
 
 #pragma once
 
-#include <Settings/SettingsWrapper.hpp>
 #include <Def/Def.hpp>
+
+BEGIN_CS_NAMESPACE
 
 /**
  * @brief   A class that reads the states of a button matrix.
@@ -73,5 +74,7 @@ class ButtonMatrix {
     const PinList<nb_rows> rowPins;
     const PinList<nb_cols> colPins;
 };
+
+END_CS_NAMESPACE
 
 #include "ButtonMatrix.ipp" // Template implementations

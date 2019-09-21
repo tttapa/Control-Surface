@@ -1,5 +1,7 @@
 #include <MIDI_Interfaces/BluetoothMIDI_Interface.hpp>
 
+using namespace CS;
+
 TEST(BluetoothMIDIInterface, initializeBegin) {
     BluetoothMIDI_Interface midi;
     BLEMIDI &ble = midi.getBLEMIDI();

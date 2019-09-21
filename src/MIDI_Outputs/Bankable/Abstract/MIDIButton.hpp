@@ -5,6 +5,8 @@
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -55,3 +57,5 @@ class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

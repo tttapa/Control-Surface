@@ -5,8 +5,11 @@
 #include "Channel.hpp"
 #include "Frequency.hpp"
 #include <Helpers/Array.hpp>
+#include <Settings/NamespaceSettings.hpp>
 #include <stddef.h> // size_t
 #include <stdint.h> // uint8_t
+
+BEGIN_CS_NAMESPACE
 
 /// The type returned from analogRead and similar functions.
 using analog_t = uint16_t;
@@ -72,3 +75,5 @@ struct PixelLocation {
 };
 
 #define UNUSED_PARAM __attribute__((unused))
+
+END_CS_NAMESPACE

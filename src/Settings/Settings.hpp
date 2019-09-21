@@ -10,6 +10,8 @@
 
 #include <Def/Def.hpp>
 
+BEGIN_CS_NAMESPACE
+
 // ----------------------------- Debug Settings ----------------------------- //
 // ========================================================================== //
 
@@ -92,3 +94,5 @@ constexpr static Frequency SPI_MAX_SPEED = 8_MHz;
 #define INDIVIDUAL_BUTTON_INVERT
 
 // ========================================================================== //
+
+END_CS_NAMESPACE

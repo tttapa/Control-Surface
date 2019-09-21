@@ -4,6 +4,8 @@
 
 #include "Button.hpp"
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for buttons that increment and decrement some counter or 
  *          setting.
@@ -73,3 +75,5 @@ class IncrementDecrementButtons {
     } longPressState = Initial;
     unsigned long longPressRepeat;
 };
+
+END_CS_NAMESPACE

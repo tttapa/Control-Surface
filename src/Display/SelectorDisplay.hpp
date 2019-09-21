@@ -3,6 +3,8 @@
 #include <Display/DisplayElement.hpp>
 #include <Selectors/Selector.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for displaying the setting of a Selector object.
  * 
@@ -19,7 +21,7 @@ class SelectorDisplay : public DisplayElement {
         : DisplayElement(display), selector(selector), offset(offset),
           multiplier(multiplier), x(loc.x), y(loc.y), size(size), color(color) {
     }
-    void draw() {
+    void draw() override {
         display.setTextColor(color);
         display.setTextSize(size);
         display.setCursor(x, y);
@@ -32,3 +34,5 @@ class SelectorDisplay : public DisplayElement {
     uint8_t size;
     uint16_t color;
 };
+
+END_CS_NAMESPACE

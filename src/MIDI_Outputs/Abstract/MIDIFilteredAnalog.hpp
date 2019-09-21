@@ -4,6 +4,8 @@
 #include <Hardware/FilteredAnalog.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for potentiometers and faders that send MIDI events.
  *
@@ -134,3 +136,5 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
     const MIDICNChannelAddress address;
     Sender sender;
 };
+
+END_CS_NAMESPACE

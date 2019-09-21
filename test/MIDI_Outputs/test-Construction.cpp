@@ -42,6 +42,8 @@
 
 #include <gtest-wrapper.h>
 
+using namespace CS;
+
 TEST(Construction, MIDIOutputs) {
     const pin_t pin = 0;
     const MIDICNChannelAddress address = {};

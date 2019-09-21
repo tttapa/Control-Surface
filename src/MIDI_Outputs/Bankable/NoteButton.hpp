@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButton.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -42,3 +44,5 @@ class NoteButton : public MIDIButton<DigitalNoteSender> {
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

@@ -6,6 +6,8 @@
 
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An abstract class for two buttons that send incremental MIDI events.
  */
@@ -64,3 +66,5 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
     RelativeSender relativeSender;
     ResetSender resetSender;
 };
+
+END_CS_NAMESPACE

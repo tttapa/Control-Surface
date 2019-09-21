@@ -5,6 +5,8 @@
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 #include <math.h>
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
 class VPotDisplay : public DisplayElement {
@@ -53,3 +55,5 @@ class VPotDisplay : public DisplayElement {
 };
 
 } // namespace MCU
+
+END_CS_NAMESPACE

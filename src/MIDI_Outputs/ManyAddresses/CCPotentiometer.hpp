@@ -1,6 +1,8 @@
 #include "Abstract/MIDIFilteredAnalog.hpp"
 #include <MIDI_Senders/ContinuousCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace ManyAddresses {
 
 /**
@@ -42,3 +44,5 @@ class CCPotentiometer
 };
 
 } // namespace ManyAddresses
+
+END_CS_NAMESPACE

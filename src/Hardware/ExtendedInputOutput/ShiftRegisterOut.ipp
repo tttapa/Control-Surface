@@ -1,7 +1,7 @@
 #include "ExtendedInputOutput.hpp"
 #include "ShiftRegisterOut.hpp"
 
-using namespace ExtIO;
+BEGIN_CS_NAMESPACE
 
 template <uint8_t N>
 ShiftRegisterOut<N>::ShiftRegisterOut(pin_t dataPin, pin_t clockPin,
@@ -35,3 +35,5 @@ void ShiftRegisterOut<N>::update() {
     ExtIO::digitalWrite(this->latchPin, HIGH);
     this->dirty = false;
 }
+
+END_CS_NAMESPACE

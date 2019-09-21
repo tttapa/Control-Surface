@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Abstract/MIDIRotaryEncoder.hpp>
 #include <MIDI_Senders/RelativeCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **quadrature
  *          (rotary) encoder** and send out relative MIDI **Control Change**
@@ -62,3 +64,5 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
                             sender) {}
 #endif
 };
+
+END_CS_NAMESPACE

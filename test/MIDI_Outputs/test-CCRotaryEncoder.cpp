@@ -4,6 +4,7 @@
 #include <gtest-wrapper.h>
 
 using namespace ::testing;
+using namespace CS;
 
 TEST(CCRotaryEncoder, turnOneStep) {
     MockMIDI_Interface midi;

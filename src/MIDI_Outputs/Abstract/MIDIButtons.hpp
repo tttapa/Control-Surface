@@ -5,6 +5,8 @@
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
  *
@@ -58,3 +60,5 @@ class MIDIButtons : public MIDIOutputElement {
     const RelativeMIDICNChannelAddress incrementAddress;
     Sender sender;
 };
+
+END_CS_NAMESPACE

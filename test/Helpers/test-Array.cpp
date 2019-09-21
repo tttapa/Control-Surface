@@ -2,6 +2,8 @@
 #include <Helpers/ArrayHelpers.hpp>
 #include <gtest-wrapper.h>
 
+using namespace CS;
+
 TEST(Array, initializeAndRetrieve) {
     Array<int, 6> arr = {0, 1, 2, 3, 4, 5};
     for (int i = 0; i < 6; i++)

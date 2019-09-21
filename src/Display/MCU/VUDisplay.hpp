@@ -3,6 +3,8 @@
 #include <Display/DisplayElement.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
 class VUDisplay : public DisplayElement {
@@ -60,7 +62,15 @@ class VUDisplay : public DisplayElement {
     unsigned long decayTime;
 };
 
+} // namespace MCU
+
+END_CS_NAMESPACE
+
 #include <Display/Helpers/Bresenham.hpp>
+
+BEGIN_CS_NAMESPACE
+
+namespace MCU {
 
 class AnalogVUDisplay : public DisplayElement {
   public:
@@ -100,3 +110,5 @@ class AnalogVUDisplay : public DisplayElement {
 };
 
 } // namespace MCU
+
+END_CS_NAMESPACE

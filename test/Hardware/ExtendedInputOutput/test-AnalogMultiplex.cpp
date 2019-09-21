@@ -4,6 +4,8 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Helpers/Debug.hpp>
 
+using namespace CS;
+
 TEST(AnalogMultiplex, analogReadNoEnable) {
     AnalogMultiplex<4> mux = {A0, {2, 3, 4, 5}};
 

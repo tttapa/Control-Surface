@@ -5,6 +5,8 @@
 #include <Hardware/FilteredAnalog.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -147,3 +149,5 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Bankable/Abstract/MIDIRotaryEncoder.hpp>
 #include <MIDI_Senders/RelativeCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -71,3 +73,5 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

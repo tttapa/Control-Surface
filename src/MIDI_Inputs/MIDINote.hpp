@@ -2,6 +2,8 @@
 
 #include "MIDIInputElementNote.hpp"
 
+BEGIN_CS_NAMESPACE
+
 /** An abstract base class for MIDI note input. */
 class MIDINote_Base : public MIDIInputElementNote {
   protected:
@@ -40,9 +42,13 @@ class MIDINote : virtual public MIDINote_Base {
     uint8_t value = 0;
 };
 
+END_CS_NAMESPACE
+
 // -------------------------------------------------------------------------- //
 
 #include <Banks/BankableMIDIInput.hpp>
+
+BEGIN_CS_NAMESPACE
 
 namespace Bankable {
 
@@ -82,3 +88,5 @@ class MIDINote : virtual public MIDINote_Base, public BankableMIDIInput<N> {
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

@@ -4,6 +4,7 @@
 // ---- User Settings ---- //
 // ======================= //
 #include "Settings.hpp"
+#include "NamespaceSettings.hpp"
 
 #ifndef ARDUINO
 #undef IGNORE_SYSEX

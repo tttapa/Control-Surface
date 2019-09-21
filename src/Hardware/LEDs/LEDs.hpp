@@ -5,6 +5,8 @@
 #include <Def/Def.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for collections of LEDs that can display ranges.
  * 
@@ -67,3 +69,5 @@ class LEDs {
   private:
     const PinList<N> ledPins;
 };
+
+END_CS_NAMESPACE

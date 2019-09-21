@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Abstract/MIDIChordButton.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **momentary
  *          push button or switch**, and send out MIDI **Note** events.
@@ -38,3 +40,5 @@ class NoteChordButton : public MIDIChordButton<DigitalNoteSender> {
                     const Chord<N> &chord, const DigitalNoteSender &sender)
         : MIDIChordButton<DigitalNoteSender>(pin, address, chord, sender) {}
 };
+
+END_CS_NAMESPACE

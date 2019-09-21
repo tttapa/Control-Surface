@@ -3,6 +3,8 @@
 #include "SelectorLEDs.hpp"
 #include <Selectors/EncoderSelector.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <setting_t N>
 class EncoderSelectorLEDs : public EncoderSelector_Base<N>,
                             public SelectorLEDs<N> {
@@ -14,3 +16,5 @@ class EncoderSelectorLEDs : public EncoderSelector_Base<N>,
                                                            wrap),
           SelectorLEDs<N>(ledPins) {}
 };
+
+END_CS_NAMESPACE

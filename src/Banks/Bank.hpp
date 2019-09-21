@@ -7,6 +7,8 @@
 #include <Helpers/LinkedList.hpp>
 #include <Selectors/Selectable.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <setting_t N>
 class BankableMIDIInput;
 
@@ -125,9 +127,13 @@ class Bank : public Selectable<N>, public OutputBank {
     DoublyLinkedList<BankableMIDIInput<N>> inputBankables;
 };
 
+END_CS_NAMESPACE
+
 // ---------------------------- Implementations ----------------------------- //
 
 #include <Banks/BankableMIDIInput.hpp>
+
+BEGIN_CS_NAMESPACE
 
 template <setting_t N>
 void Bank<N>::add(BankableMIDIInput<N> *bankable) {
@@ -146,3 +152,5 @@ void Bank<N>::select(setting_t bankSetting) {
     for (BankableMIDIInput<N> &e : inputBankables)
         e.onBankSettingChange();
 }
+
+END_CS_NAMESPACE

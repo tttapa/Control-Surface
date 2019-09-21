@@ -1,5 +1,7 @@
 #include <Banks/ManyAddressesMIDIOuptut.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace ManyAddresses {
 
 /**
@@ -73,3 +75,5 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
 };
 
 } // namespace ManyAddresses
+
+END_CS_NAMESPACE

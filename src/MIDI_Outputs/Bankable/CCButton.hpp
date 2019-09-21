@@ -1,6 +1,8 @@
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButton.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /** @brief  A namespace for MIDI elements that can be added to a Bank,
  *          to change their address or channel.
  */
@@ -44,3 +46,5 @@ class CCButton : public MIDIButton<DigitalCCSender> {
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

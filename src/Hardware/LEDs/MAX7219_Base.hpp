@@ -5,6 +5,8 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <SPI.h>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A base class for classes that control MAX7219 LED drivers.
  * 
@@ -94,3 +96,5 @@ class MAX7219_Base {
     pin_t loadPin;
     SPISettings settings = {SPI_MAX_SPEED, MSBFIRST, SPI_MODE0};
 };
+
+END_CS_NAMESPACE

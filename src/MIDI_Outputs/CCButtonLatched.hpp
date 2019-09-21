@@ -5,6 +5,8 @@
 #include <MIDI_Outputs/Abstract/MIDIButtonLatched.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **momentary
  *          push button or toggle switch**, and send out MIDI **Controller 
@@ -38,3 +40,5 @@ class CCButtonLatched : public MIDIButtonLatched<DigitalCCSender> {
                     const DigitalCCSender &sender = {})
         : MIDIButtonLatched{pin, address, sender} {}
 };
+
+END_CS_NAMESPACE

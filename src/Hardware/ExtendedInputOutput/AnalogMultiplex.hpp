@@ -7,6 +7,8 @@
 #include <Helpers/Array.hpp>
 #include <stdlib.h>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for reading multiplexed analog inputs.
  *          Supports 74HC4067, 74HC4051, etc.
@@ -206,3 +208,5 @@ void AnalogMultiplex<N>::afterReading() {
     if (enablePin != NO_PIN)
         ExtIO::digitalWrite(enablePin, MUX_DISABLED);
 }
+
+END_CS_NAMESPACE

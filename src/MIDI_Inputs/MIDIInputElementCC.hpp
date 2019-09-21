@@ -3,12 +3,15 @@
 #include <Helpers/LinkedList.hpp>
 #include <MIDI_Inputs/MIDIInputElement.hpp>
 
+
 #if defined(ESP32)
 #include <mutex>
 #define GUARD_LIST_LOCK std::lock_guard<std::mutex> _guard(mutex)
 #else
 #define GUARD_LIST_LOCK
 #endif
+
+BEGIN_CS_NAMESPACE
 
 /**
  * @brief   Class for objects that listen for incoming MIDI Controller Change
@@ -90,3 +93,5 @@ class MIDIInputElementCC : public MIDIInputElement,
 };
 
 #undef GUARD_LIST_LOCK
+
+END_CS_NAMESPACE

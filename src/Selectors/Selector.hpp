@@ -5,6 +5,8 @@
 #include <Helpers/Debug.hpp>
 #include <Helpers/Updatable.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An enumeration to set the behavior of selectors that are incremented
  *          (decremented) beyond their maximum (minimum) setting.
@@ -73,3 +75,5 @@ class Selector : public Updatable<> {
     Selectable<N> &selectable;
     setting_t setting = 0;
 };
+
+END_CS_NAMESPACE

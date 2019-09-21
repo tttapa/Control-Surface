@@ -8,6 +8,8 @@
 #include <Hardware/FilteredAnalog.hpp>
 #include <Helpers/Updatable.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /** 
  * @brief   A class for controlling the volume of AudioMixer4 objects using a 
  *          potentiometer.
@@ -71,3 +73,5 @@ class VolumeControl : public Updatable<Potentiometer> {
     FilteredAnalog<7> filteredAnalog;
     const float maxGain;
 };
+
+END_CS_NAMESPACE

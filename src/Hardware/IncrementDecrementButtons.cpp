@@ -1,5 +1,7 @@
 #include "IncrementDecrementButtons.hpp"
 
+BEGIN_CS_NAMESPACE
+
 IncrementDecrementButtons::State IncrementDecrementButtons::getState() {
     Button::State incrState = incrementButton.getState();
     Button::State decrState = decrementButton.getState();
@@ -63,3 +65,5 @@ IncrementDecrementButtons::State IncrementDecrementButtons::getState() {
     }
     return Nothing;
 }
+
+END_CS_NAMESPACE

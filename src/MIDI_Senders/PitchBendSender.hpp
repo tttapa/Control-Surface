@@ -3,6 +3,8 @@
 #include <Control_Surface/Control_Surface_Class.hpp>
 #include <Helpers/IncreaseBitDepth.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <uint8_t INPUT_PRECISION_BITS>
 class PitchBendSender {
   public:
@@ -12,3 +14,5 @@ class PitchBendSender {
         Control_Surface.MIDI().sendPB(address, value);
     }
 };
+
+END_CS_NAMESPACE

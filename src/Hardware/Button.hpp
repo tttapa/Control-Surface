@@ -5,6 +5,8 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for reading and debouncing buttons and switches.
  */
@@ -111,3 +113,5 @@ class Button {
     /// @see    BUTTON_DEBOUNCE_TIME
     constexpr static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
 };
+
+END_CS_NAMESPACE

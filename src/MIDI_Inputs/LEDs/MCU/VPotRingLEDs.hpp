@@ -3,6 +3,8 @@
 #include <Hardware/LEDs/LEDs.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
 class VPotRingLEDs_Base : virtual public VPotRing_Base {
@@ -43,3 +45,5 @@ class VPotRingLEDs : public VPotRing<N>, public VPotRingLEDs_Base {
 } // namespace Bankable
 
 } // namespace MCU
+
+END_CS_NAMESPACE

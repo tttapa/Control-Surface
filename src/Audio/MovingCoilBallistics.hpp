@@ -2,6 +2,8 @@
 
 #include <Settings/SettingsWrapper.hpp>
 
+BEGIN_CS_NAMESPACE
+
 class MovingCoilBallistics {
   public:
     MovingCoilBallistics(float springConstant, float friction, float mass,
@@ -49,3 +51,5 @@ class MovingCoilBallistics {
     float x = 0;
     float x_dot = 0;
 };
+
+END_CS_NAMESPACE

@@ -6,6 +6,8 @@
 
 #include <Settings/SettingsWrapper.hpp>
 
+BEGIN_CS_NAMESPACE
+
 const uint8_t NOTE_OFF = 0x80;
 const uint8_t NOTE_ON = 0x90;
 const uint8_t KEY_PRESSURE = 0xA0;
@@ -93,3 +95,5 @@ class MIDI_Parser {
     /** Check if the given byte is a MIDI data byte. */
     static bool isData(uint8_t data);
 };
+
+END_CS_NAMESPACE

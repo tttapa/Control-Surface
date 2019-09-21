@@ -1,6 +1,8 @@
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButtons.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -53,3 +55,5 @@ class CCButtons : public MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS> {
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

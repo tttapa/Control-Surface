@@ -7,6 +7,8 @@
 #include <Helpers/IncreaseBitDepth.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
+BEGIN_CS_NAMESPACE
+
 constexpr static uint8_t ADC_BITS = 10;
 
 /**
@@ -111,3 +113,5 @@ class FilteredAnalog {
     EMA<FILTER_SHIFT_FACTOR, FILTER_TYPE> filter;
     Hysteresis<ADC_BITS + UPSAMPLE - PRECISION, analog_t, analog_t> hysteresis;
 };
+
+END_CS_NAMESPACE

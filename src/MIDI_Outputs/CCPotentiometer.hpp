@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Abstract/MIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/ContinuousCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the analog input from a
  *          **potentiometer or fader**, and send out 7-bit MIDI 
@@ -34,3 +36,5 @@ class CCPotentiometer
                     const ContinuousCCSender &sender = {})
         : MIDIFilteredAnalogAddressable(analogPin, address, sender) {}
 };
+
+END_CS_NAMESPACE

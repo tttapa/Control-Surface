@@ -4,6 +4,8 @@
 #include <Def/MIDICNChannelAddress.hpp>
 #include <MIDI_Parsers/MIDI_Parser.hpp>
 
+BEGIN_CS_NAMESPACE
+
 constexpr auto MIDI_BAUD = 31250;
 
 class MIDI_Callbacks;
@@ -205,3 +207,5 @@ class MIDI_Callbacks {
 
     virtual ~MIDI_Callbacks() = default;
 };
+
+END_CS_NAMESPACE

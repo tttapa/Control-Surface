@@ -4,6 +4,8 @@
 #include <Hardware/ButtonMatrix.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   MIDIButtonMatrix
  * @todo    Documentation.
@@ -43,3 +45,5 @@ class MIDIButtonMatrix : public MIDIOutputElement,
     const MIDICNChannel baseChannelCN;
     Sender sender;
 };
+
+END_CS_NAMESPACE

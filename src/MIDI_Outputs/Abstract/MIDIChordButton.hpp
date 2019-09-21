@@ -6,6 +6,8 @@
 #include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An abstract class for momentary push buttons that send multiple MIDI
  *          events.
@@ -73,3 +75,5 @@ class MIDIChordButton : public MIDIOutputElement {
     unique_ptr<const IChord> newChord;
     Sender sender;
 };
+
+END_CS_NAMESPACE

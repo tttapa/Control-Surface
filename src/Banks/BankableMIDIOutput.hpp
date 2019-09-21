@@ -6,6 +6,8 @@
 #include "BankConfig.hpp"
 #include <Def/MIDICNChannelAddress.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A base class for all MIDIOutputElement#s that can be banked.
  * 
@@ -21,6 +23,9 @@
  *          playing indefinitely), there must be a way to lock the bank setting
  *          while a note is playing. Then when it is no longer playing, the 
  *          bank setting is unlocked.
+ * 
+ * @todo    Create BankableMIDIElement class, make this inherit from it, as
+ *          well as ManyAddressesMIDIOutput.
  */
 class BankableMIDIOutput {
   protected:
@@ -61,7 +66,7 @@ class BankableMIDIOutput {
     }
 
     /** 
-     * @brief   Get the actual bank setting (no matter wheter the element is 
+     * @brief   Get the actual bank setting (no matter whether the element is 
      *          locked or not).
      */
     setting_t getRawBankSetting() const { return bank.getSelection(); }
@@ -103,3 +108,5 @@ class BankableMIDIOutput {
     constexpr static setting_t UNLOCKED = NO_SETTING;
     setting_t lockedSetting = UNLOCKED;
 };
+
+END_CS_NAMESPACE

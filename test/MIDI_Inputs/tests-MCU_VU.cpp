@@ -3,6 +3,7 @@
 #include <gtest-wrapper.h>
 
 using namespace ::testing;
+using namespace CS;
 
 // -------------------------------------------------------------------------- //
 

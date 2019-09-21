@@ -2,7 +2,7 @@
 #include "ShiftRegisterOutBase.hpp"
 #include "ShiftRegisterOutRGB.hpp"
 
-using namespace ExtIO;
+BEGIN_CS_NAMESPACE
 
 template <uint8_t N>
 ShiftRegisterOutBase<N>::ShiftRegisterOutBase(pin_t latchPin, uint8_t bitOrder)
@@ -52,3 +52,5 @@ Array<pin_t, N / 3> ShiftRegisterOutBase<N>::bluePins() {
     return generateIncrementalArray<pin_t, N / 3>(
         this->pin(ShiftRegisterOutRGB::blueBit), 3);
 }
+
+END_CS_NAMESPACE

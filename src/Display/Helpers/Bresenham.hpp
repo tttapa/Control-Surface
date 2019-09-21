@@ -3,6 +3,9 @@
 #include <Arduino.h>
 #include <Printable.h>
 #include <limits.h>
+#include <Settings/SettingsWrapper.hpp>
+
+BEGIN_CS_NAMESPACE
 
 class BresenhamLine {
   public:
@@ -90,3 +93,5 @@ class BresenhamLine {
         return (T(0) < val) - (val < T(0));
     }
 };
+
+END_CS_NAMESPACE

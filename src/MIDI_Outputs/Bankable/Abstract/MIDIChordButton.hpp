@@ -7,6 +7,8 @@
 #include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -77,3 +79,5 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

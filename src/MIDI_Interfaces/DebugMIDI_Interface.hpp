@@ -3,6 +3,8 @@
 #include "SerialMIDI_Interface.hpp"
 #include <ctype.h>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for MIDI interfaces sending and receiving 
  *          human-readable MIDI messages over a Stream.
@@ -148,3 +150,5 @@ class SoftwareSerialDebugMIDI_Interface
         : SerialDebugMIDI_Interface(serial, baud) {}
 };
 #endif
+
+END_CS_NAMESPACE

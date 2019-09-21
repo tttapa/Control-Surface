@@ -18,6 +18,9 @@
 
 // If the main MCU has a USB connection or is a Teensy with MIDI USB type
 #if defined(USBCON) || defined(TEENSY_MIDIUSB_ENABLED)
+
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI
  *          connection.
@@ -147,6 +150,8 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 
 #include "SerialMIDI_Interface.hpp"
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI
  *          connection.
@@ -166,3 +171,5 @@ class USBMIDI_Interface : public USBSerialMIDI_Interface {
 };
 
 #endif
+
+END_CS_NAMESPACE

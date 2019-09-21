@@ -2,6 +2,7 @@
 #include <Selectors/IncrementSelector.hpp>
 
 using namespace ::testing;
+using namespace CS;
 
 TEST(IncrementSelector, pressWrap) {
     MockSelectable<3> selectable;

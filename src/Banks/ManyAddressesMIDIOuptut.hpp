@@ -1,6 +1,8 @@
 #include "Bank.hpp"
 #include <Def/Def.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A base class for all MIDIOutputElement#s that can have one of many
  *          addresses.
@@ -32,7 +34,7 @@ class ManyAddressesMIDIOutput {
 
   public:
     /** 
-     * @brief   Get the actual bank setting (no matter wheter the element is 
+     * @brief   Get the actual bank setting (no matter whether the element is 
      *          locked or not).
      */
     setting_t getRawBankSetting() const { return bank.getSelection(); }
@@ -73,3 +75,5 @@ class ManyAddressesMIDIOutput {
     constexpr static setting_t UNLOCKED = NO_SETTING;
     setting_t lockedSetting = UNLOCKED;
 };
+
+END_CS_NAMESPACE

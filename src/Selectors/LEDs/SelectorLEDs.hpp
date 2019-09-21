@@ -4,6 +4,8 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Selectors/Selector.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <setting_t N>
 class SelectorLEDs : virtual public Selector<N> {
   public:
@@ -23,3 +25,5 @@ class SelectorLEDs : virtual public Selector<N> {
   private:
     const PinList<N> ledPins;
 };
+
+END_CS_NAMESPACE

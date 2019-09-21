@@ -126,3 +126,7 @@
 #include <Audio/AudioVULEDs.hpp>
 #include <Audio/VolumeControl.hpp>
 #endif
+
+#ifndef NO_USING_NAMESPACE_CS
+using namespace CS;
+#endif

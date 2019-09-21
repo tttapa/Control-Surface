@@ -3,6 +3,7 @@
 #include <gtest-wrapper.h>
 
 using namespace ::testing;
+using namespace CS;
 
 /**
  * Upon construction, the button pin should be set to `INPUT_PULLUP`.

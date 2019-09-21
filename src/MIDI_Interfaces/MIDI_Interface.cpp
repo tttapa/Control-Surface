@@ -1,5 +1,7 @@
 #include "MIDI_Interface.hpp"
 
+BEGIN_CS_NAMESPACE
+
 MIDI_Interface::MIDI_Interface() {
     setAsDefault(); // Make this the default MIDI Interface
 }
@@ -133,3 +135,5 @@ void Parsing_MIDI_Interface::onSysExMessage() {
     if (callbacks)
         callbacks->onSysExMessage(*this);
 }
+
+END_CS_NAMESPACE

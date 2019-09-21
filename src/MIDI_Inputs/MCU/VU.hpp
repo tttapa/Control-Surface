@@ -6,6 +6,8 @@
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <string.h>
 
+BEGIN_CS_NAMESPACE
+
 /** 
  * @brief   An abstract interface for VU meters. It declares two methods:
  *          `getValue` and `getOverload`.
@@ -253,3 +255,5 @@ class VU : virtual public VU_Base, public BankableMIDIInput<N> {
 } // namespace Bankable
 
 } // namespace MCU
+
+END_CS_NAMESPACE

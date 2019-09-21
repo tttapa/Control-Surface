@@ -6,6 +6,8 @@
 #include <Helpers/Debug.hpp>
 #include <Helpers/LinkedList.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A base class for all MIDIInputElement#s that can be banked.
  * 
@@ -239,3 +241,5 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      */
     virtual void onBankSettingChange() const {}
 };
+
+END_CS_NAMESPACE

@@ -4,6 +4,8 @@
 #include <Helpers/LinkedList.hpp>
 #include <Print.h>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An interface for displays. 
  * 
@@ -92,3 +94,5 @@ class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
   private:
     static DoublyLinkedList<DisplayInterface> elements;
 };
+
+END_CS_NAMESPACE

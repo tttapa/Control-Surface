@@ -3,6 +3,8 @@
 #include "SelectorLEDs.hpp"
 #include <Selectors/IncrementDecrementSelector.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <setting_t N>
 class IncrementDecrementSelectorLEDs
     : public IncrementDecrementSelector_Base<N>,
@@ -16,3 +18,5 @@ class IncrementDecrementSelectorLEDs
           IncrementDecrementSelector_Base<N>(buttons, wrap),
           SelectorLEDs<N>(ledPins) {}
 };
+
+END_CS_NAMESPACE

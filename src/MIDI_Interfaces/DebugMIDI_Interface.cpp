@@ -1,5 +1,7 @@
 #include "DebugMIDI_Interface.hpp"
 
+BEGIN_CS_NAMESPACE
+
 namespace DebugMIDIMessageNames {
 
 #ifdef PROGMEM
@@ -111,3 +113,5 @@ void StreamDebugMIDI_Interface::sendImpl(const uint8_t *data, size_t length,
     (void)length;
     (void)cn; // TODO
 }
+
+END_CS_NAMESPACE

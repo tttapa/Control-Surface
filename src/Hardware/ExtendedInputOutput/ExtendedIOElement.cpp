@@ -3,6 +3,8 @@
 #include <Helpers/Error.hpp>
 #include <Helpers/Helpers.hpp>
 
+BEGIN_CS_NAMESPACE
+
 ExtendedIOElement::ExtendedIOElement(pin_t length)
     : length(length), start(offset), end(offset + length) {
     if (end < start)
@@ -51,3 +53,5 @@ DoublyLinkedList<ExtendedIOElement> &ExtendedIOElement::getAll() {
 DoublyLinkedList<ExtendedIOElement> ExtendedIOElement::elements;
 
 pin_t ExtendedIOElement::offset = NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS;
+
+END_CS_NAMESPACE

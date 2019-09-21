@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButtonMatrix.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -61,3 +63,5 @@ class NoteButtonMatrix
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

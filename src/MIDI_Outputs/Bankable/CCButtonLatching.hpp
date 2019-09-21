@@ -1,6 +1,8 @@
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButtonLatching.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -42,3 +44,5 @@ class CCButtonLatching : public MIDIButtonLatching<DigitalCCSender> {
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

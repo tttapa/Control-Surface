@@ -2,6 +2,8 @@
 
 #include <MIDI_Inputs/MIDINote.hpp>
 
+using namespace CS;
+
 TEST(MIDINote, NoteOnNoteOff) {
     MIDINote mn = {{0x3C, CHANNEL_5}};
 

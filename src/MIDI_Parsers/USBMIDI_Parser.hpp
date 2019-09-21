@@ -11,6 +11,8 @@
 #define USB_MIDI_NUMBER_OF_CABLES 1
 #endif
 
+BEGIN_CS_NAMESPACE
+
 class USBMIDI_Parser : public MIDI_Parser {
   public:
     MIDI_read_t parse(uint8_t *packet);
@@ -42,3 +44,5 @@ class USBMIDI_Parser : public MIDI_Parser {
     SysExBuffer sysexbuffers[USB_MIDI_NUMBER_OF_CABLES];
 #endif
 };
+
+END_CS_NAMESPACE

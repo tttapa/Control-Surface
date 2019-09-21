@@ -1,5 +1,9 @@
 #pragma once
 
+#include <Settings/NamespaceSettings.hpp>
+
+BEGIN_CS_NAMESPACE
+
 /// Type-safe class for frequency values.
 class Frequency {
   public:
@@ -24,3 +28,5 @@ constexpr Frequency operator"" _MHz(long double mhz) {
 constexpr Frequency operator"" _MHz(unsigned long long mhz) {
     return Frequency{(unsigned long)(mhz * 1E6)};
 }
+
+END_CS_NAMESPACE

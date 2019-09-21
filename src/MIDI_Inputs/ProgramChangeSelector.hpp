@@ -1,6 +1,8 @@
 #include "MIDIInputElementPC.hpp"
 #include <Selectors/LEDs/SelectorLEDs.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <setting_t N>
 class ProgramChangeSelector_Base : public MIDIInputElementPC,
                                    virtual public Selector<N> {
@@ -56,3 +58,5 @@ class ProgramChangeSelectorLEDs : public ProgramChangeSelector_Base<N>,
         : Selector<N>{selectable}, ProgramChangeSelector_Base<N>{address},
           SelectorLEDs<N>{ledPins} {}
 };
+
+END_CS_NAMESPACE

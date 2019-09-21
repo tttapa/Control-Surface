@@ -1,5 +1,7 @@
 #include "Button.hpp"
 
+BEGIN_CS_NAMESPACE
+
 using namespace ExtIO;
 
 Button::Button(pin_t pin) : pin(pin) {}
@@ -41,3 +43,5 @@ const char *Button::getName(Button::State state) {
 }
 
 unsigned long Button::stableTime() { return millis() - prevBounceTime; }
+
+END_CS_NAMESPACE

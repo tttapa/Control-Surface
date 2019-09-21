@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Abstract/MIDIButtons.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **collection 
  *          of momentary push buttons or switches**, and send out MIDI **Note** 
@@ -47,3 +49,5 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS> {
         : MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS>(
               buttons, baseAddress, incrementAddress, sender) {}
 };
+
+END_CS_NAMESPACE

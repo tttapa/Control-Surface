@@ -8,10 +8,10 @@
 # pragma GCC diagnostic ignored "-Wsuggest-override"
 #endif
 
-template <setting_t N>
-class MockSelectable : public Selectable<N> {
+template <CS::setting_t N>
+class MockSelectable : public CS::Selectable<N> {
   public:
-    MOCK_METHOD1(select, void(setting_t));
+    MOCK_METHOD1(select, void(CS::setting_t));
 };
 
 #if __GNUC__ >= 5

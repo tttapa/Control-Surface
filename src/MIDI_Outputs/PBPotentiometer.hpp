@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Abstract/MIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/PitchBendSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the analog input from a
  *          **potentiometer or fader**, and send out 14-bit MIDI **Pitch Bend** 
@@ -34,3 +36,5 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>, 10> {
                     const PitchBendSender<10> &sender = {})
         : MIDIFilteredAnalog(analogPin, address, sender) {}
 };
+
+END_CS_NAMESPACE

@@ -6,6 +6,8 @@
 
 #include "MovingCoilBallistics.hpp"
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A VU meter that reads from an Audio stream using the 
  *          Analyzer class.
@@ -131,3 +133,5 @@ class AudioVU : public IVU {
 
     float gain;
 };
+
+END_CS_NAMESPACE

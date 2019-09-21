@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Abstract/MIDIButtonMatrix.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input from a **matrix
  *          of momentary push buttons or switches**, and send out MIDI **Control
@@ -54,3 +56,5 @@ class CCButtonMatrix
         : MIDIButtonMatrix<DigitalCCSender, nb_rows, nb_cols>(
               rowPins, colPins, controllers, channelCN, sender) {}
 };
+
+END_CS_NAMESPACE

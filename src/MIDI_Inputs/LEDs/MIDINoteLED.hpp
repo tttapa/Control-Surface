@@ -3,6 +3,8 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <MIDI_Inputs/MIDINote.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /** A base class for MIDI note input LED display. */
 class MIDINoteLED_Base : virtual public MIDINote_Base {
   protected:
@@ -50,3 +52,5 @@ class MIDINoteLED : public MIDINote<N>, public MIDINoteLED_Base {
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

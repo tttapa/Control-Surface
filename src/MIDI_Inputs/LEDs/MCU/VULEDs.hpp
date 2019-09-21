@@ -3,6 +3,8 @@
 #include <Hardware/LEDs/DotBarDisplayLEDs.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
 template <uint8_t N>
@@ -66,3 +68,5 @@ class VULEDs : public VU<M>, public VULEDs_Base<N> {
 } // namespace Bankable
 
 } // namespace MCU
+
+END_CS_NAMESPACE

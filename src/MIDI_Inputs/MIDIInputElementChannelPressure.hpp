@@ -10,6 +10,8 @@
 #define GUARD_LIST_LOCK
 #endif
 
+BEGIN_CS_NAMESPACE
+
 class MIDIInputElementChannelPressure
     : public MIDIInputElement,
       public DoublyLinkable<MIDIInputElementChannelPressure> {
@@ -94,3 +96,5 @@ class MIDIInputElementChannelPressure
 };
 
 #undef GUARD_LIST_LOCK
+
+END_CS_NAMESPACE

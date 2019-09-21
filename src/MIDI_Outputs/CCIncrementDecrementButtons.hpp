@@ -4,6 +4,8 @@
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 #include <MIDI_Senders/RelativeCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of **two
  *          momentary push buttons** to increment or decrement a **relative 
@@ -50,3 +52,5 @@ class CCIncrementDecrementButtons
         : MIDIIncrementDecrementButtons(buttons, address, multiplier, resetNote,
                                         relativeSender, resetSender) {}
 };
+
+END_CS_NAMESPACE

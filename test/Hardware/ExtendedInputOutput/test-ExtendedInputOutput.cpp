@@ -5,6 +5,7 @@
 #include <type_traits>
 
 using namespace ::testing;
+using namespace CS;
 using namespace ExtIO;
 
 #if __GNUC__ >= 5

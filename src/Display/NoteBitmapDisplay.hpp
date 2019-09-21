@@ -4,6 +4,8 @@
 #include <Display/DisplayElement.hpp>
 #include <MIDI_Inputs/MIDINote.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /// A class that displays a bitmap depending on the state of a MIDINote.
 class NoteBitmapDisplay : public DisplayElement {
   public:
@@ -23,3 +25,5 @@ class NoteBitmapDisplay : public DisplayElement {
     int16_t x, y;
     uint16_t color;
 };
+
+END_CS_NAMESPACE

@@ -4,6 +4,8 @@
 
 #include <Def/Def.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /// A struct for saving a MIDI address consisting of a 7-bit address, a 4-bit
 /// channel, and a 4-bit cable number.
 struct __attribute__((packed)) RawMIDICNChannelAddress {
@@ -131,3 +133,5 @@ class MIDICNChannelAddress {
   private:
     RawMIDICNChannelAddress addresses;
 };
+
+END_CS_NAMESPACE

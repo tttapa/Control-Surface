@@ -5,6 +5,8 @@
 #include "ExtendedIOElement.hpp"
 #include <Helpers/ArrayHelpers.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /** 
  * @brief   A class for ExtendedIOElement#s with a fixed size.
  * 
@@ -25,3 +27,5 @@ class StaticSizeExtendedIOElement : public ExtendedIOElement {
 
     static constexpr uint16_t length() { return N; }
 };
+
+END_CS_NAMESPACE

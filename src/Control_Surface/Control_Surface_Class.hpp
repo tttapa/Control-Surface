@@ -8,6 +8,8 @@
 #include <Display/DisplayInterface.hpp>
 #include <Helpers/MillisTimer.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /** 
  * @brief   This class ensures initialization, updating, and interaction between
  *          all other classes, it's the glue that holds everything together.
@@ -120,3 +122,5 @@ class Control_Surface_ : public MIDI_Callbacks {
 
 /// A predefined instance of the Control Surface to use in the Arduino sketches.
 extern Control_Surface_ &Control_Surface;
+
+END_CS_NAMESPACE

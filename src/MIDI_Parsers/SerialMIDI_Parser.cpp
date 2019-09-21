@@ -1,5 +1,7 @@
 #include "SerialMIDI_Parser.hpp"
 
+BEGIN_CS_NAMESPACE
+
 MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
     DEBUGFN(hex << NAMEDVALUE(+midiByte) << dec);
 #ifndef IGNORE_SYSEX
@@ -73,3 +75,5 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
     }
     return NO_MESSAGE;
 }
+
+END_CS_NAMESPACE

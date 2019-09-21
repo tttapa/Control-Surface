@@ -5,6 +5,8 @@
 #include <stdint.h>
 #include <Helpers/Helpers.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <setting_t N> // TODO: check bounds here?
 class Selectable {
   public:
@@ -29,3 +31,5 @@ class Selectable {
   private:
     const setting_t initialSelection;
 };
+
+END_CS_NAMESPACE

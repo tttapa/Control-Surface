@@ -4,6 +4,8 @@
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
  *
@@ -46,3 +48,5 @@ class MIDIButton : public MIDIOutputElement {
     const MIDICNChannelAddress address;
     Sender sender;
 };
+
+END_CS_NAMESPACE

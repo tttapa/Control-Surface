@@ -7,6 +7,8 @@
 
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -75,3 +77,5 @@ class MIDIIncrementDecrementButtons : public BankableMIDIOutput,
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

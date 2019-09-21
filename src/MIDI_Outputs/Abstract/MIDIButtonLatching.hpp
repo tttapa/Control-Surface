@@ -4,6 +4,8 @@
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for latching buttons and switches that send MIDI events.
  *
@@ -40,3 +42,5 @@ class MIDIButtonLatching : public MIDIOutputElement {
     const MIDICNChannelAddress address;
     Sender sender;
 };
+
+END_CS_NAMESPACE

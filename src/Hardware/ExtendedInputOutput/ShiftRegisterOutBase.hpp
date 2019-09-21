@@ -5,6 +5,8 @@
 #include "StaticSizeExtendedIOElement.hpp"
 #include <Helpers/BitArray.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for serial-in/parallel-out shift registers, 
  *          like the 74HC595.
@@ -138,5 +140,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
     BitArray<N> buffer;
     bool dirty = true;
 };
+
+END_CS_NAMESPACE
 
 #include "ShiftRegisterOutBase.ipp"

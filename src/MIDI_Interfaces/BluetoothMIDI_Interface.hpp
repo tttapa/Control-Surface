@@ -5,6 +5,8 @@
 
 #include <Helpers/Error.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   Bluetooth Low Energy MIDI Interface for the ESP32.
  * 
@@ -163,3 +165,5 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
 
     BLEMIDI &getBLEMIDI() { return bleMidi; }
 };
+
+END_CS_NAMESPACE

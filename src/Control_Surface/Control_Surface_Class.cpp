@@ -10,6 +10,8 @@
 
 #include <Arduino.h>
 
+BEGIN_CS_NAMESPACE
+
 Control_Surface_ &Control_Surface_::getInstance() {
     static Control_Surface_ instance;
     return instance;
@@ -165,3 +167,5 @@ void Control_Surface_::updateDisplays() {
 }
 
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();
+
+END_CS_NAMESPACE

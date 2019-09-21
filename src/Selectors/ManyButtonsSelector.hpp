@@ -4,6 +4,8 @@
 #include <Def/Def.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <setting_t N>
 class ManyButtonsSelector_Base : virtual public Selector<N> {
   protected:
@@ -42,3 +44,5 @@ class ManyButtonsSelector : public ManyButtonsSelector_Base<N> {
     void updateOutput(UNUSED_PARAM setting_t oldSetting,
                       UNUSED_PARAM setting_t newSetting) override {}
 };
+
+END_CS_NAMESPACE

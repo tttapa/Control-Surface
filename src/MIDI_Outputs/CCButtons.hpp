@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Abstract/MIDIButtons.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **collection
  *          of momentary push buttons or switches**, and send out MIDI **Control
@@ -47,3 +49,5 @@ class CCButtons : public MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS> {
         : MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS>(
               buttons, baseAddress, incrementAddress, sender) {}
 };
+
+END_CS_NAMESPACE

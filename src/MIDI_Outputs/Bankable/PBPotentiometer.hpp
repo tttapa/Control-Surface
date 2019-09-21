@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Bankable/Abstract/MIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/PitchBendSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -42,3 +44,5 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>, 10> {
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

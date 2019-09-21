@@ -3,6 +3,8 @@
 #include "Selector.hpp"
 #include <Hardware/IncrementDecrementButtons.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <setting_t N>
 class IncrementDecrementSelector_Base : virtual public Selector<N> {
   public:
@@ -47,3 +49,5 @@ class IncrementDecrementSelector : public IncrementDecrementSelector_Base<N> {
     void updateOutput(UNUSED_PARAM setting_t oldSetting,
                       UNUSED_PARAM setting_t newSetting) override {}
 };
+
+END_CS_NAMESPACE

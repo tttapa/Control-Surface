@@ -2,6 +2,8 @@
 
 #include "MAX7219_Base.hpp"
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A lookup table for 7-segment characters, as specified by the Logic
  *          Control manual.
@@ -143,3 +145,5 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
         return 8 - i - startPos;
     }
 };
+
+END_CS_NAMESPACE

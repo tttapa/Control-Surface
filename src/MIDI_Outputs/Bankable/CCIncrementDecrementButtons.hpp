@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Bankable/Abstract/MIDIIncrementDecrementButtons.hpp>
 #include <MIDI_Senders/RelativeCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -58,3 +60,5 @@ class CCIncrementDecrementButtons
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE
