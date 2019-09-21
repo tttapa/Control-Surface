@@ -48,7 +48,6 @@ class MIDIInputElement {
         if (!updateImpl(midimsg, target))
             return false;
         DEBUGFN(F("Updated"));
-        moveDown();
         display();
         return true;
     }
@@ -78,14 +77,6 @@ class MIDIInputElement {
     virtual inline bool match(const MIDICNChannelAddress &target) const {
         return MIDICNChannelAddress::matchSingle(this->address, target);
     }
-
-    /**
-     * @brief   Move down this element in the linked list of elements.
-     * 
-     * This means that the element will be checked earlier on the next
-     * iteration.
-     */
-    virtual void moveDown() = 0;
 
   protected:
     const MIDICNChannelAddress address;
