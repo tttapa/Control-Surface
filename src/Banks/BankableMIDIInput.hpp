@@ -68,8 +68,8 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      *          The base address to compare it to (the address of bank setting 
      *          0).
      */
-    uint8_t getIndex(const MIDICNChannelAddress &target,
-                     const MIDICNChannelAddress &base) const {
+    uint8_t getBankIndex(const MIDICNChannelAddress &target,
+                         const MIDICNChannelAddress &base) const {
         switch (type) {
             case CHANGE_ADDRESS:
                 return (target.getAddress() - base.getAddress()) /

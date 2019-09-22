@@ -133,7 +133,7 @@ class VPotRing : virtual public VPotRing_Base, public BankableMIDIInput<N> {
   private:
     bool updateImpl(const ChannelMessageMatcher &midimsg,
                     const MIDICNChannelAddress &target) override {
-        uint8_t index = this->getIndex(target, address);
+        uint8_t index = this->getBankIndex(target, address);
         uint8_t value = sanitizeValue(midimsg.data2);
         values[index] = value;
         return true;

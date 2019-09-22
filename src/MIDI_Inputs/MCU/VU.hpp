@@ -208,7 +208,7 @@ class VU : virtual public VU_Base, public BankableMIDIInput<N> {
     bool updateImpl(const ChannelMessageMatcher &midimsg,
                     const MIDICNChannelAddress &target) override {
         uint8_t index =
-            this->getIndex(target, address) % N; // Todo: modulo everywhere?
+            this->getBankIndex(target, address) % N; // Todo: modulo everywhere?
         uint8_t data = midimsg.data1 & 0x0F;
         switch (data) {
             case 0xF: clearOverload(index); break;

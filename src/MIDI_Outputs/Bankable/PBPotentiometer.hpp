@@ -37,10 +37,10 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>, 10> {
      * @param   sender
      *          The MIDI sender to use.
      */
-    PBPotentiometer(const OutputBankConfig &bank, pin_t analogPin,
+    PBPotentiometer(const OutputBankConfig &config, pin_t analogPin,
                     const MIDICNChannel &address,
                     const PitchBendSender<10> &sender = {})
-        : MIDIFilteredAnalog{bank, analogPin, address, sender} {}
+        : MIDIFilteredAnalog{config, analogPin, address, sender} {}
 };
 
 } // namespace Bankable

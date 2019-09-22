@@ -9,14 +9,15 @@ BEGIN_CS_NAMESPACE
 namespace MCU {
 
 template <uint8_t LENGTH>
-class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
+class SevenSegmentDisplay : public MIDINoteCCRange_Base<MIDIInputElementCC>,
+                            public Printable {
   public:
     /**
     * @brief     Constructor.
     * @todo      Documentation.
     */
     SevenSegmentDisplay(const MIDICNChannelAddress &address)
-        : MIDIInputElementCC{address} {
+        : MIDINoteCCRange_Base<MIDIInputElementCC>{address} {
         reset();
     }
 
@@ -31,12 +32,13 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
      */
     virtual bool updateImpl(const ChannelMessageMatcher &midimsg,
                             const MIDICNChannelAddress &target) override {
-        uint8_t index =
-            LENGTH - (target.getAddress() - address.getAddress()) - 1;
-        // decimal point → 0x80, no decimal point → 0x00
+        uint8_t index = LENGTH - 1 - getRangeIndex(target);
+        // MIDI msg: character data → bits 0-5
+        // MIDI msg: decimal point → bit 6 set, no decimal point → bit 6 not set
+        // text:   decimal point → bit 7 set, no decimal point → bit 7 not set
         uint8_t decimalPt = (midimsg.data2 & 0x40) << 1;
-        uint8_t data2 = midimsg.data2 & 0x3F;
-        uint8_t character = data2 >= 0x20 ? data2 : data2 + 0x40;
+        uint8_t chardata = midimsg.data2 & 0x3F;
+        uint8_t character = chardata >= 0x20 ? chardata : chardata + 0x40;
         character |= decimalPt;
         text[index] = character;
         return true;
@@ -46,7 +48,7 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
      * @brief   Check if the address of the incoming MIDI message
      *          matches an address of this element.
      */
-    inline bool match(const MIDICNChannelAddress &target) const override {
+    bool match(const MIDICNChannelAddress &target) const override {
         return MIDICNChannelAddress::matchAddressInRange(target, address,
                                                          LENGTH);
     }
@@ -55,10 +57,15 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
     /**
      * @brief   Copy the ASCII text into the given buffer.
      *
-     * @param   buffer
+     * @param[out] buffer
      *          The destination to write the text to.
      *          Will be null-terminated.
      *          Should have a size of at least `length`+1 bytes.
+     * @param[in] offset
+     *          The offset to start copying from (in the source text, the offset
+     *          in the destination buffer is always zero).
+     * @param[in] length
+     *          The number of characters to copy.
      */
     void getText(char *buffer, uint8_t offset = 0,
                  uint8_t length = LENGTH) const {
@@ -75,14 +82,12 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
      * @brief   Get the character at the given index.
      * @todo    Documentation.
      */
-    inline char getCharacterAt(uint8_t index) const {
-        return text[index] & 0x7F;
-    }
+    char getCharacterAt(uint8_t index) const { return text[index] & 0x7F; }
 
     /**
      * @brief   Copy the decimal points into the given buffer.
      *
-     * @param   buffer
+     * @param[out] buffer
      *          The destination to write the decimal points to.
      *          Should have a size of at least `LENGTH` bytes.
      */
@@ -95,9 +100,7 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
      * @brief   Get the decimal point state at the given index.
      * @todo    Documentation.
      */
-    inline bool getDecimalPointAt(uint8_t index) const {
-        return text[index] & 0x80;
-    }
+    bool getDecimalPointAt(uint8_t index) const { return text[index] & 0x80; }
 
     /**
      * @brief   Print out the text of the display to the given Print.

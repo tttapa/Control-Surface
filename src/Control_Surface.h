@@ -16,13 +16,13 @@
 #include <Control_Surface/Control_Surface_Class.hpp>
 
 // -------------------------------- Display --------------------------------- //
-#include "Display/Bitmaps/XBitmaps.hpp"
-#include "Display/MCU/TimeDisplayDisplay.hpp"
-#include "Display/MCU/VPotDisplay.hpp"
-#include "Display/MCU/VUDisplay.hpp"
-#include "Display/NoteBitmapDisplay.hpp"
-#include "Display/SelectorDisplay.hpp"
-#include <Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
+// #include "Display/Bitmaps/XBitmaps.hpp"
+// #include "Display/MCU/TimeDisplayDisplay.hpp"
+// #include "Display/MCU/VPotDisplay.hpp"
+// #include "Display/MCU/VUDisplay.hpp"
+// #include "Display/NoteBitmapDisplay.hpp"
+// #include "Display/SelectorDisplay.hpp"
+// #include <Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
 
 // ------------------------------ MIDI Outputs ------------------------------ //
 #include <MIDI_Outputs/CCButton.hpp>
@@ -68,15 +68,16 @@
 #endif
 
 // ------------------------------ MIDI Inputs ------------------------------- //
-#include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
-#include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
-#include <MIDI_Inputs/MCU/VPotRing.hpp>
-#include <MIDI_Inputs/MCU/VU.hpp>
-#include <MIDI_Inputs/MIDINote.hpp>
+// #include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
+// #include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
+// #include <MIDI_Inputs/MCU/VPotRing.hpp>
+// #include <MIDI_Inputs/MCU/VU.hpp>
+// #include <MIDI_Inputs/MIDINote.hpp>
 
-#include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
-#include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>
-#include <MIDI_Inputs/LEDs/MIDINoteLED.hpp>
+// #include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
+// #include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>
+// #include <MIDI_Inputs/LEDs/MIDINoteLED.hpp>
+#include <MIDI_Inputs/MIDINoteCCRange.hpp>
 
 // ------------------------------- Selectors -------------------------------- //
 #include <Selectors/IncrementDecrementSelector.hpp>

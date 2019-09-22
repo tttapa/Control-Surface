@@ -29,9 +29,6 @@ class MIDIInputElement {
     /// Initialize the input element.
     virtual void begin() {}
 
-    /// Update the display of the input element.
-    virtual void display() const {}
-
     /// Reset the input element to its initial state.
     virtual void reset() = 0;
 
@@ -48,7 +45,6 @@ class MIDIInputElement {
         if (!updateImpl(midimsg, target))
             return false;
         DEBUGFN(F("Updated"));
-        display();
         return true;
     }
 
