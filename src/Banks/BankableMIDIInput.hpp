@@ -111,7 +111,7 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      */
     bool matchBankable(uint8_t toMatch, uint8_t base) const {
         uint8_t diff = toMatch - base;
-        return toMatch >= base && diff <= N * bank.getTracksPerBank() &&
+        return toMatch >= base && diff < N * bank.getTracksPerBank() &&
                diff % bank.getTracksPerBank() == 0;
     }
 
@@ -131,7 +131,7 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
     bool matchBankableInRange(uint8_t toMatch, uint8_t base,
                               uint8_t length) const {
         uint8_t diff = toMatch - base;
-        return toMatch >= base && diff <= N * bank.getTracksPerBank() &&
+        return toMatch >= base && diff < N * bank.getTracksPerBank() &&
                diff % bank.getTracksPerBank() < length;
     }
 
