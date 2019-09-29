@@ -239,7 +239,7 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      * the bank setting is 1, the LED displays the state of track 7.  
      * To know when to update the LED, this callback is used.
      */
-    virtual void onBankSettingChange() const {}
+    virtual void onBankSettingChange() {}
 };
 
 END_CS_NAMESPACE

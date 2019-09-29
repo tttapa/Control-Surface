@@ -9,15 +9,14 @@ BEGIN_CS_NAMESPACE
 namespace MCU {
 
 template <uint8_t LENGTH>
-class SevenSegmentDisplay : public MIDINoteCCRange_Base<MIDIInputElementCC>,
-                            public Printable {
+class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
   public:
     /**
     * @brief     Constructor.
     * @todo      Documentation.
     */
     SevenSegmentDisplay(const MIDICNChannelAddress &address)
-        : MIDINoteCCRange_Base<MIDIInputElementCC>{address} {
+        : MIDIInputElementCC{address} {
         reset();
     }
 
@@ -51,6 +50,11 @@ class SevenSegmentDisplay : public MIDINoteCCRange_Base<MIDIInputElementCC>,
     bool match(const MIDICNChannelAddress &target) const override {
         return MIDICNChannelAddress::matchAddressInRange(target, address,
                                                          LENGTH);
+    }
+
+    /// @todo
+    uint8_t getRangeIndex(const MIDICNChannelAddress &target) const {
+        return target.getAddress() - this->address.getAddress();
     }
 
   public:

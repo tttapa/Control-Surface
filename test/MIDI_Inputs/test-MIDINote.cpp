@@ -1,30 +1,30 @@
 #include <gtest-wrapper.h>
 
-#include <MIDI_Inputs/MIDINote.hpp>
+#include <MIDI_Inputs/MIDINoteCCRange.hpp>
 
 using namespace CS;
 
-TEST(MIDINote, NoteOnNoteOff) {
-    MIDINote mn = {{0x3C, CHANNEL_5}};
+TEST(NoteValue, NoteOnNoteOff) {
+    NoteValue mn = {{0x3C, CHANNEL_5}};
 
     EXPECT_EQ(mn.getValue(), 0);
-    EXPECT_FALSE(mn.getState());
+    EXPECT_FALSE(mn.getValue() > 0);
 
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg1);
 
     EXPECT_EQ(mn.getValue(), 0x7E);
-    EXPECT_TRUE(mn.getState());
+    EXPECT_TRUE(mn.getValue() > 0);
 
     ChannelMessageMatcher midimsg2 = {0x80, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg2);
 
     EXPECT_EQ(mn.getValue(), 0);
-    EXPECT_FALSE(mn.getState());
+    EXPECT_FALSE(mn.getValue() > 0);
 }
 
-TEST(MIDINote, NoteOnNoteOnZeroVelocity) {
-    MIDINote mn = {{0x3C, CHANNEL_5}};
+TEST(NoteValue, NoteOnNoteOnZeroVelocity) {
+    NoteValue mn = {{0x3C, CHANNEL_5}};
 
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg1);
@@ -33,11 +33,11 @@ TEST(MIDINote, NoteOnNoteOnZeroVelocity) {
     MIDIInputElementNote::updateAllWith(midimsg2);
 
     EXPECT_EQ(mn.getValue(), 0);
-    EXPECT_FALSE(mn.getState());
+    EXPECT_FALSE(mn.getValue() > 0);
 }
 
-TEST(MIDINote, reset) {
-    MIDINote mn = {{0x3C, CHANNEL_5}};
+TEST(NoteValue, reset) {
+    NoteValue mn = {{0x3C, CHANNEL_5}};
 
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg1);
@@ -45,11 +45,11 @@ TEST(MIDINote, reset) {
     mn.reset();
 
     EXPECT_EQ(mn.getValue(), 0);
-    EXPECT_FALSE(mn.getState());
+    EXPECT_FALSE(mn.getValue() > 0);
 }
 
-TEST(MIDINote, resetAll) {
-    MIDINote mn = {{0x3C, CHANNEL_5}};
+TEST(NoteValue, resetAll) {
+    NoteValue mn = {{0x3C, CHANNEL_5}};
 
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg1);
@@ -57,17 +57,19 @@ TEST(MIDINote, resetAll) {
     MIDIInputElementNote::resetAll();
 
     EXPECT_EQ(mn.getValue(), 0);
-    EXPECT_FALSE(mn.getState());
+    EXPECT_FALSE(mn.getValue() > 0);
 }
 
-#include <MIDI_Inputs/LEDs/MIDINoteLED.hpp>
+#include <MIDI_Inputs/LEDs/CCNoteRangeLEDs.hpp>
 
-TEST(MIDINoteLED, NoteOnNoteOff) {
-    MIDINoteLED mnl = {2, {0x3C, CHANNEL_5}};
+TEST(NoteValueLED, NoteOnNoteOff) {
+    NoteValueLED mnl = {{0x3C, CHANNEL_5}, {{2}}};
 
     ::testing::Sequence seq;
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, OUTPUT)).InSequence(seq);
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, LOW))
+        .InSequence(seq);
     MIDIInputElementNote::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, HIGH))

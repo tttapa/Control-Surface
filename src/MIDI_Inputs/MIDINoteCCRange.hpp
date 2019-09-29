@@ -16,7 +16,9 @@ class MIDINoteCCRangeEmptyCallback {
     void update(const T &) {}
 };
 
-template <class MIDIInput_t, uint8_t L,
+// -------------------------------------------------------------------------- //
+
+template <class MIDIInput_t, uint8_t RangeLen,
           class Callback = MIDINoteCCRangeEmptyCallback>
 class MIDINoteCCRange : public MIDIInput_t {
   public:
@@ -24,7 +26,7 @@ class MIDINoteCCRange : public MIDIInput_t {
                     const Callback &callback = {})
         : MIDIInput_t{address}, callback{callback} {}
 
-    /// @todo: check index bounds
+    /// @todo   check index bounds
     uint8_t getValue(uint8_t index = 0) const { return values[index]; }
 
     void begin() override { callback.begin(*this); }
@@ -37,7 +39,7 @@ class MIDINoteCCRange : public MIDIInput_t {
   private:
     bool match(const MIDICNChannelAddress &target) const override {
         return MIDICNChannelAddress::matchAddressInRange( //
-            target, this->address, L);
+            target, this->address, RangeLen);
     }
 
     bool updateImpl(const ChannelMessageMatcher &midimsg,
@@ -57,99 +59,100 @@ class MIDINoteCCRange : public MIDIInput_t {
         return target.getAddress() - this->address.getAddress();
     }
 
-    Array<uint8_t, L> values = {};
+    Array<uint8_t, RangeLen> values = {};
 
   public:
     Callback callback;
-    constexpr static uint8_t length() { return L; }
+    constexpr static uint8_t length() { return RangeLen; }
 };
 
-template <uint8_t L>
-using NoteRange = MIDINoteCCRange<MIDIInputElementNote, L>;
+// -------------------------------------------------------------------------- //
+
+template <uint8_t RangeLen>
+using NoteRange = MIDINoteCCRange<MIDIInputElementNote, RangeLen>;
 using NoteValue = MIDINoteCCRange<MIDIInputElementNote, 1>;
 
-template <uint8_t L>
-using CCRange = MIDINoteCCRange<MIDIInputElementCC, L>;
+template <uint8_t RangeLen>
+using CCRange = MIDINoteCCRange<MIDIInputElementCC, RangeLen>;
 using CCValue = MIDINoteCCRange<MIDIInputElementCC, 1>;
 
 // -------------------------------------------------------------------------- //
 
-#if 0
+#if 1
 
 namespace Bankable {
 
-template <class MIDIInput_t, uint8_t L, uint8_t N, class Callback>
-class MIDINoteCCRange;
-
-template <class MIDIInput_t, uint8_t L, uint8_t N>
-struct MIDINoteCCRange
-    : public MIDINoteCCRange<MIDIInput_t, L, N> {
-    void begin() {}
-    void update(uint8_t index) {}
-    void update() {}
-};
-
-/// @tparam L
+/// @tparam RangeLen
 ///         The length of the range.
-/// @tparam N
+/// @tparam BankSize
 ///         The size of the bank.
-/// @todo
-template <class MIDIInput_t, uint8_t L, uint8_t N,
-          class Callback = MIDINoteCCRange<MIDIInput_t, L, N>>
-class MIDINoteCCRange : public MIDINoteCCRange_Base<MIDIInput_t>,
-                        public BankableMIDIInput<N> {
+template <class MIDIInput_t, uint8_t RangeLen, uint8_t BankSize,
+          class Callback = MIDINoteCCRangeEmptyCallback>
+class MIDINoteCCRange : public MIDIInput_t, public BankableMIDIInput<BankSize> {
   public:
-    MIDINoteCCRange(const BankConfig<N> &config,
-                    const MIDICNChannelAddress &address)
-        : MIDINoteCCRange_Base<MIDIInput_t>(address), //
-          BankableMIDIInput<N>(config) {}
+    MIDINoteCCRange(const BankConfig<BankSize> &config,
+                    const MIDICNChannelAddress &address,
+                    const Callback &callback = {})
+        : MIDIInput_t{address},
+          BankableMIDIInput<BankSize>{config}, callback{callback} {}
 
-    /// @todo: check index bounds
+    /// @todo   check index bounds
     uint8_t getValue(uint8_t index = 0) const {
         // getSelection will always be less than N
         return values[this->getSelection()][index];
     }
 
-    void begin() override { callback.begin(); }
+    void begin() override { callback.begin(*this); }
 
     void reset() override {
         values = {};
-        callback.update();
+        callback.update(*this);
     }
 
   private:
     bool updateImpl(const ChannelMessageMatcher &midimsg,
                     const MIDICNChannelAddress &target) override {
-        uint8_t bankindex = this->getBankIndex(target, address);
+        uint8_t bankIndex = this->getBankIndex(target, this->address);
         uint8_t rangeIndex = this->getRangeIndex(target);
         uint8_t value = getValueFromMIDIMessage(midimsg);
-        values[bankindex][rangeIndex] = value;
-        if (bankindex == this->getSelection())
-            callback.update(rangeIndex);
+        values[bankIndex][rangeIndex] = value;
+        if (bankIndex == this->getSelection())
+            callback.update(*this, rangeIndex);
         return true;
     }
 
     bool match(const MIDICNChannelAddress &target) const override {
-        return BankableMIDIInput<N>::matchBankableAddressInRange( //
-            target, address, L);
+        return BankableMIDIInput<BankSize>::matchBankableAddressInRange(
+            target, this->address, RangeLen);
     }
 
-    void onBankSettingChange() override {
-        callback.update();
+    void onBankSettingChange() override { callback.update(*this); }
+
+    static uint8_t
+    getValueFromMIDIMessage(const ChannelMessageMatcher &midimsg) {
+        return midimsg.type == NOTE_OFF ? 0 : midimsg.data2;
     }
 
-    Array<Array<uint8_t, L>, N> values = {};
+    uint8_t getRangeIndex(const MIDICNChannelAddress &target) const {
+        return target.getAddress() - this->address.getAddress();
+    }
+
+    Array<Array<uint8_t, RangeLen>, BankSize> values = {};
+
+  public:
+    Callback callback;
+    constexpr static uint8_t length() { return RangeLen; }
 };
 
-template <uint8_t L, uint8_t N>
-using NoteRange = MIDINoteCCRange<MIDIInputElementNote, L, N>;
-template <uint8_t N>
-using NoteValue = MIDINoteCCRange<MIDIInputElementNote, 1, N>;
+template <uint8_t RangeLen, uint8_t BankSize>
+using NoteRange = MIDINoteCCRange<MIDIInputElementNote, RangeLen, BankSize>;
+template <uint8_t BankSize>
+using NoteValue = MIDINoteCCRange<MIDIInputElementNote, 1, BankSize>;
 
-template <uint8_t L, uint8_t N>
-using CCRange = MIDINoteCCRange<MIDIInputElementCC, L, N>;
-template <uint8_t L, uint8_t N>
-using CCValue = MIDINoteCCRange<MIDIInputElementCC, 1, N>;
+template <uint8_t RangeLen, uint8_t BankSize>
+using CCRange = MIDINoteCCRange<MIDIInputElementCC, RangeLen, BankSize>;
+template <uint8_t BankSize>
+using CCValue = MIDINoteCCRange<MIDIInputElementCC, 1, BankSize>;
 
 } // namespace Bankable
 

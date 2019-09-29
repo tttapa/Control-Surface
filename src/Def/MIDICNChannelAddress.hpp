@@ -22,7 +22,12 @@ class MIDICNChannel {
   public:
     MIDICNChannel() : addresses{0, 0, 0, 0} {}
     MIDICNChannel(Channel channel, int cableNumber = 0)
-        : addresses{1, 0, (uint8_t)channel.getRaw(), (uint8_t)cableNumber} {}
+        : addresses{
+              1,
+              0,
+              (uint8_t)channel.getRaw(),
+              (uint8_t)cableNumber,
+          } {}
 
     /// Get the channel [1, 16].
     Channel getChannel() const { return Channel{int8_t(addresses.channel)}; }
@@ -46,12 +51,18 @@ class RelativeMIDICNChannelAddress {
     RelativeMIDICNChannelAddress() : addresses{0, 0, 0, 0} {}
     RelativeMIDICNChannelAddress(int deltaAddress, int deltaChannel = 0,
                                  int deltaCableNumber = 0)
-        : addresses{1, (uint8_t)deltaAddress, (uint8_t)deltaChannel,
-                    (uint8_t)deltaCableNumber} {}
+        : addresses{
+              1,
+              (uint8_t)deltaAddress,
+              (uint8_t)deltaChannel,
+              (uint8_t)deltaCableNumber,
+          } {}
     bool isValid() const { return addresses.valid; }
 
   private:
     RawMIDICNChannelAddress addresses;
+    static_assert(((-1) & 0x7F) == 0x7F,
+                  "Negative numbers must be two's complement");
 };
 
 /// A type-safe utility class for saving a MIDI address consisting of a 7-bit

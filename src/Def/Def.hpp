@@ -16,6 +16,10 @@ using analog_t = uint16_t;
 /// The type for Arduino pins (and ExtendedIOElement pins).
 using pin_t = uint16_t;
 
+#ifdef NO_PIN // Fix for FastLED: https://github.com/FastLED/FastLED/issues/893
+#undef NO_PIN
+#endif
+
 /// A special pin number that indicates an unused or invalid pin.
 constexpr pin_t NO_PIN = 1 << (8 * sizeof(pin_t) - 1);
 

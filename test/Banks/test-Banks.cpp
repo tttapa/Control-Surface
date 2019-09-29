@@ -70,7 +70,7 @@ class TestInputBankable : public BankableMIDIInput<N> {
     TestInputBankable(Bank<N> &bank, BankType type)
         : BankableMIDIInput<N>(bank, type) {}
 
-    MOCK_CONST_METHOD0(onBankSettingChange, void());
+    MOCK_METHOD0(onBankSettingChange, void());
 };
 
 #if __GNUC__ >= 5

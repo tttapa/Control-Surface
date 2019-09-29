@@ -7,14 +7,18 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
-class VPotRingLEDs_Base : virtual public VPotRing_Base {
+class VPotRingLEDs {
   public:
-    VPotRingLEDs_Base(const LEDs<11> &leds) : leds(leds) {}
+    VPotRingLEDs(const LEDs<11> &leds) : leds(leds) {}
 
-    void begin() override { leds.begin(); }
+    template <class T>
+    void begin(const T &) {
+        leds.begin();
+    }
 
-    void display() const override {
-        leds.displayRange(getStartOn(), getStartOff());
+    template <class T>
+    void update(const T &t) {
+        leds.displayRange(t.getStartOn(), t.getStartOff());
     }
 
   private:
@@ -23,26 +27,9 @@ class VPotRingLEDs_Base : virtual public VPotRing_Base {
 
 // -------------------------------------------------------------------------- //
 
-class VPotRingLEDs : public VPotRing, public VPotRingLEDs_Base {
-  public:
-    VPotRingLEDs(const MIDICNChannelAddress &address, const LEDs<11> &leds)
-        : VPotRing_Base(address), VPotRing(address), VPotRingLEDs_Base(leds) {}
-};
+// TODO
 
-// -------------------------------------------------------------------------- //
-
-namespace Bankable {
-
-template <uint8_t N>
-class VPotRingLEDs : public VPotRing<N>, public VPotRingLEDs_Base {
-  public:
-    VPotRingLEDs(const BankConfig<N> &config,
-                 const MIDICNChannelAddress &address, const LEDs<11> &leds)
-        : VPotRing_Base(address), VPotRing<N>(config, address),
-          VPotRingLEDs_Base(leds) {}
-};
-
-} // namespace Bankable
+namespace Bankable {} // namespace Bankable
 
 } // namespace MCU
 
