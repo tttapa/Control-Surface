@@ -684,6 +684,20 @@
  */
 
 /**
+ * @example   "Mackie-Control-Universal-Reverse-Engineering.ino"
+ * 
+ * Mackie-Control-Universal-Reverse-Engineering
+ * ============================================
+ *
+ * Sketch that reads the MIDI input from the USB MIDI Interface and prints it to the
+ * Serial monitor, including the Mackie Control Universal note names.
+ * 
+ * This is useful to discover what kinds of messages your DAW is sending.
+ * 
+ * @boards  AVR USB, Teensy 3.x
+ */
+
+/**
  * @example   "MIDI-Input-Callback.ino"
  * 
  * MIDI-Input-Callback

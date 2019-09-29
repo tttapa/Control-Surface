@@ -99,6 +99,7 @@ greenBit	KEYWORD2
 blueBit	KEYWORD2
 
 getState	KEYWORD2
+getMCUNameFromNoteNumber	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
