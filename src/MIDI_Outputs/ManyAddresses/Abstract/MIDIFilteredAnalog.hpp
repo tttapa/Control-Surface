@@ -57,13 +57,13 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
      * @brief   Get the raw value of the analog input (this is the value 
      *          without applying the mapping function first).
      */
-    uint8_t getRawValue() const { return filteredAnalog.getRawValue(); }
+    analog_t getRawValue() const { return filteredAnalog.getRawValue(); }
 
     /**
      * @brief   Get the value of the analog input (this is the value after first
      *          applying the mapping function).
      */
-    uint8_t getValue() const { return filteredAnalog.getValue(); }
+    analog_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
     FilteredAnalog<Sender::precision(), 16 - ADC_BITS,
