@@ -10,12 +10,9 @@ namespace ManyAddresses {
  *
  * The analog input is filtered and hysteresis is applied.
  *
- * @tparam  PRECISION
- *          The analog precision in bits.
- *
  * @see     FilteredAnalog
  */
-template <setting_t N, class Sender, uint8_t PRECISION>
+template <setting_t N, class Sender>
 class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
                                       public ManyAddressesMIDIOutput<N> {
   protected:
@@ -69,7 +66,9 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
     uint8_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<PRECISION> filteredAnalog;
+    FilteredAnalog<Sender::precision(), 16 - ADC_BITS,
+                   ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
+        filteredAnalog;
     const Array<MIDICNChannelAddress, N> addresses;
     Sender sender;
 };

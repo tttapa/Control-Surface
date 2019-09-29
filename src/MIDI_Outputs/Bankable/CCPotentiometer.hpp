@@ -19,7 +19,7 @@ namespace Bankable {
  * @ingroup BankableMIDIOutputElements
  */
 class CCPotentiometer
-    : public MIDIFilteredAnalogAddressable<ContinuousCCSender, 7> {
+    : public MIDIFilteredAnalogAddressable<ContinuousCCSender> {
   public:
     /** 
      * @brief   Create a new Bankable CCPotentiometer object with the given 

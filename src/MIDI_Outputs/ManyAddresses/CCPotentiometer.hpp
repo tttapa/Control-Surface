@@ -21,7 +21,7 @@ namespace ManyAddresses {
  */
 template <setting_t N>
 class CCPotentiometer
-    : public MIDIFilteredAnalogAddressable<N, ContinuousCCSender, 7> {
+    : public MIDIFilteredAnalogAddressable<N, ContinuousCCSender> {
   public:
     /** 
      * @brief   Create a new CCPotentiometer object with the given 
@@ -39,7 +39,7 @@ class CCPotentiometer
     CCPotentiometer(const Bank<N> &bank, pin_t analogPin,
                     const Array<MIDICNChannelAddress, N> &addresses,
                     const ContinuousCCSender &sender = {})
-        : MIDIFilteredAnalogAddressable<N, ContinuousCCSender, 7>(
+        : MIDIFilteredAnalogAddressable<N, ContinuousCCSender>(
               bank, analogPin, addresses, sender) {}
 };
 

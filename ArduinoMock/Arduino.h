@@ -31,6 +31,8 @@
 #define PROGMEM
 using __FlashStringHelper = char;
 
+#define pgm_read_ptr_near(ptr) ((void *) *(ptr))
+
 #define HIGH 0x1
 #define LOW 0x0
 
