@@ -63,6 +63,8 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
     const MIDICNChannelAddress address;
     const uint8_t multiplier;
     const MIDICNChannelAddress resetAddress;
+
+  public:
     RelativeSender relativeSender;
     ResetSender resetSender;
 };

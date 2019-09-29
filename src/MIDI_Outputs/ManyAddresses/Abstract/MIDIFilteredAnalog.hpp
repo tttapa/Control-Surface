@@ -70,6 +70,8 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
                    ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
         filteredAnalog;
     const Array<MIDICNChannelAddress, N> addresses;
+
+  public:
     Sender sender;
 };
 

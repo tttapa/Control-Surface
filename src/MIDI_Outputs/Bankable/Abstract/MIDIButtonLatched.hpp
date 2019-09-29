@@ -69,6 +69,8 @@ class MIDIButtonLatched : public BankableMIDIOutput, public MIDIOutputElement {
     Button button;
     const MIDICNChannelAddress address;
     bool state = false;
+
+  public:
     Sender sender;
 };
 

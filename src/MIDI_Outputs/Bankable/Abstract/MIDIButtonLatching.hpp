@@ -47,6 +47,8 @@ class MIDIButtonLatching : public MIDIOutputElement, public BankableMIDIOutput {
   private:
     Button button;
     const MIDICNChannelAddress address;
+
+  public:
     Sender sender;
 };
 

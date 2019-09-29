@@ -53,6 +53,8 @@ class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
   private:
     Button button;
     const MIDICNChannelAddress address;
+
+  public:
     Sender sender;
 };
 

@@ -58,8 +58,10 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
     const MIDICNChannelAddress address;
     const uint8_t speedMultiply;
     const uint8_t pulsesPerStep;
-    Sender sender;
     long previousPosition = 0;
+
+  public:
+    Sender sender;
 };
 
 END_CS_NAMESPACE

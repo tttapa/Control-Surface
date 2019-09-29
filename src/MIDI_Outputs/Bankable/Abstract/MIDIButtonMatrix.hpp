@@ -75,6 +75,8 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
     AddressMatrix<nb_rows, nb_cols> addresses;
     const MIDICNChannel baseChannelCN;
     uint8_t activeButtons = 0;
+
+  public:
     Sender sender;
 };
 

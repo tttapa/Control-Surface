@@ -75,6 +75,8 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
     const MIDICNChannelAddress address;
     unique_ptr<const IChord> chord;
     unique_ptr<const IChord> newChord;
+
+  public:
     Sender sender;
 };
 

@@ -59,8 +59,10 @@ class MIDIButtonLatched : public MIDIOutputElement {
   private:
     Button button;
     const MIDICNChannelAddress address;
-    Sender sender;
     bool state = false;
+
+  public:
+    Sender sender;
 };
 
 END_CS_NAMESPACE

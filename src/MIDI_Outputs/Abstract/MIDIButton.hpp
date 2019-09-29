@@ -46,6 +46,8 @@ class MIDIButton : public MIDIOutputElement {
   private:
     Button button;
     const MIDICNChannelAddress address;
+
+  public:
     Sender sender;
 };
 
