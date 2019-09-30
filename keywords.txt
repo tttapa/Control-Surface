@@ -1,10 +1,18 @@
-#######################################
+################################################################################
 # Datatypes (KEYWORD1)
-#######################################
+################################################################################
+
 Control_Surface	KEYWORD1
 
 # Audio 
+#######
+
 AudioVU	KEYWORD1
+AudioVULEDs	KEYWORD1
+VolumeControl	KEYWORD1
+
+# MIDI Interfaces
+#################
 
 MIDI_Interface	KEYWORD1
 StreamMIDI_Interface	KEYWORD1
@@ -19,25 +27,10 @@ USBDebugMIDI_Interface	KEYWORD1
 SoftwareSerialDebugMIDI_Interface	KEYWORD1
 HairlessMIDI_Interface	KEYWORD1
 
+# Hardware
+##########
+
 Button	KEYWORD1
-CCPotentiometer	KEYWORD1
-CCRotaryEncoder	KEYWORD1
-
-IncrementDecrementSelector	KEYWORD1
-CCButtonLatched	KEYWORD1
-
-MIDINoteLED	KEYWORD1
-NoteButton	KEYWORD1
-
-MAX7219SevenSegmentDisplay	KEYWORD1
-
-Bankable	KEYWORD1
-Bank	KEYWORD1
-Transposer	KEYWORD1
-ProgramSelector	KEYWORD1
-
-Selector	KEYWORD1
-SwitchSelector	KEYWORD1
 
 ExtIO	KEYWORD1
 ExtendedIOElement	KEYWORD1
@@ -49,12 +42,63 @@ SPIShiftRegisterOut	KEYWORD1
 pin_t	KEYWORD1
 analog_t	KEYWORD1
 
+# MIDI Output Elements
+######################
+
+CCButton	KEYWORD1
+CCButtonLatched	KEYWORD1
+CCButtonLatching	KEYWORD1
+CCButtonMatrix	KEYWORD1
+CCButtons	KEYWORD1
+CCIncrementDecrementButtons	KEYWORD1
+CCPotentiometer	KEYWORD1
+CCRotaryEncoder	KEYWORD1
+
+NoteButton	KEYWORD1
+NoteButtonLatched	KEYWORD1
+NoteButtonLatching	KEYWORD1
+NoteButtonMatrix	KEYWORD1
+NoteChordButton	KEYWORD1
+
+PBPotentiometer	KEYWORD1
+
+# MIDI Input Elements
+#####################
+
+NoteLED	KEYWORD1
+
+MAX7219SevenSegmentDisplay	KEYWORD1
+
+# Banks
+#######
+
+Bankable	KEYWORD1
+Bank	KEYWORD1
+Transposer	KEYWORD1
+ProgramSelector	KEYWORD1
+
+# Selector
+##########
+
+Selector	KEYWORD1
+SwitchSelector	KEYWORD1
+IncrementDecrementSelector	KEYWORD1
+
+# Enumerations
+##############
+
 relativeCCmode	KEYWORD1
 BankType	KEYWORD1
 buttonType	KEYWORD1
 
+# Constant Namespaces
+#####################
+
 MCU	KEYWORD1
 MIDI_CC	KEYWORD1
+
+# Types
+#######
 
 Array	KEYWORD1
 Array2D	KEYWORD1
@@ -62,6 +106,7 @@ Array2D	KEYWORD1
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
+
 update	KEYWORD2
 
 setDefault	KEYWORD2
@@ -104,6 +149,7 @@ getMCUNameFromNoteNumber	KEYWORD2
 #######################################
 # Constants (LITERAL1)
 #######################################
+
 NOTE_ON	LITERAL1
 NOTE_OFF	LITERAL1
 KEY_PRESSURE	LITERAL1
@@ -112,8 +158,10 @@ CONTROL_CHANGE	LITERAL1
 PROGRAM_CHANGE	LITERAL1
 CHANNEL_PRESSURE	LITERAL1
 PITCH_BEND	LITERAL1
+
 NORMAL_ENCODER	LITERAL1
 JOG	LITERAL1
+
 ADD_64	LITERAL1
 SIGN_BIT	LITERAL1
 POS1_NEG127	LITERAL1
