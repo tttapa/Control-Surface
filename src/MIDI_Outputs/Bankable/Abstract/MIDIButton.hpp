@@ -16,8 +16,8 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <class Sender>
-class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
+template <class BankAddress, class Sender>
+class MIDIButton : public BankAddress, public MIDIOutputElement {
   public:
     /**
      * @brief   Construct a new bankable MIDIButton.
@@ -26,23 +26,18 @@ class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      */
-    MIDIButton(const OutputBankConfig &config, pin_t pin,
-               const MIDICNChannelAddress &address, const Sender &sender)
-        : BankableMIDIOutput{config}, button{pin}, address{address},
-          sender{sender} {}
+    MIDIButton(const BankAddress &bankAddress, pin_t pin, const Sender &sender)
+        : BankAddress{bankAddress}, button{pin}, sender{sender} {}
 
     void begin() final override { button.begin(); }
     void update() final override {
         Button::State state = button.getState();
-        MIDICNChannelAddress sendAddress = address;
         if (state == Button::Falling) {
-            lock();
-            sendAddress += getAddressOffset();
-            sender.sendOn(sendAddress);
+            this->lock();
+            sender.sendOn(this->getActiveAddress());
         } else if (state == Button::Rising) {
-            sendAddress += getAddressOffset();
-            sender.sendOff(sendAddress);
-            unlock();
+            sender.sendOff(this->getActiveAddress());
+            this->unlock();
         }
     }
 
@@ -52,7 +47,8 @@ class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
 
   private:
     Button button;
-    const MIDICNChannelAddress address;
+
+  public:
     Sender sender;
 };
 

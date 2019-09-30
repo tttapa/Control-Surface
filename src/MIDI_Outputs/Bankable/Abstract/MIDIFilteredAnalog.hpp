@@ -15,14 +15,11 @@ namespace Bankable {
  *
  * The analog input is filtered and hysteresis is applied.
  *
- * @tparam  PRECISION
- *          The analog precision in bits.
- *
  * @see     FilteredAnalog
  */
-template <class Sender, uint8_t PRECISION>
+template <class BankAddress, class Sender>
 class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
-                                      public BankableMIDIOutput {
+                                      public BankAddress {
   protected:
     /**
      * @brief   Construct a new MIDIFilteredAnalog.
@@ -32,19 +29,15 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
      *          connected.
      * @todo    Documentation.
      */
-    MIDIFilteredAnalogAddressable(const OutputBankConfig &config,
-                                  pin_t analogPin,
-                                  const MIDICNChannelAddress &baseAddress,
-                                  const Sender &sender)
-        : BankableMIDIOutput{config}, filteredAnalog{analogPin},
-          baseAddress{baseAddress}, sender{sender} {}
+    MIDIFilteredAnalogAddressable(const BankAddress &bankAddress,
+                                  pin_t analogPin, const Sender &sender)
+        : BankAddress{bankAddress}, filteredAnalog{analogPin}, sender{sender} {}
 
   public:
     void begin() final override {}
     void update() final override {
         if (filteredAnalog.update())
-            sender.send(filteredAnalog.getValue(),
-                        baseAddress + getAddressOffset());
+            sender.send(filteredAnalog.getValue(), this->getActiveAddress());
     }
 
     /**
@@ -64,18 +57,20 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
      * @brief   Get the raw value of the analog input (this is the value 
      *          without applying the mapping function first).
      */
-    uint8_t getRawValue() const { return filteredAnalog.getRawValue(); }
+    analog_t getRawValue() const { return filteredAnalog.getRawValue(); }
 
     /**
      * @brief   Get the value of the analog input (this is the value after first
      *          applying the mapping function).
      */
-    uint8_t getValue() const { return filteredAnalog.getValue(); }
+    analog_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<PRECISION, 6, ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
+    FilteredAnalog<Sender::precision(), 16 - ADC_BITS,
+                   ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
         filteredAnalog;
-    const MIDICNChannelAddress baseAddress;
+
+  public:
     Sender sender;
 };
 
@@ -87,12 +82,9 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
  *
  * The analog input is filtered and hysteresis is applied.
  *
- * @tparam  PRECISION
- *          The analog precision in bits.
- *
  * @see     FilteredAnalog
  */
-template <class Sender, uint8_t PRECISION>
+template <class Sender>
 class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
   protected:
     /**
@@ -133,18 +125,21 @@ class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {
      * @brief   Get the raw value of the analog input (this is the value 
      *          without applying the mapping function first).
      */
-    uint8_t getRawValue() const { return filteredAnalog.getRawValue(); }
+    analog_t getRawValue() const { return filteredAnalog.getRawValue(); }
 
     /**
      * @brief   Get the value of the analog input (this is the value after first
      *          applying the mapping function).
      */
-    uint8_t getValue() const { return filteredAnalog.getValue(); }
+    analog_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<PRECISION, 6, ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
+    FilteredAnalog<Sender::precision(), 16 - ADC_BITS,
+                   ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
         filteredAnalog;
     const MIDICNChannelAddress address;
+
+  public:
     Sender sender;
 };
 

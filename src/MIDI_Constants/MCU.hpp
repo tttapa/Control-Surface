@@ -172,6 +172,8 @@ constexpr Channel VOLUME_8               = CHANNEL_8; // In Out
 
 constexpr Channel MASTER_VOLUME          = CHANNEL_9; // In Out
 
-};
+} // namespace MCU
 
 END_CS_NAMESPACE
+
+#include "MCUNameFromNoteNumber.hpp"

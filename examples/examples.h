@@ -157,6 +157,41 @@
  */
 
 /**
+ * @example   "CCButton.ino"
+ * 
+ * CCButton
+ * ========
+ * 
+ * This is an example that demonstrates the use of MIDI Control Change Buttons.
+ *
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When the button on pin 5 is pressed, a MIDI Control Change message with a 
+ *   value of 0x7F (127) is sent for General Purpose Controller #1.
+ * - When the button on pin 5 is released, a MIDI Control Change message with a 
+ *   value of 0x00 (0) is sent for General Purpose Controller #1
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the button to a function.
+ * 
+ * Written by PieterP, 2019-09-29  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "CCIncrementDecrementButtons.ino"
  * 
  * CCIncrementDecrementButtons
@@ -681,6 +716,29 @@
  * 
  * Written by PieterP, 2019-02-07  
  * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Mackie-Control-Universal-Reverse-Engineering.ino"
+ * 
+ * Mackie-Control-Universal-Reverse-Engineering
+ * ============================================
+ *
+ * Sketch that reads the MIDI input from the USB MIDI Interface and prints it to the
+ * Serial monitor, including the Mackie Control Universal note names.
+ * 
+ * This is useful to discover what kinds of messages your DAW is sending.
+ * 
+ * @boards  AVR USB, Teensy 3.x
+ */
+
+/**
+ * @example   "Bank-Button-Matrix.ino"
+ * 
+ * Bank-Button-Matrix
+ * ==================
+ *
+ * <https://github.com/tttapa/Control-Surface/issues/38>
  */
 
 /**

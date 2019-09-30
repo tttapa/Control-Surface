@@ -103,10 +103,10 @@ fully implemented, feel free to open an issue, so I know where to focus on first
 
  - 31edaa6b76477fdf152c19fd34f7e4e8506561e6  
    The mapping function is now applied before applying hysteresis. This means 
-   that the input and output values of the function should be 10 bits wide 
+   that the input and output values of the function should be 16 bits wide 
    instead of 7. The signature of the mapping function is now 
    `analog_t f(analog_t raw)`, where the return value and raw are both numbers
-   in [0, 1023].
+   in [0, 65535].
 
 ## Work in progress
 

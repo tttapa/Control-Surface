@@ -20,6 +20,12 @@
  */
 
 /**
+ * @ingroup MIDIInputElements
+ * @defgroup    midi-input-elements-leds    MIDI Input Elements LEDs
+ * @brief   All MIDIInputElements that visualize their state using LEDs.
+ */
+
+/**
  * @defgroup    Audio Teensy Audio
  * @brief   All Elements that interact with Audio streams.
  */

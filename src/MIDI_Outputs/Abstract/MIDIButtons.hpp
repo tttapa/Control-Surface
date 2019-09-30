@@ -58,6 +58,8 @@ class MIDIButtons : public MIDIOutputElement {
     Array<Button, NUMBER_OF_BUTTONS> buttons;
     const MIDICNChannelAddress baseAddress;
     const RelativeMIDICNChannelAddress incrementAddress;
+
+  public:
     Sender sender;
 };
 

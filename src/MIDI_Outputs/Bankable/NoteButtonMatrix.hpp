@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButtonMatrix.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
@@ -26,7 +27,8 @@ namespace Bankable {
  */
 template <uint8_t nb_rows, uint8_t nb_cols>
 class NoteButtonMatrix
-    : public MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<MatrixAddress<nb_rows, nb_cols>,
+                              DigitalNoteSender, nb_rows, nb_cols> {
   public:
     /**
      * @brief   Create a new Bankable NoteButtonMatrix object with the given 
@@ -38,7 +40,7 @@ class NoteButtonMatrix
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
      *          matrix.  
-     *          **⚠** These pins will be driven LOW (Lo-Z).
+     *          **⚠** These pins will be driven LOW as outputs (Lo-Z).
      * @param   colPins
      *          A list of pin numbers connected to the columns of the button
      *          matrix.  
@@ -58,8 +60,9 @@ class NoteButtonMatrix
                      const AddressMatrix<nb_rows, nb_cols> &notes,
                      MIDICNChannel channelCN = {CHANNEL_1, 0},
                      const DigitalNoteSender &sender = {})
-        : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>(
-              config, rowPins, colPins, notes, channelCN, sender) {}
+        : MIDIButtonMatrix<MatrixAddress<nb_rows, nb_cols>, DigitalNoteSender,
+                           nb_rows, nb_cols>{
+              {config, notes, channelCN}, rowPins, colPins, sender} {}
 };
 
 } // namespace Bankable

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButtonLatching.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
@@ -18,7 +19,8 @@ namespace Bankable {
  *
  * @ingroup BankableMIDIOutputElements
  */
-class NoteButtonLatching : public MIDIButtonLatching<DigitalNoteSender> {
+class NoteButtonLatching
+    : public MIDIButtonLatching<SingleAddress, DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new Bankable NoteButtonLatching object with the given 
@@ -40,7 +42,8 @@ class NoteButtonLatching : public MIDIButtonLatching<DigitalNoteSender> {
     NoteButtonLatching(const OutputBankConfig &config, pin_t pin,
                        const MIDICNChannelAddress &address,
                        const DigitalNoteSender &sender = {})
-        : MIDIButtonLatching<DigitalNoteSender>(config, pin, address, sender) {}
+        : MIDIButtonLatching<SingleAddress, DigitalNoteSender>{
+              {config, address}, pin, sender} {}
 };
 
 } // namespace Bankable

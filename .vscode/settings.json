@@ -58,7 +58,8 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeindex": "cpp",
-        "*.axbm": "cpp"
+        "*.axbm": "cpp",
+        "__mutex_base": "cpp"
     },
     "files.exclude": {
         "**/.git": true,
@@ -68,7 +69,6 @@
         "**/.DS_Store": true,
     },
     "editor.dragAndDrop": false,
-    "editor.find.autoFindInSelection": true,
     "editor.formatOnSave": false,
     "editor.minimap.maxColumn": 80,
     "editor.minimap.renderCharacters": false,
@@ -88,12 +88,11 @@
     "search.exclude": {
         "**/node_modules": true,
         "**/bower_components": true,
-        "**/Doxygen": true,
+        "**/Doxygen/html": true,
         "**/Coverage": true,
         "**/googletest": true,
         "**/*.old": true,
     },
-    "search.location": "panel",
     "search.smartCase": true,
     "C_Cpp.default.cppStandard": "c++14",
     "editor.scrollBeyondLastColumn": 0,

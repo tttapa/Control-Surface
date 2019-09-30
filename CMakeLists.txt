@@ -45,7 +45,7 @@ set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} \
     -Wmissing-include-dirs")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
-    -g3 -Og -Wall -Wextra -Werror \
+    -g3 -ggdb -Og -Wall -Wextra -Werror \
     -fdiagnostics-show-option -Wsuggest-override \
     -Wdouble-promotion \
     -Wswitch-default -Wswitch-enum -Wimplicit-fallthrough=3 \

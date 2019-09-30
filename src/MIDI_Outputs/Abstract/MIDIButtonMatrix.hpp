@@ -43,6 +43,8 @@ class MIDIButtonMatrix : public MIDIOutputElement,
 
     AddressMatrix<nb_rows, nb_cols> addresses;
     const MIDICNChannel baseChannelCN;
+
+  public:
     Sender sender;
 };
 

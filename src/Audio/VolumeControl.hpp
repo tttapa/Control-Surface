@@ -65,6 +65,7 @@ class VolumeControl : public Updatable<Potentiometer> {
      *          parameter, and should return a value of 10 bits.
      * 
      * @see     FilteredAnalog::map
+     * @todo    Higher analog resolution?
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
 

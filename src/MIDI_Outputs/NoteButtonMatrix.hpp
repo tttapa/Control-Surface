@@ -33,7 +33,7 @@ class NoteButtonMatrix
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
      *          matrix.  
-     *          **⚠** These pins will be driven LOW (Lo-Z).
+     *          **⚠** These pins will be driven LOW as outputs (Lo-Z).
      * @param   colPins
      *          A list of pin numbers connected to the columns of the button
      *          matrix.  

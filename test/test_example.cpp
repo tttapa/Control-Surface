@@ -43,7 +43,8 @@ TEST(Serial, print_string) {
 TEST(Serial, println_string) {
     EXPECT_CALL(ArduinoMock::getSerial(), write(_, _))
         .With(Args<0, 1>(ElementsAre('T', 'e', 's', 't')));
-    EXPECT_CALL(ArduinoMock::getSerial(), write(_, _)).With(Args<0, 1>(ElementsAre('\r', '\n')));
+    EXPECT_CALL(ArduinoMock::getSerial(), write(_, _))
+        .With(Args<0, 1>(ElementsAre('\r', '\n')));
     const char *str = "Test";
     Serial.println(str);
 
@@ -53,6 +54,7 @@ TEST(Serial, println_string) {
 #include <Helpers/Error.hpp>
 
 TEST(Error, exception) {
+    USING_CS_NAMESPACE;
     EXPECT_THROW(ERROR("An error occured", 12), ErrorException);
 }
 
@@ -63,6 +65,7 @@ inline bool ends_with(std::string const &value, std::string const &ending) {
 }
 
 TEST(Error, exceptionWhatErrorCode) {
+    USING_CS_NAMESPACE;
     try {
         ERROR("An error occured", 12);
         FAIL();

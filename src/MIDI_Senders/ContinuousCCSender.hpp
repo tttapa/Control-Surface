@@ -9,6 +9,8 @@ class ContinuousCCSender {
     void send(uint8_t value, MIDICNChannelAddress address) {
         Control_Surface.MIDI().sendCC(address, value);
     }
+
+    constexpr static uint8_t precision() { return 7; }
 };
 
 END_CS_NAMESPACE

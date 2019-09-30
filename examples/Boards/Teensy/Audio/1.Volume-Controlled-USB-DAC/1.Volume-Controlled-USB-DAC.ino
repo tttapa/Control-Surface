@@ -52,7 +52,9 @@ void setup() {
   volume.begin();
   // Add a dead zone if you can't get the volume all the way to zero
   // volume.map([](analog_t i) -> analog_t {
-  //   return map(constrain(i, 10, 1013), 10, 1013, 0, 1023);
+  //   const analog_t lower = 0 + 10;
+  //   const analog_t upper = 1023 - 10;
+  //   return map(constrain(i, lower, upper), lower, upper, 0, 1023);
   // });
   AudioMemory(6);
 }

@@ -51,7 +51,7 @@ class Control_Surface_ : public MIDI_Callbacks {
     void updateMidiInput();
 
     /**
-     * @brief   Update all MIDIInputElement#s.
+     * @brief   Update all MIDIInputElement%s.
      */
     void updateInputs();
 

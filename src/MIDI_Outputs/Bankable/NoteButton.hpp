@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButton.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
@@ -18,7 +19,7 @@ namespace Bankable {
  *
  * @ingroup BankableMIDIOutputElements
  */
-class NoteButton : public MIDIButton<DigitalNoteSender> {
+class NoteButton : public MIDIButton<SingleAddress, DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new Bankable NoteButton object with the given pin, note
@@ -40,7 +41,8 @@ class NoteButton : public MIDIButton<DigitalNoteSender> {
     NoteButton(const OutputBankConfig &config, pin_t pin,
                const MIDICNChannelAddress &address,
                const DigitalNoteSender &sender = {})
-        : MIDIButton<DigitalNoteSender>(config, pin, address, sender) {}
+        : MIDIButton<SingleAddress, DigitalNoteSender>{
+              {config, address}, pin, sender} {}
 };
 
 } // namespace Bankable

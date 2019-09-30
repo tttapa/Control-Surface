@@ -13,6 +13,8 @@ class PitchBendSender {
             value);
         Control_Surface.MIDI().sendPB(address, value);
     }
+
+    constexpr static uint8_t precision() { return INPUT_PRECISION_BITS; }
 };
 
 END_CS_NAMESPACE

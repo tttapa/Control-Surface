@@ -3,6 +3,8 @@
 #include "Error.hpp"
 #include <Arduino.h>
 
+BEGIN_CS_NAMESPACE
+
 void fatalErrorExit() {
 #if defined(LED_BUILTIN) || defined(ESP32)
     pinMode(LED_BUILTIN, OUTPUT);
@@ -22,5 +24,7 @@ void fatalErrorExit() {
         yield();
 #endif
 }
+
+END_CS_NAMESPACE
 
 #endif

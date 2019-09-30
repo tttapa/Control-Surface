@@ -15,8 +15,8 @@ namespace Bankable {
  * @todo    Documentation.
  * @see     ButtonMatrix
  */
-template <class Sender, uint8_t nb_rows, uint8_t nb_cols>
-class MIDIButtonMatrix : public BankableMIDIOutput,
+template <class BankAddress, class Sender, uint8_t nb_rows, uint8_t nb_cols>
+class MIDIButtonMatrix : public BankAddress,
                          public MIDIOutputElement,
                          public ButtonMatrix<nb_rows, nb_cols> {
 
@@ -27,7 +27,7 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
      *          matrix.  
-     *          **⚠** These pins will be driven LOW (Lo-Z).
+     *          **⚠** These pins will be driven LOW as outputs (Lo-Z).
      * @param   colPins
      *          A list of pin numbers connected to the columns of the button
      *          matrix.  
@@ -39,14 +39,11 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
      * @param   channelCN
      *          The MIDI channel [1, 16] and Cable Number [0, 15].
      */
-    MIDIButtonMatrix(const OutputBankConfig &config,
+    MIDIButtonMatrix(const BankAddress &bankAddress,
                      const PinList<nb_rows> &rowPins,
-                     const PinList<nb_cols> &colPins,
-                     const AddressMatrix<nb_rows, nb_cols> &addresses,
-                     MIDICNChannel channelCN, const Sender &sender)
-        : BankableMIDIOutput(config), ButtonMatrix<nb_rows, nb_cols>(rowPins,
-                                                                     colPins),
-          addresses(addresses), baseChannelCN(channelCN), sender{sender} {}
+                     const PinList<nb_cols> &colPins, const Sender &sender)
+        : BankAddress{bankAddress},
+          ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins), sender{sender} {}
 
   public:
     void begin() final override { ButtonMatrix<nb_rows, nb_cols>::begin(); }
@@ -55,26 +52,22 @@ class MIDIButtonMatrix : public BankableMIDIOutput,
 
   private:
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
-        int8_t address = addresses[row][col];
-        MIDICNChannelAddress sendAddress = {address, baseChannelCN};
         if (state == LOW) {
             if (!activeButtons)
-                lock(); // Don't allow changing of the bank setting
-            sendAddress += getAddressOffset();
+                this->lock(); // Don't allow changing of the bank setting
             activeButtons++;
-            sender.sendOn(sendAddress);
+            sender.sendOn(this->getActiveAddress(row, col));
         } else {
-            sendAddress += getAddressOffset();
-            sender.sendOff(sendAddress);
+            sender.sendOff(this->getActiveAddress(row, col));
             activeButtons--;
             if (!activeButtons)
-                unlock();
+                this->unlock();
         }
     }
 
-    AddressMatrix<nb_rows, nb_cols> addresses;
-    const MIDICNChannel baseChannelCN;
     uint8_t activeButtons = 0;
+
+  public:
     Sender sender;
 };
 

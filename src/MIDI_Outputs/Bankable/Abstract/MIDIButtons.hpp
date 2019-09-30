@@ -71,8 +71,10 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
     Array<Button, NUMBER_OF_BUTTONS> buttons;
     const MIDICNChannelAddress baseAddress;
     const RelativeMIDICNChannelAddress incrementAddress;
-    Sender sender;
     uint8_t activeButtons = 0;
+
+  public:
+    Sender sender;
 };
 
 } // namespace Bankable

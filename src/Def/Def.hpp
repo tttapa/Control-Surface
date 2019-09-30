@@ -61,7 +61,7 @@ struct EncoderPinList {
     uint8_t B; ///< The pin connected to the B pin of the encoder.
 };
 
-/// The type used for Selector#s.
+/// The type used for Selector%s.
 using setting_t = uint8_t;
 /// A special setting that indicates an unused or invalid setting.
 constexpr setting_t NO_SETTING = 1 << (8 * sizeof(setting_t) - 1);

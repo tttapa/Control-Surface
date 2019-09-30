@@ -20,7 +20,7 @@ namespace Bankable {
  *
  * @ingroup BankableMIDIOutputElements
  */
-class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>, 10> {
+class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>> {
   public:
     /** 
      * @brief   Create a new Bankable PBPotentiometer object with the given 
