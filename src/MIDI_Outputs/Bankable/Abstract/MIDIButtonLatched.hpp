@@ -17,8 +17,8 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <class Sender>
-class MIDIButtonLatched : public BankableMIDIOutput, public MIDIOutputElement {
+template <class BankAddress, class Sender>
+class MIDIButtonLatched : public BankAddress, public MIDIOutputElement {
   protected:
     /**
      * @brief   Create a new bankable MIDIButtonLatched object on the given pin
@@ -33,10 +33,9 @@ class MIDIButtonLatched : public BankableMIDIOutput, public MIDIOutputElement {
      *          The MIDI address containing the note/controller number [0, 127],
      *          channel [1, 16], and optional cable number [0, 15].
      */
-    MIDIButtonLatched(const OutputBankConfig &config, pin_t pin,
-                      const MIDICNChannelAddress &address, const Sender &sender)
-        : BankableMIDIOutput{config}, button{pin}, address{address},
-          sender{sender} {}
+    MIDIButtonLatched(const BankAddress &bankAddress, pin_t pin,
+                      const Sender &sender)
+        : BankAddress{bankAddress}, button{pin}, sender{sender} {}
 
   public:
     void begin() final override { button.begin(); }
@@ -53,21 +52,17 @@ class MIDIButtonLatched : public BankableMIDIOutput, public MIDIOutputElement {
     bool getState() const { return state; }
     void setState(bool state) {
         this->state = state;
-        MIDICNChannelAddress sendAddress = address;
         if (state) {
-            lock();
-            sendAddress += getAddressOffset();
-            sender.sendOn(sendAddress);
+            this->lock();
+            sender.sendOn(this->getActiveAddress());
         } else {
-            sendAddress += getAddressOffset();
-            sender.sendOff(sendAddress);
-            unlock();
+            sender.sendOff(this->getActiveAddress());
+            this->unlock();
         }
     }
 
   private:
     Button button;
-    const MIDICNChannelAddress address;
     bool state = false;
 
   public:

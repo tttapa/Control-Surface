@@ -48,6 +48,7 @@
 #include <MIDI_Outputs/Bankable/CCButtonLatching.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonMatrix.hpp>
 #include <MIDI_Outputs/Bankable/CCButtons.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCButton.hpp>
 
 #include <MIDI_Outputs/Bankable/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/Bankable/CCPotentiometer.hpp>

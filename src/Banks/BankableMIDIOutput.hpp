@@ -147,7 +147,7 @@ class BankableMIDIOutput : public BankableMIDIOutput_Base {
 class ManyAddressesMIDIOutput : public BankableMIDIOutput_Base {
   protected:
     /**
-     * @brief   Create a new ManyAddressesMIDIOutput object.
+     * @brief   Constructor.
      * 
      * @param   bank
      *          The bank to add this element to.

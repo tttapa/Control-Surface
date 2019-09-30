@@ -58,7 +58,8 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeindex": "cpp",
-        "*.axbm": "cpp"
+        "*.axbm": "cpp",
+        "__mutex_base": "cpp"
     },
     "files.exclude": {
         "**/.git": true,

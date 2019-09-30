@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButtonMatrix.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
@@ -26,7 +27,8 @@ namespace Bankable {
  */
 template <uint8_t nb_rows, uint8_t nb_cols>
 class CCButtonMatrix
-    : public MIDIButtonMatrix<DigitalCCSender, nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<MatrixAddress<nb_rows, nb_cols>, DigitalCCSender,
+                              nb_rows, nb_cols> {
   public:
     /**
      * @brief   Create a new Bankable CCButtonMatrix object with the given pins,
@@ -38,7 +40,7 @@ class CCButtonMatrix
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
      *          matrix.  
-     *          **⚠** These pins will be driven LOW (Lo-Z).
+     *          **⚠** These pins will be driven LOW as outputs (Lo-Z).
      * @param   colPins
      *          A list of pin numbers connected to the columns of the button
      *          matrix.  
@@ -59,8 +61,9 @@ class CCButtonMatrix
                    const PinList<nb_cols> &colPins,
                    const AddressMatrix<nb_rows, nb_cols> &controllers,
                    MIDICNChannel channelCN, const DigitalCCSender &sender = {})
-        : MIDIButtonMatrix<DigitalCCSender, nb_rows, nb_cols>(
-              config, rowPins, colPins, controllers, channelCN, sender) {}
+        : MIDIButtonMatrix<MatrixAddress<nb_rows, nb_cols>, DigitalCCSender,
+                           nb_rows, nb_cols>{
+              {config, controllers, channelCN}, rowPins, colPins, sender} {}
 };
 
 } // namespace Bankable
