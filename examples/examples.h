@@ -733,6 +733,15 @@
  */
 
 /**
+ * @example   "Bank-Button-Matrix.ino"
+ * 
+ * Bank-Button-Matrix
+ * ==================
+ *
+ * <https://github.com/tttapa/Control-Surface/issues/38>
+ */
+
+/**
  * @example   "MIDI-Input-Callback.ino"
  * 
  * MIDI-Input-Callback
