@@ -8,7 +8,7 @@
 BEGIN_CS_NAMESPACE
 
 /** 
- * @brief   A class for ExtendedIOElement#s with a fixed size.
+ * @brief   A class for ExtendedIOElement%s with a fixed size.
  * 
  * This class is to make it easier to get an array of all pins of the element.
  */

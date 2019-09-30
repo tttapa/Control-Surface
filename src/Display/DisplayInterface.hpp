@@ -14,12 +14,12 @@ BEGIN_CS_NAMESPACE
 class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
   protected:
     /// @todo   Do I need to keep a list now that I have sorted all 
-    ///         DisplayElement#s?
+    ///         DisplayElement%s?
     DisplayInterface() { elements.append(this); }
 
   public:
     /// @todo   Do I need to keep a list now that I have sorted all 
-    ///         DisplayElement#s?
+    ///         DisplayElement%s?
     // Note to self:    don't forget to make destructor = default 
     //                  instead of deleting it altogether
     virtual ~DisplayInterface() { elements.remove(this); }

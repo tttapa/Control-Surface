@@ -15,7 +15,7 @@ class BankableMIDIInput;
 class BankableMIDIOutput;
 
 /**
- * @brief   A class for changing the address of BankableMIDIOutput#s.
+ * @brief   A class for changing the address of BankableMIDIOutput%s.
  */
 class OutputBank {
   public:
@@ -61,7 +61,7 @@ class OutputBank {
 
 /**
  * @brief   A class that groups Bankable BankableMIDIOutput%s and 
- *          BankableMIDIInput#s, and allows the user to change the addresses 
+ *          BankableMIDIInput%s, and allows the user to change the addresses 
  *          of these elements.
  * 
  * @tparam  N 
@@ -88,12 +88,17 @@ class Bank : public Selectable<N>, public OutputBank {
     /**
      * @brief   Select the given bank setting.
      * 
-     * All BankableMIDIInput#s will be updated.
+     * All BankableMIDIInput%s will be updated.
      *
      * @param   bankSetting
      *          The new setting to select.
      */
     void select(setting_t bankSetting) override;
+
+    /**
+     * @brief   Get the number of Banks.
+     */
+    constexpr static uint8_t getNumberOfBanks() { return N; }
 
   private:
     /**

@@ -9,7 +9,7 @@
 BEGIN_CS_NAMESPACE
 
 /**
- * @brief   A base class for all MIDIInputElement#s that can be banked.
+ * @brief   A base class for all MIDIInputElement%s that can be banked.
  * 
  * @note    These elements must be updated when the bank setting is changed, so 
  * they are added to a linked list of the bank.

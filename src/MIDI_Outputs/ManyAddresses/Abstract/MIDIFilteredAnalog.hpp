@@ -1,4 +1,4 @@
-#include <Banks/ManyAddressesMIDIOuptut.hpp>
+#include <Banks/BankableMIDIOutput.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -14,7 +14,7 @@ namespace ManyAddresses {
  */
 template <setting_t N, class Sender>
 class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
-                                      public ManyAddressesMIDIOutput<N> {
+                                      public ManyAddressesMIDIOutput {
   protected:
     /**
      * @brief   Construct a new MIDIFilteredAnalogAddressable.
@@ -29,7 +29,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement,
     MIDIFilteredAnalogAddressable(
         const Bank<N> &bank, pin_t analogPin,
         const Array<MIDICNChannelAddress, N> &addresses, const Sender &sender)
-        : ManyAddressesMIDIOutput<N>{bank},
+        : ManyAddressesMIDIOutput{bank},
           filteredAnalog{analogPin}, addresses{addresses}, sender{sender} {}
 
   public:

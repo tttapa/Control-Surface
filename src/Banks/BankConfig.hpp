@@ -32,7 +32,7 @@ class Bank;
 class OutputBank;
 
 /** 
- * @brief   A struct for selecting the bank of BankableMIDIInput#s and the
+ * @brief   A struct for selecting the bank of BankableMIDIInput%s and the
  *          bank type.
  */
 template <setting_t N>
@@ -44,7 +44,7 @@ struct BankConfig {
 };
 
 /** 
- * @brief   A struct for selecting the bank of BankableMIDIOutput#s and the
+ * @brief   A struct for selecting the bank of BankableMIDIOutput%s and the
  *          bank type.
  */
 struct OutputBankConfig {
