@@ -72,7 +72,7 @@
 // #include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
 // #include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
 // #include <MIDI_Inputs/MCU/VPotRing.hpp>
-// #include <MIDI_Inputs/MCU/VU.hpp>
+#include <MIDI_Inputs/MCU/VU.hpp>
 // #include <MIDI_Inputs/MIDINote.hpp>
 
 // #include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>

@@ -8,8 +8,6 @@
 
 BEGIN_CS_NAMESPACE
 
-#define CRTP(Derived) (*static_cast<Derived *>(this))
-
 /** 
  * @brief   An abstract interface for VU meters. It declares two methods:
  *          `getValue` and `getOverload`.
@@ -44,15 +42,13 @@ struct VUEmptyCallback {
  *          meter.  
  *          This is a base class to both the Bankable and non-Bankable version.
  */
-template <uint8_t NumValues, class Callback, class Derived>
+template <uint8_t NumValues, class Callback>
 class VU_Base : public MIDIInputElementChannelPressure, public IVU {
-  private:
+  protected:
     VU_Base(uint8_t track, const MIDICNChannel &channelCN,
             unsigned int decayTime, const Callback &callback)
         : MIDIInputElementChannelPressure{{track - 1, channelCN}}, IVU(12),
           decayTime(decayTime), callback{callback} {}
-
-    friend Derived;
 
   public:
     /// Initialize
@@ -111,9 +107,10 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
                 values[i]--;
     }
 
-    uint8_t getSelection() const { return CRTP(const Derived).getSelection(); }
-    uint8_t getBankIndex(const MIDICNChannelAddress &target) const {
-        return CRTP(const Derived).getBankIndex(target, this->address);
+    virtual uint8_t getSelection() const { return 0; }
+    virtual uint8_t getBankIndex(const MIDICNChannelAddress &target) const {
+        (void)target;
+        return 0;
     }
 
     /// Set the VU meter value.
@@ -148,7 +145,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
  *          This version cannot be banked.
  */
 template <class Callback = VUEmptyCallback>
-class VU_Generic : public VU_Base<1, Callback, VU_Generic<Callback>> {
+class VU_Generic : public VU_Base<1, Callback> {
   public:
     /** 
      * @brief   Construct a new VU object.
@@ -169,16 +166,7 @@ class VU_Generic : public VU_Base<1, Callback, VU_Generic<Callback>> {
      */
     VU_Generic(uint8_t track, const MIDICNChannel &channelCN,
                unsigned int decayTime = 150, const Callback &callback = {})
-        : VU_Base<1, Callback, VU_Generic<Callback>>{track, channelCN,
-                                                     decayTime, callback} {}
-
-    setting_t getSelection() const { return 0; }
-    uint8_t getBankIndex(const MIDICNChannelAddress &target,
-                         const MIDICNChannelAddress &base) const {
-        (void)target;
-        (void)base;
-        return 0;
-    }
+        : VU_Base<1, Callback>{track, channelCN, decayTime, callback} {}
 };
 
 using VU = VU_Generic<>;
@@ -196,9 +184,8 @@ namespace Bankable {
  *          The number of banks.
  */
 template <uint8_t NumBanks, class Callback = VUEmptyCallback>
-class VU_Generic
-    : public VU_Base<NumBanks, Callback, VU_Generic<NumBanks, Callback>>,
-      public BankableMIDIInput<NumBanks> {
+class VU_Generic : public VU_Base<NumBanks, Callback>,
+                   public BankableMIDIInput<NumBanks> {
   public:
     /** 
      * @brief   Construct a new Bankable VU object.
@@ -222,10 +209,7 @@ class VU_Generic
     VU_Generic(const BankConfig<NumBanks> &config, uint8_t track,
                const MIDICNChannel &channelCN, unsigned int decayTime,
                const Callback &callback)
-        : VU_Base<NumBanks, Callback, VU_Generic<NumBanks, Callback>>{track,
-                                                                      channelCN,
-                                                                      decayTime,
-                                                                      callback},
+        : VU_Base<NumBanks, Callback>{track, channelCN, decayTime, callback},
           BankableMIDIInput<NumBanks>(config) {}
 
     using BankableMIDIInput<NumBanks>::getSelection;
@@ -270,7 +254,5 @@ class VU : public VU_Generic<NumBanks> {
 } // namespace Bankable
 
 } // namespace MCU
-
-#undef CRTP
 
 END_CS_NAMESPACE
