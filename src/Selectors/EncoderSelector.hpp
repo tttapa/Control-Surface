@@ -60,6 +60,14 @@ class EncoderSelector_Base : virtual public Selector<N> {
 
 // -------------------------------------------------------------------------- //
 
+/**
+ * @brief   Selector that reads from a rotary encoder. 
+ * 
+ * @ingroup Selectors
+ * 
+ * @tparam  N 
+ *          The number of settings.
+ */
 template <setting_t N>
 class EncoderSelector : public EncoderSelector_Base<N> {
   public:

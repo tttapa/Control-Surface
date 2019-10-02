@@ -6,6 +6,7 @@
 
 BEGIN_CS_NAMESPACE
 
+/// TODO: move to different folder?
 template <setting_t N>
 class ProgramChanger : public Selectable<N> {
   public:

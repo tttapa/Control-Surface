@@ -34,6 +34,16 @@ class ManyButtonsSelector_Base : virtual public Selector<N> {
 
 // -------------------------------------------------------------------------- //
 
+/**
+ * @brief   Selector that reads from \(N\) buttons.
+ * 
+ * Pressing the \(n\)-th button selects the \(n\)-th setting.
+ * 
+ * @ingroup Selectors
+ * 
+ * @tparam  N 
+ *          The number of settings.
+ */
 template <setting_t N>
 class ManyButtonsSelector : public ManyButtonsSelector_Base<N> {
   public:

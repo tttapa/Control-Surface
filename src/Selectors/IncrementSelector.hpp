@@ -29,6 +29,14 @@ class IncrementSelector_Base : virtual public Selector<N> {
 
 // -------------------------------------------------------------------------- //
 
+/**
+ * @brief   Selector with one button that increments the selection.
+ * 
+ * @ingroup Selectors 
+ * 
+ * @tparam  N 
+ *          The number of settings.
+ */
 template <setting_t N>
 class IncrementSelector : virtual public IncrementSelector_Base<N> {
   public:

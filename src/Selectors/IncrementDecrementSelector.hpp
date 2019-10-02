@@ -36,6 +36,16 @@ class IncrementDecrementSelector_Base : virtual public Selector<N> {
 
 // -------------------------------------------------------------------------- //
 
+/**
+ * @brief   Selector with two buttons (one to increment, one to decrement).
+ * 
+ * Pressing two buttons simultaneously resets to the default setting.
+ * 
+ * @ingroup Selectors 
+ * 
+ * @tparam  N 
+ *          The number of settings.
+ */
 template <setting_t N>
 class IncrementDecrementSelector : public IncrementDecrementSelector_Base<N> {
   public:

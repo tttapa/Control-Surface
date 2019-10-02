@@ -20,6 +20,11 @@
  */
 
 /**
+ * @defgroup    Selectors   Selectors
+ * @brief   Selectors are elements that change the bank setting or any other 
+ *          selection, such as program selectors.
+ */
+/**
  * @ingroup MIDIInputElements
  * @defgroup    midi-input-elements-leds    MIDI Input Elements LEDs
  * @brief   All MIDIInputElements that visualize their state using LEDs.
