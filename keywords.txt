@@ -62,6 +62,8 @@ NoteChordButton	KEYWORD1
 
 PBPotentiometer	KEYWORD1
 
+ProgramChanger	KEYWORD1
+
 # MIDI Input Elements
 #####################
 
@@ -96,6 +98,7 @@ buttonType	KEYWORD1
 
 MCU	KEYWORD1
 MIDI_CC	KEYWORD1
+MIDI_PC	KEYWORD1
 
 # Types
 #######
