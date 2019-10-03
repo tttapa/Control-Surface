@@ -42,6 +42,7 @@
 #include <MIDI_Outputs/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/PBPotentiometer.hpp>
+#include <MIDI_Outputs/PCButton.hpp>
 
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatched.hpp>

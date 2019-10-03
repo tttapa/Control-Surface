@@ -73,15 +73,23 @@ void MIDI_Interface::sendPB(MIDICNChannelAddress address, uint16_t value) {
                  value >> 7, address.getCableNumber());
 }
 void MIDI_Interface::sendPB(MIDICNChannel address, uint16_t value) {
-    sendImpl(PITCH_BEND, address.getChannel().getRaw(), value & 0x7F,
-             value >> 7, address.getCableNumber());
+    if (address)
+        sendImpl(PITCH_BEND, address.getChannel().getRaw(), value & 0x7F,
+                 value >> 7, address.getCableNumber());
 }
 void MIDI_Interface::sendPC(MIDICNChannel address, uint8_t value) {
-    sendImpl(PROGRAM_CHANGE, address.getChannel().getRaw(), value,
-             address.getCableNumber());
+    if (address)
+        sendImpl(PROGRAM_CHANGE, address.getChannel().getRaw(), value,
+                 address.getCableNumber());
+}
+void MIDI_Interface::sendPC(MIDICNChannelAddress address) {
+    if (address)
+        sendImpl(PROGRAM_CHANGE, address.getChannel().getRaw(),
+                 address.getAddress(), address.getCableNumber());
 }
 
 // -------------------------------- PARSING --------------------------------- //
+
 Parsing_MIDI_Interface::Parsing_MIDI_Interface(MIDI_Parser &parser)
     : parser(parser) {}
 

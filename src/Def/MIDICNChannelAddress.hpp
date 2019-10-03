@@ -33,6 +33,13 @@ class MIDICNChannel {
     /// Get the cable number [0, 15].
     uint8_t getCableNumber() const { return addresses.cableNumber; }
 
+    /// Check if the MIDI address is valid.
+    bool isValid() const { return addresses.valid; }
+
+    /// Check if the MIDI address is valid.
+    /// @see    isValid
+    explicit operator bool() const { return isValid(); }
+
   private:
     RawMIDICNChannelAddress addresses;
 };
