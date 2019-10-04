@@ -129,7 +129,7 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 // If it's a Teensy board
 #if defined(TEENSYDUINO)
     MIDI_read_t read() override {
-        while (1) {
+        for (uint8_t i = 0; i < 32; ++i) {
             if (rx_packet == nullptr) { // If there's no previous packet
                 if (!usb_configuration) // Check USB configuration
                     return NO_MESSAGE;
@@ -165,20 +165,23 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
             if (parseResult != NO_MESSAGE)
                 return parseResult;
         }
+        return NO_MESSAGE;
     }
 
 // If the main MCU has a USB connection but is not a Teensy → MIDIUSB library
 #elif defined(USBCON)
     MIDI_read_t read() override {
-        while (1) {
+        for (uint8_t i = 0; i < 32; ++i) {
             midiEventPacket_t midipacket = MidiUSB.read();
-            rx_packet = reinterpret_cast<uint8_t *>(&midipacket);
+            uint8_t rx_packet[4] = {midipacket.header, midipacket.byte1,
+                                    midipacket.byte2, midipacket.byte3};
             if (!midipacket.header)
                 return NO_MESSAGE;
             MIDI_read_t parseResult = parser.parse(rx_packet);
             if (parseResult != NO_MESSAGE)
                 return parseResult;
         }
+        return NO_MESSAGE;
     }
 #endif
 
@@ -186,10 +189,6 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 // If it's a Teensy board
 #if defined(TEENSYDUINO)
     usb_packet_t *rx_packet = nullptr;
-
-// If the main MCU has a USB connection but is not a Teensy
-#elif defined(USBCON)
-    uint8_t *rx_packet = nullptr;
 #endif
 };
 
