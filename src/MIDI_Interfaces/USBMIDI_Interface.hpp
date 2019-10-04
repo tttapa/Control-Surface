@@ -60,10 +60,12 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
     MOCK_METHOD0(read, MIDI_read_t(void));
 #if __GNUC__ >= 5
 #pragma GCC diagnostic pop
+    void flush(){};
 #endif
 
 // If it's a Teensy board
 #elif defined(TEENSYDUINO)
+
     void writeUSBPacket(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1,
                         uint8_t d2) {
         usb_midi_write_packed((cn << 4) | cin | // CN|CIN
@@ -71,9 +73,11 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
                               (d1 << 16) |      // data 1
                               (d2 << 24));      // data 2
     }
+    void flush(){};
 
 // If the main MCU has a USB connection but is not a Teensy
 #elif defined(USBCON)
+
     void writeUSBPacket(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1,
                         uint8_t d2) {
         midiEventPacket_t msg = {
@@ -84,6 +88,9 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
         };
         MidiUSB.sendMIDI(msg);
     }
+
+    void flush() { MidiUSB.flush(); }
+
 #endif
 
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
@@ -92,6 +99,7 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
                        (m | c),    // status
                        d1,         // data 1
                        d2);        // data 2
+        flush();
     }
 
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
@@ -114,6 +122,7 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
             case 1: writeUSBPacket(cn, 0x5, data[0], 0, 0); break;
             default: break;
         }
+        flush();
     }
 
   public:
