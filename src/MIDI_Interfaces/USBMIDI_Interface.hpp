@@ -60,7 +60,7 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
     MOCK_METHOD0(read, MIDI_read_t(void));
 #if __GNUC__ >= 5
 #pragma GCC diagnostic pop
-    void flush(){};
+    void flush() {}
 #endif
 
 // If it's a Teensy board
@@ -73,7 +73,7 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
                               (d1 << 16) |      // data 1
                               (d2 << 24));      // data 2
     }
-    void flush(){};
+    void flush() {}
 
 // If the main MCU has a USB connection but is not a Teensy
 #elif defined(USBCON)
