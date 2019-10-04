@@ -12,7 +12,7 @@ USBMIDI_Interface midi;
 // Custom MIDI callback that prints incoming SysEx messages.
 struct MyMIDI_Callbacks : MIDI_Callbacks {
   public:
-    void onSysExMessage(Parsing_MIDI_Interface &midi) {
+    void onSysExMessage(Parsing_MIDI_Interface &midi) override {
       Serial.print(F("Received SysEx message: "));
       SysExMessage sysex = midi.getSysExMessage();
       for (uint8_t i = 0; i < sysex.length; ++i)

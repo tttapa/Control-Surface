@@ -648,6 +648,17 @@
  */
 
 /**
+ * @example   "SysEx-Send-Receive.ino"
+ * 
+ * SysEx-Send-Receive
+ * ==================
+ *
+ * Example showing how to send and receive MIDI System Exclusive messages.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ */
+
+/**
  * @example   "Dual-MIDI-Interface.ino"
  * 
  * Dual-MIDI-Interface
