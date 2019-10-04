@@ -126,6 +126,16 @@ class MIDI_Interface {
     virtual void setCallbacks(MIDI_Callbacks *cb) = 0;
 
     /**
+     * @brief   Set the callbacks that will be called when a MIDI message is 
+     *          received.
+     * 
+     * @param   cb
+     *          A reference to an object that implements the MIDI_Callbacks 
+     *          class.
+     */
+    void setCallbacks(MIDI_Callbacks &cb) { setCallbacks(&cb); }
+
+    /**
      * @brief   Low-level function for sending a 3-byte MIDI message.
      */
     virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
@@ -180,6 +190,7 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
     void update() override;
 
     void setCallbacks(MIDI_Callbacks *cb) override { this->callbacks = cb; }
+    using MIDI_Interface::setCallbacks;
 
   protected:
     bool dispatchMIDIEvent(MIDI_read_t event);

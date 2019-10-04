@@ -40,6 +40,7 @@ class MultiMIDI_Interface : public MIDI_Interface {
         for (auto interface : interfaces)
             interface->setCallbacks(cb);
     }
+    using MIDI_Interface::setCallbacks;
 
   protected:
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
