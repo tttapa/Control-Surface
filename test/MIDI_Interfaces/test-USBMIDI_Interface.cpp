@@ -78,7 +78,15 @@ TEST(USBMIDI_Interface, SysExSend0B) {
 
 TEST(USBMIDI_Interface, SysExSend2B) {
     USBMIDI_Interface midi;
+    Sequence seq;
+    EXPECT_CALL(midi, writeUSBPacket(9, 0x6, 0xF0, 0xF7, 0x00)).InSequence(seq);
     uint8_t sysex[] = {0xF0, 0xF7};
+    midi.send(sysex, 9);
+}
+
+TEST(USBMIDI_Interface, SysExSend1B) {
+    USBMIDI_Interface midi;
+    uint8_t sysex[] = {0xF0};
     try {
         midi.send(sysex);
         FAIL();

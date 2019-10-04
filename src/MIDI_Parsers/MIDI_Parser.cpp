@@ -2,7 +2,7 @@
 
 BEGIN_CS_NAMESPACE
 
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
 
 // TODO
 

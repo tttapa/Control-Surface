@@ -107,7 +107,7 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
     }
 
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        if (length < 3) {
+        if (length < 2) {
             ERROR(F("Error: invalid SysEx length"), 0x7F7F);
             return;
         }

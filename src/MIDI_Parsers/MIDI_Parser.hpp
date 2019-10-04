@@ -76,7 +76,7 @@ class MIDI_Parser {
   public:
     /** Get the latest MIDI channel message */
     ChannelMessage getChannelMessage();
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
     /** Get the latest SysEx message. */
     virtual SysExMessage getSysEx() const = 0;
 #else

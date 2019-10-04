@@ -24,7 +24,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
         return CHANNEL_MESSAGE;
     }
 
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
     else if (CIN == 0x40) {
         // SysEx starts or continues (3 bytes)
         if (packet[1] == SysExStart)
@@ -40,7 +40,8 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
     }
 
     else if (CIN == 0x50) {
-        // SysEx ends with following single byte (or Single-byte System Common Message, not implemented)
+        // SysEx ends with following single byte 
+        // (or Single-byte System Common Message, not implemented)
         if (packet[1] != SysExEnd) { // System Common (not implemented)
             return NO_MESSAGE;
         } else if (!receivingSysEx(CN)) { // If we haven't received a SysExStart
