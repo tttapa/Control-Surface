@@ -79,13 +79,13 @@ void StreamDebugMIDI_Interface::sendImpl(uint8_t m, uint8_t c, uint8_t d1,
     if (messageType >= 7)
         return;
     stream.print(DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]);
-    stream.print("\tChannel: ");
+    stream.print(F("\tChannel: "));
     stream.print(c + 1);
-    stream.print("\tData 1: 0x");
+    stream.print(F("\tData 1: 0x"));
     stream.print(d1, HEX);
-    stream.print("\tData 2: 0x");
+    stream.print(F("\tData 2: 0x"));
     stream.print(d2, HEX);
-    stream.print("\tCable: ");
+    stream.print(F("\tCable: "));
     stream.print(cn);
     stream.print("\r\n");
     stream.flush();
@@ -97,11 +97,11 @@ void StreamDebugMIDI_Interface::sendImpl(uint8_t m, uint8_t c, uint8_t d1,
     if (messageType >= 7)
         return;
     stream.print(DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]);
-    stream.print("\tChannel: ");
+    stream.print(F("\tChannel: "));
     stream.print(c + 1);
-    stream.print("\tData 1: 0x");
+    stream.print(F("\tData 1: 0x"));
     stream.print(d1, HEX);
-    stream.print("\tCable: ");
+    stream.print(F("\tCable: "));
     stream.print(cn);
     stream.print("\r\n");
     stream.flush();
@@ -109,9 +109,13 @@ void StreamDebugMIDI_Interface::sendImpl(uint8_t m, uint8_t c, uint8_t d1,
 
 void StreamDebugMIDI_Interface::sendImpl(const uint8_t *data, size_t length,
                                          uint8_t cn) {
-    (void)data;
-    (void)length;
-    (void)cn; // TODO
+    stream.print(F("SysEx: "));
+    while (length-- > 0)
+        stream.print(*data++, HEX), stream.print(' ');
+    stream.print(F("\tCable: "));
+    stream.print(cn);
+    stream.print("\r\n");
+    stream.flush();
 }
 
 END_CS_NAMESPACE

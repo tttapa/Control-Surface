@@ -57,8 +57,11 @@ struct ChannelMessage {
 };
 
 struct SysExMessage {
+    SysExMessage() : data(nullptr), length(0), CN(0) {}
+    SysExMessage(const uint8_t *data, size_t length, uint8_t CN = 0)
+        : data(data), length(length), CN(CN) {}
     const uint8_t *data;
-    size_t length;
+    uint8_t length;
     uint8_t CN;
 };
 
@@ -76,7 +79,7 @@ class MIDI_Parser {
 #ifndef IGNORE_SYSEX
     /** Get the latest SysEx message. */
     virtual SysExMessage getSysEx() const = 0;
-#else 
+#else
     SysExMessage getSysEx() const { return {nullptr, 0, 0}; }
 #endif
     /** Get the pointer to the SysEx data. */

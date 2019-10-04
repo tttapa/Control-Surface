@@ -87,6 +87,11 @@ void MIDI_Interface::sendPC(MIDICNChannelAddress address) {
         sendImpl(PROGRAM_CHANGE, address.getChannel().getRaw(),
                  address.getAddress(), address.getCableNumber());
 }
+void MIDI_Interface::send(SysExMessage message) {
+    if (message.length) {
+        sendImpl(message.data, message.length, message.CN);
+    }
+}
 
 // -------------------------------- PARSING --------------------------------- //
 

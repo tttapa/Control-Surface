@@ -94,6 +94,11 @@ class MIDI_Interface {
     void sendPB(MIDICNChannel address, uint16_t value);
     void sendPC(MIDICNChannel address, uint8_t value);
     void sendPC(MIDICNChannelAddress address);
+    void send(SysExMessage message);
+    template <size_t N>
+    void send(const uint8_t (&sysexdata)[N], uint8_t cn = 0) {
+        send(SysExMessage{sysexdata, N, cn});
+    }
 
     /**
      * @brief   Read the MIDI interface and call the callback if a message is
