@@ -16,8 +16,7 @@ namespace Bankable {
  * @see     ButtonMatrix
  */
 template <class BankAddress, class Sender, uint8_t nb_rows, uint8_t nb_cols>
-class MIDIButtonMatrix : public BankAddress,
-                         public MIDIOutputElement,
+class MIDIButtonMatrix : public MIDIOutputElement,
                          public ButtonMatrix<nb_rows, nb_cols> {
 
   protected:
@@ -42,8 +41,8 @@ class MIDIButtonMatrix : public BankAddress,
     MIDIButtonMatrix(const BankAddress &bankAddress,
                      const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins, const Sender &sender)
-        : BankAddress{bankAddress},
-          ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins), sender{sender} {}
+        : ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
+          address{bankAddress}, sender{sender} {}
 
   public:
     void begin() final override { ButtonMatrix<nb_rows, nb_cols>::begin(); }
@@ -54,18 +53,19 @@ class MIDIButtonMatrix : public BankAddress,
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
         if (state == LOW) {
             if (!activeButtons)
-                this->lock(); // Don't allow changing of the bank setting
+                address.lock(); // Don't allow changing of the bank setting
             activeButtons++;
-            sender.sendOn(this->getActiveAddress(row, col));
+            sender.sendOn(address.getActiveAddress(row, col));
         } else {
-            sender.sendOff(this->getActiveAddress(row, col));
+            sender.sendOff(address.getActiveAddress(row, col));
             activeButtons--;
             if (!activeButtons)
-                this->unlock();
+                address.unlock();
         }
     }
 
-    uint8_t activeButtons = 0;
+    BankAddress address;
+    uint16_t activeButtons = 0;
 
   public:
     Sender sender;

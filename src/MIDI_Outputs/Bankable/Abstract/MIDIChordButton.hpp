@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Banks/BankableMIDIOutput.hpp>
+#include <Banks/BankAddresses.hpp>
 #include <Def/Def.hpp>
 #include <Hardware/Button.hpp>
 #include <Helpers/unique_ptr.hpp>
@@ -20,7 +20,7 @@ namespace Bankable {
  * @see     Button
  */
 template <class Sender>
-class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
+class MIDIChordButton : public MIDIOutputElement {
   public:
     /**
      * @brief   Construct a new bankable MIDIChordButton.
@@ -36,28 +36,26 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
     MIDIChordButton(const OutputBankConfig &config, pin_t pin,
                     const MIDICNChannelAddress &address, const Chord<N> &chord,
                     const Sender &sender)
-        : BankableMIDIOutput{config}, button{pin}, address(address),
+        : address{config, address}, button{pin},
           newChord(make_unique<Chord<N>>(chord)), sender{sender} {}
-    // TODO: can I somehow get rid of the dynamic memory allocation here?
 
     void begin() final override { button.begin(); }
     void update() final override {
         Button::State state = button.getState();
-        MIDICNChannelAddress sendAddress = address;
         if (state == Button::Falling) {
             if (newChord)
                 chord = move(newChord);
-            lock();
-            sendAddress += getAddressOffset();
+            address.lock();
+            auto sendAddress = address.getActiveAddress();
             sender.sendOn(sendAddress);
             for (int8_t offset : *chord)
                 sender.sendOn(sendAddress + offset);
         } else if (state == Button::Rising) {
-            sendAddress += getAddressOffset();
+            auto sendAddress = address.getActiveAddress();
             sender.sendOff(sendAddress);
             for (int8_t offset : *chord)
                 sender.sendOff(sendAddress + offset);
-            unlock();
+            address.unlock();
         }
     }
 
@@ -71,8 +69,8 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
     }
 
   private:
+    SingleAddress address;
     Button button;
-    const MIDICNChannelAddress address;
     unique_ptr<const IChord> chord;
     unique_ptr<const IChord> newChord;
 

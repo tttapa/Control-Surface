@@ -18,7 +18,7 @@ namespace Bankable {
  * @see     Button
  */
 template <class BankAddress, class Sender>
-class MIDIButtonLatched : public BankAddress, public MIDIOutputElement {
+class MIDIButtonLatched : public MIDIOutputElement {
   protected:
     /**
      * @brief   Create a new bankable MIDIButtonLatched object on the given pin
@@ -35,7 +35,7 @@ class MIDIButtonLatched : public BankAddress, public MIDIOutputElement {
      */
     MIDIButtonLatched(const BankAddress &bankAddress, pin_t pin,
                       const Sender &sender)
-        : BankAddress{bankAddress}, button{pin}, sender{sender} {}
+        : address{bankAddress}, button{pin}, sender{sender} {}
 
   public:
     void begin() final override { button.begin(); }
@@ -53,15 +53,16 @@ class MIDIButtonLatched : public BankAddress, public MIDIOutputElement {
     void setState(bool state) {
         this->state = state;
         if (state) {
-            this->lock();
-            sender.sendOn(this->getActiveAddress());
+            address.lock();
+            sender.sendOn(address.getActiveAddress());
         } else {
-            sender.sendOff(this->getActiveAddress());
-            this->unlock();
+            sender.sendOff(address.getActiveAddress());
+            address.unlock();
         }
     }
 
   private:
+    BankAddress address;
     Button button;
     bool state = false;
 

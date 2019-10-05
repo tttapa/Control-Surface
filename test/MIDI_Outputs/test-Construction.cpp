@@ -25,6 +25,8 @@
 #include <MIDI_Outputs/Bankable/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/Bankable/CCPotentiometer.hpp>
 #include <MIDI_Outputs/ManyAddresses/CCButton.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCButtonMatrix.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/ManyAddresses/CCPotentiometer.hpp>
 
 #include <MIDI_Outputs/Bankable/NoteButton.hpp>
@@ -115,6 +117,15 @@ TEST(Construction, MIDIOutputs) {
 
     // ManyAddresses::CC -------------------------------------------------------
     Bankable::ManyAddresses::CCButton<4>{bank, pin, addresses};
+    Bankable::ManyAddresses::CCButtonMatrix<4, 3, 4>{
+        bank,
+        rowPins3,
+        colPins4,
+        {addressMatrix34, addressMatrix34, addressMatrix34, addressMatrix34},
+        {cnChannel, cnChannel, cnChannel, cnChannel},
+    };
+    Bankable::ManyAddresses::CCIncrementDecrementButtons<4>{
+        bank, {pin, pin}, addresses, 4, addresses};
 
     Bankable::ManyAddresses::CCPotentiometer<4>{bank, pin, addresses};
 }

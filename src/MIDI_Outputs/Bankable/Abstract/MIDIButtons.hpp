@@ -14,6 +14,8 @@ namespace Bankable {
  * @brief   An abstract class for momentary push buttons that send MIDI events.
  *
  * The buttons are debounced.
+ * 
+ * @todo    Use BankAddresses?
  *
  * @see     Button
  */

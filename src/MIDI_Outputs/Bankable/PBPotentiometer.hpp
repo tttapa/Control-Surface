@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/PitchBendSender.hpp>
 
@@ -20,7 +21,8 @@ namespace Bankable {
  *
  * @ingroup BankableMIDIOutputElements
  */
-class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>> {
+class PBPotentiometer
+    : public MIDIFilteredAnalog<SingleAddress, PitchBendSender<10>> {
   public:
     /** 
      * @brief   Create a new Bankable PBPotentiometer object with the given 
@@ -40,7 +42,7 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>> {
     PBPotentiometer(const OutputBankConfig &bank, pin_t analogPin,
                     const MIDICNChannel &address = CHANNEL_1,
                     const PitchBendSender<10> &sender = {})
-        : MIDIFilteredAnalog{bank, analogPin, address, sender} {}
+        : MIDIFilteredAnalog{{bank, address}, analogPin, sender} {}
 };
 
 } // namespace Bankable

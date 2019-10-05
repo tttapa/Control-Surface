@@ -53,6 +53,8 @@
 
 #include <MIDI_Outputs/Bankable/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/Bankable/CCPotentiometer.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCButtonMatrix.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/ManyAddresses/CCPotentiometer.hpp>
 
 #include <MIDI_Outputs/Bankable/NoteButton.hpp>

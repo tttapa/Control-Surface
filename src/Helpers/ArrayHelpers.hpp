@@ -65,6 +65,11 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> generateArray(G generator) {
     return array;
 }
 
+template <class T, size_t N, class... Args>
+USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> fillArray(Args... args) {
+    return generateArray<T, N>([&]() { return T{args...}; });
+}
+
 /**
  * @brief   Generate an array where the first value is given, and the subsequent
  *          values are calculated as the previous value incremented with a given

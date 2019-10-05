@@ -114,8 +114,10 @@ class MIDICNChannelAddress {
     /// Get the address [0, 127].
     uint8_t getAddress() const { return addresses.address; }
 
-    /// Get the channel [1, 16]
+    /// Get the channel [CHANNEL_1, CHANNEL_16]
     Channel getChannel() const { return Channel{int8_t(addresses.channel)}; }
+    /// Get the channel [0, 15]
+    uint8_t getRawChannel() const { return addresses.channel; }
 
     /// Get the cable number [0, 15]
     uint8_t getCableNumber() const { return addresses.cableNumber; }
