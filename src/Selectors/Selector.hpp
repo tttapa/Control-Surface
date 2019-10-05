@@ -12,38 +12,50 @@ BEGIN_CS_NAMESPACE
  *          (decremented) beyond their maximum (minimum) setting.
  */
 enum class Wrap : bool {
-    NoWrap = false, ///< When the maximum (minimum) setting is reached,
-                    ///< clamp to the maximum (minimum) setting.
-                    ///< @todo  Rename to `Clamp`?
-    Wrap = true,    ///< When the maximum (minimum) setting is reached,
-                    ///< wrap around to the minimum (maximum) setting.
+    Clamp = false, ///< When the maximum (minimum) setting is reached,
+                   ///< clamp to the maximum (minimum) setting.
+                   ///< @todo  Rename to `Clamp`?
+    Wrap = true,   ///< When the maximum (minimum) setting is reached,
+                   ///< wrap around to the minimum (maximum) setting.
+    NoWrap = false,
 };
 
-template <setting_t N>
-class Selector : public Updatable<> {
+struct EmptySelectorCallback {
+    /// Initialize.
+    void begin() {}
+    /// Refresh, called periodically.
+    void update() {}
+    /// Called when the setting changes.
+    void update(setting_t oldSetting, setting_t newSetting) {
+        (void)oldSetting, (void)newSetting;
+    }
+};
+
+template <setting_t N, class Callback = EmptySelectorCallback>
+class GenericSelector : public Updatable<> {
   protected:
-    Selector(); // Not used, only for virtual inheritance
-    Selector(Selectable<N> &selectable) : selectable(selectable) {}
+    GenericSelector(Selectable<N> &selectable, const Callback &callback)
+        : selectable{selectable}, callback{callback} {}
 
   public:
-    virtual void beginInput() = 0;
-    virtual void beginOutput() = 0;
-
     void begin() override {
-        beginOutput();
+        callback.begin();
         reset();
-        beginInput();
     }
 
-    virtual void reset() { set(selectable.getInitialSelection()); }
+    void update() override { callback.update(); }
+
+    void reset() { set(selectable.getInitialSelection()); }
 
     setting_t get() const { return setting; }
 
     void set(setting_t newSetting) {
         newSetting = Selectable<N>::validateSetting(newSetting);
         selectable.select(newSetting);
-        updateOutput(get(), newSetting);
-        setting = newSetting;
+        if (get() != newSetting) {
+            callback.update(get(), newSetting);
+            setting = newSetting;
+        }
     }
 
     void increment(Wrap wrap) {
@@ -71,10 +83,15 @@ class Selector : public Updatable<> {
     }
 
   private:
-    virtual void updateOutput(setting_t oldSetting, setting_t newSetting) = 0;
-
     Selectable<N> &selectable;
+    Callback callback;
     setting_t setting = 0;
+};
+
+template <setting_t N>
+class Selector : public GenericSelector<N> {
+  public:
+    Selector(Selectable<N> &selectable) : GenericSelector<N>{selectable, {}} {}
 };
 
 END_CS_NAMESPACE

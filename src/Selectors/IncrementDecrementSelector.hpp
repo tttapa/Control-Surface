@@ -5,16 +5,27 @@
 
 BEGIN_CS_NAMESPACE
 
-template <setting_t N>
-class IncrementDecrementSelector_Base : virtual public Selector<N> {
-  public:
-    IncrementDecrementSelector_Base(const IncrementDecrementButtons &buttons,
-                                    Wrap wrap = Wrap::Wrap)
-        : buttons(buttons), wrap(wrap) {}
+template <setting_t N, class Callback = EmptySelectorCallback>
+class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
+  protected:
+    GenericIncrementDecrementSelector(Selectable<N> &selectable,
+                                      const Callback &callback,
+                                      const IncrementDecrementButtons &buttons,
+                                      Wrap wrap = Wrap::Wrap)
+        : GenericSelector<N>{selectable, callback}, buttons{buttons},
+          wrap{wrap} {}
 
-    void beginInput() override { buttons.begin(); }
+  private:
+    using Parent = GenericSelector<N, Callback>;
+
+  public:
+    void begin() override {
+        Parent::begin();
+        buttons.begin();
+    }
 
     void update() override {
+        Parent::update();
         using IncrDecrButtons = IncrementDecrementButtons;
         switch (buttons.getState()) {
             case IncrDecrButtons::Increment: this->increment(wrap); break;
@@ -47,17 +58,17 @@ class IncrementDecrementSelector_Base : virtual public Selector<N> {
  *          The number of settings.
  */
 template <setting_t N>
-class IncrementDecrementSelector : public IncrementDecrementSelector_Base<N> {
+class IncrementDecrementSelector : public GenericIncrementDecrementSelector<N> {
   public:
     IncrementDecrementSelector(Selectable<N> &selectable,
                                const IncrementDecrementButtons &buttons,
                                Wrap wrap = Wrap::Wrap)
-        : Selector<N>(selectable), IncrementDecrementSelector_Base<N>(buttons,
-                                                                      wrap) {}
-
-    void beginOutput() override {}
-    void updateOutput(UNUSED_PARAM setting_t oldSetting,
-                      UNUSED_PARAM setting_t newSetting) override {}
+        : GenericIncrementDecrementSelector<N>{
+              selectable,
+              {},
+              buttons,
+              wrap,
+          } {}
 };
 
 END_CS_NAMESPACE

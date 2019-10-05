@@ -86,21 +86,17 @@
 #include <Selectors/IncrementDecrementSelector.hpp>
 #include <Selectors/IncrementSelector.hpp>
 #include <Selectors/ManyButtonsSelector.hpp>
+#include <Selectors/ProgramChangeSelector.hpp>
 #include <Selectors/SwitchSelector.hpp>
 
 #ifdef Encoder_h_
 #include <Selectors/EncoderSelector.hpp>
-#include <Selectors/LEDs/EncoderSelectorLEDs.hpp>
 #endif
 
-#include <Selectors/LEDs/IncrementDecrementSelectorLEDs.hpp>
-#include <Selectors/LEDs/IncrementSelectorLEDs.hpp>
-#include <Selectors/LEDs/ManyButtonsSelectorLEDs.hpp>
+#include <Selectors/LEDs/SelectorLEDs.hpp>
 
 #include <Selectors/ProgramChanger.hpp>
 #include <Selectors/Transposer.hpp>
-
-#include <MIDI_Inputs/ProgramChangeSelector.hpp>
 
 // ---------------------------- MIDI Interfaces ----------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.hpp>

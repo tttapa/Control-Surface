@@ -1,6 +1,6 @@
 #pragma once
 
-#if not defined(Encoder_h_) && not defined(IDE)
+#if !defined(Encoder_h_) && !defined(IDE)
 #error                                                                         \
     "The PJRC Encoder library should be included before the Control-Surface    \
      library. (#include <Encoder.h>)"
@@ -12,20 +12,27 @@
 
 BEGIN_CS_NAMESPACE
 
-template <setting_t N>
-class EncoderSelector_Base : virtual public Selector<N> {
-  public:
-    EncoderSelector_Base(const EncoderSwitchPinList &pins,
-                         int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
-        : encoder{pins.A, pins.B}, switchPin(pins.switchPin),
-          pulsesPerStep(pulsesPerStep), wrap(wrap) {}
+template <setting_t N, class Callback = EmptySelectorCallback>
+class GenericEncoderSelector : public GenericSelector<N, Callback> {
+  protected:
+    GenericEncoderSelector(Selectable<N> &selectable, const Callback &callback,
+                           const EncoderSwitchPinList &pins,
+                           int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
+        : GenericSelector<N>{selectable, callback}, encoder{pins.A, pins.B},
+          switchPin{pins.switchPin}, pulsesPerStep{pulsesPerStep}, wrap{wrap} {}
 
-    void beginInput() override {
+  private:
+    using Parent = GenericSelector<N, Callback>;
+
+  public:
+    void begin() override {
+        Parent::begin();
         if (switchPin != NO_PIN)
             ExtIO::pinMode(switchPin, INPUT_PULLUP);
     }
 
     void update() override {
+        Parent::update();
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         if (difference) {
@@ -50,8 +57,8 @@ class EncoderSelector_Base : virtual public Selector<N> {
 
   private:
     Encoder encoder;
-    const pin_t switchPin;
-    const int8_t pulsesPerStep;
+    pin_t switchPin;
+    int8_t pulsesPerStep;
     Wrap wrap;
 
     long previousPosition = 0;
@@ -69,18 +76,13 @@ class EncoderSelector_Base : virtual public Selector<N> {
  *          The number of settings.
  */
 template <setting_t N>
-class EncoderSelector : public EncoderSelector_Base<N> {
+class EncoderSelector : public GenericEncoderSelector<N> {
   public:
     EncoderSelector(Selectable<N> &selectable, const EncoderSwitchPinList &pins,
                     int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
-        : Selector<N>(selectable), EncoderSelector_Base<N>(pins, pulsesPerStep,
-                                                           wrap) {}
-
-    void beginOutput() override {}
-    void updateOutput(setting_t oldSetting, setting_t newSetting) override {
-        (void) oldSetting;
-        (void) newSetting;
-    }
+        : GenericEncoderSelector<N>{
+              selectable, {}, pins, pulsesPerStep, wrap,
+          } {}
 };
 
 END_CS_NAMESPACE
