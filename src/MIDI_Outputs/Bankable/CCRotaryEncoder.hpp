@@ -39,7 +39,7 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      *          The MIDI address containing the controller number [0, 119], 
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
      *          [0, 15].
-     * @param   speedMultiply
+     * @param   speedMultiplier
      *          A constant factor to increase the speed of the rotary encoder.
      *          The difference in position will just be multiplied by this 
      *          factor. 

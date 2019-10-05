@@ -22,9 +22,13 @@ class MIDIButtonLatching : public MIDIOutputElement {
     /**
      * @brief   Construct a new MIDIButtonLatching.
      *
+     * @param   bankAddress
+     *          The bankable MIDI address to send to.
      * @param   pin
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIButtonLatching(const BankAddress &bankAddress, pin_t pin,
                        const Sender &sender)

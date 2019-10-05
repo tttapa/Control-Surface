@@ -59,6 +59,10 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
      *          The destination to write the text to.
      *          Will be null-terminated.
      *          Should have a size of at least `length`+1 bytes.
+     * @param   offset
+     *          The index of the first character to read.
+     * @param   length
+     *          The number of characters to copy.
      */
     void getText(char *buffer, uint8_t offset = 0,
                  uint8_t length = LENGTH) const {

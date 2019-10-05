@@ -24,22 +24,21 @@ class MIDIButtonLatched : public MIDIOutputElement {
      * @brief   Create a new bankable MIDIButtonLatched object on the given pin
      *          and address.
      * 
-     * @param   config
-     *          The bank to add this element to.
+     * @param   bankAddress
+     *          The bankable MIDI address to send to.
      * @param   pin
-     *          The digital input pin to read from.  
+     *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
-     * @param   address
-     *          The MIDI address containing the note/controller number [0, 127],
-     *          channel [1, 16], and optional cable number [0, 15].
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIButtonLatched(const BankAddress &bankAddress, pin_t pin,
                       const Sender &sender)
         : address{bankAddress}, button{pin}, sender{sender} {}
 
   public:
-    void begin() final override { button.begin(); }
-    void update() final override {
+    void begin() override { button.begin(); }
+    void update() override {
         Button::State state = button.getState();
         if (state == Button::Falling)
             toggleState();

@@ -15,8 +15,9 @@ namespace Bankable {
  * 
  * The analog input is filtered and hysteresis is applied for maximum
  * stability.  
- * The actual precision is "only" 8 bits, because the built-in ADC
- * is pretty noisy.  
+ * The actual precision is "only" 10 bits, because this is the resolution of the
+ * built-in ADC, and this is the default resolution used by the Mackie Control
+ * Universal protocol.  
  * This version can be banked.
  *
  * @ingroup BankableMIDIOutputElements
@@ -39,10 +40,10 @@ class PBPotentiometer
      * @param   sender
      *          The MIDI sender to use.
      */
-    PBPotentiometer(const OutputBankConfig &bank, pin_t analogPin,
+    PBPotentiometer(const OutputBankConfig &config, pin_t analogPin,
                     const MIDICNChannel &address = CHANNEL_1,
                     const PitchBendSender<10> &sender = {})
-        : MIDIFilteredAnalog{{bank, address}, analogPin, sender} {}
+        : MIDIFilteredAnalog{{config, address}, analogPin, sender} {}
 };
 
 } // namespace Bankable

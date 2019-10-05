@@ -23,18 +23,21 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
     /**
      * @brief   Construct a new MIDIFilteredAnalog.
      *
+     * @param   bankAddress
+     *          The bankable MIDI address to send to.
      * @param   analogPin
      *          The analog input pin with the wiper of the potentiometer
      *          connected.
-     * @todo    Documentation.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIFilteredAnalogAddressable(const BankAddress &bankAddress,
                                   pin_t analogPin, const Sender &sender)
         : address{bankAddress}, filteredAnalog{analogPin}, sender{sender} {}
 
   public:
-    void begin() final override {}
-    void update() final override {
+    void begin() override {}
+    void update() override {
         if (filteredAnalog.update())
             sender.send(filteredAnalog.getValue(), address.getActiveAddress());
     }
@@ -90,10 +93,13 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
     /**
      * @brief   Construct a new MIDIFilteredAnalog.
      *
+     * @param   bankAddress
+     *          The bankable MIDI address to send to.
      * @param   analogPin
      *          The analog input pin with the wiper of the potentiometer
      *          connected.
-     * @todo    Bank Config
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIFilteredAnalog(const BankAddress &bankAddress, pin_t analogPin,
                        const Sender &sender)

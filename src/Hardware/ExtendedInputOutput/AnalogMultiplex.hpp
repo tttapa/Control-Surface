@@ -58,7 +58,7 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      *          The new mode of the input pin: 
      *          either INPUT or INPUT_PULLUP.
      */
-    void pinMode(pin_t, uint8_t mode) override;
+    void pinMode(UNUSED_PARAM pin_t pin, uint8_t mode) override;
 
     /**
      * @brief   The digitalWrite function is not implemented because writing an

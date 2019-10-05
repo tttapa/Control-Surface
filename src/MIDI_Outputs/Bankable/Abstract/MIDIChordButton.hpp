@@ -26,11 +26,19 @@ class MIDIChordButton : public MIDIOutputElement {
      * @brief   Construct a new bankable MIDIChordButton.
      *
      * @param   config
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
      * @param   pin
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      * @param   address
+     *          The address of the base note, containing the note number 
+     *          [0, 127], the MIDI channel [CHANNEL_1, CHANNEL_16] and Cable 
+     *          Number [0, 15].
      * @param   chord
+     *          The chord to play on top of the base notes.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     template <uint8_t N>
     MIDIChordButton(const OutputBankConfig &config, pin_t pin,
@@ -39,8 +47,8 @@ class MIDIChordButton : public MIDIOutputElement {
         : address{config, address}, button{pin},
           newChord(make_unique<Chord<N>>(chord)), sender{sender} {}
 
-    void begin() final override { button.begin(); }
-    void update() final override {
+    void begin() override { button.begin(); }
+    void update() override {
         Button::State state = button.getState();
         if (state == Button::Falling) {
             if (newChord)

@@ -22,15 +22,19 @@ class MIDIButton : public MIDIOutputElement {
     /**
      * @brief   Construct a new bankable MIDIButton.
      *
+     * @param   bankAddress
+     *          The bankable MIDI address to send to.
      * @param   pin
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIButton(const BankAddress &bankAddress, pin_t pin, const Sender &sender)
         : address{bankAddress}, button{pin}, sender{sender} {}
 
-    void begin() final override { button.begin(); }
-    void update() final override {
+    void begin() override { button.begin(); }
+    void update() override {
         Button::State state = button.getState();
         if (state == Button::Falling) {
             address.lock();

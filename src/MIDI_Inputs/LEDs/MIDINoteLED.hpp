@@ -29,10 +29,6 @@ class MIDINoteLED : public MIDINote, public MIDINoteLED_Base {
      * 
      * @param   ledPin
      *          The digital pin with the LED connected.
-     * @param   note
-     *          The MIDI note number. [0, 127]
-     * @param   channel
-     *          The MIDI channel. [1, 16] 
      */
     MIDINoteLED(pin_t ledPin, const MIDICNChannelAddress &address)
         : MIDINote_Base(address), MIDINote(address), MIDINoteLED_Base(ledPin) {}

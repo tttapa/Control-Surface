@@ -76,6 +76,8 @@ class ManyAddresses : public ManyAddressesMIDIOutput {
      * 
      * @param   bank
      *          The bank to add this element to.
+     * @param   addresses
+     *          The list of alternative addresses.
      */
     ManyAddresses(const Bank<NumBanks> &bank,
                   const Array<MIDICNChannelAddress, NumBanks> &addresses)

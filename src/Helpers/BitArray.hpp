@@ -83,7 +83,8 @@ class BitArray {
      * 
      * @note    No bounds checking is performed.
      * 
-     * @param   The index of the byte within the array. 
+     * @param   byteIndex
+     *          The index of the byte within the array. 
      */
     uint8_t getByte(uint8_t byteIndex) const {
         return buffer[byteIndex];
