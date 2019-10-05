@@ -7,18 +7,16 @@ BEGIN_CS_NAMESPACE
 
 template <setting_t N, class Callback = EmptySelectorCallback>
 class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
-  protected:
+    using Parent = GenericSelector<N, Callback>;
+
+  public:
     GenericIncrementDecrementSelector(Selectable<N> &selectable,
                                       const Callback &callback,
                                       const IncrementDecrementButtons &buttons,
                                       Wrap wrap = Wrap::Wrap)
-        : GenericSelector<N>{selectable, callback}, buttons{buttons},
+        : GenericSelector<N, Callback>{selectable, callback}, buttons{buttons},
           wrap{wrap} {}
 
-  private:
-    using Parent = GenericSelector<N, Callback>;
-
-  public:
     void begin() override {
         Parent::begin();
         buttons.begin();

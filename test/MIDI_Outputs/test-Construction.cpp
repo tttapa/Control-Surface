@@ -43,6 +43,15 @@
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
 
+#include <Selectors/EncoderSelector.hpp>
+#include <Selectors/IncrementDecrementSelector.hpp>
+#include <Selectors/IncrementSelector.hpp>
+#include <Selectors/ManyButtonsSelector.hpp>
+#include <Selectors/ProgramChangeSelector.hpp>
+#include <Selectors/SwitchSelector.hpp>
+
+#include <Selectors/LEDs/SelectorLEDs.hpp>
+
 #include <gtest-wrapper.h>
 
 using namespace CS;
@@ -128,4 +137,29 @@ TEST(Construction, MIDIOutputs) {
         bank, {pin, pin}, addresses, 4, addresses};
 
     Bankable::ManyAddresses::CCPotentiometer<4>{bank, pin, addresses};
+}
+
+TEST(Construction, Selectors) {
+    const pin_t pin = 0;
+    const MIDICNChannel cnChannel = {};
+    const Wrap wrap = Wrap::NoWrap;
+    Bank<4> bank;
+    Bank<2> bank2;
+
+    EncoderSelector<4>{bank, {pin, pin, pin}, 4, wrap};
+    IncrementDecrementSelector<4>{bank, {pin, pin}, wrap};
+    IncrementSelector<4>{bank, pin, wrap};
+    ManyButtonsSelector<4>{bank, {pin, pin, pin, pin}};
+    ProgramChangeSelector<4>{bank, cnChannel};
+    SwitchSelector{bank2, pin};
+
+    EncoderSelectorLEDs<4>{
+        bank, {pin, pin, pin}, {pin, pin, pin, pin}, 4, wrap};
+    IncrementDecrementSelectorLEDs<4>{
+        bank, {pin, pin}, {pin, pin, pin, pin}, wrap};
+    IncrementSelectorLEDs<4>{bank, pin, {pin, pin, pin, pin}, wrap};
+    ManyButtonsSelectorLEDs<4>{
+        bank, {pin, pin, pin, pin}, {pin, pin, pin, pin}};
+    ProgramChangeSelectorLEDs<4>{bank, cnChannel, {pin, pin, pin, pin}};
+    SwitchSelectorLED{bank2, pin, pin};
 }

@@ -66,6 +66,7 @@ NoteChordButton	KEYWORD1
 PBPotentiometer	KEYWORD1
 
 ProgramChanger	KEYWORD1
+PCButton	KEYWORD1
 
 # MIDI Input Elements
 #####################
@@ -86,8 +87,27 @@ ProgramSelector	KEYWORD1
 ##########
 
 Selector	KEYWORD1
-SwitchSelector	KEYWORD1
+EncoderSelector	KEYWORD1
 IncrementDecrementSelector	KEYWORD1
+IncrementSelector	KEYWORD1
+ManyButtonsSelector	KEYWORD1
+ProgramChangeSelector	KEYWORD1
+SwitchSelector	KEYWORD1
+
+GenericSelector	KEYWORD1
+GenericEncoderSelector	KEYWORD1
+GenericIncrementDecrementSelector	KEYWORD1
+GenericIncrementSelector	KEYWORD1
+GenericManyButtonsSelector	KEYWORD1
+GenericProgramChangeSelector	KEYWORD1
+GenericSwitchSelector	KEYWORD1
+
+EncoderSelectorLEDs	KEYWORD1
+IncrementDecrementSelectorLEDs	KEYWORD1
+IncrementSelectorLEDs	KEYWORD1
+ManyButtonsSelectorLEDs	KEYWORD1
+ProgramChangeSelectorLEDs	KEYWORD1
+SwitchSelectorLED	KEYWORD1
 
 # Enumerations
 ##############

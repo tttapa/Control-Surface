@@ -28,10 +28,10 @@ pin_t ExtendedIOElement::pin(pin_t p) const {
         static_assert(is_unsigned<pin_t>::value,
                       "Error: pin_t should be an unsigned integer type");
         ERROR(F("Error: the pin number (")
-                  << +p
+                  << p
                   << F(") is greater than the number of pins of this "
                        "ExtendedIOElement (")
-                  << +length << ')',
+                  << length << ')',
               0x4567);
         return end - 1;
     }

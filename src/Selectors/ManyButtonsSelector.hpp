@@ -8,17 +8,15 @@ BEGIN_CS_NAMESPACE
 
 template <setting_t N, class Callback = EmptySelectorCallback>
 class GenericManyButtonsSelector : public GenericSelector<N, Callback> {
-  protected:
+    using Parent = GenericSelector<N, Callback>;
+
+  public:
     GenericManyButtonsSelector(Selectable<N> &selectable,
                                const Callback &callback,
                                const PinList<N> &buttonPins)
         : GenericSelector<N, Callback>{selectable, callback}, buttonPins{
                                                                   buttonPins} {}
 
-  private:
-    using Parent = GenericSelector<N, Callback>;
-
-  public:
     void begin() override {
         Parent::begin();
         for (const pin_t &pin : buttonPins)

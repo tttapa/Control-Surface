@@ -14,17 +14,16 @@ BEGIN_CS_NAMESPACE
 
 template <setting_t N, class Callback = EmptySelectorCallback>
 class GenericEncoderSelector : public GenericSelector<N, Callback> {
-  protected:
-    GenericEncoderSelector(Selectable<N> &selectable, const Callback &callback,
-                           const EncoderSwitchPinList &pins,
-                           int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
-        : GenericSelector<N>{selectable, callback}, encoder{pins.A, pins.B},
-          switchPin{pins.switchPin}, pulsesPerStep{pulsesPerStep}, wrap{wrap} {}
-
-  private:
     using Parent = GenericSelector<N, Callback>;
 
   public:
+    GenericEncoderSelector(Selectable<N> &selectable, const Callback &callback,
+                           const EncoderSwitchPinList &pins,
+                           int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
+        : GenericSelector<N, Callback>{selectable, callback}, encoder{pins.A,
+                                                                      pins.B},
+          switchPin{pins.switchPin}, pulsesPerStep{pulsesPerStep}, wrap{wrap} {}
+
     void begin() override {
         Parent::begin();
         if (switchPin != NO_PIN)

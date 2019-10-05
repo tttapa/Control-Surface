@@ -71,10 +71,10 @@ void Control_Surface_::onChannelMessage(Parsing_MIDI_Interface &midi) {
 #ifdef DEBUG_MIDI_PACKETS
     // TODO: print CN
     if (midimsg.type != PROGRAM_CHANGE && midimsg.type != CHANNEL_PRESSURE)
-        DEBUG(">>> " << hex << +midichmsg.header << ' ' << +midimsg.data1 << ' '
-                     << +midimsg.data2 << dec);
+        DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1 << ' '
+                     << midimsg.data2 << dec);
     else
-        DEBUG(">>> " << hex << +midichmsg.header << ' ' << +midimsg.data1
+        DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1
                      << dec);
 #endif
 

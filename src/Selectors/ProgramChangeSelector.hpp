@@ -30,9 +30,9 @@ class GenericProgramChangeSelector : public GenericSelector<N, Callback>,
             this->set(program);
         } else {
             DEBUGFN(F("Warning: Received Program Change to program 0x")
-                    << hex << +program << dec
+                    << hex << program << dec
                     << F(", which is not smaller than the number of settings (")
-                    << +N << ')');
+                    << N << ')');
         }
         return true;
     }

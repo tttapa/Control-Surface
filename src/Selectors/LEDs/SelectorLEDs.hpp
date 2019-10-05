@@ -17,7 +17,6 @@ class SelectorLEDsCallback {
             ExtIO::pinMode(pin, OUTPUT);
             ExtIO::digitalWrite(pin, LOW);
         }
-        ExtIO::digitalWrite(ledPins[this->get()], HIGH);
     }
 
     /// Refresh, called periodically.
@@ -30,7 +29,27 @@ class SelectorLEDsCallback {
     }
 
   private:
-    const PinList<N> ledPins;
+    PinList<N> ledPins;
+};
+
+class SelectorSingleLEDCallback {
+  public:
+    SelectorSingleLEDCallback(pin_t ledPin) : ledPin{ledPin} {}
+
+    /// Initialize.
+    void begin() { ExtIO::pinMode(ledPin, OUTPUT); }
+
+    /// Refresh, called periodically.
+    void update() {}
+
+    /// Called when the setting changes.
+    void update(setting_t oldSetting, setting_t newSetting) {
+        (void)oldSetting;
+        ExtIO::digitalWrite(ledPin, newSetting == 0 ? LOW : HIGH);
+    }
+
+  private:
+    pin_t ledPin;
 };
 
 END_CS_NAMESPACE
@@ -46,9 +65,10 @@ template <setting_t N>
 class EncoderSelectorLEDs
     : public GenericEncoderSelector<N, SelectorLEDsCallback<N>> {
   public:
-    EncoderSelectorLEDs(Selectable<N> &selectable, const PinList<N> &ledPins,
+    EncoderSelectorLEDs(Selectable<N> &selectable,
                         const EncoderSwitchPinList &pins,
-                        uint8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
+                        const PinList<N> &ledPins, int8_t pulsesPerStep = 4,
+                        Wrap wrap = Wrap::Wrap)
         : GenericEncoderSelector<N, SelectorLEDsCallback<N>>{
               selectable, {ledPins}, pins, pulsesPerStep, wrap,
           } {}
@@ -142,6 +162,26 @@ class ProgramChangeSelectorLEDs
               selectable,
               {ledPins},
               address,
+          } {}
+};
+
+END_CS_NAMESPACE
+
+// -------------------------------------------------------------------------- //
+
+#include <Selectors/SwitchSelector.hpp>
+
+BEGIN_CS_NAMESPACE
+
+class SwitchSelectorLED
+    : public GenericSwitchSelector<SelectorSingleLEDCallback> {
+  public:
+    SwitchSelectorLED(Selectable<2> &selectable, const Button &button,
+                      pin_t ledPin)
+        : GenericSwitchSelector<SelectorSingleLEDCallback>{
+              selectable,
+              {ledPin},
+              button,
           } {}
 };
 

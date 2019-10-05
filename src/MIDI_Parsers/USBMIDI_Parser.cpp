@@ -5,8 +5,8 @@ BEGIN_CS_NAMESPACE
 
 // http://www.usb.org/developers/docs/devclass_docs/midi10.pdf
 MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
-    DEBUGREF("MIDIUSB packet:\t" << hex << +packet[0] << ' ' << +packet[1]
-                                 << ' ' << +packet[2] << ' ' << +packet[3]
+    DEBUGREF("MIDIUSB packet:\t" << hex << packet[0] << ' ' << packet[1]
+                                 << ' ' << packet[2] << ' ' << packet[3]
                                  << dec);
     this->CN = (uint8_t)packet[0] >> 4;
     uint8_t CIN = (uint8_t)packet[0] << 4; // MIDI USB code index number

@@ -5,21 +5,15 @@
 
 BEGIN_CS_NAMESPACE
 
-/**
- * @brief   Selector that selects one of two settings, based on the state of a 
- *          toggle or momentary switch.
- * 
- * @ingroup Selectors
- */
-class SwitchSelector : public Selector<2> {
-  public:
-    SwitchSelector(Selectable<2> &selectable, const Button &button)
-        : Selector<2>{selectable}, button{button} {}
-
-  private:
-    using Parent = Selector<2>;
+template <class Callback = EmptySelectorCallback>
+class GenericSwitchSelector : public GenericSelector<2, Callback> {
+    using Parent = GenericSelector<2, Callback>;
 
   public:
+    GenericSwitchSelector(Selectable<2> &selectable, const Callback &callback,
+                          const Button &button)
+        : GenericSelector<2, Callback>{selectable, callback}, button{button} {}
+
     void begin() override {
         Parent::begin();
         button.begin();
@@ -40,6 +34,22 @@ class SwitchSelector : public Selector<2> {
 
   private:
     Button button;
+};
+
+/**
+ * @brief   Selector that selects one of two settings, based on the state of a 
+ *          toggle or momentary switch.
+ * 
+ * @ingroup Selectors
+ */
+class SwitchSelector : public GenericSwitchSelector<> {
+  public:
+    SwitchSelector(Selectable<2> &selectable, const Button &button)
+        : GenericSwitchSelector<>{
+              selectable,
+              {},
+              button,
+          } {}
 };
 
 END_CS_NAMESPACE
