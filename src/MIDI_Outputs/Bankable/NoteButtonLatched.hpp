@@ -36,13 +36,22 @@ class NoteButtonLatched
      *          The MIDI address containing the note number [0, 127], 
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
      *          [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
+     * @param   velocity
+     *          The velocity of the MIDI Note events.
      */
     NoteButtonLatched(const OutputBankConfig &config, pin_t pin,
                       const MIDICNChannelAddress &address,
-                      const DigitalNoteSender &sender = {})
-        : MIDIButtonLatched{{config, address}, pin, sender} {}
+                      uint8_t velocity = 0x7F)
+        : MIDIButtonLatched{
+              {config, address},
+              pin,
+              {velocity},
+          } {}
+
+    /// Set the velocity of the MIDI Note events.
+    void setVelocity(uint8_t velocity) { this->sender.setVelocity(velocity); }
+    /// Get the velocity of the MIDI Note events.
+    uint8_t getVelocity() const { return this->sender.getVelocity(); }
 };
 
 } // namespace Bankable

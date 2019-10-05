@@ -29,12 +29,21 @@ class NoteButtonLatching : public MIDIButtonLatching<DigitalNoteSender> {
      *          The MIDI address containing the note number [0, 127], 
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
      *          [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
+     * @param   velocity
+     *          The velocity of the MIDI Note events.
      */
     NoteButtonLatching(pin_t pin, const MIDICNChannelAddress &address,
-                       const DigitalNoteSender &sender = {})
-        : MIDIButtonLatching(pin, address, sender) {}
+                       uint8_t velocity = 0x7F)
+        : MIDIButtonLatching{
+              pin,
+              address,
+              {velocity},
+          } {}
+
+    /// Set the velocity of the MIDI Note events.
+    void setVelocity(uint8_t velocity) { this->sender.setVelocity(velocity); }
+    /// Get the velocity of the MIDI Note events.
+    uint8_t getVelocity() const { return this->sender.getVelocity(); }
 };
 
 END_CS_NAMESPACE

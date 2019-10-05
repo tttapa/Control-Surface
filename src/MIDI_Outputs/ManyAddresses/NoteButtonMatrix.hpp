@@ -57,18 +57,27 @@ class NoteButtonMatrix
      * @param   channelCNs
      *          The a list containing the MIDI channels [CHANNEL_1, CHANNEL_16] 
      *          and Cable Numbers [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
+     * @param   velocity
+     *          The velocity of the MIDI Note events.
      */
     NoteButtonMatrix(
         const OutputBankConfig &config, const PinList<nb_rows> &rowPins,
         const PinList<nb_cols> &colPins,
         const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &controllers,
         const Array<MIDICNChannel, NumBanks> &channelCNs,
-        const DigitalNoteSender &sender = {})
+        uint8_t velocity = 0x7F)
         : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, nb_rows, nb_cols>,
                            DigitalNoteSender, nb_rows, nb_cols>{
-              {config, controllers, channelCNs}, rowPins, colPins, sender} {}
+              {config, controllers, channelCNs},
+              rowPins,
+              colPins,
+              {velocity},
+          } {}
+
+    /// Set the velocity of the MIDI Note events.
+    void setVelocity(uint8_t velocity) { this->sender.setVelocity(velocity); }
+    /// Get the velocity of the MIDI Note events.
+    uint8_t getVelocity() const { return this->sender.getVelocity(); }
 };
 
 } // namespace ManyAddresses

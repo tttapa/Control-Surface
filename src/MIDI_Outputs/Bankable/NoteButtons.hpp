@@ -44,16 +44,22 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS> {
      *          E.g. if `baseAddress` is 8, and `incrementAddress` is 2,
      *          then the first button will send on address 8, the second
      *          button will send on address 10, button three on address 12, etc.
-     * @param   sender
-     *          The MIDI sender to use.
+     * @param   velocity
+     *          The velocity of the MIDI Note events.
      */
     NoteButtons(const OutputBankConfig &config,
                 const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 const MIDICNChannelAddress &baseAddress,
                 const RelativeMIDICNChannelAddress &incrementAddress,
-                const DigitalNoteSender &sender = {})
-        : MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS>(
-              config, buttons, baseAddress, incrementAddress, sender) {}
+                uint8_t velocity = 0x7F)
+        : MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS>{
+              config, buttons, baseAddress, incrementAddress, {velocity},
+          } {}
+
+    /// Set the velocity of the MIDI Note events.
+    void setVelocity(uint8_t velocity) { this->sender.setVelocity(velocity); }
+    /// Get the velocity of the MIDI Note events.
+    uint8_t getVelocity() const { return this->sender.getVelocity(); }
 };
 
 } // namespace Bankable
