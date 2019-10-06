@@ -65,6 +65,27 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> generateArray(G generator) {
     return array;
 }
 
+/**
+ * @brief   Copy an Array to an Array of a different type.
+ * 
+ * @tparam  T 
+ *          The type of the new array.
+ * @tparam  N 
+ *          The number of elements in the arrays.
+ * @tparam  U 
+ *          The type of the source array.
+ * 
+ * @param   src 
+ *          The source array to be copied.
+ */
+template <class T, size_t N, class U>
+USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> copyAs(const Array<U, N> &src) {
+    Array<T, N> dest{};
+    for (size_t i = 0; i < N; ++i)
+        dest[i] = src[i];
+    return dest;
+}
+
 template <class T, size_t N, class... Args>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> fillArray(Args... args) {
     return generateArray<T, N>([&]() { return T{args...}; });

@@ -39,6 +39,7 @@
 
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
 #include <MIDI_Outputs/Bankable/PCButton.hpp>
+#include <MIDI_Outputs/ManyAddresses/PBPotentiometer.hpp>
 #include <MIDI_Outputs/ManyAddresses/PCButton.hpp>
 
 #include <Encoder.h>
@@ -146,6 +147,10 @@ TEST(Construction, MIDIOutputs) {
         bank, {pin, pin}, addresses, 4, addresses};
 
     Bankable::ManyAddresses::CCPotentiometer<4>{bank, pin, addresses};
+
+    // ManyAddresses::PB -------------------------------------------------------
+    Bankable::ManyAddresses::PBPotentiometer<4>{
+        bank, pin, {cnChannel, cnChannel, cnChannel, cnChannel}};
 
     // ManyAddresses::PC -------------------------------------------------------
     Bankable::ManyAddresses::PCButton<4>{bank, pin, addresses};
