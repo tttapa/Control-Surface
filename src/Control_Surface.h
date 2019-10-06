@@ -65,6 +65,8 @@
 #include <MIDI_Outputs/Bankable/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
+#include <MIDI_Outputs/Bankable/PCButton.hpp>
+#include <MIDI_Outputs/ManyAddresses/PCButton.hpp>
 
 #ifdef Encoder_h_
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>

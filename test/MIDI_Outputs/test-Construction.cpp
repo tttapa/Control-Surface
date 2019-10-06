@@ -15,6 +15,7 @@
 #include <MIDI_Outputs/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/PBPotentiometer.hpp>
+#include <MIDI_Outputs/PCButton.hpp>
 
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatched.hpp>
@@ -37,6 +38,8 @@
 #include <MIDI_Outputs/Bankable/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
+#include <MIDI_Outputs/Bankable/PCButton.hpp>
+#include <MIDI_Outputs/ManyAddresses/PCButton.hpp>
 
 #include <Encoder.h>
 //
@@ -99,6 +102,9 @@ TEST(Construction, MIDIOutputs) {
     // PB ----------------------------------------------------------------------
     PBPotentiometer{pin, cnChannel};
 
+    // PC ----------------------------------------------------------------------
+    PCButton{pin, address};
+
     // Bankable::CC ------------------------------------------------------------
     Bankable::CCButton{bank, pin, address};
     Bankable::CCButtonLatched{bank, pin, address};
@@ -124,6 +130,9 @@ TEST(Construction, MIDIOutputs) {
     // Bankable::PB ------------------------------------------------------------
     Bankable::PBPotentiometer{bank, pin, cnChannel};
 
+    // Bankable::PC ------------------------------------------------------------
+    Bankable::PCButton{bank, pin, address};
+
     // ManyAddresses::CC -------------------------------------------------------
     Bankable::ManyAddresses::CCButton<4>{bank, pin, addresses};
     Bankable::ManyAddresses::CCButtonMatrix<4, 3, 4>{
@@ -137,6 +146,9 @@ TEST(Construction, MIDIOutputs) {
         bank, {pin, pin}, addresses, 4, addresses};
 
     Bankable::ManyAddresses::CCPotentiometer<4>{bank, pin, addresses};
+
+    // ManyAddresses::PC -------------------------------------------------------
+    Bankable::ManyAddresses::PCButton<4>{bank, pin, addresses};
 }
 
 TEST(Construction, Selectors) {
