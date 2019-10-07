@@ -17,31 +17,36 @@ namespace Bankable {
  * @see     Button
  */
 template <class BankAddress, class Sender>
-class MIDIButtonLatching : public BankAddress, public MIDIOutputElement {
+class MIDIButtonLatching : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIButtonLatching.
      *
+     * @param   bankAddress
+     *          The bankable MIDI address to send to.
      * @param   pin
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIButtonLatching(const BankAddress &bankAddress, pin_t pin,
                        const Sender &sender)
-        : BankAddress{bankAddress}, button{pin}, sender{sender} {}
+        : address{bankAddress}, button{pin}, sender{sender} {}
 
   public:
     void begin() final override { button.begin(); }
     void update() final override {
         Button::State state = button.getState();
         if (state == Button::Falling || state == Button::Rising) {
-            MIDICNChannelAddress sendAddress = this->getActiveAddress();
+            MIDICNChannelAddress sendAddress = address.getActiveAddress();
             sender.sendOn(sendAddress);
             sender.sendOff(sendAddress);
         }
     }
 
   private:
+    BankAddress address;
     Button button;
 
   public:

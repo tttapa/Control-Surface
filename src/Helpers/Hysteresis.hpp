@@ -32,7 +32,7 @@ class Hysteresis {
     /**
      * @brief   Update the hysteresis output with a new input value.
      *
-     * @param   input
+     * @param   inputLevel
      *          The input to calculate the output level from.
      * @return  true
      *          The output level has changed.

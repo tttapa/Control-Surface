@@ -44,16 +44,22 @@ class NoteButtonMatrix
      *          matrix that contains the note number of each button. [0, 127]
      * @param   channelCN
      *          The MIDI channel [1, 16] and Cable Number [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
+     * @param   velocity
+     *          The velocity of the MIDI Note events.
      */
     NoteButtonMatrix(const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &notes,
                      MIDICNChannel channelCN = {CHANNEL_1, 0},
-                     const DigitalNoteSender &sender = {})
-        : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>(
-              rowPins, colPins, notes, channelCN, sender) {}
+                     uint8_t velocity = 0x7F)
+        : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>{
+              rowPins, colPins, notes, channelCN, {velocity},
+          } {}
+
+    /// Set the velocity of the MIDI Note events.
+    void setVelocity(uint8_t velocity) { this->sender.setVelocity(velocity); }
+    /// Get the velocity of the MIDI Note events.
+    uint8_t getVelocity() const { return this->sender.getVelocity(); }
 };
 
 END_CS_NAMESPACE

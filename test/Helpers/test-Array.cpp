@@ -74,3 +74,14 @@ TEST(generateArray, simple) {
     Array<unsigned int, 4> y = {0, 1, 2, 3};
     EXPECT_EQ(x, y);
 }
+
+TEST(fillArray, simple) {
+    struct S {
+        int i;
+        float f;
+        bool operator!=(S o) const { return this->i != o.i || this->f != o.f; }
+    };
+    auto x = fillArray<S, 4>(2, 3.14f);
+    Array<S, 4> y = {{{2, 3.14f}, {2, 3.14f}, {2, 3.14f}, {2, 3.14f}}};
+    EXPECT_EQ(x, y);
+}

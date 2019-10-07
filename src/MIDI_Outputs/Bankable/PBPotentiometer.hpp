@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/PitchBendSender.hpp>
 
@@ -14,13 +15,15 @@ namespace Bankable {
  * 
  * The analog input is filtered and hysteresis is applied for maximum
  * stability.  
- * The actual precision is "only" 8 bits, because the built-in ADC
- * is pretty noisy.  
+ * The actual precision is "only" 10 bits, because this is the resolution of the
+ * built-in ADC, and this is the default resolution used by the Mackie Control
+ * Universal protocol.  
  * This version can be banked.
  *
  * @ingroup BankableMIDIOutputElements
  */
-class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>> {
+class PBPotentiometer
+    : public MIDIFilteredAnalog<SingleAddress, PitchBendSender<10>> {
   public:
     /** 
      * @brief   Create a new Bankable PBPotentiometer object with the given 
@@ -40,7 +43,7 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>> {
     PBPotentiometer(const OutputBankConfig &config, pin_t analogPin,
                     const MIDICNChannel &address,
                     const PitchBendSender<10> &sender = {})
-        : MIDIFilteredAnalog{config, analogPin, address, sender} {}
+        : MIDIFilteredAnalog{{config, address}, analogPin, sender} {}
 };
 
 } // namespace Bankable

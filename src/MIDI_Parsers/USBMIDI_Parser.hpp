@@ -17,7 +17,7 @@ class USBMIDI_Parser : public MIDI_Parser {
   public:
     MIDI_read_t parse(uint8_t *packet);
 
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
     SysExMessage getSysEx() const override {
         return {sysexbuffers[CN].getBuffer(), sysexbuffers[CN].getLength(), CN};
     }
@@ -26,7 +26,7 @@ class USBMIDI_Parser : public MIDI_Parser {
     uint8_t getCN() const override { return CN; }
 
   protected:
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
     void startSysEx(uint8_t CN) { sysexbuffers[CN].start(); }
     void endSysEx(uint8_t CN) { sysexbuffers[CN].end(); }
     bool addSysExByte(uint8_t CN, uint8_t data) {
@@ -40,7 +40,7 @@ class USBMIDI_Parser : public MIDI_Parser {
     uint8_t CN = 0;
 
   private:
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
     SysExBuffer sysexbuffers[USB_MIDI_NUMBER_OF_CABLES];
 #endif
 };

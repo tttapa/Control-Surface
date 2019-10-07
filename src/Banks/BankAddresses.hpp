@@ -21,6 +21,24 @@ class SingleAddress : public BankableMIDIOutput {
     MIDICNChannelAddress address;
 };
 
+class TwoSingleAddresses : public BankableMIDIOutput {
+  public:
+    TwoSingleAddresses(OutputBankConfig config,
+                       const Array<MIDICNChannelAddress, 2> &addresses)
+        : BankableMIDIOutput{config}, addresses{addresses} {}
+
+    MIDICNChannelAddress getBaseAddress(uint8_t i) const {
+        return addresses[i];
+    }
+
+    MIDICNChannelAddress getActiveAddress(uint8_t i) const {
+        return getBaseAddress(i) + getAddressOffset();
+    }
+
+  private:
+    Array<MIDICNChannelAddress, 2> addresses;
+};
+
 template <uint8_t nb_rows, uint8_t nb_cols>
 class MatrixAddress : public BankableMIDIOutput {
   public:
@@ -58,6 +76,8 @@ class ManyAddresses : public ManyAddressesMIDIOutput {
      * 
      * @param   bank
      *          The bank to add this element to.
+     * @param   addresses
+     *          The list of alternative addresses.
      */
     ManyAddresses(const Bank<NumBanks> &bank,
                   const Array<MIDICNChannelAddress, NumBanks> &addresses)
@@ -69,6 +89,46 @@ class ManyAddresses : public ManyAddressesMIDIOutput {
 
   private:
     Array<MIDICNChannelAddress, NumBanks> addresses;
+};
+
+/**
+ * @tparam  NumBanks
+ *          The number of bank settings the bank has.
+ */
+template <uint8_t NumBanks>
+class TwoManyAddresses : public BankableMIDIOutput {
+  public:
+    TwoManyAddresses(
+        OutputBankConfig config,
+        const Array2D<MIDICNChannelAddress, 2, NumBanks> &addresses)
+        : BankableMIDIOutput{config}, addresses{addresses} {}
+
+    MIDICNChannelAddress getActiveAddress(uint8_t i) const {
+        return addresses[i][getSelection()];
+    }
+
+  private:
+    Array2D<MIDICNChannelAddress, 2, NumBanks> addresses;
+};
+
+template <uint8_t NumBanks, uint8_t nb_rows, uint8_t nb_cols>
+class ManyMatrixAddresses : public BankableMIDIOutput {
+  public:
+    ManyMatrixAddresses(
+        OutputBankConfig config,
+        const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &addresses,
+        const Array<MIDICNChannel, NumBanks> &channelCNs)
+        : BankableMIDIOutput{config}, addresses{addresses}, channelCNs{
+                                                                channelCNs} {}
+
+    MIDICNChannelAddress getActiveAddress(uint8_t row, uint8_t col) const {
+        return {addresses[getSelection()][row][col],
+                channelCNs[getSelection()]};
+    }
+
+  private:
+    Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> addresses;
+    Array<MIDICNChannel, NumBanks> channelCNs;
 };
 
 } // namespace ManyAddresses

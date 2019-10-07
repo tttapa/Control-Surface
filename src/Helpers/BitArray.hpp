@@ -67,7 +67,7 @@ class BitArray {
     uint8_t safeIndex(uint8_t byteIndex) const {
         if (byteIndex >= getBufferLength()) {
             ERROR(F("Error: index out of bounds (")
-                      << +byteIndex << F(", length is ") << +getBufferLength()
+                      << byteIndex << F(", length is ") << getBufferLength()
                       << ')',
                   0xFFFF);
             return getBufferLength() - 1;
@@ -83,7 +83,8 @@ class BitArray {
      * 
      * @note    No bounds checking is performed.
      * 
-     * @param   The index of the byte within the array. 
+     * @param   byteIndex
+     *          The index of the byte within the array. 
      */
     uint8_t getByte(uint8_t byteIndex) const {
         return buffer[byteIndex];

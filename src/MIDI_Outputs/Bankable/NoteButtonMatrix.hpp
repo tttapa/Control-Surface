@@ -50,19 +50,29 @@ class NoteButtonMatrix
      *          A 2-dimensional array of the same dimensions as the button
      *          matrix that contains the note number of each button. [0, 127]
      * @param   channelCN
-     *          The MIDI channel [1, 16] and Cable Number [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
+     *          [0, 15].
+     * @param   velocity
+     *          The velocity of the MIDI Note events.
      */
     NoteButtonMatrix(const OutputBankConfig &config,
                      const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &notes,
                      MIDICNChannel channelCN = {CHANNEL_1, 0},
-                     const DigitalNoteSender &sender = {})
+                     uint8_t velocity = 0x7F)
         : MIDIButtonMatrix<MatrixAddress<nb_rows, nb_cols>, DigitalNoteSender,
                            nb_rows, nb_cols>{
-              {config, notes, channelCN}, rowPins, colPins, sender} {}
+              {config, notes, channelCN},
+              rowPins,
+              colPins,
+              {velocity},
+          } {}
+
+    /// Set the velocity of the MIDI Note events.
+    void setVelocity(uint8_t velocity) { this->sender.setVelocity(velocity); }
+    /// Get the velocity of the MIDI Note events.
+    uint8_t getVelocity() const { return this->sender.getVelocity(); }
 };
 
 } // namespace Bankable

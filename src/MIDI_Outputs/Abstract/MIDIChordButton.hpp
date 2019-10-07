@@ -31,6 +31,8 @@ class MIDIChordButton : public MIDIOutputElement {
      *          cable number [0, 15].
      * @param   chord
      *          The chord containing the intervals of the other notes to play.
+     * @param   sender
+     *          The MIDI Note sender to use.
      * 
      * @tparam  N
      *          The number of notes in the chord.

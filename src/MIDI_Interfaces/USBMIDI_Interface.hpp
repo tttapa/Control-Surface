@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MIDI_Interface.hpp"
+#include <Helpers/Error.hpp>
 #include <Helpers/TeensyUSBTypes.hpp>
 #include <MIDI_Parsers/USBMIDI_Parser.hpp>
 
@@ -16,8 +17,12 @@
 #include "MIDIUSB.h"
 #endif
 
+#ifndef ARDUINO
+#include <gmock-wrapper.h>
+#endif
+
 // If the main MCU has a USB connection or is a Teensy with MIDI USB type
-#if defined(USBCON) || defined(TEENSY_MIDIUSB_ENABLED)
+#if defined(USBCON) || defined(TEENSY_MIDIUSB_ENABLED) || !defined(ARDUINO)
 
 BEGIN_CS_NAMESPACE
 
@@ -41,45 +46,90 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
   private:
     USBMIDI_Parser parser;
 
+// If this is a test on PC
+#ifndef ARDUINO
+
+  public:
+#if __GNUC__ >= 5
+// Disable GCC 5's -Wsuggest-override warnings in gtest
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsuggest-override"
+#endif
+    MOCK_METHOD5(writeUSBPacket,
+                 void(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));
+    MOCK_METHOD0(read, MIDI_read_t(void));
+#if __GNUC__ >= 5
+#pragma GCC diagnostic pop
+    void flush() {}
+#endif
+
 // If it's a Teensy board
-#if defined(TEENSYDUINO)
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
-                  uint8_t cn) override {
-        usb_midi_write_packed((cn << 4) | (m >> 4) | // CN|CIN
-                              ((m | c) << 8) |       // status
-                              (d1 << 16) |           // data 1
-                              (d2 << 24));           // data 2
+#elif defined(TEENSYDUINO)
+
+    void writeUSBPacket(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1,
+                        uint8_t d2) {
+        usb_midi_write_packed((cn << 4) | cin | // CN|CIN
+                              (d0 << 8) |       // status
+                              (d1 << 16) |      // data 1
+                              (d2 << 24));      // data 2
     }
+    void flush() {}
 
 // If the main MCU has a USB connection but is not a Teensy
 #elif defined(USBCON)
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
-                  uint8_t cn) override {
+
+    void writeUSBPacket(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1,
+                        uint8_t d2) {
         midiEventPacket_t msg = {
-            uint8_t((cn << 4) | (m >> 4)),
-            uint8_t(m | c),
-            d1,
-            d2,
+            uint8_t((cn << 4) | cin), // CN|CIN
+            d0,                       // status
+            d1,                       // data 1
+            d2,                       // data 2
         };
         MidiUSB.sendMIDI(msg);
-        MidiUSB.flush();
     }
+
+    void flush() { MidiUSB.flush(); }
+
 #endif
+
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                  uint8_t cn) override {
+        writeUSBPacket(cn, m >> 4, // CN|CIN
+                       (m | c),    // status
+                       d1,         // data 1
+                       d2);        // data 2
+        flush();
+    }
+
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
         sendImpl(m, c, d1, 0, cn);
     }
 
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        (void)data;
-        (void)length;
-        (void)cn; // TODO
+        if (length < 2) {
+            ERROR(F("Error: invalid SysEx length"), 0x7F7F);
+            return;
+        }
+        while (length > 3) {
+            writeUSBPacket(cn, 0x4, data[0], data[1], data[2]);
+            data += 3;
+            length -= 3;
+        }
+        switch (length) {
+            case 3: writeUSBPacket(cn, 0x7, data[0], data[1], data[2]); break;
+            case 2: writeUSBPacket(cn, 0x6, data[0], data[1], 0); break;
+            case 1: writeUSBPacket(cn, 0x5, data[0], 0, 0); break;
+            default: break;
+        }
+        flush();
     }
 
   public:
 // If it's a Teensy board
 #if defined(TEENSYDUINO)
     MIDI_read_t read() override {
-        while (1) {
+        for (uint8_t i = 0; i < 32; ++i) {
             if (rx_packet == nullptr) { // If there's no previous packet
                 if (!usb_configuration) // Check USB configuration
                     return NO_MESSAGE;
@@ -115,20 +165,23 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
             if (parseResult != NO_MESSAGE)
                 return parseResult;
         }
+        return NO_MESSAGE;
     }
 
 // If the main MCU has a USB connection but is not a Teensy → MIDIUSB library
 #elif defined(USBCON)
     MIDI_read_t read() override {
-        while (1) {
+        for (uint8_t i = 0; i < 32; ++i) {
             midiEventPacket_t midipacket = MidiUSB.read();
-            rx_packet = reinterpret_cast<uint8_t *>(&midipacket);
+            uint8_t rx_packet[4] = {midipacket.header, midipacket.byte1,
+                                    midipacket.byte2, midipacket.byte3};
             if (!midipacket.header)
                 return NO_MESSAGE;
             MIDI_read_t parseResult = parser.parse(rx_packet);
             if (parseResult != NO_MESSAGE)
                 return parseResult;
         }
+        return NO_MESSAGE;
     }
 #endif
 
@@ -136,10 +189,6 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 // If it's a Teensy board
 #if defined(TEENSYDUINO)
     usb_packet_t *rx_packet = nullptr;
-
-// If the main MCU has a USB connection but is not a Teensy
-#elif defined(USBCON)
-    uint8_t *rx_packet = nullptr;
 #endif
 };
 

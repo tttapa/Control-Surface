@@ -73,7 +73,7 @@ constexpr bool VU_PEAK_SMOOTH_DECAY = true;
 constexpr uint8_t NOTE_VELOCITY_THRESHOLD = 1;
 
 /// Don't parse incoming System Exclusive messages.
-#define IGNORE_SYSEX
+#define IGNORE_SYSEX 0
 
 /** The length of the maximum System Exclusive message
  *  that can be received. The maximum length sent by

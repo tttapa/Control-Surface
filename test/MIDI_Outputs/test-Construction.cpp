@@ -15,6 +15,7 @@
 #include <MIDI_Outputs/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/PBPotentiometer.hpp>
+#include <MIDI_Outputs/PCButton.hpp>
 
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatched.hpp>
@@ -25,6 +26,8 @@
 #include <MIDI_Outputs/Bankable/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/Bankable/CCPotentiometer.hpp>
 #include <MIDI_Outputs/ManyAddresses/CCButton.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCButtonMatrix.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/ManyAddresses/CCPotentiometer.hpp>
 
 #include <MIDI_Outputs/Bankable/NoteButton.hpp>
@@ -35,11 +38,23 @@
 #include <MIDI_Outputs/Bankable/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
+#include <MIDI_Outputs/Bankable/PCButton.hpp>
+#include <MIDI_Outputs/ManyAddresses/PBPotentiometer.hpp>
+#include <MIDI_Outputs/ManyAddresses/PCButton.hpp>
 
 #include <Encoder.h>
 //
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
+
+#include <Selectors/EncoderSelector.hpp>
+#include <Selectors/IncrementDecrementSelector.hpp>
+#include <Selectors/IncrementSelector.hpp>
+#include <Selectors/ManyButtonsSelector.hpp>
+#include <Selectors/ProgramChangeSelector.hpp>
+#include <Selectors/SwitchSelector.hpp>
+
+#include <Selectors/LEDs/SelectorLEDs.hpp>
 
 #include <gtest-wrapper.h>
 
@@ -88,6 +103,9 @@ TEST(Construction, MIDIOutputs) {
     // PB ----------------------------------------------------------------------
     PBPotentiometer{pin, cnChannel};
 
+    // PC ----------------------------------------------------------------------
+    PCButton{pin, address};
+
     // Bankable::CC ------------------------------------------------------------
     Bankable::CCButton{bank, pin, address};
     Bankable::CCButtonLatched{bank, pin, address};
@@ -113,8 +131,52 @@ TEST(Construction, MIDIOutputs) {
     // Bankable::PB ------------------------------------------------------------
     Bankable::PBPotentiometer{bank, pin, cnChannel};
 
+    // Bankable::PC ------------------------------------------------------------
+    Bankable::PCButton{bank, pin, address};
+
     // ManyAddresses::CC -------------------------------------------------------
     Bankable::ManyAddresses::CCButton<4>{bank, pin, addresses};
+    Bankable::ManyAddresses::CCButtonMatrix<4, 3, 4>{
+        bank,
+        rowPins3,
+        colPins4,
+        {addressMatrix34, addressMatrix34, addressMatrix34, addressMatrix34},
+        {cnChannel, cnChannel, cnChannel, cnChannel},
+    };
+    Bankable::ManyAddresses::CCIncrementDecrementButtons<4>{
+        bank, {pin, pin}, addresses, 4, addresses};
 
     Bankable::ManyAddresses::CCPotentiometer<4>{bank, pin, addresses};
+
+    // ManyAddresses::PB -------------------------------------------------------
+    Bankable::ManyAddresses::PBPotentiometer<4>{
+        bank, pin, {cnChannel, cnChannel, cnChannel, cnChannel}};
+
+    // ManyAddresses::PC -------------------------------------------------------
+    Bankable::ManyAddresses::PCButton<4>{bank, pin, addresses};
+}
+
+TEST(Construction, Selectors) {
+    const pin_t pin = 0;
+    const MIDICNChannel cnChannel = {};
+    const Wrap wrap = Wrap::NoWrap;
+    Bank<4> bank;
+    Bank<2> bank2;
+
+    EncoderSelector<4>{bank, {pin, pin, pin}, 4, wrap};
+    IncrementDecrementSelector<4>{bank, {pin, pin}, wrap};
+    IncrementSelector<4>{bank, pin, wrap};
+    ManyButtonsSelector<4>{bank, {pin, pin, pin, pin}};
+    ProgramChangeSelector<4>{bank, cnChannel};
+    SwitchSelector{bank2, pin};
+
+    EncoderSelectorLEDs<4>{
+        bank, {pin, pin, pin}, {pin, pin, pin, pin}, 4, wrap};
+    IncrementDecrementSelectorLEDs<4>{
+        bank, {pin, pin}, {pin, pin, pin, pin}, wrap};
+    IncrementSelectorLEDs<4>{bank, pin, {pin, pin, pin, pin}, wrap};
+    ManyButtonsSelectorLEDs<4>{
+        bank, {pin, pin, pin, pin}, {pin, pin, pin, pin}};
+    ProgramChangeSelectorLEDs<4>{bank, cnChannel, {pin, pin, pin, pin}};
+    SwitchSelectorLED{bank2, pin, pin};
 }

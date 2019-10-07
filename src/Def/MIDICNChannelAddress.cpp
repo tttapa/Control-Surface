@@ -40,20 +40,6 @@ operator-(const RelativeMIDICNChannelAddress &rhs) const {
     return copy;
 }
 
-bool MIDICNChannelAddress::operator==(const MIDICNChannelAddress &rhs) const {
-    return this->addresses.valid && rhs.addresses.valid &&
-           this->addresses.address == rhs.addresses.address &&
-           this->addresses.channel == rhs.addresses.channel &&
-           this->addresses.cableNumber == rhs.addresses.cableNumber;
-}
-
-bool MIDICNChannelAddress::operator!=(const MIDICNChannelAddress &rhs) const {
-    return this->addresses.valid && rhs.addresses.valid &&
-           !(this->addresses.address == rhs.addresses.address &&
-             this->addresses.channel == rhs.addresses.channel &&
-             this->addresses.cableNumber == rhs.addresses.cableNumber);
-}
-
 bool MIDICNChannelAddress::matchSingle(const MIDICNChannelAddress &toMatch,
                                        const MIDICNChannelAddress &base) {
     return base == toMatch;

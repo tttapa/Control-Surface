@@ -5,18 +5,22 @@
 
 BEGIN_CS_NAMESPACE
 
-/// A class for selectors that select one of two settings, based on the state
-/// of a toggle switch.
-class SwitchSelector : virtual public Selector<2> {
-  public:
-    SwitchSelector(Selectable<2> &selectable, const Button &button)
-        : Selector<2>(selectable), button(button) {}
+template <class Callback = EmptySelectorCallback>
+class GenericSwitchSelector : public GenericSelector<2, Callback> {
+    using Parent = GenericSelector<2, Callback>;
 
-    void beginInput() override { button.begin(); }
-    void beginOutput() override {}
-    void updateOutput(setting_t, setting_t) override {}
+  public:
+    GenericSwitchSelector(Selectable<2> &selectable, const Callback &callback,
+                          const Button &button)
+        : GenericSelector<2, Callback>{selectable, callback}, button{button} {}
+
+    void begin() override {
+        Parent::begin();
+        button.begin();
+    }
 
     void update() override {
+        Parent::update();
         Button::State state = button.getState();
         if (state == Button::Falling)
             this->set(1);
@@ -24,8 +28,28 @@ class SwitchSelector : virtual public Selector<2> {
             this->set(0);
     }
 
+#ifdef INDIVIDUAL_BUTTON_INVERT
+    void invert() { button.invert(); }
+#endif
+
   private:
     Button button;
+};
+
+/**
+ * @brief   Selector that selects one of two settings, based on the state of a 
+ *          toggle or momentary switch.
+ * 
+ * @ingroup Selectors
+ */
+class SwitchSelector : public GenericSwitchSelector<> {
+  public:
+    SwitchSelector(Selectable<2> &selectable, const Button &button)
+        : GenericSwitchSelector<>{
+              selectable,
+              {},
+              button,
+          } {}
 };
 
 END_CS_NAMESPACE

@@ -31,14 +31,26 @@ class NoteChordButton : public MIDIChordButton<DigitalNoteSender> {
      *          cable number [0, 15].
      * @param   chord
      *          The chord containing the intervals of the other notes to play.
+     * @param   velocity
+     *          The velocity of the MIDI Note events.
      * 
      * @tparam  N
      *          The number of notes in the chord.
      */
     template <uint8_t N>
     NoteChordButton(pin_t pin, const MIDICNChannelAddress &address,
-                    const Chord<N> &chord, const DigitalNoteSender &sender)
-        : MIDIChordButton<DigitalNoteSender>(pin, address, chord, sender) {}
+                    const Chord<N> &chord, uint8_t velocity = 0x7F)
+        : MIDIChordButton<DigitalNoteSender>{
+              pin,
+              address,
+              chord,
+              {velocity},
+          } {}
+
+    /// Set the velocity of the MIDI Note events.
+    void setVelocity(uint8_t velocity) { this->sender.setVelocity(velocity); }
+    /// Get the velocity of the MIDI Note events.
+    uint8_t getVelocity() const { return this->sender.getVelocity(); }
 };
 
 END_CS_NAMESPACE

@@ -16,24 +16,20 @@ namespace Bankable {
  * 
  * @todo    Combine RelativeSender and ResetSender?
  */
-template <class RelativeSender, class ResetSender>
-class MIDIIncrementDecrementButtons : public BankableMIDIOutput,
-                                      public MIDIOutputElement {
+template <class BankAddress, class RelativeSender, class ResetSender>
+class MIDIIncrementDecrementButtons : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIIncrementDecrementButtons.
      *
      * @todo    Documentation
      */
-    MIDIIncrementDecrementButtons(const OutputBankConfig &config,
+    MIDIIncrementDecrementButtons(const BankAddress &addresses,
                                   const IncrementDecrementButtons &buttons,
-                                  const MIDICNChannelAddress &address,
                                   uint8_t multiplier,
-                                  const MIDICNChannelAddress &resetAddress,
                                   const RelativeSender &relativeSender,
                                   const ResetSender &resetSender)
-        : BankableMIDIOutput{config}, buttons(buttons), address(address),
-          multiplier(multiplier), resetAddress(resetAddress),
+        : addresses{addresses}, buttons{buttons}, multiplier{multiplier},
           relativeSender{relativeSender}, resetSender{resetSender} {}
 
   public:
@@ -41,7 +37,7 @@ class MIDIIncrementDecrementButtons : public BankableMIDIOutput,
 
     void update() override {
         using IncrDecrButtons = IncrementDecrementButtons;
-        MIDICNChannelAddress address = this->address + getAddressOffset();
+        MIDICNChannelAddress address = addresses.getActiveAddress(0);
         switch (buttons.getState()) {
             case IncrDecrButtons::Increment: send(multiplier, address); break;
             case IncrDecrButtons::Decrement: send(-multiplier, address); break;
@@ -56,8 +52,8 @@ class MIDIIncrementDecrementButtons : public BankableMIDIOutput,
     }
 
     void reset() {
-        if (resetAddress) {
-            MIDICNChannelAddress address = resetAddress + getAddressOffset();
+        MIDICNChannelAddress address = addresses.getActiveAddress(1);
+        if (address) {
             resetSender.sendOn(address);
             resetSender.sendOff(address);
         }
@@ -68,10 +64,9 @@ class MIDIIncrementDecrementButtons : public BankableMIDIOutput,
 #endif
 
   private:
+    BankAddress addresses;
     IncrementDecrementButtons buttons;
-    const MIDICNChannelAddress address;
     const uint8_t multiplier;
-    const MIDICNChannelAddress resetAddress;
 
   public:
     RelativeSender relativeSender;

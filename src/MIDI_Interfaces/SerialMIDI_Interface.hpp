@@ -55,9 +55,8 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
     }
 
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        (void)data;
-        (void)length;
-        (void)cn; // TODO
+        stream.write(data, length);
+        (void)cn;
     }
 
   protected:

@@ -12,40 +12,96 @@ BEGIN_CS_NAMESPACE
  *          (decremented) beyond their maximum (minimum) setting.
  */
 enum class Wrap : bool {
-    NoWrap = false, ///< When the maximum (minimum) setting is reached,
-                    ///< clamp to the maximum (minimum) setting.
-                    ///< @todo  Rename to `Clamp`?
-    Wrap = true,    ///< When the maximum (minimum) setting is reached,
-                    ///< wrap around to the minimum (maximum) setting.
+    Clamp = false, ///< When the maximum (minimum) setting is reached,
+                   ///< clamp to the maximum (minimum) setting.
+                   ///< @todo  Rename to `Clamp`?
+    Wrap = true,   ///< When the maximum (minimum) setting is reached,
+                   ///< wrap around to the minimum (maximum) setting.
+    NoWrap = false,
 };
 
-template <setting_t N>
-class Selector : public Updatable<> {
+/// A callback for the GenericSelector class that does nothing.
+struct EmptySelectorCallback {
+    /// Initialize.
+    void begin() {}
+    /// Refresh, called periodically.
+    void update() {}
+    /// Called when the setting changes.
+    void update(setting_t oldSetting, setting_t newSetting) {
+        (void)oldSetting, (void)newSetting;
+    }
+};
+
+/// Base class for all Selectors exposing the `get` method, so it can be used
+/// by display elements etc, without having to provide the full generic type.
+///
+/// A `set` method is not provided, because that would require either more
+/// virtual functions, or a rather large refactoring.
+class SelectorBase {
   protected:
-    Selector(); // Not used, only for virtual inheritance
-    Selector(Selectable<N> &selectable) : selectable(selectable) {}
+    /// Constructor.
+    SelectorBase() = default;
 
   public:
-    virtual void beginInput() = 0;
-    virtual void beginOutput() = 0;
-
-    void begin() override {
-        beginOutput();
-        reset();
-        beginInput();
-    }
-
-    virtual void reset() { set(selectable.getInitialSelection()); }
-
+    /// Get the current selection/setting.
     setting_t get() const { return setting; }
 
-    void set(setting_t newSetting) {
-        newSetting = Selectable<N>::validateSetting(newSetting);
-        selectable.select(newSetting);
-        updateOutput(get(), newSetting);
-        setting = newSetting;
+  protected:
+    /// The selection of the selector. It is saved in the selector as well as
+    /// the selectable, because you need it in order to implement
+    /// increment/decrement methods.
+    setting_t setting = 0;
+};
+
+template <setting_t N, class Callback = EmptySelectorCallback>
+class GenericSelector : public SelectorBase, public Updatable<> {
+  public:
+    /**
+     * @brief   Constructor.
+     * 
+     * @param   selectable
+     *          The selectable object to manage. When the value of the selector
+     *          changes, it changes the selection of this selectable.
+     * @param   callback
+     *          The callback to call when the value changes. Used for (visual)
+     *          feedback from the selector (e.g. LEDs or some different kind of
+     *          display).
+     */
+    GenericSelector(Selectable<N> &selectable, const Callback &callback)
+        : selectable{selectable}, callback{callback} {}
+
+    void begin() override {
+        callback.begin();
+        reset();
     }
 
+    void update() override { callback.update(); }
+
+    /// Reset the selection to the initial selection.
+    void reset() { set(selectable.getInitialSelection()); }
+
+    /** 
+     * @brief   Select the given selection
+     * 
+     * @param   newSetting
+     *          The new setting to select [0, N-1].
+     */
+    void set(setting_t newSetting) {
+        newSetting = selectable.validateSetting(newSetting);
+        selectable.select(newSetting);
+        if (get() != newSetting) {
+            callback.update(get(), newSetting);
+            setting = newSetting;
+        }
+    }
+
+    /**
+     * @brief   Add one to the setting, wrap around or clamp, depending on the
+     *          parameter, if the new setting would be out of range.
+     * 
+     * @param   wrap 
+     *          Wrap or clamp if the new setting would be out of range.
+     */
     void increment(Wrap wrap) {
         setting_t setting = this->get();
         setting++;
@@ -58,6 +114,13 @@ class Selector : public Updatable<> {
         this->set(setting);
     }
 
+    /**
+     * @brief   Subtract one from the setting, wrap around or clamp, depending 
+     *          on the parameter, if the new setting would be out of range.
+     * 
+     * @param   wrap 
+     *          Wrap or clamp if the new setting would be out of range.
+     */
     void decrement(Wrap wrap) {
         setting_t setting = this->get();
         if (setting == 0) {
@@ -71,10 +134,23 @@ class Selector : public Updatable<> {
     }
 
   private:
-    virtual void updateOutput(setting_t oldSetting, setting_t newSetting) = 0;
-
     Selectable<N> &selectable;
-    setting_t setting = 0;
+
+  public:
+    Callback callback;
+};
+
+/** 
+ * @brief   A Selector with an empty callback.
+ * 
+ * @tparam  N
+ *          The number of possible settings.
+ */
+template <setting_t N>
+class Selector : public GenericSelector<N> {
+  public:
+    /// Constructor
+    Selector(Selectable<N> &selectable) : GenericSelector<N>{selectable, {}} {}
 };
 
 END_CS_NAMESPACE

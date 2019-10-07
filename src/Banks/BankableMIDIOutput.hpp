@@ -35,7 +35,6 @@ class BankableMIDIOutput_Base {
         return lockedSetting == UNLOCKED ? getRawBankSetting() : lockedSetting;
     }
 
-  protected:
     /**
      * @brief   Lock the bank setting.
      * 
@@ -55,6 +54,7 @@ class BankableMIDIOutput_Base {
      */
     void unlock() { lockedSetting = UNLOCKED; }
 
+  protected:
     const OutputBank &bank;
 
   private:

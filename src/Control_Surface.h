@@ -42,6 +42,7 @@
 #include <MIDI_Outputs/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/PBPotentiometer.hpp>
+#include <MIDI_Outputs/PCButton.hpp>
 
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatched.hpp>
@@ -52,6 +53,8 @@
 
 #include <MIDI_Outputs/Bankable/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/Bankable/CCPotentiometer.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCButtonMatrix.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/ManyAddresses/CCPotentiometer.hpp>
 
 #include <MIDI_Outputs/Bankable/NoteButton.hpp>
@@ -62,6 +65,9 @@
 #include <MIDI_Outputs/Bankable/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
+#include <MIDI_Outputs/Bankable/PCButton.hpp>
+#include <MIDI_Outputs/ManyAddresses/PBPotentiometer.hpp>
+#include <MIDI_Outputs/ManyAddresses/PCButton.hpp>
 
 #ifdef Encoder_h_
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
@@ -84,21 +90,17 @@
 #include <Selectors/IncrementDecrementSelector.hpp>
 #include <Selectors/IncrementSelector.hpp>
 #include <Selectors/ManyButtonsSelector.hpp>
+#include <Selectors/ProgramChangeSelector.hpp>
 #include <Selectors/SwitchSelector.hpp>
 
 #ifdef Encoder_h_
 #include <Selectors/EncoderSelector.hpp>
-#include <Selectors/LEDs/EncoderSelectorLEDs.hpp>
 #endif
 
-#include <Selectors/LEDs/IncrementDecrementSelectorLEDs.hpp>
-#include <Selectors/LEDs/IncrementSelectorLEDs.hpp>
-#include <Selectors/LEDs/ManyButtonsSelectorLEDs.hpp>
+#include <Selectors/LEDs/SelectorLEDs.hpp>
 
 #include <Selectors/ProgramChanger.hpp>
 #include <Selectors/Transposer.hpp>
-
-#include <MIDI_Inputs/ProgramChangeSelector.hpp>
 
 // ---------------------------- MIDI Interfaces ----------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.hpp>
@@ -118,6 +120,7 @@
 #include <MIDI_Constants/Control_Change.hpp>
 #include <MIDI_Constants/MCU.hpp>
 #include <MIDI_Constants/Notes.hpp>
+#include <MIDI_Constants/Program_Change.hpp>
 
 // ----------------------------- Array Helpers ------------------------------ //
 #include <Helpers/ArrayHelpers.hpp>

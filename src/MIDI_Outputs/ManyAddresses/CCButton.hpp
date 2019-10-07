@@ -16,8 +16,8 @@ namespace ManyAddresses {
  * A value of 0x7F is sent when the button is pressed, and a value of
  * 0x00 is sent when the button is released.  
  * The button is debounced in software.  
- *          This version can be banked using an arbitrary list of alternative
- *          addresses.
+ * This version can be banked using an arbitrary list of alternative
+ * addresses.
  *          
  * @tparam  N
  *          The number of variants/alternative addresses the element has.

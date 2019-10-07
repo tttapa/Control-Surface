@@ -13,10 +13,10 @@ namespace ManyAddresses {
  *          **potentiometer or fader**, and send out 7-bit MIDI **Control
  *          Change** events.
  * 
- *          The analog input is filtered and hysteresis is applied for maximum
- *          stability.  
- *          This version can be banked using an arbitrary list of alternative
- *          addresses.
+ * The analog input is filtered and hysteresis is applied for maximum
+ * stability.  
+ * This version can be banked using an arbitrary list of alternative
+ * addresses.
  *          
  * @tparam  N
  *          The number of variants/alternative addresses the element has.

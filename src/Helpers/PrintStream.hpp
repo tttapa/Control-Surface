@@ -73,6 +73,12 @@ using std::nouppercase;
 using std::showbase;
 using std::noshowbase;
 
+inline std::ostream &operator<<(std::ostream &os, uint8_t u) {
+    // I'm lazy, I should probably implement one for uint8_t to get the leading
+    // zeros right
+    return os << (unsigned short)u; 
+}
+
 #endif
 
 #endif // PrintStream_h

@@ -93,6 +93,12 @@ class MIDI_Interface {
     void sendPB(MIDICNChannelAddress address, uint16_t value);
     void sendPB(MIDICNChannel address, uint16_t value);
     void sendPC(MIDICNChannel address, uint8_t value);
+    void sendPC(MIDICNChannelAddress address);
+    void send(SysExMessage message);
+    template <size_t N>
+    void send(const uint8_t (&sysexdata)[N], uint8_t cn = 0) {
+        send(SysExMessage{sysexdata, N, cn});
+    }
 
     /**
      * @brief   Read the MIDI interface and call the callback if a message is
@@ -118,6 +124,16 @@ class MIDI_Interface {
      *          A pointer to an object that implements the MIDI_Callbacks class.
      */
     virtual void setCallbacks(MIDI_Callbacks *cb) = 0;
+
+    /**
+     * @brief   Set the callbacks that will be called when a MIDI message is 
+     *          received.
+     * 
+     * @param   cb
+     *          A reference to an object that implements the MIDI_Callbacks 
+     *          class.
+     */
+    void setCallbacks(MIDI_Callbacks &cb) { setCallbacks(&cb); }
 
     /**
      * @brief   Low-level function for sending a 3-byte MIDI message.
@@ -174,6 +190,7 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
     void update() override;
 
     void setCallbacks(MIDI_Callbacks *cb) override { this->callbacks = cb; }
+    using MIDI_Interface::setCallbacks;
 
   protected:
     bool dispatchMIDIEvent(MIDI_read_t event);

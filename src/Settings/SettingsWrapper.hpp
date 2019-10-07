@@ -8,6 +8,7 @@
 
 #ifndef ARDUINO
 #undef IGNORE_SYSEX
+#define IGNORE_SYSEX 0
 #ifdef DEBUG_OUT
 #undef DEBUG_OUT
 #endif

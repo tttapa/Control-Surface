@@ -22,7 +22,10 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      * @param   analogPin
      *          The analog input pin with the wiper of the potentiometer
      *          connected.
-     * @todo    Documentation.
+     * @param   address
+     *          The MIDI address to send to.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIFilteredAnalogAddressable(pin_t analogPin,
                                   const MIDICNChannelAddress &address,
@@ -90,7 +93,10 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      * @param   analogPin
      *          The analog input pin with the wiper of the potentiometer
      *          connected.
-     * @todo    Documentation.
+     * @param   address
+     *          The MIDI address to send to.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIFilteredAnalog(pin_t analogPin, const MIDICNChannel &address,
                        const Sender &sender)

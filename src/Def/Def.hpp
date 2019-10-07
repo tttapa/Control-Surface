@@ -31,8 +31,6 @@ using MappingFunction = analog_t (*)(analog_t);
 template <class T, size_t nb_rows, size_t nb_cols>
 using Array2D = Array<Array<T, nb_cols>, nb_rows>;
 
-/// A special address that indicates an unused or invalid address.
-constexpr uint8_t NO_ADDRESS = {0x80};
 /// @todo   This should be an array of type MIDICNChannelAddress.
 template <uint8_t nb_rows, uint8_t nb_cols>
 using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;

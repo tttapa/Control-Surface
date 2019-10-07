@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Banks/BankableMIDIOutput.hpp>
+#include <Banks/BankAddresses.hpp>
 #include <Def/Def.hpp>
 #include <Hardware/Button.hpp>
 #include <Helpers/unique_ptr.hpp>
@@ -20,44 +20,50 @@ namespace Bankable {
  * @see     Button
  */
 template <class Sender>
-class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
+class MIDIChordButton : public MIDIOutputElement {
   public:
     /**
      * @brief   Construct a new bankable MIDIChordButton.
      *
      * @param   config
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
      * @param   pin
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      * @param   address
+     *          The address of the base note, containing the note number 
+     *          [0, 127], the MIDI channel [CHANNEL_1, CHANNEL_16] and Cable 
+     *          Number [0, 15].
      * @param   chord
+     *          The chord to play on top of the base notes.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     template <uint8_t N>
     MIDIChordButton(const OutputBankConfig &config, pin_t pin,
                     const MIDICNChannelAddress &address, const Chord<N> &chord,
                     const Sender &sender)
-        : BankableMIDIOutput{config}, button{pin}, address(address),
+        : address{config, address}, button{pin},
           newChord(make_unique<Chord<N>>(chord)), sender{sender} {}
-    // TODO: can I somehow get rid of the dynamic memory allocation here?
 
-    void begin() final override { button.begin(); }
-    void update() final override {
+    void begin() override { button.begin(); }
+    void update() override {
         Button::State state = button.getState();
-        MIDICNChannelAddress sendAddress = address;
         if (state == Button::Falling) {
             if (newChord)
                 chord = move(newChord);
-            lock();
-            sendAddress += getAddressOffset();
+            address.lock();
+            auto sendAddress = address.getActiveAddress();
             sender.sendOn(sendAddress);
             for (int8_t offset : *chord)
                 sender.sendOn(sendAddress + offset);
         } else if (state == Button::Rising) {
-            sendAddress += getAddressOffset();
+            auto sendAddress = address.getActiveAddress();
             sender.sendOff(sendAddress);
             for (int8_t offset : *chord)
                 sender.sendOff(sendAddress + offset);
-            unlock();
+            address.unlock();
         }
     }
 
@@ -71,8 +77,8 @@ class MIDIChordButton : public BankableMIDIOutput, public MIDIOutputElement {
     }
 
   private:
+    SingleAddress address;
     Button button;
-    const MIDICNChannelAddress address;
     unique_ptr<const IChord> chord;
     unique_ptr<const IChord> newChord;
 
