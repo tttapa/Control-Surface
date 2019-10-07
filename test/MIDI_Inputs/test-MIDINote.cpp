@@ -63,7 +63,7 @@ TEST(NoteValue, resetAll) {
 #include <MIDI_Inputs/LEDs/CCNoteRangeLEDs.hpp>
 
 TEST(NoteValueLED, NoteOnNoteOff) {
-    NoteValueLED mnl = {{0x3C, CHANNEL_5}, {{2}}};
+    NoteValueLED mnl = {2, {0x3C, CHANNEL_5}};
 
     ::testing::Sequence seq;
 

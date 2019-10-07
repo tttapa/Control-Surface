@@ -58,7 +58,7 @@ class AudioVU : public IVU {
      * 
      * @return  A value in [0, max]
      */
-    uint8_t getValue() const override {
+    uint8_t getValue() override {
         uint16_t value = getFloatValue() * max;
         return value;
     }
@@ -68,7 +68,7 @@ class AudioVU : public IVU {
      * 
      * @return  A value in [0.0, 1.0]
      */
-    float getFloatValue() const override {
+    float getFloatValue() override {
         if (!level.available())
             return 0;
         float peakLevel = level.read();
@@ -79,7 +79,7 @@ class AudioVU : public IVU {
     }
 
     /** @note   This function will always return false for an AudioVU. */
-    bool getOverload() const override { return false; } // TODO
+    bool getOverload() override { return false; } // TODO
     /** 
      * @brief   Set the gain for the VU meter.
      * 
@@ -89,8 +89,7 @@ class AudioVU : public IVU {
     void setGain(float gain) { this->gain = gain; }
 
   private:
-    mutable MovingCoilBallistics ballistics =
-        MovingCoilBallistics::responsiveVU();
+    MovingCoilBallistics ballistics = MovingCoilBallistics::responsiveVU();
 
     /**
      * @brief   The `AudioAnalyzePeak` and `AudioAnalyzeRMS` classes don't 

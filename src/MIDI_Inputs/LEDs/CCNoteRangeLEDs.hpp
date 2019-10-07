@@ -1,5 +1,5 @@
-#include <MIDI_Inputs/MIDINoteCCRange.hpp>
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <MIDI_Inputs/MIDINoteCCRange.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -37,48 +37,140 @@ class NoteCCLED {
 };
 
 template <uint8_t RangeLen>
-using NoteRangeLEDs = MIDINoteCCRange<MIDIInputElementNote, //
-                                      RangeLen,             //
-                                      NoteCCLED<RangeLen>>; //
+class NoteRangeLEDs : public MIDINoteCCRange<MIDIInputElementNote, //
+                                             RangeLen,             //
+                                             NoteCCLED<RangeLen>> {
+  public:
+    NoteRangeLEDs(const PinList<RangeLen> &ledPins,
+                  MIDICNChannelAddress address)
+        : MIDINoteCCRange<MIDIInputElementNote, //
+                          RangeLen,             //
+                          NoteCCLED<RangeLen>>{
+              address,
+              {ledPins},
+          } {}
+};
 
-using NoteValueLED = MIDINoteCCRange<MIDIInputElementNote, //
-                                     1,                    //
-                                     NoteCCLED<1>>;        //
+class NoteValueLED : public MIDINoteCCRange<MIDIInputElementNote, //
+                                            1,                    //
+                                            NoteCCLED<1>> {
+  public:
+    NoteValueLED(pin_t ledPin, MIDICNChannelAddress address)
+        : MIDINoteCCRange<MIDIInputElementNote, //
+                          1,                    //
+                          NoteCCLED<1>>{
+              address,
+              {{ledPin}},
+          } {}
+};
+
+using MIDINoteLED __attribute__((deprecated)) = NoteValueLED;
 
 template <uint8_t RangeLen>
-using CCRangeLEDs = MIDINoteCCRange<MIDIInputElementCC,   //
-                                    RangeLen,             //
-                                    NoteCCLED<RangeLen>>; //
+class CCRangeLEDs : public MIDINoteCCRange<MIDIInputElementCC, //
+                                           RangeLen,           //
+                                           NoteCCLED<RangeLen>> {
+  public:
+    CCRangeLEDs(const PinList<RangeLen> &ledPins, MIDICNChannelAddress address)
+        : MIDINoteCCRange<MIDIInputElementCC, //
+                          RangeLen,           //
+                          NoteCCLED<RangeLen>>{
+              address,
+              {ledPins},
+          } {}
+};
 
-using CCValueLED = MIDINoteCCRange<MIDIInputElementCC, //
-                                   1,                  //
-                                   NoteCCLED<1>>;      //
+class CCValueLED : public MIDINoteCCRange<MIDIInputElementCC, //
+                                          1,                  //
+                                          NoteCCLED<1>> {
+  public:
+    CCValueLED(pin_t ledPin, MIDICNChannelAddress address)
+        : MIDINoteCCRange<MIDIInputElementCC, //
+                          1,                  //
+                          NoteCCLED<1>>{
+              address,
+              {{ledPin}},
+          } {}
+};
 
 namespace Bankable {
 
 template <uint8_t RangeLen, uint8_t BankSize>
-using NoteRangeLEDs = MIDINoteCCRange<MIDIInputElementNote, //
-                                      RangeLen,             //
-                                      BankSize,             //
-                                      NoteCCLED<RangeLen>>; //
+class NoteRangeLEDs : public MIDINoteCCRange<MIDIInputElementNote, //
+                                             RangeLen,             //
+                                             BankSize,             //
+                                             NoteCCLED<RangeLen>> {
+  public:
+    NoteRangeLEDs(const BankConfig<BankSize> &config,
+                  const PinList<RangeLen> &ledPins,
+                  const MIDICNChannelAddress &address)
+        : MIDINoteCCRange<MIDIInputElementNote, //
+                          RangeLen,             //
+                          BankSize,             //
+                          NoteCCLED<RangeLen>>{
+              config,
+              address,
+              {ledPins},
+          } {}
+};
 
 template <uint8_t BankSize>
-using NoteValueLED = MIDINoteCCRange<MIDIInputElementNote,  //
-                                     1,                     //
-                                     BankSize,              //
-                                     NoteCCLED<1>>; //
+class NoteValueLED : public MIDINoteCCRange<MIDIInputElementNote, //
+                                            1,                    //
+                                            BankSize,             //
+                                            NoteCCLED<1>> {
+  public:
+    NoteValueLED(const BankConfig<BankSize> &config, pin_t ledPin,
+                 const MIDICNChannelAddress &address)
+        : MIDINoteCCRange<MIDIInputElementNote, //
+                          1,                    //
+                          BankSize,             //
+                          NoteCCLED<1>>{
+              config,
+              address,
+              {{ledPin}},
+          } {}
+};
+
+template <uint8_t BankSize>
+using MIDINoteLED __attribute__((deprecated)) = NoteValueLED<BankSize>;
 
 template <uint8_t RangeLen, uint8_t BankSize>
-using CCRangeLEDs = MIDINoteCCRange<MIDIInputElementCC,   //
-                                    RangeLen,             //
-                                    BankSize,             //
-                                    NoteCCLED<RangeLen>>; //
+class CCRangeLEDs : public MIDINoteCCRange<MIDIInputElementCC, //
+                                           RangeLen,           //
+                                           BankSize,           //
+                                           NoteCCLED<RangeLen>> {
+  public:
+    CCRangeLEDs(const BankConfig<BankSize> &config,
+                const PinList<RangeLen> &ledPins,
+                const MIDICNChannelAddress &address)
+        : MIDINoteCCRange<MIDIInputElementCC, //
+                          RangeLen,           //
+                          BankSize,           //
+                          NoteCCLED<RangeLen>>{
+              config,
+              address,
+              {ledPins},
+          } {}
+};
 
 template <uint8_t BankSize>
-using CCValueLED = MIDINoteCCRange<MIDIInputElementCC, //
-                                   1,                  //
-                                   BankSize,           //
-                                   NoteCCLED<1>>;      //
+class CCValueLED : public MIDINoteCCRange<MIDIInputElementCC, //
+                                          1,                  //
+                                          BankSize,           //
+                                          NoteCCLED<1>> {
+  public:
+    CCValueLED(const BankConfig<BankSize> &config, pin_t ledPin,
+               const MIDICNChannelAddress &address)
+        : MIDINoteCCRange<MIDIInputElementCC, //
+                          1,                  //
+                          BankSize,           //
+                          NoteCCLED<1>>{
+              config,
+              address,
+              {{ledPin}},
+          } {}
+};
 
 } // namespace Bankable
 

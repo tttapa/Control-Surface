@@ -16,13 +16,13 @@
 #include <Control_Surface/Control_Surface_Class.hpp>
 
 // -------------------------------- Display --------------------------------- //
-// #include "Display/Bitmaps/XBitmaps.hpp"
-// #include "Display/MCU/TimeDisplayDisplay.hpp"
+#include "Display/Bitmaps/XBitmaps.hpp"
+#include "Display/MCU/TimeDisplayDisplay.hpp"
 // #include "Display/MCU/VPotDisplay.hpp"
-// #include "Display/MCU/VUDisplay.hpp"
-// #include "Display/NoteBitmapDisplay.hpp"
-// #include "Display/SelectorDisplay.hpp"
-// #include <Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
+#include "Display/MCU/VUDisplay.hpp"
+#include "Display/NoteBitmapDisplay.hpp"
+#include "Display/SelectorDisplay.hpp"
+#include <Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
 
 // ------------------------------ MIDI Outputs ------------------------------ //
 #include <MIDI_Outputs/CCButton.hpp>
@@ -85,6 +85,7 @@
 // #include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>
 // #include <MIDI_Inputs/LEDs/MIDINoteLED.hpp>
 #include <MIDI_Inputs/MIDINoteCCRange.hpp>
+#include <MIDI_Inputs/LEDs/CCNoteRangeLEDs.hpp>
 
 // ------------------------------- Selectors -------------------------------- //
 #include <Selectors/IncrementDecrementSelector.hpp>

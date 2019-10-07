@@ -72,6 +72,8 @@ template <uint8_t RangeLen>
 using NoteRange = MIDINoteCCRange<MIDIInputElementNote, RangeLen>;
 using NoteValue = MIDINoteCCRange<MIDIInputElementNote, 1>;
 
+using MIDINote __attribute__((deprecated)) = NoteValue;
+
 template <uint8_t RangeLen>
 using CCRange = MIDINoteCCRange<MIDIInputElementCC, RangeLen>;
 using CCValue = MIDINoteCCRange<MIDIInputElementCC, 1>;
@@ -148,6 +150,8 @@ template <uint8_t RangeLen, uint8_t BankSize>
 using NoteRange = MIDINoteCCRange<MIDIInputElementNote, RangeLen, BankSize>;
 template <uint8_t BankSize>
 using NoteValue = MIDINoteCCRange<MIDIInputElementNote, 1, BankSize>;
+template <uint8_t BankSize>
+using MIDINote __attribute__((deprecated)) = NoteValue<BankSize>;
 
 template <uint8_t RangeLen, uint8_t BankSize>
 using CCRange = MIDINoteCCRange<MIDIInputElementCC, RangeLen, BankSize>;

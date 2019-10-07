@@ -108,7 +108,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     }
 
     virtual uint8_t getSelection() const { return 0; }
-    virtual uint8_t getBankIndex(const MIDICNChannelAddress &target) const {
+    virtual setting_t getBankIndex(const MIDICNChannelAddress &target) const {
         (void)target;
         return 0;
     }
@@ -148,7 +148,7 @@ template <class Callback = VUEmptyCallback>
 class VU_Generic : public VU_Base<1, Callback> {
   public:
     /** 
-     * @brief   Construct a new VU object.
+     * @brief   Construct a new VU_Generic object.
      * 
      * @param   track
      *          The track of the VU meter. [1, 8]
@@ -167,6 +167,24 @@ class VU_Generic : public VU_Base<1, Callback> {
     VU_Generic(uint8_t track, const MIDICNChannel &channelCN,
                unsigned int decayTime = 150, const Callback &callback = {})
         : VU_Base<1, Callback>{track, channelCN, decayTime, callback} {}
+
+    /** 
+     * @brief   Construct a new VU_Generic object.
+     * 
+     * @param   track
+     *          The track of the VU meter. [1, 8]
+     * @param   decayTime
+     *          The time in milliseconds it takes for the value to decay one
+     *          step.  
+     *          The MCU protocol uses 300 ms per division, and two steps
+     *          per division, so the default is 150 ms per step.  
+     *          Some software doesn't work if the VU meter decays automatically, 
+     *          in that case, you can set the decay time to zero to disable 
+     *          the decay.
+     */
+    VU_Generic(uint8_t track, unsigned int decayTime = 150,
+               const Callback &callback = {})
+        : VU_Base<1, Callback>{track, CHANNEL_1, decayTime, callback} {}
 };
 
 using VU = VU_Generic<>;
@@ -212,8 +230,13 @@ class VU_Generic : public VU_Base<NumBanks, Callback>,
         : VU_Base<NumBanks, Callback>{track, channelCN, decayTime, callback},
           BankableMIDIInput<NumBanks>(config) {}
 
-    using BankableMIDIInput<NumBanks>::getSelection;
-    using BankableMIDIInput<NumBanks>::getBankIndex;
+    setting_t getSelection() const override {
+        return BankableMIDIInput<NumBanks>::getSelection();
+    };
+
+    uint8_t getBankIndex(const MIDICNChannelAddress &target) const override {
+        return BankableMIDIInput<NumBanks>::getBankIndex(target, this->address);
+    }
 
   protected:
     bool match(const MIDICNChannelAddress &target) const override {
