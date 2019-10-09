@@ -32,12 +32,12 @@ class VULEDsCallback {
 };
 
 template <uint8_t NumLEDs>
-using VULEDs = VU_Generic<VULEDsCallback<NumLEDs>>;
+using VULEDs = GenericVU<VULEDsCallback<NumLEDs>>;
 
 namespace Bankable {
 
 template <uint8_t NumBanks, uint8_t NumLEDs>
-using VULEDs = VU_Generic<NumBanks, VULEDsCallback<NumLEDs>>;
+using VULEDs = GenericVU<NumBanks, VULEDsCallback<NumLEDs>>;
 
 } // namespace Bankable
 

@@ -14,8 +14,8 @@
  * Connect an LED (and series resistor) between the first output of the
  * shift register and ground.
  * 
- * Remember to connect the enable pin the shift register to ground in order to 
- * enable it.  
+ * Remember to connect the enable pin of the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
  * 
  * Behavior
  * --------

@@ -14,6 +14,14 @@
  */
 
 /**
+ * @ingroup MIDIOutputElements
+ * @defgroup    ManyAddressesMIDIOutputElements Many Addresses MIDI Output 
+ *              Elements
+ * @brief   All Elements that send out MIDI events, and that can banked, with
+ *          a list of arbitrary addresses.
+ */
+
+/**
  * @defgroup    MIDIInputElements   MIDI Input Elements
  * @brief   All Elements that listen for incoming MIDI events.  
  *          This includes LEDs, VU meters, ...

@@ -31,6 +31,7 @@ class IVU {
 namespace MCU {
 
 struct VUEmptyCallback {
+    VUEmptyCallback() = default;
     template <class T>
     void begin(const T &) {}
     template <class T>
@@ -67,7 +68,6 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     /// @todo   Move to an easily accessible namespace
     constexpr static unsigned int NO_DECAY = 0;
 
-  private:
     /// Update is called periodically
     void update() override {
         if (decayTime && (millis() - prevDecayTime >= decayTime)) {
@@ -77,6 +77,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
         }
     }
 
+  private:
     /// Called when an incoming MIDI message matches this element
     bool updateImpl(const ChannelMessageMatcher &midimsg,
                     const MIDICNChannelAddress &target) override {
@@ -107,7 +108,10 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
                 values[i]--;
     }
 
+    /// Get the active bank selection
     virtual uint8_t getSelection() const { return 0; }
+
+    /// Get the bank index from a MIDI address
     virtual setting_t getBankIndex(const MIDICNChannelAddress &target) const {
         (void)target;
         return 0;
@@ -141,14 +145,47 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
 
 /** 
  * @brief   A class for MIDI input elements that represent Mackie Control
- *          Universal VU meters.  
+ *          Universal VU meters. This version is generic to allow for custom 
+ *          callbacks.  
  *          This version cannot be banked.
  */
 template <class Callback = VUEmptyCallback>
-class VU_Generic : public VU_Base<1, Callback> {
+class GenericVU : public VU_Base<1, Callback> {
   public:
     /** 
-     * @brief   Construct a new VU_Generic object.
+     * @brief   Construct a new GenericVU object.
+     * 
+     * @param   track
+     *          The track of the VU meter. [1, 8]
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
+     *          Number [0, 15].
+     * @param   decayTime
+     *          The time in milliseconds it takes for the value to decay one
+     *          step.  
+     *          The MCU protocol uses 300 ms per division, and two steps
+     *          per division, so the default is 150 ms per step.  
+     *          Some software doesn't work if the VU meter decays automatically, 
+     *          in that case, you can set the decay time to zero to disable 
+     *          the decay.
+     * @param   callback
+     *          The callback object that is update when the value changes.
+     *          Used for displaying the value on a range of LEDs etc.
+     */
+    GenericVU(uint8_t track, const MIDICNChannel &channelCN,
+              unsigned int decayTime, const Callback &callback)
+        : VU_Base<1, Callback>{track, channelCN, decayTime, callback} {}
+};
+
+/** 
+ * @brief   A class for MIDI input elements that represent Mackie Control
+ *          Universal VU meters.  
+ *          This version cannot be banked.
+ */
+class VU : public GenericVU<> {
+  public:
+    /** 
+     * @brief   Construct a new VU object.
      * 
      * @param   track
      *          The track of the VU meter. [1, 8]
@@ -164,12 +201,12 @@ class VU_Generic : public VU_Base<1, Callback> {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU_Generic(uint8_t track, const MIDICNChannel &channelCN,
-               unsigned int decayTime = 150, const Callback &callback = {})
-        : VU_Base<1, Callback>{track, channelCN, decayTime, callback} {}
+    VU(uint8_t track, const MIDICNChannel &channelCN,
+       unsigned int decayTime = 150)
+        : GenericVU<>{track, channelCN, decayTime, {}} {}
 
     /** 
-     * @brief   Construct a new VU_Generic object.
+     * @brief   Construct a new GenericVU object.
      * 
      * @param   track
      *          The track of the VU meter. [1, 8]
@@ -182,12 +219,9 @@ class VU_Generic : public VU_Base<1, Callback> {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU_Generic(uint8_t track, unsigned int decayTime = 150,
-               const Callback &callback = {})
-        : VU_Base<1, Callback>{track, CHANNEL_1, decayTime, callback} {}
+    VU(uint8_t track, unsigned int decayTime = 150)
+        : GenericVU<>{track, CHANNEL_1, decayTime, {}} {}
 };
-
-using VU = VU_Generic<>;
 
 // -------------------------------------------------------------------------- //
 
@@ -202,8 +236,8 @@ namespace Bankable {
  *          The number of banks.
  */
 template <uint8_t NumBanks, class Callback = VUEmptyCallback>
-class VU_Generic : public VU_Base<NumBanks, Callback>,
-                   public BankableMIDIInput<NumBanks> {
+class GenericVU : public VU_Base<NumBanks, Callback>,
+                  public BankableMIDIInput<NumBanks> {
   public:
     /** 
      * @brief   Construct a new Bankable VU object.
@@ -223,10 +257,14 @@ class VU_Generic : public VU_Base<NumBanks, Callback>,
      *          Some software doesn't work if the VU meter decays automatically, 
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
+     * @param   callback
+     *          The callback object that is update when the value or bank 
+     *          changes.  
+     *          Used for displaying the value on a range of LEDs etc.
      */
-    VU_Generic(const BankConfig<NumBanks> &config, uint8_t track,
-               const MIDICNChannel &channelCN, unsigned int decayTime,
-               const Callback &callback)
+    GenericVU(const BankConfig<NumBanks> &config, uint8_t track,
+              const MIDICNChannel &channelCN, unsigned int decayTime,
+              const Callback &callback)
         : VU_Base<NumBanks, Callback>{track, channelCN, decayTime, callback},
           BankableMIDIInput<NumBanks>(config) {}
 
@@ -248,7 +286,7 @@ class VU_Generic : public VU_Base<NumBanks, Callback>,
 };
 
 template <uint8_t NumBanks>
-class VU : public VU_Generic<NumBanks> {
+class VU : public GenericVU<NumBanks> {
   public:
     /** 
      * @brief   Construct a new Bankable VU object.
@@ -271,7 +309,27 @@ class VU : public VU_Generic<NumBanks> {
      */
     VU(const BankConfig<NumBanks> &config, uint8_t track,
        const MIDICNChannel &channelCN, unsigned int decayTime = 150)
-        : VU_Generic<NumBanks>{config, track, channelCN, decayTime, {}} {}
+        : GenericVU<NumBanks>{config, track, channelCN, decayTime, {}} {}
+
+    /** 
+     * @brief   Construct a new Bankable VU object.
+     * 
+     * @param   config
+     *          The bank configuration to use.
+     * @param   track
+     *          The track of the VU meter. [1, 8]
+     * @param   decayTime
+     *          The time in milliseconds it takes for the value to decay one
+     *          step.  
+     *          The MCU protocol uses 300 ms per division, and two steps
+     *          per division, so the default is 150 ms per step.  
+     *          Some software doesn't work if the VU meter decays automatically, 
+     *          in that case, you can set the decay time to zero to disable 
+     *          the decay.
+     */
+    VU(const BankConfig<NumBanks> &config, uint8_t track,
+       unsigned int decayTime = 150)
+        : GenericVU<NumBanks>{config, track, CHANNEL_1, decayTime, {}} {}
 };
 
 } // namespace Bankable

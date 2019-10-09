@@ -406,8 +406,8 @@
  * Connect an LED (and series resistor) between the first output of the
  * shift register and ground.
  * 
- * Remember to connect the enable pin the shift register to ground in order to 
- * enable it.  
+ * Remember to connect the enable pin the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
  * 
  * Behavior
  * --------
@@ -444,8 +444,8 @@
  * Connect an LED (and series resistor) between the first output of the
  * shift register and ground.
  * 
- * Remember to connect the enable pin the shift register to ground in order to 
- * enable it.  
+ * Remember to connect the enable pin of the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
  * 
  * Behavior
  * --------
@@ -493,7 +493,8 @@
  * two shift registers and ground. 
  * 
  * Remember to connect the enable pins of both the multiplexer and the shift
- * register to ground in order to enable them.  
+ * registers to ground in order to enable them. Also connect the master reset 
+ * pin of the shift registers to Vcc.  
  * Connect the serial data output of the first shift register (QH' or Q7S) to
  * the serial input of the second shift register.
  * 
@@ -726,6 +727,51 @@
  * play a middle C on the keyboard.
  * 
  * Written by PieterP, 2019-02-07  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "2.Note-Range-LEDs.ino"
+ * 
+ * 2.Note-Range-LEDs
+ * =================
+ *
+ * This example demonstrates the use of LEDs that respond to incoming  MIDI
+ * note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SS:   74HC595 ST_CP
+ *   - MOSI: 74HC595 DS
+ *   - SCK:  74HC595 SH_CP
+ * 
+ * Connect eight LEDs (and series resistors) between the outputs of the shift
+ * register and ground.
+ * 
+ * Remember to connect the enable pin of the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
+ * 
+ * Behavior
+ * --------
+ * 
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the first
+ * LED will light up, if a Note Off event for that note is sent, the LED will 
+ * turn off.  
+ * If a MIDI Note On event for note 0x3D (C#4) is sent, the second LED will
+ * light up, and so on.  
+ * (A Note On event with a velocity of zero also counts as a Note Off event.)
+ * 
+ * Mapping
+ * -------
+ * 
+ * Route the MIDI output of a MIDI keyboard to the Arduino's MIDI input. Then
+ * play some notes between middle C and middle G on the keyboard. The LEDs 
+ * should light up when you press the keys.
+ * 
+ * Written by PieterP, 2019-10-09  
  * https://github.com/tttapa/Control-Surface
  */
 

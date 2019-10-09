@@ -37,7 +37,7 @@ class PCButton
      * @param   pin
      *          The digital input pin to read from.  
      *          The internal pull-up resistor will be enabled.
-     * @param   address
+     * @param   addresses
      *          The list of MIDI addresses containing the program number 
      *          [0, 127], channel [CHANNEL_1, CHANNEL_16], and optional cable 
      *          number [0, 15].

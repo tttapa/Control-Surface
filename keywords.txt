@@ -71,7 +71,10 @@ PCButton	KEYWORD1
 # MIDI Input Elements
 #####################
 
-NoteLED	KEYWORD1
+NoteValueLED	KEYWORD1
+CCValueLED	KEYWORD1
+NoteRangeLEDs	KEYWORD1
+CCRangeLEDs	KEYWORD1
 
 MAX7219SevenSegmentDisplay	KEYWORD1
 

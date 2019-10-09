@@ -25,7 +25,8 @@
  * two shift registers and ground. 
  * 
  * Remember to connect the enable pins of both the multiplexer and the shift
- * register to ground in order to enable them.  
+ * registers to ground in order to enable them. Also connect the master reset 
+ * pin of the shift registers to Vcc.  
  * Connect the serial data output of the first shift register (QH' or Q7S) to
  * the serial input of the second shift register.
  * 
