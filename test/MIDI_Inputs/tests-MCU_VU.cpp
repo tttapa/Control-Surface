@@ -130,6 +130,29 @@ TEST(MCUVUBankable, setValueBankChangeChannel) {
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
+TEST(MCUVUBankable, setValueBankChangeCN) {
+    Bank<3> bank(4);
+    constexpr Channel channel = CHANNEL_3;
+    constexpr uint8_t track = 5;
+    MCU::Bankable::VU<3> vu = {{bank, CHANGE_CABLENB}, track, channel};
+    ChannelMessageMatcher midimsg1 = {CHANNEL_PRESSURE, channel,
+                                      (track - 1) << 4 | 0xA, 0, 4};
+    ChannelMessageMatcher midimsg2 = {CHANNEL_PRESSURE, channel,
+                                      (track - 1) << 4 | 0xB, 0, 8};
+    EXPECT_CALL(ArduinoMock::getInstance(), millis())
+        .WillOnce(Return(0))
+        .WillOnce(Return(0));
+    MIDIInputElementChannelPressure::updateAllWith(midimsg1);
+    MIDIInputElementChannelPressure::updateAllWith(midimsg2);
+    EXPECT_EQ(vu.getValue(), 0x0);
+    bank.select(1);
+    EXPECT_EQ(vu.getValue(), 0xA);
+    bank.select(2);
+    EXPECT_EQ(vu.getValue(), 0xB);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
 TEST(MCUVUBankable, overloadBankChangeAddress) {
     Bank<2> bank(4);
     constexpr Channel channel = CHANNEL_3;
