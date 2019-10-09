@@ -5,8 +5,6 @@
 
 BEGIN_CS_NAMESPACE
 
-#define CRTP(Derived) (*static_cast<Derived *>(this))
-
 namespace MCU {
 
 constexpr static uint8_t VPotRingAddress = 0x30;
@@ -15,18 +13,19 @@ inline int8_t minimum(int8_t a, int8_t b) { return a > b ? b : a; }
 inline int8_t maximum(int8_t a, int8_t b) { return a < b ? b : a; }
 
 struct VPotEmptyCallback {
+    VPotEmptyCallback() = default;
     template <class T>
     void begin(const T &) {}
     template <class T>
     void update(const T &) {}
 };
 
-template <uint8_t NumValues, class Callback, class Derived>
+template <uint8_t NumValues, class Callback>
 class VPotRing_Base : public MIDIInputElementCC {
-  public:
+  protected:
     VPotRing_Base(uint8_t track, const MIDICNChannel &channelCN,
                   const Callback &callback)
-        : MIDIInputElementCC{{address + VPotRingAddress - 1, channelCN}},
+        : MIDIInputElementCC{{track + VPotRingAddress - 1, channelCN}},
           callback{callback} {}
 
   public:
@@ -93,9 +92,13 @@ class VPotRing_Base : public MIDIInputElementCC {
 
     uint8_t getValue() const { return values[getSelection()]; }
 
-    uint8_t getSelection() const { return CRTP(Derived).getSelection(); }
-    uint8_t getBankIndex(uint8_t target) const {
-        return CRTP(Derived).getBankIndex(target, this->address);
+    /// Get the active bank selection
+    virtual uint8_t getSelection() const { return 0; }
+
+    /// Get the bank index from a MIDI address
+    virtual setting_t getBankIndex(const MIDICNChannelAddress &target) const {
+        (void)target;
+        return 0;
     }
 
     /// Extract the position from the raw value.
@@ -118,30 +121,68 @@ class VPotRing_Base : public MIDIInputElementCC {
 
 /** 
  * @brief   A class for MIDI input elements that represent Mackie Control
- *          Universal V-Pots.  
+ *          Universal V-Pots. This version is generic to allow for custom 
+ *          callbacks.  
  *          This version cannot be banked.
  */
 template <class Callback = VPotEmptyCallback>
-class VPotRing : virtual public VPotRing_Base<1, Callback, VPotRing<Callback>> {
+class GenericVPotRing : public VPotRing_Base<1, Callback> {
   public:
-    VPotRing(uint8_t track, const MIDICNChannel &channelCN,
-             const Callback &callback = {})
-        : VPotRing_Base<1, Callback, VPotRing<Callback>>{{track, channelCN},
-                                                         callback} {}
+    GenericVPotRing(uint8_t track, const MIDICNChannel &channelCN,
+                    const Callback &callback)
+        : VPotRing_Base<1, Callback>{track, channelCN, callback} {}
+};
 
-  private:
-    setting_t getSelection() const { return 0; }
-    uint8_t getBankIndex(const MIDICNChannelAddress &target,
-                         const MIDICNChannelAddress &base) const {
-        (void)target;
-        (void)base;
-        return 0;
-    }
+/**
+ * @brief   A class for MIDI input elements that represent Mackie Control
+ *          Universal V-Pots.  
+ *          This version cannot be banked.
+ * @ingroup MIDIInputElements
+ */
+class VPotRing : public GenericVPotRing<> {
+  public:
+    VPotRing(uint8_t track, const MIDICNChannel &channelCN = CHANNEL_1)
+        : GenericVPotRing{track, channelCN, {}} {}
 };
 
 // -------------------------------------------------------------------------- //
 
 namespace Bankable {
+
+/** 
+ * @brief   A class for MIDI input elements that represent Mackie Control
+ *          Universal V-Pots. This version is generic to allow for custom 
+ *          callbacks.  
+ *          This version can be banked.
+ * 
+ * @tparam  NumBanks 
+ *          The number of banks.
+ */
+template <uint8_t NumBanks, class Callback = VPotEmptyCallback>
+class GenericVPotRing : public VPotRing_Base<NumBanks, Callback>,
+                        public BankableMIDIInput<NumBanks> {
+  public:
+    GenericVPotRing(const BankConfig<NumBanks> &config, uint8_t track,
+                    const MIDICNChannel &channelCN, const Callback &callback)
+        : VPotRing_Base<NumBanks, Callback>{track, channelCN, callback},
+          BankableMIDIInput<NumBanks>{config} {}
+
+  private:
+    setting_t getSelection() const override {
+        return BankableMIDIInput<NumBanks>::getSelection();
+    };
+
+    uint8_t getBankIndex(const MIDICNChannelAddress &target) const override {
+        return BankableMIDIInput<NumBanks>::getBankIndex(target, this->address);
+    }
+
+    bool match(const MIDICNChannelAddress &target) const override {
+        return BankableMIDIInput<NumBanks>::matchBankable(target,
+                                                          this->address);
+    }
+
+    void onBankSettingChange() override { this->callback.update(*this); }
+};
 
 /** 
  * @brief   A class for MIDI input elements that represent Mackie Control
@@ -151,30 +192,16 @@ namespace Bankable {
  * @tparam  NumBanks 
  *          The number of banks.
  */
-template <uint8_t NumBanks, class Callback = VPotEmptyCallback>
-class VPotRing : virtual public VPotRing_Base<NumBanks, Callback,
-                                              VPotRing<NumBanks, Callback>>,
-                 public BankableMIDIInput<NumBanks> {
+template <uint8_t NumBanks>
+class VPotRing : public GenericVPotRing<NumBanks> {
   public:
-    VPotRing(const BankConfig<NumBanks> &config, uint8_t track,
-             const MIDICNChannel &channelCN, const Callback &callback = {})
-        : VPotRing_Base<NumBanks, Callback, VPotRing<NumBanks, Callback>>(
-              track, channelCN),
-          BankableMIDIInput<NumBanks>(config) {}
-
-  private:
-    bool match(const MIDICNChannelAddress &target) const override {
-        return BankableMIDIInput<NumBanks>::matchBankable(target,
-                                                          this->address);
-    }
-
-    void onBankSettingChange() override { this->callback.update(); }
+    VPotRing(BankConfig<NumBanks> config, uint8_t track,
+             MIDICNChannel channelCN = CHANNEL_1)
+        : GenericVPotRing<NumBanks>{config, track, channelCN, {}} {}
 };
 
 } // namespace Bankable
 
 } // namespace MCU
-
-#undef CRTP
 
 END_CS_NAMESPACE

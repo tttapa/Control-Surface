@@ -268,6 +268,7 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
         : VU_Base<NumBanks, Callback>{track, channelCN, decayTime, callback},
           BankableMIDIInput<NumBanks>(config) {}
 
+  private:
     setting_t getSelection() const override {
         return BankableMIDIInput<NumBanks>::getSelection();
     };
@@ -276,7 +277,6 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
         return BankableMIDIInput<NumBanks>::getBankIndex(target, this->address);
     }
 
-  protected:
     bool match(const MIDICNChannelAddress &target) const override {
         return BankableMIDIInput<NumBanks>::matchBankable(target,
                                                           this->address);
