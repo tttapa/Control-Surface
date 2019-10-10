@@ -188,7 +188,7 @@ TEST(MCUVULEDsBankable, displayOnBankChange) {
     constexpr Channel channel = CHANNEL_3;
     constexpr uint8_t track = 5;
     constexpr unsigned int decayTime = 150;
-    MCU::Bankable::VULEDs<2, 2> vu{bank, track, channel, decayTime, {{{0, 1}}}};
+    MCU::Bankable::VULEDs<2, 2> vu{bank, {0, 1}, track, channel, decayTime};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(0, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(1, OUTPUT));

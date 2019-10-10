@@ -32,12 +32,44 @@ class VULEDsCallback {
 };
 
 template <uint8_t NumLEDs>
-using VULEDs = GenericVU<VULEDsCallback<NumLEDs>>;
+class VULEDs : public GenericVU<VULEDsCallback<NumLEDs>> {
+  public:
+    VULEDs(const PinList<NumLEDs> &ledPins, uint8_t track,
+           unsigned int decayTime = 150)
+        : GenericVU<VULEDsCallback<NumLEDs>>{
+              track,
+              CHANNEL_1,
+              decayTime,
+              {ledPins},
+          } {}
+
+    VULEDs(const PinList<NumLEDs> &ledPins, uint8_t track,
+           MIDICNChannel channelCN, unsigned int decayTime = 150)
+        : GenericVU<VULEDsCallback<NumLEDs>>{
+              track,
+              channelCN,
+              decayTime,
+              {ledPins},
+          } {}
+};
 
 namespace Bankable {
 
 template <uint8_t NumBanks, uint8_t NumLEDs>
-using VULEDs = GenericVU<NumBanks, VULEDsCallback<NumLEDs>>;
+class VULEDs : public GenericVU<NumBanks, VULEDsCallback<NumLEDs>> {
+  public:
+    VULEDs(BankConfig<NumBanks> config, const PinList<NumLEDs> &ledPins,
+           uint8_t track, unsigned int decayTime = 150)
+        : GenericVU<NumBanks, VULEDsCallback<NumLEDs>>{
+              config, track, CHANNEL_1, decayTime, {ledPins},
+          } {}
+
+    VULEDs(BankConfig<NumBanks> config, const PinList<NumLEDs> &ledPins,
+           uint8_t track, MIDICNChannel channelCN, unsigned int decayTime = 150)
+        : GenericVU<NumBanks, VULEDsCallback<NumLEDs>>{
+              config, track, channelCN, decayTime, {ledPins},
+          } {}
+};
 
 } // namespace Bankable
 
