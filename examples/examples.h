@@ -1,4 +1,43 @@
 /**
+ * @example   "FilteredAnalog.ino"
+ * 
+ * FilteredAnalog
+ * ==============
+ *
+ * This examples shows how to filter an analog input, so you can get the 
+ * position of a knob or fader without noise.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Upload the sketch to the Arduino, and open the Serial Monitor 
+ *   (`CTRL+Shift+M`)
+ * - When you turn the potentiometer, you should see the position of the 
+ *   potentiometer being printed as a number between 0 and 1023.
+ * - The analog input is filtered, so there shouldn't be any noise on the 
+ *   position. If there is, check your wiring, and make sure that the resistance
+ *   of the potentiometer isn't too high (10 kΩ is ideal). 
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2019-10-10  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "Multiple-Control-Change-Potentiometers.ino"
  * 
  * Multiple-Control-Change-Potentiometers
@@ -852,11 +891,17 @@
  * Connections
  * -----------
  * 
+ * This specific example uses an I²S DAC, but you can use other interfaces of 
+ * the Teensy Audio library as well. For testing, I'm using a PCM5102a.
+ * 
  * - A0: wiper of a potentiometer to change the output volume
- * - 9:  BCK (I²S)
- * - 11: SCK (I²S)
- * - 22: DIN (I²S)
- * - 23: LRCK (I²S)
+ * - 9:  DAC BCK (I²S)
+ * - 11: DAC SCK (I²S)
+ * - 22: DAC DIN (I²S)
+ * - 23: DAC LRCK (I²S)
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
  * 
  * Select a USB audio option from the Tools menu in the IDE.
  * 

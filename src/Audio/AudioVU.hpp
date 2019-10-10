@@ -75,6 +75,8 @@ class AudioVU : public IVU {
         float value = ballistics(peakLevel) * gain;
         if (value > 1.0f)
             value = 1.0f;
+        else if (value < 0.0f)
+            value = 0.0f;
         return value;
     }
 

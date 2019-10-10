@@ -33,8 +33,8 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
         : filteredAnalog{analogPin}, address{address}, sender{sender} {}
 
   public:
-    void begin() final override {}
-    void update() final override {
+    void begin() override {}
+    void update() override {
         if (filteredAnalog.update())
             sender.send(filteredAnalog.getValue(), address);
     }

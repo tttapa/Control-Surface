@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
-#include <MIDI_Inputs/MIDINoteCCRange.hpp>
+#include <Banks/BankableMIDIInput.hpp>
 
 BEGIN_CS_NAMESPACE
 

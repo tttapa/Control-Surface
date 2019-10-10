@@ -9,6 +9,8 @@ BEGIN_CS_NAMESPACE
 
 /**
  * @brief   A class for reading and debouncing buttons and switches.
+ * 
+ * @ingroup HardwareUtils
  */
 class Button {
   public:

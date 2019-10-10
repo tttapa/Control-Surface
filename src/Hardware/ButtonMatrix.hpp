@@ -13,6 +13,8 @@ BEGIN_CS_NAMESPACE
  *          The number of rows in the button matrix.
  * @tparam  nb_cols
  *          The number of columns in the button matrix.
+ * 
+ * @ingroup HardwareUtils
  */
 template <uint8_t nb_rows, uint8_t nb_cols>
 class ButtonMatrix {

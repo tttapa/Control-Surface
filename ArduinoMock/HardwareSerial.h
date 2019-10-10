@@ -59,6 +59,7 @@ class HardwareSerial : public Stream {
 
     size_t write(uint8_t data) override;
     size_t write(const uint8_t *data, size_t len) override;
+    explicit operator bool() const { return true; }
 };
 
 extern HardwareSerial Serial;

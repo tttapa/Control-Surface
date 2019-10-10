@@ -16,6 +16,8 @@ BEGIN_CS_NAMESPACE
  * incrementing (decrementing) at a faster rate, until you release it.  
  * If both the increment and the decrement button are pressed at once, it resets
  * the counter.
+ * 
+ * @ingroup HardwareUtils
  */
 class IncrementDecrementButtons {
   public:
@@ -45,10 +47,10 @@ class IncrementDecrementButtons {
      * @todo    Add states for initial press.
      */
     enum State {
-        Nothing = 0, ///< The counter must not be incremented.
-        Increment,   ///< The counter must be incremented.
-        Decrement,   ///< The counter must be decremented.
-        Reset,       ///< The counter must be reset to the initial value.
+        Nothing = 0, ///< The counter should not be incremented.
+        Increment,   ///< The counter should be incremented.
+        Decrement,   ///< The counter should be decremented.
+        Reset,       ///< The counter should be reset to the initial value.
     };
 
     /**

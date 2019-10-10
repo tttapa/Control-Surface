@@ -37,7 +37,6 @@ class MIDIInputElement {
 
     /// Receive a new MIDI message and update the internal state.
     bool updateWith(const ChannelMessageMatcher &midimsg) {
-        DEBUGFN("");
         MIDICNChannelAddress target = getTarget(midimsg);
         if (!this->match(target))
             return false;

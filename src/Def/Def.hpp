@@ -11,6 +11,9 @@
 
 BEGIN_CS_NAMESPACE
 
+/// The bit depth of the ADC (Analog to Digital Converter).
+constexpr static uint8_t ADC_BITS = 10;
+
 /// The type returned from analogRead and similar functions.
 using analog_t = uint16_t;
 /// The type for Arduino pins (and ExtendedIOElement pins).

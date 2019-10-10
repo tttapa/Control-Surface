@@ -192,6 +192,8 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 #endif
 };
 
+END_CS_NAMESPACE
+
 // If the main MCU doesn't have a USB connection:
 // Fall back on Serial connection at the hardware MIDI baud rate.
 // (Can be used with HIDUINO or USBMidiKliK.)
@@ -219,6 +221,6 @@ class USBMIDI_Interface : public USBSerialMIDI_Interface {
     USBMIDI_Interface() : USBSerialMIDI_Interface(MIDI_BAUD){};
 };
 
-#endif
-
 END_CS_NAMESPACE
+
+#endif

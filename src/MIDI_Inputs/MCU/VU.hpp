@@ -9,8 +9,13 @@
 BEGIN_CS_NAMESPACE
 
 /** 
- * @brief   An abstract interface for VU meters. It declares two methods:
- *          `getValue` and `getOverload`.
+ * @brief   An abstract interface for VU meters. To allow for both floating 
+ *          point values and integers, all values are integers under the hood.
+ * 
+ * Using floats instead integers would be a strange choice as LED bar VU meters
+ * have discrete levels.  
+ * Continuous "analog" VU meters can use or override the `getFloatValue()` 
+ * method.
  */
 class IVU {
   public:
@@ -30,8 +35,8 @@ class IVU {
 
 namespace MCU {
 
+/// Empty callback for VU meters that does nothing.
 struct VUEmptyCallback {
-    VUEmptyCallback() = default;
     template <class T>
     void begin(const T &) {}
     template <class T>
@@ -42,6 +47,24 @@ struct VUEmptyCallback {
  * @brief   A MIDI input element that represents a Mackie Control Universal VU
  *          meter.  
  *          This is a base class to both the Bankable and non-Bankable version.
+ * 
+ * In the Mackie Control Universal protocol, VU meters are updated using Channel
+ * Pressure events.  
+ * Each device (cable number) has eight VU meters for the eight tracks. Only
+ * MIDI channel 1 is used in the original protocol.
+ * 
+ * The format of the MIDI message is as follows:  
+ * `| 1101 cccc | 0hhh llll |`
+ * 
+ * - `1101` (or `0xD`) is the status for Channel Pressure events
+ * - `cccc` is the MIDI channel
+ * - `hhh` is the track index [0-7]
+ * - `llll` is the level of the VU meter
+ * 
+ * If the level is `0x0`, the meter is at 0%, if it's `0xC`, the meter is at 
+ * 100%.  
+ * `0xD` is an invalid value.  
+ * `0xE` sets the overload indicator, and `0xF` clears the overload indicator.
  */
 template <uint8_t NumValues, class Callback>
 class VU_Base : public MIDIInputElementChannelPressure, public IVU {
@@ -68,7 +91,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     /// @todo   Move to an easily accessible namespace
     constexpr static unsigned int NO_DECAY = 0;
 
-    /// Update is called periodically
+    /// Update is called periodically, it decays the meter if the time is right.
     void update() override {
         if (decayTime && (millis() - prevDecayTime >= decayTime)) {
             prevDecayTime += decayTime;
@@ -93,6 +116,8 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
         return true;
     }
 
+    /// The address of the VU meter is the high nibble of the first (and only)
+    /// data byte.
     MIDICNChannelAddress
     getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {
@@ -174,13 +199,20 @@ class GenericVU : public VU_Base<1, Callback> {
      */
     GenericVU(uint8_t track, const MIDICNChannel &channelCN,
               unsigned int decayTime, const Callback &callback)
-        : VU_Base<1, Callback>{track, channelCN, decayTime, callback} {}
+        : VU_Base<1, Callback>{
+              track,
+              channelCN,
+              decayTime,
+              callback,
+          } {}
 };
 
 /** 
  * @brief   A class for MIDI input elements that represent Mackie Control
  *          Universal VU meters.  
  *          This version cannot be banked.
+ * 
+ * @ingroup MIDIInputElements
  */
 class VU : public GenericVU<> {
   public:
@@ -203,10 +235,15 @@ class VU : public GenericVU<> {
      */
     VU(uint8_t track, const MIDICNChannel &channelCN,
        unsigned int decayTime = 150)
-        : GenericVU<>{track, channelCN, decayTime, {}} {}
+        : GenericVU<>{
+              track,
+              channelCN,
+              decayTime,
+              {},
+          } {}
 
     /** 
-     * @brief   Construct a new GenericVU object.
+     * @brief   Construct a new VU object.
      * 
      * @param   track
      *          The track of the VU meter. [1, 8]
@@ -220,7 +257,12 @@ class VU : public GenericVU<> {
      *          the decay.
      */
     VU(uint8_t track, unsigned int decayTime = 150)
-        : GenericVU<>{track, CHANNEL_1, decayTime, {}} {}
+        : GenericVU<>{
+              track,
+              CHANNEL_1,
+              decayTime,
+              {},
+          } {}
 };
 
 // -------------------------------------------------------------------------- //
@@ -229,7 +271,8 @@ namespace Bankable {
 
 /** 
  * @brief   A class for MIDI input elements that represent Mackie Control
- *          Universal VU meters.  
+ *          Universal VU meters.  This version is generic to allow for custom 
+ *          callbacks.  
  *          This version can be banked.
  * 
  * @tparam  NumBanks
@@ -265,8 +308,13 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
     GenericVU(const BankConfig<NumBanks> &config, uint8_t track,
               const MIDICNChannel &channelCN, unsigned int decayTime,
               const Callback &callback)
-        : VU_Base<NumBanks, Callback>{track, channelCN, decayTime, callback},
-          BankableMIDIInput<NumBanks>(config) {}
+        : VU_Base<NumBanks, Callback>{
+            track, 
+            channelCN, 
+            decayTime, 
+            callback,
+        },
+        BankableMIDIInput<NumBanks>{config} {}
 
   private:
     setting_t getSelection() const override {
@@ -278,6 +326,7 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
     }
 
     bool match(const MIDICNChannelAddress &target) const override {
+
         return BankableMIDIInput<NumBanks>::matchBankable(target,
                                                           this->address);
     }
@@ -285,6 +334,15 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
     void onBankSettingChange() override { this->callback.update(*this); }
 };
 
+/**
+ * @brief   A class for MIDI input elements that represent Mackie Control
+ *          Universal VU meters.  
+ * 
+ * @tparam  NumBanks 
+ *          The number of banks.
+ * 
+ * @ingroup BankableMIDIInputElements
+ */
 template <uint8_t NumBanks>
 class VU : public GenericVU<NumBanks> {
   public:
@@ -309,7 +367,9 @@ class VU : public GenericVU<NumBanks> {
      */
     VU(const BankConfig<NumBanks> &config, uint8_t track,
        const MIDICNChannel &channelCN, unsigned int decayTime = 150)
-        : GenericVU<NumBanks>{config, track, channelCN, decayTime, {}} {}
+        : GenericVU<NumBanks>{
+              config, track, channelCN, decayTime, {},
+          } {}
 
     /** 
      * @brief   Construct a new Bankable VU object.
@@ -329,7 +389,9 @@ class VU : public GenericVU<NumBanks> {
      */
     VU(const BankConfig<NumBanks> &config, uint8_t track,
        unsigned int decayTime = 150)
-        : GenericVU<NumBanks>{config, track, CHANNEL_1, decayTime, {}} {}
+        : GenericVU<NumBanks>{
+              config, track, CHANNEL_1, decayTime, {},
+          } {}
 };
 
 } // namespace Bankable

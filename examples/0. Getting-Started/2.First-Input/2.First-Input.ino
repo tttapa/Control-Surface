@@ -31,7 +31,7 @@ using namespace MIDI_Notes;
 
 // Create an array of LEDs that listen to MIDI Note messages, turning on and off
 // the LEDs connected to the eight input pins of the shift register
-MIDINoteLED leds[] = {
+NoteValueLED leds[] = {
   {sreg.pin(0), note(C, 4)}, // LED pin, address (note number, channel, cable)
   {sreg.pin(1), note(D, 4)}, //
   {sreg.pin(2), note(E, 4)}, //

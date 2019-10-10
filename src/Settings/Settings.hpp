@@ -9,6 +9,7 @@
  */
 
 #include <Def/Def.hpp>
+#include <limits.h> // CHAR_BIT
 
 BEGIN_CS_NAMESPACE
 
@@ -35,6 +36,8 @@ constexpr unsigned long defaultBaudRate = 115200;
  * @f$ y[n] = \alpha\cdot x[n] + (1-\alpha)\cdot y[n-1] @f$
  * where
  * @f$ \alpha = \left(\frac{1}{2}\right)^{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$
+ * 
+ * @see FilteredAnalog
  */
 constexpr uint8_t ANALOG_FILTER_SHIFT_FACTOR = 2;
 
@@ -42,8 +45,14 @@ constexpr uint8_t ANALOG_FILTER_SHIFT_FACTOR = 2;
  * The signed integer type to use for analog inputs during filtering.
  * Should be at least @f$ 10+\text{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits wide.
  * (10 bits of ADC resolution)
+ * 
+ * @see FilteredAnalog
  */
-typedef uint16_t ANALOG_FILTER_TYPE;
+using ANALOG_FILTER_TYPE = uint16_t;
+
+/// The default number of bits to upsample the readings for FilteredAnalog.
+constexpr uint8_t ANALOG_UPSAMPLE = sizeof(ANALOG_FILTER_TYPE) * CHAR_BIT -
+                                    ADC_BITS - ANALOG_FILTER_SHIFT_FACTOR;
 
 /// The debounce time for momentary push buttons in milliseconds.
 constexpr unsigned long BUTTON_DEBOUNCE_TIME = 25; // milliseconds
@@ -57,7 +66,7 @@ constexpr unsigned long LONG_PRESS_REPEAT_DELAY = 200; // milliseconds
 /// The interval between updating filtered analog inputs, in microseconds.
 constexpr unsigned long FILTERED_INPUT_UPDATE_INTERVAL = 1000; // microseconds
 
-/// The time in milliseconds it takes for the VU meter display peak bar to drop 
+/// The time in milliseconds it takes for the VU meter display peak bar to drop
 ///  one unit (i.e. one twelfth of the complete scale).
 constexpr unsigned long VU_PEAK_DECAY_TIME = 300; // milliseconds
 

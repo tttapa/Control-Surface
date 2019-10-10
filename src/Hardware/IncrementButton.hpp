@@ -13,6 +13,8 @@ BEGIN_CS_NAMESPACE
  * it increments the counter once. If you keep on pressing it for longer than
  * a certain threshold, it keeps on incrementing at a faster rate, until you
  * release it.
+ * 
+ * @ingroup HardwareUtils
  */
 class IncrementButton {
   public:

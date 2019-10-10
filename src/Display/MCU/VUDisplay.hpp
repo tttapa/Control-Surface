@@ -18,9 +18,35 @@ class VUDisplay : public DisplayElement {
           decayTime(VU_PEAK_SMOOTH_DECAY
                         ? VU_PEAK_DECAY_TIME / (blockheight + spacing)
                         : VU_PEAK_DECAY_TIME) {}
+                        
     void draw() override {
         uint8_t value = vu.getValue();
+        updatePeak(value);
+        if (peak > 0) {
+            drawPeak(peak);
+            drawBlocks(value);
+        }
+    }
 
+  protected:
+    virtual void drawPeak(uint8_t peak) {
+        display.drawFastHLine(x,                                //
+                              y - spacing + blockheight - peak, //
+                              width,                            //
+                              color);
+    }
+
+    virtual void drawBlocks(uint8_t value) {
+        for (uint8_t i = 0; i < value; i++)
+            display.fillRect(x,                               //
+                             y - i * (blockheight + spacing), //
+                             width,                           //
+                             blockheight,                     //
+                             color);
+    }
+
+  private:
+    void updatePeak(uint8_t value) {
         int16_t newPeak = (int16_t)value * (blockheight + spacing);
         if (newPeak >= peak) {
             peak = newPeak;
@@ -36,16 +62,8 @@ class VUDisplay : public DisplayElement {
                 previousDecay += decayTime;
             }
         }
-        if (peak > 0) {
-            display.drawFastHLine(x, y - spacing + blockheight - peak, width,
-                                  color);
-            for (uint8_t i = 0; i < value; i++)
-                display.fillRect(x, y - i * (blockheight + spacing), width,
-                                 blockheight, color);
-        }
     }
 
-  private:
     IVU &vu;
 
     int16_t x;

@@ -9,19 +9,37 @@
 
 BEGIN_CS_NAMESPACE
 
-constexpr static uint8_t ADC_BITS = 10;
-
 /**
  * A class that reads and filters an analog input.
  *
  * A map function can be applied to the analog value (e.g. to compensate for
  * logarithmic taper potentiometers or to calibrate the range). The analog input
- * value is filtered using an exponential moving average filter. The settings
- * for this filter can be changed in Settings.hpp.
+ * value is filtered using an exponential moving average filter. The default
+ * settings for this filter can be changed in Settings.hpp.  
+ * After filtering, hysteresis is applied to prevent flipping back and forth 
+ * between two values when the input is not changing.
+ * 
+ * @tparam  Precision
+ *          The number of bits of precision the output should have.
+ * @tparam  Upsample
+ *          The number of bits to upsample the analog reading to.
+ * @tparam  FilterShiftFactor
+ *          The number of bits used for the EMA filter.
+ *          The pole location is
+ *          @f$ 1 - \left(\frac{1}{2}\right)^{\mathrm{FilterShiftFactor}} @f$.  
+ *          A lower shift factor means less filtering (@f$0@f$ is no filtering),
+ *          and a higher shift factor means more filtering (and more latency).
+ * @tparam  FilterType
+ *          The type to use for the intermediate types of the filter.  
+ *          Should be at least 
+ *          @f$ 10 + \mathrm{Upsample} + \mathrm{FilterShiftFactor} @f$
+ *          bits (@f$10@f$ is the number of bits of the ADC).
+ * 
+ * @ingroup HardwareUtils
  */
-template <uint8_t PRECISION, uint8_t UPSAMPLE = 0,
-          uint8_t FILTER_SHIFT_FACTOR = ANALOG_FILTER_SHIFT_FACTOR,
-          class FILTER_TYPE = ANALOG_FILTER_TYPE>
+template <uint8_t Precision = ADC_BITS, uint8_t Upsample = ANALOG_UPSAMPLE,
+          uint8_t FilterShiftFactor = ANALOG_FILTER_SHIFT_FACTOR,
+          class FilterType = ANALOG_FILTER_TYPE>
 class FilteredAnalog {
   public:
     /**
@@ -38,8 +56,8 @@ class FilteredAnalog {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the filtered value (of 10 + UPSAMPLE bits wide) as a 
-     *          parameter, and should return a value of 10 bits + UPSAMPLE .
+     *          should take the filtered value (of 10 + Upsample bits wide) as a 
+     *          parameter, and should return a value of 10 bits + Upsample .
      * 
      * @note    Applying the mapping function before filtering could result in
      *          the noise being amplified to such an extent that filtering it
@@ -49,6 +67,18 @@ class FilteredAnalog {
      *          before hysteresis.
      */
     void map(MappingFunction fn) { mapFn = fn; }
+
+    /**
+     * @brief   Invert the analog value. For example, if the precision is 10 
+     *          bits, when the analog input measures 1023, the output will be 0,
+     *          and when the analog input measures 0, the output will be 1023.
+     * 
+     * @note    This overrides the mapping function set by the `map` method.
+     */
+    void invert() {
+        constexpr analog_t maxval = (1 << (ADC_BITS + Upsample)) - 1;
+        map([](analog_t val) -> analog_t { return maxval - val; });
+    }
 
     /**
      * @brief   Read the analog input value, apply the mapping function, and
@@ -73,7 +103,7 @@ class FilteredAnalog {
      *          function applied.
      *
      * @return  The filtered value of the analog input, as a number
-     *          of `PRECISION` bits wide.
+     *          of `Precision` bits wide.
      */
     analog_t getValue() const { return hysteresis.getValue(); }
 
@@ -85,15 +115,15 @@ class FilteredAnalog {
      *          from 0.0 to 1.0.
      */
     float getFloatValue() const {
-        return getValue() * (1.0f / (ldexpf(1.0f, PRECISION) - 1.0f));
+        return getValue() * (1.0f / (ldexpf(1.0f, Precision) - 1.0f));
     }
 
     /**
      * @brief   Read the raw value of the analog input any filtering or mapping
-     *          applied, but with its bit depth increased by @c UPSAMPLE.
+     *          applied, but with its bit depth increased by @c Upsample.
      */
     analog_t getRawValue() const {
-        return increaseBitDepth<ADC_BITS + UPSAMPLE, ADC_BITS, analog_t,
+        return increaseBitDepth<ADC_BITS + Upsample, ADC_BITS, analog_t,
                                 analog_t>(ExtIO::analogRead(analogPin));
     }
 
@@ -103,15 +133,18 @@ class FilteredAnalog {
     MappingFunction mapFn = nullptr;
 
     static_assert(
-        ADC_BITS + UPSAMPLE + FILTER_SHIFT_FACTOR <=
-            sizeof(FILTER_TYPE) * CHAR_BIT,
-        "Error: FILTER_TYPE is not wide enough to hold the maximum value");
+        ADC_BITS + Upsample + FilterShiftFactor <=
+            sizeof(FilterType) * CHAR_BIT,
+        "Error: FilterType is not wide enough to hold the maximum value");
     static_assert(
-        ADC_BITS + UPSAMPLE <= sizeof(analog_t) * CHAR_BIT,
+        ADC_BITS + Upsample <= sizeof(analog_t) * CHAR_BIT,
         "Error: analog_t is not wide enough to hold the maximum value");
+    static_assert(
+        Precision <= ADC_BITS + Upsample,
+        "Error: Precision is larger than the upsampled ADC precision");
 
-    EMA<FILTER_SHIFT_FACTOR, FILTER_TYPE> filter;
-    Hysteresis<ADC_BITS + UPSAMPLE - PRECISION, analog_t, analog_t> hysteresis;
+    EMA<FilterShiftFactor, FilterType> filter;
+    Hysteresis<ADC_BITS + Upsample - Precision, analog_t, analog_t> hysteresis;
 };
 
 END_CS_NAMESPACE

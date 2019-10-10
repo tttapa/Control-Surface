@@ -34,6 +34,7 @@ SysExMessage	KEYWORD1
 ##########
 
 Button	KEYWORD1
+FilteredAnalog	KEYWORD1
 
 ExtIO	KEYWORD1
 ExtendedIOElement	KEYWORD1

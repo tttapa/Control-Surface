@@ -9,33 +9,45 @@
  * @ingroup MIDIOutputElements
  * @defgroup    BankableMIDIOutputElements Bankable MIDI Output Elements
  * @brief   All Elements that send out MIDI events, and that can be banked.  
- *          This includes potentiometers, faders, buttons, rotary encoders, 
- *          program selectors.
+ *          This includes the bankable versions of pretty much all elements in
+ *          @ref MIDIOutputElements.
  */
 
 /**
  * @ingroup MIDIOutputElements
- * @defgroup    ManyAddressesMIDIOutputElements Many Addresses MIDI Output 
- *              Elements
+ * @defgroup    ManyAddressesMIDIOutputElements Many Addresses MIDI Output Elements
  * @brief   All Elements that send out MIDI events, and that can banked, with
- *          a list of arbitrary addresses.
+ *          a list of arbitrary addresses.  
+ *          This includes the bankable versions of pretty much all elements in
+ *          @ref MIDIOutputElements.
  */
 
 /**
  * @defgroup    MIDIInputElements   MIDI Input Elements
  * @brief   All Elements that listen for incoming MIDI events.  
- *          This includes LEDs, VU meters, ...
+ *          This includes LEDs, VU meters, V-Pot LED rings, time displays ...
+ */
+
+
+/**
+ * @ingroup     MIDIInputElements
+ * @defgroup    BankableMIDIInputElements   Bankable MIDI Input Elements
+ * @brief   All Elements that listen for incoming MIDI events, and that can be
+ *          banked.  
+ *          This includes the bankable versions of pretty much all elements in
+ *          @ref MIDIInputElements.
+ */
+
+/**
+ * @ingroup MIDIInputElements
+ * @defgroup    midi-input-elements-leds    MIDI Input Elements LEDs
+ * @brief   All MIDIInputElements that visualize their state using LEDs.
  */
 
 /**
  * @defgroup    Selectors   Selectors
  * @brief   Selectors are elements that change the bank setting or any other 
  *          selection, such as program selectors.
- */
-/**
- * @ingroup MIDIInputElements
- * @defgroup    midi-input-elements-leds    MIDI Input Elements LEDs
- * @brief   All MIDIInputElements that visualize their state using LEDs.
  */
 
 /**
@@ -52,6 +64,12 @@
  * @defgroup    ExtIO Extended Input/Output
  * @brief   All Elements that extend the number of IO pins of the Arduino: 
  *          Currently only shift registers and multiplexers.
+ */
+
+/**
+ * @defgroup    HardwareUtils   Hardware Utilities
+ * @brief   Classes used for debouncing buttons, incrementing/decrementing
+ *          push buttons, scanning switch matrices, filtering analog input, etc.
  */
 
 /** 

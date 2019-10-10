@@ -2,11 +2,12 @@
 
 #include <Arduino.h>
 #include <Printable.h>
-#include <limits.h>
 #include <Settings/SettingsWrapper.hpp>
+#include <limits.h>
 
 BEGIN_CS_NAMESPACE
 
+/// Line rasterization algorithm for drawing lines to the display.
 class BresenhamLine {
   public:
     using pint = int16_t;
@@ -26,7 +27,7 @@ class BresenhamLine {
     };
 
     BresenhamLine(Pixel start, int cos, int sin)
-        : px0(start), px(start), // Starting point
+        : px(start),        // Starting point
           dx(cos), dy(sin), // cosine and sine of the slope of the line (scaled)
           adx(abs(dx)), ady(abs(dy)),   // absolute values of cos and sin
           xinc(sgn(dx)), yinc(sgn(dy)), // increment steps for x and y
@@ -78,7 +79,6 @@ class BresenhamLine {
 
   private:
     const static int errorScalingFactor = INT_MAX / 2;
-    const Pixel px0;
     Pixel px;
     int dx, dy;
     int adx, ady;
