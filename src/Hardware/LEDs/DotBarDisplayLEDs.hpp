@@ -23,7 +23,7 @@ enum class DotBarMode : bool {
 template <uint8_t N>
 class DotBarDisplayLEDs : public LEDs<N> {
   public:
-    DotBarDisplayLEDs(const PinList<N> &ledPins) : LEDs<N>(ledPins) {}
+    DotBarDisplayLEDs(const PinList<N> &ledPins) : LEDs<N>{ledPins} {}
 
     /** 
      * @brief   Display the given number of LEDs on the LED bar.

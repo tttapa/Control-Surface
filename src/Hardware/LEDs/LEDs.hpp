@@ -43,11 +43,23 @@ class LEDs {
      */
     void displayRange(uint8_t startOn, uint8_t startOff) const {
         for (uint8_t pin = 0; pin < startOn; pin++)
-            ExtIO::digitalWrite(ledPins[pin], LOW);
+            clear(pin);
         for (uint8_t pin = startOn; pin < startOff; pin++)
-            ExtIO::digitalWrite(ledPins[pin], HIGH);
+            set(pin);
         for (uint8_t pin = startOff; pin < N; pin++)
-            ExtIO::digitalWrite(ledPins[pin], LOW);
+            clear(pin);
+    }
+
+    /// Turn on the given LED.
+    void set(uint8_t index) const {
+        // TODO: bounds check?
+        ExtIO::digitalWrite(ledPins[index], HIGH);
+    }
+
+    /// Turn off the given LED.
+    void clear(uint8_t index) const {
+        // TODO: bounds check?
+        ExtIO::digitalWrite(ledPins[index], LOW);
     }
 
     /**
@@ -62,8 +74,8 @@ class LEDs {
      * @brief   Turn off all LEDs.
      */
     void clear() const {
-        for (uint8_t pin = 0; pin < N; pin++)
-            ExtIO::digitalWrite(ledPins[pin], LOW);
+        for (pin_t pin : ledPins)
+            ExtIO::digitalWrite(pin, LOW);
     }
 
   private:

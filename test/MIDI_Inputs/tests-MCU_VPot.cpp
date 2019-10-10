@@ -61,7 +61,6 @@ TEST(MCUVPotBankable, setValueBankChangeChannel) {
     EXPECT_EQ(vpot.getCenterLed(), true);
 }
 
-
 TEST(MCUVPotBankable, setValueBankChangeCN) {
     Bank<2> bank(4);
     constexpr Channel channel = CHANNEL_3;
@@ -81,49 +80,57 @@ TEST(MCUVPotBankable, setValueBankChangeCN) {
 
 // -------------------------------------------------------------------------- //
 
-#if 0
+#include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
 
-#include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>
-
-TEST(MCUVULEDsBankable, displayOnBankChange) {
+TEST(MCUVPotLEDsBankable, displayOnBankChange) {
     Bank<2> bank(4);
     constexpr Channel channel = CHANNEL_3;
     constexpr uint8_t track = 5;
-    constexpr unsigned int decayTime = 150;
-    MCU::Bankable::VULEDs<2, 2> vu{bank, track, channel, decayTime, {{{0, 1}}}};
+    MCU::Bankable::VPotRingLEDs<2> vpot{
+        bank, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, track, channel};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(0, OUTPUT));
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(1, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(4, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(5, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(6, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(7, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(8, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(9, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(10, OUTPUT));
 
-    MIDIInputElementChannelPressure::beginAll();
+    MIDIInputElementCC::beginAll();
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
-    ChannelMessageMatcher midimsg1 = {CHANNEL_PRESSURE, channel,
-                                      (track + 0 - 1) << 4 | 0xC, 0};
-    ChannelMessageMatcher midimsg2 = {CHANNEL_PRESSURE, channel,
-                                      (track + 4 - 1) << 4 | 0x6, 0};
-    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
-    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(0, HIGH));
-    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(1, HIGH));
-    MIDIInputElementChannelPressure::updateAllWith(midimsg1);
-    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+    ChannelMessageMatcher midimsg = {CONTROL_CHANGE, channel, 0x34 + 4, 0x59};
 
-    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
-    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(0, HIGH));
-    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(1, HIGH));
-    MIDIInputElementChannelPressure::updateAllWith(midimsg2);
-    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+    MIDIInputElementCC::updateAllWith(midimsg);
 
-    EXPECT_EQ(vu.getValue(), 0xC);
-    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(0, HIGH));
+    EXPECT_EQ(vpot.getPosition(), 0x0);
+    EXPECT_EQ(vpot.getMode(), 0x0);
+    EXPECT_EQ(vpot.getCenterLed(), false);
+
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(0, LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(1, LOW));
-    bank.select(1);
-    Mock::VerifyAndClear(&ArduinoMock::getInstance());
-    EXPECT_EQ(vu.getValue(), 0x6);
-    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(0, HIGH));
-    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(1, HIGH));
-    bank.select(0);
-    Mock::VerifyAndClear(&ArduinoMock::getInstance());
-}
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(3, LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(4, LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(5, HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(7, HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(8, HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(9, LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(10, LOW));
 
-#endif
+    bank.select(1);
+
+    EXPECT_EQ(vpot.getPosition(), 0x9);
+    EXPECT_EQ(vpot.getMode(), 0x1);
+    EXPECT_EQ(vpot.getCenterLed(), true);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    // TODO: test center led and more banks, updating active bank, etc.
+}
