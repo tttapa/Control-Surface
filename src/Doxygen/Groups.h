@@ -77,3 +77,9 @@
  * @brief   All Elements that can be used to show the state of the Control 
  *          Surface on the display.
  */
+
+/** 
+ * @defgroup    ControlSurfaceModule Control Surface
+ * @brief   The main class that initializes, manages and updates all other
+ *          elements.
+ */

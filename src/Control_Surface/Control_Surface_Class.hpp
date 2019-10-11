@@ -13,6 +13,8 @@ BEGIN_CS_NAMESPACE
 /** 
  * @brief   This class ensures initialization, updating, and interaction between
  *          all other classes, it's the glue that holds everything together.
+ * 
+ * @ingroup ControlSurfaceModule
  */
 class Control_Surface_ : public MIDI_Callbacks {
   public:
