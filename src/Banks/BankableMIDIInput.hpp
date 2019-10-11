@@ -135,6 +135,18 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
     }
 
     /**
+     * @brief   If matchBankableAddressInRange returned true, get the index of
+     *          the message in the range.
+     */
+    uint8_t getRangeIndex(MIDICNChannelAddress target,
+                          MIDICNChannelAddress base) const {
+        uint8_t diff = target.getAddress() - base.getAddress();
+        if (type == CHANGE_ADDRESS)
+            diff %= bank.getTracksPerBank();
+        return diff;
+    }
+
+    /**
      * @brief   Check whether a given address is within a range of given length
      *          starting from the given base address.
      * 

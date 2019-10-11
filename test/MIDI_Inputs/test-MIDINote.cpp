@@ -1,11 +1,11 @@
 #include <gtest-wrapper.h>
 
-#include <MIDI_Inputs/MIDINoteCCRange.hpp>
+#include <MIDI_Inputs/NoteCCRange.hpp>
 
 using namespace CS;
 
 TEST(NoteValue, NoteOnNoteOff) {
-    NoteValue mn = {{0x3C, CHANNEL_5}};
+    NoteValue mn{{0x3C, CHANNEL_5}};
 
     EXPECT_EQ(mn.getValue(), 0);
     EXPECT_FALSE(mn.getValue() > 0);
@@ -60,7 +60,7 @@ TEST(NoteValue, resetAll) {
     EXPECT_FALSE(mn.getValue() > 0);
 }
 
-#include <MIDI_Inputs/LEDs/CCNoteRangeLEDs.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCRangeLEDs.hpp>
 
 TEST(NoteValueLED, NoteOnNoteOff) {
     NoteValueLED mnl = {2, {0x3C, CHANNEL_5}};

@@ -55,7 +55,7 @@ class OutputBank {
     uint8_t getTracksPerBank() const { return tracksPerBank; }
 
   private:
-    const uint8_t tracksPerBank;
+    uint8_t tracksPerBank;
     setting_t bankSetting;
 };
 

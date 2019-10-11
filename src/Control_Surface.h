@@ -18,7 +18,7 @@
 // -------------------------------- Display --------------------------------- //
 #include "Display/Bitmaps/XBitmaps.hpp"
 #include "Display/MCU/TimeDisplayDisplay.hpp"
-// #include "Display/MCU/VPotDisplay.hpp"
+#include "Display/MCU/VPotDisplay.hpp"
 #include "Display/MCU/VUDisplay.hpp"
 #include "Display/NoteBitmapDisplay.hpp"
 #include "Display/SelectorDisplay.hpp"
@@ -79,9 +79,9 @@
 // #include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
-#include <MIDI_Inputs/MIDINoteCCRange.hpp>
+#include <MIDI_Inputs/NoteCCRange.hpp>
 
-#include <MIDI_Inputs/LEDs/CCNoteRangeLEDs.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCRangeLEDs.hpp>
 #include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
 #include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>
 

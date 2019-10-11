@@ -20,14 +20,14 @@ MIDI_Interface *MIDI_Interface::getDefault() { return DefaultMIDI_Interface; }
 // -------------------------------- SENDING --------------------------------- //
 
 void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) {
-    sendCN(m, c, d1, d2, 0);
+    sendOnCable(m, c, d1, d2, 0);
 }
 
 void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1) {
-    sendCN(m, c, d1, 0);
+    sendOnCable(m, c, d1, 0);
 }
 
-void MIDI_Interface::sendCN(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+void MIDI_Interface::sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
                             uint8_t cn) {
     c--;             // Channels are zero-based
     m &= 0xF0;       // bitmask high nibble
@@ -39,7 +39,7 @@ void MIDI_Interface::sendCN(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
     sendImpl(m, c, d1, d2, cn);
 }
 
-void MIDI_Interface::sendCN(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) {
+void MIDI_Interface::sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) {
     c--;             // Channels are zero-based
     m &= 0xF0;       // bitmask high nibble
     m |= 0b10000000; // set msb

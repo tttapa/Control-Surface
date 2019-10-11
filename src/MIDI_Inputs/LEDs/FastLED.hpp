@@ -1,7 +1,7 @@
 #ifdef ARDUINO
 
 #include <FastLED.h>
-#include <MIDI_Inputs/MIDINoteCCRange.hpp>
+#include <MIDI_Inputs/NoteCCRange.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -53,52 +53,52 @@ class NoteCCFastLED {
  * @ingroup midi-input-elements-leds
  */
 template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
-using NoteRangeFastLED = MIDINoteCCRange<MIDIInputElementNote,        //
-                                         RangeLen,                    //
-                                         NoteCCFastLED<ColorMapper>>; //
+using NoteRangeFastLED = GenericNoteCCRange<MIDIInputElementNote,        //
+                                            RangeLen,                    //
+                                            NoteCCFastLED<ColorMapper>>; //
 
 template <class ColorMapper = DefaultColorMapper>
-using NoteValueFastLED = MIDINoteCCRange<MIDIInputElementNote,        //
-                                         1,                           //
-                                         NoteCCFastLED<ColorMapper>>; //
+using NoteValueFastLED = GenericNoteCCRange<MIDIInputElementNote,        //
+                                            1,                           //
+                                            NoteCCFastLED<ColorMapper>>; //
 
 template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
-using CCRangeFastLED = MIDINoteCCRange<MIDIInputElementCC,          //
-                                       RangeLen,                    //
-                                       NoteCCFastLED<ColorMapper>>; //
+using CCRangeFastLED = GenericNoteCCRange<MIDIInputElementCC,          //
+                                          RangeLen,                    //
+                                          NoteCCFastLED<ColorMapper>>; //
 
 template <class ColorMapper = DefaultColorMapper>
-using CCValueFastLED = MIDINoteCCRange<MIDIInputElementCC,          //
-                                       1,                           //
-                                       NoteCCFastLED<ColorMapper>>; //
+using CCValueFastLED = GenericNoteCCRange<MIDIInputElementCC,          //
+                                          1,                           //
+                                          NoteCCFastLED<ColorMapper>>; //
 
 namespace Bankable {
 
 template <uint8_t RangeLen, uint8_t BankSize,
           class ColorMapper = DefaultColorMapper>
-using NoteRangeFastLED = MIDINoteCCRange<MIDIInputElementNote,        //
-                                         RangeLen,                    //
-                                         BankSize,                    //
-                                         NoteCCFastLED<ColorMapper>>; //
+using NoteRangeFastLED = GenericNoteCCRange<MIDIInputElementNote,        //
+                                            RangeLen,                    //
+                                            BankSize,                    //
+                                            NoteCCFastLED<ColorMapper>>; //
 
 template <uint8_t BankSize, class ColorMapper = DefaultColorMapper>
-using NoteValueFastLED = MIDINoteCCRange<MIDIInputElementNote,        //
-                                         1,                           //
-                                         BankSize,                    //
-                                         NoteCCFastLED<ColorMapper>>; //
+using NoteValueFastLED = GenericNoteCCRange<MIDIInputElementNote,        //
+                                            1,                           //
+                                            BankSize,                    //
+                                            NoteCCFastLED<ColorMapper>>; //
 
 template <uint8_t RangeLen, uint8_t BankSize,
           class ColorMapper = DefaultColorMapper>
-using CCRangeFastLED = MIDINoteCCRange<MIDIInputElementCC,          //
-                                       RangeLen,                    //
-                                       BankSize,                    //
-                                       NoteCCFastLED<ColorMapper>>; //
+using CCRangeFastLED = GenericNoteCCRange<MIDIInputElementCC,          //
+                                          RangeLen,                    //
+                                          BankSize,                    //
+                                          NoteCCFastLED<ColorMapper>>; //
 
 template <uint8_t BankSize, class ColorMapper = DefaultColorMapper>
-using CCValueFastLED = MIDINoteCCRange<MIDIInputElementCC,          //
-                                       1,                           //
-                                       BankSize,                    //
-                                       NoteCCFastLED<ColorMapper>>; //
+using CCValueFastLED = GenericNoteCCRange<MIDIInputElementCC,          //
+                                          1,                           //
+                                          BankSize,                    //
+                                          NoteCCFastLED<ColorMapper>>; //
 
 } // namespace Bankable
 

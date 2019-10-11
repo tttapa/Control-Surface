@@ -12,7 +12,7 @@ namespace MCU {
 class VPotDisplay : public DisplayElement {
 
   public:
-    VPotDisplay(DisplayInterface &display, VPotRing_Base &vpot, PixelLocation loc,
+    VPotDisplay(DisplayInterface &display, IVPotRing &vpot, PixelLocation loc,
                 uint16_t radius, uint16_t innerRadius, uint16_t color)
         : DisplayElement(display), vpot(vpot), x(loc.x + radius),
           y(loc.y + radius), radius(radius), innerRadius(innerRadius),
@@ -30,7 +30,7 @@ class VPotDisplay : public DisplayElement {
     }
 
   private:
-    VPotRing_Base &vpot;
+    IVPotRing &vpot;
 
     int16_t x, y;
     uint16_t radius, innerRadius, color;

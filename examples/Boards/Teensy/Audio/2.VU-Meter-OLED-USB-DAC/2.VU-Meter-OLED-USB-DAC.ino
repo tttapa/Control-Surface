@@ -78,13 +78,15 @@ constexpr int8_t OLED_CS_R = 18;  // Chip Select pin of the right display
 constexpr uint32_t SPI_Frequency = SPI_MAX_SPEED;
 
 // Instantiate the displays
-Adafruit_SSD1306 ssd1306Display_L = {SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,
-                                     OLED_DC,      OLED_reset,    OLED_CS_L,
-                                     SPI_Frequency};
+Adafruit_SSD1306 ssd1306Display_L = {
+  SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,          OLED_DC,
+  OLED_reset,   OLED_CS_L,     SPI_Frequency,
+};
 // Instantiate the displays
-Adafruit_SSD1306 ssd1306Display_R = {SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,
-                                     OLED_DC,      OLED_reset,    OLED_CS_R,
-                                     SPI_Frequency};
+Adafruit_SSD1306 ssd1306Display_R = {
+  SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,          OLED_DC,
+  OLED_reset,   OLED_CS_R,     SPI_Frequency,
+};
 
 // --------------------------- Display interface ---------------------------- //
 // ========================================================================== //

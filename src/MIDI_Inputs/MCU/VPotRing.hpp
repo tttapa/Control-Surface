@@ -1,7 +1,7 @@
 #pragma once
 
-#include <MIDI_Inputs/MIDIInputElementCC.hpp>
 #include <Banks/BankableMIDIInput.hpp>
+#include <MIDI_Inputs/MIDIInputElementCC.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -20,23 +20,14 @@ struct VPotEmptyCallback {
     void update(const T &) {}
 };
 
-template <uint8_t NumValues, class Callback>
-class VPotRing_Base : public MIDIInputElementCC {
+/**
+ * @todo    I'm terrible at naming things.
+ */
+class IVPotRing {
   protected:
-    VPotRing_Base(uint8_t track, const MIDICNChannel &channelCN,
-                  const Callback &callback)
-        : MIDIInputElementCC{{track + VPotRingAddress - 1, channelCN}},
-          callback{callback} {}
+    IVPotRing() = default;
 
   public:
-    /// Initialize
-    void begin() override { callback.begin(*this); }
-    /// Reset all values to zero
-    void reset() override {
-        values = {};
-        callback.update(*this);
-    }
-
     /// Return the position of the V-Pot ring. [0, 11]
     uint8_t getPosition() const { return getPosition(getValue()); }
     /// Return the status of the center LED of the V-Pot ring.
@@ -74,6 +65,37 @@ class VPotRing_Base : public MIDIInputElementCC {
         }
     }
 
+  private:
+    virtual uint8_t getValue() const = 0;
+
+    /// Extract the position from the raw value.
+    static uint8_t getPosition(uint8_t value) {
+        uint8_t position = value & 0x0F;
+        return position < 0x0C ? position : 0x0B;
+    }
+    /// Extract the center LED state from the raw value.
+    static bool getCenterLed(uint8_t value) { return value & 0x40; }
+    /// Extract the mode from the raw value.
+    static uint8_t getMode(uint8_t value) { return (value & 0x30) >> 4; }
+};
+
+template <uint8_t NumValues, class Callback>
+class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
+  protected:
+    VPotRing_Base(uint8_t track, const MIDICNChannel &channelCN,
+                  const Callback &callback)
+        : MIDIInputElementCC{{track + VPotRingAddress - 1, channelCN}},
+          callback{callback} {}
+
+  public:
+    /// Initialize
+    void begin() override { callback.begin(*this); }
+    /// Reset all values to zero
+    void reset() override {
+        values = {};
+        callback.update(*this);
+    }
+
   protected:
     /** Make sure that the received value is valid and will not result in array
      * out of bounds conditions. */
@@ -90,7 +112,7 @@ class VPotRing_Base : public MIDIInputElementCC {
         return true;
     }
 
-    uint8_t getValue() const { return values[getSelection()]; }
+    uint8_t getValue() const override { return values[getSelection()]; }
 
     /// Get the active bank selection
     virtual uint8_t getSelection() const { return 0; }
@@ -100,16 +122,6 @@ class VPotRing_Base : public MIDIInputElementCC {
         (void)target;
         return 0;
     }
-
-    /// Extract the position from the raw value.
-    static uint8_t getPosition(uint8_t value) {
-        uint8_t position = value & 0x0F;
-        return position < 0x0C ? position : 0x0B;
-    }
-    /// Extract the center LED state from the raw value.
-    static bool getCenterLed(uint8_t value) { return value & 0x40; }
-    /// Extract the mode from the raw value.
-    static uint8_t getMode(uint8_t value) { return (value & 0x30) >> 4; }
 
     Array<uint8_t, NumValues> values = {};
 

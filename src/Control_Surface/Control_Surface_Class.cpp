@@ -74,8 +74,7 @@ void Control_Surface_::onChannelMessage(Parsing_MIDI_Interface &midi) {
         DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1 << ' '
                      << midimsg.data2 << dec);
     else
-        DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1
-                     << dec);
+        DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1 << dec);
 #endif
 
     // If the Channel Message callback exists, call it to see if we have to

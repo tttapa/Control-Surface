@@ -71,7 +71,7 @@ class MIDI_Interface {
      * @param   cn
      *          The MIDI Cable Number. [0, 15]
      */
-    void sendCN(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2, uint8_t cn);
+    void sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2, uint8_t cn);
 
     /**
      * @brief   Send a 2-byte MIDI packet with cable number.
@@ -85,16 +85,25 @@ class MIDI_Interface {
      * @param   cn
      *          The MIDI Cable Number. [0, 15]
      */
-    void sendCN(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn);
+    void sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn);
 
+    /// Send a MIDI Note On event.
     void sendNoteOn(MIDICNChannelAddress address, uint8_t velocity);
+    /// Send a MIDI Note Off event.
     void sendNoteOff(MIDICNChannelAddress address, uint8_t velocity);
+    /// Send a MIDI Control Change event.
     void sendCC(MIDICNChannelAddress address, uint8_t value);
+    /// Send a MIDI Pitch Bend event.
     void sendPB(MIDICNChannelAddress address, uint16_t value);
+    /// Send a MIDI Pitch Bend event.
     void sendPB(MIDICNChannel address, uint16_t value);
-    void sendPC(MIDICNChannel address, uint8_t value);
+    /// Send a MIDI Program Change event.
     void sendPC(MIDICNChannelAddress address);
+    /// Send a MIDI Program Change event.
+    void sendPC(MIDICNChannel address, uint8_t value);
+    /// Send a MIDI System Exclusive message.
     void send(SysExMessage message);
+    /// Send a MIDI System Exclusive message.
     template <size_t N>
     void send(const uint8_t (&sysexdata)[N], uint8_t cn = 0) {
         send(SysExMessage{sysexdata, N, cn});
