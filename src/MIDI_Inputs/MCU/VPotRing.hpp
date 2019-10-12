@@ -90,10 +90,13 @@ class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
   public:
     /// Initialize
     void begin() override { callback.begin(*this); }
+
     /// Reset all values to zero
     void reset() override {
+#ifdef VPOTRING_RESET
         values = {};
         callback.update(*this);
+#endif
     }
 
   protected:

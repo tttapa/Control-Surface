@@ -17,12 +17,18 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
     */
     SevenSegmentDisplay(const MIDICNChannelAddress &address)
         : MIDIInputElementCC{address} {
-        reset();
+        fillWithSpaces();
+    }
+
+    void fillWithSpaces() {
+        for (char &c : text)
+            c = ' ';
     }
 
     void reset() override {
-        for (char &c : text)
-            c = ' ';
+#ifdef SEVENSEG_RESET
+        fillWithSpaces();
+#endif
     }
 
   private:
