@@ -174,7 +174,7 @@ MCU::AnalogVUDisplay vu_display_R = {
 // ========================================================================== //
 
 constexpr float maxGain = 5;
-FilteredAnalog<7> gainKnob = A1;
+FilteredAnalog<> gainKnob = A1;
 
 // --------------------------------- Setup ---------------------------------- //
 // ========================================================================== //
@@ -184,6 +184,7 @@ void setup() {
   // The default SPI MOSI pin (11) is used for I²S, so we need to use the
   // alternative MOSI pin (7)
   SPI.setMOSI(7);
+  FilteredAnalog<>::setupADC();
   display_L.begin();
   display_R.begin();
 }

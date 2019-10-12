@@ -58,7 +58,7 @@ class MIDIInputElement {
      *          that use data1 as an address (i.e. Note On, Note Off, Polyphonic
      *          Key Pressure and Control Change).
      */
-    virtual inline MIDICNChannelAddress
+    virtual MIDICNChannelAddress
     getTarget(const ChannelMessageMatcher &midimsg) const {
         return {int8_t(midimsg.data1), Channel(midimsg.channel), midimsg.CN};
     }
@@ -69,7 +69,7 @@ class MIDIInputElement {
      * @note    This base version of the function is only valid for non-Bankable
      *          MIDI input elements.
      */
-    virtual inline bool match(const MIDICNChannelAddress &target) const {
+    virtual bool match(const MIDICNChannelAddress &target) const {
         return MIDICNChannelAddress::matchSingle(this->address, target);
     }
 

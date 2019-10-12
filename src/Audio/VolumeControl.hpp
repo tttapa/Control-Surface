@@ -71,7 +71,7 @@ class VolumeControl : public Updatable<Potentiometer> {
 
   private:
     Array<AudioMixer4 *, N> mixers;
-    FilteredAnalog<7> filteredAnalog;
+    FilteredAnalog<> filteredAnalog;
     const float maxGain;
 };
 

@@ -37,7 +37,6 @@
 
 // Create a filtered analog object on pin A0:
 FilteredAnalog<10,      // Output precision in bits
-               4,       // How many bits to upsample
                2,       // The amount of filtering
                uint16_t // The integer type for the calculations
                >
@@ -47,7 +46,6 @@ FilteredAnalog<10,      // Output precision in bits
 // The number of bits required for the intermediate calculations increases if
 // you do so, so you have to use a larger type as well.
 FilteredAnalog<10,      // Output precision in bits
-               4,       // How many bits to upsample
                6,       // The amount of filtering
                uint32_t // The integer type for the calculations
                >
@@ -61,6 +59,8 @@ void setup() {
   Serial.begin(115200);
   while (!Serial)
     ;
+  // Select the correct ADC resolution
+  FilteredAnalog<>::setupADC();
   // If you want, you can add mapping functions to invert the input, for example
   analog.invert();
 }

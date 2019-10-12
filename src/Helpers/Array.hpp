@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <Arduino.h>
+#include <Helpers/Error.hpp>
 #include <stddef.h>
 
 /**
@@ -21,20 +21,16 @@ struct Array {
     /**
      * @brief   Get the element at the given index.
      * 
-     * @note    No bounds checking is performed.
+     * @note    Bounds checking is performed. If fatal errors are disabled, the
+     *          last element is returned if the index is out of bounds. 
      * 
      * @param   index
      *          The (zero-based) index of the element to return.
      */
     T &operator[](size_t index) {
         if (index >= N) { // TODO
-            Serial.println(__PRETTY_FUNCTION__);
-            Serial.print(F("Index out of bounds: "));
-            Serial.println(index);
+            ERROR(F("Index out of bounds: ") << index << F(" ≥ ") << N, 0xEDED);
             index = N - 1;
-#ifdef ARDUINO
-            delay(5000);
-#endif
         }
         return data[index];
     }
@@ -42,20 +38,16 @@ struct Array {
     /**
      * @brief   Get the element at the given index.
      * 
-     * @note    No bounds checking is performed.
+     * @note    Bounds checking is performed. If fatal errors are disabled, the
+     *          last element is returned if the index is out of bounds. 
      * 
      * @param   index
      *          The (zero-based) index of the element to return.
      */
     const T &operator[](size_t index) const {
         if (index >= N) { // TODO
-            Serial.println(__PRETTY_FUNCTION__);
-            Serial.print(F("Index out of bounds: "));
-            Serial.println(index);
+            ERROR(F("Index out of bounds: ") << index << F(" ≥ ") << N, 0xEDED);
             index = N - 1;
-#ifdef ARDUINO
-            delay(5000);
-#endif
         }
         return data[index];
     }

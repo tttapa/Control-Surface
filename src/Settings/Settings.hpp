@@ -8,8 +8,11 @@
  * @brief All user settings and debugging options can be changed here.
  */
 
-#include <Def/Def.hpp>
+#include <Def/Frequency.hpp>
+#include <Helpers/ADCConfig.hpp>
 #include <limits.h> // CHAR_BIT
+#include <stddef.h>
+#include <stdint.h>
 
 BEGIN_CS_NAMESPACE
 
@@ -30,6 +33,23 @@ BEGIN_CS_NAMESPACE
 /// The default baud rate for debug MIDI interfaces.
 constexpr unsigned long defaultBaudRate = 115200;
 
+/**
+ * The bit depth to use for the ADC (Analog to Digital Converter).
+ * 
+ * By default, the maximum supported resolution is used, but if you need it for
+ * compatibility with other code that expects the default 10-bit resolution, you
+ * can use 
+ * 
+ * ```cpp
+ * constexpr uint8_t ADC_BITS = 10;
+ * ```
+ * 
+ * If the library doesn't know your specific hardware, it defaults to 10 bits.
+ * This might not be the optimal resolution, so it's best to add the actual 
+ * resolution to @ref Helpers/ADCConfig.hpp.
+ */
+constexpr uint8_t ADC_BITS = ADC_RESOLUTION;
+
 /** 
  * The factor for the analog filter:  
  * Difference equation:
@@ -42,17 +62,11 @@ constexpr unsigned long defaultBaudRate = 115200;
 constexpr uint8_t ANALOG_FILTER_SHIFT_FACTOR = 2;
 
 /** 
- * The signed integer type to use for analog inputs during filtering.
- * Should be at least @f$ 10+\text{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits wide.
- * (10 bits of ADC resolution)
+ * The unsigned integer type to use for analog inputs during filtering.
  * 
  * @see FilteredAnalog
  */
 using ANALOG_FILTER_TYPE = uint16_t;
-
-/// The default number of bits to upsample the readings for FilteredAnalog.
-constexpr uint8_t ANALOG_UPSAMPLE = sizeof(ANALOG_FILTER_TYPE) * CHAR_BIT -
-                                    ADC_BITS - ANALOG_FILTER_SHIFT_FACTOR;
 
 /// The debounce time for momentary push buttons in milliseconds.
 constexpr unsigned long BUTTON_DEBOUNCE_TIME = 25; // milliseconds

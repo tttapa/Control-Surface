@@ -69,9 +69,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
 
   private:
     BankAddress address;
-    FilteredAnalog<Sender::precision(), 16 - ADC_BITS,
-                   ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
-        filteredAnalog;
+    FilteredAnalog<Sender::precision()> filteredAnalog;
 
   public:
     Sender sender;
@@ -139,9 +137,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
 
   private:
     BankAddress address;
-    FilteredAnalog<Sender::precision(), 16 - ADC_BITS,
-                   ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
-        filteredAnalog;
+    FilteredAnalog<Sender::precision()> filteredAnalog;
 
   public:
     Sender sender;

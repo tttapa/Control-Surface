@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include <Def/Def.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
 BEGIN_CS_NAMESPACE

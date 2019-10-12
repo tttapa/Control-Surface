@@ -5,6 +5,7 @@
 #include <Helpers/EMA.hpp>
 #include <Helpers/Hysteresis.hpp>
 #include <Helpers/IncreaseBitDepth.hpp>
+#include <Helpers/MinMaxFix.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -21,8 +22,6 @@ BEGIN_CS_NAMESPACE
  * 
  * @tparam  Precision
  *          The number of bits of precision the output should have.
- * @tparam  Upsample
- *          The number of bits to upsample the analog reading to.
  * @tparam  FilterShiftFactor
  *          The number of bits used for the EMA filter.
  *          The pole location is
@@ -34,12 +33,17 @@ BEGIN_CS_NAMESPACE
  *          Should be at least 
  *          @f$ 10 + \mathrm{Upsample} + \mathrm{FilterShiftFactor} @f$
  *          bits (@f$10@f$ is the number of bits of the ADC).
+ * @tparam  Upsample
+ *          The number of bits to upsample the analog reading by.
  * 
  * @ingroup HardwareUtils
  */
-template <uint8_t Precision = ADC_BITS, uint8_t Upsample = ANALOG_UPSAMPLE,
+template <uint8_t Precision = 10,
           uint8_t FilterShiftFactor = ANALOG_FILTER_SHIFT_FACTOR,
-          class FilterType = ANALOG_FILTER_TYPE>
+          class FilterType = ANALOG_FILTER_TYPE,
+          uint8_t Upsample =
+              min(sizeof(FilterType) * CHAR_BIT - ADC_BITS - FilterShiftFactor,
+                  sizeof(analog_t) * CHAR_BIT - ADC_BITS)>
 class FilteredAnalog {
   public:
     /**
@@ -125,6 +129,12 @@ class FilteredAnalog {
     analog_t getRawValue() const {
         return increaseBitDepth<ADC_BITS + Upsample, ADC_BITS, analog_t,
                                 analog_t>(ExtIO::analogRead(analogPin));
+    }
+
+    static void setupADC() {
+#if HAS_ANALOG_READ_RESOLUTION
+        analogReadResolution(ADC_BITS);
+#endif
     }
 
   private:

@@ -1,5 +1,6 @@
 #include "Control_Surface_Class.hpp"
 #include <Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
+#include <Hardware/FilteredAnalog.hpp>
 #include <MIDI_Constants/Control_Change.hpp>
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
@@ -22,9 +23,7 @@ void Control_Surface_::begin() {
     DEBUG_OUT.begin(defaultBaudRate);
     delay(250);
 #endif
-#ifdef ARDUINO_ARCH_ESP32
-    analogReadResolution(10);
-#endif
+    FilteredAnalog<>::setupADC();
     ExtendedIOElement::beginAll();
     MIDI().begin(); // initialize the MIDI interface
     MIDI().setCallbacks(this);

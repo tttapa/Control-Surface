@@ -20,9 +20,6 @@ BEGIN_CS_NAMESPACE
 class MIDIInputElementNote : public MIDIInputElement,
                              public DoublyLinkable<MIDIInputElementNote> {
   protected:
-    MIDIInputElementNote() {} // not used, only for virtual inheritance
-
-  public:
     /**
      * @brief   Constructor.
      * @todo    Documentation.
@@ -33,6 +30,7 @@ class MIDIInputElementNote : public MIDIInputElement,
         elements.append(this);
     }
 
+  public:
     /**
      * @brief   Destructor.
      * @todo    Documentation.

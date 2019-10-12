@@ -65,9 +65,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
     analog_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<Sender::precision(), 16 - ADC_BITS,
-                   ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
-        filteredAnalog;
+    FilteredAnalog<Sender::precision()> filteredAnalog;
     const MIDICNChannelAddress address;
 
   public:
@@ -135,9 +133,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
     analog_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<Sender::precision(), 16 - ADC_BITS,
-                   ANALOG_FILTER_SHIFT_FACTOR, uint32_t>
-        filteredAnalog;
+    FilteredAnalog<Sender::precision()> filteredAnalog;
     const MIDICNChannelAddress address;
 
   public:
