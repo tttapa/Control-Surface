@@ -45,12 +45,16 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the filtered analog value of 10 bits as a 
-     *          parameter, and should return a value of 10 bits.
+     *          should take the filtered analog value of @f$ 16 - 
+     *          \mathrm{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits as a parameter, 
+     *          and should return a value in the same range.
      * 
      * @see     FilteredAnalog::map
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
+
+    /// Invert the analog value.
+    void invert() { filteredAnalog.invert(); }
 
     /**
      * @brief   Get the raw value of the analog input (this is the value 
@@ -113,12 +117,16 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the filtered analog value of 16 bits [0, 65535] as a 
-     *          parameter, and should return a value of 16 bits [0, 65535].
+     *          should take the filtered analog value of @f$ 16 - 
+     *          \mathrm{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits as a parameter, 
+     *          and should return a value in the same range.
      * 
      * @see     FilteredAnalog::map
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
+
+    /// Invert the analog value.
+    void invert() { filteredAnalog.invert(); } 
 
     /**
      * @brief   Get the raw value of the analog input (this is the value 

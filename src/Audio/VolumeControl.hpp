@@ -61,13 +61,16 @@ class VolumeControl : public Updatable<Potentiometer> {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the filtered analog value of 10 bits as a 
-     *          parameter, and should return a value of 10 bits.
+     *          should take the filtered analog value of @f$ 16 - 
+     *          \mathrm{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits as a parameter, 
+     *          and should return a value in the same range.
      * 
      * @see     FilteredAnalog::map
-     * @todo    Higher analog resolution?
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
+
+    /// Invert the analog value.
+    void invert() { filteredAnalog.invert(); } 
 
   private:
     Array<AudioMixer4 *, N> mixers;

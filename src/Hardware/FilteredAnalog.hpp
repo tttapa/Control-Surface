@@ -60,8 +60,9 @@ class FilteredAnalog {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the filtered value (of 10 + Upsample bits wide) as a 
-     *          parameter, and should return a value of 10 bits + Upsample .
+     *          should take the filtered value (of ADC_BITS + Upsample bits 
+     *          wide) as a parameter, and should return a value of ADC_BITS + 
+     *          Upsample bits wide.
      * 
      * @note    Applying the mapping function before filtering could result in
      *          the noise being amplified to such an extent that filtering it

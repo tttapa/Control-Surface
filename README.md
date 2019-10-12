@@ -101,12 +101,22 @@ fully implemented, feel free to open an issue, so I know where to focus on first
 
 ## Recent Breaking Changes
 
+ - 3c01c7d5eb60e59720540d5a77095468e6984a58  
+   The **maximum supported ADC resolution is now used by default** (e.g. 13 bits
+   on Teensy 3.x, 12 bits on ESP32).  
+   This increases the accuracy of analog inputs and controls for the Control 
+   Surface library, but could cause problems if your code uses other libraries
+   that expect the resolution to be 10 bits.  
+   You can change the default resolution to 10 bits in 
+   [`src/Settings/Settings.hpp`](https://tttapa.github.io/Control-Surface/Doc/Doxygen/db/d02/Settings_8hpp.html#a8db0fcdeeb644f813c9b29211ce0a1ae)
+   if you have to.
  - 31edaa6b76477fdf152c19fd34f7e4e8506561e6  
-   The mapping function is now applied before applying hysteresis. This means 
-   that the input and output values of the function should be 16 bits wide 
-   instead of 7. The signature of the mapping function is now 
-   `analog_t f(analog_t raw)`, where the return value and raw are both numbers
-   in [0, 65535].
+   The **mapping function** is now applied before applying hysteresis.  
+   This means that the input and output values of the function should be 
+   16 - `ANALOG_FILTER_SHIFT_FACTOR` bits wide instead of 7. By default this is
+   **14 bits**.  
+   The signature of the mapping function is now `analog_t f(analog_t raw)`, 
+   where the return value and raw are both numbers in [0, 16383].
 
 ## Work in progress
 
