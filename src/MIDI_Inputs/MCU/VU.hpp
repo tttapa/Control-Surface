@@ -35,6 +35,14 @@ class IVU {
 
 namespace MCU {
 
+/// VU Decay time constants
+namespace VUDecay {
+/// Don't decay automatically, hold the latest value until a new one is received.
+constexpr unsigned int Hold = 0;
+/// Decay one segment/block every 150 ms if no new values are received.
+constexpr unsigned int Default = 150;
+} // namespace VUDecay
+
 /// Empty callback for VU meters that does nothing.
 struct VUEmptyCallback {
     template <class T>
@@ -87,9 +95,6 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     uint8_t getValue() override { return getValue(getSelection()); }
     /// Return the overload status.
     bool getOverload() override { return getOverload(getSelection()); }
-
-    /// @todo   Move to an easily accessible namespace
-    constexpr static unsigned int NO_DECAY = 0;
 
     /// Update is called periodically, it decays the meter if the time is right.
     void update() override {
@@ -234,7 +239,7 @@ class VU : public GenericVU<> {
      *          the decay.
      */
     VU(uint8_t track, const MIDICNChannel &channelCN,
-       unsigned int decayTime = 150)
+       unsigned int decayTime = VUDecay::Default)
         : GenericVU<>{
               track,
               channelCN,
@@ -256,7 +261,7 @@ class VU : public GenericVU<> {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(uint8_t track, unsigned int decayTime = 150)
+    VU(uint8_t track, unsigned int decayTime = VUDecay::Default)
         : GenericVU<>{
               track,
               CHANNEL_1,
@@ -366,7 +371,8 @@ class VU : public GenericVU<NumBanks> {
      *          the decay.
      */
     VU(const BankConfig<NumBanks> &config, uint8_t track,
-       const MIDICNChannel &channelCN, unsigned int decayTime = 150)
+       const MIDICNChannel &channelCN,
+       unsigned int decayTime = VUDecay::Default)
         : GenericVU<NumBanks>{
               config, track, channelCN, decayTime, {},
           } {}
@@ -388,7 +394,7 @@ class VU : public GenericVU<NumBanks> {
      *          the decay.
      */
     VU(const BankConfig<NumBanks> &config, uint8_t track,
-       unsigned int decayTime = 150)
+       unsigned int decayTime = VUDecay::Default)
         : GenericVU<NumBanks>{
               config, track, CHANNEL_1, decayTime, {},
           } {}

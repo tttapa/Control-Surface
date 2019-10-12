@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "Makefile.common": "makefile",
         "*.axbm": "cpp",
         "*.ipp": "cpp",
         "*.tcc": "cpp",
@@ -60,7 +61,16 @@
         "typeindex": "cpp",
         "__mutex_base": "cpp",
         "random": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "__bit_reference": "cpp",
+        "__hash_table": "cpp",
+        "__split_buffer": "cpp",
+        "__tree": "cpp",
+        "iterator": "cpp",
+        "map": "cpp",
+        "set": "cpp"
     },
     "files.exclude": {
         "**/.git": true,

@@ -36,8 +36,9 @@
  * @note    There seem to be some differences in the way some applications 
  *          handle VU meters: some expect the hardware to decay automatically,
  *          some don't.  
- *          If you notice that the meters behave strangely, try both decay 
- *          options of the MCU::VU class, or try a different decay time.
+ *          If you notice that the meters behave strangely, try both 
+ *          MCU::VUDecay::Hold and MCU::VUDecay::Default, or try a different 
+ *          decay time.
  * 
  * Demo
  * ----
@@ -121,9 +122,9 @@ MIDINote solo[8] = {
   {MCU::SOLO_6}, {MCU::SOLO_7}, {MCU::SOLO_8},
 };
 
-const auto decay = MCU::VU::NO_DECAY;
+constexpr unsigned int decay = MCU::VUDecay::Hold;
 // Try this option if your DAW doesn't decay the VU meters automatically
-// const auto decay = 60; // milliseconds to decay one block
+//   constexpr unsigned int decay = 60; // milliseconds to decay one block
 
 // VU meters
 MCU::VU VUMeters[8] = {

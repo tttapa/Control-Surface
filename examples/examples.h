@@ -736,6 +736,116 @@
  */
 
 /**
+ * @example   "MCU-OLED-SSD1306.ino"
+ * 
+ * MCU-OLED-SSD1306
+ * ================
+ *
+ * An example demonstrating the use of DisplayElement%s to display information
+ * from the DAW on a small OLED display.
+ *
+ * @boards  Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5:  Push button (to ground)
+ * - 6:  Push button (to ground)
+ * - 7:  OLED Data/D1 (SPI MOSI)
+ * - 13: OLED Clock/D0 (SPI SCK)
+ * - 17: OLED Data/Command
+ * - 10: OLED Cable Select
+ * 
+ * Add a capacitor between the reset pin of the display and ground, and a 
+ * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
+ * work fine.  
+ * You do need some way to reset the display, without it, it won't work.  
+ * Alternatively, you could use an IO pin from the Teensy to reset the 
+ * display, but this just "wastes" a pin.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - The time (bars, beats, fraction), play and record status are shown at the 
+ *   top of the display.
+ * - For each of the 8 first tracks, a VU level meter with peak indicator and
+ *   a V-Pot ring showing the pan are displayed, as well as the the mute, solo 
+ *   and record arm status.
+ * - Two tracks are displayed at once. By pressing the push buttons connected
+ *   to pins 5 and 6, you can cycle through four banks to display all 8 tracks.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
+ * 
+ * @note    There seem to be some differences in the way some applications 
+ *          handle VU meters: some expect the hardware to decay automatically,
+ *          some don't.  
+ *          If you notice that the meters behave strangely, try both 
+ *          MCU::VUDecay::Hold and MCU::VUDecay::Default, or try a different 
+ *          decay time.
+ * 
+ * Written by PieterP, 2019-11-12  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "MCU-OLED-SSD1306-x2.ino"
+ * 
+ * MCU-OLED-SSD1306-x2
+ * ===================
+ *
+ * An example demonstrating the use of DisplayElement%s to display information
+ * from the DAW on two small OLED displays.
+ *
+ * @boards  Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5:  Push button (to ground)
+ * - 7:  OLED Data/D1 (SPI MOSI)
+ * - 13: OLED Clock/D0 (SPI SCK)
+ * - 17: OLED Data/Command
+ * - 10: Left OLED Cable Select
+ * - 18: Right OLED Cable Select
+ * 
+ * Add a capacitor between the reset pins of the displays and ground, and a 
+ * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
+ * work fine.  
+ * You do need some way to reset the displays, without it, it won't work.  
+ * Alternatively, you could use an IO pin from the Teensy to reset the 
+ * displays, but this just "wastes" a pin.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - The time (bars, beats, fraction), play and record status are shown at the 
+ *   top of the display.
+ * - For each of the 8 first tracks, a VU level meter with peak indicator and
+ *   a V-Pot ring showing the pan are displayed, as well as the the mute, solo 
+ *   and record arm status.
+ * - Four tracks are displayed at once. By pressing the push button connected
+ *   to pin 5, you can switch between two banks to display all 8 tracks.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
+ * 
+ * @note    There seem to be some differences in the way some applications 
+ *          handle VU meters: some expect the hardware to decay automatically,
+ *          some don't.  
+ *          If you notice that the meters behave strangely, try both 
+ *          MCU::VUDecay::Hold and MCU::VUDecay::Default, or try a different 
+ *          decay time.
+ * 
+ * Written by PieterP, 2019-11-12  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "1.Note-LED.ino"
  * 
  * 1.Note-LED
@@ -955,12 +1065,12 @@
  * - 10: Left OLED Cable Select
  * - 18: Right OLED Cable Select
  * 
- * Add a capacitor between the reset pin of the display and ground, and a 
+ * Add a capacitor between the reset pin of the displays and ground, and a 
  * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
  * work fine.  
- * You do need some way to reset the display, without it, it won't work.  
+ * You do need some way to reset the displays, without it, it won't work.  
  * Alternatively, you could use an IO pin from the Teensy to reset the 
- * display, but this just "wastes" a pin.
+ * displays, but this just "wastes" a pin.
  * 
  * Behavior
  * --------
@@ -1030,8 +1140,9 @@
  * @note    There seem to be some differences in the way some applications 
  *          handle VU meters: some expect the hardware to decay automatically,
  *          some don't.  
- *          If you notice that the meters behave strangely, try both decay 
- *          options of the MCU::VU class, or try a different decay time.
+ *          If you notice that the meters behave strangely, try both 
+ *          MCU::VUDecay::Hold and MCU::VUDecay::Default, or try a different 
+ *          decay time.
  * 
  * Demo
  * ----
