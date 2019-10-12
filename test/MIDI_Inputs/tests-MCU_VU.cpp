@@ -89,6 +89,36 @@ TEST(MCUVU, decay) {
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
+TEST(MCUVU, getFloatValue) {
+    constexpr Channel channel = CHANNEL_3;
+    constexpr uint8_t track = 5;
+    constexpr unsigned int decayTime = 300;
+    MCU::VU vu = {track, channel, decayTime};
+    ChannelMessageMatcher midimsg = {CHANNEL_PRESSURE, channel,
+                                     (track - 1) << 4 | 0xA, 0};
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
+    MIDIInputElementChannelPressure::updateAllWith(midimsg);
+    EXPECT_FLOAT_EQ(vu.getFloatValue(), 10.0f / 12);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
+TEST(MCUVU, reset) {
+    constexpr Channel channel = CHANNEL_3;
+    constexpr uint8_t track = 5;
+    constexpr unsigned int decayTime = 300;
+    MCU::VU vu = {track, channel, decayTime};
+    ChannelMessageMatcher midimsg = {CHANNEL_PRESSURE, channel,
+                                     (track - 1) << 4 | 0xA, 0};
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
+    MIDIInputElementChannelPressure::updateAllWith(midimsg);
+    EXPECT_EQ(vu.getValue(), 0xA);
+    vu.reset();
+    EXPECT_EQ(vu.getValue(), 0x0);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
 // -------------------------------------------------------------------------- //
 
 TEST(MCUVUBankable, setValueBankChangeAddress) {

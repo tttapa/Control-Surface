@@ -30,7 +30,7 @@ class MIDIInputElement {
     virtual void begin() {}
 
     /// Reset the input element to its initial state.
-    virtual void reset() = 0;
+    virtual void reset() {}
 
     /// Update the value of the input element. Used for decaying VU meters etc.
     virtual void update() {}
