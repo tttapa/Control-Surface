@@ -95,3 +95,9 @@
  * @defgroup    Containers Containers
  * @brief   Containers like Array, BitArray and DoublyLinkedList.
  */
+
+/**
+ * @defgroup    MIDIConstants MIDI Constants
+ * @brief   Constants for MIDI addresses, controller numbers, programs and 
+ *          voices, Mackie Control Universal controls ...
+ */

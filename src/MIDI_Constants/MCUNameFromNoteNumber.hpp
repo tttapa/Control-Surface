@@ -9,6 +9,10 @@
 #include <Settings/NamespaceSettings.hpp>
 
 BEGIN_CS_NAMESPACE
+
+/// @addtogroup    MIDIConstants
+/// @{
+
 namespace MCU {
 
 /**
@@ -21,4 +25,7 @@ namespace MCU {
 const __FlashStringHelper *getMCUNameFromNoteNumber(uint8_t note);
 
 } // namespace MCU 
+
+/// @}
+
 END_CS_NAMESPACE

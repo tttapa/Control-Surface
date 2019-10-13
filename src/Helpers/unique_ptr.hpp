@@ -47,7 +47,7 @@ inline T &&forward(typename remove_reference<T>::type &&t) noexcept {
 
 #endif
 
-/// @ingroup    Utilities
+/// @addtogroup    Utilities
 /// @{
 
 /**

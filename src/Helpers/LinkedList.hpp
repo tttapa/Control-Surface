@@ -10,7 +10,7 @@
 #include <iterator>
 #endif
 
-/// @ingroup Containers
+/// @addtogroup Containers
 /// @{
 
 /**

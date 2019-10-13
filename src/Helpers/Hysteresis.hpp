@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-/// @ingroup    Utilities
+/// @addtogroup    Utilities
 /// @{
 
 /**

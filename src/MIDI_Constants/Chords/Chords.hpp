@@ -3,6 +3,8 @@
 #include "Intervals.hpp"
 #include <Helpers/ArrayHelpers.hpp>
 
+BEGIN_CS_NAMESPACE
+
 class IChord {
   public:
     virtual ~IChord() = default;
@@ -30,6 +32,10 @@ class Chord : public IChord {
     Array<int8_t, N> offsets;
 };
 
+/// @addtogroup MIDIConstants
+/// @{
+
+/// Predefined Chord constants.
 namespace Chords {
 
 using namespace Intervals;
@@ -50,6 +56,7 @@ const Chord<3> MajorSeventh = {{M3, P5, M7}};
 
 } // namespace Chords
 
+/// Predefined Chord constants with bass notes.
 namespace Bass {
 
 using namespace Intervals;
@@ -59,3 +66,7 @@ const Chord<2> Double = {{-P8, -2 * P8}};
 const Chord<3> Triple = {{-P8, -2 * P8, -3 * P8}};
 
 } // namespace Bass
+
+/// @}
+
+END_CS_NAMESPACE

@@ -5,7 +5,7 @@
 #include <Helpers/Error.hpp>
 #include <stdint.h>
 
-/// @ingroup Containers
+/// @addtogroup Containers
 /// @{
 
 /**

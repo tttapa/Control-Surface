@@ -170,6 +170,10 @@ cpp += '\n'
 
 hpp += """\
 BEGIN_CS_NAMESPACE
+
+/// @addtogroup    MIDIConstants
+/// @{{
+
 namespace MCU {{
 
 /**
@@ -182,6 +186,9 @@ namespace MCU {{
 const __FlashStringHelper *{functionname}(uint8_t note);
 
 }} // namespace MCU 
+
+/// @}}
+
 END_CS_NAMESPACE
 """.format(functionname=functionname)
 

@@ -2,11 +2,11 @@
 
 #include <Arduino.h>
 
-/// @ingroup    Utilities
-/// @{
-
 /// A function type that returns a time value.
 using timefunction = unsigned long (*)();
+
+/// @addtogroup    Utilities
+/// @{
 
 /**
  * @brief   A class for easily managing timed events. A wrapper for "Blink 

@@ -10,9 +10,6 @@
 #define USE_CONSTEXPR_ARRAY_HELPERS
 #endif
 
-/// @ingroup Containers
-/// @{
-
 /// https://en.cppreference.com/w/cpp/algorithm/generate
 template <class ForwardIt, class Generator>
 USE_CONSTEXPR_ARRAY_HELPERS void generate(ForwardIt first, ForwardIt last,
@@ -46,6 +43,9 @@ class Incrementor {
     const V increment;
 };
 
+/// @addtogroup Containers
+/// @{
+
 /**
  * @brief   Generate an array using the given generator.
  * 
@@ -64,6 +64,27 @@ class Incrementor {
 template <class T, size_t N, class G>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> generateArray(G generator) {
     Array<T, N> array{};
+    generate(array.begin(), array.end(), generator);
+    return array;
+}
+
+/**
+ * @brief   Generate an array using the given generator.
+ * 
+ * @tparam  N 
+ *          The number of elements in the array.
+ * @tparam  G
+ *          The generator functor type.
+ * 
+ * @param   generator
+ *          A functor that will be called to create each element.
+ * 
+ * @return  The generated array.
+ */
+template <size_t N, class G>
+USE_CONSTEXPR_ARRAY_HELPERS auto generateArray(G generator)
+    -> Array<decltype(generator()), N> {
+    Array<decltype(generator()), N> array{};
     generate(array.begin(), array.end(), generator);
     return array;
 }

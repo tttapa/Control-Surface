@@ -75,6 +75,12 @@ TEST(generateArray, simple) {
     EXPECT_EQ(x, y);
 }
 
+TEST(generateArray, simpleNoType) {
+    auto x = generateArray<4>([i = 0u]() mutable { return i++; });
+    Array<unsigned int, 4> y = {0, 1, 2, 3};
+    EXPECT_EQ(x, y);
+}
+
 TEST(fillArray, simple) {
     struct S {
         int i;
