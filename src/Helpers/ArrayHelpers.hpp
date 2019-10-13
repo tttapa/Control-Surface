@@ -10,6 +10,9 @@
 #define USE_CONSTEXPR_ARRAY_HELPERS
 #endif
 
+/// @ingroup Containers
+/// @{
+
 /// https://en.cppreference.com/w/cpp/algorithm/generate
 template <class ForwardIt, class Generator>
 USE_CONSTEXPR_ARRAY_HELPERS void generate(ForwardIt first, ForwardIt last,
@@ -96,7 +99,7 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> fillArray(Args... args) {
  *          values are calculated as the previous value incremented with a given
  *          value:  
  *          @f$ x[0] = start @f$  
- *          @f$ x[k+1] = x[k] + increment @f$.
+ *          @f$ x[k+1] = x[k] + increment @f$ .
  * 
  * For example:  
  * ```
@@ -156,3 +159,5 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, M + N> cat(const Array<T, M> &a,
         result[r] = b[i];
     return result;
 }
+
+/// @}

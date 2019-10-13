@@ -58,7 +58,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
 
     /**
      * @brief   Get the raw value of the analog input (this is the value 
-     *          without applying the mapping function first).
+     *          without applying the filter or the mapping function first).
      */
     analog_t getRawValue() const { return filteredAnalog.getRawValue(); }
 
@@ -130,7 +130,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
 
     /**
      * @brief   Get the raw value of the analog input (this is the value 
-     *          without applying the mapping function first).
+     *          without applying the filter or the mapping function first).
      */
     analog_t getRawValue() const { return filteredAnalog.getRawValue(); }
 

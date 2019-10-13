@@ -5,6 +5,9 @@
 #include <Helpers/Error.hpp>
 #include <stddef.h>
 
+/// @ingroup Containers
+/// @{
+
 /**
  * @brief   An array wrapper for easy copying, comparing, and iterating.
  * 
@@ -95,3 +98,5 @@ struct Array {
      */
     bool operator!=(const Array<T, N> &rhs) const { return !(*this == rhs); }
 };
+
+/// @}

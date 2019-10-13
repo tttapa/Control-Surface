@@ -6,7 +6,7 @@
 
 #include <Display/DisplayElement.hpp>
 #include <Display/DisplayInterface.hpp>
-#include <Helpers/MillisTimer.hpp>
+#include <Helpers/MillisMicrosTimer.hpp>
 
 BEGIN_CS_NAMESPACE
 

@@ -5,6 +5,9 @@
 #include <Helpers/Error.hpp>
 #include <stdint.h>
 
+/// @ingroup Containers
+/// @{
+
 /**
  * @brief   A class for arrays of bits.
  * 
@@ -108,3 +111,5 @@ class BitArray {
     constexpr static uint8_t bufferLength = (uint8_t)((N + 7) / 8);
     uint8_t buffer[bufferLength] = {};
 };
+
+/// @}

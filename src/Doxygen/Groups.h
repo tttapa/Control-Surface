@@ -83,3 +83,15 @@
  * @brief   The main class that initializes, manages and updates all other
  *          elements.
  */
+
+/**
+ * @defgroup    Utilities Utilities
+ * @brief   All kinds of utility and helper classes that are used throughout the
+ *          library, such as containers and filters.
+ */
+
+/** 
+ * @ingroup Utilities
+ * @defgroup    Containers Containers
+ * @brief   Containers like Array, BitArray and DoublyLinkedList.
+ */

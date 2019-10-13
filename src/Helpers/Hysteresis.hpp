@@ -2,6 +2,9 @@
 
 #include <stdint.h>
 
+/// @ingroup    Utilities
+/// @{
+
 /**
  * @brief   A class for applying hysteresis to a given input.
  *
@@ -65,3 +68,5 @@ class Hysteresis {
     constexpr static T_out max_out = max_in >> BITS;
     static_assert(max_in > 0, "Error: only unsigned types are supported");
 };
+
+/// @}

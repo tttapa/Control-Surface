@@ -10,6 +10,9 @@
 #include <iterator>
 #endif
 
+/// @ingroup Containers
+/// @{
+
 /**
  * @brief   A class for doubly linked lists.
  * 
@@ -299,3 +302,5 @@ class DoublyLinkable {
     Node *previous = nullptr;
     virtual ~DoublyLinkable() = default;
 };
+
+/// @}

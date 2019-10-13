@@ -47,16 +47,21 @@ inline T &&forward(typename remove_reference<T>::type &&t) noexcept {
 
 #endif
 
+/// @ingroup    Utilities
+/// @{
+
 /**
  * @brief   Very basic smart pointer. Doesn't support array types.
  * 
  * @tparam  T
+ *          The type of the pointee.
  */
 template <class T>
 class unique_ptr {
   public:
     unique_ptr() = default;
     explicit unique_ptr(T *p) : p(p) {}
+    unique_ptr(const unique_ptr &) = delete;
     template <class U>
     unique_ptr(unique_ptr<U> &&r) {
         reset(r.release());
@@ -64,6 +69,7 @@ class unique_ptr {
 
     ~unique_ptr() { delete p; }
 
+    unique_ptr &operator=(const unique_ptr &) = delete;
     unique_ptr<T> &operator=(unique_ptr<T> &&r) {
         reset(r.release());
         return *this;
@@ -99,3 +105,5 @@ template <typename T, typename... Args>
 unique_ptr<T> make_unique(Args &&... args) {
     return unique_ptr<T>(new T(forward<Args>(args)...));
 }
+
+/// @}
