@@ -71,7 +71,7 @@ TEST(Error, exceptionWhatErrorCode) {
         FAIL();
     } catch (ErrorException &e) {
         std::string msg = e.what();
-        cout << msg << endl;
+        std::cout << msg << endl;
         EXPECT_TRUE(ends_with(msg, "An error occured"));
         EXPECT_EQ(e.getErrorCode(), 12);
     }

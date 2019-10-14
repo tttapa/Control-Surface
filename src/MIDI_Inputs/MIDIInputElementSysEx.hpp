@@ -1,5 +1,3 @@
-#if 0
-
 #pragma once
 
 #include "MIDIInputElement.hpp"
@@ -25,8 +23,8 @@ class MIDIInputElementSysEx : public DoublyLinkable<MIDIInputElementSysEx> {
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementSysEx(const MIDICNChannelAddress &address)
-        : MIDIInputElement{address} {
+    MIDIInputElementSysEx(uint8_t CN = 0)
+        : CN{CN} {
         GUARD_LIST_LOCK;
         elements.append(this);
     }
@@ -40,6 +38,15 @@ class MIDIInputElementSysEx : public DoublyLinkable<MIDIInputElementSysEx> {
         GUARD_LIST_LOCK;
         elements.remove(this);
     }
+
+    /// Initialize the input element.
+    virtual void begin() {}
+
+    /// Reset the input element to its initial state.
+    virtual void reset() {}
+
+    /// Update the value of the input element. Used for decaying VU meters etc.
+    virtual void update() {}
 
     /**
      * @brief   Initialize all MIDIInputElementSysEx elements.
@@ -80,7 +87,7 @@ class MIDIInputElementSysEx : public DoublyLinkable<MIDIInputElementSysEx> {
      * 
      * @see     MIDIInputElementSysEx#updateWith
      */
-    static void updateAllWith(const ChannelMessageMatcher &midimsg) {
+    static void updateAllWith(SysExMessage midimsg) {
         for (MIDIInputElementSysEx &e : elements)
             if (e.updateWith(midimsg)) {
                 e.moveDown();
@@ -92,6 +99,14 @@ class MIDIInputElementSysEx : public DoublyLinkable<MIDIInputElementSysEx> {
     }
 
   private:
+    /// @todo   Documentation.
+    bool updateWith(SysExMessage midimsg) {
+        return midimsg.CN == this->CN && updateImpl(midimsg);
+    }
+
+    /// @todo   Documentation.
+    virtual bool updateImpl(SysExMessage midimsg) = 0;
+
     /**
      * @brief   Move down this element in the linked list of elements.
      * 
@@ -103,6 +118,9 @@ class MIDIInputElementSysEx : public DoublyLinkable<MIDIInputElementSysEx> {
         elements.moveDown(this);
     }
 
+    const uint8_t *sysExData;
+    uint8_t CN;
+
     static DoublyLinkedList<MIDIInputElementSysEx> elements;
 #ifdef ESP32
     static std::mutex mutex;
@@ -112,5 +130,3 @@ class MIDIInputElementSysEx : public DoublyLinkable<MIDIInputElementSysEx> {
 #undef GUARD_LIST_LOCK
 
 END_CS_NAMESPACE
-
-#endif

@@ -112,15 +112,15 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> copyAs(const Array<U, N> &src) {
 
 template <class T, size_t N, class... Args>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> fillArray(Args... args) {
-    return generateArray<T, N>([&]() { return T{args...}; });
+    return generateArray<N>([&]() { return T{args...}; });
 }
 
 /**
  * @brief   Generate an array where the first value is given, and the subsequent
  *          values are calculated as the previous value incremented with a given
  *          value:  
- *          @f$ x[0] = start @f$  
- *          @f$ x[k+1] = x[k] + increment @f$ .
+ *          @f$ x[0] = \mathrm{start} @f$  
+ *          @f$ x[k+1] = x[k] + \mathrm{increment} @f$ .
  * 
  * For example:  
  * ```

@@ -6,6 +6,7 @@
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <MIDI_Inputs/MIDIInputElementNote.hpp>
 #include <MIDI_Inputs/MIDIInputElementPC.hpp>
+#include <MIDI_Inputs/MIDIInputElementSysEx.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Selectors/Selector.hpp>
 
@@ -32,6 +33,7 @@ void Control_Surface_::begin() {
     MIDIInputElementPC::beginAll();
     MIDIInputElementChannelPressure::beginAll();
     MIDIInputElementNote::beginAll();
+    MIDIInputElementSysEx::beginAll();
     Updatable<>::beginAll();
     Updatable<Potentiometer>::beginAll();
     Updatable<MotorFader>::beginAll();
@@ -129,7 +131,7 @@ void Control_Surface_::onSysExMessage(Parsing_MIDI_Interface &midi) {
     // continue handling it.
     if (sysExMessageCallback && sysExMessageCallback(msg))
         return;
-    // TODO: handle SysEx input
+    MIDIInputElementSysEx::updateAllWith(msg);
 }
 
 void Control_Surface_::onRealtimeMessage(Parsing_MIDI_Interface &midi,
@@ -146,6 +148,8 @@ void Control_Surface_::updateInputs() {
     MIDIInputElementCC::updateAll();
     MIDIInputElementNote::updateAll();
     MIDIInputElementChannelPressure::updateAll();
+    MIDIInputElementPC::updateAll();
+    MIDIInputElementSysEx::updateAll();
 }
 
 void Control_Surface_::updateDisplays() {

@@ -79,6 +79,7 @@
 // #include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
+#include <MIDI_Inputs/MCU/LCD.hpp>
 #include <MIDI_Inputs/NoteCCRange.hpp>
 
 #include <MIDI_Inputs/LEDs/NoteCCRangeLEDs.hpp>
