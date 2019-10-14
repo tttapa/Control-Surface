@@ -386,6 +386,8 @@
  *           ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛
  * SS    >───────────┴──────────────────────┴──────────────────────┘
  * ```
+ * Remember to connect the enable pin of the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
  * 
  * The order of the colors doesn't matter. You can change them in software using
  * the `ShiftRegisterOutRGB::redBit`, `ShiftRegisterOutRGB::greenBit` and 

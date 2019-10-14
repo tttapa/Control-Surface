@@ -1,7 +1,10 @@
 #include "MIDI_Parser.hpp"
 #include "SysExBuffer.hpp"
+#include <Helpers/Array.hpp>
 
-#if defined(USB_MIDI4_SERIAL) || defined(USB_MIDI4)
+#ifdef MIDI_NUM_CABLES
+#define USB_MIDI_NUMBER_OF_CABLES MIDI_NUM_CABLES
+#elif defined(USB_MIDI4_SERIAL) || defined(USB_MIDI4)
 #define USB_MIDI_NUMBER_OF_CABLES 4
 #elif defined(USB_MIDI16_AUDIO_SERIAL) || defined(USB_MIDI16_SERIAL) ||        \
     defined(USB_MIDI16)
@@ -41,7 +44,7 @@ class USBMIDI_Parser : public MIDI_Parser {
 
   private:
 #if !IGNORE_SYSEX
-    SysExBuffer sysexbuffers[USB_MIDI_NUMBER_OF_CABLES];
+    Array<SysExBuffer, USB_MIDI_NUMBER_OF_CABLES> sysexbuffers;
 #endif
 };
 
