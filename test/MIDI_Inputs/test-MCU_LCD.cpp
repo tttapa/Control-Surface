@@ -1,6 +1,6 @@
 #include <gtest-wrapper.h>
 
-#include <MIDI_Inputs/MCU/LCDSysEx.hpp>
+#include <MIDI_Inputs/MCU/LCD.hpp>
 
 USING_CS_NAMESPACE;
 
