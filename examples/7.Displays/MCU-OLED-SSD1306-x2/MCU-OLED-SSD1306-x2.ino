@@ -141,6 +141,8 @@ IncrementSelector<2> bankselector = {bank, 5};
    Define all elements that listen for MIDI messages.
 */
 
+MCU::LCD<> lcd = {};
+
 // Time display_L keeps track of the bar counter
 MCU::TimeDisplay timedisplay = {};
 
@@ -196,6 +198,31 @@ MCU::Bankable::VPotRing<2> vpot[] = {
 /*
    Define all display_L elements that display_L the state of the input elements.
 */
+
+class LCDDisplay : public DisplayElement {
+ public:
+  LCDDisplay(DisplayInterface &display, const MCU::LCD<> &lcd,
+             const Bank<2> &bank, uint8_t offset, PixelLocation loc)
+    : DisplayElement(display), lcd(lcd), bank(bank), offset(offset), loc(loc) {}
+
+  void draw() override {
+    char buffer[8];
+    strncpy(buffer,
+            lcd.getText() +
+              7 * (bank.getOffset() + offset),
+            6);
+    display.setCursor(loc.x, loc.y);
+    display.setTextSize(1);
+    display.print(buffer);
+  }
+
+ private:
+  const MCU::LCD<> &lcd;
+  const Bank<2> &bank;
+  uint8_t offset;
+  PixelLocation loc;
+} lcddisp3 = {display_R, lcd, bank, 2, {4, 0}},
+  lcddisp4 = {display_R, lcd, bank, 3, {68, 0}};
 
 // Time display
 MCU::TimeDisplayDisplay timedisplaydisplay = {

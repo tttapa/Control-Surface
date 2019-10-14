@@ -54,6 +54,12 @@ class OutputBank {
      */
     uint8_t getTracksPerBank() const { return tracksPerBank; }
 
+    /**
+     * @brief   Get the offset (number of banks times the index of the selected 
+     *          bank)
+     */
+    uint8_t getOffset() const { return getSelection() * getTracksPerBank(); }
+
   private:
     uint8_t tracksPerBank;
     setting_t bankSetting;

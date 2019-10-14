@@ -3,7 +3,7 @@
 BEGIN_CS_NAMESPACE
 
 MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
-    DEBUGFN(hex << NAMEDVALUE(+midiByte) << dec);
+    DEBUGFN(hex << NAMEDVALUE(midiByte) << dec);
 #if !IGNORE_SYSEX
     // If the previous byte was a SysExStart
     // I have to handle a start in the next time step, because a start can also

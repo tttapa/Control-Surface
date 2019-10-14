@@ -45,7 +45,7 @@ class BankDisplay : public DisplayElement {
         display.setTextColor(color);
         display.setTextSize(size);
         display.setCursor(x, y);
-        display.print(bank.getSelection() * bank.getTracksPerBank() + offset);
+        display.print(bank.getOffset() + offset);
     }
 
   private:
