@@ -55,7 +55,7 @@ class VUDisplay : public DisplayElement {
         } else if (!decaying &&
                    (millis() - previousDecay > VU_PEAK_HOLD_TIME)) {
             decaying = true;
-            previousDecay += VU_PEAK_HOLD_TIME - VU_PEAK_DECAY_TIME;
+            previousDecay += VU_PEAK_HOLD_TIME - decayTime;
         } else if (decaying && (millis() - previousDecay > decayTime)) {
             if (peak > 0) {
                 peak -= VU_PEAK_SMOOTH_DECAY ? 1 : (blockheight + spacing);
