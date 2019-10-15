@@ -86,6 +86,10 @@
 #include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
 #include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>
 
+#ifdef FASTLED_VERSION
+#include <MIDI_Inputs/LEDs/FastLED.hpp>
+#endif
+
 // ------------------------------- Selectors -------------------------------- //
 #include <Selectors/IncrementDecrementSelector.hpp>
 #include <Selectors/IncrementSelector.hpp>
