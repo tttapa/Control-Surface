@@ -14,4 +14,16 @@ Color DefaultColorMapper::operator()(uint8_t value) const {
 
 END_CS_NAMESPACE
 
+#ifdef TEST_COMPILE_ALL_HEADERS_SEPARATELY
+NoteValueFastLED<>;
+NoteRangeFastLED<12>;
+CCValueFastLED<>;
+CCRangeFastLED<12>;
+
+Bankable::NoteValueFastLED<4>;
+Bankable::NoteRangeFastLED<4, 12>;
+Bankable::CCValueFastLED<4>;
+Bankable::CCRangeFastLED<4, 12>;
+#endif
+
 #endif

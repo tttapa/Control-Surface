@@ -115,7 +115,7 @@ class NoteValue : public GenericNoteCCRange<MIDIInputElementNote, 1> {
     NoteValue(MIDICNChannelAddress address)
         : GenericNoteCCRange<MIDIInputElementNote, 1>{address, {}} {}
 };
-using MIDINote __attribute__((deprecated)) = NoteValue;
+using MIDINote[[deprecated("Use NoteValue instead")]] = NoteValue;
 
 template <uint8_t RangeLen>
 class CCRange : public GenericNoteCCRange<MIDIInputElementCC, RangeLen> {
@@ -193,7 +193,7 @@ class NoteValue : public GenericNoteCCRange<MIDIInputElementNote, 1, NumBanks> {
               config, address, {}} {}
 };
 template <uint8_t NumBanks>
-using MIDINote __attribute__((deprecated)) = NoteValue<NumBanks>;
+using MIDINote[[deprecated("Use NoteValue instead")]] = NoteValue<NumBanks>;
 
 template <uint8_t RangeLen, uint8_t NumBanks>
 class CCRange
