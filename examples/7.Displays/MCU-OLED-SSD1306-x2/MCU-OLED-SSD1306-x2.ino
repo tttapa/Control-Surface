@@ -206,14 +206,23 @@ class LCDDisplay : public DisplayElement {
     : DisplayElement(display), lcd(lcd), bank(bank), offset(offset), loc(loc) {}
 
   void draw() override {
-    char buffer[8];
-    strncpy(buffer,
-            lcd.getText() +
-              7 * (bank.getOffset() + offset),
-            6);
+    char buffer[7];
+    if (!separateTracks())
+      return;
+    const char *text = lcd.getText() + 7 * (bank.getOffset() + offset);
+    strncpy(buffer, text, 6);
     display.setCursor(loc.x, loc.y);
     display.setTextSize(1);
     display.print(buffer);
+  }
+
+  bool separateTracks() const {
+    for (uint8_t i = 0; i < 8; ++i) {
+      const char *text = lcd.getText() + 7 * i;
+      if (text[6] != ' ')
+        return false;
+    }
+    return true;
   }
 
  private:
@@ -221,8 +230,12 @@ class LCDDisplay : public DisplayElement {
   const Bank<2> &bank;
   uint8_t offset;
   PixelLocation loc;
-} lcddisp3 = {display_R, lcd, bank, 2, {4, 0}},
-  lcddisp4 = {display_R, lcd, bank, 3, {68, 0}};
+} lcddisps[] = {
+  {display_L, lcd, bank, 0, {0, 40}},
+  {display_L, lcd, bank, 1, {64, 40}},
+  {display_R, lcd, bank, 2, {0, 40}},
+  {display_R, lcd, bank, 3, {64, 40}},
+};
 
 // Time display
 MCU::TimeDisplayDisplay timedisplaydisplay = {
@@ -276,11 +289,11 @@ MCU::VUDisplay vuDisp[] = {
 
 // VPot rings
 MCU::VPotDisplay vpotDisp[] = {
-  // position (0, 10), outer radius (16) px, inner radius (13) px
-  {display_L, vpot[0], {0, 10}, 16, 13, WHITE},
-  {display_L, vpot[1], {64, 10}, 16, 13, WHITE},
-  {display_R, vpot[2], {0, 10}, 16, 13, WHITE},
-  {display_R, vpot[3], {64, 10}, 16, 13, WHITE},
+  // position (0, 10), outer radius (14) px, inner radius (12) px
+  {display_L, vpot[0], {0, 10}, 14, 12, WHITE},
+  {display_L, vpot[1], {64, 10}, 14, 12, WHITE},
+  {display_R, vpot[2], {0, 10}, 14, 12, WHITE},
+  {display_R, vpot[3], {64, 10}, 14, 12, WHITE},
 };
 
 // Bank seting
