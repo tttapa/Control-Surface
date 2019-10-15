@@ -843,7 +843,57 @@
  *          MCU::VUDecay::Hold and MCU::VUDecay::Default, or try a different 
  *          decay time.
  * 
- * Written by PieterP, 2019-11-12  
+ * Demo
+ * ----
+ * 
+ * @htmlonly
+ * <iframe width="560" height="315"
+ * src="https://www.youtube.com/embed/upL609Vkzug" frameborder="0"
+ * allow="accelerometer; autoplay; encrypted-media; gyroscope;
+ * picture-in-picture" allowfullscreen></iframe>
+ * @endhtmlonly
+ * 
+ * Written by PieterP, 2019-10-12  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "9.Note-FastLED.ino"
+ * 
+ * 9.Note-FastLED
+ * ==============
+ *
+ * This example demonstrates the use of addressable LEDs that respond to 
+ * incoming  MIDI note events.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * @note    You might lose incoming MIDI data while the LED strip is being 
+ *          updated. To avoid this, don't use an Arduino UNO.  
+ *          See <https://github.com/FastLED/FastLED/wiki/Interrupt-problems>
+ * 
+ * Connections  
+ * -----------
+ * 
+ * - 2: Data pin of NeoPixel LED strip with at least 8 pixels.
+ * 
+ * Behavior
+ * --------
+ * 
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the first LED
+ * will light up, if a Note Off event for that note is sent, the LED will turn 
+ * off.  
+ * If a MIDI Note On event for note 0x3D (C#4) is sent, the second LED will 
+ * light up, etc.  
+ * (A Note On event with a velocity of zero also counts as a Note Off event.)
+ * 
+ * Mapping
+ * -------
+ * 
+ * Route the MIDI output of a MIDI keyboard to the Arduino's MIDI input. Then
+ * play a middle C and some notes above it on the keyboard.
+ * 
+ * Written by PieterP, 2019-10-15  
  * https://github.com/tttapa/Control-Surface
  */
 

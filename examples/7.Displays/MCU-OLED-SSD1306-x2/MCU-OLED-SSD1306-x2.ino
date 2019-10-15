@@ -44,12 +44,20 @@
  *          MCU::VUDecay::Hold and MCU::VUDecay::Default, or try a different 
  *          decay time.
  * 
- * Written by PieterP, 2019-11-12  
+ * Demo
+ * ----
+ * 
+ * @htmlonly
+ * <iframe width="560" height="315"
+ * src="https://www.youtube.com/embed/upL609Vkzug" frameborder="0"
+ * allow="accelerometer; autoplay; encrypted-media; gyroscope;
+ * picture-in-picture" allowfullscreen></iframe>
+ * @endhtmlonly
+ * 
+ * Written by PieterP, 2019-10-12  
  * https://github.com/tttapa/Control-Surface
  */
 
-#include <Encoder.h> // Include the Encoder library.
-// This must be done before the Control Surface library.
 #include <Control_Surface.h> // Include the Control Surface library
 // Include the display interface you'd like to use
 #include <Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp>
@@ -58,18 +66,17 @@
 // ========================================================================== //
 
 /*
-   Instantiate a MIDI interface to use for the Control Surface.
-*/
+ * Instantiate a MIDI interface to use for the Control Surface.
+ */
 
 USBMIDI_Interface midi;
-// USBDebugMIDI_Interface midi;
 
 // ----------------------------- Display setup ------------------------------ //
 // ========================================================================== //
 
 /*
-   Instantiate and initialize the SSD1306 OLED display
-*/
+ * Instantiate and initialize the SSD1306 OLED display
+ */
 
 constexpr uint8_t SCREEN_WIDTH = 128;
 constexpr uint8_t SCREEN_HEIGHT = 64;
@@ -86,7 +93,6 @@ Adafruit_SSD1306 ssd1306Display_L = {
   SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,          OLED_DC,
   OLED_reset,   OLED_CS_L,     SPI_Frequency,
 };
-// Instantiate the displays
 Adafruit_SSD1306 ssd1306Display_R = {
   SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,          OLED_DC,
   OLED_reset,   OLED_CS_R,     SPI_Frequency,
@@ -103,10 +109,12 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
     : SSD1306_DisplayInterface(display) {}
 
   void begin() override {
-    // Initialize the Adafruit_SSD1306 display
+#if defined(ADAFRUIT_SSD1306_HAS_SETBUFFER) && ADAFRUIT_SSD1306_HAS_SETBUFFER
     disp.setBuffer(buffer);
+#endif
+    // Initialize the Adafruit_SSD1306 display
     if (!disp.begin())
-      FATAL_ERROR(F("SSD1306 allocation failed."), 0x1306);
+      FATAL_ERROR(F("SSD1306 initialization failed."), 0x1306);
 
     // If you override the begin method, remember to call the super class method
     SSD1306_DisplayInterface::begin();
@@ -114,20 +122,24 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
 
   void drawBackground() override { disp.drawLine(1, 8, 126, 8, WHITE); }
 
+#if defined(ADAFRUIT_SSD1306_HAS_SETBUFFER) && ADAFRUIT_SSD1306_HAS_SETBUFFER
   // We'll use a static buffer to avoid dynamic memory usage, and to allow
   // multiple displays to reuse one single buffer.
   static uint8_t buffer[(SCREEN_WIDTH * SCREEN_HEIGHT + 7) / 8];
+#endif
 
 } display_L = ssd1306Display_L, display_R = ssd1306Display_R;
 
+#if defined(ADAFRUIT_SSD1306_HAS_SETBUFFER) && ADAFRUIT_SSD1306_HAS_SETBUFFER
 uint8_t MySSD1306_DisplayInterface::buffer[];
+#endif
 
 // ------------------------------- Bank setup ------------------------------- //
 // ========================================================================== //
 
 /*
-   Create a bank and a bank selector to change its setting.
-*/
+ * Create a bank and a bank selector to change its setting.
+ */
 
 Bank<2> bank(4); // Create a new bank with four tracks per bank
 
@@ -138,9 +150,10 @@ IncrementSelector<2> bankselector = {bank, 5};
 // ========================================================================== //
 
 /*
-   Define all elements that listen for MIDI messages.
-*/
+ * Define all elements that listen for MIDI messages.
+ */
 
+// Main MCU LCD screen, used to get track names
 MCU::LCD<> lcd = {};
 
 // Time display_L keeps track of the bar counter
@@ -196,45 +209,16 @@ MCU::Bankable::VPotRing<2> vpot[] = {
 // ========================================================================== //
 
 /*
-   Define all display_L elements that display_L the state of the input elements.
-*/
+ * Define all display_L elements that display_L the state of the input elements.
+ */
 
-class LCDDisplay : public DisplayElement {
- public:
-  LCDDisplay(DisplayInterface &display, const MCU::LCD<> &lcd,
-             const Bank<2> &bank, uint8_t offset, PixelLocation loc)
-    : DisplayElement(display), lcd(lcd), bank(bank), offset(offset), loc(loc) {}
-
-  void draw() override {
-    char buffer[7];
-    if (!separateTracks())
-      return;
-    const char *text = lcd.getText() + 7 * (bank.getOffset() + offset);
-    strncpy(buffer, text, 6);
-    display.setCursor(loc.x, loc.y);
-    display.setTextSize(1);
-    display.print(buffer);
-  }
-
-  bool separateTracks() const {
-    for (uint8_t i = 0; i < 8; ++i) {
-      const char *text = lcd.getText() + 7 * i;
-      if (text[6] != ' ')
-        return false;
-    }
-    return true;
-  }
-
- private:
-  const MCU::LCD<> &lcd;
-  const Bank<2> &bank;
-  uint8_t offset;
-  PixelLocation loc;
-} lcddisps[] = {
-  {display_L, lcd, bank, 0, {0, 40}},
-  {display_L, lcd, bank, 1, {64, 40}},
-  {display_R, lcd, bank, 2, {0, 40}},
-  {display_R, lcd, bank, 3, {64, 40}},
+// Track names
+MCU::LCDDisplay lcddisps[] = {
+  // track (1), position (0, 40), font size (1)
+  {display_L, lcd, bank, 1, {0, 40}, 1, WHITE},
+  {display_L, lcd, bank, 2, {64, 40}, 1, WHITE},
+  {display_R, lcd, bank, 3, {0, 40}, 1, WHITE},
+  {display_R, lcd, bank, 4, {64, 40}, 1, WHITE},
 };
 
 // Time display

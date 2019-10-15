@@ -2126,6 +2126,7 @@ PREDEFINED             = ARDUINO \
                          USE_MIDI_USB_INTERFACE \
                          DISPLAY_GFX \
                          Encoder_h_ \
+                         FASTLED_VERSION \
                          DOXYGEN \
                          TEENSY_MIDIUSB_ENABLED \
                          TEENSY_SERIALUSB_ENABLED \
