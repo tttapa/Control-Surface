@@ -80,10 +80,11 @@ class MIDIInputElementChannelPressure
     }
 
   private:
+    /// Channel Pressure doesn't have an address, so the target consists of just
+    /// the channel and the cable number.
     MIDICNChannelAddress
     getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {0, Channel(midimsg.channel), midimsg.CN};
-        // Channel Pressure doesn't have an address
     }
 
     /**

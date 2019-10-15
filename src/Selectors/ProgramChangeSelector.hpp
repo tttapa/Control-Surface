@@ -38,6 +38,14 @@ class GenericProgramChangeSelector : public GenericSelector<N, Callback>,
     }
 };
 
+/**
+ * @brief   Selector that listens for MIDI Program Change events on a given
+ *          MIDI Channel, and uses the program number as its selection.
+ * 
+ * @tparam  N 
+ *          The number of settings. The maximum program number is @f$ N - 1 @f$.
+ * @ingroup Selectors
+ */
 template <setting_t N>
 class ProgramChangeSelector : public GenericProgramChangeSelector<N> {
   public:

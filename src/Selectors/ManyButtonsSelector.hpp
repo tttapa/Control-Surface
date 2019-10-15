@@ -41,9 +41,13 @@ class GenericManyButtonsSelector : public GenericSelector<N, Callback> {
 // -------------------------------------------------------------------------- //
 
 /**
- * @brief   Selector that reads from \(N\) buttons.
+ * @brief   Selector that reads from @f$ N @f$ buttons.
  * 
- * Pressing the \(n\)-th button selects the \(n\)-th setting.
+ * Pressing the @f$ n @f$-th button selects the @f$ n @f$-th setting.
+ * 
+ * @htmlonly 
+ * <object type="image/svg+xml" data="../../selector-multiple-momentary-switches-LED.svg"></object>
+ * @endhtmlonly
  * 
  * @ingroup Selectors
  * 

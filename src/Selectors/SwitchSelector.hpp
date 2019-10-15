@@ -40,6 +40,10 @@ class GenericSwitchSelector : public GenericSelector<2, Callback> {
  * @brief   Selector that selects one of two settings, based on the state of a 
  *          toggle or momentary switch.
  * 
+ * @htmlonly 
+ * <object type="image/svg+xml" data="../../selector-one-toggle-switch-LED.svg"></object>
+ * @endhtmlonly
+ * 
  * @ingroup Selectors
  */
 class SwitchSelector : public GenericSwitchSelector<> {

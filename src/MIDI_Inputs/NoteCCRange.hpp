@@ -95,6 +95,8 @@ class GenericNoteCCRange
         : NoteCCRange<MIDIInput_t, RangeLen, 1, Callback>{address, callback} {}
 
   private:
+    /// Check if the address of the incoming MIDI message is within the range
+    /// of addresses of this element.
     bool match(const MIDICNChannelAddress &target) const override {
         return MIDICNChannelAddress::matchAddressInRange( //
             target, this->address, RangeLen);
@@ -151,6 +153,8 @@ class GenericNoteCCRange
         }, BankableMIDIInput<NumBanks>{config} {}
 
   private:
+    /// Check if the address of the incoming MIDI message is within the range
+    /// of addresses and in one of the banks of this element.
     bool match(const MIDICNChannelAddress &target) const override {
         return BankableMIDIInput<NumBanks>::matchBankableAddressInRange(
             target, this->address, RangeLen);

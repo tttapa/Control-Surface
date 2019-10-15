@@ -49,10 +49,8 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
         return true;
     }
 
-    /**
-     * @brief   Check if the address of the incoming MIDI message
-     *          matches an address of this element.
-     */
+    /// Check if the address of the incoming MIDI message is within the range
+    /// of addresses of this element.
     bool match(const MIDICNChannelAddress &target) const override {
         return MIDICNChannelAddress::matchAddressInRange(target, address,
                                                          LENGTH);

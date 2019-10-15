@@ -56,11 +56,18 @@ END_CS_NAMESPACE
 
 // -------------------------------------------------------------------------- //
 
+
 #if defined(Encoder_h_) || defined(IDE)
 #include <Selectors/EncoderSelector.hpp>
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   @copybrief EncoderSelector
+ *          This version displays the setting using LEDs.
+ * @details @copydetails EncoderSelector
+ * @ingroup SelectorsLEDs
+ */
 template <setting_t N>
 class EncoderSelectorLEDs
     : public GenericEncoderSelector<N, SelectorLEDsCallback<N>> {
@@ -83,6 +90,12 @@ END_CS_NAMESPACE
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   @copybrief IncrementDecrementSelector
+ *          This version displays the setting using LEDs.
+ * @details @copydetails IncrementDecrementSelector
+ * @ingroup SelectorsLEDs
+ */
 template <setting_t N>
 class IncrementDecrementSelectorLEDs
     : public GenericIncrementDecrementSelector<N, SelectorLEDsCallback<N>> {
@@ -107,6 +120,12 @@ END_CS_NAMESPACE
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   @copybrief IncrementSelector
+ *          This version displays the setting using LEDs.
+ * @details @copydetails IncrementSelector
+ * @ingroup SelectorsLEDs
+ */
 template <setting_t N>
 class IncrementSelectorLEDs
     : public GenericIncrementSelector<N, SelectorLEDsCallback<N>> {
@@ -129,6 +148,12 @@ END_CS_NAMESPACE
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   @copybrief ManyButtonsSelector
+ *          This version displays the setting using LEDs.
+ * @details @copydetails ManyButtonsSelector
+ * @ingroup SelectorsLEDs
+ */
 template <setting_t N>
 class ManyButtonsSelectorLEDs
     : public GenericManyButtonsSelector<N, SelectorLEDsCallback<N>> {
@@ -151,6 +176,12 @@ END_CS_NAMESPACE
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   @copybrief ProgramChangeSelector
+ *          This version displays the setting using LEDs.
+ * @details @copydetails ProgramChangeSelector
+ * @ingroup SelectorsLEDs
+ */
 template <setting_t N>
 class ProgramChangeSelectorLEDs
     : public GenericProgramChangeSelector<N, SelectorLEDsCallback<N>> {
@@ -173,6 +204,12 @@ END_CS_NAMESPACE
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   @copybrief SwitchSelector
+ *          This version displays the setting using LEDs.
+ * @details @copydetails SwitchSelector
+ * @ingroup SelectorsLEDs
+ */
 class SwitchSelectorLED
     : public GenericSwitchSelector<SelectorSingleLEDCallback> {
   public:

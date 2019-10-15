@@ -56,7 +56,9 @@ class MIDIInputElement {
      * @brief   Extract the target address from a MIDI message.
      * @note    This base version of the function is only valid for messages 
      *          that use data1 as an address (i.e. Note On, Note Off, Polyphonic
-     *          Key Pressure and Control Change).
+     *          Key Pressure and Control Change), because it assumes that the
+     *          target address consists of the address (data 1), the MIDI 
+     *          channel and the cable number.
      */
     virtual MIDICNChannelAddress
     getTarget(const ChannelMessageMatcher &midimsg) const {
@@ -67,7 +69,8 @@ class MIDIInputElement {
      * @brief   Check if the address of the incoming MIDI message matches an 
      *          address of this element.
      * @note    This base version of the function is only valid for non-Bankable
-     *          MIDI input elements.
+     *          MIDI input elements, it only matches if the address is equal to 
+     *          the address of this element.
      */
     virtual bool match(const MIDICNChannelAddress &target) const {
         return MIDICNChannelAddress::matchSingle(this->address, target);

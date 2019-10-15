@@ -330,8 +330,9 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
         return BankableMIDIInput<NumBanks>::getBankIndex(target, this->address);
     }
 
+    /// Check if the address of the incoming MIDI message is in one of the banks
+    /// of this element.
     bool match(const MIDICNChannelAddress &target) const override {
-
         return BankableMIDIInput<NumBanks>::matchBankable(target,
                                                           this->address);
     }

@@ -50,6 +50,10 @@ class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
  * 
  * Pressing two buttons simultaneously resets to the default setting.
  * 
+ * @htmlonly 
+ * <object type="image/svg+xml" data="../../selector-increment-decrement-LED.svg"></object>
+ * @endhtmlonly
+ * 
  * @ingroup Selectors 
  * 
  * @tparam  N 

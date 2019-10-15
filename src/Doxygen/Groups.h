@@ -51,6 +51,12 @@
  */
 
 /**
+ * @ingroup Selectors
+ * @defgroup    SelectorsLEDs   Selectors LEDs
+ * @brief   @ref Selectors with LED feedback.
+ */
+
+/**
  * @defgroup    Audio Teensy Audio
  * @brief   All Elements that interact with Audio streams.
  */

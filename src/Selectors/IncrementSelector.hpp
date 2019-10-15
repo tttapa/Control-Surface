@@ -42,6 +42,10 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
 /**
  * @brief   Selector with one button that increments the selection.
  * 
+ * @htmlonly 
+ * <object type="image/svg+xml" data="../../selector-increment-LED.svg"></object>
+ * @endhtmlonly
+ * 
  * @ingroup Selectors 
  * 
  * @tparam  N 
