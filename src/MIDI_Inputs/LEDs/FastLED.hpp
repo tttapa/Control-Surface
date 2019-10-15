@@ -1,13 +1,32 @@
-#ifdef ARDUINO
-
+#if defined(ARDUINO) && defined(FASTLED_VERSION)
 #include <FastLED.h>
-#include <MIDI_Inputs/NoteCCRange.hpp>
+#endif
+
+#include <Settings/NamespaceSettings.hpp>
+#include <stdint.h>
 
 BEGIN_CS_NAMESPACE
 
-struct DefaultColorMapper {
-    CRGB operator()(uint8_t value) const;
+struct Color {
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+#ifdef FASTLED_VERSION
+    operator CRGB() const { return CRGB{r, g, b}; }
+#endif
 };
+
+struct DefaultColorMapper {
+    Color operator()(uint8_t value) const;
+};
+
+END_CS_NAMESPACE
+
+#ifdef FASTLED_VERSION
+
+#include <MIDI_Inputs/NoteCCRange.hpp>
+
+BEGIN_CS_NAMESPACE
 
 template <class ColorMapper>
 class NoteCCFastLED {
@@ -26,14 +45,14 @@ class NoteCCFastLED {
     template <class T>
     void update(const T &t, uint8_t index) {
         uint8_t value = t.getValue(index);
-        leds[index] = colormapper(value).nscale8_video(brightness);
+        leds[index] = CRGB{colormapper(value)}.nscale8_video(brightness);
     }
 
     template <class T>
     void update(const T &t) {
         for (uint8_t index = 0; index < t.length(); ++index) {
             uint8_t value = t.getValue(index);
-            leds[index] = colormapper(value).nscale8_video(brightness);
+            leds[index] = CRGB{colormapper(value)}.nscale8_video(brightness);
         }
     }
 

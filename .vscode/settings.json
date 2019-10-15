@@ -70,7 +70,10 @@
         "__tree": "cpp",
         "iterator": "cpp",
         "map": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "__functional_base": "cpp",
+        "__functional_base_03": "cpp",
+        "locale": "cpp"
     },
     "files.exclude": {
         "**/.git": true,
