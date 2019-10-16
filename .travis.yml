@@ -1,0 +1,23 @@
+language: cpp
+os: linux
+dist: bionic
+addons:
+  apt:
+    packages:
+      - expect
+
+compiler: 
+  - gcc
+  - clang
+
+cache:
+  directories:
+    - $HOME/.arduino15
+    - $HOME/opt
+    - $HOME/.local
+
+install:
+  - bash scripts/install-travis.sh
+
+script: 
+  - bash scripts/build-travis.sh
