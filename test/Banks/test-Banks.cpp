@@ -59,9 +59,12 @@ TEST(Bank, selectOutOfBounds) {
 }
 
 #if __GNUC__ >= 5
-// Disable GCC 5's -Wsuggest-override warnings in mock methods
-# pragma GCC diagnostic push
-# pragma GCC diagnostic ignored "-Wsuggest-override"
+// Disable GCC 5's -Wsuggest-override warnings in gtest
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsuggest-override"
+#elif defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winconsistent-missing-override"
 #endif
 
 template <uint8_t N>
@@ -74,7 +77,9 @@ class TestInputBankable : public BankableMIDIInput<N> {
 };
 
 #if __GNUC__ >= 5
-# pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
+#elif defined(__clang__)
+#pragma clang diagnostic pop
 #endif
 
 TEST(Bank, onBankSettingChange) {

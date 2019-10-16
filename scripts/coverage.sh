@@ -13,7 +13,8 @@ mkdir -p "$dest"/html
 rm -f "$dest"/*.info
 rm -rf "$dest"/html/*
 
-gcov_bin="gcov-9"
+# gcov_bin="gcov-9"
+gcov_bin="$dir/llvm-cov-gcov.sh"
 branches=0
 
 cd "$proj_dir"
@@ -28,7 +29,7 @@ make -C "$build_dir" -j$((`nproc` * 2))
 lcov \
     --capture --initial --directory . \
     --output-file "$dest"/coverage_base.info \
-    --gcov-tool $gcov_bin \
+    --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches
 
 make -C "$build_dir" check
@@ -36,14 +37,14 @@ make -C "$build_dir" check
 lcov \
     --capture --directory . \
     --output-file "$dest"/coverage_test.info \
-    --gcov-tool $gcov_bin \
+    --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches
 
 lcov \
     --add-tracefile "$dest"/coverage_base.info \
     --add-tracefile "$dest"/coverage_test.info \
     --output-file "$dest"/coverage_total.info \
-    --gcov-tool $gcov_bin \
+    --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches
 
 lcov \
@@ -53,7 +54,7 @@ lcov \
     '*/googletest/*' \
     '*/test/*' \
     --output-file "$dest"/coverage_filtered.info \
-    --gcov-tool $gcov_bin \
+    --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches
 
 genhtml \

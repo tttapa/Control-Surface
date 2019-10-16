@@ -5,15 +5,27 @@ cmake_minimum_required(VERSION 3.10)
 ################################################################################
 
 set(CMAKE_CXX_STANDARD 14)
-find_program(GCC_9_CMAKE_C_COMPILER "gcc-9")
-find_program(GCC_9_CMAKE_CXX_COMPILER "g++-9")
+find_program(ENV_CMAKE_C_COMPILER NAMES $ENV{CC} PATHS ENV PATH NO_DEFAULT_PATH)
+find_program(ENV_CMAKE_CXX_COMPILER NAMES $ENV{CXX} PATHS ENV PATH NO_DEFAULT_PATH)
 
-if(NOT GCC_9_CMAKE_C_COMPILER OR NOT GCC_9_CMAKE_CXX_COMPILER)
-message(WARNING "GCC 9 not found")
+if (NOT ENV_CMAKE_C_COMPILER OR NOT ENV_CMAKE_CXX_COMPILER)
+
+    find_program(GCC_9_CMAKE_C_COMPILER "gcc-9")
+    find_program(GCC_9_CMAKE_CXX_COMPILER "g++-9")
+
+    if(NOT GCC_9_CMAKE_C_COMPILER OR NOT GCC_9_CMAKE_CXX_COMPILER)
+        message(WARNING "GCC 9 not found")
+    else()
+        message(STATUS "GCC 9 found")
+        set(CMAKE_C_COMPILER ${GCC_9_CMAKE_C_COMPILER})
+        set(CMAKE_CXX_COMPILER ${GCC_9_CMAKE_CXX_COMPILER})
+    endif()
+
 else()
-message(STATUS "GCC 9 found")
-set(CMAKE_C_COMPILER ${GCC_9_CMAKE_C_COMPILER})
-set(CMAKE_CXX_COMPILER ${GCC_9_CMAKE_CXX_COMPILER})
+
+    set(CMAKE_C_COMPILER ${ENV_CMAKE_C_COMPILER})
+    set(CMAKE_CXX_COMPILER ${ENV_CMAKE_CXX_COMPILER})
+
 endif()
 
 project(Control_Surface)
@@ -41,6 +53,27 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # Set the compiler options
 ################################################################################
 
+
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+
+set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} \
+    -Wmissing-include-dirs")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
+    -g3 -ggdb -O0 -Wall -Wextra -Werror \
+    -fno-inline-functions \
+    -fdiagnostics-show-option -Winconsistent-missing-override \
+    -Wdouble-promotion \
+    -Wswitch-default -Wswitch-enum -Wimplicit-fallthrough \
+    -Wuninitialized \
+    -Wno-double-promotion \
+    -pedantic -pedantic-errors")
+    
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
+    -g3 -Og -Wall -Wextra -Werror")
+
+else()
+
 set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS} \
     -Wmissing-include-dirs")
 
@@ -52,9 +85,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
     -Wswitch-default -Wswitch-enum -Wimplicit-fallthrough=3 \
     -Wuninitialized \
     -pedantic -pedantic-errors")
-
+    
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
     -g3 -Og -Wall -Wextra -Werror")
+
+endif()
 
 # set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
 
