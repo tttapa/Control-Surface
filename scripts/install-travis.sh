@@ -25,6 +25,7 @@ else
 
     cd /tmp
     wget https://www.pjrc.com/teensy/td_148/TeensyduinoInstall.linux64
+    chmod +x TeensyduinoInstall.linux64
     ./TeensyduinoInstall.linux64 --dir="$HOME/opt/arduino-1.8.10"
 
     mkdir -p ~/Arduino/libraries && cd ~/Arduino/libraries
