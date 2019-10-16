@@ -8,17 +8,17 @@ else
     echo "Installing Arduino"
 
     cd /tmp
-    wget https://downloads.arduino.cc/arduino-1.8.10-linux64.tar.xz
+    wget https://downloads.arduino.cc/arduino-1.8.9-linux64.tar.xz
     mkdir -p ~/opt/
-    tar -xf arduino-1.8.10-linux64.tar.xz -C ~/opt/
+    tar -xf arduino-1.8.9-linux64.tar.xz -C ~/opt/
 
     mkdir -p $HOME/.local/share/icons/hicolor
-    cd $HOME/opt/arduino-1.8.10
+    cd $HOME/opt/arduino-1.8.9
     ./install.sh
 
     mkdir -p ~/.local/bin
-    ln -s ../../opt/arduino-1.8.10/arduino ~/.local/bin/
-    ln -s ../../opt/arduino-1.8.10/arduino-builder ~/.local/bin/
+    ln -s ../../opt/arduino-1.8.9/arduino ~/.local/bin/
+    ln -s ../../opt/arduino-1.8.9/arduino-builder ~/.local/bin/
 
     arduino --pref "boardsmanager.additional.urls=https://dl.espressif.com/dl/package_esp32_index.json" --save-prefs
     arduino --install-boards esp32:esp32
@@ -26,7 +26,7 @@ else
     cd /tmp
     wget https://www.pjrc.com/teensy/td_148/TeensyduinoInstall.linux64
     chmod +x TeensyduinoInstall.linux64
-    ./TeensyduinoInstall.linux64 --dir="$HOME/opt/arduino-1.8.10"
+    ./TeensyduinoInstall.linux64 --dir="$HOME/opt/arduino-1.8.9"
 
     mkdir -p ~/Arduino/libraries && cd ~/Arduino/libraries
     git clone https://github.com/adafruit/Adafruit-GFX-Library.git &
