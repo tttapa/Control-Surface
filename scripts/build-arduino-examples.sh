@@ -17,4 +17,4 @@ fi
     --directory ../examples \
     --parallel $p --jobs $j \
     --board-options-file ../test/examples-board-options.txt \
-    --verbose # --print-successful
+    # --verbose # --print-successful
