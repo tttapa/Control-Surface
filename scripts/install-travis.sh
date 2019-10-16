@@ -24,6 +24,7 @@ else
 
     arduino --pref "boardsmanager.additional.urls=https://dl.espressif.com/dl/package_esp32_index.json" --save-prefs
     arduino --install-boards esp32:esp32
+    arduino --install-boards "arduino:avr:1.8.1"
 
     cd /tmp
     wget https://www.pjrc.com/teensy/td_148/TeensyduinoInstall.linux64
