@@ -117,3 +117,6 @@ add_custom_target(check tests
 
 add_custom_target(arduino ./build-arduino-examples.sh
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../scripts)
+
+add_custom_target(arduino_travis ./build-arduino-examples-travis.sh
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../scripts)

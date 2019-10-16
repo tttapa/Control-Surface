@@ -7,4 +7,4 @@ cd "$TRAVIS_BUILD_DIR/build"
 cmake ..
 make -j4
 make test
-make arduino
+make arduino_travis
