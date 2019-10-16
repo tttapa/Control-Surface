@@ -12,13 +12,7 @@ class EmptyParser : public CS::MIDI_Parser {
     CS::SysExMessage getSysEx() const override { return {nullptr, 0, 0}; }
 };
 
-#if __GNUC__ >= 5
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wsuggest-override"
-#elif defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winconsistent-missing-override"
-#endif
+W_SUGGEST_OVERRIDE_OFF
 
 class MockMIDI_Interface : public CS::Parsing_MIDI_Interface {
   public:
@@ -30,8 +24,4 @@ class MockMIDI_Interface : public CS::Parsing_MIDI_Interface {
     MOCK_METHOD3(sendImpl, void(const uint8_t *, size_t, uint8_t));
 };
 
-#if __GNUC__ >= 5
-#pragma GCC diagnostic pop
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#endif
+W_SUGGEST_OVERRIDE_ON

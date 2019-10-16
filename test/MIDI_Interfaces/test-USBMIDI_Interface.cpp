@@ -6,6 +6,18 @@ USING_CS_NAMESPACE;
 using ::testing::Return;
 using ::testing::Sequence;
 
+TEST(USBMIDI_Interface, send3B) {
+    USBMIDI_Interface midi;
+    EXPECT_CALL(midi, writeUSBPacket(8, 0x9, 0x93, 0x55, 0x66));
+    midi.sendNoteOn({0x55, CHANNEL_4, 8}, 0x66);
+}
+
+TEST(USBMIDI_Interface, send2B) { 
+    USBMIDI_Interface midi;
+    EXPECT_CALL(midi, writeUSBPacket(8, 0xC, 0xC3, 0x66, 0x00)); 
+    midi.sendPC({CHANNEL_4, 8}, 0x66);
+}
+
 TEST(USBMIDI_Interface, SysExSend3B) {
     USBMIDI_Interface midi;
     Sequence seq;

@@ -13,8 +13,12 @@ mkdir -p "$dest"/html
 rm -f "$dest"/*.info
 rm -rf "$dest"/html/*
 
-# gcov_bin="gcov-9"
-gcov_bin="$dir/llvm-cov-gcov.sh"
+if [ "${1,,}" == "clang" ]; then
+    gcov_bin="$dir/llvm-cov-gcov.sh"
+else
+    gcov_bin="gcov"
+fi
+
 branches=0
 
 cd "$proj_dir"
