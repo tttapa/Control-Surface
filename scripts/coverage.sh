@@ -5,7 +5,7 @@ set -ex
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 proj_dir=`realpath "$dir"/..`
-build_dir=`realpath "$proj_dir"/build`
+build_dir=`pwd`
 
 dest="$proj_dir"/doc/Coverage
 mkdir -p "$dest"/html
@@ -26,12 +26,12 @@ pwd
 
 lcov \
     --zerocounters \
-    --directory .
+    --directory "$build_dir"
 
 make -C "$build_dir" -j$((`nproc` * 2))
 
 lcov \
-    --capture --initial --directory . \
+    --capture --initial --directory "$build_dir" \
     --output-file "$dest"/coverage_base.info \
     --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches
@@ -39,7 +39,7 @@ lcov \
 make -C "$build_dir" check
 
 lcov \
-    --capture --directory . \
+    --capture --directory "$build_dir" \
     --output-file "$dest"/coverage_test.info \
     --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches

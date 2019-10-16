@@ -63,7 +63,7 @@
             "label": "Generate Coverage Information",
             "command": "make coverage",
             "options": {
-                "cwd": "${workspaceFolder}/build",
+                "cwd": "${workspaceFolder}/coverage",
             },
             "problemMatcher": [],
         },
