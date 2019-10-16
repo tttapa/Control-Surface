@@ -58,9 +58,9 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
     MOCK_METHOD5(writeUSBPacket,
                  void(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));
     MOCK_METHOD0(read, MIDI_read_t(void));
+    void flush() {}
 #if __GNUC__ >= 5
 #pragma GCC diagnostic pop
-    void flush() {}
 #endif
 
 // If it's a Teensy board

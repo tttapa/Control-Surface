@@ -34,7 +34,7 @@ class NoteCCRange : public MIDIInput_t, public INoteCCValue {
         : MIDIInput_t{address}, callback{callback} {}
 
     /// @todo   check index bounds
-    uint8_t getValue(uint8_t index = 0) const override {
+    uint8_t getValue(uint8_t index) const override {
         return values[getSelection()][index];
     }
     using INoteCCValue::getValue;

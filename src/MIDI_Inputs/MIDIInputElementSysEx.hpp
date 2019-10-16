@@ -118,7 +118,6 @@ class MIDIInputElementSysEx : public DoublyLinkable<MIDIInputElementSysEx> {
         elements.moveDown(this);
     }
 
-    const uint8_t *sysExData;
     uint8_t CN;
 
     static DoublyLinkedList<MIDIInputElementSysEx> elements;
