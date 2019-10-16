@@ -47,3 +47,5 @@ else
     cd lcov
     make install PREFIX=$HOME/.local
 fi
+
+ln -s "$TRAVIS_BUILD_DIR" "$HOME/Arduino/libraries/Control-Surface"
