@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 export PATH="$HOME/.local/bin:$PATH"
 
 if hash arduino-builder; then
@@ -35,7 +37,6 @@ else
     git clone https://github.com/arduino-libraries/MIDIUSB.git
 
     wait
-
 fi
 
 if hash lcov; then

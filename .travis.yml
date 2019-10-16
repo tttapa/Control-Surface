@@ -26,7 +26,4 @@ install:
   - bash scripts/install-travis.sh
 
 script:
-  - ls $HOME/.arduino15
-  - ls $HOME/Arduino
-  - ls $HOME/opt
   - bash scripts/build-travis.sh
