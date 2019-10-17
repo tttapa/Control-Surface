@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/tttapa/Control-Surface.svg?branch=master)](https://travis-ci.org/tttapa/Control-Surface)
+
 # Control Surface
 
 An Arduino library for MIDI control surfaces (input and output).

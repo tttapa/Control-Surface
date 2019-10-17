@@ -122,9 +122,6 @@ class AnalogVUDisplay : public DisplayElement {
     float theta_min;
     float theta_diff;
     uint16_t color;
-
-    float theta_dot = 0;
-    float theta = 0;
 };
 
 } // namespace MCU

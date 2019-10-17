@@ -31,10 +31,10 @@ TEST(EMA, EMA_overflow) {
     EMA<6, uint16_t> ema;
     constexpr size_t N = 2000;
     array<uint16_t, N> signal;
-    const uint16_t maximum = (1 << 10) - 1;
+    constexpr uint16_t maximum = (1 << 10) - 1;
     fill(signal.begin(), signal.end(), maximum);
     array<uint16_t, N> expected;
-    generate(expected.begin(), expected.end(), [maximum, i = 0]() mutable {
+    generate(expected.begin(), expected.end(), [i = 0]() mutable {
         return round(maximum - maximum * pow(1 - 0.015625, ++i));
     });
     for_each(signal.begin(), signal.end(), [&](uint16_t &s) { s = ema(s); });

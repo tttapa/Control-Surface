@@ -7,6 +7,11 @@
 
 BEGIN_CS_NAMESPACE
 
+template <typename T>
+static constexpr inline int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
+}
+
 /// Line rasterization algorithm for drawing lines to the display.
 class BresenhamLine {
   public:
@@ -84,14 +89,8 @@ class BresenhamLine {
     int adx, ady;
     int xinc, yinc;
     bool steep;
-    pint w, h;
     int error;
     pint length = 0;
-
-    template <typename T>
-    static constexpr int sgn(T val) {
-        return (T(0) < val) - (val < T(0));
-    }
 };
 
 END_CS_NAMESPACE

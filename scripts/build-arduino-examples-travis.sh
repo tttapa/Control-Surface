@@ -13,8 +13,8 @@ else
 fi
 
 ../tools/arduino-example-builder \
-    --default-board 'Teensy 3.x' \
+    --default-board 'AVR USB' \
     --directory ../examples \
     --parallel $p --jobs $j \
-    --board-options-file ../test/examples-board-options.txt \
+    --board-options-file ../test/examples-board-options-travis.txt \
     # --verbose # --print-successful

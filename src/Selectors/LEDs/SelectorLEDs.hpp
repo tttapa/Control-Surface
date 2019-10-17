@@ -13,7 +13,7 @@ class SelectorLEDsCallback {
 
     /// Initialize.
     void begin() {
-        for (const pin_t &pin : ledPins) {
+        for (pin_t pin : ledPins) {
             ExtIO::pinMode(pin, OUTPUT);
             ExtIO::digitalWrite(pin, LOW);
         }

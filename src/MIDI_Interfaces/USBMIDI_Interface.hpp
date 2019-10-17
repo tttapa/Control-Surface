@@ -50,18 +50,14 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 #ifndef ARDUINO
 
   public:
-#if __GNUC__ >= 5
-// Disable GCC 5's -Wsuggest-override warnings in gtest
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wsuggest-override"
-#endif
+    W_SUGGEST_OVERRIDE_OFF
+
     MOCK_METHOD5(writeUSBPacket,
                  void(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));
     MOCK_METHOD0(read, MIDI_read_t(void));
-#if __GNUC__ >= 5
-#pragma GCC diagnostic pop
     void flush() {}
-#endif
+
+    W_SUGGEST_OVERRIDE_ON
 
 // If it's a Teensy board
 #elif defined(TEENSYDUINO)
