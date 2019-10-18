@@ -43,7 +43,7 @@ class Hysteresis {
      *          The output level is still the same.
      */
     bool update(T_in inputLevel) {
-        T_in prevLevelFull = ((T_in)prevLevel << BITS) | offset;
+        T_in prevLevelFull = (T_in(prevLevel) << BITS) | offset;
         T_in lowerbound = prevLevel > 0 ? prevLevelFull - margin : 0;
         T_in upperbound = prevLevel < max_out ? prevLevelFull + margin : max_in;
         if (inputLevel < lowerbound || inputLevel > upperbound) {
@@ -65,7 +65,7 @@ class Hysteresis {
     constexpr static T_in margin = (1 << BITS) - 1;
     constexpr static T_in offset = 1 << (BITS - 1);
     constexpr static T_in max_in = -1;
-    constexpr static T_out max_out = max_in >> BITS;
+    constexpr static T_out max_out = static_cast<T_out>(max_in >> BITS);
     static_assert(max_in > 0, "Error: only unsigned types are supported");
 };
 
