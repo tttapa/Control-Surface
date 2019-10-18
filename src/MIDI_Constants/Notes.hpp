@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Settings/NamespaceSettings.hpp>
+#include <stdint.h>
 
 BEGIN_CS_NAMESPACE
 

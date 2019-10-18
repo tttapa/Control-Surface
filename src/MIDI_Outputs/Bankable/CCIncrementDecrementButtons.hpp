@@ -1,6 +1,6 @@
 #pragma once
 
-#include <MIDI_Senders/RelativeCCSender.hpp>
+#include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIIncrementDecrementButtons.hpp>
 #include <MIDI_Senders/RelativeCCSender.hpp>
 
@@ -19,8 +19,8 @@ namespace Bankable {
  * @ingroup BankableMIDIOutputElements
  */
 class CCIncrementDecrementButtons
-    : public MIDIIncrementDecrementButtons<
-          TwoSingleAddresses, RelativeCCSender, DigitalNoteSender> {
+    : public MIDIIncrementDecrementButtons<TwoSingleAddresses, RelativeCCSender,
+                                           DigitalNoteSender> {
   public:
     /**
      * @brief   Construct a new Bankable CCIncrementDecrementButtons object.
