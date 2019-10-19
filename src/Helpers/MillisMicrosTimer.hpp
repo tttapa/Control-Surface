@@ -1,6 +1,9 @@
 #pragma once
 
 #include <Arduino.h>
+#include <Settings/NamespaceSettings.hpp>
+
+BEGIN_CS_NAMESPACE
 
 /// A function type that returns a time value.
 using timefunction = unsigned long (*)();
@@ -32,7 +35,8 @@ class Timer {
     void begin() { previous = time() - interval; }
     /// Update the timer and return true if the event should fire.
     explicit operator bool() {
-        if (time() - previous >= interval) {
+        auto now = time();
+        if (now - previous >= interval) {
             previous += interval;
             return true;
         }
@@ -45,3 +49,5 @@ class Timer {
 };
 
 /// @}
+
+END_CS_NAMESPACE

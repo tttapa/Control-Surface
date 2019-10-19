@@ -2,6 +2,7 @@
 
 #include "PrintStream.hpp"
 
+// LCOV_EXCL_START
 
 #if not defined(ARDUINO_ARCH_ESP32) && not defined(ARDUINO_ARCH_SAM)
 #define FLUSH
@@ -255,3 +256,5 @@ void printOct(Print &printer, T val)
 {
     ; // TODO
 } */
+
+// LCOV_EXCL_STOP

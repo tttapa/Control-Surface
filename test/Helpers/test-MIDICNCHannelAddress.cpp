@@ -26,6 +26,16 @@ TEST(MIDICNChannelAddress, add) {
     EXPECT_TRUE(o.isValid());
 }
 
+TEST(MIDICNChannelAddress, sub) {
+    MIDICNChannelAddress m = {12, CHANNEL_10, 4};
+    RelativeMIDICNChannelAddress n = {11, 3, 2};
+    auto o = m - n;
+    EXPECT_EQ(o.getAddress(), 12 - 11);
+    EXPECT_EQ(o.getChannel(), CHANNEL_10 - 3);
+    EXPECT_EQ(o.getCableNumber(), 4 - 2);
+    EXPECT_TRUE(o.isValid());
+}
+
 TEST(MIDICNChannelAddress, incrAdd) {
     MIDICNChannelAddress m = {12, CHANNEL_10, 4};
     RelativeMIDICNChannelAddress n = {13, 3, 5};
@@ -33,6 +43,16 @@ TEST(MIDICNChannelAddress, incrAdd) {
     EXPECT_EQ(m.getAddress(), 12 + 13);
     EXPECT_EQ(m.getChannel(), CHANNEL_10 + 3);
     EXPECT_EQ(m.getCableNumber(), 4 + 5);
+    EXPECT_TRUE(m.isValid());
+}
+
+TEST(MIDICNChannelAddress, incrSub) {
+    MIDICNChannelAddress m = {12, CHANNEL_10, 4};
+    RelativeMIDICNChannelAddress n = {11, 3, 2};
+    m -= n;
+    EXPECT_EQ(m.getAddress(), 12 - 11);
+    EXPECT_EQ(m.getChannel(), CHANNEL_10 - 3);
+    EXPECT_EQ(m.getCableNumber(), 4 - 2);
     EXPECT_TRUE(m.isValid());
 }
 
@@ -77,6 +97,20 @@ TEST(MIDICNChannelAddress, addInvalidRHS) {
     MIDICNChannelAddress m = {13, CHANNEL_3, 5};
     RelativeMIDICNChannelAddress n;
     m += n;
+    EXPECT_FALSE(m.isValid());
+}
+
+TEST(MIDICNChannelAddress, subInvalidLHS) {
+    MIDICNChannelAddress m;
+    RelativeMIDICNChannelAddress n = {13, 3, 4};
+    m -= n;
+    EXPECT_FALSE(m.isValid());
+}
+
+TEST(MIDICNChannelAddress, subInvalidRHS) {
+    MIDICNChannelAddress m = {13, CHANNEL_3, 5};
+    RelativeMIDICNChannelAddress n;
+    m -= n;
     EXPECT_FALSE(m.isValid());
 }
 

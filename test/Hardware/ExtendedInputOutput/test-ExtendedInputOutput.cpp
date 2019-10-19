@@ -30,20 +30,28 @@ TEST(ExtendedInputOutput, digitalRead) {
     MockExtIOElement el_1 = {10};
     MockExtIOElement el_2 = {10};
 
-    Sequence seq;
+    InSequence seq;
 
-    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(0)).InSequence(seq);
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(0));
     digitalRead(0);
 
-    EXPECT_CALL(el_1, digitalRead(0)).InSequence(seq);
+    EXPECT_CALL(el_1, digitalRead(0));
     digitalRead(el_1.pin(0));
-    EXPECT_CALL(el_1, digitalRead(9)).InSequence(seq);
+    EXPECT_CALL(el_1, digitalRead(0));
+    digitalRead((int)el_1.pin(0));
+    EXPECT_CALL(el_1, digitalRead(9));
     digitalRead(el_1.pin(9));
+    EXPECT_CALL(el_1, digitalRead(9));
+    digitalRead((int)el_1.pin(9));
 
-    EXPECT_CALL(el_2, digitalRead(0)).InSequence(seq);
+    EXPECT_CALL(el_2, digitalRead(0));
     digitalRead(el_2.pin(0));
-    EXPECT_CALL(el_2, digitalRead(9)).InSequence(seq);
+    EXPECT_CALL(el_2, digitalRead(0));
+    digitalRead((int)el_2.pin(0));
+    EXPECT_CALL(el_2, digitalRead(9));
     digitalRead(el_2.pin(9));
+    EXPECT_CALL(el_2, digitalRead(9));
+    digitalRead((int)el_2.pin(9));
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
