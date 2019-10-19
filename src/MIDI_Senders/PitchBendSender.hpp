@@ -11,7 +11,10 @@ class PitchBendSender {
     static void send(uint16_t value, MIDICNChannelAddress address) {
         value = increaseBitDepth<14, INPUT_PRECISION_BITS, uint16_t, uint16_t>(
             value);
-        Control_Surface.MIDI().sendPB(address, value);
+        // ignore address byte, just use channel and cable numbers
+        MIDICNChannel channelCN = {address.getChannel(),
+                                   address.getCableNumber()};
+        Control_Surface.MIDI().sendPB(channelCN, value);
     }
 
     constexpr static uint8_t precision() { return INPUT_PRECISION_BITS; }

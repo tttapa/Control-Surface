@@ -29,7 +29,7 @@
 #include "binary.h"
 
 #define PROGMEM
-using __FlashStringHelper = char;
+struct __FlashStringHelper;
 #define pgm_read_ptr_near(ptr) ((void *) *(ptr))
 
 #define HIGH 0x1

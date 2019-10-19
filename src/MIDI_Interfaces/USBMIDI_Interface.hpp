@@ -54,10 +54,23 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 
     MOCK_METHOD5(writeUSBPacket,
                  void(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));
-    MOCK_METHOD0(read, MIDI_read_t(void));
+    using MIDIUSBPacket_t = Array<uint8_t, 4>;
+    MOCK_METHOD0(readUSBPacket, MIDIUSBPacket_t(void));
     void flush() {}
 
     W_SUGGEST_OVERRIDE_ON
+
+    MIDI_read_t read() override {
+        for (uint8_t i = 0; i < (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {
+            MIDIUSBPacket_t rx_packet = readUSBPacket();
+            if (!rx_packet[0])
+                return NO_MESSAGE;
+            MIDI_read_t parseResult = parser.parse(rx_packet.data);
+            if (parseResult != NO_MESSAGE)
+                return parseResult;
+        }
+        return NO_MESSAGE;
+    }
 
 // If it's a Teensy board
 #elif defined(TEENSYDUINO)
@@ -103,10 +116,6 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
     }
 
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        if (length < 2) {
-            ERROR(F("Error: invalid SysEx length"), 0x7F7F);
-            return;
-        }
         while (length > 3) {
             writeUSBPacket(cn, 0x4, data[0], data[1], data[2]);
             data += 3;
@@ -125,7 +134,7 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 // If it's a Teensy board
 #if defined(TEENSYDUINO)
     MIDI_read_t read() override {
-        for (uint8_t i = 0; i < 32; ++i) {
+        for (uint8_t i = 0; i < (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {
             if (rx_packet == nullptr) { // If there's no previous packet
                 if (!usb_configuration) // Check USB configuration
                     return NO_MESSAGE;
@@ -167,7 +176,7 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 // If the main MCU has a USB connection but is not a Teensy → MIDIUSB library
 #elif defined(USBCON)
     MIDI_read_t read() override {
-        for (uint8_t i = 0; i < 32; ++i) {
+        for (uint8_t i = 0; i < (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {
             midiEventPacket_t midipacket = MidiUSB.read();
             uint8_t rx_packet[4] = {midipacket.header, midipacket.byte1,
                                     midipacket.byte2, midipacket.byte3};

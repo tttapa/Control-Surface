@@ -28,7 +28,7 @@ void MIDI_Interface::send(uint8_t m, uint8_t c, uint8_t d1) {
 }
 
 void MIDI_Interface::sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
-                            uint8_t cn) {
+                                 uint8_t cn) {
     c--;             // Channels are zero-based
     m &= 0xF0;       // bitmask high nibble
     m |= 0b10000000; // set msb
@@ -49,7 +49,6 @@ void MIDI_Interface::sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) {
     sendImpl(m, c, d1, cn);
 }
 
-// TODO: check for invalid addresses
 void MIDI_Interface::sendNoteOn(MIDICNChannelAddress address,
                                 uint8_t velocity) {
     if (address)
@@ -62,19 +61,14 @@ void MIDI_Interface::sendNoteOff(MIDICNChannelAddress address,
         sendImpl(NOTE_OFF, address.getRawChannel(), address.getAddress(),
                  velocity, address.getCableNumber());
 }
+void MIDI_Interface::sendKP(MIDICNChannelAddress address, uint8_t pressure) {
+    if (address)
+        sendImpl(KEY_PRESSURE, address.getRawChannel(), address.getAddress(),
+                 pressure, address.getCableNumber());
+}
 void MIDI_Interface::sendCC(MIDICNChannelAddress address, uint8_t value) {
     if (address)
         sendImpl(CC, address.getRawChannel(), address.getAddress(), value,
-                 address.getCableNumber());
-}
-void MIDI_Interface::sendPB(MIDICNChannelAddress address, uint16_t value) {
-    if (address)
-        sendImpl(PITCH_BEND, address.getRawChannel(), value & 0x7F, value >> 7,
-                 address.getCableNumber());
-}
-void MIDI_Interface::sendPB(MIDICNChannel address, uint16_t value) {
-    if (address)
-        sendImpl(PITCH_BEND, address.getRawChannel(), value & 0x7F, value >> 7,
                  address.getCableNumber());
 }
 void MIDI_Interface::sendPC(MIDICNChannel address, uint8_t value) {
@@ -87,8 +81,22 @@ void MIDI_Interface::sendPC(MIDICNChannelAddress address) {
         sendImpl(PROGRAM_CHANGE, address.getRawChannel(), address.getAddress(),
                  address.getCableNumber());
 }
+void MIDI_Interface::sendCP(MIDICNChannel address, uint8_t pressure) {
+    if (address)
+        sendImpl(CHANNEL_PRESSURE, address.getRawChannel(), pressure,
+                 address.getCableNumber());
+}
+void MIDI_Interface::sendPB(MIDICNChannel address, uint16_t value) {
+    if (address)
+        sendImpl(PITCH_BEND, address.getRawChannel(), value & 0x7F, value >> 7,
+                 address.getCableNumber());
+}
 void MIDI_Interface::send(SysExMessage message) {
     if (message.length) {
+        if (message.length < 2) {
+            ERROR(F("Error: invalid SysEx length"), 0x7F7F);
+            return;
+        }
         sendImpl(message.data, message.length, message.CN);
     }
 }
@@ -111,8 +119,6 @@ uint8_t Parsing_MIDI_Interface::getCN() const { return parser.getCN(); }
 // -------------------------------- READING --------------------------------- //
 
 void Parsing_MIDI_Interface::update() {
-    if (callbacks == nullptr)
-        return;
     bool repeat = true;
     while (repeat) {
         MIDI_read_t event = read();

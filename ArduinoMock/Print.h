@@ -20,6 +20,8 @@
 #ifndef Print_h
 #define Print_h
 
+#include <Arduino.h>
+
 #include <inttypes.h>
 #include <stdio.h> // for size_t
 
@@ -66,6 +68,7 @@ class Print {
     virtual int availableForWrite() { return 0; }
 
     size_t print(const char[]);
+    size_t print(const __FlashStringHelper *);
     size_t print(char);
     size_t print(unsigned char, int = DEC);
     size_t print(int, int = DEC);
@@ -76,6 +79,7 @@ class Print {
     size_t print(const Printable &);
 
     size_t println(const char[]);
+    size_t println(const __FlashStringHelper *);
     size_t println(char);
     size_t println(unsigned char, int = DEC);
     size_t println(int, int = DEC);

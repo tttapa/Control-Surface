@@ -91,16 +91,18 @@ class MIDI_Interface {
     void sendNoteOn(MIDICNChannelAddress address, uint8_t velocity);
     /// Send a MIDI Note Off event.
     void sendNoteOff(MIDICNChannelAddress address, uint8_t velocity);
+    /// Send a MIDI Key Pressure event.
+    void sendKP(MIDICNChannelAddress address, uint8_t pressure);
     /// Send a MIDI Control Change event.
     void sendCC(MIDICNChannelAddress address, uint8_t value);
-    /// Send a MIDI Pitch Bend event.
-    void sendPB(MIDICNChannelAddress address, uint16_t value);
-    /// Send a MIDI Pitch Bend event.
-    void sendPB(MIDICNChannel address, uint16_t value);
     /// Send a MIDI Program Change event.
     void sendPC(MIDICNChannelAddress address);
     /// Send a MIDI Program Change event.
     void sendPC(MIDICNChannel address, uint8_t value);
+    /// Send a MIDI Channel Pressure event.
+    void sendCP(MIDICNChannel address, uint8_t pressure);
+    /// Send a MIDI Pitch Bend event.
+    void sendPB(MIDICNChannel address, uint16_t value);
     /// Send a MIDI System Exclusive message.
     void send(SysExMessage message);
     /// Send a MIDI System Exclusive message.
@@ -221,6 +223,7 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
     MIDI_Callbacks *callbacks = nullptr;
 };
 
+// LCOV_EXCL_START
 /**
  * @brief   A class for callbacks from MIDI input.
  */
@@ -233,5 +236,6 @@ class MIDI_Callbacks {
 
     virtual ~MIDI_Callbacks() = default;
 };
+// LCOV_EXCL_STOP
 
 END_CS_NAMESPACE

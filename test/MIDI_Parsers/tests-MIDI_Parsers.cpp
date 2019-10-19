@@ -5,7 +5,7 @@
 
 using namespace CS;
 
-typedef std::vector<uint8_t> SysExVector;
+using SysExVector = std::vector<uint8_t>;
 
 // ---------------------------- USB PARSER TESTS ---------------------------- //
 

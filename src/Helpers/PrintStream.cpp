@@ -2,7 +2,6 @@
 
 #include "PrintStream.hpp"
 
-#ifdef ARDUINO
 
 #if not defined(ARDUINO_ARCH_ESP32) && not defined(ARDUINO_ARCH_SAM)
 #define FLUSH
@@ -96,16 +95,16 @@ Print &noleadingzeros(Print &printer) {
   leadingZerosPrintStream = false;
   return printer;
 }
-#ifdef ARDUINO
 Print &operator<<(Print &printer, const __FlashStringHelper *s) {
     printer.print(s);
     return printer;
 }
-#endif
+#ifdef ARDUINO
 Print &operator<<(Print &printer, const String &s) {
     printer.print(s);
     return printer;
 }
+#endif
 Print &operator<<(Print &printer, const char s[]) {
     printer.print(s);
     return printer;
@@ -164,6 +163,8 @@ Print &printIntegral(Print &printer, T i) {
     /* case OCT:
         printOct(printer, i);  
         break; */
+    default:
+        break;
     }
     return printer;
 }
@@ -172,27 +173,27 @@ Print &operator<<(Print &printer, manipulator pf) {
   return pf(printer);
 }
 
-_Setbase setbase(uint8_t __base) { 
-    return { __base }; 
+Setbase setbase(uint8_t base) { 
+    return { base }; 
 }
-Print &operator<<(Print &printer, _Setbase __f) {
-    formatPrintStream = __f._M_base;
+Print &operator<<(Print &printer, Setbase f) {
+    formatPrintStream = f.M_base;
     return printer; 
 }
 
-_Setbytesep setbytesep(char __bytesep) { 
-    return { __bytesep }; 
+Setbytesep setbytesep(char bytesep) { 
+    return { bytesep }; 
 }
-Print &operator<<(Print &printer, _Setbytesep __f) {
-    byteSeparatorPrintStream = __f._M_bytesep;
+Print &operator<<(Print &printer, Setbytesep f) {
+    byteSeparatorPrintStream = f.M_bytesep;
     return printer; 
 }
 
-_Setprecision setprecision(int __n) {
-    return { __n };
+Setprecision setprecision(int n) {
+    return { n };
 }
-Print &operator<<(Print &printer, _Setprecision __f) {
-    precisionPrintStream = __f._M_n;
+Print &operator<<(Print &printer, Setprecision f) {
+    precisionPrintStream = f.M_n;
     return printer;
 }
 
@@ -254,5 +255,3 @@ void printOct(Print &printer, T val)
 {
     ; // TODO
 } */
-
-#endif
