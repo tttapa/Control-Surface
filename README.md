@@ -126,7 +126,7 @@ fully implemented, feel free to open an issue, so I know where to focus on first
 - Cleaning up the display code
 - Cleaning up the MIDI over Bluetooth LE code
 - Finish support for MIDI over USB cable numbers
-- Adding more tests (currently at over 200 unit tests)
+- Adding more tests (currently at over 250 unit tests)
 - Adding more examples and adding comments to existing examples
 - Finishing the documentation
 
