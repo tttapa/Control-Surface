@@ -36,7 +36,6 @@ class MIDIButton : public MIDIOutputElement {
     void begin() override { button.begin(); }
     void update() override {
         Button::State state = button.update();
-        MIDICNChannelAddress sendAddress = address;
         if (state == Button::Falling) {
             address.lock();
             sender.sendOn(address.getActiveAddress());
