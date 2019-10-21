@@ -4,6 +4,8 @@
 #include "ExtendedInputOutput.hpp"
 #include <SPI.h>
 
+BEGIN_CS_NAMESPACE
+
 template <uint8_t N>
 SPIShiftRegisterOut<N>::SPIShiftRegisterOut(pin_t latchPin, uint8_t bitOrder)
     : ShiftRegisterOutBase<N>(latchPin, bitOrder) {}
@@ -33,5 +35,7 @@ void SPIShiftRegisterOut<N>::update() {
     SPI.endTransaction();
     this->dirty = false;
 }
+
+END_CS_NAMESPACE
 
 #endif

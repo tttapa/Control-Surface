@@ -1,5 +1,7 @@
 #include "SysExBuffer.hpp"
 
+BEGIN_CS_NAMESPACE
+
 void SysExBuffer::start() {
     SysExLength = 0; // if the previous message wasn't finished, overwrite it
     receiving = true;
@@ -31,3 +33,5 @@ bool SysExBuffer::isReceiving() const { return receiving; }
 const uint8_t *SysExBuffer::getBuffer() const { return SysExBuffer; }
 
 size_t SysExBuffer::getLength() const { return SysExLength; }
+
+END_CS_NAMESPACE

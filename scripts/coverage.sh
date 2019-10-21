@@ -5,7 +5,7 @@ set -ex
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 proj_dir=`realpath "$dir"/..`
-build_dir=`realpath "$proj_dir"/build`
+build_dir=`pwd`
 
 dest="$proj_dir"/doc/Coverage
 mkdir -p "$dest"/html
@@ -13,7 +13,12 @@ mkdir -p "$dest"/html
 rm -f "$dest"/*.info
 rm -rf "$dest"/html/*
 
-gcov_bin="gcov-9"
+if [ "${1,,}" == "clang" ]; then
+    gcov_bin="$dir/llvm-cov-gcov.sh"
+else
+    gcov_bin="gcov"
+fi
+
 branches=0
 
 cd "$proj_dir"
@@ -21,29 +26,30 @@ pwd
 
 lcov \
     --zerocounters \
-    --directory .
+    --directory "$build_dir"
 
+touch "$build_dir/CMakeLists.txt"
 make -C "$build_dir" -j$((`nproc` * 2))
 
 lcov \
-    --capture --initial --directory . \
+    --capture --initial --directory "$build_dir" \
     --output-file "$dest"/coverage_base.info \
-    --gcov-tool $gcov_bin \
+    --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches
 
 make -C "$build_dir" check
 
 lcov \
-    --capture --directory . \
+    --capture --directory "$build_dir" \
     --output-file "$dest"/coverage_test.info \
-    --gcov-tool $gcov_bin \
+    --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches
 
 lcov \
     --add-tracefile "$dest"/coverage_base.info \
     --add-tracefile "$dest"/coverage_test.info \
     --output-file "$dest"/coverage_total.info \
-    --gcov-tool $gcov_bin \
+    --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches
 
 lcov \
@@ -53,7 +59,7 @@ lcov \
     '*/googletest/*' \
     '*/test/*' \
     --output-file "$dest"/coverage_filtered.info \
-    --gcov-tool $gcov_bin \
+    --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches
 
 genhtml \

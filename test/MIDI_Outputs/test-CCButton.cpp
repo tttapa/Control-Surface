@@ -6,6 +6,7 @@
 #include <gmock-wrapper.h>
 
 using namespace ::testing;
+using namespace CS;
 
 TEST(CCButton, pressAndRelease) {
     MockMIDI_Interface midi;

@@ -2,6 +2,14 @@
 
 #pragma once
 
+#include <Settings/NamespaceSettings.hpp>
+#include <stdint.h>
+
+BEGIN_CS_NAMESPACE
+
+/// @addtogroup    MIDIConstants
+/// @{
+
 /**
  * @brief   MIDI note names.
  */
@@ -28,4 +36,8 @@ constexpr int8_t note(int8_t note, int8_t numOctave) {
     return note + octave(numOctave);
 }
 
-} // namespace MIDI
+} // namespace MIDI_Notes
+
+/// @}
+
+END_CS_NAMESPACE

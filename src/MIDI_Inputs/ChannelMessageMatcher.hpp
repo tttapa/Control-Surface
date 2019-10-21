@@ -4,6 +4,8 @@
 
 #include <MIDI_Parsers/MIDI_Parser.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /// Struct for easily matching MIDI messages.
 struct ChannelMessageMatcher {
     ChannelMessageMatcher(uint8_t type, Channel channel, uint8_t data1,
@@ -19,3 +21,5 @@ struct ChannelMessageMatcher {
     uint8_t data2;
     uint8_t CN;
 };
+
+END_CS_NAMESPACE

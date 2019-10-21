@@ -6,6 +6,8 @@
 #include <MIDI_Parsers/SerialMIDI_Parser.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for MIDI interfaces sending and receiving MIDI messages
  *          over a Stream.
@@ -53,9 +55,8 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
     }
 
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        (void)data;
-        (void)length;
-        (void)cn; // TODO
+        stream.write(data, length);
+        (void)cn;
     }
 
   protected:
@@ -158,8 +159,17 @@ class HairlessMIDI_Interface : public USBSerialMIDI_Interface {
 };
 #endif
 
-#if defined(__AVR__) || defined(TEENSYDUINO)
+END_CS_NAMESPACE
+
+// TODO: Teensy 4.0 SoftwareSerial bug
+#if defined(__AVR__) || (defined(TEENSYDUINO) && TEENSYDUINO != 147) ||        \
+    (defined(TEENSYDUINO) && !defined(__IMXRT1052__) &&                        \
+     !defined(__IMXRT1062__))
+
 #include <SoftwareSerial.h>
+
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for MIDI interfaces sending and receiving
  *          MIDI messages over a SoftwareSerial interface.
@@ -181,4 +191,7 @@ class SoftwareSerialMIDI_Interface
     SoftwareSerialMIDI_Interface(SoftwareSerial &serial, unsigned long baud)
         : SerialMIDI_Interface(serial, baud) {}
 };
+
+END_CS_NAMESPACE
+
 #endif

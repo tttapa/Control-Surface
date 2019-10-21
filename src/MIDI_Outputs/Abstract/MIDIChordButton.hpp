@@ -6,6 +6,8 @@
 #include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An abstract class for momentary push buttons that send multiple MIDI
  *          events.
@@ -24,7 +26,16 @@ class MIDIChordButton : public MIDIOutputElement {
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
      * @param   address
+     *          The MIDI address of the base note, containing the note
+     *          number [0, 127], channel [CHANNEL_1, CHANNEL_16], and optional 
+     *          cable number [0, 15].
      * @param   chord
+     *          The chord containing the intervals of the other notes to play.
+     * @param   sender
+     *          The MIDI Note sender to use.
+     * 
+     * @tparam  N
+     *          The number of notes in the chord.
      */
     template <uint8_t N>
     MIDIChordButton(pin_t pin, const MIDICNChannelAddress &address,
@@ -66,5 +77,9 @@ class MIDIChordButton : public MIDIOutputElement {
     const MIDICNChannelAddress address;
     unique_ptr<const IChord> chord;
     unique_ptr<const IChord> newChord;
+
+  public:
     Sender sender;
 };
+
+END_CS_NAMESPACE

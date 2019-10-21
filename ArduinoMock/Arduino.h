@@ -29,7 +29,8 @@
 #include "binary.h"
 
 #define PROGMEM
-using __FlashStringHelper = char;
+struct __FlashStringHelper;
+#define pgm_read_ptr_near(ptr) ((void *) *(ptr))
 
 #define HIGH 0x1
 #define LOW 0x0
@@ -62,12 +63,12 @@ using __FlashStringHelper = char;
 
 typedef bool boolean;
 
-//#define min(a,b) ((a)<(b)?(a):(b))
-//#define max(a,b) ((a)>(b)?(a):(b))
+// #define min(a,b) ((a)<(b)?(a):(b))
+// #define max(a,b) ((a)>(b)?(a):(b))
 #define abs(x) ((x) > 0 ? (x) : -(x))
 #define constrain(amt, low, high)                                              \
     ((amt) < (low) ? (low) : ((amt) > (high) ? (high) : (amt)))
-#define round(x) ((x) >= 0 ? (long)((x) + 0.5) : (long)((x)-0.5))
+#define round(x) std::round(x)
 #define radians(deg) ((deg)*DEG_TO_RAD)
 #define degrees(rad) ((rad)*RAD_TO_DEG)
 #define sq(x) ((x) * (x))

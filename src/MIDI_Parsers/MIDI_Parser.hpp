@@ -4,7 +4,14 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include <Def/Def.hpp>
 #include <Settings/SettingsWrapper.hpp>
+
+#ifndef ARDUINO
+#include <vector>
+#endif
+
+BEGIN_CS_NAMESPACE
 
 const uint8_t NOTE_OFF = 0x80;
 const uint8_t NOTE_ON = 0x90;
@@ -55,8 +62,15 @@ struct ChannelMessage {
 };
 
 struct SysExMessage {
+    SysExMessage() : data(nullptr), length(0), CN(0) {}
+    SysExMessage(const uint8_t *data, size_t length, uint8_t CN = 0)
+        : data(data), length(length), CN(CN) {}
+#ifndef ARDUINO
+    SysExMessage(const std::vector<uint8_t> &vec, uint8_t CN = 0)
+        : data(vec.data()), length(vec.size()), CN(CN) {}
+#endif
     const uint8_t *data;
-    size_t length;
+    uint8_t length;
     uint8_t CN;
 };
 
@@ -71,10 +85,10 @@ class MIDI_Parser {
   public:
     /** Get the latest MIDI channel message */
     ChannelMessage getChannelMessage();
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
     /** Get the latest SysEx message. */
     virtual SysExMessage getSysEx() const = 0;
-#else 
+#else
     SysExMessage getSysEx() const { return {nullptr, 0, 0}; }
 #endif
     /** Get the pointer to the SysEx data. */
@@ -93,3 +107,5 @@ class MIDI_Parser {
     /** Check if the given byte is a MIDI data byte. */
     static bool isData(uint8_t data);
 };
+
+END_CS_NAMESPACE

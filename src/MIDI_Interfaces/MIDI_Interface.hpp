@@ -4,6 +4,8 @@
 #include <Def/MIDICNChannelAddress.hpp>
 #include <MIDI_Parsers/MIDI_Parser.hpp>
 
+BEGIN_CS_NAMESPACE
+
 constexpr auto MIDI_BAUD = 31250;
 
 class MIDI_Callbacks;
@@ -69,7 +71,7 @@ class MIDI_Interface {
      * @param   cn
      *          The MIDI Cable Number. [0, 15]
      */
-    void sendCN(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2, uint8_t cn);
+    void sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2, uint8_t cn);
 
     /**
      * @brief   Send a 2-byte MIDI packet with cable number.
@@ -83,14 +85,31 @@ class MIDI_Interface {
      * @param   cn
      *          The MIDI Cable Number. [0, 15]
      */
-    void sendCN(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn);
+    void sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn);
 
+    /// Send a MIDI Note On event.
     void sendNoteOn(MIDICNChannelAddress address, uint8_t velocity);
+    /// Send a MIDI Note Off event.
     void sendNoteOff(MIDICNChannelAddress address, uint8_t velocity);
+    /// Send a MIDI Key Pressure event.
+    void sendKP(MIDICNChannelAddress address, uint8_t pressure);
+    /// Send a MIDI Control Change event.
     void sendCC(MIDICNChannelAddress address, uint8_t value);
-    void sendPB(MIDICNChannelAddress address, uint16_t value);
-    void sendPB(MIDICNChannel address, uint16_t value);
+    /// Send a MIDI Program Change event.
+    void sendPC(MIDICNChannelAddress address);
+    /// Send a MIDI Program Change event.
     void sendPC(MIDICNChannel address, uint8_t value);
+    /// Send a MIDI Channel Pressure event.
+    void sendCP(MIDICNChannel address, uint8_t pressure);
+    /// Send a MIDI Pitch Bend event.
+    void sendPB(MIDICNChannel address, uint16_t value);
+    /// Send a MIDI System Exclusive message.
+    void send(SysExMessage message);
+    /// Send a MIDI System Exclusive message.
+    template <size_t N>
+    void send(const uint8_t (&sysexdata)[N], uint8_t cn = 0) {
+        send(SysExMessage{sysexdata, N, cn});
+    }
 
     /**
      * @brief   Read the MIDI interface and call the callback if a message is
@@ -116,6 +135,16 @@ class MIDI_Interface {
      *          A pointer to an object that implements the MIDI_Callbacks class.
      */
     virtual void setCallbacks(MIDI_Callbacks *cb) = 0;
+
+    /**
+     * @brief   Set the callbacks that will be called when a MIDI message is 
+     *          received.
+     * 
+     * @param   cb
+     *          A reference to an object that implements the MIDI_Callbacks 
+     *          class.
+     */
+    void setCallbacks(MIDI_Callbacks &cb) { setCallbacks(&cb); }
 
     /**
      * @brief   Low-level function for sending a 3-byte MIDI message.
@@ -172,6 +201,7 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
     void update() override;
 
     void setCallbacks(MIDI_Callbacks *cb) override { this->callbacks = cb; }
+    using MIDI_Interface::setCallbacks;
 
   protected:
     bool dispatchMIDIEvent(MIDI_read_t event);
@@ -193,6 +223,7 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
     MIDI_Callbacks *callbacks = nullptr;
 };
 
+// LCOV_EXCL_START
 /**
  * @brief   A class for callbacks from MIDI input.
  */
@@ -205,3 +236,6 @@ class MIDI_Callbacks {
 
     virtual ~MIDI_Callbacks() = default;
 };
+// LCOV_EXCL_STOP
+
+END_CS_NAMESPACE

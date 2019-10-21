@@ -5,6 +5,8 @@
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -14,29 +16,30 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <class Sender>
-class MIDIButtonLatching : public MIDIOutputElement, public BankableMIDIOutput {
+template <class BankAddress, class Sender>
+class MIDIButtonLatching : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIButtonLatching.
      *
+     * @param   bankAddress
+     *          The bankable MIDI address to send to.
      * @param   pin
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
+     * @param   sender
+     *          The MIDI sender to use.
      */
-    MIDIButtonLatching(const OutputBankConfig &config, pin_t pin,
-                       const MIDICNChannelAddress &address,
+    MIDIButtonLatching(const BankAddress &bankAddress, pin_t pin,
                        const Sender &sender)
-        : BankableMIDIOutput{config}, button{pin}, address{address},
-          sender{sender} {}
+        : address{bankAddress}, button{pin}, sender{sender} {}
 
   public:
-    void begin() final override { button.begin(); }
-    void update() final override {
+    void begin() override { button.begin(); }
+    void update() override {
         Button::State state = button.update();
-        MIDICNChannelAddress sendAddress = address;
-        sendAddress += getAddressOffset();
         if (state == Button::Falling || state == Button::Rising) {
+            MIDICNChannelAddress sendAddress = address.getActiveAddress();
             sender.sendOn(sendAddress);
             sender.sendOff(sendAddress);
         }
@@ -45,9 +48,13 @@ class MIDIButtonLatching : public MIDIOutputElement, public BankableMIDIOutput {
     Button::State getButtonState() const { return button.getState(); }
 
   private:
+    BankAddress address;
     Button button;
-    const MIDICNChannelAddress address;
+
+  public:
     Sender sender;
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

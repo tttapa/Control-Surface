@@ -4,17 +4,16 @@
 #include <Hardware/FilteredAnalog.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for potentiometers and faders that send MIDI events.
  *
  * The analog input is filtered and hysteresis is applied.
  *
- * @tparam  PRECISION
- *          The analog precision in bits.
- *
  * @see     FilteredAnalog
  */
-template <class Sender, uint8_t PRECISION>
+template <class Sender>
 class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
   protected:
     /**
@@ -23,7 +22,10 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      * @param   analogPin
      *          The analog input pin with the wiper of the potentiometer
      *          connected.
-     * @todo    Documentation.
+     * @param   address
+     *          The MIDI address to send to.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIFilteredAnalogAddressable(pin_t analogPin,
                                   const MIDICNChannelAddress &address,
@@ -31,8 +33,8 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
         : filteredAnalog{analogPin}, address{address}, sender{sender} {}
 
   public:
-    void begin() final override {}
-    void update() final override {
+    void begin() override {}
+    void update() override {
         if (filteredAnalog.update())
             sender.send(filteredAnalog.getValue(), address);
     }
@@ -43,28 +45,34 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the filtered analog value of 10 bits as a 
-     *          parameter, and should return a value of 10 bits.
+     *          should take the filtered analog value of @f$ 16 - 
+     *          \mathrm{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits as a parameter, 
+     *          and should return a value in the same range.
      * 
      * @see     FilteredAnalog::map
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
 
+    /// Invert the analog value.
+    void invert() { filteredAnalog.invert(); }
+
     /**
      * @brief   Get the raw value of the analog input (this is the value 
-     *          without applying the mapping function first).
+     *          without applying the filter or the mapping function first).
      */
-    uint8_t getRawValue() const { return filteredAnalog.getRawValue(); }
+    analog_t getRawValue() const { return filteredAnalog.getRawValue(); }
 
     /**
      * @brief   Get the value of the analog input (this is the value after first
      *          applying the mapping function).
      */
-    uint8_t getValue() const { return filteredAnalog.getValue(); }
+    analog_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<PRECISION> filteredAnalog;
+    FilteredAnalog<Sender::precision()> filteredAnalog;
     const MIDICNChannelAddress address;
+
+  public:
     Sender sender;
 };
 
@@ -76,12 +84,9 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
  *
  * The analog input is filtered and hysteresis is applied.
  *
- * @tparam  PRECISION
- *          The analog precision in bits.
- *
  * @see     FilteredAnalog
  */
-template <class Sender, uint8_t PRECISION>
+template <class Sender>
 class MIDIFilteredAnalog : public MIDIOutputElement {
   protected:
     /**
@@ -90,7 +95,10 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      * @param   analogPin
      *          The analog input pin with the wiper of the potentiometer
      *          connected.
-     * @todo    Documentation.
+     * @param   address
+     *          The MIDI address to send to.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIFilteredAnalog(pin_t analogPin, const MIDICNChannel &address,
                        const Sender &sender)
@@ -109,27 +117,35 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the filtered analog value of 10 bits as a 
-     *          parameter, and should return a value of 10 bits.
+     *          should take the filtered analog value of @f$ 16 - 
+     *          \mathrm{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits as a parameter, 
+     *          and should return a value in the same range.
      * 
      * @see     FilteredAnalog::map
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
 
+    /// Invert the analog value.
+    void invert() { filteredAnalog.invert(); } 
+
     /**
      * @brief   Get the raw value of the analog input (this is the value 
-     *          without applying the mapping function first).
+     *          without applying the filter or the mapping function first).
      */
-    uint8_t getRawValue() const { return filteredAnalog.getRawValue(); }
+    analog_t getRawValue() const { return filteredAnalog.getRawValue(); }
 
     /**
      * @brief   Get the value of the analog input (this is the value after first
      *          applying the mapping function).
      */
-    uint8_t getValue() const { return filteredAnalog.getValue(); }
+    analog_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<PRECISION> filteredAnalog;
+    FilteredAnalog<Sender::precision()> filteredAnalog;
     const MIDICNChannelAddress address;
+
+  public:
     Sender sender;
 };
+
+END_CS_NAMESPACE

@@ -4,6 +4,8 @@
 #include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <int8_t MINIMUM_SEMITONES, int8_t MAXIMUM_SEMITONES>
 class Transposer : public Bank<MAXIMUM_SEMITONES - MINIMUM_SEMITONES + 1> {
   public:
@@ -30,3 +32,5 @@ class Transposer : public Bank<MAXIMUM_SEMITONES - MINIMUM_SEMITONES + 1> {
 
     static constexpr setting_t N = MAXIMUM_SEMITONES - MINIMUM_SEMITONES + 1;
 };
+
+END_CS_NAMESPACE

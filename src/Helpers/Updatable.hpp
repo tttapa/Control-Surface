@@ -8,6 +8,8 @@
 #include <Settings/SettingsWrapper.hpp>
 #include <stddef.h>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A super class for object that have to be updated regularly.
  * 
@@ -101,3 +103,5 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
 
 template <class T>
 DoublyLinkedList<Updatable<T>> Updatable<T>::updatables;
+
+END_CS_NAMESPACE

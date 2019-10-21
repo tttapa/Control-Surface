@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Abstract/MIDIButton.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **momentary
  *          push button or switch**, and send out MIDI **Control Change**
@@ -12,7 +14,7 @@
  *          0x00 is sent when the button is released.  
  *          The button is debounced in software.  
  *          This version cannot be banked.
- *
+ * 
  * @ingroup MIDIOutputElements
  */
 class CCButton
@@ -25,13 +27,15 @@ class CCButton
      * @param   pin
      *          The digital input pin with the button connected.  
      *          The internal pull-up resistor will be enabled.
-     * @param   controller
-     *          The MIDI Controller number. [0, 119]
-     * @param   channel
-     *          The MIDI Channel. [1, 16]
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     * @param   address
+     *          The MIDI address containing the controller number [0, 119], 
+     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          [0, 15].
+     * @param   sender
+     *          The MIDI sender to use.
      */
     CCButton(pin_t pin, const MIDICNChannelAddress &address, const DigitalCCSender &sender = {})
         : MIDIButton(pin, address, sender) {}
 };
+
+END_CS_NAMESPACE

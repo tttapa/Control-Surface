@@ -16,12 +16,13 @@
 #include <Control_Surface/Control_Surface_Class.hpp>
 
 // -------------------------------- Display --------------------------------- //
-#include "Display/Bitmaps/XBitmaps.hpp"
-#include "Display/MCU/TimeDisplayDisplay.hpp"
-#include "Display/MCU/VPotDisplay.hpp"
-#include "Display/MCU/VUDisplay.hpp"
-#include "Display/NoteBitmapDisplay.hpp"
-#include "Display/SelectorDisplay.hpp"
+#include <Display/Bitmaps/XBitmaps.hpp>
+#include <Display/MCU/LCDDisplay.hpp>
+#include <Display/MCU/TimeDisplayDisplay.hpp>
+#include <Display/MCU/VPotDisplay.hpp>
+#include <Display/MCU/VUDisplay.hpp>
+#include <Display/NoteBitmapDisplay.hpp>
+#include <Display/SelectorDisplay.hpp>
 #include <Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
 
 // ------------------------------ MIDI Outputs ------------------------------ //
@@ -42,15 +43,19 @@
 #include <MIDI_Outputs/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/PBPotentiometer.hpp>
+#include <MIDI_Outputs/PCButton.hpp>
 
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatched.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatching.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonMatrix.hpp>
 #include <MIDI_Outputs/Bankable/CCButtons.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCButton.hpp>
 
 #include <MIDI_Outputs/Bankable/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/Bankable/CCPotentiometer.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCButtonMatrix.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCIncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/ManyAddresses/CCPotentiometer.hpp>
 
 #include <MIDI_Outputs/Bankable/NoteButton.hpp>
@@ -61,6 +66,9 @@
 #include <MIDI_Outputs/Bankable/NoteChordButton.hpp>
 
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
+#include <MIDI_Outputs/Bankable/PCButton.hpp>
+#include <MIDI_Outputs/ManyAddresses/PBPotentiometer.hpp>
+#include <MIDI_Outputs/ManyAddresses/PCButton.hpp>
 
 #ifdef Encoder_h_
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
@@ -68,35 +76,36 @@
 #endif
 
 // ------------------------------ MIDI Inputs ------------------------------- //
-#include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
-#include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
+// #include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
+// #include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
+#include <MIDI_Inputs/MCU/LCD.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
-#include <MIDI_Inputs/MIDINote.hpp>
+#include <MIDI_Inputs/NoteCCRange.hpp>
 
 #include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
 #include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>
-#include <MIDI_Inputs/LEDs/MIDINoteLED.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCRangeLEDs.hpp>
+
+#ifdef FASTLED_VERSION
+#include <MIDI_Inputs/LEDs/FastLED.hpp>
+#endif
 
 // ------------------------------- Selectors -------------------------------- //
 #include <Selectors/IncrementDecrementSelector.hpp>
 #include <Selectors/IncrementSelector.hpp>
 #include <Selectors/ManyButtonsSelector.hpp>
+#include <Selectors/ProgramChangeSelector.hpp>
 #include <Selectors/SwitchSelector.hpp>
 
 #ifdef Encoder_h_
 #include <Selectors/EncoderSelector.hpp>
-#include <Selectors/LEDs/EncoderSelectorLEDs.hpp>
 #endif
 
-#include <Selectors/LEDs/IncrementDecrementSelectorLEDs.hpp>
-#include <Selectors/LEDs/IncrementSelectorLEDs.hpp>
-#include <Selectors/LEDs/ManyButtonsSelectorLEDs.hpp>
+#include <Selectors/LEDs/SelectorLEDs.hpp>
 
 #include <Selectors/ProgramChanger.hpp>
 #include <Selectors/Transposer.hpp>
-
-#include <MIDI_Inputs/ProgramChangeSelector.hpp>
 
 // ---------------------------- MIDI Interfaces ----------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.hpp>
@@ -116,6 +125,7 @@
 #include <MIDI_Constants/Control_Change.hpp>
 #include <MIDI_Constants/MCU.hpp>
 #include <MIDI_Constants/Notes.hpp>
+#include <MIDI_Constants/Program_Change.hpp>
 
 // ----------------------------- Array Helpers ------------------------------ //
 #include <Helpers/ArrayHelpers.hpp>
@@ -125,4 +135,8 @@
 #include <Audio/AudioVU.hpp>
 #include <Audio/AudioVULEDs.hpp>
 #include <Audio/VolumeControl.hpp>
+#endif
+
+#ifndef NO_USING_NAMESPACE_CS
+using namespace CS;
 #endif

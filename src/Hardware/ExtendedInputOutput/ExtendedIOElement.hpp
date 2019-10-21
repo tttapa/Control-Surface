@@ -5,6 +5,8 @@
 #include <Def/Def.hpp>
 #include <Helpers/LinkedList.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An abstract base class for Extended Input/Output elements.
  *
@@ -192,3 +194,5 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
 
     static DoublyLinkedList<ExtendedIOElement> elements;
 };
+
+END_CS_NAMESPACE

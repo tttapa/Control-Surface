@@ -1,6 +1,12 @@
 #pragma once
 
 #include <stdint.h>
+#include <Settings/NamespaceSettings.hpp>
+
+BEGIN_CS_NAMESPACE
+
+/// @addtogroup    MIDIConstants
+/// @{
 
 /**
  * @brief   Names and values for all MIDI Control Change Controller Numbers.
@@ -105,3 +111,7 @@ constexpr uint8_t Mono_Mode_On                      = 0x7E;
 constexpr uint8_t Poly_Mode_On                      = 0x7F;
 
 }
+
+/// @}
+
+END_CS_NAMESPACE

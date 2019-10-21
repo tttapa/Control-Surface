@@ -10,6 +10,8 @@
 #define GUARD_LIST_LOCK
 #endif
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   Class for objects that listen for incoming MIDI Note events.
  * 
@@ -18,9 +20,6 @@
 class MIDIInputElementNote : public MIDIInputElement,
                              public DoublyLinkable<MIDIInputElementNote> {
   protected:
-    MIDIInputElementNote() {} // not used, only for virtual inheritance
-
-  public:
     /**
      * @brief   Constructor.
      * @todo    Documentation.
@@ -31,6 +30,7 @@ class MIDIInputElementNote : public MIDIInputElement,
         elements.append(this);
     }
 
+  public:
     /**
      * @brief   Destructor.
      * @todo    Documentation.
@@ -81,15 +81,23 @@ class MIDIInputElementNote : public MIDIInputElement,
      */
     static void updateAllWith(const ChannelMessageMatcher &midimsg) {
         for (MIDIInputElementNote &e : elements)
-            if (e.updateWith(midimsg))
+            if (e.updateWith(midimsg)) {
+                e.moveDown();
                 return;
+            }
         // No mutex required:
-        // e.updateWith may alter the list, but if it does, it always returns
-        // true, and we stop iterating, so it doesn't matter.
+        // e.moveDown may alter the list, but if it does, it always returns,
+        // and we stop iterating, so it doesn't matter.
     }
 
   private:
-    void moveDown() override {
+    /**
+     * @brief   Move down this element in the linked list of elements.
+     * 
+     * This means that the element will be checked earlier on the next
+     * iteration.
+     */
+    void moveDown() {
         GUARD_LIST_LOCK;
         elements.moveDown(this);
     }
@@ -101,3 +109,5 @@ class MIDIInputElementNote : public MIDIInputElement,
 };
 
 #undef GUARD_LIST_LOCK
+
+END_CS_NAMESPACE

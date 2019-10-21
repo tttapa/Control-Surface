@@ -2,6 +2,9 @@
 
 #include <Arduino.h>
 #include <stdint.h>
+#include <Settings/SettingsWrapper.hpp>
+
+BEGIN_CS_NAMESPACE
 
 /**
  * @brief A struct containing X Bitmap width, height and data.
@@ -26,3 +29,5 @@ namespace XBM
 // ========================================================================== //
 
 :contents}
+
+END_CS_NAMESPACE

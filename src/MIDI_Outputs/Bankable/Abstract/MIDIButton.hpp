@@ -5,6 +5,8 @@
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -14,33 +16,33 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <class Sender>
-class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
+template <class BankAddress, class Sender>
+class MIDIButton : public MIDIOutputElement {
   public:
     /**
      * @brief   Construct a new bankable MIDIButton.
      *
+     * @param   bankAddress
+     *          The bankable MIDI address to send to.
      * @param   pin
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
+     * @param   sender
+     *          The MIDI sender to use.
      */
-    MIDIButton(const OutputBankConfig &config, pin_t pin,
-               const MIDICNChannelAddress &address, const Sender &sender)
-        : BankableMIDIOutput{config}, button{pin}, address{address},
-          sender{sender} {}
+    MIDIButton(const BankAddress &bankAddress, pin_t pin, const Sender &sender)
+        : address{bankAddress}, button{pin}, sender{sender} {}
 
-    void begin() final override { button.begin(); }
-    void update() final override {
+    void begin() override { button.begin(); }
+    void update() override {
         Button::State state = button.update();
         MIDICNChannelAddress sendAddress = address;
         if (state == Button::Falling) {
-            lock();
-            sendAddress += getAddressOffset();
-            sender.sendOn(sendAddress);
+            address.lock();
+            sender.sendOn(address.getActiveAddress());
         } else if (state == Button::Rising) {
-            sendAddress += getAddressOffset();
-            sender.sendOff(sendAddress);
-            unlock();
+            sender.sendOff(address.getActiveAddress());
+            address.unlock();
         }
     }
 
@@ -51,9 +53,13 @@ class MIDIButton : public BankableMIDIOutput, public MIDIOutputElement {
     Button::State getButtonState() const { return button.getState(); }
 
   private:
+    BankAddress address;
     Button button;
-    const MIDICNChannelAddress address;
+
+  public:
     Sender sender;
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

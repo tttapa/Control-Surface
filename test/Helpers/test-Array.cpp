@@ -2,6 +2,8 @@
 #include <Helpers/ArrayHelpers.hpp>
 #include <gtest-wrapper.h>
 
+using namespace CS;
+
 TEST(Array, initializeAndRetrieve) {
     Array<int, 6> arr = {0, 1, 2, 3, 4, 5};
     for (int i = 0; i < 6; i++)
@@ -39,12 +41,22 @@ TEST(Array, equality) {
     Array<int, 5> a = {1, 2, 3, 4, 5};
     Array<int, 5> b = {1, 2, 3, 4, 5};
     Array<int, 5> c = {1, 2, 3, 4, 6};
+    EXPECT_EQ(a, a);
+    EXPECT_TRUE(a == a);
+    EXPECT_FALSE(a != a);
     EXPECT_EQ(a, b);
     EXPECT_TRUE(a == b);
     EXPECT_FALSE(a != b);
     EXPECT_NE(a, c);
     EXPECT_FALSE(a == c);
     EXPECT_TRUE(a != c);
+}
+
+TEST(Array, outOfBounds) {
+    Array<int, 5> a = {};
+    EXPECT_THROW(a[5], CS::ErrorException);
+    const Array<int, 5> b = {};
+    EXPECT_THROW(b[5], CS::ErrorException);
 }
 
 // -------------------------------------------------------------------------- //
@@ -70,5 +82,22 @@ TEST(generateIncrementalArray, simple) {
 TEST(generateArray, simple) {
     auto x = generateArray<unsigned int, 4>([i = 0u]() mutable { return i++; });
     Array<unsigned int, 4> y = {0, 1, 2, 3};
+    EXPECT_EQ(x, y);
+}
+
+TEST(generateArray, simpleNoType) {
+    auto x = generateArray<4>([i = 0u]() mutable { return i++; });
+    Array<unsigned int, 4> y = {0, 1, 2, 3};
+    EXPECT_EQ(x, y);
+}
+
+TEST(fillArray, simple) {
+    struct S {
+        int i;
+        float f;
+        bool operator!=(S o) const { return this->i != o.i || this->f != o.f; }
+    };
+    auto x = fillArray<S, 4>(2, 3.14f);
+    Array<S, 4> y = {{{2, 3.14f}, {2, 3.14f}, {2, 3.14f}, {2, 3.14f}}};
     EXPECT_EQ(x, y);
 }

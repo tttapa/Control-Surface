@@ -1,4 +1,43 @@
 /**
+ * @example   "FilteredAnalog.ino"
+ * 
+ * FilteredAnalog
+ * ==============
+ *
+ * This examples shows how to filter an analog input, so you can get the 
+ * position of a knob or fader without noise.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Upload the sketch to the Arduino, and open the Serial Monitor 
+ *   (`CTRL+Shift+M`)
+ * - When you turn the potentiometer, you should see the position of the 
+ *   potentiometer being printed as a number between 0 and 1023.
+ * - The analog input is filtered, so there shouldn't be any noise on the 
+ *   position. If there is, check your wiring, and make sure that the resistance
+ *   of the potentiometer isn't too high (10 kΩ is ideal). 
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2019-10-10  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "Multiple-Control-Change-Potentiometers.ino"
  * 
  * Multiple-Control-Change-Potentiometers
@@ -38,6 +77,45 @@
  * MIDI learn option to assign the potentiometers to a function.
  * 
  * Written by PieterP, 2019-08-13  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Pitch-Bend-Potentiometer.ino"
+ * 
+ * Pitch-Bend-Potentiometer
+ * ========================
+ * 
+ * This example demonstrates the use of MIDI Pitch Bend potentiometers that
+ * can be used for changing effect parameters, volumes, pan and balance
+ * controls, etc. It can control almost any knob in your DAW software.
+ *
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When you turn the potentiometer, you should receive MIDI Pitch Bend
+ *   events on channel 1, with a value between -8192 and +8191.
+ * - The analog input is filtered, so there shouldn't be any noise on the 
+ *   position. If there is, check your wiring, and make sure that the resistance
+ *   of the potentiometer isn't too high (10 kΩ is ideal).
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the potentiometer to a function.
+ * 
+ * Written by PieterP, 2019-08-23  
  * https://github.com/tttapa/Control-Surface
  */
 
@@ -114,6 +192,41 @@
  * MIDI learn option to assign the button to a function.
  * 
  * Written by PieterP, 2019-08-07  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "CCButton.ino"
+ * 
+ * CCButton
+ * ========
+ * 
+ * This is an example that demonstrates the use of MIDI Control Change Buttons.
+ *
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When the button on pin 5 is pressed, a MIDI Control Change message with a 
+ *   value of 0x7F (127) is sent for General Purpose Controller #1.
+ * - When the button on pin 5 is released, a MIDI Control Change message with a 
+ *   value of 0x00 (0) is sent for General Purpose Controller #1
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the button to a function.
+ * 
+ * Written by PieterP, 2019-09-29  
  * https://github.com/tttapa/Control-Surface
  */
 
@@ -265,7 +378,7 @@
  * registers.
  * 
  * ```
- * CLK   >───────────┬──────────────────────┬──────────────────────┐
+ * SCK   >───────────┬──────────────────────┬──────────────────────┐
  *           ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓
  *           ┃     SH_CP     ┃      ┃     SH_CP     ┃      ┃     SH_CP     ┃
  * MOSI  >───┨ DS        Q7S ┠──────┨ DS        Q7S ┠──────┨ DS        Q7S ┃
@@ -273,6 +386,8 @@
  *           ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛
  * SS    >───────────┴──────────────────────┴──────────────────────┘
  * ```
+ * Remember to connect the enable pin of the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
  * 
  * The order of the colors doesn't matter. You can change them in software using
  * the `ShiftRegisterOutRGB::redBit`, `ShiftRegisterOutRGB::greenBit` and 
@@ -332,8 +447,8 @@
  * Connect an LED (and series resistor) between the first output of the
  * shift register and ground.
  * 
- * Remember to connect the enable pin the shift register to ground in order to 
- * enable it.  
+ * Remember to connect the enable pin the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
  * 
  * Behavior
  * --------
@@ -365,13 +480,13 @@
  * 
  *   - SS:   74HC595 ST_CP
  *   - MOSI: 74HC595 DS
- *   - CLK:  74HC595 SH_CP
+ *   - SCK:  74HC595 SH_CP
  * 
  * Connect an LED (and series resistor) between the first output of the
  * shift register and ground.
  * 
- * Remember to connect the enable pin the shift register to ground in order to 
- * enable it.  
+ * Remember to connect the enable pin of the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
  * 
  * Behavior
  * --------
@@ -403,7 +518,7 @@
  * 
  *   - SS:   74HC595 ST_CP
  *   - MOSI: 74HC595 DS
- *   - CLK:  74HC595 SH_CP
+ *   - SCK:  74HC595 SH_CP
  *   - 2: 74HC4067 A (COM OUT/IN)
  *   - 3: 74HC4067 S0
  *   - 4: 74HC4067 S1
@@ -419,7 +534,8 @@
  * two shift registers and ground. 
  * 
  * Remember to connect the enable pins of both the multiplexer and the shift
- * register to ground in order to enable them.  
+ * registers to ground in order to enable them. Also connect the master reset 
+ * pin of the shift registers to Vcc.  
  * Connect the serial data output of the first shift register (QH' or Q7S) to
  * the serial input of the second shift register.
  * 
@@ -574,6 +690,17 @@
  */
 
 /**
+ * @example   "SysEx-Send-Receive.ino"
+ * 
+ * SysEx-Send-Receive
+ * ==================
+ *
+ * Example showing how to send and receive MIDI System Exclusive messages.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ */
+
+/**
  * @example   "Dual-MIDI-Interface.ino"
  * 
  * Dual-MIDI-Interface
@@ -611,6 +738,166 @@
  */
 
 /**
+ * @example   "MCU-OLED-SSD1306.ino"
+ * 
+ * MCU-OLED-SSD1306
+ * ================
+ *
+ * An example demonstrating the use of DisplayElement%s to display information
+ * from the DAW on a small OLED display.
+ *
+ * @boards  Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5:  Push button (to ground)
+ * - 6:  Push button (to ground)
+ * - 7:  OLED Data/D1 (SPI MOSI)
+ * - 13: OLED Clock/D0 (SPI SCK)
+ * - 17: OLED Data/Command
+ * - 10: OLED Cable Select
+ * 
+ * Add a capacitor between the reset pin of the display and ground, and a 
+ * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
+ * work fine.  
+ * You do need some way to reset the display, without it, it won't work.  
+ * Alternatively, you could use an IO pin from the Teensy to reset the 
+ * display, but this just "wastes" a pin.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - The time (bars, beats, fraction), play and record status are shown at the 
+ *   top of the display.
+ * - For each of the 8 first tracks, a VU level meter with peak indicator and
+ *   a V-Pot ring showing the pan are displayed, as well as the the mute, solo 
+ *   and record arm status.
+ * - Two tracks are displayed at once. By pressing the push buttons connected
+ *   to pins 5 and 6, you can cycle through four banks to display all 8 tracks.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
+ * 
+ * @note    There seem to be some differences in the way some applications 
+ *          handle VU meters: some expect the hardware to decay automatically,
+ *          some don't.  
+ *          If you notice that the meters behave strangely, try both 
+ *          MCU::VUDecay::Hold and MCU::VUDecay::Default, or try a different 
+ *          decay time.
+ * 
+ * Written by PieterP, 2019-11-12  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "MCU-OLED-SSD1306-x2.ino"
+ * 
+ * MCU-OLED-SSD1306-x2
+ * ===================
+ *
+ * An example demonstrating the use of DisplayElement%s to display information
+ * from the DAW on two small OLED displays.
+ *
+ * @boards  Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5:  Push button (to ground)
+ * - 7:  OLED Data/D1 (SPI MOSI)
+ * - 13: OLED Clock/D0 (SPI SCK)
+ * - 17: OLED Data/Command
+ * - 10: Left OLED Cable Select
+ * - 18: Right OLED Cable Select
+ * 
+ * Add a capacitor between the reset pins of the displays and ground, and a 
+ * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
+ * work fine.  
+ * You do need some way to reset the displays, without it, it won't work.  
+ * Alternatively, you could use an IO pin from the Teensy to reset the 
+ * displays, but this just "wastes" a pin.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - The time (bars, beats, fraction), play and record status are shown at the 
+ *   top of the display.
+ * - For each of the 8 first tracks, a VU level meter with peak indicator and
+ *   a V-Pot ring showing the pan are displayed, as well as the the mute, solo 
+ *   and record arm status.
+ * - Four tracks are displayed at once. By pressing the push button connected
+ *   to pin 5, you can switch between two banks to display all 8 tracks.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
+ * 
+ * @note    There seem to be some differences in the way some applications 
+ *          handle VU meters: some expect the hardware to decay automatically,
+ *          some don't.  
+ *          If you notice that the meters behave strangely, try both 
+ *          MCU::VUDecay::Hold and MCU::VUDecay::Default, or try a different 
+ *          decay time.
+ * 
+ * Demo
+ * ----
+ * 
+ * @htmlonly
+ * <iframe width="560" height="315"
+ * src="https://www.youtube.com/embed/upL609Vkzug" frameborder="0"
+ * allow="accelerometer; autoplay; encrypted-media; gyroscope;
+ * picture-in-picture" allowfullscreen></iframe>
+ * @endhtmlonly
+ * 
+ * Written by PieterP, 2019-10-12  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "9.Note-FastLED.ino"
+ * 
+ * 9.Note-FastLED
+ * ==============
+ *
+ * This example demonstrates the use of addressable LEDs that respond to 
+ * incoming  MIDI note events.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * @note    You might lose incoming MIDI data while the LED strip is being 
+ *          updated. To avoid this, don't use an Arduino UNO.  
+ *          See <https://github.com/FastLED/FastLED/wiki/Interrupt-problems>
+ * 
+ * Connections  
+ * -----------
+ * 
+ * - 2: Data pin of NeoPixel LED strip with at least 8 pixels.
+ * 
+ * Behavior
+ * --------
+ * 
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the first LED
+ * will light up, if a Note Off event for that note is sent, the LED will turn 
+ * off.  
+ * If a MIDI Note On event for note 0x3D (C#4) is sent, the second LED will 
+ * light up, etc.  
+ * (A Note On event with a velocity of zero also counts as a Note Off event.)
+ * 
+ * Mapping
+ * -------
+ * 
+ * Route the MIDI output of a MIDI keyboard to the Arduino's MIDI input. Then
+ * play a middle C and some notes above it on the keyboard.
+ * 
+ * Written by PieterP, 2019-10-15  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "1.Note-LED.ino"
  * 
  * 1.Note-LED
@@ -642,6 +929,83 @@
  * 
  * Written by PieterP, 2019-02-07  
  * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "2.Note-Range-LEDs.ino"
+ * 
+ * 2.Note-Range-LEDs
+ * =================
+ *
+ * This example demonstrates the use of LEDs that respond to incoming  MIDI
+ * note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SS:   74HC595 ST_CP
+ *   - MOSI: 74HC595 DS
+ *   - SCK:  74HC595 SH_CP
+ * 
+ * Connect eight LEDs (and series resistors) between the outputs of the shift
+ * register and ground.
+ * 
+ * Remember to connect the enable pin of the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
+ * 
+ * Behavior
+ * --------
+ * 
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the first
+ * LED will light up, if a Note Off event for that note is sent, the LED will 
+ * turn off.  
+ * If a MIDI Note On event for note 0x3D (C#4) is sent, the second LED will
+ * light up, and so on.  
+ * (A Note On event with a velocity of zero also counts as a Note Off event.)
+ * 
+ * Mapping
+ * -------
+ * 
+ * Route the MIDI output of a MIDI keyboard to the Arduino's MIDI input. Then
+ * play some notes between middle C and middle G on the keyboard. The LEDs 
+ * should light up when you press the keys.
+ * 
+ * Written by PieterP, 2019-10-09  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Mackie-Control-Universal-Reverse-Engineering.ino"
+ * 
+ * Mackie-Control-Universal-Reverse-Engineering
+ * ============================================
+ *
+ * Sketch that reads the MIDI input from the USB MIDI Interface and prints it to the
+ * Serial monitor, including the Mackie Control Universal note names.
+ * 
+ * This is useful to discover what kinds of messages your DAW is sending.
+ * 
+ * @boards  AVR USB, Teensy 3.x
+ */
+
+/**
+ * @example   "Bank-Button-Matrix.ino"
+ * 
+ * Bank-Button-Matrix
+ * ==================
+ *
+ * <https://github.com/tttapa/Control-Surface/issues/38>
+ */
+
+/**
+ * @example   "One-Pot-Both-PB-and-CC.ino"
+ * 
+ * One-Pot-Both-PB-and-CC
+ * ======================
+ *
+ * <https://github.com/tttapa/Control-Surface/issues/40>
  */
 
 /**
@@ -689,11 +1053,17 @@
  * Connections
  * -----------
  * 
+ * This specific example uses an I²S DAC, but you can use other interfaces of 
+ * the Teensy Audio library as well. For testing, I'm using a PCM5102a.
+ * 
  * - A0: wiper of a potentiometer to change the output volume
- * - 9:  BCK (I²S)
- * - 11: SCK (I²S)
- * - 22: DIN (I²S)
- * - 23: LRCK (I²S)
+ * - 9:  DAC BCK (I²S)
+ * - 11: DAC SCK (I²S)
+ * - 22: DAC DIN (I²S)
+ * - 23: DAC LRCK (I²S)
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
  * 
  * Select a USB audio option from the Tools menu in the IDE.
  * 
@@ -742,17 +1112,17 @@
  * - 23: LRCK (I²S)
  * 
  * - 7:  OLED Data/D1 (SPI MOSI)
- * - 13: OLED Clock/D0 (SPI CLK)
+ * - 13: OLED Clock/D0 (SPI SCK)
  * - 17: OLED Data/Command
  * - 10: Left OLED Cable Select
  * - 18: Right OLED Cable Select
  * 
- * Add a capacitor between the reset pin of the display and ground, and a 
+ * Add a capacitor between the reset pin of the displays and ground, and a 
  * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
  * work fine.  
- * You do need some way to reset the display, without it, it won't work.  
+ * You do need some way to reset the displays, without it, it won't work.  
  * Alternatively, you could use an IO pin from the Teensy to reset the 
- * display, but this just "wastes" a pin.
+ * displays, but this just "wastes" a pin.
  * 
  * Behavior
  * --------
@@ -822,8 +1192,9 @@
  * @note    There seem to be some differences in the way some applications 
  *          handle VU meters: some expect the hardware to decay automatically,
  *          some don't.  
- *          If you notice that the meters behave strangely, try both decay 
- *          options of the MCU::VU class, or try a different decay time.
+ *          If you notice that the meters behave strangely, try both 
+ *          MCU::VUDecay::Hold and MCU::VUDecay::Default, or try a different 
+ *          decay time.
  * 
  * Demo
  * ----

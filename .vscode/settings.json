@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "Makefile.common": "makefile",
+        "*.axbm": "cpp",
         "*.ipp": "cpp",
         "*.tcc": "cpp",
         "array": "cpp",
@@ -58,7 +59,21 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeindex": "cpp",
-        "*.axbm": "cpp"
+        "__mutex_base": "cpp",
+        "random": "cpp",
+        "algorithm": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "__bit_reference": "cpp",
+        "__hash_table": "cpp",
+        "__split_buffer": "cpp",
+        "__tree": "cpp",
+        "iterator": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "__functional_base": "cpp",
+        "__functional_base_03": "cpp",
+        "locale": "cpp"
     },
     "files.exclude": {
         "**/.git": true,
@@ -68,7 +83,6 @@
         "**/.DS_Store": true,
     },
     "editor.dragAndDrop": false,
-    "editor.find.autoFindInSelection": true,
     "editor.formatOnSave": false,
     "editor.minimap.maxColumn": 80,
     "editor.minimap.renderCharacters": false,
@@ -88,12 +102,11 @@
     "search.exclude": {
         "**/node_modules": true,
         "**/bower_components": true,
-        "**/Doxygen": true,
+        "**/Doxygen/html": true,
         "**/Coverage": true,
         "**/googletest": true,
         "**/*.old": true,
     },
-    "search.location": "panel",
     "search.smartCase": true,
     "C_Cpp.default.cppStandard": "c++14",
     "editor.scrollBeyondLastColumn": 0,

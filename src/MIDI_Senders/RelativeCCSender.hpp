@@ -4,6 +4,8 @@
 
 #include <Arduino.h> // for constrain
 
+BEGIN_CS_NAMESPACE
+
 enum relativeCCmode { TWOS_COMPLEMENT, BINARY_OFFSET, SIGN_MAGNITUDE };
 
 #define REAPER_RELATIVE_1 TWOS_COMPLEMENT
@@ -59,3 +61,5 @@ class RelativeCCSender {
   private:
     static relativeCCmode mode;
 };
+
+END_CS_NAMESPACE

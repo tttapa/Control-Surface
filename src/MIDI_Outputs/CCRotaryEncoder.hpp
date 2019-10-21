@@ -3,12 +3,14 @@
 #include <MIDI_Outputs/Abstract/MIDIRotaryEncoder.hpp>
 #include <MIDI_Senders/RelativeCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **quadrature
  *          (rotary) encoder** and send out relative MIDI **Control Change**
  *          events.
  * 
- *          This version cannot be banked.
+ * This version cannot be banked.
  *
  * @note    To use this class, include the [PJRC Encoder library]
  *          (https://github.com/PaulStoffregen/Encoder) before the
@@ -27,11 +29,11 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      *          encoder.  
      *          The internal pull-up resistors will be enabled by the Encoder
      *          library.
-     * @param   controller
-     *          The MIDI controller number. [0, 119]
-     * @param   channel
-     *          The MIDI channel. [1, 16]
-     * @param   speedMultiplier
+     * @param   address
+     *          The MIDI address containing the controller number [0, 119], 
+     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          [0, 15].
+     * @param   speedMultiply
      *          A constant factor to increase the speed of the rotary encoder.
      *          The difference in position will just be multiplied by this 
      *          factor. 
@@ -43,8 +45,8 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      *          Whereas a greater speedMultiplier factor will increase the 
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     * @param   sender
+     *          The MIDI sender to use.
      */
     CCRotaryEncoder(const EncoderPinList &pins,
                     const MIDICNChannelAddress &address,
@@ -62,3 +64,5 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
                             sender) {}
 #endif
 };
+
+END_CS_NAMESPACE

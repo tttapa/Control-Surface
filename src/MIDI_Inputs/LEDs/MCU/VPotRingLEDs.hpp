@@ -3,16 +3,22 @@
 #include <Hardware/LEDs/LEDs.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
-class VPotRingLEDs_Base : virtual public VPotRing_Base {
+class VPotRingLEDsCallback {
   public:
-    VPotRingLEDs_Base(const LEDs<11> &leds) : leds(leds) {}
+    VPotRingLEDsCallback(const LEDs<11> &leds) : leds(leds) {}
 
-    void begin() override { leds.begin(); }
+    template <class T>
+    void begin(const T &) {
+        leds.begin();
+    }
 
-    void display() const override {
-        leds.displayRange(getStartOn(), getStartOff());
+    template <class T>
+    void update(const T &t) {
+        leds.displayRange(t.getStartOn(), t.getStartOff());
     }
 
   private:
@@ -21,25 +27,26 @@ class VPotRingLEDs_Base : virtual public VPotRing_Base {
 
 // -------------------------------------------------------------------------- //
 
-class VPotRingLEDs : public VPotRing, public VPotRingLEDs_Base {
+class VPotRingLEDs : public GenericVPotRing<VPotRingLEDsCallback> {
   public:
-    VPotRingLEDs(const MIDICNChannelAddress &address, const LEDs<11> &leds)
-        : VPotRing_Base(address), VPotRing(address), VPotRingLEDs_Base(leds) {}
+    VPotRingLEDs(const PinList<11> &ledPins, uint8_t track,
+                 MIDICNChannel channelCN = CHANNEL_1)
+        : GenericVPotRing<VPotRingLEDsCallback>{track, channelCN, {ledPins}} {}
 };
-
-// -------------------------------------------------------------------------- //
 
 namespace Bankable {
 
-template <uint8_t N>
-class VPotRingLEDs : public VPotRing<N>, public VPotRingLEDs_Base {
+template <setting_t NumBanks>
+class VPotRingLEDs : public GenericVPotRing<NumBanks, VPotRingLEDsCallback> {
   public:
-    VPotRingLEDs(const BankConfig<N> &config,
-                 const MIDICNChannelAddress &address, const LEDs<11> &leds)
-        : VPotRing_Base(address), VPotRing<N>(config, address),
-          VPotRingLEDs_Base(leds) {}
+    VPotRingLEDs(BankConfig<NumBanks> config, const PinList<11> &ledPins,
+                 uint8_t track, MIDICNChannel channelCN = CHANNEL_1)
+        : GenericVPotRing<NumBanks, VPotRingLEDsCallback>{
+              config, track, channelCN, {ledPins}} {}
 };
 
 } // namespace Bankable
 
 } // namespace MCU
+
+END_CS_NAMESPACE

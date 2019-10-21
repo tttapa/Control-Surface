@@ -6,6 +6,8 @@
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for momentary buttons and switches that send MIDI events.
  *
@@ -25,8 +27,9 @@ class MIDIButtonLatched : public MIDIOutputElement {
      *          The digital input pin to read from.  
      *          The internal pull-up resistor will be enabled.
      * @param   address
-     *          The MIDI address containing the note number [0, 127], channel
-     *          [1, 16], and optional cable number.
+     *          The MIDI address to send to.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIButtonLatched(pin_t pin, const MIDICNChannelAddress &address,
                       const Sender &sender)
@@ -59,6 +62,10 @@ class MIDIButtonLatched : public MIDIOutputElement {
   private:
     Button button;
     const MIDICNChannelAddress address;
-    Sender sender;
     bool state = false;
+
+  public:
+    Sender sender;
 };
+
+END_CS_NAMESPACE

@@ -12,6 +12,8 @@
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
@@ -64,8 +66,12 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
     const MIDICNChannelAddress address;
     const uint8_t speedMultiply;
     const uint8_t pulsesPerStep;
-    Sender sender;
     long previousPosition = 0;
+
+  public:
+    Sender sender;
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

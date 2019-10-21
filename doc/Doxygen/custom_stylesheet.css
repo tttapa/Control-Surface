@@ -87,6 +87,14 @@ ul.sm-dox {
     background-image: none;
     box-shadow: 0px 1px 2px #458;
 }
+div.navpath > ul {
+    background-color: #dde;
+    background-image: none;
+    box-shadow: 0px 1px 1px #569;
+    margin-bottom: -3px;
+    z-index: 101;
+    position: relative;
+}
 .directory td > .el {
     display: inline-block;
     padding: 0.4em 0.5em 0.4em 0;
@@ -104,6 +112,10 @@ h2.memtitle, .memproto {
 }
 #MSearchResultsWindow {
     margin-top: 8px;
+}
+code {
+    background-color: #f4f4ff;
+    padding: 0 1px;
 }
 
 /* --------------------- */

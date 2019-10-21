@@ -1,8 +1,10 @@
 #include "SerialMIDI_Parser.hpp"
 
+BEGIN_CS_NAMESPACE
+
 MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
-    DEBUGFN(hex << NAMEDVALUE(+midiByte) << dec);
-#ifndef IGNORE_SYSEX
+    DEBUGFN(hex << NAMEDVALUE(midiByte) << dec);
+#if !IGNORE_SYSEX
     // If the previous byte was a SysExStart
     // I have to handle a start in the next time step, because a start can also
     // end the previous message. When that happens, I have to return 
@@ -24,7 +26,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
             uint8_t previousHeader = midimsg.header;
             midimsg.header = midiByte;
             thirdByte = false;
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
             if (midimsg.header == TuneRequest) {
                 ; // Tune request (not implemented)
             }
@@ -60,7 +62,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
                 midimsg.data1 = midiByte;
                 return CHANNEL_MESSAGE;
             }
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
             else if (midimsg.header == SysExStart) {
                 // SysEx data byte
                 addSysExByte(midiByte);
@@ -73,3 +75,5 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
     }
     return NO_MESSAGE;
 }
+
+END_CS_NAMESPACE

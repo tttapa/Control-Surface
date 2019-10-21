@@ -46,7 +46,7 @@ MultiMIDI_Interface<2> midi = {{&usbmidi, &serialmidi}};
 
 // Add some MIDI elements to show that the MIDI interfaces actually work
 CCPotentiometer pot = {A0, MIDI_CC::General_Purpose_Controller_1};
-MIDINoteLED led = {LED_BUILTIN, 0x3C};
+NoteValueLED led = {LED_BUILTIN, 0x3C};
 
 void setup() {
   Control_Surface.begin();

@@ -3,16 +3,18 @@
 #include <MIDI_Outputs/Abstract/MIDIButtonLatching.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **latching
  *          push button or toggle switch**, and send out MIDI **Control Change**
  *          events.
  * 
- *          When the switch changes state, two MIDI events are sent: the first
- *          one with a value of 0x7F, followed immediately by a second one with
- *          a value of 0x00.  
- *          The switch is debounced in software.  
- *          This version cannot be banked.
+ * When the switch changes state, two MIDI events are sent: the first
+ * one with a value of 0x7F, followed immediately by a second one with
+ * a value of 0x00.  
+ * The switch is debounced in software.  
+ * This version cannot be banked.
  *
  * @ingroup MIDIOutputElements
  */
@@ -25,14 +27,16 @@ class CCButtonLatching : public MIDIButtonLatching<DigitalCCSender> {
      * @param   pin
      *          The digital input pin with the button connected.  
      *          The internal pull-up resistor will be enabled.
-     * @param   controller
-     *          The MIDI Controller number. [0, 119]
-     * @param   channel
-     *          The MIDI Channel. [1, 16]
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     * @param   address
+     *          The MIDI address containing the controller number [0, 119], 
+     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          [0, 15].
+     * @param   sender
+     *          The MIDI sender to use.
      */
     CCButtonLatching(pin_t pin, const MIDICNChannelAddress &address,
                      const DigitalCCSender &sender = {})
         : MIDIButtonLatching(pin, address, sender) {}
 };
+
+END_CS_NAMESPACE

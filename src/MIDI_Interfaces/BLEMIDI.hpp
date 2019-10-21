@@ -13,6 +13,8 @@
 
 #include <Helpers/Error.hpp>
 
+BEGIN_CS_NAMESPACE
+
 // https://www.midi.org/specifications/item/bluetooth-le-midi
 const char *SERVICE_UUID = "03b80e5a-ede8-4b33-a751-6ce34ec4c700";
 const char *CHARACTERISTIC_UUID = "7772e5db-3868-4112-a1a9-f2669d106bf3";
@@ -100,6 +102,8 @@ class BLEMIDI {
     BLE2902 *descriptor;
 };
 
+END_CS_NAMESPACE
+
 #else
 
 #include <Def/Def.hpp>
@@ -128,6 +132,8 @@ class BLEServerCallbacks {
     virtual void onDisconnect(UNUSED_PARAM BLEServer *pServer) {}
 };
 
+BEGIN_CS_NAMESPACE
+
 class BLEMIDI {
   public:
     MOCK_METHOD1(setServerCallbacks, void(BLEServerCallbacks *));
@@ -138,5 +144,7 @@ class BLEMIDI {
     MOCK_METHOD2(notifyValue, void(uint8_t *data, size_t len));
     MOCK_METHOD0(getValue, std::string(void));
 };
+
+END_CS_NAMESPACE
 
 #endif

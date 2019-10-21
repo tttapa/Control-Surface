@@ -5,13 +5,20 @@
 #include "Channel.hpp"
 #include "Frequency.hpp"
 #include <Helpers/Array.hpp>
+#include <Settings/NamespaceSettings.hpp>
 #include <stddef.h> // size_t
 #include <stdint.h> // uint8_t
 
+BEGIN_CS_NAMESPACE
+
 /// The type returned from analogRead and similar functions.
-using analog_t = int16_t;
+using analog_t = uint16_t;
 /// The type for Arduino pins (and ExtendedIOElement pins).
 using pin_t = uint16_t;
+
+#ifdef NO_PIN // Fix for FastLED: https://github.com/FastLED/FastLED/issues/893
+#undef NO_PIN
+#endif
 
 /// A special pin number that indicates an unused or invalid pin.
 constexpr pin_t NO_PIN = 1 << (8 * sizeof(pin_t) - 1);
@@ -24,8 +31,6 @@ using MappingFunction = analog_t (*)(analog_t);
 template <class T, size_t nb_rows, size_t nb_cols>
 using Array2D = Array<Array<T, nb_cols>, nb_rows>;
 
-/// A special address that indicates an unused or invalid address.
-constexpr uint8_t NO_ADDRESS = {0x80};
 /// @todo   This should be an array of type MIDICNChannelAddress.
 template <uint8_t nb_rows, uint8_t nb_cols>
 using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
@@ -54,7 +59,7 @@ struct EncoderPinList {
     uint8_t B; ///< The pin connected to the B pin of the encoder.
 };
 
-/// The type used for Selector#s.
+/// The type used for Selector%s.
 using setting_t = uint8_t;
 /// A special setting that indicates an unused or invalid setting.
 constexpr setting_t NO_SETTING = 1 << (8 * sizeof(setting_t) - 1);
@@ -72,3 +77,5 @@ struct PixelLocation {
 };
 
 #define UNUSED_PARAM __attribute__((unused))
+
+END_CS_NAMESPACE

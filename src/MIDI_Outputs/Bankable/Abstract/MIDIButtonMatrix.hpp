@@ -6,74 +6,80 @@
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
  * @brief   MIDIButtonMatrix
- * @todo    Documentation.
+ * @todo    Documentation
  * @see     ButtonMatrix
+ * 
+ * @tparam  BankAddress
+ *          The bankable address object containing the addresses of all buttons,
+ *          as well as a reference to the bank this element belongs to.
+ * @tparam  Sender
+ *          The MIDI Sender class.
+ * @tparam  nb_rows 
+ *          The number of rows of the button matrix.
+ * @tparam  nb_cols
+ *          The number of columns of the button matrix.
  */
-template <class Sender, uint8_t nb_rows, uint8_t nb_cols>
-class MIDIButtonMatrix : public BankableMIDIOutput,
-                         public MIDIOutputElement,
+template <class BankAddress, class Sender, uint8_t nb_rows, uint8_t nb_cols>
+class MIDIButtonMatrix : public MIDIOutputElement,
                          public ButtonMatrix<nb_rows, nb_cols> {
 
   protected:
     /**
      * @brief   Create a new Bankable MIDIButtonMatrix.
      * 
+     * @param   bankAddress
+     *          The bankable MIDI address to send to.
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
      *          matrix.  
-     *          **⚠** These pins will be driven LOW (Lo-Z).
+     *          **⚠** These pins will be driven LOW as outputs (Lo-Z).
      * @param   colPins
      *          A list of pin numbers connected to the columns of the button
      *          matrix.  
      *          These pins will be used as inputs (Hi-Z), and the
      *          internal pull-up resistor will be enabled.
-     * @param   addresses
-     *          A 2-dimensional array of the same dimensions as the button
-     *          matrix that contains the MIDI address of each button. [0, 127]
-     * @param   channelCN
-     *          The MIDI channel [1, 16] and Cable Number [0, 15].
+     * @param   sender
+     *          The MIDI sender to use.
      */
-    MIDIButtonMatrix(const OutputBankConfig &config,
+    MIDIButtonMatrix(const BankAddress &bankAddress,
                      const PinList<nb_rows> &rowPins,
-                     const PinList<nb_cols> &colPins,
-                     const AddressMatrix<nb_rows, nb_cols> &addresses,
-                     MIDICNChannel channelCN, const Sender &sender)
-        : BankableMIDIOutput(config), ButtonMatrix<nb_rows, nb_cols>(rowPins,
-                                                                     colPins),
-          addresses(addresses), baseChannelCN(channelCN), sender{sender} {}
+                     const PinList<nb_cols> &colPins, const Sender &sender)
+        : ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
+          address{bankAddress}, sender{sender} {}
 
   public:
-    void begin() final override { ButtonMatrix<nb_rows, nb_cols>::begin(); }
+    void begin() override { ButtonMatrix<nb_rows, nb_cols>::begin(); }
 
-    void update() final override { ButtonMatrix<nb_rows, nb_cols>::refresh(); }
+    void update() override { ButtonMatrix<nb_rows, nb_cols>::refresh(); }
 
   private:
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
-        int8_t address = addresses[row][col];
-        MIDICNChannelAddress sendAddress = {address, baseChannelCN};
         if (state == LOW) {
             if (!activeButtons)
-                lock(); // Don't allow changing of the bank setting
-            sendAddress += getAddressOffset();
+                address.lock(); // Don't allow changing of the bank setting
             activeButtons++;
-            sender.sendOn(sendAddress);
+            sender.sendOn(address.getActiveAddress(row, col));
         } else {
-            sendAddress += getAddressOffset();
-            sender.sendOff(sendAddress);
+            sender.sendOff(address.getActiveAddress(row, col));
             activeButtons--;
             if (!activeButtons)
-                unlock();
+                address.unlock();
         }
     }
 
-    AddressMatrix<nb_rows, nb_cols> addresses;
-    const MIDICNChannel baseChannelCN;
-    uint8_t activeButtons = 0;
+    BankAddress address;
+    uint16_t activeButtons = 0;
+
+  public:
     Sender sender;
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

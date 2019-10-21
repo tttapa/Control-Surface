@@ -6,6 +6,8 @@
 
 #include "MovingCoilBallistics.hpp"
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A VU meter that reads from an Audio stream using the 
  *          Analyzer class.
@@ -56,7 +58,7 @@ class AudioVU : public IVU {
      * 
      * @return  A value in [0, max]
      */
-    uint8_t getValue() const override {
+    uint8_t getValue() override {
         uint16_t value = getFloatValue() * max;
         return value;
     }
@@ -66,18 +68,20 @@ class AudioVU : public IVU {
      * 
      * @return  A value in [0.0, 1.0]
      */
-    float getFloatValue() const override {
+    float getFloatValue() override {
         if (!level.available())
             return 0;
         float peakLevel = level.read();
         float value = ballistics(peakLevel) * gain;
         if (value > 1.0f)
             value = 1.0f;
+        else if (value < 0.0f)
+            value = 0.0f;
         return value;
     }
 
     /** @note   This function will always return false for an AudioVU. */
-    bool getOverload() const override { return false; } // TODO
+    bool getOverload() override { return false; } // TODO
     /** 
      * @brief   Set the gain for the VU meter.
      * 
@@ -87,8 +91,7 @@ class AudioVU : public IVU {
     void setGain(float gain) { this->gain = gain; }
 
   private:
-    mutable MovingCoilBallistics ballistics =
-        MovingCoilBallistics::responsiveVU();
+    MovingCoilBallistics ballistics = MovingCoilBallistics::responsiveVU();
 
     /**
      * @brief   The `AudioAnalyzePeak` and `AudioAnalyzeRMS` classes don't 
@@ -112,7 +115,7 @@ class AudioVU : public IVU {
                     return static_cast<AudioAnalyzePeak *>(analyzer)->read();
                 case RMS:
                     return static_cast<AudioAnalyzeRMS *>(analyzer)->read();
-                default: ERROR("Error: Invalid type!", 0x1518); return 0;
+                default: ERROR(F("Error: Invalid type!"), 0x1518); return 0;
             }
         }
 
@@ -124,10 +127,12 @@ class AudioVU : public IVU {
                 case RMS:
                     return static_cast<AudioAnalyzeRMS *>(analyzer)
                         ->available();
-                default: ERROR("Error: Invalid type!", 0x1519); return false;
+                default: ERROR(F("Error: Invalid type!"), 0x1519); return false;
             }
         }
     } level;
 
     float gain;
 };
+
+END_CS_NAMESPACE

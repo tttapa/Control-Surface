@@ -10,6 +10,8 @@
 #define GUARD_LIST_LOCK
 #endif
 
+BEGIN_CS_NAMESPACE
+
 class MIDIInputElementPC : public MIDIInputElement,
                            public DoublyLinkable<MIDIInputElementPC> {
   public:
@@ -66,22 +68,31 @@ class MIDIInputElementPC : public MIDIInputElement,
      * @see     MIDIInputElementPC#updateWith
      */
     static void updateAllWith(const ChannelMessageMatcher &midimsg) {
-        for (MIDIInputElementPC &el : elements)
-            if (el.updateWith(midimsg))
+        for (MIDIInputElementPC &e : elements)
+            if (e.updateWith(midimsg)) {
+                e.moveDown();
                 return;
+            }
         // No mutex required:
-        // e.updateWith may alter the list, but if it does, it always returns
-        // true, and we stop iterating, so it doesn't matter.
+        // e.moveDown may alter the list, but if it does, it always returns,
+        // and we stop iterating, so it doesn't matter.
     }
 
   private:
+    /// Program Change doesn't have an address, so the target consists of just
+    /// the channel and the cable number.
     MIDICNChannelAddress
     getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {0, Channel(midimsg.channel), midimsg.CN};
-        // Program Change doesn't have an address
     }
 
-    void moveDown() override {
+    /**
+     * @brief   Move down this element in the linked list of elements.
+     * 
+     * This means that the element will be checked earlier on the next
+     * iteration.
+     */
+    void moveDown() {
         GUARD_LIST_LOCK;
         elements.moveDown(this);
     }
@@ -93,3 +104,5 @@ class MIDIInputElementPC : public MIDIInputElement,
 };
 
 #undef GUARD_LIST_LOCK
+
+END_CS_NAMESPACE

@@ -46,7 +46,7 @@ NoteButton button = {
 };
 
 // Instantiate the LED that will light up when middle C is playing
-MIDINoteLED led = {
+NoteValueLED led = {
   LED_BUILTIN,             // Pin of built-in LED
   {note(C, 4), CHANNEL_1}, // Note C4 on MIDI channel 1
 };

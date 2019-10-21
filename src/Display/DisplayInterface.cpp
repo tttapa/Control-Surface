@@ -1,5 +1,7 @@
 #include "DisplayInterface.hpp"
 
+BEGIN_CS_NAMESPACE
+
 DoublyLinkedList<DisplayInterface> DisplayInterface::elements;
 
 void DisplayInterface::begin() {
@@ -60,3 +62,5 @@ void DisplayInterface::beginAll() {
     for (DisplayInterface &el : elements)
         el.begin();
 }
+
+END_CS_NAMESPACE

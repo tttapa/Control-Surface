@@ -2,6 +2,8 @@
 
 #include <Settings/SettingsWrapper.hpp>
 
+BEGIN_CS_NAMESPACE
+
 class MovingCoilBallistics {
   public:
     MovingCoilBallistics(float springConstant, float friction, float mass,
@@ -21,10 +23,10 @@ class MovingCoilBallistics {
 
         if (x >= 1) {
             x = 1;
-            x_dot = x_dot > 0 ? 0 : x_dot;
+            x_dot = x_dot > 0 ? -1.0 * x_dot : x_dot;
         } else if (x < 0) {
             x = 0;
-            x_dot = x_dot < 0 ? 0 : x_dot;
+            x_dot = x_dot < 0 ? -1.0 * x_dot : x_dot;
         }
         return x;
     }
@@ -49,3 +51,5 @@ class MovingCoilBallistics {
     float x = 0;
     float x_dot = 0;
 };
+
+END_CS_NAMESPACE

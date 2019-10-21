@@ -1,5 +1,7 @@
 #include "IncrementButton.hpp"
 
+BEGIN_CS_NAMESPACE
+
 IncrementButton::State IncrementButton::updateImplementation() {
     Button::State incrState = button.update();
 
@@ -28,3 +30,5 @@ IncrementButton::State IncrementButton::updateImplementation() {
     }
     return Nothing;
 }
+
+END_CS_NAMESPACE

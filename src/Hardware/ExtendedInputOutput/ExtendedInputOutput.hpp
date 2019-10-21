@@ -38,6 +38,8 @@ const uint8_t INPUT = tmp_INPUT;
 const uint8_t OUTPUT = tmp_OUTPUT;
 const uint8_t INPUT_PULLUP = tmp_INPUT_PULLUP;
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A namespace with alternatives to the standard Arduino IO functions
  *          that can be used with extended IO pin numbers.
@@ -74,3 +76,5 @@ extern analog_t analogRead(pin_t pin);
 extern analog_t analogRead(int pin);
 
 }
+
+END_CS_NAMESPACE

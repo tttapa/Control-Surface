@@ -7,6 +7,8 @@
 #include <Helpers/Array.hpp>
 #include <stdlib.h>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for reading multiplexed analog inputs.
  *          Supports 74HC4067, 74HC4051, etc.
@@ -56,7 +58,7 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      *          The new mode of the input pin: 
      *          either INPUT or INPUT_PULLUP.
      */
-    void pinMode(pin_t, uint8_t mode) override;
+    void pinMode(UNUSED_PARAM pin_t pin, uint8_t mode) override;
 
     /**
      * @brief   The digitalWrite function is not implemented because writing an
@@ -189,6 +191,9 @@ void AnalogMultiplex<N>::setMuxAddress(uint8_t address) {
         ExtIO::digitalWrite(addressPin, (address & mask) != 0);
         mask <<= 1;
     }
+#if !defined(__AVR__) && !defined(__x86_64__)
+    delayMicroseconds(5);
+#endif
 }
 
 template <uint8_t N>
@@ -203,3 +208,5 @@ void AnalogMultiplex<N>::afterReading() {
     if (enablePin != NO_PIN)
         ExtIO::digitalWrite(enablePin, MUX_DISABLED);
 }
+
+END_CS_NAMESPACE

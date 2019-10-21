@@ -2,6 +2,8 @@
 
 #include <Control_Surface/Control_Surface_Class.hpp>
 
+BEGIN_CS_NAMESPACE
+
 class DigitalNoteSender {
   public:
     DigitalNoteSender(uint8_t velocity = 0x7F) : velocity(velocity) {}
@@ -18,3 +20,5 @@ class DigitalNoteSender {
   private:
     uint8_t velocity;
 };
+
+END_CS_NAMESPACE

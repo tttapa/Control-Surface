@@ -48,22 +48,8 @@ template <> inline Print &operator<<(Print &printer, manipulator pf) {
 
 #else // No Arduino
 
-#include <iomanip>
-#include <iostream>
-using std::boolalpha;
-using std::cout;
-using std::dec;
-using std::endl;
-using std::flush;
-using std::hex;
-using std::noboolalpha;
-using std::noshowbase;
-using std::nouppercase;
-using std::setbase;
-using std::setprecision;
-using std::showbase;
-using std::uppercase;
 #define F(x) (x)
+#include "PrintStream.hpp"
 
 #endif
 

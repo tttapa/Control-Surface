@@ -25,7 +25,7 @@ with open(join(doxydir, 'Doxyfile')) as doxy:
     else:
         print('Error: couldn\'t find EXAMPLE_PATH in Doxyfile')
         exit(1)
-    m = re.search(r'INPUT\s*=\s*([^\\]+)(\s|\\)*', doxy_content)
+    m = re.search(r'INPUT\s*=\s*("[^"]+")', doxy_content)
     if m:
         lastInclude = m.group(1).split(" ")[-1]
         outputfile = realpath(join(doxydir, stripQuotes(lastInclude)))
@@ -66,7 +66,7 @@ for root, dirs, files in os.walk(exampledir):
                 else:
                     print('\t\033[0;33mWarning: no documentation for', file,
                           '\033[0m')
-                    print('\t       →', Path(root) / file)
+                    print('\t       → "' + str(Path(root) / file) + '"')
 
 with open(outputfile, 'w') as f:
     f.write(output)

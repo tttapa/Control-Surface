@@ -8,6 +8,8 @@
 #include <Hardware/FilteredAnalog.hpp>
 #include <Helpers/Updatable.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /** 
  * @brief   A class for controlling the volume of AudioMixer4 objects using a 
  *          potentiometer.
@@ -59,15 +61,21 @@ class VolumeControl : public Updatable<Potentiometer> {
      *
      * @param   fn
      *          A function pointer to the mapping function. This function
-     *          should take the filtered analog value of 10 bits as a 
-     *          parameter, and should return a value of 10 bits.
+     *          should take the filtered analog value of @f$ 16 - 
+     *          \mathrm{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits as a parameter, 
+     *          and should return a value in the same range.
      * 
      * @see     FilteredAnalog::map
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
 
+    /// Invert the analog value.
+    void invert() { filteredAnalog.invert(); } 
+
   private:
     Array<AudioMixer4 *, N> mixers;
-    FilteredAnalog<7> filteredAnalog;
+    FilteredAnalog<> filteredAnalog;
     const float maxGain;
 };
+
+END_CS_NAMESPACE

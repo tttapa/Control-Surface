@@ -3,12 +3,15 @@
 #include <Helpers/LinkedList.hpp>
 #include <MIDI_Inputs/MIDIInputElement.hpp>
 
+
 #if defined(ESP32)
 #include <mutex>
 #define GUARD_LIST_LOCK std::lock_guard<std::mutex> _guard(mutex)
 #else
 #define GUARD_LIST_LOCK
 #endif
+
+BEGIN_CS_NAMESPACE
 
 /**
  * @brief   Class for objects that listen for incoming MIDI Controller Change
@@ -70,15 +73,23 @@ class MIDIInputElementCC : public MIDIInputElement,
     /// @see     MIDIInputElementCC#updateWith
     static void updateAllWith(const ChannelMessageMatcher &midimsg) {
         for (MIDIInputElementCC &e : elements)
-            if (e.updateWith(midimsg))
+            if (e.updateWith(midimsg)) {
+                e.moveDown();
                 return;
+            }
         // No mutex required:
-        // e.updateWith may alter the list, but if it does, it always returns
-        // true, and we stop iterating, so it doesn't matter.
+        // e.moveDown may alter the list, but if it does, it always returns,
+        // and we stop iterating, so it doesn't matter.
     }
 
   private:
-    void moveDown() override {
+    /**
+     * @brief   Move down this element in the linked list of elements.
+     * 
+     * This means that the element will be checked earlier on the next
+     * iteration.
+     */
+    void moveDown() {
         GUARD_LIST_LOCK;
         elements.moveDown(this);
     }
@@ -90,3 +101,5 @@ class MIDIInputElementCC : public MIDIInputElement,
 };
 
 #undef GUARD_LIST_LOCK
+
+END_CS_NAMESPACE

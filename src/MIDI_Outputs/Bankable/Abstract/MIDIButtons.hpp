@@ -6,12 +6,16 @@
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
  *
  * The buttons are debounced.
+ * 
+ * @todo    Use BankAddresses?
  *
  * @see     Button
  */
@@ -73,8 +77,12 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
     Array<Button, NUMBER_OF_BUTTONS> buttons;
     const MIDICNChannelAddress baseAddress;
     const RelativeMIDICNChannelAddress incrementAddress;
-    Sender sender;
     uint8_t activeButtons = 0;
+
+  public:
+    Sender sender;
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

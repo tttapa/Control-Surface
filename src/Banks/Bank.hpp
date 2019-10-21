@@ -7,13 +7,15 @@
 #include <Helpers/LinkedList.hpp>
 #include <Selectors/Selectable.hpp>
 
+BEGIN_CS_NAMESPACE
+
 template <setting_t N>
 class BankableMIDIInput;
 
 class BankableMIDIOutput;
 
 /**
- * @brief   A class for changing the address of BankableMIDIOutput#s.
+ * @brief   A class for changing the address of BankableMIDIOutput%s.
  */
 class OutputBank {
   public:
@@ -52,14 +54,20 @@ class OutputBank {
      */
     uint8_t getTracksPerBank() const { return tracksPerBank; }
 
+    /**
+     * @brief   Get the offset (number of banks times the index of the selected 
+     *          bank)
+     */
+    uint8_t getOffset() const { return getSelection() * getTracksPerBank(); }
+
   private:
-    const uint8_t tracksPerBank;
+    uint8_t tracksPerBank;
     setting_t bankSetting;
 };
 
 /**
  * @brief   A class that groups Bankable BankableMIDIOutput%s and 
- *          BankableMIDIInput#s, and allows the user to change the addresses 
+ *          BankableMIDIInput%s, and allows the user to change the addresses 
  *          of these elements.
  * 
  * @tparam  N 
@@ -86,12 +94,17 @@ class Bank : public Selectable<N>, public OutputBank {
     /**
      * @brief   Select the given bank setting.
      * 
-     * All BankableMIDIInput#s will be updated.
+     * All BankableMIDIInput%s will be updated.
      *
      * @param   bankSetting
      *          The new setting to select.
      */
     void select(setting_t bankSetting) override;
+
+    /**
+     * @brief   Get the number of Banks.
+     */
+    constexpr static uint8_t getNumberOfBanks() { return N; }
 
   private:
     /**
@@ -125,9 +138,13 @@ class Bank : public Selectable<N>, public OutputBank {
     DoublyLinkedList<BankableMIDIInput<N>> inputBankables;
 };
 
+END_CS_NAMESPACE
+
 // ---------------------------- Implementations ----------------------------- //
 
 #include <Banks/BankableMIDIInput.hpp>
+
+BEGIN_CS_NAMESPACE
 
 template <setting_t N>
 void Bank<N>::add(BankableMIDIInput<N> *bankable) {
@@ -146,3 +163,5 @@ void Bank<N>::select(setting_t bankSetting) {
     for (BankableMIDIInput<N> &e : inputBankables)
         e.onBankSettingChange();
 }
+
+END_CS_NAMESPACE

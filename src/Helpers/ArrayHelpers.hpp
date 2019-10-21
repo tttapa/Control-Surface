@@ -43,6 +43,9 @@ class Incrementor {
     const V increment;
 };
 
+/// @addtogroup Containers
+/// @{
+
 /**
  * @brief   Generate an array using the given generator.
  * 
@@ -66,11 +69,58 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> generateArray(G generator) {
 }
 
 /**
+ * @brief   Generate an array using the given generator.
+ * 
+ * @tparam  N 
+ *          The number of elements in the array.
+ * @tparam  G
+ *          The generator functor type.
+ * 
+ * @param   generator
+ *          A functor that will be called to create each element.
+ * 
+ * @return  The generated array.
+ */
+template <size_t N, class G>
+USE_CONSTEXPR_ARRAY_HELPERS auto generateArray(G generator)
+    -> Array<decltype(generator()), N> {
+    Array<decltype(generator()), N> array{};
+    generate(array.begin(), array.end(), generator);
+    return array;
+}
+
+/**
+ * @brief   Copy an Array to an Array of a different type.
+ * 
+ * @tparam  T 
+ *          The type of the new array.
+ * @tparam  N 
+ *          The number of elements in the arrays.
+ * @tparam  U 
+ *          The type of the source array.
+ * 
+ * @param   src 
+ *          The source array to be copied.
+ */
+template <class T, size_t N, class U>
+USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> copyAs(const Array<U, N> &src) {
+    Array<T, N> dest{};
+    for (size_t i = 0; i < N; ++i)
+        dest[i] = src[i];
+    return dest;
+}
+
+template <class T, size_t N, class... Args>
+USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> fillArray(Args... args) {
+    return generateArray<N>([&]() { return T{args...}; });
+}
+
+/**
  * @brief   Generate an array where the first value is given, and the subsequent
  *          values are calculated as the previous value incremented with a given
  *          value:  
- *          @f$ x[0] = start @f$  
- *          @f$ x[k+1] = x[k] + increment @f$.
+ *          @f$ x[0] = \mathrm{start} @f$  
+ *          @f$ x[k+1] = x[k] + \mathrm{increment} @f$ .
  * 
  * For example:  
  * ```
@@ -130,3 +180,5 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, M + N> cat(const Array<T, M> &a,
         result[r] = b[i];
     return result;
 }
+
+/// @}

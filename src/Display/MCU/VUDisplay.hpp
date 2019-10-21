@@ -3,6 +3,8 @@
 #include <Display/DisplayElement.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
 class VUDisplay : public DisplayElement {
@@ -16,9 +18,35 @@ class VUDisplay : public DisplayElement {
           decayTime(VU_PEAK_SMOOTH_DECAY
                         ? VU_PEAK_DECAY_TIME / (blockheight + spacing)
                         : VU_PEAK_DECAY_TIME) {}
+
     void draw() override {
         uint8_t value = vu.getValue();
+        updatePeak(value);
+        if (peak > 0) {
+            drawPeak(peak);
+            drawBlocks(value);
+        }
+    }
 
+  protected:
+    virtual void drawPeak(uint8_t peak) {
+        display.drawFastHLine(x,                                //
+                              y - spacing + blockheight - peak, //
+                              width,                            //
+                              color);
+    }
+
+    virtual void drawBlocks(uint8_t value) {
+        for (uint8_t i = 0; i < value; i++)
+            display.fillRect(x,                               //
+                             y - i * (blockheight + spacing), //
+                             width,                           //
+                             blockheight,                     //
+                             color);
+    }
+
+  private:
+    void updatePeak(uint8_t value) {
         int16_t newPeak = (int16_t)value * (blockheight + spacing);
         if (newPeak >= peak) {
             peak = newPeak;
@@ -27,23 +55,15 @@ class VUDisplay : public DisplayElement {
         } else if (!decaying &&
                    (millis() - previousDecay > VU_PEAK_HOLD_TIME)) {
             decaying = true;
-            previousDecay += VU_PEAK_HOLD_TIME - VU_PEAK_DECAY_TIME;
+            previousDecay += VU_PEAK_HOLD_TIME - decayTime;
         } else if (decaying && (millis() - previousDecay > decayTime)) {
             if (peak > 0) {
                 peak -= VU_PEAK_SMOOTH_DECAY ? 1 : (blockheight + spacing);
                 previousDecay += decayTime;
             }
         }
-        if (peak > 0) {
-            display.drawFastHLine(x, y - spacing + blockheight - peak, width,
-                                  color);
-            for (uint8_t i = 0; i < value; i++)
-                display.fillRect(x, y - i * (blockheight + spacing), width,
-                                 blockheight, color);
-        }
     }
 
-  private:
     IVU &vu;
 
     int16_t x;
@@ -60,7 +80,15 @@ class VUDisplay : public DisplayElement {
     unsigned long decayTime;
 };
 
+} // namespace MCU
+
+END_CS_NAMESPACE
+
 #include <Display/Helpers/Bresenham.hpp>
+
+BEGIN_CS_NAMESPACE
+
+namespace MCU {
 
 class AnalogVUDisplay : public DisplayElement {
   public:
@@ -94,9 +122,8 @@ class AnalogVUDisplay : public DisplayElement {
     float theta_min;
     float theta_diff;
     uint16_t color;
-
-    float theta_dot = 0;
-    float theta = 0;
 };
 
 } // namespace MCU
+
+END_CS_NAMESPACE

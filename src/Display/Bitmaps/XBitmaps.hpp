@@ -2,6 +2,9 @@
 
 #include <Arduino.h>
 #include <stdint.h>
+#include <Settings/SettingsWrapper.hpp>
+
+BEGIN_CS_NAMESPACE
 
 /**
  * @brief A struct containing X Bitmap width, height and data.
@@ -126,3 +129,5 @@ const XBitmap solo_14B = { solo_14B_width, solo_14B_height, solo_14B_bits };
 const XBitmap solo_7 = { solo_7_width, solo_7_height, solo_7_bits };
 
 }
+
+END_CS_NAMESPACE

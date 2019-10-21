@@ -7,11 +7,17 @@
  * Connections
  * -----------
  * 
+ * This specific example uses an I²S DAC, but you can use other interfaces of 
+ * the Teensy Audio library as well. For testing, I'm using a PCM5102a.
+ * 
  * - A0: wiper of a potentiometer to change the output volume
- * - 9:  BCK (I²S)
- * - 11: SCK (I²S)
- * - 22: DIN (I²S)
- * - 23: LRCK (I²S)
+ * - 9:  DAC BCK (I²S)
+ * - 11: DAC SCK (I²S)
+ * - 22: DAC DIN (I²S)
+ * - 23: DAC LRCK (I²S)
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
  * 
  * Select a USB audio option from the Tools menu in the IDE.
  * 
@@ -52,7 +58,9 @@ void setup() {
   volume.begin();
   // Add a dead zone if you can't get the volume all the way to zero
   // volume.map([](analog_t i) -> analog_t {
-  //   return map(constrain(i, 10, 1013), 10, 1013, 0, 1023);
+  //   const analog_t lower = 0 + 10;
+  //   const analog_t upper = 1023 - 10;
+  //   return map(constrain(i, lower, upper), lower, upper, 0, 1023);
   // });
   AudioMemory(6);
 }

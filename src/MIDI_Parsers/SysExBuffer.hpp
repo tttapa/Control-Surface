@@ -2,6 +2,8 @@
 
 #include <Settings/SettingsWrapper.hpp>
 
+BEGIN_CS_NAMESPACE
+
 class SysExBuffer {
   private:
     uint8_t SysExBuffer[SYSEX_BUFFER_SIZE];
@@ -24,3 +26,5 @@ class SysExBuffer {
     /// Get the length of the SysEx message in the buffer.
     size_t getLength() const;
 };
+
+END_CS_NAMESPACE

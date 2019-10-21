@@ -5,12 +5,14 @@
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 #include <math.h>
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
 class VPotDisplay : public DisplayElement {
 
   public:
-    VPotDisplay(DisplayInterface &display, VPotRing_Base &vpot, PixelLocation loc,
+    VPotDisplay(DisplayInterface &display, IVPotRing &vpot, PixelLocation loc,
                 uint16_t radius, uint16_t innerRadius, uint16_t color)
         : DisplayElement(display), vpot(vpot), x(loc.x + radius),
           y(loc.y + radius), radius(radius), innerRadius(innerRadius),
@@ -28,7 +30,7 @@ class VPotDisplay : public DisplayElement {
     }
 
   private:
-    VPotRing_Base &vpot;
+    IVPotRing &vpot;
 
     int16_t x, y;
     uint16_t radius, innerRadius, color;
@@ -39,6 +41,8 @@ class VPotDisplay : public DisplayElement {
     void drawVPotSegment(uint8_t segment) {
         // segment 5 (i.e. the sixth segment) = 0° (i.e. 12 o'clock)
         float angle = angleSpacing * (segment - 5);
+
+        // TODO: use Bresenham directly
 
         uint16_t x_start = x + round((float)innerRadius * sin(angle) / 2);
         uint16_t y_start = y - round((float)innerRadius * cos(angle) / 2);
@@ -51,3 +55,5 @@ class VPotDisplay : public DisplayElement {
 };
 
 } // namespace MCU
+
+END_CS_NAMESPACE

@@ -1,11 +1,12 @@
 #include "USBMIDI_Parser.hpp"
 #include <Settings/SettingsWrapper.hpp>
 
+BEGIN_CS_NAMESPACE
+
 // http://www.usb.org/developers/docs/devclass_docs/midi10.pdf
 MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
-    DEBUGREF("MIDIUSB packet:\t" << hex << +packet[0] << ' ' << +packet[1]
-                                 << ' ' << +packet[2] << ' ' << +packet[3]
-                                 << dec);
+    DEBUG("MIDIUSB packet:\t" << hex << packet[0] << ' ' << packet[1] << ' '
+                              << packet[2] << ' ' << packet[3] << dec);
     this->CN = (uint8_t)packet[0] >> 4;
     uint8_t CIN = (uint8_t)packet[0] << 4; // MIDI USB code index number
 
@@ -22,7 +23,7 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
         return CHANNEL_MESSAGE;
     }
 
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
     else if (CIN == 0x40) {
         // SysEx starts or continues (3 bytes)
         if (packet[1] == SysExStart)
@@ -38,7 +39,8 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
     }
 
     else if (CIN == 0x50) {
-        // SysEx ends with following single byte (or Single-byte System Common Message, not implemented)
+        // SysEx ends with following single byte
+        // (or Single-byte System Common Message, not implemented)
         if (packet[1] != SysExEnd) { // System Common (not implemented)
             return NO_MESSAGE;
         } else if (!receivingSysEx(CN)) { // If we haven't received a SysExStart
@@ -103,3 +105,5 @@ MIDI_read_t USBMIDI_Parser::parse(uint8_t *packet) {
 
     return NO_MESSAGE;
 }
+
+END_CS_NAMESPACE

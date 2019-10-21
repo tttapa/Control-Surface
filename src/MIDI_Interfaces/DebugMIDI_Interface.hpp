@@ -3,6 +3,8 @@
 #include "SerialMIDI_Interface.hpp"
 #include <ctype.h>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for MIDI interfaces sending and receiving 
  *          human-readable MIDI messages over a Stream.
@@ -120,7 +122,10 @@ class USBDebugMIDI_Interface
         : SerialDebugMIDI_Interface(Serial, baud) {}
 };
 
-#if defined(__AVR__) || defined(CORE_TEENSY)
+// TODO: Teensy 4.0 SoftwareSerial bug
+#if defined(__AVR__) || (defined(TEENSYDUINO) && TEENSYDUINO != 147) ||        \
+    (defined(TEENSYDUINO) && !defined(__IMXRT1052__) &&                        \
+     !defined(__IMXRT1062__))
 #include <SoftwareSerial.h>
 /**
  * @brief   A class for debug MIDI interfaces sending and receiving 
@@ -145,3 +150,5 @@ class SoftwareSerialDebugMIDI_Interface
         : SerialDebugMIDI_Interface(serial, baud) {}
 };
 #endif
+
+END_CS_NAMESPACE

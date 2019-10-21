@@ -1,14 +1,18 @@
 #include "Control_Surface_Class.hpp"
 #include <Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
+#include <Hardware/FilteredAnalog.hpp>
 #include <MIDI_Constants/Control_Change.hpp>
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <MIDI_Inputs/MIDIInputElementNote.hpp>
 #include <MIDI_Inputs/MIDIInputElementPC.hpp>
+#include <MIDI_Inputs/MIDIInputElementSysEx.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Selectors/Selector.hpp>
 
 #include <Arduino.h>
+
+BEGIN_CS_NAMESPACE
 
 Control_Surface_ &Control_Surface_::getInstance() {
     static Control_Surface_ instance;
@@ -20,9 +24,7 @@ void Control_Surface_::begin() {
     DEBUG_OUT.begin(defaultBaudRate);
     delay(250);
 #endif
-#ifdef ARDUINO_ARCH_ESP32
-    analogReadResolution(10);
-#endif
+    FilteredAnalog<>::setupADC();
     ExtendedIOElement::beginAll();
     MIDI().begin(); // initialize the MIDI interface
     MIDI().setCallbacks(this);
@@ -31,6 +33,7 @@ void Control_Surface_::begin() {
     MIDIInputElementPC::beginAll();
     MIDIInputElementChannelPressure::beginAll();
     MIDIInputElementNote::beginAll();
+    MIDIInputElementSysEx::beginAll();
     Updatable<>::beginAll();
     Updatable<Potentiometer>::beginAll();
     Updatable<MotorFader>::beginAll();
@@ -69,11 +72,10 @@ void Control_Surface_::onChannelMessage(Parsing_MIDI_Interface &midi) {
 #ifdef DEBUG_MIDI_PACKETS
     // TODO: print CN
     if (midimsg.type != PROGRAM_CHANGE && midimsg.type != CHANNEL_PRESSURE)
-        DEBUG(">>> " << hex << +midichmsg.header << ' ' << +midimsg.data1 << ' '
-                     << +midimsg.data2 << dec);
+        DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1 << ' '
+                     << midimsg.data2 << dec);
     else
-        DEBUG(">>> " << hex << +midichmsg.header << ' ' << +midimsg.data1
-                     << dec);
+        DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1 << dec);
 #endif
 
     // If the Channel Message callback exists, call it to see if we have to
@@ -129,7 +131,7 @@ void Control_Surface_::onSysExMessage(Parsing_MIDI_Interface &midi) {
     // continue handling it.
     if (sysExMessageCallback && sysExMessageCallback(msg))
         return;
-    // TODO: handle SysEx input
+    MIDIInputElementSysEx::updateAllWith(msg);
 }
 
 void Control_Surface_::onRealtimeMessage(Parsing_MIDI_Interface &midi,
@@ -146,6 +148,8 @@ void Control_Surface_::updateInputs() {
     MIDIInputElementCC::updateAll();
     MIDIInputElementNote::updateAll();
     MIDIInputElementChannelPressure::updateAll();
+    MIDIInputElementPC::updateAll();
+    MIDIInputElementSysEx::updateAll();
 }
 
 void Control_Surface_::updateDisplays() {
@@ -165,3 +169,5 @@ void Control_Surface_::updateDisplays() {
 }
 
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();
+
+END_CS_NAMESPACE

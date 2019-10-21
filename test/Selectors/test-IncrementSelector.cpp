@@ -2,6 +2,7 @@
 #include <Selectors/IncrementSelector.hpp>
 
 using namespace ::testing;
+using namespace CS;
 
 TEST(IncrementSelector, pressWrap) {
     MockSelectable<3> selectable;
@@ -60,11 +61,11 @@ TEST(IncrementSelector, pressWrap) {
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
-TEST(IncrementSelector, pressNoWrap) {
+TEST(IncrementSelector, pressClamp) {
     MockSelectable<3> selectable;
 
     IncrementSelector<3> selector = {selectable, IncrementButton(2),
-                                     Wrap::NoWrap};
+                                     Wrap::Clamp};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
 

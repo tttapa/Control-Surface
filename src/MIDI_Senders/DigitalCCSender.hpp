@@ -2,6 +2,8 @@
 
 #include <Control_Surface/Control_Surface_Class.hpp>
 
+BEGIN_CS_NAMESPACE
+
 class DigitalCCSender {
   public:
     DigitalCCSender(uint8_t onValue = 0x7F, uint8_t offValue = 0x00)
@@ -23,3 +25,5 @@ class DigitalCCSender {
     uint8_t onValue;
     uint8_t offValue;
 };
+
+END_CS_NAMESPACE

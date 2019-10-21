@@ -1,16 +1,19 @@
 #include "DebugMIDI_Interface.hpp"
+#include <Helpers/PrintStream.hpp>
+
+BEGIN_CS_NAMESPACE
 
 namespace DebugMIDIMessageNames {
 
 #ifdef PROGMEM
 
-const static char NoteOff[] PROGMEM = "Note Off\t";
-const static char NoteOn[] PROGMEM = "Note On\t\t";
-const static char KeyPressure[] PROGMEM = "Key Pressure\t";
-const static char ControlChange[] PROGMEM = "Control Change\t";
-const static char ProgramChange[] PROGMEM = "Program Change\t";
+const static char NoteOff[] PROGMEM = "Note Off        ";
+const static char NoteOn[] PROGMEM = "Note On         ";
+const static char KeyPressure[] PROGMEM = "Key Pressure    ";
+const static char ControlChange[] PROGMEM = "Control Change  ";
+const static char ProgramChange[] PROGMEM = "Program Change  ";
 const static char ChannelPressure[] PROGMEM = "Channel Pressure";
-const static char PitchBend[] PROGMEM = "Pitch Bend\t";
+const static char PitchBend[] PROGMEM = "Pitch Bend      ";
 
 const static __FlashStringHelper *MIDIStatusTypeNames[] = {
     reinterpret_cast<const __FlashStringHelper *>(NoteOff),
@@ -76,16 +79,9 @@ void StreamDebugMIDI_Interface::sendImpl(uint8_t m, uint8_t c, uint8_t d1,
     uint8_t messageType = (m >> 4) - 8;
     if (messageType >= 7)
         return;
-    stream.print(DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]);
-    stream.print("\tChannel: ");
-    stream.print(c + 1);
-    stream.print("\tData 1: 0x");
-    stream.print(d1, HEX);
-    stream.print("\tData 2: 0x");
-    stream.print(d2, HEX);
-    stream.print("\tCable: ");
-    stream.print(cn);
-    stream.print("\r\n");
+    stream << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
+           << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
+           << F("\tData 2: 0x") << d2 << dec << F("\tCable: ") << cn << endl;
     stream.flush();
 }
 
@@ -94,20 +90,19 @@ void StreamDebugMIDI_Interface::sendImpl(uint8_t m, uint8_t c, uint8_t d1,
     uint8_t messageType = (m >> 4) - 8;
     if (messageType >= 7)
         return;
-    stream.print(DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]);
-    stream.print("\tChannel: ");
-    stream.print(c + 1);
-    stream.print("\tData 1: 0x");
-    stream.print(d1, HEX);
-    stream.print("\tCable: ");
-    stream.print(cn);
-    stream.print("\r\n");
+    stream << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
+           << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
+           << dec << F("\tCable: ") << cn << endl;
     stream.flush();
 }
 
 void StreamDebugMIDI_Interface::sendImpl(const uint8_t *data, size_t length,
                                          uint8_t cn) {
-    (void)data;
-    (void)length;
-    (void)cn; // TODO
+    stream << F("SysEx           \t") << hex << uppercase;
+    while (length-- > 0)
+        stream << (*data++) << ' ';
+    stream << dec << F("\tCable: ") << cn << "\r\n";
+    stream.flush();
 }
+
+END_CS_NAMESPACE

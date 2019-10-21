@@ -1,5 +1,7 @@
 #include "MIDICNChannelAddress.hpp"
 
+BEGIN_CS_NAMESPACE
+
 MIDICNChannelAddress &MIDICNChannelAddress::
 operator+=(const RelativeMIDICNChannelAddress &rhs) {
     if (!this->isValid() || !rhs.isValid()) {
@@ -38,20 +40,6 @@ operator-(const RelativeMIDICNChannelAddress &rhs) const {
     return copy;
 }
 
-bool MIDICNChannelAddress::operator==(const MIDICNChannelAddress &rhs) const {
-    return this->addresses.valid && rhs.addresses.valid &&
-           this->addresses.address == rhs.addresses.address &&
-           this->addresses.channel == rhs.addresses.channel &&
-           this->addresses.cableNumber == rhs.addresses.cableNumber;
-}
-
-bool MIDICNChannelAddress::operator!=(const MIDICNChannelAddress &rhs) const {
-    return this->addresses.valid && rhs.addresses.valid &&
-           !(this->addresses.address == rhs.addresses.address &&
-             this->addresses.channel == rhs.addresses.channel &&
-             this->addresses.cableNumber == rhs.addresses.cableNumber);
-}
-
 bool MIDICNChannelAddress::matchSingle(const MIDICNChannelAddress &toMatch,
                                        const MIDICNChannelAddress &base) {
     return base == toMatch;
@@ -69,3 +57,5 @@ bool MIDICNChannelAddress::matchAddressInRange(
         base.addresses.cableNumber == toMatch.addresses.cableNumber;
     return valid && addressInRange && equalChannelAndCN;
 }
+
+END_CS_NAMESPACE

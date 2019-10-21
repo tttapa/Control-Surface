@@ -4,6 +4,8 @@
 
 #include <Hardware/LEDs/LEDs.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An enumeration type to set an LED display to either bar or dot mode.
  */
@@ -21,7 +23,7 @@ enum class DotBarMode : bool {
 template <uint8_t N>
 class DotBarDisplayLEDs : public LEDs<N> {
   public:
-    DotBarDisplayLEDs(const PinList<N> &ledPins) : LEDs<N>(ledPins) {}
+    DotBarDisplayLEDs(const PinList<N> &ledPins) : LEDs<N>{ledPins} {}
 
     /** 
      * @brief   Display the given number of LEDs on the LED bar.
@@ -67,3 +69,5 @@ class DotBarDisplayLEDs : public LEDs<N> {
   private:
     DotBarMode mode = DotBarMode::Bar;
 };
+
+END_CS_NAMESPACE
