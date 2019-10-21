@@ -41,12 +41,15 @@ class IncrementButton {
     };
 
     /**
-     * @brief   Get the state of the increment button.
-     * 
-     * @todo    Add a getter that doesn't update the button.
+     * @brief   Update and return the state of the increment button.
      */
     State update() { return state = updateImplementation(); }
 
+    /**
+     * @brief   Return the state of the increment button without updating it.
+     * 
+     * Returns the same value as the last @ref update call.
+     */
     State getState() const { return state; }
 
 #ifdef INDIVIDUAL_BUTTON_INVERT
