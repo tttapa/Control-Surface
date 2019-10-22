@@ -35,7 +35,7 @@ class MIDIButton : public MIDIOutputElement {
 
     void begin() override { button.begin(); }
     void update() override {
-        Button::State state = button.getState();
+        Button::State state = button.update();
         if (state == Button::Falling) {
             address.lock();
             sender.sendOn(address.getActiveAddress());
@@ -48,6 +48,8 @@ class MIDIButton : public MIDIOutputElement {
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }
 #endif
+
+    Button::State getButtonState() const { return button.getState(); }
 
   private:
     BankAddress address;

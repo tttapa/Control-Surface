@@ -21,13 +21,15 @@ class GenericSwitchSelector : public GenericSelector<2, Callback> {
 
     void update() override {
         Parent::update();
-        Button::State state = button.getState();
+        Button::State state = button.update();
         if (state == Button::Falling)
             this->set(1);
         else if (state == Button::Rising)
             this->set(0);
     }
 
+    Button::State getButtonState() const { return button.getState(); }
+    
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }
 #endif

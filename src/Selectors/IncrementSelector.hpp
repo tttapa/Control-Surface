@@ -23,10 +23,11 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
     }
 
     void update() override {
-        Parent::update();
-        if (button.getState() == IncrementButton::Increment)
+        if (button.update() == IncrementButton::Increment)
             this->increment(wrap);
     }
+
+    IncrementButton::State getButtonState() const { return button.getState(); }
 
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }

@@ -33,7 +33,7 @@ class MIDIButton : public MIDIOutputElement {
 
     void begin() override { button.begin(); }
     void update() override {
-        Button::State state = button.getState();
+        Button::State state = button.update();
         if (state == Button::Falling) {
             sender.sendOn(address);
         } else if (state == Button::Rising) {
@@ -45,7 +45,7 @@ class MIDIButton : public MIDIOutputElement {
     void invert() { button.invert(); }
 #endif
 
-    Button getButtonCopy() const { return button; }
+    Button::State getButtonState() const { return button.getState(); }
 
   private:
     Button button;

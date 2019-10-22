@@ -83,6 +83,6 @@ void setup() { // Initialize everything
 
 void loop() { // Check if a button is pressed, if so toggle the LED
   for (uint8_t i = 0; i < mux.length(); ++i)
-    if (buttons[i].getState() == Button::Falling)
+    if (buttons[i].update() == Button::Falling)
       sreg.digitalWrite(i, !sreg.digitalRead(i));
 }

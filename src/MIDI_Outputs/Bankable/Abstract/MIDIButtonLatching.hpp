@@ -35,15 +35,17 @@ class MIDIButtonLatching : public MIDIOutputElement {
         : address{bankAddress}, button{pin}, sender{sender} {}
 
   public:
-    void begin() final override { button.begin(); }
-    void update() final override {
-        Button::State state = button.getState();
+    void begin() override { button.begin(); }
+    void update() override {
+        Button::State state = button.update();
         if (state == Button::Falling || state == Button::Rising) {
             MIDICNChannelAddress sendAddress = address.getActiveAddress();
             sender.sendOn(sendAddress);
             sender.sendOff(sendAddress);
         }
     }
+
+    Button::State getButtonState() const { return button.getState(); }
 
   private:
     BankAddress address;

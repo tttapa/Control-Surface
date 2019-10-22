@@ -39,7 +39,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
   public:
     void begin() override { button.begin(); }
     void update() override {
-        Button::State state = button.getState();
+        Button::State state = button.update();
         if (state == Button::Falling)
             toggleState();
     }
@@ -59,6 +59,8 @@ class MIDIButtonLatched : public MIDIOutputElement {
             address.unlock();
         }
     }
+
+    Button::State getButtonState() const { return button.getState(); }
 
   private:
     BankAddress address;

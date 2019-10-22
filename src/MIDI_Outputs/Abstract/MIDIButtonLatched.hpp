@@ -38,7 +38,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
   public:
     void begin() final override { button.begin(); }
     void update() final override {
-        Button::State state = button.getState();
+        Button::State state = button.update();
         if (state == Button::Falling)
             toggleState();
     }
@@ -56,6 +56,8 @@ class MIDIButtonLatched : public MIDIOutputElement {
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }
 #endif
+
+    Button::State getButtonState() const { return button.getState(); }
 
   private:
     Button button;

@@ -25,7 +25,7 @@ class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
     void update() override {
         Parent::update();
         using IncrDecrButtons = IncrementDecrementButtons;
-        switch (buttons.getState()) {
+        switch (buttons.update()) {
             case IncrDecrButtons::Increment: this->increment(wrap); break;
             case IncrDecrButtons::Decrement: this->decrement(wrap); break;
             case IncrDecrButtons::Reset: this->reset(); break;
@@ -37,6 +37,10 @@ class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { buttons.invert(); }
 #endif
+
+    IncrementDecrementButtons::State getButtonsState() const {
+        return buttons.getState();
+    }
 
   private:
     IncrementDecrementButtons buttons;
