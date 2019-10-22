@@ -65,7 +65,7 @@ class HardwareSerial : public Stream {
 extern HardwareSerial Serial;
 
 #ifndef F
-#define F(x) (x)
+#define F(x) (reinterpret_cast<const __FlashStringHelper *>(x))
 #endif
 
 #endif

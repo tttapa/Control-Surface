@@ -33,13 +33,13 @@ Button::State Button::update() {
 
 Button::State Button::getState() const { return debouncedState; }
 
-const char *Button::getName(Button::State state) {
+const __FlashStringHelper *Button::getName(Button::State state) {
     switch (state) {
-        case Button::Pressed: return "Pressed";
-        case Button::Released: return "Released";
-        case Button::Falling: return "Falling";
-        case Button::Rising: return "Rising";
-        default: return ""; // Keeps the compiler happy
+        case Button::Pressed: return F("Pressed");
+        case Button::Released: return F("Released");
+        case Button::Falling: return F("Falling");
+        case Button::Rising: return F("Rising");
+        default: return F("<invalid>"); // Keeps the compiler happy
     }
 }
 

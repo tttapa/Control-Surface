@@ -31,6 +31,7 @@
 #define PROGMEM
 struct __FlashStringHelper;
 #define pgm_read_ptr_near(ptr) ((void *) *(ptr))
+#define F(x) (reinterpret_cast<const __FlashStringHelper *>(x))
 
 #define HIGH 0x1
 #define LOW 0x0

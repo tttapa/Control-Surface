@@ -48,7 +48,7 @@ template <> inline Print &operator<<(Print &printer, manipulator pf) {
 
 #else // No Arduino
 
-#define F(x) (x)
+#include <Arduino.h>
 #include "PrintStream.hpp"
 
 #endif
