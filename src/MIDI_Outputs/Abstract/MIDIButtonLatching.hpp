@@ -1,8 +1,10 @@
 #pragma once
 
+#include <Def/Def.hpp>
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
-#include <Def/Def.hpp>
+
+BEGIN_CS_NAMESPACE
 
 /**
  * @brief   A class for latching buttons and switches that send MIDI events.
@@ -11,7 +13,7 @@
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
+template <class Sender>
 class MIDIButtonLatching : public MIDIOutputElement {
   protected:
     /**
@@ -20,21 +22,31 @@ class MIDIButtonLatching : public MIDIOutputElement {
      * @param   pin
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
+     * @param   address
+     *          The MIDI address to send to.
+     * @param   sender
+     *          The MIDI sender to use.
      */
-    MIDIButtonLatching(pin_t pin, const MIDICNChannelAddress &address)
-        : button{pin}, address(address) {}
+    MIDIButtonLatching(pin_t pin, const MIDICNChannelAddress &address,
+                       const Sender &sender)
+        : button{pin}, address(address), sender{sender} {}
 
   public:
-    void begin() final override { button.begin(); }
-    void update() final override {
+    void begin() override { button.begin(); }
+    void update() override {
         Button::State state = button.getState();
         if (state == Button::Falling || state == Button::Rising) {
-            sendOn(address);
-            sendOff(address);
+            sender.sendOn(address);
+            sender.sendOff(address);
         }
     }
 
   private:
     Button button;
     const MIDICNChannelAddress address;
+
+  public:
+    Sender sender;
 };
+
+END_CS_NAMESPACE

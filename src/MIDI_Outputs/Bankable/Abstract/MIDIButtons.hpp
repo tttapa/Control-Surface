@@ -6,17 +6,20 @@
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
  *
  * The buttons are debounced.
+ * 
+ * @todo    Use BankAddresses?
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff,
-          uint8_t NUMBER_OF_BUTTONS>
+template <class Sender, uint8_t NUMBER_OF_BUTTONS>
 class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
   protected:
     /**
@@ -27,9 +30,11 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
     MIDIButtons(const OutputBankConfig &config,
                 const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 const MIDICNChannelAddress &baseAddress,
-                const RelativeMIDICNChannelAddress &incrementAddress)
+                const RelativeMIDICNChannelAddress &incrementAddress,
+                const Sender &sender)
         : BankableMIDIOutput(config), buttons{buttons},
-          baseAddress(baseAddress), incrementAddress(incrementAddress) {}
+          baseAddress(baseAddress),
+          incrementAddress(incrementAddress), sender{sender} {}
 
   public:
     void begin() final override {
@@ -45,10 +50,10 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
                     lock(); // Don't allow changing of the bank setting
                 MIDICNChannelAddress sendAddress = address + getAddressOffset();
                 activeButtons++;
-                sendOn(sendAddress);
+                sender.sendOn(sendAddress);
             } else if (state == Button::Rising) {
                 MIDICNChannelAddress sendAddress = address + getAddressOffset();
-                sendOff(sendAddress);
+                sender.sendOff(sendAddress);
                 activeButtons--;
                 if (!activeButtons)
                     unlock();
@@ -69,6 +74,11 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
     const MIDICNChannelAddress baseAddress;
     const RelativeMIDICNChannelAddress incrementAddress;
     uint8_t activeButtons = 0;
+
+  public:
+    Sender sender;
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

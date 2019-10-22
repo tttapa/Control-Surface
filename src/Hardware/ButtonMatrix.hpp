@@ -2,17 +2,19 @@
 
 #pragma once
 
-#include <Settings/SettingsWrapper.hpp>
 #include <Def/Def.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
- * @brief   A MIDI_Control_Element that reads the states of a button matrix and
- *          sends it over MIDI.
+ * @brief   A class that reads the states of a button matrix.
  *
  * @tparam  nb_rows
  *          The number of rows in the button matrix.
  * @tparam  nb_cols
  *          The number of columns in the button matrix.
+ * 
+ * @ingroup HardwareUtils
  */
 template <uint8_t nb_rows, uint8_t nb_cols>
 class ButtonMatrix {
@@ -23,7 +25,7 @@ class ButtonMatrix {
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
      *          matrix.  
-     *          **⚠** These pins will be driven LOW (Lo-Z).
+     *          **⚠** These pins will be driven LOW as outputs (Lo-Z).
      * @param   colPins
      *          A list of pin numbers connected to the columns of the button
      *          matrix.  
@@ -74,5 +76,7 @@ class ButtonMatrix {
     const PinList<nb_rows> rowPins;
     const PinList<nb_cols> colPins;
 };
+
+END_CS_NAMESPACE
 
 #include "ButtonMatrix.ipp" // Template implementations

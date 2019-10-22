@@ -2,6 +2,8 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <string.h>
 
+BEGIN_CS_NAMESPACE
+
 using namespace ExtIO;
 
 template <uint8_t nb_rows, uint8_t nb_cols>
@@ -78,3 +80,5 @@ void ButtonMatrix<nb_rows, nb_cols>::setPrevState(uint8_t col, uint8_t row,
     else
         prevStates[bitsToIndex(bits)] &= ~bitsToBitmask(bits);
 }
+
+END_CS_NAMESPACE

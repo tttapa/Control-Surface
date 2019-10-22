@@ -1,7 +1,10 @@
 #pragma once
 
+#include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButtonLatching.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
+
+BEGIN_CS_NAMESPACE
 
 namespace Bankable {
 
@@ -9,36 +12,48 @@ namespace Bankable {
  * @brief   A class of MIDIOutputElement%s that read the input of a **latching
  *          push button or toggle switch**, and send out MIDI **Note** events.
  * 
- *          When the switch changes state, two MIDI Note events are sent: first
- *          a Note On event, followed immediately by a Note Off event.  
- *          The switch is debounced in software.  
- *          This version can be banked.  
+ * When the switch changes state, two MIDI Note events are sent: first
+ * a Note On event, followed immediately by a Note Off event.  
+ * The switch is debounced in software.  
+ * This version can be banked.  
  *
- * @ingroup MIDIOutputElements
+ * @ingroup BankableMIDIOutputElements
  */
 class NoteButtonLatching
-    : public MIDIButtonLatching<DigitalNoteSender::sendOn,
-                                DigitalNoteSender::sendOff> {
+    : public MIDIButtonLatching<SingleAddress, DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new Bankable NoteButtonLatching object with the given 
      *          pin, note number and channel.
      * 
+     * @param   config
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
      * @param   pin
      *          The digital input pin to read from.  
      *          The internal pull-up resistor will be enabled.
-     * @param   note
-     *          The MIDI note number. [0, 127]
-     * @param   channel
-     *          The MIDI channel. [1, 16]
-     * 
-     * @ingroup MIDIOutputElementConstructors
+     * @param   address
+     *          The MIDI address containing the note number [0, 127], 
+     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          [0, 15].
+     * @param   velocity
+     *          The velocity of the MIDI Note events.
      */
     NoteButtonLatching(const OutputBankConfig &config, pin_t pin,
-                       const MIDICNChannelAddress &address)
-        : MIDIButtonLatching<DigitalNoteSender::sendOn,
-                             DigitalNoteSender::sendOff>(config, pin, address) {
-    }
+                       const MIDICNChannelAddress &address,
+                       uint8_t velocity = 0x7F)
+        : MIDIButtonLatching<SingleAddress, DigitalNoteSender>{
+              {config, address},
+              pin,
+              {velocity},
+          } {}
+
+    /// Set the velocity of the MIDI Note events.
+    void setVelocity(uint8_t velocity) { this->sender.setVelocity(velocity); }
+    /// Get the velocity of the MIDI Note events.
+    uint8_t getVelocity() const { return this->sender.getVelocity(); }
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

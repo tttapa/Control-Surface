@@ -1,68 +1,79 @@
 #pragma once
 
-#include <Hardware/LEDs/VULEDs.hpp>
+#include <Hardware/LEDs/DotBarDisplayLEDs.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
+
+BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
-template <uint8_t N>
-class VULEDs_Base : virtual public VU_Base {
-  protected:
-    VULEDs_Base(const DotBarDisplayLEDs<N> &leds) : leds(leds) {}
-
+template <uint8_t NumLEDs>
+class VULEDsCallback {
   public:
-    void begin() override { leds.begin(); }
+    VULEDsCallback(const DotBarDisplayLEDs<NumLEDs> &leds) : leds(leds) {}
 
-    void display() const override {
-        uint8_t value = this->getValue();            // value in [0, 12]
-        value = (value * N + FLOOR_CORRECTION) / 12; // value in [0, N]
+    template <class T>
+    void begin(T &) {
+        leds.begin();
+    }
+
+    template <class T>
+    void update(T &t) {
+        uint8_t value = t.getValue();                      // value in [0, 12]
+        value = (value * NumLEDs + FLOOR_CORRECTION) / 12; // value in [0, N]
         leds.display(value);
     }
 
   private:
-    const DotBarDisplayLEDs<N> leds;
+    const DotBarDisplayLEDs<NumLEDs> leds;
 
-    /** @see    doc/VU-LED-mapping.ods */
+    /// @see    doc/VU-LED-mapping.ods
     constexpr static uint8_t FLOOR_CORRECTION = 5;
 };
 
-/**
- * @brief 
- * 
- * @tparam  N
- *          Number of LEDs.
- */
-template <uint8_t N>
-class VULEDs : public VU, public VULEDs_Base<N> {
+template <uint8_t NumLEDs>
+class VULEDs : public GenericVU<VULEDsCallback<NumLEDs>> {
   public:
-    VULEDs(const MIDICNChannelAddress &address,
-           const DotBarDisplayLEDs<N> &leds, unsigned int decayTime = 150)
-        : VU_Base(address, decayTime),
-          VU(address), VULEDs_Base<N>(leds) {}
+    VULEDs(const PinList<NumLEDs> &ledPins, uint8_t track,
+           unsigned int decayTime = VUDecay::Default)
+        : GenericVU<VULEDsCallback<NumLEDs>>{
+              track,
+              CHANNEL_1,
+              decayTime,
+              {ledPins},
+          } {}
+
+    VULEDs(const PinList<NumLEDs> &ledPins, uint8_t track,
+           MIDICNChannel channelCN, unsigned int decayTime = VUDecay::Default)
+        : GenericVU<VULEDsCallback<NumLEDs>>{
+              track,
+              channelCN,
+              decayTime,
+              {ledPins},
+          } {}
 };
 
 namespace Bankable {
 
-/**
- * @brief 
- * 
- * @tparam  M
- *          Number of settings.
- * @tparam  N
- *          Number of LEDs.
- */
-template <uint8_t M, uint8_t N>
-class VULEDs : public VU<M>, public VULEDs_Base<N> {
+template <uint8_t NumBanks, uint8_t NumLEDs>
+class VULEDs : public GenericVU<NumBanks, VULEDsCallback<NumLEDs>> {
   public:
-    VULEDs(const BankConfig<M> &config, const DotBarDisplayLEDs<N> &leds,
-           const MIDICNChannelAddress &address, unsigned int decayTime = 150)
-        : VU_Base(address, decayTime), VU<M>(config, address, decayTime),
-          VULEDs_Base<N>(leds) {}
+    VULEDs(BankConfig<NumBanks> config, const PinList<NumLEDs> &ledPins,
+           uint8_t track, unsigned int decayTime = VUDecay::Default)
+        : GenericVU<NumBanks, VULEDsCallback<NumLEDs>>{
+              config, track, CHANNEL_1, decayTime, {ledPins},
+          } {}
 
-  private:
-    void onBankSettingChange() const override { this->display(); }
+    VULEDs(BankConfig<NumBanks> config, const PinList<NumLEDs> &ledPins,
+           uint8_t track, MIDICNChannel channelCN,
+           unsigned int decayTime = VUDecay::Default)
+        : GenericVU<NumBanks, VULEDsCallback<NumLEDs>>{
+              config, track, channelCN, decayTime, {ledPins},
+          } {}
 };
 
 } // namespace Bankable
 
 } // namespace MCU
+
+END_CS_NAMESPACE

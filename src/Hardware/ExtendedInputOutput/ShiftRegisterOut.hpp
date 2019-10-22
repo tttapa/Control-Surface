@@ -6,6 +6,8 @@
 #include <Arduino.h> // MSBFIRST
 #include <Helpers/BitArray.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for serial-in/parallel-out shift registers, 
  *          like the 74HC595.
@@ -64,5 +66,7 @@ class ShiftRegisterOut : public ShiftRegisterOutBase<N> {
     const pin_t dataPin;
     const pin_t clockPin;
 };
+
+END_CS_NAMESPACE
 
 #include "ShiftRegisterOut.ipp"

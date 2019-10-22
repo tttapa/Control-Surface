@@ -4,6 +4,8 @@
 #include <Display/DisplayInterface.hpp>
 #include <MIDI_Inputs/MCU/TimeDisplay.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
 class TimeDisplayDisplay : public DisplayElement {
@@ -48,3 +50,5 @@ class TimeDisplayDisplay : public DisplayElement {
 };
 
 } // namespace MCU
+
+END_CS_NAMESPACE

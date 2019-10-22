@@ -2,6 +2,7 @@
 #include <Selectors/ManyButtonsSelector.hpp>
 
 using namespace ::testing;
+using namespace CS;
 
 TEST(ManyButtonsSelector, press) {
     MockSelectable<4> selectable;
@@ -18,13 +19,13 @@ TEST(ManyButtonsSelector, press) {
     Updatable<>::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
-        .WillOnce(Return(HIGH));
+        .WillRepeatedly(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
-        .WillOnce(Return(HIGH));
+        .WillRepeatedly(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(4))
-        .WillOnce(Return(HIGH));
+        .WillRepeatedly(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(5))
-        .WillOnce(Return(LOW));
+        .WillRepeatedly(Return(LOW));
 
     EXPECT_CALL(selectable, select(3));
 

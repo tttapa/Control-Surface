@@ -3,6 +3,15 @@
 #include "MIDIInputElement.hpp"
 #include <Helpers/LinkedList.hpp>
 
+#if defined(ESP32)
+#include <mutex>
+#define GUARD_LIST_LOCK std::lock_guard<std::mutex> _guard(mutex)
+#else
+#define GUARD_LIST_LOCK
+#endif
+
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   Class for objects that listen for incoming MIDI Note events.
  * 
@@ -10,21 +19,26 @@
  */
 class MIDIInputElementNote : public MIDIInputElement,
                              public DoublyLinkable<MIDIInputElementNote> {
-  public:
+  protected:
     /**
      * @brief   Constructor.
      * @todo    Documentation.
      */
     MIDIInputElementNote(const MIDICNChannelAddress &address)
         : MIDIInputElement{address} {
+        GUARD_LIST_LOCK;
         elements.append(this);
     }
 
+  public:
     /**
      * @brief   Destructor.
      * @todo    Documentation.
      */
-    virtual ~MIDIInputElementNote() { elements.remove(this); }
+    virtual ~MIDIInputElementNote() {
+        GUARD_LIST_LOCK;
+        elements.remove(this);
+    }
 
     /**
      * @brief   Initialize all MIDIInputElementNote elements.
@@ -32,6 +46,7 @@ class MIDIInputElementNote : public MIDIInputElement,
      * @see     MIDIInputElementNote#begin
      */
     static void beginAll() {
+        GUARD_LIST_LOCK;
         for (MIDIInputElementNote &e : elements)
             e.begin();
     }
@@ -42,6 +57,7 @@ class MIDIInputElementNote : public MIDIInputElement,
      * @see     MIDIInputElementNote#update
      */
     static void updateAll() {
+        GUARD_LIST_LOCK;
         for (MIDIInputElementNote &e : elements)
             e.update();
     }
@@ -52,6 +68,7 @@ class MIDIInputElementNote : public MIDIInputElement,
      * @see     MIDIInputElementNote#reset
      */
     static void resetAll() {
+        GUARD_LIST_LOCK;
         for (MIDIInputElementNote &e : elements)
             e.reset();
     }
@@ -62,14 +79,35 @@ class MIDIInputElementNote : public MIDIInputElement,
      * 
      * @see     MIDIInputElementNote#updateWith
      */
-    static void updateAllWith(const MIDI_message_matcher &midimsg) {
+    static void updateAllWith(const ChannelMessageMatcher &midimsg) {
         for (MIDIInputElementNote &e : elements)
-            if (e.updateWith(midimsg))
+            if (e.updateWith(midimsg)) {
+                e.moveDown();
                 return;
+            }
+        // No mutex required:
+        // e.moveDown may alter the list, but if it does, it always returns,
+        // and we stop iterating, so it doesn't matter.
     }
 
   private:
-    void moveDown() override { elements.moveDown(this); }
+    /**
+     * @brief   Move down this element in the linked list of elements.
+     * 
+     * This means that the element will be checked earlier on the next
+     * iteration.
+     */
+    void moveDown() {
+        GUARD_LIST_LOCK;
+        elements.moveDown(this);
+    }
 
     static DoublyLinkedList<MIDIInputElementNote> elements;
+#ifdef ESP32
+    static std::mutex mutex;
+#endif
 };
+
+#undef GUARD_LIST_LOCK
+
+END_CS_NAMESPACE

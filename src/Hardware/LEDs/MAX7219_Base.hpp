@@ -5,6 +5,8 @@
 #include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <SPI.h>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A base class for classes that control MAX7219 LED drivers.
  * 
@@ -60,7 +62,7 @@ class MAX7219_Base {
      *          The value to set the row to.
      */
     void send(uint8_t digit, uint8_t value) {
-        sendRaw((digit & 0xF) + 1, value);
+        sendRaw((digit & 0x7) + 1, value);
     }
 
     /**
@@ -94,3 +96,5 @@ class MAX7219_Base {
     pin_t loadPin;
     SPISettings settings = {SPI_MAX_SPEED, MSBFIRST, SPI_MODE0};
 };
+
+END_CS_NAMESPACE

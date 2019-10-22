@@ -4,7 +4,14 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include <Def/Def.hpp>
 #include <Settings/SettingsWrapper.hpp>
+
+#ifndef ARDUINO
+#include <vector>
+#endif
+
+BEGIN_CS_NAMESPACE
 
 const uint8_t NOTE_OFF = 0x80;
 const uint8_t NOTE_ON = 0x90;
@@ -18,23 +25,6 @@ const uint8_t SysExStart = 0xF0;
 const uint8_t SysExEnd = 0xF7;
 
 const uint8_t TuneRequest = 0xF6;
-
-struct MIDI_message {
-    uint8_t header;
-    uint8_t data1;
-    uint8_t data2;
-
-    uint8_t CN = 0;
-
-    bool operator==(const MIDI_message &other) const {
-        return this->header == other.header && this->data1 == other.data1 &&
-               this->data2 == other.data2 && this->CN == other.CN;
-    }
-
-    bool operator!=(const MIDI_message &other) const {
-        return !(*this == other);
-    }
-};
 
 enum MIDI_read_t : uint8_t {
     NO_MESSAGE = 0,
@@ -54,9 +44,38 @@ enum MIDI_read_t : uint8_t {
 
 // -------------------------------------------------------------------------- //
 
+struct ChannelMessage {
+    uint8_t header;
+    uint8_t data1;
+    uint8_t data2;
+
+    uint8_t CN = 0;
+
+    bool operator==(const ChannelMessage &other) const {
+        return this->header == other.header && this->data1 == other.data1 &&
+               this->data2 == other.data2 && this->CN == other.CN;
+    }
+
+    bool operator!=(const ChannelMessage &other) const {
+        return !(*this == other);
+    }
+};
+
 struct SysExMessage {
+    SysExMessage() : data(nullptr), length(0), CN(0) {}
+    SysExMessage(const uint8_t *data, size_t length, uint8_t CN = 0)
+        : data(data), length(length), CN(CN) {}
+#ifndef ARDUINO
+    SysExMessage(const std::vector<uint8_t> &vec, uint8_t CN = 0)
+        : data(vec.data()), length(vec.size()), CN(CN) {}
+#endif
     const uint8_t *data;
-    size_t length;
+    uint8_t length;
+    uint8_t CN;
+};
+
+struct RealTimeMessage {
+    uint8_t message;
     uint8_t CN;
 };
 
@@ -65,9 +84,13 @@ struct SysExMessage {
 class MIDI_Parser {
   public:
     /** Get the latest MIDI channel message */
-    MIDI_message getChannelMessage();
+    ChannelMessage getChannelMessage();
+#if !IGNORE_SYSEX
     /** Get the latest SysEx message. */
     virtual SysExMessage getSysEx() const = 0;
+#else
+    SysExMessage getSysEx() const { return {nullptr, 0, 0}; }
+#endif
     /** Get the pointer to the SysEx data. */
     const uint8_t *getSysExBuffer() const { return getSysEx().data; }
     /** Get the length of the SysEx message. */
@@ -76,7 +99,7 @@ class MIDI_Parser {
     virtual uint8_t getCN() const { return 0; };
 
   protected:
-    MIDI_message midimsg = {};
+    ChannelMessage midimsg = {};
 
   public:
     /** Check if the given byte is a MIDI header byte. */
@@ -84,3 +107,5 @@ class MIDI_Parser {
     /** Check if the given byte is a MIDI data byte. */
     static bool isData(uint8_t data);
 };
+
+END_CS_NAMESPACE

@@ -7,7 +7,15 @@ class Print;
 
 class Printable {
   public:
-    virtual size_t printTo(Print& p) const = 0;
+    virtual size_t printTo(Print &p) const = 0;
 };
+
+#include <Print.h>
+
+inline std::ostream &operator<<(std::ostream &os, const Printable &p) {
+    OstreamPrint op = os;
+    p.printTo(op);
+    return os;
+}
 
 #endif

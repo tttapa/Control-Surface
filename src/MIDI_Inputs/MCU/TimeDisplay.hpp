@@ -2,6 +2,8 @@
 
 #include "SevenSegmentDisplay.hpp"
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
 constexpr static uint8_t TimeDisplayLength = 10;
@@ -51,3 +53,5 @@ class TimeDisplay : public SevenSegmentDisplay<TimeDisplayLength> {
 };
 
 } // namespace MCU
+
+END_CS_NAMESPACE

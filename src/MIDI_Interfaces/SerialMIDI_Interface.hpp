@@ -6,13 +6,15 @@
 #include <MIDI_Parsers/SerialMIDI_Parser.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for MIDI interfaces sending and receiving MIDI messages
  *          over a Stream.
  * 
  * @ingroup MIDIInterfaces
  */
-class StreamMIDI_Interface : public MIDI_Interface {
+class StreamMIDI_Interface : public Parsing_MIDI_Interface {
   public:
     /**
      * @brief   Construct a StreamMIDI_Interface on the given Stream.
@@ -21,7 +23,7 @@ class StreamMIDI_Interface : public MIDI_Interface {
      *          The Stream interface.
      */
     StreamMIDI_Interface(Stream &stream)
-        : MIDI_Interface(parser), stream(stream) {}
+        : Parsing_MIDI_Interface(parser), stream(stream) {}
 
     MIDI_read_t read() override {
         while (stream.available() > 0) {
@@ -36,17 +38,25 @@ class StreamMIDI_Interface : public MIDI_Interface {
   protected:
     SerialMIDI_Parser parser;
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                  uint8_t cn) override {
+        (void)cn;
         stream.write(m | c); // Send the MIDI message over the stream
         stream.write(d1);
         stream.write(d2);
         stream.flush(); // TODO
     }
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1) override {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
+        (void)cn;
         stream.write(m | c); // Send the MIDI message over the stream
         stream.write(d1);
         stream.flush(); // TODO
+    }
+
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
+        stream.write(data, length);
+        (void)cn;
     }
 
   protected:
@@ -63,7 +73,7 @@ class StreamMIDI_Interface : public MIDI_Interface {
  * 
  * @ingroup MIDIInterfaces
  */
-template <typename T>
+template <class T>
 class SerialMIDI_Interface : public StreamMIDI_Interface {
   public:
     /**
@@ -109,45 +119,13 @@ class HardwareSerialMIDI_Interface
         : SerialMIDI_Interface(serial, baud) {}
 };
 
-// The Serial USB connection
-// (Why do I have to do this, why don't they all inherit from one single class?)
-
-// Boards without a USB connection (UNO, MEGA, Nano ...)
-#if !(defined(USBCON) || defined(CORE_TEENSY))
 /**
  * @brief   A class for MIDI interfaces sending and receiving
- *          MIDI messages over the USB CDC connection.
+ *          MIDI messages over the Serial port of the USB connection.
  *
- *          Boards without a native USB connection (UNO, MEGA, Nano ...)
- *          use HardwareSerial0 for USB communcication.
- * 
  * @ingroup MIDIInterfaces
  */
-class USBSerialMIDI_Interface : public HardwareSerialMIDI_Interface {
-  public:
-    /**
-     * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
-     *
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBSerialMIDI_Interface(unsigned long baud)
-        : HardwareSerialMIDI_Interface(Serial, baud) {}
-};
-
-// Teensies
-#elif defined(TEENSYDUINO)
-#if defined(TEENSY_SERIALUSB_ENABLED)
-/**
- * @brief   A class for MIDI interfaces sending and receiving
- *          MIDI messages over the USB Serial CDC connection.
- *
- *          The USB Serial connection `Serial` on Teensies is an instance of
- *          the `usb_serial_class`.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBSerialMIDI_Interface : public SerialMIDI_Interface<usb_serial_class> {
+class USBSerialMIDI_Interface : public SerialMIDI_Interface<decltype(Serial)> {
   public:
     /**
      * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
@@ -158,54 +136,6 @@ class USBSerialMIDI_Interface : public SerialMIDI_Interface<usb_serial_class> {
     USBSerialMIDI_Interface(unsigned long baud)
         : SerialMIDI_Interface(Serial, baud) {}
 };
-#endif
-
-// Arduino DUE
-#elif defined(ARDUINO_ARCH_SAM)
-/**
- * @brief   A class for MIDI interfaces sending and receiving
- *          MIDI messages over the USB Serial CDC connection.
- *
- *          The USB Serial connection `Serial` on the Arduino DUE is an
- *          instance of the `UARTClass`.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBSerialMIDI_Interface : public SerialMIDI_Interface<UARTClass> {
-  public:
-    /**
-     * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
-     *
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBSerialMIDI_Interface(unsigned long baud)
-        : SerialMIDI_Interface(Serial, baud) {}
-};
-
-// Others (Leonardo, Micro ... )
-#else
-/**
- * @brief   A class for MIDI interfaces sending and receiving
- *          MIDI messages over the USB Serial CDC connection.
- *
- *          The USB Serial connection `Serial` on the Arduino Leonardo, Micro,
- *          etc. is an instance of the `Serial_` class.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBSerialMIDI_Interface : public SerialMIDI_Interface<Serial_> {
-  public:
-    /**
-     * @brief   Construct a USBSerialMIDI_Interface with the given baud rate.
-     *
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBSerialMIDI_Interface(unsigned long baud)
-        : SerialMIDI_Interface(Serial, baud) {}
-};
-#endif
 
 #if !defined(TEENSYDUINO) ||                                                   \
     (defined(TEENSYDUINO) && defined(TEENSY_SERIALUSB_ENABLED))
@@ -229,8 +159,17 @@ class HairlessMIDI_Interface : public USBSerialMIDI_Interface {
 };
 #endif
 
-#if defined(__AVR__) || defined(TEENSYDUINO)
+END_CS_NAMESPACE
+
+// TODO: Teensy 4.0 SoftwareSerial bug
+#if defined(__AVR__) || (defined(TEENSYDUINO) && TEENSYDUINO != 147) ||        \
+    (defined(TEENSYDUINO) && !defined(__IMXRT1052__) &&                        \
+     !defined(__IMXRT1062__))
+
 #include <SoftwareSerial.h>
+
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for MIDI interfaces sending and receiving
  *          MIDI messages over a SoftwareSerial interface.
@@ -252,4 +191,7 @@ class SoftwareSerialMIDI_Interface
     SoftwareSerialMIDI_Interface(SoftwareSerial &serial, unsigned long baud)
         : SerialMIDI_Interface(serial, baud) {}
 };
+
+END_CS_NAMESPACE
+
 #endif

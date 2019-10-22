@@ -1,6 +1,21 @@
 #include "SerialMIDI_Parser.hpp"
 
+BEGIN_CS_NAMESPACE
+
 MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
+    DEBUGFN(hex << NAMEDVALUE(midiByte) << dec);
+#if !IGNORE_SYSEX
+    // If the previous byte was a SysExStart
+    // I have to handle a start in the next time step, because a start can also
+    // end the previous message. When that happens, I have to return 
+    // SYSEX_MESSAGE without resetting the buffer.
+    // Then, after handling the message by the user, I do have to reset the 
+    // buffer.
+    if (midimsg.header == SysExStart && !sysexbuffer.isReceiving()) {
+        startSysEx();
+        addSysExByte(SysExStart);
+    }
+#endif
     if (isStatus(midiByte)) {
         // If it's a status byte (first byte)
         if (midiByte >= 0xF8) {
@@ -11,21 +26,16 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
             uint8_t previousHeader = midimsg.header;
             midimsg.header = midiByte;
             thirdByte = false;
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
+            if (midimsg.header == TuneRequest) {
+                ; // Tune request (not implemented)
+            }
             if (previousHeader == SysExStart) {
                 // If we're currently receiving a SysEx message
-                // midimsg.header = SysExEnd; // TODO: why did I write this?
-                if (addSysExByte(SysExEnd)) { // add SysExEnd byte to buffer
-                    endSysEx();
-                    return SYSEX_MESSAGE;
-                }
-            }
-            if (midimsg.header == SysExStart) {
-                // If the first byte of a SysEx message
-                startSysEx();
-                addSysExByte(SysExStart);
-            } else if (midimsg.header == TuneRequest) {
-                ; // Tune request (not implemented)
+                addSysExByte(SysExEnd); // Try to add SysExEnd byte to buffer
+                // Even if the buffer is full, end the message anyway
+                endSysEx();
+                return SYSEX_MESSAGE;
             }
 #else
             (void)previousHeader;
@@ -34,7 +44,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
     } else {
         // If it's a data byte
         if (midimsg.header == 0) {
-            DEBUGFN("Error: No header");
+            DEBUGFN("Warning: No header");
             ; // Ignore
         } else if (thirdByte) {
             // Third byte of three (data 2)
@@ -52,7 +62,7 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
                 midimsg.data1 = midiByte;
                 return CHANNEL_MESSAGE;
             }
-#ifndef IGNORE_SYSEX
+#if !IGNORE_SYSEX
             else if (midimsg.header == SysExStart) {
                 // SysEx data byte
                 addSysExByte(midiByte);
@@ -65,3 +75,5 @@ MIDI_read_t SerialMIDI_Parser::parse(uint8_t midiByte) {
     }
     return NO_MESSAGE;
 }
+
+END_CS_NAMESPACE

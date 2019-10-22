@@ -4,6 +4,8 @@
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
  *
@@ -11,7 +13,7 @@
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
+template <class Sender>
 class MIDIButton : public MIDIOutputElement {
   public:
     /**
@@ -20,17 +22,22 @@ class MIDIButton : public MIDIOutputElement {
      * @param   pin
      *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
+     * @param   address
+     *          The MIDI address to send to.
+     * @param   sender
+     *          The MIDI sender to use.
      */
-    MIDIButton(pin_t pin, const MIDICNChannelAddress &address)
-        : button{pin}, address{address} {}
+    MIDIButton(pin_t pin, const MIDICNChannelAddress &address,
+               const Sender &sender)
+        : button{pin}, address{address}, sender{sender} {}
 
-    void begin() final override { button.begin(); }
-    void update() final override {
+    void begin() override { button.begin(); }
+    void update() override {
         Button::State state = button.getState();
         if (state == Button::Falling) {
-            sendOn(address);
+            sender.sendOn(address);
         } else if (state == Button::Rising) {
-            sendOff(address);
+            sender.sendOff(address);
         }
     }
 
@@ -43,4 +50,9 @@ class MIDIButton : public MIDIOutputElement {
   private:
     Button button;
     const MIDICNChannelAddress address;
+
+  public:
+    Sender sender;
 };
+
+END_CS_NAMESPACE

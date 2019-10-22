@@ -17,7 +17,7 @@
 #endif
 
 #if defined(USB_MIDI_AUDIO_SERIAL) || defined(USB_MIDI16_AUDIO_SERIAL) ||      \
-    defined(USB_EVERYTHING)
+    defined(USB_AUDIO) || defined(USB_EVERYTHING)
 #define TEENSY_AUDIOUSB_ENABLED
 #endif
 

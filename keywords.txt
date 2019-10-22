@@ -1,10 +1,18 @@
-#######################################
+################################################################################
 # Datatypes (KEYWORD1)
-#######################################
+################################################################################
+
 Control_Surface	KEYWORD1
 
 # Audio 
+#######
+
 AudioVU	KEYWORD1
+AudioVULEDs	KEYWORD1
+VolumeControl	KEYWORD1
+
+# MIDI Interfaces
+#################
 
 MIDI_Interface	KEYWORD1
 StreamMIDI_Interface	KEYWORD1
@@ -19,20 +27,14 @@ USBDebugMIDI_Interface	KEYWORD1
 SoftwareSerialDebugMIDI_Interface	KEYWORD1
 HairlessMIDI_Interface	KEYWORD1
 
+MIDI_Callbacks	KEYWORD1
+SysExMessage	KEYWORD1
+
+# Hardware
+##########
+
 Button	KEYWORD1
-
-CCPotentiometer	KEYWORD1
-CCRotaryEncoder	KEYWORD1
-
-CCButtonLatched	KEYWORD1
-
-Bankable	KEYWORD1
-Bank	KEYWORD1
-Transposer	KEYWORD1
-ProgramSelector	KEYWORD1
-
-Selector	KEYWORD1
-SwitchSelector	KEYWORD1
+FilteredAnalog	KEYWORD1
 
 ExtIO	KEYWORD1
 ExtendedIOElement	KEYWORD1
@@ -44,22 +46,111 @@ SPIShiftRegisterOut	KEYWORD1
 pin_t	KEYWORD1
 analog_t	KEYWORD1
 
+# MIDI Output Elements
+######################
+
+CCButton	KEYWORD1
+CCButtonLatched	KEYWORD1
+CCButtonLatching	KEYWORD1
+CCButtonMatrix	KEYWORD1
+CCButtons	KEYWORD1
+CCIncrementDecrementButtons	KEYWORD1
+CCPotentiometer	KEYWORD1
+CCRotaryEncoder	KEYWORD1
+
+NoteButton	KEYWORD1
+NoteButtonLatched	KEYWORD1
+NoteButtonLatching	KEYWORD1
+NoteButtonMatrix	KEYWORD1
+NoteChordButton	KEYWORD1
+
+PBPotentiometer	KEYWORD1
+
+ProgramChanger	KEYWORD1
+PCButton	KEYWORD1
+
+# MIDI Input Elements
+#####################
+
+NoteValueLED	KEYWORD1
+CCValueLED	KEYWORD1
+NoteRangeLEDs	KEYWORD1
+CCRangeLEDs	KEYWORD1
+
+MAX7219SevenSegmentDisplay	KEYWORD1
+
+# Banks
+#######
+
+Bankable	KEYWORD1
+Bank	KEYWORD1
+Transposer	KEYWORD1
+ProgramSelector	KEYWORD1
+
+# Selector
+##########
+
+Selector	KEYWORD1
+EncoderSelector	KEYWORD1
+IncrementDecrementSelector	KEYWORD1
+IncrementSelector	KEYWORD1
+ManyButtonsSelector	KEYWORD1
+ProgramChangeSelector	KEYWORD1
+SwitchSelector	KEYWORD1
+
+GenericSelector	KEYWORD1
+GenericEncoderSelector	KEYWORD1
+GenericIncrementDecrementSelector	KEYWORD1
+GenericIncrementSelector	KEYWORD1
+GenericManyButtonsSelector	KEYWORD1
+GenericProgramChangeSelector	KEYWORD1
+GenericSwitchSelector	KEYWORD1
+
+EncoderSelectorLEDs	KEYWORD1
+IncrementDecrementSelectorLEDs	KEYWORD1
+IncrementSelectorLEDs	KEYWORD1
+ManyButtonsSelectorLEDs	KEYWORD1
+ProgramChangeSelectorLEDs	KEYWORD1
+SwitchSelectorLED	KEYWORD1
+
+# Enumerations
+##############
+
 relativeCCmode	KEYWORD1
 BankType	KEYWORD1
 buttonType	KEYWORD1
 
+# Constant Namespaces
+#####################
+
 MCU	KEYWORD1
 MIDI_CC	KEYWORD1
+MIDI_PC	KEYWORD1
+
+# Types
+#######
 
 Array	KEYWORD1
+Array2D	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
+
 update	KEYWORD2
 
 setDefault	KEYWORD2
 getDefault	KEYWORD2
+
+setCallbacks	KEYWORD2
+getParser	KEYWORD2
+getSysExMessage	KEYWORD2
+getChannelMessage	KEYWORD2
+getCN	KEYWORD2
+
+onChannelMessage	KEYWORD2
+onSysExMessage	KEYWORD2
+onRealtimeMessage	KEYWORD2
 
 map	KEYWORD2
 invert	KEYWORD2
@@ -69,6 +160,7 @@ send	KEYWORD2
 add	KEYWORD2
 select	KEYWORD2
 getSelection	KEYWORD2
+getTracksPerBank	KEYWORD2
 getTransposition	KEYWORD2
 
 begin	KEYWORD2
@@ -92,10 +184,12 @@ greenBit	KEYWORD2
 blueBit	KEYWORD2
 
 getState	KEYWORD2
+getMCUNameFromNoteNumber	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
+
 NOTE_ON	LITERAL1
 NOTE_OFF	LITERAL1
 KEY_PRESSURE	LITERAL1
@@ -104,8 +198,10 @@ CONTROL_CHANGE	LITERAL1
 PROGRAM_CHANGE	LITERAL1
 CHANNEL_PRESSURE	LITERAL1
 PITCH_BEND	LITERAL1
+
 NORMAL_ENCODER	LITERAL1
 JOG	LITERAL1
+
 ADD_64	LITERAL1
 SIGN_BIT	LITERAL1
 POS1_NEG127	LITERAL1
@@ -132,6 +228,23 @@ Released	LITERAL1
 State	LITERAL1
 
 MIDI_BAUD	LITERAL1
+
+CHANNEL_1	LITERAL1
+CHANNEL_2	LITERAL1
+CHANNEL_3	LITERAL1
+CHANNEL_4	LITERAL1
+CHANNEL_5	LITERAL1
+CHANNEL_6	LITERAL1
+CHANNEL_7	LITERAL1
+CHANNEL_8	LITERAL1
+CHANNEL_9	LITERAL1
+CHANNEL_10	LITERAL1
+CHANNEL_11	LITERAL1
+CHANNEL_12	LITERAL1
+CHANNEL_13	LITERAL1
+CHANNEL_14	LITERAL1
+CHANNEL_15	LITERAL1
+CHANNEL_16	LITERAL1
 
 # MCU
 ######################################
@@ -257,6 +370,16 @@ V_POT_6	LITERAL1
 V_POT_7	LITERAL1
 V_POT_8	LITERAL1
 
+VOLUME_1	LITERAL1
+VOLUME_2	LITERAL1
+VOLUME_3	LITERAL1
+VOLUME_4	LITERAL1
+VOLUME_5	LITERAL1
+VOLUME_6	LITERAL1
+VOLUME_7	LITERAL1
+VOLUME_8	LITERAL1
+MASTER_VOLUME	LITERAL1
+
 # MIDI CC
 ######################################
 
@@ -333,3 +456,135 @@ Omni_Mode_Off	LITERAL1
 Omni_Mode_On	LITERAL1
 Mono_Mode_On	LITERAL1
 Poly_Mode_On	LITERAL1
+
+# MIDI PC 
+#########
+
+Acoustic_Grand_Piano	LITERAL1
+Bright_Acoustic_Piano	LITERAL1
+Electric_Grand_Piano	LITERAL1
+HonkyTonk_Piano	LITERAL1
+Electric_Piano_1	LITERAL1
+Electric_Piano_2	LITERAL1
+Harpsichord	LITERAL1
+Clavi	LITERAL1
+Celesta	LITERAL1
+Glockenspiel	LITERAL1
+Music_Box	LITERAL1
+Vibraphone	LITERAL1
+Marimba	LITERAL1
+Xylophone	LITERAL1
+Tubular_Bells	LITERAL1
+Dulcimer	LITERAL1
+Drawbar_Organ	LITERAL1
+Percussive_Organ	LITERAL1
+Rock_Organ	LITERAL1
+Church_Organ	LITERAL1
+Reed_Organ	LITERAL1
+Accordion	LITERAL1
+Harmonica	LITERAL1
+Tango_Accordion	LITERAL1
+Acoustic_Guitar_Nylon	LITERAL1
+Acoustic_Guitar_Steel	LITERAL1
+Electric_Guitar_Jazz	LITERAL1
+Electric_Guitar_Clean	LITERAL1
+Electric_Guitar_Muted	LITERAL1
+Overdriven_Guitar	LITERAL1
+Distortion_Guitar	LITERAL1
+Guitar_harmonics	LITERAL1
+Acoustic_Bass	LITERAL1
+Electric_Bass_Finger	LITERAL1
+Electric_Bass_Pick	LITERAL1
+Fretless_Bass	LITERAL1
+Slap_Bass_1	LITERAL1
+Slap_Bass_2	LITERAL1
+Synth_Bass_1	LITERAL1
+Synth_Bass_2	LITERAL1
+Violin	LITERAL1
+Viola	LITERAL1
+Cello	LITERAL1
+Contrabass	LITERAL1
+Tremolo_Strings	LITERAL1
+Pizzicato_Strings	LITERAL1
+Orchestral_Harp	LITERAL1
+Timpani	LITERAL1
+String_Ensemble_1	LITERAL1
+String_Ensemble_2	LITERAL1
+SynthStrings_1	LITERAL1
+SynthStrings_2	LITERAL1
+Choir_Aahs	LITERAL1
+Voice_Oohs	LITERAL1
+Synth_Voice	LITERAL1
+Orchestra_Hit	LITERAL1
+Trumpet	LITERAL1
+Trombone	LITERAL1
+Tuba	LITERAL1
+Muted_Trumpet	LITERAL1
+French_Horn	LITERAL1
+Brass_Section	LITERAL1
+SynthBrass_1	LITERAL1
+SynthBrass_2	LITERAL1
+Soprano_Sax	LITERAL1
+Alto_Sax	LITERAL1
+Tenor_Sax	LITERAL1
+Baritone_Sax	LITERAL1
+Oboe	LITERAL1
+English_Horn	LITERAL1
+Bassoon	LITERAL1
+Clarinet	LITERAL1
+Piccolo	LITERAL1
+Flute	LITERAL1
+Recorder	LITERAL1
+Pan_Flute	LITERAL1
+Blown_Bottle	LITERAL1
+Shakuhachi	LITERAL1
+Whistle	LITERAL1
+Ocarina	LITERAL1
+Lead_1	LITERAL1
+Lead_2	LITERAL1
+Lead_3	LITERAL1
+Lead_4	LITERAL1
+Lead_5	LITERAL1
+Lead_6	LITERAL1
+Lead_7	LITERAL1
+Lead_8	LITERAL1
+Pad_1	LITERAL1
+Pad_2	LITERAL1
+Pad_3	LITERAL1
+Pad_4	LITERAL1
+Pad_5	LITERAL1
+Pad_6	LITERAL1
+Pad_7	LITERAL1
+Pad_8	LITERAL1
+FX_1	LITERAL1
+FX_2	LITERAL1
+FX_3	LITERAL1
+FX_4	LITERAL1
+FX_5	LITERAL1
+FX_6	LITERAL1
+FX_7	LITERAL1
+FX_8	LITERAL1
+Sitar	LITERAL1
+Banjo	LITERAL1
+Shamisen	LITERAL1
+Koto	LITERAL1
+Kalimba	LITERAL1
+Bag_Pipe	LITERAL1
+Fiddle	LITERAL1
+Shanai	LITERAL1
+Tinkle_Bell	LITERAL1
+Agogo	LITERAL1
+Steel_Drums	LITERAL1
+Woodblock	LITERAL1
+Taiko_Drum	LITERAL1
+Melodic_Tom	LITERAL1
+Synth_Drum	LITERAL1
+Reverse_Cymbal	LITERAL1
+Guitar_Fret_Noise	LITERAL1
+Breath_Noise	LITERAL1
+Seashore	LITERAL1
+Bird_Tweet	LITERAL1
+Telephone_Ring	LITERAL1
+Helicopter	LITERAL1
+Applause	LITERAL1
+Gunshot	LITERAL1

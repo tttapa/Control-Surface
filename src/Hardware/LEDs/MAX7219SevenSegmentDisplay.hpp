@@ -2,6 +2,8 @@
 
 #include "MAX7219_Base.hpp"
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A lookup table for 7-segment characters, as specified by the Logic
  *          Control manual.
@@ -142,4 +144,21 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
         }
         return 8 - i - startPos;
     }
+
+    /**
+     * @brief   Print a single hexadecimal digit.
+     * 
+     * @param   digit
+     *          The digit to print to [0, 7].
+     * @param   value
+     *          The 4-bit value to print [0, 15].
+     */
+    void printHex(uint8_t digit, uint8_t value) {
+        value &= 0x0F;
+        uint8_t c =
+            value >= 0xA ? AlphaChars[value - 0x0A] : NumericChars[value];
+        send(digit, c);
+    }
 };
+
+END_CS_NAMESPACE

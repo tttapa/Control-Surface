@@ -1,11 +1,11 @@
-/* ✔ */
-
 #pragma once
 
 #include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+
+BEGIN_CS_NAMESPACE
 
 namespace Bankable {
 
@@ -17,29 +17,28 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
-class MIDIButtonLatched : public BankableMIDIOutput, public MIDIOutputElement {
+template <class BankAddress, class Sender>
+class MIDIButtonLatched : public MIDIOutputElement {
   protected:
     /**
      * @brief   Create a new bankable MIDIButtonLatched object on the given pin
      *          and address.
      * 
-     * @param   config
-     *          The bank to add this element to.
+     * @param   bankAddress
+     *          The bankable MIDI address to send to.
      * @param   pin
-     *          The digital input pin to read from.  
+     *          The digital input pin with the button connected.
      *          The internal pull-up resistor will be enabled.
-     * @param   address
-     *          The MIDI address containing the note/controller number [0, 127],
-     *          channel [1, 16], and optional cable number [0, 15].
+     * @param   sender
+     *          The MIDI sender to use.
      */
-    MIDIButtonLatched(const OutputBankConfig &config, pin_t pin,
-                      const MIDICNChannelAddress &address)
-        : BankableMIDIOutput{config}, button{pin}, address{address} {}
+    MIDIButtonLatched(const BankAddress &bankAddress, pin_t pin,
+                      const Sender &sender)
+        : address{bankAddress}, button{pin}, sender{sender} {}
 
   public:
-    void begin() final override { button.begin(); }
-    void update() final override {
+    void begin() override { button.begin(); }
+    void update() override {
         Button::State state = button.getState();
         if (state == Button::Falling)
             toggleState();
@@ -52,22 +51,24 @@ class MIDIButtonLatched : public BankableMIDIOutput, public MIDIOutputElement {
     bool getState() const { return state; }
     void setState(bool state) {
         this->state = state;
-        MIDICNChannelAddress sendAddress = address;
         if (state) {
-            lock();
-            sendAddress += getAddressOffset();
-            sendOn(sendAddress);
+            address.lock();
+            sender.sendOn(address.getActiveAddress());
         } else {
-            sendAddress += getAddressOffset();
-            sendOff(sendAddress);
-            unlock();
+            sender.sendOff(address.getActiveAddress());
+            address.unlock();
         }
     }
 
   private:
+    BankAddress address;
     Button button;
-    const MIDICNChannelAddress address;
     bool state = false;
+
+  public:
+    Sender sender;
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

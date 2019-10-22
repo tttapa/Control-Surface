@@ -5,7 +5,6 @@
 #ifndef PrintStream_h
 #define PrintStream_h
 
-#ifdef ARDUINO
 #include <Arduino.h>
 typedef Print &manipulator(Print &);
 
@@ -24,10 +23,10 @@ Print &nouppercase(Print &printer);
 Print &showbase(Print &printer);
 Print &noshowbase(Print &printer);
 
-#ifdef ARDUINO
 Print &operator<<(Print &printer, const __FlashStringHelper *s);
-#endif
+#ifdef ARDUINO
 Print &operator<<(Print &printer, const String &s);
+#endif
 Print &operator<<(Print &printer, const char s[]);
 Print &operator<<(Print &printer, char c);
 Print &operator<<(Print &printer, unsigned char c);
@@ -42,27 +41,28 @@ Print &operator<<(Print &printer, bool b);
 
 Print &operator<<(Print &printer, manipulator pf);
 
-struct _Setbase { uint8_t _M_base; };
-_Setbase setbase(uint8_t __base);
-Print &operator<<(Print &printer, _Setbase __f);
+struct Setbase { uint8_t M_base; };
+Setbase setbase(uint8_t base);
+Print &operator<<(Print &printer, Setbase f);
 
-struct _Setprecision { int _M_n; };
-_Setprecision setprecision(int __n);
-Print &operator<<(Print &printer, _Setprecision __f);
+struct Setprecision { int M_n; };
+Setprecision setprecision(int n);
+Print &operator<<(Print &printer, Setprecision f);
 
-struct _Setbytesep { char _M_bytesep; };
-_Setbytesep setbytesep(char __bytesep);
-Print &operator<<(Print &printer, _Setbytesep __f);
+struct Setbytesep { char M_bytesep; };
+Setbytesep setbytesep(char bytesep);
+Print &operator<<(Print &printer, Setbytesep f);
 
 
-#else // #ifndef ARDUINO
+#ifndef ARDUINO
 
 #include <iostream>
 #include <iomanip>
 
+// TODO: check conflicts between Arduino version and C++ STL version
 using std::endl;
-using std::setbase;
-using std::setprecision;
+// using std::setbase;
+// using std::setprecision;
 using std::dec;
 using std::hex;
 using std::flush;
@@ -72,6 +72,12 @@ using std::uppercase;
 using std::nouppercase;
 using std::showbase;
 using std::noshowbase;
+
+inline std::ostream &operator<<(std::ostream &os, uint8_t u) {
+    // I'm lazy, I should probably implement one for uint8_t to get the leading
+    // zeros right
+    return os << (unsigned short)u; 
+}
 
 #endif
 

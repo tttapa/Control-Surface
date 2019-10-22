@@ -4,6 +4,8 @@
 #include <Helpers/LinkedList.hpp>
 #include <Print.h>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An interface for displays. 
  * 
@@ -12,12 +14,12 @@
 class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
   protected:
     /// @todo   Do I need to keep a list now that I have sorted all 
-    ///         DisplayElement#s?
+    ///         DisplayElement%s?
     DisplayInterface() { elements.append(this); }
 
   public:
     /// @todo   Do I need to keep a list now that I have sorted all 
-    ///         DisplayElement#s?
+    ///         DisplayElement%s?
     // Note to self:    don't forget to make destructor = default 
     //                  instead of deleting it altogether
     virtual ~DisplayInterface() { elements.remove(this); }
@@ -92,3 +94,5 @@ class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
   private:
     static DoublyLinkedList<DisplayInterface> elements;
 };
+
+END_CS_NAMESPACE

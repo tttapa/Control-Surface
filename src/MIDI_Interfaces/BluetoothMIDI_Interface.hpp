@@ -5,12 +5,14 @@
 
 #include <Helpers/Error.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   Bluetooth Low Energy MIDI Interface for the ESP32.
  * 
  * @ingroup MIDIInterfaces
  */
-class BluetoothMIDI_Interface : public MIDI_Interface,
+class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
                                 public BLEServerCallbacks,
                                 public BLECharacteristicCallbacks {
 
@@ -51,7 +53,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
 
     unsigned long startTime = 0;
 
-    constexpr static size_t BUFFER_LENGTH = 128;
+    constexpr static size_t BUFFER_LENGTH = 1024;
 
     uint8_t buffer[BUFFER_LENGTH] = {};
     size_t index = 0;
@@ -65,13 +67,9 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     bool hasSpaceFor(size_t bytes) { return index + bytes < BUFFER_LENGTH; }
 
   public:
-    BluetoothMIDI_Interface() : MIDI_Interface(parser) {}
+    BluetoothMIDI_Interface() : Parsing_MIDI_Interface(parser) {}
 
-    void begin() override {
-        bleMidi.begin();
-        bleMidi.setServerCallbacks(this);
-        bleMidi.setCharacteristicsCallbacks(this);
-    }
+    void begin() override { bleMidi.begin(this, this); }
 
     void publish() {
         if (index == 0)
@@ -90,11 +88,11 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     }
 
     template <size_t N>
-    void addToBuffer(uint8_t (&data)[N]) {
+    void addToBuffer(const uint8_t (&data)[N]) {
         addToBuffer(&data[0], N);
     }
 
-    void addToBuffer(uint8_t *data, size_t len) {
+    void addToBuffer(const uint8_t *data, size_t len) {
         bool first = index == 0;
         if (!hasSpaceFor(len + 1 + first)) { // TODO
             DEBUGFN("Buffer full");
@@ -117,18 +115,27 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
         update();
     }
 
-    void update() {
+    void update() override {
         if (micros() - startTime >= MAX_MESSAGE_TIME)
             publish();
     }
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                  uint8_t cn) override {
+        (void)cn;
         uint8_t msg[3] = {uint8_t(m | c), d1, d2};
         addToBuffer(msg);
     }
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1) override {
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
+        (void)cn;
         uint8_t msg[2] = {uint8_t(m | c), d1};
         addToBuffer(msg);
+    }
+
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
+        (void)data;
+        (void)length;
+        (void)cn; // TODO
     }
 
     void parse(const uint8_t *const data, const size_t len) {
@@ -158,3 +165,5 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
 
     BLEMIDI &getBLEMIDI() { return bleMidi; }
 };
+
+END_CS_NAMESPACE

@@ -4,6 +4,8 @@
 
 #include <Def/Def.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An enumeration of the different bank types.
  */
@@ -30,7 +32,7 @@ class Bank;
 class OutputBank;
 
 /** 
- * @brief   A struct for selecting the bank of BankableMIDIInput#s and the
+ * @brief   A struct for selecting the bank of BankableMIDIInput%s and the
  *          bank type.
  */
 template <setting_t N>
@@ -42,7 +44,7 @@ struct BankConfig {
 };
 
 /** 
- * @brief   A struct for selecting the bank of BankableMIDIOutput#s and the
+ * @brief   A struct for selecting the bank of BankableMIDIOutput%s and the
  *          bank type.
  */
 struct OutputBankConfig {
@@ -51,3 +53,5 @@ struct OutputBankConfig {
     OutputBank &bank;
     const BankType type;
 };
+
+END_CS_NAMESPACE

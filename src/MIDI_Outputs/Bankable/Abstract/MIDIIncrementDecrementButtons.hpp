@@ -7,47 +7,55 @@
 
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
  * @brief   An abstract class for two buttons that send incremental MIDI events.
+ * 
+ * @todo    Combine RelativeSender and ResetSender?
  */
-template <RelativeSendFunction send>
-class MIDIIncrementDecrementButtons : public BankableMIDIOutput,
-                                      public MIDIOutputElement {
+template <class BankAddress, class RelativeSender, class ResetSender>
+class MIDIIncrementDecrementButtons : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIIncrementDecrementButtons.
      *
      * @todo    Documentation
      */
-    MIDIIncrementDecrementButtons(const OutputBankConfig &config,
+    MIDIIncrementDecrementButtons(const BankAddress &addresses,
                                   const IncrementDecrementButtons &buttons,
-                                  const MIDICNChannelAddress &address,
-                                  uint8_t multiplier = 1,
-                                  const MIDICNChannelAddress &resetAddress = {})
-        : BankableMIDIOutput{config}, buttons(buttons), address(address),
-          multiplier(multiplier), resetAddress(resetAddress) {}
+                                  uint8_t multiplier,
+                                  const RelativeSender &relativeSender,
+                                  const ResetSender &resetSender)
+        : addresses{addresses}, buttons{buttons}, multiplier{multiplier},
+          relativeSender{relativeSender}, resetSender{resetSender} {}
 
   public:
     void begin() override { buttons.begin(); }
 
     void update() override {
         using IncrDecrButtons = IncrementDecrementButtons;
-        MIDICNChannelAddress address = this->address + getAddressOffset();
+        MIDICNChannelAddress address = addresses.getActiveAddress(0);
         switch (buttons.getState()) {
             case IncrDecrButtons::Increment: send(multiplier, address); break;
             case IncrDecrButtons::Decrement: send(-multiplier, address); break;
             case IncrDecrButtons::Reset: reset(); break;
+            case IncrDecrButtons::Nothing: break;
             default: break;
         }
     }
 
+    void send(long delta, const MIDICNChannelAddress &address) {
+        relativeSender.send(delta, address);
+    }
+
     void reset() {
-        if (resetAddress) {
-            MIDICNChannelAddress address = resetAddress + getAddressOffset();
-            sendOn(address);
-            sendOff(address);
+        MIDICNChannelAddress address = addresses.getActiveAddress(1);
+        if (address) {
+            resetSender.sendOn(address);
+            resetSender.sendOff(address);
         }
     }
 
@@ -56,13 +64,15 @@ class MIDIIncrementDecrementButtons : public BankableMIDIOutput,
 #endif
 
   private:
+    BankAddress addresses;
     IncrementDecrementButtons buttons;
-    const MIDICNChannelAddress address;
     const uint8_t multiplier;
-    const MIDICNChannelAddress resetAddress;
 
-    constexpr static DigitalSendFunction sendOn = DigitalNoteSender::sendOn;
-    constexpr static DigitalSendFunction sendOff = DigitalNoteSender::sendOff;
+  public:
+    RelativeSender relativeSender;
+    ResetSender resetSender;
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

@@ -6,11 +6,15 @@
 
 #include <Display/DisplayElement.hpp>
 #include <Display/DisplayInterface.hpp>
-#include <Helpers/MillisTimer.hpp>
+#include <Helpers/MillisMicrosTimer.hpp>
+
+BEGIN_CS_NAMESPACE
 
 /** 
  * @brief   This class ensures initialization, updating, and interaction between
  *          all other classes, it's the glue that holds everything together.
+ * 
+ * @ingroup ControlSurfaceModule
  */
 class Control_Surface_ : public MIDI_Callbacks {
   public:
@@ -49,7 +53,7 @@ class Control_Surface_ : public MIDI_Callbacks {
     void updateMidiInput();
 
     /**
-     * @brief   Update all MIDIInputElement#s.
+     * @brief   Update all MIDIInputElement%s.
      */
     void updateInputs();
 
@@ -68,19 +72,57 @@ class Control_Surface_ : public MIDI_Callbacks {
      * @brief   The callback to be called when a MIDI channel message is
      *          received.
      */
-    void onChannelMessage(MIDI_Interface &midi) override;
+    void onChannelMessage(Parsing_MIDI_Interface &midi) override;
 
     /** 
      * @brief   The callback to be called when a MIDI System Exclusive message
      *          is received.
      */
-    void onSysExMessage(MIDI_Interface &midi) override;
+    void onSysExMessage(Parsing_MIDI_Interface &midi) override;
+
+    /** 
+     * @brief   The callback to be called when a MIDI Real-Time message is 
+     *          received.
+     */
+    void onRealtimeMessage(Parsing_MIDI_Interface &midi,
+                           uint8_t message) override;
 
     /// A timer to know when to update the analog inputs.
     Timer<micros> potentiometerTimer = {FILTERED_INPUT_UPDATE_INTERVAL};
     /// A timer to know when to refresh the displays.
     Timer<micros> displayTimer = {1000000UL / MAX_FPS};
+
+  public:
+    /// Callback function type for channel messages. Return true if handling is
+    /// done in the user-provided callback, false if `Control_Surface`
+    /// should handle the message.
+    using ChannelMessageCallback = bool (*)(ChannelMessage);
+    /// Callback function type for SysEx messages. Return true if handling is
+    /// done in the user-provided callback, false if `Control_Surface`
+    /// should handle the message.
+    using SysExMessageCallback = bool (*)(SysExMessage);
+    /// Callback function type for Real-Time messages. Return true if handling
+    /// is done in the user-provided callback, false if `Control_Surface`
+    /// should handle the message.
+    using RealTimeMessageCallback = bool (*)(RealTimeMessage);
+
+    /// Set the MIDI input callbacks.
+    void
+    setMIDIInputCallbacks(ChannelMessageCallback channelMessageCallback,
+                          SysExMessageCallback sysExMessageCallback,
+                          RealTimeMessageCallback realTimeMessageCallback) {
+        this->channelMessageCallback = channelMessageCallback;
+        this->sysExMessageCallback = sysExMessageCallback;
+        this->realTimeMessageCallback = realTimeMessageCallback;
+    }
+
+  private:
+    ChannelMessageCallback channelMessageCallback = nullptr;
+    SysExMessageCallback sysExMessageCallback = nullptr;
+    RealTimeMessageCallback realTimeMessageCallback = nullptr;
 };
 
 /// A predefined instance of the Control Surface to use in the Arduino sketches.
 extern Control_Surface_ &Control_Surface;
+
+END_CS_NAMESPACE

@@ -3,6 +3,8 @@
 #include <Display/DisplayInterface.hpp>
 #include <Helpers/LinkedList.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An interface for elements that draw to a display.
  */
@@ -43,3 +45,5 @@ class DisplayElement : public DoublyLinkable<DisplayElement> {
 
     static DoublyLinkedList<DisplayElement> elements;
 };
+
+END_CS_NAMESPACE

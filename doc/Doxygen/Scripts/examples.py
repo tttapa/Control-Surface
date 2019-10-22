@@ -2,15 +2,18 @@
 
 import re
 import os
-from os.path import join, realpath, basename
+from os.path import join, realpath, basename, splitext
+from pathlib import Path
 
 dirnm = os.path.dirname(os.path.realpath(__file__))
 doxydir = join(dirnm, '..')
 
+
 def stripQuotes(string):
-    string = re.sub(r'^"','',string)
-    string = re.sub(r'"$','',string)
+    string = re.sub(r'^"', '', string)
+    string = re.sub(r'"$', '', string)
     return string
+
 
 with open(join(doxydir, 'Doxyfile')) as doxy:
     doxy_content = doxy.read()
@@ -22,7 +25,7 @@ with open(join(doxydir, 'Doxyfile')) as doxy:
     else:
         print('Error: couldn\'t find EXAMPLE_PATH in Doxyfile')
         exit(1)
-    m = re.search(r'INPUT\s*=\s*([^\\]+)(\s|\\)*', doxy_content)
+    m = re.search(r'INPUT\s*=\s*("[^"]+")', doxy_content)
     if m:
         lastInclude = m.group(1).split(" ")[-1]
         outputfile = realpath(join(doxydir, stripQuotes(lastInclude)))
@@ -39,19 +42,31 @@ for root, dirs, files in os.walk(exampledir):
         if file.endswith('.ino'):
             with open(join(root, file)) as example:
                 example_content = example.read()
-                s = example_content.split('/**',1)
+                s = example_content.split('/**', 1)
                 if len(s) > 1:
-                    print('\t\033[0;32mFound documentation for', file, 
-                        '\033[0m')
-                    docstr = s[1].split('*/',1)[0]
-                    output += "/**\r\n * @example   "
-                    output += basename(file)
-                    output += "\r\n *"
-                    output += docstr
-                    output += "*/\r\n\r\n"
+                    print('\t\033[0;32mFound documentation for', file,
+                          '\033[0m')
+                    docstr = s[1].split('*/', 1)[0]
+                    # Add line break after brief
+                    # docstr = re.sub(r'^\s*\*\s*$', r'\g<0><br>  ', docstr, 1,
+                    #                 re.MULTILINE)
+                    # pathname = str(Path(root).relative_to(exampledir) / file)
+                    pathname = file
+                    title = splitext(basename(file))[0]
+                    underline = '=' * len(title)
+                    output += """\
+/**
+ * @example   "{pathname}"
+ * 
+ * {title}
+ * {underline}
+ *{docstr}*/
+
+""".format(pathname=pathname, title=title, underline=underline, docstr=docstr)
                 else:
                     print('\t\033[0;33mWarning: no documentation for', file,
-                        '\033[0m')
+                          '\033[0m')
+                    print('\t       → "' + str(Path(root) / file) + '"')
 
 with open(outputfile, 'w') as f:
     f.write(output)

@@ -2,6 +2,8 @@
 
 #include "SevenSegmentDisplay.hpp"
 
+BEGIN_CS_NAMESPACE
+
 namespace MCU {
 
 constexpr static uint8_t AssignmentDisplayLength = 2;
@@ -15,3 +17,5 @@ class AssignmentDisplay : public SevenSegmentDisplay<AssignmentDisplayLength> {
 };
 
 } // namespace MCU
+
+END_CS_NAMESPACE

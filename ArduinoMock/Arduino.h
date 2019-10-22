@@ -29,6 +29,8 @@
 #include "binary.h"
 
 #define PROGMEM
+struct __FlashStringHelper;
+#define pgm_read_ptr_near(ptr) ((void *) *(ptr))
 
 #define HIGH 0x1
 #define LOW 0x0
@@ -61,12 +63,12 @@
 
 typedef bool boolean;
 
-//#define min(a,b) ((a)<(b)?(a):(b))
-//#define max(a,b) ((a)>(b)?(a):(b))
+// #define min(a,b) ((a)<(b)?(a):(b))
+// #define max(a,b) ((a)>(b)?(a):(b))
 #define abs(x) ((x) > 0 ? (x) : -(x))
 #define constrain(amt, low, high)                                              \
     ((amt) < (low) ? (low) : ((amt) > (high) ? (high) : (amt)))
-#define round(x) ((x) >= 0 ? (long)((x) + 0.5) : (long)((x)-0.5))
+#define round(x) std::round(x)
 #define radians(deg) ((deg)*DEG_TO_RAD)
 #define degrees(rad) ((rad)*RAD_TO_DEG)
 #define sq(x) ((x) * (x))
@@ -91,6 +93,8 @@ void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val);
 
 void cli();
 void sei();
+
+void yield();
 
 #define PIN_A0   (14)
 #define PIN_A1   (15)

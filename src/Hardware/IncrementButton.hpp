@@ -4,6 +4,8 @@
 
 #include "Button.hpp"
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for buttons that increment some counter or setting.
  * 
@@ -11,6 +13,8 @@
  * it increments the counter once. If you keep on pressing it for longer than
  * a certain threshold, it keeps on incrementing at a faster rate, until you
  * release it.
+ * 
+ * @ingroup HardwareUtils
  */
 class IncrementButton {
   public:
@@ -55,3 +59,5 @@ class IncrementButton {
     } longPressState = Initial;
     unsigned long longPressRepeat;
 };
+
+END_CS_NAMESPACE

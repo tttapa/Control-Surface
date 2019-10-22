@@ -6,8 +6,10 @@
 #include <Helpers/Debug.hpp>
 #include <Helpers/LinkedList.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
- * @brief   A base class for all MIDIInputElement#s that can be banked.
+ * @brief   A base class for all MIDIInputElement%s that can be banked.
  * 
  * @note    These elements must be updated when the bank setting is changed, so 
  * they are added to a linked list of the bank.
@@ -66,15 +68,14 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      *          The base address to compare it to (the address of bank setting 
      *          0).
      */
-    uint8_t getIndex(const MIDICNChannelAddress &target,
-                     const MIDICNChannelAddress &base) const {
+    uint8_t getBankIndex(const MIDICNChannelAddress &target,
+                         const MIDICNChannelAddress &base) const {
         switch (type) {
             case CHANGE_ADDRESS:
                 return (target.getAddress() - base.getAddress()) /
                        bank.getTracksPerBank();
             case CHANGE_CHANNEL:
-                return (target.getChannel().getRaw() -
-                        base.getChannel().getRaw()) /
+                return (target.getRawChannel() - base.getRawChannel()) /
                        bank.getTracksPerBank();
             case CHANGE_CABLENB:
                 return (target.getCableNumber() - base.getCableNumber()) /
@@ -109,7 +110,7 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      */
     bool matchBankable(uint8_t toMatch, uint8_t base) const {
         uint8_t diff = toMatch - base;
-        return toMatch >= base && diff <= N * bank.getTracksPerBank() &&
+        return toMatch >= base && diff < N * bank.getTracksPerBank() &&
                diff % bank.getTracksPerBank() == 0;
     }
 
@@ -129,8 +130,20 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
     bool matchBankableInRange(uint8_t toMatch, uint8_t base,
                               uint8_t length) const {
         uint8_t diff = toMatch - base;
-        return toMatch >= base && diff <= N * bank.getTracksPerBank() &&
+        return toMatch >= base && diff < N * bank.getTracksPerBank() &&
                diff % bank.getTracksPerBank() < length;
+    }
+
+    /**
+     * @brief   If matchBankableAddressInRange returned true, get the index of
+     *          the message in the range.
+     */
+    uint8_t getRangeIndex(MIDICNChannelAddress target,
+                          MIDICNChannelAddress base) const {
+        uint8_t diff = target.getAddress() - base.getAddress();
+        if (type == CHANGE_ADDRESS)
+            diff %= bank.getTracksPerBank();
+        return diff;
     }
 
     /**
@@ -170,8 +183,8 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
             case CHANGE_CHANNEL: {
                 return toMatch.getAddress() == base.getAddress() &&
                        toMatch.getCableNumber() == base.getCableNumber() &&
-                       matchBankable(toMatch.getChannel().getRaw(),
-                                     base.getChannel().getRaw());
+                       matchBankable(toMatch.getRawChannel(),
+                                     base.getRawChannel());
             }
             case CHANGE_CABLENB: {
                 return toMatch.getAddress() == base.getAddress() &&
@@ -237,5 +250,7 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      * the bank setting is 1, the LED displays the state of track 7.  
      * To know when to update the LED, this callback is used.
      */
-    virtual void onBankSettingChange() const {}
+    virtual void onBankSettingChange() {}
 };
+
+END_CS_NAMESPACE

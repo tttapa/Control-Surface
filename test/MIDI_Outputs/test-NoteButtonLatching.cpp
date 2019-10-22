@@ -4,11 +4,12 @@
 #include <gmock-wrapper.h>
 
 using namespace ::testing;
+using namespace CS;
 
 TEST(NoteButtonLatching, pressAndRelease) {
     MockMIDI_Interface midi;
 
-    NoteButtonLatching button(2, {0x3C, CHANNEL_7});
+    NoteButtonLatching button(2, {0x3C, CHANNEL_7, 0xC});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 
@@ -22,8 +23,8 @@ TEST(NoteButtonLatching, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F));
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F));
+    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F, 0xC));
     button.update();
 
     // Still pressed
@@ -36,8 +37,8 @@ TEST(NoteButtonLatching, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F));
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F));
+    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F, 0xC));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -50,7 +51,7 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
 
     OutputBank bank(4);
 
-    Bankable::NoteButtonLatching button(bank, 2, {0x3C, CHANNEL_7});
+    Bankable::NoteButtonLatching button(bank, 2, {0x3C, CHANNEL_7, 0xC});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 
@@ -64,8 +65,8 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F));
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F));
+    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F, 0xC));
     button.update();
 
     // Still pressed
@@ -78,8 +79,8 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F));
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F));
+    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F, 0xC));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -90,7 +91,7 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
 
     OutputBank bank(4);
 
-    Bankable::NoteButtonLatching button(bank, 2, {0x3C, CHANNEL_7});
+    Bankable::NoteButtonLatching button(bank, 2, {0x3C, CHANNEL_7, 0xC});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 
@@ -107,8 +108,8 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C + 4, 0x7F));
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C + 4, 0x7F));
+    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C + 4, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C + 4, 0x7F, 0xC));
     button.update();
 
     // Still pressed
@@ -121,8 +122,8 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C + 4, 0x7F));
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C + 4, 0x7F));
+    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C + 4, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C + 4, 0x7F, 0xC));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -133,7 +134,7 @@ TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
 
     OutputBank bank(4);
 
-    Bankable::NoteButtonLatching button(bank, 2, {0x3C, CHANNEL_7});
+    Bankable::NoteButtonLatching button(bank, 2, {0x3C, CHANNEL_7, 0xC});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 
@@ -147,8 +148,8 @@ TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F));
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F));
+    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C, 0x7F, 0xC));
     button.update();
 
     // Change bank setting
@@ -164,8 +165,8 @@ TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C + 4, 0x7F));
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C + 4, 0x7F));
+    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 0x3C + 4, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 0x3C + 4, 0x7F, 0xC));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());

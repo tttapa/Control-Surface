@@ -3,6 +3,9 @@
 #pragma once
 
 #include <stdint.h> // int8_t
+#include <Settings/NamespaceSettings.hpp>
+
+BEGIN_CS_NAMESPACE
 
 /** 
  * A type-safe class for MIDI channels.
@@ -121,3 +124,5 @@ constexpr Channel CHANNEL_13 = 13_ch;
 constexpr Channel CHANNEL_14 = 14_ch;
 constexpr Channel CHANNEL_15 = 15_ch;
 constexpr Channel CHANNEL_16 = 16_ch;
+
+END_CS_NAMESPACE

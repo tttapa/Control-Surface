@@ -6,8 +6,12 @@
 #include <stdlib.h>
 
 #ifndef __AVR__
+#include <Helpers/MinMaxFix.hpp>
 #include <iterator>
 #endif
+
+/// @addtogroup Containers
+/// @{
 
 /**
  * @brief   A class for doubly linked lists.
@@ -180,7 +184,7 @@ class DoublyLinkedList {
      *          The new node to be inserted.
      */
     void insertSorted(Node *node) {
-        insertSorted(node, [](Node &lhs, Node& rhs) { return lhs < rhs; });
+        insertSorted(node, [](Node &lhs, Node &rhs) { return lhs < rhs; });
     }
 
     /**
@@ -298,3 +302,5 @@ class DoublyLinkable {
     Node *previous = nullptr;
     virtual ~DoublyLinkable() = default;
 };
+
+/// @}

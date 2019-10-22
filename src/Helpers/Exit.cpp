@@ -3,8 +3,10 @@
 #include "Error.hpp"
 #include <Arduino.h>
 
+BEGIN_CS_NAMESPACE
+
 void fatalErrorExit() {
-#ifdef LED_BUILTIN
+#if defined(LED_BUILTIN) || (defined(ESP32) && defined(BUILTIN_LED))
     pinMode(LED_BUILTIN, OUTPUT);
     while (1) {
         digitalWrite(LED_BUILTIN, HIGH);
@@ -16,10 +18,14 @@ void fatalErrorExit() {
         digitalWrite(LED_BUILTIN, LOW);
         delay(850);
     }
-#endif
+#else
+#warning "LED_BUILTIN is not available, so it cannot blink when an error occurs"
     noInterrupts();
     while (1)
-        ;
+        yield();
+#endif
 }
+
+END_CS_NAMESPACE
 
 #endif

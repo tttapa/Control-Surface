@@ -6,6 +6,8 @@
 #include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for momentary buttons and switches that send MIDI events.
  *
@@ -14,7 +16,7 @@
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff>
+template <class Sender>
 class MIDIButtonLatched : public MIDIOutputElement {
   protected:
     /**
@@ -25,11 +27,13 @@ class MIDIButtonLatched : public MIDIOutputElement {
      *          The digital input pin to read from.  
      *          The internal pull-up resistor will be enabled.
      * @param   address
-     *          The MIDI address containing the note number [0, 127], channel
-     *          [1, 16], and optional cable number.
+     *          The MIDI address to send to.
+     * @param   sender
+     *          The MIDI sender to use.
      */
-    MIDIButtonLatched(pin_t pin, const MIDICNChannelAddress &address)
-        : button{pin}, address{address} {}
+    MIDIButtonLatched(pin_t pin, const MIDICNChannelAddress &address,
+                      const Sender &sender)
+        : button{pin}, address{address}, sender{sender} {}
 
   public:
     void begin() final override { button.begin(); }
@@ -46,11 +50,20 @@ class MIDIButtonLatched : public MIDIOutputElement {
     bool getState() const { return state; }
     void setState(bool state) {
         this->state = state;
-        state ? sendOn(address) : sendOff(address);
+        state ? sender.sendOn(address) : sender.sendOff(address);
     }
+
+#ifdef INDIVIDUAL_BUTTON_INVERT
+    void invert() { button.invert(); }
+#endif
 
   private:
     Button button;
     const MIDICNChannelAddress address;
     bool state = false;
+
+  public:
+    Sender sender;
 };
+
+END_CS_NAMESPACE

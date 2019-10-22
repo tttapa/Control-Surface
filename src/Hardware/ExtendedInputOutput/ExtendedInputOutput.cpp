@@ -3,6 +3,8 @@
 #include <Arduino.h>
 #include <Helpers/Error.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace ExtIO {
 
 template <class T>
@@ -17,14 +19,14 @@ ExtendedIOElement &getIOElementOfPin(pin_t pin) {
         else if (inRange(pin, el.getStart(), el.getEnd()))
             return el;
 
-    FATAL_ERROR(F("Error: the given pin does not correspond to an Extended IO "
-                  "element."),
-                0x8888);
+    FATAL_ERROR(
+        F("The given pin does not correspond to an Extended IO element."),
+        0x8888);
 
     // TODO: why doesn't this give a compilation error?
     // No return statement. On desktop, FATAL_ERROR throws an exception, so
     // I get why that works, but on Arduino, it just calls fatalErrorExit, which
-    // is marked 'noreturn'. However, if I remove the 'noreturn' attribute, and 
+    // is marked 'noreturn'. However, if I remove the 'noreturn' attribute, and
     // have it return immediately, it still compiles, without returning a valid
     // reference.
 }
@@ -91,3 +93,5 @@ analog_t analogRead(pin_t pin) {
 analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
 
 } // namespace ExtIO
+
+END_CS_NAMESPACE

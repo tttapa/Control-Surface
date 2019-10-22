@@ -3,10 +3,7 @@
 #include "SerialMIDI_Interface.hpp"
 #include <ctype.h>
 
-const static char *MIDI_STATUS_TYPE_NAMES[] = { // @todo PROGMEM
-    "Note Off\t",       "Note On\t\t",      "Key Pressure\t",
-    "Control Change\t", "Program Change\t", "Channel Pressure",
-    "Pitch Bend\t"};
+BEGIN_CS_NAMESPACE
 
 /**
  * @brief   A class for MIDI interfaces sending and receiving 
@@ -24,67 +21,15 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
      */
     StreamDebugMIDI_Interface(Stream &stream) : StreamMIDI_Interface(stream) {}
 
-    MIDI_read_t read() override {
-        while (stream.available() > 0) {
-            char data = stream.read();
-
-            if (isxdigit(data)) {
-                // if we receive a hexadecimal digit
-                data = tolower(data);
-                if (firstChar == '\0') {
-                    firstChar = data;
-                } else if (secondChar == '\0') {
-                    secondChar = data;
-                } else {
-                    firstChar = secondChar;
-                    secondChar = data;
-                }
-            } else if (isspace(data) && firstChar && secondChar) {
-                // if we received two hex characters followed by
-                // whitespace
-                uint8_t midiByte = hexCharToNibble(firstChar) << 4 |
-                                   hexCharToNibble(secondChar);
-                firstChar = '\0';
-                secondChar = '\0';
-                MIDI_read_t parseResult = parser.parse(midiByte);
-                if (parseResult != NO_MESSAGE)
-                    return parseResult;
-            } else {
-                // Ignore any characters other than whitespace and hexadecimal
-                // digits
-            }
-        }
-        return NO_MESSAGE;
-    }
+    MIDI_read_t read() override;
 
   protected:
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) override {
-        uint8_t messageType = (m >> 4) - 8;
-        if (messageType >= 7)
-            return;
-        stream.print(MIDI_STATUS_TYPE_NAMES[messageType]);
-        stream.print("\tChannel: ");
-        stream.print(c + 1);
-        stream.print("\tData 1: 0x");
-        stream.print(d1, HEX);
-        stream.print("\tData 2: 0x");
-        stream.print(d2, HEX);
-        stream.print("\r\n");
-        stream.flush();
-    }
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                  uint8_t cn) override;
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1) override {
-        uint8_t messageType = (m >> 4) - 8;
-        if (messageType >= 7)
-            return;
-        stream.print(MIDI_STATUS_TYPE_NAMES[messageType]);
-        stream.print("\tChannel: ");
-        stream.print(c + 1);
-        stream.print("\tData 1: 0x");
-        stream.print(d1, HEX);
-        stream.print("\r\n");
-        stream.flush();
-    }
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override;
+
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override;
 
   private:
     char firstChar = '\0';
@@ -93,7 +38,7 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
     /**
      * @brief   Convert a hexadecimal character to a 4-bit nibble.
      */
-    uint8_t hexCharToNibble(char hex) {
+    static uint8_t hexCharToNibble(char hex) {
         return hex < 'a' ? hex - '0' : hex - 'a' + 10;
     }
 };
@@ -155,70 +100,17 @@ class HardwareSerialDebugMIDI_Interface
         : SerialDebugMIDI_Interface(serial, baud) {}
 };
 
-// The Serial USB connection
-// (Why do I have to do this, why don't they all inherit from one single class?)
-
-// Boards without a USB connection (UNO, MEGA, Nano ...)
-#if !(defined(USBCON) || defined(CORE_TEENSY))
 /**
  * @brief   A class for debug MIDI interfaces sending and receiving 
  *          human-readable MIDI messages over the USB CDC connection.
  * 
  *          Boards without a native USB connection (UNO, MEGA, Nano ...)
- *          use HardwareSerial0 for USB communcication.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBDebugMIDI_Interface : public HardwareSerialDebugMIDI_Interface {
-  public:
-    /**
-     * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.
-     * 
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBDebugMIDI_Interface(unsigned long baud = defaultBaudRate)
-        : HardwareSerialDebugMIDI_Interface(Serial, baud) {}
-};
-
-// Teensies
-#elif defined(CORE_TEENSY)
-#if defined(TEENSY_SERIALUSB_ENABLED)
-/**
- * @brief   A class for debug MIDI interfaces sending and receiving 
- *          human-readable MIDI messages over the USB Serial CDC connection.
- * 
- *          The USB Serial connection `Serial` on Teensies is an instance of
- *          the `usb_serial_class`.
+ *          use HardwareSerial0 for USB communication.
  * 
  * @ingroup MIDIInterfaces
  */
 class USBDebugMIDI_Interface
-    : public SerialDebugMIDI_Interface<usb_serial_class> {
-  public:
-    /**
-     * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.
-     * 
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBDebugMIDI_Interface(unsigned long baud = defaultBaudRate)
-        : SerialDebugMIDI_Interface(Serial, baud) {}
-};
-#endif
-
-// Arduino DUE
-#elif defined(ARDUINO_ARCH_SAM)
-/**
- * @brief   A class for debug MIDI interfaces sending and receiving 
- *          human-readable MIDI messages over the USB Serial CDC connection.
- * 
- *          The USB Serial connection `Serial` on the Arduino DUE is an 
- *          instance of the `UARTClass`.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<UARTClass> {
+    : public SerialDebugMIDI_Interface<decltype(Serial)> {
   public:
     /**
      * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.
@@ -230,31 +122,10 @@ class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<UARTClass> {
         : SerialDebugMIDI_Interface(Serial, baud) {}
 };
 
-// Others (Leonardo, Micro ... )
-#else
-/**
- * @brief   A class for debug MIDI interfaces sending and receiving 
- *          human-readable MIDI messages over the USB Serial CDC connection.
- * 
- *          The USB Serial connection `Serial` on the Arduino Leonardo, Micro,
- *          etc. is an instance of the `Serial_` class.
- * 
- * @ingroup MIDIInterfaces
- */
-class USBDebugMIDI_Interface : public SerialDebugMIDI_Interface<Serial_> {
-  public:
-    /**
-     * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.
-     * 
-     * @param   baud
-     *          The baud rate to start the USB Serial connection with.
-     */
-    USBDebugMIDI_Interface(unsigned long baud = defaultBaudRate)
-        : SerialDebugMIDI_Interface(Serial, baud) {}
-};
-#endif
-
-#if defined(__AVR__) || defined(CORE_TEENSY)
+// TODO: Teensy 4.0 SoftwareSerial bug
+#if defined(__AVR__) || (defined(TEENSYDUINO) && TEENSYDUINO != 147) ||        \
+    (defined(TEENSYDUINO) && !defined(__IMXRT1052__) &&                        \
+     !defined(__IMXRT1062__))
 #include <SoftwareSerial.h>
 /**
  * @brief   A class for debug MIDI interfaces sending and receiving 
@@ -279,3 +150,5 @@ class SoftwareSerialDebugMIDI_Interface
         : SerialDebugMIDI_Interface(serial, baud) {}
 };
 #endif
+
+END_CS_NAMESPACE

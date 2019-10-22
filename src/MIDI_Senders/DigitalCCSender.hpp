@@ -2,14 +2,28 @@
 
 #include <Control_Surface/Control_Surface_Class.hpp>
 
+BEGIN_CS_NAMESPACE
+
 class DigitalCCSender {
   public:
-    static void sendOn(MIDICNChannelAddress address) {
+    DigitalCCSender(uint8_t onValue = 0x7F, uint8_t offValue = 0x00)
+        : onValue{onValue}, offValue{offValue} {}
+
+    void sendOn(MIDICNChannelAddress address) {
         Control_Surface.MIDI().sendCC(address, onValue);
     }
-    static void sendOff(MIDICNChannelAddress address) {
+    void sendOff(MIDICNChannelAddress address) {
         Control_Surface.MIDI().sendCC(address, offValue);
     }
-    constexpr static uint8_t onValue = 127;
-    constexpr static uint8_t offValue = 0;
+
+    uint8_t getOnValue() const { return this->onValue; }
+    void setOnValue(uint8_t onValue) { this->onValue = onValue; }
+    uint8_t getOffValue() const { return this->offValue; }
+    void setOffValue(uint8_t offValue) { this->offValue = offValue; }
+
+  private:
+    uint8_t onValue;
+    uint8_t offValue;
 };
+
+END_CS_NAMESPACE

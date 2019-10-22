@@ -3,6 +3,9 @@
 #pragma once
 
 #include <stdint.h>
+#include <Settings/SettingsWrapper.hpp>
+
+BEGIN_CS_NAMESPACE
 
 /**
  * @brief   A struct for setting the RGB mode for RGB shift registers.
@@ -24,3 +27,5 @@ struct ShiftRegisterOutRGB {
      */
     const static uint8_t blueBit; // = 2;
 };
+
+END_CS_NAMESPACE

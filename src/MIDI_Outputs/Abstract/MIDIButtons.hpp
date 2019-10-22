@@ -5,6 +5,8 @@
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An abstract class for momentary push buttons that send MIDI events.
  *
@@ -12,8 +14,7 @@
  *
  * @see     Button
  */
-template <DigitalSendFunction sendOn, DigitalSendFunction sendOff,
-          uint8_t NUMBER_OF_BUTTONS>
+template <class Sender, uint8_t NUMBER_OF_BUTTONS>
 class MIDIButtons : public MIDIOutputElement {
   protected:
     /**
@@ -23,9 +24,10 @@ class MIDIButtons : public MIDIOutputElement {
      */
     MIDIButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
                 const MIDICNChannelAddress &baseAddress,
-                const RelativeMIDICNChannelAddress &incrementAddress = {1, 0})
+                const RelativeMIDICNChannelAddress &incrementAddress,
+                const Sender &sender)
         : buttons{buttons}, baseAddress(baseAddress),
-          incrementAddress(incrementAddress) {}
+          incrementAddress(incrementAddress), sender{sender} {}
 
   public:
     void begin() final override {
@@ -37,9 +39,9 @@ class MIDIButtons : public MIDIOutputElement {
         for (Button &button : buttons) {
             Button::State state = button.getState();
             if (state == Button::Falling) {
-                sendOn(address);
+                sender.sendOn(address);
             } else if (state == Button::Rising) {
-                sendOff(address);
+                sender.sendOff(address);
             }
             address += incrementAddress;
         }
@@ -56,4 +58,9 @@ class MIDIButtons : public MIDIOutputElement {
     Array<Button, NUMBER_OF_BUTTONS> buttons;
     const MIDICNChannelAddress baseAddress;
     const RelativeMIDICNChannelAddress incrementAddress;
+
+  public:
+    Sender sender;
 };
+
+END_CS_NAMESPACE

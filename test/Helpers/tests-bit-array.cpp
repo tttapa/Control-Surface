@@ -30,3 +30,8 @@ TEST(BitArray, setClearGet) {
         else
             EXPECT_FALSE(ba.get(i));
 }
+
+TEST(BitArray, outOfBounds) {
+    BitArray<16> ba;
+    EXPECT_THROW(ba.get(17), CS::ErrorException);
+}

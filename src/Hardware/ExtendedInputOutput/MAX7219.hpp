@@ -6,6 +6,8 @@
 #include <Hardware/LEDs/MAX7219_Base.hpp>
 #include <Helpers/BitArray.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   A class for LED outputs using the MAX7219 LED display driver. 
  * 
@@ -105,3 +107,5 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
   private:
     BitArray<8 * 8> buffer;
 };
+
+END_CS_NAMESPACE

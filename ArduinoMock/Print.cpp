@@ -46,6 +46,10 @@ size_t Print::print(const char str[])
   return write(str);
 }
 
+size_t Print::print(const __FlashStringHelper *s) {
+    return print(reinterpret_cast<const char *>(s));
+}
+
 size_t Print::print(char c)
 {
   return write(c);
@@ -108,6 +112,10 @@ size_t Print::println(const char c[])
   size_t n = print(c);
   n += println();
   return n;
+}
+
+size_t Print::println(const __FlashStringHelper *s) {
+    return println(reinterpret_cast<const char *>(s));
 }
 
 size_t Print::println(char c)

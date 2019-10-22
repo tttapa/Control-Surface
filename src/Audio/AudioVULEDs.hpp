@@ -4,7 +4,9 @@
 
 #include <Audio/AudioVU.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/LEDs/VULEDs.hpp>
+#include <Hardware/LEDs/DotBarDisplayLEDs.hpp>
+
+BEGIN_CS_NAMESPACE
 
 /**
  * @brief   A VU meter that reads from an Audio stream using the 
@@ -72,3 +74,5 @@ class AudioVULEDs : public AudioVU, public Updatable<AudioVU> {
     DotBarDisplayLEDs<N> vuleds;
     uint8_t previousValue = 0;
 };
+
+END_CS_NAMESPACE

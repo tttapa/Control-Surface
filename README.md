@@ -1,10 +1,16 @@
+[![Build Status](https://travis-ci.org/tttapa/Control-Surface.svg?branch=master)](https://travis-ci.org/tttapa/Control-Surface)
+
 # Control Surface
 
 An Arduino library for MIDI control surfaces (input and output).
 
-## UNDER CONSTRUCTION
+## Under Construction
 
-Should not be considered stable. API is might change in the near future.
+The library is not yet finished, and some parts of the API could change in the future.  
+However, I believe that this is a useful library, even if not everything is 
+implemented yet.  
+If you'd like to help me with the development, please open an issue if you have requests 
+or if you encounter any problems.
 
 ## Overview
 
@@ -57,12 +63,70 @@ display elements, using some minimal, high level code. All low level stuff is
 completely **reusable** (e.g. all MIDI operations, debouncing switches, 
 filtering analog inputs, and so on).
 
+## The Control Surface library vs. The MIDI Controller library
+
+You might already have found my other Arduino MIDI library, [MIDI Controller](https://github.com/tttapa/MIDI_Controller), 
+and are wondering which one you should use for your project.
+
+First, some background:  
+I first started working on the MIDI Controller library way back in 2015, and it
+evolved a lot early on. The library seemed to be pretty popular, and it worked
+pretty well, so I couldn't just push breaking changes every couple of months.  
+Many people requested support for MIDI input, and I liked experimenting with it
+as well. The main problem was that the overall architecture of the library 
+needed a complete overhaul in order to add MIDI input support. Since I didn't 
+know if the MIDI input was going to work out, and I didn't want to break 
+compatibility with older versions of the library, I decided to fork it: Control
+Surface was born.  
+At the moment, I consider the MIDI Controller library "complete". I won't be 
+adding any groundbreaking new features, but I will still be fixing bugs and 
+providing support.  
+Control Surface, on the other hand, is where the active development takes place.
+
+The main difference between the two libraries is that Control Surface has much
+more features. MIDI Controller has everything you need for a working MIDI 
+controller with potentiometers, push buttons, rotary encoders, etc., while 
+Control Surface supports all of that, plus MIDI input, LEDs, VU meters, OLED 
+displays, MIDI over Bluetooth, Audio over USB, etc.  
+Another major difference is the documentation and tests. Control Surface tries
+to provide better documentation using Doxygen, and it has many unit tests to 
+make sure I don't introduce any bugs.
+
+For a new project, I would recommend Control Surface, because I think it has 
+some great features compared to MIDI Controller.  
+The only caveat is that this library is still under development. Master should 
+always be relatively stable, but I might change the API of some parts of the 
+library for future releases if necessary.  
+Another thing is that not everything is implemented yet, and many features are 
+not yet fully documented. If you have a specific feature request that is not yet
+fully implemented, feel free to open an issue, so I know where to focus on first.
+
+## Recent Breaking Changes
+
+ - 3c01c7d5eb60e59720540d5a77095468e6984a58  
+   The **maximum supported ADC resolution is now used by default** (e.g. 13 bits
+   on Teensy 3.x, 12 bits on ESP32).  
+   This increases the accuracy of analog inputs and controls for the Control 
+   Surface library, but could cause problems if your code uses other libraries
+   that expect the resolution to be 10 bits.  
+   You can change the default resolution to 10 bits in 
+   [`src/Settings/Settings.hpp`](https://tttapa.github.io/Control-Surface/Doc/Doxygen/db/d02/Settings_8hpp.html#a8db0fcdeeb644f813c9b29211ce0a1ae)
+   if you have to.
+ - 31edaa6b76477fdf152c19fd34f7e4e8506561e6  
+   The **mapping function** is now applied before applying hysteresis.  
+   This means that the input and output values of the function should be 
+   16 - `ANALOG_FILTER_SHIFT_FACTOR` bits wide instead of 7. By default this is
+   **14 bits**.  
+   The signature of the mapping function is now `analog_t f(analog_t raw)`, 
+   where the return value and raw are both numbers in [0, 16383].
+
 ## Work in progress
 
 - Adding support for motorized faders
 - Cleaning up the display code
 - Cleaning up the MIDI over Bluetooth LE code
-- Adding more tests (currently at over 170 unit tests)
+- Finish support for MIDI over USB cable numbers
+- Adding more tests (currently at over 250 unit tests)
 - Adding more examples and adding comments to existing examples
 - Finishing the documentation
 
@@ -74,18 +138,10 @@ document to get started using the library.
 ## Documentation
 
 The automatically generated Doxygen documentation for this library can be found 
-[here](https://tttapa.github.io/Control-Surface/Doc/Doxygen/index.html). 
-(incomplete)
+[here](https://tttapa.github.io/Control-Surface/Doc/Doxygen/index.html).
 
-## Building and running the tests
+## Information for developers
 
-For help compiling and running the tests, see [Tests.md](Tests.md).
-
-## Known problems
-
-When compiling without LTO (Link Time Optimization) and -Os (optimize for size),
-GCC will produce a linker error (`Undefined reference to ...`).  
-This is normal, and it helps me to find other errors. I will eventually fix it
-when I release a stable version of the library.  
-
-For now, just enable LTO, or choose a different optimization option.
+Information for people that would like to help improve the Control Surface library can be found here: <https://tttapa.github.io/Pages/Arduino/Control-Surface/Developers/index.html>  
+It covers installation instructions for developers, instructions for running the
+tests and generating documentation, a style guide, etc.

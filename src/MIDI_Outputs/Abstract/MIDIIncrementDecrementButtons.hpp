@@ -6,10 +6,12 @@
 
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
+BEGIN_CS_NAMESPACE
+
 /**
  * @brief   An abstract class for two buttons that send incremental MIDI events.
  */
-template <RelativeSendFunction send>
+template <class RelativeSender, class ResetSender>
 class MIDIIncrementDecrementButtons : public MIDIOutputElement {
   protected:
     /**
@@ -19,10 +21,13 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
      */
     MIDIIncrementDecrementButtons(const IncrementDecrementButtons &buttons,
                                   const MIDICNChannelAddress &address,
-                                  uint8_t multiplier = 1,
-                                  const MIDICNChannelAddress &resetAddress = {})
+                                  uint8_t multiplier,
+                                  const MIDICNChannelAddress &resetAddress,
+                                  const RelativeSender &relativeSender,
+                                  const ResetSender &resetSender)
         : buttons(buttons), address(address), multiplier(multiplier),
-          resetAddress(resetAddress) {}
+          resetAddress(resetAddress), relativeSender{relativeSender},
+          resetSender{resetSender} {}
 
   public:
     void begin() override { buttons.begin(); }
@@ -33,14 +38,19 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
             case IncrDecrButtons::Increment: send(multiplier, address); break;
             case IncrDecrButtons::Decrement: send(-multiplier, address); break;
             case IncrDecrButtons::Reset: reset(); break;
+            case IncrDecrButtons::Nothing: break;
             default: break;
         }
     }
 
+    void send(long delta, const MIDICNChannelAddress &address) {
+        relativeSender.send(delta, address);
+    }
+
     void reset() {
         if (resetAddress) {
-            sendOn(resetAddress);
-            sendOff(resetAddress);
+            resetSender.sendOn(resetAddress);
+            resetSender.sendOff(resetAddress);
         }
     }
 
@@ -54,6 +64,9 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
     const uint8_t multiplier;
     const MIDICNChannelAddress resetAddress;
 
-    constexpr static DigitalSendFunction sendOn = DigitalNoteSender::sendOn;
-    constexpr static DigitalSendFunction sendOff = DigitalNoteSender::sendOff;
+  public:
+    RelativeSender relativeSender;
+    ResetSender resetSender;
 };
+
+END_CS_NAMESPACE

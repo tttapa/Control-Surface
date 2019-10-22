@@ -12,13 +12,15 @@
 #include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
+BEGIN_CS_NAMESPACE
+
 namespace Bankable {
 
 /**
  * @brief   An abstract class for rotary encoders that send MIDI events and that
  *          can be added to a Bank.
  */
-template <RelativeSendFunction send>
+template <class Sender>
 class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
   protected:
     /**
@@ -29,17 +31,21 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
     MIDIRotaryEncoder(const OutputBankConfig &config,
                       const EncoderPinList &pins,
                       const MIDICNChannelAddress &address,
-                      uint8_t speedMultiply, uint8_t pulsesPerStep)
+                      uint8_t speedMultiply, uint8_t pulsesPerStep,
+                      const Sender &sender)
         : BankableMIDIOutput(config), encoder{pins.A, pins.B}, address(address),
-          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep) {}
+          speedMultiply(speedMultiply),
+          pulsesPerStep(pulsesPerStep), sender{sender} {}
 
 // For tests only
 #ifndef ARDUINO
     MIDIRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
                       const MIDICNChannelAddress &address,
-                      uint8_t speedMultiply, uint8_t pulsesPerStep)
+                      uint8_t speedMultiply, uint8_t pulsesPerStep,
+                      const Sender &sender)
         : BankableMIDIOutput(config), encoder{encoder}, address(address),
-          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep) {}
+          speedMultiply(speedMultiply),
+          pulsesPerStep(pulsesPerStep), sender{sender} {}
 #endif
 
   public:
@@ -50,7 +56,7 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         // I could do the division inside of the if statement for performance
         if (difference) {
-            send(difference * speedMultiply, sendAddress);
+            sender.send(difference * speedMultiply, sendAddress);
             previousPosition += difference * pulsesPerStep;
         }
     }
@@ -60,8 +66,12 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
     const MIDICNChannelAddress address;
     const uint8_t speedMultiply;
     const uint8_t pulsesPerStep;
-
     long previousPosition = 0;
+
+  public:
+    Sender sender;
 };
 
 } // namespace Bankable
+
+END_CS_NAMESPACE

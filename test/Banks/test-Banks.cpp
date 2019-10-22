@@ -2,6 +2,8 @@
 
 #include <Banks/Bank.hpp>
 
+using namespace CS;
+
 TEST(OutputBank, OutputBank) {
     OutputBank ob = {4};
     EXPECT_EQ(ob.getSelection(), 0);
@@ -56,11 +58,7 @@ TEST(Bank, selectOutOfBounds) {
     }
 }
 
-#if __GNUC__ >= 5
-// Disable GCC 5's -Wsuggest-override warnings in mock methods
-# pragma GCC diagnostic push
-# pragma GCC diagnostic ignored "-Wsuggest-override"
-#endif
+W_SUGGEST_OVERRIDE_OFF
 
 template <uint8_t N>
 class TestInputBankable : public BankableMIDIInput<N> {
@@ -68,12 +66,10 @@ class TestInputBankable : public BankableMIDIInput<N> {
     TestInputBankable(Bank<N> &bank, BankType type)
         : BankableMIDIInput<N>(bank, type) {}
 
-    MOCK_CONST_METHOD0(onBankSettingChange, void());
+    MOCK_METHOD0(onBankSettingChange, void());
 };
 
-#if __GNUC__ >= 5
-# pragma GCC diagnostic pop
-#endif
+W_SUGGEST_OVERRIDE_ON
 
 TEST(Bank, onBankSettingChange) {
     Bank<10> bank = {4};
