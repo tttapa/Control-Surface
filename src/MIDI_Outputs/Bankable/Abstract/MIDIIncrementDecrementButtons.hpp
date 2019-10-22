@@ -38,7 +38,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
     void update() override {
         using IncrDecrButtons = IncrementDecrementButtons;
         MIDICNChannelAddress address = addresses.getActiveAddress(0);
-        switch (buttons.getState()) {
+        switch (buttons.update()) {
             case IncrDecrButtons::Increment: send(multiplier, address); break;
             case IncrDecrButtons::Decrement: send(-multiplier, address); break;
             case IncrDecrButtons::Reset: reset(); break;
@@ -62,6 +62,10 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { buttons.invert(); }
 #endif
+
+    IncrementDecrementButtons::State getButtonsState() const {
+        return buttons.getState();
+    }
 
   private:
     BankAddress addresses;

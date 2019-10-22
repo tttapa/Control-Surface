@@ -2,9 +2,10 @@
 
 BEGIN_CS_NAMESPACE
 
-IncrementDecrementButtons::State IncrementDecrementButtons::getState() {
-    Button::State incrState = incrementButton.getState();
-    Button::State decrState = decrementButton.getState();
+IncrementDecrementButtons::State
+IncrementDecrementButtons::updateImplementation() {
+    Button::State incrState = incrementButton.update();
+    Button::State decrState = decrementButton.update();
 
     if (decrState == Button::Released && incrState == Button::Released) {
         // Both released

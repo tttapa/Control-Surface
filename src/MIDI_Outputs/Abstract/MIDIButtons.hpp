@@ -37,7 +37,7 @@ class MIDIButtons : public MIDIOutputElement {
     void update() final override {
         MIDICNChannelAddress address = baseAddress;
         for (Button &button : buttons) {
-            Button::State state = button.getState();
+            Button::State state = button.update();
             if (state == Button::Falling) {
                 sender.sendOn(address);
             } else if (state == Button::Rising) {
@@ -45,6 +45,10 @@ class MIDIButtons : public MIDIOutputElement {
             }
             address += incrementAddress;
         }
+    }
+
+    Button::State getButtonState(size_t index) const {
+        return buttons[index].getState();
     }
 
 #ifdef INDIVIDUAL_BUTTON_INVERT

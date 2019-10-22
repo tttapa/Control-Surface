@@ -49,7 +49,7 @@ class MIDIChordButton : public MIDIOutputElement {
 
     void begin() override { button.begin(); }
     void update() override {
-        Button::State state = button.getState();
+        Button::State state = button.update();
         if (state == Button::Falling) {
             if (newChord)
                 chord = move(newChord);
@@ -70,6 +70,8 @@ class MIDIChordButton : public MIDIOutputElement {
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }
 #endif
+
+    Button::State getButtonState() const { return button.getState(); }
 
     template <uint8_t N>
     void setChord(const Chord<N> &chord) {

@@ -41,14 +41,24 @@ class IncrementButton {
     };
 
     /**
-     * @brief   Get the state of the increment button.
+     * @brief   Update and return the state of the increment button.
      */
-    State getState();
+    State update() { return state = updateImplementation(); }
+
+    /**
+     * @brief   Return the state of the increment button without updating it.
+     * 
+     * Returns the same value as the last @ref update call.
+     */
+    State getState() const { return state; }
 
 #ifdef INDIVIDUAL_BUTTON_INVERT
     /// @see    Button::invert
     void invert() { button.invert(); }
 #endif
+
+  protected:
+    State updateImplementation();
 
   private:
     Button button;
@@ -58,6 +68,8 @@ class IncrementButton {
         LongPress,
     } longPressState = Initial;
     unsigned long longPressRepeat;
+
+    State state = Nothing;
 };
 
 END_CS_NAMESPACE
