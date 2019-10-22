@@ -11,6 +11,8 @@ class MovingCoilBallistics {
         : springConstant(springConstant / mass * Ts),
           friction(friction / mass * Ts), Ts(Ts) {}
 
+    /// @todo   Uses forward Euler integration, altering the step response:
+    ///         Replace it with zero-order-hold discretization.
     float operator()(float input) {
         // float x_dot_new = (1 - friction / mass * Ts) * x_dot -
         //                   springConstant / mass * Ts * (x + input);

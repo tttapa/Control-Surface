@@ -1,7 +1,7 @@
 /**
+ * @file
  * @brief   The main header file that includes all Control-Surface header files.
  *
- * @file    Control_Surface.h
  * @author  Pieter Pas
  * @date    2018-07-04
  */

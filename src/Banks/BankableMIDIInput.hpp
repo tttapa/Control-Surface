@@ -12,7 +12,7 @@ BEGIN_CS_NAMESPACE
  * @brief   A base class for all MIDIInputElement%s that can be banked.
  * 
  * @note    These elements must be updated when the bank setting is changed, so 
- * they are added to a linked list of the bank.
+ *          they are added to a linked list of the bank.
  * 
  * @tparam  N
  *          The number of banks.
@@ -92,10 +92,12 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      * Consider the following example:  
      * A Bank with 4 tracks per bank (T), 2 bank settings (N), 
      * and a base address of 3.
+     * 
      * ```
      * 0   1   2   3   4   5   6   7   8   9  10  11  12  ...
      * F   F   F   T   F   F   F   T   F   F   F   F   F  ...
      * ```
+     * 
      * Addresses before the base adddress are not matched (0, 1, 2).  
      * Addresses after N * T are not matched (8, 9, 10, 11, 12).  
      * Addresses with a distance to the base address that is not a multiple of N
