@@ -249,7 +249,7 @@ class DoublyLinkedList {
     /** 
      * @brief   Check if the linked list could contain the given node.
      * 
-     * @return  true
+     * @retval  true
      *          The given node is part of some linked list or it is the first
      *          node of the given linked list.  
      *          It could be that the node is part of a different linked list
@@ -257,7 +257,7 @@ class DoublyLinkedList {
      *          However, **if this function returns true and the node was never
      *          added to another linked list, it means that this linked list 
      *          contains the given node**.
-     * @return  false
+     * @retval  false
      *          The given node is not part of any linked list, or it is the 
      *          only element of a different linked list.
      */

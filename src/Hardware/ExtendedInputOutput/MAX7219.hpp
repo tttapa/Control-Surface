@@ -55,9 +55,9 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
      * 
      * @param   pin
      *          The output to read the state from.
-     * @return  0
+     * @retval  0
      *          The state of the output is `LOW`.
-     * @return  1
+     * @retval  1
      *          The state of the output is `HIGH`.
      */
     int digitalRead(pin_t pin) override { return buffer.get(pin); }
@@ -67,9 +67,9 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
      *          is always digital.
      * @param   pin
      *          The output to read the state from.
-     * @return  0
+     * @retval  0
      *          The state of the output is `LOW`.
-     * @return  1023
+     * @retval  1023
      *          The state of the output is `HIGH`.
      */
     analog_t analogRead(pin_t pin) override __attribute__((deprecated)) {

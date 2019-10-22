@@ -89,9 +89,9 @@ class FilteredAnalog {
      * @brief   Read the analog input value, apply the mapping function, and
      *          update the average.
      *
-     * @return  true
+     * @retval  true
      *          The value changed since last time it was updated.
-     * @return  false
+     * @retval  false
      *          The value is still the same.
      */
     bool update() {

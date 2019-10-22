@@ -37,9 +37,9 @@ class Hysteresis {
      *
      * @param   inputLevel
      *          The input to calculate the output level from.
-     * @return  true
+     * @retval  true
      *          The output level has changed.
-     * @return  false
+     * @retval  false
      *          The output level is still the same.
      */
     bool update(T_in inputLevel) {

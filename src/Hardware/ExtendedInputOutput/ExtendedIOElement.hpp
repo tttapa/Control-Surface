@@ -121,8 +121,7 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
      * 
      * @param   pin 
      *          The (zero-based) pin of this IO element.
-     * @return 
-     *          The new analog value of pin.
+     * @return  The new analog value of pin.
      */
     virtual analog_t analogRead(pin_t pin) = 0;
 

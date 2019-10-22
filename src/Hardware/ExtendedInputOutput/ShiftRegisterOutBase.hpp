@@ -58,9 +58,9 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      * 
      * @param   pin
      *          The shift register pin to read from.
-     * @return  0
+     * @retval  0
      *          The state of the pin is `LOW`.
-     * @return  1
+     * @retval  1
      *          The state of the pin is `HIGH`.
      */
     int digitalRead(pin_t pin) override;
@@ -70,9 +70,9 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      *          is always digital.
      * @param   pin
      *          The shift register pin to read from.
-     * @return  0
+     * @retval  0
      *          The state of the pin is `LOW`.
-     * @return  1023
+     * @retval  1023
      *          The state of the pin is `HIGH`.
      */
     analog_t analogRead(pin_t pin) override __attribute__((deprecated)) {
