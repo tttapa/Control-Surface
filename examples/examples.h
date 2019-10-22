@@ -389,12 +389,15 @@
  * Remember to connect the enable pin of the shift register to ground and the 
  * master reset pin to Vcc in order to enable it.  
  * 
- *   - 10: 74HC595 ST_CP
- *   - 11: 74HC595 DS
- *   - 13: 74HC595 SH_CP
+ * The order of the colors doesn't matter. You can change them in software using
+ * the `ShiftRegisterOutRGB::redBit`, `ShiftRegisterOutRGB::greenBit` and 
+ * `ShiftRegisterOutRGB::blueBit` constants.
  * 
- * Connect an LED (and series resistor) between the first output of the
- * shift register and ground. 
+ * If you wired the LEDs as RGB (red first, then green and then blue), the red 
+ * bit is 0, the green bit is 1 and the blue bit is 2.  
+ * If you wired the LEDs as BGR (blue first, then green and then red), the red
+ * bit is 2, the green bit is 1 and the blue bit is 0.  
+ * Other combinations are possible as well.
  * 
  * Behavior
  * --------
@@ -522,15 +525,13 @@
  *   - 5: 74HC4067 S2
  *   - 6: 74HC4067 S3
  * 
- * The order of the colors doesn't matter. You can change them in software using
- * the `ShiftRegisterOutRGB::redBit`, `ShiftRegisterOutRGB::greenBit` and 
- * `ShiftRegisterOutRGB::blueBit` constants.
+ * Connect 16 momentary push buttons between the input pins of the 
+ * multiplexer and ground.  
+ * The internal pull-up resistor for the buttons will be enabled automatically,
+ * so no external resistors are necessary.
  * 
- * If you wired the LEDs as RGB (red first, then green and then blue), the red 
- * bit is 0, the green bit is 1 and the blue bit is 2.  
- * If you wired the LEDs as BGR (blue first, then green and then red), the red
- * bit is 2, the green bit is 1 and the blue bit is 0.  
- * Other combinations are possible as well.
+ * Connect 16 LEDs (and series resistors) between the eight outputs of the
+ * two shift registers and ground. 
  * 
  * Remember to connect the enable pins of both the multiplexer and the shift
  * registers to ground in order to enable them. Also connect the master reset 
@@ -1180,7 +1181,8 @@
  * Behavior
  * --------
  * 
- * Connections:  
+ * The first display should now display the level meters and mute/solo states
+ * of the first 8 tracks.
  * 
  * Mapping
  * -------
@@ -1207,3 +1209,4 @@
  * Written by PieterP, 2019-08-09  
  * https://github.com/tttapa/Control-Surface
  */
+
