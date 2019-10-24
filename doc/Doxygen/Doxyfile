@@ -2132,7 +2132,10 @@ PREDEFINED             = ARDUINO \
                          TEENSY_SERIALUSB_ENABLED \
                          TEENSY_AUDIOUSB_ENABLED \
                          USE_MIDI_USB_INTERFACE \
-                         PROGMEM
+                         PROGMEM \
+                         BEGIN_CS_NAMESPACE=; \
+                         END_CS_NAMESPACE=;
+
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The

@@ -103,6 +103,13 @@ class GenericNoteCCRange
     }
 };
 
+/**
+ * @brief   MIDI Input Element that listens to a range of notes.
+ * 
+ * @ingroup MIDIInputElements
+ * @tparam  RangeLen 
+ *          The length of the range of notes to listen to.
+ */
 template <uint8_t RangeLen>
 class NoteRange : public GenericNoteCCRange<MIDIInputElementNote, RangeLen> {
   public:

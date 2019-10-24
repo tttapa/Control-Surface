@@ -12,6 +12,8 @@ BEGIN_CS_NAMESPACE
  * 
  * @tparam  N
  *          The number of LEDs in the collection.
+ * 
+ * @ingroup HardwareUtils
  */
 template <uint8_t N>
 class LEDs {

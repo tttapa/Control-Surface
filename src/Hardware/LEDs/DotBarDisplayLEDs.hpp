@@ -19,10 +19,13 @@ enum class DotBarMode : bool {
  * 
  * @tparam  N 
  *          The number of LEDs in the bar.
+ * 
+ * @ingroup HardwareUtils
  */
 template <uint8_t N>
 class DotBarDisplayLEDs : public LEDs<N> {
   public:
+    /// Constructor from list of pins.
     DotBarDisplayLEDs(const PinList<N> &ledPins) : LEDs<N>{ledPins} {}
 
     /** 
@@ -56,14 +59,10 @@ class DotBarDisplayLEDs : public LEDs<N> {
      */
     void setMode(DotBarMode mode) { this->mode = mode; }
 
-    /**
-     * @brief   Set the mode to dot mode.
-     */
+    /// Set the mode to dot mode.
     void dotMode() { setMode(DotBarMode::Dot); }
 
-    /**
-     * @brief   Set the mode to bar mode.
-     */
+    /// Set the mode to bar mode.
     void barMode() { setMode(DotBarMode::Bar); }
 
   private:

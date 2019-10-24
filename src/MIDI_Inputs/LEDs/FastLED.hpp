@@ -7,6 +7,7 @@
 
 BEGIN_CS_NAMESPACE
 
+/// A structure for RGB colors.
 struct Color {
     uint8_t r;
     uint8_t g;
@@ -16,7 +17,10 @@ struct Color {
 #endif
 };
 
+/// The default mapping from a 7-bit MIDI value to an RGB color.  
+/// This uses the Novation Launchpad mapping.
 struct DefaultColorMapper {
+    /// Map from a 7-bit MIDI value to an RGB color.
     Color operator()(uint8_t value) const;
 };
 
@@ -28,6 +32,8 @@ END_CS_NAMESPACE
 
 BEGIN_CS_NAMESPACE
 
+/// Callback for Note or CC range or value input that displays the value to a
+/// FastLED strip.
 template <class ColorMapper>
 class NoteCCFastLED {
   public:

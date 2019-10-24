@@ -43,11 +43,18 @@ class MIDIButtonLatched : public MIDIOutputElement {
             toggleState();
     }
 
+    /// Flip the state (on → off or off → on).
+    /// Sends the appropriate MIDI event.
     bool toggleState() {
         setState(!getState());
         return getState();
     }
+
+    /// Get the current state.
     bool getState() const { return state; }
+
+    /// Set the state to the given value.
+    /// Sends the appropriate MIDI event.
     void setState(bool state) {
         this->state = state;
         state ? sender.sendOn(address) : sender.sendOff(address);
@@ -57,6 +64,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
     void invert() { button.invert(); }
 #endif
 
+    /// Get the state of the underlying button.
     Button::State getButtonState() const { return button.getState(); }
 
   private:
