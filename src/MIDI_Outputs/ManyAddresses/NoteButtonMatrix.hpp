@@ -50,7 +50,7 @@ class NoteButtonMatrix
      *          matrix.  
      *          These pins will be used as inputs (Hi-Z), and the
      *          internal pull-up resistor will be enabled.
-     * @param   controllers
+     * @param   notes
      *          A list of 2-dimensional arrays of the same dimensions as the 
      *          button matrix that contains the MIDI Note number of each button.
      *          [0, 127]
@@ -63,12 +63,12 @@ class NoteButtonMatrix
     NoteButtonMatrix(
         const OutputBankConfig &config, const PinList<nb_rows> &rowPins,
         const PinList<nb_cols> &colPins,
-        const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &controllers,
+        const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &notes,
         const Array<MIDICNChannel, NumBanks> &channelCNs,
         uint8_t velocity = 0x7F)
         : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, nb_rows, nb_cols>,
                            DigitalNoteSender, nb_rows, nb_cols>{
-              {config, controllers, channelCNs},
+              {config, notes, channelCNs},
               rowPins,
               colPins,
               {velocity},
