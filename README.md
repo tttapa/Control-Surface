@@ -103,7 +103,7 @@ fully implemented, feel free to open an issue, so I know where to focus on first
 
 ## Recent Breaking Changes
 
- - ########################################
+ - bca6e11b2b3e02df5f600f65c81676708a81155b
    The color mapper for `NoteRangeFastLED` and the like now takes a second 
    parameter that represents the index of the LED within the LED strip.
  - 3c01c7d5eb60e59720540d5a77095468e6984a58  
