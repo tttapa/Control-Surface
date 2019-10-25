@@ -204,7 +204,12 @@ class CCValueFastLED : public GenericNoteCCRange<MIDIInputElementCC, 1,
     uint8_t getBrightness() const { return this->callback.getBrightness(); }
 };
 
+/// @}
+
 namespace Bankable {
+
+/// @addtogroup midi-input-elements-leds
+/// @{
 
 template <uint8_t RangeLen, uint8_t BankSize,
           class ColorMapper = DefaultColorMapper>
@@ -344,9 +349,9 @@ class CCValueFastLED
     uint8_t getBrightness() const { return this->callback.getBrightness(); }
 };
 
-} // namespace Bankable
-
 /// @}
+
+} // namespace Bankable
 
 END_CS_NAMESPACE
 
