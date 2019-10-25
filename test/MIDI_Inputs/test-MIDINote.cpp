@@ -6,6 +6,7 @@ using namespace CS;
 
 TEST(NoteValue, NoteOnNoteOff) {
     NoteValue mn{{0x3C, CHANNEL_5}};
+    mn.begin();
 
     EXPECT_EQ(mn.getValue(), 0);
     EXPECT_FALSE(mn.getValue() > 0);
@@ -23,8 +24,35 @@ TEST(NoteValue, NoteOnNoteOff) {
     EXPECT_FALSE(mn.getValue() > 0);
 }
 
+TEST(NoteRange, NoteOnNoteOff) {
+    NoteRange<2> mn{{0x3C, CHANNEL_5}};
+    mn.begin();
+
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+
+    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
+    MIDIInputElementNote::updateAllWith(midimsg1);
+
+    EXPECT_EQ(mn.getValue(0), 0x7E);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+
+    ChannelMessageMatcher midimsg2 = {0x90, CHANNEL_5, 0x3D, 0x7D};
+    MIDIInputElementNote::updateAllWith(midimsg2);
+
+    EXPECT_EQ(mn.getValue(0), 0x7E);
+    EXPECT_EQ(mn.getValue(1), 0x7D);
+
+    ChannelMessageMatcher midimsg3 = {0x80, CHANNEL_5, 0x3C, 0x7E};
+    MIDIInputElementNote::updateAllWith(midimsg3);
+    
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x7D);
+}
+
 TEST(NoteValue, NoteOnNoteOnZeroVelocity) {
     NoteValue mn = {{0x3C, CHANNEL_5}};
+    mn.begin();
 
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg1);
@@ -38,6 +66,7 @@ TEST(NoteValue, NoteOnNoteOnZeroVelocity) {
 
 TEST(NoteValue, reset) {
     NoteValue mn = {{0x3C, CHANNEL_5}};
+    mn.begin();
 
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg1);
@@ -50,6 +79,7 @@ TEST(NoteValue, reset) {
 
 TEST(NoteValue, resetAll) {
     NoteValue mn = {{0x3C, CHANNEL_5}};
+    mn.begin();
 
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg1);
@@ -63,6 +93,7 @@ TEST(NoteValue, resetAll) {
 TEST(NoteRange, bankableInRange) {
     Bank<2> bank(4);
     Bankable::NoteRange<3, 2> mn = {bank, {0x10, CHANNEL_5}};
+    mn.begin();
 
     // First bank, first address
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x10, 0x20};
@@ -104,6 +135,7 @@ TEST(NoteRange, bankableInRange) {
 TEST(NoteRange, bankableNotInRange) {
     Bank<2> bank(4);
     Bankable::NoteRange<3, 2> mn = {bank, {0x10, CHANNEL_5}};
+    mn.begin();
 
     // Before first bank
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x10 - 1, 0x20};
@@ -181,6 +213,7 @@ TEST(NoteRange, bankableNotInRange) {
 TEST(NoteRange, bankableInRangeChangeChannel) {
     Bank<2> bank(4);
     Bankable::NoteRange<3, 2> mn = {{bank, CHANGE_CHANNEL}, {0x10, CHANNEL_5}};
+    mn.begin();
 
     // First bank, first address
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x10, 0x20};
@@ -222,6 +255,7 @@ TEST(NoteRange, bankableInRangeChangeChannel) {
 TEST(NoteRange, bankableNotInRangeChangeChannel) {
     Bank<2> bank(4);
     Bankable::NoteRange<3, 2> mn = {{bank, CHANGE_CHANNEL}, {0x10, CHANNEL_5}};
+    mn.begin();
 
     // Before first bank
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x10 - 1, 0x20};
@@ -300,6 +334,7 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
 
 TEST(NoteValueLED, NoteOnNoteOff) {
     NoteValueLED mnl = {2, {0x3C, CHANNEL_5}};
+    mnl.begin();
 
     ::testing::Sequence seq;
 
