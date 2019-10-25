@@ -47,7 +47,7 @@ USBMIDI_Interface midi;
 // Create a functor that maps the velocity and the index of a note to a color.
 struct RainbowColorMapper {
   CHSV operator()(uint8_t velocity, uint8_t index) const {
-    return {255 * index / leds.length, 255, 2 * velocity};
+    return CHSV(255 * index / leds.length, 255, 2 * velocity);
   }
 };
  
