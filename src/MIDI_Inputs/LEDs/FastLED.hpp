@@ -17,11 +17,11 @@ struct Color {
 #endif
 };
 
-/// The default mapping from a 7-bit MIDI value to an RGB color.  
+/// The default mapping from a 7-bit MIDI value to an RGB color.
 /// This uses the Novation Launchpad mapping.
 struct DefaultColorMapper {
     /// Map from a 7-bit MIDI value to an RGB color.
-    Color operator()(uint8_t value) const;
+    Color operator()(uint8_t value, uint8_t index) const;
 };
 
 END_CS_NAMESPACE
@@ -37,13 +37,13 @@ BEGIN_CS_NAMESPACE
 template <class ColorMapper>
 class NoteCCFastLED {
   public:
-    NoteCCFastLED(CRGB *leds, const ColorMapper &colormapper)
-        : leds(leds), colormapper{colormapper} {}
+    NoteCCFastLED(CRGB *ledcolors, const ColorMapper &colormapper)
+        : ledcolors(ledcolors), colormapper{colormapper} {}
 
     /** 
      * @brief   Set the maximum brightness of the LEDs.
-     * @param  brightness
-     *         The maximum brightness [0, 255]
+     * @param   brightness
+     *          The maximum brightness [0, 255]
      */
     void setBrightness(uint8_t brightness) { this->brightness = brightness; }
     /// Get the maximum brightness of the LEDs.
@@ -57,32 +57,35 @@ class NoteCCFastLED {
     template <class T>
     void update(const T &t, uint8_t index) {
         uint8_t value = t.getValue(index);
-        leds[index] = CRGB{colormapper(value)}.nscale8_video(brightness);
+        ledcolors[index] =
+            CRGB{colormapper(value, index)}.nscale8_video(brightness);
     }
 
     template <class T>
     void update(const T &t) {
         for (uint8_t index = 0; index < t.length(); ++index) {
             uint8_t value = t.getValue(index);
-            leds[index] = CRGB{colormapper(value)}.nscale8_video(brightness);
+            ledcolors[index] =
+                CRGB{colormapper(value, index)}.nscale8_video(brightness);
         }
     }
 
   private:
-    CRGB *leds;
+    CRGB *ledcolors;
     uint8_t brightness = 255;
 
   public:
     ColorMapper colormapper;
 };
 
+/// @addtogroup midi-input-elements-leds
+/// @{
+
 /**
  * @brief   
  * 
  * @tparam  RangeLen 
  * @tparam  DefaultColorMapper 
- * 
- * @ingroup midi-input-elements-leds
  */
 template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
 class NoteRangeFastLED
@@ -342,6 +345,8 @@ class CCValueFastLED
 };
 
 } // namespace Bankable
+
+/// @}
 
 END_CS_NAMESPACE
 

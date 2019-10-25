@@ -45,7 +45,7 @@ TEST(NoteRange, NoteOnNoteOff) {
 
     ChannelMessageMatcher midimsg3 = {0x80, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg3);
-    
+
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x7D);
 }
@@ -336,20 +336,17 @@ TEST(NoteValueLED, NoteOnNoteOff) {
     NoteValueLED mnl = {2, {0x3C, CHANNEL_5}};
     mnl.begin();
 
-    ::testing::Sequence seq;
+    ::testing::InSequence seq;
 
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, OUTPUT)).InSequence(seq);
-    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, LOW))
-        .InSequence(seq);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, LOW));
     MIDIInputElementNote::beginAll();
 
-    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, HIGH))
-        .InSequence(seq);
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, HIGH));
     ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg1);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, LOW))
-        .InSequence(seq);
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, LOW));
     ChannelMessageMatcher midimsg2 = {0x80, CHANNEL_5, 0x3C, 0x7E};
     MIDIInputElementNote::updateAllWith(midimsg2);
 

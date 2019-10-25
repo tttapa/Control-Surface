@@ -103,6 +103,9 @@ fully implemented, feel free to open an issue, so I know where to focus on first
 
 ## Recent Breaking Changes
 
+ - ########################################
+   The color mapper for `NoteRangeFastLED` and the like now takes a second 
+   parameter that represents the index of the LED within the LED strip.
  - 3c01c7d5eb60e59720540d5a77095468e6984a58  
    The **maximum supported ADC resolution is now used by default** (e.g. 13 bits
    on Teensy 3.x, 12 bits on ESP32).  
