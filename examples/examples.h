@@ -1251,3 +1251,44 @@
  * https://github.com/tttapa/Control-Surface
  */
 
+/**
+ * @example   "Transposer.ino"
+ * 
+ * Transposer
+ * ==========
+ * 
+ * This is an example that demonstrates the use a Transposer to transpose the
+ * note events sent out by NoteButton%s.
+ *
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 2-9: momentary push buttons (to ground) to use as "piano keys"
+ * - A0: momentary push button (to ground) to transpose one semitone up
+ * - A1: momentary push button (to ground) to transpose one semitone down
+ * 
+ * The internal pull-up resistor for the buttons will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - By default, the 8 push buttons on pins 2-9 send MIDI Note events for notes
+ *   C4 - C5.
+ * - If you press the push button on pin A0, all notes are transposed one 
+ *   semitone up.
+ * - If you press the push button on pin A1, all notes are transposed one 
+ *   semitone down.
+ * - If you press the push buttons on pins A0 and A1 simultaneously, the 
+ *   transposer resets.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Route the Arduino MIDI port into a synth to play the notes.
+ * 
+ * Written by PieterP, 2019-10-26  
+ * https://github.com/tttapa/Control-Surface
+ */
+
