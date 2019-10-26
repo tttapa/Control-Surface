@@ -36,6 +36,8 @@
 #include <MIDI_Outputs/Bankable/NoteButtonMatrix.hpp>
 #include <MIDI_Outputs/Bankable/NoteButtons.hpp>
 #include <MIDI_Outputs/Bankable/NoteChordButton.hpp>
+#include <MIDI_Outputs/ManyAddresses/NoteButton.hpp>
+#include <MIDI_Outputs/ManyAddresses/NoteButtonMatrix.hpp>
 
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
 #include <MIDI_Outputs/Bankable/PCButton.hpp>
@@ -133,6 +135,16 @@ TEST(Construction, MIDIOutputs) {
 
     // Bankable::PC ------------------------------------------------------------
     Bankable::PCButton{bank, pin, address};
+
+    // ManyAddresses::Note -------------------------------------------------------
+    Bankable::ManyAddresses::NoteButton<4>{bank, pin, addresses};
+    Bankable::ManyAddresses::NoteButtonMatrix<4, 3, 4>{
+        bank,
+        rowPins3,
+        colPins4,
+        {addressMatrix34, addressMatrix34, addressMatrix34, addressMatrix34},
+        {cnChannel, cnChannel, cnChannel, cnChannel},
+    };
 
     // ManyAddresses::CC -------------------------------------------------------
     Bankable::ManyAddresses::CCButton<4>{bank, pin, addresses};

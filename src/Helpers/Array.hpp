@@ -19,6 +19,7 @@
 template <class T, size_t N>
 struct Array {
     T data[N];
+    using type = T;
     constexpr static size_t length = N;
 
     /**
