@@ -1266,8 +1266,8 @@
  * -----------
  * 
  * - 2-9: momentary push buttons (to ground) to use as "piano keys"
- * - A0: momentary push button (to ground) to transpose one semitone up
- * - A1: momentary push button (to ground) to transpose one semitone down
+ * - 10: momentary push button (to ground) to transpose one semitone up
+ * - 11: momentary push button (to ground) to transpose one semitone down
  * 
  * The internal pull-up resistor for the buttons will be enabled automatically.
  * 
@@ -1276,11 +1276,11 @@
  * 
  * - By default, the 8 push buttons on pins 2-9 send MIDI Note events for notes
  *   C4 - C5.
- * - If you press the push button on pin A0, all notes are transposed one 
+ * - If you press the push button on pin 10, all notes are transposed one 
  *   semitone up.
- * - If you press the push button on pin A1, all notes are transposed one 
+ * - If you press the push button on pin 11, all notes are transposed one 
  *   semitone down.
- * - If you press the push buttons on pins A0 and A1 simultaneously, the 
+ * - If you press the push buttons on pins 10 and 11 simultaneously, the 
  *   transposer resets.
  * 
  * Mapping

@@ -6,15 +6,61 @@
 
 BEGIN_CS_NAMESPACE
 
-enum relativeCCmode { TWOS_COMPLEMENT, BINARY_OFFSET, SIGN_MAGNITUDE };
-
-#define REAPER_RELATIVE_1 TWOS_COMPLEMENT
-#define REAPER_RELATIVE_2 BINARY_OFFSET
-#define REAPER_RELATIVE_3 SIGN_MAGNITUDE
-
-#define TRACKTION_RELATIVE TWOS_COMPLEMENT
-
-#define MACKIE_CONTROL_RELATIVE SIGN_MAGNITUDE
+/// The encoding to use for relative control change value.
+enum relativeCCmode {
+    /**
+     * @brief    Encode negative MIDI CC values as 7-bit two's complement.
+     *
+     * | Encoded  | Value | 
+     * |---------:|------:|
+     * | 000'0000 | 0     |
+     * | 000'0001 | +1    |
+     * | 011'1111 | +63   |
+     * | 100'0000 | -64   |
+     * | 100'0001 | -63   |
+     * | 111'1111 | -1    |
+     */
+    TWOS_COMPLEMENT,
+    /** 
+     * @brief   Encode negative MIDI CC values by adding a fixed offset of 
+     *          @f$ 2^6 = 64 @f$.
+     *
+     * | Encoded  | Value | 
+     * |---------:|------:|
+     * | 000'0000 | -64   |
+     * | 000'0001 | -63   |
+     * | 011'1111 | -1    |
+     * | 100'0000 | 0     |
+     * | 100'0001 | +1    |
+     * | 111'1111 | +63   |
+     */
+    BINARY_OFFSET,
+    /**
+     * @brief   Encode negative MIDI CC values by using the most significant bit
+     *          as a sign bit, and the six least significant bits as the 
+     *          absolute value.
+     *
+     * | Encoded  | Value | 
+     * |---------:|------:|
+     * | 000'0000 | +0    |
+     * | 000'0001 | 1     |
+     * | 011'1111 | 63    |
+     * | 100'0000 | -0    |
+     * | 100'0001 | -1    |
+     * | 111'1111 | -63   |
+     */
+    SIGN_MAGNITUDE,
+    /// First relative mode in Reaper.
+    REAPER_RELATIVE_1 = TWOS_COMPLEMENT,
+    /// Second relative mode in Reaper.
+    REAPER_RELATIVE_2 = BINARY_OFFSET,
+    /// Third relative mode in Reaper.
+    REAPER_RELATIVE_3 = SIGN_MAGNITUDE,
+    /// Relative mode in Tracktion.
+    TRACKTION_RELATIVE = TWOS_COMPLEMENT,
+    /// Relative mode used by the Mackie Control Universal protocol.
+    MACKIE_CONTROL_RELATIVE = SIGN_MAGNITUDE,
+};
 
 class RelativeCCSender {
   public:

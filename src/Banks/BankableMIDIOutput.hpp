@@ -82,7 +82,7 @@ class BankableMIDIOutput_Base {
  *          well as ManyAddressesMIDIOutput.
  */
 class BankableMIDIOutput : public BankableMIDIOutput_Base {
-  protected:
+  public:
     /**
      * @brief   Create a new BankableMIDIOutput object.
      * 
@@ -105,7 +105,6 @@ class BankableMIDIOutput : public BankableMIDIOutput_Base {
     BankableMIDIOutput(const OutputBankConfig &config)
         : BankableMIDIOutput(config.bank, config.type) {}
 
-  public:
     /** 
      * @brief   Get the offset relative to the base address.
      */
@@ -145,7 +144,7 @@ class BankableMIDIOutput : public BankableMIDIOutput_Base {
  *            \mathbb{N} @f$.
  */
 class ManyAddressesMIDIOutput : public BankableMIDIOutput_Base {
-  protected:
+  public:
     /**
      * @brief   Constructor.
      * 
