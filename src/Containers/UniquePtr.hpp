@@ -4,7 +4,7 @@
 
 BEGIN_AH_NAMESPACE
 
-/// @addtogroup    Utilities
+/// @addtogroup    Containers
 /// @{
 
 /**

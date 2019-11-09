@@ -73,7 +73,10 @@
         "set": "cpp",
         "__functional_base": "cpp",
         "__functional_base_03": "cpp",
-        "locale": "cpp"
+        "locale": "cpp",
+        "memory_resource": "cpp",
+        "bit": "cpp",
+        "*.dox": "cpp"
     },
     "files.exclude": {
         "**/.git": true,

@@ -84,28 +84,30 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html">Settings/NamespaceSettings.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#abe0f0e505619b6899c38363f4e42a272">BEGIN_AH_NAMESPACE</a></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifdef min</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#undef min</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> U&gt;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="../../d7/d79/MinMaxFix_8hpp.html#a14defb38b6c00778e25b94ea91b0b4ac">   11</a></span>&#160;constexpr <span class="keyword">auto</span> <a class="code" href="../../d7/d79/MinMaxFix_8hpp.html#a14defb38b6c00778e25b94ea91b0b4ac">min</a>(<span class="keyword">const</span> T &amp;a, <span class="keyword">const</span> U &amp;b) -&gt; decltype(b &lt; a ? b : a) {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordflow">return</span> b &lt; a ? b : a;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;}</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifdef max</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#undef max</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> U&gt;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="../../d7/d79/MinMaxFix_8hpp.html#a89a4eacb9a5ac9b8f4ae9e94fa784344">   19</a></span>&#160;constexpr <span class="keyword">auto</span> <a class="code" href="../../d7/d79/MinMaxFix_8hpp.html#a89a4eacb9a5ac9b8f4ae9e94fa784344">max</a>(<span class="keyword">const</span> T &amp;a, <span class="keyword">const</span> U &amp;b) -&gt; decltype(b &lt; a ? b : a) {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">return</span> a &lt; b ? b : a;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifdef min</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#undef min</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> U&gt;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="../../df/d13/group__Math.html#ga14defb38b6c00778e25b94ea91b0b4ac">   14</a></span>&#160;constexpr <span class="keyword">auto</span> <a class="code" href="../../df/d13/group__Math.html#ga14defb38b6c00778e25b94ea91b0b4ac">min</a>(<span class="keyword">const</span> T &amp;a, <span class="keyword">const</span> U &amp;b) -&gt; decltype(b &lt; a ? b : a) {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> b &lt; a ? b : a;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifdef max</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#undef max</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> U&gt;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="../../df/d13/group__Math.html#ga9e95297ceced5af9c60b19932989502d">   24</a></span>&#160;constexpr <span class="keyword">auto</span> <a class="code" href="../../df/d13/group__Math.html#ga9e95297ceced5af9c60b19932989502d">max</a>(<span class="keyword">const</span> T &amp;a, <span class="keyword">const</span> U &amp;b) -&gt; decltype(a &lt; b ? b : a) {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">return</span> a &lt; b ? b : a;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aNamespaceSettings_8hpp_html_abe0f0e505619b6899c38363f4e42a272"><div class="ttname"><a href="../../dc/dc7/NamespaceSettings_8hpp.html#abe0f0e505619b6899c38363f4e42a272">BEGIN_AH_NAMESPACE</a></div><div class="ttdeci">#define BEGIN_AH_NAMESPACE</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/dc7/NamespaceSettings_8hpp_source.html#l00009">NamespaceSettings.hpp:9</a></div></div>
+<div class="ttc" id="agroup__Math_html_ga9e95297ceced5af9c60b19932989502d"><div class="ttname"><a href="../../df/d13/group__Math.html#ga9e95297ceced5af9c60b19932989502d">max</a></div><div class="ttdeci">constexpr auto max(const T &amp;a, const U &amp;b) -&gt; decltype(a&lt; b ? b :a)</div><div class="ttdoc">Return the larger of two numbers/objects.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d79/MinMaxFix_8hpp_source.html#l00024">MinMaxFix.hpp:24</a></div></div>
 <div class="ttc" id="aNamespaceSettings_8hpp_html"><div class="ttname"><a href="../../dc/dc7/NamespaceSettings_8hpp.html">NamespaceSettings.hpp</a></div></div>
-<div class="ttc" id="aMinMaxFix_8hpp_html_a89a4eacb9a5ac9b8f4ae9e94fa784344"><div class="ttname"><a href="../../d7/d79/MinMaxFix_8hpp.html#a89a4eacb9a5ac9b8f4ae9e94fa784344">max</a></div><div class="ttdeci">constexpr auto max(const T &amp;a, const U &amp;b) -&gt; decltype(b&lt; a ? b :a)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d79/MinMaxFix_8hpp_source.html#l00019">MinMaxFix.hpp:19</a></div></div>
 <div class="ttc" id="aNamespaceSettings_8hpp_html_a03ed68e9e3d1bbe9a28fd924cb7260c1"><div class="ttname"><a href="../../dc/dc7/NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div><div class="ttdeci">#define END_AH_NAMESPACE</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/dc7/NamespaceSettings_8hpp_source.html#l00010">NamespaceSettings.hpp:10</a></div></div>
-<div class="ttc" id="aMinMaxFix_8hpp_html_a14defb38b6c00778e25b94ea91b0b4ac"><div class="ttname"><a href="../../d7/d79/MinMaxFix_8hpp.html#a14defb38b6c00778e25b94ea91b0b4ac">min</a></div><div class="ttdeci">constexpr auto min(const T &amp;a, const U &amp;b) -&gt; decltype(b&lt; a ? b :a)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d79/MinMaxFix_8hpp_source.html#l00011">MinMaxFix.hpp:11</a></div></div>
+<div class="ttc" id="agroup__Math_html_ga14defb38b6c00778e25b94ea91b0b4ac"><div class="ttname"><a href="../../df/d13/group__Math.html#ga14defb38b6c00778e25b94ea91b0b4ac">min</a></div><div class="ttdeci">constexpr auto min(const T &amp;a, const U &amp;b) -&gt; decltype(b&lt; a ? b :a)</div><div class="ttdoc">Return the smaller of two numbers/objects.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d79/MinMaxFix_8hpp_source.html#l00014">MinMaxFix.hpp:14</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

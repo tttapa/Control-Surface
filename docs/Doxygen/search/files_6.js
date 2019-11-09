@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['increasebitdepth_2ecpp_514',['IncreaseBitDepth.cpp',['../de/d9b/IncreaseBitDepth_8cpp.html',1,'']]],
-  ['increasebitdepth_2ehpp_515',['IncreaseBitDepth.hpp',['../d5/dee/IncreaseBitDepth_8hpp.html',1,'']]],
-  ['incrementbutton_2ecpp_516',['IncrementButton.cpp',['../db/d9d/IncrementButton_8cpp.html',1,'']]],
-  ['incrementbutton_2ehpp_517',['IncrementButton.hpp',['../d5/d04/IncrementButton_8hpp.html',1,'']]],
-  ['incrementdecrementbuttons_2ecpp_518',['IncrementDecrementButtons.cpp',['../da/d66/IncrementDecrementButtons_8cpp.html',1,'']]],
-  ['incrementdecrementbuttons_2ehpp_519',['IncrementDecrementButtons.hpp',['../df/df5/IncrementDecrementButtons_8hpp.html',1,'']]]
+  ['hardware_2dtypes_2ehpp_524',['Hardware-Types.hpp',['../d4/d35/Hardware-Types_8hpp.html',1,'']]],
+  ['hardware_2edox_525',['Hardware.dox',['../d4/d45/Hardware_8dox.html',1,'']]],
+  ['hysteresis_2ecpp_526',['Hysteresis.cpp',['../dd/d40/Hysteresis_8cpp.html',1,'']]],
+  ['hysteresis_2ehpp_527',['Hysteresis.hpp',['../d3/d09/Hysteresis_8hpp.html',1,'']]]
 ];

@@ -1,0 +1,4 @@
+/** 
+ * @defgroup    Containers Containers
+ * @brief   Containers like Array, BitArray, DoublyLinkedList and UniquePtr.
+ */

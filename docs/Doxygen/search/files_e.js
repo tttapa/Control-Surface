@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['uniqueptr_2ecpp_558',['UniquePtr.cpp',['../de/d47/UniquePtr_8cpp.html',1,'']]],
-  ['uniqueptr_2ehpp_559',['UniquePtr.hpp',['../de/d7e/UniquePtr_8hpp.html',1,'']]],
-  ['updatable_2ecpp_560',['Updatable.cpp',['../d6/dea/Updatable_8cpp.html',1,'']]],
-  ['updatable_2ehpp_561',['Updatable.hpp',['../d4/d93/Updatable_8hpp.html',1,'']]]
+  ['teensyusbtypes_2ehpp_571',['TeensyUSBTypes.hpp',['../d9/d98/TeensyUSBTypes_8hpp.html',1,'']]],
+  ['timing_2edox_572',['Timing.dox',['../d8/dd7/Timing_8dox.html',1,'']]],
+  ['type_5ftraits_5ffallback_2ehpp_573',['type_traits_fallback.hpp',['../df/d65/type__traits__fallback_8hpp.html',1,'']]]
 ];

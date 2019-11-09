@@ -78,6 +78,9 @@ $(function() {
 <div class="title">Containers</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Containers like <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>, <a class="el" href="../../db/de9/classBitArray.html" title="A class for arrays of bits.">BitArray</a>, <a class="el" href="../../dd/d16/classDoublyLinkedList.html" title="A class for doubly linked lists.">DoublyLinkedList</a> and <a class="el" href="../../d0/ddd/classUniquePtr.html" title="Very basic smart pointer.">UniquePtr</a>.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -92,6 +95,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d23/classDoublyLinkable.html">DoublyLinkable&lt; Node &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class that can be inherited from to allow inserting into a <a class="el" href="../../dd/d16/classDoublyLinkedList.html" title="A class for doubly linked lists.">DoublyLinkedList</a>.  <a href="../../d4/d23/classDoublyLinkable.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/ddd/classUniquePtr.html">UniquePtr&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Very basic smart pointer.  <a href="../../d0/ddd/classUniquePtr.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -128,8 +134,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gaad0d1453702ba4ea1c2e3f4281029377"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, M+N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../db/d50/group__Containers.html#gaad0d1453702ba4ea1c2e3f4281029377">cat</a> (const <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, M &gt; &amp;a, const <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, N &gt; &amp;b)</td></tr>
 <tr class="memdesc:gaad0d1453702ba4ea1c2e3f4281029377"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate two arrays.  <a href="../../db/d50/group__Containers.html#gaad0d1453702ba4ea1c2e3f4281029377">More...</a><br /></td></tr>
 <tr class="separator:gaad0d1453702ba4ea1c2e3f4281029377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb4ce09bb1bbca704175a873b2a3f28a"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Args&gt; </td></tr>
+<tr class="memitem:gabb4ce09bb1bbca704175a873b2a3f28a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../d0/ddd/classUniquePtr.html">UniquePtr</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../db/d50/group__Containers.html#gabb4ce09bb1bbca704175a873b2a3f28a">MakeUnique</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="separator:gabb4ce09bb1bbca704175a873b2a3f28a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Containers like <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>, <a class="el" href="../../db/de9/classBitArray.html" title="A class for arrays of bits.">BitArray</a>, <a class="el" href="../../dd/d16/classDoublyLinkedList.html" title="A class for doubly linked lists.">DoublyLinkedList</a> and <a class="el" href="../../d0/ddd/classUniquePtr.html" title="Very basic smart pointer.">UniquePtr</a>. </p>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ga65347c7f97dc7e8e602fb77ac735f585"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga65347c7f97dc7e8e602fb77ac735f585">&#9670;&nbsp;</a></span>Array2D</h2>
@@ -395,6 +405,28 @@ template&lt;class T , size_t M, size_t N&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>A new array containing the elements of both input arrays (in order). </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00173">173</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
+
+</div>
+</div>
+<a id="gabb4ce09bb1bbca704175a873b2a3f28a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabb4ce09bb1bbca704175a873b2a3f28a">&#9670;&nbsp;</a></span>MakeUnique()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d0/ddd/classUniquePtr.html">UniquePtr</a>&lt;T&gt; MakeUnique </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../de/d7e/UniquePtr_8hpp_source.html#l00062">62</a> of file <a class="el" href="../../de/d7e/UniquePtr_8hpp_source.html">UniquePtr.hpp</a>.</p>
 
 </div>
 </div>

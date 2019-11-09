@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['printstream_2ecpp_536',['PrintStream.cpp',['../da/d69/PrintStream_8cpp.html',1,'']]],
-  ['printstream_2ehpp_537',['PrintStream.hpp',['../dd/d80/PrintStream_8hpp.html',1,'']]]
+  ['namespacesettings_2ecpp_549',['NamespaceSettings.cpp',['../dc/dd6/NamespaceSettings_8cpp.html',1,'']]],
+  ['namespacesettings_2ehpp_550',['NamespaceSettings.hpp',['../dc/dc7/NamespaceSettings_8hpp.html',1,'']]]
 ];

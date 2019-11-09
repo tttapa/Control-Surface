@@ -80,12 +80,13 @@ $(function() {
 <div class="title">Debug.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="../../d2/dd5/SettingsWrapper_8hpp_source.html">Settings/SettingsWrapper.hpp</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="../../dd/d80/PrintStream_8hpp_source.html">PrintStream/PrintStream.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="../../d2/dd5/SettingsWrapper_8hpp_source.html">Settings/SettingsWrapper.hpp</a>&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Debug.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../dc/d1f/Debug_8hpp__incl.svg" width="803" height="336"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../dc/d1f/Debug_8hpp__incl.svg" width="736" height="336"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -97,19 +98,21 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a7ff58a0631676f068e4db329a2ca8d28"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a7ff58a0631676f068e4db329a2ca8d28">FLUSH_ON_EVERY_DEBUG_STATEMENT</a></td></tr>
+<tr class="memitem:a7ff58a0631676f068e4db329a2ca8d28"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a7ff58a0631676f068e4db329a2ca8d28">FLUSH_ON_EVERY_DEBUG_STATEMENT</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:a7ff58a0631676f068e4db329a2ca8d28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should the output stream be flushed after each debug statement? Enabling this feature can slow things down significantly, and is not supported on ESP32 / ESP8266.  <a href="../../df/dee/Debug_8hpp.html#a7ff58a0631676f068e4db329a2ca8d28">More...</a><br /></td></tr>
 <tr class="separator:a7ff58a0631676f068e4db329a2ca8d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90dc3f3ee970394e0080300526390a84"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a90dc3f3ee970394e0080300526390a84">ENDL</a>&#160;&#160;&#160;<a class="el" href="../../dd/d80/PrintStream_8hpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a></td></tr>
-<tr class="separator:a90dc3f3ee970394e0080300526390a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a890d84b9b5d0b0aede9eea1092a7a10a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a890d84b9b5d0b0aede9eea1092a7a10a">STR_HELPER</a>(x)&#160;&#160;&#160;#x</td></tr>
-<tr class="separator:a890d84b9b5d0b0aede9eea1092a7a10a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18d295a837ac71add5578860b55e5502"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a18d295a837ac71add5578860b55e5502">STR</a>(x)&#160;&#160;&#160;<a class="el" href="../../df/dee/Debug_8hpp.html#a890d84b9b5d0b0aede9eea1092a7a10a">STR_HELPER</a>(x)</td></tr>
-<tr class="separator:a18d295a837ac71add5578860b55e5502"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af70a086ec2671f38a23cd71019e6e9fc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#af70a086ec2671f38a23cd71019e6e9fc">FUNC_LOCATION</a>&#160;&#160;&#160;'[' &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; F(&quot; @ line &quot; STR(__LINE__) &quot;]:\t&quot;)</td></tr>
-<tr class="separator:af70a086ec2671f38a23cd71019e6e9fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac27b81440ce6781d5bfcab7a9bbdef99"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#ac27b81440ce6781d5bfcab7a9bbdef99">LOCATION</a>&#160;&#160;&#160;&quot;[&quot; __FILE__ &quot;:&quot; <a class="el" href="../../df/dee/Debug_8hpp.html#a18d295a837ac71add5578860b55e5502">STR</a>(__LINE__) &quot;]:\t&quot;</td></tr>
-<tr class="separator:ac27b81440ce6781d5bfcab7a9bbdef99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35654913b4a1f9d9300f847fab14b3d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a35654913b4a1f9d9300f847fab14b3d3">NAMEDVALUE</a>(x)&#160;&#160;&#160;F(<a class="el" href="../../df/dee/Debug_8hpp.html#a18d295a837ac71add5578860b55e5502">STR</a>(x) &quot; = &quot;) &lt;&lt; x</td></tr>
+<tr class="memitem:adfee4e127bcb4f8cd258a42e57358d25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#adfee4e127bcb4f8cd258a42e57358d25">DEBUG_ENDL</a>&#160;&#160;&#160;&quot;\r\n&quot;</td></tr>
+<tr class="separator:adfee4e127bcb4f8cd258a42e57358d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a6e9a76d67fbd228ee6bb2075ef65ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a8a6e9a76d67fbd228ee6bb2075ef65ac">DEBUG_STR_HELPER</a>(x)&#160;&#160;&#160;#x</td></tr>
+<tr class="separator:a8a6e9a76d67fbd228ee6bb2075ef65ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b1af4db37be4dd296aaf199038b27e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a6b1af4db37be4dd296aaf199038b27e1">DEBUG_STR</a>(x)&#160;&#160;&#160;<a class="el" href="../../df/dee/Debug_8hpp.html#a8a6e9a76d67fbd228ee6bb2075ef65ac">DEBUG_STR_HELPER</a>(x)</td></tr>
+<tr class="separator:a6b1af4db37be4dd296aaf199038b27e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a612bc94828e6e5e75f6ff978d6eb6f87"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a612bc94828e6e5e75f6ff978d6eb6f87">DEBUG_FUNC_LOCATION</a>&#160;&#160;&#160;'[' &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; F(&quot; @ line &quot; DEBUG_STR(__LINE__) &quot;]:\t&quot;)</td></tr>
+<tr class="separator:a612bc94828e6e5e75f6ff978d6eb6f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a287b57d7cf8a3a20f97c91893d2ebace"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a287b57d7cf8a3a20f97c91893d2ebace">DEBUG_LOCATION</a>&#160;&#160;&#160;&quot;[&quot; __FILE__ &quot;:&quot; <a class="el" href="../../df/dee/Debug_8hpp.html#a6b1af4db37be4dd296aaf199038b27e1">DEBUG_STR</a>(__LINE__) &quot;]:\t&quot;</td></tr>
+<tr class="separator:a287b57d7cf8a3a20f97c91893d2ebace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35654913b4a1f9d9300f847fab14b3d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a35654913b4a1f9d9300f847fab14b3d3">NAMEDVALUE</a>(x)&#160;&#160;&#160;F(<a class="el" href="../../df/dee/Debug_8hpp.html#a6b1af4db37be4dd296aaf199038b27e1">DEBUG_STR</a>(x) &quot; = &quot;) &lt;&lt; x</td></tr>
+<tr class="memdesc:a35654913b4a1f9d9300f847fab14b3d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro for printing an expression as a string, followed by its value.  <a href="../../df/dee/Debug_8hpp.html#a35654913b4a1f9d9300f847fab14b3d3">More...</a><br /></td></tr>
 <tr class="separator:a35654913b4a1f9d9300f847fab14b3d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3dfa58b1c5c2943dd49d8aa1981d377d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dee/Debug_8hpp.html#a3dfa58b1c5c2943dd49d8aa1981d377d">DEBUG</a>(x)</td></tr>
 <tr class="separator:a3dfa58b1c5c2943dd49d8aa1981d377d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,39 +133,42 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define FLUSH_ON_EVERY_DEBUG_STATEMENT</td>
+          <td class="memname">#define FLUSH_ON_EVERY_DEBUG_STATEMENT&#160;&#160;&#160;0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00007">7</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
+<p>Should the output stream be flushed after each debug statement? Enabling this feature can slow things down significantly, and is not supported on ESP32 / ESP8266. </p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000001">Todo:</a></b></dt><dd>I should probably use Streams instead of Prints, so Espressif boards can flush as well. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00017">17</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a90dc3f3ee970394e0080300526390a84"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90dc3f3ee970394e0080300526390a84">&#9670;&nbsp;</a></span>ENDL</h2>
+<a id="adfee4e127bcb4f8cd258a42e57358d25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfee4e127bcb4f8cd258a42e57358d25">&#9670;&nbsp;</a></span>DEBUG_ENDL</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ENDL&#160;&#160;&#160;<a class="el" href="../../dd/d80/PrintStream_8hpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a></td>
+          <td class="memname">#define DEBUG_ENDL&#160;&#160;&#160;&quot;\r\n&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00013">13</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00045">45</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a890d84b9b5d0b0aede9eea1092a7a10a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a890d84b9b5d0b0aede9eea1092a7a10a">&#9670;&nbsp;</a></span>STR_HELPER</h2>
+<a id="a8a6e9a76d67fbd228ee6bb2075ef65ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a6e9a76d67fbd228ee6bb2075ef65ac">&#9670;&nbsp;</a></span>DEBUG_STR_HELPER</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define STR_HELPER</td>
+          <td class="memname">#define DEBUG_STR_HELPER</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">x</td><td>)</td>
@@ -171,59 +177,59 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00058">58</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00054">54</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a18d295a837ac71add5578860b55e5502"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18d295a837ac71add5578860b55e5502">&#9670;&nbsp;</a></span>STR</h2>
+<a id="a6b1af4db37be4dd296aaf199038b27e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b1af4db37be4dd296aaf199038b27e1">&#9670;&nbsp;</a></span>DEBUG_STR</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define STR</td>
+          <td class="memname">#define DEBUG_STR</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">x</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="../../df/dee/Debug_8hpp.html#a890d84b9b5d0b0aede9eea1092a7a10a">STR_HELPER</a>(x)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="../../df/dee/Debug_8hpp.html#a8a6e9a76d67fbd228ee6bb2075ef65ac">DEBUG_STR_HELPER</a>(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00055">55</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a612bc94828e6e5e75f6ff978d6eb6f87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a612bc94828e6e5e75f6ff978d6eb6f87">&#9670;&nbsp;</a></span>DEBUG_FUNC_LOCATION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEBUG_FUNC_LOCATION&#160;&#160;&#160;'[' &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; F(&quot; @ line &quot; DEBUG_STR(__LINE__) &quot;]:\t&quot;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00057">57</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a287b57d7cf8a3a20f97c91893d2ebace"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a287b57d7cf8a3a20f97c91893d2ebace">&#9670;&nbsp;</a></span>DEBUG_LOCATION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEBUG_LOCATION&#160;&#160;&#160;&quot;[&quot; __FILE__ &quot;:&quot; <a class="el" href="../../df/dee/Debug_8hpp.html#a6b1af4db37be4dd296aaf199038b27e1">DEBUG_STR</a>(__LINE__) &quot;]:\t&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00059">59</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
-
-</div>
-</div>
-<a id="af70a086ec2671f38a23cd71019e6e9fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af70a086ec2671f38a23cd71019e6e9fc">&#9670;&nbsp;</a></span>FUNC_LOCATION</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define FUNC_LOCATION&#160;&#160;&#160;'[' &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; F(&quot; @ line &quot; STR(__LINE__) &quot;]:\t&quot;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00061">61</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ac27b81440ce6781d5bfcab7a9bbdef99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac27b81440ce6781d5bfcab7a9bbdef99">&#9670;&nbsp;</a></span>LOCATION</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LOCATION&#160;&#160;&#160;&quot;[&quot; __FILE__ &quot;:&quot; <a class="el" href="../../df/dee/Debug_8hpp.html#a18d295a837ac71add5578860b55e5502">STR</a>(__LINE__) &quot;]:\t&quot;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00063">63</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
 
 </div>
 </div>
@@ -238,12 +244,15 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">x</td><td>)</td>
-          <td>&#160;&#160;&#160;F(<a class="el" href="../../df/dee/Debug_8hpp.html#a18d295a837ac71add5578860b55e5502">STR</a>(x) &quot; = &quot;) &lt;&lt; x</td>
+          <td>&#160;&#160;&#160;F(<a class="el" href="../../df/dee/Debug_8hpp.html#a6b1af4db37be4dd296aaf199038b27e1">DEBUG_STR</a>(x) &quot; = &quot;) &lt;&lt; x</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00065">65</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
+<p>Macro for printing an expression as a string, followed by its value. </p>
+<p>The expression string is saved in PROGMEM using the <code>F(...)</code> macro. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00066">66</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
 
 </div>
 </div>
@@ -265,7 +274,7 @@ Macros</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {                                                                       \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00106">106</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00128">128</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
 
 </div>
 </div>
@@ -287,7 +296,7 @@ Macros</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {                                                                       \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00109">109</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00131">131</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
 
 </div>
 </div>
@@ -309,7 +318,7 @@ Macros</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {                                                                       \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00112">112</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00134">134</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
 
 </div>
 </div>
@@ -331,7 +340,7 @@ Macros</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {                                                                       \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00116">116</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00138">138</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
 
 </div>
 </div>
@@ -353,7 +362,7 @@ Macros</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {                                                                       \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00120">120</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dee/Debug_8hpp_source.html#l00142">142</a> of file <a class="el" href="../../df/dee/Debug_8hpp_source.html">Debug.hpp</a>.</p>
 
 </div>
 </div>

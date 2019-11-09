@@ -23,7 +23,7 @@ enable_if_t<(Bits_out <= 2 * Bits_in), T_out> increaseBitDepthImpl(T_in in) {
     return (T_out(in) << leftShift) | (in >> rightShift);
 }
 
-/// @addtogroup    Utilities
+/// @addtogroup    Math
 /// @{
 
 /**

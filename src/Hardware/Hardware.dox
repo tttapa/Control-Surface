@@ -1,0 +1,5 @@
+/**
+ * @defgroup    HardwareUtils   Hardware Utilities
+ * @brief   Classes used for debouncing buttons, incrementing/decrementing
+ *          push buttons, scanning switch matrices, filtering analog input, etc.
+ */

@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['hardware_2dtypes_2ehpp_511',['Hardware-Types.hpp',['../d4/d35/Hardware-Types_8hpp.html',1,'']]],
-  ['hysteresis_2ecpp_512',['Hysteresis.cpp',['../dd/d40/Hysteresis_8cpp.html',1,'']]],
-  ['hysteresis_2ehpp_513',['Hysteresis.hpp',['../d3/d09/Hysteresis_8hpp.html',1,'']]]
+  ['filteredanalog_2ecpp_520',['FilteredAnalog.cpp',['../dd/d47/FilteredAnalog_8cpp.html',1,'']]],
+  ['filteredanalog_2ehpp_521',['FilteredAnalog.hpp',['../d8/df3/FilteredAnalog_8hpp.html',1,'']]],
+  ['filters_2edox_522',['Filters.dox',['../dc/ddf/Filters_8dox.html',1,'']]],
+  ['frequency_2ehpp_523',['Frequency.hpp',['../dc/d50/Frequency_8hpp.html',1,'']]]
 ];

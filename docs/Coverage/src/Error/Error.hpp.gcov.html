@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - HEAD - src/Error/Error.hpp</title>
+  <title>LCOV - cf7103ae0e6ed0a3b8b1e39fa45c3366ecf70959 - src/Error/Error.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">HEAD</td>
+            <td class="headerValue">cf7103ae0e6ed0a3b8b1e39fa45c3366ecf70959</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">5</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-09 19:21:29</td>
+            <td class="headerValue">2019-11-09 23:44:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -134,7 +134,7 @@
 <a name="64"><span class="lineNum">      64 </span>            :     do {                                                                       \</a>
 <a name="65"><span class="lineNum">      65 </span>            :         USING_AH_NAMESPACE;                                                    \</a>
 <a name="66"><span class="lineNum">      66 </span>            :         std::ostringstream s;                                                  \</a>
-<a name="67"><span class="lineNum">      67 </span>            :         s &lt;&lt; FUNC_LOCATION &lt;&lt; x;                                               \</a>
+<a name="67"><span class="lineNum">      67 </span>            :         s &lt;&lt; DEBUG_FUNC_LOCATION &lt;&lt; x;                                         \</a>
 <a name="68"><span class="lineNum">      68 </span>            :         throw ErrorException(s.str(), e);                                      \</a>
 <a name="69"><span class="lineNum">      69 </span>            :     } while (0)</a>
 <a name="70"><span class="lineNum">      70 </span>            : </a>
@@ -142,7 +142,7 @@
 <a name="72"><span class="lineNum">      72 </span>            :     do {                                                                       \</a>
 <a name="73"><span class="lineNum">      73 </span>            :         USING_AH_NAMESPACE;                                                    \</a>
 <a name="74"><span class="lineNum">      74 </span>            :         std::ostringstream s;                                                  \</a>
-<a name="75"><span class="lineNum">      75 </span>            :         s &lt;&lt; FUNC_LOCATION &lt;&lt; x;                                               \</a>
+<a name="75"><span class="lineNum">      75 </span>            :         s &lt;&lt; DEBUG_FUNC_LOCATION &lt;&lt; x;                                         \</a>
 <a name="76"><span class="lineNum">      76 </span>            :         throw ErrorException(s.str(), e);                                      \</a>
 <a name="77"><span class="lineNum">      77 </span>            :     } while (0)</a>
 <a name="78"><span class="lineNum">      78 </span>            : </a>

@@ -64,7 +64,7 @@ END_AH_NAMESPACE
     do {                                                                       \
         USING_AH_NAMESPACE;                                                    \
         std::ostringstream s;                                                  \
-        s << FUNC_LOCATION << x;                                               \
+        s << DEBUG_FUNC_LOCATION << x;                                         \
         throw ErrorException(s.str(), e);                                      \
     } while (0)
 
@@ -72,7 +72,7 @@ END_AH_NAMESPACE
     do {                                                                       \
         USING_AH_NAMESPACE;                                                    \
         std::ostringstream s;                                                  \
-        s << FUNC_LOCATION << x;                                               \
+        s << DEBUG_FUNC_LOCATION << x;                                         \
         throw ErrorException(s.str(), e);                                      \
     } while (0)
 

@@ -1,0 +1,4 @@
+/**
+ * @defgroup    Filters     Filters
+ * @brief   Classes for basic filtering and hysteresis.
+ */
