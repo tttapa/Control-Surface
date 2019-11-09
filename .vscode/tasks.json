@@ -1,0 +1,80 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Make All",
+            "command": "make -j$[$(nproc) * 2]",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "problemMatcher": "$gcc",
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
+        },
+        {
+            "type": "shell",
+            "label": "Make Test",
+            "command": "make test",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "dependsOn": "Make All",
+            "problemMatcher": "$gcc",
+            "group": "test",
+        },
+        {
+            "type": "shell",
+            "label": "Make Check",
+            "command": "make check",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "dependsOn": "Make All",
+            "problemMatcher": "$gcc",
+            "group": "test",
+        },
+        {
+            "type": "shell",
+            "label": "Make & Test & Build examples",
+            "command": "./build-arduino-examples.sh $[$(nproc) * 2]",
+            "problemMatcher": "$gcc",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts",
+            },
+            "dependsOn": "Make Test",
+            "group": "test",
+        },
+        {
+            "type": "shell",
+            "label": "Generate Documentation",
+            "command": "make documentation",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "problemMatcher": [],
+        },
+        {
+            "type": "shell",
+            "label": "Generate Coverage Information",
+            "command": "make coverage",
+            "options": {
+                "cwd": "${workspaceFolder}/build/coverage",
+            },
+            "problemMatcher": [],
+        },
+        {
+            "type": "shell",
+            "label": "Clear Build Directory and Run CMake",
+            "command": "./setup-build.sh \"${workspaceFolder}\"",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts",
+            },
+            "problemMatcher": [],
+        },
+    ]
+}
