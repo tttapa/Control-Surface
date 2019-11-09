@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - cf7103ae0e6ed0a3b8b1e39fa45c3366ecf70959 - src/Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp</title>
+  <title>LCOV - d95b6db8e10e7318533e3410a6e19eb807794ff5 - src/Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">cf7103ae0e6ed0a3b8b1e39fa45c3366ecf70959</td>
+            <td class="headerValue">d95b6db8e10e7318533e3410a6e19eb807794ff5</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">35</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-09 23:44:54</td>
+            <td class="headerValue">2019-11-10 00:05:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -101,15 +101,15 @@
 <a name="31"><span class="lineNum">      31 </span>            :     // reference.</a>
 <a name="32"><span class="lineNum">      32 </span><span class="lineCov">          2 : }</span></a>
 <a name="33"><span class="lineNum">      33 </span>            : </a>
-<a name="34"><span class="lineNum">      34 </span><span class="lineCov">         36 : void pinMode(pin_t pin, uint8_t mode) {</span></a>
+<a name="34"><span class="lineNum">      34 </span><span class="lineCov">         38 : void pinMode(pin_t pin, uint8_t mode) {</span></a>
 <a name="35"><span class="lineNum">      35 </span>            :     // DEBUGFN(DEBUGVAR(pin) &lt;&lt; '\t' &lt;&lt; DEBUGVAR(mode));</a>
-<a name="36"><span class="lineNum">      36 </span><span class="lineCov">         36 :     if (pin &lt; NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {</span></a>
-<a name="37"><span class="lineNum">      37 </span><span class="lineCov">         35 :         ::pinMode(pin, mode);</span></a>
-<a name="38"><span class="lineNum">      38 </span><span class="lineCov">         35 :     } else {</span></a>
+<a name="36"><span class="lineNum">      36 </span><span class="lineCov">         38 :     if (pin &lt; NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {</span></a>
+<a name="37"><span class="lineNum">      37 </span><span class="lineCov">         37 :         ::pinMode(pin, mode);</span></a>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">         37 :     } else {</span></a>
 <a name="39"><span class="lineNum">      39 </span><span class="lineCov">          1 :         ExtendedIOElement &amp;el = getIOElementOfPin(pin);</span></a>
 <a name="40"><span class="lineNum">      40 </span><span class="lineCov">          1 :         el.pinMode(pin - el.getStart(), mode);</span></a>
 <a name="41"><span class="lineNum">      41 </span>            :     }</a>
-<a name="42"><span class="lineNum">      42 </span><span class="lineCov">         36 : }</span></a>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">         38 : }</span></a>
 <a name="43"><span class="lineNum">      43 </span><span class="lineNoCov">          0 : void pinMode(int pin, uint8_t mode) { pinMode((pin_t)pin, mode); }</span></a>
 <a name="44"><span class="lineNum">      44 </span>            : </a>
 <a name="45"><span class="lineNum">      45 </span><span class="lineCov">         47 : void digitalWrite(pin_t pin, uint8_t val) {</span></a>
@@ -123,15 +123,15 @@
 <a name="53"><span class="lineNum">      53 </span><span class="lineCov">         47 : }</span></a>
 <a name="54"><span class="lineNum">      54 </span><span class="lineNoCov">          0 : void digitalWrite(int pin, uint8_t val) { digitalWrite((pin_t)pin, val); }</span></a>
 <a name="55"><span class="lineNum">      55 </span>            : </a>
-<a name="56"><span class="lineNum">      56 </span><span class="lineCov">         41 : int digitalRead(pin_t pin) {</span></a>
-<a name="57"><span class="lineNum">      57 </span><span class="lineCov">         41 :     if (pin &lt; NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {</span></a>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">         29 :         return ::digitalRead(pin);</span></a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">         52 : int digitalRead(pin_t pin) {</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">         52 :     if (pin &lt; NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">         40 :         return ::digitalRead(pin);</span></a>
 <a name="59"><span class="lineNum">      59 </span>            :     } else {</a>
 <a name="60"><span class="lineNum">      60 </span><span class="lineCov">         12 :         ExtendedIOElement &amp;el = getIOElementOfPin(pin);</span></a>
 <a name="61"><span class="lineNum">      61 </span><span class="lineCov">         12 :         return el.digitalRead(pin - el.getStart());</span></a>
 <a name="62"><span class="lineNum">      62 </span>            :     }</a>
 <a name="63"><span class="lineNum">      63 </span>            :     return 0;</a>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         39 : }</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         50 : }</span></a>
 <a name="65"><span class="lineNum">      65 </span><span class="lineCov">          5 : int digitalRead(int pin) { return digitalRead((pin_t)pin); }</span></a>
 <a name="66"><span class="lineNum">      66 </span>            : </a>
 <a name="67"><span class="lineNum">      67 </span><span class="lineNoCov">          0 : void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val) {</span></a>

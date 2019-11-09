@@ -30,7 +30,7 @@ lcov \
     --zerocounters \
     --directory "$build_dir"
 
-touch "$build_dir/CMakeLists.txt"
+cmake -S "$proj_dir" -B "$build_dir"
 make -C "$build_dir" -j$((`nproc` * 2))
 
 lcov \

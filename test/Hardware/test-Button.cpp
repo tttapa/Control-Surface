@@ -50,6 +50,21 @@ TEST(Button, falling) {
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
+TEST(Button, stableTime) {
+    Button b(2);
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    b.begin();
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(LOW));
+    EXPECT_EQ(b.update(), Button::Falling);
+
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1234));
+    EXPECT_EQ(b.stableTime(), 234);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
 /**
  * If two successive readings are low, the state should be `Pressed`.
  */
@@ -114,34 +129,42 @@ TEST(Button, debouncePressed) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_EQ(b.update(), Button::Falling);
+    EXPECT_EQ(b.getState(), Button::Falling);
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1001));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_EQ(b.update(), Button::Pressed);
+    EXPECT_EQ(b.getState(), Button::Pressed);
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1002));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_EQ(b.update(), Button::Pressed);
+    EXPECT_EQ(b.getState(), Button::Pressed);
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1003));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_EQ(b.update(), Button::Pressed);
+    EXPECT_EQ(b.getState(), Button::Pressed);
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1004));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_EQ(b.update(), Button::Pressed);
+    EXPECT_EQ(b.getState(), Button::Pressed);
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1005));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_EQ(b.update(), Button::Pressed);
+    EXPECT_EQ(b.getState(), Button::Pressed);
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_EQ(b.update(), Button::Rising);
+    EXPECT_EQ(b.getState(), Button::Rising);
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(3000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_EQ(b.update(), Button::Released);
+    EXPECT_EQ(b.getState(), Button::Released);
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
@@ -206,4 +229,75 @@ TEST(Button, debounceReleased) {
     EXPECT_EQ(b.update(), Button::Pressed);
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
+/**
+ * When the button bounces when releasing, the state should stay released.
+ * ```
+ * Raw input:
+ *    LOW    ┌─┐ ┌──────┐
+ *    HIGH  ─┘ └─┘      └─
+ *           ├─┼─┼────┤
+ *
+ * Debounced output:
+ *    HIGH   ┌──────────┐
+ *    LOW   ─┘          └─
+ * ```
+ */
+TEST(Button, debounceReleasedInverted) {
+    Button b(2);
+    b.invert();
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
+    b.begin();
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(HIGH));
+    EXPECT_EQ(b.update(), Button::Released);
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(999));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(HIGH));
+    EXPECT_EQ(b.update(), Button::Falling);
+    // Steady low
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(LOW));
+    EXPECT_EQ(b.update(), Button::Rising);
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1001));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(LOW));
+    EXPECT_EQ(b.update(), Button::Released);
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1002));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(HIGH));
+    EXPECT_EQ(b.update(), Button::Released);
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1003));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(HIGH));
+    EXPECT_EQ(b.update(), Button::Released);
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1004));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(LOW));
+    EXPECT_EQ(b.update(), Button::Released);
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1005));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(LOW));
+    EXPECT_EQ(b.update(), Button::Released);
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(HIGH));
+    EXPECT_EQ(b.update(), Button::Falling);
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(3000));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(HIGH));
+    EXPECT_EQ(b.update(), Button::Pressed);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
+TEST(Button, getName) {
+    EXPECT_STREQ((const char *)Button::getName(Button::Falling), "Falling");
+    EXPECT_STREQ((const char *)Button::getName(Button::Rising), "Rising");
+    EXPECT_STREQ((const char *)Button::getName(Button::Pressed), "Pressed");
+    EXPECT_STREQ((const char *)Button::getName(Button::Released), "Released");
+    EXPECT_STREQ((const char *)Button::getName(Button::State(99)), "<invalid>");
 }
