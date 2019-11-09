@@ -240,7 +240,7 @@ void loop() {
 
 Unlike the MIDI Controller library, the Control Surface library does support
 MIDI input.  
-This example shows how to use the `MIDINoteLED` class to turn on and off LEDs
+This example shows how to use the `NoteValueLED` class to turn on and off LEDs
 when MIDI Note On/Off messages are received.  
 The example shows the use of a shift register to drive the LEDs, but you can of
 course use any pins you want.
@@ -312,8 +312,8 @@ https://tttapa.github.io/Control-Surface/Doc/Doxygen/d7/dcd/group__MIDIInputElem
 
 Let's define a single LED on pin `13` that listens for MIDI Note events for
 a middle C on channel 1.  
-In the [documentation](https://tttapa.github.io/Control-Surface/Doc/Doxygen/d9/d0d/classMIDINoteLED.html),
-you'll find that the first argument for the `MIDINoteLED` constructor is the 
+In the [documentation](https://tttapa.github.io/Control-Surface/Doc/Doxygen/d3/dd5/classNoteValueLED.html),
+you'll find that the first argument for the `NoteValueLED` constructor is the 
 number of the pin with the LED connected, and the second is the MIDI address.  
 The MIDI address is a structure that consists of an address number, 
 the MIDI channel, and the cable number.  
@@ -329,7 +329,7 @@ or you can just use a number.
 
 ```cpp
 using namespace MIDI_Notes;
-MIDINoteLED noteLed = { 13, {note(C, 4), CHANNEL_1} };  // C4 = middle C
+NoteValueLED noteLed = { 13, {note(C, 4), CHANNEL_1} };  // C4 = middle C
 ```
 
 In our case, we don't want a single LED, we want eight. It's much easier to 
@@ -341,7 +341,7 @@ default channel, `CHANNEL_1`.
 > **Note**: The first pin is `pin(0)`, not `pin(1)`.
 
 ```cpp
-MIDINoteLED leds[] = {
+NoteValueLED leds[] = {
   {sreg.pin(0), note(C, 4)},
   {sreg.pin(1), note(D, 4)},
   {sreg.pin(2), note(E, 4)},
@@ -396,7 +396,7 @@ using namespace MIDI_Notes;
 
 // Create an array of LEDs that listen to MIDI Note messages, turning on and off
 // the LEDs connected to the eight input pins of the shift register
-MIDINoteLED leds[] = {
+NoteValueLED leds[] = {
   {sreg.pin(0), note(C, 4)}, // LED pin, address (note number, channel, cable)
   {sreg.pin(1), note(D, 4)}, //
   {sreg.pin(2), note(E, 4)}, //

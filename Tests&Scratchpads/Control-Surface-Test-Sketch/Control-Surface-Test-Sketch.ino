@@ -38,14 +38,14 @@ Bankable::CCRotaryEncoder enc             = {bank, {2, 3}, 0x20,  1, speedMultip
   
 //-----------------------------------------------------------------------------------------------------
 
-Bankable::MIDINoteLED<2> mute[] = {
+Bankable::NoteValueLED<2> mute[] = {
   { bank, MCU::MUTE_1, 1, sr.red(0) },
   { bank, MCU::MUTE_2, 1, sr.red(1) },
   { bank, MCU::MUTE_3, 1, sr.red(2) },
   { bank, MCU::MUTE_4, 1, sr.red(3) },
 };
 
-Bankable::MIDINoteLED<2> solo[] = {
+Bankable::NoteValueLED<2> solo[] = {
   { bank, MCU::SOLO_1, 1, sr.green(0) },
   { bank, MCU::SOLO_2, 1, sr.green(1) },
   { bank, MCU::SOLO_3, 1, sr.green(2) },
