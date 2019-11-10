@@ -1,6 +1,6 @@
 #include <gtest-wrapper.h>
 
-#include <Filters/Hysteresis.hpp>
+#include <AH/Filters/Hysteresis.hpp>
 #include <algorithm>
 
 TEST(Hysteresis, increasing) {

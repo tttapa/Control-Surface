@@ -51,7 +51,7 @@ TEST(Serial, println_string) {
     Mock::VerifyAndClear(&Serial);
 }
 
-#include <Error/Error.hpp>
+#include <AH/Error/Error.hpp>
 
 TEST(Error, exception) {
     USING_AH_NAMESPACE;

@@ -1,6 +1,6 @@
 #include <gtest-wrapper.h>
 
-#include <Math/IncreaseBitDepth.hpp>
+#include <AH/Math/IncreaseBitDepth.hpp>
 #include <algorithm>
 
 USING_AH_NAMESPACE;

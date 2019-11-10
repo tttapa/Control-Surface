@@ -1,4 +1,4 @@
-#include <Containers/BitArray.hpp>
+#include <AH/Containers/BitArray.hpp>
 #include <gtest-wrapper.h>
 
 USING_AH_NAMESPACE;

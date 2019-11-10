@@ -29,8 +29,8 @@
 
 // Include the library
 #include <Arduino_Helpers.h>
-#include <Hardware/FilteredAnalog.hpp>
-#include <Timing/MillisMicrosTimer.hpp>
+#include <AH/Hardware/FilteredAnalog.hpp>
+#include <AH/Timing/MillisMicrosTimer.hpp>
 
 // Create a filtered analog object on pin A0:
 FilteredAnalog<10,      // Output precision in bits

@@ -28,7 +28,7 @@
  */
 
 #include <Arduino_Helpers.h> // Include the Arduino Helpers library.
-#include <Hardware/ExtendedInputOutput/ShiftRegisterOut.hpp>
+#include <AH/Hardware/ExtendedInputOutput/ShiftRegisterOut.hpp>
 
 using namespace ExtIO; // Bring the ExtIO pin functions into your sketch
 

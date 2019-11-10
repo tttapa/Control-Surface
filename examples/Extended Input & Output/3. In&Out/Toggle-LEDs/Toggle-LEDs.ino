@@ -48,10 +48,10 @@
  */
 
 #include <Arduino_Helpers.h> // Include the Arduino Helpers library.
-#include <Containers/ArrayHelpers.hpp>
-#include <Hardware/Button.hpp>
-#include <Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
-#include <Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
+#include <AH/Containers/ArrayHelpers.hpp>
+#include <AH/Hardware/Button.hpp>
+#include <AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
+#include <AH/Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
 
 // Instantiate a multiplexer
 CD74HC4067 mux = {

@@ -1,6 +1,6 @@
 #include <gtest-wrapper.h>
 
-#include <Filters/EMA.hpp>
+#include <AH/Filters/EMA.hpp>
 #include <algorithm>
 #include <cmath>
 

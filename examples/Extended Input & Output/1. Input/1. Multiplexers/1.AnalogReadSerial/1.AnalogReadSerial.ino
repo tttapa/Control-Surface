@@ -35,7 +35,7 @@
  */
 
 #include <Arduino_Helpers.h> // Include the Arduino Helpers library
-#include <Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
+#include <AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
 
 // Instantiate a multiplexer
 CD74HC4067 mux = {

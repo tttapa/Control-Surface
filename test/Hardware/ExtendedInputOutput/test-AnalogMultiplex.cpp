@@ -1,7 +1,7 @@
 #include <gtest-wrapper.h>
 
-#include <Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
+#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 
 USING_AH_NAMESPACE;
 
