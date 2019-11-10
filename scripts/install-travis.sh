@@ -52,3 +52,6 @@ else
 fi
 
 ln -s "$TRAVIS_BUILD_DIR" "$HOME/Arduino/libraries/Control-Surface"
+
+cd "$TRAVIS_BUILD_DIR/.."
+git clone https://github.com/tttapa/Arduino-Helpers.git
