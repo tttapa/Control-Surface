@@ -1,0 +1,13 @@
+#pragma once
+
+#ifdef __AVR__
+#include "Fallback/initializer_list"
+#else
+#include <initializer_list>
+#endif
+
+#include <AH/Settings/NamespaceSettings.hpp>
+
+BEGIN_AH_NAMESPACE
+
+END_AH_NAMESPACE

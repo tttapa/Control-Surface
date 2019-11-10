@@ -5,6 +5,8 @@
 #include <AH/Error/Error.hpp>
 #include <stddef.h> // size_t
 
+BEGIN_AH_NAMESPACE
+
 /// @addtogroup Containers
 /// @{
 
@@ -105,3 +107,5 @@ template <class T, size_t nb_rows, size_t nb_cols>
 using Array2D = Array<Array<T, nb_cols>, nb_rows>;
 
 /// @}
+
+END_AH_NAMESPACE

@@ -1,23 +1,26 @@
 #pragma once
 
 #include <AH/STL/type_traits> // enable_if
-#include <limits.h>        // CHAR_BIT
-#include <stddef.h>        // size_t
+#include <limits.h>           // CHAR_BIT
+#include <stddef.h>           // size_t
 
 BEGIN_AH_NAMESPACE
 
 template <size_t Bits_out, size_t Bits_in, class T_out, class T_in>
-enable_if_t<(Bits_out <= 2 * Bits_in), T_out> increaseBitDepthImpl(T_in in);
+std::enable_if_t<(Bits_out <= 2 * Bits_in), T_out>
+increaseBitDepthImpl(T_in in);
 
 template <size_t Bits_out, size_t Bits_in, class T_out, class T_in>
-enable_if_t<(Bits_out > 2 * Bits_in), T_out> increaseBitDepthImpl(T_in in) {
+std::enable_if_t<(Bits_out > 2 * Bits_in), T_out>
+increaseBitDepthImpl(T_in in) {
     constexpr size_t leftShift = Bits_out - Bits_in;
     return (T_out(in) << leftShift) |
            increaseBitDepthImpl<leftShift, Bits_in, T_out>(in);
 }
 
 template <size_t Bits_out, size_t Bits_in, class T_out, class T_in>
-enable_if_t<(Bits_out <= 2 * Bits_in), T_out> increaseBitDepthImpl(T_in in) {
+std::enable_if_t<(Bits_out <= 2 * Bits_in), T_out>
+increaseBitDepthImpl(T_in in) {
     constexpr size_t leftShift = Bits_out - Bits_in;
     constexpr size_t rightShift = Bits_in - leftShift;
     return (T_out(in) << leftShift) | (in >> rightShift);

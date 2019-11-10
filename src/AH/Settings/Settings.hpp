@@ -1,4 +1,4 @@
-#ifndef SETTINGSWRAPPER_HPP
+#ifndef AH_SETTINGSWRAPPER_HPP
 #error "Do not include this file directly, use the wrapper!"
 #endif
 
@@ -74,6 +74,9 @@ constexpr unsigned long LONG_PRESS_DELAY = 450; // milliseconds
 
 /// The time between increments/decremnets during a long press.
 constexpr unsigned long LONG_PRESS_REPEAT_DELAY = 200; // milliseconds
+
+/// The interval between updating filtered analog inputs, in microseconds.
+constexpr unsigned long FILTERED_INPUT_UPDATE_INTERVAL = 1000; // microseconds
 
 constexpr static Frequency SPI_MAX_SPEED = 8_MHz;
 

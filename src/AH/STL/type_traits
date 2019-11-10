@@ -1,49 +1,18 @@
 #pragma once
 
-/**
- * @file
- * @brief   AVR Arduinos don't have access to the STL, so this is a simple
- *          implementation of some of the SFINAE stuff used by other parts of 
- *          the library.
- * 
- * <https://en.cppreference.com/w/cpp/types/enable_if>
- */
-
 #include <AH/Settings/NamespaceSettings.hpp>
 
 #ifdef __AVR__
-
-#include "type_traits_fallback.hpp"
-
+#include "Fallback/type_traits"
 #else
-
 #include <type_traits>
-#include <utility>
-
-BEGIN_AH_NAMESPACE
-
-using std::enable_if;
-using std::false_type;
-using std::forward;
-using std::integral_constant;
-using std::is_lvalue_reference;
-using std::is_unsigned;
-using std::remove_reference;
-using std::true_type;
-
-#if __cplusplus >= 201402L
-using std::enable_if_t;
 #endif
 
-END_AH_NAMESPACE
-
-#endif
-
-BEGIN_AH_NAMESPACE
+namespace std {
 
 #if __cplusplus < 201402L
 template <bool B, class T = void>
 using enable_if_t = typename enable_if<B, T>::type;
 #endif
 
-END_AH_NAMESPACE
+} // namespace std

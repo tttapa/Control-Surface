@@ -22,27 +22,36 @@
 // see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-#pragma once
+/** @file include/type_traits
+ *  This is a Standard C++ Library header.
+ */
+
+#ifndef _GLIBCXX_TYPE_TRAITS
+#define _GLIBCXX_TYPE_TRAITS 1
+
 #pragma GCC system_header
 
 #if __cplusplus < 201103L
-#error "C++ 11 required"
+# include "bits/c++0x_warning.h"
 #else
 
-#include <AH/Settings/NamespaceSettings.hpp>
+#include "bits/c++config.h"
 
-BEGIN_AH_NAMESPACE
-
-  // Fixes for missing bits/c++config.h include
-  typedef decltype(nullptr)	nullptr_t;
-
-#if __cpp_noexcept_function_type
-#define _GLIBCXX_NOEXCEPT_PARM , bool _NE
-#define _GLIBCXX_NOEXCEPT_QUAL noexcept (_NE)
-#else
-#define _GLIBCXX_NOEXCEPT_PARM
-#define _GLIBCXX_NOEXCEPT_QUAL
+#ifdef _GLIBCXX_USE_C99_STDINT_TR1
+# if defined (__UINT_LEAST16_TYPE__) && defined(__UINT_LEAST32_TYPE__)
+namespace std
+{
+  typedef __UINT_LEAST16_TYPE__ uint_least16_t;
+  typedef __UINT_LEAST32_TYPE__ uint_least32_t;
+}
+# else
+#  include "cstdint"
+# endif
 #endif
+
+namespace std _GLIBCXX_VISIBILITY(default)
+{
+_GLIBCXX_BEGIN_NAMESPACE_VERSION
 
   /**
    * @defgroup metaprogramming Metaprogramming
@@ -350,7 +359,7 @@ BEGIN_AH_NAMESPACE
     struct is_array
     : public false_type { };
 
-  template<typename _Tp, size_t _Size>
+  template<typename _Tp, std::size_t _Size>
     struct is_array<_Tp[_Size]>
     : public true_type { };
 
@@ -549,7 +558,7 @@ BEGIN_AH_NAMESPACE
     : public false_type { };
 
   template<>
-    struct __is_null_pointer_helper<nullptr_t>
+    struct __is_null_pointer_helper<std::nullptr_t>
     : public true_type { };
 
   /// is_null_pointer (LWG 2247).
@@ -1452,36 +1461,36 @@ BEGIN_AH_NAMESPACE
   /// alignment_of
   template<typename _Tp>
     struct alignment_of
-    : public integral_constant<size_t, __alignof__(_Tp)> { };
+    : public integral_constant<std::size_t, __alignof__(_Tp)> { };
 
   /// rank
   template<typename>
     struct rank
-    : public integral_constant<size_t, 0> { };
+    : public integral_constant<std::size_t, 0> { };
 
-  template<typename _Tp, size_t _Size>
+  template<typename _Tp, std::size_t _Size>
     struct rank<_Tp[_Size]>
-    : public integral_constant<size_t, 1 + rank<_Tp>::value> { };
+    : public integral_constant<std::size_t, 1 + rank<_Tp>::value> { };
 
   template<typename _Tp>
     struct rank<_Tp[]>
-    : public integral_constant<size_t, 1 + rank<_Tp>::value> { };
+    : public integral_constant<std::size_t, 1 + rank<_Tp>::value> { };
 
   /// extent
   template<typename, unsigned _Uint>
     struct extent
-    : public integral_constant<size_t, 0> { };
+    : public integral_constant<std::size_t, 0> { };
 
-  template<typename _Tp, unsigned _Uint, size_t _Size>
+  template<typename _Tp, unsigned _Uint, std::size_t _Size>
     struct extent<_Tp[_Size], _Uint>
-    : public integral_constant<size_t,
+    : public integral_constant<std::size_t,
 			       _Uint == 0 ? _Size : extent<_Tp,
 							   _Uint - 1>::value>
     { };
 
   template<typename _Tp, unsigned _Uint>
     struct extent<_Tp[], _Uint>
-    : public integral_constant<size_t,
+    : public integral_constant<std::size_t,
 			       _Uint == 0 ? 0 : extent<_Tp,
 						       _Uint - 1>::value>
     { };
@@ -1517,7 +1526,7 @@ BEGIN_AH_NAMESPACE
 	static void __test_aux(_To1);
 
       template<typename _From1, typename _To1,
-	       typename = decltype(__test_aux<_To1>(declval<_From1>()))>
+	       typename = decltype(__test_aux<_To1>(std::declval<_From1>()))>
 	static true_type
 	__test(int);
 
@@ -1932,7 +1941,7 @@ BEGIN_AH_NAMESPACE
     struct remove_extent
     { typedef _Tp     type; };
 
-  template<typename _Tp, size_t _Size>
+  template<typename _Tp, std::size_t _Size>
     struct remove_extent<_Tp[_Size]>
     { typedef _Tp     type; };
 
@@ -1945,7 +1954,7 @@ BEGIN_AH_NAMESPACE
     struct remove_all_extents
     { typedef _Tp     type; };
 
-  template<typename _Tp, size_t _Size>
+  template<typename _Tp, std::size_t _Size>
     struct remove_all_extents<_Tp[_Size]>
     { typedef typename remove_all_extents<_Tp>::type     type; };
 
@@ -2004,7 +2013,7 @@ BEGIN_AH_NAMESPACE
     using add_pointer_t = typename add_pointer<_Tp>::type;
 #endif
 
-  template<size_t _Len>
+  template<std::size_t _Len>
     struct __aligned_storage_msa
     {
       union __type
@@ -2024,7 +2033,7 @@ BEGIN_AH_NAMESPACE
    *  storage for any object whose size is at most _Len and whose
    *  alignment is a divisor of _Align.
   */
-  template<size_t _Len, size_t _Align =
+  template<std::size_t _Len, std::size_t _Align =
 	   __alignof__(typename __aligned_storage_msa<_Len>::__type)>
     struct aligned_storage
     {
@@ -2171,8 +2180,8 @@ BEGIN_AH_NAMESPACE
   {
     template<typename _Tp, typename _Up>
       static __success_type<typename decay<decltype
-			    (true ? declval<_Tp>()
-			     : declval<_Up>())>::type> _S_test(int);
+			    (true ? std::declval<_Tp>()
+			     : std::declval<_Up>())>::type> _S_test(int);
 
     template<typename, typename>
       static __failure_type _S_test(...);
@@ -2273,7 +2282,7 @@ BEGIN_AH_NAMESPACE
   {
     template<typename _Fp, typename _Tp1, typename... _Args>
       static __result_of_success<decltype(
-      (declval<_Tp1>().*declval<_Fp>())(declval<_Args>()...)
+      (std::declval<_Tp1>().*std::declval<_Fp>())(std::declval<_Args>()...)
       ), __invoke_memfun_ref> _S_test(int);
 
     template<typename...>
@@ -2292,7 +2301,7 @@ BEGIN_AH_NAMESPACE
   {
     template<typename _Fp, typename _Tp1, typename... _Args>
       static __result_of_success<decltype(
-      ((*declval<_Tp1>()).*declval<_Fp>())(declval<_Args>()...)
+      ((*std::declval<_Tp1>()).*std::declval<_Fp>())(std::declval<_Args>()...)
       ), __invoke_memfun_deref> _S_test(int);
 
     template<typename...>
@@ -2311,7 +2320,7 @@ BEGIN_AH_NAMESPACE
   {
     template<typename _Fp, typename _Tp1>
       static __result_of_success<decltype(
-      declval<_Tp1>().*declval<_Fp>()
+      std::declval<_Tp1>().*std::declval<_Fp>()
       ), __invoke_memobj_ref> _S_test(int);
 
     template<typename, typename>
@@ -2330,7 +2339,7 @@ BEGIN_AH_NAMESPACE
   {
     template<typename _Fp, typename _Tp1>
       static __result_of_success<decltype(
-      (*declval<_Tp1>()).*declval<_Fp>()
+      (*std::declval<_Tp1>()).*std::declval<_Fp>()
       ), __invoke_memobj_deref> _S_test(int);
 
     template<typename, typename>
@@ -2416,7 +2425,7 @@ BEGIN_AH_NAMESPACE
   {
     template<typename _Fn, typename... _Args>
       static __result_of_success<decltype(
-      declval<_Fn>()(declval<_Args>()...)
+      std::declval<_Fn>()(std::declval<_Args>()...)
       ), __invoke_other> _S_test(int);
 
     template<typename...>
@@ -2581,10 +2590,12 @@ BEGIN_AH_NAMESPACE
     noexcept(__is_nothrow_swappable<_Tp>::value);
 
   namespace __swappable_details {
+    using std::swap;
+
     struct __do_is_swappable_impl
     {
       template<typename _Tp, typename
-               = decltype(swap(declval<_Tp&>(), declval<_Tp&>()))>
+               = decltype(swap(std::declval<_Tp&>(), std::declval<_Tp&>()))>
         static true_type __test(int);
 
       template<typename>
@@ -2595,7 +2606,7 @@ BEGIN_AH_NAMESPACE
     {
       template<typename _Tp>
         static __bool_constant<
-          noexcept(swap(declval<_Tp&>(), declval<_Tp&>()))
+          noexcept(swap(std::declval<_Tp&>(), std::declval<_Tp&>()))
         > __test(int);
 
       template<typename>
@@ -2657,12 +2668,14 @@ BEGIN_AH_NAMESPACE
 #endif // __cplusplus >= 201402L
 
   namespace __swappable_with_details {
+    using std::swap;
+
     struct __do_is_swappable_with_impl
     {
       template<typename _Tp, typename _Up, typename
-               = decltype(swap(declval<_Tp>(), declval<_Up>())),
+               = decltype(swap(std::declval<_Tp>(), std::declval<_Up>())),
                typename
-               = decltype(swap(declval<_Up>(), declval<_Tp>()))>
+               = decltype(swap(std::declval<_Up>(), std::declval<_Tp>()))>
         static true_type __test(int);
 
       template<typename, typename>
@@ -2673,9 +2686,9 @@ BEGIN_AH_NAMESPACE
     {
       template<typename _Tp, typename _Up>
         static __bool_constant<
-          noexcept(swap(declval<_Tp>(), declval<_Up>()))
+          noexcept(swap(std::declval<_Tp>(), std::declval<_Up>()))
           &&
-          noexcept(swap(declval<_Up>(), declval<_Tp>()))
+          noexcept(swap(std::declval<_Up>(), std::declval<_Tp>()))
         > __test(int);
 
       template<typename, typename>
@@ -2759,40 +2772,40 @@ BEGIN_AH_NAMESPACE
     constexpr bool __call_is_nt(__invoke_memfun_ref)
     {
       using _Up = typename __inv_unwrap<_Tp>::type;
-      return noexcept((declval<_Up>().*declval<_Fn>())(
-	    declval<_Args>()...));
+      return noexcept((std::declval<_Up>().*std::declval<_Fn>())(
+	    std::declval<_Args>()...));
     }
 
   template<typename _Fn, typename _Tp, typename... _Args>
     constexpr bool __call_is_nt(__invoke_memfun_deref)
     {
-      return noexcept(((*declval<_Tp>()).*declval<_Fn>())(
-	    declval<_Args>()...));
+      return noexcept(((*std::declval<_Tp>()).*std::declval<_Fn>())(
+	    std::declval<_Args>()...));
     }
 
   template<typename _Fn, typename _Tp>
     constexpr bool __call_is_nt(__invoke_memobj_ref)
     {
       using _Up = typename __inv_unwrap<_Tp>::type;
-      return noexcept(declval<_Up>().*declval<_Fn>());
+      return noexcept(std::declval<_Up>().*std::declval<_Fn>());
     }
 
   template<typename _Fn, typename _Tp>
     constexpr bool __call_is_nt(__invoke_memobj_deref)
     {
-      return noexcept((*declval<_Tp>()).*declval<_Fn>());
+      return noexcept((*std::declval<_Tp>()).*std::declval<_Fn>());
     }
 
   template<typename _Fn, typename... _Args>
     constexpr bool __call_is_nt(__invoke_other)
     {
-      return noexcept(declval<_Fn>()(declval<_Args>()...));
+      return noexcept(std::declval<_Fn>()(std::declval<_Args>()...));
     }
 
   template<typename _Result, typename _Fn, typename... _Args>
     struct __call_is_nothrow
     : __bool_constant<
-	__call_is_nt<_Fn, _Args...>(typename _Result::__invoke_type{})
+	std::__call_is_nt<_Fn, _Args...>(typename _Result::__invoke_type{})
       >
     { };
 
@@ -3092,6 +3105,9 @@ template <typename _From, typename _To>
 
 #endif // C++17
 
-END_AH_NAMESPACE
+_GLIBCXX_END_NAMESPACE_VERSION
+} // namespace std
 
 #endif  // C++11
+
+#endif  // _GLIBCXX_TYPE_TRAITS

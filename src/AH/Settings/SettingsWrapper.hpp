@@ -1,5 +1,5 @@
-#ifndef SETTINGSWRAPPER_HPP
-#define SETTINGSWRAPPER_HPP
+#ifndef AH_SETTINGSWRAPPER_HPP
+#define AH_SETTINGSWRAPPER_HPP
 
 // ---- User Settings ---- //
 // ======================= //
@@ -43,4 +43,4 @@ END_AH_NAMESPACE
 // ===================== //
 #include <AH/Debug/Debug.hpp>
 
-#endif // SETTINGSWRAPPER_HPP
+#endif // AH_SETTINGSWRAPPER_HPP

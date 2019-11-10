@@ -1,7 +1,7 @@
 #include "ExtendedIOElement.hpp"
-#include <Arduino.h>
 #include <AH/Error/Error.hpp>
 #include <AH/STL/type_traits> // is_unsigned
+#include <Arduino.h>
 
 BEGIN_AH_NAMESPACE
 
@@ -25,7 +25,7 @@ void ExtendedIOElement::beginAll() {
 
 pin_t ExtendedIOElement::pin(pin_t p) const {
     if (p >= length) {
-        static_assert(is_unsigned<pin_t>::value,
+        static_assert(std::is_unsigned<pin_t>::value,
                       "Error: pin_t should be an unsigned integer type");
         ERROR(F("Error: the pin number (")
                   << p

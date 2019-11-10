@@ -1,6 +1,7 @@
 #pragma once
 
 #include <AH/STL/type_traits>
+#include <AH/STL/utility>
 
 BEGIN_AH_NAMESPACE
 
@@ -60,7 +61,7 @@ class UniquePtr {
 
 template <typename T, typename... Args>
 UniquePtr<T> MakeUnique(Args &&... args) {
-    return UniquePtr<T>(new T(forward<Args>(args)...));
+    return UniquePtr<T>(new T(std::forward<Args>(args)...));
 }
 
 /// @}

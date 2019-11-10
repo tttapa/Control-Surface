@@ -10,6 +10,8 @@
 #define USE_CONSTEXPR_ARRAY_HELPERS
 #endif
 
+BEGIN_AH_NAMESPACE
+
 /// https://en.cppreference.com/w/cpp/algorithm/generate
 template <class ForwardIt, class Generator>
 USE_CONSTEXPR_ARRAY_HELPERS void generate(ForwardIt first, ForwardIt last,
@@ -43,8 +45,12 @@ class Incrementor {
     const V increment;
 };
 
+END_AH_NAMESPACE
+
 /// @addtogroup Containers
 /// @{
+
+BEGIN_AH_NAMESPACE
 
 /**
  * @brief   Generate an array using the given generator.
@@ -180,5 +186,7 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, M + N> cat(const Array<T, M> &a,
         result[r] = b[i];
     return result;
 }
+
+END_AH_NAMESPACE
 
 /// @}
