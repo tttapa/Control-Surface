@@ -13,5 +13,5 @@ var searchData=
   ['uppercase_426',['UPPERCASE',['../da/d69/PrintStream_8cpp.html#a6674af4819a4f85e8c40be5971746668a19d6b87b851ddfd4fdc4f182e2ae0617',1,'UPPERCASE():&#160;PrintStream.cpp'],['../da/d69/PrintStream_8cpp.html#a2b44e6ada22b1b5a703617123ebd0598',1,'uppercase(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#a2b44e6ada22b1b5a703617123ebd0598',1,'uppercase(Print &amp;printer):&#160;PrintStream.cpp']]],
   ['use_5fah_5fnamespace_427',['USE_AH_NAMESPACE',['../dc/dc7/NamespaceSettings_8hpp.html#a00f163a3376fd194033495f415535986',1,'NamespaceSettings.hpp']]],
   ['use_5fconstexpr_5farray_5fhelpers_428',['USE_CONSTEXPR_ARRAY_HELPERS',['../d5/db6/ArrayHelpers_8hpp.html#addd42f8d7a7cb2605e50325b9c54fefa',1,'ArrayHelpers.hpp']]],
-  ['using_5fah_5fnamespace_429',['USING_AH_NAMESPACE',['../dc/dc7/NamespaceSettings_8hpp.html#a652d295f60f5f72e47f545429e4e1acc',1,'USING_AH_NAMESPACE():&#160;NamespaceSettings.hpp'],['../dc/de6/Arduino__Helpers_8h.html#acefb7f636631fc5f09ef995b53a5b743',1,'USING_AH_NAMESPACE():&#160;Arduino_Helpers.h']]]
+  ['using_5fah_5fnamespace_429',['USING_AH_NAMESPACE',['../dc/dc7/NamespaceSettings_8hpp.html#a652d295f60f5f72e47f545429e4e1acc',1,'NamespaceSettings.hpp']]]
 ];
