@@ -11,7 +11,7 @@
 #include <BLEServer.h>
 #include <BLEUtils.h>
 
-#include <Helpers/Error.hpp>
+#include <AH/Error/Error.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -119,8 +119,12 @@ class BLECharacteristic {
 class BLECharacteristicCallbacks {
   public:
     virtual ~BLECharacteristicCallbacks() = default;
-    virtual void onRead(UNUSED_PARAM BLECharacteristic *pCharacteristic) {}
-    virtual void onWrite(UNUSED_PARAM BLECharacteristic *pCharacteristic) {}
+    virtual void onRead(BLECharacteristic *pCharacteristic) {
+        (void)pCharacteristic;
+    }
+    virtual void onWrite(BLECharacteristic *pCharacteristic) {
+        (void)pCharacteristic;
+    }
 };
 
 class BLEServer {};
@@ -128,8 +132,8 @@ class BLEServer {};
 class BLEServerCallbacks {
   public:
     virtual ~BLEServerCallbacks() = default;
-    virtual void onConnect(UNUSED_PARAM BLEServer *pServer) {}
-    virtual void onDisconnect(UNUSED_PARAM BLEServer *pServer) {}
+    virtual void onConnect(BLEServer *pServer) { (void)pServer; }
+    virtual void onDisconnect(BLEServer *pServer) { (void)pServer; }
 };
 
 BEGIN_CS_NAMESPACE

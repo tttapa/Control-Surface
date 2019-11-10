@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Banks/BankableMIDIInput.hpp>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
-#include <Helpers/MinMaxFix.hpp>
+#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <AH/Math/MinMaxFix.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <string.h>
 

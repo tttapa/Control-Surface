@@ -1,8 +1,8 @@
 #pragma once
 
+#include <AH/Hardware/Button.hpp>
 #include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -15,7 +15,7 @@ namespace Bankable {
  * The button is debounced, and the button is latched (press once to enable, 
  * press again to disable) (toggle).
  *
- * @see     Button
+ * @see     AH::Button
  */
 template <class BankAddress, class Sender>
 class MIDIButtonLatched : public MIDIOutputElement {
@@ -39,8 +39,8 @@ class MIDIButtonLatched : public MIDIOutputElement {
   public:
     void begin() override { button.begin(); }
     void update() override {
-        Button::State state = button.update();
-        if (state == Button::Falling)
+        AH::Button::State state = button.update();
+        if (state == AH::Button::Falling)
             toggleState();
     }
 
@@ -60,11 +60,11 @@ class MIDIButtonLatched : public MIDIOutputElement {
         }
     }
 
-    Button::State getButtonState() const { return button.getState(); }
+    AH::Button::State getButtonState() const { return button.getState(); }
 
   private:
     BankAddress address;
-    Button button;
+    AH::Button button;
     bool state = false;
 
   public:

@@ -2,7 +2,10 @@
 #include <Selectors/ManyButtonsSelector.hpp>
 
 using namespace ::testing;
-using namespace CS;
+
+USING_CS_NAMESPACE;
+
+using AH::Updatable;
 
 TEST(ManyButtonsSelector, press) {
     MockSelectable<4> selectable;

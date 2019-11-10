@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Intervals.hpp"
-#include <Helpers/ArrayHelpers.hpp>
+#include <Def/Def.hpp>
 
 BEGIN_CS_NAMESPACE
 

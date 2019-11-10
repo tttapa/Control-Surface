@@ -1,6 +1,6 @@
 #include "MIDI_Parser.hpp"
 #include "SysExBuffer.hpp"
-#include <Helpers/Array.hpp>
+#include <AH/Containers/Array.hpp>
 
 #ifdef MIDI_NUM_CABLES
 #define USB_MIDI_NUMBER_OF_CABLES MIDI_NUM_CABLES

@@ -1,8 +1,7 @@
 #pragma once
 
+#include <AH/Hardware/Button.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/Button.hpp>
-#include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -22,7 +21,7 @@ class MIDIButtons : public MIDIOutputElement {
      *
      * @todo    Documentation
      */
-    MIDIButtons(const Array<Button, NUMBER_OF_BUTTONS> &buttons,
+    MIDIButtons(const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
                 const MIDICNChannelAddress &baseAddress,
                 const RelativeMIDICNChannelAddress &incrementAddress,
                 const Sender &sender)
@@ -31,23 +30,23 @@ class MIDIButtons : public MIDIOutputElement {
 
   public:
     void begin() final override {
-        for (Button &button : buttons)
+        for (auto &button : buttons)
             button.begin();
     }
     void update() final override {
         MIDICNChannelAddress address = baseAddress;
-        for (Button &button : buttons) {
-            Button::State state = button.update();
-            if (state == Button::Falling) {
+        for (auto &button : buttons) {
+            AH::Button::State state = button.update();
+            if (state == AH::Button::Falling) {
                 sender.sendOn(address);
-            } else if (state == Button::Rising) {
+            } else if (state == AH::Button::Rising) {
                 sender.sendOff(address);
             }
             address += incrementAddress;
         }
     }
 
-    Button::State getButtonState(size_t index) const {
+    AH::Button::State getButtonState(size_t index) const {
         return buttons[index].getState();
     }
 
@@ -59,7 +58,7 @@ class MIDIButtons : public MIDIOutputElement {
 #endif
 
   private:
-    Array<Button, NUMBER_OF_BUTTONS> buttons;
+    Array<AH::Button, NUMBER_OF_BUTTONS> buttons;
     const MIDICNChannelAddress baseAddress;
     const RelativeMIDICNChannelAddress incrementAddress;
 

@@ -6,23 +6,23 @@ if (FAST_COMPILE)
         MIDI_Inputs/MIDIInputElementChannelPressure.cpp
         MIDI_Inputs/MIDIInputElementSysEx.cpp
         MIDI_Inputs/MIDIInputElementPC.cpp
-        MIDI_Inputs/LEDs/FastLED.cpp
         MIDI_Inputs/MCU/LCD.cpp
         MIDI_Constants/MCUNameFromNoteNumber.cpp
         Display/DisplayInterface.cpp
         Display/DisplayElement.cpp
         Display/MCU/VPotDisplay.cpp
-        Hardware/IncrementDecrementButtons.cpp
-        Hardware/Button.cpp
-        Hardware/IncrementButton.cpp
-        Hardware/ExtendedInputOutput/ShiftRegisterOutRGB.cpp
-        Hardware/ExtendedInputOutput/ExtendedIOElement.cpp
-        Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp
+        AH/PrintStream/PrintStream.cpp
+        AH/Debug/Debug.cpp
+        AH/Hardware/IncrementDecrementButtons.cpp
+        AH/Hardware/Button.cpp
+        AH/Hardware/IncrementButton.cpp
+        AH/Hardware/ExtendedInputOutput/ShiftRegisterOutRGB.cpp
+        AH/Hardware/ExtendedInputOutput/ExtendedIOElement.cpp
+        AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp
+        AH/Error/Exit.cpp
         Control_Surface/Control_Surface_Class.cpp
         MIDI_Senders/RelativeCCSender.cpp
-        Helpers/Debug.cpp
-        Helpers/PrintStream.cpp
-        Helpers/Exit.cpp
+        Banks/BankAddresses.cpp
         MIDI_Parsers/USBMIDI_Parser.cpp
         MIDI_Parsers/MIDI_Parser.cpp
         MIDI_Parsers/SerialMIDI_Parser.cpp

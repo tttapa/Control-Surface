@@ -1,4 +1,4 @@
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <MIDI_Inputs/NoteCCRange.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -14,7 +14,7 @@ class NoteCCLED {
     template <class T>
     void begin(const T &t) {
         for (pin_t pin : ledPins)
-            ExtIO::pinMode(pin, OUTPUT);
+            AH::ExtIO::pinMode(pin, OUTPUT);
         update(t);
     }
 
@@ -22,7 +22,7 @@ class NoteCCLED {
     void update(const T &t, uint8_t index) {
         uint8_t value = t.getValue(index);
         bool state = value > threshold;
-        ExtIO::digitalWrite(ledPins[index], state);
+        AH::ExtIO::digitalWrite(ledPins[index], state);
     }
 
     template <class T>

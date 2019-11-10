@@ -2,7 +2,8 @@
 
 #include <Banks/Bank.hpp>
 
-using namespace CS;
+USING_CS_NAMESPACE;
+using AH::ErrorException;
 
 TEST(OutputBank, OutputBank) {
     OutputBank ob = {4};

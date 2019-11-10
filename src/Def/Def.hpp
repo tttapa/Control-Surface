@@ -3,41 +3,26 @@
 #pragma once
 
 #include "Channel.hpp"
-#include "Frequency.hpp"
-#include <Helpers/Array.hpp>
+#include <AH/Containers/Array.hpp>
+#include <AH/Hardware/Hardware-Types.hpp>
 #include <Settings/NamespaceSettings.hpp>
 #include <stddef.h> // size_t
 #include <stdint.h> // uint8_t
 
 BEGIN_CS_NAMESPACE
 
-/// The type returned from analogRead and similar functions.
-using analog_t = uint16_t;
-/// The type for Arduino pins (and ExtendedIOElement pins).
-using pin_t = uint16_t;
+using AH::analog_t;
+using AH::MappingFunction;
+using AH::NO_PIN;
+using AH::pin_t;
+using AH::PinList;
 
-#ifdef NO_PIN // Fix for FastLED: https://github.com/FastLED/FastLED/issues/893
-#undef NO_PIN
-#endif
-
-/// A special pin number that indicates an unused or invalid pin.
-constexpr pin_t NO_PIN = 1 << (8 * sizeof(pin_t) - 1);
-
-/// A function pointer to a mapping function to map analog values.
-/// @see    MIDIFilteredAnalog::map()
-using MappingFunction = analog_t (*)(analog_t);
-
-/// An easy alias for two-dimensional Arrays.
-template <class T, size_t nb_rows, size_t nb_cols>
-using Array2D = Array<Array<T, nb_cols>, nb_rows>;
+using AH::Array;
+using AH::Array2D;
 
 /// @todo   This should be an array of type MIDICNChannelAddress.
 template <uint8_t nb_rows, uint8_t nb_cols>
 using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
-
-/// An easy alias for arrays of pins.
-template <size_t N>
-using PinList = Array<pin_t, N>;
 
 /// A struct for the pins of a rotary (quadrature) encoder with a switch.
 struct EncoderSwitchPinList {
@@ -65,7 +50,6 @@ using setting_t = uint8_t;
 constexpr setting_t NO_SETTING = 1 << (8 * sizeof(setting_t) - 1);
 
 // Updatable types:
-struct NormalUpdatable {};
 struct Potentiometer {};
 struct MotorFader {};
 struct Display {};
@@ -75,7 +59,5 @@ struct PixelLocation {
     int16_t x;
     int16_t y;
 };
-
-#define UNUSED_PARAM __attribute__((unused))
 
 END_CS_NAMESPACE

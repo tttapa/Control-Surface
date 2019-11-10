@@ -51,10 +51,10 @@ TEST(Serial, println_string) {
     Mock::VerifyAndClear(&Serial);
 }
 
-#include <Helpers/Error.hpp>
+#include <AH/Error/Error.hpp>
 
 TEST(Error, exception) {
-    USING_CS_NAMESPACE;
+    USING_AH_NAMESPACE;
     EXPECT_THROW(ERROR("An error occured", 12), ErrorException);
 }
 
@@ -65,7 +65,7 @@ inline bool ends_with(std::string const &value, std::string const &ending) {
 }
 
 TEST(Error, exceptionWhatErrorCode) {
-    USING_CS_NAMESPACE;
+    USING_AH_NAMESPACE;
     try {
         ERROR("An error occured", 12);
         FAIL();

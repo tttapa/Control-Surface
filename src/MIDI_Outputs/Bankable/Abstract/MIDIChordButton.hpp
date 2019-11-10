@@ -1,9 +1,9 @@
 #pragma once
 
+#include <AH/Containers/UniquePtr.hpp>
+#include <AH/Hardware/Button.hpp>
 #include <Banks/BankAddresses.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/Button.hpp>
-#include <Helpers/unique_ptr.hpp>
 #include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -17,7 +17,7 @@ namespace Bankable {
  *
  * The button is debounced.
  *
- * @see     Button
+ * @see     AH::Button
  */
 template <class Sender>
 class MIDIChordButton : public MIDIOutputElement {
@@ -45,20 +45,20 @@ class MIDIChordButton : public MIDIOutputElement {
                     const MIDICNChannelAddress &address, const Chord<N> &chord,
                     const Sender &sender)
         : address{config, address}, button{pin},
-          newChord(make_unique<Chord<N>>(chord)), sender{sender} {}
+          newChord(AH::MakeUnique<Chord<N>>(chord)), sender{sender} {}
 
     void begin() override { button.begin(); }
     void update() override {
-        Button::State state = button.update();
-        if (state == Button::Falling) {
+        AH::Button::State state = button.update();
+        if (state == AH::Button::Falling) {
             if (newChord)
-                chord = move(newChord);
+                chord = std::move(newChord);
             address.lock();
             auto sendAddress = address.getActiveAddress();
             sender.sendOn(sendAddress);
             for (int8_t offset : *chord)
                 sender.sendOn(sendAddress + offset);
-        } else if (state == Button::Rising) {
+        } else if (state == AH::Button::Rising) {
             auto sendAddress = address.getActiveAddress();
             sender.sendOff(sendAddress);
             for (int8_t offset : *chord)
@@ -71,7 +71,7 @@ class MIDIChordButton : public MIDIOutputElement {
     void invert() { button.invert(); }
 #endif
 
-    Button::State getButtonState() const { return button.getState(); }
+    AH::Button::State getButtonState() const { return button.getState(); }
 
     template <uint8_t N>
     void setChord(const Chord<N> &chord) {
@@ -80,9 +80,9 @@ class MIDIChordButton : public MIDIOutputElement {
 
   private:
     SingleAddress address;
-    Button button;
-    unique_ptr<const IChord> chord;
-    unique_ptr<const IChord> newChord;
+    AH::Button button;
+    AH::UniquePtr<const IChord> chord;
+    AH::UniquePtr<const IChord> newChord;
 
   public:
     Sender sender;

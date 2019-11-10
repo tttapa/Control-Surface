@@ -1,6 +1,7 @@
 #include "Control_Surface_Class.hpp"
-#include <Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
-#include <Hardware/FilteredAnalog.hpp>
+#include <AH/Debug/Debug.hpp>
+#include <AH/Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
+#include <AH/Hardware/FilteredAnalog.hpp>
 #include <MIDI_Constants/Control_Change.hpp>
 #include <MIDI_Inputs/MIDIInputElementCC.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
@@ -13,6 +14,8 @@
 #include <Arduino.h>
 
 BEGIN_CS_NAMESPACE
+
+using AH::ExtendedIOElement;
 
 Control_Surface_ &Control_Surface_::getInstance() {
     static Control_Surface_ instance;

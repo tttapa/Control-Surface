@@ -2,13 +2,20 @@
 
 #pragma once
 
-#include <MIDI_Interfaces/MIDI_Interface.hpp>
-
+#include <AH/Containers/Updatable.hpp>
+#include <AH/Hardware/FilteredAnalog.hpp>
+#include <AH/Timing/MillisMicrosTimer.hpp>
 #include <Display/DisplayElement.hpp>
 #include <Display/DisplayInterface.hpp>
-#include <Helpers/MillisMicrosTimer.hpp>
+#include <MIDI_Interfaces/MIDI_Interface.hpp>
+#include <Settings/SettingsWrapper.hpp>
 
 BEGIN_CS_NAMESPACE
+
+using AH::FilteredAnalog;
+using AH::NormalUpdatable;
+using AH::Timer;
+using AH::Updatable;
 
 /** 
  * @brief   This class ensures initialization, updating, and interaction between
@@ -88,7 +95,7 @@ class Control_Surface_ : public MIDI_Callbacks {
                            uint8_t message) override;
 
     /// A timer to know when to update the analog inputs.
-    Timer<micros> potentiometerTimer = {FILTERED_INPUT_UPDATE_INTERVAL};
+    Timer<micros> potentiometerTimer = {AH::FILTERED_INPUT_UPDATE_INTERVAL};
     /// A timer to know when to refresh the displays.
     Timer<micros> displayTimer = {1000000UL / MAX_FPS};
 

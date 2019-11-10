@@ -10,7 +10,7 @@
 
 #include <Arduino.h> // For VSCode errors in examples
 
-#include <Helpers/TeensyUSBTypes.hpp>
+#include <AH/Teensy/TeensyUSBTypes.hpp>
 
 // ------------------------------- Main Logic ------------------------------- //
 #include <Control_Surface/Control_Surface_Class.hpp>
@@ -23,7 +23,7 @@
 #include <Display/MCU/VUDisplay.hpp>
 #include <Display/NoteBitmapDisplay.hpp>
 #include <Display/SelectorDisplay.hpp>
-#include <Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
+#include <AH/Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
 
 // ------------------------------ MIDI Outputs ------------------------------ //
 #include <MIDI_Outputs/CCButton.hpp>
@@ -116,11 +116,11 @@
 #include <MIDI_Interfaces/USBMIDI_Interface.hpp>
 
 // ------------------------- Extended Input Output -------------------------- //
-#include <Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
-#include <Hardware/ExtendedInputOutput/MAX7219.hpp>
-#include <Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
-#include <Hardware/ExtendedInputOutput/ShiftRegisterOut.hpp>
+#include <AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
+#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <AH/Hardware/ExtendedInputOutput/MAX7219.hpp>
+#include <AH/Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
+#include <AH/Hardware/ExtendedInputOutput/ShiftRegisterOut.hpp>
 
 // ----------------------------- MIDI Constants ----------------------------- //
 #include <MIDI_Constants/Chords/Chords.hpp>
@@ -130,7 +130,7 @@
 #include <MIDI_Constants/Program_Change.hpp>
 
 // ----------------------------- Array Helpers ------------------------------ //
-#include <Helpers/ArrayHelpers.hpp>
+#include <AH/Containers/ArrayHelpers.hpp>
 
 // --------------------------------- Audio ---------------------------------- //
 #ifdef TEENSY_AUDIOUSB_ENABLED
@@ -139,6 +139,12 @@
 #include <Audio/VolumeControl.hpp>
 #endif
 
+BEGIN_CS_NAMESPACE
+#ifndef NO_USING_NAMESPACE_AH
+USING_AH_NAMESPACE;
+#endif
+END_CS_NAMESPACE
+
 #ifndef NO_USING_NAMESPACE_CS
-using namespace CS;
+USING_CS_NAMESPACE;
 #endif

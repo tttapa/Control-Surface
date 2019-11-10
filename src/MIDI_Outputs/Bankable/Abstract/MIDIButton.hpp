@@ -1,8 +1,8 @@
 #pragma once
 
+#include <AH/Hardware/Button.hpp>
 #include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -35,11 +35,11 @@ class MIDIButton : public MIDIOutputElement {
 
     void begin() override { button.begin(); }
     void update() override {
-        Button::State state = button.update();
-        if (state == Button::Falling) {
+        AH::Button::State state = button.update();
+        if (state == AH::Button::Falling) {
             address.lock();
             sender.sendOn(address.getActiveAddress());
-        } else if (state == Button::Rising) {
+        } else if (state == AH::Button::Rising) {
             sender.sendOff(address.getActiveAddress());
             address.unlock();
         }
@@ -49,11 +49,11 @@ class MIDIButton : public MIDIOutputElement {
     void invert() { button.invert(); }
 #endif
 
-    Button::State getButtonState() const { return button.getState(); }
+    AH::Button::State getButtonState() const { return button.getState(); }
 
   private:
     BankAddress address;
-    Button button;
+    AH::Button button;
 
   public:
     Sender sender;

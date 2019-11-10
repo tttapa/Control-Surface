@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Selectable.hpp"
+#include <AH/Containers/Updatable.hpp>
+#include <AH/Debug/Debug.hpp>
 #include <Def/Def.hpp>
-#include <Helpers/Debug.hpp>
-#include <Helpers/Updatable.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -54,7 +54,7 @@ class SelectorBase {
 };
 
 template <setting_t N, class Callback = EmptySelectorCallback>
-class GenericSelector : public SelectorBase, public Updatable<> {
+class GenericSelector : public SelectorBase, public AH::Updatable<> {
   public:
     /**
      * @brief   Constructor.

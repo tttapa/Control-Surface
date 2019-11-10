@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Hardware/LEDs/DotBarDisplayLEDs.hpp>
+#include <AH/Hardware/LEDs/DotBarDisplayLEDs.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -10,7 +10,7 @@ namespace MCU {
 template <uint8_t NumLEDs>
 class VULEDsCallback {
   public:
-    VULEDsCallback(const DotBarDisplayLEDs<NumLEDs> &leds) : leds(leds) {}
+    VULEDsCallback(const AH::DotBarDisplayLEDs<NumLEDs> &leds) : leds(leds) {}
 
     template <class T>
     void begin(T &) {
@@ -25,7 +25,7 @@ class VULEDsCallback {
     }
 
   private:
-    const DotBarDisplayLEDs<NumLEDs> leds;
+    const AH::DotBarDisplayLEDs<NumLEDs> leds;
 
     /// @see    doc/VU-LED-mapping.ods
     constexpr static uint8_t FLOOR_CORRECTION = 5;

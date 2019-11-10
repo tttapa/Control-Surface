@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Selector.hpp"
-#include <Hardware/IncrementButton.hpp>
+#include <AH/Hardware/IncrementButton.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -12,7 +12,7 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
   public:
     GenericIncrementSelector(Selectable<N> &selectable,
                              const Callback &callback,
-                             const IncrementButton &button,
+                             const AH::IncrementButton &button,
                              Wrap wrap = Wrap::Wrap)
         : GenericSelector<N, Callback>{selectable, callback}, button{button},
           wrap{wrap} {}
@@ -23,18 +23,20 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
     }
 
     void update() override {
-        if (button.update() == IncrementButton::Increment)
+        if (button.update() == AH::IncrementButton::Increment)
             this->increment(wrap);
     }
 
-    IncrementButton::State getButtonState() const { return button.getState(); }
+    AH::IncrementButton::State getButtonState() const {
+        return button.getState();
+    }
 
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }
 #endif
 
   private:
-    IncrementButton button;
+    AH::IncrementButton button;
     Wrap wrap;
 };
 
@@ -55,8 +57,8 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
 template <setting_t N>
 class IncrementSelector : virtual public GenericIncrementSelector<N> {
   public:
-    IncrementSelector(Selectable<N> &selectable, const IncrementButton &button,
-                      Wrap wrap = Wrap::Wrap)
+    IncrementSelector(Selectable<N> &selectable,
+                      const AH::IncrementButton &button, Wrap wrap = Wrap::Wrap)
         : GenericIncrementSelector<N>{
               selectable,
               {},
@@ -64,7 +66,7 @@ class IncrementSelector : virtual public GenericIncrementSelector<N> {
               wrap,
           } {}
 
-    IncrementSelector(Selectable<N> &selectable, const Button &button,
+    IncrementSelector(Selectable<N> &selectable, const AH::Button &button,
                       Wrap wrap = Wrap::Wrap)
         : GenericIncrementSelector<N>{
               selectable,

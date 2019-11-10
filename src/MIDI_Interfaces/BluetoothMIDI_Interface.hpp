@@ -3,7 +3,7 @@
 #include "BLEMIDI.hpp"
 #include "SerialMIDI_Interface.hpp"
 
-#include <Helpers/Error.hpp>
+#include <AH/Error/Error.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -18,11 +18,13 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
 
     // BLE Callbacks
 
-    void onConnect(UNUSED_PARAM BLEServer *pServer) override {
+    void onConnect(BLEServer *pServer) override {
+        (void)pServer;
         DEBUGFN("Connected");
         connected++;
     };
-    void onDisconnect(UNUSED_PARAM BLEServer *pServer) override {
+    void onDisconnect(BLEServer *pServer) override {
+        (void)pServer;
         DEBUGFN("Disonnected");
         if (!connected) {
             ERROR(F("Error: disconnect event, but was not connected"), 0x7788);

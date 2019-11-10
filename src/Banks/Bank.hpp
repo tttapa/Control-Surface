@@ -2,9 +2,9 @@
 
 #pragma once
 
-#include <Helpers/Debug.hpp>
-#include <Helpers/Error.hpp>
-#include <Helpers/LinkedList.hpp>
+#include <AH/Debug/Debug.hpp>
+#include <AH/Error/Error.hpp>
+#include <AH/Containers/LinkedList.hpp>
 #include <Selectors/Selectable.hpp>
 
 BEGIN_CS_NAMESPACE

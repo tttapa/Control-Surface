@@ -1,8 +1,8 @@
 #pragma once
 
 #include "MIDI_Interface.hpp"
-#include <Helpers/Error.hpp>
-#include <Helpers/TeensyUSBTypes.hpp>
+#include <AH/Error/Error.hpp>
+#include <AH/Teensy/TeensyUSBTypes.hpp>
 #include <MIDI_Parsers/USBMIDI_Parser.hpp>
 
 #ifdef TEENSY_MIDIUSB_ENABLED

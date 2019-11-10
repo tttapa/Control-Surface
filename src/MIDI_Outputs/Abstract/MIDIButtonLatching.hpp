@@ -1,7 +1,7 @@
 #pragma once
 
+#include <AH/Hardware/Button.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -34,17 +34,17 @@ class MIDIButtonLatching : public MIDIOutputElement {
   public:
     void begin() override { button.begin(); }
     void update() override {
-        Button::State state = button.update();
-        if (state == Button::Falling || state == Button::Rising) {
+        AH::Button::State state = button.update();
+        if (state == AH::Button::Falling || state == AH::Button::Rising) {
             sender.sendOn(address);
             sender.sendOff(address);
         }
     }
 
-    Button::State getButtonState() const { return button.getState(); }
+    AH::Button::State getButtonState() const { return button.getState(); }
 
   private:
-    Button button;
+    AH::Button button;
     const MIDICNChannelAddress address;
 
   public:

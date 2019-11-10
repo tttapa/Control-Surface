@@ -7,8 +7,8 @@
 #endif
 
 #include "Selector.hpp"
+#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -27,7 +27,7 @@ class GenericEncoderSelector : public GenericSelector<N, Callback> {
     void begin() override {
         Parent::begin();
         if (switchPin != NO_PIN)
-            ExtIO::pinMode(switchPin, INPUT_PULLUP);
+            AH::ExtIO::pinMode(switchPin, INPUT_PULLUP);
     }
 
     void update() override {
@@ -45,7 +45,7 @@ class GenericEncoderSelector : public GenericSelector<N, Callback> {
         }
 
         if (switchPin != NO_PIN) {
-            bool currentState = ExtIO::digitalRead(switchPin);
+            bool currentState = AH::ExtIO::digitalRead(switchPin);
             if (previousSwitchState == HIGH && currentState == LOW) {
                 // TODO: invert?
                 this->reset();
