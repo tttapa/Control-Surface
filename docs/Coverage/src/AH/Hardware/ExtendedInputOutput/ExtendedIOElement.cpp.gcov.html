@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 6021838b0741dcb5c786700f6926a5a2d0a44453 - src/AH/Hardware/ExtendedInputOutput/ExtendedIOElement.cpp</title>
+  <title>LCOV - 27521e6b1cf02fd382dbd8391eb3e7a5bcee4dda - src/AH/Hardware/ExtendedInputOutput/ExtendedIOElement.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">6021838b0741dcb5c786700f6926a5a2d0a44453</td>
+            <td class="headerValue">27521e6b1cf02fd382dbd8391eb3e7a5bcee4dda</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">21</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-10 11:30:54</td>
+            <td class="headerValue">2019-11-10 15:48:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -69,9 +69,9 @@
 <pre class="sourceHeading">          Line data    Source code</pre>
 <pre class="source">
 <a name="1"><span class="lineNum">       1 </span>            : #include &quot;ExtendedIOElement.hpp&quot;</a>
-<a name="2"><span class="lineNum">       2 </span>            : #include &lt;Arduino.h&gt;</a>
-<a name="3"><span class="lineNum">       3 </span>            : #include &lt;AH/Error/Error.hpp&gt;</a>
-<a name="4"><span class="lineNum">       4 </span>            : #include &lt;AH/STL/type_traits&gt; // is_unsigned</a>
+<a name="2"><span class="lineNum">       2 </span>            : #include &lt;AH/Error/Error.hpp&gt;</a>
+<a name="3"><span class="lineNum">       3 </span>            : #include &lt;AH/STL/type_traits&gt; // is_unsigned</a>
+<a name="4"><span class="lineNum">       4 </span>            : #include &lt;Arduino.h&gt;</a>
 <a name="5"><span class="lineNum">       5 </span>            : </a>
 <a name="6"><span class="lineNum">       6 </span>            : BEGIN_AH_NAMESPACE</a>
 <a name="7"><span class="lineNum">       7 </span>            : </a>
@@ -95,7 +95,7 @@
 <a name="25"><span class="lineNum">      25 </span>            : </a>
 <a name="26"><span class="lineNum">      26 </span><span class="lineCov">         24 : pin_t ExtendedIOElement::pin(pin_t p) const {</span></a>
 <a name="27"><span class="lineNum">      27 </span><span class="lineCov">         24 :     if (p &gt;= length) {</span></a>
-<a name="28"><span class="lineNum">      28 </span>            :         static_assert(is_unsigned&lt;pin_t&gt;::value,</a>
+<a name="28"><span class="lineNum">      28 </span>            :         static_assert(std::is_unsigned&lt;pin_t&gt;::value,</a>
 <a name="29"><span class="lineNum">      29 </span>            :                       &quot;Error: pin_t should be an unsigned integer type&quot;);</a>
 <a name="30"><span class="lineNum">      30 </span><span class="lineCov">          2 :         ERROR(F(&quot;Error: the pin number (&quot;)</span></a>
 <a name="31"><span class="lineNum">      31 </span>            :                   &lt;&lt; p</a>

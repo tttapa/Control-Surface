@@ -34,6 +34,7 @@ END_AH_NAMESPACE
 
 #define FATAL_ERROR(x, e)                                                      \
     do {                                                                       \
+        USING_AH_NAMESPACE;                                                    \
         DEBUGFN(F("Fatal Error: ") << x << " (0x" << hex << uppercase << e     \
                                    << dec << nouppercase << ')');              \
         fatalErrorExit();                                                      \

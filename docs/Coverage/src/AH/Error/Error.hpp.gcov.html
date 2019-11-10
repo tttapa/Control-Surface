@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 6021838b0741dcb5c786700f6926a5a2d0a44453 - src/AH/Error/Error.hpp</title>
+  <title>LCOV - 27521e6b1cf02fd382dbd8391eb3e7a5bcee4dda - src/AH/Error/Error.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">6021838b0741dcb5c786700f6926a5a2d0a44453</td>
+            <td class="headerValue">27521e6b1cf02fd382dbd8391eb3e7a5bcee4dda</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">5</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-10 11:30:54</td>
+            <td class="headerValue">2019-11-10 15:48:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -104,49 +104,50 @@
 <a name="34"><span class="lineNum">      34 </span>            : </a>
 <a name="35"><span class="lineNum">      35 </span>            : #define FATAL_ERROR(x, e)                                                      \</a>
 <a name="36"><span class="lineNum">      36 </span>            :     do {                                                                       \</a>
-<a name="37"><span class="lineNum">      37 </span>            :         DEBUGFN(F(&quot;Fatal Error: &quot;) &lt;&lt; x &lt;&lt; &quot; (0x&quot; &lt;&lt; hex &lt;&lt; uppercase &lt;&lt; e     \</a>
-<a name="38"><span class="lineNum">      38 </span>            :                                    &lt;&lt; dec &lt;&lt; nouppercase &lt;&lt; ')');              \</a>
-<a name="39"><span class="lineNum">      39 </span>            :         fatalErrorExit();                                                      \</a>
-<a name="40"><span class="lineNum">      40 </span>            :     } while (0)</a>
-<a name="41"><span class="lineNum">      41 </span>            : </a>
-<a name="42"><span class="lineNum">      42 </span>            : #else // ----------------------------------------------------------------- TESTS</a>
-<a name="43"><span class="lineNum">      43 </span>            : </a>
-<a name="44"><span class="lineNum">      44 </span>            : #include &lt;exception&gt;</a>
-<a name="45"><span class="lineNum">      45 </span>            : #include &lt;sstream&gt;</a>
-<a name="46"><span class="lineNum">      46 </span>            : </a>
-<a name="47"><span class="lineNum">      47 </span>            : BEGIN_AH_NAMESPACE</a>
-<a name="48"><span class="lineNum">      48 </span>            : </a>
-<a name="49"><span class="lineNum">      49 </span><span class="lineCov">         10 : class ErrorException : public std::exception {</span></a>
-<a name="50"><span class="lineNum">      50 </span>            :   public:</a>
-<a name="51"><span class="lineNum">      51 </span><span class="lineCov">         10 :     ErrorException(const std::string message, int errorCode)</span></a>
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">         20 :         : message(std::move(message)), errorCode(errorCode) {}</span></a>
-<a name="53"><span class="lineNum">      53 </span><span class="lineCov">          1 :     const char *what() const throw() override { return message.c_str(); }</span></a>
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          6 :     int getErrorCode() const { return errorCode; }</span></a>
-<a name="55"><span class="lineNum">      55 </span>            : </a>
-<a name="56"><span class="lineNum">      56 </span>            :   private:</a>
-<a name="57"><span class="lineNum">      57 </span>            :     const std::string message;</a>
-<a name="58"><span class="lineNum">      58 </span>            :     const int errorCode;</a>
-<a name="59"><span class="lineNum">      59 </span>            : };</a>
-<a name="60"><span class="lineNum">      60 </span>            : </a>
-<a name="61"><span class="lineNum">      61 </span>            : END_AH_NAMESPACE</a>
-<a name="62"><span class="lineNum">      62 </span>            : </a>
-<a name="63"><span class="lineNum">      63 </span>            : #define ERROR(x, e)                                                            \</a>
-<a name="64"><span class="lineNum">      64 </span>            :     do {                                                                       \</a>
-<a name="65"><span class="lineNum">      65 </span>            :         USING_AH_NAMESPACE;                                                    \</a>
-<a name="66"><span class="lineNum">      66 </span>            :         std::ostringstream s;                                                  \</a>
-<a name="67"><span class="lineNum">      67 </span>            :         s &lt;&lt; DEBUG_FUNC_LOCATION &lt;&lt; x;                                         \</a>
-<a name="68"><span class="lineNum">      68 </span>            :         throw ErrorException(s.str(), e);                                      \</a>
-<a name="69"><span class="lineNum">      69 </span>            :     } while (0)</a>
-<a name="70"><span class="lineNum">      70 </span>            : </a>
-<a name="71"><span class="lineNum">      71 </span>            : #define FATAL_ERROR(x, e)                                                      \</a>
-<a name="72"><span class="lineNum">      72 </span>            :     do {                                                                       \</a>
-<a name="73"><span class="lineNum">      73 </span>            :         USING_AH_NAMESPACE;                                                    \</a>
-<a name="74"><span class="lineNum">      74 </span>            :         std::ostringstream s;                                                  \</a>
-<a name="75"><span class="lineNum">      75 </span>            :         s &lt;&lt; DEBUG_FUNC_LOCATION &lt;&lt; x;                                         \</a>
-<a name="76"><span class="lineNum">      76 </span>            :         throw ErrorException(s.str(), e);                                      \</a>
-<a name="77"><span class="lineNum">      77 </span>            :     } while (0)</a>
-<a name="78"><span class="lineNum">      78 </span>            : </a>
-<a name="79"><span class="lineNum">      79 </span>            : #endif</a>
+<a name="37"><span class="lineNum">      37 </span>            :         USING_AH_NAMESPACE;                                                    \</a>
+<a name="38"><span class="lineNum">      38 </span>            :         DEBUGFN(F(&quot;Fatal Error: &quot;) &lt;&lt; x &lt;&lt; &quot; (0x&quot; &lt;&lt; hex &lt;&lt; uppercase &lt;&lt; e     \</a>
+<a name="39"><span class="lineNum">      39 </span>            :                                    &lt;&lt; dec &lt;&lt; nouppercase &lt;&lt; ')');              \</a>
+<a name="40"><span class="lineNum">      40 </span>            :         fatalErrorExit();                                                      \</a>
+<a name="41"><span class="lineNum">      41 </span>            :     } while (0)</a>
+<a name="42"><span class="lineNum">      42 </span>            : </a>
+<a name="43"><span class="lineNum">      43 </span>            : #else // ----------------------------------------------------------------- TESTS</a>
+<a name="44"><span class="lineNum">      44 </span>            : </a>
+<a name="45"><span class="lineNum">      45 </span>            : #include &lt;exception&gt;</a>
+<a name="46"><span class="lineNum">      46 </span>            : #include &lt;sstream&gt;</a>
+<a name="47"><span class="lineNum">      47 </span>            : </a>
+<a name="48"><span class="lineNum">      48 </span>            : BEGIN_AH_NAMESPACE</a>
+<a name="49"><span class="lineNum">      49 </span>            : </a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">         10 : class ErrorException : public std::exception {</span></a>
+<a name="51"><span class="lineNum">      51 </span>            :   public:</a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">         10 :     ErrorException(const std::string message, int errorCode)</span></a>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">         20 :         : message(std::move(message)), errorCode(errorCode) {}</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          1 :     const char *what() const throw() override { return message.c_str(); }</span></a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">          6 :     int getErrorCode() const { return errorCode; }</span></a>
+<a name="56"><span class="lineNum">      56 </span>            : </a>
+<a name="57"><span class="lineNum">      57 </span>            :   private:</a>
+<a name="58"><span class="lineNum">      58 </span>            :     const std::string message;</a>
+<a name="59"><span class="lineNum">      59 </span>            :     const int errorCode;</a>
+<a name="60"><span class="lineNum">      60 </span>            : };</a>
+<a name="61"><span class="lineNum">      61 </span>            : </a>
+<a name="62"><span class="lineNum">      62 </span>            : END_AH_NAMESPACE</a>
+<a name="63"><span class="lineNum">      63 </span>            : </a>
+<a name="64"><span class="lineNum">      64 </span>            : #define ERROR(x, e)                                                            \</a>
+<a name="65"><span class="lineNum">      65 </span>            :     do {                                                                       \</a>
+<a name="66"><span class="lineNum">      66 </span>            :         USING_AH_NAMESPACE;                                                    \</a>
+<a name="67"><span class="lineNum">      67 </span>            :         std::ostringstream s;                                                  \</a>
+<a name="68"><span class="lineNum">      68 </span>            :         s &lt;&lt; DEBUG_FUNC_LOCATION &lt;&lt; x;                                         \</a>
+<a name="69"><span class="lineNum">      69 </span>            :         throw ErrorException(s.str(), e);                                      \</a>
+<a name="70"><span class="lineNum">      70 </span>            :     } while (0)</a>
+<a name="71"><span class="lineNum">      71 </span>            : </a>
+<a name="72"><span class="lineNum">      72 </span>            : #define FATAL_ERROR(x, e)                                                      \</a>
+<a name="73"><span class="lineNum">      73 </span>            :     do {                                                                       \</a>
+<a name="74"><span class="lineNum">      74 </span>            :         USING_AH_NAMESPACE;                                                    \</a>
+<a name="75"><span class="lineNum">      75 </span>            :         std::ostringstream s;                                                  \</a>
+<a name="76"><span class="lineNum">      76 </span>            :         s &lt;&lt; DEBUG_FUNC_LOCATION &lt;&lt; x;                                         \</a>
+<a name="77"><span class="lineNum">      77 </span>            :         throw ErrorException(s.str(), e);                                      \</a>
+<a name="78"><span class="lineNum">      78 </span>            :     } while (0)</a>
+<a name="79"><span class="lineNum">      79 </span>            : </a>
+<a name="80"><span class="lineNum">      80 </span>            : #endif</a>
 </pre>
       </td>
     </tr>

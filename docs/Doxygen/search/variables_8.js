@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['increasebitdepthimpl_771',['increaseBitDepthImpl',['../d5/dee/IncreaseBitDepth_8hpp.html#a36378e93b67390afaa8ee1c3966151dc',1,'IncreaseBitDepth.hpp']]],
+  ['increasebitdepthimpl_771',['increaseBitDepthImpl',['../d5/dee/IncreaseBitDepth_8hpp.html#a6b57289740210e994ef084e3b620e902',1,'IncreaseBitDepth.hpp']]],
   ['increment_772',['increment',['../dd/dd6/classIncrementor.html#a5f9ac3154cda1e503cbbe5194a706a39',1,'Incrementor']]],
   ['incrementbutton_773',['incrementButton',['../d5/d20/classIncrementDecrementButtons.html#a606c093331d3be8597ac308ef7dc37e3',1,'IncrementDecrementButtons']]],
   ['input_774',['INPUT',['../dd/ddf/ExtendedInputOutput_8hpp.html#a1c022e5fb9141ce12c7c22a000ce732a',1,'ExtendedInputOutput.hpp']]],

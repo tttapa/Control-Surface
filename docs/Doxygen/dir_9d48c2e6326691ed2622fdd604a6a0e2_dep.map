@@ -1,7 +1,0 @@
-<map id="LEDs" name="LEDs">
-<area shape="rect" id="node1" href="dir_9d48c2e6326691ed2622fdd604a6a0e2.html" title="LEDs" alt="" coords="42,52,114,100"/>
-<area shape="rect" id="node2" href="dir_408a5fcddca7cdabbf926ab2e14fb9fb.html" title="ExtendedInputOutput" alt="" coords="5,148,151,196"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000005_000002.html" title="2" alt="" coords="73,122,81,137"/>
-<area shape="rect" id="edge2-headlabel" href="dir_000002_000005.html" title="1" alt="" coords="75,112,83,126"/>
-<area shape="rect" id="clust1" href="dir_392e5fed41b2de721750e308647dcb9c.html" title="Hardware" alt="" coords="31,16,125,111"/>
-</map>

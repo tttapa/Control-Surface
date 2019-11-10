@@ -79,9 +79,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="../../da/d1f/ExtendedIOElement_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d4/d57/ExtendedIOElement_8hpp.html">ExtendedIOElement.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="../../d1/d93/Error_8hpp.html">AH/Error/Error.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;AH/STL/type_traits&gt;</span> <span class="comment">// is_unsigned</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="../../d1/d93/Error_8hpp.html">AH/Error/Error.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;AH/STL/type_traits&gt;</span> <span class="comment">// is_unsigned</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#abe0f0e505619b6899c38363f4e42a272">BEGIN_AH_NAMESPACE</a></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
@@ -105,7 +105,7 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03">   26</a></span>&#160;<a class="code" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="code" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03">ExtendedIOElement::pin</a>(<a class="code" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> p)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">if</span> (p &gt;= <a class="code" href="../../de/d4e/classExtendedIOElement.html#a018a3ac2d6a11014e27c8186a2feb684">length</a>) {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        static_assert(is_unsigned&lt;pin_t&gt;::value,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        static_assert(std::is_unsigned&lt;pin_t&gt;::value,</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                      <span class="stringliteral">&quot;Error: pin_t should be an unsigned integer type&quot;</span>);</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="../../d1/d93/Error_8hpp.html#a72337c44fb2364f15aa51d3c4223f1c5">ERROR</a>(F(<span class="stringliteral">&quot;Error: the pin number (&quot;</span>)</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                  &lt;&lt; p</div>

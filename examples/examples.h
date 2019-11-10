@@ -33,6 +33,15 @@
  */
 
 /**
+ * @example   "STL-test.ino"
+ * 
+ * STL-test
+ * ========
+ *
+ * @boards  AVR, AVR USB
+ */
+
+/**
  * @example   "2.RGB-LED-Chaser.ino"
  * 
  * 2.RGB-LED-Chaser
