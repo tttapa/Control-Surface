@@ -36,5 +36,6 @@ var searchData=
   ['arrayhelpers_2ecpp_33',['ArrayHelpers.cpp',['../db/d93/ArrayHelpers_8cpp.html',1,'']]],
   ['arrayhelpers_2ehpp_34',['ArrayHelpers.hpp',['../d5/db6/ArrayHelpers_8hpp.html',1,'']]],
   ['arrayreftype_35',['ArrayRefType',['../df/de0/classArraySlice.html#a6a7c3fa67e8eb750f5e1f280ac6ef6a7',1,'ArraySlice']]],
-  ['arrayslice_36',['ArraySlice',['../df/de0/classArraySlice.html',1,'ArraySlice&lt; T, N, Start, End, Const &gt;'],['../df/de0/classArraySlice.html#a7246525cbb676f82262b4484af6624ff',1,'ArraySlice::ArraySlice()']]]
+  ['arrayslice_36',['ArraySlice',['../df/de0/classArraySlice.html',1,'ArraySlice&lt; T, N, Start, End, Const &gt;'],['../df/de0/classArraySlice.html#a7246525cbb676f82262b4484af6624ff',1,'ArraySlice::ArraySlice()']]],
+  ['asarray_37',['asArray',['../df/de0/classArraySlice.html#afd2694f37752957a68a53fb933d87730',1,'ArraySlice']]]
 ];

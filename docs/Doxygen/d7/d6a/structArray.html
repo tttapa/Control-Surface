@@ -124,12 +124,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5a33628f3e756558e67eb13a1a729ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7e8542ba7de979a20e8e244f2e96b9e0"><td class="memTemplParams" colspan="2">template&lt;size_t Start = 0, size_t End = N&gt; </td></tr>
 <tr class="memitem:ga7e8542ba7de979a20e8e244f2e96b9e0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, false &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../db/d50/group__Containers.html#ga7e8542ba7de979a20e8e244f2e96b9e0">slice</a> ()</td></tr>
+<tr class="memdesc:ga7e8542ba7de979a20e8e244f2e96b9e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a view on a slice of the <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>.  <a href="../../db/d50/group__Containers.html#ga7e8542ba7de979a20e8e244f2e96b9e0">More...</a><br /></td></tr>
 <tr class="separator:ga7e8542ba7de979a20e8e244f2e96b9e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4203c42d6037132c52fef2b529c85407"><td class="memTemplParams" colspan="2">template&lt;size_t Start = 0, size_t End = N&gt; </td></tr>
 <tr class="memitem:ga4203c42d6037132c52fef2b529c85407"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, true &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../db/d50/group__Containers.html#ga4203c42d6037132c52fef2b529c85407">slice</a> () const</td></tr>
+<tr class="memdesc:ga4203c42d6037132c52fef2b529c85407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a read-only view on a slice of the <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>.  <a href="../../db/d50/group__Containers.html#ga4203c42d6037132c52fef2b529c85407">More...</a><br /></td></tr>
 <tr class="separator:ga4203c42d6037132c52fef2b529c85407"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad706dd0f65791cfcd12e0f85aedc3d32"><td class="memTemplParams" colspan="2">template&lt;size_t Start = 0, size_t End = N&gt; </td></tr>
 <tr class="memitem:ad706dd0f65791cfcd12e0f85aedc3d32"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, true &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d7/d6a/structArray.html#ad706dd0f65791cfcd12e0f85aedc3d32">cslice</a> () const</td></tr>
+<tr class="memdesc:ad706dd0f65791cfcd12e0f85aedc3d32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a read-only view on a slice of the <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>.  <a href="../../d7/d6a/structArray.html#ad706dd0f65791cfcd12e0f85aedc3d32">More...</a><br /></td></tr>
 <tr class="separator:ad706dd0f65791cfcd12e0f85aedc3d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -481,7 +484,17 @@ template&lt;size_t Start = 0, size_t End = N&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00115">115</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p>Get a read-only view on a slice of the <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </p>
+<p>Doesn't copy the contents of the array, it's just a reference to the original array.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Start</td><td>The start index of the slice. </td></tr>
+    <tr><td class="paramname">End</td><td>The end index of the slice (non inclusive). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00134">134</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>

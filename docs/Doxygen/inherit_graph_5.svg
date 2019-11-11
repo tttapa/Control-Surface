@@ -11,7 +11,7 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-35 124,-35 124,4 -4,4"/>
 <!-- Node0 -->
 <g id="node1" class="node"><title>Node0</title>
-<g id="a_node1"><a xlink:href="df/de0/classArraySlice.html" target="_top" xlink:title=" ">
+<g id="a_node1"><a xlink:href="df/de0/classArraySlice.html" target="_top" xlink:title="Class for a view on a slice of an array.">
 <polygon fill="white" stroke="black" points="-7.10543e-15,-0.5 -7.10543e-15,-30.5 120,-30.5 120,-0.5 -7.10543e-15,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">ArraySlice&lt; T, N, Start,</text>
 <text text-anchor="middle" x="60" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00"> End, Const &gt;</text>

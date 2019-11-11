@@ -85,6 +85,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice&lt; T, N, Start, End, Const &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class for a view on a slice of an array.  <a href="../../df/de0/classArraySlice.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d6a/structArray.html">Array&lt; T, N &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An array wrapper for easy copying, comparing, and iterating.  <a href="../../d7/d6a/structArray.html#details">More...</a><br /></td></tr>
@@ -225,9 +226,11 @@ Functions</h2></td></tr>
 <tr class="separator:gabb4ce09bb1bbca704175a873b2a3f28a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7e8542ba7de979a20e8e244f2e96b9e0"><td class="memTemplParams" colspan="2">template&lt;size_t Start = 0, size_t End = N&gt; </td></tr>
 <tr class="memitem:ga7e8542ba7de979a20e8e244f2e96b9e0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, false &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../db/d50/group__Containers.html#ga7e8542ba7de979a20e8e244f2e96b9e0">Array&lt; T, N &gt;::slice</a> ()</td></tr>
+<tr class="memdesc:ga7e8542ba7de979a20e8e244f2e96b9e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a view on a slice of the <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>.  <a href="../../db/d50/group__Containers.html#ga7e8542ba7de979a20e8e244f2e96b9e0">More...</a><br /></td></tr>
 <tr class="separator:ga7e8542ba7de979a20e8e244f2e96b9e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4203c42d6037132c52fef2b529c85407"><td class="memTemplParams" colspan="2">template&lt;size_t Start = 0, size_t End = N&gt; </td></tr>
 <tr class="memitem:ga4203c42d6037132c52fef2b529c85407"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, true &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../db/d50/group__Containers.html#ga4203c42d6037132c52fef2b529c85407">Array&lt; T, N &gt;::slice</a> () const</td></tr>
+<tr class="memdesc:ga4203c42d6037132c52fef2b529c85407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a read-only view on a slice of the <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>.  <a href="../../db/d50/group__Containers.html#ga4203c42d6037132c52fef2b529c85407">More...</a><br /></td></tr>
 <tr class="separator:ga4203c42d6037132c52fef2b529c85407"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -249,7 +252,7 @@ template&lt;class T , size_t nb_rows, size_t nb_cols&gt; </div>
 
 <p>An easy alias for two-dimensional Arrays. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00373">373</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00413">413</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -284,7 +287,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2, size_t Start1, size_t St
 
 <p>Slice == Slice. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00173">173</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00213">213</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -318,7 +321,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2, size_t Start2, size_t En
 
 <p><a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> == Slice. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00185">185</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00225">225</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -352,7 +355,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2, size_t Start1, size_t En
 
 <p>Slice == <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00233">233</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -386,7 +389,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2, size_t Start1, size_t St
 
 <p>Slice + Slice. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00204">204</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00244">244</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -420,7 +423,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2&gt; </div>
 
 <p><a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> + <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00215">215</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00255">255</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -454,7 +457,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2, size_t Start1, size_t St
 
 <p>Slice += Slice. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00224">224</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00264">264</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -488,7 +491,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2&gt; </div>
 
 <p><a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> += <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00234">234</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00274">274</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -522,7 +525,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2, size_t Start1, size_t St
 
 <p>Slice - Slice. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00245">245</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00285">285</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -556,7 +559,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2&gt; </div>
 
 <p><a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> - <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00256">256</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00296">296</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -590,7 +593,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2, size_t Start1, size_t St
 
 <p>Slice -= Slice. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00265">265</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00305">305</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -624,7 +627,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2&gt; </div>
 
 <p><a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> -= <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00275">275</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00315">315</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -658,7 +661,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t Start1, size_t End1, bool Co
 
 <p>Slice * Scalar. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00286">286</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00326">326</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -692,7 +695,7 @@ template&lt;class T1 , class T2 , size_t N1&gt; </div>
 
 <p><a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> * Scalar. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00295">295</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00335">335</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -726,7 +729,7 @@ template&lt;class T1 , class T2 , size_t N2, size_t Start2, size_t End2, bool Co
 
 <p>Scalar * Slice. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00303">303</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00343">343</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -760,7 +763,7 @@ template&lt;class T1 , class T2 , size_t N2&gt; </div>
 
 <p>Scalar * <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00312">312</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00352">352</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -794,7 +797,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t Start1, size_t End1, bool Co
 
 <p>Slice *= Scalar. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00320">320</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00360">360</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -828,7 +831,7 @@ template&lt;class T1 , class T2 , size_t N1&gt; </div>
 
 <p><a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> *= Scalar. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00328">328</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00368">368</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -862,7 +865,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t Start1, size_t End1, bool Co
 
 <p>Slice / Scalar. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00339">339</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00379">379</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -896,7 +899,7 @@ template&lt;class T1 , class T2 , size_t N1&gt; </div>
 
 <p><a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> / Scalar. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00348">348</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00388">388</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -930,7 +933,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t Start1, size_t End1, bool Co
 
 <p>Slice /= Scalar. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00356">356</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00396">396</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -964,7 +967,7 @@ template&lt;class T1 , class T2 , size_t N1&gt; </div>
 
 <p><a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> /= Scalar. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00364">364</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00404">404</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -1263,7 +1266,17 @@ template&lt;size_t Start, size_t End&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00158">158</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p>Get a view on a slice of the <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </p>
+<p>Doesn't copy the contents of the array, it's just a reference to the original array.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Start</td><td>The start index of the slice. </td></tr>
+    <tr><td class="paramname">End</td><td>The end index of the slice (non inclusive). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00198">198</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -1294,7 +1307,17 @@ template&lt;size_t Start, size_t End&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00164">164</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p>Get a read-only view on a slice of the <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </p>
+<p>Doesn't copy the contents of the array, it's just a reference to the original array.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Start</td><td>The start index of the slice. </td></tr>
+    <tr><td class="paramname">End</td><td>The end index of the slice (non inclusive). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00204">204</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
