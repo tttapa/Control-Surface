@@ -52,7 +52,7 @@ class IncrementButton {
      */
     State getState() const { return state; }
 
-#ifdef INDIVIDUAL_BUTTON_INVERT
+#ifdef AH_INDIVIDUAL_BUTTON_INVERT
     /// @see    Button::invert
     void invert() { button.invert(); }
 #endif

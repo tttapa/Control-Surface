@@ -38,11 +38,6 @@
  * Pressing the second button will turn on the second LED. Pressing it again 
  * will turn it off again, and so on.
  * 
- * Mapping
- * -------
- * 
- * None.
- * 
  * Written by PieterP, 2018-08-28  
  * https://github.com/tttapa/Arduino-Helpers
  */

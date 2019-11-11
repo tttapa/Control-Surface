@@ -8,6 +8,16 @@ from pathlib import Path
 dirnm = os.path.dirname(os.path.realpath(__file__))
 doxydir = join(dirnm, '..')
 
+template = """\
+/**
+ * @example   "{pathname}"
+ * 
+ * {title}
+ * {underline}
+ *{docstr}*/
+
+"""
+
 
 def stripQuotes(string):
     string = re.sub(r'^"', '', string)
@@ -54,15 +64,10 @@ for root, dirs, files in os.walk(exampledir):
                     pathname = file
                     title = splitext(basename(file))[0]
                     underline = '=' * len(title)
-                    output += """\
-/**
- * @example   "{pathname}"
- * 
- * {title}
- * {underline}
- *{docstr}*/
-
-""".format(pathname=pathname, title=title, underline=underline, docstr=docstr)
+                    output += template.format(pathname=pathname,
+                                              title=title,
+                                              underline=underline,
+                                              docstr=docstr)
                 else:
                     print('\t\033[0;33mWarning: no documentation for', file,
                           '\033[0m')

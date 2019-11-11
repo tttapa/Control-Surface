@@ -1,6 +1,5 @@
 {
     "files.associations": {
-        "Makefile.common": "makefile",
         "*.axbm": "cpp",
         "*.ipp": "cpp",
         "*.tcc": "cpp",
@@ -104,11 +103,10 @@
     "files.trimTrailingWhitespace": false,
     "search.exclude": {
         "**/node_modules": true,
-        "**/bower_components": true,
-        "**/Doxygen/html": true,
-        "**/Coverage": true,
         "**/googletest": true,
         "**/*.old": true,
+        "**/docs/Doxygen": true,
+        "**/docs/Coverage": true
     },
     "search.smartCase": true,
     "C_Cpp.default.cppStandard": "c++14",

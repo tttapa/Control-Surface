@@ -3,9 +3,9 @@
 #endif
 
 /**
- * @file Settings.hpp
- *
- * @brief All user settings and debugging options can be changed here.
+ * @file
+ * @brief   All user settings and debugging options can be changed here.
+ * @ingroup Settings
  */
 
 #include <AH/Types/Frequency.hpp>
@@ -19,7 +19,11 @@ BEGIN_AH_NAMESPACE
 // ----------------------------- Debug Settings ----------------------------- //
 // ========================================================================== //
 
-/// The debug output.
+/// The debug output.  
+/// Use `#define DEBUG_OUT Serial` to print debugging information to the serial
+/// monitor.  
+/// @note   Printing debug information can slow down the program dramatically.
+#define DEBUG_OUT
 // #define DEBUG_OUT Serial
 
 /// Exit when encountering an error, instead of trying to recover (recommended).
@@ -82,7 +86,7 @@ constexpr static Frequency SPI_MAX_SPEED = 8_MHz;
 
 /// Make it possible to invert individual push buttons.
 /// Enabling this will increase memory usage.
-#define INDIVIDUAL_BUTTON_INVERT
+#define AH_INDIVIDUAL_BUTTON_INVERT
 
 // ========================================================================== //
 

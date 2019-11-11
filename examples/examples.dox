@@ -1,4 +1,39 @@
 /**
+ * @example   "Debug.ino"
+ * 
+ * Debug
+ * =====
+ *
+ * This examples shows how use the debug macros for printing different kinds of
+ * debugging information
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Enable debugging in `src/AH/Settings/Settings.hpp`.
+ * - Upload the sketch to the Arduino, and open the Serial Monitor 
+ *   (`CTRL+Shift+M`)
+ * - Every five seconds, debugging information is printed, for example:
+ * 
+ * ~~~
+ * This is the result of `DEBUG`
+ * [/home/pieter/GitHub/Arduino-Debugging/Example/Example.ino:12]:	This is the result of `DEBUGREF`
+ * [void loop() @ line 13]:	This is the result of `DEBUGFN`
+ * [0:2:11.085]:	This is the result of `DEBUGTIME`
+ * a = 1, b = 2, c = 3
+ * log10(1000) - 2 = 1.00
+ * millis() = 131085
+ * Serial.read() = -1
+ * [int someFunction(int) @ line 26]:	parameter = 42
+ * ~~~
+ * 
+ * Written by PieterP, 2018-07-31  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
  * @example   "1.FilteredAnalog.ino"
  * 
  * 1.FilteredAnalog
@@ -30,15 +65,6 @@
  * 
  * Written by PieterP, 2019-10-10  
  * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "STL-test.ino"
- * 
- * STL-test
- * ========
- *
- * @boards  AVR, AVR USB
  */
 
 /**
@@ -164,12 +190,7 @@
  * Behavior
  * --------
  * 
- * This sketch will just blink the LED once a second.
- * 
- * Mapping
- * -------
- * 
- * None.
+ * This sketch will blink the LED once a second.
  * 
  * Written by PieterP, 2018-09-01
  * https://github.com/tttapa/Arduino-Helpers
@@ -219,11 +240,6 @@
  * turn it off again.
  * Pressing the second button will turn on the second LED. Pressing it again 
  * will turn it off again, and so on.
- * 
- * Mapping
- * -------
- * 
- * None.
  * 
  * Written by PieterP, 2018-08-28  
  * https://github.com/tttapa/Arduino-Helpers
@@ -311,5 +327,14 @@
  * 
  * Written by Pieter P, 2019-08-08   
  * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "STL-test.ino"
+ * 
+ * STL-test
+ * ========
+ *
+ * @boards  AVR, AVR USB
  */
 

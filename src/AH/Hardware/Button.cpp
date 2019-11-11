@@ -10,7 +10,7 @@ void Button::begin() { ExtIO::pinMode(pin, INPUT_PULLUP); }
 
 void Button::invert() { invertState = true; }
 
-#ifndef INDIVIDUAL_BUTTON_INVERT
+#ifndef AH_INDIVIDUAL_BUTTON_INVERT
 bool Button::invertState = false;
 #endif
 

@@ -1,8 +1,10 @@
 #pragma once
 
-#include <Arduino.h>
+/// @file
+
 #include <AH/PrintStream/PrintStream.hpp>
 #include <AH/Settings/SettingsWrapper.hpp>
+#include <Arduino.h>
 
 #ifndef FLUSH_ON_EVERY_DEBUG_STATEMENT
 #if !(defined(ESP32) || defined(ESP8266))
@@ -13,7 +15,6 @@
 ///
 /// @todo   I should probably use Streams instead of Prints, so Espressif boards
 ///         can flush as well.
-/// @ingroup    Debug
 #define FLUSH_ON_EVERY_DEBUG_STATEMENT 0
 
 #else
@@ -96,11 +97,35 @@
 
 /// Print an expression and the time since startup to the debug output if
 /// debugging is enabled.
-/// Only supported on Arduino at the moment.
+/// Format: `[hours:minutes:seconds.milliseconds]`
 /// @ingroup    Debug
 #define DEBUGTIME(x)                                                           \
     do {                                                                       \
         unsigned long t = millis();                                            \
+        unsigned long h = t / (60UL * 60 * 1000);                              \
+        unsigned long m = (t / (60UL * 1000)) % 60;                            \
+        unsigned long s = (t / (1000UL)) % 60;                                 \
+        unsigned long ms = t % 1000;                                           \
+        const char *ms_zeros = ms > 99 ? "" : (ms > 9 ? "0" : "00");           \
+        DEBUG_OUT << '[' << h << ':' << m << ':' << s << '.' << ms_zeros << ms \
+                  << "]:\t" << x << DEBUG_ENDL;                                \
+    } while (0)
+
+#else // !ARDUINO
+
+#include <chrono>
+
+BEGIN_AH_NAMESPACE
+extern const decltype(std::chrono::high_resolution_clock::now()) start_time;
+END_AH_NAMESPACE
+
+#define DEBUGTIME(x)                                                           \
+    do {                                                                       \
+        USING_AH_NAMESPACE;                                                    \
+        using namespace std::chrono;                                           \
+        auto now = high_resolution_clock::now();                               \
+        unsigned long t =                                                      \
+            duration_cast<milliseconds>(now - start_time).count();             \
         unsigned long h = t / (60UL * 60 * 1000);                              \
         unsigned long m = (t / (60UL * 1000)) % 60;                            \
         unsigned long s = (t / (1000UL)) % 60;                                 \
@@ -134,11 +159,9 @@
 #define DEBUGFN(x)                                                             \
     do {                                                                       \
     } while (0)
-#ifdef ARDUINO
 #define DEBUGTIME(x)                                                           \
     do {                                                                       \
     } while (0)
-#endif
 #define DEBUGVAL(...)                                                          \
     do {                                                                       \
     } while (0)

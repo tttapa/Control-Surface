@@ -40,11 +40,11 @@ class Button {
      *          (button pressed is `HIGH` instead of `LOW`).
      *
      * @note    This affects **all** Button objects if 
-     *          `INDIVIDUAL_BUTTON_INVERT` is not defined.
+     *          `AH_INDIVIDUAL_BUTTON_INVERT` is not defined.
      * 
-     * @see     INDIVIDUAL_BUTTON_INVERT
+     * @see     AH_INDIVIDUAL_BUTTON_INVERT
      */
-    INDIVIDUAL_BUTTON_INVERT_STATIC void invert();
+    AH_INDIVIDUAL_BUTTON_INVERT_STATIC void invert();
 
     /// @brief   An enumeration of the different states a button can be in.
     enum State {
@@ -105,7 +105,7 @@ class Button {
     State debouncedState = Released;
     unsigned long prevBounceTime = 0;
 
-#ifdef INDIVIDUAL_BUTTON_INVERT // Edit this in Settings/Settings.hpp
+#ifdef AH_INDIVIDUAL_BUTTON_INVERT // Edit this in Settings/Settings.hpp
     bool invertState = false;
 #else 
     static bool invertState;

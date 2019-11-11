@@ -1,0 +1,4 @@
+/**
+ * @defgroup    PrintStream     PrintStream
+ * @brief   Functions for printing to Streams using the streaming operator `<<`.
+ */

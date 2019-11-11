@@ -84,7 +84,7 @@ set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 # Build the source files and tests
 ################################################################################
 
-add_subdirectory(googletest-wrappers)
+add_subdirectory(gtest-wrappers)
 add_subdirectory(mock)
 add_subdirectory(src)
 add_subdirectory(test)
@@ -94,12 +94,16 @@ add_subdirectory(test)
 ################################################################################
 
 # Add documentation target
-add_custom_target(documentation rm -rf html && ./scripts/examples.py && doxygen
+add_custom_target(documentation 
+    rm -rf html && ./scripts/examples.py && doxygen
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen)
 
 # Add coverage target
-add_custom_target(coverage ${CMAKE_CURRENT_LIST_DIR}/scripts/coverage.sh ${CMAKE_CXX_COMPILER_ID}
-WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
+add_custom_target(coverage 
+    ${CMAKE_CURRENT_LIST_DIR}/scripts/coverage.sh ${CMAKE_CXX_COMPILER_ID}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+endif()
 
 # Custom test targets
 add_custom_target(check tests

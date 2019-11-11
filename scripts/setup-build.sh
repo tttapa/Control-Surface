@@ -2,6 +2,11 @@
 
 set -ex 
 
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <project-dir>"
+    exit 0
+fi
+
 cd "$1"
 
 rm -rf build/*

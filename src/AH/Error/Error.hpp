@@ -1,42 +1,64 @@
 #pragma once
 
+/// @file
+
 #include <AH/Debug/Debug.hpp>
 
 #ifdef ARDUINO // ------------------------------------------------------ ARDUINO
 
 BEGIN_AH_NAMESPACE
 
-/// Function that executes and loops forever, blinking the LED when a fatal
-/// error is encountered.
+/// Function that executes and loops forever, blinking the built-in LED when a
+/// fatal error is encountered.
 extern void fatalErrorExit() __attribute__((noreturn));
 
 END_AH_NAMESPACE
 
 #ifdef FATAL_ERRORS
 
-#define ERROR(x, e)                                                            \
+#define ERROR(msg, errc)                                                       \
     do {                                                                       \
         USING_AH_NAMESPACE;                                                    \
-        DEBUGFN(x << " (0x" << hex << uppercase << e << dec << nouppercase     \
-                  << ')');                                                     \
+        DEBUGFN(msg << " (0x" << hex << uppercase << errc << dec               \
+                    << nouppercase << ')');                                    \
         fatalErrorExit();                                                      \
     } while (0)
 
 #else
 
-#define ERROR(x, e)                                                            \
+/// Print the error message and error code, and stop the execution if
+/// `FATAL_ERRORS` are enabled. Otherwise just prints the error.
+///
+/// @param  msg
+///         The information to print, can contain streaming operators (`<<`) to
+///         print multiple things.
+/// @param  errc
+///         A unique error code.
+///
+/// @ingroup    Error
+#define ERROR(msg, errc)                                                       \
     do {                                                                       \
-        DEBUGFN(x << " (0x" << hex << uppercase << e << dec << nouppercase     \
-                  << ')');                                                     \
+        DEBUGFN(msg << " (0x" << hex << uppercase << errc << dec               \
+                    << nouppercase << ')');                                    \
     } while (0)
 
 #endif
 
-#define FATAL_ERROR(x, e)                                                      \
+/// Print the error message and error code, and stop the execution.
+/// Doesn't depend on `FATAL_ERRORS`, it always stops the execution.
+///
+/// @param  msg
+///         The information to print, can contain streaming operators (`<<`) to
+///         print multiple things.
+/// @param  errc
+///         A unique error code.
+///
+/// @ingroup    Error
+#define FATAL_ERROR(msg, errc)                                                 \
     do {                                                                       \
         USING_AH_NAMESPACE;                                                    \
-        DEBUGFN(F("Fatal Error: ") << x << " (0x" << hex << uppercase << e     \
-                                   << dec << nouppercase << ')');              \
+        DEBUGFN(F("Fatal Error: ") << msg << " (0x" << hex << uppercase        \
+                                   << errc << dec << nouppercase << ')');      \
         fatalErrorExit();                                                      \
     } while (0)
 
@@ -61,20 +83,20 @@ class ErrorException : public std::exception {
 
 END_AH_NAMESPACE
 
-#define ERROR(x, e)                                                            \
+#define ERROR(msg, errc)                                                       \
     do {                                                                       \
         USING_AH_NAMESPACE;                                                    \
         std::ostringstream s;                                                  \
-        s << DEBUG_FUNC_LOCATION << x;                                         \
-        throw ErrorException(s.str(), e);                                      \
+        s << DEBUG_FUNC_LOCATION << msg;                                       \
+        throw ErrorException(s.str(), errc);                                   \
     } while (0)
 
-#define FATAL_ERROR(x, e)                                                      \
+#define FATAL_ERROR(msg, errc)                                                 \
     do {                                                                       \
         USING_AH_NAMESPACE;                                                    \
         std::ostringstream s;                                                  \
-        s << DEBUG_FUNC_LOCATION << x;                                         \
-        throw ErrorException(s.str(), e);                                      \
+        s << DEBUG_FUNC_LOCATION << msg;                                       \
+        throw ErrorException(s.str(), errc);                                   \
     } while (0)
 
 #endif

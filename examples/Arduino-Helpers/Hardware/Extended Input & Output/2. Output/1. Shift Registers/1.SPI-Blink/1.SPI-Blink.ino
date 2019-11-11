@@ -20,12 +20,7 @@
  * Behavior
  * --------
  * 
- * This sketch will just blink the LED once a second.
- * 
- * Mapping
- * -------
- * 
- * None.
+ * This sketch will blink the LED once a second.
  * 
  * Written by PieterP, 2018-09-01
  * https://github.com/tttapa/Arduino-Helpers
