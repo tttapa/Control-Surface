@@ -183,6 +183,13 @@ TEST(Array, compDiv) {
     EXPECT_EQ(c, b);
 }
 
+TEST(Array, sliceToArray) {
+    Array<int, 5> a = {2, 4, 6, 8, 10};
+    Array<int, 3> b = a.slice<1, 4>().asArray();
+    Array<int, 3> c = {4, 6, 8};
+    EXPECT_EQ(b, c);
+}
+
 // -------------------------------------------------------------------------- //
 
 TEST(Array2D, initialize) {

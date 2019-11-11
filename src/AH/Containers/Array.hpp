@@ -4,7 +4,7 @@
 
 #include <AH/Error/Error.hpp>
 #include <AH/STL/type_traits> // conditional
-#include <stddef.h> // size_t
+#include <stddef.h>           // size_t
 
 BEGIN_AH_NAMESPACE
 
@@ -105,12 +105,31 @@ struct Array {
      */
     bool operator!=(const Array<T, N> &rhs) const { return !(*this == rhs); }
 
+    /**
+     * @brief   Get a view on a slice of the Array.
+     * 
+     * Doesn't copy the contents of the array, it's just a reference to the 
+     * original array.
+     * 
+     * @tparam  Start
+     *          The start index of the slice.
+     * @tparam  End
+     *          The end index of the slice (non inclusive).
+     */
     template <size_t Start = 0, size_t End = N>
     ArraySlice<T, N, Start, End, false> slice();
 
+    /**
+     * @brief   Get a read-only view on a slice of the Array.
+     * @copydetails     slice()
+     */
     template <size_t Start = 0, size_t End = N>
     ArraySlice<T, N, Start, End, true> slice() const;
 
+    /**
+     * @brief   Get a read-only view on a slice of the Array.
+     * @copydetails     slice()
+     */
     template <size_t Start = 0, size_t End = N>
     ArraySlice<T, N, Start, End, true> cslice() const {
         const Array<T, N> &This = *this;
@@ -118,6 +137,23 @@ struct Array {
     }
 };
 
+/**
+ * @brief   Class for a view on a slice of an array.
+ * 
+ * Doesn't copy the contents of the array, it's just a reference to the original
+ * array.
+ * 
+ * @tparam  T
+ *          The type of elements of the Array.
+ * @tparam  N 
+ *          The size of the Array.
+ * @tparam  Start
+ *          The start index of the slice.
+ * @tparam  End
+ *          The end index of the slice (non inclusive).
+ * @tparam  Const
+ *          Whether to save a read-only or mutable reference to the Array.
+ */
 template <class T, size_t N, size_t Start = 0, size_t End = N,
           bool Const = true>
 class ArraySlice {
@@ -127,9 +163,13 @@ class ArraySlice {
         typename std::conditional<Const, const T &, T &>::type;
 
   public:
+    /// Constructor
     ArraySlice(ArrayRefType array) : array{array} {}
 
-    explicit operator Array<T, End - Start>() const {
+    /// Implicit conversion from slice to new array (creates a copy).
+    operator Array<T, End - Start>() const { return asArray(); }
+
+    Array<T, End - Start> asArray() const {
         Array<T, End - Start> slice = {};
         for (size_t i = 0; i < End - Start; ++i)
             slice[i] = array[Start + i];
