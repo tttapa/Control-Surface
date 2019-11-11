@@ -74,11 +74,11 @@ $(function() {
 <div class="title">2.DigitalReadSerial.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md22"></a>
+<h1><a class="anchor" id="autotoc_md21"></a>
 2.DigitalReadSerial</h1>
 <p>This is an example of the <a class="el" href="../../d7/d8d/classAnalogMultiplex.html" title="A class for reading multiplexed analog inputs.">AnalogMultiplex</a> class. It prints the states of all 16 switches connected to a multiplexers to the serial monitor.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md23"></a>
+<h2><a class="anchor" id="autotoc_md22"></a>
 Connections</h2>
 <ul>
 <li>2: CD74HC4067 signal pin ("common input/output")</li>
@@ -90,7 +90,7 @@ Connections</h2>
 <p>Optionally you can connect the enable pin as well, this is useful if you want to use multiple multiplexers with the same address lines and the same analog input. Otherwise, just connect the enable pin to ground.</p>
 <p>If you are using a 3-bit multiplexer, like the CD74HC4051, you can uncomment the code specific to this multiplexer, and use only three address pins.</p>
 <p>Connect a switch or push button between each input pin of the multiplexer and ground. A pull-up resistor is not necessary, because we'll use the internal one.</p>
-<h2><a class="anchor" id="autotoc_md24"></a>
+<h2><a class="anchor" id="autotoc_md23"></a>
 Behavior</h2>
 <p>Open the serial monitor (CTRL+SHIFT+M) or the serial plotter (CTRL+SHIFT+L), and press some buttons, you should see all 16 signals printed or plotted.</p>
 <p>Written by Pieter P, 2019-08-08 <br  />
@@ -147,7 +147,7 @@ Behavior</h2>
 <div class="ttc" id="aclassAnalogMultiplex_html_a17e37b634c36f15c11fea3eeed0ba4f7"><div class="ttname"><a href="../../d7/d8d/classAnalogMultiplex.html#a17e37b634c36f15c11fea3eeed0ba4f7">AnalogMultiplex::begin</a></div><div class="ttdeci">void begin() override</div><div class="ttdoc">Initialize the multiplexer: set the pin mode of the address pins and the enable pin to output mode.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00184">AnalogMultiplex.hpp:184</a></div></div>
 <div class="ttc" id="anamespaceExtIO_html_a9bda9dc007f42a200626d1d4ea94250b"><div class="ttname"><a href="../../d8/d3d/namespaceExtIO.html#a9bda9dc007f42a200626d1d4ea94250b">ExtIO::digitalRead</a></div><div class="ttdeci">int digitalRead(pin_t pin)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00056">ExtendedInputOutput.cpp:56</a></div></div>
 <div class="ttc" id="aclassAnalogMultiplex_html_a762dd040ff0eb6322d298cddcc10e313"><div class="ttname"><a href="../../d7/d8d/classAnalogMultiplex.html#a762dd040ff0eb6322d298cddcc10e313">AnalogMultiplex::pinMode</a></div><div class="ttdeci">void pinMode(pin_t pin, uint8_t mode) override</div><div class="ttdoc">Set the pin mode of the analog input pin.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00162">AnalogMultiplex.hpp:162</a></div></div>
-<div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder.</div></div>
+<div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <div class="ttc" id="aHardware-Types_8hpp_html_ae9cbfef0ba7a84ef222eff1fc509f88b"><div class="ttname"><a href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a></div><div class="ttdeci">uint16_t pin_t</div><div class="ttdoc">The type for Arduino pins (and ExtendedIOElement pins).</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d35/Hardware-Types_8hpp_source.html#l00014">Hardware-Types.hpp:14</a></div></div>
 <div class="ttc" id="aclassStaticSizeExtendedIOElement_html_aee2c3864f44f4d969265e36643f61776"><div class="ttname"><a href="../../d1/d13/classStaticSizeExtendedIOElement.html#aee2c3864f44f4d969265e36643f61776">StaticSizeExtendedIOElement::pins</a></div><div class="ttdeci">Array&lt; pin_t, N &gt; pins() const</div><div class="ttdoc">Get an array containing all pins of the element.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d05/StaticSizeExtendedIOElement_8hpp_source.html#l00024">StaticSizeExtendedIOElement.hpp:24</a></div></div>
 <!-- start footer part -->

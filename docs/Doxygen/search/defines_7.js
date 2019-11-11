@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['individual_5fbutton_5finvert_902',['INDIVIDUAL_BUTTON_INVERT',['../db/d02/Settings_8hpp.html#a0f4fabd413ae4e94b4f8d45cc1a249ad',1,'Settings.hpp']]],
-  ['individual_5fbutton_5finvert_5fstatic_903',['INDIVIDUAL_BUTTON_INVERT_STATIC',['../d2/dd5/SettingsWrapper_8hpp.html#a9483d053be25212d4085aea39e49d297',1,'SettingsWrapper.hpp']]]
+  ['use_5fah_5fnamespace_917',['USE_AH_NAMESPACE',['../dc/dc7/NamespaceSettings_8hpp.html#a00f163a3376fd194033495f415535986',1,'NamespaceSettings.hpp']]],
+  ['use_5fconstexpr_5farray_5fhelpers_918',['USE_CONSTEXPR_ARRAY_HELPERS',['../d5/db6/ArrayHelpers_8hpp.html#addd42f8d7a7cb2605e50325b9c54fefa',1,'ArrayHelpers.hpp']]],
+  ['using_5fah_5fnamespace_919',['USING_AH_NAMESPACE',['../dc/dc7/NamespaceSettings_8hpp.html#a652d295f60f5f72e47f545429e4e1acc',1,'NamespaceSettings.hpp']]]
 ];

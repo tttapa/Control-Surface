@@ -6,7 +6,7 @@
 <area shape="rect" id="node33" href="$d2/dd5/SettingsWrapper_8hpp.html" title=" " alt="" coords="533,229,677,256"/>
 <area shape="rect" id="node42" href="$d1/dd0/MillisMicrosTimer_8hpp.html" title=" " alt="" coords="1043,80,1192,107"/>
 <area shape="rect" id="node43" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="650,80,758,107"/>
-<area shape="rect" id="node45" href="$dc/de6/Arduino__Helpers_8h.html" title="Dummy header file for Arduino builder." alt="" coords="1685,80,1814,107"/>
+<area shape="rect" id="node45" href="$dc/de6/Arduino__Helpers_8h.html" title="Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t..." alt="" coords="1685,80,1814,107"/>
 <area shape="rect" id="node3" href="$d2/d25/MAX7219_8hpp.html" title=" " alt="" coords="1841,827,1945,853"/>
 <area shape="rect" id="node4" href="$d8/d93/ShiftRegisterOutBase_8hpp.html" title=" " alt="" coords="1266,752,1441,779"/>
 <area shape="rect" id="node8" href="$d7/d88/SPIShiftRegisterOut_8hpp.html" title=" " alt="" coords="1390,827,1557,853"/>

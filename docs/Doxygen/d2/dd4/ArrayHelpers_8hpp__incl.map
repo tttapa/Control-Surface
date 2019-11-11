@@ -1,17 +1,18 @@
 <map id="ArrayHelpers.hpp" name="ArrayHelpers.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="456,5,579,32"/>
-<area shape="rect" id="node2" href="$de/d76/Array_8hpp.html" title=" " alt="" coords="478,80,557,107"/>
-<area shape="rect" id="node3" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="360,155,491,181"/>
-<area shape="rect" id="node13" title=" " alt="" coords="776,453,846,480"/>
-<area shape="rect" id="node4" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="309,229,460,256"/>
-<area shape="rect" id="node5" title=" " alt="" coords="55,528,132,555"/>
-<area shape="rect" id="node6" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="38,304,250,331"/>
-<area shape="rect" id="node7" href="$d2/dd5/SettingsWrapper_8hpp.html" title=" " alt="" coords="275,304,494,331"/>
-<area shape="rect" id="node8" href="$dc/dc7/NamespaceSettings_8hpp.html" title=" " alt="" coords="370,528,535,555"/>
-<area shape="rect" id="node9" href="$db/d02/Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="478,379,573,405"/>
-<area shape="rect" id="node15" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="230,379,454,405"/>
-<area shape="rect" id="node10" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="582,453,752,480"/>
-<area shape="rect" id="node11" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions. By default, the library automatically selec..." alt="" coords="182,453,379,480"/>
-<area shape="rect" id="node12" title=" " alt="" coords="494,453,558,480"/>
-<area shape="rect" id="node14" title=" " alt="" coords="404,453,469,480"/>
+<area shape="rect" id="node1" title=" " alt="" coords="562,5,685,32"/>
+<area shape="rect" id="node2" href="$de/d76/Array_8hpp.html" title=" " alt="" coords="584,80,663,107"/>
+<area shape="rect" id="node3" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="326,155,457,181"/>
+<area shape="rect" id="node13" title=" " alt="" coords="902,453,972,480"/>
+<area shape="rect" id="node4" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="200,229,351,256"/>
+<area shape="rect" id="node5" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="22,379,234,405"/>
+<area shape="rect" id="node6" title=" " alt="" coords="89,528,166,555"/>
+<area shape="rect" id="node7" href="$d2/dd5/SettingsWrapper_8hpp.html" title=" " alt="" coords="256,304,474,331"/>
+<area shape="rect" id="node16" href="$d7/d52/DebugVal_8hpp.html" title=" " alt="" coords="77,304,181,331"/>
+<area shape="rect" id="node8" href="$dc/dc7/NamespaceSettings_8hpp.html" title=" " alt="" coords="450,528,616,555"/>
+<area shape="rect" id="node9" href="$db/d02/Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="580,379,675,405"/>
+<area shape="rect" id="node15" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="308,379,532,405"/>
+<area shape="rect" id="node10" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="708,453,878,480"/>
+<area shape="rect" id="node11" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions. By default, the library automatically selec..." alt="" coords="308,453,505,480"/>
+<area shape="rect" id="node12" title=" " alt="" coords="620,453,684,480"/>
+<area shape="rect" id="node14" title=" " alt="" coords="530,453,595,480"/>
 </map>

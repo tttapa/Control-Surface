@@ -97,7 +97,7 @@
 </g>
 <!-- Node45 -->
 <g id="node45" class="node"><title>Node45</title>
-<g id="a_node45"><a xlink:href="../../dc/de6/Arduino__Helpers_8h.html" target="_top" xlink:title="Dummy header file for Arduino builder.">
+<g id="a_node45"><a xlink:href="../../dc/de6/Arduino__Helpers_8h.html" target="_top" xlink:title="Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...">
 <polygon fill="white" stroke="black" points="1259.5,-616.5 1259.5,-635.5 1356.5,-635.5 1356.5,-616.5 1259.5,-616.5"/>
 <text text-anchor="middle" x="1308" y="-623.5" font-family="Helvetica,sans-Serif" font-size="10.00">Arduino_Helpers.h</text>
 </a>

@@ -1,13 +1,14 @@
 <map id="Exit.cpp" name="Exit.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="887,5,958,32"/>
-<area shape="rect" id="node2" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="796,80,871,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="757,453,835,480"/>
-<area shape="rect" id="node3" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="653,155,803,181"/>
-<area shape="rect" id="node5" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="765,229,977,256"/>
-<area shape="rect" id="node6" href="$d2/dd5/SettingsWrapper_8hpp.html" title=" " alt="" coords="401,229,620,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="755,5,826,32"/>
+<area shape="rect" id="node2" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="677,80,752,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="752,453,829,480"/>
+<area shape="rect" id="node3" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="601,155,751,181"/>
+<area shape="rect" id="node4" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="550,304,762,331"/>
+<area shape="rect" id="node6" href="$d2/dd5/SettingsWrapper_8hpp.html" title=" " alt="" coords="329,229,548,256"/>
+<area shape="rect" id="node15" href="$d7/d52/DebugVal_8hpp.html" title=" " alt="" coords="675,229,779,256"/>
 <area shape="rect" id="node7" href="$dc/dc7/NamespaceSettings_8hpp.html" title=" " alt="" coords="5,453,171,480"/>
-<area shape="rect" id="node8" href="$db/d02/Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="463,304,558,331"/>
-<area shape="rect" id="node14" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="215,304,439,331"/>
+<area shape="rect" id="node8" href="$db/d02/Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="391,304,486,331"/>
+<area shape="rect" id="node14" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="143,304,367,331"/>
 <area shape="rect" id="node9" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="64,379,235,405"/>
 <area shape="rect" id="node10" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions. By default, the library automatically selec..." alt="" coords="443,379,640,405"/>
 <area shape="rect" id="node11" title=" " alt="" coords="664,379,728,405"/>

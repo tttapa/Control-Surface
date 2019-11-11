@@ -74,17 +74,17 @@ $(function() {
 <div class="title">1.FilteredAnalog.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md0"></a>
+<h1><a class="anchor" id="autotoc_md2"></a>
 1.FilteredAnalog</h1>
 <p>This examples shows how to filter an analog input, so you can get the position of a knob or fader without noise.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md1"></a>
+<h2><a class="anchor" id="autotoc_md3"></a>
 Connections</h2>
 <ul>
 <li>A0: wiper of a potentiometer</li>
 </ul>
 <p>Connect the left terminal of the potentiometer to ground, and the right one to V<sub>CC</sub>.</p>
-<h2><a class="anchor" id="autotoc_md2"></a>
+<h2><a class="anchor" id="autotoc_md4"></a>
 Behavior</h2>
 <ul>
 <li>Upload the sketch to the Arduino, and open the Serial Monitor (<code>CTRL+Shift+M</code>)</li>
@@ -96,6 +96,7 @@ Behavior</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="comment">// Include the library</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d8/df3/FilteredAnalog_8hpp.html">AH/Hardware/FilteredAnalog.hpp</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d1/dd0/MillisMicrosTimer_8hpp.html">AH/Timing/MillisMicrosTimer.hpp</a>&gt;</span></div>
 <div class="line"> </div>
@@ -148,7 +149,7 @@ Behavior</h2>
 <div class="ttc" id="aMillisMicrosTimer_8hpp_html"><div class="ttname"><a href="../../d1/dd0/MillisMicrosTimer_8hpp.html">MillisMicrosTimer.hpp</a></div></div>
 <div class="ttc" id="aclassFilteredAnalog_html"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html">FilteredAnalog</a></div><div class="ttdoc">A class that reads and filters an analog input.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00047">FilteredAnalog.hpp:47</a></div></div>
 <div class="ttc" id="aclassTimer_html"><div class="ttname"><a href="../../dc/dea/classTimer.html">Timer</a></div><div class="ttdoc">A class for easily managing timed events.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00022">MillisMicrosTimer.hpp:22</a></div></div>
-<div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder.</div></div>
+<div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <div class="ttc" id="aFilteredAnalog_8hpp_html"><div class="ttname"><a href="../../d8/df3/FilteredAnalog_8hpp.html">FilteredAnalog.hpp</a></div></div>
 <div class="ttc" id="aclassFilteredAnalog_html_a5a3518c354ba9da25720c6fa93445e72"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html#a5a3518c354ba9da25720c6fa93445e72">FilteredAnalog::setupADC</a></div><div class="ttdeci">static void setupADC()</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00135">FilteredAnalog.hpp:135</a></div></div>
 <!-- start footer part -->

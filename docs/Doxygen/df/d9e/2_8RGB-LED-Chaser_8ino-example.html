@@ -74,11 +74,11 @@ $(function() {
 <div class="title">2.RGB-LED-Chaser.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 2.RGB-LED-Chaser</h1>
 <p>This is an example of the <a class="el" href="../../d1/d5c/classShiftRegisterOut.html" title="A class for serial-in/parallel-out shift registers, like the 74HC595.">ShiftRegisterOut</a> class of the Control Surface library. It creates light effects using three 8-bit shift registers and some RGB <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a>.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 Connections</h2>
 <p>Connect three daisy-chained shift registers to the SPI pins. <br  />
  Connect 8 RGB <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> (+ current limiting resistors) to the outputs of the shift registers.</p>
@@ -95,10 +95,10 @@ Connections</h2>
 <p>If you wired the <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> as RGB (red first, then green and then blue), the red bit is 0, the green bit is 1 and the blue bit is 2. <br  />
  If you wired the <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> as BGR (blue first, then green and then red), the red bit is 2, the green bit is 1 and the blue bit is 0. <br  />
  Other combinations are possible as well.</p>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 Behavior</h2>
 <p>This example will turn on all red <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> one by one, then turn them off one by one, next, it will turn on and off all green <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> in the same manner, and finally the same for the blue <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a>. This is repeated indefinitely.</p>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 Demo</h2>
 <p> 
 <iframe width="560" height="315"
@@ -181,7 +181,7 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="ttc" id="astructShiftRegisterOutRGB_html_a9249b63255413f960f507f46b6f6024a"><div class="ttname"><a href="../../d5/d45/structShiftRegisterOutRGB.html#a9249b63255413f960f507f46b6f6024a">ShiftRegisterOutRGB::greenBit</a></div><div class="ttdeci">const static uint8_t greenBit</div><div class="ttdoc">The position of the green output pin for 3-color LEDs.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d1f/ShiftRegisterOutRGB_8hpp_source.html#l00023">ShiftRegisterOutRGB.hpp:23</a></div></div>
 <div class="ttc" id="aclassShiftRegisterOutBase_html_a81fabf06f40056b1e2c22e0d8420cc1c"><div class="ttname"><a href="../../d8/db4/classShiftRegisterOutBase.html#a81fabf06f40056b1e2c22e0d8420cc1c">ShiftRegisterOutBase::green</a></div><div class="ttdeci">pin_t green(pin_t id)</div><div class="ttdoc">Get the green output pin of the given LED.</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d47/ShiftRegisterOutBase_8ipp_source.html#l00024">ShiftRegisterOutBase.ipp:24</a></div></div>
 <div class="ttc" id="aclassSPIShiftRegisterOut_html_a69c874e1a9212ba5cc386644c0e68a4f"><div class="ttname"><a href="../../dd/d81/classSPIShiftRegisterOut.html#a69c874e1a9212ba5cc386644c0e68a4f">SPIShiftRegisterOut::begin</a></div><div class="ttdeci">void begin() override</div><div class="ttdoc">Initialize the shift register.</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d45/SPIShiftRegisterOut_8ipp_source.html#l00014">SPIShiftRegisterOut.ipp:14</a></div></div>
-<div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder.</div></div>
+<div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <div class="ttc" id="aclassShiftRegisterOutBase_html_a6cbf86a1b6bf843c75bfc0b4ecf5a391"><div class="ttname"><a href="../../d8/db4/classShiftRegisterOutBase.html#a6cbf86a1b6bf843c75bfc0b4ecf5a391">ShiftRegisterOutBase::red</a></div><div class="ttdeci">pin_t red(pin_t id)</div><div class="ttdoc">Get the red output pin of the given LED.</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d47/ShiftRegisterOutBase_8ipp_source.html#l00035">ShiftRegisterOutBase.ipp:35</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -74,11 +74,11 @@ $(function() {
 <div class="title">1.AnalogReadSerial.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md19"></a>
+<h1><a class="anchor" id="autotoc_md18"></a>
 1.AnalogReadSerial</h1>
 <p>This is an example of the <a class="el" href="../../d7/d8d/classAnalogMultiplex.html" title="A class for reading multiplexed analog inputs.">AnalogMultiplex</a> class. It prints the values of all 16 inputs of a multiplexers to the serial monitor.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 Connections</h2>
 <ul>
 <li>A0: CD74HC4067 signal pin ("common input/output")</li>
@@ -89,7 +89,7 @@ Connections</h2>
 </ul>
 <p>Optionally you can connect the enable pin as well, this is useful if you want to use multiple multiplexers with the same address lines and the same analog input. Otherwise, just connect the enable pin to ground.</p>
 <p>If you are using a 3-bit multiplexer, like the CD74HC4051, you can uncomment the code specific to this multiplexer, and use only three address pins.</p>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h2><a class="anchor" id="autotoc_md20"></a>
 Behavior</h2>
 <p>Connect some potentiometers or other analog sensors to the 16 inputs of the multiplexer, and open the serial monitor (CTRL+SHIFT+M) or the serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed or plotted.</p>
 <p>Written by Pieter P, 31-01-2019 <br  />
@@ -140,7 +140,7 @@ Behavior</h2>
 <div class="ttc" id="aclassExtendedIOElement_html_a3d9607995d349d197fc24a23d6c4016f"><div class="ttname"><a href="../../de/d4e/classExtendedIOElement.html#a3d9607995d349d197fc24a23d6c4016f">ExtendedIOElement::getLength</a></div><div class="ttdeci">pin_t getLength() const</div><div class="ttdoc">Get the number of pins this IO element has.</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00043">ExtendedIOElement.cpp:43</a></div></div>
 <div class="ttc" id="aclassAnalogMultiplex_html"><div class="ttname"><a href="../../d7/d8d/classAnalogMultiplex.html">AnalogMultiplex</a></div><div class="ttdoc">A class for reading multiplexed analog inputs.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00025">AnalogMultiplex.hpp:25</a></div></div>
 <div class="ttc" id="aclassAnalogMultiplex_html_a17e37b634c36f15c11fea3eeed0ba4f7"><div class="ttname"><a href="../../d7/d8d/classAnalogMultiplex.html#a17e37b634c36f15c11fea3eeed0ba4f7">AnalogMultiplex::begin</a></div><div class="ttdeci">void begin() override</div><div class="ttdoc">Initialize the multiplexer: set the pin mode of the address pins and the enable pin to output mode.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00184">AnalogMultiplex.hpp:184</a></div></div>
-<div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder.</div></div>
+<div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <div class="ttc" id="aclassAnalogMultiplex_html_acdece870fadd4c99a2e0b7cf00f637ef"><div class="ttname"><a href="../../d7/d8d/classAnalogMultiplex.html#acdece870fadd4c99a2e0b7cf00f637ef">AnalogMultiplex::analogRead</a></div><div class="ttdeci">analog_t analogRead(pin_t pin) override</div><div class="ttdoc">Read the analog value of the given input.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00175">AnalogMultiplex.hpp:175</a></div></div>
 <div class="ttc" id="aHardware-Types_8hpp_html_ae9cbfef0ba7a84ef222eff1fc509f88b"><div class="ttname"><a href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a></div><div class="ttdeci">uint16_t pin_t</div><div class="ttdoc">The type for Arduino pins (and ExtendedIOElement pins).</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d35/Hardware-Types_8hpp_source.html#l00014">Hardware-Types.hpp:14</a></div></div>
 <div class="ttc" id="aclassStaticSizeExtendedIOElement_html_aee2c3864f44f4d969265e36643f61776"><div class="ttname"><a href="../../d1/d13/classStaticSizeExtendedIOElement.html#aee2c3864f44f4d969265e36643f61776">StaticSizeExtendedIOElement::pins</a></div><div class="ttdeci">Array&lt; pin_t, N &gt; pins() const</div><div class="ttdoc">Get an array containing all pins of the element.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d05/StaticSizeExtendedIOElement_8hpp_source.html#l00024">StaticSizeExtendedIOElement.hpp:24</a></div></div>
