@@ -25,7 +25,7 @@ var searchData=
   ['analogwrite_22',['analogWrite',['../d7/d8d/classAnalogMultiplex.html#a80e48ba8040e1835c1b9efe138293ecf',1,'AnalogMultiplex::analogWrite()'],['../de/d4e/classExtendedIOElement.html#a2cf92229bc134f5e5e8088a920289140',1,'ExtendedIOElement::analogWrite()'],['../dc/d19/classMAX7219.html#a0142ff818b660dfdef3dc024ca0c3a85',1,'MAX7219::analogWrite()'],['../d8/db4/classShiftRegisterOutBase.html#a99806b37b9f62f566f9abfa82b6432ca',1,'ShiftRegisterOutBase::analogWrite()']]],
   ['append_23',['append',['../dd/d16/classDoublyLinkedList.html#a3c067d3d91d183268148650708108be6',1,'DoublyLinkedList::append(Node *node)'],['../dd/d16/classDoublyLinkedList.html#a57fafae0be8c04f523bbfc06aa2c9bf9',1,'DoublyLinkedList::append(Node &amp;node)']]],
   ['arduino_5fhelpers_2eh_24',['Arduino_Helpers.h',['../dc/de6/Arduino__Helpers_8h.html',1,'']]],
-  ['array_25',['Array',['../d7/d6a/structArray.html',1,'']]],
+  ['array_25',['Array',['../d7/d6a/structArray.html',1,'Array&lt; T, N &gt;'],['../df/de0/classArraySlice.html#a301dffa6fe45a511343e0ba7f169fa17',1,'ArraySlice::array()']]],
   ['array_2ecpp_26',['Array.cpp',['../d1/d32/Array_8cpp.html',1,'']]],
   ['array_2ehpp_27',['Array.hpp',['../de/d76/Array_8hpp.html',1,'']]],
   ['array2d_28',['Array2D',['../db/d50/group__Containers.html#ga65347c7f97dc7e8e602fb77ac735f585',1,'Array.hpp']]],
@@ -34,5 +34,7 @@ var searchData=
   ['array_3c_20nb_5frows_20_3e_31',['Array&lt; nb_rows &gt;',['../d7/d6a/structArray.html',1,'']]],
   ['array_3c_20pin_5ft_2c_20n_20_3e_32',['Array&lt; pin_t, N &gt;',['../d7/d6a/structArray.html',1,'']]],
   ['arrayhelpers_2ecpp_33',['ArrayHelpers.cpp',['../db/d93/ArrayHelpers_8cpp.html',1,'']]],
-  ['arrayhelpers_2ehpp_34',['ArrayHelpers.hpp',['../d5/db6/ArrayHelpers_8hpp.html',1,'']]]
+  ['arrayhelpers_2ehpp_34',['ArrayHelpers.hpp',['../d5/db6/ArrayHelpers_8hpp.html',1,'']]],
+  ['arrayreftype_35',['ArrayRefType',['../df/de0/classArraySlice.html#a6a7c3fa67e8eb750f5e1f280ac6ef6a7',1,'ArraySlice']]],
+  ['arrayslice_36',['ArraySlice',['../df/de0/classArraySlice.html',1,'ArraySlice&lt; T, N, Start, End, Const &gt;'],['../df/de0/classArraySlice.html#a7246525cbb676f82262b4484af6624ff',1,'ArraySlice::ArraySlice()']]]
 ];

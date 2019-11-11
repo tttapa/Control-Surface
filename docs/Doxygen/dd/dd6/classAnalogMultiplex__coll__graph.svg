@@ -162,26 +162,29 @@
 <!-- Node6 -->
 <g id="node6" class="node"><title>Node6</title>
 <g id="a_node6"><a xlink:href="../../d7/d6a/structArray.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="494,-314.5 494,-459.5 586,-459.5 586,-314.5 494,-314.5"/>
-<text text-anchor="middle" x="540" y="-447.5" font-family="Helvetica,sans-Serif" font-size="10.00">Array&lt; pin_t, N &gt;</text>
-<polyline fill="none" stroke="black" points="494,-440.5 586,-440.5 "/>
-<text text-anchor="start" x="502" y="-428.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ data</text>
-<text text-anchor="start" x="502" y="-417.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ length</text>
-<polyline fill="none" stroke="black" points="494,-410.5 586,-410.5 "/>
-<text text-anchor="start" x="502" y="-398.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator[]()</text>
-<text text-anchor="start" x="502" y="-387.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator[]()</text>
-<text text-anchor="start" x="502" y="-376.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
-<text text-anchor="start" x="502" y="-365.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
-<text text-anchor="start" x="502" y="-354.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ end()</text>
-<text text-anchor="start" x="502" y="-343.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ end()</text>
-<text text-anchor="start" x="502" y="-332.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator==()</text>
-<text text-anchor="start" x="502" y="-321.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator!=()</text>
+<polygon fill="white" stroke="black" points="494,-298 494,-476 586,-476 586,-298 494,-298"/>
+<text text-anchor="middle" x="540" y="-464" font-family="Helvetica,sans-Serif" font-size="10.00">Array&lt; pin_t, N &gt;</text>
+<polyline fill="none" stroke="black" points="494,-457 586,-457 "/>
+<text text-anchor="start" x="502" y="-445" font-family="Helvetica,sans-Serif" font-size="10.00">+ data</text>
+<text text-anchor="start" x="502" y="-434" font-family="Helvetica,sans-Serif" font-size="10.00">+ length</text>
+<polyline fill="none" stroke="black" points="494,-427 586,-427 "/>
+<text text-anchor="start" x="502" y="-415" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator[]()</text>
+<text text-anchor="start" x="502" y="-404" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator[]()</text>
+<text text-anchor="start" x="502" y="-393" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
+<text text-anchor="start" x="502" y="-382" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
+<text text-anchor="start" x="502" y="-371" font-family="Helvetica,sans-Serif" font-size="10.00">+ end()</text>
+<text text-anchor="start" x="502" y="-360" font-family="Helvetica,sans-Serif" font-size="10.00">+ end()</text>
+<text text-anchor="start" x="502" y="-349" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator==()</text>
+<text text-anchor="start" x="502" y="-338" font-family="Helvetica,sans-Serif" font-size="10.00">+ operator!=()</text>
+<text text-anchor="start" x="502" y="-327" font-family="Helvetica,sans-Serif" font-size="10.00">+ slice()</text>
+<text text-anchor="start" x="502" y="-316" font-family="Helvetica,sans-Serif" font-size="10.00">+ slice()</text>
+<text text-anchor="start" x="502" y="-305" font-family="Helvetica,sans-Serif" font-size="10.00">+ cslice()</text>
 </a>
 </g>
 </g>
 <!-- Node6&#45;&gt;Node1 -->
 <g id="edge7" class="edge"><title>Node6&#45;&gt;Node1</title>
-<path fill="none" stroke="#404040" d="M511.582,-314.324C503.075,-292.967 493.696,-269.522 485,-248 480.27,-236.294 475.306,-224.071 470.343,-211.895"/>
+<path fill="none" stroke="#404040" d="M505.063,-297.977C498.428,-281.365 491.522,-264.141 485,-248 480.27,-236.294 475.306,-224.071 470.343,-211.895"/>
 <polygon fill="none" stroke="#404040" points="470.326,-211.853 464.356,-207.808 465.793,-200.742 471.764,-204.787 470.326,-211.853"/>
 <text text-anchor="middle" x="507.5" y="-222" font-family="Helvetica,sans-Serif" font-size="10.00"> &#45;addressPins</text>
 </g>
