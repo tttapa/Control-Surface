@@ -183,6 +183,23 @@ TEST(Array, compDiv) {
     EXPECT_EQ(c, b);
 }
 
+// Negation
+
+TEST(Array, sliceNegate) {
+    Array<int, 5> a = {2, -4, -6, 8, 0};
+    Array<int, 4> b = {4, 6, -8, 0};
+    auto s1 = -a.slice<1, 4>();
+    EXPECT_EQ(s1, b);
+}
+
+TEST(Array, negate) {
+    Array<int, 5> a = {2, -4, -6, 8, 0};
+    Array<int, 5> b = {-2, 4, 6, -8, 0};
+    EXPECT_EQ(-a, b);
+}
+
+// Convert slice to array
+
 TEST(Array, sliceToArray) {
     Array<int, 5> a = {2, 4, 6, 8, 10};
     Array<int, 3> b = a.slice<1, 3>().asArray();

@@ -489,6 +489,24 @@ Array<T1, N1> &operator/=(Array<T1, N1> &a, T2 b) {
     return a;
 }
 
+// Negation ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+/// -Slice
+template <class T, size_t N, bool Reverse, bool Const>
+Array<decltype(-T{}), N>
+operator-(ArraySlice<T, N, Reverse, Const> a) {
+    Array<decltype(-T{}), N> result = {};
+    for (size_t i = 0; i < N; ++i)
+        result[i] = -a[i];
+    return result;
+}
+
+/// -Array
+template <class T, size_t N>
+Array<decltype(-T{}), N> operator-(const Array<T, N> &a) {
+    return -a.slice();
+}
+
 // Type aliases ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 /// An easy alias for two-dimensional Arrays.
