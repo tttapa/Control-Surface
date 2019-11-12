@@ -187,6 +187,65 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, M + N> cat(const Array<T, M> &a,
     return result;
 }
 
+template <class T1, class T2, size_t N1, size_t N2, size_t Start1,
+          size_t Start2, size_t End1, size_t End2, bool Const1, bool Const2>
+USE_CONSTEXPR_ARRAY_HELPERS
+    Array<decltype(T1{} * T2{}), End1 - Start1 + End2 - Start2 - 1>
+    distribute(const ArraySlice<T1, N1, Start1, End1, Const1> &a,
+               const ArraySlice<T2, N2, Start2, End2, Const2> &b) {
+    Array<decltype(T1{} * T2{}), End1 - Start1 + End2 - Start2 - 1> result = {};
+    for (size_t i = 0; i < End1 - Start1; ++i)
+        for (size_t j = 0; j < End2 - Start2; ++j)
+            result[i + j] += a[i] * b[j];
+    return result;
+}
+
+template <class T1, class T2, size_t N1, size_t N2, size_t Start1, size_t End1,
+          bool Const1>
+USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(T1{} * T2{}), End1 - Start1 + N2 - 1>
+distribute(const ArraySlice<T1, N1, Start1, End1, Const1> &a,
+           const Array<T2, N2> &b) {
+    return distribute(a, b.slice());
+}
+
+template <class T1, class T2, size_t N1, size_t N2, size_t Start2, size_t End2,
+          bool Const2>
+USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(T1{} * T2{}), N1 + End2 - Start2 - 1>
+distribute(const Array<T1, N1> &a,
+           const ArraySlice<T2, N2, Start2, End2, Const2> &b) {
+    return distribute(a.slice(), b);
+}
+
+template <class T1, class T2, size_t N1, size_t N2>
+USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(T1{} * T2{}), N1 + N2 - 1>
+distribute(const Array<T1, N1> &a, const Array<T2, N2> &b) {
+    return distribute(a.slice(), b.slice());
+}
+
 END_AH_NAMESPACE
 
 /// @}
+
+#ifndef ARDUINO
+
+#include <ostream>
+
+template <class T, size_t N>
+std::enable_if_t<std::is_arithmetic<T>::value, std::ostream &>
+operator<<(std::ostream &os, const AH::Array<T, N> &a) {
+    for (const T &el : a.template slice<0, N - 1>())
+        os << el << ", ";
+    os << a[N - 1];
+    return os;
+}
+
+template <class T, size_t N, size_t Start, size_t End, bool Const>
+std::enable_if_t<std::is_arithmetic<T>::value, std::ostream &>
+operator<<(std::ostream &os, const AH::ArraySlice<T, N, Start, End, Const> &a) {
+    for (const T &el : a.template slice<0, End - Start - 1>())
+        os << el << ", ";
+    os << a[End - Start - 1];
+    return os;
+}
+
+#endif

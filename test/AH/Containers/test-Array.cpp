@@ -232,3 +232,49 @@ TEST(fillArray, simple) {
     Array<S, 4> y = {{{2, 3.14f}, {2, 3.14f}, {2, 3.14f}, {2, 3.14f}}};
     EXPECT_EQ(x, y);
 }
+
+// -----------------------------------------------------------------------------
+
+TEST(Array, sliceDistributeSlice) {
+    Array<int, 9> a = {3, 1, -4, 2, 10, 12, 13, 14, 15};
+    Array<int, 20> b = {11, 3, 7, 11, 13};
+    Array<int, 6> c = {-12, -22, 0, 40, 136, 130};
+    auto s1 = a.slice<2, 5>();
+    auto s2 = b.slice<1, 5>();
+    auto s3 = distribute(s1, s2);
+    EXPECT_EQ(s3, c);
+}
+
+TEST(Array, sliceDistribute1) {
+    Array<int, 9> a = {3, 1, -4, 2, 10, 12, 13, 14, 15};
+    Array<int, 4> b = {3, 7, 11, 13};
+    Array<int, 6> c = {-12, -22, 0, 40, 136, 130};
+    auto s1 = a.slice<2, 5>();
+    auto s2 = distribute(s1, b);
+    EXPECT_EQ(s2, c);
+}
+
+TEST(Array, sliceDistribute2) {
+    Array<int, 9> a = {3, 1, 3, 7, 11, 13, 13, 14, 15};
+    Array<int, 3> b = {-4, 2, 10};
+    Array<int, 6> c = {-12, -22, 0, 40, 136, 130};
+    auto s1 = a.slice<2, 6>();
+    auto s2 = distribute(s1, b);
+    EXPECT_EQ(s2, c);
+}
+
+TEST(Array, distribute1) {
+    Array<int, 3> a = { -4, 2, 10};
+    Array<int, 4> b = {3, 7, 11, 13};
+    Array<int, 6> c = {-12, -22, 0, 40, 136, 130};
+    auto s2 = distribute(a, b);
+    EXPECT_EQ(s2, c);
+}
+
+TEST(Array, distribute2) {
+    Array<int, 4> a = {3, 7, 11, 13};
+    Array<int, 3> b = {-4, 2, 10};
+    Array<int, 6> c = {-12, -22, 0, 40, 136, 130};
+    auto s2 = distribute(a, b);
+    EXPECT_EQ(s2, c);
+}

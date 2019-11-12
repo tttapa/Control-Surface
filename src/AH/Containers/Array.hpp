@@ -161,6 +161,8 @@ class ArraySlice {
                                                    Array<T, N> &>::type;
     using ElementRefType =
         typename std::conditional<Const, const T &, T &>::type;
+    using ElementPtrType =
+        typename std::conditional<Const, const T *, T *>::type;
 
   public:
     /// Constructor
@@ -189,6 +191,12 @@ class ArraySlice {
         return array[Start + index];
     }
 
+    ElementPtrType begin() const { return array.begin() + Start; }
+    ElementPtrType end() const { return array.begin() + End; }
+
+    template <size_t NewStart, size_t NewEnd>
+    ArraySlice<T, N, Start + NewStart, Start + NewEnd, Const> slice() const;
+
   private:
     ArrayRefType &array;
 };
@@ -203,6 +211,15 @@ template <class T, size_t N>
 template <size_t Start, size_t End>
 inline ArraySlice<T, N, Start, End, true> Array<T, N>::slice() const {
     return ArraySlice<T, N, Start, End, true>{*this};
+}
+
+template <class T, size_t N, size_t Start, size_t End, bool Const>
+template <size_t NewStart, size_t NewEnd>
+ArraySlice<T, N, Start + NewStart, Start + NewEnd, Const>
+ArraySlice<T, N, Start, End, Const>::slice() const {
+    static_assert(NewStart < NewEnd, "");
+    static_assert(NewEnd < End - Start, "");
+    return array;
 }
 
 // Equality ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
