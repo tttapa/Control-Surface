@@ -64,8 +64,8 @@ TEST(Array, sliceAdd) {
     Array<int, 5> a = {1, 2, 3, 4, 5};
     Array<int, 5> b = {1, 2, 3, 4, 5};
     Array<int, 3> c = {4, 6, 8};
-    auto s1 = a.slice<0, 3>();
-    auto s2 = b.slice<2, 5>();
+    auto s1 = a.slice<0, 2>();
+    auto s2 = b.slice<2, 4>();
     EXPECT_EQ(s1 + s2, c);
 }
 
@@ -80,9 +80,9 @@ TEST(Array, sliceCompAdd) {
     Array<int, 5> a = {1, 2, 3, 4, 5};
     Array<int, 5> b = {1, 2, 3, 4, 5};
     Array<int, 5> c = {4, 6, 8, 4, 5};
-    auto s1 = a.slice<0, 3>();
-    auto s2 = b.slice<2, 5>();
-    auto s3 = c.slice<0, 3>();
+    auto s1 = a.slice<0, 2>();
+    auto s2 = b.slice<2, 4>();
+    auto s3 = c.slice<0, 2>();
     auto s4 = s1 += s2;
     EXPECT_EQ(s4, s3);
     EXPECT_EQ(a, c);
@@ -103,8 +103,8 @@ TEST(Array, sliceSub) {
     Array<int, 5> a = {1, 2, 3, 4, 5};
     Array<int, 5> b = {1, 2, 4, 8, 16};
     Array<int, 3> c = {-3, -6, -13};
-    auto s1 = a.slice<0, 3>();
-    auto s2 = b.slice<2, 5>();
+    auto s1 = a.slice<0, 2>();
+    auto s2 = b.slice<2, 4>();
     EXPECT_EQ(s1 - s2, c);
 }
 
@@ -120,7 +120,7 @@ TEST(Array, sub) {
 TEST(Array, sliceMult) {
     Array<int, 5> a = {1, 2, 3, 4, 5};
     Array<int, 3> b = {4, 6, 8};
-    auto s1 = a.slice<1, 4>();
+    auto s1 = a.slice<1, 3>();
     EXPECT_EQ(s1 * 2, b);
     EXPECT_EQ(2 * s1, b);
 }
@@ -135,9 +135,9 @@ TEST(Array, mult) {
 TEST(Array, sliceCompMult) {
     Array<int, 5> a = {1, 2, 3, 4, 5};
     Array<int, 5> b = {1, 4, 6, 8, 5};
-    auto s1 = a.slice<1, 4>();
+    auto s1 = a.slice<1, 3>();
     auto c = s1 *= 2;
-    auto s3 = b.slice<1, 4>();
+    auto s3 = b.slice<1, 3>();
     EXPECT_EQ(a, b);
     EXPECT_EQ(c, s3);
 }
@@ -155,7 +155,7 @@ TEST(Array, compMult) {
 TEST(Array, sliceDiv) {
     Array<int, 5> a = {2, 4, 6, 8, 10};
     Array<int, 3> b = {2, 3, 4};
-    auto s1 = a.slice<1, 4>();
+    auto s1 = a.slice<1, 3>();
     EXPECT_EQ(s1 / 2, b);
 }
 
@@ -168,9 +168,9 @@ TEST(Array, div) {
 TEST(Array, sliceCompDiv) {
     Array<int, 5> a = {1, 4, 6, 8, 5};
     Array<int, 5> b = {1, 2, 3, 4, 5};
-    auto s1 = a.slice<1, 4>();
+    auto s1 = a.slice<1, 3>();
     auto c = s1 /= 2;
-    auto s3 = b.slice<1, 4>();
+    auto s3 = b.slice<1, 3>();
     EXPECT_EQ(a, b);
     EXPECT_EQ(c, s3);
 }
@@ -185,7 +185,7 @@ TEST(Array, compDiv) {
 
 TEST(Array, sliceToArray) {
     Array<int, 5> a = {2, 4, 6, 8, 10};
-    Array<int, 3> b = a.slice<1, 4>().asArray();
+    Array<int, 3> b = a.slice<1, 3>().asArray();
     Array<int, 3> c = {4, 6, 8};
     EXPECT_EQ(b, c);
 }
@@ -239,8 +239,8 @@ TEST(Array, sliceDistributeSlice) {
     Array<int, 9> a = {3, 1, -4, 2, 10, 12, 13, 14, 15};
     Array<int, 20> b = {11, 3, 7, 11, 13};
     Array<int, 6> c = {-12, -22, 0, 40, 136, 130};
-    auto s1 = a.slice<2, 5>();
-    auto s2 = b.slice<1, 5>();
+    auto s1 = a.slice<2, 4>();
+    auto s2 = b.slice<1, 4>();
     auto s3 = distribute(s1, s2);
     EXPECT_EQ(s3, c);
 }
@@ -249,7 +249,7 @@ TEST(Array, sliceDistribute1) {
     Array<int, 9> a = {3, 1, -4, 2, 10, 12, 13, 14, 15};
     Array<int, 4> b = {3, 7, 11, 13};
     Array<int, 6> c = {-12, -22, 0, 40, 136, 130};
-    auto s1 = a.slice<2, 5>();
+    auto s1 = a.slice<2, 4>();
     auto s2 = distribute(s1, b);
     EXPECT_EQ(s2, c);
 }
@@ -258,13 +258,13 @@ TEST(Array, sliceDistribute2) {
     Array<int, 9> a = {3, 1, 3, 7, 11, 13, 13, 14, 15};
     Array<int, 3> b = {-4, 2, 10};
     Array<int, 6> c = {-12, -22, 0, 40, 136, 130};
-    auto s1 = a.slice<2, 6>();
+    auto s1 = a.slice<2, 5>();
     auto s2 = distribute(s1, b);
     EXPECT_EQ(s2, c);
 }
 
 TEST(Array, distribute1) {
-    Array<int, 3> a = { -4, 2, 10};
+    Array<int, 3> a = {-4, 2, 10};
     Array<int, 4> b = {3, 7, 11, 13};
     Array<int, 6> c = {-12, -22, 0, 40, 136, 130};
     auto s2 = distribute(a, b);
@@ -277,4 +277,45 @@ TEST(Array, distribute2) {
     Array<int, 6> c = {-12, -22, 0, 40, 136, 130};
     auto s2 = distribute(a, b);
     EXPECT_EQ(s2, c);
+}
+
+TEST(Array, reverseSlice) {
+    Array<int, 5> a = {1, 2, 3, 4, 5};
+    Array<int, 5> b = {5, 4, 3, 2, 1};
+    auto s1 = a.slice<4, 0>();
+    auto s2 = s1.slice<4, 0>();
+    EXPECT_EQ(s1, b);
+    EXPECT_EQ(s2, a);
+}
+
+TEST(Array, reverseSliceSlice) {
+    Array<int, 5> a = {1, 2, 3, 4, 5};
+    auto s1 = a.slice<4, 0>();
+    auto s2 = s1.slice<3, 1>();
+    auto s3 = a.slice<1, 3>();
+    EXPECT_EQ(s2, s3);
+}
+
+TEST(Array, reverseSliceIterator) {
+    Array<int, 5> a = {1, 2, 3, 4, 5};
+    Array<int, 5> b = a.slice<4, 0>();
+    auto s1 = b.slice();
+    std::reverse(std::begin(s1), std::end(s1));
+    EXPECT_EQ(s1, a);
+}
+
+TEST(Array, reverseSliceSort) {
+    Array<int, 5> a = {1, 5, 4, 3, 2};
+    Array<int, 5> b = {5, 4, 3, 2, 1};
+    auto s1 = a.slice<4, 0>();               // reverse view of a
+    std::sort(std::begin(s1), std::end(s1)); // sort reverse view
+    EXPECT_EQ(a, b); // a should be sorted in reverse order
+}
+
+TEST(Array, reverseSubSliceSort) {
+    Array<int, 7> a = {10, 1, 5, 4, 3, 2, 0};
+    Array<int, 7> b = {10, 5, 4, 3, 2, 1, 0};
+    auto s1 = a.slice<5, 1>();               // reverse subview of a
+    std::sort(std::begin(s1), std::end(s1)); // sort reverse subview
+    EXPECT_EQ(a, b); // middle of a should be sorted in reverse order
 }

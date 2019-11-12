@@ -55,7 +55,7 @@
 #ifndef _STL_HEAP_H
 #define _STL_HEAP_H 1
 
-// #include <debug/debug.h>
+#include "../debug/debug.h"
 #include "../bits/move.h"
 #include "../bits/predefined_ops.h"
 

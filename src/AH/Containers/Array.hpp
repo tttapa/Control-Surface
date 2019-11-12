@@ -4,14 +4,20 @@
 
 #include <AH/Error/Error.hpp>
 #include <AH/STL/type_traits> // conditional
+#include <AH/STL/iterator>
 #include <stddef.h>           // size_t
 
 BEGIN_AH_NAMESPACE
 
+template <class T>
+constexpr T abs_diff(const T &a, const T &b) {
+    return a < b ? b - a : a - b;
+}
+
 /// @addtogroup Containers
 /// @{
 
-template <class T, size_t N, size_t Start, size_t End, bool Const>
+template <class T, size_t N, bool Reverse, bool Const>
 class ArraySlice;
 
 /**
@@ -105,6 +111,7 @@ struct Array {
      */
     bool operator!=(const Array<T, N> &rhs) const { return !(*this == rhs); }
 
+  public:
     /**
      * @brief   Get a view on a slice of the Array.
      * 
@@ -114,26 +121,27 @@ struct Array {
      * @tparam  Start
      *          The start index of the slice.
      * @tparam  End
-     *          The end index of the slice (non inclusive).
+     *          The end index of the slice.
      */
-    template <size_t Start = 0, size_t End = N>
-    ArraySlice<T, N, Start, End, false> slice();
+    template <size_t Start = 0, size_t End = N - 1>
+    ArraySlice<T, abs_diff(Start, End) + 1, (End < Start), false> slice();
 
     /**
      * @brief   Get a read-only view on a slice of the Array.
      * @copydetails     slice()
      */
-    template <size_t Start = 0, size_t End = N>
-    ArraySlice<T, N, Start, End, true> slice() const;
+    template <size_t Start = 0, size_t End = N - 1>
+    ArraySlice<T, abs_diff(Start, End) + 1, (End < Start), true> slice() const;
 
     /**
      * @brief   Get a read-only view on a slice of the Array.
      * @copydetails     slice()
      */
-    template <size_t Start = 0, size_t End = N>
-    ArraySlice<T, N, Start, End, true> cslice() const {
-        const Array<T, N> &This = *this;
-        return This.slice();
+    template <size_t Start = 0, size_t End = N - 1>
+    ArraySlice<T, abs_diff(Start, End) + 1, (End < Start), true>
+    cslice() const {
+        const Array<T, N> *This = this;
+        return This->slice();
     }
 };
 
@@ -146,19 +154,14 @@ struct Array {
  * @tparam  T
  *          The type of elements of the Array.
  * @tparam  N 
- *          The size of the Array.
- * @tparam  Start
- *          The start index of the slice.
- * @tparam  End
- *          The end index of the slice (non inclusive).
+ *          The size of the slice.
+ * @tparam  Reverse
+ *          Whether the slice is reversed or not.
  * @tparam  Const
  *          Whether to save a read-only or mutable reference to the Array.
  */
-template <class T, size_t N, size_t Start = 0, size_t End = N,
-          bool Const = true>
+template <class T, size_t N, bool Reverse = false, bool Const = true>
 class ArraySlice {
-    using ArrayRefType = typename std::conditional<Const, const Array<T, N> &,
-                                                   Array<T, N> &>::type;
     using ElementRefType =
         typename std::conditional<Const, const T &, T &>::type;
     using ElementPtrType =
@@ -166,17 +169,62 @@ class ArraySlice {
 
   public:
     /// Constructor
-    ArraySlice(ArrayRefType array) : array{array} {}
+    ArraySlice(ElementPtrType array) : array{array} {}
 
     /// Implicit conversion from slice to new array (creates a copy).
-    operator Array<T, End - Start>() const { return asArray(); }
+    operator Array<T, N>() const { return asArray(); }
 
-    Array<T, End - Start> asArray() const {
-        Array<T, End - Start> slice = {};
-        for (size_t i = 0; i < End - Start; ++i)
-            slice[i] = array[Start + i];
+    Array<T, N> asArray() const {
+        Array<T, N> slice = {};
+        for (size_t i = 0; i < N; ++i)
+            slice[i] = (*this)[i];
         return slice;
     }
+
+    class Iterator {
+      public:
+        Iterator(ElementPtrType ptr) : ptr(ptr) {}
+
+        using difference_type = std::ptrdiff_t;
+        using value_type = T;
+        using pointer = ElementPtrType;
+        using reference = ElementRefType;
+        using iterator_category = std::random_access_iterator_tag;
+
+        bool operator!=(Iterator rhs) const { return ptr != rhs.ptr; }
+        bool operator==(Iterator rhs) const { return ptr == rhs.ptr; }
+
+        reference operator*() const { return *ptr; }
+
+        Iterator &operator++() {
+            Reverse ? --ptr : ++ptr;
+            return *this;
+        }
+
+        Iterator &operator--() {
+            Reverse ? ++ptr : --ptr;
+            return *this;
+        }
+
+        difference_type operator-(Iterator rhs) const {
+            return Reverse ? rhs.ptr - ptr : ptr - rhs.ptr;
+        }
+
+        Iterator operator+(difference_type rhs) const {
+            return Reverse ? ptr - rhs : ptr + rhs;
+        }
+
+        Iterator operator-(difference_type rhs) const {
+            return Reverse ? ptr + rhs : ptr - rhs;
+        }
+
+        bool operator<(Iterator rhs) const {
+            return Reverse ? rhs.ptr < ptr : ptr < rhs.ptr;
+        }
+
+      private:
+        ElementPtrType ptr;
+    };
 
     /**
      * @brief   Get the element at the given index.
@@ -188,81 +236,104 @@ class ArraySlice {
      *          The (zero-based) index of the element to return.
      */
     ElementRefType operator[](size_t index) const {
-        return array[Start + index];
+        if (index >= N) { // TODO
+            ERROR(F("Index out of bounds: ") << index << F(" ≥ ") << N, 0xEDEF);
+            index = N - 1;
+        }
+        if (Reverse)
+            return array[-index];
+        else
+            return array[index];
     }
 
-    ElementPtrType begin() const { return array.begin() + Start; }
-    ElementPtrType end() const { return array.begin() + End; }
+    Iterator begin() const {
+        if (Reverse)
+            return array;
+        else
+            return array;
+    }
 
-    template <size_t NewStart, size_t NewEnd>
-    ArraySlice<T, N, Start + NewStart, Start + NewEnd, Const> slice() const;
+    Iterator end() const {
+        if (Reverse)
+            return array - N;
+        else
+            return array + N;
+    }
+
+    template <size_t Start, size_t End>
+    ArraySlice<T, abs_diff(End, Start) + 1, Reverse ^ (End < Start), Const>
+    slice() const;
 
   private:
-    ArrayRefType &array;
+    ElementPtrType array;
 };
 
 template <class T, size_t N>
 template <size_t Start, size_t End>
-inline ArraySlice<T, N, Start, End, false> Array<T, N>::slice() {
-    return ArraySlice<T, N, Start, End, false>{*this};
+inline ArraySlice<T, abs_diff(Start, End) + 1, (End < Start), false>
+Array<T, N>::slice() {
+    static_assert(Start < N, "");
+    static_assert(End < N, "");
+    return &(*this)[Start];
 }
 
 template <class T, size_t N>
 template <size_t Start, size_t End>
-inline ArraySlice<T, N, Start, End, true> Array<T, N>::slice() const {
-    return ArraySlice<T, N, Start, End, true>{*this};
+inline ArraySlice<T, abs_diff(Start, End) + 1, (End < Start), true>
+Array<T, N>::slice() const {
+    static_assert(Start < N, "");
+    static_assert(End < N, "");
+    return &(*this)[Start];
 }
 
-template <class T, size_t N, size_t Start, size_t End, bool Const>
-template <size_t NewStart, size_t NewEnd>
-ArraySlice<T, N, Start + NewStart, Start + NewEnd, Const>
-ArraySlice<T, N, Start, End, Const>::slice() const {
-    static_assert(NewStart < NewEnd, "");
-    static_assert(NewEnd < End - Start, "");
-    return array;
+template <class T, size_t N, bool Reverse, bool Const>
+template <size_t Start, size_t End>
+ArraySlice<T, abs_diff(End, Start) + 1, Reverse ^ (End < Start), Const>
+ArraySlice<T, N, Reverse, Const>::slice() const {
+    static_assert(Start < N, "");
+    static_assert(End < N, "");
+    return &(*this)[Start];
 }
 
 // Equality ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 /// Slice == Slice
-template <class T1, class T2, size_t N1, size_t N2, size_t Start1,
-          size_t Start2, size_t End1, size_t End2, bool Const1, bool Const2>
-bool operator==(ArraySlice<T1, N1, Start1, End1, Const1> a,
-                ArraySlice<T2, N2, Start2, End2, Const2> b) {
-    static_assert(End1 - Start1 == End2 - Start2, "Error: sizes do not match");
-    for (size_t i = 0; i < End1 - Start1; ++i)
+template <class T1, class T2, size_t N1, size_t N2, bool Reverse1,
+          bool Reverse2, bool Const1, bool Const2>
+bool operator==(ArraySlice<T1, N1, Reverse1, Const1> a,
+                ArraySlice<T2, N2, Reverse2, Const2> b) {
+    static_assert(N1 == N2, "Error: sizes do not match");
+    for (size_t i = 0; i < N1; ++i)
         if (a[i] != b[i])
             return false;
     return true;
 }
 
 /// Array == Slice
-template <class T1, class T2, size_t N1, size_t N2, size_t Start2, size_t End2,
-          bool Const2>
+template <class T1, class T2, size_t N1, size_t N2, bool Reverse2, bool Const2>
 bool operator==(const Array<T1, N1> &a,
-                ArraySlice<T2, N2, Start2, End2, Const2> b) {
+                ArraySlice<T2, N2, Reverse2, Const2> b) {
     return a.slice() == b;
 }
 
 /// Slice == Array
-template <class T1, class T2, size_t N1, size_t N2, size_t Start1, size_t End1,
-          bool Const1>
-bool operator==(ArraySlice<T2, N2, Start1, End1, Const1> a,
-                const Array<T1, N1> &b) {
+template <class T1, class T2, size_t N1, size_t N2, bool Reverse1, bool Const1>
+bool operator==(ArraySlice<T1, N1, Reverse1, Const1> a,
+                const Array<T2, N2> &b) {
     return a == b.slice();
 }
 
 // Addition ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 /// Slice + Slice
-template <class T1, class T2, size_t N1, size_t N2, size_t Start1,
-          size_t Start2, size_t End1, size_t End2, bool Const1, bool Const2>
-Array<decltype(T1{} + T2{}), End1 - Start1>
-operator+(ArraySlice<T1, N1, Start1, End1, Const1> a,
-          ArraySlice<T2, N2, Start2, End2, Const2> b) {
-    static_assert(End1 - Start1 == End2 - Start2, "Error: sizes do not match");
-    Array<decltype(T1{} + T2{}), End1 - Start1> result = {};
-    for (size_t i = 0; i < End1 - Start1; ++i)
+template <class T1, class T2, size_t N1, size_t N2, bool Reverse1,
+          bool Reverse2, bool Const1, bool Const2>
+Array<decltype(T1{} + T2{}), N1>
+operator+(ArraySlice<T1, N1, Reverse1, Const1> a,
+          ArraySlice<T2, N2, Reverse2, Const2> b) {
+    static_assert(N1 == N2, "Error: sizes do not match");
+    Array<decltype(T1{} + T2{}), N1> result = {};
+    for (size_t i = 0; i < N1; ++i)
         result[i] = a[i] + b[i];
     return result;
 }
@@ -275,13 +346,13 @@ Array<decltype(T1{} + T2{}), N1> operator+(const Array<T1, N1> &a,
 }
 
 /// Slice += Slice
-template <class T1, class T2, size_t N1, size_t N2, size_t Start1,
-          size_t Start2, size_t End1, size_t End2, bool Const1, bool Const2>
-const ArraySlice<T1, N1, Start1, End1, Const1> &
-operator+=(const ArraySlice<T1, N1, Start1, End1, Const1> &a,
-           const ArraySlice<T2, N2, Start2, End2, Const2> &b) {
-    static_assert(End1 - Start1 == End2 - Start2, "Error: sizes do not match");
-    for (size_t i = 0; i < End1 - Start1; ++i)
+template <class T1, class T2, size_t N1, size_t N2, bool Reverse1,
+          bool Reverse2, bool Const1, bool Const2>
+const ArraySlice<T1, N1, Reverse1, Const1> &
+operator+=(const ArraySlice<T1, N1, Reverse1, Const1> &a,
+           const ArraySlice<T2, N2, Reverse2, Const2> &b) {
+    static_assert(N1 == N2, "Error: sizes do not match");
+    for (size_t i = 0; i < N1; ++i)
         a[i] += b[i];
     return a;
 }
@@ -296,14 +367,14 @@ Array<T1, N1> &operator+=(Array<T1, N1> &a, const Array<T2, N2> &b) {
 // Subtraction :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 /// Slice - Slice
-template <class T1, class T2, size_t N1, size_t N2, size_t Start1,
-          size_t Start2, size_t End1, size_t End2, bool Const1, bool Const2>
-Array<decltype(T1{} - T2{}), End1 - Start1>
-operator-(ArraySlice<T1, N1, Start1, End1, Const1> a,
-          ArraySlice<T2, N2, Start2, End2, Const2> b) {
-    static_assert(End1 - Start1 == End2 - Start2, "Error: sizes do not match");
-    Array<decltype(T1{} - T2{}), End1 - Start1> result = {};
-    for (size_t i = 0; i < End1 - Start1; ++i)
+template <class T1, class T2, size_t N1, size_t N2, bool Reverse1,
+          bool Reverse2, bool Const1, bool Const2>
+Array<decltype(T1{} - T2{}), N1>
+operator-(ArraySlice<T1, N1, Reverse1, Const1> a,
+          ArraySlice<T2, N2, Reverse2, Const2> b) {
+    static_assert(N1 == N2, "Error: sizes do not match");
+    Array<decltype(T1{} - T2{}), N1> result = {};
+    for (size_t i = 0; i < N1; ++i)
         result[i] = a[i] - b[i];
     return result;
 }
@@ -316,13 +387,13 @@ Array<decltype(T1{} - T2{}), N1> operator-(const Array<T1, N1> &a,
 }
 
 /// Slice -= Slice
-template <class T1, class T2, size_t N1, size_t N2, size_t Start1,
-          size_t Start2, size_t End1, size_t End2, bool Const1, bool Const2>
-const ArraySlice<T1, N1, Start1, End1, Const1> &
-operator-=(const ArraySlice<T1, N1, Start1, End1, Const1> &a,
-           const ArraySlice<T2, N2, Start2, End2, Const2> &b) {
-    static_assert(End1 - Start1 == End2 - Start2, "Error: sizes do not match");
-    for (size_t i = 0; i < End1 - Start1; ++i)
+template <class T1, class T2, size_t N1, size_t N2, bool Reverse1,
+          bool Reverse2, bool Const1, bool Const2>
+const ArraySlice<T1, N1, Reverse1, Const1> &
+operator-=(const ArraySlice<T1, N1, Reverse1, Const1> &a,
+           const ArraySlice<T2, N2, Reverse2, Const2> &b) {
+    static_assert(N1 == N2, "Error: sizes do not match");
+    for (size_t i = 0; i < N1; ++i)
         a[i] -= b[i];
     return a;
 }
@@ -337,12 +408,11 @@ Array<T1, N1> &operator-=(Array<T1, N1> &a, const Array<T2, N2> &b) {
 // Scalar Multiplication :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 /// Slice * Scalar
-template <class T1, class T2, size_t N1, size_t Start1, size_t End1,
-          bool Const1>
-Array<decltype(T1{} * T2{}), End1 - Start1>
-operator*(ArraySlice<T1, N1, Start1, End1, Const1> a, T2 b) {
-    Array<decltype(T1{} * T2{}), End1 - Start1> result = {};
-    for (size_t i = 0; i < End1 - Start1; ++i)
+template <class T1, class T2, size_t N1, bool Reverse1, bool Const1>
+Array<decltype(T1{} * T2{}), N1>
+operator*(ArraySlice<T1, N1, Reverse1, Const1> a, T2 b) {
+    Array<decltype(T1{} * T2{}), N1> result = {};
+    for (size_t i = 0; i < N1; ++i)
         result[i] = a[i] * b;
     return result;
 }
@@ -354,12 +424,11 @@ Array<decltype(T1{} * T2{}), N1> operator*(const Array<T1, N1> &a, T2 b) {
 }
 
 /// Scalar * Slice
-template <class T1, class T2, size_t N2, size_t Start2, size_t End2,
-          bool Const2>
-Array<decltype(T1{} * T2{}), End2 - Start2>
-operator*(T1 a, ArraySlice<T2, N2, Start2, End2, Const2> b) {
-    Array<decltype(T1{} * T2{}), End2 - Start2> result = {};
-    for (size_t i = 0; i < End2 - Start2; ++i)
+template <class T1, class T2, size_t N2, bool Reverse2, bool Const2>
+Array<decltype(T1{} * T2{}), N2>
+operator*(T1 a, ArraySlice<T2, N2, Reverse2, Const2> b) {
+    Array<decltype(T1{} * T2{}), N2> result = {};
+    for (size_t i = 0; i < N2; ++i)
         result[i] = a * b[i];
     return result;
 }
@@ -371,11 +440,10 @@ Array<decltype(T1{} * T2{}), N2> operator*(T1 a, const Array<T2, N2> &b) {
 }
 
 /// Slice *= Scalar
-template <class T1, class T2, size_t N1, size_t Start1, size_t End1,
-          bool Const1>
-const ArraySlice<T1, N1, Start1, End1, Const1> &
-operator*=(const ArraySlice<T1, N1, Start1, End1, Const1> &a, T2 b) {
-    for (size_t i = 0; i < End1 - Start1; ++i)
+template <class T1, class T2, size_t N1, bool Reverse1, bool Const1>
+const ArraySlice<T1, N1, Reverse1, Const1> &
+operator*=(const ArraySlice<T1, N1, Reverse1, Const1> &a, T2 b) {
+    for (size_t i = 0; i < N1; ++i)
         a[i] *= b;
     return a;
 }
@@ -390,12 +458,11 @@ Array<T1, N1> &operator*=(Array<T1, N1> &a, T2 b) {
 // Scalar Division :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 /// Slice / Scalar
-template <class T1, class T2, size_t N1, size_t Start1, size_t End1,
-          bool Const1>
-Array<decltype(T1{} / T2{}), End1 - Start1>
-operator/(ArraySlice<T1, N1, Start1, End1, Const1> a, T2 b) {
-    Array<decltype(T1{} / T2{}), End1 - Start1> result = {};
-    for (size_t i = 0; i < End1 - Start1; ++i)
+template <class T1, class T2, size_t N1, bool Reverse1, bool Const1>
+Array<decltype(T1{} / T2{}), N1>
+operator/(ArraySlice<T1, N1, Reverse1, Const1> a, T2 b) {
+    Array<decltype(T1{} / T2{}), N1> result = {};
+    for (size_t i = 0; i < N1; ++i)
         result[i] = a[i] / b;
     return result;
 }
@@ -407,11 +474,10 @@ Array<decltype(T1{} / T2{}), N1> operator/(const Array<T1, N1> &a, T2 b) {
 }
 
 /// Slice /= Scalar
-template <class T1, class T2, size_t N1, size_t Start1, size_t End1,
-          bool Const1>
-const ArraySlice<T1, N1, Start1, End1, Const1> &
-operator/=(const ArraySlice<T1, N1, Start1, End1, Const1> &a, T2 b) {
-    for (size_t i = 0; i < End1 - Start1; ++i)
+template <class T1, class T2, size_t N1, bool Reverse1, bool Const1>
+const ArraySlice<T1, N1, Reverse1, Const1> &
+operator/=(const ArraySlice<T1, N1, Reverse1, Const1> &a, T2 b) {
+    for (size_t i = 0; i < N1; ++i)
         a[i] /= b;
     return a;
 }

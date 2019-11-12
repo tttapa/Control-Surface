@@ -66,7 +66,7 @@
 #include "../bits/stl_iterator_base_funcs.h"
 #include "../bits/stl_iterator.h"
 #include "../bits/concept_check.h"
-// #include <debug/debug.h>
+#include "../debug/debug.h"
 #include "../bits/move.h" // For std::swap and _GLIBCXX_MOVE
 #include "../bits/predefined_ops.h"
 
