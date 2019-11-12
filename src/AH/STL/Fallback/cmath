@@ -68,7 +68,7 @@ enum
 # define FP_NORMAL 4
       FP_NORMAL
   };
-#endif
+#endif // __AVR__
 
 // Get rid of those macros defined in <math.h> in lieu of real functions.
 #undef div
@@ -1248,6 +1248,139 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
 #else // __AVR__
   
   using ::round;
+
+  constexpr double
+  acosh(double __x)
+  { return __builtin_acosh(__x); }
+  
+  constexpr double
+  asinh(double __x)
+  { return __builtin_asinh(__x); }
+
+  constexpr double
+  atanh(double __x)
+  { return __builtin_atanh(__x); }
+
+  constexpr double
+  cbrt(double __x)
+  { return __builtin_cbrt(__x); }
+
+  constexpr double
+  copysign(double __x, double __y)
+  { return __builtin_copysign(__x, __y); }
+
+  constexpr double
+  erf(double __x)
+  { return __builtin_erf(__x); }
+
+  constexpr double
+  erfc(double __x)
+  { return __builtin_erfc(__x); }
+
+  constexpr double
+  exp2(double __x)
+  { return __builtin_exp2(__x); }
+
+  constexpr double
+  expm1(double __x)
+  { return __builtin_expm1(__x); }
+
+  constexpr double
+  fdim(double __x, double __y)
+  { return __builtin_fdim(__x, __y); }
+
+  constexpr double
+  fma(double __x, double __y, double __z)
+  { return __builtin_fma(__x, __y, __z); }
+
+  constexpr double
+  fmax(double __x, double __y)
+  { return __builtin_fmax(__x, __y); }
+
+  constexpr double
+  fmin(double __x, double __y)
+  { return __builtin_fmin(__x, __y); }
+
+  constexpr double
+  hypot(double __x, double __y)
+  { return __builtin_hypot(__x, __y); }
+
+  constexpr double
+  ilogb(double __x)
+  { return __builtin_ilogb(__x); }
+
+  constexpr double
+  lgamma(double __x)
+  { return __builtin_lgamma(__x); }
+
+  constexpr long long
+  llrint(double __x)
+  { return __builtin_llrint(__x); }
+
+  constexpr long long
+  llround(double __x)
+  { return __builtin_llround(__x); }
+
+  constexpr double
+  log1p(double __x)
+  { return __builtin_log1p(__x); }
+
+  constexpr double
+  log2(double __x)
+  { return __builtin_log2(__x); }
+
+  constexpr double
+  logb(double __x)
+  { return __builtin_logb(__x); }
+
+  constexpr long
+  lrint(double __x)
+  { return __builtin_lrint(__x); }
+
+  constexpr long
+  lround(double __x)
+  { return __builtin_lround(__x); }
+
+  constexpr double
+  nearbyint(double __x)
+  { return __builtin_nearbyint(__x); }
+
+  constexpr double
+  nextafter(double __x, double __y)
+  { return __builtin_nextafter(__x, __y); }
+
+  constexpr double
+  nexttoward(double __x, double __y)
+  { return __builtin_nexttoward(__x, __y); }
+
+  constexpr double
+  remainder(double __x, double __y)
+  { return __builtin_remainder(__x, __y); }
+
+  constexpr double
+  remquo(double __x, double __y, int * __pquo)
+  { return __builtin_remquo(__x, __y, __pquo); }
+
+  constexpr double
+  rint(double __x)
+  { return __builtin_rint(__x); }
+
+  constexpr double
+  scalbln(double __x, long __ex)
+  { return __builtin_scalbln(__x, __ex); }
+
+  constexpr double
+  scalbn(double __x, int __ex)
+  { return __builtin_scalbn(__x, __ex); }
+
+  constexpr double
+  tgamma(double __x)
+  { return __builtin_tgamma(__x); }
+
+  constexpr double
+  trunc(double __x)
+  { return __builtin_trunc(__x); }
+
 
 #endif // __AVR__
 
