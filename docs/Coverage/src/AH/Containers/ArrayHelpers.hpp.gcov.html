@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 7af469c8d1838a54ffd56c17f41992241b1e5f61 - src/AH/Containers/ArrayHelpers.hpp</title>
+  <title>LCOV - 028dd6d4af623a32bbdc8db9c17aa8f0078ef20e - src/AH/Containers/ArrayHelpers.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,20 +28,20 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">7af469c8d1838a54ffd56c17f41992241b1e5f61</td>
+            <td class="headerValue">028dd6d4af623a32bbdc8db9c17aa8f0078ef20e</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">23</td>
-            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">33</td>
+            <td class="headerCovTableEntry">33</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-11 21:46:09</td>
+            <td class="headerValue">2019-11-13 00:00:03</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">13</td>
-            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntry">22</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -257,9 +257,81 @@
 <a name="187"><span class="lineNum">     187 </span>            :     return result;</a>
 <a name="188"><span class="lineNum">     188 </span>            : }</a>
 <a name="189"><span class="lineNum">     189 </span>            : </a>
-<a name="190"><span class="lineNum">     190 </span>            : END_AH_NAMESPACE</a>
-<a name="191"><span class="lineNum">     191 </span>            : </a>
-<a name="192"><span class="lineNum">     192 </span>            : /// @}</a>
+<a name="190"><span class="lineNum">     190 </span>            : template &lt;class T1, class T2, size_t N1, size_t N2, bool Reverse1,</a>
+<a name="191"><span class="lineNum">     191 </span>            :           bool Reverse2, bool Const1, bool Const2&gt;</a>
+<a name="192"><span class="lineNum">     192 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;decltype(T1{} * T2{}), N1 + N2 - 1&gt;</a>
+<a name="193"><span class="lineNum">     193 </span><span class="lineCov">          5 : distribute(const ArraySlice&lt;T1, N1, Reverse1, Const1&gt; &amp;a,</span></a>
+<a name="194"><span class="lineNum">     194 </span>            :            const ArraySlice&lt;T2, N2, Reverse2, Const2&gt; &amp;b) {</a>
+<a name="195"><span class="lineNum">     195 </span><span class="lineCov">          5 :     Array&lt;decltype(T1{} * T2{}), N1 + N2 - 1&gt; result = {};</span></a>
+<a name="196"><span class="lineNum">     196 </span><span class="lineCov">         22 :     for (size_t i = 0; i &lt; N1; ++i)</span></a>
+<a name="197"><span class="lineNum">     197 </span><span class="lineCov">         77 :         for (size_t j = 0; j &lt; N2; ++j)</span></a>
+<a name="198"><span class="lineNum">     198 </span><span class="lineCov">         77 :             result[i + j] += a[i] * b[j];</span></a>
+<a name="199"><span class="lineNum">     199 </span><span class="lineCov">          5 :     return result;</span></a>
+<a name="200"><span class="lineNum">     200 </span>            : }</a>
+<a name="201"><span class="lineNum">     201 </span>            : </a>
+<a name="202"><span class="lineNum">     202 </span>            : template &lt;class T1, class T2, size_t N1, size_t N2, bool Reverse1, bool Const1&gt;</a>
+<a name="203"><span class="lineNum">     203 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;decltype(T1{} * T2{}), N1 + N2 - 1&gt;</a>
+<a name="204"><span class="lineNum">     204 </span><span class="lineCov">          2 : distribute(const ArraySlice&lt;T1, N1, Reverse1, Const1&gt; &amp;a,</span></a>
+<a name="205"><span class="lineNum">     205 </span>            :            const Array&lt;T2, N2&gt; &amp;b) {</a>
+<a name="206"><span class="lineNum">     206 </span><span class="lineCov">          2 :     return distribute(a, b.slice());</span></a>
+<a name="207"><span class="lineNum">     207 </span>            : }</a>
+<a name="208"><span class="lineNum">     208 </span>            : </a>
+<a name="209"><span class="lineNum">     209 </span>            : template &lt;class T1, class T2, size_t N1, size_t N2, bool Reverse2, bool Const2&gt;</a>
+<a name="210"><span class="lineNum">     210 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;decltype(T1{} * T2{}), N1 + N2 - 1&gt;</a>
+<a name="211"><span class="lineNum">     211 </span>            : distribute(const Array&lt;T1, N1&gt; &amp;a,</a>
+<a name="212"><span class="lineNum">     212 </span>            :            const ArraySlice&lt;T2, N2, Reverse2, Const2&gt; &amp;b) {</a>
+<a name="213"><span class="lineNum">     213 </span>            :     return distribute(a.slice(), b);</a>
+<a name="214"><span class="lineNum">     214 </span>            : }</a>
+<a name="215"><span class="lineNum">     215 </span>            : </a>
+<a name="216"><span class="lineNum">     216 </span>            : template &lt;class T1, class T2, size_t N1, size_t N2&gt;</a>
+<a name="217"><span class="lineNum">     217 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;decltype(T1{} * T2{}), N1 + N2 - 1&gt;</a>
+<a name="218"><span class="lineNum">     218 </span><span class="lineCov">          2 : distribute(const Array&lt;T1, N1&gt; &amp;a, const Array&lt;T2, N2&gt; &amp;b) {</span></a>
+<a name="219"><span class="lineNum">     219 </span><span class="lineCov">          2 :     return distribute(a.slice(), b.slice());</span></a>
+<a name="220"><span class="lineNum">     220 </span>            : }</a>
+<a name="221"><span class="lineNum">     221 </span>            : </a>
+<a name="222"><span class="lineNum">     222 </span>            : END_AH_NAMESPACE</a>
+<a name="223"><span class="lineNum">     223 </span>            : </a>
+<a name="224"><span class="lineNum">     224 </span>            : /// @}</a>
+<a name="225"><span class="lineNum">     225 </span>            : </a>
+<a name="226"><span class="lineNum">     226 </span>            : #ifndef ARDUINO</a>
+<a name="227"><span class="lineNum">     227 </span>            : </a>
+<a name="228"><span class="lineNum">     228 </span>            : #include &lt;ostream&gt;</a>
+<a name="229"><span class="lineNum">     229 </span>            : </a>
+<a name="230"><span class="lineNum">     230 </span>            : template &lt;class T, size_t N, bool Reverse, bool Const&gt;</a>
+<a name="231"><span class="lineNum">     231 </span>            : std::enable_if_t&lt;std::is_arithmetic&lt;T&gt;::value, std::ostream &amp;&gt;</a>
+<a name="232"><span class="lineNum">     232 </span>            : operator&lt;&lt;(std::ostream &amp;os, const AH::ArraySlice&lt;T, N, Reverse, Const&gt; &amp;a) {</a>
+<a name="233"><span class="lineNum">     233 </span>            :     for (const T &amp;el : a.template slice&lt;0, N - 2&gt;())</a>
+<a name="234"><span class="lineNum">     234 </span>            :         os &lt;&lt; el &lt;&lt; &quot;, &quot;;</a>
+<a name="235"><span class="lineNum">     235 </span>            :     os &lt;&lt; a[N - 1];</a>
+<a name="236"><span class="lineNum">     236 </span>            :     return os;</a>
+<a name="237"><span class="lineNum">     237 </span>            : }</a>
+<a name="238"><span class="lineNum">     238 </span>            : </a>
+<a name="239"><span class="lineNum">     239 </span>            : template &lt;class T, size_t N&gt;</a>
+<a name="240"><span class="lineNum">     240 </span>            : std::enable_if_t&lt;std::is_arithmetic&lt;T&gt;::value, std::ostream &amp;&gt;</a>
+<a name="241"><span class="lineNum">     241 </span>            : operator&lt;&lt;(std::ostream &amp;os, const AH::Array&lt;T, N&gt; &amp;a) {</a>
+<a name="242"><span class="lineNum">     242 </span>            :     return os &lt;&lt; a.slice();</a>
+<a name="243"><span class="lineNum">     243 </span>            : }</a>
+<a name="244"><span class="lineNum">     244 </span>            : </a>
+<a name="245"><span class="lineNum">     245 </span>            : #else</a>
+<a name="246"><span class="lineNum">     246 </span>            : </a>
+<a name="247"><span class="lineNum">     247 </span>            : #include &lt;AH/PrintStream/PrintStream.hpp&gt;</a>
+<a name="248"><span class="lineNum">     248 </span>            : </a>
+<a name="249"><span class="lineNum">     249 </span>            : template &lt;class T, size_t N, bool Reverse, bool Const&gt;</a>
+<a name="250"><span class="lineNum">     250 </span>            : std::enable_if_t&lt;std::is_arithmetic&lt;T&gt;::value, Print &amp;&gt;</a>
+<a name="251"><span class="lineNum">     251 </span>            : operator&lt;&lt;(Print &amp;os, const AH::ArraySlice&lt;T, N, Reverse, Const&gt; &amp;a) {</a>
+<a name="252"><span class="lineNum">     252 </span>            :     for (const T &amp;el : a.template slice&lt;0, N - 2&gt;())</a>
+<a name="253"><span class="lineNum">     253 </span>            :         os &lt;&lt; el &lt;&lt; &quot;, &quot;;</a>
+<a name="254"><span class="lineNum">     254 </span>            :     os &lt;&lt; a[N - 1];</a>
+<a name="255"><span class="lineNum">     255 </span>            :     return os;</a>
+<a name="256"><span class="lineNum">     256 </span>            : }</a>
+<a name="257"><span class="lineNum">     257 </span>            : </a>
+<a name="258"><span class="lineNum">     258 </span>            : template &lt;class T, size_t N&gt;</a>
+<a name="259"><span class="lineNum">     259 </span>            : std::enable_if_t&lt;std::is_arithmetic&lt;T&gt;::value, Print &amp;&gt;</a>
+<a name="260"><span class="lineNum">     260 </span>            : operator&lt;&lt;(Print &amp;os, const AH::Array&lt;T, N&gt; &amp;a) {</a>
+<a name="261"><span class="lineNum">     261 </span>            :     return os &lt;&lt; a.slice();</a>
+<a name="262"><span class="lineNum">     262 </span>            : }</a>
+<a name="263"><span class="lineNum">     263 </span>            : </a>
+<a name="264"><span class="lineNum">     264 </span>            : #endif</a>
 </pre>
       </td>
     </tr>

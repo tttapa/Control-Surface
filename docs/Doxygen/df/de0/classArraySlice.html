@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: ArraySlice&lt; T, N, Start, End, Const &gt; Class Template Reference</title>
+<title>Arduino Helpers: ArraySlice&lt; T, N, Reverse, Const &gt; Class Template Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -71,12 +71,13 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-types">Private Types</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="../../d0/d1b/classArraySlice-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ArraySlice&lt; T, N, Start, End, Const &gt; Class Template Reference<div class="ingroups"><a class="el" href="../../db/d50/group__Containers.html">Containers</a></div></div>  </div>
+<div class="title">ArraySlice&lt; T, N, Reverse, Const &gt; Class Template Reference<div class="ingroups"><a class="el" href="../../db/d50/group__Containers.html">Containers</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -85,69 +86,80 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Collaboration diagram for ArraySlice&lt; T, N, Start, End, Const &gt;:</div>
+Collaboration diagram for ArraySlice&lt; T, N, Reverse, Const &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d1/d00/classArraySlice__coll__graph.svg" width="171" height="162"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d1/d00/classArraySlice__coll__graph.svg" width="192" height="191"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d1a/classArraySlice_1_1Iterator.html">Iterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7246525cbb676f82262b4484af6624ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#a7246525cbb676f82262b4484af6624ff">ArraySlice</a> (<a class="el" href="../../df/de0/classArraySlice.html#a6a7c3fa67e8eb750f5e1f280ac6ef6a7">ArrayRefType</a> <a class="el" href="../../df/de0/classArraySlice.html#a301dffa6fe45a511343e0ba7f169fa17">array</a>)</td></tr>
-<tr class="memdesc:a7246525cbb676f82262b4484af6624ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="../../df/de0/classArraySlice.html#a7246525cbb676f82262b4484af6624ff">More...</a><br /></td></tr>
-<tr class="separator:a7246525cbb676f82262b4484af6624ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec7b646182363a2e16befbb06dc482d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#aec7b646182363a2e16befbb06dc482d4">operator Array&lt; T, End - Start &gt;</a> () const</td></tr>
-<tr class="memdesc:aec7b646182363a2e16befbb06dc482d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implicit conversion from slice to new array (creates a copy).  <a href="../../df/de0/classArraySlice.html#aec7b646182363a2e16befbb06dc482d4">More...</a><br /></td></tr>
-<tr class="separator:aec7b646182363a2e16befbb06dc482d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd2694f37752957a68a53fb933d87730"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, End - Start &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#afd2694f37752957a68a53fb933d87730">asArray</a> () const</td></tr>
-<tr class="separator:afd2694f37752957a68a53fb933d87730"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a371449e4f94f84857e199ab0389b8a4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../df/de0/classArraySlice.html#a3f9f34cf6c014b8d0d732455c81541b8">ElementRefType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#a371449e4f94f84857e199ab0389b8a4a">operator[]</a> (size_t index) const</td></tr>
-<tr class="memdesc:a371449e4f94f84857e199ab0389b8a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the element at the given index.  <a href="../../df/de0/classArraySlice.html#a371449e4f94f84857e199ab0389b8a4a">More...</a><br /></td></tr>
-<tr class="separator:a371449e4f94f84857e199ab0389b8a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bdcc8a59ae6862255202e68dd76bc67"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#a0bdcc8a59ae6862255202e68dd76bc67">ArraySlice</a> (<a class="el" href="../../df/de0/classArraySlice.html#acd13b56ec45f9aee8638548c137a2094">ElementPtrType</a> <a class="el" href="../../df/de0/classArraySlice.html#ad8de72634b6cff93fe558c88458dc3d2">array</a>)</td></tr>
+<tr class="memdesc:a0bdcc8a59ae6862255202e68dd76bc67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="../../df/de0/classArraySlice.html#a0bdcc8a59ae6862255202e68dd76bc67">More...</a><br /></td></tr>
+<tr class="separator:a0bdcc8a59ae6862255202e68dd76bc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b242ed880de8cc3fdb2821c3321c514"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#a8b242ed880de8cc3fdb2821c3321c514">operator Array&lt; T, N &gt;</a> () const</td></tr>
+<tr class="memdesc:a8b242ed880de8cc3fdb2821c3321c514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implicit conversion from slice to new array (creates a copy).  <a href="../../df/de0/classArraySlice.html#a8b242ed880de8cc3fdb2821c3321c514">More...</a><br /></td></tr>
+<tr class="separator:a8b242ed880de8cc3fdb2821c3321c514"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56df6a9437528074885f56d614c0f098"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, N &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#a56df6a9437528074885f56d614c0f098">asArray</a> () const</td></tr>
+<tr class="separator:a56df6a9437528074885f56d614c0f098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af80b2761c5ddb961dc4e06f2fece8f26"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../df/de0/classArraySlice.html#ab80039ba9df0bef46ed94bc8409ff755">ElementRefType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#af80b2761c5ddb961dc4e06f2fece8f26">operator[]</a> (size_t index) const</td></tr>
+<tr class="memdesc:af80b2761c5ddb961dc4e06f2fece8f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the element at the given index.  <a href="../../df/de0/classArraySlice.html#af80b2761c5ddb961dc4e06f2fece8f26">More...</a><br /></td></tr>
+<tr class="separator:af80b2761c5ddb961dc4e06f2fece8f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27d143321d49e1c607dc0e37ce888909"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d1a/classArraySlice_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#a27d143321d49e1c607dc0e37ce888909">begin</a> () const</td></tr>
+<tr class="separator:a27d143321d49e1c607dc0e37ce888909"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeafd03877a860e21203d3245b0a404ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d1a/classArraySlice_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#aeafd03877a860e21203d3245b0a404ae">end</a> () const</td></tr>
+<tr class="separator:aeafd03877a860e21203d3245b0a404ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9de26bd1c36d3937bfa927f156f07463"><td class="memTemplParams" colspan="2">template&lt;size_t Start, size_t End&gt; </td></tr>
+<tr class="memitem:a9de26bd1c36d3937bfa927f156f07463"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, <a class="el" href="../../de/d76/Array_8hpp.html#ae5bf4063671aea64f62cbfeb1f5f63d6">abs_diff</a>(End, Start)+1, Reverse ^(End&lt; Start), Const &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#a9de26bd1c36d3937bfa927f156f07463">slice</a> () const</td></tr>
+<tr class="separator:a9de26bd1c36d3937bfa927f156f07463"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
 Private Types</h2></td></tr>
-<tr class="memitem:a6a7c3fa67e8eb750f5e1f280ac6ef6a7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#a6a7c3fa67e8eb750f5e1f280ac6ef6a7">ArrayRefType</a> = typename std::conditional&lt; Const, const <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, N &gt; &amp;, <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, N &gt; &amp; &gt;::type</td></tr>
-<tr class="separator:a6a7c3fa67e8eb750f5e1f280ac6ef6a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f9f34cf6c014b8d0d732455c81541b8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#a3f9f34cf6c014b8d0d732455c81541b8">ElementRefType</a> = typename std::conditional&lt; Const, const T &amp;, T &amp; &gt;::type</td></tr>
-<tr class="separator:a3f9f34cf6c014b8d0d732455c81541b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab80039ba9df0bef46ed94bc8409ff755"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#ab80039ba9df0bef46ed94bc8409ff755">ElementRefType</a> = typename std::conditional&lt; Const, const T &amp;, T &amp; &gt;::type</td></tr>
+<tr class="separator:ab80039ba9df0bef46ed94bc8409ff755"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd13b56ec45f9aee8638548c137a2094"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#acd13b56ec45f9aee8638548c137a2094">ElementPtrType</a> = typename std::conditional&lt; Const, const T *, T * &gt;::type</td></tr>
+<tr class="separator:acd13b56ec45f9aee8638548c137a2094"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a301dffa6fe45a511343e0ba7f169fa17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../df/de0/classArraySlice.html#a6a7c3fa67e8eb750f5e1f280ac6ef6a7">ArrayRefType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#a301dffa6fe45a511343e0ba7f169fa17">array</a></td></tr>
-<tr class="separator:a301dffa6fe45a511343e0ba7f169fa17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8de72634b6cff93fe558c88458dc3d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../df/de0/classArraySlice.html#acd13b56ec45f9aee8638548c137a2094">ElementPtrType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de0/classArraySlice.html#ad8de72634b6cff93fe558c88458dc3d2">array</a></td></tr>
+<tr class="separator:ad8de72634b6cff93fe558c88458dc3d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = true&gt;<br />
-class ArraySlice&lt; T, N, Start, End, Const &gt;</h3>
+<div class="textblock"><h3>template&lt;class T, size_t N, bool Reverse = false, bool Const = true&gt;<br />
+class ArraySlice&lt; T, N, Reverse, Const &gt;</h3>
 
 <p>Class for a view on a slice of an array. </p>
 <p>Doesn't copy the contents of the array, it's just a reference to the original array.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The type of elements of the <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </td></tr>
-    <tr><td class="paramname">N</td><td>The size of the <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </td></tr>
-    <tr><td class="paramname">Start</td><td>The start index of the slice. </td></tr>
-    <tr><td class="paramname">End</td><td>The end index of the slice (non inclusive). </td></tr>
+    <tr><td class="paramname">N</td><td>The size of the slice. </td></tr>
+    <tr><td class="paramname">Reverse</td><td>Whether the slice is reversed or not. </td></tr>
     <tr><td class="paramname">Const</td><td>Whether to save a read-only or mutable reference to the <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00015">15</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00021">21</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a6a7c3fa67e8eb750f5e1f280ac6ef6a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a7c3fa67e8eb750f5e1f280ac6ef6a7">&#9670;&nbsp;</a></span>ArrayRefType</h2>
+<a id="ab80039ba9df0bef46ed94bc8409ff755"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab80039ba9df0bef46ed94bc8409ff755">&#9670;&nbsp;</a></span>ElementRefType</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = true&gt; </div>
+template&lt;class T, size_t N, bool Reverse = false, bool Const = true&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, Const &gt;::<a class="el" href="../../df/de0/classArraySlice.html#a6a7c3fa67e8eb750f5e1f280ac6ef6a7">ArrayRefType</a> =  typename std::conditional&lt;Const, const <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt;T, N&gt; &amp;, <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt;T, N&gt; &amp;&gt;::type</td>
+          <td class="memname">using <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt;::<a class="el" href="../../df/de0/classArraySlice.html#ab80039ba9df0bef46ed94bc8409ff755">ElementRefType</a> =  typename std::conditional&lt;Const, const T &amp;, T &amp;&gt;::type</td>
         </tr>
       </table>
   </td>
@@ -157,23 +169,23 @@ template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = tr
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00161">161</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00166">166</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a3f9f34cf6c014b8d0d732455c81541b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f9f34cf6c014b8d0d732455c81541b8">&#9670;&nbsp;</a></span>ElementRefType</h2>
+<a id="acd13b56ec45f9aee8638548c137a2094"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd13b56ec45f9aee8638548c137a2094">&#9670;&nbsp;</a></span>ElementPtrType</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = true&gt; </div>
+template&lt;class T, size_t N, bool Reverse = false, bool Const = true&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, Const &gt;::<a class="el" href="../../df/de0/classArraySlice.html#a3f9f34cf6c014b8d0d732455c81541b8">ElementRefType</a> =  typename std::conditional&lt;Const, const T &amp;, T &amp;&gt;::type</td>
+          <td class="memname">using <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt;::<a class="el" href="../../df/de0/classArraySlice.html#acd13b56ec45f9aee8638548c137a2094">ElementPtrType</a> =  typename std::conditional&lt;Const, const T *, T *&gt;::type</td>
         </tr>
       </table>
   </td>
@@ -183,26 +195,26 @@ template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = tr
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00163">163</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00168">168</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a7246525cbb676f82262b4484af6624ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7246525cbb676f82262b4484af6624ff">&#9670;&nbsp;</a></span>ArraySlice()</h2>
+<a id="a0bdcc8a59ae6862255202e68dd76bc67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bdcc8a59ae6862255202e68dd76bc67">&#9670;&nbsp;</a></span>ArraySlice()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = true&gt; </div>
+template&lt;class T, size_t N, bool Reverse = false, bool Const = true&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, Const &gt;::<a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a> </td>
+          <td class="memname"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt;::<a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/de0/classArraySlice.html#a6a7c3fa67e8eb750f5e1f280ac6ef6a7">ArrayRefType</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../df/de0/classArraySlice.html#acd13b56ec45f9aee8638548c137a2094">ElementPtrType</a>&#160;</td>
           <td class="paramname"><em>array</em></td><td>)</td>
           <td></td>
         </tr>
@@ -216,24 +228,24 @@ template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = tr
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00167">167</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00172">172</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aec7b646182363a2e16befbb06dc482d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec7b646182363a2e16befbb06dc482d4">&#9670;&nbsp;</a></span>operator Array&lt; T, End - Start &gt;()</h2>
+<a id="a8b242ed880de8cc3fdb2821c3321c514"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b242ed880de8cc3fdb2821c3321c514">&#9670;&nbsp;</a></span>operator Array&lt; T, N &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = true&gt; </div>
+template&lt;class T, size_t N, bool Reverse = false, bool Const = true&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, Const &gt;::operator <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, End - Start &gt; </td>
+          <td class="memname"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt;::operator <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, N &gt; </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -248,23 +260,23 @@ template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = tr
 
 <p>Implicit conversion from slice to new array (creates a copy). </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00170">170</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00175">175</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
-<a id="afd2694f37752957a68a53fb933d87730"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd2694f37752957a68a53fb933d87730">&#9670;&nbsp;</a></span>asArray()</h2>
+<a id="a56df6a9437528074885f56d614c0f098"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56df6a9437528074885f56d614c0f098">&#9670;&nbsp;</a></span>asArray()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = true&gt; </div>
+template&lt;class T, size_t N, bool Reverse = false, bool Const = true&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt;T, End - Start&gt; <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, Const &gt;::asArray </td>
+          <td class="memname"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt;T, N&gt; <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt;::asArray </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -277,23 +289,23 @@ template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = tr
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00172">172</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00177">177</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a371449e4f94f84857e199ab0389b8a4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a371449e4f94f84857e199ab0389b8a4a">&#9670;&nbsp;</a></span>operator[]()</h2>
+<a id="af80b2761c5ddb961dc4e06f2fece8f26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af80b2761c5ddb961dc4e06f2fece8f26">&#9670;&nbsp;</a></span>operator[]()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = true&gt; </div>
+template&lt;class T, size_t N, bool Reverse = false, bool Const = true&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../df/de0/classArraySlice.html#a3f9f34cf6c014b8d0d732455c81541b8">ElementRefType</a> <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, Const &gt;::operator[] </td>
+          <td class="memname"><a class="el" href="../../df/de0/classArraySlice.html#ab80039ba9df0bef46ed94bc8409ff755">ElementRefType</a> <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt;::operator[] </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
@@ -316,24 +328,103 @@ template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = tr
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00188">188</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00238">238</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a301dffa6fe45a511343e0ba7f169fa17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a301dffa6fe45a511343e0ba7f169fa17">&#9670;&nbsp;</a></span>array</h2>
+<a id="a27d143321d49e1c607dc0e37ce888909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27d143321d49e1c607dc0e37ce888909">&#9670;&nbsp;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = true&gt; </div>
+template&lt;class T, size_t N, bool Reverse = false, bool Const = true&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../df/de0/classArraySlice.html#a6a7c3fa67e8eb750f5e1f280ac6ef6a7">ArrayRefType</a>&amp; <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Start, End, Const &gt;::array</td>
+          <td class="memname"><a class="el" href="../../d9/d1a/classArraySlice_1_1Iterator.html">Iterator</a> <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00249">249</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aeafd03877a860e21203d3245b0a404ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeafd03877a860e21203d3245b0a404ae">&#9670;&nbsp;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, size_t N, bool Reverse = false, bool Const = true&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d9/d1a/classArraySlice_1_1Iterator.html">Iterator</a> <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00256">256</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9de26bd1c36d3937bfa927f156f07463"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9de26bd1c36d3937bfa927f156f07463">&#9670;&nbsp;</a></span>slice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, size_t N, bool Reverse = false, bool Const = true&gt; </div>
+<div class="memtemplate">
+template&lt;size_t Start, size_t End&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt;T, <a class="el" href="../../de/d76/Array_8hpp.html#ae5bf4063671aea64f62cbfeb1f5f63d6">abs_diff</a>(End, Start) + 1, Reverse ^ (End &lt; Start), Const&gt; <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt;::slice </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad8de72634b6cff93fe558c88458dc3d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8de72634b6cff93fe558c88458dc3d2">&#9670;&nbsp;</a></span>array</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, size_t N, bool Reverse = false, bool Const = true&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../df/de0/classArraySlice.html#acd13b56ec45f9aee8638548c137a2094">ElementPtrType</a> <a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt;::array</td>
         </tr>
       </table>
   </td>
@@ -343,7 +434,7 @@ template&lt;class T, size_t N, size_t Start = 0, size_t End = N, bool Const = tr
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00268">268</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>

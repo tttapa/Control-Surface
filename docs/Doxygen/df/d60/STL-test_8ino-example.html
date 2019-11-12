@@ -74,7 +74,7 @@ $(function() {
 <div class="title">STL-test.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md24"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 STL-test</h1>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB</dd></dl>
 <div class="fragment"><div class="line"> </div>
@@ -85,13 +85,70 @@ STL-test</h1>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/cstdint&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/cstdlib&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/initializer_list&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;AH/STL/utility&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;AH/STL/new&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/limits&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;AH/STL/new&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/type_traits&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;AH/STL/utility&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> setup() {}</div>
-<div class="line"><span class="keywordtype">void</span> loop() {}</div>
+<div class="line"><span class="keyword">using</span> std::is_same;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define TEST_CMATH_FUNCTION(Fun)                                               \</span></div>
+<div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((float)1)), float&gt;::value,                \</span></div>
+<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(float)&quot;);                                \</span></div>
+<div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((double)1)), double&gt;::value,              \</span></div>
+<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(double)&quot;);                               \</span></div>
+<div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((long double)1)), long double&gt;::value,    \</span></div>
+<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(long double)&quot;);</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define TEST_CMATH_FUNCTION_I(Fun)                                             \</span></div>
+<div class="line"><span class="preprocessor">  TEST_CMATH_FUNCTION(Fun);                                                    \</span></div>
+<div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((int)1)), int&gt;::value,                    \</span></div>
+<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(int)&quot;);</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define TEST_CMATH_FUNCTION3(Fun)                                              \</span></div>
+<div class="line"><span class="preprocessor">  static_assert(                                                               \</span></div>
+<div class="line"><span class="preprocessor">    is_same&lt;decltype(Fun((float)1, (float)1, (float)1)), float&gt;::value,        \</span></div>
+<div class="line"><span class="preprocessor">    &quot;cmath error &quot; #Fun &quot;(float)&quot;);                                            \</span></div>
+<div class="line"><span class="preprocessor">  static_assert(                                                               \</span></div>
+<div class="line"><span class="preprocessor">    is_same&lt;decltype(Fun((double)1, (double)1, (double)1)), double&gt;::value,    \</span></div>
+<div class="line"><span class="preprocessor">    &quot;cmath error &quot; #Fun &quot;(double)&quot;);                                           \</span></div>
+<div class="line"><span class="preprocessor">  static_assert(                                                               \</span></div>
+<div class="line"><span class="preprocessor">    is_same&lt;decltype(Fun((long double)1, (long double)1, (long double)1)),     \</span></div>
+<div class="line"><span class="preprocessor">            long double&gt;::value,                                               \</span></div>
+<div class="line"><span class="preprocessor">    &quot;cmath error &quot; #Fun &quot;(long double)&quot;);</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define TEST_CMATH_FUNCTION2(Fun)                                             \</span></div>
+<div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((float)1, (float)1)), float&gt;::value,      \</span></div>
+<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(float)&quot;);                                \</span></div>
+<div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((double)1, (double)1)), double&gt;::value,   \</span></div>
+<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(double)&quot;);                               \</span></div>
+<div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((long double)1, (long double)1)),         \</span></div>
+<div class="line"><span class="preprocessor">                        long double&gt;::value,                                   \</span></div>
+<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(long double)&quot;);</span></div>
+<div class="line"> </div>
+<div class="line">TEST_CMATH_FUNCTION(std::round);</div>
+<div class="line">TEST_CMATH_FUNCTION(std::sin);</div>
+<div class="line">TEST_CMATH_FUNCTION(std::cos);</div>
+<div class="line">TEST_CMATH_FUNCTION(std::tan);</div>
+<div class="line">TEST_CMATH_FUNCTION(std::asin);</div>
+<div class="line">TEST_CMATH_FUNCTION(std::acos);</div>
+<div class="line">TEST_CMATH_FUNCTION(std::atan);</div>
+<div class="line">TEST_CMATH_FUNCTION(std::exp);</div>
+<div class="line">TEST_CMATH_FUNCTION(std::log);</div>
+<div class="line">TEST_CMATH_FUNCTION(std::log10);</div>
+<div class="line"> </div>
+<div class="line">TEST_CMATH_FUNCTION(std::asinh);</div>
+<div class="line">TEST_CMATH_FUNCTION(std::exp2);</div>
+<div class="line"> </div>
+<div class="line">TEST_CMATH_FUNCTION_I(std::abs);</div>
+<div class="line"> </div>
+<div class="line">TEST_CMATH_FUNCTION2(std::hypot);</div>
+<div class="line">TEST_CMATH_FUNCTION3(std::fma);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> setup() {</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordtype">void</span> loop() {</div>
+<div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <!-- start footer part -->
