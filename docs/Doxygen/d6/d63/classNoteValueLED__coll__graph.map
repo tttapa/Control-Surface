@@ -1,0 +1,13 @@
+<map id="NoteValueLED" name="NoteValueLED">
+<area shape="rect" id="node1" title=" " alt="" coords="501,1604,630,1681"/>
+<area shape="rect" id="node2" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="479,1433,652,1555"/>
+<area shape="rect" id="node3" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="437,1072,694,1325"/>
+<area shape="rect" id="node4" href="$db/d4b/classMIDIInputElementNote.html" title="Class for objects that listen for incoming MIDI Note events." alt="" coords="147,727,331,892"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1153,187,1245"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="211,1013,403,1384"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="161,424,317,633"/>
+<area shape="rect" id="node6" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="145,5,332,361"/>
+<area shape="rect" id="node9" href="$d7/dab/classINoteCCValue.html" title=" " alt="" coords="355,756,482,863"/>
+<area shape="rect" id="node10" href="$d5/ddd/classNoteCCLED.html" title=" " alt="" coords="506,727,633,892"/>
+<area shape="rect" id="node11" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="657,683,855,936"/>
+</map>

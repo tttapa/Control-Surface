@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: 1.FilteredAnalog.ino</title>
+<title>Control Surface: 1.FilteredAnalog.ino</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
+   <div id="projectname">Control Surface
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">MIDI Control Surface library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -74,17 +74,17 @@ $(function() {
 <div class="title">1.FilteredAnalog.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md36"></a>
 1.FilteredAnalog</h1>
 <p>This examples shows how to filter an analog input, so you can get the position of a knob or fader without noise.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md37"></a>
 Connections</h2>
 <ul>
 <li>A0: wiper of a potentiometer</li>
 </ul>
 <p>Connect the left terminal of the potentiometer to ground, and the right one to V<sub>CC</sub>.</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md38"></a>
 Behavior</h2>
 <ul>
 <li>Upload the sketch to the Arduino, and open the Serial Monitor (<code>CTRL+Shift+M</code>)</li>
@@ -93,7 +93,35 @@ Behavior</h2>
 </ul>
 <p>Written by PieterP, 2019-10-10 <br  />
  <a href="https://github.com/tttapa/Arduino-Helpers">https://github.com/tttapa/Arduino-Helpers</a></p>
-<div class="fragment"><div class="line"> </div>
+<div class="fragment"><div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * This examples shows how to filter an analog input, so you can get the </span></div>
+<div class="line"><span class="comment"> * position of a knob or fader without noise.</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * @boards  AVR, AVR USB, Teensy 3.x, ESP32</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * Connections</span></div>
+<div class="line"><span class="comment"> * -----------</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * - A0: wiper of a potentiometer</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * Connect the left terminal of the potentiometer to ground, and the right one</span></div>
+<div class="line"><span class="comment"> * to V&lt;sub&gt;CC&lt;/sub&gt;.</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * Behavior</span></div>
+<div class="line"><span class="comment"> * --------</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * - Upload the sketch to the Arduino, and open the Serial Monitor </span></div>
+<div class="line"><span class="comment"> *   (`CTRL+Shift+M`)</span></div>
+<div class="line"><span class="comment"> * - When you turn the potentiometer, you should see the position of the </span></div>
+<div class="line"><span class="comment"> *   potentiometer being printed as a number between 0 and 1023.</span></div>
+<div class="line"><span class="comment"> * - The analog input is filtered, so there shouldn&#39;t be any noise on the </span></div>
+<div class="line"><span class="comment"> *   position. If there is, check your wiring, and make sure that the resistance</span></div>
+<div class="line"><span class="comment"> *   of the potentiometer isn&#39;t too high (10 kΩ is ideal). </span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * Written by PieterP, 2019-10-10  </span></div>
+<div class="line"><span class="comment"> * https://github.com/tttapa/Arduino-Helpers</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"> </div>
 <div class="line"><span class="comment">// Include the library</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a>&gt;</span></div>
 <div class="line"> </div>
@@ -101,7 +129,7 @@ Behavior</h2>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d1/dd0/MillisMicrosTimer_8hpp.html">AH/Timing/MillisMicrosTimer.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Create a filtered analog object on pin A0:</span></div>
-<div class="line"><a name="_a0"></a><a class="code" href="../../da/da7/classFilteredAnalog.html">FilteredAnalog</a>&lt;10,      <span class="comment">// Output precision in bits</span></div>
+<div class="line">FilteredAnalog&lt;10,      <span class="comment">// Output precision in bits</span></div>
 <div class="line">               2,       <span class="comment">// The amount of filtering</span></div>
 <div class="line">               uint16_t <span class="comment">// The integer type for the calculations</span></div>
 <div class="line">               &gt;</div>
@@ -110,7 +138,7 @@ Behavior</h2>
 <div class="line"><span class="comment">// If you want more filtering, you can increase the filter shift factor.</span></div>
 <div class="line"><span class="comment">// The number of bits required for the intermediate calculations increases if</span></div>
 <div class="line"><span class="comment">// you do so, so you have to use a larger type as well.</span></div>
-<div class="line"><a class="code" href="../../da/da7/classFilteredAnalog.html">FilteredAnalog</a>&lt;10,      <span class="comment">// Output precision in bits</span></div>
+<div class="line">FilteredAnalog&lt;10,      <span class="comment">// Output precision in bits</span></div>
 <div class="line">               6,       <span class="comment">// The amount of filtering</span></div>
 <div class="line">               uint32_t <span class="comment">// The integer type for the calculations</span></div>
 <div class="line">               &gt;</div>
@@ -118,21 +146,21 @@ Behavior</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// If you don&#39;t care about the specific settings, and just want a</span></div>
 <div class="line"><span class="comment">// default that works, you can use the following:</span></div>
-<div class="line"><a class="code" href="../../da/da7/classFilteredAnalog.html">FilteredAnalog&lt;&gt;</a> simpleAnalog = A0;</div>
+<div class="line">FilteredAnalog&lt;&gt; simpleAnalog = A0;</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
 <div class="line">  Serial.begin(115200);</div>
 <div class="line">  <span class="keywordflow">while</span> (!Serial)</div>
 <div class="line">    ;</div>
 <div class="line">  <span class="comment">// Select the correct ADC resolution</span></div>
-<div class="line">  <a name="a1"></a><a class="code" href="../../da/da7/classFilteredAnalog.html#a5a3518c354ba9da25720c6fa93445e72">FilteredAnalog&lt;&gt;::setupADC</a>();</div>
+<div class="line">  FilteredAnalog&lt;&gt;::setupADC();</div>
 <div class="line">  <span class="comment">// If you want, you can add mapping functions to invert the input, for example</span></div>
 <div class="line">  analog.invert();</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
 <div class="line">  <span class="comment">// Read the analog input every millisecond, and print if the value has changed</span></div>
-<div class="line">  <span class="keyword">static</span> <a name="_a2"></a><a class="code" href="../../dc/dea/classTimer.html">Timer&lt;millis&gt;</a> timer = 1; <span class="comment">// ms</span></div>
+<div class="line">  <span class="keyword">static</span> Timer&lt;millis&gt; timer = 1; <span class="comment">// ms</span></div>
 <div class="line">  <span class="keywordflow">if</span> (timer &amp;&amp; analog.update())</div>
 <div class="line">    Serial.println(analog.getValue());</div>
 <div class="line"> </div>
@@ -147,11 +175,8 @@ Behavior</h2>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
 <div class="ttc" id="aMillisMicrosTimer_8hpp_html"><div class="ttname"><a href="../../d1/dd0/MillisMicrosTimer_8hpp.html">MillisMicrosTimer.hpp</a></div></div>
-<div class="ttc" id="aclassFilteredAnalog_html"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html">FilteredAnalog</a></div><div class="ttdoc">A class that reads and filters an analog input.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00047">FilteredAnalog.hpp:47</a></div></div>
-<div class="ttc" id="aclassTimer_html"><div class="ttname"><a href="../../dc/dea/classTimer.html">Timer</a></div><div class="ttdoc">A class for easily managing timed events.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00022">MillisMicrosTimer.hpp:22</a></div></div>
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <div class="ttc" id="aFilteredAnalog_8hpp_html"><div class="ttname"><a href="../../d8/df3/FilteredAnalog_8hpp.html">FilteredAnalog.hpp</a></div></div>
-<div class="ttc" id="aclassFilteredAnalog_html_a5a3518c354ba9da25720c6fa93445e72"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html#a5a3518c354ba9da25720c6fa93445e72">FilteredAnalog::setupADC</a></div><div class="ttdeci">static void setupADC()</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00135">FilteredAnalog.hpp:135</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

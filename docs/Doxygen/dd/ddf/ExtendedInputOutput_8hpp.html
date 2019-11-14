@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: ExtendedInputOutput.hpp File Reference</title>
+<title>Control Surface: ExtendedInputOutput.hpp File Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
+   <div id="projectname">Control Surface
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">MIDI Control Surface library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -88,20 +88,24 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ExtendedInputOutput.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/d90/ExtendedInputOutput_8hpp__incl.svg" width="1107" height="724"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/d90/ExtendedInputOutput_8hpp__incl.svg" width="1107" height="724"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d99/ExtendedInputOutput_8hpp__dep__incl.svg" width="2008" height="336"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d99/ExtendedInputOutput_8hpp__dep__incl.svg" width="8887" height="486"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 </div>
 <p><a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:d8/d3d/namespaceExtIO"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html">ExtIO</a></td></tr>
-<tr class="memdesc:d8/d3d/namespaceExtIO"><td class="mdescLeft">&#160;</td><td class="mdescRight">A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO pin numbers. <br /></td></tr>
+<tr class="memitem:dc/d69/namespaceAH"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d69/namespaceAH.html">AH</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:d7/d22/namespaceAH_1_1ExtIO"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html">AH::ExtIO</a></td></tr>
+<tr class="memdesc:d7/d22/namespaceAH_1_1ExtIO"><td class="mdescLeft">&#160;</td><td class="mdescRight">A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO pin numbers. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -111,39 +115,39 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae314377b34b9e49b153f6e36fb354d37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#ae314377b34b9e49b153f6e36fb354d37">ExtIO::getIOElementOfPin</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin)</td></tr>
-<tr class="memdesc:ae314377b34b9e49b153f6e36fb354d37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the IO element of a given extended IO pin number.  <a href="../../d8/d3d/namespaceExtIO.html#ae314377b34b9e49b153f6e36fb354d37">More...</a><br /></td></tr>
-<tr class="separator:ae314377b34b9e49b153f6e36fb354d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab1cbf2a78b56e576a536d371e1984ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#aab1cbf2a78b56e576a536d371e1984ef">ExtIO::pinMode</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin, uint8_t mode)</td></tr>
-<tr class="memdesc:aab1cbf2a78b56e576a536d371e1984ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#aab1cbf2a78b56e576a536d371e1984ef">More...</a><br /></td></tr>
-<tr class="separator:aab1cbf2a78b56e576a536d371e1984ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2255838f49566f984eb61c8609a6a7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#aa2255838f49566f984eb61c8609a6a7a">ExtIO::pinMode</a> (int pin, uint8_t mode)</td></tr>
-<tr class="memdesc:aa2255838f49566f984eb61c8609a6a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#aa2255838f49566f984eb61c8609a6a7a">More...</a><br /></td></tr>
-<tr class="separator:aa2255838f49566f984eb61c8609a6a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af83b2f2728401bf8efea42049ceb7dcd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#af83b2f2728401bf8efea42049ceb7dcd">ExtIO::digitalWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin, uint8_t val)</td></tr>
-<tr class="memdesc:af83b2f2728401bf8efea42049ceb7dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#af83b2f2728401bf8efea42049ceb7dcd">More...</a><br /></td></tr>
-<tr class="separator:af83b2f2728401bf8efea42049ceb7dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69924b6a6c77c160b097286862ba5f38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a69924b6a6c77c160b097286862ba5f38">ExtIO::digitalWrite</a> (int pin, uint8_t val)</td></tr>
-<tr class="memdesc:a69924b6a6c77c160b097286862ba5f38"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a69924b6a6c77c160b097286862ba5f38">More...</a><br /></td></tr>
-<tr class="separator:a69924b6a6c77c160b097286862ba5f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bda9dc007f42a200626d1d4ea94250b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a9bda9dc007f42a200626d1d4ea94250b">ExtIO::digitalRead</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin)</td></tr>
-<tr class="memdesc:a9bda9dc007f42a200626d1d4ea94250b"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a9bda9dc007f42a200626d1d4ea94250b">More...</a><br /></td></tr>
-<tr class="separator:a9bda9dc007f42a200626d1d4ea94250b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e1b1e3ddc71a977fbf6df93c10cce82"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a9e1b1e3ddc71a977fbf6df93c10cce82">ExtIO::digitalRead</a> (int pin)</td></tr>
-<tr class="memdesc:a9e1b1e3ddc71a977fbf6df93c10cce82"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a9e1b1e3ddc71a977fbf6df93c10cce82">More...</a><br /></td></tr>
-<tr class="separator:a9e1b1e3ddc71a977fbf6df93c10cce82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa363601af9782e76375355968252cc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#aaa363601af9782e76375355968252cc3">ExtIO::shiftOut</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> dataPin, <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> clockPin, uint8_t bitOrder, uint8_t val)</td></tr>
-<tr class="memdesc:aaa363601af9782e76375355968252cc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#aaa363601af9782e76375355968252cc3">More...</a><br /></td></tr>
-<tr class="separator:aaa363601af9782e76375355968252cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1396c29ef255279ab322d1bed2576612"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a1396c29ef255279ab322d1bed2576612">ExtIO::shiftOut</a> (int dataPin, int clockPin, uint8_t bitOrder, uint8_t val)</td></tr>
-<tr class="memdesc:a1396c29ef255279ab322d1bed2576612"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a1396c29ef255279ab322d1bed2576612">More...</a><br /></td></tr>
-<tr class="separator:a1396c29ef255279ab322d1bed2576612"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7203d161f7e9676d191ed320d9dad00f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a7203d161f7e9676d191ed320d9dad00f">ExtIO::analogRead</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin)</td></tr>
-<tr class="memdesc:a7203d161f7e9676d191ed320d9dad00f"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a7203d161f7e9676d191ed320d9dad00f">More...</a><br /></td></tr>
-<tr class="separator:a7203d161f7e9676d191ed320d9dad00f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2ec79a352fdba93731326dbc4004de6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#aa2ec79a352fdba93731326dbc4004de6">ExtIO::analogRead</a> (int pin)</td></tr>
-<tr class="memdesc:aa2ec79a352fdba93731326dbc4004de6"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#aa2ec79a352fdba93731326dbc4004de6">More...</a><br /></td></tr>
-<tr class="separator:aa2ec79a352fdba93731326dbc4004de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33880fbb86c641ade9a563db5f3b41d2"><td class="memItemLeft" align="right" valign="top">ExtendedIOElement &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html#a33880fbb86c641ade9a563db5f3b41d2">AH::ExtIO::getIOElementOfPin</a> (pin_t pin)</td></tr>
+<tr class="memdesc:a33880fbb86c641ade9a563db5f3b41d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the IO element of a given extended IO pin number.  <a href="../../d7/d22/namespaceAH_1_1ExtIO.html#a33880fbb86c641ade9a563db5f3b41d2">More...</a><br /></td></tr>
+<tr class="separator:a33880fbb86c641ade9a563db5f3b41d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a575fa42168c3cd1393bf132fc7e776e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html#a575fa42168c3cd1393bf132fc7e776e6">AH::ExtIO::pinMode</a> (pin_t pin, uint8_t mode)</td></tr>
+<tr class="memdesc:a575fa42168c3cd1393bf132fc7e776e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d7/d22/namespaceAH_1_1ExtIO.html#a575fa42168c3cd1393bf132fc7e776e6">More...</a><br /></td></tr>
+<tr class="separator:a575fa42168c3cd1393bf132fc7e776e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8ff8941512a3839172644abf731dac9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aa8ff8941512a3839172644abf731dac9">AH::ExtIO::pinMode</a> (int pin, uint8_t mode)</td></tr>
+<tr class="memdesc:aa8ff8941512a3839172644abf731dac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d7/d22/namespaceAH_1_1ExtIO.html#aa8ff8941512a3839172644abf731dac9">More...</a><br /></td></tr>
+<tr class="separator:aa8ff8941512a3839172644abf731dac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dfd4944a17db4ba1b028af54104ede9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html#a5dfd4944a17db4ba1b028af54104ede9">AH::ExtIO::digitalWrite</a> (pin_t pin, uint8_t val)</td></tr>
+<tr class="memdesc:a5dfd4944a17db4ba1b028af54104ede9"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d7/d22/namespaceAH_1_1ExtIO.html#a5dfd4944a17db4ba1b028af54104ede9">More...</a><br /></td></tr>
+<tr class="separator:a5dfd4944a17db4ba1b028af54104ede9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af61b47803aeb7dc59e5783fc4065be6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html#af61b47803aeb7dc59e5783fc4065be6c">AH::ExtIO::digitalWrite</a> (int pin, uint8_t val)</td></tr>
+<tr class="memdesc:af61b47803aeb7dc59e5783fc4065be6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d7/d22/namespaceAH_1_1ExtIO.html#af61b47803aeb7dc59e5783fc4065be6c">More...</a><br /></td></tr>
+<tr class="separator:af61b47803aeb7dc59e5783fc4065be6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e39098fb41dd5de011453792ea4a50f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html#a8e39098fb41dd5de011453792ea4a50f">AH::ExtIO::digitalRead</a> (pin_t pin)</td></tr>
+<tr class="memdesc:a8e39098fb41dd5de011453792ea4a50f"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d7/d22/namespaceAH_1_1ExtIO.html#a8e39098fb41dd5de011453792ea4a50f">More...</a><br /></td></tr>
+<tr class="separator:a8e39098fb41dd5de011453792ea4a50f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3bdc84e16d943a2bbbf56c20e25b820"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html#ab3bdc84e16d943a2bbbf56c20e25b820">AH::ExtIO::digitalRead</a> (int pin)</td></tr>
+<tr class="memdesc:ab3bdc84e16d943a2bbbf56c20e25b820"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d7/d22/namespaceAH_1_1ExtIO.html#ab3bdc84e16d943a2bbbf56c20e25b820">More...</a><br /></td></tr>
+<tr class="separator:ab3bdc84e16d943a2bbbf56c20e25b820"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7ba4f0f8ed1ced87f78d75c63ff2937"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html#ac7ba4f0f8ed1ced87f78d75c63ff2937">AH::ExtIO::shiftOut</a> (pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val)</td></tr>
+<tr class="memdesc:ac7ba4f0f8ed1ced87f78d75c63ff2937"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d7/d22/namespaceAH_1_1ExtIO.html#ac7ba4f0f8ed1ced87f78d75c63ff2937">More...</a><br /></td></tr>
+<tr class="separator:ac7ba4f0f8ed1ced87f78d75c63ff2937"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bef90207a91b9c67b70000d907b07dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html#a4bef90207a91b9c67b70000d907b07dc">AH::ExtIO::shiftOut</a> (int dataPin, int clockPin, uint8_t bitOrder, uint8_t val)</td></tr>
+<tr class="memdesc:a4bef90207a91b9c67b70000d907b07dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d7/d22/namespaceAH_1_1ExtIO.html#a4bef90207a91b9c67b70000d907b07dc">More...</a><br /></td></tr>
+<tr class="separator:a4bef90207a91b9c67b70000d907b07dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbc8253b4357dbb2bd771911ae6017ba"><td class="memItemLeft" align="right" valign="top">analog_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html#abbc8253b4357dbb2bd771911ae6017ba">AH::ExtIO::analogRead</a> (pin_t pin)</td></tr>
+<tr class="memdesc:abbc8253b4357dbb2bd771911ae6017ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d7/d22/namespaceAH_1_1ExtIO.html#abbc8253b4357dbb2bd771911ae6017ba">More...</a><br /></td></tr>
+<tr class="separator:abbc8253b4357dbb2bd771911ae6017ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a964eab123f1d7ba52b9d49c4fe4fa7a5"><td class="memItemLeft" align="right" valign="top">analog_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html#a964eab123f1d7ba52b9d49c4fe4fa7a5">AH::ExtIO::analogRead</a> (int pin)</td></tr>
+<tr class="memdesc:a964eab123f1d7ba52b9d49c4fe4fa7a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d7/d22/namespaceAH_1_1ExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d7/d22/namespaceAH_1_1ExtIO.html#a964eab123f1d7ba52b9d49c4fe4fa7a5">More...</a><br /></td></tr>
+<tr class="separator:a964eab123f1d7ba52b9d49c4fe4fa7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -321,7 +325,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d5f/1_8SPI-Blink_8ino-example.html#a6">1.SPI-Blink.ino</a>, <a class="el" href="../../d1/d5f/2_8BitBang-Blink_8ino-example.html#a6">2.BitBang-Blink.ino</a>, and <a class="el" href="../../df/d9e/2_8RGB-LED-Chaser_8ino-example.html#a7">2.RGB-LED-Chaser.ino</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d5f/1_8SPI-Blink_8ino-example.html#a4">1.SPI-Blink.ino</a>, <a class="el" href="../../d1/d5f/2_8BitBang-Blink_8ino-example.html#a4">2.BitBang-Blink.ino</a>, and <a class="el" href="../../df/d9e/2_8RGB-LED-Chaser_8ino-example.html#a1">2.RGB-LED-Chaser.ino</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00034">34</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
@@ -339,7 +343,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d5f/1_8SPI-Blink_8ino-example.html#a7">1.SPI-Blink.ino</a>, <a class="el" href="../../d1/d5f/2_8BitBang-Blink_8ino-example.html#a7">2.BitBang-Blink.ino</a>, and <a class="el" href="../../df/d9e/2_8RGB-LED-Chaser_8ino-example.html#a8">2.RGB-LED-Chaser.ino</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d5f/1_8SPI-Blink_8ino-example.html#a5">1.SPI-Blink.ino</a>, <a class="el" href="../../d1/d5f/2_8BitBang-Blink_8ino-example.html#a5">2.BitBang-Blink.ino</a>, and <a class="el" href="../../df/d9e/2_8RGB-LED-Chaser_8ino-example.html#a2">2.RGB-LED-Chaser.ino</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00035">35</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
@@ -373,7 +377,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d5f/1_8SPI-Blink_8ino-example.html#a4">1.SPI-Blink.ino</a>, and <a class="el" href="../../d1/d5f/2_8BitBang-Blink_8ino-example.html#a4">2.BitBang-Blink.ino</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d5f/1_8SPI-Blink_8ino-example.html#a2">1.SPI-Blink.ino</a>, <a class="el" href="../../d1/d5f/2_8BitBang-Blink_8ino-example.html#a2">2.BitBang-Blink.ino</a>, and <a class="el" href="../../d9/d9d/MIDI-Controller-Finished-Example_8ino-example.html#a27">MIDI-Controller-Finished-Example.ino</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00038">38</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
@@ -391,7 +395,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d42/2_8DigitalReadSerial_8ino-example.html#a3">2.DigitalReadSerial.ino</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d42/2_8DigitalReadSerial_8ino-example.html#a1">2.DigitalReadSerial.ino</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00039">39</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>

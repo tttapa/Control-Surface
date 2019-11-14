@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: ADCConfig.hpp Source File</title>
+<title>Control Surface: ADCConfig.hpp Source File</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
+   <div id="projectname">Control Surface
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">MIDI Control Surface library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -79,7 +79,15 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="../../d7/d7c/ADCConfig_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * @file</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * @brief   This file contains the platform-specific ADC resolutions.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *          By default, the library automatically selects the maximum supported</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *          resolution for known boards, otherwise, it falls back to 10 bits.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * @see     ADC_BITS</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#if defined(ADC_RESOLUTION)</span></div>
@@ -132,8 +140,10 @@ $(function() {
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">// Unknown/Default</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">//------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#define ADC_RESOLUTION 10</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#define HAS_ANALOG_READ_RESOLUTION 0</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">/// The actual maximum resolution of the built-in ADC.</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="../../d7/d7c/ADCConfig_8hpp.html#a00978ca9e8220475258dcbbbb7d29129">   64</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define ADC_RESOLUTION 10</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/// Whether the platform supports the `analogReadResolution` function.</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="../../d7/d7c/ADCConfig_8hpp.html#a4af2da2db9e536067c953baac53b70e6">   66</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define HAS_ANALOG_READ_RESOLUTION 0</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->

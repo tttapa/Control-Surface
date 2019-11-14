@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['hardware_2dtypes_2ehpp_558',['Hardware-Types.hpp',['../d4/d35/Hardware-Types_8hpp.html',1,'']]],
-  ['hardware_2edox_559',['Hardware.dox',['../d4/d45/Hardware_8dox.html',1,'']]],
-  ['hysteresis_2ecpp_560',['Hysteresis.cpp',['../dd/d40/Hysteresis_8cpp.html',1,'']]],
-  ['hysteresis_2ehpp_561',['Hysteresis.hpp',['../d3/d09/Hysteresis_8hpp.html',1,'']]]
+  ['getting_2dstarted_2emd_2658',['Getting-Started.md',['../d1/d20/Getting-Started_8md.html',1,'']]],
+  ['groups_2eh_2659',['Groups.h',['../da/d0a/Groups_8h.html',1,'']]]
 ];

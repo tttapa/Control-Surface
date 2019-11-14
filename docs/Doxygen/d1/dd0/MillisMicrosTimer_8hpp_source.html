@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: MillisMicrosTimer.hpp Source File</title>
+<title>Control Surface: MillisMicrosTimer.hpp Source File</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
+   <div id="projectname">Control Surface
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">MIDI Control Surface library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -81,48 +81,65 @@ $(function() {
 <a href="../../d1/dd0/MillisMicrosTimer_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html">AH/Settings/NamespaceSettings.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html">AH/Settings/NamespaceSettings.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#abe0f0e505619b6899c38363f4e42a272">BEGIN_AH_NAMESPACE</a></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../d1/dd0/MillisMicrosTimer_8hpp.html#a4086ab91003e2f23ab3d8d590d6f2fe3">    9</a></span>&#160;<span class="keyword">using</span> <a class="code" href="../../d1/dd0/MillisMicrosTimer_8hpp.html#a4086ab91003e2f23ab3d8d590d6f2fe3">timefunction</a> = <span class="keywordtype">unsigned</span> long (*)();</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<a class="code" href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html#abe0f0e505619b6899c38363f4e42a272">BEGIN_AH_NAMESPACE</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/// A function type that returns a time value.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../dc/d69/namespaceAH.html#a3a2d82ba635b57ed2b32b0fc9facc2ec">    9</a></span>&#160;<span class="comment"></span><span class="keyword">using</span> <a class="code" href="../../dc/d69/namespaceAH.html#a3a2d82ba635b57ed2b32b0fc9facc2ec">timefunction</a> = <span class="keywordtype">unsigned</span> long (*)();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">/// @addtogroup    Timing</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/// @{</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"></span><span class="comment"></span> </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * @brief   A class for easily managing timed events. A wrapper for &quot;Blink </span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *          Without Delay&quot;.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * @tparam time</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> *         The time function to use.</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span> &lt;timefunction time = micros&gt;</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="../../dc/dea/classTimer.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../dc/dea/classTimer.html">Timer</a> {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="../../dc/dea/classTimer.html#a80b14a1a0a76371692329924b9064a19">   29</a></span>&#160;    <a class="code" href="../../dc/dea/classTimer.html#a80b14a1a0a76371692329924b9064a19">Timer</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="../../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d">interval</a>) : <a class="code" href="../../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d">interval</a>(<a class="code" href="../../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d">interval</a>) {</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="../../d2/de5/classAH_1_1Timer.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d2/de5/classAH_1_1Timer.html">Timer</a> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     * @brief   Constructor.</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     * @param   interval</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     *          The interval between two events.</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="../../d2/de5/classAH_1_1Timer.html#a191c2b326b35ebbf0eff514bf6c36abf">   29</a></span>&#160;    <a class="code" href="../../d2/de5/classAH_1_1Timer.html#a191c2b326b35ebbf0eff514bf6c36abf">Timer</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> interval) : interval(interval) {</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="../../dc/dea/classTimer.html#a8a385bff3bedc0250ead0b1a8e82d76f">begin</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        begin();</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="../../dc/dea/classTimer.html#a8a385bff3bedc0250ead0b1a8e82d76f">   35</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../dc/dea/classTimer.html#a8a385bff3bedc0250ead0b1a8e82d76f">begin</a>() { <a class="code" href="../../dc/dea/classTimer.html#ad4fa8e5c9f307790593ab1f7d9862205">previous</a> = time() - <a class="code" href="../../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d">interval</a>; }</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="../../dc/dea/classTimer.html#ab4883393ce41724763407b2a73826a24">   37</a></span>&#160;    <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }<span class="comment"></span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    /// Initialize the timer.</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="../../d2/de5/classAH_1_1Timer.html#adbf458b1dcce0e20531f4e9f09385cf8">   35</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="../../d2/de5/classAH_1_1Timer.html#adbf458b1dcce0e20531f4e9f09385cf8">begin</a>() { previous = time() - interval; }<span class="comment"></span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    /// Update the timer and return true if the event should fire.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="../../d2/de5/classAH_1_1Timer.html#a272e746c36a076aca7049f48326bacbf">   37</a></span>&#160;<span class="comment"></span>    <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">auto</span> now = time();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">if</span> (now - <a class="code" href="../../dc/dea/classTimer.html#ad4fa8e5c9f307790593ab1f7d9862205">previous</a> &gt;= <a class="code" href="../../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d">interval</a>) {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <a class="code" href="../../dc/dea/classTimer.html#ad4fa8e5c9f307790593ab1f7d9862205">previous</a> += <a class="code" href="../../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d">interval</a>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">if</span> (now - previous &gt;= interval) {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            previous += interval;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        }</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="../../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d">   47</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="../../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d">interval</a>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="../../dc/dea/classTimer.html#ad4fa8e5c9f307790593ab1f7d9862205">   48</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="../../dc/dea/classTimer.html#ad4fa8e5c9f307790593ab1f7d9862205">previous</a> = 0;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="../../d2/de5/classAH_1_1Timer.html#a88ef8dcad279a4aed5fa00d99e469af1">   47</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="../../d2/de5/classAH_1_1Timer.html#a88ef8dcad279a4aed5fa00d99e469af1">interval</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="../../d2/de5/classAH_1_1Timer.html#afd37d1c9e754f735a516dfc3644d8422">   48</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> previous = 0;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/// @}</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<a class="code" href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aNamespaceSettings_8hpp_html_abe0f0e505619b6899c38363f4e42a272"><div class="ttname"><a href="../../dc/dc7/NamespaceSettings_8hpp.html#abe0f0e505619b6899c38363f4e42a272">BEGIN_AH_NAMESPACE</a></div><div class="ttdeci">#define BEGIN_AH_NAMESPACE</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/dc7/NamespaceSettings_8hpp_source.html#l00009">NamespaceSettings.hpp:9</a></div></div>
-<div class="ttc" id="aclassTimer_html_a80b14a1a0a76371692329924b9064a19"><div class="ttname"><a href="../../dc/dea/classTimer.html#a80b14a1a0a76371692329924b9064a19">Timer::Timer</a></div><div class="ttdeci">Timer(unsigned long interval)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00029">MillisMicrosTimer.hpp:29</a></div></div>
-<div class="ttc" id="aclassTimer_html_ad74f3b503f038643f12fb6445a7e581d"><div class="ttname"><a href="../../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d">Timer::interval</a></div><div class="ttdeci">const unsigned long interval</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00047">MillisMicrosTimer.hpp:47</a></div></div>
-<div class="ttc" id="aclassTimer_html_a8a385bff3bedc0250ead0b1a8e82d76f"><div class="ttname"><a href="../../dc/dea/classTimer.html#a8a385bff3bedc0250ead0b1a8e82d76f">Timer::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdoc">Initialize the timer.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00035">MillisMicrosTimer.hpp:35</a></div></div>
-<div class="ttc" id="aclassTimer_html"><div class="ttname"><a href="../../dc/dea/classTimer.html">Timer</a></div><div class="ttdoc">A class for easily managing timed events.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00022">MillisMicrosTimer.hpp:22</a></div></div>
-<div class="ttc" id="aNamespaceSettings_8hpp_html"><div class="ttname"><a href="../../dc/dc7/NamespaceSettings_8hpp.html">NamespaceSettings.hpp</a></div></div>
-<div class="ttc" id="aclassTimer_html_ad4fa8e5c9f307790593ab1f7d9862205"><div class="ttname"><a href="../../dc/dea/classTimer.html#ad4fa8e5c9f307790593ab1f7d9862205">Timer::previous</a></div><div class="ttdeci">unsigned long previous</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00048">MillisMicrosTimer.hpp:48</a></div></div>
-<div class="ttc" id="aNamespaceSettings_8hpp_html_a03ed68e9e3d1bbe9a28fd924cb7260c1"><div class="ttname"><a href="../../dc/dc7/NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div><div class="ttdeci">#define END_AH_NAMESPACE</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/dc7/NamespaceSettings_8hpp_source.html#l00010">NamespaceSettings.hpp:10</a></div></div>
-<div class="ttc" id="aMillisMicrosTimer_8hpp_html_a4086ab91003e2f23ab3d8d590d6f2fe3"><div class="ttname"><a href="../../d1/dd0/MillisMicrosTimer_8hpp.html#a4086ab91003e2f23ab3d8d590d6f2fe3">timefunction</a></div><div class="ttdeci">unsigned long(*)() timefunction</div><div class="ttdoc">A function type that returns a time value.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00009">MillisMicrosTimer.hpp:9</a></div></div>
+<div class="ttc" id="aclassAH_1_1Timer_html_a88ef8dcad279a4aed5fa00d99e469af1"><div class="ttname"><a href="../../d2/de5/classAH_1_1Timer.html#a88ef8dcad279a4aed5fa00d99e469af1">AH::Timer::interval</a></div><div class="ttdeci">const unsigned long interval</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00047">MillisMicrosTimer.hpp:47</a></div></div>
+<div class="ttc" id="aclassAH_1_1Timer_html"><div class="ttname"><a href="../../d2/de5/classAH_1_1Timer.html">AH::Timer</a></div><div class="ttdoc">A class for easily managing timed events.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00022">MillisMicrosTimer.hpp:22</a></div></div>
+<div class="ttc" id="anamespaceAH_html_a3a2d82ba635b57ed2b32b0fc9facc2ec"><div class="ttname"><a href="../../dc/d69/namespaceAH.html#a3a2d82ba635b57ed2b32b0fc9facc2ec">AH::timefunction</a></div><div class="ttdeci">unsigned long(*)() timefunction</div><div class="ttdoc">A function type that returns a time value.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00009">MillisMicrosTimer.hpp:9</a></div></div>
+<div class="ttc" id="aclassAH_1_1Timer_html_a191c2b326b35ebbf0eff514bf6c36abf"><div class="ttname"><a href="../../d2/de5/classAH_1_1Timer.html#a191c2b326b35ebbf0eff514bf6c36abf">AH::Timer::Timer</a></div><div class="ttdeci">Timer(unsigned long interval)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00029">MillisMicrosTimer.hpp:29</a></div></div>
+<div class="ttc" id="aAH_2Settings_2NamespaceSettings_8hpp_html_abe0f0e505619b6899c38363f4e42a272"><div class="ttname"><a href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html#abe0f0e505619b6899c38363f4e42a272">BEGIN_AH_NAMESPACE</a></div><div class="ttdeci">#define BEGIN_AH_NAMESPACE</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp_source.html#l00009">AH/Settings/NamespaceSettings.hpp:9</a></div></div>
+<div class="ttc" id="aAH_2Settings_2NamespaceSettings_8hpp_html_a03ed68e9e3d1bbe9a28fd924cb7260c1"><div class="ttname"><a href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div><div class="ttdeci">#define END_AH_NAMESPACE</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp_source.html#l00010">AH/Settings/NamespaceSettings.hpp:10</a></div></div>
+<div class="ttc" id="aAH_2Settings_2NamespaceSettings_8hpp_html"><div class="ttname"><a href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html">NamespaceSettings.hpp</a></div></div>
+<div class="ttc" id="aclassAH_1_1Timer_html_adbf458b1dcce0e20531f4e9f09385cf8"><div class="ttname"><a href="../../d2/de5/classAH_1_1Timer.html#adbf458b1dcce0e20531f4e9f09385cf8">AH::Timer::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdoc">Initialize the timer.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00035">MillisMicrosTimer.hpp:35</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - f37e26f20cf510efd46f00ec2ed0243c86a219dc - src/AH/Containers/ArrayHelpers.hpp</title>
+  <title>LCOV - 19343ebcf36971a89e33a8a2b20977410e6d8881 - src/AH/Containers/ArrayHelpers.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,20 +28,20 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">f37e26f20cf510efd46f00ec2ed0243c86a219dc</td>
+            <td class="headerValue">19343ebcf36971a89e33a8a2b20977410e6d8881</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">33</td>
-            <td class="headerCovTableEntry">33</td>
+            <td class="headerCovTableEntry">38</td>
+            <td class="headerCovTableEntry">38</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-13 00:31:02</td>
+            <td class="headerValue">2019-11-14 16:43:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">22</td>
-            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">23</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -179,11 +179,11 @@
 <a name="109"><span class="lineNum">     109 </span>            :  *          The source array to be copied.</a>
 <a name="110"><span class="lineNum">     110 </span>            :  */</a>
 <a name="111"><span class="lineNum">     111 </span>            : template &lt;class T, size_t N, class U&gt;</a>
-<a name="112"><span class="lineNum">     112 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt; copyAs(const Array&lt;U, N&gt; &amp;src) {</a>
-<a name="113"><span class="lineNum">     113 </span>            :     Array&lt;T, N&gt; dest{};</a>
-<a name="114"><span class="lineNum">     114 </span>            :     for (size_t i = 0; i &lt; N; ++i)</a>
-<a name="115"><span class="lineNum">     115 </span>            :         dest[i] = src[i];</a>
-<a name="116"><span class="lineNum">     116 </span>            :     return dest;</a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">          1 : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt; copyAs(const Array&lt;U, N&gt; &amp;src) {</span></a>
+<a name="113"><span class="lineNum">     113 </span><span class="lineCov">          4 :     Array&lt;T, N&gt; dest{};</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">          5 :     for (size_t i = 0; i &lt; N; ++i)</span></a>
+<a name="115"><span class="lineNum">     115 </span><span class="lineCov">          4 :         dest[i] = src[i];</span></a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">          1 :     return dest;</span></a>
 <a name="117"><span class="lineNum">     117 </span>            : }</a>
 <a name="118"><span class="lineNum">     118 </span>            : </a>
 <a name="119"><span class="lineNum">     119 </span>            : template &lt;class T, size_t N, class... Args&gt;</a>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - f37e26f20cf510efd46f00ec2ed0243c86a219dc - src/AH/Filters/EMA.hpp</title>
+  <title>LCOV - 19343ebcf36971a89e33a8a2b20977410e6d8881 - src/AH/Filters/EMA.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">f37e26f20cf510efd46f00ec2ed0243c86a219dc</td>
+            <td class="headerValue">19343ebcf36971a89e33a8a2b20977410e6d8881</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">14</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-13 00:31:02</td>
+            <td class="headerValue">2019-11-14 16:43:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -106,7 +106,7 @@
 <a name="36"><span class="lineNum">      36 </span>            :  * @ingroup    Filters</a>
 <a name="37"><span class="lineNum">      37 </span>            :  */</a>
 <a name="38"><span class="lineNum">      38 </span>            : template &lt;uint8_t K, class uint_t&gt;</a>
-<a name="39"><span class="lineNum">      39 </span><span class="lineCov">          2 : class EMA {</span></a>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">         14 : class EMA {</span></a>
 <a name="40"><span class="lineNum">      40 </span>            :   public:</a>
 <a name="41"><span class="lineNum">      41 </span>            :     /**</a>
 <a name="42"><span class="lineNum">      42 </span>            :      * @brief   Filter the input: Given @f$ x[n] @f$, calculate @f$ y[n] @f$.</a>
@@ -115,11 +115,11 @@
 <a name="45"><span class="lineNum">      45 </span>            :      *          The new raw input value.</a>
 <a name="46"><span class="lineNum">      46 </span>            :      * @return  The new filtered output value.</a>
 <a name="47"><span class="lineNum">      47 </span>            :      */</a>
-<a name="48"><span class="lineNum">      48 </span><span class="lineCov">       2012 :     uint_t filter(uint_t input) {</span></a>
-<a name="49"><span class="lineNum">      49 </span><span class="lineCov">       2012 :         filtered += input;</span></a>
-<a name="50"><span class="lineNum">      50 </span><span class="lineCov">       2012 :         uint_t output = (filtered + fixedPointAHalf) &gt;&gt; K;</span></a>
-<a name="51"><span class="lineNum">      51 </span><span class="lineCov">       2012 :         filtered -= output;</span></a>
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">       2012 :         return output;</span></a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">       2030 :     uint_t filter(uint_t input) {</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">       2030 :         filtered += input;</span></a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">       2030 :         uint_t output = (filtered + fixedPointAHalf) &gt;&gt; K;</span></a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">       2030 :         filtered -= output;</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">       2030 :         return output;</span></a>
 <a name="53"><span class="lineNum">      53 </span>            :     }</a>
 <a name="54"><span class="lineNum">      54 </span>            : </a>
 <a name="55"><span class="lineNum">      55 </span>            :     /**</a>
@@ -137,7 +137,7 @@
 <a name="67"><span class="lineNum">      67 </span>            :         &quot;the division using bit shifts is invalid.&quot;);</a>
 <a name="68"><span class="lineNum">      68 </span>            : </a>
 <a name="69"><span class="lineNum">      69 </span>            :   private:</a>
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          2 :     uint_t filtered = 0;</span></a>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">         14 :     uint_t filtered = 0;</span></a>
 <a name="71"><span class="lineNum">      71 </span>            :     constexpr static uint_t fixedPointAHalf = 1 &lt;&lt; (K - 1);</a>
 <a name="72"><span class="lineNum">      72 </span>            : };</a>
 <a name="73"><span class="lineNum">      73 </span>            : </a>

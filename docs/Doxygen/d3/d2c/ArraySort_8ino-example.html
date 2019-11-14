@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: ArraySort.ino</title>
+<title>Control Surface: ArraySort.ino</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
+   <div id="projectname">Control Surface
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">MIDI Control Surface library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -74,7 +74,7 @@ $(function() {
 <div class="title">ArraySort.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md0"></a>
+<h1><a class="anchor" id="autotoc_md33"></a>
 ArraySort</h1>
 <p>Example of using the standard library algorithms.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
@@ -85,7 +85,30 @@ ArraySort</h1>
 <div class="line">  Sorting            ├─────────────────┤      in descending order</div>
 <div class="line">After sorting:  3, 5, 9, 8, 6, 4, 2, 1, 7, 0</div>
 </div><!-- fragment --><p>Written by PieterP, 2019-11-12 <a href="https://github.com/tttapa/Arduino-Helpers">https://github.com/tttapa/Arduino-Helpers</a></p>
-<div class="fragment"><div class="line"> </div>
+<div class="fragment"><div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * Example of using the standard library algorithms.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @boards  AVR, AVR USB, Teensy 3.x, ESP32</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * This sketch creates an array with an unordered sequence of 10 numbers.</span></div>
+<div class="line"><span class="comment"> * It prints the array, and then creates a reverse view on the 6 elements in the </span></div>
+<div class="line"><span class="comment"> * middle of the array and sorts it.</span></div>
+<div class="line"><span class="comment"> * The resulting array has the same elements in the 4 outermost places, but the</span></div>
+<div class="line"><span class="comment"> * 6 elements in the middle have been sorted in reverse order.</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * **Output**</span></div>
+<div class="line"><span class="comment"> * ~~~</span></div>
+<div class="line"><span class="comment"> * Before sorting: 3, 5, 9, 2, 1, 8, 6, 4, 7, 0</span></div>
+<div class="line"><span class="comment"> *   Sorting            ├─────────────────┤      in ascending order</span></div>
+<div class="line"><span class="comment"> * After sorting:  3, 5, 1, 2, 4, 6, 8, 9, 7, 0</span></div>
+<div class="line"><span class="comment"> *   Sorting            ├─────────────────┤      in descending order</span></div>
+<div class="line"><span class="comment"> * After sorting:  3, 5, 9, 8, 6, 4, 2, 1, 7, 0</span></div>
+<div class="line"><span class="comment"> * ~~~</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * Written by PieterP, 2019-11-12</span></div>
+<div class="line"><span class="comment"> * https://github.com/tttapa/Arduino-Helpers</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../de/d76/Array_8hpp.html">AH/Containers/Array.hpp</a>&gt;</span>        <span class="comment">// Array</span></div>
@@ -97,15 +120,15 @@ ArraySort</h1>
 <div class="line">  <span class="keywordflow">while</span> (!Serial)</div>
 <div class="line">    ;</div>
 <div class="line"> </div>
-<div class="line">  <a name="_a0"></a><a class="code" href="../../d7/d6a/structArray.html">Array&lt;int, 10&gt;</a> array = {3, 5, 9, 2, 1, 8, 6, 4, 7, 0};</div>
+<div class="line">  Array&lt;int, 10&gt; array = {3, 5, 9, 2, 1, 8, 6, 4, 7, 0};</div>
 <div class="line"> </div>
-<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;Before sorting: &quot;</span> &lt;&lt; array &lt;&lt; <a name="a1"></a><a class="code" href="../../da/d69/PrintStream_8cpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
+<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;Before sorting: &quot;</span> &lt;&lt; array &lt;&lt; <a name="a0"></a><a class="code" href="../../da/d69/PrintStream_8cpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
 <div class="line"> </div>
 <div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;  Sorting            ├─────────────────┤      in ascending order&quot;</span></div>
 <div class="line">         &lt;&lt; <a class="code" href="../../da/d69/PrintStream_8cpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// select elements 2 through 7 (inclusive)</span></div>
-<div class="line">  <span class="keyword">auto</span> forward_view = array.<a name="a2"></a><a class="code" href="../../d7/d6a/structArray.html#a7190f8a90f43436823e0eb3cfe450e10">slice</a>&lt;2, 7&gt;();</div>
+<div class="line">  <span class="keyword">auto</span> forward_view = array.slice&lt;2, 7&gt;();</div>
 <div class="line">  <span class="comment">// sort the view in ascending order</span></div>
 <div class="line">  std::sort(std::begin(forward_view), std::end(forward_view));</div>
 <div class="line"> </div>
@@ -114,7 +137,7 @@ ArraySort</h1>
 <div class="line">         &lt;&lt; <a class="code" href="../../da/d69/PrintStream_8cpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// select elements 2 through 7 (inclusive) in reverse order</span></div>
-<div class="line">  <span class="keyword">auto</span> reverse_view = array.<a class="code" href="../../d7/d6a/structArray.html#a7190f8a90f43436823e0eb3cfe450e10">slice</a>&lt;7, 2&gt;();</div>
+<div class="line">  <span class="keyword">auto</span> reverse_view = array.slice&lt;7, 2&gt;();</div>
 <div class="line">  <span class="comment">// sort the reverse view in ascending order (this means that the original</span></div>
 <div class="line">  <span class="comment">// array is sorted in descending order)</span></div>
 <div class="line">  std::sort(std::begin(reverse_view), std::end(reverse_view));</div>
@@ -125,10 +148,8 @@ ArraySort</h1>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
-<div class="ttc" id="astructArray_html"><div class="ttname"><a href="../../d7/d6a/structArray.html">Array</a></div><div class="ttdoc">An array wrapper for easy copying, comparing, and iterating.</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d76/Array_8hpp_source.html#l00032">Array.hpp:32</a></div></div>
 <div class="ttc" id="aArray_8hpp_html"><div class="ttname"><a href="../../de/d76/Array_8hpp.html">Array.hpp</a></div></div>
 <div class="ttc" id="aArrayHelpers_8hpp_html"><div class="ttname"><a href="../../d5/db6/ArrayHelpers_8hpp.html">ArrayHelpers.hpp</a></div></div>
-<div class="ttc" id="astructArray_html_a7190f8a90f43436823e0eb3cfe450e10"><div class="ttname"><a href="../../d7/d6a/structArray.html#a7190f8a90f43436823e0eb3cfe450e10">Array::slice</a></div><div class="ttdeci">ArraySlice&lt; T, abs_diff(Start, End)+1,(End&lt; Start), false &gt; slice()</div><div class="ttdoc">Get a view on a slice of the Array.</div></div>
 <div class="ttc" id="aPrintStream_8cpp_html_aae13bd0e8ea7184cf85b86bcd1a01e2d"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a></div><div class="ttdeci">Print &amp; endl(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00027">PrintStream.cpp:27</a></div></div>
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <!-- start footer part -->

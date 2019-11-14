@@ -199,7 +199,7 @@
 </g>
 <!-- Node13 -->
 <g id="node13" class="node"><title>Node13</title>
-<g id="a_node13"><a xlink:href="../../dc/dc7/NamespaceSettings_8hpp.html" target="_top" xlink:title=" ">
+<g id="a_node13"><a xlink:href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="238,-0.5 238,-19.5 362,-19.5 362,-0.5 238,-0.5"/>
 <text text-anchor="middle" x="300" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">NamespaceSettings.hpp</text>
 </a>
@@ -308,7 +308,7 @@
 </g>
 <!-- Node12 -->
 <g id="node12" class="node"><title>Node12</title>
-<g id="a_node12"><a xlink:href="../../d2/dd5/SettingsWrapper_8hpp.html" target="_top" xlink:title=" ">
+<g id="a_node12"><a xlink:href="../../de/dd1/AH_2Settings_2SettingsWrapper_8hpp.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="330,-168.5 330,-187.5 494,-187.5 494,-168.5 330,-168.5"/>
 <text text-anchor="middle" x="412" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">AH/Settings/SettingsWrapper.hpp</text>
 </a>
@@ -349,7 +349,7 @@
 </g>
 <!-- Node14 -->
 <g id="node14" class="node"><title>Node14</title>
-<g id="a_node14"><a xlink:href="../../db/d02/Settings_8hpp.html" target="_top" xlink:title="All user settings and debugging options can be changed here.">
+<g id="a_node14"><a xlink:href="../../d5/d4f/AH_2Settings_2Settings_8hpp.html" target="_top" xlink:title="All user settings and debugging options can be changed here.">
 <polygon fill="white" stroke="black" points="514.5,-112.5 514.5,-131.5 585.5,-131.5 585.5,-112.5 514.5,-112.5"/>
 <text text-anchor="middle" x="550" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">Settings.hpp</text>
 </a>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['timefunction_905',['timefunction',['../d1/dd0/MillisMicrosTimer_8hpp.html#a4086ab91003e2f23ab3d8d590d6f2fe3',1,'MillisMicrosTimer.hpp']]],
-  ['type_906',['type',['../d7/d6a/structArray.html#a3cbf8f2bfa23eb494f638eaa609a92f4',1,'Array']]]
+  ['setting_5ft_4209',['setting_t',['../d0/d4e/Def_8hpp.html#a51d33bc7af1fb6a6705f272add970db0',1,'Def.hpp']]],
+  ['sysexmessagecallback_4210',['SysExMessageCallback',['../dc/d45/classControl__Surface__.html#ae647a6e44a9ec71d446912be232bfe53',1,'Control_Surface_']]]
 ];

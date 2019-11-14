@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: MAX7219SevenSegmentDisplay.hpp File Reference</title>
+<title>Control Surface: MAX7219SevenSegmentDisplay.hpp File Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
+   <div id="projectname">Control Surface
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">MIDI Control Surface library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -76,6 +76,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">MAX7219SevenSegmentDisplay.hpp File Reference</div>  </div>
@@ -85,121 +86,39 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for MAX7219SevenSegmentDisplay.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d2/de5/MAX7219SevenSegmentDisplay_8hpp__incl.svg" width="1107" height="888"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d2/de5/MAX7219SevenSegmentDisplay_8hpp__incl.svg" width="1107" height="888"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d59/MAX7219SevenSegmentDisplay_8hpp__dep__incl.svg" width="248" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 </div>
 <p><a href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d26/classMAX7219SevenSegmentDisplay.html">MAX7219SevenSegmentDisplay</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class for 8-digit 7-segment displays with a <a class="el" href="../../dc/d19/classMAX7219.html" title="A class for LED outputs using the MAX7219 LED display driver.">MAX7219</a> driver.  <a href="../../d4/d26/classMAX7219SevenSegmentDisplay.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d72/classAH_1_1MAX7219SevenSegmentDisplay.html">AH::MAX7219SevenSegmentDisplay</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class for 8-digit 7-segment displays with a <a class="el" href="../../de/de9/classAH_1_1MAX7219.html" title="A class for LED outputs using the MAX7219 LED display driver.">MAX7219</a> driver.  <a href="../../d9/d72/classAH_1_1MAX7219SevenSegmentDisplay.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:dc/d69/namespaceAH"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d69/namespaceAH.html">AH</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a5a6ac1773492df06f2083501ada5e692"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html#a5a6ac1773492df06f2083501ada5e692">SevenSegmentCharacters</a> [0x40]</td></tr>
-<tr class="memdesc:a5a6ac1773492df06f2083501ada5e692"><td class="mdescLeft">&#160;</td><td class="mdescRight">A lookup table for 7-segment characters, as specified by the Logic Control manual.  <a href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html#a5a6ac1773492df06f2083501ada5e692">More...</a><br /></td></tr>
-<tr class="separator:a5a6ac1773492df06f2083501ada5e692"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a421add2f41548ad816d5d9bb028cfa6f"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html#a421add2f41548ad816d5d9bb028cfa6f">AlphaChars</a> = &amp;<a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html#a5a6ac1773492df06f2083501ada5e692">SevenSegmentCharacters</a>[0x01]</td></tr>
-<tr class="separator:a421add2f41548ad816d5d9bb028cfa6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22aef2ea85e50ea5193e012410dfb4b0"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html#a22aef2ea85e50ea5193e012410dfb4b0">NumericChars</a> = &amp;<a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html#a5a6ac1773492df06f2083501ada5e692">SevenSegmentCharacters</a>[0x30]</td></tr>
-<tr class="separator:a22aef2ea85e50ea5193e012410dfb4b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1594f3a4214b45e577326a593fd7f731"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d69/namespaceAH.html#a1594f3a4214b45e577326a593fd7f731">AH::SevenSegmentCharacters</a> [0x40]</td></tr>
+<tr class="memdesc:a1594f3a4214b45e577326a593fd7f731"><td class="mdescLeft">&#160;</td><td class="mdescRight">A lookup table for 7-segment characters, as specified by the Logic Control manual.  <a href="../../dc/d69/namespaceAH.html#a1594f3a4214b45e577326a593fd7f731">More...</a><br /></td></tr>
+<tr class="separator:a1594f3a4214b45e577326a593fd7f731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ad923931cb77ac27715f717d8ada4f1"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d69/namespaceAH.html#a0ad923931cb77ac27715f717d8ada4f1">AH::AlphaChars</a> = &amp;SevenSegmentCharacters[0x01]</td></tr>
+<tr class="separator:a0ad923931cb77ac27715f717d8ada4f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21ad37da0e731f4767bc782f13bc46fd"><td class="memItemLeft" align="right" valign="top">static constexpr const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d69/namespaceAH.html#a21ad37da0e731f4767bc782f13bc46fd">AH::NumericChars</a> = &amp;SevenSegmentCharacters[0x30]</td></tr>
+<tr class="separator:a21ad37da0e731f4767bc782f13bc46fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a5a6ac1773492df06f2083501ada5e692"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a6ac1773492df06f2083501ada5e692">&#9670;&nbsp;</a></span>SevenSegmentCharacters</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t SevenSegmentCharacters[0x40]</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    0b00000000, 0b01110111, 0b00011111, 0b01001110, </div>
-<div class="line">    0b00111101, 0b01001111, 0b01000111, 0b01011110, </div>
-<div class="line">    0b00010111, 0b00110000, 0b00111100, 0b00000111, </div>
-<div class="line">    0b00001110, 0b01110110, 0b00010101, 0b00011101, </div>
-<div class="line">    0b01100111, 0b01110011, 0b00000101, 0b01011011, </div>
-<div class="line">    0b00001111, 0b00011100, 0b00100111, 0b00111110, </div>
-<div class="line">    0b00110111, 0b00111011, 0b01101101, 0b01001110, </div>
-<div class="line">    0b00010011, 0b01111000, 0b01100010, 0b00001000, </div>
-<div class="line">    0b00000000, 0b00000000, 0b00100010, 0b01100011, </div>
-<div class="line">    0b01011011, 0b01100111, 0b01111101, 0b00000010, </div>
-<div class="line">    0b01001110, 0b01111000, 0b01100011, 0b00110001, </div>
-<div class="line">    0b00000100, 0b00000001, 0b00001000, 0b00100101, </div>
-<div class="line">    0b01111110, 0b00110000, 0b01101101, 0b01111001, </div>
-<div class="line">    0b00110011, 0b01011011, 0b01011111, 0b01110000, </div>
-<div class="line">    0b01111111, 0b01111011, 0b00000000, 0b01000100, </div>
-<div class="line">    0b00110001, 0b00001001, 0b00000111, 0b01100101, </div>
-<div class="line">}</div>
-</div><!-- fragment -->
-<p>A lookup table for 7-segment characters, as specified by the Logic Control manual. </p>
-<p><b>A</b> | | F | | B |__G__| | | E | | C |__D__| o DP </p>
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp_source.html#l00019">19</a> of file <a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp_source.html">MAX7219SevenSegmentDisplay.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a421add2f41548ad816d5d9bb028cfa6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a421add2f41548ad816d5d9bb028cfa6f">&#9670;&nbsp;</a></span>AlphaChars</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const uint8_t* AlphaChars = &amp;<a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html#a5a6ac1773492df06f2083501ada5e692">SevenSegmentCharacters</a>[0x01]</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp_source.html#l00038">38</a> of file <a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp_source.html">MAX7219SevenSegmentDisplay.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a22aef2ea85e50ea5193e012410dfb4b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22aef2ea85e50ea5193e012410dfb4b0">&#9670;&nbsp;</a></span>NumericChars</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const uint8_t* NumericChars = &amp;<a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html#a5a6ac1773492df06f2083501ada5e692">SevenSegmentCharacters</a>[0x30]</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp_source.html#l00039">39</a> of file <a class="el" href="../../d5/d0c/MAX7219SevenSegmentDisplay_8hpp_source.html">MAX7219SevenSegmentDisplay.hpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

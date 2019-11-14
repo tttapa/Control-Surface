@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: Debug.ino</title>
+<title>Control Surface: Debug.ino</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
+   <div id="projectname">Control Surface
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">MIDI Control Surface library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -74,14 +74,14 @@ $(function() {
 <div class="title">Debug.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md1"></a>
+<h1><a class="anchor" id="autotoc_md34"></a>
 Debug</h1>
 <p>This examples shows how use the debug macros for printing different kinds of debugging information</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md2"></a>
+<h2><a class="anchor" id="autotoc_md35"></a>
 Behavior</h2>
 <ul>
-<li>Enable debugging in <code><a class="el" href="../../db/d02/Settings_8hpp.html" title="All user settings and debugging options can be changed here.">src/AH/Settings/Settings.hpp</a></code>.</li>
+<li>Enable debugging in <code><a class="el" href="../../d5/d4f/AH_2Settings_2Settings_8hpp.html" title="All user settings and debugging options can be changed here.">src/AH/Settings/Settings.hpp</a></code>.</li>
 <li>Upload the sketch to the Arduino, and open the Serial Monitor (<code>CTRL+Shift+M</code>)</li>
 <li>Every five seconds, debugging information is printed, for example:</li>
 </ul>
@@ -96,7 +96,36 @@ Behavior</h2>
 <div class="line">[<span class="keywordtype">int</span> someFunction(<span class="keywordtype">int</span>) @ line 26]:  parameter = 42</div>
 </div><!-- fragment --><p>Written by PieterP, 2018-07-31 <br  />
  <a href="https://github.com/tttapa/Arduino-Helpers">https://github.com/tttapa/Arduino-Helpers</a></p>
-<div class="fragment"><div class="line"> </div>
+<div class="fragment"><div class="line"><span class="comment">/**</span></div>
+<div class="line"><span class="comment"> * This examples shows how use the debug macros for printing different kinds of</span></div>
+<div class="line"><span class="comment"> * debugging information</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * @boards  AVR, AVR USB, Teensy 3.x, ESP32</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * Behavior</span></div>
+<div class="line"><span class="comment"> * --------</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * - Enable debugging in `src/AH/Settings/Settings.hpp`.</span></div>
+<div class="line"><span class="comment"> * - Upload the sketch to the Arduino, and open the Serial Monitor </span></div>
+<div class="line"><span class="comment"> *   (`CTRL+Shift+M`)</span></div>
+<div class="line"><span class="comment"> * - Every five seconds, debugging information is printed, for example:</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * ~~~</span></div>
+<div class="line"><span class="comment"> * This is the result of `DEBUG`</span></div>
+<div class="line"><span class="comment"> * [/home/pieter/GitHub/Arduino-Debugging/Example/Example.ino:12]:  This is the result of `DEBUGREF`</span></div>
+<div class="line"><span class="comment"> * [void loop() @ line 13]: This is the result of `DEBUGFN`</span></div>
+<div class="line"><span class="comment"> * [0:2:11.085]:    This is the result of `DEBUGTIME`</span></div>
+<div class="line"><span class="comment"> * a = 1, b = 2, c = 3</span></div>
+<div class="line"><span class="comment"> * log10(1000) - 2 = 1.00</span></div>
+<div class="line"><span class="comment"> * millis() = 131085</span></div>
+<div class="line"><span class="comment"> * Serial.read() = -1</span></div>
+<div class="line"><span class="comment"> * [int someFunction(int) @ line 26]:   parameter = 42</span></div>
+<div class="line"><span class="comment"> * ~~~</span></div>
+<div class="line"><span class="comment"> * </span></div>
+<div class="line"><span class="comment"> * Written by PieterP, 2018-07-31  </span></div>
+<div class="line"><span class="comment"> * https://github.com/tttapa/Arduino-Helpers</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../df/dee/Debug_8hpp.html">AH/Debug/Debug.hpp</a>&gt;</span></div>

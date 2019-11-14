@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['settings_968',['Settings',['../d3/d43/group__Settings.html',1,'']]]
+  ['printstream_4322',['PrintStream',['../d7/d3f/group__PrintStream.html',1,'']]]
 ];

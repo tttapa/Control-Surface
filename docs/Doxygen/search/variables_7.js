@@ -1,6 +1,16 @@
 var searchData=
 [
-  ['hertz_821',['hertz',['../d7/d90/classFrequency.html#a42d4284ade4160360eb7a54afccf5a4c',1,'Frequency']]],
-  ['high_822',['HIGH',['../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d',1,'ExtendedInputOutput.hpp']]],
-  ['hysteresis_823',['hysteresis',['../da/da7/classFilteredAnalog.html#a5bd61ac70b34ee15cf1811aefd330aa0',1,'FilteredAnalog']]]
+  ['hairless_5fbaud_3764',['HAIRLESS_BAUD',['../dc/d4f/Settings_2Settings_8hpp.html#aee625974250707110fbe8686b37ae3a1',1,'Settings.hpp']]],
+  ['harmonica_3765',['Harmonica',['../da/da6/namespaceMIDI__PC.html#ae70b7f033757f7f0e9e690fe15d9791c',1,'MIDI_PC']]],
+  ['harpsichord_3766',['Harpsichord',['../da/da6/namespaceMIDI__PC.html#ac203f2e71f07ffae31487bf6f398250c',1,'MIDI_PC']]],
+  ['header_3767',['header',['../d7/d3f/structChannelMessage.html#a4a90c0b5ab52e44c5bb035868f3bc9c5',1,'ChannelMessage']]],
+  ['height_3768',['height',['../d2/df6/structXBitmap.html#aadc2e950f43a466fb09b0b0239dcf3ee',1,'XBitmap']]],
+  ['helicopter_3769',['Helicopter',['../da/da6/namespaceMIDI__PC.html#a4f8a81aeed217dabed21b64a12b08789',1,'MIDI_PC']]],
+  ['hertz_3770',['hertz',['../df/d4d/classAH_1_1Frequency.html#abf51dc7119409dc403a0e1a23c7d26c3',1,'AH::Frequency']]],
+  ['high_3771',['HIGH',['../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d',1,'ExtendedInputOutput.hpp']]],
+  ['high_5fresolution_5fvelocity_5fprefix_3772',['High_Resolution_Velocity_Prefix',['../d4/dbe/namespaceMIDI__CC.html#ad7384a220e9d2f6115a8729356cf3787',1,'MIDI_CC']]],
+  ['hold_3773',['Hold',['../d6/d98/namespaceMCU_1_1VUDecay.html#ac4567deabb7cfc6e3cd01c45aacfb0a6',1,'MCU::VUDecay']]],
+  ['hold_5f2_3774',['Hold_2',['../d4/dbe/namespaceMIDI__CC.html#a4f4fbdf93ecdd1f1768b84b3dcd847eb',1,'MIDI_CC']]],
+  ['honkytonk_5fpiano_3775',['HonkyTonk_Piano',['../da/da6/namespaceMIDI__PC.html#a7551c21061b43f19efaffce9f7dbd930',1,'MIDI_PC']]],
+  ['hysteresis_3776',['hysteresis',['../d3/d6e/classAH_1_1FilteredAnalog.html#a82d4abfe5f6635b1fda61e1bfd072ee6',1,'AH::FilteredAnalog']]]
 ];

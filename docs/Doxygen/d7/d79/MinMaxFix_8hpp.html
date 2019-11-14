@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: MinMaxFix.hpp File Reference</title>
+<title>Control Surface: MinMaxFix.hpp File Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
+   <div id="projectname">Control Surface
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">MIDI Control Surface library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -75,36 +75,44 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">MinMaxFix.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="../../dc/dc7/NamespaceSettings_8hpp_source.html">AH/Settings/NamespaceSettings.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp_source.html">AH/Settings/NamespaceSettings.hpp</a>&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for MinMaxFix.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/dce/MinMaxFix_8hpp__incl.svg" width="352" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/dce/MinMaxFix_8hpp__incl.svg" width="352" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d4/d14/MinMaxFix_8hpp__dep__incl.svg" width="1898" height="560"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d4/d14/MinMaxFix_8hpp__dep__incl.svg" width="10794" height="710"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 </div>
 <p><a href="../../d7/d79/MinMaxFix_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:dc/d69/namespaceAH"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d69/namespaceAH.html">AH</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga14defb38b6c00778e25b94ea91b0b4ac"><td class="memTemplParams" colspan="2">template&lt;class T , class U &gt; </td></tr>
-<tr class="memitem:ga14defb38b6c00778e25b94ea91b0b4ac"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../df/d13/group__Math.html#ga14defb38b6c00778e25b94ea91b0b4ac">min</a> (const T &amp;a, const U &amp;b) -&gt; decltype(b&lt; a ? b :a)</td></tr>
-<tr class="memdesc:ga14defb38b6c00778e25b94ea91b0b4ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the smaller of two numbers/objects.  <a href="../../df/d13/group__Math.html#ga14defb38b6c00778e25b94ea91b0b4ac">More...</a><br /></td></tr>
-<tr class="separator:ga14defb38b6c00778e25b94ea91b0b4ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9e95297ceced5af9c60b19932989502d"><td class="memTemplParams" colspan="2">template&lt;class T , class U &gt; </td></tr>
-<tr class="memitem:ga9e95297ceced5af9c60b19932989502d"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../df/d13/group__Math.html#ga9e95297ceced5af9c60b19932989502d">max</a> (const T &amp;a, const U &amp;b) -&gt; decltype(a&lt; b ? b :a)</td></tr>
-<tr class="memdesc:ga9e95297ceced5af9c60b19932989502d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the larger of two numbers/objects.  <a href="../../df/d13/group__Math.html#ga9e95297ceced5af9c60b19932989502d">More...</a><br /></td></tr>
-<tr class="separator:ga9e95297ceced5af9c60b19932989502d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5e07739c1fd7a29e6b2840237af7f1bc"><td class="memTemplParams" colspan="2">template&lt;class T , class U &gt; </td></tr>
+<tr class="memitem:ga5e07739c1fd7a29e6b2840237af7f1bc"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../df/d13/group__Math.html#ga5e07739c1fd7a29e6b2840237af7f1bc">AH::min</a> (const T &amp;a, const U &amp;b) -&gt; decltype(b&lt; a ? b :a)</td></tr>
+<tr class="memdesc:ga5e07739c1fd7a29e6b2840237af7f1bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the smaller of two numbers/objects.  <a href="../../df/d13/group__Math.html#ga5e07739c1fd7a29e6b2840237af7f1bc">More...</a><br /></td></tr>
+<tr class="separator:ga5e07739c1fd7a29e6b2840237af7f1bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9c976cf1a12d963c960d12808675e8a9"><td class="memTemplParams" colspan="2">template&lt;class T , class U &gt; </td></tr>
+<tr class="memitem:ga9c976cf1a12d963c960d12808675e8a9"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../df/d13/group__Math.html#ga9c976cf1a12d963c960d12808675e8a9">AH::max</a> (const T &amp;a, const U &amp;b) -&gt; decltype(a&lt; b ? b :a)</td></tr>
+<tr class="memdesc:ga9c976cf1a12d963c960d12808675e8a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the larger of two numbers/objects.  <a href="../../df/d13/group__Math.html#ga9c976cf1a12d963c960d12808675e8a9">More...</a><br /></td></tr>
+<tr class="separator:ga9c976cf1a12d963c960d12808675e8a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

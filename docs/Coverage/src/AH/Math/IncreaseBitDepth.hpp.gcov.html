@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - f37e26f20cf510efd46f00ec2ed0243c86a219dc - src/AH/Math/IncreaseBitDepth.hpp</title>
+  <title>LCOV - 19343ebcf36971a89e33a8a2b20977410e6d8881 - src/AH/Math/IncreaseBitDepth.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">f37e26f20cf510efd46f00ec2ed0243c86a219dc</td>
+            <td class="headerValue">19343ebcf36971a89e33a8a2b20977410e6d8881</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,11 +37,11 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-13 00:31:02</td>
+            <td class="headerValue">2019-11-14 16:43:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -90,10 +90,10 @@
 <a name="20"><span class="lineNum">      20 </span>            : </a>
 <a name="21"><span class="lineNum">      21 </span>            : template &lt;size_t Bits_out, size_t Bits_in, class T_out, class T_in&gt;</a>
 <a name="22"><span class="lineNum">      22 </span>            : std::enable_if_t&lt;(Bits_out &lt;= 2 * Bits_in), T_out&gt;</a>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          8 : increaseBitDepthImpl(T_in in) {</span></a>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          8 :     constexpr size_t leftShift = Bits_out - Bits_in;</span></a>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          8 :     constexpr size_t rightShift = Bits_in - leftShift;</span></a>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          8 :     return (T_out(in) &lt;&lt; leftShift) | (in &gt;&gt; rightShift);</span></a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">         35 : increaseBitDepthImpl(T_in in) {</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">         35 :     constexpr size_t leftShift = Bits_out - Bits_in;</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">         35 :     constexpr size_t rightShift = Bits_in - leftShift;</span></a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">         35 :     return (T_out(in) &lt;&lt; leftShift) | (in &gt;&gt; rightShift);</span></a>
 <a name="27"><span class="lineNum">      27 </span>            : }</a>
 <a name="28"><span class="lineNum">      28 </span>            : </a>
 <a name="29"><span class="lineNum">      29 </span>            : /// @addtogroup    Math</a>
@@ -132,12 +132,12 @@
 <a name="62"><span class="lineNum">      62 </span>            :  * @return  The scaled up value.</a>
 <a name="63"><span class="lineNum">      63 </span>            :  */</a>
 <a name="64"><span class="lineNum">      64 </span>            : template &lt;size_t Bits_out, size_t Bits_in, class T_out, class T_in&gt;</a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          8 : T_out increaseBitDepth(T_in in) {</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">         35 : T_out increaseBitDepth(T_in in) {</span></a>
 <a name="66"><span class="lineNum">      66 </span>            :     static_assert(Bits_in &lt;= sizeof(T_in) * CHAR_BIT,</a>
 <a name="67"><span class="lineNum">      67 </span>            :                   &quot;Error: Bits_in &gt; bits(T_in)&quot;);</a>
 <a name="68"><span class="lineNum">      68 </span>            :     static_assert(Bits_out &lt;= sizeof(T_out) * CHAR_BIT,</a>
 <a name="69"><span class="lineNum">      69 </span>            :                   &quot;Error: Bits_out &gt; bits(T_out)&quot;);</a>
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          8 :     return increaseBitDepthImpl&lt;Bits_out, Bits_in, T_out&gt;(in);</span></a>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">         35 :     return increaseBitDepthImpl&lt;Bits_out, Bits_in, T_out&gt;(in);</span></a>
 <a name="71"><span class="lineNum">      71 </span>            : }</a>
 <a name="72"><span class="lineNum">      72 </span>            : </a>
 <a name="73"><span class="lineNum">      73 </span>            : /// @}</a>

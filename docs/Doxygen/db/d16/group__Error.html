@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: Error</title>
+<title>Control Surface: Error</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
+   <div id="projectname">Control Surface
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">MIDI Control Surface library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -163,7 +163,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> {                                                                       \</div>
 <div class="line">        USING_AH_NAMESPACE;                                                    \</div>
-<div class="line">        DEBUGFN(F(<span class="stringliteral">&quot;Fatal Error: &quot;</span>) &lt;&lt; msg &lt;&lt; <span class="stringliteral">&quot; (0x&quot;</span> &lt;&lt; <a class="code" href="../../da/d69/PrintStream_8cpp.html#aa47b34b5f85fef7f8b050c0d0a715d2f">hex</a> &lt;&lt; <a class="code" href="../../da/d69/PrintStream_8cpp.html#a2b44e6ada22b1b5a703617123ebd0598">uppercase</a>        \</div>
+<div class="line">        DEBUGFN(<a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a43bb6e39eb685f48594d3241b1bc55e1">F</a>(<span class="stringliteral">&quot;Fatal Error: &quot;</span>) &lt;&lt; msg &lt;&lt; <span class="stringliteral">&quot; (0x&quot;</span> &lt;&lt; <a class="code" href="../../da/d69/PrintStream_8cpp.html#aa47b34b5f85fef7f8b050c0d0a715d2f">hex</a> &lt;&lt; <a class="code" href="../../da/d69/PrintStream_8cpp.html#a2b44e6ada22b1b5a703617123ebd0598">uppercase</a>        \</div>
 <div class="line">                                   &lt;&lt; errc &lt;&lt; <a class="code" href="../../da/d69/PrintStream_8cpp.html#aa46b20141a495c428e33bcdcbf63c04e">dec</a> &lt;&lt; <a class="code" href="../../da/d69/PrintStream_8cpp.html#aff5eada882f71bd90e0de66c48faaeb3">nouppercase</a> &lt;&lt; <span class="charliteral">&#39;)&#39;</span>);      \</div>
 <div class="line">        fatalErrorExit();                                                      \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
@@ -177,6 +177,8 @@ Macros</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d3a/2_8VU-Meter-OLED-USB-DAC_8ino-example.html#a3">2.VU-Meter-OLED-USB-DAC.ino</a>, <a class="el" href="../../d0/d84/MCU-OLED-SSD1306-x2_8ino-example.html#a4">MCU-OLED-SSD1306-x2.ino</a>, <a class="el" href="../../dd/d42/MCU-OLED-SSD1306_8ino-example.html#a4">MCU-OLED-SSD1306.ino</a>, and <a class="el" href="../../d8/de6/VU-Meter-Bridge_8ino-example.html#a4">VU-Meter-Bridge.ino</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/d93/Error_8hpp_source.html#l00057">57</a> of file <a class="el" href="../../d1/d93/Error_8hpp_source.html">Error.hpp</a>.</p>
 
@@ -187,6 +189,7 @@ Macros</h2></td></tr>
 <div class="ttc" id="aPrintStream_8cpp_html_aff5eada882f71bd90e0de66c48faaeb3"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#aff5eada882f71bd90e0de66c48faaeb3">nouppercase</a></div><div class="ttdeci">Print &amp; nouppercase(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00040">PrintStream.cpp:40</a></div></div>
 <div class="ttc" id="aPrintStream_8cpp_html_aa46b20141a495c428e33bcdcbf63c04e"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#aa46b20141a495c428e33bcdcbf63c04e">dec</a></div><div class="ttdeci">Print &amp; dec(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00077">PrintStream.cpp:77</a></div></div>
 <div class="ttc" id="aPrintStream_8cpp_html_aa47b34b5f85fef7f8b050c0d0a715d2f"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#aa47b34b5f85fef7f8b050c0d0a715d2f">hex</a></div><div class="ttdeci">Print &amp; hex(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00062">PrintStream.cpp:62</a></div></div>
+<div class="ttc" id="anamespaceMIDI__Notes_html_a43bb6e39eb685f48594d3241b1bc55e1"><div class="ttname"><a href="../../d7/d78/namespaceMIDI__Notes.html#a43bb6e39eb685f48594d3241b1bc55e1">MIDI_Notes::F</a></div><div class="ttdeci">constexpr int8_t F</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dc5/Notes_8hpp_source.html#l00023">Notes.hpp:23</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

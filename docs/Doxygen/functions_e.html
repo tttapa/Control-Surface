@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: Class Members</title>
+<title>Control Surface: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Arduino Helpers
+   <div id="projectname">Control Surface
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Utility library for Arduino</div>
+   <div id="projectbrief">MIDI Control Surface library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -74,31 +74,65 @@ $(function() {
 
 <h3><a id="index_e"></a>- e -</h3><ul>
 <li>ElementPtrType
-: <a class="el" href="df/de0/classArraySlice.html#acd13b56ec45f9aee8638548c137a2094">ArraySlice&lt; T, N, Reverse, Const &gt;</a>
+: <a class="el" href="d2/dc9/classAH_1_1ArraySlice.html#ae815efa149af640572d262570c77e0f0">AH::ArraySlice&lt; T, N, Reverse, Const &gt;</a>
 </li>
 <li>ElementRefType
-: <a class="el" href="df/de0/classArraySlice.html#ab80039ba9df0bef46ed94bc8409ff755">ArraySlice&lt; T, N, Reverse, Const &gt;</a>
+: <a class="el" href="d2/dc9/classAH_1_1ArraySlice.html#a8864b11cd2fc246387ff4adace86db58">AH::ArraySlice&lt; T, N, Reverse, Const &gt;</a>
 </li>
 <li>elements
-: <a class="el" href="de/d4e/classExtendedIOElement.html#a972adc28e5ee916d7f1eaba13daf76a2">ExtendedIOElement</a>
+: <a class="el" href="d2/dda/classAH_1_1ExtendedIOElement.html#aa73a5b59330b4bc9562f39de640f58b3">AH::ExtendedIOElement</a>
+, <a class="el" href="d8/d43/classDisplayElement.html#ab2cc9ad72b720035a3e39c6a9b0c10f3">DisplayElement</a>
+, <a class="el" href="df/d42/classDisplayInterface.html#a40ef6f7f99789390d88e4d67fa436ba8">DisplayInterface</a>
+, <a class="el" href="d3/d96/classMIDIInputElementCC.html#abb45298f2fb5603360f5e30a807f6c1a">MIDIInputElementCC</a>
+, <a class="el" href="d1/df7/classMIDIInputElementChannelPressure.html#afd32e17bd94b1a83c8e29559a28b7b9f">MIDIInputElementChannelPressure</a>
+, <a class="el" href="db/d4b/classMIDIInputElementNote.html#a803846e21a2488fccf5f612087bbfa76">MIDIInputElementNote</a>
+, <a class="el" href="db/d1d/classMIDIInputElementPC.html#a1da309d5b769a517f0723e767865b9ac">MIDIInputElementPC</a>
+, <a class="el" href="dc/def/classMIDIInputElementSysEx.html#a6d9b96f3e379631dd543634a89b37d11">MIDIInputElementSysEx</a>
 </li>
 <li>EMA_f()
 : <a class="el" href="db/d6f/classEMA__f.html#a884fba1eb900c21bd0fedb3a891d3507">EMA_f</a>
 </li>
 <li>enable()
-: <a class="el" href="d5/de0/classUpdatable.html#ad4273e4aa2f15de8dbe478af16af259e">Updatable&lt; T &gt;</a>
+: <a class="el" href="d1/d55/classAH_1_1Updatable.html#ad17c70e02573d44a0c18d0ea75591ab4">AH::Updatable&lt; T &gt;</a>
 </li>
 <li>enablePin
-: <a class="el" href="d7/d8d/classAnalogMultiplex.html#a2d7896bcedc95c3aa74f57e7268078cd">AnalogMultiplex&lt; N &gt;</a>
+: <a class="el" href="d2/d94/classAH_1_1AnalogMultiplex.html#ae36bc1769ee5a123636f2211a6797d80">AH::AnalogMultiplex&lt; N &gt;</a>
+</li>
+<li>encoder
+: <a class="el" href="dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a64a108a0c9764840522de9af678a932b">Bankable::MIDIRotaryEncoder&lt; Sender &gt;</a>
+, <a class="el" href="da/dbf/classGenericEncoderSelector.html#a4e414fa1eebfa73019f1a71151cabf47">GenericEncoderSelector&lt; N, Callback &gt;</a>
+, <a class="el" href="d8/d20/classMIDIRotaryEncoder.html#a3d3256d09de61d6b3c5ccbe56b32fcc9">MIDIRotaryEncoder&lt; Sender &gt;</a>
+</li>
+<li>EncoderSelector()
+: <a class="el" href="d3/dc5/classEncoderSelector.html#a79907f1c533e2728598a4176f65598c5">EncoderSelector&lt; N &gt;</a>
+</li>
+<li>EncoderSelectorLEDs()
+: <a class="el" href="d8/df7/classEncoderSelectorLEDs.html#ab68ae6af61f17b5f1393fa66edfc8c1e">EncoderSelectorLEDs&lt; N &gt;</a>
+</li>
+<li>EncoderSwitchPinList()
+: <a class="el" href="d7/dc2/structEncoderSwitchPinList.html#a0bc9a283cfa2c285593e6e5fa7168f3f">EncoderSwitchPinList</a>
 </li>
 <li>end()
-: <a class="el" href="d7/d6a/structArray.html#a99c8affba2ed7cd3d9d39ed70c182caf">Array&lt; T, N &gt;</a>
-, <a class="el" href="df/de0/classArraySlice.html#aeafd03877a860e21203d3245b0a404ae">ArraySlice&lt; T, N, Reverse, Const &gt;</a>
-, <a class="el" href="dd/d16/classDoublyLinkedList.html#acbcb82c1029fcec3f6e8bcb3326df8c9">DoublyLinkedList&lt; Node &gt;</a>
-, <a class="el" href="de/d4e/classExtendedIOElement.html#a649aee01a4874e63c540b2aafd8afc03">ExtendedIOElement</a>
+: <a class="el" href="d0/d32/structAH_1_1Array.html#a75f8590e787ade1d3c996d9fe754171b">AH::Array&lt; T, N &gt;</a>
+, <a class="el" href="d2/dc9/classAH_1_1ArraySlice.html#a7cbf479293708a82a88c5a67d465dd76">AH::ArraySlice&lt; T, N, Reverse, Const &gt;</a>
+, <a class="el" href="d2/dda/classAH_1_1ExtendedIOElement.html#a332cc1e1355206c732d426409bbb0b33">AH::ExtendedIOElement</a>
+, <a class="el" href="d5/dc0/classChord.html#a01cb413bb322c10d22d70112d21e9f4d">Chord&lt; N &gt;</a>
+, <a class="el" href="dd/d16/classDoublyLinkedList.html#aa21ac3c9f28d3d2a6a26b4f56557c5a2">DoublyLinkedList&lt; Node &gt;</a>
+, <a class="el" href="db/dbe/classIChord.html#a6a53cc44d300ac691ec7f8c2244f71ee">IChord</a>
+, <a class="el" href="d1/db1/classSysExBuffer.html#a1f7af4669c4fca392bec6767a0c31f1a">SysExBuffer</a>
+</li>
+<li>endSysEx()
+: <a class="el" href="d0/d0d/classSerialMIDI__Parser.html#a88204d0c18b9efb220513dfa10c9c259">SerialMIDI_Parser</a>
+, <a class="el" href="db/db0/classUSBMIDI__Parser.html#ae61832c9768b95ccda2c77c2b1162763">USBMIDI_Parser</a>
+</li>
+<li>error
+: <a class="el" href="d6/d99/classBresenhamLine.html#a96c87015e50faead61c34a0e414e4c11">BresenhamLine</a>
+</li>
+<li>errorScalingFactor
+: <a class="el" href="d6/d99/classBresenhamLine.html#af4d6c9fbe257be0bb73907cd6fc802a6">BresenhamLine</a>
 </li>
 <li>ExtendedIOElement()
-: <a class="el" href="de/d4e/classExtendedIOElement.html#ac8029dcd223af8b53e4fdd588b309554">ExtendedIOElement</a>
+: <a class="el" href="d2/dda/classAH_1_1ExtendedIOElement.html#a1c7106f521a9ed1c46b6d47902a4b100">AH::ExtendedIOElement</a>
 </li>
 </ul>
 </div><!-- contents -->

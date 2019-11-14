@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['error_962',['Error',['../db/d16/group__Error.html',1,'']]],
-  ['extended_20input_2foutput_963',['Extended Input/Output',['../d1/d8e/group__ExtIO.html',1,'']]]
+  ['debug_4309',['Debug',['../df/dec/group__Debug.html',1,'']]],
+  ['display_20elements_4310',['Display Elements',['../d5/d1e/group__DisplayElements.html',1,'']]]
 ];
