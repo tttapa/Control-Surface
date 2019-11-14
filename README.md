@@ -1,3 +1,4 @@
+[![Build Status](https://github.com/tttapa/Arduino-Filters/workflows/CI%20Tests/badge.svg)](https://github.com/tttapa/Arduino-Filters/actions)
 [![Build Status](https://travis-ci.org/tttapa/Arduino-Helpers.svg?branch=master)](https://travis-ci.org/tttapa/Arduino-Helpers)
 
 # Arduino Helpers
