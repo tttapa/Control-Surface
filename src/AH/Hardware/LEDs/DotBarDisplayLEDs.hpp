@@ -20,7 +20,7 @@ enum class DotBarMode : bool {
  * @tparam  N 
  *          The number of LEDs in the bar.
  * 
- * @ingroup HardwareUtils
+ * @ingroup AH_HardwareUtils
  */
 template <uint8_t N>
 class DotBarDisplayLEDs : public LEDs<N> {

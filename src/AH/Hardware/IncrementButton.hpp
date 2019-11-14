@@ -14,7 +14,7 @@ BEGIN_AH_NAMESPACE
  * a certain threshold, it keeps on incrementing at a faster rate, until you
  * release it.
  * 
- * @ingroup HardwareUtils
+ * @ingroup AH_HardwareUtils
  */
 class IncrementButton {
   public:

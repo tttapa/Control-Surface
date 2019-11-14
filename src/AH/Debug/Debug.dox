@@ -4,7 +4,7 @@
 /// @endcond
 
 /**
- * @defgroup    Debug     Debug
+ * @defgroup    AH_Debug     Debug
  * @brief   Macros for printing debug information that can be easily enabled or 
  *          disabled.
  */

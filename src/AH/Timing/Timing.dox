@@ -4,7 +4,7 @@
 /// @endcond
 
 /**
- * @defgroup    Timing  Timing
+ * @defgroup    AH_Timing  Timing
  * @brief   Blink Without Delay-style timers.
  */
 

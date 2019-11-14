@@ -4,7 +4,7 @@
 /// @endcond
 
 /**
- * @defgroup    ExtIO Extended Input/Output
+ * @defgroup    AH_ExtIO Extended Input/Output
  * @brief   All Elements that extend the number of IO pins of the Arduino: 
  *          Currently only shift registers and multiplexers.
  */

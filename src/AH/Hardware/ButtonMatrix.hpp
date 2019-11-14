@@ -14,7 +14,7 @@ BEGIN_AH_NAMESPACE
  * @tparam  nb_cols
  *          The number of columns in the button matrix.
  * 
- * @ingroup HardwareUtils
+ * @ingroup AH_HardwareUtils
  */
 template <uint8_t nb_rows, uint8_t nb_cols>
 class ButtonMatrix {

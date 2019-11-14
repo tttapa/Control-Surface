@@ -26,7 +26,7 @@ increaseBitDepthImpl(T_in in) {
     return (T_out(in) << leftShift) | (in >> rightShift);
 }
 
-/// @addtogroup    Math
+/// @addtogroup    AH_Math
 /// @{
 
 /**

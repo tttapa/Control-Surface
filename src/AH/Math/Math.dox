@@ -4,7 +4,7 @@
 /// @endcond
 
 /**
- * @defgroup    Math   Math Utilities
+ * @defgroup    AH_Math   Math Utilities
  * @brief   Mathematics helper functions. Min/max functions, functions to 
  *          uniformly increase the effective bid depth, etc.
  */

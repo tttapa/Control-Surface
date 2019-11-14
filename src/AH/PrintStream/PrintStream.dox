@@ -4,7 +4,7 @@
 /// @endcond
 
 /**
- * @defgroup    PrintStream     PrintStream
+ * @defgroup    AH_PrintStream     PrintStream
  * @brief   Functions for printing to Streams using the streaming operator `<<`.
  */
 

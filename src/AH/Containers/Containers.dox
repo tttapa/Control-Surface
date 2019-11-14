@@ -4,7 +4,7 @@
 /// @endcond
 
 /** 
- * @defgroup    Containers Containers
+ * @defgroup    AH_Containers Containers
  * @brief   Containers like Array, BitArray, DoublyLinkedList and UniquePtr.
  */
 

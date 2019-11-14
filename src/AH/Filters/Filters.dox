@@ -4,7 +4,7 @@
 /// @endcond
 
 /**
- * @defgroup    Filters     Filters
+ * @defgroup    AH_Filters     Filters
  * @brief   Classes for basic filtering and hysteresis.
  */
 

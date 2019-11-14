@@ -7,7 +7,7 @@
 
 #include <Arduino.h>
 
-/// @addtogroup  PrintStream
+/// @addtogroup  AH_PrintStream
 /// @{
 
 typedef Print &manipulator(Print &);

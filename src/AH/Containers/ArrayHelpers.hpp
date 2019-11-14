@@ -47,7 +47,7 @@ class Incrementor {
 
 END_AH_NAMESPACE
 
-/// @addtogroup Containers
+/// @addtogroup AH_Containers
 /// @{
 
 BEGIN_AH_NAMESPACE

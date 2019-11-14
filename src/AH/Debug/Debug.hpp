@@ -63,13 +63,13 @@
 
 /// Macro for printing an expression as a string, followed by its value.
 /// The expression string is saved in PROGMEM using the `F(...)` macro.
-/// @ingroup    Debug
+/// @ingroup    AH_Debug
 #define NAMEDVALUE(x) F(DEBUG_STR(x) " = ") << x
 
 #ifdef DEBUG_OUT // Debugging enabled ==========================================
 
 /// Print an expression to the debug output if debugging is enabled.
-/// @ingroup    Debug
+/// @ingroup    AH_Debug
 #define DEBUG(x)                                                               \
     do {                                                                       \
         DEBUG_OUT << x << DEBUG_ENDL;                                          \
@@ -78,7 +78,7 @@
 /// Print an expression and its location (file and line number) to the debug
 /// output if debugging is enabled.
 /// The location is saved in PROGMEM using the `F(...)` macro.
-/// @ingroup    Debug
+/// @ingroup    AH_Debug
 #define DEBUGREF(x)                                                            \
     do {                                                                       \
         DEBUG_OUT << F(DEBUG_LOCATION) << x << DEBUG_ENDL;                     \
@@ -87,7 +87,7 @@
 /// Print an expression and its function (function name and line number) to the
 /// debug output if debugging is enabled.
 /// The function name is saved in RAM.
-/// @ingroup    Debug
+/// @ingroup    AH_Debug
 #define DEBUGFN(x)                                                             \
     do {                                                                       \
         DEBUG_OUT << DEBUG_FUNC_LOCATION << x << DEBUG_ENDL;                   \
@@ -98,7 +98,7 @@
 /// Print an expression and the time since startup to the debug output if
 /// debugging is enabled.
 /// Format: `[hours:minutes:seconds.milliseconds]`
-/// @ingroup    Debug
+/// @ingroup    AH_Debug
 #define DEBUGTIME(x)                                                           \
     do {                                                                       \
         unsigned long t = millis();                                            \
@@ -145,7 +145,7 @@ END_AH_NAMESPACE
 /// digitalRead(2) = 0`.
 /// A maximum of 10 expressions is supported.
 /// The expression strings are saved in PROGMEM using the `F(...)` macro.
-/// @ingroup    Debug
+/// @ingroup    AH_Debug
 #define DEBUGVAL(...) DEBUGVALN(COUNT(__VA_ARGS__))(__VA_ARGS__)
 
 #else // Debugging disabled ====================================================

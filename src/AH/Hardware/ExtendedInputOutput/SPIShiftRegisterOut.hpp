@@ -17,7 +17,7 @@ BEGIN_AH_NAMESPACE
  *          74HC595) have eight bits per chip, so `length = 8 * k` where `k`
  *          is the number of cascaded chips.
  * 
- * @ingroup ExtIO
+ * @ingroup AH_ExtIO
  */
 template <uint8_t N>
 class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {

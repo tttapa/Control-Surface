@@ -10,7 +10,7 @@ BEGIN_AH_NAMESPACE
 /**
  * @brief   A class for reading and debouncing buttons and switches.
  * 
- * @ingroup HardwareUtils
+ * @ingroup AH_HardwareUtils
  */
 class Button {
   public:

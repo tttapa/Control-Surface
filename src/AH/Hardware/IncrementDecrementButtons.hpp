@@ -17,7 +17,7 @@ BEGIN_AH_NAMESPACE
  * If both the increment and the decrement button are pressed at once, it resets
  * the counter.
  * 
- * @ingroup HardwareUtils
+ * @ingroup AH_HardwareUtils
  */
 class IncrementDecrementButtons {
   public:

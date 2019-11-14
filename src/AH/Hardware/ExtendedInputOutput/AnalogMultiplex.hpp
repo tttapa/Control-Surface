@@ -19,7 +19,7 @@ BEGIN_AH_NAMESPACE
  * @tparam  N 
  *          The number of address lines.
  * 
- * @ingroup ExtIO
+ * @ingroup AH_ExtIO
  */
 template <uint8_t N>
 class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
@@ -144,7 +144,7 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
  * @brief   An alias for AnalogMultiplex<4> to use with CD74HC4067 analog 
  *          multiplexers.
  * 
- * @ingroup ExtIO
+ * @ingroup AH_ExtIO
  */
 using CD74HC4067 = AnalogMultiplex<4>;
 
@@ -152,7 +152,7 @@ using CD74HC4067 = AnalogMultiplex<4>;
  * @brief   An alias for AnalogMultiplex<3> to use with CD74HC4051 analog 
  *          multiplexers.
  * 
- * @ingroup ExtIO
+ * @ingroup AH_ExtIO
  */
 using CD74HC4051 = AnalogMultiplex<3>;
 

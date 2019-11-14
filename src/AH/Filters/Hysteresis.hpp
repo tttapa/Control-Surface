@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-/// @addtogroup    Filters
+/// @addtogroup    AH_Filters
 /// @{
 
 /**

@@ -4,7 +4,7 @@
 /// @endcond
 
 /**
- * @defgroup    Error     Error
+ * @defgroup    AH_Error     Error
  * @brief   Macros for handling and reporting both fatal and non-fatal errors.
  */
 
