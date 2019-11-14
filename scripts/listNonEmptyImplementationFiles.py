@@ -16,7 +16,7 @@ template = """\
 
 
 def main():
-    for root, dirs, files in os.walk(src_dir, followlinks=True):
+    for root, dirs, files in os.walk(src_dir):
         for f in files:
             name, ext = splitext(f)
             if ext == '.cpp':

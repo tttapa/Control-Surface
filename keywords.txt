@@ -2,6 +2,58 @@
 # Datatypes (KEYWORD1)
 ################################################################################
 
+Arduino_Helpers	KEYWORD1
+
+# Hardware
+##########
+
+Button	KEYWORD1
+FilteredAnalog	KEYWORD1
+
+ExtIO	KEYWORD1
+ExtendedIOElement	KEYWORD1
+AnalogMultiplex	KEYWORD1
+CD74HC4051	KEYWORD1
+CD74HC4067	KEYWORD1
+ShiftRegisterOut	KEYWORD1
+SPIShiftRegisterOut	KEYWORD1
+pin_t	KEYWORD1
+analog_t	KEYWORD1
+
+# Types
+#######
+
+Array	KEYWORD1
+Array2D	KEYWORD1
+
+################################################################################
+# Methods and Functions (KEYWORD2)
+################################################################################
+
+update	KEYWORD2
+
+map	KEYWORD2
+invert	KEYWORD2
+
+add	KEYWORD2
+
+begin	KEYWORD2
+reset	KEYWORD2
+print	KEYWORD2
+pin	KEYWORD2
+getEnd	KEYWORD2
+getStart	KEYWORD2
+
+getIOElementOfPin	KEYWORD2
+getFirst	KEYWORD2
+getNext	KEYWORD2
+
+generateIncrementalArray	KEYWORD2
+
+################################################################################
+# Datatypes (KEYWORD1)
+################################################################################
+
 Control_Surface	KEYWORD1
 
 # Audio 
@@ -29,22 +81,6 @@ HairlessMIDI_Interface	KEYWORD1
 
 MIDI_Callbacks	KEYWORD1
 SysExMessage	KEYWORD1
-
-# Hardware
-##########
-
-Button	KEYWORD1
-FilteredAnalog	KEYWORD1
-
-ExtIO	KEYWORD1
-ExtendedIOElement	KEYWORD1
-AnalogMultiplex	KEYWORD1
-CD74HC4051	KEYWORD1
-CD74HC4067	KEYWORD1
-ShiftRegisterOut	KEYWORD1
-SPIShiftRegisterOut	KEYWORD1
-pin_t	KEYWORD1
-analog_t	KEYWORD1
 
 # MIDI Output Elements
 ######################
@@ -127,17 +163,9 @@ MCU	KEYWORD1
 MIDI_CC	KEYWORD1
 MIDI_PC	KEYWORD1
 
-# Types
-#######
-
-Array	KEYWORD1
-Array2D	KEYWORD1
-
-#######################################
+################################################################################
 # Methods and Functions (KEYWORD2)
-#######################################
-
-update	KEYWORD2
+################################################################################
 
 setDefault	KEYWORD2
 getDefault	KEYWORD2
@@ -163,27 +191,6 @@ getSelection	KEYWORD2
 getTracksPerBank	KEYWORD2
 getTransposition	KEYWORD2
 
-begin	KEYWORD2
-reset	KEYWORD2
-print	KEYWORD2
-pin	KEYWORD2
-getEnd	KEYWORD2
-getStart	KEYWORD2
-
-getIOElementOfPin	KEYWORD2
-getFirst	KEYWORD2
-getNext	KEYWORD2
-
-generateIncrementalArray	KEYWORD2
-
-red	KEYWORD2
-green	KEYWORD2
-blue	KEYWORD2
-redBit	KEYWORD2
-greenBit	KEYWORD2
-blueBit	KEYWORD2
-
-getState	KEYWORD2
 getMCUNameFromNoteNumber	KEYWORD2
 
 #######################################
@@ -219,6 +226,20 @@ CHANGE_ADDRESS	LITERAL1
 
 TOGGLE	LITERAL1
 MOMENTARY	LITERAL1
+
+
+red	KEYWORD2
+green	KEYWORD2
+blue	KEYWORD2
+redBit	KEYWORD2
+greenBit	KEYWORD2
+blueBit	KEYWORD2
+
+getState	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
 
 Rising	LITERAL1
 Falling	LITERAL1

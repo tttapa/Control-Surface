@@ -1,0 +1,13 @@
+#pragma once
+
+#ifdef __AVR__
+#include "Fallback/cstdint"
+#else
+#include <cstdint>
+#endif
+
+#include <AH/Settings/NamespaceSettings.hpp>
+
+BEGIN_AH_NAMESPACE
+
+END_AH_NAMESPACE

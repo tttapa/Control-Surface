@@ -1,3 +1,5 @@
+add_subdirectory(AH)
+
 if (FAST_COMPILE)
     set(CONTROL_SURFACE_SOURCES
         Def/MIDICNChannelAddress.cpp
@@ -52,3 +54,4 @@ else ()
 endif ()
 
 target_link_libraries(Control_Surface PUBLIC ArduinoMock)
+target_link_libraries(Control_Surface PUBLIC Arduino_Helpers)

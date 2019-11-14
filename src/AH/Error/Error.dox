@@ -1,0 +1,4 @@
+/**
+ * @defgroup    Error     Error
+ * @brief   Macros for handling and reporting both fatal and non-fatal errors.
+ */

@@ -1,0 +1,5 @@
+/**
+ * @defgroup    Debug     Debug
+ * @brief   Macros for printing debug information that can be easily enabled or 
+ *          disabled.
+ */
