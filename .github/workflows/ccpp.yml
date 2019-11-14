@@ -9,8 +9,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Checkout submodules
-      uses: textbook/git-checkout-submodule-action@2.0.0
+      with:
+        submodules: recursive
     - name: CMake
       run: cmake ..
       working-directory: build
