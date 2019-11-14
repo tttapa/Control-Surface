@@ -8,7 +8,7 @@ BEGIN_AH_NAMESPACE
 /// A function type that returns a time value.
 using timefunction = unsigned long (*)();
 
-/// @addtogroup    Timing
+/// @addtogroup    AH_Timing
 /// @{
 
 /**

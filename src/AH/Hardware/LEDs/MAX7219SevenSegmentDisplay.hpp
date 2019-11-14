@@ -41,7 +41,7 @@ static constexpr const uint8_t *NumericChars = &SevenSegmentCharacters[0x30];
 /**
  * @brief   A class for 8-digit 7-segment displays with a MAX7219 driver.
  * 
- * @ingroup HardwareUtils
+ * @ingroup AH_HardwareUtils
  */
 class MAX7219SevenSegmentDisplay : public MAX7219_Base {
   public:

@@ -6,7 +6,7 @@
 #include <AH/Settings/NamespaceSettings.hpp>
 #include <stdint.h>
 
-/// @addtogroup Containers
+/// @addtogroup AH_Containers
 /// @{
 
 BEGIN_AH_NAMESPACE

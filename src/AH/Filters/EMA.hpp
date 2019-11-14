@@ -33,7 +33,7 @@
  *          In case of the Arduino's built-in ADC,
  *          @f$ M = 10 = \log_2(1024) @f$.
  * 
- * @ingroup    Filters
+ * @ingroup    AH_Filters
  */
 template <uint8_t K, class uint_t>
 class EMA {
@@ -85,7 +85,7 @@ class EMA {
  * [An in-depth explanation of the EMA filter]
  * (https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential%20Moving%20Average/)
  * 
- * @ingroup    Filters
+ * @ingroup    AH_Filters
  */
 class EMA_f {
   public:

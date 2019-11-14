@@ -11,7 +11,7 @@ BEGIN_AH_NAMESPACE
  * @brief   A class for serial-in/parallel-out shift registers, 
  *          like the 74HC595.
  * 
- * @ingroup ExtIO
+ * @ingroup AH_ExtIO
  */
 template <uint8_t N>
 class ShiftRegisterOut : public ShiftRegisterOutBase<N> {

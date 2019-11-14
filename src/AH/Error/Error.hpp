@@ -35,7 +35,7 @@ END_AH_NAMESPACE
 /// @param  errc
 ///         A unique error code.
 ///
-/// @ingroup    Error
+/// @ingroup    AH_Error
 #define ERROR(msg, errc)                                                       \
     do {                                                                       \
         DEBUGFN(msg << " (0x" << hex << uppercase << errc << dec               \
@@ -53,7 +53,7 @@ END_AH_NAMESPACE
 /// @param  errc
 ///         A unique error code.
 ///
-/// @ingroup    Error
+/// @ingroup    AH_Error
 #define FATAL_ERROR(msg, errc)                                                 \
     do {                                                                       \
         USING_AH_NAMESPACE;                                                    \

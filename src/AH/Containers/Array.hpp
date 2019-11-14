@@ -14,7 +14,7 @@ constexpr T abs_diff(const T &a, const T &b) {
     return a < b ? b - a : a - b;
 }
 
-/// @addtogroup Containers
+/// @addtogroup AH_Containers
 /// @{
 
 template <class T, size_t N, bool Reverse, bool Const>

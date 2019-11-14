@@ -36,7 +36,7 @@ BEGIN_AH_NAMESPACE
  * @tparam  Upsample
  *          The number of bits to upsample the analog reading by.
  * 
- * @ingroup HardwareUtils
+ * @ingroup AH_HardwareUtils
  */
 template <uint8_t Precision = 10,
           uint8_t FilterShiftFactor = ANALOG_FILTER_SHIFT_FACTOR,

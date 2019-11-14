@@ -1,0 +1,8 @@
+/// @cond   !AH_MAIN_LIBRARY
+
+/**
+ * @defgroup    AH_group    Arduino Helpers
+ * @brief   Common utility library: <https://github.com/tttapa/Arduino-Helpers>
+ */
+
+/// @endcond

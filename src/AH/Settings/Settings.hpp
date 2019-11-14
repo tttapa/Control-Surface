@@ -5,7 +5,7 @@
 /**
  * @file
  * @brief   All user settings and debugging options can be changed here.
- * @ingroup Settings
+ * @ingroup AH_Settings
  */
 
 #include <AH/Types/Frequency.hpp>

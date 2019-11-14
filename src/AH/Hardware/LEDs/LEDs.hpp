@@ -12,7 +12,7 @@ BEGIN_AH_NAMESPACE
  * @tparam  N
  *          The number of LEDs in the collection.
  * 
- * @ingroup HardwareUtils
+ * @ingroup AH_HardwareUtils
  */
 template <uint8_t N>
 class LEDs {
