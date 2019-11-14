@@ -23,7 +23,7 @@ before_install:
   - sudo apt-get install libstdc++6 -y
 
 install:
-  - bash scripts/install-travis.sh
+  - bash scripts/install-ci.sh
 
 script:
-  - bash scripts/build-travis.sh
+  - bash scripts/build-ci.sh
