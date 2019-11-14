@@ -105,7 +105,7 @@ class Button {
     State debouncedState = Released;
     unsigned long prevBounceTime = 0;
 
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT // Edit this in Settings/Settings.hpp
+#ifdef AH_INDIVIDUAL_BUTTON_INVERT // Edit this in AH/Settings/Settings.hpp
     bool invertState = false;
 #else 
     static bool invertState;

@@ -141,7 +141,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
     analog_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<Sender::precision()> filteredAnalog;
+    AH::FilteredAnalog<Sender::precision()> filteredAnalog;
     const MIDICNChannelAddress address;
 
   public:

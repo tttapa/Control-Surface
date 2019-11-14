@@ -29,8 +29,7 @@ dirnm = os.path.dirname(os.path.realpath(__file__))
 inputdir = os.path.realpath(os.path.join(dirnm,  '../XBM'))
 outputdir = os.path.realpath(os.path.join(dirnm, '..'))
 # pngoutputdir = os.path.realpath(os.path.join(dirnm, '../PNG'))
-pngoutputdir = os.path.realpath(os.path.join(
-    dirnm, '../../../../doc/Doxygen/images/xbm'))
+pngoutputdir = os.getcwd()
 
 os.makedirs(pngoutputdir, exist_ok=True)
 

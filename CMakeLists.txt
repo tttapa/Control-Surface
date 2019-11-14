@@ -93,13 +93,15 @@ add_subdirectory(test)
 # Custom targets for documentation 
 ################################################################################
 
-# Add export documentation target
-add_custom_target(export_documentation ./Export.sh
-WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../doc/Doxygen/Scripts)
+add_custom_target(export_documentation ./export.sh
+WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen/scripts)
 
 # Add XBM target
-add_custom_target(xbm python3 XBM-export.py
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../src/Display/Bitmaps/Scripts/)
+add_custom_target(xbm 
+    python3 ${CMAKE_CURRENT_LIST_DIR}/src/Display/Bitmaps/Scripts/XBM-export.py
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen/images/xbm)
+
+# Add export documentation target
 add_custom_target(documentation 
     rm -rf html && ./scripts/examples.py && doxygen
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen)

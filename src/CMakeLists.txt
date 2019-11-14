@@ -13,15 +13,6 @@ if (FAST_COMPILE)
         Display/DisplayInterface.cpp
         Display/DisplayElement.cpp
         Display/MCU/VPotDisplay.cpp
-        AH/PrintStream/PrintStream.cpp
-        AH/Debug/Debug.cpp
-        AH/Hardware/IncrementDecrementButtons.cpp
-        AH/Hardware/Button.cpp
-        AH/Hardware/IncrementButton.cpp
-        AH/Hardware/ExtendedInputOutput/ShiftRegisterOutRGB.cpp
-        AH/Hardware/ExtendedInputOutput/ExtendedIOElement.cpp
-        AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp
-        AH/Error/Exit.cpp
         Control_Surface/Control_Surface_Class.cpp
         MIDI_Senders/RelativeCCSender.cpp
         Banks/BankAddresses.cpp
@@ -34,6 +25,7 @@ if (FAST_COMPILE)
 else ()
     file(GLOB_RECURSE
         CONTROL_SURFACE_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+    list(FILTER CONTROL_SURFACE_SOURCES EXCLUDE REGEX "AH/.*")
 endif ()
 
 add_library(Control_Surface ${CONTROL_SURFACE_SOURCES})

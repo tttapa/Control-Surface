@@ -66,18 +66,6 @@
  * @brief   All MIDI Interfaces that can send and receive MIDI events.
  */
 
-/**
- * @defgroup    ExtIO Extended Input/Output
- * @brief   All Elements that extend the number of IO pins of the Arduino: 
- *          Currently only shift registers and multiplexers.
- */
-
-/**
- * @defgroup    HardwareUtils   Hardware Utilities
- * @brief   Classes used for debouncing buttons, incrementing/decrementing
- *          push buttons, scanning switch matrices, filtering analog input, etc.
- */
-
 /** 
  * @defgroup    DisplayElements Display Elements
  * @brief   All Elements that can be used to show the state of the Control 
@@ -88,18 +76,6 @@
  * @defgroup    ControlSurfaceModule Control Surface
  * @brief   The main class that initializes, manages and updates all other
  *          elements.
- */
-
-/**
- * @defgroup    Utilities Utilities
- * @brief   All kinds of utility and helper classes that are used throughout the
- *          library, such as containers and filters.
- */
-
-/** 
- * @ingroup Utilities
- * @defgroup    Containers Containers
- * @brief   Containers like Array, BitArray and DoublyLinkedList.
  */
 
 /**

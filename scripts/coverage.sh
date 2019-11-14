@@ -7,7 +7,7 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 proj_dir=`realpath "$dir"/..`
 build_dir=`pwd`
 
-html_dest="$proj_dir/doc/Coverage/html"
+html_dest="$proj_dir/docs/Coverage"
 dest="$build_dir/coverage"
 mkdir -p "$dest"
 mkdir -p "$html_dest"
@@ -67,6 +67,6 @@ lcov \
 genhtml \
     --prefix `realpath "$proj_dir"` \
     "$dest"/coverage_filtered.info \
-    --output-directory="$dest"/html \
+    --output-directory="$html_dest" \
     --legend --title `cd "$proj_dir" && git rev-parse HEAD` \
     --rc lcov_branch_coverage=$branches

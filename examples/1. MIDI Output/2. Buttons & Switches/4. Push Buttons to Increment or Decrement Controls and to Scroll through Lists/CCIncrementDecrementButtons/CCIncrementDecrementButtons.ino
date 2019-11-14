@@ -25,8 +25,8 @@
  *   sending increment/decrement messages quickly until you release it (like a 
  *   key on a computer keyboard).
  *   This is to make it easier to scroll a large amount, for example.
- *   The timing can be changed by tweaking @ref LONG_PRESS_DELAY and 
- *   @ref LONG_PRESS_REPEAT_DELAY in Settings/Settings.hpp.
+ *   The timing can be changed by tweaking @ref AH::LONG_PRESS_DELAY and 
+ *   @ref AH::LONG_PRESS_REPEAT_DELAY in @ref AH/Settings/Settings.hpp.
  * - If both buttons are pressed simultaneously, a MIDI Note On event is sent on
  *   note `MCU::V_POT_SELECT_1`.  
  *   (This is optional, you can just leave out the final argument to the 

@@ -32,7 +32,7 @@ DOXYFILE_ENCODING      = UTF-8
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME           = "Arduino Helpers"
+PROJECT_NAME           = "Control Surface"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
@@ -44,7 +44,7 @@ PROJECT_NUMBER         = 1.0.0
 # for a project that appears at the top of each page and should give viewer a
 # quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = "Utility library for Arduino"
+PROJECT_BRIEF          = "MIDI Control Surface library for Arduino"
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
@@ -645,7 +645,7 @@ SORT_BY_SCOPE_NAME     = NO
 # accept a match between prototype and implementation in such cases.
 # The default value is: NO.
 
-STRICT_PROTO_MATCHING  = YES
+STRICT_PROTO_MATCHING  = NO
 
 # The GENERATE_TODOLIST tag can be used to enable (YES) or disable (NO) the todo
 # list. This list is created by putting \todo commands in the documentation.
@@ -821,8 +821,11 @@ WARN_LOGFILE           =
 
 INPUT                  = "../examples/examples.dox" \
                          "../src/" \
-                         "../README.md" \
-                         "pages/Debug.md"
+                         "pages/Getting-Started.md" \
+                         "pages/Installation.md" \
+                         "pages/MIDI-over-USB.md" \
+                         "pages/Debug.md" \
+                         "../README.md"
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -920,7 +923,9 @@ EXAMPLE_RECURSIVE      = YES
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             = "images"
+IMAGE_PATH             = "svg" \
+                         "images" \
+                         "images/xbm"
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -1002,7 +1007,7 @@ INLINE_SOURCES         = NO
 # Fortran comments will always remain visible.
 # The default value is: YES.
 
-STRIP_CODE_COMMENTS    = YES
+STRIP_CODE_COMMENTS    = NO
 
 # If the REFERENCED_BY_RELATION tag is set to YES then for each documented
 # entity all documented functions referencing it will be listed.
@@ -1177,7 +1182,10 @@ HTML_EXTRA_STYLESHEET  = "custom_stylesheet.css"
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = 
+HTML_EXTRA_FILES       = "svg/selector-multiple-momentary-switches-LED.svg" \
+                         "svg/selector-increment-decrement-LED.svg" \
+                         "svg/selector-one-toggle-switch-LED.svg" \
+                         "svg/selector-increment-LED.svg"
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to
@@ -2129,8 +2137,10 @@ PREDEFINED             = ARDUINO \
                          TEENSY_AUDIOUSB_ENABLED \
                          USE_MIDI_USB_INTERFACE \
                          PROGMEM \
-                         BEGIN_AH_NAMESPACE=; \
-                         END_AH_NAMESPACE=;
+                         BEGIN_CS_NAMESPACE=; \
+                         END_CS_NAMESPACE=; \
+                         BEGIN_AH_NAMESPACE="namespace AH {" \
+                         END_AH_NAMESPACE="}"
 
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
