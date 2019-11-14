@@ -1,5 +1,14 @@
+/// @cond   !AH_MAIN_LIBRARY
+/// @addtogroup AH_group
+/// @{
+/// @endcond
+
 /**
  * @defgroup    Debug     Debug
  * @brief   Macros for printing debug information that can be easily enabled or 
  *          disabled.
  */
+
+/// @cond   !AH_MAIN_LIBRARY
+/// @}
+/// @endcond

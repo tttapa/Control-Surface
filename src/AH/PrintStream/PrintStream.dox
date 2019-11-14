@@ -1,4 +1,13 @@
+/// @cond   !AH_MAIN_LIBRARY
+/// @addtogroup AH_group
+/// @{
+/// @endcond
+
 /**
  * @defgroup    PrintStream     PrintStream
  * @brief   Functions for printing to Streams using the streaming operator `<<`.
  */
+
+/// @cond   !AH_MAIN_LIBRARY
+/// @}
+/// @endcond

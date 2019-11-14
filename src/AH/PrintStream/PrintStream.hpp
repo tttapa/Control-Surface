@@ -7,6 +7,9 @@
 
 #include <Arduino.h>
 
+/// @addtogroup  PrintStream
+/// @{
+
 typedef Print &manipulator(Print &);
 
 Print &endl(Print &printer);
@@ -59,6 +62,8 @@ struct Setbytesep {
 };
 Setbytesep setbytesep(char bytesep);
 Print &operator<<(Print &printer, Setbytesep f);
+
+/// @}
 
 #ifndef ARDUINO
 

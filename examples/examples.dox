@@ -1,4 +1,23 @@
 /**
+ * @example   "Complex.ino"
+ * 
+ * Complex
+ * =======
+ *
+ * Example of using the standard library complex numbers.
+ *
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ *
+ * **Output**
+ * ~~~
+ * √(2i) = (1.00,1.00)
+ * ~~~
+ * 
+ * Written by PieterP, 2019-11-14
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
  * @example   "ArraySort.ino"
  * 
  * ArraySort
