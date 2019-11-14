@@ -16,5 +16,5 @@ fi
     --default-board 'AVR USB' \
     --directory ../examples \
     --parallel $p --jobs $j \
-    --board-options-file ../test/examples-board-options-travis.txt \
+    --board-options-file ../test/examples-board-options-ci.txt \
     # --verbose # --print-successful

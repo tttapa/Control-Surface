@@ -51,4 +51,5 @@ else
     make install PREFIX=$HOME/.local
 fi
 
-ln -s "$TRAVIS_BUILD_DIR" "$HOME/Arduino/libraries/Control-Surface"
+ln -s "${TRAVIS_BUILD_DIR}${GITHUB_WORKSPACE}" \
+      "$HOME/Arduino/libraries/Control-Surface"

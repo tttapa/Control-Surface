@@ -6,6 +6,7 @@
 
 #include <AH/STL/algorithm>
 #include <AH/STL/cmath>
+#include <AH/STL/complex>
 #include <AH/STL/cstdint>
 #include <AH/STL/cstdlib>
 #include <AH/STL/initializer_list>

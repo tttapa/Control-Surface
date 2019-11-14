@@ -1,0 +1,16 @@
+#pragma once
+
+#include <AH/Settings/NamespaceSettings.hpp>
+
+#ifdef __AVR__
+#include "Fallback/complex"
+#else
+#include <complex>
+#endif
+
+#include <AH/PrintStream/PrintStream.hpp>
+
+template <typename Tp>
+Print &operator<<(Print &os, const std::complex<Tp> &x) {
+    return os << '(' << x.real() << ',' << x.imag() << ')';
+}
