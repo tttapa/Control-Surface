@@ -74,7 +74,7 @@ $(function() {
 <div class="title">2.VU-Meter-OLED-USB-DAC.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md104"></a>
+<h1><a class="anchor" id="autotoc_md105"></a>
 2.VU-Meter-OLED-USB-DAC</h1>
 <p>This example shows the usage of the <a class="el" href="../../d4/dce/classAudioVU.html" title="A VU meter that reads from an Audio stream using the Analyzer class.">AudioVU</a> and AnalogVUDisplay classes of the Control Surface library. <br  />
 </p>
@@ -82,7 +82,7 @@ $(function() {
  The VU meters imitate the inertia and ballistics of real analog VU meters.</p>
 <p>It acts as a USB Audio DAC (Digital-to-Analog Converter).</p>
 <dl class="section user"><dt>Boards:</dt><dd>Teensy 3.x</dd></dl>
-<h2><a class="anchor" id="autotoc_md105"></a>
+<h2><a class="anchor" id="autotoc_md106"></a>
 Connections</h2>
 <ul>
 <li>A0: wiper of a potentiometer to change the output volume</li>
@@ -100,15 +100,15 @@ Connections</h2>
 <p>Add a capacitor between the reset pin of the displays and ground, and a resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ work fine. <br  />
  You do need some way to reset the displays, without it, it won't work. <br  />
  Alternatively, you could use an IO pin from the Teensy to reset the displays, but this just "wastes" a pin.</p>
-<h2><a class="anchor" id="autotoc_md106"></a>
+<h2><a class="anchor" id="autotoc_md107"></a>
 Behavior</h2>
 <p>Upload the sketch, and select the Control Surface as the audio output of your computer. Connect the output of the DAC to a pair of headphones or powered speakers, and play some music. <br  />
  You should see the VU meters come to life and jump around to the music.</p>
 <p>You can now adjust the volume using the potentiometer on pin A0, and the gain/sensitivity of the meters using the potentiometer on pin A1.</p>
-<h2><a class="anchor" id="autotoc_md107"></a>
+<h2><a class="anchor" id="autotoc_md108"></a>
 Mapping</h2>
 <p>None.</p>
-<h2><a class="anchor" id="autotoc_md108"></a>
+<h2><a class="anchor" id="autotoc_md109"></a>
 Demo</h2>
 <dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000001">Todo:</a></b></dt><dd>Add a demo video.</dd></dl>
 <p>Written by PieterP, 2019-08-09 <br  />
@@ -218,7 +218,7 @@ Demo</h2>
 <div class="line">  <span class="keywordtype">void</span> <a name="a2"></a><a class="code" href="../../df/d42/classDisplayInterface.html#a37445a6dc517bc34bbfb67fc6eea3996">begin</a>()<span class="keyword"> override </span>{</div>
 <div class="line">    <span class="comment">// Initialize the Adafruit_SSD1306 display</span></div>
 <div class="line">    <span class="keywordflow">if</span> (!disp.begin())</div>
-<div class="line">      <a name="a3"></a><a class="code" href="../../db/d16/group__Error.html#ga3add19f1f413c0aabde3f5c6fe4230c6">FATAL_ERROR</a>(<a name="a4"></a><a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a43bb6e39eb685f48594d3241b1bc55e1">F</a>(<span class="stringliteral">&quot;SSD1306 allocation failed.&quot;</span>), 0x1306);</div>
+<div class="line">      <a name="a3"></a><a class="code" href="../../d0/df7/group__AH__Error.html#ga3add19f1f413c0aabde3f5c6fe4230c6">FATAL_ERROR</a>(<a name="a4"></a><a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a43bb6e39eb685f48594d3241b1bc55e1">F</a>(<span class="stringliteral">&quot;SSD1306 allocation failed.&quot;</span>), 0x1306);</div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#ifdef DIGITAL_VU</span></div>
 <div class="line">    disp.setRotation(1); <span class="comment">// Rotate the display in portrait mode</span></div>
@@ -326,6 +326,7 @@ Demo</h2>
 <div class="ttc" id="aclassMovingCoilBallistics_html_ac62a70eda14779a73fa517ee4669e5c1"><div class="ttname"><a href="../../d0/d49/classMovingCoilBallistics.html#ac62a70eda14779a73fa517ee4669e5c1">MovingCoilBallistics::responsiveVU</a></div><div class="ttdeci">static MovingCoilBallistics responsiveVU(float Tsfactor=2.0)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d4f/MovingCoilBallistics_8hpp_source.html#l00040">MovingCoilBallistics.hpp:40</a></div></div>
 <div class="ttc" id="aclassMovingCoilBallistics_html_aa419c4e8eebabb73aad89838fa073fa2"><div class="ttname"><a href="../../d0/d49/classMovingCoilBallistics.html#aa419c4e8eebabb73aad89838fa073fa2">MovingCoilBallistics::noOvershoot</a></div><div class="ttdeci">static MovingCoilBallistics noOvershoot(float Tsfactor=1.0)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d4f/MovingCoilBallistics_8hpp_source.html#l00044">MovingCoilBallistics.hpp:44</a></div></div>
 <div class="ttc" id="aclassAudioVU_html"><div class="ttname"><a href="../../d4/dce/classAudioVU.html">AudioVU</a></div><div class="ttdoc">A VU meter that reads from an Audio stream using the Analyzer class.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/de8/AudioVU_8hpp_source.html#l00016">AudioVU.hpp:16</a></div></div>
+<div class="ttc" id="agroup__AH__Error_html_ga3add19f1f413c0aabde3f5c6fe4230c6"><div class="ttname"><a href="../../d0/df7/group__AH__Error.html#ga3add19f1f413c0aabde3f5c6fe4230c6">FATAL_ERROR</a></div><div class="ttdeci">#define FATAL_ERROR(msg, errc)</div><div class="ttdoc">Print the error message and error code, and stop the execution.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d93/Error_8hpp_source.html#l00057">Error.hpp:57</a></div></div>
 <div class="ttc" id="aSettings_2Settings_8hpp_html_ab44cfa307e19c5688403a9506ea0555e"><div class="ttname"><a href="../../dc/d4f/Settings_2Settings_8hpp.html#ab44cfa307e19c5688403a9506ea0555e">MAX_FPS</a></div><div class="ttdeci">constexpr uint8_t MAX_FPS</div><div class="ttdoc">The maximum frame rate of the displays.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d4f/Settings_2Settings_8hpp_source.html#l00059">Settings/Settings.hpp:59</a></div></div>
 <div class="ttc" id="aControl__Surface_8h_html"><div class="ttname"><a href="../../db/dbf/Control__Surface_8h.html">Control_Surface.h</a></div><div class="ttdoc">The main header file that includes all Control-Surface header files.</div></div>
 <div class="ttc" id="aclassMCU_1_1AnalogVUDisplay_html"><div class="ttname"><a href="../../dc/d95/classMCU_1_1AnalogVUDisplay.html">MCU::AnalogVUDisplay</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d0/db9/VUDisplay_8hpp_source.html#l00093">VUDisplay.hpp:93</a></div></div>
@@ -337,7 +338,6 @@ Demo</h2>
 <div class="ttc" id="aclassMCU_1_1VUDisplay_html"><div class="ttname"><a href="../../d4/d42/classMCU_1_1VUDisplay.html">MCU::VUDisplay</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d0/db9/VUDisplay_8hpp_source.html#l00010">VUDisplay.hpp:10</a></div></div>
 <div class="ttc" id="aclassControl__Surface___html_aff515a0b3c0cd86ab716bb2ff01a07ef"><div class="ttname"><a href="../../dc/d45/classControl__Surface__.html#aff515a0b3c0cd86ab716bb2ff01a07ef">Control_Surface_::updateDisplays</a></div><div class="ttdeci">void updateDisplays()</div><div class="ttdoc">Clear, draw and display all displays.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d38/Control__Surface__Class_8cpp_source.html#l00158">Control_Surface_Class.cpp:158</a></div></div>
 <div class="ttc" id="aclassVolumeControl_html"><div class="ttname"><a href="../../d4/de3/classVolumeControl.html">VolumeControl</a></div><div class="ttdoc">A class for controlling the volume of AudioMixer4 objects using a potentiometer.</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d51/VolumeControl_8hpp_source.html#l00023">VolumeControl.hpp:23</a></div></div>
-<div class="ttc" id="agroup__Error_html_ga3add19f1f413c0aabde3f5c6fe4230c6"><div class="ttname"><a href="../../db/d16/group__Error.html#ga3add19f1f413c0aabde3f5c6fe4230c6">FATAL_ERROR</a></div><div class="ttdeci">#define FATAL_ERROR(msg, errc)</div><div class="ttdoc">Print the error message and error code, and stop the execution.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d93/Error_8hpp_source.html#l00057">Error.hpp:57</a></div></div>
 <div class="ttc" id="anamespaceAH_html_a3d80655b4e921cc260215660d0117684"><div class="ttname"><a href="../../dc/d69/namespaceAH.html#a3d80655b4e921cc260215660d0117684">AH::SPI_MAX_SPEED</a></div><div class="ttdeci">constexpr static Frequency SPI_MAX_SPEED</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d4f/AH_2Settings_2Settings_8hpp_source.html#l00085">AH/Settings/Settings.hpp:85</a></div></div>
 <div class="ttc" id="aclassAudioVU_html_a3e2d23e9a4d13d95c9c423aad13010b5"><div class="ttname"><a href="../../d4/dce/classAudioVU.html#a3e2d23e9a4d13d95c9c423aad13010b5">AudioVU::setGain</a></div><div class="ttdeci">void setGain(float gain)</div><div class="ttdoc">Set the gain for the VU meter.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/de8/AudioVU_8hpp_source.html#l00090">AudioVU.hpp:90</a></div></div>
 <div class="ttc" id="aclassDisplayInterface_html_a37445a6dc517bc34bbfb67fc6eea3996"><div class="ttname"><a href="../../df/d42/classDisplayInterface.html#a37445a6dc517bc34bbfb67fc6eea3996">DisplayInterface::begin</a></div><div class="ttdeci">virtual void begin()</div><div class="ttdoc">Initialize the display.</div><div class="ttdef"><b>Definition:</b> <a href="../../da/ddf/DisplayInterface_8cpp_source.html#l00007">DisplayInterface.cpp:7</a></div></div>

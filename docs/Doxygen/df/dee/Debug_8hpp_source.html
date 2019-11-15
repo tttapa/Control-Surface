@@ -143,14 +143,14 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">/// Macro for printing an expression as a string, followed by its value.</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/// The expression string is saved in PROGMEM using the `F(...)` macro.</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">/// @ingroup    Debug</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="../../df/dec/group__Debug.html#ga35654913b4a1f9d9300f847fab14b3d3">   67</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define NAMEDVALUE(x) F(DEBUG_STR(x) &quot; = &quot;) &lt;&lt; x</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">/// @ingroup    AH_Debug</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="../../d4/da5/group__AH__Debug.html#ga35654913b4a1f9d9300f847fab14b3d3">   67</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define NAMEDVALUE(x) F(DEBUG_STR(x) &quot; = &quot;) &lt;&lt; x</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#ifdef DEBUG_OUT // Debugging enabled ==========================================</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/// Print an expression to the debug output if debugging is enabled.</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">/// @ingroup    Debug</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="../../df/dec/group__Debug.html#ga3dfa58b1c5c2943dd49d8aa1981d377d">   73</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define DEBUG(x)                                                               \</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">/// @ingroup    AH_Debug</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="../../d4/da5/group__AH__Debug.html#ga3dfa58b1c5c2943dd49d8aa1981d377d">   73</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define DEBUG(x)                                                               \</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">    do {                                                                       \</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">        DEBUG_OUT &lt;&lt; x &lt;&lt; DEBUG_ENDL;                                          \</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">    } while (0)</span></div>
@@ -158,8 +158,8 @@ $(function() {
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/// Print an expression and its location (file and line number) to the debug</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">/// output if debugging is enabled.</span></div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">/// The location is saved in PROGMEM using the `F(...)` macro.</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">/// @ingroup    Debug</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="../../df/dec/group__Debug.html#gafedb5ed0c0a4ef76c6b968368af014c7">   82</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define DEBUGREF(x)                                                            \</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">/// @ingroup    AH_Debug</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="../../d4/da5/group__AH__Debug.html#gafedb5ed0c0a4ef76c6b968368af014c7">   82</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define DEBUGREF(x)                                                            \</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">    do {                                                                       \</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">        DEBUG_OUT &lt;&lt; F(DEBUG_LOCATION) &lt;&lt; x &lt;&lt; DEBUG_ENDL;                     \</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">    } while (0)</span></div>
@@ -167,8 +167,8 @@ $(function() {
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">/// Print an expression and its function (function name and line number) to the</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">/// debug output if debugging is enabled.</span></div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">/// The function name is saved in RAM.</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">/// @ingroup    Debug</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="../../df/dec/group__Debug.html#ga5e1b7520df0706433ae295a78471fb3c">   91</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define DEBUGFN(x)                                                             \</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">/// @ingroup    AH_Debug</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="../../d4/da5/group__AH__Debug.html#ga5e1b7520df0706433ae295a78471fb3c">   91</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define DEBUGFN(x)                                                             \</span></div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">    do {                                                                       \</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">        DEBUG_OUT &lt;&lt; DEBUG_FUNC_LOCATION &lt;&lt; x &lt;&lt; DEBUG_ENDL;                   \</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">    } while (0)</span></div>
@@ -178,8 +178,8 @@ $(function() {
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">/// Print an expression and the time since startup to the debug output if</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">/// debugging is enabled.</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">/// Format: `[hours:minutes:seconds.milliseconds]`</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">/// @ingroup    Debug</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="../../df/dec/group__Debug.html#ga95d4440a4127650cdd221322b1780833">  102</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define DEBUGTIME(x)                                                           \</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">/// @ingroup    AH_Debug</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="../../d4/da5/group__AH__Debug.html#ga95d4440a4127650cdd221322b1780833">  102</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define DEBUGTIME(x)                                                           \</span></div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">    do {                                                                       \</span></div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">        unsigned long t = millis();                                            \</span></div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">        unsigned long h = t / (60UL * 60 * 1000);                              \</span></div>
@@ -225,8 +225,8 @@ $(function() {
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">/// digitalRead(2) = 0`.</span></div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">/// A maximum of 10 expressions is supported.</span></div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">/// The expression strings are saved in PROGMEM using the `F(...)` macro.</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">/// @ingroup    Debug</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="../../df/dec/group__Debug.html#gaab96fed8c4f7d9e0f985b05cc6a419b2">  149</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define DEBUGVAL(...) DEBUGVALN(COUNT(__VA_ARGS__))(__VA_ARGS__)</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">/// @ingroup    AH_Debug</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="../../d4/da5/group__AH__Debug.html#gaab96fed8c4f7d9e0f985b05cc6a419b2">  149</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define DEBUGVAL(...) DEBUGVALN(COUNT(__VA_ARGS__))(__VA_ARGS__)</span></div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">#else // Debugging disabled ====================================================</span></div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>

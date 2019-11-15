@@ -74,23 +74,23 @@ $(function() {
 <div class="title">Dual-MIDI-Interface.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md64"></a>
+<h1><a class="anchor" id="autotoc_md65"></a>
 Dual-MIDI-Interface</h1>
 <p>This example demonstrates how to group together two or more MIDI interfaces, so you can send the MIDI output over both MIDI USB and 5-pin DIN MIDI, for example. MIDI input is received from all interfaces as well.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR USB, Teensy 3.x</dd></dl>
-<h2><a class="anchor" id="autotoc_md65"></a>
+<h2><a class="anchor" id="autotoc_md66"></a>
 Connections</h2>
 <ul>
 <li>A0: wiper of a potentiometer</li>
 </ul>
 <p>Connect the left terminal of the potentiometer to ground, and the right one to V<sub>CC</sub>.</p>
-<h2><a class="anchor" id="autotoc_md66"></a>
+<h2><a class="anchor" id="autotoc_md67"></a>
 Behavior</h2>
 <ul>
 <li>When you turn the potentiometer, you should receive MIDI Control Change events on both the Serial MIDI interface and the USB MIDI interface.</li>
 <li>When a MIDI Note event for middle C is received on either MIDI interface, the state of the built-in LED will change accordingly.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md67"></a>
+<h2><a class="anchor" id="autotoc_md68"></a>
 Mapping</h2>
 <ul>
 <li>None</li>

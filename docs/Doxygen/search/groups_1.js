@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['containers_4307',['Containers',['../db/d50/group__Containers.html',1,'']]],
-  ['control_20surface_4308',['Control Surface',['../d7/d16/group__ControlSurfaceModule.html',1,'']]]
+  ['bankable_20midi_20input_20elements_4312',['Bankable MIDI Input Elements',['../d8/d6f/group__BankableMIDIInputElements.html',1,'']]],
+  ['bankable_20midi_20output_20elements_4313',['Bankable MIDI Output Elements',['../d2/d00/group__BankableMIDIOutputElements.html',1,'']]]
 ];

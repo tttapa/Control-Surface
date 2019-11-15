@@ -77,35 +77,35 @@ $(function() {
 <div class="textblock"><p>This document assumes that the Arduino IDE is already installed, as well as the necessary hardware support packages, such as Teensyduino or the ESP32 Core.</p>
 <p>You have to install the Control Surface library itself, as well as some dependencies.</p>
 <p>If you want to keep up to date with the latest developments, or if you want an easy way to update, the git install is recommended. Otherwise, you can use the no git install.</p>
-<h1><a class="anchor" id="autotoc_md130"></a>
+<h1><a class="anchor" id="autotoc_md131"></a>
 Installation (no git)</h1>
-<h2><a class="anchor" id="autotoc_md131"></a>
+<h2><a class="anchor" id="autotoc_md132"></a>
 1. Download</h2>
 <p>Download the repository as a ZIP archive by going to the <a href="https://github.com/tttapa/Control-Surface">home page of the repository</a> and click the green <em>Clone or download</em> button on the top right.</p>
-<h2><a class="anchor" id="autotoc_md132"></a>
+<h2><a class="anchor" id="autotoc_md133"></a>
 2. Install the Library in the Arduino IDE</h2>
 <p>Open the Arduino IDE, and go to the <em>Sketch &gt; Include Library &gt; Add .ZIP Library</em> menu. <br  />
  Then navigate to your downloads directory where you just downloaded the library. <br  />
  Select it, and click <em>Ok</em>.</p>
-<h1><a class="anchor" id="autotoc_md133"></a>
+<h1><a class="anchor" id="autotoc_md134"></a>
 Installation (git)</h1>
-<h2><a class="anchor" id="autotoc_md134"></a>
+<h2><a class="anchor" id="autotoc_md135"></a>
 0. Install git</h2>
 <p>If you haven't already, install git from <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> or use your system's package manager.</p>
 <p>On Ubuntu and other Debian-based distros: </p><div class="fragment"><div class="line">sudo apt-get install git</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md135"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md136"></a>
 1. Browse to your Arduino Libraries folder</h2>
 <p>Open a terminal window and change the directory to your Arduino folder.</p>
 <p>On Linux: </p><div class="fragment"><div class="line">mkdir -p ~/Arduino/libraries &amp;&amp; cd $_</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md136"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md137"></a>
 2. Clone the Library</h2>
 <div class="fragment"><div class="line">git clone https://github.com/tttapa/Control-Surface</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md137"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md138"></a>
 3. Updating to the latest version</h2>
 <p>If you installed the library using git, you can easily update it when a new version comes out. <br  />
  To update to the latest <code>master</code> version:</p>
 <div class="fragment"><div class="line">git pull</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md138"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md139"></a>
 Dependencies</h1>
 <p>If you are using an Arduino board with on-board USB capabilities, you need the <a href="https://github.com/arduino-libraries/MIDIUSB">MIDIUSB library</a>. Install it as explained before, or by using the <a href="https://www.arduino.cc/en/Guide/Libraries#toc3">Library Manager</a>.</p>
 <p>The Control Surface Library depends on the <a href="https://www.pjrc.com/teensy/td_libs_Encoder.html">PJRC Encoder library</a> for reading the input from rotary encoders. Download and install it if you plan on using those.</p>

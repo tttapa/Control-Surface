@@ -74,11 +74,11 @@ $(function() {
 <div class="title">Toggle-LEDs.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md49"></a>
+<h1><a class="anchor" id="autotoc_md50"></a>
 Toggle-LEDs</h1>
 <p>This example demonstrates the use of push buttons and LEDs and how to use shift registers and analog multiplexers to save pins.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md50"></a>
+<h2><a class="anchor" id="autotoc_md51"></a>
 Connections</h2>
 <ul>
 <li>SS: 74HC595 ST_CP</li>
@@ -95,7 +95,7 @@ Connections</h2>
 <p>Connect 16 LEDs (and series resistors) between the eight outputs of the two shift registers and ground.</p>
 <p>Remember to connect the enable pins of both the multiplexer and the shift registers to ground in order to enable them. Also connect the master reset pin of the shift registers to Vcc. <br  />
  Connect the serial data output of the first shift register (QH' or Q7S) to the serial input of the second shift register.</p>
-<h2><a class="anchor" id="autotoc_md51"></a>
+<h2><a class="anchor" id="autotoc_md52"></a>
 Behavior</h2>
 <p>Pressing the first button will turn on the first LED. Pressing it again will turn it off again. Pressing the second button will turn on the second LED. Pressing it again will turn it off again, and so on.</p>
 <p>Written by PieterP, 2018-08-28 <br  />
@@ -151,7 +151,7 @@ Behavior</h2>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d7/d88/SPIShiftRegisterOut_8hpp.html">AH/Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Instantiate a multiplexer</span></div>
-<div class="line"><a name="a0"></a><a class="code" href="../../d1/d8e/group__ExtIO.html#ga0f0c7f73d22542f0ff7df26b5a74c448">CD74HC4067</a> mux = {</div>
+<div class="line"><a name="a0"></a><a class="code" href="../../db/dd3/group__AH__ExtIO.html#ga0f0c7f73d22542f0ff7df26b5a74c448">CD74HC4067</a> mux = {</div>
 <div class="line">  2,            <span class="comment">// input pin</span></div>
 <div class="line">  {3, 4, 5, 6}, <span class="comment">// Address pins S0, S1, S2, S3</span></div>
 <div class="line">  <span class="comment">// 7, // Optionally, specify the enable pin</span></div>
@@ -191,9 +191,9 @@ Behavior</h2>
 <div class="ttc" id="aButton_8hpp_html"><div class="ttname"><a href="../../d4/db3/Button_8hpp.html">Button.hpp</a></div></div>
 <div class="ttc" id="aSPIShiftRegisterOut_8hpp_html"><div class="ttname"><a href="../../d7/d88/SPIShiftRegisterOut_8hpp.html">SPIShiftRegisterOut.hpp</a></div></div>
 <div class="ttc" id="aAnalogMultiplex_8hpp_html"><div class="ttname"><a href="../../d7/def/AnalogMultiplex_8hpp.html">AnalogMultiplex.hpp</a></div></div>
-<div class="ttc" id="agroup__ExtIO_html_ga0f0c7f73d22542f0ff7df26b5a74c448"><div class="ttname"><a href="../../d1/d8e/group__ExtIO.html#ga0f0c7f73d22542f0ff7df26b5a74c448">AH::CD74HC4067</a></div><div class="ttdeci">AnalogMultiplex&lt; 4 &gt; CD74HC4067</div><div class="ttdoc">An alias for AnalogMultiplex&lt;4&gt; to use with CD74HC4067 analog multiplexers.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00149">AnalogMultiplex.hpp:149</a></div></div>
 <div class="ttc" id="anamespaceAH_html_a59e9cb64606cb2e154ef640ede532b5e"><div class="ttname"><a href="../../dc/d69/namespaceAH.html#a59e9cb64606cb2e154ef640ede532b5e">AH::generateIncrementalArray</a></div><div class="ttdeci">Array&lt; T, N &gt; generateIncrementalArray(U start=0, V increment=1)</div><div class="ttdoc">Generate an array where the first value is given, and the subsequent values are calculated as the pre...</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00158">ArrayHelpers.hpp:158</a></div></div>
 <div class="ttc" id="aArrayHelpers_8hpp_html"><div class="ttname"><a href="../../d5/db6/ArrayHelpers_8hpp.html">ArrayHelpers.hpp</a></div></div>
+<div class="ttc" id="agroup__AH__ExtIO_html_ga0f0c7f73d22542f0ff7df26b5a74c448"><div class="ttname"><a href="../../db/dd3/group__AH__ExtIO.html#ga0f0c7f73d22542f0ff7df26b5a74c448">AH::CD74HC4067</a></div><div class="ttdeci">AnalogMultiplex&lt; 4 &gt; CD74HC4067</div><div class="ttdoc">An alias for AnalogMultiplex&lt;4&gt; to use with CD74HC4067 analog multiplexers.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00149">AnalogMultiplex.hpp:149</a></div></div>
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
