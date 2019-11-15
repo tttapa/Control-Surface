@@ -196,6 +196,14 @@ Functions</h2></td></tr>
 <tr class="memitem:gaecf9cec09cb6b1daf4899053f90dfc20"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T1, N1 &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../db/d50/group__Containers.html#gaecf9cec09cb6b1daf4899053f90dfc20">operator/=</a> (<a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T1, N1 &gt; &amp;a, T2 b)</td></tr>
 <tr class="memdesc:gaecf9cec09cb6b1daf4899053f90dfc20"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> /= Scalar.  <a href="../../db/d50/group__Containers.html#gaecf9cec09cb6b1daf4899053f90dfc20">More...</a><br /></td></tr>
 <tr class="separator:gaecf9cec09cb6b1daf4899053f90dfc20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacc2f020c702ecb15a6159ad224eaa683"><td class="memTemplParams" colspan="2">template&lt;class T , size_t N, bool Reverse, bool Const&gt; </td></tr>
+<tr class="memitem:gacc2f020c702ecb15a6159ad224eaa683"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; decltype(-T{}), N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../db/d50/group__Containers.html#gacc2f020c702ecb15a6159ad224eaa683">operator-</a> (<a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt; a)</td></tr>
+<tr class="memdesc:gacc2f020c702ecb15a6159ad224eaa683"><td class="mdescLeft">&#160;</td><td class="mdescRight">-Slice  <a href="../../db/d50/group__Containers.html#gacc2f020c702ecb15a6159ad224eaa683">More...</a><br /></td></tr>
+<tr class="separator:gacc2f020c702ecb15a6159ad224eaa683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3ee72fd9836670faac18a3051d3c8c0f"><td class="memTemplParams" colspan="2">template&lt;class T , size_t N&gt; </td></tr>
+<tr class="memitem:ga3ee72fd9836670faac18a3051d3c8c0f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; decltype(-T{}), N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../db/d50/group__Containers.html#ga3ee72fd9836670faac18a3051d3c8c0f">operator-</a> (const <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, N &gt; &amp;a)</td></tr>
+<tr class="memdesc:ga3ee72fd9836670faac18a3051d3c8c0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">-<a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>  <a href="../../db/d50/group__Containers.html#ga3ee72fd9836670faac18a3051d3c8c0f">More...</a><br /></td></tr>
+<tr class="separator:ga3ee72fd9836670faac18a3051d3c8c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabd08306949ede9909fb0f3aca9d0d74a"><td class="memTemplParams" colspan="2">template&lt;class T , size_t N, class G &gt; </td></tr>
 <tr class="memitem:gabd08306949ede9909fb0f3aca9d0d74a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../db/d50/group__Containers.html#gabd08306949ede9909fb0f3aca9d0d74a">generateArray</a> (G generator)</td></tr>
 <tr class="memdesc:gabd08306949ede9909fb0f3aca9d0d74a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an array using the given generator.  <a href="../../db/d50/group__Containers.html#gabd08306949ede9909fb0f3aca9d0d74a">More...</a><br /></td></tr>
@@ -256,7 +264,7 @@ template&lt;class T , size_t nb_rows, size_t nb_cols&gt; </div>
 
 <p>An easy alias for two-dimensional Arrays. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00496">496</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00514">514</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
@@ -500,7 +508,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2&gt; </div>
 </div>
 </div>
 <a id="ga684f0e78c6c771a98f7198e6c7ecb2a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga684f0e78c6c771a98f7198e6c7ecb2a3">&#9670;&nbsp;</a></span>operator-() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ga684f0e78c6c771a98f7198e6c7ecb2a3">&#9670;&nbsp;</a></span>operator-() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -534,7 +542,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2, bool Reverse1, bool Reve
 </div>
 </div>
 <a id="gae0c80ca2f1f9a3dd17d85ccd79e0b696"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae0c80ca2f1f9a3dd17d85ccd79e0b696">&#9670;&nbsp;</a></span>operator-() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#gae0c80ca2f1f9a3dd17d85ccd79e0b696">&#9670;&nbsp;</a></span>operator-() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -972,6 +980,54 @@ template&lt;class T1 , class T2 , size_t N1&gt; </div>
 <p><a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> /= Scalar. </p>
 
 <p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00487">487</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+
+</div>
+</div>
+<a id="gacc2f020c702ecb15a6159ad224eaa683"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacc2f020c702ecb15a6159ad224eaa683">&#9670;&nbsp;</a></span>operator-() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t N, bool Reverse, bool Const&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(-T{}), N&gt; operator- </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../df/de0/classArraySlice.html">ArraySlice</a>&lt; T, N, Reverse, Const &gt;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>-Slice </p>
+
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00497">497</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ga3ee72fd9836670faac18a3051d3c8c0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3ee72fd9836670faac18a3051d3c8c0f">&#9670;&nbsp;</a></span>operator-() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(-T{}), N&gt; operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, N &gt; &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>-<a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="../../de/d76/Array_8hpp_source.html#l00506">506</a> of file <a class="el" href="../../de/d76/Array_8hpp_source.html">Array.hpp</a>.</p>
 
 </div>
 </div>
