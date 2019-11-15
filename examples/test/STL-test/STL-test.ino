@@ -5,6 +5,7 @@
 #include <Arduino_Helpers.h>
 
 #include <AH/STL/algorithm>
+#include <AH/STL/array>
 #include <AH/STL/cmath>
 #include <AH/STL/complex>
 #include <AH/STL/cstdint>
