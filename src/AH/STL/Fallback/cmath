@@ -46,6 +46,11 @@
 #undef _GLIBCXX_INCLUDE_NEXT_C_HEADERS
 #include "bits/std_abs.h"
 
+#ifdef ARDUINO
+// #undef Arduino round macros by including it first
+#include <Arduino.h>
+#endif
+
 #ifndef _GLIBCXX_CMATH
 #define _GLIBCXX_CMATH 1
 
