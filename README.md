@@ -139,13 +139,25 @@ fully implemented, feel free to open an issue, so I know where to focus on first
 See the [Getting Started](https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html)
 document to get started using the library.
 
+Libraries that use the Arduino Helpers library include:
+- [**Arduino Filters**](https://github.com/tttapa/Arduino-Filters):
+  FIR, IIR filtering library
+- [**Control Surface**](https://github.com/tttapa/Control-Surface):
+  library for creating MIDI Control Surfaces, with knobs and push buttons, 
+  LEDs, displays, etc.
+
 ## Documentation
 
 The automatically generated Doxygen documentation for this library can be found 
-[here](https://tttapa.github.io/Control-Surface/Doc/Doxygen/index.html).
+here:  
+[**Documentation**](https://tttapa.github.io/Control-Surface/Doxygen/index.html)  
+Test coverage information can be found here:  
+[**Code Coverage**](https://tttapa.github.io/Control-Surface/Coverage/index.html)
 
 ## Information for developers
 
-Information for people that would like to help improve the Control Surface library can be found here: <https://tttapa.github.io/Pages/Arduino/Control-Surface/Developers/index.html>  
+Information for people that would like to help improve the Control Surface 
+library can be found here: 
+<https://tttapa.github.io/Pages/Arduino/Control-Surface/Developers/index.html>  
 It covers installation instructions for developers, instructions for running the
 tests and generating documentation, a style guide, etc.

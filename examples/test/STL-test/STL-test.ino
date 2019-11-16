@@ -13,6 +13,7 @@
 #include <AH/STL/initializer_list>
 #include <AH/STL/limits>
 #include <AH/STL/new>
+#include <AH/STL/optional>
 #include <AH/STL/type_traits>
 #include <AH/STL/utility>
 
@@ -72,6 +73,11 @@ TEST_CMATH_FUNCTION2(std::hypot);
 TEST_CMATH_FUNCTION3(std::fma);
 
 void setup() {
+#ifdef __cpp_lib_optional
+    std::optional<int> opt = std::nullopt;
+    opt = 1;
+    Serial.println(*opt);
+#endif
 }
 void loop() {
 }

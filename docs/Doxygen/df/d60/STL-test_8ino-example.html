@@ -92,6 +92,7 @@ STL-test</h1>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/initializer_list&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/limits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/new&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;AH/STL/optional&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/type_traits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/utility&gt;</span></div>
 <div class="line"> </div>
@@ -151,6 +152,11 @@ STL-test</h1>
 <div class="line">TEST_CMATH_FUNCTION3(std::fma);</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
+<div class="line"><span class="preprocessor">#ifdef __cpp_lib_optional</span></div>
+<div class="line">    std::optional&lt;int&gt; opt = std::nullopt;</div>
+<div class="line">    opt = 1;</div>
+<div class="line">    Serial.println(*opt);</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">}</div>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
 <div class="line">}</div>
