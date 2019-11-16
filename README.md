@@ -36,6 +36,7 @@ Libraries that use the Arduino Helpers library include:
 ## Documentation
 
 The automatically generated Doxygen documentation for this library can be found 
-[here](https://tttapa.github.io/Arduino-Helpers/Doxygen/index.html).  
-Test coverage information can be found 
-[here](https://tttapa.github.io/Arduino-Helpers/Coverage/index.html).
+here:  
+[**Documentation**](https://tttapa.github.io/Arduino-Helpers/Doxygen/index.html)  
+Test coverage information can be found here:  
+[**Code Coverage**](https://tttapa.github.io/Arduino-Helpers/Coverage/index.html)
