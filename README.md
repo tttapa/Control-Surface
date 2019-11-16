@@ -17,13 +17,21 @@
 - **Timing Utilities**: Blink Without Delay-style timers.
 - **C++ STL Implementation** (partial): Some useful parts of the C++ Standard
   Template Library, adapted to work on AVR Arduinos. Includes the 
-  `<type_traits>`, `<algorithm>`, `<utility>` and `<limits>` headers, among 
-  others.
+  `<type_traits>`, `<algorithm>`, `<new>`, `<array>`, `<optional>`, `<cmath>`,
+  `<complex>`, `<cstdlib>`, `<cstdint>`, `<initialize_list>`, `<utility>` and 
+  `<limits>` headers, among others.
 
 These utilities were originally part of the
 [Control Surface library](https://github.com/tttapa/Control-Surface),
 and were split off to be used as a stand-alone library, or as a template for 
 other libraries.
+
+Libraries that use the Arduino Helpers library include:
+- [**Arduino Filters**](https://github.com/tttapa/Arduino-Filters):
+  FIR, IIR filtering library
+- [**Control Surface**](https://github.com/tttapa/Control-Surface):
+  library for creating MIDI Control Surfaces, with knobs and push buttons, 
+  LEDs, displays, etc.
 
 ## Documentation
 
