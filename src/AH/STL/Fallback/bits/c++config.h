@@ -572,10 +572,10 @@ namespace std
 
 #if __cplusplus > 201402L
 // In C++17 mathematical special functions are in namespace std.
-# define _GLIBCXX_USE_STD_SPEC_FUNCS 1
+// # define _GLIBCXX_USE_STD_SPEC_FUNCS 1
 #elif __cplusplus >= 201103L && __STDCPP_WANT_MATH_SPEC_FUNCS__ != 0
 // For C++11 and C++14 they are in namespace std when requested.
-# define _GLIBCXX_USE_STD_SPEC_FUNCS 1
+// # define _GLIBCXX_USE_STD_SPEC_FUNCS 1
 #endif
 
 // The remainder of the prewritten config is automatic; all the
@@ -654,7 +654,7 @@ namespace std
 #define _GLIBCXX_HAVE_ACOSL 1
 
 /* Define to 1 if you have the `aligned_alloc' function. */
-#define _GLIBCXX_HAVE_ALIGNED_ALLOC 1
+// #define _GLIBCXX_HAVE_ALIGNED_ALLOC 1
 
 /* Define to 1 if you have the `asinf' function. */
 #define _GLIBCXX_HAVE_ASINF 1
