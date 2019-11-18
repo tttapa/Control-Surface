@@ -28,5 +28,4 @@ void setup() {
   Serial << "√(2i) = " << std::sqrt(c) << endl;
 }
 
-void loop() {
-}
+void loop() {}

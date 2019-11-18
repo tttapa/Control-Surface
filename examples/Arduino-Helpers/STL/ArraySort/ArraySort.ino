@@ -58,5 +58,4 @@ void setup() {
   Serial << "After sorting:  " << array << endl;
 }
 
-void loop() {
-}
+void loop() {}

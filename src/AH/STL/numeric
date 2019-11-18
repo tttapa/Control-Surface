@@ -1,0 +1,9 @@
+#pragma once
+
+#include <AH/Settings/NamespaceSettings.hpp>
+
+#ifdef __AVR__
+#include "Fallback/numeric"
+#else
+#include <numeric>
+#endif

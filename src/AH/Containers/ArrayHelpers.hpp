@@ -242,7 +242,7 @@ operator<<(std::ostream &os, const AH::Array<T, N> &a) {
     return os << a.slice();
 }
 
-#else
+#endif
 
 #include <AH/PrintStream/PrintStream.hpp>
 
@@ -260,5 +260,3 @@ std::enable_if_t<std::is_arithmetic<T>::value, Print &>
 operator<<(Print &os, const AH::Array<T, N> &a) {
     return os << a.slice();
 }
-
-#endif
