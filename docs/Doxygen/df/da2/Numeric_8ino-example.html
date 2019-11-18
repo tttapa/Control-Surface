@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino Helpers: Complex.ino</title>
+<title>Arduino Helpers: Numeric.ino</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -71,34 +71,53 @@ $(function() {
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Complex.ino</div>  </div>
+<div class="title">Numeric.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md0"></a>
-Complex</h1>
-<p>Example of using the standard library complex numbers.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Numeric</h1>
+<p>Example of using the standard library numeric functions.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<p><b>Output</b> </p><div class="fragment"><div class="line">√(2i) = (1.00,1.00)</div>
-</div><!-- fragment --><p>Written by PieterP, 2019-11-14 <a href="https://github.com/tttapa/Arduino-Helpers">https://github.com/tttapa/Arduino-Helpers</a></p>
+<p>This sketch creates an incremental array using the iota function, then computes the inner product of the vector with itself, and uses that to calculate the norm of the vector.</p>
+<p><b>Output</b> </p><div class="fragment"><div class="line">v      = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</div>
+<div class="line">〈v, v〉 = 385</div>
+<div class="line">‖v‖    = 19.6214160</div>
+</div><!-- fragment --><p>Written by PieterP, 2019-11-18 <br  />
+ <a href="https://github.com/tttapa/Arduino-Helpers">https://github.com/tttapa/Arduino-Helpers</a></p>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;AH/STL/complex&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../de/d76/Array_8hpp.html">AH/Containers/Array.hpp</a>&gt;</span>        <span class="comment">// Array</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d5/db6/ArrayHelpers_8hpp.html">AH/Containers/ArrayHelpers.hpp</a>&gt;</span> <span class="comment">// For printing the array</span></div>
+<div class="line"><span class="preprocessor">#include &lt;AH/STL/cmath&gt;</span>                   <span class="comment">// std::sqrt</span></div>
+<div class="line"><span class="preprocessor">#include &lt;AH/STL/numeric&gt;</span>                 <span class="comment">// std::iota, std::inner_product</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
 <div class="line">  Serial.begin(115200);</div>
 <div class="line">  <span class="keywordflow">while</span> (!Serial)</div>
 <div class="line">    ;</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Create a complex number</span></div>
-<div class="line">  std::complex&lt;double&gt; c = 2i;</div>
+<div class="line">  <span class="comment">// Create an array with the elements [1, 2 ... 9, 10]</span></div>
+<div class="line">  <a name="_a0"></a><a class="code" href="../../d7/d6a/structArray.html">Array&lt;int, 10&gt;</a> vector;</div>
+<div class="line">  std::iota(std::begin(vector), std::end(vector), 1);</div>
+<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;v      = [&quot;</span> &lt;&lt; vector &lt;&lt; <span class="charliteral">&#39;]&#39;</span> &lt;&lt; <a name="a1"></a><a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// Print the square root</span></div>
-<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;√(2i) = &quot;</span> &lt;&lt; std::sqrt(c) &lt;&lt; <a name="a0"></a><a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
+<div class="line">  <span class="comment">// Compute the inner product of vector with itself, with an initial sum of 0</span></div>
+<div class="line">  <span class="keywordtype">int</span> sum_sq = std::inner_product(std::begin(vector), std::end(vector),</div>
+<div class="line">                                  std::begin(vector), 0);</div>
+<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;〈v, v〉 = &quot;</span> &lt;&lt; sum_sq &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The 2-norm of a vector is the squareroot of the inner product with itself</span></div>
+<div class="line">  <span class="keywordtype">double</span> norm = std::sqrt(sum_sq);</div>
+<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;‖v‖    = &quot;</span> &lt;&lt; <a name="a2"></a><a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaf7cf4b0e6244f6fab7b1e15c2523e4e7">setprecision</a>(7) &lt;&lt; norm &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {}</div>
 </div><!-- fragment --> </div><!-- contents -->
+<div class="ttc" id="agroup__AH__PrintStream_html_gaf7cf4b0e6244f6fab7b1e15c2523e4e7"><div class="ttname"><a href="../../d8/d4b/group__AH__PrintStream.html#gaf7cf4b0e6244f6fab7b1e15c2523e4e7">setprecision</a></div><div class="ttdeci">Setprecision setprecision(int n)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00193">PrintStream.cpp:193</a></div></div>
+<div class="ttc" id="astructArray_html"><div class="ttname"><a href="../../d7/d6a/structArray.html">Array</a></div><div class="ttdoc">An array wrapper for easy copying, comparing, and iterating.</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d76/Array_8hpp_source.html#l00032">Array.hpp:32</a></div></div>
+<div class="ttc" id="aArray_8hpp_html"><div class="ttname"><a href="../../de/d76/Array_8hpp.html">Array.hpp</a></div></div>
+<div class="ttc" id="aArrayHelpers_8hpp_html"><div class="ttname"><a href="../../d5/db6/ArrayHelpers_8hpp.html">ArrayHelpers.hpp</a></div></div>
 <div class="ttc" id="agroup__AH__PrintStream_html_gaae13bd0e8ea7184cf85b86bcd1a01e2d"><div class="ttname"><a href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a></div><div class="ttdeci">Print &amp; endl(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00027">PrintStream.cpp:27</a></div></div>
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <!-- start footer part -->
