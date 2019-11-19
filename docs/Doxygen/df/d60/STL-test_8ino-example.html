@@ -74,7 +74,7 @@ $(function() {
 <div class="title">STL-test.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md59"></a>
+<h1><a class="anchor" id="autotoc_md60"></a>
 STL-test</h1>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB</dd></dl>
 <div class="fragment"><div class="line"><span class="comment">/**</span></div>
@@ -92,6 +92,7 @@ STL-test</h1>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/initializer_list&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/limits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/new&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;AH/STL/numeric&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/optional&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/type_traits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/utility&gt;</span></div>
@@ -123,7 +124,7 @@ STL-test</h1>
 <div class="line"><span class="preprocessor">            long double&gt;::value,                                               \</span></div>
 <div class="line"><span class="preprocessor">    &quot;cmath error &quot; #Fun &quot;(long double)&quot;);</span></div>
 <div class="line"> </div>
-<div class="line"><span class="preprocessor">#define TEST_CMATH_FUNCTION2(Fun)                                             \</span></div>
+<div class="line"><span class="preprocessor">#define TEST_CMATH_FUNCTION2(Fun)                                              \</span></div>
 <div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((float)1, (float)1)), float&gt;::value,      \</span></div>
 <div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(float)&quot;);                                \</span></div>
 <div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((double)1, (double)1)), double&gt;::value,   \</span></div>
@@ -153,13 +154,12 @@ STL-test</h1>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
 <div class="line"><span class="preprocessor">#ifdef __cpp_lib_optional</span></div>
-<div class="line">    std::optional&lt;int&gt; opt = std::nullopt;</div>
-<div class="line">    opt = 1;</div>
-<div class="line">    Serial.println(*opt);</div>
+<div class="line">  std::optional&lt;int&gt; opt = std::nullopt;</div>
+<div class="line">  opt = 1;</div>
+<div class="line">  Serial.println(*opt);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">}</div>
-<div class="line"><span class="keywordtype">void</span> loop() {</div>
-<div class="line">}</div>
+<div class="line"><span class="keywordtype">void</span> loop() {}</div>
 </div><!-- fragment --> </div><!-- contents -->
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <!-- start footer part -->

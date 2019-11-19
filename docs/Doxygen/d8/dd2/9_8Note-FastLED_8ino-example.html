@@ -74,23 +74,23 @@ $(function() {
 <div class="title">9.Note-FastLED.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md78"></a>
+<h1><a class="anchor" id="autotoc_md79"></a>
 9.Note-FastLED</h1>
 <p>This example demonstrates the use of addressable LEDs that respond to incoming MIDI note events.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>You might lose incoming MIDI data while the LED strip is being updated. To avoid this, don't use an Arduino UNO. <br  />
  See <a href="https://github.com/FastLED/FastLED/wiki/Interrupt-problems">https://github.com/FastLED/FastLED/wiki/Interrupt-problems</a></dd></dl>
-<h2><a class="anchor" id="autotoc_md79"></a>
+<h2><a class="anchor" id="autotoc_md80"></a>
 Connections</h2>
 <ul>
 <li>2: Data pin of NeoPixel LED strip with at least 8 pixels.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md80"></a>
+<h2><a class="anchor" id="autotoc_md81"></a>
 Behavior</h2>
 <p>If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the first LED will light up, if a Note Off event for that note is sent, the LED will turn off. <br  />
  If a MIDI Note On event for note 0x3D (C#4) is sent, the second LED will light up, etc. <br  />
  (A Note On event with a velocity of zero also counts as a Note Off event.)</p>
-<h2><a class="anchor" id="autotoc_md81"></a>
+<h2><a class="anchor" id="autotoc_md82"></a>
 Mapping</h2>
 <p>Route the MIDI output of a MIDI keyboard to the Arduino's MIDI input. Then play a middle C and some notes above it on the keyboard.</p>
 <p>Written by PieterP, 2019-10-15 <br  />

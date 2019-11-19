@@ -74,12 +74,12 @@ $(function() {
 <div class="title">VU-Meter-Bridge.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md110"></a>
+<h1><a class="anchor" id="autotoc_md111"></a>
 VU-Meter-Bridge</h1>
 <p>This is an example on how to use an OLED display to display the VU meters and mute/solo states of the eight first tracks, by using the Arduino as a Mackie Control Universal. This is an example modified to work with the ESP32 only, using MIDI over Bluetooth Low Energy. <br  />
 </p>
 <dl class="section user"><dt>Boards:</dt><dd>ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md111"></a>
+<h2><a class="anchor" id="autotoc_md112"></a>
 Connections</h2>
 <p>This example drives two SSD1306 OLED displays over SPI</p><ul>
 <li>SCK: SSD1306 D0</li>
@@ -90,15 +90,15 @@ Connections</h2>
 <p>Add a capacitor between the reset pin of the display and ground, and a resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ work fine. <br  />
  You do need some way to reset the display, without it, it won't work. <br  />
  Alternatively, you could use an IO pin from the ESP32 to reset the display, but this just "wastes" a pin.</p>
-<h2><a class="anchor" id="autotoc_md112"></a>
+<h2><a class="anchor" id="autotoc_md113"></a>
 Behavior</h2>
 <p>The first display should now display the level meters and mute/solo states of the first 8 tracks.</p>
-<h2><a class="anchor" id="autotoc_md113"></a>
+<h2><a class="anchor" id="autotoc_md114"></a>
 Mapping</h2>
 <p>Map "Control Surface" as a Mackie Control Universal unit in your DAW.</p>
 <dl class="section note"><dt>Note</dt><dd>There seem to be some differences in the way some applications handle VU meters: some expect the hardware to decay automatically, some don't. <br  />
  If you notice that the meters behave strangely, try both <a class="el" href="../../d6/d98/namespaceMCU_1_1VUDecay.html#ac4567deabb7cfc6e3cd01c45aacfb0a6" title="Don&#39;t decay automatically, hold the latest value until a new one is received.">MCU::VUDecay::Hold</a> and <a class="el" href="../../d6/d98/namespaceMCU_1_1VUDecay.html#acddb03c75a0930c4e17a4b070f6e24a6" title="Decay one segment/block every 150 ms if no new values are received.">MCU::VUDecay::Default</a>, or try a different decay time.</dd></dl>
-<h2><a class="anchor" id="autotoc_md114"></a>
+<h2><a class="anchor" id="autotoc_md115"></a>
 Demo</h2>
 <p> 
 <iframe width="560" height="315"

@@ -74,17 +74,17 @@ $(function() {
 <div class="title">1.FilteredAnalog.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md37"></a>
+<h1><a class="anchor" id="autotoc_md38"></a>
 1.FilteredAnalog</h1>
 <p>This examples shows how to filter an analog input, so you can get the position of a knob or fader without noise.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md39"></a>
 Connections</h2>
 <ul>
 <li>A0: wiper of a potentiometer</li>
 </ul>
 <p>Connect the left terminal of the potentiometer to ground, and the right one to V<sub>CC</sub>.</p>
-<h2><a class="anchor" id="autotoc_md39"></a>
+<h2><a class="anchor" id="autotoc_md40"></a>
 Behavior</h2>
 <ul>
 <li>Upload the sketch to the Arduino, and open the Serial Monitor (<code>CTRL+Shift+M</code>)</li>
@@ -129,10 +129,11 @@ Behavior</h2>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d1/dd0/MillisMicrosTimer_8hpp.html">AH/Timing/MillisMicrosTimer.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Create a filtered analog object on pin A0:</span></div>
-<div class="line">FilteredAnalog&lt;10,      <span class="comment">// Output precision in bits</span></div>
-<div class="line">               2,       <span class="comment">// The amount of filtering</span></div>
-<div class="line">               uint16_t <span class="comment">// The integer type for the calculations</span></div>
-<div class="line">               &gt;</div>
+<div class="line">FilteredAnalog&lt;10,       <span class="comment">// Output precision in bits</span></div>
+<div class="line">               2,        <span class="comment">// The amount of filtering</span></div>
+<div class="line">               uint16_t, <span class="comment">// The integer type for the filter calculations</span></div>
+<div class="line">               <a name="a0"></a><a class="code" href="../../dc/d69/namespaceAH.html#a81a2a5d2411e293e4b727c9e9062c92c">analog_t</a>  <span class="comment">// The integer type for the upscaled analog values</span></div>
+<div class="line">              &gt;</div>
 <div class="line">  analog = A0;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// If you want more filtering, you can increase the filter shift factor.</span></div>
@@ -140,8 +141,8 @@ Behavior</h2>
 <div class="line"><span class="comment">// you do so, so you have to use a larger type as well.</span></div>
 <div class="line">FilteredAnalog&lt;10,      <span class="comment">// Output precision in bits</span></div>
 <div class="line">               6,       <span class="comment">// The amount of filtering</span></div>
-<div class="line">               uint32_t <span class="comment">// The integer type for the calculations</span></div>
-<div class="line">               &gt;</div>
+<div class="line">               uint32_t <span class="comment">// The integer type for the filter calculations</span></div>
+<div class="line">              &gt;</div>
 <div class="line">  moreFiltering = A0;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// If you don&#39;t care about the specific settings, and just want a</span></div>
@@ -175,6 +176,7 @@ Behavior</h2>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
 <div class="ttc" id="aMillisMicrosTimer_8hpp_html"><div class="ttname"><a href="../../d1/dd0/MillisMicrosTimer_8hpp.html">MillisMicrosTimer.hpp</a></div></div>
+<div class="ttc" id="anamespaceAH_html_a81a2a5d2411e293e4b727c9e9062c92c"><div class="ttname"><a href="../../dc/d69/namespaceAH.html#a81a2a5d2411e293e4b727c9e9062c92c">AH::analog_t</a></div><div class="ttdeci">uint16_t analog_t</div><div class="ttdoc">The type returned from analogRead and similar functions.</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d35/Hardware-Types_8hpp_source.html#l00012">Hardware-Types.hpp:12</a></div></div>
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <div class="ttc" id="aFilteredAnalog_8hpp_html"><div class="ttname"><a href="../../d8/df3/FilteredAnalog_8hpp.html">FilteredAnalog.hpp</a></div></div>
 <!-- start footer part -->

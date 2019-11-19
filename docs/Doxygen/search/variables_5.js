@@ -13,7 +13,7 @@ var searchData=
   ['fader_5ftouch_5fmaster_3602',['FADER_TOUCH_MASTER',['../d7/dc7/namespaceMCU.html#a0926b23e79c7619b77bb90e84f38a75c',1,'MCU']]],
   ['fast_5ffwd_3603',['FAST_FWD',['../d7/dc7/namespaceMCU.html#af3a4109ef62d17f7b8d5b22666d37f3b',1,'MCU']]],
   ['fiddle_3604',['Fiddle',['../da/da6/namespaceMIDI__PC.html#a2137a4cf2e00c066b98b5a700e4eb9bc',1,'MIDI_PC']]],
-  ['filter_3605',['filter',['../d3/d6e/classAH_1_1FilteredAnalog.html#a587cdf7a29a9feaaf8452bce04e2e890',1,'AH::FilteredAnalog']]],
+  ['filter_3605',['filter',['../d3/d6e/classAH_1_1FilteredAnalog.html#ace39a3a491093b4c60eadf0095b05c98',1,'AH::FilteredAnalog']]],
   ['filtered_3606',['filtered',['../d7/d40/classEMA.html#a1f257cdacafe46b66ef5b593eeb2f6c8',1,'EMA::filtered()'],['../db/d6f/classEMA__f.html#a51014d3b88b666e6565a6d8be53538fa',1,'EMA_f::filtered()']]],
   ['filtered_5finput_5fupdate_5finterval_3607',['FILTERED_INPUT_UPDATE_INTERVAL',['../dc/d69/namespaceAH.html#a8de5e3a9057ae97f40a7cc18c745bcb8',1,'AH']]],
   ['filteredanalog_3608',['filteredAnalog',['../d4/de3/classVolumeControl.html#a061f4d133646e9a36118f8d57fbcaefa',1,'VolumeControl::filteredAnalog()'],['../d0/dd2/classMIDIFilteredAnalogAddressable.html#a605770c0b41f0fb6182bdc26a78115b6',1,'MIDIFilteredAnalogAddressable::filteredAnalog()'],['../d5/d8e/classMIDIFilteredAnalog.html#af8f83d685b258dd972c69fd1b2b4a5bb',1,'MIDIFilteredAnalog::filteredAnalog()'],['../d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a6a12b8bb7aa9ecf1fad7a859a45ab06e',1,'Bankable::MIDIFilteredAnalogAddressable::filteredAnalog()'],['../db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a980266332eb5797ed79dd2500e8c86f3',1,'Bankable::MIDIFilteredAnalog::filteredAnalog()']]],

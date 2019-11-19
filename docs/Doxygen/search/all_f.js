@@ -28,7 +28,7 @@ var searchData=
   ['pcbutton_2ecpp_1472',['PCButton.cpp',['../d1/d68/PCButton_8cpp.html',1,'']]],
   ['pcbutton_2ehpp_1473',['PCButton.hpp',['../d2/dbf/PCButton_8hpp.html',1,'']]],
   ['pcharacteristic_1474',['pCharacteristic',['../d8/d39/classBLEMIDI.html#af388b78447b485342da87dbc401bcfeb',1,'BLEMIDI']]],
-  ['peak_1475',['peak',['../d4/d42/classMCU_1_1VUDisplay.html#a3b83c0ee0dcee75aacc60d8ac8ba3c03',1,'MCU::VUDisplay::peak()'],['../d0/d18/classAudioVU_1_1Analyzer.html#a26ba95857f09053c0d60e2e87a0eeb6daa7ffa644cdb3c25fc713e5d38a04b04d',1,'AudioVU::Analyzer::Peak()']]],
+  ['peak_1475',['Peak',['../d0/d18/classAudioVU_1_1Analyzer.html#a26ba95857f09053c0d60e2e87a0eeb6daa7ffa644cdb3c25fc713e5d38a04b04d',1,'AudioVU::Analyzer::Peak()'],['../d4/d42/classMCU_1_1VUDisplay.html#a3b83c0ee0dcee75aacc60d8ac8ba3c03',1,'MCU::VUDisplay::peak()']]],
   ['percussive_5forgan_1476',['Percussive_Organ',['../da/da6/namespaceMIDI__PC.html#ac45fec3396943ce917eaf3ff8fc5805b',1,'MIDI_PC']]],
   ['piccolo_1477',['Piccolo',['../da/da6/namespaceMIDI__PC.html#a267c6285fb5c34940454c2232984e582',1,'MIDI_PC']]],
   ['pin_1478',['pin',['../de/d0d/classAH_1_1Button.html#ae360826b3b28ead0b8897647f11c629d',1,'AH::Button::pin()'],['../d2/dda/classAH_1_1ExtendedIOElement.html#a61dc67d743cbb9bdd001957639b5a91b',1,'AH::ExtendedIOElement::pin()']]],

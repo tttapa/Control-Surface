@@ -21,7 +21,7 @@ var searchData=
   ['alphachars_3407',['AlphaChars',['../dc/d69/namespaceAH.html#a0ad923931cb77ac27715f717d8ada4f1',1,'AH']]],
   ['alto_5fsax_3408',['Alto_Sax',['../da/da6/namespaceMIDI__PC.html#aa72e697e20da91b4bbdb17179438777b',1,'MIDI_PC']]],
   ['analog_5ffilter_5fshift_5ffactor_3409',['ANALOG_FILTER_SHIFT_FACTOR',['../dc/d69/namespaceAH.html#a4c0248f748d54c7d0b8b8866f48e9172',1,'AH']]],
-  ['analogpin_3410',['analogPin',['../d2/d94/classAH_1_1AnalogMultiplex.html#a2f5ae533d9eeddef40a3fb8866975c63',1,'AH::AnalogMultiplex::analogPin()'],['../d3/d6e/classAH_1_1FilteredAnalog.html#add664989b9d6624ef1ec4fb775f8c6d1',1,'AH::FilteredAnalog::analogPin()']]],
+  ['analogpin_3410',['analogPin',['../d2/d94/classAH_1_1AnalogMultiplex.html#a2f5ae533d9eeddef40a3fb8866975c63',1,'AH::AnalogMultiplex::analogPin()'],['../d3/d6e/classAH_1_1FilteredAnalog.html#ae5e31a96ef99c47aa1f534765617d289',1,'AH::FilteredAnalog::analogPin()']]],
   ['analyzer_3411',['analyzer',['../d0/d18/classAudioVU_1_1Analyzer.html#a71f374cd364aa4de82b6368748c9005e',1,'AudioVU::Analyzer']]],
   ['anglespacing_3412',['angleSpacing',['../d3/d98/classMCU_1_1VPotDisplay.html#a68d0d02999b1f355b61ce1e3d614a7a9',1,'MCU::VPotDisplay']]],
   ['applause_3413',['Applause',['../da/da6/namespaceMIDI__PC.html#a3f5b37134ab348fc07465abdbfc1548c',1,'MIDI_PC']]],

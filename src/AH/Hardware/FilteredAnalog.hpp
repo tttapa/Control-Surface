@@ -31,8 +31,12 @@ BEGIN_AH_NAMESPACE
  * @tparam  FilterType
  *          The type to use for the intermediate types of the filter.  
  *          Should be at least 
- *          @f$ 10 + \mathrm{Upsample} + \mathrm{FilterShiftFactor} @f$
- *          bits (@f$10@f$ is the number of bits of the ADC).
+ *          @f$ \mathrm{ADC_BITS} + \mathrm{Upsample} + 
+ *          \mathrm{FilterShiftFactor} @f$ bits wide.
+ * @tparam  AnalogType
+ *          The type to use for the analog values.  
+ *          Should be at least @f$ \mathrm{ADC_BITS} + \mathrm{Upsample} @f$ 
+ *          bits wide.
  * @tparam  Upsample
  *          The number of bits to upsample the analog reading by.
  * 
@@ -40,10 +44,10 @@ BEGIN_AH_NAMESPACE
  */
 template <uint8_t Precision = 10,
           uint8_t FilterShiftFactor = ANALOG_FILTER_SHIFT_FACTOR,
-          class FilterType = ANALOG_FILTER_TYPE,
+          class FilterType = ANALOG_FILTER_TYPE, class AnalogType = analog_t,
           uint8_t Upsample =
               min(sizeof(FilterType) * CHAR_BIT - ADC_BITS - FilterShiftFactor,
-                  sizeof(analog_t) * CHAR_BIT - ADC_BITS)>
+                  sizeof(AnalogType) * CHAR_BIT - ADC_BITS)>
 class FilteredAnalog {
   public:
     /**
@@ -53,6 +57,10 @@ class FilteredAnalog {
      *          The analog pin to read from.
      */
     FilteredAnalog(pin_t analogPin) : analogPin(analogPin) {}
+
+    /// A function pointer to a mapping function to map analog values.
+    /// @see    map()
+    using MappingFunction = AnalogType (*)(AnalogType);
 
     /**
      * @brief   Specify a mapping function that is applied to the raw
@@ -81,8 +89,8 @@ class FilteredAnalog {
      * @note    This overrides the mapping function set by the `map` method.
      */
     void invert() {
-        constexpr analog_t maxval = (1 << (ADC_BITS + Upsample)) - 1;
-        map([](analog_t val) -> analog_t { return maxval - val; });
+        constexpr AnalogType maxval = (1UL << (ADC_BITS + Upsample)) - 1;
+        map([](AnalogType val) -> AnalogType { return maxval - val; });
     }
 
     /**
@@ -95,10 +103,10 @@ class FilteredAnalog {
      *          The value is still the same.
      */
     bool update() {
-        analog_t input = getRawValue();  // read the raw analog input value
-        input = filter.filter(input);    // apply a low-pass EMA filter
-        if (mapFn)                       // If a mapping function is specified,
-            input = mapFn(input);        // apply it
+        AnalogType input = getRawValue(); // read the raw analog input value
+        input = filter.filter(input);     // apply a low-pass EMA filter
+        if (mapFn)                        // If a mapping function is specified,
+            input = mapFn(input);         // apply it
         return hysteresis.update(input); // apply hysteresis, and return true if
         // the value changed since last time
     }
@@ -110,7 +118,7 @@ class FilteredAnalog {
      * @return  The filtered value of the analog input, as a number
      *          of `Precision` bits wide.
      */
-    analog_t getValue() const { return hysteresis.getValue(); }
+    AnalogType getValue() const { return hysteresis.getValue(); }
 
     /**
      * @brief   Get the filtered value of the analog input with the mapping 
@@ -127,9 +135,9 @@ class FilteredAnalog {
      * @brief   Read the raw value of the analog input any filtering or mapping
      *          applied, but with its bit depth increased by @c Upsample.
      */
-    analog_t getRawValue() const {
-        return increaseBitDepth<ADC_BITS + Upsample, ADC_BITS, analog_t,
-                                analog_t>(ExtIO::analogRead(analogPin));
+    AnalogType getRawValue() const {
+        return increaseBitDepth<ADC_BITS + Upsample, ADC_BITS, AnalogType,
+                                AnalogType>(ExtIO::analogRead(analogPin));
     }
 
     static void setupADC() {
@@ -148,14 +156,15 @@ class FilteredAnalog {
             sizeof(FilterType) * CHAR_BIT,
         "Error: FilterType is not wide enough to hold the maximum value");
     static_assert(
-        ADC_BITS + Upsample <= sizeof(analog_t) * CHAR_BIT,
-        "Error: analog_t is not wide enough to hold the maximum value");
+        ADC_BITS + Upsample <= sizeof(AnalogType) * CHAR_BIT,
+        "Error: AnalogType is not wide enough to hold the maximum value");
     static_assert(
         Precision <= ADC_BITS + Upsample,
         "Error: Precision is larger than the upsampled ADC precision");
 
     EMA<FilterShiftFactor, FilterType> filter;
-    Hysteresis<ADC_BITS + Upsample - Precision, analog_t, analog_t> hysteresis;
+    Hysteresis<ADC_BITS + Upsample - Precision, AnalogType, AnalogType>
+        hysteresis;
 };
 
 END_AH_NAMESPACE

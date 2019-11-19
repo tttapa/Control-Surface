@@ -34,10 +34,11 @@
 #include <AH/Timing/MillisMicrosTimer.hpp>
 
 // Create a filtered analog object on pin A0:
-FilteredAnalog<10,      // Output precision in bits
-               2,       // The amount of filtering
-               uint16_t // The integer type for the calculations
-               >
+FilteredAnalog<10,       // Output precision in bits
+               2,        // The amount of filtering
+               uint16_t, // The integer type for the filter calculations
+               analog_t  // The integer type for the upscaled analog values
+              >
   analog = A0;
 
 // If you want more filtering, you can increase the filter shift factor.
@@ -45,8 +46,8 @@ FilteredAnalog<10,      // Output precision in bits
 // you do so, so you have to use a larger type as well.
 FilteredAnalog<10,      // Output precision in bits
                6,       // The amount of filtering
-               uint32_t // The integer type for the calculations
-               >
+               uint32_t // The integer type for the filter calculations
+              >
   moreFiltering = A0;
 
 // If you don't care about the specific settings, and just want a

@@ -23,9 +23,9 @@ var searchData=
   ['hold_980',['Hold',['../d6/d98/namespaceMCU_1_1VUDecay.html#ac4567deabb7cfc6e3cd01c45aacfb0a6',1,'MCU::VUDecay']]],
   ['hold_5f2_981',['Hold_2',['../d4/dbe/namespaceMIDI__CC.html#a4f4fbdf93ecdd1f1768b84b3dcd847eb',1,'MIDI_CC']]],
   ['honkytonk_5fpiano_982',['HonkyTonk_Piano',['../da/da6/namespaceMIDI__PC.html#a7551c21061b43f19efaffce9f7dbd930',1,'MIDI_PC']]],
-  ['hysteresis_983',['Hysteresis',['../d2/dcb/classHysteresis.html',1,'Hysteresis&lt; BITS, T_in, T_out &gt;'],['../d3/d6e/classAH_1_1FilteredAnalog.html#a82d4abfe5f6635b1fda61e1bfd072ee6',1,'AH::FilteredAnalog::hysteresis()']]],
+  ['hysteresis_983',['Hysteresis',['../d2/dcb/classHysteresis.html',1,'Hysteresis&lt; BITS, T_in, T_out &gt;'],['../d3/d6e/classAH_1_1FilteredAnalog.html#a279c317254e16de0a9e7096eec50a2c9',1,'AH::FilteredAnalog::hysteresis()']]],
   ['hysteresis_2ecpp_984',['Hysteresis.cpp',['../dd/d40/Hysteresis_8cpp.html',1,'']]],
   ['hysteresis_2ehpp_985',['Hysteresis.hpp',['../d3/d09/Hysteresis_8hpp.html',1,'']]],
   ['hysteresis_3c_20adc_5fbits_2bmin_28sizeof_28analog_5ffilter_5ftype_29_20_2achar_5fbit_20_2d_20adc_5fbits_20_2d_20analog_5ffilter_5fshift_5ffactor_2c_20sizeof_28analog_5ft_29_20_2achar_5fbit_20_2d_20adc_5fbits_29_20_2d_20precision_2c_20analog_5ft_2c_20analog_5ft_20_3e_986',['Hysteresis&lt; ADC_BITS+min(sizeof(ANALOG_FILTER_TYPE) *CHAR_BIT - ADC_BITS - ANALOG_FILTER_SHIFT_FACTOR, sizeof(analog_t) *CHAR_BIT - ADC_BITS) - Precision, analog_t, analog_t &gt;',['../d2/dcb/classHysteresis.html',1,'']]],
-  ['hysteresis_3c_20adc_5fbits_2bupsample_20_2d_20precision_2c_20analog_5ft_2c_20analog_5ft_20_3e_987',['Hysteresis&lt; ADC_BITS+Upsample - Precision, analog_t, analog_t &gt;',['../d2/dcb/classHysteresis.html',1,'']]]
+  ['hysteresis_3c_20adc_5fbits_2bupsample_20_2d_20precision_2c_20analogtype_2c_20analogtype_20_3e_987',['Hysteresis&lt; ADC_BITS+Upsample - Precision, AnalogType, AnalogType &gt;',['../d2/dcb/classHysteresis.html',1,'']]]
 ];

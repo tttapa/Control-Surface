@@ -51,7 +51,7 @@ var searchData=
   ['decaying_451',['decaying',['../d4/d42/classMCU_1_1VUDisplay.html#aa7219d841ca5db8894cfed444b71acd2',1,'MCU::VUDisplay']]],
   ['decaytime_452',['decayTime',['../d4/d42/classMCU_1_1VUDisplay.html#a5e2388ab8ba02b03d50f6a2729052555',1,'MCU::VUDisplay::decayTime()'],['../d4/d71/classMCU_1_1VU__Base.html#a61c835d4ce8a4ac2dc564beeb81e3cde',1,'MCU::VU_Base::decayTime()']]],
   ['decodemode_453',['DECODEMODE',['../dd/de5/classAH_1_1MAX7219__Base.html#a2b2d39c9423fa5377e8c42f4d83cd126',1,'AH::MAX7219_Base']]],
-  ['decrement_454',['Decrement',['../df/dc6/classAH_1_1IncrementDecrementButtons.html#a51221bff5c44bb95999f5e7b589265cda70c9efd0a8ec4917c9e98fe048940573',1,'AH::IncrementDecrementButtons::Decrement()'],['../d0/d04/classGenericSelector.html#ae834ca1344af5ad080f609fe16c9faa4',1,'GenericSelector::decrement()']]],
+  ['decrement_454',['decrement',['../d0/d04/classGenericSelector.html#ae834ca1344af5ad080f609fe16c9faa4',1,'GenericSelector::decrement()'],['../df/dc6/classAH_1_1IncrementDecrementButtons.html#a51221bff5c44bb95999f5e7b589265cda70c9efd0a8ec4917c9e98fe048940573',1,'AH::IncrementDecrementButtons::Decrement()']]],
   ['decrementbutton_455',['decrementButton',['../df/dc6/classAH_1_1IncrementDecrementButtons.html#a7a20282e1f5ea74e837c28938c9cdd53',1,'AH::IncrementDecrementButtons']]],
   ['def_2ecpp_456',['Def.cpp',['../db/d5f/Def_8cpp.html',1,'']]],
   ['def_2ehpp_457',['Def.hpp',['../d0/d4e/Def_8hpp.html',1,'']]],

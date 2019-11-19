@@ -13,6 +13,7 @@
 #include <AH/STL/initializer_list>
 #include <AH/STL/limits>
 #include <AH/STL/new>
+#include <AH/STL/numeric>
 #include <AH/STL/optional>
 #include <AH/STL/type_traits>
 #include <AH/STL/utility>
@@ -44,7 +45,7 @@ using std::is_same;
             long double>::value,                                               \
     "cmath error " #Fun "(long double)");
 
-#define TEST_CMATH_FUNCTION2(Fun)                                             \
+#define TEST_CMATH_FUNCTION2(Fun)                                              \
   static_assert(is_same<decltype(Fun((float)1, (float)1)), float>::value,      \
                 "cmath error " #Fun "(float)");                                \
   static_assert(is_same<decltype(Fun((double)1, (double)1)), double>::value,   \
@@ -74,10 +75,9 @@ TEST_CMATH_FUNCTION3(std::fma);
 
 void setup() {
 #ifdef __cpp_lib_optional
-    std::optional<int> opt = std::nullopt;
-    opt = 1;
-    Serial.println(*opt);
+  std::optional<int> opt = std::nullopt;
+  opt = 1;
+  Serial.println(*opt);
 #endif
 }
-void loop() {
-}
+void loop() {}

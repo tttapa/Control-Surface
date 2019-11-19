@@ -322,7 +322,7 @@ $(function() {
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordflow">return</span> os &lt;&lt; a.<a class="code" href="../../d0/d32/structAH_1_1Array.html#a5297a5bb958543bb3503c444eb43f48c">slice</a>();</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;}</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="../../dd/d80/PrintStream_8hpp.html">AH/PrintStream/PrintStream.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
@@ -340,8 +340,6 @@ $(function() {
 <div class="line"><a name="l00260"></a><span class="lineno"><a class="line" href="../../d5/db6/ArrayHelpers_8hpp.html#a9c834cf78018a1f6badb9fded544d3e0">  260</a></span>&#160;<a class="code" href="../../d5/db6/ArrayHelpers_8hpp.html#a52ef59564017ff8fb10957c26c58b0db">operator&lt;&lt;</a>(Print &amp;os, <span class="keyword">const</span> <a class="code" href="../../d0/d32/structAH_1_1Array.html">AH::Array&lt;T, N&gt;</a> &amp;a) {</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordflow">return</span> os &lt;&lt; a.<a class="code" href="../../d0/d32/structAH_1_1Array.html#a5297a5bb958543bb3503c444eb43f48c">slice</a>();</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;}</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespaceAH_html_aaa066c3fc69fbf28e2d522d13583c9d6"><div class="ttname"><a href="../../dc/d69/namespaceAH.html#aaa066c3fc69fbf28e2d522d13583c9d6">AH::generateArray</a></div><div class="ttdeci">auto generateArray(G generator) -&gt; Array&lt; decltype(generator()), N &gt;</div><div class="ttdoc">Generate an array using the given generator.</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00091">ArrayHelpers.hpp:91</a></div></div>
 <div class="ttc" id="aArrayHelpers_8hpp_html_a52ef59564017ff8fb10957c26c58b0db"><div class="ttname"><a href="../../d5/db6/ArrayHelpers_8hpp.html#a52ef59564017ff8fb10957c26c58b0db">operator&lt;&lt;</a></div><div class="ttdeci">std::enable_if_t&lt; std::is_arithmetic&lt; T &gt;::value, Print &amp; &gt; operator&lt;&lt;(Print &amp;os, const AH::ArraySlice&lt; T, N, Reverse, Const &gt; &amp;a)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00251">ArrayHelpers.hpp:251</a></div></div>

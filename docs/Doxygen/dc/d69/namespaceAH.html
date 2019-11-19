@@ -186,9 +186,6 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a5674c973801a7f18514a073503f6f479"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d69/namespaceAH.html#a5674c973801a7f18514a073503f6f479">pin_t</a> = uint16_t</td></tr>
 <tr class="memdesc:a5674c973801a7f18514a073503f6f479"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type for Arduino pins (and <a class="el" href="../../d2/dda/classAH_1_1ExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements.">ExtendedIOElement</a> pins).  <a href="../../dc/d69/namespaceAH.html#a5674c973801a7f18514a073503f6f479">More...</a><br /></td></tr>
 <tr class="separator:a5674c973801a7f18514a073503f6f479"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a601b9939dd871097682548f351c3f1e5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d69/namespaceAH.html#a601b9939dd871097682548f351c3f1e5">MappingFunction</a> = <a class="el" href="../../dc/d69/namespaceAH.html#a81a2a5d2411e293e4b727c9e9062c92c">analog_t</a>(*)(<a class="el" href="../../dc/d69/namespaceAH.html#a81a2a5d2411e293e4b727c9e9062c92c">analog_t</a>)</td></tr>
-<tr class="memdesc:a601b9939dd871097682548f351c3f1e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function pointer to a mapping function to map analog values.  <a href="../../dc/d69/namespaceAH.html#a601b9939dd871097682548f351c3f1e5">More...</a><br /></td></tr>
-<tr class="separator:a601b9939dd871097682548f351c3f1e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69811526f645221053b94f3e7c48b83e"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
 <tr class="memitem:a69811526f645221053b94f3e7c48b83e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../dc/d69/namespaceAH.html#a69811526f645221053b94f3e7c48b83e">PinList</a> = <a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt; <a class="el" href="../../dc/d69/namespaceAH.html#a5674c973801a7f18514a073503f6f479">pin_t</a>, N &gt;</td></tr>
 <tr class="memdesc:a69811526f645221053b94f3e7c48b83e"><td class="mdescLeft">&#160;</td><td class="mdescRight">An easy alias for arrays of pins.  <a href="../../dc/d69/namespaceAH.html#a69811526f645221053b94f3e7c48b83e">More...</a><br /></td></tr>
@@ -425,6 +422,8 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The type returned from analogRead and similar functions. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d3/dbe/1_8FilteredAnalog_8ino-example.html#a0">1.FilteredAnalog.ino</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d4/d35/Hardware-Types_8hpp_source.html#l00012">12</a> of file <a class="el" href="../../d4/d35/Hardware-Types_8hpp_source.html">Hardware-Types.hpp</a>.</p>
 
@@ -450,25 +449,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a601b9939dd871097682548f351c3f1e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a601b9939dd871097682548f351c3f1e5">&#9670;&nbsp;</a></span>MappingFunction</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="../../dc/d69/namespaceAH.html#a601b9939dd871097682548f351c3f1e5">AH::MappingFunction</a> = typedef <a class="el" href="../../dc/d69/namespaceAH.html#a81a2a5d2411e293e4b727c9e9062c92c">analog_t</a> (*)(<a class="el" href="../../dc/d69/namespaceAH.html#a81a2a5d2411e293e4b727c9e9062c92c">analog_t</a>)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>A function pointer to a mapping function to map analog values. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d3/d6e/classAH_1_1FilteredAnalog.html#aa37b0a0088b3a73b36f82426c96e0fb9" title="Specify a mapping function that is applied to the raw analog value before filtering.">FilteredAnalog::map()</a> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../d4/d35/Hardware-Types_8hpp_source.html#l00025">25</a> of file <a class="el" href="../../d4/d35/Hardware-Types_8hpp_source.html">Hardware-Types.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a69811526f645221053b94f3e7c48b83e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a69811526f645221053b94f3e7c48b83e">&#9670;&nbsp;</a></span>PinList</h2>
 
@@ -485,7 +465,7 @@ template&lt;size_t N&gt; </div>
 
 <p>An easy alias for arrays of pins. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d35/Hardware-Types_8hpp_source.html#l00029">29</a> of file <a class="el" href="../../d4/d35/Hardware-Types_8hpp_source.html">Hardware-Types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d35/Hardware-Types_8hpp_source.html#l00025">25</a> of file <a class="el" href="../../d4/d35/Hardware-Types_8hpp_source.html">Hardware-Types.hpp</a>.</p>
 
 </div>
 </div>

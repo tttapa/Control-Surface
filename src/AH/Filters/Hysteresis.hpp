@@ -62,8 +62,8 @@ class Hysteresis {
 
   private:
     T_out prevLevel = 0;
-    constexpr static T_in margin = (1 << BITS) - 1;
-    constexpr static T_in offset = 1 << (BITS - 1);
+    constexpr static T_in margin = (1UL << BITS) - 1;
+    constexpr static T_in offset = 1UL << (BITS - 1);
     constexpr static T_in max_in = -1;
     constexpr static T_out max_out = static_cast<T_out>(max_in >> BITS);
     static_assert(max_in > 0, "Error: only unsigned types are supported");
