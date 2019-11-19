@@ -20,10 +20,6 @@ using pin_t = uint16_t;
 /// A special pin number that indicates an unused or invalid pin.
 constexpr pin_t NO_PIN = 1 << (8 * sizeof(pin_t) - 1);
 
-/// A function pointer to a mapping function to map analog values.
-/// @see    FilteredAnalog::map()
-using MappingFunction = analog_t (*)(analog_t);
-
 /// An easy alias for arrays of pins.
 template <size_t N>
 using PinList = Array<pin_t, N>;
