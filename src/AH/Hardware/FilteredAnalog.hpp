@@ -81,7 +81,7 @@ class FilteredAnalog {
      * @note    This overrides the mapping function set by the `map` method.
      */
     void invert() {
-        constexpr analog_t maxval = (1 << (ADC_BITS + Upsample)) - 1;
+        constexpr analog_t maxval = (1UL << (ADC_BITS + Upsample)) - 1;
         map([](analog_t val) -> analog_t { return maxval - val; });
     }
 
