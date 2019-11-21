@@ -59,6 +59,11 @@ class MultiMIDI_Interface : public MIDI_Interface {
             interface->sendImpl(data, length, cn);
     }
 
+    void sendImpl(uint8_t rt, uint8_t cn) override {
+        for (auto interface : interfaces)
+            interface->sendImpl(rt, cn);
+    }
+
   private:
     Array<Parsing_MIDI_Interface *, N> interfaces;
 };

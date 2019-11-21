@@ -130,6 +130,14 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
         flush();
     }
 
+    void sendImpl(uint8_t rt, uint8_t cn) override {
+        writeUSBPacket(cn, 0xF, // CN|CIN
+                       rt,      // single byte
+                       0,       // no data
+                       0);      // no data
+        flush();
+    }
+
   public:
 // If it's a Teensy board
 #if defined(TEENSYDUINO)

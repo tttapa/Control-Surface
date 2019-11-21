@@ -49,6 +49,12 @@ void MIDI_Interface::sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) {
     sendImpl(m, c, d1, cn);
 }
 
+void MIDI_Interface::sendOnCable(uint8_t r, uint8_t cn) {
+    r |= 0b10000000; // set msb
+    cn &= 0x0F;      // bitmask low nibble
+    sendImpl(r, cn);
+}
+
 void MIDI_Interface::sendNoteOn(MIDICNChannelAddress address,
                                 uint8_t velocity) {
     if (address)
@@ -98,6 +104,11 @@ void MIDI_Interface::send(SysExMessage message) {
             return;
         }
         sendImpl(message.data, message.length, message.CN);
+    }
+}
+void MIDI_Interface::send(uint8_t rt, uint8_t cn) {
+    if (rt) {
+        sendImpl(rt, cn);
     }
 }
 
