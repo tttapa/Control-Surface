@@ -140,6 +140,11 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
         (void)cn; // TODO
     }
 
+    void sendImpl(uint8_t rt, uint8_t cn) override {
+        (void)rt;
+        (void)cn; // TODO
+    }
+
     void parse(const uint8_t *const data, const size_t len) {
         if (len <= 1)
             return;

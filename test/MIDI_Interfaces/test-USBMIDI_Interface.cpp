@@ -20,6 +20,13 @@ TEST(USBMIDI_Interface, send2B) {
     midi.sendPC({CHANNEL_4, 8}, 0x66);
 }
 
+TEST(USBMIDI_Interface, RealTime) {
+    USBMIDI_Interface midi;
+    Sequence seq;
+    EXPECT_CALL(midi, writeUSBPacket(8, 0xF, 0xF8, 0x00, 0x00)).InSequence(seq);
+    midi.send(0xF8, 8);
+}
+
 TEST(USBMIDI_Interface, SysExSend3B) {
     USBMIDI_Interface midi;
     Sequence seq;

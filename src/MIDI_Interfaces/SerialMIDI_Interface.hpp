@@ -44,19 +44,26 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
         stream.write(m | c); // Send the MIDI message over the stream
         stream.write(d1);
         stream.write(d2);
-        stream.flush(); // TODO
+        // stream.flush(); // TODO
     }
 
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
         (void)cn;
         stream.write(m | c); // Send the MIDI message over the stream
         stream.write(d1);
-        stream.flush(); // TODO
+        // stream.flush(); // TODO
     }
 
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        stream.write(data, length);
         (void)cn;
+        stream.write(data, length);
+        // stream.flush(); // TODO
+    }
+
+    void sendImpl(uint8_t rt, uint8_t cn) override {
+        (void)cn;
+        stream.write(rt); // Send the MIDI message over the stream
+        // stream.flush(); // TODO
     }
 
   protected:

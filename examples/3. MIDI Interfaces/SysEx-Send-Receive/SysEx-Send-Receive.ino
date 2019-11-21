@@ -35,7 +35,7 @@ void setup() {
 void loop() {
   // Send a SysEx message when the push button is pressed
   uint8_t sysex[] = {0xF0, 0x11, 0x22, 0x33, 0xF7};
-  if (pushbutton.getState() == Button::Falling)
+  if (pushbutton.update() == Button::Falling)
     midi.send(sysex);
     
   // Read incoming MIDI data and call the callback if a new 

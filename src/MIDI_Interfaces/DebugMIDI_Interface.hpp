@@ -31,6 +31,8 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
 
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override;
 
+    void sendImpl(uint8_t rt, uint8_t cn) override;
+
   private:
     char firstChar = '\0';
     char secondChar = '\0';

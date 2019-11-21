@@ -87,6 +87,16 @@ class MIDI_Interface {
      */
     void sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn);
 
+    /**
+     * @brief   Send a single-byte MIDI packet with cable number.
+     *
+     * @param   r
+     *          The MIDI byte to send.
+     * @param   cn
+     *          The MIDI Cable Number. [0, 15]
+     */
+    void sendOnCable(uint8_t r, uint8_t cn);
+
     /// Send a MIDI Note On event.
     void sendNoteOn(MIDICNChannelAddress address, uint8_t velocity);
     /// Send a MIDI Note Off event.
@@ -110,6 +120,8 @@ class MIDI_Interface {
     void send(const uint8_t (&sysexdata)[N], uint8_t cn = 0) {
         send(SysExMessage{sysexdata, N, cn});
     }
+    /// Send a single-byte MIDI message.
+    void send(uint8_t rt, uint8_t cn = 0);
 
     /**
      * @brief   Read the MIDI interface and call the callback if a message is
@@ -160,6 +172,11 @@ class MIDI_Interface {
      * @brief   Low-level function for sending a system exclusive MIDI message.
      */
     virtual void sendImpl(const uint8_t *data, size_t length, uint8_t cn) = 0;
+
+    /** 
+     * @brief   Low-level function for sending a single-byte MIDI message.
+     */
+    virtual void sendImpl(uint8_t rt, uint8_t cn) = 0;
 
   private:
     static MIDI_Interface *DefaultMIDI_Interface;
