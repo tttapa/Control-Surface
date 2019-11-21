@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - afdb9050a563b1a3a5660aa5dc357795af8eafc0 - src/MIDI_Interfaces/DebugMIDI_Interface.cpp</title>
+  <title>LCOV - 80ba08a3895ece11ffdc0615e2a6f53de411ae19 - src/MIDI_Interfaces/DebugMIDI_Interface.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">afdb9050a563b1a3a5660aa5dc357795af8eafc0</td>
+            <td class="headerValue">80ba08a3895ece11ffdc0615e2a6f53de411ae19</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">49</td>
-            <td class="headerCovTableEntry">53</td>
-            <td class="headerCovTableEntryHi">92.5 %</td>
+            <td class="headerCovTableEntry">58</td>
+            <td class="headerCovTableEntryMed">84.5 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-19 03:49:44</td>
+            <td class="headerValue">2019-11-21 23:16:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryMed">80.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -175,7 +175,13 @@
 <a name="105"><span class="lineNum">     105 </span><span class="lineCov">          1 :     stream.flush();</span></a>
 <a name="106"><span class="lineNum">     106 </span><span class="lineCov">          1 : }</span></a>
 <a name="107"><span class="lineNum">     107 </span>            : </a>
-<a name="108"><span class="lineNum">     108 </span>            : END_CS_NAMESPACE</a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineNoCov">          0 : void StreamDebugMIDI_Interface::sendImpl(uint8_t rt, uint8_t cn) {</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineNoCov">          0 :     stream &lt;&lt; F(&quot;Real-Time: 0x&quot;) &lt;&lt; hex &lt;&lt; rt &lt;&lt; dec &lt;&lt; F(&quot;\tCable: &quot;) &lt;&lt; cn</span></a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineNoCov">          0 :            &lt;&lt; endl;</span></a>
+<a name="111"><span class="lineNum">     111 </span><span class="lineNoCov">          0 :     stream.flush();</span></a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineNoCov">          0 : }</span></a>
+<a name="113"><span class="lineNum">     113 </span>            : </a>
+<a name="114"><span class="lineNum">     114 </span>            : END_CS_NAMESPACE</a>
 </pre>
       </td>
     </tr>

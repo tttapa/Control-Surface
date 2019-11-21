@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - afdb9050a563b1a3a5660aa5dc357795af8eafc0 - src/MIDI_Interfaces/USBMIDI_Interface.hpp</title>
+  <title>LCOV - 80ba08a3895ece11ffdc0615e2a6f53de411ae19 - src/MIDI_Interfaces/USBMIDI_Interface.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">afdb9050a563b1a3a5660aa5dc357795af8eafc0</td>
+            <td class="headerValue">80ba08a3895ece11ffdc0615e2a6f53de411ae19</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">35</td>
-            <td class="headerCovTableEntry">38</td>
-            <td class="headerCovTableEntryHi">92.1 %</td>
+            <td class="headerCovTableEntry">40</td>
+            <td class="headerCovTableEntry">43</td>
+            <td class="headerCovTableEntryHi">93.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-19 03:49:44</td>
+            <td class="headerValue">2019-11-21 23:16:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">11</td>
             <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntryHi">91.7 %</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryHi">92.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -106,12 +106,12 @@
 <a name="36"><span class="lineNum">      36 </span>            :  * </a>
 <a name="37"><span class="lineNum">      37 </span>            :  * @ingroup MIDIInterfaces</a>
 <a name="38"><span class="lineNum">      38 </span>            :  */</a>
-<a name="39"><span class="lineNum">      39 </span><span class="lineCov">         15 : class USBMIDI_Interface : public Parsing_MIDI_Interface {</span></a>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">         16 : class USBMIDI_Interface : public Parsing_MIDI_Interface {</span></a>
 <a name="40"><span class="lineNum">      40 </span>            :   public:</a>
 <a name="41"><span class="lineNum">      41 </span>            :     /**</a>
 <a name="42"><span class="lineNum">      42 </span>            :      * @brief   Construct a new USBMIDI_Interface.</a>
 <a name="43"><span class="lineNum">      43 </span>            :      */</a>
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">         15 :     USBMIDI_Interface() : Parsing_MIDI_Interface(parser) {}</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">         16 :     USBMIDI_Interface() : Parsing_MIDI_Interface(parser) {}</span></a>
 <a name="45"><span class="lineNum">      45 </span>            : </a>
 <a name="46"><span class="lineNum">      46 </span>            :   private:</a>
 <a name="47"><span class="lineNum">      47 </span>            :     USBMIDI_Parser parser;</a>
@@ -122,11 +122,11 @@
 <a name="52"><span class="lineNum">      52 </span>            :   public:</a>
 <a name="53"><span class="lineNum">      53 </span>            :     W_SUGGEST_OVERRIDE_OFF</a>
 <a name="54"><span class="lineNum">      54 </span>            : </a>
-<a name="55"><span class="lineNum">      55 </span><span class="lineCov">         38 :     MOCK_METHOD5(writeUSBPacket,</span></a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">         40 :     MOCK_METHOD5(writeUSBPacket,</span></a>
 <a name="56"><span class="lineNum">      56 </span>            :                  void(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));</a>
 <a name="57"><span class="lineNum">      57 </span>            :     using MIDIUSBPacket_t = Array&lt;uint8_t, 4&gt;;</a>
 <a name="58"><span class="lineNum">      58 </span><span class="lineCov">          8 :     MOCK_METHOD0(readUSBPacket, MIDIUSBPacket_t(void));</span></a>
-<a name="59"><span class="lineNum">      59 </span><span class="lineCov">         10 :     void flush() {}</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">         11 :     void flush() {}</span></a>
 <a name="60"><span class="lineNum">      60 </span>            : </a>
 <a name="61"><span class="lineNum">      61 </span>            :     W_SUGGEST_OVERRIDE_ON</a>
 <a name="62"><span class="lineNum">      62 </span>            : </a>
@@ -200,105 +200,113 @@
 <a name="130"><span class="lineNum">     130 </span><span class="lineCov">          8 :         flush();</span></a>
 <a name="131"><span class="lineNum">     131 </span><span class="lineCov">          8 :     }</span></a>
 <a name="132"><span class="lineNum">     132 </span>            : </a>
-<a name="133"><span class="lineNum">     133 </span>            :   public:</a>
-<a name="134"><span class="lineNum">     134 </span>            : // If it's a Teensy board</a>
-<a name="135"><span class="lineNum">     135 </span>            : #if defined(TEENSYDUINO)</a>
-<a name="136"><span class="lineNum">     136 </span>            :     MIDI_read_t read() override {</a>
-<a name="137"><span class="lineNum">     137 </span>            :         for (uint8_t i = 0; i &lt; (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {</a>
-<a name="138"><span class="lineNum">     138 </span>            :             if (rx_packet == nullptr) { // If there's no previous packet</a>
-<a name="139"><span class="lineNum">     139 </span>            :                 if (!usb_configuration) // Check USB configuration</a>
-<a name="140"><span class="lineNum">     140 </span>            :                     return NO_MESSAGE;</a>
-<a name="141"><span class="lineNum">     141 </span>            :                 rx_packet = usb_rx(</a>
-<a name="142"><span class="lineNum">     142 </span>            :                     MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer</a>
-<a name="143"><span class="lineNum">     143 </span>            :                 if (rx_packet == nullptr) { // If there's no new packet, return</a>
-<a name="144"><span class="lineNum">     144 </span>            :                     return NO_MESSAGE;</a>
-<a name="145"><span class="lineNum">     145 </span>            :                 }</a>
-<a name="146"><span class="lineNum">     146 </span>            :                 if (rx_packet-&gt;len &lt; 4) {</a>
-<a name="147"><span class="lineNum">     147 </span>            :                     // If the lenght is less than 4, it's not a valid MIDI USB</a>
-<a name="148"><span class="lineNum">     148 </span>            :                     // packet</a>
-<a name="149"><span class="lineNum">     149 </span>            :                     usb_free(rx_packet); // Free the packet</a>
-<a name="150"><span class="lineNum">     150 </span>            :                     rx_packet = nullptr; // Read new packet next time around</a>
-<a name="151"><span class="lineNum">     151 </span>            :                     return NO_MESSAGE;</a>
-<a name="152"><span class="lineNum">     152 </span>            :                 }</a>
-<a name="153"><span class="lineNum">     153 </span>            :             }</a>
-<a name="154"><span class="lineNum">     154 </span>            : </a>
-<a name="155"><span class="lineNum">     155 </span>            :             size_t index = rx_packet-&gt;index;</a>
-<a name="156"><span class="lineNum">     156 </span>            :             uint8_t *data = rx_packet-&gt;buf + index; // A pointer to this packet</a>
-<a name="157"><span class="lineNum">     157 </span>            : </a>
-<a name="158"><span class="lineNum">     158 </span>            :             MIDI_read_t parseResult = parser.parse(data);</a>
-<a name="159"><span class="lineNum">     159 </span>            : </a>
-<a name="160"><span class="lineNum">     160 </span>            :             index += 4;</a>
-<a name="161"><span class="lineNum">     161 </span>            :             if (index &lt; rx_packet-&gt;len) {</a>
-<a name="162"><span class="lineNum">     162 </span>            :                 // If the packet is longer than 4 bytes</a>
-<a name="163"><span class="lineNum">     163 </span>            :                 rx_packet-&gt;index = index; // Change the index and read the next</a>
-<a name="164"><span class="lineNum">     164 </span>            :                                           // four bytes on next read</a>
-<a name="165"><span class="lineNum">     165 </span>            :             } else {</a>
-<a name="166"><span class="lineNum">     166 </span>            :                 // If the packet was only 4 bytes long</a>
-<a name="167"><span class="lineNum">     167 </span>            :                 usb_free(rx_packet);                  // Free the packet</a>
-<a name="168"><span class="lineNum">     168 </span>            :                 rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read the next packet</a>
-<a name="169"><span class="lineNum">     169 </span>            :             }</a>
-<a name="170"><span class="lineNum">     170 </span>            :             if (parseResult != NO_MESSAGE)</a>
-<a name="171"><span class="lineNum">     171 </span>            :                 return parseResult;</a>
-<a name="172"><span class="lineNum">     172 </span>            :         }</a>
-<a name="173"><span class="lineNum">     173 </span>            :         return NO_MESSAGE;</a>
-<a name="174"><span class="lineNum">     174 </span>            :     }</a>
-<a name="175"><span class="lineNum">     175 </span>            : </a>
-<a name="176"><span class="lineNum">     176 </span>            : // If the main MCU has a USB connection but is not a Teensy → MIDIUSB library</a>
-<a name="177"><span class="lineNum">     177 </span>            : #elif defined(USBCON)</a>
-<a name="178"><span class="lineNum">     178 </span>            :     MIDI_read_t read() override {</a>
-<a name="179"><span class="lineNum">     179 </span>            :         for (uint8_t i = 0; i &lt; (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {</a>
-<a name="180"><span class="lineNum">     180 </span>            :             midiEventPacket_t midipacket = MidiUSB.read();</a>
-<a name="181"><span class="lineNum">     181 </span>            :             uint8_t rx_packet[4] = {midipacket.header, midipacket.byte1,</a>
-<a name="182"><span class="lineNum">     182 </span>            :                                     midipacket.byte2, midipacket.byte3};</a>
-<a name="183"><span class="lineNum">     183 </span>            :             if (!midipacket.header)</a>
-<a name="184"><span class="lineNum">     184 </span>            :                 return NO_MESSAGE;</a>
-<a name="185"><span class="lineNum">     185 </span>            :             MIDI_read_t parseResult = parser.parse(rx_packet);</a>
-<a name="186"><span class="lineNum">     186 </span>            :             if (parseResult != NO_MESSAGE)</a>
-<a name="187"><span class="lineNum">     187 </span>            :                 return parseResult;</a>
-<a name="188"><span class="lineNum">     188 </span>            :         }</a>
-<a name="189"><span class="lineNum">     189 </span>            :         return NO_MESSAGE;</a>
-<a name="190"><span class="lineNum">     190 </span>            :     }</a>
-<a name="191"><span class="lineNum">     191 </span>            : #endif</a>
-<a name="192"><span class="lineNum">     192 </span>            : </a>
-<a name="193"><span class="lineNum">     193 </span>            :   private:</a>
-<a name="194"><span class="lineNum">     194 </span>            : // If it's a Teensy board</a>
-<a name="195"><span class="lineNum">     195 </span>            : #if defined(TEENSYDUINO)</a>
-<a name="196"><span class="lineNum">     196 </span>            :     usb_packet_t *rx_packet = nullptr;</a>
-<a name="197"><span class="lineNum">     197 </span>            : #endif</a>
-<a name="198"><span class="lineNum">     198 </span>            : };</a>
-<a name="199"><span class="lineNum">     199 </span>            : </a>
-<a name="200"><span class="lineNum">     200 </span>            : END_CS_NAMESPACE</a>
-<a name="201"><span class="lineNum">     201 </span>            : </a>
-<a name="202"><span class="lineNum">     202 </span>            : // If the main MCU doesn't have a USB connection:</a>
-<a name="203"><span class="lineNum">     203 </span>            : // Fall back on Serial connection at the hardware MIDI baud rate.</a>
-<a name="204"><span class="lineNum">     204 </span>            : // (Can be used with HIDUINO or USBMidiKliK.)</a>
-<a name="205"><span class="lineNum">     205 </span>            : #elif !defined(USBCON) &amp;&amp; !defined(TEENSYDUINO)</a>
-<a name="206"><span class="lineNum">     206 </span>            : </a>
-<a name="207"><span class="lineNum">     207 </span>            : #include &quot;SerialMIDI_Interface.hpp&quot;</a>
-<a name="208"><span class="lineNum">     208 </span>            : </a>
-<a name="209"><span class="lineNum">     209 </span>            : BEGIN_CS_NAMESPACE</a>
-<a name="210"><span class="lineNum">     210 </span>            : </a>
-<a name="211"><span class="lineNum">     211 </span>            : /**</a>
-<a name="212"><span class="lineNum">     212 </span>            :  * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI</a>
-<a name="213"><span class="lineNum">     213 </span>            :  *          connection.</a>
-<a name="214"><span class="lineNum">     214 </span>            :  * </a>
-<a name="215"><span class="lineNum">     215 </span>            :  * @note    See the [MIDI over USB Wiki]</a>
-<a name="216"><span class="lineNum">     216 </span>            :  *          (https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB)</a>
-<a name="217"><span class="lineNum">     217 </span>            :  *          for more information.</a>
-<a name="218"><span class="lineNum">     218 </span>            :  * </a>
-<a name="219"><span class="lineNum">     219 </span>            :  * @ingroup MIDIInterfaces</a>
-<a name="220"><span class="lineNum">     220 </span>            :  */</a>
-<a name="221"><span class="lineNum">     221 </span>            : class USBMIDI_Interface : public USBSerialMIDI_Interface {</a>
-<a name="222"><span class="lineNum">     222 </span>            :   public:</a>
-<a name="223"><span class="lineNum">     223 </span>            :     /**</a>
-<a name="224"><span class="lineNum">     224 </span>            :      * @brief   Construct a new USBMIDI_Interface.</a>
-<a name="225"><span class="lineNum">     225 </span>            :      */</a>
-<a name="226"><span class="lineNum">     226 </span>            :     USBMIDI_Interface() : USBSerialMIDI_Interface(MIDI_BAUD){};</a>
-<a name="227"><span class="lineNum">     227 </span>            : };</a>
-<a name="228"><span class="lineNum">     228 </span>            : </a>
-<a name="229"><span class="lineNum">     229 </span>            : END_CS_NAMESPACE</a>
-<a name="230"><span class="lineNum">     230 </span>            : </a>
-<a name="231"><span class="lineNum">     231 </span>            : #endif</a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineCov">          1 :     void sendImpl(uint8_t rt, uint8_t cn) override {</span></a>
+<a name="134"><span class="lineNum">     134 </span><span class="lineCov">          2 :         writeUSBPacket(cn, 0xF, // CN|CIN</span></a>
+<a name="135"><span class="lineNum">     135 </span><span class="lineCov">          1 :                        rt,      // single byte</span></a>
+<a name="136"><span class="lineNum">     136 </span>            :                        0,       // no data</a>
+<a name="137"><span class="lineNum">     137 </span>            :                        0);      // no data</a>
+<a name="138"><span class="lineNum">     138 </span><span class="lineCov">          1 :         flush();</span></a>
+<a name="139"><span class="lineNum">     139 </span><span class="lineCov">          1 :     }</span></a>
+<a name="140"><span class="lineNum">     140 </span>            : </a>
+<a name="141"><span class="lineNum">     141 </span>            :   public:</a>
+<a name="142"><span class="lineNum">     142 </span>            : // If it's a Teensy board</a>
+<a name="143"><span class="lineNum">     143 </span>            : #if defined(TEENSYDUINO)</a>
+<a name="144"><span class="lineNum">     144 </span>            :     MIDI_read_t read() override {</a>
+<a name="145"><span class="lineNum">     145 </span>            :         for (uint8_t i = 0; i &lt; (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {</a>
+<a name="146"><span class="lineNum">     146 </span>            :             if (rx_packet == nullptr) { // If there's no previous packet</a>
+<a name="147"><span class="lineNum">     147 </span>            :                 if (!usb_configuration) // Check USB configuration</a>
+<a name="148"><span class="lineNum">     148 </span>            :                     return NO_MESSAGE;</a>
+<a name="149"><span class="lineNum">     149 </span>            :                 rx_packet = usb_rx(</a>
+<a name="150"><span class="lineNum">     150 </span>            :                     MIDI_RX_ENDPOINT); // Read a new packet from the USB buffer</a>
+<a name="151"><span class="lineNum">     151 </span>            :                 if (rx_packet == nullptr) { // If there's no new packet, return</a>
+<a name="152"><span class="lineNum">     152 </span>            :                     return NO_MESSAGE;</a>
+<a name="153"><span class="lineNum">     153 </span>            :                 }</a>
+<a name="154"><span class="lineNum">     154 </span>            :                 if (rx_packet-&gt;len &lt; 4) {</a>
+<a name="155"><span class="lineNum">     155 </span>            :                     // If the lenght is less than 4, it's not a valid MIDI USB</a>
+<a name="156"><span class="lineNum">     156 </span>            :                     // packet</a>
+<a name="157"><span class="lineNum">     157 </span>            :                     usb_free(rx_packet); // Free the packet</a>
+<a name="158"><span class="lineNum">     158 </span>            :                     rx_packet = nullptr; // Read new packet next time around</a>
+<a name="159"><span class="lineNum">     159 </span>            :                     return NO_MESSAGE;</a>
+<a name="160"><span class="lineNum">     160 </span>            :                 }</a>
+<a name="161"><span class="lineNum">     161 </span>            :             }</a>
+<a name="162"><span class="lineNum">     162 </span>            : </a>
+<a name="163"><span class="lineNum">     163 </span>            :             size_t index = rx_packet-&gt;index;</a>
+<a name="164"><span class="lineNum">     164 </span>            :             uint8_t *data = rx_packet-&gt;buf + index; // A pointer to this packet</a>
+<a name="165"><span class="lineNum">     165 </span>            : </a>
+<a name="166"><span class="lineNum">     166 </span>            :             MIDI_read_t parseResult = parser.parse(data);</a>
+<a name="167"><span class="lineNum">     167 </span>            : </a>
+<a name="168"><span class="lineNum">     168 </span>            :             index += 4;</a>
+<a name="169"><span class="lineNum">     169 </span>            :             if (index &lt; rx_packet-&gt;len) {</a>
+<a name="170"><span class="lineNum">     170 </span>            :                 // If the packet is longer than 4 bytes</a>
+<a name="171"><span class="lineNum">     171 </span>            :                 rx_packet-&gt;index = index; // Change the index and read the next</a>
+<a name="172"><span class="lineNum">     172 </span>            :                                           // four bytes on next read</a>
+<a name="173"><span class="lineNum">     173 </span>            :             } else {</a>
+<a name="174"><span class="lineNum">     174 </span>            :                 // If the packet was only 4 bytes long</a>
+<a name="175"><span class="lineNum">     175 </span>            :                 usb_free(rx_packet);                  // Free the packet</a>
+<a name="176"><span class="lineNum">     176 </span>            :                 rx_packet = usb_rx(MIDI_RX_ENDPOINT); // Read the next packet</a>
+<a name="177"><span class="lineNum">     177 </span>            :             }</a>
+<a name="178"><span class="lineNum">     178 </span>            :             if (parseResult != NO_MESSAGE)</a>
+<a name="179"><span class="lineNum">     179 </span>            :                 return parseResult;</a>
+<a name="180"><span class="lineNum">     180 </span>            :         }</a>
+<a name="181"><span class="lineNum">     181 </span>            :         return NO_MESSAGE;</a>
+<a name="182"><span class="lineNum">     182 </span>            :     }</a>
+<a name="183"><span class="lineNum">     183 </span>            : </a>
+<a name="184"><span class="lineNum">     184 </span>            : // If the main MCU has a USB connection but is not a Teensy → MIDIUSB library</a>
+<a name="185"><span class="lineNum">     185 </span>            : #elif defined(USBCON)</a>
+<a name="186"><span class="lineNum">     186 </span>            :     MIDI_read_t read() override {</a>
+<a name="187"><span class="lineNum">     187 </span>            :         for (uint8_t i = 0; i &lt; (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {</a>
+<a name="188"><span class="lineNum">     188 </span>            :             midiEventPacket_t midipacket = MidiUSB.read();</a>
+<a name="189"><span class="lineNum">     189 </span>            :             uint8_t rx_packet[4] = {midipacket.header, midipacket.byte1,</a>
+<a name="190"><span class="lineNum">     190 </span>            :                                     midipacket.byte2, midipacket.byte3};</a>
+<a name="191"><span class="lineNum">     191 </span>            :             if (!midipacket.header)</a>
+<a name="192"><span class="lineNum">     192 </span>            :                 return NO_MESSAGE;</a>
+<a name="193"><span class="lineNum">     193 </span>            :             MIDI_read_t parseResult = parser.parse(rx_packet);</a>
+<a name="194"><span class="lineNum">     194 </span>            :             if (parseResult != NO_MESSAGE)</a>
+<a name="195"><span class="lineNum">     195 </span>            :                 return parseResult;</a>
+<a name="196"><span class="lineNum">     196 </span>            :         }</a>
+<a name="197"><span class="lineNum">     197 </span>            :         return NO_MESSAGE;</a>
+<a name="198"><span class="lineNum">     198 </span>            :     }</a>
+<a name="199"><span class="lineNum">     199 </span>            : #endif</a>
+<a name="200"><span class="lineNum">     200 </span>            : </a>
+<a name="201"><span class="lineNum">     201 </span>            :   private:</a>
+<a name="202"><span class="lineNum">     202 </span>            : // If it's a Teensy board</a>
+<a name="203"><span class="lineNum">     203 </span>            : #if defined(TEENSYDUINO)</a>
+<a name="204"><span class="lineNum">     204 </span>            :     usb_packet_t *rx_packet = nullptr;</a>
+<a name="205"><span class="lineNum">     205 </span>            : #endif</a>
+<a name="206"><span class="lineNum">     206 </span>            : };</a>
+<a name="207"><span class="lineNum">     207 </span>            : </a>
+<a name="208"><span class="lineNum">     208 </span>            : END_CS_NAMESPACE</a>
+<a name="209"><span class="lineNum">     209 </span>            : </a>
+<a name="210"><span class="lineNum">     210 </span>            : // If the main MCU doesn't have a USB connection:</a>
+<a name="211"><span class="lineNum">     211 </span>            : // Fall back on Serial connection at the hardware MIDI baud rate.</a>
+<a name="212"><span class="lineNum">     212 </span>            : // (Can be used with HIDUINO or USBMidiKliK.)</a>
+<a name="213"><span class="lineNum">     213 </span>            : #elif !defined(USBCON) &amp;&amp; !defined(TEENSYDUINO)</a>
+<a name="214"><span class="lineNum">     214 </span>            : </a>
+<a name="215"><span class="lineNum">     215 </span>            : #include &quot;SerialMIDI_Interface.hpp&quot;</a>
+<a name="216"><span class="lineNum">     216 </span>            : </a>
+<a name="217"><span class="lineNum">     217 </span>            : BEGIN_CS_NAMESPACE</a>
+<a name="218"><span class="lineNum">     218 </span>            : </a>
+<a name="219"><span class="lineNum">     219 </span>            : /**</a>
+<a name="220"><span class="lineNum">     220 </span>            :  * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI</a>
+<a name="221"><span class="lineNum">     221 </span>            :  *          connection.</a>
+<a name="222"><span class="lineNum">     222 </span>            :  * </a>
+<a name="223"><span class="lineNum">     223 </span>            :  * @note    See the [MIDI over USB Wiki]</a>
+<a name="224"><span class="lineNum">     224 </span>            :  *          (https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB)</a>
+<a name="225"><span class="lineNum">     225 </span>            :  *          for more information.</a>
+<a name="226"><span class="lineNum">     226 </span>            :  * </a>
+<a name="227"><span class="lineNum">     227 </span>            :  * @ingroup MIDIInterfaces</a>
+<a name="228"><span class="lineNum">     228 </span>            :  */</a>
+<a name="229"><span class="lineNum">     229 </span>            : class USBMIDI_Interface : public USBSerialMIDI_Interface {</a>
+<a name="230"><span class="lineNum">     230 </span>            :   public:</a>
+<a name="231"><span class="lineNum">     231 </span>            :     /**</a>
+<a name="232"><span class="lineNum">     232 </span>            :      * @brief   Construct a new USBMIDI_Interface.</a>
+<a name="233"><span class="lineNum">     233 </span>            :      */</a>
+<a name="234"><span class="lineNum">     234 </span>            :     USBMIDI_Interface() : USBSerialMIDI_Interface(MIDI_BAUD){};</a>
+<a name="235"><span class="lineNum">     235 </span>            : };</a>
+<a name="236"><span class="lineNum">     236 </span>            : </a>
+<a name="237"><span class="lineNum">     237 </span>            : END_CS_NAMESPACE</a>
+<a name="238"><span class="lineNum">     238 </span>            : </a>
+<a name="239"><span class="lineNum">     239 </span>            : #endif</a>
 </pre>
       </td>
     </tr>

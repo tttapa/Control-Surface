@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - afdb9050a563b1a3a5660aa5dc357795af8eafc0 - src/MIDI_Interfaces/BluetoothMIDI_Interface.hpp</title>
+  <title>LCOV - 80ba08a3895ece11ffdc0615e2a6f53de411ae19 - src/MIDI_Interfaces/BluetoothMIDI_Interface.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">afdb9050a563b1a3a5660aa5dc357795af8eafc0</td>
+            <td class="headerValue">80ba08a3895ece11ffdc0615e2a6f53de411ae19</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">28</td>
-            <td class="headerCovTableEntry">106</td>
-            <td class="headerCovTableEntryLo">26.4 %</td>
+            <td class="headerCovTableEntry">108</td>
+            <td class="headerCovTableEntryLo">25.9 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-19 03:49:44</td>
+            <td class="headerValue">2019-11-21 23:16:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
-            <td class="headerCovTableEntry">21</td>
-            <td class="headerCovTableEntryLo">28.6 %</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntryLo">27.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -210,35 +210,40 @@
 <a name="140"><span class="lineNum">     140 </span>            :         (void)cn; // TODO</a>
 <a name="141"><span class="lineNum">     141 </span><span class="lineNoCov">          0 :     }</span></a>
 <a name="142"><span class="lineNum">     142 </span>            : </a>
-<a name="143"><span class="lineNum">     143 </span><span class="lineCov">         10 :     void parse(const uint8_t *const data, const size_t len) {</span></a>
-<a name="144"><span class="lineNum">     144 </span><span class="lineCov">         10 :         if (len &lt;= 1)</span></a>
-<a name="145"><span class="lineNum">     145 </span><span class="lineNoCov">          0 :             return;</span></a>
-<a name="146"><span class="lineNum">     146 </span><span class="lineCov">         10 :         if (MIDI_Parser::isData(data[0]))</span></a>
-<a name="147"><span class="lineNum">     147 </span><span class="lineNoCov">          0 :             return;</span></a>
-<a name="148"><span class="lineNum">     148 </span><span class="lineCov">         10 :         if (MIDI_Parser::isData(data[1]))</span></a>
-<a name="149"><span class="lineNum">     149 </span><span class="lineCov">          1 :             parse(data[1]);</span></a>
-<a name="150"><span class="lineNum">     150 </span><span class="lineCov">         10 :         bool prevWasTimestamp = true;</span></a>
-<a name="151"><span class="lineNum">     151 </span><span class="lineCov">         84 :         for (const uint8_t *d = data + 2; d &lt; data + len; d++) {</span></a>
-<a name="152"><span class="lineNum">     152 </span><span class="lineCov">         74 :             if (MIDI_Parser::isData(*d)) {</span></a>
-<a name="153"><span class="lineNum">     153 </span><span class="lineCov">         39 :                 parse(*d);</span></a>
-<a name="154"><span class="lineNum">     154 </span><span class="lineCov">         39 :                 prevWasTimestamp = false;</span></a>
-<a name="155"><span class="lineNum">     155 </span><span class="lineCov">         39 :             } else {</span></a>
-<a name="156"><span class="lineNum">     156 </span><span class="lineCov">         35 :                 if (prevWasTimestamp)</span></a>
-<a name="157"><span class="lineNum">     157 </span><span class="lineCov">         21 :                     parse(*d);</span></a>
-<a name="158"><span class="lineNum">     158 </span><span class="lineCov">         35 :                 prevWasTimestamp = !prevWasTimestamp;</span></a>
-<a name="159"><span class="lineNum">     159 </span>            :             }</a>
-<a name="160"><span class="lineNum">     160 </span><span class="lineCov">         74 :         }</span></a>
-<a name="161"><span class="lineNum">     161 </span><span class="lineCov">         10 :     }</span></a>
-<a name="162"><span class="lineNum">     162 </span>            : </a>
-<a name="163"><span class="lineNum">     163 </span><span class="lineCov">         61 :     void parse(uint8_t data) {</span></a>
-<a name="164"><span class="lineNum">     164 </span><span class="lineCov">         61 :         MIDI_read_t event = parser.parse(data);</span></a>
-<a name="165"><span class="lineNum">     165 </span><span class="lineCov">         61 :         dispatchMIDIEvent(event);</span></a>
-<a name="166"><span class="lineNum">     166 </span><span class="lineCov">         61 :     }</span></a>
+<a name="143"><span class="lineNum">     143 </span><span class="lineNoCov">          0 :     void sendImpl(uint8_t rt, uint8_t cn) override {</span></a>
+<a name="144"><span class="lineNum">     144 </span>            :         (void)rt;</a>
+<a name="145"><span class="lineNum">     145 </span>            :         (void)cn; // TODO</a>
+<a name="146"><span class="lineNum">     146 </span><span class="lineNoCov">          0 :     }</span></a>
+<a name="147"><span class="lineNum">     147 </span>            : </a>
+<a name="148"><span class="lineNum">     148 </span><span class="lineCov">         10 :     void parse(const uint8_t *const data, const size_t len) {</span></a>
+<a name="149"><span class="lineNum">     149 </span><span class="lineCov">         10 :         if (len &lt;= 1)</span></a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineNoCov">          0 :             return;</span></a>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">         10 :         if (MIDI_Parser::isData(data[0]))</span></a>
+<a name="152"><span class="lineNum">     152 </span><span class="lineNoCov">          0 :             return;</span></a>
+<a name="153"><span class="lineNum">     153 </span><span class="lineCov">         10 :         if (MIDI_Parser::isData(data[1]))</span></a>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">          1 :             parse(data[1]);</span></a>
+<a name="155"><span class="lineNum">     155 </span><span class="lineCov">         10 :         bool prevWasTimestamp = true;</span></a>
+<a name="156"><span class="lineNum">     156 </span><span class="lineCov">         84 :         for (const uint8_t *d = data + 2; d &lt; data + len; d++) {</span></a>
+<a name="157"><span class="lineNum">     157 </span><span class="lineCov">         74 :             if (MIDI_Parser::isData(*d)) {</span></a>
+<a name="158"><span class="lineNum">     158 </span><span class="lineCov">         39 :                 parse(*d);</span></a>
+<a name="159"><span class="lineNum">     159 </span><span class="lineCov">         39 :                 prevWasTimestamp = false;</span></a>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">         39 :             } else {</span></a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">         35 :                 if (prevWasTimestamp)</span></a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">         21 :                     parse(*d);</span></a>
+<a name="163"><span class="lineNum">     163 </span><span class="lineCov">         35 :                 prevWasTimestamp = !prevWasTimestamp;</span></a>
+<a name="164"><span class="lineNum">     164 </span>            :             }</a>
+<a name="165"><span class="lineNum">     165 </span><span class="lineCov">         74 :         }</span></a>
+<a name="166"><span class="lineNum">     166 </span><span class="lineCov">         10 :     }</span></a>
 <a name="167"><span class="lineNum">     167 </span>            : </a>
-<a name="168"><span class="lineNum">     168 </span><span class="lineCov">         10 :     BLEMIDI &amp;getBLEMIDI() { return bleMidi; }</span></a>
-<a name="169"><span class="lineNum">     169 </span>            : };</a>
-<a name="170"><span class="lineNum">     170 </span>            : </a>
-<a name="171"><span class="lineNum">     171 </span>            : END_CS_NAMESPACE</a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">         61 :     void parse(uint8_t data) {</span></a>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">         61 :         MIDI_read_t event = parser.parse(data);</span></a>
+<a name="170"><span class="lineNum">     170 </span><span class="lineCov">         61 :         dispatchMIDIEvent(event);</span></a>
+<a name="171"><span class="lineNum">     171 </span><span class="lineCov">         61 :     }</span></a>
+<a name="172"><span class="lineNum">     172 </span>            : </a>
+<a name="173"><span class="lineNum">     173 </span><span class="lineCov">         10 :     BLEMIDI &amp;getBLEMIDI() { return bleMidi; }</span></a>
+<a name="174"><span class="lineNum">     174 </span>            : };</a>
+<a name="175"><span class="lineNum">     175 </span>            : </a>
+<a name="176"><span class="lineNum">     176 </span>            : END_CS_NAMESPACE</a>
 </pre>
       </td>
     </tr>
