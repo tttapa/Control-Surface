@@ -3,7 +3,7 @@
 //                                                                            //
 // Edit Teensy-USB-MIDI-name.py instead.                                      //
 
-#if defined(ARDUINO) && defined(TEENSYDUINO)
+#if defined(ARDUINO) && defined(TEENSYDUINO) && !defined(__AVR_AT90USB1286__)
 #include "usb_names.h"
 
 /// USB name: "Control Surface"

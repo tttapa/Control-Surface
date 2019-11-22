@@ -37,7 +37,7 @@ warning = """
 """.format(filename=pythonfilename, sp=' ' * (59 - len(pythonfilename)))
 
 output = warning + """
-#if defined(ARDUINO) && defined(TEENSYDUINO)
+#if defined(ARDUINO) && defined(TEENSYDUINO) && !defined(__AVR_AT90USB1286__)
 #include "usb_names.h"
 """
 
