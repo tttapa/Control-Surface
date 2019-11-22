@@ -141,6 +141,33 @@
  */
 
 /**
+ * @example   "2.Button.ino"
+ * 
+ * 2.Button
+ * ========
+ *
+ * This examples shows how to use the debounced Button class to toggle an LED.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 2: Momentary push button (other pin to ground)
+ * 
+ * The internal pull-up resistor will be enabled.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - If you press the push button once, the built-in LED is turned on.
+ * - If you press the button again, the LED is turned off again.
+ * 
+ * Written by PieterP, 2019-11-22  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
  * @example   "2.RGB-LED-Chaser.ino"
  * 
  * 2.RGB-LED-Chaser
