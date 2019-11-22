@@ -6,7 +6,11 @@
 #include <MIDI_Parsers/USBMIDI_Parser.hpp>
 
 #ifdef TEENSY_MIDIUSB_ENABLED
+#ifndef __AVR_AT90USB1286__ // Probably Teensy 3.x
 #include <usb_dev.h>
+#else // Teensy++ 2.0
+#include <usb_private.h>
+#endif
 #elif defined TEENSYDUINO
 #warning                                                                       \
     "Teensy: USB MIDI not enabled. Enable it from the Tools > USB Type menu."
@@ -74,7 +78,7 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 
 // If it's a Teensy board
 #elif defined(TEENSYDUINO)
-
+#ifndef __AVR_AT90USB1286__ // Probably Teensy 3.x
     void writeUSBPacket(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1,
                         uint8_t d2) {
         usb_midi_write_packed((cn << 4) | cin | // CN|CIN
@@ -82,6 +86,40 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
                               (d1 << 16) |      // data 1
                               (d2 << 24));      // data 2
     }
+#else                       // Teensy++ 2.0
+    void writeUSBPacket(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1,
+                        uint8_t d2) {
+        uint8_t intr_state, timeout;
+
+        if (!usb_configuration)
+            return;
+        intr_state = SREG;
+        cli();
+        UENUM = MIDI_TX_ENDPOINT;
+        timeout = UDFNUML + 2;
+        while (1) {
+            // are we ready to transmit?
+            if (UEINTX & (1 << RWAL))
+                break;
+            SREG = intr_state;
+            if (UDFNUML == timeout)
+                return;
+            if (!usb_configuration)
+                return;
+            intr_state = SREG;
+            cli();
+            UENUM = MIDI_TX_ENDPOINT;
+        }
+        UEDATX = (cn << 4) | cin;
+        UEDATX = d0;
+        UEDATX = d1;
+        UEDATX = d2;
+        if (!(UEINTX & (1 << RWAL)))
+            UEINTX = 0x3A;
+        SREG = intr_state;
+    }
+#endif                      // Teensy++ 2.0
+
     void flush() {}
 
 // If the main MCU has a USB connection but is not a Teensy
@@ -141,6 +179,7 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
   public:
 // If it's a Teensy board
 #if defined(TEENSYDUINO)
+#ifndef __AVR_AT90USB1286__ // Probably Teensy 3.x
     MIDI_read_t read() override {
         for (uint8_t i = 0; i < (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {
             if (rx_packet == nullptr) { // If there's no previous packet
@@ -180,6 +219,47 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
         }
         return NO_MESSAGE;
     }
+#else  // Teensy++ 2.0
+    MIDI_read_t read() override {
+        for (uint8_t i = 0; i < (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {
+            uint8_t data[4];
+
+            // https://github.com/PaulStoffregen/cores/blob/73ea157600a7082686d9cc48786a73caa7567da9/usb_midi/usb_api.cpp#L195
+            uint8_t c, intr_state;
+
+            intr_state = SREG;
+            cli();
+            if (!usb_configuration) {
+                SREG = intr_state;
+                return NO_MESSAGE;
+            }
+            UENUM = MIDI_RX_ENDPOINT;
+        retry:
+            c = UEINTX;
+            if (!(c & (1 << RWAL))) {
+                if (c & (1 << RXOUTI)) {
+                    UEINTX = 0x6B;
+                    goto retry;
+                }
+                SREG = intr_state;
+                return NO_MESSAGE;
+            }
+            data[0] = UEDATX;
+            data[1] = UEDATX;
+            data[2] = UEDATX;
+            data[3] = UEDATX;
+            if (!(UEINTX & (1 << RWAL)))
+                UEINTX = 0x6B;
+            SREG = intr_state;
+
+            MIDI_read_t parseResult = parser.parse(data);
+
+            if (parseResult != NO_MESSAGE)
+                return parseResult;
+        }
+        return NO_MESSAGE;
+    }
+#endif // Teensy++ 2.0
 
 // If the main MCU has a USB connection but is not a Teensy → MIDIUSB library
 #elif defined(USBCON)
@@ -200,7 +280,7 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 
   private:
 // If it's a Teensy board
-#if defined(TEENSYDUINO)
+#if defined(TEENSYDUINO) && !defined(__AVR_AT90USB1286__)
     usb_packet_t *rx_packet = nullptr;
 #endif
 };
