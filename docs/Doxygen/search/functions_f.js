@@ -11,7 +11,7 @@ var searchData=
   ['setmuxaddress_766',['setMuxAddress',['../d7/d8d/classAnalogMultiplex.html#af163589d6ce6e3596804e3e92984c236',1,'AnalogMultiplex']]],
   ['setprecision_767',['setprecision',['../d8/d4b/group__AH__PrintStream.html#gaf7cf4b0e6244f6fab7b1e15c2523e4e7',1,'setprecision(int n):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#gaf7cf4b0e6244f6fab7b1e15c2523e4e7',1,'setprecision(int n):&#160;PrintStream.cpp']]],
   ['setprevstate_768',['setPrevState',['../d8/d6c/classButtonMatrix.html#a62e38d98ee02ed2692c96775a458baa7',1,'ButtonMatrix']]],
-  ['setupadc_769',['setupADC',['../da/da7/classFilteredAnalog.html#a5a3518c354ba9da25720c6fa93445e72',1,'FilteredAnalog']]],
+  ['setupadc_769',['setupADC',['../da/da7/classFilteredAnalog.html#a1a2095b531b00be08057bcfd02f9b1a1',1,'FilteredAnalog']]],
   ['shiftout_770',['shiftOut',['../d8/d3d/namespaceExtIO.html#aaa363601af9782e76375355968252cc3',1,'ExtIO::shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val)'],['../d8/d3d/namespaceExtIO.html#a1396c29ef255279ab322d1bed2576612',1,'ExtIO::shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val)']]],
   ['shiftregisterout_771',['ShiftRegisterOut',['../d1/d5c/classShiftRegisterOut.html#a7cd17e20ee72d99e572c9f99301b2d1d',1,'ShiftRegisterOut']]],
   ['shiftregisteroutbase_772',['ShiftRegisterOutBase',['../d8/db4/classShiftRegisterOutBase.html#a49a12cc04732437a6d0e50949f263ead',1,'ShiftRegisterOutBase']]],

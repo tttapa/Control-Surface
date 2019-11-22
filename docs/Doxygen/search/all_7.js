@@ -7,8 +7,8 @@ var searchData=
   ['hertz_223',['hertz',['../d7/d90/classFrequency.html#a42d4284ade4160360eb7a54afccf5a4c',1,'Frequency']]],
   ['hex_224',['hex',['../d8/d4b/group__AH__PrintStream.html#gaa47b34b5f85fef7f8b050c0d0a715d2f',1,'hex(Print &amp;printer):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#gaa47b34b5f85fef7f8b050c0d0a715d2f',1,'hex(Print &amp;printer):&#160;PrintStream.cpp']]],
   ['high_225',['HIGH',['../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d',1,'ExtendedInputOutput.hpp']]],
-  ['hysteresis_226',['Hysteresis',['../d2/dcb/classHysteresis.html',1,'Hysteresis&lt; BITS, T_in, T_out &gt;'],['../da/da7/classFilteredAnalog.html#a5bd61ac70b34ee15cf1811aefd330aa0',1,'FilteredAnalog::hysteresis()']]],
+  ['hysteresis_226',['Hysteresis',['../d2/dcb/classHysteresis.html',1,'Hysteresis&lt; BITS, T_in, T_out &gt;'],['../da/da7/classFilteredAnalog.html#ab9336c0dd47647a7854d66f59aab64ef',1,'FilteredAnalog::hysteresis()']]],
   ['hysteresis_2ecpp_227',['Hysteresis.cpp',['../dd/d40/Hysteresis_8cpp.html',1,'']]],
   ['hysteresis_2ehpp_228',['Hysteresis.hpp',['../d3/d09/Hysteresis_8hpp.html',1,'']]],
-  ['hysteresis_3c_20adc_5fbits_2bupsample_20_2d_20precision_2c_20analog_5ft_2c_20analog_5ft_20_3e_229',['Hysteresis&lt; ADC_BITS+Upsample - Precision, analog_t, analog_t &gt;',['../d2/dcb/classHysteresis.html',1,'']]]
+  ['hysteresis_3c_20adc_5fbits_2bupsample_20_2d_20precision_2c_20analogtype_2c_20analogtype_20_3e_229',['Hysteresis&lt; ADC_BITS+Upsample - Precision, AnalogType, AnalogType &gt;',['../d2/dcb/classHysteresis.html',1,'']]]
 ];

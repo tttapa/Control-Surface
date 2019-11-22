@@ -101,10 +101,11 @@ Behavior</h2>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d1/dd0/MillisMicrosTimer_8hpp.html">AH/Timing/MillisMicrosTimer.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Create a filtered analog object on pin A0:</span></div>
-<div class="line"><a name="_a0"></a><a class="code" href="../../da/da7/classFilteredAnalog.html">FilteredAnalog</a>&lt;10,      <span class="comment">// Output precision in bits</span></div>
-<div class="line">               2,       <span class="comment">// The amount of filtering</span></div>
-<div class="line">               uint16_t <span class="comment">// The integer type for the calculations</span></div>
-<div class="line">               &gt;</div>
+<div class="line"><a name="_a0"></a><a class="code" href="../../da/da7/classFilteredAnalog.html">FilteredAnalog</a>&lt;10,       <span class="comment">// Output precision in bits</span></div>
+<div class="line">               2,        <span class="comment">// The amount of filtering</span></div>
+<div class="line">               uint16_t, <span class="comment">// The integer type for the filter calculations</span></div>
+<div class="line">               <a class="code" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a>  <span class="comment">// The integer type for the upscaled analog values</span></div>
+<div class="line">              &gt;</div>
 <div class="line">  analog = A0;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// If you want more filtering, you can increase the filter shift factor.</span></div>
@@ -112,8 +113,8 @@ Behavior</h2>
 <div class="line"><span class="comment">// you do so, so you have to use a larger type as well.</span></div>
 <div class="line"><a class="code" href="../../da/da7/classFilteredAnalog.html">FilteredAnalog</a>&lt;10,      <span class="comment">// Output precision in bits</span></div>
 <div class="line">               6,       <span class="comment">// The amount of filtering</span></div>
-<div class="line">               uint32_t <span class="comment">// The integer type for the calculations</span></div>
-<div class="line">               &gt;</div>
+<div class="line">               uint32_t <span class="comment">// The integer type for the filter calculations</span></div>
+<div class="line">              &gt;</div>
 <div class="line">  moreFiltering = A0;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// If you don&#39;t care about the specific settings, and just want a</span></div>
@@ -125,7 +126,7 @@ Behavior</h2>
 <div class="line">  <span class="keywordflow">while</span> (!Serial)</div>
 <div class="line">    ;</div>
 <div class="line">  <span class="comment">// Select the correct ADC resolution</span></div>
-<div class="line">  <a name="a1"></a><a class="code" href="../../da/da7/classFilteredAnalog.html#a5a3518c354ba9da25720c6fa93445e72">FilteredAnalog&lt;&gt;::setupADC</a>();</div>
+<div class="line">  <a name="a1"></a><a class="code" href="../../da/da7/classFilteredAnalog.html#a1a2095b531b00be08057bcfd02f9b1a1">FilteredAnalog&lt;&gt;::setupADC</a>();</div>
 <div class="line">  <span class="comment">// If you want, you can add mapping functions to invert the input, for example</span></div>
 <div class="line">  analog.invert();</div>
 <div class="line">}</div>
@@ -147,11 +148,12 @@ Behavior</h2>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
 <div class="ttc" id="aMillisMicrosTimer_8hpp_html"><div class="ttname"><a href="../../d1/dd0/MillisMicrosTimer_8hpp.html">MillisMicrosTimer.hpp</a></div></div>
-<div class="ttc" id="aclassFilteredAnalog_html"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html">FilteredAnalog</a></div><div class="ttdoc">A class that reads and filters an analog input.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00047">FilteredAnalog.hpp:47</a></div></div>
+<div class="ttc" id="aclassFilteredAnalog_html"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html">FilteredAnalog</a></div><div class="ttdoc">A class that reads and filters an analog input.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00051">FilteredAnalog.hpp:51</a></div></div>
+<div class="ttc" id="aHardware-Types_8hpp_html_a30fffbcff933a72fdd7bfc161d386bef"><div class="ttname"><a href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a></div><div class="ttdeci">uint16_t analog_t</div><div class="ttdoc">The type returned from analogRead and similar functions.</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d35/Hardware-Types_8hpp_source.html#l00012">Hardware-Types.hpp:12</a></div></div>
 <div class="ttc" id="aclassTimer_html"><div class="ttname"><a href="../../dc/dea/classTimer.html">Timer</a></div><div class="ttdoc">A class for easily managing timed events.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00022">MillisMicrosTimer.hpp:22</a></div></div>
+<div class="ttc" id="aclassFilteredAnalog_html_a1a2095b531b00be08057bcfd02f9b1a1"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html#a1a2095b531b00be08057bcfd02f9b1a1">FilteredAnalog::setupADC</a></div><div class="ttdeci">static void setupADC()</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00143">FilteredAnalog.hpp:143</a></div></div>
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <div class="ttc" id="aFilteredAnalog_8hpp_html"><div class="ttname"><a href="../../d8/df3/FilteredAnalog_8hpp.html">FilteredAnalog.hpp</a></div></div>
-<div class="ttc" id="aclassFilteredAnalog_html_a5a3518c354ba9da25720c6fa93445e72"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html#a5a3518c354ba9da25720c6fa93445e72">FilteredAnalog::setupADC</a></div><div class="ttdeci">static void setupADC()</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00135">FilteredAnalog.hpp:135</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
