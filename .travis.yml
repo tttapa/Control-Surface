@@ -11,6 +11,7 @@ compiler:
   - clang
 
 cache:
+  ccache: true
   directories:
     - $HOME/.arduino15
     - $HOME/opt
