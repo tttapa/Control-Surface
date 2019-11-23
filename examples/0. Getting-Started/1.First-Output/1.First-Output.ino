@@ -2,7 +2,7 @@
  * This is the first example used in the 'Getting Started' guide:
  * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Due, Teensy 3.x, ESP32
  *
  *  Written by PieterP, 2018-08-29  
  *  https://github.com/tttapa/Control-Surface

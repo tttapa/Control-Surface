@@ -2,7 +2,7 @@
  * This is an example of the AnalogMultiplex class. It prints the values of all
  * 16 inputs of a multiplexers to the serial monitor.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------

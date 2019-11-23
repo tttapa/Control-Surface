@@ -7,7 +7,7 @@
  * This examples shows how to filter an analog input, so you can get the 
  * position of a knob or fader without noise.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -48,7 +48,7 @@
  * controls, etc. It can control almost any knob in your DAW software. 
  * This example shows how to define multiple potentiometers using an array.
  *
- * @boards  AVR, AVR USB, Teensy 3.x
+ * @boards  AVR, AVR USB, Due, Teensy 3.x
  * 
  * Connections
  * -----------
@@ -90,7 +90,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc. It can control almost any knob in your DAW software.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -129,7 +129,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc. It can control almost any knob in your DAW software.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -168,7 +168,7 @@
  * used for triggering samples, mute/solo/rec buttons, play/pause/stop buttons, 
  * etc. It can control almost any push button control in your DAW software.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -203,7 +203,7 @@
  * 
  * This is an example that demonstrates the use of MIDI Control Change Buttons.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -242,7 +242,7 @@
  * You can compare it to a rotary encoder, but with two buttons instead of an 
  * encoder.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  *
  * Connections
  * -----------
@@ -330,7 +330,7 @@
  * This is the first example used in the 'Getting Started' guide:
  * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  *
  *  Written by PieterP, 2018-08-29  
  *  https://github.com/tttapa/Control-Surface
@@ -345,7 +345,7 @@
  * This is the second example used in the 'Getting Started' guide:
  * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * @htmlonly
  * <iframe width="560" height="315"
@@ -368,7 +368,7 @@
  * library. It creates light effects using three 8-bit shift registers and some
  * RGB LEDs.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  *
  * Connections
  * -----------
@@ -435,7 +435,7 @@
  * normal IO pins. This version uses bit-banging to drive the  shift register. 
  * You should probably be using the SPI version instead.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -473,7 +473,7 @@
  * This example demonstrates the use of shift registers as if they were just
  * normal IO pins. The SPI interface is used because it's easy and fast.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -511,7 +511,7 @@
  * This example demonstrates the use of push buttons and LEDs and how to use
  * shift registers and analog multiplexers to save pins.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -565,7 +565,7 @@
  * This is an example of the AnalogMultiplex class. It prints the values of all
  * 16 inputs of a multiplexers to the serial monitor.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -611,7 +611,7 @@
  * This is an example of the AnalogMultiplex class. It prints the states of all
  * 16 switches connected to a multiplexers to the serial monitor.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -658,7 +658,7 @@
  * 
  * This example demonstrates how to use the MIDI interface for debugging.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -697,7 +697,7 @@
  *
  * Example showing how to send and receive MIDI System Exclusive messages.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  */
 
 /**
@@ -866,7 +866,7 @@
  * This example demonstrates the use of addressable LEDs that respond to 
  * incoming  MIDI note events.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * @note    You might lose incoming MIDI data while the LED strip is being 
  *          updated. To avoid this, don't use an Arduino UNO.  
@@ -907,7 +907,7 @@
  * incoming  MIDI note events. This example uses a custom color mapper to
  * get a rainbow effect across the LED strip.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * @note    You might lose incoming MIDI data while the LED strip is being 
  *          updated. To avoid this, don't use an Arduino UNO.  
@@ -947,7 +947,7 @@
  * This example demonstrates the use of LEDs that respond to incoming  MIDI
  * note events.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -981,7 +981,7 @@
  * This example demonstrates the use of LEDs that respond to incoming  MIDI
  * note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -1058,7 +1058,7 @@
  * This is an example on how to attach your own callbacks for receiving MIDI 
  * input data.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -1260,7 +1260,7 @@
  * This is an example that demonstrates the use a Transposer to transpose the
  * note events sent out by NoteButton%s.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -1291,4 +1291,3 @@
  * Written by PieterP, 2019-10-26  
  * https://github.com/tttapa/Control-Surface
  */
-

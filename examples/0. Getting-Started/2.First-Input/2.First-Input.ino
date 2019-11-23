@@ -2,7 +2,7 @@
  * This is the second example used in the 'Getting Started' guide:
  * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * @htmlonly
  * <iframe width="560" height="315"

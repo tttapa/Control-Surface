@@ -3,3 +3,4 @@ teensy 3.x=skip
 avr=arduino:avr:uno
 avr usb=arduino:avr:leonardo
 leonardo=arduino:avr:leonardo
+due=arduino:sam:arduino_due_x_dbg

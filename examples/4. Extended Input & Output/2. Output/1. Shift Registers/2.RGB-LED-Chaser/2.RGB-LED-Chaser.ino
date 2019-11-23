@@ -3,7 +3,7 @@
  * library. It creates light effects using three 8-bit shift registers and some
  * RGB LEDs.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  *
  * Connections
  * -----------
