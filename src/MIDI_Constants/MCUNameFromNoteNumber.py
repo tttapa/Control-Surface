@@ -200,7 +200,7 @@ const __FlashStringHelper *{functionname}(uint8_t note) {{
     const static char invalid[] PROGMEM = "<out-of-bounds>";
     if (note >= 0x{length:02X})
         return reinterpret_cast<const __FlashStringHelper *>(invalid);
-    void *flashptr = pgm_read_ptr_near({lutname} + note);
+    const void *flashptr = pgm_read_ptr_near({lutname} + note);
     return reinterpret_cast<const __FlashStringHelper *>(flashptr);
 }}
 
