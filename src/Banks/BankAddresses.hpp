@@ -25,7 +25,7 @@ class TwoSingleAddresses : public BankableMIDIOutput {
   public:
     TwoSingleAddresses(OutputBankConfig config,
                        const Array<MIDICNChannelAddress, 2> &addresses)
-        : BankableMIDIOutput{config}, addresses{addresses} {}
+        : BankableMIDIOutput{config}, addresses(addresses) {}
 
     MIDICNChannelAddress getBaseAddress(uint8_t i) const {
         return addresses[i];

@@ -63,7 +63,7 @@ class Incrementor {
  */
 template <class T, size_t N, class G>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> generateArray(G generator) {
-    Array<T, N> array{};
+    Array<T, N> array{{}};
     generate(array.begin(), array.end(), generator);
     return array;
 }
@@ -84,7 +84,7 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> generateArray(G generator) {
 template <size_t N, class G>
 USE_CONSTEXPR_ARRAY_HELPERS auto generateArray(G generator)
     -> Array<decltype(generator()), N> {
-    Array<decltype(generator()), N> array{};
+    Array<decltype(generator()), N> array{{}};
     generate(array.begin(), array.end(), generator);
     return array;
 }
@@ -104,16 +104,27 @@ USE_CONSTEXPR_ARRAY_HELPERS auto generateArray(G generator)
  */
 template <class T, size_t N, class U>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> copyAs(const Array<U, N> &src) {
-    Array<T, N> dest{};
+    Array<T, N> dest{{}};
     for (size_t i = 0; i < N; ++i)
         dest[i] = src[i];
     return dest;
 }
 
+#if !defined(__GNUC__) || (__GNUC__ > 7) ||                                    \
+    (__GNUC__ == 7 && __GNUC_MINOR__ >= 3)
 template <class T, size_t N, class... Args>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> fillArray(Args... args) {
     return generateArray<N>([&]() { return T{args...}; });
 }
+#else
+template <class T, size_t N, class... Args>
+USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> fillArray(Args... args) {
+    Array<T, N> array{};
+    for (auto &el : array)
+        el = T{args...};
+    return array;
+}
+#endif
 
 /**
  * @brief   Generate an array where the first value is given, and the subsequent
@@ -172,7 +183,7 @@ generateIncrementalArray(U start = 0, V increment = 1) {
 template <class T, size_t M, size_t N>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, M + N> cat(const Array<T, M> &a,
                                                 const Array<T, N> &b) {
-    Array<T, M + N> result = {};
+    Array<T, M + N> result = {{}};
     size_t r = 0;
     for (size_t i = 0; i < M; ++i, ++r)
         result[r] = a[i];

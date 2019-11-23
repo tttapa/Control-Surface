@@ -31,7 +31,7 @@ class MIDIButton : public MIDIOutputElement {
      *          The MIDI sender to use.
      */
     MIDIButton(const BankAddress &bankAddress, pin_t pin, const Sender &sender)
-        : address{bankAddress}, button{pin}, sender{sender} {}
+        : address{bankAddress}, button{pin}, sender(sender) {}
 
     void begin() override { button.begin(); }
     void update() override {

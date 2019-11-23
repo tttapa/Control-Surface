@@ -68,7 +68,7 @@ class GenericSelector : public SelectorBase, public Updatable<> {
      *          display).
      */
     GenericSelector(Selectable<N> &selectable, const Callback &callback)
-        : selectable{selectable}, callback{callback} {}
+        : selectable(selectable), callback(callback) {}
 
     void begin() override {
         callback.begin();

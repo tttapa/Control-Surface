@@ -30,7 +30,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
                                   const RelativeSender &relativeSender,
                                   const ResetSender &resetSender)
         : addresses{addresses}, buttons{buttons}, multiplier{multiplier},
-          relativeSender{relativeSender}, resetSender{resetSender} {}
+          relativeSender(relativeSender), resetSender(resetSender) {}
 
   public:
     void begin() override { buttons.begin(); }

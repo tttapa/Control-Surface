@@ -33,7 +33,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      */
     MIDIFilteredAnalogAddressable(const BankAddress &bankAddress,
                                   pin_t analogPin, const Sender &sender)
-        : address{bankAddress}, filteredAnalog{analogPin}, sender{sender} {}
+        : address{bankAddress}, filteredAnalog{analogPin}, sender(sender) {}
 
   public:
     void begin() override {}
@@ -105,7 +105,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      */
     MIDIFilteredAnalog(const BankAddress &bankAddress, pin_t analogPin,
                        const Sender &sender)
-        : address{bankAddress}, filteredAnalog{analogPin}, sender{sender} {}
+        : address(bankAddress), filteredAnalog(analogPin), sender(sender) {}
 
   public:
     void begin() final override {}
