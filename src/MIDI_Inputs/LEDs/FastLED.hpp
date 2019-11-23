@@ -38,7 +38,7 @@ template <class ColorMapper>
 class NoteCCFastLED {
   public:
     NoteCCFastLED(CRGB *ledcolors, const ColorMapper &colormapper)
-        : ledcolors(ledcolors), colormapper{colormapper} {}
+        : ledcolors(ledcolors), colormapper(colormapper) {}
 
     /** 
      * @brief   Set the maximum brightness of the LEDs.
