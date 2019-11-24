@@ -1,9 +1,12 @@
 var searchData=
 [
-  ['adc_5fresolution_931',['ADC_RESOLUTION',['../d7/d7c/ADCConfig_8hpp.html#a00978ca9e8220475258dcbbbb7d29129',1,'ADCConfig.hpp']]],
-  ['ah_5findividual_5fbutton_5finvert_932',['AH_INDIVIDUAL_BUTTON_INVERT',['../db/d02/Settings_8hpp.html#ac7d8f5c5d6672ffc748f2c614740d2d6',1,'Settings.hpp']]],
-  ['ah_5findividual_5fbutton_5finvert_5fstatic_933',['AH_INDIVIDUAL_BUTTON_INVERT_STATIC',['../d2/dd5/SettingsWrapper_8hpp.html#aaf9b2b6312ec507a3ad47a2c5f4748a2',1,'SettingsWrapper.hpp']]],
-  ['ah_5fis_5fempty_934',['AH_IS_EMPTY',['../d2/dd5/SettingsWrapper_8hpp.html#a04be36de00cd3bce8a6764d6b5b5f4c6',1,'SettingsWrapper.hpp']]],
-  ['ah_5fis_5fempty_5fhelper_935',['AH_IS_EMPTY_HELPER',['../d2/dd5/SettingsWrapper_8hpp.html#a707484720c54a77b6d54a9a78078579a',1,'SettingsWrapper.hpp']]],
-  ['ah_5fnamespace_5fname_936',['AH_NAMESPACE_NAME',['../dc/dc7/NamespaceSettings_8hpp.html#a6b56d72e5238e6495c46decbafa0d329',1,'NamespaceSettings.hpp']]]
+  ['adc_5fresolution_936',['ADC_RESOLUTION',['../d7/d7c/ADCConfig_8hpp.html#a00978ca9e8220475258dcbbbb7d29129',1,'ADCConfig.hpp']]],
+  ['ah_5fdiagnostic_5fexternal_5fheader_937',['AH_DIAGNOSTIC_EXTERNAL_HEADER',['../d1/d65/Warnings_8hpp.html#a3a0cae69447cc44576ccb703f17dfdfd',1,'Warnings.hpp']]],
+  ['ah_5fdiagnostic_5fpop_938',['AH_DIAGNOSTIC_POP',['../d1/d65/Warnings_8hpp.html#a76cbff6dfc5304a7ccb72380afb3fd13',1,'Warnings.hpp']]],
+  ['ah_5fdiagnostic_5fwerror_939',['AH_DIAGNOSTIC_WERROR',['../d1/d65/Warnings_8hpp.html#a771cc2342ac82150821566443a3c0160',1,'Warnings.hpp']]],
+  ['ah_5findividual_5fbutton_5finvert_940',['AH_INDIVIDUAL_BUTTON_INVERT',['../db/d02/Settings_8hpp.html#ac7d8f5c5d6672ffc748f2c614740d2d6',1,'Settings.hpp']]],
+  ['ah_5findividual_5fbutton_5finvert_5fstatic_941',['AH_INDIVIDUAL_BUTTON_INVERT_STATIC',['../d2/dd5/SettingsWrapper_8hpp.html#aaf9b2b6312ec507a3ad47a2c5f4748a2',1,'SettingsWrapper.hpp']]],
+  ['ah_5fis_5fempty_942',['AH_IS_EMPTY',['../d2/dd5/SettingsWrapper_8hpp.html#a04be36de00cd3bce8a6764d6b5b5f4c6',1,'SettingsWrapper.hpp']]],
+  ['ah_5fis_5fempty_5fhelper_943',['AH_IS_EMPTY_HELPER',['../d2/dd5/SettingsWrapper_8hpp.html#a707484720c54a77b6d54a9a78078579a',1,'SettingsWrapper.hpp']]],
+  ['ah_5fnamespace_5fname_944',['AH_NAMESPACE_NAME',['../dc/dc7/NamespaceSettings_8hpp.html#a6b56d72e5238e6495c46decbafa0d329',1,'NamespaceSettings.hpp']]]
 ];
