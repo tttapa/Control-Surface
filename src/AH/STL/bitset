@@ -8,6 +8,8 @@
 #include <bitset>
 #endif
 
+#include <AH/PrintStream/PrintStream.hpp>
+
 template <size_t Nb>
 Print &operator<<(Print &os, const std::bitset<Nb> &bs) {
     for (size_t i = 0; i < Nb; ++i)
