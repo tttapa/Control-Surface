@@ -6,6 +6,7 @@
 
 #include <AH/STL/algorithm>
 #include <AH/STL/array>
+#include <AH/STL/bitset>
 #include <AH/STL/cmath>
 #include <AH/STL/complex>
 #include <AH/STL/cstdint>
@@ -74,10 +75,17 @@ TEST_CMATH_FUNCTION2(std::hypot);
 TEST_CMATH_FUNCTION3(std::fma);
 
 void setup() {
+    Serial.begin(115200);
+    while(!Serial);
 #ifdef __cpp_lib_optional
   std::optional<int> opt = std::nullopt;
   opt = 1;
   Serial.println(*opt);
 #endif
+    std::bitset<128> bs;
+    bs[0] = 1;
+    bs[2] = 1;
+    Serial << bs << endl;
 }
+
 void loop() {}
