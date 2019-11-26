@@ -19,8 +19,9 @@
 - **C++ STL Implementation** (partial): Some useful parts of the C++ Standard
   Template Library, adapted to work on AVR Arduinos. Includes the 
   `<type_traits>`, `<algorithm>`, `<numeric>`, `<new>`, `<array>`, `<bitset>`, 
-  `<optional>`, `<cmath>`, `<complex>`, `<cstdlib>`, `<cstdint>`,
-  `<initialize_list>`, `<utility>` and `<limits>` headers, among others.
+  `<optional>`, `<cmath>`, `<complex>`, `<cstdlib>`, `<cstdint>`, `<tuple>`,
+  `<memory>` (`std::unique_ptr`), `<initialize_list>`, `<utility>` and 
+  `<limits>` headers, among others.
 
 These utilities were originally part of the
 [Control Surface library](https://github.com/tttapa/Control-Surface),
