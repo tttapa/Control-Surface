@@ -1,8 +1,8 @@
 #include "ArduinoMock.hpp"
 
-ArduinoMock *ArduinoMock::instance = nullptr;
+testing::StrictMock<ArduinoMock> *ArduinoMock::instance = nullptr;
 
-ArduinoMock &ArduinoMock::getInstance() {
+testing::StrictMock<ArduinoMock> &ArduinoMock::getInstance() {
     if (instance == nullptr)
         throw std::runtime_error("Error: no active ArduinoMock instance.");
     return *instance;
@@ -10,7 +10,7 @@ ArduinoMock &ArduinoMock::getInstance() {
 void ArduinoMock::begin() {
     if (instance != nullptr)
         throw std::runtime_error("Error: ArduinoMock instance already active.");
-    instance = new ArduinoMock;
+    instance = new testing::StrictMock<ArduinoMock>;
 }
 void ArduinoMock::end() {
     if (instance == nullptr)

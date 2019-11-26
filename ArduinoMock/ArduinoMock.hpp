@@ -3,13 +3,15 @@
 #include "HardwareSerial.h"
 
 class ArduinoMock {
+  protected:
+    ArduinoMock() = default;
+
   private:
-    ArduinoMock() {}
     SerialHelper serial;
-    static ArduinoMock *instance;
+    static testing::StrictMock<ArduinoMock> *instance;
 
   public:
-    static ArduinoMock &getInstance();
+    static testing::StrictMock<ArduinoMock> &getInstance();
     static void begin();
     static void end();
     static SerialHelper &getSerial();
