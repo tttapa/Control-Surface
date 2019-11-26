@@ -973,6 +973,47 @@
  */
 
 /**
+ * @example   "3.NoteLEDBar.ino"
+ * 
+ * 3.NoteLEDBar
+ * ============
+ *
+ * This example demonstrates the use of LED bar graphs that respond to incoming 
+ * MIDI note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SS:   74HC595 ST_CP
+ *   - MOSI: 74HC595 DS
+ *   - SCK:  74HC595 SH_CP
+ * 
+ * Connect eight LEDs (and series resistors) between the outputs of the shift
+ * register and ground.
+ * 
+ * Remember to connect the enable pin of the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
+ * 
+ * Behavior
+ * --------
+ * 
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the LED bar
+ * display is turned on, the higher the velocity (the harder you press the key),
+ * the more LEDs will turn on.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Route the MIDI output of a MIDI keyboard or from an audio workstation to 
+ * the Arduino's MIDI input.
+ * 
+ * Written by PieterP, 2019-11-25  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "2.Note-Range-LEDs.ino"
  * 
  * 2.Note-Range-LEDs
