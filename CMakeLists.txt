@@ -1,6 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
 
 ################################################################################
+# Enable ccache if available
+################################################################################
+
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+endif()
+
+################################################################################
 # Set the C++ standard to C++14
 ################################################################################
 
