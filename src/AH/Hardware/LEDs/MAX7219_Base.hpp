@@ -38,6 +38,7 @@ class MAX7219_Base {
 
     /**
      * @brief   Initialize the Arduino pins, SPI, and the MAX7219.
+     * @todo    Rename to `update`.
      */
     void init() {
         ExtIO::digitalWrite(loadPin, HIGH);

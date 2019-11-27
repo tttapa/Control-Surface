@@ -1,71 +1,221 @@
 ################################################################################
-# Datatypes (KEYWORD1)
+#                         AUTOMATICALLY GENERATED FILE                         #
+#                                                                              #
+#    ! Don't edit this file directly, edit the keywords.yml files in the !     #
+#    ! appropriate subdirectories instead.                               !     #
+#                                                                              #
 ################################################################################
 
+# src
+#####
+
 Arduino_Helpers	KEYWORD1
+AH	KEYWORD1
 
-# Hardware
-##########
+# AH/Math
+#########
 
-Button	KEYWORD1
-FilteredAnalog	KEYWORD1
+increaseBitDepth	KEYWORD2
+min	KEYWORD2
+max	KEYWORD2
 
-ExtIO	KEYWORD1
-ExtendedIOElement	KEYWORD1
-AnalogMultiplex	KEYWORD1
-CD74HC4051	KEYWORD1
-CD74HC4067	KEYWORD1
-ShiftRegisterOut	KEYWORD1
-SPIShiftRegisterOut	KEYWORD1
-pin_t	KEYWORD1
-analog_t	KEYWORD1
+# AH/Timing
+###########
 
-# Types
-#######
-
-Array	KEYWORD1
-Array2D	KEYWORD1
-
-#######################################
-# Methods and Functions (KEYWORD2)
-#######################################
-
-update	KEYWORD2
-
-map	KEYWORD2
-invert	KEYWORD2
-
-add	KEYWORD2
+Timer	KEYWORD1
 
 begin	KEYWORD2
+
+timefunction	LITERAL1
+
+# AH/Containers
+###############
+
+Array	KEYWORD1
+ArraySlice	KEYWORD1
+Iterator	KEYWORD1
+BitArray	KEYWORD1
+DoublyLinkedList	KEYWORD1
+iterator	KEYWORD1
+const_iterator	KEYWORD1
+reverse_iterator	KEYWORD1
+const_reverse_iterator	KEYWORD1
+DoublyLinkable	KEYWORD1
+UniquePtr	KEYWORD1
+NormalUpdatable	KEYWORD1
+Updatable	KEYWORD1
+
+length	KEYWORD2
+begin	KEYWORD2
+end	KEYWORD2
+slice	KEYWORD2
+cslice	KEYWORD2
+asArray	KEYWORD2
+generate	KEYWORD2
+generateArray	KEYWORD2
+copyAs	KEYWORD2
+fillArray	KEYWORD2
+cat	KEYWORD2
+distribute	KEYWORD2
+get	KEYWORD2
+set	KEYWORD2
+clear	KEYWORD2
+safeIndex	KEYWORD2
+getByte	KEYWORD2
+getBufferLength	KEYWORD2
+append	KEYWORD2
+insertBefore	KEYWORD2
+insertSorted	KEYWORD2
+remove	KEYWORD2
+moveDown	KEYWORD2
+couldContain	KEYWORD2
 reset	KEYWORD2
-print	KEYWORD2
+get	KEYWORD2
+release	KEYWORD2
+MakeUnique	KEYWORD2
+update	KEYWORD2
+begin	KEYWORD2
+enable	KEYWORD2
+disable	KEYWORD2
+isEnabled	KEYWORD2
+beginAll	KEYWORD2
+updateAll	KEYWORD2
+
+ElementRefType	LITERAL1
+ElementPtrType	LITERAL1
+
+# AH/Hardware
+#############
+
+Button	KEYWORD1
+ButtonMatrix	KEYWORD1
+FilteredAnalog	KEYWORD1
+IncrementButton	KEYWORD1
+IncrementDecrementButtons	KEYWORD1
+
+begin	KEYWORD2
+update	KEYWORD2
+getState	KEYWORD2
+getName	KEYWORD2
+stableTime	KEYWORD2
+onButtonChanged	KEYWORD2
+begin	KEYWORD2
+update	KEYWORD2
+map	KEYWORD2
+invert	KEYWORD2
+update	KEYWORD2
+getValue	KEYWORD2
+getFloatValue	KEYWORD2
+getRawValue	KEYWORD2
+setupADC	KEYWORD2
+begin	KEYWORD2
+update	KEYWORD2
+getState	KEYWORD2
+invert	KEYWORD2
+begin	KEYWORD2
+update	KEYWORD2
+getState	KEYWORD2
+invert	KEYWORD2
+
+State	LITERAL1
+Pressed	LITERAL1
+Released	LITERAL1
+Falling	LITERAL1
+Rising	LITERAL1
+MappingFunction	LITERAL1
+analog_t	LITERAL1
+pin_t	LITERAL1
+NO_PIN	LITERAL1
+PinList	LITERAL1
+State	LITERAL1
+Nothing	LITERAL1
+Increment	LITERAL1
+State	LITERAL1
+Nothing	LITERAL1
+Increment	LITERAL1
+Decrement	LITERAL1
+Reset	LITERAL1
+
+# AH/Hardware/ExtendedInputOutput
+#################################
+
+AnalogMultiplex	KEYWORD1
+CD74HC4067	KEYWORD1
+CD74HC4051	KEYWORD1
+ExtIO	KEYWORD1
+ExtendedIOElement	KEYWORD1
+MAX7219	KEYWORD1
+ShiftRegisterOut	KEYWORD1
+ShiftRegisterOutRGB	KEYWORD1
+SPIShiftRegisterOut	KEYWORD1
+StaticSizeExtendedIOElement	KEYWORD1
+
+begin	KEYWORD2
+update	KEYWORD2
+pinMode	KEYWORD2
+digitalWrite	KEYWORD2
+digitalRead	KEYWORD2
+analogRead	KEYWORD2
+analogWrite	KEYWORD2
+getIOElementOfPin	KEYWORD2
+shiftOut	KEYWORD2
 pin	KEYWORD2
+getLength	KEYWORD2
 getEnd	KEYWORD2
 getStart	KEYWORD2
-
-getIOElementOfPin	KEYWORD2
-getFirst	KEYWORD2
-getNext	KEYWORD2
-
-generateIncrementalArray	KEYWORD2
-
-red	KEYWORD2
-green	KEYWORD2
-blue	KEYWORD2
+getAll	KEYWORD2
 redBit	KEYWORD2
 greenBit	KEYWORD2
 blueBit	KEYWORD2
+pins	KEYWORD2
 
-getState	KEYWORD2
+# AH/Hardware/LEDs
+##################
 
-#######################################
-# Constants (LITERAL1)
-#######################################
+DotBarDisplayLEDs	KEYWORD1
+LEDs	KEYWORD1
+MAX7219SevenSegmentDisplay	KEYWORD1
 
-Rising	LITERAL1
-Falling	LITERAL1
-Pressed	LITERAL1
-Released	LITERAL1
+begin	KEYWORD2
+display	KEYWORD2
+setMode	KEYWORD2
+dotMode	KEYWORD2
+barMode	KEYWORD2
+begin	KEYWORD2
+displayRange	KEYWORD2
+set	KEYWORD2
+clear	KEYWORD2
+displayDot	KEYWORD2
+init	KEYWORD2
+clear	KEYWORD2
+send	KEYWORD2
+sendRaw	KEYWORD2
+setIntensity	KEYWORD2
+begin	KEYWORD2
+display	KEYWORD2
+printHex	KEYWORD2
 
-State	LITERAL1
+DotBarMode	LITERAL1
+Dot	LITERAL1
+Bar	LITERAL1
+
+# AH/Types
+##########
+
+Frequency	KEYWORD1
+
+_MHz	LITERAL1
+_kHz	LITERAL1
+_Hz	LITERAL1
+
+# AH/Filters
+############
+
+EMA	KEYWORD1
+EMA_f	KEYWORD1
+Hysteresis	KEYWORD1
+
+filter	KEYWORD2
+update	KEYWORD2
+getValue	KEYWORD2
+

@@ -1,0 +1,44 @@
+keyword1:
+  - AnalogMultiplex
+  - CD74HC4067
+  - CD74HC4051
+
+  - ExtIO
+
+  - ExtendedIOElement
+
+  - MAX7219
+
+  - ShiftRegisterOut
+
+  - ShiftRegisterOutRGB
+
+  - SPIShiftRegisterOut
+
+  - StaticSizeExtendedIOElement
+
+keyword2:
+  - begin
+  - update
+  - pinMode
+  - digitalWrite
+  - digitalRead
+  - analogRead
+  - analogWrite
+
+  - getIOElementOfPin
+  - shiftOut
+
+  - pin
+  - getLength
+  - getEnd
+  - getStart
+  - getAll
+
+  - redBit
+  - greenBit
+  - blueBit
+
+  - pins
+
+literal1:

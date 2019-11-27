@@ -14,7 +14,7 @@ ButtonMatrix<nb_rows, nb_cols>::ButtonMatrix(const PinList<nb_rows> &rowPins,
 }
 
 template <uint8_t nb_rows, uint8_t nb_cols>
-void ButtonMatrix<nb_rows, nb_cols>::refresh() {
+void ButtonMatrix<nb_rows, nb_cols>::update() {
     unsigned long now = millis();
     // only update 25 ms after previous change (crude software debounce).
     // Edit this in Settings/Settings.hpp

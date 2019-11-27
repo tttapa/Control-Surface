@@ -1,0 +1,66 @@
+keyword1:
+  # Button.hpp
+  - Button
+  # ButtonMatrix.hpp
+  - ButtonMatrix
+  # FilteredAnalog.hpp
+  - FilteredAnalog
+  # IncrementButton.hpp
+  - IncrementButton
+  # IncrementDecrementButtons.hpp
+  - IncrementDecrementButtons
+
+keyword2:
+  # Button.hpp
+  - begin
+  - update
+  - getState
+  - getName
+  - stableTime
+  # ButtonMatrix.hpp
+  - onButtonChanged
+  - begin
+  - update
+  # FilteredAnalog.hpp
+  - map
+  - invert
+  - update
+  - getValue
+  - getFloatValue
+  - getRawValue
+  - setupADC
+  # IncrementButton.hpp
+  - begin
+  - update
+  - getState
+  - invert
+  # IncrementDecrementButtons.hpp
+  - begin
+  - update
+  - getState
+  - invert
+
+literal1:
+  # Button.hpp
+  - State
+  - Pressed
+  - Released
+  - Falling
+  - Rising
+  # FilteredAnalog.hpp
+  - MappingFunction
+  # Hardware-Types.hpp
+  - analog_t
+  - pin_t
+  - NO_PIN
+  - PinList
+  # IncrementButton.hpp
+  - State
+  - Nothing
+  - Increment
+  # IncrementDecrementButtons.hpp
+  - State
+  - Nothing
+  - Increment
+  - Decrement
+  - Reset

@@ -51,7 +51,7 @@ class ButtonMatrix {
      * @brief   Scan the matrix, read all button states, and call the
      *          onButtonChanged callback.
      */
-    void refresh();
+    void update();
 
   private:
     /**
