@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef __GNUC__
+#if defined(__GNUC__) && !defined(__clang__)
 
 #define AH_DIAGNOSTIC_WERROR()                                                 \
     _Pragma("GCC diagnostic push") _Pragma("GCC diagnostic error \"-Wall\"")   \
@@ -13,7 +13,6 @@
 
 #else
 
-#warning "Compiler is not GCC, -Werror not enabled"
 #define AH_DIAGNOSTIC_WERROR()
 #define AH_DIAGNOSTIC_POP()
 #define AH_DIAGNOSTIC_EXTERNAL_HEADER()
