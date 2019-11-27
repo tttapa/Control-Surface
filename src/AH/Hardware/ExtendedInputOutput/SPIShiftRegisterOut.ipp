@@ -1,13 +1,16 @@
 #ifdef ARDUINO // I'm too lazy to mock the SPI library
 
-#include "SPIShiftRegisterOut.hpp"
 #include "ExtendedInputOutput.hpp"
+#include "SPIShiftRegisterOut.hpp"
+
+AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <SPI.h>
+AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE
 
 template <uint8_t N>
-SPIShiftRegisterOut<N>::SPIShiftRegisterOut(pin_t latchPin, uint8_t bitOrder)
+SPIShiftRegisterOut<N>::SPIShiftRegisterOut(pin_t latchPin, BitOrder_t bitOrder)
     : ShiftRegisterOutBase<N>(latchPin, bitOrder) {}
 
 template <uint8_t N>

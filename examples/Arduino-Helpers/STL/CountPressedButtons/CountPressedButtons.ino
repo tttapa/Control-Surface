@@ -1,7 +1,7 @@
 /**
  * Example of using the standard library algorithms and the Button class.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * This sketch reads a number of push buttons or switches, and uses the standard
  * library algorithms to count how many of them are pressed.

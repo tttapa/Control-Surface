@@ -5,7 +5,8 @@
 BEGIN_AH_NAMESPACE
 
 template <uint8_t N>
-ShiftRegisterOutBase<N>::ShiftRegisterOutBase(pin_t latchPin, uint8_t bitOrder)
+ShiftRegisterOutBase<N>::ShiftRegisterOutBase(pin_t latchPin,
+                                              BitOrder_t bitOrder)
     : latchPin(latchPin), bitOrder(bitOrder) {}
 
 template <uint8_t N>

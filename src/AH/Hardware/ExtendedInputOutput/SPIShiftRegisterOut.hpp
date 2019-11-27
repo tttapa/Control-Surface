@@ -28,6 +28,8 @@ BEGIN_AH_NAMESPACE
 template <uint8_t N>
 class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
   public:
+    using BitOrder_t = typename ShiftRegisterOutBase<N>::BitOrder_t;
+
     /**
      * @brief   Create a new SPIShiftRegisterOut object with a given bit order,
      *          and a given number of outputs.
@@ -52,7 +54,7 @@ class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
      *          Either `MSBFIRST` (most significant bit first) or `LSBFIRST`
      *          (least significant bit first).
      */
-    SPIShiftRegisterOut(pin_t latchPin = SS, uint8_t bitOrder = MSBFIRST);
+    SPIShiftRegisterOut(pin_t latchPin = SS, BitOrder_t bitOrder = MSBFIRST);
 
     /**
      * @brief   Initialize the shift register.  

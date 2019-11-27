@@ -3,7 +3,7 @@
  * normal IO pins. This version uses bit-banging to drive the  shift register. 
  * You should probably be using the SPI version instead.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------

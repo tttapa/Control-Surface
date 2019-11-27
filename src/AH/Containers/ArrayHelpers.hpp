@@ -69,7 +69,7 @@ BEGIN_AH_NAMESPACE
  */
 template <class T, size_t N, class G>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> generateArray(G generator) {
-    Array<T, N> array{};
+    Array<T, N> array{{}};
     std::generate(array.begin(), array.end(), generator);
     return array;
 }
@@ -90,7 +90,7 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> generateArray(G generator) {
 template <size_t N, class G>
 USE_CONSTEXPR_ARRAY_HELPERS auto generateArray(G generator)
     -> Array<decltype(generator()), N> {
-    Array<decltype(generator()), N> array{};
+    Array<decltype(generator()), N> array{{}};
     std::generate(array.begin(), array.end(), generator);
     return array;
 }
@@ -110,7 +110,7 @@ USE_CONSTEXPR_ARRAY_HELPERS auto generateArray(G generator)
  */
 template <class T, size_t N, class U>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> copyAs(const Array<U, N> &src) {
-    Array<T, N> dest{};
+    Array<T, N> dest{{}};
     std::transform(std::begin(src), std::end(src), std::begin(dest),
                    [](const U &src) { return T(src); });
     return dest;
@@ -122,11 +122,13 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> copyAs(const Array<U, N> &src) {
 template <class F, class U, size_t N>
 USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(F{}(U{})), N>
 apply(const Array<U, N> &src, F f) {
-    Array<decltype(F{}(U{})), N> dest{};
+    Array<decltype(F{}(U{})), N> dest{{}};
     std::transform(std::begin(src), std::end(src), std::begin(dest), f);
     return dest;
 }
 
+#if !defined(__GNUC__) || (__GNUC__ > 7) ||                                    \
+    (__GNUC__ == 7 && __GNUC_MINOR__ >= 3) || defined(DOXYGEN)
 /** 
  * @brief   Fill the array with the same value for each element.
  */
@@ -134,6 +136,15 @@ template <class T, size_t N, class... Args>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> fillArray(Args... args) {
     return generateArray<N>([&]() { return T{args...}; });
 }
+#else
+template <class T, size_t N, class... Args>
+USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> fillArray(Args... args) {
+    Array<T, N> array{{}};
+    for (auto &el : array)
+        el = T{args...};
+    return array;
+}
+#endif
 
 /**
  * @brief   Generate an array where the first value is given, and the subsequent
@@ -192,7 +203,7 @@ generateIncrementalArray(U start = 0, V increment = V(1)) {
 template <class T, size_t M, size_t N>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, M + N> cat(const Array<T, M> &a,
                                                 const Array<T, N> &b) {
-    Array<T, M + N> result = {};
+    Array<T, M + N> result{{}};
     size_t r = 0;
     for (size_t i = 0; i < M; ++i, ++r)
         result[r] = a[i];
@@ -203,10 +214,10 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, M + N> cat(const Array<T, M> &a,
 
 template <class T1, class T2, size_t N1, size_t N2, bool Reverse1,
           bool Reverse2, bool Const1, bool Const2>
-USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(T1{} * T2{}), N1 + N2 - 1>
+USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(T1() * T2()), N1 + N2 - 1>
 distribute(const ArraySlice<T1, N1, Reverse1, Const1> &a,
            const ArraySlice<T2, N2, Reverse2, Const2> &b) {
-    Array<decltype(T1{} * T2{}), N1 + N2 - 1> result = {};
+    Array<decltype(T1() * T2()), N1 + N2 - 1> result = {{}};
     for (size_t i = 0; i < N1; ++i)
         for (size_t j = 0; j < N2; ++j)
             result[i + j] += a[i] * b[j];
@@ -214,21 +225,21 @@ distribute(const ArraySlice<T1, N1, Reverse1, Const1> &a,
 }
 
 template <class T1, class T2, size_t N1, size_t N2, bool Reverse1, bool Const1>
-USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(T1{} * T2{}), N1 + N2 - 1>
+USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(T1() * T2()), N1 + N2 - 1>
 distribute(const ArraySlice<T1, N1, Reverse1, Const1> &a,
            const Array<T2, N2> &b) {
     return distribute(a, b.slice());
 }
 
 template <class T1, class T2, size_t N1, size_t N2, bool Reverse2, bool Const2>
-USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(T1{} * T2{}), N1 + N2 - 1>
+USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(T1() * T2()), N1 + N2 - 1>
 distribute(const Array<T1, N1> &a,
            const ArraySlice<T2, N2, Reverse2, Const2> &b) {
     return distribute(a.slice(), b);
 }
 
 template <class T1, class T2, size_t N1, size_t N2>
-USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(T1{} * T2{}), N1 + N2 - 1>
+USE_CONSTEXPR_ARRAY_HELPERS Array<decltype(T1() * T2()), N1 + N2 - 1>
 distribute(const Array<T1, N1> &a, const Array<T2, N2> &b) {
     return distribute(a.slice(), b.slice());
 }

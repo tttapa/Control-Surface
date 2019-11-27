@@ -23,6 +23,13 @@ BEGIN_AH_NAMESPACE
  */
 template <uint8_t N>
 class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
+  public:
+#if defined(__SAM3X8E__) || defined(__SAMD21G18A__)
+    using BitOrder_t = BitOrder;
+#else
+    using BitOrder_t = uint8_t;
+#endif
+
   protected:
     /**
      * @brief   Create a new ShiftRegisterOutBase object with a given bit order,
@@ -35,7 +42,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      *          Either `MSBFIRST` (most significant bit first) or `LSBFIRST`
      *          (least significant bit first).
      */
-    ShiftRegisterOutBase(pin_t latchPin, uint8_t bitOrder);
+    ShiftRegisterOutBase(pin_t latchPin, BitOrder_t bitOrder);
 
   public:
     /**
@@ -140,7 +147,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
 
   protected:
     const pin_t latchPin;
-    const uint8_t bitOrder;
+    const BitOrder_t bitOrder;
 
     BitArray<N> buffer;
     bool dirty = true;
