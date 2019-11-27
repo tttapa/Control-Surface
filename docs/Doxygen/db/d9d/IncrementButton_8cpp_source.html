@@ -97,25 +97,26 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (incrState == <a class="code" href="../../d1/d19/classButton.html#ae15938c6b06f6bbf909314f987938fd6ae322e4070b093611d60f42872eb008cf">Button::Falling</a>) {</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">return</span> Increment;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    } <span class="keywordflow">else</span> { <span class="comment">// if (incrState == Button::Pressed)</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordflow">if</span> (longPressState == LongPress) {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="comment">// still long pressed</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="keywordflow">if</span> (millis() - longPressRepeat &gt;= <a class="code" href="../../db/d02/Settings_8hpp.html#a4c6482347c7ca829da34491dfb905773">LONG_PRESS_REPEAT_DELAY</a>) {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                longPressRepeat += <a class="code" href="../../db/d02/Settings_8hpp.html#a4c6482347c7ca829da34491dfb905773">LONG_PRESS_REPEAT_DELAY</a>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                <span class="keywordflow">return</span> Increment;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            }</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (button.stableTime() &gt;= <a class="code" href="../../db/d02/Settings_8hpp.html#ae45a88a68c9a82d85febda88f7ecf96d">LONG_PRESS_DELAY</a>) {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="comment">// long press starts</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            longPressState = LongPress;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            longPressRepeat = millis();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">return</span> Increment;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> Nothing;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<a class="code" href="../../d1/d65/Warnings_8hpp.html#a4f088fb95f1d6dc4279357ca2a562cbe">AH_DIAGNOSTIC_POP</a>()</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">auto</span> now = millis();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordflow">if</span> (longPressState == LongPress) {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="comment">// still long pressed</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <span class="keywordflow">if</span> (now - longPressRepeat &gt;= <a class="code" href="../../db/d02/Settings_8hpp.html#a4c6482347c7ca829da34491dfb905773">LONG_PRESS_REPEAT_DELAY</a>) {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                longPressRepeat += <a class="code" href="../../db/d02/Settings_8hpp.html#a4c6482347c7ca829da34491dfb905773">LONG_PRESS_REPEAT_DELAY</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                <span class="keywordflow">return</span> Increment;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            }</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (button.stableTime(now) &gt;= <a class="code" href="../../db/d02/Settings_8hpp.html#ae45a88a68c9a82d85febda88f7ecf96d">LONG_PRESS_DELAY</a>) {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="comment">// long press starts</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            longPressState = LongPress;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            longPressRepeat = now;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordflow">return</span> Increment;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">return</span> Nothing;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<a class="code" href="../../d1/d65/Warnings_8hpp.html#a4f088fb95f1d6dc4279357ca2a562cbe">AH_DIAGNOSTIC_POP</a>()</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aNamespaceSettings_8hpp_html_abe0f0e505619b6899c38363f4e42a272"><div class="ttname"><a href="../../dc/dc7/NamespaceSettings_8hpp.html#abe0f0e505619b6899c38363f4e42a272">BEGIN_AH_NAMESPACE</a></div><div class="ttdeci">#define BEGIN_AH_NAMESPACE</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/dc7/NamespaceSettings_8hpp_source.html#l00009">NamespaceSettings.hpp:9</a></div></div>
 <div class="ttc" id="aclassButton_html_ae15938c6b06f6bbf909314f987938fd6a9ab5bfa1050fa2d2219af088e13b220c"><div class="ttname"><a href="../../d1/d19/classButton.html#ae15938c6b06f6bbf909314f987938fd6a9ab5bfa1050fa2d2219af088e13b220c">Button::Rising</a></div><div class="ttdoc">&lt; Input went from high to low (1,0)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/db3/Button_8hpp_source.html#l00057">Button.hpp:57</a></div></div>

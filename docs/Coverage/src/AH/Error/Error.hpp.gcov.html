@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - d1ff1a721ea5cbda4fa0e6506c7980d04f131ba9 - src/AH/Error/Error.hpp</title>
+  <title>LCOV - 3099ed165116e6d76ea29503530d28f462004753 - src/AH/Error/Error.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">d1ff1a721ea5cbda4fa0e6506c7980d04f131ba9</td>
+            <td class="headerValue">3099ed165116e6d76ea29503530d28f462004753</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">5</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-27 16:27:24</td>
+            <td class="headerValue">2019-11-27 22:37:50</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -142,10 +142,10 @@
 <a name="72"><span class="lineNum">      72 </span>            : </a>
 <a name="73"><span class="lineNum">      73 </span>            : BEGIN_AH_NAMESPACE</a>
 <a name="74"><span class="lineNum">      74 </span>            : </a>
-<a name="75"><span class="lineNum">      75 </span><span class="lineCov">         10 : class ErrorException : public std::exception {</span></a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">         12 : class ErrorException : public std::exception {</span></a>
 <a name="76"><span class="lineNum">      76 </span>            :   public:</a>
-<a name="77"><span class="lineNum">      77 </span><span class="lineCov">         10 :     ErrorException(const std::string message, int errorCode)</span></a>
-<a name="78"><span class="lineNum">      78 </span><span class="lineCov">         20 :         : message(std::move(message)), errorCode(errorCode) {}</span></a>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">         12 :     ErrorException(const std::string message, int errorCode)</span></a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">         24 :         : message(std::move(message)), errorCode(errorCode) {}</span></a>
 <a name="79"><span class="lineNum">      79 </span><span class="lineCov">          1 :     const char *what() const throw() override { return message.c_str(); }</span></a>
 <a name="80"><span class="lineNum">      80 </span><span class="lineCov">          6 :     int getErrorCode() const { return errorCode; }</span></a>
 <a name="81"><span class="lineNum">      81 </span>            : </a>
