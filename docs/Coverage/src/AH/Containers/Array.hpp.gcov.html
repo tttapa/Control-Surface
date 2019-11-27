@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 5d7df5a633088e0cc4dd37d1d824f6e452634c1d - src/AH/Containers/Array.hpp</title>
+  <title>LCOV - d1ff1a721ea5cbda4fa0e6506c7980d04f131ba9 - src/AH/Containers/Array.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">5d7df5a633088e0cc4dd37d1d824f6e452634c1d</td>
+            <td class="headerValue">d1ff1a721ea5cbda4fa0e6506c7980d04f131ba9</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">132</td>
@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-27 03:27:40</td>
+            <td class="headerValue">2019-11-27 16:27:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">119</td>
-            <td class="headerCovTableEntry">121</td>
-            <td class="headerCovTableEntryHi">98.3 %</td>
+            <td class="headerCovTableEntry">122</td>
+            <td class="headerCovTableEntry">124</td>
+            <td class="headerCovTableEntryHi">98.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -134,23 +134,23 @@
 <a name="64"><span class="lineNum">      64 </span>            :      * @param   index</a>
 <a name="65"><span class="lineNum">      65 </span>            :      *          The (zero-based) index of the element to return.</a>
 <a name="66"><span class="lineNum">      66 </span>            :      */</a>
-<a name="67"><span class="lineNum">      67 </span><span class="lineCov">        379 :     const T &amp;operator[](size_t index) const {</span></a>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">        379 :         if (index &gt;= N) { // TODO</span></a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">        389 :     const T &amp;operator[](size_t index) const {</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">        389 :         if (index &gt;= N) { // TODO</span></a>
 <a name="69"><span class="lineNum">      69 </span><span class="lineCov">          1 :             ERROR(F(&quot;Index out of bounds: &quot;) &lt;&lt; index &lt;&lt; F(&quot; ≥ &quot;) &lt;&lt; N, 0xEDED);</span></a>
 <a name="70"><span class="lineNum">      70 </span><span class="lineNoCov">          0 :             index = N - 1;</span></a>
 <a name="71"><span class="lineNum">      71 </span><span class="lineNoCov">          0 :         }</span></a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">        378 :         return data[index];</span></a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">        388 :         return data[index];</span></a>
 <a name="73"><span class="lineNum">      73 </span><span class="lineCov">          1 :     }</span></a>
 <a name="74"><span class="lineNum">      74 </span>            : </a>
 <a name="75"><span class="lineNum">      75 </span>            :     /**</a>
 <a name="76"><span class="lineNum">      76 </span>            :      * @brief   Get a pointer to the first element.</a>
 <a name="77"><span class="lineNum">      77 </span>            :      */</a>
-<a name="78"><span class="lineNum">      78 </span><span class="lineCov">          5 :     T *begin() { return &amp;data[0]; }</span></a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">          6 :     T *begin() { return &amp;data[0]; }</span></a>
 <a name="79"><span class="lineNum">      79 </span>            : </a>
 <a name="80"><span class="lineNum">      80 </span>            :     /**</a>
 <a name="81"><span class="lineNum">      81 </span>            :      * @brief   Get a pointer to the first element.</a>
 <a name="82"><span class="lineNum">      82 </span>            :      */</a>
-<a name="83"><span class="lineNum">      83 </span><span class="lineCov">         16 :     const T *begin() const { return &amp;data[0]; }</span></a>
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">         17 :     const T *begin() const { return &amp;data[0]; }</span></a>
 <a name="84"><span class="lineNum">      84 </span>            : </a>
 <a name="85"><span class="lineNum">      85 </span>            :     /**</a>
 <a name="86"><span class="lineNum">      86 </span>            :      * @brief   Get a pointer to the memory beyond the array.</a>
@@ -160,7 +160,7 @@
 <a name="90"><span class="lineNum">      90 </span>            :     /**</a>
 <a name="91"><span class="lineNum">      91 </span>            :      * @brief   Get a pointer to the memory beyond the array.</a>
 <a name="92"><span class="lineNum">      92 </span>            :      */</a>
-<a name="93"><span class="lineNum">      93 </span><span class="lineCov">         16 :     const T *end() const { return &amp;data[N]; }</span></a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">         17 :     const T *end() const { return &amp;data[N]; }</span></a>
 <a name="94"><span class="lineNum">      94 </span>            : </a>
 <a name="95"><span class="lineNum">      95 </span>            :     /**</a>
 <a name="96"><span class="lineNum">      96 </span>            :      * @brief   Check the equality of all elements in two arrays.</a>
@@ -168,14 +168,14 @@
 <a name="98"><span class="lineNum">      98 </span>            :      * @param   rhs </a>
 <a name="99"><span class="lineNum">      99 </span>            :      *          The array to compare this array to.</a>
 <a name="100"><span class="lineNum">     100 </span>            :      */</a>
-<a name="101"><span class="lineNum">     101 </span><span class="lineCov">         42 :     bool operator==(const Array&lt;T, N&gt; &amp;rhs) const {</span></a>
-<a name="102"><span class="lineNum">     102 </span><span class="lineCov">         42 :         if (this == &amp;rhs)</span></a>
+<a name="101"><span class="lineNum">     101 </span><span class="lineCov">         43 :     bool operator==(const Array&lt;T, N&gt; &amp;rhs) const {</span></a>
+<a name="102"><span class="lineNum">     102 </span><span class="lineCov">         43 :         if (this == &amp;rhs)</span></a>
 <a name="103"><span class="lineNum">     103 </span><span class="lineCov">          3 :             return true;</span></a>
-<a name="104"><span class="lineNum">     104 </span><span class="lineCov">        213 :         for (size_t i = 0; i &lt; N; i++)</span></a>
-<a name="105"><span class="lineNum">     105 </span><span class="lineCov">        177 :             if ((*this)[i] != rhs[i])</span></a>
+<a name="104"><span class="lineNum">     104 </span><span class="lineCov">        219 :         for (size_t i = 0; i &lt; N; i++)</span></a>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">        182 :             if ((*this)[i] != rhs[i])</span></a>
 <a name="106"><span class="lineNum">     106 </span><span class="lineCov">          3 :                 return false;</span></a>
-<a name="107"><span class="lineNum">     107 </span><span class="lineCov">         36 :         return true;</span></a>
-<a name="108"><span class="lineNum">     108 </span><span class="lineCov">         42 :     }</span></a>
+<a name="107"><span class="lineNum">     107 </span><span class="lineCov">         37 :         return true;</span></a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineCov">         43 :     }</span></a>
 <a name="109"><span class="lineNum">     109 </span>            : </a>
 <a name="110"><span class="lineNum">     110 </span>            :     /**</a>
 <a name="111"><span class="lineNum">     111 </span>            :      * @brief   Check the inequality of all elements in two arrays.</a>

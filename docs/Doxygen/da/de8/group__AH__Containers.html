@@ -216,8 +216,13 @@ Functions</h2></td></tr>
 <tr class="memitem:gafabc9f5a80a8d4c068141c62de619714"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/de8/group__AH__Containers.html#gafabc9f5a80a8d4c068141c62de619714">copyAs</a> (const <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; U, N &gt; &amp;src)</td></tr>
 <tr class="memdesc:gafabc9f5a80a8d4c068141c62de619714"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy an <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> to an <a class="el" href="../../d7/d6a/structArray.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> of a different type.  <a href="../../da/de8/group__AH__Containers.html#gafabc9f5a80a8d4c068141c62de619714">More...</a><br /></td></tr>
 <tr class="separator:gafabc9f5a80a8d4c068141c62de619714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0895d71ba77dd8fa6640113b19d86c03"><td class="memTemplParams" colspan="2">template&lt;class F , class U , size_t N&gt; </td></tr>
+<tr class="memitem:ga0895d71ba77dd8fa6640113b19d86c03"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; decltype(F{}(U{})), N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/de8/group__AH__Containers.html#ga0895d71ba77dd8fa6640113b19d86c03">apply</a> (const <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; U, N &gt; &amp;src, F f)</td></tr>
+<tr class="memdesc:ga0895d71ba77dd8fa6640113b19d86c03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a function to all elements of the array and return a copy.  <a href="../../da/de8/group__AH__Containers.html#ga0895d71ba77dd8fa6640113b19d86c03">More...</a><br /></td></tr>
+<tr class="separator:ga0895d71ba77dd8fa6640113b19d86c03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9637082562b5de1c3370f53ba840cb25"><td class="memTemplParams" colspan="2">template&lt;class T , size_t N, class... Args&gt; </td></tr>
 <tr class="memitem:ga9637082562b5de1c3370f53ba840cb25"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/de8/group__AH__Containers.html#ga9637082562b5de1c3370f53ba840cb25">fillArray</a> (Args... args)</td></tr>
+<tr class="memdesc:ga9637082562b5de1c3370f53ba840cb25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill the array with the same value for each element.  <a href="../../da/de8/group__AH__Containers.html#ga9637082562b5de1c3370f53ba840cb25">More...</a><br /></td></tr>
 <tr class="separator:ga9637082562b5de1c3370f53ba840cb25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga916ecc658d4308b2b4aa876a03bc5f2f"><td class="memTemplParams" colspan="2">template&lt;class T , size_t N, class U , class V  = U&gt; </td></tr>
 <tr class="memitem:ga916ecc658d4308b2b4aa876a03bc5f2f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; T, N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/de8/group__AH__Containers.html#ga916ecc658d4308b2b4aa876a03bc5f2f">generateIncrementalArray</a> (U start=0, V increment=V(1))</td></tr>
@@ -1146,6 +1151,40 @@ template&lt;class T , size_t N, class U &gt; </div>
 
 </div>
 </div>
+<a id="ga0895d71ba77dd8fa6640113b19d86c03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0895d71ba77dd8fa6640113b19d86c03">&#9670;&nbsp;</a></span>apply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class F , class U , size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(F{}(U{})), N&gt; apply </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; U, N &gt; &amp;&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply a function to all elements of the array and return a copy. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00124">124</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
+
+</div>
+</div>
 <a id="ga9637082562b5de1c3370f53ba840cb25"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga9637082562b5de1c3370f53ba840cb25">&#9670;&nbsp;</a></span>fillArray()</h2>
 
@@ -1164,7 +1203,9 @@ template&lt;class T , size_t N, class... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00120">120</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
+<p>Fill the array with the same value for each element. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00134">134</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
 
 </div>
 </div>
@@ -1223,7 +1264,7 @@ template&lt;class T , size_t N, class U , class V  = U&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../da/d78/Toggle-LEDs_8ino-example.html#a3">Toggle-LEDs.ino</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00158">158</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00172">172</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
 
 </div>
 </div>
@@ -1273,7 +1314,7 @@ template&lt;class T , size_t M, size_t N&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A new array containing the elements of both input arrays (in order). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00179">179</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
 
 </div>
 </div>
@@ -1305,7 +1346,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2, bool Reverse1, bool Reve
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00207">207</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
 
 </div>
 </div>
@@ -1337,7 +1378,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2, bool Reverse1, bool Cons
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00204">204</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00218">218</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
 
 </div>
 </div>
@@ -1369,7 +1410,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2, bool Reverse2, bool Cons
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00211">211</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00225">225</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
 
 </div>
 </div>
@@ -1401,7 +1442,7 @@ template&lt;class T1 , class T2 , size_t N1, size_t N2&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00218">218</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html#l00232">232</a> of file <a class="el" href="../../d5/db6/ArrayHelpers_8hpp_source.html">ArrayHelpers.hpp</a>.</p>
 
 </div>
 </div>
