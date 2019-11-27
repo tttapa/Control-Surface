@@ -67,11 +67,8 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      * @brief   The digitalWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
-    void digitalWrite(pin_t pin, uint8_t val) override
-        __attribute__((deprecated)) {
-        (void)pin;
-        (void)val;
-    }
+    void digitalWrite(pin_t, uint8_t) override // LCOV_EXCL_LINE
+        __attribute__((deprecated)) {}         // LCOV_EXCL_LINE
 
     /**
      * @brief   Read the digital state of the given input.
@@ -93,11 +90,8 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      * @brief   The analogWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
-    void analogWrite(pin_t pin, analog_t val) override
-        __attribute__((deprecated)) {
-        (void)pin;
-        (void)val;
-    }
+    void analogWrite(pin_t, analog_t) override // LCOV_EXCL_LINE
+        __attribute__((deprecated)) {}         // LCOV_EXCL_LINE
 
     /**
      * @brief   Initialize the multiplexer: set the pin mode of the address pins
@@ -109,7 +103,7 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      * @brief   No periodic updating of the state is necessary, all actions are 
      *          carried out when the user calls analogRead or digitalRead.
      */
-    void update() override {}
+    void update() override {} // LCOV_EXCL_LINE
 
   private:
     const pin_t analogPin;

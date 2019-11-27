@@ -12,7 +12,8 @@ IncrementDecrementButtons::updateImplementation() {
     if (decrState == Button::Released && incrState == Button::Released) {
         // Both released
     } else if ((decrState == Button::Rising && incrState == Button::Released) ||
-               (incrState == Button::Rising && decrState == Button::Released)) {
+               (incrState == Button::Rising && decrState == Button::Released) ||
+               (incrState == Button::Rising && decrState == Button::Rising)) {
         // One released, the other rising → nothing
         // now both released, so go to initial state
         longPressState = Initial;
@@ -43,26 +44,28 @@ IncrementDecrementButtons::updateImplementation() {
         // Both pressed → nothing
     } else if (longPressState != AfterReset && incrState == Button::Pressed) {
         // Not reset and increment pressed → long press?
+        auto now = millis();
         if (longPressState == LongPress) {
-            if (millis() - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
+            if (now - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
                 longPressRepeat += LONG_PRESS_REPEAT_DELAY;
                 return Increment;
             }
         } else if (incrementButton.stableTime() >= LONG_PRESS_DELAY) {
             longPressState = LongPress;
-            longPressRepeat = millis();
+            longPressRepeat = now;
             return Increment;
         }
     } else if (longPressState != AfterReset && decrState == Button::Pressed) {
         // Not reset and decrement pressed → long press?
+        auto now = millis();
         if (longPressState == LongPress) {
-            if (millis() - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
+            if (now - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
                 longPressRepeat += LONG_PRESS_REPEAT_DELAY;
                 return Decrement;
             }
         } else if (decrementButton.stableTime() >= LONG_PRESS_DELAY) {
             longPressState = LongPress;
-            longPressRepeat = millis();
+            longPressRepeat = now;
             return Decrement;
         }
     }

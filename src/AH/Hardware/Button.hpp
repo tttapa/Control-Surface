@@ -98,8 +98,15 @@ class Button {
     /// @brief   Return the name of the state as a string.
     static const __FlashStringHelper *getName(State state);
 
+    /// Return the time point (in milliseconds) when the button last bounced.
+    unsigned long previousBounceTime() const;
+
+    /// Return the time (in milliseconds) that the button has been stable for,
+    /// compared to the given time point.
+    unsigned long stableTime(unsigned long now) const;
+    
     /// Return the time (in milliseconds) that the button has been stable for.
-    unsigned long stableTime();
+    unsigned long stableTime() const;
 
   private:
     pin_t pin;
@@ -110,7 +117,7 @@ class Button {
 
 #ifdef AH_INDIVIDUAL_BUTTON_INVERT // Edit this in Settings/Settings.hpp
     bool invertState = false;
-#else 
+#else
     static bool invertState;
 #endif
 

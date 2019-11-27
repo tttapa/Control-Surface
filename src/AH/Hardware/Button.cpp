@@ -45,7 +45,13 @@ const __FlashStringHelper *Button::getName(Button::State state) {
     }
 }
 
-unsigned long Button::stableTime() { return millis() - prevBounceTime; }
+unsigned long Button::previousBounceTime() const { return prevBounceTime; }
+
+unsigned long Button::stableTime(unsigned long now) const {
+    return now - previousBounceTime();
+}
+
+unsigned long Button::stableTime() const { return stableTime(millis()); }
 
 END_AH_NAMESPACE
 

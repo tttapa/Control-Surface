@@ -17,16 +17,17 @@ IncrementButton::State IncrementButton::updateImplementation() {
     } else if (incrState == Button::Falling) {
         return Increment;
     } else { // if (incrState == Button::Pressed)
+        auto now = millis();
         if (longPressState == LongPress) {
             // still long pressed
-            if (millis() - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
+            if (now - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
                 longPressRepeat += LONG_PRESS_REPEAT_DELAY;
                 return Increment;
             }
-        } else if (button.stableTime() >= LONG_PRESS_DELAY) {
+        } else if (button.stableTime(now) >= LONG_PRESS_DELAY) {
             // long press starts
             longPressState = LongPress;
-            longPressRepeat = millis();
+            longPressRepeat = now;
             return Increment;
         }
     }

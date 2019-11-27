@@ -35,7 +35,7 @@ pin_t ExtendedIOElement::pin(pin_t p) const {
                        "ExtendedIOElement (")
                   << length << ')',
               0x4567);
-        return end - 1;
+        return end - 1; // LCOV_EXCL_LINE
     }
     return p + start;
 }

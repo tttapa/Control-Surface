@@ -19,7 +19,6 @@ const static uint8_t tmp_INPUT = INPUT;
 const static uint8_t tmp_OUTPUT = OUTPUT;
 const static uint8_t tmp_INPUT_PULLUP = INPUT_PULLUP;
 
-
 #ifdef HIGH
 #undef HIGH
 #endif
@@ -80,8 +79,16 @@ extern void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val);
 extern analog_t analogRead(pin_t pin);
 /// An ExtIO version of the Arduino function
 extern analog_t analogRead(int pin);
+/// An ExtIO version of the Arduino function
+extern void analogWrite(pin_t pin, analog_t val);
+/// An ExtIO version of the Arduino function
+extern void analogWrite(int pin, analog_t val);
+/// An ExtIO version of the Arduino function
+extern void analogWrite(int pin, int val);
+/// An ExtIO version of the Arduino function
+extern void analogWrite(pin_t pin, int val);
 
-}
+} // namespace ExtIO
 
 END_AH_NAMESPACE
 

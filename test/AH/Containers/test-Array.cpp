@@ -51,11 +51,35 @@ TEST(Array, equality) {
     EXPECT_TRUE(a != c);
 }
 
+TEST(Array, sliceEquality) {
+    auto a = Array<int, 5>{1, 2, 3, 4, 5}.slice();
+    auto b = Array<int, 5>{1, 2, 3, 4, 5}.slice();
+    auto c = Array<int, 5>{1, 2, 3, 4, 6}.slice();
+    EXPECT_EQ(a, a);
+    EXPECT_TRUE(a == a);
+    EXPECT_FALSE(a != a);
+    EXPECT_EQ(a, b);
+    EXPECT_TRUE(a == b);
+    EXPECT_FALSE(a != b);
+    EXPECT_NE(a, c);
+    EXPECT_FALSE(a == c);
+    EXPECT_TRUE(a != c);
+}
+
 TEST(Array, outOfBounds) {
     Array<int, 5> a = {};
     EXPECT_THROW(a[5], AH::ErrorException);
     const Array<int, 5> b = {};
     EXPECT_THROW(b[5], AH::ErrorException);
+}
+
+TEST(Array, sliceOutOfBounds) {
+    Array<int, 5> a = {};
+    auto sa = a.slice<0, 1>();
+    EXPECT_THROW(sa[2], AH::ErrorException);
+    const Array<int, 5> b = {};
+    auto sb = b.slice<3, 4>();
+    EXPECT_THROW(sb[2], AH::ErrorException);
 }
 
 // Addition
@@ -342,4 +366,18 @@ TEST(Array, reverseSubSliceSort) {
     auto s1 = a.slice<5, 1>();               // reverse subview of a
     std::sort(std::begin(s1), std::end(s1)); // sort reverse subview
     EXPECT_EQ(a, b); // middle of a should be sorted in reverse order
+}
+
+TEST(Array, reverseSliceIteratorSubtract) {
+    Array<int, 5> a = {1, 2, 3, 4, 5};
+    auto s = a.slice<4, 0>();
+    EXPECT_EQ(*(s.end() - 1), 1);
+    EXPECT_EQ(*(s.end() - 2), 2);
+}
+
+TEST(Array, sliceIteratorSubtract) {
+    Array<int, 5> a = {1, 2, 3, 4, 5};
+    auto s = a.slice<0, 4>();
+    EXPECT_EQ(*(s.end() - 1), 5);
+    EXPECT_EQ(*(s.end() - 2), 4);
 }

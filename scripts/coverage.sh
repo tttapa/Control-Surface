@@ -70,3 +70,5 @@ genhtml \
     --output-directory="$html_dest" \
     --legend --title `cd "$proj_dir" && git rev-parse HEAD` \
     --rc lcov_branch_coverage=$branches
+
+./scripts/coverage-badge.py

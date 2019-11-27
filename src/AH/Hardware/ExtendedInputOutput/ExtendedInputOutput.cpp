@@ -94,6 +94,19 @@ analog_t analogRead(pin_t pin) {
 }
 analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
 
+void analogWrite(pin_t pin, analog_t val) {
+    // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+        ::analogWrite(pin, val);
+    } else {
+        ExtendedIOElement &el = getIOElementOfPin(pin);
+        el.analogWrite(pin - el.getStart(), val);
+    }
+}
+void analogWrite(int pin, analog_t val) { analogWrite((pin_t)pin, val); }
+void analogWrite(int pin, int val) { analogWrite((pin_t)pin, (analog_t)val); }
+void analogWrite(pin_t pin, int val) { analogWrite(pin, (analog_t)val); }
+
 } // namespace ExtIO
 
 END_AH_NAMESPACE

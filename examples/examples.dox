@@ -454,5 +454,6 @@
  * STL-test
  * ========
  *
- * @boards  AVR, AVR USB
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
  */
+
