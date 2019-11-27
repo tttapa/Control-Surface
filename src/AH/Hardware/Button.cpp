@@ -1,5 +1,7 @@
 #include "Button.hpp"
 
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 BEGIN_AH_NAMESPACE
 
 using namespace ExtIO;
@@ -46,3 +48,5 @@ const __FlashStringHelper *Button::getName(Button::State state) {
 unsigned long Button::stableTime() { return millis() - prevBounceTime; }
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

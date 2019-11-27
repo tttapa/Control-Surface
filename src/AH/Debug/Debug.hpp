@@ -2,9 +2,11 @@
 
 /// @file
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <AH/PrintStream/PrintStream.hpp>
 #include <AH/Settings/SettingsWrapper.hpp>
-#include <Arduino.h>
 
 #ifndef FLUSH_ON_EVERY_DEBUG_STATEMENT
 #if !(defined(ESP32) || defined(ESP8266))
@@ -167,3 +169,5 @@ END_AH_NAMESPACE
     } while (0)
 
 #endif
+
+AH_DIAGNOSTIC_POP()

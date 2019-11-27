@@ -2,6 +2,9 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include "Button.hpp"
 
 BEGIN_AH_NAMESPACE
@@ -91,3 +94,5 @@ class IncrementDecrementButtons {
 };
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

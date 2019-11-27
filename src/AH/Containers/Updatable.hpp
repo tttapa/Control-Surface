@@ -2,6 +2,10 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <AH/Containers/LinkedList.hpp>
 #include <AH/Error/Error.hpp>
 #include <AH/Settings/SettingsWrapper.hpp>
@@ -106,3 +110,5 @@ template <class T>
 DoublyLinkedList<Updatable<T>> Updatable<T>::updatables;
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

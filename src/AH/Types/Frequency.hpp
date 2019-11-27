@@ -1,5 +1,8 @@
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <AH/Settings/NamespaceSettings.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -30,3 +33,5 @@ constexpr Frequency operator"" _MHz(unsigned long long mhz) {
 }
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

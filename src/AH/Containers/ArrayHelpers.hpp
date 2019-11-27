@@ -2,7 +2,12 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include "Array.hpp"
+#include <AH/STL/algorithm>
 
 #if __cplusplus >= 201400L
 #define USE_CONSTEXPR_ARRAY_HELPERS constexpr
@@ -12,13 +17,7 @@
 
 BEGIN_AH_NAMESPACE
 
-/// https://en.cppreference.com/w/cpp/algorithm/generate
-template <class ForwardIt, class Generator>
-USE_CONSTEXPR_ARRAY_HELPERS void generate(ForwardIt first, ForwardIt last,
-                                          Generator g) {
-    while (first != last)
-        *first++ = g();
-}
+namespace detail {
 
 /** 
  * @brief   Utility class that acts as a functor to return incremental values.
@@ -45,8 +44,9 @@ class Incrementor {
     const V increment;
 };
 
-END_AH_NAMESPACE
+} // namespace detail
 
+END_AH_NAMESPACE
 /// @addtogroup AH_Containers
 /// @{
 
@@ -70,7 +70,7 @@ BEGIN_AH_NAMESPACE
 template <class T, size_t N, class G>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> generateArray(G generator) {
     Array<T, N> array{};
-    generate(array.begin(), array.end(), generator);
+    std::generate(array.begin(), array.end(), generator);
     return array;
 }
 
@@ -91,7 +91,7 @@ template <size_t N, class G>
 USE_CONSTEXPR_ARRAY_HELPERS auto generateArray(G generator)
     -> Array<decltype(generator()), N> {
     Array<decltype(generator()), N> array{};
-    generate(array.begin(), array.end(), generator);
+    std::generate(array.begin(), array.end(), generator);
     return array;
 }
 
@@ -111,8 +111,8 @@ USE_CONSTEXPR_ARRAY_HELPERS auto generateArray(G generator)
 template <class T, size_t N, class U>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> copyAs(const Array<U, N> &src) {
     Array<T, N> dest{};
-    for (size_t i = 0; i < N; ++i)
-        dest[i] = src[i];
+    std::transform(std::begin(src), std::end(src), std::begin(dest),
+                   [](const U &src) { return T(src); });
     return dest;
 }
 
@@ -155,8 +155,8 @@ USE_CONSTEXPR_ARRAY_HELPERS Array<T, N> fillArray(Args... args) {
  */
 template <class T, size_t N, class U, class V = U>
 USE_CONSTEXPR_ARRAY_HELPERS Array<T, N>
-generateIncrementalArray(U start = 0, V increment = 1) {
-    Incrementor<U, V> g(start, increment);
+generateIncrementalArray(U start = 0, V increment = V(1)) {
+    detail::Incrementor<U, V> g(start, increment);
     return generateArray<T, N>(g);
 }
 
@@ -260,3 +260,5 @@ std::enable_if_t<std::is_arithmetic<T>::value, Print &>
 operator<<(Print &os, const AH::Array<T, N> &a) {
     return os << a.slice();
 }
+
+AH_DIAGNOSTIC_POP()

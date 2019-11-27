@@ -1,6 +1,8 @@
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include "ExtendedInputOutput.hpp"
 #include "ExtendedIOElement.hpp"
-#include <Arduino.h>
 #include <AH/Error/Error.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -95,3 +97,5 @@ analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
 } // namespace ExtIO
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

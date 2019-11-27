@@ -2,6 +2,9 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include "ExtendedIOElement.hpp"
 #include <AH/Containers/ArrayHelpers.hpp>
 
@@ -29,3 +32,5 @@ class StaticSizeExtendedIOElement : public ExtendedIOElement {
 };
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

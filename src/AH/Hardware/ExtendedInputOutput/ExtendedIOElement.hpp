@@ -2,6 +2,9 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <AH/Hardware/Hardware-Types.hpp>
 #include <AH/Containers/LinkedList.hpp>
 
@@ -195,3 +198,5 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
 };
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

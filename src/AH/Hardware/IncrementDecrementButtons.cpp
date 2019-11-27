@@ -1,5 +1,7 @@
 #include "IncrementDecrementButtons.hpp"
 
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 BEGIN_AH_NAMESPACE
 
 IncrementDecrementButtons::State
@@ -68,3 +70,5 @@ IncrementDecrementButtons::updateImplementation() {
 }
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

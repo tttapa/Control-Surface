@@ -2,8 +2,14 @@
 
 #pragma once
 
-#include "ExtendedIOElement.hpp"
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
+AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <Arduino.h> // pin functions and constants
+AH_DIAGNOSTIC_POP()
+
+#include "ExtendedIOElement.hpp"
 
 #define EXT_PIN(x) (x + NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
 
@@ -78,3 +84,5 @@ extern analog_t analogRead(int pin);
 }
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

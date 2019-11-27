@@ -1,5 +1,9 @@
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <AH/STL/type_traits>
 #include <AH/STL/utility>
 
@@ -67,3 +71,5 @@ UniquePtr<T> MakeUnique(Args &&... args) {
 /// @}
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

@@ -2,6 +2,10 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <AH/Debug/Debug.hpp>
 #include <AH/Math/MinMaxFix.hpp>
 #include <stdlib.h>
@@ -304,3 +308,5 @@ class DoublyLinkable {
 };
 
 /// @}
+
+AH_DIAGNOSTIC_POP()

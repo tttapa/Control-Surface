@@ -1,7 +1,9 @@
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include "ExtendedIOElement.hpp"
 #include <AH/Error/Error.hpp>
 #include <AH/STL/type_traits> // is_unsigned
-#include <Arduino.h>
 
 BEGIN_AH_NAMESPACE
 
@@ -55,3 +57,5 @@ DoublyLinkedList<ExtendedIOElement> ExtendedIOElement::elements;
 pin_t ExtendedIOElement::offset = NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS;
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

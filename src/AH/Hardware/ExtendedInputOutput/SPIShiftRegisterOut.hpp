@@ -2,9 +2,15 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include "ShiftRegisterOutBase.hpp"
-#include <Arduino.h> // MSBFIRST, SS
 #include <AH/Containers/BitArray.hpp>
+
+AH_DIAGNOSTIC_EXTERNAL_HEADER()
+#include <Arduino.h> // MSBFIRST, SS
+AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE
 
@@ -64,3 +70,5 @@ class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
 END_AH_NAMESPACE
 
 #include "SPIShiftRegisterOut.ipp"
+
+AH_DIAGNOSTIC_POP()

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <stdint.h>
 
 /// @addtogroup    AH_Filters
@@ -70,3 +73,5 @@ class Hysteresis {
 };
 
 /// @}
+
+AH_DIAGNOSTIC_POP()

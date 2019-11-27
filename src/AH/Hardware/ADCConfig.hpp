@@ -8,7 +8,12 @@
  * @see     ADC_BITS
  */
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
+AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <Arduino.h>
+AH_DIAGNOSTIC_POP()
 
 #if defined(ADC_RESOLUTION)
 #define HAS_ANALOG_READ_RESOLUTION 1
@@ -66,3 +71,5 @@
 #define HAS_ANALOG_READ_RESOLUTION 0
 
 #endif
+
+AH_DIAGNOSTIC_POP()

@@ -5,7 +5,12 @@
 #ifndef PrintStream_h
 #define PrintStream_h
 
-#include <Arduino.h>
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
+AH_DIAGNOSTIC_EXTERNAL_HEADER()
+#include <Arduino.h> // Print
+AH_DIAGNOSTIC_POP()
 
 /// @addtogroup  AH_PrintStream
 /// @{
@@ -96,5 +101,7 @@ inline std::ostream &operator<<(std::ostream &os,
 }
 
 #endif
+
+AH_DIAGNOSTIC_POP()
 
 #endif // PrintStream_h

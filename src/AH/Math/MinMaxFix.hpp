@@ -1,6 +1,12 @@
 #pragma once
 
-#include <Arduino.h>
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
+AH_DIAGNOSTIC_EXTERNAL_HEADER()
+#include <Arduino.h> // min max
+AH_DIAGNOSTIC_POP()
+
 #include <AH/Settings/NamespaceSettings.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -26,3 +32,5 @@ constexpr auto max(const T &a, const U &b) -> decltype(a < b ? b : a) {
 }
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

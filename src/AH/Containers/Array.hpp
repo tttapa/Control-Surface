@@ -2,9 +2,13 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <AH/Error/Error.hpp>
-#include <AH/STL/type_traits> // conditional
 #include <AH/STL/iterator>
+#include <AH/STL/type_traits> // conditional
 #include <stddef.h>           // size_t
 
 BEGIN_AH_NAMESPACE
@@ -493,8 +497,7 @@ Array<T1, N1> &operator/=(Array<T1, N1> &a, T2 b) {
 
 /// -Slice
 template <class T, size_t N, bool Reverse, bool Const>
-Array<decltype(-T{}), N>
-operator-(ArraySlice<T, N, Reverse, Const> a) {
+Array<decltype(-T{}), N> operator-(ArraySlice<T, N, Reverse, Const> a) {
     Array<decltype(-T{}), N> result = {};
     for (size_t i = 0; i < N; ++i)
         result[i] = -a[i];
@@ -516,3 +519,5 @@ using Array2D = Array<Array<T, nb_cols>, nb_rows>;
 /// @}
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()
