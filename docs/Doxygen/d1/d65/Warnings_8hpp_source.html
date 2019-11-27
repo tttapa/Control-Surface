@@ -80,22 +80,22 @@ $(function() {
 <div class="contents">
 <a href="../../d1/d65/Warnings_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#ifdef __GNUC__</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#if defined(__GNUC__) &amp;&amp; !defined(__clang__)</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_WERROR                                                   \</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_WERROR()                                                 \</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">    _Pragma(&quot;GCC diagnostic push&quot;) _Pragma(&quot;GCC diagnostic error \&quot;-Wall\&quot;&quot;)   \</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">        _Pragma(&quot;GCC diagnostic error \&quot;-Wextra\&quot;&quot;)                            \</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">            _Pragma(&quot;GCC diagnostic ignored \&quot;-Wc++0x-compat\&quot;&quot;)</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_POP _Pragma(&quot;GCC diagnostic pop&quot;)</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_EXTERNAL_HEADER                                          \</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    _Pragma(&quot;GCC diagnostic ignored \&quot;-Wunused-parameter\&quot;&quot;)</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#warning &quot;Compiler is not GCC, -Werror not enabled&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a771cc2342ac82150821566443a3c0160">   16</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_WERROR</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a76cbff6dfc5304a7ccb72380afb3fd13">   17</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_POP</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a3a0cae69447cc44576ccb703f17dfdfd">   18</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_EXTERNAL_HEADER</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_POP() _Pragma(&quot;GCC diagnostic pop&quot;)</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_EXTERNAL_HEADER()                                        \</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    _Pragma(&quot;GCC diagnostic ignored \&quot;-Wsuggest-override\&quot;&quot;)                   \</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">        _Pragma(&quot;GCC diagnostic ignored \&quot;-Wunused-parameter\&quot;&quot;)</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a9f2deeea1dd06b45ebc381da1633c7ee">   16</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_WERROR()</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a4f088fb95f1d6dc4279357ca2a562cbe">   17</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_POP()</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a44dd04a1d1f97866e5b01c548f35fe5e">   18</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_EXTERNAL_HEADER()</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->

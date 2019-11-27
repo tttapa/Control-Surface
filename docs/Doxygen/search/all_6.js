@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['generate_197',['generate',['../d5/db6/ArrayHelpers_8hpp.html#a0e8e41fee2969dc39cf8d7caedf27d71',1,'ArrayHelpers.hpp']]],
   ['generatearray_198',['generateArray',['../da/de8/group__AH__Containers.html#gabd08306949ede9909fb0f3aca9d0d74a',1,'generateArray(G generator):&#160;ArrayHelpers.hpp'],['../da/de8/group__AH__Containers.html#ga4e07b33e52979d678830f6f78218607e',1,'generateArray(G generator) -&gt; Array&lt; decltype(generator()), N &gt;:&#160;ArrayHelpers.hpp']]],
-  ['generateincrementalarray_199',['generateIncrementalArray',['../da/de8/group__AH__Containers.html#gac4ea74cb15e2302d0e2e05c8885b69c6',1,'ArrayHelpers.hpp']]],
+  ['generateincrementalarray_199',['generateIncrementalArray',['../da/de8/group__AH__Containers.html#ga916ecc658d4308b2b4aa876a03bc5f2f',1,'ArrayHelpers.hpp']]],
   ['get_200',['get',['../db/de9/classBitArray.html#ae70a67b38aba607d4301cca64a2f9640',1,'BitArray::get()'],['../d0/ddd/classUniquePtr.html#acc5b0ba6dfd6a155fe8d378d24dbf189',1,'UniquePtr::get()'],['../d0/ddd/classUniquePtr.html#ad2e373779a2c8a44ad9321d9b99fb304',1,'UniquePtr::get() const']]],
   ['getall_201',['getAll',['../de/d4e/classExtendedIOElement.html#a3151d5bf08e6b32231cdd58ed2f39aee',1,'ExtendedIOElement']]],
   ['getbufferbit_202',['getBufferBit',['../db/de9/classBitArray.html#a873e212ea025f807da031667ec38508d',1,'BitArray']]],
