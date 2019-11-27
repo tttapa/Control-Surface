@@ -334,7 +334,6 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
 
 TEST(NoteValueLED, NoteOnNoteOff) {
     NoteValueLED mnl = {2, {0x3C, CHANNEL_5}};
-    mnl.begin();
 
     ::testing::InSequence seq;
 

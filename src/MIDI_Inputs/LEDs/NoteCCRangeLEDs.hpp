@@ -4,31 +4,23 @@
 BEGIN_CS_NAMESPACE
 
 template <uint8_t NumLEDs>
-class NoteCCLED {
+class NoteCCLED : public SimpleNoteCCValueCallback {
   public:
     NoteCCLED(const PinList<NumLEDs> &ledPins) : ledPins(ledPins) {}
 
     void setThreshold(uint8_t threshold) { this->threshold = threshold; }
     uint8_t getThreshold() const { return this->threshold; }
 
-    template <class T>
-    void begin(const T &t) {
+    void begin(const INoteCCValue &t) override {
         for (pin_t pin : ledPins)
             ExtIO::pinMode(pin, OUTPUT);
-        update(t);
+        updateAll(t);
     }
 
-    template <class T>
-    void update(const T &t, uint8_t index) {
+    void update(const INoteCCValue &t, uint8_t index) override {
         uint8_t value = t.getValue(index);
         bool state = value > threshold;
         ExtIO::digitalWrite(ledPins[index], state);
-    }
-
-    template <class T>
-    void update(const T &t) {
-        for (uint8_t index = 0; index < t.length(); ++index)
-            update(t, index);
     }
 
   private:

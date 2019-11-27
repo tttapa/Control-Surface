@@ -35,7 +35,7 @@ BEGIN_CS_NAMESPACE
 /// Callback for Note or CC range or value input that displays the value to a
 /// FastLED strip.
 template <class ColorMapper>
-class NoteCCFastLED {
+class NoteCCFastLED : public SimpleNoteCCValueCallback {
   public:
     NoteCCFastLED(CRGB *ledcolors, const ColorMapper &colormapper)
         : ledcolors(ledcolors), colormapper(colormapper) {}
@@ -49,27 +49,16 @@ class NoteCCFastLED {
     /// Get the maximum brightness of the LEDs.
     uint8_t getBrightness() const { return this->brightness; }
 
-    template <class T>
-    void begin(const T &t) {
-        update(t);
+    void begin(const INoteCCValue &t) override {
+        updateAll(t);
     }
 
-    template <class T>
-    void update(const T &t, uint8_t index) {
+    void update(const INoteCCValue &t, uint8_t index) override {
         uint8_t value = t.getValue(index);
         ledcolors[index] =
             CRGB{colormapper(value, index)}.nscale8_video(brightness);
     }
-
-    template <class T>
-    void update(const T &t) {
-        for (uint8_t index = 0; index < t.length(); ++index) {
-            uint8_t value = t.getValue(index);
-            ledcolors[index] =
-                CRGB{colormapper(value, index)}.nscale8_video(brightness);
-        }
-    }
-
+    
   private:
     CRGB *ledcolors;
     uint8_t brightness = 255;

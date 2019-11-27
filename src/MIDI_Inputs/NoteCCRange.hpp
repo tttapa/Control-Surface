@@ -6,32 +6,46 @@
 
 BEGIN_CS_NAMESPACE
 
+class INoteCCValue {
+  protected:
+    INoteCCValue(uint8_t rangeLength) : rangeLength{rangeLength} {}
+
+  public:
+    uint8_t length() const { return rangeLength; }
+    virtual uint8_t getValue(uint8_t index) const = 0;
+    uint8_t getValue() const { return getValue(0); }
+
+  private:
+    uint8_t rangeLength;
+};
+
 class NoteCCRangeEmptyCallback {
   public:
-    template <class T>
-    void begin(const T &) {}
-    template <class T>
-    void update(const T &, uint8_t) {}
-    template <class T>
-    void update(const T &) {}
+    void begin(const INoteCCValue &) {}
+    void update(const INoteCCValue &, uint8_t) {}
+    void updateAll(const INoteCCValue &) {}
+};
+
+struct SimpleNoteCCValueCallback {
+  protected:
+    SimpleNoteCCValueCallback() = default;
+
+  public:
+    virtual void begin(const INoteCCValue &) {}
+    virtual void update(const INoteCCValue &, uint8_t) = 0;
+    virtual void updateAll(const INoteCCValue &noteccval) {
+        for (uint8_t i = 0; i < noteccval.length(); ++i)
+            update(noteccval, i);
+    }
 };
 
 // -------------------------------------------------------------------------- //
-
-class INoteCCValue {
-  protected:
-    INoteCCValue() = default;
-
-  public:
-    virtual uint8_t getValue(uint8_t index) const = 0;
-    uint8_t getValue() const { return getValue(0); }
-};
 
 template <class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callback>
 class NoteCCRange : public MIDIInput_t, public INoteCCValue {
   public:
     NoteCCRange(MIDICNChannelAddress address, const Callback &callback)
-        : MIDIInput_t{address}, callback(callback) {}
+        : MIDIInput_t{address}, INoteCCValue{RangeLen}, callback(callback) {}
 
     /// @todo   check index bounds
     uint8_t getValue(uint8_t index) const override {
@@ -44,7 +58,7 @@ class NoteCCRange : public MIDIInput_t, public INoteCCValue {
     /// Reset all values to zero
     void reset() override {
         values = {{}};
-        callback.update(*this);
+        callback.updateAll(*this);
     }
 
   private:
@@ -180,7 +194,7 @@ class GenericNoteCCRange
                                                           this->address);
     }
 
-    void onBankSettingChange() override { this->callback.update(*this); }
+    void onBankSettingChange() override { this->callback.updateAll(*this); }
 };
 
 template <uint8_t RangeLen, uint8_t NumBanks>
