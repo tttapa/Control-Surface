@@ -1091,6 +1091,15 @@
  */
 
 /**
+ * @example   "Encoder-Selector-Bank.ino"
+ * 
+ * Encoder-Selector-Bank
+ * =====================
+ *
+ * https://github.com/tttapa/Control-Surface/issues/66
+ */
+
+/**
  * @example   "MIDI-Input-Callback.ino"
  * 
  * MIDI-Input-Callback
