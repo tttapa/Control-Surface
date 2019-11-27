@@ -52,9 +52,12 @@ TEST(Array, equality) {
 }
 
 TEST(Array, sliceEquality) {
-    auto a = Array<int, 5>{1, 2, 3, 4, 5}.slice();
-    auto b = Array<int, 5>{1, 2, 3, 4, 5}.slice();
-    auto c = Array<int, 5>{1, 2, 3, 4, 6}.slice();
+    Array<int, 5> aa = {1, 2, 3, 4, 5};
+    auto a = aa.slice();
+    Array<int, 5> ba = {1, 2, 3, 4, 5};
+    auto b = ba.slice();
+    Array<int, 5> ca = {1, 2, 3, 4, 6};
+    auto c = ca.slice();
     EXPECT_EQ(a, a);
     EXPECT_TRUE(a == a);
     EXPECT_FALSE(a != a);
