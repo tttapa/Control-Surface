@@ -1,8 +1,8 @@
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
-#include "ExtendedInputOutput.hpp"
 #include "ExtendedIOElement.hpp"
+#include "ExtendedInputOutput.hpp"
 #include <AH/Error/Error.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -97,7 +97,9 @@ analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
 void analogWrite(pin_t pin, analog_t val) {
     // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+#ifndef ESP32
         ::analogWrite(pin, val);
+#endif
     } else {
         ExtendedIOElement &el = getIOElementOfPin(pin);
         el.analogWrite(pin - el.getStart(), val);
