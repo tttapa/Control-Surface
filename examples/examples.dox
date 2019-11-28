@@ -7,7 +7,7 @@
  * This examples shows how to filter an analog input, so you can get the 
  * position of a knob or fader without noise.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -48,7 +48,7 @@
  * controls, etc. It can control almost any knob in your DAW software. 
  * This example shows how to define multiple potentiometers using an array.
  *
- * @boards  AVR, AVR USB, Teensy 3.x
+ * @boards  AVR, AVR USB, Due, Teensy 3.x
  * 
  * Connections
  * -----------
@@ -90,7 +90,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc. It can control almost any knob in your DAW software.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -129,7 +129,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc. It can control almost any knob in your DAW software.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -168,7 +168,7 @@
  * used for triggering samples, mute/solo/rec buttons, play/pause/stop buttons, 
  * etc. It can control almost any push button control in your DAW software.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -203,7 +203,7 @@
  * 
  * This is an example that demonstrates the use of MIDI Control Change Buttons.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -242,7 +242,7 @@
  * You can compare it to a rotary encoder, but with two buttons instead of an 
  * encoder.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  *
  * Connections
  * -----------
@@ -330,7 +330,7 @@
  * This is the first example used in the 'Getting Started' guide:
  * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  *
  *  Written by PieterP, 2018-08-29  
  *  https://github.com/tttapa/Control-Surface
@@ -345,7 +345,7 @@
  * This is the second example used in the 'Getting Started' guide:
  * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * @htmlonly
  * <iframe width="560" height="315"
@@ -825,7 +825,7 @@
  * 
  * This example demonstrates how to use the MIDI interface for debugging.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -864,7 +864,7 @@
  *
  * Example showing how to send and receive MIDI System Exclusive messages.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  */
 
 /**
@@ -877,7 +877,7 @@
  * so you can send the MIDI output over both MIDI USB and 5-pin DIN MIDI, for 
  * example. MIDI input is received from all interfaces as well.
  *
- * @boards  AVR USB, Teensy 3.x
+ * @boards  AVR USB, Due, Teensy 3.x
  * 
  * Connections
  * -----------
@@ -1033,7 +1033,7 @@
  * This example demonstrates the use of addressable LEDs that respond to 
  * incoming  MIDI note events.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * @note    You might lose incoming MIDI data while the LED strip is being 
  *          updated. To avoid this, don't use an Arduino UNO.  
@@ -1074,7 +1074,7 @@
  * incoming  MIDI note events. This example uses a custom color mapper to
  * get a rainbow effect across the LED strip.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * @note    You might lose incoming MIDI data while the LED strip is being 
  *          updated. To avoid this, don't use an Arduino UNO.  
@@ -1114,7 +1114,7 @@
  * This example demonstrates the use of LEDs that respond to incoming  MIDI
  * note events.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -1140,6 +1140,47 @@
  */
 
 /**
+ * @example   "3.NoteLEDBar.ino"
+ * 
+ * 3.NoteLEDBar
+ * ============
+ *
+ * This example demonstrates the use of LED bar graphs that respond to incoming 
+ * MIDI note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.
+ * 
+ * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SS:   74HC595 ST_CP
+ *   - MOSI: 74HC595 DS
+ *   - SCK:  74HC595 SH_CP
+ * 
+ * Connect eight LEDs (and series resistors) between the outputs of the shift
+ * register and ground.
+ * 
+ * Remember to connect the enable pin of the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
+ * 
+ * Behavior
+ * --------
+ * 
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the LED bar
+ * display is turned on, the higher the velocity (the harder you press the key),
+ * the more LEDs will turn on.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Route the MIDI output of a MIDI keyboard or from an audio workstation to 
+ * the Arduino's MIDI input.
+ * 
+ * Written by PieterP, 2019-11-25  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "2.Note-Range-LEDs.ino"
  * 
  * 2.Note-Range-LEDs
@@ -1148,7 +1189,7 @@
  * This example demonstrates the use of LEDs that respond to incoming  MIDI
  * note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -1190,12 +1231,12 @@
  * Mackie-Control-Universal-Reverse-Engineering
  * ============================================
  *
- * Sketch that reads the MIDI input from the USB MIDI Interface and prints it to the
- * Serial monitor, including the Mackie Control Universal note names.
+ * Sketch that reads the MIDI input from the USB MIDI Interface and prints it to
+ * the Serial monitor, including the Mackie Control Universal note names.
  * 
  * This is useful to discover what kinds of messages your DAW is sending.
  * 
- * @boards  AVR USB, Teensy 3.x
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  */
 
 /**
@@ -1217,6 +1258,15 @@
  */
 
 /**
+ * @example   "Encoder-Selector-Bank.ino"
+ * 
+ * Encoder-Selector-Bank
+ * =====================
+ *
+ * https://github.com/tttapa/Control-Surface/issues/66
+ */
+
+/**
  * @example   "MIDI-Input-Callback.ino"
  * 
  * MIDI-Input-Callback
@@ -1225,7 +1275,7 @@
  * This is an example on how to attach your own callbacks for receiving MIDI 
  * input data.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -1427,7 +1477,7 @@
  * This is an example that demonstrates the use a Transposer to transpose the
  * note events sent out by NoteButton%s.
  *
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------

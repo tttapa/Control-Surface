@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - d0de365697a9d6a8331c32c0388c9e38aa541a32 - src/MIDI_Inputs/MIDIInputElement.hpp</title>
+  <title>LCOV - 1c27400155b34adca37cca4d6a53c6d9f2a23f36 - src/MIDI_Inputs/MIDIInputElement.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">d0de365697a9d6a8331c32c0388c9e38aa541a32</td>
+            <td class="headerValue">1c27400155b34adca37cca4d6a53c6d9f2a23f36</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">15</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-28 01:24:59</td>
+            <td class="headerValue">2019-11-28 02:04:22</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -91,10 +91,10 @@
 <a name="21"><span class="lineNum">      21 </span>            :      * @param   address</a>
 <a name="22"><span class="lineNum">      22 </span>            :      *          The MIDI address to listen to.</a>
 <a name="23"><span class="lineNum">      23 </span>            :      */</a>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">         42 :     MIDIInputElement(const MIDICNChannelAddress &amp;address) : address(address) {}</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">         43 :     MIDIInputElement(const MIDICNChannelAddress &amp;address) : address(address) {}</span></a>
 <a name="25"><span class="lineNum">      25 </span>            : </a>
 <a name="26"><span class="lineNum">      26 </span>            :   public:</a>
-<a name="27"><span class="lineNum">      27 </span><span class="lineCov">         42 :     virtual ~MIDIInputElement() = default;</span></a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">         43 :     virtual ~MIDIInputElement() = default;</span></a>
 <a name="28"><span class="lineNum">      28 </span>            : </a>
 <a name="29"><span class="lineNum">      29 </span>            :     /// Initialize the input element.</a>
 <a name="30"><span class="lineNum">      30 </span><span class="lineNoCov">          0 :     virtual void begin() {}</span></a>
@@ -106,16 +106,16 @@
 <a name="36"><span class="lineNum">      36 </span><span class="lineNoCov">          0 :     virtual void update() {}</span></a>
 <a name="37"><span class="lineNum">      37 </span>            : </a>
 <a name="38"><span class="lineNum">      38 </span>            :     /// Receive a new MIDI message and update the internal state.</a>
-<a name="39"><span class="lineNum">      39 </span><span class="lineCov">        123 :     bool updateWith(const ChannelMessageMatcher &amp;midimsg) {</span></a>
-<a name="40"><span class="lineNum">      40 </span><span class="lineCov">        123 :         MIDICNChannelAddress target = getTarget(midimsg);</span></a>
-<a name="41"><span class="lineNum">      41 </span><span class="lineCov">        123 :         if (!this-&gt;match(target))</span></a>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">        125 :     bool updateWith(const ChannelMessageMatcher &amp;midimsg) {</span></a>
+<a name="40"><span class="lineNum">      40 </span><span class="lineCov">        125 :         MIDICNChannelAddress target = getTarget(midimsg);</span></a>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">        125 :         if (!this-&gt;match(target))</span></a>
 <a name="42"><span class="lineNum">      42 </span><span class="lineCov">         12 :             return false;</span></a>
-<a name="43"><span class="lineNum">      43 </span><span class="lineCov">        111 :         DEBUGFN(F(&quot;MIDI message matches&quot;));</span></a>
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">        111 :         if (!updateImpl(midimsg, target))</span></a>
+<a name="43"><span class="lineNum">      43 </span><span class="lineCov">        113 :         DEBUGFN(F(&quot;MIDI message matches&quot;));</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">        113 :         if (!updateImpl(midimsg, target))</span></a>
 <a name="45"><span class="lineNum">      45 </span><span class="lineNoCov">          0 :             return false;</span></a>
-<a name="46"><span class="lineNum">      46 </span><span class="lineCov">        111 :         DEBUGFN(F(&quot;Updated&quot;));</span></a>
-<a name="47"><span class="lineNum">      47 </span><span class="lineCov">        111 :         return true;</span></a>
-<a name="48"><span class="lineNum">      48 </span><span class="lineCov">        123 :     }</span></a>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">        113 :         DEBUGFN(F(&quot;Updated&quot;));</span></a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">        113 :         return true;</span></a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">        125 :     }</span></a>
 <a name="49"><span class="lineNum">      49 </span>            : </a>
 <a name="50"><span class="lineNum">      50 </span>            :   private:</a>
 <a name="51"><span class="lineNum">      51 </span>            :     /// Update the internal state with the new MIDI message.</a>
@@ -131,8 +131,8 @@
 <a name="61"><span class="lineNum">      61 </span>            :      *          channel and the cable number.</a>
 <a name="62"><span class="lineNum">      62 </span>            :      */</a>
 <a name="63"><span class="lineNum">      63 </span>            :     virtual MIDICNChannelAddress</a>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">        104 :     getTarget(const ChannelMessageMatcher &amp;midimsg) const {</span></a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">        104 :         return {int8_t(midimsg.data1), Channel(midimsg.channel), midimsg.CN};</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">        106 :     getTarget(const ChannelMessageMatcher &amp;midimsg) const {</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">        106 :         return {int8_t(midimsg.data1), Channel(midimsg.channel), midimsg.CN};</span></a>
 <a name="66"><span class="lineNum">      66 </span>            :     }</a>
 <a name="67"><span class="lineNum">      67 </span>            : </a>
 <a name="68"><span class="lineNum">      68 </span>            :     /**</a>

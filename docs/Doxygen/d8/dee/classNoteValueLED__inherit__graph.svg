@@ -142,21 +142,22 @@
 <!-- Node7 -->
 <g id="node7" class="node"><title>Node7</title>
 <g id="a_node7"><a xlink:href="../../d7/dab/classINoteCCValue.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="218,-480.5 218,-559.5 313,-559.5 313,-480.5 218,-480.5"/>
-<text text-anchor="middle" x="265.5" y="-547.5" font-family="Helvetica,sans-Serif" font-size="10.00">INoteCCValue</text>
-<polyline fill="none" stroke="black" points="218,-540.5 313,-540.5 "/>
-<text text-anchor="middle" x="265.5" y="-528.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="218,-521.5 313,-521.5 "/>
-<text text-anchor="start" x="226" y="-509.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
-<text text-anchor="start" x="226" y="-498.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
-<text text-anchor="start" x="226" y="-487.5" font-family="Helvetica,sans-Serif" font-size="10.00"># INoteCCValue()</text>
+<polygon fill="white" stroke="black" points="218,-475 218,-565 313,-565 313,-475 218,-475"/>
+<text text-anchor="middle" x="265.5" y="-553" font-family="Helvetica,sans-Serif" font-size="10.00">INoteCCValue</text>
+<polyline fill="none" stroke="black" points="218,-546 313,-546 "/>
+<text text-anchor="start" x="226" y="-534" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; rangeLength</text>
+<polyline fill="none" stroke="black" points="218,-527 313,-527 "/>
+<text text-anchor="start" x="226" y="-515" font-family="Helvetica,sans-Serif" font-size="10.00">+ length()</text>
+<text text-anchor="start" x="226" y="-504" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
+<text text-anchor="start" x="226" y="-493" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
+<text text-anchor="start" x="226" y="-482" font-family="Helvetica,sans-Serif" font-size="10.00"># INoteCCValue()</text>
 </a>
 </g>
 </g>
 <!-- Node7&#45;&gt;Node3 -->
 <g id="edge6" class="edge"><title>Node7&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M248.774,-470.667C243.594,-455.699 237.686,-438.627 231.768,-421.524"/>
-<polygon fill="none" stroke="midnightblue" points="245.487,-471.872 252.065,-480.178 252.103,-469.583 245.487,-471.872"/>
+<path fill="none" stroke="midnightblue" d="M246.926,-465.327C242.246,-451.803 237.071,-436.849 231.884,-421.861"/>
+<polygon fill="none" stroke="midnightblue" points="243.662,-466.596 250.239,-474.902 250.277,-464.307 243.662,-466.596"/>
 </g>
 </g>
 </svg>

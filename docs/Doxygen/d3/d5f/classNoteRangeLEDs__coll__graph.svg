@@ -12,65 +12,65 @@
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#bfbfbf" stroke="black" points="346.5,-0.5 346.5,-57.5 499.5,-57.5 499.5,-0.5 346.5,-0.5"/>
-<text text-anchor="middle" x="423" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">NoteRangeLEDs&lt; RangeLen &gt;</text>
-<polyline fill="none" stroke="black" points="346.5,-38.5 499.5,-38.5 "/>
-<text text-anchor="middle" x="423" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="346.5,-19.5 499.5,-19.5 "/>
-<text text-anchor="start" x="354.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ NoteRangeLEDs()</text>
+<polygon fill="#bfbfbf" stroke="black" points="335.5,-0.5 335.5,-57.5 488.5,-57.5 488.5,-0.5 335.5,-0.5"/>
+<text text-anchor="middle" x="412" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">NoteRangeLEDs&lt; RangeLen &gt;</text>
+<polyline fill="none" stroke="black" points="335.5,-38.5 488.5,-38.5 "/>
+<text text-anchor="middle" x="412" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polyline fill="none" stroke="black" points="335.5,-19.5 488.5,-19.5 "/>
+<text text-anchor="start" x="343.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ NoteRangeLEDs()</text>
 </a>
 </g>
 </g>
 <!-- Node2 -->
 <g id="node2" class="node"><title>Node2</title>
 <g id="a_node2"><a xlink:href="../../d5/d80/classGenericNoteCCRange.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="357.5,-95.5 357.5,-196.5 488.5,-196.5 488.5,-95.5 357.5,-95.5"/>
-<text text-anchor="start" x="365.5" y="-184.5" font-family="Helvetica,sans-Serif" font-size="10.00">GenericNoteCCRange</text>
-<text text-anchor="start" x="365.5" y="-173.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; MIDIInputElementNote,</text>
-<text text-anchor="start" x="365.5" y="-162.5" font-family="Helvetica,sans-Serif" font-size="10.00"> RangeLen, NoteCCLED&lt;</text>
-<text text-anchor="middle" x="423" y="-151.5" font-family="Helvetica,sans-Serif" font-size="10.00"> RangeLen &gt; &gt;</text>
-<polyline fill="none" stroke="black" points="357.5,-144.5 488.5,-144.5 "/>
-<text text-anchor="middle" x="423" y="-132.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="357.5,-125.5 488.5,-125.5 "/>
-<text text-anchor="start" x="365.5" y="-113.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ GenericNoteCCRange()</text>
-<text text-anchor="start" x="365.5" y="-102.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; match()</text>
+<polygon fill="white" stroke="black" points="346.5,-95.5 346.5,-196.5 477.5,-196.5 477.5,-95.5 346.5,-95.5"/>
+<text text-anchor="start" x="354.5" y="-184.5" font-family="Helvetica,sans-Serif" font-size="10.00">GenericNoteCCRange</text>
+<text text-anchor="start" x="354.5" y="-173.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; MIDIInputElementNote,</text>
+<text text-anchor="start" x="354.5" y="-162.5" font-family="Helvetica,sans-Serif" font-size="10.00"> RangeLen, NoteCCLED&lt;</text>
+<text text-anchor="middle" x="412" y="-151.5" font-family="Helvetica,sans-Serif" font-size="10.00"> RangeLen &gt; &gt;</text>
+<polyline fill="none" stroke="black" points="346.5,-144.5 477.5,-144.5 "/>
+<text text-anchor="middle" x="412" y="-132.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polyline fill="none" stroke="black" points="346.5,-125.5 477.5,-125.5 "/>
+<text text-anchor="start" x="354.5" y="-113.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ GenericNoteCCRange()</text>
+<text text-anchor="start" x="354.5" y="-102.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; match()</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node1 -->
 <g id="edge1" class="edge"><title>Node2&#45;&gt;Node1</title>
-<path fill="none" stroke="midnightblue" d="M423,-85.2151C423,-75.5929 423,-66.0561 423,-57.6848"/>
-<polygon fill="none" stroke="midnightblue" points="419.5,-85.2281 423,-95.2282 426.5,-85.2282 419.5,-85.2281"/>
+<path fill="none" stroke="midnightblue" d="M412,-85.2151C412,-75.5929 412,-66.0561 412,-57.6848"/>
+<polygon fill="none" stroke="midnightblue" points="408.5,-85.2281 412,-95.2282 415.5,-85.2282 408.5,-85.2281"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node"><title>Node3</title>
 <g id="a_node3"><a xlink:href="../../d2/df4/classNoteCCRange.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="338,-273 338,-473 508,-473 508,-273 338,-273"/>
-<text text-anchor="start" x="346" y="-461" font-family="Helvetica,sans-Serif" font-size="10.00">NoteCCRange&lt; MIDIInputElement</text>
-<text text-anchor="start" x="346" y="-450" font-family="Helvetica,sans-Serif" font-size="10.00">Note, RangeLen, 1, NoteCCLED</text>
-<text text-anchor="middle" x="423" y="-439" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; RangeLen &gt; &gt;</text>
-<polyline fill="none" stroke="black" points="338,-432 508,-432 "/>
-<text text-anchor="middle" x="423" y="-420" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="338,-413 508,-413 "/>
-<text text-anchor="start" x="346" y="-401" font-family="Helvetica,sans-Serif" font-size="10.00">+ NoteCCRange()</text>
-<text text-anchor="start" x="346" y="-390" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
-<text text-anchor="start" x="346" y="-379" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
-<text text-anchor="start" x="346" y="-368" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
-<text text-anchor="start" x="346" y="-357" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
-<text text-anchor="start" x="346" y="-346" font-family="Helvetica,sans-Serif" font-size="10.00">+ reset()</text>
-<text text-anchor="start" x="346" y="-335" font-family="Helvetica,sans-Serif" font-size="10.00">+ length()</text>
-<text text-anchor="start" x="346" y="-324" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; updateImpl()</text>
-<text text-anchor="start" x="346" y="-313" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; getSelection()</text>
-<text text-anchor="start" x="346" y="-302" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; getBankIndex()</text>
-<text text-anchor="start" x="346" y="-291" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; getRangeIndex()</text>
-<text text-anchor="start" x="346" y="-280" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; getValueFromMIDIMessage()</text>
+<polygon fill="white" stroke="black" points="327,-273 327,-473 497,-473 497,-273 327,-273"/>
+<text text-anchor="start" x="335" y="-461" font-family="Helvetica,sans-Serif" font-size="10.00">NoteCCRange&lt; MIDIInputElement</text>
+<text text-anchor="start" x="335" y="-450" font-family="Helvetica,sans-Serif" font-size="10.00">Note, RangeLen, 1, NoteCCLED</text>
+<text text-anchor="middle" x="412" y="-439" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; RangeLen &gt; &gt;</text>
+<polyline fill="none" stroke="black" points="327,-432 497,-432 "/>
+<text text-anchor="middle" x="412" y="-420" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polyline fill="none" stroke="black" points="327,-413 497,-413 "/>
+<text text-anchor="start" x="335" y="-401" font-family="Helvetica,sans-Serif" font-size="10.00">+ NoteCCRange()</text>
+<text text-anchor="start" x="335" y="-390" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
+<text text-anchor="start" x="335" y="-379" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
+<text text-anchor="start" x="335" y="-368" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
+<text text-anchor="start" x="335" y="-357" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
+<text text-anchor="start" x="335" y="-346" font-family="Helvetica,sans-Serif" font-size="10.00">+ reset()</text>
+<text text-anchor="start" x="335" y="-335" font-family="Helvetica,sans-Serif" font-size="10.00">+ length()</text>
+<text text-anchor="start" x="335" y="-324" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; updateImpl()</text>
+<text text-anchor="start" x="335" y="-313" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; getSelection()</text>
+<text text-anchor="start" x="335" y="-302" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; getBankIndex()</text>
+<text text-anchor="start" x="335" y="-291" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; getRangeIndex()</text>
+<text text-anchor="start" x="335" y="-280" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; getValueFromMIDIMessage()</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node2 -->
 <g id="edge2" class="edge"><title>Node3&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M423,-262.734C423,-239.589 423,-216.261 423,-196.673"/>
-<polygon fill="none" stroke="midnightblue" points="419.5,-262.984 423,-272.984 426.5,-262.984 419.5,-262.984"/>
+<path fill="none" stroke="midnightblue" d="M412,-262.734C412,-239.589 412,-216.261 412,-196.673"/>
+<polygon fill="none" stroke="midnightblue" points="408.5,-262.984 412,-272.984 415.5,-262.984 408.5,-262.984"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node"><title>Node4</title>
@@ -92,7 +92,7 @@
 </g>
 <!-- Node4&#45;&gt;Node3 -->
 <g id="edge3" class="edge"><title>Node4&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M233.393,-595.416C240.615,-586.817 247.948,-578.175 255,-570 277.614,-543.785 284.303,-538.143 307,-512 317.875,-499.474 329.219,-486.22 340.371,-473.075"/>
+<path fill="none" stroke="midnightblue" d="M233.393,-595.416C240.615,-586.817 247.948,-578.175 255,-570 277.614,-543.785 284.945,-538.687 307,-512 317.26,-499.585 327.818,-486.332 338.101,-473.134"/>
 <polygon fill="none" stroke="midnightblue" points="230.539,-593.373 226.803,-603.287 235.906,-597.867 230.539,-593.373"/>
 </g>
 <!-- Node7 -->
@@ -231,49 +231,69 @@
 <!-- Node9 -->
 <g id="node9" class="node"><title>Node9</title>
 <g id="a_node9"><a xlink:href="../../d7/dab/classINoteCCValue.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="264.5,-625.5 264.5,-704.5 359.5,-704.5 359.5,-625.5 264.5,-625.5"/>
-<text text-anchor="middle" x="312" y="-692.5" font-family="Helvetica,sans-Serif" font-size="10.00">INoteCCValue</text>
-<polyline fill="none" stroke="black" points="264.5,-685.5 359.5,-685.5 "/>
-<text text-anchor="middle" x="312" y="-673.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="264.5,-666.5 359.5,-666.5 "/>
-<text text-anchor="start" x="272.5" y="-654.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
-<text text-anchor="start" x="272.5" y="-643.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
-<text text-anchor="start" x="272.5" y="-632.5" font-family="Helvetica,sans-Serif" font-size="10.00"># INoteCCValue()</text>
+<polygon fill="white" stroke="black" points="264.5,-620 264.5,-710 359.5,-710 359.5,-620 264.5,-620"/>
+<text text-anchor="middle" x="312" y="-698" font-family="Helvetica,sans-Serif" font-size="10.00">INoteCCValue</text>
+<polyline fill="none" stroke="black" points="264.5,-691 359.5,-691 "/>
+<text text-anchor="start" x="272.5" y="-679" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; rangeLength</text>
+<polyline fill="none" stroke="black" points="264.5,-672 359.5,-672 "/>
+<text text-anchor="start" x="272.5" y="-660" font-family="Helvetica,sans-Serif" font-size="10.00">+ length()</text>
+<text text-anchor="start" x="272.5" y="-649" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
+<text text-anchor="start" x="272.5" y="-638" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
+<text text-anchor="start" x="272.5" y="-627" font-family="Helvetica,sans-Serif" font-size="10.00"># INoteCCValue()</text>
 </a>
 </g>
 </g>
 <!-- Node9&#45;&gt;Node3 -->
 <g id="edge10" class="edge"><title>Node9&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M330.361,-616.029C345.181,-577.31 366.531,-521.533 385,-473.28"/>
-<polygon fill="none" stroke="midnightblue" points="327.046,-614.9 326.74,-625.49 333.583,-617.402 327.046,-614.9"/>
+<path fill="none" stroke="midnightblue" d="M330.61,-610.03C343.836,-571.676 361.982,-519.054 377.783,-473.228"/>
+<polygon fill="none" stroke="midnightblue" points="327.139,-609.361 327.188,-619.955 333.757,-611.642 327.139,-609.361"/>
 </g>
 <!-- Node10 -->
 <g id="node10" class="node"><title>Node10</title>
 <g id="a_node10"><a xlink:href="../../d5/ddd/classNoteCCLED.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="378,-603.5 378,-726.5 512,-726.5 512,-603.5 378,-603.5"/>
-<text text-anchor="middle" x="445" y="-714.5" font-family="Helvetica,sans-Serif" font-size="10.00">NoteCCLED&lt; RangeLen &gt;</text>
-<polyline fill="none" stroke="black" points="378,-707.5 512,-707.5 "/>
-<text text-anchor="start" x="386" y="-695.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; ledPins</text>
-<text text-anchor="start" x="386" y="-684.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; threshold</text>
-<polyline fill="none" stroke="black" points="378,-677.5 512,-677.5 "/>
-<text text-anchor="start" x="386" y="-665.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ NoteCCLED()</text>
-<text text-anchor="start" x="386" y="-654.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ setThreshold()</text>
-<text text-anchor="start" x="386" y="-643.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getThreshold()</text>
-<text text-anchor="start" x="386" y="-632.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
-<text text-anchor="start" x="386" y="-621.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ update()</text>
-<text text-anchor="start" x="386" y="-610.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ update()</text>
+<polygon fill="white" stroke="black" points="378,-609 378,-721 512,-721 512,-609 378,-609"/>
+<text text-anchor="middle" x="445" y="-709" font-family="Helvetica,sans-Serif" font-size="10.00">NoteCCLED&lt; RangeLen &gt;</text>
+<polyline fill="none" stroke="black" points="378,-702 512,-702 "/>
+<text text-anchor="start" x="386" y="-690" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; ledPins</text>
+<text text-anchor="start" x="386" y="-679" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; threshold</text>
+<polyline fill="none" stroke="black" points="378,-672 512,-672 "/>
+<text text-anchor="start" x="386" y="-660" font-family="Helvetica,sans-Serif" font-size="10.00">+ NoteCCLED()</text>
+<text text-anchor="start" x="386" y="-649" font-family="Helvetica,sans-Serif" font-size="10.00">+ setThreshold()</text>
+<text text-anchor="start" x="386" y="-638" font-family="Helvetica,sans-Serif" font-size="10.00">+ getThreshold()</text>
+<text text-anchor="start" x="386" y="-627" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
+<text text-anchor="start" x="386" y="-616" font-family="Helvetica,sans-Serif" font-size="10.00">+ update()</text>
 </a>
 </g>
 </g>
 <!-- Node10&#45;&gt;Node3 -->
 <g id="edge11" class="edge"><title>Node10&#45;&gt;Node3</title>
-<path fill="none" stroke="#404040" d="M440.388,-603.206C437.796,-569.041 434.48,-525.33 431.44,-485.259"/>
-<polygon fill="none" stroke="#404040" points="431.436,-485.199 426.993,-479.519 430.528,-473.233 434.971,-478.914 431.436,-485.199"/>
-<text text-anchor="middle" x="459" y="-538.5" font-family="Helvetica,sans-Serif" font-size="10.00"> +callback</text>
+<path fill="none" stroke="#404040" d="M438.715,-608.771C434.741,-573.845 429.463,-527.465 424.649,-485.156"/>
+<polygon fill="none" stroke="#404040" points="424.628,-484.975 419.976,-479.466 423.271,-473.052 427.924,-478.561 424.628,-484.975"/>
+<text text-anchor="middle" x="455" y="-538.5" font-family="Helvetica,sans-Serif" font-size="10.00"> +callback</text>
 </g>
 <!-- Node11 -->
 <g id="node11" class="node"><title>Node11</title>
-<g id="a_node11"><a xlink:href="../../d0/d32/structAH_1_1Array.html" target="_top" xlink:title=" ">
+<g id="a_node11"><a xlink:href="../../de/d07/structSimpleNoteCCValueCallback.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="365,-830.5 365,-920.5 525,-920.5 525,-830.5 365,-830.5"/>
+<text text-anchor="middle" x="445" y="-908.5" font-family="Helvetica,sans-Serif" font-size="10.00">SimpleNoteCCValueCallback</text>
+<polyline fill="none" stroke="black" points="365,-901.5 525,-901.5 "/>
+<text text-anchor="middle" x="445" y="-889.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polyline fill="none" stroke="black" points="365,-882.5 525,-882.5 "/>
+<text text-anchor="start" x="373" y="-870.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
+<text text-anchor="start" x="373" y="-859.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ update()</text>
+<text text-anchor="start" x="373" y="-848.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ updateAll()</text>
+<text text-anchor="start" x="373" y="-837.5" font-family="Helvetica,sans-Serif" font-size="10.00"># SimpleNoteCCValueCallback()</text>
+</a>
+</g>
+</g>
+<!-- Node11&#45;&gt;Node10 -->
+<g id="edge12" class="edge"><title>Node11&#45;&gt;Node10</title>
+<path fill="none" stroke="midnightblue" d="M445,-820.266C445,-789.824 445,-751.925 445,-721.31"/>
+<polygon fill="none" stroke="midnightblue" points="441.5,-820.282 445,-830.283 448.5,-820.283 441.5,-820.282"/>
+</g>
+<!-- Node12 -->
+<g id="node12" class="node"><title>Node12</title>
+<g id="a_node12"><a xlink:href="../../d0/d32/structAH_1_1Array.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="530,-570.5 530,-759.5 678,-759.5 678,-570.5 530,-570.5"/>
 <text text-anchor="start" x="538" y="-747.5" font-family="Helvetica,sans-Serif" font-size="10.00">AH::Array&lt; Array&lt; uint8</text>
 <text text-anchor="middle" x="604" y="-736.5" font-family="Helvetica,sans-Serif" font-size="10.00">_t, RangeLen &gt;, NumBanks &gt;</text>
@@ -295,11 +315,11 @@
 </a>
 </g>
 </g>
-<!-- Node11&#45;&gt;Node3 -->
-<g id="edge12" class="edge"><title>Node11&#45;&gt;Node3</title>
-<path fill="none" stroke="#404040" d="M545.484,-570.246C528.237,-542.611 509.21,-512.127 491.4,-483.591"/>
-<polygon fill="none" stroke="#404040" points="491.253,-483.355 484.683,-480.383 484.899,-473.175 491.469,-476.147 491.253,-483.355"/>
-<text text-anchor="middle" x="547.5" y="-538.5" font-family="Helvetica,sans-Serif" font-size="10.00"> &#45;values</text>
+<!-- Node12&#45;&gt;Node3 -->
+<g id="edge13" class="edge"><title>Node12&#45;&gt;Node3</title>
+<path fill="none" stroke="#404040" d="M541.928,-570.246C523.552,-542.49 503.272,-511.859 484.309,-483.216"/>
+<polygon fill="none" stroke="#404040" points="484.285,-483.181 477.638,-480.386 477.661,-473.175 484.308,-475.97 484.285,-483.181"/>
+<text text-anchor="middle" x="543.5" y="-538.5" font-family="Helvetica,sans-Serif" font-size="10.00"> &#45;values</text>
 </g>
 </g>
 </svg>

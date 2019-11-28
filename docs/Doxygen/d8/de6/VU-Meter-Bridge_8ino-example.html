@@ -74,12 +74,12 @@ $(function() {
 <div class="title">VU-Meter-Bridge.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md115"></a>
+<h1><a class="anchor" id="autotoc_md120"></a>
 VU-Meter-Bridge</h1>
 <p>This is an example on how to use an OLED display to display the VU meters and mute/solo states of the eight first tracks, by using the Arduino as a Mackie Control Universal. This is an example modified to work with the ESP32 only, using MIDI over Bluetooth Low Energy. <br  />
 </p>
 <dl class="section user"><dt>Boards:</dt><dd>ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md116"></a>
+<h2><a class="anchor" id="autotoc_md121"></a>
 Connections</h2>
 <p>This example drives two SSD1306 OLED displays over SPI</p><ul>
 <li>SCK: SSD1306 D0</li>
@@ -90,15 +90,15 @@ Connections</h2>
 <p>Add a capacitor between the reset pin of the display and ground, and a resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ work fine. <br  />
  You do need some way to reset the display, without it, it won't work. <br  />
  Alternatively, you could use an IO pin from the ESP32 to reset the display, but this just "wastes" a pin.</p>
-<h2><a class="anchor" id="autotoc_md117"></a>
+<h2><a class="anchor" id="autotoc_md122"></a>
 Behavior</h2>
 <p>The first display should now display the level meters and mute/solo states of the first 8 tracks.</p>
-<h2><a class="anchor" id="autotoc_md118"></a>
+<h2><a class="anchor" id="autotoc_md123"></a>
 Mapping</h2>
 <p>Map "Control Surface" as a Mackie Control Universal unit in your DAW.</p>
 <dl class="section note"><dt>Note</dt><dd>There seem to be some differences in the way some applications handle VU meters: some expect the hardware to decay automatically, some don't. <br  />
  If you notice that the meters behave strangely, try both <a class="el" href="../../d6/d98/namespaceMCU_1_1VUDecay.html#ac4567deabb7cfc6e3cd01c45aacfb0a6" title="Don&#39;t decay automatically, hold the latest value until a new one is received.">MCU::VUDecay::Hold</a> and <a class="el" href="../../d6/d98/namespaceMCU_1_1VUDecay.html#acddb03c75a0930c4e17a4b070f6e24a6" title="Decay one segment/block every 150 ms if no new values are received.">MCU::VUDecay::Default</a>, or try a different decay time.</dd></dl>
-<h2><a class="anchor" id="autotoc_md119"></a>
+<h2><a class="anchor" id="autotoc_md124"></a>
 Demo</h2>
 <p> 
 <iframe width="560" height="315"
@@ -220,13 +220,13 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="line"><span class="comment">// -------------------------- MIDI Input Elements --------------------------- //</span></div>
 <div class="line"><span class="comment">// ========================================================================== //</span></div>
 <div class="line"> </div>
-<div class="line"><a name="_a7"></a><a class="code" href="../../de/ddd/classNoteValue.html">MIDINote</a> mute[8] = {</div>
+<div class="line"><a name="_a7"></a><a class="code" href="../../de/ddd/classNoteValue.html">NoteValue</a> mute[8] = {</div>
 <div class="line">  {<a name="a8"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#ad037ada6c7ebd64eeec862a410184229">MCU::MUTE_1</a>}, <span class="comment">// The mute status of the first track</span></div>
 <div class="line">  {<a name="a9"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#ac68849b1dd54d44a472212e04eccfc28">MCU::MUTE_2</a>}, {<a name="a10"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#aff4b1ae44544ef0f8a3bb796be4eb9de">MCU::MUTE_3</a>}, {<a name="a11"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#a14a7cfd850ae0f5213ed83ad326d19d6">MCU::MUTE_4</a>}, {<a name="a12"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#afe56acab364a0f0173d9724f37dc02df">MCU::MUTE_5</a>},</div>
 <div class="line">  {<a name="a13"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#a1b2096bf302a7a3ce6335964135fad7a">MCU::MUTE_6</a>}, {<a name="a14"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#aef9d9576f611c1369ae72f6aa63d6e0b">MCU::MUTE_7</a>}, {<a name="a15"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#abfa709b8012df710e1559ad6ad3a9d0a">MCU::MUTE_8</a>},</div>
 <div class="line">};</div>
 <div class="line"> </div>
-<div class="line"><a class="code" href="../../de/ddd/classNoteValue.html">MIDINote</a> solo[8] = {</div>
+<div class="line"><a class="code" href="../../de/ddd/classNoteValue.html">NoteValue</a> solo[8] = {</div>
 <div class="line">  {<a name="a16"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#a7d0577153aa90745c199d0b30ef8702a">MCU::SOLO_1</a>}, <span class="comment">// The solo status of the first track</span></div>
 <div class="line">  {<a name="a17"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#af99606ab5a1d14dc833d88859d2ee7a0">MCU::SOLO_2</a>}, {<a name="a18"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#a722819169f87755149d4600342dc6324">MCU::SOLO_3</a>}, {<a name="a19"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#ae4887527db0f87cb3caa2457d2881f8f">MCU::SOLO_4</a>}, {<a name="a20"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#a8487fcfd7495b03a65945ffc0af32bf5">MCU::SOLO_5</a>},</div>
 <div class="line">  {<a name="a21"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#a1ab1ff1f17b3f16251ae9d05f248beb3">MCU::SOLO_6</a>}, {<a name="a22"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#a8dc9fd22834328f4e685ed66234386c1">MCU::SOLO_7</a>}, {<a name="a23"></a><a class="code" href="../../d7/dc7/namespaceMCU.html#af861683f5a82f8a12e612d7a88fdade9">MCU::SOLO_8</a>},</div>
@@ -303,7 +303,7 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="ttc" id="aclassNoteBitmapDisplay_html"><div class="ttname"><a href="../../de/dc5/classNoteBitmapDisplay.html">NoteBitmapDisplay</a></div><div class="ttdoc">A class that displays a bitmap depending on the state of a MIDINote.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d24/NoteBitmapDisplay_8hpp_source.html#l00010">NoteBitmapDisplay.hpp:10</a></div></div>
 <div class="ttc" id="aBluetoothMIDI__Interface_8hpp_html"><div class="ttname"><a href="../../df/ded/BluetoothMIDI__Interface_8hpp.html">BluetoothMIDI_Interface.hpp</a></div></div>
 <div class="ttc" id="aclassBluetoothMIDI__Interface_html"><div class="ttname"><a href="../../d0/d89/classBluetoothMIDI__Interface.html">BluetoothMIDI_Interface</a></div><div class="ttdoc">Bluetooth Low Energy MIDI Interface for the ESP32.</div><div class="ttdef"><b>Definition:</b> <a href="../../df/ded/BluetoothMIDI__Interface_8hpp_source.html#l00015">BluetoothMIDI_Interface.hpp:15</a></div></div>
-<div class="ttc" id="aclassNoteValue_html"><div class="ttname"><a href="../../de/ddd/classNoteValue.html">NoteValue</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00120">NoteCCRange.hpp:120</a></div></div>
+<div class="ttc" id="aclassNoteValue_html"><div class="ttname"><a href="../../de/ddd/classNoteValue.html">NoteValue</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00134">NoteCCRange.hpp:134</a></div></div>
 <div class="ttc" id="anamespaceMCU_html_a8487fcfd7495b03a65945ffc0af32bf5"><div class="ttname"><a href="../../d7/dc7/namespaceMCU.html#a8487fcfd7495b03a65945ffc0af32bf5">MCU::SOLO_5</a></div><div class="ttdeci">constexpr uint8_t SOLO_5</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d60/MCU_8hpp_source.html#l00031">MCU.hpp:31</a></div></div>
 <div class="ttc" id="anamespaceMCU_html_a8dc9fd22834328f4e685ed66234386c1"><div class="ttname"><a href="../../d7/dc7/namespaceMCU.html#a8dc9fd22834328f4e685ed66234386c1">MCU::SOLO_7</a></div><div class="ttdeci">constexpr uint8_t SOLO_7</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d60/MCU_8hpp_source.html#l00033">MCU.hpp:33</a></div></div>
 <div class="ttc" id="anamespaceMCU_html_aff4b1ae44544ef0f8a3bb796be4eb9de"><div class="ttname"><a href="../../d7/dc7/namespaceMCU.html#aff4b1ae44544ef0f8a3bb796be4eb9de">MCU::MUTE_3</a></div><div class="ttdeci">constexpr uint8_t MUTE_3</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d60/MCU_8hpp_source.html#l00038">MCU.hpp:38</a></div></div>

@@ -74,11 +74,11 @@ $(function() {
 <div class="title">2.Note-Range-LEDs.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md95"></a>
+<h1><a class="anchor" id="autotoc_md99"></a>
 2.Note-Range-LEDs</h1>
 <p>This example demonstrates the use of LEDs that respond to incoming MIDI note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.</p>
-<dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md96"></a>
+<dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Due, Teensy 3.x, ESP32</dd></dl>
+<h2><a class="anchor" id="autotoc_md100"></a>
 Connections</h2>
 <ul>
 <li>SS: 74HC595 ST_CP</li>
@@ -88,12 +88,12 @@ Connections</h2>
 <p>Connect eight LEDs (and series resistors) between the outputs of the shift register and ground.</p>
 <p>Remember to connect the enable pin of the shift register to ground and the master reset pin to Vcc in order to enable it. <br  />
 </p>
-<h2><a class="anchor" id="autotoc_md97"></a>
+<h2><a class="anchor" id="autotoc_md101"></a>
 Behavior</h2>
 <p>If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the first LED will light up, if a Note Off event for that note is sent, the LED will turn off. <br  />
  If a MIDI Note On event for note 0x3D (C#4) is sent, the second LED will light up, and so on. <br  />
  (A Note On event with a velocity of zero also counts as a Note Off event.)</p>
-<h2><a class="anchor" id="autotoc_md98"></a>
+<h2><a class="anchor" id="autotoc_md102"></a>
 Mapping</h2>
 <p>Route the MIDI output of a MIDI keyboard to the Arduino's MIDI input. Then play some notes between middle C and middle G on the keyboard. The LEDs should light up when you press the keys.</p>
 <p>Written by PieterP, 2019-10-09 <br  />
@@ -102,7 +102,7 @@ Mapping</h2>
 <div class="line"><span class="comment"> * This example demonstrates the use of LEDs that respond to incoming  MIDI</span></div>
 <div class="line"><span class="comment"> * note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.</span></div>
 <div class="line"><span class="comment"> * </span></div>
-<div class="line"><span class="comment"> * @boards  AVR, AVR USB, Teensy 3.x, ESP32</span></div>
+<div class="line"><span class="comment"> * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32</span></div>
 <div class="line"><span class="comment"> * </span></div>
 <div class="line"><span class="comment"> * Connections</span></div>
 <div class="line"><span class="comment"> * -----------</span></div>
@@ -173,7 +173,7 @@ Mapping</h2>
 <div class="ttc" id="aclassControl__Surface___html_a1fda63983d83a8be20302e9fef48f63e"><div class="ttname"><a href="../../dc/d45/classControl__Surface__.html#a1fda63983d83a8be20302e9fef48f63e">Control_Surface_::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdoc">Initialize the Control_Surface.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d38/Control__Surface__Class_8cpp_source.html#l00025">Control_Surface_Class.cpp:25</a></div></div>
 <div class="ttc" id="anamespaceMIDI__Notes_html_ac199d8a68ddb5b6aab199fc827947900"><div class="ttname"><a href="../../d7/d78/namespaceMIDI__Notes.html#ac199d8a68ddb5b6aab199fc827947900">MIDI_Notes::C</a></div><div class="ttdeci">constexpr int8_t C</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dc5/Notes_8hpp_source.html#l00018">Notes.hpp:18</a></div></div>
 <div class="ttc" id="anamespaceMIDI__Notes_html"><div class="ttname"><a href="../../d7/d78/namespaceMIDI__Notes.html">MIDI_Notes</a></div><div class="ttdoc">MIDI note names.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dc5/Notes_8hpp_source.html#l00016">Notes.hpp:16</a></div></div>
-<div class="ttc" id="aclassNoteRangeLEDs_html"><div class="ttname"><a href="../../de/db8/classNoteRangeLEDs.html">NoteRangeLEDs</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d33/NoteCCRangeLEDs_8hpp_source.html#l00040">NoteCCRangeLEDs.hpp:40</a></div></div>
+<div class="ttc" id="aclassNoteRangeLEDs_html"><div class="ttname"><a href="../../de/db8/classNoteRangeLEDs.html">NoteRangeLEDs</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d33/NoteCCRangeLEDs_8hpp_source.html#l00037">NoteCCRangeLEDs.hpp:37</a></div></div>
 <div class="ttc" id="aclassControl__Surface___html_a69fd0ae13604c39d6dc0da12fc94a18f"><div class="ttname"><a href="../../dc/d45/classControl__Surface__.html#a69fd0ae13604c39d6dc0da12fc94a18f">Control_Surface_::loop</a></div><div class="ttdeci">void loop()</div><div class="ttdoc">Update all MIDI elements, send MIDI events and read MIDI input.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d38/Control__Surface__Class_8cpp_source.html#l00048">Control_Surface_Class.cpp:48</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

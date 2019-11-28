@@ -94,12 +94,14 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for Bankable::GenericNoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/d00/classBankable_1_1GenericNoteCCRange__inherit__graph.svg" width="511" height="676"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/d00/classBankable_1_1GenericNoteCCRange__inherit__graph.svg" width="511" height="691"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Collaboration diagram for Bankable::GenericNoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d3/d24/classBankable_1_1GenericNoteCCRange__coll__graph.svg" width="775" height="824"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d3/d24/classBankable_1_1GenericNoteCCRange__coll__graph.svg" width="775" height="824"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -120,6 +122,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a30431eaa99f0e2259656592d77c99e1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/df4/classNoteCCRange.html#a30431eaa99f0e2259656592d77c99e1d">reset</a> () override</td></tr>
 <tr class="memdesc:a30431eaa99f0e2259656592d77c99e1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all values to zero.  <a href="../../d2/df4/classNoteCCRange.html#a30431eaa99f0e2259656592d77c99e1d">More...</a><br /></td></tr>
 <tr class="separator:a30431eaa99f0e2259656592d77c99e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd46854dc2b1695ef9521b314a19fb10"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/dab/classINoteCCValue.html#afd46854dc2b1695ef9521b314a19fb10">length</a> () const</td></tr>
+<tr class="separator:afd46854dc2b1695ef9521b314a19fb10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1bd85c23ad830c167ffd6f93c791ab5"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d6e/classBankableMIDIInput.html#ab1bd85c23ad830c167ffd6f93c791ab5">getBankIndex</a> (const <a class="el" href="../../d3/d10/classMIDICNChannelAddress.html">MIDICNChannelAddress</a> &amp;target, const <a class="el" href="../../d3/d10/classMIDICNChannelAddress.html">MIDICNChannelAddress</a> &amp;base) const</td></tr>
 <tr class="memdesc:ab1bd85c23ad830c167ffd6f93c791ab5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the bank setting of a given MIDI address, relative to a base address.  <a href="../../db/d6e/classBankableMIDIInput.html#ab1bd85c23ad830c167ffd6f93c791ab5">More...</a><br /></td></tr>
 <tr class="separator:ab1bd85c23ad830c167ffd6f93c791ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,8 +195,10 @@ Static Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a72a0db4855fef292ea83eb981049f595"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt; <a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt; uint8_t, RangeLen &gt;, NumBanks &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/df4/classNoteCCRange.html#a72a0db4855fef292ea83eb981049f595">values</a> = {}</td></tr>
+<tr class="memitem:a72a0db4855fef292ea83eb981049f595"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt; <a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt; uint8_t, RangeLen &gt;, NumBanks &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/df4/classNoteCCRange.html#a72a0db4855fef292ea83eb981049f595">values</a> = {{}}</td></tr>
 <tr class="separator:a72a0db4855fef292ea83eb981049f595"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b89d55440a6ecc3e26c9c0bdb001a14"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/dab/classINoteCCValue.html#a4b89d55440a6ecc3e26c9c0bdb001a14">rangeLength</a></td></tr>
+<tr class="separator:a4b89d55440a6ecc3e26c9c0bdb001a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf0c1d8da75edecd39505d52ea0dab1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/dbd/classBank.html">Bank</a>&lt; N &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d6e/classBankableMIDIInput.html#abf0c1d8da75edecd39505d52ea0dab1d">bank</a></td></tr>
 <tr class="separator:abf0c1d8da75edecd39505d52ea0dab1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c1e7958b83dcc7bc1290cfa0c08c7f6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../dd/d1f/BankConfig_8hpp.html#a6fe085db0aa80588322c415f46d74bf1">BankType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d6e/classBankableMIDIInput.html#a3c1e7958b83dcc7bc1290cfa0c08c7f6">type</a></td></tr>
@@ -210,7 +216,7 @@ class Bankable::GenericNoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00150">150</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00164">164</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a401c6b3852dc400793b10f3b50b704f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a401c6b3852dc400793b10f3b50b704f4">&#9670;&nbsp;</a></span>GenericNoteCCRange()</h2>
@@ -254,7 +260,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00154">154</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00168">168</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -287,7 +293,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Check if the address of the incoming MIDI message is within the range of addresses and in one of the banks of this element. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00165">165</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00179">179</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -320,7 +326,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Reimplemented from <a class="el" href="../../d2/df4/classNoteCCRange.html#a4e37546b73057fa73adffede43060b28">NoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00170">170</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00184">184</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -354,7 +360,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Reimplemented from <a class="el" href="../../d2/df4/classNoteCCRange.html#a5bf642f5d9b2c9c6e51efdb822a7d978">NoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00174">174</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00188">188</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -386,7 +392,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Reimplemented from <a class="el" href="../../d2/df4/classNoteCCRange.html#aeca4e0af06ac8109dc04703cea2e3112">NoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00178">178</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00192">192</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -421,7 +427,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Reimplemented from <a class="el" href="../../db/d6e/classBankableMIDIInput.html#a29042ba68eca6ef19c1e3b0ee9a126fe">BankableMIDIInput&lt; NumBanks &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00183">183</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00197">197</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -454,7 +460,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Implements <a class="el" href="../../d7/dab/classINoteCCValue.html#ad07af64394de7e35f34191d25f25bc70">INoteCCValue</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00037">37</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00051">51</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -504,7 +510,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00027">27</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -531,7 +537,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00027">27</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -562,7 +568,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Initialize. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00043">43</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00057">57</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -593,7 +599,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Reset all values to zero. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00045">45</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00059">59</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -633,7 +639,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00051">51</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00065">65</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -663,12 +669,12 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00063">63</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00077">77</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a2677fbde8af4599cd844acc1c058ba7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2677fbde8af4599cd844acc1c058ba7e">&#9670;&nbsp;</a></span>length()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2677fbde8af4599cd844acc1c058ba7e">&#9670;&nbsp;</a></span>length() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -692,7 +698,34 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00084">84</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00098">98</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afd46854dc2b1695ef9521b314a19fb10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd46854dc2b1695ef9521b314a19fb10">&#9670;&nbsp;</a></span>length() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t INoteCCValue::length </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00014">14</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -1061,7 +1094,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt;<a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt;uint8_t, RangeLen&gt;, NumBanks&gt; <a class="el" href="../../d2/df4/classNoteCCRange.html">NoteCCRange</a>&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;::values = {}</td>
+          <td class="memname"><a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt;<a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt;uint8_t, RangeLen&gt;, NumBanks&gt; <a class="el" href="../../d2/df4/classNoteCCRange.html">NoteCCRange</a>&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;::values = {{}}</td>
         </tr>
       </table>
   </td>
@@ -1071,7 +1104,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00080">80</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00094">94</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -1097,7 +1130,31 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00083">83</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00097">97</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4b89d55440a6ecc3e26c9c0bdb001a14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b89d55440a6ecc3e26c9c0bdb001a14">&#9670;&nbsp;</a></span>rangeLength</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t INoteCCValue::rangeLength</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00019">19</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>

@@ -9,8 +9,8 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 67.5)">
 <title>Graphical Class Hierarchy</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-67.5 467,-67.5 467,4 -4,4"/>
-<!-- Node384 -->
-<g id="node1" class="node"><title>Node384</title>
+<!-- Node398 -->
+<g id="node1" class="node"><title>Node398</title>
 <g id="a_node1"><a xlink:href="d4/d23/classDoublyLinkable.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="0,-33 0,-63 136,-63 136,-33 0,-33"/>
 <text text-anchor="start" x="8" y="-51" font-family="Helvetica,sans-Serif" font-size="10.00">DoublyLinkable&lt; MIDIInput</text>
@@ -18,16 +18,16 @@
 </a>
 </g>
 </g>
-<!-- Node385 -->
-<g id="node2" class="node"><title>Node385</title>
+<!-- Node399 -->
+<g id="node2" class="node"><title>Node399</title>
 <g id="a_node2"><a xlink:href="dc/def/classMIDIInputElementSysEx.html" target="_top" xlink:title="Class for objects that listen for incoming MIDI SysEx events.">
 <polygon fill="white" stroke="black" points="172,-38.5 172,-57.5 297,-57.5 297,-38.5 172,-38.5"/>
 <text text-anchor="middle" x="234.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">MIDIInputElementSysEx</text>
 </a>
 </g>
 </g>
-<!-- Node384&#45;&gt;Node385 -->
-<g id="edge1" class="edge"><title>Node384&#45;&gt;Node385</title>
+<!-- Node398&#45;&gt;Node399 -->
+<g id="edge1" class="edge"><title>Node398&#45;&gt;Node399</title>
 <path fill="none" stroke="midnightblue" d="M146.62,-48C155.059,-48 163.562,-48 171.775,-48"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="146.383,-44.5001 136.383,-48 146.383,-51.5001 146.383,-44.5001"/>
 </g>
@@ -39,8 +39,8 @@
 </a>
 </g>
 </g>
-<!-- Node385&#45;&gt;Node1 -->
-<g id="edge2" class="edge"><title>Node385&#45;&gt;Node1</title>
+<!-- Node399&#45;&gt;Node1 -->
+<g id="edge2" class="edge"><title>Node399&#45;&gt;Node1</title>
 <path fill="none" stroke="midnightblue" d="M307.058,-39.5814C315.688,-38.5661 324.459,-37.5342 332.972,-36.5328"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="306.539,-36.1182 297.017,-40.7627 307.357,-43.0702 306.539,-36.1182"/>
 </g>

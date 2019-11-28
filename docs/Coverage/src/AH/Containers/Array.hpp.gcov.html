@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - d0de365697a9d6a8331c32c0388c9e38aa541a32 - src/AH/Containers/Array.hpp</title>
+  <title>LCOV - 1c27400155b34adca37cca4d6a53c6d9f2a23f36 - src/AH/Containers/Array.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">d0de365697a9d6a8331c32c0388c9e38aa541a32</td>
+            <td class="headerValue">1c27400155b34adca37cca4d6a53c6d9f2a23f36</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">140</td>
@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-28 01:24:59</td>
+            <td class="headerValue">2019-11-28 02:04:22</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">174</td>
-            <td class="headerCovTableEntry">192</td>
-            <td class="headerCovTableEntryHi">90.6 %</td>
+            <td class="headerCovTableEntry">177</td>
+            <td class="headerCovTableEntry">195</td>
+            <td class="headerCovTableEntryHi">90.8 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -117,12 +117,12 @@
 <a name="47"><span class="lineNum">      47 </span>            :      * @param   index</a>
 <a name="48"><span class="lineNum">      48 </span>            :      *          The (zero-based) index of the element to return.</a>
 <a name="49"><span class="lineNum">      49 </span>            :      */</a>
-<a name="50"><span class="lineNum">      50 </span><span class="lineCov">        447 :     T &amp;operator[](size_t index) {</span></a>
-<a name="51"><span class="lineNum">      51 </span><span class="lineCov">        447 :         if (index &gt;= N) { // TODO</span></a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">        450 :     T &amp;operator[](size_t index) {</span></a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">        450 :         if (index &gt;= N) { // TODO</span></a>
 <a name="52"><span class="lineNum">      52 </span><span class="lineCov">          1 :             ERROR(F(&quot;Index out of bounds: &quot;) &lt;&lt; index &lt;&lt; F(&quot; ≥ &quot;) &lt;&lt; N, 0xEDED);</span></a>
 <a name="53"><span class="lineNum">      53 </span>            :             index = N - 1; // LCOV_EXCL_LINE</a>
 <a name="54"><span class="lineNum">      54 </span>            :         }                  // LCOV_EXCL_LINE</a>
-<a name="55"><span class="lineNum">      55 </span><span class="lineCov">        446 :         return data[index];</span></a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">        449 :         return data[index];</span></a>
 <a name="56"><span class="lineNum">      56 </span><span class="lineCov">          1 :     }</span></a>
 <a name="57"><span class="lineNum">      57 </span>            : </a>
 <a name="58"><span class="lineNum">      58 </span>            :     /**</a>
@@ -134,33 +134,33 @@
 <a name="64"><span class="lineNum">      64 </span>            :      * @param   index</a>
 <a name="65"><span class="lineNum">      65 </span>            :      *          The (zero-based) index of the element to return.</a>
 <a name="66"><span class="lineNum">      66 </span>            :      */</a>
-<a name="67"><span class="lineNum">      67 </span><span class="lineCov">        956 :     const T &amp;operator[](size_t index) const {</span></a>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">        956 :         if (index &gt;= N) { // TODO</span></a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">        976 :     const T &amp;operator[](size_t index) const {</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">        976 :         if (index &gt;= N) { // TODO</span></a>
 <a name="69"><span class="lineNum">      69 </span><span class="lineCov">          1 :             ERROR(F(&quot;Index out of bounds: &quot;) &lt;&lt; index &lt;&lt; F(&quot; ≥ &quot;) &lt;&lt; N, 0xEDED);</span></a>
 <a name="70"><span class="lineNum">      70 </span>            :             index = N - 1; // LCOV_EXCL_LINE</a>
 <a name="71"><span class="lineNum">      71 </span>            :         }                  // LCOV_EXCL_LINE</a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">        955 :         return data[index];</span></a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">        975 :         return data[index];</span></a>
 <a name="73"><span class="lineNum">      73 </span><span class="lineCov">          1 :     }</span></a>
 <a name="74"><span class="lineNum">      74 </span>            : </a>
 <a name="75"><span class="lineNum">      75 </span>            :     /**</a>
 <a name="76"><span class="lineNum">      76 </span>            :      * @brief   Get a pointer to the first element.</a>
 <a name="77"><span class="lineNum">      77 </span>            :      */</a>
-<a name="78"><span class="lineNum">      78 </span><span class="lineCov">         36 :     T *begin() { return &amp;data[0]; }</span></a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">         35 :     T *begin() { return &amp;data[0]; }</span></a>
 <a name="79"><span class="lineNum">      79 </span>            : </a>
 <a name="80"><span class="lineNum">      80 </span>            :     /**</a>
 <a name="81"><span class="lineNum">      81 </span>            :      * @brief   Get a pointer to the first element.</a>
 <a name="82"><span class="lineNum">      82 </span>            :      */</a>
-<a name="83"><span class="lineNum">      83 </span><span class="lineCov">         26 :     const T *begin() const { return &amp;data[0]; }</span></a>
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">         28 :     const T *begin() const { return &amp;data[0]; }</span></a>
 <a name="84"><span class="lineNum">      84 </span>            : </a>
 <a name="85"><span class="lineNum">      85 </span>            :     /**</a>
 <a name="86"><span class="lineNum">      86 </span>            :      * @brief   Get a pointer to the memory beyond the array.</a>
 <a name="87"><span class="lineNum">      87 </span>            :      */</a>
-<a name="88"><span class="lineNum">      88 </span><span class="lineCov">         34 :     T *end() { return &amp;data[N]; }</span></a>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">         33 :     T *end() { return &amp;data[N]; }</span></a>
 <a name="89"><span class="lineNum">      89 </span>            : </a>
 <a name="90"><span class="lineNum">      90 </span>            :     /**</a>
 <a name="91"><span class="lineNum">      91 </span>            :      * @brief   Get a pointer to the memory beyond the array.</a>
 <a name="92"><span class="lineNum">      92 </span>            :      */</a>
-<a name="93"><span class="lineNum">      93 </span><span class="lineCov">         26 :     const T *end() const { return &amp;data[N]; }</span></a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">         28 :     const T *end() const { return &amp;data[N]; }</span></a>
 <a name="94"><span class="lineNum">      94 </span>            : </a>
 <a name="95"><span class="lineNum">      95 </span>            :     /**</a>
 <a name="96"><span class="lineNum">      96 </span>            :      * @brief   Check the equality of all elements in two arrays.</a>

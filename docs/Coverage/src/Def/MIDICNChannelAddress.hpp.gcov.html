@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - d0de365697a9d6a8331c32c0388c9e38aa541a32 - src/Def/MIDICNChannelAddress.hpp</title>
+  <title>LCOV - 1c27400155b34adca37cca4d6a53c6d9f2a23f36 - src/Def/MIDICNChannelAddress.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">d0de365697a9d6a8331c32c0388c9e38aa541a32</td>
+            <td class="headerValue">1c27400155b34adca37cca4d6a53c6d9f2a23f36</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">57</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-28 01:24:59</td>
+            <td class="headerValue">2019-11-28 02:04:22</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">22</td>
@@ -165,14 +165,14 @@
 <a name="95"><span class="lineNum">      95 </span><span class="lineCov">         27 :               channelCN.getRawChannel(),</span></a>
 <a name="96"><span class="lineNum">      96 </span><span class="lineCov">         27 :               channelCN.getCableNumber(),</span></a>
 <a name="97"><span class="lineNum">      97 </span><span class="lineCov">         27 :           } {}</span></a>
-<a name="98"><span class="lineNum">      98 </span><span class="lineCov">        206 :     constexpr MIDICNChannelAddress(int address, Channel channel = CHANNEL_1,</span></a>
+<a name="98"><span class="lineNum">      98 </span><span class="lineCov">        209 :     constexpr MIDICNChannelAddress(int address, Channel channel = CHANNEL_1,</span></a>
 <a name="99"><span class="lineNum">      99 </span>            :                                    int cableNumber = 0x0)</a>
-<a name="100"><span class="lineNum">     100 </span><span class="lineCov">        824 :         : addresses{</span></a>
+<a name="100"><span class="lineNum">     100 </span><span class="lineCov">        836 :         : addresses{</span></a>
 <a name="101"><span class="lineNum">     101 </span>            :               1,</a>
-<a name="102"><span class="lineNum">     102 </span><span class="lineCov">        206 :               (uint8_t)address,</span></a>
-<a name="103"><span class="lineNum">     103 </span><span class="lineCov">        206 :               (uint8_t)channel.getRaw(),</span></a>
-<a name="104"><span class="lineNum">     104 </span><span class="lineCov">        206 :               (uint8_t)cableNumber,</span></a>
-<a name="105"><span class="lineNum">     105 </span><span class="lineCov">        206 :           } {} // Deliberate overflow for negative numbers</span></a>
+<a name="102"><span class="lineNum">     102 </span><span class="lineCov">        209 :               (uint8_t)address,</span></a>
+<a name="103"><span class="lineNum">     103 </span><span class="lineCov">        209 :               (uint8_t)channel.getRaw(),</span></a>
+<a name="104"><span class="lineNum">     104 </span><span class="lineCov">        209 :               (uint8_t)cableNumber,</span></a>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">        209 :           } {} // Deliberate overflow for negative numbers</span></a>
 <a name="106"><span class="lineNum">     106 </span><span class="lineCov">         12 :     constexpr MIDICNChannelAddress(Channel channel, int cableNumber = 0x0)</span></a>
 <a name="107"><span class="lineNum">     107 </span><span class="lineCov">         36 :         : addresses{</span></a>
 <a name="108"><span class="lineNum">     108 </span>            :               1,</a>
@@ -181,7 +181,7 @@
 <a name="111"><span class="lineNum">     111 </span><span class="lineCov">         12 :               (uint8_t)cableNumber,</span></a>
 <a name="112"><span class="lineNum">     112 </span><span class="lineCov">         12 :           } {} // Deliberate overflow for negative numbers</span></a>
 <a name="113"><span class="lineNum">     113 </span><span class="lineCov">         11 :     constexpr MIDICNChannelAddress(const MIDICNChannel &amp;address)</span></a>
-<a name="114"><span class="lineNum">     114 </span><span class="lineCov">         11 :         : addresses{address.addresses} {}</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">         11 :         : addresses(address.addresses) {}</span></a>
 <a name="115"><span class="lineNum">     115 </span>            : </a>
 <a name="116"><span class="lineNum">     116 </span>            :     MIDICNChannelAddress &amp;operator+=(const RelativeMIDICNChannelAddress &amp;rhs);</a>
 <a name="117"><span class="lineNum">     117 </span>            : </a>
@@ -208,7 +208,7 @@
 <a name="138"><span class="lineNum">     138 </span>            :     }</a>
 <a name="139"><span class="lineNum">     139 </span>            : </a>
 <a name="140"><span class="lineNum">     140 </span>            :     /// Get the address [0, 127].</a>
-<a name="141"><span class="lineNum">     141 </span><span class="lineCov">        374 :     constexpr uint8_t getAddress() const { return addresses.address; }</span></a>
+<a name="141"><span class="lineNum">     141 </span><span class="lineCov">        378 :     constexpr uint8_t getAddress() const { return addresses.address; }</span></a>
 <a name="142"><span class="lineNum">     142 </span>            : </a>
 <a name="143"><span class="lineNum">     143 </span>            :     /// Get the channel [CHANNEL_1, CHANNEL_16]</a>
 <a name="144"><span class="lineNum">     144 </span><span class="lineCov">         69 :     constexpr Channel getChannel() const {</span></a>

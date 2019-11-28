@@ -261,21 +261,22 @@
 <!-- Node10 -->
 <g id="node10" class="node"><title>Node10</title>
 <g id="a_node10"><a xlink:href="../../d7/dab/classINoteCCValue.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="671.5,-435.5 671.5,-514.5 766.5,-514.5 766.5,-435.5 671.5,-435.5"/>
-<text text-anchor="middle" x="719" y="-502.5" font-family="Helvetica,sans-Serif" font-size="10.00">INoteCCValue</text>
-<polyline fill="none" stroke="black" points="671.5,-495.5 766.5,-495.5 "/>
-<text text-anchor="middle" x="719" y="-483.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="671.5,-476.5 766.5,-476.5 "/>
-<text text-anchor="start" x="679.5" y="-464.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
-<text text-anchor="start" x="679.5" y="-453.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
-<text text-anchor="start" x="679.5" y="-442.5" font-family="Helvetica,sans-Serif" font-size="10.00"># INoteCCValue()</text>
+<polygon fill="white" stroke="black" points="671.5,-430 671.5,-520 766.5,-520 766.5,-430 671.5,-430"/>
+<text text-anchor="middle" x="719" y="-508" font-family="Helvetica,sans-Serif" font-size="10.00">INoteCCValue</text>
+<polyline fill="none" stroke="black" points="671.5,-501 766.5,-501 "/>
+<text text-anchor="start" x="679.5" y="-489" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; rangeLength</text>
+<polyline fill="none" stroke="black" points="671.5,-482 766.5,-482 "/>
+<text text-anchor="start" x="679.5" y="-470" font-family="Helvetica,sans-Serif" font-size="10.00">+ length()</text>
+<text text-anchor="start" x="679.5" y="-459" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
+<text text-anchor="start" x="679.5" y="-448" font-family="Helvetica,sans-Serif" font-size="10.00">+ getValue()</text>
+<text text-anchor="start" x="679.5" y="-437" font-family="Helvetica,sans-Serif" font-size="10.00"># INoteCCValue()</text>
 </a>
 </g>
 </g>
 <!-- Node10&#45;&gt;Node1 -->
 <g id="edge13" class="edge"><title>Node10&#45;&gt;Node1</title>
-<path fill="none" stroke="#404040" d="M707.431,-435.36C689.777,-376.395 656.027,-263.67 635.712,-195.817"/>
-<polygon fill="none" stroke="#404040" points="635.646,-195.598 630.093,-190.997 632.204,-184.102 637.757,-188.703 635.646,-195.598"/>
+<path fill="none" stroke="#404040" d="M705.824,-429.992C687.8,-369.791 655.45,-261.743 635.733,-195.89"/>
+<polygon fill="none" stroke="#404040" points="635.647,-195.601 630.094,-191.001 632.205,-184.106 637.758,-188.706 635.647,-195.601"/>
 <text text-anchor="middle" x="684.5" y="-304.5" font-family="Helvetica,sans-Serif" font-size="10.00"> &#45;note</text>
 </g>
 </g>

@@ -87,12 +87,14 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for NoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d7/dde/classNoteCCRange__inherit__graph.svg" width="254" height="676"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d7/dde/classNoteCCRange__inherit__graph.svg" width="254" height="691"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Collaboration diagram for NoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../dd/d21/classNoteCCRange__coll__graph.svg" width="572" height="595"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../dd/d21/classNoteCCRange__coll__graph.svg" width="572" height="595"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -111,6 +113,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6c9049410722ff70e11ce052e9472691"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fb7bae823d893a5ed465e0decc2e365"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/df4/classNoteCCRange.html#a1fb7bae823d893a5ed465e0decc2e365">getValue</a> () const</td></tr>
 <tr class="separator:a1fb7bae823d893a5ed465e0decc2e365"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd46854dc2b1695ef9521b314a19fb10"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/dab/classINoteCCValue.html#afd46854dc2b1695ef9521b314a19fb10">length</a> () const</td></tr>
+<tr class="separator:afd46854dc2b1695ef9521b314a19fb10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fb7bae823d893a5ed465e0decc2e365"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/dab/classINoteCCValue.html#a1fb7bae823d893a5ed465e0decc2e365">getValue</a> () const</td></tr>
 <tr class="separator:a1fb7bae823d893a5ed465e0decc2e365"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -144,15 +148,17 @@ Static Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a72a0db4855fef292ea83eb981049f595"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt; <a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt; uint8_t, RangeLen &gt;, NumBanks &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/df4/classNoteCCRange.html#a72a0db4855fef292ea83eb981049f595">values</a> = {}</td></tr>
+<tr class="memitem:a72a0db4855fef292ea83eb981049f595"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt; <a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt; uint8_t, RangeLen &gt;, NumBanks &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/df4/classNoteCCRange.html#a72a0db4855fef292ea83eb981049f595">values</a> = {{}}</td></tr>
 <tr class="separator:a72a0db4855fef292ea83eb981049f595"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b89d55440a6ecc3e26c9c0bdb001a14"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/dab/classINoteCCValue.html#a4b89d55440a6ecc3e26c9c0bdb001a14">rangeLength</a></td></tr>
+<tr class="separator:a4b89d55440a6ecc3e26c9c0bdb001a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callback&gt;<br />
 class NoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00031">31</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00045">45</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a443e26ae528c91105eee3062f6d1be02"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a443e26ae528c91105eee3062f6d1be02">&#9670;&nbsp;</a></span>NoteCCRange()</h2>
@@ -190,7 +196,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00033">33</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00047">47</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -224,7 +230,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Implements <a class="el" href="../../d7/dab/classINoteCCValue.html#ad07af64394de7e35f34191d25f25bc70">INoteCCValue</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00037">37</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00051">51</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -255,7 +261,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Initialize. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00043">43</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00057">57</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -286,7 +292,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Reset all values to zero. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00045">45</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00059">59</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -326,7 +332,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00051">51</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00065">65</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -356,7 +362,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00063">63</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00077">77</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -387,9 +393,9 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Get the active bank selection. </p>
 
-<p>Reimplemented in <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, and <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, NumBanks &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCLEDBarCallback&lt; NumLEDs &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCLEDBarCallback&lt; NumLEDs &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, and <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a9e448d4fcd510fd497dc661cd9278968">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, NumBanks &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00068">68</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00082">82</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -421,9 +427,9 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 
 <p>Get the bank index from a MIDI address. </p>
 
-<p>Reimplemented in <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, and <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, NumBanks &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCLEDBarCallback&lt; NumLEDs &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCLEDBarCallback&lt; NumLEDs &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, and <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a05643e4c47b99b5be25b44d97ccb0137">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, NumBanks &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00071">71</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00085">85</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -453,14 +459,14 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, and <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, NumBanks &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, RangeLen, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, NumBanks &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCLEDBarCallback&lt; NumLEDs &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementNote, 1, BankSize, NoteCCLED&lt; 1 &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCFastLED&lt; ColorMapper &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, 1, BankSize, NoteCCLEDBarCallback&lt; NumLEDs &gt; &gt;</a>, <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, BankSize, NoteCCLED&lt; RangeLen &gt; &gt;</a>, and <a class="el" href="../../da/df0/classBankable_1_1GenericNoteCCRange.html#a164d556b568d459a29a896387be0a28c">Bankable::GenericNoteCCRange&lt; MIDIInputElementCC, RangeLen, NumBanks &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00076">76</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00090">90</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a2677fbde8af4599cd844acc1c058ba7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2677fbde8af4599cd844acc1c058ba7e">&#9670;&nbsp;</a></span>length()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2677fbde8af4599cd844acc1c058ba7e">&#9670;&nbsp;</a></span>length() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -484,7 +490,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00084">84</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00098">98</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -526,7 +532,34 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00027">27</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afd46854dc2b1695ef9521b314a19fb10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd46854dc2b1695ef9521b314a19fb10">&#9670;&nbsp;</a></span>length() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t INoteCCValue::length </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00014">14</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -553,7 +586,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00027">27</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -570,7 +603,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt;<a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt;uint8_t, RangeLen&gt;, NumBanks&gt; <a class="el" href="../../d2/df4/classNoteCCRange.html">NoteCCRange</a>&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;::values = {}</td>
+          <td class="memname"><a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt;<a class="el" href="../../d0/d32/structAH_1_1Array.html">Array</a>&lt;uint8_t, RangeLen&gt;, NumBanks&gt; <a class="el" href="../../d2/df4/classNoteCCRange.html">NoteCCRange</a>&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;::values = {{}}</td>
         </tr>
       </table>
   </td>
@@ -580,7 +613,7 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00080">80</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00094">94</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
@@ -598,7 +631,31 @@ template&lt;class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callbac
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00083">83</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00097">97</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4b89d55440a6ecc3e26c9c0bdb001a14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b89d55440a6ecc3e26c9c0bdb001a14">&#9670;&nbsp;</a></span>rangeLength</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t INoteCCValue::rangeLength</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html#l00019">19</a> of file <a class="el" href="../../d6/dbb/NoteCCRange_8hpp_source.html">NoteCCRange.hpp</a>.</p>
 
 </div>
 </div>
