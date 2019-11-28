@@ -18,7 +18,7 @@ class NoteCCLED : public SimpleNoteCCValueCallback {
 
     void begin(const INoteCCValue &t) override {
         for (pin_t pin : ledPins)
-            ExtIO::pinMode(pin, OUTPUT);
+            AH::ExtIO::pinMode(pin, OUTPUT);
         updateAll(t);
     }
 
