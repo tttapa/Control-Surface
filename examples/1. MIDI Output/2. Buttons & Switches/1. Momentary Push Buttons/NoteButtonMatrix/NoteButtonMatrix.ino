@@ -1,5 +1,5 @@
 // TODO: documentation
-// @boards  AVR, AVR USB, Teensy 3.x, ESP32
+// @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
 
 #include <Control_Surface.h>
 

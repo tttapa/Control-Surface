@@ -80,14 +80,14 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     VU_Base(uint8_t track, const MIDICNChannel &channelCN,
             unsigned int decayTime, const Callback &callback)
         : MIDIInputElementChannelPressure{{track - 1, channelCN}}, IVU(12),
-          decayTime(decayTime), callback{callback} {}
+          decayTime(decayTime), callback(callback) {}
 
   public:
     /// Initialize
     void begin() override { callback.begin(*this); }
     /// Reset all values to zero
     void reset() override {
-        values = {};
+        values = {{}};
         callback.update(*this);
     }
 
@@ -163,7 +163,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     bool getOverload(uint8_t index) const { return values[index] & 0xF0; }
 
   private:
-    Array<uint8_t, NumValues> values = {};
+    Array<uint8_t, NumValues> values = {{}};
     unsigned int decayTime;
     unsigned long prevDecayTime = 0;
 

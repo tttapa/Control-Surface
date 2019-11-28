@@ -254,7 +254,7 @@ const __FlashStringHelper *getMCUNameFromNoteNumber(uint8_t note) {
     const static char invalid[] PROGMEM = "<out-of-bounds>";
     if (note >= 0x77)
         return reinterpret_cast<const __FlashStringHelper *>(invalid);
-    void *flashptr = pgm_read_ptr_near(MCU_Note_Name_LUT + note);
+    const void *flashptr = pgm_read_ptr_near(MCU_Note_Name_LUT + note);
     return reinterpret_cast<const __FlashStringHelper *>(flashptr);
 }
 

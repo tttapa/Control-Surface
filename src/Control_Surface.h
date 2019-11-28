@@ -87,6 +87,7 @@
 
 #include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
 #include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCRangeLEDBar.hpp>
 #include <MIDI_Inputs/LEDs/NoteCCRangeLEDs.hpp>
 
 #ifdef FASTLED_VERSION

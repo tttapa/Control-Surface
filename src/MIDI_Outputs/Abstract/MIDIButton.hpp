@@ -29,7 +29,7 @@ class MIDIButton : public MIDIOutputElement {
      */
     MIDIButton(pin_t pin, const MIDICNChannelAddress &address,
                const Sender &sender)
-        : button{pin}, address{address}, sender{sender} {}
+        : button{pin}, address{address}, sender(sender) {}
 
     void begin() override { button.begin(); }
     void update() override {
