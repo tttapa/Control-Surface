@@ -1,6 +1,8 @@
-#include "ExtendedInputOutput.hpp"
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include "ExtendedIOElement.hpp"
-#include <Arduino.h>
+#include "ExtendedInputOutput.hpp"
 #include <AH/Error/Error.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -92,6 +94,23 @@ analog_t analogRead(pin_t pin) {
 }
 analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
 
+void analogWrite(pin_t pin, analog_t val) {
+    // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+#ifndef ESP32
+        ::analogWrite(pin, val);
+#endif
+    } else {
+        ExtendedIOElement &el = getIOElementOfPin(pin);
+        el.analogWrite(pin - el.getStart(), val);
+    }
+}
+void analogWrite(int pin, analog_t val) { analogWrite((pin_t)pin, val); }
+void analogWrite(int pin, int val) { analogWrite((pin_t)pin, (analog_t)val); }
+void analogWrite(pin_t pin, int val) { analogWrite(pin, (analog_t)val); }
+
 } // namespace ExtIO
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

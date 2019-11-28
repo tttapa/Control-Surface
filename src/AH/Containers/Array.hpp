@@ -2,9 +2,13 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <AH/Error/Error.hpp>
-#include <AH/STL/type_traits> // conditional
 #include <AH/STL/iterator>
+#include <AH/STL/type_traits> // conditional
 #include <stddef.h>           // size_t
 
 BEGIN_AH_NAMESPACE
@@ -46,8 +50,8 @@ struct Array {
     T &operator[](size_t index) {
         if (index >= N) { // TODO
             ERROR(F("Index out of bounds: ") << index << F(" ≥ ") << N, 0xEDED);
-            index = N - 1;
-        }
+            index = N - 1; // LCOV_EXCL_LINE
+        }                  // LCOV_EXCL_LINE
         return data[index];
     }
 
@@ -63,8 +67,8 @@ struct Array {
     const T &operator[](size_t index) const {
         if (index >= N) { // TODO
             ERROR(F("Index out of bounds: ") << index << F(" ≥ ") << N, 0xEDED);
-            index = N - 1;
-        }
+            index = N - 1; // LCOV_EXCL_LINE
+        }                  // LCOV_EXCL_LINE
         return data[index];
     }
 
@@ -238,8 +242,8 @@ class ArraySlice {
     ElementRefType operator[](size_t index) const {
         if (index >= N) { // TODO
             ERROR(F("Index out of bounds: ") << index << F(" ≥ ") << N, 0xEDEF);
-            index = N - 1;
-        }
+            index = N - 1; // LCOV_EXCL_LINE
+        }                  // LCOV_EXCL_LINE
         if (Reverse)
             return array[-index];
         else
@@ -321,6 +325,30 @@ template <class T1, class T2, size_t N1, size_t N2, bool Reverse1, bool Const1>
 bool operator==(ArraySlice<T1, N1, Reverse1, Const1> a,
                 const Array<T2, N2> &b) {
     return a == b.slice();
+}
+
+// Inequality ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+/// Slice != Slice
+template <class T1, class T2, size_t N1, size_t N2, bool Reverse1,
+          bool Reverse2, bool Const1, bool Const2>
+bool operator!=(ArraySlice<T1, N1, Reverse1, Const1> a,
+                ArraySlice<T2, N2, Reverse2, Const2> b) {
+    return !(a == b);
+}
+
+/// Array != Slice
+template <class T1, class T2, size_t N1, size_t N2, bool Reverse2, bool Const2>
+bool operator!=(const Array<T1, N1> &a,
+                ArraySlice<T2, N2, Reverse2, Const2> b) {
+    return a.slice() != b;
+}
+
+/// Slice != Array
+template <class T1, class T2, size_t N1, size_t N2, bool Reverse1, bool Const1>
+bool operator!=(ArraySlice<T1, N1, Reverse1, Const1> a,
+                const Array<T2, N2> &b) {
+    return a != b.slice();
 }
 
 // Addition ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -493,8 +521,7 @@ Array<T1, N1> &operator/=(Array<T1, N1> &a, T2 b) {
 
 /// -Slice
 template <class T, size_t N, bool Reverse, bool Const>
-Array<decltype(-T{}), N>
-operator-(ArraySlice<T, N, Reverse, Const> a) {
+Array<decltype(-T{}), N> operator-(ArraySlice<T, N, Reverse, Const> a) {
     Array<decltype(-T{}), N> result = {};
     for (size_t i = 0; i < N; ++i)
         result[i] = -a[i];
@@ -516,3 +543,5 @@ using Array2D = Array<Array<T, nb_cols>, nb_rows>;
 /// @}
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

@@ -2,8 +2,14 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include "ShiftRegisterOutBase.hpp"
+
+AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <Arduino.h> // MSBFIRST
+AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE
 
@@ -16,6 +22,8 @@ BEGIN_AH_NAMESPACE
 template <uint8_t N>
 class ShiftRegisterOut : public ShiftRegisterOutBase<N> {
   public:
+    using BitOrder_t = typename ShiftRegisterOutBase<N>::BitOrder_t;
+
     /**
      * @brief   Create a new ShiftRegisterOut object with a shift register
      *          connected to the given pins, with a given bit order,
@@ -47,7 +55,7 @@ class ShiftRegisterOut : public ShiftRegisterOutBase<N> {
      *          (least significant bit first).
      */
     ShiftRegisterOut(pin_t dataPin, pin_t clockPin, pin_t latchPin,
-                     uint8_t bitOrder = MSBFIRST);
+                     BitOrder_t bitOrder = MSBFIRST);
 
     /**
      * @brief   Initialize the shift register.  
@@ -69,3 +77,5 @@ class ShiftRegisterOut : public ShiftRegisterOutBase<N> {
 END_AH_NAMESPACE
 
 #include "ShiftRegisterOut.ipp"
+
+AH_DIAGNOSTIC_POP()

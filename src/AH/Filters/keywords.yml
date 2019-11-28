@@ -1,0 +1,13 @@
+keyword1:
+  # EMA.hpp
+  - EMA
+  - EMA_f
+  # Hysteresis.hpp
+  - Hysteresis
+
+keyword2:
+  # EMA.hpp
+  - filter
+  # Hysteresis.hpp
+  - update
+  - getValue

@@ -5,7 +5,7 @@ BEGIN_AH_NAMESPACE
 
 template <uint8_t N>
 ShiftRegisterOut<N>::ShiftRegisterOut(pin_t dataPin, pin_t clockPin,
-                                      pin_t latchPin, uint8_t bitOrder)
+                                      pin_t latchPin, BitOrder_t bitOrder)
     : ShiftRegisterOutBase<N>(latchPin, bitOrder), dataPin(dataPin),
       clockPin(clockPin) {}
 
@@ -25,11 +25,11 @@ void ShiftRegisterOut<N>::update() {
     const uint8_t bufferLength = this->buffer.getBufferLength();
     if (this->bitOrder == LSBFIRST)
         for (uint8_t i = 0; i < bufferLength; i++)
-            ExtIO::shiftOut(dataPin, clockPin, LSBFIRST,
+            ExtIO::shiftOut(dataPin, clockPin, uint8_t(LSBFIRST),
                             this->buffer.getByte(i));
     else
         for (int8_t i = bufferLength - 1; i >= 0; i--)
-            ExtIO::shiftOut(dataPin, clockPin, MSBFIRST,
+            ExtIO::shiftOut(dataPin, clockPin, uint8_t(MSBFIRST),
                             this->buffer.getByte(i));
 
     ExtIO::digitalWrite(this->latchPin, HIGH);

@@ -1,7 +1,9 @@
 #ifdef ARDUINO
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include "Error.hpp"
-#include <Arduino.h>
 
 BEGIN_AH_NAMESPACE
 
@@ -27,5 +29,7 @@ void fatalErrorExit() {
 }
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()
 
 #endif

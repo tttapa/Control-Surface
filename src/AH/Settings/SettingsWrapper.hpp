@@ -1,12 +1,15 @@
 #ifndef AH_SETTINGSWRAPPER_HPP
 #define AH_SETTINGSWRAPPER_HPP
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 // ---- User Settings ---- //
 // ======================= //
 #include "NamespaceSettings.hpp"
 #include "Settings.hpp"
 
-#define AH_IS_EMPTY_HELPER(x) x ## 1
+#define AH_IS_EMPTY_HELPER(x) x##1
 #define AH_IS_EMPTY(x) AH_IS_EMPTY_HELPER(x) == 1
 
 #if AH_IS_EMPTY(DEBUG_OUT)
@@ -49,5 +52,7 @@ END_AH_NAMESPACE
 // ------- Debug ------- //
 // ===================== //
 #include <AH/Debug/Debug.hpp>
+
+AH_DIAGNOSTIC_POP()
 
 #endif // AH_SETTINGSWRAPPER_HPP

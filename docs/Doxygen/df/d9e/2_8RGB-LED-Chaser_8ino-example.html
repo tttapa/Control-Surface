@@ -74,11 +74,11 @@ $(function() {
 <div class="title">2.RGB-LED-Chaser.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md41"></a>
+<h1><a class="anchor" id="autotoc_md45"></a>
 2.RGB-LED-Chaser</h1>
 <p>This is an example of the ShiftRegisterOut class of the Control Surface library. It creates light effects using three 8-bit shift registers and some RGB LEDs.</p>
-<dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md42"></a>
+<dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Due, Teensy 3.x, ESP32</dd></dl>
+<h2><a class="anchor" id="autotoc_md46"></a>
 Connections</h2>
 <p>Connect three daisy-chained shift registers to the SPI pins. <br  />
  Connect 8 RGB LEDs (+ current limiting resistors) to the outputs of the shift registers.</p>
@@ -95,10 +95,10 @@ Connections</h2>
 <p>If you wired the LEDs as RGB (red first, then green and then blue), the red bit is 0, the green bit is 1 and the blue bit is 2. <br  />
  If you wired the LEDs as BGR (blue first, then green and then red), the red bit is 2, the green bit is 1 and the blue bit is 0. <br  />
  Other combinations are possible as well.</p>
-<h2><a class="anchor" id="autotoc_md43"></a>
+<h2><a class="anchor" id="autotoc_md47"></a>
 Behavior</h2>
 <p>This example will turn on all red LEDs one by one, then turn them off one by one, next, it will turn on and off all green LEDs in the same manner, and finally the same for the blue LEDs. This is repeated indefinitely.</p>
-<h2><a class="anchor" id="autotoc_md44"></a>
+<h2><a class="anchor" id="autotoc_md48"></a>
 Demo</h2>
 <p> 
 <iframe width="560" height="315"
@@ -113,7 +113,7 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="line"><span class="comment"> * library. It creates light effects using three 8-bit shift registers and some</span></div>
 <div class="line"><span class="comment"> * RGB LEDs.</span></div>
 <div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * @boards  AVR, AVR USB, Teensy 3.x, ESP32</span></div>
+<div class="line"><span class="comment"> * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Connections</span></div>
 <div class="line"><span class="comment"> * -----------</span></div>
@@ -226,10 +226,10 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
 <div class="ttc" id="aSPIShiftRegisterOut_8hpp_html"><div class="ttname"><a href="../../d7/d88/SPIShiftRegisterOut_8hpp.html">SPIShiftRegisterOut.hpp</a></div></div>
-<div class="ttc" id="aExtendedInputOutput_8hpp_html_acecd29798f132930ae1bfbe527f41e8d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a></div><div class="ttdeci">const uint8_t HIGH</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00034">ExtendedInputOutput.hpp:34</a></div></div>
-<div class="ttc" id="aExtendedInputOutput_8hpp_html_a948017cfe0ff222ceee310d1db10173d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a></div><div class="ttdeci">const uint8_t LOW</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00035">ExtendedInputOutput.hpp:35</a></div></div>
+<div class="ttc" id="aExtendedInputOutput_8hpp_html_acecd29798f132930ae1bfbe527f41e8d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a></div><div class="ttdeci">const uint8_t HIGH</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00039">ExtendedInputOutput.hpp:39</a></div></div>
+<div class="ttc" id="aExtendedInputOutput_8hpp_html_a948017cfe0ff222ceee310d1db10173d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a></div><div class="ttdeci">const uint8_t LOW</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00040">ExtendedInputOutput.hpp:40</a></div></div>
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
-<div class="ttc" id="anamespaceAH_1_1ExtIO_html_a5dfd4944a17db4ba1b028af54104ede9"><div class="ttname"><a href="../../d7/d22/namespaceAH_1_1ExtIO.html#a5dfd4944a17db4ba1b028af54104ede9">AH::ExtIO::digitalWrite</a></div><div class="ttdeci">void digitalWrite(pin_t pin, uint8_t val)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00045">ExtendedInputOutput.cpp:45</a></div></div>
+<div class="ttc" id="anamespaceAH_1_1ExtIO_html_a5dfd4944a17db4ba1b028af54104ede9"><div class="ttname"><a href="../../d7/d22/namespaceAH_1_1ExtIO.html#a5dfd4944a17db4ba1b028af54104ede9">AH::ExtIO::digitalWrite</a></div><div class="ttdeci">void digitalWrite(pin_t pin, uint8_t val)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00047">ExtendedInputOutput.cpp:47</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

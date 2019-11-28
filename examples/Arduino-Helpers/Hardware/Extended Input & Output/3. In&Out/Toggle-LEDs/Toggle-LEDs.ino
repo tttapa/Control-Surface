@@ -2,7 +2,7 @@
  * This example demonstrates the use of push buttons and LEDs and how to use
  * shift registers and analog multiplexers to save pins.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------

@@ -1,0 +1,51 @@
+#pragma once
+
+#include <AH/Settings/NamespaceSettings.hpp>
+
+#ifdef __AVR__
+#include "Fallback/memory"
+#else
+#include <memory>
+#endif
+
+BEGIN_AH_NAMESPACE 
+
+#if __cplusplus > 201103L
+
+using std::make_unique;
+
+#else 
+
+  template<typename _Tp>
+    struct _MakeUniq
+    { typedef std::unique_ptr<_Tp> __single_object; };
+
+  template<typename _Tp>
+    struct _MakeUniq<_Tp[]>
+    { typedef std::unique_ptr<_Tp[]> __array; };
+
+  template<typename _Tp, size_t _Bound>
+    struct _MakeUniq<_Tp[_Bound]>
+    { struct __invalid_type { }; };
+
+  /// std::make_unique for single objects
+  template<typename _Tp, typename... _Args>
+    inline typename _MakeUniq<_Tp>::__single_object
+    make_unique(_Args&&... __args)
+    { return std::unique_ptr<_Tp>(new _Tp(std::forward<_Args>(__args)...)); }
+
+  /// std::make_unique for arrays of unknown bound
+  template<typename _Tp>
+    inline typename _MakeUniq<_Tp>::__array
+    make_unique(size_t __num)
+    { return std::unique_ptr<_Tp>(
+        new typename std::remove_extent<_Tp>::type[__num]()); }
+
+  /// Disable std::make_unique for arrays of known bound
+  template<typename _Tp, typename... _Args>
+    inline typename _MakeUniq<_Tp>::__invalid_type
+    make_unique(_Args&&...) = delete;
+
+#endif
+
+END_AH_NAMESPACE

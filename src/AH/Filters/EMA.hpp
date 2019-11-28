@@ -2,6 +2,9 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <stdint.h>
 
 /**
@@ -126,3 +129,5 @@ class EMA_f {
     float alpha;
     float filtered = 0;
 };
+
+AH_DIAGNOSTIC_POP()

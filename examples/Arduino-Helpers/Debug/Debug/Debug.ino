@@ -2,7 +2,7 @@
  * This examples shows how use the debug macros for printing different kinds of
  * debugging information
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
  * 
  * Behavior
  * --------

@@ -93,7 +93,7 @@ $(function() {
 <div class="dynheader">
 Collaboration diagram for AH::Button:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../dc/d45/classAH_1_1Button__coll__graph.svg" width="139" height="264"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../dc/d45/classAH_1_1Button__coll__graph.svg" width="175" height="294"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
@@ -126,9 +126,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a33a0dbb2d745e255f1f948769308738e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d0d/classAH_1_1Button.html#aadc4c43a8cc0d2e3b21ee4729ae1147e">State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d0d/classAH_1_1Button.html#a33a0dbb2d745e255f1f948769308738e">getState</a> () const</td></tr>
 <tr class="memdesc:a33a0dbb2d745e255f1f948769308738e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the state of the button, without updating it.  <a href="../../de/d0d/classAH_1_1Button.html#a33a0dbb2d745e255f1f948769308738e">More...</a><br /></td></tr>
 <tr class="separator:a33a0dbb2d745e255f1f948769308738e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0575611df978995a201653b04c81b5c8"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d0d/classAH_1_1Button.html#a0575611df978995a201653b04c81b5c8">stableTime</a> ()</td></tr>
-<tr class="memdesc:a0575611df978995a201653b04c81b5c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the time (in milliseconds) that the button has been stable for.  <a href="../../de/d0d/classAH_1_1Button.html#a0575611df978995a201653b04c81b5c8">More...</a><br /></td></tr>
-<tr class="separator:a0575611df978995a201653b04c81b5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab53e77b51dc17b09e77c616500590d0c"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d0d/classAH_1_1Button.html#ab53e77b51dc17b09e77c616500590d0c">previousBounceTime</a> () const</td></tr>
+<tr class="memdesc:ab53e77b51dc17b09e77c616500590d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the time point (in milliseconds) when the button last bounced.  <a href="../../de/d0d/classAH_1_1Button.html#ab53e77b51dc17b09e77c616500590d0c">More...</a><br /></td></tr>
+<tr class="separator:ab53e77b51dc17b09e77c616500590d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dad8d86407ddf00ebd1b0b805bd5c08"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d0d/classAH_1_1Button.html#a4dad8d86407ddf00ebd1b0b805bd5c08">stableTime</a> (unsigned long now) const</td></tr>
+<tr class="memdesc:a4dad8d86407ddf00ebd1b0b805bd5c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the time (in milliseconds) that the button has been stable for, compared to the given time point.  <a href="../../de/d0d/classAH_1_1Button.html#a4dad8d86407ddf00ebd1b0b805bd5c08">More...</a><br /></td></tr>
+<tr class="separator:a4dad8d86407ddf00ebd1b0b805bd5c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada6cc2420d825b39278a79be6cac4dfc"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d0d/classAH_1_1Button.html#ada6cc2420d825b39278a79be6cac4dfc">stableTime</a> () const</td></tr>
+<tr class="memdesc:ada6cc2420d825b39278a79be6cac4dfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the time (in milliseconds) that the button has been stable for.  <a href="../../de/d0d/classAH_1_1Button.html#ada6cc2420d825b39278a79be6cac4dfc">More...</a><br /></td></tr>
+<tr class="separator:ada6cc2420d825b39278a79be6cac4dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -158,7 +164,7 @@ Static Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class for reading and debouncing buttons and switches. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00015">15</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="aadc4c43a8cc0d2e3b21ee4729ae1147e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aadc4c43a8cc0d2e3b21ee4729ae1147e">&#9670;&nbsp;</a></span>State</h2>
@@ -183,7 +189,7 @@ Static Private Attributes</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00050">50</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00053">53</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
 
 </div>
 </div>
@@ -215,7 +221,7 @@ Static Private Attributes</h2></td></tr>
 <p><b>This constructor should not be used.</b> <br  />
  It is just a way to easily create arrays of buttons, and initializing them later. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00024">24</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00027">27</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
 
 </div>
 </div>
@@ -243,7 +249,7 @@ Static Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00007">7</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00009">9</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
 
 </div>
 </div>
@@ -265,7 +271,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Initialize (enable the internal pull-up resistor). </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00009">9</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00011">11</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
 
 </div>
 </div>
@@ -288,7 +294,7 @@ Static Private Attributes</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>This affects <b>all</b> <a class="el" href="../../de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches.">Button</a> objects if <code>AH_INDIVIDUAL_BUTTON_INVERT</code> is not defined.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d5/d4f/AH_2Settings_2Settings_8hpp.html#ac7d8f5c5d6672ffc748f2c614740d2d6" title="Make it possible to invert individual push buttons.">AH_INDIVIDUAL_BUTTON_INVERT</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00011">11</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00013">13</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
 
 </div>
 </div>
@@ -326,7 +332,7 @@ Static Private Attributes</h2></td></tr>
 <div class="line">           RELEASED   FALLING   PRESSED   RISING</div>
 </div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>The state of the button, either Button::PRESSED, Button::RELEASED, Button::FALLING or Button::RISING. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00017">17</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00019">19</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
 
 </div>
 </div>
@@ -349,7 +355,7 @@ Static Private Attributes</h2></td></tr>
 <p>Returns the same value as the last call to <a class="el" href="../../de/d0d/classAH_1_1Button.html#a639a68908c43b7e0b9177226c6c7b132">update</a>.</p>
 <dl class="section return"><dt>Returns</dt><dd>The state of the button, either Button::PRESSED, Button::RELEASED, Button::FALLING or Button::RISING. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00034">34</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00036">36</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
 
 </div>
 </div>
@@ -379,12 +385,55 @@ Static Private Attributes</h2></td></tr>
 
 <p>Return the name of the state as a string. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00036">36</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00038">38</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a0575611df978995a201653b04c81b5c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0575611df978995a201653b04c81b5c8">&#9670;&nbsp;</a></span>stableTime()</h2>
+<a id="ab53e77b51dc17b09e77c616500590d0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab53e77b51dc17b09e77c616500590d0c">&#9670;&nbsp;</a></span>previousBounceTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long AH::Button::previousBounceTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the time point (in milliseconds) when the button last bounced. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00048">48</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4dad8d86407ddf00ebd1b0b805bd5c08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dad8d86407ddf00ebd1b0b805bd5c08">&#9670;&nbsp;</a></span>stableTime() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long AH::Button::stableTime </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>now</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the time (in milliseconds) that the button has been stable for, compared to the given time point. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00050">50</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ada6cc2420d825b39278a79be6cac4dfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada6cc2420d825b39278a79be6cac4dfc">&#9670;&nbsp;</a></span>stableTime() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -393,14 +442,14 @@ Static Private Attributes</h2></td></tr>
           <td class="memname">unsigned long AH::Button::stableTime </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Return the time (in milliseconds) that the button has been stable for. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00046">46</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/dd1/Button_8cpp_source.html#l00054">54</a> of file <a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a>.</p>
 
 </div>
 </div>
@@ -425,7 +474,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00102">102</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00112">112</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
 
 </div>
 </div>
@@ -449,7 +498,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00104">104</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00114">114</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
 
 </div>
 </div>
@@ -473,7 +522,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00105">105</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00115">115</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
 
 </div>
 </div>
@@ -497,7 +546,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00106">106</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00116">116</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
 
 </div>
 </div>
@@ -521,7 +570,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00111">111</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00121">121</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
 
 </div>
 </div>
@@ -548,7 +597,7 @@ Static Private Attributes</h2></td></tr>
 <p>Edit this in Settings.hpp. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="../../dc/d69/namespaceAH.html#a26e56196222fe5210ebc2c2b2229beb6" title="The debounce time for momentary push buttons in milliseconds.">BUTTON_DEBOUNCE_TIME</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00116">116</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/db3/Button_8hpp_source.html#l00126">126</a> of file <a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>.</p>
 
 </div>
 </div>
@@ -557,8 +606,8 @@ Static Private Attributes</h2></td></tr>
 <li><a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a></li>
 </ul>
 </div><!-- contents -->
-<div class="ttc" id="aExtendedInputOutput_8hpp_html_acecd29798f132930ae1bfbe527f41e8d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a></div><div class="ttdeci">const uint8_t HIGH</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00034">ExtendedInputOutput.hpp:34</a></div></div>
-<div class="ttc" id="aExtendedInputOutput_8hpp_html_a948017cfe0ff222ceee310d1db10173d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a></div><div class="ttdeci">const uint8_t LOW</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00035">ExtendedInputOutput.hpp:35</a></div></div>
+<div class="ttc" id="aExtendedInputOutput_8hpp_html_acecd29798f132930ae1bfbe527f41e8d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a></div><div class="ttdeci">const uint8_t HIGH</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00039">ExtendedInputOutput.hpp:39</a></div></div>
+<div class="ttc" id="aExtendedInputOutput_8hpp_html_a948017cfe0ff222ceee310d1db10173d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a></div><div class="ttdeci">const uint8_t LOW</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00040">ExtendedInputOutput.hpp:40</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -14,8 +14,8 @@
 <g id="a_node1"><a xlink:href="d3/d6e/classAH_1_1FilteredAnalog.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="-7.10543e-15,-0.5 -7.10543e-15,-41.5 121,-41.5 121,-0.5 -7.10543e-15,-0.5"/>
 <text text-anchor="start" x="8" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">AH::FilteredAnalog</text>
-<text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; PitchBendSender&lt; 10</text>
-<text text-anchor="middle" x="60.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00"> &gt; ::precision()&gt;</text>
+<text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; ContinuousCCSender</text>
+<text text-anchor="middle" x="60.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00"> ::precision()&gt;</text>
 </a>
 </g>
 </g>

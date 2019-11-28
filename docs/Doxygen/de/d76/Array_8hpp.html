@@ -83,14 +83,15 @@ $(function() {
 <div class="title">Array.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="../../d1/d93/Error_8hpp_source.html">AH/Error/Error.hpp</a>&gt;</code><br />
-<code>#include &lt;AH/STL/type_traits&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="../../d1/d65/Warnings_8hpp_source.html">AH/Settings/Warnings.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="../../d1/d93/Error_8hpp_source.html">AH/Error/Error.hpp</a>&gt;</code><br />
 <code>#include &lt;AH/STL/iterator&gt;</code><br />
+<code>#include &lt;AH/STL/type_traits&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Array.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../dc/d20/Array_8hpp__incl.svg" width="1128" height="486"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../dc/d20/Array_8hpp__incl.svg" width="1436" height="486"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -143,6 +144,18 @@ Functions</h2></td></tr>
 <tr class="memitem:ga818847fca2a20663858442ae048176dc"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/de8/group__AH__Containers.html#ga818847fca2a20663858442ae048176dc">AH::operator==</a> (ArraySlice&lt; T1, N1, Reverse1, Const1 &gt; a, const Array&lt; T2, N2 &gt; &amp;b)</td></tr>
 <tr class="memdesc:ga818847fca2a20663858442ae048176dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slice == <a class="el" href="../../d0/d32/structAH_1_1Array.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>.  <a href="../../da/de8/group__AH__Containers.html#ga818847fca2a20663858442ae048176dc">More...</a><br /></td></tr>
 <tr class="separator:ga818847fca2a20663858442ae048176dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga51a8f93bc11bd1c0e8c4c9b91127c978"><td class="memTemplParams" colspan="2">template&lt;class T1 , class T2 , size_t N1, size_t N2, bool Reverse1, bool Reverse2, bool Const1, bool Const2&gt; </td></tr>
+<tr class="memitem:ga51a8f93bc11bd1c0e8c4c9b91127c978"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/de8/group__AH__Containers.html#ga51a8f93bc11bd1c0e8c4c9b91127c978">AH::operator!=</a> (ArraySlice&lt; T1, N1, Reverse1, Const1 &gt; a, ArraySlice&lt; T2, N2, Reverse2, Const2 &gt; b)</td></tr>
+<tr class="memdesc:ga51a8f93bc11bd1c0e8c4c9b91127c978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slice != Slice.  <a href="../../da/de8/group__AH__Containers.html#ga51a8f93bc11bd1c0e8c4c9b91127c978">More...</a><br /></td></tr>
+<tr class="separator:ga51a8f93bc11bd1c0e8c4c9b91127c978"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga29fc2cfc0339bd270fd86a02d38ba2d7"><td class="memTemplParams" colspan="2">template&lt;class T1 , class T2 , size_t N1, size_t N2, bool Reverse2, bool Const2&gt; </td></tr>
+<tr class="memitem:ga29fc2cfc0339bd270fd86a02d38ba2d7"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/de8/group__AH__Containers.html#ga29fc2cfc0339bd270fd86a02d38ba2d7">AH::operator!=</a> (const Array&lt; T1, N1 &gt; &amp;a, ArraySlice&lt; T2, N2, Reverse2, Const2 &gt; b)</td></tr>
+<tr class="memdesc:ga29fc2cfc0339bd270fd86a02d38ba2d7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../d0/d32/structAH_1_1Array.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a> != Slice.  <a href="../../da/de8/group__AH__Containers.html#ga29fc2cfc0339bd270fd86a02d38ba2d7">More...</a><br /></td></tr>
+<tr class="separator:ga29fc2cfc0339bd270fd86a02d38ba2d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga407309d710839111f70b52bce46d962f"><td class="memTemplParams" colspan="2">template&lt;class T1 , class T2 , size_t N1, size_t N2, bool Reverse1, bool Const1&gt; </td></tr>
+<tr class="memitem:ga407309d710839111f70b52bce46d962f"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/de8/group__AH__Containers.html#ga407309d710839111f70b52bce46d962f">AH::operator!=</a> (ArraySlice&lt; T1, N1, Reverse1, Const1 &gt; a, const Array&lt; T2, N2 &gt; &amp;b)</td></tr>
+<tr class="memdesc:ga407309d710839111f70b52bce46d962f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slice != <a class="el" href="../../d0/d32/structAH_1_1Array.html" title="An array wrapper for easy copying, comparing, and iterating.">Array</a>.  <a href="../../da/de8/group__AH__Containers.html#ga407309d710839111f70b52bce46d962f">More...</a><br /></td></tr>
+<tr class="separator:ga407309d710839111f70b52bce46d962f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga92c0de2ed63614953525278005361ab0"><td class="memTemplParams" colspan="2">template&lt;class T1 , class T2 , size_t N1, size_t N2, bool Reverse1, bool Reverse2, bool Const1, bool Const2&gt; </td></tr>
 <tr class="memitem:ga92c0de2ed63614953525278005361ab0"><td class="memTemplItemLeft" align="right" valign="top">Array&lt; decltype(T1{}+T2{}), N1 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/de8/group__AH__Containers.html#ga92c0de2ed63614953525278005361ab0">AH::operator+</a> (ArraySlice&lt; T1, N1, Reverse1, Const1 &gt; a, ArraySlice&lt; T2, N2, Reverse2, Const2 &gt; b)</td></tr>
 <tr class="memdesc:ga92c0de2ed63614953525278005361ab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Slice + Slice.  <a href="../../da/de8/group__AH__Containers.html#ga92c0de2ed63614953525278005361ab0">More...</a><br /></td></tr>

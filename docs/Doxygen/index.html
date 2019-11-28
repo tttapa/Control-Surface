@@ -74,16 +74,16 @@ $(function() {
 <div class="title">Control Surface Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://github.com/tttapa/Arduino-Filters/actions"><img src="https://github.com/tttapa/Arduino-Filters/workflows/CI%20Tests/badge.svg" alt="Build Status" class="inline"/></a> <a href="https://travis-ci.org/tttapa/Control-Surface"><img src="https://travis-ci.org/tttapa/Control-Surface.svg?branch=master" alt="Build Status" class="inline"/></a></p>
-<h1><a class="anchor" id="autotoc_md149"></a>
+<div class="textblock"><p><a href="https://github.com/tttapa/Arduino-Filters/actions"><img src="https://github.com/tttapa/Arduino-Filters/workflows/CI%20Tests/badge.svg" alt="Build Status" class="inline"/></a> <a href="https://tttapa.github.io/Control-Surface/Coverage/index.html"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/tttapa/Control-Surface/master/docs/Coverage/shield.io.coverage.json" alt="Test Coverage" class="inline"/></a> <a href="https://travis-ci.org/tttapa/Control-Surface"><img src="https://travis-ci.org/tttapa/Control-Surface.svg?branch=master" alt="Build Status" class="inline"/></a> <a href="https://github.com/tttapa/Control-Surface"><img src="https://img.shields.io/github/stars/tttapa/Control-Surface?label=GitHub&amp;logo=github" alt="GitHub" class="inline"/></a></p>
+<h1><a class="anchor" id="autotoc_md153"></a>
 Control Surface</h1>
 <p>An Arduino library for MIDI control surfaces (input and output).</p>
-<h2><a class="anchor" id="autotoc_md150"></a>
+<h2><a class="anchor" id="autotoc_md154"></a>
 Under Construction</h2>
 <p>The library is not yet finished, and some parts of the API could change in the future. <br  />
  However, I believe that this is a useful library, even if not everything is implemented yet. <br  />
  If you'd like to help me with the development, please open an issue if you have requests or if you encounter any problems.</p>
-<h2><a class="anchor" id="autotoc_md151"></a>
+<h2><a class="anchor" id="autotoc_md155"></a>
 Overview</h2>
 <p>This library turns your Arduino-compatible board into a MIDI control surface. <br  />
 </p>
@@ -102,7 +102,7 @@ Overview</h2>
 <p>If you are using a Teensy 3.x, you can use it as a <b>USB audio interface</b>. Just add an I²S DAC (e.g. PCM5102), and 5 lines of code, and you can start playing audio through your Teensy. <br  />
  You can also add volume controls and VU meters for these audio connections.</p>
 <p>Thanks to the structure of the library, you can easily add your own MIDI or display elements, using some minimal, high level code. All low level stuff is completely <b>reusable</b> (e.g. all MIDI operations, debouncing switches, filtering analog inputs, and so on).</p>
-<h2><a class="anchor" id="autotoc_md152"></a>
+<h2><a class="anchor" id="autotoc_md156"></a>
 The Control Surface library vs. The MIDI Controller library</h2>
 <p>You might already have found my other Arduino MIDI library, <a href="https://github.com/tttapa/MIDI_Controller">MIDI Controller</a>, and are wondering which one you should use for your project.</p>
 <p>First, some background: <br  />
@@ -115,7 +115,7 @@ The Control Surface library vs. The MIDI Controller library</h2>
 <p>For a new project, I would recommend Control Surface, because I think it has some great features compared to MIDI Controller. <br  />
  The only caveat is that this library is still under development. Master should always be relatively stable, but I might change the API of some parts of the library for future releases if necessary. <br  />
  Another thing is that not everything is implemented yet, and many features are not yet fully documented. If you have a specific feature request that is not yet fully implemented, feel free to open an issue, so I know where to focus on first.</p>
-<h2><a class="anchor" id="autotoc_md153"></a>
+<h2><a class="anchor" id="autotoc_md157"></a>
 Recent Breaking Changes</h2>
 <ul>
 <li>bca6e11b2b3e02df5f600f65c81676708a81155b <br  />
@@ -129,7 +129,7 @@ Recent Breaking Changes</h2>
  This means that the input and output values of the function should be 16 - <code>ANALOG_FILTER_SHIFT_FACTOR</code> bits wide instead of 7. By default this is <b>14 bits</b>. <br  />
  The signature of the mapping function is now <code>analog_t f(analog_t raw)</code>, where the return value and raw are both numbers in [0, 16383].</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md154"></a>
+<h2><a class="anchor" id="autotoc_md158"></a>
 Work in progress</h2>
 <ul>
 <li>Adding support for motorized faders</li>
@@ -140,20 +140,20 @@ Work in progress</h2>
 <li>Adding more examples and adding comments to existing examples</li>
 <li>Finishing the documentation</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md155"></a>
+<h2><a class="anchor" id="autotoc_md159"></a>
 Getting Started</h2>
 <p>See the <a href="https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html">Getting Started</a> document to get started using the library.</p>
 <p>Libraries that use the Arduino Helpers library include:</p><ul>
 <li><a href="https://github.com/tttapa/Arduino-Filters"><b>Arduino Filters</b></a>: FIR, IIR filtering library</li>
 <li><a href="https://github.com/tttapa/Control-Surface"><b>Control Surface</b></a>: library for creating MIDI Control Surfaces, with knobs and push buttons, LEDs, displays, etc.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md156"></a>
+<h2><a class="anchor" id="autotoc_md160"></a>
 Documentation</h2>
 <p>The automatically generated Doxygen documentation for this library can be found here: <br  />
  <a href="https://tttapa.github.io/Control-Surface/Doxygen/index.html"><b>Documentation</b></a> <br  />
  Test coverage information can be found here: <br  />
  <a href="https://tttapa.github.io/Control-Surface/Coverage/index.html"><b>Code Coverage</b></a></p>
-<h2><a class="anchor" id="autotoc_md157"></a>
+<h2><a class="anchor" id="autotoc_md161"></a>
 Information for developers</h2>
 <p>Information for people that would like to help improve the Control Surface library can be found here: <a href="https://tttapa.github.io/Pages/Arduino/Control-Surface/Developers/index.html">https://tttapa.github.io/Pages/Arduino/Control-Surface/Developers/index.html</a> <br  />
  It covers installation instructions for developers, instructions for running the tests and generating documentation, a style guide, etc. </p>

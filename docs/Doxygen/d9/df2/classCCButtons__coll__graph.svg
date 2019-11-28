@@ -272,32 +272,34 @@
 <!-- Node11 -->
 <g id="node11" class="node"><title>Node11</title>
 <g id="a_node11"><a xlink:href="../../de/d0d/classAH_1_1Button.html" target="_top" xlink:title="A class for reading and debouncing buttons and switches.">
-<polygon fill="white" stroke="black" points="394,-624.5 394,-813.5 490,-813.5 490,-624.5 394,-624.5"/>
-<text text-anchor="middle" x="442" y="-801.5" font-family="Helvetica,sans-Serif" font-size="10.00">AH::Button</text>
-<polyline fill="none" stroke="black" points="394,-794.5 490,-794.5 "/>
-<text text-anchor="start" x="402" y="-782.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; pin</text>
-<text text-anchor="start" x="402" y="-771.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; prevInput</text>
-<text text-anchor="start" x="402" y="-760.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; debouncedState</text>
-<text text-anchor="start" x="402" y="-749.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; prevBounceTime</text>
-<text text-anchor="start" x="402" y="-738.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; invertState</text>
-<text text-anchor="start" x="402" y="-727.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; debounceTime</text>
-<polyline fill="none" stroke="black" points="394,-720.5 490,-720.5 "/>
-<text text-anchor="start" x="402" y="-708.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ Button()</text>
-<text text-anchor="start" x="402" y="-697.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ Button()</text>
-<text text-anchor="start" x="402" y="-686.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
-<text text-anchor="start" x="402" y="-675.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ invert()</text>
-<text text-anchor="start" x="402" y="-664.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ update()</text>
-<text text-anchor="start" x="402" y="-653.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getState()</text>
-<text text-anchor="start" x="402" y="-642.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ stableTime()</text>
-<text text-anchor="start" x="402" y="-631.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getName()</text>
+<polygon fill="white" stroke="black" points="394.5,-613.5 394.5,-824.5 517.5,-824.5 517.5,-613.5 394.5,-613.5"/>
+<text text-anchor="middle" x="456" y="-812.5" font-family="Helvetica,sans-Serif" font-size="10.00">AH::Button</text>
+<polyline fill="none" stroke="black" points="394.5,-805.5 517.5,-805.5 "/>
+<text text-anchor="start" x="402.5" y="-793.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; pin</text>
+<text text-anchor="start" x="402.5" y="-782.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; prevInput</text>
+<text text-anchor="start" x="402.5" y="-771.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; debouncedState</text>
+<text text-anchor="start" x="402.5" y="-760.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; prevBounceTime</text>
+<text text-anchor="start" x="402.5" y="-749.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; invertState</text>
+<text text-anchor="start" x="402.5" y="-738.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; debounceTime</text>
+<polyline fill="none" stroke="black" points="394.5,-731.5 517.5,-731.5 "/>
+<text text-anchor="start" x="402.5" y="-719.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ Button()</text>
+<text text-anchor="start" x="402.5" y="-708.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ Button()</text>
+<text text-anchor="start" x="402.5" y="-697.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
+<text text-anchor="start" x="402.5" y="-686.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ invert()</text>
+<text text-anchor="start" x="402.5" y="-675.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ update()</text>
+<text text-anchor="start" x="402.5" y="-664.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getState()</text>
+<text text-anchor="start" x="402.5" y="-653.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ previousBounceTime()</text>
+<text text-anchor="start" x="402.5" y="-642.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ stableTime()</text>
+<text text-anchor="start" x="402.5" y="-631.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ stableTime()</text>
+<text text-anchor="start" x="402.5" y="-620.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getName()</text>
 </a>
 </g>
 </g>
 <!-- Node11&#45;&gt;Node10 -->
 <g id="edge12" class="edge"><title>Node11&#45;&gt;Node10</title>
-<path fill="none" stroke="#404040" d="M424.617,-624.457C417.378,-585.5 408.96,-540.202 401.597,-500.579"/>
-<polygon fill="none" stroke="#404040" points="401.592,-500.548 396.563,-495.38 399.399,-488.75 404.428,-493.919 401.592,-500.548"/>
-<text text-anchor="middle" x="427" y="-554" font-family="Helvetica,sans-Serif" font-size="10.00"> +data</text>
+<path fill="none" stroke="#404040" d="M431.895,-613.159C423.556,-576.889 414.237,-536.359 405.99,-500.489"/>
+<polygon fill="none" stroke="#404040" points="405.926,-500.211 400.683,-495.259 403.237,-488.516 408.479,-493.467 405.926,-500.211"/>
+<text text-anchor="middle" x="434" y="-554" font-family="Helvetica,sans-Serif" font-size="10.00"> +data</text>
 </g>
 <!-- Node12 -->
 <g id="node12" class="node"><title>Node12</title>

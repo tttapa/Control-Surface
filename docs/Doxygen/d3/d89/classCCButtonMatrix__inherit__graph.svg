@@ -110,7 +110,7 @@
 <text text-anchor="start" x="146.5" y="-377" font-family="Helvetica,sans-Serif" font-size="10.00">+ ButtonMatrix()</text>
 <text text-anchor="start" x="146.5" y="-366" font-family="Helvetica,sans-Serif" font-size="10.00">+ ~ButtonMatrix()</text>
 <text text-anchor="start" x="146.5" y="-355" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
-<text text-anchor="start" x="146.5" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ refresh()</text>
+<text text-anchor="start" x="146.5" y="-344" font-family="Helvetica,sans-Serif" font-size="10.00">+ update()</text>
 <text text-anchor="start" x="146.5" y="-333" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; onButtonChanged()</text>
 <text text-anchor="start" x="146.5" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; getPrevState()</text>
 <text text-anchor="start" x="146.5" y="-311" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; setPrevState()</text>

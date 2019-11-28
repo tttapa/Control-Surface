@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['parent_4207',['Parent',['../da/dbf/classGenericEncoderSelector.html#a4c20f4953f4d0759906bd136869991ad',1,'GenericEncoderSelector::Parent()'],['../d3/d78/classGenericIncrementDecrementSelector.html#a981bd0725bfe89cf23becb2e7140fee8',1,'GenericIncrementDecrementSelector::Parent()'],['../d1/d94/classGenericIncrementSelector.html#a2d09dcd41628b35a631615db7ec4f5da',1,'GenericIncrementSelector::Parent()'],['../de/d1e/classGenericManyButtonsSelector.html#a4a2174b5433d926c86f579942eea69d5',1,'GenericManyButtonsSelector::Parent()'],['../d2/d1c/classGenericSwitchSelector.html#afcfc987d21ca01bf12d7c332d70b3fd5',1,'GenericSwitchSelector::Parent()']]],
-  ['pin_5ft_4208',['pin_t',['../dc/d69/namespaceAH.html#a5674c973801a7f18514a073503f6f479',1,'AH']]],
-  ['pinlist_4209',['PinList',['../dc/d69/namespaceAH.html#a69811526f645221053b94f3e7c48b83e',1,'AH']]],
-  ['pint_4210',['pint',['../d6/d99/classBresenhamLine.html#a4533d38d700f6039e28f761bb3137952',1,'BresenhamLine']]],
-  ['pointer_4211',['pointer',['../df/d2b/classAH_1_1ArraySlice_1_1Iterator.html#aba444e43e6275abc807708976afad496',1,'AH::ArraySlice::Iterator::pointer()'],['../dd/d02/classDoublyLinkedList_1_1node__iterator.html#ae80d10b3b8d42307d7997181af7331f1',1,'DoublyLinkedList::node_iterator::pointer()'],['../d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html#aa9907a1233b2edcdbfb2277d7d87a717',1,'DoublyLinkedList::reverse_node_iterator::pointer()']]]
+  ['manipulator_4210',['manipulator',['../d8/d4b/group__AH__PrintStream.html#gab82cf12919f956954b9bba423b696205',1,'PrintStream.hpp']]],
+  ['mappingfunction_4211',['MappingFunction',['../d3/d6e/classAH_1_1FilteredAnalog.html#aa080a585e0ed40e33953d9ff07461c34',1,'AH::FilteredAnalog::MappingFunction()'],['../d0/d4e/Def_8hpp.html#a8a88619567eb674b733cb39ac9b06ad6',1,'MappingFunction():&#160;Def.hpp']]],
+  ['midinote_4212',['MIDINote',['../d6/dbb/NoteCCRange_8hpp.html#a61df835b176a68297c50afa97f31c96b',1,'MIDINote():&#160;NoteCCRange.hpp'],['../d1/dd0/namespaceBankable.html#a2b40d332a6a0ecd62ef66efe9a9fba48',1,'Bankable::MIDINote()']]],
+  ['midinoteled_4213',['MIDINoteLED',['../d4/d33/NoteCCRangeLEDs_8hpp.html#a6176287dcf4c5ee8ae321a2c0bc4a4a8',1,'MIDINoteLED():&#160;NoteCCRangeLEDs.hpp'],['../d1/dd0/namespaceBankable.html#a2636a5cfd753cbb040d004f512d47792',1,'Bankable::MIDINoteLED()']]],
+  ['midioutputelement_4214',['MIDIOutputElement',['../d1/d41/MIDIOutputElement_8hpp.html#a42e54a3ce5a3ac2d4c99d22b246fed53',1,'MIDIOutputElement.hpp']]],
+  ['midioutputelementpotentiometer_4215',['MIDIOutputElementPotentiometer',['../d1/d41/MIDIOutputElement_8hpp.html#a9f1e57346f96f69505fe7f72806d5287',1,'MIDIOutputElement.hpp']]]
 ];

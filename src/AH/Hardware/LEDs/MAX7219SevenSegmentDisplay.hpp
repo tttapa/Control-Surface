@@ -1,5 +1,8 @@
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include "MAX7219_Base.hpp"
 
 BEGIN_AH_NAMESPACE
@@ -154,6 +157,9 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
      *          The digit to print to [0, 7].
      * @param   value
      *          The 4-bit value to print [0, 15].
+     * 
+     * @todo    Rename to `printHexChar` and create function that actually 
+     *          prints longer hexadecimal numbers.
      */
     void printHex(uint8_t digit, uint8_t value) {
         value &= 0x0F;
@@ -164,3 +170,5 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
 };
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

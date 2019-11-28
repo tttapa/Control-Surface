@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 80ba08a3895ece11ffdc0615e2a6f53de411ae19 - src/AH/Hardware/ButtonMatrix.ipp</title>
+  <title>LCOV - d0de365697a9d6a8331c32c0388c9e38aa541a32 - src/AH/Hardware/ButtonMatrix.ipp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">80ba08a3895ece11ffdc0615e2a6f53de411ae19</td>
+            <td class="headerValue">d0de365697a9d6a8331c32c0388c9e38aa541a32</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">42</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-21 23:16:59</td>
+            <td class="headerValue">2019-11-28 01:24:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -84,7 +84,7 @@
 <a name="14"><span class="lineNum">      14 </span><span class="lineCov">          9 : }</span></a>
 <a name="15"><span class="lineNum">      15 </span>            : </a>
 <a name="16"><span class="lineNum">      16 </span>            : template &lt;uint8_t nb_rows, uint8_t nb_cols&gt;</a>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">         10 : void ButtonMatrix&lt;nb_rows, nb_cols&gt;::refresh() {</span></a>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">         10 : void ButtonMatrix&lt;nb_rows, nb_cols&gt;::update() {</span></a>
 <a name="18"><span class="lineNum">      18 </span><span class="lineCov">         10 :     unsigned long now = millis();</span></a>
 <a name="19"><span class="lineNum">      19 </span>            :     // only update 25 ms after previous change (crude software debounce).</a>
 <a name="20"><span class="lineNum">      20 </span>            :     // Edit this in Settings/Settings.hpp</a>
@@ -140,10 +140,10 @@
 <a name="70"><span class="lineNum">      70 </span><span class="lineCov">         60 :     uint8_t bits = positionToBits(col, row);</span></a>
 <a name="71"><span class="lineNum">      71 </span><span class="lineCov">         60 :     return !!(prevStates[bitsToIndex(bits)] &amp; bitsToBitmask(bits));</span></a>
 <a name="72"><span class="lineNum">      72 </span>            : }</a>
-<a name="73"><span class="lineNum">      73 </span><span class="lineCov">          9 : </span></a>
+<a name="73"><span class="lineNum">      73 </span>            : </a>
 <a name="74"><span class="lineNum">      74 </span>            : template &lt;uint8_t nb_rows, uint8_t nb_cols&gt;</a>
 <a name="75"><span class="lineNum">      75 </span><span class="lineCov">         10 : void ButtonMatrix&lt;nb_rows, nb_cols&gt;::setPrevState(uint8_t col, uint8_t row,</span></a>
-<a name="76"><span class="lineNum">      76 </span>            :                                                   bool state) {</a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">          9 :                                                   bool state) {</span></a>
 <a name="77"><span class="lineNum">      77 </span><span class="lineCov">         10 :     uint8_t bits = positionToBits(col, row);</span></a>
 <a name="78"><span class="lineNum">      78 </span><span class="lineCov">         10 :     if (state)</span></a>
 <a name="79"><span class="lineNum">      79 </span><span class="lineCov">          5 :         prevStates[bitsToIndex(bits)] |= bitsToBitmask(bits);</span></a>

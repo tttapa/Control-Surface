@@ -2,6 +2,9 @@
 
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <AH/Hardware/Hardware-Types.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -48,7 +51,7 @@ class ButtonMatrix {
      * @brief   Scan the matrix, read all button states, and call the
      *          onButtonChanged callback.
      */
-    void refresh();
+    void update();
 
   private:
     /**
@@ -80,3 +83,5 @@ class ButtonMatrix {
 END_AH_NAMESPACE
 
 #include "ButtonMatrix.ipp" // Template implementations
+
+AH_DIAGNOSTIC_POP()

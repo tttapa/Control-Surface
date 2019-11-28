@@ -56,7 +56,7 @@ class MIDIButtonMatrix : public MIDIOutputElement,
   public:
     void begin() override { AH::ButtonMatrix<nb_rows, nb_cols>::begin(); }
 
-    void update() override { AH::ButtonMatrix<nb_rows, nb_cols>::refresh(); }
+    void update() override { AH::ButtonMatrix<nb_rows, nb_cols>::update(); }
 
   private:
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {

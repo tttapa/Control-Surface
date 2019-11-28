@@ -74,11 +74,11 @@ $(function() {
 <div class="title">MCU-OLED-SSD1306-x2.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md74"></a>
+<h1><a class="anchor" id="autotoc_md78"></a>
 MCU-OLED-SSD1306-x2</h1>
 <p>An example demonstrating the use of <a class="el" href="../../d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display.">DisplayElement</a>s to display information from the DAW on two small OLED displays.</p>
 <dl class="section user"><dt>Boards:</dt><dd>Teensy 3.x</dd></dl>
-<h2><a class="anchor" id="autotoc_md75"></a>
+<h2><a class="anchor" id="autotoc_md79"></a>
 Connections</h2>
 <ul>
 <li>5: Push button (to ground)</li>
@@ -91,19 +91,19 @@ Connections</h2>
 <p>Add a capacitor between the reset pins of the displays and ground, and a resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ work fine. <br  />
  You do need some way to reset the displays, without it, it won't work. <br  />
  Alternatively, you could use an IO pin from the Teensy to reset the displays, but this just "wastes" a pin.</p>
-<h2><a class="anchor" id="autotoc_md76"></a>
+<h2><a class="anchor" id="autotoc_md80"></a>
 Behavior</h2>
 <ul>
 <li>The time (bars, beats, fraction), play and record status are shown at the top of the display.</li>
 <li>For each of the 8 first tracks, a VU level meter with peak indicator and a V-Pot ring showing the pan are displayed, as well as the the mute, solo and record arm status.</li>
 <li>Four tracks are displayed at once. By pressing the push button connected to pin 5, you can switch between two banks to display all 8 tracks.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md77"></a>
+<h2><a class="anchor" id="autotoc_md81"></a>
 Mapping</h2>
 <p>Map "Control Surface" as a Mackie Control Universal unit in your DAW.</p>
 <dl class="section note"><dt>Note</dt><dd>There seem to be some differences in the way some applications handle VU meters: some expect the hardware to decay automatically, some don't. <br  />
  If you notice that the meters behave strangely, try both <a class="el" href="../../d6/d98/namespaceMCU_1_1VUDecay.html#ac4567deabb7cfc6e3cd01c45aacfb0a6" title="Don&#39;t decay automatically, hold the latest value until a new one is received.">MCU::VUDecay::Hold</a> and <a class="el" href="../../d6/d98/namespaceMCU_1_1VUDecay.html#acddb03c75a0930c4e17a4b070f6e24a6" title="Decay one segment/block every 150 ms if no new values are received.">MCU::VUDecay::Default</a>, or try a different decay time.</dd></dl>
-<h2><a class="anchor" id="autotoc_md78"></a>
+<h2><a class="anchor" id="autotoc_md82"></a>
 Demo</h2>
 <p> 
 <iframe width="560" height="315"
@@ -423,7 +423,7 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="line">  <a class="code" href="../../d9/d38/Control__Surface__Class_8cpp.html#af7a5d250297d82b2b29605dd7ac250df">Control_Surface</a>.<a name="a47"></a><a class="code" href="../../dc/d45/classControl__Surface__.html#a69fd0ae13604c39d6dc0da12fc94a18f">loop</a>(); <span class="comment">// Refresh all elements</span></div>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
-<div class="ttc" id="aclassUSBMIDI__Interface_html"><div class="ttname"><a href="../../de/d05/classUSBMIDI__Interface.html">USBMIDI_Interface</a></div><div class="ttdoc">A class for MIDI interfaces sending MIDI messages over a USB MIDI connection.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d64/USBMIDI__Interface_8hpp_source.html#l00039">USBMIDI_Interface.hpp:39</a></div></div>
+<div class="ttc" id="aclassUSBMIDI__Interface_html"><div class="ttname"><a href="../../de/d05/classUSBMIDI__Interface.html">USBMIDI_Interface</a></div><div class="ttdoc">A class for MIDI interfaces sending MIDI messages over a USB MIDI connection.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d64/USBMIDI__Interface_8hpp_source.html#l00043">USBMIDI_Interface.hpp:43</a></div></div>
 <div class="ttc" id="aclassNoteBitmapDisplay_html"><div class="ttname"><a href="../../de/dc5/classNoteBitmapDisplay.html">NoteBitmapDisplay</a></div><div class="ttdoc">A class that displays a bitmap depending on the state of a MIDINote.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d24/NoteBitmapDisplay_8hpp_source.html#l00010">NoteBitmapDisplay.hpp:10</a></div></div>
 <div class="ttc" id="aRelativeCCSender_8hpp_html_a793b4d05f50a2c3af3ddeeef50e7a71dafb57df7f09c11569e6325f0250664288"><div class="ttname"><a href="../../d9/d24/RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71dafb57df7f09c11569e6325f0250664288">MACKIE_CONTROL_RELATIVE</a></div><div class="ttdoc">Relative mode used by the Mackie Control Universal protocol.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d24/RelativeCCSender_8hpp_source.html#l00062">RelativeCCSender.hpp:62</a></div></div>
 <div class="ttc" id="anamespaceXBM_html_af6edd4e5836d40a8eb9127bc7ad94c57"><div class="ttname"><a href="../../dd/d93/namespaceXBM.html#af6edd4e5836d40a8eb9127bc7ad94c57">XBM::solo_10B</a></div><div class="ttdeci">const XBitmap solo_10B</div><div class="ttdoc">XBitmap solo_10B (10px × 10px)</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d33/XBitmaps_8hpp_source.html#l00115">XBitmaps.hpp:115</a></div></div>
@@ -442,7 +442,7 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="ttc" id="anamespaceMCU_html_a7d0577153aa90745c199d0b30ef8702a"><div class="ttname"><a href="../../d7/dc7/namespaceMCU.html#a7d0577153aa90745c199d0b30ef8702a">MCU::SOLO_1</a></div><div class="ttdeci">constexpr uint8_t SOLO_1</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d60/MCU_8hpp_source.html#l00027">MCU.hpp:27</a></div></div>
 <div class="ttc" id="aclassMCU_1_1Bankable_1_1VU_html"><div class="ttname"><a href="../../d0/d43/classMCU_1_1Bankable_1_1VU.html">MCU::Bankable::VU</a></div><div class="ttdoc">A class for MIDI input elements that represent Mackie Control Universal VU meters.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/dda/VU_8hpp_source.html#l00353">VU.hpp:353</a></div></div>
 <div class="ttc" id="anamespaceMCU_html_aa0973f152233cfe4f9752ec9ca254216"><div class="ttname"><a href="../../d7/dc7/namespaceMCU.html#aa0973f152233cfe4f9752ec9ca254216">MCU::REC_RDY_1</a></div><div class="ttdeci">constexpr uint8_t REC_RDY_1</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d60/MCU_8hpp_source.html#l00018">MCU.hpp:18</a></div></div>
-<div class="ttc" id="agroup__AH__Error_html_ga3add19f1f413c0aabde3f5c6fe4230c6"><div class="ttname"><a href="../../d0/df7/group__AH__Error.html#ga3add19f1f413c0aabde3f5c6fe4230c6">FATAL_ERROR</a></div><div class="ttdeci">#define FATAL_ERROR(msg, errc)</div><div class="ttdoc">Print the error message and error code, and stop the execution.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d93/Error_8hpp_source.html#l00057">Error.hpp:57</a></div></div>
+<div class="ttc" id="agroup__AH__Error_html_ga3add19f1f413c0aabde3f5c6fe4230c6"><div class="ttname"><a href="../../d0/df7/group__AH__Error.html#ga3add19f1f413c0aabde3f5c6fe4230c6">FATAL_ERROR</a></div><div class="ttdeci">#define FATAL_ERROR(msg, errc)</div><div class="ttdoc">Print the error message and error code, and stop the execution.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d93/Error_8hpp_source.html#l00060">Error.hpp:60</a></div></div>
 <div class="ttc" id="anamespaceMCU_1_1VUDecay_html_ac4567deabb7cfc6e3cd01c45aacfb0a6"><div class="ttname"><a href="../../d6/d98/namespaceMCU_1_1VUDecay.html#ac4567deabb7cfc6e3cd01c45aacfb0a6">MCU::VUDecay::Hold</a></div><div class="ttdeci">constexpr unsigned int Hold</div><div class="ttdoc">Don't decay automatically, hold the latest value until a new one is received.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/dda/VU_8hpp_source.html#l00041">VU.hpp:41</a></div></div>
 <div class="ttc" id="aclassBankDisplay_html"><div class="ttname"><a href="../../d6/dc4/classBankDisplay.html">BankDisplay</a></div><div class="ttdoc">A class for displaying the setting of a Bank object.</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d3d/SelectorDisplay_8hpp_source.html#l00037">SelectorDisplay.hpp:37</a></div></div>
 <div class="ttc" id="aControl__Surface_8h_html"><div class="ttname"><a href="../../db/dbf/Control__Surface_8h.html">Control_Surface.h</a></div><div class="ttdoc">The main header file that includes all Control-Surface header files.</div></div>

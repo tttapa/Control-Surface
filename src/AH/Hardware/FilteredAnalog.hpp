@@ -1,5 +1,8 @@
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+
 #include <AH/Filters/EMA.hpp>
 #include <AH/Filters/Hysteresis.hpp>
 #include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
@@ -168,3 +171,5 @@ class FilteredAnalog {
 };
 
 END_AH_NAMESPACE
+
+AH_DIAGNOSTIC_POP()
