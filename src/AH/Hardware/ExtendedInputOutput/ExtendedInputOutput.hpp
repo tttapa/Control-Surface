@@ -23,6 +23,8 @@ const static uint8_t tmp_OUTPUT = OUTPUT;
 const static uint8_t tmp_INPUT_PULLUP = INPUT_PULLUP;
 }
 
+END_AH_NAMESPACE
+
 #ifndef ARDUINO_API_VERSION
 #ifdef HIGH
 #undef HIGH
@@ -41,14 +43,15 @@ const static uint8_t tmp_INPUT_PULLUP = INPUT_PULLUP;
 #undef INPUT_PULLUP
 #endif
 
-const uint8_t HIGH = detail::tmp_HIGH;
-const uint8_t LOW = detail::tmp_LOW;
+const uint8_t HIGH = AH::detail::tmp_HIGH;
+const uint8_t LOW = AH::detail::tmp_LOW;
 
-const uint8_t INPUT = detail::tmp_INPUT;
-const uint8_t OUTPUT = detail::tmp_OUTPUT;
-const uint8_t INPUT_PULLUP = detail::tmp_INPUT_PULLUP;
+const uint8_t INPUT = AH::detail::tmp_INPUT;
+const uint8_t OUTPUT = AH::detail::tmp_OUTPUT;
+const uint8_t INPUT_PULLUP = AH::detail::tmp_INPUT_PULLUP;
 #endif
 
+BEGIN_AH_NAMESPACE
 
 /**
  * @brief   A namespace with alternatives to the standard Arduino IO functions
