@@ -22,10 +22,12 @@ else
     ln -s ../../opt/arduino-1.8.9/arduino ~/.local/bin/
     ln -s ../../opt/arduino-1.8.9/arduino-builder ~/.local/bin/
 
-    arduino --pref "boardsmanager.additional.urls=https://dl.espressif.com/dl/package_esp32_index.json" --save-prefs
-    arduino --install-boards esp32:esp32
+    arduino --pref "boardsmanager.additional.urls=https://dl.espressif.com/dl/package_esp32_index.json,https://arduino.esp8266.com/stable/package_esp8266com_index.json" --save-prefs
+    arduino --install-boards "esp32:esp32"
+    arduino --install-boards "esp8266:esp8266"
     arduino --install-boards "arduino:avr:1.8.1"
     arduino --install-boards "arduino:sam"
+    arduino --install-boards "arduino:samd"
 
     cd /tmp
     wget https://www.pjrc.com/teensy/td_148/TeensyduinoInstall.linux64

@@ -179,7 +179,7 @@ class ArraySlice {
     operator Array<T, N>() const { return asArray(); }
 
     Array<T, N> asArray() const {
-        Array<T, N> slice = {};
+        Array<T, N> slice = {{}};
         for (size_t i = 0; i < N; ++i)
             slice[i] = (*this)[i];
         return slice;
@@ -360,7 +360,7 @@ Array<decltype(T1{} + T2{}), N1>
 operator+(ArraySlice<T1, N1, Reverse1, Const1> a,
           ArraySlice<T2, N2, Reverse2, Const2> b) {
     static_assert(N1 == N2, "Error: sizes do not match");
-    Array<decltype(T1{} + T2{}), N1> result = {};
+    Array<decltype(T1{} + T2{}), N1> result = {{}};
     for (size_t i = 0; i < N1; ++i)
         result[i] = a[i] + b[i];
     return result;
@@ -401,7 +401,7 @@ Array<decltype(T1{} - T2{}), N1>
 operator-(ArraySlice<T1, N1, Reverse1, Const1> a,
           ArraySlice<T2, N2, Reverse2, Const2> b) {
     static_assert(N1 == N2, "Error: sizes do not match");
-    Array<decltype(T1{} - T2{}), N1> result = {};
+    Array<decltype(T1{} - T2{}), N1> result = {{}};
     for (size_t i = 0; i < N1; ++i)
         result[i] = a[i] - b[i];
     return result;
@@ -439,7 +439,7 @@ Array<T1, N1> &operator-=(Array<T1, N1> &a, const Array<T2, N2> &b) {
 template <class T1, class T2, size_t N1, bool Reverse1, bool Const1>
 Array<decltype(T1{} * T2{}), N1>
 operator*(ArraySlice<T1, N1, Reverse1, Const1> a, T2 b) {
-    Array<decltype(T1{} * T2{}), N1> result = {};
+    Array<decltype(T1{} * T2{}), N1> result = {{}};
     for (size_t i = 0; i < N1; ++i)
         result[i] = a[i] * b;
     return result;
@@ -455,7 +455,7 @@ Array<decltype(T1{} * T2{}), N1> operator*(const Array<T1, N1> &a, T2 b) {
 template <class T1, class T2, size_t N2, bool Reverse2, bool Const2>
 Array<decltype(T1{} * T2{}), N2>
 operator*(T1 a, ArraySlice<T2, N2, Reverse2, Const2> b) {
-    Array<decltype(T1{} * T2{}), N2> result = {};
+    Array<decltype(T1{} * T2{}), N2> result = {{}};
     for (size_t i = 0; i < N2; ++i)
         result[i] = a * b[i];
     return result;
@@ -489,7 +489,7 @@ Array<T1, N1> &operator*=(Array<T1, N1> &a, T2 b) {
 template <class T1, class T2, size_t N1, bool Reverse1, bool Const1>
 Array<decltype(T1{} / T2{}), N1>
 operator/(ArraySlice<T1, N1, Reverse1, Const1> a, T2 b) {
-    Array<decltype(T1{} / T2{}), N1> result = {};
+    Array<decltype(T1{} / T2{}), N1> result = {{}};
     for (size_t i = 0; i < N1; ++i)
         result[i] = a[i] / b;
     return result;
@@ -522,7 +522,7 @@ Array<T1, N1> &operator/=(Array<T1, N1> &a, T2 b) {
 /// -Slice
 template <class T, size_t N, bool Reverse, bool Const>
 Array<decltype(-T{}), N> operator-(ArraySlice<T, N, Reverse, Const> a) {
-    Array<decltype(-T{}), N> result = {};
+    Array<decltype(-T{}), N> result = {{}};
     for (size_t i = 0; i < N; ++i)
         result[i] = -a[i];
     return result;

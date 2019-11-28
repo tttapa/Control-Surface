@@ -11,14 +11,19 @@ AH_DIAGNOSTIC_POP()
 
 #include "ExtendedIOElement.hpp"
 
-#define EXT_PIN(x) (x + NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
+BEGIN_AH_NAMESPACE
 
+#define AH_EXT_PIN(x) (x + NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
+
+namespace detail {
 const static uint8_t tmp_HIGH = HIGH;
 const static uint8_t tmp_LOW = LOW;
 const static uint8_t tmp_INPUT = INPUT;
 const static uint8_t tmp_OUTPUT = OUTPUT;
 const static uint8_t tmp_INPUT_PULLUP = INPUT_PULLUP;
+}
 
+#ifndef ARDUINO_API_VERSION
 #ifdef HIGH
 #undef HIGH
 #endif
@@ -36,14 +41,14 @@ const static uint8_t tmp_INPUT_PULLUP = INPUT_PULLUP;
 #undef INPUT_PULLUP
 #endif
 
-const uint8_t HIGH = tmp_HIGH;
-const uint8_t LOW = tmp_LOW;
+const uint8_t HIGH = detail::tmp_HIGH;
+const uint8_t LOW = detail::tmp_LOW;
 
-const uint8_t INPUT = tmp_INPUT;
-const uint8_t OUTPUT = tmp_OUTPUT;
-const uint8_t INPUT_PULLUP = tmp_INPUT_PULLUP;
+const uint8_t INPUT = detail::tmp_INPUT;
+const uint8_t OUTPUT = detail::tmp_OUTPUT;
+const uint8_t INPUT_PULLUP = detail::tmp_INPUT_PULLUP;
+#endif
 
-BEGIN_AH_NAMESPACE
 
 /**
  * @brief   A namespace with alternatives to the standard Arduino IO functions

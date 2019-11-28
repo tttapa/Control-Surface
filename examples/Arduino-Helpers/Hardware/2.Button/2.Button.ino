@@ -1,7 +1,7 @@
 /**
  * This examples shows how to use the debounced Button class to toggle an LED.
  * 
- * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
