@@ -1,5 +1,8 @@
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR()
+
 #include <MIDI_Outputs/Abstract/MIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/PitchBendSender.hpp>
 
@@ -38,3 +41,5 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>> {
 };
 
 END_CS_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

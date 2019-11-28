@@ -110,13 +110,13 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
 // -------------------------- MIDI Input Elements --------------------------- //
 // ========================================================================== //
 
-MIDINote mute[8] = {
+NoteValue mute[8] = {
   {MCU::MUTE_1}, // The mute status of the first track
   {MCU::MUTE_2}, {MCU::MUTE_3}, {MCU::MUTE_4}, {MCU::MUTE_5},
   {MCU::MUTE_6}, {MCU::MUTE_7}, {MCU::MUTE_8},
 };
 
-MIDINote solo[8] = {
+NoteValue solo[8] = {
   {MCU::SOLO_1}, // The solo status of the first track
   {MCU::SOLO_2}, {MCU::SOLO_3}, {MCU::SOLO_4}, {MCU::SOLO_5},
   {MCU::SOLO_6}, {MCU::SOLO_7}, {MCU::SOLO_8},
