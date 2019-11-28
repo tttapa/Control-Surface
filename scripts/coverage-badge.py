@@ -24,7 +24,7 @@ json = """\
 
 def main():
     with open(join(cov_dir, 'index.html'), 'r') as f:
-        pattern = r'<td class="headerCovTableEntryHi">([\d.]+)'
+        pattern = r'<td class="headerCovTableEntry\w+">([\d.]+)'
         linecov, funccov = map(lambda m: m.group(1),
                                re.finditer(pattern, f.read()))
         print(linecov, funccov)
