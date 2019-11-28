@@ -2,6 +2,8 @@
 
 #include <AH/Settings/NamespaceSettings.hpp>
 
+#include <AH/Math/FixArduinoMacros.hpp>
+
 #ifdef __AVR__
 #include "Fallback/iterator"
 #else

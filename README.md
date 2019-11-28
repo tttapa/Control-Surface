@@ -8,14 +8,15 @@
 ## Features
 
 - **Containers**: Arrays, Bit Arrays, Linked Lists, Smart Pointers.
-- **Extended Input/Output**: Use shift registers and multiplexers as if they
-  were normal Arduino IO pins.
+- **Extended Input/Output**: Use shift registers (e.g. 74HC595) and multiplexers
+  (e.g. 74HC4051, 74HC4067) as if they were normal Arduino IO pins.
 - **Hardware Utilities**: Debounced buttons, long press buttons, button 
   matrices, filtered analog inputs, LED ranges, MAX7219 displays and LED 
   matrices.
 - **Filters**: Exponential Moving Average filters, Hysteresis.
 - **Math functions**: `min` and `max` functions instead of macros, functions
-  for uniformly increasing the bit depth of signals.
+  for uniformly increasing the bit depth of signals, all C++ standard library 
+  functions.
 - **Timing Utilities**: Blink Without Delay-style timers.
 - **C++ STL Implementation** (partial): Some useful parts of the C++ Standard
   Template Library, adapted to work on AVR Arduinos. Includes the 
@@ -43,3 +44,30 @@ here:
 [**Documentation**](https://tttapa.github.io/Arduino-Helpers/Doxygen/index.html)  
 Test coverage information can be found here:  
 [**Code Coverage**](https://tttapa.github.io/Arduino-Helpers/Coverage/index.html)
+
+## Supported boards
+
+For each commit, the continuous integration tests compile the examples for the
+following boards:
+
+- Arduino UNO
+- Arduino Leonardo
+- Teensy 3.2
+- Arduino Due
+- Arduino Nano 33 IoT
+- ESP8266
+- ESP32
+
+This covers a very large part of the Arduino platform, and similar boards will
+also work (e.g. Arduino Nano, Arduino Mega, etc.).
+
+If you have a board that's not supported, please 
+[open an issue](https://github.com/tttapa/Arduino-Helpers/issues/new)
+and let me know!
+
+### Known limitations
+
+The Arduino Due toolchain provided by Arduino is very old, and has some 
+configuration problems. As a result, some math functions are not available.  
+There is nothing I can do about it in this library, it's a bug in the Arduino 
+Due Core.

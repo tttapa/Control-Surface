@@ -1,12 +1,14 @@
 #pragma once
 
+#include <AH/Settings/NamespaceSettings.hpp>
+
+#include <AH/Math/FixArduinoMacros.hpp>
+
 #ifdef __AVR__
 #include "Fallback/algorithm"
 #else
 #include <algorithm>
 #endif
-
-#include <AH/Settings/NamespaceSettings.hpp>
 
 BEGIN_AH_NAMESPACE
 
