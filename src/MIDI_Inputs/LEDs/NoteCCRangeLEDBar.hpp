@@ -27,11 +27,11 @@ class NoteCCLEDBarCallback : public SimpleNoteCCValueCallback {
         leds.display(value / 127.0f);
     }
 
-    /// @copydoc    DotBarDisplayLEDs::dotMode
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
     void dotMode() { leds.dotMode(); }
-    /// @copydoc    DotBarDisplayLEDs::barMode
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
     void barMode() { leds.barMode(); }
-    /// @copydoc    DotBarDisplayLEDs::setMode
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
     void setMode(AH::DotBarMode mode) { leds.setMode(mode); }
 
   private:
@@ -60,11 +60,11 @@ class NoteLEDBar : public GenericNoteCCRange<MIDIInputElementNote, 1,
               {leds},
           } {}
 
-    /// @copydoc    DotBarDisplayLEDs::dotMode
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
     void dotMode() { this->callback.dotMode(); }
-    /// @copydoc    DotBarDisplayLEDs::barMode
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
     void barMode() { this->callback.barMode(); }
-    /// @copydoc    DotBarDisplayLEDs::setMode
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
     void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
 };
 
@@ -90,11 +90,11 @@ class CCLEDBar : public GenericNoteCCRange<MIDIInputElementCC, 1,
               {leds},
           } {}
 
-    /// @copydoc    DotBarDisplayLEDs::dotMode
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
     void dotMode() { this->callback.dotMode(); }
-    /// @copydoc    DotBarDisplayLEDs::barMode
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
     void barMode() { this->callback.barMode(); }
-    /// @copydoc    DotBarDisplayLEDs::setMode
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
     void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
 };
 
@@ -128,11 +128,11 @@ class NoteLEDBar : public GenericNoteCCRange<MIDIInputElementNote, 1, BankSize,
               {leds},
           } {}
 
-    /// @copydoc    DotBarDisplayLEDs::dotMode
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
     void dotMode() { this->callback.dotMode(); }
-    /// @copydoc    DotBarDisplayLEDs::barMode
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
     void barMode() { this->callback.barMode(); }
-    /// @copydoc    DotBarDisplayLEDs::setMode
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
     void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
 };
 
@@ -162,11 +162,11 @@ class CCLEDBar : public GenericNoteCCRange<MIDIInputElementCC, 1, BankSize,
               {leds},
           } {}
 
-    /// @copydoc    DotBarDisplayLEDs::dotMode
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
     void dotMode() { this->callback.dotMode(); }
-    /// @copydoc    DotBarDisplayLEDs::barMode
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
     void barMode() { this->callback.barMode(); }
-    /// @copydoc    DotBarDisplayLEDs::setMode
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
     void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
 };
 
