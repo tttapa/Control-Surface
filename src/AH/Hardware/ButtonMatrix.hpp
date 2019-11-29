@@ -53,6 +53,13 @@ class ButtonMatrix {
      */
     void update();
 
+    /** 
+     * Get the state of the button in the given column and row.
+     * 
+     * @note    No bounds checking is performed.
+     */
+    bool getPrevState(uint8_t col, uint8_t row);
+
   private:
     /**
      * @brief   The callback function that is called whenever a button changes
@@ -70,7 +77,6 @@ class ButtonMatrix {
     static inline uint8_t positionToBits(uint8_t col, uint8_t row);
     static inline uint8_t bitsToIndex(uint8_t bits);
     static inline uint8_t bitsToBitmask(uint8_t bits);
-    bool getPrevState(uint8_t col, uint8_t row);
     void setPrevState(uint8_t col, uint8_t row, bool state);
 
     unsigned long prevRefresh = 0;
