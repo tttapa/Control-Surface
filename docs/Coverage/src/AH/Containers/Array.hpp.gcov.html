@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 1c27400155b34adca37cca4d6a53c6d9f2a23f36 - src/AH/Containers/Array.hpp</title>
+  <title>LCOV - b4779a30dee68efaa17c97be83937ca85800ecb7 - src/AH/Containers/Array.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">1c27400155b34adca37cca4d6a53c6d9f2a23f36</td>
+            <td class="headerValue">b4779a30dee68efaa17c97be83937ca85800ecb7</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">140</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-28 02:04:22</td>
+            <td class="headerValue">2019-11-30 00:02:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">177</td>
@@ -249,7 +249,7 @@
 <a name="179"><span class="lineNum">     179 </span><span class="lineCov">          1 :     operator Array&lt;T, N&gt;() const { return asArray(); }</span></a>
 <a name="180"><span class="lineNum">     180 </span>            : </a>
 <a name="181"><span class="lineNum">     181 </span><span class="lineCov">          2 :     Array&lt;T, N&gt; asArray() const {</span></a>
-<a name="182"><span class="lineNum">     182 </span><span class="lineCov">          2 :         Array&lt;T, N&gt; slice = {};</span></a>
+<a name="182"><span class="lineNum">     182 </span><span class="lineCov">          2 :         Array&lt;T, N&gt; slice = {{}};</span></a>
 <a name="183"><span class="lineNum">     183 </span><span class="lineCov">         10 :         for (size_t i = 0; i &lt; N; ++i)</span></a>
 <a name="184"><span class="lineNum">     184 </span><span class="lineCov">          8 :             slice[i] = (*this)[i];</span></a>
 <a name="185"><span class="lineNum">     185 </span><span class="lineCov">          2 :         return slice;</span></a>
@@ -430,7 +430,7 @@
 <a name="360"><span class="lineNum">     360 </span><span class="lineCov">          2 : operator+(ArraySlice&lt;T1, N1, Reverse1, Const1&gt; a,</span></a>
 <a name="361"><span class="lineNum">     361 </span>            :           ArraySlice&lt;T2, N2, Reverse2, Const2&gt; b) {</a>
 <a name="362"><span class="lineNum">     362 </span>            :     static_assert(N1 == N2, &quot;Error: sizes do not match&quot;);</a>
-<a name="363"><span class="lineNum">     363 </span><span class="lineCov">          2 :     Array&lt;decltype(T1{} + T2{}), N1&gt; result = {};</span></a>
+<a name="363"><span class="lineNum">     363 </span><span class="lineCov">          2 :     Array&lt;decltype(T1{} + T2{}), N1&gt; result = {{}};</span></a>
 <a name="364"><span class="lineNum">     364 </span><span class="lineCov">          8 :     for (size_t i = 0; i &lt; N1; ++i)</span></a>
 <a name="365"><span class="lineNum">     365 </span><span class="lineCov">          6 :         result[i] = a[i] + b[i];</span></a>
 <a name="366"><span class="lineNum">     366 </span><span class="lineCov">          2 :     return result;</span></a>
@@ -471,7 +471,7 @@
 <a name="401"><span class="lineNum">     401 </span><span class="lineCov">          2 : operator-(ArraySlice&lt;T1, N1, Reverse1, Const1&gt; a,</span></a>
 <a name="402"><span class="lineNum">     402 </span>            :           ArraySlice&lt;T2, N2, Reverse2, Const2&gt; b) {</a>
 <a name="403"><span class="lineNum">     403 </span>            :     static_assert(N1 == N2, &quot;Error: sizes do not match&quot;);</a>
-<a name="404"><span class="lineNum">     404 </span><span class="lineCov">          2 :     Array&lt;decltype(T1{} - T2{}), N1&gt; result = {};</span></a>
+<a name="404"><span class="lineNum">     404 </span><span class="lineCov">          2 :     Array&lt;decltype(T1{} - T2{}), N1&gt; result = {{}};</span></a>
 <a name="405"><span class="lineNum">     405 </span><span class="lineCov">          8 :     for (size_t i = 0; i &lt; N1; ++i)</span></a>
 <a name="406"><span class="lineNum">     406 </span><span class="lineCov">          6 :         result[i] = a[i] - b[i];</span></a>
 <a name="407"><span class="lineNum">     407 </span><span class="lineCov">          2 :     return result;</span></a>
@@ -509,7 +509,7 @@
 <a name="439"><span class="lineNum">     439 </span>            : template &lt;class T1, class T2, size_t N1, bool Reverse1, bool Const1&gt;</a>
 <a name="440"><span class="lineNum">     440 </span>            : Array&lt;decltype(T1{} * T2{}), N1&gt;</a>
 <a name="441"><span class="lineNum">     441 </span><span class="lineCov">          2 : operator*(ArraySlice&lt;T1, N1, Reverse1, Const1&gt; a, T2 b) {</span></a>
-<a name="442"><span class="lineNum">     442 </span><span class="lineCov">          2 :     Array&lt;decltype(T1{} * T2{}), N1&gt; result = {};</span></a>
+<a name="442"><span class="lineNum">     442 </span><span class="lineCov">          2 :     Array&lt;decltype(T1{} * T2{}), N1&gt; result = {{}};</span></a>
 <a name="443"><span class="lineNum">     443 </span><span class="lineCov">         10 :     for (size_t i = 0; i &lt; N1; ++i)</span></a>
 <a name="444"><span class="lineNum">     444 </span><span class="lineCov">          8 :         result[i] = a[i] * b;</span></a>
 <a name="445"><span class="lineNum">     445 </span><span class="lineCov">          2 :     return result;</span></a>
@@ -525,7 +525,7 @@
 <a name="455"><span class="lineNum">     455 </span>            : template &lt;class T1, class T2, size_t N2, bool Reverse2, bool Const2&gt;</a>
 <a name="456"><span class="lineNum">     456 </span>            : Array&lt;decltype(T1{} * T2{}), N2&gt;</a>
 <a name="457"><span class="lineNum">     457 </span><span class="lineCov">          2 : operator*(T1 a, ArraySlice&lt;T2, N2, Reverse2, Const2&gt; b) {</span></a>
-<a name="458"><span class="lineNum">     458 </span><span class="lineCov">          2 :     Array&lt;decltype(T1{} * T2{}), N2&gt; result = {};</span></a>
+<a name="458"><span class="lineNum">     458 </span><span class="lineCov">          2 :     Array&lt;decltype(T1{} * T2{}), N2&gt; result = {{}};</span></a>
 <a name="459"><span class="lineNum">     459 </span><span class="lineCov">         10 :     for (size_t i = 0; i &lt; N2; ++i)</span></a>
 <a name="460"><span class="lineNum">     460 </span><span class="lineCov">          8 :         result[i] = a * b[i];</span></a>
 <a name="461"><span class="lineNum">     461 </span><span class="lineCov">          2 :     return result;</span></a>
@@ -559,7 +559,7 @@
 <a name="489"><span class="lineNum">     489 </span>            : template &lt;class T1, class T2, size_t N1, bool Reverse1, bool Const1&gt;</a>
 <a name="490"><span class="lineNum">     490 </span>            : Array&lt;decltype(T1{} / T2{}), N1&gt;</a>
 <a name="491"><span class="lineNum">     491 </span><span class="lineCov">          2 : operator/(ArraySlice&lt;T1, N1, Reverse1, Const1&gt; a, T2 b) {</span></a>
-<a name="492"><span class="lineNum">     492 </span><span class="lineCov">          2 :     Array&lt;decltype(T1{} / T2{}), N1&gt; result = {};</span></a>
+<a name="492"><span class="lineNum">     492 </span><span class="lineCov">          2 :     Array&lt;decltype(T1{} / T2{}), N1&gt; result = {{}};</span></a>
 <a name="493"><span class="lineNum">     493 </span><span class="lineCov">         10 :     for (size_t i = 0; i &lt; N1; ++i)</span></a>
 <a name="494"><span class="lineNum">     494 </span><span class="lineCov">          8 :         result[i] = a[i] / b;</span></a>
 <a name="495"><span class="lineNum">     495 </span><span class="lineCov">          2 :     return result;</span></a>
@@ -592,7 +592,7 @@
 <a name="522"><span class="lineNum">     522 </span>            : /// -Slice</a>
 <a name="523"><span class="lineNum">     523 </span>            : template &lt;class T, size_t N, bool Reverse, bool Const&gt;</a>
 <a name="524"><span class="lineNum">     524 </span><span class="lineCov">          2 : Array&lt;decltype(-T{}), N&gt; operator-(ArraySlice&lt;T, N, Reverse, Const&gt; a) {</span></a>
-<a name="525"><span class="lineNum">     525 </span><span class="lineCov">          2 :     Array&lt;decltype(-T{}), N&gt; result = {};</span></a>
+<a name="525"><span class="lineNum">     525 </span><span class="lineCov">          2 :     Array&lt;decltype(-T{}), N&gt; result = {{}};</span></a>
 <a name="526"><span class="lineNum">     526 </span><span class="lineCov">         11 :     for (size_t i = 0; i &lt; N; ++i)</span></a>
 <a name="527"><span class="lineNum">     527 </span><span class="lineCov">          9 :         result[i] = -a[i];</span></a>
 <a name="528"><span class="lineNum">     528 </span><span class="lineCov">          2 :     return result;</span></a>

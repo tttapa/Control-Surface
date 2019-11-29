@@ -92,12 +92,14 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for CCButtonMatrix&lt; nb_rows, nb_cols &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d3/d89/classCCButtonMatrix__inherit__graph.svg" width="346" height="802"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d3/d89/classCCButtonMatrix__inherit__graph.svg" width="346" height="802"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Collaboration diagram for CCButtonMatrix&lt; nb_rows, nb_cols &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/d31/classCCButtonMatrix__coll__graph.svg" width="824" height="1583"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d8/d31/classCCButtonMatrix__coll__graph.svg" width="824" height="1583"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -120,6 +122,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a91d270833807c166e5850f88aa92c2e7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d55/classAH_1_1Updatable.html#a91d270833807c166e5850f88aa92c2e7">isEnabled</a> ()</td></tr>
 <tr class="memdesc:a91d270833807c166e5850f88aa92c2e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this updatable is enabled.  <a href="../../d1/d55/classAH_1_1Updatable.html#a91d270833807c166e5850f88aa92c2e7">More...</a><br /></td></tr>
 <tr class="separator:a91d270833807c166e5850f88aa92c2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02c8f5d0ef51ebd420abeb9fa2e6a3dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d29/classAH_1_1ButtonMatrix.html#a02c8f5d0ef51ebd420abeb9fa2e6a3dc">getPrevState</a> (uint8_t col, uint8_t row)</td></tr>
+<tr class="memdesc:a02c8f5d0ef51ebd420abeb9fa2e6a3dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the state of the button in the given column and row.  <a href="../../dd/d29/classAH_1_1ButtonMatrix.html#a02c8f5d0ef51ebd420abeb9fa2e6a3dc">More...</a><br /></td></tr>
+<tr class="separator:a02c8f5d0ef51ebd420abeb9fa2e6a3dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -159,8 +164,6 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a834693920707de2c890f159796042e81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d54/classMIDIButtonMatrix.html#a834693920707de2c890f159796042e81">onButtonChanged</a> (uint8_t row, uint8_t col, bool state) final override</td></tr>
 <tr class="memdesc:a834693920707de2c890f159796042e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">The callback function that is called whenever a button changes state.  <a href="../../d0/d54/classMIDIButtonMatrix.html#a834693920707de2c890f159796042e81">More...</a><br /></td></tr>
 <tr class="separator:a834693920707de2c890f159796042e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02c8f5d0ef51ebd420abeb9fa2e6a3dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d29/classAH_1_1ButtonMatrix.html#a02c8f5d0ef51ebd420abeb9fa2e6a3dc">getPrevState</a> (uint8_t col, uint8_t row)</td></tr>
-<tr class="separator:a02c8f5d0ef51ebd420abeb9fa2e6a3dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a415e6054650c511c25b20eae94034717"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d29/classAH_1_1ButtonMatrix.html#a415e6054650c511c25b20eae94034717">setPrevState</a> (uint8_t col, uint8_t row, bool state)</td></tr>
 <tr class="separator:a415e6054650c511c25b20eae94034717"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -718,6 +721,49 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 
 </div>
 </div>
+<a id="a02c8f5d0ef51ebd420abeb9fa2e6a3dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02c8f5d0ef51ebd420abeb9fa2e6a3dc">&#9670;&nbsp;</a></span>getPrevState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="../../dd/d29/classAH_1_1ButtonMatrix.html">AH::ButtonMatrix</a>&lt; nb_rows, nb_cols &gt;::getPrevState </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>row</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the state of the button in the given column and row. </p>
+<dl class="section note"><dt>Note</dt><dd>No bounds checking is performed. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d41/ButtonMatrix_8ipp_source.html#l00069">69</a> of file <a class="el" href="../../d5/d41/ButtonMatrix_8ipp_source.html">ButtonMatrix.ipp</a>.</p>
+
+</div>
+</div>
 <a id="ac8261a2f8359f6fcff193fc32172f748"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac8261a2f8359f6fcff193fc32172f748">&#9670;&nbsp;</a></span>positionToBits()</h2>
 
@@ -815,46 +861,6 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="../../d5/d41/ButtonMatrix_8ipp_source.html#l00064">64</a> of file <a class="el" href="../../d5/d41/ButtonMatrix_8ipp_source.html">ButtonMatrix.ipp</a>.</p>
-
-</div>
-</div>
-<a id="a02c8f5d0ef51ebd420abeb9fa2e6a3dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02c8f5d0ef51ebd420abeb9fa2e6a3dc">&#9670;&nbsp;</a></span>getPrevState()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="../../dd/d29/classAH_1_1ButtonMatrix.html">AH::ButtonMatrix</a>&lt; nb_rows, nb_cols &gt;::getPrevState </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>col</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>row</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d41/ButtonMatrix_8ipp_source.html#l00069">69</a> of file <a class="el" href="../../d5/d41/ButtonMatrix_8ipp_source.html">ButtonMatrix.ipp</a>.</p>
 
 </div>
 </div>
@@ -1071,7 +1077,7 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00076">76</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00082">82</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
 
 </div>
 </div>
@@ -1097,7 +1103,7 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00077">77</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00083">83</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
 
 </div>
 </div>
@@ -1123,7 +1129,7 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00079">79</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00085">85</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
 
 </div>
 </div>
@@ -1149,7 +1155,7 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00080">80</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00086">86</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
 
 </div>
 </div>

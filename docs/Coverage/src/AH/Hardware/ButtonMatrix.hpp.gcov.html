@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 1c27400155b34adca37cca4d6a53c6d9f2a23f36 - src/AH/Hardware/ButtonMatrix.hpp</title>
+  <title>LCOV - b4779a30dee68efaa17c97be83937ca85800ecb7 - src/AH/Hardware/ButtonMatrix.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">1c27400155b34adca37cca4d6a53c6d9f2a23f36</td>
+            <td class="headerValue">b4779a30dee68efaa17c97be83937ca85800ecb7</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">1</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-28 02:04:22</td>
+            <td class="headerValue">2019-11-30 00:02:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -123,38 +123,44 @@
 <a name="53"><span class="lineNum">      53 </span>            :      */</a>
 <a name="54"><span class="lineNum">      54 </span>            :     void update();</a>
 <a name="55"><span class="lineNum">      55 </span>            : </a>
-<a name="56"><span class="lineNum">      56 </span>            :   private:</a>
-<a name="57"><span class="lineNum">      57 </span>            :     /**</a>
-<a name="58"><span class="lineNum">      58 </span>            :      * @brief   The callback function that is called whenever a button changes</a>
-<a name="59"><span class="lineNum">      59 </span>            :      *          state.</a>
-<a name="60"><span class="lineNum">      60 </span>            :      * </a>
-<a name="61"><span class="lineNum">      61 </span>            :      * @param   row</a>
-<a name="62"><span class="lineNum">      62 </span>            :      *          The row of the button that changed state.</a>
-<a name="63"><span class="lineNum">      63 </span>            :      * @param   col</a>
-<a name="64"><span class="lineNum">      64 </span>            :      *          The column of the button that changed state.</a>
-<a name="65"><span class="lineNum">      65 </span>            :      * @param   state</a>
-<a name="66"><span class="lineNum">      66 </span>            :      *          The new state of the button.</a>
-<a name="67"><span class="lineNum">      67 </span>            :      */</a>
-<a name="68"><span class="lineNum">      68 </span>            :     virtual void onButtonChanged(uint8_t row, uint8_t col, bool state) = 0;</a>
-<a name="69"><span class="lineNum">      69 </span>            : </a>
-<a name="70"><span class="lineNum">      70 </span>            :     static inline uint8_t positionToBits(uint8_t col, uint8_t row);</a>
-<a name="71"><span class="lineNum">      71 </span>            :     static inline uint8_t bitsToIndex(uint8_t bits);</a>
-<a name="72"><span class="lineNum">      72 </span>            :     static inline uint8_t bitsToBitmask(uint8_t bits);</a>
-<a name="73"><span class="lineNum">      73 </span>            :     bool getPrevState(uint8_t col, uint8_t row);</a>
-<a name="74"><span class="lineNum">      74 </span>            :     void setPrevState(uint8_t col, uint8_t row, bool state);</a>
-<a name="75"><span class="lineNum">      75 </span>            : </a>
-<a name="76"><span class="lineNum">      76 </span>            :     unsigned long prevRefresh = 0;</a>
-<a name="77"><span class="lineNum">      77 </span>            :     uint8_t prevStates[(nb_cols * nb_rows + 7) / 8];</a>
-<a name="78"><span class="lineNum">      78 </span>            : </a>
-<a name="79"><span class="lineNum">      79 </span>            :     const PinList&lt;nb_rows&gt; rowPins;</a>
-<a name="80"><span class="lineNum">      80 </span>            :     const PinList&lt;nb_cols&gt; colPins;</a>
-<a name="81"><span class="lineNum">      81 </span>            : };</a>
-<a name="82"><span class="lineNum">      82 </span>            : </a>
-<a name="83"><span class="lineNum">      83 </span>            : END_AH_NAMESPACE</a>
+<a name="56"><span class="lineNum">      56 </span>            :     /** </a>
+<a name="57"><span class="lineNum">      57 </span>            :      * Get the state of the button in the given column and row.</a>
+<a name="58"><span class="lineNum">      58 </span>            :      * </a>
+<a name="59"><span class="lineNum">      59 </span>            :      * @note    No bounds checking is performed.</a>
+<a name="60"><span class="lineNum">      60 </span>            :      */</a>
+<a name="61"><span class="lineNum">      61 </span>            :     bool getPrevState(uint8_t col, uint8_t row);</a>
+<a name="62"><span class="lineNum">      62 </span>            : </a>
+<a name="63"><span class="lineNum">      63 </span>            :   private:</a>
+<a name="64"><span class="lineNum">      64 </span>            :     /**</a>
+<a name="65"><span class="lineNum">      65 </span>            :      * @brief   The callback function that is called whenever a button changes</a>
+<a name="66"><span class="lineNum">      66 </span>            :      *          state.</a>
+<a name="67"><span class="lineNum">      67 </span>            :      * </a>
+<a name="68"><span class="lineNum">      68 </span>            :      * @param   row</a>
+<a name="69"><span class="lineNum">      69 </span>            :      *          The row of the button that changed state.</a>
+<a name="70"><span class="lineNum">      70 </span>            :      * @param   col</a>
+<a name="71"><span class="lineNum">      71 </span>            :      *          The column of the button that changed state.</a>
+<a name="72"><span class="lineNum">      72 </span>            :      * @param   state</a>
+<a name="73"><span class="lineNum">      73 </span>            :      *          The new state of the button.</a>
+<a name="74"><span class="lineNum">      74 </span>            :      */</a>
+<a name="75"><span class="lineNum">      75 </span>            :     virtual void onButtonChanged(uint8_t row, uint8_t col, bool state) = 0;</a>
+<a name="76"><span class="lineNum">      76 </span>            : </a>
+<a name="77"><span class="lineNum">      77 </span>            :     static inline uint8_t positionToBits(uint8_t col, uint8_t row);</a>
+<a name="78"><span class="lineNum">      78 </span>            :     static inline uint8_t bitsToIndex(uint8_t bits);</a>
+<a name="79"><span class="lineNum">      79 </span>            :     static inline uint8_t bitsToBitmask(uint8_t bits);</a>
+<a name="80"><span class="lineNum">      80 </span>            :     void setPrevState(uint8_t col, uint8_t row, bool state);</a>
+<a name="81"><span class="lineNum">      81 </span>            : </a>
+<a name="82"><span class="lineNum">      82 </span>            :     unsigned long prevRefresh = 0;</a>
+<a name="83"><span class="lineNum">      83 </span>            :     uint8_t prevStates[(nb_cols * nb_rows + 7) / 8];</a>
 <a name="84"><span class="lineNum">      84 </span>            : </a>
-<a name="85"><span class="lineNum">      85 </span>            : #include &quot;ButtonMatrix.ipp&quot; // Template implementations</a>
-<a name="86"><span class="lineNum">      86 </span>            : </a>
-<a name="87"><span class="lineNum">      87 </span>            : AH_DIAGNOSTIC_POP()</a>
+<a name="85"><span class="lineNum">      85 </span>            :     const PinList&lt;nb_rows&gt; rowPins;</a>
+<a name="86"><span class="lineNum">      86 </span>            :     const PinList&lt;nb_cols&gt; colPins;</a>
+<a name="87"><span class="lineNum">      87 </span>            : };</a>
+<a name="88"><span class="lineNum">      88 </span>            : </a>
+<a name="89"><span class="lineNum">      89 </span>            : END_AH_NAMESPACE</a>
+<a name="90"><span class="lineNum">      90 </span>            : </a>
+<a name="91"><span class="lineNum">      91 </span>            : #include &quot;ButtonMatrix.ipp&quot; // Template implementations</a>
+<a name="92"><span class="lineNum">      92 </span>            : </a>
+<a name="93"><span class="lineNum">      93 </span>            : AH_DIAGNOSTIC_POP()</a>
 </pre>
       </td>
     </tr>

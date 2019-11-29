@@ -25,8 +25,8 @@
 <text text-anchor="start" x="586" y="-415.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ ~ButtonMatrix()</text>
 <text text-anchor="start" x="586" y="-404.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ begin()</text>
 <text text-anchor="start" x="586" y="-393.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ update()</text>
-<text text-anchor="start" x="586" y="-382.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; onButtonChanged()</text>
-<text text-anchor="start" x="586" y="-371.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; getPrevState()</text>
+<text text-anchor="start" x="586" y="-382.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ getPrevState()</text>
+<text text-anchor="start" x="586" y="-371.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; onButtonChanged()</text>
 <text text-anchor="start" x="586" y="-360.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; setPrevState()</text>
 <text text-anchor="start" x="586" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; positionToBits()</text>
 <text text-anchor="start" x="586" y="-338.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45; bitsToIndex()</text>

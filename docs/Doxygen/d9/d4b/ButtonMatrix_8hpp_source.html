@@ -132,47 +132,53 @@ $(function() {
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">     *          onButtonChanged callback.</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">     */</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> update();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">private</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     * @brief   The callback function that is called whenever a button changes</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">     *          state.</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">     * </span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">     * @param   row</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">     *          The row of the button that changed state.</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">     * @param   col</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">     *          The column of the button that changed state.</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">     * @param   state</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">     *          The new state of the button.</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> onButtonChanged(uint8_t row, uint8_t col, <span class="keywordtype">bool</span> state) = 0;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> uint8_t positionToBits(uint8_t col, uint8_t row);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> uint8_t bitsToIndex(uint8_t bits);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> uint8_t bitsToBitmask(uint8_t bits);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">bool</span> getPrevState(uint8_t col, uint8_t row);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> setPrevState(uint8_t col, uint8_t row, <span class="keywordtype">bool</span> state);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="../../dd/d29/classAH_1_1ButtonMatrix.html#af78c0714c747b03623f74f498b046920">   76</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> prevRefresh = 0;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="../../dd/d29/classAH_1_1ButtonMatrix.html#a6fbee883d9d95d94ac4525b1ddde161d">   77</a></span>&#160;    uint8_t prevStates[(nb_cols * nb_rows + 7) / 8];</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="../../dd/d29/classAH_1_1ButtonMatrix.html#ad104a3beb84f07b921ae090b25574c2a">   79</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="../../d0/d32/structAH_1_1Array.html">PinList&lt;nb_rows&gt;</a> <a class="code" href="../../dd/d29/classAH_1_1ButtonMatrix.html#ad104a3beb84f07b921ae090b25574c2a">rowPins</a>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="../../dd/d29/classAH_1_1ButtonMatrix.html#a66fff0858c129ddad2a6e9abc5981ecd">   80</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="../../d0/d32/structAH_1_1Array.html">PinList&lt;nb_cols&gt;</a> <a class="code" href="../../dd/d29/classAH_1_1ButtonMatrix.html#a66fff0858c129ddad2a6e9abc5981ecd">colPins</a>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<a class="code" href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">    /** </span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">     * Get the state of the button in the given column and row.</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">     * @note    No bounds checking is performed.</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">bool</span> getPrevState(uint8_t col, uint8_t row);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">     * @brief   The callback function that is called whenever a button changes</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">     *          state.</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">     * </span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">     * @param   row</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">     *          The row of the button that changed state.</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">     * @param   col</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">     *          The column of the button that changed state.</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">     * @param   state</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">     *          The new state of the button.</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> onButtonChanged(uint8_t row, uint8_t col, <span class="keywordtype">bool</span> state) = 0;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> uint8_t positionToBits(uint8_t col, uint8_t row);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> uint8_t bitsToIndex(uint8_t bits);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> uint8_t bitsToBitmask(uint8_t bits);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> setPrevState(uint8_t col, uint8_t row, <span class="keywordtype">bool</span> state);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="../../dd/d29/classAH_1_1ButtonMatrix.html#af78c0714c747b03623f74f498b046920">   82</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> prevRefresh = 0;</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="../../dd/d29/classAH_1_1ButtonMatrix.html#a6fbee883d9d95d94ac4525b1ddde161d">   83</a></span>&#160;    uint8_t prevStates[(nb_cols * nb_rows + 7) / 8];</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d5/d41/ButtonMatrix_8ipp.html">ButtonMatrix.ipp</a>&quot;</span> <span class="comment">// Template implementations</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<a class="code" href="../../d1/d65/Warnings_8hpp.html#a4f088fb95f1d6dc4279357ca2a562cbe">AH_DIAGNOSTIC_POP</a>()</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="../../dd/d29/classAH_1_1ButtonMatrix.html#ad104a3beb84f07b921ae090b25574c2a">   85</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="../../d0/d32/structAH_1_1Array.html">PinList&lt;nb_rows&gt;</a> <a class="code" href="../../dd/d29/classAH_1_1ButtonMatrix.html#ad104a3beb84f07b921ae090b25574c2a">rowPins</a>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="../../dd/d29/classAH_1_1ButtonMatrix.html#a66fff0858c129ddad2a6e9abc5981ecd">   86</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="../../d0/d32/structAH_1_1Array.html">PinList&lt;nb_cols&gt;</a> <a class="code" href="../../dd/d29/classAH_1_1ButtonMatrix.html#a66fff0858c129ddad2a6e9abc5981ecd">colPins</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<a class="code" href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d5/d41/ButtonMatrix_8ipp.html">ButtonMatrix.ipp</a>&quot;</span> <span class="comment">// Template implementations</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<a class="code" href="../../d1/d65/Warnings_8hpp.html#a4f088fb95f1d6dc4279357ca2a562cbe">AH_DIAGNOSTIC_POP</a>()</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aWarnings_8hpp_html"><div class="ttname"><a href="../../d1/d65/Warnings_8hpp.html">Warnings.hpp</a></div></div>
 <div class="ttc" id="aWarnings_8hpp_html_a4f088fb95f1d6dc4279357ca2a562cbe"><div class="ttname"><a href="../../d1/d65/Warnings_8hpp.html#a4f088fb95f1d6dc4279357ca2a562cbe">AH_DIAGNOSTIC_POP</a></div><div class="ttdeci">#define AH_DIAGNOSTIC_POP()</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d65/Warnings_8hpp_source.html#l00017">Warnings.hpp:17</a></div></div>
 <div class="ttc" id="astructAH_1_1Array_html"><div class="ttname"><a href="../../d0/d32/structAH_1_1Array.html">AH::Array&lt; pin_t, N &gt;</a></div></div>
-<div class="ttc" id="aclassAH_1_1ButtonMatrix_html_ad104a3beb84f07b921ae090b25574c2a"><div class="ttname"><a href="../../dd/d29/classAH_1_1ButtonMatrix.html#ad104a3beb84f07b921ae090b25574c2a">AH::ButtonMatrix::rowPins</a></div><div class="ttdeci">const PinList&lt; nb_rows &gt; rowPins</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00079">ButtonMatrix.hpp:79</a></div></div>
+<div class="ttc" id="aclassAH_1_1ButtonMatrix_html_ad104a3beb84f07b921ae090b25574c2a"><div class="ttname"><a href="../../dd/d29/classAH_1_1ButtonMatrix.html#ad104a3beb84f07b921ae090b25574c2a">AH::ButtonMatrix::rowPins</a></div><div class="ttdeci">const PinList&lt; nb_rows &gt; rowPins</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00085">ButtonMatrix.hpp:85</a></div></div>
 <div class="ttc" id="aWarnings_8hpp_html_a9f2deeea1dd06b45ebc381da1633c7ee"><div class="ttname"><a href="../../d1/d65/Warnings_8hpp.html#a9f2deeea1dd06b45ebc381da1633c7ee">AH_DIAGNOSTIC_WERROR</a></div><div class="ttdeci">#define AH_DIAGNOSTIC_WERROR()</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d65/Warnings_8hpp_source.html#l00016">Warnings.hpp:16</a></div></div>
 <div class="ttc" id="aButtonMatrix_8ipp_html"><div class="ttname"><a href="../../d5/d41/ButtonMatrix_8ipp.html">ButtonMatrix.ipp</a></div></div>
-<div class="ttc" id="aclassAH_1_1ButtonMatrix_html_a66fff0858c129ddad2a6e9abc5981ecd"><div class="ttname"><a href="../../dd/d29/classAH_1_1ButtonMatrix.html#a66fff0858c129ddad2a6e9abc5981ecd">AH::ButtonMatrix::colPins</a></div><div class="ttdeci">const PinList&lt; nb_cols &gt; colPins</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00080">ButtonMatrix.hpp:80</a></div></div>
+<div class="ttc" id="aclassAH_1_1ButtonMatrix_html_a66fff0858c129ddad2a6e9abc5981ecd"><div class="ttname"><a href="../../dd/d29/classAH_1_1ButtonMatrix.html#a66fff0858c129ddad2a6e9abc5981ecd">AH::ButtonMatrix::colPins</a></div><div class="ttdeci">const PinList&lt; nb_cols &gt; colPins</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00086">ButtonMatrix.hpp:86</a></div></div>
 <div class="ttc" id="aAH_2Settings_2NamespaceSettings_8hpp_html_abe0f0e505619b6899c38363f4e42a272"><div class="ttname"><a href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html#abe0f0e505619b6899c38363f4e42a272">BEGIN_AH_NAMESPACE</a></div><div class="ttdeci">#define BEGIN_AH_NAMESPACE</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp_source.html#l00009">AH/Settings/NamespaceSettings.hpp:9</a></div></div>
 <div class="ttc" id="aAH_2Settings_2NamespaceSettings_8hpp_html_a03ed68e9e3d1bbe9a28fd924cb7260c1"><div class="ttname"><a href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html#a03ed68e9e3d1bbe9a28fd924cb7260c1">END_AH_NAMESPACE</a></div><div class="ttdeci">#define END_AH_NAMESPACE</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/db0/AH_2Settings_2NamespaceSettings_8hpp_source.html#l00010">AH/Settings/NamespaceSettings.hpp:10</a></div></div>
 <div class="ttc" id="aclassAH_1_1ButtonMatrix_html"><div class="ttname"><a href="../../dd/d29/classAH_1_1ButtonMatrix.html">AH::ButtonMatrix</a></div><div class="ttdoc">A class that reads the states of a button matrix.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00023">ButtonMatrix.hpp:23</a></div></div>

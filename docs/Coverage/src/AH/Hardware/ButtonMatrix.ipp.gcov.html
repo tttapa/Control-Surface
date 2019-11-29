@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 1c27400155b34adca37cca4d6a53c6d9f2a23f36 - src/AH/Hardware/ButtonMatrix.ipp</title>
+  <title>LCOV - b4779a30dee68efaa17c97be83937ca85800ecb7 - src/AH/Hardware/ButtonMatrix.ipp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">1c27400155b34adca37cca4d6a53c6d9f2a23f36</td>
+            <td class="headerValue">b4779a30dee68efaa17c97be83937ca85800ecb7</td>
             <td></td>
             <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">41</td>
             <td class="headerCovTableEntry">42</td>
-            <td class="headerCovTableEntry">43</td>
-            <td class="headerCovTableEntryHi">97.7 %</td>
+            <td class="headerCovTableEntryHi">97.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-28 02:04:22</td>
+            <td class="headerValue">2019-11-30 00:02:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -143,13 +143,13 @@
 <a name="73"><span class="lineNum">      73 </span>            : </a>
 <a name="74"><span class="lineNum">      74 </span>            : template &lt;uint8_t nb_rows, uint8_t nb_cols&gt;</a>
 <a name="75"><span class="lineNum">      75 </span><span class="lineCov">         10 : void ButtonMatrix&lt;nb_rows, nb_cols&gt;::setPrevState(uint8_t col, uint8_t row,</span></a>
-<a name="76"><span class="lineNum">      76 </span><span class="lineCov">          9 :                                                   bool state) {</span></a>
+<a name="76"><span class="lineNum">      76 </span>            :                                                   bool state) {</a>
 <a name="77"><span class="lineNum">      77 </span><span class="lineCov">         10 :     uint8_t bits = positionToBits(col, row);</span></a>
 <a name="78"><span class="lineNum">      78 </span><span class="lineCov">         10 :     if (state)</span></a>
 <a name="79"><span class="lineNum">      79 </span><span class="lineCov">          5 :         prevStates[bitsToIndex(bits)] |= bitsToBitmask(bits);</span></a>
 <a name="80"><span class="lineNum">      80 </span>            :     else</a>
 <a name="81"><span class="lineNum">      81 </span><span class="lineCov">          5 :         prevStates[bitsToIndex(bits)] &amp;= ~bitsToBitmask(bits);</span></a>
-<a name="82"><span class="lineNum">      82 </span><span class="lineCov">         10 : }</span></a>
+<a name="82"><span class="lineNum">      82 </span><span class="lineCov">         19 : }</span></a>
 <a name="83"><span class="lineNum">      83 </span>            : </a>
 <a name="84"><span class="lineNum">      84 </span>            : END_AH_NAMESPACE</a>
 </pre>
