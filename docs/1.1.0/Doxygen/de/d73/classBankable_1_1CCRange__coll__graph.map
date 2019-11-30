@@ -1,0 +1,15 @@
+<map id="Bankable::CCRange&lt; RangeLen, NumBanks &gt;" name="Bankable::CCRange&lt; RangeLen, NumBanks &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="785,1663,956,1755"/>
+<area shape="rect" id="node2" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="755,1433,986,1613"/>
+<area shape="rect" id="node3" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="466,1065,742,1333"/>
+<area shape="rect" id="node4" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="153,727,329,892"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1153,187,1245"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="211,1013,403,1384"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="163,424,319,633"/>
+<area shape="rect" id="node6" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="148,5,335,361"/>
+<area shape="rect" id="node9" href="$d7/dab/classINoteCCValue.html" title=" " alt="" coords="354,749,481,870"/>
+<area shape="rect" id="node10" href="$da/dcc/classNoteCCRangeEmptyCallback.html" title=" " alt="" coords="505,756,703,863"/>
+<area shape="rect" id="node11" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="727,683,924,936"/>
+<area shape="rect" id="node12" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="874,1065,1102,1333"/>
+<area shape="rect" id="node13" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="949,756,1126,863"/>
+</map>
