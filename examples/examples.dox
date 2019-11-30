@@ -856,6 +856,17 @@
  */
 
 /**
+ * @example   "Send-MIDI-Notes.ino"
+ * 
+ * Send-MIDI-Notes
+ * ===============
+ *
+ * Example showing how to send MIDI Note messages.
+ * 
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ */
+
+/**
  * @example   "Debug-MIDI-Interface.ino"
  * 
  * Debug-MIDI-Interface
