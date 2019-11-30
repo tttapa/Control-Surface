@@ -74,7 +74,7 @@ $(function() {
 <div class="title">2.VU-Meter-OLED-USB-DAC.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md115"></a>
+<h1><a class="anchor" id="autotoc_md119"></a>
 2.VU-Meter-OLED-USB-DAC</h1>
 <p>This example shows the usage of the <a class="el" href="../../d4/dce/classAudioVU.html" title="A VU meter that reads from an Audio stream using the Analyzer class.">AudioVU</a> and AnalogVUDisplay classes of the Control Surface library. <br  />
 </p>
@@ -82,7 +82,7 @@ $(function() {
  The VU meters imitate the inertia and ballistics of real analog VU meters.</p>
 <p>It acts as a USB Audio DAC (Digital-to-Analog Converter).</p>
 <dl class="section user"><dt>Boards:</dt><dd>Teensy 3.x</dd></dl>
-<h2><a class="anchor" id="autotoc_md116"></a>
+<h2><a class="anchor" id="autotoc_md120"></a>
 Connections</h2>
 <ul>
 <li>A0: wiper of a potentiometer to change the output volume</li>
@@ -100,15 +100,15 @@ Connections</h2>
 <p>Add a capacitor between the reset pin of the displays and ground, and a resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ work fine. <br  />
  You do need some way to reset the displays, without it, it won't work. <br  />
  Alternatively, you could use an IO pin from the Teensy to reset the displays, but this just "wastes" a pin.</p>
-<h2><a class="anchor" id="autotoc_md117"></a>
+<h2><a class="anchor" id="autotoc_md121"></a>
 Behavior</h2>
 <p>Upload the sketch, and select the Control Surface as the audio output of your computer. Connect the output of the DAC to a pair of headphones or powered speakers, and play some music. <br  />
  You should see the VU meters come to life and jump around to the music.</p>
 <p>You can now adjust the volume using the potentiometer on pin A0, and the gain/sensitivity of the meters using the potentiometer on pin A1.</p>
-<h2><a class="anchor" id="autotoc_md118"></a>
+<h2><a class="anchor" id="autotoc_md122"></a>
 Mapping</h2>
 <p>None.</p>
-<h2><a class="anchor" id="autotoc_md119"></a>
+<h2><a class="anchor" id="autotoc_md123"></a>
 Demo</h2>
 <dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000001">Todo:</a></b></dt><dd>Add a demo video.</dd></dl>
 <p>Written by PieterP, 2019-08-09 <br  />

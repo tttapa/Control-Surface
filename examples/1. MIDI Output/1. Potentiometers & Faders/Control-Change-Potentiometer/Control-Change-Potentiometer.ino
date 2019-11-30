@@ -3,7 +3,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc. It can control almost any knob in your DAW software.
  *
- * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------

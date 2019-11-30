@@ -74,11 +74,11 @@ $(function() {
 <div class="title">Transposer.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md125"></a>
+<h1><a class="anchor" id="autotoc_md129"></a>
 Transposer</h1>
 <p>This is an example that demonstrates the use a <a class="el" href="../../da/db8/classTransposer.html">Transposer</a> to transpose the note events sent out by <a class="el" href="../../d1/d9f/classNoteButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,...">NoteButton</a>s.</p>
-<dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Due, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md126"></a>
+<dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32</dd></dl>
+<h2><a class="anchor" id="autotoc_md130"></a>
 Connections</h2>
 <ul>
 <li>2-9: momentary push buttons (to ground) to use as "piano keys"</li>
@@ -86,7 +86,7 @@ Connections</h2>
 <li>11: momentary push button (to ground) to transpose one semitone down</li>
 </ul>
 <p>The internal pull-up resistor for the buttons will be enabled automatically.</p>
-<h2><a class="anchor" id="autotoc_md127"></a>
+<h2><a class="anchor" id="autotoc_md131"></a>
 Behavior</h2>
 <ul>
 <li>By default, the 8 push buttons on pins 2-9 send MIDI Note events for notes C4 - C5.</li>
@@ -94,7 +94,7 @@ Behavior</h2>
 <li>If you press the push button on pin 11, all notes are transposed one semitone down.</li>
 <li>If you press the push buttons on pins 10 and 11 simultaneously, the transposer resets.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md128"></a>
+<h2><a class="anchor" id="autotoc_md132"></a>
 Mapping</h2>
 <p>Route the Arduino MIDI port into a synth to play the notes.</p>
 <p>Written by PieterP, 2019-10-26 <br  />
@@ -103,7 +103,7 @@ Mapping</h2>
 <div class="line"><span class="comment"> * This is an example that demonstrates the use a Transposer to transpose the</span></div>
 <div class="line"><span class="comment"> * note events sent out by NoteButton%s.</span></div>
 <div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32</span></div>
+<div class="line"><span class="comment"> * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32</span></div>
 <div class="line"><span class="comment"> * </span></div>
 <div class="line"><span class="comment"> * Connections</span></div>
 <div class="line"><span class="comment"> * -----------</span></div>

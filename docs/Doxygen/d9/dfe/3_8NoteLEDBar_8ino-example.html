@@ -74,11 +74,11 @@ $(function() {
 <div class="title">3.NoteLEDBar.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md95"></a>
+<h1><a class="anchor" id="autotoc_md99"></a>
 3.NoteLEDBar</h1>
 <p>This example demonstrates the use of LED bar graphs that respond to incoming MIDI note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Teensy 3.x, ESP32</dd></dl>
-<h2><a class="anchor" id="autotoc_md96"></a>
+<h2><a class="anchor" id="autotoc_md100"></a>
 Connections</h2>
 <ul>
 <li>SS: 74HC595 ST_CP</li>
@@ -88,10 +88,10 @@ Connections</h2>
 <p>Connect eight LEDs (and series resistors) between the outputs of the shift register and ground.</p>
 <p>Remember to connect the enable pin of the shift register to ground and the master reset pin to Vcc in order to enable it. <br  />
 </p>
-<h2><a class="anchor" id="autotoc_md97"></a>
+<h2><a class="anchor" id="autotoc_md101"></a>
 Behavior</h2>
 <p>If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the LED bar display is turned on, the higher the velocity (the harder you press the key), the more LEDs will turn on.</p>
-<h2><a class="anchor" id="autotoc_md98"></a>
+<h2><a class="anchor" id="autotoc_md102"></a>
 Mapping</h2>
 <p>Route the MIDI output of a MIDI keyboard or from an audio workstation to the Arduino's MIDI input.</p>
 <p>Written by PieterP, 2019-11-25 <br  />

@@ -5,7 +5,7 @@
  * You can compare it to a rotary encoder, but with two buttons instead of an 
  * encoder.
  *
- * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
  *
  * Connections
  * -----------

@@ -3,7 +3,7 @@
  * incoming  MIDI note events. This example uses a custom color mapper to
  * get a rainbow effect across the LED strip.
  * 
- * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
  * 
  * @note    You might lose incoming MIDI data while the LED strip is being 
  *          updated. To avoid this, don't use an Arduino UNO.  

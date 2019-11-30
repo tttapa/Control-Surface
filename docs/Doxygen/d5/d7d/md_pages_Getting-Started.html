@@ -74,16 +74,16 @@ $(function() {
 <div class="title">Getting Started </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md131"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md135"></a>
 Installation</h1>
 <p>Instructions on how to install the library and its dependencies can be found on the page <a class="el" href="../../d2/d2c/Installation_8md.html">Installation</a>.</p>
-<h1><a class="anchor" id="autotoc_md132"></a>
+<h1><a class="anchor" id="autotoc_md136"></a>
 Creating a Basic MIDI Controller Sketch</h1>
-<h2><a class="anchor" id="autotoc_md133"></a>
+<h2><a class="anchor" id="autotoc_md137"></a>
 1. Include the library</h2>
 <p>Include the library so that you have access to all the classes and functions.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../db/dbf/Control__Surface_8h.html">Control_Surface.h</a>&gt;</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md134"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md138"></a>
 2. Instantiate a MIDI Interface</h2>
 <p>If you want to send out or receive MIDI messages, you have to define at least one MIDI interface. If you don't do that, you'll get an error when calling <code>Control_Surface.begin()</code>.</p>
 <p>There are many different MIDI interfaces to choose from:</p>
@@ -104,7 +104,7 @@ Creating a Basic MIDI Controller Sketch</h1>
  In that case, you can instantiate it as follows: <br  />
  <code><a class="el" href="../../de/d2d/classUSBDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human-readable MIDI messages over the USB CDC...">USBDebugMIDI_Interface</a> midi = {115200};</code> </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md135"></a>
+<h2><a class="anchor" id="autotoc_md139"></a>
 3. Add Extended Input/Output elements (optional)</h2>
 <p>If your MIDI Controller requires many in- or outputs, you'll run out of IO pins really quickly. A solution is to use multiplexers or shift registers. <br  />
  The Control Surface Library supports both of these options, and makes it easy to support other types of IO expanders in the future.</p>
@@ -113,7 +113,7 @@ Creating a Basic MIDI Controller Sketch</h1>
 <p>Each of the eight analog inputs of the multiplexer can be connected to the wiper of one potentiometer.</p>
 <p>We'll connect the three address lines of the multiplexer (<code>S0</code>, <code>S1</code> and <code>S2</code>) to digital pins <code>3</code>, <code>4</code> and <code>5</code>. The output of the multiplexer goes to analog pin <code>A0</code>. Connect the enable pin (<code>Ē</code>) to ground.</p>
 <div class="fragment"><div class="line"><a class="code" href="../../db/dd3/group__AH__ExtIO.html#ga61b86abe972c3205b1c165aa40632aa0">CD74HC4051</a> mux = { A0, {3, 4, 5} };</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md136"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md140"></a>
 4. Add MIDI Control Elements</h2>
 <p>Now, we can specify the objects that read the input of the potentiometers and send out MIDI events accordingly.</p>
 <p>Again, I'll refer to the overview of MIDI Output Elements <a href="https://tttapa.github.io/Control-Surface/Doc/Doxygen/d7/dcd/group__MIDIOutputElements.html">here</a>.</p>
@@ -143,7 +143,7 @@ Creating a Basic MIDI Controller Sketch</h1>
 <p><b>Note</b>: Some other MIDI Control Elements might not need an address number, or they might not need a channel. In that case, you just leave out the optional parts that you don't need. <br  />
  For example, a <code><a class="el" href="../../da/d6a/classPBPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,...">PBPotentiometer</a></code> doesn't need an address number, just a channel, so you can instantiate it as follows: </p><div class="fragment"><div class="line"><a class="code" href="../../da/d6a/classPBPotentiometer.html">PBPotentiometer</a> potentiometer = { A1, <a class="code" href="../../d7/d42/Channel_8hpp.html#a6425dd1ff4072e66fe3244789b74e6ad">CHANNEL_9</a> };</div>
 </div><!-- fragment --> </blockquote>
-<h2><a class="anchor" id="autotoc_md137"></a>
+<h2><a class="anchor" id="autotoc_md141"></a>
 5. Initialize the Control Surface</h2>
 <p>There's a lot to be done in the <code>setup</code>: The MIDI interface has to be initialized, all pins must be set to the correct mode, etc. <br  />
  Luckily, the Control Surface Library handles almost all of it for you.</p>
@@ -156,7 +156,7 @@ Creating a Basic MIDI Controller Sketch</h1>
  If you don't know why this happens, you should enable debug information in the <code>Control_Surface/src/Settings/Settings.h</code> file, and inspect the output in the Serial Monitor. <br  />
  Someday, I will add a "Troubleshooting" page. For now, if you have any problems, just <a href="https://github.com/tttapa/Control-Surface/issues/new">open an issue on GitHub</a> to remind me. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md138"></a>
+<h2><a class="anchor" id="autotoc_md142"></a>
 6. Continuously Update the Control Surface</h2>
 <p>Now that everything is set up, you can just update the Control Surface forever. It will refresh all inputs and send the appropriate MIDI messages if any of the inputs change.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> loop() {</div>
@@ -165,7 +165,7 @@ Creating a Basic MIDI Controller Sketch</h1>
 </div><!-- fragment --><blockquote class="doxtable">
 <p><b>Note</b>: Using blocking code like delays will interfere with the Control Surface, so try to use <a href="https://www.arduino.cc/en/Tutorial/BlinkWithoutDelay">Blink Without Delay</a> techniques instead. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md139"></a>
+<h2><a class="anchor" id="autotoc_md143"></a>
 The finished sketch</h2>
 <p>That's it! <br  />
  Now you can just upload the sketch to your Arduino, open up your favorite audio software, map the potentiometers, and start playing!</p>

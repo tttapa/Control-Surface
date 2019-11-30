@@ -74,11 +74,11 @@ $(function() {
 <div class="title">MCU-OLED-SSD1306.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md74"></a>
+<h1><a class="anchor" id="autotoc_md78"></a>
 MCU-OLED-SSD1306</h1>
 <p>An example demonstrating the use of <a class="el" href="../../d8/d43/classDisplayElement.html" title="An interface for elements that draw to a display.">DisplayElement</a>s to display information from the DAW on a small OLED display.</p>
 <dl class="section user"><dt>Boards:</dt><dd>Teensy 3.x</dd></dl>
-<h2><a class="anchor" id="autotoc_md75"></a>
+<h2><a class="anchor" id="autotoc_md79"></a>
 Connections</h2>
 <ul>
 <li>5: Push button (to ground)</li>
@@ -91,14 +91,14 @@ Connections</h2>
 <p>Add a capacitor between the reset pin of the display and ground, and a resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ work fine. <br  />
  You do need some way to reset the display, without it, it won't work. <br  />
  Alternatively, you could use an IO pin from the Teensy to reset the display, but this just "wastes" a pin.</p>
-<h2><a class="anchor" id="autotoc_md76"></a>
+<h2><a class="anchor" id="autotoc_md80"></a>
 Behavior</h2>
 <ul>
 <li>The time (bars, beats, fraction), play and record status are shown at the top of the display.</li>
 <li>For each of the 8 first tracks, a VU level meter with peak indicator and a V-Pot ring showing the pan are displayed, as well as the the mute, solo and record arm status.</li>
 <li>Two tracks are displayed at once. By pressing the push buttons connected to pins 5 and 6, you can cycle through four banks to display all 8 tracks.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md77"></a>
+<h2><a class="anchor" id="autotoc_md81"></a>
 Mapping</h2>
 <p>Map "Control Surface" as a Mackie Control Universal unit in your DAW.</p>
 <dl class="section note"><dt>Note</dt><dd>There seem to be some differences in the way some applications handle VU meters: some expect the hardware to decay automatically, some don't. <br  />

@@ -4,7 +4,7 @@
  * 
  * This is useful to discover what kinds of messages your DAW is sending.
  * 
- * @boards  AVR, AVR USB, Due, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
  */
 
 
