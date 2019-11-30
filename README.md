@@ -1,19 +1,11 @@
-[![Build Status](https://github.com/tttapa/Arduino-Filters/workflows/CI%20Tests/badge.svg)](https://github.com/tttapa/Arduino-Filters/actions)
-[![Test Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/tttapa/Control-Surface/master/docs/Coverage/shield.io.coverage.json)](https://tttapa.github.io/Control-Surface/Coverage/index.html)
+[![Build Status](https://github.com/tttapa/Control-Surface/workflows/CI%20Tests/badge.svg)](https://github.com/tttapa/Control-Surface/actions)
+[![Test Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/tttapa/Control-Surface-doc/master/docs/Coverage/shield.io.coverage.json)](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)
 [![Build Status](https://travis-ci.org/tttapa/Control-Surface.svg?branch=master)](https://travis-ci.org/tttapa/Control-Surface)
 [![GitHub](https://img.shields.io/github/stars/tttapa/Control-Surface?label=GitHub&logo=github)](https://github.com/tttapa/Control-Surface)
 
 # Control Surface
 
 An Arduino library for MIDI control surfaces (input and output).
-
-## Under Construction
-
-The library is not yet finished, and some parts of the API could change in the future.  
-However, I believe that this is a useful library, even if not everything is 
-implemented yet.  
-If you'd like to help me with the development, please open an issue if you have requests 
-or if you encounter any problems.
 
 ## Overview
 
@@ -104,6 +96,68 @@ Another thing is that not everything is implemented yet, and many features are
 not yet fully documented. If you have a specific feature request that is not yet
 fully implemented, feel free to open an issue, so I know where to focus on first.
 
+## Work in progress
+
+- Adding support for motorized faders
+- Cleaning up the display code
+- Cleaning up the MIDI over Bluetooth LE code
+- Adding more tests (currently at over 320 unit tests)
+- Adding more examples and adding comments to existing examples
+- Finishing the documentation
+
+## Getting Started
+
+See the [**Getting Started**](https://tttapa.github.io/Control-Surface-doc/Doxygen/dd/dcc/md_Getting-Started.html)
+document to get started using the library.
+
+## Documentation
+
+The automatically generated Doxygen documentation for this library can be found 
+here:  
+[**Documentation**](https://tttapa.github.io/Control-Surface-doc/Doxygen/index.html)  
+Test coverage information can be found here:  
+[**Code Coverage**](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)  
+Arduino examples can be found here:  
+[**Examples**](https://tttapa.github.io/Control-Surface-doc/Doxygen/examples.html)
+
+Have a look at the [**modules**](https://tttapa.github.io/Control-Surface-doc/Doxygen/modules.html)
+for an overview of the features of the library.
+
+## Supported boards
+
+For each commit, the continuous integration tests compile the examples for the
+following boards:
+
+- Arduino UNO
+- Arduino Leonardo
+- Teensy 3.2
+- Arduino Due
+- Arduino Nano 33 IoT
+- ESP8266
+- ESP32
+
+This covers a very large part of the Arduino platform, and similar boards will
+also work (e.g. Arduino Nano, Arduino Mega, etc.).
+
+If you have a board that's not supported, please 
+[open an issue](https://github.com/tttapa/Control-Surface/issues/new)
+and let me know!
+
+Note that MIDI over USB and MIDI over Bluetooth are not supported on all boards.  
+For MIDI over USB support, check out the [**MIDI over USB**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d8/d4a/md_pages_MIDI-over-USB.html)
+documentation page. As a general rule of thumb, if your board is supported by 
+the [MIDIUSB library](https://github.com/arduino-libraries/MIDIUSB) or if it's
+a Teensy, MIDI over USB should be supported.  
+MIDI over BLE is currently only supported on ESP32.
+
+## Information for developers
+
+Information for people that would like to help improve the Control Surface 
+library can be found here: 
+<https://tttapa.github.io/Pages/Arduino/Control-Surface/Developers/index.html>  
+It covers installation instructions for developers, instructions for running the
+tests and generating documentation, a style guide, etc.
+
 ## Recent Breaking Changes
 
  - bca6e11b2b3e02df5f600f65c81676708a81155b  
@@ -125,41 +179,3 @@ fully implemented, feel free to open an issue, so I know where to focus on first
    **14 bits**.  
    The signature of the mapping function is now `analog_t f(analog_t raw)`, 
    where the return value and raw are both numbers in [0, 16383].
-
-## Work in progress
-
-- Adding support for motorized faders
-- Cleaning up the display code
-- Cleaning up the MIDI over Bluetooth LE code
-- Finish support for MIDI over USB cable numbers
-- Adding more tests (currently at over 250 unit tests)
-- Adding more examples and adding comments to existing examples
-- Finishing the documentation
-
-## Getting Started
-
-See the [Getting Started](https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html)
-document to get started using the library.
-
-Libraries that use the Arduino Helpers library include:
-- [**Arduino Filters**](https://github.com/tttapa/Arduino-Filters):
-  FIR, IIR filtering library
-- [**Control Surface**](https://github.com/tttapa/Control-Surface):
-  library for creating MIDI Control Surfaces, with knobs and push buttons, 
-  LEDs, displays, etc.
-
-## Documentation
-
-The automatically generated Doxygen documentation for this library can be found 
-here:  
-[**Documentation**](https://tttapa.github.io/Control-Surface/Doxygen/index.html)  
-Test coverage information can be found here:  
-[**Code Coverage**](https://tttapa.github.io/Control-Surface/Coverage/index.html)
-
-## Information for developers
-
-Information for people that would like to help improve the Control Surface 
-library can be found here: 
-<https://tttapa.github.io/Pages/Arduino/Control-Surface/Developers/index.html>  
-It covers installation instructions for developers, instructions for running the
-tests and generating documentation, a style guide, etc.
