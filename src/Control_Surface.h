@@ -143,3 +143,5 @@
 #ifndef NO_USING_NAMESPACE_CS
 using namespace CS;
 #endif
+
+#define CONTROL_SURFACE_VERSION 10000
