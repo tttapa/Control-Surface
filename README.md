@@ -170,7 +170,7 @@ tests and generating documentation, a style guide, etc.
    Surface library, but could cause problems if your code uses other libraries
    that expect the resolution to be 10 bits.  
    You can change the default resolution to 10 bits in 
-   [`src/Settings/Settings.hpp`](https://tttapa.github.io/Control-Surface/Doc/Doxygen/db/d02/Settings_8hpp.html#a8db0fcdeeb644f813c9b29211ce0a1ae)
+   [`src/AH/Settings/Settings.hpp`](https://tttapa.github.io/Control-Surface-doc/Doxygen/dc/d69/namespaceAH.html#a4f2ec536d7413c6969f44d63ba14ce55)
    if you have to.
  - 31edaa6b76477fdf152c19fd34f7e4e8506561e6  
    The **mapping function** is now applied before applying hysteresis.  
