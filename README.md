@@ -107,7 +107,7 @@ fully implemented, feel free to open an issue, so I know where to focus on first
 
 ## Getting Started
 
-See the [**Getting Started**](https://tttapa.github.io/Control-Surface-doc/Doxygen/dd/dcc/md_Getting-Started.html)
+See the [**Getting Started**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d5/d7d/md_pages_Getting-Started.html)
 document to get started using the library.
 
 ## Documentation
