@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Hardware/LEDs/LEDs.hpp>
+#include <AH/Hardware/LEDs/LEDs.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -9,7 +9,7 @@ namespace MCU {
 
 class VPotRingLEDsCallback {
   public:
-    VPotRingLEDsCallback(const LEDs<11> &leds) : leds(leds) {}
+    VPotRingLEDsCallback(const AH::LEDs<11> &leds) : leds(leds) {}
 
     template <class T>
     void begin(const T &) {
@@ -22,7 +22,7 @@ class VPotRingLEDsCallback {
     }
 
   private:
-    const LEDs<11> leds;
+    const AH::LEDs<11> leds;
 };
 
 // -------------------------------------------------------------------------- //

@@ -1,0 +1,35 @@
+keyword1:
+  - DotBarDisplayLEDs
+
+  - LEDs
+
+  - MAX7219SevenSegmentDisplay
+
+keyword2:
+  - begin
+  - display
+  - setMode
+  - dotMode
+  - barMode
+
+  - begin
+  - displayRange
+  - set
+  - clear
+  - displayDot
+
+  - init
+  - clear
+  - send
+  - sendRaw
+  - setIntensity
+
+  - begin
+  - display
+  - printHex
+
+
+literal1:
+  - DotBarMode 
+  - Dot
+  - Bar

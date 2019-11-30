@@ -1,0 +1,13 @@
+/// @cond   !AH_MAIN_LIBRARY
+/// @addtogroup AH_group
+/// @{
+/// @endcond
+
+/** 
+ * @defgroup    AH_Containers Containers
+ * @brief   Containers like Array, BitArray, DoublyLinkedList and UniquePtr.
+ */
+
+/// @cond   !AH_MAIN_LIBRARY
+/// @}
+/// @endcond

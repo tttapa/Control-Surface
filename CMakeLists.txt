@@ -1,6 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
 
 ################################################################################
+# Enable ccache if available
+################################################################################
+
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+endif()
+
+################################################################################
 # Set the C++ standard to C++14
 ################################################################################
 
@@ -84,31 +93,34 @@ set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 # Build the source files and tests
 ################################################################################
 
-add_subdirectory(googletest-wrappers)
-add_subdirectory(ArduinoMock)
-add_subdirectory(src)
+add_subdirectory(gtest-wrappers)
 add_subdirectory(mock)
+add_subdirectory(src)
 add_subdirectory(test)
 
 ################################################################################
 # Custom targets for documentation 
 ################################################################################
 
-# Add documentation target
-add_custom_target(documentation rm -rf html && ./Scripts/examples.py && doxygen
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../doc/Doxygen)
-
-# Add export documentation target
-add_custom_target(export_documentation ./Export.sh
-WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../doc/Doxygen/Scripts)
-
-# Add coverage target
-add_custom_target(coverage ${CMAKE_BINARY_DIR}/../scripts/coverage.sh ${CMAKE_CXX_COMPILER_ID}
-WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+add_custom_target(export_documentation ./export.sh
+WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen/scripts)
 
 # Add XBM target
-add_custom_target(xbm python3 XBM-export.py
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../src/Display/Bitmaps/Scripts/)
+add_custom_target(xbm 
+    python3 ${CMAKE_CURRENT_LIST_DIR}/src/Display/Bitmaps/Scripts/XBM-export.py
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen/images/xbm)
+
+# Add export documentation target
+add_custom_target(documentation 
+    rm -rf html && ./scripts/examples.py && doxygen
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen)
+
+# Add coverage target
+if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
+add_custom_target(coverage 
+    ${CMAKE_CURRENT_LIST_DIR}/scripts/coverage.sh ${CMAKE_CXX_COMPILER_ID}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+endif()
 
 # Custom test targets
 add_custom_target(check tests
@@ -116,7 +128,7 @@ add_custom_target(check tests
     DEPENDS tests)
 
 add_custom_target(arduino ./build-arduino-examples.sh
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../scripts)
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/scripts)
 
-add_custom_target(arduino_travis ./build-arduino-examples-travis.sh
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../scripts)
+add_custom_target(arduino_ci ./build-arduino-examples-ci.sh
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/scripts)

@@ -111,7 +111,7 @@ class MIDICNChannelAddress {
               (uint8_t)cableNumber,
           } {} // Deliberate overflow for negative numbers
     constexpr MIDICNChannelAddress(const MIDICNChannel &address)
-        : addresses{address.addresses} {}
+        : addresses(address.addresses) {}
 
     MIDICNChannelAddress &operator+=(const RelativeMIDICNChannelAddress &rhs);
 

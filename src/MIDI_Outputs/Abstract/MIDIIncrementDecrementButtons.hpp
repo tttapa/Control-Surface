@@ -1,7 +1,7 @@
 #pragma once
 
+#include <AH/Hardware/IncrementDecrementButtons.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/IncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 #include <MIDI_Senders/DigitalNoteSender.hpp>
@@ -19,21 +19,21 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
      *
      * @todo    Documentation
      */
-    MIDIIncrementDecrementButtons(const IncrementDecrementButtons &buttons,
+    MIDIIncrementDecrementButtons(const AH::IncrementDecrementButtons &buttons,
                                   const MIDICNChannelAddress &address,
                                   uint8_t multiplier,
                                   const MIDICNChannelAddress &resetAddress,
                                   const RelativeSender &relativeSender,
                                   const ResetSender &resetSender)
         : buttons(buttons), address(address), multiplier(multiplier),
-          resetAddress(resetAddress), relativeSender{relativeSender},
-          resetSender{resetSender} {}
+          resetAddress(resetAddress), relativeSender(relativeSender),
+          resetSender(resetSender) {}
 
   public:
     void begin() override { buttons.begin(); }
 
     void update() override {
-        using IncrDecrButtons = IncrementDecrementButtons;
+        using IncrDecrButtons = AH::IncrementDecrementButtons;
         switch (buttons.update()) {
             case IncrDecrButtons::Increment: send(multiplier, address); break;
             case IncrDecrButtons::Decrement: send(-multiplier, address); break;
@@ -58,12 +58,12 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
     void invert() { buttons.invert(); }
 #endif
 
-    IncrementDecrementButtons::State getButtonsState() const {
+    AH::IncrementDecrementButtons::State getButtonsState() const {
         return buttons.getState();
     }
 
   private:
-    IncrementDecrementButtons buttons;
+    AH::IncrementDecrementButtons buttons;
     const MIDICNChannelAddress address;
     const uint8_t multiplier;
     const MIDICNChannelAddress resetAddress;

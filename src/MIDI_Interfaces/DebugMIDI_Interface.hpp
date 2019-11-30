@@ -67,7 +67,8 @@ class SerialDebugMIDI_Interface : public StreamDebugMIDI_Interface {
      * @param   baud
      *          The baud rate for the Serial interface.
      */
-    SerialDebugMIDI_Interface(T &serial, unsigned long baud = defaultBaudRate)
+    SerialDebugMIDI_Interface(T &serial,
+                              unsigned long baud = AH::defaultBaudRate)
         : StreamDebugMIDI_Interface(serial), serial(serial), baud(baud) {}
     /**
      * @brief   Start the Serial interface at the predefined baud rate.
@@ -98,7 +99,7 @@ class HardwareSerialDebugMIDI_Interface
      *          The baud rate for the serial interface.
      */
     HardwareSerialDebugMIDI_Interface(HardwareSerial &serial,
-                                      unsigned long baud = defaultBaudRate)
+                                      unsigned long baud = AH::defaultBaudRate)
         : SerialDebugMIDI_Interface(serial, baud) {}
 };
 
@@ -120,7 +121,7 @@ class USBDebugMIDI_Interface
      * @param   baud
      *          The baud rate to start the USB Serial connection with.
      */
-    USBDebugMIDI_Interface(unsigned long baud = defaultBaudRate)
+    USBDebugMIDI_Interface(unsigned long baud = AH::defaultBaudRate)
         : SerialDebugMIDI_Interface(Serial, baud) {}
 };
 

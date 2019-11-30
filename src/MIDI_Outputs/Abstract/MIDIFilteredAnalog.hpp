@@ -1,7 +1,7 @@
 #pragma once
 
+#include <AH/Hardware/FilteredAnalog.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/FilteredAnalog.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -30,7 +30,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
     MIDIFilteredAnalogAddressable(pin_t analogPin,
                                   const MIDICNChannelAddress &address,
                                   const Sender &sender)
-        : filteredAnalog{analogPin}, address{address}, sender{sender} {}
+        : filteredAnalog{analogPin}, address{address}, sender(sender) {}
 
   public:
     void begin() override {}
@@ -69,7 +69,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
     analog_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<Sender::precision()> filteredAnalog;
+    AH::FilteredAnalog<Sender::precision()> filteredAnalog;
     const MIDICNChannelAddress address;
 
   public:
@@ -102,7 +102,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      */
     MIDIFilteredAnalog(pin_t analogPin, const MIDICNChannel &address,
                        const Sender &sender)
-        : filteredAnalog{analogPin}, address(address), sender{sender} {}
+        : filteredAnalog{analogPin}, address(address), sender(sender) {}
 
   public:
     void begin() final override {}
@@ -126,7 +126,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
 
     /// Invert the analog value.
-    void invert() { filteredAnalog.invert(); } 
+    void invert() { filteredAnalog.invert(); }
 
     /**
      * @brief   Get the raw value of the analog input (this is the value 
@@ -141,7 +141,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
     analog_t getValue() const { return filteredAnalog.getValue(); }
 
   private:
-    FilteredAnalog<Sender::precision()> filteredAnalog;
+    AH::FilteredAnalog<Sender::precision()> filteredAnalog;
     const MIDICNChannelAddress address;
 
   public:

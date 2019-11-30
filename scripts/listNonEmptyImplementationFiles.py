@@ -21,8 +21,8 @@ def main():
             name, ext = splitext(f)
             if ext == '.cpp':
                 with open(join(root, f), 'r+') as cpp_file:
-                    if not 'TEST_COMPILE_ALL_HEADERS_SEPARATELY' in cpp_file.read(
-                    ):
+                    if not 'TEST_COMPILE_ALL_HEADERS_SEPARATELY' in \
+                        cpp_file.read():
                         print(
                             relpath(normpath(join(root, f)),
                                     normpath(src_dir)))

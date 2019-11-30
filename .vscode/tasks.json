@@ -3,6 +3,7 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
+        // Build tasks :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         {
             "type": "shell",
             "label": "Make All",
@@ -16,6 +17,16 @@
                 "isDefault": true,
             },
         },
+        {
+            "type": "shell",
+            "label": "Clear Build Directory and Run CMake",
+            "command": "./setup-build.sh \"${workspaceFolder}\"",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts",
+            },
+            "problemMatcher": [],
+        },
+        // Tests :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         {
             "type": "shell",
             "label": "Make Test",
@@ -49,6 +60,7 @@
             "dependsOn": "Make Test",
             "group": "test",
         },
+        // Documentation & Coverage ::::::::::::::::::::::::::::::::::::::::::::
         {
             "type": "shell",
             "label": "Generate Documentation",
@@ -63,7 +75,7 @@
             "label": "Generate Coverage Information",
             "command": "make coverage",
             "options": {
-                "cwd": "${workspaceFolder}/coverage",
+                "cwd": "${workspaceFolder}/build/coverage",
             },
             "problemMatcher": [],
         },
@@ -73,15 +85,6 @@
             "command": "make export_documentation",
             "options": {
                 "cwd": "${workspaceFolder}/build",
-            },
-            "problemMatcher": [],
-        },
-        {
-            "type": "shell",
-            "label": "Clear Build Directory and Run CMake",
-            "command": "rm -rf build/* && mkdir -p build && cd build && cmake ..",
-            "options": {
-                "cwd": "${workspaceFolder}",
             },
             "problemMatcher": [],
         },

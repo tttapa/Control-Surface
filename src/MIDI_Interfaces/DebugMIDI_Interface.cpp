@@ -1,5 +1,5 @@
 #include "DebugMIDI_Interface.hpp"
-#include <Helpers/PrintStream.hpp>
+#include <AH/PrintStream/PrintStream.hpp>
 
 BEGIN_CS_NAMESPACE
 

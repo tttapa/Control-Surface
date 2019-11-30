@@ -7,6 +7,8 @@ USING_CS_NAMESPACE;
 using ::testing::Return;
 using ::testing::Sequence;
 
+using AH::ErrorException;
+
 class TestStream : public Stream {
   public:
     size_t write(uint8_t data) override {

@@ -1,9 +1,9 @@
 #pragma once
 
+#include <AH/Containers/Array.hpp>
+#include <AH/Hardware/ButtonMatrix.hpp>
 #include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/ButtonMatrix.hpp>
-#include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -13,7 +13,7 @@ namespace Bankable {
 /**
  * @brief   MIDIButtonMatrix
  * @todo    Documentation
- * @see     ButtonMatrix
+ * @see     AH::ButtonMatrix
  * 
  * @tparam  BankAddress
  *          The bankable address object containing the addresses of all buttons,
@@ -27,7 +27,7 @@ namespace Bankable {
  */
 template <class BankAddress, class Sender, uint8_t nb_rows, uint8_t nb_cols>
 class MIDIButtonMatrix : public MIDIOutputElement,
-                         public ButtonMatrix<nb_rows, nb_cols> {
+                         public AH::ButtonMatrix<nb_rows, nb_cols> {
 
   protected:
     /**
@@ -50,13 +50,13 @@ class MIDIButtonMatrix : public MIDIOutputElement,
     MIDIButtonMatrix(const BankAddress &bankAddress,
                      const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins, const Sender &sender)
-        : ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
+        : AH::ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
           address{bankAddress}, sender{sender} {}
 
   public:
-    void begin() override { ButtonMatrix<nb_rows, nb_cols>::begin(); }
+    void begin() override { AH::ButtonMatrix<nb_rows, nb_cols>::begin(); }
 
-    void update() override { ButtonMatrix<nb_rows, nb_cols>::refresh(); }
+    void update() override { AH::ButtonMatrix<nb_rows, nb_cols>::update(); }
 
   private:
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {

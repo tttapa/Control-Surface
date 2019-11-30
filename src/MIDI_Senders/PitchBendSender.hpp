@@ -1,7 +1,7 @@
 #pragma once
 
+#include <AH/Math/IncreaseBitDepth.hpp>
 #include <Control_Surface/Control_Surface_Class.hpp>
-#include <Helpers/IncreaseBitDepth.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -9,8 +9,9 @@ template <uint8_t INPUT_PRECISION_BITS>
 class PitchBendSender {
   public:
     static void send(uint16_t value, MIDICNChannelAddress address) {
-        value = increaseBitDepth<14, INPUT_PRECISION_BITS, uint16_t, uint16_t>(
-            value);
+        value =
+            AH::increaseBitDepth<14, INPUT_PRECISION_BITS, uint16_t, uint16_t>(
+                value);
         // ignore address byte, just use channel and cable numbers
         MIDICNChannel channelCN = {address.getChannel(),
                                    address.getCableNumber()};

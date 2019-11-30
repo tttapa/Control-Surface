@@ -3,8 +3,8 @@
 #include "Bank.hpp"
 #include "BankConfig.hpp"
 #include <Def/MIDICNChannelAddress.hpp>
-#include <Helpers/Debug.hpp>
-#include <Helpers/LinkedList.hpp>
+#include <AH/Debug/Debug.hpp>
+#include <AH/Containers/LinkedList.hpp>
 
 BEGIN_CS_NAMESPACE
 

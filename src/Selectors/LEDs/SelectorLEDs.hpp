@@ -1,7 +1,7 @@
 #pragma once
 
+#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Selectors/Selector.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -14,8 +14,8 @@ class SelectorLEDsCallback {
     /// Initialize.
     void begin() {
         for (pin_t pin : ledPins) {
-            ExtIO::pinMode(pin, OUTPUT);
-            ExtIO::digitalWrite(pin, LOW);
+            AH::ExtIO::pinMode(pin, OUTPUT);
+            AH::ExtIO::digitalWrite(pin, LOW);
         }
     }
 
@@ -24,8 +24,8 @@ class SelectorLEDsCallback {
 
     /// Called when the setting changes.
     void update(setting_t oldSetting, setting_t newSetting) {
-        ExtIO::digitalWrite(ledPins[oldSetting], LOW);
-        ExtIO::digitalWrite(ledPins[newSetting], HIGH);
+        AH::ExtIO::digitalWrite(ledPins[oldSetting], LOW);
+        AH::ExtIO::digitalWrite(ledPins[newSetting], HIGH);
     }
 
   private:
@@ -37,7 +37,7 @@ class SelectorSingleLEDCallback {
     SelectorSingleLEDCallback(pin_t ledPin) : ledPin{ledPin} {}
 
     /// Initialize.
-    void begin() { ExtIO::pinMode(ledPin, OUTPUT); }
+    void begin() { AH::ExtIO::pinMode(ledPin, OUTPUT); }
 
     /// Refresh, called periodically.
     void update() {}
@@ -45,7 +45,7 @@ class SelectorSingleLEDCallback {
     /// Called when the setting changes.
     void update(setting_t oldSetting, setting_t newSetting) {
         (void)oldSetting;
-        ExtIO::digitalWrite(ledPin, newSetting == 0 ? LOW : HIGH);
+        AH::ExtIO::digitalWrite(ledPin, newSetting == 0 ? LOW : HIGH);
     }
 
   private:
@@ -55,7 +55,6 @@ class SelectorSingleLEDCallback {
 END_CS_NAMESPACE
 
 // -------------------------------------------------------------------------- //
-
 
 #if defined(Encoder_h_) || defined(IDE)
 #include <Selectors/EncoderSelector.hpp>
@@ -101,7 +100,7 @@ class IncrementDecrementSelectorLEDs
     : public GenericIncrementDecrementSelector<N, SelectorLEDsCallback<N>> {
   public:
     IncrementDecrementSelectorLEDs(Selectable<N> &selectable,
-                                   const IncrementDecrementButtons &buttons,
+                                   const AH::IncrementDecrementButtons &buttons,
                                    const PinList<N> &ledPins,
                                    Wrap wrap = Wrap::Wrap)
         : GenericIncrementDecrementSelector<N, SelectorLEDsCallback<N>>{
@@ -130,7 +129,7 @@ template <setting_t N>
 class IncrementSelectorLEDs
     : public GenericIncrementSelector<N, SelectorLEDsCallback<N>> {
   public:
-    IncrementSelectorLEDs(Selectable<N> &selectable, const Button &button,
+    IncrementSelectorLEDs(Selectable<N> &selectable, const AH::Button &button,
                           const PinList<N> &ledPins, Wrap wrap = Wrap::Wrap)
         : GenericIncrementSelector<N, SelectorLEDsCallback<N>>{
               selectable,
@@ -213,7 +212,7 @@ BEGIN_CS_NAMESPACE
 class SwitchSelectorLED
     : public GenericSwitchSelector<SelectorSingleLEDCallback> {
   public:
-    SwitchSelectorLED(Selectable<2> &selectable, const Button &button,
+    SwitchSelectorLED(Selectable<2> &selectable, const AH::Button &button,
                       pin_t ledPin)
         : GenericSwitchSelector<SelectorSingleLEDCallback>{
               selectable,

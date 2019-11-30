@@ -1,0 +1,68 @@
+keyword1:
+  # Array.hpp
+  - Array
+  - ArraySlice
+  - Iterator
+  # BitArray.hpp
+  - BitArray
+  # LinkedList.hpp
+  - DoublyLinkedList
+  - iterator
+  - const_iterator
+  - reverse_iterator
+  - const_reverse_iterator
+  - DoublyLinkable
+  # UniquePtr.hpp
+  - UniquePtr
+  # Updatable.hpp
+  - NormalUpdatable
+  - Updatable
+
+keyword2:
+  # Array.hpp
+  - length
+  - begin
+  - end
+  - slice
+  - cslice
+  - asArray
+  # ArrayHelpers.hpp
+  - generate
+  - generateArray
+  - copyAs
+  - fillArray
+  - cat
+  - distribute
+  # BitArray.hpp
+  - get
+  - set
+  - clear
+  - safeIndex
+  - getByte
+  - getBufferLength
+  # LinkedList.hpp
+  - append
+  - insertBefore
+  - insertSorted
+  - remove
+  - moveDown
+  - couldContain
+  # UniquePtr.hpp
+  - reset
+  - get
+  - release
+  - MakeUnique
+  # Updatable.hpp
+  - update
+  - begin
+  - enable
+  - disable
+  - isEnabled
+  - beginAll
+  - updateAll
+
+
+literal1:
+  # Array.hpp
+  - ElementRefType
+  - ElementPtrType

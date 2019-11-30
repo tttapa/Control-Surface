@@ -1,8 +1,8 @@
 #pragma once
 
+#include <AH/Hardware/FilteredAnalog.hpp>
 #include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/FilteredAnalog.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -33,7 +33,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      */
     MIDIFilteredAnalogAddressable(const BankAddress &bankAddress,
                                   pin_t analogPin, const Sender &sender)
-        : address{bankAddress}, filteredAnalog{analogPin}, sender{sender} {}
+        : address{bankAddress}, filteredAnalog{analogPin}, sender(sender) {}
 
   public:
     void begin() override {}
@@ -57,7 +57,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
 
     /// Invert the analog value.
-    void invert() { filteredAnalog.invert(); } 
+    void invert() { filteredAnalog.invert(); }
 
     /**
      * @brief   Get the raw value of the analog input (this is the value 
@@ -73,7 +73,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
 
   private:
     BankAddress address;
-    FilteredAnalog<Sender::precision()> filteredAnalog;
+    AH::FilteredAnalog<Sender::precision()> filteredAnalog;
 
   public:
     Sender sender;
@@ -105,7 +105,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      */
     MIDIFilteredAnalog(const BankAddress &bankAddress, pin_t analogPin,
                        const Sender &sender)
-        : address{bankAddress}, filteredAnalog{analogPin}, sender{sender} {}
+        : address(bankAddress), filteredAnalog(analogPin), sender(sender) {}
 
   public:
     void begin() final override {}
@@ -145,7 +145,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
 
   private:
     BankAddress address;
-    FilteredAnalog<Sender::precision()> filteredAnalog;
+    AH::FilteredAnalog<Sender::precision()> filteredAnalog;
 
   public:
     Sender sender;

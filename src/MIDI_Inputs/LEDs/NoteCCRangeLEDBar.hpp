@@ -1,5 +1,5 @@
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
-#include <Hardware/LEDs/DotBarDisplayLEDs.hpp>
+#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <AH/Hardware/LEDs/DotBarDisplayLEDs.hpp>
 #include <MIDI_Inputs/NoteCCRange.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -14,7 +14,8 @@ BEGIN_CS_NAMESPACE
 template <uint8_t NumLEDs>
 class NoteCCLEDBarCallback : public SimpleNoteCCValueCallback {
   public:
-    NoteCCLEDBarCallback(const DotBarDisplayLEDs<NumLEDs> &leds) : leds(leds) {}
+    NoteCCLEDBarCallback(const AH::DotBarDisplayLEDs<NumLEDs> &leds)
+        : leds(leds) {}
 
     void begin(const INoteCCValue &t) override {
         leds.begin();
@@ -26,15 +27,15 @@ class NoteCCLEDBarCallback : public SimpleNoteCCValueCallback {
         leds.display(value / 127.0f);
     }
 
-    /// @copydoc    DotBarDisplayLEDs::dotMode
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
     void dotMode() { leds.dotMode(); }
-    /// @copydoc    DotBarDisplayLEDs::barMode
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
     void barMode() { leds.barMode(); }
-    /// @copydoc    DotBarDisplayLEDs::setMode
-    void setMode(DotBarMode mode) { leds.setMode(mode); }
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
+    void setMode(AH::DotBarMode mode) { leds.setMode(mode); }
 
   private:
-    DotBarDisplayLEDs<NumLEDs> leds;
+    AH::DotBarDisplayLEDs<NumLEDs> leds;
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -51,7 +52,7 @@ template <uint8_t NumLEDs>
 class NoteLEDBar : public GenericNoteCCRange<MIDIInputElementNote, 1,
                                              NoteCCLEDBarCallback<NumLEDs>> {
   public:
-    NoteLEDBar(const DotBarDisplayLEDs<NumLEDs> &leds,
+    NoteLEDBar(const AH::DotBarDisplayLEDs<NumLEDs> &leds,
                MIDICNChannelAddress address)
         : GenericNoteCCRange<MIDIInputElementNote, 1,
                              NoteCCLEDBarCallback<NumLEDs>>{
@@ -59,12 +60,12 @@ class NoteLEDBar : public GenericNoteCCRange<MIDIInputElementNote, 1,
               {leds},
           } {}
 
-    /// @copydoc    DotBarDisplayLEDs::dotMode
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
     void dotMode() { this->callback.dotMode(); }
-    /// @copydoc    DotBarDisplayLEDs::barMode
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
     void barMode() { this->callback.barMode(); }
-    /// @copydoc    DotBarDisplayLEDs::setMode
-    void setMode(DotBarMode mode) { this->callback.setMode(mode); }
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
+    void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -81,7 +82,7 @@ template <uint8_t NumLEDs>
 class CCLEDBar : public GenericNoteCCRange<MIDIInputElementCC, 1,
                                            NoteCCLEDBarCallback<NumLEDs>> {
   public:
-    CCLEDBar(const DotBarDisplayLEDs<NumLEDs> &leds,
+    CCLEDBar(const AH::DotBarDisplayLEDs<NumLEDs> &leds,
              MIDICNChannelAddress address)
         : GenericNoteCCRange<MIDIInputElementCC, 1,
                              NoteCCLEDBarCallback<NumLEDs>>{
@@ -89,12 +90,12 @@ class CCLEDBar : public GenericNoteCCRange<MIDIInputElementCC, 1,
               {leds},
           } {}
 
-    /// @copydoc    DotBarDisplayLEDs::dotMode
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
     void dotMode() { this->callback.dotMode(); }
-    /// @copydoc    DotBarDisplayLEDs::barMode
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
     void barMode() { this->callback.barMode(); }
-    /// @copydoc    DotBarDisplayLEDs::setMode
-    void setMode(DotBarMode mode) { this->callback.setMode(mode); }
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
+    void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -118,7 +119,7 @@ class NoteLEDBar : public GenericNoteCCRange<MIDIInputElementNote, 1, BankSize,
                                              NoteCCLEDBarCallback<NumLEDs>> {
   public:
     NoteLEDBar(const BankConfig<BankSize> &config,
-               const DotBarDisplayLEDs<NumLEDs> &leds,
+               const AH::DotBarDisplayLEDs<NumLEDs> &leds,
                const MIDICNChannelAddress &address)
         : GenericNoteCCRange<MIDIInputElementNote, 1, BankSize,
                              NoteCCLEDBarCallback<NumLEDs>>{
@@ -126,6 +127,13 @@ class NoteLEDBar : public GenericNoteCCRange<MIDIInputElementNote, 1, BankSize,
               address,
               {leds},
           } {}
+
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
+    void dotMode() { this->callback.dotMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
+    void barMode() { this->callback.barMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
+    void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -145,7 +153,7 @@ class CCLEDBar : public GenericNoteCCRange<MIDIInputElementCC, 1, BankSize,
                                            NoteCCLEDBarCallback<NumLEDs>> {
   public:
     CCLEDBar(const BankConfig<BankSize> &config,
-             const DotBarDisplayLEDs<NumLEDs> &leds,
+             const AH::DotBarDisplayLEDs<NumLEDs> &leds,
              const MIDICNChannelAddress &address)
         : GenericNoteCCRange<MIDIInputElementCC, 1, BankSize,
                              NoteCCLEDBarCallback<NumLEDs>>{
@@ -153,6 +161,13 @@ class CCLEDBar : public GenericNoteCCRange<MIDIInputElementCC, 1, BankSize,
               address,
               {leds},
           } {}
+
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
+    void dotMode() { this->callback.dotMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
+    void barMode() { this->callback.barMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
+    void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
 };
 
 } // namespace Bankable

@@ -1,0 +1,14 @@
+/// @cond   !AH_MAIN_LIBRARY
+/// @addtogroup AH_group
+/// @{
+/// @endcond
+
+/**
+ * @defgroup    AH_ExtIO Extended Input/Output
+ * @brief   All Elements that extend the number of IO pins of the Arduino: 
+ *          Currently only shift registers and multiplexers.
+ */
+
+/// @cond   !AH_MAIN_LIBRARY
+/// @}
+/// @endcond

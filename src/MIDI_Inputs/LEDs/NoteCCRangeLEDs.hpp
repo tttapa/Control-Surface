@@ -1,4 +1,9 @@
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#pragma once
+
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR()
+
+#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <MIDI_Inputs/NoteCCRange.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -13,14 +18,14 @@ class NoteCCLED : public SimpleNoteCCValueCallback {
 
     void begin(const INoteCCValue &t) override {
         for (pin_t pin : ledPins)
-            ExtIO::pinMode(pin, OUTPUT);
+            AH::ExtIO::pinMode(pin, OUTPUT);
         updateAll(t);
     }
 
     void update(const INoteCCValue &t, uint8_t index) override {
         uint8_t value = t.getValue(index);
         bool state = value > threshold;
-        ExtIO::digitalWrite(ledPins[index], state);
+        AH::ExtIO::digitalWrite(ledPins[index], state);
     }
 
   private:
@@ -139,3 +144,5 @@ class CCValueLED
 } // namespace Bankable
 
 END_CS_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

@@ -1,0 +1,15 @@
+#pragma once
+
+#ifdef __AVR__
+#include "Fallback/optional"
+#else
+#if defined(__cpp_lib_optional) && __cpp_lib_optional >= 201603
+#include <optional>
+#endif
+#endif
+
+#include <AH/Settings/NamespaceSettings.hpp>
+
+BEGIN_AH_NAMESPACE
+
+END_AH_NAMESPACE

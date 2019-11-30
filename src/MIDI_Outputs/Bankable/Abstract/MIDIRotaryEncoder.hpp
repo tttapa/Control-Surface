@@ -9,7 +9,6 @@
 #include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
 #include <Encoder.h>
-#include <Helpers/Array.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE

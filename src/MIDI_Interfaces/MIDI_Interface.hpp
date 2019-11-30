@@ -246,10 +246,13 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
  */
 class MIDI_Callbacks {
   public:
-    virtual void onChannelMessage(UNUSED_PARAM Parsing_MIDI_Interface &midi) {}
-    virtual void onSysExMessage(UNUSED_PARAM Parsing_MIDI_Interface &midi) {}
-    virtual void onRealtimeMessage(UNUSED_PARAM Parsing_MIDI_Interface &midi,
-                                   UNUSED_PARAM uint8_t message) {}
+    virtual void onChannelMessage(Parsing_MIDI_Interface &midi) { (void)midi; }
+    virtual void onSysExMessage(Parsing_MIDI_Interface &midi) { (void)midi; }
+    virtual void onRealtimeMessage(Parsing_MIDI_Interface &midi,
+                                   uint8_t message) {
+        (void)midi;
+        (void)message;
+    }
 
     virtual ~MIDI_Callbacks() = default;
 };

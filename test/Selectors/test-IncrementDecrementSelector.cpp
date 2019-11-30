@@ -4,6 +4,8 @@
 using namespace ::testing;
 using namespace CS;
 
+using AH::Updatable;
+
 TEST(IncrementDecrementSelector, pressIncrementWrap) {
     MockSelectable<3> selectable;
 

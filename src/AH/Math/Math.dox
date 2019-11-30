@@ -1,0 +1,14 @@
+/// @cond   !AH_MAIN_LIBRARY
+/// @addtogroup AH_group
+/// @{
+/// @endcond
+
+/**
+ * @defgroup    AH_Math   Math Utilities
+ * @brief   Mathematics helper functions. Min/max functions, functions to 
+ *          uniformly increase the effective bid depth, etc.
+ */
+
+/// @cond   !AH_MAIN_LIBRARY
+/// @}
+/// @endcond

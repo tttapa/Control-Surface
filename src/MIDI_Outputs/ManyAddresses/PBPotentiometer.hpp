@@ -1,7 +1,10 @@
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+AH_DIAGNOSTIC_WERROR()
+
+#include <AH/Containers/ArrayHelpers.hpp>
 #include <Banks/BankAddresses.hpp>
-#include <Helpers/ArrayHelpers.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/PitchBendSender.hpp>
 
@@ -51,7 +54,7 @@ class PBPotentiometer
                     const Array<MIDICNChannel, N> &addresses,
                     const PitchBendSender<10> &sender = {})
         : MIDIFilteredAnalog<ManyAddresses<N>, PitchBendSender<10>>{
-              {bank, copyAs<MIDICNChannelAddress>(addresses)},
+              {bank, AH::copyAs<MIDICNChannelAddress>(addresses)},
               analogPin,
               sender,
           } {}
@@ -61,3 +64,5 @@ class PBPotentiometer
 } // namespace Bankable
 
 END_CS_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

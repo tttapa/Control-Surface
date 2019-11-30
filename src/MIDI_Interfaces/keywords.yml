@@ -1,0 +1,15 @@
+keyword1:
+ - MIDI_Interface
+ - StreamMIDI_Interface
+ - SerialMIDI_Interface
+ - HardwareSerialMIDI_Interface
+ - USBSerialMIDI_Interface
+ - USBMIDI_Interface
+ - StreamDebugMIDI_Interface
+ - SerialDebugMIDI_Interface
+ - HardwareSerialDebugMIDI_Interface
+ - USBDebugMIDI_Interface
+ - SoftwareSerialDebugMIDI_Interface
+ - HairlessMIDI_Interface
+ - MIDI_Callbacks
+ - SysExMessage

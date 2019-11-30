@@ -1,0 +1,6 @@
+<map id="Bankable::PBPotentiometer" name="Bankable::PBPotentiometer">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="27,763,210,840"/>
+<area shape="rect" id="node2" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="5,491,232,715"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="49,160,188,443"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="27,5,210,112"/>
+</map>

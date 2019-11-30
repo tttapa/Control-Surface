@@ -1,6 +1,7 @@
 #pragma once
 
-#include <Helpers/Debug.hpp>
+#include <AH/Debug/Debug.hpp>
+#include <AH/Math/MinMaxFix.hpp>
 #include <MIDI_Inputs/MIDIInputElementSysEx.hpp>
 #include <string.h> // memcpy
 
@@ -9,6 +10,9 @@
 #endif
 
 BEGIN_CS_NAMESPACE
+
+using AH::max;
+using AH::min;
 
 namespace MCU {
 

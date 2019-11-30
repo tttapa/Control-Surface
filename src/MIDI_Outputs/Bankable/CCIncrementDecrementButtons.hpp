@@ -49,7 +49,7 @@ class CCIncrementDecrementButtons
      *          The MIDI sender to use for reset events.
      */
     CCIncrementDecrementButtons(const OutputBankConfig &config,
-                                const IncrementDecrementButtons &buttons,
+                                const AH::IncrementDecrementButtons &buttons,
                                 const MIDICNChannelAddress &address,
                                 uint8_t multiplier = 1,
                                 const MIDICNChannelAddress &resetNote = {},

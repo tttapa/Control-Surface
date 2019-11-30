@@ -2,7 +2,7 @@
 
 #include <Banks/BankableMIDIOutput.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/IncrementDecrementButtons.hpp>
+#include <AH/Hardware/IncrementDecrementButtons.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 #include <MIDI_Senders/DigitalNoteSender.hpp>
@@ -25,18 +25,18 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
      * @todo    Documentation
      */
     MIDIIncrementDecrementButtons(const BankAddress &addresses,
-                                  const IncrementDecrementButtons &buttons,
+                                  const AH::IncrementDecrementButtons &buttons,
                                   uint8_t multiplier,
                                   const RelativeSender &relativeSender,
                                   const ResetSender &resetSender)
         : addresses{addresses}, buttons{buttons}, multiplier{multiplier},
-          relativeSender{relativeSender}, resetSender{resetSender} {}
+          relativeSender(relativeSender), resetSender(resetSender) {}
 
   public:
     void begin() override { buttons.begin(); }
 
     void update() override {
-        using IncrDecrButtons = IncrementDecrementButtons;
+        using IncrDecrButtons = AH::IncrementDecrementButtons;
         MIDICNChannelAddress address = addresses.getActiveAddress(0);
         switch (buttons.update()) {
             case IncrDecrButtons::Increment: send(multiplier, address); break;
@@ -63,13 +63,13 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
     void invert() { buttons.invert(); }
 #endif
 
-    IncrementDecrementButtons::State getButtonsState() const {
+    AH::IncrementDecrementButtons::State getButtonsState() const {
         return buttons.getState();
     }
 
   private:
     BankAddress addresses;
-    IncrementDecrementButtons buttons;
+    AH::IncrementDecrementButtons buttons;
     const uint8_t multiplier;
 
   public:

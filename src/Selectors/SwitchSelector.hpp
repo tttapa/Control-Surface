@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Selector.hpp"
-#include <Hardware/Button.hpp>
+#include <AH/Hardware/Button.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -11,7 +11,7 @@ class GenericSwitchSelector : public GenericSelector<2, Callback> {
 
   public:
     GenericSwitchSelector(Selectable<2> &selectable, const Callback &callback,
-                          const Button &button)
+                          const AH::Button &button)
         : GenericSelector<2, Callback>{selectable, callback}, button{button} {}
 
     void begin() override {
@@ -21,21 +21,21 @@ class GenericSwitchSelector : public GenericSelector<2, Callback> {
 
     void update() override {
         Parent::update();
-        Button::State state = button.update();
-        if (state == Button::Falling)
+        AH::Button::State state = button.update();
+        if (state == AH::Button::Falling)
             this->set(1);
-        else if (state == Button::Rising)
+        else if (state == AH::Button::Rising)
             this->set(0);
     }
 
-    Button::State getButtonState() const { return button.getState(); }
-    
+    AH::Button::State getButtonState() const { return button.getState(); }
+
 #ifdef INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }
 #endif
 
   private:
-    Button button;
+    AH::Button button;
 };
 
 /**
@@ -50,7 +50,7 @@ class GenericSwitchSelector : public GenericSelector<2, Callback> {
  */
 class SwitchSelector : public GenericSwitchSelector<> {
   public:
-    SwitchSelector(Selectable<2> &selectable, const Button &button)
+    SwitchSelector(Selectable<2> &selectable, const AH::Button &button)
         : GenericSwitchSelector<>{
               selectable,
               {},

@@ -1,0 +1,15 @@
+<map id="GenericProgramChangeSelector&lt; N, Callback &gt;" name="GenericProgramChangeSelector&lt; N, Callback &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="95,1675,325,1811"/>
+<area shape="rect" id="node2" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="139,1300,281,1480"/>
+<area shape="rect" id="node3" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,1050,124,1142"/>
+<area shape="rect" id="node4" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="148,955,272,1237"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="72,5,255,112"/>
+<area shape="rect" id="node7" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="155,161,388,444"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="154,521,381,892"/>
+<area shape="rect" id="node8" title=" " alt="" coords="296,1057,369,1135"/>
+<area shape="rect" id="node9" href="$db/d1d/classMIDIInputElementPC.html" title=" " alt="" coords="429,1300,604,1480"/>
+<area shape="rect" id="node12" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="349,1697,530,1789"/>
+<area shape="rect" id="node13" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="554,1557,746,1928"/>
+<area shape="rect" id="node10" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="439,991,595,1201"/>
+<area shape="rect" id="node11" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="423,529,610,885"/>
+</map>

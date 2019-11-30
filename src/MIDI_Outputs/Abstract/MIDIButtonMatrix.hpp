@@ -1,7 +1,7 @@
 #pragma once
 
+#include <AH/Hardware/ButtonMatrix.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/ButtonMatrix.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -9,11 +9,11 @@ BEGIN_CS_NAMESPACE
 /**
  * @brief   MIDIButtonMatrix
  * @todo    Documentation.
- * @see     ButtonMatrix
+ * @see     AH::ButtonMatrix
  */
 template <class Sender, uint8_t nb_rows, uint8_t nb_cols>
 class MIDIButtonMatrix : public MIDIOutputElement,
-                         public ButtonMatrix<nb_rows, nb_cols> {
+                         public AH::ButtonMatrix<nb_rows, nb_cols> {
 
   protected:
     /**
@@ -24,13 +24,15 @@ class MIDIButtonMatrix : public MIDIOutputElement,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
                      MIDICNChannel channelCN, const Sender &sender)
-        : ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
+        : AH::ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
           addresses(addresses), baseChannelCN(channelCN), sender{sender} {}
 
   public:
-    void begin() final override { ButtonMatrix<nb_rows, nb_cols>::begin(); }
+    void begin() final override { AH::ButtonMatrix<nb_rows, nb_cols>::begin(); }
 
-    void update() final override { ButtonMatrix<nb_rows, nb_cols>::refresh(); }
+    void update() final override {
+        AH::ButtonMatrix<nb_rows, nb_cols>::update();
+    }
 
   private:
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {

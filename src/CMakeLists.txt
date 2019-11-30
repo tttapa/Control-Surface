@@ -1,3 +1,5 @@
+add_subdirectory(AH)
+
 if (FAST_COMPILE)
     set(CONTROL_SURFACE_SOURCES
         Def/MIDICNChannelAddress.cpp
@@ -6,23 +8,14 @@ if (FAST_COMPILE)
         MIDI_Inputs/MIDIInputElementChannelPressure.cpp
         MIDI_Inputs/MIDIInputElementSysEx.cpp
         MIDI_Inputs/MIDIInputElementPC.cpp
-        MIDI_Inputs/LEDs/FastLED.cpp
         MIDI_Inputs/MCU/LCD.cpp
         MIDI_Constants/MCUNameFromNoteNumber.cpp
         Display/DisplayInterface.cpp
         Display/DisplayElement.cpp
         Display/MCU/VPotDisplay.cpp
-        Hardware/IncrementDecrementButtons.cpp
-        Hardware/Button.cpp
-        Hardware/IncrementButton.cpp
-        Hardware/ExtendedInputOutput/ShiftRegisterOutRGB.cpp
-        Hardware/ExtendedInputOutput/ExtendedIOElement.cpp
-        Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp
         Control_Surface/Control_Surface_Class.cpp
         MIDI_Senders/RelativeCCSender.cpp
-        Helpers/Debug.cpp
-        Helpers/PrintStream.cpp
-        Helpers/Exit.cpp
+        Banks/BankAddresses.cpp
         MIDI_Parsers/USBMIDI_Parser.cpp
         MIDI_Parsers/MIDI_Parser.cpp
         MIDI_Parsers/SerialMIDI_Parser.cpp
@@ -32,6 +25,7 @@ if (FAST_COMPILE)
 else ()
     file(GLOB_RECURSE
         CONTROL_SURFACE_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+    list(FILTER CONTROL_SURFACE_SOURCES EXCLUDE REGEX "AH/.*")
 endif ()
 
 add_library(Control_Surface ${CONTROL_SURFACE_SOURCES})
@@ -52,3 +46,4 @@ else ()
 endif ()
 
 target_link_libraries(Control_Surface PUBLIC ArduinoMock)
+target_link_libraries(Control_Surface PUBLIC Arduino_Helpers)

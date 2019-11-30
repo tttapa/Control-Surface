@@ -1,4 +1,7 @@
+[![Build Status](https://github.com/tttapa/Arduino-Filters/workflows/CI%20Tests/badge.svg)](https://github.com/tttapa/Arduino-Filters/actions)
+[![Test Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/tttapa/Control-Surface/master/docs/Coverage/shield.io.coverage.json)](https://tttapa.github.io/Control-Surface/Coverage/index.html)
 [![Build Status](https://travis-ci.org/tttapa/Control-Surface.svg?branch=master)](https://travis-ci.org/tttapa/Control-Surface)
+[![GitHub](https://img.shields.io/github/stars/tttapa/Control-Surface?label=GitHub&logo=github)](https://github.com/tttapa/Control-Surface)
 
 # Control Surface
 
@@ -138,13 +141,25 @@ fully implemented, feel free to open an issue, so I know where to focus on first
 See the [Getting Started](https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html)
 document to get started using the library.
 
+Libraries that use the Arduino Helpers library include:
+- [**Arduino Filters**](https://github.com/tttapa/Arduino-Filters):
+  FIR, IIR filtering library
+- [**Control Surface**](https://github.com/tttapa/Control-Surface):
+  library for creating MIDI Control Surfaces, with knobs and push buttons, 
+  LEDs, displays, etc.
+
 ## Documentation
 
 The automatically generated Doxygen documentation for this library can be found 
-[here](https://tttapa.github.io/Control-Surface/Doc/Doxygen/index.html).
+here:  
+[**Documentation**](https://tttapa.github.io/Control-Surface/Doxygen/index.html)  
+Test coverage information can be found here:  
+[**Code Coverage**](https://tttapa.github.io/Control-Surface/Coverage/index.html)
 
 ## Information for developers
 
-Information for people that would like to help improve the Control Surface library can be found here: <https://tttapa.github.io/Pages/Arduino/Control-Surface/Developers/index.html>  
+Information for people that would like to help improve the Control Surface 
+library can be found here: 
+<https://tttapa.github.io/Pages/Arduino/Control-Surface/Developers/index.html>  
 It covers installation instructions for developers, instructions for running the
 tests and generating documentation, a style guide, etc.

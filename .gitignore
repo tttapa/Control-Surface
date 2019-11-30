@@ -1,28 +1,10 @@
-doc/Doxygen/html/
-doc/Doxygen/xml/
-doc/Doxygen/MathJax
+# .vscode/
+.vscode/tags
+*.pc
+.vscode/ipch
 
-doc/Coverage/
+.~lock*
+__pycache__/
 
 *.tmp
 *.hex
-
-# .vscode/
-tags
-
-TODO.txt
-.~lock*
-*.o
-*.geany
-__pycache__/
-
-*.pc
-bin/
-lib/
-
-.cproject
-.project
-language.settings.xml
-.settings/*
-
-.vscode/ipch

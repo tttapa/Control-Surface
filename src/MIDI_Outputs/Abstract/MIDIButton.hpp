@@ -1,7 +1,7 @@
 #pragma once
 
+#include <AH/Hardware/Button.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -29,14 +29,14 @@ class MIDIButton : public MIDIOutputElement {
      */
     MIDIButton(pin_t pin, const MIDICNChannelAddress &address,
                const Sender &sender)
-        : button{pin}, address{address}, sender{sender} {}
+        : button{pin}, address{address}, sender(sender) {}
 
     void begin() override { button.begin(); }
     void update() override {
-        Button::State state = button.update();
-        if (state == Button::Falling) {
+        AH::Button::State state = button.update();
+        if (state == AH::Button::Falling) {
             sender.sendOn(address);
-        } else if (state == Button::Rising) {
+        } else if (state == AH::Button::Rising) {
             sender.sendOff(address);
         }
     }
@@ -45,10 +45,10 @@ class MIDIButton : public MIDIOutputElement {
     void invert() { button.invert(); }
 #endif
 
-    Button::State getButtonState() const { return button.getState(); }
+    AH::Button::State getButtonState() const { return button.getState(); }
 
   private:
-    Button button;
+    AH::Button button;
     const MIDICNChannelAddress address;
 
   public:

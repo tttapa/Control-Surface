@@ -1,0 +1,13 @@
+/// @cond   !AH_MAIN_LIBRARY
+/// @addtogroup AH_group
+/// @{
+/// @endcond
+
+/**
+ * @defgroup    AH_Filters     Filters
+ * @brief   Classes for basic filtering and hysteresis.
+ */
+
+/// @cond   !AH_MAIN_LIBRARY
+/// @}
+/// @endcond

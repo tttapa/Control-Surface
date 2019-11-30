@@ -2,11 +2,11 @@
 
 #pragma once
 
+#include <AH/Containers/Updatable.hpp>
+#include <AH/Hardware/FilteredAnalog.hpp>
 #include <Arduino.h>
 #include <Audio.h>
 #include <Def/Def.hpp>
-#include <Hardware/FilteredAnalog.hpp>
-#include <Helpers/Updatable.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -20,7 +20,7 @@ BEGIN_CS_NAMESPACE
  * @ingroup Audio
  */
 template <uint8_t N>
-class VolumeControl : public Updatable<Potentiometer> {
+class VolumeControl : public AH::Updatable<Potentiometer> {
   public:
     /**
      * @brief   Create a new VolumeControl object.
@@ -70,11 +70,11 @@ class VolumeControl : public Updatable<Potentiometer> {
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
 
     /// Invert the analog value.
-    void invert() { filteredAnalog.invert(); } 
+    void invert() { filteredAnalog.invert(); }
 
   private:
     Array<AudioMixer4 *, N> mixers;
-    FilteredAnalog<> filteredAnalog;
+    AH::FilteredAnalog<> filteredAnalog;
     const float maxGain;
 };
 

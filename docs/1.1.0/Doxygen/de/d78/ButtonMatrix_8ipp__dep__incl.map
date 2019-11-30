@@ -1,0 +1,13 @@
+<map id="ButtonMatrix.ipp" name="ButtonMatrix.ipp">
+<area shape="rect" id="node1" title=" " alt="" coords="356,5,473,32"/>
+<area shape="rect" id="node2" href="$d9/d4b/ButtonMatrix_8hpp.html" title=" " alt="" coords="354,80,475,107"/>
+<area shape="rect" id="node3" href="$d7/d33/Abstract_2MIDIButtonMatrix_8hpp.html" title=" " alt="" coords="170,155,321,181"/>
+<area shape="rect" id="node7" href="$d5/d5e/Bankable_2Abstract_2MIDIButtonMatrix_8hpp.html" title=" " alt="" coords="509,155,659,181"/>
+<area shape="rect" id="node4" href="$d5/d9b/CCButtonMatrix_8hpp.html" title=" " alt="" coords="5,229,147,256"/>
+<area shape="rect" id="node6" href="$d2/da8/NoteButtonMatrix_8hpp.html" title=" " alt="" coords="171,229,320,256"/>
+<area shape="rect" id="node5" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="435,304,562,331"/>
+<area shape="rect" id="node8" href="$d9/d55/Bankable_2CCButtonMatrix_8hpp.html" title=" " alt="" coords="344,229,485,256"/>
+<area shape="rect" id="node9" href="$dc/dde/Bankable_2NoteButtonMatrix_8hpp.html" title=" " alt="" coords="509,229,659,256"/>
+<area shape="rect" id="node10" href="$de/dfd/ManyAddresses_2CCButtonMatrix_8hpp.html" title=" " alt="" coords="683,229,824,256"/>
+<area shape="rect" id="node11" href="$d1/da1/ManyAddresses_2NoteButtonMatrix_8hpp.html" title=" " alt="" coords="848,229,997,256"/>
+</map>

@@ -1,5 +1,0 @@
-esp32=esp32:esp32:esp32thing:FlashFreq=80,PartitionScheme=default,UploadSpeed=921600,DebugLevel=none
-teensy 3.x=skip
-avr=arduino:avr:uno
-avr usb=arduino:avr:leonardo
-leonardo=arduino:avr:leonardo

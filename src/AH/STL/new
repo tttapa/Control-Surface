@@ -1,0 +1,13 @@
+#pragma once
+
+#ifdef __AVR__
+#include "Fallback/new"
+#else
+#include <new>
+#endif
+
+#include <AH/Settings/NamespaceSettings.hpp>
+
+BEGIN_AH_NAMESPACE
+
+END_AH_NAMESPACE

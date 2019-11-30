@@ -2,12 +2,15 @@
 #include <Selectors/IncrementSelector.hpp>
 
 using namespace ::testing;
-using namespace CS;
+
+USING_CS_NAMESPACE;
+
+using AH::Updatable;
 
 TEST(IncrementSelector, pressWrap) {
     MockSelectable<3> selectable;
 
-    IncrementSelector<3> selector = {selectable, IncrementButton(2),
+    IncrementSelector<3> selector = {selectable, AH::IncrementButton(2),
                                      Wrap::Wrap};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
@@ -64,7 +67,7 @@ TEST(IncrementSelector, pressWrap) {
 TEST(IncrementSelector, pressClamp) {
     MockSelectable<3> selectable;
 
-    IncrementSelector<3> selector = {selectable, IncrementButton(2),
+    IncrementSelector<3> selector = {selectable, AH::IncrementButton(2),
                                      Wrap::Clamp};
 
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));

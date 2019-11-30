@@ -6,6 +6,8 @@ USING_CS_NAMESPACE;
 using ::testing::Return;
 using ::testing::Sequence;
 
+using AH::ErrorException;
+
 TEST(USBMIDI_Interface, send3B) {
     USBMIDI_Interface midi;
     EXPECT_CALL(midi, writeUSBPacket(8, 0x9, 0x93, 0x55, 0x66));

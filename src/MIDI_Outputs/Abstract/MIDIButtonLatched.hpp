@@ -2,8 +2,8 @@
 
 #pragma once
 
+#include <AH/Hardware/Button.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/Button.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -38,8 +38,8 @@ class MIDIButtonLatched : public MIDIOutputElement {
   public:
     void begin() final override { button.begin(); }
     void update() final override {
-        Button::State state = button.update();
-        if (state == Button::Falling)
+        AH::Button::State state = button.update();
+        if (state == AH::Button::Falling)
             toggleState();
     }
 
@@ -65,10 +65,10 @@ class MIDIButtonLatched : public MIDIOutputElement {
 #endif
 
     /// Get the state of the underlying button.
-    Button::State getButtonState() const { return button.getState(); }
+    AH::Button::State getButtonState() const { return button.getState(); }
 
   private:
-    Button button;
+    AH::Button button;
     const MIDICNChannelAddress address;
     bool state = false;
 

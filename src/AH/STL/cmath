@@ -1,0 +1,48 @@
+#pragma once
+
+#include <AH/Settings/NamespaceSettings.hpp>
+
+#include <AH/Math/FixArduinoMacros.hpp>
+
+#ifdef __AVR__
+#include "Fallback/cmath"
+#else
+
+#include <cmath>
+
+#ifndef _GLIBCXX_USE_C99_MATH_TR1
+#pragma message("FMA math fix")
+namespace std {
+  constexpr double
+  fma(double __x, double __y, double __z)
+  { return __builtin_fma(__x, __y, __z); }
+  
+  constexpr float
+  fma(float __x, float __y, float __z)
+  { return __builtin_fmaf(__x, __y, __z); }
+
+  constexpr long double
+  fma(long double __x, long double __y, long double __z)
+  { return __builtin_fmal(__x, __y, __z); }
+
+  constexpr float
+  round(float __x)
+  { return __builtin_roundf(__x); }
+
+  constexpr double
+  round(double __x)
+  { return __builtin_round(__x); }
+
+  constexpr long double
+  round(long double __x)
+  { return __builtin_roundl(__x); }
+
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    round(_Tp __x)
+    { return __builtin_round(__x); }
+}
+#endif
+
+#endif

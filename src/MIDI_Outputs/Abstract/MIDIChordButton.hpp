@@ -1,8 +1,8 @@
 #pragma once
 
+#include <AH/Containers/UniquePtr.hpp>
+#include <AH/Hardware/Button.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/Button.hpp>
-#include <Helpers/unique_ptr.hpp>
 #include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -14,7 +14,7 @@ BEGIN_CS_NAMESPACE
  *
  * The button is debounced.
  *
- * @see     Button
+ * @see     AH::Button
  */
 template <class Sender>
 class MIDIChordButton : public MIDIOutputElement {
@@ -41,20 +41,20 @@ class MIDIChordButton : public MIDIOutputElement {
     MIDIChordButton(pin_t pin, const MIDICNChannelAddress &address,
                     const Chord<N> &chord, const Sender &sender)
         : button{pin}, address(address),
-          newChord(make_unique<Chord<N>>(chord)), sender{sender} {}
+          newChord(AH::MakeUnique<Chord<N>>(chord)), sender{sender} {}
     // TODO: can I somehow get rid of the dynamic memory allocation here?
 
     void begin() final override { button.begin(); }
     void update() final override {
-        Button::State state = button.update();
+        AH::Button::State state = button.update();
         MIDICNChannelAddress sendAddress = address;
-        if (state == Button::Falling) {
+        if (state == AH::Button::Falling) {
             if (newChord)
-                chord = move(newChord);
+                chord = std::move(newChord);
             sender.sendOn(sendAddress);
             for (int8_t offset : *chord)
                 sender.sendOn(sendAddress + offset);
-        } else if (state == Button::Rising) {
+        } else if (state == AH::Button::Rising) {
             sender.sendOff(sendAddress);
             for (int8_t offset : *chord)
                 sender.sendOff(sendAddress + offset);
@@ -65,7 +65,7 @@ class MIDIChordButton : public MIDIOutputElement {
     void invert() { button.invert(); }
 #endif
 
-    Button::State getButtonState() const { return button.getState(); }
+    AH::Button::State getButtonState() const { return button.getState(); }
 
     template <uint8_t N>
     void setChord(const Chord<N> &chord) {
@@ -73,10 +73,10 @@ class MIDIChordButton : public MIDIOutputElement {
     }
 
   private:
-    Button button;
+    AH::Button button;
     const MIDICNChannelAddress address;
-    unique_ptr<const IChord> chord;
-    unique_ptr<const IChord> newChord;
+    AH::UniquePtr<const IChord> chord;
+    AH::UniquePtr<const IChord> newChord;
 
   public:
     Sender sender;

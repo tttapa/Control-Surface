@@ -1,8 +1,8 @@
 #pragma once
 
+#include <AH/Error/Error.hpp>
+#include <AH/STL/type_traits>
 #include <Def/Def.hpp>
-#include <Helpers/Error.hpp>
-#include <Helpers/Helpers.hpp>
 #include <stdint.h>
 
 BEGIN_CS_NAMESPACE
@@ -17,7 +17,7 @@ class Selectable {
     virtual void select(setting_t setting) = 0;
 
     static setting_t validateSetting(setting_t setting) {
-        static_assert(is_unsigned<setting_t>::value,
+        static_assert(std::is_unsigned<setting_t>::value,
                       "Error: setting_t should be an unsigned integer type.");
         if (setting >= N) {
             ERROR(F("Error: Setting ")

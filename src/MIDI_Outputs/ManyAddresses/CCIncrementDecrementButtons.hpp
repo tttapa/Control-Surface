@@ -56,7 +56,7 @@ class CCIncrementDecrementButtons
      */
     CCIncrementDecrementButtons(
         const OutputBankConfig &config,
-        const IncrementDecrementButtons &buttons,
+        const AH::IncrementDecrementButtons &buttons,
         const Array<MIDICNChannelAddress, N> &addresses, uint8_t multiplier = 1,
         const Array<MIDICNChannelAddress, N> &resetNotes = {},
         const RelativeCCSender &relativeSender = {},

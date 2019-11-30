@@ -1,12 +1,12 @@
 #pragma once
 
+#include <AH/Containers/Updatable.hpp>
 #include <Def/Def.hpp>
 #include <Def/MIDICNChannelAddress.hpp>
-#include <Helpers/Updatable.hpp>
 
 BEGIN_CS_NAMESPACE
 
-using MIDIOutputElement = Updatable<>;
-using MIDIOutputElementPotentiometer = Updatable<Potentiometer>;
+using MIDIOutputElement = AH::Updatable<>;
+using MIDIOutputElementPotentiometer = AH::Updatable<Potentiometer>;
 
 END_CS_NAMESPACE

@@ -1,0 +1,13 @@
+/// @cond   !AH_MAIN_LIBRARY
+/// @addtogroup AH_group
+/// @{
+/// @endcond
+
+/**
+ * @defgroup    AH_Timing  Timing
+ * @brief   Blink Without Delay-style timers.
+ */
+
+/// @cond   !AH_MAIN_LIBRARY
+/// @}
+/// @endcond

@@ -85,7 +85,7 @@ class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
     VPotRing_Base(uint8_t track, const MIDICNChannel &channelCN,
                   const Callback &callback)
         : MIDIInputElementCC{{track + VPotRingAddress - 1, channelCN}},
-          callback{callback} {}
+          callback(callback) {}
 
   public:
     /// Initialize
@@ -94,7 +94,7 @@ class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
     /// Reset all values to zero
     void reset() override {
 #ifdef VPOTRING_RESET
-        values = {};
+        values = {{}};
         callback.update(*this);
 #endif
     }
@@ -126,7 +126,7 @@ class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
         return 0;
     }
 
-    Array<uint8_t, NumValues> values = {};
+    Array<uint8_t, NumValues> values = {{}};
 
   public:
     Callback callback;

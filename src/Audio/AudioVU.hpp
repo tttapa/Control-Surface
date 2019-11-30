@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Audio.h>
-#include <Helpers/EMA.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
 
 #include "MovingCoilBallistics.hpp"

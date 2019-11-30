@@ -1,0 +1,13 @@
+/// @cond   !AH_MAIN_LIBRARY
+/// @addtogroup AH_group
+/// @{
+/// @endcond
+
+/**
+ * @defgroup    AH_Settings    Settings
+ * @brief   User settings and debugging options.
+ */
+
+/// @cond   !AH_MAIN_LIBRARY
+/// @}
+/// @endcond

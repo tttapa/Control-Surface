@@ -1,0 +1,14 @@
+/// @cond   !AH_MAIN_LIBRARY
+/// @addtogroup AH_group
+/// @{
+/// @endcond
+
+/**
+ * @defgroup    AH_HardwareUtils   Hardware Utilities
+ * @brief   Classes used for debouncing buttons, incrementing/decrementing
+ *          push buttons, scanning switch matrices, filtering analog input, etc.
+ */
+
+/// @cond   !AH_MAIN_LIBRARY
+/// @}
+/// @endcond

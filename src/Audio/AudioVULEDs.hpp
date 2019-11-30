@@ -2,9 +2,9 @@
 
 #pragma once
 
+#include <AH/Hardware/LEDs/DotBarDisplayLEDs.hpp>
 #include <Audio/AudioVU.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/LEDs/DotBarDisplayLEDs.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -18,7 +18,7 @@ BEGIN_CS_NAMESPACE
  * @ingroup Audio
  */
 template <uint8_t N>
-class AudioVULEDs : public AudioVU, public Updatable<AudioVU> {
+class AudioVULEDs : public AudioVU, public AH::Updatable<AudioVU> {
   public:
     /**
      * @brief   Create a new AudioVULEDs object.
@@ -32,7 +32,7 @@ class AudioVULEDs : public AudioVU, public Updatable<AudioVU> {
      * @param   gain
      *          A multiplier to calibrate the VU meter.
      */
-    AudioVULEDs(const DotBarDisplayLEDs<N> &vuleds, AudioAnalyzePeak &level,
+    AudioVULEDs(const AH::DotBarDisplayLEDs<N> &vuleds, AudioAnalyzePeak &level,
                 float gain = 1.0)
         : AudioVU(level, gain, N), vuleds(vuleds) {}
 
@@ -58,7 +58,7 @@ class AudioVULEDs : public AudioVU, public Updatable<AudioVU> {
      * @param   mode 
      *          The mode.
      */
-    void setMode(DotBarMode mode) { vuleds.setMode(mode); }
+    void setMode(AH::DotBarMode mode) { vuleds.setMode(mode); }
 
     /**
      * @brief   Set the mode to dot mode.
@@ -71,7 +71,7 @@ class AudioVULEDs : public AudioVU, public Updatable<AudioVU> {
     void barMode() { vuleds.barMode(); }
 
   private:
-    DotBarDisplayLEDs<N> vuleds;
+    AH::DotBarDisplayLEDs<N> vuleds;
     uint8_t previousValue = 0;
 };
 

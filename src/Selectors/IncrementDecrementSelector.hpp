@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Selector.hpp"
-#include <Hardware/IncrementDecrementButtons.hpp>
+#include <AH/Hardware/IncrementDecrementButtons.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -10,10 +10,9 @@ class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
     using Parent = GenericSelector<N, Callback>;
 
   public:
-    GenericIncrementDecrementSelector(Selectable<N> &selectable,
-                                      const Callback &callback,
-                                      const IncrementDecrementButtons &buttons,
-                                      Wrap wrap = Wrap::Wrap)
+    GenericIncrementDecrementSelector(
+        Selectable<N> &selectable, const Callback &callback,
+        const AH::IncrementDecrementButtons &buttons, Wrap wrap = Wrap::Wrap)
         : GenericSelector<N, Callback>{selectable, callback}, buttons{buttons},
           wrap{wrap} {}
 
@@ -24,7 +23,7 @@ class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
 
     void update() override {
         Parent::update();
-        using IncrDecrButtons = IncrementDecrementButtons;
+        using IncrDecrButtons = AH::IncrementDecrementButtons;
         switch (buttons.update()) {
             case IncrDecrButtons::Increment: this->increment(wrap); break;
             case IncrDecrButtons::Decrement: this->decrement(wrap); break;
@@ -38,12 +37,12 @@ class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
     void invert() { buttons.invert(); }
 #endif
 
-    IncrementDecrementButtons::State getButtonsState() const {
+    AH::IncrementDecrementButtons::State getButtonsState() const {
         return buttons.getState();
     }
 
   private:
-    IncrementDecrementButtons buttons;
+    AH::IncrementDecrementButtons buttons;
     Wrap wrap;
 };
 
@@ -67,7 +66,7 @@ template <setting_t N>
 class IncrementDecrementSelector : public GenericIncrementDecrementSelector<N> {
   public:
     IncrementDecrementSelector(Selectable<N> &selectable,
-                               const IncrementDecrementButtons &buttons,
+                               const AH::IncrementDecrementButtons &buttons,
                                Wrap wrap = Wrap::Wrap)
         : GenericIncrementDecrementSelector<N>{
               selectable,

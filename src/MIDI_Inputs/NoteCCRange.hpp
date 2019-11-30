@@ -45,7 +45,7 @@ template <class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callback>
 class NoteCCRange : public MIDIInput_t, public INoteCCValue {
   public:
     NoteCCRange(MIDICNChannelAddress address, const Callback &callback)
-        : MIDIInput_t{address}, INoteCCValue{RangeLen}, callback{callback} {}
+        : MIDIInput_t{address}, INoteCCValue{RangeLen}, callback(callback) {}
 
     /// @todo   check index bounds
     uint8_t getValue(uint8_t index) const override {
@@ -57,7 +57,7 @@ class NoteCCRange : public MIDIInput_t, public INoteCCValue {
     void begin() override { callback.begin(*this); }
     /// Reset all values to zero
     void reset() override {
-        values = {};
+        values = {{}};
         callback.updateAll(*this);
     }
 
@@ -91,7 +91,7 @@ class NoteCCRange : public MIDIInput_t, public INoteCCValue {
         return target.getAddress() - this->address.getAddress();
     }
 
-    Array<Array<uint8_t, RangeLen>, NumBanks> values = {};
+    Array<Array<uint8_t, RangeLen>, NumBanks> values = {{}};
 
   public:
     Callback callback;

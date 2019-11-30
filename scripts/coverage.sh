@@ -7,11 +7,13 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 proj_dir=`realpath "$dir"/..`
 build_dir=`pwd`
 
-dest="$proj_dir"/doc/Coverage
-mkdir -p "$dest"/html
+html_dest="$proj_dir/docs/Coverage"
+dest="$build_dir/coverage"
+mkdir -p "$dest"
+mkdir -p "$html_dest"
 
-rm -f "$dest"/*.info
-rm -rf "$dest"/html/*
+rm -f "$dest/*.info"
+rm -rf "$html_dest/*"
 
 if [ "${1,,}" == "clang" ]; then
     gcov_bin="$dir/llvm-cov-gcov.sh"
@@ -28,7 +30,7 @@ lcov \
     --zerocounters \
     --directory "$build_dir"
 
-touch "$build_dir/CMakeLists.txt"
+cmake -S "$proj_dir" -B "$build_dir"
 make -C "$build_dir" -j$((`nproc` * 2))
 
 lcov \
@@ -65,6 +67,8 @@ lcov \
 genhtml \
     --prefix `realpath "$proj_dir"` \
     "$dest"/coverage_filtered.info \
-    --output-directory="$dest"/html \
+    --output-directory="$html_dest" \
     --legend --title `cd "$proj_dir" && git rev-parse HEAD` \
     --rc lcov_branch_coverage=$branches
+
+./scripts/coverage-badge.py

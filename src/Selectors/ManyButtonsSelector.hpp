@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Selector.hpp"
+#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Def/Def.hpp>
-#include <Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -20,15 +20,15 @@ class GenericManyButtonsSelector : public GenericSelector<N, Callback> {
     void begin() override {
         Parent::begin();
         for (const pin_t &pin : buttonPins)
-            ExtIO::pinMode(pin, INPUT_PULLUP);
+            AH::ExtIO::pinMode(pin, INPUT_PULLUP);
     }
 
     void update() override {
         Parent::update();
         for (setting_t i = 0; i < N; i++)
             // TODO: invert?
-            if (ExtIO::digitalRead(buttonPins[i]) == LOW) {
-                if (ExtIO::digitalRead(buttonPins[this->get()]) != LOW)
+            if (AH::ExtIO::digitalRead(buttonPins[i]) == LOW) {
+                if (AH::ExtIO::digitalRead(buttonPins[this->get()]) != LOW)
                     this->set(i);
                 break;
             }
