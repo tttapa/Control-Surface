@@ -17,6 +17,11 @@ rm -rf "$html_dest/*"
 
 if [ "${1,,}" == "clang" ]; then
     gcov_bin="$dir/llvm-cov-gcov.sh"
+    # Replace the default c++filt program with LLVM/Clang's version
+    mkdir /tmp/clang-cxxfilt
+    ln -s `which llvm-cxxfilt` /tmp/clang-cxxfilt/c++filt
+    export PATH=/tmp/clang-cxxfilt:$PATH
+    which c++filt
 else
     gcov_bin="gcov"
 fi
@@ -69,6 +74,8 @@ genhtml \
     "$dest"/coverage_filtered.info \
     --output-directory="$html_dest" \
     --legend --title `cd "$proj_dir" && git rev-parse HEAD` \
-    --rc lcov_branch_coverage=$branches
+    --rc lcov_branch_coverage=$branches \
+    -s \
+    --demangle-cpp
 
 ./scripts/coverage-badge.py
