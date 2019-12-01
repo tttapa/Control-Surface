@@ -36,7 +36,7 @@ your system's package manager.
 
 On Ubuntu and other Debian-based distros: 
 ```sh
-sudo apt-get install git
+sudo apt install git
 ```
 
 ### 1. Browse to your Arduino Libraries folder
