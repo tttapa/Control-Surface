@@ -1316,6 +1316,22 @@
  */
 
 /**
+ * @example   "Keyboard-Matrix-BCD.ino"
+ * 
+ * Keyboard-Matrix-BCD
+ * ===================
+ *
+ * This examples shows how to use a button matrix to read many switches using
+ * a BD to decimal decoder.  
+ * https://forum.arduino.cc/index.php?topic=651047
+ * 
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * Written by Pieter P, 2019-12-01  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "MIDI-Input-Callback.ino"
  * 
  * MIDI-Input-Callback
