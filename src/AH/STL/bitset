@@ -12,7 +12,7 @@
 
 template <size_t Nb>
 Print &operator<<(Print &os, const std::bitset<Nb> &bs) {
-    for (size_t i = 0; i < Nb; ++i)
+    for (size_t i = Nb; i-- > 0;)
         os << (bs[i] ? '1' : '0');
     return os;
 }
