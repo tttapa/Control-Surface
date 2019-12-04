@@ -49,6 +49,7 @@
                                 // overflow_error
 // #include <iosfwd>
 // #include <bits/cxxabi_forced.h>
+#include "algorithm"
 
 #define _GLIBCXX_BITSET_BITS_PER_WORD  (__CHAR_BIT__ * __SIZEOF_LONG__)
 #define _GLIBCXX_BITSET_WORDS(__n) \
