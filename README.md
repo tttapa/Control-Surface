@@ -58,6 +58,42 @@ display elements, using some minimal, high level code. All low level stuff is
 completely **reusable** (e.g. all MIDI operations, debouncing switches, 
 filtering analog inputs, and so on).
 
+## Example
+The following is a complete sketch for 8 potentiometers (connected using an analog multiplexer) that send out MIDI Control Change messages over USB.
+
+```cpp
+#include <Control_Surface.h>  // Include the library
+ 
+USBMIDI_Interface midi;  // Instantiate a MIDI Interface to use
+ 
+// Instantiate an analog multiplexer
+CD74HC4051 mux = {
+  A0,       // Analog input pin
+  {3, 4, 5} // Address pins S0, S1, S2
+};
+ 
+// Create an array of potentiometers that send out MIDI Control Change messages 
+// when you turn the potentiometers connected to the 8 input pins of the mux.
+CCPotentiometer volumePotentiometers[] = {
+  { mux.pin(0), { MIDI_CC::Channel_Volume, CHANNEL_1 } },
+  { mux.pin(1), { MIDI_CC::Channel_Volume, CHANNEL_2 } },
+  { mux.pin(2), { MIDI_CC::Channel_Volume, CHANNEL_3 } },
+  { mux.pin(3), { MIDI_CC::Channel_Volume, CHANNEL_4 } },
+  { mux.pin(4), { MIDI_CC::Channel_Volume, CHANNEL_5 } },
+  { mux.pin(5), { MIDI_CC::Channel_Volume, CHANNEL_6 } },
+  { mux.pin(6), { MIDI_CC::Channel_Volume, CHANNEL_7 } },
+  { mux.pin(7), { MIDI_CC::Channel_Volume, CHANNEL_8 } },
+};
+ 
+void setup() {
+  Control_Surface.begin();  // Initialize the Control Surface
+}
+
+void loop() {
+  Control_Surface.loop();  // Update the Control Surface
+}
+```
+
 ## The Control Surface library vs. The MIDI Controller library
 
 You might already have found my other Arduino MIDI library, [MIDI Controller](https://github.com/tttapa/MIDI_Controller), 
