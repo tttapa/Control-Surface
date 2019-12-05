@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - d1cdb05ef344d5464422491f07267cf4229d06f9 - src/AH/Containers/UniquePtr.hpp</title>
+  <title>LCOV - 207ea97b7805bc92dc1e48fee25c5e6654c57fec - src/AH/Containers/UniquePtr.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">d1cdb05ef344d5464422491f07267cf4229d06f9</td>
+            <td class="headerValue">207ea97b7805bc92dc1e48fee25c5e6654c57fec</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">21</td>
             <td class="headerCovTableEntry">22</td>
-            <td class="headerCovTableEntryHi">95.5 %</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntryHi">95.7 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-12-05 13:07:14</td>
+            <td class="headerValue">2019-12-05 16:12:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -115,8 +115,8 @@
 <a name="45"><span class="lineNum">      45 </span><span class="lineCov">          4 :     T *release() {</span></a>
 <a name="46"><span class="lineNum">      46 </span><span class="lineCov">          4 :         T *old_ptr = p;</span></a>
 <a name="47"><span class="lineNum">      47 </span><span class="lineCov">          4 :         p = nullptr;</span></a>
-<a name="48"><span class="lineNum">      48 </span><span class="lineCov">          4 :         return old_ptr;</span></a>
-<a name="49"><span class="lineNum">      49 </span>            :     }</a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">          8 :         return old_ptr;</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">          4 :     }</span></a>
 <a name="50"><span class="lineNum">      50 </span>            : </a>
 <a name="51"><span class="lineNum">      51 </span>            :     explicit operator bool() const { return p != nullptr; }</a>
 <a name="52"><span class="lineNum">      52 </span>            : </a>

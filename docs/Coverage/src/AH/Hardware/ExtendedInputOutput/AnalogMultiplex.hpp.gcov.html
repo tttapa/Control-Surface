@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - d1cdb05ef344d5464422491f07267cf4229d06f9 - src/AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp</title>
+  <title>LCOV - 207ea97b7805bc92dc1e48fee25c5e6654c57fec - src/AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">d1cdb05ef344d5464422491f07267cf4229d06f9</td>
+            <td class="headerValue">207ea97b7805bc92dc1e48fee25c5e6654c57fec</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">41</td>
-            <td class="headerCovTableEntry">41</td>
+            <td class="headerCovTableEntry">44</td>
+            <td class="headerCovTableEntry">44</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-12-05 13:07:14</td>
+            <td class="headerValue">2019-12-05 16:12:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">16</td>
@@ -235,8 +235,8 @@
 <a name="165"><span class="lineNum">     165 </span><span class="lineCov">          2 :     prepareReading(pin);</span></a>
 <a name="166"><span class="lineNum">     166 </span><span class="lineCov">          2 :     int result = ExtIO::digitalRead(analogPin);</span></a>
 <a name="167"><span class="lineNum">     167 </span><span class="lineCov">          2 :     afterReading();</span></a>
-<a name="168"><span class="lineNum">     168 </span><span class="lineCov">          2 :     return result;</span></a>
-<a name="169"><span class="lineNum">     169 </span>            : }</a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">          4 :     return result;</span></a>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">          2 : }</span></a>
 <a name="170"><span class="lineNum">     170 </span>            : </a>
 <a name="171"><span class="lineNum">     171 </span>            : template &lt;uint8_t N&gt;</a>
 <a name="172"><span class="lineNum">     172 </span><span class="lineCov">          7 : analog_t AnalogMultiplex&lt;N&gt;::analogRead(pin_t pin) {</span></a>
@@ -244,8 +244,8 @@
 <a name="174"><span class="lineNum">     174 </span><span class="lineCov">          7 :     ExtIO::analogRead(analogPin); // Discard first reading</span></a>
 <a name="175"><span class="lineNum">     175 </span><span class="lineCov">          7 :     analog_t result = ExtIO::analogRead(analogPin);</span></a>
 <a name="176"><span class="lineNum">     176 </span><span class="lineCov">          7 :     afterReading();</span></a>
-<a name="177"><span class="lineNum">     177 </span><span class="lineCov">          7 :     return result;</span></a>
-<a name="178"><span class="lineNum">     178 </span>            : }</a>
+<a name="177"><span class="lineNum">     177 </span><span class="lineCov">         14 :     return result;</span></a>
+<a name="178"><span class="lineNum">     178 </span><span class="lineCov">          7 : }</span></a>
 <a name="179"><span class="lineNum">     179 </span>            : </a>
 <a name="180"><span class="lineNum">     180 </span>            : template &lt;uint8_t N&gt;</a>
 <a name="181"><span class="lineNum">     181 </span><span class="lineCov">          6 : void AnalogMultiplex&lt;N&gt;::begin() {</span></a>
@@ -263,7 +263,7 @@
 <a name="193"><span class="lineNum">     193 </span><span class="lineCov">         42 :     for (const pin_t &amp;addressPin : addressPins) {</span></a>
 <a name="194"><span class="lineNum">     194 </span><span class="lineCov">         33 :         ExtIO::digitalWrite(addressPin, (address &amp; mask) != 0);</span></a>
 <a name="195"><span class="lineNum">     195 </span><span class="lineCov">         33 :         mask &lt;&lt;= 1;</span></a>
-<a name="196"><span class="lineNum">     196 </span>            :     }</a>
+<a name="196"><span class="lineNum">     196 </span><span class="lineCov">         33 :     }</span></a>
 <a name="197"><span class="lineNum">     197 </span>            : #if !defined(__AVR__) &amp;&amp; !defined(__x86_64__)</a>
 <a name="198"><span class="lineNum">     198 </span>            :     delayMicroseconds(5);</a>
 <a name="199"><span class="lineNum">     199 </span>            : #endif</a>

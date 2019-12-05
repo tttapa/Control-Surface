@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - d1cdb05ef344d5464422491f07267cf4229d06f9 - src/AH/Containers/Array.hpp</title>
+  <title>LCOV - 207ea97b7805bc92dc1e48fee25c5e6654c57fec - src/AH/Containers/Array.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">d1cdb05ef344d5464422491f07267cf4229d06f9</td>
+            <td class="headerValue">207ea97b7805bc92dc1e48fee25c5e6654c57fec</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">139</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-12-05 13:07:14</td>
+            <td class="headerValue">2019-12-05 16:12:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">132</td>
@@ -171,7 +171,7 @@
 <a name="101"><span class="lineNum">     101 </span><span class="lineCov">         43 :     bool operator==(const Array&lt;T, N&gt; &amp;rhs) const {</span></a>
 <a name="102"><span class="lineNum">     102 </span><span class="lineCov">         43 :         if (this == &amp;rhs)</span></a>
 <a name="103"><span class="lineNum">     103 </span><span class="lineCov">          3 :             return true;</span></a>
-<a name="104"><span class="lineNum">     104 </span><span class="lineCov">        219 :         for (size_t i = 0; i &lt; N; i++)</span></a>
+<a name="104"><span class="lineNum">     104 </span><span class="lineCov">        222 :         for (size_t i = 0; i &lt; N; i++)</span></a>
 <a name="105"><span class="lineNum">     105 </span><span class="lineCov">        182 :             if ((*this)[i] != rhs[i])</span></a>
 <a name="106"><span class="lineNum">     106 </span><span class="lineCov">          3 :                 return false;</span></a>
 <a name="107"><span class="lineNum">     107 </span><span class="lineCov">         37 :         return true;</span></a>
@@ -377,7 +377,7 @@
 <a name="307"><span class="lineNum">     307 </span><span class="lineCov">         16 : bool operator==(ArraySlice&lt;T1, N1, Reverse1, Const1&gt; a,</span></a>
 <a name="308"><span class="lineNum">     308 </span>            :                 ArraySlice&lt;T2, N2, Reverse2, Const2&gt; b) {</a>
 <a name="309"><span class="lineNum">     309 </span>            :     static_assert(N1 == N2, &quot;Error: sizes do not match&quot;);</a>
-<a name="310"><span class="lineNum">     310 </span><span class="lineCov">         85 :     for (size_t i = 0; i &lt; N1; ++i)</span></a>
+<a name="310"><span class="lineNum">     310 </span><span class="lineCov">         88 :     for (size_t i = 0; i &lt; N1; ++i)</span></a>
 <a name="311"><span class="lineNum">     311 </span><span class="lineCov">         72 :         if (a[i] != b[i])</span></a>
 <a name="312"><span class="lineNum">     312 </span><span class="lineCov">          3 :             return false;</span></a>
 <a name="313"><span class="lineNum">     313 </span><span class="lineCov">         13 :     return true;</span></a>

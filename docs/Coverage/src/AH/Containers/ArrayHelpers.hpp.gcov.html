@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - d1cdb05ef344d5464422491f07267cf4229d06f9 - src/AH/Containers/ArrayHelpers.hpp</title>
+  <title>LCOV - 207ea97b7805bc92dc1e48fee25c5e6654c57fec - src/AH/Containers/ArrayHelpers.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">d1cdb05ef344d5464422491f07267cf4229d06f9</td>
+            <td class="headerValue">207ea97b7805bc92dc1e48fee25c5e6654c57fec</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">36</td>
-            <td class="headerCovTableEntry">36</td>
+            <td class="headerCovTableEntry">38</td>
+            <td class="headerCovTableEntry">38</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-12-05 13:07:14</td>
+            <td class="headerValue">2019-12-05 16:12:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">17</td>
@@ -106,8 +106,8 @@
 <a name="36"><span class="lineNum">      36 </span><span class="lineCov">          4 :     USE_CONSTEXPR_ARRAY_HELPERS T operator()() {</span></a>
 <a name="37"><span class="lineNum">      37 </span><span class="lineCov">          4 :         T temp = value;</span></a>
 <a name="38"><span class="lineNum">      38 </span><span class="lineCov">          4 :         value += increment;</span></a>
-<a name="39"><span class="lineNum">      39 </span><span class="lineCov">          4 :         return temp;</span></a>
-<a name="40"><span class="lineNum">      40 </span>            :     }</a>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">          8 :         return temp;</span></a>
+<a name="40"><span class="lineNum">      40 </span><span class="lineCov">          4 :     }</span></a>
 <a name="41"><span class="lineNum">      41 </span>            : </a>
 <a name="42"><span class="lineNum">      42 </span>            :   private:</a>
 <a name="43"><span class="lineNum">      43 </span>            :     T value;</a>
@@ -253,7 +253,7 @@
 <a name="183"><span class="lineNum">     183 </span><span class="lineCov">          1 : generateIncrementalArray(U start = 0, V increment = V(1)) {</span></a>
 <a name="184"><span class="lineNum">     184 </span><span class="lineCov">          1 :     detail::Incrementor&lt;U, V&gt; g(start, increment);</span></a>
 <a name="185"><span class="lineNum">     185 </span><span class="lineCov">          1 :     return generateArray&lt;T, N&gt;(g);</span></a>
-<a name="186"><span class="lineNum">     186 </span>            : }</a>
+<a name="186"><span class="lineNum">     186 </span><span class="lineCov">          1 : }</span></a>
 <a name="187"><span class="lineNum">     187 </span>            : </a>
 <a name="188"><span class="lineNum">     188 </span>            : /**</a>
 <a name="189"><span class="lineNum">     189 </span>            :  * @brief   Concatenate two arrays.</a>
