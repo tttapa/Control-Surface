@@ -58,8 +58,22 @@ display elements, using some minimal, high level code. All low level stuff is
 completely **reusable** (e.g. all MIDI operations, debouncing switches, 
 filtering analog inputs, and so on).
 
-## Example
-The following is a complete sketch for 8 potentiometers (connected using an analog multiplexer) that send out MIDI Control Change messages over USB.
+## Example usage
+
+A complete sketch for a MIDI controller with a potentiometer that sends out MIDI Control Change message can be written in just five lines of code:
+
+```cpp
+#include <Control_Surface.h>
+
+USBMIDI_Interface midi;
+CCPotentiometer pot = { A0, MIDI_CC::General_Purpose_Controller_1 };
+
+void setup() { Control_Surface.begin(); }
+void loop() { Control_Surface.loop(); }
+```
+
+Larger MIDI controllers can implemented very easily as well, with clean and easy to modify code.  
+The following sketch is for 8 potentiometers (connected using an analog multiplexer) that send out MIDI Control Change messages over USB.
 
 ```cpp
 #include <Control_Surface.h>  // Include the library
@@ -92,6 +106,18 @@ void setup() {
 void loop() {
   Control_Surface.loop();  // Update the Control Surface
 }
+```
+
+MIDI input is very easy as well. For example, an LED that turns on when a MIDI Note On message for middle C is received:
+```cpp
+#include <Control_Surface.h>
+
+USBMIDI_Interface midi;
+using namespace MIDI_Notes;
+NoteValueLED led = { LED_BUILTIN, note(C, 4) };
+
+void setup() { Control_Surface.begin(); }
+void loop() { Control_Surface.loop(); }
 ```
 
 ## The Control Surface library vs. The MIDI Controller library
