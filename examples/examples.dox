@@ -1,4 +1,24 @@
 /**
+ * @example   "BlinkWithoutDelay-Timer.ino"
+ * 
+ * BlinkWithoutDelay-Timer
+ * =======================
+ *
+ * This examples shows how use the Timer class to blink an LED every
+ * second, in a non-blocking fashion (without using delay).
+ * 
+ * @boards  AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Behavior
+ * --------
+ * 
+ * Blinks the built-in LED every second.
+ * 
+ * Written by PieterP, 2019-12-06  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
  * @example   "CountPressedButtons.ino"
  * 
  * CountPressedButtons
