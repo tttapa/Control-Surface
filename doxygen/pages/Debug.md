@@ -1,6 +1,7 @@
 # Debug
 
-@see    @ref AH_Debug for more information.
+@see    Module @ref AH_Debug for more information.
+@see    @ref Debug.ino for example usage.
 
 ## Adding a 'Debug' menu in the Arduino IDE
 
