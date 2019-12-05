@@ -55,8 +55,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
     -Wall -Wextra -Werror")
 
-set(CMAKE_CXX_FLAGS_DEBUG "-g3 -ggdb -O0 -fno-inline-functions")
-set(CMAKE_C_FLAGS_DEBUG "-g3 -ggdb -O0 -fno-inline-functions")
+set(CMAKE_CXX_FLAGS_DEBUG 
+    "-ggdb3 -O0 -fno-inline-functions -fsanitize=address")
+set(CMAKE_C_FLAGS_DEBUG
+    "-ggdb3 -O0 -fno-inline-functions -fsanitize=address")
 
 set(CMAKE_CXX_FLAGS_RELEASE "-Os")
 set(CMAKE_C_FLAGS_RELEASE "-Os")
@@ -83,9 +85,11 @@ endif()
 ################################################################################
 
 set(CMAKE_C_FLAGS_COVERAGE "${CMAKE_C_FLAGS_DEBUG} \
-                            -fprofile-arcs -ftest-coverage")
+                            -fprofile-arcs -ftest-coverage \
+                            -fsanitize=address")
 set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG} \
-                              -fprofile-arcs -ftest-coverage")
+                              -fprofile-arcs -ftest-coverage \
+                              -fsanitize=address")
 set(CMAKE_EXE_LINKER_FLAGS_COVERAGE "-fprofile-arcs -ftest-coverage")
 set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 
