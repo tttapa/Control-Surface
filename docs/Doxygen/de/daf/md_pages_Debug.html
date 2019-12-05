@@ -74,7 +74,8 @@ $(function() {
 <div class="title">Debug </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md38"></a>
+<div class="textblock"><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d4/da5/group__AH__Debug.html">Debug</a> for more information.</dd></dl>
+<h1><a class="anchor" id="autotoc_md38"></a>
 Adding a 'Debug' menu in the Arduino IDE</h1>
 <p>If you are going to be debugging a lot, it might be useful to just add a menu option in the IDE to disable/enable debugging. <br  />
  This can be easily done by editing the <code>boards.txt</code> file.</p>
@@ -91,7 +92,7 @@ Adding a 'Debug' menu in the Arduino IDE</h1>
 </div><!-- fragment --><p>Next, add the debugging flags to the compilation options by adding the line:</p>
 <div class="fragment"><div class="line">uno.build.extra_flags={build.debug_output}</div>
 </div><!-- fragment --><p>If your board already has an <code>extra_flags</code> entry, just add <code>{build.debug_output}</code> to the end (separated by a space).</p>
-<p>A complete list of all the AVR boards and their added debug options can be found <a href="https://github.com/tttapa/Arduino-Debugging/blob/master/boards.txt.example">here</a>.</p>
+<p>A complete list of all the AVR boards and their added debug options can be found <a href="https://github.com/tttapa/Arduino-Helpers/blob/master/docs/extra/boards.txt.example"><b>here</b></a>.</p>
 <p>Finally, restart the IDE. <br  />
  If you now open your the <code>Tools</code> menu in the Arduino IDE, you should see the debug options: </p><div class="image">
 <img src="../../Screenshot-Arduino-IDE-Debug.png" alt=""/>
