@@ -778,7 +778,7 @@ _GLIBCXX_BEGIN_NAMESPACE_CONTAINER
       void _M_check(size_t __position, const char *__s) const
       {
 	if (__position >= _Nb)
-	  __throw_out_of_range_index_length(s, __position, _Nb);
+	  __throw_out_of_range_index_length(__s, __position, _Nb);
       }
 
 #endif // __AVR__

@@ -125,15 +125,15 @@ _GLIBCXX_END_NAMESPACE_VERSION
   #define __throw_bad_typeid() FATAL_ERROR(F("std::bad_typeid"), 0x1114)
 
   // Helpers for exception objects in <stdexcept>
-  #define __throw_logic_error(msg) FATAL_ERROR(F("std::logic_error: " msg), 0x1115)
+  #define __throw_logic_error(msg) FATAL_ERROR(F("std::logic_error: ") << msg, 0x1115)
 
-  #define __throw_domain_error(msg) FATAL_ERROR(F("std::domain_error: " msg), 0x1116)
+  #define __throw_domain_error(msg) FATAL_ERROR(F("std::domain_error: ") << msg, 0x1116)
 
-  #define __throw_invalid_argument(msg) FATAL_ERROR(F("std::invalid_argument: " msg), 0x1117)
+  #define __throw_invalid_argument(msg) FATAL_ERROR(F("std::invalid_argument: ") << msg, 0x1117)
 
-  #define __throw_length_error(msg) FATAL_ERROR(F("std::length_error: " msg), 0x1118)
+  #define __throw_length_error(msg) FATAL_ERROR(F("std::length_error: ") << msg, 0x1118)
 
-  #define __throw_out_of_range(msg) FATAL_ERROR(F("std::out_of_range: " msg), 0x1119)
+  #define __throw_out_of_range(msg) FATAL_ERROR(F("std::out_of_range: ") << msg, 0x1119)
 
   // void
   // __throw_out_of_range_fmt(const char*, ...) __attribute__((__noreturn__))
@@ -141,16 +141,16 @@ _GLIBCXX_END_NAMESPACE_VERSION
   #define __throw_out_of_range_index_length(msg, index, size) \
     FATAL_ERROR(F("std::out_of_range: ") << msg << F("; index = ") << index << F(", length = ") << size, 0x1119)
 
-  #define __throw_runtime_error(msg) FATAL_ERROR(F("std::runtime_error: " msg), 0x111A)
+  #define __throw_runtime_error(msg) FATAL_ERROR(F("std::runtime_error: ") << msg, 0x111A)
 
-  #define __throw_range_error(msg) FATAL_ERROR(F("std::range_error: " msg), 0x111B)
+  #define __throw_range_error(msg) FATAL_ERROR(F("std::range_error: ") << msg, 0x111B)
 
-  #define __throw_overflow_error(msg) FATAL_ERROR(F("std::overflow_error: " msg), 0x111C)
+  #define __throw_overflow_error(msg) FATAL_ERROR(F("std::overflow_error: ") << msg, 0x111C)
 
-  #define __throw_underflow_error(msg) FATAL_ERROR(F("std::underflow_error: " msg), 0x111D)
+  #define __throw_underflow_error(msg) FATAL_ERROR(F("std::underflow_error: ") << msg, 0x111D)
 
   // Helpers for exception objects in <ios>
-  #define __throw_ios_failure(msg) FATAL_ERROR(F("std::ios_failure: " msg), 0x111E)
+  #define __throw_ios_failure(msg) FATAL_ERROR(F("std::ios_failure: ") << msg, 0x111E)
 
   #define __throw_system_error(code) FATAL_ERROR(F("std::system_error: ") << code, 0x1120)
 

@@ -30,7 +30,7 @@
 #define _NEW_ALLOCATOR_H 1
 
 #include "../bits/c++config.h"
-#include <new>
+#include "../new"
 #include "../bits/functexcept.h"
 #include "../bits/move.h"
 #if __cplusplus >= 201103L
@@ -99,16 +99,22 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
       allocate(size_type __n, const void* = static_cast<const void*>(0))
       {
 	if (__n > this->max_size())
-	  std::__throw_bad_alloc();
+	  __throw_bad_alloc();
 
 #if __cpp_aligned_new
 	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
 	  {
 	    std::align_val_t __al = std::align_val_t(alignof(_Tp));
-	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+	    _Tp* __newres =  static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+        if (__newres == nullptr)
+            __throw_bad_alloc();
+        return __newres;
 	  }
 #endif
-	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+	_Tp* __newres = static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+    if (__newres == nullptr)
+        __throw_bad_alloc();
+    return __newres;
       }
 
       // __p is not permitted to be a null pointer.

@@ -205,7 +205,7 @@ _GLIBCXX_BEGIN_NAMESPACE_CONTAINER
 					__n, _Nm);
     #else
     if (__n >= _Nm) {
-        ERROR(F("array::at: __n (which is ") << __n << ") "
+        ERROR(F("array::at: __n (which is ") << __n << ") " <<
 					  F(">= _Nm (which is ") << _Nm << ")", 0x6784);
         __n = _Nm - 1;
     }
@@ -226,7 +226,7 @@ _GLIBCXX_BEGIN_NAMESPACE_CONTAINER
 	     _AT_Type::_S_ref(_M_elems, 0));
     #else
     return __n < _Nm ? _AT_Type::_S_ref(_M_elems, __n)
-	  : ([=] {ERROR(F("array::at: __n (which is ") << __n << ") "
+	  : ([=] {ERROR(F("array::at: __n (which is ") << __n << ") " <<
 					  F(">= _Nm (which is ") << _Nm << ")", 0x6784);}(),
 	     _AT_Type::_S_ref(_M_elems, _Nm - 1));
     #endif
