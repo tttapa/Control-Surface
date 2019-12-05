@@ -14,10 +14,11 @@ var searchData=
   ['filteredanalog_2ehpp_191',['FilteredAnalog.hpp',['../d8/df3/FilteredAnalog_8hpp.html',1,'']]],
   ['filters_2edox_192',['Filters.dox',['../dc/ddf/Filters_8dox.html',1,'']]],
   ['first_193',['first',['../dd/d16/classDoublyLinkedList.html#aa99a1b25b649c77114d63ea32c7f2681',1,'DoublyLinkedList']]],
-  ['fixedpointahalf_194',['fixedPointAHalf',['../d7/d40/classEMA.html#a1001ffe926ae6929ff404f592db9b459',1,'EMA']]],
-  ['flush_195',['flush',['../d8/d4b/group__AH__PrintStream.html#gad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#gad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp']]],
-  ['flush_5fon_5fevery_5fdebug_5fstatement_196',['FLUSH_ON_EVERY_DEBUG_STATEMENT',['../df/dee/Debug_8hpp.html#a7ff58a0631676f068e4db329a2ca8d28',1,'Debug.hpp']]],
-  ['formatprintstream_197',['formatPrintStream',['../da/d69/PrintStream_8cpp.html#aa9cd8589bac070bb2ab968b4f9c15231',1,'PrintStream.cpp']]],
-  ['frequency_198',['Frequency',['../d7/d90/classFrequency.html',1,'Frequency'],['../d7/d90/classFrequency.html#a74f669a1568087cc2c134363faa18186',1,'Frequency::Frequency()']]],
-  ['frequency_2ehpp_199',['Frequency.hpp',['../dc/d50/Frequency_8hpp.html',1,'']]]
+  ['fixarduinomacros_2ehpp_194',['FixArduinoMacros.hpp',['../d6/d3b/FixArduinoMacros_8hpp.html',1,'']]],
+  ['fixedpointahalf_195',['fixedPointAHalf',['../d7/d40/classEMA.html#a1001ffe926ae6929ff404f592db9b459',1,'EMA']]],
+  ['flush_196',['flush',['../d8/d4b/group__AH__PrintStream.html#gad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#gad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp']]],
+  ['flush_5fon_5fevery_5fdebug_5fstatement_197',['FLUSH_ON_EVERY_DEBUG_STATEMENT',['../df/dee/Debug_8hpp.html#a7ff58a0631676f068e4db329a2ca8d28',1,'Debug.hpp']]],
+  ['formatprintstream_198',['formatPrintStream',['../da/d69/PrintStream_8cpp.html#aa9cd8589bac070bb2ab968b4f9c15231',1,'PrintStream.cpp']]],
+  ['frequency_199',['Frequency',['../d7/d90/classFrequency.html',1,'Frequency'],['../d7/d90/classFrequency.html#a74f669a1568087cc2c134363faa18186',1,'Frequency::Frequency()']]],
+  ['frequency_2ehpp_200',['Frequency.hpp',['../dc/d50/Frequency_8hpp.html',1,'']]]
 ];

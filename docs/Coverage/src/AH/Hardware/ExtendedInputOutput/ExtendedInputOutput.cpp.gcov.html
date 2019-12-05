@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 62f9b31690cd326528909dc900cfda9ba79bd101 - src/AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp</title>
+  <title>LCOV - e1c89e46e403c322721144544b0cb6e8331fc8ed - src/AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">62f9b31690cd326528909dc900cfda9ba79bd101</td>
+            <td class="headerValue">e1c89e46e403c322721144544b0cb6e8331fc8ed</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">62</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-11-27 22:46:21</td>
+            <td class="headerValue">2019-12-05 12:56:49</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">16</td>
@@ -71,8 +71,8 @@
 <a name="1"><span class="lineNum">       1 </span>            : #include &lt;AH/Settings/Warnings.hpp&gt;</a>
 <a name="2"><span class="lineNum">       2 </span>            : AH_DIAGNOSTIC_WERROR() // Enable errors on warnings</a>
 <a name="3"><span class="lineNum">       3 </span>            : </a>
-<a name="4"><span class="lineNum">       4 </span>            : #include &quot;ExtendedInputOutput.hpp&quot;</a>
-<a name="5"><span class="lineNum">       5 </span>            : #include &quot;ExtendedIOElement.hpp&quot;</a>
+<a name="4"><span class="lineNum">       4 </span>            : #include &quot;ExtendedIOElement.hpp&quot;</a>
+<a name="5"><span class="lineNum">       5 </span>            : #include &quot;ExtendedInputOutput.hpp&quot;</a>
 <a name="6"><span class="lineNum">       6 </span>            : #include &lt;AH/Error/Error.hpp&gt;</a>
 <a name="7"><span class="lineNum">       7 </span>            : </a>
 <a name="8"><span class="lineNum">       8 </span>            : BEGIN_AH_NAMESPACE</a>
@@ -167,21 +167,23 @@
 <a name="97"><span class="lineNum">      97 </span><span class="lineCov">         11 : void analogWrite(pin_t pin, analog_t val) {</span></a>
 <a name="98"><span class="lineNum">      98 </span>            :     // DEBUGFN(DEBUGVAR(pin) &lt;&lt; '\t' &lt;&lt; DEBUGVAR(val));</a>
 <a name="99"><span class="lineNum">      99 </span><span class="lineCov">         11 :     if (pin &lt; NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {</span></a>
-<a name="100"><span class="lineNum">     100 </span><span class="lineCov">          1 :         ::analogWrite(pin, val);</span></a>
-<a name="101"><span class="lineNum">     101 </span><span class="lineCov">          1 :     } else {</span></a>
-<a name="102"><span class="lineNum">     102 </span><span class="lineCov">         10 :         ExtendedIOElement &amp;el = getIOElementOfPin(pin);</span></a>
-<a name="103"><span class="lineNum">     103 </span><span class="lineCov">         10 :         el.analogWrite(pin - el.getStart(), val);</span></a>
-<a name="104"><span class="lineNum">     104 </span>            :     }</a>
-<a name="105"><span class="lineNum">     105 </span><span class="lineCov">         11 : }</span></a>
-<a name="106"><span class="lineNum">     106 </span><span class="lineCov">          2 : void analogWrite(int pin, analog_t val) { analogWrite((pin_t)pin, val); }</span></a>
-<a name="107"><span class="lineNum">     107 </span><span class="lineCov">          5 : void analogWrite(int pin, int val) { analogWrite((pin_t)pin, (analog_t)val); }</span></a>
-<a name="108"><span class="lineNum">     108 </span><span class="lineCov">          4 : void analogWrite(pin_t pin, int val) { analogWrite(pin, (analog_t)val); }</span></a>
-<a name="109"><span class="lineNum">     109 </span>            : </a>
-<a name="110"><span class="lineNum">     110 </span>            : } // namespace ExtIO</a>
+<a name="100"><span class="lineNum">     100 </span>            : #ifndef ESP32</a>
+<a name="101"><span class="lineNum">     101 </span><span class="lineCov">          1 :         ::analogWrite(pin, val);</span></a>
+<a name="102"><span class="lineNum">     102 </span>            : #endif</a>
+<a name="103"><span class="lineNum">     103 </span><span class="lineCov">          1 :     } else {</span></a>
+<a name="104"><span class="lineNum">     104 </span><span class="lineCov">         10 :         ExtendedIOElement &amp;el = getIOElementOfPin(pin);</span></a>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">         10 :         el.analogWrite(pin - el.getStart(), val);</span></a>
+<a name="106"><span class="lineNum">     106 </span>            :     }</a>
+<a name="107"><span class="lineNum">     107 </span><span class="lineCov">         11 : }</span></a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineCov">          2 : void analogWrite(int pin, analog_t val) { analogWrite((pin_t)pin, val); }</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineCov">          5 : void analogWrite(int pin, int val) { analogWrite((pin_t)pin, (analog_t)val); }</span></a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineCov">          4 : void analogWrite(pin_t pin, int val) { analogWrite(pin, (analog_t)val); }</span></a>
 <a name="111"><span class="lineNum">     111 </span>            : </a>
-<a name="112"><span class="lineNum">     112 </span>            : END_AH_NAMESPACE</a>
+<a name="112"><span class="lineNum">     112 </span>            : } // namespace ExtIO</a>
 <a name="113"><span class="lineNum">     113 </span>            : </a>
-<a name="114"><span class="lineNum">     114 </span>            : AH_DIAGNOSTIC_POP()</a>
+<a name="114"><span class="lineNum">     114 </span>            : END_AH_NAMESPACE</a>
+<a name="115"><span class="lineNum">     115 </span>            : </a>
+<a name="116"><span class="lineNum">     116 </span>            : AH_DIAGNOSTIC_POP()</a>
 </pre>
       </td>
     </tr>

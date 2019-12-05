@@ -171,7 +171,7 @@ $(function() {
 <div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="../../df/de0/classArraySlice.html#a8b242ed880de8cc3fdb2821c3321c514">  179</a></span>&#160;    <span class="keyword">operator</span> <a class="code" href="../../d7/d6a/structArray.html">Array&lt;T, N&gt;</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="../../df/de0/classArraySlice.html#a56df6a9437528074885f56d614c0f098">asArray</a>(); }</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
 <div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="../../df/de0/classArraySlice.html#a56df6a9437528074885f56d614c0f098">  181</a></span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array&lt;T, N&gt;</a> <a class="code" href="../../df/de0/classArraySlice.html#a56df6a9437528074885f56d614c0f098">asArray</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <a class="code" href="../../d7/d6a/structArray.html">Array&lt;T, N&gt;</a> <a class="code" href="../../df/de0/classArraySlice.html#a9de26bd1c36d3937bfa927f156f07463">slice</a> = {};</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <a class="code" href="../../d7/d6a/structArray.html">Array&lt;T, N&gt;</a> <a class="code" href="../../df/de0/classArraySlice.html#a9de26bd1c36d3937bfa927f156f07463">slice</a> = {{}};</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; N; ++i)</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            <a class="code" href="../../df/de0/classArraySlice.html#a9de26bd1c36d3937bfa927f156f07463">slice</a>[i] = (*<span class="keyword">this</span>)[i];</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="../../df/de0/classArraySlice.html#a9de26bd1c36d3937bfa927f156f07463">slice</a>;</div>
@@ -336,7 +336,7 @@ $(function() {
 <div class="line"><a name="l00360"></a><span class="lineno"><a class="line" href="../../da/de8/group__AH__Containers.html#gad957ff32abdac9e23c620d8e1ef3917f">  360</a></span>&#160;<span class="keyword">operator</span>+(<a class="code" href="../../df/de0/classArraySlice.html">ArraySlice&lt;T1, N1, Reverse1, Const1&gt;</a> a,</div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;          <a class="code" href="../../df/de0/classArraySlice.html">ArraySlice&lt;T2, N2, Reverse2, Const2&gt;</a> b) {</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    static_assert(N1 == N2, <span class="stringliteral">&quot;Error: sizes do not match&quot;</span>);</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} + T2{}), N1&gt; result = {};</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} + T2{}), N1&gt; result = {{}};</div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; N1; ++i)</div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        result[i] = a[i] + b[i];</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keywordflow">return</span> result;</div>
@@ -373,7 +373,7 @@ $(function() {
 <div class="line"><a name="l00401"></a><span class="lineno"><a class="line" href="../../da/de8/group__AH__Containers.html#ga684f0e78c6c771a98f7198e6c7ecb2a3">  401</a></span>&#160;<span class="keyword">operator</span>-(<a class="code" href="../../df/de0/classArraySlice.html">ArraySlice&lt;T1, N1, Reverse1, Const1&gt;</a> a,</div>
 <div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;          <a class="code" href="../../df/de0/classArraySlice.html">ArraySlice&lt;T2, N2, Reverse2, Const2&gt;</a> b) {</div>
 <div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    static_assert(N1 == N2, <span class="stringliteral">&quot;Error: sizes do not match&quot;</span>);</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} - T2{}), N1&gt; result = {};</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} - T2{}), N1&gt; result = {{}};</div>
 <div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; N1; ++i)</div>
 <div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        result[i] = a[i] - b[i];</div>
 <div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="keywordflow">return</span> result;</div>
@@ -407,7 +407,7 @@ $(function() {
 <div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T1, <span class="keyword">class</span> T2, <span class="keywordtype">size_t</span> N1, <span class="keywordtype">bool</span> Reverse1, <span class="keywordtype">bool</span> Const1&gt;</div>
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} * T2{}), N1&gt;</div>
 <div class="line"><a name="l00441"></a><span class="lineno"><a class="line" href="../../da/de8/group__AH__Containers.html#gae05240f5dd9331e9b8973876f1460a87">  441</a></span>&#160;<span class="keyword">operator</span>*(<a class="code" href="../../df/de0/classArraySlice.html">ArraySlice&lt;T1, N1, Reverse1, Const1&gt;</a> a, T2 b) {</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} * T2{}), N1&gt; result = {};</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} * T2{}), N1&gt; result = {{}};</div>
 <div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; N1; ++i)</div>
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        result[i] = a[i] * b;</div>
 <div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    <span class="keywordflow">return</span> result;</div>
@@ -421,7 +421,7 @@ $(function() {
 <div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T1, <span class="keyword">class</span> T2, <span class="keywordtype">size_t</span> N2, <span class="keywordtype">bool</span> Reverse2, <span class="keywordtype">bool</span> Const2&gt;</div>
 <div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} * T2{}), N2&gt;</div>
 <div class="line"><a name="l00457"></a><span class="lineno"><a class="line" href="../../da/de8/group__AH__Containers.html#ga61b35a20cc3b709bb084bd85d737b97a">  457</a></span>&#160;<span class="keyword">operator</span>*(T1 a, <a class="code" href="../../df/de0/classArraySlice.html">ArraySlice&lt;T2, N2, Reverse2, Const2&gt;</a> b) {</div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} * T2{}), N2&gt; result = {};</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} * T2{}), N2&gt; result = {{}};</div>
 <div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; N2; ++i)</div>
 <div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;        result[i] = a * b[i];</div>
 <div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    <span class="keywordflow">return</span> result;</div>
@@ -451,7 +451,7 @@ $(function() {
 <div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T1, <span class="keyword">class</span> T2, <span class="keywordtype">size_t</span> N1, <span class="keywordtype">bool</span> Reverse1, <span class="keywordtype">bool</span> Const1&gt;</div>
 <div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} / T2{}), N1&gt;</div>
 <div class="line"><a name="l00491"></a><span class="lineno"><a class="line" href="../../da/de8/group__AH__Containers.html#gad03301bb0682ccd12d1512a637bea9f1">  491</a></span>&#160;<span class="keyword">operator</span>/(<a class="code" href="../../df/de0/classArraySlice.html">ArraySlice&lt;T1, N1, Reverse1, Const1&gt;</a> a, T2 b) {</div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} / T2{}), N1&gt; result = {};</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(T1{} / T2{}), N1&gt; result = {{}};</div>
 <div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; N1; ++i)</div>
 <div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;        result[i] = a[i] / b;</div>
 <div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;    <span class="keywordflow">return</span> result;</div>
@@ -480,7 +480,7 @@ $(function() {
 <div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160; </div>
 <div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keywordtype">size_t</span> N, <span class="keywordtype">bool</span> Reverse, <span class="keywordtype">bool</span> Const&gt;</div>
 <div class="line"><a name="l00524"></a><span class="lineno"><a class="line" href="../../da/de8/group__AH__Containers.html#gacc2f020c702ecb15a6159ad224eaa683">  524</a></span>&#160;<a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(-T{}), N&gt; <span class="keyword">operator</span>-(<a class="code" href="../../df/de0/classArraySlice.html">ArraySlice&lt;T, N, Reverse, Const&gt;</a> a) {</div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(-T{}), N&gt; result = {};</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;    <a class="code" href="../../d7/d6a/structArray.html">Array</a>&lt;decltype(-T{}), N&gt; result = {{}};</div>
 <div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; N; ++i)</div>
 <div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;        result[i] = -a[i];</div>
 <div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;    <span class="keywordflow">return</span> result;</div>
