@@ -12,6 +12,7 @@
  *   - SS:   74HC595 ST_CP
  *   - MOSI: 74HC595 DS
  *   - SCK:  74HC595 SH_CP
+ *   - A0:   Push button (to ground, internal pull-up resistor will be used)
  * 
  * Connect an LED (and series resistor) between each of the first 12 outputs of 
  * the shift registers and ground.
@@ -22,7 +23,9 @@
  * Behavior
  * --------
  * 
- * The LEDs display the level of the first track in your DAW.
+ * The LEDs display the level of the first track in your DAW.  
+ * When the push button is pressed, the VU meter switches from bar mode to dot 
+ * mode and back.
  * 
  * Mapping
  * -------
@@ -62,6 +65,7 @@ MCU::VULEDs<12> vu = {
 // If you use 24 LEDs, for example, the LEDs will turn on in groups of 2 at a
 // time.
 
+// Push button to switch between dot and bar mode.
 Button dotBarModeButton = A0;
 
 void setup() {
