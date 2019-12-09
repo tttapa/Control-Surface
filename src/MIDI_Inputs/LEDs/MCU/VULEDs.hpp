@@ -24,8 +24,19 @@ class VULEDsCallback {
         leds.display(value);
     }
 
+    /// @copydoc    AH::DotBarDisplayLEDs::getMode
+    AH::DotBarMode getMode() const { return this->leds.getMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
+    void setMode(AH::DotBarMode mode) { this->leds.setMode(mode); }
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
+    void dotMode() { this->leds.dotMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
+    void barMode() { this->leds.barMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::toggleMode
+    void toggleMode() { this->leds.toggleMode(); }
+
   private:
-    const AH::DotBarDisplayLEDs<NumLEDs> leds;
+    AH::DotBarDisplayLEDs<NumLEDs> leds;
 
     /// @see    doc/VU-LED-mapping.ods
     constexpr static uint8_t FLOOR_CORRECTION = 5;
@@ -51,6 +62,17 @@ class VULEDs : public GenericVU<VULEDsCallback<NumLEDs>> {
               decayTime,
               {ledPins},
           } {}
+
+    /// @copydoc    AH::DotBarDisplayLEDs::getMode
+    AH::DotBarMode getMode() const { return this->callback.getMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
+    void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
+    void dotMode() { this->callback.dotMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
+    void barMode() { this->callback.barMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::toggleMode
+    void toggleMode() { this->callback.toggleMode(); }
 };
 
 namespace Bankable {
@@ -70,6 +92,17 @@ class VULEDs : public GenericVU<NumBanks, VULEDsCallback<NumLEDs>> {
         : GenericVU<NumBanks, VULEDsCallback<NumLEDs>>{
               config, track, channelCN, decayTime, {ledPins},
           } {}
+
+    /// @copydoc    AH::DotBarDisplayLEDs::getMode
+    AH::DotBarMode getMode() const { return this->callback.getMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::setMode
+    void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
+    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
+    void dotMode() { this->callback.dotMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::barMode
+    void barMode() { this->callback.barMode(); }
+    /// @copydoc    AH::DotBarDisplayLEDs::toggleMode
+    void toggleMode() { this->callback.toggleMode(); }
 };
 
 } // namespace Bankable
