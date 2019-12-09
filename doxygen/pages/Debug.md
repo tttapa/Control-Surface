@@ -1,5 +1,8 @@
 # Debug
 
+@see    Module @ref AH_Debug for more information.
+@see    @ref Debug.ino for example usage.
+
 ## Adding a 'Debug' menu in the Arduino IDE
 
 If you are going to be debugging a lot, it might be useful to just add a menu 
@@ -39,7 +42,7 @@ If your board already has an `extra_flags` entry, just add
 ` {build.debug_output}` to the end (separated by a space).
 
 A complete list of all the AVR boards and their added debug options can be found
-[here](https://github.com/tttapa/Arduino-Debugging/blob/master/boards.txt.example).
+[**here**](https://github.com/tttapa/Arduino-Helpers/blob/master/docs/extra/boards.txt.example).
 
 Finally, restart the IDE.  
 If you now open your the `Tools` menu in the Arduino IDE, you should see the 

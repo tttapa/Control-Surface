@@ -24,6 +24,9 @@
  * [int someFunction(int) @ line 26]:	parameter = 42
  * ~~~
  * 
+ * @see @ref md_pages_Debug for instructions on how to add an option in the 
+ *      Arduino IDE to easily enable and disable debugging.
+ * 
  * Written by PieterP, 2018-07-31  
  * https://github.com/tttapa/Arduino-Helpers
  */

@@ -5,7 +5,7 @@
  * @brief   This file contains the platform-specific ADC resolutions.
  *          By default, the library automatically selects the maximum supported
  *          resolution for known boards, otherwise, it falls back to 10 bits.
- * @see     ADC_BITS
+ * @see     @ref ADC_BITS
  */
 
 #include <AH/Settings/Warnings.hpp>

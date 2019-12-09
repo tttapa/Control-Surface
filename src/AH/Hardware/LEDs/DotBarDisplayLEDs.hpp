@@ -54,6 +54,9 @@ class DotBarDisplayLEDs : public LEDs<N> {
      */
     void display(float value) const { display(uint8_t(value * (N + 1))); }
 
+    /// Get the dot/bar mode.
+    DotBarMode getMode() const { return mode; }
+
     /**
      * @brief   Set the mode to either dot or bar mode.
      * 
@@ -67,6 +70,9 @@ class DotBarDisplayLEDs : public LEDs<N> {
 
     /// Set the mode to bar mode.
     void barMode() { setMode(DotBarMode::Bar); }
+
+    /// Toggle the dot/bar mode.
+    void toggleMode() { getMode() == DotBarMode::Bar ? dotMode() : barMode(); }
 
   private:
     DotBarMode mode = DotBarMode::Bar;
