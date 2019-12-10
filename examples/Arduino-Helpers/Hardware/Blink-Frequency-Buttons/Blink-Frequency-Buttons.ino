@@ -61,7 +61,7 @@ void loop() {
     case IncrementDecrementButtons::Reset:
       timer.setInterval(defaultInterval);
       break;
-    default:
+    default: break;
   }
 
   // print the new interval if a button was pushed
