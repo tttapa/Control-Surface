@@ -1444,7 +1444,9 @@
  *
  * <https://github.com/tttapa/MIDI_controller/issues/97#issuecomment-564247602>
  * 
- * Many bankable potentiometers and buttons. 
+ * Many bankable potentiometers and buttons. Bank selector displays bank setting
+ * using LEDs.  
+ * If any of the buttons is pressed, the LED on pin 22 is turned on.
  * 
  * @boards  Mega
  */

@@ -60,7 +60,8 @@ filtering analog inputs, and so on).
 
 ## Example usage
 
-A complete sketch for a MIDI controller with a potentiometer that sends out MIDI Control Change message can be written in just five lines of code:
+A complete sketch for a MIDI controller with a potentiometer that sends out MIDI
+Control Change message can be written in just five lines of code:
 
 ```cpp
 #include <Control_Surface.h>
@@ -72,8 +73,10 @@ void setup() { Control_Surface.begin(); }
 void loop() { Control_Surface.loop(); }
 ```
 
-Larger MIDI controllers can implemented very easily as well, with clean and easy to modify code.  
-The following sketch is for 8 potentiometers (connected using an analog multiplexer) that send out MIDI Control Change messages over USB.
+Larger MIDI controllers can implemented very easily as well, with clean and easy
+to modify code.  
+The following sketch is for 8 potentiometers (connected using an analog
+multiplexer) that send out MIDI Control Change messages over USB.
 
 ```cpp
 #include <Control_Surface.h>  // Include the library
@@ -108,7 +111,9 @@ void loop() {
 }
 ```
 
-MIDI input is very easy as well. For example, an LED that turns on when a MIDI Note On message for middle C is received:
+Control Surface supports many types of MIDI inputs. 
+For example, an LED that turns on when a MIDI Note On message for middle C is
+received:
 ```cpp
 #include <Control_Surface.h>
 
@@ -119,6 +124,23 @@ NoteValueLED led = { LED_BUILTIN, note(C, 4) };
 void setup() { Control_Surface.begin(); }
 void loop() { Control_Surface.loop(); }
 ```
+## Getting Started
+
+See the [**Getting Started**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d5/d7d/md_pages_Getting-Started.html)
+page to get started using the library.
+
+## Documentation
+
+The automatically generated Doxygen documentation for this library can be found 
+here:  
+[**Documentation**](https://tttapa.github.io/Control-Surface-doc/Doxygen/index.html)  
+Test coverage information can be found here:  
+[**Code Coverage**](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)  
+Arduino examples can be found here:  
+[**Examples**](https://tttapa.github.io/Control-Surface-doc/Doxygen/examples.html)
+
+Have a look at the [**modules**](https://tttapa.github.io/Control-Surface-doc/Doxygen/modules.html)
+for an overview of the features of the library.
 
 ## The Control Surface library vs. The MIDI Controller library
 
@@ -166,24 +188,6 @@ fully implemented, feel free to open an issue, so I know where to focus on first
 - Adding more tests (currently at over 320 unit tests)
 - Adding more examples and adding comments to existing examples
 - Finishing the documentation
-
-## Getting Started
-
-See the [**Getting Started**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d5/d7d/md_pages_Getting-Started.html)
-document to get started using the library.
-
-## Documentation
-
-The automatically generated Doxygen documentation for this library can be found 
-here:  
-[**Documentation**](https://tttapa.github.io/Control-Surface-doc/Doxygen/index.html)  
-Test coverage information can be found here:  
-[**Code Coverage**](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)  
-Arduino examples can be found here:  
-[**Examples**](https://tttapa.github.io/Control-Surface-doc/Doxygen/examples.html)
-
-Have a look at the [**modules**](https://tttapa.github.io/Control-Surface-doc/Doxygen/modules.html)
-for an overview of the features of the library.
 
 ## Supported boards
 
