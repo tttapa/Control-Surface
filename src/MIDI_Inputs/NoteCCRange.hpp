@@ -117,6 +117,20 @@ class GenericNoteCCRange
     }
 };
 
+template <uint8_t RangeLen, class Callback = NoteCCRangeEmptyCallback>
+using GenericNoteRange =
+    GenericNoteCCRange<MIDIInputElementNote, RangeLen, Callback>;
+
+template <uint8_t RangeLen, class Callback = NoteCCRangeEmptyCallback>
+using GenericCCRange =
+    GenericNoteCCRange<MIDIInputElementCC, RangeLen, Callback>;
+
+template <class Callback = NoteCCRangeEmptyCallback>
+using GenericNoteValue = GenericNoteCCRange<MIDIInputElementNote, 1, Callback>;
+
+template <class Callback = NoteCCRangeEmptyCallback>
+using GenericCCValue = GenericNoteCCRange<MIDIInputElementCC, 1, Callback>;
+
 /**
  * @brief   MIDI Input Element that listens to a range of notes.
  * 
@@ -125,30 +139,28 @@ class GenericNoteCCRange
  *          The length of the range of notes to listen to.
  */
 template <uint8_t RangeLen>
-class NoteRange : public GenericNoteCCRange<MIDIInputElementNote, RangeLen> {
+class NoteRange : public GenericNoteRange<RangeLen> {
   public:
     NoteRange(MIDICNChannelAddress address)
-        : GenericNoteCCRange<MIDIInputElementNote, RangeLen>{address, {}} {}
+        : GenericNoteRange<RangeLen>{address, {}} {}
 };
 
-class NoteValue : public GenericNoteCCRange<MIDIInputElementNote, 1> {
+class NoteValue : public GenericNoteValue<> {
   public:
-    NoteValue(MIDICNChannelAddress address)
-        : GenericNoteCCRange<MIDIInputElementNote, 1>{address, {}} {}
+    NoteValue(MIDICNChannelAddress address) : GenericNoteValue<>{address, {}} {}
 };
 using MIDINote[[deprecated("Use NoteValue instead")]] = NoteValue;
 
 template <uint8_t RangeLen>
-class CCRange : public GenericNoteCCRange<MIDIInputElementCC, RangeLen> {
+class CCRange : public GenericCCRange<RangeLen> {
   public:
     CCRange(MIDICNChannelAddress address)
-        : GenericNoteCCRange<MIDIInputElementCC, RangeLen>{address, {}} {}
+        : GenericCCRange<RangeLen>{address, {}} {}
 };
 
-class CCValue : public GenericNoteCCRange<MIDIInputElementCC, 1> {
+class CCValue : public GenericCCValue<> {
   public:
-    CCValue(MIDICNChannelAddress address)
-        : GenericNoteCCRange<MIDIInputElementCC, 1>{address, {}} {}
+    CCValue(MIDICNChannelAddress address) : GenericCCValue<>{address, {}} {}
 };
 
 // -------------------------------------------------------------------------- //
@@ -197,40 +209,52 @@ class GenericNoteCCRange
     void onBankSettingChange() override { this->callback.updateAll(*this); }
 };
 
+template <uint8_t RangeLen, uint8_t NumBanks,
+          class Callback = NoteCCRangeEmptyCallback>
+using GenericNoteRange =
+    GenericNoteCCRange<MIDIInputElementNote, RangeLen, NumBanks, Callback>;
+
+template <uint8_t RangeLen, uint8_t NumBanks,
+          class Callback = NoteCCRangeEmptyCallback>
+using GenericCCRange =
+    GenericNoteCCRange<MIDIInputElementCC, RangeLen, NumBanks, Callback>;
+
+template <uint8_t NumBanks, class Callback = NoteCCRangeEmptyCallback>
+using GenericNoteValue =
+    GenericNoteCCRange<MIDIInputElementNote, 1, NumBanks, Callback>;
+
+template <uint8_t NumBanks, class Callback = NoteCCRangeEmptyCallback>
+using GenericCCValue =
+    GenericNoteCCRange<MIDIInputElementCC, 1, NumBanks, Callback>;
+
 template <uint8_t RangeLen, uint8_t NumBanks>
-class NoteRange
-    : public GenericNoteCCRange<MIDIInputElementNote, RangeLen, NumBanks> {
+class NoteRange : public GenericNoteRange<RangeLen, NumBanks> {
   public:
     NoteRange(BankConfig<NumBanks> config, MIDICNChannelAddress address)
-        : GenericNoteCCRange<MIDIInputElementNote, RangeLen, NumBanks>{
-              config, address, {}} {}
+        : GenericNoteRange<RangeLen, NumBanks>{config, address, {}} {}
 };
 
 template <uint8_t NumBanks>
-class NoteValue : public GenericNoteCCRange<MIDIInputElementNote, 1, NumBanks> {
+class NoteValue : public GenericNoteValue<NumBanks> {
   public:
     NoteValue(BankConfig<NumBanks> config, MIDICNChannelAddress address)
-        : GenericNoteCCRange<MIDIInputElementNote, 1, NumBanks>{
-              config, address, {}} {}
+        : GenericNoteValue<NumBanks>{config, address, {}} {}
 };
 template <uint8_t NumBanks>
 using MIDINote[[deprecated("Use NoteValue instead")]] = NoteValue<NumBanks>;
 
 template <uint8_t RangeLen, uint8_t NumBanks>
-class CCRange
-    : public GenericNoteCCRange<MIDIInputElementCC, RangeLen, NumBanks> {
+class CCRange : public GenericCCRange<RangeLen, NumBanks> {
   public:
     CCRange(BankConfig<NumBanks> config, MIDICNChannelAddress address)
-        : GenericNoteCCRange<MIDIInputElementCC, RangeLen, NumBanks>{
-              config, address, {}} {}
+        : GenericCCRange<RangeLen, NumBanks>{config, address, {}} {}
 };
 
 template <uint8_t NumBanks>
-class CCValue : public GenericNoteCCRange<MIDIInputElementCC, 1, NumBanks> {
+class CCValue : public GenericCCValue<NumBanks> {
   public:
     CCValue(BankConfig<NumBanks> config, MIDICNChannelAddress address)
-        : GenericNoteCCRange<MIDIInputElementCC, 1, NumBanks>{
-              config, address, {}} {}
+        : GenericCCValue<NumBanks>{config, address, {}} {}
 };
 
 } // namespace Bankable

@@ -1477,6 +1477,19 @@
  */
 
 /**
+ * @example   "MIDI-Note-Callback-IR.ino"
+ * 
+ * MIDI-Note-Callback-IR
+ * =====================
+ *
+ * <https://forum.arduino.cc/index.php?topic=653004>
+ * 
+ * Listen to MIDI notes 0 and 1, and print when Note On events are received.  
+ * This was initially intended to send IR remote commands when a note event
+ * is received for one of these notes.
+ */
+
+/**
  * @example   "MIDI-Input-Callback.ino"
  * 
  * MIDI-Input-Callback
