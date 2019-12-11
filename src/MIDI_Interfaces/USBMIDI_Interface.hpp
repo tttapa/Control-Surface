@@ -136,7 +136,14 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
         MidiUSB.sendMIDI(msg);
     }
 
-    void flush() { MidiUSB.flush(); }
+    void flush() { 
+        MidiUSB.flush();
+#if defined(__SAM3X8E__) || defined(__SAMD21G18A__)
+        // fix for Arduino Due
+        // https://github.com/tttapa/Control-Surface/issues/72
+        delayMicroseconds(50);
+#endif
+    }
 
 #endif
 
