@@ -61,7 +61,7 @@ class MIDIChordButton : public MIDIOutputElement {
         }
     }
 
-#ifdef INDIVIDUAL_BUTTON_INVERT
+#ifdef AH_INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }
 #endif
 

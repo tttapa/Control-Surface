@@ -50,7 +50,7 @@ class MIDIButtons : public MIDIOutputElement {
         return buttons[index].getState();
     }
 
-#ifdef INDIVIDUAL_BUTTON_INVERT
+#ifdef AH_INDIVIDUAL_BUTTON_INVERT
     void invert() {
         for (auto &button : buttons)
             button.invert();

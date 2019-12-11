@@ -54,7 +54,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         }
     }
 
-#ifdef INDIVIDUAL_BUTTON_INVERT
+#ifdef AH_INDIVIDUAL_BUTTON_INVERT
     void invert() { buttons.invert(); }
 #endif
 

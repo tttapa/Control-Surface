@@ -60,7 +60,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
         state ? sender.sendOn(address) : sender.sendOff(address);
     }
 
-#ifdef INDIVIDUAL_BUTTON_INVERT
+#ifdef AH_INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }
 #endif
 

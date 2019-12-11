@@ -31,7 +31,7 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
         return button.getState();
     }
 
-#ifdef INDIVIDUAL_BUTTON_INVERT
+#ifdef AH_INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }
 #endif
 

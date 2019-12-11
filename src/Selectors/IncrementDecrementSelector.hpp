@@ -33,7 +33,7 @@ class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
         }
     }
 
-#ifdef INDIVIDUAL_BUTTON_INVERT
+#ifdef AH_INDIVIDUAL_BUTTON_INVERT
     void invert() { buttons.invert(); }
 #endif
 
