@@ -12,6 +12,8 @@
 
 #include <AH/STL/algorithm> // std::any_of
 
+USBMIDI_Interface midi; // MIDI Interface to use
+
 Bank<4> bank(16);
 
 // Create a new bank selector that changes the bank setting of the bank we just
