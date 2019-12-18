@@ -68,6 +68,7 @@ TEST(Construction, MIDIOutputs) {
     const RelativeMIDICNChannelAddress relAddress = {};
     const MIDICNChannel cnChannel = {};
     uint8_t u8 = 0;
+    int8_t i8 = 0;
     const PinList<3> rowPins3 = {1, 2, 3};
     const PinList<4> colPins4 = {4, 5, 6, 7};
     const AddressMatrix<3, 4> addressMatrix34 = {{
@@ -93,7 +94,7 @@ TEST(Construction, MIDIOutputs) {
 
     CCPotentiometer{pin, address};
 
-    CCRotaryEncoder{EncoderPinList{pin, pin}, address, u8, u8};
+    CCRotaryEncoder{EncoderPinList{pin, pin}, address, i8, u8};
 
     // Note --------------------------------------------------------------------
     NoteButton{pin, address};
@@ -120,7 +121,7 @@ TEST(Construction, MIDIOutputs) {
 
     Bankable::CCPotentiometer{bank, pin, address};
 
-    Bankable::CCRotaryEncoder{bank, EncoderPinList{pin, pin}, address, u8, u8};
+    Bankable::CCRotaryEncoder{bank, EncoderPinList{pin, pin}, address, i8, u8};
 
     // Bankable::Note ----------------------------------------------------------
     Bankable::NoteButton{bank, pin, address};

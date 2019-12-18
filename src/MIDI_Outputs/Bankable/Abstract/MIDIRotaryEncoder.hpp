@@ -34,7 +34,7 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
                       const Sender &sender)
         : BankableMIDIOutput(config), encoder{pins.A, pins.B}, address(address),
           speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender{sender} {}
+          pulsesPerStep(pulsesPerStep), sender(sender) {}
 
 // For tests only
 #ifndef ARDUINO
@@ -44,7 +44,7 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
                       const Sender &sender)
         : BankableMIDIOutput(config), encoder{encoder}, address(address),
           speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender{sender} {}
+          pulsesPerStep(pulsesPerStep), sender(sender) {}
 #endif
 
   public:

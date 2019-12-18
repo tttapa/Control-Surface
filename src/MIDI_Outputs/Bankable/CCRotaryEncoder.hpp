@@ -56,7 +56,7 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      */
     CCRotaryEncoder(const OutputBankConfig &config, const EncoderPinList &pins,
                     const MIDICNChannelAddress &address,
-                    uint8_t speedMultiplier, uint8_t pulsesPerStep,
+                    int8_t speedMultiplier, uint8_t pulsesPerStep,
                     const RelativeCCSender &sender = {})
         : MIDIRotaryEncoder(config, pins, address, speedMultiplier,
                             pulsesPerStep, sender) {}
@@ -65,7 +65,7 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
 #ifndef ARDUINO
     CCRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
                     const MIDICNChannelAddress &address,
-                    uint8_t speedMultiplier = 1, uint8_t pulsesPerStep = 4,
+                    int8_t speedMultiplier = 1, uint8_t pulsesPerStep = 4,
                     const RelativeCCSender &sender = {})
         : MIDIRotaryEncoder(config, encoder, address, speedMultiplier,
                             pulsesPerStep, sender) {}

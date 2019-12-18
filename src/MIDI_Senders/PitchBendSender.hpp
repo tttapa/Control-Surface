@@ -18,7 +18,11 @@ class PitchBendSender {
         Control_Surface.MIDI().sendPB(channelCN, value);
     }
 
-    constexpr static uint8_t precision() { return INPUT_PRECISION_BITS; }
+    constexpr static uint8_t precision() {
+        static_assert(INPUT_PRECISION_BITS <= 14,
+                      "Maximum pitch bend resolution is 14 bits");
+        return INPUT_PRECISION_BITS;
+    }
 };
 
 END_CS_NAMESPACE

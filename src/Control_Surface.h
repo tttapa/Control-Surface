@@ -16,6 +16,7 @@
 #include <Control_Surface/Control_Surface_Class.hpp>
 
 // -------------------------------- Display --------------------------------- //
+#include <AH/Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
 #include <Display/Bitmaps/XBitmaps.hpp>
 #include <Display/MCU/LCDDisplay.hpp>
 #include <Display/MCU/TimeDisplayDisplay.hpp>
@@ -23,7 +24,6 @@
 #include <Display/MCU/VUDisplay.hpp>
 #include <Display/NoteBitmapDisplay.hpp>
 #include <Display/SelectorDisplay.hpp>
-#include <AH/Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
 
 // ------------------------------ MIDI Outputs ------------------------------ //
 #include <MIDI_Outputs/CCButton.hpp>
@@ -74,7 +74,9 @@
 
 #ifdef Encoder_h_
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
+#include <MIDI_Outputs/CCAbsoluteEncoder.hpp>
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
+#include <MIDI_Outputs/PBAbsoluteEncoder.hpp>
 #endif
 
 // ------------------------------ MIDI Inputs ------------------------------- //

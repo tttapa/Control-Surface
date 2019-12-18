@@ -1,13 +1,13 @@
 #pragma once
 
-#include <MIDI_Outputs/Abstract/MIDIRotaryEncoder.hpp>
-#include <MIDI_Senders/RelativeCCSender.hpp>
+#include <MIDI_Outputs/Abstract/MIDIAbsoluteEncoder.hpp>
+#include <MIDI_Senders/ContinuousCCSender.hpp>
 
 BEGIN_CS_NAMESPACE
 
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **quadrature
- *          (rotary) encoder** and send out relative MIDI **Control Change**
+ *          (rotary) encoder** and send out absolute MIDI **Control Change**
  *          events.
  * 
  * This version cannot be banked.
@@ -18,10 +18,10 @@ BEGIN_CS_NAMESPACE
  *
  * @ingroup MIDIOutputElements
  */
-class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
+class CCAbsoluteEncoder : public MIDIAbsoluteEncoder<ContinuousCCSender> {
   public:
     /**
-     * @brief   Construct a new CCRotaryEncoder object with the given pins, 
+     * @brief   Construct a new CCAbsoluteEncoder object with the given pins, 
      *          address, channel, speed factor, and number of pulses per step.
      * 
      * @param   pins
@@ -33,10 +33,9 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      *          The MIDI address containing the controller number [0, 119], 
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
      *          [0, 15].
-     * @param   speedMultiply
+     * @param   multiplier
      *          A constant factor to increase the speed of the rotary encoder.
-     *          The difference in position will just be multiplied by this 
-     *          factor. 
+     *          The position will just be multiplied by this factor. 
      * @param   pulsesPerStep
      *          The number of pulses per physical click of the encoder.
      *          For a normal encoder, this is 4. If you want to increase the
@@ -48,21 +47,12 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCRotaryEncoder(const EncoderPinList &pins,
-                    const MIDICNChannelAddress &address,
-                    int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4,
-                    const RelativeCCSender &sender = {})
-        : MIDIRotaryEncoder(pins, address, speedMultiply, pulsesPerStep,
-                            sender) {}
-
-// For tests only (PJRC Encoder library's copy constructor doesn't work)
-#ifndef ARDUINO
-    CCRotaryEncoder(const Encoder &encoder, const MIDICNChannelAddress &address,
-                    int8_t speedMultiply, uint8_t pulsesPerStep,
-                    const RelativeCCSender &sender = {})
-        : MIDIRotaryEncoder(encoder, address, speedMultiply, pulsesPerStep,
-                            sender) {}
-#endif
+    CCAbsoluteEncoder(const EncoderPinList &pins,
+                      const MIDICNChannelAddress &address,
+                      int16_t multiplier = 1, uint8_t pulsesPerStep = 4,
+                      const ContinuousCCSender &sender = {})
+        : MIDIAbsoluteEncoder(pins, address, multiplier, pulsesPerStep,
+                              sender) {}
 };
 
 END_CS_NAMESPACE
