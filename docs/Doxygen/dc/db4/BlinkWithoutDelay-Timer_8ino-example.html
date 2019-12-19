@@ -76,7 +76,7 @@ $(function() {
 <div class="contents">
 <h1><a class="anchor" id="autotoc_md0"></a>
 BlinkWithoutDelay-Timer</h1>
-<p>This examples shows how use the Timer class to blink an LED every second, in a non-blocking fashion (without using delay).</p>
+<p>This examples shows how use the <a class="el" href="../../dc/dea/classTimer.html" title="A class for easily managing timed events.">Timer</a> class to blink an LED every second, in a non-blocking fashion (without using delay).</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32</dd></dl>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Behavior</h2>
@@ -87,24 +87,25 @@ Behavior</h2>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d1/dd0/MillisMicrosTimer_8hpp.html">AH/Timing/MillisMicrosTimer.hpp</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line">Timer&lt;millis&gt; timer = 500; <span class="comment">// milliseconds</span></div>
+<div class="line"><a name="_a0"></a><a class="code" href="../../dc/dea/classTimer.html">Timer&lt;millis&gt;</a> timer = 500; <span class="comment">// milliseconds</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
-<div class="line">  <a name="a0"></a><a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#a14f5d8ef18838978bf0c2df86f3cce25">pinMode</a>(LED_BUILTIN, <a name="a1"></a><a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afe385e49d42243d0f7eee016aee5d7b9">OUTPUT</a>);</div>
+<div class="line">  <a name="a1"></a><a class="code" href="../../d8/d3d/namespaceExtIO.html#a14f5d8ef18838978bf0c2df86f3cce25">pinMode</a>(LED_BUILTIN, <a name="a2"></a><a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afe385e49d42243d0f7eee016aee5d7b9">OUTPUT</a>);</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
 <div class="line">  <span class="keywordflow">if</span> (timer) {</div>
-<div class="line">    <a name="a2"></a><a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">digitalWrite</a>(LED_BUILTIN, !<a name="a3"></a><a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aecc9c66e459fa540ac06ada7f25f0b96">digitalRead</a>(LED_BUILTIN));</div>
+<div class="line">    <a name="a3"></a><a class="code" href="../../d8/d3d/namespaceExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">digitalWrite</a>(LED_BUILTIN, !<a name="a4"></a><a class="code" href="../../d8/d3d/namespaceExtIO.html#aecc9c66e459fa540ac06ada7f25f0b96">digitalRead</a>(LED_BUILTIN));</div>
 <div class="line">  }</div>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
-<div class="ttc" id="anamespaceAH_1_1ExtIO_html_a14f5d8ef18838978bf0c2df86f3cce25"><div class="ttname"><a href="../../d7/d22/namespaceAH_1_1ExtIO.html#a14f5d8ef18838978bf0c2df86f3cce25">AH::ExtIO::pinMode</a></div><div class="ttdeci">void pinMode(pin_t pin, uint8_t mode)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00036">ExtendedInputOutput.cpp:36</a></div></div>
 <div class="ttc" id="aMillisMicrosTimer_8hpp_html"><div class="ttname"><a href="../../d1/dd0/MillisMicrosTimer_8hpp.html">MillisMicrosTimer.hpp</a></div></div>
-<div class="ttc" id="anamespaceAH_1_1ExtIO_html_aecc9c66e459fa540ac06ada7f25f0b96"><div class="ttname"><a href="../../d7/d22/namespaceAH_1_1ExtIO.html#aecc9c66e459fa540ac06ada7f25f0b96">AH::ExtIO::digitalRead</a></div><div class="ttdeci">int digitalRead(pin_t pin)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00058">ExtendedInputOutput.cpp:58</a></div></div>
+<div class="ttc" id="anamespaceExtIO_html_aafb55ff1ef70b0086bfa19406c1d076a"><div class="ttname"><a href="../../d8/d3d/namespaceExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">ExtIO::digitalWrite</a></div><div class="ttdeci">void digitalWrite(pin_t pin, uint8_t val)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00047">ExtendedInputOutput.cpp:47</a></div></div>
+<div class="ttc" id="anamespaceExtIO_html_aecc9c66e459fa540ac06ada7f25f0b96"><div class="ttname"><a href="../../d8/d3d/namespaceExtIO.html#aecc9c66e459fa540ac06ada7f25f0b96">ExtIO::digitalRead</a></div><div class="ttdeci">int digitalRead(pin_t pin)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00058">ExtendedInputOutput.cpp:58</a></div></div>
+<div class="ttc" id="aclassTimer_html"><div class="ttname"><a href="../../dc/dea/classTimer.html">Timer</a></div><div class="ttdoc">A class for easily managing timed events.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00028">MillisMicrosTimer.hpp:28</a></div></div>
+<div class="ttc" id="anamespaceExtIO_html_a14f5d8ef18838978bf0c2df86f3cce25"><div class="ttname"><a href="../../d8/d3d/namespaceExtIO.html#a14f5d8ef18838978bf0c2df86f3cce25">ExtIO::pinMode</a></div><div class="ttdeci">void pinMode(pin_t pin, uint8_t mode)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00036">ExtendedInputOutput.cpp:36</a></div></div>
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <div class="ttc" id="aExtendedInputOutput_8hpp_html_afe385e49d42243d0f7eee016aee5d7b9"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afe385e49d42243d0f7eee016aee5d7b9">OUTPUT</a></div><div class="ttdeci">const uint8_t OUTPUT</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00050">ExtendedInputOutput.hpp:50</a></div></div>
-<div class="ttc" id="anamespaceAH_1_1ExtIO_html_aafb55ff1ef70b0086bfa19406c1d076a"><div class="ttname"><a href="../../d7/d22/namespaceAH_1_1ExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">AH::ExtIO::digitalWrite</a></div><div class="ttdeci">void digitalWrite(pin_t pin, uint8_t val)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00047">ExtendedInputOutput.cpp:47</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

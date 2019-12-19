@@ -2128,9 +2128,10 @@ PREDEFINED             = ARDUINO \
                          TEENSY_SERIALUSB_ENABLED \
                          TEENSY_AUDIOUSB_ENABLED \
                          USE_MIDI_USB_INTERFACE \
-                         PROGMEM \
-                         BEGIN_AH_NAMESPACE="namespace AH {" \
-                         END_AH_NAMESPACE=} \
+                         PROGMEM= \
+                         BEGIN_AH_NAMESPACE= \
+                         END_AH_NAMESPACE= \
+                         USING_AH_NAMESPACE= \
                          AH_DIAGNOSTIC_WERROR=; \
                          AH_DIAGNOSTIC_POP=; \
                          AH_DIAGNOSTIC_EXTERNAL_HEADER=;
@@ -2143,7 +2144,7 @@ PREDEFINED             = ARDUINO \
 # definition found in the source code.
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
-EXPAND_AS_DEFINED      = UNUSED_PARAM
+EXPAND_AS_DEFINED      =
 
 # If the SKIP_FUNCTION_MACROS tag is set to YES then doxygen's preprocessor will
 # remove all references to function-like macros that are alone on a line, have
@@ -2153,7 +2154,7 @@ EXPAND_AS_DEFINED      = UNUSED_PARAM
 # The default value is: YES.
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
-SKIP_FUNCTION_MACROS   = YES
+SKIP_FUNCTION_MACROS   = NO
 
 #---------------------------------------------------------------------------
 # Configuration options related to external references
