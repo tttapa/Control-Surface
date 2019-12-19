@@ -76,7 +76,7 @@ $(function() {
 <div class="contents">
 <h1><a class="anchor" id="autotoc_md30"></a>
 1.AnalogReadSerial</h1>
-<p>This is an example of the <a class="el" href="../../d7/d8d/classAnalogMultiplex.html" title="A class for reading multiplexed analog inputs.">AnalogMultiplex</a> class. It prints the values of all 16 inputs of a multiplexers to the serial monitor.</p>
+<p>This is an example of the AnalogMultiplex class. It prints the values of all 16 inputs of a multiplexers to the serial monitor.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32</dd></dl>
 <h2><a class="anchor" id="autotoc_md31"></a>
 Connections</h2>
@@ -99,7 +99,7 @@ Behavior</h2>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d7/def/AnalogMultiplex_8hpp.html">AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Instantiate a multiplexer</span></div>
-<div class="line"><a name="_a0"></a><a class="code" href="../../d7/d8d/classAnalogMultiplex.html">CD74HC4067</a> mux = {</div>
+<div class="line"><a name="a0"></a><a class="code" href="../../db/dd3/group__AH__ExtIO.html#ga76abe1cbb481b44875fb5e08da186ad0">CD74HC4067</a> mux = {</div>
 <div class="line">  A0,              <span class="comment">// analog pin</span></div>
 <div class="line">  {3, 4, 5, 6}, <span class="comment">// Address pins S0, S1, S2, S3</span></div>
 <div class="line">  <span class="comment">// 7, // Optionally, specify the enable pin</span></div>
@@ -113,13 +113,13 @@ Behavior</h2>
 <div class="line"><span class="comment">// };</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
-<div class="line">  Serial.<a name="a1"></a><a class="code" href="../../d7/d8d/classAnalogMultiplex.html#a17e37b634c36f15c11fea3eeed0ba4f7">begin</a>(115200);</div>
-<div class="line">  mux.<a class="code" href="../../d7/d8d/classAnalogMultiplex.html#a17e37b634c36f15c11fea3eeed0ba4f7">begin</a>(); <span class="comment">// Initialize multiplexer</span></div>
+<div class="line">  Serial.begin(115200);</div>
+<div class="line">  mux.begin(); <span class="comment">// Initialize multiplexer</span></div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
-<div class="line">  <span class="keywordflow">for</span> (<a class="code" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin = 0; pin &lt; mux.<a name="a2"></a><a class="code" href="../../de/d4e/classExtendedIOElement.html#a3d9607995d349d197fc24a23d6c4016f">getLength</a>(); ++pin) {</div>
-<div class="line">    Serial.print(mux.<a name="a3"></a><a class="code" href="../../d7/d8d/classAnalogMultiplex.html#acdece870fadd4c99a2e0b7cf00f637ef">analogRead</a>(pin));</div>
+<div class="line">  <span class="keywordflow">for</span> (<a name="a1"></a><a class="code" href="../../dc/d69/namespaceAH.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin = 0; pin &lt; mux.getLength(); ++pin) {</div>
+<div class="line">    Serial.print(mux.analogRead(pin));</div>
 <div class="line">    Serial.print(<span class="charliteral">&#39;\t&#39;</span>);</div>
 <div class="line">  }</div>
 <div class="line">  Serial.println();</div>
@@ -127,8 +127,8 @@ Behavior</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Or if you&#39;re a cool kid, use a range-based for loop</span></div>
 <div class="line"><span class="keywordtype">void</span> loop2() {</div>
-<div class="line">  <span class="keywordflow">for</span> (<a class="code" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin : mux.<a name="a4"></a><a class="code" href="../../d1/d13/classStaticSizeExtendedIOElement.html#aee2c3864f44f4d969265e36643f61776">pins</a>()) {</div>
-<div class="line">    Serial.print(<a name="a5"></a><a class="code" href="../../d8/d3d/namespaceExtIO.html#a7203d161f7e9676d191ed320d9dad00f">analogRead</a>(pin));</div>
+<div class="line">  <span class="keywordflow">for</span> (<a class="code" href="../../dc/d69/namespaceAH.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin : mux.pins()) {</div>
+<div class="line">    Serial.print(<a name="a2"></a><a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aa9e5896aa520b8b2d65e1828032ee6a2">analogRead</a>(pin));</div>
 <div class="line">    Serial.print(<span class="charliteral">&#39;\t&#39;</span>);</div>
 <div class="line">  }</div>
 <div class="line">  Serial.println();</div>
@@ -136,15 +136,11 @@ Behavior</h2>
 <div class="line"><span class="comment">// Okay, it&#39;s a bit slower, because it has to look up what ExtIO device the pin </span></div>
 <div class="line"><span class="comment">// belongs to, but hey, it&#39;s nice to have it anyway</span></div>
 </div><!-- fragment --> </div><!-- contents -->
+<div class="ttc" id="anamespaceAH_html_ae9cbfef0ba7a84ef222eff1fc509f88b"><div class="ttname"><a href="../../dc/d69/namespaceAH.html#ae9cbfef0ba7a84ef222eff1fc509f88b">AH::pin_t</a></div><div class="ttdeci">uint16_t pin_t</div><div class="ttdoc">The type for Arduino pins (and ExtendedIOElement pins).</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d35/Hardware-Types_8hpp_source.html#l00017">Hardware-Types.hpp:17</a></div></div>
 <div class="ttc" id="aAnalogMultiplex_8hpp_html"><div class="ttname"><a href="../../d7/def/AnalogMultiplex_8hpp.html">AnalogMultiplex.hpp</a></div></div>
-<div class="ttc" id="aclassExtendedIOElement_html_a3d9607995d349d197fc24a23d6c4016f"><div class="ttname"><a href="../../de/d4e/classExtendedIOElement.html#a3d9607995d349d197fc24a23d6c4016f">ExtendedIOElement::getLength</a></div><div class="ttdeci">pin_t getLength() const</div><div class="ttdoc">Get the number of pins this IO element has.</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00045">ExtendedIOElement.cpp:45</a></div></div>
-<div class="ttc" id="aclassAnalogMultiplex_html"><div class="ttname"><a href="../../d7/d8d/classAnalogMultiplex.html">AnalogMultiplex</a></div><div class="ttdoc">A class for reading multiplexed analog inputs.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00028">AnalogMultiplex.hpp:28</a></div></div>
-<div class="ttc" id="aclassAnalogMultiplex_html_a17e37b634c36f15c11fea3eeed0ba4f7"><div class="ttname"><a href="../../d7/d8d/classAnalogMultiplex.html#a17e37b634c36f15c11fea3eeed0ba4f7">AnalogMultiplex::begin</a></div><div class="ttdeci">void begin() override</div><div class="ttdoc">Initialize the multiplexer: set the pin mode of the address pins and the enable pin to output mode.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00181">AnalogMultiplex.hpp:181</a></div></div>
+<div class="ttc" id="anamespaceAH_1_1ExtIO_html_aa9e5896aa520b8b2d65e1828032ee6a2"><div class="ttname"><a href="../../d7/d22/namespaceAH_1_1ExtIO.html#aa9e5896aa520b8b2d65e1828032ee6a2">AH::ExtIO::analogRead</a></div><div class="ttdeci">analog_t analogRead(pin_t pin)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00086">ExtendedInputOutput.cpp:86</a></div></div>
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
-<div class="ttc" id="aclassAnalogMultiplex_html_acdece870fadd4c99a2e0b7cf00f637ef"><div class="ttname"><a href="../../d7/d8d/classAnalogMultiplex.html#acdece870fadd4c99a2e0b7cf00f637ef">AnalogMultiplex::analogRead</a></div><div class="ttdeci">analog_t analogRead(pin_t pin) override</div><div class="ttdoc">Read the analog value of the given input.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00172">AnalogMultiplex.hpp:172</a></div></div>
-<div class="ttc" id="aHardware-Types_8hpp_html_ae9cbfef0ba7a84ef222eff1fc509f88b"><div class="ttname"><a href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a></div><div class="ttdeci">uint16_t pin_t</div><div class="ttdoc">The type for Arduino pins (and ExtendedIOElement pins).</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d35/Hardware-Types_8hpp_source.html#l00017">Hardware-Types.hpp:17</a></div></div>
-<div class="ttc" id="aclassStaticSizeExtendedIOElement_html_aee2c3864f44f4d969265e36643f61776"><div class="ttname"><a href="../../d1/d13/classStaticSizeExtendedIOElement.html#aee2c3864f44f4d969265e36643f61776">StaticSizeExtendedIOElement::pins</a></div><div class="ttdeci">Array&lt; pin_t, N &gt; pins() const</div><div class="ttdoc">Get an array containing all pins of the element.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d05/StaticSizeExtendedIOElement_8hpp_source.html#l00027">StaticSizeExtendedIOElement.hpp:27</a></div></div>
-<div class="ttc" id="anamespaceExtIO_html_a7203d161f7e9676d191ed320d9dad00f"><div class="ttname"><a href="../../d8/d3d/namespaceExtIO.html#a7203d161f7e9676d191ed320d9dad00f">ExtIO::analogRead</a></div><div class="ttdeci">analog_t analogRead(pin_t pin)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00086">ExtendedInputOutput.cpp:86</a></div></div>
+<div class="ttc" id="agroup__AH__ExtIO_html_ga76abe1cbb481b44875fb5e08da186ad0"><div class="ttname"><a href="../../db/dd3/group__AH__ExtIO.html#ga76abe1cbb481b44875fb5e08da186ad0">AH::CD74HC4067</a></div><div class="ttdeci">AnalogMultiplex&lt; 4 &gt; CD74HC4067</div><div class="ttdoc">An alias for AnalogMultiplex&lt;4&gt; to use with CD74HC4067 analog multiplexers.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00146">AnalogMultiplex.hpp:146</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

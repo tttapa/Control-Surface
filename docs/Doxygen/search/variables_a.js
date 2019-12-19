@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['m_5fbase_867',['M_base',['../d3/d55/structSetbase.html#a8ff13cdfc11f94e5a92c136648b296c8',1,'Setbase']]],
-  ['m_5fbytesep_868',['M_bytesep',['../d5/d93/structSetbytesep.html#aae3b7063d949661cdedb23d77e4ff74c',1,'Setbytesep']]],
-  ['m_5fn_869',['M_n',['../d7/d70/structSetprecision.html#a0938bbcf6988d5a3e473bd14ca87287b',1,'Setprecision']]],
-  ['mapfn_870',['mapFn',['../da/da7/classFilteredAnalog.html#a1925c382957ffaea91ab8e5de67b2953',1,'FilteredAnalog']]],
-  ['margin_871',['margin',['../d2/dcb/classHysteresis.html#acf0ff7dc0691f62004e3b58428fe92b5',1,'Hysteresis']]],
-  ['max_5fin_872',['max_in',['../d2/dcb/classHysteresis.html#a91ae21e42f8a911c511a463f80f5c334',1,'Hysteresis']]],
-  ['max_5fout_873',['max_out',['../d2/dcb/classHysteresis.html#ad27dca7fd0316ed630090cc1e878ac1b',1,'Hysteresis']]],
-  ['mode_874',['mode',['../d1/d3e/classDotBarDisplayLEDs.html#ab84c68ad7f06313d1e8e20aa26595bc6',1,'DotBarDisplayLEDs']]],
-  ['mux_5fdisabled_875',['MUX_DISABLED',['../d7/d8d/classAnalogMultiplex.html#a3ec8e2e72275f17b958b6225b6825e48',1,'AnalogMultiplex']]],
-  ['mux_5fenabled_876',['MUX_ENABLED',['../d7/d8d/classAnalogMultiplex.html#a521b79a2af4987b24e744e9bf7f83588',1,'AnalogMultiplex']]]
+  ['m_5fbase_863',['M_base',['../d3/d55/structSetbase.html#afb0976de86139aa215d620374e260b65',1,'Setbase']]],
+  ['m_5fbytesep_864',['M_bytesep',['../d5/d93/structSetbytesep.html#a4317dddd006fb401e44c3d68cf4a7443',1,'Setbytesep']]],
+  ['m_5fn_865',['M_n',['../d7/d70/structSetprecision.html#aa99b9e058a9d384b3496a9c30c0c28f5',1,'Setprecision']]],
+  ['mapfn_866',['mapFn',['../d3/d6e/classAH_1_1FilteredAnalog.html#ac0b34350a8c36183ef0611f470c594c0',1,'AH::FilteredAnalog']]],
+  ['margin_867',['margin',['../d2/dcb/classHysteresis.html#a60f481ee556174be7b3acfb02a6e53ca',1,'Hysteresis']]],
+  ['max_5fin_868',['max_in',['../d2/dcb/classHysteresis.html#a32964102524c8f7f878be5daa02e1c47',1,'Hysteresis']]],
+  ['max_5fout_869',['max_out',['../d2/dcb/classHysteresis.html#a73cb90fdff9327a69c32e9e9c8e39d2a',1,'Hysteresis']]],
+  ['mode_870',['mode',['../d9/d89/classAH_1_1DotBarDisplayLEDs.html#a5238ef04e9caeb86f50f51d775e16127',1,'AH::DotBarDisplayLEDs']]],
+  ['mux_5fdisabled_871',['MUX_DISABLED',['../d2/d94/classAH_1_1AnalogMultiplex.html#a5c8583111be1c1c3fbb0e64eaf246bd0',1,'AH::AnalogMultiplex']]],
+  ['mux_5fenabled_872',['MUX_ENABLED',['../d2/d94/classAH_1_1AnalogMultiplex.html#aa9e0740b2ffd0812db9548c24f6f979b',1,'AH::AnalogMultiplex']]]
 ];

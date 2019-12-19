@@ -98,9 +98,9 @@ Numeric</h1>
 <div class="line">    ;</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Create an array with the elements [1, 2 ... 9, 10]</span></div>
-<div class="line">  <a name="_a0"></a><a class="code" href="../../d7/d6a/structArray.html">Array&lt;int, 10&gt;</a> vector;</div>
+<div class="line">  Array&lt;int, 10&gt; vector;</div>
 <div class="line">  std::iota(std::begin(vector), std::end(vector), 1);</div>
-<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;v      = [&quot;</span> &lt;&lt; vector &lt;&lt; <span class="charliteral">&#39;]&#39;</span> &lt;&lt; <a name="a1"></a><a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
+<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;v      = [&quot;</span> &lt;&lt; vector &lt;&lt; <span class="charliteral">&#39;]&#39;</span> &lt;&lt; <a name="a0"></a><a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Compute the inner product of vector with itself, with an initial sum of 0</span></div>
 <div class="line">  <span class="keywordtype">int</span> sum_sq = std::inner_product(std::begin(vector), std::end(vector),</div>
@@ -109,13 +109,12 @@ Numeric</h1>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// The 2-norm of a vector is the squareroot of the inner product with itself</span></div>
 <div class="line">  <span class="keywordtype">double</span> norm = std::sqrt(sum_sq);</div>
-<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;‖v‖    = &quot;</span> &lt;&lt; <a name="a2"></a><a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaf7cf4b0e6244f6fab7b1e15c2523e4e7">setprecision</a>(7) &lt;&lt; norm &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
+<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;‖v‖    = &quot;</span> &lt;&lt; <a name="a1"></a><a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaf7cf4b0e6244f6fab7b1e15c2523e4e7">setprecision</a>(7) &lt;&lt; norm &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {}</div>
 </div><!-- fragment --> </div><!-- contents -->
 <div class="ttc" id="agroup__AH__PrintStream_html_gaf7cf4b0e6244f6fab7b1e15c2523e4e7"><div class="ttname"><a href="../../d8/d4b/group__AH__PrintStream.html#gaf7cf4b0e6244f6fab7b1e15c2523e4e7">setprecision</a></div><div class="ttdeci">Setprecision setprecision(int n)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00193">PrintStream.cpp:193</a></div></div>
-<div class="ttc" id="astructArray_html"><div class="ttname"><a href="../../d7/d6a/structArray.html">Array</a></div><div class="ttdoc">An array wrapper for easy copying, comparing, and iterating.</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d76/Array_8hpp_source.html#l00036">Array.hpp:36</a></div></div>
 <div class="ttc" id="aArray_8hpp_html"><div class="ttname"><a href="../../de/d76/Array_8hpp.html">Array.hpp</a></div></div>
 <div class="ttc" id="aArrayHelpers_8hpp_html"><div class="ttname"><a href="../../d5/db6/ArrayHelpers_8hpp.html">ArrayHelpers.hpp</a></div></div>
 <div class="ttc" id="agroup__AH__PrintStream_html_gaae13bd0e8ea7184cf85b86bcd1a01e2d"><div class="ttname"><a href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a></div><div class="ttdeci">Print &amp; endl(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00027">PrintStream.cpp:27</a></div></div>

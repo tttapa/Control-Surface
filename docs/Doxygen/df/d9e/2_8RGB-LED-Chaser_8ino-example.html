@@ -76,12 +76,12 @@ $(function() {
 <div class="contents">
 <h1><a class="anchor" id="autotoc_md17"></a>
 2.RGB-LED-Chaser</h1>
-<p>This is an example of the <a class="el" href="../../d1/d5c/classShiftRegisterOut.html" title="A class for serial-in/parallel-out shift registers, like the 74HC595.">ShiftRegisterOut</a> class of the Control Surface library. It creates light effects using three 8-bit shift registers and some RGB <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a>.</p>
+<p>This is an example of the ShiftRegisterOut class of the Control Surface library. It creates light effects using three 8-bit shift registers and some RGB LEDs.</p>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32</dd></dl>
 <h2><a class="anchor" id="autotoc_md18"></a>
 Connections</h2>
 <p>Connect three daisy-chained shift registers to the SPI pins. <br  />
- Connect 8 RGB <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> (+ current limiting resistors) to the outputs of the shift registers.</p>
+ Connect 8 RGB LEDs (+ current limiting resistors) to the outputs of the shift registers.</p>
 <div class="fragment"><div class="line">SCK   &gt;───────────┬──────────────────────┬──────────────────────┐</div>
 <div class="line">          ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓</div>
 <div class="line">          ┃     SH_CP     ┃      ┃     SH_CP     ┃      ┃     SH_CP     ┃</div>
@@ -91,13 +91,13 @@ Connections</h2>
 <div class="line">SS    &gt;───────────┴──────────────────────┴──────────────────────┘</div>
 </div><!-- fragment --><p> Remember to connect the enable pin of the shift register to ground and the master reset pin to Vcc in order to enable it. <br  />
 </p>
-<p>The order of the colors doesn't matter. You can change them in software using the <code><a class="el" href="../../d5/d45/structShiftRegisterOutRGB.html#a2b5a071173be4a3b3aac498931d3f22b" title="The position of the red output pin for 3-color LEDs.">ShiftRegisterOutRGB::redBit</a></code>, <code><a class="el" href="../../d5/d45/structShiftRegisterOutRGB.html#a9249b63255413f960f507f46b6f6024a" title="The position of the green output pin for 3-color LEDs.">ShiftRegisterOutRGB::greenBit</a></code> and <code><a class="el" href="../../d5/d45/structShiftRegisterOutRGB.html#a125908df5ab175500611a66b4b0e1aa7" title="The position of the blue output pin for 3-color LEDs.">ShiftRegisterOutRGB::blueBit</a></code> constants.</p>
-<p>If you wired the <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> as RGB (red first, then green and then blue), the red bit is 0, the green bit is 1 and the blue bit is 2. <br  />
- If you wired the <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> as BGR (blue first, then green and then red), the red bit is 2, the green bit is 1 and the blue bit is 0. <br  />
+<p>The order of the colors doesn't matter. You can change them in software using the <code>ShiftRegisterOutRGB::redBit</code>, <code>ShiftRegisterOutRGB::greenBit</code> and <code>ShiftRegisterOutRGB::blueBit</code> constants.</p>
+<p>If you wired the LEDs as RGB (red first, then green and then blue), the red bit is 0, the green bit is 1 and the blue bit is 2. <br  />
+ If you wired the LEDs as BGR (blue first, then green and then red), the red bit is 2, the green bit is 1 and the blue bit is 0. <br  />
  Other combinations are possible as well.</p>
 <h2><a class="anchor" id="autotoc_md19"></a>
 Behavior</h2>
-<p>This example will turn on all red <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> one by one, then turn them off one by one, next, it will turn on and off all green <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> in the same manner, and finally the same for the blue <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a>. This is repeated indefinitely.</p>
+<p>This example will turn on all red LEDs one by one, then turn them off one by one, next, it will turn on and off all green LEDs in the same manner, and finally the same for the blue LEDs. This is repeated indefinitely.</p>
 <h2><a class="anchor" id="autotoc_md20"></a>
 Demo</h2>
 <p> 
@@ -112,12 +112,12 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a>&gt;</span> <span class="comment">// Include the Arduino Helpers library.</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d7/d88/SPIShiftRegisterOut_8hpp.html">AH/Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">using namespace </span><a class="code" href="../../d8/d3d/namespaceExtIO.html">ExtIO</a>; <span class="comment">// Bring the ExtIO pin functions into your sketch</span></div>
+<div class="line"><span class="keyword">using namespace </span>ExtIO; <span class="comment">// Bring the ExtIO pin functions into your sketch</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// If you wired your LEDs as RGB</span></div>
-<div class="line"><span class="keyword">const</span> uint8_t <a name="a0"></a><a class="code" href="../../d5/d45/structShiftRegisterOutRGB.html#a2b5a071173be4a3b3aac498931d3f22b">ShiftRegisterOutRGB::redBit</a> = 0;</div>
-<div class="line"><span class="keyword">const</span> uint8_t <a name="a1"></a><a class="code" href="../../d5/d45/structShiftRegisterOutRGB.html#a9249b63255413f960f507f46b6f6024a">ShiftRegisterOutRGB::greenBit</a> = 1;</div>
-<div class="line"><span class="keyword">const</span> uint8_t <a name="a2"></a><a class="code" href="../../d5/d45/structShiftRegisterOutRGB.html#a125908df5ab175500611a66b4b0e1aa7">ShiftRegisterOutRGB::blueBit</a> = 2;</div>
+<div class="line"><span class="keyword">const</span> uint8_t ShiftRegisterOutRGB::redBit = 0;</div>
+<div class="line"><span class="keyword">const</span> uint8_t ShiftRegisterOutRGB::greenBit = 1;</div>
+<div class="line"><span class="keyword">const</span> uint8_t ShiftRegisterOutRGB::blueBit = 2;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// If you wired your LEDs as BGR</span></div>
 <div class="line"><span class="comment">// const uint8_t ShiftRegisterOutRGB::redBit   = 2;</span></div>
@@ -127,11 +127,11 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="line"><span class="comment">// Create a new shift register output connected to pins 11, 13 and 10,</span></div>
 <div class="line"><span class="comment">// shift the data out with the most significant bit first.</span></div>
 <div class="line"><span class="comment">// There are 24 (= 3×8) outputs in total.</span></div>
-<div class="line"><a name="_a3"></a><a class="code" href="../../dd/d81/classSPIShiftRegisterOut.html">SPIShiftRegisterOut&lt;24&gt;</a> sreg = {SS, MSBFIRST};</div>
+<div class="line">SPIShiftRegisterOut&lt;24&gt; sreg = {SS, MSBFIRST};</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
 <div class="line">  <span class="comment">// Initialize the shift registers</span></div>
-<div class="line">  sreg.<a name="a4"></a><a class="code" href="../../dd/d81/classSPIShiftRegisterOut.html#a69c874e1a9212ba5cc386644c0e68a4f">begin</a>();</div>
+<div class="line">  sreg.begin();</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">constexpr <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> delayTime = 50;</div>
@@ -139,50 +139,41 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
 <div class="line">  <span class="comment">// Red on</span></div>
 <div class="line">  <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; 8; i++) {</div>
-<div class="line">    <a name="a5"></a><a class="code" href="../../d8/d3d/namespaceExtIO.html#af83b2f2728401bf8efea42049ceb7dcd">digitalWrite</a>(sreg.<a name="a6"></a><a class="code" href="../../d8/db4/classShiftRegisterOutBase.html#a6cbf86a1b6bf843c75bfc0b4ecf5a391">red</a>(i), <a name="a7"></a><a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a>);</div>
+<div class="line">    <a name="a0"></a><a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">digitalWrite</a>(sreg.red(i), <a name="a1"></a><a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a>);</div>
 <div class="line">    delay(delayTime);</div>
 <div class="line">  }</div>
 <div class="line">  <span class="comment">// Red off</span></div>
 <div class="line">  <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; 8; i++) {</div>
-<div class="line">    <a class="code" href="../../d8/d3d/namespaceExtIO.html#af83b2f2728401bf8efea42049ceb7dcd">digitalWrite</a>(sreg.<a class="code" href="../../d8/db4/classShiftRegisterOutBase.html#a6cbf86a1b6bf843c75bfc0b4ecf5a391">red</a>(i), <a name="a8"></a><a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a>);</div>
+<div class="line">    <a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">digitalWrite</a>(sreg.red(i), <a name="a2"></a><a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a>);</div>
 <div class="line">    delay(delayTime);</div>
 <div class="line">  }</div>
 <div class="line">  <span class="comment">// Green on</span></div>
 <div class="line">  <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; 8; i++) {</div>
-<div class="line">    <a class="code" href="../../d8/d3d/namespaceExtIO.html#af83b2f2728401bf8efea42049ceb7dcd">digitalWrite</a>(sreg.<a name="a9"></a><a class="code" href="../../d8/db4/classShiftRegisterOutBase.html#a81fabf06f40056b1e2c22e0d8420cc1c">green</a>(i), <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a>);</div>
+<div class="line">    <a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">digitalWrite</a>(sreg.green(i), <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a>);</div>
 <div class="line">    delay(delayTime);</div>
 <div class="line">  }</div>
 <div class="line">  <span class="comment">// Green off</span></div>
 <div class="line">  <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; 8; i++) {</div>
-<div class="line">    <a class="code" href="../../d8/d3d/namespaceExtIO.html#af83b2f2728401bf8efea42049ceb7dcd">digitalWrite</a>(sreg.<a class="code" href="../../d8/db4/classShiftRegisterOutBase.html#a81fabf06f40056b1e2c22e0d8420cc1c">green</a>(i), <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a>);</div>
+<div class="line">    <a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">digitalWrite</a>(sreg.green(i), <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a>);</div>
 <div class="line">    delay(delayTime);</div>
 <div class="line">  }</div>
 <div class="line">  <span class="comment">// Blue on</span></div>
 <div class="line">  <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; 8; i++) {</div>
-<div class="line">    <a class="code" href="../../d8/d3d/namespaceExtIO.html#af83b2f2728401bf8efea42049ceb7dcd">digitalWrite</a>(sreg.<a name="a10"></a><a class="code" href="../../d8/db4/classShiftRegisterOutBase.html#ad87dfdfa94c11f4cb6fdfbebe95731f1">blue</a>(i), <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a>);</div>
+<div class="line">    <a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">digitalWrite</a>(sreg.blue(i), <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a>);</div>
 <div class="line">    delay(delayTime);</div>
 <div class="line">  }</div>
 <div class="line">  <span class="comment">// Blue off</span></div>
 <div class="line">  <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; 8; i++) {</div>
-<div class="line">    <a class="code" href="../../d8/d3d/namespaceExtIO.html#af83b2f2728401bf8efea42049ceb7dcd">digitalWrite</a>(sreg.<a class="code" href="../../d8/db4/classShiftRegisterOutBase.html#ad87dfdfa94c11f4cb6fdfbebe95731f1">blue</a>(i), <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a>);</div>
+<div class="line">    <a class="code" href="../../d7/d22/namespaceAH_1_1ExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">digitalWrite</a>(sreg.blue(i), <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a>);</div>
 <div class="line">    delay(delayTime);</div>
 <div class="line">  }</div>
 <div class="line">}</div>
 </div><!-- fragment --> </div><!-- contents -->
-<div class="ttc" id="aclassSPIShiftRegisterOut_html"><div class="ttname"><a href="../../dd/d81/classSPIShiftRegisterOut.html">SPIShiftRegisterOut</a></div><div class="ttdoc">A class for serial-in/parallel-out shift registers, like the 74HC595 that are connected to the SPI bu...</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d88/SPIShiftRegisterOut_8hpp_source.html#l00029">SPIShiftRegisterOut.hpp:29</a></div></div>
 <div class="ttc" id="aSPIShiftRegisterOut_8hpp_html"><div class="ttname"><a href="../../d7/d88/SPIShiftRegisterOut_8hpp.html">SPIShiftRegisterOut.hpp</a></div></div>
 <div class="ttc" id="aExtendedInputOutput_8hpp_html_acecd29798f132930ae1bfbe527f41e8d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a></div><div class="ttdeci">const uint8_t HIGH</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00046">ExtendedInputOutput.hpp:46</a></div></div>
-<div class="ttc" id="astructShiftRegisterOutRGB_html_a125908df5ab175500611a66b4b0e1aa7"><div class="ttname"><a href="../../d5/d45/structShiftRegisterOutRGB.html#a125908df5ab175500611a66b4b0e1aa7">ShiftRegisterOutRGB::blueBit</a></div><div class="ttdeci">const static uint8_t blueBit</div><div class="ttdoc">The position of the blue output pin for 3-color LEDs.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d1f/ShiftRegisterOutRGB_8hpp_source.html#l00031">ShiftRegisterOutRGB.hpp:31</a></div></div>
-<div class="ttc" id="aclassShiftRegisterOutBase_html_ad87dfdfa94c11f4cb6fdfbebe95731f1"><div class="ttname"><a href="../../d8/db4/classShiftRegisterOutBase.html#ad87dfdfa94c11f4cb6fdfbebe95731f1">ShiftRegisterOutBase::blue</a></div><div class="ttdeci">pin_t blue(pin_t id)</div><div class="ttdoc">Get the blue output pin of the given LED.</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d47/ShiftRegisterOutBase_8ipp_source.html#l00047">ShiftRegisterOutBase.ipp:47</a></div></div>
-<div class="ttc" id="astructShiftRegisterOutRGB_html_a2b5a071173be4a3b3aac498931d3f22b"><div class="ttname"><a href="../../d5/d45/structShiftRegisterOutRGB.html#a2b5a071173be4a3b3aac498931d3f22b">ShiftRegisterOutRGB::redBit</a></div><div class="ttdeci">const static uint8_t redBit</div><div class="ttdoc">The position of the red output pin for 3-color LEDs.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d1f/ShiftRegisterOutRGB_8hpp_source.html#l00021">ShiftRegisterOutRGB.hpp:21</a></div></div>
-<div class="ttc" id="anamespaceExtIO_html_af83b2f2728401bf8efea42049ceb7dcd"><div class="ttname"><a href="../../d8/d3d/namespaceExtIO.html#af83b2f2728401bf8efea42049ceb7dcd">ExtIO::digitalWrite</a></div><div class="ttdeci">void digitalWrite(pin_t pin, uint8_t val)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00047">ExtendedInputOutput.cpp:47</a></div></div>
 <div class="ttc" id="aExtendedInputOutput_8hpp_html_a948017cfe0ff222ceee310d1db10173d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a></div><div class="ttdeci">const uint8_t LOW</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00047">ExtendedInputOutput.hpp:47</a></div></div>
-<div class="ttc" id="anamespaceExtIO_html"><div class="ttname"><a href="../../d8/d3d/namespaceExtIO.html">ExtIO</a></div><div class="ttdoc">A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00010">ExtendedInputOutput.cpp:10</a></div></div>
-<div class="ttc" id="astructShiftRegisterOutRGB_html_a9249b63255413f960f507f46b6f6024a"><div class="ttname"><a href="../../d5/d45/structShiftRegisterOutRGB.html#a9249b63255413f960f507f46b6f6024a">ShiftRegisterOutRGB::greenBit</a></div><div class="ttdeci">const static uint8_t greenBit</div><div class="ttdoc">The position of the green output pin for 3-color LEDs.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d1f/ShiftRegisterOutRGB_8hpp_source.html#l00026">ShiftRegisterOutRGB.hpp:26</a></div></div>
-<div class="ttc" id="aclassShiftRegisterOutBase_html_a81fabf06f40056b1e2c22e0d8420cc1c"><div class="ttname"><a href="../../d8/db4/classShiftRegisterOutBase.html#a81fabf06f40056b1e2c22e0d8420cc1c">ShiftRegisterOutBase::green</a></div><div class="ttdeci">pin_t green(pin_t id)</div><div class="ttdoc">Get the green output pin of the given LED.</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d47/ShiftRegisterOutBase_8ipp_source.html#l00025">ShiftRegisterOutBase.ipp:25</a></div></div>
-<div class="ttc" id="aclassSPIShiftRegisterOut_html_a69c874e1a9212ba5cc386644c0e68a4f"><div class="ttname"><a href="../../dd/d81/classSPIShiftRegisterOut.html#a69c874e1a9212ba5cc386644c0e68a4f">SPIShiftRegisterOut::begin</a></div><div class="ttdeci">void begin() override</div><div class="ttdoc">Initialize the shift register.</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d45/SPIShiftRegisterOut_8ipp_source.html#l00017">SPIShiftRegisterOut.ipp:17</a></div></div>
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
-<div class="ttc" id="aclassShiftRegisterOutBase_html_a6cbf86a1b6bf843c75bfc0b4ecf5a391"><div class="ttname"><a href="../../d8/db4/classShiftRegisterOutBase.html#a6cbf86a1b6bf843c75bfc0b4ecf5a391">ShiftRegisterOutBase::red</a></div><div class="ttdeci">pin_t red(pin_t id)</div><div class="ttdoc">Get the red output pin of the given LED.</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d47/ShiftRegisterOutBase_8ipp_source.html#l00036">ShiftRegisterOutBase.ipp:36</a></div></div>
+<div class="ttc" id="anamespaceAH_1_1ExtIO_html_aafb55ff1ef70b0086bfa19406c1d076a"><div class="ttname"><a href="../../d7/d22/namespaceAH_1_1ExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">AH::ExtIO::digitalWrite</a></div><div class="ttdeci">void digitalWrite(pin_t pin, uint8_t val)</div><div class="ttdoc">An ExtIO version of the Arduino function.</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d3c/ExtendedInputOutput_8cpp_source.html#l00047">ExtendedInputOutput.cpp:47</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

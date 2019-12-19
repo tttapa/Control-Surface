@@ -97,15 +97,15 @@ ArraySort</h1>
 <div class="line">  <span class="keywordflow">while</span> (!Serial)</div>
 <div class="line">    ;</div>
 <div class="line"> </div>
-<div class="line">  <a name="_a0"></a><a class="code" href="../../d7/d6a/structArray.html">Array&lt;int, 10&gt;</a> array = {3, 5, 9, 2, 1, 8, 6, 4, 7, 0};</div>
+<div class="line">  Array&lt;int, 10&gt; array = {3, 5, 9, 2, 1, 8, 6, 4, 7, 0};</div>
 <div class="line"> </div>
-<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;Before sorting: &quot;</span> &lt;&lt; array &lt;&lt; <a name="a1"></a><a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
+<div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;Before sorting: &quot;</span> &lt;&lt; array &lt;&lt; <a name="a0"></a><a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
 <div class="line"> </div>
 <div class="line">  Serial &lt;&lt; <span class="stringliteral">&quot;  Sorting            ├─────────────────┤      in ascending order&quot;</span></div>
 <div class="line">         &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// select elements 2 through 7 (inclusive)</span></div>
-<div class="line">  <span class="keyword">auto</span> forward_view = array.<a name="a2"></a><a class="code" href="../../d7/d6a/structArray.html#a7190f8a90f43436823e0eb3cfe450e10">slice</a>&lt;2, 7&gt;();</div>
+<div class="line">  <span class="keyword">auto</span> forward_view = array.slice&lt;2, 7&gt;();</div>
 <div class="line">  <span class="comment">// sort the view in ascending order</span></div>
 <div class="line">  std::sort(std::begin(forward_view), std::end(forward_view));</div>
 <div class="line"> </div>
@@ -114,7 +114,7 @@ ArraySort</h1>
 <div class="line">         &lt;&lt; <a class="code" href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// select elements 2 through 7 (inclusive) in reverse order</span></div>
-<div class="line">  <span class="keyword">auto</span> reverse_view = array.<a class="code" href="../../d7/d6a/structArray.html#a7190f8a90f43436823e0eb3cfe450e10">slice</a>&lt;7, 2&gt;();</div>
+<div class="line">  <span class="keyword">auto</span> reverse_view = array.slice&lt;7, 2&gt;();</div>
 <div class="line">  <span class="comment">// sort the reverse view in ascending order (this means that the original</span></div>
 <div class="line">  <span class="comment">// array is sorted in descending order)</span></div>
 <div class="line">  std::sort(std::begin(reverse_view), std::end(reverse_view));</div>
@@ -124,10 +124,8 @@ ArraySort</h1>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {}</div>
 </div><!-- fragment --> </div><!-- contents -->
-<div class="ttc" id="astructArray_html"><div class="ttname"><a href="../../d7/d6a/structArray.html">Array</a></div><div class="ttdoc">An array wrapper for easy copying, comparing, and iterating.</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d76/Array_8hpp_source.html#l00036">Array.hpp:36</a></div></div>
 <div class="ttc" id="aArray_8hpp_html"><div class="ttname"><a href="../../de/d76/Array_8hpp.html">Array.hpp</a></div></div>
 <div class="ttc" id="aArrayHelpers_8hpp_html"><div class="ttname"><a href="../../d5/db6/ArrayHelpers_8hpp.html">ArrayHelpers.hpp</a></div></div>
-<div class="ttc" id="astructArray_html_a7190f8a90f43436823e0eb3cfe450e10"><div class="ttname"><a href="../../d7/d6a/structArray.html#a7190f8a90f43436823e0eb3cfe450e10">Array::slice</a></div><div class="ttdeci">ArraySlice&lt; T, abs_diff(Start, End)+1,(End&lt; Start), false &gt; slice()</div><div class="ttdoc">Get a view on a slice of the Array.</div></div>
 <div class="ttc" id="agroup__AH__PrintStream_html_gaae13bd0e8ea7184cf85b86bcd1a01e2d"><div class="ttname"><a href="../../d8/d4b/group__AH__PrintStream.html#gaae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a></div><div class="ttdeci">Print &amp; endl(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00027">PrintStream.cpp:27</a></div></div>
 <div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
 <!-- start footer part -->
