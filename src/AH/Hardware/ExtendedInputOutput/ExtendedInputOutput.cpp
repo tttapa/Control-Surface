@@ -35,7 +35,9 @@ ExtendedIOElement &getIOElementOfPin(pin_t pin) {
 
 void pinMode(pin_t pin, uint8_t mode) {
     // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(mode));
-    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+    if (pin == NO_PIN)
+        return;
+    else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::pinMode(pin, mode);
     } else {
         ExtendedIOElement &el = getIOElementOfPin(pin);
@@ -46,7 +48,9 @@ void pinMode(int pin, uint8_t mode) { pinMode((pin_t)pin, mode); }
 
 void digitalWrite(pin_t pin, uint8_t val) {
     // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
-    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+    if (pin == NO_PIN)
+        return;
+    else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::digitalWrite(pin, val);
     } else {
         ExtendedIOElement &el = getIOElementOfPin(pin);
@@ -56,7 +60,9 @@ void digitalWrite(pin_t pin, uint8_t val) {
 void digitalWrite(int pin, uint8_t val) { digitalWrite((pin_t)pin, val); }
 
 int digitalRead(pin_t pin) {
-    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+    if (pin == NO_PIN)
+        return 0;
+    else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         return ::digitalRead(pin);
     } else {
         ExtendedIOElement &el = getIOElementOfPin(pin);
@@ -84,7 +90,9 @@ void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val) {
 }
 
 analog_t analogRead(pin_t pin) {
-    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+    if (pin == NO_PIN)
+        return 0;
+    else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         return ::analogRead(pin);
     } else {
         ExtendedIOElement &el = getIOElementOfPin(pin);
@@ -96,7 +104,9 @@ analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
 
 void analogWrite(pin_t pin, analog_t val) {
     // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
-    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+    if (pin == NO_PIN)
+        return;
+    else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
 #ifndef ESP32
         ::analogWrite(pin, val);
 #endif

@@ -10,8 +10,7 @@ class PitchBendSender {
   public:
     static void send(uint16_t value, MIDICNChannelAddress address) {
         value =
-            AH::increaseBitDepth<14, INPUT_PRECISION_BITS, uint16_t, uint16_t>(
-                value);
+            AH::increaseBitDepth<14, precision(), uint16_t, uint16_t>(value);
         // ignore address byte, just use channel and cable numbers
         MIDICNChannel channelCN = {address.getChannel(),
                                    address.getCableNumber()};
