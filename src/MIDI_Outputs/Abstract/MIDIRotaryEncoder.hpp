@@ -18,7 +18,7 @@ BEGIN_CS_NAMESPACE
  */
 template <class Enc, class Sender>
 class GenericMIDIRotaryEncoder : public MIDIOutputElement {
-  protected:
+  public:
     /**
      * @brief   Construct a new MIDIRotaryEncoder.
      *
@@ -41,7 +41,6 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
           pulsesPerStep(pulsesPerStep), sender(sender) {}
 #endif
 
-  public:
     void begin() final override {}
     void update() final override {
         long currentPosition = encoder.read();

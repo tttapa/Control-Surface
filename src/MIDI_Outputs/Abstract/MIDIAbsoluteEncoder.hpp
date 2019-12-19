@@ -18,7 +18,7 @@ BEGIN_CS_NAMESPACE
  */
 template <class Enc, class Sender>
 class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
-  protected:
+  public:
     GenericMIDIAbsoluteEncoder(Enc &&encoder, MIDICNChannelAddress address,
                                int16_t multiplier, uint8_t pulsesPerStep,
                                const Sender &sender)
@@ -26,7 +26,6 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
           multiplier(multiplier), pulsesPerStep(pulsesPerStep), sender(sender) {
     }
 
-  public:
     void begin() override { resetPositionOffset(); }
     void update() override {
         uint16_t currentPosition = getNewValue();
