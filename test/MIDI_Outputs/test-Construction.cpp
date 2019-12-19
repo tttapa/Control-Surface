@@ -94,7 +94,7 @@ TEST(Construction, MIDIOutputs) {
 
     CCPotentiometer{pin, address};
 
-    CCRotaryEncoder{EncoderPinList{pin, pin}, address, i8, u8};
+    CCRotaryEncoder{{pin, pin}, address, i8, u8};
 
     // Note --------------------------------------------------------------------
     NoteButton{pin, address};

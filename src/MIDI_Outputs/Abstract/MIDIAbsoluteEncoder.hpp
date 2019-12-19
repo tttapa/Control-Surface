@@ -16,48 +16,64 @@ BEGIN_CS_NAMESPACE
  * @brief   An abstract class for rotary encoders that send absolute MIDI 
  *          events.
  */
-template <class Sender>
-class MIDIAbsoluteEncoder : public MIDIOutputElement {
+template <class Enc, class Sender>
+class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
   protected:
-        MIDIAbsoluteEncoder(const EncoderPinList &pins,
-                            const MIDICNChannelAddress &address,
-                            int16_t multiplier, uint8_t pulsesPerStep,
-                            const Sender &sender)
-        : encoder{pins.A, pins.B}, address(address),
-          multiplier(multiplier),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
-          
+    GenericMIDIAbsoluteEncoder(Enc &&encoder, MIDICNChannelAddress address,
+                               int16_t multiplier, uint8_t pulsesPerStep,
+                               const Sender &sender)
+        : encoder(std::forward<Enc>(encoder)), address(address),
+          multiplier(multiplier), pulsesPerStep(pulsesPerStep), sender(sender) {
+    }
+
   public:
-    void begin() override {}
+    void begin() override { resetPositionOffset(); }
     void update() override {
-        long currentPosition = getValue();
+        uint16_t currentPosition = getNewValue();
         if (currentPosition != previousPosition) {
             sender.send(currentPosition, address);
             previousPosition = currentPosition;
         }
     }
 
-    analog_t getValue() { 
-      auto maxval = (1 << Sender::precision()) - 1;
-      noInterrupts();
-      auto rawval = encoder.read() * multiplier / pulsesPerStep;
-      noInterrupts(); // encoder.read() enables interrupts :(
-      auto val = constrain(rawval, 0, maxval);
-      if (val != rawval)
-        encoder.write(val * pulsesPerStep / multiplier);
-      interrupts();
-      return val;
+    uint16_t getNewValue() {
+        auto maxval = (1 << Sender::precision()) - 1;
+        auto encval = encoder.read();
+        long rawval =
+            (encval - zeroOffsetPosition) * multiplier / pulsesPerStep;
+        auto val = constrain(rawval, 0, maxval);
+        if (val != rawval)
+            zeroOffsetPosition =
+                encval + (rawval - val) * pulsesPerStep / multiplier;
+        return val;
+    }
+
+    uint16_t getValue() const { return previousPosition; }
+
+    void resetPositionOffset() { set(getValue()); }
+
+    void set(uint16_t value) {
+        zeroOffsetPosition =
+            encoder.read() - (long)value * pulsesPerStep / multiplier;
     }
 
   private:
-    Encoder encoder;
-    const MIDICNChannelAddress address;
-    const int16_t multiplier;
-    const uint8_t pulsesPerStep;
-    long previousPosition = 0;
+    Enc encoder;
+    MIDICNChannelAddress address;
+    int16_t multiplier;
+    uint8_t pulsesPerStep;
+    uint16_t previousPosition = 0;
+    long zeroOffsetPosition = 0;
 
   public:
     Sender sender;
 };
+
+template <class Sender>
+using MIDIAbsoluteEncoder = GenericMIDIAbsoluteEncoder<Encoder, Sender>;
+
+template <class Sender>
+using BorrowedMIDIAbsoluteEncoder =
+    GenericMIDIAbsoluteEncoder<Encoder &, Sender>;
 
 END_CS_NAMESPACE

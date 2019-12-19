@@ -24,9 +24,10 @@ class PBAbsoluteEncoder : public MIDIAbsoluteEncoder<PitchBendSender<14>> {
      * @brief   Construct a new PBAbsoluteEncoder object with the given pins, 
      *          address, channel, speed factor, and number of pulses per step.
      * 
-     * @param   pins
-     *          A list of the two pins connected to the A and B outputs of the
-     *          encoder.  
+     * @param   encoder
+     *          The Encoder object to use.  
+     *          Usually passed as a list of the two pins connected to the 
+     *          A and B outputs of the encoder, e.g. `{2, 3}`.  
      *          The internal pull-up resistors will be enabled by the Encoder
      *          library.
      * @param   address
@@ -46,11 +47,11 @@ class PBAbsoluteEncoder : public MIDIAbsoluteEncoder<PitchBendSender<14>> {
      * @param   sender
      *          The MIDI sender to use.
      */
-    PBAbsoluteEncoder(const EncoderPinList &pins, const MIDICNChannel &address,
+    PBAbsoluteEncoder(Encoder &&encoder, const MIDICNChannel &address,
                       int16_t multiplier = 1, uint8_t pulsesPerStep = 4,
                       const PitchBendSender<14> &sender = {})
-        : MIDIAbsoluteEncoder(pins, address, multiplier, pulsesPerStep,
-                              sender) {}
+        : MIDIAbsoluteEncoder<PitchBendSender<14>>(
+              std::move(encoder), address, multiplier, pulsesPerStep, sender) {}
 };
 
 END_CS_NAMESPACE
