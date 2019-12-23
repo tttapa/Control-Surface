@@ -14,11 +14,11 @@ class MIDI_Pipe;
 class MIDI_Sink {
   public:
     /// Accept an incoming MIDI Channel message.
-    virtual void sinkMIDI(ChannelMessage) = 0;
+    virtual void sinkMIDIfromPipe(ChannelMessage) = 0;
     /// Accept an incoming MIDI System Exclusive message.
-    virtual void sinkMIDI(SysExMessage) = 0;
+    virtual void sinkMIDIfromPipe(SysExMessage) = 0;
     /// Accept an incoming MIDI Real-Time message.
-    virtual void sinkMIDI(RealTimeMessage) = 0;
+    virtual void sinkMIDIfromPipe(RealTimeMessage) = 0;
 
     virtual ~MIDI_Sink();
 
@@ -34,11 +34,11 @@ class MIDI_Sink {
 class MIDI_Source {
   public:
     /// Send a MIDI Channel Message.
-    void sendMIDI(ChannelMessage);
+    void sourceMIDItoPipe(ChannelMessage);
     /// Send a MIDI System Exclusive message.
-    void sendMIDI(SysExMessage);
+    void sourceMIDItoPipe(SysExMessage);
     /// Send a MIDI Real-Time message.
-    void sendMIDI(RealTimeMessage);
+    void sourceMIDItoPipe(RealTimeMessage);
 
     virtual ~MIDI_Source();
 
@@ -54,6 +54,19 @@ class MIDI_Source {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
+  public:
+    MIDI_Pipe() = default;
+
+    MIDI_Pipe(const MIDI_Pipe &) = delete;
+    MIDI_Pipe &operator=(const MIDI_Pipe &) = delete;
+
+    /// TODO: move construction/assignment
+    MIDI_Pipe(MIDI_Pipe &&) = delete;
+    /// TODO: move construction/assignment
+    MIDI_Pipe &operator=(MIDI_Pipe &&) = delete;
+
+    virtual ~MIDI_Pipe();
+
   private:
     void connectSink(MIDI_Sink *sink);
     void disconnectSink();
@@ -69,41 +82,39 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
         if (hasThroughOut())
             throughOut->pipeMIDI(msg);
         // map(msg)
-        sinkMIDI(msg);
+        sinkMIDIfromPipe(msg);
     }
     virtual void pipeMIDI(SysExMessage msg) {
         if (hasThroughOut())
             throughOut->pipeMIDI(msg);
         // map(msg)
-        sinkMIDI(msg);
+        sinkMIDIfromPipe(msg);
     }
     virtual void pipeMIDI(RealTimeMessage msg) {
         if (hasThroughOut())
             throughOut->pipeMIDI(msg);
         // map(msg)
-        sinkMIDI(msg);
+        sinkMIDIfromPipe(msg);
     }
 
     /// Forward from source through to output without processing;
-    void sinkMIDI(ChannelMessage msg) final override {
+    void sinkMIDIfromPipe(ChannelMessage msg) final override {
         if (hasSink())
-            sink->sinkMIDI(msg);
+            sink->sinkMIDIfromPipe(msg);
     }
     /// Forward froum source through to output without processing;
-    void sinkMIDI(SysExMessage msg) final override {
+    void sinkMIDIfromPipe(SysExMessage msg) final override {
         if (hasSink())
-            sink->sinkMIDI(msg);
+            sink->sinkMIDIfromPipe(msg);
     }
     /// Forward froum source through to output without processing;
-    void sinkMIDI(RealTimeMessage msg) final override {
+    void sinkMIDIfromPipe(RealTimeMessage msg) final override {
         if (hasSink())
-            sink->sinkMIDI(msg);
+            sink->sinkMIDIfromPipe(msg);
     }
 
   public:
     void disconnect();
-
-    virtual ~MIDI_Pipe();
 
   private:
     MIDI_Sink *sink = nullptr;

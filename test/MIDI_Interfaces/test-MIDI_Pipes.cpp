@@ -8,9 +8,9 @@ using ::testing::StrictMock;
 W_SUGGEST_OVERRIDE_OFF
 
 struct MockMIDI_Sink : TrueMIDI_Sink {
-    MOCK_METHOD(void, sinkMIDI, (ChannelMessage), (override));
-    MOCK_METHOD(void, sinkMIDI, (SysExMessage), (override));
-    MOCK_METHOD(void, sinkMIDI, (RealTimeMessage), (override));
+    MOCK_METHOD(void, sinkMIDIfromPipe, (ChannelMessage), (override));
+    MOCK_METHOD(void, sinkMIDIfromPipe, (SysExMessage), (override));
+    MOCK_METHOD(void, sinkMIDIfromPipe, (RealTimeMessage), (override));
 };
 
 W_SUGGEST_OVERRIDE_ON
@@ -18,9 +18,9 @@ W_SUGGEST_OVERRIDE_ON
 W_SUGGEST_OVERRIDE_OFF
 
 struct MockMIDI_SinkSource : TrueMIDI_SinkSource {
-    MOCK_METHOD(void, sinkMIDI, (ChannelMessage), (override));
-    MOCK_METHOD(void, sinkMIDI, (SysExMessage), (override));
-    MOCK_METHOD(void, sinkMIDI, (RealTimeMessage), (override));
+    MOCK_METHOD(void, sinkMIDIfromPipe, (ChannelMessage), (override));
+    MOCK_METHOD(void, sinkMIDIfromPipe, (SysExMessage), (override));
+    MOCK_METHOD(void, sinkMIDIfromPipe, (RealTimeMessage), (override));
 };
 
 W_SUGGEST_OVERRIDE_ON
@@ -33,8 +33,8 @@ TEST(MIDI_Pipes, sourcePipeSink) {
     source >> pipe >> sink;
 
     RealTimeMessage msg = {0xFF, 3};
-    EXPECT_CALL(sink, sinkMIDI(msg));
-    source.sendMIDI(msg);
+    EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
+    source.sourceMIDItoPipe(msg);
 }
 
 TEST(MIDI_Pipes, sourceX2PipeSink) {
@@ -46,12 +46,12 @@ TEST(MIDI_Pipes, sourceX2PipeSink) {
     source2 >> pipe2 >> sink;
 
     RealTimeMessage msg = {0xFF, 3};
-    EXPECT_CALL(sink, sinkMIDI(msg));
-    source1.sendMIDI(msg);
+    EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
+    source1.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&sink);
 
-    EXPECT_CALL(sink, sinkMIDI(msg));
-    source2.sendMIDI(msg);
+    EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
+    source2.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&sink);
 }
 
@@ -67,11 +67,11 @@ TEST(MIDI_Pipes, sourceX2PipeSinkDisconnectPipe) {
 
     pipe1.disconnect();
 
-    EXPECT_CALL(sink, sinkMIDI(msg));
-    source2.sendMIDI(msg);
+    EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
+    source2.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&sink);
 
-    source1.sendMIDI(msg); // shouldn't crash
+    source1.sourceMIDItoPipe(msg); // shouldn't crash
     ::testing::Mock::VerifyAndClear(&sink);
 }
 
@@ -85,9 +85,9 @@ TEST(MIDI_Pipes, sourcePipeSinkX2) {
 
     RealTimeMessage msg = {0xFF, 3};
 
-    EXPECT_CALL(sink1, sinkMIDI(msg));
-    EXPECT_CALL(sink2, sinkMIDI(msg));
-    source.sendMIDI(msg);
+    EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+    EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+    source.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&sink1);
     ::testing::Mock::VerifyAndClear(&sink2);
 }
@@ -104,8 +104,8 @@ TEST(MIDI_Pipes, sourcePipeSinkX2DisconnectPipe) {
 
     pipe1.disconnect();
 
-    EXPECT_CALL(sink2, sinkMIDI(msg));
-    source.sendMIDI(msg);
+    EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+    source.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&sink1);
     ::testing::Mock::VerifyAndClear(&sink2);
 }
@@ -121,15 +121,15 @@ TEST(MIDI_Pipes, sourceX2PipeSinkX2) {
     source2 >> pipe4 >> sink2;
 
     RealTimeMessage msg = {0xFF, 3};
-    EXPECT_CALL(sink1, sinkMIDI(msg));
-    EXPECT_CALL(sink2, sinkMIDI(msg));
-    source1.sendMIDI(msg);
+    EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+    EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+    source1.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&sink1);
     ::testing::Mock::VerifyAndClear(&sink2);
 
-    EXPECT_CALL(sink1, sinkMIDI(msg));
-    EXPECT_CALL(sink2, sinkMIDI(msg));
-    source2.sendMIDI(msg);
+    EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+    EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+    source2.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&sink1);
     ::testing::Mock::VerifyAndClear(&sink2);
 }
@@ -145,13 +145,13 @@ TEST(MIDI_Pipes, sourcePipeSinkBidirectional) {
 
     RealTimeMessage msg = {0xFF, 3};
 
-    EXPECT_CALL(B, sinkMIDI(msg));
-    A.sendMIDI(msg);
+    EXPECT_CALL(B, sinkMIDIfromPipe(msg));
+    A.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&A);
     ::testing::Mock::VerifyAndClear(&B);
 
-    EXPECT_CALL(A, sinkMIDI(msg));
-    B.sendMIDI(msg);
+    EXPECT_CALL(A, sinkMIDIfromPipe(msg));
+    B.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&A);
     ::testing::Mock::VerifyAndClear(&B);
 }
@@ -164,13 +164,13 @@ TEST(MIDI_Pipes, sourcePipeSinkBidirectionalBidirectional) {
 
     RealTimeMessage msg = {0xFF, 3};
 
-    EXPECT_CALL(B, sinkMIDI(msg));
-    A.sendMIDI(msg);
+    EXPECT_CALL(B, sinkMIDIfromPipe(msg));
+    A.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&A);
     ::testing::Mock::VerifyAndClear(&B);
 
-    EXPECT_CALL(A, sinkMIDI(msg));
-    B.sendMIDI(msg);
+    EXPECT_CALL(A, sinkMIDIfromPipe(msg));
+    B.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&A);
     ::testing::Mock::VerifyAndClear(&B);
 }
