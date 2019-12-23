@@ -7,9 +7,7 @@
 #include <Def/Def.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
-#ifndef ARDUINO
-#include <vector>
-#endif
+#include "MIDI_MessageTypes.hpp"
 
 BEGIN_CS_NAMESPACE
 
@@ -40,43 +38,6 @@ enum MIDI_read_t : uint8_t {
     UNDEFINED_REALTIME_MESSAGE_2 = 0xFD,
     ACTIVE_SENSING_MESSAGE = 0xFE,
     RESET_MESSAGE = 0xFF
-};
-
-// -------------------------------------------------------------------------- //
-
-struct ChannelMessage {
-    uint8_t header;
-    uint8_t data1;
-    uint8_t data2;
-
-    uint8_t CN = 0;
-
-    bool operator==(const ChannelMessage &other) const {
-        return this->header == other.header && this->data1 == other.data1 &&
-               this->data2 == other.data2 && this->CN == other.CN;
-    }
-
-    bool operator!=(const ChannelMessage &other) const {
-        return !(*this == other);
-    }
-};
-
-struct SysExMessage {
-    SysExMessage() : data(nullptr), length(0), CN(0) {}
-    SysExMessage(const uint8_t *data, size_t length, uint8_t CN = 0)
-        : data(data), length(length), CN(CN) {}
-#ifndef ARDUINO
-    SysExMessage(const std::vector<uint8_t> &vec, uint8_t CN = 0)
-        : data(vec.data()), length(vec.size()), CN(CN) {}
-#endif
-    const uint8_t *data;
-    uint8_t length;
-    uint8_t CN;
-};
-
-struct RealTimeMessage {
-    uint8_t message;
-    uint8_t CN;
 };
 
 // -------------------------------------------------------------------------- //

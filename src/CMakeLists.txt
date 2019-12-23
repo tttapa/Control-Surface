@@ -9,6 +9,7 @@ if (FAST_COMPILE)
         MIDI_Inputs/MIDIInputElementSysEx.cpp
         MIDI_Inputs/MIDIInputElementPC.cpp
         MIDI_Inputs/MCU/LCD.cpp
+        MIDI_Interfaces/MIDI_Pipes.cpp
         MIDI_Constants/MCUNameFromNoteNumber.cpp
         Display/DisplayInterface.cpp
         Display/DisplayElement.cpp
