@@ -26,6 +26,7 @@ void MIDI_Sink::connectSourcePipe(MIDI_Pipe *source) {
 
 void MIDI_Sink::disconnectSourcePipe() {
     if (sourcePipe != nullptr) {
+        sourcePipe->disconnectSourcePipe();
         sourcePipe->disconnectSink();
         sourcePipe = nullptr;
     }
@@ -46,6 +47,7 @@ void MIDI_Source::connectSinkPipe(MIDI_Pipe *sink) {
 
 void MIDI_Source::disconnectSinkPipe() {
     if (sinkPipe != nullptr) {
+        sinkPipe->disconnectSinkPipe();
         sinkPipe->disconnectSource();
         sinkPipe = nullptr;
     }
@@ -97,15 +99,17 @@ void MIDI_Pipe::disconnectSource() { this->source = nullptr; }
 void MIDI_Pipe::disconnect() {
     if (hasSink() && hasThroughIn()) {
         auto oldSink = sink;
+        auto oldThroughIn = throughIn;
         sink->disconnectSourcePipe();
-        throughIn->disconnectSink();
-        oldSink->connectSourcePipe(throughIn);
+        this->disconnectSourcePipe(); // disconnect throughIn
+        oldSink->connectSourcePipe(oldThroughIn);
     }
     if (hasSource() && hasThroughOut()) {
         auto oldSource = source;
+        auto oldThroughOut = throughOut;
         source->disconnectSinkPipe();
-        throughOut->disconnectSource();
-        oldSource->connectSinkPipe(throughOut);
+        this->disconnectSinkPipe(); // disconnect throughOut
+        oldSource->connectSinkPipe(oldThroughOut);
     }
     if (hasSink()) {
         sink->disconnectSourcePipe();
@@ -113,6 +117,8 @@ void MIDI_Pipe::disconnect() {
     if (hasSource()) {
         source->disconnectSinkPipe();
     }
+    if (hasThroughIn() || hasThroughOut())
+        assert(false);
 }
 
 MIDI_Pipe::~MIDI_Pipe() { disconnect(); }

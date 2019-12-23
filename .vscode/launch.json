@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/build/bin/tests",
             "args": [
-                "--gtest_filter='MIDI_Pipes.*'"
+                "--gtest_filter='MIDI_Pipes.disconnectPipe1'"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

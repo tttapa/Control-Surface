@@ -25,6 +25,8 @@ class MIDI_Sink {
     void connectSourcePipe(MIDI_Pipe *source);
     void disconnectSourcePipe();
 
+    bool hasSourcePipe() const { return sourcePipe != nullptr; }
+
   protected:
     MIDI_Pipe *sourcePipe = nullptr;
 };
@@ -44,6 +46,8 @@ class MIDI_Source {
 
     void connectSinkPipe(MIDI_Pipe *sink);
     void disconnectSinkPipe();
+
+    bool hasSinkPipe() const { return sinkPipe != nullptr; }
 
   protected:
     MIDI_Pipe *sinkPipe = nullptr;
@@ -73,11 +77,13 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     void connectSource(MIDI_Source *source);
     void disconnectSource();
 
+  public:
     bool hasSink() const { return sink != nullptr; }
     bool hasSource() const { return source != nullptr; }
     bool hasThroughOut() const { return throughOut != nullptr; }
     bool hasThroughIn() const { return throughIn != nullptr; }
 
+  private:
     virtual void pipeMIDI(ChannelMessage msg) {
         if (hasThroughOut())
             throughOut->pipeMIDI(msg);

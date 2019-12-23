@@ -166,3 +166,250 @@ TEST(MIDI_Pipes, sourcePipeSinkBidirectionalBidirectional) {
     ::testing::Mock::VerifyAndClear(&A);
     ::testing::Mock::VerifyAndClear(&B);
 }
+
+TEST(MIDI_Pipes, checkConnections) {
+    StrictMock<MockMIDI_Sink> sink1;
+    StrictMock<MockMIDI_Sink> sink2;
+    MIDI_Pipe pipe1;
+    MIDI_Pipe pipe2;
+    MIDI_Pipe pipe3;
+    MIDI_Pipe pipe4;
+    TrueMIDI_Source source1;
+    TrueMIDI_Source source2;
+
+    source1 >> pipe1 >> sink1;
+    source1 >> pipe2 >> sink2;
+    source2 >> pipe3 >> sink1;
+    source2 >> pipe4 >> sink2;
+
+    EXPECT_TRUE(source1.hasSinkPipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+    EXPECT_TRUE(sink1.hasSourcePipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_TRUE(pipe3.hasSink());
+    EXPECT_TRUE(pipe3.hasSource());
+    EXPECT_TRUE(pipe4.hasSink());
+    EXPECT_TRUE(pipe4.hasSource());
+
+    EXPECT_TRUE(pipe1.hasThroughIn());
+    EXPECT_TRUE(pipe1.hasThroughOut());
+    EXPECT_TRUE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+    EXPECT_FALSE(pipe3.hasThroughIn());
+    EXPECT_TRUE(pipe3.hasThroughOut());
+    EXPECT_FALSE(pipe4.hasThroughIn());
+    EXPECT_FALSE(pipe4.hasThroughOut());
+}
+
+TEST(MIDI_Pipes, disconnectPipe1) {
+    StrictMock<MockMIDI_Sink> sink1;
+    StrictMock<MockMIDI_Sink> sink2;
+    MIDI_Pipe pipe1;
+    MIDI_Pipe pipe2;
+    MIDI_Pipe pipe3;
+    MIDI_Pipe pipe4;
+    TrueMIDI_Source source1;
+    TrueMIDI_Source source2;
+
+    source1 >> pipe1 >> sink1;
+    source1 >> pipe2 >> sink2;
+    source2 >> pipe3 >> sink1;
+    source2 >> pipe4 >> sink2;
+
+    pipe1.disconnect();
+
+    EXPECT_TRUE(source1.hasSinkPipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+    EXPECT_TRUE(sink1.hasSourcePipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+
+    EXPECT_FALSE(pipe1.hasSink());
+    EXPECT_FALSE(pipe1.hasSource());
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_TRUE(pipe3.hasSink());
+    EXPECT_TRUE(pipe3.hasSource());
+    EXPECT_TRUE(pipe4.hasSink());
+    EXPECT_TRUE(pipe4.hasSource());
+
+    EXPECT_FALSE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughOut());
+    EXPECT_TRUE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+    EXPECT_FALSE(pipe3.hasThroughIn());
+    EXPECT_TRUE(pipe3.hasThroughOut());
+    EXPECT_FALSE(pipe4.hasThroughIn());
+    EXPECT_FALSE(pipe4.hasThroughOut());
+}
+
+TEST(MIDI_Pipes, disconnectPipe12) {
+    StrictMock<MockMIDI_Sink> sink1;
+    StrictMock<MockMIDI_Sink> sink2;
+    MIDI_Pipe pipe1;
+    MIDI_Pipe pipe2;
+    MIDI_Pipe pipe3;
+    MIDI_Pipe pipe4;
+    TrueMIDI_Source source1;
+    TrueMIDI_Source source2;
+
+    source1 >> pipe1 >> sink1;
+    source1 >> pipe2 >> sink2;
+    source2 >> pipe3 >> sink1;
+    source2 >> pipe4 >> sink2;
+
+    pipe1.disconnect();
+    pipe2.disconnect();
+
+    EXPECT_FALSE(source1.hasSinkPipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+    EXPECT_TRUE(sink1.hasSourcePipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+
+    EXPECT_FALSE(pipe1.hasSink());
+    EXPECT_FALSE(pipe1.hasSource());
+    EXPECT_FALSE(pipe2.hasSink());
+    EXPECT_FALSE(pipe2.hasSource());
+    EXPECT_TRUE(pipe3.hasSink());
+    EXPECT_TRUE(pipe3.hasSource());
+    EXPECT_TRUE(pipe4.hasSink());
+    EXPECT_TRUE(pipe4.hasSource());
+
+    EXPECT_FALSE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughOut());
+    EXPECT_FALSE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+    EXPECT_FALSE(pipe3.hasThroughIn());
+    EXPECT_TRUE(pipe3.hasThroughOut());
+    EXPECT_FALSE(pipe4.hasThroughIn());
+    EXPECT_FALSE(pipe4.hasThroughOut());
+}
+
+TEST(MIDI_Pipes, disconnectPipe123) {
+    StrictMock<MockMIDI_Sink> sink1;
+    StrictMock<MockMIDI_Sink> sink2;
+    MIDI_Pipe pipe1;
+    MIDI_Pipe pipe2;
+    MIDI_Pipe pipe3;
+    MIDI_Pipe pipe4;
+    TrueMIDI_Source source1;
+    TrueMIDI_Source source2;
+
+    source1 >> pipe1 >> sink1;
+    source1 >> pipe2 >> sink2;
+    source2 >> pipe3 >> sink1;
+    source2 >> pipe4 >> sink2;
+
+    pipe1.disconnect();
+    pipe2.disconnect();
+    pipe3.disconnect();
+
+    EXPECT_FALSE(source1.hasSinkPipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+    EXPECT_FALSE(sink1.hasSourcePipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+
+    EXPECT_FALSE(pipe1.hasSink());
+    EXPECT_FALSE(pipe1.hasSource());
+    EXPECT_FALSE(pipe2.hasSink());
+    EXPECT_FALSE(pipe2.hasSource());
+    EXPECT_FALSE(pipe3.hasSink());
+    EXPECT_FALSE(pipe3.hasSource());
+    EXPECT_TRUE(pipe4.hasSink());
+    EXPECT_TRUE(pipe4.hasSource());
+
+    EXPECT_FALSE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughOut());
+    EXPECT_FALSE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+    EXPECT_FALSE(pipe3.hasThroughIn());
+    EXPECT_FALSE(pipe3.hasThroughOut());
+    EXPECT_FALSE(pipe4.hasThroughIn());
+    EXPECT_FALSE(pipe4.hasThroughOut());
+}
+
+TEST(MIDI_Pipes, disconnectSource1) {
+    StrictMock<MockMIDI_Sink> sink1;
+    StrictMock<MockMIDI_Sink> sink2;
+    MIDI_Pipe pipe1;
+    MIDI_Pipe pipe2;
+    MIDI_Pipe pipe3;
+    MIDI_Pipe pipe4;
+    TrueMIDI_Source source1;
+    TrueMIDI_Source source2;
+
+    source1 >> pipe1 >> sink1;
+    source1 >> pipe2 >> sink2;
+    source2 >> pipe3 >> sink1;
+    source2 >> pipe4 >> sink2;
+
+    source1.disconnectSinkPipe();
+
+    EXPECT_FALSE(source1.hasSinkPipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+    EXPECT_TRUE(sink1.hasSourcePipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_FALSE(pipe1.hasSource());
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_FALSE(pipe2.hasSource());
+    EXPECT_TRUE(pipe3.hasSink());
+    EXPECT_TRUE(pipe3.hasSource());
+    EXPECT_TRUE(pipe4.hasSink());
+    EXPECT_TRUE(pipe4.hasSource());
+
+    EXPECT_TRUE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughOut());
+    EXPECT_TRUE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+    EXPECT_FALSE(pipe3.hasThroughIn());
+    EXPECT_TRUE(pipe3.hasThroughOut());
+    EXPECT_FALSE(pipe4.hasThroughIn());
+    EXPECT_FALSE(pipe4.hasThroughOut());
+}
+
+TEST(MIDI_Pipes, disconnectSink1) {
+    StrictMock<MockMIDI_Sink> sink1;
+    StrictMock<MockMIDI_Sink> sink2;
+    MIDI_Pipe pipe1;
+    MIDI_Pipe pipe2;
+    MIDI_Pipe pipe3;
+    MIDI_Pipe pipe4;
+    TrueMIDI_Source source1;
+    TrueMIDI_Source source2;
+
+    source1 >> pipe1 >> sink1;
+    source1 >> pipe2 >> sink2;
+    source2 >> pipe3 >> sink1;
+    source2 >> pipe4 >> sink2;
+
+    sink1.disconnectSourcePipe();
+
+    EXPECT_TRUE(source1.hasSinkPipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+    EXPECT_FALSE(sink1.hasSourcePipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+
+    EXPECT_FALSE(pipe1.hasSink());
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_FALSE(pipe3.hasSink());
+    EXPECT_TRUE(pipe3.hasSource());
+    EXPECT_TRUE(pipe4.hasSink());
+    EXPECT_TRUE(pipe4.hasSource());
+
+    EXPECT_FALSE(pipe1.hasThroughIn());
+    EXPECT_TRUE(pipe1.hasThroughOut());
+    EXPECT_TRUE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+    EXPECT_FALSE(pipe3.hasThroughIn());
+    EXPECT_TRUE(pipe3.hasThroughOut());
+    EXPECT_FALSE(pipe4.hasThroughIn());
+    EXPECT_FALSE(pipe4.hasThroughOut());
+}
