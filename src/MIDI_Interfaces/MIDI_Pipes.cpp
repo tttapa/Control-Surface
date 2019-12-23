@@ -3,6 +3,14 @@
 
 AH_DIAGNOSTIC_WERROR()
 
+#if defined(ESP32) || !defined(ARDUINO)
+#include <mutex>
+#define GUARD_PIPE_LOCK std::lock_guard<std::mutex> guard_(pipe_mutex)
+static std::mutex pipe_mutex;
+#else
+#define GUARD_PIPE_LOCK
+#endif
+
 BEGIN_CS_NAMESPACE
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -45,17 +53,23 @@ void MIDI_Source::disconnectSinkPipe() {
 
 MIDI_Source::~MIDI_Source() { disconnectSinkPipe(); }
 
-void MIDI_Source::sendMIDI(ChannelMessage msg) {
-    if (sinkPipe != nullptr)
+void MIDI_Source::sourceMIDItoPipe(ChannelMessage msg) {
+    if (sinkPipe != nullptr) {
+        GUARD_PIPE_LOCK;
         sinkPipe->pipeMIDI(msg);
+    }
 }
-void MIDI_Source::sendMIDI(SysExMessage msg) {
-    if (sinkPipe != nullptr)
+void MIDI_Source::sourceMIDItoPipe(SysExMessage msg) {
+    if (sinkPipe != nullptr) {
+        GUARD_PIPE_LOCK;
         sinkPipe->pipeMIDI(msg);
+    }
 }
-void MIDI_Source::sendMIDI(RealTimeMessage msg) {
-    if (sinkPipe != nullptr)
+void MIDI_Source::sourceMIDItoPipe(RealTimeMessage msg) {
+    if (sinkPipe != nullptr) {
+        GUARD_PIPE_LOCK;
         sinkPipe->pipeMIDI(msg);
+    }
 }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
