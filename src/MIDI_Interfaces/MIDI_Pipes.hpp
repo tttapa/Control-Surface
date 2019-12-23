@@ -22,14 +22,11 @@ class MIDI_Sink {
 
     virtual ~MIDI_Sink();
 
-  private:
-    bool connectSourcePipe(MIDI_Pipe *source);
+    void connectSourcePipe(MIDI_Pipe *source);
     void disconnectSourcePipe();
 
   protected:
     MIDI_Pipe *sourcePipe = nullptr;
-
-    friend class MIDI_Pipe;
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -45,8 +42,7 @@ class MIDI_Source {
 
     virtual ~MIDI_Source();
 
-  private:
-    bool connectSinkPipe(MIDI_Pipe *sink);
+    void connectSinkPipe(MIDI_Pipe *sink);
     void disconnectSinkPipe();
 
   protected:
@@ -58,7 +54,7 @@ class MIDI_Source {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
-  public:
+  private:
     void connectSink(MIDI_Sink *sink);
     void disconnectSink();
     void connectSource(MIDI_Source *source);
@@ -104,6 +100,9 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
             sink->sinkMIDI(msg);
     }
 
+  public:
+    void disconnect();
+
     virtual ~MIDI_Pipe();
 
   private:
@@ -111,19 +110,32 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     MIDI_Source *source = nullptr;
     MIDI_Pipe *&throughOut = MIDI_Source::sinkPipe;
     MIDI_Pipe *&throughIn = MIDI_Sink::sourcePipe;
+
+    friend class MIDI_Sink;
+    friend class MIDI_Source;
 };
 
 struct TrueMIDI_Sink : MIDI_Sink {};
 struct TrueMIDI_Source : MIDI_Source {};
 
-inline MIDI_Pipe &operator>>(MIDI_Source &source, MIDI_Pipe &pipe) {
-    pipe.connectSource(&source);
+inline MIDI_Pipe &operator>>(TrueMIDI_Source &source, MIDI_Pipe &pipe) {
+    source.connectSinkPipe(&pipe);
     return pipe;
 }
 
-inline MIDI_Sink &operator>>(MIDI_Pipe &pipe, MIDI_Sink &sink) {
-    pipe.connectSink(&sink);
+inline TrueMIDI_Sink &operator>>(MIDI_Pipe &pipe, TrueMIDI_Sink &sink) {
+    sink.connectSourcePipe(&pipe);
     return sink;
+}
+
+inline MIDI_Pipe &operator<<(TrueMIDI_Sink &sink, MIDI_Pipe &pipe) {
+    sink.connectSourcePipe(&pipe);
+    return pipe;
+}
+
+inline TrueMIDI_Source &operator<<(MIDI_Pipe &pipe, TrueMIDI_Source &source) {
+    source.connectSinkPipe(&pipe);
+    return source;
 }
 
 END_CS_NAMESPACE
