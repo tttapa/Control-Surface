@@ -3,8 +3,7 @@
 #include <gtest-wrapper.h>
 
 USING_CS_NAMESPACE;
-using ::testing::Return;
-using ::testing::Sequence;
+using ::testing::StrictMock;
 
 W_SUGGEST_OVERRIDE_OFF
 
@@ -16,8 +15,18 @@ struct MockMIDI_Sink : TrueMIDI_Sink {
 
 W_SUGGEST_OVERRIDE_ON
 
+W_SUGGEST_OVERRIDE_OFF
+
+struct MockMIDI_SinkSource : TrueMIDI_SinkSource {
+    MOCK_METHOD(void, sinkMIDI, (ChannelMessage), (override));
+    MOCK_METHOD(void, sinkMIDI, (SysExMessage), (override));
+    MOCK_METHOD(void, sinkMIDI, (RealTimeMessage), (override));
+};
+
+W_SUGGEST_OVERRIDE_ON
+
 TEST(MIDI_Pipes, sourcePipeSink) {
-    ::testing::StrictMock<MockMIDI_Sink> sink;
+    StrictMock<MockMIDI_Sink> sink;
     MIDI_Pipe pipe;
     TrueMIDI_Source source;
 
@@ -29,7 +38,7 @@ TEST(MIDI_Pipes, sourcePipeSink) {
 }
 
 TEST(MIDI_Pipes, sourceX2PipeSink) {
-    ::testing::StrictMock<MockMIDI_Sink> sink;
+    StrictMock<MockMIDI_Sink> sink;
     MIDI_Pipe pipe1, pipe2;
     TrueMIDI_Source source1, source2;
 
@@ -47,7 +56,7 @@ TEST(MIDI_Pipes, sourceX2PipeSink) {
 }
 
 TEST(MIDI_Pipes, sourceX2PipeSinkDisconnectPipe) {
-    ::testing::StrictMock<MockMIDI_Sink> sink;
+    StrictMock<MockMIDI_Sink> sink;
     MIDI_Pipe pipe1, pipe2;
     TrueMIDI_Source source1, source2;
 
@@ -67,7 +76,7 @@ TEST(MIDI_Pipes, sourceX2PipeSinkDisconnectPipe) {
 }
 
 TEST(MIDI_Pipes, sourcePipeSinkX2) {
-    ::testing::StrictMock<MockMIDI_Sink> sink1, sink2;
+    StrictMock<MockMIDI_Sink> sink1, sink2;
     MIDI_Pipe pipe1, pipe2;
     TrueMIDI_Source source;
 
@@ -84,7 +93,7 @@ TEST(MIDI_Pipes, sourcePipeSinkX2) {
 }
 
 TEST(MIDI_Pipes, sourcePipeSinkX2DisconnectPipe) {
-    ::testing::StrictMock<MockMIDI_Sink> sink1, sink2;
+    StrictMock<MockMIDI_Sink> sink1, sink2;
     MIDI_Pipe pipe1, pipe2;
     TrueMIDI_Source source;
 
@@ -102,7 +111,7 @@ TEST(MIDI_Pipes, sourcePipeSinkX2DisconnectPipe) {
 }
 
 TEST(MIDI_Pipes, sourceX2PipeSinkX2) {
-    ::testing::StrictMock<MockMIDI_Sink> sink1, sink2;
+    StrictMock<MockMIDI_Sink> sink1, sink2;
     MIDI_Pipe pipe1, pipe2, pipe3, pipe4;
     TrueMIDI_Source source1, source2;
 
@@ -125,14 +134,33 @@ TEST(MIDI_Pipes, sourceX2PipeSinkX2) {
     ::testing::Mock::VerifyAndClear(&sink2);
 }
 
-struct MockMIDI_SinkSource : MockMIDI_Sink, TrueMIDI_Source {};
-
 TEST(MIDI_Pipes, sourcePipeSinkBidirectional) {
-    ::testing::StrictMock<MockMIDI_SinkSource> A, B;
+    struct MockMIDI_SinkSource : MockMIDI_Sink, TrueMIDI_Source {};
+
+    StrictMock<MockMIDI_SinkSource> A, B;
     MIDI_Pipe pipe1, pipe2, pipe3, pipe4;
 
     A >> pipe1 >> B;
     A << pipe2 << B;
+
+    RealTimeMessage msg = {0xFF, 3};
+
+    EXPECT_CALL(B, sinkMIDI(msg));
+    A.sendMIDI(msg);
+    ::testing::Mock::VerifyAndClear(&A);
+    ::testing::Mock::VerifyAndClear(&B);
+
+    EXPECT_CALL(A, sinkMIDI(msg));
+    B.sendMIDI(msg);
+    ::testing::Mock::VerifyAndClear(&A);
+    ::testing::Mock::VerifyAndClear(&B);
+}
+
+TEST(MIDI_Pipes, sourcePipeSinkBidirectionalBidirectional) {
+    StrictMock<MockMIDI_SinkSource> A, B;
+    BidirectionalMIDI_Pipe pipe;
+
+    A | pipe | B;
 
     RealTimeMessage msg = {0xFF, 3};
 

@@ -61,14 +61,20 @@ void MIDI_Source::sendMIDI(RealTimeMessage msg) {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 void MIDI_Pipe::connectSink(MIDI_Sink *sink) {
-    assert(this->sink == nullptr);
+    if (this->sink != nullptr) {
+        FATAL_ERROR(F("This pipe is already connected to a sink"), 0x9145);
+        return;
+    }
     this->sink = sink;
 }
 
 void MIDI_Pipe::disconnectSink() { this->sink = nullptr; }
 
 void MIDI_Pipe::connectSource(MIDI_Source *source) {
-    assert(this->source == nullptr);
+    if (this->source != nullptr) {
+        FATAL_ERROR(F("This pipe is already connected to a sink"), 0x9145);
+        return;
+    }
     this->source = source;
 }
 
