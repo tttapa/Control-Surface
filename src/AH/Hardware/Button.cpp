@@ -53,6 +53,14 @@ unsigned long Button::stableTime(unsigned long now) const {
 
 unsigned long Button::stableTime() const { return stableTime(millis()); }
 
+void Button::setDebounceTime(unsigned long debounceTime) {
+    Button::debounceTime = debounceTime;
+}
+
+unsigned long Button::getDebounceTime() { return Button::debounceTime; }
+
+unsigned long Button::debounceTime = BUTTON_DEBOUNCE_TIME;
+
 END_AH_NAMESPACE
 
 AH_DIAGNOSTIC_POP()

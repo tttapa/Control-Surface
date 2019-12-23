@@ -123,8 +123,12 @@ TEST(Button, rising) {
  */
 TEST(Button, debouncePressed) {
     Button b(2);
+    Button::setDebounceTime(100);
+    EXPECT_EQ(Button::getDebounceTime(), 100);
+
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     b.begin();
+    
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
