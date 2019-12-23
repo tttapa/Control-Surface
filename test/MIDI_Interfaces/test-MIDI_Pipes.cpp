@@ -24,9 +24,24 @@ TEST(MIDI_Pipes, sourcePipeSink) {
 
     source >> pipe >> sink;
 
-    RealTimeMessage msg = {0xFF, 3};
-    EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
-    source.sourceMIDItoPipe(msg);
+    {
+        RealTimeMessage msg = {0xFF, 3};
+        EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink);
+    }
+    {
+        ChannelMessage msg{0x93, 0x10, 0x7F, 5};
+        EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink);
+    }
+    {
+        SysExMessage msg = {nullptr, 0, 10};
+        EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink);
+    }
 }
 
 TEST(MIDI_Pipes, sourceX2PipeSink) {
@@ -412,4 +427,34 @@ TEST(MIDI_Pipes, disconnectSink1) {
     EXPECT_TRUE(pipe3.hasThroughOut());
     EXPECT_FALSE(pipe4.hasThroughIn());
     EXPECT_FALSE(pipe4.hasThroughOut());
+}
+
+#include <AH/Error/Error.hpp>
+
+TEST(MIDI_Pipes, connectPipeToSinkTwice) {
+    StrictMock<MockMIDI_Sink> sink1, sink2;
+    MIDI_Pipe pipe;
+
+    pipe >> sink1;
+
+    try {
+        pipe >> sink2;
+        FAIL();
+    } catch (AH::ErrorException &e) {
+        EXPECT_EQ(e.getErrorCode(), 0x9145);
+    }
+}
+
+TEST(MIDI_Pipes, connectPipeToSourceTwice) {
+    TrueMIDI_Source source1, source2;
+    MIDI_Pipe pipe;
+
+    source1 >> pipe;
+
+    try {
+        source2 >> pipe;
+        FAIL();
+    } catch (AH::ErrorException &e) {
+        EXPECT_EQ(e.getErrorCode(), 0x9146);
+    }
 }
