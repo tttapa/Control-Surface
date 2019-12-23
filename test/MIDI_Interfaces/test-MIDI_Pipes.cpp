@@ -5,25 +5,17 @@
 USING_CS_NAMESPACE;
 using ::testing::StrictMock;
 
-W_SUGGEST_OVERRIDE_OFF
-
 struct MockMIDI_Sink : TrueMIDI_Sink {
     MOCK_METHOD(void, sinkMIDIfromPipe, (ChannelMessage), (override));
     MOCK_METHOD(void, sinkMIDIfromPipe, (SysExMessage), (override));
     MOCK_METHOD(void, sinkMIDIfromPipe, (RealTimeMessage), (override));
 };
 
-W_SUGGEST_OVERRIDE_ON
-
-W_SUGGEST_OVERRIDE_OFF
-
 struct MockMIDI_SinkSource : TrueMIDI_SinkSource {
     MOCK_METHOD(void, sinkMIDIfromPipe, (ChannelMessage), (override));
     MOCK_METHOD(void, sinkMIDIfromPipe, (SysExMessage), (override));
     MOCK_METHOD(void, sinkMIDIfromPipe, (RealTimeMessage), (override));
 };
-
-W_SUGGEST_OVERRIDE_ON
 
 TEST(MIDI_Pipes, sourcePipeSink) {
     StrictMock<MockMIDI_Sink> sink;

@@ -69,7 +69,8 @@ set(CMAKE_C_FLAGS_RELWITHDEBINFO "-Os -g3 -ggdb")
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
-        -Winconsistent-missing-override")
+        -Winconsistent-missing-override \
+        -Wno-gnu-zero-variadic-macro-arguments")
     
 else()
 
