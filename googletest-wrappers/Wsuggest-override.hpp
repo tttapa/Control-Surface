@@ -3,7 +3,7 @@
     _Pragma("GCC diagnostic push")                                             \
         _Pragma("GCC diagnostic ignored \"-Wsuggest-override\"")
 #elif defined(__clang__)
-#define W_SUGGEST_OVERRIDE_OFF                                              \
+#define W_SUGGEST_OVERRIDE_OFF                                                 \
     _Pragma("clang diagnostic push") _Pragma(                                  \
         "clang diagnostic ignored \"-Winconsistent-missing-override\"")
 #endif
