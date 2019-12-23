@@ -2,7 +2,8 @@
 
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
-#include <stdint.h>
+#include <stdint.h> // uint8_t
+#include <stddef.h> // size_t
 
 #ifndef ARDUINO
 #include <vector>

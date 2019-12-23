@@ -115,8 +115,16 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     friend class MIDI_Source;
 };
 
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
 struct TrueMIDI_Sink : MIDI_Sink {};
 struct TrueMIDI_Source : MIDI_Source {};
+
+struct BidirectionalMIDI_Pipe {
+    MIDI_Pipe dir1, dir2;
+};
+
+struct TrueMIDI_SinkSource : TrueMIDI_Sink, TrueMIDI_Source {};
 
 inline MIDI_Pipe &operator>>(TrueMIDI_Source &source, MIDI_Pipe &pipe) {
     source.connectSinkPipe(&pipe);
@@ -136,6 +144,20 @@ inline MIDI_Pipe &operator<<(TrueMIDI_Sink &sink, MIDI_Pipe &pipe) {
 inline TrueMIDI_Source &operator<<(MIDI_Pipe &pipe, TrueMIDI_Source &source) {
     source.connectSinkPipe(&pipe);
     return source;
+}
+
+inline TrueMIDI_SinkSource &operator|(BidirectionalMIDI_Pipe &pipe,
+                                      TrueMIDI_SinkSource &sinksource) {
+    sinksource.connectSinkPipe(&pipe.dir1);
+    sinksource.connectSourcePipe(&pipe.dir2);
+    return sinksource;
+}
+
+inline BidirectionalMIDI_Pipe &operator|(TrueMIDI_SinkSource &sinksource,
+                                         BidirectionalMIDI_Pipe &pipe) {
+    sinksource.connectSinkPipe(&pipe.dir2);
+    sinksource.connectSourcePipe(&pipe.dir1);
+    return pipe;
 }
 
 END_CS_NAMESPACE
