@@ -79,7 +79,7 @@ void MIDI_Source::sourceMIDItoPipe(RealTimeMessage msg) {
 void MIDI_Pipe::connectSink(MIDI_Sink *sink) {
     if (this->sink != nullptr) {
         FATAL_ERROR(F("This pipe is already connected to a sink"), 0x9145);
-        return;
+        return; // LCOV_EXCL_LINE
     }
     this->sink = sink;
 }
@@ -88,8 +88,8 @@ void MIDI_Pipe::disconnectSink() { this->sink = nullptr; }
 
 void MIDI_Pipe::connectSource(MIDI_Source *source) {
     if (this->source != nullptr) {
-        FATAL_ERROR(F("This pipe is already connected to a sink"), 0x9145);
-        return;
+        FATAL_ERROR(F("This pipe is already connected to a source"), 0x9146);
+        return; // LCOV_EXCL_LINE
     }
     this->source = source;
 }
@@ -118,7 +118,7 @@ void MIDI_Pipe::disconnect() {
         source->disconnectSinkPipe();
     }
     if (hasThroughIn() || hasThroughOut())
-        assert(false);
+        assert(false); // LCOV_EXCL_LINE
 }
 
 MIDI_Pipe::~MIDI_Pipe() { disconnect(); }

@@ -2,8 +2,8 @@
 
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
-#include <stdint.h> // uint8_t
 #include <stddef.h> // size_t
+#include <stdint.h> // uint8_t
 
 #ifndef ARDUINO
 #include <vector>
@@ -20,14 +20,11 @@ struct ChannelMessage {
 
     uint8_t CN = 0;
 
-    bool operator==(const ChannelMessage &other) const {
+    bool operator==(ChannelMessage other) const {
         return this->header == other.header && this->data1 == other.data1 &&
                this->data2 == other.data2 && this->CN == other.CN;
     }
-
-    bool operator!=(const ChannelMessage &other) const {
-        return !(*this == other);
-    }
+    bool operator!=(ChannelMessage other) const { return !(*this == other); }
 };
 
 struct SysExMessage {
@@ -41,6 +38,13 @@ struct SysExMessage {
     const uint8_t *data;
     uint8_t length;
     uint8_t CN;
+
+    bool operator==(SysExMessage other) const {
+        return this->length == other.length &&
+               this->data == other.data && // TODO: compare contents or pointer?
+               this->CN == other.CN;
+    }
+    bool operator!=(SysExMessage other) const { return !(*this == other); }
 };
 
 struct RealTimeMessage {
@@ -50,6 +54,7 @@ struct RealTimeMessage {
     bool operator==(RealTimeMessage other) const {
         return this->message == other.message && this->CN == other.CN;
     }
+    bool operator!=(RealTimeMessage other) const { return !(*this == other); }
 };
 
 END_CS_NAMESPACE
