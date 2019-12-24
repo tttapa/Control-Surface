@@ -111,14 +111,14 @@ void MIDI_Pipe::disconnect() {
         this->disconnectSinkPipe(); // disconnect throughOut
         oldSource->connectSinkPipe(oldThroughOut);
     }
-    if (hasSink()) {
+    if (hasSink())
         sink->disconnectSourcePipe();
-    }
-    if (hasSource()) {
+
+    if (hasSource())
         source->disconnectSinkPipe();
-    }
+
     if (hasThroughIn() || hasThroughOut())
-        assert(false); // LCOV_EXCL_LINE
+        FATAL_ERROR(F("Invalid state"), 0x9147); //LCOV_EXCL_LINE
 }
 
 MIDI_Pipe::~MIDI_Pipe() { disconnect(); }
