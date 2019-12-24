@@ -18,8 +18,8 @@ rm -rf "$html_dest/*"
 if [ "${1,,}" == "clang" ]; then
     gcov_bin="$dir/llvm-cov-gcov.sh"
     # Replace the default c++filt program with LLVM/Clang's version
-    mkdir /tmp/clang-cxxfilt
-    ln -s `which llvm-cxxfilt` /tmp/clang-cxxfilt/c++filt
+    mkdir -p /tmp/clang-cxxfilt
+    ln -sf `which llvm-cxxfilt` /tmp/clang-cxxfilt/c++filt
     export PATH=/tmp/clang-cxxfilt:$PATH
     which c++filt
 else
