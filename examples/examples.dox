@@ -430,7 +430,7 @@
  * - 3: momentary push button (to ground)
  * - 4: momentary push button (to ground)
  * 
- * The internal pull-up resistor for the button will be enabled automatically.
+ * The internal pull-up resistor for the buttons will be enabled automatically.
  * 
  * Behavior
  * --------

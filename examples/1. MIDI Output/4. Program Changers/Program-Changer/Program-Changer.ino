@@ -10,7 +10,7 @@
  * - 3: momentary push button (to ground)
  * - 4: momentary push button (to ground)
  * 
- * The internal pull-up resistor for the button will be enabled automatically.
+ * The internal pull-up resistor for the buttons will be enabled automatically.
  * 
  * Behavior
  * --------
@@ -45,7 +45,7 @@ ProgramChanger<3> programChanger = {
 // changer
 ManyButtonsSelector<3> programSelector = {
   programChanger,
-  {2, 3, 4},
+  {{2, 3, 4}},
 };
 
 // The library comes with many different Selectors, like rotary encoders,
