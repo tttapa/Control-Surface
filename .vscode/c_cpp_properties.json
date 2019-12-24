@@ -3,7 +3,8 @@
         {
             "name": "Linux",
             "defines": [
-                "IDE"
+                "IDE",
+                "FASTLED_VERSION"
             ],
             "compilerPath": "/usr/bin/env gcc-9",
             "cStandard": "c11",
