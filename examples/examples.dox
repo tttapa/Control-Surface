@@ -405,6 +405,75 @@
  */
 
 /**
+ * @example   "ManyAddressesPCButton.ino"
+ * 
+ * ManyAddressesPCButton
+ * =====================
+ *
+ * An advanced example with Program Change buttons in different Banks.
+ */
+
+/**
+ * @example   "Program-Changer.ino"
+ * 
+ * Program-Changer
+ * ===============
+ * 
+ * This is an example that demonstrates the use of MIDI Program Changers.
+ *
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 2: momentary push button (to ground)
+ * - 3: momentary push button (to ground)
+ * - 4: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When the button on pin 2 is pressed, the MIDI Program for 
+ *   "Acoustic Grand Piano" is selected.
+ * - When the button on pin 3 is pressed, the MIDI Program for 
+ *   "Rock Organ" is selected.
+ * - When the button on pin 4 is pressed, the MIDI Program for 
+ *   "Electric Bass Pick" is selected. 
+ * 
+ * Written by PieterP, 2019-08-07  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "PCButton.ino"
+ * 
+ * PCButton
+ * ========
+ * 
+ * This is an example that demonstrates the use of MIDI Program Change buttons.
+ *
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 2: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When the button on pin 2 is pressed, the MIDI Program for 
+ *   "Steel Drums" is selected.
+ * 
+ * Written by PieterP, 2019-08-07  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "MIDI-Controller-Finished-Example.ino"
  * 
  * MIDI-Controller-Finished-Example
