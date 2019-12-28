@@ -825,6 +825,7 @@ INPUT                  = "../examples/examples.dox" \
                          "pages/Installation.md" \
                          "pages/MIDI-over-USB.md" \
                          "pages/Debug.md" \
+                         "pages/xbm.md" \
                          "../README.md"
 
 # This tag can be used to specify the character encoding of the source files
@@ -886,7 +887,8 @@ EXCLUDE_SYMLINKS       = NO
 # Note that the wildcards are matched against the file with absolute path, so to
 # exclude all test directories for example use the pattern */test/*
 
-EXCLUDE_PATTERNS       = "*/src/AH/STL/README.md"
+EXCLUDE_PATTERNS       = "*/src/AH/STL/README.md" \
+                         "../src/*/*.md"
 
 # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names
 # (namespaces, classes, functions, etc.) that should be excluded from the
@@ -924,8 +926,7 @@ EXAMPLE_RECURSIVE      = YES
 # \image command).
 
 IMAGE_PATH             = "svg" \
-                         "images" \
-                         "images/xbm"
+                         "images"
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program

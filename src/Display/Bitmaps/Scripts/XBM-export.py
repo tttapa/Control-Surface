@@ -11,9 +11,9 @@ as the identifier for the bitmap.
 A header file is created that includes all 
 these bitmaps (as a XBitmap struct), including
 Doxygen documentation.
-All XBM images are converted to PNG images
-and saved to the Doxygen HTML folder, to be
+All XBM images are converted to PNG images, to be
 displayed in the documentation.
+The PNG images are exported to the current working directory.
 """
 
 # TODO: make this code readable.
@@ -29,7 +29,7 @@ dirnm = os.path.dirname(os.path.realpath(__file__))
 inputdir = os.path.realpath(os.path.join(dirnm,  '../XBM'))
 outputdir = os.path.realpath(os.path.join(dirnm, '..'))
 # pngoutputdir = os.path.realpath(os.path.join(dirnm, '../PNG'))
-pngoutputdir = os.getcwd()
+pngoutputdir = os.path.join(os.getcwd(), 'xbm')
 
 os.makedirs(pngoutputdir, exist_ok=True)
 
@@ -80,7 +80,7 @@ for filename in sorted(os.listdir(inputdir)):
         # Replace the existing identifier for the data array,
         # change the type from unsigned char to uint8_t, 
         # and store it in PROGMEM
-        contents = re.sub(r'static unsigned char [a-zA-Z_][a-zA-Z0-9_]*(_bits\[\] *= *{ *(?:0x[0-9a-fA-F]{2}, *)*}?;?) *',
+        contents = re.sub(r'static (?:unsigned )?char [a-zA-Z_][a-zA-Z0-9_]*(_bits\[\] *= *{ *(?:0x[0-9a-fA-F]{2}, *)*}?;?) *',
                           r'static const PROGMEM uint8_t {}\1'.format(identifier), contents)
         # Extract the width and height
         m = re.search(r'.*_width\s*=\s*(?P<width>\d+)\s*;[\r\n\s]+.*_height\s*=\s*(?P<height>\d+)',
@@ -110,7 +110,7 @@ for filename in sorted(os.listdir(inputdir)):
         bitmaps.append((identifier, width, height))
         # Save the bitmap source file that can be used with Arduino
         with open(os.path.join(outputdir, identifier+'.axbm'), 'w') as axbm:
-            axbm.write('#ifndef DOXYGEN\n'+contents+'#endif\n')
+            axbm.write('#ifndef DOXYGEN\n'+contents+'\n'+'#endif\n')
         print()
 
 XBitmaps = """// Automatically generated file: do not edit
@@ -125,7 +125,7 @@ for bm in bitmaps:
         """#include "{id}.axbm"
 /**
  * XBitmap&emsp;<b>{id}</b>&emsp;({width}px × {height}px)
- * <img src="{id}.png" alt="{id}" class="xbm" style="width:{pngwidth}em;">
+ * <img src="xbm/{id}.png" alt="{id}" class="xbm" style="width:{pngwidth}em;">
  */
 const XBitmap {id} = {{ {id}_width, {id}_height, {id}_bits }};
 
