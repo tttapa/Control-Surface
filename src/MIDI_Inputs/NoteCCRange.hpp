@@ -6,19 +6,30 @@
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   Interface for NoteCCValue objects: provides getters for the 
+ *          velocity or controller values.
+ */
 class INoteCCValue {
   protected:
     INoteCCValue(uint8_t rangeLength) : rangeLength{rangeLength} {}
 
   public:
+    /// Get the length of the range of note/CC addresses.
     uint8_t length() const { return rangeLength; }
+    /// Get the velocity or controller value for the given index in the range.
     virtual uint8_t getValue(uint8_t index) const = 0;
+    /// Get the velocity or controller value of the first or only note or
+    /// controller.
     uint8_t getValue() const { return getValue(0); }
 
   private:
     uint8_t rangeLength;
 };
 
+/**
+ * @brief   A callback for NoteCCRange that doesn't do anything.
+ */
 class NoteCCRangeEmptyCallback {
   public:
     void begin(const INoteCCValue &) {}
@@ -26,13 +37,24 @@ class NoteCCRangeEmptyCallback {
     void updateAll(const INoteCCValue &) {}
 };
 
+/**
+ * @brief   A callback for NoteCCRange with an action that can be implemented 
+ *          by the user.
+ * 
+ * Provides default implementations for `begin` and `updateAll`.
+ */
 struct SimpleNoteCCValueCallback {
   protected:
     SimpleNoteCCValueCallback() = default;
 
   public:
+    /// Initialize: called once
     virtual void begin(const INoteCCValue &) {}
-    virtual void update(const INoteCCValue &, uint8_t) = 0;
+    /// Update the given index: called when a new message is received for this
+    /// index
+    virtual void update(const INoteCCValue &noteccval, uint8_t index) = 0;
+    /// Update all values: called when a bank change causes all values to
+    /// (possibly) change, or when the entire range is reset to zero.
     virtual void updateAll(const INoteCCValue &noteccval) {
         for (uint8_t i = 0; i < noteccval.length(); ++i)
             update(noteccval, i);
@@ -41,6 +63,12 @@ struct SimpleNoteCCValueCallback {
 
 // -------------------------------------------------------------------------- //
 
+/** 
+ * @brief   Base class for all other classes that listen for incoming MIDI Note 
+ *          or Control Change messages and saves their values.
+ * 
+ * Can listen to a range of addresses or a single address.
+ */
 template <class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callback>
 class NoteCCRange : public MIDIInput_t, public INoteCCValue {
   public:
@@ -48,7 +76,7 @@ class NoteCCRange : public MIDIInput_t, public INoteCCValue {
         : MIDIInput_t{address}, INoteCCValue{RangeLen}, callback(callback) {}
 
     /// @todo   check index bounds
-    uint8_t getValue(uint8_t index) const override {
+    uint8_t getValue(uint8_t index) const final override {
         return values[getSelection()][index];
     }
     using INoteCCValue::getValue;
@@ -62,39 +90,61 @@ class NoteCCRange : public MIDIInput_t, public INoteCCValue {
     }
 
   private:
+    // Called when a MIDI message comes in, and if that message has been matched
+    // by the `match` method.
     bool updateImpl(const ChannelMessageMatcher &midimsg,
                     const MIDICNChannelAddress &target) override {
+        // Compute the offsets/indices in the range and the bank.
+        // E.g. if the start address of the range is 10 and the incoming message
+        // is on address 15, the range index will be 5 = 15 - 10.
+        // Very similar for banks, but in that case there are 3 possible 
+        // addresses (note/controller number, MIDI channel and MIDI cable).
         uint8_t bankIndex = this->getBankIndex(target);
         uint8_t rangeIndex = this->getRangeIndex(target);
+        // extract the velocity or controller value from the message
         uint8_t value = getValueFromMIDIMessage(midimsg);
+        // save the value
         values[bankIndex][rangeIndex] = value;
+        // if the bank that the message belongs to is the active bank,
+        // update the display
         if (bankIndex == this->getSelection())
             callback.update(*this, rangeIndex);
+        // event was handled successfully
         return true;
     }
 
+    /// Extract the "value" from a MIDI Note or Control Change message.
+    /// For Note On and Control Change, this is simply the second data byte,
+    /// for Note Off, it's zero.
     static uint8_t
     getValueFromMIDIMessage(const ChannelMessageMatcher &midimsg) {
         return midimsg.type == NOTE_OFF ? 0 : midimsg.data2;
     }
 
-    /// Get the active bank selection
+    /// Get the active bank selection.
     virtual uint8_t getSelection() const { return 0; }
 
-    /// Get the bank index from a MIDI address
+    /// Get the bank index from a MIDI address.
     virtual setting_t getBankIndex(MIDICNChannelAddress target) const {
+        // Default implementation for non-bankable version (bank is always 0)
         (void)target;
         return 0;
     }
 
+    /// Get the index of the given MIDI address in the range
     virtual uint8_t getRangeIndex(MIDICNChannelAddress target) const {
+        // Default implementation for non-bankable version (base address of the 
+        // range is fixed)
         return target.getAddress() - this->address.getAddress();
     }
 
+    /// A 2D array for saving all values of the range, for all banks.
     Array<Array<uint8_t, RangeLen>, NumBanks> values = {{}};
 
   public:
+    /// Callback that is called when a value in the active bank changes.
     Callback callback;
+    /// Get the length of the range.
     constexpr static uint8_t length() { return RangeLen; }
 };
 
