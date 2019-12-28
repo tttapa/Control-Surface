@@ -182,7 +182,8 @@ template <class Callback = NoteCCRangeEmptyCallback>
 using GenericCCValue = GenericNoteCCRange<MIDIInputElementCC, 1, Callback>;
 
 /**
- * @brief   MIDI Input Element that listens to a range of notes.
+ * @brief   MIDI Input Element that listens to a range of notes and saves their
+ *          velocity values.
  * 
  * @ingroup MIDIInputElements
  * @tparam  RangeLen 
@@ -195,12 +196,26 @@ class NoteRange : public GenericNoteRange<RangeLen> {
         : GenericNoteRange<RangeLen>{address, {}} {}
 };
 
+/**
+ * @brief   MIDI Input Element that listens to a single note and saves its 
+ *          velocity value.
+ * 
+ * @ingroup MIDIInputElements
+ */
 class NoteValue : public GenericNoteValue<> {
   public:
     NoteValue(MIDICNChannelAddress address) : GenericNoteValue<>{address, {}} {}
 };
 using MIDINote[[deprecated("Use NoteValue instead")]] = NoteValue;
 
+/**
+ * @brief   MIDI Input Element that listens to a range of controllers
+ *          and saves their values.
+ * 
+ * @ingroup MIDIInputElements
+ * @tparam  RangeLen 
+ *          The length of the range of controllers to listen to.
+ */
 template <uint8_t RangeLen>
 class CCRange : public GenericCCRange<RangeLen> {
   public:
@@ -208,6 +223,12 @@ class CCRange : public GenericCCRange<RangeLen> {
         : GenericCCRange<RangeLen>{address, {}} {}
 };
 
+/**
+ * @brief   MIDI Input Element that listens to a single controller and saves its 
+ *          value.
+ * 
+ * @ingroup MIDIInputElements
+ */
 class CCValue : public GenericCCValue<> {
   public:
     CCValue(MIDICNChannelAddress address) : GenericCCValue<>{address, {}} {}
@@ -277,6 +298,16 @@ template <uint8_t NumBanks, class Callback = NoteCCRangeEmptyCallback>
 using GenericCCValue =
     GenericNoteCCRange<MIDIInputElementCC, 1, NumBanks, Callback>;
 
+/**
+ * @brief   MIDI Input Element that listens to a range of notes and saves their
+ *          velocity values.
+ * 
+ * @ingroup BankableMIDIInputElements
+ * @tparam  RangeLen 
+ *          The length of the range of notes to listen to.
+ * @tparam  NumBanks 
+ *          The size of the bank.
+ */
 template <uint8_t RangeLen, uint8_t NumBanks>
 class NoteRange : public GenericNoteRange<RangeLen, NumBanks> {
   public:
@@ -284,15 +315,36 @@ class NoteRange : public GenericNoteRange<RangeLen, NumBanks> {
         : GenericNoteRange<RangeLen, NumBanks>{config, address, {}} {}
 };
 
+/**
+ * @brief   MIDI Input Element that listens to a single note and saves its
+ *          value.
+ * 
+ * @ingroup BankableMIDIInputElements
+ * @tparam  NumBanks 
+ *          The size of the bank.
+ */
 template <uint8_t NumBanks>
 class NoteValue : public GenericNoteValue<NumBanks> {
   public:
     NoteValue(BankConfig<NumBanks> config, MIDICNChannelAddress address)
         : GenericNoteValue<NumBanks>{config, address, {}} {}
 };
+
+/// Deprecated.
+/// @see Bankable::NoteValue
 template <uint8_t NumBanks>
 using MIDINote[[deprecated("Use NoteValue instead")]] = NoteValue<NumBanks>;
 
+/**
+ * @brief   MIDI Input Element that listens to a range of controllers and saves 
+ *          their values.
+ * 
+ * @ingroup BankableMIDIInputElements
+ * @tparam  RangeLen 
+ *          The length of the range of controllers to listen to.
+ * @tparam  NumBanks 
+ *          The size of the bank.
+ */
 template <uint8_t RangeLen, uint8_t NumBanks>
 class CCRange : public GenericCCRange<RangeLen, NumBanks> {
   public:
@@ -300,6 +352,14 @@ class CCRange : public GenericCCRange<RangeLen, NumBanks> {
         : GenericCCRange<RangeLen, NumBanks>{config, address, {}} {}
 };
 
+/**
+ * @brief   MIDI Input Element that listens to a single controller and saves its
+ *          value.
+ * 
+ * @ingroup BankableMIDIInputElements
+ * @tparam  NumBanks 
+ *          The size of the bank.
+ */
 template <uint8_t NumBanks>
 class CCValue : public GenericCCValue<NumBanks> {
   public:

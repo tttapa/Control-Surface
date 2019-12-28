@@ -69,6 +69,9 @@ class NoteCCLEDPWM : public SimpleNoteCCValueCallback {
 
 // --------------------------------- ON/OFF --------------------------------- //
 
+/// @addtogroup midi-input-elements-leds
+/// @{
+
 /**
  * @brief   MIDI Input Element that listens for MIDI Note messages in a given 
  *          range, and displays their values by turning on/off LEDs depending on
@@ -185,7 +188,12 @@ class CCValueLED
           } {}
 };
 
+/// @}
+
 namespace Bankable {
+
+/// @addtogroup midi-input-elements-leds
+/// @{
 
 template <uint8_t RangeLen, uint8_t BankSize>
 class NoteRangeLEDs : public GenericNoteCCRange<MIDIInputElementNote, RangeLen,
@@ -249,9 +257,14 @@ class CCValueLED
           } {}
 };
 
+/// @}
+
 } // namespace Bankable
 
 // ----------------------------------- PWM ---------------------------------- //
+
+/// @addtogroup midi-input-elements-leds
+/// @{
 
 /**
  * @brief   MIDI Input Element that listens for MIDI Note messages in a given 
@@ -361,7 +374,12 @@ class CCValueLEDPWM
           } {}
 };
 
+/// @}
+
 namespace Bankable {
+
+/// @addtogroup midi-input-elements-leds
+/// @{
 
 template <uint8_t RangeLen, uint8_t BankSize>
 class NoteRangeLEDsPWM : public GenericNoteCCRange<MIDIInputElementNote, RangeLen,
@@ -418,6 +436,8 @@ class CCValueLEDPWM
               {{ledPin}},
           } {}
 };
+
+/// @}
 
 } // namespace Bankable
 
