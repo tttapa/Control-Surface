@@ -90,13 +90,30 @@ TEST(MIDI_Pipes, sourcePipeSinkX2) {
     source >> pipe1 >> sink1;
     source >> pipe2 >> sink2;
 
-    RealTimeMessage msg = {0xFF, 3};
-
-    EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
-    EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
-    source.sourceMIDItoPipe(msg);
-    ::testing::Mock::VerifyAndClear(&sink1);
-    ::testing::Mock::VerifyAndClear(&sink2);
+    {
+        RealTimeMessage msg = {0xFF, 3};
+        EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+        EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink1);
+        ::testing::Mock::VerifyAndClear(&sink2);
+    }
+    {
+        ChannelMessage msg{0x93, 0x10, 0x7F, 5};
+        EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+        EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink1);
+        ::testing::Mock::VerifyAndClear(&sink2);
+    }
+    {
+        SysExMessage msg = {nullptr, 0, 10};
+        EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+        EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink1);
+        ::testing::Mock::VerifyAndClear(&sink2);
+    }
 }
 
 TEST(MIDI_Pipes, sourcePipeSinkX2DisconnectPipe) {
@@ -427,6 +444,87 @@ TEST(MIDI_Pipes, disconnectSink1) {
     EXPECT_TRUE(pipe3.hasThroughOut());
     EXPECT_FALSE(pipe4.hasThroughIn());
     EXPECT_FALSE(pipe4.hasThroughOut());
+}
+
+TEST(MIDI_Pipes, exclusive) {
+    StrictMock<MockMIDI_Sink> sinks[2];
+    MIDI_PipeFactory<6> pipes;
+    TrueMIDI_Source sources[4];
+
+    sources[1] >> pipes >> sinks[1];
+    sources[1] >> pipes >> sinks[0];
+
+    sources[0] >> pipes >> sinks[0];
+
+    sources[2] >> pipes >> sinks[1];
+    sources[3] >> pipes >> sinks[1];
+
+    ASSERT_TRUE(sources[0].canWrite(0xC));
+    ASSERT_TRUE(sources[1].canWrite(0xC));
+    ASSERT_TRUE(sources[2].canWrite(0xC));
+    ASSERT_TRUE(sources[3].canWrite(0xC));
+
+    sources[3].exclusive(0xC);
+    ASSERT_TRUE(sources[0].canWrite(0xC));
+    ASSERT_FALSE(sources[1].canWrite(0xC));
+    ASSERT_FALSE(sources[2].canWrite(0xC));
+    ASSERT_TRUE(sources[3].canWrite(0xC));
+
+    sources[3].exclusive(0xC, false);
+    ASSERT_TRUE(sources[0].canWrite(0xC));
+    ASSERT_TRUE(sources[1].canWrite(0xC));
+    ASSERT_TRUE(sources[2].canWrite(0xC));
+    ASSERT_TRUE(sources[3].canWrite(0xC));
+
+    sources[2].exclusive(0xC);
+    ASSERT_TRUE(sources[0].canWrite(0xC));
+    ASSERT_FALSE(sources[1].canWrite(0xC));
+    ASSERT_TRUE(sources[2].canWrite(0xC));
+    ASSERT_FALSE(sources[3].canWrite(0xC));
+
+    sources[2].exclusive(0xC, false);
+    ASSERT_TRUE(sources[0].canWrite(0xC));
+    ASSERT_TRUE(sources[1].canWrite(0xC));
+    ASSERT_TRUE(sources[2].canWrite(0xC));
+    ASSERT_TRUE(sources[3].canWrite(0xC));
+
+    sources[1].exclusive(0xC);
+    ASSERT_TRUE(sources[0].canWrite(0xC));
+    ASSERT_TRUE(sources[1].canWrite(0xC));
+    ASSERT_FALSE(sources[2].canWrite(0xC));
+    ASSERT_FALSE(sources[3].canWrite(0xC));
+
+    sources[1].exclusive(0xC, false);
+    ASSERT_TRUE(sources[0].canWrite(0xC));
+    ASSERT_TRUE(sources[1].canWrite(0xC));
+    ASSERT_TRUE(sources[2].canWrite(0xC));
+    ASSERT_TRUE(sources[3].canWrite(0xC));
+
+    sources[0].exclusive(0xC);
+    ASSERT_TRUE(sources[0].canWrite(0xC));
+    ASSERT_FALSE(sources[1].canWrite(0xC));
+    ASSERT_TRUE(sources[2].canWrite(0xC));
+    ASSERT_TRUE(sources[3].canWrite(0xC));
+
+    sources[0].exclusive(0xC, false);
+    ASSERT_TRUE(sources[0].canWrite(0xC));
+    ASSERT_TRUE(sources[1].canWrite(0xC));
+    ASSERT_TRUE(sources[2].canWrite(0xC));
+    ASSERT_TRUE(sources[3].canWrite(0xC));
+}
+
+TEST(MIDI_PipeFactory, notEnoughPipes) {
+    StrictMock<MockMIDI_Sink> sinks[3];
+    MIDI_PipeFactory<2> pipes;
+
+    pipes >> sinks[0];
+    pipes >> sinks[1];
+    try {
+        pipes >> sinks[2];
+        FAIL();
+    } catch (AH::ErrorException &e) {
+        EXPECT_EQ(e.getErrorCode(), 0x2459);
+    }
 }
 
 #include <AH/Error/Error.hpp>

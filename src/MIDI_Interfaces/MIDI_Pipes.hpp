@@ -1,5 +1,6 @@
 #pragma once
 
+#include <AH/Containers/BitArray.hpp>
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
 
@@ -8,6 +9,8 @@
 AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
+
+using cn_t = uint8_t;
 
 class MIDI_Pipe;
 
@@ -27,8 +30,13 @@ class MIDI_Sink {
 
     bool hasSourcePipe() const { return sourcePipe != nullptr; }
 
+  private:
+    virtual void lockDownstream(cn_t cn, bool lock) { (void)cn, (void)lock; }
+
   protected:
     MIDI_Pipe *sourcePipe = nullptr;
+
+    friend class MIDI_Pipe;
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -48,6 +56,9 @@ class MIDI_Source {
     void disconnectSinkPipe();
 
     bool hasSinkPipe() const { return sinkPipe != nullptr; }
+
+    void exclusive(cn_t cn, bool exclusive = true);
+    bool canWrite(cn_t cn) const;
 
   protected:
     MIDI_Pipe *sinkPipe = nullptr;
@@ -119,14 +130,43 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
             sink->sinkMIDIfromPipe(msg);
     }
 
+    void lockDownstream(cn_t cn, bool lock) override {
+        lockSelf(cn, lock);
+        if (hasSink())
+            sink->lockDownstream(cn, lock);
+    }
+
+    void lockUpstream(cn_t cn, bool lock) {
+        lockSelf(cn, lock);
+        if (hasThroughIn())
+            throughIn->lockUpstream(cn, lock);
+    }
+
+    void lockSelf(cn_t cn, bool lock) { locks.set(cn, lock); }
+
   public:
     void disconnect();
+
+    void exclusive(cn_t cn, bool exclusive = true) {
+        if (hasSink())
+            sink->lockDownstream(cn, exclusive);
+        if (hasThroughIn())
+            throughIn->lockUpstream(cn, exclusive);
+    }
+
+    bool isLocked(cn_t cn) const { return locks.get(cn); }
+
+    bool isAvailableForWrite(cn_t cn) const {
+        return !isLocked(cn) &&
+               (!hasThroughOut() || throughOut->isAvailableForWrite(cn));
+    }
 
   private:
     MIDI_Sink *sink = nullptr;
     MIDI_Source *source = nullptr;
     MIDI_Pipe *&throughOut = MIDI_Source::sinkPipe;
     MIDI_Pipe *&throughIn = MIDI_Sink::sourcePipe;
+    AH::BitArray<16> locks;
 
     friend class MIDI_Sink;
     friend class MIDI_Source;
@@ -175,6 +215,42 @@ inline BidirectionalMIDI_Pipe &operator|(TrueMIDI_SinkSource &sinksource,
     sinksource.connectSinkPipe(&pipe.dir2);
     sinksource.connectSourcePipe(&pipe.dir1);
     return pipe;
+}
+
+template <size_t N, class Pipe = MIDI_Pipe>
+struct MIDI_PipeFactory {
+    Pipe pipes[N];
+    size_t index = 0;
+
+    Pipe &getNext() {
+        if (index >= N)
+            FATAL_ERROR(F("Not enough pipes available"), 0x2459);
+        return pipes[index++];
+    }
+};
+
+template <size_t N, class Pipe>
+inline MIDI_Pipe &operator>>(TrueMIDI_Source &source,
+                             MIDI_PipeFactory<N, Pipe> &pipe) {
+    return source >> pipe.getNext();
+}
+
+template <size_t N, class Pipe>
+inline TrueMIDI_Sink &operator>>(MIDI_PipeFactory<N, Pipe> &pipe,
+                                 TrueMIDI_Sink &sink) {
+    return pipe.getNext() >> sink;
+}
+
+template <size_t N, class Pipe>
+inline MIDI_Pipe &operator<<(TrueMIDI_Sink &sink,
+                             MIDI_PipeFactory<N, Pipe> &pipe) {
+    return sink << pipe.getNext();
+}
+
+template <size_t N, class Pipe>
+inline TrueMIDI_Source &operator<<(MIDI_PipeFactory<N, Pipe> &pipe,
+                                   TrueMIDI_Source &source) {
+    return pipe.getNext() << source;
 }
 
 END_CS_NAMESPACE
