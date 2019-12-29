@@ -3,4 +3,5 @@ constexpr size_t rec_rdy_7_width = 7;
 constexpr size_t rec_rdy_7_height = 7;
 static const PROGMEM uint8_t rec_rdy_7_bits[] = {
    0x1e, 0x22, 0x22, 0x1e, 0x0a, 0x12, 0x22 };
+
 #endif

@@ -113,12 +113,13 @@ WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen/scripts)
 # Add XBM target
 add_custom_target(xbm 
     python3 ${CMAKE_CURRENT_LIST_DIR}/src/Display/Bitmaps/Scripts/XBM-export.py
-    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen/images/xbm)
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/docs/Doxygen)
 
 # Add export documentation target
 add_custom_target(documentation 
     rm -rf html && ./scripts/examples.py && doxygen
-    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen)
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen
+    DEPENDS xbm)
 
 # Add coverage target
 if (CMAKE_BUILD_TYPE STREQUAL "Coverage")

@@ -14,8 +14,8 @@ class GenericManyButtonsSelector : public GenericSelector<N, Callback> {
     GenericManyButtonsSelector(Selectable<N> &selectable,
                                const Callback &callback,
                                const PinList<N> &buttonPins)
-        : GenericSelector<N, Callback>{selectable, callback}, buttonPins{
-                                                                  buttonPins} {}
+        : GenericSelector<N, Callback>{selectable, callback},
+          buttonPins(buttonPins) {}
 
     void begin() override {
         Parent::begin();

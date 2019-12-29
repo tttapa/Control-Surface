@@ -351,3 +351,27 @@ TEST(NoteValueLED, NoteOnNoteOff) {
 
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
+
+TEST(NoteValueLED, PWM) {
+    NoteValueLEDPWM mnl = {2, {0x3C, CHANNEL_5}};
+
+    ::testing::InSequence seq;
+
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 0));
+    MIDIInputElementNote::beginAll();
+
+    EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 255));
+    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7F};
+    MIDIInputElementNote::updateAllWith(midimsg1);
+
+    EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 16));
+    ChannelMessageMatcher midimsg2 = {0x90, CHANNEL_5, 0x3C, 0x08};
+    MIDIInputElementNote::updateAllWith(midimsg2);
+
+    EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 0));
+    ChannelMessageMatcher midimsg3 = {0x80, CHANNEL_5, 0x3C, 0x7F};
+    MIDIInputElementNote::updateAllWith(midimsg3);
+
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}

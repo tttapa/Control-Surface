@@ -1,3 +1,7 @@
+/**
+ * An advanced example with Program Change buttons in different Banks.
+ */
+
 #include <Control_Surface.h>
 
 USBMIDI_Interface midi;

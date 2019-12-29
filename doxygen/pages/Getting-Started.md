@@ -395,7 +395,7 @@ SPIShiftRegisterOut<8> sreg = {
 using namespace MIDI_Notes;
 
 // Create an array of LEDs that listen to MIDI Note messages, turning on and off
-// the LEDs connected to the eight input pins of the shift register
+// the LEDs connected to the eight output pins of the shift register
 NoteValueLED leds[] = {
   {sreg.pin(0), note(C, 4)}, // LED pin, address (note number, channel, cable)
   {sreg.pin(1), note(D, 4)}, //

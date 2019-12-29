@@ -49,7 +49,7 @@ SPIShiftRegisterOut<8> sreg = {
 using namespace MIDI_Notes;
 
 // Create a LED bar driver that listens for MIDI Note C4 that drives
-// the LEDs connected to the eight input pins of the shift register
+// the LEDs connected to the eight output pins of the shift register
 NoteLEDBar<8> leds = { sreg.pins(), note(C, 4) };
 
 // Initialize the Control Surface

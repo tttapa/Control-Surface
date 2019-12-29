@@ -72,9 +72,9 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
 
 /**
  * @brief   A wrapper class for MIDI interfaces sending and receiving
- *          MIDI messages over a Serial port of class T.
+ *          MIDI messages over a Serial port of generic class T.
  *
- * @note    This is a template class because the class of the Serial object
+ * @note    This is a template class because the type of the Serial object
  *          is completely different on different architectures, and they
  *          do not share a common super-class that has a `begin` method.
  * 
@@ -92,8 +92,9 @@ class SerialMIDI_Interface : public StreamMIDI_Interface {
      * @param   baud
      *          The baud rate for the Serial interface.
      */
-    SerialMIDI_Interface(T &serial, unsigned long baud)
+    SerialMIDI_Interface(T &serial, unsigned long baud = MIDI_BAUD)
         : StreamMIDI_Interface(serial), serial(serial), baud(baud) {}
+
     /**
      * @brief   Start the Serial interface at the predefined baud rate.
      */
@@ -106,7 +107,7 @@ class SerialMIDI_Interface : public StreamMIDI_Interface {
 
 /**
  * @brief   A class for MIDI interfaces sending and receiving
- *          MIDI messages over a Serial port of class T.
+ *          MIDI messages over a Hardware Serial port.
  * 
  * @ingroup MIDIInterfaces
  */
@@ -122,7 +123,8 @@ class HardwareSerialMIDI_Interface
      * @param   baud
      *          The baud rate for the serial interface.
      */
-    HardwareSerialMIDI_Interface(HardwareSerial &serial, unsigned long baud)
+    HardwareSerialMIDI_Interface(HardwareSerial &serial,
+                                 unsigned long baud = MIDI_BAUD)
         : SerialMIDI_Interface(serial, baud) {}
 };
 
