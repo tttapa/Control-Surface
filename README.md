@@ -5,7 +5,9 @@
 
 # Control Surface
 
-An Arduino library for MIDI control surfaces (input and output).
+An Arduino library for MIDI control surfaces (input and output).  
+It includes general-purpose MIDI abstraction layer as well, which can be useful
+for any MIDI-related project.
 
 ## Overview
 
