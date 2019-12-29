@@ -104,9 +104,27 @@ class Button {
     /// Return the time (in milliseconds) that the button has been stable for,
     /// compared to the given time point.
     unsigned long stableTime(unsigned long now) const;
-    
+
     /// Return the time (in milliseconds) that the button has been stable for.
     unsigned long stableTime() const;
+
+    /**
+     * @brief   Set the debounce time for all Button%s.
+     * 
+     * @note    This function affects **all** Button objects.
+     * 
+     * @param   debounceTime
+     *          The new debounce time in milliseconds.
+     */
+    static void
+    setDebounceTime(unsigned long debounceTime = BUTTON_DEBOUNCE_TIME) ;
+
+    /**
+     * @brief   Get the debounce time.
+     * @return  The debounce time in milliseconds.
+     * @see     setDebounceTime
+     */
+    static unsigned long getDebounceTime();
 
   private:
     pin_t pin;
@@ -123,7 +141,7 @@ class Button {
 
     /// Edit this in Settings.hpp
     /// @see    BUTTON_DEBOUNCE_TIME
-    constexpr static unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
+    static unsigned long debounceTime;
 };
 
 END_AH_NAMESPACE
