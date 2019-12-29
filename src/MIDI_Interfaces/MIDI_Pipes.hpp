@@ -147,12 +147,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
   public:
     void disconnect();
 
-    void exclusive(cn_t cn, bool exclusive = true) {
-        if (hasSink())
-            sink->lockDownstream(cn, exclusive);
-        if (hasThroughIn())
-            throughIn->lockUpstream(cn, exclusive);
-    }
+    void exclusive(cn_t cn, bool exclusive = true);
 
     bool isLocked(cn_t cn) const { return locks.get(cn); }
 
@@ -217,6 +212,8 @@ inline BidirectionalMIDI_Pipe &operator|(TrueMIDI_SinkSource &sinksource,
     return pipe;
 }
 
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
 template <size_t N, class Pipe = MIDI_Pipe>
 struct MIDI_PipeFactory {
     Pipe pipes[N];
@@ -229,28 +226,46 @@ struct MIDI_PipeFactory {
     }
 };
 
+template <size_t N>
+using BidirectionalMIDI_PipeFactory =
+    MIDI_PipeFactory<N, BidirectionalMIDI_Pipe>;
+
 template <size_t N, class Pipe>
 inline MIDI_Pipe &operator>>(TrueMIDI_Source &source,
-                             MIDI_PipeFactory<N, Pipe> &pipe) {
-    return source >> pipe.getNext();
+                             MIDI_PipeFactory<N, Pipe> &pipe_fact) {
+    return source >> pipe_fact.getNext();
 }
 
 template <size_t N, class Pipe>
-inline TrueMIDI_Sink &operator>>(MIDI_PipeFactory<N, Pipe> &pipe,
+inline TrueMIDI_Sink &operator>>(MIDI_PipeFactory<N, Pipe> &pipe_fact,
                                  TrueMIDI_Sink &sink) {
-    return pipe.getNext() >> sink;
+    return pipe_fact.getNext() >> sink;
 }
 
 template <size_t N, class Pipe>
 inline MIDI_Pipe &operator<<(TrueMIDI_Sink &sink,
-                             MIDI_PipeFactory<N, Pipe> &pipe) {
-    return sink << pipe.getNext();
+                             MIDI_PipeFactory<N, Pipe> &pipe_fact) {
+    return sink << pipe_fact.getNext();
 }
 
 template <size_t N, class Pipe>
-inline TrueMIDI_Source &operator<<(MIDI_PipeFactory<N, Pipe> &pipe,
+inline TrueMIDI_Source &operator<<(MIDI_PipeFactory<N, Pipe> &pipe_fact,
                                    TrueMIDI_Source &source) {
-    return pipe.getNext() << source;
+    return pipe_fact.getNext() << source;
+}
+
+template <size_t N>
+inline TrueMIDI_SinkSource &
+operator|(BidirectionalMIDI_PipeFactory<N> &pipe_fact,
+          TrueMIDI_SinkSource &sinksource) {
+    return pipe_fact.getNext() | sinksource;
+}
+
+template <size_t N>
+inline BidirectionalMIDI_Pipe &
+operator|(TrueMIDI_SinkSource &sinksource,
+          BidirectionalMIDI_PipeFactory<N> &pipe_fact) {
+    return sinksource | pipe_fact.getNext();
 }
 
 END_CS_NAMESPACE

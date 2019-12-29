@@ -1,6 +1,10 @@
 #include "MIDI_Pipes.hpp"
 #include <AH/Error/Error.hpp>
 
+#if defined(ESP32) || !defined(ARDUINO)
+#include <mutex>
+#endif
+
 AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
@@ -51,7 +55,7 @@ void MIDI_Source::exclusive(cn_t cn, bool exclusive) {
 }
 
 bool MIDI_Source::canWrite(cn_t cn) const {
-    return hasSinkPipe() && sinkPipe->isAvailableForWrite(cn);
+    return !hasSinkPipe() || sinkPipe->isAvailableForWrite(cn);
 }
 
 MIDI_Source::~MIDI_Source() { disconnectSinkPipe(); }
@@ -120,6 +124,20 @@ void MIDI_Pipe::disconnect() {
 }
 
 MIDI_Pipe::~MIDI_Pipe() { disconnect(); }
+
+#if defined(ESP32) || !defined(ARDUINO)
+static std::mutex pipe_exclusive_mutex;
+#endif
+
+void MIDI_Pipe::exclusive(cn_t cn, bool exclusive) {
+#if defined(ESP32) || !defined(ARDUINO)
+    std::lock_guard<std::mutex> lock_guard(pipe_exclusive_mutex);
+#endif
+    if (hasSink())
+        sink->lockDownstream(cn, exclusive);
+    if (hasThroughIn())
+        throughIn->lockUpstream(cn, exclusive);
+}
 
 END_CS_NAMESPACE
 

@@ -556,3 +556,78 @@ TEST(MIDI_Pipes, connectPipeToSourceTwice) {
         EXPECT_EQ(e.getErrorCode(), 0x9146);
     }
 }
+
+#include <MIDI_Interfaces/USBMIDI_Interface.hpp>
+#include <MockMIDI_Interface.hpp>
+
+using ::testing::Return;
+
+TEST(MIDI_Pipes, USBInterface) {
+    StrictMock<USBMIDI_Interface> midiA[2];
+    StrictMock<MockMIDI_Interface> midiB[2];
+
+    BidirectionalMIDI_Pipe pipe1;
+    MIDI_Pipe pipe2, pipe3;
+
+    midiA[0] | pipe1 | midiB[0];
+    midiA[1] >> pipe2 >> midiB[0];
+    midiA[1] >> pipe3 >> midiB[1];
+
+    using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
+    EXPECT_CALL(midiA[0], readUSBPacket())
+        .WillOnce(Return(Packet_t{0x54, 0xF0, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t{0x54, 0x77, 0x11, 0x22}))
+        .WillOnce(Return(Packet_t{0x56, 0x33, 0xF7, 0x00}));
+    const uint8_t *sysexData =
+        midiA[0].getSysExMessage().data + 5 * sizeof(SysExBuffer);
+    //                                    ^~~~ CN
+    EXPECT_CALL(midiB[0], sendImpl(sysexData, 8, 5));
+    midiA[0].update();
+
+    EXPECT_CALL(midiA[1], readUSBPacket())
+        .WillOnce(Return(Packet_t{0x94, 0xF0, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
+        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}));
+    sysexData = midiA[1].getSysExMessage().data + 9 * sizeof(SysExBuffer);
+    //                                            ^~~~ CN
+    EXPECT_CALL(midiB[0], sendImpl(sysexData, 7, 9));
+    EXPECT_CALL(midiB[1], sendImpl(sysexData, 7, 9));
+    midiA[1].update();
+}
+
+TEST(MIDI_Pipes, USBInterfaceLock) {
+    StrictMock<USBMIDI_Interface> midiA[2];
+    StrictMock<MockMIDI_Interface> midiB[2];
+
+    BidirectionalMIDI_Pipe pipe1;
+    MIDI_Pipe pipe2, pipe3;
+
+    midiA[0] | pipe1 | midiB[0];
+    midiA[1] >> pipe2 >> midiB[0];
+    midiA[1] >> pipe3 >> midiB[1];
+
+    using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
+    EXPECT_CALL(midiA[1], readUSBPacket())
+        .WillOnce(Return(Packet_t{0x94, 0xF0, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
+        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}));
+
+    // lock pipes of all MIDI interfaces that pipe to the same sinks as midiA[0]
+    // (i.e. midiA[1]) so that midiA[0] has exclusive access.
+    midiA[0].exclusive(9);
+    // shouldn't send anything, sink pipe is locked
+    midiA[1].update();
+
+    ::testing::Mock::VerifyAndClear(&midiB[0]);
+    ::testing::Mock::VerifyAndClear(&midiB[1]);
+
+    // unlock the pipes
+    midiA[0].exclusive(9, false);
+
+    // message is already in buffer, CN is already 9, so getSysExMessage()
+    // returns 9th buffer
+    const uint8_t *sysexData = midiA[1].getSysExMessage().data;
+    EXPECT_CALL(midiB[0], sendImpl(sysexData, 7, 9));
+    EXPECT_CALL(midiB[1], sendImpl(sysexData, 7, 9));
+    midiA[1].update(); // should send old message now
+}
