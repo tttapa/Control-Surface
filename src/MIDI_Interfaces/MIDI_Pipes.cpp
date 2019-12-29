@@ -3,14 +3,6 @@
 
 AH_DIAGNOSTIC_WERROR()
 
-#if defined(ESP32) || !defined(ARDUINO)
-#include <mutex>
-#define GUARD_PIPE_LOCK std::lock_guard<std::mutex> guard_(pipe_mutex)
-static std::mutex pipe_mutex;
-#else
-#define GUARD_PIPE_LOCK
-#endif
-
 BEGIN_CS_NAMESPACE
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -53,23 +45,29 @@ void MIDI_Source::disconnectSinkPipe() {
     }
 }
 
+void MIDI_Source::exclusive(cn_t cn, bool exclusive) {
+    if (hasSinkPipe())
+        sinkPipe->exclusive(cn, exclusive);
+}
+
+bool MIDI_Source::canWrite(cn_t cn) const {
+    return hasSinkPipe() && sinkPipe->isAvailableForWrite(cn);
+}
+
 MIDI_Source::~MIDI_Source() { disconnectSinkPipe(); }
 
 void MIDI_Source::sourceMIDItoPipe(ChannelMessage msg) {
     if (sinkPipe != nullptr) {
-        GUARD_PIPE_LOCK;
         sinkPipe->pipeMIDI(msg);
     }
 }
 void MIDI_Source::sourceMIDItoPipe(SysExMessage msg) {
     if (sinkPipe != nullptr) {
-        GUARD_PIPE_LOCK;
         sinkPipe->pipeMIDI(msg);
     }
 }
 void MIDI_Source::sourceMIDItoPipe(RealTimeMessage msg) {
     if (sinkPipe != nullptr) {
-        GUARD_PIPE_LOCK;
         sinkPipe->pipeMIDI(msg);
     }
 }
@@ -118,7 +116,7 @@ void MIDI_Pipe::disconnect() {
         source->disconnectSinkPipe();
 
     if (hasThroughIn() || hasThroughOut())
-        FATAL_ERROR(F("Invalid state"), 0x9147); //LCOV_EXCL_LINE
+        FATAL_ERROR(F("Invalid state"), 0x9147); // LCOV_EXCL_LINE
 }
 
 MIDI_Pipe::~MIDI_Pipe() { disconnect(); }
