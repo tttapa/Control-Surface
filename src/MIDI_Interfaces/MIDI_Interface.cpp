@@ -112,6 +112,24 @@ void MIDI_Interface::send(uint8_t rt, uint8_t cn) {
     }
 }
 
+void MIDI_Interface::send(RealTimeMessage message) {
+    send(message.message, message.CN);
+}
+
+void MIDI_Interface::send(ChannelMessage message) {
+    uint8_t m = message.header & 0xF0; // message type
+    uint8_t c = message.header & 0x0F; // channel
+    // TODO: optimize header?
+    if (m != PROGRAM_CHANGE && m != CHANNEL_PRESSURE)
+        sendImpl(m, c, message.data1, message.data2, message.CN);
+    else
+        sendImpl(m, c, message.data1, message.CN);
+}
+
+void MIDI_Interface::sinkMIDIfromPipe(ChannelMessage msg) { send(msg); }
+void MIDI_Interface::sinkMIDIfromPipe(SysExMessage msg) { send(msg); }
+void MIDI_Interface::sinkMIDIfromPipe(RealTimeMessage msg) { send(msg); }
+
 // -------------------------------- PARSING --------------------------------- //
 
 Parsing_MIDI_Interface::Parsing_MIDI_Interface(MIDI_Parser &parser)
@@ -130,11 +148,11 @@ uint8_t Parsing_MIDI_Interface::getCN() const { return parser.getCN(); }
 // -------------------------------- READING --------------------------------- //
 
 void Parsing_MIDI_Interface::update() {
-    bool repeat = true;
-    while (repeat) {
-        MIDI_read_t event = read();
-        repeat = dispatchMIDIEvent(event);
-    }
+    if (event == NO_MESSAGE)      // If previous event was handled
+        event = read();           // Read the next event
+    if (dispatchMIDIEvent(event)) // If handled successfully
+        event = NO_MESSAGE;       // Read again next time around
+    // TODO: Should I read multiple messages here to prevent USB lockup?
 }
 
 #pragma GCC diagnostic push
@@ -142,28 +160,43 @@ void Parsing_MIDI_Interface::update() {
 
 bool Parsing_MIDI_Interface::dispatchMIDIEvent(MIDI_read_t event) {
     switch (event) {
-        case NO_MESSAGE: return false;
-        case CHANNEL_MESSAGE: onChannelMessage(); return true;
-        case SYSEX_MESSAGE: onSysExMessage(); return true;
-        default: onRealtimeMessage(static_cast<uint8_t>(event)); return true;
+        case NO_MESSAGE: return true;
+        case CHANNEL_MESSAGE: return onChannelMessage();
+        case SYSEX_MESSAGE: return onSysExMessage();
+        default: return onRealtimeMessage(static_cast<uint8_t>(event));
     }
 }
 
 #pragma GCC diagnostic pop
 
-void Parsing_MIDI_Interface::onRealtimeMessage(uint8_t message) {
+bool Parsing_MIDI_Interface::onRealtimeMessage(uint8_t message) {
+    // Always send write to pipe, don't check if it's in exclusive mode or not
+    sourceMIDItoPipe(RealTimeMessage{message, getCN()});
     if (callbacks)
         callbacks->onRealtimeMessage(*this, message);
+    return true;
 }
 
-void Parsing_MIDI_Interface::onChannelMessage() {
+bool Parsing_MIDI_Interface::onChannelMessage() {
+    auto message = getChannelMessage();
+    if (!canWrite(message.CN))
+        return false;
+    sourceMIDItoPipe(message);
     if (callbacks)
         callbacks->onChannelMessage(*this);
+    // TODO: we have the message already, should we just pass it to the
+    //       callback as a parameter? (idem for SysEx and RT)
+    return true;
 }
 
-void Parsing_MIDI_Interface::onSysExMessage() {
+bool Parsing_MIDI_Interface::onSysExMessage() {
+    auto message = getSysExMessage();
+    if (!canWrite(message.CN))
+        return false;
+    sourceMIDItoPipe(message);
     if (callbacks)
         callbacks->onSysExMessage(*this);
+    return true;
 }
 
 END_CS_NAMESPACE

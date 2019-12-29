@@ -6,6 +6,10 @@
 #include <MIDI_Parsers/SerialMIDI_Parser.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
+#if defined(ESP32) || !defined(ARDUINO)
+#include <mutex>
+#endif
+
 BEGIN_CS_NAMESPACE
 
 /**
@@ -25,6 +29,9 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
     StreamMIDI_Interface(Stream &stream)
         : Parsing_MIDI_Interface(parser), stream(stream) {}
 
+    StreamMIDI_Interface(const StreamMIDI_Interface &other)
+        : Parsing_MIDI_Interface(other), stream(other.stream) {}
+
     MIDI_read_t read() override {
         while (stream.available() > 0) {
             uint8_t midiByte = stream.read();
@@ -40,6 +47,9 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
 
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
                   uint8_t cn) override {
+#if defined(ESP32) || !defined(ARDUINO)
+        std::lock_guard<std::mutex> lock(mutex);
+#endif
         (void)cn;
         stream.write(m | c); // Send the MIDI message over the stream
         stream.write(d1);
@@ -48,6 +58,9 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
     }
 
     void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
+#if defined(ESP32) || !defined(ARDUINO)
+        std::lock_guard<std::mutex> lock(mutex);
+#endif
         (void)cn;
         stream.write(m | c); // Send the MIDI message over the stream
         stream.write(d1);
@@ -55,12 +68,18 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
     }
 
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
+#if defined(ESP32) || !defined(ARDUINO)
+        std::lock_guard<std::mutex> lock(mutex);
+#endif
         (void)cn;
         stream.write(data, length);
         // stream.flush(); // TODO
     }
 
     void sendImpl(uint8_t rt, uint8_t cn) override {
+#if defined(ESP32) || !defined(ARDUINO)
+        std::lock_guard<std::mutex> lock(mutex);
+#endif
         (void)cn;
         stream.write(rt); // Send the MIDI message over the stream
         // stream.flush(); // TODO
@@ -68,6 +87,9 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
 
   protected:
     Stream &stream;
+#if defined(ESP32) || !defined(ARDUINO)
+    std::mutex mutex;
+#endif
 };
 
 /**
@@ -93,15 +115,14 @@ class SerialMIDI_Interface : public StreamMIDI_Interface {
      *          The baud rate for the Serial interface.
      */
     SerialMIDI_Interface(T &serial, unsigned long baud = MIDI_BAUD)
-        : StreamMIDI_Interface(serial), serial(serial), baud(baud) {}
+        : StreamMIDI_Interface(serial), baud(baud) {}
 
     /**
      * @brief   Start the Serial interface at the predefined baud rate.
      */
-    void begin() override { serial.begin(baud); }
+    void begin() override { static_cast<T &>(stream).begin(baud); }
 
   private:
-    T &serial;
     const unsigned long baud;
 };
 
