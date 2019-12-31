@@ -779,7 +779,7 @@ TEST(MIDI_Pipes, disconnectSourceFromSink) {
     }
 }
 
-TEST(MIDI_Pipes, DISABLED_disconnectSinkFromSource) {
+TEST(MIDI_Pipes, disconnectSinkFromSource) {
     {
         TrueMIDI_Source sources[2];
         MIDI_PipeFactory<5> pipes;
@@ -799,8 +799,9 @@ TEST(MIDI_Pipes, DISABLED_disconnectSinkFromSource) {
         ASSERT_FALSE(sinks[3].hasSourcePipe());
         ASSERT_EQ(sinks[1].getSourcePipe()->getInitialSource(), //
                   &sources[1]);
-        ASSERT_EQ(sinks[1].getSourcePipe()->getThroughOut()->getInitialSource(), //
-                  &sources[0]);
+        ASSERT_EQ(
+            sinks[1].getSourcePipe()->getThroughIn()->getInitialSource(), //
+            &sources[0]);
         ASSERT_EQ(sinks[0].getSourcePipe()->getInitialSource(), //
                   &sources[0]);
         ASSERT_EQ(sinks[2].getSourcePipe()->getInitialSource(), //
@@ -829,8 +830,9 @@ TEST(MIDI_Pipes, DISABLED_disconnectSinkFromSource) {
         ASSERT_FALSE(sinks[2].hasSourcePipe());
         ASSERT_EQ(sinks[1].getSourcePipe()->getInitialSource(), //
                   &sources[1]);
-        ASSERT_EQ(sinks[1].getSourcePipe()->getThroughOut()->getInitialSource(), //
-                  &sources[0]);
+        ASSERT_EQ(
+            sinks[1].getSourcePipe()->getThroughIn()->getInitialSource(), //
+            &sources[0]);
         ASSERT_EQ(sinks[0].getSourcePipe()->getInitialSource(), //
                   &sources[0]);
         ASSERT_EQ(sinks[3].getSourcePipe()->getInitialSource(), //
@@ -868,7 +870,7 @@ TEST(MIDI_Pipes, DISABLED_disconnectSinkFromSource) {
                   nullptr);
     }
     {
-       TrueMIDI_Source sources[2];
+        TrueMIDI_Source sources[2];
         MIDI_PipeFactory<5> pipes;
         StrictMock<MockMIDI_Sink> sinks[4];
 
@@ -913,8 +915,9 @@ TEST(MIDI_Pipes, DISABLED_disconnectSinkFromSource) {
         ASSERT_FALSE(sinks[0].hasSourcePipe());
         ASSERT_EQ(sinks[1].getSourcePipe()->getInitialSource(), //
                   &sources[1]);
-        ASSERT_EQ(sinks[1].getSourcePipe()->getThroughOut()->getInitialSource(), //
-                  &sources[0]);
+        ASSERT_EQ(
+            sinks[1].getSourcePipe()->getThroughIn()->getInitialSource(), //
+            &sources[0]);
         ASSERT_EQ(sinks[0].getSourcePipe(), //
                   nullptr);
         ASSERT_EQ(sinks[3].getSourcePipe()->getInitialSource(), //
