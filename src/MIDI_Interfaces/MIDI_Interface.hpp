@@ -21,6 +21,8 @@ class MIDI_Interface : public TrueMIDI_SinkSource {
      */
     MIDI_Interface();
 
+    MIDI_Interface(MIDI_Interface &&);
+
   public:
     /**
      * @brief   Destructor.

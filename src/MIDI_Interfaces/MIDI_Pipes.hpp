@@ -1,9 +1,9 @@
 #pragma once
 
 #include <AH/Containers/BitArray.hpp>
+#include <AH/STL/utility>
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
-
 #include <MIDI_Parsers/MIDI_MessageTypes.hpp>
 
 AH_DIAGNOSTIC_WERROR()
@@ -16,6 +16,7 @@ class MIDI_Pipe;
 struct TrueMIDI_Sink;
 struct TrueMIDI_Source;
 
+/// Class that can receive MIDI messages from a MIDI pipe.
 class MIDI_Sink {
   public:
     /// Accept an incoming MIDI Channel message.
@@ -25,6 +26,20 @@ class MIDI_Sink {
     /// Accept an incoming MIDI Real-Time message.
     virtual void sinkMIDIfromPipe(RealTimeMessage) = 0;
 
+    /// Default constructor.
+    MIDI_Sink() = default;
+
+    /// Copy constructor.
+    MIDI_Sink(const MIDI_Sink &) = delete;
+    /// Copy assignment.
+    MIDI_Sink &operator=(const MIDI_Sink &) = delete;
+
+    /// Move constructor.
+    MIDI_Sink(MIDI_Sink &&other);
+    /// Move assignment.
+    MIDI_Sink &operator=(MIDI_Sink &&other);
+
+    /// Destructor.
     virtual ~MIDI_Sink();
 
     void connectSourcePipe(MIDI_Pipe *source);
@@ -51,6 +66,7 @@ class MIDI_Sink {
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
+/// Class that can send MIDI messages to a MIDI pipe.
 class MIDI_Source {
   public:
     /// Send a MIDI Channel Message.
@@ -60,6 +76,20 @@ class MIDI_Source {
     /// Send a MIDI Real-Time message.
     void sourceMIDItoPipe(RealTimeMessage);
 
+    /// Default constructor.
+    MIDI_Source() = default;
+
+    /// Copy constructor.
+    MIDI_Source(const MIDI_Source &) = delete;
+    /// Copy assignment.
+    MIDI_Source &operator=(const MIDI_Source &) = delete;
+
+    /// Move constructor.
+    MIDI_Source(MIDI_Source &&other);
+    /// Move assignment.
+    MIDI_Source &operator=(MIDI_Source &&other);
+
+    /// Destructor.
     virtual ~MIDI_Source();
 
     void connectSinkPipe(MIDI_Pipe *sink);
@@ -227,48 +257,91 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
-struct BidirectionalMIDI_Pipe {
-    MIDI_Pipe dir1, dir2;
-};
-
 struct TrueMIDI_SinkSource : TrueMIDI_Sink, TrueMIDI_Source {};
 
+/**
+ * @addtogroup MIDI_Routing MIDI Routing
+ * @brief   Operators and utilities for MIDI routing.
+ * 
+ * Allows you to use syntax like:
+ * 
+ * ~~~cpp
+ * HardwareSerialMIDI_Interface 
+ *     midiA = Serial1, midiB = Serial2, midiC = Serial3;
+ * MIDI_PipeFactory<3> pipes; // Factory that can produce 3 pipes
+ * 
+ * midiA >> pipes >> midiB;
+ * midiC >> pipes >> midiB;
+ * midiC << pipes << midiB;
+ * ~~~
+ * 
+ * Or for bidirectional connections:
+ * 
+ * ~~~cpp
+ * HardwareSerialMIDI_Interface 
+ *     midiA = Serial1, midiB = Serial2, midiC = Serial3;
+ * BidirectionalMIDI_PipeFactory<2> pipes; // Factory that can produce 2 pipes
+ * 
+ * midiA | pipes | midiB;
+ * midiA | pipes | midiC;
+ * ~~~
+ * 
+ * @{ 
+ */
+
+/// A bidirectional pipe consists of two unidirectional pipes.
+using BidirectionalMIDI_Pipe = std::pair<MIDI_Pipe, MIDI_Pipe>;
+
+/// Connect a source to a pipe (`source >> pipe`).
 inline MIDI_Pipe &operator>>(TrueMIDI_Source &source, MIDI_Pipe &pipe) {
     source.connectSinkPipe(&pipe);
     return pipe;
 }
 
+/// Connect a pipe to a sink (`pipe >> sink`).
 inline TrueMIDI_Sink &operator>>(MIDI_Pipe &pipe, TrueMIDI_Sink &sink) {
     sink.connectSourcePipe(&pipe);
     return sink;
 }
 
+/// Connect a sink to a pipe (`sink << pipe`).
 inline MIDI_Pipe &operator<<(TrueMIDI_Sink &sink, MIDI_Pipe &pipe) {
     sink.connectSourcePipe(&pipe);
     return pipe;
 }
 
+/// Connect a pipe to a source (`pipe << source`).
 inline TrueMIDI_Source &operator<<(MIDI_Pipe &pipe, TrueMIDI_Source &source) {
     source.connectSinkPipe(&pipe);
     return source;
 }
 
+/// Connect a pipe to a sink+source (`pipe | source+sink`).
 inline TrueMIDI_SinkSource &operator|(BidirectionalMIDI_Pipe &pipe,
                                       TrueMIDI_SinkSource &sinksource) {
-    sinksource.connectSinkPipe(&pipe.dir1);
-    sinksource.connectSourcePipe(&pipe.dir2);
+    sinksource.connectSinkPipe(&pipe.first);
+    sinksource.connectSourcePipe(&pipe.second);
     return sinksource;
 }
 
+/// Connect a sink+source to a pipe (`source+sink | pipe`).
 inline BidirectionalMIDI_Pipe &operator|(TrueMIDI_SinkSource &sinksource,
                                          BidirectionalMIDI_Pipe &pipe) {
-    sinksource.connectSinkPipe(&pipe.dir2);
-    sinksource.connectSourcePipe(&pipe.dir1);
+    sinksource.connectSinkPipe(&pipe.second);
+    sinksource.connectSourcePipe(&pipe.first);
     return pipe;
 }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
+/**
+ * @brief   Class that produces multiple MIDI_Pipe%s.
+ * 
+ * @tparam  N 
+ *          The maximum number of pipes it can produce.
+ * @tparam  Pipe 
+ *          The type of pipes to produce.
+ */
 template <size_t N, class Pipe = MIDI_Pipe>
 struct MIDI_PipeFactory {
     Pipe pipes[N];
@@ -324,6 +397,8 @@ operator|(TrueMIDI_SinkSource &sinksource,
           BidirectionalMIDI_PipeFactory<N> &pipe_fact) {
     return sinksource | pipe_fact.getNext();
 }
+
+/// @}
 
 END_CS_NAMESPACE
 

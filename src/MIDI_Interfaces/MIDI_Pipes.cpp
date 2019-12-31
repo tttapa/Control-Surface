@@ -1,5 +1,6 @@
 #include "MIDI_Pipes.hpp"
 #include <AH/Error/Error.hpp>
+#include <AH/STL/utility>
 
 #if defined(ESP32) || !defined(ARDUINO)
 #include <mutex>
@@ -43,6 +44,27 @@ bool MIDI_Sink::disconnect(TrueMIDI_Source &source) {
 
 MIDI_Sink::~MIDI_Sink() { disconnectSourcePipes(); }
 
+MIDI_Sink::MIDI_Sink(MIDI_Sink &&other)
+    : sourcePipe(std::exchange(other.sourcePipe, nullptr)) {
+    if (this->hasSourcePipe()) {
+        this->sourcePipe->disconnectSink();
+        this->sourcePipe->connectSink(this);
+    }
+}
+
+MIDI_Sink &MIDI_Sink::operator=(MIDI_Sink &&other) {
+    std::swap(this->sourcePipe, other.sourcePipe);
+    if (this->hasSourcePipe()) {
+        this->sourcePipe->disconnectSink();
+        this->sourcePipe->connectSink(this);
+    }
+    if (other.hasSourcePipe()) {
+        other.sourcePipe->disconnectSink();
+        other.sourcePipe->connectSink(this);
+    }
+    return *this;
+}
+
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 void MIDI_Source::connectSinkPipe(MIDI_Pipe *sink) {
@@ -75,6 +97,29 @@ bool MIDI_Source::disconnect(TrueMIDI_Sink &sink) {
     return sinkPipe->disconnect(sink);
 }
 
+MIDI_Source::MIDI_Source(MIDI_Source &&other)
+    : sinkPipe(std::exchange(other.sinkPipe, nullptr)) {
+    if (this->hasSinkPipe()) {
+        this->sinkPipe->disconnectSource();
+        this->sinkPipe->connectSource(this);
+    }
+}
+
+MIDI_Source &MIDI_Source::operator=(MIDI_Source &&other) {
+    std::swap(this->sinkPipe, other.sinkPipe);
+    if (this->hasSinkPipe()) {
+        this->sinkPipe->disconnectSource();
+        this->sinkPipe->connectSource(this);
+    }
+    if (other.hasSinkPipe()) {
+        other.sinkPipe->disconnectSource();
+        other.sinkPipe->connectSource(this);
+    }
+    return *this;
+}
+
+MIDI_Source::~MIDI_Source() { disconnectSinkPipes(); }
+
 void MIDI_Source::exclusive(cn_t cn, bool exclusive) {
     if (hasSinkPipe())
         sinkPipe->exclusive(cn, exclusive);
@@ -83,8 +128,6 @@ void MIDI_Source::exclusive(cn_t cn, bool exclusive) {
 bool MIDI_Source::canWrite(cn_t cn) const {
     return !hasSinkPipe() || sinkPipe->isAvailableForWrite(cn);
 }
-
-MIDI_Source::~MIDI_Source() { disconnectSinkPipes(); }
 
 void MIDI_Source::sourceMIDItoPipe(ChannelMessage msg) {
     if (sinkPipe != nullptr) {
