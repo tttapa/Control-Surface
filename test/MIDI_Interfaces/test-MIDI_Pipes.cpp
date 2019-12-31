@@ -379,7 +379,7 @@ TEST(MIDI_Pipes, disconnectSource1) {
     source2 >> pipe3 >> sink1;
     source2 >> pipe4 >> sink2;
 
-    source1.disconnectSinkPipe();
+    source1.disconnectSinkPipes();
 
     EXPECT_FALSE(source1.hasSinkPipe());
     EXPECT_TRUE(source2.hasSinkPipe());
@@ -420,7 +420,7 @@ TEST(MIDI_Pipes, disconnectSink1) {
     source2 >> pipe3 >> sink1;
     source2 >> pipe4 >> sink2;
 
-    sink1.disconnectSourcePipe();
+    sink1.disconnectSourcePipes();
 
     EXPECT_TRUE(source1.hasSinkPipe());
     EXPECT_TRUE(source2.hasSinkPipe());
@@ -630,4 +630,298 @@ TEST(MIDI_Pipes, USBInterfaceLock) {
     EXPECT_CALL(midiB[0], sendImpl(sysexData, 7, 9));
     EXPECT_CALL(midiB[1], sendImpl(sysexData, 7, 9));
     midiA[1].update(); // should send old message now
+}
+
+TEST(MIDI_Pipes, disconnectSourceFromSink) {
+    {
+        StrictMock<MockMIDI_Sink> sinks[2];
+        MIDI_PipeFactory<5> pipes;
+        TrueMIDI_Source sources[4];
+
+        sources[1] >> pipes >> sinks[1];
+        sources[1] >> pipes >> sinks[0];
+
+        sources[0] >> pipes >> sinks[0];
+
+        sources[2] >> pipes >> sinks[1];
+        sources[3] >> pipes >> sinks[1];
+
+        ASSERT_FALSE(sources[3].disconnect(sinks[0]));
+        ASSERT_TRUE(sources[3].disconnect(sinks[1]));
+        ASSERT_FALSE(sources[3].disconnect(sinks[1]));
+        ASSERT_FALSE(sources[3].hasSinkPipe());
+        ASSERT_EQ(sources[1].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(sources[1].getSinkPipe()->getThroughOut()->getFinalSink(), //
+                  &sinks[0]);
+        ASSERT_EQ(sources[0].getSinkPipe()->getFinalSink(), //
+                  &sinks[0]);
+        ASSERT_EQ(sources[2].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(sources[3].getSinkPipe(), //
+                  nullptr);
+        ASSERT_EQ(pipes[4].getFinalSink(), //
+                  nullptr);
+    }
+    {
+        StrictMock<MockMIDI_Sink> sinks[2];
+        MIDI_PipeFactory<5> pipes;
+        TrueMIDI_Source sources[4];
+
+        sources[1] >> pipes >> sinks[1];
+        sources[1] >> pipes >> sinks[0];
+
+        sources[0] >> pipes >> sinks[0];
+
+        sources[2] >> pipes >> sinks[1];
+        sources[3] >> pipes >> sinks[1];
+
+        ASSERT_FALSE(sources[2].disconnect(sinks[0]));
+        ASSERT_TRUE(sources[2].disconnect(sinks[1]));
+        ASSERT_FALSE(sources[2].disconnect(sinks[1]));
+        ASSERT_FALSE(sources[2].hasSinkPipe());
+        ASSERT_EQ(sources[1].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(sources[1].getSinkPipe()->getThroughOut()->getFinalSink(), //
+                  &sinks[0]);
+        ASSERT_EQ(sources[0].getSinkPipe()->getFinalSink(), //
+                  &sinks[0]);
+        ASSERT_EQ(sources[3].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(sources[2].getSinkPipe(), //
+                  nullptr);
+        ASSERT_EQ(pipes[3].getFinalSink(), //
+                  nullptr);
+    }
+    {
+        StrictMock<MockMIDI_Sink> sinks[2];
+        MIDI_PipeFactory<5> pipes;
+        TrueMIDI_Source sources[4];
+
+        sources[1] >> pipes >> sinks[1];
+        sources[1] >> pipes >> sinks[0];
+
+        sources[0] >> pipes >> sinks[0];
+
+        sources[2] >> pipes >> sinks[1];
+        sources[3] >> pipes >> sinks[1];
+
+        ASSERT_TRUE(sources[1].disconnect(sinks[1]));
+        ASSERT_FALSE(sources[1].disconnect(sinks[1]));
+        ASSERT_TRUE(sources[1].hasSinkPipe());
+        ASSERT_EQ(sources[1].getSinkPipe()->getFinalSink(), //
+                  &sinks[0]);
+        ASSERT_EQ(sources[0].getSinkPipe()->getFinalSink(), //
+                  &sinks[0]);
+        ASSERT_EQ(sources[3].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(sources[2].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(pipes[0].getFinalSink(), //
+                  nullptr);
+    }
+    {
+        StrictMock<MockMIDI_Sink> sinks[2];
+        MIDI_PipeFactory<5> pipes;
+        TrueMIDI_Source sources[4];
+
+        sources[1] >> pipes >> sinks[1];
+        sources[1] >> pipes >> sinks[0];
+
+        sources[0] >> pipes >> sinks[0];
+
+        sources[2] >> pipes >> sinks[1];
+        sources[3] >> pipes >> sinks[1];
+
+        ASSERT_TRUE(sources[1].disconnect(sinks[0]));
+        ASSERT_FALSE(sources[1].disconnect(sinks[0]));
+        ASSERT_TRUE(sources[1].hasSinkPipe());
+        ASSERT_EQ(sources[1].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(sources[0].getSinkPipe()->getFinalSink(), //
+                  &sinks[0]);
+        ASSERT_EQ(sources[3].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(sources[2].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(pipes[1].getFinalSink(), //
+                  nullptr);
+    }
+    {
+        StrictMock<MockMIDI_Sink> sinks[2];
+        MIDI_PipeFactory<5> pipes;
+        TrueMIDI_Source sources[4];
+
+        sources[1] >> pipes >> sinks[1];
+        sources[1] >> pipes >> sinks[0];
+
+        sources[0] >> pipes >> sinks[0];
+
+        sources[2] >> pipes >> sinks[1];
+        sources[3] >> pipes >> sinks[1];
+
+        ASSERT_FALSE(sources[0].disconnect(sinks[1]));
+        ASSERT_TRUE(sources[0].disconnect(sinks[0]));
+        ASSERT_FALSE(sources[0].disconnect(sinks[0]));
+        ASSERT_FALSE(sources[0].hasSinkPipe());
+        ASSERT_EQ(sources[1].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(sources[1].getSinkPipe()->getThroughOut()->getFinalSink(), //
+                  &sinks[0]);
+        ASSERT_EQ(sources[0].getSinkPipe(), //
+                  nullptr);
+        ASSERT_EQ(sources[3].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(sources[2].getSinkPipe()->getFinalSink(), //
+                  &sinks[1]);
+        ASSERT_EQ(pipes[2].getFinalSink(), //
+                  nullptr);
+    }
+}
+
+TEST(MIDI_Pipes, DISABLED_disconnectSinkFromSource) {
+    {
+        TrueMIDI_Source sources[2];
+        MIDI_PipeFactory<5> pipes;
+        StrictMock<MockMIDI_Sink> sinks[4];
+
+        sinks[1] << pipes << sources[1];
+        sinks[1] << pipes << sources[0];
+
+        sinks[0] << pipes << sources[0];
+
+        sinks[2] << pipes << sources[1];
+        sinks[3] << pipes << sources[1];
+
+        ASSERT_FALSE(sinks[3].disconnect(sources[0]));
+        ASSERT_TRUE(sinks[3].disconnect(sources[1]));
+        ASSERT_FALSE(sinks[3].disconnect(sources[1]));
+        ASSERT_FALSE(sinks[3].hasSourcePipe());
+        ASSERT_EQ(sinks[1].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(sinks[1].getSourcePipe()->getThroughOut()->getInitialSource(), //
+                  &sources[0]);
+        ASSERT_EQ(sinks[0].getSourcePipe()->getInitialSource(), //
+                  &sources[0]);
+        ASSERT_EQ(sinks[2].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(sinks[3].getSourcePipe(), //
+                  nullptr);
+        ASSERT_EQ(pipes[4].getInitialSource(), //
+                  nullptr);
+    }
+    {
+        TrueMIDI_Source sources[2];
+        MIDI_PipeFactory<5> pipes;
+        StrictMock<MockMIDI_Sink> sinks[4];
+
+        sinks[1] << pipes << sources[1];
+        sinks[1] << pipes << sources[0];
+
+        sinks[0] << pipes << sources[0];
+
+        sinks[2] << pipes << sources[1];
+        sinks[3] << pipes << sources[1];
+
+        ASSERT_FALSE(sinks[2].disconnect(sources[0]));
+        ASSERT_TRUE(sinks[2].disconnect(sources[1]));
+        ASSERT_FALSE(sinks[2].disconnect(sources[1]));
+        ASSERT_FALSE(sinks[2].hasSourcePipe());
+        ASSERT_EQ(sinks[1].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(sinks[1].getSourcePipe()->getThroughOut()->getInitialSource(), //
+                  &sources[0]);
+        ASSERT_EQ(sinks[0].getSourcePipe()->getInitialSource(), //
+                  &sources[0]);
+        ASSERT_EQ(sinks[3].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(sinks[2].getSourcePipe(), //
+                  nullptr);
+        ASSERT_EQ(pipes[3].getInitialSource(), //
+                  nullptr);
+    }
+    {
+        TrueMIDI_Source sources[2];
+        MIDI_PipeFactory<5> pipes;
+        StrictMock<MockMIDI_Sink> sinks[4];
+
+        sinks[1] << pipes << sources[1];
+        sinks[1] << pipes << sources[0];
+
+        sinks[0] << pipes << sources[0];
+
+        sinks[2] << pipes << sources[1];
+        sinks[3] << pipes << sources[1];
+
+        ASSERT_TRUE(sinks[1].disconnect(sources[1]));
+        ASSERT_FALSE(sinks[1].disconnect(sources[1]));
+        ASSERT_TRUE(sinks[1].hasSourcePipe());
+        ASSERT_EQ(sinks[1].getSourcePipe()->getInitialSource(), //
+                  &sources[0]);
+        ASSERT_EQ(sinks[0].getSourcePipe()->getInitialSource(), //
+                  &sources[0]);
+        ASSERT_EQ(sinks[3].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(sinks[2].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(pipes[0].getInitialSource(), //
+                  nullptr);
+    }
+    {
+       TrueMIDI_Source sources[2];
+        MIDI_PipeFactory<5> pipes;
+        StrictMock<MockMIDI_Sink> sinks[4];
+
+        sinks[1] << pipes << sources[1];
+        sinks[1] << pipes << sources[0];
+
+        sinks[0] << pipes << sources[0];
+
+        sinks[2] << pipes << sources[1];
+        sinks[3] << pipes << sources[1];
+
+        ASSERT_TRUE(sinks[1].disconnect(sources[0]));
+        ASSERT_FALSE(sinks[1].disconnect(sources[0]));
+        ASSERT_TRUE(sinks[1].hasSourcePipe());
+        ASSERT_EQ(sinks[1].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(sinks[0].getSourcePipe()->getInitialSource(), //
+                  &sources[0]);
+        ASSERT_EQ(sinks[3].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(sinks[2].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(pipes[1].getInitialSource(), //
+                  nullptr);
+    }
+    {
+        TrueMIDI_Source sources[2];
+        MIDI_PipeFactory<5> pipes;
+        StrictMock<MockMIDI_Sink> sinks[4];
+
+        sinks[1] << pipes << sources[1];
+        sinks[1] << pipes << sources[0];
+
+        sinks[0] << pipes << sources[0];
+
+        sinks[2] << pipes << sources[1];
+        sinks[3] << pipes << sources[1];
+
+        ASSERT_FALSE(sinks[0].disconnect(sources[1]));
+        ASSERT_TRUE(sinks[0].disconnect(sources[0]));
+        ASSERT_FALSE(sinks[0].disconnect(sources[0]));
+        ASSERT_FALSE(sinks[0].hasSourcePipe());
+        ASSERT_EQ(sinks[1].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(sinks[1].getSourcePipe()->getThroughOut()->getInitialSource(), //
+                  &sources[0]);
+        ASSERT_EQ(sinks[0].getSourcePipe(), //
+                  nullptr);
+        ASSERT_EQ(sinks[3].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(sinks[2].getSourcePipe()->getInitialSource(), //
+                  &sources[1]);
+        ASSERT_EQ(pipes[2].getInitialSource(), //
+                  nullptr);
+    }
 }

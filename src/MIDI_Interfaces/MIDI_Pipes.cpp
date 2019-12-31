@@ -20,15 +20,28 @@ void MIDI_Sink::connectSourcePipe(MIDI_Pipe *source) {
     }
 }
 
-void MIDI_Sink::disconnectSourcePipe() {
+void MIDI_Sink::disconnectSourcePipes() {
     if (sourcePipe != nullptr) {
-        sourcePipe->disconnectSourcePipe();
+        sourcePipe->disconnectSourcePipes();
         sourcePipe->disconnectSink();
         sourcePipe = nullptr;
     }
 }
 
-MIDI_Sink::~MIDI_Sink() { disconnectSourcePipe(); }
+void MIDI_Sink::disconnectSourcePipesShallow() {
+    if (sourcePipe != nullptr) {
+        sourcePipe->disconnectSink();
+        sourcePipe = nullptr;
+    }
+}
+
+bool MIDI_Sink::disconnect(TrueMIDI_Source &source) {
+    if (!hasSourcePipe())
+        return false;
+    return sourcePipe->disconnect(source);
+}
+
+MIDI_Sink::~MIDI_Sink() { disconnectSourcePipes(); }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
@@ -41,12 +54,25 @@ void MIDI_Source::connectSinkPipe(MIDI_Pipe *sink) {
     }
 }
 
-void MIDI_Source::disconnectSinkPipe() {
+void MIDI_Source::disconnectSinkPipes() {
     if (sinkPipe != nullptr) {
-        sinkPipe->disconnectSinkPipe();
+        sinkPipe->disconnectSinkPipes();
         sinkPipe->disconnectSource();
         sinkPipe = nullptr;
     }
+}
+
+void MIDI_Source::disconnectSinkPipesShallow() {
+    if (sinkPipe != nullptr) {
+        sinkPipe->disconnectSource();
+        sinkPipe = nullptr;
+    }
+}
+
+bool MIDI_Source::disconnect(TrueMIDI_Sink &sink) {
+    if (!hasSinkPipe())
+        return false;
+    return sinkPipe->disconnect(sink);
 }
 
 void MIDI_Source::exclusive(cn_t cn, bool exclusive) {
@@ -58,7 +84,7 @@ bool MIDI_Source::canWrite(cn_t cn) const {
     return !hasSinkPipe() || sinkPipe->isAvailableForWrite(cn);
 }
 
-MIDI_Source::~MIDI_Source() { disconnectSinkPipe(); }
+MIDI_Source::~MIDI_Source() { disconnectSinkPipes(); }
 
 void MIDI_Source::sourceMIDItoPipe(ChannelMessage msg) {
     if (sinkPipe != nullptr) {
@@ -102,22 +128,22 @@ void MIDI_Pipe::disconnect() {
     if (hasSink() && hasThroughIn()) {
         auto oldSink = sink;
         auto oldThroughIn = throughIn;
-        sink->disconnectSourcePipe();
-        this->disconnectSourcePipe(); // disconnect throughIn
+        sink->disconnectSourcePipesShallow();
+        this->disconnectSourcePipesShallow(); // disconnect throughIn
         oldSink->connectSourcePipe(oldThroughIn);
     }
     if (hasSource() && hasThroughOut()) {
         auto oldSource = source;
         auto oldThroughOut = throughOut;
-        source->disconnectSinkPipe();
-        this->disconnectSinkPipe(); // disconnect throughOut
+        source->disconnectSinkPipesShallow();
+        this->disconnectSinkPipesShallow(); // disconnect throughOut
         oldSource->connectSinkPipe(oldThroughOut);
     }
     if (hasSink())
-        sink->disconnectSourcePipe();
+        sink->disconnectSourcePipesShallow();
 
     if (hasSource())
-        source->disconnectSinkPipe();
+        source->disconnectSinkPipesShallow();
 
     if (hasThroughIn() || hasThroughOut())
         FATAL_ERROR(F("Invalid state"), 0x9147); // LCOV_EXCL_LINE
