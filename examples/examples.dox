@@ -1211,6 +1211,20 @@
  */
 
 /**
+ * @example   "MIDI_Pipes-Routing.ino"
+ * 
+ * MIDI_Pipes-Routing
+ * ==================
+ *
+ * MIDI routing using MIDI_Pipe%s.
+ * 
+ * Bridges the USB MIDI interface to a Serial MIDI interface, and loops back
+ * anything it receives on the USB interface.
+ * 
+ * @boards  AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ */
+
+/**
  * @example   "Dual-MIDI-Interface.ino"
  * 
  * Dual-MIDI-Interface
