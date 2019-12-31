@@ -123,6 +123,7 @@ struct TrueMIDI_Source : MIDI_Source {};
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
+/// Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink.
 class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
   public:
     MIDI_Pipe() = default;
@@ -130,9 +131,9 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     MIDI_Pipe(const MIDI_Pipe &) = delete;
     MIDI_Pipe &operator=(const MIDI_Pipe &) = delete;
 
-    /// TODO: move construction/assignment
+    /// TODO: move construction/assignment?
     MIDI_Pipe(MIDI_Pipe &&) = delete;
-    /// TODO: move construction/assignment
+    /// TODO: move construction/assignment?
     MIDI_Pipe &operator=(MIDI_Pipe &&) = delete;
 
     virtual ~MIDI_Pipe();
