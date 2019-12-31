@@ -13,6 +13,8 @@ BEGIN_CS_NAMESPACE
 using cn_t = uint8_t;
 
 class MIDI_Pipe;
+struct TrueMIDI_Sink;
+struct TrueMIDI_Source;
 
 class MIDI_Sink {
   public:
@@ -26,12 +28,20 @@ class MIDI_Sink {
     virtual ~MIDI_Sink();
 
     void connectSourcePipe(MIDI_Pipe *source);
-    void disconnectSourcePipe();
+    void disconnectSourcePipes();
+
+    bool disconnect(TrueMIDI_Source &source);
 
     bool hasSourcePipe() const { return sourcePipe != nullptr; }
 
+#ifndef ARDUINO
+    MIDI_Pipe *getSourcePipe() { return sourcePipe; }
+#endif
+
   private:
     virtual void lockDownstream(cn_t cn, bool lock) { (void)cn, (void)lock; }
+    virtual MIDI_Sink *getFinalSink() { return this; }
+    void disconnectSourcePipesShallow();
 
   protected:
     MIDI_Pipe *sourcePipe = nullptr;
@@ -53,18 +63,33 @@ class MIDI_Source {
     virtual ~MIDI_Source();
 
     void connectSinkPipe(MIDI_Pipe *sink);
-    void disconnectSinkPipe();
+    void disconnectSinkPipes();
+
+    bool disconnect(TrueMIDI_Sink &sink);
 
     bool hasSinkPipe() const { return sinkPipe != nullptr; }
 
     void exclusive(cn_t cn, bool exclusive = true);
     bool canWrite(cn_t cn) const;
 
+#ifndef ARDUINO
+    MIDI_Pipe *getSinkPipe() { return sinkPipe; }
+#endif
+
+  private:
+    virtual MIDI_Source *getInitialSource() { return this; }
+    void disconnectSinkPipesShallow();
+
   protected:
     MIDI_Pipe *sinkPipe = nullptr;
 
     friend class MIDI_Pipe;
 };
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
+struct TrueMIDI_Sink : MIDI_Sink {};
+struct TrueMIDI_Source : MIDI_Source {};
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
@@ -147,6 +172,39 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
   public:
     void disconnect();
 
+    MIDI_Sink *getFinalSink() override {
+        return hasSink() ? sink->getFinalSink() : nullptr;
+    }
+    MIDI_Source *getInitialSource() override {
+        return hasSource() ? source->getInitialSource() : nullptr;
+    }
+
+    bool disconnect(TrueMIDI_Sink &sink) {
+        if (getFinalSink() == &sink) {
+            disconnect();
+            return true;
+        }
+        if (hasThroughOut()) {
+            return throughOut->disconnect(sink);
+        }
+        return false;
+    }
+    bool disconnect(TrueMIDI_Source &source) {
+        if (getInitialSource() == &source) {
+            disconnect();
+            return true;
+        }
+        if (hasThroughIn()) {
+            return throughIn->disconnect(source);
+        }
+        return false;
+    }
+
+#ifndef ARDUINO
+    MIDI_Pipe *getThroughOut() { return throughOut; }
+    MIDI_Pipe *getThroughIn() { return throughIn; }
+#endif
+
     void exclusive(cn_t cn, bool exclusive = true);
 
     bool isLocked(cn_t cn) const { return locks.get(cn); }
@@ -168,9 +226,6 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
-
-struct TrueMIDI_Sink : MIDI_Sink {};
-struct TrueMIDI_Source : MIDI_Source {};
 
 struct BidirectionalMIDI_Pipe {
     MIDI_Pipe dir1, dir2;
@@ -224,6 +279,8 @@ struct MIDI_PipeFactory {
             FATAL_ERROR(F("Not enough pipes available"), 0x2459);
         return pipes[index++];
     }
+    Pipe &operator[](size_t i) { return pipes[i]; }
+    const Pipe &operator[](size_t i) const { return pipes[i]; }
 };
 
 template <size_t N>
