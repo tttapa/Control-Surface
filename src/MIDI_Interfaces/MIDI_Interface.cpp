@@ -6,6 +6,10 @@ MIDI_Interface::MIDI_Interface() {
     setAsDefault(); // Make this the default MIDI Interface
 }
 
+MIDI_Interface::MIDI_Interface(MIDI_Interface &&) {
+    setAsDefault(); // Make this the default MIDI Interface
+}
+
 MIDI_Interface::~MIDI_Interface() {
     if (getDefault() == this)
         DefaultMIDI_Interface = nullptr;

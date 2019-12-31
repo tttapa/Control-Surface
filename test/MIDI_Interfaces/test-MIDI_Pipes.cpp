@@ -17,6 +17,12 @@ struct MockMIDI_SinkSource : TrueMIDI_SinkSource {
     MOCK_METHOD(void, sinkMIDIfromPipe, (RealTimeMessage), (override));
 };
 
+struct DummyMIDI_Sink : TrueMIDI_Sink {
+    void sinkMIDIfromPipe(ChannelMessage) override {}
+    void sinkMIDIfromPipe(SysExMessage) override {}
+    void sinkMIDIfromPipe(RealTimeMessage) override {}
+};
+
 TEST(MIDI_Pipes, sourcePipeSink) {
     StrictMock<MockMIDI_Sink> sink;
     MIDI_Pipe pipe;
@@ -446,6 +452,492 @@ TEST(MIDI_Pipes, disconnectSink1) {
     EXPECT_FALSE(pipe4.hasThroughOut());
 }
 
+TEST(MIDI_Pipes, checkConnectionsMoveSink) {
+    DummyMIDI_Sink sink1;
+    MIDI_Pipe pipe;
+    TrueMIDI_Source source;
+
+    source >> pipe >> sink1;
+
+    EXPECT_TRUE(source.hasSinkPipe());
+    EXPECT_TRUE(sink1.hasSourcePipe());
+
+    EXPECT_TRUE(pipe.hasSink());
+    EXPECT_EQ(pipe.getFinalSink(), &sink1);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe);
+    EXPECT_TRUE(pipe.hasSource());
+    EXPECT_EQ(pipe.getInitialSource(), &source);
+    EXPECT_EQ(source.getSinkPipe(), &pipe);
+
+    EXPECT_FALSE(pipe.hasThroughIn());
+    EXPECT_FALSE(pipe.hasThroughOut());
+
+    DummyMIDI_Sink sink2 = std::move(sink1);
+
+    EXPECT_FALSE(sink1.hasSourcePipe());
+
+    EXPECT_TRUE(source.hasSinkPipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+    EXPECT_FALSE(sink1.hasSourcePipe());
+
+    EXPECT_TRUE(pipe.hasSink());
+    EXPECT_EQ(pipe.getFinalSink(), &sink2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe);
+    EXPECT_EQ(sink1.getSourcePipe(), nullptr);
+    EXPECT_TRUE(pipe.hasSource());
+    EXPECT_EQ(pipe.getInitialSource(), &source);
+    EXPECT_EQ(source.getSinkPipe(), &pipe);
+
+    EXPECT_FALSE(pipe.hasThroughIn());
+    EXPECT_FALSE(pipe.hasThroughOut());
+}
+
+TEST(MIDI_Pipes, checkConnectionsMoveSink2Sources) {
+    DummyMIDI_Sink sink1;
+    MIDI_Pipe pipe1, pipe2;
+    TrueMIDI_Source source1, source2;
+
+    source1 >> pipe1 >> sink1;
+    source2 >> pipe2 >> sink1;
+
+    EXPECT_TRUE(source1.hasSinkPipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+    EXPECT_TRUE(sink1.hasSourcePipe());
+
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink1);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source1);
+    EXPECT_EQ(source1.getSinkPipe(), &pipe1);
+
+    EXPECT_TRUE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughOut());
+
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink1);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe1);
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source2);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe2);
+    EXPECT_EQ(sink1.getSourcePipe()->getThroughIn(), &pipe2);
+
+    EXPECT_FALSE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+
+    DummyMIDI_Sink sink2 = std::move(sink1);
+
+    EXPECT_FALSE(sink1.hasSourcePipe());
+
+    EXPECT_TRUE(source1.hasSinkPipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source1);
+    EXPECT_EQ(source1.getSinkPipe(), &pipe1);
+
+    EXPECT_TRUE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughOut());
+
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe1);
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source2);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe2);
+
+    EXPECT_FALSE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+}
+
+TEST(MIDI_Pipes, checkConnectionsMoveSink2Sinks) {
+    DummyMIDI_Sink sink1, sink2;
+    MIDI_Pipe pipe1, pipe2;
+    TrueMIDI_Source source;
+
+    source >> pipe1 >> sink1;
+    source >> pipe2 >> sink2;
+
+    EXPECT_TRUE(source.hasSinkPipe());
+    EXPECT_TRUE(sink1.hasSourcePipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink1);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source);
+    EXPECT_EQ(source.getSinkPipe(), &pipe1);
+
+    EXPECT_FALSE(pipe1.hasThroughIn());
+    EXPECT_TRUE(pipe1.hasThroughOut());
+
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe2);
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source);
+    EXPECT_EQ(source.getSinkPipe()->getThroughOut(), &pipe2);
+
+    DummyMIDI_Sink sink3 = std::move(sink1);
+
+    EXPECT_FALSE(sink1.hasSourcePipe());
+    
+    EXPECT_TRUE(source.hasSinkPipe());
+    EXPECT_TRUE(sink3.hasSourcePipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink3);
+    EXPECT_EQ(sink3.getSourcePipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source);
+    EXPECT_EQ(source.getSinkPipe(), &pipe1);
+
+    EXPECT_FALSE(pipe1.hasThroughIn());
+    EXPECT_TRUE(pipe1.hasThroughOut());
+
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe2);
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source);
+    EXPECT_EQ(source.getSinkPipe()->getThroughOut(), &pipe2);
+
+    DummyMIDI_Sink sink4 = std::move(sink2);
+
+    EXPECT_FALSE(sink2.hasSourcePipe());
+    
+    EXPECT_TRUE(source.hasSinkPipe());
+    EXPECT_TRUE(sink3.hasSourcePipe());
+    EXPECT_TRUE(sink4.hasSourcePipe());
+
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink3);
+    EXPECT_EQ(sink3.getSourcePipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source);
+    EXPECT_EQ(source.getSinkPipe(), &pipe1);
+
+    EXPECT_FALSE(pipe1.hasThroughIn());
+    EXPECT_TRUE(pipe1.hasThroughOut());
+
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink4);
+    EXPECT_EQ(sink4.getSourcePipe(), &pipe2);
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source);
+    EXPECT_EQ(source.getSinkPipe()->getThroughOut(), &pipe2);
+}
+
+TEST(MIDI_Pipes, checkConnectionsSwapSink) {
+    DummyMIDI_Sink sink1, sink2;
+    MIDI_Pipe pipe1, pipe2;
+    TrueMIDI_Source source1, source2;
+
+    source1 >> pipe1 >> sink1;
+    source2 >> pipe2 >> sink2;
+
+    EXPECT_TRUE(source1.hasSinkPipe());
+    EXPECT_TRUE(sink1.hasSourcePipe());
+
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink1);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source1);
+    EXPECT_EQ(source1.getSinkPipe(), &pipe1);
+
+    EXPECT_FALSE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughOut());
+
+    EXPECT_TRUE(source2.hasSinkPipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe2);
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source2);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe2);
+
+    EXPECT_FALSE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+
+    std::swap(sink1, sink2);
+
+    EXPECT_TRUE(source1.hasSinkPipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source1);
+    EXPECT_EQ(source1.getSinkPipe(), &pipe1);
+
+    EXPECT_FALSE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughOut());
+
+    EXPECT_TRUE(source2.hasSinkPipe());
+    EXPECT_TRUE(sink1.hasSourcePipe());
+
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink1);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe2);
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source2);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe2);
+
+    EXPECT_FALSE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+}
+
+TEST(MIDI_Pipes, checkConnectionsMoveSource) {
+    TrueMIDI_Source source1;
+    MIDI_Pipe pipe;
+    DummyMIDI_Sink sink;
+
+    sink << pipe << source1;
+
+    EXPECT_TRUE(sink.hasSourcePipe());
+    EXPECT_TRUE(source1.hasSinkPipe());
+
+    EXPECT_TRUE(pipe.hasSource());
+    EXPECT_EQ(pipe.getInitialSource(), &source1);
+    EXPECT_EQ(source1.getSinkPipe(), &pipe);
+    EXPECT_TRUE(pipe.hasSink());
+    EXPECT_EQ(pipe.getFinalSink(), &sink);
+    EXPECT_EQ(sink.getSourcePipe(), &pipe);
+
+    EXPECT_FALSE(pipe.hasThroughIn());
+    EXPECT_FALSE(pipe.hasThroughOut());
+
+    TrueMIDI_Source source2 = std::move(source1);
+
+    EXPECT_TRUE(sink.hasSourcePipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+    EXPECT_FALSE(source1.hasSinkPipe());
+
+    EXPECT_TRUE(pipe.hasSource());
+    EXPECT_EQ(pipe.getInitialSource(), &source2);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe);
+    EXPECT_EQ(source1.getSinkPipe(), nullptr);
+    EXPECT_TRUE(pipe.hasSink());
+    EXPECT_EQ(pipe.getFinalSink(), &sink);
+    EXPECT_EQ(sink.getSourcePipe(), &pipe);
+
+    EXPECT_FALSE(pipe.hasThroughIn());
+    EXPECT_FALSE(pipe.hasThroughOut());
+}
+
+TEST(MIDI_Pipes, checkConnectionsMoveSource2Sinks) {
+    TrueMIDI_Source source1;
+    MIDI_Pipe pipe1, pipe2;
+    DummyMIDI_Sink sink1, sink2;
+
+    sink1 << pipe1 << source1;
+    sink2 << pipe2 << source1;
+
+    EXPECT_TRUE(sink1.hasSourcePipe());
+    EXPECT_TRUE(sink2.hasSourcePipe());
+    EXPECT_TRUE(source1.hasSinkPipe());
+
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source1);
+    EXPECT_EQ(source1.getSinkPipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink1);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe1);
+
+    EXPECT_TRUE(pipe1.hasThroughOut());
+    EXPECT_FALSE(pipe1.hasThroughIn());
+
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source1);
+    EXPECT_EQ(source1.getSinkPipe(), &pipe1);
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe2);
+    EXPECT_EQ(source1.getSinkPipe()->getThroughOut(), &pipe2);
+
+    EXPECT_FALSE(pipe2.hasThroughOut());
+    EXPECT_FALSE(pipe2.hasThroughIn());
+
+    TrueMIDI_Source source2 = std::move(source1);
+
+    EXPECT_FALSE(source1.hasSinkPipe());
+
+    EXPECT_TRUE(sink1.hasSourcePipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source2);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink1);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe1);
+
+    EXPECT_TRUE(pipe1.hasThroughOut());
+    EXPECT_FALSE(pipe1.hasThroughIn());
+
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source2);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe1);
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe2);
+
+    EXPECT_FALSE(pipe2.hasThroughOut());
+    EXPECT_FALSE(pipe2.hasThroughIn());
+}
+
+TEST(MIDI_Pipes, checkConnectionsMoveSource2Sources) {
+    TrueMIDI_Source source1, source2;
+    MIDI_Pipe pipe1, pipe2;
+    DummyMIDI_Sink sink;
+
+    sink << pipe1 << source1;
+    sink << pipe2 << source2;
+
+    EXPECT_TRUE(sink.hasSourcePipe());
+    EXPECT_TRUE(source1.hasSinkPipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source1);
+    EXPECT_EQ(source1.getSinkPipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink);
+    EXPECT_EQ(sink.getSourcePipe(), &pipe1);
+
+    EXPECT_FALSE(pipe1.hasThroughOut());
+    EXPECT_TRUE(pipe1.hasThroughIn());
+
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source2);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe2);
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink);
+    EXPECT_EQ(sink.getSourcePipe()->getThroughIn(), &pipe2);
+
+    TrueMIDI_Source source3 = std::move(source1);
+
+    EXPECT_FALSE(source1.hasSinkPipe());
+    
+    EXPECT_TRUE(sink.hasSourcePipe());
+    EXPECT_TRUE(source3.hasSinkPipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source3);
+    EXPECT_EQ(source3.getSinkPipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink);
+    EXPECT_EQ(sink.getSourcePipe(), &pipe1);
+
+    EXPECT_FALSE(pipe1.hasThroughOut());
+    EXPECT_TRUE(pipe1.hasThroughIn());
+
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source2);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe2);
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink);
+    EXPECT_EQ(sink.getSourcePipe()->getThroughIn(), &pipe2);
+
+    TrueMIDI_Source source4 = std::move(source2);
+
+    EXPECT_FALSE(source2.hasSinkPipe());
+    
+    EXPECT_TRUE(sink.hasSourcePipe());
+    EXPECT_TRUE(source3.hasSinkPipe());
+    EXPECT_TRUE(source4.hasSinkPipe());
+
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source3);
+    EXPECT_EQ(source3.getSinkPipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink);
+    EXPECT_EQ(sink.getSourcePipe(), &pipe1);
+
+    EXPECT_FALSE(pipe1.hasThroughOut());
+    EXPECT_TRUE(pipe1.hasThroughIn());
+
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source4);
+    EXPECT_EQ(source4.getSinkPipe(), &pipe2);
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink);
+    EXPECT_EQ(sink.getSourcePipe()->getThroughIn(), &pipe2);
+}
+
+TEST(MIDI_Pipes, checkConnectionsSwapSource) {
+    TrueMIDI_Source source1, source2;
+    MIDI_Pipe pipe1, pipe2;
+    DummyMIDI_Sink sink1, sink2;
+
+    sink1 << pipe1 << source1;
+    sink2 << pipe2 << source2;
+
+    EXPECT_TRUE(sink1.hasSourcePipe());
+    EXPECT_TRUE(source1.hasSinkPipe());
+
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source1);
+    EXPECT_EQ(source1.getSinkPipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink1);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe1);
+
+    EXPECT_FALSE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughOut());
+
+    EXPECT_TRUE(sink2.hasSourcePipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source2);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe2);
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe2);
+
+    EXPECT_FALSE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+
+    std::swap(source1, source2);
+
+    EXPECT_TRUE(sink1.hasSourcePipe());
+    EXPECT_TRUE(source2.hasSinkPipe());
+
+    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_EQ(pipe1.getInitialSource(), &source2);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe1);
+    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_EQ(pipe1.getFinalSink(), &sink1);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe1);
+
+    EXPECT_FALSE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughOut());
+
+    EXPECT_TRUE(sink2.hasSourcePipe());
+    EXPECT_TRUE(source1.hasSinkPipe());
+
+    EXPECT_TRUE(pipe2.hasSource());
+    EXPECT_EQ(pipe2.getInitialSource(), &source1);
+    EXPECT_EQ(source1.getSinkPipe(), &pipe2);
+    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_EQ(pipe2.getFinalSink(), &sink2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe2);
+
+    EXPECT_FALSE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughOut());
+}
+
 TEST(MIDI_Pipes, exclusive) {
     StrictMock<MockMIDI_Sink> sinks[2];
     MIDI_PipeFactory<6> pipes;
@@ -595,7 +1087,7 @@ TEST(MIDI_Pipes, USBInterface) {
     midiA[1].update();
 }
 
-TEST(MIDI_Pipes, USBInterfaceLock) {
+TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
     StrictMock<USBMIDI_Interface> midiA[2];
     StrictMock<MockMIDI_Interface> midiB[2];
 
@@ -630,6 +1122,85 @@ TEST(MIDI_Pipes, USBInterfaceLock) {
     EXPECT_CALL(midiB[0], sendImpl(sysexData, 7, 9));
     EXPECT_CALL(midiB[1], sendImpl(sysexData, 7, 9));
     midiA[1].update(); // should send old message now
+}
+
+TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
+    StrictMock<USBMIDI_Interface> midiA[2];
+    StrictMock<MockMIDI_Interface> midiB[2];
+
+    BidirectionalMIDI_Pipe pipe1;
+    MIDI_Pipe pipe2, pipe3;
+
+    midiA[0] | pipe1 | midiB[0];
+    midiA[1] >> pipe2 >> midiB[0];
+    midiA[1] >> pipe3 >> midiB[1];
+
+    using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
+    EXPECT_CALL(midiA[1], readUSBPacket())
+        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}));
+
+    // lock pipes of all MIDI interfaces that pipe to the same sinks as midiA[0]
+    // (i.e. midiA[1]) so that midiA[0] has exclusive access.
+    midiA[0].exclusive(9);
+    // shouldn't send anything, sink pipe is locked
+    midiA[1].update();
+
+    ::testing::Mock::VerifyAndClear(&midiB[0]);
+    ::testing::Mock::VerifyAndClear(&midiB[1]);
+
+    // unlock the pipes
+    midiA[0].exclusive(9, false);
+
+    EXPECT_CALL(midiB[0], sendImpl(0x90, 0x05, 0x55, 0x66, 0x9));
+    EXPECT_CALL(midiB[1], sendImpl(0x90, 0x05, 0x55, 0x66, 0x9));
+    midiA[1].update(); // should send old message now
+}
+
+TEST(MIDI_Pipes, USBInterfaceLoopBack) {
+    StrictMock<USBMIDI_Interface> midi;
+
+    MIDI_Pipe pipe;
+
+    midi >> pipe >> midi;
+
+    using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
+    EXPECT_CALL(midi, readUSBPacket())
+        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}));
+
+    EXPECT_CALL(midi, writeUSBPacket(0x9, 0x9, 0x95, 0x55, 0x66));
+    midi.update();
+}
+
+TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
+    StrictMock<USBMIDI_Interface> midiA[2];
+    StrictMock<MockMIDI_Interface> midiB[2];
+
+    BidirectionalMIDI_Pipe pipe1;
+    MIDI_Pipe pipe2, pipe3;
+
+    midiA[0] | pipe1 | midiB[0];
+    midiA[1] >> pipe2 >> midiB[0];
+    midiA[1] >> pipe3 >> midiB[1];
+
+    using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
+    EXPECT_CALL(midiA[1], readUSBPacket())
+        .WillOnce(Return(Packet_t{0x9F, 0xF8, 0x00, 0x00}))
+        .WillOnce(Return(Packet_t{}));
+
+    midiA[0].exclusive(9);
+
+    // even though pipe is locked, real-time message should get through
+    EXPECT_CALL(midiB[0], sendImpl(0xF8, 0x9));
+    EXPECT_CALL(midiB[1], sendImpl(0xF8, 0x9));
+
+    midiA[1].update();
+
+    ::testing::Mock::VerifyAndClear(&midiB[0]);
+    ::testing::Mock::VerifyAndClear(&midiB[1]);
+
+    // unlock the pipes
+    midiA[0].exclusive(9, false);
+    midiA[1].update(); // shouldn't send anything
 }
 
 TEST(MIDI_Pipes, disconnectSourceFromSink) {

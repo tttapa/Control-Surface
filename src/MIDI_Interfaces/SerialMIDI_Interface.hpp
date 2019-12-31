@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MIDI_Interface.hpp"
+#include <AH/STL/utility>
 #include <AH/Teensy/TeensyUSBTypes.hpp>
 #include <Arduino.h> // Stream
 #include <MIDI_Parsers/SerialMIDI_Parser.hpp>
@@ -29,8 +30,9 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
     StreamMIDI_Interface(Stream &stream)
         : Parsing_MIDI_Interface(parser), stream(stream) {}
 
-    StreamMIDI_Interface(const StreamMIDI_Interface &other)
-        : Parsing_MIDI_Interface(other), stream(other.stream) {}
+    StreamMIDI_Interface(StreamMIDI_Interface &&other)
+        : Parsing_MIDI_Interface(std::move(other)), stream(other.stream) {}
+    // TODO: should I move the mutex too?
 
     MIDI_read_t read() override {
         while (stream.available() > 0) {
