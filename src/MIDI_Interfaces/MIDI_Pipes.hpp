@@ -49,6 +49,8 @@ class MIDI_Sink {
     void disconnectSourcePipes();
     /// Disconnect the given source from this sink. Leaves other sources 
     /// connected.
+    /// Returns true if the source was found and disconnected, false if the 
+    /// given source was not a direct or indirect source to this sink.
     bool disconnect(TrueMIDI_Source &source);
     /// Check if this sink is connected to a source pipe.
     bool hasSourcePipe() const { return sourcePipe != nullptr; }
@@ -111,6 +113,8 @@ class MIDI_Source {
     void disconnectSinkPipes();
     /// Disconnect the given sink from this source. Leaves other sinks
     /// connected.
+    /// Returns true if the sink was found and disconnected, false if the 
+    /// given sink was not a direct or indirect sink of this source.
     bool disconnect(TrueMIDI_Sink &sink);
     /// Check if this source is connected to a sink pipe.
     bool hasSinkPipe() const { return sinkPipe != nullptr; }
