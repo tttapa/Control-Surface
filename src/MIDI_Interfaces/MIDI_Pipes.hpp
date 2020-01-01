@@ -3,13 +3,14 @@
 #include <AH/Containers/BitArray.hpp>
 #include <AH/STL/utility>
 #include <AH/Settings/Warnings.hpp>
-#include <Settings/NamespaceSettings.hpp>
 #include <MIDI_Parsers/MIDI_MessageTypes.hpp>
+#include <Settings/NamespaceSettings.hpp>
 
 AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
 
+/// Data type for cable numbers.
 using cn_t = uint8_t;
 
 class MIDI_Pipe;
@@ -29,9 +30,9 @@ class MIDI_Sink {
     /// Default constructor.
     MIDI_Sink() = default;
 
-    /// Copy constructor.
+    /// Copy constructor (copying not allowed).
     MIDI_Sink(const MIDI_Sink &) = delete;
-    /// Copy assignment.
+    /// Copy assignment (copying not allowed).
     MIDI_Sink &operator=(const MIDI_Sink &) = delete;
 
     /// Move constructor.
@@ -42,11 +43,14 @@ class MIDI_Sink {
     /// Destructor.
     virtual ~MIDI_Sink();
 
+    /// Fully connect a source pipe to this sink.
     void connectSourcePipe(MIDI_Pipe *source);
+    /// Disconnect all source pipes that sink to this sink (recursively).
     void disconnectSourcePipes();
-
+    /// Disconnect the given source from this sink. Leaves other sources 
+    /// connected.
     bool disconnect(TrueMIDI_Source &source);
-
+    /// Check if this sink is connected to a source pipe.
     bool hasSourcePipe() const { return sourcePipe != nullptr; }
 
 #ifndef ARDUINO
@@ -54,8 +58,17 @@ class MIDI_Sink {
 #endif
 
   private:
+    /// Base case for recursive lock function.
+    /// @see    MIDI_Pipe::lockDownstream
     virtual void lockDownstream(cn_t cn, bool lock) { (void)cn, (void)lock; }
+    /// Base case for recursive function.
+    /// @see    MIDI_Pipe::getFinalSink
     virtual MIDI_Sink *getFinalSink() { return this; }
+    /// Disconnect only the first pipe connected to this sink. Leaves the
+    /// other pipes connected to the original pipe, which doesn't have a sink
+    /// anymore when this function finishes.
+    /// Used to disconnect a MIDI_Pipe while preserving the connections of its 
+    /// "through" inputs.
     void disconnectSourcePipesShallow();
 
   protected:
@@ -79,9 +92,9 @@ class MIDI_Source {
     /// Default constructor.
     MIDI_Source() = default;
 
-    /// Copy constructor.
+    /// Copy constructor (copying not allowed).
     MIDI_Source(const MIDI_Source &) = delete;
-    /// Copy assignment.
+    /// Copy assignment (copying not allowed).
     MIDI_Source &operator=(const MIDI_Source &) = delete;
 
     /// Move constructor.
@@ -92,14 +105,35 @@ class MIDI_Source {
     /// Destructor.
     virtual ~MIDI_Source();
 
+    /// Fully connect a sink pipe to this source.
     void connectSinkPipe(MIDI_Pipe *sink);
+    /// Disconnect all sink pipes that this source sinks to (recursively).
     void disconnectSinkPipes();
-
+    /// Disconnect the given sink from this source. Leaves other sinks
+    /// connected.
     bool disconnect(TrueMIDI_Sink &sink);
-
+    /// Check if this source is connected to a sink pipe.
     bool hasSinkPipe() const { return sinkPipe != nullptr; }
 
+    /** 
+     * @brief   Enter or exit exclusive mode for the given cable number.
+     *          This means that this becomes the only source that can sink to 
+     *          the sinks connected to this source. Other sources have to wait
+     *          until this source exits exclusive mode until they can send 
+     *          again.
+     * @param   cn
+     *          Cable number to set the exclusive mode for [0, 15].
+     * @param   exclusive
+     *          True to enable exclusive mode, false to disable.
+     */
     void exclusive(cn_t cn, bool exclusive = true);
+    /** 
+     * @brief   Check if this source can write to the sinks it connects to.
+     *          Returns false if any of the sinks have another source that is
+     *          in exclusive mode.
+     * @param   cn
+     *          Cable number to check [0, 15].
+     */
     bool canWrite(cn_t cn) const;
 
 #ifndef ARDUINO
@@ -107,7 +141,14 @@ class MIDI_Source {
 #endif
 
   private:
+    /// Base case for recursive function.
+    /// @see    MIDI_Pipe::getInitialSource
     virtual MIDI_Source *getInitialSource() { return this; }
+    /// Disconnect only the first pipe connected to this source. Leaves the
+    /// other pipes connected to the original pipe, which doesn't have a source
+    /// anymore when this function finishes.
+    /// Used to disconnect a MIDI_Pipe while preserving the connections of its 
+    /// "through" outputs.
     void disconnectSinkPipesShallow();
 
   protected:
@@ -118,51 +159,123 @@ class MIDI_Source {
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
+/// A MIDI_Sink that is not also a MIDI_Pipe.
 struct TrueMIDI_Sink : MIDI_Sink {};
+/// A MIDI_Source that is not also a MIDI_Pipe.
 struct TrueMIDI_Source : MIDI_Source {};
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
-/// Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink.
+/** 
+ * @brief   Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink.
+ * 
+ * A pipe has at least two, at most four connections. In the simplest case, a 
+ * pipe just has a sourca and a sink. The source sends data down the pipe, and
+ * the pipe sends it to the source. A mapping or filter can be applied to the 
+ * data traveling down the pipe.
+ * To be able to connect multiple pipes to a single sink or source, a pipe also
+ * has a "through" output and a "through" input, both are pipes, not sinks or 
+ * sources. All data that comes from the source is sent to the "through" output
+ * as well, and all input that comes in from the "through" input is sent to the
+ * sink as well. The mapping or filter is not applied to the data going from/to
+ * the "through" connections.
+ * 
+ * Merging data from multiple sources into a single sink can cause problems
+ * because messages can be interleaved (e.g. RPN/NRPN messages). To circumvent
+ * this issue, a source can request exclusive access to the pipe it's connected
+ * to. This locks all other pipes that sink into the same sinks as the exclusive
+ * source.
+ * Other sources must then query its pipe before sending, to make sure it's not
+ * locked by another source that has exclusive access.
+ * 
+ * **Pipe model**
+ * 
+ * ~~~
+ *                  ╭────────────────>  through out
+ *                  │ ┌────────┐
+ *     source  >━━━━┷━┥ filter ┝━┯━━━>  sink
+ *                    └────────┘ │
+ * through in  >─────────────────╯
+ * ~~~
+ * 
+ * For example, if you have one source that should connect to two sinks, the
+ * configuration is as follows:
+ * 
+ * ~~~
+ *                      through out         × ┌────────┐
+ *                  ╭────────────────> >━━━━┷━┥ pipe 2 ┝━┯━━━>  sink 2
+ *                  │ ┌────────┐              └────────┘ ×
+ *     source  >━━━━┷━┥ pipe 1 ┝━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━>  sink 1
+ *                    └────────┘ ×
+ * ~~~
+ * 
+ * Each connection between a source and a sink has its own pipe, and no two 
+ * pipes are connected in series.
+ */
 class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
   public:
+    /// Default constructor
     MIDI_Pipe() = default;
 
+    /// Copy constructor (copying not allowed).
     MIDI_Pipe(const MIDI_Pipe &) = delete;
+    /// Copy assignment (copying not allowed).
     MIDI_Pipe &operator=(const MIDI_Pipe &) = delete;
 
-    /// TODO: move construction/assignment?
+    /// Move constructor.
+    /// @todo   Add move constructor.
     MIDI_Pipe(MIDI_Pipe &&) = delete;
-    /// TODO: move construction/assignment?
+    /// Move assignment.
+    /// @todo   Add move assignment.
     MIDI_Pipe &operator=(MIDI_Pipe &&) = delete;
 
+    /// Destructor.
     virtual ~MIDI_Pipe();
 
   private:
+    /// Set the sink pointer to point to the given sink. Does not connect this
+    /// pipe to the sink. Initiate the connection from the sink.
     void connectSink(MIDI_Sink *sink);
+    /// Set the sink pointer to null. Does not disconnect this pipe from the 
+    /// sink. Initiate the disconnection from the sink.
     void disconnectSink();
+    /// Set the source pointer to point to the given source. Does not connect 
+    /// this pipe to the source. Initiate the connection from the source.
     void connectSource(MIDI_Source *source);
+    /// Set the source pointer to null. Does not disconnect this pipe from the 
+    /// source. Initiate the disconnection from the source.
     void disconnectSource();
 
   public:
+    /// Check if this pipe is connected to a sink.
     bool hasSink() const { return sink != nullptr; }
+    /// Check if this pipe is connected to a source.
     bool hasSource() const { return source != nullptr; }
+    /// Check if this pipe has a "through" output that sends all incoming 
+    /// messages from the input (source) to another pipe.
     bool hasThroughOut() const { return throughOut != nullptr; }
+    /// Check if this pipe has a "through" input that merges all messages from
+    /// another pipe into the output (sink).
     bool hasThroughIn() const { return throughIn != nullptr; }
 
   private:
+    /// Accept a MIDI message from the source, forward it to the "through" 
+    /// output if necessary, map or filter the MIDI message if necessary, 
+    /// and send it to the sink.
     virtual void pipeMIDI(ChannelMessage msg) {
         if (hasThroughOut())
             throughOut->pipeMIDI(msg);
         // map(msg)
         sinkMIDIfromPipe(msg);
     }
+    /// @copydoc pipeMIDI
     virtual void pipeMIDI(SysExMessage msg) {
         if (hasThroughOut())
             throughOut->pipeMIDI(msg);
         // map(msg)
         sinkMIDIfromPipe(msg);
     }
+    /// @copydoc pipeMIDI
     virtual void pipeMIDI(RealTimeMessage msg) {
         if (hasThroughOut())
             throughOut->pipeMIDI(msg);
@@ -170,46 +283,61 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
         sinkMIDIfromPipe(msg);
     }
 
-    /// Forward from source through to output without processing;
     void sinkMIDIfromPipe(ChannelMessage msg) final override {
         if (hasSink())
             sink->sinkMIDIfromPipe(msg);
     }
-    /// Forward froum source through to output without processing;
     void sinkMIDIfromPipe(SysExMessage msg) final override {
         if (hasSink())
             sink->sinkMIDIfromPipe(msg);
     }
-    /// Forward froum source through to output without processing;
     void sinkMIDIfromPipe(RealTimeMessage msg) final override {
         if (hasSink())
             sink->sinkMIDIfromPipe(msg);
     }
 
+    /// Lock this pipe and all other pipes further downstream (following the 
+    /// path of the sink). Operates recursively until the end of the 
+    /// chain is reached.
     void lockDownstream(cn_t cn, bool lock) override {
         lockSelf(cn, lock);
         if (hasSink())
             sink->lockDownstream(cn, lock);
     }
 
+    /// Lock this pipe and all other pipes further upstream (following the 
+    /// path of the "trough" input). Operates recursively until the end of the 
+    /// chain is reached.
     void lockUpstream(cn_t cn, bool lock) {
         lockSelf(cn, lock);
         if (hasThroughIn())
             throughIn->lockUpstream(cn, lock);
     }
 
+    /// Lock this pipe, so sources cannot send messages through it.
     void lockSelf(cn_t cn, bool lock) { locks.set(cn, lock); }
 
   public:
+    /// Disconnect this pipe from all other pipes, sources and sinks. If the 
+    /// "through" input and/or output were in use, they are reconnected to the
+    /// original sink and/or source respectively.
     void disconnect();
 
+    /// Get the sink this pipe eventually sinks to, following the chain 
+    /// recursively.
     MIDI_Sink *getFinalSink() override {
         return hasSink() ? sink->getFinalSink() : nullptr;
     }
+    /// Get the original source that sources to this pipe, following the chain 
+    /// recursively.
     MIDI_Source *getInitialSource() override {
         return hasSource() ? source->getInitialSource() : nullptr;
     }
 
+    /// Disconnect the given sink from this pipe. The sink can be connected 
+    /// directly, or via the "through" output.
+    /// Returns true if the sink was found and disconnected, false if the given
+    /// sink was not a direct or indirect sink of this pipe.
     bool disconnect(TrueMIDI_Sink &sink) {
         if (getFinalSink() == &sink) {
             disconnect();
@@ -220,6 +348,11 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
         }
         return false;
     }
+
+    /// Disconnect the given source from this pipe. The source can be connected 
+    /// directly, or via the "through" input.
+    /// Returns true if the source was found and disconnected, false if the 
+    /// given source was not a direct or indirect source to this pipe.
     bool disconnect(TrueMIDI_Source &source) {
         if (getInitialSource() == &source) {
             disconnect();
@@ -236,10 +369,18 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     MIDI_Pipe *getThroughIn() { return throughIn; }
 #endif
 
+    /// @copydoc    MIDI_Source::exclusive
     void exclusive(cn_t cn, bool exclusive = true);
 
+    /// Check if this pipe is locked for a given cable number.
     bool isLocked(cn_t cn) const { return locks.get(cn); }
 
+    /** 
+     * @brief   Check if any of the sinks or outputs of this chain of pipes are
+     *          locked for the given cable number.
+     * @param   cn
+     *          The cable number to check.
+     */
     bool isAvailableForWrite(cn_t cn) const {
         return !isLocked(cn) &&
                (!hasThroughOut() || throughOut->isAvailableForWrite(cn));
