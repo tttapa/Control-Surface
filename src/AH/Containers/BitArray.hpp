@@ -30,7 +30,7 @@ class BitArray {
      * @param   bitIndex
      *          The (zero-based) index of the bit to read.
      */
-    bool get(uint8_t bitIndex) {
+    bool get(uint8_t bitIndex) const {
         return buffer[getBufferIndex(bitIndex)] & getBufferMask(bitIndex);
     }
 

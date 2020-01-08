@@ -49,8 +49,13 @@ class Timer {
         return false;
     }
 
+    /// Get the interval of the timer.
+    unsigned long getInterval() const { return interval; }
+    /// Set the interval of the timer.
+    void setInterval(unsigned long interval) { this->interval = interval; }
+
   private:
-    const unsigned long interval;
+    unsigned long interval;
     unsigned long previous = 0;
 };
 
