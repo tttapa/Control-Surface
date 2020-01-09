@@ -1135,6 +1135,38 @@
  */
 
 /**
+ * @example   "Serial-Interface.ino"
+ * 
+ * Serial-Interface
+ * ================
+ * 
+ * This example demonstrates how to use a Serial MIDI Interface, for use with
+ * 5-pin DIN connectors, for example.
+ *
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - This is just a simple MIDI controller with a single note button and an LED.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2020-01-09  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "SysEx-Send-Receive.ino"
  * 
  * SysEx-Send-Receive
