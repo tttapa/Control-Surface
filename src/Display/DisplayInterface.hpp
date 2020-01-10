@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Def/Def.hpp>
 #include <AH/Containers/LinkedList.hpp>
+#include <Def/Def.hpp>
 #include <Print.h>
 
 BEGIN_CS_NAMESPACE
@@ -13,14 +13,14 @@ BEGIN_CS_NAMESPACE
  */
 class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
   protected:
-    /// @todo   Do I need to keep a list now that I have sorted all 
+    /// @todo   Do I need to keep a list now that I have sorted all
     ///         DisplayElement%s?
     DisplayInterface() { elements.append(this); }
 
   public:
-    /// @todo   Do I need to keep a list now that I have sorted all 
+    /// @todo   Do I need to keep a list now that I have sorted all
     ///         DisplayElement%s?
-    // Note to self:    don't forget to make destructor = default 
+    // Note to self:    don't forget to make destructor = default
     //                  instead of deleting it altogether
     virtual ~DisplayInterface() { elements.remove(this); }
 
@@ -80,6 +80,34 @@ class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
     /// Initialize all displays.
     /// @see    begin
     static void beginAll();
+
+    /// Enable this display: insert it into the linked list of instances,
+    /// so it gets updated automatically
+    void enable() {
+        if (isEnabled()) {
+            ERROR(F("Error: This display is already enabled."), 0x1214);
+            return;
+        }
+        elements.append(this);
+    }
+
+    /// Disable this display: remove it from the linked list of instances,
+    /// so it no longer gets updated automatically
+    void disable() {
+        if (!isEnabled()) {
+            ERROR(F("Error: This element is already disabled."), 0x1215);
+            return;
+        }
+        elements.remove(this);
+    }
+
+    /**
+     * @brief   Check if this display is enabled.
+     * 
+     * @note    Assumes that the display is not added to a different linked 
+     *          list by the user.
+     */
+    bool isEnabled() { return elements.couldContain(this); }
 
     /**
      * @brief   Clear the frame buffer, and draw the custom background.

@@ -159,13 +159,15 @@ void Control_Surface_::updateDisplays() {
     DisplayInterface *previousDisplay = nullptr;
     for (DisplayElement &displayElement : DisplayElement::getAll()) {
         DisplayInterface *thisDisplay = &displayElement.getDisplay();
+        if (!thisDisplay->isEnabled())
+            continue;
         if (thisDisplay != previousDisplay) {
             if (previousDisplay)
                 previousDisplay->display();
+            previousDisplay = thisDisplay;
             thisDisplay->clearAndDrawBackground();
         }
         displayElement.draw();
-        previousDisplay = thisDisplay;
     }
     if (previousDisplay)
         previousDisplay->display();
