@@ -95,7 +95,7 @@ class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
     /// so it no longer gets updated automatically
     void disable() {
         if (!isEnabled()) {
-            ERROR(F("Error: This element is already disabled."), 0x1215);
+            ERROR(F("Error: This display is already disabled."), 0x1215);
             return;
         }
         elements.remove(this);

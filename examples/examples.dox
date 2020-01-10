@@ -152,7 +152,8 @@
  * -------
  * 
  * Select the Arduino as a custom MIDI controller in your DAW, and use the 
- * MIDI learn option to assign the potentiometer to a function.
+ * MIDI learn option to assign the potentiometer to a function.  
+ * It will send the MIDI Control Change Channel Volume parameter for channel 1.
  * 
  * Written by PieterP, 2019-08-13  
  * https://github.com/tttapa/Control-Surface
@@ -168,9 +169,41 @@
  *          Control_Surface library, and specifically, how to use the `map`
  *          function to account for non-linearities of the potentiometer.
  * 
- * Connect a potentiometer to analog pin A0. This will be the MIDI channel 
- * volume of channel 1.  
- * Map it in your DAW or DJ software.
+ * The map function in this example corrects for potentiometers that don't go
+ * all the way to the extreme values. Some potentiometers still read a value
+ * that's greater than 0 when turned all the way to the left. To fix that, tweak
+ * the `minimumValue` constant. If the potentiometer doesn't read the maximum
+ * value when turned all the way to the right, tweak the `maximumValue` 
+ * constant.
+ * 
+ * @boards  AVR, AVR USB, Due, Nano 33, ESP32, Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - If you open the Serial Monitor, you'll see the raw potentiometer values 
+ *   being printed.
+ * - Turn the potentiometer all the way to the left, and read the value. 
+ *   It should print a value close to zero.  
+ *   Set `minimumValue` to this printed value plus some safety margin 
+ *   (add 5%, for example).  
+ * - Now turn the potentiometer all the way to the right, and do the same thing
+ *   for `maximumValue`.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the potentiometer to a function.  
+ * It will send the MIDI Control Change Channel Volume parameter for channel 1.
  * 
  * Written by Pieter P, 16-06-2019  
  * https://github.com/tttapa/Control-Surface

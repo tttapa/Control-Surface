@@ -24,7 +24,7 @@ Control_Surface_ &Control_Surface_::getInstance() {
 
 void Control_Surface_::begin() {
 #if defined(ARDUINO) && defined(DEBUG_OUT)
-    DEBUG_OUT.begin(defaultBaudRate);
+    DEBUG_OUT.begin(AH::defaultBaudRate);
     delay(250);
 #endif
     FilteredAnalog<>::setupADC();
