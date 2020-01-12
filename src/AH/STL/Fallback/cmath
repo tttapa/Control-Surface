@@ -106,6 +106,8 @@ namespace std _GLIBCXX_VISIBILITY(default)
 {
 _GLIBCXX_BEGIN_NAMESPACE_VERSION
 
+#ifndef __AVR__
+
   using ::acos;
 
 #ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
@@ -539,6 +541,443 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
     tanh(_Tp __x)
     { return __builtin_tanh(__x); }
 
+#else // __AVR__
+
+
+  using ::acos;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  acos(float __x)
+  { return __builtin_acos(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  acos(long double __x)
+  { return __builtin_acos(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                    double>::__type
+    acos(_Tp __x)
+    { return __builtin_acos(__x); }
+
+  using ::asin;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  asin(float __x)
+  { return __builtin_asin(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  asin(long double __x)
+  { return __builtin_asin(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+                                    double>::__type
+    asin(_Tp __x)
+    { return __builtin_asin(__x); }
+
+  using ::atan;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  atan(float __x)
+  { return __builtin_atan(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  atan(long double __x)
+  { return __builtin_atan(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+                                    double>::__type
+    atan(_Tp __x)
+    { return __builtin_atan(__x); }
+
+  using ::atan2;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  atan2(float __y, float __x)
+  { return __builtin_atan2(__y, __x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  atan2(long double __y, long double __x)
+  { return __builtin_atan2(__y, __x); }
+#endif
+
+  template<typename _Tp, typename _Up>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+    atan2(_Tp __y, _Up __x)
+    {
+      typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+      return atan2(__type(__y), __type(__x));
+    }
+
+  using ::ceil;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  ceil(float __x)
+  { return __builtin_ceil(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  ceil(long double __x)
+  { return __builtin_ceil(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                    double>::__type
+    ceil(_Tp __x)
+    { return __builtin_ceil(__x); }
+
+  using ::cos;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  cos(float __x)
+  { return __builtin_cos(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  cos(long double __x)
+  { return __builtin_cos(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+                                    double>::__type
+    cos(_Tp __x)
+    { return __builtin_cos(__x); }
+
+  using ::cosh;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  cosh(float __x)
+  { return __builtin_cosh(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  cosh(long double __x)
+  { return __builtin_cosh(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+                                    double>::__type
+    cosh(_Tp __x)
+    { return __builtin_cosh(__x); }
+
+  using ::exp;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  exp(float __x)
+  { return __builtin_exp(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  exp(long double __x)
+  { return __builtin_exp(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+                                    double>::__type
+    exp(_Tp __x)
+    { return __builtin_exp(__x); }
+
+  using ::fabs;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  fabs(float __x)
+  { return __builtin_fabs(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  fabs(long double __x)
+  { return __builtin_fabs(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+                                    double>::__type
+    fabs(_Tp __x)
+    { return __builtin_fabs(__x); }
+
+  using ::floor;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  floor(float __x)
+  { return __builtin_floor(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  floor(long double __x)
+  { return __builtin_floor(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+                                    double>::__type
+    floor(_Tp __x)
+    { return __builtin_floor(__x); }
+
+  using ::fmod;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  fmod(float __x, float __y)
+  { return __builtin_fmod(__x, __y); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  fmod(long double __x, long double __y)
+  { return __builtin_fmod(__x, __y); }
+#endif
+
+  template<typename _Tp, typename _Up>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+    fmod(_Tp __x, _Up __y)
+    {
+      typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+      return fmod(__type(__x), __type(__y));
+    }
+
+  using ::frexp;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline float
+  frexp(float __x, int* __exp)
+  { return __builtin_frexp(__x, __exp); }
+
+  inline long double
+  frexp(long double __x, int* __exp)
+  { return __builtin_frexp(__x, __exp); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                    double>::__type
+    frexp(_Tp __x, int* __exp)
+    { return __builtin_frexp(__x, __exp); }
+
+  using ::ldexp;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  ldexp(float __x, int __exp)
+  { return __builtin_ldexp(__x, __exp); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  ldexp(long double __x, int __exp)
+  { return __builtin_ldexp(__x, __exp); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                    double>::__type
+    ldexp(_Tp __x, int __exp)
+    { return __builtin_ldexp(__x, __exp); }
+
+  using ::log;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  log(float __x)
+  { return __builtin_log(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  log(long double __x)
+  { return __builtin_log(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                    double>::__type
+    log(_Tp __x)
+    { return __builtin_log(__x); }
+
+  using ::log10;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  log10(float __x)
+  { return __builtin_log10(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  log10(long double __x)
+  { return __builtin_log10(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value,
+                                    double>::__type
+    log10(_Tp __x)
+    { return __builtin_log10(__x); }
+
+  using ::modf;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline float
+  modf(float __x, float* __iptr)
+  { return __builtin_modf(__x, (double*)__iptr); }
+
+  inline long double
+  modf(long double __x, long double* __iptr)
+  { return __builtin_modf(__x, (double*)__iptr); }
+#endif
+
+  using ::pow;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  pow(float __x, float __y)
+  { return __builtin_pow(__x, __y); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  pow(long double __x, long double __y)
+  { return __builtin_pow(__x, __y); }
+
+#if __cplusplus < 201103L
+  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+  // DR 550. What should the return type of pow(float,int) be?
+  inline double
+  pow(double __x, int __i)
+  { return __builtin_powi(__x, __i); }
+
+  inline float
+  pow(float __x, int __n)
+  { return __builtin_powi(__x, __n); }
+
+  inline long double
+  pow(long double __x, int __n)
+  { return __builtin_powi(__x, __n); }
+#endif
+#endif
+
+  template<typename _Tp, typename _Up>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+    pow(_Tp __x, _Up __y)
+    {
+      typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+      return pow(__type(__x), __type(__y));
+    }
+
+  using ::sin;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  sin(float __x)
+  { return __builtin_sin(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  sin(long double __x)
+  { return __builtin_sin(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                    double>::__type
+    sin(_Tp __x)
+    { return __builtin_sin(__x); }
+
+  using ::sinh;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  sinh(float __x)
+  { return __builtin_sinh(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  sinh(long double __x)
+  { return __builtin_sinh(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                    double>::__type
+    sinh(_Tp __x)
+    { return __builtin_sinh(__x); }
+
+  using ::sqrt;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  sqrt(float __x)
+  { return __builtin_sqrt(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  sqrt(long double __x)
+  { return __builtin_sqrt(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                    double>::__type
+    sqrt(_Tp __x)
+    { return __builtin_sqrt(__x); }
+
+  using ::tan;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  tan(float __x)
+  { return __builtin_tan(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  tan(long double __x)
+  { return __builtin_tan(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                    double>::__type
+    tan(_Tp __x)
+    { return __builtin_tan(__x); }
+
+  using ::tanh;
+
+#ifndef __CORRECT_ISO_CPP_MATH_H_PROTO
+  inline _GLIBCXX_CONSTEXPR float
+  tanh(float __x)
+  { return __builtin_tanh(__x); }
+
+  inline _GLIBCXX_CONSTEXPR long double
+  tanh(long double __x)
+  { return __builtin_tanh(__x); }
+#endif
+
+  template<typename _Tp>
+    inline _GLIBCXX_CONSTEXPR
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                    double>::__type
+    tanh(_Tp __x)
+    { return __builtin_tanh(__x); }
+
+#endif // __AVR__
 _GLIBCXX_END_NAMESPACE_VERSION
 } // namespace
 
@@ -1389,6 +1828,8 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
 
 #endif // __AVR__
 
+#ifndef __AVR__
+
   /// Additional overloads.
 #ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
   constexpr float
@@ -2022,6 +2463,648 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
     trunc(_Tp __x)
     { return __builtin_trunc(__x); }
 #endif
+
+#else // __AVR__
+
+// On AVR, float == double == long double
+// All functions must call the double version, not the float or long double
+// versions, because they don't exist and cause linker errors.
+
+  /// Additional overloads.
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  acosh(float __x)
+  { return __builtin_acosh(__x); }
+
+  constexpr long double
+  acosh(long double __x)
+  { return __builtin_acosh(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    acosh(_Tp __x)
+    { return __builtin_acosh(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  asinh(float __x)
+  { return __builtin_asinh(__x); }
+
+  constexpr long double
+  asinh(long double __x)
+  { return __builtin_asinh(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    asinh(_Tp __x)
+    { return __builtin_asinh(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  atanh(float __x)
+  { return __builtin_atanh(__x); }
+
+  constexpr long double
+  atanh(long double __x)
+  { return __builtin_atanh(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    atanh(_Tp __x)
+    { return __builtin_atanh(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  cbrt(float __x)
+  { return __builtin_cbrt(__x); }
+
+  constexpr long double
+  cbrt(long double __x)
+  { return __builtin_cbrt(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    cbrt(_Tp __x)
+    { return __builtin_cbrt(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  copysign(float __x, float __y)
+  { return __builtin_copysign(__x, __y); }
+
+  constexpr long double
+  copysign(long double __x, long double __y)
+  { return __builtin_copysign(__x, __y); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp, typename _Up>
+    constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+    copysign(_Tp __x, _Up __y)
+    {
+      typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+      return copysign(__type(__x), __type(__y));
+    }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  erf(float __x)
+  { return __builtin_erf(__x); }
+
+  constexpr long double
+  erf(long double __x)
+  { return __builtin_erf(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    erf(_Tp __x)
+    { return __builtin_erf(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  erfc(float __x)
+  { return __builtin_erfc(__x); }
+
+  constexpr long double
+  erfc(long double __x)
+  { return __builtin_erfc(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    erfc(_Tp __x)
+    { return __builtin_erfc(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  exp2(float __x)
+  { return __builtin_exp2(__x); }
+
+  constexpr long double
+  exp2(long double __x)
+  { return __builtin_exp2(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    exp2(_Tp __x)
+    { return __builtin_exp2(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  expm1(float __x)
+  { return __builtin_expm1(__x); }
+
+  constexpr long double
+  expm1(long double __x)
+  { return __builtin_expm1(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    expm1(_Tp __x)
+    { return __builtin_expm1(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  fdim(float __x, float __y)
+  { return __builtin_fdim(__x, __y); }
+
+  constexpr long double
+  fdim(long double __x, long double __y)
+  { return __builtin_fdim(__x, __y); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp, typename _Up>
+    constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+    fdim(_Tp __x, _Up __y)
+    {
+      typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+      return fdim(__type(__x), __type(__y));
+    }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  fma(float __x, float __y, float __z)
+  // { return __builtin_fma(__x, __y, __z); }
+  { return __builtin_fma(__x, __y, __z); } // AVR: float = double
+
+  constexpr long double
+  fma(long double __x, long double __y, long double __z)
+  { return __builtin_fma(__x, __y, __z); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp, typename _Up, typename _Vp>
+    constexpr typename __gnu_cxx::__promote_3<_Tp, _Up, _Vp>::__type
+    fma(_Tp __x, _Up __y, _Vp __z)
+    {
+      typedef typename __gnu_cxx::__promote_3<_Tp, _Up, _Vp>::__type __type;
+      return fma(__type(__x), __type(__y), __type(__z));
+    }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  fmax(float __x, float __y)
+  { return __builtin_fmax(__x, __y); }
+
+  constexpr long double
+  fmax(long double __x, long double __y)
+  { return __builtin_fmax(__x, __y); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp, typename _Up>
+    constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+    fmax(_Tp __x, _Up __y)
+    {
+      typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+      return fmax(__type(__x), __type(__y));
+    }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  fmin(float __x, float __y)
+  { return __builtin_fmin(__x, __y); }
+
+  constexpr long double
+  fmin(long double __x, long double __y)
+  { return __builtin_fmin(__x, __y); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp, typename _Up>
+    constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+    fmin(_Tp __x, _Up __y)
+    {
+      typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+      return fmin(__type(__x), __type(__y));
+    }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  hypot(float __x, float __y)
+  { return __builtin_hypot(__x, __y); }
+
+  constexpr long double
+  hypot(long double __x, long double __y)
+  { return __builtin_hypot(__x, __y); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp, typename _Up>
+    constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+    hypot(_Tp __x, _Up __y)
+    {
+      typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+      return hypot(__type(__x), __type(__y));
+    }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr int
+  ilogb(float __x)
+  { return __builtin_ilogb(__x); }
+
+  constexpr int
+  ilogb(long double __x)
+  { return __builtin_ilogb(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr
+    typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                    int>::__type
+    ilogb(_Tp __x)
+    { return __builtin_ilogb(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  lgamma(float __x)
+  { return __builtin_lgamma(__x); }
+
+  constexpr long double
+  lgamma(long double __x)
+  { return __builtin_lgamma(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    lgamma(_Tp __x)
+    { return __builtin_lgamma(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr long long
+  llrint(float __x)
+  { return __builtin_llrint(__x); }
+
+  constexpr long long
+  llrint(long double __x)
+  { return __builtin_llrint(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              long long>::__type
+    llrint(_Tp __x)
+    { return __builtin_llrint(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr long long
+  llround(float __x)
+  { return __builtin_llround(__x); }
+
+  constexpr long long
+  llround(long double __x)
+  { return __builtin_llround(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              long long>::__type
+    llround(_Tp __x)
+    { return __builtin_llround(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  log1p(float __x)
+  { return __builtin_log1p(__x); }
+
+  constexpr long double
+  log1p(long double __x)
+  { return __builtin_log1p(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    log1p(_Tp __x)
+    { return __builtin_log1p(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  // DR 568.
+  constexpr float
+  log2(float __x)
+  { return __builtin_log2(__x); }
+
+  constexpr long double
+  log2(long double __x)
+  { return __builtin_log2(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    log2(_Tp __x)
+    { return __builtin_log2(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  logb(float __x)
+  { return __builtin_logb(__x); }
+
+  constexpr long double
+  logb(long double __x)
+  { return __builtin_logb(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    logb(_Tp __x)
+    { return __builtin_logb(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr long
+  lrint(float __x)
+  { return __builtin_lrint(__x); }
+
+  constexpr long
+  lrint(long double __x)
+  { return __builtin_lrint(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              long>::__type
+    lrint(_Tp __x)
+    { return __builtin_lrint(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr long
+  lround(float __x)
+  { return __builtin_lround(__x); }
+
+  constexpr long
+  lround(long double __x)
+  { return __builtin_lround(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              long>::__type
+    lround(_Tp __x)
+    { return __builtin_lround(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  nearbyint(float __x)
+  { return __builtin_nearbyint(__x); }
+
+  constexpr long double
+  nearbyint(long double __x)
+  { return __builtin_nearbyint(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    nearbyint(_Tp __x)
+    { return __builtin_nearbyint(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  nextafter(float __x, float __y)
+  { return __builtin_nextafter(__x, __y); }
+
+  constexpr long double
+  nextafter(long double __x, long double __y)
+  { return __builtin_nextafter(__x, __y); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp, typename _Up>
+    constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+    nextafter(_Tp __x, _Up __y)
+    {
+      typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+      return nextafter(__type(__x), __type(__y));
+    }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  nexttoward(float __x, long double __y)
+  { return __builtin_nexttoward(__x, __y); }
+
+  constexpr long double
+  nexttoward(long double __x, long double __y)
+  { return __builtin_nexttoward(__x, __y); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    nexttoward(_Tp __x, long double __y)
+    { return __builtin_nexttoward(__x, __y); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  remainder(float __x, float __y)
+  { return __builtin_remainder(__x, __y); }
+
+  constexpr long double
+  remainder(long double __x, long double __y)
+  { return __builtin_remainder(__x, __y); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp, typename _Up>
+    constexpr typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+    remainder(_Tp __x, _Up __y)
+    {
+      typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+      return remainder(__type(__x), __type(__y));
+    }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  inline float
+  remquo(float __x, float __y, int* __pquo)
+  { return __builtin_remquo(__x, __y, __pquo); }
+
+  inline long double
+  remquo(long double __x, long double __y, int* __pquo)
+  { return __builtin_remquo(__x, __y, __pquo); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp, typename _Up>
+    inline typename __gnu_cxx::__promote_2<_Tp, _Up>::__type
+    remquo(_Tp __x, _Up __y, int* __pquo)
+    {
+      typedef typename __gnu_cxx::__promote_2<_Tp, _Up>::__type __type;
+      return remquo(__type(__x), __type(__y), __pquo);
+    }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  rint(float __x)
+  { return __builtin_rint(__x); }
+
+  constexpr long double
+  rint(long double __x)
+  { return __builtin_rint(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    rint(_Tp __x)
+    { return __builtin_rint(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  round(float __x)
+  { return __builtin_round(__x); }
+
+  constexpr long double
+  round(long double __x)
+  { return __builtin_round(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    round(_Tp __x)
+    { return __builtin_round(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  scalbln(float __x, long __ex)
+  { return __builtin_scalbln(__x, __ex); }
+
+  constexpr long double
+  scalbln(long double __x, long __ex)
+  { return __builtin_scalbln(__x, __ex); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    scalbln(_Tp __x, long __ex)
+    { return __builtin_scalbln(__x, __ex); }
+#endif
+ 
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  scalbn(float __x, int __ex)
+  { return __builtin_scalbn(__x, __ex); }
+
+  constexpr long double
+  scalbn(long double __x, int __ex)
+  { return __builtin_scalbn(__x, __ex); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    scalbn(_Tp __x, int __ex)
+    { return __builtin_scalbn(__x, __ex); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  tgamma(float __x)
+  { return __builtin_tgamma(__x); }
+
+  constexpr long double
+  tgamma(long double __x)
+  { return __builtin_tgamma(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    tgamma(_Tp __x)
+    { return __builtin_tgamma(__x); }
+#endif
+ 
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_FP
+  constexpr float
+  trunc(float __x)
+  { return __builtin_trunc(__x); }
+
+  constexpr long double
+  trunc(long double __x)
+  { return __builtin_trunc(__x); }
+#endif
+
+#ifndef __CORRECT_ISO_CPP11_MATH_H_PROTO_INT
+  template<typename _Tp>
+    constexpr typename __gnu_cxx::__enable_if<__is_integer<_Tp>::__value, 
+                                              double>::__type
+    trunc(_Tp __x)
+    { return __builtin_trunc(__x); }
+#endif
+
+#endif // __AVR__
 
 _GLIBCXX_END_NAMESPACE_VERSION
 } // namespace
