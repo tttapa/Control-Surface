@@ -99,7 +99,11 @@ STL-test</h1>
 <div class="line"> </div>
 <div class="line"><a name="a0"></a><a class="code" href="../../d1/d65/Warnings_8hpp.html#a9f2deeea1dd06b45ebc381da1633c7ee">AH_DIAGNOSTIC_WERROR</a>() <span class="comment">// ESP32 -Werror=c++0x-compat fix</span></div>
 <div class="line"> </div>
-<div class="line">using std::is_same;</div>
+<div class="line">long <span class="keywordtype">double</span> f() {</div>
+<div class="line">  <span class="keywordflow">return</span> rand();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using</span> std::is_same;</div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#define TEST_CMATH_FUNCTION(Fun)                                               \</span></div>
 <div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((float)1)), float&gt;::value,                \</span></div>
@@ -107,12 +111,16 @@ STL-test</h1>
 <div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((double)1)), double&gt;::value,              \</span></div>
 <div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(double)&quot;);                               \</span></div>
 <div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((long double)1)), long double&gt;::value,    \</span></div>
-<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(long double)&quot;);</span></div>
+<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(long double)&quot;);                          \</span></div>
+<div class="line"><span class="preprocessor">  Serial.println(Fun((float)f()));                                             \</span></div>
+<div class="line"><span class="preprocessor">  Serial.println(Fun((double)f()));                                            \</span></div>
+<div class="line"><span class="preprocessor">  Serial.println((double)Fun((long double)f()));</span></div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#define TEST_CMATH_FUNCTION_I(Fun)                                             \</span></div>
 <div class="line"><span class="preprocessor">  TEST_CMATH_FUNCTION(Fun);                                                    \</span></div>
 <div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((int)1)), int&gt;::value,                    \</span></div>
-<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(int)&quot;);</span></div>
+<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(int)&quot;);                                  \</span></div>
+<div class="line"><span class="preprocessor">  Serial.println(Fun((int)f()));</span></div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#define TEST_CMATH_FUNCTION3(Fun)                                              \</span></div>
 <div class="line"><span class="preprocessor">  static_assert(                                                               \</span></div>
@@ -124,7 +132,11 @@ STL-test</h1>
 <div class="line"><span class="preprocessor">  static_assert(                                                               \</span></div>
 <div class="line"><span class="preprocessor">    is_same&lt;decltype(Fun((long double)1, (long double)1, (long double)1)),     \</span></div>
 <div class="line"><span class="preprocessor">            long double&gt;::value,                                               \</span></div>
-<div class="line"><span class="preprocessor">    &quot;cmath error &quot; #Fun &quot;(long double)&quot;);</span></div>
+<div class="line"><span class="preprocessor">    &quot;cmath error &quot; #Fun &quot;(long double)&quot;);                                      \</span></div>
+<div class="line"><span class="preprocessor">  Serial.println(Fun((float)f(), (float)f(), (float)f()));                     \</span></div>
+<div class="line"><span class="preprocessor">  Serial.println(Fun((double)f(), (double)f(), (double)f()));                  \</span></div>
+<div class="line"><span class="preprocessor">  Serial.println(                                                              \</span></div>
+<div class="line"><span class="preprocessor">    (double)Fun((long double)f(), (long double)f(), (long double)f()));</span></div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#define TEST_CMATH_FUNCTION2(Fun)                                              \</span></div>
 <div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((float)1, (float)1)), float&gt;::value,      \</span></div>
@@ -133,26 +145,10 @@ STL-test</h1>
 <div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(double)&quot;);                               \</span></div>
 <div class="line"><span class="preprocessor">  static_assert(is_same&lt;decltype(Fun((long double)1, (long double)1)),         \</span></div>
 <div class="line"><span class="preprocessor">                        long double&gt;::value,                                   \</span></div>
-<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(long double)&quot;);</span></div>
-<div class="line"> </div>
-<div class="line">TEST_CMATH_FUNCTION(std::round);</div>
-<div class="line">TEST_CMATH_FUNCTION(std::sin);</div>
-<div class="line">TEST_CMATH_FUNCTION(std::cos);</div>
-<div class="line">TEST_CMATH_FUNCTION(std::tan);</div>
-<div class="line">TEST_CMATH_FUNCTION(std::asin);</div>
-<div class="line">TEST_CMATH_FUNCTION(std::acos);</div>
-<div class="line">TEST_CMATH_FUNCTION(std::atan);</div>
-<div class="line">TEST_CMATH_FUNCTION(std::exp);</div>
-<div class="line">TEST_CMATH_FUNCTION(std::log);</div>
-<div class="line">TEST_CMATH_FUNCTION(std::log10);</div>
-<div class="line"> </div>
-<div class="line">TEST_CMATH_FUNCTION(std::asinh);</div>
-<div class="line">TEST_CMATH_FUNCTION(std::exp2);</div>
-<div class="line"> </div>
-<div class="line">TEST_CMATH_FUNCTION_I(std::abs);</div>
-<div class="line"> </div>
-<div class="line">TEST_CMATH_FUNCTION2(std::hypot);</div>
-<div class="line">TEST_CMATH_FUNCTION3(std::fma);</div>
+<div class="line"><span class="preprocessor">                &quot;cmath error &quot; #Fun &quot;(long double)&quot;);                          \</span></div>
+<div class="line"><span class="preprocessor">  Serial.println(Fun((float)f(), (float)f()));                                 \</span></div>
+<div class="line"><span class="preprocessor">  Serial.println(Fun((double)f(), (double)f()));                               \</span></div>
+<div class="line"><span class="preprocessor">  Serial.println((double)Fun((long double)f(), (long double)f()));</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
 <div class="line">  Serial.begin(115200);</div>
@@ -170,6 +166,27 @@ STL-test</h1>
 <div class="line">  <span class="keyword">auto</span> ptr = AH::make_unique&lt;std::array&lt;int, 10&gt;&gt;();</div>
 <div class="line">  ptr-&gt;operator[](2) = 42;</div>
 <div class="line">  Serial.println(ptr-&gt;at(2));</div>
+<div class="line"> </div>
+<div class="line">  TEST_CMATH_FUNCTION(std::round);</div>
+<div class="line">  TEST_CMATH_FUNCTION(std::sin);</div>
+<div class="line">  TEST_CMATH_FUNCTION(std::cos);</div>
+<div class="line">  TEST_CMATH_FUNCTION(std::tan);</div>
+<div class="line">  TEST_CMATH_FUNCTION(std::asin);</div>
+<div class="line">  TEST_CMATH_FUNCTION(std::acos);</div>
+<div class="line">  TEST_CMATH_FUNCTION(std::atan);</div>
+<div class="line">  TEST_CMATH_FUNCTION(std::exp);</div>
+<div class="line">  TEST_CMATH_FUNCTION(std::log);</div>
+<div class="line">  TEST_CMATH_FUNCTION(std::log10);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifndef __AVR__</span></div>
+<div class="line">  TEST_CMATH_FUNCTION(std::asinh);</div>
+<div class="line">  TEST_CMATH_FUNCTION(std::exp2);</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line">  TEST_CMATH_FUNCTION_I(std::abs);</div>
+<div class="line"> </div>
+<div class="line">  TEST_CMATH_FUNCTION2(std::hypot);</div>
+<div class="line">  TEST_CMATH_FUNCTION3(std::fma);</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {}</div>
