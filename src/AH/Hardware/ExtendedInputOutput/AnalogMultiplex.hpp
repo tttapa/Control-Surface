@@ -133,8 +133,8 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
     void afterReading();
 
     // The enable pin is active low.
-    constexpr static uint8_t MUX_ENABLED = LOW;
-    constexpr static uint8_t MUX_DISABLED = HIGH;
+    constexpr static auto MUX_ENABLED = LOW;
+    constexpr static auto MUX_DISABLED = HIGH;
 };
 
 /**

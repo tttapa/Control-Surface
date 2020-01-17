@@ -97,7 +97,7 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
      */
     void analogWrite(pin_t pin, analog_t val) override
         __attribute__((deprecated)) {
-        digitalWrite(pin, val >= 0x80);
+        digitalWrite(pin, val >= 0x80 ? HIGH : LOW);
     }
 
     /**

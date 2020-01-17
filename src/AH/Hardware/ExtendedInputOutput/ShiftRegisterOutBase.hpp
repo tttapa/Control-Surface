@@ -98,7 +98,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      */
     void analogWrite(pin_t pin, analog_t val) override
         __attribute__((deprecated)) {
-        digitalWrite(pin, val >= 0x80);
+        digitalWrite(pin, val >= 0x80 ? HIGH : LOW);
     }
 
     /**
