@@ -6,6 +6,7 @@
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 #include "StaticSizeExtendedIOElement.hpp"
+#include "ExtendedInputOutput.hpp"
 #include <AH/Containers/BitArray.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -23,13 +24,6 @@ BEGIN_AH_NAMESPACE
  */
 template <uint8_t N>
 class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
-  public:
-#if defined(__SAM3X8E__) || defined(__SAMD21G18A__)
-    using BitOrder_t = BitOrder;
-#else
-    using BitOrder_t = uint8_t;
-#endif
-
   protected:
     /**
      * @brief   Create a new ShiftRegisterOutBase object with a given bit order,
