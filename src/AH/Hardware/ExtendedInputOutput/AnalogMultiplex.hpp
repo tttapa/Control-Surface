@@ -191,7 +191,7 @@ template <uint8_t N>
 void AnalogMultiplex<N>::setMuxAddress(uint8_t address) {
     uint8_t mask = 1;
     for (const pin_t &addressPin : addressPins) {
-        ExtIO::digitalWrite(addressPin, (address & mask) != 0);
+        ExtIO::digitalWrite(addressPin, (address & mask) != 0 ? HIGH : LOW);
         mask <<= 1;
     }
 #if !defined(__AVR__) && defined(ARDUINO)
