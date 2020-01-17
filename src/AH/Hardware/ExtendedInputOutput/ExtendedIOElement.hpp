@@ -5,8 +5,9 @@
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
-#include <AH/Hardware/Hardware-Types.hpp>
+#include "ExtendedInputOutput.hpp"
 #include <AH/Containers/LinkedList.hpp>
+#include <AH/Hardware/Hardware-Types.hpp>
 
 BEGIN_AH_NAMESPACE
 
@@ -88,7 +89,7 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
      *          The mode to set the pin to (e.g. `INPUT`, `OUTPUT` or 
      *          `INPUT_PULLUP`).
      */
-    virtual void pinMode(pin_t pin, uint8_t mode) = 0;
+    virtual void pinMode(pin_t pin, PinMode_t mode) = 0;
 
     /** 
      * @brief   Set the output of the given pin to the given state.
@@ -98,7 +99,7 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
      * @param   state
      *          The new state to set the pin to.
      */
-    virtual void digitalWrite(pin_t pin, uint8_t state) = 0;
+    virtual void digitalWrite(pin_t pin, PinStatus_t state) = 0;
 
     /** 
      * @brief   Read the state of the given pin.
