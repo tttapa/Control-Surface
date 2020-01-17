@@ -61,14 +61,14 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      *          The new mode of the input pin: 
      *          either INPUT or INPUT_PULLUP.
      */
-    void pinMode(pin_t pin, uint8_t mode) override;
+    void pinMode(pin_t pin, PinMode_t mode) override;
 
     /**
      * @brief   The digitalWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
-    void digitalWrite(pin_t, uint8_t) override // LCOV_EXCL_LINE
-        __attribute__((deprecated)) {}         // LCOV_EXCL_LINE
+    void digitalWrite(pin_t, PinStatus_t) override // LCOV_EXCL_LINE
+        __attribute__((deprecated)) {}             // LCOV_EXCL_LINE
 
     /**
      * @brief   Read the digital state of the given input.
@@ -133,8 +133,8 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
     void afterReading();
 
     // The enable pin is active low.
-    constexpr static uint8_t MUX_ENABLED = LOW;
-    constexpr static uint8_t MUX_DISABLED = HIGH;
+    constexpr static auto MUX_ENABLED = LOW;
+    constexpr static auto MUX_DISABLED = HIGH;
 };
 
 /**
@@ -156,7 +156,7 @@ using CD74HC4051 = AnalogMultiplex<3>;
 // -------------------------------------------------------------------------- //
 
 template <uint8_t N>
-void AnalogMultiplex<N>::pinMode(pin_t, uint8_t mode) {
+void AnalogMultiplex<N>::pinMode(pin_t, PinMode_t mode) {
     ExtIO::pinMode(analogPin, mode);
 }
 
@@ -191,7 +191,7 @@ template <uint8_t N>
 void AnalogMultiplex<N>::setMuxAddress(uint8_t address) {
     uint8_t mask = 1;
     for (const pin_t &addressPin : addressPins) {
-        ExtIO::digitalWrite(addressPin, (address & mask) != 0);
+        ExtIO::digitalWrite(addressPin, (address & mask) != 0 ? HIGH : LOW);
         mask <<= 1;
     }
 #if !defined(__AVR__) && !defined(__x86_64__)

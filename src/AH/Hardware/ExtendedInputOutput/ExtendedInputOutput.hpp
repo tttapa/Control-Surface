@@ -3,13 +3,15 @@
 #pragma once
 
 #include <AH/Settings/Warnings.hpp>
+#include <AH/Settings/NamespaceSettings.hpp>
+
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <Arduino.h> // pin functions and constants
 AH_DIAGNOSTIC_POP()
 
-#include "ExtendedIOElement.hpp"
+#include <AH/Hardware/Hardware-Types.hpp>
 
 BEGIN_AH_NAMESPACE
 
@@ -65,6 +67,8 @@ using BitOrder_t = BitOrder;
 #endif
 
 BEGIN_AH_NAMESPACE
+
+class ExtendedIOElement;
 
 /**
  * @brief   A namespace with alternatives to the standard Arduino IO functions

@@ -1,8 +1,8 @@
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
-#include "ExtendedIOElement.hpp"
 #include "ExtendedInputOutput.hpp"
+#include "ExtendedIOElement.hpp"
 #include <AH/Error/Error.hpp>
 
 BEGIN_AH_NAMESPACE

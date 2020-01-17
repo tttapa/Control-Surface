@@ -10,8 +10,7 @@
 
 #pragma once
 
-#include <Arduino.h> // For VSCode errors in examples
-#include <AH/Settings/NamespaceSettings.hpp>
+#include <AH/Math/MinMaxFix.hpp>
 
 BEGIN_AH_NAMESPACE
 END_AH_NAMESPACE
