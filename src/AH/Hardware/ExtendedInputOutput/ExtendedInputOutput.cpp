@@ -33,7 +33,7 @@ ExtendedIOElement &getIOElementOfPin(pin_t pin) {
     // reference.
 }
 
-void pinMode(pin_t pin, uint8_t mode) {
+void pinMode(pin_t pin, PinMode_t mode) {
     // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(mode));
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::pinMode(pin, mode);
@@ -42,9 +42,9 @@ void pinMode(pin_t pin, uint8_t mode) {
         el.pinMode(pin - el.getStart(), mode);
     }
 }
-void pinMode(int pin, uint8_t mode) { pinMode((pin_t)pin, mode); }
+void pinMode(int pin, PinMode_t mode) { pinMode((pin_t)pin, mode); }
 
-void digitalWrite(pin_t pin, uint8_t val) {
+void digitalWrite(pin_t pin, PinStatus_t val) {
     // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::digitalWrite(pin, val);
@@ -53,7 +53,7 @@ void digitalWrite(pin_t pin, uint8_t val) {
         el.digitalWrite(pin - el.getStart(), val);
     }
 }
-void digitalWrite(int pin, uint8_t val) { digitalWrite((pin_t)pin, val); }
+void digitalWrite(int pin, PinStatus_t val) { digitalWrite((pin_t)pin, val); }
 
 int digitalRead(pin_t pin) {
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
@@ -66,7 +66,7 @@ int digitalRead(pin_t pin) {
 }
 int digitalRead(int pin) { return digitalRead((pin_t)pin); }
 
-void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val) {
+void shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder, uint8_t val) {
     uint8_t i;
 
     for (i = 0; i < 8; i++) {
@@ -79,7 +79,7 @@ void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val) {
         digitalWrite(clockPin, LOW);
     }
 }
-void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val) {
+void shiftOut(int dataPin, int clockPin, BitOrder_t bitOrder, uint8_t val) {
     shiftOut((pin_t)dataPin, (pin_t)clockPin, bitOrder, val);
 }
 
