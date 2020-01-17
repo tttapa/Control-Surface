@@ -1,6 +1,7 @@
 #include <gmock-wrapper.h>
 
 #include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <AH/Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
 #include <type_traits>
 
 using namespace ::testing;

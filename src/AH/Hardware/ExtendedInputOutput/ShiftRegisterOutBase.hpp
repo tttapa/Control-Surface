@@ -5,8 +5,8 @@
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
-#include "StaticSizeExtendedIOElement.hpp"
 #include "ExtendedInputOutput.hpp"
+#include "StaticSizeExtendedIOElement.hpp"
 #include <AH/Containers/BitArray.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -43,7 +43,8 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      * @brief   The pinMode function is not implemented because the mode is
      *          `OUTPUT` by definition.
      */
-    void pinMode(pin_t pin, uint8_t mode) override __attribute__((deprecated)) {
+    void pinMode(pin_t pin, PinMode_t mode) override
+        __attribute__((deprecated)) {
         (void)pin;
         (void)mode;
     }
@@ -57,7 +58,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      *          The value to set the pin to.
      *          (Either `HIGH` (1) or `LOW` (0))
      */
-    void digitalWrite(pin_t pin, uint8_t val) override;
+    void digitalWrite(pin_t pin, PinStatus_t val) override;
 
     /**
      * @brief   Get the current state of a given output pin.
