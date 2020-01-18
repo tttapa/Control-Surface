@@ -9,7 +9,7 @@ AH_DIAGNOSTIC_POP()
 
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
-#ifdef __AVR__
+#ifdef PSTR
 #pragma push_macro("PSTR")
 #undef PSTR
 #define PSTR(s) (s)
@@ -17,7 +17,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 using FlashString_t = std::remove_reference<decltype(*F(""))>::type *;
 
-#ifdef __AVR__
+#ifdef PSTR 
 #pragma pop_macro("PSTR")
 #endif
 
