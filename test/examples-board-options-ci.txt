@@ -3,6 +3,8 @@ esp8266=esp8266:esp8266:d1_mini:xtal=80,vt=flash,exception=legacy,ssl=all,eesz=4
 teensy 3.x=skip
 avr=arduino:avr:uno
 avr usb=arduino:avr:leonardo
+mega=arduino:avr:mega:cpu=atmega2560
 leonardo=arduino:avr:leonardo
 due=arduino:sam:arduino_due_x_dbg
 nano 33=arduino:samd:nano_33_iot
+nano every=arduino:megaavr:nona4809:mode=off
