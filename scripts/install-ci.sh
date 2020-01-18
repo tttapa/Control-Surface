@@ -28,6 +28,7 @@ else
     arduino --install-boards "arduino:avr:1.8.1"
     arduino --install-boards "arduino:sam"
     arduino --install-boards "arduino:samd"
+    arduino --install-boards "arduino:megaavr"
 
     cd /tmp
     wget https://www.pjrc.com/teensy/td_148/TeensyduinoInstall.linux64
