@@ -3,7 +3,7 @@
  * normal IO pins. This version uses bit-banging to drive the  shift register. 
  * You should probably be using the SPI version instead.
  * 
- * @boards  AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
