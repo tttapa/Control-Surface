@@ -12,7 +12,7 @@
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <Arduino.h>
+#include <AH/Arduino-Wrapper.h>
 AH_DIAGNOSTIC_POP()
 
 #if defined(ADC_RESOLUTION)

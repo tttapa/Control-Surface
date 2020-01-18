@@ -96,7 +96,7 @@ class Button {
     State getState() const;
 
     /// @brief   Return the name of the state as a string.
-    static const __FlashStringHelper *getName(State state);
+    static FlashString_t getName(State state);
 
     /// Return the time point (in milliseconds) when the button last bounced.
     unsigned long previousBounceTime() const;

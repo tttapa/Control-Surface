@@ -9,7 +9,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #include <AH/Containers/BitArray.hpp>
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <Arduino.h> // MSBFIRST, SS
+#include <AH/Arduino-Wrapper.h> // MSBFIRST, SS
 AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE
