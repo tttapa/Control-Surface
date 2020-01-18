@@ -1,6 +1,7 @@
 #pragma once
 
 #include <AH/Math/MinMaxFix.hpp>
+#include <AH/STL/type_traits>
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <Arduino.h> // min max
@@ -14,7 +15,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #define PSTR(s) (s)
 #endif
 
-using FlashString_t = decltype(F(""));
+using FlashString_t = std::remove_reference<decltype(*F(""))>::type *;
 
 #ifdef __AVR__
 #pragma pop_macro("PSTR")
