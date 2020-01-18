@@ -4,7 +4,7 @@
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <Arduino.h> // millis, micros
+#include <AH/Arduino-Wrapper.h> // millis, micros
 AH_DIAGNOSTIC_POP()
 
 #include <AH/Settings/NamespaceSettings.hpp>
