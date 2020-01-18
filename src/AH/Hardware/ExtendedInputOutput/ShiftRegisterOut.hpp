@@ -8,7 +8,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #include "ShiftRegisterOutBase.hpp"
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <Arduino.h> // MSBFIRST
+#include <AH/Arduino-Wrapper.h> // MSBFIRST
 AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE

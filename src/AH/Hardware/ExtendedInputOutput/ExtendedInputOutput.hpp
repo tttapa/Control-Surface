@@ -8,7 +8,7 @@
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <Arduino.h> // pin functions and constants
+#include <AH/Arduino-Wrapper.h> // pin functions and constants
 AH_DIAGNOSTIC_POP()
 
 #include <AH/Hardware/Hardware-Types.hpp>
