@@ -2,7 +2,7 @@
  * This example demonstrates how to use a Serial MIDI Interface, for use with
  * 5-pin DIN connectors, for example.
  *
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------

@@ -3,7 +3,7 @@
  * so you can send the MIDI output over both MIDI USB and 5-pin DIN MIDI, for 
  * example. MIDI input is received from all interfaces as well.
  *
- * @boards  AVR USB, Due, Teensy 3.x
+ * @boards  AVR USB, Nano Every, Due, Teensy 3.x
  * 
  * Connections
  * -----------
