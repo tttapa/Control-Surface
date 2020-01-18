@@ -1,8 +1,8 @@
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
-#include "ExtendedInputOutput.hpp"
 #include "ExtendedIOElement.hpp"
+#include "ExtendedInputOutput.hpp"
 #include <AH/Error/Error.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -71,9 +71,9 @@ void shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder, uint8_t val) {
 
     for (i = 0; i < 8; i++) {
         if (bitOrder == LSBFIRST)
-            digitalWrite(dataPin, !!(val & (1 << i)));
+            digitalWrite(dataPin, (val & (1 << i)) ? HIGH : LOW);
         else
-            digitalWrite(dataPin, !!(val & (1 << (7 - i))));
+            digitalWrite(dataPin, (val & (1 << (7 - i))) ? HIGH : LOW);
 
         digitalWrite(clockPin, HIGH);
         digitalWrite(clockPin, LOW);
