@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <Arduino.h> // For VSCode errors in examples
+#include <AH/Arduino-Wrapper.h> // For VSCode errors in examples
 
 #include <AH/Teensy/TeensyUSBTypes.hpp>
 

@@ -140,7 +140,7 @@ warning = """
 hpp = warning + """
 #pragma once
 
-#include <Arduino.h>  // __FlashStringHelper
+#include <AH/Arduino-Wrapper.h>  // __FlashStringHelper
 #include <Settings/NamespaceSettings.hpp>
 
 """
@@ -158,10 +158,10 @@ for kv in strings:
     cpp += '"' + kv[0] + '";'
     cpp += '\n'
 cpp += '\n'
-cpp += 'const static __FlashStringHelper *const ' + lutname + '[] PROGMEM = {'
+cpp += 'static FlashString_t const ' + lutname + '[] PROGMEM = {'
 cpp += '\n'
 for kv in strings:
-    cpp += '    reinterpret_cast<const __FlashStringHelper *>'
+    cpp += '    reinterpret_cast<FlashString_t>'
     cpp += '(flashstr_0x{:02X}), '.format(kv[1])
     cpp += '\n'
 
@@ -183,7 +183,7 @@ namespace MCU {{
  * @param   note 
  *          The note number of the function to look up.
  */
-const __FlashStringHelper *{functionname}(uint8_t note);
+FlashString_t {functionname}(uint8_t note);
 
 }} // namespace MCU 
 
@@ -196,12 +196,12 @@ cpp += """
 BEGIN_CS_NAMESPACE
 namespace MCU {{
 
-const __FlashStringHelper *{functionname}(uint8_t note) {{
+FlashString_t {functionname}(uint8_t note) {{
     const static char invalid[] PROGMEM = "<out-of-bounds>";
     if (note >= 0x{length:02X})
-        return reinterpret_cast<const __FlashStringHelper *>(invalid);
+        return reinterpret_cast<FlashString_t>(invalid);
     const void *flashptr = pgm_read_ptr_near({lutname} + note);
-    return reinterpret_cast<const __FlashStringHelper *>(flashptr);
+    return reinterpret_cast<FlashString_t>(flashptr);
 }}
 
 }} // namespace MCU 

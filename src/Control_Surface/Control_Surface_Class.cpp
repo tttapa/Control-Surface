@@ -11,7 +11,7 @@
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Selectors/Selector.hpp>
 
-#include <Arduino.h>
+#include <AH/Arduino-Wrapper.h>
 
 BEGIN_CS_NAMESPACE
 
