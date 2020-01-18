@@ -10,6 +10,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 #ifdef __AVR__
 #pragma push_macro("PSTR")
+#undef PSTR
 #define PSTR(s) (s)
 #endif
 
