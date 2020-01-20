@@ -34,7 +34,6 @@ ExtendedIOElement &getIOElementOfPin(pin_t pin) {
 }
 
 void pinMode(pin_t pin, uint8_t mode) {
-    // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(mode));
     if (pin == NO_PIN)
         return;
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
@@ -47,7 +46,6 @@ void pinMode(pin_t pin, uint8_t mode) {
 void pinMode(int pin, uint8_t mode) { pinMode((pin_t)pin, mode); }
 
 void digitalWrite(pin_t pin, uint8_t val) {
-    // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
     if (pin == NO_PIN)
         return;
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
@@ -103,7 +101,7 @@ analog_t analogRead(pin_t pin) {
 analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
 
 void analogWrite(pin_t pin, analog_t val) {
-    // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
+    // DEBUGFN(NAMEDVALUE(pin) << '\t' << NAMEDVALUE(val));
     if (pin == NO_PIN)
         return;
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {

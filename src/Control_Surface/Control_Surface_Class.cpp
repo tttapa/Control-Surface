@@ -24,7 +24,7 @@ Control_Surface_ &Control_Surface_::getInstance() {
 
 void Control_Surface_::begin() {
 #if defined(ARDUINO) && defined(DEBUG_OUT)
-    DEBUG_OUT.begin(defaultBaudRate);
+    DEBUG_OUT.begin(AH::defaultBaudRate);
     delay(250);
 #endif
     FilteredAnalog<>::setupADC();
@@ -159,13 +159,15 @@ void Control_Surface_::updateDisplays() {
     DisplayInterface *previousDisplay = nullptr;
     for (DisplayElement &displayElement : DisplayElement::getAll()) {
         DisplayInterface *thisDisplay = &displayElement.getDisplay();
+        if (!thisDisplay->isEnabled())
+            continue;
         if (thisDisplay != previousDisplay) {
             if (previousDisplay)
                 previousDisplay->display();
+            previousDisplay = thisDisplay;
             thisDisplay->clearAndDrawBackground();
         }
         displayElement.draw();
-        previousDisplay = thisDisplay;
     }
     if (previousDisplay)
         previousDisplay->display();

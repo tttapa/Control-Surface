@@ -26,7 +26,8 @@
  * -------
  * 
  * Select the Arduino as a custom MIDI controller in your DAW, and use the 
- * MIDI learn option to assign the potentiometer to a function.
+ * MIDI learn option to assign the potentiometer to a function.  
+ * It will send the MIDI Control Change Channel Volume parameter for channel 1.
  * 
  * Written by PieterP, 2019-08-13  
  * https://github.com/tttapa/Control-Surface

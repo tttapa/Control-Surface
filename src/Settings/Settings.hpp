@@ -3,9 +3,10 @@
 #endif
 
 /**
- * @file Settings.hpp
- *
- * @brief All user settings and debugging options can be changed here.
+ * @file
+ * 
+ * @brief   All user settings and debugging options for the Control Change 
+ *          library can be changed here.
  */
 
 #include "NamespaceSettings.hpp"

@@ -152,9 +152,60 @@
  * -------
  * 
  * Select the Arduino as a custom MIDI controller in your DAW, and use the 
- * MIDI learn option to assign the potentiometer to a function.
+ * MIDI learn option to assign the potentiometer to a function.  
+ * It will send the MIDI Control Change Channel Volume parameter for channel 1.
  * 
  * Written by PieterP, 2019-08-13  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "CCPotentiometer-Map.ino"
+ * 
+ * CCPotentiometer-Map
+ * ===================
+ *
+ * @brief   This is an example of the `CCPotentiometer` class of the 
+ *          Control_Surface library, and specifically, how to use the `map`
+ *          function to account for non-linearities of the potentiometer.
+ * 
+ * The map function in this example corrects for potentiometers that don't go
+ * all the way to the extreme values. Some potentiometers still read a value
+ * that's greater than 0 when turned all the way to the left. To fix that, tweak
+ * the `minimumValue` constant. If the potentiometer doesn't read the maximum
+ * value when turned all the way to the right, tweak the `maximumValue` 
+ * constant.
+ * 
+ * @boards  AVR, AVR USB, Due, Nano 33, ESP32, Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - If you open the Serial Monitor, you'll see the raw potentiometer values 
+ *   being printed.
+ * - Turn the potentiometer all the way to the left, and read the value. 
+ *   It should print a value close to zero.  
+ *   Set `minimumValue` to this printed value plus some safety margin 
+ *   (add 5%, for example).  
+ * - Now turn the potentiometer all the way to the right, and do the same thing
+ *   for `maximumValue`.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the potentiometer to a function.  
+ * It will send the MIDI Control Change Channel Volume parameter for channel 1.
+ * 
+ * Written by Pieter P, 16-06-2019  
  * https://github.com/tttapa/Control-Surface
  */
 
@@ -1117,6 +1168,38 @@
  */
 
 /**
+ * @example   "Serial-Interface.ino"
+ * 
+ * Serial-Interface
+ * ================
+ * 
+ * This example demonstrates how to use a Serial MIDI Interface, for use with
+ * 5-pin DIN connectors, for example.
+ *
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - This is just a simple MIDI controller with a single note button and an LED.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2020-01-09  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "SysEx-Send-Receive.ino"
  * 
  * SysEx-Send-Receive
@@ -1598,6 +1681,41 @@
  */
 
 /**
+ * @example   "5.Note-LED-PWM.ino"
+ * 
+ * 5.Note-LED-PWM
+ * ==============
+ *
+ * This example demonstrates the use of LEDs that respond to incoming  MIDI
+ * note events by changing the brightness of an LED using PWM.
+ * 
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * Connect an LED (+ current limiting resistor) to any PWM pin. Then change the
+ * pin number in the `ledPin` constant to match the pin with your LED connected.
+ * 
+ * Behavior
+ * --------
+ * 
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the LED will
+ * light up, with the brightness depending on the velocity.  
+ * If a Note Off event for that note is sent, the LED will turn off.  
+ * (A Note On event with a velocity of zero also counts as a Note Off event.)
+ * 
+ * Mapping
+ * -------
+ * 
+ * Route the MIDI output of a MIDI keyboard to the Arduino's MIDI input. Then
+ * play a middle C on the keyboard.
+ * 
+ * Written by PieterP, 2020-01-03  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "Mackie-Control-Universal-Reverse-Engineering.ino"
  * 
  * Mackie-Control-Universal-Reverse-Engineering
@@ -1933,4 +2051,3 @@
  * Written by PieterP, 2019-10-26  
  * https://github.com/tttapa/Control-Surface
  */
-

@@ -1,16 +1,24 @@
 # Installation
 
-This document assumes that the Arduino IDE is already installed, as well as the
-necessary hardware support packages, such as Teensyduino or the ESP32 Core.
+This document assumes that the **Arduino IDE** is already installed, as well as 
+the necessary hardware support packages, such as Teensyduino or the ESP32 Core, 
+if you're not using a standard board.  
+Here are some links to installation instructions for the Arduino IDE on
+[**Linux**](https://tttapa.github.io/Pages/Ubuntu/Software-Installation/Arduino/Arduino-IDE.html), on [**Windows**](https://www.arduino.cc/en/guide/windows), 
+and on [**OSX**](https://www.arduino.cc/en/guide/macOSX).
 
 You have to install the Control Surface library itself, as well as some 
 dependencies.
 
 If you want to keep up to date with the latest developments, or if you want an 
-easy way to update, the git install is recommended. Otherwise, you can use the
-no git install.
+easy way to update, the Git install is recommended. Otherwise, the installation
+without Git will be fine as well.
 
-## Installation (no git)
+If you're using **PlatformIO**, you can download the library using the PIO 
+Library Manager: 
+[https://platformio.org/lib/show/6793/Control Surface/installation](https://platformio.org/lib/show/6793/Control%20Surface/installation)
+
+## Installation (No Git)
 
 ### 1. Download
 
@@ -26,12 +34,11 @@ Then navigate to your downloads directory where you just downloaded the
 library.  
 Select it, and click _Ok_.
 
+## Installation (Git)
 
-## Installation (git)
+### 0. Install Git
 
-### 0. Install git
-
-If you haven't already, install git from https://git-scm.com/downloads or use 
+If you haven't already, install Git from https://git-scm.com/downloads or use 
 your system's package manager.
 
 On Ubuntu and other Debian-based distros: 
@@ -43,7 +50,7 @@ sudo apt install git
 
 Open a terminal window and change the directory to your Arduino folder.
 
-On Linux: 
+In a Linux terminal or Git Bash: 
 ```sh
 mkdir -p ~/Arduino/libraries && cd $_
 ```
@@ -56,7 +63,7 @@ git clone https://github.com/tttapa/Control-Surface
 
 ### 3. Updating to the latest version
 
-If you installed the library using git, you can easily update it when a new 
+If you installed the library using Git, you can easily update it when a new 
 version comes out.  
 To update to the latest `master` version:
 
@@ -67,13 +74,13 @@ git pull
 ## Dependencies
 
 If you are using an Arduino board with on-board USB capabilities, you need the
-[MIDIUSB library](https://github.com/arduino-libraries/MIDIUSB). 
+[**MIDIUSB library**](https://github.com/arduino-libraries/MIDIUSB). 
 Install it as explained before, or by using the [Library Manager](
 https://www.arduino.cc/en/Guide/Libraries#toc3).
 
-The Control Surface Library depends on the [PJRC Encoder library](
+The Control Surface Library depends on the [**PJRC Encoder library**](
 https://www.pjrc.com/teensy/td_libs_Encoder.html) for reading the
 input from rotary encoders. Download and install it if you plan on using those.
 
 If you are using a Teensy, you don't need the MIDIUSB library, and the Encoder
-library should already be installed.
+library should already be installed by default.
