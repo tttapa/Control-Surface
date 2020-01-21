@@ -55,27 +55,25 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
     -Wall -Wextra -Werror")
 
-set(CMAKE_CXX_FLAGS_DEBUG 
-    "-ggdb3 -O0 -fno-inline-functions -fsanitize=address")
-set(CMAKE_C_FLAGS_DEBUG
-    "-ggdb3 -O0 -fno-inline-functions -fsanitize=address")
+set(CMAKE_CXX_FLAGS_DEBUG "-ggdb3 -O0")
+set(CMAKE_C_FLAGS_DEBUG   "-ggdb3 -O0")
+
+set(CMAKE_CXX_FLAGS_ASAN "-g3 -O0 -fsanitize=address")
+set(CMAKE_C_FLAGS_ASAN   "-g3 -O0 -fsanitize=address")
 
 set(CMAKE_CXX_FLAGS_RELEASE "-Os")
-set(CMAKE_C_FLAGS_RELEASE "-Os")
+set(CMAKE_C_FLAGS_RELEASE   "-Os")
 
-set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-Os -g3 -ggdb")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "-Os -g3 -ggdb")
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-Os -ggdb3")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO   "-Os -ggdb3")
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
-        -Winconsistent-missing-override")
-    
+        -Winconsistent-missing-override \
+        -Wno-gnu-zero-variadic-macro-arguments")
 else()
-
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
         -Wsuggest-override")
-
 endif()
 
 # set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO

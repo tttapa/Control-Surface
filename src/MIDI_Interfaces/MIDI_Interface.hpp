@@ -1,5 +1,6 @@
 #pragma once
 
+#include "MIDI_Pipes.hpp"
 #include <Def/Def.hpp>
 #include <Def/MIDICNChannelAddress.hpp>
 #include <MIDI_Parsers/MIDI_Parser.hpp>
@@ -13,12 +14,14 @@ class MIDI_Callbacks;
 /**
  * @brief   An abstract class for MIDI interfaces.
  */
-class MIDI_Interface {
+class MIDI_Interface : public TrueMIDI_SinkSource {
   protected:
     /**
      * @brief   Constructor.
      */
     MIDI_Interface();
+
+    MIDI_Interface(MIDI_Interface &&);
 
   public:
     /**
@@ -113,6 +116,8 @@ class MIDI_Interface {
     void sendCP(MIDICNChannel address, uint8_t pressure);
     /// Send a MIDI Pitch Bend event.
     void sendPB(MIDICNChannel address, uint16_t value);
+    /// Send a MIDI Channel Message
+    void send(ChannelMessage message);
     /// Send a MIDI System Exclusive message.
     void send(SysExMessage message);
     /// Send a MIDI System Exclusive message.
@@ -120,6 +125,8 @@ class MIDI_Interface {
     void send(const uint8_t (&sysexdata)[N], uint8_t cn = 0) {
         send(SysExMessage{sysexdata, N, cn});
     }
+    /// Send a MIDI Real-Time message.
+    void send(RealTimeMessage message);
     /// Send a single-byte MIDI message.
     void send(uint8_t rt, uint8_t cn = 0);
 
@@ -178,6 +185,14 @@ class MIDI_Interface {
      */
     virtual void sendImpl(uint8_t rt, uint8_t cn) = 0;
 
+  protected:
+    /// Accept an incoming MIDI Channel message.
+    void sinkMIDIfromPipe(ChannelMessage) override;
+    /// Accept an incoming MIDI System Exclusive message.
+    void sinkMIDIfromPipe(SysExMessage) override;
+    /// Accept an incoming MIDI Real-Time message.
+    void sinkMIDIfromPipe(RealTimeMessage) override;
+
   private:
     static MIDI_Interface *DefaultMIDI_Interface;
 };
@@ -229,15 +244,16 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
      */
     virtual MIDI_read_t read() = 0;
 
-    void onRealtimeMessage(uint8_t message);
+    bool onRealtimeMessage(uint8_t message);
 
-    void onChannelMessage();
+    bool onChannelMessage();
 
-    void onSysExMessage();
+    bool onSysExMessage();
 
-  private:
+  protected:
     MIDI_Parser &parser;
     MIDI_Callbacks *callbacks = nullptr;
+    MIDI_read_t event = NO_MESSAGE;
 };
 
 // LCOV_EXCL_START

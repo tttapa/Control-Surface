@@ -146,6 +146,7 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
     }
 
     void parse(const uint8_t *const data, const size_t len) {
+        // TODO: documentation and link to BLE MIDI spec
         if (len <= 1)
             return;
         if (MIDI_Parser::isData(data[0]))
@@ -166,8 +167,21 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
     }
 
     void parse(uint8_t data) {
-        MIDI_read_t event = parser.parse(data);
-        dispatchMIDIEvent(event);
+        event = parser.parse(data);
+        // Best we can do is just retry until the pipe is no longer in exclusive
+        // mode.
+        // Keep in mind that this is executed in the callback of the BLE stack,
+        // I don't know what happens to the Bluetooth connection if we let it
+        // wait for longer than the communication interval.
+        //
+        // TODO: If this causes problems, we could buffer the data until the
+        //       pipe is available for writing again.
+        while (!dispatchMIDIEvent(event))
+#ifdef ARDUINO
+            delay(1);
+#else
+            usleep(1e3);
+#endif
     }
 
     BLEMIDI &getBLEMIDI() { return bleMidi; }
