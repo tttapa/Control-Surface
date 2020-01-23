@@ -6,8 +6,8 @@
  * Connections
  * -----------
  * 
- * Connect a 4 × 3 matrix of buttons with the rows to pins 2, 3, 4 and 5, 
- * and the columns to pins 6, 7 and 8.
+ * Connect a 4 × 4 matrix of buttons with the rows to pins 2, 3, 4 and 5, 
+ * and the columns to pins 6, 7, 8 and 9.
  * 
  * Pull-up resistors are not necessary, because the internal ones will be used. 
  * 
