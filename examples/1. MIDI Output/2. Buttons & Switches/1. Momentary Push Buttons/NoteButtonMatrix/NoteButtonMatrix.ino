@@ -36,16 +36,16 @@
 USBMIDI_Interface midi;
 
 // The note numbers corresponding to the buttons in the matrix
-const AddressMatrix<4, 3> addresses = {{
-  {1, 2, 3},
-  {4, 5, 6},
-  {7, 8, 9},
-  {10, 11, 12},
+const AddressMatrix<4, 4> addresses = {{
+  {48, 49, 50, 51}, // Ableton drumrack map
+  {44, 45, 46, 47},
+  {40, 41, 42, 43},
+  {36, 37, 38, 39},
 }};
 
-NoteButtonMatrix<4, 3> buttonmatrix = {
+NoteButtonMatrix<4, 4> buttonmatrix = {
   {2, 3, 4, 5}, // row pins
-  {6, 7, 8},    // column pins
+  {6, 7, 8, 9},    // column pins
   addresses,    // address matrix
   CHANNEL_1,    // channel and cable number
 };
