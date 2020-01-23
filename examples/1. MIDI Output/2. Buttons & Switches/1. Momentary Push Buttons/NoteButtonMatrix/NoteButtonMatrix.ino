@@ -10,7 +10,8 @@
  * and the columns to pins 6, 7, 8 and 9.
  * 
  * Pull-up resistors are not necessary, because the internal ones will be used. 
- * 
+ * Required diode zener 1N4148 for multipresser buttons at the same time
+ *
  * If you want to be able to press multiple buttons at once, add a diode 
  * in series with each button:  
  * @image html Button-matrix.png
@@ -26,6 +27,7 @@
  *
  * The note numbers are specified in the `addresses` array.
  * Map accordingly in your DAW or DJ software.
+ * Ableton drumrack map added
  *
  * Written by Pieter P, 24/09/2017  
  * https://github.com/tttapa/Control-Surface
