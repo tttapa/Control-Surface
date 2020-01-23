@@ -6,8 +6,8 @@
  * Connections
  * -----------
  * 
- * Connect a 4 × 3 matrix of buttons with the rows to pins 2, 3, 4 and 5, 
- * and the columns to pins 6, 7 and 8.
+ * Connect a 4 × 4 matrix of buttons with the rows to pins 2, 3, 4 and 5, 
+ * and the columns to pins 6, 7, 8 and 9.
  * 
  * Pull-up resistors are not necessary, because the internal ones will be used. 
  * 
@@ -36,13 +36,13 @@
 USBMIDI_Interface midi;
 // Fours potentiometer to analog pinout
 
-CCPotentiometer potentiometer(A0, {MIDI_CC::Channel_Volume, CHANNEL_2});
+CCPotentiometer potentiometer1(A0, {MIDI_CC::Channel_Volume, CHANNEL_2});
 
-CCPotentiometer potentiometer(A1, {MIDI_CC::Channel_Volume, CHANNEL_3});
+CCPotentiometer potentiometer2(A1, {MIDI_CC::Channel_Volume, CHANNEL_3});
 
-CCPotentiometer potentiometer(A2, {MIDI_CC::Channel_Volume, CHANNEL_4});
+CCPotentiometer potentiometer3(A2, {MIDI_CC::Channel_Volume, CHANNEL_4});
 
-CCPotentiometer potentiometer(A3, {MIDI_CC::Channel_Volume, CHANNEL_5});
+CCPotentiometer potentiometer4(A3, {MIDI_CC::Channel_Volume, CHANNEL_5});
 
 // The note numbers corresponding to the buttons in the matrix
 const AddressMatrix<4, 4> addresses = {{
