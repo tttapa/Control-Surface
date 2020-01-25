@@ -85,7 +85,7 @@ $(function() {
 <p>A class for reading and debouncing buttons and switches.  
  <a href="../../d1/d19/classButton.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="../../d4/db3/Button_8hpp_source.html">Button.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="../../d4/db3/Button_8hpp_source.html">AH/Hardware/Button.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Button:</div>
 <div class="dyncontent">
@@ -134,9 +134,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a6f271a6c38429ca0553c06cedbbcdd17"><td class="memItemLeft" align="right" valign="top">static const __FlashStringHelper *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d19/classButton.html#a6f271a6c38429ca0553c06cedbbcdd17">getName</a> (<a class="el" href="../../d1/d19/classButton.html#a5d74787dedbc4e11c1ab15bf487e61f8">State</a> state)</td></tr>
-<tr class="memdesc:a6f271a6c38429ca0553c06cedbbcdd17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the name of the state as a string.  <a href="../../d1/d19/classButton.html#a6f271a6c38429ca0553c06cedbbcdd17">More...</a><br /></td></tr>
-<tr class="separator:a6f271a6c38429ca0553c06cedbbcdd17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91e5a22cc59426bda8af5ff7f359c8d0"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../d6/ddf/Arduino-Wrapper_8h.html#a3630a2353170800c56b5c1db67995033">FlashString_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d19/classButton.html#a91e5a22cc59426bda8af5ff7f359c8d0">getName</a> (<a class="el" href="../../d1/d19/classButton.html#a5d74787dedbc4e11c1ab15bf487e61f8">State</a> state)</td></tr>
+<tr class="memdesc:a91e5a22cc59426bda8af5ff7f359c8d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the name of the state as a string.  <a href="../../d1/d19/classButton.html#a91e5a22cc59426bda8af5ff7f359c8d0">More...</a><br /></td></tr>
+<tr class="separator:a91e5a22cc59426bda8af5ff7f359c8d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c842d71d208b8b1204fc6eb3799d4fd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d19/classButton.html#a4c842d71d208b8b1204fc6eb3799d4fd">setDebounceTime</a> (unsigned long <a class="el" href="../../d1/d19/classButton.html#afff06ce15647fe4cfea1c11dcc235858">debounceTime</a>=<a class="el" href="../../db/d02/Settings_8hpp.html#a838b0bb32d176701ae1362e3188c578d">BUTTON_DEBOUNCE_TIME</a>)</td></tr>
 <tr class="memdesc:a4c842d71d208b8b1204fc6eb3799d4fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the debounce time for all <a class="el" href="../../d1/d19/classButton.html" title="A class for reading and debouncing buttons and switches.">Button</a>s.  <a href="../../d1/d19/classButton.html#a4c842d71d208b8b1204fc6eb3799d4fd">More...</a><br /></td></tr>
 <tr class="separator:a4c842d71d208b8b1204fc6eb3799d4fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,7 +148,7 @@ Static Public Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:ab322a42eb2d992af0fe951f228d8410b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d19/classButton.html#ab322a42eb2d992af0fe951f228d8410b">pin</a></td></tr>
 <tr class="separator:ab322a42eb2d992af0fe951f228d8410b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a883b0cf1dda8588777ae7724287d12fe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d19/classButton.html#a883b0cf1dda8588777ae7724287d12fe">prevInput</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a></td></tr>
+<tr class="memitem:a883b0cf1dda8588777ae7724287d12fe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d19/classButton.html#a883b0cf1dda8588777ae7724287d12fe">prevInput</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1a23a9c76c68c1dab0655f95291a75af">HIGH</a></td></tr>
 <tr class="separator:a883b0cf1dda8588777ae7724287d12fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae33604ae5a1dfe1ed92f33733414cb45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d1/d19/classButton.html#a5d74787dedbc4e11c1ab15bf487e61f8">State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d19/classButton.html#ae33604ae5a1dfe1ed92f33733414cb45">debouncedState</a> = <a class="el" href="../../d1/d19/classButton.html#a5d74787dedbc4e11c1ab15bf487e61f8ad9417ac74f0134b9577d1d85cf422c25">Released</a></td></tr>
 <tr class="separator:ae33604ae5a1dfe1ed92f33733414cb45"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -325,17 +325,17 @@ Static Private Attributes</h2></td></tr>
 <div class="fragment"><div class="line">Debounce time: ├────┤</div>
 <div class="line"> </div>
 <div class="line">Raw input:</div>
-<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a>  ──────┐      ┌──────┐ ┌─┐      ┌─┐ ┌──────┐ ┌────────</div>
-<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a>         └──────┘      └─┘ └──────┘ └─┘      └─┘</div>
+<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1a23a9c76c68c1dab0655f95291a75af">HIGH</a>  ──────┐      ┌──────┐ ┌─┐      ┌─┐ ┌──────┐ ┌────────</div>
+<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#ad294464395ca0655395db09e768fdc1d">LOW</a>         └──────┘      └─┘ └──────┘ └─┘      └─┘</div>
 <div class="line">               ├────┤ ├────┤ ├─┼─┼────┤ ├─┼─┼────┤ ├─┼────┤</div>
 <div class="line"> </div>
 <div class="line">Debounced output:</div>
-<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a>  ──────┐      ┌──────┐          ┌──────────┐      ┌───</div>
-<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a>         └──────┘      └──────────┘          └──────┘</div>
+<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1a23a9c76c68c1dab0655f95291a75af">HIGH</a>  ──────┐      ┌──────┐          ┌──────────┐      ┌───</div>
+<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#ad294464395ca0655395db09e768fdc1d">LOW</a>         └──────┘      └──────────┘          └──────┘</div>
 <div class="line"> </div>
 <div class="line">States:</div>
-<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a>  ────────────────┐                  ┌─────────────────</div>
-<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a>                   └──────────────────┘</div>
+<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1a23a9c76c68c1dab0655f95291a75af">HIGH</a>  ────────────────┐                  ┌─────────────────</div>
+<div class="line">   <a class="code" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#ad294464395ca0655395db09e768fdc1d">LOW</a>                   └──────────────────┘</div>
 <div class="line">           RELEASED   FALLING   PRESSED   RISING</div>
 </div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>The state of the button, either Button::PRESSED, Button::RELEASED, Button::FALLING or Button::RISING. </dd></dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d0/da9/2_8Button_8ino-example.html#a5">2.Button.ino</a>.</dd>
@@ -368,8 +368,8 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6f271a6c38429ca0553c06cedbbcdd17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f271a6c38429ca0553c06cedbbcdd17">&#9670;&nbsp;</a></span>getName()</h2>
+<a id="a91e5a22cc59426bda8af5ff7f359c8d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91e5a22cc59426bda8af5ff7f359c8d0">&#9670;&nbsp;</a></span>getName()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -378,7 +378,7 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const __FlashStringHelper * getName </td>
+          <td class="memname"><a class="el" href="../../d6/ddf/Arduino-Wrapper_8h.html#a3630a2353170800c56b5c1db67995033">FlashString_t</a> getName </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="../../d1/d19/classButton.html#a5d74787dedbc4e11c1ab15bf487e61f8">Button::State</a>&#160;</td>
           <td class="paramname"><em>state</em></td><td>)</td>
@@ -565,7 +565,7 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool prevInput = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a></td>
+          <td class="memname">bool prevInput = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1a23a9c76c68c1dab0655f95291a75af">HIGH</a></td>
         </tr>
       </table>
   </td>
@@ -683,8 +683,8 @@ Static Private Attributes</h2></td></tr>
 <li><a class="el" href="../../de/dd1/Button_8cpp_source.html">Button.cpp</a></li>
 </ul>
 </div><!-- contents -->
-<div class="ttc" id="aExtendedInputOutput_8hpp_html_acecd29798f132930ae1bfbe527f41e8d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a></div><div class="ttdeci">const uint8_t HIGH</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00046">ExtendedInputOutput.hpp:46</a></div></div>
-<div class="ttc" id="aExtendedInputOutput_8hpp_html_a948017cfe0ff222ceee310d1db10173d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a></div><div class="ttdeci">const uint8_t LOW</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00047">ExtendedInputOutput.hpp:47</a></div></div>
+<div class="ttc" id="aExtendedInputOutput_8hpp_html_ad294464395ca0655395db09e768fdc1d"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#ad294464395ca0655395db09e768fdc1d">LOW</a></div><div class="ttdeci">const PinStatus_t LOW</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00057">ExtendedInputOutput.hpp:57</a></div></div>
+<div class="ttc" id="aExtendedInputOutput_8hpp_html_a1a23a9c76c68c1dab0655f95291a75af"><div class="ttname"><a href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1a23a9c76c68c1dab0655f95291a75af">HIGH</a></div><div class="ttdeci">const PinStatus_t HIGH</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00056">ExtendedInputOutput.hpp:56</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

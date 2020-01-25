@@ -71,7 +71,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -86,7 +85,7 @@ $(function() {
 <p>A class for serial-in/parallel-out shift registers, like the 74HC595 that are connected to the SPI bus.  
  <a href="../../dd/d81/classSPIShiftRegisterOut.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="../../d7/d88/SPIShiftRegisterOut_8hpp_source.html">SPIShiftRegisterOut.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="../../d7/d88/SPIShiftRegisterOut_8hpp_source.html">AH/Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for SPIShiftRegisterOut&lt; N &gt;:</div>
 <div class="dyncontent">
@@ -98,14 +97,9 @@ Collaboration diagram for SPIShiftRegisterOut&lt; N &gt;:</div>
 <div class="center"><iframe scrolling="no" frameborder="0" src="../../d6/d10/classSPIShiftRegisterOut__coll__graph.svg" width="662" height="1288"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a9c89f2b0981844ec80c88f4696425867"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d81/classSPIShiftRegisterOut.html#a9c89f2b0981844ec80c88f4696425867">BitOrder_t</a> = typename <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html">ShiftRegisterOutBase</a>&lt; N &gt;::<a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a></td></tr>
-<tr class="separator:a9c89f2b0981844ec80c88f4696425867"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3732a80bf2f4ebf4d0ac32a9d393fb73"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d81/classSPIShiftRegisterOut.html#a3732a80bf2f4ebf4d0ac32a9d393fb73">SPIShiftRegisterOut</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a7d9f8a9622e636bd5a43af7babab0dee">latchPin</a>=SS, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a> <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a4e460a68da9f4a4878ea5bf65fdcaedc">bitOrder</a>=MSBFIRST)</td></tr>
+<tr class="memitem:a3732a80bf2f4ebf4d0ac32a9d393fb73"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d81/classSPIShiftRegisterOut.html#a3732a80bf2f4ebf4d0ac32a9d393fb73">SPIShiftRegisterOut</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a7d9f8a9622e636bd5a43af7babab0dee">latchPin</a>=SS, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a> <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a4e460a68da9f4a4878ea5bf65fdcaedc">bitOrder</a>=MSBFIRST)</td></tr>
 <tr class="memdesc:a3732a80bf2f4ebf4d0ac32a9d393fb73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="../../dd/d81/classSPIShiftRegisterOut.html" title="A class for serial-in/parallel-out shift registers, like the 74HC595 that are connected to the SPI bu...">SPIShiftRegisterOut</a> object with a given bit order, and a given number of outputs.  <a href="../../dd/d81/classSPIShiftRegisterOut.html#a3732a80bf2f4ebf4d0ac32a9d393fb73">More...</a><br /></td></tr>
 <tr class="separator:a3732a80bf2f4ebf4d0ac32a9d393fb73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c3e14d99bd3dc0e3670d6956dafcaf2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d81/classSPIShiftRegisterOut.html#a7c3e14d99bd3dc0e3670d6956dafcaf2">begin</a> () override</td></tr>
@@ -114,12 +108,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a44137bb65de2396875934e48a6ee5099"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d81/classSPIShiftRegisterOut.html#a44137bb65de2396875934e48a6ee5099">update</a> () override</td></tr>
 <tr class="memdesc:a44137bb65de2396875934e48a6ee5099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the state buffer to the physical outputs.  <a href="../../dd/d81/classSPIShiftRegisterOut.html#a44137bb65de2396875934e48a6ee5099">More...</a><br /></td></tr>
 <tr class="separator:a44137bb65de2396875934e48a6ee5099"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c74624aa395cccd8a061d3f61fbdcf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a9c74624aa395cccd8a061d3f61fbdcf6">pinMode</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, uint8_t mode) override __attribute__((deprecated))</td></tr>
-<tr class="memdesc:a9c74624aa395cccd8a061d3f61fbdcf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The pinMode function is not implemented because the mode is <code>OUTPUT</code> by definition.  <a href="../../d8/db4/classShiftRegisterOutBase.html#a9c74624aa395cccd8a061d3f61fbdcf6">More...</a><br /></td></tr>
-<tr class="separator:a9c74624aa395cccd8a061d3f61fbdcf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b4fdbf457a991d88b4f7cf765a64b5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a7b4fdbf457a991d88b4f7cf765a64b5e">digitalWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, uint8_t val) override</td></tr>
-<tr class="memdesc:a7b4fdbf457a991d88b4f7cf765a64b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state of a given output pin.  <a href="../../d8/db4/classShiftRegisterOutBase.html#a7b4fdbf457a991d88b4f7cf765a64b5e">More...</a><br /></td></tr>
-<tr class="separator:a7b4fdbf457a991d88b4f7cf765a64b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9484141de4b96166588525a48e4bf8cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a9484141de4b96166588525a48e4bf8cb">pinMode</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> mode) override __attribute__((deprecated))</td></tr>
+<tr class="memdesc:a9484141de4b96166588525a48e4bf8cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The pinMode function is not implemented because the mode is <code>OUTPUT</code> by definition.  <a href="../../d8/db4/classShiftRegisterOutBase.html#a9484141de4b96166588525a48e4bf8cb">More...</a><br /></td></tr>
+<tr class="separator:a9484141de4b96166588525a48e4bf8cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bc560538e38f319febb1d7fed2a6388"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a7bc560538e38f319febb1d7fed2a6388">digitalWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a> val) override</td></tr>
+<tr class="memdesc:a7bc560538e38f319febb1d7fed2a6388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the state of a given output pin.  <a href="../../d8/db4/classShiftRegisterOutBase.html#a7bc560538e38f319febb1d7fed2a6388">More...</a><br /></td></tr>
+<tr class="separator:a7bc560538e38f319febb1d7fed2a6388"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06c8be051c17288bea66f7fd94d352b1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a06c8be051c17288bea66f7fd94d352b1">digitalRead</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>) override</td></tr>
 <tr class="memdesc:a06c8be051c17288bea66f7fd94d352b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current state of a given output pin.  <a href="../../d8/db4/classShiftRegisterOutBase.html#a06c8be051c17288bea66f7fd94d352b1">More...</a><br /></td></tr>
 <tr class="separator:a06c8be051c17288bea66f7fd94d352b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,7 +175,7 @@ Static Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a7d9f8a9622e636bd5a43af7babab0dee"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a7d9f8a9622e636bd5a43af7babab0dee">latchPin</a></td></tr>
 <tr class="separator:a7d9f8a9622e636bd5a43af7babab0dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e460a68da9f4a4878ea5bf65fdcaedc"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a4e460a68da9f4a4878ea5bf65fdcaedc">bitOrder</a></td></tr>
+<tr class="memitem:a4e460a68da9f4a4878ea5bf65fdcaedc"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a4e460a68da9f4a4878ea5bf65fdcaedc">bitOrder</a></td></tr>
 <tr class="separator:a4e460a68da9f4a4878ea5bf65fdcaedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52f28b99ebaf530ae5b8219ccc6f4f81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/de9/classBitArray.html">BitArray</a>&lt; N &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a52f28b99ebaf530ae5b8219ccc6f4f81">buffer</a></td></tr>
 <tr class="separator:a52f28b99ebaf530ae5b8219ccc6f4f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,24 +215,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d7/d88/SPIShiftRegisterOut_8hpp_source.html#l00029">29</a> of file <a class="el" href="../../d7/d88/SPIShiftRegisterOut_8hpp_source.html">SPIShiftRegisterOut.hpp</a>.</p>
-</div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a9c89f2b0981844ec80c88f4696425867"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c89f2b0981844ec80c88f4696425867">&#9670;&nbsp;</a></span>BitOrder_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a> =  typename <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html">ShiftRegisterOutBase</a>&lt;N&gt;::<a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d7/d88/SPIShiftRegisterOut_8hpp_source.html#l00031">31</a> of file <a class="el" href="../../d7/d88/SPIShiftRegisterOut_8hpp_source.html">SPIShiftRegisterOut.hpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3732a80bf2f4ebf4d0ac32a9d393fb73"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3732a80bf2f4ebf4d0ac32a9d393fb73">&#9670;&nbsp;</a></span>SPIShiftRegisterOut()</h2>
 
@@ -254,7 +231,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a>&#160;</td>
           <td class="paramname"><em>bitOrder</em> = <code>MSBFIRST</code>&#160;</td>
         </tr>
         <tr>
@@ -351,8 +328,8 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 
 </div>
 </div>
-<a id="a9c74624aa395cccd8a061d3f61fbdcf6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c74624aa395cccd8a061d3f61fbdcf6">&#9670;&nbsp;</a></span>pinMode()</h2>
+<a id="a9484141de4b96166588525a48e4bf8cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9484141de4b96166588525a48e4bf8cb">&#9670;&nbsp;</a></span>pinMode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -369,7 +346,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a>&#160;</td>
           <td class="paramname"><em>mode</em>&#160;</td>
         </tr>
         <tr>
@@ -387,14 +364,14 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 
 <p>The pinMode function is not implemented because the mode is <code>OUTPUT</code> by definition. </p>
 
-<p>Implements <a class="el" href="../../de/d4e/classExtendedIOElement.html#ab72b3f2586f58ed91f7a2039cafdd89c">ExtendedIOElement</a>.</p>
+<p>Implements <a class="el" href="../../de/d4e/classExtendedIOElement.html#a06e8ff482466ab329f1d897a85d3dbab">ExtendedIOElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00052">52</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00046">46</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7b4fdbf457a991d88b4f7cf765a64b5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b4fdbf457a991d88b4f7cf765a64b5e">&#9670;&nbsp;</a></span>digitalWrite()</h2>
+<a id="a7bc560538e38f319febb1d7fed2a6388"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bc560538e38f319febb1d7fed2a6388">&#9670;&nbsp;</a></span>digitalWrite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -411,7 +388,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a>&#160;</td>
           <td class="paramname"><em>val</em>&#160;</td>
         </tr>
         <tr>
@@ -436,7 +413,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="../../de/d4e/classExtendedIOElement.html#a7bea30a74383ad0a10a24fb0c8cc5a05">ExtendedIOElement</a>.</p>
+<p>Implements <a class="el" href="../../de/d4e/classExtendedIOElement.html#ab32d2ef2699aa92bab01e692bda7d775">ExtendedIOElement</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="../../d5/d47/ShiftRegisterOutBase_8ipp_source.html#l00013">13</a> of file <a class="el" href="../../d5/d47/ShiftRegisterOutBase_8ipp_source.html">ShiftRegisterOutBase.ipp</a>.</p>
 
@@ -528,7 +505,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 
 <p>Implements <a class="el" href="../../de/d4e/classExtendedIOElement.html#a7dc0d012462169ef826dc7cfcbb5eb3e">ExtendedIOElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00090">90</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00085">85</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
 
 </div>
 </div>
@@ -577,7 +554,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 
 <p>Implements <a class="el" href="../../de/d4e/classExtendedIOElement.html#a4c7700ad6cbe07d6f10e3cbfc545a9ba">ExtendedIOElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00104">104</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00099">99</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
 
 </div>
 </div>
@@ -1078,7 +1055,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00149">149</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00144">144</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
 
 </div>
 </div>
@@ -1092,7 +1069,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a> bitOrder</td>
+          <td class="memname">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a> bitOrder</td>
         </tr>
       </table>
   </td>
@@ -1102,7 +1079,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00150">150</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00145">145</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
 
 </div>
 </div>
@@ -1126,7 +1103,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00152">152</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00147">147</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
 
 </div>
 </div>
@@ -1150,7 +1127,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00153">153</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00148">148</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
 
 </div>
 </div>
@@ -1174,7 +1151,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00194">194</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -1198,7 +1175,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00194">194</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00195">195</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -1222,7 +1199,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00195">195</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00196">196</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -1246,7 +1223,7 @@ class SPIShiftRegisterOut&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00197">197</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00198">198</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>

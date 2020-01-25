@@ -86,7 +86,7 @@ $(function() {
 <p>A class for reading multiplexed analog inputs.  
  <a href="../../d7/d8d/classAnalogMultiplex.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="../../d7/def/AnalogMultiplex_8hpp_source.html">AnalogMultiplex.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="../../d7/def/AnalogMultiplex_8hpp_source.html">AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for AnalogMultiplex&lt; N &gt;:</div>
 <div class="dyncontent">
@@ -103,12 +103,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0a2d2327d5aa0996c8a1009ce63a4737"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a0a2d2327d5aa0996c8a1009ce63a4737">AnalogMultiplex</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a66f65580427e2512fca5f49b4742f5d8">analogPin</a>, const <a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>, N &gt; &amp;<a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a1944405e0abd4d8f5b8bc34c392d2338">addressPins</a>, <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a559afa2d89a827ab58baad7f444ff69d">enablePin</a>=<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a4a1c4604f2bf0c0c2fcfb0b1e0f91c25">NO_PIN</a>)</td></tr>
 <tr class="memdesc:a0a2d2327d5aa0996c8a1009ce63a4737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="../../d7/d8d/classAnalogMultiplex.html" title="A class for reading multiplexed analog inputs.">AnalogMultiplex</a> object on the given pins.  <a href="../../d7/d8d/classAnalogMultiplex.html#a0a2d2327d5aa0996c8a1009ce63a4737">More...</a><br /></td></tr>
 <tr class="separator:a0a2d2327d5aa0996c8a1009ce63a4737"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac242c17105b455c26871695b506226a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ac242c17105b455c26871695b506226a9">pinMode</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, uint8_t mode) override</td></tr>
-<tr class="memdesc:ac242c17105b455c26871695b506226a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the pin mode of the analog input pin.  <a href="../../d7/d8d/classAnalogMultiplex.html#ac242c17105b455c26871695b506226a9">More...</a><br /></td></tr>
-<tr class="separator:ac242c17105b455c26871695b506226a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af873c712ef239ca96d8369c66d823a29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/classAnalogMultiplex.html#af873c712ef239ca96d8369c66d823a29">digitalWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>, uint8_t) override __attribute__((deprecated))</td></tr>
-<tr class="memdesc:af873c712ef239ca96d8369c66d823a29"><td class="mdescLeft">&#160;</td><td class="mdescRight">The digitalWrite function is not implemented because writing an output to a multiplexer is not useful.  <a href="../../d7/d8d/classAnalogMultiplex.html#af873c712ef239ca96d8369c66d823a29">More...</a><br /></td></tr>
-<tr class="separator:af873c712ef239ca96d8369c66d823a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4d58e1c7ac954786bcaa8e1d8f4e84c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ac4d58e1c7ac954786bcaa8e1d8f4e84c">pinMode</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> mode) override</td></tr>
+<tr class="memdesc:ac4d58e1c7ac954786bcaa8e1d8f4e84c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the pin mode of the analog input pin.  <a href="../../d7/d8d/classAnalogMultiplex.html#ac4d58e1c7ac954786bcaa8e1d8f4e84c">More...</a><br /></td></tr>
+<tr class="separator:ac4d58e1c7ac954786bcaa8e1d8f4e84c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8ceb0539ad48c5bdbf7ffd2e69e0d1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ad8ceb0539ad48c5bdbf7ffd2e69e0d1b">digitalWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a>) override __attribute__((deprecated))</td></tr>
+<tr class="memdesc:ad8ceb0539ad48c5bdbf7ffd2e69e0d1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The digitalWrite function is not implemented because writing an output to a multiplexer is not useful.  <a href="../../d7/d8d/classAnalogMultiplex.html#ad8ceb0539ad48c5bdbf7ffd2e69e0d1b">More...</a><br /></td></tr>
+<tr class="separator:ad8ceb0539ad48c5bdbf7ffd2e69e0d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06c8be051c17288bea66f7fd94d352b1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a06c8be051c17288bea66f7fd94d352b1">digitalRead</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>) override</td></tr>
 <tr class="memdesc:a06c8be051c17288bea66f7fd94d352b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the digital state of the given input.  <a href="../../d7/d8d/classAnalogMultiplex.html#a06c8be051c17288bea66f7fd94d352b1">More...</a><br /></td></tr>
 <tr class="separator:a06c8be051c17288bea66f7fd94d352b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -188,10 +188,10 @@ Private Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
-<tr class="memitem:aa9e0740b2ffd0812db9548c24f6f979b"><td class="memItemLeft" align="right" valign="top">constexpr static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/classAnalogMultiplex.html#aa9e0740b2ffd0812db9548c24f6f979b">MUX_ENABLED</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a></td></tr>
-<tr class="separator:aa9e0740b2ffd0812db9548c24f6f979b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c8583111be1c1c3fbb0e64eaf246bd0"><td class="memItemLeft" align="right" valign="top">constexpr static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a5c8583111be1c1c3fbb0e64eaf246bd0">MUX_DISABLED</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a></td></tr>
-<tr class="separator:a5c8583111be1c1c3fbb0e64eaf246bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af27f94a32984ac557cad98e595bee5ab"><td class="memItemLeft" align="right" valign="top">constexpr static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/classAnalogMultiplex.html#af27f94a32984ac557cad98e595bee5ab">MUX_ENABLED</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#ad294464395ca0655395db09e768fdc1d">LOW</a></td></tr>
+<tr class="separator:af27f94a32984ac557cad98e595bee5ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad627362c29fb6b80417dce9a01c3ee9a"><td class="memItemLeft" align="right" valign="top">constexpr static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ad627362c29fb6b80417dce9a01c3ee9a">MUX_DISABLED</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1a23a9c76c68c1dab0655f95291a75af">HIGH</a></td></tr>
+<tr class="separator:ad627362c29fb6b80417dce9a01c3ee9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d439a6c37c0f2be13c119a42d450bb2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a7d439a6c37c0f2be13c119a42d450bb2">offset</a> = NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS</td></tr>
 <tr class="separator:a7d439a6c37c0f2be13c119a42d450bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a876a3612572c06ebe4a697ed273ea7f1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../dd/d16/classDoublyLinkedList.html">DoublyLinkedList</a>&lt; <a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a876a3612572c06ebe4a697ed273ea7f1">elements</a></td></tr>
@@ -271,8 +271,8 @@ class AnalogMultiplex&lt; N &gt;</h3>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac242c17105b455c26871695b506226a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac242c17105b455c26871695b506226a9">&#9670;&nbsp;</a></span>pinMode()</h2>
+<a id="ac4d58e1c7ac954786bcaa8e1d8f4e84c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4d58e1c7ac954786bcaa8e1d8f4e84c">&#9670;&nbsp;</a></span>pinMode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -289,7 +289,7 @@ class AnalogMultiplex&lt; N &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a>&#160;</td>
           <td class="paramname"><em>mode</em>&#160;</td>
         </tr>
         <tr>
@@ -319,7 +319,7 @@ class AnalogMultiplex&lt; N &gt;</h3>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="../../de/d4e/classExtendedIOElement.html#ab72b3f2586f58ed91f7a2039cafdd89c">ExtendedIOElement</a>.</p>
+<p>Implements <a class="el" href="../../de/d4e/classExtendedIOElement.html#a06e8ff482466ab329f1d897a85d3dbab">ExtendedIOElement</a>.</p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d42/2_8DigitalReadSerial_8ino-example.html#a2">2.DigitalReadSerial.ino</a>.</dd>
 </dl>
 
@@ -327,8 +327,8 @@ class AnalogMultiplex&lt; N &gt;</h3>
 
 </div>
 </div>
-<a id="af873c712ef239ca96d8369c66d823a29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af873c712ef239ca96d8369c66d823a29">&#9670;&nbsp;</a></span>digitalWrite()</h2>
+<a id="ad8ceb0539ad48c5bdbf7ffd2e69e0d1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8ceb0539ad48c5bdbf7ffd2e69e0d1b">&#9670;&nbsp;</a></span>digitalWrite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -345,7 +345,7 @@ class AnalogMultiplex&lt; N &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a>&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -363,7 +363,7 @@ class AnalogMultiplex&lt; N &gt;</h3>
 
 <p>The digitalWrite function is not implemented because writing an output to a multiplexer is not useful. </p>
 
-<p>Implements <a class="el" href="../../de/d4e/classExtendedIOElement.html#a7bea30a74383ad0a10a24fb0c8cc5a05">ExtendedIOElement</a>.</p>
+<p>Implements <a class="el" href="../../de/d4e/classExtendedIOElement.html#ab32d2ef2699aa92bab01e692bda7d775">ExtendedIOElement</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="../../d7/def/AnalogMultiplex_8hpp_source.html#l00070">70</a> of file <a class="el" href="../../d7/def/AnalogMultiplex_8hpp_source.html">AnalogMultiplex.hpp</a>.</p>
 
@@ -1014,8 +1014,8 @@ class AnalogMultiplex&lt; N &gt;</h3>
 
 </div>
 </div>
-<a id="aa9e0740b2ffd0812db9548c24f6f979b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9e0740b2ffd0812db9548c24f6f979b">&#9670;&nbsp;</a></span>MUX_ENABLED</h2>
+<a id="af27f94a32984ac557cad98e595bee5ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af27f94a32984ac557cad98e595bee5ab">&#9670;&nbsp;</a></span>MUX_ENABLED</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1024,7 +1024,7 @@ class AnalogMultiplex&lt; N &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr static uint8_t MUX_ENABLED = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a></td>
+          <td class="memname">constexpr static auto MUX_ENABLED = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#ad294464395ca0655395db09e768fdc1d">LOW</a></td>
         </tr>
       </table>
   </td>
@@ -1038,8 +1038,8 @@ class AnalogMultiplex&lt; N &gt;</h3>
 
 </div>
 </div>
-<a id="a5c8583111be1c1c3fbb0e64eaf246bd0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c8583111be1c1c3fbb0e64eaf246bd0">&#9670;&nbsp;</a></span>MUX_DISABLED</h2>
+<a id="ad627362c29fb6b80417dce9a01c3ee9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad627362c29fb6b80417dce9a01c3ee9a">&#9670;&nbsp;</a></span>MUX_DISABLED</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1048,7 +1048,7 @@ class AnalogMultiplex&lt; N &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr static uint8_t MUX_DISABLED = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a></td>
+          <td class="memname">constexpr static auto MUX_DISABLED = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1a23a9c76c68c1dab0655f95291a75af">HIGH</a></td>
         </tr>
       </table>
   </td>
@@ -1082,7 +1082,7 @@ class AnalogMultiplex&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00194">194</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -1106,7 +1106,7 @@ class AnalogMultiplex&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00194">194</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00195">195</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -1130,7 +1130,7 @@ class AnalogMultiplex&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00195">195</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00196">196</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -1154,7 +1154,7 @@ class AnalogMultiplex&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00197">197</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00198">198</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>

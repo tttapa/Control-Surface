@@ -86,7 +86,7 @@ $(function() {
 <p>An abstract base class for Extended Input/Output elements.  
  <a href="../../de/d4e/classExtendedIOElement.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">AH/Hardware/ExtendedInputOutput/ExtendedIOElement.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ExtendedIOElement:</div>
 <div class="dyncontent">
@@ -102,12 +102,12 @@ Collaboration diagram for ExtendedIOElement:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afb3e78caecbc529d44030584ba09d284"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#afb3e78caecbc529d44030584ba09d284">~ExtendedIOElement</a> ()</td></tr>
 <tr class="separator:afb3e78caecbc529d44030584ba09d284"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab72b3f2586f58ed91f7a2039cafdd89c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#ab72b3f2586f58ed91f7a2039cafdd89c">pinMode</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, uint8_t mode)=0</td></tr>
-<tr class="memdesc:ab72b3f2586f58ed91f7a2039cafdd89c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mode of a given pin.  <a href="../../de/d4e/classExtendedIOElement.html#ab72b3f2586f58ed91f7a2039cafdd89c">More...</a><br /></td></tr>
-<tr class="separator:ab72b3f2586f58ed91f7a2039cafdd89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bea30a74383ad0a10a24fb0c8cc5a05"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a7bea30a74383ad0a10a24fb0c8cc5a05">digitalWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, uint8_t state)=0</td></tr>
-<tr class="memdesc:a7bea30a74383ad0a10a24fb0c8cc5a05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output of the given pin to the given state.  <a href="../../de/d4e/classExtendedIOElement.html#a7bea30a74383ad0a10a24fb0c8cc5a05">More...</a><br /></td></tr>
-<tr class="separator:a7bea30a74383ad0a10a24fb0c8cc5a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06e8ff482466ab329f1d897a85d3dbab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a06e8ff482466ab329f1d897a85d3dbab">pinMode</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> mode)=0</td></tr>
+<tr class="memdesc:a06e8ff482466ab329f1d897a85d3dbab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mode of a given pin.  <a href="../../de/d4e/classExtendedIOElement.html#a06e8ff482466ab329f1d897a85d3dbab">More...</a><br /></td></tr>
+<tr class="separator:a06e8ff482466ab329f1d897a85d3dbab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab32d2ef2699aa92bab01e692bda7d775"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#ab32d2ef2699aa92bab01e692bda7d775">digitalWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a> state)=0</td></tr>
+<tr class="memdesc:ab32d2ef2699aa92bab01e692bda7d775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output of the given pin to the given state.  <a href="../../de/d4e/classExtendedIOElement.html#ab32d2ef2699aa92bab01e692bda7d775">More...</a><br /></td></tr>
+<tr class="separator:ab32d2ef2699aa92bab01e692bda7d775"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa50a5106cba6e0dc7822fb8cd73f737"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#afa50a5106cba6e0dc7822fb8cd73f737">digitalRead</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>)=0</td></tr>
 <tr class="memdesc:afa50a5106cba6e0dc7822fb8cd73f737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the state of the given pin.  <a href="../../de/d4e/classExtendedIOElement.html#afa50a5106cba6e0dc7822fb8cd73f737">More...</a><br /></td></tr>
 <tr class="separator:afa50a5106cba6e0dc7822fb8cd73f737"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,7 +193,7 @@ Static Private Attributes</h2></td></tr>
 <p>The design here is a compromise: saving a pointer to each extended IO element to find it directly would be much faster than having to search all elements each time. On the other hand, it would require each <code>pin_t</code> variable to be at least one byte larger. Since almost all other classes in this library store pin variables, the memory penalty would be too large, especially on AVR microcontrollers. <br  />
  Another reason to do it this way, is that this approach is still fast enough to make sure it is not noticable to human users. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00062">62</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00063">63</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab082f60c807354734c73413eb519f083"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab082f60c807354734c73413eb519f083">&#9670;&nbsp;</a></span>ExtendedIOElement()</h2>
@@ -259,8 +259,8 @@ Static Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab72b3f2586f58ed91f7a2039cafdd89c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab72b3f2586f58ed91f7a2039cafdd89c">&#9670;&nbsp;</a></span>pinMode()</h2>
+<a id="a06e8ff482466ab329f1d897a85d3dbab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06e8ff482466ab329f1d897a85d3dbab">&#9670;&nbsp;</a></span>pinMode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -277,7 +277,7 @@ Static Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a>&#160;</td>
           <td class="paramname"><em>mode</em>&#160;</td>
         </tr>
         <tr>
@@ -305,12 +305,12 @@ Static Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a9c74624aa395cccd8a061d3f61fbdcf6">ShiftRegisterOutBase&lt; N &gt;</a>, <a class="el" href="../../dc/d19/classMAX7219.html#a9c74624aa395cccd8a061d3f61fbdcf6">MAX7219</a>, and <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ac242c17105b455c26871695b506226a9">AnalogMultiplex&lt; N &gt;</a>.</p>
+<p>Implemented in <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a9484141de4b96166588525a48e4bf8cb">ShiftRegisterOutBase&lt; N &gt;</a>, <a class="el" href="../../dc/d19/classMAX7219.html#a9484141de4b96166588525a48e4bf8cb">MAX7219</a>, and <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ac4d58e1c7ac954786bcaa8e1d8f4e84c">AnalogMultiplex&lt; N &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a7bea30a74383ad0a10a24fb0c8cc5a05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bea30a74383ad0a10a24fb0c8cc5a05">&#9670;&nbsp;</a></span>digitalWrite()</h2>
+<a id="ab32d2ef2699aa92bab01e692bda7d775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab32d2ef2699aa92bab01e692bda7d775">&#9670;&nbsp;</a></span>digitalWrite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -327,7 +327,7 @@ Static Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a>&#160;</td>
           <td class="paramname"><em>state</em>&#160;</td>
         </tr>
         <tr>
@@ -352,7 +352,7 @@ Static Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#af873c712ef239ca96d8369c66d823a29">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a7b4fdbf457a991d88b4f7cf765a64b5e">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../dc/d19/classMAX7219.html#a7b4fdbf457a991d88b4f7cf765a64b5e">MAX7219</a>.</p>
+<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ad8ceb0539ad48c5bdbf7ffd2e69e0d1b">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a7bc560538e38f319febb1d7fed2a6388">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../dc/d19/classMAX7219.html#a7bc560538e38f319febb1d7fed2a6388">MAX7219</a>.</p>
 
 </div>
 </div>
@@ -741,7 +741,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00192">192</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -765,7 +765,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00194">194</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -789,7 +789,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00194">194</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00195">195</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -813,7 +813,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00195">195</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00196">196</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -837,7 +837,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00197">197</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00198">198</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>

@@ -77,6 +77,7 @@ $(function() {
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -84,17 +85,20 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="../../d1/d65/Warnings_8hpp_source.html">AH/Settings/Warnings.hpp</a>&gt;</code><br />
-<code>#include &lt;Arduino.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="../../dc/dc7/NamespaceSettings_8hpp_source.html">AH/Settings/NamespaceSettings.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="../../d6/ddf/Arduino-Wrapper_8h_source.html">AH/Arduino-Wrapper.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="../../d4/d35/Hardware-Types_8hpp_source.html">AH/Hardware/Hardware-Types.hpp</a>&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ExtendedInputOutput.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/d90/ExtendedInputOutput_8hpp__incl.svg" width="1755" height="724"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/d90/ExtendedInputOutput_8hpp__incl.svg" width="1402" height="874"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d99/ExtendedInputOutput_8hpp__dep__incl.svg" width="2008" height="336"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d99/ExtendedInputOutput_8hpp__dep__incl.svg" width="2022" height="411"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 </div>
 <p><a href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -112,35 +116,44 @@ Macros</h2></td></tr>
 <tr class="memitem:a83aa0a0fed53945fc7fd8c66d373a436"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a83aa0a0fed53945fc7fd8c66d373a436">AH_EXT_PIN</a>(x)&#160;&#160;&#160;(x + NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)</td></tr>
 <tr class="separator:a83aa0a0fed53945fc7fd8c66d373a436"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a819db182182c1ca2a6487ff7163a757d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a> = uint8_t</td></tr>
+<tr class="separator:a819db182182c1ca2a6487ff7163a757d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeedc392af4451c66ba1b66bdd6965b2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> = uint8_t</td></tr>
+<tr class="separator:afeedc392af4451c66ba1b66bdd6965b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43d3c7f80d4a67d87c13e7222466fe28"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a> = uint8_t</td></tr>
+<tr class="separator:a43d3c7f80d4a67d87c13e7222466fe28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a61c05f198865505b4ecbeb9759a9aa77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a61c05f198865505b4ecbeb9759a9aa77">getIOElementOfPin</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin)</td></tr>
 <tr class="memdesc:a61c05f198865505b4ecbeb9759a9aa77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the IO element of a given extended IO pin number.  <a href="../../d8/d3d/namespaceExtIO.html#a61c05f198865505b4ecbeb9759a9aa77">More...</a><br /></td></tr>
 <tr class="separator:a61c05f198865505b4ecbeb9759a9aa77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14f5d8ef18838978bf0c2df86f3cce25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a14f5d8ef18838978bf0c2df86f3cce25">pinMode</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin, uint8_t mode)</td></tr>
-<tr class="memdesc:a14f5d8ef18838978bf0c2df86f3cce25"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a14f5d8ef18838978bf0c2df86f3cce25">More...</a><br /></td></tr>
-<tr class="separator:a14f5d8ef18838978bf0c2df86f3cce25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20b75acbae873236abbd8e89079f2493"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a20b75acbae873236abbd8e89079f2493">pinMode</a> (int pin, uint8_t mode)</td></tr>
-<tr class="memdesc:a20b75acbae873236abbd8e89079f2493"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a20b75acbae873236abbd8e89079f2493">More...</a><br /></td></tr>
-<tr class="separator:a20b75acbae873236abbd8e89079f2493"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafb55ff1ef70b0086bfa19406c1d076a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">digitalWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin, uint8_t val)</td></tr>
-<tr class="memdesc:aafb55ff1ef70b0086bfa19406c1d076a"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#aafb55ff1ef70b0086bfa19406c1d076a">More...</a><br /></td></tr>
-<tr class="separator:aafb55ff1ef70b0086bfa19406c1d076a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01431c91530865557cbbd074bbe84a95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a01431c91530865557cbbd074bbe84a95">digitalWrite</a> (int pin, uint8_t val)</td></tr>
-<tr class="memdesc:a01431c91530865557cbbd074bbe84a95"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a01431c91530865557cbbd074bbe84a95">More...</a><br /></td></tr>
-<tr class="separator:a01431c91530865557cbbd074bbe84a95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6500d2ccee66ed7f10b09e4ce51c74e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a6500d2ccee66ed7f10b09e4ce51c74e9">pinMode</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> mode)</td></tr>
+<tr class="memdesc:a6500d2ccee66ed7f10b09e4ce51c74e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a6500d2ccee66ed7f10b09e4ce51c74e9">More...</a><br /></td></tr>
+<tr class="separator:a6500d2ccee66ed7f10b09e4ce51c74e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac144a5299ca8847f332dfcbc09ed3bad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#ac144a5299ca8847f332dfcbc09ed3bad">pinMode</a> (int pin, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> mode)</td></tr>
+<tr class="memdesc:ac144a5299ca8847f332dfcbc09ed3bad"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#ac144a5299ca8847f332dfcbc09ed3bad">More...</a><br /></td></tr>
+<tr class="separator:ac144a5299ca8847f332dfcbc09ed3bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff89e0a727f5b97e0618b8f2f65b3356"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#aff89e0a727f5b97e0618b8f2f65b3356">digitalWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a> val)</td></tr>
+<tr class="memdesc:aff89e0a727f5b97e0618b8f2f65b3356"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#aff89e0a727f5b97e0618b8f2f65b3356">More...</a><br /></td></tr>
+<tr class="separator:aff89e0a727f5b97e0618b8f2f65b3356"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada328a3e2a9996880ab0703e84d8587"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#aada328a3e2a9996880ab0703e84d8587">digitalWrite</a> (int pin, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a> val)</td></tr>
+<tr class="memdesc:aada328a3e2a9996880ab0703e84d8587"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#aada328a3e2a9996880ab0703e84d8587">More...</a><br /></td></tr>
+<tr class="separator:aada328a3e2a9996880ab0703e84d8587"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecc9c66e459fa540ac06ada7f25f0b96"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#aecc9c66e459fa540ac06ada7f25f0b96">digitalRead</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin)</td></tr>
 <tr class="memdesc:aecc9c66e459fa540ac06ada7f25f0b96"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#aecc9c66e459fa540ac06ada7f25f0b96">More...</a><br /></td></tr>
 <tr class="separator:aecc9c66e459fa540ac06ada7f25f0b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1e3d979645a535a8ce49f935392d8bc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#ae1e3d979645a535a8ce49f935392d8bc">digitalRead</a> (int pin)</td></tr>
 <tr class="memdesc:ae1e3d979645a535a8ce49f935392d8bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#ae1e3d979645a535a8ce49f935392d8bc">More...</a><br /></td></tr>
 <tr class="separator:ae1e3d979645a535a8ce49f935392d8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10983c6dc6781c3978dc0b91bf240fe1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a10983c6dc6781c3978dc0b91bf240fe1">shiftOut</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> dataPin, <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> clockPin, uint8_t bitOrder, uint8_t val)</td></tr>
-<tr class="memdesc:a10983c6dc6781c3978dc0b91bf240fe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a10983c6dc6781c3978dc0b91bf240fe1">More...</a><br /></td></tr>
-<tr class="separator:a10983c6dc6781c3978dc0b91bf240fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b005d8c772c9256ecb94e4748c8b895"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a3b005d8c772c9256ecb94e4748c8b895">shiftOut</a> (int dataPin, int clockPin, uint8_t bitOrder, uint8_t val)</td></tr>
-<tr class="memdesc:a3b005d8c772c9256ecb94e4748c8b895"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a3b005d8c772c9256ecb94e4748c8b895">More...</a><br /></td></tr>
-<tr class="separator:a3b005d8c772c9256ecb94e4748c8b895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeae5394d6ac8fa71365e0901c894016d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#aeae5394d6ac8fa71365e0901c894016d">shiftOut</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> dataPin, <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> clockPin, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a> bitOrder, uint8_t val)</td></tr>
+<tr class="memdesc:aeae5394d6ac8fa71365e0901c894016d"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#aeae5394d6ac8fa71365e0901c894016d">More...</a><br /></td></tr>
+<tr class="separator:aeae5394d6ac8fa71365e0901c894016d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b553f6793c042d88c2d1eb3f4023fe0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#a9b553f6793c042d88c2d1eb3f4023fe0">shiftOut</a> (int dataPin, int clockPin, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a> bitOrder, uint8_t val)</td></tr>
+<tr class="memdesc:a9b553f6793c042d88c2d1eb3f4023fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#a9b553f6793c042d88c2d1eb3f4023fe0">More...</a><br /></td></tr>
+<tr class="separator:a9b553f6793c042d88c2d1eb3f4023fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9e5896aa520b8b2d65e1828032ee6a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d3d/namespaceExtIO.html#aa9e5896aa520b8b2d65e1828032ee6a2">analogRead</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin)</td></tr>
 <tr class="memdesc:aa9e5896aa520b8b2d65e1828032ee6a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">An <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> version of the Arduino function.  <a href="../../d8/d3d/namespaceExtIO.html#aa9e5896aa520b8b2d65e1828032ee6a2">More...</a><br /></td></tr>
 <tr class="separator:aa9e5896aa520b8b2d65e1828032ee6a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,26 +175,26 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a17ae6be1564c38e079bb4a295b34bc47"><td class="memItemLeft" align="right" valign="top">const static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d39/namespacedetail.html#a17ae6be1564c38e079bb4a295b34bc47">tmp_HIGH</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a></td></tr>
-<tr class="separator:a17ae6be1564c38e079bb4a295b34bc47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8bcc703d4f97453fb09f43e41be9c08"><td class="memItemLeft" align="right" valign="top">const static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d39/namespacedetail.html#ad8bcc703d4f97453fb09f43e41be9c08">tmp_LOW</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a></td></tr>
-<tr class="separator:ad8bcc703d4f97453fb09f43e41be9c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a648e0ebad7ea7f24f5101e57974018a7"><td class="memItemLeft" align="right" valign="top">const static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d39/namespacedetail.html#a648e0ebad7ea7f24f5101e57974018a7">tmp_INPUT</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1c022e5fb9141ce12c7c22a000ce732a">INPUT</a></td></tr>
-<tr class="separator:a648e0ebad7ea7f24f5101e57974018a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf75d554e4ca4a4379dcd5c93b3743d5"><td class="memItemLeft" align="right" valign="top">const static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d39/namespacedetail.html#acf75d554e4ca4a4379dcd5c93b3743d5">tmp_OUTPUT</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afe385e49d42243d0f7eee016aee5d7b9">OUTPUT</a></td></tr>
-<tr class="separator:acf75d554e4ca4a4379dcd5c93b3743d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5527335766c12876614ea8b2e2a49ab"><td class="memItemLeft" align="right" valign="top">const static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d39/namespacedetail.html#ad5527335766c12876614ea8b2e2a49ab">tmp_INPUT_PULLUP</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a7821f03e2c35ca4bf4a867e64994bcfd">INPUT_PULLUP</a></td></tr>
-<tr class="separator:ad5527335766c12876614ea8b2e2a49ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acecd29798f132930ae1bfbe527f41e8d"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d">HIGH</a> = AH::detail::tmp_HIGH</td></tr>
-<tr class="separator:acecd29798f132930ae1bfbe527f41e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a948017cfe0ff222ceee310d1db10173d"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d">LOW</a> = AH::detail::tmp_LOW</td></tr>
-<tr class="separator:a948017cfe0ff222ceee310d1db10173d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c022e5fb9141ce12c7c22a000ce732a"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1c022e5fb9141ce12c7c22a000ce732a">INPUT</a> = AH::detail::tmp_INPUT</td></tr>
-<tr class="separator:a1c022e5fb9141ce12c7c22a000ce732a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe385e49d42243d0f7eee016aee5d7b9"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afe385e49d42243d0f7eee016aee5d7b9">OUTPUT</a> = AH::detail::tmp_OUTPUT</td></tr>
-<tr class="separator:afe385e49d42243d0f7eee016aee5d7b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7821f03e2c35ca4bf4a867e64994bcfd"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a7821f03e2c35ca4bf4a867e64994bcfd">INPUT_PULLUP</a> = AH::detail::tmp_INPUT_PULLUP</td></tr>
-<tr class="separator:a7821f03e2c35ca4bf4a867e64994bcfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f03019b537b3981a51086f6e774144d"><td class="memItemLeft" align="right" valign="top">constexpr static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d39/namespacedetail.html#a5f03019b537b3981a51086f6e774144d">tmp_HIGH</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1a23a9c76c68c1dab0655f95291a75af">HIGH</a></td></tr>
+<tr class="separator:a5f03019b537b3981a51086f6e774144d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65199823d77f72589751ff25c57b256f"><td class="memItemLeft" align="right" valign="top">constexpr static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d39/namespacedetail.html#a65199823d77f72589751ff25c57b256f">tmp_LOW</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#ad294464395ca0655395db09e768fdc1d">LOW</a></td></tr>
+<tr class="separator:a65199823d77f72589751ff25c57b256f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a190a0dff4123257d20d9ad5812a5fca1"><td class="memItemLeft" align="right" valign="top">constexpr static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d39/namespacedetail.html#a190a0dff4123257d20d9ad5812a5fca1">tmp_INPUT</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a274803df397520b66c65f48aa3fee4d8">INPUT</a></td></tr>
+<tr class="separator:a190a0dff4123257d20d9ad5812a5fca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a9567743828aaf2793ed72c92edf584"><td class="memItemLeft" align="right" valign="top">constexpr static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d39/namespacedetail.html#a9a9567743828aaf2793ed72c92edf584">tmp_OUTPUT</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a0120d38256091ba61693f24e3fb05adb">OUTPUT</a></td></tr>
+<tr class="separator:a9a9567743828aaf2793ed72c92edf584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ce67b061968e974bfb11c03a2f20e35"><td class="memItemLeft" align="right" valign="top">constexpr static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d39/namespacedetail.html#a3ce67b061968e974bfb11c03a2f20e35">tmp_INPUT_PULLUP</a> = <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a5df793c699710c5ff025efef7d9f73b6">INPUT_PULLUP</a></td></tr>
+<tr class="separator:a3ce67b061968e974bfb11c03a2f20e35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a23a9c76c68c1dab0655f95291a75af"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a1a23a9c76c68c1dab0655f95291a75af">HIGH</a> = AH::detail::tmp_HIGH</td></tr>
+<tr class="separator:a1a23a9c76c68c1dab0655f95291a75af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad294464395ca0655395db09e768fdc1d"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#ad294464395ca0655395db09e768fdc1d">LOW</a> = AH::detail::tmp_LOW</td></tr>
+<tr class="separator:ad294464395ca0655395db09e768fdc1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a274803df397520b66c65f48aa3fee4d8"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a274803df397520b66c65f48aa3fee4d8">INPUT</a> = AH::detail::tmp_INPUT</td></tr>
+<tr class="separator:a274803df397520b66c65f48aa3fee4d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0120d38256091ba61693f24e3fb05adb"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a0120d38256091ba61693f24e3fb05adb">OUTPUT</a> = AH::detail::tmp_OUTPUT</td></tr>
+<tr class="separator:a0120d38256091ba61693f24e3fb05adb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5df793c699710c5ff025efef7d9f73b6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a5df793c699710c5ff025efef7d9f73b6">INPUT_PULLUP</a> = AH::detail::tmp_INPUT_PULLUP</td></tr>
+<tr class="separator:a5df793c699710c5ff025efef7d9f73b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a83aa0a0fed53945fc7fd8c66d373a436"></a>
@@ -200,55 +213,35 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="acecd29798f132930ae1bfbe527f41e8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acecd29798f132930ae1bfbe527f41e8d">&#9670;&nbsp;</a></span>HIGH</h2>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a819db182182c1ca2a6487ff7163a757d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a819db182182c1ca2a6487ff7163a757d">&#9670;&nbsp;</a></span>PinStatus_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t HIGH = AH::detail::tmp_HIGH</td>
+          <td class="memname">using <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a> =  uint8_t</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d5f/1_8SPI-Blink_8ino-example.html#a6">1.SPI-Blink.ino</a>, <a class="el" href="../../d1/d5f/2_8BitBang-Blink_8ino-example.html#a6">2.BitBang-Blink.ino</a>, and <a class="el" href="../../df/d9e/2_8RGB-LED-Chaser_8ino-example.html#a7">2.RGB-LED-Chaser.ino</a>.</dd>
-</dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00046">46</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00048">48</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a948017cfe0ff222ceee310d1db10173d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a948017cfe0ff222ceee310d1db10173d">&#9670;&nbsp;</a></span>LOW</h2>
+<a id="afeedc392af4451c66ba1b66bdd6965b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeedc392af4451c66ba1b66bdd6965b2">&#9670;&nbsp;</a></span>PinMode_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t LOW = AH::detail::tmp_LOW</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d5f/1_8SPI-Blink_8ino-example.html#a7">1.SPI-Blink.ino</a>, <a class="el" href="../../d1/d5f/2_8BitBang-Blink_8ino-example.html#a7">2.BitBang-Blink.ino</a>, <a class="el" href="../../d0/da9/2_8Button_8ino-example.html#a4">2.Button.ino</a>, and <a class="el" href="../../df/d9e/2_8RGB-LED-Chaser_8ino-example.html#a8">2.RGB-LED-Chaser.ino</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00047">47</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a1c022e5fb9141ce12c7c22a000ce732a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c022e5fb9141ce12c7c22a000ce732a">&#9670;&nbsp;</a></span>INPUT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint8_t INPUT = AH::detail::tmp_INPUT</td>
+          <td class="memname">using <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> =  uint8_t</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -257,39 +250,108 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="afe385e49d42243d0f7eee016aee5d7b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe385e49d42243d0f7eee016aee5d7b9">&#9670;&nbsp;</a></span>OUTPUT</h2>
+<a id="a43d3c7f80d4a67d87c13e7222466fe28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43d3c7f80d4a67d87c13e7222466fe28">&#9670;&nbsp;</a></span>BitOrder_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t OUTPUT = AH::detail::tmp_OUTPUT</td>
+          <td class="memname">using <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a43d3c7f80d4a67d87c13e7222466fe28">BitOrder_t</a> =  uint8_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00053">53</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a1a23a9c76c68c1dab0655f95291a75af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a23a9c76c68c1dab0655f95291a75af">&#9670;&nbsp;</a></span>HIGH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a> HIGH = AH::detail::tmp_HIGH</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d5f/1_8SPI-Blink_8ino-example.html#a6">1.SPI-Blink.ino</a>, <a class="el" href="../../d1/d5f/2_8BitBang-Blink_8ino-example.html#a6">2.BitBang-Blink.ino</a>, <a class="el" href="../../d0/da9/2_8Button_8ino-example.html#a8">2.Button.ino</a>, <a class="el" href="../../df/d9e/2_8RGB-LED-Chaser_8ino-example.html#a7">2.RGB-LED-Chaser.ino</a>, <a class="el" href="../../db/df8/Blink-Frequency-Buttons_8ino-example.html#a8">Blink-Frequency-Buttons.ino</a>, <a class="el" href="../../dc/db4/BlinkWithoutDelay-Timer_8ino-example.html#a6">BlinkWithoutDelay-Timer.ino</a>, and <a class="el" href="../../da/d78/Toggle-LEDs_8ino-example.html#a9">Toggle-LEDs.ino</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00056">56</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad294464395ca0655395db09e768fdc1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad294464395ca0655395db09e768fdc1d">&#9670;&nbsp;</a></span>LOW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a> LOW = AH::detail::tmp_LOW</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d5f/1_8SPI-Blink_8ino-example.html#a7">1.SPI-Blink.ino</a>, <a class="el" href="../../d1/d5f/2_8BitBang-Blink_8ino-example.html#a7">2.BitBang-Blink.ino</a>, <a class="el" href="../../d0/da9/2_8Button_8ino-example.html#a4">2.Button.ino</a>, <a class="el" href="../../df/d9e/2_8RGB-LED-Chaser_8ino-example.html#a8">2.RGB-LED-Chaser.ino</a>, <a class="el" href="../../db/df8/Blink-Frequency-Buttons_8ino-example.html#a7">Blink-Frequency-Buttons.ino</a>, <a class="el" href="../../dc/db4/BlinkWithoutDelay-Timer_8ino-example.html#a5">BlinkWithoutDelay-Timer.ino</a>, and <a class="el" href="../../da/d78/Toggle-LEDs_8ino-example.html#a8">Toggle-LEDs.ino</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00057">57</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a274803df397520b66c65f48aa3fee4d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a274803df397520b66c65f48aa3fee4d8">&#9670;&nbsp;</a></span>INPUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> INPUT = AH::detail::tmp_INPUT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00059">59</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0120d38256091ba61693f24e3fb05adb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0120d38256091ba61693f24e3fb05adb">&#9670;&nbsp;</a></span>OUTPUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> OUTPUT = AH::detail::tmp_OUTPUT</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d5f/1_8SPI-Blink_8ino-example.html#a4">1.SPI-Blink.ino</a>, <a class="el" href="../../d1/d5f/2_8BitBang-Blink_8ino-example.html#a4">2.BitBang-Blink.ino</a>, <a class="el" href="../../d0/da9/2_8Button_8ino-example.html#a2">2.Button.ino</a>, <a class="el" href="../../db/df8/Blink-Frequency-Buttons_8ino-example.html#a3">Blink-Frequency-Buttons.ino</a>, and <a class="el" href="../../dc/db4/BlinkWithoutDelay-Timer_8ino-example.html#a2">BlinkWithoutDelay-Timer.ino</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00050">50</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00060">60</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7821f03e2c35ca4bf4a867e64994bcfd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7821f03e2c35ca4bf4a867e64994bcfd">&#9670;&nbsp;</a></span>INPUT_PULLUP</h2>
+<a id="a5df793c699710c5ff025efef7d9f73b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5df793c699710c5ff025efef7d9f73b6">&#9670;&nbsp;</a></span>INPUT_PULLUP</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t INPUT_PULLUP = AH::detail::tmp_INPUT_PULLUP</td>
+          <td class="memname">const <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> INPUT_PULLUP = AH::detail::tmp_INPUT_PULLUP</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d9/d42/2_8DigitalReadSerial_8ino-example.html#a3">2.DigitalReadSerial.ino</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00051">51</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html#l00061">61</a> of file <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp_source.html">ExtendedInputOutput.hpp</a>.</p>
 
 </div>
 </div>
