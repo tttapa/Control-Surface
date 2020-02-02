@@ -13,6 +13,36 @@ BEGIN_CS_NAMESPACE
 /// Data type for cable numbers.
 using cn_t = uint8_t;
 
+/**
+ * @addtogroup MIDI_Routing MIDI Routing
+ * @brief   Operators and utilities for MIDI routing.
+ * 
+ * Allows you to use syntax like:
+ * 
+ * ~~~cpp
+ * HardwareSerialMIDI_Interface 
+ *     midiA = Serial1, midiB = Serial2, midiC = Serial3;
+ * MIDI_PipeFactory<3> pipes; // Factory that can produce 3 pipes
+ * 
+ * midiA >> pipes >> midiB;
+ * midiC >> pipes >> midiB;
+ * midiC << pipes << midiB;
+ * ~~~
+ * 
+ * Or for bidirectional connections:
+ * 
+ * ~~~cpp
+ * HardwareSerialMIDI_Interface 
+ *     midiA = Serial1, midiB = Serial2, midiC = Serial3;
+ * BidirectionalMIDI_PipeFactory<2> pipes; // Factory that can produce 2 pipes
+ * 
+ * midiA | pipes | midiB;
+ * midiA | pipes | midiC;
+ * ~~~
+ * 
+ * @{ 
+ */
+
 class MIDI_Pipe;
 struct TrueMIDI_Sink;
 struct TrueMIDI_Source;
@@ -163,9 +193,9 @@ class MIDI_Source {
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
-/// A MIDI_Sink that is not also a MIDI_Pipe.
+/// A MIDI_Sink that is not a MIDI_Pipe.
 struct TrueMIDI_Sink : MIDI_Sink {};
-/// A MIDI_Source that is not also a MIDI_Pipe.
+/// A MIDI_Source that is not a MIDI_Pipe.
 struct TrueMIDI_Source : MIDI_Source {};
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -175,8 +205,9 @@ struct TrueMIDI_Source : MIDI_Source {};
  * 
  * A pipe has at least two, at most four connections. In the simplest case, a 
  * pipe just has a sourca and a sink. The source sends data down the pipe, and
- * the pipe sends it to the source. A mapping or filter can be applied to the 
+ * the pipe sends it to the sink. A mapping or filter can be applied to the 
  * data traveling down the pipe.
+ * 
  * To be able to connect multiple pipes to a single sink or source, a pipe also
  * has a "through" output and a "through" input, both are pipes, not sinks or 
  * sources. All data that comes from the source is sent to the "through" output
@@ -188,7 +219,7 @@ struct TrueMIDI_Source : MIDI_Source {};
  * because messages can be interleaved (e.g. RPN/NRPN messages). To circumvent
  * this issue, a source can request exclusive access to the pipe it's connected
  * to. This locks all other pipes that sink into the same sinks as the exclusive
- * source.
+ * source.  
  * Other sources must then query its pipe before sending, to make sure it's not
  * locked by another source that has exclusive access.
  * 
@@ -403,37 +434,8 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
+/// A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source.
 struct TrueMIDI_SinkSource : TrueMIDI_Sink, TrueMIDI_Source {};
-
-/**
- * @addtogroup MIDI_Routing MIDI Routing
- * @brief   Operators and utilities for MIDI routing.
- * 
- * Allows you to use syntax like:
- * 
- * ~~~cpp
- * HardwareSerialMIDI_Interface 
- *     midiA = Serial1, midiB = Serial2, midiC = Serial3;
- * MIDI_PipeFactory<3> pipes; // Factory that can produce 3 pipes
- * 
- * midiA >> pipes >> midiB;
- * midiC >> pipes >> midiB;
- * midiC << pipes << midiB;
- * ~~~
- * 
- * Or for bidirectional connections:
- * 
- * ~~~cpp
- * HardwareSerialMIDI_Interface 
- *     midiA = Serial1, midiB = Serial2, midiC = Serial3;
- * BidirectionalMIDI_PipeFactory<2> pipes; // Factory that can produce 2 pipes
- * 
- * midiA | pipes | midiB;
- * midiA | pipes | midiC;
- * ~~~
- * 
- * @{ 
- */
 
 /// A bidirectional pipe consists of two unidirectional pipes.
 using BidirectionalMIDI_Pipe = std::pair<MIDI_Pipe, MIDI_Pipe>;
