@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MIDI_Pipes.hpp"
+#include <AH/Containers/Updatable.hpp>
 #include <Def/Def.hpp>
 #include <Def/MIDICNChannelAddress.hpp>
 #include <MIDI_Parsers/MIDI_Parser.hpp>
@@ -12,28 +13,10 @@ constexpr auto MIDI_BAUD = 31250;
 class MIDI_Callbacks;
 
 /**
- * @brief   An abstract class for MIDI interfaces.
+ * @brief   Class for sending MIDI messages.
  */
-class MIDI_Interface : public TrueMIDI_SinkSource {
-  protected:
-    /**
-     * @brief   Constructor.
-     */
-    MIDI_Interface();
-
-    MIDI_Interface(MIDI_Interface &&);
-
+class MIDI_Sender {
   public:
-    /**
-     * @brief   Destructor.
-     */
-    virtual ~MIDI_Interface();
-
-    /**
-     * @brief   Initialize the MIDI Interface.
-     */
-    virtual void begin() {}
-
     /**
      * @brief   Send a 3-byte MIDI packet.
      *
@@ -130,11 +113,58 @@ class MIDI_Interface : public TrueMIDI_SinkSource {
     /// Send a single-byte MIDI message.
     void send(uint8_t rt, uint8_t cn = 0);
 
+  private:
+    /**
+     * @brief   Low-level function for sending a 3-byte MIDI message.
+     */
+    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                          uint8_t cn) = 0;
+    /**
+     * @brief   Low-level function for sending a 2-byte MIDI message.
+     */
+    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) = 0;
+
+    /**
+     * @brief   Low-level function for sending a system exclusive MIDI message.
+     */
+    virtual void sendImpl(const uint8_t *data, size_t length, uint8_t cn) = 0;
+
+    /** 
+     * @brief   Low-level function for sending a single-byte MIDI message.
+     */
+    virtual void sendImpl(uint8_t rt, uint8_t cn) = 0;
+};
+
+/**
+ * @brief   An abstract class for MIDI interfaces.
+ */
+class MIDI_Interface : public TrueMIDI_SinkSource,
+                       public MIDI_Sender,
+                       public AH::Updatable<MIDI_Interface> {
+  protected:
+    /**
+     * @brief   Constructor.
+     */
+    MIDI_Interface();
+
+    MIDI_Interface(MIDI_Interface &&);
+
+  public:
+    /**
+     * @brief   Destructor.
+     */
+    virtual ~MIDI_Interface();
+
+    /**
+     * @brief   Initialize the MIDI Interface.
+     */
+    using AH::Updatable<MIDI_Interface>::begin;
+
     /**
      * @brief   Read the MIDI interface and call the callback if a message is
      *          received.
      */
-    virtual void update() = 0;
+    using AH::Updatable<MIDI_Interface>::update;
 
     /**
      * @brief   Return the default MIDI interface.
@@ -164,26 +194,6 @@ class MIDI_Interface : public TrueMIDI_SinkSource {
      *          class.
      */
     void setCallbacks(MIDI_Callbacks &cb) { setCallbacks(&cb); }
-
-    /**
-     * @brief   Low-level function for sending a 3-byte MIDI message.
-     */
-    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
-                          uint8_t cn) = 0;
-    /**
-     * @brief   Low-level function for sending a 2-byte MIDI message.
-     */
-    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) = 0;
-
-    /**
-     * @brief   Low-level function for sending a system exclusive MIDI message.
-     */
-    virtual void sendImpl(const uint8_t *data, size_t length, uint8_t cn) = 0;
-
-    /** 
-     * @brief   Low-level function for sending a single-byte MIDI message.
-     */
-    virtual void sendImpl(uint8_t rt, uint8_t cn) = 0;
 
   protected:
     /// Accept an incoming MIDI Channel message.

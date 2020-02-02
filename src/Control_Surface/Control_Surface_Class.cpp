@@ -27,50 +27,64 @@ void Control_Surface_::begin() {
     DEBUG_OUT.begin(AH::defaultBaudRate);
     delay(250);
 #endif
+    // Initialize the hardware (ADC and Extended IO)
     FilteredAnalog<>::setupADC();
     ExtendedIOElement::beginAll();
-    MIDI().begin(); // initialize the MIDI interface
-    MIDI().setCallbacks(this);
-    DisplayInterface::beginAll(); // initialize all displays
+    // Initialize the MIDI interfaces
+    Updatable<MIDI_Interface>::beginAll();
+    connectDefaultMIDI();
+    // Initialize the displays
+    DisplayInterface::beginAll();
+    // Initialize the MIDI Input Elements
     MIDIInputElementCC::beginAll();
     MIDIInputElementPC::beginAll();
     MIDIInputElementChannelPressure::beginAll();
     MIDIInputElementNote::beginAll();
     MIDIInputElementSysEx::beginAll();
+    // Initialize the Updatables (including MIDI Output Elements)
     Updatable<>::beginAll();
     Updatable<Potentiometer>::beginAll();
     Updatable<MotorFader>::beginAll();
-    Updatable<Display>::beginAll();
+    Updatable<Display>::beginAll(); // Display elements
+    // Reset the timers
     potentiometerTimer.begin();
     displayTimer.begin();
 }
 
+bool Control_Surface_::connectDefaultMIDI() {
+    if (MIDI_Interface::getDefault()) {
+        auto &midi_interface = *MIDI_Interface::getDefault();
+        auto &control_surface = *this;
+        pipe.first.disconnect();
+        pipe.second.disconnect();
+        // Connect Control Surface to the default MIDI interface:
+        control_surface | pipe | midi_interface;
+        return true;
+    } else {
+        DEBUG(F("Warning: no default MIDI interface, Control Surface not "
+                "connected"));
+        return false;
+    }
+}
+
 void Control_Surface_::loop() {
+    // Update MIDI Output Elements
     Updatable<>::updateAll();
     if (potentiometerTimer)
         Updatable<Potentiometer>::updateAll();
-    updateMidiInput();
+    // Read MIDI input
+    Updatable<MIDI_Interface>::updateAll();
+    // Update MIDI Input Elements
     updateInputs();
+    // Update the displays
     if (displayTimer)
         updateDisplays();
 }
 
-MIDI_Interface &Control_Surface_::MIDI() {
-    MIDI_Interface *midi = MIDI_Interface::getDefault();
-    if (midi == nullptr)
-        FATAL_ERROR(F("No default MIDI interface is selected."), 0xDEAD);
+MIDI_Sender &Control_Surface_::MIDI() { return *this; }
 
-    return *midi;
-}
-
-void Control_Surface_::updateMidiInput() {
-    MIDI_Interface &midi = MIDI();
-    midi.update();
-}
-
-void Control_Surface_::onChannelMessage(Parsing_MIDI_Interface &midi) {
-    ChannelMessage midichmsg = midi.getChannelMessage();
-    ChannelMessageMatcher midimsg = {midichmsg};
+void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midichmsg) {
+    ChannelMessageMatcher midimsg = midichmsg;
 
 #ifdef DEBUG_MIDI_PACKETS
     // TODO: print CN
@@ -118,9 +132,8 @@ void Control_Surface_::onChannelMessage(Parsing_MIDI_Interface &midi) {
     }
 }
 
-void Control_Surface_::onSysExMessage(Parsing_MIDI_Interface &midi) {
+void Control_Surface_::sinkMIDIfromPipe(SysExMessage msg) {
     // System Exclusive
-    SysExMessage msg = midi.getSysExMessage();
 #ifdef DEBUG_MIDI_PACKETS
     const uint8_t *data = msg.data;
     size_t len = msg.length;
@@ -137,9 +150,7 @@ void Control_Surface_::onSysExMessage(Parsing_MIDI_Interface &midi) {
     MIDIInputElementSysEx::updateAllWith(msg);
 }
 
-void Control_Surface_::onRealtimeMessage(Parsing_MIDI_Interface &midi,
-                                         uint8_t message) {
-    RealTimeMessage rtMessage = {message, midi.getCN()};
+void Control_Surface_::sinkMIDIfromPipe(RealTimeMessage rtMessage) {
     // If the Real-Time Message callback exists, call it to see if we have to
     // continue handling it.
     if (realTimeMessageCallback && realTimeMessageCallback(rtMessage))

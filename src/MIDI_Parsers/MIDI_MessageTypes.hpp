@@ -14,11 +14,14 @@ AH_DIAGNOSTIC_WERROR()
 BEGIN_CS_NAMESPACE
 
 struct ChannelMessage {
+    ChannelMessage() : header(0), data1(0), data2(0), CN(0) {}
+    ChannelMessage(uint8_t header, uint8_t data1, uint8_t data2, uint8_t CN = 0)
+        : header(header), data1(data1), data2(data2), CN(CN) {}
+
     uint8_t header;
     uint8_t data1;
     uint8_t data2;
-
-    uint8_t CN = 0;
+    uint8_t CN;
 
     bool operator==(ChannelMessage other) const {
         return this->header == other.header && this->data1 == other.data1 &&

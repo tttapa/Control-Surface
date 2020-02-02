@@ -23,7 +23,7 @@ using AH::Updatable;
  * 
  * @ingroup ControlSurfaceModule
  */
-class Control_Surface_ : public MIDI_Callbacks {
+class Control_Surface_ : public MIDI_Sender, public TrueMIDI_SinkSource {
   public:
     // Copying is not allowed
     Control_Surface_(Control_Surface_ const &) = delete;
@@ -50,14 +50,47 @@ class Control_Surface_ : public MIDI_Callbacks {
      *
      * @return  A reference to the Control Surface's MIDI interface.
      * 
-     * @todo    This violate's the Law of Demeter.
+     * @deprecated
      */
-    MIDI_Interface &MIDI();
+    MIDI_Sender &MIDI();
+
+    /// Connect Control Surface to the default MIDI interface:
+    bool connectDefaultMIDI();
+
+    /// Accept an incoming MIDI Channel message.
+    void sinkMIDIfromPipe(ChannelMessage) override;
+    /// Accept an incoming MIDI System Exclusive message.
+    void sinkMIDIfromPipe(SysExMessage) override;
+    /// Accept an incoming MIDI Real-Time message.
+    void sinkMIDIfromPipe(RealTimeMessage) override;
+
+    /// Low-level function for sending a 3-byte MIDI message.
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                  uint8_t cn) override {
+        uint8_t h = m | c;
+        sourceMIDItoPipe(ChannelMessage{h, d1, d2, cn});
+    }
+    /**
+     * @brief   Low-level function for sending a 2-byte MIDI message.
+     */
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
+        uint8_t h = m | c;
+        sourceMIDItoPipe(ChannelMessage{h, d1, 0, cn});
+    }
+
+    /**
+     * @brief   Low-level function for sending a system exclusive MIDI message.
+     */
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
+        sourceMIDItoPipe(SysExMessage{data, length, cn});
+    }
 
     /** 
-     * @brief   Update all MIDI interfaces to receive new MIDI events.
+     * @brief   Low-level function for sending a single-byte MIDI message.
      */
-    void updateMidiInput();
+    void sendImpl(uint8_t rt, uint8_t cn) override {
+        sourceMIDItoPipe(RealTimeMessage{rt, cn});
+    }
 
     /**
      * @brief   Update all MIDIInputElement%s.
@@ -75,29 +108,13 @@ class Control_Surface_ : public MIDI_Callbacks {
      */
     Control_Surface_() = default;
 
-    /** 
-     * @brief   The callback to be called when a MIDI channel message is
-     *          received.
-     */
-    void onChannelMessage(Parsing_MIDI_Interface &midi) override;
-
-    /** 
-     * @brief   The callback to be called when a MIDI System Exclusive message
-     *          is received.
-     */
-    void onSysExMessage(Parsing_MIDI_Interface &midi) override;
-
-    /** 
-     * @brief   The callback to be called when a MIDI Real-Time message is 
-     *          received.
-     */
-    void onRealtimeMessage(Parsing_MIDI_Interface &midi,
-                           uint8_t message) override;
+    /// The pipes used to connect to the MIDI interface.
+    BidirectionalMIDI_Pipe pipe;
 
     /// A timer to know when to update the analog inputs.
     Timer<micros> potentiometerTimer = {AH::FILTERED_INPUT_UPDATE_INTERVAL};
     /// A timer to know when to refresh the displays.
-    Timer<micros> displayTimer = {1000000UL / MAX_FPS};
+    Timer<micros> displayTimer = {1000000 / MAX_FPS};
 
   public:
     /// Callback function type for channel messages. Return true if handling is

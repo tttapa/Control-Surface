@@ -23,6 +23,8 @@ class MockMIDI_Interface : public CS::Parsing_MIDI_Interface {
     MOCK_METHOD4(sendImpl, void(uint8_t, uint8_t, uint8_t, uint8_t));
     MOCK_METHOD3(sendImpl, void(const uint8_t *, size_t, uint8_t));
     MOCK_METHOD2(sendImpl, void(uint8_t, uint8_t));
+
+    void begin() override {}
 };
 
 W_SUGGEST_OVERRIDE_ON

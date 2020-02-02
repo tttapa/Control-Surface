@@ -102,6 +102,8 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
     }
 
   public:
+    void begin() override {}
+
     MIDI_read_t read() override {
         for (uint8_t i = 0; i < (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {
             MIDIUSBPacket_t midi_packet = readUSBPacket();

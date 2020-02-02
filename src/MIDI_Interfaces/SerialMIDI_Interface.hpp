@@ -34,6 +34,8 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
         : Parsing_MIDI_Interface(std::move(other)), stream(other.stream) {}
     // TODO: should I move the mutex too?
 
+    void begin() override {}
+
     MIDI_read_t read() override {
         while (stream.available() > 0) {
             uint8_t midiByte = stream.read();
