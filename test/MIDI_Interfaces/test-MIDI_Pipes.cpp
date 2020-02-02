@@ -951,58 +951,79 @@ TEST(MIDI_Pipes, exclusive) {
     sources[2] >> pipes >> sinks[1];
     sources[3] >> pipes >> sinks[1];
 
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    ASSERT_TRUE(sources[0].try_lock_mutex(0xC));
+    sources[0].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[1].try_lock_mutex(0xC));
+    sources[1].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[2].try_lock_mutex(0xC));
+    sources[2].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[3].try_lock_mutex(0xC));
+    sources[3].unlock_mutex(0xC);
 
-    sources[3].exclusive(0xC);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_FALSE(sources[1].canWrite(0xC));
-    ASSERT_FALSE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    ASSERT_TRUE(sources[3].try_lock_mutex(0xC));
+    ASSERT_TRUE(sources[0].try_lock_mutex(0xC));
+    sources[0].unlock_mutex(0xC);
+    ASSERT_FALSE(sources[1].try_lock_mutex(0xC));
+    ASSERT_FALSE(sources[2].try_lock_mutex(0xC));
+    sources[3].unlock_mutex(0xC);
 
-    sources[3].exclusive(0xC, false);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    ASSERT_TRUE(sources[0].try_lock_mutex(0xC));
+    sources[0].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[1].try_lock_mutex(0xC));
+    sources[1].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[2].try_lock_mutex(0xC));
+    sources[2].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[3].try_lock_mutex(0xC));
+    sources[3].unlock_mutex(0xC);
 
-    sources[2].exclusive(0xC);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_FALSE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_FALSE(sources[3].canWrite(0xC));
+    ASSERT_TRUE(sources[2].try_lock_mutex(0xC));
+    ASSERT_TRUE(sources[0].try_lock_mutex(0xC));
+    sources[0].unlock_mutex(0xC);
+    ASSERT_FALSE(sources[1].try_lock_mutex(0xC));
+    ASSERT_FALSE(sources[3].try_lock_mutex(0xC));
+    sources[2].unlock_mutex(0xC);
 
-    sources[2].exclusive(0xC, false);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    ASSERT_TRUE(sources[0].try_lock_mutex(0xC));
+    sources[0].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[1].try_lock_mutex(0xC));
+    sources[1].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[2].try_lock_mutex(0xC));
+    sources[2].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[3].try_lock_mutex(0xC));
+    sources[3].unlock_mutex(0xC);
 
-    sources[1].exclusive(0xC);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_FALSE(sources[2].canWrite(0xC));
-    ASSERT_FALSE(sources[3].canWrite(0xC));
+    ASSERT_TRUE(sources[1].try_lock_mutex(0xC));
+    ASSERT_TRUE(sources[0].try_lock_mutex(0xC));
+    sources[0].unlock_mutex(0xC);
+    ASSERT_FALSE(sources[2].try_lock_mutex(0xC));
+    ASSERT_FALSE(sources[3].try_lock_mutex(0xC));
+    sources[1].unlock_mutex(0xC);
 
-    sources[1].exclusive(0xC, false);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    ASSERT_TRUE(sources[0].try_lock_mutex(0xC));
+    sources[0].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[1].try_lock_mutex(0xC));
+    sources[1].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[2].try_lock_mutex(0xC));
+    sources[2].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[3].try_lock_mutex(0xC));
+    sources[3].unlock_mutex(0xC);
 
-    sources[0].exclusive(0xC);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_FALSE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    ASSERT_TRUE(sources[0].try_lock_mutex(0xC));
+    ASSERT_FALSE(sources[1].try_lock_mutex(0xC));
+    ASSERT_TRUE(sources[2].try_lock_mutex(0xC));
+    sources[2].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[3].try_lock_mutex(0xC));
+    sources[3].unlock_mutex(0xC);
 
-    sources[0].exclusive(0xC, false);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    sources[0].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[0].try_lock_mutex(0xC));
+    sources[0].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[1].try_lock_mutex(0xC));
+    sources[1].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[2].try_lock_mutex(0xC));
+    sources[2].unlock_mutex(0xC);
+    ASSERT_TRUE(sources[3].try_lock_mutex(0xC));
+    sources[3].unlock_mutex(0xC);
 }
 
 TEST(MIDI_PipeFactory, notEnoughPipes) {
@@ -1106,7 +1127,7 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
 
     // lock pipes of all MIDI interfaces that pipe to the same sinks as midiA[0]
     // (i.e. midiA[1]) so that midiA[0] has exclusive access.
-    midiA[0].exclusive(9);
+    ASSERT_TRUE(midiA[0].try_lock_mutex(9));
     // shouldn't send anything, sink pipe is locked
     midiA[1].update();
 
@@ -1114,7 +1135,7 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
     ::testing::Mock::VerifyAndClear(&midiB[1]);
 
     // unlock the pipes
-    midiA[0].exclusive(9, false);
+    midiA[0].unlock_mutex(9);
 
     // message is already in buffer, CN is already 9, so getSysExMessage()
     // returns 9th buffer
@@ -1141,7 +1162,7 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
 
     // lock pipes of all MIDI interfaces that pipe to the same sinks as midiA[0]
     // (i.e. midiA[1]) so that midiA[0] has exclusive access.
-    midiA[0].exclusive(9);
+    ASSERT_TRUE(midiA[0].try_lock_mutex(9));
     // shouldn't send anything, sink pipe is locked
     midiA[1].update();
 
@@ -1149,7 +1170,7 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
     ::testing::Mock::VerifyAndClear(&midiB[1]);
 
     // unlock the pipes
-    midiA[0].exclusive(9, false);
+    midiA[0].unlock_mutex(9);
 
     EXPECT_CALL(midiB[0], sendImpl(0x90, 0x05, 0x55, 0x66, 0x9));
     EXPECT_CALL(midiB[1], sendImpl(0x90, 0x05, 0x55, 0x66, 0x9));
@@ -1187,7 +1208,7 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
         .WillOnce(Return(Packet_t{0x9F, 0xF8, 0x00, 0x00}))
         .WillOnce(Return(Packet_t{}));
 
-    midiA[0].exclusive(9);
+    ASSERT_TRUE(midiA[0].try_lock_mutex(9));
 
     // even though pipe is locked, real-time message should get through
     EXPECT_CALL(midiB[0], sendImpl(0xF8, 0x9));
@@ -1199,7 +1220,7 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
     ::testing::Mock::VerifyAndClear(&midiB[1]);
 
     // unlock the pipes
-    midiA[0].exclusive(9, false);
+    midiA[0].unlock_mutex(9);
     midiA[1].update(); // shouldn't send anything
 }
 

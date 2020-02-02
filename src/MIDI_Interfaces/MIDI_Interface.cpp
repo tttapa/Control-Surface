@@ -13,7 +13,7 @@ void MIDI_Sender::send(uint8_t m, uint8_t c, uint8_t d1) {
 }
 
 void MIDI_Sender::sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
-                                 uint8_t cn) {
+                              uint8_t cn) {
     c--;             // Channels are zero-based
     m &= 0xF0;       // bitmask high nibble
     m |= 0b10000000; // set msb
@@ -40,14 +40,12 @@ void MIDI_Sender::sendOnCable(uint8_t r, uint8_t cn) {
     sendImpl(r, cn);
 }
 
-void MIDI_Sender::sendNoteOn(MIDICNChannelAddress address,
-                                uint8_t velocity) {
+void MIDI_Sender::sendNoteOn(MIDICNChannelAddress address, uint8_t velocity) {
     if (address)
         sendImpl(NOTE_ON, address.getRawChannel(), address.getAddress(),
                  velocity, address.getCableNumber());
 }
-void MIDI_Sender::sendNoteOff(MIDICNChannelAddress address,
-                                 uint8_t velocity) {
+void MIDI_Sender::sendNoteOff(MIDICNChannelAddress address, uint8_t velocity) {
     if (address)
         sendImpl(NOTE_OFF, address.getRawChannel(), address.getAddress(),
                  velocity, address.getCableNumber());
@@ -185,9 +183,11 @@ bool Parsing_MIDI_Interface::onRealtimeMessage(uint8_t message) {
 
 bool Parsing_MIDI_Interface::onChannelMessage() {
     auto message = getChannelMessage();
-    if (!canWrite(message.CN))
+    auto cn = message.CN;
+    if (!try_lock_mutex(cn))
         return false;
     sourceMIDItoPipe(message);
+    unlock_mutex(cn);
     if (callbacks)
         callbacks->onChannelMessage(*this);
     // TODO: we have the message already, should we just pass it to the
@@ -197,9 +197,11 @@ bool Parsing_MIDI_Interface::onChannelMessage() {
 
 bool Parsing_MIDI_Interface::onSysExMessage() {
     auto message = getSysExMessage();
-    if (!canWrite(message.CN))
+    auto cn = message.CN;
+    if (!try_lock_mutex(cn))
         return false;
     sourceMIDItoPipe(message);
+    unlock_mutex(cn);
     if (callbacks)
         callbacks->onSysExMessage(*this);
     return true;

@@ -120,13 +120,31 @@ MIDI_Source &MIDI_Source::operator=(MIDI_Source &&other) {
 
 MIDI_Source::~MIDI_Source() { disconnectSinkPipes(); }
 
-void MIDI_Source::exclusive(cn_t cn, bool exclusive) {
-    if (hasSinkPipe())
-        sinkPipe->exclusive(cn, exclusive);
+#if defined(ESP32) || !defined(ARDUINO)
+static std::mutex pipe_exclusive_mutex;
+#endif
+
+bool MIDI_Source::try_lock_mutex(cn_t cn) {
+#if defined(ESP32) || !defined(ARDUINO)
+    std::lock_guard<std::mutex> lock_guard(pipe_exclusive_mutex);
+#endif
+    // Nothing to lock if the source isn't connected to a pipe
+    if (!hasSinkPipe())
+        return true;
+    // Check if the pipe is locked
+    if (!sinkPipe->isAvailableForWrite(cn))
+        return false;
+    // If not, lock the pipe
+    sinkPipe->exclusive(cn, true);
+    return true;
 }
 
-bool MIDI_Source::canWrite(cn_t cn) const {
-    return !hasSinkPipe() || sinkPipe->isAvailableForWrite(cn);
+void MIDI_Source::unlock_mutex(cn_t cn) {
+#if defined(ESP32) || !defined(ARDUINO)
+    std::lock_guard<std::mutex> lock_guard(pipe_exclusive_mutex);
+#endif
+    if (hasSinkPipe())
+        sinkPipe->exclusive(cn, false);
 }
 
 void MIDI_Source::sourceMIDItoPipe(ChannelMessage msg) {
@@ -194,14 +212,7 @@ void MIDI_Pipe::disconnect() {
 
 MIDI_Pipe::~MIDI_Pipe() { disconnect(); }
 
-#if defined(ESP32) || !defined(ARDUINO)
-static std::mutex pipe_exclusive_mutex;
-#endif
-
 void MIDI_Pipe::exclusive(cn_t cn, bool exclusive) {
-#if defined(ESP32) || !defined(ARDUINO)
-    std::lock_guard<std::mutex> lock_guard(pipe_exclusive_mutex);
-#endif
     if (hasSink())
         sink->lockDownstream(cn, exclusive);
     if (hasThroughIn())
