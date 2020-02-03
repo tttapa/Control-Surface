@@ -19,11 +19,15 @@ namespace Bankable {
  * 
  * The switch is debounced in software.  
  * This version can be banked.  
+ * 
+ * @tparam  NumBanks
+ *          The number of banks.
  *
  * @ingroup BankableMIDIOutputElements
  */
+template <uint8_t NumBanks>
 class CCButtonLatched
-    : public MIDIButtonLatched<SingleAddress, DigitalCCSender> {
+    : public MIDIButtonLatched<NumBanks, SingleAddress, DigitalCCSender> {
   public:
     /**
      * @brief   Create a new bankable CCButtonLatched object on the given pin 
@@ -42,10 +46,11 @@ class CCButtonLatched
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButtonLatched(const OutputBankConfig &config, pin_t pin,
+    CCButtonLatched(const BankConfig<NumBanks> &config, pin_t pin,
                     const MIDICNChannelAddress &address,
                     const DigitalCCSender &sender = {})
-        : MIDIButtonLatched{{config, address}, pin, sender} {}
+        : MIDIButtonLatched<NumBanks, SingleAddress, DigitalCCSender>{
+              {config, address}, pin, sender} {}
 };
 
 } // namespace Bankable
