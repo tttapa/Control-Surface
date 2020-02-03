@@ -48,6 +48,9 @@ struct BankConfig {
  *          bank type.
  */
 struct OutputBankConfig {
+    template <setting_t N>
+    OutputBankConfig(const BankConfig<N> &bankconfig)
+        : bank(bankconfig.bank), type(bankconfig.type) {}
     OutputBankConfig(OutputBank &bank, BankType type = CHANGE_ADDRESS)
         : bank(bank), type(type) {}
     OutputBank &bank;

@@ -111,7 +111,7 @@ TEST(Construction, MIDIOutputs) {
 
     // Bankable::CC ------------------------------------------------------------
     Bankable::CCButton{bank, pin, address};
-    Bankable::CCButtonLatched{bank, pin, address};
+    Bankable::CCButtonLatched<4>{bank, pin, address};
     Bankable::CCButtonLatching{bank, pin, address};
     Bankable::CCButtonMatrix<3, 4>{bank, rowPins3, colPins4, addressMatrix34,
                                    cnChannel};
@@ -125,7 +125,7 @@ TEST(Construction, MIDIOutputs) {
 
     // Bankable::Note ----------------------------------------------------------
     Bankable::NoteButton{bank, pin, address};
-    Bankable::NoteButtonLatched{bank, pin, address};
+    Bankable::NoteButtonLatched<4>{bank, pin, address};
     Bankable::NoteButtonLatching{bank, pin, address};
     Bankable::NoteButtonMatrix<3, 4>{bank, rowPins3, colPins4, addressMatrix34,
                                      cnChannel};

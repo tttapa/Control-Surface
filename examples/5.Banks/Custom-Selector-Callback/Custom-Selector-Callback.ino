@@ -106,7 +106,7 @@ GenericIncrementDecrementSelector<6, MySelectorCallback> selector = {
   bank,         // bank to manage
   {10, 11, 12}, // red, green, blue LED pins 
                 // (this is the MySelectorCallback constructor defined above)
-  {2, 3},     // incr/decr button pins
+  {2, 3},       // incr/decr button pins
   Wrap::Wrap,   // wrap around when reaching setting 6
 };
 
