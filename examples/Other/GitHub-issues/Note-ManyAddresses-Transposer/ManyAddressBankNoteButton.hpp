@@ -12,7 +12,7 @@ class ManyAddressBank {
                   OutputBankConfig bank)
     : manyaddresses{manyaddresses}, bank{bank} {}
 
-  void lock() { manyaddresses.lock(), bank.lock(); }
+  bool lock() { return manyaddresses.lock() & bank.lock(); }
   void unlock() { manyaddresses.unlock(), bank.unlock(); }
 
   MIDICNChannelAddress getActiveAddress() const {

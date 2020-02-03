@@ -3,6 +3,7 @@
 #include <AH/Containers/Array.hpp>
 #include <AH/Hardware/ButtonMatrix.hpp>
 #include <Banks/BankableMIDIOutput.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -56,20 +57,30 @@ class MIDIButtonMatrix : public MIDIOutputElement,
   public:
     void begin() override { AH::ButtonMatrix<nb_rows, nb_cols>::begin(); }
 
-    void update() override { AH::ButtonMatrix<nb_rows, nb_cols>::update(); }
+    void update() override {
+        bool unlock = address.lock();
+        // CN is the same for all buttons in the matrix:
+        auto cn = address.getActiveAddress(0, 0).getCableNumber();
+
+        if (Control_Surface.try_lock_mutex(cn)) {
+            AH::ButtonMatrix<nb_rows, nb_cols>::update();
+            unlock = activeButtons == 0;
+
+            Control_Surface.unlock_mutex(cn);
+        }
+
+        if (unlock)
+            address.unlock();
+    }
 
   private:
     void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
         if (state == LOW) {
-            if (!activeButtons)
-                address.lock(); // Don't allow changing of the bank setting
             activeButtons++;
             sender.sendOn(address.getActiveAddress(row, col));
         } else {
             sender.sendOff(address.getActiveAddress(row, col));
             activeButtons--;
-            if (!activeButtons)
-                address.unlock();
         }
     }
 

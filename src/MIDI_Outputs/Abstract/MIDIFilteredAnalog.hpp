@@ -1,6 +1,7 @@
 #pragma once
 
 #include <AH/Hardware/FilteredAnalog.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -35,8 +36,14 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
   public:
     void begin() override {}
     void update() override {
+        auto cn = address.getCableNumber();
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         if (filteredAnalog.update())
             sender.send(filteredAnalog.getValue(), address);
+
+        Control_Surface.unlock_mutex(cn);
     }
 
     /**
@@ -107,8 +114,14 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
   public:
     void begin() final override {}
     void update() final override {
+        auto cn = address.getCableNumber();
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         if (filteredAnalog.update())
             sender.send(filteredAnalog.getValue(), address);
+
+        Control_Surface.unlock_mutex(cn);
     }
 
     /**

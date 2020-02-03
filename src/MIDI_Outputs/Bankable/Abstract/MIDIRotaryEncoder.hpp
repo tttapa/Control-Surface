@@ -7,6 +7,7 @@
 #endif
 
 #include <Banks/BankableMIDIOutput.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <Encoder.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -33,8 +34,8 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
                       uint8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
         : BankableMIDIOutput(config), encoder{pins.A, pins.B}, address(address),
-          speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
+          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
+          sender(sender) {}
 
 // For tests only
 #ifndef ARDUINO
@@ -43,14 +44,19 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
                       uint8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
         : BankableMIDIOutput(config), encoder{encoder}, address(address),
-          speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
+          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
+          sender(sender) {}
 #endif
 
   public:
     void begin() final override {}
     void update() final override {
         MIDICNChannelAddress sendAddress = address + getAddressOffset();
+        auto cn = sendAddress.getCableNumber();
+
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         // I could do the division inside of the if statement for performance
@@ -58,6 +64,8 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
             sender.send(difference * speedMultiply, sendAddress);
             previousPosition += difference * pulsesPerStep;
         }
+
+        Control_Surface.unlock_mutex(cn);
     }
 
   private:

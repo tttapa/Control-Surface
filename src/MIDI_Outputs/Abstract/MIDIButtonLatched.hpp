@@ -3,6 +3,7 @@
 #pragma once
 
 #include <AH/Hardware/Button.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -37,28 +38,45 @@ class MIDIButtonLatched : public MIDIOutputElement {
 
   public:
     void begin() final override { button.begin(); }
+
     void update() final override {
-        AH::Button::State state = button.update();
-        if (state == AH::Button::Falling)
-            toggleState();
+        auto cn = address.getCableNumber();
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
+        if (newstate != state) {
+            state = newstate;
+            sendState();
+        }
+
+        AH::Button::State buttonstate = button.update();
+        if (buttonstate == AH::Button::Falling) {
+            state = (newstate = !state);
+            sendState();
+        }
+
+        Control_Surface.unlock_mutex(cn);
     }
 
     /// Flip the state (on → off or off → on).
-    /// Sends the appropriate MIDI event.
+    /// @note   The MIDI message is not actually sent until the next time when
+    ///         `update` is called and the MIDI output is available.
     bool toggleState() {
-        setState(!getState());
-        return getState();
+        setState(!getNewState());
+        return getNewState();
     }
 
     /// Get the current state.
     bool getState() const { return state; }
 
+    /// Get the new state (that will be sent over MIDI when the MIDI output
+    /// becomes available).
+    bool getNewState() const { return newstate; }
+
     /// Set the state to the given value.
-    /// Sends the appropriate MIDI event.
-    void setState(bool state) {
-        this->state = state;
-        state ? sender.sendOn(address) : sender.sendOff(address);
-    }
+    /// @note   The MIDI message is not actually sent until the next time when
+    ///         `update` is called and the MIDI output is available.
+    void setState(bool state) { this->newstate = state; }
 
 #ifdef AH_INDIVIDUAL_BUTTON_INVERT
     void invert() { button.invert(); }
@@ -68,9 +86,15 @@ class MIDIButtonLatched : public MIDIOutputElement {
     AH::Button::State getButtonState() const { return button.getState(); }
 
   private:
+    void sendState() {
+        state ? sender.sendOn(address) : sender.sendOff(address);
+    }
+
+  private:
     AH::Button button;
     const MIDICNChannelAddress address;
     bool state = false;
+    bool newstate = false;
 
   public:
     Sender sender;

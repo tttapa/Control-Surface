@@ -3,6 +3,7 @@
 #include <AH/Containers/UniquePtr.hpp>
 #include <AH/Hardware/Button.hpp>
 #include <Banks/BankAddresses.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -48,23 +49,38 @@ class MIDIChordButton : public MIDIOutputElement {
           newChord(AH::MakeUnique<Chord<N>>(chord)), sender{sender} {}
 
     void begin() override { button.begin(); }
+
     void update() override {
-        AH::Button::State state = button.update();
-        if (state == AH::Button::Falling) {
-            if (newChord)
-                chord = std::move(newChord);
-            address.lock();
-            auto sendAddress = address.getActiveAddress();
-            sender.sendOn(sendAddress);
-            for (int8_t offset : *chord)
-                sender.sendOn(sendAddress + offset);
-        } else if (state == AH::Button::Rising) {
-            auto sendAddress = address.getActiveAddress();
-            sender.sendOff(sendAddress);
-            for (int8_t offset : *chord)
-                sender.sendOff(sendAddress + offset);
-            address.unlock();
+        // Lock the bank setting and get the MIDI cable number to lock
+        bool unlock = address.lock();
+        auto sendAddress = address.getActiveAddress();
+        auto cn = sendAddress.getCableNumber();
+
+        // Lock the MIDI cable and update the button if successful
+        if (Control_Surface.try_lock_mutex(cn)) {
+
+            AH::Button::State state = button.update();
+            if (state == AH::Button::Falling) {
+                if (newChord)
+                    chord = std::move(newChord);
+                sender.sendOn(sendAddress);
+                for (int8_t offset : *chord)
+                    sender.sendOn(sendAddress + offset);
+                unlock = false;
+            } else if (state == AH::Button::Rising) {
+                sender.sendOff(sendAddress);
+                for (int8_t offset : *chord)
+                    sender.sendOff(sendAddress + offset);
+                unlock = true;
+            }
+
+            // Unlock the MIDI cable
+            Control_Surface.unlock_mutex(cn);
         }
+
+        // Unlock the bank setting again
+        if (unlock)
+            address.unlock();
     }
 
 #ifdef AH_INDIVIDUAL_BUTTON_INVERT

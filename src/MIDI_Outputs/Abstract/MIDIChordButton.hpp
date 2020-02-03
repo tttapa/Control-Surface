@@ -2,6 +2,7 @@
 
 #include <AH/Containers/UniquePtr.hpp>
 #include <AH/Hardware/Button.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -45,7 +46,12 @@ class MIDIChordButton : public MIDIOutputElement {
     // TODO: can I somehow get rid of the dynamic memory allocation here?
 
     void begin() final override { button.begin(); }
+
     void update() final override {
+        auto cn = address.getCableNumber();
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         AH::Button::State state = button.update();
         MIDICNChannelAddress sendAddress = address;
         if (state == AH::Button::Falling) {
@@ -59,6 +65,8 @@ class MIDIChordButton : public MIDIOutputElement {
             for (int8_t offset : *chord)
                 sender.sendOff(sendAddress + offset);
         }
+
+        Control_Surface.unlock_mutex(cn);
     }
 
 #ifdef AH_INDIVIDUAL_BUTTON_INVERT

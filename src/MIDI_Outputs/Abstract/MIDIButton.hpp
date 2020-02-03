@@ -1,6 +1,7 @@
 #pragma once
 
 #include <AH/Hardware/Button.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -32,13 +33,20 @@ class MIDIButton : public MIDIOutputElement {
         : button{pin}, address{address}, sender(sender) {}
 
     void begin() override { button.begin(); }
+
     void update() override {
+        auto cn = address.getCableNumber();
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         AH::Button::State state = button.update();
         if (state == AH::Button::Falling) {
             sender.sendOn(address);
         } else if (state == AH::Button::Rising) {
             sender.sendOff(address);
         }
+
+        Control_Surface.unlock_mutex(cn);
     }
 
 #ifdef AH_INDIVIDUAL_BUTTON_INVERT

@@ -2,6 +2,7 @@
 
 #include <AH/Hardware/Button.hpp>
 #include <Banks/BankableMIDIOutput.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -36,13 +37,20 @@ class MIDIButtonLatching : public MIDIOutputElement {
 
   public:
     void begin() override { button.begin(); }
+
     void update() override {
+        auto sendAddress = address.getActiveAddress();
+        auto cn = sendAddress.getCableNumber();
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         AH::Button::State state = button.update();
         if (state == AH::Button::Falling || state == AH::Button::Rising) {
-            MIDICNChannelAddress sendAddress = address.getActiveAddress();
             sender.sendOn(sendAddress);
             sender.sendOff(sendAddress);
         }
+
+        Control_Surface.unlock_mutex(cn);
     }
 
     AH::Button::State getButtonState() const { return button.getState(); }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <AH/Hardware/ButtonMatrix.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -31,7 +32,13 @@ class MIDIButtonMatrix : public MIDIOutputElement,
     void begin() final override { AH::ButtonMatrix<nb_rows, nb_cols>::begin(); }
 
     void update() final override {
+        auto cn = baseChannelCN.getCableNumber();
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         AH::ButtonMatrix<nb_rows, nb_cols>::update();
+
+        Control_Surface.unlock_mutex(cn);
     }
 
   private:

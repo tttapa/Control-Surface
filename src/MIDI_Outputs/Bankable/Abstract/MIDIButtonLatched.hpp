@@ -2,6 +2,7 @@
 
 #include <AH/Hardware/Button.hpp>
 #include <Banks/BankableMIDIOutput.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -38,21 +39,71 @@ class MIDIButtonLatched : public MIDIOutputElement {
 
   public:
     void begin() override { button.begin(); }
+
     void update() override {
-        AH::Button::State state = button.update();
-        if (state == AH::Button::Falling)
-            toggleState();
+        // Lock the bank setting and get the MIDI cable number to lock
+        bool unlock = address.lock();
+        auto sendAddress = address.getActiveAddress();
+        auto cn = sendAddress.getCableNumber();
+
+        // Lock the MIDI cable and update the button if successful
+        if (Control_Surface.try_lock_mutex(cn)) {
+
+            if (newstate != state) {
+                state = newstate;
+                state ? sender.sendOn(sendAddress) // send MIDI
+                      : sender.sendOff(sendAddress);
+                unlock = !state; // if enabled, keep locked, if disabled, unlock
+            }
+
+            AH::Button::State buttonstate = button.update(); // read button
+            if (buttonstate == AH::Button::Falling) {        // if pressed
+                newstate = !state;                           // toggle the state
+                state = newstate;
+                state ? sender.sendOn(sendAddress) // send MIDI
+                      : sender.sendOff(sendAddress);
+                unlock = !state; // if enabled, keep locked, if disabled, unlock
+            }
+
+            // Unlock the MIDI cable
+            Control_Surface.unlock_mutex(cn);
+        }
+
+        // Unlock the bank setting again
+        if (unlock)
+            address.unlock();
     }
 
+    /// Flip the state (on → off or off → on).
+    /// @note   The MIDI message is not actually sent until the next time when
+    ///         `update` is called and the MIDI output is available.
     bool toggleState() {
-        setState(!getState());
-        return getState();
+        setState(!getNewState());
+        return getNewState();
     }
+
+    /// Get the current state.
     bool getState() const { return state; }
-    void setState(bool state) {
-        this->state = state;
+
+    /// Get the new state (that will be sent over MIDI when the MIDI output
+    /// becomes available).
+    bool getNewState() const { return newstate; }
+
+    /// Set the state to the given value.
+    /// @note   The MIDI message is not actually sent until the next time when
+    ///         `update` is called and the MIDI output is available.
+    void setState(bool state) { this->newstate = state; }
+
+#ifdef AH_INDIVIDUAL_BUTTON_INVERT
+    void invert() { button.invert(); }
+#endif
+
+    /// Get the state of the underlying button.
+    AH::Button::State getButtonState() const { return button.getState(); }
+
+  private:
+    void sendState() {
         if (state) {
-            address.lock();
             sender.sendOn(address.getActiveAddress());
         } else {
             sender.sendOff(address.getActiveAddress());
@@ -60,12 +111,11 @@ class MIDIButtonLatched : public MIDIOutputElement {
         }
     }
 
-    AH::Button::State getButtonState() const { return button.getState(); }
-
   private:
     BankAddress address;
     AH::Button button;
     bool state = false;
+    bool newstate = false;
 
   public:
     Sender sender;

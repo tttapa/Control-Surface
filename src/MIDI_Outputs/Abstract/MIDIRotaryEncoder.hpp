@@ -6,6 +6,7 @@
     "library. (#include <Encoder.h>)"
 #endif
 
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <Encoder.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -24,32 +25,37 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
      * @todo    Documentation
      */
     MIDIRotaryEncoder(const EncoderPinList &pins,
-                      const MIDICNChannelAddress &address,
-                      int8_t speedMultiply, uint8_t pulsesPerStep,
-                      const Sender &sender)
+                      const MIDICNChannelAddress &address, int8_t speedMultiply,
+                      uint8_t pulsesPerStep, const Sender &sender)
         : encoder{pins.A, pins.B}, address(address),
-          speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
+          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
+          sender(sender) {}
 
 // For tests only
 #ifndef ARDUINO
     MIDIRotaryEncoder(const Encoder &encoder,
-                      const MIDICNChannelAddress &address,
-                      int8_t speedMultiply, uint8_t pulsesPerStep,
-                      const Sender &sender)
+                      const MIDICNChannelAddress &address, int8_t speedMultiply,
+                      uint8_t pulsesPerStep, const Sender &sender)
         : encoder{encoder}, address(address), speedMultiply(speedMultiply),
           pulsesPerStep(pulsesPerStep), sender(sender) {}
 #endif
 
   public:
     void begin() final override {}
+
     void update() final override {
+        auto cn = address.getCableNumber();
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         if (difference) {
             sender.send(difference * speedMultiply, address);
             previousPosition += difference * pulsesPerStep;
         }
+
+        Control_Surface.unlock_mutex(cn);
     }
 
   private:

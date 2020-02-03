@@ -2,6 +2,7 @@
 
 #include <AH/Hardware/FilteredAnalog.hpp>
 #include <Banks/BankableMIDIOutput.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -38,8 +39,16 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
   public:
     void begin() override {}
     void update() override {
+        auto activeAddress = address.getActiveAddress();
+        auto cn = activeAddress.getCableNumber();
+
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         if (filteredAnalog.update())
-            sender.send(filteredAnalog.getValue(), address.getActiveAddress());
+            sender.send(filteredAnalog.getValue(), activeAddress);
+
+        Control_Surface.unlock_mutex(cn);
     }
 
     /**
@@ -52,7 +61,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      *          \mathrm{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$ bits as a parameter, 
      *          and should return a value in the same range.
      * 
-     * @see     FilteredAnalog::map     
+     * @see     FilteredAnalog::map
      */
     void map(MappingFunction fn) { filteredAnalog.map(fn); }
 
@@ -110,8 +119,16 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
   public:
     void begin() final override {}
     void update() final override {
+        auto activeAddress = address.getActiveAddress();
+        auto cn = activeAddress.getCableNumber();
+
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         if (filteredAnalog.update())
-            sender.send(filteredAnalog.getValue(), address.getActiveAddress());
+            sender.send(filteredAnalog.getValue(), activeAddress);
+
+        Control_Surface.unlock_mutex(cn);
     }
 
     /**

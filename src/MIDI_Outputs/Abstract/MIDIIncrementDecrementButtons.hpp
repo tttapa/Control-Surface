@@ -1,9 +1,9 @@
 #pragma once
 
 #include <AH/Hardware/IncrementDecrementButtons.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
-
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -33,6 +33,10 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
     void begin() override { buttons.begin(); }
 
     void update() override {
+        auto cn = address.getCableNumber();
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         using IncrDecrButtons = AH::IncrementDecrementButtons;
         switch (buttons.update()) {
             case IncrDecrButtons::Increment: send(multiplier, address); break;
@@ -41,6 +45,8 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
             case IncrDecrButtons::Nothing: break;
             default: break;
         }
+
+        Control_Surface.unlock_mutex(cn);
     }
 
     void send(long delta, const MIDICNChannelAddress &address) {

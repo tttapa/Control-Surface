@@ -3,6 +3,7 @@
 #include <AH/Hardware/Button.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <Control_Surface/Control_Surface_Class.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -33,12 +34,19 @@ class MIDIButtonLatching : public MIDIOutputElement {
 
   public:
     void begin() override { button.begin(); }
+
     void update() override {
+        auto cn = address.getCableNumber();
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         AH::Button::State state = button.update();
         if (state == AH::Button::Falling || state == AH::Button::Rising) {
             sender.sendOn(address);
             sender.sendOff(address);
         }
+
+        Control_Surface.unlock_mutex(cn);
     }
 
     AH::Button::State getButtonState() const { return button.getState(); }

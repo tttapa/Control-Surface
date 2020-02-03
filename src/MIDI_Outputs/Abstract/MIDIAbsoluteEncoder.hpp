@@ -6,6 +6,7 @@
     "library. (#include <Encoder.h>)"
 #endif
 
+#include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <Encoder.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -19,34 +20,39 @@ BEGIN_CS_NAMESPACE
 template <class Sender>
 class MIDIAbsoluteEncoder : public MIDIOutputElement {
   protected:
-        MIDIAbsoluteEncoder(const EncoderPinList &pins,
-                            const MIDICNChannelAddress &address,
-                            int16_t multiplier, uint8_t pulsesPerStep,
-                            const Sender &sender)
-        : encoder{pins.A, pins.B}, address(address),
-          multiplier(multiplier),
+    MIDIAbsoluteEncoder(const EncoderPinList &pins,
+                        const MIDICNChannelAddress &address, int16_t multiplier,
+                        uint8_t pulsesPerStep, const Sender &sender)
+        : encoder{pins.A, pins.B}, address(address), multiplier(multiplier),
           pulsesPerStep(pulsesPerStep), sender(sender) {}
-          
+
   public:
     void begin() override {}
+
     void update() override {
+        auto cn = address.getCableNumber();
+        if (!Control_Surface.try_lock_mutex(cn))
+            return;
+
         long currentPosition = getValue();
         if (currentPosition != previousPosition) {
             sender.send(currentPosition, address);
             previousPosition = currentPosition;
         }
+
+        Control_Surface.unlock_mutex(cn);
     }
 
-    analog_t getValue() { 
-      auto maxval = (1 << Sender::precision()) - 1;
-      noInterrupts();
-      auto rawval = encoder.read() * multiplier / pulsesPerStep;
-      noInterrupts(); // encoder.read() enables interrupts :(
-      auto val = constrain(rawval, 0, maxval);
-      if (val != rawval)
-        encoder.write(val * pulsesPerStep / multiplier);
-      interrupts();
-      return val;
+    analog_t getValue() {
+        auto maxval = (1 << Sender::precision()) - 1;
+        noInterrupts();
+        auto rawval = encoder.read() * multiplier / pulsesPerStep;
+        noInterrupts(); // encoder.read() enables interrupts :(
+        auto val = constrain(rawval, 0, maxval);
+        if (val != rawval)
+            encoder.write(val * pulsesPerStep / multiplier);
+        interrupts();
+        return val;
     }
 
   private:

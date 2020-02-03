@@ -40,10 +40,29 @@ class BankableMIDIOutput_Base {
      * 
      * As long as it's locked, `getSelection` will return the current setting,
      * independent from the actual bank setting.
+     * 
+     * Locking is idempotent: locking twice has the same effect as locking once,
+     * but the return value will be different.
+     * 
+     * @retval  true
+     *          The bank setting was previously unlocked and has now become
+     *          locked.
+     * @retval  false
+     *          The bank setting was locked already. 
      */
-    void lock() {
-        if (lockedSetting == UNLOCKED)
+    bool lock() {
+        if (lockedSetting == UNLOCKED) {
             lockedSetting = getRawBankSetting();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @brief   Check if the bank setting is locked.
+     */
+    bool isLocked() const {
+        return lockedSetting != UNLOCKED;
     }
 
     /**
