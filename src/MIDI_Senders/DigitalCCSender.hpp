@@ -9,10 +9,10 @@ class DigitalCCSender {
     DigitalCCSender(uint8_t onValue = 0x7F, uint8_t offValue = 0x00)
         : onValue{onValue}, offValue{offValue} {}
 
-    void sendOn(MIDICNChannelAddress address) {
+    void sendOn(MIDIAddress address) {
         Control_Surface.MIDI().sendCC(address, onValue);
     }
-    void sendOff(MIDICNChannelAddress address) {
+    void sendOff(MIDIAddress address) {
         Control_Surface.MIDI().sendCC(address, offValue);
     }
 

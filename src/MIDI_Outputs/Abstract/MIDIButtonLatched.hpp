@@ -32,7 +32,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIButtonLatched(pin_t pin, const MIDICNChannelAddress &address,
+    MIDIButtonLatched(pin_t pin, const MIDIAddress &address,
                       const Sender &sender)
         : button{pin}, address{address}, sender{sender} {}
 
@@ -92,7 +92,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
 
   private:
     AH::Button button;
-    const MIDICNChannelAddress address;
+    const MIDIAddress address;
     bool state = false;
     bool newstate = false;
 

@@ -64,9 +64,9 @@ using namespace CS;
 
 TEST(Construction, MIDIOutputs) {
     const pin_t pin = 0;
-    const MIDICNChannelAddress address = {};
-    // const RelativeMIDICNChannelAddress relAddress = {};
-    const MIDICNChannel cnChannel = {};
+    const MIDIAddress address = {};
+    // const RelativeMIDIAddress relAddress = {};
+    const MIDIChannelCN cnChannel = {};
     uint8_t u8 = 0;
     int8_t i8 = 0;
     const PinList<3> rowPins3 = {1, 2, 3};
@@ -76,7 +76,7 @@ TEST(Construction, MIDIOutputs) {
         {21, 22, 23, 24},
         {31, 32, 33, 34},
     }};
-    const Array<MIDICNChannelAddress, 4> addresses = {{
+    const Array<MIDIAddress, 4> addresses = {{
         1,
         2,
         3,
@@ -171,7 +171,7 @@ TEST(Construction, MIDIOutputs) {
 
 TEST(Construction, Selectors) {
     const pin_t pin = 0;
-    const MIDICNChannel cnChannel = {};
+    const MIDIChannelCN cnChannel = {};
     const Wrap wrap = Wrap::NoWrap;
     Bank<4> bank;
     Bank<2> bank2;

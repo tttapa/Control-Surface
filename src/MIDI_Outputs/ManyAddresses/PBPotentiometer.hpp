@@ -51,10 +51,10 @@ class PBPotentiometer
      *          The MIDI sender to use.
      */
     PBPotentiometer(const Bank<N> &bank, pin_t analogPin,
-                    const Array<MIDICNChannel, N> &addresses,
+                    const Array<MIDIChannelCN, N> &addresses,
                     const PitchBendSender<10> &sender = {})
         : MIDIFilteredAnalog<ManyAddresses<N>, PitchBendSender<10>>{
-              {bank, AH::copyAs<MIDICNChannelAddress>(addresses)},
+              {bank, AH::copyAs<MIDIAddress>(addresses)},
               analogPin,
               sender,
           } {}

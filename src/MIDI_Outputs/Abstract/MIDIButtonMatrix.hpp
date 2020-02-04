@@ -24,7 +24,7 @@ class MIDIButtonMatrix : public MIDIOutputElement,
     MIDIButtonMatrix(const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
-                     MIDICNChannel channelCN, const Sender &sender)
+                     MIDIChannelCN channelCN, const Sender &sender)
         : AH::ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
           addresses(addresses), baseChannelCN(channelCN), sender{sender} {}
 
@@ -51,7 +51,7 @@ class MIDIButtonMatrix : public MIDIOutputElement,
     }
 
     AddressMatrix<nb_rows, nb_cols> addresses;
-    const MIDICNChannel baseChannelCN;
+    const MIDIChannelCN baseChannelCN;
 
   public:
     Sender sender;

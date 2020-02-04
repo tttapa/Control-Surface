@@ -98,6 +98,10 @@ class MySelectorCallback {
     pin_t redLED, greenLED, blueLED;
 };
 
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
+USBMIDI_Interface midi;
+
 // Create 6 banks with one track per bank.
 Bank<6> bank = 1;
 

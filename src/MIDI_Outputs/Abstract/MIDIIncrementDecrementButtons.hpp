@@ -20,9 +20,9 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
      * @todo    Documentation
      */
     MIDIIncrementDecrementButtons(const AH::IncrementDecrementButtons &buttons,
-                                  const MIDICNChannelAddress &address,
+                                  const MIDIAddress &address,
                                   uint8_t multiplier,
-                                  const MIDICNChannelAddress &resetAddress,
+                                  const MIDIAddress &resetAddress,
                                   const RelativeSender &relativeSender,
                                   const ResetSender &resetSender)
         : buttons(buttons), address(address), multiplier(multiplier),
@@ -49,7 +49,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         Control_Surface.unlock_mutex(cn);
     }
 
-    void send(long delta, const MIDICNChannelAddress &address) {
+    void send(long delta, const MIDIAddress &address) {
         relativeSender.send(delta, address);
     }
 
@@ -70,9 +70,9 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
 
   private:
     AH::IncrementDecrementButtons buttons;
-    const MIDICNChannelAddress address;
+    const MIDIAddress address;
     const uint8_t multiplier;
-    const MIDICNChannelAddress resetAddress;
+    const MIDIAddress resetAddress;
 
   public:
     RelativeSender relativeSender;

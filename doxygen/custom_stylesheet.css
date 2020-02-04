@@ -117,6 +117,10 @@ code {
     background-color: #f4f4ff;
     padding: 0 1px;
 }
+div.fragment {
+    padding: 0.6em;
+}
+
 
 /* --------------------- */
 

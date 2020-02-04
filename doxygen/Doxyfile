@@ -826,6 +826,7 @@ INPUT                  = "../examples/examples.dox" \
                          "pages/MIDI-over-USB.md" \
                          "pages/Debug.md" \
                          "pages/xbm.md" \
+                         "pages/Basics.md" \
                          "../README.md"
 
 # This tag can be used to specify the character encoding of the source files

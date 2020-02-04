@@ -46,7 +46,7 @@ class CCPotentiometer
      * @ingroup MIDIOutputElementConstructors
      */
     CCPotentiometer(const Bank<N> &bank, pin_t analogPin,
-                    const Array<MIDICNChannelAddress, N> &addresses,
+                    const Array<MIDIAddress, N> &addresses,
                     const ContinuousCCSender &sender = {})
         : MIDIFilteredAnalogAddressable<ManyAddresses<N>, ContinuousCCSender>{
               {bank, addresses}, analogPin, sender} {}

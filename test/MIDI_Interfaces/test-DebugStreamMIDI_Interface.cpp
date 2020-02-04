@@ -39,7 +39,7 @@ TEST(StreamDebugMIDI_Interface, send3B) {
     midi.sendNoteOff({0x55, CHANNEL_4, 9}, 0x66);
     midi.sendCC({0x55, CHANNEL_4, 9}, 0x66);
     midi.sendKP({0x55, CHANNEL_4, 9}, 0x66);
-    midi.sendPB(MIDICNChannel{CHANNEL_4, 9}, 0x3355);
+    midi.sendPB(MIDIChannelCN{CHANNEL_4, 9}, 0x3355);
     std::string expected =
         "Note On         \tChannel: 4\tData 1: 0x55\tData 2: 0x66\tCable: 0\r\n"
         "Note On         \tChannel: 4\tData 1: 0x55\tData 2: 0x66\tCable: 9\r\n"

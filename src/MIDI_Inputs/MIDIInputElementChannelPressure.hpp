@@ -20,7 +20,7 @@ class MIDIInputElementChannelPressure
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementChannelPressure(const MIDICNChannelAddress &address)
+    MIDIInputElementChannelPressure(const MIDIAddress &address)
         : MIDIInputElement(address) {
         GUARD_LIST_LOCK;
         elements.append(this);
@@ -82,7 +82,7 @@ class MIDIInputElementChannelPressure
   private:
     /// Channel Pressure doesn't have an address, so the target consists of just
     /// the channel and the cable number.
-    MIDICNChannelAddress
+    MIDIAddress
     getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {0, Channel(midimsg.channel), midimsg.CN};
     }

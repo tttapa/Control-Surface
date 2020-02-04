@@ -53,7 +53,7 @@ class NoteLEDBar : public GenericNoteCCRange<MIDIInputElementNote, 1,
                                              NoteCCLEDBarCallback<NumLEDs>> {
   public:
     NoteLEDBar(const AH::DotBarDisplayLEDs<NumLEDs> &leds,
-               MIDICNChannelAddress address)
+               MIDIAddress address)
         : GenericNoteCCRange<MIDIInputElementNote, 1,
                              NoteCCLEDBarCallback<NumLEDs>>{
               address,
@@ -83,7 +83,7 @@ class CCLEDBar : public GenericNoteCCRange<MIDIInputElementCC, 1,
                                            NoteCCLEDBarCallback<NumLEDs>> {
   public:
     CCLEDBar(const AH::DotBarDisplayLEDs<NumLEDs> &leds,
-             MIDICNChannelAddress address)
+             MIDIAddress address)
         : GenericNoteCCRange<MIDIInputElementCC, 1,
                              NoteCCLEDBarCallback<NumLEDs>>{
               address,
@@ -120,7 +120,7 @@ class NoteLEDBar : public GenericNoteCCRange<MIDIInputElementNote, 1, BankSize,
   public:
     NoteLEDBar(const BankConfig<BankSize> &config,
                const AH::DotBarDisplayLEDs<NumLEDs> &leds,
-               const MIDICNChannelAddress &address)
+               const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementNote, 1, BankSize,
                              NoteCCLEDBarCallback<NumLEDs>>{
               config,
@@ -154,7 +154,7 @@ class CCLEDBar : public GenericNoteCCRange<MIDIInputElementCC, 1, BankSize,
   public:
     CCLEDBar(const BankConfig<BankSize> &config,
              const AH::DotBarDisplayLEDs<NumLEDs> &leds,
-             const MIDICNChannelAddress &address)
+             const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementCC, 1, BankSize,
                              NoteCCLEDBarCallback<NumLEDs>>{
               config,

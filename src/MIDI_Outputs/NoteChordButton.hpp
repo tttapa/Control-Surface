@@ -38,7 +38,7 @@ class NoteChordButton : public MIDIChordButton<DigitalNoteSender> {
      *          The number of notes in the chord.
      */
     template <uint8_t N>
-    NoteChordButton(pin_t pin, const MIDICNChannelAddress &address,
+    NoteChordButton(pin_t pin, const MIDIAddress &address,
                     const Chord<N> &chord, uint8_t velocity = 0x7F)
         : MIDIChordButton<DigitalNoteSender>{
               pin,

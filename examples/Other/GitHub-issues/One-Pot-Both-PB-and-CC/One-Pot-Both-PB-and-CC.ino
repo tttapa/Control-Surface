@@ -9,8 +9,8 @@ USBDebugMIDI_Interface midi;
 Bank<3> bank;
 IncrementDecrementSelector<3> bankselector = {bank, {2, 3}, Wrap::Wrap};
 
-constexpr auto no_address = MIDICNChannelAddress::invalid();
-constexpr auto no_channel = MIDICNChannel::invalid();
+constexpr auto no_address = MIDIAddress::invalid();
+constexpr auto no_channel = MIDIChannelCN::invalid();
 
 Bankable::ManyAddresses::CCPotentiometer<3> ccpots[] = {
   {bank, A0, {91, no_address, 72}},

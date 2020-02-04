@@ -37,7 +37,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
 
     void update() override {
         using IncrDecrButtons = AH::IncrementDecrementButtons;
-        MIDICNChannelAddress address = addresses.getActiveAddress(0);
+        MIDIAddress address = addresses.getActiveAddress(0);
         auto cn = address.getCableNumber();
 
         if (!Control_Surface.try_lock_mutex(cn))
@@ -54,12 +54,12 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         Control_Surface.unlock_mutex(cn);
     }
 
-    void send(long delta, const MIDICNChannelAddress &address) {
+    void send(long delta, const MIDIAddress &address) {
         relativeSender.send(delta, address);
     }
 
     void reset() {
-        MIDICNChannelAddress address = addresses.getActiveAddress(1);
+        MIDIAddress address = addresses.getActiveAddress(1);
         if (address) {
             resetSender.sendOn(address);
             resetSender.sendOff(address);

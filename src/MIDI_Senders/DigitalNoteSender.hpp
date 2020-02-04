@@ -7,10 +7,10 @@ BEGIN_CS_NAMESPACE
 class DigitalNoteSender {
   public:
     DigitalNoteSender(uint8_t velocity = 0x7F) : velocity(velocity) {}
-    void sendOn(MIDICNChannelAddress address) {
+    void sendOn(MIDIAddress address) {
         Control_Surface.MIDI().sendNoteOn(address, getVelocity());
     }
-    void sendOff(MIDICNChannelAddress address) {
+    void sendOff(MIDIAddress address) {
         Control_Surface.MIDI().sendNoteOff(address, 0x7F);
     }
 

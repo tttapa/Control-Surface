@@ -1,9 +1,9 @@
-#include "MIDICNChannelAddress.hpp"
+#include "MIDIAddress.hpp"
 
 BEGIN_CS_NAMESPACE
 
-MIDICNChannelAddress &MIDICNChannelAddress::
-operator+=(const RelativeMIDICNChannelAddress &rhs) {
+MIDIAddress &MIDIAddress::
+operator+=(const RelativeMIDIAddress &rhs) {
     if (!this->isValid() || !rhs.isValid()) {
         this->addresses.valid = false;
     } else {
@@ -14,8 +14,8 @@ operator+=(const RelativeMIDICNChannelAddress &rhs) {
     return *this;
 }
 
-MIDICNChannelAddress &MIDICNChannelAddress::
-operator-=(const RelativeMIDICNChannelAddress &rhs) {
+MIDIAddress &MIDIAddress::
+operator-=(const RelativeMIDIAddress &rhs) {
     if (!this->isValid() || !rhs.isValid()) {
         this->addresses.valid = false;
     } else {
@@ -26,27 +26,27 @@ operator-=(const RelativeMIDICNChannelAddress &rhs) {
     return *this;
 }
 
-MIDICNChannelAddress MIDICNChannelAddress::
-operator+(const RelativeMIDICNChannelAddress &rhs) const {
-    MIDICNChannelAddress copy = *this;
+MIDIAddress MIDIAddress::
+operator+(const RelativeMIDIAddress &rhs) const {
+    MIDIAddress copy = *this;
     copy += rhs;
     return copy;
 }
 
-MIDICNChannelAddress MIDICNChannelAddress::
-operator-(const RelativeMIDICNChannelAddress &rhs) const {
-    MIDICNChannelAddress copy = *this;
+MIDIAddress MIDIAddress::
+operator-(const RelativeMIDIAddress &rhs) const {
+    MIDIAddress copy = *this;
     copy -= rhs;
     return copy;
 }
 
-bool MIDICNChannelAddress::matchSingle(const MIDICNChannelAddress &toMatch,
-                                       const MIDICNChannelAddress &base) {
+bool MIDIAddress::matchSingle(const MIDIAddress &toMatch,
+                                       const MIDIAddress &base) {
     return base == toMatch;
 }
 
-bool MIDICNChannelAddress::matchAddressInRange(
-    const MIDICNChannelAddress &toMatch, const MIDICNChannelAddress &base,
+bool MIDIAddress::matchAddressInRange(
+    const MIDIAddress &toMatch, const MIDIAddress &base,
     uint8_t length) {
     bool valid = base.addresses.valid && toMatch.addresses.valid;
     bool addressInRange =

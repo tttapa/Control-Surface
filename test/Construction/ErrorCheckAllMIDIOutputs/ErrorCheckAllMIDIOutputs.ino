@@ -4,9 +4,9 @@
 
 void setup() {
     const pin_t pin = 0;
-    const MIDICNChannelAddress address = {};
-    const RelativeMIDICNChannelAddress relAddress = {};
-    const MIDICNChannel cnChannel = {};
+    const MIDIAddress address = {};
+    const RelativeMIDIAddress relAddress = {};
+    const MIDIChannelCN cnChannel = {};
     uint8_t u8 = 0;
     const PinList<3> rowPins3 = {1, 2, 3};
     const PinList<4> colPins4 = {4, 5, 6, 7};
@@ -15,7 +15,7 @@ void setup() {
         {21, 22, 23, 24},
         {31, 32, 33, 34},
     }};
-    const Array<MIDICNChannelAddress, 4> addresses = {{
+    const Array<MIDIAddress, 4> addresses = {{
         1,
         2,
         3,

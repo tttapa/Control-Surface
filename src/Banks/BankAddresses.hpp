@@ -8,35 +8,35 @@ namespace Bankable {
 
 class SingleAddress : public BankableMIDIOutput {
   public:
-    SingleAddress(OutputBankConfig config, MIDICNChannelAddress address)
+    SingleAddress(OutputBankConfig config, MIDIAddress address)
         : BankableMIDIOutput{config}, address{address} {}
 
-    MIDICNChannelAddress getBaseAddress() const { return address; }
+    MIDIAddress getBaseAddress() const { return address; }
 
-    MIDICNChannelAddress getActiveAddress() const {
+    MIDIAddress getActiveAddress() const {
         return getBaseAddress() + getAddressOffset();
     }
 
   private:
-    MIDICNChannelAddress address;
+    MIDIAddress address;
 };
 
 class TwoSingleAddresses : public BankableMIDIOutput {
   public:
     TwoSingleAddresses(OutputBankConfig config,
-                       const Array<MIDICNChannelAddress, 2> &addresses)
+                       const Array<MIDIAddress, 2> &addresses)
         : BankableMIDIOutput{config}, addresses(addresses) {}
 
-    MIDICNChannelAddress getBaseAddress(uint8_t i) const {
+    MIDIAddress getBaseAddress(uint8_t i) const {
         return addresses[i];
     }
 
-    MIDICNChannelAddress getActiveAddress(uint8_t i) const {
+    MIDIAddress getActiveAddress(uint8_t i) const {
         return getBaseAddress(i) + getAddressOffset();
     }
 
   private:
-    Array<MIDICNChannelAddress, 2> addresses;
+    Array<MIDIAddress, 2> addresses;
 };
 
 template <uint8_t nb_rows, uint8_t nb_cols>
@@ -44,7 +44,7 @@ class MatrixAddress : public BankableMIDIOutput {
   public:
     MatrixAddress(OutputBankConfig config,
                   const AddressMatrix<nb_rows, nb_cols> &addresses,
-                  MIDICNChannel channelCN)
+                  MIDIChannelCN channelCN)
         : BankableMIDIOutput{config}, addresses{addresses}, channelCN{
                                                                 channelCN} {}
 
@@ -52,14 +52,14 @@ class MatrixAddress : public BankableMIDIOutput {
         return addresses[row][col];
     }
 
-    MIDICNChannelAddress getActiveAddress(uint8_t row, uint8_t col) const {
-        MIDICNChannelAddress address = {getBaseAddress(row, col), channelCN};
+    MIDIAddress getActiveAddress(uint8_t row, uint8_t col) const {
+        MIDIAddress address = {getBaseAddress(row, col), channelCN};
         return address + getAddressOffset();
     }
 
   private:
     AddressMatrix<nb_rows, nb_cols> addresses;
-    MIDICNChannel channelCN;
+    MIDIChannelCN channelCN;
 };
 
 namespace ManyAddresses {
@@ -80,15 +80,15 @@ class ManyAddresses : public ManyAddressesMIDIOutput {
      *          The list of alternative addresses.
      */
     ManyAddresses(const Bank<NumBanks> &bank,
-                  const Array<MIDICNChannelAddress, NumBanks> &addresses)
+                  const Array<MIDIAddress, NumBanks> &addresses)
         : ManyAddressesMIDIOutput{bank}, addresses{addresses} {}
 
-    MIDICNChannelAddress getActiveAddress() const {
+    MIDIAddress getActiveAddress() const {
         return addresses[getSelection()];
     }
 
   private:
-    Array<MIDICNChannelAddress, NumBanks> addresses;
+    Array<MIDIAddress, NumBanks> addresses;
 };
 
 /**
@@ -100,15 +100,15 @@ class TwoManyAddresses : public BankableMIDIOutput {
   public:
     TwoManyAddresses(
         OutputBankConfig config,
-        const Array2D<MIDICNChannelAddress, 2, NumBanks> &addresses)
+        const Array2D<MIDIAddress, 2, NumBanks> &addresses)
         : BankableMIDIOutput{config}, addresses{addresses} {}
 
-    MIDICNChannelAddress getActiveAddress(uint8_t i) const {
+    MIDIAddress getActiveAddress(uint8_t i) const {
         return addresses[i][getSelection()];
     }
 
   private:
-    Array2D<MIDICNChannelAddress, 2, NumBanks> addresses;
+    Array2D<MIDIAddress, 2, NumBanks> addresses;
 };
 
 template <uint8_t NumBanks, uint8_t nb_rows, uint8_t nb_cols>
@@ -117,18 +117,18 @@ class ManyMatrixAddresses : public BankableMIDIOutput {
     ManyMatrixAddresses(
         OutputBankConfig config,
         const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &addresses,
-        const Array<MIDICNChannel, NumBanks> &channelCNs)
+        const Array<MIDIChannelCN, NumBanks> &channelCNs)
         : BankableMIDIOutput{config}, addresses{addresses}, channelCNs{
                                                                 channelCNs} {}
 
-    MIDICNChannelAddress getActiveAddress(uint8_t row, uint8_t col) const {
+    MIDIAddress getActiveAddress(uint8_t row, uint8_t col) const {
         return {addresses[getSelection()][row][col],
                 channelCNs[getSelection()]};
     }
 
   private:
     Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> addresses;
-    Array<MIDICNChannel, NumBanks> channelCNs;
+    Array<MIDIChannelCN, NumBanks> channelCNs;
 };
 
 } // namespace ManyAddresses

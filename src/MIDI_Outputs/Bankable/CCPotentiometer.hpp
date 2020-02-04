@@ -39,7 +39,7 @@ class CCPotentiometer
      *          The MIDI sender to use.
      */
     CCPotentiometer(const OutputBankConfig &config, pin_t analogPin,
-                    const MIDICNChannelAddress &address,
+                    const MIDIAddress &address,
                     const ContinuousCCSender &sender = {})
         : MIDIFilteredAnalogAddressable(SingleAddress{config, address}, analogPin, sender) {}
 };

@@ -40,42 +40,42 @@ void MIDI_Sender::sendOnCable(uint8_t r, uint8_t cn) {
     sendImpl(r, cn);
 }
 
-void MIDI_Sender::sendNoteOn(MIDICNChannelAddress address, uint8_t velocity) {
+void MIDI_Sender::sendNoteOn(MIDIAddress address, uint8_t velocity) {
     if (address)
         sendImpl(NOTE_ON, address.getRawChannel(), address.getAddress(),
                  velocity, address.getCableNumber());
 }
-void MIDI_Sender::sendNoteOff(MIDICNChannelAddress address, uint8_t velocity) {
+void MIDI_Sender::sendNoteOff(MIDIAddress address, uint8_t velocity) {
     if (address)
         sendImpl(NOTE_OFF, address.getRawChannel(), address.getAddress(),
                  velocity, address.getCableNumber());
 }
-void MIDI_Sender::sendKP(MIDICNChannelAddress address, uint8_t pressure) {
+void MIDI_Sender::sendKP(MIDIAddress address, uint8_t pressure) {
     if (address)
         sendImpl(KEY_PRESSURE, address.getRawChannel(), address.getAddress(),
                  pressure, address.getCableNumber());
 }
-void MIDI_Sender::sendCC(MIDICNChannelAddress address, uint8_t value) {
+void MIDI_Sender::sendCC(MIDIAddress address, uint8_t value) {
     if (address)
         sendImpl(CC, address.getRawChannel(), address.getAddress(), value,
                  address.getCableNumber());
 }
-void MIDI_Sender::sendPC(MIDICNChannel address, uint8_t value) {
+void MIDI_Sender::sendPC(MIDIChannelCN address, uint8_t value) {
     if (address)
         sendImpl(PROGRAM_CHANGE, address.getRawChannel(), value,
                  address.getCableNumber());
 }
-void MIDI_Sender::sendPC(MIDICNChannelAddress address) {
+void MIDI_Sender::sendPC(MIDIAddress address) {
     if (address)
         sendImpl(PROGRAM_CHANGE, address.getRawChannel(), address.getAddress(),
                  address.getCableNumber());
 }
-void MIDI_Sender::sendCP(MIDICNChannel address, uint8_t pressure) {
+void MIDI_Sender::sendCP(MIDIChannelCN address, uint8_t pressure) {
     if (address)
         sendImpl(CHANNEL_PRESSURE, address.getRawChannel(), pressure,
                  address.getCableNumber());
 }
-void MIDI_Sender::sendPB(MIDICNChannel address, uint16_t value) {
+void MIDI_Sender::sendPB(MIDIChannelCN address, uint16_t value) {
     if (address)
         sendImpl(PITCH_BEND, address.getRawChannel(), value & 0x7F, value >> 7,
                  address.getCableNumber());

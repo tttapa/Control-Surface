@@ -72,7 +72,7 @@ struct SimpleNoteCCValueCallback {
 template <class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callback>
 class NoteCCRange : public MIDIInput_t, public INoteCCValue {
   public:
-    NoteCCRange(MIDICNChannelAddress address, const Callback &callback)
+    NoteCCRange(MIDIAddress address, const Callback &callback)
         : MIDIInput_t{address}, INoteCCValue{RangeLen}, callback(callback) {}
 
     /// @todo   check index bounds
@@ -93,7 +93,7 @@ class NoteCCRange : public MIDIInput_t, public INoteCCValue {
     // Called when a MIDI message comes in, and if that message has been matched
     // by the `match` method.
     bool updateImpl(const ChannelMessageMatcher &midimsg,
-                    const MIDICNChannelAddress &target) override {
+                    const MIDIAddress &target) override {
         // Compute the offsets/indices in the range and the bank.
         // E.g. if the start address of the range is 10 and the incoming message
         // is on address 15, the range index will be 5 = 15 - 10.
@@ -125,14 +125,14 @@ class NoteCCRange : public MIDIInput_t, public INoteCCValue {
     virtual uint8_t getSelection() const { return 0; }
 
     /// Get the bank index from a MIDI address.
-    virtual setting_t getBankIndex(MIDICNChannelAddress target) const {
+    virtual setting_t getBankIndex(MIDIAddress target) const {
         // Default implementation for non-bankable version (bank is always 0)
         (void)target;
         return 0;
     }
 
     /// Get the index of the given MIDI address in the range
-    virtual uint8_t getRangeIndex(MIDICNChannelAddress target) const {
+    virtual uint8_t getRangeIndex(MIDIAddress target) const {
         // Default implementation for non-bankable version (base address of the 
         // range is fixed)
         return target.getAddress() - this->address.getAddress();
@@ -155,14 +155,14 @@ template <class MIDIInput_t, uint8_t RangeLen,
 class GenericNoteCCRange
     : public NoteCCRange<MIDIInput_t, RangeLen, 1, Callback> {
   public:
-    GenericNoteCCRange(MIDICNChannelAddress address, const Callback &callback)
+    GenericNoteCCRange(MIDIAddress address, const Callback &callback)
         : NoteCCRange<MIDIInput_t, RangeLen, 1, Callback>{address, callback} {}
 
   private:
     /// Check if the address of the incoming MIDI message is within the range
     /// of addresses of this element.
-    bool match(const MIDICNChannelAddress &target) const override {
-        return MIDICNChannelAddress::matchAddressInRange( //
+    bool match(const MIDIAddress &target) const override {
+        return MIDIAddress::matchAddressInRange( //
             target, this->address, RangeLen);
     }
 };
@@ -192,7 +192,7 @@ using GenericCCValue = GenericNoteCCRange<MIDIInputElementCC, 1, Callback>;
 template <uint8_t RangeLen>
 class NoteRange : public GenericNoteRange<RangeLen> {
   public:
-    NoteRange(MIDICNChannelAddress address)
+    NoteRange(MIDIAddress address)
         : GenericNoteRange<RangeLen>{address, {}} {}
 };
 
@@ -204,7 +204,7 @@ class NoteRange : public GenericNoteRange<RangeLen> {
  */
 class NoteValue : public GenericNoteValue<> {
   public:
-    NoteValue(MIDICNChannelAddress address) : GenericNoteValue<>{address, {}} {}
+    NoteValue(MIDIAddress address) : GenericNoteValue<>{address, {}} {}
 };
 using MIDINote[[deprecated("Use NoteValue instead")]] = NoteValue;
 
@@ -219,7 +219,7 @@ using MIDINote[[deprecated("Use NoteValue instead")]] = NoteValue;
 template <uint8_t RangeLen>
 class CCRange : public GenericCCRange<RangeLen> {
   public:
-    CCRange(MIDICNChannelAddress address)
+    CCRange(MIDIAddress address)
         : GenericCCRange<RangeLen>{address, {}} {}
 };
 
@@ -231,7 +231,7 @@ class CCRange : public GenericCCRange<RangeLen> {
  */
 class CCValue : public GenericCCValue<> {
   public:
-    CCValue(MIDICNChannelAddress address) : GenericCCValue<>{address, {}} {}
+    CCValue(MIDIAddress address) : GenericCCValue<>{address, {}} {}
 };
 
 // -------------------------------------------------------------------------- //
@@ -249,7 +249,7 @@ class GenericNoteCCRange
       public BankableMIDIInput<NumBanks> {
   public:
     GenericNoteCCRange(BankConfig<NumBanks> config,
-                       MIDICNChannelAddress address,
+                       MIDIAddress address,
                        const Callback &callback)
         : NoteCCRange<MIDIInput_t, RangeLen, NumBanks, Callback>{
             address,
@@ -259,7 +259,7 @@ class GenericNoteCCRange
   private:
     /// Check if the address of the incoming MIDI message is within the range
     /// of addresses and in one of the banks of this element.
-    bool match(const MIDICNChannelAddress &target) const override {
+    bool match(const MIDIAddress &target) const override {
         return BankableMIDIInput<NumBanks>::matchBankableAddressInRange(
             target, this->address, RangeLen);
     }
@@ -268,11 +268,11 @@ class GenericNoteCCRange
         return BankableMIDIInput<NumBanks>::getSelection();
     };
 
-    uint8_t getBankIndex(MIDICNChannelAddress target) const override {
+    uint8_t getBankIndex(MIDIAddress target) const override {
         return BankableMIDIInput<NumBanks>::getBankIndex(target, this->address);
     }
 
-    uint8_t getRangeIndex(MIDICNChannelAddress target) const override {
+    uint8_t getRangeIndex(MIDIAddress target) const override {
         return BankableMIDIInput<NumBanks>::getRangeIndex(target,
                                                           this->address);
     }
@@ -311,7 +311,7 @@ using GenericCCValue =
 template <uint8_t RangeLen, uint8_t NumBanks>
 class NoteRange : public GenericNoteRange<RangeLen, NumBanks> {
   public:
-    NoteRange(BankConfig<NumBanks> config, MIDICNChannelAddress address)
+    NoteRange(BankConfig<NumBanks> config, MIDIAddress address)
         : GenericNoteRange<RangeLen, NumBanks>{config, address, {}} {}
 };
 
@@ -326,7 +326,7 @@ class NoteRange : public GenericNoteRange<RangeLen, NumBanks> {
 template <uint8_t NumBanks>
 class NoteValue : public GenericNoteValue<NumBanks> {
   public:
-    NoteValue(BankConfig<NumBanks> config, MIDICNChannelAddress address)
+    NoteValue(BankConfig<NumBanks> config, MIDIAddress address)
         : GenericNoteValue<NumBanks>{config, address, {}} {}
 };
 
@@ -348,7 +348,7 @@ using MIDINote[[deprecated("Use NoteValue instead")]] = NoteValue<NumBanks>;
 template <uint8_t RangeLen, uint8_t NumBanks>
 class CCRange : public GenericCCRange<RangeLen, NumBanks> {
   public:
-    CCRange(BankConfig<NumBanks> config, MIDICNChannelAddress address)
+    CCRange(BankConfig<NumBanks> config, MIDIAddress address)
         : GenericCCRange<RangeLen, NumBanks>{config, address, {}} {}
 };
 
@@ -363,7 +363,7 @@ class CCRange : public GenericCCRange<RangeLen, NumBanks> {
 template <uint8_t NumBanks>
 class CCValue : public GenericCCValue<NumBanks> {
   public:
-    CCValue(BankConfig<NumBanks> config, MIDICNChannelAddress address)
+    CCValue(BankConfig<NumBanks> config, MIDIAddress address)
         : GenericCCValue<NumBanks>{config, address, {}} {}
 };
 

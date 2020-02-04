@@ -2,7 +2,7 @@
 
 #include "Bank.hpp"
 #include "BankConfig.hpp"
-#include <Def/MIDICNChannelAddress.hpp>
+#include <Def/MIDIAddress.hpp>
 #include <AH/Debug/Debug.hpp>
 #include <AH/Containers/LinkedList.hpp>
 
@@ -68,8 +68,8 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      *          The base address to compare it to (the address of bank setting 
      *          0).
      */
-    uint8_t getBankIndex(const MIDICNChannelAddress &target,
-                         const MIDICNChannelAddress &base) const {
+    uint8_t getBankIndex(const MIDIAddress &target,
+                         const MIDIAddress &base) const {
         switch (type) {
             case CHANGE_ADDRESS:
                 return (target.getAddress() - base.getAddress()) /
@@ -140,8 +140,8 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      * @brief   If matchBankableAddressInRange returned true, get the index of
      *          the message in the range.
      */
-    uint8_t getRangeIndex(MIDICNChannelAddress target,
-                          MIDICNChannelAddress base) const {
+    uint8_t getRangeIndex(MIDIAddress target,
+                          MIDIAddress base) const {
         uint8_t diff = target.getAddress() - base.getAddress();
         if (type == CHANGE_ADDRESS)
             diff %= bank.getTracksPerBank();
@@ -172,8 +172,8 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      * @param   base
      *          The base address (the address of bank setting 0).
      */
-    bool matchBankable(const MIDICNChannelAddress &toMatch,
-                       const MIDICNChannelAddress &base) const {
+    bool matchBankable(const MIDIAddress &toMatch,
+                       const MIDIAddress &base) const {
         if (!toMatch.isValid() || !base.isValid())
             return false;
         switch (type) {
@@ -209,8 +209,8 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      * @param   length
      *          The length of the range.
      */
-    bool matchBankableAddressInRange(const MIDICNChannelAddress &toMatch,
-                                     const MIDICNChannelAddress &base,
+    bool matchBankableAddressInRange(const MIDIAddress &toMatch,
+                                     const MIDIAddress &base,
                                      uint8_t length) const {
         if (!toMatch.isValid() || !base.isValid())
             return false;

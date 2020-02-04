@@ -3,7 +3,7 @@
 #include "MIDI_Pipes.hpp"
 #include <AH/Containers/Updatable.hpp>
 #include <Def/Def.hpp>
-#include <Def/MIDICNChannelAddress.hpp>
+#include <Def/MIDIAddress.hpp>
 #include <MIDI_Parsers/MIDI_Parser.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -84,21 +84,21 @@ class MIDI_Sender {
     void sendOnCable(uint8_t r, uint8_t cn);
 
     /// Send a MIDI Note On event.
-    void sendNoteOn(MIDICNChannelAddress address, uint8_t velocity);
+    void sendNoteOn(MIDIAddress address, uint8_t velocity);
     /// Send a MIDI Note Off event.
-    void sendNoteOff(MIDICNChannelAddress address, uint8_t velocity);
+    void sendNoteOff(MIDIAddress address, uint8_t velocity);
     /// Send a MIDI Key Pressure event.
-    void sendKP(MIDICNChannelAddress address, uint8_t pressure);
+    void sendKP(MIDIAddress address, uint8_t pressure);
     /// Send a MIDI Control Change event.
-    void sendCC(MIDICNChannelAddress address, uint8_t value);
+    void sendCC(MIDIAddress address, uint8_t value);
     /// Send a MIDI Program Change event.
-    void sendPC(MIDICNChannelAddress address);
+    void sendPC(MIDIAddress address);
     /// Send a MIDI Program Change event.
-    void sendPC(MIDICNChannel address, uint8_t value);
+    void sendPC(MIDIChannelCN address, uint8_t value);
     /// Send a MIDI Channel Pressure event.
-    void sendCP(MIDICNChannel address, uint8_t pressure);
+    void sendCP(MIDIChannelCN address, uint8_t pressure);
     /// Send a MIDI Pitch Bend event.
-    void sendPB(MIDICNChannel address, uint16_t value);
+    void sendPB(MIDIChannelCN address, uint16_t value);
     /// Send a MIDI Channel Message
     void send(ChannelMessage message);
     /// Send a MIDI System Exclusive message.

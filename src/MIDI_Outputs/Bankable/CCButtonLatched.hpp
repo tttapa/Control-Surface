@@ -47,7 +47,7 @@ class CCButtonLatched
      *          The MIDI sender to use.
      */
     CCButtonLatched(const BankConfig<NumBanks> &config, pin_t pin,
-                    const MIDICNChannelAddress &address,
+                    const MIDIAddress &address,
                     const DigitalCCSender &sender = {})
         : MIDIButtonLatched<NumBanks, SingleAddress, DigitalCCSender>{
               {config, address}, pin, sender} {}

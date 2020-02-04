@@ -44,7 +44,7 @@ class PBPotentiometer
      *          The MIDI sender to use.
      */
     PBPotentiometer(const OutputBankConfig &config, pin_t analogPin,
-                    const MIDICNChannel &address,
+                    const MIDIChannelCN &address,
                     const PitchBendSender<10> &sender = {})
         : MIDIFilteredAnalog{{config, address}, analogPin, sender} {}
 };
