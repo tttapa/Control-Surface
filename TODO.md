@@ -1,25 +1,25 @@
 ## TODO
 
-- Change template structure for senders
-- Fix and reorder examples.
-- Move Wikis to tttapa.github.io.
+- ✔ ~~Change template structure for senders~~
+- More examples with better structure
+- ✔ ~~Move Wikis to tttapa.github.io~~
 - Add FAQ and Troubleshooting pages
-- Add a getter for the button state, and rename `getState()` → update()
+- ✔ ~~Add a getter for the button state, and rename `getState()` → update()~~
 - Cleanup structure of display elements.
 - Flashing LEDs
-- Add motorized faders.
+- Motorized faders
 - Keywords
 - Make many protected functions private if 1) they are not needed in tests 2) 
   they should not be called from within subclasses.
-- Make it easier to add custom bitmaps.
-- ✔ Cleanup structure of input elements.
-- ✔ Extension consistency.
-- ✔ Malloc → new + smart pointers.
+- ✔ ~~Make it easier to add custom bitmaps~~
+- ✔ ~~Cleanup structure of input elements~~
+- ✔ ~~Extension consistency~~
+- ✔ ~~Malloc → new + smart pointers~~
 - Make constructors of abstract classes protected.
-- Make destructors virtual if necessary. (e.g. callback classes)
-- GitHub template
-- ✔ Fix firmware link DFU scripts
-- Move DFU scripts → scripts
+- ✔ ~~Make destructors virtual if necessary. (e.g. callback classes)~~
+- ✔ ~~GitHub template~~
+- ✔ ~~Fix firmware link DFU scripts~~
+- ✔ ~~Move DFU scripts → scripts~~
 - Find and list all TODO's throughout the source code.
 
 ## Specific elements
@@ -43,7 +43,7 @@
 - ✔ Buttons
 - ✔ Button Matrix
 
-- Potentiometer
+- ✔ Potentiometer
 - Potentiometers
 
 - ✔ Rotary Encoder
@@ -80,8 +80,8 @@
 - ✔ VU
 - ✔ Assignment display
 - ✔ Time display
+- ✔ LCD display (SysEx)
 - Flashing LED
-- LCD display (SysEx)
 
 - ✔ Bankable VPotRing
 - ✔ Bankable VU
@@ -99,14 +99,14 @@
 
 
 ### Selectors
-- Switch
+- ✔ Switch
 - Latching
-- Encoder
+- ✔ Encoder
 - ✔ Increment
 - ✔ Increment/Decrement
 - ✔ Many Buttons
 
 ### Selectable
 - ✔ Bank
-- Program Change
-- Transpose
+- ✔ Program Change
+- ✔ Transpose
