@@ -15,7 +15,7 @@ class ManyAddressBank {
   void lock() { manyaddresses.lock(), bank.lock(); }
   void unlock() { manyaddresses.unlock(), bank.unlock(); }
 
-  MIDICNChannelAddress getActiveAddress() const {
+  MIDIAddress getActiveAddress() const {
     return manyaddresses.getActiveAddress() + bank.getAddressOffset();
   }
 

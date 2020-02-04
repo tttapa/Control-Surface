@@ -43,8 +43,8 @@ class CCButtons : public MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS> {
      *          The MIDI sender to use.
      */
     CCButtons(const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
-              const MIDICNChannelAddress &baseAddress,
-              const RelativeMIDICNChannelAddress &incrementAddress,
+              const MIDIAddress &baseAddress,
+              const RelativeMIDIAddress &incrementAddress,
               const DigitalCCSender &sender = {})
         : MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS>(
               buttons, baseAddress, incrementAddress, sender) {}

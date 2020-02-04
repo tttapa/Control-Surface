@@ -34,7 +34,7 @@ class CCButton
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButton(pin_t pin, const MIDICNChannelAddress &address, const DigitalCCSender &sender = {})
+    CCButton(pin_t pin, const MIDIAddress &address, const DigitalCCSender &sender = {})
         : MIDIButton(pin, address, sender) {}
 };
 

@@ -6,10 +6,10 @@ BEGIN_CS_NAMESPACE
 
 class ProgramChangeSender {
   public:
-    void sendOn(MIDICNChannelAddress address) {
+    void sendOn(MIDIAddress address) {
         Control_Surface.MIDI().sendPC(address);
     }
-    void sendOff(MIDICNChannelAddress address) {
+    void sendOff(MIDIAddress address) {
         (void) address;
     }
 };

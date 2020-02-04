@@ -29,8 +29,8 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
      */
     MIDIButtons(const OutputBankConfig &config,
                 const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
-                const MIDICNChannelAddress &baseAddress,
-                const RelativeMIDICNChannelAddress &incrementAddress,
+                const MIDIAddress &baseAddress,
+                const RelativeMIDIAddress &incrementAddress,
                 const Sender &sender)
         : BankableMIDIOutput(config), buttons{buttons},
           baseAddress(baseAddress),
@@ -42,17 +42,17 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
             button.begin();
     }
     void update() final override {
-        MIDICNChannelAddress address = baseAddress;
+        MIDIAddress address = baseAddress;
         for (auto &button : buttons) {
             AH::Button::State state = button.update();
             if (state == AH::Button::Falling) {
                 if (!activeButtons)
                     lock(); // Don't allow changing of the bank setting
-                MIDICNChannelAddress sendAddress = address + getAddressOffset();
+                MIDIAddress sendAddress = address + getAddressOffset();
                 activeButtons++;
                 sender.sendOn(sendAddress);
             } else if (state == AH::Button::Rising) {
-                MIDICNChannelAddress sendAddress = address + getAddressOffset();
+                MIDIAddress sendAddress = address + getAddressOffset();
                 sender.sendOff(sendAddress);
                 activeButtons--;
                 if (!activeButtons)
@@ -75,8 +75,8 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
 
   private:
     Array<AH::Button, NUMBER_OF_BUTTONS> buttons;
-    const MIDICNChannelAddress baseAddress;
-    const RelativeMIDICNChannelAddress incrementAddress;
+    const MIDIAddress baseAddress;
+    const RelativeMIDIAddress incrementAddress;
     uint8_t activeButtons = 0;
 
   public:

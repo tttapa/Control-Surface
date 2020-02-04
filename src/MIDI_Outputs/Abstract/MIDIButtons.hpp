@@ -22,8 +22,8 @@ class MIDIButtons : public MIDIOutputElement {
      * @todo    Documentation
      */
     MIDIButtons(const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
-                const MIDICNChannelAddress &baseAddress,
-                const RelativeMIDICNChannelAddress &incrementAddress,
+                const MIDIAddress &baseAddress,
+                const RelativeMIDIAddress &incrementAddress,
                 const Sender &sender)
         : buttons{buttons}, baseAddress(baseAddress),
           incrementAddress(incrementAddress), sender{sender} {}
@@ -34,7 +34,7 @@ class MIDIButtons : public MIDIOutputElement {
             button.begin();
     }
     void update() final override {
-        MIDICNChannelAddress address = baseAddress;
+        MIDIAddress address = baseAddress;
         for (auto &button : buttons) {
             AH::Button::State state = button.update();
             if (state == AH::Button::Falling) {
@@ -59,8 +59,8 @@ class MIDIButtons : public MIDIOutputElement {
 
   private:
     Array<AH::Button, NUMBER_OF_BUTTONS> buttons;
-    const MIDICNChannelAddress baseAddress;
-    const RelativeMIDICNChannelAddress incrementAddress;
+    const MIDIAddress baseAddress;
+    const RelativeMIDIAddress incrementAddress;
 
   public:
     Sender sender;

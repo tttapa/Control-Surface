@@ -16,7 +16,7 @@ Button pushbutton = {2};
 using namespace MIDI_Notes;
 
 // MIDI address of the note to send
-const MIDICNChannelAddress noteAddress = {note(C, 4), CHANNEL_1};
+const MIDIAddress noteAddress = {note(C, 4), CHANNEL_1};
 // The velocity of the note events
 const uint8_t velocity = 0x7F;
 

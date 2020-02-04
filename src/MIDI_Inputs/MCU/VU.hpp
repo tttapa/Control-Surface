@@ -108,7 +108,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
   private:
     /// Called when an incoming MIDI message matches this element
     bool updateImpl(const ChannelMessageMatcher &midimsg,
-                    const MIDICNChannelAddress &target) override {
+                    const MIDIAddress &target) override {
         uint8_t data = midimsg.data1 & 0x0F;
         uint8_t index = getBankIndex(target);
         switch (data) {
@@ -123,7 +123,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
 
     /// The address of the VU meter is the high nibble of the first (and only)
     /// data byte.
-    MIDICNChannelAddress
+    MIDIAddress
     getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {
             int8_t(midimsg.data1 >> 4),
@@ -142,7 +142,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     virtual uint8_t getSelection() const { return 0; }
 
     /// Get the bank index from a MIDI address
-    virtual setting_t getBankIndex(const MIDICNChannelAddress &target) const {
+    virtual setting_t getBankIndex(const MIDIAddress &target) const {
         (void)target;
         return 0;
     }
@@ -326,13 +326,13 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
         return BankableMIDIInput<NumBanks>::getSelection();
     };
 
-    uint8_t getBankIndex(const MIDICNChannelAddress &target) const override {
+    uint8_t getBankIndex(const MIDIAddress &target) const override {
         return BankableMIDIInput<NumBanks>::getBankIndex(target, this->address);
     }
 
     /// Check if the address of the incoming MIDI message is in one of the banks
     /// of this element.
-    bool match(const MIDICNChannelAddress &target) const override {
+    bool match(const MIDIAddress &target) const override {
         return BankableMIDIInput<NumBanks>::matchBankable(target,
                                                           this->address);
     }

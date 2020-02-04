@@ -49,7 +49,7 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      *          The MIDI sender to use.
      */
     CCRotaryEncoder(const EncoderPinList &pins,
-                    const MIDICNChannelAddress &address,
+                    const MIDIAddress &address,
                     int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4,
                     const RelativeCCSender &sender = {})
         : MIDIRotaryEncoder(pins, address, speedMultiply, pulsesPerStep,
@@ -57,7 +57,7 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
 
 // For tests only (PJRC Encoder library's copy constructor doesn't work)
 #ifndef ARDUINO
-    CCRotaryEncoder(const Encoder &encoder, const MIDICNChannelAddress &address,
+    CCRotaryEncoder(const Encoder &encoder, const MIDIAddress &address,
                     int8_t speedMultiply, uint8_t pulsesPerStep,
                     const RelativeCCSender &sender = {})
         : MIDIRotaryEncoder(encoder, address, speedMultiply, pulsesPerStep,

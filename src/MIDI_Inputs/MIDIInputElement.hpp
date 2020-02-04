@@ -3,7 +3,7 @@
 #pragma once
 
 #include "ChannelMessageMatcher.hpp"
-#include <Def/MIDICNChannelAddress.hpp>
+#include <Def/MIDIAddress.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -21,7 +21,7 @@ class MIDIInputElement {
      * @param   address
      *          The MIDI address to listen to.
      */
-    MIDIInputElement(const MIDICNChannelAddress &address) : address(address) {}
+    MIDIInputElement(const MIDIAddress &address) : address(address) {}
 
   public:
     virtual ~MIDIInputElement() = default;
@@ -37,7 +37,7 @@ class MIDIInputElement {
 
     /// Receive a new MIDI message and update the internal state.
     bool updateWith(const ChannelMessageMatcher &midimsg) {
-        MIDICNChannelAddress target = getTarget(midimsg);
+        MIDIAddress target = getTarget(midimsg);
         if (!this->match(target))
             return false;
         DEBUGFN(F("MIDI message matches"));
@@ -50,7 +50,7 @@ class MIDIInputElement {
   private:
     /// Update the internal state with the new MIDI message.
     virtual bool updateImpl(const ChannelMessageMatcher &midimsg,
-                            const MIDICNChannelAddress &target) = 0;
+                            const MIDIAddress &target) = 0;
 
     /**
      * @brief   Extract the target address from a MIDI message.
@@ -60,7 +60,7 @@ class MIDIInputElement {
      *          target address consists of the address (data 1), the MIDI 
      *          channel and the cable number.
      */
-    virtual MIDICNChannelAddress
+    virtual MIDIAddress
     getTarget(const ChannelMessageMatcher &midimsg) const {
         return {int8_t(midimsg.data1), Channel(midimsg.channel), midimsg.CN};
     }
@@ -72,12 +72,12 @@ class MIDIInputElement {
      *          MIDI input elements, it only matches if the address is equal to 
      *          the address of this element.
      */
-    virtual bool match(const MIDICNChannelAddress &target) const {
-        return MIDICNChannelAddress::matchSingle(this->address, target);
+    virtual bool match(const MIDIAddress &target) const {
+        return MIDIAddress::matchSingle(this->address, target);
     }
 
   protected:
-    const MIDICNChannelAddress address;
+    const MIDIAddress address;
 };
 
 END_CS_NAMESPACE

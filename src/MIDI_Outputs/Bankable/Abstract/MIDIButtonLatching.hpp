@@ -39,7 +39,7 @@ class MIDIButtonLatching : public MIDIOutputElement {
     void update() override {
         AH::Button::State state = button.update();
         if (state == AH::Button::Falling || state == AH::Button::Rising) {
-            MIDICNChannelAddress sendAddress = address.getActiveAddress();
+            MIDIAddress sendAddress = address.getActiveAddress();
             sender.sendOn(sendAddress);
             sender.sendOff(sendAddress);
         }

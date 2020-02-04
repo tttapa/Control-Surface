@@ -822,4 +822,4 @@ onSysExMessage	KEYWORD2
 onRealtimeMessage	KEYWORD2
 
 MIDICNChannel	KEYWORD1
-MIDICNChannelAddress	KEYWORD1
+MIDIAddress	KEYWORD1

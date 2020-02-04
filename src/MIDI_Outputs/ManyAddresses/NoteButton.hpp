@@ -46,7 +46,7 @@ class NoteButton
      * @ingroup MIDIOutputElementConstructors
      */
     NoteButton(const Bank<N> &bank, pin_t pin,
-               const Array<MIDICNChannelAddress, N> &addresses,
+               const Array<MIDIAddress, N> &addresses,
                uint8_t velocity = 0x7F)
         : MIDIButton<ManyAddresses<N>, DigitalNoteSender>{
               {bank, addresses}, pin, {velocity}} {}

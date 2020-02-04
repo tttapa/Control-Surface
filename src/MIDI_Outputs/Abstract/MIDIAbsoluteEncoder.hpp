@@ -20,7 +20,7 @@ template <class Sender>
 class MIDIAbsoluteEncoder : public MIDIOutputElement {
   protected:
         MIDIAbsoluteEncoder(const EncoderPinList &pins,
-                            const MIDICNChannelAddress &address,
+                            const MIDIAddress &address,
                             int16_t multiplier, uint8_t pulsesPerStep,
                             const Sender &sender)
         : encoder{pins.A, pins.B}, address(address),
@@ -51,7 +51,7 @@ class MIDIAbsoluteEncoder : public MIDIOutputElement {
 
   private:
     Encoder encoder;
-    const MIDICNChannelAddress address;
+    const MIDIAddress address;
     const int16_t multiplier;
     const uint8_t pulsesPerStep;
     long previousPosition = 0;

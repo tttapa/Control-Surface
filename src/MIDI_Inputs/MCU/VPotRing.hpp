@@ -108,7 +108,7 @@ class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
 
   private:
     bool updateImpl(const ChannelMessageMatcher &midimsg,
-                    const MIDICNChannelAddress &target) override {
+                    const MIDIAddress &target) override {
         uint8_t index = getBankIndex(target);
         uint8_t value = sanitizeValue(midimsg.data2);
         values[index] = value;
@@ -121,7 +121,7 @@ class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
     virtual uint8_t getSelection() const { return 0; }
 
     /// Get the bank index from a MIDI address
-    virtual setting_t getBankIndex(const MIDICNChannelAddress &target) const {
+    virtual setting_t getBankIndex(const MIDIAddress &target) const {
         (void)target;
         return 0;
     }
@@ -187,13 +187,13 @@ class GenericVPotRing : public VPotRing_Base<NumBanks, Callback>,
         return BankableMIDIInput<NumBanks>::getSelection();
     };
 
-    uint8_t getBankIndex(const MIDICNChannelAddress &target) const override {
+    uint8_t getBankIndex(const MIDIAddress &target) const override {
         return BankableMIDIInput<NumBanks>::getBankIndex(target, this->address);
     }
 
     /// Check if the address of the incoming MIDI message is in one of the banks
     /// of this element.
-    bool match(const MIDICNChannelAddress &target) const override {
+    bool match(const MIDIAddress &target) const override {
         return BankableMIDIInput<NumBanks>::matchBankable(target,
                                                           this->address);
     }

@@ -4,7 +4,7 @@
 
 #include "Bank.hpp"
 #include "BankConfig.hpp"
-#include <Def/MIDICNChannelAddress.hpp>
+#include <Def/MIDIAddress.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -108,7 +108,7 @@ class BankableMIDIOutput : public BankableMIDIOutput_Base {
     /** 
      * @brief   Get the offset relative to the base address.
      */
-    RelativeMIDICNChannelAddress getAddressOffset() const {
+    RelativeMIDIAddress getAddressOffset() const {
         int8_t offset = getSelection() * bank.getTracksPerBank();
         switch (type) {
             case CHANGE_ADDRESS: return {offset, 0, 0};

@@ -44,7 +44,7 @@ class NoteButtonLatched
      *          The velocity of the MIDI Note events.
      */
     NoteButtonLatched(const BankConfig<NumBanks> &config, pin_t pin,
-                      const MIDICNChannelAddress &address,
+                      const MIDIAddress &address,
                       uint8_t velocity = 0x7F)
         : MIDIButtonLatched<NumBanks, SingleAddress, DigitalNoteSender>{
               {config, address},

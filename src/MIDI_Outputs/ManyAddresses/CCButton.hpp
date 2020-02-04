@@ -47,7 +47,7 @@ class CCButton
      * @ingroup MIDIOutputElementConstructors
      */
     CCButton(const Bank<N> &bank, pin_t pin,
-             const Array<MIDICNChannelAddress, N> &addresses,
+             const Array<MIDIAddress, N> &addresses,
              const DigitalCCSender &sender = {})
         : MIDIButton<ManyAddresses<N>, DigitalCCSender>{
               {bank, addresses}, pin, sender} {}

@@ -6,7 +6,7 @@ BEGIN_CS_NAMESPACE
 
 class ContinuousCCSender {
   public:
-    void send(uint8_t value, MIDICNChannelAddress address) {
+    void send(uint8_t value, MIDIAddress address) {
         Control_Surface.MIDI().sendCC(address, value);
     }
 

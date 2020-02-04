@@ -23,7 +23,7 @@ class GenericProgramChangeSelector : public GenericSelector<N, Callback>,
     void reset() override { GenericSelector<N, Callback>::reset(); }
 
     bool updateImpl(const ChannelMessageMatcher &midimsg,
-                    const MIDICNChannelAddress &target) override {
+                    const MIDIAddress &target) override {
         (void)target;
         uint8_t program = midimsg.data1;
         if (program < N) {

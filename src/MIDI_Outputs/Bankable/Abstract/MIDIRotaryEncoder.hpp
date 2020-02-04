@@ -29,7 +29,7 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
      */
     MIDIRotaryEncoder(const OutputBankConfig &config,
                       const EncoderPinList &pins,
-                      const MIDICNChannelAddress &address,
+                      const MIDIAddress &address,
                       uint8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
         : BankableMIDIOutput(config), encoder{pins.A, pins.B}, address(address),
@@ -39,7 +39,7 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
 // For tests only
 #ifndef ARDUINO
     MIDIRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
-                      const MIDICNChannelAddress &address,
+                      const MIDIAddress &address,
                       uint8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
         : BankableMIDIOutput(config), encoder{encoder}, address(address),
@@ -50,7 +50,7 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
   public:
     void begin() final override {}
     void update() final override {
-        MIDICNChannelAddress sendAddress = address + getAddressOffset();
+        MIDIAddress sendAddress = address + getAddressOffset();
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         // I could do the division inside of the if statement for performance
@@ -62,7 +62,7 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
 
   private:
     Encoder encoder;
-    const MIDICNChannelAddress address;
+    const MIDIAddress address;
     const uint8_t speedMultiply;
     const uint8_t pulsesPerStep;
     long previousPosition = 0;
