@@ -53,6 +53,9 @@ class MIDIChannelCN {
     RawMIDIAddress addresses;
 };
 
+/// @deprecated
+using MIDICNChannel[[deprecated("Use MIDIChannelCN instead")]] = MIDIChannelCN;
+
 /// A class for saving an offset to a MIDI address.
 /// It can be added to a MIDIAddress.
 class RelativeMIDIAddress {
