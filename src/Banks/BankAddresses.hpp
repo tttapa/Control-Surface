@@ -44,7 +44,7 @@ class MatrixAddress : public BankableMIDIOutput {
   public:
     MatrixAddress(OutputBankConfig config,
                   const AddressMatrix<nb_rows, nb_cols> &addresses,
-                  MIDICNChannel channelCN)
+                  MIDIChannelCN channelCN)
         : BankableMIDIOutput{config}, addresses{addresses}, channelCN{
                                                                 channelCN} {}
 
@@ -59,7 +59,7 @@ class MatrixAddress : public BankableMIDIOutput {
 
   private:
     AddressMatrix<nb_rows, nb_cols> addresses;
-    MIDICNChannel channelCN;
+    MIDIChannelCN channelCN;
 };
 
 namespace ManyAddresses {
@@ -117,7 +117,7 @@ class ManyMatrixAddresses : public BankableMIDIOutput {
     ManyMatrixAddresses(
         OutputBankConfig config,
         const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &addresses,
-        const Array<MIDICNChannel, NumBanks> &channelCNs)
+        const Array<MIDIChannelCN, NumBanks> &channelCNs)
         : BankableMIDIOutput{config}, addresses{addresses}, channelCNs{
                                                                 channelCNs} {}
 
@@ -128,7 +128,7 @@ class ManyMatrixAddresses : public BankableMIDIOutput {
 
   private:
     Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> addresses;
-    Array<MIDICNChannel, NumBanks> channelCNs;
+    Array<MIDIChannelCN, NumBanks> channelCNs;
 };
 
 } // namespace ManyAddresses

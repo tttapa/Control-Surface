@@ -6,7 +6,7 @@ void setup() {
     const pin_t pin = 0;
     const MIDIAddress address = {};
     const RelativeMIDIAddress relAddress = {};
-    const MIDICNChannel cnChannel = {};
+    const MIDIChannelCN cnChannel = {};
     uint8_t u8 = 0;
     const PinList<3> rowPins3 = {1, 2, 3};
     const PinList<4> colPins4 = {4, 5, 6, 7};

@@ -77,7 +77,7 @@ struct VUEmptyCallback {
 template <uint8_t NumValues, class Callback>
 class VU_Base : public MIDIInputElementChannelPressure, public IVU {
   protected:
-    VU_Base(uint8_t track, const MIDICNChannel &channelCN,
+    VU_Base(uint8_t track, const MIDIChannelCN &channelCN,
             unsigned int decayTime, const Callback &callback)
         : MIDIInputElementChannelPressure{{track - 1, channelCN}}, IVU(12),
           decayTime(decayTime), callback(callback) {}
@@ -202,7 +202,7 @@ class GenericVU : public VU_Base<1, Callback> {
      *          The callback object that is update when the value changes.
      *          Used for displaying the value on a range of LEDs etc.
      */
-    GenericVU(uint8_t track, const MIDICNChannel &channelCN,
+    GenericVU(uint8_t track, const MIDIChannelCN &channelCN,
               unsigned int decayTime, const Callback &callback)
         : VU_Base<1, Callback>{
               track,
@@ -238,7 +238,7 @@ class VU : public GenericVU<> {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(uint8_t track, const MIDICNChannel &channelCN,
+    VU(uint8_t track, const MIDIChannelCN &channelCN,
        unsigned int decayTime = VUDecay::Default)
         : GenericVU<>{
               track,
@@ -311,7 +311,7 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
      *          Used for displaying the value on a range of LEDs etc.
      */
     GenericVU(const BankConfig<NumBanks> &config, uint8_t track,
-              const MIDICNChannel &channelCN, unsigned int decayTime,
+              const MIDIChannelCN &channelCN, unsigned int decayTime,
               const Callback &callback)
         : VU_Base<NumBanks, Callback>{
             track, 
@@ -372,7 +372,7 @@ class VU : public GenericVU<NumBanks> {
      *          the decay.
      */
     VU(const BankConfig<NumBanks> &config, uint8_t track,
-       const MIDICNChannel &channelCN,
+       const MIDIChannelCN &channelCN,
        unsigned int decayTime = VUDecay::Default)
         : GenericVU<NumBanks>{
               config, track, channelCN, decayTime, {},

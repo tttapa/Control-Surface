@@ -12,7 +12,7 @@ class PitchBendSender {
         value =
             AH::increaseBitDepth<14, precision(), uint16_t, uint16_t>(value);
         // ignore address byte, just use channel and cable numbers
-        MIDICNChannel channelCN = {address.getChannel(),
+        MIDIChannelCN channelCN = {address.getChannel(),
                                    address.getCableNumber()};
         Control_Surface.MIDI().sendPB(channelCN, value);
     }

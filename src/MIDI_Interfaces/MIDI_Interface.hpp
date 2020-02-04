@@ -111,11 +111,11 @@ class MIDI_Interface : public TrueMIDI_SinkSource {
     /// Send a MIDI Program Change event.
     void sendPC(MIDIAddress address);
     /// Send a MIDI Program Change event.
-    void sendPC(MIDICNChannel address, uint8_t value);
+    void sendPC(MIDIChannelCN address, uint8_t value);
     /// Send a MIDI Channel Pressure event.
-    void sendCP(MIDICNChannel address, uint8_t pressure);
+    void sendCP(MIDIChannelCN address, uint8_t pressure);
     /// Send a MIDI Pitch Bend event.
-    void sendPB(MIDICNChannel address, uint16_t value);
+    void sendPB(MIDIChannelCN address, uint16_t value);
     /// Send a MIDI Channel Message
     void send(ChannelMessage message);
     /// Send a MIDI System Exclusive message.

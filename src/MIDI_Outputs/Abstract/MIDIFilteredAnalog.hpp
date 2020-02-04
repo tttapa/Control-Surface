@@ -100,7 +100,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIFilteredAnalog(pin_t analogPin, const MIDICNChannel &address,
+    MIDIFilteredAnalog(pin_t analogPin, const MIDIChannelCN &address,
                        const Sender &sender)
         : filteredAnalog{analogPin}, address(address), sender(sender) {}
 

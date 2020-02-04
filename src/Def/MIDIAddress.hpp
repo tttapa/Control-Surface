@@ -16,12 +16,12 @@ struct __attribute__((packed)) RawMIDIAddress {
 };
 
 /// A class for saving a MIDI channel and cable number.
-class MIDICNChannel {
+class MIDIChannelCN {
     friend class MIDIAddress;
 
   public:
-    constexpr MIDICNChannel() : addresses{0, 0, 0, 0} {}
-    constexpr MIDICNChannel(Channel channel, int cableNumber = 0)
+    constexpr MIDIChannelCN() : addresses{0, 0, 0, 0} {}
+    constexpr MIDIChannelCN(Channel channel, int cableNumber = 0)
         : addresses{
               1,
               0,
@@ -47,7 +47,7 @@ class MIDICNChannel {
     /// @see    isValid
     constexpr explicit operator bool() const { return isValid(); }
 
-    constexpr static MIDICNChannel invalid() { return {}; }
+    constexpr static MIDIChannelCN invalid() { return {}; }
 
   private:
     RawMIDIAddress addresses;
@@ -104,7 +104,7 @@ class MIDIAddress {
      * @param   channelCN 
      *          The MIDI Channel and the MIDI USB cable number.
      */
-    constexpr MIDIAddress(int address, MIDICNChannel channelCN)
+    constexpr MIDIAddress(int address, MIDIChannelCN channelCN)
         : addresses{
               1,
               (uint8_t)address,
@@ -160,7 +160,7 @@ class MIDIAddress {
      * @param   address 
      *          The MIDI Channel and the MIDI USB cable number.  
      */
-    constexpr MIDIAddress(const MIDICNChannel &address)
+    constexpr MIDIAddress(const MIDIChannelCN &address)
         : addresses(address.addresses) {}
 
     /// Return an invalid address.

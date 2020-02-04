@@ -81,7 +81,7 @@ void MIDI_Interface::sendCC(MIDIAddress address, uint8_t value) {
         sendImpl(CC, address.getRawChannel(), address.getAddress(), value,
                  address.getCableNumber());
 }
-void MIDI_Interface::sendPC(MIDICNChannel address, uint8_t value) {
+void MIDI_Interface::sendPC(MIDIChannelCN address, uint8_t value) {
     if (address)
         sendImpl(PROGRAM_CHANGE, address.getRawChannel(), value,
                  address.getCableNumber());
@@ -91,12 +91,12 @@ void MIDI_Interface::sendPC(MIDIAddress address) {
         sendImpl(PROGRAM_CHANGE, address.getRawChannel(), address.getAddress(),
                  address.getCableNumber());
 }
-void MIDI_Interface::sendCP(MIDICNChannel address, uint8_t pressure) {
+void MIDI_Interface::sendCP(MIDIChannelCN address, uint8_t pressure) {
     if (address)
         sendImpl(CHANNEL_PRESSURE, address.getRawChannel(), pressure,
                  address.getCableNumber());
 }
-void MIDI_Interface::sendPB(MIDICNChannel address, uint16_t value) {
+void MIDI_Interface::sendPB(MIDIChannelCN address, uint16_t value) {
     if (address)
         sendImpl(PITCH_BEND, address.getRawChannel(), value & 0x7F, value >> 7,
                  address.getCableNumber());

@@ -66,7 +66,7 @@ class CCButtonMatrix
         const OutputBankConfig &config, const PinList<nb_rows> &rowPins,
         const PinList<nb_cols> &colPins,
         const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &controllers,
-        const Array<MIDICNChannel, NumBanks> &channelCNs,
+        const Array<MIDIChannelCN, NumBanks> &channelCNs,
         const DigitalCCSender &sender = {})
         : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, nb_rows, nb_cols>,
                            DigitalCCSender, nb_rows, nb_cols>{

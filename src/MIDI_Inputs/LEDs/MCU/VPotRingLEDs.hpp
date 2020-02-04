@@ -30,7 +30,7 @@ class VPotRingLEDsCallback {
 class VPotRingLEDs : public GenericVPotRing<VPotRingLEDsCallback> {
   public:
     VPotRingLEDs(const PinList<11> &ledPins, uint8_t track,
-                 MIDICNChannel channelCN = CHANNEL_1)
+                 MIDIChannelCN channelCN = CHANNEL_1)
         : GenericVPotRing<VPotRingLEDsCallback>{track, channelCN, {ledPins}} {}
 };
 
@@ -40,7 +40,7 @@ template <setting_t NumBanks>
 class VPotRingLEDs : public GenericVPotRing<NumBanks, VPotRingLEDsCallback> {
   public:
     VPotRingLEDs(BankConfig<NumBanks> config, const PinList<11> &ledPins,
-                 uint8_t track, MIDICNChannel channelCN = CHANNEL_1)
+                 uint8_t track, MIDIChannelCN channelCN = CHANNEL_1)
         : GenericVPotRing<NumBanks, VPotRingLEDsCallback>{
               config, track, channelCN, {ledPins}} {}
 };

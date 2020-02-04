@@ -46,7 +46,7 @@ class PBAbsoluteEncoder : public MIDIAbsoluteEncoder<PitchBendSender<14>> {
      * @param   sender
      *          The MIDI sender to use.
      */
-    PBAbsoluteEncoder(const EncoderPinList &pins, const MIDICNChannel &address,
+    PBAbsoluteEncoder(const EncoderPinList &pins, const MIDIChannelCN &address,
                       int16_t multiplier = 1, uint8_t pulsesPerStep = 4,
                       const PitchBendSender<14> &sender = {})
         : MIDIAbsoluteEncoder(pins, address, multiplier, pulsesPerStep,

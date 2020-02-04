@@ -82,7 +82,7 @@ class IVPotRing {
 template <uint8_t NumValues, class Callback>
 class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
   protected:
-    VPotRing_Base(uint8_t track, const MIDICNChannel &channelCN,
+    VPotRing_Base(uint8_t track, const MIDIChannelCN &channelCN,
                   const Callback &callback)
         : MIDIInputElementCC{{track + VPotRingAddress - 1, channelCN}},
           callback(callback) {}
@@ -143,7 +143,7 @@ class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
 template <class Callback = VPotEmptyCallback>
 class GenericVPotRing : public VPotRing_Base<1, Callback> {
   public:
-    GenericVPotRing(uint8_t track, const MIDICNChannel &channelCN,
+    GenericVPotRing(uint8_t track, const MIDIChannelCN &channelCN,
                     const Callback &callback)
         : VPotRing_Base<1, Callback>{track, channelCN, callback} {}
 };
@@ -156,7 +156,7 @@ class GenericVPotRing : public VPotRing_Base<1, Callback> {
  */
 class VPotRing : public GenericVPotRing<> {
   public:
-    VPotRing(uint8_t track, const MIDICNChannel &channelCN = CHANNEL_1)
+    VPotRing(uint8_t track, const MIDIChannelCN &channelCN = CHANNEL_1)
         : GenericVPotRing{track, channelCN, {}} {}
 };
 
@@ -178,7 +178,7 @@ class GenericVPotRing : public VPotRing_Base<NumBanks, Callback>,
                         public BankableMIDIInput<NumBanks> {
   public:
     GenericVPotRing(const BankConfig<NumBanks> &config, uint8_t track,
-                    const MIDICNChannel &channelCN, const Callback &callback)
+                    const MIDIChannelCN &channelCN, const Callback &callback)
         : VPotRing_Base<NumBanks, Callback>{track, channelCN, callback},
           BankableMIDIInput<NumBanks>{config} {}
 
@@ -213,7 +213,7 @@ template <uint8_t NumBanks>
 class VPotRing : public GenericVPotRing<NumBanks> {
   public:
     VPotRing(BankConfig<NumBanks> config, uint8_t track,
-             MIDICNChannel channelCN = CHANNEL_1)
+             MIDIChannelCN channelCN = CHANNEL_1)
         : GenericVPotRing<NumBanks>{config, track, channelCN, {}} {}
 };
 

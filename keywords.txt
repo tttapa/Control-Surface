@@ -821,5 +821,5 @@ onChannelMessage	KEYWORD2
 onSysExMessage	KEYWORD2
 onRealtimeMessage	KEYWORD2
 
-MIDICNChannel	KEYWORD1
+MIDIChannelCN	KEYWORD1
 MIDIAddress	KEYWORD1
