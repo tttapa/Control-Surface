@@ -25,7 +25,6 @@ using AH::Array2D;
 template <uint8_t nb_rows, uint8_t nb_cols>
 using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
 
-
 /// A struct for the pins of a rotary (quadrature) encoder with a switch.
 struct EncoderSwitchPinList {
     // TODO: why do I need explicit constructors?
