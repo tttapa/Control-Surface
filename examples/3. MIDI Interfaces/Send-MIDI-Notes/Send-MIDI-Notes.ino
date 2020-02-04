@@ -22,14 +22,15 @@ const uint8_t velocity = 0x7F;
 
 void setup() {
   pushbutton.begin(); // enables internal pull-up
-  midi.begin();
+  midi.begin();       // initialize the MIDI interface
 }
 
 void loop() {
-  midi.update();
-  pushbutton.update();
-  if (pushbutton.getState() == Button::Falling)
-    midi.sendNoteOn(noteAddress, velocity);
-  else if (pushbutton.getState() == Button::Rising)
-    midi.sendNoteOff(noteAddress, velocity);
+  midi.update(); // read and handle or discard MIDI input
+
+  pushbutton.update();                              // read the button state
+  if (pushbutton.getState() == Button::Falling)     // if the button is pressed
+    midi.sendNoteOn(noteAddress, velocity);         // send a note on event
+  else if (pushbutton.getState() == Button::Rising) // if the button is released
+    midi.sendNoteOff(noteAddress, velocity);        // send a note off event
 }

@@ -2101,3 +2101,82 @@
  * https://github.com/tttapa/Control-Surface
  */
 
+/**
+ * @example   "Bank.ino"
+ * 
+ * Bank
+ * ====
+ * 
+ * This is an example that demonstrates the use of Banks.
+ *
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x
+ * 
+ * Banks allow you to use a single control for many different actions. 
+ * By changing the bank setting, you can change the address of a MIDI Element.
+ * 
+ * In this example, we will use two potentiometers to control the volume of 
+ * eight MIDI channels by using four banks.
+ * 
+ * The setup is as follows:
+ * 
+ *     ═══════════   ─╮             ═════════════════
+ *      Channel 1     │              Potentiometer 1
+ *     ──────────     │  Bank 1      ────────────────
+ *      Channel 2     │              Potentiometer 2
+ *     ═══════════   ─┤             ═════════════════
+ *      Channel 3     │              Potentiometer 1
+ *     ──────────     │  Bank 2      ────────────────
+ *      Channel 4     │              Potentiometer 2
+ *     ═══════════   ─┤             ═════════════════
+ *      Channel 5     │              Potentiometer 1
+ *     ──────────     │  Bank 3      ────────────────
+ *      Channel 6     │              Potentiometer 2
+ *     ═══════════   ─┤             ═════════════════
+ *      Channel 7     │              Potentiometer 1
+ *     ──────────     │  Bank 4      ────────────────
+ *      Channel 8     │              Potentiometer 2
+ *     ═══════════   ─╯             ═════════════════
+ * 
+ * When Bank 1 is selected, Potentiometer 1 controls Channel 1, and 
+ * Potentiometer 2 controls Channel 2.  
+ * When Bank 2 is selected, Potentiometer 1 controls Channel 3, and 
+ * Potentiometer 2 controls Channel 4.  
+ * When Bank 3 is selected, Potentiometer 1 controls Channel 5, and 
+ * Potentiometer 2 controls Channel 6.  
+ * When Bank 4 is selected, Potentiometer 1 controls Channel 7, and 
+ * Potentiometer 2 controls Channel 8.  
+ * 
+ * To select the active bank, you can either use the @ref Bank::select method,
+ * or you can use one of the many @ref Selectors.  
+ * In this example, we'll use an @ref IncrementDecrementSelector. It has one
+ * push button to increment the bank setting, and one push button to decrement
+ * the bank setting.
+ * 
+ * To display which bank is currently active, you can use the Selectors with LED
+ * feedback in the @ref SelectorsLEDs module, or you can write your own callback
+ * that gets called when the setting changes. The latter is demonstrated in the
+ * @ref Custom-Selector-Callback.ino example.
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 2: momentary push button (to ground)
+ * - 3: momentary push button (to ground)
+ * - A0: wiper of a potentiometer
+ * - A1: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.  
+ * The internal pull-up resistors for the buttons will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Press the Bank selector buttons while turning the potentiometers. Notice
+ *   how the channel of the MIDI messages changes when you change the Bank, as 
+ *   explained above.
+ * 
+ * Written by PieterP, 2020-02-04  
+ * https://github.com/tttapa/Control-Surface
+ */
+
