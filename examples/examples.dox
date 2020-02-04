@@ -1225,39 +1225,30 @@
  */
 
 /**
- * @example   "Dual-MIDI-Interface.ino"
+ * @example   "Bluetooth-MIDI-bridge.ino"
  * 
- * Dual-MIDI-Interface
- * ===================
- * 
- * This example demonstrates how to group together two or more MIDI interfaces,
- * so you can send the MIDI output over both MIDI USB and 5-pin DIN MIDI, for 
- * example. MIDI input is received from all interfaces as well.
+ * Bluetooth-MIDI-bridge
+ * =====================
  *
- * @boards  AVR USB, Due, Teensy 3.x
+ * MIDI routing using MIDI_Pipe%s.
+ * 
+ * Bridges the Bluetooth Low Energy MIDI interface to a Serial MIDI interface.
+ * 
+ * @boards  ESP32
  * 
  * Connections
  * -----------
  * 
- * - A0: wiper of a potentiometer
+ * - GPIO16 (RX2): a 5-pin DIN MIDI input
+ * - GPIO17 (TX2): a 5-pin DIN MIDI output
  * 
- * Connect the left terminal of the potentiometer to ground, and the right one
- * to V<sub>CC</sub>.
+ * For a detailed schematic, see 
+ * <https://tttapa.github.io/Arduino/MIDI/Chap02-MIDI-Hardware.html>.  
+ * Use the 3.3V version at the bottom of the page.
  * 
- * Behavior
- * --------
+ * See the @ref MIDI_Routing module for more information about MIDI pipes.
  * 
- * - When you turn the potentiometer, you should receive MIDI Control Change
- *   events on both the Serial MIDI interface and the USB MIDI interface.
- * - When a MIDI Note event for middle C is received on either MIDI interface,
- *   the state of the built-in LED will change accordingly.
- * 
- * Mapping
- * -------
- * 
- * - None
- * 
- * Written by PieterP, 2019-08-22  
+ * Written by PieterP, 2020-02-04  
  * https://github.com/tttapa/Control-Surface
  */
 
@@ -2100,3 +2091,4 @@
  * Written by PieterP, 2019-10-26  
  * https://github.com/tttapa/Control-Surface
  */
+
