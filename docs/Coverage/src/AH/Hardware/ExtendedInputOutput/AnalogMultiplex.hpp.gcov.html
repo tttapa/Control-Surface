@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 52d245673dfd4cc8f3b584eac390ff0364ff06b7 - src/AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp</title>
+  <title>LCOV - 2616ec616fa2d75a78d560e385bd6eaf29a5b8be - src/AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">52d245673dfd4cc8f3b584eac390ff0364ff06b7</td>
+            <td class="headerValue">2616ec616fa2d75a78d560e385bd6eaf29a5b8be</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">44</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-12-23 15:42:58</td>
+            <td class="headerValue">2020-02-06 22:55:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">16</td>
@@ -131,14 +131,14 @@
 <a name="61"><span class="lineNum">      61 </span>            :      *          The new mode of the input pin: </a>
 <a name="62"><span class="lineNum">      62 </span>            :      *          either INPUT or INPUT_PULLUP.</a>
 <a name="63"><span class="lineNum">      63 </span>            :      */</a>
-<a name="64"><span class="lineNum">      64 </span>            :     void pinMode(pin_t pin, uint8_t mode) override;</a>
+<a name="64"><span class="lineNum">      64 </span>            :     void pinMode(pin_t pin, PinMode_t mode) override;</a>
 <a name="65"><span class="lineNum">      65 </span>            : </a>
 <a name="66"><span class="lineNum">      66 </span>            :     /**</a>
 <a name="67"><span class="lineNum">      67 </span>            :      * @brief   The digitalWrite function is not implemented because writing an</a>
 <a name="68"><span class="lineNum">      68 </span>            :      *          output to a multiplexer is not useful.</a>
 <a name="69"><span class="lineNum">      69 </span>            :      */</a>
-<a name="70"><span class="lineNum">      70 </span>            :     void digitalWrite(pin_t, uint8_t) override // LCOV_EXCL_LINE</a>
-<a name="71"><span class="lineNum">      71 </span>            :         __attribute__((deprecated)) {}         // LCOV_EXCL_LINE</a>
+<a name="70"><span class="lineNum">      70 </span>            :     void digitalWrite(pin_t, PinStatus_t) override // LCOV_EXCL_LINE</a>
+<a name="71"><span class="lineNum">      71 </span>            :         __attribute__((deprecated)) {}             // LCOV_EXCL_LINE</a>
 <a name="72"><span class="lineNum">      72 </span>            : </a>
 <a name="73"><span class="lineNum">      73 </span>            :     /**</a>
 <a name="74"><span class="lineNum">      74 </span>            :      * @brief   Read the digital state of the given input.</a>
@@ -203,8 +203,8 @@
 <a name="133"><span class="lineNum">     133 </span>            :     void afterReading();</a>
 <a name="134"><span class="lineNum">     134 </span>            : </a>
 <a name="135"><span class="lineNum">     135 </span>            :     // The enable pin is active low.</a>
-<a name="136"><span class="lineNum">     136 </span>            :     constexpr static uint8_t MUX_ENABLED = LOW;</a>
-<a name="137"><span class="lineNum">     137 </span>            :     constexpr static uint8_t MUX_DISABLED = HIGH;</a>
+<a name="136"><span class="lineNum">     136 </span>            :     constexpr static auto MUX_ENABLED = LOW;</a>
+<a name="137"><span class="lineNum">     137 </span>            :     constexpr static auto MUX_DISABLED = HIGH;</a>
 <a name="138"><span class="lineNum">     138 </span>            : };</a>
 <a name="139"><span class="lineNum">     139 </span>            : </a>
 <a name="140"><span class="lineNum">     140 </span>            : /**</a>
@@ -226,7 +226,7 @@
 <a name="156"><span class="lineNum">     156 </span>            : // -------------------------------------------------------------------------- //</a>
 <a name="157"><span class="lineNum">     157 </span>            : </a>
 <a name="158"><span class="lineNum">     158 </span>            : template &lt;uint8_t N&gt;</a>
-<a name="159"><span class="lineNum">     159 </span><span class="lineCov">          1 : void AnalogMultiplex&lt;N&gt;::pinMode(pin_t, uint8_t mode) {</span></a>
+<a name="159"><span class="lineNum">     159 </span><span class="lineCov">          1 : void AnalogMultiplex&lt;N&gt;::pinMode(pin_t, PinMode_t mode) {</span></a>
 <a name="160"><span class="lineNum">     160 </span><span class="lineCov">          1 :     ExtIO::pinMode(analogPin, mode);</span></a>
 <a name="161"><span class="lineNum">     161 </span><span class="lineCov">          1 : }</span></a>
 <a name="162"><span class="lineNum">     162 </span>            : </a>
@@ -261,7 +261,7 @@
 <a name="191"><span class="lineNum">     191 </span><span class="lineCov">          9 : void AnalogMultiplex&lt;N&gt;::setMuxAddress(uint8_t address) {</span></a>
 <a name="192"><span class="lineNum">     192 </span><span class="lineCov">          9 :     uint8_t mask = 1;</span></a>
 <a name="193"><span class="lineNum">     193 </span><span class="lineCov">         42 :     for (const pin_t &amp;addressPin : addressPins) {</span></a>
-<a name="194"><span class="lineNum">     194 </span><span class="lineCov">         33 :         ExtIO::digitalWrite(addressPin, (address &amp; mask) != 0);</span></a>
+<a name="194"><span class="lineNum">     194 </span><span class="lineCov">         33 :         ExtIO::digitalWrite(addressPin, (address &amp; mask) != 0 ? HIGH : LOW);</span></a>
 <a name="195"><span class="lineNum">     195 </span><span class="lineCov">         33 :         mask &lt;&lt;= 1;</span></a>
 <a name="196"><span class="lineNum">     196 </span><span class="lineCov">         33 :     }</span></a>
 <a name="197"><span class="lineNum">     197 </span>            : #if !defined(__AVR__) &amp;&amp; !defined(__x86_64__)</a>
@@ -293,7 +293,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14-5-g4ff2ed6</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14-6-g40580cd</a></td></tr>
   </table>
   <br>
 

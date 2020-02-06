@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 52d245673dfd4cc8f3b584eac390ff0364ff06b7 - src/AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp</title>
+  <title>LCOV - 2616ec616fa2d75a78d560e385bd6eaf29a5b8be - src/AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">52d245673dfd4cc8f3b584eac390ff0364ff06b7</td>
+            <td class="headerValue">2616ec616fa2d75a78d560e385bd6eaf29a5b8be</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">68</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-12-23 15:42:58</td>
+            <td class="headerValue">2020-02-06 22:55:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">16</td>
@@ -103,7 +103,7 @@
 <a name="33"><span class="lineNum">      33 </span>            :     // reference.</a>
 <a name="34"><span class="lineNum">      34 </span><span class="lineCov">        150 : }</span></a>
 <a name="35"><span class="lineNum">      35 </span>            : </a>
-<a name="36"><span class="lineNum">      36 </span><span class="lineCov">         53 : void pinMode(pin_t pin, uint8_t mode) {</span></a>
+<a name="36"><span class="lineNum">      36 </span><span class="lineCov">         53 : void pinMode(pin_t pin, PinMode_t mode) {</span></a>
 <a name="37"><span class="lineNum">      37 </span>            :     // DEBUGFN(DEBUGVAR(pin) &lt;&lt; '\t' &lt;&lt; DEBUGVAR(mode));</a>
 <a name="38"><span class="lineNum">      38 </span><span class="lineCov">         53 :     if (pin &lt; NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {</span></a>
 <a name="39"><span class="lineNum">      39 </span><span class="lineCov">         44 :         ::pinMode(pin, mode);</span></a>
@@ -112,9 +112,9 @@
 <a name="42"><span class="lineNum">      42 </span><span class="lineCov">          9 :         el.pinMode(pin - el.getStart(), mode);</span></a>
 <a name="43"><span class="lineNum">      43 </span><span class="lineCov">          9 :     }</span></a>
 <a name="44"><span class="lineNum">      44 </span><span class="lineCov">         53 : }</span></a>
-<a name="45"><span class="lineNum">      45 </span><span class="lineCov">          5 : void pinMode(int pin, uint8_t mode) { pinMode((pin_t)pin, mode); }</span></a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">          5 : void pinMode(int pin, PinMode_t mode) { pinMode((pin_t)pin, mode); }</span></a>
 <a name="46"><span class="lineNum">      46 </span>            : </a>
-<a name="47"><span class="lineNum">      47 </span><span class="lineCov">        152 : void digitalWrite(pin_t pin, uint8_t val) {</span></a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">        152 : void digitalWrite(pin_t pin, PinStatus_t val) {</span></a>
 <a name="48"><span class="lineNum">      48 </span>            :     // DEBUGFN(DEBUGVAR(pin) &lt;&lt; '\t' &lt;&lt; DEBUGVAR(val));</a>
 <a name="49"><span class="lineNum">      49 </span><span class="lineCov">        152 :     if (pin &lt; NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {</span></a>
 <a name="50"><span class="lineNum">      50 </span><span class="lineCov">         48 :         ::digitalWrite(pin, val);</span></a>
@@ -123,7 +123,7 @@
 <a name="53"><span class="lineNum">      53 </span><span class="lineCov">        104 :         el.digitalWrite(pin - el.getStart(), val);</span></a>
 <a name="54"><span class="lineNum">      54 </span><span class="lineCov">        104 :     }</span></a>
 <a name="55"><span class="lineNum">      55 </span><span class="lineCov">        152 : }</span></a>
-<a name="56"><span class="lineNum">      56 </span><span class="lineCov">          5 : void digitalWrite(int pin, uint8_t val) { digitalWrite((pin_t)pin, val); }</span></a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">          5 : void digitalWrite(int pin, PinStatus_t val) { digitalWrite((pin_t)pin, val); }</span></a>
 <a name="57"><span class="lineNum">      57 </span>            : </a>
 <a name="58"><span class="lineNum">      58 </span><span class="lineCov">         97 : int digitalRead(pin_t pin) {</span></a>
 <a name="59"><span class="lineNum">      59 </span><span class="lineCov">         97 :     if (pin &lt; NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {</span></a>
@@ -136,20 +136,20 @@
 <a name="66"><span class="lineNum">      66 </span><span class="lineCov">         95 : }</span></a>
 <a name="67"><span class="lineNum">      67 </span><span class="lineCov">          5 : int digitalRead(int pin) { return digitalRead((pin_t)pin); }</span></a>
 <a name="68"><span class="lineNum">      68 </span>            : </a>
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          4 : void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder, uint8_t val) {</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          4 : void shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder, uint8_t val) {</span></a>
 <a name="70"><span class="lineNum">      70 </span><span class="lineCov">          4 :     uint8_t i;</span></a>
 <a name="71"><span class="lineNum">      71 </span>            : </a>
 <a name="72"><span class="lineNum">      72 </span><span class="lineCov">         36 :     for (i = 0; i &lt; 8; i++) {</span></a>
 <a name="73"><span class="lineNum">      73 </span><span class="lineCov">         32 :         if (bitOrder == LSBFIRST)</span></a>
-<a name="74"><span class="lineNum">      74 </span><span class="lineCov">         16 :             digitalWrite(dataPin, !!(val &amp; (1 &lt;&lt; i)));</span></a>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">         16 :             digitalWrite(dataPin, (val &amp; (1 &lt;&lt; i)) ? HIGH : LOW);</span></a>
 <a name="75"><span class="lineNum">      75 </span>            :         else</a>
-<a name="76"><span class="lineNum">      76 </span><span class="lineCov">         16 :             digitalWrite(dataPin, !!(val &amp; (1 &lt;&lt; (7 - i))));</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">         16 :             digitalWrite(dataPin, (val &amp; (1 &lt;&lt; (7 - i))) ? HIGH : LOW);</span></a>
 <a name="77"><span class="lineNum">      77 </span>            : </a>
 <a name="78"><span class="lineNum">      78 </span><span class="lineCov">         32 :         digitalWrite(clockPin, HIGH);</span></a>
 <a name="79"><span class="lineNum">      79 </span><span class="lineCov">         32 :         digitalWrite(clockPin, LOW);</span></a>
 <a name="80"><span class="lineNum">      80 </span><span class="lineCov">         32 :     }</span></a>
 <a name="81"><span class="lineNum">      81 </span><span class="lineCov">          4 : }</span></a>
-<a name="82"><span class="lineNum">      82 </span><span class="lineCov">          2 : void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val) {</span></a>
+<a name="82"><span class="lineNum">      82 </span><span class="lineCov">          2 : void shiftOut(int dataPin, int clockPin, BitOrder_t bitOrder, uint8_t val) {</span></a>
 <a name="83"><span class="lineNum">      83 </span><span class="lineCov">          2 :     shiftOut((pin_t)dataPin, (pin_t)clockPin, bitOrder, val);</span></a>
 <a name="84"><span class="lineNum">      84 </span><span class="lineCov">          2 : }</span></a>
 <a name="85"><span class="lineNum">      85 </span>            : </a>
@@ -192,7 +192,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14-5-g4ff2ed6</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14-6-g40580cd</a></td></tr>
   </table>
   <br>
 

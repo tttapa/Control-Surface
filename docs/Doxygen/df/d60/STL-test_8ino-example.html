@@ -74,7 +74,7 @@ $(function() {
 <div class="title">STL-test.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md36"></a>
+<h1><a class="anchor" id="autotoc_md39"></a>
 STL-test</h1>
 <dl class="section user"><dt>Boards:</dt><dd>AVR, AVR USB, Nano 33, Teensy 3.x, ESP8266, ESP32</dd></dl>
 <div class="fragment"><div class="line"> </div>
@@ -83,6 +83,7 @@ STL-test</h1>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/algorithm&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/array&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/bitset&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;AH/STL/climits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/cmath&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/complex&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/cstdint&gt;</span></div>
@@ -96,6 +97,7 @@ STL-test</h1>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/tuple&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/type_traits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;AH/STL/utility&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;AH/STL/vector&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><a name="a0"></a><a class="code" href="../../d1/d65/Warnings_8hpp.html#a9f2deeea1dd06b45ebc381da1633c7ee">AH_DIAGNOSTIC_WERROR</a>() <span class="comment">// ESP32 -Werror=c++0x-compat fix</span></div>
 <div class="line"> </div>
@@ -187,6 +189,13 @@ STL-test</h1>
 <div class="line"> </div>
 <div class="line">  TEST_CMATH_FUNCTION2(std::hypot);</div>
 <div class="line">  TEST_CMATH_FUNCTION3(std::fma);</div>
+<div class="line"> </div>
+<div class="line">  std::vector&lt;int&gt; vec = {1, 2, 3, 4};</div>
+<div class="line">  vec.reserve(100);</div>
+<div class="line">  vec.resize(50);</div>
+<div class="line">  vec[1] = -2;</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec)</div>
+<div class="line">    Serial.println(i);</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {}</div>
