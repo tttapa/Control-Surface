@@ -75,6 +75,7 @@
         "locale": "cpp",
         "memory_resource": "cpp",
         "bit": "cpp",
+        "climits": "cpp",
         "*.dox": "cpp"
     },
     "files.exclude": {

@@ -7,6 +7,7 @@
 #include <AH/STL/algorithm>
 #include <AH/STL/array>
 #include <AH/STL/bitset>
+#include <AH/STL/climits>
 #include <AH/STL/cmath>
 #include <AH/STL/complex>
 #include <AH/STL/cstdint>
@@ -117,7 +118,7 @@ void setup() {
   vec.reserve(100);
   vec.resize(50);
   vec[1] = -2;
-  for (int i : vec) 
+  for (int i : vec)
     Serial.println(i);
 }
 
