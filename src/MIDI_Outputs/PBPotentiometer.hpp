@@ -15,8 +15,9 @@ BEGIN_CS_NAMESPACE
  * 
  * The analog input is filtered and hysteresis is applied for maximum
  * stability.  
- * The actual precision is "only" 8 bits, because the built-in ADC
- * is pretty noisy.  
+ * The actual precision is "only" 10 bits, because this is the resolution of the
+ * built-in ADC, and this is the default resolution used by the Mackie Control
+ * Universal protocol.  
  * This version cannot be banked.
  *
  * @ingroup MIDIOutputElements
