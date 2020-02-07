@@ -12,6 +12,13 @@
 
 BEGIN_CS_NAMESPACE
 
+
+/**
+ * @brief   Class for objects that listen for incoming MIDI Program Change
+ *          events.
+ * 
+ * @ingroup MIDIInputElements
+ */
 class MIDIInputElementPC : public MIDIInputElement,
                            public DoublyLinkable<MIDIInputElementPC> {
   public:
