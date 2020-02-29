@@ -59,14 +59,12 @@ void MIDI_Interface::sendOnCable(uint8_t r, uint8_t cn) {
     sendImpl(r, cn);
 }
 
-void MIDI_Interface::sendNoteOn(MIDIAddress address,
-                                uint8_t velocity) {
+void MIDI_Interface::sendNoteOn(MIDIAddress address, uint8_t velocity) {
     if (address)
         sendImpl(NOTE_ON, address.getRawChannel(), address.getAddress(),
                  velocity, address.getCableNumber());
 }
-void MIDI_Interface::sendNoteOff(MIDIAddress address,
-                                 uint8_t velocity) {
+void MIDI_Interface::sendNoteOff(MIDIAddress address, uint8_t velocity) {
     if (address)
         sendImpl(NOTE_OFF, address.getRawChannel(), address.getAddress(),
                  velocity, address.getCableNumber());
@@ -152,11 +150,15 @@ uint8_t Parsing_MIDI_Interface::getCN() const { return parser.getCN(); }
 // -------------------------------- READING --------------------------------- //
 
 void Parsing_MIDI_Interface::update() {
-    if (event == NO_MESSAGE)      // If previous event was handled
-        event = read();           // Read the next event
-    if (dispatchMIDIEvent(event)) // If handled successfully
-        event = NO_MESSAGE;       // Read again next time around
-    // TODO: Should I read multiple messages here to prevent USB lockup?
+    if (event == NO_MESSAGE)          // If previous event was handled
+        event = read();               // Read the next incoming message
+    while (event != NO_MESSAGE) {     // As long as there are incoming messages
+        if (dispatchMIDIEvent(event)) // If handled successfully
+            event = read();           // Read the next incoming message
+        else                          // If pipe is locked
+            break;                    // Try sending again next time
+    }
+    // TODO: maximum number of iterations? Timeout?
 }
 
 #pragma GCC diagnostic push

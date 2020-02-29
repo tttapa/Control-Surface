@@ -1069,7 +1069,8 @@ TEST(MIDI_Pipes, USBInterface) {
     EXPECT_CALL(midiA[0], readUSBPacket())
         .WillOnce(Return(Packet_t{0x54, 0xF0, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{0x54, 0x77, 0x11, 0x22}))
-        .WillOnce(Return(Packet_t{0x56, 0x33, 0xF7, 0x00}));
+        .WillOnce(Return(Packet_t{0x56, 0x33, 0xF7, 0x00}))
+        .WillOnce(Return(Packet_t{}));
     const uint8_t *sysexData =
         midiA[0].getSysExMessage().data + 5 * sizeof(SysExBuffer);
     //                                    ^~~~ CN
@@ -1079,7 +1080,8 @@ TEST(MIDI_Pipes, USBInterface) {
     EXPECT_CALL(midiA[1], readUSBPacket())
         .WillOnce(Return(Packet_t{0x94, 0xF0, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
-        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}));
+        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
+        .WillOnce(Return(Packet_t{}));
     sysexData = midiA[1].getSysExMessage().data + 9 * sizeof(SysExBuffer);
     //                                            ^~~~ CN
     EXPECT_CALL(midiB[0], sendImpl(sysexData, 7, 9));
@@ -1102,7 +1104,8 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
     EXPECT_CALL(midiA[1], readUSBPacket())
         .WillOnce(Return(Packet_t{0x94, 0xF0, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
-        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}));
+        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
+        .WillOnce(Return(Packet_t{}));
 
     // lock pipes of all MIDI interfaces that pipe to the same sinks as midiA[0]
     // (i.e. midiA[1]) so that midiA[0] has exclusive access.
@@ -1137,7 +1140,8 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midiA[1], readUSBPacket())
-        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}));
+        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t{}));
 
     // lock pipes of all MIDI interfaces that pipe to the same sinks as midiA[0]
     // (i.e. midiA[1]) so that midiA[0] has exclusive access.
@@ -1165,7 +1169,8 @@ TEST(MIDI_Pipes, USBInterfaceLoopBack) {
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midi, readUSBPacket())
-        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}));
+        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t{}));
 
     EXPECT_CALL(midi, writeUSBPacket(0x9, 0x9, 0x95, 0x55, 0x66));
     midi.update();
@@ -1185,6 +1190,7 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midiA[1], readUSBPacket())
         .WillOnce(Return(Packet_t{0x9F, 0xF8, 0x00, 0x00}))
+        .WillOnce(Return(Packet_t{}))
         .WillOnce(Return(Packet_t{}));
 
     midiA[0].exclusive(9);
