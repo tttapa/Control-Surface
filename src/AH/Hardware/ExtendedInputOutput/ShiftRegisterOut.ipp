@@ -25,11 +25,11 @@ void ShiftRegisterOut<N>::update() {
     const uint8_t bufferLength = this->buffer.getBufferLength();
     if (this->bitOrder == LSBFIRST)
         for (uint8_t i = 0; i < bufferLength; i++)
-            ExtIO::shiftOut(dataPin, clockPin, uint8_t(LSBFIRST),
+            ExtIO::shiftOut(dataPin, clockPin, LSBFIRST,
                             this->buffer.getByte(i));
     else
         for (int8_t i = bufferLength - 1; i >= 0; i--)
-            ExtIO::shiftOut(dataPin, clockPin, uint8_t(MSBFIRST),
+            ExtIO::shiftOut(dataPin, clockPin, MSBFIRST,
                             this->buffer.getByte(i));
 
     ExtIO::digitalWrite(this->latchPin, HIGH);

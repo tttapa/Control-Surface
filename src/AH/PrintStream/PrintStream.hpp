@@ -9,7 +9,7 @@
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <Arduino.h> // Print
+#include <AH/Arduino-Wrapper.h> // Print
 AH_DIAGNOSTIC_POP()
 
 /// @addtogroup  AH_PrintStream

@@ -5,6 +5,7 @@
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
+#include "ExtendedInputOutput.hpp"
 #include "StaticSizeExtendedIOElement.hpp"
 #include <AH/Containers/BitArray.hpp>
 
@@ -23,13 +24,6 @@ BEGIN_AH_NAMESPACE
  */
 template <uint8_t N>
 class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
-  public:
-#if defined(__SAM3X8E__) || defined(__SAMD21G18A__)
-    using BitOrder_t = BitOrder;
-#else
-    using BitOrder_t = uint8_t;
-#endif
-
   protected:
     /**
      * @brief   Create a new ShiftRegisterOutBase object with a given bit order,
@@ -49,7 +43,8 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      * @brief   The pinMode function is not implemented because the mode is
      *          `OUTPUT` by definition.
      */
-    void pinMode(pin_t pin, uint8_t mode) override __attribute__((deprecated)) {
+    void pinMode(pin_t pin, PinMode_t mode) override
+        __attribute__((deprecated)) {
         (void)pin;
         (void)mode;
     }
@@ -63,7 +58,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      *          The value to set the pin to.
      *          (Either `HIGH` (1) or `LOW` (0))
      */
-    void digitalWrite(pin_t pin, uint8_t val) override;
+    void digitalWrite(pin_t pin, PinStatus_t val) override;
 
     /**
      * @brief   Get the current state of a given output pin.
@@ -103,7 +98,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      */
     void analogWrite(pin_t pin, analog_t val) override
         __attribute__((deprecated)) {
-        digitalWrite(pin, val >= 0x80);
+        digitalWrite(pin, val >= 0x80 ? HIGH : LOW);
     }
 
     /**

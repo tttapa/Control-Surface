@@ -2,7 +2,7 @@
  * This examples shows how use the Timer class to blink an LED every
  * second, in a non-blocking fashion (without using delay).
  * 
- * @boards  AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Behavior
  * --------
@@ -24,6 +24,6 @@ void setup() {
 
 void loop() {
   if (timer) {
-    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+    digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN) ? LOW : HIGH);
   }
 }

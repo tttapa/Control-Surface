@@ -9,7 +9,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #include <AH/Containers/BitArray.hpp>
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <Arduino.h> // MSBFIRST, SS
+#include <AH/Arduino-Wrapper.h> // MSBFIRST, SS
 AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE
@@ -28,8 +28,6 @@ BEGIN_AH_NAMESPACE
 template <uint8_t N>
 class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
   public:
-    using BitOrder_t = typename ShiftRegisterOutBase<N>::BitOrder_t;
-
     /**
      * @brief   Create a new SPIShiftRegisterOut object with a given bit order,
      *          and a given number of outputs.

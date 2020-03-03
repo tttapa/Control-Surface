@@ -2,7 +2,7 @@
  * This example demonstrates the use of push buttons and LEDs and how to use
  * shift registers and analog multiplexers to save pins.
  * 
- * @boards  AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -43,6 +43,7 @@
  */
 
 #include <Arduino_Helpers.h> // Include the Arduino Helpers library.
+
 #include <AH/Containers/ArrayHelpers.hpp>
 #include <AH/Hardware/Button.hpp>
 #include <AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
@@ -83,5 +84,5 @@ void setup() { // Initialize everything
 void loop() { // Check if a button is pressed, if so toggle the LED
   for (uint8_t i = 0; i < mux.length(); ++i)
     if (buttons[i].update() == Button::Falling)
-      sreg.digitalWrite(i, !sreg.digitalRead(i));
+      sreg.digitalWrite(i, sreg.digitalRead(i) ? LOW : HIGH);
 }

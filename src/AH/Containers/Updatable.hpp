@@ -116,7 +116,7 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
 
     /// @}
 
-  private:
+  protected:
     static DoublyLinkedList<Updatable<T>> updatables;
 };
 

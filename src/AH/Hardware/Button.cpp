@@ -35,7 +35,7 @@ Button::State Button::update() {
 
 Button::State Button::getState() const { return debouncedState; }
 
-const __FlashStringHelper *Button::getName(Button::State state) {
+FlashString_t Button::getName(Button::State state) {
     switch (state) {
         case Button::Pressed: return F("Pressed");
         case Button::Released: return F("Released");
