@@ -102,7 +102,7 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
             disable(el);
     }
 
-  private:
+  protected:
     static DoublyLinkedList<Updatable<T>> updatables;
 };
 
