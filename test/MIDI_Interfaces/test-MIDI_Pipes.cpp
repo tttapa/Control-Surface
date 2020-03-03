@@ -392,23 +392,32 @@ TEST(MIDI_Pipes, disconnectSource1) {
     EXPECT_TRUE(sink1.hasSourcePipe());
     EXPECT_TRUE(sink2.hasSourcePipe());
 
-    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_FALSE(pipe1.hasSink());
     EXPECT_FALSE(pipe1.hasSource());
-    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_FALSE(pipe2.hasSink());
     EXPECT_FALSE(pipe2.hasSource());
     EXPECT_TRUE(pipe3.hasSink());
     EXPECT_TRUE(pipe3.hasSource());
     EXPECT_TRUE(pipe4.hasSink());
     EXPECT_TRUE(pipe4.hasSource());
 
-    EXPECT_TRUE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughIn());
     EXPECT_FALSE(pipe1.hasThroughOut());
-    EXPECT_TRUE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughIn());
     EXPECT_FALSE(pipe2.hasThroughOut());
     EXPECT_FALSE(pipe3.hasThroughIn());
     EXPECT_TRUE(pipe3.hasThroughOut());
     EXPECT_FALSE(pipe4.hasThroughIn());
     EXPECT_FALSE(pipe4.hasThroughOut());
+
+    EXPECT_EQ(source2.getSinkPipe(), &pipe3);
+    EXPECT_EQ(pipe3.getSource(), &source2);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe3);
+    EXPECT_EQ(pipe3.getSink(), &sink1);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe4);
+    EXPECT_EQ(pipe4.getSink(), &sink2);
+    EXPECT_EQ(pipe3.getThroughOut(), &pipe4);
+    EXPECT_EQ(pipe4.getSource(), (MIDI_Source *)&pipe3);
 }
 
 TEST(MIDI_Pipes, disconnectSink1) {
@@ -434,22 +443,31 @@ TEST(MIDI_Pipes, disconnectSink1) {
     EXPECT_TRUE(sink2.hasSourcePipe());
 
     EXPECT_FALSE(pipe1.hasSink());
-    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_FALSE(pipe1.hasSource());
     EXPECT_TRUE(pipe2.hasSink());
     EXPECT_TRUE(pipe2.hasSource());
     EXPECT_FALSE(pipe3.hasSink());
-    EXPECT_TRUE(pipe3.hasSource());
+    EXPECT_FALSE(pipe3.hasSource());
     EXPECT_TRUE(pipe4.hasSink());
     EXPECT_TRUE(pipe4.hasSource());
 
     EXPECT_FALSE(pipe1.hasThroughIn());
-    EXPECT_TRUE(pipe1.hasThroughOut());
+    EXPECT_FALSE(pipe1.hasThroughOut());
     EXPECT_TRUE(pipe2.hasThroughIn());
     EXPECT_FALSE(pipe2.hasThroughOut());
     EXPECT_FALSE(pipe3.hasThroughIn());
-    EXPECT_TRUE(pipe3.hasThroughOut());
+    EXPECT_FALSE(pipe3.hasThroughOut());
     EXPECT_FALSE(pipe4.hasThroughIn());
     EXPECT_FALSE(pipe4.hasThroughOut());
+
+    EXPECT_EQ(source1.getSinkPipe(), &pipe2);
+    EXPECT_EQ(pipe2.getSource(), &source1);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe4);
+    EXPECT_EQ(pipe4.getSource(), &source2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe2);
+    EXPECT_EQ(pipe2.getSink(), &sink2);
+    EXPECT_EQ(pipe2.getThroughIn(), &pipe4);
+    EXPECT_EQ(pipe4.getSink(), (MIDI_Sink *)&pipe2);
 }
 
 TEST(MIDI_Pipes, checkConnectionsMoveSink) {
@@ -585,7 +603,7 @@ TEST(MIDI_Pipes, checkConnectionsMoveSink2Sinks) {
     DummyMIDI_Sink sink3 = std::move(sink1);
 
     EXPECT_FALSE(sink1.hasSourcePipe());
-    
+
     EXPECT_TRUE(source.hasSinkPipe());
     EXPECT_TRUE(sink3.hasSourcePipe());
     EXPECT_TRUE(sink2.hasSourcePipe());
@@ -610,7 +628,7 @@ TEST(MIDI_Pipes, checkConnectionsMoveSink2Sinks) {
     DummyMIDI_Sink sink4 = std::move(sink2);
 
     EXPECT_FALSE(sink2.hasSourcePipe());
-    
+
     EXPECT_TRUE(source.hasSinkPipe());
     EXPECT_TRUE(sink3.hasSourcePipe());
     EXPECT_TRUE(sink4.hasSourcePipe());
@@ -827,7 +845,7 @@ TEST(MIDI_Pipes, checkConnectionsMoveSource2Sources) {
     TrueMIDI_Source source3 = std::move(source1);
 
     EXPECT_FALSE(source1.hasSinkPipe());
-    
+
     EXPECT_TRUE(sink.hasSourcePipe());
     EXPECT_TRUE(source3.hasSinkPipe());
     EXPECT_TRUE(source2.hasSinkPipe());
@@ -852,7 +870,7 @@ TEST(MIDI_Pipes, checkConnectionsMoveSource2Sources) {
     TrueMIDI_Source source4 = std::move(source2);
 
     EXPECT_FALSE(source2.hasSinkPipe());
-    
+
     EXPECT_TRUE(sink.hasSourcePipe());
     EXPECT_TRUE(source3.hasSinkPipe());
     EXPECT_TRUE(source4.hasSinkPipe());

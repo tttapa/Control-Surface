@@ -18,7 +18,7 @@ struct ChannelMessage {
     uint8_t data1;
     uint8_t data2;
 
-    uint8_t CN = 0;
+    uint8_t CN;
 
     bool operator==(ChannelMessage other) const {
         return this->header == other.header && this->data1 == other.data1 &&

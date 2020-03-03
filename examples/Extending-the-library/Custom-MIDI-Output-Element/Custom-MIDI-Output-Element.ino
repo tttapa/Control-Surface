@@ -69,9 +69,9 @@ class MyNoteButton : public MIDIOutputElement {
   void update() final override {
     AH::Button::State state = button.update();               // Read the button
     if (state == AH::Button::Falling) {                      // if pressed
-      Control_Surface.MIDI().sendNoteOn(address, velocity);  // → note on
+      Control_Surface.sendNoteOn(address, velocity);  // → note on
     } else if (state == AH::Button::Rising) {                // if released
-      Control_Surface.MIDI().sendNoteOff(address, velocity); // → note off
+      Control_Surface.sendNoteOff(address, velocity); // → note off
     }
   }
 

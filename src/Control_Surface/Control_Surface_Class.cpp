@@ -27,10 +27,11 @@ void Control_Surface_::begin() {
     DEBUG_OUT.begin(AH::defaultBaudRate);
     delay(250);
 #endif
+
+    connectDefaultMIDI_Interface();
+
     FilteredAnalog<>::setupADC();
     ExtendedIOElement::beginAll();
-    MIDI().begin(); // initialize the MIDI interface
-    MIDI().setCallbacks(this);
     DisplayInterface::beginAll(); // initialize all displays
     MIDIInputElementCC::beginAll();
     MIDIInputElementPC::beginAll();
@@ -41,8 +42,27 @@ void Control_Surface_::begin() {
     Updatable<Potentiometer>::beginAll();
     Updatable<MotorFader>::beginAll();
     Updatable<Display>::beginAll();
+    Updatable<MIDI_Interface>::beginAll();
     potentiometerTimer.begin();
     displayTimer.begin();
+}
+
+bool Control_Surface_::connectDefaultMIDI_Interface() {
+    if (hasSinkPipe() || hasSourcePipe())
+        return false;
+    auto def = MIDI_Interface::getDefault();
+    if (def == nullptr) {
+        FATAL_ERROR(F("No default MIDI Interface"), 0xF123);
+        return false;
+    }
+    *this << inpipe << *def;
+    *this >> outpipe >> *def;
+    return true;
+}
+
+void Control_Surface_::disconnectMIDI_Interfaces() {
+    disconnectSinkPipes();
+    disconnectSourcePipes();
 }
 
 void Control_Surface_::loop() {
@@ -55,21 +75,26 @@ void Control_Surface_::loop() {
         updateDisplays();
 }
 
-MIDI_Interface &Control_Surface_::MIDI() {
-    MIDI_Interface *midi = MIDI_Interface::getDefault();
-    if (midi == nullptr)
-        FATAL_ERROR(F("No default MIDI interface is selected."), 0xDEAD);
-
-    return *midi;
-}
-
 void Control_Surface_::updateMidiInput() {
-    MIDI_Interface &midi = MIDI();
-    midi.update();
+    Updatable<MIDI_Interface>::updateAll();
 }
 
-void Control_Surface_::onChannelMessage(Parsing_MIDI_Interface &midi) {
-    ChannelMessage midichmsg = midi.getChannelMessage();
+void Control_Surface_::sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                                uint8_t cn) {
+    this->sourceMIDItoPipe(ChannelMessage{uint8_t(m | c), d1, d2, cn});
+}
+void Control_Surface_::sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) {
+    this->sourceMIDItoPipe(ChannelMessage{uint8_t(m | c), d1, 0x00, cn});
+}
+void Control_Surface_::sendImpl(const uint8_t *data, size_t length,
+                                uint8_t cn) {
+    this->sourceMIDItoPipe(SysExMessage{data, length, cn});
+}
+void Control_Surface_::sendImpl(uint8_t rt, uint8_t cn) {
+    this->sourceMIDItoPipe(RealTimeMessage{rt, cn});
+}
+
+void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midichmsg) {
     ChannelMessageMatcher midimsg = {midichmsg};
 
 #ifdef DEBUG_MIDI_PACKETS
@@ -118,9 +143,8 @@ void Control_Surface_::onChannelMessage(Parsing_MIDI_Interface &midi) {
     }
 }
 
-void Control_Surface_::onSysExMessage(Parsing_MIDI_Interface &midi) {
+void Control_Surface_::sinkMIDIfromPipe(SysExMessage msg) {
     // System Exclusive
-    SysExMessage msg = midi.getSysExMessage();
 #ifdef DEBUG_MIDI_PACKETS
     const uint8_t *data = msg.data;
     size_t len = msg.length;
@@ -137,9 +161,7 @@ void Control_Surface_::onSysExMessage(Parsing_MIDI_Interface &midi) {
     MIDIInputElementSysEx::updateAllWith(msg);
 }
 
-void Control_Surface_::onRealtimeMessage(Parsing_MIDI_Interface &midi,
-                                         uint8_t message) {
-    RealTimeMessage rtMessage = {message, midi.getCN()};
+void Control_Surface_::sinkMIDIfromPipe(RealTimeMessage rtMessage) {
     // If the Real-Time Message callback exists, call it to see if we have to
     // continue handling it.
     if (realTimeMessageCallback && realTimeMessageCallback(rtMessage))

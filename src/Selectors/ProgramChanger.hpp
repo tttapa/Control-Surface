@@ -15,7 +15,7 @@ class ProgramChanger : public Selectable<N> {
 
     void select(setting_t setting) override {
         setting = this->validateSetting(setting);
-        Control_Surface.MIDI().sendPC(channelCN, programs[setting]);
+        Control_Surface.sendPC(channelCN, programs[setting]);
     }
 
   private:

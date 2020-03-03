@@ -7,7 +7,7 @@ BEGIN_CS_NAMESPACE
 class ProgramChangeSender {
   public:
     void sendOn(MIDIAddress address) {
-        Control_Surface.MIDI().sendPC(address);
+        Control_Surface.sendPC(address);
     }
     void sendOff(MIDIAddress address) {
         (void) address;

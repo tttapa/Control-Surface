@@ -8,7 +8,7 @@ BEGIN_CS_NAMESPACE
 class ContinuousCCSender {
   public:
     void send(uint8_t value, MIDIAddress address) {
-        Control_Surface.MIDI().sendCC(address, value);
+        Control_Surface.sendCC(address, value);
     }
 
     constexpr static uint8_t precision() { return 7; }
@@ -20,8 +20,8 @@ class ContinuousCCSender14 {
     void send(uint16_t value, MIDIAddress address) {
         value =
             AH::increaseBitDepth<14, precision(), uint16_t, uint16_t>(value);
-        Control_Surface.MIDI().sendCC(address + 0x00, (value >> 7) & 0x7f);
-        Control_Surface.MIDI().sendCC(address + 0x20, (value >> 0) & 0x7F);
+        Control_Surface.sendCC(address + 0x00, (value >> 7) & 0x7f);
+        Control_Surface.sendCC(address + 0x20, (value >> 0) & 0x7F);
     }
 
     constexpr static uint8_t precision() {

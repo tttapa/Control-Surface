@@ -10,10 +10,10 @@ class DigitalCCSender {
         : onValue{onValue}, offValue{offValue} {}
 
     void sendOn(MIDIAddress address) {
-        Control_Surface.MIDI().sendCC(address, onValue);
+        Control_Surface.sendCC(address, onValue);
     }
     void sendOff(MIDIAddress address) {
-        Control_Surface.MIDI().sendCC(address, offValue);
+        Control_Surface.sendCC(address, offValue);
     }
 
     uint8_t getOnValue() const { return this->onValue; }

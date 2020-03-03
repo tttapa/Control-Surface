@@ -403,6 +403,8 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
 #ifndef ARDUINO
     MIDI_Pipe *getThroughOut() { return throughOut; }
     MIDI_Pipe *getThroughIn() { return throughIn; }
+    MIDI_Source *getSource() { return source; }
+    MIDI_Sink *getSink() { return sink; }
 #endif
 
     /// @copydoc    MIDI_Source::exclusive

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MIDI_Pipes.hpp"
+#include <AH/Containers/Updatable.hpp>
 #include <Def/Def.hpp>
 #include <Def/MIDIAddress.hpp>
 #include <MIDI_Parsers/MIDI_Parser.hpp>
@@ -12,28 +13,11 @@ constexpr auto MIDI_BAUD = 31250;
 class MIDI_Callbacks;
 
 /**
- * @brief   An abstract class for MIDI interfaces.
+ * @brief   Statically polymorphic template for classes that send MIDI messages.
  */
-class MIDI_Interface : public TrueMIDI_SinkSource {
-  protected:
-    /**
-     * @brief   Constructor.
-     */
-    MIDI_Interface();
-
-    MIDI_Interface(MIDI_Interface &&);
-
+template <class Derived>
+class MIDI_Sender {
   public:
-    /**
-     * @brief   Destructor.
-     */
-    virtual ~MIDI_Interface();
-
-    /**
-     * @brief   Initialize the MIDI Interface.
-     */
-    virtual void begin() {}
-
     /**
      * @brief   Send a 3-byte MIDI packet.
      *
@@ -129,12 +113,38 @@ class MIDI_Interface : public TrueMIDI_SinkSource {
     void send(RealTimeMessage message);
     /// Send a single-byte MIDI message.
     void send(uint8_t rt, uint8_t cn = 0);
+};
+
+/**
+ * @brief   An abstract class for MIDI interfaces.
+ */
+class MIDI_Interface : public TrueMIDI_SinkSource,
+                       public MIDI_Sender<MIDI_Interface>,
+                       public AH::Updatable<MIDI_Interface> {
+  protected:
+    /**
+     * @brief   Constructor.
+     */
+    MIDI_Interface() = default;
+
+    MIDI_Interface(MIDI_Interface &&) = default;
+
+  public:
+    /**
+     * @brief   Destructor.
+     */
+    virtual ~MIDI_Interface();
+
+    /**
+     * @brief   Initialize the MIDI Interface.
+     */
+    void begin() override {}
 
     /**
      * @brief   Read the MIDI interface and call the callback if a message is
      *          received.
      */
-    virtual void update() = 0;
+    void update() override = 0;
 
     /**
      * @brief   Return the default MIDI interface.
@@ -275,3 +285,5 @@ class MIDI_Callbacks {
 // LCOV_EXCL_STOP
 
 END_CS_NAMESPACE
+
+#include "MIDI_Interface.ipp"
