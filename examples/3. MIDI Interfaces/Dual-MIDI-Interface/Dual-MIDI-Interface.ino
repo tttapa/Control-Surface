@@ -3,8 +3,9 @@
  * so you can send the MIDI output over both MIDI USB and 5-pin DIN MIDI, for 
  * example. MIDI input is received from all interfaces as well.
  * 
- * Also have a look at the @ref MIDI_Pipes-Routing.ino example and the 
- * @ref MIDI_Pipe documentation for more information about MIDI routing.  
+ * Also have a look at the @ref MIDI_Pipes-Routing.ino example, the
+ * @ref MIDI_Routing module and the @ref MIDI_Pipe documentation for more 
+ * information about MIDI routing.  
  * Control Surface can be used as both a MIDI sink and a MIDI source.
  * 
  * When you call `Control_Surface.begin()`, it automatically connects itself to 
@@ -64,3 +65,17 @@ void setup() {
 void loop() {
   Control_Surface.loop();
 }
+
+/*
+ * The vertical pipe operator (|) is used to make a bidirectional connection 
+ * between a MIDI sink or source and a MIDI pipe.
+ * You can also use unidirectional pipes. These can be connected using the 
+ * stream operators (<< and >>).
+ * 
+ * For example:
+ * 
+ *     MIDI_PipeFactory<2> pipes;
+ *     ...
+ *       Control_Surface >> pipes >> usbmidi;    // Output to usbmidi
+ *       Control_Surface << pipes << serialmidi; // Input from serialmidi
+ */

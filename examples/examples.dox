@@ -717,6 +717,10 @@
  * Bridges the USB MIDI interface to a Serial MIDI interface, and loops back
  * anything it receives on the USB interface.
  * 
+ * You can also use the MIDI pipes to route the input and output of Control 
+ * Surface itself, not just the input and output of MIDI interfaces. This is
+ * demonstrated in the @ref Dual-MIDI-Interface.ino example.
+ * 
  * @boards  AVR USB, Due, Nano 33, Teensy 3.x, ESP32
  */
 
@@ -730,8 +734,9 @@
  * so you can send the MIDI output over both MIDI USB and 5-pin DIN MIDI, for 
  * example. MIDI input is received from all interfaces as well.
  * 
- * Also have a look at the @ref MIDI_Pipes-Routing.ino example and the 
- * @ref MIDI_Pipe documentation for more information about MIDI routing.  
+ * Also have a look at the @ref MIDI_Pipes-Routing.ino example, the
+ * @ref MIDI_Routing module and the @ref MIDI_Pipe documentation for more 
+ * information about MIDI routing.  
  * Control Surface can be used as both a MIDI sink and a MIDI source.
  * 
  * When you call `Control_Surface.begin()`, it automatically connects itself to 
