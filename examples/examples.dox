@@ -1720,6 +1720,40 @@
  */
 
 /**
+ * @example   "Custom-Note-LED-Input-Element-Callback.ino"
+ * 
+ * Custom-Note-LED-Input-Element-Callback
+ * ======================================
+ *
+ * This example demonstrates how to attach custom callbacks to Note or
+ * Control Change MIDI Input Elements.
+ *
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x
+ *
+ * Connections
+ * -----------
+ *
+ * - Pin 3 (PWM pin): An LED (with current-limiting resistor) to ground.
+ *
+ * Behavior
+ * --------
+ *
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the built-in
+ * LED will light up at full brightness,
+ * if a Note Off event for that note is sent, the LED will light dimly.  
+ * (A Note On event with a velocity of zero also counts as a Note Off event.)
+ *
+ * Mapping
+ * -------
+ *
+ * Route the MIDI output of a MIDI keyboard to the Arduino's MIDI input. Then
+ * play a middle C on the keyboard.
+ *
+ * Written by PieterP, 2020-03-10  
+ * https://github.com/tttapa/Control-Surface
+*/
+
+/**
  * @example   "STL-test.ino"
  * 
  * STL-test
