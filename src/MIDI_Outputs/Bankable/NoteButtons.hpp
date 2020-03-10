@@ -49,8 +49,8 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS> {
      */
     NoteButtons(const OutputBankConfig &config,
                 const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
-                const MIDICNChannelAddress &baseAddress,
-                const RelativeMIDICNChannelAddress &incrementAddress,
+                const MIDIAddress &baseAddress,
+                const RelativeMIDIAddress &incrementAddress,
                 uint8_t velocity = 0x7F)
         : MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS>{
               config, buttons, baseAddress, incrementAddress, {velocity},

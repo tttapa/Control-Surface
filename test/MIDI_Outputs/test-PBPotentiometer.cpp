@@ -11,6 +11,7 @@ auto high = [](uint16_t x) { return x; };
 
 TEST(PBPotentiometer, simple) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     PBPotentiometer pot(2, {CHANNEL_7, 0xC});
     pot.begin();
@@ -31,6 +32,7 @@ TEST(PBPotentiometer, simple) {
 
 TEST(PBPotentiometer, mapping) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     PBPotentiometer pot(2, {CHANNEL_7, 0xC});
     pot.begin();
@@ -52,6 +54,7 @@ TEST(PBPotentiometer, mapping) {
 
 TEST(PBPotentiometer, invert) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     PBPotentiometer pot(2, {CHANNEL_7, 0xC});
     pot.begin();

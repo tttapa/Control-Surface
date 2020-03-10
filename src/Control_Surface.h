@@ -114,7 +114,6 @@
 
 // ---------------------------- MIDI Interfaces ----------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.hpp>
-#include <MIDI_Interfaces/MultiMIDI_Interface.hpp>
 #include <MIDI_Interfaces/SerialMIDI_Interface.hpp>
 #include <MIDI_Interfaces/USBMIDI_Interface.hpp>
 

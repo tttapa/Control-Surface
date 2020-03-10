@@ -32,7 +32,7 @@ class PCButton : public MIDIButton<ProgramChangeSender> {
      * @param   sender
      *          The MIDI sender to use.
      */
-    PCButton(pin_t pin, const MIDICNChannelAddress &address,
+    PCButton(pin_t pin, const MIDIAddress &address,
                const ProgramChangeSender &sender = {})
         : MIDIButton(pin, address, sender) {}
 };

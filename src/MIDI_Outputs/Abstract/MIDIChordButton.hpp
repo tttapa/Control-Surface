@@ -38,7 +38,7 @@ class MIDIChordButton : public MIDIOutputElement {
      *          The number of notes in the chord.
      */
     template <uint8_t N>
-    MIDIChordButton(pin_t pin, const MIDICNChannelAddress &address,
+    MIDIChordButton(pin_t pin, const MIDIAddress &address,
                     const Chord<N> &chord, const Sender &sender)
         : button{pin}, address(address),
           newChord(AH::MakeUnique<Chord<N>>(chord)), sender{sender} {}
@@ -47,7 +47,7 @@ class MIDIChordButton : public MIDIOutputElement {
     void begin() final override { button.begin(); }
     void update() final override {
         AH::Button::State state = button.update();
-        MIDICNChannelAddress sendAddress = address;
+        MIDIAddress sendAddress = address;
         if (state == AH::Button::Falling) {
             if (newChord)
                 chord = std::move(newChord);
@@ -74,7 +74,7 @@ class MIDIChordButton : public MIDIOutputElement {
 
   private:
     AH::Button button;
-    const MIDICNChannelAddress address;
+    const MIDIAddress address;
     AH::UniquePtr<const IChord> chord;
     AH::UniquePtr<const IChord> newChord;
 

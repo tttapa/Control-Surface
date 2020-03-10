@@ -34,7 +34,7 @@ class CCButtonLatching : public MIDIButtonLatching<DigitalCCSender> {
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButtonLatching(pin_t pin, const MIDICNChannelAddress &address,
+    CCButtonLatching(pin_t pin, const MIDIAddress &address,
                      const DigitalCCSender &sender = {})
         : MIDIButtonLatching(pin, address, sender) {}
 };

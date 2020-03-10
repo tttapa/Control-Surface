@@ -4,6 +4,10 @@
  * Bridges the USB MIDI interface to a Serial MIDI interface, and loops back
  * anything it receives on the USB interface.
  * 
+ * You can also use the MIDI pipes to route the input and output of Control 
+ * Surface itself, not just the input and output of MIDI interfaces. This is
+ * demonstrated in the @ref Dual-MIDI-Interface.ino example.
+ * 
  * @boards  AVR USB, Due, Nano 33, Teensy 3.x, ESP32
  */
 

@@ -39,7 +39,7 @@ TEST(StreamMIDI_Interface, send3B) {
     midi.sendNoteOff({0x55, CHANNEL_4, 8}, 0x66);
     midi.sendCC({0x55, CHANNEL_4, 8}, 0x66);
     midi.sendKP({0x55, CHANNEL_4, 8}, 0x66);
-    midi.sendPB(MIDICNChannel{CHANNEL_4, 8}, 0x3355);
+    midi.sendPB(MIDIChannelCN{CHANNEL_4, 8}, 0x3355);
     u8vec expected = {
         0x93, 0x55, 0x66, //
         0x93, 0x55, 0x66, //

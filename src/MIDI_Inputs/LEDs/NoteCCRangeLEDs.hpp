@@ -97,7 +97,7 @@ class NoteRangeLEDs : public GenericNoteCCRange<MIDIInputElementNote, RangeLen,
      *          object will listen to addresses 10, 11, 12, 13.
      */
     NoteRangeLEDs(const PinList<RangeLen> &ledPins,
-                  MIDICNChannelAddress address)
+                  MIDIAddress address)
         : GenericNoteCCRange<MIDIInputElementNote, RangeLen,
                              NoteCCLED<RangeLen>>{
               address,
@@ -122,7 +122,7 @@ class NoteValueLED
      * @param   address 
      *          The MIDI address to listen to.
      */
-    NoteValueLED(pin_t ledPin, MIDICNChannelAddress address)
+    NoteValueLED(pin_t ledPin, MIDIAddress address)
         : GenericNoteCCRange<MIDIInputElementNote, 1, NoteCCLED<1>>{
               address,
               {{ledPin}},
@@ -157,7 +157,7 @@ class CCRangeLEDs : public GenericNoteCCRange<MIDIInputElementCC, RangeLen,
      *          For example, if `address = 10` and `RangeLen = 4`, the this
      *          object will listen to addresses 10, 11, 12, 13.
      */
-    CCRangeLEDs(const PinList<RangeLen> &ledPins, MIDICNChannelAddress address)
+    CCRangeLEDs(const PinList<RangeLen> &ledPins, MIDIAddress address)
         : GenericNoteCCRange<MIDIInputElementCC, RangeLen, NoteCCLED<RangeLen>>{
               address,
               {ledPins},
@@ -181,7 +181,7 @@ class CCValueLED
      * @param   address 
      *          The MIDI address to listen to.
      */
-    CCValueLED(pin_t ledPin, MIDICNChannelAddress address)
+    CCValueLED(pin_t ledPin, MIDIAddress address)
         : GenericNoteCCRange<MIDIInputElementCC, 1, NoteCCLED<1>>{
               address,
               {{ledPin}},
@@ -201,7 +201,7 @@ class NoteRangeLEDs : public GenericNoteCCRange<MIDIInputElementNote, RangeLen,
   public:
     NoteRangeLEDs(const BankConfig<BankSize> &config,
                   const PinList<RangeLen> &ledPins,
-                  const MIDICNChannelAddress &address)
+                  const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementNote, RangeLen, BankSize,
                              NoteCCLED<RangeLen>>{
               config,
@@ -215,7 +215,7 @@ class NoteValueLED : public GenericNoteCCRange<MIDIInputElementNote, 1,
                                                BankSize, NoteCCLED<1>> {
   public:
     NoteValueLED(const BankConfig<BankSize> &config, pin_t ledPin,
-                 const MIDICNChannelAddress &address)
+                 const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementNote, 1, BankSize, NoteCCLED<1>>{
               config,
               address,
@@ -235,7 +235,7 @@ class CCRangeLEDs : public GenericNoteCCRange<MIDIInputElementCC, RangeLen,
   public:
     CCRangeLEDs(const BankConfig<BankSize> &config,
                 const PinList<RangeLen> &ledPins,
-                const MIDICNChannelAddress &address)
+                const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementCC, RangeLen, BankSize,
                              NoteCCLED<RangeLen>>{
               config,
@@ -249,7 +249,7 @@ class CCValueLED
     : public GenericNoteCCRange<MIDIInputElementCC, 1, BankSize, NoteCCLED<1>> {
   public:
     CCValueLED(const BankConfig<BankSize> &config, pin_t ledPin,
-               const MIDICNChannelAddress &address)
+               const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementCC, 1, BankSize, NoteCCLED<1>>{
               config,
               address,
@@ -290,7 +290,7 @@ class NoteRangeLEDsPWM : public GenericNoteCCRange<MIDIInputElementNote, RangeLe
      *          object will listen to addresses 10, 11, 12, 13.
      */
     NoteRangeLEDsPWM(const PinList<RangeLen> &ledPins,
-                     MIDICNChannelAddress address)
+                     MIDIAddress address)
         : GenericNoteCCRange<MIDIInputElementNote, RangeLen,
                              NoteCCLEDPWM<RangeLen>>{
               address,
@@ -314,7 +314,7 @@ class NoteValueLEDPWM
      * @param   address 
      *          The MIDI address to listen to.
      */
-    NoteValueLEDPWM(pin_t ledPin, MIDICNChannelAddress address)
+    NoteValueLEDPWM(pin_t ledPin, MIDIAddress address)
         : GenericNoteCCRange<MIDIInputElementNote, 1, NoteCCLEDPWM<1>>{
               address,
               {{ledPin}},
@@ -344,7 +344,7 @@ class CCRangeLEDsPWM : public GenericNoteCCRange<MIDIInputElementCC, RangeLen,
      *          For example, if `address = 10` and `RangeLen = 4`, the this
      *          object will listen to addresses 10, 11, 12, 13.
      */
-    CCRangeLEDsPWM(const PinList<RangeLen> &ledPins, MIDICNChannelAddress address)
+    CCRangeLEDsPWM(const PinList<RangeLen> &ledPins, MIDIAddress address)
         : GenericNoteCCRange<MIDIInputElementCC, RangeLen, NoteCCLEDPWM<RangeLen>>{
               address,
               {ledPins},
@@ -367,7 +367,7 @@ class CCValueLEDPWM
      * @param   address 
      *          The MIDI address to listen to.
      */
-    CCValueLEDPWM(pin_t ledPin, MIDICNChannelAddress address)
+    CCValueLEDPWM(pin_t ledPin, MIDIAddress address)
         : GenericNoteCCRange<MIDIInputElementCC, 1, NoteCCLEDPWM<1>>{
               address,
               {{ledPin}},
@@ -387,7 +387,7 @@ class NoteRangeLEDsPWM : public GenericNoteCCRange<MIDIInputElementNote, RangeLe
   public:
     NoteRangeLEDsPWM(const BankConfig<BankSize> &config,
                   const PinList<RangeLen> &ledPins,
-                  const MIDICNChannelAddress &address)
+                  const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementNote, RangeLen, BankSize,
                              NoteCCLEDPWM<RangeLen>>{
               config,
@@ -401,7 +401,7 @@ class NoteValueLEDPWM : public GenericNoteCCRange<MIDIInputElementNote, 1,
                                                BankSize, NoteCCLEDPWM<1>> {
   public:
     NoteValueLEDPWM(const BankConfig<BankSize> &config, pin_t ledPin,
-                 const MIDICNChannelAddress &address)
+                 const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementNote, 1, BankSize, NoteCCLEDPWM<1>>{
               config,
               address,
@@ -415,7 +415,7 @@ class CCRangeLEDsPWM : public GenericNoteCCRange<MIDIInputElementCC, RangeLen,
   public:
     CCRangeLEDsPWM(const BankConfig<BankSize> &config,
                 const PinList<RangeLen> &ledPins,
-                const MIDICNChannelAddress &address)
+                const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementCC, RangeLen, BankSize,
                              NoteCCLEDPWM<RangeLen>>{
               config,
@@ -429,7 +429,7 @@ class CCValueLEDPWM
     : public GenericNoteCCRange<MIDIInputElementCC, 1, BankSize, NoteCCLEDPWM<1>> {
   public:
     CCValueLEDPWM(const BankConfig<BankSize> &config, pin_t ledPin,
-               const MIDICNChannelAddress &address)
+               const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementCC, 1, BankSize, NoteCCLEDPWM<1>>{
               config,
               address,

@@ -15,8 +15,9 @@ BEGIN_CS_NAMESPACE
  * 
  * The analog input is filtered and hysteresis is applied for maximum
  * stability.  
- * The actual precision is "only" 8 bits, because the built-in ADC
- * is pretty noisy.  
+ * The actual precision is "only" 10 bits, because this is the resolution of the
+ * built-in ADC, and this is the default resolution used by the Mackie Control
+ * Universal protocol.  
  * This version cannot be banked.
  *
  * @ingroup MIDIOutputElements
@@ -35,7 +36,7 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>> {
      * @param   sender
      *          The MIDI sender to use.
      */
-    PBPotentiometer(pin_t analogPin, const MIDICNChannel &address = CHANNEL_1,
+    PBPotentiometer(pin_t analogPin, const MIDIChannelCN &address = CHANNEL_1,
                     const PitchBendSender<10> &sender = {})
         : MIDIFilteredAnalog(analogPin, address, sender) {}
 };

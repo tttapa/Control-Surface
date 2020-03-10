@@ -82,7 +82,7 @@ class IVPotRing {
 template <uint8_t NumValues, class Callback>
 class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
   protected:
-    VPotRing_Base(uint8_t track, const MIDICNChannel &channelCN,
+    VPotRing_Base(uint8_t track, const MIDIChannelCN &channelCN,
                   const Callback &callback)
         : MIDIInputElementCC{{track + VPotRingAddress - 1, channelCN}},
           callback(callback) {}
@@ -108,7 +108,7 @@ class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
 
   private:
     bool updateImpl(const ChannelMessageMatcher &midimsg,
-                    const MIDICNChannelAddress &target) override {
+                    const MIDIAddress &target) override {
         uint8_t index = getBankIndex(target);
         uint8_t value = sanitizeValue(midimsg.data2);
         values[index] = value;
@@ -121,7 +121,7 @@ class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
     virtual uint8_t getSelection() const { return 0; }
 
     /// Get the bank index from a MIDI address
-    virtual setting_t getBankIndex(const MIDICNChannelAddress &target) const {
+    virtual setting_t getBankIndex(const MIDIAddress &target) const {
         (void)target;
         return 0;
     }
@@ -143,7 +143,7 @@ class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
 template <class Callback = VPotEmptyCallback>
 class GenericVPotRing : public VPotRing_Base<1, Callback> {
   public:
-    GenericVPotRing(uint8_t track, const MIDICNChannel &channelCN,
+    GenericVPotRing(uint8_t track, const MIDIChannelCN &channelCN,
                     const Callback &callback)
         : VPotRing_Base<1, Callback>{track, channelCN, callback} {}
 };
@@ -156,7 +156,7 @@ class GenericVPotRing : public VPotRing_Base<1, Callback> {
  */
 class VPotRing : public GenericVPotRing<> {
   public:
-    VPotRing(uint8_t track, const MIDICNChannel &channelCN = CHANNEL_1)
+    VPotRing(uint8_t track, const MIDIChannelCN &channelCN = CHANNEL_1)
         : GenericVPotRing{track, channelCN, {}} {}
 };
 
@@ -178,7 +178,7 @@ class GenericVPotRing : public VPotRing_Base<NumBanks, Callback>,
                         public BankableMIDIInput<NumBanks> {
   public:
     GenericVPotRing(const BankConfig<NumBanks> &config, uint8_t track,
-                    const MIDICNChannel &channelCN, const Callback &callback)
+                    const MIDIChannelCN &channelCN, const Callback &callback)
         : VPotRing_Base<NumBanks, Callback>{track, channelCN, callback},
           BankableMIDIInput<NumBanks>{config} {}
 
@@ -187,13 +187,13 @@ class GenericVPotRing : public VPotRing_Base<NumBanks, Callback>,
         return BankableMIDIInput<NumBanks>::getSelection();
     };
 
-    uint8_t getBankIndex(const MIDICNChannelAddress &target) const override {
+    uint8_t getBankIndex(const MIDIAddress &target) const override {
         return BankableMIDIInput<NumBanks>::getBankIndex(target, this->address);
     }
 
     /// Check if the address of the incoming MIDI message is in one of the banks
     /// of this element.
-    bool match(const MIDICNChannelAddress &target) const override {
+    bool match(const MIDIAddress &target) const override {
         return BankableMIDIInput<NumBanks>::matchBankable(target,
                                                           this->address);
     }
@@ -213,7 +213,7 @@ template <uint8_t NumBanks>
 class VPotRing : public GenericVPotRing<NumBanks> {
   public:
     VPotRing(BankConfig<NumBanks> config, uint8_t track,
-             MIDICNChannel channelCN = CHANNEL_1)
+             MIDIChannelCN channelCN = CHANNEL_1)
         : GenericVPotRing<NumBanks>{config, track, channelCN, {}} {}
 };
 

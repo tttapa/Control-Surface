@@ -15,7 +15,7 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
     * @brief     Constructor.
     * @todo      Documentation.
     */
-    SevenSegmentDisplay(const MIDICNChannelAddress &address)
+    SevenSegmentDisplay(const MIDIAddress &address)
         : MIDIInputElementCC{address} {
         fillWithSpaces();
     }
@@ -36,7 +36,7 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
      * @brief   Update a character.
      */
     virtual bool updateImpl(const ChannelMessageMatcher &midimsg,
-                            const MIDICNChannelAddress &target) override {
+                            const MIDIAddress &target) override {
         uint8_t index = LENGTH - 1 - getRangeIndex(target);
         // MIDI msg: character data → bits 0-5
         // MIDI msg: decimal point → bit 6 set, no decimal point → bit 6 not set
@@ -51,13 +51,13 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
 
     /// Check if the address of the incoming MIDI message is within the range
     /// of addresses of this element.
-    bool match(const MIDICNChannelAddress &target) const override {
-        return MIDICNChannelAddress::matchAddressInRange(target, address,
+    bool match(const MIDIAddress &target) const override {
+        return MIDIAddress::matchAddressInRange(target, address,
                                                          LENGTH);
     }
 
     /// @todo
-    uint8_t getRangeIndex(const MIDICNChannelAddress &target) const {
+    uint8_t getRangeIndex(const MIDIAddress &target) const {
         return target.getAddress() - this->address.getAddress();
     }
 

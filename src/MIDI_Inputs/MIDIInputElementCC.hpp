@@ -19,6 +19,8 @@ BEGIN_CS_NAMESPACE
  * 
  * All instances are added to a linked list that can be traversed to update
  * all of them when a new MIDI CC event is received.
+ * 
+ * @ingroup MIDIInputElements
  */
 class MIDIInputElementCC : public MIDIInputElement,
                            public DoublyLinkable<MIDIInputElementCC> {
@@ -33,7 +35,7 @@ class MIDIInputElementCC : public MIDIInputElement,
      *          The MIDI address to listen to. (Controller number [0, 119],
      *          Channel [1, 16], Cable Number [0, 15].)
      */
-    MIDIInputElementCC(const MIDICNChannelAddress &address)
+    MIDIInputElementCC(const MIDIAddress &address)
         : MIDIInputElement{address} {
         GUARD_LIST_LOCK;
         elements.append(this);

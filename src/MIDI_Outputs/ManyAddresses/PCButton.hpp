@@ -45,7 +45,7 @@ class PCButton
      *          The MIDI sender to use.
      */
     PCButton(const Bank<N> &bank, pin_t pin,
-             const Array<MIDICNChannelAddress, N> &addresses,
+             const Array<MIDIAddress, N> &addresses,
              const ProgramChangeSender &sender = {})
         : MIDIButton<ManyAddresses<N>, ProgramChangeSender>{
               {bank, addresses},

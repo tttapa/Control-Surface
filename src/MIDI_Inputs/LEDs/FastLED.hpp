@@ -153,7 +153,7 @@ class NoteRangeFastLED
      * @param   colormapper 
      *          Optional initialization for the color mapper.
      */
-    NoteRangeFastLED(Array<CRGB, RangeLen> &leds, MIDICNChannelAddress address,
+    NoteRangeFastLED(Array<CRGB, RangeLen> &leds, MIDIAddress address,
                      const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementNote, RangeLen,
                              NoteCCFastLEDCallback<ColorMapper>>{
@@ -177,7 +177,7 @@ class NoteRangeFastLED
      * @param   colormapper 
      *          Optional initialization for the color mapper.
      */
-    NoteRangeFastLED(CRGB *leds, MIDICNChannelAddress address,
+    NoteRangeFastLED(CRGB *leds, MIDIAddress address,
                      const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementNote, RangeLen,
                              NoteCCFastLEDCallback<ColorMapper>>{
@@ -202,7 +202,7 @@ class NoteValueFastLED
     : public GenericNoteCCRange<MIDIInputElementNote, 1,
                                 NoteCCFastLEDCallback<ColorMapper>> {
   public:
-    NoteValueFastLED(CRGB &led, MIDICNChannelAddress address,
+    NoteValueFastLED(CRGB &led, MIDIAddress address,
                      const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementNote, 1,
                              NoteCCFastLEDCallback<ColorMapper>>{
@@ -224,7 +224,7 @@ class CCRangeFastLED
                                 NoteCCFastLEDCallback<ColorMapper>> {
 
   public:
-    CCRangeFastLED(Array<CRGB, RangeLen> &leds, MIDICNChannelAddress address,
+    CCRangeFastLED(Array<CRGB, RangeLen> &leds, MIDIAddress address,
                    const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementCC, RangeLen,
                              NoteCCFastLEDCallback<ColorMapper>>{
@@ -232,7 +232,7 @@ class CCRangeFastLED
               {leds.data, colormapper},
           } {}
 
-    CCRangeFastLED(CRGB *leds, MIDICNChannelAddress address,
+    CCRangeFastLED(CRGB *leds, MIDIAddress address,
                    const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementCC, RangeLen,
                              NoteCCFastLEDCallback<ColorMapper>>{
@@ -257,7 +257,7 @@ class CCValueFastLED
     : public GenericNoteCCRange<MIDIInputElementCC, 1,
                                 NoteCCFastLEDCallback<ColorMapper>> {
   public:
-    CCValueFastLED(CRGB &led, MIDICNChannelAddress address,
+    CCValueFastLED(CRGB &led, MIDIAddress address,
                    const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementCC, 1,
                              NoteCCFastLEDCallback<ColorMapper>>{
@@ -287,7 +287,7 @@ class NoteRangeFastLED
                                 NoteCCFastLEDCallback<ColorMapper>> {
   public:
     NoteRangeFastLED(BankConfig<BankSize> config, Array<CRGB, RangeLen> &leds,
-                     MIDICNChannelAddress address,
+                     MIDIAddress address,
                      const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementNote, RangeLen, BankSize,
                              NoteCCFastLEDCallback<ColorMapper>>{
@@ -297,7 +297,7 @@ class NoteRangeFastLED
           } {}
 
     NoteRangeFastLED(BankConfig<BankSize> config, CRGB *leds,
-                     MIDICNChannelAddress address,
+                     MIDIAddress address,
                      const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementNote, RangeLen, BankSize,
                              NoteCCFastLEDCallback<ColorMapper>>{
@@ -324,7 +324,7 @@ class NoteValueFastLED
                                 NoteCCFastLEDCallback<ColorMapper>> {
   public:
     NoteValueFastLED(BankConfig<BankSize> config, CRGB &led,
-                     MIDICNChannelAddress address,
+                     MIDIAddress address,
                      const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementNote, 1, BankSize,
                              NoteCCFastLEDCallback<ColorMapper>>{
@@ -348,7 +348,7 @@ class CCRangeFastLED
                                 NoteCCFastLEDCallback<ColorMapper>> {
   public:
     CCRangeFastLED(BankConfig<BankSize> config, Array<CRGB, RangeLen> &leds,
-                   MIDICNChannelAddress address,
+                   MIDIAddress address,
                    const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementCC, RangeLen, BankSize,
                              NoteCCFastLEDCallback<ColorMapper>>{
@@ -358,7 +358,7 @@ class CCRangeFastLED
           } {}
 
     CCRangeFastLED(BankConfig<BankSize> config, CRGB *leds,
-                   MIDICNChannelAddress address,
+                   MIDIAddress address,
                    const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementCC, RangeLen, BankSize,
                              NoteCCFastLEDCallback<ColorMapper>>{
@@ -385,7 +385,7 @@ class CCValueFastLED
                                 NoteCCFastLEDCallback<ColorMapper>> {
   public:
     CCValueFastLED(BankConfig<BankSize> config, CRGB &led,
-                   MIDICNChannelAddress address,
+                   MIDIAddress address,
                    const ColorMapper &colormapper = {})
         : GenericNoteCCRange<MIDIInputElementCC, 1, BankSize,
                              NoteCCFastLEDCallback<ColorMapper>>{

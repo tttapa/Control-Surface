@@ -20,11 +20,14 @@ struct NormalUpdatable {};
  * 
  * All instances of this class are kept in a linked list, so it's easy to 
  * iterate over all of them to update them.
+ * 
+ * @nosubgrouping
  */
 template <class T = NormalUpdatable>
 class Updatable : public DoublyLinkable<Updatable<T>> {
   protected:
-    /// Create an Updatabe and add it to the linked list of instances.
+    /// Constructor: create an Updatabe and add it to the linked list of 
+    /// instances.
     Updatable() { updatables.append(this); }
 
   public:
@@ -34,11 +37,34 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
             updatables.remove(this);
     }
 
-    /// Update this updatable.
-    virtual void update() = 0;
+    /// @name Main initialization and updating methods
+    /// @{
 
     /// Initialize this updatable.
     virtual void begin() = 0;
+
+    /// Update this updatable.
+    virtual void update() = 0;
+
+    /// Begin all enabled instances of this class
+    /// @see    begin()
+    static void beginAll() {
+        for (Updatable &el : updatables)
+            el.begin();
+    }
+
+    /// Update all enabled instances of this class
+    /// @see    update()
+    static void updateAll() {
+        for (Updatable &el : updatables)
+            el.update();
+    }
+
+    /// @}
+
+    public:
+    /// @name Enabling and disabling updatables
+    /// @{
 
     /// Enable this updatable: insert it into the linked list of instances,
     /// so it gets updated automatically
@@ -68,20 +94,6 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
      */
     bool isEnabled() { return updatables.couldContain(this); }
 
-    /// Begin all enabled instances of this class
-    /// @see    begin()
-    static void beginAll() {
-        for (Updatable &el : updatables)
-            el.begin();
-    }
-
-    /// Update all enabled instances of this class
-    /// @see    update()
-    static void updateAll() {
-        for (Updatable &el : updatables)
-            el.update();
-    }
-
     static void enable(Updatable *element) { element->enable(); }
 
     static void enable(Updatable &element) { element.enable(); }
@@ -102,7 +114,9 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
             disable(el);
     }
 
-  private:
+    /// @}
+
+  protected:
     static DoublyLinkedList<Updatable<T>> updatables;
 };
 

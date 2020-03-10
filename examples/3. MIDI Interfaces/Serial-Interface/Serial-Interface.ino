@@ -57,7 +57,7 @@ NoteValueLED led = {
 };
 
 void setup() {
-  Control_Surface.begin(); // Initialize Control Surface
+  Control_Surface.begin(); // Initialize the Control Surface
 }
 
 void loop() {

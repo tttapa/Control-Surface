@@ -10,17 +10,17 @@ BEGIN_CS_NAMESPACE
 template <setting_t N>
 class ProgramChanger : public Selectable<N> {
   public:
-    ProgramChanger(const Array<uint8_t, N> &programs, MIDICNChannel channelCN)
+    ProgramChanger(const Array<uint8_t, N> &programs, MIDIChannelCN channelCN)
         : programs(programs), channelCN(channelCN) {}
 
     void select(setting_t setting) override {
         setting = this->validateSetting(setting);
-        Control_Surface.MIDI().sendPC(channelCN, programs[setting]);
+        Control_Surface.sendPC(channelCN, programs[setting]);
     }
 
   private:
     const Array<uint8_t, N> programs;
-    const MIDICNChannel channelCN;
+    const MIDIChannelCN channelCN;
 };
 
 END_CS_NAMESPACE

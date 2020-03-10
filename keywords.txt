@@ -780,3 +780,46 @@ Telephone_Ring	LITERAL1
 Helicopter	LITERAL1
 Applause	LITERAL1
 Gunshot	LITERAL1
+
+# MIDI_Interfaces
+#################
+
+MIDI_Interface	KEYWORD1
+StreamMIDI_Interface	KEYWORD1
+SerialMIDI_Interface	KEYWORD1
+HardwareSerialMIDI_Interface	KEYWORD1
+USBSerialMIDI_Interface	KEYWORD1
+USBMIDI_Interface	KEYWORD1
+StreamDebugMIDI_Interface	KEYWORD1
+SerialDebugMIDI_Interface	KEYWORD1
+HardwareSerialDebugMIDI_Interface	KEYWORD1
+USBDebugMIDI_Interface	KEYWORD1
+SoftwareSerialDebugMIDI_Interface	KEYWORD1
+HairlessMIDI_Interface	KEYWORD1
+MIDI_Callbacks	KEYWORD1
+SysExMessage	KEYWORD1
+
+begin	KEYWORD2
+update	KEYWORD2
+send	KEYWORD2
+sendOnCable	KEYWORD2
+sendNoteOn	KEYWORD2
+sendNoteOff	KEYWORD2
+sendKP	KEYWORD2
+sendCC	KEYWORD2
+sendPC	KEYWORD2
+sendCP	KEYWORD2
+sendPB	KEYWORD2
+getDefault	KEYWORD2
+setAsDefault	KEYWORD2
+setCallbacks	KEYWORD2
+getParser	KEYWORD2
+getChannelMessage	KEYWORD2
+getSysExMessage	KEYWORD2
+getCN	KEYWORD2
+onChannelMessage	KEYWORD2
+onSysExMessage	KEYWORD2
+onRealtimeMessage	KEYWORD2
+
+MIDIChannelCN	KEYWORD1
+MIDIAddress	KEYWORD1

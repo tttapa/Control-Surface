@@ -77,7 +77,7 @@ struct VUEmptyCallback {
 template <uint8_t NumValues, class Callback>
 class VU_Base : public MIDIInputElementChannelPressure, public IVU {
   protected:
-    VU_Base(uint8_t track, const MIDICNChannel &channelCN,
+    VU_Base(uint8_t track, const MIDIChannelCN &channelCN,
             unsigned int decayTime, const Callback &callback)
         : MIDIInputElementChannelPressure{{track - 1, channelCN}}, IVU(12),
           decayTime(decayTime), callback(callback) {}
@@ -108,7 +108,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
   private:
     /// Called when an incoming MIDI message matches this element
     bool updateImpl(const ChannelMessageMatcher &midimsg,
-                    const MIDICNChannelAddress &target) override {
+                    const MIDIAddress &target) override {
         uint8_t data = midimsg.data1 & 0x0F;
         uint8_t index = getBankIndex(target);
         switch (data) {
@@ -123,7 +123,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
 
     /// The address of the VU meter is the high nibble of the first (and only)
     /// data byte.
-    MIDICNChannelAddress
+    MIDIAddress
     getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {
             int8_t(midimsg.data1 >> 4),
@@ -142,7 +142,7 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     virtual uint8_t getSelection() const { return 0; }
 
     /// Get the bank index from a MIDI address
-    virtual setting_t getBankIndex(const MIDICNChannelAddress &target) const {
+    virtual setting_t getBankIndex(const MIDIAddress &target) const {
         (void)target;
         return 0;
     }
@@ -202,7 +202,7 @@ class GenericVU : public VU_Base<1, Callback> {
      *          The callback object that is update when the value changes.
      *          Used for displaying the value on a range of LEDs etc.
      */
-    GenericVU(uint8_t track, const MIDICNChannel &channelCN,
+    GenericVU(uint8_t track, const MIDIChannelCN &channelCN,
               unsigned int decayTime, const Callback &callback)
         : VU_Base<1, Callback>{
               track,
@@ -238,7 +238,7 @@ class VU : public GenericVU<> {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(uint8_t track, const MIDICNChannel &channelCN,
+    VU(uint8_t track, const MIDIChannelCN &channelCN,
        unsigned int decayTime = VUDecay::Default)
         : GenericVU<>{
               track,
@@ -311,7 +311,7 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
      *          Used for displaying the value on a range of LEDs etc.
      */
     GenericVU(const BankConfig<NumBanks> &config, uint8_t track,
-              const MIDICNChannel &channelCN, unsigned int decayTime,
+              const MIDIChannelCN &channelCN, unsigned int decayTime,
               const Callback &callback)
         : VU_Base<NumBanks, Callback>{
             track, 
@@ -326,13 +326,13 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
         return BankableMIDIInput<NumBanks>::getSelection();
     };
 
-    uint8_t getBankIndex(const MIDICNChannelAddress &target) const override {
+    uint8_t getBankIndex(const MIDIAddress &target) const override {
         return BankableMIDIInput<NumBanks>::getBankIndex(target, this->address);
     }
 
     /// Check if the address of the incoming MIDI message is in one of the banks
     /// of this element.
-    bool match(const MIDICNChannelAddress &target) const override {
+    bool match(const MIDIAddress &target) const override {
         return BankableMIDIInput<NumBanks>::matchBankable(target,
                                                           this->address);
     }
@@ -372,7 +372,7 @@ class VU : public GenericVU<NumBanks> {
      *          the decay.
      */
     VU(const BankConfig<NumBanks> &config, uint8_t track,
-       const MIDICNChannel &channelCN,
+       const MIDIChannelCN &channelCN,
        unsigned int decayTime = VUDecay::Default)
         : GenericVU<NumBanks>{
               config, track, channelCN, decayTime, {},

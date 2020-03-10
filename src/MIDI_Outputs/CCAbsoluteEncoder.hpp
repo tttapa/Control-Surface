@@ -48,7 +48,7 @@ class CCAbsoluteEncoder : public MIDIAbsoluteEncoder<ContinuousCCSender> {
      *          The MIDI sender to use.
      */
     CCAbsoluteEncoder(const EncoderPinList &pins,
-                      const MIDICNChannelAddress &address,
+                      const MIDIAddress &address,
                       int16_t multiplier = 1, uint8_t pulsesPerStep = 4,
                       const ContinuousCCSender &sender = {})
         : MIDIAbsoluteEncoder(pins, address, multiplier, pulsesPerStep,
