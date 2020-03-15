@@ -21,15 +21,44 @@ class SingleAddress : public BankableMIDIOutput {
     MIDIAddress address;
 };
 
+template <uint8_t N>
+class SingleAddressMultipleBanks {
+  public:
+    SingleAddressMultipleBanks(const Array<BankableMIDIOutput, N> &banks,
+                               MIDIAddress address)
+        : banks{banks}, address{address} {}
+
+    MIDIAddress getBaseAddress() const { return address; }
+
+    MIDIAddress getActiveAddress() const {
+        auto address = getBaseAddress();
+        for (const BankableMIDIOutput &bank : banks)
+            address += bank.getAddressOffset();
+        return address;
+    }
+
+    void lock() {
+        for (BankableMIDIOutput &bank : banks)
+            bank.lock();
+    }
+
+    void unlock() {
+        for (BankableMIDIOutput &bank : banks)
+            bank.unlock();
+    }
+
+  private:
+    Array<BankableMIDIOutput, N> banks;
+    MIDIAddress address;
+};
+
 class TwoSingleAddresses : public BankableMIDIOutput {
   public:
     TwoSingleAddresses(OutputBankConfig config,
                        const Array<MIDIAddress, 2> &addresses)
         : BankableMIDIOutput{config}, addresses(addresses) {}
 
-    MIDIAddress getBaseAddress(uint8_t i) const {
-        return addresses[i];
-    }
+    MIDIAddress getBaseAddress(uint8_t i) const { return addresses[i]; }
 
     MIDIAddress getActiveAddress(uint8_t i) const {
         return getBaseAddress(i) + getAddressOffset();
@@ -83,9 +112,7 @@ class ManyAddresses : public ManyAddressesMIDIOutput {
                   const Array<MIDIAddress, NumBanks> &addresses)
         : ManyAddressesMIDIOutput{bank}, addresses{addresses} {}
 
-    MIDIAddress getActiveAddress() const {
-        return addresses[getSelection()];
-    }
+    MIDIAddress getActiveAddress() const { return addresses[getSelection()]; }
 
   private:
     Array<MIDIAddress, NumBanks> addresses;
@@ -98,9 +125,8 @@ class ManyAddresses : public ManyAddressesMIDIOutput {
 template <uint8_t NumBanks>
 class TwoManyAddresses : public BankableMIDIOutput {
   public:
-    TwoManyAddresses(
-        OutputBankConfig config,
-        const Array2D<MIDIAddress, 2, NumBanks> &addresses)
+    TwoManyAddresses(OutputBankConfig config,
+                     const Array2D<MIDIAddress, 2, NumBanks> &addresses)
         : BankableMIDIOutput{config}, addresses{addresses} {}
 
     MIDIAddress getActiveAddress(uint8_t i) const {
