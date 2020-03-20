@@ -76,6 +76,7 @@
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/CCAbsoluteEncoder.hpp>
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/PBAbsoluteEncoder.hpp>
 #endif
 

@@ -7,39 +7,41 @@
 BEGIN_CS_NAMESPACE
 
 namespace Bankable {
+namespace ManyAddresses {
 
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **quadrature
  *          (rotary) encoder** and send out relative MIDI **Control Change**
  *          events.
  * 
- * This version can be banked.
+ * This version can be banked using an arbitrary list of alternative
+ * addresses.
+ *          
+ * @tparam  N
+ *          The number of variants/alternative addresses the element has.
  *
- * @note    To use this class, include the [PJRC Encoder library]
- *          (https://github.com/PaulStoffregen/Encoder) before the
- *          Control-Surface library.
- *
- * @ingroup BankableMIDIOutputElements
+ * @ingroup ManyAddressesMIDIOutputElements
  */
-class CCRotaryEncoder : public MIDIRotaryEncoder<SingleAddress, RelativeCCSender> {
+template <setting_t N>
+class CCRotaryEncoder
+    : public MIDIRotaryEncoder<ManyAddresses<N>, RelativeCCSender> {
   public:
     /**
      * @brief   Construct a new Bankable CCRotaryEncoder object with the given 
      *          pins, controller, channel, speed factor, and number of pulses
      *          per step.
      * 
-     * @param   config
-     *          The bank configuration to use: the bank to add this element to,
-     *          and whether to change the address, channel or cable number.
+     * @param   bank
+     *          The bank that selects the address to use.
      * @param   pins
      *          A list of the two pins connected to the A and B outputs of the
      *          encoder.  
      *          The internal pull-up resistors will be enabled by the Encoder
      *          library.
-     * @param   address
-     *          The MIDI address containing the controller number [0, 119], 
-     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
-     *          [0, 15].
+     * @param   addresses
+     *          The list of MIDI addresses containing the controller number 
+     *          [0, 119], channel [CHANNEL_1, CHANNEL_16], and optional cable 
+     *          number [0, 15].
      * @param   speedMultiply
      *          A constant factor to increase the speed of the rotary encoder.
      *          The difference in position will just be multiplied by this 
@@ -55,24 +57,26 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<SingleAddress, RelativeCCSender
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCRotaryEncoder(const OutputBankConfig &config, const EncoderPinList &pins,
-                    const MIDIAddress &address,
+    CCRotaryEncoder(const Bank<N> &bank, const EncoderPinList &pins,
+                    const Array<MIDIAddress, N> &addresses,
                     int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4,
                     const RelativeCCSender &sender = {})
-        : MIDIRotaryEncoder({config, address}, pins, speedMultiply,
-                            pulsesPerStep, sender) {}
+        : MIDIRotaryEncoder<ManyAddresses<N>, RelativeCCSender>(
+              {bank, addresses}, pins, speedMultiply, pulsesPerStep, sender) {}
 
 // For tests only (PJRC Encoder library's copy constructor doesn't work)
 #ifndef ARDUINO
-    CCRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
-                    const MIDIAddress &address,
+    CCRotaryEncoder(const Bank<N> &bank, const Encoder &encoder,
+                    const Array<MIDIAddress, N> &addresses,
                     int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4,
                     const RelativeCCSender &sender = {})
-        : MIDIRotaryEncoder({config, address}, encoder, speedMultiply,
-                            pulsesPerStep, sender) {}
+        : MIDIRotaryEncoder<ManyAddresses<N>, RelativeCCSender>(
+              {bank, addresses}, encoder, speedMultiply, pulsesPerStep,
+              sender) {}
 #endif
 };
 
+} // namespace ManyAddresses
 } // namespace Bankable
 
 END_CS_NAMESPACE

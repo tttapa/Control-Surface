@@ -19,30 +19,28 @@ namespace Bankable {
  * @brief   An abstract class for rotary encoders that send MIDI events and that
  *          can be added to a Bank.
  */
-template <class Sender>
-class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
+template <class BankAddress, class Sender>
+class MIDIRotaryEncoder : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIRotaryEncoder.
      *
      * @todo    Documentation
      */
-    MIDIRotaryEncoder(const OutputBankConfig &config,
+    MIDIRotaryEncoder(const BankAddress &bankAddress,
                       const EncoderPinList &pins,
-                      const MIDIAddress &address,
                       uint8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
-        : BankableMIDIOutput(config), encoder{pins.A, pins.B}, address(address),
+        : address(bankAddress), encoder{pins.A, pins.B}, 
           speedMultiply(speedMultiply),
           pulsesPerStep(pulsesPerStep), sender(sender) {}
 
 // For tests only
 #ifndef ARDUINO
-    MIDIRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
-                      const MIDIAddress &address,
+    MIDIRotaryEncoder(const BankAddress &bankAddress, const Encoder &encoder,
                       uint8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
-        : BankableMIDIOutput(config), encoder{encoder}, address(address),
+        : address(bankAddress), encoder{encoder}, 
           speedMultiply(speedMultiply),
           pulsesPerStep(pulsesPerStep), sender(sender) {}
 #endif
@@ -50,19 +48,18 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
   public:
     void begin() final override {}
     void update() final override {
-        MIDIAddress sendAddress = address + getAddressOffset();
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         // I could do the division inside of the if statement for performance
         if (difference) {
-            sender.send(difference * speedMultiply, sendAddress);
+            sender.send(difference * speedMultiply, address.getActiveAddress());
             previousPosition += difference * pulsesPerStep;
         }
     }
 
   private:
+    BankAddress address;
     Encoder encoder;
-    const MIDIAddress address;
     const uint8_t speedMultiply;
     const uint8_t pulsesPerStep;
     long previousPosition = 0;
