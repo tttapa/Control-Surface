@@ -58,8 +58,10 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
 set(CMAKE_CXX_FLAGS_DEBUG "-ggdb3 -O0")
 set(CMAKE_C_FLAGS_DEBUG   "-ggdb3 -O0")
 
-set(CMAKE_CXX_FLAGS_ASAN "-g3 -O0 -fsanitize=address")
-set(CMAKE_C_FLAGS_ASAN   "-g3 -O0 -fsanitize=address")
+set(CMAKE_CXX_FLAGS_ASAN "-g3 -O0 \
+    -fsanitize=address,leak,undefined,pointer-compare,pointer-subtract")
+set(CMAKE_C_FLAGS_ASAN   "-g3 -O0 \
+    -fsanitize=address,leak,undefined,pointer-compare,pointer-subtract")
 
 set(CMAKE_CXX_FLAGS_RELEASE "-Os")
 set(CMAKE_C_FLAGS_RELEASE   "-Os")

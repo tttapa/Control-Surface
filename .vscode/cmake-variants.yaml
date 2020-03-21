@@ -1,0 +1,23 @@
+buildType:
+    default: debug
+    choices:
+      debug:
+        short: Debug
+        long: Debug
+        buildType: Debug
+      release:
+        short: Release
+        long: Release
+        buildType: Release
+      asan:
+        short: Asan
+        long: Address Sanitizer
+        buildType: Asan
+      relwithdebinfo:
+        short: RelWithDebInfo 
+        long: Release with Debug Information
+        buildType: RelWithDebInfo
+      coverage:
+        short: Coverage 
+        long: Coverage Information
+        buildType: Coverage
