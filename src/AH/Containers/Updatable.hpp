@@ -126,6 +126,7 @@ struct NormalUpdatable {};
  */
 template <class T = NormalUpdatable>
 class Updatable : public UpdatableCRTP<Updatable<T>> {
+  public:
     /// @name Main initialization and updating methods
     /// @{
 
