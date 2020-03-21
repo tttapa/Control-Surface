@@ -91,9 +91,8 @@ AlwaysBreakTemplateDeclarations: true
 PenaltyReturnTypeOnItsOwnLine: 60
 PointerAlignment: Right
 RawStringFormats: 
-  - Delimiter:       pb
-    Language:        TextProto
-    BasedOnStyle:    google
+  - Language:        TextProto
+  - BasedOnStyle:    google
 ReflowComments:  false
 SortIncludes:    true
 SortUsingDeclarations: true
