@@ -48,7 +48,7 @@ class UpdatableCRTP : public DoublyLinkable<UpdatableCRTP<Derived>> {
     static void applyToAll(void (Derived::*method)(Args &&...),
                            Args &&... args) {
         for (UpdatableCRTP &el : updatables)
-            CRTP_INST(Derived, el).*method(std::forward<Args>(args)...);
+            (CRTP_INST(Derived, el).*method)(std::forward<Args>(args)...);
     }
 
     /// @}
@@ -138,11 +138,11 @@ class Updatable : public UpdatableCRTP<Updatable<T>> {
 
     /// Begin all enabled instances of this class
     /// @see    begin()
-    static void beginAll() { applyToAll(&begin); }
+    static void beginAll() { Updatable::applyToAll(&Updatable::begin); }
 
     /// Update all enabled instances of this class
     /// @see    update()
-    static void updateAll() { applyToAll(&update); }
+    static void updateAll() { Updatable::applyToAll(&Updatable::update); }
 
     /// @}
 };
