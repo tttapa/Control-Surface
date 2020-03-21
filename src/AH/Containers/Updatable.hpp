@@ -45,7 +45,8 @@ class UpdatableCRTP : public DoublyLinkable<UpdatableCRTP<Derived>> {
     /// @{
 
     template <class... Args>
-    static void applyToAll(void (Derived::*method)(Args...), Args... args) {
+    static void applyToAll(void (Derived::*method)(Args &&...),
+                           Args &&... args) {
         for (UpdatableCRTP &el : updatables)
             CRTP_INST(Derived, el).*method(std::forward<Args>(args)...);
     }
