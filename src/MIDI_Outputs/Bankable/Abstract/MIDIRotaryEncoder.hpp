@@ -6,7 +6,7 @@
     "library. (#include <Encoder.h>)"
 #endif
 
-#include <Banks/BankableMIDIOutput.hpp>
+#include <Banks/BankableAddresses.hpp>
 #include <Def/Def.hpp>
 #include <Encoder.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>

@@ -18,14 +18,14 @@ namespace ManyAddresses {
  * This version can be banked using an arbitrary list of alternative
  * addresses.
  *          
- * @tparam  N
+ * @tparam  NumBanks
  *          The number of variants/alternative addresses the element has.
  *
  * @ingroup ManyAddressesMIDIOutputElements
  */
-template <setting_t N>
+template <setting_t NumBanks>
 class CCPotentiometer
-    : public Bankable::MIDIFilteredAnalogAddressable<ManyAddresses<N>,
+    : public Bankable::MIDIFilteredAnalogAddressable<ManyAddresses<NumBanks>,
                                                      ContinuousCCSender> {
   public:
     /** 
@@ -45,10 +45,11 @@ class CCPotentiometer
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    CCPotentiometer(const Bank<N> &bank, pin_t analogPin,
-                    const Array<MIDIAddress, N> &addresses,
+    CCPotentiometer(const Bank<NumBanks> &bank, pin_t analogPin,
+                    const Array<MIDIAddress, NumBanks> &addresses,
                     const ContinuousCCSender &sender = {})
-        : MIDIFilteredAnalogAddressable<ManyAddresses<N>, ContinuousCCSender>{
+        : MIDIFilteredAnalogAddressable<ManyAddresses<NumBanks>,
+                                        ContinuousCCSender>{
               {bank, addresses}, analogPin, sender} {}
 };
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include <AH/Hardware/Button.hpp>
-#include <Banks/BankableMIDIOutput.hpp>
-#include <Def/Def.hpp>
 #include <AH/Containers/Array.hpp>
+#include <AH/Hardware/Button.hpp>
+#include <Banks/BankableAddresses.hpp>
+#include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -19,21 +19,19 @@ namespace Bankable {
  *
  * @see     Button
  */
-template <class Sender, uint8_t NUMBER_OF_BUTTONS>
-class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
+template <class BankAddress, class Sender, uint8_t NumButtons>
+class MIDIButtons : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIButtons.
      *
      * @todo    Documentation
      */
-    MIDIButtons(const OutputBankConfig &config,
-                const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
-                const MIDIAddress &baseAddress,
+    MIDIButtons(const BankAddress &bankAddress,
+                const Array<AH::Button, NumButtons> &buttons,
                 const RelativeMIDIAddress &incrementAddress,
                 const Sender &sender)
-        : BankableMIDIOutput(config), buttons{buttons},
-          baseAddress(baseAddress),
+        : address(bankAddress), buttons{buttons},
           incrementAddress(incrementAddress), sender{sender} {}
 
   public:
@@ -42,23 +40,23 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
             button.begin();
     }
     void update() final override {
-        MIDIAddress address = baseAddress;
+        RelativeMIDIAddress offset = {0, 0, 0};
         for (auto &button : buttons) {
             AH::Button::State state = button.update();
             if (state == AH::Button::Falling) {
                 if (!activeButtons)
-                    lock(); // Don't allow changing of the bank setting
-                MIDIAddress sendAddress = address + getAddressOffset();
-                activeButtons++;
+                    address.lock(); // Don't allow changing of the bank setting
+                MIDIAddress sendAddress = address.getActiveAddress() + offset;
                 sender.sendOn(sendAddress);
+                activeButtons++;
             } else if (state == AH::Button::Rising) {
-                MIDIAddress sendAddress = address + getAddressOffset();
+                MIDIAddress sendAddress = address.getActiveAddress() + offset;
                 sender.sendOff(sendAddress);
                 activeButtons--;
                 if (!activeButtons)
-                    unlock();
+                    address.unlock();
             }
-            address += incrementAddress;
+            offset += incrementAddress;
         }
     }
 
@@ -74,9 +72,9 @@ class MIDIButtons : public BankableMIDIOutput, public MIDIOutputElement {
     }
 
   private:
-    Array<AH::Button, NUMBER_OF_BUTTONS> buttons;
-    const MIDIAddress baseAddress;
-    const RelativeMIDIAddress incrementAddress;
+    BankAddress address;
+    Array<AH::Button, NumButtons> buttons;
+    RelativeMIDIAddress incrementAddress;
     uint8_t activeButtons = 0;
 
   public:

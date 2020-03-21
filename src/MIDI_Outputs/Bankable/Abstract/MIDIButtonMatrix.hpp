@@ -2,7 +2,7 @@
 
 #include <AH/Containers/Array.hpp>
 #include <AH/Hardware/ButtonMatrix.hpp>
-#include <Banks/BankableMIDIOutput.hpp>
+#include <Banks/BankableAddresses.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 

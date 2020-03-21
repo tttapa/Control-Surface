@@ -17,14 +17,14 @@ namespace ManyAddresses {
  * This version can be banked using an arbitrary list of alternative
  * addresses.
  *          
- * @tparam  N
+ * @tparam  NumBanks
  *          The number of variants/alternative addresses the element has.
  *
  * @ingroup ManyAddressesMIDIOutputElements
  */
-template <setting_t N>
+template <setting_t NumBanks>
 class CCRotaryEncoder
-    : public MIDIRotaryEncoder<ManyAddresses<N>, RelativeCCSender> {
+    : public MIDIRotaryEncoder<ManyAddresses<NumBanks>, RelativeCCSender> {
   public:
     /**
      * @brief   Construct a new Bankable CCRotaryEncoder object with the given 
@@ -57,20 +57,20 @@ class CCRotaryEncoder
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCRotaryEncoder(const Bank<N> &bank, const EncoderPinList &pins,
-                    const Array<MIDIAddress, N> &addresses,
+    CCRotaryEncoder(const Bank<NumBanks> &bank, const EncoderPinList &pins,
+                    const Array<MIDIAddress, NumBanks> &addresses,
                     int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4,
                     const RelativeCCSender &sender = {})
-        : MIDIRotaryEncoder<ManyAddresses<N>, RelativeCCSender>(
+        : MIDIRotaryEncoder<ManyAddresses<NumBanks>, RelativeCCSender>(
               {bank, addresses}, pins, speedMultiply, pulsesPerStep, sender) {}
 
 // For tests only (PJRC Encoder library's copy constructor doesn't work)
 #ifndef ARDUINO
-    CCRotaryEncoder(const Bank<N> &bank, const Encoder &encoder,
-                    const Array<MIDIAddress, N> &addresses,
+    CCRotaryEncoder(const Bank<NumBanks> &bank, const Encoder &encoder,
+                    const Array<MIDIAddress, NumBanks> &addresses,
                     int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4,
                     const RelativeCCSender &sender = {})
-        : MIDIRotaryEncoder<ManyAddresses<N>, RelativeCCSender>(
+        : MIDIRotaryEncoder<ManyAddresses<NumBanks>, RelativeCCSender>(
               {bank, addresses}, encoder, speedMultiply, pulsesPerStep,
               sender) {}
 #endif

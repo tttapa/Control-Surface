@@ -19,14 +19,14 @@ namespace ManyAddresses {
  * This version can be banked using an arbitrary list of alternative
  * addresses.
  *          
- * @tparam  N
+ * @tparam  NumBanks
  *          The number of variants/alternative addresses the element has.
  *
  * @ingroup ManyAddressesMIDIOutputElements
  */
-template <setting_t N>
+template <setting_t NumBanks>
 class CCButton
-    : public Bankable::MIDIButton<ManyAddresses<N>, DigitalCCSender> {
+    : public Bankable::MIDIButton<ManyAddresses<NumBanks>, DigitalCCSender> {
   public:
     /**
      * @brief   Create a new Bankable CCButton object with the given bank 
@@ -46,10 +46,10 @@ class CCButton
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    CCButton(const Bank<N> &bank, pin_t pin,
-             const Array<MIDIAddress, N> &addresses,
+    CCButton(const Bank<NumBanks> &bank, pin_t pin,
+             const Array<MIDIAddress, NumBanks> &addresses,
              const DigitalCCSender &sender = {})
-        : MIDIButton<ManyAddresses<N>, DigitalCCSender>{
+        : MIDIButton<ManyAddresses<NumBanks>, DigitalCCSender>{
               {bank, addresses}, pin, sender} {}
 };
 

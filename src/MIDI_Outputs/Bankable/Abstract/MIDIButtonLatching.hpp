@@ -1,7 +1,7 @@
 #pragma once
 
 #include <AH/Hardware/Button.hpp>
-#include <Banks/BankableMIDIOutput.hpp>
+#include <Banks/BankableAddresses.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 

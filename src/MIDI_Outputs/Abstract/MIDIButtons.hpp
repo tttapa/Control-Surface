@@ -13,7 +13,7 @@ BEGIN_CS_NAMESPACE
  *
  * @see     Button
  */
-template <class Sender, uint8_t NUMBER_OF_BUTTONS>
+template <class Sender, uint8_t NumButtons>
 class MIDIButtons : public MIDIOutputElement {
   protected:
     /**
@@ -21,7 +21,7 @@ class MIDIButtons : public MIDIOutputElement {
      *
      * @todo    Documentation
      */
-    MIDIButtons(const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
+    MIDIButtons(const Array<AH::Button, NumButtons> &buttons,
                 const MIDIAddress &baseAddress,
                 const RelativeMIDIAddress &incrementAddress,
                 const Sender &sender)
@@ -58,7 +58,7 @@ class MIDIButtons : public MIDIOutputElement {
 #endif
 
   private:
-    Array<AH::Button, NUMBER_OF_BUTTONS> buttons;
+    Array<AH::Button, NumButtons> buttons;
     const MIDIAddress baseAddress;
     const RelativeMIDIAddress incrementAddress;
 

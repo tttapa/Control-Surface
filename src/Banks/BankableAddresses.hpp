@@ -8,7 +8,7 @@
 
 BEGIN_CS_NAMESPACE
 
-class BankableMIDIOutput_Base {
+class OutputBankableMIDIAddress_Base {
   protected:
     /**
      * @brief   Constructor.
@@ -16,7 +16,7 @@ class BankableMIDIOutput_Base {
      * @param   bank
      *          The bank to add this element to.
      */
-    BankableMIDIOutput_Base(const OutputBank &bank) : bank(bank) {}
+    OutputBankableMIDIAddress_Base(const OutputBank &bank) : bank(bank) {}
 
   public:
     /** 
@@ -49,7 +49,7 @@ class BankableMIDIOutput_Base {
     /**
      * @brief   Unlock the bank setting.
      * 
-     * After unlocking, `getSelection` will return the actual bank setting 
+     * After unlocking, @ref getSelection will return the actual bank setting 
      * again.
      */
     void unlock() { lockedSetting = UNLOCKED; }
@@ -77,33 +77,30 @@ class BankableMIDIOutput_Base {
  *          playing indefinitely), there must be a way to lock the bank setting
  *          while a note is playing. Then when it is no longer playing, the 
  *          bank setting is unlocked.
- * 
- * @todo    Create BankableMIDIElement class, make this inherit from it, as
- *          well as ManyAddressesMIDIOutput.
  */
-class BankableMIDIOutput : public BankableMIDIOutput_Base {
+class OutputBankableMIDIAddress : public OutputBankableMIDIAddress_Base {
   public:
     /**
-     * @brief   Create a new BankableMIDIOutput object.
+     * @brief   Create a new OutputBankableMIDIAddress object.
      * 
      * @param   bank
      *          The bank to add this element to.
      * @param   type
      *          What address type to change (address, channel or cable number).
      */
-    BankableMIDIOutput(const OutputBank &bank, BankType type)
-        : BankableMIDIOutput_Base{bank}, type(type) {}
+    OutputBankableMIDIAddress(const OutputBank &bank, BankType type)
+        : OutputBankableMIDIAddress_Base{bank}, type(type) {}
 
     /**
-     * @brief   Create a new BankableMIDIOutput object.
+     * @brief   Create a new OutputBankableMIDIAddress object.
      * 
      * @param   config
      *          The bank and address type to change.
      * 
-     * @see     BankableMIDIOutput::BankableMIDIOutput(Bank<N> &, BankType)
+     * @see     OutputBankableMIDIAddress::OutputBankableMIDIAddress(Bank<N> &, BankType)
      */
-    BankableMIDIOutput(const OutputBankConfig &config)
-        : BankableMIDIOutput(config.bank, config.type) {}
+    OutputBankableMIDIAddress(const OutputBankConfig &config)
+        : OutputBankableMIDIAddress(config.bank, config.type) {}
 
     /** 
      * @brief   Get the offset relative to the base address.
@@ -143,7 +140,7 @@ class BankableMIDIOutput : public BankableMIDIOutput_Base {
  *            @f$ \left[0, \mathrm{bank.getNumberOfBanks()}\right) \cap 
  *            \mathbb{N} @f$.
  */
-class ManyAddressesMIDIOutput : public BankableMIDIOutput_Base {
+class ManyAddresses_Base : public OutputBankableMIDIAddress_Base {
   public:
     /**
      * @brief   Constructor.
@@ -154,8 +151,8 @@ class ManyAddressesMIDIOutput : public BankableMIDIOutput_Base {
      *          The number of bank settings @p bank has.
      */
     template <uint8_t NumBanks>
-    ManyAddressesMIDIOutput(const Bank<NumBanks> &bank)
-        : BankableMIDIOutput_Base{bank} {}
+    ManyAddresses_Base(const Bank<NumBanks> &bank)
+        : OutputBankableMIDIAddress_Base{bank} {}
 };
 
 END_CS_NAMESPACE

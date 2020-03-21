@@ -39,9 +39,8 @@ class CCButtonMatrix
      * @brief   Create a new Bankable CCButtonMatrix object with the given pins,
      *          controller numbers and channel.
      * 
-     * @param   config
-     *          The bank configuration to use: the bank to add this element to,
-     *          and whether to change the address, channel or cable number.
+     * @param   bank
+     *          The bank to add this element to.
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
      *          matrix.  
@@ -63,14 +62,14 @@ class CCButtonMatrix
      *          The MIDI sender to use.
      */
     CCButtonMatrix(
-        const OutputBankConfig &config, const PinList<nb_rows> &rowPins,
+        const Bank<NumBanks> &bank, const PinList<nb_rows> &rowPins,
         const PinList<nb_cols> &colPins,
         const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &controllers,
         const Array<MIDIChannelCN, NumBanks> &channelCNs,
         const DigitalCCSender &sender = {})
         : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, nb_rows, nb_cols>,
                            DigitalCCSender, nb_rows, nb_cols>{
-              {config, controllers, channelCNs}, rowPins, colPins, sender} {}
+              {bank, controllers, channelCNs}, rowPins, colPins, sender} {}
 };
 
 } // namespace ManyAddresses

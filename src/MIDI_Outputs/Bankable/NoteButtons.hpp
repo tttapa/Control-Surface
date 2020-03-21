@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButtons.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
@@ -17,13 +18,14 @@ namespace Bankable {
  * The buttons are debounced in software.  
  * This version can be banked.
  * 
- * @tparam  NUMBER_OF_BUTTONS
+ * @tparam  NumButtons
  *          The number of buttons in the collection.
  *
  * @ingroup BankableMIDIOutputElements
  */
-template <uint8_t NUMBER_OF_BUTTONS>
-class NoteButtons : public MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS> {
+template <uint8_t NumButtons>
+class NoteButtons
+    : public MIDIButtons<SingleAddress, DigitalNoteSender, NumButtons> {
   public:
     /**
      * @brief   Create a new Bankable NoteButtons object with the given pins,
@@ -48,12 +50,15 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS> {
      *          The velocity of the MIDI Note events.
      */
     NoteButtons(const OutputBankConfig &config,
-                const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
+                const Array<AH::Button, NumButtons> &buttons,
                 const MIDIAddress &baseAddress,
                 const RelativeMIDIAddress &incrementAddress,
                 uint8_t velocity = 0x7F)
-        : MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS>{
-              config, buttons, baseAddress, incrementAddress, {velocity},
+        : MIDIButtons<SingleAddress, DigitalNoteSender, NumButtons>{
+              {config, baseAddress},
+              buttons,
+              incrementAddress,
+              {velocity},
           } {}
 
     /// Set the velocity of the MIDI Note events.

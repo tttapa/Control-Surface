@@ -15,13 +15,13 @@ BEGIN_CS_NAMESPACE
  * The buttons are debounced in software.  
  * This version cannot be banked.  
  *
- * @tparam  NUMBER_OF_BUTTONS
+ * @tparam  NumButtons
  *          The number of buttons in the collection.
  *
  * @ingroup MIDIOutputElements
  */
-template <uint8_t NUMBER_OF_BUTTONS>
-class CCButtons : public MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS> {
+template <uint8_t NumButtons>
+class CCButtons : public MIDIButtons<DigitalCCSender, NumButtons> {
   public:
     /**
      * @brief   Create a new CCButtons object with the given pins,
@@ -42,11 +42,11 @@ class CCButtons : public MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS> {
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButtons(const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
+    CCButtons(const Array<AH::Button, NumButtons> &buttons,
               const MIDIAddress &baseAddress,
               const RelativeMIDIAddress &incrementAddress,
               const DigitalCCSender &sender = {})
-        : MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS>(
+        : MIDIButtons<DigitalCCSender, NumButtons>(
               buttons, baseAddress, incrementAddress, sender) {}
 };
 

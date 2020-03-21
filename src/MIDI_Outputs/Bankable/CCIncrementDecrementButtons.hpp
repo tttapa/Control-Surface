@@ -19,7 +19,7 @@ namespace Bankable {
  * @ingroup BankableMIDIOutputElements
  */
 class CCIncrementDecrementButtons
-    : public MIDIIncrementDecrementButtons<TwoSingleAddresses, RelativeCCSender,
+    : public MIDIIncrementDecrementButtons<DualAddresses, RelativeCCSender,
                                            DigitalNoteSender> {
   public:
     /**
@@ -55,7 +55,7 @@ class CCIncrementDecrementButtons
                                 const MIDIAddress &resetNote = {},
                                 const RelativeCCSender &relativeSender = {},
                                 const DigitalNoteSender &resetSender = {})
-        : MIDIIncrementDecrementButtons<TwoSingleAddresses, RelativeCCSender,
+        : MIDIIncrementDecrementButtons<DualAddresses, RelativeCCSender,
                                         DigitalNoteSender>(
               {config, {address, resetNote}}, buttons, multiplier,
               relativeSender, resetSender) {}
