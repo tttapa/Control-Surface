@@ -35,13 +35,10 @@ class PCButton : public MIDIButton<SingleAddress, ProgramChangeSender> {
      *          The MIDI address containing the program number [0, 127], 
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
      *          [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
      */
     PCButton(const OutputBankConfig &config, pin_t pin,
-             const MIDIAddress &address,
-             const ProgramChangeSender &sender = {})
-        : MIDIButton({config, address}, pin, sender) {}
+             const MIDIAddress &address)
+        : MIDIButton({config, address}, pin, {}) {}
 };
 
 } // namespace Bankable

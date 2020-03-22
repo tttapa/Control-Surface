@@ -45,23 +45,16 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      *          Whereas a greater speedMultiplier factor will increase the 
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
-     * @param   sender
-     *          The MIDI sender to use.
      */
-    CCRotaryEncoder(const EncoderPinList &pins,
-                    const MIDIAddress &address,
-                    int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4,
-                    const RelativeCCSender &sender = {})
-        : MIDIRotaryEncoder(pins, address, speedMultiply, pulsesPerStep,
-                            sender) {}
+    CCRotaryEncoder(const EncoderPinList &pins, const MIDIAddress &address,
+                    int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
+        : MIDIRotaryEncoder(pins, address, speedMultiply, pulsesPerStep, {}) {}
 
 // For tests only (PJRC Encoder library's copy constructor doesn't work)
 #ifndef ARDUINO
-    CCRotaryEncoder(const Encoder &encoder, const MIDIAddress &address,
-                    int8_t speedMultiply, uint8_t pulsesPerStep,
-                    const RelativeCCSender &sender = {})
-        : MIDIRotaryEncoder(encoder, address, speedMultiply, pulsesPerStep,
-                            sender) {}
+    CCRotaryEncoder(const Encoder &enc, const MIDIAddress &address,
+                    int8_t speedMultiply, uint8_t pulsesPerStep)
+        : MIDIRotaryEncoder(enc, address, speedMultiply, pulsesPerStep, {}) {}
 #endif
 };
 

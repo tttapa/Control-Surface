@@ -33,12 +33,9 @@ class PBPotentiometer : public MIDIFilteredAnalog<PitchBendSender<10>> {
      * @param   address
      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
      *          Number [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
      */
-    PBPotentiometer(pin_t analogPin, const MIDIChannelCN &address = CHANNEL_1,
-                    const PitchBendSender<10> &sender = {})
-        : MIDIFilteredAnalog(analogPin, address, sender) {}
+    PBPotentiometer(pin_t analogPin, const MIDIChannelCN &address = CHANNEL_1)
+        : MIDIFilteredAnalog(analogPin, address, {}) {}
 };
 
 END_CS_NAMESPACE

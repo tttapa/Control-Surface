@@ -47,17 +47,11 @@ class PBPotentiometer
      * @param   addresses
      *          The list of MIDI channels [CHANNEL_1, CHANNEL_16] and optional 
      *          Cable Numbers [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
      */
     PBPotentiometer(const Bank<NumBanks> &bank, pin_t analogPin,
-                    const Array<MIDIChannelCN, NumBanks> &addresses,
-                    const PitchBendSender<10> &sender = {})
+                    const Array<MIDIChannelCN, NumBanks> &addresses)
         : MIDIFilteredAnalog<ManyAddresses<NumBanks>, PitchBendSender<10>>{
-              {bank, AH::copyAs<MIDIAddress>(addresses)},
-              analogPin,
-              sender,
-          } {}
+              {bank, AH::copyAs<MIDIAddress>(addresses)}, analogPin, {}} {}
 };
 
 } // namespace ManyAddresses

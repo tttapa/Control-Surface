@@ -40,13 +40,10 @@ class PBPotentiometer
      * @param   address
      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
      *          Number [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
      */
     PBPotentiometer(const OutputBankConfig &config, pin_t analogPin,
-                    const MIDIChannelCN &address,
-                    const PitchBendSender<10> &sender = {})
-        : MIDIFilteredAnalog{{config, address}, analogPin, sender} {}
+                    const MIDIChannelCN &address)
+        : MIDIFilteredAnalog{{config, address}, analogPin, {}} {}
 };
 
 } // namespace Bankable

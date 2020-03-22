@@ -21,7 +21,8 @@ namespace Bankable {
  *
  * @ingroup BankableMIDIOutputElements
  */
-class CCRotaryEncoder : public MIDIRotaryEncoder<SingleAddress, RelativeCCSender> {
+class CCRotaryEncoder
+    : public MIDIRotaryEncoder<SingleAddress, RelativeCCSender> {
   public:
     /**
      * @brief   Construct a new Bankable CCRotaryEncoder object with the given 
@@ -52,24 +53,20 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<SingleAddress, RelativeCCSender
      *          Whereas a greater speedMultiply factor will increase the 
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
-     * @param   sender
-     *          The MIDI sender to use.
      */
     CCRotaryEncoder(const OutputBankConfig &config, const EncoderPinList &pins,
-                    const MIDIAddress &address,
-                    int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4,
-                    const RelativeCCSender &sender = {})
+                    const MIDIAddress &address, int8_t speedMultiply = 1,
+                    uint8_t pulsesPerStep = 4)
         : MIDIRotaryEncoder({config, address}, pins, speedMultiply,
-                            pulsesPerStep, sender) {}
+                            pulsesPerStep, {}) {}
 
 // For tests only (PJRC Encoder library's copy constructor doesn't work)
 #ifndef ARDUINO
     CCRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
-                    const MIDIAddress &address,
-                    int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4,
-                    const RelativeCCSender &sender = {})
+                    const MIDIAddress &address, int8_t speedMultiply = 1,
+                    uint8_t pulsesPerStep = 4)
         : MIDIRotaryEncoder({config, address}, encoder, speedMultiply,
-                            pulsesPerStep, sender) {}
+                            pulsesPerStep, {}) {}
 #endif
 };
 
