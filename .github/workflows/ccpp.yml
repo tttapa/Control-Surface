@@ -11,9 +11,17 @@ jobs:
     - uses: actions/checkout@v1
     - name: Git Submodules
       run: git submodule update --init --recursive --depth 50
+    - name: Install GCC 9
+      run: |
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+        sudo apt update
+        sudo apt install gcc-9 g++-9
     - name: CMake
       run: cmake .. -DCMAKE_BUILD_TYPE=Asan
       working-directory: build
+      env:
+        CC: gcc-9
+        CXX: g++-9
     - name: Build
       run: make -j4
       working-directory: build
