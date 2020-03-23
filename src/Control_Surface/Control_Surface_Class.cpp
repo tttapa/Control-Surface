@@ -32,6 +32,7 @@ void Control_Surface_::begin() {
 
     FilteredAnalog<>::setupADC();
     ExtendedIOElement::beginAll();
+    Updatable<MIDI_Interface>::beginAll();
     DisplayInterface::beginAll(); // initialize all displays
     MIDIInputElementCC::beginAll();
     MIDIInputElementPC::beginAll();
@@ -42,7 +43,6 @@ void Control_Surface_::begin() {
     Updatable<Potentiometer>::beginAll();
     Updatable<MotorFader>::beginAll();
     Updatable<Display>::beginAll();
-    Updatable<MIDI_Interface>::beginAll();
     potentiometerTimer.begin();
     displayTimer.begin();
 }
