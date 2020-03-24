@@ -33,7 +33,7 @@ class NoteCCLED : public SimpleNoteCCValueCallback {
 
   private:
     PinList<NumLEDs> ledPins;
-    uint8_t threshold = 0x3F;
+    uint8_t threshold = 0x00;
 };
 
 /// Callback for Note or CC range or value input that displays the value to a
