@@ -16,7 +16,7 @@
 - **Filters**: Exponential Moving Average filters, Hysteresis.
 - **Math functions**: `min` and `max` functions instead of macros, functions
   for uniformly increasing the bit depth of signals, all C++ standard library 
-  functions.
+  functions, vectors, quaternions, Euler angles.
 - **Timing Utilities**: Blink Without Delay-style timers.
 - **C++ STL Implementation** (partial): Some useful parts of the C++ Standard
   Template Library, adapted to work on AVR Arduinos. Includes the 
