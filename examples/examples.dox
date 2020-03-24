@@ -368,6 +368,34 @@
  */
 
 /**
+ * @example   "1.MAX7219-Blink.ino"
+ * 
+ * 1.MAX7219-Blink
+ * ===============
+ *
+ * This example demonstrates the use of MAX7219 LED outputs as if they were just
+ * normal IO pins, using `digitalWrite`.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SS:   MAX7219 CS
+ *   - MOSI: MAX7219 DIN
+ *   - SCK:  MAX7219 CLK
+ * 
+ * Behavior
+ * --------
+ * 
+ * This sketch will blink the first and the last LEDs once a second, in an 
+ * alternating pattern.
+ * 
+ * Written by PieterP, 2020-03-24  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
  * @example   "1.SPI-Blink.ino"
  * 
  * 1.SPI-Blink
