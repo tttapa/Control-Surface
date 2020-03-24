@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['reverse_5fnode_5fiterator_527',['reverse_node_iterator',['../d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html',1,'DoublyLinkedList']]]
+  ['quaternion_569',['Quaternion',['../dc/dc7/structQuaternion.html',1,'']]]
 ];

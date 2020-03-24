@@ -1,17 +1,16 @@
 var searchData=
 [
-  ['uniqueptr_467',['UniquePtr',['../d0/ddd/classUniquePtr.html',1,'UniquePtr&lt; T &gt;'],['../d0/ddd/classUniquePtr.html#a644a16aac250619a3134a57e6348f1ef',1,'UniquePtr::UniquePtr()=default'],['../d0/ddd/classUniquePtr.html#a51f3581b2281c6a684d46d27bf8abaae',1,'UniquePtr::UniquePtr(T *p)'],['../d0/ddd/classUniquePtr.html#aaef2e17f579f60d2fed8437412bc1b09',1,'UniquePtr::UniquePtr(const UniquePtr &amp;)=delete'],['../d0/ddd/classUniquePtr.html#aa803d07d745f9c7d2639d289f21b97d6',1,'UniquePtr::UniquePtr(UniquePtr&lt; U &gt; &amp;&amp;r)']]],
-  ['uniqueptr_2ecpp_468',['UniquePtr.cpp',['../de/d47/UniquePtr_8cpp.html',1,'']]],
-  ['uniqueptr_2ehpp_469',['UniquePtr.hpp',['../de/d7e/UniquePtr_8hpp.html',1,'']]],
-  ['updatable_470',['Updatable',['../d5/de0/classUpdatable.html',1,'Updatable&lt; T &gt;'],['../d5/de0/classUpdatable.html#a87d2727bbd24a3064948a29b5e3bc79e',1,'Updatable::Updatable()']]],
-  ['updatable_2ecpp_471',['Updatable.cpp',['../d6/dea/Updatable_8cpp.html',1,'']]],
-  ['updatable_2ehpp_472',['Updatable.hpp',['../d4/d93/Updatable_8hpp.html',1,'']]],
-  ['updatables_473',['updatables',['../d5/de0/classUpdatable.html#a3e1d4cf193404475766f612eeab8f087',1,'Updatable']]],
-  ['update_474',['update',['../d5/de0/classUpdatable.html#a99b02345a8a15d3c5ea2844a2253f510',1,'Updatable::update()'],['../d2/dcb/classHysteresis.html#a131ea12643cc4dc7874f101f521f4324',1,'Hysteresis::update()'],['../d1/d19/classButton.html#a58595f333f45f8096d91bf42e8a760a2',1,'Button::update()'],['../d8/d6c/classButtonMatrix.html#ac5c54df7ed3b930268c8d7752c101725',1,'ButtonMatrix::update()'],['../d7/d8d/classAnalogMultiplex.html#a44137bb65de2396875934e48a6ee5099',1,'AnalogMultiplex::update()'],['../de/d4e/classExtendedIOElement.html#a99b02345a8a15d3c5ea2844a2253f510',1,'ExtendedIOElement::update()'],['../dc/d19/classMAX7219.html#a44137bb65de2396875934e48a6ee5099',1,'MAX7219::update()'],['../d1/d5c/classShiftRegisterOut.html#a44137bb65de2396875934e48a6ee5099',1,'ShiftRegisterOut::update()'],['../dd/d81/classSPIShiftRegisterOut.html#a44137bb65de2396875934e48a6ee5099',1,'SPIShiftRegisterOut::update()'],['../da/da7/classFilteredAnalog.html#aa2aac016e2bf7b5bd2b271786c2791aa',1,'FilteredAnalog::update()'],['../df/d38/classIncrementButton.html#ad3475e1e3dd2663470de0906a75ccf73',1,'IncrementButton::update()'],['../d5/d20/classIncrementDecrementButtons.html#ad3475e1e3dd2663470de0906a75ccf73',1,'IncrementDecrementButtons::update()']]],
-  ['updateall_475',['updateAll',['../d5/de0/classUpdatable.html#a44e05f733dace05adcf585b5a17be292',1,'Updatable']]],
-  ['updateimplementation_476',['updateImplementation',['../df/d38/classIncrementButton.html#aed6dd7ae138afdede444afa5832a1757',1,'IncrementButton::updateImplementation()'],['../d5/d20/classIncrementDecrementButtons.html#a53624594134ff1978bb74f6a9c0412fb',1,'IncrementDecrementButtons::updateImplementation()']]],
-  ['uppercase_477',['UPPERCASE',['../da/d69/PrintStream_8cpp.html#a6674af4819a4f85e8c40be5971746668a19d6b87b851ddfd4fdc4f182e2ae0617',1,'UPPERCASE():&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#ga2b44e6ada22b1b5a703617123ebd0598',1,'uppercase(Print &amp;printer):&#160;PrintStream.cpp'],['../d8/d4b/group__AH__PrintStream.html#ga2b44e6ada22b1b5a703617123ebd0598',1,'uppercase(Print &amp;printer):&#160;PrintStream.cpp']]],
-  ['use_5fah_5fnamespace_478',['USE_AH_NAMESPACE',['../dc/dc7/NamespaceSettings_8hpp.html#a00f163a3376fd194033495f415535986',1,'NamespaceSettings.hpp']]],
-  ['use_5fconstexpr_5farray_5fhelpers_479',['USE_CONSTEXPR_ARRAY_HELPERS',['../d5/db6/ArrayHelpers_8hpp.html#addd42f8d7a7cb2605e50325b9c54fefa',1,'ArrayHelpers.hpp']]],
-  ['using_5fah_5fnamespace_480',['USING_AH_NAMESPACE',['../dc/dc7/NamespaceSettings_8hpp.html#a652d295f60f5f72e47f545429e4e1acc',1,'NamespaceSettings.hpp']]]
+  ['timing_483',['Timing',['../d1/df1/group__AH__Timing.html',1,'']]],
+  ['teensyusbtypes_2ehpp_484',['TeensyUSBTypes.hpp',['../d9/d98/TeensyUSBTypes_8hpp.html',1,'']]],
+  ['timefunction_485',['timefunction',['../d1/dd0/MillisMicrosTimer_8hpp.html#a4086ab91003e2f23ab3d8d590d6f2fe3',1,'MillisMicrosTimer.hpp']]],
+  ['timer_486',['Timer',['../dc/dea/classTimer.html',1,'Timer&lt; time &gt;'],['../dc/dea/classTimer.html#a601e4fc3c3d5fa54634192a88819ad5a',1,'Timer::Timer()']]],
+  ['timing_2edox_487',['Timing.dox',['../d8/dd7/Timing_8dox.html',1,'']]],
+  ['tmp_5fhigh_488',['tmp_HIGH',['../dd/d39/namespacedetail.html#a5f03019b537b3981a51086f6e774144d',1,'detail']]],
+  ['tmp_5finput_489',['tmp_INPUT',['../dd/d39/namespacedetail.html#a190a0dff4123257d20d9ad5812a5fca1',1,'detail']]],
+  ['tmp_5finput_5fpullup_490',['tmp_INPUT_PULLUP',['../dd/d39/namespacedetail.html#a3ce67b061968e974bfb11c03a2f20e35',1,'detail']]],
+  ['tmp_5flow_491',['tmp_LOW',['../dd/d39/namespacedetail.html#a65199823d77f72589751ff25c57b256f',1,'detail']]],
+  ['tmp_5foutput_492',['tmp_OUTPUT',['../dd/d39/namespacedetail.html#a9a9567743828aaf2793ed72c92edf584',1,'detail']]],
+  ['todo_20list_493',['Todo List',['../dd/da0/todo.html',1,'']]],
+  ['togglemode_494',['toggleMode',['../d1/d3e/classDotBarDisplayLEDs.html#a2ffa1ba1cd260f6e8ffd484452c3bab7',1,'DotBarDisplayLEDs']]],
+  ['type_495',['type',['../d7/d6a/structArray.html#a834c467da58ea1d81821952d3c473b64',1,'Array']]]
 ];
