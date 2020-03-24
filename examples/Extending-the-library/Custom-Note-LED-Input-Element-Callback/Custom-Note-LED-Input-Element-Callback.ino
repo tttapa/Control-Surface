@@ -76,7 +76,7 @@ class CustomLEDCallback : public SimpleNoteCCValueCallback {
  private:
   pin_t ledPin;
   uint8_t lowBrightness;
-  const static uint8_t threshold = 0x3F;
+  const static uint8_t threshold = 0x00;
 };
 
 // Create a type alias fore      the MIDI Note Input Element that uses
