@@ -8,6 +8,15 @@
  * @brief   Mathematics helper functions. Min/max functions, functions to 
  *          uniformly increase the effective bid depth, etc.
  */
+/// @{
+
+/**
+ * @defgroup    math-types  Math Types
+ *              Vector and Quaternion types with the necessary operators and 
+ *              functions.
+ */
+
+/// @}
 
 /// @cond   !AH_MAIN_LIBRARY
 /// @}

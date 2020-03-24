@@ -1,4 +1,28 @@
+keyword1:
+  - Quaternion
+  - EulerAngles
+  - Vec2f
+  - Vec3f
+
 keyword2:
   - increaseBitDepth
   - min
   - max
+  - w
+  - x
+  - y
+  - z
+  - hamiltonianProduct
+  - conjugated
+  - normSquared
+  - norm
+  - normalize
+  - normalized
+  - rotate
+  - identity
+  - fromDirection
+  - fromXYAngle
+  - quat2eul
+  - eul2quat
+  - rad2deg
+  - deg2rad

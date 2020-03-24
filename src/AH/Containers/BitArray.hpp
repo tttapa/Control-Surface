@@ -80,7 +80,7 @@ class BitArray {
                       << byteIndex << F(", length is ") << getBufferLength()
                       << ')',
                   0xFFFF);
-            return getBufferLength() - 1;
+            return getBufferLength() - 1; // LCOV_EXCL_LINE
         }
         return byteIndex;
     }
