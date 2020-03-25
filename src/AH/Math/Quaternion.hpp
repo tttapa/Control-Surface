@@ -3,10 +3,11 @@
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
-#include <AH/Math/Degrees.hpp> // rad2deg()
-#include <AH/Math/Vector.hpp>  // Vec3f
-#include <AH/STL/cmath>        // std::sqrt
-#include <AH/STL/limits>       // std::numeric_limits
+#include <AH/Math/Degrees.hpp>   // rad2deg()
+#include <AH/Math/MinMaxFix.hpp> // std::min
+#include <AH/Math/Vector.hpp>    // Vec3f
+#include <AH/STL/cmath>          // std::sqrt
+#include <AH/STL/limits>         // std::numeric_limits
 
 #ifndef ARDUINO
 #include <iosfwd> // std::ostream
@@ -207,25 +208,38 @@ struct Quaternion {
          * ϑ can be found using |A×B| = |A||B|·sin(ϑ).
     	 */
 
-        // First check the edge case, where v ~= (0 0 1).
         float eps = std::numeric_limits<float>::epsilon();
-        if (std::abs(v.x) <= eps && std::abs(v.y) <= eps)
-            return Quaternion::identity();
+
+        // Ensure that the norm of v is not zero
+        float v_norm = v.norm();
+        if (v_norm <= eps)
+            return Quaternion(0, 0, 0, 0); // invalid zero quaternion
+
+        // Normalize the x and y components (only the sign of v.z matters now)
+        float x = v.x / v_norm;
+        float y = v.y / v_norm;
+
+        // Check the edge case, where v ≃ (0 0 ±1).
+        if (std::abs(x) <= eps && std::abs(y) <= eps)
+            return v.z > 0 ? Quaternion(1, 0, 0, 0) : Quaternion(0, 1, 0, 0);
 
         // Calculate the cross product and its norm.
-        Vec3f cross = {-v.y, v.x, 0};
-        float crossNorm = cross.norm();
+        // (z component is always zero)
+        Vec2f cross = {-y, x};
+        float crossNorm = min(cross.norm(), 1);
         cross /= crossNorm;
 
         // Calculate the angle ϑ.
-        float angle = std::asin(crossNorm / v.norm());
+        float angle = std::asin(crossNorm);
+        if (v.z < 0)
+            angle = M_PI - angle;
 
         // Calculate the resulting quaternion.
         return {
             std::cos(angle / 2),           //
             std::sin(angle / 2) * cross.x, //
             std::sin(angle / 2) * cross.y, //
-            std::sin(angle / 2) * cross.z, //
+            0,                             // = std::sin(angle / 2) * cross.z
         };
     }
 
