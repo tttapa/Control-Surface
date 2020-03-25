@@ -3,10 +3,11 @@
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
-#include <AH/Math/Degrees.hpp> // rad2deg()
-#include <AH/Math/Vector.hpp>  // Vec3f
-#include <AH/STL/cmath>        // std::sqrt
-#include <AH/STL/limits>       // std::numeric_limits
+#include <AH/Math/Degrees.hpp>   // rad2deg()
+#include <AH/Math/MinMaxFix.hpp> // std::min
+#include <AH/Math/Vector.hpp>    // Vec3f
+#include <AH/STL/cmath>          // std::sqrt
+#include <AH/STL/limits>         // std::numeric_limits
 
 #ifndef ARDUINO
 #include <iosfwd> // std::ostream
@@ -225,7 +226,7 @@ struct Quaternion {
         // Calculate the cross product and its norm.
         // (z component is always zero)
         Vec2f cross = {-y, x};
-        float crossNorm = cross.norm();
+        float crossNorm = min(cross.norm(), 1);
         cross /= crossNorm;
 
         // Calculate the angle ϑ.

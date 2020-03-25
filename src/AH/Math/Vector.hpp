@@ -108,7 +108,10 @@ struct Vec2f {
     /// Norm squared.
     float normSquared() const { return (*this) * (*this); }
     /// Norm.
-    float norm() const { return std::sqrt(normSquared()); }
+    float norm() const {
+        // return std::sqrt(normSquared()); // faster but less accurate
+        return std::hypot(x, y);
+    }
     /// Normalize this vector.
     Vec2f &normalize() { return *this /= norm(); }
     /// Normalize a copy of this vector (doesn't change the original vector).
@@ -218,7 +221,10 @@ struct Vec3f {
     float normSquared() const { return (*this) * (*this); }
 
     /// Norm.
-    float norm() const { return std::sqrt(normSquared()); }
+    float norm() const {
+        return std::sqrt(normSquared());
+        // return std::hypot(x, y, z);  // C++17
+    }
 
     /// Normalize this vector.
     Vec3f &normalize() { return *this /= norm(); }
