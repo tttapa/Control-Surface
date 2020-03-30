@@ -7,3 +7,4 @@ mega=arduino:avr:mega:cpu=atmega2560
 leonardo=arduino:avr:leonardo
 due=arduino:sam:arduino_due_x_dbg
 nano 33=arduino:samd:nano_33_iot
+nano every=arduino:megaavr:nona4809:mode=off

@@ -8,7 +8,7 @@ using namespace CS;
 
 TEST(NoteButtonLatching, pressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
 
     NoteButtonLatching button(2, {0x3C, CHANNEL_7, 0xC});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
@@ -49,7 +49,7 @@ TEST(NoteButtonLatching, pressAndRelease) {
 
 TEST(NoteButtonLatchingBankable, pressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
 
@@ -90,7 +90,7 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
 
 TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
 
@@ -134,7 +134,7 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
 
 TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
 

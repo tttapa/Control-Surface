@@ -2,123 +2,6 @@
 
 BEGIN_CS_NAMESPACE
 
-// -------------------------------- SENDING --------------------------------- //
-
-void MIDI_Sender::send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2) {
-    sendOnCable(m, c, d1, d2, 0);
-}
-
-void MIDI_Sender::send(uint8_t m, uint8_t c, uint8_t d1) {
-    sendOnCable(m, c, d1, 0);
-}
-
-void MIDI_Sender::sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
-                              uint8_t cn) {
-    c--;             // Channels are zero-based
-    m &= 0xF0;       // bitmask high nibble
-    m |= 0b10000000; // set msb
-    c &= 0x0F;       // bitmask low nibble
-    d1 &= 0x7F;      // clear msb
-    d2 &= 0x7F;      // clear msb
-    cn &= 0x0F;      // bitmask low nibble
-    sendImpl(m, c, d1, d2, cn);
-}
-
-void MIDI_Sender::sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) {
-    c--;             // Channels are zero-based
-    m &= 0xF0;       // bitmask high nibble
-    m |= 0b10000000; // set msb
-    c &= 0x0F;       // bitmask low nibble
-    d1 &= 0x7F;      // clear msb
-    cn &= 0x0F;      // bitmask low nibble
-    sendImpl(m, c, d1, cn);
-}
-
-void MIDI_Sender::sendOnCable(uint8_t r, uint8_t cn) {
-    r |= 0b10000000; // set msb
-    cn &= 0x0F;      // bitmask low nibble
-    sendImpl(r, cn);
-}
-
-void MIDI_Sender::sendNoteOn(MIDIAddress address, uint8_t velocity) {
-    if (address)
-        sendImpl(NOTE_ON, address.getRawChannel(), address.getAddress(),
-                 velocity, address.getCableNumber());
-}
-void MIDI_Sender::sendNoteOff(MIDIAddress address, uint8_t velocity) {
-    if (address)
-        sendImpl(NOTE_OFF, address.getRawChannel(), address.getAddress(),
-                 velocity, address.getCableNumber());
-}
-void MIDI_Sender::sendKP(MIDIAddress address, uint8_t pressure) {
-    if (address)
-        sendImpl(KEY_PRESSURE, address.getRawChannel(), address.getAddress(),
-                 pressure, address.getCableNumber());
-}
-void MIDI_Sender::sendCC(MIDIAddress address, uint8_t value) {
-    if (address)
-        sendImpl(CC, address.getRawChannel(), address.getAddress(), value,
-                 address.getCableNumber());
-}
-void MIDI_Sender::sendPC(MIDIChannelCN address, uint8_t value) {
-    if (address)
-        sendImpl(PROGRAM_CHANGE, address.getRawChannel(), value,
-                 address.getCableNumber());
-}
-void MIDI_Sender::sendPC(MIDIAddress address) {
-    if (address)
-        sendImpl(PROGRAM_CHANGE, address.getRawChannel(), address.getAddress(),
-                 address.getCableNumber());
-}
-void MIDI_Sender::sendCP(MIDIChannelCN address, uint8_t pressure) {
-    if (address)
-        sendImpl(CHANNEL_PRESSURE, address.getRawChannel(), pressure,
-                 address.getCableNumber());
-}
-void MIDI_Sender::sendPB(MIDIChannelCN address, uint16_t value) {
-    if (address)
-        sendImpl(PITCH_BEND, address.getRawChannel(), value & 0x7F, value >> 7,
-                 address.getCableNumber());
-}
-void MIDI_Sender::send(SysExMessage message) {
-    if (message.length) {
-        if (message.length < 2) {
-            ERROR(F("Error: invalid SysEx length"), 0x7F7F);
-            return;
-        }
-        sendImpl(message.data, message.length, message.CN);
-    }
-}
-void MIDI_Sender::send(uint8_t rt, uint8_t cn) {
-    if (rt) {
-        sendImpl(rt, cn);
-    }
-}
-
-void MIDI_Sender::send(RealTimeMessage message) {
-    send(message.message, message.CN);
-}
-
-void MIDI_Sender::send(ChannelMessage message) {
-    uint8_t m = message.header & 0xF0; // message type
-    uint8_t c = message.header & 0x0F; // channel
-    // TODO: optimize header?
-    if (m != PROGRAM_CHANGE && m != CHANNEL_PRESSURE)
-        sendImpl(m, c, message.data1, message.data2, message.CN);
-    else
-        sendImpl(m, c, message.data1, message.CN);
-}
-
-// MIDI_Interface --------------------------------------------------------------
-
-MIDI_Interface::MIDI_Interface() {
-    setAsDefault(); // Make this the default MIDI Interface
-}
-
-MIDI_Interface::MIDI_Interface(MIDI_Interface &&) {
-    setAsDefault(); // Make this the default MIDI Interface
-}
-
 MIDI_Interface::~MIDI_Interface() {
     if (getDefault() == this)
         DefaultMIDI_Interface = nullptr;
@@ -128,7 +11,19 @@ MIDI_Interface *MIDI_Interface::DefaultMIDI_Interface = nullptr;
 
 void MIDI_Interface::setAsDefault() { DefaultMIDI_Interface = this; }
 
-MIDI_Interface *MIDI_Interface::getDefault() { return DefaultMIDI_Interface; }
+MIDI_Interface *MIDI_Interface::getDefault() {
+#ifndef ARDUINO
+    return DefaultMIDI_Interface == nullptr
+               ? dynamic_cast<MIDI_Interface *>(updatables.getLast())
+               : DefaultMIDI_Interface;
+#else
+    return DefaultMIDI_Interface == nullptr
+               ? static_cast<MIDI_Interface *>(updatables.getLast())
+               : DefaultMIDI_Interface;
+#endif
+}
+
+// -------------------------------- SENDING --------------------------------- //
 
 void MIDI_Interface::sinkMIDIfromPipe(ChannelMessage msg) { send(msg); }
 void MIDI_Interface::sinkMIDIfromPipe(SysExMessage msg) { send(msg); }
@@ -152,11 +47,15 @@ uint8_t Parsing_MIDI_Interface::getCN() const { return parser.getCN(); }
 // -------------------------------- READING --------------------------------- //
 
 void Parsing_MIDI_Interface::update() {
-    if (event == NO_MESSAGE)      // If previous event was handled
-        event = read();           // Read the next event
-    if (dispatchMIDIEvent(event)) // If handled successfully
-        event = NO_MESSAGE;       // Read again next time around
-    // TODO: Should I read multiple messages here to prevent USB lockup?
+    if (event == NO_MESSAGE)          // If previous event was handled
+        event = read();               // Read the next incoming message
+    while (event != NO_MESSAGE) {     // As long as there are incoming messages
+        if (dispatchMIDIEvent(event)) // If handled successfully
+            event = read();           // Read the next incoming message
+        else                          // If pipe is locked
+            break;                    // Try sending again next time
+    }
+    // TODO: maximum number of iterations? Timeout?
 }
 
 #pragma GCC diagnostic push
@@ -183,11 +82,10 @@ bool Parsing_MIDI_Interface::onRealtimeMessage(uint8_t message) {
 
 bool Parsing_MIDI_Interface::onChannelMessage() {
     auto message = getChannelMessage();
-    auto cn = message.CN;
-    if (!try_lock_mutex(cn))
+    if (!try_lock_mutex(message.CN))
         return false;
     sourceMIDItoPipe(message);
-    unlock_mutex(cn);
+    unlock_mutex(message.CN);
     if (callbacks)
         callbacks->onChannelMessage(*this);
     // TODO: we have the message already, should we just pass it to the
@@ -197,11 +95,10 @@ bool Parsing_MIDI_Interface::onChannelMessage() {
 
 bool Parsing_MIDI_Interface::onSysExMessage() {
     auto message = getSysExMessage();
-    auto cn = message.CN;
-    if (!try_lock_mutex(cn))
+    if (!try_lock_mutex(message.CN))
         return false;
     sourceMIDItoPipe(message);
-    unlock_mutex(cn);
+    unlock_mutex(message.CN);
     if (callbacks)
         callbacks->onSysExMessage(*this);
     return true;

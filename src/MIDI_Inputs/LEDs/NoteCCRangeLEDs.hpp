@@ -28,12 +28,12 @@ class NoteCCLED : public SimpleNoteCCValueCallback {
     void update(const INoteCCValue &t, uint8_t index) override {
         uint8_t value = t.getValue(index);
         bool state = value > threshold;
-        AH::ExtIO::digitalWrite(ledPins[index], state);
+        AH::ExtIO::digitalWrite(ledPins[index], state ? HIGH : LOW);
     }
 
   private:
     PinList<NumLEDs> ledPins;
-    uint8_t threshold = 0x3F;
+    uint8_t threshold = 0x00;
 };
 
 /// Callback for Note or CC range or value input that displays the value to a

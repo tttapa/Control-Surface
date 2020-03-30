@@ -1,5 +1,5 @@
 /**
- * @boards  AVR, AVR USB, Nano 33, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Teensy 3.x, ESP8266, ESP32
  */
 
 #include <Arduino_Helpers.h>
@@ -7,6 +7,7 @@
 #include <AH/STL/algorithm>
 #include <AH/STL/array>
 #include <AH/STL/bitset>
+#include <AH/STL/climits>
 #include <AH/STL/cmath>
 #include <AH/STL/complex>
 #include <AH/STL/cstdint>
@@ -20,6 +21,7 @@
 #include <AH/STL/tuple>
 #include <AH/STL/type_traits>
 #include <AH/STL/utility>
+#include <AH/STL/vector>
 
 AH_DIAGNOSTIC_WERROR() // ESP32 -Werror=c++0x-compat fix
 
@@ -111,6 +113,13 @@ void setup() {
 
   TEST_CMATH_FUNCTION2(std::hypot);
   TEST_CMATH_FUNCTION3(std::fma);
+
+  std::vector<int> vec = {1, 2, 3, 4};
+  vec.reserve(100);
+  vec.resize(50);
+  vec[1] = -2;
+  for (int i : vec)
+    Serial.println(i);
 }
 
 void loop() {}

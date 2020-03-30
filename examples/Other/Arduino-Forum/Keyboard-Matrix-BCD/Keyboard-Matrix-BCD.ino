@@ -3,7 +3,7 @@
  * a BD to decimal decoder.  
  * https://forum.arduino.cc/index.php?topic=651047
  * 
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
  * 
  * Written by Pieter P, 2019-12-01  
  * https://github.com/tttapa/Control-Surface
@@ -43,7 +43,7 @@ const PinList<columns> columnPins = {{6, 7, 8, 9, 10, 11, 12, 13}};
 void selectLine(uint8_t line) {
   uint8_t mask = 1;
   for (pin_t addressPin : addressPins) {
-    digitalWrite(addressPin, (line & mask) != 0);
+    digitalWrite(addressPin, (line & mask) != 0 ? HIGH : LOW);
     mask <<= 1;
   }
 }

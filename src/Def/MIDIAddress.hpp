@@ -54,7 +54,7 @@ class MIDIChannelCN {
 };
 
 /// @deprecated
-using MIDICNChannel[[deprecated("Use MIDIChannelCN instead")]] = MIDIChannelCN;
+using MIDICNChannel [[deprecated("Use MIDIChannelCN instead")]] = MIDIChannelCN;
 
 /// A class for saving an offset to a MIDI address.
 /// It can be added to a MIDIAddress.
@@ -72,6 +72,10 @@ class RelativeMIDIAddress {
               (uint8_t)deltaCableNumber,
           } {}
     constexpr bool isValid() const { return addresses.valid; }
+
+    /// Compound addition. Element-wise addition, result is valid if both 
+    /// operands were valid.
+    RelativeMIDIAddress &operator+=(RelativeMIDIAddress that);
 
   private:
     RawMIDIAddress addresses;
@@ -269,7 +273,7 @@ class MIDIAddress {
 };
 
 /// @deprecated
-using MIDICNChannelAddress[[deprecated("Use MIDIAddress instead")]] =
+using MIDICNChannelAddress [[deprecated("Use MIDIAddress instead")]] =
     MIDIAddress;
 
 END_CS_NAMESPACE

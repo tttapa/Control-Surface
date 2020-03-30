@@ -28,7 +28,8 @@ class GenericManyButtonsSelector : public GenericSelector<N, Callback> {
         for (setting_t i = 0; i < N; i++)
             // TODO: invert?
             if (AH::ExtIO::digitalRead(buttonPins[i]) == LOW) {
-                if (AH::ExtIO::digitalRead(buttonPins[this->get()]) != LOW)
+                if (this->get() != i &&
+                    AH::ExtIO::digitalRead(buttonPins[this->get()]) != LOW)
                     this->set(i);
                 break;
             }

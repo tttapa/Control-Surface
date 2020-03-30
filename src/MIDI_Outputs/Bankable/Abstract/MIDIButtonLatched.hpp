@@ -2,7 +2,7 @@
 
 #include <AH/Containers/BitArray.hpp>
 #include <AH/Hardware/Button.hpp>
-#include <Banks/BankableMIDIOutput.hpp>
+#include <Banks/BankableAddresses.hpp>
 #include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>

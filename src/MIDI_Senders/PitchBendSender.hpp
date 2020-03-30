@@ -14,7 +14,7 @@ class PitchBendSender {
         // ignore address byte, just use channel and cable numbers
         MIDIChannelCN channelCN = {address.getChannel(),
                                    address.getCableNumber()};
-        Control_Surface.MIDI().sendPB(channelCN, value);
+        Control_Surface.sendPB(channelCN, value);
     }
 
     constexpr static uint8_t precision() {

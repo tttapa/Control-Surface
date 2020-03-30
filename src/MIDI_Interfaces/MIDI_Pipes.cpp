@@ -24,7 +24,7 @@ void MIDI_Sink::connectSourcePipe(MIDI_Pipe *source) {
 void MIDI_Sink::disconnectSourcePipes() {
     if (sourcePipe != nullptr) {
         sourcePipe->disconnectSourcePipes();
-        sourcePipe->disconnectSink();
+        sourcePipe->disconnect();
         sourcePipe = nullptr;
     }
 }
@@ -79,7 +79,7 @@ void MIDI_Source::connectSinkPipe(MIDI_Pipe *sink) {
 void MIDI_Source::disconnectSinkPipes() {
     if (sinkPipe != nullptr) {
         sinkPipe->disconnectSinkPipes();
-        sinkPipe->disconnectSource();
+        sinkPipe->disconnect();
         sinkPipe = nullptr;
     }
 }

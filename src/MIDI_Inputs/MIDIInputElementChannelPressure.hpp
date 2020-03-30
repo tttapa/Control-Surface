@@ -12,6 +12,12 @@
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   Class for objects that listen for incoming MIDI Channel Pressure
+ *          events.
+ * 
+ * @ingroup MIDIInputElements
+ */
 class MIDIInputElementChannelPressure
     : public MIDIInputElement,
       public DoublyLinkable<MIDIInputElementChannelPressure> {

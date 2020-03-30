@@ -42,6 +42,18 @@ namespace std {
                                               double>::__type
     round(_Tp __x)
     { return __builtin_round(__x); }
+
+  constexpr float
+  hypot(float __x, float __y)
+  { return __builtin_hypotf(__x, __y); }
+
+  constexpr double
+  hypot(double __x, double __y)
+  { return __builtin_hypot(__x, __y); }
+
+  constexpr long double
+  hypot(long double __x, long double __y)
+  { return __builtin_hypotl(__x, __y); }
 }
 #endif
 

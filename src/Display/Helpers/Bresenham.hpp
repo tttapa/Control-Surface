@@ -1,9 +1,11 @@
 #pragma once
 
-#include <Arduino.h>
+#include <AH/Arduino-Wrapper.h>
+
 #include <Printable.h>
 #include <Settings/SettingsWrapper.hpp>
 #include <limits.h>
+#include <stdint.h>
 
 BEGIN_CS_NAMESPACE
 
@@ -20,10 +22,7 @@ class BresenhamLine {
         pint x = 0, y = 0;
         Pixel(pint x, pint y) : x(x), y(y) {}
         Pixel() = default;
-        size_t printTo(Print &p) const override {
-            return p.print('(') + p.print(x) + p.print(", ") + p.print(y) +
-                   p.print(')');
-        };
+        size_t printTo(Print &p) const override;
         unsigned int distanceSquared(Pixel other) const {
             int dx = this->x - other.x;
             int dy = this->y - other.y;

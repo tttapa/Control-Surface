@@ -19,14 +19,14 @@ namespace ManyAddresses {
  * This version can be banked using an arbitrary list of alternative
  * addresses.
  *          
- * @tparam  N
+ * @tparam  NumBanks
  *          The number of variants/alternative addresses the element has.
  *
  * @ingroup ManyAddressesMIDIOutputElements
  */
-template <setting_t N>
-class PCButton
-    : public Bankable::MIDIButton<ManyAddresses<N>, ProgramChangeSender> {
+template <setting_t NumBanks>
+class PCButton : public Bankable::MIDIButton<ManyAddresses<NumBanks>,
+                                             ProgramChangeSender> {
   public:
     /**
      * @brief   Create a new PCButton object with the given pin, program number
@@ -41,17 +41,11 @@ class PCButton
      *          The list of MIDI addresses containing the program number 
      *          [0, 127], channel [CHANNEL_1, CHANNEL_16], and optional cable 
      *          number [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
      */
-    PCButton(const Bank<N> &bank, pin_t pin,
-             const Array<MIDIAddress, N> &addresses,
-             const ProgramChangeSender &sender = {})
-        : MIDIButton<ManyAddresses<N>, ProgramChangeSender>{
-              {bank, addresses},
-              pin,
-              sender,
-          } {}
+    PCButton(const Bank<NumBanks> &bank, pin_t pin,
+             const Array<MIDIAddress, NumBanks> &addresses)
+        : MIDIButton<ManyAddresses<NumBanks>, ProgramChangeSender>{
+              {bank, addresses}, pin, {}} {}
 };
 
 } // namespace ManyAddresses

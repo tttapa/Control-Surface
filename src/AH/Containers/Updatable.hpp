@@ -6,33 +6,37 @@
 
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
+#include <AH/Containers/CRTP.hpp>
 #include <AH/Containers/LinkedList.hpp>
 #include <AH/Error/Error.hpp>
+#include <AH/STL/utility> // std::forward
 #include <AH/Settings/SettingsWrapper.hpp>
 #include <stddef.h>
 
 BEGIN_AH_NAMESPACE
 
-struct NormalUpdatable {};
-
 /**
  * @brief   A super class for object that have to be updated regularly.
  * 
  * All instances of this class are kept in a linked list, so it's easy to 
- * iterate over all of them to update them.
+ * iterate over all of them to update them.  
+ * 
+ * This version uses static polymorphism using the Curiously Recurring Template
+ * Pattern. This requires less virtual function calls.  
+ * (Only the destructor is virtual.)
  * 
  * @nosubgrouping
  */
-template <class T = NormalUpdatable>
-class Updatable : public DoublyLinkable<Updatable<T>> {
+template <class Derived>
+class UpdatableCRTP : public DoublyLinkable<UpdatableCRTP<Derived>> {
   protected:
-    /// Constructor: create an Updatabe and add it to the linked list of 
+    /// Constructor: create an Updatabe and add it to the linked list of
     /// instances.
-    Updatable() { updatables.append(this); }
+    UpdatableCRTP() { updatables.append(this); }
 
   public:
     /// Destructor: remove the updatable from the linked list of instances.
-    virtual ~Updatable() {
+    virtual ~UpdatableCRTP() {
         if (isEnabled())
             updatables.remove(this);
     }
@@ -40,29 +44,16 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
     /// @name Main initialization and updating methods
     /// @{
 
-    /// Initialize this updatable.
-    virtual void begin() = 0;
-
-    /// Update this updatable.
-    virtual void update() = 0;
-
-    /// Begin all enabled instances of this class
-    /// @see    begin()
-    static void beginAll() {
-        for (Updatable &el : updatables)
-            el.begin();
-    }
-
-    /// Update all enabled instances of this class
-    /// @see    update()
-    static void updateAll() {
-        for (Updatable &el : updatables)
-            el.update();
+    template <class... Args>
+    static void applyToAll(void (Derived::*method)(Args &&...),
+                           Args &&... args) {
+        for (UpdatableCRTP &el : updatables)
+            (CRTP_INST(Derived, el).*method)(std::forward<Args>(args)...);
     }
 
     /// @}
 
-    public:
+  public:
     /// @name Enabling and disabling updatables
     /// @{
 
@@ -94,9 +85,9 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
      */
     bool isEnabled() { return updatables.couldContain(this); }
 
-    static void enable(Updatable *element) { element->enable(); }
+    static void enable(UpdatableCRTP *element) { element->enable(); }
 
-    static void enable(Updatable &element) { element.enable(); }
+    static void enable(UpdatableCRTP &element) { element.enable(); }
 
     template <class U, size_t N>
     static void enable(U (&array)[N]) {
@@ -104,9 +95,9 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
             enable(el);
     }
 
-    static void disable(Updatable<T> *element) { element->disable(); }
+    static void disable(UpdatableCRTP *element) { element->disable(); }
 
-    static void disable(Updatable<T> &element) { element.disable(); }
+    static void disable(UpdatableCRTP &element) { element.disable(); }
 
     template <class U, size_t N>
     static void disable(U (&array)[N]) {
@@ -116,12 +107,45 @@ class Updatable : public DoublyLinkable<Updatable<T>> {
 
     /// @}
 
-  private:
-    static DoublyLinkedList<Updatable<T>> updatables;
+  protected:
+    static DoublyLinkedList<UpdatableCRTP<Derived>> updatables;
 };
 
-template <class T>
-DoublyLinkedList<Updatable<T>> Updatable<T>::updatables;
+template <class Derived>
+DoublyLinkedList<UpdatableCRTP<Derived>> UpdatableCRTP<Derived>::updatables;
+
+struct NormalUpdatable {};
+
+/**
+ * @brief   A super class for object that have to be updated regularly.
+ * 
+ * All instances of this class are kept in a linked list, so it's easy to 
+ * iterate over all of them to update them.
+ * 
+ * @nosubgrouping
+ */
+template <class T = NormalUpdatable>
+class Updatable : public UpdatableCRTP<Updatable<T>> {
+  public:
+    /// @name Main initialization and updating methods
+    /// @{
+
+    /// Initialize this updatable.
+    virtual void begin() = 0;
+
+    /// Update this updatable.
+    virtual void update() = 0;
+
+    /// Begin all enabled instances of this class
+    /// @see    begin()
+    static void beginAll() { Updatable::applyToAll(&Updatable::begin); }
+
+    /// Update all enabled instances of this class
+    /// @see    update()
+    static void updateAll() { Updatable::applyToAll(&Updatable::update); }
+
+    /// @}
+};
 
 END_AH_NAMESPACE
 

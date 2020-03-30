@@ -8,7 +8,7 @@ using namespace CS;
 
 TEST(CCPotentiometer, simple) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
 
     CCPotentiometer pot(2, {0x3C, CHANNEL_7, 0xC});
     pot.begin();
@@ -29,7 +29,7 @@ TEST(CCPotentiometer, simple) {
 
 TEST(CCPotentiometer, mapping) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
 
     CCPotentiometer pot(2, {0x3C, CHANNEL_7, 0xC});
     pot.begin();
@@ -51,7 +51,7 @@ TEST(CCPotentiometer, mapping) {
 
 TEST(CCPotentiometer, invert) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
 
     CCPotentiometer pot(2, {0x3C, CHANNEL_7, 0xC});
     pot.begin();

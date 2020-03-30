@@ -12,8 +12,11 @@ jobs:
     - name: Git Submodules
       run: git submodule update --init --recursive --depth 50
     - name: CMake
-      run: cmake ..
+      run: cmake .. -DCMAKE_BUILD_TYPE=Asan
       working-directory: build
+      env:
+        CC: gcc-9
+        CXX: g++-9
     - name: Build
       run: make -j4
       working-directory: build

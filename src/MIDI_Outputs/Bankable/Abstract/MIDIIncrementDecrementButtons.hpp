@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Banks/BankableMIDIOutput.hpp>
-#include <Def/Def.hpp>
 #include <AH/Hardware/IncrementDecrementButtons.hpp>
-#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <Banks/BankableAddresses.hpp>
 #include <Control_Surface/Control_Surface_Class.hpp>
+#include <Def/Def.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -37,7 +37,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
 
     void update() override {
         using IncrDecrButtons = AH::IncrementDecrementButtons;
-        MIDIAddress address = addresses.getActiveAddress(0);
+        MIDIAddress address = addresses.getFirstActiveAddress();
         auto cn = address.getCableNumber();
 
         if (!Control_Surface.try_lock_mutex(cn))
@@ -59,7 +59,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
     }
 
     void reset() {
-        MIDIAddress address = addresses.getActiveAddress(1);
+        MIDIAddress address = addresses.getSecondActiveAddress();
         if (address) {
             resetSender.sendOn(address);
             resetSender.sendOff(address);

@@ -3,7 +3,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc.
  *
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x
  * 
  * Connections
  * -----------

@@ -8,7 +8,7 @@ using namespace CS;
 
 TEST(CCRotaryEncoder, turnOneStep) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
@@ -22,7 +22,7 @@ TEST(CCRotaryEncoder, turnOneStep) {
 
 TEST(CCRotaryEncoder, turnFourHalfSteps) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
@@ -51,7 +51,7 @@ TEST(CCRotaryEncoder, turnFourHalfSteps) {
 
 TEST(CCRotaryEncoder, turnOneStepBackwards) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
@@ -65,7 +65,7 @@ TEST(CCRotaryEncoder, turnOneStepBackwards) {
 
 TEST(CCRotaryEncoder, turnSixteenSteps) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
@@ -81,7 +81,7 @@ TEST(CCRotaryEncoder, turnSixteenSteps) {
 
 TEST(CCRotaryEncoder, turnSixteenStepsBackwards) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
@@ -97,7 +97,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwards) {
 
 TEST(CCRotaryEncoder, turnSixteenStepsBackwardsSignMagnitude) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
@@ -114,7 +114,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwardsSignMagnitude) {
 
 TEST(CCRotaryEncoder, turnSixteenStepsBackwardsBinaryOffset) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
@@ -135,7 +135,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwardsBinaryOffset) {
 
 TEST(CCRotaryEncoderBankable, turnOneStepChangeSettingTurnOneStep) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     OutputBank bank(4);

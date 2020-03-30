@@ -36,7 +36,8 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
      * @brief   The pinMode function is not implemented because the mode is
      *          `OUTPUT` by definition.
      */
-    void pinMode(pin_t pin, uint8_t mode) override __attribute__((deprecated)) {
+    void pinMode(pin_t pin, PinMode_t mode) override
+        __attribute__((deprecated)) {
         (void)pin;
         (void)mode;
     }
@@ -50,7 +51,7 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
      *          The value to set the output to.
      *          (Either `HIGH` (1) or `LOW` (0))
      */
-    void digitalWrite(pin_t pin, uint8_t val) override {
+    void digitalWrite(pin_t pin, PinStatus_t val) override {
         buffer.set(pin, val);
         update();
     }
@@ -96,7 +97,7 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
      */
     void analogWrite(pin_t pin, analog_t val) override
         __attribute__((deprecated)) {
-        digitalWrite(pin, val >= 0x80);
+        digitalWrite(pin, val >= 0x80 ? HIGH : LOW);
     }
 
     /**

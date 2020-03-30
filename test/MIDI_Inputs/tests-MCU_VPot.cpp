@@ -104,9 +104,9 @@ TEST(MCUVPotLEDsBankable, displayOnBankChange) {
     MIDIInputElementCC::beginAll();
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
-    ChannelMessageMatcher midimsg = {CONTROL_CHANGE, channel, 0x34 + 4, 0x59};
+    ChannelMessageMatcher midimsg1 = {CONTROL_CHANGE, channel, 0x34 + 4, 0x59};
 
-    MIDIInputElementCC::updateAllWith(midimsg);
+    MIDIInputElementCC::updateAllWith(midimsg1);
 
     EXPECT_EQ(vpot.getPosition(), 0x0);
     EXPECT_EQ(vpot.getMode(), 0x0);
@@ -129,6 +129,28 @@ TEST(MCUVPotLEDsBankable, displayOnBankChange) {
     EXPECT_EQ(vpot.getPosition(), 0x9);
     EXPECT_EQ(vpot.getMode(), 0x1);
     EXPECT_EQ(vpot.getCenterLed(), true);
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(0, LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(1, HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(3, HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(4, HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(5, HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(6, LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(7, LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(8, LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(9, LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(10, LOW));
+
+    ChannelMessageMatcher midimsg2 = {CONTROL_CHANGE, channel, 0x34 + 4, 0x12};
+
+    MIDIInputElementCC::updateAllWith(midimsg2);
+
+    EXPECT_EQ(vpot.getPosition(), 0x2);
+    EXPECT_EQ(vpot.getMode(), 0x1);
+    EXPECT_EQ(vpot.getCenterLed(), false);
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 

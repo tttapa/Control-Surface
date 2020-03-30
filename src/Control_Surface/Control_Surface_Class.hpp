@@ -23,7 +23,11 @@ using AH::Updatable;
  * 
  * @ingroup ControlSurfaceModule
  */
-class Control_Surface_ : public MIDI_Sender, public TrueMIDI_SinkSource {
+class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
+                         public TrueMIDI_SinkSource {
+
+    friend class MIDI_Sender<Control_Surface_>;
+
   public:
     // Copying is not allowed
     Control_Surface_(Control_Surface_ const &) = delete;
@@ -46,51 +50,28 @@ class Control_Surface_ : public MIDI_Sender, public TrueMIDI_SinkSource {
     void loop();
 
     /**
-     * @brief   Get the MIDI interface of the Control Surface.
-     *
-     * @return  A reference to the Control Surface's MIDI interface.
+     * @brief   Connect Control Surface to the default MIDI interface.
+     */
+    bool connectDefaultMIDI_Interface();
+
+    /**
+     * @brief   Disconnect Control Surface from the MIDI interfaces it's 
+     *          connected to.
+     */
+    void disconnectMIDI_Interfaces();
+
+    /**
+     * @brief   Get a reference to the MIDI sender.
      * 
-     * @deprecated
+     * @deprecated  Use `Control_Surface.send(...)` directly instead of 
+     *              `Control_Surface.MIDI().send(...)`.
      */
-    MIDI_Sender &MIDI();
-
-    /// Connect Control Surface to the default MIDI interface:
-    bool connectDefaultMIDI();
-
-    /// Accept an incoming MIDI Channel message.
-    void sinkMIDIfromPipe(ChannelMessage) override;
-    /// Accept an incoming MIDI System Exclusive message.
-    void sinkMIDIfromPipe(SysExMessage) override;
-    /// Accept an incoming MIDI Real-Time message.
-    void sinkMIDIfromPipe(RealTimeMessage) override;
-
-    /// Low-level function for sending a 3-byte MIDI message.
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
-                  uint8_t cn) override {
-        uint8_t h = m | c;
-        sourceMIDItoPipe(ChannelMessage{h, d1, d2, cn});
-    }
-    /**
-     * @brief   Low-level function for sending a 2-byte MIDI message.
-     */
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
-        uint8_t h = m | c;
-        sourceMIDItoPipe(ChannelMessage{h, d1, 0, cn});
-    }
-
-    /**
-     * @brief   Low-level function for sending a system exclusive MIDI message.
-     */
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        sourceMIDItoPipe(SysExMessage{data, length, cn});
-    }
-
+    MIDI_Sender<Control_Surface_> &MIDI() { return *this; }
+    
     /** 
-     * @brief   Low-level function for sending a single-byte MIDI message.
+     * @brief   Update all MIDI interfaces to receive new MIDI events.
      */
-    void sendImpl(uint8_t rt, uint8_t cn) override {
-        sourceMIDItoPipe(RealTimeMessage{rt, cn});
-    }
+    void updateMidiInput();
 
     /**
      * @brief   Update all MIDIInputElement%s.
@@ -104,12 +85,34 @@ class Control_Surface_ : public MIDI_Sender, public TrueMIDI_SinkSource {
 
   private:
     /**
+     * @brief   Low-level function for sending a 3-byte MIDI message.
+     */
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2, uint8_t cn);
+    /**
+     * @brief   Low-level function for sending a 2-byte MIDI message.
+     */
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn);
+
+    /**
+     * @brief   Low-level function for sending a system exclusive MIDI message.
+     */
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn);
+
+    /** 
+     * @brief   Low-level function for sending a single-byte MIDI message.
+     */
+    void sendImpl(uint8_t rt, uint8_t cn);
+
+  private:
+    void sinkMIDIfromPipe(ChannelMessage msg) override;
+    void sinkMIDIfromPipe(SysExMessage msg) override;
+    void sinkMIDIfromPipe(RealTimeMessage msg) override;
+
+  private:
+    /**
      * @brief   Control_Surface_ is a singleton, so the constructor is private.
      */
     Control_Surface_() = default;
-
-    /// The pipes used to connect to the MIDI interface.
-    BidirectionalMIDI_Pipe pipe;
 
     /// A timer to know when to update the analog inputs.
     Timer<micros> potentiometerTimer = {AH::FILTERED_INPUT_UPDATE_INTERVAL};
@@ -144,6 +147,7 @@ class Control_Surface_ : public MIDI_Sender, public TrueMIDI_SinkSource {
     ChannelMessageCallback channelMessageCallback = nullptr;
     SysExMessageCallback sysExMessageCallback = nullptr;
     RealTimeMessageCallback realTimeMessageCallback = nullptr;
+    MIDI_Pipe inpipe, outpipe;
 };
 
 /// A predefined instance of the Control Surface to use in the Arduino sketches.

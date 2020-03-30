@@ -292,7 +292,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     /// another pipe into the output (sink).
     bool hasThroughIn() const { return throughIn != nullptr; }
 
-  private:
+  protected:
     /// Accept a MIDI message from the source, forward it to the "through"
     /// output if necessary, map or filter the MIDI message if necessary,
     /// and send it to the sink.
@@ -317,6 +317,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
         sinkMIDIfromPipe(msg);
     }
 
+  private:
     void sinkMIDIfromPipe(ChannelMessage msg) final override {
         if (hasSink())
             sink->sinkMIDIfromPipe(msg);
@@ -401,6 +402,8 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
 #ifndef ARDUINO
     MIDI_Pipe *getThroughOut() { return throughOut; }
     MIDI_Pipe *getThroughIn() { return throughIn; }
+    MIDI_Source *getSource() { return source; }
+    MIDI_Sink *getSink() { return sink; }
 #endif
 
   private:

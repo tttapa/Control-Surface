@@ -2,7 +2,7 @@
  * This examples shows how to use two push buttons to set the frequency at which
  * an LED blinks.
  * 
- * @boards  AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -48,7 +48,7 @@ void setup() {
 void loop() {
   // toggle the LED when the given number of milliseconds have passed
   if (timer)
-    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+    digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN) ? LOW : HIGH);
 
   // read the buttons, and change interval accordingly
   switch (buttons.update()) {

@@ -8,7 +8,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #include "ShiftRegisterOutBase.hpp"
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <Arduino.h> // MSBFIRST
+#include <AH/Arduino-Wrapper.h> // MSBFIRST
 AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE
@@ -22,8 +22,6 @@ BEGIN_AH_NAMESPACE
 template <uint8_t N>
 class ShiftRegisterOut : public ShiftRegisterOutBase<N> {
   public:
-    using BitOrder_t = typename ShiftRegisterOutBase<N>::BitOrder_t;
-
     /**
      * @brief   Create a new ShiftRegisterOut object with a shift register
      *          connected to the given pins, with a given bit order,

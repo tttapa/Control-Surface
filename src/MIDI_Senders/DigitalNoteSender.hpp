@@ -8,10 +8,10 @@ class DigitalNoteSender {
   public:
     DigitalNoteSender(uint8_t velocity = 0x7F) : velocity(velocity) {}
     void sendOn(MIDIAddress address) {
-        Control_Surface.MIDI().sendNoteOn(address, getVelocity());
+        Control_Surface.sendNoteOn(address, getVelocity());
     }
     void sendOff(MIDIAddress address) {
-        Control_Surface.MIDI().sendNoteOff(address, 0x7F);
+        Control_Surface.sendNoteOff(address, 0x7F);
     }
 
     void setVelocity(uint8_t velocity) { this->velocity = velocity; }

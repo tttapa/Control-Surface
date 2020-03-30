@@ -6,7 +6,7 @@
     "library. (#include <Encoder.h>)"
 #endif
 
-#include <Banks/BankableMIDIOutput.hpp>
+#include <Banks/BankableAddresses.hpp>
 #include <Control_Surface/Control_Surface_Class.hpp>
 #include <Def/Def.hpp>
 #include <Encoder.h>
@@ -20,37 +20,37 @@ namespace Bankable {
  * @brief   An abstract class for rotary encoders that send MIDI events and that
  *          can be added to a Bank.
  */
-template <class Sender>
-class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
+template <class BankAddress, class Sender>
+class MIDIRotaryEncoder : public MIDIOutputElement {
   protected:
     /**
      * @brief   Construct a new MIDIRotaryEncoder.
      *
      * @todo    Documentation
      */
-    MIDIRotaryEncoder(const OutputBankConfig &config,
-                      const EncoderPinList &pins, const MIDIAddress &address,
+    MIDIRotaryEncoder(const BankAddress &bankAddress,
+                      const EncoderPinList &pins,
                       uint8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
-        : BankableMIDIOutput(config), encoder{pins.A, pins.B}, address(address),
-          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
-          sender(sender) {}
+        : address(bankAddress), encoder{pins.A, pins.B}, 
+          speedMultiply(speedMultiply),
+          pulsesPerStep(pulsesPerStep), sender(sender) {}
 
 // For tests only
 #ifndef ARDUINO
-    MIDIRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
-                      const MIDIAddress &address, uint8_t speedMultiply,
-                      uint8_t pulsesPerStep, const Sender &sender)
-        : BankableMIDIOutput(config), encoder{encoder}, address(address),
-          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
-          sender(sender) {}
+    MIDIRotaryEncoder(const BankAddress &bankAddress, const Encoder &encoder,
+                      uint8_t speedMultiply, uint8_t pulsesPerStep,
+                      const Sender &sender)
+        : address(bankAddress), encoder{encoder}, 
+          speedMultiply(speedMultiply),
+          pulsesPerStep(pulsesPerStep), sender(sender) {}
 #endif
 
   public:
     void begin() final override {}
 
     void update() final override {
-        MIDIAddress sendAddress = address + getAddressOffset();
+        MIDIAddress sendAddress =  address.getActiveAddress();
         auto cn = sendAddress.getCableNumber();
 
         if (!Control_Surface.try_lock_mutex(cn))
@@ -68,8 +68,8 @@ class MIDIRotaryEncoder : public BankableMIDIOutput, public MIDIOutputElement {
     }
 
   private:
+    BankAddress address;
     Encoder encoder;
-    const MIDIAddress address;
     const uint8_t speedMultiply;
     const uint8_t pulsesPerStep;
     long previousPosition = 0;

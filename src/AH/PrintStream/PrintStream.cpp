@@ -4,64 +4,62 @@
 
 // LCOV_EXCL_START
 
-#if not defined(ARDUINO_ARCH_ESP32) && not defined(ARDUINO_ARCH_SAM)
+#if not defined(ARDUINO_ARCH_ESP32) && not defined(ARDUINO_ARCH_SAM) &&        \
+    not defined(ARDUINO_API_VERSION)
 #define FLUSH
 #endif
 
- /* #define OCT 8 */
+/* #define OCT 8 */
 
 uint8_t formatPrintStream = DEC;
 bool boolalphaPrintStream = false;
 bool leadingZerosPrintStream = false;
 uint8_t precisionPrintStream = 2;
 char byteSeparatorPrintStream = '\0';
-enum : char{
-    LOWERCASE = 0x7F,
-    UPPERCASE = 0x5F
-} casePrintStream = LOWERCASE;
+enum : char { LOWERCASE = 0x7F, UPPERCASE = 0x5F } casePrintStream = LOWERCASE;
 bool showbasePrintStream = false;
 
 template <class T>
 Print &printIntegral(Print &printer, T i);
 
 Print &endl(Print &printer) {
-  printer.println();
+    printer.println();
 #ifdef FLUSH
-  printer.flush();
+    printer.flush();
 #endif
-  return printer;
+    return printer;
 }
 
 Print &uppercase(Print &printer) {
-  casePrintStream = UPPERCASE;
-  return printer;
+    casePrintStream = UPPERCASE;
+    return printer;
 }
 
 Print &nouppercase(Print &printer) {
-  casePrintStream = LOWERCASE;
-  return printer;
+    casePrintStream = LOWERCASE;
+    return printer;
 }
 
 Print &showbase(Print &printer) {
-  showbasePrintStream = true;
-  return printer;
+    showbasePrintStream = true;
+    return printer;
 }
 
 Print &noshowbase(Print &printer) {
-  showbasePrintStream = false;
-  return printer;
+    showbasePrintStream = false;
+    return printer;
 }
 
 Print &flush(Print &printer) {
 #ifdef FLUSH
-  printer.flush();
+    printer.flush();
 #endif
-  return printer;
+    return printer;
 }
 
 Print &hex(Print &printer) {
-  formatPrintStream = HEX;
-  return printer;
+    formatPrintStream = HEX;
+    return printer;
 }
 
 /* Print &oct(Print &printer) {
@@ -70,31 +68,31 @@ Print &hex(Print &printer) {
 } */
 
 Print &bin(Print &printer) {
-  formatPrintStream = BIN;
-  return printer;
+    formatPrintStream = BIN;
+    return printer;
 }
 
 Print &dec(Print &printer) {
-  formatPrintStream = DEC;
-  return printer;
+    formatPrintStream = DEC;
+    return printer;
 }
 
 Print &boolalpha(Print &printer) {
-  boolalphaPrintStream = true;
-  return printer;
+    boolalphaPrintStream = true;
+    return printer;
 }
 Print &noboolalpha(Print &printer) {
-  boolalphaPrintStream = false;
-  return printer;
+    boolalphaPrintStream = false;
+    return printer;
 }
 
 Print &leadingzeros(Print &printer) {
-  leadingZerosPrintStream = true;
-  return printer;
+    leadingZerosPrintStream = true;
+    return printer;
 }
 Print &noleadingzeros(Print &printer) {
-  leadingZerosPrintStream = false;
-  return printer;
+    leadingZerosPrintStream = false;
+    return printer;
 }
 Print &operator<<(Print &printer, const __FlashStringHelper *s) {
     printer.print(s);
@@ -117,18 +115,14 @@ Print &operator<<(Print &printer, char c) {
 Print &operator<<(Print &printer, unsigned char i) {
     return printIntegral(printer, i);
 }
-Print &operator<<(Print &printer, int i) {
-    return printIntegral(printer, i);
-}
+Print &operator<<(Print &printer, int i) { return printIntegral(printer, i); }
 Print &operator<<(Print &printer, unsigned int i) {
     return printIntegral(printer, i);
 }
 Print &operator<<(Print &printer, int8_t i) {
     return printIntegral(printer, i);
 }
-Print &operator<<(Print &printer, long i) {
-    return printIntegral(printer, i);
-}
+Print &operator<<(Print &printer, long i) { return printIntegral(printer, i); }
 Print &operator<<(Print &printer, unsigned long i) {
     return printIntegral(printer, i);
 }
@@ -136,7 +130,7 @@ Print &operator<<(Print &printer, double d) {
     printer.print(d, precisionPrintStream);
     return printer;
 }
-Print &operator<<(Print &printer, const Printable& p) {
+Print &operator<<(Print &printer, const Printable &p) {
     printer.print(p);
     return printer;
 }
@@ -150,57 +144,42 @@ Print &operator<<(Print &printer, bool b) {
 
 template <class T>
 Print &printIntegral(Print &printer, T i) {
-    switch (formatPrintStream)
-    {
-    case DEC:
-        printer.print(i);
-        break;
-    case HEX:
-        printHex(printer, i);
-        break;
-    case BIN:
-        printBin(printer, i);  
-        break;
-    /* case OCT:
+    switch (formatPrintStream) {
+        case DEC: printer.print(i); break;
+        case HEX: printHex(printer, i); break;
+        case BIN: printBin(printer, i); break;
+        /* case OCT:
         printOct(printer, i);  
         break; */
-    default:
-        break;
+        default: break;
     }
     return printer;
 }
 
-Print &operator<<(Print &printer, manipulator pf) {
-  return pf(printer);
-}
+Print &operator<<(Print &printer, manipulator pf) { return pf(printer); }
 
-Setbase setbase(uint8_t base) { 
-    return { base }; 
-}
+Setbase setbase(uint8_t base) { return {base}; }
 Print &operator<<(Print &printer, Setbase f) {
     formatPrintStream = f.M_base;
-    return printer; 
+    return printer;
 }
 
-Setbytesep setbytesep(char bytesep) { 
-    return { bytesep }; 
-}
+Setbytesep setbytesep(char bytesep) { return {bytesep}; }
 Print &operator<<(Print &printer, Setbytesep f) {
     byteSeparatorPrintStream = f.M_bytesep;
-    return printer; 
+    return printer;
 }
 
-Setprecision setprecision(int n) {
-    return { n };
-}
+Setprecision setprecision(int n) { return {n}; }
 Print &operator<<(Print &printer, Setprecision f) {
     precisionPrintStream = f.M_n;
     return printer;
 }
 
-static char nibble_to_hex(uint8_t nibble) {  // convert a 4-bit nibble to a hexadecimal character
-  nibble &= 0xF;
-  return nibble > 9 ? nibble - 10 + ('a' & casePrintStream) : nibble + '0';
+static char nibble_to_hex(
+    uint8_t nibble) { // convert a 4-bit nibble to a hexadecimal character
+    nibble &= 0xF;
+    return nibble > 9 ? nibble - 10 + ('a' & casePrintStream) : nibble + '0';
 }
 
 #if __BYTE_ORDER != __LITTLE_ENDIAN
@@ -208,13 +187,11 @@ static char nibble_to_hex(uint8_t nibble) {  // convert a 4-bit nibble to a hexa
 #endif
 
 template <class T>
-void printHex(Print &printer, T val)
-{
+void printHex(Print &printer, T val) {
     if (showbasePrintStream)
         printer.print("0x");
     bool nonZero = false;
-    for (int i = sizeof(val) - 1; i >= 0; i--)
-    {
+    for (int i = sizeof(val) - 1; i >= 0; i--) {
         uint8_t currByte = ((uint8_t *)&val)[i];
         if (currByte != 0 || i == 0)
             nonZero = true;
@@ -228,16 +205,13 @@ void printHex(Print &printer, T val)
 }
 
 template <class T>
-void printBin(Print &printer, T val)
-{
+void printBin(Print &printer, T val) {
     if (showbasePrintStream)
         printer.print("0b");
     bool nonZero = false;
-    for (int i = sizeof(val) - 1; i >= 0; i--)
-    {
-        uint8_t currByte = ((uint8_t *)&val)[i]; 
-        for (int j = 7; j >= 0; j--)
-        {
+    for (int i = sizeof(val) - 1; i >= 0; i--) {
+        uint8_t currByte = ((uint8_t *)&val)[i];
+        for (int j = 7; j >= 0; j--) {
             uint8_t currBit = currByte & 0x80;
             if (currBit != 0 || (i == 0 && j == 0))
                 nonZero = true;
@@ -245,11 +219,11 @@ void printBin(Print &printer, T val)
                 printer.print(currBit ? '1' : '0');
             currByte <<= 1;
         }
-        if (byteSeparatorPrintStream && i && (leadingZerosPrintStream || nonZero))
+        if (byteSeparatorPrintStream && i &&
+            (leadingZerosPrintStream || nonZero))
             printer.print(byteSeparatorPrintStream);
     }
 }
-
 
 /* template <class T>
 void printOct(Print &printer, T val)

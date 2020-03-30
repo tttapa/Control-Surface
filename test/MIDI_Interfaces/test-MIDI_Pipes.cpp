@@ -392,23 +392,32 @@ TEST(MIDI_Pipes, disconnectSource1) {
     EXPECT_TRUE(sink1.hasSourcePipe());
     EXPECT_TRUE(sink2.hasSourcePipe());
 
-    EXPECT_TRUE(pipe1.hasSink());
+    EXPECT_FALSE(pipe1.hasSink());
     EXPECT_FALSE(pipe1.hasSource());
-    EXPECT_TRUE(pipe2.hasSink());
+    EXPECT_FALSE(pipe2.hasSink());
     EXPECT_FALSE(pipe2.hasSource());
     EXPECT_TRUE(pipe3.hasSink());
     EXPECT_TRUE(pipe3.hasSource());
     EXPECT_TRUE(pipe4.hasSink());
     EXPECT_TRUE(pipe4.hasSource());
 
-    EXPECT_TRUE(pipe1.hasThroughIn());
+    EXPECT_FALSE(pipe1.hasThroughIn());
     EXPECT_FALSE(pipe1.hasThroughOut());
-    EXPECT_TRUE(pipe2.hasThroughIn());
+    EXPECT_FALSE(pipe2.hasThroughIn());
     EXPECT_FALSE(pipe2.hasThroughOut());
     EXPECT_FALSE(pipe3.hasThroughIn());
     EXPECT_TRUE(pipe3.hasThroughOut());
     EXPECT_FALSE(pipe4.hasThroughIn());
     EXPECT_FALSE(pipe4.hasThroughOut());
+
+    EXPECT_EQ(source2.getSinkPipe(), &pipe3);
+    EXPECT_EQ(pipe3.getSource(), &source2);
+    EXPECT_EQ(sink1.getSourcePipe(), &pipe3);
+    EXPECT_EQ(pipe3.getSink(), &sink1);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe4);
+    EXPECT_EQ(pipe4.getSink(), &sink2);
+    EXPECT_EQ(pipe3.getThroughOut(), &pipe4);
+    EXPECT_EQ(pipe4.getSource(), (MIDI_Source *)&pipe3);
 }
 
 TEST(MIDI_Pipes, disconnectSink1) {
@@ -434,22 +443,31 @@ TEST(MIDI_Pipes, disconnectSink1) {
     EXPECT_TRUE(sink2.hasSourcePipe());
 
     EXPECT_FALSE(pipe1.hasSink());
-    EXPECT_TRUE(pipe1.hasSource());
+    EXPECT_FALSE(pipe1.hasSource());
     EXPECT_TRUE(pipe2.hasSink());
     EXPECT_TRUE(pipe2.hasSource());
     EXPECT_FALSE(pipe3.hasSink());
-    EXPECT_TRUE(pipe3.hasSource());
+    EXPECT_FALSE(pipe3.hasSource());
     EXPECT_TRUE(pipe4.hasSink());
     EXPECT_TRUE(pipe4.hasSource());
 
     EXPECT_FALSE(pipe1.hasThroughIn());
-    EXPECT_TRUE(pipe1.hasThroughOut());
+    EXPECT_FALSE(pipe1.hasThroughOut());
     EXPECT_TRUE(pipe2.hasThroughIn());
     EXPECT_FALSE(pipe2.hasThroughOut());
     EXPECT_FALSE(pipe3.hasThroughIn());
-    EXPECT_TRUE(pipe3.hasThroughOut());
+    EXPECT_FALSE(pipe3.hasThroughOut());
     EXPECT_FALSE(pipe4.hasThroughIn());
     EXPECT_FALSE(pipe4.hasThroughOut());
+
+    EXPECT_EQ(source1.getSinkPipe(), &pipe2);
+    EXPECT_EQ(pipe2.getSource(), &source1);
+    EXPECT_EQ(source2.getSinkPipe(), &pipe4);
+    EXPECT_EQ(pipe4.getSource(), &source2);
+    EXPECT_EQ(sink2.getSourcePipe(), &pipe2);
+    EXPECT_EQ(pipe2.getSink(), &sink2);
+    EXPECT_EQ(pipe2.getThroughIn(), &pipe4);
+    EXPECT_EQ(pipe4.getSink(), (MIDI_Sink *)&pipe2);
 }
 
 TEST(MIDI_Pipes, checkConnectionsMoveSink) {
@@ -585,7 +603,7 @@ TEST(MIDI_Pipes, checkConnectionsMoveSink2Sinks) {
     DummyMIDI_Sink sink3 = std::move(sink1);
 
     EXPECT_FALSE(sink1.hasSourcePipe());
-    
+
     EXPECT_TRUE(source.hasSinkPipe());
     EXPECT_TRUE(sink3.hasSourcePipe());
     EXPECT_TRUE(sink2.hasSourcePipe());
@@ -610,7 +628,7 @@ TEST(MIDI_Pipes, checkConnectionsMoveSink2Sinks) {
     DummyMIDI_Sink sink4 = std::move(sink2);
 
     EXPECT_FALSE(sink2.hasSourcePipe());
-    
+
     EXPECT_TRUE(source.hasSinkPipe());
     EXPECT_TRUE(sink3.hasSourcePipe());
     EXPECT_TRUE(sink4.hasSourcePipe());
@@ -827,7 +845,7 @@ TEST(MIDI_Pipes, checkConnectionsMoveSource2Sources) {
     TrueMIDI_Source source3 = std::move(source1);
 
     EXPECT_FALSE(source1.hasSinkPipe());
-    
+
     EXPECT_TRUE(sink.hasSourcePipe());
     EXPECT_TRUE(source3.hasSinkPipe());
     EXPECT_TRUE(source2.hasSinkPipe());
@@ -852,7 +870,7 @@ TEST(MIDI_Pipes, checkConnectionsMoveSource2Sources) {
     TrueMIDI_Source source4 = std::move(source2);
 
     EXPECT_FALSE(source2.hasSinkPipe());
-    
+
     EXPECT_TRUE(sink.hasSourcePipe());
     EXPECT_TRUE(source3.hasSinkPipe());
     EXPECT_TRUE(source4.hasSinkPipe());
@@ -1090,7 +1108,8 @@ TEST(MIDI_Pipes, USBInterface) {
     EXPECT_CALL(midiA[0], readUSBPacket())
         .WillOnce(Return(Packet_t{0x54, 0xF0, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{0x54, 0x77, 0x11, 0x22}))
-        .WillOnce(Return(Packet_t{0x56, 0x33, 0xF7, 0x00}));
+        .WillOnce(Return(Packet_t{0x56, 0x33, 0xF7, 0x00}))
+        .WillOnce(Return(Packet_t{}));
     const uint8_t *sysexData =
         midiA[0].getSysExMessage().data + 5 * sizeof(SysExBuffer);
     //                                    ^~~~ CN
@@ -1100,7 +1119,8 @@ TEST(MIDI_Pipes, USBInterface) {
     EXPECT_CALL(midiA[1], readUSBPacket())
         .WillOnce(Return(Packet_t{0x94, 0xF0, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
-        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}));
+        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
+        .WillOnce(Return(Packet_t{}));
     sysexData = midiA[1].getSysExMessage().data + 9 * sizeof(SysExBuffer);
     //                                            ^~~~ CN
     EXPECT_CALL(midiB[0], sendImpl(sysexData, 7, 9));
@@ -1123,7 +1143,8 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
     EXPECT_CALL(midiA[1], readUSBPacket())
         .WillOnce(Return(Packet_t{0x94, 0xF0, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
-        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}));
+        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
+        .WillOnce(Return(Packet_t{}));
 
     // lock pipes of all MIDI interfaces that pipe to the same sinks as midiA[0]
     // (i.e. midiA[1]) so that midiA[0] has exclusive access.
@@ -1158,7 +1179,8 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midiA[1], readUSBPacket())
-        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}));
+        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t{}));
 
     // lock pipes of all MIDI interfaces that pipe to the same sinks as midiA[0]
     // (i.e. midiA[1]) so that midiA[0] has exclusive access.
@@ -1186,7 +1208,8 @@ TEST(MIDI_Pipes, USBInterfaceLoopBack) {
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midi, readUSBPacket())
-        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}));
+        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t{}));
 
     EXPECT_CALL(midi, writeUSBPacket(0x9, 0x9, 0x95, 0x55, 0x66));
     midi.update();
@@ -1206,6 +1229,7 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midiA[1], readUSBPacket())
         .WillOnce(Return(Packet_t{0x9F, 0xF8, 0x00, 0x00}))
+        .WillOnce(Return(Packet_t{}))
         .WillOnce(Return(Packet_t{}));
 
     ASSERT_TRUE(midiA[0].try_lock_mutex(9));

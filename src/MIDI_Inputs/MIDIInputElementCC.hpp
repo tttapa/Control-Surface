@@ -19,6 +19,8 @@ BEGIN_CS_NAMESPACE
  * 
  * All instances are added to a linked list that can be traversed to update
  * all of them when a new MIDI CC event is received.
+ * 
+ * @ingroup MIDIInputElements
  */
 class MIDIInputElementCC : public MIDIInputElement,
                            public DoublyLinkable<MIDIInputElementCC> {

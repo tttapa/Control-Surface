@@ -21,7 +21,7 @@ class ManyAddressBank {
 
  private:
   ManyAddresses<NumAddr> manyaddresses;
-  BankableMIDIOutput bank;
+  OutputBankableMIDIAddress bank;
 };
 
 template <uint8_t NumAddr>

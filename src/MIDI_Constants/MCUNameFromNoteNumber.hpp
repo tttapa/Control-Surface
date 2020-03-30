@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <Arduino.h>  // __FlashStringHelper
+#include <AH/Arduino-Wrapper.h>  // __FlashStringHelper
 #include <Settings/NamespaceSettings.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -22,7 +22,7 @@ namespace MCU {
  * @param   note 
  *          The note number of the function to look up.
  */
-const __FlashStringHelper *getMCUNameFromNoteNumber(uint8_t note);
+FlashString_t getMCUNameFromNoteNumber(uint8_t note);
 
 } // namespace MCU 
 

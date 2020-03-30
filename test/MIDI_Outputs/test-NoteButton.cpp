@@ -10,7 +10,7 @@ using namespace CS;
 
 TEST(NoteButton, pressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
 
     NoteButton button(2, {0x3C, CHANNEL_7, 0xC});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
@@ -49,7 +49,7 @@ TEST(NoteButton, pressAndRelease) {
 
 TEST(NoteButtonBankable, pressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
 
@@ -88,7 +88,7 @@ TEST(NoteButtonBankable, pressAndRelease) {
 
 TEST(NoteButtonBankable, changeSettingAndPressAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
     // Change bank setting
@@ -129,7 +129,7 @@ TEST(NoteButtonBankable, changeSettingAndPressAndRelease) {
 
 TEST(NoteButtonBankable, pressAndChangeSettingAndRelease) {
     MockMIDI_Interface midi;
-    Control_Surface.connectDefaultMIDI();
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
 

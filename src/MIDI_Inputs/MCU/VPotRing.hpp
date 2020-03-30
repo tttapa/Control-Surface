@@ -112,6 +112,8 @@ class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
         uint8_t index = getBankIndex(target);
         uint8_t value = sanitizeValue(midimsg.data2);
         values[index] = value;
+        if (getSelection() == index)
+            callback.update(*this);
         return true;
     }
 

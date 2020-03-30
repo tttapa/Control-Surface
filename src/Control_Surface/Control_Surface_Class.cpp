@@ -11,7 +11,7 @@
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Selectors/Selector.hpp>
 
-#include <Arduino.h>
+#include <AH/Arduino-Wrapper.h>
 
 BEGIN_CS_NAMESPACE
 
@@ -27,64 +27,75 @@ void Control_Surface_::begin() {
     DEBUG_OUT.begin(AH::defaultBaudRate);
     delay(250);
 #endif
-    // Initialize the hardware (ADC and Extended IO)
+
+    connectDefaultMIDI_Interface();
+
     FilteredAnalog<>::setupADC();
     ExtendedIOElement::beginAll();
-    // Initialize the MIDI interfaces
     Updatable<MIDI_Interface>::beginAll();
-    connectDefaultMIDI();
-    // Initialize the displays
-    DisplayInterface::beginAll();
-    // Initialize the MIDI Input Elements
+    DisplayInterface::beginAll(); // initialize all displays
     MIDIInputElementCC::beginAll();
     MIDIInputElementPC::beginAll();
     MIDIInputElementChannelPressure::beginAll();
     MIDIInputElementNote::beginAll();
     MIDIInputElementSysEx::beginAll();
-    // Initialize the Updatables (including MIDI Output Elements)
     Updatable<>::beginAll();
     Updatable<Potentiometer>::beginAll();
     Updatable<MotorFader>::beginAll();
-    Updatable<Display>::beginAll(); // Display elements
-    // Reset the timers
+    Updatable<Display>::beginAll();
     potentiometerTimer.begin();
     displayTimer.begin();
 }
 
-bool Control_Surface_::connectDefaultMIDI() {
-    if (MIDI_Interface::getDefault()) {
-        auto &midi_interface = *MIDI_Interface::getDefault();
-        auto &control_surface = *this;
-        pipe.first.disconnect();
-        pipe.second.disconnect();
-        // Connect Control Surface to the default MIDI interface:
-        control_surface | pipe | midi_interface;
-        return true;
-    } else {
-        DEBUG(F("Warning: no default MIDI interface, Control Surface not "
-                "connected"));
+bool Control_Surface_::connectDefaultMIDI_Interface() {
+    if (hasSinkPipe() || hasSourcePipe())
+        return false;
+    auto def = MIDI_Interface::getDefault();
+    if (def == nullptr) {
+        FATAL_ERROR(F("No default MIDI Interface"), 0xF123);
         return false;
     }
+    *this << inpipe << *def;
+    *this >> outpipe >> *def;
+    return true;
+}
+
+void Control_Surface_::disconnectMIDI_Interfaces() {
+    disconnectSinkPipes();
+    disconnectSourcePipes();
 }
 
 void Control_Surface_::loop() {
-    // Update MIDI Output Elements
     Updatable<>::updateAll();
     if (potentiometerTimer)
         Updatable<Potentiometer>::updateAll();
-    // Read MIDI input
-    Updatable<MIDI_Interface>::updateAll();
-    // Update MIDI Input Elements
+    updateMidiInput();
     updateInputs();
-    // Update the displays
     if (displayTimer)
         updateDisplays();
 }
 
-MIDI_Sender &Control_Surface_::MIDI() { return *this; }
+void Control_Surface_::updateMidiInput() {
+    Updatable<MIDI_Interface>::updateAll();
+}
+
+void Control_Surface_::sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+                                uint8_t cn) {
+    this->sourceMIDItoPipe(ChannelMessage{uint8_t(m | c), d1, d2, cn});
+}
+void Control_Surface_::sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) {
+    this->sourceMIDItoPipe(ChannelMessage{uint8_t(m | c), d1, 0x00, cn});
+}
+void Control_Surface_::sendImpl(const uint8_t *data, size_t length,
+                                uint8_t cn) {
+    this->sourceMIDItoPipe(SysExMessage{data, length, cn});
+}
+void Control_Surface_::sendImpl(uint8_t rt, uint8_t cn) {
+    this->sourceMIDItoPipe(RealTimeMessage{rt, cn});
+}
 
 void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midichmsg) {
-    ChannelMessageMatcher midimsg = midichmsg;
+    ChannelMessageMatcher midimsg = {midichmsg};
 
 #ifdef DEBUG_MIDI_PACKETS
     // TODO: print CN

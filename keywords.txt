@@ -12,78 +12,6 @@
 Arduino_Helpers	KEYWORD1
 AH	KEYWORD1
 
-# AH/Math
-#########
-
-increaseBitDepth	KEYWORD2
-min	KEYWORD2
-max	KEYWORD2
-
-# AH/Timing
-###########
-
-Timer	KEYWORD1
-
-begin	KEYWORD2
-
-timefunction	LITERAL1
-
-# AH/Containers
-###############
-
-Array	KEYWORD1
-ArraySlice	KEYWORD1
-Iterator	KEYWORD1
-BitArray	KEYWORD1
-DoublyLinkedList	KEYWORD1
-iterator	KEYWORD1
-const_iterator	KEYWORD1
-reverse_iterator	KEYWORD1
-const_reverse_iterator	KEYWORD1
-DoublyLinkable	KEYWORD1
-UniquePtr	KEYWORD1
-NormalUpdatable	KEYWORD1
-Updatable	KEYWORD1
-
-length	KEYWORD2
-begin	KEYWORD2
-end	KEYWORD2
-slice	KEYWORD2
-cslice	KEYWORD2
-asArray	KEYWORD2
-generate	KEYWORD2
-generateArray	KEYWORD2
-copyAs	KEYWORD2
-fillArray	KEYWORD2
-cat	KEYWORD2
-distribute	KEYWORD2
-get	KEYWORD2
-set	KEYWORD2
-clear	KEYWORD2
-safeIndex	KEYWORD2
-getByte	KEYWORD2
-getBufferLength	KEYWORD2
-append	KEYWORD2
-insertBefore	KEYWORD2
-insertSorted	KEYWORD2
-remove	KEYWORD2
-moveDown	KEYWORD2
-couldContain	KEYWORD2
-reset	KEYWORD2
-get	KEYWORD2
-release	KEYWORD2
-MakeUnique	KEYWORD2
-update	KEYWORD2
-begin	KEYWORD2
-enable	KEYWORD2
-disable	KEYWORD2
-isEnabled	KEYWORD2
-beginAll	KEYWORD2
-updateAll	KEYWORD2
-
-ElementRefType	LITERAL1
-ElementPtrType	LITERAL1
-
 # AH/Hardware
 #############
 
@@ -397,6 +325,92 @@ DotBarMode	LITERAL1
 Dot	LITERAL1
 Bar	LITERAL1
 
+# AH/Containers
+###############
+
+Array	KEYWORD1
+ArraySlice	KEYWORD1
+Iterator	KEYWORD1
+BitArray	KEYWORD1
+DoublyLinkedList	KEYWORD1
+iterator	KEYWORD1
+const_iterator	KEYWORD1
+reverse_iterator	KEYWORD1
+const_reverse_iterator	KEYWORD1
+DoublyLinkable	KEYWORD1
+UniquePtr	KEYWORD1
+NormalUpdatable	KEYWORD1
+Updatable	KEYWORD1
+
+length	KEYWORD2
+begin	KEYWORD2
+end	KEYWORD2
+slice	KEYWORD2
+cslice	KEYWORD2
+asArray	KEYWORD2
+generate	KEYWORD2
+generateArray	KEYWORD2
+copyAs	KEYWORD2
+fillArray	KEYWORD2
+cat	KEYWORD2
+distribute	KEYWORD2
+get	KEYWORD2
+set	KEYWORD2
+clear	KEYWORD2
+safeIndex	KEYWORD2
+getByte	KEYWORD2
+getBufferLength	KEYWORD2
+append	KEYWORD2
+insertBefore	KEYWORD2
+insertSorted	KEYWORD2
+remove	KEYWORD2
+moveDown	KEYWORD2
+couldContain	KEYWORD2
+reset	KEYWORD2
+get	KEYWORD2
+release	KEYWORD2
+MakeUnique	KEYWORD2
+update	KEYWORD2
+begin	KEYWORD2
+enable	KEYWORD2
+disable	KEYWORD2
+isEnabled	KEYWORD2
+beginAll	KEYWORD2
+updateAll	KEYWORD2
+
+ElementRefType	LITERAL1
+ElementPtrType	LITERAL1
+
+# AH/Math
+#########
+
+Quaternion	KEYWORD1
+EulerAngles	KEYWORD1
+Vec2f	KEYWORD1
+Vec3f	KEYWORD1
+
+increaseBitDepth	KEYWORD2
+min	KEYWORD2
+max	KEYWORD2
+w	KEYWORD2
+x	KEYWORD2
+y	KEYWORD2
+z	KEYWORD2
+hamiltonianProduct	KEYWORD2
+conjugated	KEYWORD2
+normSquared	KEYWORD2
+norm	KEYWORD2
+normalize	KEYWORD2
+normalized	KEYWORD2
+rotate	KEYWORD2
+identity	KEYWORD2
+fromDirection	KEYWORD2
+fromXYAngle	KEYWORD2
+quat2eul	KEYWORD2
+eul2quat	KEYWORD2
+rad2deg	KEYWORD2
+deg2rad	KEYWORD2
+
 # AH/Types
 ##########
 
@@ -405,6 +419,15 @@ Frequency	KEYWORD1
 _MHz	LITERAL1
 _kHz	LITERAL1
 _Hz	LITERAL1
+
+# AH/Timing
+###########
+
+Timer	KEYWORD1
+
+begin	KEYWORD2
+
+timefunction	LITERAL1
 
 # AH/Filters
 ############
