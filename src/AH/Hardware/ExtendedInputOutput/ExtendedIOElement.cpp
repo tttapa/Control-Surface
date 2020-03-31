@@ -15,14 +15,18 @@ ExtendedIOElement::ExtendedIOElement(pin_t length)
                       "recommended."),
                     0x00FF);
     offset = end;
-    elements.append(this);
 }
 
-ExtendedIOElement::~ExtendedIOElement() { elements.remove(this); }
-
 void ExtendedIOElement::beginAll() {
-    for (ExtendedIOElement &e : elements)
-        e.begin();
+    ExtendedIOElement::applyToAll(&ExtendedIOElement::begin);
+}
+
+void ExtendedIOElement::updateAllBufferedOutputs() {
+    ExtendedIOElement::applyToAll(&ExtendedIOElement::updateBufferedOutputs);
+}
+
+void ExtendedIOElement::updateAllBufferedInputs() {
+    ExtendedIOElement::applyToAll(&ExtendedIOElement::updateBufferedInputs);
 }
 
 pin_t ExtendedIOElement::pin(pin_t p) const {
@@ -49,10 +53,8 @@ pin_t ExtendedIOElement::getEnd() const { return end; }
 pin_t ExtendedIOElement::getStart() const { return start; }
 
 DoublyLinkedList<ExtendedIOElement> &ExtendedIOElement::getAll() {
-    return elements;
+    return updatables;
 }
-
-DoublyLinkedList<ExtendedIOElement> ExtendedIOElement::elements;
 
 pin_t ExtendedIOElement::offset = NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS;
 

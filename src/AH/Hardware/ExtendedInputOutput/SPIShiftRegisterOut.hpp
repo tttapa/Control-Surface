@@ -64,7 +64,7 @@ class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
     /**
      * @brief   Write the state buffer to the physical outputs.
      */
-    void update() override;
+    void updateBufferedOutputs() override;
 };
 
 END_AH_NAMESPACE

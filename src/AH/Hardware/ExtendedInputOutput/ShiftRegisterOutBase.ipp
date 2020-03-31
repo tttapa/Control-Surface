@@ -13,7 +13,13 @@ template <uint8_t N>
 void ShiftRegisterOutBase<N>::digitalWrite(pin_t pin, PinStatus_t val) {
     buffer.set(pin, val);
     dirty = true;
-    this->update(); // TODO: should I always update?
+    this->updateBufferedOutputs(); // TODO: should I always update?
+}
+
+template <uint8_t N>
+void ShiftRegisterOutBase<N>::digitalWriteBuffered(pin_t pin, PinStatus_t val) {
+    buffer.set(pin, val);
+    dirty = true;
 }
 
 template <uint8_t N>

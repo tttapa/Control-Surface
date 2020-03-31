@@ -20,8 +20,15 @@ class MockExtIOElement : public ExtendedIOElement {
     MOCK_METHOD1(analogRead, analog_t(pin_t));
     MOCK_METHOD2(analogWrite, void(pin_t, analog_t));
 
+    MOCK_METHOD2(pinModeBuffered, void(pin_t, uint8_t));
+    MOCK_METHOD2(digitalWriteBuffered, void(pin_t, uint8_t));
+    MOCK_METHOD1(digitalReadBuffered, int(pin_t));
+    MOCK_METHOD1(analogReadBuffered, analog_t(pin_t));
+    MOCK_METHOD2(analogWriteBuffered, void(pin_t, analog_t));
+
     MOCK_METHOD0(begin, void());
-    MOCK_METHOD0(update, void());
+    MOCK_METHOD0(updateBufferedOutputs, void());
+    MOCK_METHOD0(updateBufferedInputs, void());
 };
 
 W_SUGGEST_OVERRIDE_ON

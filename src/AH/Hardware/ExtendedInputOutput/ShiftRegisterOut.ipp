@@ -14,11 +14,11 @@ void ShiftRegisterOut<N>::begin() {
     ExtIO::pinMode(dataPin, OUTPUT);
     ExtIO::pinMode(clockPin, OUTPUT);
     ExtIO::pinMode(this->latchPin, OUTPUT);
-    update();
+    updateBufferedOutputs();
 }
 
 template <uint8_t N>
-void ShiftRegisterOut<N>::update() {
+void ShiftRegisterOut<N>::updateBufferedOutputs() {
     if (!this->dirty)
         return;
     ExtIO::digitalWrite(this->latchPin, LOW);

@@ -113,4 +113,5 @@
     "C_Cpp.default.cppStandard": "c++14",
     "editor.scrollBeyondLastColumn": 0,
     "terminal.integrated.cwd": "build",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json"
 }
