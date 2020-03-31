@@ -48,15 +48,9 @@ struct TrueMIDI_Sink;
 struct TrueMIDI_Source;
 
 /// Class that can receive MIDI messages from a MIDI pipe.
+/// @nosubgrouping
 class MIDI_Sink {
   public:
-    /// Accept an incoming MIDI Channel message.
-    virtual void sinkMIDIfromPipe(ChannelMessage) = 0;
-    /// Accept an incoming MIDI System Exclusive message.
-    virtual void sinkMIDIfromPipe(SysExMessage) = 0;
-    /// Accept an incoming MIDI Real-Time message.
-    virtual void sinkMIDIfromPipe(RealTimeMessage) = 0;
-
     /// Default constructor.
     MIDI_Sink() = default;
 
@@ -73,6 +67,21 @@ class MIDI_Sink {
     /// Destructor.
     virtual ~MIDI_Sink();
 
+    /// @name Sending data over a MIDI Pipe
+    /// @{
+
+    /// Accept an incoming MIDI Channel message.
+    virtual void sinkMIDIfromPipe(ChannelMessage) = 0;
+    /// Accept an incoming MIDI System Exclusive message.
+    virtual void sinkMIDIfromPipe(SysExMessage) = 0;
+    /// Accept an incoming MIDI Real-Time message.
+    virtual void sinkMIDIfromPipe(RealTimeMessage) = 0;
+
+    /// @}
+
+    /// @name Connecting and disconnecting MIDI Pipes
+    /// @{
+
     /// Fully connect a source pipe to this sink.
     void connectSourcePipe(MIDI_Pipe *source);
     /// Disconnect all source pipes that sink to this sink (recursively).
@@ -88,6 +97,8 @@ class MIDI_Sink {
 #ifndef ARDUINO
     MIDI_Pipe *getSourcePipe() { return sourcePipe; }
 #endif
+
+    /// @}
 
   private:
     /// Base case for recursive lock function.
@@ -112,42 +123,18 @@ class MIDI_Sink {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 /// Class that can send MIDI messages to a MIDI pipe.
+/// @nosubgrouping
 class MIDI_Source {
   public:
+    /// @name Sending data over a MIDI Pipe
+    /// @{
+
     /// Send a MIDI Channel Message.
     void sourceMIDItoPipe(ChannelMessage);
     /// Send a MIDI System Exclusive message.
     void sourceMIDItoPipe(SysExMessage);
     /// Send a MIDI Real-Time message.
     void sourceMIDItoPipe(RealTimeMessage);
-
-    /// Default constructor.
-    MIDI_Source() = default;
-
-    /// Copy constructor (copying not allowed).
-    MIDI_Source(const MIDI_Source &) = delete;
-    /// Copy assignment (copying not allowed).
-    MIDI_Source &operator=(const MIDI_Source &) = delete;
-
-    /// Move constructor.
-    MIDI_Source(MIDI_Source &&other);
-    /// Move assignment.
-    MIDI_Source &operator=(MIDI_Source &&other);
-
-    /// Destructor.
-    virtual ~MIDI_Source();
-
-    /// Fully connect a sink pipe to this source.
-    void connectSinkPipe(MIDI_Pipe *sink);
-    /// Disconnect all sink pipes that this source sinks to (recursively).
-    void disconnectSinkPipes();
-    /// Disconnect the given sink from this source. Leaves other sinks
-    /// connected.
-    /// Returns true if the sink was found and disconnected, false if the
-    /// given sink was not a direct or indirect sink of this source.
-    bool disconnect(TrueMIDI_Sink &sink);
-    /// Check if this source is connected to a sink pipe.
-    bool hasSinkPipe() const { return sinkPipe != nullptr; }
 
     /** 
      * @brief   Enter or exit exclusive mode for the given cable number.
@@ -170,9 +157,44 @@ class MIDI_Source {
      */
     bool canWrite(cn_t cn) const;
 
+    /// @}
+
+    /// Default constructor.
+    MIDI_Source() = default;
+
+    /// Copy constructor (copying not allowed).
+    MIDI_Source(const MIDI_Source &) = delete;
+    /// Copy assignment (copying not allowed).
+    MIDI_Source &operator=(const MIDI_Source &) = delete;
+
+    /// Move constructor.
+    MIDI_Source(MIDI_Source &&other);
+    /// Move assignment.
+    MIDI_Source &operator=(MIDI_Source &&other);
+
+    /// Destructor.
+    virtual ~MIDI_Source();
+
+    /// @name Connecting and disconnecting MIDI Pipes
+    /// @{
+
+    /// Fully connect a sink pipe to this source.
+    void connectSinkPipe(MIDI_Pipe *sink);
+    /// Disconnect all sink pipes that this source sinks to (recursively).
+    void disconnectSinkPipes();
+    /// Disconnect the given sink from this source. Leaves other sinks
+    /// connected.
+    /// Returns true if the sink was found and disconnected, false if the
+    /// given sink was not a direct or indirect sink of this source.
+    bool disconnect(TrueMIDI_Sink &sink);
+    /// Check if this source is connected to a sink pipe.
+    bool hasSinkPipe() const { return sinkPipe != nullptr; }
+
 #ifndef ARDUINO
     MIDI_Pipe *getSinkPipe() { return sinkPipe; }
 #endif
+
+    /// @}
 
   private:
     /// Base case for recursive function.
@@ -194,8 +216,10 @@ class MIDI_Source {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 /// A MIDI_Sink that is not a MIDI_Pipe.
+/// @nosubgrouping
 struct TrueMIDI_Sink : MIDI_Sink {};
 /// A MIDI_Source that is not a MIDI_Pipe.
+/// @nosubgrouping
 struct TrueMIDI_Source : MIDI_Source {};
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -438,6 +462,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 /// A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source.
+/// @nosubgrouping
 struct TrueMIDI_SinkSource : TrueMIDI_Sink, TrueMIDI_Source {};
 
 /// A bidirectional pipe consists of two unidirectional pipes.

@@ -22,16 +22,22 @@ using AH::Updatable;
  *          all other classes, it's the glue that holds everything together.
  * 
  * @ingroup ControlSurfaceModule
+ * 
+ * @nosubgrouping
  */
 class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
                          public TrueMIDI_SinkSource {
 
     friend class MIDI_Sender<Control_Surface_>;
 
+    /// @name Singleton boilerplate
+    /// @{
+
   public:
-    // Copying is not allowed
+    /// Copying is not allowed
     Control_Surface_(Control_Surface_ const &) = delete;
-    void operator=(Control_Surface_ const &) = delete;
+    /// Copying is not allowed
+    Control_Surface_ &operator=(Control_Surface_ const &) = delete;
 
     /**
      * @brief   Return the static Control_Surface_ instance.
@@ -39,6 +45,15 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
      */
     static Control_Surface_ &getInstance();
 
+  private:
+    /**
+     * @brief   Control_Surface_ is a singleton, so the constructor is private.
+     */
+    Control_Surface_() = default;
+
+    /// @}
+
+  public:
     /**
      * @brief   Initialize the Control_Surface.
      */
@@ -108,17 +123,15 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     void sinkMIDIfromPipe(RealTimeMessage msg) override;
 
   private:
-    /**
-     * @brief   Control_Surface_ is a singleton, so the constructor is private.
-     */
-    Control_Surface_() = default;
-
     /// A timer to know when to update the analog inputs.
     Timer<micros> potentiometerTimer = {AH::FILTERED_INPUT_UPDATE_INTERVAL};
     /// A timer to know when to refresh the displays.
     Timer<micros> displayTimer = {1000000UL / MAX_FPS};
 
   public:
+    /// @name MIDI Input Callbacks
+    /// @{
+
     /// Callback function type for channel messages. Return true if handling is
     /// done in the user-provided callback, false if `Control_Surface`
     /// should handle the message.
@@ -141,6 +154,8 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
         this->sysExMessageCallback = sysExMessageCallback;
         this->realTimeMessageCallback = realTimeMessageCallback;
     }
+
+    /// @}
 
   private:
     ChannelMessageCallback channelMessageCallback = nullptr;

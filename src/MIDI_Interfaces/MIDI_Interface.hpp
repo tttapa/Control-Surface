@@ -14,10 +14,15 @@ class MIDI_Callbacks;
 
 /**
  * @brief   Statically polymorphic template for classes that send MIDI messages.
+ * 
+ * @nosubgrouping
  */
 template <class Derived>
 class MIDI_Sender {
   public:
+    /// @name Sending MIDI
+    /// @{
+
     /**
      * @brief   Send a 3-byte MIDI packet.
      *
@@ -113,6 +118,8 @@ class MIDI_Sender {
     void send(RealTimeMessage message);
     /// Send a single-byte MIDI message.
     void send(uint8_t rt, uint8_t cn = 0);
+
+    /// @}
 };
 
 /**
