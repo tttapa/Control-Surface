@@ -56,7 +56,7 @@ A complete overview of the available MIDI interfaces can be found in the
 For now, we'll use the `USBMIDI_Interface` because it's probably the one you'll
 use in your final program.
 
-You can give the interface any name you want, here, I'll be very original and
+You can give the interface any name you want. I'll be very original and
 choose `midi`. It doesn't matter, and you don't need to use it afterwards, 
 just defining the interface is enough, the Control Surface library will 
 automatically detect and use it.
@@ -121,13 +121,28 @@ For the MIDI controller numbers, you can use the
 ```cpp
 CCPotentiometer potentiometer = { A1, {MIDI_CC::Channel_Volume, CHANNEL_1} };
 ```
+```cpp
+CCPotentiometer potentiometer = { A1, {7, CHANNEL_1} };
+```
 
 In our case, we don't want a single potentiometer, we want eight. It's much
 easier to define them in an array.  
-Also note how we state that it should use the pins of the multiplexer we 
-defined in the previous step. 
+Also note how we declare that the potentiometers are connected to the the pins 
+of the multiplexer we defined in the previous step.
 
-> **Note**: The first pin is `pin(0)`, not `pin(1)`.
+To go from the initialization of a single potentiometer to the initialization of
+an array of potentiometers, we just create a comma-separated list of 
+initializers for single elements, and then we add another pair of curly braces 
+around it.  
+Compare this to the initialization of an array of integers: to initialize a 
+single integer, you use `int i = 42;` and to initialize an array of integers, 
+you use `int ii[] = {42, 43, ...};`. 
+Analogously, to initialize a single potentiometer object, you use 
+`CCPotentiometer pot = {pin, address};` and to initialize an array of 
+potentiometers, you use 
+`CCPotentiometer pots[] = { {pin, address}, {pin, address}, ... };`.
+
+> **Note**: The first pin is of the multiplexer is `pin(0)`, not `pin(1)`.
 
 ```cpp
 CCPotentiometer volumePotentiometers[] = {
@@ -163,7 +178,7 @@ void setup() {
 }
 ```
 
-> **Note**: If you didn't define a MIDI interface, `Control_Surface.begin()`
+> **Note**: If you forget to define a MIDI interface, `Control_Surface.begin()`
 > will raise an error and the on-board LED will start blinking.  
 > Other errors will also be indicated this way.  
 > If you don't know why this happens, you should enable debug information in 
