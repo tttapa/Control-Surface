@@ -44,7 +44,7 @@ class NoteChordButton : public MIDIChordButton<DigitalNoteSender> {
      */
     template <uint8_t N>
     NoteChordButton(const OutputBankConfig &config, pin_t pin,
-                    const MIDICNChannelAddress &address, const Chord<N> &chord,
+                    const MIDIAddress &address, const Chord<N> &chord,
                     uint8_t velocity = 0x7F)
         : MIDIChordButton<DigitalNoteSender>{
               config, pin, address, chord, {velocity},

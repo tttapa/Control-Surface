@@ -1,7 +1,8 @@
 #pragma once
 
+#include <AH/Containers/BitArray.hpp>
 #include <AH/Hardware/Button.hpp>
-#include <Banks/BankableMIDIOutput.hpp>
+#include <Banks/BankableAddresses.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -17,7 +18,7 @@ namespace Bankable {
  *
  * @see     AH::Button
  */
-template <class BankAddress, class Sender>
+template <uint8_t NumBanks, class BankAddress, class Sender>
 class MIDIButtonLatched : public MIDIOutputElement {
   protected:
     /**
@@ -38,6 +39,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
 
   public:
     void begin() override { button.begin(); }
+
     void update() override {
         AH::Button::State state = button.update();
         if (state == AH::Button::Falling)
@@ -45,18 +47,19 @@ class MIDIButtonLatched : public MIDIOutputElement {
     }
 
     bool toggleState() {
-        setState(!getState());
-        return getState();
+        bool newstate = !getState();
+        setState(newstate);
+        return newstate;
     }
-    bool getState() const { return state; }
+
+    bool getState() const { return states.get(address.getSelection()); }
+
     void setState(bool state) {
-        this->state = state;
+        states.set(address.getSelection(), state);
         if (state) {
-            address.lock();
             sender.sendOn(address.getActiveAddress());
         } else {
             sender.sendOff(address.getActiveAddress());
-            address.unlock();
         }
     }
 
@@ -65,7 +68,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
   private:
     BankAddress address;
     AH::Button button;
-    bool state = false;
+    AH::BitArray<NumBanks> states;
 
   public:
     Sender sender;

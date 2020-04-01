@@ -13,7 +13,7 @@ BEGIN_CS_NAMESPACE
  *
  * @see     Button
  */
-template <class Sender, uint8_t NUMBER_OF_BUTTONS>
+template <class Sender, uint8_t NumButtons>
 class MIDIButtons : public MIDIOutputElement {
   protected:
     /**
@@ -21,9 +21,9 @@ class MIDIButtons : public MIDIOutputElement {
      *
      * @todo    Documentation
      */
-    MIDIButtons(const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
-                const MIDICNChannelAddress &baseAddress,
-                const RelativeMIDICNChannelAddress &incrementAddress,
+    MIDIButtons(const Array<AH::Button, NumButtons> &buttons,
+                const MIDIAddress &baseAddress,
+                const RelativeMIDIAddress &incrementAddress,
                 const Sender &sender)
         : buttons{buttons}, baseAddress(baseAddress),
           incrementAddress(incrementAddress), sender{sender} {}
@@ -34,7 +34,7 @@ class MIDIButtons : public MIDIOutputElement {
             button.begin();
     }
     void update() final override {
-        MIDICNChannelAddress address = baseAddress;
+        MIDIAddress address = baseAddress;
         for (auto &button : buttons) {
             AH::Button::State state = button.update();
             if (state == AH::Button::Falling) {
@@ -58,9 +58,9 @@ class MIDIButtons : public MIDIOutputElement {
 #endif
 
   private:
-    Array<AH::Button, NUMBER_OF_BUTTONS> buttons;
-    const MIDICNChannelAddress baseAddress;
-    const RelativeMIDICNChannelAddress incrementAddress;
+    Array<AH::Button, NumButtons> buttons;
+    const MIDIAddress baseAddress;
+    const RelativeMIDIAddress incrementAddress;
 
   public:
     Sender sender;

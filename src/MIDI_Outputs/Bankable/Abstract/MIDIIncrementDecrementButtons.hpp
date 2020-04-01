@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Banks/BankableMIDIOutput.hpp>
-#include <Def/Def.hpp>
 #include <AH/Hardware/IncrementDecrementButtons.hpp>
+#include <Banks/BankableAddresses.hpp>
+#include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
-
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -37,7 +36,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
 
     void update() override {
         using IncrDecrButtons = AH::IncrementDecrementButtons;
-        MIDICNChannelAddress address = addresses.getActiveAddress(0);
+        MIDIAddress address = addresses.getFirstActiveAddress();
         switch (buttons.update()) {
             case IncrDecrButtons::Increment: send(multiplier, address); break;
             case IncrDecrButtons::Decrement: send(-multiplier, address); break;
@@ -47,12 +46,12 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         }
     }
 
-    void send(long delta, const MIDICNChannelAddress &address) {
+    void send(long delta, const MIDIAddress &address) {
         relativeSender.send(delta, address);
     }
 
     void reset() {
-        MIDICNChannelAddress address = addresses.getActiveAddress(1);
+        MIDIAddress address = addresses.getSecondActiveAddress();
         if (address) {
             resetSender.sendOn(address);
             resetSender.sendOff(address);

@@ -39,7 +39,7 @@ class NoteButton : public MIDIButton<SingleAddress, DigitalNoteSender> {
      *          The velocity of the MIDI Note events.
      */
     NoteButton(const OutputBankConfig &config, pin_t pin,
-               const MIDICNChannelAddress &address, uint8_t velocity = 0x7F)
+               const MIDIAddress &address, uint8_t velocity = 0x7F)
         : MIDIButton<SingleAddress, DigitalNoteSender>{
               {config, address},
               pin,

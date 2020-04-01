@@ -22,12 +22,22 @@ using AH::Updatable;
  *          all other classes, it's the glue that holds everything together.
  * 
  * @ingroup ControlSurfaceModule
+ * 
+ * @nosubgrouping
  */
-class Control_Surface_ : public MIDI_Callbacks {
+class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
+                         public TrueMIDI_SinkSource {
+
+    friend class MIDI_Sender<Control_Surface_>;
+
+    /// @name Singleton boilerplate
+    /// @{
+
   public:
-    // Copying is not allowed
+    /// Copying is not allowed
     Control_Surface_(Control_Surface_ const &) = delete;
-    void operator=(Control_Surface_ const &) = delete;
+    /// Copying is not allowed
+    Control_Surface_ &operator=(Control_Surface_ const &) = delete;
 
     /**
      * @brief   Return the static Control_Surface_ instance.
@@ -35,6 +45,15 @@ class Control_Surface_ : public MIDI_Callbacks {
      */
     static Control_Surface_ &getInstance();
 
+  private:
+    /**
+     * @brief   Control_Surface_ is a singleton, so the constructor is private.
+     */
+    Control_Surface_() = default;
+
+    /// @}
+
+  public:
     /**
      * @brief   Initialize the Control_Surface.
      */
@@ -46,14 +65,23 @@ class Control_Surface_ : public MIDI_Callbacks {
     void loop();
 
     /**
-     * @brief   Get the MIDI interface of the Control Surface.
-     *
-     * @return  A reference to the Control Surface's MIDI interface.
-     * 
-     * @todo    This violate's the Law of Demeter.
+     * @brief   Connect Control Surface to the default MIDI interface.
      */
-    MIDI_Interface &MIDI();
+    bool connectDefaultMIDI_Interface();
 
+    /**
+     * @brief   Disconnect Control Surface from the MIDI interfaces it's 
+     *          connected to.
+     */
+    void disconnectMIDI_Interfaces();
+
+    /**
+     * @brief   Get a reference to the MIDI sender.
+     * 
+     * @deprecated  Use `Control_Surface.send(...)` directly instead of 
+     *              `Control_Surface.MIDI().send(...)`.
+     */
+    MIDI_Sender<Control_Surface_> &MIDI() { return *this; }
     /** 
      * @brief   Update all MIDI interfaces to receive new MIDI events.
      */
@@ -71,35 +99,39 @@ class Control_Surface_ : public MIDI_Callbacks {
 
   private:
     /**
-     * @brief   Control_Surface_ is a singleton, so the constructor is private.
+     * @brief   Low-level function for sending a 3-byte MIDI message.
      */
-    Control_Surface_() = default;
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2, uint8_t cn);
+    /**
+     * @brief   Low-level function for sending a 2-byte MIDI message.
+     */
+    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn);
+
+    /**
+     * @brief   Low-level function for sending a system exclusive MIDI message.
+     */
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn);
 
     /** 
-     * @brief   The callback to be called when a MIDI channel message is
-     *          received.
+     * @brief   Low-level function for sending a single-byte MIDI message.
      */
-    void onChannelMessage(Parsing_MIDI_Interface &midi) override;
+    void sendImpl(uint8_t rt, uint8_t cn);
 
-    /** 
-     * @brief   The callback to be called when a MIDI System Exclusive message
-     *          is received.
-     */
-    void onSysExMessage(Parsing_MIDI_Interface &midi) override;
+  private:
+    void sinkMIDIfromPipe(ChannelMessage msg) override;
+    void sinkMIDIfromPipe(SysExMessage msg) override;
+    void sinkMIDIfromPipe(RealTimeMessage msg) override;
 
-    /** 
-     * @brief   The callback to be called when a MIDI Real-Time message is 
-     *          received.
-     */
-    void onRealtimeMessage(Parsing_MIDI_Interface &midi,
-                           uint8_t message) override;
-
+  private:
     /// A timer to know when to update the analog inputs.
     Timer<micros> potentiometerTimer = {AH::FILTERED_INPUT_UPDATE_INTERVAL};
     /// A timer to know when to refresh the displays.
     Timer<micros> displayTimer = {1000000UL / MAX_FPS};
 
   public:
+    /// @name MIDI Input Callbacks
+    /// @{
+
     /// Callback function type for channel messages. Return true if handling is
     /// done in the user-provided callback, false if `Control_Surface`
     /// should handle the message.
@@ -123,10 +155,13 @@ class Control_Surface_ : public MIDI_Callbacks {
         this->realTimeMessageCallback = realTimeMessageCallback;
     }
 
+    /// @}
+
   private:
     ChannelMessageCallback channelMessageCallback = nullptr;
     SysExMessageCallback sysExMessageCallback = nullptr;
     RealTimeMessageCallback realTimeMessageCallback = nullptr;
+    MIDI_Pipe inpipe, outpipe;
 };
 
 /// A predefined instance of the Control Surface to use in the Arduino sketches.

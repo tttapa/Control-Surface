@@ -2,13 +2,14 @@ add_subdirectory(AH)
 
 if (FAST_COMPILE)
     set(CONTROL_SURFACE_SOURCES
-        Def/MIDICNChannelAddress.cpp
+        Def/MIDIAddress.cpp
         MIDI_Inputs/MIDIInputElementCC.cpp
         MIDI_Inputs/MIDIInputElementNote.cpp
         MIDI_Inputs/MIDIInputElementChannelPressure.cpp
         MIDI_Inputs/MIDIInputElementSysEx.cpp
         MIDI_Inputs/MIDIInputElementPC.cpp
         MIDI_Inputs/MCU/LCD.cpp
+        MIDI_Interfaces/MIDI_Pipes.cpp
         MIDI_Constants/MCUNameFromNoteNumber.cpp
         Display/DisplayInterface.cpp
         Display/DisplayElement.cpp

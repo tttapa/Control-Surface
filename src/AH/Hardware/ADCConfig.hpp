@@ -5,14 +5,14 @@
  * @brief   This file contains the platform-specific ADC resolutions.
  *          By default, the library automatically selects the maximum supported
  *          resolution for known boards, otherwise, it falls back to 10 bits.
- * @see     @ref ADC_BITS
+ * @see     @ref AH::ADC_BITS
  */
 
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <Arduino.h>
+#include <AH/Arduino-Wrapper.h>
 AH_DIAGNOSTIC_POP()
 
 #if defined(ADC_RESOLUTION)

@@ -38,9 +38,8 @@ class NoteButtonMatrix
      * @brief   Create a new Bankable NoteButtonMatrix object with the given 
      *          pins, controller numbers and channel.
      * 
-     * @param   config
-     *          The bank configuration to use: the bank to add this element to,
-     *          and whether to change the address, channel or cable number.
+     * @param   bank
+     *          The bank to add this element to.
      * @param   rowPins
      *          A list of pin numbers connected to the rows of the button
      *          matrix.  
@@ -61,14 +60,14 @@ class NoteButtonMatrix
      *          The velocity of the MIDI Note events.
      */
     NoteButtonMatrix(
-        const OutputBankConfig &config, const PinList<nb_rows> &rowPins,
+        const Bank<NumBanks> &bank, const PinList<nb_rows> &rowPins,
         const PinList<nb_cols> &colPins,
         const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &notes,
-        const Array<MIDICNChannel, NumBanks> &channelCNs,
+        const Array<MIDIChannelCN, NumBanks> &channelCNs,
         uint8_t velocity = 0x7F)
         : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, nb_rows, nb_cols>,
                            DigitalNoteSender, nb_rows, nb_cols>{
-              {config, notes, channelCNs},
+              {bank, notes, channelCNs},
               rowPins,
               colPins,
               {velocity},

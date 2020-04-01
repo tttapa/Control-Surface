@@ -10,6 +10,7 @@ using namespace CS;
 
 TEST(CCButton, pressAndRelease) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     CCButton button(2, {0x3C, CHANNEL_7, 0xC});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
@@ -46,6 +47,7 @@ TEST(CCButton, pressAndRelease) {
 
 TEST(CCButtonBankable, pressAndRelease) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
 
@@ -84,6 +86,7 @@ TEST(CCButtonBankable, pressAndRelease) {
 
 TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
 
@@ -125,6 +128,7 @@ TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
 
 TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
 
@@ -168,6 +172,7 @@ TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
 
 TEST(CCButtons, pressAndRelease) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     CCButtons<2> buttons = {{2, 3}, {0x3C, CHANNEL_7, 0xC}, {1, 2}};
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
@@ -255,6 +260,7 @@ TEST(CCButtons, pressAndRelease) {
 
 TEST(CCButtonsBankable, pressChangeBankAndRelease) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
 
@@ -345,6 +351,7 @@ TEST(CCButtonsBankable, pressChangeBankAndRelease) {
 
 TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
 

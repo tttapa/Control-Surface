@@ -1,7 +1,7 @@
 /**
  * This examples shows how to use a button matrix to read many switches.
  * 
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------

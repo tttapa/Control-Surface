@@ -1,11 +1,13 @@
-[![Build Status](https://github.com/tttapa/Control-Surface/workflows/CI%20Tests/badge.svg)](https://github.com/tttapa/Control-Surface/actions)
+[![Build Status](https://github.com/tttapa/Control-Surface/workflows/CI%20Tests/badge.svg#)](https://github.com/tttapa/Control-Surface/actions)
 [![Test Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/tttapa/Control-Surface-doc/master/docs/Coverage/shield.io.coverage.json)](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)
-[![Build Status](https://travis-ci.org/tttapa/Control-Surface.svg?branch=master)](https://travis-ci.org/tttapa/Control-Surface)
+[![Build Status](https://travis-ci.org/tttapa/Control-Surface.svg#?branch=master)](https://travis-ci.org/tttapa/Control-Surface)
 [![GitHub](https://img.shields.io/github/stars/tttapa/Control-Surface?label=GitHub&logo=github)](https://github.com/tttapa/Control-Surface)
 
 # Control Surface
 
-An Arduino library for MIDI control surfaces (input and output).
+An Arduino library for MIDI control surfaces (input and output).  
+It includes general-purpose MIDI abstraction layer as well, which can be useful
+for any MIDI-related project.
 
 ## Overview
 
@@ -226,6 +228,17 @@ tests and generating documentation, a style guide, etc.
 
 ## Recent Breaking Changes
 
+ - 8a3b1b314cf5b4aedf3ad60cbbc492fbcbb25c73  
+   Before, `Control_Surface.MIDI()` was used to get the MIDI interface used by
+   Control Surface. This method was removed, because you can now connect 
+   multiple interfaces to Control Surface, using the 
+   [MIDI Pipe routing system](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/d72/classMIDI__Pipe.html#details).
+   To send MIDI using Control Surface, you can now use 
+   `Control_Surface.sendCC(...)` and the other similar methods directly.
+ - 8a3b1b314cf5b4aedf3ad60cbbc492fbcbb25c73  
+   For the same reason as the bullet above, the `MultiMIDI_Interface` was
+   removed, and has been replaced by the
+   [MIDI Pipe routing system](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/d72/classMIDI__Pipe.html#details).
  - bca6e11b2b3e02df5f600f65c81676708a81155b  
    The color mapper for `NoteRangeFastLED` and the like now takes a second 
    parameter that represents the index of the LED within the LED strip.

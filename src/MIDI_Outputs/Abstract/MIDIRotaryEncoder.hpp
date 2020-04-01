@@ -24,7 +24,7 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
      *
      * @todo    Documentation
      */
-    GenericMIDIRotaryEncoder(Enc &&encoder, const MIDICNChannelAddress &address,
+    GenericMIDIRotaryEncoder(Enc &&encoder,  MIDIAddress address,
                              int8_t speedMultiply, uint8_t pulsesPerStep,
                              const Sender &sender)
         : encoder(std::forward<Enc>(encoder)), address(address),
@@ -34,15 +34,15 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
 // For tests only
 #ifndef ARDUINO
     GenericMIDIRotaryEncoder(const Encoder &encoder,
-                             const MIDICNChannelAddress &address,
+                             MIDIAddress address,
                              int8_t speedMultiply, uint8_t pulsesPerStep,
                              const Sender &sender)
         : encoder{encoder}, address(address), speedMultiply(speedMultiply),
           pulsesPerStep(pulsesPerStep), sender(sender) {}
 #endif
 
-    void begin() final override {}
-    void update() final override {
+    void begin() override {}
+    void update() override {
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         if (difference) {
@@ -55,9 +55,9 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
 
   private:
     Enc encoder;
-    const MIDICNChannelAddress address;
-    const int8_t speedMultiply;
-    const uint8_t pulsesPerStep;
+    MIDIAddress address;
+    int8_t speedMultiply;
+    uint8_t pulsesPerStep;
     long previousPosition = 0;
 
   public:

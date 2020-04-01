@@ -2,7 +2,7 @@
  * This example demonstrates the use of LEDs that respond to incoming  MIDI
  * note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.
  * 
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -53,7 +53,7 @@ SPIShiftRegisterOut<8> sreg = {
 using namespace MIDI_Notes;
 
 // Create a range of LEDs that listens for MIDI Note messages, turning on and off
-// the LEDs connected to the eight input pins of the shift register
+// the LEDs connected to the eight output pins of the shift register
 NoteRangeLEDs<8> leds = { sreg.pins(), note(C, 4) };
 
 // Initialize the Control Surface

@@ -35,7 +35,7 @@ Button::State Button::update() {
 
 Button::State Button::getState() const { return debouncedState; }
 
-const __FlashStringHelper *Button::getName(Button::State state) {
+FlashString_t Button::getName(Button::State state) {
     switch (state) {
         case Button::Pressed: return F("Pressed");
         case Button::Released: return F("Released");
@@ -52,6 +52,14 @@ unsigned long Button::stableTime(unsigned long now) const {
 }
 
 unsigned long Button::stableTime() const { return stableTime(millis()); }
+
+void Button::setDebounceTime(unsigned long debounceTime) {
+    Button::debounceTime = debounceTime;
+}
+
+unsigned long Button::getDebounceTime() { return Button::debounceTime; }
+
+unsigned long Button::debounceTime = BUTTON_DEBOUNCE_TIME;
 
 END_AH_NAMESPACE
 

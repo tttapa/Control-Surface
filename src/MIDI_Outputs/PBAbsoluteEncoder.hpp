@@ -44,14 +44,11 @@ class PBAbsoluteEncoder : public MIDIAbsoluteEncoder<PitchBendSender<14>> {
      *          Whereas a greater speedMultiplier factor will increase the 
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
-     * @param   sender
-     *          The MIDI sender to use.
      */
-    PBAbsoluteEncoder(Encoder &&encoder, const MIDICNChannel &address,
-                      int16_t multiplier = 1, uint8_t pulsesPerStep = 4,
-                      const PitchBendSender<14> &sender = {})
+    PBAbsoluteEncoder(Encoder &&encoder, MIDIAddress address,
+                      int16_t multiplier = 1, uint8_t pulsesPerStep = 4)
         : MIDIAbsoluteEncoder<PitchBendSender<14>>(
-              std::move(encoder), address, multiplier, pulsesPerStep, sender) {}
+              std::move(encoder), address, multiplier, pulsesPerStep, {}) {}
 };
 
 END_CS_NAMESPACE

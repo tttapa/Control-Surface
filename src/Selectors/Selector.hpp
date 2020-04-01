@@ -78,7 +78,12 @@ class GenericSelector : public SelectorBase, public AH::Updatable<> {
     void update() override { callback.update(); }
 
     /// Reset the selection to the initial selection.
-    void reset() { set(selectable.getInitialSelection()); }
+    void reset() {
+        setting_t initialSelection = selectable.getInitialSelection();
+        selectable.select(initialSelection);
+        callback.update(initialSelection, initialSelection);
+        this->setting = initialSelection;
+    }
 
     /** 
      * @brief   Select the given selection
@@ -91,7 +96,7 @@ class GenericSelector : public SelectorBase, public AH::Updatable<> {
         selectable.select(newSetting);
         if (get() != newSetting) {
             callback.update(get(), newSetting);
-            setting = newSetting;
+            this->setting = newSetting;
         }
     }
 

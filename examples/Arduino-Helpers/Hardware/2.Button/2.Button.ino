@@ -1,7 +1,7 @@
 /**
  * This examples shows how to use the debounced Button class to toggle an LED.
  * 
- * @boards  AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -43,7 +43,8 @@ void loop() {
   // Read the digital input, debounce the signal, and check the state of
   // the button:
   if (pushbutton.update() == Button::Falling) {
-    ledState = !ledState;           // Invert the state of the LED
-    digitalWrite(ledPin, ledState); // Update the LED with the new state
+    ledState = !ledState; // Invert the state of the LED
+    // Update the LED with the new state
+    digitalWrite(ledPin, ledState ? HIGH : LOW);
   }
 }

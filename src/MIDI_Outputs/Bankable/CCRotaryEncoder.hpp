@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIRotaryEncoder.hpp>
 #include <MIDI_Senders/RelativeCCSender.hpp>
 
@@ -20,7 +21,8 @@ namespace Bankable {
  *
  * @ingroup BankableMIDIOutputElements
  */
-class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
+class CCRotaryEncoder
+    : public MIDIRotaryEncoder<SingleAddress, RelativeCCSender> {
   public:
     /**
      * @brief   Construct a new Bankable CCRotaryEncoder object with the given 
@@ -39,7 +41,7 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      *          The MIDI address containing the controller number [0, 119], 
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
      *          [0, 15].
-     * @param   speedMultiplier
+     * @param   speedMultiply
      *          A constant factor to increase the speed of the rotary encoder.
      *          The difference in position will just be multiplied by this 
      *          factor. 
@@ -48,27 +50,23 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      *          For a normal encoder, this is 4. If you want to increase the
      *          resolution, for the use of Jog wheels, for example, you can go
      *          as 1.  
-     *          Whereas a greater speedMultiplier factor will increase the 
+     *          Whereas a greater speedMultiply factor will increase the 
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
-     * @param   sender
-     *          The MIDI sender to use.
      */
     CCRotaryEncoder(const OutputBankConfig &config, const EncoderPinList &pins,
-                    const MIDICNChannelAddress &address,
-                    int8_t speedMultiplier, uint8_t pulsesPerStep,
-                    const RelativeCCSender &sender = {})
-        : MIDIRotaryEncoder(config, pins, address, speedMultiplier,
-                            pulsesPerStep, sender) {}
+                    const MIDIAddress &address, int8_t speedMultiply = 1,
+                    uint8_t pulsesPerStep = 4)
+        : MIDIRotaryEncoder({config, address}, pins, speedMultiply,
+                            pulsesPerStep, {}) {}
 
 // For tests only (PJRC Encoder library's copy constructor doesn't work)
 #ifndef ARDUINO
     CCRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
-                    const MIDICNChannelAddress &address,
-                    int8_t speedMultiplier = 1, uint8_t pulsesPerStep = 4,
-                    const RelativeCCSender &sender = {})
-        : MIDIRotaryEncoder(config, encoder, address, speedMultiplier,
-                            pulsesPerStep, sender) {}
+                    const MIDIAddress &address, int8_t speedMultiply = 1,
+                    uint8_t pulsesPerStep = 4)
+        : MIDIRotaryEncoder({config, address}, encoder, speedMultiply,
+                            pulsesPerStep, {}) {}
 #endif
 };
 

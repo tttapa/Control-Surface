@@ -55,7 +55,7 @@ class VULEDs : public GenericVU<VULEDsCallback<NumLEDs>> {
           } {}
 
     VULEDs(const PinList<NumLEDs> &ledPins, uint8_t track,
-           MIDICNChannel channelCN, unsigned int decayTime = VUDecay::Default)
+           MIDIChannelCN channelCN, unsigned int decayTime = VUDecay::Default)
         : GenericVU<VULEDsCallback<NumLEDs>>{
               track,
               channelCN,
@@ -87,7 +87,7 @@ class VULEDs : public GenericVU<NumBanks, VULEDsCallback<NumLEDs>> {
           } {}
 
     VULEDs(BankConfig<NumBanks> config, const PinList<NumLEDs> &ledPins,
-           uint8_t track, MIDICNChannel channelCN,
+           uint8_t track, MIDIChannelCN channelCN,
            unsigned int decayTime = VUDecay::Default)
         : GenericVU<NumBanks, VULEDsCallback<NumLEDs>>{
               config, track, channelCN, decayTime, {ledPins},

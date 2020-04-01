@@ -27,8 +27,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIFilteredAnalogAddressable(pin_t analogPin,
-                                  const MIDICNChannelAddress &address,
+    MIDIFilteredAnalogAddressable(pin_t analogPin, const MIDIAddress &address,
                                   const Sender &sender)
         : filteredAnalog{analogPin}, address{address}, sender(sender) {}
 
@@ -70,7 +69,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
 
   private:
     AH::FilteredAnalog<Sender::precision()> filteredAnalog;
-    const MIDICNChannelAddress address;
+    const MIDIAddress address;
 
   public:
     Sender sender;
@@ -100,7 +99,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIFilteredAnalog(pin_t analogPin, const MIDICNChannel &address,
+    MIDIFilteredAnalog(pin_t analogPin, const MIDIAddress &address,
                        const Sender &sender)
         : filteredAnalog{analogPin}, address(address), sender(sender) {}
 
@@ -142,7 +141,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
 
   private:
     AH::FilteredAnalog<Sender::precision()> filteredAnalog;
-    const MIDICNChannelAddress address;
+    const MIDIAddress address;
 
   public:
     Sender sender;

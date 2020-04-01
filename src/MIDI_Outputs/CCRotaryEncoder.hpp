@@ -46,23 +46,18 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      *          Whereas a greater speedMultiplier factor will increase the 
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
-     * @param   sender
-     *          The MIDI sender to use.
      */
-    CCRotaryEncoder(Encoder &&encoder, const MIDICNChannelAddress &address,
-                    int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4,
-                    const RelativeCCSender &sender = {})
-        : MIDIRotaryEncoder<RelativeCCSender>(std::move(encoder), address,
-                                              speedMultiply, pulsesPerStep,
-                                              sender) {}
+    CCRotaryEncoder(Encoder &&encoder, MIDIAddress address,
+                    int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
+        : MIDIRotaryEncoder<RelativeCCSender>(
+              std::move(encoder), address, speedMultiply, pulsesPerStep, {}) {}
 
 // For tests only (PJRC Encoder library's copy constructor doesn't work)
 #ifndef ARDUINO
-    CCRotaryEncoder(const Encoder &encoder, const MIDICNChannelAddress &address,
-                    int8_t speedMultiply, uint8_t pulsesPerStep,
-                    const RelativeCCSender &sender = {})
+    CCRotaryEncoder(const Encoder &encoder, MIDIAddress address,
+                    int8_t speedMultiply, uint8_t pulsesPerStep)
         : MIDIRotaryEncoder<RelativeCCSender>(encoder, address, speedMultiply,
-                                              pulsesPerStep, sender) {}
+                                              pulsesPerStep, {}) {}
 #endif
 };
 
@@ -110,11 +105,10 @@ class BorrowedCCRotaryEncoder
      *          The MIDI sender to use.
      */
     BorrowedCCRotaryEncoder(Encoder &encoder,
-                            const MIDICNChannelAddress &address,
-                            int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4,
-                            const RelativeCCSender &sender = {})
+                            MIDIAddress address,
+                            int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
         : BorrowedMIDIRotaryEncoder<RelativeCCSender>(
-              encoder, address, speedMultiply, pulsesPerStep, sender) {}
+              encoder, address, speedMultiply, pulsesPerStep, {}) {}
 };
 
 END_CS_NAMESPACE

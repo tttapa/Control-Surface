@@ -18,14 +18,14 @@ namespace ManyAddresses {
  * This version can be banked using an arbitrary list of alternative
  * addresses.
  *          
- * @tparam  N
+ * @tparam  NumBanks
  *          The number of variants/alternative addresses the element has.
  *
  * @ingroup ManyAddressesMIDIOutputElements
  */
-template <setting_t N>
+template <setting_t NumBanks>
 class NoteButton
-    : public Bankable::MIDIButton<ManyAddresses<N>, DigitalNoteSender> {
+    : public Bankable::MIDIButton<ManyAddresses<NumBanks>, DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new Bankable NoteButton object with the given bank 
@@ -45,10 +45,10 @@ class NoteButton
      * 
      * @ingroup MIDIOutputElementConstructors
      */
-    NoteButton(const Bank<N> &bank, pin_t pin,
-               const Array<MIDICNChannelAddress, N> &addresses,
+    NoteButton(const Bank<NumBanks> &bank, pin_t pin,
+               const Array<MIDIAddress, NumBanks> &addresses,
                uint8_t velocity = 0x7F)
-        : MIDIButton<ManyAddresses<N>, DigitalNoteSender>{
+        : MIDIButton<ManyAddresses<NumBanks>, DigitalNoteSender>{
               {bank, addresses}, pin, {velocity}} {}
 };
 

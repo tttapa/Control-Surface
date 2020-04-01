@@ -15,13 +15,13 @@ class ManyAddressBank {
   void lock() { manyaddresses.lock(), bank.lock(); }
   void unlock() { manyaddresses.unlock(), bank.unlock(); }
 
-  MIDICNChannelAddress getActiveAddress() const {
+  MIDIAddress getActiveAddress() const {
     return manyaddresses.getActiveAddress() + bank.getAddressOffset();
   }
 
  private:
   ManyAddresses<NumAddr> manyaddresses;
-  BankableMIDIOutput bank;
+  OutputBankableMIDIAddress bank;
 };
 
 template <uint8_t NumAddr>

@@ -19,7 +19,7 @@ BEGIN_CS_NAMESPACE
 template <class Enc, class Sender>
 class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
   public:
-    GenericMIDIAbsoluteEncoder(Enc &&encoder, MIDICNChannelAddress address,
+    GenericMIDIAbsoluteEncoder(Enc &&encoder, MIDIAddress address,
                                int16_t multiplier, uint8_t pulsesPerStep,
                                const Sender &sender)
         : encoder(std::forward<Enc>(encoder)), address(address),
@@ -58,7 +58,7 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
 
   private:
     Enc encoder;
-    MIDICNChannelAddress address;
+    MIDIAddress address;
     int16_t multiplier;
     uint8_t pulsesPerStep;
     uint16_t previousPosition = 0;

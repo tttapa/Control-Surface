@@ -5,13 +5,19 @@
 
 #if defined(ESP32)
 #include <mutex>
-#define GUARD_LIST_LOCK std::lock_guard<std::mutex> _guard(mutex)
+#define GUARD_LIST_LOCK std::lock_guard<std::mutex> guard_(mutex)
 #else
 #define GUARD_LIST_LOCK
 #endif
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   Class for objects that listen for incoming MIDI Channel Pressure
+ *          events.
+ * 
+ * @ingroup MIDIInputElements
+ */
 class MIDIInputElementChannelPressure
     : public MIDIInputElement,
       public DoublyLinkable<MIDIInputElementChannelPressure> {
@@ -20,7 +26,7 @@ class MIDIInputElementChannelPressure
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementChannelPressure(const MIDICNChannelAddress &address)
+    MIDIInputElementChannelPressure(const MIDIAddress &address)
         : MIDIInputElement(address) {
         GUARD_LIST_LOCK;
         elements.append(this);
@@ -82,7 +88,7 @@ class MIDIInputElementChannelPressure
   private:
     /// Channel Pressure doesn't have an address, so the target consists of just
     /// the channel and the cable number.
-    MIDICNChannelAddress
+    MIDIAddress
     getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {0, Channel(midimsg.channel), midimsg.CN};
     }

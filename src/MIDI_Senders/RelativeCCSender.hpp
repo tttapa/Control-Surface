@@ -90,14 +90,14 @@ class RelativeCCSender {
         }
     }
 
-    static void send(long delta, MIDICNChannelAddress address) {
+    static void send(long delta, MIDIAddress address) {
         while (delta != 0) {
             // Constrain relative movement to +/-15 for
             // Mackie Control Universal compatibility
             long thisDelta = constrain(delta, -15, 15);
             uint8_t msgVal = mapRelativeCC(thisDelta);
             // send a Control Change MIDI event
-            Control_Surface.MIDI().sendCC(address, msgVal);
+            Control_Surface.sendCC(address, msgVal);
             delta -= thisDelta;
         }
     }

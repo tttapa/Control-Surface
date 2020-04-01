@@ -29,12 +29,9 @@ class CCPotentiometer
      *          The MIDI address containing the controller number [0, 119], 
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
      *          [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
      */
-    CCPotentiometer(pin_t analogPin, const MIDICNChannelAddress &address,
-                    const ContinuousCCSender &sender = {})
-        : MIDIFilteredAnalogAddressable(analogPin, address, sender) {}
+    CCPotentiometer(pin_t analogPin, const MIDIAddress &address)
+        : MIDIFilteredAnalogAddressable(analogPin, address, {}) {}
 };
 
 END_CS_NAMESPACE

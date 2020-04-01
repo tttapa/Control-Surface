@@ -45,14 +45,11 @@ class CCAbsoluteEncoder : public MIDIAbsoluteEncoder<ContinuousCCSender> {
      *          Whereas a greater speedMultiplier factor will increase the 
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
-     * @param   sender
-     *          The MIDI sender to use.
      */
-    CCAbsoluteEncoder(Encoder &&encoder, const MIDICNChannelAddress &address,
-                      int16_t multiplier = 1, uint8_t pulsesPerStep = 4,
-                      const ContinuousCCSender &sender = {})
+    CCAbsoluteEncoder(Encoder &&encoder, MIDIAddress address,
+                      int16_t multiplier = 1, uint8_t pulsesPerStep = 4)
         : MIDIAbsoluteEncoder<ContinuousCCSender>(
-              std::move(encoder), address, multiplier, pulsesPerStep, sender) {}
+              std::move(encoder), address, multiplier, pulsesPerStep, {}) {}
 };
 
 END_CS_NAMESPACE

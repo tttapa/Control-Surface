@@ -9,6 +9,8 @@ if (FAST_COMPILE)
         Hardware/ExtendedInputOutput/ExtendedIOElement.cpp
         Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp
         Error/Exit.cpp
+        Math/Vector.cpp
+        Math/Quaternion.cpp
     )
 else ()
     file(GLOB_RECURSE

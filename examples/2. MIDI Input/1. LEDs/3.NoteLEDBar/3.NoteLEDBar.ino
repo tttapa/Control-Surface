@@ -2,7 +2,7 @@
  * This example demonstrates the use of LED bar graphs that respond to incoming 
  * MIDI note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.
  * 
- * @boards  AVR, AVR USB, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -49,7 +49,7 @@ SPIShiftRegisterOut<8> sreg = {
 using namespace MIDI_Notes;
 
 // Create a LED bar driver that listens for MIDI Note C4 that drives
-// the LEDs connected to the eight input pins of the shift register
+// the LEDs connected to the eight output pins of the shift register
 NoteLEDBar<8> leds = { sreg.pins(), note(C, 4) };
 
 // Initialize the Control Surface

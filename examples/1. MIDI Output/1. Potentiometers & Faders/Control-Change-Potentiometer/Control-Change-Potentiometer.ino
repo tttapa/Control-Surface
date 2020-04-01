@@ -3,7 +3,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc. It can control almost any knob in your DAW software.
  *
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -26,7 +26,8 @@
  * -------
  * 
  * Select the Arduino as a custom MIDI controller in your DAW, and use the 
- * MIDI learn option to assign the potentiometer to a function.
+ * MIDI learn option to assign the potentiometer to a function.  
+ * It will send the MIDI Control Change Channel Volume parameter for channel 1.
  * 
  * Written by PieterP, 2019-08-13  
  * https://github.com/tttapa/Control-Surface

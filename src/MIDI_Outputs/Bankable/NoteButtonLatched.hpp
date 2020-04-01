@@ -17,11 +17,15 @@ namespace Bankable {
  * 
  * The switch is debounced in software.  
  * This version can be banked.  
+ * 
+ * @tparam  NumBanks
+ *          The number of banks.
  *
  * @ingroup BankableMIDIOutputElements
  */
+template <uint8_t NumBanks>
 class NoteButtonLatched
-    : public MIDIButtonLatched<SingleAddress, DigitalNoteSender> {
+    : public MIDIButtonLatched<NumBanks, SingleAddress, DigitalNoteSender> {
   public:
     /**
      * @brief   Create a new bankable NoteButtonLatched object on the given pin 
@@ -39,10 +43,10 @@ class NoteButtonLatched
      * @param   velocity
      *          The velocity of the MIDI Note events.
      */
-    NoteButtonLatched(const OutputBankConfig &config, pin_t pin,
-                      const MIDICNChannelAddress &address,
+    NoteButtonLatched(const BankConfig<NumBanks> &config, pin_t pin,
+                      const MIDIAddress &address,
                       uint8_t velocity = 0x7F)
-        : MIDIButtonLatched{
+        : MIDIButtonLatched<NumBanks, SingleAddress, DigitalNoteSender>{
               {config, address},
               pin,
               {velocity},

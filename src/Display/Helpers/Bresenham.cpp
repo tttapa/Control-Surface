@@ -1,3 +1,10 @@
-#ifdef TEST_COMPILE_ALL_HEADERS_SEPARATELY
 #include "Bresenham.hpp"
-#endif
+
+BEGIN_CS_NAMESPACE
+
+size_t BresenhamLine::Pixel::printTo(Print &p) const {
+    return p.print('(') + p.print(x) + p.print(", ") + p.print(y) +
+           p.print(')');
+}
+
+END_CS_NAMESPACE

@@ -13,3 +13,26 @@ keyword1:
  - HairlessMIDI_Interface
  - MIDI_Callbacks
  - SysExMessage
+
+keyword2:
+ - begin
+ - update
+ - send
+ - sendOnCable
+ - sendNoteOn
+ - sendNoteOff
+ - sendKP
+ - sendCC
+ - sendPC
+ - sendCP
+ - sendPB
+ - getDefault
+ - setAsDefault
+ - setCallbacks
+ - getParser
+ - getChannelMessage
+ - getSysExMessage
+ - getCN
+ - onChannelMessage
+ - onSysExMessage
+ - onRealtimeMessage

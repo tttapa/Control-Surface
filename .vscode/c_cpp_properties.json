@@ -3,7 +3,8 @@
         {
             "name": "Linux",
             "defines": [
-                "IDE"
+                "IDE",
+                "FASTLED_VERSION"
             ],
             "compilerPath": "/usr/bin/env gcc-9",
             "cStandard": "c11",
@@ -20,7 +21,8 @@
                 "${env:HOME}/Arduino/libraries/FastLED",
                 "${env:HOME}/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino5/avr/include"
             ],
-            "configurationProvider": "vector-of-bool.cmake-tools"
+            "configurationProvider": "vector-of-bool.cmake-tools",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
         }
     ],
     "version": 4

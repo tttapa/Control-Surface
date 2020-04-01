@@ -1,3 +1,6 @@
+#pragma once
+
+#include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIButtons.hpp>
 #include <MIDI_Senders/DigitalCCSender.hpp>
 
@@ -15,13 +18,14 @@ namespace Bankable {
  * The buttons are debounced in software.  
  * This version can be banked.  
  *
- * @tparam  NUMBER_OF_BUTTONS
+ * @tparam  NumButtons
  *          The number of buttons in the collection.
  *
  * @ingroup BankableMIDIOutputElements
  */
-template <uint8_t NUMBER_OF_BUTTONS>
-class CCButtons : public MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS> {
+template <uint8_t NumButtons>
+class CCButtons
+    : public MIDIButtons<SingleAddress, DigitalCCSender, NumButtons> {
   public:
     /**
      * @brief   Create a new Bankable CCButtons object with the given pins,
@@ -46,12 +50,12 @@ class CCButtons : public MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS> {
      *          The MIDI sender to use.
      */
     CCButtons(const OutputBankConfig &config,
-              const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
-              const MIDICNChannelAddress &baseAddress,
-              const RelativeMIDICNChannelAddress &incrementAddress,
+              const Array<AH::Button, NumButtons> &buttons,
+              const MIDIAddress &baseAddress,
+              const RelativeMIDIAddress &incrementAddress,
               const DigitalCCSender &sender = {})
-        : MIDIButtons<DigitalCCSender, NUMBER_OF_BUTTONS>(
-              config, buttons, baseAddress, incrementAddress, sender) {}
+        : MIDIButtons<SingleAddress, DigitalCCSender, NumButtons>(
+              {config, baseAddress}, buttons, incrementAddress, sender) {}
 };
 
 } // namespace Bankable

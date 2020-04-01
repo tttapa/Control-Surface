@@ -15,13 +15,13 @@ BEGIN_CS_NAMESPACE
  * The buttons are debounced in software.  
  * This version cannot be banked.
  * 
- * @tparam  NUMBER_OF_BUTTONS
+ * @tparam  NumButtons
  *          The number of buttons in the collection.
  * 
  * @ingroup MIDIOutputElements
  */
-template <uint8_t NUMBER_OF_BUTTONS>
-class NoteButtons : public MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS> {
+template <uint8_t NumButtons>
+class NoteButtons : public MIDIButtons<DigitalNoteSender, NumButtons> {
   public:
     /**
      * @brief   Create a new NoteButtons object with the given pins,
@@ -42,11 +42,11 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS> {
      * @param   velocity
      *          The velocity of the MIDI Note events.
      */
-    NoteButtons(const Array<AH::Button, NUMBER_OF_BUTTONS> &buttons,
-                const MIDICNChannelAddress &baseAddress,
-                const RelativeMIDICNChannelAddress &incrementAddress,
+    NoteButtons(const Array<AH::Button, NumButtons> &buttons,
+                const MIDIAddress &baseAddress,
+                const RelativeMIDIAddress &incrementAddress,
                 uint8_t velocity = 0x7F)
-        : MIDIButtons<DigitalNoteSender, NUMBER_OF_BUTTONS>{
+        : MIDIButtons<DigitalNoteSender, NumButtons>{
               buttons,
               baseAddress,
               incrementAddress,

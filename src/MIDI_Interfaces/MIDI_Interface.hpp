@@ -1,7 +1,9 @@
 #pragma once
 
+#include "MIDI_Pipes.hpp"
+#include <AH/Containers/Updatable.hpp>
 #include <Def/Def.hpp>
-#include <Def/MIDICNChannelAddress.hpp>
+#include <Def/MIDIAddress.hpp>
 #include <MIDI_Parsers/MIDI_Parser.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -11,25 +13,15 @@ constexpr auto MIDI_BAUD = 31250;
 class MIDI_Callbacks;
 
 /**
- * @brief   An abstract class for MIDI interfaces.
+ * @brief   Statically polymorphic template for classes that send MIDI messages.
+ * 
+ * @nosubgrouping
  */
-class MIDI_Interface {
-  protected:
-    /**
-     * @brief   Constructor.
-     */
-    MIDI_Interface();
-
+template <class Derived>
+class MIDI_Sender {
   public:
-    /**
-     * @brief   Destructor.
-     */
-    virtual ~MIDI_Interface();
-
-    /**
-     * @brief   Initialize the MIDI Interface.
-     */
-    virtual void begin() {}
+    /// @name Sending MIDI
+    /// @{
 
     /**
      * @brief   Send a 3-byte MIDI packet.
@@ -98,21 +90,23 @@ class MIDI_Interface {
     void sendOnCable(uint8_t r, uint8_t cn);
 
     /// Send a MIDI Note On event.
-    void sendNoteOn(MIDICNChannelAddress address, uint8_t velocity);
+    void sendNoteOn(MIDIAddress address, uint8_t velocity);
     /// Send a MIDI Note Off event.
-    void sendNoteOff(MIDICNChannelAddress address, uint8_t velocity);
+    void sendNoteOff(MIDIAddress address, uint8_t velocity);
     /// Send a MIDI Key Pressure event.
-    void sendKP(MIDICNChannelAddress address, uint8_t pressure);
+    void sendKP(MIDIAddress address, uint8_t pressure);
     /// Send a MIDI Control Change event.
-    void sendCC(MIDICNChannelAddress address, uint8_t value);
+    void sendCC(MIDIAddress address, uint8_t value);
     /// Send a MIDI Program Change event.
-    void sendPC(MIDICNChannelAddress address);
+    void sendPC(MIDIAddress address);
     /// Send a MIDI Program Change event.
-    void sendPC(MIDICNChannel address, uint8_t value);
+    void sendPC(MIDIChannelCN address, uint8_t value);
     /// Send a MIDI Channel Pressure event.
-    void sendCP(MIDICNChannel address, uint8_t pressure);
+    void sendCP(MIDIChannelCN address, uint8_t pressure);
     /// Send a MIDI Pitch Bend event.
-    void sendPB(MIDICNChannel address, uint16_t value);
+    void sendPB(MIDIChannelCN address, uint16_t value);
+    /// Send a MIDI Channel Message
+    void send(ChannelMessage message);
     /// Send a MIDI System Exclusive message.
     void send(SysExMessage message);
     /// Send a MIDI System Exclusive message.
@@ -120,14 +114,44 @@ class MIDI_Interface {
     void send(const uint8_t (&sysexdata)[N], uint8_t cn = 0) {
         send(SysExMessage{sysexdata, N, cn});
     }
+    /// Send a MIDI Real-Time message.
+    void send(RealTimeMessage message);
     /// Send a single-byte MIDI message.
     void send(uint8_t rt, uint8_t cn = 0);
+
+    /// @}
+};
+
+/**
+ * @brief   An abstract class for MIDI interfaces.
+ */
+class MIDI_Interface : public TrueMIDI_SinkSource,
+                       public MIDI_Sender<MIDI_Interface>,
+                       public AH::Updatable<MIDI_Interface> {
+  protected:
+    /**
+     * @brief   Constructor.
+     */
+    MIDI_Interface() = default;
+
+    MIDI_Interface(MIDI_Interface &&) = default;
+
+  public:
+    /**
+     * @brief   Destructor.
+     */
+    virtual ~MIDI_Interface();
+
+    /**
+     * @brief   Initialize the MIDI Interface.
+     */
+    void begin() override {}
 
     /**
      * @brief   Read the MIDI interface and call the callback if a message is
      *          received.
      */
-    virtual void update() = 0;
+    void update() override = 0;
 
     /**
      * @brief   Return the default MIDI interface.
@@ -177,6 +201,14 @@ class MIDI_Interface {
      * @brief   Low-level function for sending a single-byte MIDI message.
      */
     virtual void sendImpl(uint8_t rt, uint8_t cn) = 0;
+
+  protected:
+    /// Accept an incoming MIDI Channel message.
+    void sinkMIDIfromPipe(ChannelMessage) override;
+    /// Accept an incoming MIDI System Exclusive message.
+    void sinkMIDIfromPipe(SysExMessage) override;
+    /// Accept an incoming MIDI Real-Time message.
+    void sinkMIDIfromPipe(RealTimeMessage) override;
 
   private:
     static MIDI_Interface *DefaultMIDI_Interface;
@@ -229,15 +261,16 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
      */
     virtual MIDI_read_t read() = 0;
 
-    void onRealtimeMessage(uint8_t message);
+    bool onRealtimeMessage(uint8_t message);
 
-    void onChannelMessage();
+    bool onChannelMessage();
 
-    void onSysExMessage();
+    bool onSysExMessage();
 
-  private:
+  protected:
     MIDI_Parser &parser;
     MIDI_Callbacks *callbacks = nullptr;
+    MIDI_read_t event = NO_MESSAGE;
 };
 
 // LCOV_EXCL_START
@@ -259,3 +292,5 @@ class MIDI_Callbacks {
 // LCOV_EXCL_STOP
 
 END_CS_NAMESPACE
+
+#include "MIDI_Interface.ipp"

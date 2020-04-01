@@ -1,7 +1,7 @@
 /**
  * Example of using the standard library numeric functions.
  *
- * @boards  AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
  *
  * This sketch creates an incremental array using the iota function, then
  * computes the inner product of the vector with itself, and uses that to

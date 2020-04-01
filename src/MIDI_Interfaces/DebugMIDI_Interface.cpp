@@ -15,14 +15,14 @@ const static char ProgramChange[] PROGMEM = "Program Change  ";
 const static char ChannelPressure[] PROGMEM = "Channel Pressure";
 const static char PitchBend[] PROGMEM = "Pitch Bend      ";
 
-const static __FlashStringHelper *MIDIStatusTypeNames[] = {
-    reinterpret_cast<const __FlashStringHelper *>(NoteOff),
-    reinterpret_cast<const __FlashStringHelper *>(NoteOn),
-    reinterpret_cast<const __FlashStringHelper *>(KeyPressure),
-    reinterpret_cast<const __FlashStringHelper *>(ControlChange),
-    reinterpret_cast<const __FlashStringHelper *>(ProgramChange),
-    reinterpret_cast<const __FlashStringHelper *>(ChannelPressure),
-    reinterpret_cast<const __FlashStringHelper *>(PitchBend),
+const static FlashString_t MIDIStatusTypeNames[] = {
+    reinterpret_cast<FlashString_t>(NoteOff),
+    reinterpret_cast<FlashString_t>(NoteOn),
+    reinterpret_cast<FlashString_t>(KeyPressure),
+    reinterpret_cast<FlashString_t>(ControlChange),
+    reinterpret_cast<FlashString_t>(ProgramChange),
+    reinterpret_cast<FlashString_t>(ChannelPressure),
+    reinterpret_cast<FlashString_t>(PitchBend),
 };
 
 #else

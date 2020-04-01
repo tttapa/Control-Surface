@@ -2,7 +2,7 @@
  * This example demonstrates the use of shift registers as if they were just
  * normal IO pins. The SPI interface is used because it's easy and fast.
  * 
- * @boards  AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------

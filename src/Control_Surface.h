@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <Arduino.h> // For VSCode errors in examples
+#include <AH/Arduino-Wrapper.h> // For VSCode errors in examples
 
 #include <AH/Teensy/TeensyUSBTypes.hpp>
 
@@ -76,6 +76,7 @@
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/CCAbsoluteEncoder.hpp>
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/PBAbsoluteEncoder.hpp>
 #endif
 
@@ -114,7 +115,6 @@
 
 // ---------------------------- MIDI Interfaces ----------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.hpp>
-#include <MIDI_Interfaces/MultiMIDI_Interface.hpp>
 #include <MIDI_Interfaces/SerialMIDI_Interface.hpp>
 #include <MIDI_Interfaces/USBMIDI_Interface.hpp>
 

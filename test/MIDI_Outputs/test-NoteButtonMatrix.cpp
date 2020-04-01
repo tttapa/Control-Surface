@@ -7,6 +7,7 @@ using namespace CS;
 
 TEST(NoteButtonMatrix, pressAndRelease) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     constexpr Channel channel = CHANNEL_7;
     constexpr uint8_t cn = 0xC;
@@ -80,6 +81,7 @@ TEST(NoteButtonMatrix, pressAndRelease) {
 
 TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     OutputBank bank(4);
 
@@ -221,10 +223,11 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
 
 TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
     MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
 
     Bank<2> bank(4);
 
-    Array<MIDICNChannel, 2> channels = {{{CHANNEL_7, 0xC}, {CHANNEL_2, 0x9}}};
+    Array<MIDIChannelCN, 2> channels = {{{CHANNEL_7, 0xC}, {CHANNEL_2, 0x9}}};
     AddressMatrix<3, 2> addresses1 = {{{1, 3}, {5, 7}, {9, 11}}};
     AddressMatrix<3, 2> addresses2 = {{{10, 30}, {50, 70}, {90, 110}}};
 

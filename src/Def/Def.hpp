@@ -21,10 +21,9 @@ using MappingFunction = analog_t (*)(analog_t);
 using AH::Array;
 using AH::Array2D;
 
-/// @todo   This should be an array of type MIDICNChannelAddress.
+/// @todo   This should be an array of type MIDIAddress.
 template <uint8_t nb_rows, uint8_t nb_cols>
 using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
-
 
 /// A struct for the pins of a rotary (quadrature) encoder with a switch.
 struct EncoderSwitchPinList {

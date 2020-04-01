@@ -5,13 +5,20 @@
 
 #if defined(ESP32)
 #include <mutex>
-#define GUARD_LIST_LOCK std::lock_guard<std::mutex> _guard(mutex)
+#define GUARD_LIST_LOCK std::lock_guard<std::mutex> guard_(mutex)
 #else
 #define GUARD_LIST_LOCK
 #endif
 
 BEGIN_CS_NAMESPACE
 
+
+/**
+ * @brief   Class for objects that listen for incoming MIDI Program Change
+ *          events.
+ * 
+ * @ingroup MIDIInputElements
+ */
 class MIDIInputElementPC : public MIDIInputElement,
                            public DoublyLinkable<MIDIInputElementPC> {
   public:
@@ -19,7 +26,7 @@ class MIDIInputElementPC : public MIDIInputElement,
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementPC(const MIDICNChannelAddress &address)
+    MIDIInputElementPC(const MIDIAddress &address)
         : MIDIInputElement(address) {
         GUARD_LIST_LOCK;
         elements.append(this);
@@ -81,7 +88,7 @@ class MIDIInputElementPC : public MIDIInputElement,
   private:
     /// Program Change doesn't have an address, so the target consists of just
     /// the channel and the cable number.
-    MIDICNChannelAddress
+    MIDIAddress
     getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {0, Channel(midimsg.channel), midimsg.CN};
     }

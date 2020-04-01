@@ -27,7 +27,7 @@ class MIDIButton : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIButton(pin_t pin, const MIDICNChannelAddress &address,
+    MIDIButton(pin_t pin, const MIDIAddress &address,
                const Sender &sender)
         : button{pin}, address{address}, sender(sender) {}
 
@@ -49,7 +49,7 @@ class MIDIButton : public MIDIOutputElement {
 
   private:
     AH::Button button;
-    const MIDICNChannelAddress address;
+    const MIDIAddress address;
 
   public:
     Sender sender;

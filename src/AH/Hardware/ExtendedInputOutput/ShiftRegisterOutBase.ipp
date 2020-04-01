@@ -10,7 +10,7 @@ ShiftRegisterOutBase<N>::ShiftRegisterOutBase(pin_t latchPin,
     : latchPin(latchPin), bitOrder(bitOrder) {}
 
 template <uint8_t N>
-void ShiftRegisterOutBase<N>::digitalWrite(pin_t pin, uint8_t val) {
+void ShiftRegisterOutBase<N>::digitalWrite(pin_t pin, PinStatus_t val) {
     buffer.set(pin, val);
     dirty = true;
     this->update(); // TODO: should I always update?

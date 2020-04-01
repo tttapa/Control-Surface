@@ -3,25 +3,27 @@
 #pragma once
 
 #include <AH/Settings/Warnings.hpp>
+#include <AH/Settings/NamespaceSettings.hpp>
+
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <Arduino.h> // pin functions and constants
+#include <AH/Arduino-Wrapper.h> // pin functions and constants
 AH_DIAGNOSTIC_POP()
 
-#include "ExtendedIOElement.hpp"
+#include <AH/Hardware/Hardware-Types.hpp>
 
 BEGIN_AH_NAMESPACE
 
 #define AH_EXT_PIN(x) (x + NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
 
 namespace detail {
-const static uint8_t tmp_HIGH = HIGH;
-const static uint8_t tmp_LOW = LOW;
-const static uint8_t tmp_INPUT = INPUT;
-const static uint8_t tmp_OUTPUT = OUTPUT;
-const static uint8_t tmp_INPUT_PULLUP = INPUT_PULLUP;
-}
+constexpr static auto tmp_HIGH = HIGH;
+constexpr static auto tmp_LOW = LOW;
+constexpr static auto tmp_INPUT = INPUT;
+constexpr static auto tmp_OUTPUT = OUTPUT;
+constexpr static auto tmp_INPUT_PULLUP = INPUT_PULLUP;
+} // namespace detail
 
 END_AH_NAMESPACE
 
@@ -43,15 +45,30 @@ END_AH_NAMESPACE
 #undef INPUT_PULLUP
 #endif
 
-const uint8_t HIGH = AH::detail::tmp_HIGH;
-const uint8_t LOW = AH::detail::tmp_LOW;
+using PinStatus_t = uint8_t;
+using PinMode_t = uint8_t;
+#if defined(SAMD_SERIES) /* Nano 33 */ || defined(_LIB_SAM_) /* Due */
+using BitOrder_t = BitOrder;
+#else 
+using BitOrder_t = uint8_t;
+#endif
 
-const uint8_t INPUT = AH::detail::tmp_INPUT;
-const uint8_t OUTPUT = AH::detail::tmp_OUTPUT;
-const uint8_t INPUT_PULLUP = AH::detail::tmp_INPUT_PULLUP;
+const PinStatus_t HIGH = AH::detail::tmp_HIGH;
+const PinStatus_t LOW = AH::detail::tmp_LOW;
+
+const PinMode_t INPUT = AH::detail::tmp_INPUT;
+const PinMode_t OUTPUT = AH::detail::tmp_OUTPUT;
+const PinMode_t INPUT_PULLUP = AH::detail::tmp_INPUT_PULLUP;
+
+#else
+using PinStatus_t = PinStatus;
+using PinMode_t = PinMode;
+using BitOrder_t = BitOrder;
 #endif
 
 BEGIN_AH_NAMESPACE
+
+class ExtendedIOElement;
 
 /**
  * @brief   A namespace with alternatives to the standard Arduino IO functions
@@ -65,36 +82,37 @@ namespace ExtIO {
  *          The extended IO pin number to find the IO element of.
  * @return  A pointer to the extended IO element that the given pin belongs to.
  */
-extern ExtendedIOElement &getIOElementOfPin(pin_t pin);
+ExtendedIOElement &getIOElementOfPin(pin_t pin);
 /// An ExtIO version of the Arduino function
-extern void pinMode(pin_t pin, uint8_t mode);
+void pinMode(pin_t pin, PinMode_t mode);
 /// An ExtIO version of the Arduino function
-extern void pinMode(int pin, uint8_t mode);
+void pinMode(int pin, PinMode_t mode);
 /// An ExtIO version of the Arduino function
-extern void digitalWrite(pin_t pin, uint8_t val);
+void digitalWrite(pin_t pin, PinStatus_t val);
 /// An ExtIO version of the Arduino function
-extern void digitalWrite(int pin, uint8_t val);
+void digitalWrite(int pin, PinStatus_t val);
 /// An ExtIO version of the Arduino function
-extern int digitalRead(pin_t pin);
+int digitalRead(pin_t pin);
 /// An ExtIO version of the Arduino function
-extern int digitalRead(int pin);
+int digitalRead(int pin);
 /// An ExtIO version of the Arduino function
-extern void shiftOut(pin_t dataPin, pin_t clockPin, uint8_t bitOrder,
+void shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder,
                      uint8_t val);
 /// An ExtIO version of the Arduino function
-extern void shiftOut(int dataPin, int clockPin, uint8_t bitOrder, uint8_t val);
+void shiftOut(int dataPin, int clockPin, BitOrder_t bitOrder,
+                     uint8_t val);
 /// An ExtIO version of the Arduino function
-extern analog_t analogRead(pin_t pin);
+analog_t analogRead(pin_t pin);
 /// An ExtIO version of the Arduino function
-extern analog_t analogRead(int pin);
+analog_t analogRead(int pin);
 /// An ExtIO version of the Arduino function
-extern void analogWrite(pin_t pin, analog_t val);
+void analogWrite(pin_t pin, analog_t val);
 /// An ExtIO version of the Arduino function
-extern void analogWrite(int pin, analog_t val);
+void analogWrite(int pin, analog_t val);
 /// An ExtIO version of the Arduino function
-extern void analogWrite(int pin, int val);
+void analogWrite(int pin, int val);
 /// An ExtIO version of the Arduino function
-extern void analogWrite(pin_t pin, int val);
+void analogWrite(pin_t pin, int val);
 
 } // namespace ExtIO
 

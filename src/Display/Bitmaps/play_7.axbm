@@ -3,4 +3,5 @@ constexpr size_t play_7_width = 7;
 constexpr size_t play_7_height = 7;
 static const PROGMEM uint8_t play_7_bits[] = {
    0x01, 0x07, 0x1f, 0x7f, 0x1f, 0x07, 0x01 };
+
 #endif

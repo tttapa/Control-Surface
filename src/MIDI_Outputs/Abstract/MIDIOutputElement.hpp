@@ -2,7 +2,7 @@
 
 #include <AH/Containers/Updatable.hpp>
 #include <Def/Def.hpp>
-#include <Def/MIDICNChannelAddress.hpp>
+#include <Def/MIDIAddress.hpp>
 
 BEGIN_CS_NAMESPACE
 

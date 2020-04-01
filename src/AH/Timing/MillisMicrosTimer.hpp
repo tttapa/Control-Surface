@@ -4,7 +4,7 @@
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <Arduino.h> // millis, micros
+#include <AH/Arduino-Wrapper.h> // millis, micros
 AH_DIAGNOSTIC_POP()
 
 #include <AH/Settings/NamespaceSettings.hpp>
@@ -49,8 +49,13 @@ class Timer {
         return false;
     }
 
+    /// Get the interval of the timer.
+    unsigned long getInterval() const { return interval; }
+    /// Set the interval of the timer.
+    void setInterval(unsigned long interval) { this->interval = interval; }
+
   private:
-    const unsigned long interval;
+    unsigned long interval;
     unsigned long previous = 0;
 };
 

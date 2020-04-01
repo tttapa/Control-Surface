@@ -26,14 +26,14 @@ namespace ManyAddresses {
  * This version can be banked using an arbitrary list of alternative
  * addresses.
  *          
- * @tparam  N
+ * @tparam  NumBanks
  *          The number of variants/alternative addresses the element has.
  *
  * @ingroup ManyAddressesMIDIOutputElements
  */
-template <setting_t N>
+template <setting_t NumBanks>
 class PBPotentiometer
-    : public Bankable::MIDIFilteredAnalog<ManyAddresses<N>,
+    : public Bankable::MIDIFilteredAnalog<ManyAddresses<NumBanks>,
                                           PitchBendSender<10>> {
   public:
     /** 
@@ -47,17 +47,11 @@ class PBPotentiometer
      * @param   addresses
      *          The list of MIDI channels [CHANNEL_1, CHANNEL_16] and optional 
      *          Cable Numbers [0, 15].
-     * @param   sender
-     *          The MIDI sender to use.
      */
-    PBPotentiometer(const Bank<N> &bank, pin_t analogPin,
-                    const Array<MIDICNChannel, N> &addresses,
-                    const PitchBendSender<10> &sender = {})
-        : MIDIFilteredAnalog<ManyAddresses<N>, PitchBendSender<10>>{
-              {bank, AH::copyAs<MIDICNChannelAddress>(addresses)},
-              analogPin,
-              sender,
-          } {}
+    PBPotentiometer(const Bank<NumBanks> &bank, pin_t analogPin,
+                    const Array<MIDIChannelCN, NumBanks> &addresses)
+        : MIDIFilteredAnalog<ManyAddresses<NumBanks>, PitchBendSender<10>>{
+              {bank, AH::copyAs<MIDIAddress>(addresses)}, analogPin, {}} {}
 };
 
 } // namespace ManyAddresses

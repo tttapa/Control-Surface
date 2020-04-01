@@ -12,78 +12,6 @@
 Arduino_Helpers	KEYWORD1
 AH	KEYWORD1
 
-# AH/Math
-#########
-
-increaseBitDepth	KEYWORD2
-min	KEYWORD2
-max	KEYWORD2
-
-# AH/Timing
-###########
-
-Timer	KEYWORD1
-
-begin	KEYWORD2
-
-timefunction	LITERAL1
-
-# AH/Containers
-###############
-
-Array	KEYWORD1
-ArraySlice	KEYWORD1
-Iterator	KEYWORD1
-BitArray	KEYWORD1
-DoublyLinkedList	KEYWORD1
-iterator	KEYWORD1
-const_iterator	KEYWORD1
-reverse_iterator	KEYWORD1
-const_reverse_iterator	KEYWORD1
-DoublyLinkable	KEYWORD1
-UniquePtr	KEYWORD1
-NormalUpdatable	KEYWORD1
-Updatable	KEYWORD1
-
-length	KEYWORD2
-begin	KEYWORD2
-end	KEYWORD2
-slice	KEYWORD2
-cslice	KEYWORD2
-asArray	KEYWORD2
-generate	KEYWORD2
-generateArray	KEYWORD2
-copyAs	KEYWORD2
-fillArray	KEYWORD2
-cat	KEYWORD2
-distribute	KEYWORD2
-get	KEYWORD2
-set	KEYWORD2
-clear	KEYWORD2
-safeIndex	KEYWORD2
-getByte	KEYWORD2
-getBufferLength	KEYWORD2
-append	KEYWORD2
-insertBefore	KEYWORD2
-insertSorted	KEYWORD2
-remove	KEYWORD2
-moveDown	KEYWORD2
-couldContain	KEYWORD2
-reset	KEYWORD2
-get	KEYWORD2
-release	KEYWORD2
-MakeUnique	KEYWORD2
-update	KEYWORD2
-begin	KEYWORD2
-enable	KEYWORD2
-disable	KEYWORD2
-isEnabled	KEYWORD2
-beginAll	KEYWORD2
-updateAll	KEYWORD2
-
-ElementRefType	LITERAL1
-ElementPtrType	LITERAL1
-
 # AH/Hardware
 #############
 
@@ -228,10 +156,20 @@ PCButton	KEYWORD1
 # MIDI Input Elements
 #####################
 
+NoteValue	KEYWORD1
+CCValue	KEYWORD1
+NoteRange	KEYWORD1
+CCRange	KEYWORD1
+
 NoteValueLED	KEYWORD1
 CCValueLED	KEYWORD1
 NoteRangeLEDs	KEYWORD1
 CCRangeLEDs	KEYWORD1
+
+NoteValueLEDPWM	KEYWORD1
+CCValueLEDPWM	KEYWORD1
+NoteRangeLEDsPWM	KEYWORD1
+CCRangeLEDsPWM	KEYWORD1
 
 MAX7219SevenSegmentDisplay	KEYWORD1
 
@@ -387,6 +325,92 @@ DotBarMode	LITERAL1
 Dot	LITERAL1
 Bar	LITERAL1
 
+# AH/Containers
+###############
+
+Array	KEYWORD1
+ArraySlice	KEYWORD1
+Iterator	KEYWORD1
+BitArray	KEYWORD1
+DoublyLinkedList	KEYWORD1
+iterator	KEYWORD1
+const_iterator	KEYWORD1
+reverse_iterator	KEYWORD1
+const_reverse_iterator	KEYWORD1
+DoublyLinkable	KEYWORD1
+UniquePtr	KEYWORD1
+NormalUpdatable	KEYWORD1
+Updatable	KEYWORD1
+
+length	KEYWORD2
+begin	KEYWORD2
+end	KEYWORD2
+slice	KEYWORD2
+cslice	KEYWORD2
+asArray	KEYWORD2
+generate	KEYWORD2
+generateArray	KEYWORD2
+copyAs	KEYWORD2
+fillArray	KEYWORD2
+cat	KEYWORD2
+distribute	KEYWORD2
+get	KEYWORD2
+set	KEYWORD2
+clear	KEYWORD2
+safeIndex	KEYWORD2
+getByte	KEYWORD2
+getBufferLength	KEYWORD2
+append	KEYWORD2
+insertBefore	KEYWORD2
+insertSorted	KEYWORD2
+remove	KEYWORD2
+moveDown	KEYWORD2
+couldContain	KEYWORD2
+reset	KEYWORD2
+get	KEYWORD2
+release	KEYWORD2
+MakeUnique	KEYWORD2
+update	KEYWORD2
+begin	KEYWORD2
+enable	KEYWORD2
+disable	KEYWORD2
+isEnabled	KEYWORD2
+beginAll	KEYWORD2
+updateAll	KEYWORD2
+
+ElementRefType	LITERAL1
+ElementPtrType	LITERAL1
+
+# AH/Math
+#########
+
+Quaternion	KEYWORD1
+EulerAngles	KEYWORD1
+Vec2f	KEYWORD1
+Vec3f	KEYWORD1
+
+increaseBitDepth	KEYWORD2
+min	KEYWORD2
+max	KEYWORD2
+w	KEYWORD2
+x	KEYWORD2
+y	KEYWORD2
+z	KEYWORD2
+hamiltonianProduct	KEYWORD2
+conjugated	KEYWORD2
+normSquared	KEYWORD2
+norm	KEYWORD2
+normalize	KEYWORD2
+normalized	KEYWORD2
+rotate	KEYWORD2
+identity	KEYWORD2
+fromDirection	KEYWORD2
+fromXYAngle	KEYWORD2
+quat2eul	KEYWORD2
+eul2quat	KEYWORD2
+rad2deg	KEYWORD2
+deg2rad	KEYWORD2
+
 # AH/Types
 ##########
 
@@ -395,6 +419,15 @@ Frequency	KEYWORD1
 _MHz	LITERAL1
 _kHz	LITERAL1
 _Hz	LITERAL1
+
+# AH/Timing
+###########
+
+Timer	KEYWORD1
+
+begin	KEYWORD2
+
+timefunction	LITERAL1
 
 # AH/Filters
 ############
@@ -770,3 +803,46 @@ Telephone_Ring	LITERAL1
 Helicopter	LITERAL1
 Applause	LITERAL1
 Gunshot	LITERAL1
+
+# MIDI_Interfaces
+#################
+
+MIDI_Interface	KEYWORD1
+StreamMIDI_Interface	KEYWORD1
+SerialMIDI_Interface	KEYWORD1
+HardwareSerialMIDI_Interface	KEYWORD1
+USBSerialMIDI_Interface	KEYWORD1
+USBMIDI_Interface	KEYWORD1
+StreamDebugMIDI_Interface	KEYWORD1
+SerialDebugMIDI_Interface	KEYWORD1
+HardwareSerialDebugMIDI_Interface	KEYWORD1
+USBDebugMIDI_Interface	KEYWORD1
+SoftwareSerialDebugMIDI_Interface	KEYWORD1
+HairlessMIDI_Interface	KEYWORD1
+MIDI_Callbacks	KEYWORD1
+SysExMessage	KEYWORD1
+
+begin	KEYWORD2
+update	KEYWORD2
+send	KEYWORD2
+sendOnCable	KEYWORD2
+sendNoteOn	KEYWORD2
+sendNoteOff	KEYWORD2
+sendKP	KEYWORD2
+sendCC	KEYWORD2
+sendPC	KEYWORD2
+sendCP	KEYWORD2
+sendPB	KEYWORD2
+getDefault	KEYWORD2
+setAsDefault	KEYWORD2
+setCallbacks	KEYWORD2
+getParser	KEYWORD2
+getChannelMessage	KEYWORD2
+getSysExMessage	KEYWORD2
+getCN	KEYWORD2
+onChannelMessage	KEYWORD2
+onSysExMessage	KEYWORD2
+onRealtimeMessage	KEYWORD2
+
+MIDIChannelCN	KEYWORD1
+MIDIAddress	KEYWORD1

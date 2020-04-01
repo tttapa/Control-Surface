@@ -17,22 +17,21 @@ namespace ManyAddresses {
  * This version can be banked using an arbitrary list of alternative
  * addresses.
  *          
- * @tparam  N
+ * @tparam  NumBanks
  *          The number of variants/alternative addresses the element has.
  *
  * @ingroup ManyAddressesMIDIOutputElements
  */
-template <setting_t N>
+template <setting_t NumBanks>
 class CCIncrementDecrementButtons
     : public MIDIIncrementDecrementButtons<
-          TwoManyAddresses<N>, RelativeCCSender, DigitalNoteSender> {
+          DualManyAddresses<NumBanks>, RelativeCCSender, DigitalNoteSender> {
   public:
     /**
      * @brief   Construct a new Bankable CCIncrementDecrementButtons object.
      * 
-     * @param   config
-     *          The bank configuration to use: the bank to add this element to,
-     *          and whether to change the address, channel or cable number.
+     * @param   bank
+     *          The bank to add this element to.
      * @param   buttons
      *          The pins with the increment and decrement buttons connected.  
      *          The internal pull-up resistors will be enabled.
@@ -55,15 +54,14 @@ class CCIncrementDecrementButtons
      *          The MIDI sender to use for reset events.
      */
     CCIncrementDecrementButtons(
-        const OutputBankConfig &config,
-        const AH::IncrementDecrementButtons &buttons,
-        const Array<MIDICNChannelAddress, N> &addresses, uint8_t multiplier = 1,
-        const Array<MIDICNChannelAddress, N> &resetNotes = {},
+        const Bank<NumBanks> &bank, const AH::IncrementDecrementButtons &buttons,
+        const Array<MIDIAddress, NumBanks> &addresses, uint8_t multiplier = 1,
+        const Array<MIDIAddress, NumBanks> &resetNotes = {},
         const RelativeCCSender &relativeSender = {},
         const DigitalNoteSender &resetSender = {})
-        : MIDIIncrementDecrementButtons<TwoManyAddresses<N>, RelativeCCSender,
-                                        DigitalNoteSender>(
-              {config, {addresses, resetNotes}}, buttons, multiplier,
+        : MIDIIncrementDecrementButtons<DualManyAddresses<NumBanks>,
+                                        RelativeCCSender, DigitalNoteSender>(
+              {bank, {addresses, resetNotes}}, buttons, multiplier,
               relativeSender, resetSender) {}
 };
 } // namespace ManyAddresses

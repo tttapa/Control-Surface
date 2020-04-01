@@ -12,8 +12,6 @@ BEGIN_CS_NAMESPACE
 template <setting_t N>
 class BankableMIDIInput;
 
-class BankableMIDIOutput;
-
 /**
  * @brief   A class for changing the address of BankableMIDIOutput%s.
  */

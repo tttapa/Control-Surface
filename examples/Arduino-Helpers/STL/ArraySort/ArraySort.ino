@@ -1,7 +1,7 @@
 /**
  * Example of using the standard library algorithms.
  *
- * @boards  AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
  *
  * This sketch creates an array with an unordered sequence of 10 numbers.
  * It prints the array, and then creates a reverse view on the 6 elements in the 

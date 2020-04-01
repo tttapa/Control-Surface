@@ -5,7 +5,7 @@
 
 #if defined(ESP32)
 #include <mutex>
-#define GUARD_LIST_LOCK std::lock_guard<std::mutex> _guard(mutex)
+#define GUARD_LIST_LOCK std::lock_guard<std::mutex> guard_(mutex)
 #else
 #define GUARD_LIST_LOCK
 #endif
@@ -24,7 +24,7 @@ class MIDIInputElementNote : public MIDIInputElement,
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementNote(const MIDICNChannelAddress &address)
+    MIDIInputElementNote(const MIDIAddress &address)
         : MIDIInputElement{address} {
         GUARD_LIST_LOCK;
         elements.append(this);
