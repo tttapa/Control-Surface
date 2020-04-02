@@ -3,6 +3,8 @@
 #include <MIDI_Outputs/Abstract/MIDIAbsoluteEncoder.hpp>
 #include <MIDI_Senders/PitchBendSender.hpp>
 
+AH_DIAGNOSTIC_WERROR()
+
 BEGIN_CS_NAMESPACE
 
 /**
@@ -51,3 +53,5 @@ class PBAbsoluteEncoder : public MIDIAbsoluteEncoder<PitchBendSender<14>> {
 };
 
 END_CS_NAMESPACE
+
+AH_DIAGNOSTIC_POP()
