@@ -1,5 +1,5 @@
 # MIDI over USB
-There are some differences in MIDI over USB implementation between different types of Arduino-compatible boards.
+There are some differences in MIDI over USB implementation between different types of Arduino-compatible boards. This page provides an overview and some board recommendations if you're planning to build an Arduino MIDI device with MIDI over USB support.
  
 ## Arduino boards with native USB support
 _Arduino Due, Arduino Zero, Arduino Leonardo, Arduino Micro, Arduino LilyPad USB ..._  
@@ -20,7 +20,7 @@ You can use up to 16 USB MIDI cables over a single USB connection, they will sho
 _Arduino Uno, Arduino Mega_
 ***
 Some Arduino's that don't have native USB support can still be used as a USB MIDI device.  
-This is because they have a second, smaller microcontroller on board, an ATmega16U2 (ATmega8U2 on older boards), that communicates with the main MCU over TTL UART (serial, TX and RX on pins 0 and 1), and also acts as a USB COM port, to communicate with the computer (for programming and for using the Serial Monitor). During normal operation, the ATmega16U2 is just a USB-to-Serial bridge, but you can also program it to be a USB MIDI-to-Serial bridge.  
+This is because they have a second, smaller microcontroller on board, an ATmega16U2 (ATmega8U2 on older boards). This small USB-capable MCU communicates with the main MCU over TTL UART (serial, TX and RX on pins 0 and 1), and also acts as a USB COM port, to communicate with the computer (for programming and for using the Serial Monitor). During normal operation, the ATmega16U2 is just a USB-to-Serial bridge, but you can also program it to be a USB MIDI-to-Serial bridge.  
 
 You can use the [HIDUINO](https://github.com/ddiakopoulos/hiduino) firmware by [Dimitri Diakopoulos](http://www.dimitridiakopoulos.com/hiduino). This flashing process is called a Device Firmware Upgrade (DFU). On Windows, you can use the Atmel Flip tool, on Linux or Mac, you can use `dfu-programmer`. Everything is explained [here](https://github.com/tttapa/MIDI_controller#arduino-uno-or-mega).  
 Because you need the ATmega16U2 for uploading new programs to the Arduino, you have to upload your program first, and then flash the MIDI firmware. If you want to change your program, you have to flash the default Serial firmware again, then upload your new program, and finally flash the MIDI firmware.  
@@ -42,6 +42,10 @@ To use it in the Control Surface library, instantiate a `HairlessMIDI_Interface`
 #### HIDUINO MIDI over USB
 Finally, when you know that everything is working the way you want it, you can change the baud rate to the official MIDI baud rate of 31250, by using the `USBMIDI_Interface`, uploading the sketch, and flashing the HIDUINO MIDI firmware using Flip or dfu-programmer.  
 You can now just plug it into your computer, and it will be recognized as a MIDI device, you don't need to run Hairless anymore.  
+
+#### USBMidiKliK
+The HIDUINO firmware is rather old, and there's a newer alternative that combines the MIDI USB and Serial USB modes in a single firmware: [USBMidiKliK](https://github.com/TheKikGen/USBMidiKliK). This means that you should be able to program the Arduino and use MIDI over USB without swapping firmwares all the time.  
+I haven't tried this myself, but it looks promising.
 
 ## Boards with a single-purpose USB-to-TTL chip  
 _Arduino Nano, Arduino Duemilanove, Chinese Uno & Mega clones ..._
