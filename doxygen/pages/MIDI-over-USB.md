@@ -52,7 +52,18 @@ _Arduino Nano, Arduino Duemilanove, Chinese Uno & Mega clones ..._
 ***
 Whereas the ATmega16U2 chip is programmable, most other USB-to-TTL chips are single-purpose, so you can't flash them with the HIDUINO MIDI firmware.  
 These chips include FTDI chips (Nano and Duemilanove) and the CH340G or CP2102 (both popular on Chinese "Arduino" clones).  
-While MIDI over USB is not supported on these boards, you can still use Hairless. Just instantiate a `HairlessMIDI_Interface` at the top of your sketch.    
+While MIDI over USB is not supported on these boards, you can still use Hairless. Just instantiate a `HairlessMIDI_Interface` at the top of your sketch.  
+
+## Espressif boards
+_ESP8266, ESP32_
+***
+The ESP8266 and ESP32 microcontrollers don't have native USB support, and all development boards I've come across use a single-purpose USB-to-TTL chip, which means that they fall into the same category as the Arduino Nano when it comes to MIDI over USB.
+
+That being said, both the ESP8266 and the ESP32 have built-in WiFi, so you can use rtpMIDI, using the [AppleMIDI library](https://github.com/lathoub/Arduino-AppleMIDI-Library), for example.  
+An alternative is to use Open Sound Control (OSC). This is not MIDI, it's an entirely different protocol, built on top of UDP. It can be used for bidirectional communication between audio software and control surfaces. I've successfully used this to build a control surface for Reaper.  
+OSC and rtpMIDI are not directly supported by the Control Surface library, but they can be integrated relatively easily.
+
+The ESP32 also has Bluetooth support, so you can use MIDI over BLE. This is supported by the Control Surface library using the @ref BluetoothMIDI_Interface.
 
 ***
 
