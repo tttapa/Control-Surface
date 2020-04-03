@@ -31,17 +31,8 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
           speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
           sender(sender) {}
 
-// For tests only
-#ifndef ARDUINO
-    GenericMIDIRotaryEncoder(const Encoder &encoder,
-                             MIDIAddress address,
-                             int8_t speedMultiply, uint8_t pulsesPerStep,
-                             const Sender &sender)
-        : encoder{encoder}, address(address), speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
-#endif
-
     void begin() override {}
+    
     void update() override {
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;

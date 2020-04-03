@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Banks/BankAddresses.hpp>
-#include <MIDI_Outputs/Bankable/Abstract/MIDIRotaryEncoder.hpp>
-#include <MIDI_Senders/RelativeCCSender.hpp>
+#include <MIDI_Outputs/Bankable/Abstract/MIDIAbsoluteEncoder.hpp>
+#include <MIDI_Senders/PitchBendSender.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -10,7 +10,7 @@ namespace Bankable {
 
 /**
  * @brief   A class of MIDIOutputElement%s that read the input of a **quadrature
- *          (rotary) encoder** and send out relative MIDI **Control Change**
+ *          (rotary) encoder** and send out absolute MIDI **Control Change**
  *          events.
  * 
  * This version can be banked.
@@ -19,13 +19,17 @@ namespace Bankable {
  *          (https://github.com/PaulStoffregen/Encoder) before the
  *          Control-Surface library.
  *
+ * @tparam  NumBanks
+ *          The number of banks.
+ * 
  * @ingroup BankableMIDIOutputElements
  */
-class CCRotaryEncoder
-    : public MIDIRotaryEncoder<SingleAddress, RelativeCCSender> {
+template <size_t NumBanks>
+class PBAbsoluteEncoder
+    : public MIDIAbsoluteEncoder<NumBanks, SingleAddress, PitchBendSender<14>> {
   public:
     /**
-     * @brief   Construct a new Bankable CCRotaryEncoder object with the given 
+     * @brief   Construct a new Bankable PBAbsoluteEncoder object with the given 
      *          pins, controller, channel, speed factor, and number of pulses
      *          per step.
      * 
@@ -55,12 +59,21 @@ class CCRotaryEncoder
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    CCRotaryEncoder(const OutputBankConfig &config, Encoder &&encoder,
-                    const MIDIAddress &address, int8_t speedMultiply = 1,
-                    uint8_t pulsesPerStep = 4)
-        : MIDIRotaryEncoder<SingleAddress, RelativeCCSender>(
+    PBAbsoluteEncoder(const BankConfig<NumBanks> &config, Encoder &&encoder,
+                      const MIDIAddress &address, int8_t speedMultiply = 1,
+                      uint8_t pulsesPerStep = 4)
+        : MIDIAbsoluteEncoder<NumBanks, SingleAddress, PitchBendSender<14>>(
               {config, address}, std::move(encoder), speedMultiply,
               pulsesPerStep, {}) {}
+
+// For tests only (PJRC Encoder library's copy constructor doesn't work)
+#ifndef ARDUINO
+    PBAbsoluteEncoder(const BankConfig<NumBanks> &config,
+                      const Encoder &encoder, const MIDIAddress &address,
+                      int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
+        : MIDIAbsoluteEncoder<NumBanks, SingleAddress, PitchBendSender<14>>(
+              {config, address}, encoder, speedMultiply, pulsesPerStep, {}) {}
+#endif
 };
 
 } // namespace Bankable

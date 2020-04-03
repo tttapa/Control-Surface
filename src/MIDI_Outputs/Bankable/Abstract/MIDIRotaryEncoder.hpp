@@ -19,35 +19,25 @@ namespace Bankable {
  * @brief   An abstract class for rotary encoders that send MIDI events and that
  *          can be added to a Bank.
  */
-template <class BankAddress, class Sender>
-class MIDIRotaryEncoder : public MIDIOutputElement {
+template <class Enc, class BankAddress, class Sender>
+class GenericMIDIRotaryEncoder : public MIDIOutputElement {
   protected:
     /**
-     * @brief   Construct a new MIDIRotaryEncoder.
+     * @brief   Construct a new GenericMIDIRotaryEncoder.
      *
      * @todo    Documentation
      */
-    MIDIRotaryEncoder(const BankAddress &bankAddress,
-                      const EncoderPinList &pins,
-                      uint8_t speedMultiply, uint8_t pulsesPerStep,
-                      const Sender &sender)
-        : address(bankAddress), encoder{pins.A, pins.B}, 
-          speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
-
-// For tests only
-#ifndef ARDUINO
-    MIDIRotaryEncoder(const BankAddress &bankAddress, const Encoder &encoder,
-                      uint8_t speedMultiply, uint8_t pulsesPerStep,
-                      const Sender &sender)
-        : address(bankAddress), encoder{encoder}, 
-          speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
-#endif
+    GenericMIDIRotaryEncoder(const BankAddress &bankAddress, Enc &&encoder,
+                             uint8_t speedMultiply, uint8_t pulsesPerStep,
+                             const Sender &sender)
+        : address(bankAddress), encoder(std::forward<Enc>(encoder)),
+          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
+          sender(sender) {}
 
   public:
-    void begin() final override {}
-    void update() final override {
+    void begin() override {}
+
+    void update() override {
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         // I could do the division inside of the if statement for performance
@@ -59,7 +49,7 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
 
   private:
     BankAddress address;
-    Encoder encoder;
+    Enc encoder;
     const uint8_t speedMultiply;
     const uint8_t pulsesPerStep;
     long previousPosition = 0;
@@ -67,6 +57,14 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
   public:
     Sender sender;
 };
+
+template <class BankAddress, class Sender>
+using MIDIRotaryEncoder =
+    GenericMIDIRotaryEncoder<Encoder, BankAddress, Sender>;
+
+template <class BankAddress, class Sender>
+using BorrowedMIDIRotaryEncoder =
+    GenericMIDIRotaryEncoder<Encoder &, BankAddress, Sender>;
 
 } // namespace Bankable
 
