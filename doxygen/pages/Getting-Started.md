@@ -50,13 +50,13 @@ There are many different MIDI interfaces to choose from:
   hexadecimal MIDI messages (as text) in the Serial monitor 
   (e.g. `90 3C 7F` to turn on middle C).
 
-A complete overview of the available MIDI interfaces can be found [here](
-https://tttapa.github.io/Control-Surface/Doc/Doxygen/dc/df0/group__MIDIInterfaces.html).
+A complete overview of the available MIDI interfaces can be found in the 
+@ref MIDIInterfaces module.
 
 For now, we'll use the `USBMIDI_Interface` because it's probably the one you'll
 use in your final program.
 
-You can give the interface any name you want, here, I'll be very original and
+You can give the interface any name you want. I'll be very original and
 choose `midi`. It doesn't matter, and you don't need to use it afterwards, 
 just defining the interface is enough, the Control Surface library will 
 automatically detect and use it.
@@ -77,8 +77,8 @@ really quickly. A solution is to use multiplexers or shift registers.
 The Control Surface Library supports both of these options, and makes it easy
 to support other types of IO expanders in the future.
 
-An overview of Extended Input/Output elements can be found [here](
-https://tttapa.github.io/Control-Surface/Doc/Doxygen/d1/d8e/group__ExtIO.html).
+An overview of Extended Input/Output elements can be found in the @ref AH_ExtIO
+module.
 
 In this example, we'll use an 8-channel CD74HC4051 analog multiplexer. This
 allows us to read eight analog inputs using just one analog pin on the Arduino,
@@ -100,13 +100,11 @@ CD74HC4051 mux = { A0, {3, 4, 5} };
 Now, we can specify the objects that read the input of the potentiometers and
 send out MIDI events accordingly.
 
-Again, I'll refer to the overview of MIDI Output Elements [here](
-https://tttapa.github.io/Control-Surface/Doc/Doxygen/d7/dcd/group__MIDIOutputElements.html).
+Again, I'll refer to the overview of @ref MIDIOutputElements.
 
 Let's define a single potentiometer on pin `A1` that sends out MIDI Control 
 Change events.  
-In the [documentation](
-https://tttapa.github.io/Control-Surface/Doc/Doxygen/db/d32/classCCPotentiometer.html),
+In the @ref CCPotentiometer::CCPotentiometer "documentation",
 you'll find that the first argument for the `CCPotentiometer` constructor is the 
 analog pin number, and the second is the MIDI address.  
 The MIDI address is a structure that consists of an address number, 
@@ -115,21 +113,36 @@ In this case, the address number is the controller number, which is a number
 from 0 to 119. The MIDI channel is a channel from `CHANNEL_1` until 
 `CHANNEL_16`. We'll ignore the cable number for now, if you don't specifically
 set it, it'll just use the default cable.  
+You can find more information about MIDI addresses @ref md_pages_Basics "here". 
 
-For the MIDI controller numbers, you can use the [predefined constants](
-https://tttapa.github.io/Control-Surface/Doc/Doxygen/d4/dbe/namespaceMIDI__CC.html),
-or you can just use a number.
+For the MIDI controller numbers, you can use the 
+@ref MIDI_CC "predefined constants", or you can just use a number.
 
 ```cpp
 CCPotentiometer potentiometer = { A1, {MIDI_CC::Channel_Volume, CHANNEL_1} };
 ```
+```cpp
+CCPotentiometer potentiometer = { A1, {7, CHANNEL_1} };
+```
 
 In our case, we don't want a single potentiometer, we want eight. It's much
 easier to define them in an array.  
-Also note how we state that it should use the pins of the multiplexer we 
-defined in the previous step. 
+Also note how we declare that the potentiometers are connected to the the pins 
+of the multiplexer we defined in the previous step.
 
-> **Note**: The first pin is `pin(0)`, not `pin(1)`.
+To go from the initialization of a single potentiometer to the initialization of
+an array of potentiometers, we just create a comma-separated list of 
+initializers for single elements, and then we add another pair of curly braces 
+around it.  
+Compare this to the initialization of an array of integers: to initialize a 
+single integer, you use `int i = 42;` and to initialize an array of integers, 
+you use `int ii[] = {42, 43, ...};`. 
+Analogously, to initialize a single potentiometer object, you use 
+`CCPotentiometer pot = {pin, address};` and to initialize an array of 
+potentiometers, you use 
+`CCPotentiometer pots[] = { {pin, address}, {pin, address}, ... };`.
+
+> **Note**: The first pin is of the multiplexer is `pin(0)`, not `pin(1)`.
 
 ```cpp
 CCPotentiometer volumePotentiometers[] = {
@@ -165,11 +178,11 @@ void setup() {
 }
 ```
 
-> **Note**: If you didn't define a MIDI interface, `Control_Surface.begin()`
+> **Note**: If you forget to define a MIDI interface, `Control_Surface.begin()`
 > will raise an error and the on-board LED will start blinking.  
 > Other errors will also be indicated this way.  
 > If you don't know why this happens, you should enable debug information in 
-> the `Control_Surface/src/Settings/Settings.h` file, and inspect the output
+> the `Control_Surface/src/AH/Settings/Settings.h` file, and inspect the output
 > in the Serial Monitor.  
 > Someday, I will add a "Troubleshooting" page. For now, if you have any 
 > problems, just [open an issue on GitHub](https://github.com/tttapa/Control-Surface/issues/new)
@@ -307,12 +320,11 @@ program.
 Now, we can specify the objects that listen for MIDI input, and update the 
 status of the LEDs accordingly.
 
-I'll refer to the overview of MIDI Input Elements [here](
-https://tttapa.github.io/Control-Surface/Doc/Doxygen/d7/dcd/group__MIDIInputElements.html).
+I'll refer to the overview of @ref MIDIInputElements.
 
 Let's define a single LED on pin `13` that listens for MIDI Note events for
 a middle C on channel 1.  
-In the [documentation](https://tttapa.github.io/Control-Surface/Doc/Doxygen/d3/dd5/classNoteValueLED.html),
+In the @ref NoteValueLED "documentation",
 you'll find that the first argument for the `NoteValueLED` constructor is the 
 number of the pin with the LED connected, and the second is the MIDI address.  
 The MIDI address is a structure that consists of an address number, 
@@ -323,8 +335,7 @@ from 0 to 127. The MIDI channel is a channel from `CHANNEL_1` until
 set it, it'll just use the default cable.  
 
 For the MIDI note numbers, you can use the note constants and the `note`
-function in the 
-[`MIDI_Notes` namespace](https://tttapa.github.io/Control-Surface/Doc/Doxygen/d7/d78/namespaceMIDI__Notes.html),
+function in the @ref MIDI_Notes namespace,
 or you can just use a number.
 
 ```cpp
