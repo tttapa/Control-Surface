@@ -50,6 +50,15 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
     }
 
     /**
+     * @copydoc pinMode
+     */
+    void pinModeBuffered(pin_t pin, PinMode_t mode) override
+        __attribute__((deprecated)) {
+        (void)pin;
+        (void)mode;
+    }
+
+    /**
      * @brief   Set the state of a given output pin.
      * 
      * @param   pin
@@ -59,6 +68,14 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      *          (Either `HIGH` (1) or `LOW` (0))
      */
     void digitalWrite(pin_t pin, PinStatus_t val) override;
+
+    /**
+     * @brief   Set the output of a given pin in the software buffer.
+     * The buffer is written to the ExtIO device when @ref updateBufferedOutputs
+     * is called.
+     * @copydetails digitalWrite
+     */
+    void digitalWriteBuffered(pin_t pin, PinStatus_t val) override;
 
     /**
      * @brief   Get the current state of a given output pin.
@@ -72,6 +89,13 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      */
     int digitalRead(pin_t pin) override;
 
+    /** 
+     * @copydoc digitalRead
+     */
+    int digitalReadBuffered(pin_t pin) override {
+        return digitalRead(pin);
+    }
+
     /**
      * @brief   The analogRead function is deprecated because a shift
      *          is always digital.
@@ -83,6 +107,14 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      *          The state of the pin is `HIGH`.
      */
     analog_t analogRead(pin_t pin) override __attribute__((deprecated)) {
+        return 1023 * digitalRead(pin);
+    }
+
+    /**
+     * @copydoc analogRead
+     */
+    analog_t analogReadBuffered(pin_t pin) override
+        __attribute__((deprecated)) {
         return 1023 * digitalRead(pin);
     }
 
@@ -100,6 +132,19 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
         __attribute__((deprecated)) {
         digitalWrite(pin, val >= 0x80 ? HIGH : LOW);
     }
+
+    /**
+     * @copydoc analogWrite
+     */
+    void analogWriteBuffered(pin_t pin, analog_t val) override
+        __attribute__((deprecated)) {
+        digitalWrite(pin, val >= 0x80 ? HIGH : LOW);
+    }
+
+    /**
+     * @brief   Shift registers don't have an input buffer.
+     */
+    void updateBufferedInputs() override {} // LCOV_EXCL_LINE
 
     /**
      * @brief   Get the red output pin of the given LED.

@@ -65,7 +65,7 @@ class ShiftRegisterOut : public ShiftRegisterOutBase<N> {
     /**
      * @brief   Write the state buffer to the physical outputs.
      */
-    void update() override;
+    void updateBufferedOutputs() override;
 
   private:
     const pin_t dataPin;

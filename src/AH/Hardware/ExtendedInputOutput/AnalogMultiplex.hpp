@@ -64,11 +64,22 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
     void pinMode(pin_t pin, PinMode_t mode) override;
 
     /**
+     * @copydoc pinMode
+     */
+    void pinModeBuffered(pin_t pin, PinMode_t mode) override;
+
+    /**
      * @brief   The digitalWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
     void digitalWrite(pin_t, PinStatus_t) override // LCOV_EXCL_LINE
         __attribute__((deprecated)) {}             // LCOV_EXCL_LINE
+
+    /**
+     * @copydoc digitalWrite
+     */
+    void digitalWriteBuffered(pin_t, PinStatus_t) override // LCOV_EXCL_LINE
+        __attribute__((deprecated)) {}                     // LCOV_EXCL_LINE
 
     /**
      * @brief   Read the digital state of the given input.
@@ -79,6 +90,11 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
     int digitalRead(pin_t pin) override;
 
     /**
+     * @copydoc digitalRead
+     */
+    int digitalReadBuffered(pin_t pin) override;
+
+    /**
      * @brief   Read the analog value of the given input.
      * 
      * @param   pin
@@ -87,11 +103,22 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
     analog_t analogRead(pin_t pin) override;
 
     /**
+     * @copydoc analogRead
+     */
+    analog_t analogReadBuffered(pin_t pin) override;
+
+    /**
      * @brief   The analogWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
     void analogWrite(pin_t, analog_t) override // LCOV_EXCL_LINE
         __attribute__((deprecated)) {}         // LCOV_EXCL_LINE
+
+    /**
+     * @copydoc analogWrite
+     */
+    void analogWriteBuffered(pin_t, analog_t) override // LCOV_EXCL_LINE
+        __attribute__((deprecated)) {}                 // LCOV_EXCL_LINE
 
     /**
      * @brief   Initialize the multiplexer: set the pin mode of the address pins
@@ -103,7 +130,13 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      * @brief   No periodic updating of the state is necessary, all actions are 
      *          carried out when the user calls analogRead or digitalRead.
      */
-    void update() override {} // LCOV_EXCL_LINE
+    void updateBufferedOutputs() override {} // LCOV_EXCL_LINE
+
+    /**
+     * @brief   No periodic updating of the state is necessary, all actions are 
+     *          carried out when the user calls analogRead or digitalRead.
+     */
+    void updateBufferedInputs() override {} // LCOV_EXCL_LINE
 
   private:
     const pin_t analogPin;
@@ -161,11 +194,21 @@ void AnalogMultiplex<N>::pinMode(pin_t, PinMode_t mode) {
 }
 
 template <uint8_t N>
+void AnalogMultiplex<N>::pinModeBuffered(pin_t, PinMode_t mode) {
+    AnalogMultiplex<N>::pinMode(analogPin, mode);
+}
+
+template <uint8_t N>
 int AnalogMultiplex<N>::digitalRead(pin_t pin) {
     prepareReading(pin);
     int result = ExtIO::digitalRead(analogPin);
     afterReading();
     return result;
+}
+
+template <uint8_t N>
+int AnalogMultiplex<N>::digitalReadBuffered(pin_t pin) {
+    return AnalogMultiplex<N>::digitalRead(pin);
 }
 
 template <uint8_t N>
@@ -175,6 +218,11 @@ analog_t AnalogMultiplex<N>::analogRead(pin_t pin) {
     analog_t result = ExtIO::analogRead(analogPin);
     afterReading();
     return result;
+}
+
+template <uint8_t N>
+analog_t AnalogMultiplex<N>::analogReadBuffered(pin_t pin) {
+    return AnalogMultiplex<N>::analogRead(pin);
 }
 
 template <uint8_t N>

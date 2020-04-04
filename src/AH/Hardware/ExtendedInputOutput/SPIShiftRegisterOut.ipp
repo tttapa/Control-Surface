@@ -17,11 +17,11 @@ template <uint8_t N>
 void SPIShiftRegisterOut<N>::begin() {
     ExtIO::pinMode(this->latchPin, OUTPUT);
     SPI.begin();
-    update();
+    updateBufferedOutputs();
 }
 
 template <uint8_t N>
-void SPIShiftRegisterOut<N>::update() {
+void SPIShiftRegisterOut<N>::updateBufferedOutputs() {
     if (!this->dirty)
         return;
     SPISettings settings = {SPI_MAX_SPEED, this->bitOrder, SPI_MODE0};

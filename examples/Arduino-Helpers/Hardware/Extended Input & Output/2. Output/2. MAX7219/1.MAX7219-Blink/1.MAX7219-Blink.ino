@@ -27,7 +27,9 @@
 using namespace ExtIO; // Bring the ExtIO pin functions into your sketch
 
 // Instantiate a MAX7219 with the SPI slave select pin as latch pin
-MAX7219 max7219 = SS;
+// There's just 1 MAX7219 in the chain, if you have more of them daisy-chained
+// together, you can increase the template argument (between angled brackets)
+MAX7219<1> max7219 = SS;
 
 const pin_t ledPin1 = max7219.pin(0);  // first LED of the MAX7219
 const pin_t ledPin2 = max7219.pin(63); // last LED of the MAX7219

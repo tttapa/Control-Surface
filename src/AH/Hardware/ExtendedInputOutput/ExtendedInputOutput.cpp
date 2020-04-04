@@ -15,7 +15,7 @@ bool inRange(T target, T start, T end) {
 }
 
 ExtendedIOElement &getIOElementOfPin(pin_t pin) {
-    for (ExtendedIOElement &el : ExtendedIOElement::getAll())
+    for (auto &el : ExtendedIOElement::getAll())
         if (pin < el.getStart())
             break;
         else if (inRange(pin, el.getStart(), el.getEnd()))
