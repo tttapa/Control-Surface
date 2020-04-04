@@ -65,15 +65,6 @@ class CCAbsoluteEncoder
         : MIDIAbsoluteEncoder<NumBanks, SingleAddress, ContinuousCCSender>(
               {config, address}, std::move(encoder), speedMultiply,
               pulsesPerStep, {}) {}
-
-// For tests only (PJRC Encoder library's copy constructor doesn't work)
-#ifndef ARDUINO
-    CCAbsoluteEncoder(const BankConfig<NumBanks> &config,
-                      const Encoder &encoder, MIDIAddress address,
-                      int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
-        : MIDIAbsoluteEncoder<NumBanks, SingleAddress, ContinuousCCSender>(
-              {config, address}, encoder, speedMultiply, pulsesPerStep, {}) {}
-#endif
 };
 
 } // namespace Bankable

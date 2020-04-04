@@ -32,30 +32,20 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     void begin() override {}
 
     void update() override {
-        auto delta = getNewDelta();
+        int32_t encval = encoder.read();
+        int32_t delta = (encval - deltaOffset) * multiplier / pulsesPerStep;
         if (delta) {
             address.lock();
-            auto oldValue = values[address.getSelection()];
-            auto newValue = oldValue + delta;
+            uint16_t oldValue = values[address.getSelection()];
+            int32_t newValue = oldValue + delta;
             newValue = constrain(newValue, 0, maxValue);
             if (oldValue != newValue) {
                 sender.send(newValue, address.getActiveAddress());
                 values[address.getSelection()] = newValue;
             }
             address.unlock();
+            deltaOffset += delta * pulsesPerStep / multiplier;
         }
-    }
-
-    /**
-     * @brief   Read the encoder and return the difference (delta) in position
-     *          relative to the previous time this method was called.
-     */
-    long getNewDelta() {
-        auto encval = encoder.read();
-        long delta = (encval - zeroOffsetPosition) * multiplier / pulsesPerStep;
-        if (delta)
-            zeroOffsetPosition = encval + delta * pulsesPerStep / multiplier;
-        return delta;
     }
 
     /**
@@ -82,7 +72,7 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     int16_t multiplier;
     uint8_t pulsesPerStep;
     Array<uint16_t, NumBanks> values = {{}};
-    long zeroOffsetPosition = 0;
+    int32_t deltaOffset = 0;
 
     constexpr static uint16_t maxValue = (1 << Sender::precision()) - 1;
 

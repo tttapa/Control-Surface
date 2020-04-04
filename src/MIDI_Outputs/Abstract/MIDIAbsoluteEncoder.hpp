@@ -26,43 +26,42 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
           multiplier(multiplier), pulsesPerStep(pulsesPerStep), sender(sender) {
     }
 
-    void begin() override { resetPositionOffset(); }
+    void begin() override {}
+
     void update() override {
-        uint16_t currentPosition = getNewValue();
-        if (currentPosition != previousPosition) {
-            sender.send(currentPosition, address);
-            previousPosition = currentPosition;
+        int32_t encval = encoder.read();
+        int32_t delta = (encval - deltaOffset) * multiplier / pulsesPerStep;
+        if (delta) {
+            uint16_t oldValue = value;
+            int32_t newValue = oldValue + delta;
+            newValue = constrain(newValue, 0, maxValue);
+            if (oldValue != newValue) {
+                sender.send(newValue, address);
+                value = newValue;
+            }
+            deltaOffset += delta * pulsesPerStep / multiplier;
         }
     }
 
-    uint16_t getNewValue() {
-        auto maxval = (1 << Sender::precision()) - 1;
-        auto encval = encoder.read();
-        long rawval =
-            (encval - zeroOffsetPosition) * multiplier / pulsesPerStep;
-        auto val = constrain(rawval, 0, maxval);
-        if (val != rawval)
-            zeroOffsetPosition =
-                encval + (rawval - val) * pulsesPerStep / multiplier;
-        return val;
-    }
+    /**
+     * @brief   Get the absolute value of the encoder.
+     */
+    uint16_t getValue() const { return value; }
 
-    uint16_t getValue() const { return previousPosition; }
-
-    void resetPositionOffset() { set(getValue()); }
-
-    void set(uint16_t value) {
-        zeroOffsetPosition =
-            encoder.read() - (long)value * pulsesPerStep / multiplier;
-    }
+    /**
+     * @brief   Set the absolute value of the encoder.
+     */
+    void setValue(uint16_t value) { this->value = value; }
 
   private:
     Enc encoder;
     MIDIAddress address;
     int16_t multiplier;
     uint8_t pulsesPerStep;
-    uint16_t previousPosition = 0;
-    long zeroOffsetPosition = 0;
+    uint16_t value = 0;
+    long deltaOffset = 0;
+
+    constexpr static uint16_t maxValue = (1 << Sender::precision()) - 1;
 
   public:
     Sender sender;

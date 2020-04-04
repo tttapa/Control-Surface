@@ -24,7 +24,7 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
      *
      * @todo    Documentation
      */
-    GenericMIDIRotaryEncoder(Enc &&encoder,  MIDIAddress address,
+    GenericMIDIRotaryEncoder(Enc &&encoder, MIDIAddress address,
                              int8_t speedMultiply, uint8_t pulsesPerStep,
                              const Sender &sender)
         : encoder(std::forward<Enc>(encoder)), address(address),
@@ -32,24 +32,22 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
           sender(sender) {}
 
     void begin() override {}
-    
+
     void update() override {
-        long currentPosition = encoder.read();
-        long difference = (currentPosition - previousPosition) / pulsesPerStep;
-        if (difference) {
-            sender.send(difference * speedMultiply, address);
-            previousPosition += difference * pulsesPerStep;
+        int32_t encval = encoder.read();
+        int32_t delta = (encval - deltaOffset) * speedMultiply / pulsesPerStep;
+        if (delta) {
+            sender.send(delta, address);
+            deltaOffset += delta * pulsesPerStep / speedMultiply;
         }
     }
-
-    void resetPositionOffset() { previousPosition = encoder.read(); }
 
   private:
     Enc encoder;
     MIDIAddress address;
     int8_t speedMultiply;
     uint8_t pulsesPerStep;
-    long previousPosition = 0;
+    long deltaOffset = 0;
 
   public:
     Sender sender;

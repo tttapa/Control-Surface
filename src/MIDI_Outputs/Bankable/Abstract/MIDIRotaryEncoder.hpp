@@ -38,12 +38,11 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
     void begin() override {}
 
     void update() override {
-        long currentPosition = encoder.read();
-        long difference = (currentPosition - previousPosition) / pulsesPerStep;
-        // I could do the division inside of the if statement for performance
-        if (difference) {
-            sender.send(difference * speedMultiply, address.getActiveAddress());
-            previousPosition += difference * pulsesPerStep;
+        int32_t encval = encoder.read();
+        int32_t delta = (encval - deltaOffset) * speedMultiply / pulsesPerStep;
+        if (delta) {
+            sender.send(delta, address.getActiveAddress());
+            deltaOffset += delta * pulsesPerStep / speedMultiply;
         }
     }
 
@@ -52,7 +51,7 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
     Enc encoder;
     const uint8_t speedMultiply;
     const uint8_t pulsesPerStep;
-    long previousPosition = 0;
+    long deltaOffset = 0;
 
   public:
     Sender sender;
