@@ -75,8 +75,10 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         -Wno-gnu-zero-variadic-macro-arguments")
 else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
-        -Wsuggest-override")
+        -Wsuggest-override \
+        -Wno-error=attributes")
 endif()
+
 
 # set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
 

@@ -53,15 +53,39 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
      * 
      * @param   loadPin
      *          The pin connected to the load pin (C̄S̄) of the MAX7219.
+     * @param   chainlength
+     *          The number of daisy-chained MAX7219 chips.
      */
-    MAX7219SevenSegmentDisplay(pin_t loadPin) : MAX7219_Base(loadPin) {}
+    MAX7219SevenSegmentDisplay(pin_t loadPin, uint8_t chainlength = 1)
+        : MAX7219_Base(loadPin, chainlength) {}
 
     /// Initialize.
     /// @see    MAX7219#init
     void begin() { init(); }
 
     /**
-     * @brief   Display a long integer number to the display.
+     * @brief   Set the value of a single digit.
+     * 
+     * @param   digit
+     *          The digit to set the value of. May be greater than 7 if more 
+     *          than one chip are daisy-chained.  
+     *          Digit numbering starts from the right, the rightmost digit is
+     *          digit zero.
+     * @param   value
+     *          The value/bit pattern to set the digit to.
+     */
+    void sendDigit(uint16_t digit, uint8_t value) {
+        sendRaw((digit % 8) + 1, value, digit / 8);
+    }
+
+    /**
+     * @brief   Get the total number of digits in this chain of displays, i.e. 
+     *          eight times the number of chips.
+     */
+    uint8_t getNumberOfDigits() const { return 8 * getChainLength(); }
+
+    /**
+     * @brief   Display a long integer to the display.
      *          The number will be right-aligned.
      * 
      * @param   number
@@ -73,26 +97,89 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
      * @param   endDigit
      *          The last digit (zero-based, counting from the right) that can 
      *          be printed.
-     *          If the number is larger than `endDigit - startDigit`, the number
-     *          is truncated on the left. If the number is smaller than 
+     *          If the number is larger than `endDigit - startDigit`, a series
+     *          of dashes is displayed. If the number is smaller than 
      *          `endDigit - startDigit`, the leftmost digits including 
      *          `endDigit` are cleared.
      * @return  The number of digits that have been overwritten 
      *          (`endDigit - startDigit`).
      */
-    uint8_t display(long number, uint8_t startDigit = 0, uint8_t endDigit = 7) {
-        long anumber = abs(number);
-        uint8_t i = startDigit + 1;
-        endDigit++;
+    int16_t display(long number, int16_t startDigit = 0,
+                    int16_t endDigit = -1) {
+        if (startDigit < 0)
+            startDigit += getNumberOfDigits();
+        if (endDigit < 0)
+            endDigit += getNumberOfDigits();
+        unsigned long anumber = abs(number);
+        int16_t i = startDigit;
         do {
-            sendRaw(i++, NumericChars[anumber % 10]);
+            sendDigit(i++, NumericChars[anumber % 10]);
             anumber /= 10;
         } while (anumber && i <= endDigit);
-        if (number < 0 && i <= endDigit)
-            sendRaw(i++, 0b00000001); // minus sign
-        while (i <= endDigit)
-            sendRaw(i++, 0b00000000); // clear unused digits within range
+        if (number < 0 && i <= endDigit) {
+            sendDigit(i++, 0b00000001); // minus sign
+        } else if (number < 0 || anumber != 0) {
+            for (int16_t i = startDigit; i <= endDigit;)
+                sendDigit(i++, 0b00000001);
+        } else {
+            // clear unused digits within range
+            while (i <= endDigit)
+                sendDigit(i++, 0b00000000);
+        }
         return endDigit - startDigit;
+    }
+
+    /// @copydoc    display(long)
+    int16_t display(int number, int16_t startDigit = 0, int16_t endDigit = -1) {
+        return display(long(number), startDigit, endDigit);
+    }
+
+    /**
+     * @brief   Display a long unsigned integer to the display.
+     *          The number will be right-aligned.
+     * 
+     * @param   number
+     *          The number to display.
+     * @param   startDigit
+     *          The digit (zero-based, counting from the right) to start 
+     *          printing the number.  
+     *          Digits: 7 6 5 4 3 2 1 0
+     * @param   endDigit
+     *          The last digit (zero-based, counting from the right) that can 
+     *          be printed.
+     *          If the number is larger than `endDigit - startDigit`, a series
+     *          of dashes is displayed. If the number is smaller than 
+     *          `endDigit - startDigit`, the leftmost digits including 
+     *          `endDigit` are cleared.
+     * @return  The number of digits that have been overwritten 
+     *          (`endDigit - startDigit`).
+     */
+    int16_t display(unsigned long number, int16_t startDigit = 0,
+                    int16_t endDigit = -1) {
+        if (startDigit < 0)
+            startDigit += getNumberOfDigits();
+        if (endDigit < 0)
+            endDigit += getNumberOfDigits();
+        int16_t i = startDigit;
+        do {
+            sendDigit(i++, NumericChars[number % 10]);
+            number /= 10;
+        } while (number && i <= endDigit);
+        if (number != 0) {
+            for (int16_t i = startDigit; i <= endDigit;)
+                sendDigit(i++, 0b00000001);
+        } else {
+            // clear unused digits within range
+            while (i <= endDigit)
+                sendDigit(i++, 0b00000000);
+        }
+        return endDigit - startDigit;
+    }
+
+    /// @copydoc    display(unsigned long)
+    int16_t display(unsigned int number, int16_t startDigit = 0,
+                    int16_t endDigit = -1) {
+        return display((unsigned long)(number), startDigit, endDigit);
     }
 
     /**
@@ -105,19 +192,21 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
      * @param   startPos
      *          The position to start printing.
      */
-    uint8_t display(const char *text, uint8_t startPos = 0) {
-        uint8_t i = 8 - startPos;
+    int16_t display(const char *text, int16_t startPos = 0) {
+        if (startPos < 0)
+            startPos += getNumberOfDigits();
+        int16_t i = getNumberOfDigits() - startPos;
         char prevD = '\0';
         while (*text && (i > 0 || *text == '.')) {
             char c = *text++;
             uint8_t d = 0;
             if (c == '.') {
                 if (prevD) {
-                    sendRaw(1 + i, prevD | 0b10000000);
+                    sendDigit(i, prevD | 0b10000000);
                     prevD = '\0';
                     continue;
                 } else {
-                    sendRaw(i--, 0b10000000);
+                    sendDigit(--i, 0b10000000);
                     continue;
                 }
             } else if (c >= '@' && c <= '_')
@@ -126,28 +215,10 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
                 d = SevenSegmentCharacters[(uint8_t)c];
             else if (c >= 'a' && c <= 'z')
                 d = SevenSegmentCharacters[(uint8_t)c - 'a' + 'A' - '@'];
-            sendRaw(i--, d);
+            sendDigit(--i, d);
             prevD = d;
         }
-        return 8 - i - startPos;
-    }
-
-    /**
-     * @brief   ?
-     * 
-     * @todo    Find out what this function does, and write documentation.
-     */
-    template <uint8_t N>
-    uint8_t display(const uint8_t (&characters)[N], uint8_t startPos = 0) {
-        uint8_t i = 8 - startPos;
-        const uint8_t *char_p = &characters[0];
-        const uint8_t *const end_p = &characters[N];
-        while (i && char_p < end_p) {
-            uint8_t c = *char_p++;
-            sendRaw(i--, SevenSegmentCharacters[(uint8_t)c & 0x3F] |
-                             (((uint8_t)c & 0x40) << 1));
-        }
-        return 8 - i - startPos;
+        return getNumberOfDigits() - i - startPos;
     }
 
     /**
@@ -157,15 +228,55 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
      *          The digit to print to [0, 7].
      * @param   value
      *          The 4-bit value to print [0, 15].
-     * 
-     * @todo    Rename to `printHexChar` and create function that actually 
-     *          prints longer hexadecimal numbers.
      */
-    void printHex(uint8_t digit, uint8_t value) {
+    void printHexChar(int16_t digit, uint8_t value) {
+        if (digit < 0)
+            digit += getNumberOfDigits();
         value &= 0x0F;
-        uint8_t c =
-            value >= 0xA ? AlphaChars[value - 0x0A] : NumericChars[value];
-        send(digit, c);
+        uint8_t c = value >= 0x0A //
+                        ? AlphaChars[value - 0x0A]
+                        : NumericChars[value];
+        sendDigit(digit, c);
+    }
+
+    /**
+     * @brief   Print a number to the display in hexadecimal format.
+     * @param   number
+     *          The number to display.
+     * @param   startDigit
+     *          The digit (zero-based, counting from the right) to start 
+     *          printing the number.  
+     *          Digits: 7 6 5 4 3 2 1 0
+     * @param   endDigit
+     *          The last digit (zero-based, counting from the right) that can 
+     *          be printed.
+     *          If the number is larger than `endDigit - startDigit`, a series
+     *          of dashes is displayed. If the number is smaller than 
+     *          `endDigit - startDigit`, the leftmost digits including 
+     *          `endDigit` are cleared.
+     * @return  The number of digits that have been overwritten 
+     *          (`endDigit - startDigit`).
+     */
+    int16_t displayHex(unsigned long number, int16_t startDigit = 0,
+                       int16_t endDigit = -1) {
+        if (startDigit < 0)
+            startDigit += getNumberOfDigits();
+        if (endDigit < 0)
+            endDigit += getNumberOfDigits();
+        int16_t i = startDigit;
+        do {
+            printHexChar(i++, uint8_t(number));
+            number >>= 4;
+        } while (number && i <= endDigit);
+        if (number != 0) {
+            for (int16_t i = startDigit; i <= endDigit;)
+                sendDigit(i++, 0b00000001);
+        } else {
+            // clear unused digits within range
+            while (i <= endDigit)
+                sendDigit(i++, 0b00000000);
+        }
+        return endDigit - startDigit;
     }
 };
 

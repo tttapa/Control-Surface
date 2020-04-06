@@ -9,6 +9,9 @@ keyword1:
   - IncrementButton
   # IncrementDecrementButtons.hpp
   - IncrementDecrementButtons
+  # MCP23017Encoders.hpp
+  - MCP23017Encoders
+  - MCP23017Encoder
 
 keyword2:
   # Button.hpp
@@ -39,6 +42,12 @@ keyword2:
   - update
   - getState
   - invert
+  # MCP23017Encoders.hpp
+  - begin
+  - update
+  - read
+  - readAndReset
+  - write
 
 literal1:
   # Button.hpp

@@ -6,7 +6,7 @@
 # Control Surface
 
 An Arduino library for MIDI control surfaces (input and output).  
-It includes general-purpose MIDI abstraction layer as well, which can be useful
+It includes a general-purpose MIDI abstraction layer as well, which can be useful
 for any MIDI-related project.
 
 ## Overview
@@ -51,7 +51,7 @@ In order to save some IO pins, the library natively supports **Shift Registers**
 (e.g. 74HC595) and **multiplexers** (e.g. 74HC4051 or 74HC4067).
 
 If you are using a Teensy 3.x, you can use it as a **USB audio interface**. Just
-add an I²S DAC (e.g. PCM5102), and 5 lines of code, and you can start playing 
+add an I²S DAC (e.g. PCM5102) and 5 lines of code, and you can start playing 
 audio through your Teensy.  
 You can also add volume controls and VU meters for these audio connections.
 
@@ -142,7 +142,8 @@ Arduino examples can be found here:
 [**Examples**](https://tttapa.github.io/Control-Surface-doc/Doxygen/examples.html)
 
 Have a look at the [**modules**](https://tttapa.github.io/Control-Surface-doc/Doxygen/modules.html)
-for an overview of the features of the library.
+for an overview of the features of the library, it's the best entry point for 
+the documentation.
 
 ## The Control Surface library vs. The MIDI Controller library
 
@@ -187,7 +188,7 @@ fully implemented, feel free to open an issue, so I know where to focus on first
 - Adding support for motorized faders
 - Cleaning up the display code
 - Cleaning up the MIDI over Bluetooth LE code
-- Adding more tests (currently at over 320 unit tests)
+- Adding more tests (currently at over 440 unit tests)
 - Adding more examples and adding comments to existing examples
 - Finishing the documentation
 
