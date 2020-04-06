@@ -215,6 +215,13 @@ class MAX7219_Base {
         sendRaw(INTENSITY, intensity & 0xF, chip);
     }
 
+    /**
+     * @brief   Get the number of daisy-chained chips.
+     */
+    uint8_t getChainLength() const {
+        return chainlength;
+    }
+
   private:
     pin_t loadPin;
     uint8_t chainlength;

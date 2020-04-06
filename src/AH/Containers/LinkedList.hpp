@@ -270,6 +270,11 @@ class DoublyLinkedList {
                         node->previous != nullptr);
     }
 
+    /// @copydoc couldContain(Node *)
+    bool couldContain(Node &node) {
+        return couldContain(&node);
+    }
+
     iterator begin() { return {first}; }
     iterator end() { return {nullptr}; }
 
