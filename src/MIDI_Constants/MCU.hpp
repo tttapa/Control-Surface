@@ -4,16 +4,20 @@
 
 BEGIN_CS_NAMESPACE
 
+namespace MCU {
+
 /// @addtogroup    MIDIConstants
 /// @{
 
 /**
+ * @defgroup    MCU_Constants   Mackie Control Universal constants
  * @brief   Names and note and controller numbers for the Mackie Control 
  *          Universal (MCU) protocol.
+ * @{
  */
-namespace MCU {
 
-// Notes
+/// @defgroup MCU_Notes MCU MIDI Note controls
+/// @{
 
 constexpr uint8_t REC_RDY_1              = 0x00; // In Out
 constexpr uint8_t REC_RDY_2              = 0x01; // In Out
@@ -147,7 +151,10 @@ constexpr uint8_t RUDE_SOLO              = 0x73; // In
 
 constexpr uint8_t RELAY                  = 0x76; // In
 
-// Control Change
+/// @}
+
+/// @defgroup MCU_CC MCU Control Change controls
+/// @{
 
 constexpr uint8_t V_POT_1                = 0x10; //    Out
 constexpr uint8_t V_POT_2                = 0x11; //    Out
@@ -162,7 +169,10 @@ constexpr uint8_t EXTERNAL_CONTROLLER    = 0x2E; //    Out
 
 constexpr uint8_t JOG_WHEEL              = 0x3C; //    Out
 
-// Pitch Bend
+/// @}
+
+/// @defgroup MCU_PB MCU Pitch Bend controls
+/// @{
 
 constexpr Channel VOLUME_1               = CHANNEL_1; // In Out
 constexpr Channel VOLUME_2               = CHANNEL_2; // In Out
@@ -175,9 +185,13 @@ constexpr Channel VOLUME_8               = CHANNEL_8; // In Out
 
 constexpr Channel MASTER_VOLUME          = CHANNEL_9; // In Out
 
-} // namespace MCU
+/// @}
 
 /// @}
+
+/// @}
+
+} // namespace MCU
 
 END_CS_NAMESPACE
 

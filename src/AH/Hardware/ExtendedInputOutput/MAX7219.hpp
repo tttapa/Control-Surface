@@ -17,8 +17,13 @@ BEGIN_AH_NAMESPACE
  * The SPI interface is used.
  * 
  * @todo    Wiring diagram for SPI connection.
+ * 
+ * @tparam  NumChips
+ *          The number of daisy-chained MAX7219 chips.
  */
-class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
+template <uint8_t NumChips = 1>
+class MAX7219 : public MAX7219_Base,
+                public StaticSizeExtendedIOElement<8 * 8 * NumChips> {
   public:
     /**
      * @brief   Create a MAX7219 ExtendedIOElement.
@@ -26,17 +31,45 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
      * @param   loadPin
      *          The pin connected to the load pin (C̄S̄) of the MAX7219.
      */
-    MAX7219(pin_t loadPin) : MAX7219_Base(loadPin) {}
+    MAX7219(pin_t loadPin) : MAX7219_Base(loadPin, NumChips) {}
 
     /// Initialize.
     /// @see    MAX7219#init
     void begin() override { init(); }
 
+  private:
+    struct IndexMask {
+        uint8_t row;
+        uint8_t col;
+        uint8_t rowgrp;
+        uint8_t rowmask;
+        uint8_t colmask;
+    };
+
+    static IndexMask pin2index(pin_t pin) {
+        uint8_t row = pin / 8;
+        uint8_t col = pin % 8;
+        uint8_t rowgrp = row % 8;
+        uint8_t rowmask = 1 << rowgrp;
+        uint8_t colmask = 1 << col;
+        return {row, col, rowgrp, rowmask, colmask};
+    }
+
+  public:
     /**
      * @brief   The pinMode function is not implemented because the mode is
      *          `OUTPUT` by definition.
      */
     void pinMode(pin_t pin, PinMode_t mode) override
+        __attribute__((deprecated)) {
+        (void)pin;
+        (void)mode;
+    }
+
+    /**
+     * @copydoc pinMode
+     */
+    void pinModeBuffered(pin_t pin, PinMode_t mode) override
         __attribute__((deprecated)) {
         (void)pin;
         (void)mode;
@@ -52,8 +85,23 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
      *          (Either `HIGH` (1) or `LOW` (0))
      */
     void digitalWrite(pin_t pin, PinStatus_t val) override {
-        buffer.set(pin, val);
-        update();
+        IndexMask i = pin2index(pin);
+        val ? buffer[i.row] |= i.colmask   // set the pin (high)
+            : buffer[i.row] &= ~i.colmask; // clear the pin (low)
+        updateBufferedOutputRow(i);
+    }
+
+    /**
+     * @brief   Set the state of a given pin in the software buffer.
+     * The buffer is written to the MAX7219 when @ref updateBufferedOutputs
+     * is called.
+     * @copydetails digitalWrite
+     */
+    void digitalWriteBuffered(pin_t pin, PinStatus_t val) override {
+        IndexMask i = pin2index(pin);
+        val ? buffer[i.row] |= i.colmask   // set the pin (high)
+            : buffer[i.row] &= ~i.colmask; // clear the pin (low)
+        dirty_rows |= i.rowmask;
     }
 
     /**
@@ -66,7 +114,18 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
      * @retval  1
      *          The state of the output is `HIGH`.
      */
-    int digitalRead(pin_t pin) override { return buffer.get(pin); }
+    int digitalRead(pin_t pin) override {
+        IndexMask i = pin2index(pin);
+        return bool(buffer[i.row] & i.colmask);
+    }
+
+    /**
+     * @copydoc digitalRead
+     */
+    int digitalReadBuffered(pin_t pin) override {
+        IndexMask i = pin2index(pin);
+        return bool(buffer[i.row] & i.colmask);
+    }
 
     /**
      * @brief   The analogRead function is deprecated because a MAX7219
@@ -79,6 +138,14 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
      *          The state of the output is `HIGH`.
      */
     analog_t analogRead(pin_t pin) override __attribute__((deprecated)) {
+        return 1023 * digitalRead(pin);
+    }
+
+    /**
+     * @copydoc analogRead
+     */
+    analog_t analogReadBuffered(pin_t pin) override
+        __attribute__((deprecated)) {
         return 1023 * digitalRead(pin);
     }
 
@@ -101,17 +168,35 @@ class MAX7219 : public MAX7219_Base, public StaticSizeExtendedIOElement<8 * 8> {
     }
 
     /**
-     * @brief   Write the buffer to the display.
-     * 
-     * @todo    Does this really have to happen on each update?
+     * @copydoc analogWrite
      */
-    void update() override {
-        for (uint8_t i = 0; i < buffer.getBufferLength(); i++)
-            sendRaw(i + 1, buffer.getByte(i));
+    void analogWriteBuffered(pin_t pin, analog_t val) override
+        __attribute__((deprecated)) {
+        digitalWrite(pin, val >= 0x80 ? HIGH : LOW);
     }
 
+    void updateBufferedOutputRow(IndexMask i) {
+        sendRowAll(i.rowgrp, buffer.data + i.rowgrp, 8);
+        dirty_rows &= ~i.rowmask;
+    }
+
+    void updateBufferedOutputs() override {
+        if (dirty_rows == 0)
+            return;
+        uint8_t row = 8;
+        do {
+            --row;
+            if (dirty_rows & 0x80)
+                sendRowAll(row, buffer.data + row, 8);
+            dirty_rows <<= 1;
+        } while (row);
+    }
+
+    void updateBufferedInputs() override {}
+
   private:
-    BitArray<8 * 8> buffer;
+    Array<uint8_t, 8 * NumChips> buffer;
+    uint8_t dirty_rows = 0xFF;
 };
 
 END_AH_NAMESPACE

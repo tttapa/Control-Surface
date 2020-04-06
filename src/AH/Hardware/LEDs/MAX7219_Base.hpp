@@ -27,8 +27,11 @@ class MAX7219_Base {
      * 
      * @param   loadPin
      *          The pin connected to the load pin (C̄S̄) of the MAX7219.
+     * @param   chainlength
+     *          The number of daisy-chained MAX7219 chips.
      */
-    MAX7219_Base(pin_t loadPin) : loadPin(loadPin) {}
+    MAX7219_Base(pin_t loadPin, uint8_t chainlength = 1)
+        : loadPin(loadPin), chainlength(chainlength) {}
 
     static constexpr uint8_t DECODEMODE = 9;
     static constexpr uint8_t INTENSITY = 10;
@@ -44,12 +47,12 @@ class MAX7219_Base {
         ExtIO::digitalWrite(loadPin, HIGH);
         ExtIO::pinMode(loadPin, OUTPUT);
         SPI.begin();
-        sendRaw(DISPLAYTEST, 0);        // Normal operation, no test mode
-        sendRaw(SCANLIMIT, 7);          // Scan all 8 digits
-        sendRaw(DECODEMODE, 0);         // Raw LED addressing
-        sendRaw(INTENSITY, 0xF);        // Maximum intensity
+        sendRawAll(DISPLAYTEST, 0); // Normal operation, no test mode
+        sendRawAll(SCANLIMIT, 7);   // Scan all 8 digits
+        sendRawAll(DECODEMODE, 0);  // Raw LED addressing
+        sendRawAll(INTENSITY, 0xF); // Maximum intensity
         clear();
-        sendRaw(SHUTDOWN, 1); // Enable the display
+        sendRawAll(SHUTDOWN, 1); // Enable the display
     }
 
     /** 
@@ -57,50 +60,164 @@ class MAX7219_Base {
      */
     void clear() {
         for (uint8_t j = 1; j < 8 + 1; j++)
-            sendRaw(j, 0);
+            sendRawAll(j, 0);
     }
 
     /**
-     * @brief   Send the value to the given digit.
+     * @brief   Send the value to the given digit or row.
      * 
      * @param   digit
      *          The digit or row to set [0, 7].
      * @param   value
      *          The value to set the row to.
+     * @param   chip
+     *          The chip to send the digit to.
      */
-    void send(uint8_t digit, uint8_t value) {
-        sendRaw((digit & 0x7) + 1, value);
+    void send(uint8_t digit, uint8_t value, uint8_t chip = 0) {
+        sendRaw((digit & 0x7) + 1, value, chip);
     }
 
     /**
-     * @brief   Send a raw opcode and value to the MAX7219.
+     * @brief   Send values to the given digit or row, sending a different value
+     *          for each chip.
+     * 
+     * The array is often a matrix containing the values for all rows of all 
+     * chips in this chain. In that case, the leading dimension is 8, because 
+     * each chip has 8 rows.
+     * 
+     *     [0] chip 0, row 0  ┐
+     *     [1] chip 0, row 1  │
+     *     [ ] ...            │ 8 elements between two chips
+     *     [7] chip 0, row 7  │
+     *     [8] chip 1, row 0  ┘
+     *     [9] chip 1, row 1
+     *     [ ] ...
+     * 
+     * If you just want to specify a single row for all chips, the leading 
+     * dimension of the array is 1.
+     * 
+     *     [0] chip 0, row 0  ┐
+     *     [1] chip 1, row 0  ┘ 1 element between two chips
+     *     [2] chip 2, row 0
+     *     [ ] ...
+     * 
+     * @param   digit
+     *          The digit or row to set [0, 7].
+     * @param   values
+     *          The array of values to send.
+     * @param   leading_dim
+     *          The leading dimension of the array of values.
+     */
+    void sendRowAll(uint8_t digit, const uint8_t *values,
+                    uint8_t leading_dim = 1) {
+        uint8_t opcode = (digit & 0x7) + 1;
+        ExtIO::digitalWrite(loadPin, LOW);
+        SPI.beginTransaction(settings);
+        for (uint8_t i = 0; i < chainlength; ++i) {
+            SPI.transfer(opcode);
+            SPI.transfer(values[uint16_t(i) * leading_dim]);
+        }
+        ExtIO::digitalWrite(loadPin, HIGH);
+        SPI.endTransaction();
+    }
+
+    /**
+     * @brief   Send different values to all digits/rows of all chips.
+     *
+     * The array layout should be as follows: 
+     *
+     *     [0] chip 0, row 0  ┐
+     *     [1] chip 0, row 1  │
+     *     [ ] ...            │ 8 elements between two chips
+     *     [7] chip 0, row 7  │
+     *     [8] chip 1, row 0  ┘
+     *     [9] chip 1, row 1
+     *     [ ] ...
+     * 
+     * The array has 8 * `chainlength` elements in total.
+     * 
+     * @param   values
+     *          The array of values to send.
+     */
+    void sendAll(const uint8_t *values) {
+        for (uint8_t row = 0; row < 8; ++row)
+            sendRowAll(row, values + row, 8);
+    }
+
+    /**
+     * @brief   Send the same raw opcode and value to all chips in the chain.
      * 
      * @param   opcode
      *          The opcode to send.
      * @param   value
      *          The value to send.
      */
-    void sendRaw(uint8_t opcode, uint8_t value) {
+    void sendRawAll(uint8_t opcode, uint8_t value) {
         ExtIO::digitalWrite(loadPin, LOW);
         SPI.beginTransaction(settings);
-        SPI.transfer(opcode);
-        SPI.transfer(value);
+        for (uint8_t i = 0; i < chainlength; ++i) {
+            SPI.transfer(opcode);
+            SPI.transfer(value);
+        }
         ExtIO::digitalWrite(loadPin, HIGH);
         SPI.endTransaction();
     }
 
     /**
-     * @brief   Set the intensity of the LEDs.
+     * @brief   Send a raw opcode and value to the given MAX7219.
+     * 
+     * @param   opcode
+     *          The opcode to send.
+     * @param   value
+     *          The value to send.
+     * @param   chip
+     *          The chip to send the command to.
+     */
+    void sendRaw(uint8_t opcode, uint8_t value, uint8_t chip = 0) {
+        if (chip >= chainlength)
+            return; // Should I throw an error?
+        ExtIO::digitalWrite(loadPin, LOW);
+        SPI.beginTransaction(settings);
+        uint8_t c = 0;
+        for (; c < chip; c++) {
+            SPI.transfer(0x00); // No-Op
+            SPI.transfer(0x00);
+        }
+        SPI.transfer(opcode);
+        SPI.transfer(value);
+        for (c++; c < chainlength; c++) {
+            SPI.transfer(0x00); // No-Op
+            SPI.transfer(0x00);
+        }
+        ExtIO::digitalWrite(loadPin, HIGH);
+        SPI.endTransaction();
+    }
+
+    /**
+     * @brief   Set the intensity of the LEDs of all chips.
      * 
      * @param   intensity
      *          The intensity [0, 15].
      */
     void setIntensity(uint8_t intensity) {
-        sendRaw(INTENSITY, intensity & 0xF);
+        sendRawAll(INTENSITY, intensity & 0xF);
+    }
+
+    /**
+     * @brief   Set the intensity of the LEDs of a specific chip.
+     * 
+     * @param   intensity
+     *          The intensity [0, 15].
+     * @param   chip
+     *          The chip to set the intensity of.
+     */
+    void setIntensity(uint8_t intensity, uint8_t chip) {
+        sendRaw(INTENSITY, intensity & 0xF, chip);
     }
 
   private:
     pin_t loadPin;
+    uint8_t chainlength;
     SPISettings settings = {SPI_MAX_SPEED, MSBFIRST, SPI_MODE0};
 };
 

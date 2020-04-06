@@ -6,7 +6,7 @@
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 #include "ExtendedInputOutput.hpp"
-#include <AH/Containers/LinkedList.hpp>
+#include <AH/Containers/Updatable.hpp>
 #include <AH/Hardware/Hardware-Types.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -60,7 +60,7 @@ BEGIN_AH_NAMESPACE
  * Another reason to do it this way, is that this approach is still fast enough
  * to make sure it is not noticable to human users.
  */
-class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
+class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
   protected:
     /**
      * @brief   Create an ExtendedIOElement with the given number of pins.
@@ -71,8 +71,6 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
     ExtendedIOElement(pin_t length);
 
   public:
-    virtual ~ExtendedIOElement();
-
     /** 
      * @brief   Set the mode of a given pin.
      * 
@@ -89,7 +87,18 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
      *          The mode to set the pin to (e.g. `INPUT`, `OUTPUT` or 
      *          `INPUT_PULLUP`).
      */
-    virtual void pinMode(pin_t pin, PinMode_t mode) = 0;
+    virtual void pinMode(pin_t pin, PinMode_t mode) {
+        pinModeBuffered(pin, mode);
+        updateBufferedOutputs();
+    }
+
+    /**
+     * @brief   Set the mode of a given pin in the software buffer.
+     * The buffer is written to the ExtIO device when @ref updateBufferedOutputs
+     * is called.
+     * @copydetails pinMode
+     */
+    virtual void pinModeBuffered(pin_t pin, PinMode_t mode) = 0;
 
     /** 
      * @brief   Set the output of the given pin to the given state.
@@ -99,7 +108,18 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
      * @param   state
      *          The new state to set the pin to.
      */
-    virtual void digitalWrite(pin_t pin, PinStatus_t state) = 0;
+    virtual void digitalWrite(pin_t pin, PinStatus_t state) {
+        digitalWriteBuffered(pin, state);
+        updateBufferedOutputs();
+    }
+
+    /**
+     * @brief   Set the output of a given pin in the software buffer.
+     * The buffer is written to the ExtIO device when @ref updateBufferedOutputs
+     * is called.
+     * @copydetails digitalWrite
+     */
+    virtual void digitalWriteBuffered(pin_t pin, PinStatus_t state) = 0;
 
     /** 
      * @brief   Read the state of the given pin.
@@ -108,7 +128,17 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
      *          The (zero-based) pin of this IO element.
      * @return  The state of the given pin.
      */
-    virtual int digitalRead(pin_t pin) = 0;
+    virtual int digitalRead(pin_t pin) {
+        updateBufferedInputs();
+        return digitalReadBuffered(pin);
+    }
+
+    /** 
+     * @brief   Read the state of the given pin from the software buffer.
+     * To update the buffer, you have to call @ref updateBufferedInputs first.
+     * @copydetails digitalRead
+     */
+    virtual int digitalReadBuffered(pin_t pin) = 0;
 
     /**
      * @brief   Write an analog (or PWM) value to the given pin.
@@ -118,7 +148,18 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
      * @param   val 
      *          The new analog value to set the pin to.
      */
-    virtual void analogWrite(pin_t pin, analog_t val) = 0;
+    virtual void analogWrite(pin_t pin, analog_t val) {
+        analogWriteBuffered(pin, val);
+        updateBufferedOutputs();
+    }
+
+    /**
+     * @brief   Write an analog (or PWM) value to the software buffer given pin.
+     * The buffer is written to the ExtIO device when @ref updateBufferedOutputs
+     * is called.
+     * @copydetails analogWrite
+     */
+    virtual void analogWriteBuffered(pin_t pin, analog_t val) = 0;
 
     /**
      * @brief   Read the analog value of the given pin.
@@ -127,7 +168,17 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
      *          The (zero-based) pin of this IO element.
      * @return  The new analog value of pin.
      */
-    virtual analog_t analogRead(pin_t pin) = 0;
+    virtual analog_t analogRead(pin_t pin) {
+        updateBufferedInputs();
+        return analogReadBuffered(pin);
+    }
+
+    /** 
+     * @brief   Read the analog value of the given pin from the software buffer.
+     * To update the buffer, you have to call @ref updateBufferedInputs first.
+     * @copydetails analogRead
+     */
+    virtual analog_t analogReadBuffered(pin_t pin) = 0;
 
     /**
      * @brief   Initialize the extended IO element.
@@ -140,11 +191,26 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
     static void beginAll();
 
     /**
-     * @brief   Update the extended IO element:
-     *          write the internal state to the physical outputs,
-     *          or read the physical state into the input buffers.
+     * @brief   Write the internal state to the physical outputs.
      */
-    virtual void update() = 0;
+    virtual void updateBufferedOutputs() = 0;
+
+    /**
+     * @brief   Write the internal states to the physical outputs for all 
+     *          extended IO elements.
+     */
+    static void updateAllBufferedOutputs();
+
+    /** 
+     * @brief   Read the physical state into the input buffers.
+     */
+    virtual void updateBufferedInputs() = 0;
+
+    /** 
+     * @brief   Read the physical state into the input buffers for all extended
+     *          IO elements.
+     */
+    static void updateAllBufferedInputs();
 
     /**
      * @brief   Get the extended IO pin number of a given physical pin of this
@@ -194,8 +260,6 @@ class ExtendedIOElement : public DoublyLinkable<ExtendedIOElement> {
     const pin_t start;
     const pin_t end;
     static pin_t offset;
-
-    static DoublyLinkedList<ExtendedIOElement> elements;
 };
 
 END_AH_NAMESPACE
