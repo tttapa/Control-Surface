@@ -1,14 +1,7 @@
 #pragma once
 
-#if not defined(Encoder_h_) && not defined(IDE)
-#error                                                                         \
-    "The PJRC Encoder library should be included before the Control-Surface "  \
-    "library. (#include <Encoder.h>)"
-#endif
-
 #include <AH/STL/utility> // std::forward
 #include <Def/Def.hpp>
-#include <Encoder.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -53,10 +46,14 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
     Sender sender;
 };
 
+#if defined(Encoder_h_) || not defined(ARDUINO)
+
 template <class Sender>
 using MIDIRotaryEncoder = GenericMIDIRotaryEncoder<Encoder, Sender>;
 
 template <class Sender>
 using BorrowedMIDIRotaryEncoder = GenericMIDIRotaryEncoder<Encoder &, Sender>;
+
+#endif
 
 END_CS_NAMESPACE

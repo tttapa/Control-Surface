@@ -1,14 +1,7 @@
 #pragma once
 
-#if not defined(Encoder_h_) && not defined(IDE)
-#error                                                                         \
-    "The PJRC Encoder library should be included before the Control-Surface "  \
-    "library. (#include <Encoder.h>)"
-#endif
-
 #include <Banks/BankableAddresses.hpp>
 #include <Def/Def.hpp>
-#include <Encoder.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -57,6 +50,8 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
     Sender sender;
 };
 
+#if defined(Encoder_h_) || not defined(ARDUINO)
+
 template <class BankAddress, class Sender>
 using MIDIRotaryEncoder =
     GenericMIDIRotaryEncoder<Encoder, BankAddress, Sender>;
@@ -64,6 +59,8 @@ using MIDIRotaryEncoder =
 template <class BankAddress, class Sender>
 using BorrowedMIDIRotaryEncoder =
     GenericMIDIRotaryEncoder<Encoder &, BankAddress, Sender>;
+
+#endif
 
 } // namespace Bankable
 
