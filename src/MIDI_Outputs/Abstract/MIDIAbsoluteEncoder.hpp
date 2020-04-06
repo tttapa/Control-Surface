@@ -66,7 +66,7 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     using SignedEnc_t = typename std::make_signed<Enc_t>::type;
     Enc_t deltaOffset = 0;
 
-    constexpr static uint16_t maxValue = (1 << Sender::precision()) - 1;
+    constexpr static int16_t maxValue = uint16_t(1u << Sender::precision()) - 1;
 
   public:
     Sender sender;
