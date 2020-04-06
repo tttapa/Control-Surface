@@ -129,7 +129,7 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
         return endDigit - startDigit;
     }
 
-    /// @copydoc    display(long)
+    /// @copydoc    display(long, int16_t, int16_t)
     int16_t display(int number, int16_t startDigit = 0, int16_t endDigit = -1) {
         return display(long(number), startDigit, endDigit);
     }
@@ -176,7 +176,7 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
         return endDigit - startDigit;
     }
 
-    /// @copydoc    display(unsigned long)
+    /// @copydoc    display(unsigned long, int16_t, int16_t)
     int16_t display(unsigned int number, int16_t startDigit = 0,
                     int16_t endDigit = -1) {
         return display((unsigned long)(number), startDigit, endDigit);
