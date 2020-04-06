@@ -29,6 +29,10 @@ BEGIN_AH_NAMESPACE
  */
 template <class Derived>
 class UpdatableCRTP : public DoublyLinkable<Derived> {
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wattributes"
+
   protected:
     /// Constructor: create an Updatabe and add it to the linked list of
     /// instances.
@@ -42,6 +46,8 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
         if (updatables.couldContain(CRTP(Derived)))
             updatables.remove(CRTP(Derived));
     }
+
+#pragma GCC diagnostic pop
 
     /// @name Main initialization and updating methods
     /// @{
