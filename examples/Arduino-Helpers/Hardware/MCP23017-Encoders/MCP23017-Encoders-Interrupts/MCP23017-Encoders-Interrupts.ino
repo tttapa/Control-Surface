@@ -75,7 +75,7 @@ void isr() {
 void setup() {
   Serial.begin(115200);
   Wire.begin(); // Must be called before enc.begin()
-  Wire.setClock(2400000);
+  Wire.setClock(800000);
   enc.begin(); // Initialize the MCP23017
   attachInterrupt(digitalPinToInterrupt(interrupt_pin), isr, LOW);
 }

@@ -101,6 +101,13 @@ class MCP23017Encoders {
         // No need to specify the register address, since this was done in the
         // begin method, and the MCP23017 mode was set to Byte mode with
         // IOCON.BANK = 0 (see §3.2.1 in the datasheet).
+        //
+        // TODO:
+        // For some reason, it sometimes seems to mess up though, and it'll read
+        // the wrong register, so we'll select the register again (for now).
+
+        writeI2C(0x12); // GPIOA
+
         this->wire->requestFrom(address, uint8_t(2));
         uint8_t a = this->wire->read();
         uint16_t b = this->wire->read();
