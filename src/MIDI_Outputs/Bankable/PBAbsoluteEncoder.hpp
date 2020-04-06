@@ -60,20 +60,11 @@ class PBAbsoluteEncoder
      *          lower speed.
      */
     PBAbsoluteEncoder(const BankConfig<NumBanks> &config, Encoder &&encoder,
-                      const MIDIAddress &address, int8_t speedMultiply = 1,
+                      const MIDIAddress &address, int16_t speedMultiply = 1,
                       uint8_t pulsesPerStep = 4)
         : MIDIAbsoluteEncoder<NumBanks, SingleAddress, PitchBendSender<14>>(
               {config, address}, std::move(encoder), speedMultiply,
               pulsesPerStep, {}) {}
-
-// For tests only (PJRC Encoder library's copy constructor doesn't work)
-#ifndef ARDUINO
-    PBAbsoluteEncoder(const BankConfig<NumBanks> &config,
-                      const Encoder &encoder, const MIDIAddress &address,
-                      int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
-        : MIDIAbsoluteEncoder<NumBanks, SingleAddress, PitchBendSender<14>>(
-              {config, address}, encoder, speedMultiply, pulsesPerStep, {}) {}
-#endif
 };
 
 } // namespace Bankable

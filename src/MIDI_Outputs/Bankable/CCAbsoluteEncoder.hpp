@@ -60,7 +60,7 @@ class CCAbsoluteEncoder
      *          lower speed.
      */
     CCAbsoluteEncoder(BankConfig<NumBanks> config, Encoder &&encoder,
-                      MIDIAddress address, int8_t speedMultiply = 1,
+                      MIDIAddress address, int16_t speedMultiply = 1,
                       uint8_t pulsesPerStep = 4)
         : MIDIAbsoluteEncoder<NumBanks, SingleAddress, ContinuousCCSender>(
               {config, address}, std::move(encoder), speedMultiply,

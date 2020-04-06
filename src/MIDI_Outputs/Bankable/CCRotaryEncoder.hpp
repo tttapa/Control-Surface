@@ -56,7 +56,7 @@ class CCRotaryEncoder
      *          lower speed.
      */
     CCRotaryEncoder(const OutputBankConfig &config, Encoder &&encoder,
-                    const MIDIAddress &address, int8_t speedMultiply = 1,
+                    const MIDIAddress &address, int16_t speedMultiply = 1,
                     uint8_t pulsesPerStep = 4)
         : MIDIRotaryEncoder<SingleAddress, RelativeCCSender>(
               {config, address}, std::move(encoder), speedMultiply,
