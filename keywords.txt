@@ -20,6 +20,8 @@ ButtonMatrix	KEYWORD1
 FilteredAnalog	KEYWORD1
 IncrementButton	KEYWORD1
 IncrementDecrementButtons	KEYWORD1
+MCP23017Encoders	KEYWORD1
+MCP23017Encoder	KEYWORD1
 
 begin	KEYWORD2
 update	KEYWORD2
@@ -44,6 +46,11 @@ begin	KEYWORD2
 update	KEYWORD2
 getState	KEYWORD2
 invert	KEYWORD2
+begin	KEYWORD2
+update	KEYWORD2
+read	KEYWORD2
+readAndReset	KEYWORD2
+write	KEYWORD2
 
 State	LITERAL1
 Pressed	LITERAL1
