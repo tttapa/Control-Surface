@@ -1,11 +1,7 @@
 #pragma once
 
-#if not defined(Encoder_h_) && not defined(IDE)
-#error                                                                         \
-    "The PJRC Encoder library should be included before the Control-Surface "  \
-    "library. (#include <Encoder.h>)"
-#endif
-
+#include <AH/STL/type_traits> // std::make_signed
+#include <AH/STL/utility> // std::forward
 #include <Def/Def.hpp>
 #include <Encoder.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -31,17 +27,22 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     void begin() override {}
 
     void update() override {
-        int32_t encval = encoder.read();
-        int32_t delta = (encval - deltaOffset) * multiplier / pulsesPerStep;
+        Enc_t encval = encoder.read();
+        // If Enc_t is an unsigned type, integer overflow is well-defined, which
+        // is what we want when Enc_t is small and expected to overflow.
+        // However, we need it to be signed because we're interrested  in the
+        // delta.
+        int16_t delta = SignedEnc_t(Enc_t(encval - deltaOffset));
+        delta = delta * multiplier / pulsesPerStep;
         if (delta) {
-            uint16_t oldValue = value;
-            int32_t newValue = oldValue + delta;
+            int16_t oldValue = value;
+            int16_t newValue = oldValue + delta;
             newValue = constrain(newValue, 0, maxValue);
             if (oldValue != newValue) {
                 sender.send(newValue, address);
                 value = newValue;
             }
-            deltaOffset += delta * pulsesPerStep / multiplier;
+            deltaOffset += Enc_t(delta * pulsesPerStep / multiplier);
         }
     }
 
@@ -61,7 +62,9 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     int16_t multiplier;
     uint8_t pulsesPerStep;
     uint16_t value = 0;
-    long deltaOffset = 0;
+    using Enc_t = decltype(encoder.read());
+    using SignedEnc_t = typename std::make_signed<Enc_t>::type;
+    Enc_t deltaOffset = 0;
 
     constexpr static uint16_t maxValue = (1 << Sender::precision()) - 1;
 
@@ -69,12 +72,16 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     Sender sender;
 };
 
+#if defined(Encoder_h_) || not defined(ARDUINO)
+
 template <class Sender>
 using MIDIAbsoluteEncoder = GenericMIDIAbsoluteEncoder<Encoder, Sender>;
 
 template <class Sender>
 using BorrowedMIDIAbsoluteEncoder =
     GenericMIDIAbsoluteEncoder<Encoder &, Sender>;
+
+#endif
 
 END_CS_NAMESPACE
 
