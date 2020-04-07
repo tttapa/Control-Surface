@@ -30,7 +30,7 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
         Enc_t encval = encoder.read();
         // If Enc_t is an unsigned type, integer overflow is well-defined, which
         // is what we want when Enc_t is small and expected to overflow.
-        // However, we need it to be signed because we're interrested  in the
+        // However, we need it to be signed because we're interested  in the
         // delta.
         int16_t delta = SignedEnc_t(Enc_t(encval - deltaOffset));
         delta = delta * multiplier / pulsesPerStep;
