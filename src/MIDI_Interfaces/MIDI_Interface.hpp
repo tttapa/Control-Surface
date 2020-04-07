@@ -14,8 +14,6 @@ class MIDI_Callbacks;
 
 /**
  * @brief   Statically polymorphic template for classes that send MIDI messages.
- * 
- * @nosubgrouping
  */
 template <class Derived>
 class MIDI_Sender {

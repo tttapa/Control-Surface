@@ -85,7 +85,6 @@ class RelativeMIDIAddress {
 
 /// A type-safe utility class for saving a MIDI address consisting of a 7-bit
 /// address, a 4-bit channel, and a 4-bit cable number.
-/// @nosubgrouping
 class MIDIAddress {
   public:
     /// @name   Constructors
