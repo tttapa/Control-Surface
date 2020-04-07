@@ -48,7 +48,6 @@ struct TrueMIDI_Sink;
 struct TrueMIDI_Source;
 
 /// Class that can receive MIDI messages from a MIDI pipe.
-/// @nosubgrouping
 class MIDI_Sink {
   public:
     /// Default constructor.
@@ -123,7 +122,6 @@ class MIDI_Sink {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 /// Class that can send MIDI messages to a MIDI pipe.
-/// @nosubgrouping
 class MIDI_Source {
   public:
     /// @name Sending data over a MIDI Pipe
@@ -216,10 +214,8 @@ class MIDI_Source {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 /// A MIDI_Sink that is not a MIDI_Pipe.
-/// @nosubgrouping
 struct TrueMIDI_Sink : MIDI_Sink {};
 /// A MIDI_Source that is not a MIDI_Pipe.
-/// @nosubgrouping
 struct TrueMIDI_Source : MIDI_Source {};
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -462,7 +458,6 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 /// A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source.
-/// @nosubgrouping
 struct TrueMIDI_SinkSource : TrueMIDI_Sink, TrueMIDI_Source {};
 
 /// A bidirectional pipe consists of two unidirectional pipes.
