@@ -58,8 +58,8 @@
 
 using WireType = decltype(Wire);     // The type of I²C driver to use
 using EncoderPositionType = int32_t; // The type for saving encoder positions
-constexpr bool Interrupt = true;
-using MCPEncoderType = MCP23017Encoders<WireType, EncoderPositionType, Interrupt>;
+constexpr bool IntSafe = true;       // Make it safe to call `update` in an ISR
+using MCPEncoderType = MCP23017Encoders<WireType, EncoderPositionType, IntSafe>;
 
 const uint8_t interrupt_pin = 12;
 
