@@ -66,6 +66,7 @@ void Control_Surface_::disconnectMIDI_Interfaces() {
 }
 
 void Control_Surface_::loop() {
+    ExtendedIOElement::updateAllBufferedInputs();
     Updatable<>::updateAll();
     if (potentiometerTimer)
         Updatable<Potentiometer>::updateAll();
@@ -73,6 +74,7 @@ void Control_Surface_::loop() {
     updateInputs();
     if (displayTimer)
         updateDisplays();
+    ExtendedIOElement::updateAllBufferedOutputs();
 }
 
 void Control_Surface_::updateMidiInput() {
