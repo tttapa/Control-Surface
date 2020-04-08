@@ -34,7 +34,6 @@ ExtendedIOElement &getIOElementOfPin(pin_t pin) {
 }
 
 void pinMode(pin_t pin, PinMode_t mode) {
-    // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(mode));
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::pinMode(pin, mode);
     } else {
@@ -45,7 +44,6 @@ void pinMode(pin_t pin, PinMode_t mode) {
 void pinMode(int pin, PinMode_t mode) { pinMode((pin_t)pin, mode); }
 
 void digitalWrite(pin_t pin, PinStatus_t val) {
-    // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
     if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::digitalWrite(pin, val);
     } else {
@@ -66,6 +64,97 @@ int digitalRead(pin_t pin) {
 }
 int digitalRead(int pin) { return digitalRead((pin_t)pin); }
 
+analog_t analogRead(pin_t pin) {
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+        return ::analogRead(pin);
+    } else {
+        ExtendedIOElement &el = getIOElementOfPin(pin);
+        return el.analogRead(pin - el.getStart());
+    }
+    return 0;
+}
+analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
+
+void analogWrite(pin_t pin, analog_t val) {
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+#ifndef ESP32
+        ::analogWrite(pin, val);
+#endif
+    } else {
+        ExtendedIOElement &el = getIOElementOfPin(pin);
+        el.analogWrite(pin - el.getStart(), val);
+    }
+}
+void analogWrite(int pin, analog_t val) { analogWrite((pin_t)pin, val); }
+void analogWrite(int pin, int val) { analogWrite((pin_t)pin, (analog_t)val); }
+void analogWrite(pin_t pin, int val) { analogWrite(pin, (analog_t)val); }
+
+void pinModeBuffered(pin_t pin, PinMode_t mode) {
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+        ::pinMode(pin, mode);
+    } else {
+        ExtendedIOElement &el = getIOElementOfPin(pin);
+        el.pinModeBuffered(pin - el.getStart(), mode);
+    }
+}
+void pinModeBuffered(int pin, PinMode_t mode) {
+    pinModeBuffered((pin_t)pin, mode);
+}
+
+void digitalWriteBuffered(pin_t pin, PinStatus_t val) {
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+        ::digitalWrite(pin, val);
+    } else {
+        ExtendedIOElement &el = getIOElementOfPin(pin);
+        el.digitalWriteBuffered(pin - el.getStart(), val);
+    }
+}
+void digitalWriteBuffered(int pin, PinStatus_t val) {
+    digitalWriteBuffered((pin_t)pin, val);
+}
+
+int digitalReadBuffered(pin_t pin) {
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+        return ::digitalRead(pin);
+    } else {
+        ExtendedIOElement &el = getIOElementOfPin(pin);
+        return el.digitalReadBuffered(pin - el.getStart());
+    }
+    return 0;
+}
+int digitalReadBuffered(int pin) { return digitalReadBuffered((pin_t)pin); }
+
+analog_t analogReadBuffered(pin_t pin) {
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+        return ::analogRead(pin);
+    } else {
+        ExtendedIOElement &el = getIOElementOfPin(pin);
+        return el.analogReadBuffered(pin - el.getStart());
+    }
+    return 0;
+}
+analog_t analogReadBuffered(int pin) { return analogReadBuffered((pin_t)pin); }
+
+void analogWriteBuffered(pin_t pin, analog_t val) {
+    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
+#ifndef ESP32
+        ::analogWrite(pin, val);
+#endif
+    } else {
+        ExtendedIOElement &el = getIOElementOfPin(pin);
+        el.analogWriteBuffered(pin - el.getStart(), val);
+    }
+}
+void analogWriteBuffered(int pin, analog_t val) {
+    analogWriteBuffered((pin_t)pin, val);
+}
+void analogWriteBuffered(int pin, int val) {
+    analogWriteBuffered((pin_t)pin, (analog_t)val);
+}
+void analogWriteBuffered(pin_t pin, int val) {
+    analogWriteBuffered(pin, (analog_t)val);
+}
+
 void shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder, uint8_t val) {
     uint8_t i;
 
@@ -82,32 +171,6 @@ void shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder, uint8_t val) {
 void shiftOut(int dataPin, int clockPin, BitOrder_t bitOrder, uint8_t val) {
     shiftOut((pin_t)dataPin, (pin_t)clockPin, bitOrder, val);
 }
-
-analog_t analogRead(pin_t pin) {
-    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
-        return ::analogRead(pin);
-    } else {
-        ExtendedIOElement &el = getIOElementOfPin(pin);
-        return el.analogRead(pin - el.getStart());
-    }
-    return 0;
-}
-analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
-
-void analogWrite(pin_t pin, analog_t val) {
-    // DEBUGFN(DEBUGVAR(pin) << '\t' << DEBUGVAR(val));
-    if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
-#ifndef ESP32
-        ::analogWrite(pin, val);
-#endif
-    } else {
-        ExtendedIOElement &el = getIOElementOfPin(pin);
-        el.analogWrite(pin - el.getStart(), val);
-    }
-}
-void analogWrite(int pin, analog_t val) { analogWrite((pin_t)pin, val); }
-void analogWrite(int pin, int val) { analogWrite((pin_t)pin, (analog_t)val); }
-void analogWrite(pin_t pin, int val) { analogWrite(pin, (analog_t)val); }
 
 } // namespace ExtIO
 
