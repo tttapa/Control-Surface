@@ -11,7 +11,9 @@
 #define AH_DIAGNOSTIC_POP() _Pragma("GCC diagnostic pop")
 #define AH_DIAGNOSTIC_EXTERNAL_HEADER()                                        \
     _Pragma("GCC diagnostic push") _Pragma("GCC diagnostic ignored \"-Wall\"") \
-        _Pragma("GCC diagnostic ignored \"-Wextra\"")
+        _Pragma("GCC diagnostic ignored \"-Wextra\"")                          \
+            _Pragma("GCC diagnostic ignored \"-Wsuggest-override\"")           \
+                _Pragma("GCC diagnostic ignored \"-Wunused-parameter\"")
 
 #else // __GNUC__ < 5
 
@@ -23,8 +25,9 @@
 #define AH_DIAGNOSTIC_POP() _Pragma("GCC diagnostic pop")
 #define AH_DIAGNOSTIC_EXTERNAL_HEADER()                                        \
     _Pragma("GCC diagnostic push") _Pragma("GCC diagnostic ignored \"-Wall\"") \
-        _Pragma("GCC diagnostic ignored \"-Wextra\"")
-        
+        _Pragma("GCC diagnostic ignored \"-Wextra\"")                          \
+            _Pragma("GCC diagnostic ignored \"-Wunused-parameter\"")
+
 #endif
 
 #else
