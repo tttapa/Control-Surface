@@ -1,8 +1,9 @@
 <map id="AnalogMultiplex&lt; N &gt;" name="AnalogMultiplex&lt; N &gt;">
-<area shape="rect" id="node1" title="A class for reading multiplexed analog inputs." alt="" coords="498,857,646,1125"/>
-<area shape="rect" id="node2" href="$d1/d13/classStaticSizeExtendedIOElement.html" title=" " alt="" coords="5,549,224,670"/>
-<area shape="rect" id="node3" href="$de/d4e/classExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="331,5,498,347"/>
-<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="248,563,427,655"/>
-<area shape="rect" id="node5" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="451,424,640,795"/>
-<area shape="rect" id="node6" href="$d7/d6a/structArray.html" title=" " alt="" coords="664,490,787,729"/>
+<area shape="rect" id="node1" title="A class for reading multiplexed analog inputs." alt="" coords="117,975,293,1331"/>
+<area shape="rect" id="node2" href="$d1/d13/classStaticSizeExtendedIOElement.html" title=" " alt="" coords="5,659,224,780"/>
+<area shape="rect" id="node3" href="$de/d4e/classExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="335,5,526,449"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="447,673,625,765"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="649,527,839,912"/>
+<area shape="rect" id="node4" href="$d2/dfb/classUpdatableCRTP.html" title=" " alt="" coords="407,1033,665,1272"/>
+<area shape="rect" id="node7" href="$d7/d6a/structArray.html" title=" " alt="" coords="248,600,371,839"/>
 </map>

@@ -76,6 +76,7 @@ $(function() {
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="../../d3/dc0/classStaticSizeExtendedIOElement-members.html">List of all members</a>  </div>
@@ -88,15 +89,19 @@ $(function() {
  <a href="../../d1/d13/classStaticSizeExtendedIOElement.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="../../d2/d05/StaticSizeExtendedIOElement_8hpp_source.html">AH/Hardware/ExtendedInputOutput/StaticSizeExtendedIOElement.hpp</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for StaticSizeExtendedIOElement&lt; N &gt;:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/dc8/classStaticSizeExtendedIOElement__inherit__graph.svg" width="363" height="1176"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Inheritance diagram for StaticSizeExtendedIOElement&lt; N &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
-<div class="dynheader">
-Collaboration diagram for StaticSizeExtendedIOElement&lt; N &gt;:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d0/d44/classStaticSizeExtendedIOElement__coll__graph.svg" width="662" height="800"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../da/dc8/classStaticSizeExtendedIOElement__inherit__graph.svg" width="387" height="1639"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="../../closed.png" alt="+"/> Collaboration diagram for StaticSizeExtendedIOElement&lt; N &gt;:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d0/d44/classStaticSizeExtendedIOElement__coll__graph.svg" width="710" height="1219"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -104,27 +109,45 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9db76a949dbd42494c35e82655f7defa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d6a/structArray.html">Array</a>&lt; <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>, N &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d13/classStaticSizeExtendedIOElement.html#a9db76a949dbd42494c35e82655f7defa">pins</a> () const</td></tr>
 <tr class="memdesc:a9db76a949dbd42494c35e82655f7defa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an array containing all pins of the element.  <a href="../../d1/d13/classStaticSizeExtendedIOElement.html#a9db76a949dbd42494c35e82655f7defa">More...</a><br /></td></tr>
 <tr class="separator:a9db76a949dbd42494c35e82655f7defa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06e8ff482466ab329f1d897a85d3dbab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a06e8ff482466ab329f1d897a85d3dbab">pinMode</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> mode)=0</td></tr>
-<tr class="memdesc:a06e8ff482466ab329f1d897a85d3dbab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mode of a given pin.  <a href="../../de/d4e/classExtendedIOElement.html#a06e8ff482466ab329f1d897a85d3dbab">More...</a><br /></td></tr>
-<tr class="separator:a06e8ff482466ab329f1d897a85d3dbab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab32d2ef2699aa92bab01e692bda7d775"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#ab32d2ef2699aa92bab01e692bda7d775">digitalWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a> state)=0</td></tr>
-<tr class="memdesc:ab32d2ef2699aa92bab01e692bda7d775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output of the given pin to the given state.  <a href="../../de/d4e/classExtendedIOElement.html#ab32d2ef2699aa92bab01e692bda7d775">More...</a><br /></td></tr>
-<tr class="separator:ab32d2ef2699aa92bab01e692bda7d775"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa50a5106cba6e0dc7822fb8cd73f737"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#afa50a5106cba6e0dc7822fb8cd73f737">digitalRead</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>)=0</td></tr>
-<tr class="memdesc:afa50a5106cba6e0dc7822fb8cd73f737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the state of the given pin.  <a href="../../de/d4e/classExtendedIOElement.html#afa50a5106cba6e0dc7822fb8cd73f737">More...</a><br /></td></tr>
-<tr class="separator:afa50a5106cba6e0dc7822fb8cd73f737"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c7700ad6cbe07d6f10e3cbfc545a9ba"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a4c7700ad6cbe07d6f10e3cbfc545a9ba">analogWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a> val)=0</td></tr>
-<tr class="memdesc:a4c7700ad6cbe07d6f10e3cbfc545a9ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an analog (or PWM) value to the given pin.  <a href="../../de/d4e/classExtendedIOElement.html#a4c7700ad6cbe07d6f10e3cbfc545a9ba">More...</a><br /></td></tr>
-<tr class="separator:a4c7700ad6cbe07d6f10e3cbfc545a9ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dc0d012462169ef826dc7cfcbb5eb3e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a7dc0d012462169ef826dc7cfcbb5eb3e">analogRead</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>)=0</td></tr>
-<tr class="memdesc:a7dc0d012462169ef826dc7cfcbb5eb3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the analog value of the given pin.  <a href="../../de/d4e/classExtendedIOElement.html#a7dc0d012462169ef826dc7cfcbb5eb3e">More...</a><br /></td></tr>
-<tr class="separator:a7dc0d012462169ef826dc7cfcbb5eb3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4487c4922d874fbf02bb46dd789a6da"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#aa4487c4922d874fbf02bb46dd789a6da">pinMode</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> mode)</td></tr>
+<tr class="memdesc:aa4487c4922d874fbf02bb46dd789a6da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mode of a given pin.  <a href="../../de/d4e/classExtendedIOElement.html#aa4487c4922d874fbf02bb46dd789a6da">More...</a><br /></td></tr>
+<tr class="separator:aa4487c4922d874fbf02bb46dd789a6da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf73c35b7195c725dc10fddcdffdb23d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#adf73c35b7195c725dc10fddcdffdb23d">pinModeBuffered</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a> mode)=0</td></tr>
+<tr class="memdesc:adf73c35b7195c725dc10fddcdffdb23d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mode of a given pin in the software buffer.  <a href="../../de/d4e/classExtendedIOElement.html#adf73c35b7195c725dc10fddcdffdb23d">More...</a><br /></td></tr>
+<tr class="separator:adf73c35b7195c725dc10fddcdffdb23d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad233fffb4eb9160de10a6e0502fa02df"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#ad233fffb4eb9160de10a6e0502fa02df">digitalWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a> state)</td></tr>
+<tr class="memdesc:ad233fffb4eb9160de10a6e0502fa02df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output of the given pin to the given state.  <a href="../../de/d4e/classExtendedIOElement.html#ad233fffb4eb9160de10a6e0502fa02df">More...</a><br /></td></tr>
+<tr class="separator:ad233fffb4eb9160de10a6e0502fa02df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2e664df97d2e674f549a1200c1cdce3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#aa2e664df97d2e674f549a1200c1cdce3">digitalWriteBuffered</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a> state)=0</td></tr>
+<tr class="memdesc:aa2e664df97d2e674f549a1200c1cdce3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output of a given pin in the software buffer.  <a href="../../de/d4e/classExtendedIOElement.html#aa2e664df97d2e674f549a1200c1cdce3">More...</a><br /></td></tr>
+<tr class="separator:aa2e664df97d2e674f549a1200c1cdce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4c3241852f5d1af79441b2914467220"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#ac4c3241852f5d1af79441b2914467220">digitalRead</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>)</td></tr>
+<tr class="memdesc:ac4c3241852f5d1af79441b2914467220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the state of the given pin.  <a href="../../de/d4e/classExtendedIOElement.html#ac4c3241852f5d1af79441b2914467220">More...</a><br /></td></tr>
+<tr class="separator:ac4c3241852f5d1af79441b2914467220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b48975f0d04aca3a9e3a2c487c4c84"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a96b48975f0d04aca3a9e3a2c487c4c84">digitalReadBuffered</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>)=0</td></tr>
+<tr class="memdesc:a96b48975f0d04aca3a9e3a2c487c4c84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the state of the given pin from the software buffer.  <a href="../../de/d4e/classExtendedIOElement.html#a96b48975f0d04aca3a9e3a2c487c4c84">More...</a><br /></td></tr>
+<tr class="separator:a96b48975f0d04aca3a9e3a2c487c4c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3a89ee952ad360c12d8a5385b296392"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#ab3a89ee952ad360c12d8a5385b296392">analogWrite</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a> val)</td></tr>
+<tr class="memdesc:ab3a89ee952ad360c12d8a5385b296392"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an analog (or PWM) value to the given pin.  <a href="../../de/d4e/classExtendedIOElement.html#ab3a89ee952ad360c12d8a5385b296392">More...</a><br /></td></tr>
+<tr class="separator:ab3a89ee952ad360c12d8a5385b296392"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b1eacc5a4c04088989efaa3490265a7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a5b1eacc5a4c04088989efaa3490265a7">analogWriteBuffered</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>, <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a> val)=0</td></tr>
+<tr class="memdesc:a5b1eacc5a4c04088989efaa3490265a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an analog (or PWM) value to the software buffer given pin.  <a href="../../de/d4e/classExtendedIOElement.html#a5b1eacc5a4c04088989efaa3490265a7">More...</a><br /></td></tr>
+<tr class="separator:a5b1eacc5a4c04088989efaa3490265a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70bb6c81cd8f0e50ea49756cdf5d25a5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a70bb6c81cd8f0e50ea49756cdf5d25a5">analogRead</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>)</td></tr>
+<tr class="memdesc:a70bb6c81cd8f0e50ea49756cdf5d25a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the analog value of the given pin.  <a href="../../de/d4e/classExtendedIOElement.html#a70bb6c81cd8f0e50ea49756cdf5d25a5">More...</a><br /></td></tr>
+<tr class="separator:a70bb6c81cd8f0e50ea49756cdf5d25a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af968d6b0058121e22c45c31131e6855d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#af968d6b0058121e22c45c31131e6855d">analogReadBuffered</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a>)=0</td></tr>
+<tr class="memdesc:af968d6b0058121e22c45c31131e6855d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the analog value of the given pin from the software buffer.  <a href="../../de/d4e/classExtendedIOElement.html#af968d6b0058121e22c45c31131e6855d">More...</a><br /></td></tr>
+<tr class="separator:af968d6b0058121e22c45c31131e6855d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf893c33f3c041e289a12c153dcc9789"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#aaf893c33f3c041e289a12c153dcc9789">begin</a> ()=0</td></tr>
 <tr class="memdesc:aaf893c33f3c041e289a12c153dcc9789"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the extended IO element.  <a href="../../de/d4e/classExtendedIOElement.html#aaf893c33f3c041e289a12c153dcc9789">More...</a><br /></td></tr>
 <tr class="separator:aaf893c33f3c041e289a12c153dcc9789"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99b02345a8a15d3c5ea2844a2253f510"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a99b02345a8a15d3c5ea2844a2253f510">update</a> ()=0</td></tr>
-<tr class="memdesc:a99b02345a8a15d3c5ea2844a2253f510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the extended IO element: write the internal state to the physical outputs, or read the physical state into the input buffers.  <a href="../../de/d4e/classExtendedIOElement.html#a99b02345a8a15d3c5ea2844a2253f510">More...</a><br /></td></tr>
-<tr class="separator:a99b02345a8a15d3c5ea2844a2253f510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b9d52c22ebbf0c44df97d5013eab3ee"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a2b9d52c22ebbf0c44df97d5013eab3ee">updateBufferedOutputs</a> ()=0</td></tr>
+<tr class="memdesc:a2b9d52c22ebbf0c44df97d5013eab3ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the internal state to the physical outputs.  <a href="../../de/d4e/classExtendedIOElement.html#a2b9d52c22ebbf0c44df97d5013eab3ee">More...</a><br /></td></tr>
+<tr class="separator:a2b9d52c22ebbf0c44df97d5013eab3ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a259bf5ac38e0493bf471988851712e2f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a259bf5ac38e0493bf471988851712e2f">updateBufferedInputs</a> ()=0</td></tr>
+<tr class="memdesc:a259bf5ac38e0493bf471988851712e2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the physical state into the input buffers.  <a href="../../de/d4e/classExtendedIOElement.html#a259bf5ac38e0493bf471988851712e2f">More...</a><br /></td></tr>
+<tr class="separator:a259bf5ac38e0493bf471988851712e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32bdc98870117b27f2e8b1e157c79ea4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">pin</a> (<a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a> pin) const</td></tr>
 <tr class="memdesc:a32bdc98870117b27f2e8b1e157c79ea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the extended IO pin number of a given physical pin of this extended IO element.  <a href="../../de/d4e/classExtendedIOElement.html#a32bdc98870117b27f2e8b1e157c79ea4">More...</a><br /></td></tr>
 <tr class="separator:a32bdc98870117b27f2e8b1e157c79ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,6 +171,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac6e14454ba435e2e2ea0ce820173430b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#ac6e14454ba435e2e2ea0ce820173430b">beginAll</a> ()</td></tr>
 <tr class="memdesc:ac6e14454ba435e2e2ea0ce820173430b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize all extended IO elements.  <a href="../../de/d4e/classExtendedIOElement.html#ac6e14454ba435e2e2ea0ce820173430b">More...</a><br /></td></tr>
 <tr class="separator:ac6e14454ba435e2e2ea0ce820173430b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abec6911e67d8da1c873ea86e7dc263b4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#abec6911e67d8da1c873ea86e7dc263b4">updateAllBufferedOutputs</a> ()</td></tr>
+<tr class="memdesc:abec6911e67d8da1c873ea86e7dc263b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the internal states to the physical outputs for all extended IO elements.  <a href="../../de/d4e/classExtendedIOElement.html#abec6911e67d8da1c873ea86e7dc263b4">More...</a><br /></td></tr>
+<tr class="separator:abec6911e67d8da1c873ea86e7dc263b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1a38da578742acc2edc010de377ceb4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#af1a38da578742acc2edc010de377ceb4">updateAllBufferedInputs</a> ()</td></tr>
+<tr class="memdesc:af1a38da578742acc2edc010de377ceb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the physical state into the input buffers for all extended IO elements.  <a href="../../de/d4e/classExtendedIOElement.html#af1a38da578742acc2edc010de377ceb4">More...</a><br /></td></tr>
+<tr class="separator:af1a38da578742acc2edc010de377ceb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab39c55f3dc8c6b76da5a2e38d3ce71eb"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../dd/d16/classDoublyLinkedList.html">DoublyLinkedList</a>&lt; <a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#ab39c55f3dc8c6b76da5a2e38d3ce71eb">getAll</a> ()</td></tr>
 <tr class="memdesc:ab39c55f3dc8c6b76da5a2e38d3ce71eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the list of all Extended IO elements.  <a href="../../de/d4e/classExtendedIOElement.html#ab39c55f3dc8c6b76da5a2e38d3ce71eb">More...</a><br /></td></tr>
 <tr class="separator:ab39c55f3dc8c6b76da5a2e38d3ce71eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,6 +193,11 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:adbc3186d4d3faa0f9cd6c6492c5494df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d23/classDoublyLinkable.html#adbc3186d4d3faa0f9cd6c6492c5494df">previous</a></td></tr>
 <tr class="separator:adbc3186d4d3faa0f9cd6c6492c5494df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a4943fe5ee6614da25808705c1471da08"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../dd/d16/classDoublyLinkedList.html">DoublyLinkedList</a>&lt; <a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html#a4943fe5ee6614da25808705c1471da08">updatables</a></td></tr>
+<tr class="separator:a4943fe5ee6614da25808705c1471da08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a72d639edb9fa3781645cab09c2ee3dd3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a72d639edb9fa3781645cab09c2ee3dd3">start</a></td></tr>
@@ -175,8 +209,35 @@ Private Attributes</h2></td></tr>
 Static Private Attributes</h2></td></tr>
 <tr class="memitem:a7d439a6c37c0f2be13c119a42d450bb2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a7d439a6c37c0f2be13c119a42d450bb2">offset</a> = NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS</td></tr>
 <tr class="separator:a7d439a6c37c0f2be13c119a42d450bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a876a3612572c06ebe4a697ed273ea7f1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../dd/d16/classDoublyLinkedList.html">DoublyLinkedList</a>&lt; <a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#a876a3612572c06ebe4a697ed273ea7f1">elements</a></td></tr>
-<tr class="separator:a876a3612572c06ebe4a697ed273ea7f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Main initialization and updating methods</h2></td></tr>
+<tr class="memitem:adc854bd51713ad44a652f9e3b3a18ea0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html#adc854bd51713ad44a652f9e3b3a18ea0">applyToAll</a> (void(<a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> ::*method)(Args &amp;&amp;...), Args &amp;&amp;... args)</td></tr>
+<tr class="separator:adc854bd51713ad44a652f9e3b3a18ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Enabling and disabling updatables</h2></td></tr>
+<tr class="memitem:a486f22824bd83c5308a0d70ffac6f758"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html#a486f22824bd83c5308a0d70ffac6f758">enable</a> ()</td></tr>
+<tr class="memdesc:a486f22824bd83c5308a0d70ffac6f758"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable this updatable: insert it into the linked list of instances, so it gets updated automatically.  <a href="../../d2/dfb/classUpdatableCRTP.html#a486f22824bd83c5308a0d70ffac6f758">More...</a><br /></td></tr>
+<tr class="separator:a486f22824bd83c5308a0d70ffac6f758"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cfbbe53c1cf6e3054736daea3044c0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html#a8cfbbe53c1cf6e3054736daea3044c0f">disable</a> ()</td></tr>
+<tr class="memdesc:a8cfbbe53c1cf6e3054736daea3044c0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable this updatable: remove it from the linked list of instances, so it no longer gets updated automatically.  <a href="../../d2/dfb/classUpdatableCRTP.html#a8cfbbe53c1cf6e3054736daea3044c0f">More...</a><br /></td></tr>
+<tr class="separator:a8cfbbe53c1cf6e3054736daea3044c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56722b6f1c22da04885bc9853148bb71"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html#a56722b6f1c22da04885bc9853148bb71">isEnabled</a> ()</td></tr>
+<tr class="memdesc:a56722b6f1c22da04885bc9853148bb71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this updatable is enabled.  <a href="../../d2/dfb/classUpdatableCRTP.html#a56722b6f1c22da04885bc9853148bb71">More...</a><br /></td></tr>
+<tr class="separator:a56722b6f1c22da04885bc9853148bb71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad12acee2ce11483080385d904cee97bd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html#ad12acee2ce11483080385d904cee97bd">enable</a> (<a class="el" href="../../d2/dfb/classUpdatableCRTP.html">UpdatableCRTP</a> *element)</td></tr>
+<tr class="separator:ad12acee2ce11483080385d904cee97bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0da0232ed3b2839c53832dde4f72b8dc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html#a0da0232ed3b2839c53832dde4f72b8dc">enable</a> (<a class="el" href="../../d2/dfb/classUpdatableCRTP.html">UpdatableCRTP</a> &amp;element)</td></tr>
+<tr class="separator:a0da0232ed3b2839c53832dde4f72b8dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f775da7b162931d468d6d6b6950dfcf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html#a2f775da7b162931d468d6d6b6950dfcf">enable</a> (U(&amp;array)[N])</td></tr>
+<tr class="separator:a2f775da7b162931d468d6d6b6950dfcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacbfe5d6ba589f29a195bd0a54f35772"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html#aacbfe5d6ba589f29a195bd0a54f35772">disable</a> (<a class="el" href="../../d2/dfb/classUpdatableCRTP.html">UpdatableCRTP</a> *element)</td></tr>
+<tr class="separator:aacbfe5d6ba589f29a195bd0a54f35772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67781608cee470244316e2302f6290d6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html#a67781608cee470244316e2302f6290d6">disable</a> (<a class="el" href="../../d2/dfb/classUpdatableCRTP.html">UpdatableCRTP</a> &amp;element)</td></tr>
+<tr class="separator:a67781608cee470244316e2302f6290d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac05c991ba1ef6cb7363a44e2232119f0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html#ac05c991ba1ef6cb7363a44e2232119f0">disable</a> (U(&amp;array)[N])</td></tr>
+<tr class="separator:ac05c991ba1ef6cb7363a44e2232119f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;uint16_t N&gt;<br />
@@ -271,8 +332,8 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 
 </div>
 </div>
-<a id="a06e8ff482466ab329f1d897a85d3dbab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06e8ff482466ab329f1d897a85d3dbab">&#9670;&nbsp;</a></span>pinMode()</h2>
+<a id="aa4487c4922d874fbf02bb46dd789a6da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4487c4922d874fbf02bb46dd789a6da">&#9670;&nbsp;</a></span>pinMode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -300,7 +361,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -317,12 +378,64 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a9484141de4b96166588525a48e4bf8cb">ShiftRegisterOutBase&lt; N &gt;</a>, <a class="el" href="../../dc/d19/classMAX7219.html#a9484141de4b96166588525a48e4bf8cb">MAX7219</a>, and <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ac4d58e1c7ac954786bcaa8e1d8f4e84c">AnalogMultiplex&lt; N &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="../../dc/d19/classMAX7219.html#a9484141de4b96166588525a48e4bf8cb">MAX7219&lt; NumChips &gt;</a>, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a9484141de4b96166588525a48e4bf8cb">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ac4d58e1c7ac954786bcaa8e1d8f4e84c">AnalogMultiplex&lt; N &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00090">90</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ab32d2ef2699aa92bab01e692bda7d775"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab32d2ef2699aa92bab01e692bda7d775">&#9670;&nbsp;</a></span>digitalWrite()</h2>
+<a id="adf73c35b7195c725dc10fddcdffdb23d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf73c35b7195c725dc10fddcdffdb23d">&#9670;&nbsp;</a></span>pinModeBuffered()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void pinModeBuffered </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#afeedc392af4451c66ba1b66bdd6965b2">PinMode_t</a>&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the mode of a given pin in the software buffer. </p>
+<p>The buffer is written to the <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> device when <a class="el" href="../../de/d4e/classExtendedIOElement.html#a2b9d52c22ebbf0c44df97d5013eab3ee">updateBufferedOutputs</a> is called. </p><dl class="section note"><dt>Note</dt><dd>This function might not be implemented by all subclasses. <br  />
+ Some extended IO types, such as shift registers, can only be used as outputs. <br  />
+ On others, it might be implemented, but it could impact all pins of the IO element. For example, enabling the internal pull-up resistor on an analog multiplexer affects all pins of the mux.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>The (zero-based) pin of this IO element. </td></tr>
+    <tr><td class="paramname">mode</td><td>The mode to set the pin to (e.g. <code>INPUT</code>, <code>OUTPUT</code> or <code>INPUT_PULLUP</code>). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="../../dc/d19/classMAX7219.html#a9d90692888ca21ed8e4042a3055efe7e">MAX7219&lt; NumChips &gt;</a>, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a9d90692888ca21ed8e4042a3055efe7e">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a5f5a1bc9932a6b2f6f06890a758d6ca7">AnalogMultiplex&lt; N &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ad233fffb4eb9160de10a6e0502fa02df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad233fffb4eb9160de10a6e0502fa02df">&#9670;&nbsp;</a></span>digitalWrite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,7 +463,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -364,12 +477,61 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ad8ceb0539ad48c5bdbf7ffd2e69e0d1b">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a7bc560538e38f319febb1d7fed2a6388">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../dc/d19/classMAX7219.html#a7bc560538e38f319febb1d7fed2a6388">MAX7219</a>.</p>
+<p>Reimplemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ad8ceb0539ad48c5bdbf7ffd2e69e0d1b">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../dc/d19/classMAX7219.html#a7bc560538e38f319febb1d7fed2a6388">MAX7219&lt; NumChips &gt;</a>, and <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a7bc560538e38f319febb1d7fed2a6388">ShiftRegisterOutBase&lt; N &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00111">111</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
-<a id="afa50a5106cba6e0dc7822fb8cd73f737"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa50a5106cba6e0dc7822fb8cd73f737">&#9670;&nbsp;</a></span>digitalRead()</h2>
+<a id="aa2e664df97d2e674f549a1200c1cdce3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2e664df97d2e674f549a1200c1cdce3">&#9670;&nbsp;</a></span>digitalWriteBuffered()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void digitalWriteBuffered </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../dd/ddf/ExtendedInputOutput_8hpp.html#a819db182182c1ca2a6487ff7163a757d">PinStatus_t</a>&#160;</td>
+          <td class="paramname"><em>state</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the output of a given pin in the software buffer. </p>
+<p>The buffer is written to the <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> device when <a class="el" href="../../de/d4e/classExtendedIOElement.html#a2b9d52c22ebbf0c44df97d5013eab3ee">updateBufferedOutputs</a> is called. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>The (zero-based) pin of this IO element. </td></tr>
+    <tr><td class="paramname">state</td><td>The new state to set the pin to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a7ebd456a2a958adb4860863c26181541">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../dc/d19/classMAX7219.html#af78cf7b41c4cf48da05594e8e69b03f9">MAX7219&lt; NumChips &gt;</a>, and <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#af78cf7b41c4cf48da05594e8e69b03f9">ShiftRegisterOutBase&lt; N &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ac4c3241852f5d1af79441b2914467220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4c3241852f5d1af79441b2914467220">&#9670;&nbsp;</a></span>digitalRead()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -387,7 +549,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -401,12 +563,51 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The state of the given pin. </dd></dl>
 
-<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a06c8be051c17288bea66f7fd94d352b1">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a06c8be051c17288bea66f7fd94d352b1">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../dc/d19/classMAX7219.html#a06c8be051c17288bea66f7fd94d352b1">MAX7219</a>.</p>
+<p>Reimplemented in <a class="el" href="../../dc/d19/classMAX7219.html#a06c8be051c17288bea66f7fd94d352b1">MAX7219&lt; NumChips &gt;</a>, <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a06c8be051c17288bea66f7fd94d352b1">AnalogMultiplex&lt; N &gt;</a>, and <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a06c8be051c17288bea66f7fd94d352b1">ShiftRegisterOutBase&lt; N &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00131">131</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a4c7700ad6cbe07d6f10e3cbfc545a9ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c7700ad6cbe07d6f10e3cbfc545a9ba">&#9670;&nbsp;</a></span>analogWrite()</h2>
+<a id="a96b48975f0d04aca3a9e3a2c487c4c84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96b48975f0d04aca3a9e3a2c487c4c84">&#9670;&nbsp;</a></span>digitalReadBuffered()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int digitalReadBuffered </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the state of the given pin from the software buffer. </p>
+<p>To update the buffer, you have to call <a class="el" href="../../de/d4e/classExtendedIOElement.html#a259bf5ac38e0493bf471988851712e2f">updateBufferedInputs</a> first. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>The (zero-based) pin of this IO element. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The state of the given pin. </dd></dl>
+
+<p>Implemented in <a class="el" href="../../dc/d19/classMAX7219.html#aa622a3f8939f14b203b97b533ec36d6f">MAX7219&lt; NumChips &gt;</a>, <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#aa622a3f8939f14b203b97b533ec36d6f">AnalogMultiplex&lt; N &gt;</a>, and <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#aa622a3f8939f14b203b97b533ec36d6f">ShiftRegisterOutBase&lt; N &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ab3a89ee952ad360c12d8a5385b296392"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3a89ee952ad360c12d8a5385b296392">&#9670;&nbsp;</a></span>analogWrite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -434,7 +635,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -448,12 +649,61 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a251172dbebd68a9bf81f2ea0b47a2315">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a11243cbfdd8502261b8aca0e4b1ce829">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../dc/d19/classMAX7219.html#a11243cbfdd8502261b8aca0e4b1ce829">MAX7219</a>.</p>
+<p>Reimplemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a251172dbebd68a9bf81f2ea0b47a2315">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../dc/d19/classMAX7219.html#a11243cbfdd8502261b8aca0e4b1ce829">MAX7219&lt; NumChips &gt;</a>, and <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a11243cbfdd8502261b8aca0e4b1ce829">ShiftRegisterOutBase&lt; N &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00151">151</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7dc0d012462169ef826dc7cfcbb5eb3e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dc0d012462169ef826dc7cfcbb5eb3e">&#9670;&nbsp;</a></span>analogRead()</h2>
+<a id="a5b1eacc5a4c04088989efaa3490265a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b1eacc5a4c04088989efaa3490265a7">&#9670;&nbsp;</a></span>analogWriteBuffered()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void analogWriteBuffered </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a>&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write an analog (or PWM) value to the software buffer given pin. </p>
+<p>The buffer is written to the <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> device when <a class="el" href="../../de/d4e/classExtendedIOElement.html#a2b9d52c22ebbf0c44df97d5013eab3ee">updateBufferedOutputs</a> is called. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>The (zero-based) pin of this IO element. </td></tr>
+    <tr><td class="paramname">val</td><td>The new analog value to set the pin to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a0564e9fbf466c51d0c3a99a2be7465fe">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../dc/d19/classMAX7219.html#ac2c64582307fdf9308660b8f18f8a352">MAX7219&lt; NumChips &gt;</a>, and <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#ac2c64582307fdf9308660b8f18f8a352">ShiftRegisterOutBase&lt; N &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a70bb6c81cd8f0e50ea49756cdf5d25a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70bb6c81cd8f0e50ea49756cdf5d25a5">&#9670;&nbsp;</a></span>analogRead()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -471,7 +721,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -485,7 +735,46 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The new analog value of pin. </dd></dl>
 
-<p>Implemented in <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a95dfb56a8e54b9a627916371b91648f7">ShiftRegisterOutBase&lt; N &gt;</a>, <a class="el" href="../../dc/d19/classMAX7219.html#a95dfb56a8e54b9a627916371b91648f7">MAX7219</a>, and <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a6e6cf5e65d0f38cba3839725bfaca7b5">AnalogMultiplex&lt; N &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="../../dc/d19/classMAX7219.html#a95dfb56a8e54b9a627916371b91648f7">MAX7219&lt; NumChips &gt;</a>, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a95dfb56a8e54b9a627916371b91648f7">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a6e6cf5e65d0f38cba3839725bfaca7b5">AnalogMultiplex&lt; N &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00171">171</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af968d6b0058121e22c45c31131e6855d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af968d6b0058121e22c45c31131e6855d">&#9670;&nbsp;</a></span>analogReadBuffered()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#a30fffbcff933a72fdd7bfc161d386bef">analog_t</a> analogReadBuffered </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/d35/Hardware-Types_8hpp.html#ae9cbfef0ba7a84ef222eff1fc509f88b">pin_t</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the analog value of the given pin from the software buffer. </p>
+<p>To update the buffer, you have to call <a class="el" href="../../de/d4e/classExtendedIOElement.html#a259bf5ac38e0493bf471988851712e2f">updateBufferedInputs</a> first. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>The (zero-based) pin of this IO element. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The new analog value of pin. </dd></dl>
+
+<p>Implemented in <a class="el" href="../../dc/d19/classMAX7219.html#a0aa77f1d019d8c1230696b0f7eed790d">MAX7219&lt; NumChips &gt;</a>, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a0aa77f1d019d8c1230696b0f7eed790d">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#ab135b538148933155a92cc289e9a2e8b">AnalogMultiplex&lt; N &gt;</a>.</p>
 
 </div>
 </div>
@@ -514,7 +803,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 
 <p>Initialize the extended IO element. </p>
 
-<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a7c3e14d99bd3dc0e3670d6956dafcaf2">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../d1/d5c/classShiftRegisterOut.html#a7c3e14d99bd3dc0e3670d6956dafcaf2">ShiftRegisterOut&lt; N &gt;</a>, <a class="el" href="../../dd/d81/classSPIShiftRegisterOut.html#a7c3e14d99bd3dc0e3670d6956dafcaf2">SPIShiftRegisterOut&lt; N &gt;</a>, and <a class="el" href="../../dc/d19/classMAX7219.html#a7c3e14d99bd3dc0e3670d6956dafcaf2">MAX7219</a>.</p>
+<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a7c3e14d99bd3dc0e3670d6956dafcaf2">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../d1/d5c/classShiftRegisterOut.html#a7c3e14d99bd3dc0e3670d6956dafcaf2">ShiftRegisterOut&lt; N &gt;</a>, <a class="el" href="../../dd/d81/classSPIShiftRegisterOut.html#a7c3e14d99bd3dc0e3670d6956dafcaf2">SPIShiftRegisterOut&lt; N &gt;</a>, and <a class="el" href="../../dc/d19/classMAX7219.html#a7c3e14d99bd3dc0e3670d6956dafcaf2">MAX7219&lt; NumChips &gt;</a>.</p>
 
 </div>
 </div>
@@ -543,12 +832,12 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 
 <p>Initialize all extended IO elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00023">23</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00020">20</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a99b02345a8a15d3c5ea2844a2253f510"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99b02345a8a15d3c5ea2844a2253f510">&#9670;&nbsp;</a></span>update()</h2>
+<a id="a2b9d52c22ebbf0c44df97d5013eab3ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b9d52c22ebbf0c44df97d5013eab3ee">&#9670;&nbsp;</a></span>updateBufferedOutputs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -557,7 +846,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void update </td>
+          <td class="memname">virtual void updateBufferedOutputs </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -570,9 +859,96 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p>Update the extended IO element: write the internal state to the physical outputs, or read the physical state into the input buffers. </p>
+<p>Write the internal state to the physical outputs. </p>
 
-<p>Implemented in <a class="el" href="../../dc/d19/classMAX7219.html#a44137bb65de2396875934e48a6ee5099">MAX7219</a>, <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a44137bb65de2396875934e48a6ee5099">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../d1/d5c/classShiftRegisterOut.html#a44137bb65de2396875934e48a6ee5099">ShiftRegisterOut&lt; N &gt;</a>, and <a class="el" href="../../dd/d81/classSPIShiftRegisterOut.html#a44137bb65de2396875934e48a6ee5099">SPIShiftRegisterOut&lt; N &gt;</a>.</p>
+<p>Implemented in <a class="el" href="../../dc/d19/classMAX7219.html#a20a0229c188bb291fb7388ea74c31abf">MAX7219&lt; NumChips &gt;</a>, <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a20a0229c188bb291fb7388ea74c31abf">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../d1/d5c/classShiftRegisterOut.html#a20a0229c188bb291fb7388ea74c31abf">ShiftRegisterOut&lt; N &gt;</a>, and <a class="el" href="../../dd/d81/classSPIShiftRegisterOut.html#a20a0229c188bb291fb7388ea74c31abf">SPIShiftRegisterOut&lt; N &gt;</a>.</p>
+
+</div>
+</div>
+<a id="abec6911e67d8da1c873ea86e7dc263b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abec6911e67d8da1c873ea86e7dc263b4">&#9670;&nbsp;</a></span>updateAllBufferedOutputs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateAllBufferedOutputs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the internal states to the physical outputs for all extended IO elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00024">24</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a259bf5ac38e0493bf471988851712e2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a259bf5ac38e0493bf471988851712e2f">&#9670;&nbsp;</a></span>updateBufferedInputs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void updateBufferedInputs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the physical state into the input buffers. </p>
+
+<p>Implemented in <a class="el" href="../../dc/d19/classMAX7219.html#a651e4e7a2bab28c5980e990b040dc4b6">MAX7219&lt; NumChips &gt;</a>, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a651e4e7a2bab28c5980e990b040dc4b6">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a651e4e7a2bab28c5980e990b040dc4b6">AnalogMultiplex&lt; N &gt;</a>.</p>
+
+</div>
+</div>
+<a id="af1a38da578742acc2edc010de377ceb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1a38da578742acc2edc010de377ceb4">&#9670;&nbsp;</a></span>updateAllBufferedInputs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateAllBufferedInputs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the physical state into the input buffers for all extended IO elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00028">28</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
 
 </div>
 </div>
@@ -608,10 +984,10 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The global, unique extended IO pin number for the given pin. </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d1/dcb/1_8MAX7219-Blink_8ino-example.html#a1">1.MAX7219-Blink.ino</a>, and <a class="el" href="../../da/d78/Toggle-LEDs_8ino-example.html#a5">Toggle-LEDs.ino</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../da/d78/Toggle-LEDs_8ino-example.html#a5">Toggle-LEDs.ino</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00028">28</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00032">32</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
 
 </div>
 </div>
@@ -649,7 +1025,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The global, unique extended IO pin number for the given pin. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00043">43</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00047">47</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
 
 </div>
 </div>
@@ -681,7 +1057,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../dc/d1b/1_8AnalogReadSerial_8ino-example.html#a2">1.AnalogReadSerial.ino</a>, and <a class="el" href="../../d9/d42/2_8DigitalReadSerial_8ino-example.html#a4">2.DigitalReadSerial.ino</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00045">45</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00049">49</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
 
 </div>
 </div>
@@ -710,7 +1086,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 
 <p>Get the largest global extended IO pin number that belongs to this extended IO element. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00047">47</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00051">51</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
 
 </div>
 </div>
@@ -739,7 +1115,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 
 <p>Get the smallest global extended IO pin number that belongs to this extended IO element. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00049">49</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00053">53</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
 
 </div>
 </div>
@@ -768,7 +1144,301 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 
 <p>Get the list of all Extended IO elements. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00051">51</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00055">55</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
+
+</div>
+</div>
+<a id="adc854bd51713ad44a652f9e3b3a18ea0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc854bd51713ad44a652f9e3b3a18ea0">&#9670;&nbsp;</a></span>applyToAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void applyToAll </td>
+          <td>(</td>
+          <td class="paramtype">void(Derived::*)(Args &amp;&amp;...)&#160;</td>
+          <td class="paramname"><em>method</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d93/Updatable_8hpp_source.html#l00056">56</a> of file <a class="el" href="../../d4/d93/Updatable_8hpp_source.html">Updatable.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a486f22824bd83c5308a0d70ffac6f758"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a486f22824bd83c5308a0d70ffac6f758">&#9670;&nbsp;</a></span>enable() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void enable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable this updatable: insert it into the linked list of instances, so it gets updated automatically. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d93/Updatable_8hpp_source.html#l00070">70</a> of file <a class="el" href="../../d4/d93/Updatable_8hpp_source.html">Updatable.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad12acee2ce11483080385d904cee97bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad12acee2ce11483080385d904cee97bd">&#9670;&nbsp;</a></span>enable() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void enable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html">UpdatableCRTP</a>&lt; <a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> &gt; *&#160;</td>
+          <td class="paramname"><em>element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d93/Updatable_8hpp_source.html#l00096">96</a> of file <a class="el" href="../../d4/d93/Updatable_8hpp_source.html">Updatable.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0da0232ed3b2839c53832dde4f72b8dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0da0232ed3b2839c53832dde4f72b8dc">&#9670;&nbsp;</a></span>enable() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void enable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html">UpdatableCRTP</a>&lt; <a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d93/Updatable_8hpp_source.html#l00098">98</a> of file <a class="el" href="../../d4/d93/Updatable_8hpp_source.html">Updatable.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2f775da7b162931d468d6d6b6950dfcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f775da7b162931d468d6d6b6950dfcf">&#9670;&nbsp;</a></span>enable() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void enable </td>
+          <td>(</td>
+          <td class="paramtype">U(&amp;)&#160;</td>
+          <td class="paramname"><em>array</em>[N]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d93/Updatable_8hpp_source.html#l00101">101</a> of file <a class="el" href="../../d4/d93/Updatable_8hpp_source.html">Updatable.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8cfbbe53c1cf6e3054736daea3044c0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cfbbe53c1cf6e3054736daea3044c0f">&#9670;&nbsp;</a></span>disable() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void disable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable this updatable: remove it from the linked list of instances, so it no longer gets updated automatically. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d93/Updatable_8hpp_source.html#l00080">80</a> of file <a class="el" href="../../d4/d93/Updatable_8hpp_source.html">Updatable.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aacbfe5d6ba589f29a195bd0a54f35772"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacbfe5d6ba589f29a195bd0a54f35772">&#9670;&nbsp;</a></span>disable() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void disable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html">UpdatableCRTP</a>&lt; <a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> &gt; *&#160;</td>
+          <td class="paramname"><em>element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d93/Updatable_8hpp_source.html#l00106">106</a> of file <a class="el" href="../../d4/d93/Updatable_8hpp_source.html">Updatable.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a67781608cee470244316e2302f6290d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67781608cee470244316e2302f6290d6">&#9670;&nbsp;</a></span>disable() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void disable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d2/dfb/classUpdatableCRTP.html">UpdatableCRTP</a>&lt; <a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d93/Updatable_8hpp_source.html#l00108">108</a> of file <a class="el" href="../../d4/d93/Updatable_8hpp_source.html">Updatable.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac05c991ba1ef6cb7363a44e2232119f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac05c991ba1ef6cb7363a44e2232119f0">&#9670;&nbsp;</a></span>disable() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void disable </td>
+          <td>(</td>
+          <td class="paramtype">U(&amp;)&#160;</td>
+          <td class="paramname"><em>array</em>[N]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d93/Updatable_8hpp_source.html#l00111">111</a> of file <a class="el" href="../../d4/d93/Updatable_8hpp_source.html">Updatable.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a56722b6f1c22da04885bc9853148bb71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56722b6f1c22da04885bc9853148bb71">&#9670;&nbsp;</a></span>isEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isEnabled </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if this updatable is enabled. </p>
+<dl class="section note"><dt>Note</dt><dd>Assumes that the updatable is not added to a different linked list by the user. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d93/Updatable_8hpp_source.html#l00094">94</a> of file <a class="el" href="../../d4/d93/Updatable_8hpp_source.html">Updatable.hpp</a>.</p>
 
 </div>
 </div>
@@ -793,7 +1463,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00194">194</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00260">260</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -817,7 +1487,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00195">195</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00261">261</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -841,12 +1511,12 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00196">196</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00262">262</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a876a3612572c06ebe4a697ed273ea7f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a876a3612572c06ebe4a697ed273ea7f1">&#9670;&nbsp;</a></span>elements</h2>
+<a id="a4943fe5ee6614da25808705c1471da08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4943fe5ee6614da25808705c1471da08">&#9670;&nbsp;</a></span>updatables</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -855,17 +1525,17 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../dd/d16/classDoublyLinkedList.html">DoublyLinkedList</a>&lt; <a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a> &gt; elements</td>
+          <td class="memname"><a class="el" href="../../dd/d16/classDoublyLinkedList.html">DoublyLinkedList</a>&lt; <a class="el" href="../../de/d4e/classExtendedIOElement.html">ExtendedIOElement</a>  &gt; updatables</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00198">198</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d93/Updatable_8hpp_source.html#l00119">119</a> of file <a class="el" href="../../d4/d93/Updatable_8hpp_source.html">Updatable.hpp</a>.</p>
 
 </div>
 </div>
@@ -889,7 +1559,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/dd1/LinkedList_8hpp_source.html#l00305">305</a> of file <a class="el" href="../../de/dd1/LinkedList_8hpp_source.html">LinkedList.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/dd1/LinkedList_8hpp_source.html#l00310">310</a> of file <a class="el" href="../../de/dd1/LinkedList_8hpp_source.html">LinkedList.hpp</a>.</p>
 
 </div>
 </div>
@@ -913,7 +1583,7 @@ class StaticSizeExtendedIOElement&lt; N &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../de/dd1/LinkedList_8hpp_source.html#l00306">306</a> of file <a class="el" href="../../de/dd1/LinkedList_8hpp_source.html">LinkedList.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../de/dd1/LinkedList_8hpp_source.html#l00311">311</a> of file <a class="el" href="../../de/dd1/LinkedList_8hpp_source.html">LinkedList.hpp</a>.</p>
 
 </div>
 </div>

@@ -1,6 +1,7 @@
 <map id="Updatable&lt; T &gt;" name="Updatable&lt; T &gt;">
-<area shape="rect" id="node1" title="A super class for object that have to be updated regularly." alt="" coords="5,461,119,582"/>
-<area shape="rect" id="node2" href="$d2/dfb/classUpdatableCRTP.html" title=" " alt="" coords="265,5,454,259"/>
-<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="143,475,421,567"/>
-<area shape="rect" id="node4" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="445,336,724,707"/>
+<area shape="rect" id="node1" title="A super class for object that have to be updated regularly." alt="" coords="5,308,119,429"/>
+<area shape="rect" id="node2" href="$d2/dfb/classUpdatableCRTP.html" title=" " alt="" coords="106,5,295,259"/>
+<area shape="rect" id="node4" href="$d5/de0/classUpdatable.html" title=" " alt="" coords="195,308,401,429"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="117,653,300,745"/>
+<area shape="rect" id="node5" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="339,507,532,892"/>
 </map>

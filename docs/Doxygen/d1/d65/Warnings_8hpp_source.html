@@ -89,16 +89,17 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">            _Pragma(&quot;GCC diagnostic ignored \&quot;-Wc++0x-compat\&quot;&quot;)</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_POP() _Pragma(&quot;GCC diagnostic pop&quot;)</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_EXTERNAL_HEADER()                                        \</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    _Pragma(&quot;GCC diagnostic ignored \&quot;-Wsuggest-override\&quot;&quot;)                   \</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">        _Pragma(&quot;GCC diagnostic ignored \&quot;-Wunused-parameter\&quot;&quot;)</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a9f2deeea1dd06b45ebc381da1633c7ee">   16</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_WERROR()</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a4f088fb95f1d6dc4279357ca2a562cbe">   17</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_POP()</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a44dd04a1d1f97866e5b01c548f35fe5e">   18</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_EXTERNAL_HEADER()</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    _Pragma(&quot;GCC diagnostic push&quot;)                                             \</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">        _Pragma(&quot;GCC diagnostic ignored \&quot;-Wsuggest-override\&quot;&quot;)               \</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">            _Pragma(&quot;GCC diagnostic ignored \&quot;-Wunused-parameter\&quot;&quot;)</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a9f2deeea1dd06b45ebc381da1633c7ee">   17</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_WERROR()</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a4f088fb95f1d6dc4279357ca2a562cbe">   18</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_POP()</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="../../d1/d65/Warnings_8hpp.html#a44dd04a1d1f97866e5b01c548f35fe5e">   19</a></span>&#160;<span class="preprocessor">#define AH_DIAGNOSTIC_EXTERNAL_HEADER()</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

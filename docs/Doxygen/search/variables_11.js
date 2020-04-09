@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['updatables_995',['updatables',['../d2/dfb/classUpdatableCRTP.html#a4e9602610fd63844b02462076b61f9d9',1,'UpdatableCRTP']]]
+  ['updatables_1082',['updatables',['../d2/dfb/classUpdatableCRTP.html#a4943fe5ee6614da25808705c1471da08',1,'UpdatableCRTP']]]
 ];
