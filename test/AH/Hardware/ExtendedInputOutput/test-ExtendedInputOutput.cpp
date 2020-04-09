@@ -31,6 +31,21 @@ class MockExtIOElement : public ExtendedIOElement {
     MOCK_METHOD0(updateBufferedInputs, void());
 };
 
+class MinimalMockExtIOElement : public ExtendedIOElement {
+  public:
+    MinimalMockExtIOElement(pin_t length) : ExtendedIOElement(length) {}
+
+    MOCK_METHOD2(pinModeBuffered, void(pin_t, uint8_t));
+    MOCK_METHOD2(digitalWriteBuffered, void(pin_t, uint8_t));
+    MOCK_METHOD1(digitalReadBuffered, int(pin_t));
+    MOCK_METHOD1(analogReadBuffered, analog_t(pin_t));
+    MOCK_METHOD2(analogWriteBuffered, void(pin_t, analog_t));
+
+    MOCK_METHOD0(begin, void());
+    MOCK_METHOD0(updateBufferedOutputs, void());
+    MOCK_METHOD0(updateBufferedInputs, void());
+};
+
 W_SUGGEST_OVERRIDE_ON
 
 TEST(ExtendedInputOutput, ExtendedIOElement) {
@@ -374,4 +389,106 @@ TEST(ExtendedInputOutput, shiftOutLSBFIRST) {
     EXPECT_CALL(el, digitalWrite(clck, 0));
 
     shiftOut((int)el.pin(data), (int)el.pin(clck), LSBFIRST, 0b00111001);
+}
+
+TEST(ExtendedIOElement, bufferedMinimal) {
+    MinimalMockExtIOElement e(8);
+
+    testing::InSequence s;
+
+    EXPECT_CALL(e, updateBufferedInputs());
+    EXPECT_CALL(e, digitalReadBuffered(4));
+    ExtIO::digitalRead(e.pin(4));
+    Mock::VerifyAndClear(&e);
+
+    EXPECT_CALL(e, updateBufferedInputs());
+    EXPECT_CALL(e, analogReadBuffered(7));
+    ExtIO::analogRead(e.pin(7));
+    Mock::VerifyAndClear(&e);
+
+    EXPECT_CALL(e, pinModeBuffered(0, INPUT));
+    EXPECT_CALL(e, updateBufferedOutputs());
+    ExtIO::pinMode(e.pin(0), INPUT);
+    Mock::VerifyAndClear(&e);
+
+    EXPECT_CALL(e, digitalWriteBuffered(0, HIGH));
+    EXPECT_CALL(e, updateBufferedOutputs());
+    ExtIO::digitalWrite(e.pin(0), HIGH);
+    Mock::VerifyAndClear(&e);
+
+    EXPECT_CALL(e, analogWriteBuffered(0, 511));
+    EXPECT_CALL(e, updateBufferedOutputs());
+    ExtIO::analogWrite(e.pin(0), 511);
+    Mock::VerifyAndClear(&e);
+}
+
+
+TEST(ExtendedIOElement, bufferedGlobal) {
+    MinimalMockExtIOElement e(8);
+
+    testing::InSequence s;
+
+    EXPECT_CALL(e, digitalReadBuffered(4));
+    ExtIO::digitalReadBuffered(e.pin(4));
+    Mock::VerifyAndClear(&e);
+
+    EXPECT_CALL(e, analogReadBuffered(7));
+    ExtIO::analogReadBuffered(e.pin(7));
+    Mock::VerifyAndClear(&e);
+
+    EXPECT_CALL(e, pinModeBuffered(0, INPUT));
+    ExtIO::pinModeBuffered(e.pin(0), INPUT);
+    Mock::VerifyAndClear(&e);
+
+    EXPECT_CALL(e, digitalWriteBuffered(0, HIGH));
+    ExtIO::digitalWriteBuffered(e.pin(0), HIGH);
+    Mock::VerifyAndClear(&e);
+
+    EXPECT_CALL(e, analogWriteBuffered(0, 511)).Times(2);
+    ExtIO::analogWriteBuffered(e.pin(0), 511);
+    ExtIO::analogWriteBuffered(e.pin(0), (analog_t)511);
+    Mock::VerifyAndClear(&e);
+}
+
+TEST(ExtendedIOElement, bufferedGlobalArduino) {
+    testing::InSequence s;
+
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(4));
+    ExtIO::digitalReadBuffered(4);
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(7));
+    ExtIO::analogReadBuffered(7);
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(0, INPUT));
+    ExtIO::pinModeBuffered(0, INPUT);
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(0, HIGH));
+    ExtIO::digitalWriteBuffered(0, HIGH);
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(0, 511)).Times(2);
+    ExtIO::analogWriteBuffered(0, 511);
+    ExtIO::analogWriteBuffered(0, (analog_t)511);
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
+TEST(ExtendedIOElement, updateAllBufferedInputs) {
+    MockExtIOElement el1(10);
+    MockExtIOElement el2(10);
+
+    EXPECT_CALL(el1, updateBufferedInputs());
+    EXPECT_CALL(el2, updateBufferedInputs());
+    ExtendedIOElement::updateAllBufferedInputs();
+}
+
+TEST(ExtendedIOElement, updateAllBufferedOutputs) {
+    MockExtIOElement el1(10);
+    MockExtIOElement el2(10);
+
+    EXPECT_CALL(el1, updateBufferedOutputs());
+    EXPECT_CALL(el2, updateBufferedOutputs());
+    ExtendedIOElement::updateAllBufferedOutputs();
 }
