@@ -26,9 +26,15 @@ BEGIN_CS_NAMESPACE
  * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI
  *          connection.
  * 
- * @note    See the [MIDI over USB Wiki]
- *          (https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB)
- *          for more information.
+ * On boards that support it, this will create a native MIDI over USB interface
+ * using the platform-specific libraries (e.g. MIDIUSB for Arduino Leonardo, or 
+ * the Core usbMIDI library for Teensy).  
+ * On boards without native USB support, it'll fall back to a serial MIDI 
+ * interface at the default @ref MIDI_BAUD "MIDI baud rate" on the UART 
+ * connected to the Serial to USB chip. This can be used with custom 
+ * MIDI over USB firmware for the Serial to USB chip.
+ * 
+ * @note    See @ref md_pages_MIDI_over_USB for more information.
  * 
  * @ingroup MIDIInterfaces
  */
@@ -132,9 +138,7 @@ BEGIN_CS_NAMESPACE
  * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI
  *          connection.
  * 
- * @note    See the [MIDI over USB Wiki]
- *          (https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB)
- *          for more information.
+ * @note    See @ref md_pages_MIDI_over_USB for more information.
  * 
  * @ingroup MIDIInterfaces
  */
