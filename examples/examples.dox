@@ -368,6 +368,48 @@
  */
 
 /**
+ * @example   "3.FilteredAnalogReadSerial.ino"
+ * 
+ * 3.FilteredAnalogReadSerial
+ * ==========================
+ *
+ * This is an example of the AnalogMultiplex and the FilteredAnalog classes. 
+ * It prints the filtered values of all 16 inputs of a multiplexers to the 
+ * serial monitor.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *  - A0: CD74HC4067 signal pin ("common input/output")
+ *  - 3:  CD74HC4067 address pin S0
+ *  - 4:  CD74HC4067 address pin S1
+ *  - 5:  CD74HC4067 address pin S2
+ *  - 6:  CD74HC4067 address pin S3
+ *  
+ * Optionally you can connect the enable pin as well, this is useful
+ * if you want to use multiple multiplexers with the same address 
+ * lines and the same analog input. Otherwise, just connect the enable
+ * pin to ground.
+ * 
+ * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
+ * uncomment the code specific to this multiplexer, and use only three
+ * address pins.
+ *  
+ * Behavior
+ * --------
+ * 
+ * Connect some potentiometers or other analog sensors to the 16 inputs
+ * of the multiplexer, and open the serial monitor (CTRL+SHIFT+M) or the
+ * serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed
+ * or plotted.
+ * 
+ * Written by Pieter P, 09-04-2019  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
  * @example   "1.MAX7219-Blink.ino"
  * 
  * 1.MAX7219-Blink
@@ -521,6 +563,116 @@
  * @endhtmlonly
  * 
  * Written by Pieter P, 2018-07-13  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "MCP23017-Encoders-No-Interrupts.ino"
+ * 
+ * MCP23017-Encoders-No-Interrupts
+ * ===============================
+ *
+ * This example demonstrates the use of MCP23017 I²C port expanders with rotary
+ * encoders.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SDA:  MCP23017 SDA
+ *   - SCL:  MCP23017 SCL
+ *   - 12:   MCP23017 INTA or INTB
+ *   
+ * Connect up to 8 encoders to the MCP23017's GPIO pins: 
+ * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
+ * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
+ * Connect the "common" pins of the encoders to ground.  
+ * The built-in pull-up resistors of the MCP23017 will be enabled.
+ * 
+ * Make sure that the reset and address pins are all configured correctly 
+ * (reset to Vcc; A0, A1 and A2 to ground).
+ * 
+ * If you need more than one MCP23017 with encoders, you can connect their 
+ * interrupt pins together. This does result in higher latency, because on 
+ * average, half of the total number of MCP23017s have to be polled, which is 
+ * relatively slow, and might lead to missed pulses when using a large number
+ * of encoders.
+ * 
+ * Behavior
+ * --------
+ * 
+ * When the position of one of the encoders changes, it is printed to the Serial
+ * monitor.
+ * 
+ * Cautions
+ * --------
+ * 
+ * The interrupt pin of the MCP23017 doesn't trigger a hardware interrupt on the
+ * Arduino. It's used only to determine whether the Arduino should read the GPIO
+ * registers from the MCP23017.  
+ * If the update function isn't called often enough, you will miss encoder 
+ * pulses, and the position will be incorrect.  
+ * It's very important to keep your main loop free from any code that blocks for
+ * more than a couple of hundreds of microseconds.
+ * 
+ * Written by PieterP, 2020-04-06  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "MCP23017-Encoders-Interrupts.ino"
+ * 
+ * MCP23017-Encoders-Interrupts
+ * ============================
+ *
+ * This example demonstrates the use of MCP23017 I²C port expanders with rotary
+ * encoders, using hardware interrupts so you don't miss any pulses.
+ * 
+ * @boards  Teensy 3.x
+ * 
+ * This only works on Teensy boards, and maybe on other ARM boards.  
+ * I've tested it using a Teensy 3.2 and a Teensy 4.0.
+ * 
+ * AVR boards (Arduino Uno, Mega, etc.) don't support I²C inside of interrupt
+ * service routines, so there's no way to read the state of the MCP23017
+ * inside of an ISR.  
+ * The same goes for ESP32 and ESP8266, although there may be ways around
+ * this by using alternative I²C drivers or by using FreeRTOS features.
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SDA:  MCP23017 SDA
+ *   - SCL:  MCP23017 SCL
+ *   - 12:   MCP23017 INTA or INTB
+ *   
+ * Connect up to 8 encoders to the MCP23017's GPIO pins: 
+ * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
+ * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
+ * Connect the "common" pins of the encoders to ground.  
+ * The built-in pull-up resistors of the MCP23017 will be enabled.
+ * 
+ * Make sure that the reset and address pins are all configured correctly 
+ * (reset to Vcc; A0, A1 and A2 to ground).
+ * 
+ * If you need more than one MCP23017 with encoders, you can connect their 
+ * interrupt pins together. This does result in higher latency, because on 
+ * average, half of the total number of MCP23017s have to be polled, which is 
+ * relatively slow, and might lead to missed pulses when using a large number
+ * of encoders.
+ * 
+ * Behavior
+ * --------
+ * 
+ * When the position of one of the encoders changes, it is printed to the Serial
+ * monitor.
+ * 
+ * The interrupt pin of the MCP23017 triggers a hardware interrupt on the
+ * Arduino. This means that you don't have to manually poll the encoders all
+ * the time.
+ * 
+ * Written by PieterP, 2020-04-06  
  * https://github.com/tttapa/Arduino-Helpers
  */
 

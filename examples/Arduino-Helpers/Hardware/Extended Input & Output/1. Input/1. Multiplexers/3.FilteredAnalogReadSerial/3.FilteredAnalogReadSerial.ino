@@ -64,7 +64,7 @@ auto filteredAnalogs = [] {
   v.reserve(pins.length);
   std::copy(std::begin(pins), std::end(pins), std::back_inserter(v));
   return v;
-}();
+}(); // This is an immediately invoked lambda expression
 
 void setup() {
   Serial.begin(115200);

@@ -75,7 +75,7 @@ $(function() {
 <div class="title">MCP23017-Encoders-Interrupts.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md43"></a>
+<h1><a class="anchor" id="autotoc_md46"></a>
 MCP23017-Encoders-Interrupts</h1>
 <p>This example demonstrates the use of MCP23017 I²C port expanders with rotary encoders, using hardware interrupts so you don't miss any pulses.</p>
 <dl class="section user"><dt>Boards:</dt><dd>Teensy 3.x</dd></dl>
@@ -83,7 +83,7 @@ MCP23017-Encoders-Interrupts</h1>
  I've tested it using a Teensy 3.2 and a Teensy 4.0.</p>
 <p>AVR boards (Arduino Uno, Mega, etc.) don't support I²C inside of interrupt service routines, so there's no way to read the state of the MCP23017 inside of an ISR. <br  />
  The same goes for ESP32 and ESP8266, although there may be ways around this by using alternative I²C drivers or by using FreeRTOS features.</p>
-<h2><a class="anchor" id="autotoc_md44"></a>
+<h2><a class="anchor" id="autotoc_md47"></a>
 Connections</h2>
 <ul>
 <li>SDA: MCP23017 SDA</li>
@@ -95,7 +95,7 @@ Connections</h2>
  The built-in pull-up resistors of the MCP23017 will be enabled.</p>
 <p>Make sure that the reset and address pins are all configured correctly (reset to Vcc; A0, A1 and A2 to ground).</p>
 <p>If you need more than one MCP23017 with encoders, you can connect their interrupt pins together. This does result in higher latency, because on average, half of the total number of MCP23017s have to be polled, which is relatively slow, and might lead to missed pulses when using a large number of encoders.</p>
-<h2><a class="anchor" id="autotoc_md45"></a>
+<h2><a class="anchor" id="autotoc_md48"></a>
 Behavior</h2>
 <p>When the position of one of the encoders changes, it is printed to the Serial monitor.</p>
 <p>The interrupt pin of the MCP23017 triggers a hardware interrupt on the Arduino. This means that you don't have to manually poll the encoders all the time.</p>
