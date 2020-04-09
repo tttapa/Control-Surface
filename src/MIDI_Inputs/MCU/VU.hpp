@@ -310,7 +310,7 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
      *          changes.  
      *          Used for displaying the value on a range of LEDs etc.
      */
-    GenericVU(const BankConfig<NumBanks> &config, uint8_t track,
+    GenericVU(BankConfig<NumBanks> config, uint8_t track,
               const MIDIChannelCN &channelCN, unsigned int decayTime,
               const Callback &callback)
         : VU_Base<NumBanks, Callback>{
@@ -371,7 +371,7 @@ class VU : public GenericVU<NumBanks> {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(const BankConfig<NumBanks> &config, uint8_t track,
+    VU(BankConfig<NumBanks> config, uint8_t track,
        const MIDIChannelCN &channelCN,
        unsigned int decayTime = VUDecay::Default)
         : GenericVU<NumBanks>{
@@ -394,7 +394,7 @@ class VU : public GenericVU<NumBanks> {
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
-    VU(const BankConfig<NumBanks> &config, uint8_t track,
+    VU(BankConfig<NumBanks> config, uint8_t track,
        unsigned int decayTime = VUDecay::Default)
         : GenericVU<NumBanks>{
               config, track, CHANNEL_1, decayTime, {},

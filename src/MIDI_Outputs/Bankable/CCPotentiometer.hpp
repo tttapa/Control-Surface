@@ -36,8 +36,8 @@ class CCPotentiometer
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
      *          [0, 15].
      */
-    CCPotentiometer(const OutputBankConfig &config, pin_t analogPin,
-                    const MIDIAddress &address)
+    CCPotentiometer(OutputBankConfig<> config, pin_t analogPin,
+                    MIDIAddress address)
         : MIDIFilteredAnalogAddressable(SingleAddress{config, address},
                                         analogPin, {}) {}
 };

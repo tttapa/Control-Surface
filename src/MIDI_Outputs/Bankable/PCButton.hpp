@@ -36,8 +36,7 @@ class PCButton : public MIDIButton<SingleAddress, ProgramChangeSender> {
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
      *          [0, 15].
      */
-    PCButton(const OutputBankConfig &config, pin_t pin,
-             const MIDIAddress &address)
+    PCButton(OutputBankConfig<> config, pin_t pin, MIDIAddress address)
         : MIDIButton({config, address}, pin, {}) {}
 };
 

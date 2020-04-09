@@ -27,7 +27,7 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
      *
      * @todo    Documentation
      */
-    MIDIRotaryEncoder(const BankAddress &bankAddress,
+    MIDIRotaryEncoder(BankAddress bankAddress,
                       const EncoderPinList &pins,
                       uint8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
@@ -37,7 +37,7 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
 
 // For tests only
 #ifndef ARDUINO
-    MIDIRotaryEncoder(const BankAddress &bankAddress, const Encoder &encoder,
+    MIDIRotaryEncoder(BankAddress bankAddress, const Encoder &encoder,
                       uint8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
         : address(bankAddress), encoder{encoder}, 

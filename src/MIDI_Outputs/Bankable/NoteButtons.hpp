@@ -49,10 +49,9 @@ class NoteButtons
      * @param   velocity
      *          The velocity of the MIDI Note events.
      */
-    NoteButtons(const OutputBankConfig &config,
+    NoteButtons(OutputBankConfig<> config,
                 const Array<AH::Button, NumButtons> &buttons,
-                const MIDIAddress &baseAddress,
-                const RelativeMIDIAddress &incrementAddress,
+                MIDIAddress baseAddress, RelativeMIDIAddress incrementAddress,
                 uint8_t velocity = 0x7F)
         : MIDIButtons<SingleAddress, DigitalNoteSender, NumButtons>{
               {config, baseAddress},

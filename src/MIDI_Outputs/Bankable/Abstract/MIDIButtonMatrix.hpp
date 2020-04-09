@@ -47,7 +47,7 @@ class MIDIButtonMatrix : public MIDIOutputElement,
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIButtonMatrix(const BankAddress &bankAddress,
+    MIDIButtonMatrix(BankAddress bankAddress,
                      const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins, const Sender &sender)
         : AH::ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),

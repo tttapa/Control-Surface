@@ -54,16 +54,16 @@ class CCRotaryEncoder
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    CCRotaryEncoder(const OutputBankConfig &config, const EncoderPinList &pins,
-                    const MIDIAddress &address, int8_t speedMultiply = 1,
+    CCRotaryEncoder(OutputBankConfig<> config, EncoderPinList pins,
+                    MIDIAddress address, int8_t speedMultiply = 1,
                     uint8_t pulsesPerStep = 4)
         : MIDIRotaryEncoder({config, address}, pins, speedMultiply,
                             pulsesPerStep, {}) {}
 
 // For tests only (PJRC Encoder library's copy constructor doesn't work)
 #ifndef ARDUINO
-    CCRotaryEncoder(const OutputBankConfig &config, const Encoder &encoder,
-                    const MIDIAddress &address, int8_t speedMultiply = 1,
+    CCRotaryEncoder(OutputBankConfig<> config, const Encoder &encoder,
+                    MIDIAddress address, int8_t speedMultiply = 1,
                     uint8_t pulsesPerStep = 4)
         : MIDIRotaryEncoder({config, address}, encoder, speedMultiply,
                             pulsesPerStep, {}) {}

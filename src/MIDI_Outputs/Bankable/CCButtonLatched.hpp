@@ -46,11 +46,10 @@ class CCButtonLatched
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButtonLatched(const BankConfig<NumBanks> &config, pin_t pin,
-                    const MIDIAddress &address,
+    CCButtonLatched(BankConfig<NumBanks> config, pin_t pin, MIDIAddress address,
                     const DigitalCCSender &sender = {})
-        : MIDIButtonLatched<NumBanks, SingleAddress, DigitalCCSender>{
-              {config, address}, pin, sender} {}
+        : MIDIButtonLatched<NumBanks, SingleAddress, DigitalCCSender>(
+              {config, address}, pin, sender) {}
 };
 
 } // namespace Bankable

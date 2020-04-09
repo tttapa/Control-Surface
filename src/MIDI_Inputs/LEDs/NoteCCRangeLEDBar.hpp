@@ -118,7 +118,7 @@ template <uint8_t BankSize, uint8_t NumLEDs>
 class NoteLEDBar : public GenericNoteCCRange<MIDIInputElementNote, 1, BankSize,
                                              NoteCCLEDBarCallback<NumLEDs>> {
   public:
-    NoteLEDBar(const BankConfig<BankSize> &config,
+    NoteLEDBar(BankConfig<BankSize> config,
                const AH::DotBarDisplayLEDs<NumLEDs> &leds,
                const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementNote, 1, BankSize,
@@ -152,7 +152,7 @@ template <uint8_t BankSize, uint8_t NumLEDs>
 class CCLEDBar : public GenericNoteCCRange<MIDIInputElementCC, 1, BankSize,
                                            NoteCCLEDBarCallback<NumLEDs>> {
   public:
-    CCLEDBar(const BankConfig<BankSize> &config,
+    CCLEDBar(BankConfig<BankSize> config,
              const AH::DotBarDisplayLEDs<NumLEDs> &leds,
              const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementCC, 1, BankSize,
