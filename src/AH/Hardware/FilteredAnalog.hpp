@@ -161,7 +161,7 @@ class FilteredAnalog {
     }
 
   private:
-    const pin_t analogPin;
+    pin_t analogPin;
 
     MappingFunction mapFn = nullptr;
 
