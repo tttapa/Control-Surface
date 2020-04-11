@@ -71,7 +71,7 @@ class EMA {
 
   private:
     uint_t filtered = 0;
-    constexpr static uint_t fixedPointAHalf = 1 << (K - 1);
+    constexpr static uint_t fixedPointAHalf = K > 0 ? 1 << (K - 1) : 0;
 };
 
 // -------------------------------------------------------------------------- //
