@@ -9,72 +9,54 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #include <AH/Hardware/Hardware-Types.hpp>
 #include <AH/Math/IncreaseBitDepth.hpp>
 #include <AH/Math/MinMaxFix.hpp>
+#include <AH/STL/type_traits> // std::enable_if, std::is_constructible
+#include <AH/STL/utility>     // std::forward
 #include <AH/Settings/SettingsWrapper.hpp>
 
 BEGIN_AH_NAMESPACE
 
 /**
- * A class that reads and filters an analog input.
- *
- * A map function can be applied to the analog value (e.g. to compensate for
- * logarithmic taper potentiometers or to calibrate the range). The analog input
- * value is filtered using an exponential moving average filter. The default
- * settings for this filter can be changed in Settings.hpp.  
- * After filtering, hysteresis is applied to prevent flipping back and forth 
- * between two values when the input is not changing.
- * 
- * @tparam  Precision
- *          The number of bits of precision the output should have.
- * @tparam  FilterShiftFactor
- *          The number of bits used for the EMA filter.
- *          The pole location is
- *          @f$ 1 - \left(\frac{1}{2}\right)^{\text{FilterShiftFactor}} @f$.  
- *          A lower shift factor means less filtering (@f$0@f$ is no filtering),
- *          and a higher shift factor means more filtering (and more latency).
- * @tparam  FilterType
- *          The type to use for the intermediate types of the filter.  
- *          Should be at least 
- *          @f$ \text{ADC_BITS} + \text{IncRes} + 
- *          \text{FilterShiftFactor} @f$ bits wide.
- * @tparam  AnalogType
- *          The type to use for the analog values.  
- *          Should be at least @f$ \text{ADC_BITS} + \text{IncRes} @f$ 
- *          bits wide.
- * @tparam  IncRes
- *          The number of bits to increase the resolution of the analog reading
- *          by.
- * 
- * @ingroup AH_HardwareUtils
+ * @brief   Helper to determine how many of the remaining bits of the filter 
+ *          data types can be used to achieve higher precision.
  */
-template <uint8_t Precision = 10,
+template <uint8_t FilterShiftFactor, class FilterType, class AnalogType>
+struct MaximumFilteredAnalogIncRes {
+    constexpr static uint8_t value =
+        min(sizeof(FilterType) * CHAR_BIT - ADC_BITS - FilterShiftFactor,
+            sizeof(AnalogType) * CHAR_BIT - ADC_BITS);
+};
+
+/**
+ * @brief   FilteredAnalog base class with generic MappingFunction.
+ * 
+ * @see FilteredAnalog
+ */
+template <class MappingFunction, uint8_t Precision = 10,
           uint8_t FilterShiftFactor = ANALOG_FILTER_SHIFT_FACTOR,
           class FilterType = ANALOG_FILTER_TYPE, class AnalogType = analog_t,
-          uint8_t IncRes =
-              min(sizeof(FilterType) * CHAR_BIT - ADC_BITS - FilterShiftFactor,
-                  sizeof(AnalogType) * CHAR_BIT - ADC_BITS)>
-class FilteredAnalog {
+          uint8_t IncRes = MaximumFilteredAnalogIncRes<
+              FilterShiftFactor, FilterType, AnalogType>::value>
+class GenericFilteredAnalog {
   public:
     /**
-     * @brief   Construct a new FilteredAnalog object.
+     * @brief   Construct a new GenericFilteredAnalog object.
      *
      * @param   analogPin
      *          The analog pin to read from.
+     * @param   mapFn
+     *          The mapping function
      */
-    FilteredAnalog(pin_t analogPin) : analogPin(analogPin) {}
-
-    /// A function pointer to a mapping function to map analog values.
-    /// @see    map()
-    using MappingFunction = AnalogType (*)(AnalogType);
+    GenericFilteredAnalog(pin_t analogPin, MappingFunction &&mapFn)
+        : analogPin(analogPin), mapFn(std::forward<MappingFunction>(mapFn)) {}
 
     /**
-     * @brief   Specify a mapping function that is applied to the raw
-     *          analog value before filtering.
+     * @brief   Specify a mapping function/functor that is applied to the analog
+     *          value after filtering and before applying hysteresis.
      *
      * @param   fn
-     *          A function pointer to the mapping function. This function
-     *          should take the filtered value (of ADC_BITS + IncRes bits 
-     *          wide) as a parameter, and should return a value of ADC_BITS + 
-     *          IncRes bits wide.
+     *          This functor should have a call operator that takes the filtered
+     *          value (of ADC_BITS + IncRes bits wide) as a parameter, 
+     *          and returns a value of ADC_BITS + IncRes bits wide.
      * 
      * @note    Applying the mapping function before filtering could result in
      *          the noise being amplified to such an extent that filtering it
@@ -83,19 +65,18 @@ class FilteredAnalog {
      *          That's why the mapping function is applied after filtering and
      *          before hysteresis.
      */
-    void map(MappingFunction fn) { mapFn = fn; }
+    void map(MappingFunction &&fn) {
+        mapFn = std::forward<MappingFunction>(fn);
+    }
 
     /**
-     * @brief   Invert the analog value. For example, if the precision is 10 
-     *          bits, when the analog input measures 1023, the output will be 0,
-     *          and when the analog input measures 0, the output will be 1023.
-     * 
-     * @note    This overrides the mapping function set by the `map` method.
+     * @brief   Get a reference to the mapping function.
      */
-    void invert() {
-        constexpr AnalogType maxval = (1UL << (ADC_BITS + IncRes)) - 1;
-        map([](AnalogType val) -> AnalogType { return maxval - val; });
-    }
+    MappingFunction &getMappingFunction() { return mapFn; }
+    /**
+     * @brief   Get a reference to the mapping function.
+     */
+    const MappingFunction &getMappingFunction() const { return mapFn; }
 
     /**
      * @brief   Read the analog input value, apply the mapping function, and
@@ -109,8 +90,7 @@ class FilteredAnalog {
     bool update() {
         AnalogType input = getRawValue(); // read the raw analog input value
         input = filter.filter(input);     // apply a low-pass EMA filter
-        if (mapFn)                        // If a mapping function is specified,
-            input = mapFn(input);         // apply it
+        input = mapFnHelper(input);       // apply the mapping function
         return hysteresis.update(input);  // apply hysteresis, and return true
         // if the value changed since last time
     }
@@ -161,9 +141,30 @@ class FilteredAnalog {
     }
 
   private:
-    pin_t analogPin;
+    /// Helper function that applies the mapping function if it's enabled.
+    /// This function is only enabled if MappingFunction is explicitly
+    /// convertible to bool.
+    template <typename M = MappingFunction>
+    typename std::enable_if<std::is_constructible<bool, M>::value,
+                            AnalogType>::type
+    mapFnHelper(AnalogType input) {
+        return bool(mapFn) ? mapFn(input) : input;
+    }
 
-    MappingFunction mapFn = nullptr;
+    /// Helper function that applies the mapping function without checking if
+    /// it's enabled.
+    /// This function is only enabled if MappingFunction is not convertible to
+    /// bool.
+    template <typename M = MappingFunction>
+    typename std::enable_if<!std::is_constructible<bool, M>::value,
+                            AnalogType>::type
+    mapFnHelper(AnalogType input) {
+        return mapFn(input);
+    }
+
+  private:
+    pin_t analogPin;
+    MappingFunction mapFn;
 
     static_assert(
         ADC_BITS + IncRes + FilterShiftFactor <= sizeof(FilterType) * CHAR_BIT,
@@ -178,6 +179,77 @@ class FilteredAnalog {
     EMA<FilterShiftFactor, FilterType> filter;
     Hysteresis<ADC_BITS + IncRes - Precision, AnalogType, AnalogType>
         hysteresis;
+};
+
+/**
+ * @brief   A class that reads and filters an analog input.
+ *
+ * A map function can be applied to the analog value (e.g. to compensate for
+ * logarithmic taper potentiometers or to calibrate the range). The analog input
+ * value is filtered using an exponential moving average filter. The default
+ * settings for this filter can be changed in Settings.hpp.  
+ * After filtering, hysteresis is applied to prevent flipping back and forth 
+ * between two values when the input is not changing.
+ * 
+ * @tparam  Precision
+ *          The number of bits of precision the output should have.
+ * @tparam  FilterShiftFactor
+ *          The number of bits used for the EMA filter.
+ *          The pole location is
+ *          @f$ 1 - \left(\frac{1}{2}\right)^{\text{FilterShiftFactor}} @f$.  
+ *          A lower shift factor means less filtering (@f$0@f$ is no filtering),
+ *          and a higher shift factor means more filtering (and more latency).
+ * @tparam  FilterType
+ *          The type to use for the intermediate types of the filter.  
+ *          Should be at least 
+ *          @f$ \text{ADC_BITS} + \text{IncRes} + 
+ *          \text{FilterShiftFactor} @f$ bits wide.
+ * @tparam  AnalogType
+ *          The type to use for the analog values.  
+ *          Should be at least @f$ \text{ADC_BITS} + \text{IncRes} @f$ 
+ *          bits wide.
+ * @tparam  IncRes
+ *          The number of bits to increase the resolution of the analog reading
+ *          by.
+ * 
+ * @ingroup AH_HardwareUtils
+ */
+template <uint8_t Precision = 10,
+          uint8_t FilterShiftFactor = ANALOG_FILTER_SHIFT_FACTOR,
+          class FilterType = ANALOG_FILTER_TYPE, class AnalogType = analog_t,
+          uint8_t IncRes = MaximumFilteredAnalogIncRes<
+              FilterShiftFactor, FilterType, AnalogType>::value>
+class FilteredAnalog
+    : public GenericFilteredAnalog<AnalogType (*)(AnalogType), Precision,
+                                   FilterShiftFactor, FilterType, AnalogType,
+                                   IncRes> {
+  public:
+    /**
+     * @brief   Construct a new FilteredAnalog object.
+     *
+     * @param   analogPin
+     *          The analog pin to read from.
+     */
+    FilteredAnalog(pin_t analogPin)
+        : GenericFilteredAnalog<AnalogType (*)(AnalogType), Precision,
+                                FilterShiftFactor, FilterType, AnalogType,
+                                IncRes>(analogPin, nullptr) {}
+
+    /// A function pointer to a mapping function to map analog values.
+    /// @see    map()
+    using MappingFunction = AnalogType (*)(AnalogType);
+
+    /**
+     * @brief   Invert the analog value. For example, if the precision is 10 
+     *          bits, when the analog input measures 1023, the output will be 0,
+     *          and when the analog input measures 0, the output will be 1023.
+     * 
+     * @note    This overrides the mapping function set by the `map` method.
+     */
+    void invert() {
+        constexpr AnalogType maxval = (1UL << (ADC_BITS + IncRes)) - 1;
+        this->map([](AnalogType val) -> AnalogType { return maxval - val; });
+    }
 };
 
 END_AH_NAMESPACE
