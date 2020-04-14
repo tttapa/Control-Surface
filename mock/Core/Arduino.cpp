@@ -22,6 +22,10 @@ int analogRead(uint8_t pin) {
     return ArduinoMock::getInstance().analogRead(pin);
 }
 
+void analogReadResolution(uint8_t bits) {
+    ArduinoMock::getInstance().analogReadResolution(bits);
+}
+
 void analogWrite(uint8_t pin, int value) {
     ArduinoMock::getInstance().analogWrite(pin, value);
 }
