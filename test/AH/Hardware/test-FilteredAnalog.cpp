@@ -228,3 +228,40 @@ TEST(GenericFilteredAnalog, MappingFunctionNoBool) {
 
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
+
+TEST(GenericFilteredAnalog, NonCopyableMovableMappingFunction) {
+    struct MappingFunction {
+        MappingFunction() = default;
+        MappingFunction(const MappingFunction &) = delete;
+        MappingFunction &operator=(const MappingFunction &) = delete;
+        MappingFunction(MappingFunction &&) = default;
+        MappingFunction &operator=(MappingFunction &&) = default;
+    };
+
+    pin_t pin = A0;
+    MappingFunction map1;
+    GenericFilteredAnalog<MappingFunction, 9, 0> analog = {
+        pin,
+        std::move(map1),
+    };
+
+    MappingFunction map2;
+    analog.map(std::move(map2));
+}
+
+TEST(GenericFilteredAnalog, NonCopyableNonMovableMappingFunction) {
+    struct MappingFunction {
+        MappingFunction() = default;
+        MappingFunction(const MappingFunction &) = delete;
+        MappingFunction &operator=(const MappingFunction &) = delete;
+        MappingFunction(MappingFunction &&) = delete;
+        MappingFunction &operator=(MappingFunction &&) = delete;
+    };
+
+    pin_t pin = A0;
+    MappingFunction map1;
+    GenericFilteredAnalog<MappingFunction &, 9, 0> analog = {
+        pin,
+        map1,
+    };
+}
