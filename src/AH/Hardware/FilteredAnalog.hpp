@@ -46,7 +46,7 @@ class GenericFilteredAnalog {
      * @param   mapFn
      *          The mapping function
      */
-    GenericFilteredAnalog(pin_t analogPin, MappingFunction &&mapFn)
+    GenericFilteredAnalog(pin_t analogPin, MappingFunction mapFn)
         : analogPin(analogPin), mapFn(std::forward<MappingFunction>(mapFn)) {}
 
     /**
@@ -65,7 +65,7 @@ class GenericFilteredAnalog {
      *          That's why the mapping function is applied after filtering and
      *          before hysteresis.
      */
-    void map(MappingFunction &&fn) {
+    void map(MappingFunction fn) {
         mapFn = std::forward<MappingFunction>(fn);
     }
 
