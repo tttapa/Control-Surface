@@ -12,6 +12,10 @@ AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <AH/Arduino-Wrapper.h> // Print
 AH_DIAGNOSTIC_POP()
 
+#ifdef ARDUINO_API_VERSION
+using arduino::Print;
+#endif
+
 /// @addtogroup  AH_PrintStream
 /// @{
 
