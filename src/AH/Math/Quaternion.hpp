@@ -3,17 +3,15 @@
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
-#include <AH/Math/Degrees.hpp>   // rad2deg()
-#include <AH/Math/MinMaxFix.hpp> // std::min
-#include <AH/Math/Vector.hpp>    // Vec3f
-#include <AH/STL/cmath>          // std::sqrt
-#include <AH/STL/limits>         // std::numeric_limits
+#include <AH/Arduino-Wrapper.h> // Print
+#include <AH/Math/Degrees.hpp>  // rad2deg()
+#include <AH/Math/Vector.hpp>   // Vec3f
+#include <AH/STL/cmath>         // std::sqrt
+#include <AH/STL/limits>        // std::numeric_limits
 
 #ifndef ARDUINO
 #include <iosfwd> // std::ostream
 #endif
-
-class Print;
 
 BEGIN_AH_NAMESPACE
 
