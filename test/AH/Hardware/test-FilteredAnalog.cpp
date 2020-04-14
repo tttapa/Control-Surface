@@ -264,4 +264,5 @@ TEST(GenericFilteredAnalog, NonCopyableNonMovableMappingFunction) {
         pin,
         map1,
     };
+    (void)analog;
 }
