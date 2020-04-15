@@ -9,8 +9,6 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 BEGIN_AH_NAMESPACE
 
-using ::operator<<;
-
 // LCOV_EXCL_START
 
 #ifndef ARDUINO

@@ -9,6 +9,8 @@
 #define FLUSH
 #endif
 
+BEGIN_AH_NAMESPACE
+
 /* #define OCT 8 */
 
 uint8_t formatPrintStream = DEC;
@@ -231,5 +233,7 @@ Print &printIntegral(Print &printer, T i) {
     }
     return printer;
 }
+
+END_AH_NAMESPACE
 
 // LCOV_EXCL_STOP
