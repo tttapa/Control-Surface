@@ -15,10 +15,6 @@ AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE
 
-#ifdef ARDUINO_API_VERSION
-using arduino::Print;
-#endif
-
 /// @addtogroup  AH_PrintStream
 /// @{
 
