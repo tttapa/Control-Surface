@@ -1,6 +1,6 @@
-[![Build Status](https://github.com/tttapa/Arduino-Helpers/workflows/CI%20Tests/badge.svg)](https://github.com/tttapa/Arduino-Helpers/actions)
+[![Build Status](https://github.com/tttapa/Arduino-Helpers/workflows/CI%20Tests/badge.svg#)](https://github.com/tttapa/Arduino-Helpers/actions)
 [![Test Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/tttapa/Arduino-Helpers/master/docs/Coverage/shield.io.coverage.json)](https://tttapa.github.io/Arduino-Helpers/Coverage/index.html)
-[![Build Status](https://travis-ci.org/tttapa/Arduino-Helpers.svg?branch=master)](https://travis-ci.org/tttapa/Arduino-Helpers)
+[![Build Status](https://travis-ci.org/tttapa/Arduino-Helpers.svg#?branch=master)](https://travis-ci.org/tttapa/Arduino-Helpers)
 [![GitHub](https://img.shields.io/github/stars/tttapa/Arduino-Helpers?label=GitHub&logo=github)](https://github.com/tttapa/Arduino-Helpers)
 
 # Arduino Helpers
