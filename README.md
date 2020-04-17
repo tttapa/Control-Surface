@@ -11,8 +11,8 @@
 - **Extended Input/Output**: Use shift registers (e.g. 74HC595) and multiplexers
   (e.g. 74HC4051, 74HC4067) as if they were normal Arduino IO pins.
 - **Hardware Utilities**: Debounced buttons, long press buttons, button 
-  matrices, filtered analog inputs, LED ranges, MAX7219 displays and LED 
-  matrices.
+  matrices, filtered analog inputs, MCP23017 Rotary Encoders, LED ranges, 
+  MAX7219 displays and LED matrices.
 - **Filters**: Exponential Moving Average filters, Hysteresis.
 - **Math functions**: `min` and `max` functions instead of macros, functions
   for uniformly increasing the bit depth of signals, all C++ standard library 

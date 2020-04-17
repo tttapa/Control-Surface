@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hysteresis_600',['Hysteresis',['../d2/dcb/classHysteresis.html',1,'']]],
-  ['hysteresis_3c_20adc_5fbits_2bmin_28sizeof_28analog_5ffilter_5ftype_29_20_2achar_5fbit_20_2d_20adc_5fbits_20_2d_20analog_5ffilter_5fshift_5ffactor_2c_20sizeof_28analog_5ft_29_20_2achar_5fbit_20_2d_20adc_5fbits_29_20_2d_2010_2c_20analog_5ft_2c_20analog_5ft_20_3e_601',['Hysteresis&lt; ADC_BITS+min(sizeof(ANALOG_FILTER_TYPE) *CHAR_BIT - ADC_BITS - ANALOG_FILTER_SHIFT_FACTOR, sizeof(analog_t) *CHAR_BIT - ADC_BITS) - 10, analog_t, analog_t &gt;',['../d2/dcb/classHysteresis.html',1,'']]]
+  ['genericfilteredanalog_602',['GenericFilteredAnalog',['../dc/d91/classGenericFilteredAnalog.html',1,'']]],
+  ['genericfilteredanalog_3c_20analog_5ft_28_2a_29_28analog_5ft_29_2c_2010_2c_20analog_5ffilter_5fshift_5ffactor_2c_20analog_5ffilter_5ftype_2c_20analog_5ft_2c_20maximumfilteredanalogincres_3c_20analog_5ffilter_5fshift_5ffactor_2c_20analog_5ffilter_5ftype_2c_20analog_5ft_20_3e_3a_3avalue_20_3e_603',['GenericFilteredAnalog&lt; analog_t(*)(analog_t), 10, ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t, MaximumFilteredAnalogIncRes&lt; ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t &gt;::value &gt;',['../dc/d91/classGenericFilteredAnalog.html',1,'']]]
 ];

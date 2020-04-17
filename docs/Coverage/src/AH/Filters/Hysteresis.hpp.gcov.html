@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - a3fda74847ede684b2b981b3939eea84776f418f - src/AH/Filters/Hysteresis.hpp</title>
+  <title>LCOV - 42e1dd0b397bacd1ff62a86a7c079717d33b79c5 - src/AH/Filters/Hysteresis.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">a3fda74847ede684b2b981b3939eea84776f418f</td>
+            <td class="headerValue">42e1dd0b397bacd1ff62a86a7c079717d33b79c5</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">12</td>
@@ -37,11 +37,11 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-04-09 14:54:24</td>
+            <td class="headerValue">2020-04-17 18:32:00</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">6</td>
-            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">9</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -103,7 +103,7 @@
 <a name="33"><span class="lineNum">      33 </span>            :  *          Increasing this number will result in a decrease in fluctuations.</a>
 <a name="34"><span class="lineNum">      34 </span>            :  */</a>
 <a name="35"><span class="lineNum">      35 </span>            : template &lt;uint8_t BITS, class T_in = uint16_t, class T_out = uint8_t&gt;</a>
-<a name="36"><span class="lineNum">      36 </span><span class="lineCov">          5 : class Hysteresis {</span></a>
+<a name="36"><span class="lineNum">      36 </span><span class="lineCov">         12 : class Hysteresis {</span></a>
 <a name="37"><span class="lineNum">      37 </span>            :   public:</a>
 <a name="38"><span class="lineNum">      38 </span>            :     /**</a>
 <a name="39"><span class="lineNum">      39 </span>            :      * @brief   Update the hysteresis output with a new input value.</a>
@@ -115,26 +115,26 @@
 <a name="45"><span class="lineNum">      45 </span>            :      * @retval  false</a>
 <a name="46"><span class="lineNum">      46 </span>            :      *          The output level is still the same.</a>
 <a name="47"><span class="lineNum">      47 </span>            :      */</a>
-<a name="48"><span class="lineNum">      48 </span><span class="lineCov">         76 :     bool update(T_in inputLevel) {</span></a>
-<a name="49"><span class="lineNum">      49 </span><span class="lineCov">         76 :         T_in prevLevelFull = (T_in(prevLevel) &lt;&lt; BITS) | offset;</span></a>
-<a name="50"><span class="lineNum">      50 </span><span class="lineCov">         76 :         T_in lowerbound = prevLevel &gt; 0 ? prevLevelFull - margin : 0;</span></a>
-<a name="51"><span class="lineNum">      51 </span><span class="lineCov">         76 :         T_in upperbound = prevLevel &lt; max_out ? prevLevelFull + margin : max_in;</span></a>
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">         76 :         if (inputLevel &lt; lowerbound || inputLevel &gt; upperbound) {</span></a>
-<a name="53"><span class="lineNum">      53 </span><span class="lineCov">         22 :             prevLevel = inputLevel &gt;&gt; BITS;</span></a>
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">         22 :             return true;</span></a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">        100 :     bool update(T_in inputLevel) {</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">        100 :         T_in prevLevelFull = (T_in(prevLevel) &lt;&lt; BITS) | offset;</span></a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">        100 :         T_in lowerbound = prevLevel &gt; 0 ? prevLevelFull - margin : 0;</span></a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">        100 :         T_in upperbound = prevLevel &lt; max_out ? prevLevelFull + margin : max_in;</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">        100 :         if (inputLevel &lt; lowerbound || inputLevel &gt; upperbound) {</span></a>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">         34 :             prevLevel = inputLevel &gt;&gt; BITS;</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">         34 :             return true;</span></a>
 <a name="55"><span class="lineNum">      55 </span>            :         }</a>
-<a name="56"><span class="lineNum">      56 </span><span class="lineCov">         54 :         return false;</span></a>
-<a name="57"><span class="lineNum">      57 </span><span class="lineCov">         76 :     }</span></a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">         66 :         return false;</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">        100 :     }</span></a>
 <a name="58"><span class="lineNum">      58 </span>            : </a>
 <a name="59"><span class="lineNum">      59 </span>            :     /**</a>
 <a name="60"><span class="lineNum">      60 </span>            :      * @brief   Get the current output level.</a>
 <a name="61"><span class="lineNum">      61 </span>            :      *</a>
 <a name="62"><span class="lineNum">      62 </span>            :      * @return  The output level.</a>
 <a name="63"><span class="lineNum">      63 </span>            :      */</a>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         76 :     T_out getValue() const { return prevLevel; }</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">        121 :     T_out getValue() const { return prevLevel; }</span></a>
 <a name="65"><span class="lineNum">      65 </span>            : </a>
 <a name="66"><span class="lineNum">      66 </span>            :   private:</a>
-<a name="67"><span class="lineNum">      67 </span><span class="lineCov">          5 :     T_out prevLevel = 0;</span></a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">         12 :     T_out prevLevel = 0;</span></a>
 <a name="68"><span class="lineNum">      68 </span>            :     constexpr static T_in margin = (1UL &lt;&lt; BITS) - 1;</a>
 <a name="69"><span class="lineNum">      69 </span>            :     constexpr static T_in offset = 1UL &lt;&lt; (BITS - 1);</a>
 <a name="70"><span class="lineNum">      70 </span>            :     constexpr static T_in max_in = -1;</a>

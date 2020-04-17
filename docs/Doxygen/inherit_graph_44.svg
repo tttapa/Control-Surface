@@ -12,9 +12,9 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:href="d0/dc7/structVec3f.html" target="_top" xlink:title="Type for 3D vectors of floating point numbers.">
+<g id="a_node1"><a xlink:href="dc/da0/structVec2f.html" target="_top" xlink:title="Type for 2D vectors of floating point numbers.">
 <polygon fill="#ffffff" stroke="#000000" points="0,-.5 0,-19.5 42,-19.5 42,-.5 0,-.5"/>
-<text text-anchor="middle" x="21" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Vec3f</text>
+<text text-anchor="middle" x="21" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Vec2f</text>
 </a>
 </g>
 </g>

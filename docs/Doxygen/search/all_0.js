@@ -26,7 +26,7 @@ var searchData=
   ['analogmultiplex_23',['AnalogMultiplex',['../d7/d8d/classAnalogMultiplex.html',1,'AnalogMultiplex&lt; N &gt;'],['../d7/d8d/classAnalogMultiplex.html#a0a2d2327d5aa0996c8a1009ce63a4737',1,'AnalogMultiplex::AnalogMultiplex()']]],
   ['analogmultiplex_2ecpp_24',['AnalogMultiplex.cpp',['../de/d16/AnalogMultiplex_8cpp.html',1,'']]],
   ['analogmultiplex_2ehpp_25',['AnalogMultiplex.hpp',['../d7/def/AnalogMultiplex_8hpp.html',1,'']]],
-  ['analogpin_26',['analogPin',['../d7/d8d/classAnalogMultiplex.html#a66f65580427e2512fca5f49b4742f5d8',1,'AnalogMultiplex::analogPin()'],['../da/da7/classFilteredAnalog.html#a14a694c01cf8f7a34d197120c9cd5906',1,'FilteredAnalog::analogPin()']]],
+  ['analogpin_26',['analogPin',['../d7/d8d/classAnalogMultiplex.html#a66f65580427e2512fca5f49b4742f5d8',1,'AnalogMultiplex::analogPin()'],['../dc/d91/classGenericFilteredAnalog.html#a14a694c01cf8f7a34d197120c9cd5906',1,'GenericFilteredAnalog::analogPin()']]],
   ['analogread_27',['analogRead',['../d7/d8d/classAnalogMultiplex.html#a6e6cf5e65d0f38cba3839725bfaca7b5',1,'AnalogMultiplex::analogRead()'],['../de/d4e/classExtendedIOElement.html#a70bb6c81cd8f0e50ea49756cdf5d25a5',1,'ExtendedIOElement::analogRead()'],['../dc/d19/classMAX7219.html#a95dfb56a8e54b9a627916371b91648f7',1,'MAX7219::analogRead()'],['../d8/db4/classShiftRegisterOutBase.html#a95dfb56a8e54b9a627916371b91648f7',1,'ShiftRegisterOutBase::analogRead()'],['../d8/d3d/namespaceExtIO.html#aa9e5896aa520b8b2d65e1828032ee6a2',1,'ExtIO::analogRead(pin_t pin)'],['../d8/d3d/namespaceExtIO.html#afc10d6ffc969685e9f11070f814234a0',1,'ExtIO::analogRead(int pin)']]],
   ['analogreadbuffered_28',['analogReadBuffered',['../d7/d8d/classAnalogMultiplex.html#ab135b538148933155a92cc289e9a2e8b',1,'AnalogMultiplex::analogReadBuffered()'],['../de/d4e/classExtendedIOElement.html#af968d6b0058121e22c45c31131e6855d',1,'ExtendedIOElement::analogReadBuffered()'],['../dc/d19/classMAX7219.html#a0aa77f1d019d8c1230696b0f7eed790d',1,'MAX7219::analogReadBuffered()'],['../d8/db4/classShiftRegisterOutBase.html#a0aa77f1d019d8c1230696b0f7eed790d',1,'ShiftRegisterOutBase::analogReadBuffered()'],['../d8/d3d/namespaceExtIO.html#acd6b7dafd80f43436d5bafe07d4d5df8',1,'ExtIO::analogReadBuffered(pin_t pin)'],['../d8/d3d/namespaceExtIO.html#aa88b1454a76af770354ae6564a12c21e',1,'ExtIO::analogReadBuffered(int pin)']]],
   ['analogwrite_29',['analogWrite',['../d7/d8d/classAnalogMultiplex.html#a251172dbebd68a9bf81f2ea0b47a2315',1,'AnalogMultiplex::analogWrite()'],['../de/d4e/classExtendedIOElement.html#ab3a89ee952ad360c12d8a5385b296392',1,'ExtendedIOElement::analogWrite()'],['../dc/d19/classMAX7219.html#a11243cbfdd8502261b8aca0e4b1ce829',1,'MAX7219::analogWrite()'],['../d8/db4/classShiftRegisterOutBase.html#a11243cbfdd8502261b8aca0e4b1ce829',1,'ShiftRegisterOutBase::analogWrite()'],['../d8/d3d/namespaceExtIO.html#a5aa3b4dbb8bfffdd022e1f5bb8dc5784',1,'ExtIO::analogWrite(pin_t pin, analog_t val)'],['../d8/d3d/namespaceExtIO.html#a91f6280a1573205c324783d55f91b0d2',1,'ExtIO::analogWrite(int pin, analog_t val)'],['../d8/d3d/namespaceExtIO.html#abc9bba50fc4f0e8c8e3ee16dde83c517',1,'ExtIO::analogWrite(int pin, int val)'],['../d8/d3d/namespaceExtIO.html#aa12648190e21d162949587c009ef294b',1,'ExtIO::analogWrite(pin_t pin, int val)']]],
@@ -41,13 +41,10 @@ var searchData=
   ['array_2ecpp_38',['Array.cpp',['../d1/d32/Array_8cpp.html',1,'']]],
   ['array_2ehpp_39',['Array.hpp',['../de/d76/Array_8hpp.html',1,'']]],
   ['array2d_40',['Array2D',['../da/de8/group__AH__Containers.html#ga65347c7f97dc7e8e602fb77ac735f585',1,'Array.hpp']]],
-  ['array_3c_20n_20_3e_41',['Array&lt; N &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20nb_5fcols_20_3e_42',['Array&lt; nb_cols &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20nb_5frows_20_3e_43',['Array&lt; nb_rows &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20pin_5ft_2c_20n_20_3e_44',['Array&lt; pin_t, N &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20uint8_5ft_2c_208_20_2a1_20_3e_45',['Array&lt; uint8_t, 8 *1 &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['arrayhelpers_2ecpp_46',['ArrayHelpers.cpp',['../db/d93/ArrayHelpers_8cpp.html',1,'']]],
-  ['arrayhelpers_2ehpp_47',['ArrayHelpers.hpp',['../d5/db6/ArrayHelpers_8hpp.html',1,'']]],
-  ['arrayslice_48',['ArraySlice',['../df/de0/classArraySlice.html',1,'ArraySlice&lt; T, N, Reverse, Const &gt;'],['../df/de0/classArraySlice.html#a4d1735860de2456adfc31f3472b6d874',1,'ArraySlice::ArraySlice()']]],
-  ['asarray_49',['asArray',['../df/de0/classArraySlice.html#adb626672a33880a352b7a56edfb3d29f',1,'ArraySlice']]]
+  ['array_3c_20pin_5ft_2c_20n_20_3e_41',['Array&lt; pin_t, N &gt;',['../d7/d6a/structArray.html',1,'']]],
+  ['array_3c_20uint8_5ft_2c_208_20_2a1_20_3e_42',['Array&lt; uint8_t, 8 *1 &gt;',['../d7/d6a/structArray.html',1,'']]],
+  ['arrayhelpers_2ecpp_43',['ArrayHelpers.cpp',['../db/d93/ArrayHelpers_8cpp.html',1,'']]],
+  ['arrayhelpers_2ehpp_44',['ArrayHelpers.hpp',['../d5/db6/ArrayHelpers_8hpp.html',1,'']]],
+  ['arrayslice_45',['ArraySlice',['../df/de0/classArraySlice.html',1,'ArraySlice&lt; T, N, Reverse, Const &gt;'],['../df/de0/classArraySlice.html#a4d1735860de2456adfc31f3472b6d874',1,'ArraySlice::ArraySlice()']]],
+  ['asarray_46',['asArray',['../df/de0/classArraySlice.html#adb626672a33880a352b7a56edfb3d29f',1,'ArraySlice']]]
 ];

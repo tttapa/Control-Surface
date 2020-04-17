@@ -1,12 +1,14 @@
 <map id="Quaternion.hpp" name="Quaternion.hpp">
-<area shape="rect" id="node1" title="Definition of Quaternion and EulerAngles." alt="" coords="645,5,755,32"/>
-<area shape="rect" id="node2" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="477,229,654,256"/>
-<area shape="rect" id="node3" href="$de/d79/Degrees_8hpp.html" title="Conversions between radians and degrees." alt="" coords="681,80,833,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="603,155,712,181"/>
-<area shape="rect" id="node5" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="274,80,441,107"/>
-<area shape="rect" id="node9" href="$de/dd9/Vector_8hpp.html" title="Definition of Vec2f and Vec3f." alt="" coords="465,80,607,107"/>
-<area shape="rect" id="node10" title=" " alt="" coords="908,80,1012,107"/>
-<area shape="rect" id="node6" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="5,155,213,181"/>
-<area shape="rect" id="node8" href="$dc/dc7/NamespaceSettings_8hpp.html" title=" " alt="" coords="237,155,477,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="71,229,148,256"/>
+<area shape="rect" id="node1" title="Definition of Quaternion and EulerAngles." alt="" coords="231,5,342,32"/>
+<area shape="rect" id="node2" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="176,379,354,405"/>
+<area shape="rect" id="node3" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="380,155,534,181"/>
+<area shape="rect" id="node9" href="$de/d79/Degrees_8hpp.html" title="Conversions between radians and degrees." alt="" coords="44,80,196,107"/>
+<area shape="rect" id="node10" title=" " alt="" coords="126,155,236,181"/>
+<area shape="rect" id="node11" href="$de/dd9/Vector_8hpp.html" title="Definition of Vec2f and Vec3f." alt="" coords="270,80,412,107"/>
+<area shape="rect" id="node12" title=" " alt="" coords="486,80,590,107"/>
+<area shape="rect" id="node4" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="374,229,540,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="753,379,830,405"/>
+<area shape="rect" id="node8" title=" " alt="" coords="564,229,699,256"/>
+<area shape="rect" id="node5" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="617,304,825,331"/>
+<area shape="rect" id="node7" href="$dc/dc7/NamespaceSettings_8hpp.html" title=" " alt="" coords="353,304,593,331"/>
 </map>

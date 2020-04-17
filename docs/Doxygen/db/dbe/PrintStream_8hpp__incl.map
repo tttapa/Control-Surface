@@ -1,10 +1,10 @@
 <map id="PrintStream.hpp" name="PrintStream.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="81,5,197,32"/>
-<area shape="rect" id="node2" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="5,304,183,331"/>
-<area shape="rect" id="node3" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="423,80,576,107"/>
-<area shape="rect" id="node4" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="276,155,443,181"/>
-<area shape="rect" id="node6" title=" " alt="" coords="405,304,482,331"/>
-<area shape="rect" id="node8" title=" " alt="" coords="679,155,813,181"/>
-<area shape="rect" id="node5" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="131,229,339,256"/>
-<area shape="rect" id="node7" href="$dc/dc7/NamespaceSettings_8hpp.html" title=" " alt="" coords="363,229,603,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="172,5,288,32"/>
+<area shape="rect" id="node2" href="$dc/dc7/NamespaceSettings_8hpp.html" title=" " alt="" coords="31,229,271,256"/>
+<area shape="rect" id="node3" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="452,304,629,331"/>
+<area shape="rect" id="node4" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="38,80,192,107"/>
+<area shape="rect" id="node5" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="284,155,450,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="152,304,230,331"/>
+<area shape="rect" id="node8" title=" " alt="" coords="48,155,182,181"/>
+<area shape="rect" id="node6" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="295,229,503,256"/>
 </map>

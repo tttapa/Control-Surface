@@ -1,63 +1,63 @@
 <map id="Warnings.hpp" name="Warnings.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="1461,5,1563,32"/>
-<area shape="rect" id="node2" href="$de/d76/Array_8hpp.html" title=" " alt="" coords="297,528,375,555"/>
-<area shape="rect" id="node3" href="$d5/db6/ArrayHelpers_8hpp.html" title=" " alt="" coords="749,603,872,629"/>
-<area shape="rect" id="node4" href="$d2/d05/StaticSizeExtendedIOElement_8hpp.html" title=" " alt="" coords="801,827,1025,853"/>
-<area shape="rect" id="node5" href="$d7/def/AnalogMultiplex_8hpp.html" title=" " alt="" coords="637,901,776,928"/>
-<area shape="rect" id="node6" href="$d2/d25/MAX7219_8hpp.html" title=" " alt="" coords="1356,901,1460,928"/>
-<area shape="rect" id="node7" href="$d8/d93/ShiftRegisterOutBase_8hpp.html" title=" " alt="" coords="1545,901,1719,928"/>
-<area shape="rect" id="node8" href="$d0/db4/ShiftRegisterOut_8hpp.html" title=" " alt="" coords="2141,976,2285,1003"/>
-<area shape="rect" id="node11" href="$d7/d88/SPIShiftRegisterOut_8hpp.html" title=" " alt="" coords="1423,976,1590,1003"/>
-<area shape="rect" id="node13" href="$d4/d35/Hardware-Types_8hpp.html" title=" " alt="" coords="1131,603,1274,629"/>
-<area shape="rect" id="node14" href="$d9/d4b/ButtonMatrix_8hpp.html" title=" " alt="" coords="855,677,977,704"/>
-<area shape="rect" id="node16" href="$dd/ddf/ExtendedInputOutput_8hpp.html" title=" " alt="" coords="1883,677,2053,704"/>
-<area shape="rect" id="node17" href="$d4/db3/Button_8hpp.html" title=" " alt="" coords="2351,752,2436,779"/>
-<area shape="rect" id="node19" href="$d5/d04/IncrementButton_8hpp.html" title=" " alt="" coords="2551,827,2694,853"/>
-<area shape="rect" id="node21" href="$df/df5/IncrementDecrementButtons_8hpp.html" title=" " alt="" coords="2859,827,3074,853"/>
-<area shape="rect" id="node23" href="$d4/d57/ExtendedIOElement_8hpp.html" title=" " alt="" coords="539,752,703,779"/>
-<area shape="rect" id="node24" href="$d6/d3c/ExtendedInputOutput_8cpp.html" title=" " alt="" coords="468,827,639,853"/>
-<area shape="rect" id="node25" href="$da/d1f/ExtendedIOElement_8cpp.html" title=" " alt="" coords="161,827,325,853"/>
-<area shape="rect" id="node26" href="$d8/df3/FilteredAnalog_8hpp.html" title=" " alt="" coords="2460,752,2591,779"/>
-<area shape="rect" id="node27" href="$d9/d4f/LEDs_8hpp.html" title=" " alt="" coords="3004,752,3084,779"/>
-<area shape="rect" id="node28" href="$d6/d3a/DotBarDisplayLEDs_8hpp.html" title=" " alt="" coords="3099,827,3264,853"/>
-<area shape="rect" id="node29" href="$d7/d13/MAX7219__Base_8hpp.html" title=" " alt="" coords="2064,752,2205,779"/>
-<area shape="rect" id="node30" href="$d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html" title=" " alt="" coords="2040,827,2277,853"/>
-<area shape="rect" id="node31" href="$d8/dd2/MCP23017Encoders_8hpp.html" title=" " alt="" coords="1595,752,1762,779"/>
-<area shape="rect" id="node32" href="$d1/d40/BitArray_8hpp.html" title=" " alt="" coords="1273,827,1367,853"/>
-<area shape="rect" id="node33" href="$de/dd1/LinkedList_8hpp.html" title=" " alt="" coords="573,453,680,480"/>
-<area shape="rect" id="node34" href="$d4/d93/Updatable_8hpp.html" title=" " alt="" coords="704,528,811,555"/>
-<area shape="rect" id="node35" href="$de/d7e/UniquePtr_8hpp.html" title=" " alt="" coords="3159,80,3265,107"/>
-<area shape="rect" id="node36" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="675,379,760,405"/>
-<area shape="rect" id="node38" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="373,453,448,480"/>
-<area shape="rect" id="node39" href="$d6/df4/Exit_8cpp.html" title=" " alt="" coords="609,528,679,555"/>
-<area shape="rect" id="node41" href="$d2/dd5/SettingsWrapper_8hpp.html" title=" " alt="" coords="1624,453,1768,480"/>
-<area shape="rect" id="node42" href="$d1/d1f/ShiftRegisterOutRGB_8hpp.html" title=" " alt="" coords="1584,528,1757,555"/>
-<area shape="rect" id="node44" href="$d3/df0/EMA_8hpp.html" title=" " alt="" coords="2562,677,2638,704"/>
-<area shape="rect" id="node45" href="$d3/d09/Hysteresis_8hpp.html" title=" " alt="" coords="2578,229,2689,256"/>
-<area shape="rect" id="node46" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions. By default, the library automatically selec..." alt="" coords="2220,304,2335,331"/>
-<area shape="rect" id="node48" href="$de/d79/Degrees_8hpp.html" title="Conversions between radians and degrees." alt="" coords="1143,155,1239,181"/>
-<area shape="rect" id="node49" href="$d3/d1f/Quaternion_8hpp.html" title="Definition of Quaternion and EulerAngles." alt="" coords="1135,229,1246,256"/>
-<area shape="rect" id="node51" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="1625,80,1777,107"/>
-<area shape="rect" id="node52" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="1635,155,1746,181"/>
-<area shape="rect" id="node54" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="987,304,1103,331"/>
-<area shape="rect" id="node57" href="$d1/dd0/MillisMicrosTimer_8hpp.html" title=" " alt="" coords="1945,304,2095,331"/>
-<area shape="rect" id="node59" href="$d5/dee/IncreaseBitDepth_8hpp.html" title=" " alt="" coords="2629,80,2777,107"/>
-<area shape="rect" id="node60" href="$de/dd9/Vector_8hpp.html" title="Definition of Vec2f and Vec3f." alt="" coords="1263,155,1348,181"/>
-<area shape="rect" id="node61" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="2293,155,2401,181"/>
-<area shape="rect" id="node10" href="$d5/d47/ShiftRegisterOutBase_8ipp.html" title=" " alt="" coords="1643,976,1813,1003"/>
-<area shape="rect" id="node9" href="$de/d95/ShiftRegisterOut_8ipp.html" title=" " alt="" coords="2143,1051,2283,1077"/>
-<area shape="rect" id="node12" href="$da/d45/SPIShiftRegisterOut_8ipp.html" title=" " alt="" coords="1425,1051,1588,1077"/>
-<area shape="rect" id="node15" href="$d5/d41/ButtonMatrix_8ipp.html" title=" " alt="" coords="845,752,963,779"/>
-<area shape="rect" id="node18" href="$de/dd1/Button_8cpp.html" title=" " alt="" coords="2352,827,2437,853"/>
-<area shape="rect" id="node20" href="$db/d9d/IncrementButton_8cpp.html" title=" " alt="" coords="2551,901,2694,928"/>
-<area shape="rect" id="node22" href="$da/d66/IncrementDecrementButtons_8cpp.html" title=" " alt="" coords="2859,901,3074,928"/>
-<area shape="rect" id="node37" href="$df/d66/Debug_8cpp.html" title=" " alt="" coords="704,453,789,480"/>
-<area shape="rect" id="node40" href="$d4/d1b/vector_8cpp.html" title=" " alt="" coords="451,528,533,555"/>
-<area shape="rect" id="node43" href="$db/d0b/ShiftRegisterOutRGB_8cpp.html" title=" " alt="" coords="1544,603,1717,629"/>
-<area shape="rect" id="node47" href="$db/d02/Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="2230,379,2325,405"/>
-<area shape="rect" id="node50" href="$d4/d11/Quaternion_8cpp.html" title=" " alt="" coords="1127,379,1238,405"/>
-<area shape="rect" id="node53" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="1881,229,2012,256"/>
-<area shape="rect" id="node58" href="$dc/de6/Arduino__Helpers_8h.html" title="Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t..." alt="" coords="1626,229,1755,256"/>
-<area shape="rect" id="node55" href="$dd/d4e/Vector_8cpp.html" title=" " alt="" coords="1263,379,1348,405"/>
-<area shape="rect" id="node56" href="$da/d69/PrintStream_8cpp.html" title=" " alt="" coords="987,379,1103,405"/>
+<area shape="rect" id="node1" title=" " alt="" coords="1502,5,1605,32"/>
+<area shape="rect" id="node2" href="$de/d76/Array_8hpp.html" title=" " alt="" coords="833,528,911,555"/>
+<area shape="rect" id="node3" href="$d5/db6/ArrayHelpers_8hpp.html" title=" " alt="" coords="1044,603,1167,629"/>
+<area shape="rect" id="node4" href="$d2/d05/StaticSizeExtendedIOElement_8hpp.html" title=" " alt="" coords="993,827,1217,853"/>
+<area shape="rect" id="node5" href="$d7/def/AnalogMultiplex_8hpp.html" title=" " alt="" coords="875,901,1013,928"/>
+<area shape="rect" id="node6" href="$d2/d25/MAX7219_8hpp.html" title=" " alt="" coords="1128,901,1232,928"/>
+<area shape="rect" id="node7" href="$d8/d93/ShiftRegisterOutBase_8hpp.html" title=" " alt="" coords="1721,901,1895,928"/>
+<area shape="rect" id="node8" href="$d0/db4/ShiftRegisterOut_8hpp.html" title=" " alt="" coords="2035,976,2179,1003"/>
+<area shape="rect" id="node11" href="$d7/d88/SPIShiftRegisterOut_8hpp.html" title=" " alt="" coords="1397,976,1563,1003"/>
+<area shape="rect" id="node13" href="$d4/d35/Hardware-Types_8hpp.html" title=" " alt="" coords="723,603,866,629"/>
+<area shape="rect" id="node14" href="$d9/d4b/ButtonMatrix_8hpp.html" title=" " alt="" coords="694,677,815,704"/>
+<area shape="rect" id="node16" href="$dd/ddf/ExtendedInputOutput_8hpp.html" title=" " alt="" coords="1681,677,1852,704"/>
+<area shape="rect" id="node17" href="$d4/db3/Button_8hpp.html" title=" " alt="" coords="2304,752,2389,779"/>
+<area shape="rect" id="node19" href="$d5/d04/IncrementButton_8hpp.html" title=" " alt="" coords="2345,827,2487,853"/>
+<area shape="rect" id="node21" href="$df/df5/IncrementDecrementButtons_8hpp.html" title=" " alt="" coords="2511,827,2726,853"/>
+<area shape="rect" id="node23" href="$d4/d57/ExtendedIOElement_8hpp.html" title=" " alt="" coords="509,752,673,779"/>
+<area shape="rect" id="node24" href="$d6/d3c/ExtendedInputOutput_8cpp.html" title=" " alt="" coords="457,827,628,853"/>
+<area shape="rect" id="node25" href="$da/d1f/ExtendedIOElement_8cpp.html" title=" " alt="" coords="222,827,386,853"/>
+<area shape="rect" id="node26" href="$d8/df3/FilteredAnalog_8hpp.html" title=" " alt="" coords="2891,752,3021,779"/>
+<area shape="rect" id="node27" href="$d9/d4f/LEDs_8hpp.html" title=" " alt="" coords="2787,752,2867,779"/>
+<area shape="rect" id="node28" href="$d6/d3a/DotBarDisplayLEDs_8hpp.html" title=" " alt="" coords="2953,827,3119,853"/>
+<area shape="rect" id="node29" href="$d7/d13/MAX7219__Base_8hpp.html" title=" " alt="" coords="1844,752,1985,779"/>
+<area shape="rect" id="node30" href="$d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html" title=" " alt="" coords="1821,827,2059,853"/>
+<area shape="rect" id="node31" href="$d8/dd2/MCP23017Encoders_8hpp.html" title=" " alt="" coords="1275,752,1442,779"/>
+<area shape="rect" id="node32" href="$d1/d40/BitArray_8hpp.html" title=" " alt="" coords="1297,827,1391,853"/>
+<area shape="rect" id="node33" href="$de/dd1/LinkedList_8hpp.html" title=" " alt="" coords="801,453,908,480"/>
+<area shape="rect" id="node34" href="$d4/d93/Updatable_8hpp.html" title=" " alt="" coords="600,528,707,555"/>
+<area shape="rect" id="node35" href="$de/d7e/UniquePtr_8hpp.html" title=" " alt="" coords="3227,80,3333,107"/>
+<area shape="rect" id="node36" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="903,379,988,405"/>
+<area shape="rect" id="node38" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="399,453,473,480"/>
+<area shape="rect" id="node39" href="$d6/df4/Exit_8cpp.html" title=" " alt="" coords="246,528,317,555"/>
+<area shape="rect" id="node41" href="$d2/dd5/SettingsWrapper_8hpp.html" title=" " alt="" coords="2184,453,2328,480"/>
+<area shape="rect" id="node42" href="$d1/d1f/ShiftRegisterOutRGB_8hpp.html" title=" " alt="" coords="2285,528,2459,555"/>
+<area shape="rect" id="node44" href="$d3/df0/EMA_8hpp.html" title=" " alt="" coords="2990,229,3066,256"/>
+<area shape="rect" id="node45" href="$d3/d09/Hysteresis_8hpp.html" title=" " alt="" coords="3041,677,3151,704"/>
+<area shape="rect" id="node46" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions. By default, the library automatically selec..." alt="" coords="2184,304,2299,331"/>
+<area shape="rect" id="node48" href="$de/d79/Degrees_8hpp.html" title="Conversions between radians and degrees." alt="" coords="1395,155,1491,181"/>
+<area shape="rect" id="node49" href="$d3/d1f/Quaternion_8hpp.html" title="Definition of Quaternion and EulerAngles." alt="" coords="1517,379,1627,405"/>
+<area shape="rect" id="node51" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="1616,80,1768,107"/>
+<area shape="rect" id="node52" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="1602,155,1713,181"/>
+<area shape="rect" id="node54" href="$de/dd9/Vector_8hpp.html" title="Definition of Vec2f and Vec3f." alt="" coords="1344,304,1429,331"/>
+<area shape="rect" id="node56" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="1153,304,1269,331"/>
+<area shape="rect" id="node58" href="$d1/dd0/MillisMicrosTimer_8hpp.html" title=" " alt="" coords="1808,304,1957,331"/>
+<area shape="rect" id="node60" href="$d5/dee/IncreaseBitDepth_8hpp.html" title=" " alt="" coords="2791,80,2939,107"/>
+<area shape="rect" id="node61" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="2274,155,2382,181"/>
+<area shape="rect" id="node10" href="$d5/d47/ShiftRegisterOutBase_8ipp.html" title=" " alt="" coords="1761,976,1932,1003"/>
+<area shape="rect" id="node9" href="$de/d95/ShiftRegisterOut_8ipp.html" title=" " alt="" coords="2037,1051,2177,1077"/>
+<area shape="rect" id="node12" href="$da/d45/SPIShiftRegisterOut_8ipp.html" title=" " alt="" coords="1399,1051,1561,1077"/>
+<area shape="rect" id="node15" href="$d5/d41/ButtonMatrix_8ipp.html" title=" " alt="" coords="697,752,815,779"/>
+<area shape="rect" id="node18" href="$de/dd1/Button_8cpp.html" title=" " alt="" coords="2235,827,2320,853"/>
+<area shape="rect" id="node20" href="$db/d9d/IncrementButton_8cpp.html" title=" " alt="" coords="2345,901,2487,928"/>
+<area shape="rect" id="node22" href="$da/d66/IncrementDecrementButtons_8cpp.html" title=" " alt="" coords="2511,901,2726,928"/>
+<area shape="rect" id="node37" href="$df/d66/Debug_8cpp.html" title=" " alt="" coords="932,453,1017,480"/>
+<area shape="rect" id="node40" href="$d4/d1b/vector_8cpp.html" title=" " alt="" coords="443,528,525,555"/>
+<area shape="rect" id="node43" href="$db/d0b/ShiftRegisterOutRGB_8cpp.html" title=" " alt="" coords="2285,603,2459,629"/>
+<area shape="rect" id="node47" href="$db/d02/Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="2209,379,2303,405"/>
+<area shape="rect" id="node50" href="$d4/d11/Quaternion_8cpp.html" title=" " alt="" coords="1221,453,1331,480"/>
+<area shape="rect" id="node53" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="1709,229,1840,256"/>
+<area shape="rect" id="node59" href="$dc/de6/Arduino__Helpers_8h.html" title="Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t..." alt="" coords="1555,229,1685,256"/>
+<area shape="rect" id="node55" href="$dd/d4e/Vector_8cpp.html" title=" " alt="" coords="1407,379,1492,405"/>
+<area shape="rect" id="node57" href="$da/d69/PrintStream_8cpp.html" title=" " alt="" coords="1165,379,1281,405"/>
 </map>

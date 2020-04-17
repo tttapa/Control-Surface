@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - a3fda74847ede684b2b981b3939eea84776f418f - src/AH/Filters/EMA.hpp</title>
+  <title>LCOV - 42e1dd0b397bacd1ff62a86a7c079717d33b79c5 - src/AH/Filters/EMA.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">a3fda74847ede684b2b981b3939eea84776f418f</td>
+            <td class="headerValue">42e1dd0b397bacd1ff62a86a7c079717d33b79c5</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">15</td>
@@ -37,11 +37,11 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-04-09 14:54:24</td>
+            <td class="headerValue">2020-04-17 18:32:00</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">9</td>
-            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">11</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -109,7 +109,7 @@
 <a name="39"><span class="lineNum">      39 </span>            :  * @ingroup    AH_Filters</a>
 <a name="40"><span class="lineNum">      40 </span>            :  */</a>
 <a name="41"><span class="lineNum">      41 </span>            : template &lt;uint8_t K, class uint_t&gt;</a>
-<a name="42"><span class="lineNum">      42 </span><span class="lineCov">          2 : class EMA {</span></a>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">          9 : class EMA {</span></a>
 <a name="43"><span class="lineNum">      43 </span>            :   public:</a>
 <a name="44"><span class="lineNum">      44 </span>            :     /**</a>
 <a name="45"><span class="lineNum">      45 </span>            :      * @brief   Filter the input: Given @f$ x[n] @f$, calculate @f$ y[n] @f$.</a>
@@ -118,12 +118,12 @@
 <a name="48"><span class="lineNum">      48 </span>            :      *          The new raw input value.</a>
 <a name="49"><span class="lineNum">      49 </span>            :      * @return  The new filtered output value.</a>
 <a name="50"><span class="lineNum">      50 </span>            :      */</a>
-<a name="51"><span class="lineNum">      51 </span><span class="lineCov">       2012 :     uint_t filter(uint_t input) {</span></a>
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">       2012 :         filtered += input;</span></a>
-<a name="53"><span class="lineNum">      53 </span><span class="lineCov">       2012 :         uint_t output = (filtered + fixedPointAHalf) &gt;&gt; K;</span></a>
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">       2012 :         filtered -= output;</span></a>
-<a name="55"><span class="lineNum">      55 </span><span class="lineCov">       4024 :         return output;</span></a>
-<a name="56"><span class="lineNum">      56 </span><span class="lineCov">       2012 :     }</span></a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">       2036 :     uint_t filter(uint_t input) {</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">       2036 :         filtered += input;</span></a>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">       2036 :         uint_t output = (filtered + fixedPointAHalf) &gt;&gt; K;</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">       2036 :         filtered -= output;</span></a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">       4072 :         return output;</span></a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">       2036 :     }</span></a>
 <a name="57"><span class="lineNum">      57 </span>            : </a>
 <a name="58"><span class="lineNum">      58 </span>            :     /**</a>
 <a name="59"><span class="lineNum">      59 </span>            :      * @brief   Filter the input: Given @f$ x[n] @f$, calculate @f$ y[n] @f$.</a>
@@ -140,8 +140,8 @@
 <a name="70"><span class="lineNum">      70 </span>            :         &quot;the division using bit shifts is invalid.&quot;);</a>
 <a name="71"><span class="lineNum">      71 </span>            : </a>
 <a name="72"><span class="lineNum">      72 </span>            :   private:</a>
-<a name="73"><span class="lineNum">      73 </span><span class="lineCov">          2 :     uint_t filtered = 0;</span></a>
-<a name="74"><span class="lineNum">      74 </span>            :     constexpr static uint_t fixedPointAHalf = 1 &lt;&lt; (K - 1);</a>
+<a name="73"><span class="lineNum">      73 </span><span class="lineCov">          9 :     uint_t filtered = 0;</span></a>
+<a name="74"><span class="lineNum">      74 </span>            :     constexpr static uint_t fixedPointAHalf = K &gt; 0 ? 1 &lt;&lt; (K - 1) : 0;</a>
 <a name="75"><span class="lineNum">      75 </span>            : };</a>
 <a name="76"><span class="lineNum">      76 </span>            : </a>
 <a name="77"><span class="lineNum">      77 </span>            : // -------------------------------------------------------------------------- //</a>
