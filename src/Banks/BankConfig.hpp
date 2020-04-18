@@ -20,9 +20,7 @@ enum BankType {
      */
     CHANGE_CHANNEL = 1,
     /**
-     * @brief   Change the offset of the cable number of the element 
-     *          (experimental).
-     * @todo    Implement
+     * @brief   Change the offset of the cable number of the element.
      */
     CHANGE_CABLENB = 2,
 };
