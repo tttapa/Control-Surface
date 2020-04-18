@@ -26,7 +26,7 @@
 
 #else // Not a Teensy
 
-#include <Arduino.h>
+#include <AH/Arduino-Wrapper.h>
 
 #ifdef USBCON
 #include "USBMIDI_MIDIUSB.ipp"

@@ -2,7 +2,7 @@
 
 #include <Control_Surface/Control_Surface_Class.hpp>
 
-#include <Arduino.h> // for constrain
+#include <AH/Arduino-Wrapper.h> // for constrain
 
 BEGIN_CS_NAMESPACE
 
