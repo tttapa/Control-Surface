@@ -62,25 +62,36 @@ enum relativeCCmode {
     MACKIE_CONTROL_RELATIVE = SIGN_MAGNITUDE,
 };
 
+/**
+ * @brief   Class that sends relative/incremental MIDI control change messages.
+ *          This is often used for rotary encoders.
+ * 
+ * This requires explicit support from your DAW. You have to select relative
+ * MIDI CC mode in the MIDI learn settings.
+ * 
+ * This class supports multiple different modes, see @ref relativeCCmode.
+ * 
+ * @ingroup MIDI_Senders
+ */
 class RelativeCCSender {
   public:
-    /** Convert an 8-bit two's complement integer to a 7-bit two's complement
-     *  integer. */
+    /// Convert an 8-bit two's complement integer to a 7-bit two's complement
+    /// integer.
     static uint8_t toTwosComplement7bit(int8_t value) { return value & 0x7F; }
-    /** Convert an 8-bit two's complement integer to a 7-bit integer with a
-     *  binary offset of 64. In other words, a value of 0 corresponds to -64,
-     *  a value of 64 corresponds to 0, and a value of 127 corresponds to 63. */
+    /// Convert an 8-bit two's complement integer to a 7-bit integer with a
+    /// binary offset of 64. In other words, a value of 0 corresponds to -64,
+    /// a value of 64 corresponds to 0, and a value of 127 corresponds to 63.
     static uint8_t toBinaryOffset7bit(int8_t value) { return value + 64; }
-    /** Convert an 8-bit two's complement integer to 7-bit sign-magnitude
-     *  format. */
+    /// Convert an 8-bit two's complement integer to 7-bit sign-magnitude
+    /// format.
     static uint8_t toSignedMagnitude7bit(int8_t value) {
         uint8_t mask = value >> 7;
         uint8_t abs = (value + mask) ^ mask;
         uint8_t sign = mask & 0b01000000;
         return (abs & 0b00111111) | sign;
     }
-    /** Convert an 8-bit two's complement integer to a 7-bit value to send over
-     *  MIDI. */
+    /// Convert an 8-bit two's complement integer to a 7-bit value to send over
+    /// MIDI.
     static uint8_t mapRelativeCC(int8_t value) {
         switch (mode) {
             case TWOS_COMPLEMENT: return toTwosComplement7bit(value);
@@ -90,6 +101,7 @@ class RelativeCCSender {
         }
     }
 
+    /// Send a relative CC message.
     static void send(long delta, MIDIAddress address) {
         while (delta != 0) {
             // Constrain relative movement to +/-15 for
@@ -102,6 +114,8 @@ class RelativeCCSender {
         }
     }
 
+    /// Set the relative CC mode that's used. Requires the same setting on the
+    /// receiving end, in your DAW, for example.
     static void setMode(relativeCCmode mode) { RelativeCCSender::mode = mode; }
 
   private:
