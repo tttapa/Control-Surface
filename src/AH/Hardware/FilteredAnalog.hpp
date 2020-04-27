@@ -65,9 +65,7 @@ class GenericFilteredAnalog {
      *          That's why the mapping function is applied after filtering and
      *          before hysteresis.
      */
-    void map(MappingFunction fn) {
-        mapFn = std::forward<MappingFunction>(fn);
-    }
+    void map(MappingFunction fn) { mapFn = std::forward<MappingFunction>(fn); }
 
     /**
      * @brief   Get a reference to the mapping function.
@@ -125,6 +123,13 @@ class GenericFilteredAnalog {
     AnalogType getRawValue() const {
         return increaseBitDepth<ADC_BITS + IncRes, ADC_BITS, AnalogType,
                                 AnalogType>(ExtIO::analogRead(analogPin));
+    }
+
+    /**
+     * @brief   Get the maximum value that can be returned from @ref getRawValue.
+     */
+    constexpr static AnalogType getMaxRawValue() {
+        return (1UL << (ADC_BITS + IncRes)) - 1;
     }
 
     /**
@@ -247,7 +252,7 @@ class FilteredAnalog
      * @note    This overrides the mapping function set by the `map` method.
      */
     void invert() {
-        constexpr AnalogType maxval = (1UL << (ADC_BITS + IncRes)) - 1;
+        constexpr AnalogType maxval = FilteredAnalog::getMaxRawValue();
         this->map([](AnalogType val) -> AnalogType { return maxval - val; });
     }
 };
