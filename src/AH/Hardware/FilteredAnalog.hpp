@@ -117,8 +117,8 @@ class GenericFilteredAnalog {
     }
 
     /**
-     * @brief   Read the raw value of the analog input any filtering or mapping
-     *          applied, but with its bit depth increased by @c IncRes.
+     * @brief   Read the raw value of the analog input without any filtering or
+     *          mapping applied, but with its bit depth increased by @c IncRes.
      */
     AnalogType getRawValue() const {
         return increaseBitDepth<ADC_BITS + IncRes, ADC_BITS, AnalogType,
