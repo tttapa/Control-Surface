@@ -102,10 +102,19 @@ div.navpath > ul {
 .directory td.desc {
     padding: 0.4em 0.5em 0.4em 0.5em;
 }
-h2.memtitle, .memproto {
+h2.memtitle, .memproto, .fieldtable th {
     background-color: #dde;
     background-image: none;
     border-radius: 0;
+}
+table.fieldtable {
+    border-radius: 0;
+}
+.fieldtable th {
+    font-size: 1.1em;
+}
+span.mlabel {
+    font-size: 0.9em;
 }
 .memdoc {
     border-radius: 0;
