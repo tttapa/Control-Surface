@@ -24,7 +24,7 @@ class NoteCCLEDBarCallback : public SimpleNoteCCValueCallback {
 
     void update(const INoteCCValue &t, uint8_t) override {
         uint8_t value = t.getValue();
-        leds.display(value / 127.0f);
+        leds.display(value / 128.0f);
     }
 
     /// @copydoc    AH::DotBarDisplayLEDs::dotMode
