@@ -84,3 +84,5 @@ input from rotary encoders. Download and install it if you plan on using those.
 
 If you are using a Teensy, you don't need the MIDIUSB library, and the Encoder
 library should already be installed by default.
+
+To use AppleMIDI, you also need the [AppleMIDI](https://github.com/lathoub/Arduino-AppleMIDI-Library) library and its dependencies.
