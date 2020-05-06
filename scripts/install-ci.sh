@@ -40,7 +40,9 @@ else
     git clone https://github.com/tttapa/Adafruit_SSD1306.git &
     git clone https://github.com/PaulStoffregen/Encoder.git &
     git clone https://github.com/FastLED/FastLED.git &
-    git clone https://github.com/arduino-libraries/MIDIUSB.git
+    git clone https://github.com/arduino-libraries/MIDIUSB.git &
+    git clone https://github.com/lathoub/Arduino-AppleMIDI-Library.git &
+    git clone https://github.com/FortySevenEffects/arduino_midi_library.git &
 
     wait
 fi
