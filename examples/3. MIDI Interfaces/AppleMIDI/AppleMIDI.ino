@@ -36,6 +36,9 @@
  * software supports mDNS (Apple Bonjour), you can use `ESP32.local`, 
  * otherwise, you'll have to use the IP address.
  * 
+ * RTP MIDI Bridge (Linux)
+ * -----------------------
+ * 
  * If you're on Linux, you can use the rtpmidi-bridge application in the example
  * folder. You'll need to install Node.js and NPM.
  * 
@@ -45,7 +48,7 @@
  * sudo apt install build-essential libasound2-dev libavahi-compat-libdnssd-dev
  * ~~~
  * 
- * Then install the NPM dependencies:
+ * Then install the dependencies using NPM:
  * 
  * ~~~sh
  * npm install
