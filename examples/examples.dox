@@ -606,6 +606,55 @@
  */
 
 /**
+ * @example   "Bankable-Smart-Control-Change-Potentiometer.ino"
+ * 
+ * Bankable-Smart-Control-Change-Potentiometer
+ * ===========================================
+ * 
+ * This example introduces smart bankable potentiometers to prevent
+ * values jumping around when changing banks.
+ *  
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * - 2:  momentary push button (other pin to ground)
+ * - 3:  momentary push button (other pin to ground)
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.  
+ * The internal pull-up resistors for the push buttons will be enabled.
+ * 
+ * Behavior
+ * --------
+ * 
+ * If you move the potentiometer to, say, 60%, then switch to bank #2, move the
+ * potentiometer to 20%, and then switch back to bank #1, the potentiometer will
+ * be disabled, until you move it up to 60% again.
+ * 
+ * This prevents values jumping around in your DAW when cycling through the
+ * different banks.
+ * 
+ * Changing banks is done using the two push buttons. The push button on pin 2
+ * increments the bank number, the push button on pin 3 decrements the bank 
+ * number.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the potentiometer to a function, change the  
+ * bank using the buttons, and map the potentiometer again.
+ * It will send the MIDI Control Change Channel Volume parameter for channels 
+ * 1, 2, 3 and 4 (for banks #1, #2, #3 and #4 respectively).
+ * 
+ * Written by PieterP, 2020-04-09  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "Transposer.ino"
  * 
  * Transposer
@@ -692,6 +741,108 @@
  * None.
  * 
  * Written by PieterP, 2020-02-03  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "AppleMIDI.ino"
+ * 
+ * AppleMIDI
+ * =========
+ *
+ * This example demonstrates how to use the AppleMIDI library to use Control
+ * Surface over the network.
+ * 
+ * @boards  ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * The on-board LED will be used, as well as the push button on GPIO0. These 
+ * should be present on most ESP32 boards, if this is not the case for your 
+ * board, connect an LED (+ series resistor) and a push button to the relevant
+ * pins (in the "MIDI Elements" section below). For more details, see the 
+ * @ref NoteButton.ino and @ref 1.Note-LED.ino examples.
+ * 
+ * WiFi Credentials
+ * ----------------
+ * 
+ * Open the tab `WiFi-Credentials.example.h`, enter your WiFi credentials, and
+ * rename the file to `WiFi-Credentials.h`.
+ * 
+ * Behavior
+ * --------
+ * 
+ * Upload the code to the ESP32, and open the Serial monitor. You should see
+ * output like this
+ * 
+ * ~~~
+ * Connecting to Your WiFi Network ...
+ * Connected!
+ * IP address: 192.168.1.35
+ * mDNS responder started (ESP32.local)
+ * ~~~
+ * 
+ * Next, connect to the device using your DAW or other MIDI software. If the 
+ * software supports mDNS (Apple Bonjour), you can use `ESP32.local`, 
+ * otherwise, you'll have to use the IP address.
+ * 
+ * RTP MIDI Bridge (Linux)
+ * -----------------------
+ * 
+ * If you're on Linux, you can use the rtpmidi-bridge application in the example
+ * folder. You'll need to install Node.js and NPM.
+ * 
+ * First, install the necessary dependencies and build tools:
+ * 
+ * ~~~sh
+ * sudo apt install build-essential libasound2-dev libavahi-compat-libdnssd-dev
+ * ~~~
+ * 
+ * Then install the dependencies using NPM:
+ * 
+ * ~~~sh
+ * npm install
+ * ~~~
+ * You might get a compilation error for the `avahi_pub` module. This is not an
+ * issue, it's an optional dependency of the `rtpmidi` module.
+ * 
+ * Finally, run the application:
+ * 
+ * ~~~sh
+ * node rtpmidi-bridge.js
+ * ~~~
+ * 
+ * The application will initiate a RTP MIDI connection with the ESP32, create
+ * virtual MIDI ports, and bridge the MIDI traffic between the RTP MIDI 
+ * connection and the virtual MIDI ports.  
+ * You can then connect your DAW or other MIDI application to the virtual MIDI 
+ * ports.
+ * 
+ * When the ESP32 is connected, you should see the following in the serial 
+ * monitor and the rtpmidi-bridge output respectively:
+ * 
+ * ~~~
+ * Connected to session Node RTPMidi
+ * ~~~
+ * 
+ * ~~~
+ * 2020-05-06T15:50:42.956Z info:  Invitation accepted by ESP32
+ * 2020-05-06T15:50:42.962Z info:  Data channel to ESP32 established
+ * ~~~
+ * 
+ * When the button is pushed, a MIDI note on message for note C4 (middle C) is
+ * sent.  
+ * When the ESP32 receives a MIDI note message for that note, it turn on/off the
+ * LED accordingly.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Connect the virtual MIDI ports or the AppleMIDI connection to a device or 
+ * application that can send and receive MIDI notes.
+ * 
+ * Written by PieterP, 2020-05-06  
  * https://github.com/tttapa/Control-Surface
  */
 
@@ -1714,6 +1865,46 @@
  * None.
  * 
  * Written by PieterP, 2019-10-10  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Custom-MIDI-Sender.ino"
+ * 
+ * Custom-MIDI-Sender
+ * ==================
+ * 
+ * This is an example that demonstrates how to extend the library using your own
+ * MIDI Senders. It implements functionality similar to the built-in 
+ * @ref DigitalNoteSender class, but with support for different on and off 
+ * velocities.
+ * 
+ * @see @ref MIDI_Senders for different kinds of MIDI senders to start from.
+ *
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When the button on pin 5 is pressed, a MIDI Note On message is sent for
+ *   note C4 with velocity 0x40.
+ * - When the button on pin 5 is released, a MIDI Note Off message is sent for 
+ *   note C4 with velocity 0x10.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the button to a function.
+ * 
+ * Written by PieterP, 2020-04-18  
  * https://github.com/tttapa/Control-Surface
  */
 
