@@ -57,5 +57,14 @@ else
     make install PREFIX=$HOME/.local
 fi
 
+cd ~/Arduino/libraries
+if [ ! -d WiFi-Credentials ]; then
+    mkdir WiFi-Credentials
+    cat << EOF > WiFi-Credentials/WiFi-Credentials.h
+const char *ssid = "Your WiFi SSID";
+const char *password = "Your WiFi Password";
+EOF
+fi
+
 ln -s "${TRAVIS_BUILD_DIR}${GITHUB_WORKSPACE}" \
       "$HOME/Arduino/libraries/Control-Surface"
