@@ -843,6 +843,7 @@ SoftwareSerialDebugMIDI_Interface	KEYWORD1
 HairlessMIDI_Interface	KEYWORD1
 MIDI_Callbacks	KEYWORD1
 SysExMessage	KEYWORD1
+FortySevenEffectsMIDI_Interface	KEYWORD1
 
 begin	KEYWORD2
 update	KEYWORD2

@@ -40,7 +40,9 @@ else
     git clone https://github.com/tttapa/Adafruit_SSD1306.git &
     git clone https://github.com/PaulStoffregen/Encoder.git &
     git clone https://github.com/FastLED/FastLED.git &
-    git clone https://github.com/arduino-libraries/MIDIUSB.git
+    git clone https://github.com/arduino-libraries/MIDIUSB.git &
+    git clone https://github.com/lathoub/Arduino-AppleMIDI-Library.git &
+    git clone https://github.com/FortySevenEffects/arduino_midi_library.git &
 
     wait
 fi
@@ -53,6 +55,15 @@ else
     git clone https://github.com/linux-test-project/lcov.git
     cd lcov
     make install PREFIX=$HOME/.local
+fi
+
+cd ~/Arduino/libraries
+if [ ! -d WiFi-Credentials ]; then
+    mkdir WiFi-Credentials
+    cat << EOF > WiFi-Credentials/WiFi-Credentials.h
+const char *ssid = "Your WiFi SSID";
+const char *password = "Your WiFi Password";
+EOF
 fi
 
 ln -s "${TRAVIS_BUILD_DIR}${GITHUB_WORKSPACE}" \

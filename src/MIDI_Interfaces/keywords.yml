@@ -13,6 +13,7 @@ keyword1:
  - HairlessMIDI_Interface
  - MIDI_Callbacks
  - SysExMessage
+ - FortySevenEffectsMIDI_Interface
 
 keyword2:
  - begin
