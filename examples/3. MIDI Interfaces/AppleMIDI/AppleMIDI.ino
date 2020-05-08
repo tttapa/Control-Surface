@@ -2,6 +2,10 @@
  * This example demonstrates how to use the AppleMIDI library to use Control
  * Surface over the network.
  * 
+ * This example requires the 
+ * [AppleMIDI](https://github.com/lathoub/Arduino-AppleMIDI-Library) and 
+ * [MIDI](https://github.com/FortySevenEffects/arduino_midi_library) libraries.
+ * 
  * @boards  ESP32
  * 
  * Connections
@@ -35,6 +39,18 @@
  * Next, connect to the device using your DAW or other MIDI software. If the 
  * software supports mDNS (Apple Bonjour), you can use `ESP32.local`, 
  * otherwise, you'll have to use the IP address.
+ * 
+ * When the connection is successful, you'll see the following message in the
+ * Serial monitor:
+ * 
+ * ~~~
+ * Connected to session Your Session Name
+ * ~~~
+ * 
+ * When the button is pushed, a MIDI note on message for note C4 (middle C) is
+ * sent.  
+ * When the ESP32 receives a MIDI note message for that note, it turn on/off the
+ * LED accordingly.
  * 
  * RTP MIDI Bridge (Linux)
  * -----------------------
@@ -80,11 +96,6 @@
  * 2020-05-06T15:50:42.962Z info:  Data channel to ESP32 established
  * ~~~
  * 
- * When the button is pushed, a MIDI note on message for note C4 (middle C) is
- * sent.  
- * When the ESP32 receives a MIDI note message for that note, it turn on/off the
- * LED accordingly.
- * 
  * Mapping
  * -------
  * 
@@ -95,6 +106,9 @@
  * https://github.com/tttapa/Control-Surface
  */
 
+#include <AppleMIDI.h>
+USING_NAMESPACE_APPLEMIDI
+
 #include <Control_Surface.h>
 #include <MIDI_Interfaces/Wrappers/FortySevenEffects.hpp>
 
@@ -103,9 +117,6 @@
 #include <WiFiUdp.h>
 
 #include "WiFi-Credentials.h" // See instructions above
-
-#include <AppleMIDI.h>
-USING_NAMESPACE_APPLEMIDI
 
 // ----------------------------- MIDI Interface ----------------------------- //
 
@@ -135,11 +146,9 @@ NoteValueLED led = {
 void onAppleMidiConnected(const ssrc_t &ssrc, const char *name) {
   Serial << F("Connected to session ") << name << endl;
 }
-
 void onAppleMidiDisconnected(const ssrc_t &ssrc) {
   Serial << F("Disconnected") << endl;
 }
-
 void onAppleMidiError(const ssrc_t &ssrc, int32_t err) {
   Serial << F("Exception ") << err << F(" from ssrc 0x") << hex << ssrc << dec
          << endl;
