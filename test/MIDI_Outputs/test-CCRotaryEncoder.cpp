@@ -71,7 +71,7 @@ TEST(CCRotaryEncoder, turnSixteenSteps) {
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
 
-    // Should be send in packets of value 15 max
+    // Should be sent in packets of value 15 max
     EXPECT_CALL(encm, read()).WillOnce(Return(4 * 16));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 15, 0xC)).Times(2);
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 2, 0xC)).Times(1);
@@ -87,10 +87,27 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwards) {
     EncoderMock encm;
     CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
 
-    // Should be send in packets of value -15 minimum
+    // Should be sent in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, (-15) & 0x7F, 0xC)).Times(2);
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, (-2) & 0x7F, 0xC)).Times(1);
+
+    ccenc.update();
+}
+
+TEST(CCRotaryEncoder, turnSixteenStepsForwardsSignMagnitude) {
+    MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
+    RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
+
+    EncoderMock encm;
+    RelativeCCSender::setMode(relativeCCmode::SIGN_MAGNITUDE);
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+
+    // Should be sent in packets of value 15 maximum
+    EXPECT_CALL(encm, read()).WillOnce(Return(4 * 16));
+    EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 15, 0xC)).Times(2);
+    EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 2, 0xC)).Times(1);
 
     ccenc.update();
 }
@@ -104,10 +121,44 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwardsSignMagnitude) {
     RelativeCCSender::setMode(relativeCCmode::SIGN_MAGNITUDE);
     CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
 
-    // Should be send in packets of value -15 minimum
+    // Should be sent in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 15 | 0x40, 0xC)).Times(2);
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 2 | 0x40, 0xC)).Times(1);
+
+    ccenc.update();
+}
+
+TEST(CCRotaryEncoder, turnSixteenStepsForwardsNextAddress) {
+    MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
+    RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
+
+    EncoderMock encm;
+    RelativeCCSender::setMode(relativeCCmode::NEXT_ADDRESS);
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+
+    // Should be sent in packets of value 15 maximum
+    EXPECT_CALL(encm, read()).WillOnce(Return(4 * 16));
+    EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 15, 0xC)).Times(2);
+    EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 2, 0xC)).Times(1);
+
+    ccenc.update();
+}
+
+TEST(CCRotaryEncoder, turnSixteenStepsBackwardsNextAddress) {
+    MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
+    RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
+
+    EncoderMock encm;
+    RelativeCCSender::setMode(relativeCCmode::NEXT_ADDRESS);
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+
+    // Should be sent in packets of value -15 minimum
+    EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
+    EXPECT_CALL(midi, sendImpl(CC, 6, 0x21, 15, 0xC)).Times(2);
+    EXPECT_CALL(midi, sendImpl(CC, 6, 0x21, 2, 0xC)).Times(1);
 
     ccenc.update();
 }
@@ -121,7 +172,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwardsBinaryOffset) {
     RelativeCCSender::setMode(relativeCCmode::BINARY_OFFSET);
     CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
 
-    // Should be send in packets of value -15 minimum
+    // Should be sent in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 0x40 - 15, 0xC)).Times(2);
     EXPECT_CALL(midi, sendImpl(CC, 6, 0x20, 0x40 - 2, 0xC)).Times(1);

@@ -50,6 +50,16 @@ enum relativeCCmode {
      * | 111'1111 | -63   |
      */
     SIGN_MAGNITUDE,
+    /**
+     * @brief   Encode negative MIDI CC values by incrementing the address if 
+     *          the number is negative, the MIDI value that's sent is always the
+     *          absolute value of the relative delta.
+     * 
+     * For example, if the base address is 0x10, a delta value of +4 will be 
+     * sent as a value of 4 to address 0x10, and a delta value of -8 will be 
+     * sent as a value of 8 to address 0x11.
+     */
+    NEXT_ADDRESS = 4,
     /// First relative mode in Reaper.
     REAPER_RELATIVE_1 = TWOS_COMPLEMENT,
     /// Second relative mode in Reaper.
@@ -60,6 +70,8 @@ enum relativeCCmode {
     TRACKTION_RELATIVE = TWOS_COMPLEMENT,
     /// Relative mode used by the Mackie Control Universal protocol.
     MACKIE_CONTROL_RELATIVE = SIGN_MAGNITUDE,
+    /// Korg KONTROL in Inc/Dec mode 1.
+    KORG_KONTROL_INC_DEC_1 = NEXT_ADDRESS,
 };
 
 /**
@@ -97,12 +109,15 @@ class RelativeCCSender {
             case TWOS_COMPLEMENT: return toTwosComplement7bit(value);
             case BINARY_OFFSET: return toBinaryOffset7bit(value);
             case SIGN_MAGNITUDE: return toSignedMagnitude7bit(value);
+            case NEXT_ADDRESS: return value < 0 ? -value : value;
             default: return 0; // Keeps the compiler happy
         }
     }
 
     /// Send a relative CC message.
     static void send(long delta, MIDIAddress address) {
+        if (delta < 0 && mode == NEXT_ADDRESS)
+            address = address + 1;
         while (delta != 0) {
             // Constrain relative movement to +/-15 for
             // Mackie Control Universal compatibility
