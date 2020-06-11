@@ -869,6 +869,37 @@
  */
 
 /**
+ * @example   "MIDI-Input.ino"
+ * 
+ * MIDI-Input
+ * ==========
+ * 
+ * This is an example on how to attach your own callbacks for receiving MIDI 
+ * input.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * None.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When MIDI messages are sent to the USB interface, they are printed to the 
+ *   Serial port.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2020-06-11  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "MIDI_Pipes-Routing.ino"
  * 
  * MIDI_Pipes-Routing

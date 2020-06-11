@@ -134,6 +134,9 @@ USBDebugMIDI_Interface	KEYWORD1
 SoftwareSerialDebugMIDI_Interface	KEYWORD1
 HairlessMIDI_Interface	KEYWORD1
 MIDI_Pipe	KEYWORD1
+MIDI_PipeFactory	KEYWORD1
+BidirectionalMIDI_Pipe	KEYWORD1
+BidirectionalMIDI_PipeFactory	KEYWORD1
 
 MIDI_Callbacks	KEYWORD1
 SysExMessage	KEYWORD1
