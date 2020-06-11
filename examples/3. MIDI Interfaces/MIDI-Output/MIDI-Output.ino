@@ -27,7 +27,7 @@
 #include <Control_Surface.h> // Include the Control Surface library
 
 // The MIDI over USB interface to use
-USBDebugMIDI_Interface midi;
+USBMIDI_Interface midi;
 
 void setup() {
   midi.begin(); // Initialize the MIDI interface

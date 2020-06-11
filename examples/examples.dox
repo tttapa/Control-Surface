@@ -999,6 +999,37 @@
  */
 
 /**
+ * @example   "MIDI-Output.ino"
+ * 
+ * MIDI-Output
+ * ===========
+ * 
+ * This is an example on how to send MIDI messages.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * For a full list of available MIDI send functions, see @ref MIDI_Sender.
+ * 
+ * Connections
+ * -----------
+ * 
+ * None.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Sends a pair of MIDI note on/off messages every second.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2020-06-11  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "Send-MIDI-Notes.ino"
  * 
  * Send-MIDI-Notes
