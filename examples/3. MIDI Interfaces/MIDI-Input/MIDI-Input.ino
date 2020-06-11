@@ -31,6 +31,7 @@ USBMIDI_Interface midi;
 
 // Custom MIDI callback that prints incoming messages.
 struct MyMIDI_Callbacks : MIDI_Callbacks {
+
   // Callback for channel messages (notes, control change, pitch bend, etc.).
   void onChannelMessage(Parsing_MIDI_Interface &midi) override {
     ChannelMessage cm = midi.getChannelMessage();
@@ -40,7 +41,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
   }
 
   // Callback for system exclusive messages
-  void onSysExMessage(Parsing_MIDI_Interface &midi)override {
+  void onSysExMessage(Parsing_MIDI_Interface &midi) override {
     SysExMessage se = midi.getSysExMessage();
     // Print the message
     Serial << F("System Exclusive message: ") << hex;
@@ -48,6 +49,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
       Serial << se.data[i] << ' ';
     Serial << dec << F("on cable ") << se.CN << endl;
   }
+
 } callbacks;
 
 
