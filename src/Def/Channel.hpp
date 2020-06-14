@@ -19,7 +19,7 @@ class Channel {
      *          The zero-based channel (0 is the first channel).
      */
     explicit constexpr Channel(int8_t zeroBasedChannel)
-        : zeroBasedChannel(zeroBasedChannel) {}
+        : zeroBasedChannel(zeroBasedChannel & 0xF) {}
 
     /**
      * @brief   Get the channel as an integer.
@@ -56,6 +56,7 @@ class Channel {
      */
     Channel &operator+=(const int8_t rhs) {
         this->zeroBasedChannel += rhs;
+        this->zeroBasedChannel &= 0xF;
         return *this;
     }
 
@@ -79,6 +80,7 @@ class Channel {
      */
     Channel &operator-=(const int8_t rhs) {
         this->zeroBasedChannel -= rhs;
+        this->zeroBasedChannel &= 0xF;
         return *this;
     }
 

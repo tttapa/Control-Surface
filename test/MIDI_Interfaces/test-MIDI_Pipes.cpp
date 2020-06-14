@@ -50,6 +50,98 @@ TEST(MIDI_Pipes, sourcePipeSink) {
     }
 }
 
+TEST(MIDI_Pipes, sourcePipeSinkMap) {
+    StrictMock<MockMIDI_Sink> sink1, sink2;
+    MIDI_Pipe pipe1;
+    TrueMIDI_Source source;
+
+    struct CustomPipe : MIDI_Pipe {
+        void mapForwardMIDI(ChannelMessage msg) override { 
+            msg.setChannel(CHANNEL_8);
+            sourceMIDItoSink(msg); 
+        }
+    } pipe2;
+
+    source >> pipe1 >> sink1;
+    source >> pipe2 >> sink2;
+
+    {
+        RealTimeMessage msg = {0xFF, 3};
+        EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+        EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink1);
+        ::testing::Mock::VerifyAndClear(&sink2);
+    }
+    {
+        ChannelMessage msg{0x93, 0x10, 0x7F, 5};
+        ChannelMessage msg2{0x97, 0x10, 0x7F, 5};
+        EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+        EXPECT_CALL(sink2, sinkMIDIfromPipe(msg2));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink1);
+        ::testing::Mock::VerifyAndClear(&sink2);
+    }
+    {
+        SysExMessage msg = {nullptr, 0, 10};
+        EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+        EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink1);
+        ::testing::Mock::VerifyAndClear(&sink2);
+    }
+}
+
+TEST(MIDI_Pipes, sourcePipeSinkFilter) {
+    StrictMock<MockMIDI_Sink> sink1, sink2;
+    MIDI_Pipe pipe1;
+    TrueMIDI_Source source;
+
+    struct CustomPipe : MIDI_Pipe {
+        void mapForwardMIDI(ChannelMessage msg) override { 
+            if (msg.getChannel() == CHANNEL_7)
+                return;
+            sourceMIDItoSink(msg);
+        }
+    } pipe2;
+
+    source >> pipe1 >> sink1;
+    source >> pipe2 >> sink2;
+
+    {
+        RealTimeMessage msg = {0xFF, 3};
+        EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+        EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink1);
+        ::testing::Mock::VerifyAndClear(&sink2);
+    }
+    {
+        ChannelMessage msg{0x93, 0x10, 0x7F, 5};
+        EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+        EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink1);
+        ::testing::Mock::VerifyAndClear(&sink2);
+    }
+    {
+        ChannelMessage msg{0x96, 0x10, 0x7F, 5};
+        EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+        // sink2 shouldn't receive it
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink1);
+        ::testing::Mock::VerifyAndClear(&sink2);
+    }
+    {
+        SysExMessage msg = {nullptr, 0, 10};
+        EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
+        EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
+        source.sourceMIDItoPipe(msg);
+        ::testing::Mock::VerifyAndClear(&sink1);
+        ::testing::Mock::VerifyAndClear(&sink2);
+    }
+}
+
 TEST(MIDI_Pipes, sourceX2PipeSink) {
     StrictMock<MockMIDI_Sink> sink;
     MIDI_Pipe pipe1, pipe2;

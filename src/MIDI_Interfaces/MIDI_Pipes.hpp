@@ -317,41 +317,79 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     /// Accept a MIDI message from the source, forward it to the "through"
     /// output if necessary, map or filter the MIDI message if necessary,
     /// and send it to the sink.
-    virtual void pipeMIDI(ChannelMessage msg) {
+    void pipeMIDI(ChannelMessage msg) {
+        // Forward 
         if (hasThroughOut())
             throughOut->pipeMIDI(msg);
-        // map(msg)
-        sinkMIDIfromPipe(msg);
+        mapForwardMIDI(msg);
     }
     /// @copydoc pipeMIDI
-    virtual void pipeMIDI(SysExMessage msg) {
+    void pipeMIDI(SysExMessage msg) {
         if (hasThroughOut())
             throughOut->pipeMIDI(msg);
-        // map(msg)
-        sinkMIDIfromPipe(msg);
+        mapForwardMIDI(msg);
     }
     /// @copydoc pipeMIDI
-    virtual void pipeMIDI(RealTimeMessage msg) {
+    void pipeMIDI(RealTimeMessage msg) {
         if (hasThroughOut())
             throughOut->pipeMIDI(msg);
-        // map(msg)
-        sinkMIDIfromPipe(msg);
+        mapForwardMIDI(msg);
+    }
+
+  protected:
+    /// Send the given MIDI message to the sink of this pipe.
+    void sourceMIDItoSink(ChannelMessage msg) {
+        if (hasSink())
+            sink->sinkMIDIfromPipe(msg);
+    }
+
+    /// @copydoc sourceMIDItoSink
+    void sourceMIDItoSink(SysExMessage msg) {
+        if (hasSink())
+            sink->sinkMIDIfromPipe(msg);
+    }
+
+    /// @copydoc sourceMIDItoSink
+    void sourceMIDItoSink(RealTimeMessage msg) {
+        if (hasSink())
+            sink->sinkMIDIfromPipe(msg);
     }
 
   private:
-    void sinkMIDIfromPipe(ChannelMessage msg) final override {
-        if (hasSink())
-            sink->sinkMIDIfromPipe(msg);
-    }
-    void sinkMIDIfromPipe(SysExMessage msg) final override {
-        if (hasSink())
-            sink->sinkMIDIfromPipe(msg);
-    }
-    void sinkMIDIfromPipe(RealTimeMessage msg) final override {
-        if (hasSink())
-            sink->sinkMIDIfromPipe(msg);
+    /// Function that maps, edits or filters MIDI messages, and then forwards 
+    /// them to the sink of the pipe.
+    virtual void mapForwardMIDI(ChannelMessage msg) { 
+        // Optionally edit the message before passing it on
+        sourceMIDItoSink(msg); 
     }
 
+    /// @copydoc    mapForwardMIDI
+    virtual void mapForwardMIDI(SysExMessage msg) { 
+        // Optionally edit the message before passing it on
+        sourceMIDItoSink(msg); 
+    }
+
+    /// @copydoc    mapForwardMIDI
+    virtual void mapForwardMIDI(RealTimeMessage msg) { 
+        // Optionally edit the message before passing it on
+        sourceMIDItoSink(msg); 
+    }
+
+  private:
+    void sinkMIDIfromPipe(ChannelMessage msg) override {
+        // Called when data from Through In arrives, forward it to the sink
+        sourceMIDItoSink(msg);
+    }
+    void sinkMIDIfromPipe(SysExMessage msg) override {
+        // Called when data from Through In arrives, forward it to the sink
+        sourceMIDItoSink(msg);
+    }
+    void sinkMIDIfromPipe(RealTimeMessage msg) override {
+        // Called when data from Through In arrives, forward it to the sink
+        sourceMIDItoSink(msg);
+    }
+
+  private:
     /// Lock this pipe and all other pipes further downstream (following the
     /// path of the sink). Operates recursively until the end of the
     /// chain is reached.
@@ -420,13 +458,15 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
         return false;
     }
 
-#ifndef ARDUINO
+#ifdef ARDUINO
+  protected:
+#endif
     MIDI_Pipe *getThroughOut() { return throughOut; }
     MIDI_Pipe *getThroughIn() { return throughIn; }
     MIDI_Source *getSource() { return source; }
     MIDI_Sink *getSink() { return sink; }
-#endif
 
+  public:
     /// @copydoc    MIDI_Source::exclusive
     void exclusive(cn_t cn, bool exclusive = true);
 

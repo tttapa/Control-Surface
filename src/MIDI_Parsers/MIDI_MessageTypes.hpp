@@ -11,20 +11,33 @@
 
 AH_DIAGNOSTIC_WERROR()
 
+#include <Def/Channel.hpp>
+
 BEGIN_CS_NAMESPACE
 
 struct ChannelMessage {
-    uint8_t header;
-    uint8_t data1;
-    uint8_t data2;
+    uint8_t header; ///< MIDI status byte (message type and channel).
+    uint8_t data1;  ///< First MIDI data byte
+    uint8_t data2;  ///< First MIDI data byte
 
-    uint8_t CN;
+    uint8_t CN; ///< USB MIDI cable number;
 
+    /// Check for equality.
     bool operator==(ChannelMessage other) const {
         return this->header == other.header && this->data1 == other.data1 &&
                this->data2 == other.data2 && this->CN == other.CN;
     }
+    /// Check for inequality.
     bool operator!=(ChannelMessage other) const { return !(*this == other); }
+
+    /// Get the MIDI channel of the message.
+    Channel getChannel() const { return Channel(header & 0x0F); }
+
+    /// Set the MIDI channel of the message.
+    void setChannel(Channel channel) {
+        header &= 0xF0;
+        header |= channel.getRaw();
+    }
 };
 
 struct SysExMessage {
