@@ -43,11 +43,6 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
         const uint8_t *const data =
             reinterpret_cast<const uint8_t *>(value.data());
         size_t len = value.size();
-        for (size_t i = 0; i < len; i++) {
-            Serial.print(data[i], HEX);
-            Serial.print(' ');
-        }
-        Serial.println();
         parse(data, len);
     }
 
