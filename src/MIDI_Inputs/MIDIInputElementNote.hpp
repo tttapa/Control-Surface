@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MIDIInputElement.hpp"
-#include <AH/Containers/LinkedList.hpp>
+#include <AH/Containers/Updatable.hpp>
 
 #if defined(ESP32)
 #include <mutex>
@@ -19,6 +19,7 @@ BEGIN_CS_NAMESPACE
  */
 class MIDIInputElementNote : public MIDIInputElement,
                              public DoublyLinkable<MIDIInputElementNote> {
+                             // public AH::UpdatableCRTP<MIDIInputElementNote> {
   protected:
     /**
      * @brief   Constructor.
@@ -71,6 +72,7 @@ class MIDIInputElementNote : public MIDIInputElement,
         GUARD_LIST_LOCK;
         for (MIDIInputElementNote &e : elements)
             e.reset();
+        // MIDIInputElementNote::applyToAll(&MIDIInputElementNote::reset);
     }
 
     /**

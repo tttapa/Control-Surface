@@ -136,8 +136,8 @@ class GenericFilteredAnalog {
      * @brief   Select the configured ADC resolution. By default, it is set to
      *          the maximum resolution supported by the hardware.
      * 
-     * @see     @ref ADC_BITS
-     * @see     @ref ADCConfig.hpp 
+     * @see     @ref ADC_BITS "ADC_BITS"
+     * @see     @ref ADCConfig.hpp "ADCConfig.hpp"
      */
     static void setupADC() {
 #if HAS_ANALOG_READ_RESOLUTION

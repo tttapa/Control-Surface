@@ -79,7 +79,12 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
      * @deprecated  Use `Control_Surface.send(...)` directly instead of 
      *              `Control_Surface.MIDI().send(...)`.
      */
-    MIDI_Sender<Control_Surface_> &MIDI() { return *this; }
+    [[deprecated("Use Control_Surface.send(...) directly, instead of "
+                 "Control_Surface.MIDI().send(...)")]] //
+    MIDI_Sender<Control_Surface_> &
+    MIDI() {
+        return *this;
+    }
     /** 
      * @brief   Update all MIDI interfaces to receive new MIDI events.
      */

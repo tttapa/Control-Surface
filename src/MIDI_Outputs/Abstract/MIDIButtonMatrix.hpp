@@ -17,8 +17,23 @@ class MIDIButtonMatrix : public MIDIOutputElement,
 
   protected:
     /**
-     * @brief
-     * @todo    Documentation
+     * @brief   Construct a new MIDIButtonMatrix.
+     * 
+     * @param   rowPins
+     *          A list of pin numbers connected to the rows of the button
+     *          matrix.  
+     *          **⚠** These pins will be driven LOW as outputs (Lo-Z).
+     * @param   colPins
+     *          A list of pin numbers connected to the columns of the button
+     *          matrix.  
+     *          These pins will be used as inputs (Hi-Z), and the internal 
+     *          pull-up resistor will be enabled.
+     * @param   addresses
+     *          A matrix containing the address corresponding to each button.
+     * @param   channelCN
+     *          The MIDI channel and optional cable number for all buttons.
+     * @param   sender
+     *          The MIDI sender to use.
      */
     MIDIButtonMatrix(const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
@@ -44,7 +59,7 @@ class MIDIButtonMatrix : public MIDIOutputElement,
     }
 
     AddressMatrix<nb_rows, nb_cols> addresses;
-    const MIDIChannelCN baseChannelCN;
+    MIDIChannelCN baseChannelCN;
 
   public:
     Sender sender;

@@ -19,8 +19,8 @@ class ProgramChanger : public Selectable<N> {
     }
 
   private:
-    const Array<uint8_t, N> programs;
-    const MIDIChannelCN channelCN;
+    Array<uint8_t, N> programs;
+    MIDIChannelCN channelCN;
 };
 
 END_CS_NAMESPACE

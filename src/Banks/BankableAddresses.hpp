@@ -125,9 +125,6 @@ class OutputBankableMIDIAddress : public OutputBankableMIDIAddress_Base {
  *          
  * The bank setting determines the address that's being used.
  *          
- * @tparam  N
- *          The number of addresses the element has.
- *          
  * @note    To prevent 'sticky' notes (i.e. a button is pressed, a note on is
  *          sent, the bank is changed, the button is released, and the note off
  *          is sent to a different address, causing the first note to keep on 
