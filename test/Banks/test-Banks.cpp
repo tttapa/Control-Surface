@@ -59,18 +59,14 @@ TEST(Bank, selectOutOfBounds) {
     }
 }
 
-W_SUGGEST_OVERRIDE_OFF
-
 template <uint8_t N>
 class TestInputBankable : public BankableMIDIInput<N> {
   public:
     TestInputBankable(Bank<N> &bank, BankType type)
         : BankableMIDIInput<N>(bank, type) {}
 
-    MOCK_METHOD0(onBankSettingChange, void());
+    MOCK_METHOD(void, onBankSettingChange, (), (override));
 };
-
-W_SUGGEST_OVERRIDE_ON
 
 TEST(Bank, onBankSettingChange) {
     Bank<10> bank = {4};

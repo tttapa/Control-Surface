@@ -52,14 +52,10 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
 
 #ifndef ARDUINO
   public:
-    W_SUGGEST_OVERRIDE_OFF
-
-    MOCK_METHOD5(writeUSBPacket,
-                 void(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));
-    MOCK_METHOD0(readUSBPacket, MIDIUSBPacket_t(void));
+    MOCK_METHOD(void, writeUSBPacket,
+                (uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));
+    MOCK_METHOD(MIDIUSBPacket_t, readUSBPacket, ());
     void flushUSB() {}
-
-    W_SUGGEST_OVERRIDE_ON
 
   private:
 #else

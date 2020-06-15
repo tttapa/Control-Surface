@@ -112,8 +112,8 @@ END_CS_NAMESPACE
 
 class BLECharacteristic {
   public:
-    MOCK_METHOD0(getValue, std::string(void));
-    MOCK_METHOD2(setValue, void(uint8_t *data, size_t len));
+    MOCK_METHOD(std::string, getValue, ());
+    MOCK_METHOD(void, setValue, (uint8_t * data, size_t len));
 };
 
 class BLECharacteristicCallbacks {
@@ -140,13 +140,13 @@ BEGIN_CS_NAMESPACE
 
 class BLEMIDI {
   public:
-    MOCK_METHOD1(setServerCallbacks, void(BLEServerCallbacks *));
-    MOCK_METHOD1(setCharacteristicsCallbacks,
-                 void(BLECharacteristicCallbacks *));
-    MOCK_METHOD2(begin,
-                 void(BLEServerCallbacks *, BLECharacteristicCallbacks *));
-    MOCK_METHOD2(notifyValue, void(uint8_t *data, size_t len));
-    MOCK_METHOD0(getValue, std::string(void));
+    MOCK_METHOD(void, setServerCallbacks, (BLEServerCallbacks *));
+    MOCK_METHOD(void, setCharacteristicsCallbacks,
+                (BLECharacteristicCallbacks *));
+    MOCK_METHOD(void, begin,
+                (BLEServerCallbacks *, BLECharacteristicCallbacks *));
+    MOCK_METHOD(void, notifyValue, (uint8_t * data, size_t len));
+    MOCK_METHOD(std::string, getValue, ());
 };
 
 END_CS_NAMESPACE

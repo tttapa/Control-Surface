@@ -16,15 +16,15 @@ class ArduinoMock {
     static void end();
     static SerialHelper &getSerial();
 
-    MOCK_METHOD2(pinMode, void(uint8_t, uint8_t));
-    MOCK_METHOD2(digitalWrite, void(uint8_t, uint8_t));
-    MOCK_METHOD1(digitalRead, int(uint8_t));
-    MOCK_METHOD1(analogRead, int(uint8_t));
-    MOCK_METHOD1(analogReadResolution, void(uint8_t));
-    MOCK_METHOD2(analogWrite, void(uint8_t, int));
+    MOCK_METHOD(void, pinMode, (uint8_t, uint8_t));
+    MOCK_METHOD(void, digitalWrite, (uint8_t, uint8_t));
+    MOCK_METHOD(int, digitalRead, (uint8_t));
+    MOCK_METHOD(int, analogRead, (uint8_t));
+    MOCK_METHOD(void, analogReadResolution, (uint8_t));
+    MOCK_METHOD(void, analogWrite, (uint8_t, int));
 
-    MOCK_METHOD0(millis, unsigned long());
-    MOCK_METHOD0(micros, unsigned long());
+    MOCK_METHOD(unsigned long, millis, ());
+    MOCK_METHOD(unsigned long, micros, ());
 
     virtual ~ArduinoMock() = default;
 };
