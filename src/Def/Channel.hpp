@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <stdint.h> // int8_t
+#include <stdint.h> // uint8_t
 #include <Settings/NamespaceSettings.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -34,7 +34,7 @@ class Channel {
      * @param   oneBasedChannel
      *          The channel number (1 is the first channel).
      */
-    static constexpr Channel createChannel(int8_t oneBasedChannel) {
+    static constexpr Channel createChannel(uint8_t oneBasedChannel) {
         return Channel{uint8_t(oneBasedChannel - 1)};
     }
 

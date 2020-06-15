@@ -224,7 +224,7 @@ class CCRange : public GenericCCRange<RangeLen> {
 };
 
 /**
- * @brief   MIDI Input Element that listens to a single controller and saves its 
+ * @brief   MIDI Input Element that listens to a single controller and saves its
  *          value.
  * 
  * @ingroup MIDIInputElements

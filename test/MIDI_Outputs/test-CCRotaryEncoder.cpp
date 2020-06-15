@@ -12,7 +12,7 @@ TEST(CCRotaryEncoder, turnOneStep) {
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
-    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     EXPECT_CALL(encm, read()).WillOnce(Return(4));
     EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 2, 0xC));
@@ -26,7 +26,7 @@ TEST(CCRotaryEncoder, turnFourHalfSteps) {
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
-    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     EXPECT_CALL(encm, read())
         .WillOnce(Return(2))
@@ -55,7 +55,7 @@ TEST(CCRotaryEncoder, turnOneStepBackwards) {
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
-    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     EXPECT_CALL(encm, read()).WillOnce(Return(-4));
     EXPECT_CALL(midi, sendImpl(0xB6, 0x20, (-2) & 0x7F, 0xC));
@@ -69,7 +69,7 @@ TEST(CCRotaryEncoder, turnSixteenSteps) {
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
-    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     // Should be sent in packets of value 15 max
     EXPECT_CALL(encm, read()).WillOnce(Return(4 * 16));
@@ -85,7 +85,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwards) {
     RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
 
     EncoderMock encm;
-    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     // Should be sent in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
@@ -102,7 +102,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsForwardsSignMagnitude) {
 
     EncoderMock encm;
     RelativeCCSender::setMode(relativeCCmode::SIGN_MAGNITUDE);
-    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     // Should be sent in packets of value 15 maximum
     EXPECT_CALL(encm, read()).WillOnce(Return(4 * 16));
@@ -119,7 +119,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwardsSignMagnitude) {
 
     EncoderMock encm;
     RelativeCCSender::setMode(relativeCCmode::SIGN_MAGNITUDE);
-    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     // Should be sent in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
@@ -136,7 +136,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsForwardsNextAddress) {
 
     EncoderMock encm;
     RelativeCCSender::setMode(relativeCCmode::NEXT_ADDRESS);
-    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     // Should be sent in packets of value 15 maximum
     EXPECT_CALL(encm, read()).WillOnce(Return(4 * 16));
@@ -153,7 +153,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwardsNextAddress) {
 
     EncoderMock encm;
     RelativeCCSender::setMode(relativeCCmode::NEXT_ADDRESS);
-    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     // Should be sent in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
@@ -170,7 +170,7 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwardsBinaryOffset) {
 
     EncoderMock encm;
     RelativeCCSender::setMode(relativeCCmode::BINARY_OFFSET);
-    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+    CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     // Should be sent in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
@@ -193,7 +193,7 @@ TEST(CCRotaryEncoderBankable, turnOneStepChangeSettingTurnOneStep) {
 
     EncoderMock encm;
     Bankable::CCRotaryEncoder ccenc = {
-        bank, encm, {0x20, CHANNEL_7, 0xC}, 2, 4};
+        bank, encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     EXPECT_CALL(encm, read()).WillOnce(Return(4));
     EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 2, 0xC));

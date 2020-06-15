@@ -34,7 +34,7 @@ class MIDIChordButton : public MIDIOutputElement {
      * @param   address
      *          The address of the base note, containing the note number 
      *          [0, 127], the MIDI channel [CHANNEL_1, CHANNEL_16] and Cable 
-     *          Number [0, 15].
+     *          Number [CABLE_1, CABLE_16].
      * @param   chord
      *          The chord to play on top of the base notes.
      * @param   sender

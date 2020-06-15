@@ -33,7 +33,7 @@ class MIDIInputElementCC : public MIDIInputElement,
      * 
      * @param   address
      *          The MIDI address to listen to. (Controller number [0, 119],
-     *          Channel [1, 16], Cable Number [0, 15].)
+     *          Channel [1, 16], Cable Number [CABLE_1, CABLE_16].)
      */
     MIDIInputElementCC(const MIDIAddress &address)
         : MIDIInputElement{address} {

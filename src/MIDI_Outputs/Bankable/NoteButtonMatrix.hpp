@@ -51,14 +51,14 @@ class NoteButtonMatrix
      *          matrix that contains the note number of each button. [0, 127]
      * @param   channelCN
      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
-     *          [0, 15].
+     *          [CABLE_1, CABLE_16].
      * @param   velocity
      *          The velocity of the MIDI Note events.
      */
     NoteButtonMatrix(OutputBankConfig<> config, const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &notes,
-                     MIDIChannelCN channelCN = {CHANNEL_1, 0},
+                     MIDIChannelCN channelCN = {CHANNEL_1, CABLE_1},
                      uint8_t velocity = 0x7F)
         : MIDIButtonMatrix<MatrixAddress<nb_rows, nb_cols>, DigitalNoteSender,
                            nb_rows, nb_cols>{

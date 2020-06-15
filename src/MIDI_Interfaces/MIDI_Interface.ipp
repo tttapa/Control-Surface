@@ -5,46 +5,44 @@ BEGIN_CS_NAMESPACE
 
 template <class Derived>
 void MIDI_Sender<Derived>::send(MIDIMessageType m, Channel c, uint8_t d1,
-                                uint8_t d2) {
-    sendOnCable(m, c, d1, d2, 0);
+                                uint8_t d2, Cable cable) {
+    sendOnCable(m, c, d1, d2, cable);
 }
 
 template <class Derived>
-void MIDI_Sender<Derived>::send(MIDIMessageType m, Channel c, uint8_t d1) {
-    sendOnCable(m, c, d1, 0);
+void MIDI_Sender<Derived>::send(MIDIMessageType m, Channel c, uint8_t d1,
+                                Cable cable) {
+    sendOnCable(m, c, d1, cable);
 }
 
 template <class Derived>
 void MIDI_Sender<Derived>::sendOnCable(MIDIMessageType m, Channel c, uint8_t d1,
-                                       uint8_t d2, uint8_t cn) {
+                                       uint8_t d2, Cable cable) {
     uint8_t mm = static_cast<uint8_t>(m);
     uint8_t cc = c.getRaw();
     mm &= 0xF0;       // bitmask high nibble
     mm |= 0b10000000; // set msb
     d1 &= 0x7F;       // clear msb
     d2 &= 0x7F;       // clear msb
-    cn &= 0x0F;       // bitmask low nibble
-    CRTP(Derived).sendImpl(mm | cc, d1, d2, cn);
+    CRTP(Derived).sendImpl(mm | cc, d1, d2, cable.getRaw());
 }
 
 template <class Derived>
 void MIDI_Sender<Derived>::sendOnCable(MIDIMessageType m, Channel c, uint8_t d1,
-                                       uint8_t cn) {
+                                       Cable cable) {
     uint8_t mm = static_cast<uint8_t>(m);
     uint8_t cc = c.getRaw();
     mm &= 0xF0;       // bitmask high nibble
     mm |= 0b10000000; // set msb
     d1 &= 0x7F;       // clear msb
-    cn &= 0x0F;       // bitmask low nibble
-    CRTP(Derived).sendImpl(mm | cc, d1, cn);
+    CRTP(Derived).sendImpl(mm | cc, d1, cable.getRaw());
 }
 
 template <class Derived>
-void MIDI_Sender<Derived>::sendOnCable(MIDIMessageType r, uint8_t cn) {
+void MIDI_Sender<Derived>::sendOnCable(MIDIMessageType r, Cable cable) {
     uint8_t rr = static_cast<uint8_t>(r);
     rr |= 0b10000000; // set msb
-    cn &= 0x0F;       // bitmask low nibble
-    CRTP(Derived).sendImpl(rr, cn);
+    CRTP(Derived).sendImpl(rr, cable.getRaw());
 }
 
 template <class Derived>
@@ -106,9 +104,8 @@ void MIDI_Sender<Derived>::send(SysExMessage message) {
     }
 }
 template <class Derived>
-void MIDI_Sender<Derived>::send(MIDIMessageType rt) {
-    // if (rt != MIDIMessageType::INVALID) { // TODO
-    CRTP(Derived).sendImpl(rt, 0);
+void MIDI_Sender<Derived>::send(MIDIMessageType rt, Cable cable) {
+    CRTP(Derived).sendImpl(rt, cable.getRaw());
 }
 
 template <class Derived>

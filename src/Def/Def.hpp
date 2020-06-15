@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Channel.hpp"
+#include "Cable.hpp"
 #include <AH/Containers/Array.hpp>
 #include <AH/Hardware/Hardware-Types.hpp>
 #include <Settings/NamespaceSettings.hpp>

@@ -13,7 +13,7 @@ TEST(PBPotentiometer, simple) {
     MockMIDI_Interface midi;
     Control_Surface.connectDefaultMIDI_Interface();
 
-    PBPotentiometer pot(2, {CHANNEL_7, 0xC});
+    PBPotentiometer pot(2, {CHANNEL_7, CABLE_13});
     pot.begin();
 
     EXPECT_CALL(ArduinoMock::getInstance(), analogRead(2))
@@ -34,7 +34,7 @@ TEST(PBPotentiometer, mapping) {
     MockMIDI_Interface midi;
     Control_Surface.connectDefaultMIDI_Interface();
 
-    PBPotentiometer pot(2, {CHANNEL_7, 0xC});
+    PBPotentiometer pot(2, {CHANNEL_7, CABLE_13});
     pot.begin();
     pot.map([](analog_t x) -> analog_t { return x * 2; });
 
@@ -56,7 +56,7 @@ TEST(PBPotentiometer, invert) {
     MockMIDI_Interface midi;
     Control_Surface.connectDefaultMIDI_Interface();
 
-    PBPotentiometer pot(2, {CHANNEL_7, 0xC});
+    PBPotentiometer pot(2, {CHANNEL_7, CABLE_13});
     pot.begin();
     pot.invert();
 

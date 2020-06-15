@@ -21,24 +21,27 @@ class MIDIChannelCN {
 
   public:
     constexpr MIDIChannelCN() : addresses{0, 0, 0, 0} {}
-    constexpr MIDIChannelCN(Channel channel, int cableNumber = 0)
+    constexpr MIDIChannelCN(Channel channel, Cable cableNumber = CABLE_1)
         : addresses{
               1,
               0,
               channel.getRaw(),
-              (uint8_t)cableNumber,
+              cableNumber.getRaw(),
           } {}
 
     /// Get the channel [1, 16].
-    constexpr Channel getChannel() const {
-        return Channel{addresses.channel};
-    }
-
+    constexpr Channel getChannel() const { return Channel{addresses.channel}; }
     /// Get the channel as an integer [0, 15].
     constexpr uint8_t getRawChannel() const { return addresses.channel; }
 
-    /// Get the cable number [0, 15].
-    constexpr uint8_t getCableNumber() const { return addresses.cableNumber; }
+    /// Get the cable number [CABLE_1, CABLE_16].
+    constexpr Cable getCableNumber() const {
+        return Cable(addresses.cableNumber);
+    }
+    /// Get the cable number as an integer [0, 15].
+    constexpr uint8_t getRawCableNumber() const {
+        return addresses.cableNumber;
+    }
 
     /// Check if the MIDI address is valid.
     constexpr bool isValid() const { return addresses.valid; }
@@ -73,7 +76,7 @@ class RelativeMIDIAddress {
           } {}
     constexpr bool isValid() const { return addresses.valid; }
 
-    /// Compound addition. Element-wise addition, result is valid if both 
+    /// Compound addition. Element-wise addition, result is valid if both
     /// operands were valid.
     RelativeMIDIAddress &operator+=(RelativeMIDIAddress that);
 
@@ -115,8 +118,8 @@ class MIDIAddress {
               1,
               (uint8_t)address,
               channelCN.getRawChannel(),
-              channelCN.getCableNumber(),
-          } {}
+              channelCN.getRawCableNumber(),
+          } {} // Deliberate overflow for negative numbers
 
     /** 
      * @brief Constructor.
@@ -131,15 +134,35 @@ class MIDIAddress {
      *          Use the constants @ref CHANNEL_1 through @ref CHANNEL_16.
      * @param   cableNumber 
      *          The MIDI USB cable number.  
-     *          Must be a number in the range [0, 15].
+     *          Use the constants @ref CABLE_1 through @ref CABLE_16.
      */
     constexpr MIDIAddress(int address, Channel channel = CHANNEL_1,
-                          int cableNumber = 0x0)
+                          Cable cableNumber = CABLE_1)
         : addresses{
               1,
               (uint8_t)address,
               channel.getRaw(),
-              (uint8_t)cableNumber,
+              cableNumber.getRaw(),
+          } {} // Deliberate overflow for negative numbers
+
+    /** 
+     * @brief Constructor.
+     * 
+     * @param   address 
+     *          The 7-bit MIDI address.  
+     *          Depending on the message type, this can be the MIDI note number,
+     *          the number of the MIDI Control Change Controller, etc.  
+     *          Must be a number in the range [0, 127].
+     * @param   cableNumber 
+     *          The MIDI USB cable number.  
+     *          Use the constants @ref CABLE_1 through @ref CABLE_16.
+     */
+    constexpr MIDIAddress(int address, Cable cableNumber)
+        : addresses{
+              1,
+              (uint8_t)address,
+              0,
+              cableNumber.getRaw(),
           } {} // Deliberate overflow for negative numbers
 
     /** 
@@ -150,15 +173,15 @@ class MIDIAddress {
      *          Use the constants @ref CHANNEL_1 through @ref CHANNEL_16.
      * @param   cableNumber 
      *          The MIDI USB cable number.  
-     *          Must be a number in the range [0, 15].
+     *          Use the constants @ref CABLE_1 through @ref CABLE_16.
      */
-    constexpr MIDIAddress(Channel channel, int cableNumber = 0x0)
+    constexpr MIDIAddress(Channel channel, Cable cableNumber = CABLE_1)
         : addresses{
               1,
               0,
               channel.getRaw(),
-              (uint8_t)cableNumber,
-          } {} // Deliberate overflow for negative numbers
+              cableNumber.getRaw(),
+          } {}
 
     /** 
      * @brief Constructor.
@@ -200,14 +223,18 @@ class MIDIAddress {
     constexpr uint8_t getAddress() const { return addresses.address; }
 
     /// Get the channel [CHANNEL_1, CHANNEL_16]
-    constexpr Channel getChannel() const {
-        return Channel{addresses.channel};
-    }
+    constexpr Channel getChannel() const { return Channel{addresses.channel}; }
     /// Get the channel as an integer [0, 15]
     constexpr uint8_t getRawChannel() const { return addresses.channel; }
 
-    /// Get the cable number [0, 15]
-    constexpr uint8_t getCableNumber() const { return addresses.cableNumber; }
+    /// Get the cable number [CABLE_1, CABLE_16].
+    constexpr Cable getCableNumber() const {
+        return Cable(addresses.cableNumber);
+    }
+    /// Get the cable number as an integer [0, 15].
+    constexpr uint8_t getRawCableNumber() const {
+        return addresses.cableNumber;
+    }
 
     /// @}
 

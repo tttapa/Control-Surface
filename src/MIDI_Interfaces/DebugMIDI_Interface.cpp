@@ -82,7 +82,8 @@ void StreamDebugMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
     uint8_t c = header & 0x0F;
     stream << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
            << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
-           << F("\tData 2: 0x") << d2 << dec << F("\tCable: ") << cn << endl;
+           << F("\tData 2: 0x") << d2 << dec << F("\tCable: ") << (cn + 1)
+           << endl;
     stream.flush();
 }
 
@@ -94,7 +95,7 @@ void StreamDebugMIDI_Interface::sendImpl(uint8_t header, uint8_t d1,
     uint8_t c = header & 0x0F;
     stream << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
            << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
-           << dec << F("\tCable: ") << cn << endl;
+           << dec << F("\tCable: ") << (cn + 1) << endl;
     stream.flush();
 }
 
@@ -103,7 +104,7 @@ void StreamDebugMIDI_Interface::sendImpl(const uint8_t *data, size_t length,
     stream << F("SysEx           \t") << hex << uppercase;
     while (length-- > 0)
         stream << (*data++) << ' ';
-    stream << dec << F("\tCable: ") << cn << "\r\n";
+    stream << dec << F("\tCable: ") << (cn + 1) << "\r\n";
     stream.flush();
 }
 

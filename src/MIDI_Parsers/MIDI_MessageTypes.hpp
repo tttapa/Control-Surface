@@ -12,6 +12,7 @@
 AH_DIAGNOSTIC_WERROR()
 
 #include <Def/Channel.hpp>
+#include <Def/Cable.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -69,6 +70,16 @@ enum class MIDICodeIndexNumber : uint8_t {
 // -------------------------------------------------------------------------- //
 
 struct ChannelMessage {
+    /// Constructor.
+    ChannelMessage(uint8_t header, uint8_t data1, uint8_t data2, uint8_t CN)
+        : header(header), data1(data1), data2(data2), CN(CN) {}
+
+    /// Constructor.
+    ChannelMessage(MIDIMessageType type, Channel channel, uint8_t data1,
+                   uint8_t data2 = 0x00, Cable cable = CABLE_1)
+        : ChannelMessage(uint8_t(type) | channel.getRaw(), data1, data2,
+                         cable.getRaw()) {}
+
     uint8_t header; ///< MIDI status byte (message type and channel).
     uint8_t data1;  ///< First MIDI data byte
     uint8_t data2;  ///< First MIDI data byte
@@ -90,6 +101,11 @@ struct ChannelMessage {
         header &= 0xF0;
         header |= channel.getRaw();
     }
+
+    /// Get the MIDI USB cable number of the message.
+    Cable getCable() const { return Cable(CN); }
+    /// Set the MIDI USB cable number of the message.
+    void setCable(Cable cable) { CN = cable.getRaw(); }
 
     /// Get the MIDI message type.
     MIDIMessageType getMessageType() const {
@@ -120,13 +136,23 @@ struct ChannelMessage {
 };
 
 struct SysExMessage {
+    /// Constructor.
     SysExMessage() : data(nullptr), length(0), CN(0) {}
-    SysExMessage(const uint8_t *data, size_t length, uint8_t CN = 0)
+
+    /// Constructor.
+    SysExMessage(const uint8_t *data, size_t length, uint8_t CN)
         : data(data), length(length), CN(CN) {}
+
+    /// Constructor.
+    SysExMessage(const uint8_t *data, size_t length, Cable cable = CABLE_1)
+        : data(data), length(length), CN(cable.getRaw()) {}
+
 #ifndef ARDUINO
-    SysExMessage(const std::vector<uint8_t> &vec, uint8_t CN = 0)
-        : data(vec.data()), length(vec.size()), CN(CN) {}
+    /// Constructor.
+    SysExMessage(const std::vector<uint8_t> &vec, Cable cable = CABLE_1)
+        : SysExMessage(vec.data(), vec.size(), cable) {}
 #endif
+
     const uint8_t *data;
     uint8_t length;
     uint8_t CN;
@@ -137,12 +163,28 @@ struct SysExMessage {
                this->CN == other.CN;
     }
     bool operator!=(SysExMessage other) const { return !(*this == other); }
+
+    /// Get the MIDI USB cable number of the message.
+    Cable getCable() const { return Cable(CN); }
+    /// Set the MIDI USB cable number of the message.
+    void setCable(Cable cable) { CN = cable.getRaw(); }
 };
 
 struct RealTimeMessage {
+    /// Constructor.
     RealTimeMessage(uint8_t message, uint8_t cn) : message(message), CN(cn) {}
+
+    /// Constructor.
     RealTimeMessage(MIDIMessageType message, uint8_t cn)
         : message(uint8_t(message)), CN(cn) {}
+
+    /// Constructor.
+    RealTimeMessage(uint8_t message, Cable cable = CABLE_1)
+        : message(message), CN(cable.getRaw()) {}
+
+    /// Constructor.
+    RealTimeMessage(MIDIMessageType message, Cable cable = CABLE_1)
+        : message(uint8_t(message)), CN(cable.getRaw()) {}
 
     uint8_t message;
     uint8_t CN;
@@ -151,6 +193,11 @@ struct RealTimeMessage {
         return this->message == other.message && this->CN == other.CN;
     }
     bool operator!=(RealTimeMessage other) const { return !(*this == other); }
+
+    /// Get the MIDI USB cable number of the message.
+    Cable getCable() const { return Cable(CN); }
+    /// Set the MIDI USB cable number of the message.
+    void setCable(Cable cable) { CN = cable.getRaw(); }
 };
 
 END_CS_NAMESPACE

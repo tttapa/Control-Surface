@@ -43,14 +43,14 @@ class NoteButtonMatrix
      *          A 2-dimensional array of the same dimensions as the button
      *          matrix that contains the note number of each button. [0, 127]
      * @param   channelCN
-     *          The MIDI channel [1, 16] and Cable Number [0, 15].
+     *          The MIDI channel [1, 16] and Cable Number [CABLE_1, CABLE_16].
      * @param   velocity
      *          The velocity of the MIDI Note events.
      */
     NoteButtonMatrix(const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &notes,
-                     MIDIChannelCN channelCN = {CHANNEL_1, 0},
+                     MIDIChannelCN channelCN = {CHANNEL_1, CABLE_1},
                      uint8_t velocity = 0x7F)
         : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>{
               rowPins, colPins, notes, channelCN, {velocity},

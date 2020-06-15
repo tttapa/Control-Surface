@@ -28,7 +28,7 @@ class PCButton : public MIDIButton<ProgramChangeSender> {
      * @param   address
      *          The MIDI address containing the program number [0, 127], 
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
-     *          [0, 15].
+     *          [CABLE_1, CABLE_16].
      */
     PCButton(pin_t pin, const MIDIAddress &address)
         : MIDIButton(pin, address, {}) {}

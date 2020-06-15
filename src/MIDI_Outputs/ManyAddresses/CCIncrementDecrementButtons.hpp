@@ -38,23 +38,24 @@ class CCIncrementDecrementButtons
      * @param   addresses
      *          The list of MIDI addresses to use for the relative events, 
      *          containing the controller number [0, 119], channel [CHANNEL_1, 
-     *          CHANNEL_16], and optional cable number [0, 15].
+     *          CHANNEL_16], and optional cable number [CABLE_1, CABLE_16].
      * @param   multiplier
      *          The multiplier for the relative events. When setting it to 2,
      *          it will scroll twice as fast, for example.
      * @param   resetNotes
      *          The list of MIDI addresses to use to reset the setting, 
      *          containing the note number [0, 127], channel [CHANNEL_1, 
-     *          CHANNEL_16], and optional cable number [0, 15]. It will be 
-     *          triggered when the increment and decrement buttons are pressed 
-     *          simultaneously.
+     *          CHANNEL_16], and optional cable number [CABLE_1, CABLE_16]. 
+     *          It will be triggered when the increment and decrement buttons
+     *          are pressed simultaneously.
      * @param   relativeSender
      *          The MIDI sender to use for the relative events.
      * @param   resetSender
      *          The MIDI sender to use for reset events.
      */
     CCIncrementDecrementButtons(
-        const Bank<NumBanks> &bank, const AH::IncrementDecrementButtons &buttons,
+        const Bank<NumBanks> &bank,
+        const AH::IncrementDecrementButtons &buttons,
         const Array<MIDIAddress, NumBanks> &addresses, uint8_t multiplier = 1,
         const Array<MIDIAddress, NumBanks> &resetNotes = {},
         const RelativeCCSender &relativeSender = {},

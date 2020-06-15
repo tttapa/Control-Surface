@@ -39,7 +39,7 @@ class PBPotentiometer
      *          The analog input pin to read from.
      * @param   address
      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
-     *          Number [0, 15].
+     *          Number [CABLE_1, CABLE_16].
      */
     PBPotentiometer(OutputBankConfig<BankType::CHANGE_CHANNEL> config,
                     pin_t analogPin, MIDIChannelCN address)

@@ -34,12 +34,12 @@ TEST(StreamMIDI_Interface, send3B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
     midi.send(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66);
-    midi.sendOnCable(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66, 9);
-    midi.sendNoteOn({0x55, CHANNEL_4, 8}, 0x66);
-    midi.sendNoteOff({0x55, CHANNEL_4, 8}, 0x66);
-    midi.sendCC({0x55, CHANNEL_4, 8}, 0x66);
-    midi.sendKP({0x55, CHANNEL_4, 8}, 0x66);
-    midi.sendPB(MIDIChannelCN{CHANNEL_4, 8}, 0x3355);
+    midi.sendOnCable(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66, CABLE_1);
+    midi.sendNoteOn({0x55, CHANNEL_4}, 0x66);
+    midi.sendNoteOff({0x55, CHANNEL_4}, 0x66);
+    midi.sendCC({0x55, CHANNEL_4}, 0x66);
+    midi.sendKP({0x55, CHANNEL_4}, 0x66);
+    midi.sendPB(CHANNEL_4, 0x3355);
     u8vec expected = {
         0x93, 0x55, 0x66, //
         0x93, 0x55, 0x66, //
@@ -56,10 +56,10 @@ TEST(StreamMIDI_Interface, send2B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
     midi.send(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66);
-    midi.sendOnCable(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66, 9);
-    midi.sendPC({CHANNEL_4, 8}, 0x66);
-    midi.sendPC({0x66, CHANNEL_4, 8});
-    midi.sendCP({CHANNEL_4, 8}, 0x66);
+    midi.sendOnCable(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66, CABLE_1);
+    midi.sendPC({CHANNEL_4}, 0x66);
+    midi.sendPC({0x66, CHANNEL_4});
+    midi.sendCP(CHANNEL_4, 0x66);
     u8vec expected = {
         0xC3, 0x66, //
         0xC3, 0x66, //
@@ -140,12 +140,12 @@ TEST(StreamMIDI_Interface, readSysEx) {
 TEST(StreamMIDI_Interface, readSysExUpdate) {
     class MockMIDI_Callbacks : public MIDI_Callbacks {
       public:
-        W_SUGGEST_OVERRIDE_OFF
-        MOCK_METHOD1(onChannelMessage, void(Parsing_MIDI_Interface &));
-        MOCK_METHOD1(onSysExMessage, void(Parsing_MIDI_Interface &));
-        MOCK_METHOD2(onRealTimeMessage,
-                     void(Parsing_MIDI_Interface &, uint8_t));
-        W_SUGGEST_OVERRIDE_ON
+        MOCK_METHOD(void, onChannelMessage, (Parsing_MIDI_Interface &),
+                    (override));
+        MOCK_METHOD(void, onSysExMessage, (Parsing_MIDI_Interface &),
+                    (override));
+        MOCK_METHOD(void, onRealTimeMessage, (Parsing_MIDI_Interface &),
+                    (override));
     } callbacks;
     TestStream stream;
     StreamMIDI_Interface midi = stream;

@@ -6,7 +6,7 @@
 BEGIN_CS_NAMESPACE
 
 /**
- * @brief   A class of MIDIOutputElement%s that read the input of a **collection 
+ * @brief   A class of MIDIOutputElement%s that read the input of a **collection
  *          of momentary push buttons or switches**, and send out MIDI **Note** 
  *          events.
  * 
@@ -33,7 +33,7 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NumButtons> {
      * @param   baseAddress
      *          The MIDI address of the first button, containing the note
      *          number [0, 127], channel [CHANNEL_1, CHANNEL_16], and optional 
-     *          cable number [0, 15].
+     *          cable number [CABLE_1, CABLE_16].
      * @param   incrementAddress
      *          The number of addresses to increment for each next button.  
      *          E.g. if `baseAddress` is 8, and `incrementAddress` is 2,

@@ -69,8 +69,8 @@ class MIDIInputElementChannelPressure
     }
 
     /**
-     * @brief   Update all MIDIInputElementChannelPressure elements with a new MIDI
-     *          message.
+     * @brief   Update all MIDIInputElementChannelPressure elements with a new 
+     *          MIDI message.
      *
      * @see     MIDIInputElementChannelPressure#updateWith
      */
@@ -88,9 +88,12 @@ class MIDIInputElementChannelPressure
   private:
     /// Channel Pressure doesn't have an address, so the target consists of just
     /// the channel and the cable number.
-    MIDIAddress
-    getTarget(const ChannelMessageMatcher &midimsg) const override {
-        return {0, Channel(midimsg.channel), midimsg.CN};
+    MIDIAddress getTarget(const ChannelMessageMatcher &midimsg) const override {
+        return {
+            0,
+            Channel(midimsg.channel),
+            Cable(midimsg.CN),
+        };
     }
 
     /**

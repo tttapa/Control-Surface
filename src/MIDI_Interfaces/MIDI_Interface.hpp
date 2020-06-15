@@ -32,8 +32,11 @@ class MIDI_Sender {
      *          The first data byte. [0, 127]
      * @param   d2
      *          The second data byte. [0, 127]
+     * @param   cable
+     *          The MIDI Cable Number. [1, 16]
      */
-    void send(MIDIMessageType m, Channel c, uint8_t d1, uint8_t d2);
+    void send(MIDIMessageType m, Channel c, uint8_t d1, uint8_t d2,
+              Cable cable = CABLE_1);
 
     /**
      * @brief   Send a 2-byte MIDI packet.
@@ -44,8 +47,10 @@ class MIDI_Sender {
      *          The MIDI channel. [1, 16]
      * @param   d1
      *          The first data byte. [0, 127]
+     * @param   cable
+     *          The MIDI Cable Number. [1, 16]
      */
-    void send(MIDIMessageType m, Channel c, uint8_t d1);
+    void send(MIDIMessageType m, Channel c, uint8_t d1, Cable cable = CABLE_1);
 
     /**
      * @brief   Send a 3-byte MIDI packet with cable number.
@@ -58,10 +63,11 @@ class MIDI_Sender {
      *          The first data byte. [0, 127]
      * @param   d2
      *          The second data byte. [0, 127]
-     * @param   cn
-     *          The MIDI Cable Number. [0, 15]
+     * @param   cable
+     *          The MIDI Cable Number. [1, 16]
      */
-    void sendOnCable(MIDIMessageType m, Channel c, uint8_t d1, uint8_t d2, uint8_t cn);
+    void sendOnCable(MIDIMessageType m, Channel c, uint8_t d1, uint8_t d2,
+                     Cable cable);
 
     /**
      * @brief   Send a 2-byte MIDI packet with cable number.
@@ -72,20 +78,20 @@ class MIDI_Sender {
      *          The MIDI channel. [1, 16]
      * @param   d1
      *          The first data byte. [0, 127]
-     * @param   cn
-     *          The MIDI Cable Number. [0, 15]
+     * @param   cable
+     *          The MIDI Cable Number. [1, 16]
      */
-    void sendOnCable(MIDIMessageType m, Channel c, uint8_t d1, uint8_t cn);
+    void sendOnCable(MIDIMessageType m, Channel c, uint8_t d1, Cable cable);
 
     /**
      * @brief   Send a single-byte MIDI packet with cable number.
      *
      * @param   rt
      *          The MIDI byte to send.
-     * @param   cn
-     *          The MIDI Cable Number. [0, 15]
+     * @param   cable
+     *          The MIDI Cable Number. [1, 16]
      */
-    void sendOnCable(MIDIMessageType rt, uint8_t cn);
+    void sendOnCable(MIDIMessageType rt, Cable cable);
 
     /// Send a MIDI Note On event.
     void sendNoteOn(MIDIAddress address, uint8_t velocity);
@@ -109,13 +115,13 @@ class MIDI_Sender {
     void send(SysExMessage message);
     /// Send a MIDI System Exclusive message.
     template <size_t N>
-    void send(const uint8_t (&sysexdata)[N], uint8_t cn = 0) {
-        send(SysExMessage{sysexdata, N, cn});
+    void send(const uint8_t (&sysexdata)[N], Cable cable = CABLE_1) {
+        send(SysExMessage{sysexdata, N, cable});
     }
     /// Send a MIDI Real-Time message.
     void send(RealTimeMessage message);
     /// Send a single-byte MIDI message.
-    void send(MIDIMessageType rt);
+    void send(MIDIMessageType rt, Cable cable = CABLE_1);
 
     /// @}
 };

@@ -19,7 +19,7 @@ BEGIN_CS_NAMESPACE
 class NoteChordButton : public MIDIChordButton<DigitalNoteSender> {
   public:
     /**
-     * @brief   Create a new Bankable NoteChordButton object with the given pin, 
+     * @brief   Create a new Bankable NoteChordButton object with the given pin,
      *          address and chord.
      * 
      * @param   pin
@@ -28,7 +28,7 @@ class NoteChordButton : public MIDIChordButton<DigitalNoteSender> {
      * @param   address
      *          The MIDI address of the base note, containing the note
      *          number [0, 127], channel [CHANNEL_1, CHANNEL_16], and optional 
-     *          cable number [0, 15].
+     *          cable number [CABLE_1, CABLE_16].
      * @param   chord
      *          The chord containing the intervals of the other notes to play.
      * @param   velocity

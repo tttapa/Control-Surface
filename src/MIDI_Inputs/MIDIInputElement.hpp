@@ -60,9 +60,12 @@ class MIDIInputElement {
      *          target address consists of the address (data 1), the MIDI 
      *          channel and the cable number.
      */
-    virtual MIDIAddress
-    getTarget(const ChannelMessageMatcher &midimsg) const {
-        return {int8_t(midimsg.data1), Channel(midimsg.channel), midimsg.CN};
+    virtual MIDIAddress getTarget(const ChannelMessageMatcher &midimsg) const {
+        return {
+            int8_t(midimsg.data1),
+            Channel(midimsg.channel),
+            Cable(midimsg.CN),
+        };
     }
 
     /**

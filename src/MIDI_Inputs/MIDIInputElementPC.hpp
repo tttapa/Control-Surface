@@ -12,7 +12,6 @@
 
 BEGIN_CS_NAMESPACE
 
-
 /**
  * @brief   Class for objects that listen for incoming MIDI Program Change
  *          events.
@@ -26,8 +25,7 @@ class MIDIInputElementPC : public MIDIInputElement,
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementPC(const MIDIAddress &address)
-        : MIDIInputElement(address) {
+    MIDIInputElementPC(const MIDIAddress &address) : MIDIInputElement(address) {
         GUARD_LIST_LOCK;
         elements.append(this);
     }
@@ -88,9 +86,12 @@ class MIDIInputElementPC : public MIDIInputElement,
   private:
     /// Program Change doesn't have an address, so the target consists of just
     /// the channel and the cable number.
-    MIDIAddress
-    getTarget(const ChannelMessageMatcher &midimsg) const override {
-        return {0, Channel(midimsg.channel), midimsg.CN};
+    MIDIAddress getTarget(const ChannelMessageMatcher &midimsg) const override {
+        return {
+            0,
+            Channel(midimsg.channel),
+            Cable(midimsg.CN),
+        };
     }
 
     /**

@@ -89,7 +89,7 @@ class HardwareSerialDebugMIDI_Interface
     : public SerialDebugMIDI_Interface<HardwareSerial> {
   public:
     /**
-     * @brief   Construct a new Debug MIDI Interface on the given HardwareSerial 
+     * @brief   Construct a new Debug MIDI Interface on the given HardwareSerial
      *          interface with the given baud rate.
      * 
      * @param   serial

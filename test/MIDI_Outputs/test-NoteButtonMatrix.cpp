@@ -10,7 +10,7 @@ TEST(NoteButtonMatrix, pressAndRelease) {
     Control_Surface.connectDefaultMIDI_Interface();
 
     constexpr Channel channel = CHANNEL_7;
-    constexpr uint8_t cn = 0xC;
+    constexpr Cable cn = CABLE_13;
     AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
     NoteButtonMatrix<3, 2> matrix = {
         {2, 3, 4}, {5, 6}, addresses, {channel, cn}};
@@ -86,7 +86,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     OutputBank bank(4);
 
     constexpr Channel channel = CHANNEL_7;
-    constexpr uint8_t cn = 0xC;
+    constexpr Cable cn = CABLE_13;
     AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
 
     Bankable::NoteButtonMatrix<3, 2> matrix = {
@@ -227,7 +227,10 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
 
     Bank<2> bank(4);
 
-    Array<MIDIChannelCN, 2> channels = {{{CHANNEL_7, 0xC}, {CHANNEL_2, 0x9}}};
+    Array<MIDIChannelCN, 2> channels = {{
+        {CHANNEL_7, CABLE_13},
+        {CHANNEL_2, CABLE_10},
+    }};
     AddressMatrix<3, 2> addresses1 = {{{1, 3}, {5, 7}, {9, 11}}};
     AddressMatrix<3, 2> addresses2 = {{{10, 30}, {50, 70}, {90, 110}}};
 

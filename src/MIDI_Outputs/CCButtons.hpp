@@ -33,7 +33,7 @@ class CCButtons : public MIDIButtons<DigitalCCSender, NumButtons> {
      * @param   baseAddress
      *          The MIDI address of the first button, containing the controller
      *          number [0, 119], channel [CHANNEL_1, CHANNEL_16], and optional 
-     *          cable number [0, 15].
+     *          cable number [CABLE_1, CABLE_16].
      * @param   incrementAddress
      *          The number of addresses to increment for each next button.  
      *          E.g. if `baseAddress` is 8, and `incrementAddress` is 2,

@@ -34,7 +34,7 @@ class CCSmartPotentiometer
                                      ContinuousCCSender> {
   public:
     /** 
-     * @brief   Create a new Bankable CCSmartPotentiometer object with the given 
+     * @brief   Create a new Bankable CCSmartPotentiometer object with the given
      *          analog pin, controller number and channel.
      * 
      * @param   config
@@ -45,7 +45,7 @@ class CCSmartPotentiometer
      * @param   address
      *          The MIDI address containing the controller number [0, 119], 
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
-     *          [0, 15].
+     *          [CABLE_1, CABLE_16].
      */
     CCSmartPotentiometer(BankConfig<NumBanks> config, pin_t analogPin,
                          MIDIAddress address)

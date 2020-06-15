@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Banks/BankableMIDIInput.hpp>
 #include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <AH/Math/MinMaxFix.hpp>
+#include <Banks/BankableMIDIInput.hpp>
 #include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
 #include <string.h>
 
@@ -123,12 +123,11 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
 
     /// The address of the VU meter is the high nibble of the first (and only)
     /// data byte.
-    MIDIAddress
-    getTarget(const ChannelMessageMatcher &midimsg) const override {
+    MIDIAddress getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {
             int8_t(midimsg.data1 >> 4),
             Channel(midimsg.channel),
-            midimsg.CN,
+            Cable(midimsg.CN),
         };
     }
 
@@ -189,7 +188,7 @@ class GenericVU : public VU_Base<1, Callback> {
      *          The track of the VU meter. [1, 8]
      * @param   channelCN
      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
-     *          Number [0, 15].
+     *          Number [CABLE_1, CABLE_16].
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
      *          step.  
@@ -228,7 +227,7 @@ class VU : public GenericVU<> {
      *          The track of the VU meter. [1, 8]
      * @param   channelCN
      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
-     *          Number [0, 15].
+     *          Number [CABLE_1, CABLE_16].
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
      *          step.  
@@ -257,7 +256,7 @@ class VU : public GenericVU<> {
      *          step.  
      *          The MCU protocol uses 300 ms per division, and two steps
      *          per division, so the default is 150 ms per step.  
-     *          Some software doesn't work if the VU meter decays automatically, 
+     *          Some software doesn't work if the VU meter decays automatically,
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
      */
@@ -296,7 +295,7 @@ class GenericVU : public VU_Base<NumBanks, Callback>,
      *          The track of the VU meter. [1, 8]
      * @param   channelCN
      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
-     *          Number [0, 15].
+     *          Number [CABLE_1, CABLE_16].
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
      *          step.  
@@ -361,7 +360,7 @@ class VU : public GenericVU<NumBanks> {
      *          The track of the VU meter. [1, 8]
      * @param   channelCN
      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
-     *          Number [0, 15].
+     *          Number [CABLE_1, CABLE_16].
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
      *          step.  

@@ -47,7 +47,7 @@ class PBSmartPotentiometer
      *          The analog input pin to read from.
      * @param   address
      *          The MIDI address containing the channel [CHANNEL_1, CHANNEL_16],
-     *          and optional cable number [0, 15].
+     *          and optional cable number [CABLE_1, CABLE_16].
      */
     PBSmartPotentiometer(BankConfig<NumBanks> config, pin_t analogPin,
                          MIDIChannelCN address)

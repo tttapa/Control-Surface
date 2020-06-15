@@ -40,7 +40,7 @@ class CCRotaryEncoder
      * @param   address
      *          The MIDI address containing the controller number [0, 119], 
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
-     *          [0, 15].
+     *          [CABLE_1, CABLE_16]1, CABLE_16].
      * @param   speedMultiply
      *          A constant factor to increase the speed of the rotary encoder.
      *          The difference in position will just be multiplied by this 

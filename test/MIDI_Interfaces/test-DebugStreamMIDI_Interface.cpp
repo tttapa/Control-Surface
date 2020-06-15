@@ -34,14 +34,14 @@ TEST(StreamDebugMIDI_Interface, send3B) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
     midi.send(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66);
-    midi.sendOnCable(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66, 9);
-    midi.sendNoteOn({0x55, CHANNEL_4, 9}, 0x66);
-    midi.sendNoteOff({0x55, CHANNEL_4, 9}, 0x66);
-    midi.sendCC({0x55, CHANNEL_4, 9}, 0x66);
-    midi.sendKP({0x55, CHANNEL_4, 9}, 0x66);
-    midi.sendPB(MIDIChannelCN{CHANNEL_4, 9}, 0x3355);
+    midi.sendOnCable(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66, CABLE_9);
+    midi.sendNoteOn({0x55, CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendNoteOff({0x55, CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendCC({0x55, CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendKP({0x55, CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendPB({CHANNEL_4, CABLE_9}, 0x3355);
     std::string expected =
-        "Note On         \tChannel: 4\tData 1: 0x55\tData 2: 0x66\tCable: 0\r\n"
+        "Note On         \tChannel: 4\tData 1: 0x55\tData 2: 0x66\tCable: 1\r\n"
         "Note On         \tChannel: 4\tData 1: 0x55\tData 2: 0x66\tCable: 9\r\n"
         "Note On         \tChannel: 4\tData 1: 0x55\tData 2: 0x66\tCable: 9\r\n"
         "Note Off        \tChannel: 4\tData 1: 0x55\tData 2: 0x66\tCable: 9\r\n"
@@ -57,12 +57,12 @@ TEST(StreamDebugMIDI_Interface, send2B) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
     midi.send(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66);
-    midi.sendOnCable(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66, 9);
-    midi.sendPC({CHANNEL_4, 9}, 0x66);
-    midi.sendPC({0x66, CHANNEL_4, 9});
-    midi.sendCP({CHANNEL_4, 9}, 0x66);
+    midi.sendOnCable(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66, CABLE_9);
+    midi.sendPC({CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendPC({0x66, CHANNEL_4, CABLE_9});
+    midi.sendCP({CHANNEL_4, CABLE_9}, 0x66);
     std::string expected =
-        "Program Change  \tChannel: 4\tData 1: 0x66\tCable: 0\r\n"
+        "Program Change  \tChannel: 4\tData 1: 0x66\tCable: 1\r\n"
         "Program Change  \tChannel: 4\tData 1: 0x66\tCable: 9\r\n"
         "Program Change  \tChannel: 4\tData 1: 0x66\tCable: 9\r\n"
         "Program Change  \tChannel: 4\tData 1: 0x66\tCable: 9\r\n"
@@ -76,7 +76,7 @@ TEST(StreamDebugMIDI_Interface, SysExSend8B) {
     StreamDebugMIDI_Interface midi = stream;
     Sequence seq;
     u8vec sysex = {0xF0, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0xF7};
-    midi.send({sysex.data(), sysex.size(), 10});
+    midi.send({sysex.data(), sysex.size(), CABLE_10});
     std::string expected =
         "SysEx           \tF0 11 22 33 44 55 66 F7 \tCable: 10\r\n";
     std::string sentStr(stream.sent.begin(), stream.sent.end());

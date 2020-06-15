@@ -17,8 +17,7 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup MIDIOutputElements
  */
-class CCButton
-    : public MIDIButton<DigitalCCSender> {
+class CCButton : public MIDIButton<DigitalCCSender> {
   public:
     /**
      * @brief   Create a new CCButton object with the given pin,
@@ -30,11 +29,11 @@ class CCButton
      * @param   address
      *          The MIDI address containing the controller number [0, 119], 
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
-     *          [0, 15].
+     *          [CABLE_1, CABLE_16].
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButton(pin_t pin, const MIDIAddress &address, const DigitalCCSender &sender = {})
+    CCButton(pin_t pin, MIDIAddress address, const DigitalCCSender &sender = {})
         : MIDIButton(pin, address, sender) {}
 };
 
