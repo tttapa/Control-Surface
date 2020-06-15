@@ -18,15 +18,15 @@ class Channel {
      * @param   zeroBasedChannel
      *          The zero-based channel (0 is the first channel).
      */
-    explicit constexpr Channel(int8_t zeroBasedChannel)
-        : zeroBasedChannel(zeroBasedChannel & 0xF) {}
+    explicit constexpr Channel(uint8_t zeroBasedChannel)
+        : zeroBasedChannel(zeroBasedChannel) {}
 
     /**
      * @brief   Get the channel as an integer.
      * 
      * @return  The zero-based channel (0 is the first channel).
      */
-    constexpr int8_t getRaw() const { return zeroBasedChannel; }
+    constexpr uint8_t getRaw() const { return zeroBasedChannel; }
 
     /**
      * @brief   Create a channel.
@@ -35,7 +35,7 @@ class Channel {
      *          The channel number (1 is the first channel).
      */
     static constexpr Channel createChannel(int8_t oneBasedChannel) {
-        return Channel{int8_t(oneBasedChannel - 1)};
+        return Channel{uint8_t(oneBasedChannel - 1)};
     }
 
     /**
@@ -54,9 +54,8 @@ class Channel {
      * @param   rhs
      *          The offset to add to this channel.
      */
-    Channel &operator+=(const int8_t rhs) {
+    Channel &operator+=(uint8_t rhs) {
         this->zeroBasedChannel += rhs;
-        this->zeroBasedChannel &= 0xF;
         return *this;
     }
 
@@ -66,7 +65,7 @@ class Channel {
      * @param   rhs
      *          The offset to add to the channel.
      */
-    Channel operator+(const int8_t rhs) const {
+    Channel operator+(uint8_t rhs) const {
         Channel copy = *this;
         copy += rhs;
         return copy;
@@ -78,9 +77,8 @@ class Channel {
      * @param   rhs
      *          The offset to subtract from this channel.
      */
-    Channel &operator-=(const int8_t rhs) {
+    Channel &operator-=(uint8_t rhs) {
         this->zeroBasedChannel -= rhs;
-        this->zeroBasedChannel &= 0xF;
         return *this;
     }
 
@@ -90,14 +88,14 @@ class Channel {
      * @param   rhs
      *          The offset to subtract from the channel.
      */
-    Channel operator-(const int8_t rhs) const {
+    Channel operator-(uint8_t rhs) const {
         Channel copy = *this;
         copy -= rhs;
         return copy;
     }
 
   private:
-    int8_t zeroBasedChannel;
+    uint8_t zeroBasedChannel : 4;
 };
 
 /** 

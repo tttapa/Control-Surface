@@ -81,12 +81,12 @@ void Control_Surface_::updateMidiInput() {
     Updatable<MIDI_Interface>::updateAll();
 }
 
-void Control_Surface_::sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+void Control_Surface_::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
                                 uint8_t cn) {
-    this->sourceMIDItoPipe(ChannelMessage{uint8_t(m | c), d1, d2, cn});
+    this->sourceMIDItoPipe(ChannelMessage{header, d1, d2, cn});
 }
-void Control_Surface_::sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) {
-    this->sourceMIDItoPipe(ChannelMessage{uint8_t(m | c), d1, 0x00, cn});
+void Control_Surface_::sendImpl(uint8_t header, uint8_t d1, uint8_t cn) {
+    this->sourceMIDItoPipe(ChannelMessage{header, d1, 0x00, cn});
 }
 void Control_Surface_::sendImpl(const uint8_t *data, size_t length,
                                 uint8_t cn) {
@@ -113,30 +113,33 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midichmsg) {
     if (channelMessageCallback && channelMessageCallback(midichmsg))
         return;
 
-    if (midimsg.type == CC && midimsg.data1 == 0x79) {
+    if (midimsg.type == MIDIMessageType::CONTROL_CHANGE &&
+        midimsg.data1 == MIDI_CC::Reset_All_Controllers) {
         // Reset All Controllers
         DEBUG(F("Reset All Controllers"));
         MIDIInputElementCC::resetAll();
         MIDIInputElementChannelPressure::resetAll();
-    } else if (midimsg.type == CC && midimsg.data1 == MIDI_CC::All_Notes_Off) {
+    } else if (midimsg.type == MIDIMessageType::CONTROL_CHANGE &&
+               midimsg.data1 == MIDI_CC::All_Notes_Off) {
         MIDIInputElementNote::resetAll();
     } else {
-        if (midimsg.type == CC) {
+        if (midimsg.type == MIDIMessageType::CONTROL_CHANGE) {
             // Control Change
             DEBUGFN(F("Updating CC elements with new MIDI message."));
             MIDIInputElementCC::updateAllWith(midimsg);
 
-        } else if (midimsg.type == NOTE_OFF || midimsg.type == NOTE_ON) {
+        } else if (midimsg.type == MIDIMessageType::NOTE_OFF ||
+                   midimsg.type == MIDIMessageType::NOTE_ON) {
             // Note
             DEBUGFN(F("Updating Note elements with new MIDI message."));
             MIDIInputElementNote::updateAllWith(midimsg);
 
-        } else if (midimsg.type == CHANNEL_PRESSURE) {
+        } else if (midimsg.type == MIDIMessageType::CHANNEL_PRESSURE) {
             // Channel Pressure
             DEBUGFN(F("Updating Channel Pressure elements with new "
                       "MIDI message."));
             MIDIInputElementChannelPressure::updateAllWith(midimsg);
-        } else if (midimsg.type == PROGRAM_CHANGE) {
+        } else if (midimsg.type == MIDIMessageType::PROGRAM_CHANGE) {
             // Channel Pressure
             DEBUGFN(F("Updating Program Change elements with new "
                       "MIDI message."));

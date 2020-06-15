@@ -18,20 +18,22 @@ BEGIN_CS_NAMESPACE
 
 class USBMIDI_Parser : public MIDI_Parser {
   public:
-    MIDI_read_t parse(uint8_t *packet);
+    MIDIReadEvent parse(uint8_t *packet);
 
 #if !IGNORE_SYSEX
-    SysExMessage getSysEx() const override {
-        return {sysexbuffers[CN].getBuffer(), sysexbuffers[CN].getLength(), CN};
+    SysExMessage getSysExMessage() const override {
+        return {sysexbuffers[activeSysExCN].getBuffer(),
+                sysexbuffers[activeSysExCN].getLength(), activeSysExCN};
     }
 #endif
-
-    uint8_t getCN() const override { return CN; }
 
   protected:
 #if !IGNORE_SYSEX
     void startSysEx(uint8_t CN) { sysexbuffers[CN].start(); }
-    void endSysEx(uint8_t CN) { sysexbuffers[CN].end(); }
+    void endSysEx(uint8_t CN) {
+        sysexbuffers[CN].end();
+        activeSysExCN = CN;
+    }
     bool addSysExByte(uint8_t CN, uint8_t data) {
         return sysexbuffers[CN].add(data);
     }
@@ -40,7 +42,7 @@ class USBMIDI_Parser : public MIDI_Parser {
     }
 #endif
 
-    uint8_t CN = 0;
+    uint8_t activeSysExCN = 0;
 
   private:
 #if !IGNORE_SYSEX

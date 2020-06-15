@@ -79,9 +79,9 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
         index = 0;
     }
 
-    MIDI_read_t read() override {
-        update();          // TODO
-        return NO_MESSAGE; // TODO
+    MIDIReadEvent read() override {
+        update();                         // TODO
+        return MIDIReadEvent::NO_MESSAGE; // TODO
     }
 
     template <size_t N>
@@ -117,15 +117,14 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
             publish();
     }
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
-                  uint8_t cn) override {
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override {
         (void)cn;
-        uint8_t msg[3] = {uint8_t(m | c), d1, d2};
+        uint8_t msg[3] = {header, d1, d2};
         addToBuffer(msg);
     }
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override {
         (void)cn;
-        uint8_t msg[2] = {uint8_t(m | c), d1};
+        uint8_t msg[2] = {header, d1};
         addToBuffer(msg);
     }
 

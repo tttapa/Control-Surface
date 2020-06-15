@@ -11,13 +11,23 @@ TEST(NoteValue, NoteOnNoteOff) {
     EXPECT_EQ(mn.getValue(), 0);
     EXPECT_FALSE(mn.getValue() > 0);
 
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3C,
+        0x7E,
+    };
     MIDIInputElementNote::updateAllWith(midimsg1);
 
     EXPECT_EQ(mn.getValue(), 0x7E);
     EXPECT_TRUE(mn.getValue() > 0);
 
-    ChannelMessageMatcher midimsg2 = {0x80, CHANNEL_5, 0x3C, 0x7E};
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::NOTE_OFF,
+        CHANNEL_5,
+        0x3C,
+        0x7E,
+    };
     MIDIInputElementNote::updateAllWith(midimsg2);
 
     EXPECT_EQ(mn.getValue(), 0);
@@ -31,19 +41,34 @@ TEST(NoteRange, NoteOnNoteOff) {
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
 
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3C,
+        0x7E,
+    };
     MIDIInputElementNote::updateAllWith(midimsg1);
 
     EXPECT_EQ(mn.getValue(0), 0x7E);
     EXPECT_EQ(mn.getValue(1), 0x00);
 
-    ChannelMessageMatcher midimsg2 = {0x90, CHANNEL_5, 0x3D, 0x7D};
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3D,
+        0x7D,
+    };
     MIDIInputElementNote::updateAllWith(midimsg2);
 
     EXPECT_EQ(mn.getValue(0), 0x7E);
     EXPECT_EQ(mn.getValue(1), 0x7D);
 
-    ChannelMessageMatcher midimsg3 = {0x80, CHANNEL_5, 0x3C, 0x7E};
+    ChannelMessageMatcher midimsg3 = {
+        MIDIMessageType::NOTE_OFF,
+        CHANNEL_5,
+        0x3C,
+        0x7E,
+    };
     MIDIInputElementNote::updateAllWith(midimsg3);
 
     EXPECT_EQ(mn.getValue(0), 0x00);
@@ -54,10 +79,20 @@ TEST(NoteValue, NoteOnNoteOnZeroVelocity) {
     NoteValue mn = {{0x3C, CHANNEL_5}};
     mn.begin();
 
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3C,
+        0x7E,
+    };
     MIDIInputElementNote::updateAllWith(midimsg1);
 
-    ChannelMessageMatcher midimsg2 = {0x90, CHANNEL_5, 0x3C, 0x00};
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3C,
+        0x00,
+    };
     MIDIInputElementNote::updateAllWith(midimsg2);
 
     EXPECT_EQ(mn.getValue(), 0);
@@ -68,7 +103,12 @@ TEST(NoteValue, reset) {
     NoteValue mn = {{0x3C, CHANNEL_5}};
     mn.begin();
 
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3C,
+        0x7E,
+    };
     MIDIInputElementNote::updateAllWith(midimsg1);
 
     mn.reset();
@@ -81,7 +121,12 @@ TEST(NoteValue, resetAll) {
     NoteValue mn = {{0x3C, CHANNEL_5}};
     mn.begin();
 
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3C,
+        0x7E,
+    };
     MIDIInputElementNote::updateAllWith(midimsg1);
 
     MIDIInputElementNote::resetAll();
@@ -96,21 +141,36 @@ TEST(NoteRange, bankableInRange) {
     mn.begin();
 
     // First bank, first address
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x10, 0x20};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10,
+        0x20,
+    };
     EXPECT_TRUE(mn.updateWith(midimsg1));
     EXPECT_EQ(mn.getValue(0), 0x20);
     EXPECT_EQ(mn.getValue(1), 0x00);
     EXPECT_EQ(mn.getValue(2), 0x00);
 
     // First bank, third address
-    ChannelMessageMatcher midimsg2 = {0x90, CHANNEL_5, 0x10 + 2, 0x21};
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 + 2,
+        0x21,
+    };
     EXPECT_TRUE(mn.updateWith(midimsg2));
     EXPECT_EQ(mn.getValue(0), 0x20);
     EXPECT_EQ(mn.getValue(1), 0x00);
     EXPECT_EQ(mn.getValue(2), 0x21);
 
     // Second bank, second address
-    ChannelMessageMatcher midimsg3 = {0x90, CHANNEL_5, 0x10 + 4 + 1, 0x22};
+    ChannelMessageMatcher midimsg3 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 + 4 + 1,
+        0x22,
+    };
     EXPECT_TRUE(mn.updateWith(midimsg3));
     EXPECT_EQ(mn.getValue(0), 0x20);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -121,7 +181,12 @@ TEST(NoteRange, bankableInRange) {
     EXPECT_EQ(mn.getValue(2), 0x00);
 
     // First bank, first address
-    ChannelMessageMatcher midimsg4 = {0x90, CHANNEL_5, 0x10, 0x23};
+    ChannelMessageMatcher midimsg4 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10,
+        0x23,
+    };
     EXPECT_TRUE(mn.updateWith(midimsg4));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x22);
@@ -138,7 +203,12 @@ TEST(NoteRange, bankableNotInRange) {
     mn.begin();
 
     // Before first bank
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x10 - 1, 0x20};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 - 1,
+        0x20,
+    };
     EXPECT_FALSE(mn.updateWith(midimsg1));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -150,7 +220,12 @@ TEST(NoteRange, bankableNotInRange) {
     bank.select(0);
 
     // First bank, fourth address
-    ChannelMessageMatcher midimsg2 = {0x90, CHANNEL_5, 0x10 + 3, 0x20};
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 + 3,
+        0x20,
+    };
     EXPECT_FALSE(mn.updateWith(midimsg2));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -162,7 +237,8 @@ TEST(NoteRange, bankableNotInRange) {
     bank.select(0);
 
     // Second bank, fourth address
-    ChannelMessageMatcher midimsg3 = {0x90, CHANNEL_5, 0x10 + 4 + 3, 0x20};
+    ChannelMessageMatcher midimsg3 = {MIDIMessageType::NOTE_ON, CHANNEL_5,
+                                      0x10 + 4 + 3, 0x20};
     EXPECT_FALSE(mn.updateWith(midimsg3));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -174,7 +250,12 @@ TEST(NoteRange, bankableNotInRange) {
     bank.select(0);
 
     // Before first bank, first address
-    ChannelMessageMatcher midimsg4 = {0x90, CHANNEL_5, 0x10 - 4, 0x20};
+    ChannelMessageMatcher midimsg4 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 - 4,
+        0x20,
+    };
     EXPECT_FALSE(mn.updateWith(midimsg4));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -186,7 +267,12 @@ TEST(NoteRange, bankableNotInRange) {
     bank.select(0);
 
     // After last bank, first address
-    ChannelMessageMatcher midimsg5 = {0x90, CHANNEL_5, 0x10 + 8, 0x20};
+    ChannelMessageMatcher midimsg5 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 + 8,
+        0x20,
+    };
     EXPECT_FALSE(mn.updateWith(midimsg5));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -198,7 +284,12 @@ TEST(NoteRange, bankableNotInRange) {
     bank.select(0);
 
     // Different channel
-    ChannelMessageMatcher midimsg6 = {0x90, CHANNEL_5 + 1, 0x10, 0x20};
+    ChannelMessageMatcher midimsg6 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5 + 1,
+        0x10,
+        0x20,
+    };
     EXPECT_FALSE(mn.updateWith(midimsg6));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -216,21 +307,36 @@ TEST(NoteRange, bankableInRangeChangeChannel) {
     mn.begin();
 
     // First bank, first address
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x10, 0x20};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10,
+        0x20,
+    };
     EXPECT_TRUE(mn.updateWith(midimsg1));
     EXPECT_EQ(mn.getValue(0), 0x20);
     EXPECT_EQ(mn.getValue(1), 0x00);
     EXPECT_EQ(mn.getValue(2), 0x00);
 
     // First bank, third address
-    ChannelMessageMatcher midimsg2 = {0x90, CHANNEL_5, 0x10 + 2, 0x21};
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 + 2,
+        0x21,
+    };
     EXPECT_TRUE(mn.updateWith(midimsg2));
     EXPECT_EQ(mn.getValue(0), 0x20);
     EXPECT_EQ(mn.getValue(1), 0x00);
     EXPECT_EQ(mn.getValue(2), 0x21);
 
     // Second bank, second address
-    ChannelMessageMatcher midimsg3 = {0x90, CHANNEL_5 + 4, 0x10 + 1, 0x22};
+    ChannelMessageMatcher midimsg3 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5 + 4,
+        0x10 + 1,
+        0x22,
+    };
     EXPECT_TRUE(mn.updateWith(midimsg3));
     EXPECT_EQ(mn.getValue(0), 0x20);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -241,7 +347,12 @@ TEST(NoteRange, bankableInRangeChangeChannel) {
     EXPECT_EQ(mn.getValue(2), 0x00);
 
     // First bank, first address
-    ChannelMessageMatcher midimsg4 = {0x90, CHANNEL_5, 0x10, 0x23};
+    ChannelMessageMatcher midimsg4 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10,
+        0x23,
+    };
     EXPECT_TRUE(mn.updateWith(midimsg4));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x22);
@@ -258,7 +369,12 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
     mn.begin();
 
     // Before first bank
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x10 - 1, 0x20};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 - 1,
+        0x20,
+    };
     EXPECT_FALSE(mn.updateWith(midimsg1));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -270,7 +386,12 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
     bank.select(0);
 
     // First bank, fourth address
-    ChannelMessageMatcher midimsg2 = {0x90, CHANNEL_5, 0x10 + 3, 0x20};
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 + 3,
+        0x20,
+    };
     EXPECT_FALSE(mn.updateWith(midimsg2));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -282,7 +403,12 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
     bank.select(0);
 
     // Before second bank
-    ChannelMessageMatcher midimsg3 = {0x90, CHANNEL_5 + 4, 0x10 - 1, 0x20};
+    ChannelMessageMatcher midimsg3 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5 + 4,
+        0x10 - 1,
+        0x20,
+    };
     EXPECT_FALSE(mn.updateWith(midimsg3));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -294,7 +420,12 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
     bank.select(0);
 
     // Second bank, fourth address
-    ChannelMessageMatcher midimsg4 = {0x90, CHANNEL_5 + 4, 0x10 + 3, 0x20};
+    ChannelMessageMatcher midimsg4 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5 + 4,
+        0x10 + 3,
+        0x20,
+    };
     EXPECT_FALSE(mn.updateWith(midimsg4));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -306,7 +437,12 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
     bank.select(0);
 
     // Before first bank, first address
-    ChannelMessageMatcher midimsg5 = {0x90, CHANNEL_5 - 4, 0x10, 0x20};
+    ChannelMessageMatcher midimsg5 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5 - 4,
+        0x10,
+        0x20,
+    };
     EXPECT_FALSE(mn.updateWith(midimsg5));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -318,7 +454,12 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
     bank.select(0);
 
     // After last bank, first address
-    ChannelMessageMatcher midimsg6 = {0x90, CHANNEL_5 + 8, 0x10, 0x20};
+    ChannelMessageMatcher midimsg6 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5 + 8,
+        0x10,
+        0x20,
+    };
     EXPECT_FALSE(mn.updateWith(midimsg6));
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -342,11 +483,21 @@ TEST(NoteValueLED, NoteOnNoteOff) {
     MIDIInputElementNote::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, HIGH));
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7E};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3C,
+        0x7E,
+    };
     MIDIInputElementNote::updateAllWith(midimsg1);
 
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, LOW));
-    ChannelMessageMatcher midimsg2 = {0x80, CHANNEL_5, 0x3C, 0x7E};
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::NOTE_OFF,
+        CHANNEL_5,
+        0x3C,
+        0x7E,
+    };
     MIDIInputElementNote::updateAllWith(midimsg2);
 
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -362,15 +513,30 @@ TEST(NoteValueLED, PWM) {
     MIDIInputElementNote::beginAll();
 
     EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 255));
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x7F};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3C,
+        0x7F,
+    };
     MIDIInputElementNote::updateAllWith(midimsg1);
 
     EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 16));
-    ChannelMessageMatcher midimsg2 = {0x90, CHANNEL_5, 0x3C, 0x08};
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3C,
+        0x08,
+    };
     MIDIInputElementNote::updateAllWith(midimsg2);
 
     EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 0));
-    ChannelMessageMatcher midimsg3 = {0x80, CHANNEL_5, 0x3C, 0x7F};
+    ChannelMessageMatcher midimsg3 = {
+        MIDIMessageType::NOTE_OFF,
+        CHANNEL_5,
+        0x3C,
+        0x7F,
+    };
     MIDIInputElementNote::updateAllWith(midimsg3);
 
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());

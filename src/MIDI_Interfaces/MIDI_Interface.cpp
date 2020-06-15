@@ -29,28 +29,14 @@ void MIDI_Interface::sinkMIDIfromPipe(ChannelMessage msg) { send(msg); }
 void MIDI_Interface::sinkMIDIfromPipe(SysExMessage msg) { send(msg); }
 void MIDI_Interface::sinkMIDIfromPipe(RealTimeMessage msg) { send(msg); }
 
-// -------------------------------- PARSING --------------------------------- //
-
-Parsing_MIDI_Interface::Parsing_MIDI_Interface(MIDI_Parser &parser)
-    : parser(parser) {}
-
-ChannelMessage Parsing_MIDI_Interface::getChannelMessage() {
-    return parser.getChannelMessage();
-}
-
-SysExMessage Parsing_MIDI_Interface::getSysExMessage() const {
-    return parser.getSysEx();
-}
-
-uint8_t Parsing_MIDI_Interface::getCN() const { return parser.getCN(); }
-
 // -------------------------------- READING --------------------------------- //
 
 void Parsing_MIDI_Interface::update() {
-    if (event == NO_MESSAGE)          // If previous event was handled
-        event = read();               // Read the next incoming message
-    while (event != NO_MESSAGE) {     // As long as there are incoming messages
-        if (dispatchMIDIEvent(event)) // If handled successfully
+    if (event == MIDIReadEvent::NO_MESSAGE) // If previous event was handled
+        event = read();                     // Read the next incoming message
+    while (event != MIDIReadEvent::NO_MESSAGE) { // As long as there are
+                                                 // incoming messages
+        if (dispatchMIDIEvent(event)) // If event was handled successfully
             event = read();           // Read the next incoming message
         else                          // If pipe is locked
             break;                    // Try sending again next time
@@ -58,25 +44,22 @@ void Parsing_MIDI_Interface::update() {
     // TODO: maximum number of iterations? Timeout?
 }
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wswitch-enum"
-
-bool Parsing_MIDI_Interface::dispatchMIDIEvent(MIDI_read_t event) {
+bool Parsing_MIDI_Interface::dispatchMIDIEvent(MIDIReadEvent event) {
     switch (event) {
-        case NO_MESSAGE: return true;
-        case CHANNEL_MESSAGE: return onChannelMessage();
-        case SYSEX_MESSAGE: return onSysExMessage();
-        default: return onRealtimeMessage(static_cast<uint8_t>(event));
+        case MIDIReadEvent::NO_MESSAGE: return true;
+        case MIDIReadEvent::CHANNEL_MESSAGE: return onChannelMessage();
+        case MIDIReadEvent::SYSEX_MESSAGE: return onSysExMessage();
+        case MIDIReadEvent::REALTIME_MESSAGE: return onRealTimeMessage();
+        default: return true;
     }
 }
 
-#pragma GCC diagnostic pop
-
-bool Parsing_MIDI_Interface::onRealtimeMessage(uint8_t message) {
+bool Parsing_MIDI_Interface::onRealTimeMessage() {
     // Always send write to pipe, don't check if it's in exclusive mode or not
-    sourceMIDItoPipe(RealTimeMessage{message, getCN()});
+    auto message = getRealTimeMessage();
+    sourceMIDItoPipe(message);
     if (callbacks)
-        callbacks->onRealtimeMessage(*this, message);
+        callbacks->onRealTimeMessage(*this);
     return true;
 }
 

@@ -25,13 +25,13 @@ class MIDIChannelCN {
         : addresses{
               1,
               0,
-              (uint8_t)channel.getRaw(),
+              channel.getRaw(),
               (uint8_t)cableNumber,
           } {}
 
     /// Get the channel [1, 16].
     constexpr Channel getChannel() const {
-        return Channel{int8_t(addresses.channel)};
+        return Channel{addresses.channel};
     }
 
     /// Get the channel as an integer [0, 15].
@@ -138,7 +138,7 @@ class MIDIAddress {
         : addresses{
               1,
               (uint8_t)address,
-              (uint8_t)channel.getRaw(),
+              channel.getRaw(),
               (uint8_t)cableNumber,
           } {} // Deliberate overflow for negative numbers
 
@@ -156,7 +156,7 @@ class MIDIAddress {
         : addresses{
               1,
               0,
-              (uint8_t)channel.getRaw(),
+              channel.getRaw(),
               (uint8_t)cableNumber,
           } {} // Deliberate overflow for negative numbers
 
@@ -201,7 +201,7 @@ class MIDIAddress {
 
     /// Get the channel [CHANNEL_1, CHANNEL_16]
     constexpr Channel getChannel() const {
-        return Channel{int8_t(addresses.channel)};
+        return Channel{addresses.channel};
     }
     /// Get the channel as an integer [0, 15]
     constexpr uint8_t getRawChannel() const { return addresses.channel; }

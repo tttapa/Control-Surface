@@ -7,10 +7,10 @@ BEGIN_CS_NAMESPACE
 
 class SerialMIDI_Parser : public MIDI_Parser {
   public:
-    MIDI_read_t parse(uint8_t midibyte);
+    MIDIReadEvent parse(uint8_t midibyte);
 
 #if !IGNORE_SYSEX
-    SysExMessage getSysEx() const override {
+    SysExMessage getSysExMessage() const override {
         return {sysexbuffer.getBuffer(), sysexbuffer.getLength(), 0};
     }
 #endif

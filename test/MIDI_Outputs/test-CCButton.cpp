@@ -26,7 +26,7 @@ TEST(CCButton, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x7F, 0xC));
     button.update();
 
     // Still pressed
@@ -39,7 +39,7 @@ TEST(CCButton, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x00, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x00, 0xC));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -65,7 +65,7 @@ TEST(CCButtonBankable, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x7F, 0xC));
     button.update();
 
     // Still pressed
@@ -78,7 +78,7 @@ TEST(CCButtonBankable, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x00, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x00, 0xC));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -107,7 +107,7 @@ TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C + 4, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C + 4, 0x7F, 0xC));
     button.update();
 
     // Still pressed
@@ -120,7 +120,7 @@ TEST(CCButtonBankable, changeSettingAndPressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C + 4, 0x00, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C + 4, 0x00, 0xC));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -146,7 +146,7 @@ TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x7F, 0xC));
     button.update();
 
     // Change bank setting
@@ -162,7 +162,7 @@ TEST(CCButtonBankable, pressAndChangeSettingAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x00, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x00, 0xC));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -197,7 +197,7 @@ TEST(CCButtons, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(2000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x7F, 0xC));
     buttons.update();
 
     // 2 still pressed & pressing 3
@@ -208,7 +208,7 @@ TEST(CCButtons, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(3000));
-    EXPECT_CALL(midi, sendImpl(CC, 6 + 2, 0x3C + 1, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6 + 2, 0x3C + 1, 0x7F, 0xC));
     buttons.update();
 
     // 2 still pressed & 3 still pressed
@@ -229,7 +229,7 @@ TEST(CCButtons, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(5000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x00, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x00, 0xC));
     buttons.update();
 
     // 2 still released & releasing 3
@@ -240,7 +240,7 @@ TEST(CCButtons, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(6000));
-    EXPECT_CALL(midi, sendImpl(CC, 6 + 2, 0x3C + 1, 0x00, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6 + 2, 0x3C + 1, 0x00, 0xC));
     buttons.update();
 
     // 2 still released & 3 still released
@@ -288,7 +288,7 @@ TEST(CCButtonsBankable, pressChangeBankAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(2000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x7F, 0xC));
     buttons.update();
 
     bank.select(1);
@@ -301,7 +301,7 @@ TEST(CCButtonsBankable, pressChangeBankAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(3000));
-    EXPECT_CALL(midi, sendImpl(CC, 6 + 2, 0x3C + 1, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6 + 2, 0x3C + 1, 0x7F, 0xC));
     buttons.update();
 
     // 2 still pressed & 3 still pressed
@@ -322,7 +322,7 @@ TEST(CCButtonsBankable, pressChangeBankAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(5000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x00, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x00, 0xC));
     buttons.update();
 
     // 2 still released & releasing 3
@@ -333,7 +333,7 @@ TEST(CCButtonsBankable, pressChangeBankAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(6000));
-    EXPECT_CALL(midi, sendImpl(CC, 6 + 2, 0x3C + 1, 0x00, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6 + 2, 0x3C + 1, 0x00, 0xC));
     buttons.update();
 
     // 2 still released & 3 still released
@@ -379,7 +379,7 @@ TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(2000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x7F, 0xC));
     buttons.update();
 
     bank.select(1);
@@ -392,7 +392,7 @@ TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(3000));
-    EXPECT_CALL(midi, sendImpl(CC, 6 + 2, 0x3C + 1, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6 + 2, 0x3C + 1, 0x7F, 0xC));
     buttons.update();
 
     // 2 still pressed & 3 still pressed
@@ -413,7 +413,7 @@ TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(5000));
-    EXPECT_CALL(midi, sendImpl(CC, 6, 0x3C, 0x00, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 0x00, 0xC));
     buttons.update();
 
     // 2 still released & releasing 3
@@ -424,7 +424,7 @@ TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(6000));
-    EXPECT_CALL(midi, sendImpl(CC, 6 + 2, 0x3C + 1, 0x00, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6 + 2, 0x3C + 1, 0x00, 0xC));
     buttons.update();
 
     // 2 still released & 3 still released
@@ -445,7 +445,7 @@ TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(8000));
-    EXPECT_CALL(midi, sendImpl(CC, 6 + 2, 0x3C + 1 + 4, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6 + 2, 0x3C + 1 + 4, 0x7F, 0xC));
     buttons.update();
 
     // 2 still released & releasing 3
@@ -456,7 +456,7 @@ TEST(CCButtonsBankable, pressChangeBankAndReleaseAndPress) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2)
         .WillRepeatedly(Return(9000));
-    EXPECT_CALL(midi, sendImpl(CC, 6 + 2, 0x3C + 1 + 4, 0x00, 0xC));
+    EXPECT_CALL(midi, sendImpl(0xB6 + 2, 0x3C + 1 + 4, 0x00, 0xC));
     buttons.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());

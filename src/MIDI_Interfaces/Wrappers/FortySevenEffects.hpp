@@ -31,7 +31,7 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
         this->midimsg.CN = 0;
     }
 
-    /// Get the latest system exclusive message from teh given MIDI interface.
+    /// Get the latest system exclusive message from the given MIDI interface.
     template <class MidiInterface>
     void updateSysExMessage(const MidiInterface &interface) {
         this->sysex.data = interface.getSysExArray();
@@ -39,11 +39,18 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
         this->sysex.CN = 0;
     }
 
+    /// Get the latest real-time message from the given MIDI interface.
+    template <class MidiInterface>
+    void updateRealTimeMessage(const MidiInterface &interface) {
+        this->rtmsg.message = interface.getType();
+        this->rtmsg.CN = 0;
+    }
+
     /// Temporarily saves a pointer to the MIDI parser's SysEx buffer.
     SysExMessage sysex = {nullptr, 0, 0};
 
   public:
-    SysExMessage getSysEx() const override { return sysex; }
+    SysExMessage getSysExMessage() const override { return sysex; }
 };
 
 /**
@@ -75,32 +82,36 @@ class FortySevenEffectsMIDI_Interface : public Parsing_MIDI_Interface {
 
     void begin() override { midi.begin(MIDI_CHANNEL_OMNI); }
 
-    MIDI_read_t read() override {
+    MIDIReadEvent read() override {
         if (!midi.read())      // Update the MIDI input and check if there's
-            return NO_MESSAGE; // a new message available
+            return MIDIReadEvent::NO_MESSAGE; // a new message available
         auto type = midi.getType();
         if (midi.isChannelMessage(type)) { // Channel
             parser.updateChannelMessage(midi);
-            return CHANNEL_MESSAGE;
+            return MIDIReadEvent::CHANNEL_MESSAGE;
         }
-        if (type == SysExStart) { // SysEx
+        if (type == uint8_t(MIDIMessageType::SYSEX_START)) { // SysEx
             parser.updateSysExMessage(midi);
-            return SYSEX_MESSAGE;
+            return MIDIReadEvent::SYSEX_MESSAGE;
         }
-        if (type >= TIMING_CLOCK_MESSAGE) { // Real-Time
-            return static_cast<MIDI_read_t>(type);
+        if (type >= uint8_t(MIDIMessageType::TIMING_CLOCK)) { // Real-Time
+            parser.updateRealTimeMessage(midi);
+            return MIDIReadEvent::REALTIME_MESSAGE;
         }
-        return NO_MESSAGE;
+        return MIDIReadEvent::NO_MESSAGE;
     }
 
   protected:
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
-                  uint8_t cn) override {
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override {
+        uint8_t m = header & 0xF0;
+        uint8_t c = header & 0x0F;
         // channel is zero-based in Control Surface, one-based in MIDI 47 Fx
         midi.send(static_cast<MIDI_NAMESPACE::MidiType>(m), d1, d2, c + 1);
         (void)cn;
     }
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override {
+        uint8_t m = header & 0xF0;
+        uint8_t c = header & 0x0F;
         // channel is zero-based in Control Surface, one-based in MIDI 47 Fx
         midi.send(static_cast<MIDI_NAMESPACE::MidiType>(m), d1, 0, c + 1);
         // MIDI 47 Fx checks message type to handle 2-byte messages separately

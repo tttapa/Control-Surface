@@ -37,7 +37,7 @@ const static char *MIDIStatusTypeNames[] = {
 
 } // namespace DebugMIDIMessageNames
 
-MIDI_read_t StreamDebugMIDI_Interface::read() {
+MIDIReadEvent StreamDebugMIDI_Interface::read() {
     while (stream.available() > 0) {
         char data = stream.read();
 
@@ -56,40 +56,42 @@ MIDI_read_t StreamDebugMIDI_Interface::read() {
                 hexCharToNibble(firstChar) << 4 | hexCharToNibble(secondChar);
             firstChar = '\0';
             secondChar = '\0';
-            MIDI_read_t parseResult = parser.parse(midiByte);
-            if (parseResult != NO_MESSAGE)
+            MIDIReadEvent parseResult = parser.parse(midiByte);
+            if (parseResult != MIDIReadEvent::NO_MESSAGE)
                 return parseResult;
         } else if (!isxdigit(data) && firstChar) {
             // if we received one hex character followed by whitespace/other
             uint8_t midiByte = hexCharToNibble(firstChar);
             firstChar = '\0';
-            MIDI_read_t parseResult = parser.parse(midiByte);
-            if (parseResult != NO_MESSAGE)
+            MIDIReadEvent parseResult = parser.parse(midiByte);
+            if (parseResult != MIDIReadEvent::NO_MESSAGE)
                 return parseResult;
         } else {
             // Ignore any characters other than whitespace and hexadecimal
             // digits
         }
     }
-    return NO_MESSAGE;
+    return MIDIReadEvent::NO_MESSAGE;
 }
 
-void StreamDebugMIDI_Interface::sendImpl(uint8_t m, uint8_t c, uint8_t d1,
-                                         uint8_t d2, uint8_t cn) {
-    uint8_t messageType = (m >> 4) - 8;
+void StreamDebugMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
+                                         uint8_t cn) {
+    uint8_t messageType = (header >> 4) - 8;
     if (messageType >= 7)
         return;
+    uint8_t c = header & 0x0F;
     stream << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
            << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
            << F("\tData 2: 0x") << d2 << dec << F("\tCable: ") << cn << endl;
     stream.flush();
 }
 
-void StreamDebugMIDI_Interface::sendImpl(uint8_t m, uint8_t c, uint8_t d1,
+void StreamDebugMIDI_Interface::sendImpl(uint8_t header, uint8_t d1,
                                          uint8_t cn) {
-    uint8_t messageType = (m >> 4) - 8;
+    uint8_t messageType = (header >> 4) - 8;
     if (messageType >= 7)
         return;
+    uint8_t c = header & 0x0F;
     stream << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
            << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
            << dec << F("\tCable: ") << cn << endl;

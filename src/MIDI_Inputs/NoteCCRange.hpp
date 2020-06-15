@@ -118,7 +118,7 @@ class NoteCCRange : public MIDIInput_t, public INoteCCValue {
     /// for Note Off, it's zero.
     static uint8_t
     getValueFromMIDIMessage(const ChannelMessageMatcher &midimsg) {
-        return midimsg.type == NOTE_OFF ? 0 : midimsg.data2;
+        return midimsg.type == MIDIMessageType::NOTE_OFF ? 0 : midimsg.data2;
     }
 
     /// Get the active bank selection.

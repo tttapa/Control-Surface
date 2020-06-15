@@ -50,8 +50,15 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
     Serial << dec << F("on cable ") << se.CN << endl;
   }
 
-} callbacks;
+  // Callback for real-time messages
+  void onRealTimeMessage(Parsing_MIDI_Interface &midi) override {
+    RealTimeMessage rt = midi.getRealTimeMessage();
+    // Print the message
+    Serial << F("Real-time message: ") << hex << rt.message << dec
+           << F(" on cable ") << rt.CN << endl;
+  }
 
+} callbacks;
 
 void setup() {
   Serial.begin(115200);         // For printing the messages

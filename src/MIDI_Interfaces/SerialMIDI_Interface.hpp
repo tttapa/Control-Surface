@@ -34,37 +34,37 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
         : Parsing_MIDI_Interface(std::move(other)), stream(other.stream) {}
     // TODO: should I move the mutex too?
 
-    MIDI_read_t read() override {
+    MIDIReadEvent read() override {
         while (stream.available() > 0) {
             uint8_t midiByte = stream.read();
-            MIDI_read_t parseResult = parser.parse(midiByte);
-            if (parseResult != NO_MESSAGE)
+            MIDIReadEvent parseResult = parser.parse(midiByte);
+            if (parseResult != MIDIReadEvent::NO_MESSAGE)
                 return parseResult;
         }
-        return NO_MESSAGE;
+        return MIDIReadEvent::NO_MESSAGE;
     }
 
   protected:
     SerialMIDI_Parser parser;
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
                   uint8_t cn) override {
 #if defined(ESP32) || !defined(ARDUINO)
         std::lock_guard<std::mutex> lock(mutex);
 #endif
         (void)cn;
-        stream.write(m | c); // Send the MIDI message over the stream
+        stream.write(header); // Send the MIDI message over the stream
         stream.write(d1);
         stream.write(d2);
         // stream.flush(); // TODO
     }
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override {
 #if defined(ESP32) || !defined(ARDUINO)
         std::lock_guard<std::mutex> lock(mutex);
 #endif
         (void)cn;
-        stream.write(m | c); // Send the MIDI message over the stream
+        stream.write(header); // Send the MIDI message over the stream
         stream.write(d1);
         // stream.flush(); // TODO
     }

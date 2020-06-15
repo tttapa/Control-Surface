@@ -22,14 +22,14 @@ class MockMIDI_Callbacks : public MIDI_Callbacks {
                              msg.data + msg.length);
         sysExCounter++;
     }
-    void onRealtimeMessage(Parsing_MIDI_Interface &midi, uint8_t rtm) override {
+    void onRealTimeMessage(Parsing_MIDI_Interface &midi) override {
         (void)midi;
-        realtimeMessages.push_back(rtm);
+        realtimeMessages.push_back(midi.getRealTimeMessage());
     }
 
     std::vector<ChannelMessage> channelMessages;
     std::vector<uint8_t> sysExMessages;
-    std::vector<uint8_t> realtimeMessages;
+    std::vector<RealTimeMessage> realtimeMessages;
     size_t sysExCounter = 0;
 };
 

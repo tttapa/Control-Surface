@@ -36,4 +36,4 @@ keyword2:
  - getCN
  - onChannelMessage
  - onSysExMessage
- - onRealtimeMessage
+ - onRealTimeMessage

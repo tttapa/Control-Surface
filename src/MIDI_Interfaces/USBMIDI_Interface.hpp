@@ -71,17 +71,16 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
     void flushUSB() { USBMIDI::flush(); }
 #endif
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
-                  uint8_t cn) override {
-        writeUSBPacket(cn, m >> 4, // CN|CIN
-                       (m | c),    // status
-                       d1,         // data 1
-                       d2);        // data 2
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override {
+        writeUSBPacket(cn, header >> 4, // CN|CIN
+                       header,          // status
+                       d1,              // data 1
+                       d2);             // data 2
         flushUSB();
     }
 
-    void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override {
-        sendImpl(m, c, d1, 0, cn);
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override {
+        sendImpl(header, d1, 0, cn);
     }
 
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
@@ -108,18 +107,18 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
     }
 
   public:
-    MIDI_read_t read() override {
+    MIDIReadEvent read() override {
         for (uint8_t i = 0; i < (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {
             MIDIUSBPacket_t midi_packet = readUSBPacket();
             if (midi_packet.data[0] == 0)
-                return NO_MESSAGE;
+                return MIDIReadEvent::NO_MESSAGE;
 
-            MIDI_read_t parseResult = parser.parse(midi_packet.data);
+            MIDIReadEvent parseResult = parser.parse(midi_packet.data);
 
-            if (parseResult != NO_MESSAGE)
+            if (parseResult != MIDIReadEvent::NO_MESSAGE)
                 return parseResult;
         }
-        return NO_MESSAGE;
+        return MIDIReadEvent::NO_MESSAGE;
     }
 };
 
@@ -147,7 +146,7 @@ class USBMIDI_Interface : public USBSerialMIDI_Interface {
     /**
      * @brief   Construct a new USBMIDI_Interface.
      */
-    USBMIDI_Interface() : USBSerialMIDI_Interface(MIDI_BAUD){};
+    USBMIDI_Interface() : USBSerialMIDI_Interface(MIDI_BAUD) {}
 };
 
 END_CS_NAMESPACE

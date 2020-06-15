@@ -43,7 +43,7 @@ TEST(NoteButtonMatrix, pressAndRelease) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
 
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 5, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0x96, 5, 0x7F, 0xC));
 
     matrix.update();
 
@@ -68,7 +68,7 @@ TEST(NoteButtonMatrix, pressAndRelease) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
 
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 5, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0x86, 5, 0x7F, 0xC));
 
     matrix.update();
 
@@ -122,7 +122,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
 
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 5, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0x96, 5, 0x7F, 0xC));
 
     matrix.update();
 
@@ -154,7 +154,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
 
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 5, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0x86, 5, 0x7F, 0xC));
 
     matrix.update();
 
@@ -182,7 +182,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(3000));
 
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 5 + 4, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0x96, 5 + 4, 0x7F, 0xC));
 
     matrix.update();
 
@@ -210,7 +210,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
 
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 5 + 4, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0x86, 5 + 4, 0x7F, 0xC));
 
     matrix.update();
 
@@ -264,7 +264,7 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
 
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 6, 5, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0x96, 5, 0x7F, 0xC));
 
     matrix.update();
 
@@ -296,7 +296,7 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
 
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 6, 5, 0x7F, 0xC));
+    EXPECT_CALL(midi, sendImpl(0x86, 5, 0x7F, 0xC));
 
     matrix.update();
 
@@ -324,7 +324,7 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(3000));
 
-    EXPECT_CALL(midi, sendImpl(NOTE_ON, 1, 50, 0x7F, 0x9));
+    EXPECT_CALL(midi, sendImpl(0x91, 50, 0x7F, 0x9));
 
     matrix.update();
 
@@ -352,7 +352,7 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
 
-    EXPECT_CALL(midi, sendImpl(NOTE_OFF, 1, 50, 0x7F, 0x9));
+    EXPECT_CALL(midi, sendImpl(0x81, 50, 0x7F, 0x9));
 
     matrix.update();
 

@@ -33,7 +33,7 @@ class MIDI_Sender {
      * @param   d2
      *          The second data byte. [0, 127]
      */
-    void send(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2);
+    void send(MIDIMessageType m, Channel c, uint8_t d1, uint8_t d2);
 
     /**
      * @brief   Send a 2-byte MIDI packet.
@@ -45,7 +45,7 @@ class MIDI_Sender {
      * @param   d1
      *          The first data byte. [0, 127]
      */
-    void send(uint8_t m, uint8_t c, uint8_t d1);
+    void send(MIDIMessageType m, Channel c, uint8_t d1);
 
     /**
      * @brief   Send a 3-byte MIDI packet with cable number.
@@ -61,7 +61,7 @@ class MIDI_Sender {
      * @param   cn
      *          The MIDI Cable Number. [0, 15]
      */
-    void sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2, uint8_t cn);
+    void sendOnCable(MIDIMessageType m, Channel c, uint8_t d1, uint8_t d2, uint8_t cn);
 
     /**
      * @brief   Send a 2-byte MIDI packet with cable number.
@@ -75,17 +75,17 @@ class MIDI_Sender {
      * @param   cn
      *          The MIDI Cable Number. [0, 15]
      */
-    void sendOnCable(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn);
+    void sendOnCable(MIDIMessageType m, Channel c, uint8_t d1, uint8_t cn);
 
     /**
      * @brief   Send a single-byte MIDI packet with cable number.
      *
-     * @param   r
+     * @param   rt
      *          The MIDI byte to send.
      * @param   cn
      *          The MIDI Cable Number. [0, 15]
      */
-    void sendOnCable(uint8_t r, uint8_t cn);
+    void sendOnCable(MIDIMessageType rt, uint8_t cn);
 
     /// Send a MIDI Note On event.
     void sendNoteOn(MIDIAddress address, uint8_t velocity);
@@ -115,7 +115,7 @@ class MIDI_Sender {
     /// Send a MIDI Real-Time message.
     void send(RealTimeMessage message);
     /// Send a single-byte MIDI message.
-    void send(uint8_t rt, uint8_t cn = 0);
+    void send(MIDIMessageType rt);
 
     /// @}
 };
@@ -191,12 +191,12 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     /**
      * @brief   Low-level function for sending a 3-byte MIDI message.
      */
-    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,
+    virtual void sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
                           uint8_t cn) = 0;
     /**
      * @brief   Low-level function for sending a 2-byte MIDI message.
      */
-    virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) = 0;
+    virtual void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) = 0;
 
     /**
      * @brief   Low-level function for sending a system exclusive MIDI message.
@@ -233,27 +233,27 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
      * @param   parser
      *          The MIDI parser to use for the interface.
      */
-    Parsing_MIDI_Interface(MIDI_Parser &parser);
+    Parsing_MIDI_Interface(MIDI_Parser &parser) : parser(parser) {}
 
   public:
     /// @name   Parsing MIDI Input
     /// @{
+
     MIDI_Parser &getParser() { return parser; }
 
-    /**
-     * @brief   Return the received channel message.
-     */
-    ChannelMessage getChannelMessage();
+    /// Return the received channel message.
+    ChannelMessage getChannelMessage() const {
+        return parser.getChannelMessage();
+    }
 
-    /**
-     * @brief   Return the received system exclusive message.
-     */
-    SysExMessage getSysExMessage() const;
+    /// Return the received real-time message.
+    RealTimeMessage getRealTimeMessage() const {
+        return parser.getRealTimeMessage();
+    }
 
-    /**
-     * @brief   Return the cable number of the received message.
-     */
-    uint8_t getCN() const;
+    /// Return the received system exclusive message.
+    SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
+
     /// @}
 
     void update() override;
@@ -262,7 +262,7 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
     using MIDI_Interface::setCallbacks;
 
   protected:
-    bool dispatchMIDIEvent(MIDI_read_t event);
+    bool dispatchMIDIEvent(MIDIReadEvent event);
 
   private:
     /**
@@ -270,16 +270,16 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
      * @return  Returns the type of the read message, or @ref NO_MESSAGE if no
      *          MIDI message was available.
      */
-    virtual MIDI_read_t read() = 0;
+    virtual MIDIReadEvent read() = 0;
 
-    bool onRealtimeMessage(uint8_t message);
+    bool onRealTimeMessage();
     bool onChannelMessage();
     bool onSysExMessage();
 
   protected:
     MIDI_Parser &parser;
     MIDI_Callbacks *callbacks = nullptr;
-    MIDI_read_t event = NO_MESSAGE;
+    MIDIReadEvent event = MIDIReadEvent::NO_MESSAGE;
 };
 
 // LCOV_EXCL_START
@@ -288,17 +288,13 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
  */
 class MIDI_Callbacks {
   public:
-    /// Callback for incoming MIDI Channel Messages (notes, control change, 
+    /// Callback for incoming MIDI Channel Messages (notes, control change,
     /// pitch bend, etc.)
     virtual void onChannelMessage(Parsing_MIDI_Interface &midi) { (void)midi; }
     /// Callback for incoming MIDI System Exclusive Messages.
     virtual void onSysExMessage(Parsing_MIDI_Interface &midi) { (void)midi; }
     /// Callback for incoming MIDI Real-Time Messages.
-    virtual void onRealtimeMessage(Parsing_MIDI_Interface &midi,
-                                   uint8_t message) {
-        (void)midi;
-        (void)message;
-    }
+    virtual void onRealTimeMessage(Parsing_MIDI_Interface &midi) { (void)midi; }
 
     /// Destructor.
     virtual ~MIDI_Callbacks() = default;

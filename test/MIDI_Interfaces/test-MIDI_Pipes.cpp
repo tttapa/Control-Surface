@@ -1265,8 +1265,8 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
     // unlock the pipes
     midiA[0].exclusive(9, false);
 
-    EXPECT_CALL(midiB[0], sendImpl(0x90, 0x05, 0x55, 0x66, 0x9));
-    EXPECT_CALL(midiB[1], sendImpl(0x90, 0x05, 0x55, 0x66, 0x9));
+    EXPECT_CALL(midiB[0], sendImpl(0x95, 0x55, 0x66, 0x9));
+    EXPECT_CALL(midiB[1], sendImpl(0x95, 0x55, 0x66, 0x9));
     midiA[1].update(); // should send old message now
 }
 

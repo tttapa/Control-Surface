@@ -247,7 +247,7 @@ getCN	KEYWORD2
 
 onChannelMessage	KEYWORD2
 onSysExMessage	KEYWORD2
-onRealtimeMessage	KEYWORD2
+onRealTimeMessage	KEYWORD2
 
 map	KEYWORD2
 invert	KEYWORD2
@@ -871,7 +871,7 @@ getSysExMessage	KEYWORD2
 getCN	KEYWORD2
 onChannelMessage	KEYWORD2
 onSysExMessage	KEYWORD2
-onRealtimeMessage	KEYWORD2
+onRealTimeMessage	KEYWORD2
 
 MIDIChannelCN	KEYWORD1
 MIDIAddress	KEYWORD1

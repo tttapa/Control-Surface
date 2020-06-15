@@ -33,8 +33,8 @@ using u8vec = std::vector<uint8_t>;
 TEST(StreamMIDI_Interface, send3B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
-    midi.send(NOTE_ON, 4, 0x55, 0x66);
-    midi.sendOnCable(NOTE_ON, 4, 0x55, 0x66, 9);
+    midi.send(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66);
+    midi.sendOnCable(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66, 9);
     midi.sendNoteOn({0x55, CHANNEL_4, 8}, 0x66);
     midi.sendNoteOff({0x55, CHANNEL_4, 8}, 0x66);
     midi.sendCC({0x55, CHANNEL_4, 8}, 0x66);
@@ -55,8 +55,8 @@ TEST(StreamMIDI_Interface, send3B) {
 TEST(StreamMIDI_Interface, send2B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
-    midi.send(PROGRAM_CHANGE, 4, 0x66);
-    midi.sendOnCable(PROGRAM_CHANGE, 4, 0x66, 9);
+    midi.send(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66);
+    midi.sendOnCable(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66, 9);
     midi.sendPC({CHANNEL_4, 8}, 0x66);
     midi.sendPC({0x66, CHANNEL_4, 8});
     midi.sendCP({CHANNEL_4, 8}, 0x66);
@@ -102,8 +102,9 @@ TEST(StreamMIDI_Interface, readRealTime) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
     stream.toRead.push(0xF8);
-    EXPECT_EQ(midi.read(), TIMING_CLOCK_MESSAGE);
-    EXPECT_EQ(midi.getCN(), 0);
+    RealTimeMessage expectedMsg = {MIDIMessageType::TIMING_CLOCK, 0};
+    EXPECT_EQ(midi.read(), MIDIReadEvent::REALTIME_MESSAGE);
+    EXPECT_EQ(midi.getRealTimeMessage(), expectedMsg);
 }
 
 TEST(StreamMIDI_Interface, readNoteOn) {
@@ -111,7 +112,7 @@ TEST(StreamMIDI_Interface, readNoteOn) {
     StreamMIDI_Interface midi = stream;
     for (auto v : {0x93, 0x3C, 0x60})
         stream.toRead.push(v);
-    EXPECT_EQ(midi.read(), CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage expectedMsg = {0x93, 0x3C, 0x60, 0x00};
     EXPECT_EQ(midi.getChannelMessage(), expectedMsg);
 }
@@ -123,7 +124,7 @@ TEST(StreamMIDI_Interface, readSysEx) {
     StreamMIDI_Interface midi = stream;
     for (auto v : {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7, 0x00})
         stream.toRead.push(v);
-    EXPECT_EQ(midi.read(), SYSEX_MESSAGE);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::SYSEX_MESSAGE);
     SysExMessage sysex = midi.getSysExMessage();
     const SysExVector result = {
         sysex.data,
@@ -142,7 +143,7 @@ TEST(StreamMIDI_Interface, readSysExUpdate) {
         W_SUGGEST_OVERRIDE_OFF
         MOCK_METHOD1(onChannelMessage, void(Parsing_MIDI_Interface &));
         MOCK_METHOD1(onSysExMessage, void(Parsing_MIDI_Interface &));
-        MOCK_METHOD2(onRealtimeMessage,
+        MOCK_METHOD2(onRealTimeMessage,
                      void(Parsing_MIDI_Interface &, uint8_t));
         W_SUGGEST_OVERRIDE_ON
     } callbacks;

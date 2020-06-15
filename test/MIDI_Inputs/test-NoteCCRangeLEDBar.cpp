@@ -18,13 +18,23 @@ TEST(NoteLEDBar, NoteLEDBar) {
 
     for (int i = 0; i < 8; ++i)
         EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(i, i < 4));
-    ChannelMessageMatcher midimsg1 = {0x90, CHANNEL_5, 0x3C, 0x47};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3C,
+        0x47,
+    };
     MIDIInputElementNote::updateAllWith(midimsg1);
     testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
     for (int i = 0; i < 8; ++i)
         EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(i, i < 5));
-    ChannelMessageMatcher midimsg2 = {0x90, CHANNEL_5, 0x3C, 0x48};
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x3C,
+        0x48,
+    };
     MIDIInputElementNote::updateAllWith(midimsg2);
     testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

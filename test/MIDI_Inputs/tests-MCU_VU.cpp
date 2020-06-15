@@ -11,8 +11,12 @@ TEST(MCUVU, setValue) {
     constexpr Channel channel = CHANNEL_3;
     constexpr uint8_t track = 5;
     MCU::VU vu = {track, channel};
-    ChannelMessageMatcher midimsg = {CHANNEL_PRESSURE, channel,
-                                     (track - 1) << 4 | 0xA, 0};
+    ChannelMessageMatcher midimsg = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0xA,
+        0,
+    };
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     MIDIInputElementChannelPressure::updateAllWith(midimsg);
     EXPECT_EQ(vu.getValue(), 0xA);
@@ -24,8 +28,12 @@ TEST(MCUVU, setOverload) {
     constexpr Channel channel = CHANNEL_2;
     constexpr uint8_t track = 6;
     MCU::VU vu = {track, channel};
-    ChannelMessageMatcher midimsg = {CHANNEL_PRESSURE, channel,
-                                     (track - 1) << 4 | 0xE, 0};
+    ChannelMessageMatcher midimsg = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0xE,
+        0,
+    };
     MIDIInputElementChannelPressure::updateAllWith(midimsg);
     EXPECT_EQ(vu.getValue(), 0);
     EXPECT_TRUE(vu.getOverload());
@@ -37,11 +45,19 @@ TEST(MCUVU, clearOverload) {
     constexpr Channel channel = CHANNEL_3;
     constexpr uint8_t track = 5;
     MCU::VU vu = {track, channel};
-    ChannelMessageMatcher midimsgSet = {CHANNEL_PRESSURE, channel,
-                                        (track - 1) << 4 | 0xE, 0};
+    ChannelMessageMatcher midimsgSet = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0xE,
+        0,
+    };
     MIDIInputElementChannelPressure::updateAllWith(midimsgSet);
-    ChannelMessageMatcher midimsgClr = {CHANNEL_PRESSURE, channel,
-                                        (track - 1) << 4 | 0xF, 0};
+    ChannelMessageMatcher midimsgClr = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0xF,
+        0,
+    };
     MIDIInputElementChannelPressure::updateAllWith(midimsgClr);
     EXPECT_EQ(vu.getValue(), 0);
     EXPECT_FALSE(vu.getOverload());
@@ -53,17 +69,29 @@ TEST(MCUVU, retainValueAfterOverload) {
     constexpr Channel channel = CHANNEL_3;
     constexpr uint8_t track = 5;
     MCU::VU vu = {track, channel};
-    ChannelMessageMatcher midimsg = {CHANNEL_PRESSURE, channel,
-                                     (track - 1) << 4 | 0x6, 0};
+    ChannelMessageMatcher midimsg = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0x6,
+        0,
+    };
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     MIDIInputElementChannelPressure::updateAllWith(midimsg);
     EXPECT_EQ(vu.getValue(), 0x6);
-    ChannelMessageMatcher midimsgSet = {CHANNEL_PRESSURE, channel,
-                                        (track - 1) << 4 | 0xE, 0};
+    ChannelMessageMatcher midimsgSet = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0xE,
+        0,
+    };
     MIDIInputElementChannelPressure::updateAllWith(midimsgSet);
     EXPECT_EQ(vu.getValue(), 0x6);
-    ChannelMessageMatcher midimsgClr = {CHANNEL_PRESSURE, channel,
-                                        (track - 1) << 4 | 0xF, 0};
+    ChannelMessageMatcher midimsgClr = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0xF,
+        0,
+    };
     MIDIInputElementChannelPressure::updateAllWith(midimsgClr);
     EXPECT_EQ(vu.getValue(), 0x6);
     EXPECT_FALSE(vu.getOverload());
@@ -76,8 +104,12 @@ TEST(MCUVU, decay) {
     constexpr uint8_t track = 5;
     constexpr unsigned int decayTime = 300;
     MCU::VU vu = {track, channel, decayTime};
-    ChannelMessageMatcher midimsg = {CHANNEL_PRESSURE, channel,
-                                     (track - 1) << 4 | 0xA, 0};
+    ChannelMessageMatcher midimsg = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0xA,
+        0,
+    };
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     MIDIInputElementChannelPressure::updateAllWith(midimsg);
     EXPECT_EQ(vu.getValue(), 0xA);
@@ -94,8 +126,12 @@ TEST(MCUVU, getFloatValue) {
     constexpr uint8_t track = 5;
     constexpr unsigned int decayTime = 300;
     MCU::VU vu = {track, channel, decayTime};
-    ChannelMessageMatcher midimsg = {CHANNEL_PRESSURE, channel,
-                                     (track - 1) << 4 | 0xA, 0};
+    ChannelMessageMatcher midimsg = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0xA,
+        0,
+    };
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     MIDIInputElementChannelPressure::updateAllWith(midimsg);
     EXPECT_FLOAT_EQ(vu.getFloatValue(), 10.0f / 12);
@@ -108,8 +144,12 @@ TEST(MCUVU, reset) {
     constexpr uint8_t track = 5;
     constexpr unsigned int decayTime = 300;
     MCU::VU vu = {track, channel, decayTime};
-    ChannelMessageMatcher midimsg = {CHANNEL_PRESSURE, channel,
-                                     (track - 1) << 4 | 0xA, 0};
+    ChannelMessageMatcher midimsg = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0xA,
+        0,
+    };
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     MIDIInputElementChannelPressure::updateAllWith(midimsg);
     EXPECT_EQ(vu.getValue(), 0xA);
@@ -126,8 +166,12 @@ TEST(MCUVUBankable, setValueBankChangeAddress) {
     constexpr Channel channel = CHANNEL_3;
     constexpr uint8_t track = 5;
     MCU::Bankable::VU<2> vu = {bank, track, channel};
-    ChannelMessageMatcher midimsg = {CHANNEL_PRESSURE, channel,
-                                     (track + 4 - 1) << 4 | 0xA, 0};
+    ChannelMessageMatcher midimsg = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track + 4 - 1) << 4 | 0xA,
+        0,
+    };
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     MIDIInputElementChannelPressure::updateAllWith(midimsg);
     EXPECT_EQ(vu.getValue(), 0x0);
@@ -142,10 +186,18 @@ TEST(MCUVUBankable, setValueBankChangeChannel) {
     constexpr Channel channel = CHANNEL_3;
     constexpr uint8_t track = 5;
     MCU::Bankable::VU<3> vu = {{bank, CHANGE_CHANNEL}, track, channel};
-    ChannelMessageMatcher midimsg1 = {CHANNEL_PRESSURE, channel + 4,
-                                      (track - 1) << 4 | 0xA, 0};
-    ChannelMessageMatcher midimsg2 = {CHANNEL_PRESSURE, channel + 8,
-                                      (track - 1) << 4 | 0xB, 0};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel + 4,
+        (track - 1) << 4 | 0xA,
+        0,
+    };
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel + 8,
+        (track - 1) << 4 | 0xB,
+        0,
+    };
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .WillOnce(Return(0))
         .WillOnce(Return(0));
@@ -165,10 +217,20 @@ TEST(MCUVUBankable, setValueBankChangeCN) {
     constexpr Channel channel = CHANNEL_3;
     constexpr uint8_t track = 5;
     MCU::Bankable::VU<3> vu = {{bank, CHANGE_CABLENB}, track, channel};
-    ChannelMessageMatcher midimsg1 = {CHANNEL_PRESSURE, channel,
-                                      (track - 1) << 4 | 0xA, 0, 4};
-    ChannelMessageMatcher midimsg2 = {CHANNEL_PRESSURE, channel,
-                                      (track - 1) << 4 | 0xB, 0, 8};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0xA,
+        0,
+        4,
+    };
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track - 1) << 4 | 0xB,
+        0,
+        8,
+    };
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .WillOnce(Return(0))
         .WillOnce(Return(0));
@@ -191,15 +253,23 @@ TEST(MCUVUBankable, overloadBankChangeAddress) {
     EXPECT_FALSE(vu.getOverload());
     bank.select(1);
     EXPECT_FALSE(vu.getOverload());
-    ChannelMessageMatcher midimsgSet = {CHANNEL_PRESSURE, channel,
-                                        (track + 4 - 1) << 4 | 0xE, 0};
+    ChannelMessageMatcher midimsgSet = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track + 4 - 1) << 4 | 0xE,
+        0,
+    };
     MIDIInputElementChannelPressure::updateAllWith(midimsgSet);
     bank.select(0);
     EXPECT_FALSE(vu.getOverload());
     bank.select(1);
     EXPECT_TRUE(vu.getOverload());
-    ChannelMessageMatcher midimsgClr = {CHANNEL_PRESSURE, channel,
-                                        (track + 4 - 1) << 4 | 0xF, 0};
+    ChannelMessageMatcher midimsgClr = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track + 4 - 1) << 4 | 0xF,
+        0,
+    };
     MIDIInputElementChannelPressure::updateAllWith(midimsgClr);
     bank.select(0);
     EXPECT_FALSE(vu.getOverload());
@@ -226,10 +296,18 @@ TEST(MCUVULEDsBankable, displayOnBankChange) {
     MIDIInputElementChannelPressure::beginAll();
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
-    ChannelMessageMatcher midimsg1 = {CHANNEL_PRESSURE, channel,
-                                      (track + 0 - 1) << 4 | 0xC, 0};
-    ChannelMessageMatcher midimsg2 = {CHANNEL_PRESSURE, channel,
-                                      (track + 4 - 1) << 4 | 0x6, 0};
+    ChannelMessageMatcher midimsg1 = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track + 0 - 1) << 4 | 0xC,
+        0,
+    };
+    ChannelMessageMatcher midimsg2 = {
+        MIDIMessageType::CHANNEL_PRESSURE,
+        channel,
+        (track + 4 - 1) << 4 | 0x6,
+        0,
+    };
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(0, HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(1, HIGH));
