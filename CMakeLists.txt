@@ -4,9 +4,12 @@ cmake_minimum_required(VERSION 3.10)
 # Enable ccache if available
 ################################################################################
 
-find_program(CCACHE_PROGRAM ccache)
-if(CCACHE_PROGRAM)
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+option(DISABLE_CCACHE Off)
+if (NOT DISABLE_CCACHE)
+    find_program(CCACHE_PROGRAM ccache)
+    if(CCACHE_PROGRAM)
+        set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+    endif()
 endif()
 
 ################################################################################
@@ -63,6 +66,11 @@ set(CMAKE_CXX_FLAGS_ASAN "-g3 -O0 \
 set(CMAKE_C_FLAGS_ASAN   "-g3 -O0 \
     -fsanitize=address,leak,undefined,pointer-compare,pointer-subtract")
 
+set(CMAKE_CXX_FLAGS_TSAN "-g3 -O0 \
+    -fsanitize=thread,undefined")
+set(CMAKE_C_FLAGS_TSAN   "-g3 -O0 \
+    -fsanitize=thread,undefined")
+
 set(CMAKE_CXX_FLAGS_RELEASE "-Os")
 set(CMAKE_C_FLAGS_RELEASE   "-Os")
 
@@ -72,7 +80,10 @@ set(CMAKE_C_FLAGS_RELWITHDEBINFO   "-Os -ggdb3")
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
         -Winconsistent-missing-override \
-        -Wno-gnu-zero-variadic-macro-arguments")
+        -Wno-gnu-zero-variadic-macro-arguments \
+        -Wdocumentation \
+        -Wno-error=unknown-attributes \
+        -Wno-error=documentation")
 else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
         -Wsuggest-override \
