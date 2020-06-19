@@ -118,7 +118,8 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
         } while (anumber && i <= endDigit);
         if (number < 0 && i <= endDigit) {
             sendDigit(i++, 0b00000001); // minus sign
-        } else if (number < 0 || anumber != 0) {
+        } 
+        if (anumber != 0) {
             for (int16_t i = startDigit; i <= endDigit;)
                 sendDigit(i++, 0b00000001);
         } else {
