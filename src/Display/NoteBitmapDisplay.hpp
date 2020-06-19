@@ -9,7 +9,7 @@ BEGIN_CS_NAMESPACE
 /// A class that displays a bitmap depending on the state of a MIDINote.
 class NoteBitmapDisplay : public DisplayElement {
   public:
-    NoteBitmapDisplay(DisplayInterface &display, INoteCCValue &note,
+    NoteBitmapDisplay(DisplayInterface &display, INoteCCKPValue &note,
                       const XBitmap &xbm, PixelLocation loc, uint16_t color)
         : DisplayElement(display), note(note), xbm(xbm), x(loc.x), y(loc.y),
           color(color) {}
@@ -20,7 +20,7 @@ class NoteBitmapDisplay : public DisplayElement {
     }
 
   private:
-    INoteCCValue &note;
+    INoteCCKPValue &note;
     const XBitmap &xbm;
     int16_t x, y;
     uint16_t color;

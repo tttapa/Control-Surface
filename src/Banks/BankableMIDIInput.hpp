@@ -18,7 +18,7 @@ BEGIN_CS_NAMESPACE
  *          The number of banks.
  */
 template <setting_t N>
-class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
+class BankableMIDIInput : private BankSettingChangeCallback {
     friend class Bank<N>;
 
   protected:
@@ -241,18 +241,6 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
   private:
     Bank<N> &bank;
     const BankType type;
-
-    /**
-     * @brief   A function to be executed each time the bank setting changes.
-     * 
-     * Think of an LED that indicates whether a track is muted or not. If this 
-     * LED is bankable, let's say with 4 tracks per bank, 2 banks, and a base
-     * address of 3, then this LED object keeps the state of tracks 3 and 7.
-     * When the bank setting is 0, the LED displays the state of track 3, when
-     * the bank setting is 1, the LED displays the state of track 7.  
-     * To know when to update the LED, this callback is used.
-     */
-    virtual void onBankSettingChange() {}
 };
 
 END_CS_NAMESPACE

@@ -20,6 +20,9 @@ class MIDIChannelCN {
     friend class MIDIAddress;
 
   public:
+    /// @name   Constructors
+    /// @{
+
     constexpr MIDIChannelCN() : addresses{0, 0, 0, 0} {}
     constexpr MIDIChannelCN(Channel channel, Cable cableNumber = CABLE_1)
         : addresses{
@@ -28,6 +31,14 @@ class MIDIChannelCN {
               channel.getRaw(),
               cableNumber.getRaw(),
           } {}
+
+    constexpr static MIDIChannelCN invalid() { return {}; }
+
+    /// @}
+
+  public:
+    /// @name   Member access
+    /// @{
 
     /// Get the channel [1, 16].
     constexpr Channel getChannel() const { return Channel{addresses.channel}; }
@@ -43,6 +54,32 @@ class MIDIChannelCN {
         return addresses.cableNumber;
     }
 
+    /// @}
+
+  public:
+    /// @name   Checks
+    /// @{
+
+    /// Check for equality: two addresses are equal if and only if they are both
+    /// valid addresses and the MIDI channel and MIDI USB cable number are
+    /// equal.
+    /// @note   Invalid addresses are not equal nor inequal.
+    constexpr bool operator==(const MIDIChannelCN &rhs) const {
+        return this->addresses.valid && rhs.addresses.valid &&
+               this->addresses.channel == rhs.addresses.channel &&
+               this->addresses.cableNumber == rhs.addresses.cableNumber;
+    }
+
+    /// Check for inequality: two addresses are not equal if and only if they
+    /// are both valid addresses and have a MIDI channel or MIDI USB cable
+    /// number that differs.
+    /// @note   Invalid addresses are not equal nor inequal.
+    constexpr bool operator!=(const MIDIChannelCN &rhs) const {
+        return this->addresses.valid && rhs.addresses.valid &&
+               !(this->addresses.channel == rhs.addresses.channel &&
+                 this->addresses.cableNumber == rhs.addresses.cableNumber);
+    }
+
     /// Check if the MIDI address is valid.
     constexpr bool isValid() const { return addresses.valid; }
 
@@ -50,7 +87,19 @@ class MIDIChannelCN {
     /// @see    isValid
     constexpr explicit operator bool() const { return isValid(); }
 
-    constexpr static MIDIChannelCN invalid() { return {}; }
+    /// @}
+
+  public:
+    /// @name   Base functions for address pattern matching.
+    /// @{
+
+    /// Check if two addresses match (are equal).
+    static bool matchSingle(const MIDIChannelCN &toMatch,
+                            const MIDIChannelCN &base) {
+        return base == toMatch;
+    }
+
+    /// @}
 
   private:
     RawMIDIAddress addresses;
@@ -274,12 +323,14 @@ class MIDIAddress {
     /// @}
 
   public:
-    /// @name   Base functions for address pattern matching
+    /// @name   Base functions for address pattern matching.
     /// @{
 
     /// Check if two addresses match (are equal).
     static bool matchSingle(const MIDIAddress &toMatch,
-                            const MIDIAddress &base);
+                            const MIDIAddress &base) {
+        return base == toMatch;
+    }
 
     /// Check if an address falls within a range of MIDI addresses, starting
     /// with address `base`, with a given length.
@@ -289,8 +340,8 @@ class MIDIAddress {
     ///         and MIDI USB Cable Number of `toMatch` and `base` are the same.
     /// @retval false
     ///         Otherwise.
-    static bool matchAddressInRange(const MIDIAddress &toMatch,
-                                    const MIDIAddress &base, uint8_t length);
+    static bool matchAddressInRange(MIDIAddress toMatch, MIDIAddress base,
+                                    uint8_t length);
 
     /// @}
 

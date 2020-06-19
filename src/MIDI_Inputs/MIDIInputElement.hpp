@@ -63,8 +63,8 @@ class MIDIInputElement {
     virtual MIDIAddress getTarget(const ChannelMessageMatcher &midimsg) const {
         return {
             int8_t(midimsg.data1),
-            Channel(midimsg.channel),
-            Cable(midimsg.CN),
+            midimsg.channel,
+            midimsg.cable,
         };
     }
 

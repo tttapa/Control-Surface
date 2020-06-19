@@ -19,13 +19,13 @@ class NoteCCLED : public SimpleNoteCCValueCallback {
     void setThreshold(uint8_t threshold) { this->threshold = threshold; }
     uint8_t getThreshold() const { return this->threshold; }
 
-    void begin(const INoteCCValue &t) override {
+    void begin(const INoteCCKPValue &t) override {
         for (pin_t pin : ledPins)
             AH::ExtIO::pinMode(pin, OUTPUT);
         updateAll(t);
     }
 
-    void update(const INoteCCValue &t, uint8_t index) override {
+    void update(const INoteCCKPValue &t, uint8_t index) override {
         uint8_t value = t.getValue(index);
         bool state = value > threshold;
         AH::ExtIO::digitalWrite(ledPins[index], state ? HIGH : LOW);
@@ -43,13 +43,13 @@ class NoteCCLEDPWM : public SimpleNoteCCValueCallback {
   public:
     NoteCCLEDPWM(const PinList<NumLEDs> &ledPins) : ledPins(ledPins) {}
 
-    void begin(const INoteCCValue &t) override {
+    void begin(const INoteCCKPValue &t) override {
         for (pin_t pin : ledPins)
             AH::ExtIO::pinMode(pin, OUTPUT);
         updateAll(t);
     }
 
-    void update(const INoteCCValue &t, uint8_t index) override {
+    void update(const INoteCCKPValue &t, uint8_t index) override {
         uint8_t value = AH::increaseBitDepth<8, 7, uint8_t>(t.getValue(index));
         AH::ExtIO::analogWrite(ledPins[index], value);
     }

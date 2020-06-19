@@ -2,6 +2,7 @@
 
 #include <Display/DisplayElement.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
+#include <Settings/SettingsWrapper.hpp>
 
 BEGIN_CS_NAMESPACE
 

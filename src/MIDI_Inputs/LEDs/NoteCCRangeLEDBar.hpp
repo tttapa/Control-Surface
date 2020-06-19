@@ -17,12 +17,12 @@ class NoteCCLEDBarCallback : public SimpleNoteCCValueCallback {
     NoteCCLEDBarCallback(const AH::DotBarDisplayLEDs<NumLEDs> &leds)
         : leds(leds) {}
 
-    void begin(const INoteCCValue &t) override {
+    void begin(const INoteCCKPValue &t) override {
         leds.begin();
         updateAll(t);
     }
 
-    void update(const INoteCCValue &t, uint8_t) override {
+    void update(const INoteCCKPValue &t, uint8_t) override {
         uint8_t value = t.getValue();
         leds.display(value / 128.0f);
     }

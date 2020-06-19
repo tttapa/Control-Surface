@@ -126,8 +126,8 @@ class VU_Base : public MIDIInputElementChannelPressure, public IVU {
     MIDIAddress getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {
             int8_t(midimsg.data1 >> 4),
-            Channel(midimsg.channel),
-            Cable(midimsg.CN),
+            midimsg.channel,
+            midimsg.cable,
         };
     }
 

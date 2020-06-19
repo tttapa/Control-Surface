@@ -222,14 +222,14 @@ TEST(MCUVUBankable, setValueBankChangeCN) {
         channel,
         (track - 1) << 4 | 0xA,
         0,
-        4,
+        CABLE_5,
     };
     ChannelMessageMatcher midimsg2 = {
         MIDIMessageType::CHANNEL_PRESSURE,
         channel,
         (track - 1) << 4 | 0xB,
         0,
-        8,
+        CABLE_9,
     };
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .WillOnce(Return(0))

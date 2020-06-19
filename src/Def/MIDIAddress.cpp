@@ -38,13 +38,8 @@ MIDIAddress MIDIAddress::operator-(const RelativeMIDIAddress &rhs) const {
     return copy;
 }
 
-bool MIDIAddress::matchSingle(const MIDIAddress &toMatch,
-                              const MIDIAddress &base) {
-    return base == toMatch;
-}
-
-bool MIDIAddress::matchAddressInRange(const MIDIAddress &toMatch,
-                                      const MIDIAddress &base, uint8_t length) {
+bool MIDIAddress::matchAddressInRange(MIDIAddress toMatch, MIDIAddress base,
+                                      uint8_t length) {
     bool valid = base.addresses.valid && toMatch.addresses.valid;
     bool addressInRange =
         base.addresses.address <= toMatch.addresses.address &&

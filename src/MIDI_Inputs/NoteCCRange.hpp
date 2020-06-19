@@ -10,9 +10,9 @@ BEGIN_CS_NAMESPACE
  * @brief   Interface for NoteCCValue objects: provides getters for the 
  *          velocity or controller values.
  */
-class INoteCCValue {
+class INoteCCKPValue {
   protected:
-    INoteCCValue(uint8_t rangeLength) : rangeLength{rangeLength} {}
+    INoteCCKPValue(uint8_t rangeLength) : rangeLength{rangeLength} {}
 
   public:
     /// Get the length of the range of note/CC addresses.
@@ -27,14 +27,16 @@ class INoteCCValue {
     uint8_t rangeLength;
 };
 
+using INoteCCValue [[deprecated]] = INoteCCKPValue;
+
 /**
  * @brief   A callback for NoteCCRange that doesn't do anything.
  */
 class NoteCCRangeEmptyCallback {
   public:
-    void begin(const INoteCCValue &) {}
-    void update(const INoteCCValue &, uint8_t) {}
-    void updateAll(const INoteCCValue &) {}
+    void begin(const INoteCCKPValue &) {}
+    void update(const INoteCCKPValue &, uint8_t) {}
+    void updateAll(const INoteCCKPValue &) {}
 };
 
 /**
@@ -49,13 +51,13 @@ struct SimpleNoteCCValueCallback {
 
   public:
     /// Initialize: called once
-    virtual void begin(const INoteCCValue &) {}
+    virtual void begin(const INoteCCKPValue &) {}
     /// Update the given index: called when a new message is received for this
     /// index
-    virtual void update(const INoteCCValue &noteccval, uint8_t index) = 0;
+    virtual void update(const INoteCCKPValue &noteccval, uint8_t index) = 0;
     /// Update all values: called when a bank change causes all values to
     /// (possibly) change, or when the entire range is reset to zero.
-    virtual void updateAll(const INoteCCValue &noteccval) {
+    virtual void updateAll(const INoteCCKPValue &noteccval) {
         for (uint8_t i = 0; i < noteccval.length(); ++i)
             update(noteccval, i);
     }
@@ -70,16 +72,16 @@ struct SimpleNoteCCValueCallback {
  * Can listen to a range of addresses or a single address.
  */
 template <class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callback>
-class NoteCCRange : public MIDIInput_t, public INoteCCValue {
+class NoteCCRange : public MIDIInput_t, public INoteCCKPValue {
   public:
     NoteCCRange(MIDIAddress address, const Callback &callback)
-        : MIDIInput_t{address}, INoteCCValue{RangeLen}, callback(callback) {}
+        : MIDIInput_t{address}, INoteCCKPValue{RangeLen}, callback(callback) {}
 
     /// @todo   check index bounds
     uint8_t getValue(uint8_t index) const final override {
         return values[getSelection()][index];
     }
-    using INoteCCValue::getValue;
+    using INoteCCKPValue::getValue;
 
     /// Initialize
     void begin() override { callback.begin(*this); }

@@ -71,7 +71,7 @@ class NoteCCFastLEDCallback : public SimpleNoteCCValueCallback {
     }
 
     // Called once upon initialization.
-    void begin(const INoteCCValue &input) override { updateAll(input); }
+    void begin(const INoteCCKPValue &input) override { updateAll(input); }
 
     // Called each time a MIDI message is received and an LED has to be updated.
     // @param   input
@@ -80,7 +80,7 @@ class NoteCCFastLEDCallback : public SimpleNoteCCValueCallback {
     //          values.
     // @param   index
     //          The index of the value that changed. (zero-based)
-    void update(const INoteCCValue &input, uint8_t index) override {
+    void update(const INoteCCKPValue &input, uint8_t index) override {
         // Get the MIDI value that changed [0, 127]
         uint8_t value = input.getValue(index);
         // Apply the color mapper to convert the value to a color

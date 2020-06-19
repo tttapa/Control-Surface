@@ -2,9 +2,9 @@
 
 #pragma once
 
+#include <AH/Containers/LinkedList.hpp>
 #include <AH/Debug/Debug.hpp>
 #include <AH/Error/Error.hpp>
-#include <AH/Containers/LinkedList.hpp>
 #include <Selectors/Selectable.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -63,6 +63,27 @@ class OutputBank {
     setting_t bankSetting;
 };
 
+/// Callback class for Bankable objects that need to be notified when the
+/// active setting of their Bank changes.
+class BankSettingChangeCallback
+    : public DoublyLinkable<BankSettingChangeCallback> {
+    template <setting_t N>
+    friend class Bank;
+
+  private:
+    /**
+     * @brief   A function to be executed each time the bank setting changes.
+     * 
+     * Think of an LED that indicates whether a track is muted or not. If this 
+     * LED is bankable, let's say with 4 tracks per bank, 2 banks, and a base
+     * address of 3, then this LED object keeps the state of tracks 3 and 7.
+     * When the bank setting is 0, the LED displays the state of track 3, when
+     * the bank setting is 1, the LED displays the state of track 7.  
+     * To know when to update the LED, this callback is used.
+     */
+    virtual void onBankSettingChange() {}
+};
+
 /**
  * @brief   A class that groups Bankable BankableMIDIOutput%s and 
  *          BankableMIDIInput%s, and allows the user to change the addresses 
@@ -104,27 +125,24 @@ class Bank : public Selectable<N>, public OutputBank {
      */
     constexpr static uint8_t getNumberOfBanks() { return N; }
 
-  private:
+  public:
     /**
      * @brief   Add a BankableMIDIInput to the bank.
      * 
-     * This method is called in the BankableMIDIInput constructor.
-     *
      * @param   bankable
      *          The BankableMIDIInput to be added.
      */
-    void add(BankableMIDIInput<N> *bankable);
+    void add(BankSettingChangeCallback *bankable);
 
     /**
      * @brief   Remove a BankableMIDIInput from the bank.
      * 
-     * This method is called in the BankableMIDIInput destructor.
-     *
      * @param   bankable
      *          The BankableMIDIInput to be removed.
      */
-    void remove(BankableMIDIInput<N> *bankable);
+    void remove(BankSettingChangeCallback *bankable);
 
+  private:
     /**
      * @brief   A linked list of all BankableMIDIInput elements that have been
      *          added to this bank, and that should be updated when the bank
@@ -133,7 +151,7 @@ class Bank : public Selectable<N>, public OutputBank {
      * The list is updated automatically when BankableMIDIInput elements are
      * created or destroyed.
      */
-    DoublyLinkedList<BankableMIDIInput<N>> inputBankables;
+    DoublyLinkedList<BankSettingChangeCallback> inputBankables;
 };
 
 END_CS_NAMESPACE
@@ -145,12 +163,12 @@ END_CS_NAMESPACE
 BEGIN_CS_NAMESPACE
 
 template <setting_t N>
-void Bank<N>::add(BankableMIDIInput<N> *bankable) {
+void Bank<N>::add(BankSettingChangeCallback *bankable) {
     inputBankables.append(bankable);
 }
 
 template <setting_t N>
-void Bank<N>::remove(BankableMIDIInput<N> *bankable) {
+void Bank<N>::remove(BankSettingChangeCallback *bankable) {
     inputBankables.remove(bankable);
 }
 
@@ -158,7 +176,7 @@ template <setting_t N>
 void Bank<N>::select(setting_t bankSetting) {
     bankSetting = this->validateSetting(bankSetting);
     OutputBank::select(bankSetting);
-    for (BankableMIDIInput<N> &e : inputBankables)
+    for (BankSettingChangeCallback &e : inputBankables)
         e.onBankSettingChange();
 }
 

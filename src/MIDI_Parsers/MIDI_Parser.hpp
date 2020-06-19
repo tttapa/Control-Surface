@@ -11,11 +11,12 @@
 
 BEGIN_CS_NAMESPACE
 
+/// Values returned by the MIDI reading functions.
 enum class MIDIReadEvent : uint8_t {
-    NO_MESSAGE = 0,
-    CHANNEL_MESSAGE = 1,
-    SYSEX_MESSAGE = 2,
-    REALTIME_MESSAGE = 3,
+    NO_MESSAGE = 0,       ///< No new messages were received.
+    CHANNEL_MESSAGE = 1,  ///< A MIDI Channel message was received.
+    SYSEX_MESSAGE = 2,    ///< A MIDI System Exclusive message was received.
+    REALTIME_MESSAGE = 3, ///< A MIDI Real-Time message was received.
 };
 
 class MIDI_Parser {

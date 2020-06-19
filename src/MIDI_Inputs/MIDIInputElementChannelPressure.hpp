@@ -91,8 +91,8 @@ class MIDIInputElementChannelPressure
     MIDIAddress getTarget(const ChannelMessageMatcher &midimsg) const override {
         return {
             0,
-            Channel(midimsg.channel),
-            Cable(midimsg.CN),
+            midimsg.channel,
+            midimsg.cable,
         };
     }
 
