@@ -7,4 +7,5 @@ target_link_libraries(tests
                       googletest_wrappers)
 
 # Add tests
-gtest_discover_tests(tests)
+gtest_add_tests(TARGET tests TEST_LIST test_list)
+set_tests_properties(${test_list} PROPERTIES TIMEOUT 20)
