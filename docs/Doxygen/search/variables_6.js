@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['greenbit_1017',['greenBit',['../d5/d45/structShiftRegisterOutRGB.html#a923cc98d65a21c97f8f9e31a36677b14',1,'ShiftRegisterOutRGB']]]
+  ['greenbit_1057',['greenBit',['../d5/d45/structShiftRegisterOutRGB.html#aebf4ab212ee2a39ae11b1184c41c4b1b',1,'ShiftRegisterOutRGB']]]
 ];

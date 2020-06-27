@@ -1,0 +1,3 @@
+<map id="EmptyMutex" name="EmptyMutex">
+<area shape="rect" id="node1" title="Mutex that doesn&#39;t lock anything, used on single&#45;core systems." alt="" coords="5,5,111,97"/>
+</map>

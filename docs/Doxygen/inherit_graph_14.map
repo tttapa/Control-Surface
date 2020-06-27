@@ -1,5 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$db/d52/classDoublyLinkedList_1_1node__iterator__base.html" title="Base class for doubly linked list iterators." alt="" coords="5,35,171,91"/>
-<area shape="rect" id="node2" href="$dd/d02/classDoublyLinkedList_1_1node__iterator.html" title="Forward bidirectional doubly linked list iterator." alt="" coords="219,5,395,47"/>
-<area shape="rect" id="node3" href="$d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html" title="Reverse bidirectional doubly linked list iterator." alt="" coords="223,71,390,127"/>
+<area shape="rect" id="node1" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,39,269,80"/>
+<area shape="rect" id="node2" href="$d2/dfb/classUpdatableCRTP.html" title=" " alt="" coords="317,31,552,87"/>
+<area shape="rect" id="node3" href="$d5/de0/classUpdatable.html" title=" " alt="" coords="600,5,823,47"/>
+<area shape="rect" id="node4" href="$d5/de0/classUpdatable.html" title=" " alt="" coords="600,71,823,112"/>
 </map>

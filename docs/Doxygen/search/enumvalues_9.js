@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uppercase_1143',['UPPERCASE',['../da/d69/PrintStream_8cpp.html#a6674af4819a4f85e8c40be5971746668a19d6b87b851ddfd4fdc4f182e2ae0617',1,'PrintStream.cpp']]]
+  ['uppercase_1187',['UPPERCASE',['../da/d69/PrintStream_8cpp.html#a0c7d36d3bdf541208a94c83b3a25d239a19d6b87b851ddfd4fdc4f182e2ae0617',1,'PrintStream.cpp']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['manipulator_1114',['manipulator',['../d8/d4b/group__AH__PrintStream.html#gab82cf12919f956954b9bba423b696205',1,'PrintStream.hpp']]],
-  ['mappingfunction_1115',['MappingFunction',['../da/da7/classFilteredAnalog.html#acebdd7d5e342b3080a731e8dd0a0738f',1,'FilteredAnalog']]]
+  ['lockguard_1156',['LockGuard',['../d2/dfb/classUpdatableCRTP.html#a65d4c4a857abe1431f68cb2c3247d27a',1,'UpdatableCRTP']]]
 ];
