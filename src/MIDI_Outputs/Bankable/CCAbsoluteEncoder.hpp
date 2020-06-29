@@ -21,8 +21,9 @@ namespace Bankable {
  *
  * @ingroup BankableMIDIOutputElements
  */
+template <size_t NumBanks>
 class CCAbsoluteEncoder
-    : public MIDIAbsoluteEncoder<SingleAddress, ContinuousCCSender> {
+    : public MIDIAbsoluteEncoder<NumBanks, SingleAddress, ContinuousCCSender> {
   public:
     /**
      * @brief   Construct a new Bankable CCAbsoluteEncoder object with the given 
@@ -53,7 +54,7 @@ class CCAbsoluteEncoder
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    CCAbsoluteEncoder(OutputBankConfig<> config, const EncoderPinList &pins,
+    CCAbsoluteEncoder(OutputBankConfig<NumBanks> config, const EncoderPinList &pins,
                       const MIDIAddress &address, int16_t multiplier = 1,
                       uint8_t pulsesPerStep = 4)
         : MIDIAbsoluteEncoder({config, address}, pins, multiplier,

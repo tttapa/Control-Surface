@@ -19,7 +19,7 @@ namespace Bankable {
  * @brief   An abstract class for rotary encoders that send MIDI events and that
  *          can be added to a Bank.
  */
-template <class BankAddress, class Sender>
+template <uint8_t NumBanks,class BankAddress, class Sender>
 class MIDIAbsoluteEncoder : public MIDIOutputElement {
   protected:
     /**
