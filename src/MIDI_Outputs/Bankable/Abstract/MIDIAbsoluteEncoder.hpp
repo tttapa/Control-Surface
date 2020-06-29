@@ -37,32 +37,47 @@ class MIDIAbsoluteEncoder : public MIDIOutputElement {
 
   public:
     void begin() final override {}
+
     void update() override {
-        long currentPosition = getValue();
-        if (currentPosition != previousPosition) {
-            sender.send(currentPosition, address.getActiveAddress());
-            previousPosition = currentPosition;
+        Enc_t encval = encoder.read();
+        // If Enc_t is an unsigned type, integer overflow is well-defined, which
+        // is what we want when Enc_t is small and expected to overflow.
+        // However, we need it to be signed because we're interested  in the
+        // delta.
+        int16_t delta = SignedEnc_t(Enc_t(encval - deltaOffset));
+        delta = delta * multiplier / pulsesPerStep;
+        if (delta) {
+            address.lock();
+            int16_t oldValue = values[address.getSelection()];
+            int16_t newValue = oldValue + delta;
+            newValue = constrain(newValue, 0, maxValue);
+            if (oldValue != newValue) {
+                sender.send(newValue, address.getActiveAddress());
+                values[address.getSelection()] = newValue;
+            }
+            address.unlock();
+            deltaOffset += Enc_t(delta * pulsesPerStep / multiplier);
         }
     }
 
-    analog_t getValue() {
-        auto maxval = (1 << Sender::precision()) - 1;
-        noInterrupts();
-        auto rawval = encoder.read() * multiplier / pulsesPerStep;
-        noInterrupts(); // encoder.read() enables interrupts :(
-        auto val = constrain(rawval, 0, maxval);
-        if (val != rawval)
-            encoder.write(val * pulsesPerStep / multiplier);
-        interrupts();
-        return val;
-    }
+    uint16_t getValue(setting_t bank) const { return values[bank]; }
+    uint16_t getValue() const { return getValue(address.getSelection()); }
+
+    void setValue(uint16_t value, setting_t bank) { values[bank] = value; }
+    void setValue(uint16_t value) { setValue(value, address.getSelection()); }
 
   private:
     BankAddress address;
     Encoder encoder;
     const int16_t multiplier;
     const uint8_t pulsesPerStep;
-    long previousPosition = 0;
+    // long previousPosition = 0;
+    Array<uint16_t, NumBanks> values = {{}};
+    using Enc_t = decltype(encoder.read());
+    using SignedEnc_t = typename std::make_signed<Enc_t>::type;
+    Enc_t deltaOffset = 0;
+
+    constexpr static int16_t maxValue = uint16_t(1u << Sender::precision()) - 1;
 
   public:
     Sender sender;
