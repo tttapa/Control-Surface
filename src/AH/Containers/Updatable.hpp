@@ -103,8 +103,8 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
 
     /// Enable this updatable: insert it into the linked list of instances,
     /// so it gets updated automatically
-    void enable(const LockGuard &) {
-        if (isEnabled()) {
+    void enable(const LockGuard &lock) {
+        if (isEnabled(lock)) {
             ERROR(F("Error: This element is already enabled."), 0x1212);
             return;
         }
@@ -116,8 +116,8 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
 
     /// Disable this updatable: remove it from the linked list of instances,
     /// so it no longer gets updated automatically
-    void disable(const LockGuard &) {
-        if (!isEnabled()) {
+    void disable(const LockGuard &lock) {
+        if (!isEnabled(lock)) {
             ERROR(F("Error: This element is already disabled."), 0x1213);
             return;
         }
@@ -134,7 +134,7 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
      *          list by the user.
      */
     bool isEnabled(const LockGuard &) const {
-        return updatables.couldContain(CRTP(Derived));
+        return updatables.couldContain(CRTP(const Derived));
     }
 
     /// @copydoc isEnabled

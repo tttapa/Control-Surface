@@ -49,3 +49,14 @@ TEST(Updatable, threadSafety) {
     EXPECT_EQ(dist_fwd, v.size());
     EXPECT_EQ(dist_bwd, v.size());
 }
+
+TEST(Updatable, enableDisable) {
+    TestUpdatable v[16];
+    TestUpdatable::disable(v);
+    auto &l = TestUpdatable::getList();
+    auto len = std::distance(l.begin(), l.end());
+    EXPECT_EQ(len, 0);
+    TestUpdatable::enable(v);
+    len = std::distance(l.begin(), l.end());
+    EXPECT_EQ(len, 16);
+}
