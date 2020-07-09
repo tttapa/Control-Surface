@@ -278,13 +278,13 @@ class DoublyLinkedList {
      *          The given node is not part of any linked list, or it is the 
      *          only element of a different linked list.
      */
-    bool couldContain(Node *node) {
+    bool couldContain(const Node *node) const {
         return node && (node == first || node->next != nullptr ||
                         node->previous != nullptr);
     }
 
     /// @copydoc couldContain(Node *)
-    bool couldContain(Node &node) {
+    bool couldContain(const Node &node) const {
         return couldContain(&node);
     }
 
