@@ -2,19 +2,21 @@
 There are some differences in MIDI over USB implementation between different types of Arduino-compatible boards. This page provides an overview and some board recommendations if you're planning to build an Arduino MIDI device with MIDI over USB support.
  
 ## Arduino boards with native USB support
-_Arduino Due, Arduino Zero, Arduino Leonardo, Arduino Micro, Arduino LilyPad USB ..._  
+_Arduino Due, Arduino Leonardo, Arduino Micro, Arduino Nano 33 BLE, Arduino Nano 33 IOT, Arduino Zero, Arduino MKR Zero, Arduino MKR1000 ..._  
 ***
-Some of the newer boards have native USB support (i.e. the USB connection goes directly to the main MCU) this means that they can pretend to be a USB MIDI device. This is based on PluggableUSB, using the [MIDIUSB](https://github.com/arduino-libraries/MIDIUSB) library.  
+Some of the newer boards have native USB support (i.e. the USB connection goes directly to the main MCU) this means that they can act as a true USB MIDI device. This is based on PluggableUSB, using the [MIDIUSB](https://github.com/arduino-libraries/MIDIUSB) library.  
 You just have to @ref md_pages_Installation "install the MIDIUSB library", and upload a Control Surface sketch with a @ref USBMIDI_Interface.  
 The computer will then automatically detect the Arduino as a MIDI device.
 
+The MIDIUSB library only supports one MIDI USB virtual cable, while most Teensies support all 16 cables (see below).
+
 ## Teensy
-_Teensy 2.0, Teensy++ 2.0, Teensy LC, Teensy 3.0, Teensy 3.1, Teensy 3.2, Teensy 3.5, Teensy 3.6_  
+_Teensy 2.0, Teensy++ 2.0, Teensy LC, Teensy 3.0, Teensy 3.1, Teensy 3.2, Teensy 3.5, Teensy 3.6, Teensy 4.0, Teensy 4.1_  
 ***
 Teensy boards have native USB support as well. You don't even need to install anything, because MIDI over USB is implemented in the Teensy Core.  
 You just need to select the 'MIDI' USB type from Tools > USB Type > MIDI. Other USB types that include MIDI can be used as well.
 
-You can use up to 16 USB MIDI cables over a single USB connection, they will show up as 16 different MIDI devices on your computer. (On a Teensy 2, this number is limited to 4 USB MIDI cables).
+You can use up to 16 USB MIDI virtual cables over a single USB connection, they will show up as 16 different MIDI devices on your computer. (On a Teensy 2, this number is limited to 4 USB MIDI cables).
 
 ## Arduino boards with an ATmega16U2 (ATmega8U2)
 _Arduino Uno, Arduino Mega_
@@ -47,6 +49,15 @@ You can now just plug it into your computer, and it will be recognized as a MIDI
 The HIDUINO firmware is rather old, and there's a newer alternative that combines the MIDI USB and Serial USB modes in a single firmware: [USBMidiKliK](https://github.com/TheKikGen/USBMidiKliK). This means that you should be able to program the Arduino and use MIDI over USB without swapping firmwares all the time.  
 I haven't tried this myself, but it looks promising.
 
+## Arduino boards with a SAMD11
+_Arduino Nano Every_
+***
+Some newer boards use a SAMD11 as the USB-to-TTL chip. In theory, you could also upload custom firmware to this chip, but I've never seen anyone do it.
+This [forum thread](https://forum.arduino.cc/index.php?topic=677150.msg4562019#msg4562019) contains some useful information.  
+
+Once you have working SAMD11 MIDI over USB firmware, the usage is the same as the previous section about the ATmega16U2.  
+I wouldn't recommend this approach.
+
 ## Boards with a single-purpose USB-to-TTL chip  
 _Arduino Nano, Arduino Duemilanove, Chinese Uno & Mega clones ..._
 ***
@@ -60,25 +71,35 @@ _ESP8266, ESP32_
 The ESP8266 and ESP32 microcontrollers don't have native USB support, and all development boards I've come across use a single-purpose USB-to-TTL chip, which means that they fall into the same category as the Arduino Nano when it comes to MIDI over USB.
 
 That being said, both the ESP8266 and the ESP32 have built-in WiFi, so you can use rtpMIDI, using the [AppleMIDI library](https://github.com/lathoub/Arduino-AppleMIDI-Library), for example.  
-An alternative is to use Open Sound Control (OSC). This is not MIDI, it's an entirely different protocol, built on top of UDP. It can be used for bidirectional communication between audio software and control surfaces. I've successfully used this to build a control surface for Reaper.  
-OSC and rtpMIDI are not directly supported by the Control Surface library, but they can be integrated relatively easily.
+An alternative is to use Open Sound Control (OSC). This is not MIDI, it's an entirely different protocol, built on top of UDP. It can be used for bidirectional communication between audio software and control surfaces. I've successfully used this to build a control surface for Reaper.
+
+Control Surface supports AppleMIDI if you install the AppleMIDI library. See the @ref AppleMIDI.ino example for details.  
+OSC is not directly supported by the Control Surface library, but they can be integrated relatively easily.
 
 The ESP32 also has Bluetooth support, so you can use MIDI over BLE. This is supported by the Control Surface library using the @ref BluetoothMIDI_Interface.
 
 ***
 
 ## Conclusion
-I strongly recommend getting a Teensy 3.x for building a Control Surface. 
+I strongly recommend getting a Teensy 3.x or 4.x for building a Control Surface. 
 MIDI over USB is supported right of the box, and it's the only platform that 
 currently supports USB audio output. 
 On top of that, it has plenty of memory to create large MIDI Controllers, and 
 drive lots of displays.
 
-If you just want a very small MIDI Controller, the Arduino Leonardo/Micro are 
-good choices as well, just keep in mind that they don't have a lot of RAM.
+Arduino boards using the nRF52840 or SAMD21 also support MIDI over USB natively.
+They're not as powerful as a Teensy, and SAMD21 doesn't have that much memory,
+but they are suitable for medium-sized MIDI project.  
+This category includes Arduino Nano 33 and Arduino MKR boards.
 
-The Arduino UNO and MEGA boards are just not fit for MIDI over USB, and I 
-wouldn't recommend them at all for this application.
+If you just want a small and cheap MIDI Controller, the Arduino Leonardo/Micro 
+are good choices as well, just keep in mind that they don't have a lot of RAM, 
+and are pretty slow compared to Teensy boards, both in terms of CPU power and 
+IO or analog inputs.
+
+The Arduino Uno, Mega, NANO and Nano Every boards are just not fit for MIDI over
+USB, and I wouldn't recommend them at all for this application. They can of 
+course still be used if you just want 5-pin DIN MIDI instead of MIDI over USB.
 
 You don't have to worry too much about the number of IO pins a board has, since
 you can use multiplexers and GPIO expanders, using the ExtendedIO classes of the 
