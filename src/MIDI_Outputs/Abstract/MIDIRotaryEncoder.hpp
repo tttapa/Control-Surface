@@ -1,7 +1,7 @@
 #pragma once
 
 #include <AH/STL/type_traits> // std::make_signed
-#include <AH/STL/utility> // std::forward
+#include <AH/STL/utility>     // std::forward
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
@@ -21,11 +21,11 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
      * @todo    Documentation
      */
     GenericMIDIRotaryEncoder(Enc &&encoder, MIDIAddress address,
-                             int16_t speedMultiply, uint8_t pulsesPerStep,
+                             int16_t multiplier, uint8_t pulsesPerStep,
                              const Sender &sender)
         : encoder(std::forward<Enc>(encoder)), address(address),
-          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
-          sender(sender) {}
+          multiplier(multiplier), pulsesPerStep(pulsesPerStep), sender(sender) {
+    }
 
     void begin() override {}
 
@@ -33,21 +33,29 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
         Enc_t encval = encoder.read();
         // If Enc_t is an unsigned type, integer overflow is well-defined, which
         // is what we want when Enc_t is small and expected to overflow.
-        // However, we need it to be signed because we're interested  in the
+        // However, we need it to be signed because we're interested in the
         // delta.
-        int16_t delta = SignedEnc_t(Enc_t(encval - deltaOffset));
-        delta = delta * speedMultiply / pulsesPerStep;
-        if (delta) {
-            sender.send(delta, address);
-            deltaOffset += Enc_t(delta * pulsesPerStep / speedMultiply);
+        Enc_t uDelta = encval - deltaOffset;
+        if (uDelta) {
+            int16_t delta = SignedEnc_t(uDelta);
+            // Assumption: delta and multiplier are relatively small, so
+            // multiplication probably won't overflow.
+            int16_t multipliedDelta = delta * multiplier + remainder;
+            int16_t scaledDelta = multipliedDelta / pulsesPerStep;
+            remainder = multipliedDelta % pulsesPerStep;
+
+            if (scaledDelta)
+                sender.send(scaledDelta, address);
+            deltaOffset += uDelta;
         }
     }
 
   private:
     Enc encoder;
     MIDIAddress address;
-    int16_t speedMultiply;
+    int16_t multiplier;
     uint8_t pulsesPerStep;
+    int16_t remainder = 0;
     using Enc_t = decltype(encoder.read());
     using SignedEnc_t = typename std::make_signed<Enc_t>::type;
     Enc_t deltaOffset = 0;
