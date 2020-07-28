@@ -88,8 +88,8 @@ On top of that, it has plenty of memory to create large MIDI Controllers, and
 drive lots of displays.
 
 Arduino boards using the nRF52840 or SAMD21 also support MIDI over USB natively.
-They're not as powerful as a Teensy, and SAMD21 doesn't have that much memory,
-but they are suitable for medium-sized MIDI project.  
+They're not as powerful as a Teensy, and the SAMD21 doesn't have that much 
+memory, but they are suitable for medium-sized MIDI projects.  
 This category includes Arduino Nano 33 and Arduino MKR boards.
 
 If you just want a small and cheap MIDI Controller, the Arduino Leonardo/Micro 
