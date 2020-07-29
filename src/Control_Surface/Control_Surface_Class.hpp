@@ -22,8 +22,6 @@ using AH::Updatable;
  *          all other classes, it's the glue that holds everything together.
  * 
  * @ingroup ControlSurfaceModule
- * 
- * @nosubgrouping
  */
 class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
                          public TrueMIDI_SinkSource {

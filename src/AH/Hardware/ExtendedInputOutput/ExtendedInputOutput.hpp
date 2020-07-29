@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
 #include <AH/Settings/NamespaceSettings.hpp>
+#include <AH/Settings/Warnings.hpp>
 
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
@@ -49,7 +49,7 @@ using PinStatus_t = uint8_t;
 using PinMode_t = uint8_t;
 #if defined(SAMD_SERIES) /* Nano 33 */ || defined(_LIB_SAM_) /* Due */
 using BitOrder_t = BitOrder;
-#else 
+#else
 using BitOrder_t = uint8_t;
 #endif
 
@@ -84,35 +84,85 @@ namespace ExtIO {
  */
 ExtendedIOElement &getIOElementOfPin(pin_t pin);
 /// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::pinMode
 void pinMode(pin_t pin, PinMode_t mode);
 /// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::pinMode
 void pinMode(int pin, PinMode_t mode);
 /// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::digitalWrite
 void digitalWrite(pin_t pin, PinStatus_t val);
 /// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::digitalWrite
 void digitalWrite(int pin, PinStatus_t val);
 /// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::digitalRead
 int digitalRead(pin_t pin);
 /// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::digitalRead
 int digitalRead(int pin);
+
 /// An ExtIO version of the Arduino function
-void shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder,
-                     uint8_t val);
-/// An ExtIO version of the Arduino function
-void shiftOut(int dataPin, int clockPin, BitOrder_t bitOrder,
-                     uint8_t val);
-/// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::analogRead
 analog_t analogRead(pin_t pin);
 /// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::analogRead
 analog_t analogRead(int pin);
 /// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::analogWrite
 void analogWrite(pin_t pin, analog_t val);
 /// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::analogWrite
 void analogWrite(int pin, analog_t val);
 /// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::analogWrite
 void analogWrite(int pin, int val);
 /// An ExtIO version of the Arduino function
+/// @see    ExtendedIOElement::analogWrite
 void analogWrite(pin_t pin, int val);
+
+/// An ExtIO version of the Arduino function
+void shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder, uint8_t val);
+/// An ExtIO version of the Arduino function
+void shiftOut(int dataPin, int clockPin, BitOrder_t bitOrder, uint8_t val);
+
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::pinModeBuffered
+void pinModeBuffered(pin_t pin, PinMode_t mode);
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::pinModeBuffered
+void pinModeBuffered(int pin, PinMode_t mode);
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::digitalWriteBuffered
+void digitalWriteBuffered(pin_t pin, PinStatus_t val);
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::digitalWriteBuffered
+void digitalWriteBuffered(int pin, PinStatus_t val);
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::digitalReadBuffered
+int digitalReadBuffered(pin_t pin);
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::digitalReadBuffered
+int digitalReadBuffered(int pin);
+
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::analogReadBuffered
+analog_t analogReadBuffered(pin_t pin);
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::analogReadBuffered
+analog_t analogReadBuffered(int pin);
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::analogWriteBuffered
+void analogWriteBuffered(pin_t pin, analog_t val);
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::analogWriteBuffered
+void analogWriteBuffered(int pin, analog_t val);
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::analogWriteBuffered
+void analogWriteBuffered(int pin, int val);
+/// A buffered ExtIO version of the Arduino function
+/// @see   ExtendedIOElement::analogWriteBuffered
+void analogWriteBuffered(pin_t pin, int val);
 
 } // namespace ExtIO
 

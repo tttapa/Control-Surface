@@ -14,8 +14,6 @@ class MIDI_Callbacks;
 
 /**
  * @brief   Statically polymorphic template for classes that send MIDI messages.
- * 
- * @nosubgrouping
  */
 template <class Derived>
 class MIDI_Sender {
@@ -153,6 +151,8 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
      */
     void update() override = 0;
 
+    /// @name   Default MIDI Interfaces
+    /// @{
     /**
      * @brief   Return the default MIDI interface.
      */
@@ -162,7 +162,10 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
      * @brief   Set this MIDI interface as the default interface.
      */
     void setAsDefault();
+    /// @}
 
+    /// @name   MIDI Input Callbacks
+    /// @{
     /**
      * @brief   Set the callbacks that will be called when a MIDI message is 
      *          received.
@@ -181,7 +184,10 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
      *          class.
      */
     void setCallbacks(MIDI_Callbacks &cb) { setCallbacks(&cb); }
+    /// @}
 
+  protected:
+    friend class MIDI_Sender<MIDI_Interface>;
     /**
      * @brief   Low-level function for sending a 3-byte MIDI message.
      */
@@ -230,6 +236,8 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
     Parsing_MIDI_Interface(MIDI_Parser &parser);
 
   public:
+    /// @name   Parsing MIDI Input
+    /// @{
     MIDI_Parser &getParser() { return parser; }
 
     /**
@@ -246,6 +254,7 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
      * @brief   Return the cable number of the received message.
      */
     uint8_t getCN() const;
+    /// @}
 
     void update() override;
 
@@ -257,14 +266,14 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
 
   private:
     /**
-     * @todo    Documentation
+     * @brief   Try reading and parsing a single incoming MIDI message.
+     * @return  Returns the type of the read message, or @ref NO_MESSAGE if no
+     *          MIDI message was available.
      */
     virtual MIDI_read_t read() = 0;
 
     bool onRealtimeMessage(uint8_t message);
-
     bool onChannelMessage();
-
     bool onSysExMessage();
 
   protected:
@@ -279,14 +288,19 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
  */
 class MIDI_Callbacks {
   public:
+    /// Callback for incoming MIDI Channel Messages (notes, control change, 
+    /// pitch bend, etc.)
     virtual void onChannelMessage(Parsing_MIDI_Interface &midi) { (void)midi; }
+    /// Callback for incoming MIDI System Exclusive Messages.
     virtual void onSysExMessage(Parsing_MIDI_Interface &midi) { (void)midi; }
+    /// Callback for incoming MIDI Real-Time Messages.
     virtual void onRealtimeMessage(Parsing_MIDI_Interface &midi,
                                    uint8_t message) {
         (void)midi;
         (void)message;
     }
 
+    /// Destructor.
     virtual ~MIDI_Callbacks() = default;
 };
 // LCOV_EXCL_STOP

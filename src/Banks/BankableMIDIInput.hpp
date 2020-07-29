@@ -42,7 +42,7 @@ class BankableMIDIInput : public DoublyLinkable<BankableMIDIInput<N>> {
      * 
      * @see     BankableMIDIInput::BankableMIDIInput(Bank<N> &, BankType)
      */
-    BankableMIDIInput(const BankConfig<N> &config)
+    BankableMIDIInput(BankConfig<N> config)
         : BankableMIDIInput<N>(config.bank, config.type) {}
 
   public:

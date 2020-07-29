@@ -41,8 +41,8 @@ class PBPotentiometer
      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
      *          Number [0, 15].
      */
-    PBPotentiometer(const OutputBankConfig &config, pin_t analogPin,
-                    const MIDIChannelCN &address)
+    PBPotentiometer(OutputBankConfig<BankType::CHANGE_CHANNEL> config,
+                    pin_t analogPin, MIDIChannelCN address)
         : MIDIFilteredAnalog{{config, address}, analogPin, {}} {}
 };
 

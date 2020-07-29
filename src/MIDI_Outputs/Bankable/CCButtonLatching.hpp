@@ -41,8 +41,7 @@ class CCButtonLatching
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButtonLatching(const OutputBankConfig &config, pin_t pin,
-                     const MIDIAddress &address,
+    CCButtonLatching(OutputBankConfig<> config, pin_t pin, MIDIAddress address,
                      const DigitalCCSender &sender = {})
         : MIDIButtonLatching<SingleAddress, DigitalCCSender>{
               {config, address}, pin, sender} {}

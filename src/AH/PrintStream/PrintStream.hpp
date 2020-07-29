@@ -5,12 +5,15 @@
 #ifndef PrintStream_h
 #define PrintStream_h
 
+#include<AH/Settings/NamespaceSettings.hpp>
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <AH/Arduino-Wrapper.h> // Print
 AH_DIAGNOSTIC_POP()
+
+BEGIN_AH_NAMESPACE
 
 /// @addtogroup  AH_PrintStream
 /// @{
@@ -102,6 +105,31 @@ inline std::ostream &operator<<(std::ostream &os,
 
 #endif
 
+END_AH_NAMESPACE
+
 AH_DIAGNOSTIC_POP()
+
+#include <Settings/NamespaceSettings.hpp>
+
+BEGIN_CS_NAMESPACE
+using AH::operator<<;
+using AH::manipulator;
+using AH::endl;
+using AH::flush;
+using AH::hex;
+using AH::bin;
+using AH::dec;
+using AH::boolalpha;
+using AH::noboolalpha;
+using AH::leadingzeros;
+using AH::noleadingzeros;
+using AH::uppercase;
+using AH::nouppercase;
+using AH::showbase;
+using AH::noshowbase;
+using AH::setbase;
+using AH::setprecision;
+using AH::setbytesep;
+END_CS_NAMESPACE
 
 #endif // PrintStream_h

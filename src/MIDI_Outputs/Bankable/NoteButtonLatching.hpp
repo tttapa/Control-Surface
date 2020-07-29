@@ -39,9 +39,8 @@ class NoteButtonLatching
      * @param   velocity
      *          The velocity of the MIDI Note events.
      */
-    NoteButtonLatching(const OutputBankConfig &config, pin_t pin,
-                       const MIDIAddress &address,
-                       uint8_t velocity = 0x7F)
+    NoteButtonLatching(OutputBankConfig<> config, pin_t pin,
+                       MIDIAddress address, uint8_t velocity = 0x7F)
         : MIDIButtonLatching<SingleAddress, DigitalNoteSender>{
               {config, address},
               pin,

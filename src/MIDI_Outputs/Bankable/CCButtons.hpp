@@ -49,10 +49,9 @@ class CCButtons
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButtons(const OutputBankConfig &config,
+    CCButtons(OutputBankConfig<> config,
               const Array<AH::Button, NumButtons> &buttons,
-              const MIDIAddress &baseAddress,
-              const RelativeMIDIAddress &incrementAddress,
+              MIDIAddress baseAddress, RelativeMIDIAddress incrementAddress,
               const DigitalCCSender &sender = {})
         : MIDIButtons<SingleAddress, DigitalCCSender, NumButtons>(
               {config, baseAddress}, buttons, incrementAddress, sender) {}

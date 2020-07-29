@@ -179,7 +179,7 @@ template <uint8_t NumBanks, class Callback = VPotEmptyCallback>
 class GenericVPotRing : public VPotRing_Base<NumBanks, Callback>,
                         public BankableMIDIInput<NumBanks> {
   public:
-    GenericVPotRing(const BankConfig<NumBanks> &config, uint8_t track,
+    GenericVPotRing(BankConfig<NumBanks> config, uint8_t track,
                     const MIDIChannelCN &channelCN, const Callback &callback)
         : VPotRing_Base<NumBanks, Callback>{track, channelCN, callback},
           BankableMIDIInput<NumBanks>{config} {}

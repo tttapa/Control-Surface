@@ -606,6 +606,55 @@
  */
 
 /**
+ * @example   "Bankable-Smart-Control-Change-Potentiometer.ino"
+ * 
+ * Bankable-Smart-Control-Change-Potentiometer
+ * ===========================================
+ * 
+ * This example introduces smart bankable potentiometers to prevent
+ * values jumping around when changing banks.
+ *  
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * - 2:  momentary push button (other pin to ground)
+ * - 3:  momentary push button (other pin to ground)
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.  
+ * The internal pull-up resistors for the push buttons will be enabled.
+ * 
+ * Behavior
+ * --------
+ * 
+ * If you move the potentiometer to, say, 60%, then switch to bank #2, move the
+ * potentiometer to 20%, and then switch back to bank #1, the potentiometer will
+ * be disabled, until you move it up to 60% again.
+ * 
+ * This prevents values jumping around in your DAW when cycling through the
+ * different banks.
+ * 
+ * Changing banks is done using the two push buttons. The push button on pin 2
+ * increments the bank number, the push button on pin 3 decrements the bank 
+ * number.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the potentiometer to a function, change the  
+ * bank using the buttons, and map the potentiometer again.
+ * It will send the MIDI Control Change Channel Volume parameter for channels 
+ * 1, 2, 3 and 4 (for banks #1, #2, #3 and #4 respectively).
+ * 
+ * Written by PieterP, 2020-04-09  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "Transposer.ino"
  * 
  * Transposer
@@ -696,6 +745,119 @@
  */
 
 /**
+ * @example   "AppleMIDI.ino"
+ * 
+ * AppleMIDI
+ * =========
+ *
+ * This example demonstrates how to use the AppleMIDI library to use Control
+ * Surface over the network.
+ * 
+ * This example requires the 
+ * [AppleMIDI](https://github.com/lathoub/Arduino-AppleMIDI-Library) and 
+ * [MIDI](https://github.com/FortySevenEffects/arduino_midi_library) libraries.
+ * 
+ * @boards  ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * The on-board LED will be used, as well as the push button on GPIO0. These 
+ * should be present on most ESP32 boards, if this is not the case for your 
+ * board, connect an LED (+ series resistor) and a push button to the relevant
+ * pins (in the "MIDI Elements" section below). For more details, see the 
+ * @ref NoteButton.ino and @ref 1.Note-LED.ino examples.
+ * 
+ * WiFi Credentials
+ * ----------------
+ * 
+ * Open the tab `WiFi-Credentials.example.h`, enter your WiFi credentials, and
+ * rename the file to `WiFi-Credentials.h`.
+ * 
+ * Behavior
+ * --------
+ * 
+ * Upload the code to the ESP32, and open the Serial monitor. You should see
+ * output like this
+ * 
+ * ~~~
+ * Connecting to Your WiFi Network ...
+ * Connected!
+ * IP address: 192.168.1.35
+ * mDNS responder started (ESP32.local)
+ * ~~~
+ * 
+ * Next, connect to the device using your DAW or other MIDI software. If the 
+ * software supports mDNS (Apple Bonjour), you can use `ESP32.local`, 
+ * otherwise, you'll have to use the IP address.
+ * 
+ * When the connection is successful, you'll see the following message in the
+ * Serial monitor:
+ * 
+ * ~~~
+ * Connected to session Your Session Name
+ * ~~~
+ * 
+ * When the button is pushed, a MIDI note on message for note C4 (middle C) is
+ * sent.  
+ * When the ESP32 receives a MIDI note message for that note, it turn on/off the
+ * LED accordingly.
+ * 
+ * RTP MIDI Bridge (Linux)
+ * -----------------------
+ * 
+ * If you're on Linux, you can use the rtpmidi-bridge application in the example
+ * folder. You'll need to install Node.js and NPM.
+ * 
+ * First, install the necessary dependencies and build tools:
+ * 
+ * ~~~sh
+ * sudo apt install build-essential libasound2-dev libavahi-compat-libdnssd-dev
+ * ~~~
+ * 
+ * Then install the dependencies using NPM:
+ * 
+ * ~~~sh
+ * npm install
+ * ~~~
+ * You might get a compilation error for the `avahi_pub` module. This is not an
+ * issue, it's an optional dependency of the `rtpmidi` module.
+ * 
+ * Finally, run the application:
+ * 
+ * ~~~sh
+ * node rtpmidi-bridge.js
+ * ~~~
+ * 
+ * The application will initiate a RTP MIDI connection with the ESP32, create
+ * virtual MIDI ports, and bridge the MIDI traffic between the RTP MIDI 
+ * connection and the virtual MIDI ports.  
+ * You can then connect your DAW or other MIDI application to the virtual MIDI 
+ * ports.
+ * 
+ * When the ESP32 is connected, you should see the following in the serial 
+ * monitor and the rtpmidi-bridge output respectively:
+ * 
+ * ~~~
+ * Connected to session Node RTPMidi
+ * ~~~
+ * 
+ * ~~~
+ * 2020-05-06T15:50:42.956Z info:  Invitation accepted by ESP32
+ * 2020-05-06T15:50:42.962Z info:  Data channel to ESP32 established
+ * ~~~
+ * 
+ * Mapping
+ * -------
+ * 
+ * Connect the virtual MIDI ports or the AppleMIDI connection to a device or 
+ * application that can send and receive MIDI notes.
+ * 
+ * Written by PieterP, 2020-05-06  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "SysEx-Send-Receive.ino"
  * 
  * SysEx-Send-Receive
@@ -704,6 +866,37 @@
  * Example showing how to send and receive MIDI System Exclusive messages.
  * 
  * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ */
+
+/**
+ * @example   "MIDI-Input.ino"
+ * 
+ * MIDI-Input
+ * ==========
+ * 
+ * This is an example on how to attach your own callbacks for receiving MIDI 
+ * input.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * None.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When MIDI messages are sent to the USB interface, they are printed to the 
+ *   Serial port.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2020-06-11  
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -802,6 +995,37 @@
  * None.
  * 
  * Written by PieterP, 2020-01-09  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "MIDI-Output.ino"
+ * 
+ * MIDI-Output
+ * ===========
+ * 
+ * This is an example on how to send MIDI messages.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * For a full list of available MIDI send functions, see @ref MIDI_Sender.
+ * 
+ * Connections
+ * -----------
+ * 
+ * None.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Sends a pair of MIDI note on/off messages every second.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2020-06-11  
  * https://github.com/tttapa/Control-Surface
  */
 
@@ -1718,6 +1942,46 @@
  */
 
 /**
+ * @example   "Custom-MIDI-Sender.ino"
+ * 
+ * Custom-MIDI-Sender
+ * ==================
+ * 
+ * This is an example that demonstrates how to extend the library using your own
+ * MIDI Senders. It implements functionality similar to the built-in 
+ * @ref DigitalNoteSender class, but with support for different on and off 
+ * velocities.
+ * 
+ * @see @ref MIDI_Senders for different kinds of MIDI senders to start from.
+ *
+ * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When the button on pin 5 is pressed, a MIDI Note On message is sent for
+ *   note C4 with velocity 0x40.
+ * - When the button on pin 5 is released, a MIDI Note Off message is sent for 
+ *   note C4 with velocity 0x10.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the button to a function.
+ * 
+ * Written by PieterP, 2020-04-18  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "Custom-MIDI-Output-Element.ino"
  * 
  * Custom-MIDI-Output-Element
@@ -2196,6 +2460,48 @@
  */
 
 /**
+ * @example   "3.FilteredAnalogReadSerial.ino"
+ * 
+ * 3.FilteredAnalogReadSerial
+ * ==========================
+ *
+ * This is an example of the AnalogMultiplex and the FilteredAnalog classes. 
+ * It prints the filtered values of all 16 inputs of a multiplexers to the 
+ * serial monitor.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *  - A0: CD74HC4067 signal pin ("common input/output")
+ *  - 3:  CD74HC4067 address pin S0
+ *  - 4:  CD74HC4067 address pin S1
+ *  - 5:  CD74HC4067 address pin S2
+ *  - 6:  CD74HC4067 address pin S3
+ *  
+ * Optionally you can connect the enable pin as well, this is useful
+ * if you want to use multiple multiplexers with the same address 
+ * lines and the same analog input. Otherwise, just connect the enable
+ * pin to ground.
+ * 
+ * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
+ * uncomment the code specific to this multiplexer, and use only three
+ * address pins.
+ *  
+ * Behavior
+ * --------
+ * 
+ * Connect some potentiometers or other analog sensors to the 16 inputs
+ * of the multiplexer, and open the serial monitor (CTRL+SHIFT+M) or the
+ * serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed
+ * or plotted.
+ * 
+ * Written by Pieter P, 09-04-2019  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
  * @example   "1.MAX7219-Blink.ino"
  * 
  * 1.MAX7219-Blink
@@ -2349,6 +2655,116 @@
  * @endhtmlonly
  * 
  * Written by Pieter P, 2018-07-13  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "MCP23017-Encoders-No-Interrupts.ino"
+ * 
+ * MCP23017-Encoders-No-Interrupts
+ * ===============================
+ *
+ * This example demonstrates the use of MCP23017 I²C port expanders with rotary
+ * encoders.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SDA:  MCP23017 SDA
+ *   - SCL:  MCP23017 SCL
+ *   - 12:   MCP23017 INTA or INTB
+ *   
+ * Connect up to 8 encoders to the MCP23017's GPIO pins: 
+ * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
+ * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
+ * Connect the "common" pins of the encoders to ground.  
+ * The built-in pull-up resistors of the MCP23017 will be enabled.
+ * 
+ * Make sure that the reset and address pins are all configured correctly 
+ * (reset to Vcc; A0, A1 and A2 to ground).
+ * 
+ * If you need more than one MCP23017 with encoders, you can connect their 
+ * interrupt pins together. This does result in higher latency, because on 
+ * average, half of the total number of MCP23017s have to be polled, which is 
+ * relatively slow, and might lead to missed pulses when using a large number
+ * of encoders.
+ * 
+ * Behavior
+ * --------
+ * 
+ * When the position of one of the encoders changes, it is printed to the Serial
+ * monitor.
+ * 
+ * Cautions
+ * --------
+ * 
+ * The interrupt pin of the MCP23017 doesn't trigger a hardware interrupt on the
+ * Arduino. It's used only to determine whether the Arduino should read the GPIO
+ * registers from the MCP23017.  
+ * If the update function isn't called often enough, you will miss encoder 
+ * pulses, and the position will be incorrect.  
+ * It's very important to keep your main loop free from any code that blocks for
+ * more than a couple of hundreds of microseconds.
+ * 
+ * Written by PieterP, 2020-04-06  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "MCP23017-Encoders-Interrupts.ino"
+ * 
+ * MCP23017-Encoders-Interrupts
+ * ============================
+ *
+ * This example demonstrates the use of MCP23017 I²C port expanders with rotary
+ * encoders, using hardware interrupts so you don't miss any pulses.
+ * 
+ * @boards  Teensy 3.x
+ * 
+ * This only works on Teensy boards, and maybe on other ARM boards.  
+ * I've tested it using a Teensy 3.2 and a Teensy 4.0.
+ * 
+ * AVR boards (Arduino Uno, Mega, etc.) don't support I²C inside of interrupt
+ * service routines, so there's no way to read the state of the MCP23017
+ * inside of an ISR.  
+ * The same goes for ESP32 and ESP8266, although there may be ways around
+ * this by using alternative I²C drivers or by using FreeRTOS features.
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SDA:  MCP23017 SDA
+ *   - SCL:  MCP23017 SCL
+ *   - 12:   MCP23017 INTA or INTB
+ *   
+ * Connect up to 8 encoders to the MCP23017's GPIO pins: 
+ * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
+ * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
+ * Connect the "common" pins of the encoders to ground.  
+ * The built-in pull-up resistors of the MCP23017 will be enabled.
+ * 
+ * Make sure that the reset and address pins are all configured correctly 
+ * (reset to Vcc; A0, A1 and A2 to ground).
+ * 
+ * If you need more than one MCP23017 with encoders, you can connect their 
+ * interrupt pins together. This does result in higher latency, because on 
+ * average, half of the total number of MCP23017s have to be polled, which is 
+ * relatively slow, and might lead to missed pulses when using a large number
+ * of encoders.
+ * 
+ * Behavior
+ * --------
+ * 
+ * When the position of one of the encoders changes, it is printed to the Serial
+ * monitor.
+ * 
+ * The interrupt pin of the MCP23017 triggers a hardware interrupt on the
+ * Arduino. This means that you don't have to manually poll the encoders all
+ * the time.
+ * 
+ * Written by PieterP, 2020-04-06  
  * https://github.com/tttapa/Arduino-Helpers
  */
 

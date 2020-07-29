@@ -1,0 +1,4 @@
+/** 
+ * @defgroup    MIDI_Senders MIDI Senders
+ * @brief   Classes that send certain types of MIDI messages.
+ */

@@ -54,12 +54,14 @@ void setup() {
   //   - TWOS_COMPLEMENT (default)
   //   - BINARY_OFFSET
   //   - SIGN_MAGNITUDE
+  //   - NEXT_ADDRESS
   // Aliases:
   //   - REAPER_RELATIVE_1
   //   - REAPER_RELATIVE_2
   //   - REAPER_RELATIVE_3
   //   - TRACKTION_RELATIVE
   //   - MACKIE_CONTROL_RELATIVE
+  //   - KORG_KONTROL_INC_DEC_1
   RelativeCCSender::setMode(relativeCCmode::MACKIE_CONTROL_RELATIVE);
   Control_Surface.begin(); // Initialize Control Surface
 }

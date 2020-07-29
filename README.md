@@ -18,8 +18,8 @@ your code.
 
 Multiple different MIDI interfaces are supported: **MIDI over USB**, Serial MIDI 
 (e.g. **5-pin DIN MIDI**), **Debug MIDI** (prints out the messages in a readable
-format, and allows you to input text based messages), **MIDI over Bluetooth LE**
-(experimental).
+format, and allows you to input text based messages), **AppleMIDI** over WiFi or
+Ethernet, **MIDI over Bluetooth LE** (experimental).
 
 For MIDI output, you can use **push buttons**, toggle switches, 
 **potentiometers**, faders, **rotary encoders**, etc.

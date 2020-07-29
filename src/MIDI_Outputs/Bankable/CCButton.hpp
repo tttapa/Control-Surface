@@ -42,8 +42,7 @@ class CCButton : public MIDIButton<SingleAddress, DigitalCCSender> {
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButton(const OutputBankConfig &config, pin_t pin,
-             const MIDIAddress &address,
+    CCButton(OutputBankConfig<> config, pin_t pin, MIDIAddress address,
              const DigitalCCSender &sender = {})
         : MIDIButton{{config, address}, pin, sender} {}
 };

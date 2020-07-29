@@ -24,7 +24,7 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
      *
      * @todo    Documentation
      */
-    GenericMIDIRotaryEncoder(const BankAddress &bankAddress, Enc &&encoder,
+    GenericMIDIRotaryEncoder(BankAddress bankAddress, Enc &&encoder,
                              int16_t multiplier, uint8_t pulsesPerStep,
                              const Sender &sender)
         : address(bankAddress), encoder(std::forward<Enc>(encoder)),

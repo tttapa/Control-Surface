@@ -62,6 +62,13 @@ AH_DIAGNOSTIC_POP()
 #define ADC_RESOLUTION 12
 #define HAS_ANALOG_READ_RESOLUTION 1
 
+// Unit test on PC
+// -----------------------------------------------------------------------------
+#elif !defined(ARDUINO)
+
+#define ADC_RESOLUTION 10
+#define HAS_ANALOG_READ_RESOLUTION 1
+
 // Unknown/Default
 //------------------------------------------------------------------------------
 #else

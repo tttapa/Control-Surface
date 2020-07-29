@@ -30,7 +30,7 @@ class MIDIButtonLatching : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIButtonLatching(const BankAddress &bankAddress, pin_t pin,
+    MIDIButtonLatching(BankAddress bankAddress, pin_t pin,
                        const Sender &sender)
         : address{bankAddress}, button{pin}, sender{sender} {}
 

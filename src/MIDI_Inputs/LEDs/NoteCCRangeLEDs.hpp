@@ -199,7 +199,7 @@ template <uint8_t RangeLen, uint8_t BankSize>
 class NoteRangeLEDs : public GenericNoteCCRange<MIDIInputElementNote, RangeLen,
                                                 BankSize, NoteCCLED<RangeLen>> {
   public:
-    NoteRangeLEDs(const BankConfig<BankSize> &config,
+    NoteRangeLEDs(BankConfig<BankSize> config,
                   const PinList<RangeLen> &ledPins,
                   const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementNote, RangeLen, BankSize,
@@ -214,7 +214,7 @@ template <uint8_t BankSize>
 class NoteValueLED : public GenericNoteCCRange<MIDIInputElementNote, 1,
                                                BankSize, NoteCCLED<1>> {
   public:
-    NoteValueLED(const BankConfig<BankSize> &config, pin_t ledPin,
+    NoteValueLED(BankConfig<BankSize> config, pin_t ledPin,
                  const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementNote, 1, BankSize, NoteCCLED<1>>{
               config,
@@ -233,7 +233,7 @@ template <uint8_t RangeLen, uint8_t BankSize>
 class CCRangeLEDs : public GenericNoteCCRange<MIDIInputElementCC, RangeLen,
                                               BankSize, NoteCCLED<RangeLen>> {
   public:
-    CCRangeLEDs(const BankConfig<BankSize> &config,
+    CCRangeLEDs(BankConfig<BankSize> config,
                 const PinList<RangeLen> &ledPins,
                 const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementCC, RangeLen, BankSize,
@@ -248,7 +248,7 @@ template <uint8_t BankSize>
 class CCValueLED
     : public GenericNoteCCRange<MIDIInputElementCC, 1, BankSize, NoteCCLED<1>> {
   public:
-    CCValueLED(const BankConfig<BankSize> &config, pin_t ledPin,
+    CCValueLED(BankConfig<BankSize> config, pin_t ledPin,
                const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementCC, 1, BankSize, NoteCCLED<1>>{
               config,
@@ -385,7 +385,7 @@ template <uint8_t RangeLen, uint8_t BankSize>
 class NoteRangeLEDsPWM : public GenericNoteCCRange<MIDIInputElementNote, RangeLen,
                                                 BankSize, NoteCCLEDPWM<RangeLen>> {
   public:
-    NoteRangeLEDsPWM(const BankConfig<BankSize> &config,
+    NoteRangeLEDsPWM(BankConfig<BankSize> config,
                   const PinList<RangeLen> &ledPins,
                   const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementNote, RangeLen, BankSize,
@@ -400,7 +400,7 @@ template <uint8_t BankSize>
 class NoteValueLEDPWM : public GenericNoteCCRange<MIDIInputElementNote, 1,
                                                BankSize, NoteCCLEDPWM<1>> {
   public:
-    NoteValueLEDPWM(const BankConfig<BankSize> &config, pin_t ledPin,
+    NoteValueLEDPWM(BankConfig<BankSize> config, pin_t ledPin,
                  const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementNote, 1, BankSize, NoteCCLEDPWM<1>>{
               config,
@@ -413,7 +413,7 @@ template <uint8_t RangeLen, uint8_t BankSize>
 class CCRangeLEDsPWM : public GenericNoteCCRange<MIDIInputElementCC, RangeLen,
                                               BankSize, NoteCCLEDPWM<RangeLen>> {
   public:
-    CCRangeLEDsPWM(const BankConfig<BankSize> &config,
+    CCRangeLEDsPWM(BankConfig<BankSize> config,
                 const PinList<RangeLen> &ledPins,
                 const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementCC, RangeLen, BankSize,
@@ -428,7 +428,7 @@ template <uint8_t BankSize>
 class CCValueLEDPWM
     : public GenericNoteCCRange<MIDIInputElementCC, 1, BankSize, NoteCCLEDPWM<1>> {
   public:
-    CCValueLEDPWM(const BankConfig<BankSize> &config, pin_t ledPin,
+    CCValueLEDPWM(BankConfig<BankSize> config, pin_t ledPin,
                const MIDIAddress &address)
         : GenericNoteCCRange<MIDIInputElementCC, 1, BankSize, NoteCCLEDPWM<1>>{
               config,
