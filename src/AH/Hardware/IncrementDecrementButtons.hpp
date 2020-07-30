@@ -50,10 +50,14 @@ class IncrementDecrementButtons {
      * @todo    Add states for initial press.
      */
     enum State {
-        Nothing = 0, ///< The counter should not be incremented.
-        Increment,   ///< The counter should be incremented.
-        Decrement,   ///< The counter should be decremented.
-        Reset,       ///< The counter should be reset to the initial value.
+        Nothing = 0,    ///< The counter should not be incremented.
+        IncrementShort, ///< The counter must be incremented (after short press).
+        IncrementLong,  ///< The counter must be incremented (after long press).
+        IncrementHold,  ///< The counter must be incremented (still pressed).
+        DecrementShort, ///< The counter must be decremented (after short press).
+        DecrementLong,  ///< The counter must be decremented (after long press).
+        DecrementHold,  ///< The counter must be decremented (still pressed).
+        Reset,          ///< The counter should be reset to the initial value.
     };
 
     /**

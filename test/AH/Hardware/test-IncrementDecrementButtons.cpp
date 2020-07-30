@@ -47,7 +47,7 @@ TEST(IncrementDecrementButtons, testAllCombinations) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .WillRepeatedly(Return(time));
-    EXPECT_EQ(b.update(), IncrementDecrementButtons::Increment);
+    EXPECT_EQ(b.update(), IncrementDecrementButtons::IncrementShort);
 
     Mock::VerifyAndClearExpectations(&ArduinoMock::getInstance());
     
@@ -73,7 +73,7 @@ TEST(IncrementDecrementButtons, testAllCombinations) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .WillRepeatedly(Return(time));
-    EXPECT_EQ(b.update(), IncrementDecrementButtons::Increment);
+    EXPECT_EQ(b.update(), IncrementDecrementButtons::IncrementLong);
 
     Mock::VerifyAndClearExpectations(&ArduinoMock::getInstance());
 
@@ -99,7 +99,7 @@ TEST(IncrementDecrementButtons, testAllCombinations) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .WillRepeatedly(Return(time));
-    EXPECT_EQ(b.update(), IncrementDecrementButtons::Increment);
+    EXPECT_EQ(b.update(), IncrementDecrementButtons::IncrementHold);
 
     Mock::VerifyAndClearExpectations(&ArduinoMock::getInstance());
 
@@ -149,7 +149,7 @@ TEST(IncrementDecrementButtons, testAllCombinations) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .WillRepeatedly(Return(time));
-    EXPECT_EQ(b.update(), IncrementDecrementButtons::Decrement);
+    EXPECT_EQ(b.update(), IncrementDecrementButtons::DecrementShort);
 
     Mock::VerifyAndClearExpectations(&ArduinoMock::getInstance());
     
@@ -175,7 +175,7 @@ TEST(IncrementDecrementButtons, testAllCombinations) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .WillRepeatedly(Return(time));
-    EXPECT_EQ(b.update(), IncrementDecrementButtons::Decrement);
+    EXPECT_EQ(b.update(), IncrementDecrementButtons::DecrementLong);
 
     Mock::VerifyAndClearExpectations(&ArduinoMock::getInstance());
 
@@ -201,7 +201,7 @@ TEST(IncrementDecrementButtons, testAllCombinations) {
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .WillRepeatedly(Return(time));
-    EXPECT_EQ(b.update(), IncrementDecrementButtons::Decrement);
+    EXPECT_EQ(b.update(), IncrementDecrementButtons::DecrementHold);
 
     Mock::VerifyAndClearExpectations(&ArduinoMock::getInstance());
 

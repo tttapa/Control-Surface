@@ -29,7 +29,7 @@ IncrementDecrementButtons::updateImplementation() {
             return Reset;
         } else {
             // Increment falling, the other released → increment
-            return Increment;
+            return IncrementShort;
         }
     } else if (decrState == Button::Falling) {
         if (incrState == Button::Pressed) {
@@ -38,7 +38,7 @@ IncrementDecrementButtons::updateImplementation() {
             return Reset;
         } else {
             // Decrement falling, the other released → decrement
-            return Decrement;
+            return DecrementShort;
         }
     } else if (incrState == Button::Pressed && decrState == Button::Pressed) {
         // Both pressed → nothing
@@ -48,12 +48,12 @@ IncrementDecrementButtons::updateImplementation() {
         if (longPressState == LongPress) {
             if (now - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
                 longPressRepeat += LONG_PRESS_REPEAT_DELAY;
-                return Increment;
+                return IncrementHold;
             }
         } else if (incrementButton.stableTime() >= LONG_PRESS_DELAY) {
             longPressState = LongPress;
             longPressRepeat = now;
-            return Increment;
+            return IncrementLong;
         }
     } else if (longPressState != AfterReset && decrState == Button::Pressed) {
         // Not reset and decrement pressed → long press?
@@ -61,12 +61,12 @@ IncrementDecrementButtons::updateImplementation() {
         if (longPressState == LongPress) {
             if (now - longPressRepeat >= LONG_PRESS_REPEAT_DELAY) {
                 longPressRepeat += LONG_PRESS_REPEAT_DELAY;
-                return Decrement;
+                return DecrementHold;
             }
         } else if (decrementButton.stableTime() >= LONG_PRESS_DELAY) {
             longPressState = LongPress;
             longPressRepeat = now;
-            return Decrement;
+            return DecrementLong;
         }
     }
     return Nothing;
