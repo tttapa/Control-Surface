@@ -25,10 +25,14 @@ class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
         Parent::update();
         using IncrDecrButtons = AH::IncrementDecrementButtons;
         switch (buttons.update()) {
-            case IncrDecrButtons::Increment: this->increment(wrap); break;
-            case IncrDecrButtons::Decrement: this->decrement(wrap); break;
-            case IncrDecrButtons::Reset: this->reset(); break;
             case IncrDecrButtons::Nothing: break;
+            case IncrDecrButtons::IncrementShort: // fallthrough
+            case IncrDecrButtons::IncrementLong:  // fallthrough
+            case IncrDecrButtons::IncrementHold: this->increment(wrap); break;
+            case IncrDecrButtons::DecrementShort: // fallthrough
+            case IncrDecrButtons::DecrementLong:  // fallthrough
+            case IncrDecrButtons::DecrementHold: this->decrement(wrap); break;
+            case IncrDecrButtons::Reset: this->reset(); break;
             default: break;
         }
     }

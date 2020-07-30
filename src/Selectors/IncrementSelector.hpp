@@ -12,10 +12,8 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
   public:
     GenericIncrementSelector(Selectable<N> &selectable,
                              const Callback &callback,
-                             const AH::IncrementButton &button,
-                             Wrap wrap = Wrap::Wrap)
-        : GenericSelector<N, Callback>{selectable, callback}, button{button},
-          wrap{wrap} {}
+                             const AH::IncrementButton &button)
+        : GenericSelector<N, Callback>{selectable, callback}, button{button} {}
 
     void begin() override {
         Parent::begin();
@@ -23,8 +21,8 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
     }
 
     void update() override {
-        if (button.update() == AH::IncrementButton::Increment)
-            this->increment(wrap);
+        if (button.update() != AH::IncrementButton::Nothing)
+            this->increment(Wrap::Wrap);
     }
 
     AH::IncrementButton::State getButtonState() const {
@@ -37,7 +35,6 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
 
   private:
     AH::IncrementButton button;
-    Wrap wrap;
 };
 
 // -------------------------------------------------------------------------- //
@@ -58,22 +55,11 @@ template <setting_t N>
 class IncrementSelector : virtual public GenericIncrementSelector<N> {
   public:
     IncrementSelector(Selectable<N> &selectable,
-                      const AH::IncrementButton &button, Wrap wrap = Wrap::Wrap)
-        : GenericIncrementSelector<N>{
-              selectable,
-              {},
-              button,
-              wrap,
-          } {}
+                      const AH::IncrementButton &button)
+        : GenericIncrementSelector<N>{selectable, {}, button} {}
 
-    IncrementSelector(Selectable<N> &selectable, const AH::Button &button,
-                      Wrap wrap = Wrap::Wrap)
-        : GenericIncrementSelector<N>{
-              selectable,
-              {},
-              button,
-              wrap,
-          } {}
+    IncrementSelector(Selectable<N> &selectable, const AH::Button &button)
+        : GenericIncrementSelector<N>{selectable, {}, button} {}
 };
 
 END_CS_NAMESPACE

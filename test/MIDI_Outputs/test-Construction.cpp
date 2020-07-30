@@ -178,7 +178,7 @@ TEST(Construction, Selectors) {
 
     EncoderSelector<4>{bank, {pin, pin, pin}, 4, wrap};
     IncrementDecrementSelector<4>{bank, {pin, pin}, wrap};
-    IncrementSelector<4>{bank, pin, wrap};
+    IncrementSelector<4>{bank, pin};
     ManyButtonsSelector<4>{bank, {pin, pin, pin, pin}};
     ProgramChangeSelector<4>{bank, cnChannel};
     SwitchSelector{bank2, pin};
@@ -187,7 +187,7 @@ TEST(Construction, Selectors) {
         bank, {pin, pin, pin}, {pin, pin, pin, pin}, 4, wrap};
     IncrementDecrementSelectorLEDs<4>{
         bank, {pin, pin}, {pin, pin, pin, pin}, wrap};
-    IncrementSelectorLEDs<4>{bank, pin, {pin, pin, pin, pin}, wrap};
+    IncrementSelectorLEDs<4>{bank, pin, {pin, pin, pin, pin}};
     ManyButtonsSelectorLEDs<4>{
         bank, {pin, pin, pin, pin}, {pin, pin, pin, pin}};
     ProgramChangeSelectorLEDs<4>{bank, cnChannel, {pin, pin, pin, pin}};
