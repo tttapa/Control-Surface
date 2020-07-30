@@ -72,14 +72,39 @@ TEST(IncrementButton, longPress) {
             Return(1000 + LONG_PRESS_DELAY + LONG_PRESS_REPEAT_DELAY));
     EXPECT_EQ(b.update(), IncrementButton::IncrementHold);
 
-    // Release
+    // Release (long press)
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(1)
         .WillRepeatedly(
             Return(1000 + LONG_PRESS_DELAY + LONG_PRESS_REPEAT_DELAY + 1000));
+    EXPECT_EQ(b.update(), IncrementButton::ReleasedLong);
+
+    // Fall → increment
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), millis())
+        .Times(1)
+        .WillRepeatedly(Return(10000));
+    EXPECT_EQ(b.update(), IncrementButton::IncrementShort);
+
+    // Stay low
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(LOW));
+    EXPECT_CALL(ArduinoMock::getInstance(), millis())
+        .Times(2)
+        .WillRepeatedly(Return(10000 + LONG_PRESS_DELAY - 2));
     EXPECT_EQ(b.update(), IncrementButton::Nothing);
+
+    // Release (short press)
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
+        .WillOnce(Return(HIGH));
+    EXPECT_CALL(ArduinoMock::getInstance(), millis())
+        .Times(1)
+        .WillRepeatedly(
+            Return(10000 + LONG_PRESS_DELAY - 1));
+    EXPECT_EQ(b.update(), IncrementButton::ReleasedShort);
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

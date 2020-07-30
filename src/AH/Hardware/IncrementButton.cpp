@@ -12,8 +12,11 @@ IncrementButton::State IncrementButton::updateImplementation() {
         // This one is first to minimize overhead
         // because most of the time, the button will
         // be released
+        return Nothing;
     } else if (incrState == Button::Rising) {
+        auto res = longPressState == LongPress ? ReleasedLong : ReleasedShort;
         longPressState = Initial;
+        return res;
     } else if (incrState == Button::Falling) {
         return IncrementShort;
     } else { // if (incrState == Button::Pressed)

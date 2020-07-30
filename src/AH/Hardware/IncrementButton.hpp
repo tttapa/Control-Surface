@@ -43,6 +43,8 @@ class IncrementButton {
         IncrementShort, ///< The counter must be incremented (after short press).
         IncrementLong,  ///< The counter must be incremented (after long press).
         IncrementHold,  ///< The counter must be incremented (still pressed).
+        ReleasedShort,  ///< The button was released after a short press.
+        ReleasedLong,   ///< The button was released after a long press.
     };
 
     /**
