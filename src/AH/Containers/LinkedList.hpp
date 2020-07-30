@@ -10,9 +10,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #include <AH/Math/MinMaxFix.hpp>
 #include <stdlib.h>
 
-#ifndef __AVR__
-#include <iterator>
-#endif
+#include <AH/STL/iterator>
 
 /// @addtogroup AH_Containers
 /// @{
@@ -36,6 +34,10 @@ class DoublyLinkedList {
             return node != rhs.node;
         }
 
+        bool operator==(const node_iterator_base &rhs) const {
+            return !(*this != rhs);
+        }
+
         INode &operator*() const {
             // TODO: check node != nullptr
             return *node;
@@ -51,13 +53,11 @@ class DoublyLinkedList {
       public:
         node_iterator(INode *node) : node_iterator_base<INode>(node) {}
 
-#ifndef __AVR__
-        using difference_type = void;
+        using difference_type = long;
         using value_type = INode;
         using pointer = INode *;
         using reference = INode &;
         using iterator_category = std::bidirectional_iterator_tag;
-#endif
 
         /// Prefix increment operator
         node_iterator &operator++() {
@@ -80,13 +80,11 @@ class DoublyLinkedList {
       public:
         reverse_node_iterator(INode *node) : node_iterator_base<INode>(node) {}
 
-#ifndef __AVR__
-        using difference_type = void;
+        using difference_type = long;
         using value_type = INode;
         using pointer = INode *;
         using reference = INode &;
         using iterator_category = std::bidirectional_iterator_tag;
-#endif
 
         /// Prefix increment operator
         reverse_node_iterator &operator++() {
@@ -250,6 +248,21 @@ class DoublyLinkedList {
             last = nodeB;
     }
 
+    /**
+     * @brief   Move down the given node in the linked list.
+     * 
+     * For example: moving down node `C`:
+     * ```
+     * Before:  ... → A → B → C → D → ...
+     * After:   ... → A → C → B → D → ...
+     * ```
+     * @param   node
+     *          A reference to the node to be moved down.
+     */
+    void moveDown(Node &node) {
+        moveDown(&node);
+    }
+
     /** 
      * @brief   Check if the linked list could contain the given node.
      * 
@@ -265,13 +278,13 @@ class DoublyLinkedList {
      *          The given node is not part of any linked list, or it is the 
      *          only element of a different linked list.
      */
-    bool couldContain(Node *node) {
+    bool couldContain(const Node *node) const {
         return node && (node == first || node->next != nullptr ||
                         node->previous != nullptr);
     }
 
-    /// @copydoc couldContain(Node *)
-    bool couldContain(Node &node) {
+    /// @copydoc couldContain(const Node *) const
+    bool couldContain(const Node &node) const {
         return couldContain(&node);
     }
 

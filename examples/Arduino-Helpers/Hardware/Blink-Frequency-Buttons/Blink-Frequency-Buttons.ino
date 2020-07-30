@@ -52,11 +52,15 @@ void loop() {
 
   // read the buttons, and change interval accordingly
   switch (buttons.update()) {
-    case IncrementDecrementButtons::Increment:
+    case IncrementDecrementButtons::IncrementShort:
+    case IncrementDecrementButtons::IncrementLong:
+    case IncrementDecrementButtons::IncrementHold:
       timer.setInterval(
         AH::max(timer.getInterval() - intervalDelta, minInterval));
       break;
-    case IncrementDecrementButtons::Decrement:
+    case IncrementDecrementButtons::DecrementShort:
+    case IncrementDecrementButtons::DecrementLong:
+    case IncrementDecrementButtons::DecrementHold:
       timer.setInterval(
         AH::min(timer.getInterval() + intervalDelta, maxInterval));
       break;

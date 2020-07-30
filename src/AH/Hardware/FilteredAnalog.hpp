@@ -45,9 +45,28 @@ class GenericFilteredAnalog {
      *          The analog pin to read from.
      * @param   mapFn
      *          The mapping function
+     * @param   initial
+     *          The initial value of the filter.
      */
-    GenericFilteredAnalog(pin_t analogPin, MappingFunction mapFn)
-        : analogPin(analogPin), mapFn(std::forward<MappingFunction>(mapFn)) {}
+    GenericFilteredAnalog(pin_t analogPin, MappingFunction mapFn,
+                          AnalogType initial = 0)
+        : analogPin(analogPin), mapFn(std::forward<MappingFunction>(mapFn)),
+          filter(increaseBitDepth<ADC_BITS + IncRes, Precision, AnalogType,
+                                  AnalogType>(initial)) {}
+
+    /**
+     * @brief   Reset the filter to the given value.
+     * 
+     * @param   value 
+     *          The value to reset the filter state to.
+     * 
+     * @todo    Should the filter be initialized to the first value that is read
+     *          instead of to zero? This would require adding a `begin` method.
+     */
+    void reset(AnalogType value = 0) {
+        filter.reset(increaseBitDepth<ADC_BITS + IncRes, Precision, AnalogType,
+                                      AnalogType>(value));
+    }
 
     /**
      * @brief   Specify a mapping function/functor that is applied to the analog
@@ -234,11 +253,13 @@ class FilteredAnalog
      *
      * @param   analogPin
      *          The analog pin to read from.
+     * @param   initial 
+     *          The initial value of the filter.
      */
-    FilteredAnalog(pin_t analogPin)
+    FilteredAnalog(pin_t analogPin, AnalogType initial = 0)
         : GenericFilteredAnalog<AnalogType (*)(AnalogType), Precision,
                                 FilterShiftFactor, FilterType, AnalogType,
-                                IncRes>(analogPin, nullptr) {}
+                                IncRes>(analogPin, nullptr, initial) {}
 
     /// A function pointer to a mapping function to map analog values.
     /// @see    map()
