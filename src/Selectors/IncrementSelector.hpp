@@ -21,8 +21,17 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
     }
 
     void update() override {
-        if (button.update() != AH::IncrementButton::Nothing)
-            this->increment(Wrap::Wrap);
+        switch (button.update()) {
+            case AH::IncrementButton::Nothing: break;
+            case AH::IncrementButton::IncrementShort: // fallthrough
+            case AH::IncrementButton::IncrementLong:  // fallthrough
+            case AH::IncrementButton::IncrementHold:
+                this->increment(Wrap::Wrap);
+                break;
+            case AH::IncrementButton::ReleasedShort: break;
+            case AH::IncrementButton::ReleasedLong: break;
+            default: break;
+        }
     }
 
     AH::IncrementButton::State getButtonState() const {
