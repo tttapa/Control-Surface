@@ -16,7 +16,7 @@ var searchData=
   ['const_5freverse_5fiterator_93',['const_reverse_iterator',['../dd/d16/classDoublyLinkedList.html#a858c22bc6707c956dff7ed4838eb6450',1,'DoublyLinkedList']]],
   ['containers_2edox_94',['Containers.dox',['../d5/def/Containers_8dox.html',1,'']]],
   ['copyas_95',['copyAs',['../da/de8/group__AH__Containers.html#gafabc9f5a80a8d4c068141c62de619714',1,'ArrayHelpers.hpp']]],
-  ['couldcontain_96',['couldContain',['../dd/d16/classDoublyLinkedList.html#a07505b9229f646d1f819acee79aded6d',1,'DoublyLinkedList::couldContain(Node *node)'],['../dd/d16/classDoublyLinkedList.html#ade19a7c2339360cef0db06e7df908865',1,'DoublyLinkedList::couldContain(Node &amp;node)']]],
+  ['couldcontain_96',['couldContain',['../dd/d16/classDoublyLinkedList.html#a3bb0529b5a1b73e9d59ddfa7edb2a249',1,'DoublyLinkedList::couldContain(const Node *node) const'],['../dd/d16/classDoublyLinkedList.html#a56cf1b6499de50ca5855629091d08f4e',1,'DoublyLinkedList::couldContain(const Node &amp;node) const']]],
   ['count_97',['COUNT',['../d7/d52/DebugVal_8hpp.html#adbcb2cf49651bf55398702c8e57b13fd',1,'DebugVal.hpp']]],
   ['count_5fhelper_98',['COUNT_HELPER',['../d7/d52/DebugVal_8hpp.html#a3c4a20d343dd3badfcb32ad13e23011f',1,'DebugVal.hpp']]],
   ['crtp_99',['CRTP',['../d4/dba/CRTP_8hpp.html#ad36775cd65cca08763279b2f956098e1',1,'CRTP.hpp']]],

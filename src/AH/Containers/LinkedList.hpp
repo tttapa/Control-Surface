@@ -283,7 +283,7 @@ class DoublyLinkedList {
                         node->previous != nullptr);
     }
 
-    /// @copydoc couldContain(Node *)
+    /// @copydoc couldContain(const Node *) const
     bool couldContain(const Node &node) const {
         return couldContain(&node);
     }

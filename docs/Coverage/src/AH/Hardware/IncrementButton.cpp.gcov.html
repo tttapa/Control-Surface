@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 4360c8ae61556d1969d7ae0fe7d97d9fd98fb40b - src/AH/Hardware/IncrementButton.cpp</title>
+  <title>LCOV - 64ed18acafaadd72bd1db05f498efe961816ef85 - src/AH/Hardware/IncrementButton.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">4360c8ae61556d1969d7ae0fe7d97d9fd98fb40b</td>
+            <td class="headerValue">64ed18acafaadd72bd1db05f498efe961816ef85</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">19</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-06-27 22:40:08</td>
+            <td class="headerValue">2020-07-30 14:50:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -85,20 +85,20 @@
 <a name="15"><span class="lineNum">      15 </span><span class="lineCov">          7 :     } else if (incrState == Button::Rising) {</span></a>
 <a name="16"><span class="lineNum">      16 </span><span class="lineCov">          1 :         longPressState = Initial;</span></a>
 <a name="17"><span class="lineNum">      17 </span><span class="lineCov">          6 :     } else if (incrState == Button::Falling) {</span></a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          1 :         return Increment;</span></a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          1 :         return IncrementShort;</span></a>
 <a name="19"><span class="lineNum">      19 </span>            :     } else { // if (incrState == Button::Pressed)</a>
 <a name="20"><span class="lineNum">      20 </span><span class="lineCov">          4 :         auto now = millis();</span></a>
 <a name="21"><span class="lineNum">      21 </span><span class="lineCov">          4 :         if (longPressState == LongPress) {</span></a>
 <a name="22"><span class="lineNum">      22 </span>            :             // still long pressed</a>
 <a name="23"><span class="lineNum">      23 </span><span class="lineCov">          2 :             if (now - longPressRepeat &gt;= LONG_PRESS_REPEAT_DELAY) {</span></a>
 <a name="24"><span class="lineNum">      24 </span><span class="lineCov">          1 :                 longPressRepeat += LONG_PRESS_REPEAT_DELAY;</span></a>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          1 :                 return Increment;</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          1 :                 return IncrementHold;</span></a>
 <a name="26"><span class="lineNum">      26 </span>            :             }</a>
 <a name="27"><span class="lineNum">      27 </span><span class="lineCov">          3 :         } else if (button.stableTime(now) &gt;= LONG_PRESS_DELAY) {</span></a>
 <a name="28"><span class="lineNum">      28 </span>            :             // long press starts</a>
 <a name="29"><span class="lineNum">      29 </span><span class="lineCov">          1 :             longPressState = LongPress;</span></a>
 <a name="30"><span class="lineNum">      30 </span><span class="lineCov">          1 :             longPressRepeat = now;</span></a>
-<a name="31"><span class="lineNum">      31 </span><span class="lineCov">          1 :             return Increment;</span></a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">          1 :             return IncrementLong;</span></a>
 <a name="32"><span class="lineNum">      32 </span>            :         }</a>
 <a name="33"><span class="lineNum">      33 </span><span class="lineCov">          4 :     }</span></a>
 <a name="34"><span class="lineNum">      34 </span><span class="lineCov">          4 :     return Nothing;</span></a>

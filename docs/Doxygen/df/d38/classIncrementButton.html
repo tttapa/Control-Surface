@@ -92,14 +92,15 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d9b/classIncrementButton__coll__graph.svg" width="207" height="551"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../db/d9b/classIncrementButton__coll__graph.svg" width="207" height="551"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a5d74787dedbc4e11c1ab15bf487e61f8"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d38/classIncrementButton.html#a5d74787dedbc4e11c1ab15bf487e61f8">State</a> { <a class="el" href="../../df/d38/classIncrementButton.html#a5d74787dedbc4e11c1ab15bf487e61f8a0b44d4e916221e52c4ba47a8efb5e2fc">Nothing</a> = 0, 
-<a class="el" href="../../df/d38/classIncrementButton.html#a5d74787dedbc4e11c1ab15bf487e61f8a0da20ccab743c7169b305055013d9bf3">Increment</a>
+<a class="el" href="../../df/d38/classIncrementButton.html#a5d74787dedbc4e11c1ab15bf487e61f8a15b369933d9c2b62087f91265bcff93b">IncrementShort</a>, 
+<a class="el" href="../../df/d38/classIncrementButton.html#a5d74787dedbc4e11c1ab15bf487e61f8abc8b9308d31a6f3d4109bfff1a1cecdf">IncrementLong</a>, 
+<a class="el" href="../../df/d38/classIncrementButton.html#a5d74787dedbc4e11c1ab15bf487e61f8a180229f90c48ca630f67b826b698de11">IncrementHold</a>
  }</td></tr>
 <tr class="memdesc:a5d74787dedbc4e11c1ab15bf487e61f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">An enumeration of the different actions to be performed by the counter.  <a href="../../df/d38/classIncrementButton.html#a5d74787dedbc4e11c1ab15bf487e61f8">More...</a><br /></td></tr>
 <tr class="separator:a5d74787dedbc4e11c1ab15bf487e61f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,7 +165,11 @@ Private Attributes</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5d74787dedbc4e11c1ab15bf487e61f8a0b44d4e916221e52c4ba47a8efb5e2fc"></a>Nothing&#160;</td><td class="fielddoc"><p>The counter must not be incremented. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5d74787dedbc4e11c1ab15bf487e61f8a0da20ccab743c7169b305055013d9bf3"></a>Increment&#160;</td><td class="fielddoc"><p>The counter must be incremented. </p>
+<tr><td class="fieldname"><a id="a5d74787dedbc4e11c1ab15bf487e61f8a15b369933d9c2b62087f91265bcff93b"></a>IncrementShort&#160;</td><td class="fielddoc"><p>The counter must be incremented (after short press). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5d74787dedbc4e11c1ab15bf487e61f8abc8b9308d31a6f3d4109bfff1a1cecdf"></a>IncrementLong&#160;</td><td class="fielddoc"><p>The counter must be incremented (after long press). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5d74787dedbc4e11c1ab15bf487e61f8a180229f90c48ca630f67b826b698de11"></a>IncrementHold&#160;</td><td class="fielddoc"><p>The counter must be incremented (still pressed). </p>
 </td></tr>
 </table>
 
@@ -196,7 +201,7 @@ Private Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a06fc87d81c62e9abb8790b6e5713c55bade879c91413c9c7b60f9ca1fb92eb234"></a>LongPress&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00069">69</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00071">71</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
 
 </div>
 </div>
@@ -292,7 +297,7 @@ Private Attributes</h2></td></tr>
 
 <p>Update and return the state of the increment button. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00049">49</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00051">51</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
 
 </div>
 </div>
@@ -322,7 +327,7 @@ Private Attributes</h2></td></tr>
 <p>Return the state of the increment button without updating it. </p>
 <p>Returns the same value as the last <a class="el" href="../../df/d38/classIncrementButton.html#ad3475e1e3dd2663470de0906a75ccf73">update</a> call. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00056">56</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00058">58</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
 
 </div>
 </div>
@@ -374,7 +379,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00067">67</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00069">69</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
 
 </div>
 </div>
@@ -412,7 +417,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00073">73</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00075">75</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
 
 </div>
 </div>
@@ -436,7 +441,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00075">75</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html#l00077">77</a> of file <a class="el" href="../../d5/d04/IncrementButton_8hpp_source.html">IncrementButton.hpp</a>.</p>
 
 </div>
 </div>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 4360c8ae61556d1969d7ae0fe7d97d9fd98fb40b - src/AH/Containers/Updatable.hpp</title>
+  <title>LCOV - 64ed18acafaadd72bd1db05f498efe961816ef85 - src/AH/Containers/Updatable.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">4360c8ae61556d1969d7ae0fe7d97d9fd98fb40b</td>
+            <td class="headerValue">64ed18acafaadd72bd1db05f498efe961816ef85</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">19</td>
-            <td class="headerCovTableEntry">19</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
+            <td class="headerCovTableEntry">41</td>
+            <td class="headerCovTableEntry">45</td>
+            <td class="headerCovTableEntryHi">91.1 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-06-27 22:40:08</td>
+            <td class="headerValue">2020-07-30 14:50:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">10</td>
-            <td class="headerCovTableEntry">13</td>
-            <td class="headerCovTableEntryMed">76.9 %</td>
+            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntryMed">86.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -128,18 +128,18 @@
 <a name="58"><span class="lineNum">      58 </span>            :   protected:</a>
 <a name="59"><span class="lineNum">      59 </span>            :     /// Constructor: create an Updatable and add it to the linked list of</a>
 <a name="60"><span class="lineNum">      60 </span>            :     /// instances.</a>
-<a name="61"><span class="lineNum">      61 </span><span class="lineCov">         51 :     UpdatableCRTP() __attribute__((no_sanitize(&quot;undefined&quot;))) {</span></a>
-<a name="62"><span class="lineNum">      62 </span><span class="lineCov">         51 :         LockGuard lock(mutex);</span></a>
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">         51 :         updatables.append(CRTP(Derived));</span></a>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         51 :     }</span></a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineCov">         67 :     UpdatableCRTP() __attribute__((no_sanitize(&quot;undefined&quot;))) {</span></a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">         67 :         LockGuard lock(mutex);</span></a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">         67 :         updatables.append(CRTP(Derived));</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         67 :     }</span></a>
 <a name="65"><span class="lineNum">      65 </span>            : </a>
 <a name="66"><span class="lineNum">      66 </span>            :   public:</a>
 <a name="67"><span class="lineNum">      67 </span>            :     /// Destructor: remove the updatable from the linked list of instances.</a>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">         51 :     virtual ~UpdatableCRTP() __attribute__((no_sanitize(&quot;undefined&quot;))) {</span></a>
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">         51 :         LockGuard lock(mutex);</span></a>
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">         51 :         if (updatables.couldContain(CRTP(Derived)))</span></a>
-<a name="71"><span class="lineNum">      71 </span><span class="lineCov">         51 :             updatables.remove(CRTP(Derived));</span></a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">         51 :     }</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">         67 :     virtual ~UpdatableCRTP() __attribute__((no_sanitize(&quot;undefined&quot;))) {</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">         67 :         LockGuard lock(mutex);</span></a>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">         67 :         if (updatables.couldContain(CRTP(Derived)))</span></a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">         67 :             updatables.remove(CRTP(Derived));</span></a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">         67 :     }</span></a>
 <a name="73"><span class="lineNum">      73 </span>            : </a>
 <a name="74"><span class="lineNum">      74 </span>            : #if defined(__GNUC__) &amp;&amp; !defined(__clang__)</a>
 <a name="75"><span class="lineNum">      75 </span>            : #pragma GCC diagnostic pop</a>
@@ -173,29 +173,29 @@
 <a name="103"><span class="lineNum">     103 </span>            : </a>
 <a name="104"><span class="lineNum">     104 </span>            :     /// Enable this updatable: insert it into the linked list of instances,</a>
 <a name="105"><span class="lineNum">     105 </span>            :     /// so it gets updated automatically</a>
-<a name="106"><span class="lineNum">     106 </span>            :     void enable(const LockGuard &amp;) {</a>
-<a name="107"><span class="lineNum">     107 </span>            :         if (isEnabled()) {</a>
-<a name="108"><span class="lineNum">     108 </span>            :             ERROR(F(&quot;Error: This element is already enabled.&quot;), 0x1212);</a>
-<a name="109"><span class="lineNum">     109 </span>            :             return;</a>
+<a name="106"><span class="lineNum">     106 </span><span class="lineCov">         16 :     void enable(const LockGuard &amp;lock) {</span></a>
+<a name="107"><span class="lineNum">     107 </span><span class="lineCov">         16 :         if (isEnabled(lock)) {</span></a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineNoCov">          0 :             ERROR(F(&quot;Error: This element is already enabled.&quot;), 0x1212);</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineNoCov">          0 :             return;</span></a>
 <a name="110"><span class="lineNum">     110 </span>            :         }</a>
-<a name="111"><span class="lineNum">     111 </span>            :         updatables.append(CRTP(Derived));</a>
-<a name="112"><span class="lineNum">     112 </span>            :     }</a>
+<a name="111"><span class="lineNum">     111 </span><span class="lineCov">         16 :         updatables.append(CRTP(Derived));</span></a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">         16 :     }</span></a>
 <a name="113"><span class="lineNum">     113 </span>            : </a>
 <a name="114"><span class="lineNum">     114 </span>            :     /// @copydoc enable</a>
-<a name="115"><span class="lineNum">     115 </span>            :     void enable() { enable(LockGuard(mutex)); }</a>
+<a name="115"><span class="lineNum">     115 </span><span class="lineCov">         16 :     void enable() { enable(LockGuard(mutex)); }</span></a>
 <a name="116"><span class="lineNum">     116 </span>            : </a>
 <a name="117"><span class="lineNum">     117 </span>            :     /// Disable this updatable: remove it from the linked list of instances,</a>
 <a name="118"><span class="lineNum">     118 </span>            :     /// so it no longer gets updated automatically</a>
-<a name="119"><span class="lineNum">     119 </span>            :     void disable(const LockGuard &amp;) {</a>
-<a name="120"><span class="lineNum">     120 </span>            :         if (!isEnabled()) {</a>
-<a name="121"><span class="lineNum">     121 </span>            :             ERROR(F(&quot;Error: This element is already disabled.&quot;), 0x1213);</a>
-<a name="122"><span class="lineNum">     122 </span>            :             return;</a>
+<a name="119"><span class="lineNum">     119 </span><span class="lineCov">         16 :     void disable(const LockGuard &amp;lock) {</span></a>
+<a name="120"><span class="lineNum">     120 </span><span class="lineCov">         16 :         if (!isEnabled(lock)) {</span></a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineNoCov">          0 :             ERROR(F(&quot;Error: This element is already disabled.&quot;), 0x1213);</span></a>
+<a name="122"><span class="lineNum">     122 </span><span class="lineNoCov">          0 :             return;</span></a>
 <a name="123"><span class="lineNum">     123 </span>            :         }</a>
-<a name="124"><span class="lineNum">     124 </span>            :         updatables.remove(CRTP(Derived));</a>
-<a name="125"><span class="lineNum">     125 </span>            :     }</a>
+<a name="124"><span class="lineNum">     124 </span><span class="lineCov">         16 :         updatables.remove(CRTP(Derived));</span></a>
+<a name="125"><span class="lineNum">     125 </span><span class="lineCov">         16 :     }</span></a>
 <a name="126"><span class="lineNum">     126 </span>            : </a>
 <a name="127"><span class="lineNum">     127 </span>            :     /// @copydoc disable</a>
-<a name="128"><span class="lineNum">     128 </span>            :     void disable() { disable(LockGuard(mutex)); }</a>
+<a name="128"><span class="lineNum">     128 </span><span class="lineCov">         16 :     void disable() { disable(LockGuard(mutex)); }</span></a>
 <a name="129"><span class="lineNum">     129 </span>            : </a>
 <a name="130"><span class="lineNum">     130 </span>            :     /**</a>
 <a name="131"><span class="lineNum">     131 </span>            :      * @brief   Check if this updatable is enabled.</a>
@@ -203,8 +203,8 @@
 <a name="133"><span class="lineNum">     133 </span>            :      * @note    Assumes that the updatable is not added to a different linked </a>
 <a name="134"><span class="lineNum">     134 </span>            :      *          list by the user.</a>
 <a name="135"><span class="lineNum">     135 </span>            :      */</a>
-<a name="136"><span class="lineNum">     136 </span>            :     bool isEnabled(const LockGuard &amp;) const {</a>
-<a name="137"><span class="lineNum">     137 </span>            :         return updatables.couldContain(CRTP(Derived));</a>
+<a name="136"><span class="lineNum">     136 </span><span class="lineCov">         32 :     bool isEnabled(const LockGuard &amp;) const {</span></a>
+<a name="137"><span class="lineNum">     137 </span><span class="lineCov">         32 :         return updatables.couldContain(CRTP(const Derived));</span></a>
 <a name="138"><span class="lineNum">     138 </span>            :     }</a>
 <a name="139"><span class="lineNum">     139 </span>            : </a>
 <a name="140"><span class="lineNum">     140 </span>            :     /// @copydoc isEnabled</a>
@@ -213,29 +213,29 @@
 <a name="143"><span class="lineNum">     143 </span>            :     /// @copydoc enable</a>
 <a name="144"><span class="lineNum">     144 </span>            :     static void enable(UpdatableCRTP *element) { element-&gt;enable(); }</a>
 <a name="145"><span class="lineNum">     145 </span>            :     /// @copydoc enable</a>
-<a name="146"><span class="lineNum">     146 </span>            :     static void enable(UpdatableCRTP &amp;element) { element.enable(); }</a>
+<a name="146"><span class="lineNum">     146 </span><span class="lineCov">         16 :     static void enable(UpdatableCRTP &amp;element) { element.enable(); }</span></a>
 <a name="147"><span class="lineNum">     147 </span>            :     /// @copydoc enable</a>
 <a name="148"><span class="lineNum">     148 </span>            :     template &lt;class U, size_t N&gt;</a>
-<a name="149"><span class="lineNum">     149 </span>            :     static void enable(U (&amp;array)[N]) {</a>
-<a name="150"><span class="lineNum">     150 </span>            :         for (U &amp;el : array)</a>
-<a name="151"><span class="lineNum">     151 </span>            :             enable(el);</a>
-<a name="152"><span class="lineNum">     152 </span>            :     }</a>
+<a name="149"><span class="lineNum">     149 </span><span class="lineCov">          1 :     static void enable(U (&amp;array)[N]) {</span></a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineCov">         17 :         for (U &amp;el : array)</span></a>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">         16 :             enable(el);</span></a>
+<a name="152"><span class="lineNum">     152 </span><span class="lineCov">          1 :     }</span></a>
 <a name="153"><span class="lineNum">     153 </span>            : </a>
 <a name="154"><span class="lineNum">     154 </span>            :     /// @copydoc disable</a>
 <a name="155"><span class="lineNum">     155 </span>            :     static void disable(UpdatableCRTP *element) { element-&gt;disable(); }</a>
 <a name="156"><span class="lineNum">     156 </span>            :     /// @copydoc disable</a>
-<a name="157"><span class="lineNum">     157 </span>            :     static void disable(UpdatableCRTP &amp;element) { element.disable(); }</a>
+<a name="157"><span class="lineNum">     157 </span><span class="lineCov">         16 :     static void disable(UpdatableCRTP &amp;element) { element.disable(); }</span></a>
 <a name="158"><span class="lineNum">     158 </span>            :     /// @copydoc disable</a>
 <a name="159"><span class="lineNum">     159 </span>            :     template &lt;class U, size_t N&gt;</a>
-<a name="160"><span class="lineNum">     160 </span>            :     static void disable(U (&amp;array)[N]) {</a>
-<a name="161"><span class="lineNum">     161 </span>            :         for (U &amp;el : array)</a>
-<a name="162"><span class="lineNum">     162 </span>            :             disable(el);</a>
-<a name="163"><span class="lineNum">     163 </span>            :     }</a>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">          1 :     static void disable(U (&amp;array)[N]) {</span></a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">         17 :         for (U &amp;el : array)</span></a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">         16 :             disable(el);</span></a>
+<a name="163"><span class="lineNum">     163 </span><span class="lineCov">          1 :     }</span></a>
 <a name="164"><span class="lineNum">     164 </span>            : </a>
 <a name="165"><span class="lineNum">     165 </span>            :     /// Move down this element in the list.</a>
 <a name="166"><span class="lineNum">     166 </span><span class="lineCov">    1048576 :     void moveDown(const LockGuard &amp;) { updatables.moveDown(CRTP(Derived)); }</span></a>
 <a name="167"><span class="lineNum">     167 </span>            :     /// Move down this element in the list.</a>
-<a name="168"><span class="lineNum">     168 </span><span class="lineCov">    1027010 :     void moveDown() { moveDown(LockGuard(mutex)); }</span></a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">    1033482 :     void moveDown() { moveDown(LockGuard(mutex)); }</span></a>
 <a name="169"><span class="lineNum">     169 </span>            : </a>
 <a name="170"><span class="lineNum">     170 </span>            :     /// @}</a>
 <a name="171"><span class="lineNum">     171 </span>            : </a>
@@ -262,7 +262,7 @@
 <a name="192"><span class="lineNum">     192 </span>            :  * @nosubgrouping</a>
 <a name="193"><span class="lineNum">     193 </span>            :  */</a>
 <a name="194"><span class="lineNum">     194 </span>            : template &lt;class T = NormalUpdatable, bool ThreadSafe = false&gt;</a>
-<a name="195"><span class="lineNum">     195 </span><span class="lineCov">         32 : class Updatable : public UpdatableCRTP&lt;Updatable&lt;T, ThreadSafe&gt;, ThreadSafe&gt; {</span></a>
+<a name="195"><span class="lineNum">     195 </span><span class="lineCov">         64 : class Updatable : public UpdatableCRTP&lt;Updatable&lt;T, ThreadSafe&gt;, ThreadSafe&gt; {</span></a>
 <a name="196"><span class="lineNum">     196 </span>            :   public:</a>
 <a name="197"><span class="lineNum">     197 </span>            :     /// @name Main initialization and updating methods</a>
 <a name="198"><span class="lineNum">     198 </span>            :     /// @{</a>

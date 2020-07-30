@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 4360c8ae61556d1969d7ae0fe7d97d9fd98fb40b - src/AH/Hardware/IncrementButton.hpp</title>
+  <title>LCOV - 64ed18acafaadd72bd1db05f498efe961816ef85 - src/AH/Hardware/IncrementButton.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">4360c8ae61556d1969d7ae0fe7d97d9fd98fb40b</td>
+            <td class="headerValue">64ed18acafaadd72bd1db05f498efe961816ef85</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">5</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-06-27 22:40:08</td>
+            <td class="headerValue">2020-07-30 14:50:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -109,45 +109,47 @@
 <a name="39"><span class="lineNum">      39 </span>            :      * @todo    Add states for initial press.</a>
 <a name="40"><span class="lineNum">      40 </span>            :      */</a>
 <a name="41"><span class="lineNum">      41 </span>            :     enum State {</a>
-<a name="42"><span class="lineNum">      42 </span>            :         Nothing = 0, ///&lt; The counter must not be incremented.</a>
-<a name="43"><span class="lineNum">      43 </span>            :         Increment,   ///&lt; The counter must be incremented.</a>
-<a name="44"><span class="lineNum">      44 </span>            :     };</a>
-<a name="45"><span class="lineNum">      45 </span>            : </a>
-<a name="46"><span class="lineNum">      46 </span>            :     /**</a>
-<a name="47"><span class="lineNum">      47 </span>            :      * @brief   Update and return the state of the increment button.</a>
-<a name="48"><span class="lineNum">      48 </span>            :      */</a>
-<a name="49"><span class="lineNum">      49 </span><span class="lineCov">          7 :     State update() { return state = updateImplementation(); }</span></a>
-<a name="50"><span class="lineNum">      50 </span>            : </a>
-<a name="51"><span class="lineNum">      51 </span>            :     /**</a>
-<a name="52"><span class="lineNum">      52 </span>            :      * @brief   Return the state of the increment button without updating it.</a>
-<a name="53"><span class="lineNum">      53 </span>            :      * </a>
-<a name="54"><span class="lineNum">      54 </span>            :      * Returns the same value as the last @ref update call.</a>
-<a name="55"><span class="lineNum">      55 </span>            :      */</a>
-<a name="56"><span class="lineNum">      56 </span>            :     State getState() const { return state; }</a>
-<a name="57"><span class="lineNum">      57 </span>            : </a>
-<a name="58"><span class="lineNum">      58 </span>            : #ifdef AH_INDIVIDUAL_BUTTON_INVERT</a>
-<a name="59"><span class="lineNum">      59 </span>            :     /// @see    Button::invert</a>
-<a name="60"><span class="lineNum">      60 </span>            :     void invert() { button.invert(); }</a>
-<a name="61"><span class="lineNum">      61 </span>            : #endif</a>
-<a name="62"><span class="lineNum">      62 </span>            : </a>
-<a name="63"><span class="lineNum">      63 </span>            :   protected:</a>
-<a name="64"><span class="lineNum">      64 </span>            :     State updateImplementation();</a>
-<a name="65"><span class="lineNum">      65 </span>            : </a>
-<a name="66"><span class="lineNum">      66 </span>            :   private:</a>
-<a name="67"><span class="lineNum">      67 </span>            :     Button button;</a>
-<a name="68"><span class="lineNum">      68 </span>            : </a>
-<a name="69"><span class="lineNum">      69 </span>            :     enum {</a>
-<a name="70"><span class="lineNum">      70 </span>            :         Initial,</a>
-<a name="71"><span class="lineNum">      71 </span>            :         LongPress,</a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">          2 :     } longPressState = Initial;</span></a>
-<a name="73"><span class="lineNum">      73 </span>            :     unsigned long longPressRepeat;</a>
-<a name="74"><span class="lineNum">      74 </span>            : </a>
-<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          2 :     State state = Nothing;</span></a>
-<a name="76"><span class="lineNum">      76 </span>            : };</a>
-<a name="77"><span class="lineNum">      77 </span>            : </a>
-<a name="78"><span class="lineNum">      78 </span>            : END_AH_NAMESPACE</a>
+<a name="42"><span class="lineNum">      42 </span>            :         Nothing = 0,    ///&lt; The counter must not be incremented.</a>
+<a name="43"><span class="lineNum">      43 </span>            :         IncrementShort, ///&lt; The counter must be incremented (after short press).</a>
+<a name="44"><span class="lineNum">      44 </span>            :         IncrementLong,  ///&lt; The counter must be incremented (after long press).</a>
+<a name="45"><span class="lineNum">      45 </span>            :         IncrementHold,  ///&lt; The counter must be incremented (still pressed).</a>
+<a name="46"><span class="lineNum">      46 </span>            :     };</a>
+<a name="47"><span class="lineNum">      47 </span>            : </a>
+<a name="48"><span class="lineNum">      48 </span>            :     /**</a>
+<a name="49"><span class="lineNum">      49 </span>            :      * @brief   Update and return the state of the increment button.</a>
+<a name="50"><span class="lineNum">      50 </span>            :      */</a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">          7 :     State update() { return state = updateImplementation(); }</span></a>
+<a name="52"><span class="lineNum">      52 </span>            : </a>
+<a name="53"><span class="lineNum">      53 </span>            :     /**</a>
+<a name="54"><span class="lineNum">      54 </span>            :      * @brief   Return the state of the increment button without updating it.</a>
+<a name="55"><span class="lineNum">      55 </span>            :      * </a>
+<a name="56"><span class="lineNum">      56 </span>            :      * Returns the same value as the last @ref update call.</a>
+<a name="57"><span class="lineNum">      57 </span>            :      */</a>
+<a name="58"><span class="lineNum">      58 </span>            :     State getState() const { return state; }</a>
+<a name="59"><span class="lineNum">      59 </span>            : </a>
+<a name="60"><span class="lineNum">      60 </span>            : #ifdef AH_INDIVIDUAL_BUTTON_INVERT</a>
+<a name="61"><span class="lineNum">      61 </span>            :     /// @see    Button::invert</a>
+<a name="62"><span class="lineNum">      62 </span>            :     void invert() { button.invert(); }</a>
+<a name="63"><span class="lineNum">      63 </span>            : #endif</a>
+<a name="64"><span class="lineNum">      64 </span>            : </a>
+<a name="65"><span class="lineNum">      65 </span>            :   protected:</a>
+<a name="66"><span class="lineNum">      66 </span>            :     State updateImplementation();</a>
+<a name="67"><span class="lineNum">      67 </span>            : </a>
+<a name="68"><span class="lineNum">      68 </span>            :   private:</a>
+<a name="69"><span class="lineNum">      69 </span>            :     Button button;</a>
+<a name="70"><span class="lineNum">      70 </span>            : </a>
+<a name="71"><span class="lineNum">      71 </span>            :     enum {</a>
+<a name="72"><span class="lineNum">      72 </span>            :         Initial,</a>
+<a name="73"><span class="lineNum">      73 </span>            :         LongPress,</a>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          2 :     } longPressState = Initial;</span></a>
+<a name="75"><span class="lineNum">      75 </span>            :     unsigned long longPressRepeat;</a>
+<a name="76"><span class="lineNum">      76 </span>            : </a>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">          2 :     State state = Nothing;</span></a>
+<a name="78"><span class="lineNum">      78 </span>            : };</a>
 <a name="79"><span class="lineNum">      79 </span>            : </a>
-<a name="80"><span class="lineNum">      80 </span>            : AH_DIAGNOSTIC_POP()</a>
+<a name="80"><span class="lineNum">      80 </span>            : END_AH_NAMESPACE</a>
+<a name="81"><span class="lineNum">      81 </span>            : </a>
+<a name="82"><span class="lineNum">      82 </span>            : AH_DIAGNOSTIC_POP()</a>
 </pre>
       </td>
     </tr>
