@@ -1,5 +1,6 @@
 #pragma once
 
+#include "InterfaceMIDIInputElements.hpp"
 #include "MIDIInputElementMatchers.hpp"
 
 BEGIN_CS_NAMESPACE
@@ -15,8 +16,8 @@ BEGIN_CS_NAMESPACE
 ///         - MIDIMessageType::CONTROL_CHANGE
 ///         - MIDIMessageType::KEY_PRESSURE
 template <MIDIMessageType Type>
-class NoteCCKPValue
-    : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher> {
+class NoteCCKPValue : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>,
+                      public Interfaces::IValue {
   public:
     /// Constructor.
     ///
@@ -36,7 +37,7 @@ class NoteCCKPValue
     /// @{
 
     /// Get the most recent MIDI value that was received.
-    uint8_t getValue() const { return value; }
+    uint8_t getValue() const override { return value; }
 
     /// @}
 
@@ -46,20 +47,8 @@ class NoteCCKPValue
         dirty = true;
     }
 
-    /// @name   Detecting changes
-    /// @{
-
-    /// Check if the value was updated since the last time the dirty flag was
-    /// cleared.
-    bool getDirty() const { return dirty; }
-    /// Clear the dirty flag.
-    void clearDirty() { dirty = false; }
-
-    /// @}
-
   private:
     uint8_t value = 0;
-    bool dirty = true;
 };
 
 /// Class that listens for MIDI Note events on a single address and saves their
@@ -94,7 +83,8 @@ namespace Bankable {
 ///         The number of banks.
 template <MIDIMessageType Type, uint8_t BankSize>
 class NoteCCKPValue : public BankableMatchingMIDIInputElement<
-                          Type, BankableTwoByteMIDIMatcher<BankSize>> {
+                          Type, BankableTwoByteMIDIMatcher<BankSize>>,
+                      public Interfaces::IValue {
   public:
     using Matcher = BankableTwoByteMIDIMatcher<BankSize>;
 
@@ -120,7 +110,7 @@ class NoteCCKPValue : public BankableMatchingMIDIInputElement<
     /// @{
 
     /// Get the most recent MIDI value that was received for the active bank.
-    uint8_t getValue() const { return values[this->getActiveBank()]; }
+    uint8_t getValue() const override { return values[this->getActiveBank()]; }
     /// Get the most recent MIDI value that was received for the given bank.
     uint8_t getValue(uint8_t bank) const { return values[bank]; }
 
@@ -132,23 +122,11 @@ class NoteCCKPValue : public BankableMatchingMIDIInputElement<
         dirty = true;
     }
 
-    /// @name   Detecting changes
-    /// @{
-
-    /// Check if the value was updated since the last time the dirty flag was
-    /// cleared.
-    bool getDirty() const { return dirty; }
-    /// Clear the dirty flag.
-    void clearDirty() { dirty = false; }
-
-    /// @}
-
   protected:
     void onBankSettingChange() override { dirty = true; }
 
   private:
     AH::Array<uint8_t, BankSize> values = {{}};
-    bool dirty = true;
 };
 
 /// Class that listens for MIDI Note events on a single address and

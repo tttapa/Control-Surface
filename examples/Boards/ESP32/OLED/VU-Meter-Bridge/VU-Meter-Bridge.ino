@@ -134,7 +134,7 @@ MCU::VU VUMeters[8] = {
 // ---------------------------- Display Elements ---------------------------- //
 // ========================================================================== //
 
-MCU::VUDisplay<decltype(VUMeters[0])> vuDisp[8] = {
+MCU::VUDisplay<> vuDisp[8] = {
   // Draw the first VU meter to the display, at position (2, 50),
   // (12) pixels wide, blocks of (3) pixels high, a spacing between
   // blocks of (1) pixel, and draw in white.
@@ -148,7 +148,7 @@ MCU::VUDisplay<decltype(VUMeters[0])> vuDisp[8] = {
   {display, VUMeters[7], {2 + 16 * 7, 50}, 12, 3, 1, WHITE},
 };
 
-NoteBitmapDisplay<decltype(mute[0])> muteDisp[8] = {
+NoteBitmapDisplay<> muteDisp[8] = {
   // Draw the first mute indicator to the display, at position (4, 54),
   // using bitmap icon mute_7 with a white foreground color.
   {display, mute[0], XBM::mute_7, {4 + 16 * 0, 54}, WHITE},
@@ -161,7 +161,7 @@ NoteBitmapDisplay<decltype(mute[0])> muteDisp[8] = {
   {display, mute[7], XBM::mute_7, {4 + 16 * 7, 54}, WHITE},
 };
 
-NoteBitmapDisplay<decltype(solo[0])> soloDisp[8] = {
+NoteBitmapDisplay<> soloDisp[8] = {
   // Draw the first solo indicator to the display, at position (4, 54),
   // using bitmap icon solo_7 with a white foreground color.
   {display, solo[0], XBM::solo_7, {4 + 16 * 0, 54}, WHITE},

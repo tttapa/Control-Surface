@@ -224,15 +224,15 @@ MCU::TimeDisplayDisplay timedisplaydisplay = {
 };
 
 // Play / Record
-NoteBitmapDisplay<decltype(play)> playDisp = {
+NoteBitmapDisplay<> playDisp = {
   display_L, play, XBM::play_7, {16 + 64, 0}, WHITE,
 };
-NoteBitmapDisplay<decltype(record)> recordDisp = {
+NoteBitmapDisplay<> recordDisp = {
   display_L, record, XBM::record_7, {26 + 64, 0}, WHITE,
 };
 
 // Mute
-NoteBitmapDisplay<decltype(mute[0])> muteDisp[] = {
+NoteBitmapDisplay<> muteDisp[] = {
   {display_L, mute[0], XBM::mute_10B, {14, 50}, WHITE},
   {display_L, mute[1], XBM::mute_10B, {14 + 64, 50}, WHITE},
   {display_R, mute[2], XBM::mute_10B, {14, 50}, WHITE},
@@ -240,18 +240,18 @@ NoteBitmapDisplay<decltype(mute[0])> muteDisp[] = {
 };
 
 // Solo
-NoteBitmapDisplay<decltype(solo[0])> soloDisp[] = {
+NoteBitmapDisplay<> soloDisp[] = {
   {display_L, solo[0], XBM::solo_10B, {14, 50}, WHITE},
   {display_L, solo[1], XBM::solo_10B, {14 + 64, 50}, WHITE},
   {display_R, solo[2], XBM::solo_10B, {14, 50}, WHITE},
   {display_R, solo[3], XBM::solo_10B, {14 + 64, 50}, WHITE},
 };
 
-NoteBitmapDisplay<decltype(rudeSolo)> rudeSoloDisp = {
+NoteBitmapDisplay<> rudeSoloDisp = {
   display_L, rudeSolo, XBM::solo_7, {36 + 64, 0}, WHITE};
 
 // Record arm / ready
-NoteBitmapDisplay<decltype(recrdy[0])> recrdyDisp[] = {
+NoteBitmapDisplay<> recrdyDisp[] = {
   {display_L, recrdy[0], XBM::rec_rdy_10B, {14 + 14, 50}, WHITE},
   {display_L, recrdy[1], XBM::rec_rdy_10B, {14 + 14 + 64, 50}, WHITE},
   {display_R, recrdy[2], XBM::rec_rdy_10B, {14 + 14, 50}, WHITE},
@@ -259,7 +259,7 @@ NoteBitmapDisplay<decltype(recrdy[0])> recrdyDisp[] = {
 };
 
 // VU meters
-MCU::VUDisplay<decltype(vu[0])> vuDisp[] = {
+MCU::VUDisplay<> vuDisp[] = {
   // position (32+11, 60), width (16), bar height (3) px, bar spacing (1) px
   {display_L, vu[0], {32 + 11, 60}, 16, 3, 1, WHITE},
   {display_L, vu[1], {32 + 11 + 64, 60}, 16, 3, 1, WHITE},
@@ -268,7 +268,7 @@ MCU::VUDisplay<decltype(vu[0])> vuDisp[] = {
 };
 
 // VPot rings
-MCU::VPotDisplay<decltype(vpot[0])> vpotDisp[] = {
+MCU::VPotDisplay<> vpotDisp[] = {
   // position (0, 10), outer radius (14) px, inner radius (12) px
   {display_L, vpot[0], {0, 10}, 14, 12, WHITE},
   {display_L, vpot[1], {64, 10}, 14, 12, WHITE},

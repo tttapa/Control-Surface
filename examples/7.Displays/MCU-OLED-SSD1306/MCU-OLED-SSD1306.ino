@@ -181,43 +181,43 @@ MCU::TimeDisplayDisplay timedisplaydisplay = {
 };
 
 // Play / Record
-NoteBitmapDisplay<decltype(play)> playDisp = {
+NoteBitmapDisplay<> playDisp = {
   display, play, XBM::play_7, {16 + 64, 0}, WHITE,
 };
-NoteBitmapDisplay<decltype(record)> recordDisp = {
+NoteBitmapDisplay<> recordDisp = {
   display, record, XBM::record_7, {26 + 64, 0}, WHITE,
 };
 
 // Mute
-NoteBitmapDisplay<decltype(mute[0])> muteDisp[] = {
+NoteBitmapDisplay<> muteDisp[] = {
   {display, mute[0], XBM::mute_10B, {14, 50}, WHITE},
   {display, mute[1], XBM::mute_10B, {14 + 64, 50}, WHITE},
 };
 
 // Solo
-NoteBitmapDisplay<decltype(solo[0])> soloDisp[] = {
+NoteBitmapDisplay<> soloDisp[] = {
   {display, solo[0], XBM::solo_10B, {14, 50}, WHITE},
   {display, solo[1], XBM::solo_10B, {14 + 64, 50}, WHITE},
 };
 
-NoteBitmapDisplay<decltype(rudeSolo)> rudeSoloDisp = {
+NoteBitmapDisplay<> rudeSoloDisp = {
   display, rudeSolo, XBM::solo_7, {36 + 64, 0}, WHITE};
 
 // Record arm / ready
-NoteBitmapDisplay<decltype(recrdy[0])> recrdyDisp[] = {
+NoteBitmapDisplay<> recrdyDisp[] = {
   {display, recrdy[0], XBM::rec_rdy_10B, {14 + 14, 50}, WHITE},
   {display, recrdy[1], XBM::rec_rdy_10B, {14 + 14 + 64, 50}, WHITE},
 };
 
 // VU meters
-MCU::VUDisplay<decltype(vu[0])> vuDisp[] = {
+MCU::VUDisplay<> vuDisp[] = {
   // position (32+11, 60), width (16), bar height (3) px, bar spacing (1) px
   {display, vu[0], {32 + 11, 60}, 16, 3, 1, WHITE},
   {display, vu[1], {32 + 11 + 64, 60}, 16, 3, 1, WHITE},
 };
 
 // VPot rings
-MCU::VPotDisplay<decltype(vpot[0])> vpotDisp[] = {
+MCU::VPotDisplay<> vpotDisp[] = {
   // position (0, 10), outer radius (16) px, inner radius (13) px
   {display, vpot[0], {0, 10}, 16, 13, WHITE},
   {display, vpot[1], {64, 10}, 16, 13, WHITE},

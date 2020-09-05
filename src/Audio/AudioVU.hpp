@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Audio.h>
-#include <MIDI_Inputs/MCU/VU.hpp>
+#include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
 
 #include "MovingCoilBallistics.hpp"
 
@@ -13,7 +13,7 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup Audio
  */
-class AudioVU {
+class AudioVU : public Interfaces::MCU::IVU {
   public:
     /** 
      * @brief   Create a new AudioVU object.
@@ -30,7 +30,7 @@ class AudioVU {
      */
     template <class T>
     AudioVU(T &level, float gain = 1.0, uint8_t max = 255)
-        : level{level}, max(max), gain(gain) {}
+        : IVU(max, true), level{level}, gain(gain) {}
 
     /** 
      * @brief   Create a new AudioVU object.
@@ -50,14 +50,14 @@ class AudioVU {
     template <class T>
     AudioVU(T &level, MovingCoilBallistics ballistics, float gain = 1.0,
             uint8_t max = 255)
-        : ballistics(ballistics), level(level), max(max), gain(gain) {}
+        : IVU(max, true), ballistics(ballistics), level(level), gain(gain) {}
 
     /** 
      * @brief   Get the value of the VU meter.
      * 
-     * @return  A value in [0, max]
+     * @return  A value in [0, getMax()]
      */
-    uint8_t getValue() {
+    uint8_t getValue() override {
         uint16_t value = getFloatValue() * max;
         return value;
     }
@@ -67,7 +67,7 @@ class AudioVU {
      * 
      * @return  A value in [0.0, 1.0]
      */
-    float getFloatValue() {
+    float getFloatValue() override {
         if (!level.available())
             return 0;
         float peakLevel = level.read();
@@ -80,7 +80,8 @@ class AudioVU {
     }
 
     /** @note   This function will always return false for an AudioVU. */
-    bool getOverload() { return false; } // TODO
+    bool getOverload() override { return false; } // TODO
+
     /** 
      * @brief   Set the gain for the VU meter.
      * 
@@ -131,7 +132,6 @@ class AudioVU {
         }
     } level;
 
-    uint8_t max;
     float gain;
 };
 

@@ -2,14 +2,14 @@
 
 #include <Display/DisplayElement.hpp>
 #include <Display/DisplayInterface.hpp>
-#include <MIDI_Inputs/MCU/VPotRing.hpp>
+#include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
 #include <math.h>
 
 BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
-template <class VPot_t>
+template <class VPot_t = Interfaces::MCU::IVPot>
 class VPotDisplay : public DisplayElement {
 
   public:

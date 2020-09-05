@@ -1,14 +1,14 @@
 #pragma once
 
 #include <Display/DisplayElement.hpp>
-#include <MIDI_Inputs/MCU/VU.hpp>
+#include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
 BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
-template <class VU_t>
+template <class VU_t = Interfaces::MCU::IVU>
 class VUDisplay : public DisplayElement {
   public:
     VUDisplay(DisplayInterface &display, VU_t &vu, PixelLocation loc,

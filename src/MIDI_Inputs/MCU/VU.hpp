@@ -1,6 +1,7 @@
 #pragma once
 
 #include <AH/Timing/MillisMicrosTimer.hpp>
+#include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
 #include <MIDI_Inputs/MIDIInputElementMatchers.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -186,7 +187,8 @@ constexpr unsigned int Default = 150;
  * @ingroup MIDIInputElements
  */
 class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
-                                           VUMatcher> {
+                                           VUMatcher>,
+           public Interfaces::MCU::IVU {
   public:
     /**
      * @brief   Constructor.
@@ -210,7 +212,8 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
        unsigned int decayTime = VUDecay::Default)
         : MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
                                    VUMatcher>({{track - 1, channel}}),
-          decayTimer(decayTime) {}
+          IVU(12), decayTimer(decayTime) {}
+
     /**
      * @brief   Constructor.
      * 
@@ -255,29 +258,17 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
     /// @{
 
     /// Get the most recent VU position that was received.
-    uint8_t getValue() const { return state.value; }
+    uint8_t getValue() override { return state.value; }
     /// Get the status of the overload indicator.
-    bool getOverload() const { return state.overload; }
+    bool getOverload() override { return state.overload; }
 
     /// Get the most recent VU position as a value between 0 and 1.
-    float getFloatValue() const { return getValue() / 12.f; }
-
-    /// @}
-
-    /// @name   Detecting changes
-    /// @{
-
-    /// Check if the value was updated since the last time the dirty flag was
-    /// cleared.
-    bool getDirty() const { return dirty; }
-    /// Clear the dirty flag.
-    void clearDirty() { dirty = false; }
+    float getFloatValue() override { return getValue() / 12.f; }
 
     /// @}
 
   private:
     VUState state = {};
-    bool dirty = true;
     AH::Timer<millis> decayTimer;
 };
 
@@ -297,7 +288,8 @@ namespace Bankable {
 template <uint8_t BankSize>
 class VU
     : public BankableMatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
-                                              VUMatcher<BankSize>> {
+                                              VUMatcher<BankSize>>,
+      public Interfaces::MCU::IVU {
   public:
     /**
      * @brief   Constructor.
@@ -324,7 +316,7 @@ class VU
         : BankableMatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
                                            VUMatcher<BankSize>>(
               {config, {track - 1, channel}}),
-          decayTimer(decayTime) {}
+          IVU(12), decayTimer(decayTime) {}
 
     /**
      * @brief   Constructor.
@@ -388,35 +380,22 @@ class VU
     uint8_t getValue(uint8_t bank) const { return states[bank].value; }
     /// Get the status of the overload indicator for the given bank.
     bool getOverload(uint8_t bank) const { return states[bank].overload; }
-
-    /// Get the most recent VU position that was received for the active bank.
-    uint8_t getValue() const { return getValue(this->getActiveBank()); }
-    /// Get the status of the overload indicator for the active bank.
-    bool getOverload() const { return getOverload(this->getActiveBank()); }
-
     /// Get the most recent VU position for the given bank as a value between
     /// 0 and 1.
     float getFloatValue(uint8_t bank) const { return getValue(bank) / 12.f; }
+
+    /// Get the most recent VU position that was received for the active bank.
+    uint8_t getValue() override { return getValue(this->getActiveBank()); }
+    /// Get the status of the overload indicator for the active bank.
+    bool getOverload() override { return getOverload(this->getActiveBank()); }
     /// Get the most recent VU position for the active bank as a value between
     /// 0 and 1.
-    float getFloatValue() const { return getValue() / 12.f; }
-
-    /// @}
-
-    /// @name   Detecting changes
-    /// @{
-
-    /// Check if the value was updated since the last time the dirty flag was
-    /// cleared.
-    bool getDirty() const { return dirty; }
-    /// Clear the dirty flag.
-    void clearDirty() { dirty = false; }
+    float getFloatValue() override { return getValue() / 12.f; }
 
     /// @}
 
   private:
     AH::Array<VUState, BankSize> states = {{}};
-    bool dirty = true;
     AH::Timer<millis> decayTimer;
 };
 

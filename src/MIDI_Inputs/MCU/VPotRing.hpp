@@ -2,6 +2,7 @@
 
 #include <AH/STL/algorithm>
 #include <AH/Timing/MillisMicrosTimer.hpp>
+#include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
 #include <MIDI_Inputs/MIDIInputElementMatchers.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -144,7 +145,8 @@ struct VPotMatcher : public BankableTwoByteMIDIMatcher<BankSize> {
  */
 class VPotRing
     : public MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
-                                      VPotMatcher> {
+                                      VPotMatcher>,
+      public Interfaces::MCU::IVPot {
   public:
     /**
      * @brief   Constructor.
@@ -174,14 +176,14 @@ class VPotRing
     /// @copydoc    VPotState::getPosition
     uint8_t getPosition() const { return state.getPosition(); }
     /// @copydoc    VPotState::getCenterLed
-    bool getCenterLed() const { return state.getCenterLed(); }
+    bool getCenterLed() const override { return state.getCenterLed(); }
     /// @copydoc    VPotState::getMode
     VPotState::Mode getMode() const { return state.getMode(); }
 
     /// @copydoc    VPotState::getStartOn
-    uint8_t getStartOn() const { return state.getStartOn(); }
+    uint8_t getStartOn() const override { return state.getStartOn(); }
     /// @copydoc    VPotState::getStartOff
-    uint8_t getStartOff() const { return state.getStartOff(); }
+    uint8_t getStartOff() const override { return state.getStartOff(); }
 
     /// @}
 
@@ -193,20 +195,8 @@ class VPotRing
         }
     }
 
-    /// @name   Detecting changes
-    /// @{
-
-    /// Check if the value was updated since the last time the dirty flag was
-    /// cleared.
-    bool getDirty() const { return dirty; }
-    /// Clear the dirty flag.
-    void clearDirty() { dirty = false; }
-
-    /// @}
-
   private:
     VPotState state = {};
-    bool dirty = true;
 
   public:
     /// Don't reset the state when calling the `reset` method. This is the
@@ -231,7 +221,8 @@ namespace Bankable {
 template <uint8_t BankSize>
 class VPotRing
     : public BankableMatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
-                                              VPotMatcher<BankSize>> {
+                                              VPotMatcher<BankSize>>,
+      public Interfaces::MCU::IVPot {
   public:
     /**
      * @brief   Constructor.
@@ -299,17 +290,23 @@ class VPotRing
     uint8_t getPosition() const { return getPosition(this->getActiveBank()); }
     /// @copydoc    VPotState::getCenterLed
     /// (For the active bank.)
-    bool getCenterLed() const { return getCenterLed(this->getActiveBank()); }
+    bool getCenterLed() const override {
+        return getCenterLed(this->getActiveBank());
+    }
     /// @copydoc    VPotState::getMode
     /// (For the active bank.)
     VPotState::Mode getMode() const { return getMode(this->getActiveBank()); }
 
     /// @copydoc    VPotState::getStartOn
     /// (For the active bank.)
-    uint8_t getStartOn() const { return getStartOn(this->getActiveBank()); }
+    uint8_t getStartOn() const override {
+        return getStartOn(this->getActiveBank());
+    }
     /// @copydoc    VPotState::getStartOff
     /// (For the active bank.)
-    uint8_t getStartOff() const { return getStartOff(this->getActiveBank()); }
+    uint8_t getStartOff() const override {
+        return getStartOff(this->getActiveBank());
+    }
 
     /// @}
 
@@ -321,23 +318,11 @@ class VPotRing
         }
     }
 
-    /// @name   Detecting changes
-    /// @{
-
-    /// Check if the value was updated since the last time the dirty flag was
-    /// cleared.
-    bool getDirty() const { return dirty; }
-    /// Clear the dirty flag.
-    void clearDirty() { dirty = false; }
-
-    /// @}
-
   protected:
     void onBankSettingChange() override { dirty = true; }
 
   private:
     AH::Array<VPotState, BankSize> states = {{}};
-    bool dirty = true;
 
   public:
     /// Don't reset the state when calling the `reset` method. This is the
