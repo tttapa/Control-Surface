@@ -129,7 +129,7 @@ add_custom_target(xbm
 
 # Add export documentation target
 add_custom_target(documentation 
-    rm -rf html && ./scripts/examples.py && doxygen
+    ./scripts/examples.py && doxygen
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen
     DEPENDS xbm)
 
