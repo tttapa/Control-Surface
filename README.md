@@ -1,6 +1,6 @@
 [![Build Status](https://github.com/tttapa/Control-Surface/workflows/CI%20Tests/badge.svg#)](https://github.com/tttapa/Control-Surface/actions)
 [![Test Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/tttapa/Control-Surface-doc/master/docs/Coverage/shield.io.coverage.json)](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)
-[![Build Status](https://travis-ci.org/tttapa/Control-Surface.svg#?branch=master)](https://travis-ci.org/tttapa/Control-Surface)
+[![Build Status](https://travis-ci.org/tttapa/Control-Surface.svg?branch=master)](https://travis-ci.org/tttapa/Control-Surface)
 [![GitHub](https://img.shields.io/github/stars/tttapa/Control-Surface?label=GitHub&logo=github)](https://github.com/tttapa/Control-Surface)
 
 # Control Surface
