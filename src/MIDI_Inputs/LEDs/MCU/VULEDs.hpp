@@ -7,102 +7,170 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
+/// Small helper to display the VU meters on an LED bar display.
 template <uint8_t NumLEDs>
-class VULEDsCallback {
+class VULEDsDriver : public AH::DotBarDisplayLEDs<NumLEDs> {
   public:
-    VULEDsCallback(const AH::DotBarDisplayLEDs<NumLEDs> &leds) : leds(leds) {}
+    /// Constructor
+    VULEDsDriver(const PinList<NumLEDs> &leds)
+        : AH::DotBarDisplayLEDs<NumLEDs>(leds) {}
 
-    template <class T>
-    void begin(T &) {
-        leds.begin();
+    /// @param  value
+    ///         [0, 12]
+    void displayVU(uint8_t value) {
+        value = (value * NumLEDs + FLOOR_CORRECTION) / 12; // [0, N]
+        this->display(value);
     }
-
-    template <class T>
-    void update(T &t) {
-        uint8_t value = t.getValue();                      // value in [0, 12]
-        value = (value * NumLEDs + FLOOR_CORRECTION) / 12; // value in [0, N]
-        leds.display(value);
-    }
-
-    /// @copydoc    AH::DotBarDisplayLEDs::getMode
-    AH::DotBarMode getMode() const { return this->leds.getMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::setMode
-    void setMode(AH::DotBarMode mode) { this->leds.setMode(mode); }
-    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
-    void dotMode() { this->leds.dotMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::barMode
-    void barMode() { this->leds.barMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::toggleMode
-    void toggleMode() { this->leds.toggleMode(); }
 
   private:
-    AH::DotBarDisplayLEDs<NumLEDs> leds;
-
     /// @see    doc/VU-LED-mapping.ods
     constexpr static uint8_t FLOOR_CORRECTION = 5;
 };
 
+// -------------------------------------------------------------------------- //
+
+/** 
+ * @brief   A MIDI input element that represents a Mackie Control Universal VU
+ *          meter and displays its value using LEDs.
+ * 
+ * @tparam  NumLEDs
+ *          The number of LEDs for the VU meter display. Recommended value is 
+ *          12, because this is the range that's sent over MIDI.
+ * 
+ * @ingroup midi-input-elements-leds
+ */
 template <uint8_t NumLEDs>
-class VULEDs : public GenericVU<VULEDsCallback<NumLEDs>> {
+class VULEDs : public VU, public VULEDsDriver<NumLEDs> {
   public:
-    VULEDs(const PinList<NumLEDs> &ledPins, uint8_t track,
+    /// Constructor.
+    ///
+    /// @param  track
+    ///         The track to listen for [1, 8].
+    VULEDs(const PinList<NumLEDs> &leds, uint8_t track, MIDIChannelCN channel,
            unsigned int decayTime = VUDecay::Default)
-        : GenericVU<VULEDsCallback<NumLEDs>>{
-              track,
-              CHANNEL_1,
-              decayTime,
-              {ledPins},
-          } {}
+        : VU(track, channel, decayTime), VULEDsDriver<NumLEDs>(leds) {}
 
-    VULEDs(const PinList<NumLEDs> &ledPins, uint8_t track,
-           MIDIChannelCN channelCN, unsigned int decayTime = VUDecay::Default)
-        : GenericVU<VULEDsCallback<NumLEDs>>{
-              track,
-              channelCN,
-              decayTime,
-              {ledPins},
-          } {}
+    /// Constructor.
+    ///
+    /// @param  track
+    ///         The track to listen for [1, 8].
+    VULEDs(const PinList<NumLEDs> &leds, uint8_t track,
+           unsigned int decayTime = VUDecay::Default)
+        : VU(track, decayTime), VULEDsDriver<NumLEDs>(leds) {}
 
-    /// @copydoc    AH::DotBarDisplayLEDs::getMode
-    AH::DotBarMode getMode() const { return this->callback.getMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::setMode
-    void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
-    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
-    void dotMode() { this->callback.dotMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::barMode
-    void barMode() { this->callback.barMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::toggleMode
-    void toggleMode() { this->callback.toggleMode(); }
+  protected:
+    void handleUpdate(VUMatcher::Result match) override {
+        VU::handleUpdate(match);
+        updateDisplay();
+    }
+
+    /// If the state is dirty, update the LEDs
+    void updateDisplay() {
+        if (getDirty()) {
+            this->displayVU(getValue());
+            clearDirty();
+        }
+    }
+
+  public:
+    void begin() override {
+        VU::begin();
+        VULEDsDriver<NumLEDs>::begin();
+        updateDisplay();
+    }
+
+    void reset() override {
+        VU::reset();
+        updateDisplay();
+    }
+
+    void update() override {
+        VU::update();
+        updateDisplay();
+    }
+
+  protected:
+    using VU::clearDirty;
+    using VU::getDirty;
 };
+
+// -------------------------------------------------------------------------- //
 
 namespace Bankable {
 
-template <uint8_t NumBanks, uint8_t NumLEDs>
-class VULEDs : public GenericVU<NumBanks, VULEDsCallback<NumLEDs>> {
+/** 
+ * @brief   A MIDI input element that represents a Mackie Control Universal VU
+ *          meter and displays its value using LEDs.
+ * 
+ * @tparam  BankSize
+ *          The number of banks.
+ * @tparam  NumLEDs
+ *          The number of LEDs for the VU meter display. Recommended value is 
+ *          12, because this is the range that's sent over MIDI.
+ * 
+ * @ingroup BankableMIDIInputElementsLEDs
+ */
+template <uint8_t BankSize, uint8_t NumLEDs>
+class VULEDs : public VU<BankSize>, public VULEDsDriver<NumLEDs> {
   public:
-    VULEDs(BankConfig<NumBanks> config, const PinList<NumLEDs> &ledPins,
-           uint8_t track, unsigned int decayTime = VUDecay::Default)
-        : GenericVU<NumBanks, VULEDsCallback<NumLEDs>>{
-              config, track, CHANNEL_1, decayTime, {ledPins},
-          } {}
-
-    VULEDs(BankConfig<NumBanks> config, const PinList<NumLEDs> &ledPins,
-           uint8_t track, MIDIChannelCN channelCN,
+    /// Constructor.
+    ///
+    /// @param  config
+    ///         The bank configuration to use.
+    /// @param  track
+    ///         The track to listen for [1, 8].
+    /// @param  channel
+    ///         The MIDI channel and cable.
+    VULEDs(BankConfig<BankSize> config, const PinList<NumLEDs> &leds,
+           uint8_t track, MIDIChannelCN channel,
            unsigned int decayTime = VUDecay::Default)
-        : GenericVU<NumBanks, VULEDsCallback<NumLEDs>>{
-              config, track, channelCN, decayTime, {ledPins},
-          } {}
+        : VU<BankSize>(config, track, channel, decayTime),
+          VULEDsDriver<NumLEDs>(leds) {}
 
-    /// @copydoc    AH::DotBarDisplayLEDs::getMode
-    AH::DotBarMode getMode() const { return this->callback.getMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::setMode
-    void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
-    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
-    void dotMode() { this->callback.dotMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::barMode
-    void barMode() { this->callback.barMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::toggleMode
-    void toggleMode() { this->callback.toggleMode(); }
+    /// Constructor.
+    ///
+    /// @param  config
+    ///         The bank configuration to use.
+    /// @param  track
+    ///         The track to listen for [1, 8].
+    VULEDs(BankConfig<BankSize> config, const PinList<NumLEDs> &leds,
+           uint8_t track, unsigned int decayTime = VUDecay::Default)
+        : VU<BankSize>(config, track, decayTime), VULEDsDriver<NumLEDs>(leds) {}
+
+  protected:
+    void handleUpdate(typename VUMatcher<BankSize>::Result match) override {
+        VU<BankSize>::handleUpdate(match);
+        updateDisplay();
+    }
+
+    /// If the state is dirty, update the LEDs
+    void updateDisplay() {
+        if (getDirty()) {
+            this->displayVU(this->getValue());
+            clearDirty();
+        }
+    }
+
+  public:
+    void begin() override {
+        VU<BankSize>::begin();
+        VULEDsDriver<NumLEDs>::begin();
+        updateDisplay();
+    }
+
+    void reset() override {
+        VU<BankSize>::reset();
+        updateDisplay();
+    }
+
+    void update() override {
+        VU<BankSize>::update();
+        updateDisplay();
+    }
+
+  protected:
+    using VU<BankSize>::clearDirty;
+    using VU<BankSize>::getDirty;
 };
 
 } // namespace Bankable

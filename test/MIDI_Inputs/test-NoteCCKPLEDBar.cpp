@@ -1,6 +1,6 @@
 #include <gtest-wrapper.h>
 
-#include <MIDI_Inputs/LEDs/NoteCCRangeLEDBar.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCKPLEDBar.hpp>
 
 USING_CS_NAMESPACE;
 

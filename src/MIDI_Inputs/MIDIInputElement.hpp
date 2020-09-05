@@ -1,30 +1,35 @@
-/* ✔ */
-
 #pragma once
 
 #include "ChannelMessageMatcher.hpp"
 #include <Def/MIDIAddress.hpp>
 
+#include <Banks/Bank.hpp> // Bank<N>, BankSettingChangeCallback
+
+#include <AH/Containers/Updatable.hpp>
+#include <AH/STL/type_traits>
+
 BEGIN_CS_NAMESPACE
+
+// -------------------------------------------------------------------------- //
 
 /**
  * @brief   A class for objects that listen for incoming MIDI events.
  * 
  * They can either update some kind of display, or they can just save the state.
  */
-class MIDIInputElement {
+template <MIDIMessageType Type>
+class MIDIInputElement
+    : public AH::UpdatableCRTP<MIDIInputElement<Type>, true> {
   protected:
-    MIDIInputElement() {} // not used, only for virtual inheritance
-    /**
-     * @brief   Create a new MIDIInputElement that listens on the given address.
-     * 
-     * @param   address
-     *          The MIDI address to listen to.
-     */
-    MIDIInputElement(const MIDIAddress &address) : address(address) {}
+    MIDIInputElement() = default;
 
   public:
     virtual ~MIDIInputElement() = default;
+
+  public:
+    using MessageMatcherType =
+        typename std::conditional<Type == MIDIMessageType::SYSEX_START,
+                                  SysExMessage, ChannelMessageMatcher>::type;
 
     /// Initialize the input element.
     virtual void begin() {}
@@ -36,51 +41,96 @@ class MIDIInputElement {
     virtual void update() {}
 
     /// Receive a new MIDI message and update the internal state.
-    bool updateWith(const ChannelMessageMatcher &midimsg) {
-        MIDIAddress target = getTarget(midimsg);
-        if (!this->match(target))
-            return false;
-        DEBUGFN(F("MIDI message matches"));
-        if (!updateImpl(midimsg, target))
-            return false;
-        DEBUGFN(F("Updated"));
-        return true;
+    virtual bool updateWith(MessageMatcherType midimsg) = 0;
+
+    /// Update all
+    static bool updateAllWith(MessageMatcherType midimsg) {
+        // MIDI messages can arrive asynchronously, so the linked list must be
+        // locked before iterating over it or altering it.
+        typename MIDIInputElement::LockGuard lock(MIDIInputElement::getMutex());
+
+        for (auto &el : MIDIInputElement::updatables) {
+            if (el.updateWith(midimsg)) {
+                el.moveDown(lock);
+                return true;
+            }
+        }
+        return false;
     }
 
-  private:
-    /// Update the internal state with the new MIDI message.
-    virtual bool updateImpl(const ChannelMessageMatcher &midimsg,
-                            const MIDIAddress &target) = 0;
-
-    /**
-     * @brief   Extract the target address from a MIDI message.
-     * @note    This base version of the function is only valid for messages 
-     *          that use data1 as an address (i.e. Note On, Note Off, Polyphonic
-     *          Key Pressure and Control Change), because it assumes that the
-     *          target address consists of the address (data 1), the MIDI 
-     *          channel and the cable number.
-     */
-    virtual MIDIAddress getTarget(const ChannelMessageMatcher &midimsg) const {
-        return {
-            int8_t(midimsg.data1),
-            midimsg.channel,
-            midimsg.cable,
-        };
+    /// Update all
+    static void updateAll() {
+        MIDIInputElement::applyToAll(&MIDIInputElement::update);
     }
 
-    /**
-     * @brief   Check if the address of the incoming MIDI message matches an 
-     *          address of this element.
-     * @note    This base version of the function is only valid for non-Bankable
-     *          MIDI input elements, it only matches if the address is equal to 
-     *          the address of this element.
-     */
-    virtual bool match(const MIDIAddress &target) const {
-        return MIDIAddress::matchSingle(this->address, target);
+    /// Begin all
+    static void beginAll() {
+        MIDIInputElement::applyToAll(&MIDIInputElement::begin);
     }
+
+    /// Reset all
+    static void resetAll() {
+        MIDIInputElement::applyToAll(&MIDIInputElement::reset);
+    }
+};
+
+// -------------------------------------------------------------------------- //
+
+template <MIDIMessageType Type, class Matcher>
+class MatchingMIDIInputElement : public MIDIInputElement<Type> {
+  protected:
+    MatchingMIDIInputElement(const Matcher &matcher) : matcher(matcher) {}
+
+  public:
+    using MessageMatcherType =
+        typename MIDIInputElement<Type>::MessageMatcherType;
+
+    bool updateWith(MessageMatcherType midimsg) override {
+        auto match = matcher(midimsg);
+        if (match.match)
+            handleUpdate(match);
+        return match.match;
+    }
+
+    virtual void handleUpdate(typename Matcher::Result match) = 0;
 
   protected:
-    const MIDIAddress address;
+    Matcher matcher;
 };
+
+// -------------------------------------------------------------------------- //
+
+template <MIDIMessageType Type, class Matcher>
+class BankableMatchingMIDIInputElement
+    : public MatchingMIDIInputElement<Type, Matcher>,
+      public BankSettingChangeCallback {
+    friend class Bank<Matcher::getBankSize()>;
+
+  protected:
+    /// Create a new BankableMatchingMIDIInputElement object, and add it to the
+    /// bank.
+    BankableMatchingMIDIInputElement(const Matcher &matcher)
+        : MatchingMIDIInputElement<Type, Matcher>(matcher) {
+        this->matcher.getBank().add(this);
+    }
+
+    uint8_t getActiveBank() const { return this->matcher.getSelection(); }
+
+  public:
+    /// Destructor: remove element from the bank.
+    virtual ~BankableMatchingMIDIInputElement() {
+        this->matcher.getBank().remove(this);
+    }
+};
+
+// -------------------------------------------------------------------------- //
+
+using MIDIInputElementNote = MIDIInputElement<MIDIMessageType::NOTE_ON>;
+using MIDIInputElementKP = MIDIInputElement<MIDIMessageType::KEY_PRESSURE>;
+using MIDIInputElementCC = MIDIInputElement<MIDIMessageType::CONTROL_CHANGE>;
+using MIDIInputElementPC = MIDIInputElement<MIDIMessageType::PROGRAM_CHANGE>;
+using MIDIInputElementCP = MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>;
+using MIDIInputElementPB = MIDIInputElement<MIDIMessageType::PITCH_BEND>;
+using MIDIInputElementSysEx = MIDIInputElement<MIDIMessageType::SYSEX_START>;
 
 END_CS_NAMESPACE

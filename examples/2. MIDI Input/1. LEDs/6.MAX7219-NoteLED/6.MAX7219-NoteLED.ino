@@ -42,7 +42,7 @@ using namespace MIDI_Notes;
 MAX7219<1> max7219 = SS;
 
 // Instantiate the LED that will light up when middle C is playing
-NoteValueLED led = {
+NoteLED led = {
   max7219.pin(0),          // First pin of the MAX7219
   {note(C, 4), CHANNEL_1}, // Note C4 on MIDI channel 1
 };

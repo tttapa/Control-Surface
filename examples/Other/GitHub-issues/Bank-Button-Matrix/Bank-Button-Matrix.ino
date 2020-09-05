@@ -22,7 +22,7 @@ Bankable::NoteButtonMatrix<2, 3> buttons = {
   CHANNEL_1, //
 };
 
-Bankable::NoteValueLED<4> leds[] = {
+Bankable::NoteLED<4> leds[] = {
   {bank, 7, {notes[0][0], CHANNEL_1}},  //
   {bank, 8, {notes[0][1], CHANNEL_1}},  //
   {bank, 9, {notes[0][2], CHANNEL_1}},  //

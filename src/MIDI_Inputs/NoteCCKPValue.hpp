@@ -25,25 +25,37 @@ class NoteCCKPValue
     NoteCCKPValue(MIDIAddress address)
         : MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>(address) {}
 
-  private:
+  protected:
     void handleUpdate(typename TwoByteMIDIMatcher::Result match) override {
         dirty |= value != match.value;
         value = match.value;
     }
 
   public:
+    /// @name Data access
+    /// @{
+
     /// Get the most recent MIDI value that was received.
     uint8_t getValue() const { return value; }
+
+    /// @}
+
     /// Reset all values to zero.
     void reset() override {
         value = 0;
         dirty = true;
     }
+
+    /// @name   Detecting changes
+    /// @{
+
     /// Check if the value was updated since the last time the dirty flag was
     /// cleared.
     bool getDirty() const { return dirty; }
     /// Clear the dirty flag.
     void clearDirty() { dirty = false; }
+
+    /// @}
 
   private:
     uint8_t value = 0;
@@ -53,17 +65,17 @@ class NoteCCKPValue
 /// Class that listens for MIDI Note events on a single address and saves their
 /// value.
 /// @ingroup    MIDIInputElements
-using NewNoteValue = NoteCCKPValue<MIDIMessageType::NOTE_ON>;
+using NoteValue = NoteCCKPValue<MIDIMessageType::NOTE_ON>;
 
 /// Class that listens for MIDI Control Change events on a single address and
 /// saves their value.
 /// @ingroup    MIDIInputElements
-using NewCCValue = NoteCCKPValue<MIDIMessageType::CONTROL_CHANGE>;
+using CCValue = NoteCCKPValue<MIDIMessageType::CONTROL_CHANGE>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
 /// saves their value.
 /// @ingroup    MIDIInputElements
-using NewKPValue = NoteCCKPValue<MIDIMessageType::KEY_PRESSURE>;
+using KPValue = NoteCCKPValue<MIDIMessageType::KEY_PRESSURE>;
 
 // -------------------------------------------------------------------------- //
 
@@ -78,7 +90,7 @@ namespace Bankable {
 ///         - MIDIMessageType::NOTE_ON
 ///         - MIDIMessageType::CONTROL_CHANGE
 ///         - MIDIMessageType::KEY_PRESSURE
-/// @param  BankSize
+/// @tparam BankSize
 ///         The number of banks.
 template <MIDIMessageType Type, uint8_t BankSize>
 class NoteCCKPValue : public BankableMatchingMIDIInputElement<
@@ -97,27 +109,42 @@ class NoteCCKPValue : public BankableMatchingMIDIInputElement<
 
   protected:
     void handleUpdate(typename Matcher::Result match) override {
-        dirty |= values[match.bankIndex] != match.value;
+        dirty |= values[match.bankIndex] != match.value &&
+                 match.bankIndex == this->getActiveBank();
+        // Only mark dirty if the value of the active bank changed
         values[match.bankIndex] = match.value;
     }
 
-    uint8_t getActiveBank() const { return this->matcher.getSelection(); }
-
   public:
+    /// @name Data access
+    /// @{
+
     /// Get the most recent MIDI value that was received for the active bank.
-    uint8_t getValue() const { return values[getActiveBank()]; }
+    uint8_t getValue() const { return values[this->getActiveBank()]; }
     /// Get the most recent MIDI value that was received for the given bank.
     uint8_t getValue(uint8_t bank) const { return values[bank]; }
+
+    /// @}
+
     /// Reset all values to zero.
     void reset() override {
         values = {{}};
         dirty = true;
     }
+
+    /// @name   Detecting changes
+    /// @{
+
     /// Check if the value was updated since the last time the dirty flag was
     /// cleared.
     bool getDirty() const { return dirty; }
     /// Clear the dirty flag.
     void clearDirty() { dirty = false; }
+
+    /// @}
+
+  protected:
+    void onBankSettingChange() override { dirty = true; }
 
   private:
     AH::Array<uint8_t, BankSize> values = {{}};
@@ -128,19 +155,19 @@ class NoteCCKPValue : public BankableMatchingMIDIInputElement<
 /// saves their value. This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElements
 template <uint8_t BankSize>
-using NewNoteValue = NoteCCKPValue<MIDIMessageType::NOTE_ON, BankSize>;
+using NoteValue = NoteCCKPValue<MIDIMessageType::NOTE_ON, BankSize>;
 
 /// Class that listens for MIDI Control Change events on a single address and
 /// saves their value. This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElements
 template <uint8_t BankSize>
-using NewCCValue = NoteCCKPValue<MIDIMessageType::CONTROL_CHANGE, BankSize>;
+using CCValue = NoteCCKPValue<MIDIMessageType::CONTROL_CHANGE, BankSize>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
 /// saves their value. This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElements
 template <uint8_t BankSize>
-using NewKPValue = NoteCCKPValue<MIDIMessageType::KEY_PRESSURE, BankSize>;
+using KPValue = NoteCCKPValue<MIDIMessageType::KEY_PRESSURE, BankSize>;
 
 } // namespace Bankable
 

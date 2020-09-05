@@ -57,8 +57,6 @@
 #include <Control_Surface.h> // Include the Control Surface library
 // Include the display interface you'd like to use
 #include <Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp>
-// Include the BLE MIDI interface
-#include <MIDI_Interfaces/BluetoothMIDI_Interface.hpp>
 
 // ----------------------------- MIDI Interface ----------------------------- //
 // ========================================================================== //
@@ -123,7 +121,7 @@ NoteValue solo[8] = {
 };
 
 constexpr unsigned int decay = MCU::VUDecay::Hold;
-// Try this option if your DAW doesn't decay the VU meters automatically
+// Try this option if your DAW doesn't decay the VU meters automatically:
 //   constexpr unsigned int decay = 60; // milliseconds to decay one block
 
 // VU meters
@@ -136,7 +134,7 @@ MCU::VU VUMeters[8] = {
 // ---------------------------- Display Elements ---------------------------- //
 // ========================================================================== //
 
-MCU::VUDisplay vuDisp[8] = {
+MCU::VUDisplay<decltype(VUMeters[0])> vuDisp[8] = {
   // Draw the first VU meter to the display, at position (2, 50),
   // (12) pixels wide, blocks of (3) pixels high, a spacing between
   // blocks of (1) pixel, and draw in white.
@@ -150,7 +148,7 @@ MCU::VUDisplay vuDisp[8] = {
   {display, VUMeters[7], {2 + 16 * 7, 50}, 12, 3, 1, WHITE},
 };
 
-NoteBitmapDisplay muteDisp[8] = {
+NoteBitmapDisplay<decltype(mute[0])> muteDisp[8] = {
   // Draw the first mute indicator to the display, at position (4, 54),
   // using bitmap icon mute_7 with a white foreground color.
   {display, mute[0], XBM::mute_7, {4 + 16 * 0, 54}, WHITE},
@@ -163,7 +161,7 @@ NoteBitmapDisplay muteDisp[8] = {
   {display, mute[7], XBM::mute_7, {4 + 16 * 7, 54}, WHITE},
 };
 
-NoteBitmapDisplay soloDisp[8] = {
+NoteBitmapDisplay<decltype(solo[0])> soloDisp[8] = {
   // Draw the first solo indicator to the display, at position (4, 54),
   // using bitmap icon solo_7 with a white foreground color.
   {display, solo[0], XBM::solo_7, {4 + 16 * 0, 54}, WHITE},

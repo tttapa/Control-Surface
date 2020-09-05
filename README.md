@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/tttapa/Control-Surface/workflows/CI%20Tests/badge.svg#)](https://github.com/tttapa/Control-Surface/actions)
+[![Build Status](https://github.com/tttapa/Control-Surface/workflows/CI%20Tests/badge.svg)](https://github.com/tttapa/Control-Surface/actions)
 [![Test Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/tttapa/Control-Surface-doc/master/docs/Coverage/shield.io.coverage.json)](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)
 [![Build Status](https://travis-ci.org/tttapa/Control-Surface.svg#?branch=master)](https://travis-ci.org/tttapa/Control-Surface)
 [![GitHub](https://img.shields.io/github/stars/tttapa/Control-Surface?label=GitHub&logo=github)](https://github.com/tttapa/Control-Surface)
@@ -121,7 +121,7 @@ received:
 
 USBMIDI_Interface midi;
 using namespace MIDI_Notes;
-NoteValueLED led = { LED_BUILTIN, note(C, 4) };
+NoteLED led = { LED_BUILTIN, note(C, 4) };
 
 void setup() { Control_Surface.begin(); }
 void loop() { Control_Surface.loop(); }

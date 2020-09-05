@@ -83,17 +83,21 @@
 #endif
 
 // ------------------------------ MIDI Inputs ------------------------------- //
-// #include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
-// #include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
+#include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
 #include <MIDI_Inputs/MCU/LCD.hpp>
+#include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
+#include <MIDI_Inputs/MCU/TimeDisplay.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
-#include <MIDI_Inputs/NoteCCRange.hpp>
+#include <MIDI_Inputs/NoteCCKPRange.hpp>
+#include <MIDI_Inputs/NoteCCKPValue.hpp>
 
 #include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
 #include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>
-#include <MIDI_Inputs/LEDs/NoteCCRangeLEDBar.hpp>
-#include <MIDI_Inputs/LEDs/NoteCCRangeLEDs.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCKPLED.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCKPLEDBar.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCKPLEDPWM.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCKPRangeLEDs.hpp>
 
 #ifdef FASTLED_VERSION
 #include <MIDI_Inputs/LEDs/FastLED.hpp>
@@ -157,4 +161,4 @@ END_CS_NAMESPACE
 USING_CS_NAMESPACE;
 #endif
 
-#define CONTROL_SURFACE_VERSION 10100
+#define CONTROL_SURFACE_VERSION 20000

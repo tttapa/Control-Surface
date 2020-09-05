@@ -1,71 +1,98 @@
 #pragma once
 
-#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
-#include <AH/Math/MinMaxFix.hpp>
-#include <Banks/BankableMIDIInput.hpp>
-#include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
-#include <string.h>
+#include <AH/Timing/MillisMicrosTimer.hpp>
+#include <MIDI_Inputs/MIDIInputElementMatchers.hpp>
 
 BEGIN_CS_NAMESPACE
 
-/** 
- * @brief   An abstract interface for VU meters. To allow for both floating 
- *          point values and integers, all values are integers under the hood.
- * 
- * Using floats instead integers would be a strange choice as LED bar VU meters
- * have discrete levels.  
- * Continuous "analog" VU meters can use or override the `getFloatValue()` 
- * method.
- */
-class IVU {
-  public:
-    IVU(uint8_t max) : max(max) {}
-    /** Return the VU meter value as an integer. */
-    virtual uint8_t getValue() = 0;
-    /** Return the overload status. */
-    virtual bool getOverload() = 0;
-    /** Get the VU meter value as a floating point number. */
-    virtual float getFloatValue() { return (float)getValue() / getMax(); }
-    /** Get the maximum value that this VU meter can return. */
-    uint8_t getMax() const { return max; }
-
-  protected:
-    const uint8_t max;
-};
-
 namespace MCU {
 
-/// VU Decay time constants
-namespace VUDecay {
-/// Don't decay automatically, hold the latest value until a new one is received.
-constexpr unsigned int Hold = 0;
-/// Decay one segment/block every 150 ms if no new values are received.
-constexpr unsigned int Default = 150;
-} // namespace VUDecay
+/// Struct that keeps track of the value and overload indicator of a Mackie
+/// Control Universal VU meter.
+struct VUState {
+    /**
+     * @brief   Constructor.
+     * 
+     * @param   value 
+     *          The value of the VU meter [0, 12].
+     * @param   overload 
+     *          The state of the overload indicator.
+     */
+    VUState(uint8_t value = 0, bool overload = false)
+        : value(value), overload(overload) {}
 
-/// Empty callback for VU meters that does nothing.
-struct VUEmptyCallback {
-    template <class T>
-    void begin(const T &) {}
-    template <class T>
-    void update(const T &) {}
+    uint8_t value : 4; ///< The value of the VU meter [0, 12].
+    bool overload : 1; ///< The state of the overload indicator.
+
+    enum Changed {
+        NothingChanged = 0,
+        ValueChanged = 1,
+        OverloadChanged = 2,
+    };
+
+    /**
+     * @brief   Update the value or overload status with a new raw MIDI value.
+     *
+     * @param   data
+     *          The raw 4-bit MIDI data (with track number masked out).
+     *
+     * @retval  ValueChanged
+     *          The VU meter value has changed.
+     * @retval  OverloadChanged
+     *          The overload status has changed.
+     * @retval  NothingChanged
+     *          Neither the value nor overload status has changed.
+     */
+    Changed update(uint8_t data) {
+        switch (data) {
+            case 0xF: { // clear overload
+                Changed changed = overload ? OverloadChanged : NothingChanged;
+                overload = false;
+                return changed;
+            }
+            case 0xE: { // set overload
+                Changed changed = !overload ? OverloadChanged : NothingChanged;
+                overload = true;
+                return changed;
+            }
+            case 0xD: { // no meaning
+                return NothingChanged;
+            }
+            default: { // set value
+                Changed changed = value != data ? ValueChanged : NothingChanged;
+                value = data;
+                return changed;
+            }
+        }
+    }
+
+    /// Decay the VU value: subtract one from the position if it is not zero.
+    /// @return     Returns true if the value changed.
+    bool decay() {
+        if (value == 0)
+            return false;
+        value--;
+        return true;
+    }
 };
 
-/** 
- * @brief   A MIDI input element that represents a Mackie Control Universal VU
- *          meter.  
- *          This is a base class to both the Bankable and non-Bankable version.
- * 
+// -------------------------------------------------------------------------- //
+
+/**
+ * @brief   MIDI Input matcher for Mackie Control Universal VU meters.
+ *
  * In the Mackie Control Universal protocol, VU meters are updated using Channel
  * Pressure events.  
  * Each device (cable number) has eight VU meters for the eight tracks. Only
  * MIDI channel 1 is used in the original protocol.
  * 
- * The format of the MIDI message is as follows:  
- * `| 1101 cccc | 0hhh llll |`
+ * The format of the MIDI message is as follows:
+ * | Status      | Data 1      |
+ * |:-----------:|:-----------:|
+ * | `1101 cccc` | `0hhh llll` |
  * 
  * - `1101` (or `0xD`) is the status for Channel Pressure events
- * - `cccc` is the MIDI channel
+ * - `cccc` is the MIDI channel [0-15]
  * - `hhh` is the track index [0-7]
  * - `llll` is the level of the VU meter
  * 
@@ -74,154 +101,95 @@ struct VUEmptyCallback {
  * `0xD` is an invalid value.  
  * `0xE` sets the overload indicator, and `0xF` clears the overload indicator.
  */
-template <uint8_t NumValues, class Callback>
-class VU_Base : public MIDIInputElementChannelPressure, public IVU {
-  protected:
-    VU_Base(uint8_t track, const MIDIChannelCN &channelCN,
-            unsigned int decayTime, const Callback &callback)
-        : MIDIInputElementChannelPressure{{track - 1, channelCN}}, IVU(12),
-          decayTime(decayTime), callback(callback) {}
+struct VUMatcher {
+    /// Constructor.
+    VUMatcher(MIDIAddress address) : address(address) {}
 
-  public:
-    /// Initialize
-    void begin() override { callback.begin(*this); }
-    /// Reset all values to zero
-    void reset() override {
-        values = {{}};
-        callback.update(*this);
+    /// Output data of the matcher/parser.
+    struct Result {
+        bool match; ///< Whether the address of the message matched our address.
+        uint8_t data; ///< The data to update the VU meter with [0x0, 0xF].
+    };
+
+    /// Parse and try to match the incoming MIDI message.
+    Result operator()(ChannelMessageMatcher m) {
+        uint8_t track = m.data1 >> 4;
+        if (!MIDIAddress::matchSingle({track, m.getChannelCN()}, address))
+            return {false, 0};
+        uint8_t data = m.data1 & 0x0F;
+        return {true, data};
     }
 
-    /// Return the VU meter value as an integer in [0, 12].
-    uint8_t getValue() override { return getValue(getSelection()); }
-    /// Return the overload status.
-    bool getOverload() override { return getOverload(getSelection()); }
-
-    /// Update is called periodically, it decays the meter if the time is right.
-    void update() override {
-        if (decayTime && (millis() - prevDecayTime >= decayTime)) {
-            prevDecayTime += decayTime;
-            decay();
-            callback.update(*this);
-        }
-    }
-
-  private:
-    /// Called when an incoming MIDI message matches this element
-    bool updateImpl(const ChannelMessageMatcher &midimsg,
-                    const MIDIAddress &target) override {
-        uint8_t data = midimsg.data1 & 0x0F;
-        uint8_t index = getBankIndex(target);
-        switch (data) {
-            case 0xF: clearOverload(index); break;
-            case 0xE: setOverload(index); break;
-            case 0xD: break; // no meaning
-            default: setValue(index, data); break;
-        }
-        callback.update(*this);
-        return true;
-    }
-
-    /// The address of the VU meter is the high nibble of the first (and only)
-    /// data byte.
-    MIDIAddress getTarget(const ChannelMessageMatcher &midimsg) const override {
-        return {
-            int8_t(midimsg.data1 >> 4),
-            midimsg.channel,
-            midimsg.cable,
-        };
-    }
-
-    void decay() {
-        for (uint8_t i = 0; i < NumValues; ++i)
-            if (getValue(i) > 0)
-                values[i]--;
-    }
-
-    /// Get the active bank selection
-    virtual uint8_t getSelection() const { return 0; }
-
-    /// Get the bank index from a MIDI address
-    virtual setting_t getBankIndex(const MIDIAddress &target) const {
-        (void)target;
-        return 0;
-    }
-
-    /// Set the VU meter value.
-    void setValue(uint8_t index, uint8_t newValue) {
-        prevDecayTime = millis();
-        values[index] = newValue | (values[index] & 0xF0);
-    }
-
-    /// Set the overload status.
-    void setOverload(uint8_t index) { values[index] |= 0xF0; }
-    /// Clear the overload status.
-    void clearOverload(uint8_t index) { values[index] &= 0x0F; }
-    /// Get the VU meter value from the raw value.
-    uint8_t getValue(uint8_t index) const { return values[index] & 0x0F; }
-    /// Get the overload status value from the raw value.
-    bool getOverload(uint8_t index) const { return values[index] & 0xF0; }
-
-  private:
-    Array<uint8_t, NumValues> values = {{}};
-    unsigned int decayTime;
-    unsigned long prevDecayTime = 0;
-
-  public:
-    Callback callback;
+    MIDIAddress address; ///< MIDI address to compare incoming messages with.
 };
+
+namespace Bankable {
+
+/// MIDI Input matcher for Mackie Control Universal VU meters with bank support.
+/// @see    @ref MCU::VUMatcher
+template <uint8_t BankSize>
+struct VUMatcher {
+    /// Constructor.
+    VUMatcher(BankConfig<BankSize> config, MIDIAddress address)
+        : config(config), address(address) {}
+
+    /// Output data of the matcher/parser.
+    struct Result {
+        bool match; ///< Whether the address of the message matched our address.
+        uint8_t data;      ///< The data to update the VU meter with [0x0, 0xF].
+        uint8_t bankIndex; ///< The bank index of the message [0, BankSize-1].
+    };
+
+    /// Parse and try to match the incoming MIDI message.
+    Result operator()(ChannelMessageMatcher m) {
+        using BankableMIDIMatcherHelpers::getBankIndex;
+        using BankableMIDIMatcherHelpers::matchBankable;
+        uint8_t track = m.data1 >> 4;
+        MIDIAddress midiaddr = {track, m.getChannelCN()};
+        if (!matchBankable(midiaddr, address, config))
+            return {false, 0, 0};
+        uint8_t data = m.data1 & 0x0F;
+        uint8_t bankIndex = getBankIndex(midiaddr, address, config);
+        return {true, data, bankIndex};
+    }
+
+    /// @todo   Remove unnecessary methods.
+    Bank<BankSize> &getBank() { return config.bank; }
+    const Bank<BankSize> &getBank() const { return config.bank; }
+    BankType getBankType() const { return config.type; }
+    static constexpr setting_t getBankSize() { return BankSize; }
+
+    /// Get the current bank setting.
+    /// @see    @ref Bank<N>::getSelection()
+    setting_t getSelection() const { return getBank().getSelection(); }
+
+    BaseBankConfig<BankSize> config; ///< Bank configuration.
+    MIDIAddress address; ///< MIDI address to compare incoming messages with.
+};
+
+} // namespace Bankable
 
 // -------------------------------------------------------------------------- //
 
-/** 
- * @brief   A class for MIDI input elements that represent Mackie Control
- *          Universal VU meters. This version is generic to allow for custom 
- *          callbacks.  
- *          This version cannot be banked.
- */
-template <class Callback = VUEmptyCallback>
-class GenericVU : public VU_Base<1, Callback> {
-  public:
-    /** 
-     * @brief   Construct a new GenericVU object.
-     * 
-     * @param   track
-     *          The track of the VU meter. [1, 8]
-     * @param   channelCN
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
-     *          Number [CABLE_1, CABLE_16].
-     * @param   decayTime
-     *          The time in milliseconds it takes for the value to decay one
-     *          step.  
-     *          The MCU protocol uses 300 ms per division, and two steps
-     *          per division, so the default is 150 ms per step.  
-     *          Some software doesn't work if the VU meter decays automatically, 
-     *          in that case, you can set the decay time to zero to disable 
-     *          the decay.
-     * @param   callback
-     *          The callback object that is update when the value changes.
-     *          Used for displaying the value on a range of LEDs etc.
-     */
-    GenericVU(uint8_t track, const MIDIChannelCN &channelCN,
-              unsigned int decayTime, const Callback &callback)
-        : VU_Base<1, Callback>{
-              track,
-              channelCN,
-              decayTime,
-              callback,
-          } {}
-};
+/// VU Decay time constants.
+namespace VUDecay {
+/// Don't decay automatically, hold the latest value until a new one is received.
+constexpr unsigned int Hold = 0;
+/// Decay one segment/block every 150 ms if no new values are received.
+constexpr unsigned int Default = 150;
+} // namespace VUDecay
 
 /** 
- * @brief   A class for MIDI input elements that represent Mackie Control
- *          Universal VU meters.  
- *          This version cannot be banked.
+ * @brief   A MIDI input element that represents a Mackie Control Universal VU
+ *          meter.
  * 
  * @ingroup MIDIInputElements
  */
-class VU : public GenericVU<> {
+class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
+                                           VUMatcher> {
   public:
-    /** 
-     * @brief   Construct a new VU object.
+    /**
+     * @brief   Constructor.
      * 
      * @param   track
      *          The track of the VU meter. [1, 8]
@@ -236,18 +204,15 @@ class VU : public GenericVU<> {
      *          Some software doesn't work if the VU meter decays automatically, 
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
+     *          @see    @ref MCU::VUDecay
      */
-    VU(uint8_t track, const MIDIChannelCN &channelCN,
+    VU(uint8_t track, MIDIChannelCN channel,
        unsigned int decayTime = VUDecay::Default)
-        : GenericVU<>{
-              track,
-              channelCN,
-              decayTime,
-              {},
-          } {}
-
-    /** 
-     * @brief   Construct a new VU object.
+        : MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
+                                   VUMatcher>({{track - 1, channel}}),
+          decayTimer(decayTime) {}
+    /**
+     * @brief   Constructor.
      * 
      * @param   track
      *          The track of the VU meter. [1, 8]
@@ -256,17 +221,64 @@ class VU : public GenericVU<> {
      *          step.  
      *          The MCU protocol uses 300 ms per division, and two steps
      *          per division, so the default is 150 ms per step.  
-     *          Some software doesn't work if the VU meter decays automatically,
+     *          Some software doesn't work if the VU meter decays automatically, 
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
+     *          @see    @ref MCU::VUDecay
      */
     VU(uint8_t track, unsigned int decayTime = VUDecay::Default)
-        : GenericVU<>{
-              track,
-              CHANNEL_1,
-              decayTime,
-              {},
-          } {}
+        : VU(track, CHANNEL_1, decayTime) {}
+
+  protected:
+    void handleUpdate(VUMatcher::Result match) override {
+        auto changed = state.update(match.data);
+        if (changed) {
+            if (changed == VUState::ValueChanged)
+                // reset the timer and fire after one interval
+                decayTimer.beginNextPeriod();
+            dirty = true;
+        }
+    }
+
+  public:
+    /// Reset all values to zero.
+    void reset() override { state = {}; }
+
+    /// Decay the VU meter.
+    void update() override {
+        if (decayTimer.getInterval() != VUDecay::Hold && decayTimer)
+            dirty |= state.decay();
+    }
+
+  public:
+    /// @name Data access
+    /// @{
+
+    /// Get the most recent VU position that was received.
+    uint8_t getValue() const { return state.value; }
+    /// Get the status of the overload indicator.
+    bool getOverload() const { return state.overload; }
+
+    /// Get the most recent VU position as a value between 0 and 1.
+    float getFloatValue() const { return getValue() / 12.f; }
+
+    /// @}
+
+    /// @name   Detecting changes
+    /// @{
+
+    /// Check if the value was updated since the last time the dirty flag was
+    /// cleared.
+    bool getDirty() const { return dirty; }
+    /// Clear the dirty flag.
+    void clearDirty() { dirty = false; }
+
+    /// @}
+
+  private:
+    VUState state = {};
+    bool dirty = true;
+    AH::Timer<millis> decayTimer;
 };
 
 // -------------------------------------------------------------------------- //
@@ -274,85 +286,21 @@ class VU : public GenericVU<> {
 namespace Bankable {
 
 /** 
- * @brief   A class for MIDI input elements that represent Mackie Control
- *          Universal VU meters.  This version is generic to allow for custom 
- *          callbacks.  
- *          This version can be banked.
- * 
- * @tparam  NumBanks
- *          The number of banks.
- */
-template <uint8_t NumBanks, class Callback = VUEmptyCallback>
-class GenericVU : public VU_Base<NumBanks, Callback>,
-                  public BankableMIDIInput<NumBanks> {
-  public:
-    /** 
-     * @brief   Construct a new Bankable VU object.
-     * 
-     * @param   config
-     *          The bank configuration to use.
-     * @param   track
-     *          The track of the VU meter. [1, 8]
-     * @param   channelCN
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
-     *          Number [CABLE_1, CABLE_16].
-     * @param   decayTime
-     *          The time in milliseconds it takes for the value to decay one
-     *          step.  
-     *          The MCU protocol uses 300 ms per division, and two steps
-     *          per division, so the default is 150 ms per step.  
-     *          Some software doesn't work if the VU meter decays automatically, 
-     *          in that case, you can set the decay time to zero to disable 
-     *          the decay.
-     * @param   callback
-     *          The callback object that is update when the value or bank 
-     *          changes.  
-     *          Used for displaying the value on a range of LEDs etc.
-     */
-    GenericVU(BankConfig<NumBanks> config, uint8_t track,
-              const MIDIChannelCN &channelCN, unsigned int decayTime,
-              const Callback &callback)
-        : VU_Base<NumBanks, Callback>{
-            track, 
-            channelCN, 
-            decayTime, 
-            callback,
-        },
-        BankableMIDIInput<NumBanks>{config} {}
-
-  private:
-    setting_t getSelection() const override {
-        return BankableMIDIInput<NumBanks>::getSelection();
-    };
-
-    uint8_t getBankIndex(const MIDIAddress &target) const override {
-        return BankableMIDIInput<NumBanks>::getBankIndex(target, this->address);
-    }
-
-    /// Check if the address of the incoming MIDI message is in one of the banks
-    /// of this element.
-    bool match(const MIDIAddress &target) const override {
-        return BankableMIDIInput<NumBanks>::matchBankable(target,
-                                                          this->address);
-    }
-
-    void onBankSettingChange() override { this->callback.update(*this); }
-};
-
-/**
- * @brief   A class for MIDI input elements that represent Mackie Control
- *          Universal VU meters.  
- * 
- * @tparam  NumBanks 
+ * @brief   A MIDI input element that represents a Mackie Control Universal VU
+ *          meter. This version can be banked.
+ *
+ * @tparam  BankSize
  *          The number of banks.
  * 
  * @ingroup BankableMIDIInputElements
  */
-template <uint8_t NumBanks>
-class VU : public GenericVU<NumBanks> {
+template <uint8_t BankSize>
+class VU
+    : public BankableMatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
+                                              VUMatcher<BankSize>> {
   public:
-    /** 
-     * @brief   Construct a new Bankable VU object.
+    /**
+     * @brief   Constructor.
      * 
      * @param   config
      *          The bank configuration to use.
@@ -369,16 +317,17 @@ class VU : public GenericVU<NumBanks> {
      *          Some software doesn't work if the VU meter decays automatically, 
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
+     *          @see    @ref MCU::VUDecay
      */
-    VU(BankConfig<NumBanks> config, uint8_t track,
-       const MIDIChannelCN &channelCN,
+    VU(BankConfig<BankSize> config, uint8_t track, MIDIChannelCN channel,
        unsigned int decayTime = VUDecay::Default)
-        : GenericVU<NumBanks>{
-              config, track, channelCN, decayTime, {},
-          } {}
+        : BankableMatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
+                                           VUMatcher<BankSize>>(
+              {config, {track - 1, channel}}),
+          decayTimer(decayTime) {}
 
-    /** 
-     * @brief   Construct a new Bankable VU object.
+    /**
+     * @brief   Constructor.
      * 
      * @param   config
      *          The bank configuration to use.
@@ -392,12 +341,83 @@ class VU : public GenericVU<NumBanks> {
      *          Some software doesn't work if the VU meter decays automatically, 
      *          in that case, you can set the decay time to zero to disable 
      *          the decay.
+     *          @see    @ref MCU::VUDecay
      */
-    VU(BankConfig<NumBanks> config, uint8_t track,
+    VU(BankConfig<BankSize> config, uint8_t track,
        unsigned int decayTime = VUDecay::Default)
-        : GenericVU<NumBanks>{
-              config, track, CHANNEL_1, decayTime, {},
-          } {}
+        : VU(config, track, CHANNEL_1, decayTime) {}
+
+  protected:
+    void handleUpdate(typename VUMatcher<BankSize>::Result match) override {
+        auto changed = states[match.bankIndex].update(match.data);
+        if (changed) {
+            if (changed == VUState::ValueChanged &&
+                match.bankIndex == this->getActiveBank())
+                // Only care about active bank's decay.
+                // Other banks will decay as well, but not as precisely.
+                // They aren't visible anyway, so it's a good compromise.
+                decayTimer.beginNextPeriod();
+            dirty |= match.bankIndex == this->getActiveBank();
+            // Only mark dirty if the value of the active bank changed
+        }
+    }
+
+  public:
+    /// Reset all values to zero.
+    void reset() override {
+        states = {{}};
+        dirty = true;
+    }
+
+    /// Decay the VU meter.
+    void update() override {
+        if (decayTimer.getInterval() != VUDecay::Hold && decayTimer)
+            for (uint8_t i = 0; i < BankSize; ++i)
+                dirty |= states[i].decay() && i == this->getActiveBank();
+        // Only mark dirty if the value of the active bank decayed
+    }
+
+  protected:
+    void onBankSettingChange() override { dirty = true; }
+
+  public:
+    /// @name Data access
+    /// @{
+
+    /// Get the most recent VU position that was received for the given bank.
+    uint8_t getValue(uint8_t bank) const { return states[bank].value; }
+    /// Get the status of the overload indicator for the given bank.
+    bool getOverload(uint8_t bank) const { return states[bank].overload; }
+
+    /// Get the most recent VU position that was received for the active bank.
+    uint8_t getValue() const { return getValue(this->getActiveBank()); }
+    /// Get the status of the overload indicator for the active bank.
+    bool getOverload() const { return getOverload(this->getActiveBank()); }
+
+    /// Get the most recent VU position for the given bank as a value between
+    /// 0 and 1.
+    float getFloatValue(uint8_t bank) const { return getValue(bank) / 12.f; }
+    /// Get the most recent VU position for the active bank as a value between
+    /// 0 and 1.
+    float getFloatValue() const { return getValue() / 12.f; }
+
+    /// @}
+
+    /// @name   Detecting changes
+    /// @{
+
+    /// Check if the value was updated since the last time the dirty flag was
+    /// cleared.
+    bool getDirty() const { return dirty; }
+    /// Clear the dirty flag.
+    void clearDirty() { dirty = false; }
+
+    /// @}
+
+  private:
+    AH::Array<VUState, BankSize> states = {{}};
+    bool dirty = true;
+    AH::Timer<millis> decayTimer;
 };
 
 } // namespace Bankable

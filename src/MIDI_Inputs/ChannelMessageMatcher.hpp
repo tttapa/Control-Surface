@@ -21,11 +21,11 @@ struct ChannelMessageMatcher {
           data1(midimsg.data1), data2(midimsg.data2),
           cable(midimsg.getCable()) {}
 
-    MIDIMessageType type;
-    Channel channel;
-    uint8_t data1;
-    uint8_t data2;
-    Cable cable;
+    MIDIMessageType type; ///< MIDI Message Type
+    Channel channel;      ///< MIDI Channel
+    uint8_t data1;        ///< MIDI data byte 1
+    uint8_t data2;        ///< MIDI data byte 2
+    Cable cable;          ///< MIDI USB cable number
 
     /// Get the MIDI address of this message, using `data1` as the address.
     /// @note   Don't use this for Channel Pressure or Pitch Bend messages,

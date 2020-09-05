@@ -1,6 +1,7 @@
 #pragma once
 
 #include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <AH/Math/IncreaseBitDepth.hpp>
 #include <MIDI_Inputs/NoteCCKPValue.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -8,8 +9,8 @@ BEGIN_CS_NAMESPACE
 // -------------------------------------------------------------------------- //
 
 /// Generic base class for classes that listen for MIDI Note, Control Change and
-/// Key Pressure events on a single address and turns on an LED when the value
-/// is higher than a threshold.
+/// Key Pressure events on a single address and turns on an LED with a
+/// brightness/duty cycle proportional to the MIDI value.
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
@@ -17,22 +18,23 @@ BEGIN_CS_NAMESPACE
 ///         - MIDIMessageType::CONTROL_CHANGE
 ///         - MIDIMessageType::KEY_PRESSURE
 template <MIDIMessageType Type>
-class NoteCCKPLED : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher> {
+class NoteCCKPLEDPWM
+    : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher> {
   public:
     /// Constructor.
     ///
     /// @param  ledPin
-    ///         The output pin with the LED connected.
+    ///         The PWM pin with the LED connected.
     /// @param  address
     ///         The address to listen to.
-    NoteCCKPLED(pin_t ledPin, MIDIAddress address)
+    NoteCCKPLEDPWM(pin_t ledPin, MIDIAddress address)
         : MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>(address),
           ledPin(ledPin) {}
 
   private:
     void handleUpdate(typename TwoByteMIDIMatcher::Result match) override {
-        PinStatus_t state = match.value >= threshold ? HIGH : LOW;
-        AH::ExtIO::digitalWrite(ledPin, state);
+        auto value = AH::increaseBitDepth<8, 7, uint8_t, uint8_t>(match.value);
+        AH::ExtIO::analogWrite(ledPin, value);
     }
 
   public:
@@ -58,17 +60,17 @@ class NoteCCKPLED : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher> {
 /// Class that listens for MIDI Note events on a single address and turns
 /// on an LED when the value is higher than a threshold.
 /// @ingroup    midi-input-elements-leds
-using NoteLED = NoteCCKPLED<MIDIMessageType::NOTE_ON>;
+using NoteLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::NOTE_ON>;
 
 /// Class that listens for MIDI Control Change events on a single address and
 /// turns on an LED when the value is higher than a threshold.
 /// @ingroup    midi-input-elements-leds
-using CCLED = NoteCCKPLED<MIDIMessageType::CONTROL_CHANGE>;
+using CCLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::CONTROL_CHANGE>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
 /// turns on an LED when the value is higher than a threshold.
 /// @ingroup    midi-input-elements-leds
-using KPLED = NoteCCKPLED<MIDIMessageType::KEY_PRESSURE>;
+using KPLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::KEY_PRESSURE>;
 
 // -------------------------------------------------------------------------- //
 
@@ -86,7 +88,7 @@ namespace Bankable {
 /// @tparam BankSize
 ///         The number of banks.
 template <MIDIMessageType Type, uint8_t BankSize>
-class NoteCCKPLED : public NoteCCKPValue<Type, BankSize> {
+class NoteCCKPLEDPWM : public NoteCCKPValue<Type, BankSize> {
   public:
     using Matcher = typename NoteCCKPValue<Type, BankSize>::Matcher;
 
@@ -95,10 +97,11 @@ class NoteCCKPLED : public NoteCCKPValue<Type, BankSize> {
     /// @param  config
     ///         The bank configuration to use.
     /// @param  ledPin
-    ///         The output pin with the LED connected.
+    ///         The PWM pin with the LED connected.
     /// @param  address
     ///         The base address to listen to.
-    NoteCCKPLED(BankConfig<BankSize> config, pin_t ledPin, MIDIAddress address)
+    NoteCCKPLEDPWM(BankConfig<BankSize> config, pin_t ledPin,
+                   MIDIAddress address)
         : NoteCCKPValue<Type, BankSize>(config, address), ledPin(ledPin) {}
 
   protected:
@@ -111,8 +114,8 @@ class NoteCCKPLED : public NoteCCKPValue<Type, BankSize> {
     }
 
     void display() {
-        PinStatus_t state = getValue() >= threshold ? HIGH : LOW;
-        AH::ExtIO::digitalWrite(ledPin, state);
+        auto value = AH::increaseBitDepth<8, 7, uint8_t, uint8_t>(getValue());
+        AH::ExtIO::analogWrite(ledPin, value);
     }
 
   public:
@@ -153,21 +156,21 @@ class NoteCCKPLED : public NoteCCKPValue<Type, BankSize> {
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize>
-using NoteLED = NoteCCKPLED<MIDIMessageType::NOTE_ON, BankSize>;
+using NoteLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::NOTE_ON, BankSize>;
 
 /// Class that listens for MIDI Control Change events on a single address and
 /// turns on an LED when the value is higher than a threshold.
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize>
-using CCLED = NoteCCKPLED<MIDIMessageType::CONTROL_CHANGE, BankSize>;
+using CCLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::CONTROL_CHANGE, BankSize>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
 /// turns on an LED when the value is higher than a threshold.
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize>
-using KPLED = NoteCCKPLED<MIDIMessageType::KEY_PRESSURE, BankSize>;
+using KPLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::KEY_PRESSURE, BankSize>;
 
 } // namespace Bankable
 

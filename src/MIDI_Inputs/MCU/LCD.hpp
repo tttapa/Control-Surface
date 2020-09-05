@@ -2,7 +2,7 @@
 
 #include <AH/Debug/Debug.hpp>
 #include <AH/Math/MinMaxFix.hpp>
-#include <MIDI_Inputs/MIDIInputElementSysEx.hpp>
+#include <MIDI_Inputs/MIDIInputElement.hpp>
 #include <string.h> // memcpy
 
 #ifndef ARDUINO
@@ -16,6 +16,9 @@ using AH::min;
 
 namespace MCU {
 
+/// Counts the number of instances of the LCD class.
+/// If there are multiple LCD objects, we have to update all of them before
+/// breaking out of the MIDI input handling loop.
 class LCDCounter {
   public:
     LCDCounter() { instances++; }
@@ -26,21 +29,41 @@ class LCDCounter {
   private:
     static uint8_t instances;
 };
-
+/**
+ * @brief   A class that represents the Mackie Control Universal LCD display and
+ *          saves the text it receives.
+ * 
+ * The format of the MIDI message is as follows (hex):
+ * | SysEx Start | Data 1 | Data 2 | Data 3 | Data 4 | Data 5 | Data 6 | Data 7 | &emsp;...&emsp; | SysEx End |
+ * |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:---:|:----:|
+ * | `F0` | `mm` | `mm` | `mm` | `nn` | `12` | `oo` | `yy` | ... | `F7` |
+ * 
+ * - `mm` is manufacturer ID (`00 00 66` for Mackie)
+ * - `nn` is model number (`10` for Logic Control, `11` for Logic Control XT)
+ * - `oo` is offset relative to the first character of the LCD [0x00, 0x6F]
+ * - `yy`... is the ASCII text data
+ * 
+ * The manufacturer ID and model number are ignored by this class.
+ * 
+ * @ingroup MIDIInputElements
+ */
 template <uint8_t BufferSize = 120>
 class LCD : public MIDIInputElementSysEx, private LCDCounter {
   public:
-    LCD(uint8_t offset = 0, uint8_t CN = 0)
-        : MIDIInputElementSysEx{CN}, offset{offset} {
+    LCD(uint8_t offset = 0, Cable cable = CABLE_1)
+        : offset(offset), cable(cable) {
+        // Null-terminate the buffer
         buffer[BufferSize] = '\0';
+        // Fill the buffer with spaces
         for (uint8_t i = 0; i < BufferSize; i++)
             buffer[i] = ' ';
     }
 
-    const char *getText() const { return &buffer[0]; }
+  protected:
+    bool updateWith(SysExMessage midimsg) override {
+        if (midimsg.getCable() != this->cable)
+            return false;
 
-  private:
-    bool updateImpl(SysExMessage midimsg) override {
         // Format:
         // F0 mm mm mm nn 12 oo yy... F7
         // mm = manufacturer ID (00 00 66 for Mackie)
@@ -57,10 +80,14 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
 
         const uint8_t bufferEnd = this->offset + BufferSize;
 
-        // no overlap between incoming range and this range
+        // No overlap between incoming range and this range
         if (midiOffset >= bufferEnd || this->offset >= midiBufferEnd)
+            // If there are other instances, maybe it'll match one of those,
+            // otherwise, stop handling this message:
             return getInstances() == 1;
 
+        // Find the ranges that overlap between the text data in the message
+        // (src) and the range of characters we're listening for (dst):
         uint8_t srcStart = max(0, this->offset - midiOffset);
         uint8_t dstStart = max(0, midiOffset - this->offset);
         uint8_t length = midiBufferEnd - midiOffset -
@@ -71,12 +98,10 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
         //     max(0, midiOffset - this->offset) -                            //
         //     max(0, BufferSize - midiLength - (midiOffset - this->offset)); //
 
-        DEBUGVAL(this->offset, midiOffset, BufferSize, midiLength, srcStart,
-                 dstStart, length);
-
+        // Copy the interesting part to our buffer:
 #ifdef ARDUINO
         memcpy(&buffer[dstStart], &text[srcStart], length);
-#else
+#else // Tests
         for (uint8_t i = 0; i < length; ++i) {
             buffer[dstStart + i] = text[srcStart + i];
             assert(dstStart + i < BufferSize);
@@ -84,15 +109,38 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
         }
 #endif
 
-        DEBUGFN(getText());
+        dirty = true;
 
         // If this is the only instance, the others don't have to be updated
-        // anymore
+        // anymore, so we return true to break the loop:
         return getInstances() == 1;
     }
 
+  public:
+    /// @name   Data access
+    /// @{
+
+    /// Get a pointer to the null-terminated display text.
+    const char *getText() const { return buffer.data; }
+
+    /// @}
+
+    /// @name   Detecting changes
+    /// @{
+
+    /// Check if the text was updated since the last time the dirty flag was
+    /// cleared.
+    bool getDirty() const { return dirty; }
+    /// Clear the dirty flag.
+    void clearDirty() { dirty = false; }
+
+    /// @}
+
+  private:
     Array<char, BufferSize + 1> buffer;
     uint8_t offset;
+    Cable cable;
+    bool dirty = true;
 };
 
 } // namespace MCU

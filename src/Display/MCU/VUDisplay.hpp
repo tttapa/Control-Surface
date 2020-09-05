@@ -8,9 +8,10 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
+template <class VU_t>
 class VUDisplay : public DisplayElement {
   public:
-    VUDisplay(DisplayInterface &display, IVU &vu, PixelLocation loc,
+    VUDisplay(DisplayInterface &display, VU_t &vu, PixelLocation loc,
               uint16_t width, uint8_t blockheight, uint8_t spacing,
               uint16_t color)
         : DisplayElement(display), vu(vu), x(loc.x), y(loc.y - blockheight + 1),
@@ -65,7 +66,7 @@ class VUDisplay : public DisplayElement {
         }
     }
 
-    IVU &vu;
+    VU_t &vu;
 
     int16_t x;
     int16_t y;
@@ -91,9 +92,10 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
+template <class VU_t>
 class AnalogVUDisplay : public DisplayElement {
   public:
-    AnalogVUDisplay(DisplayInterface &display, IVU &vu, PixelLocation loc,
+    AnalogVUDisplay(DisplayInterface &display, VU_t &vu, PixelLocation loc,
                     uint16_t radius, float theta_min, float theta_diff,
                     uint16_t color)
         : DisplayElement(display), vu(vu), x(loc.x), y(loc.y),
@@ -115,7 +117,7 @@ class AnalogVUDisplay : public DisplayElement {
     }
 
   private:
-    IVU &vu;
+    VU_t &vu;
 
     int16_t x;
     int16_t y;

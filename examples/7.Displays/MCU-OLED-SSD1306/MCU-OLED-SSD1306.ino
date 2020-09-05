@@ -2,7 +2,7 @@
  * An example demonstrating the use of DisplayElement%s to display information
  * from the DAW on a small OLED display.
  *
- * @boards  Teensy 3.x
+ * @boards  Mega, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -181,43 +181,43 @@ MCU::TimeDisplayDisplay timedisplaydisplay = {
 };
 
 // Play / Record
-NoteBitmapDisplay playDisp = {
+NoteBitmapDisplay<decltype(play)> playDisp = {
   display, play, XBM::play_7, {16 + 64, 0}, WHITE,
 };
-NoteBitmapDisplay recordDisp = {
+NoteBitmapDisplay<decltype(record)> recordDisp = {
   display, record, XBM::record_7, {26 + 64, 0}, WHITE,
 };
 
 // Mute
-NoteBitmapDisplay muteDisp[] = {
+NoteBitmapDisplay<decltype(mute[0])> muteDisp[] = {
   {display, mute[0], XBM::mute_10B, {14, 50}, WHITE},
   {display, mute[1], XBM::mute_10B, {14 + 64, 50}, WHITE},
 };
 
 // Solo
-NoteBitmapDisplay soloDisp[] = {
+NoteBitmapDisplay<decltype(solo[0])> soloDisp[] = {
   {display, solo[0], XBM::solo_10B, {14, 50}, WHITE},
   {display, solo[1], XBM::solo_10B, {14 + 64, 50}, WHITE},
 };
 
-NoteBitmapDisplay rudeSoloDisp = {
+NoteBitmapDisplay<decltype(rudeSolo)> rudeSoloDisp = {
   display, rudeSolo, XBM::solo_7, {36 + 64, 0}, WHITE};
 
 // Record arm / ready
-NoteBitmapDisplay recrdyDisp[] = {
+NoteBitmapDisplay<decltype(recrdy[0])> recrdyDisp[] = {
   {display, recrdy[0], XBM::rec_rdy_10B, {14 + 14, 50}, WHITE},
   {display, recrdy[1], XBM::rec_rdy_10B, {14 + 14 + 64, 50}, WHITE},
 };
 
 // VU meters
-MCU::VUDisplay vuDisp[] = {
+MCU::VUDisplay<decltype(vu[0])> vuDisp[] = {
   // position (32+11, 60), width (16), bar height (3) px, bar spacing (1) px
   {display, vu[0], {32 + 11, 60}, 16, 3, 1, WHITE},
   {display, vu[1], {32 + 11 + 64, 60}, 16, 3, 1, WHITE},
 };
 
 // VPot rings
-MCU::VPotDisplay vpotDisp[] = {
+MCU::VPotDisplay<decltype(vpot[0])> vpotDisp[] = {
   // position (0, 10), outer radius (16) px, inner radius (13) px
   {display, vpot[0], {0, 10}, 16, 13, WHITE},
   {display, vpot[1], {64, 10}, 16, 13, WHITE},
@@ -234,9 +234,6 @@ BankDisplay bankDisp[] = {
 // ========================================================================== //
 
 void setup() {
-  // The default SPI MOSI pin (11) is used for I²S, so we need to use the
-  // alternative MOSI pin (7)
-  SPI.setMOSI(7);
   // Correct relative mode for MCU rotary encoders
   RelativeCCSender::setMode(MACKIE_CONTROL_RELATIVE);
   Control_Surface.begin(); // Initialize Control Surface

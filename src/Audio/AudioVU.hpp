@@ -13,7 +13,7 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup Audio
  */
-class AudioVU : public IVU {
+class AudioVU {
   public:
     /** 
      * @brief   Create a new AudioVU object.
@@ -30,7 +30,7 @@ class AudioVU : public IVU {
      */
     template <class T>
     AudioVU(T &level, float gain = 1.0, uint8_t max = 255)
-        : IVU(max), level{level}, gain(gain) {}
+        : level{level}, max(max), gain(gain) {}
 
     /** 
      * @brief   Create a new AudioVU object.
@@ -50,14 +50,14 @@ class AudioVU : public IVU {
     template <class T>
     AudioVU(T &level, MovingCoilBallistics ballistics, float gain = 1.0,
             uint8_t max = 255)
-        : IVU(max), ballistics(ballistics), level(level), gain(gain) {}
+        : ballistics(ballistics), level(level), max(max), gain(gain) {}
 
     /** 
      * @brief   Get the value of the VU meter.
      * 
      * @return  A value in [0, max]
      */
-    uint8_t getValue() override {
+    uint8_t getValue() {
         uint16_t value = getFloatValue() * max;
         return value;
     }
@@ -67,7 +67,7 @@ class AudioVU : public IVU {
      * 
      * @return  A value in [0.0, 1.0]
      */
-    float getFloatValue() override {
+    float getFloatValue() {
         if (!level.available())
             return 0;
         float peakLevel = level.read();
@@ -80,7 +80,7 @@ class AudioVU : public IVU {
     }
 
     /** @note   This function will always return false for an AudioVU. */
-    bool getOverload() override { return false; } // TODO
+    bool getOverload() { return false; } // TODO
     /** 
      * @brief   Set the gain for the VU meter.
      * 
@@ -131,6 +131,7 @@ class AudioVU : public IVU {
         }
     } level;
 
+    uint8_t max;
     float gain;
 };
 

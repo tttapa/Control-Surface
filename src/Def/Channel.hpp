@@ -48,6 +48,16 @@ class Channel {
         return this->zeroBasedChannel == rhs.zeroBasedChannel;
     }
 
+        /**
+     * @brief   Check if two channels are the different.
+     * 
+     * @param   rhs
+     *          The other channel to compare this channel to.
+     */
+    constexpr bool operator!=(const Channel &rhs) const {
+        return this->zeroBasedChannel != rhs.zeroBasedChannel;
+    }
+
     /**
      * @brief   Add an offset.
      * 

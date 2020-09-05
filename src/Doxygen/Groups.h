@@ -1,3 +1,5 @@
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
 /**
  * @defgroup    MIDIOutputElements MIDI Output Elements
  * @brief   All Elements that send out MIDI events.  
@@ -22,12 +24,13 @@
  *          @ref MIDIOutputElements.
  */
 
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
 /**
  * @defgroup    MIDIInputElements   MIDI Input Elements
  * @brief   All Elements that listen for incoming MIDI events.  
  *          This includes LEDs, VU meters, V-Pot LED rings, time displays ...
  */
-
 
 /**
  * @ingroup     MIDIInputElements
@@ -45,6 +48,15 @@
  */
 
 /**
+ * @ingroup midi-input-elements-leds
+ * @defgroup    BankableMIDIInputElementsLEDs Bankable MIDI Input Elements LEDs
+ * @brief   All Bankable MIDIInputElements that visualize their state using 
+ *          LEDs.
+ */
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
+/**
  * @defgroup    Selectors   Selectors
  * @brief   Selectors are elements that change the bank setting or any other 
  *          selection, such as program selectors.
@@ -56,15 +68,21 @@
  * @brief   @ref Selectors with LED feedback.
  */
 
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
 /**
  * @defgroup    Audio Teensy Audio
  * @brief   All Elements that interact with Audio streams.
  */
 
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
 /** 
  * @defgroup    MIDIInterfaces MIDI Interfaces
  * @brief   All MIDI Interfaces that can send and receive MIDI events.
  */
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 /** 
  * @defgroup    DisplayElements Display Elements
@@ -72,14 +90,20 @@
  *          Surface on the display.
  */
 
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
 /** 
  * @defgroup    ControlSurfaceModule Control Surface
  * @brief   The main class that initializes, manages and updates all other
  *          elements.
  */
 
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
 /**
  * @defgroup    MIDIConstants MIDI Constants
  * @brief   Constants for MIDI addresses, controller numbers, programs and 
  *          voices, Mackie Control Universal controls ...
  */
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //

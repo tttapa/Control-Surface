@@ -137,7 +137,7 @@ using namespace MIDI_Notes;
 NoteButton button = {
     0, note(C, 4),  // GPIO0 has a push button connected on most boards
 };
-NoteValueLED led = {
+NoteLED led = {
     LED_BUILTIN, note(C, 4),
 };
 

@@ -52,7 +52,7 @@ BidirectionalMIDI_PipeFactory<2> pipes;
 
 // Add some MIDI elements to show that the MIDI interfaces actually work
 CCPotentiometer pot = {A0, MIDI_CC::General_Purpose_Controller_1};
-NoteValueLED led = {LED_BUILTIN, 0x3C};
+NoteLED led = {LED_BUILTIN, 0x3C};
 
 void setup() {
   // Manually connect the MIDI interfaces to Control Surface

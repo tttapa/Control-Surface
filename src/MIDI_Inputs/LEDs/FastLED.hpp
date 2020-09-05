@@ -2,6 +2,7 @@
 #include <FastLED.h>
 #endif
 
+#include <AH/STL/type_traits> // std::enable_if, std::is_default_constructible
 #include <Settings/NamespaceSettings.hpp>
 #include <stdint.h>
 
@@ -28,25 +29,67 @@ END_CS_NAMESPACE
 
 #ifdef FASTLED_VERSION
 
-#include <MIDI_Inputs/NoteCCRange.hpp>
+#include <MIDI_Inputs/MIDIInputElement.hpp>
 
 BEGIN_CS_NAMESPACE
 
 /// Function pointer type to permute indices.
 using index_permuter_f = uint8_t (*)(uint8_t);
 
-/// Callback for Note or CC range or value input that displays the value to a
-/// FastLED strip.
-template <class ColorMapper>
-class NoteCCFastLEDCallback : public SimpleNoteCCValueCallback {
+/// Generic base class for classes that listen for MIDI Note, Control Change and
+/// Key Pressure events on a range of addresses and turns on the corresponding
+/// LED in a FastLED strip with a color that depends both on the index in the
+/// range and the value of the incoming MIDI message.
+///
+/// @tparam Type
+///         The type of MIDI messages to listen for:
+///         - MIDIMessageType::NOTE_ON
+///         - MIDIMessageType::CONTROL_CHANGE
+///         - MIDIMessageType::KEY_PRESSURE
+/// @tparam RangeLen
+///         The length of the range of addresses to listen to.
+template <MIDIMessageType Type, uint8_t RangeLen, class ColorMapper>
+class NoteCCKPRangeFastLED
+    : public MatchingMIDIInputElement<Type, TwoByteRangeMIDIMatcher> {
   public:
-    NoteCCFastLEDCallback(CRGB *ledcolors, const ColorMapper &colormapper)
-        : ledcolors(ledcolors), colormapper(colormapper) {}
+    NoteCCKPRangeFastLED(CRGB *ledcolors, MIDIAddress address,
+                         const ColorMapper &colormapper)
+        : MatchingMIDIInputElement<Type, TwoByteRangeMIDIMatcher>(
+              {address, RangeLen}),
+          ledcolors(ledcolors), colormapper(colormapper) {}
 
-    NoteCCFastLEDCallback(CRGB *ledcolors, const ColorMapper &colormapper,
-                          index_permuter_f index_permuter)
-        : ledcolors(ledcolors), colormapper(colormapper),
+    NoteCCKPRangeFastLED(AH::Array<CRGB, RangeLen> &ledcolors,
+                         MIDIAddress address, const ColorMapper &colormapper)
+        : NoteCCKPRangeFastLED(ledcolors.data, address, colormapper) {}
+
+    NoteCCKPRangeFastLED(CRGB *ledcolors, MIDIAddress address,
+                         const ColorMapper &colormapper,
+                         index_permuter_f index_permuter)
+        : MatchingMIDIInputElement<Type, TwoByteRangeMIDIMatcher>(
+              {address, RangeLen}),
+          ledcolors(ledcolors), colormapper(colormapper),
           ledIndexPermuter(index_permuter) {}
+
+    NoteCCKPRangeFastLED(AH::Array<CRGB, RangeLen> &ledcolors,
+                         MIDIAddress address, const ColorMapper &colormapper,
+                         index_permuter_f index_permuter)
+        : NoteCCKPRangeFastLED(ledcolors.data, address, colormapper,
+                               index_permuter) {}
+
+    template <class ColorMapper_ = ColorMapper>
+    NoteCCKPRangeFastLED(CRGB *ledcolors, MIDIAddress address,
+                         typename std::enable_if<std::is_default_constructible<
+                             ColorMapper_>::value>::type * = nullptr)
+        : MatchingMIDIInputElement<Type, TwoByteRangeMIDIMatcher>(
+              {address, RangeLen}),
+          ledcolors(ledcolors) {}
+
+    template <class ColorMapper_ = ColorMapper>
+    NoteCCKPRangeFastLED(AH::Array<CRGB, RangeLen> &ledcolors,
+                         MIDIAddress address,
+                         typename std::enable_if<std::is_default_constructible<
+                             ColorMapper_>::value>::type * = nullptr)
+        : NoteCCKPRangeFastLED(ledcolors.data, address) {}
 
     /** 
      * @brief   Set the maximum brightness of the LEDs.
@@ -70,31 +113,41 @@ class NoteCCFastLEDCallback : public SimpleNoteCCValueCallback {
         this->ledIndexPermuter = permuter ? permuter : identityPermuter;
     }
 
-    // Called once upon initialization.
-    void begin(const INoteCCKPValue &input) override { updateAll(input); }
+    void begin() override { resetLEDs(); }
 
-    // Called each time a MIDI message is received and an LED has to be updated.
-    // @param   input
-    //          The NoteCCRange or NoteCCValue object this callback belongs to.
-    //          This is the object that actually receives and stores the MIDI
-    //          values.
-    // @param   index
-    //          The index of the value that changed. (zero-based)
-    void update(const INoteCCKPValue &input, uint8_t index) override {
-        // Get the MIDI value that changed [0, 127]
-        uint8_t value = input.getValue(index);
-        // Apply the color mapper to convert the value to a color
+    void handleUpdate(typename TwoByteRangeMIDIMatcher::Result match) override {
+        updateLED(match.index, match.value);
+    }
+
+    void reset() override { resetLEDs(); }
+
+    void updateLED(uint8_t index, uint8_t value) {
+        // Apply the color mapper to convert the value and index to a color
         CRGB newColor = CRGB(colormapper(value, index));
         // Apply the brightness to the color
         newColor = newColor.nscale8_video(brightness);
         // Map the note index to the LED index
         uint8_t ledIndex = ledIndexPermuter(index);
+        // Check if the color changed
+        dirty |= ledcolors[ledIndex] == newColor;
         // Update the LED color
         ledcolors[ledIndex] = newColor;
     }
 
+    void resetLEDs() {
+        for (uint8_t index = 0; index < RangeLen; ++index)
+            updateLED(index, 0);
+    }
+
+    /// Check if the colors changed since the last time the dirty flag was
+    /// cleared.
+    bool getDirty() const { return dirty; }
+    /// Clear the dirty flag.
+    void clearDirty() { dirty = false; }
+
   private:
     CRGB *ledcolors;
+    bool dirty = true;
     uint8_t brightness = 255;
     index_permuter_f ledIndexPermuter = identityPermuter;
 
@@ -109,8 +162,8 @@ class NoteCCFastLEDCallback : public SimpleNoteCCValueCallback {
 // easier to use.
 //
 // It defines MIDI elements that listen to (a single, a range of)
-// (MIDI Note, MIDI Control Change) message(s) that display the values of
-// these messages using FastLED LEDs or LED strips.
+// (MIDI Note, MIDI Control Change, MIDI Key Pressure) message(s) that display 
+// the values of these messages using FastLED LEDs or LED strips.
 // An optional color mapper can be supplied that defines the mapping from a
 // MIDI value [0, 127] to an RGB color.
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -133,145 +186,28 @@ class NoteCCFastLEDCallback : public SimpleNoteCCValueCallback {
  *          to an RGB color for the LEDs.
  */
 template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
-class NoteRangeFastLED
-    : public GenericNoteCCRange<MIDIInputElementNote, RangeLen,
-                                NoteCCFastLEDCallback<ColorMapper>> {
-  public:
-    /**
-     * @brief Construct a new NoteRangeFastLED object.
-     * 
-     * @param   leds 
-     *          A buffer of CRGB colors, used by the FastLED library. This class
-     *          only writes to the buffer, it's the responsibility of the user
-     *          to actually output this buffer to the LEDs in the main loop, 
-     *          using the FastLED library.
-     * @param   address 
-     *          The first address in the range. The entire range is defined by
-     *          this address and the `RangeLen` template parameter.  
-     *          For example, if `address = 10` and `RangeLen = 4`, the this
-     *          object will listen to addresses 10, 11, 12, 13.
-     * @param   colormapper 
-     *          Optional initialization for the color mapper.
-     */
-    NoteRangeFastLED(Array<CRGB, RangeLen> &leds, MIDIAddress address,
-                     const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementNote, RangeLen,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              address,
-              {leds.data, colormapper},
-          } {}
-
-    /**
-     * @brief Construct a new NoteRangeFastLED object.
-     * 
-     * @param   leds 
-     *          A buffer of CRGB colors, used by the FastLED library. This class
-     *          only writes to the buffer, it's the responsibility of the user
-     *          to actually output this buffer to the LEDs in the main loop, 
-     *          using the FastLED library.
-     * @param   address 
-     *          The first address in the range. The entire range is defined by
-     *          this address and the `RangeLen` template parameter.  
-     *          For example, if `address = 10` and `RangeLen = 4`, the this
-     *          object will listen to addresses 10, 11, 12, 13.
-     * @param   colormapper 
-     *          Optional initialization for the color mapper.
-     */
-    NoteRangeFastLED(CRGB *leds, MIDIAddress address,
-                     const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementNote, RangeLen,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              address,
-              {leds, colormapper},
-          } {}
-
-    /// @copydoc    NoteCCFastLEDCallback::setBrightness
-    void setBrightness(uint8_t brightness) {
-        this->callback.setBrightness(brightness);
-    }
-    /// @copydoc    NoteCCFastLEDCallback::getBrightness
-    uint8_t getBrightness() const { return this->callback.getBrightness(); }
-    /// @copydoc    NoteCCFastLEDCallback::setLEDIndexPermuter
-    void setLEDIndexPermuter(index_permuter_f permuter) {
-        this->callback.setLEDIndexPermuter(permuter);
-    }
-};
+using NoteRangeFastLED =
+    NoteCCKPRangeFastLED<MIDIMessageType::NOTE_ON, RangeLen, ColorMapper>;
 
 template <class ColorMapper = DefaultColorMapper>
-class NoteValueFastLED
-    : public GenericNoteCCRange<MIDIInputElementNote, 1,
-                                NoteCCFastLEDCallback<ColorMapper>> {
-  public:
-    NoteValueFastLED(CRGB &led, MIDIAddress address,
-                     const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementNote, 1,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              address,
-              {&led, colormapper},
-          } {}
-
-    /// @copydoc    NoteCCFastLEDCallback::setBrightness
-    void setBrightness(uint8_t brightness) {
-        this->callback.setBrightness(brightness);
-    }
-    /// @copydoc    NoteCCFastLEDCallback::getBrightness
-    uint8_t getBrightness() const { return this->callback.getBrightness(); }
-};
+using NoteValueFastLED =
+    NoteCCKPRangeFastLED<MIDIMessageType::NOTE_ON, 1, ColorMapper>;
 
 template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
-class CCRangeFastLED
-    : public GenericNoteCCRange<MIDIInputElementCC, RangeLen,
-                                NoteCCFastLEDCallback<ColorMapper>> {
-
-  public:
-    CCRangeFastLED(Array<CRGB, RangeLen> &leds, MIDIAddress address,
-                   const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementCC, RangeLen,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              address,
-              {leds.data, colormapper},
-          } {}
-
-    CCRangeFastLED(CRGB *leds, MIDIAddress address,
-                   const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementCC, RangeLen,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              address,
-              {leds, colormapper},
-          } {}
-
-    /// @copydoc    NoteCCFastLEDCallback::setBrightness
-    void setBrightness(uint8_t brightness) {
-        this->callback.setBrightness(brightness);
-    }
-    /// @copydoc    NoteCCFastLEDCallback::getBrightness
-    uint8_t getBrightness() const { return this->callback.getBrightness(); }
-    /// @copydoc    NoteCCFastLEDCallback::setLEDIndexPermuter
-    void setLEDIndexPermuter(index_permuter_f permuter) {
-        this->callback.setLEDIndexPermuter(permuter);
-    }
-};
+using CCRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::CONTROL_CHANGE,
+                                            RangeLen, ColorMapper>;
 
 template <class ColorMapper = DefaultColorMapper>
-class CCValueFastLED
-    : public GenericNoteCCRange<MIDIInputElementCC, 1,
-                                NoteCCFastLEDCallback<ColorMapper>> {
-  public:
-    CCValueFastLED(CRGB &led, MIDIAddress address,
-                   const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementCC, 1,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              address,
-              {&led, colormapper},
-          } {}
+using CCValueFastLED =
+    NoteCCKPRangeFastLED<MIDIMessageType::CONTROL_CHANGE, 1, ColorMapper>;
 
-    /// @copydoc    NoteCCFastLEDCallback::setBrightness
-    void setBrightness(uint8_t brightness) {
-        this->callback.setBrightness(brightness);
-    }
-    /// @copydoc    NoteCCFastLEDCallback::getBrightness
-    uint8_t getBrightness() const { return this->callback.getBrightness(); }
-};
+template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
+using KPRangeFastLED =
+    NoteCCKPRangeFastLED<MIDIMessageType::KEY_PRESSURE, RangeLen, ColorMapper>;
+
+template <class ColorMapper = DefaultColorMapper>
+using KPValueFastLED =
+    NoteCCKPRangeFastLED<MIDIMessageType::KEY_PRESSURE, 1, ColorMapper>;
 
 /// @}
 
@@ -280,127 +216,29 @@ namespace Bankable {
 /// @addtogroup midi-input-elements-leds
 /// @{
 
-template <uint8_t RangeLen, uint8_t BankSize,
-          class ColorMapper = DefaultColorMapper>
-class NoteRangeFastLED
-    : public GenericNoteCCRange<MIDIInputElementNote, RangeLen, BankSize,
-                                NoteCCFastLEDCallback<ColorMapper>> {
-  public:
-    NoteRangeFastLED(BankConfig<BankSize> config, Array<CRGB, RangeLen> &leds,
-                     MIDIAddress address,
-                     const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementNote, RangeLen, BankSize,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              config,
-              address,
-              {leds.data, colormapper},
-          } {}
+/// @todo   Implement.
+template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
+using NoteRangeFastLED = void;
 
-    NoteRangeFastLED(BankConfig<BankSize> config, CRGB *leds,
-                     MIDIAddress address,
-                     const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementNote, RangeLen, BankSize,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              config,
-              address,
-              {leds, colormapper},
-          } {}
+/// @todo   Implement.
+template <class ColorMapper = DefaultColorMapper>
+using NoteValueFastLED = void;
 
-    /// @copydoc    NoteCCFastLEDCallback::setBrightness
-    void setBrightness(uint8_t brightness) {
-        this->callback.setBrightness(brightness);
-    }
-    /// @copydoc    NoteCCFastLEDCallback::getBrightness
-    uint8_t getBrightness() const { return this->callback.getBrightness(); }
-    /// @copydoc    NoteCCFastLEDCallback::setLEDIndexPermuter
-    void setLEDIndexPermuter(index_permuter_f permuter) {
-        this->callback.setLEDIndexPermuter(permuter);
-    }
-};
+/// @todo   Implement.
+template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
+using CCRangeFastLED = void;
 
-template <uint8_t BankSize, class ColorMapper = DefaultColorMapper>
-class NoteValueFastLED
-    : public GenericNoteCCRange<MIDIInputElementNote, 1, BankSize,
-                                NoteCCFastLEDCallback<ColorMapper>> {
-  public:
-    NoteValueFastLED(BankConfig<BankSize> config, CRGB &led,
-                     MIDIAddress address,
-                     const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementNote, 1, BankSize,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              config,
-              address,
-              {&led, colormapper},
-          } {}
+/// @todo   Implement.
+template <class ColorMapper = DefaultColorMapper>
+using CCValueFastLED = void;
 
-    /// @copydoc    NoteCCFastLEDCallback::setBrightness
-    void setBrightness(uint8_t brightness) {
-        this->callback.setBrightness(brightness);
-    }
-    /// @copydoc    NoteCCFastLEDCallback::getBrightness
-    uint8_t getBrightness() const { return this->callback.getBrightness(); }
-};
+/// @todo   Implement.
+template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
+using KPRangeFastLED = void;
 
-template <uint8_t RangeLen, uint8_t BankSize,
-          class ColorMapper = DefaultColorMapper>
-class CCRangeFastLED
-    : public GenericNoteCCRange<MIDIInputElementCC, RangeLen, BankSize,
-                                NoteCCFastLEDCallback<ColorMapper>> {
-  public:
-    CCRangeFastLED(BankConfig<BankSize> config, Array<CRGB, RangeLen> &leds,
-                   MIDIAddress address,
-                   const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementCC, RangeLen, BankSize,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              config,
-              address,
-              {leds.data, colormapper},
-          } {}
-
-    CCRangeFastLED(BankConfig<BankSize> config, CRGB *leds,
-                   MIDIAddress address,
-                   const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementCC, RangeLen, BankSize,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              config,
-              address,
-              {leds, colormapper},
-          } {}
-
-    /// @copydoc    NoteCCFastLEDCallback::setBrightness
-    void setBrightness(uint8_t brightness) {
-        this->callback.setBrightness(brightness);
-    }
-    /// @copydoc    NoteCCFastLEDCallback::getBrightness
-    uint8_t getBrightness() const { return this->callback.getBrightness(); }
-    /// @copydoc    NoteCCFastLEDCallback::setLEDIndexPermuter
-    void setLEDIndexPermuter(index_permuter_f permuter) {
-        this->callback.setLEDIndexPermuter(permuter);
-    }
-};
-
-template <uint8_t BankSize, class ColorMapper = DefaultColorMapper>
-class CCValueFastLED
-    : public GenericNoteCCRange<MIDIInputElementCC, 1, BankSize,
-                                NoteCCFastLEDCallback<ColorMapper>> {
-  public:
-    CCValueFastLED(BankConfig<BankSize> config, CRGB &led,
-                   MIDIAddress address,
-                   const ColorMapper &colormapper = {})
-        : GenericNoteCCRange<MIDIInputElementCC, 1, BankSize,
-                             NoteCCFastLEDCallback<ColorMapper>>{
-              config,
-              address,
-              {&led, colormapper},
-          } {}
-
-    /// @copydoc    NoteCCFastLEDCallback::setBrightness
-    void setBrightness(uint8_t brightness) {
-        this->callback.setBrightness(brightness);
-    }
-    /// @copydoc    NoteCCFastLEDCallback::getBrightness
-    uint8_t getBrightness() const { return this->callback.getBrightness(); }
-};
+/// @todo   Implement.
+template <class ColorMapper = DefaultColorMapper>
+using KPValueFastLED = void;
 
 /// @}
 

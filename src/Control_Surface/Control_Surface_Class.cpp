@@ -3,11 +3,7 @@
 #include <AH/Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
 #include <AH/Hardware/FilteredAnalog.hpp>
 #include <MIDI_Constants/Control_Change.hpp>
-#include <MIDI_Inputs/MIDIInputElementCC.hpp>
-#include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
-#include <MIDI_Inputs/MIDIInputElementNote.hpp>
-#include <MIDI_Inputs/MIDIInputElementPC.hpp>
-#include <MIDI_Inputs/MIDIInputElementSysEx.hpp>
+#include <MIDI_Inputs/MIDIInputElement.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Selectors/Selector.hpp>
 
@@ -34,10 +30,12 @@ void Control_Surface_::begin() {
     ExtendedIOElement::beginAll();
     Updatable<MIDI_Interface>::beginAll();
     DisplayInterface::beginAll(); // initialize all displays
+    MIDIInputElementNote::beginAll();
+    MIDIInputElementKP::beginAll();
     MIDIInputElementCC::beginAll();
     MIDIInputElementPC::beginAll();
-    MIDIInputElementChannelPressure::beginAll();
-    MIDIInputElementNote::beginAll();
+    MIDIInputElementCP::beginAll();
+    MIDIInputElementPB::beginAll();
     MIDIInputElementSysEx::beginAll();
     Updatable<>::beginAll();
     Updatable<Potentiometer>::beginAll();
@@ -118,9 +116,10 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midichmsg) {
         // Reset All Controllers
         DEBUG(F("Reset All Controllers"));
         MIDIInputElementCC::resetAll();
-        MIDIInputElementChannelPressure::resetAll();
+        MIDIInputElementCP::resetAll();
     } else if (midimsg.type == MIDIMessageType::CONTROL_CHANGE &&
                midimsg.data1 == MIDI_CC::All_Notes_Off) {
+        // All Notes Off
         MIDIInputElementNote::resetAll();
     } else {
         if (midimsg.type == MIDIMessageType::CONTROL_CHANGE) {
@@ -138,7 +137,7 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midichmsg) {
             // Channel Pressure
             DEBUGFN(F("Updating Channel Pressure elements with new "
                       "MIDI message."));
-            MIDIInputElementChannelPressure::updateAllWith(midimsg);
+            MIDIInputElementCP::updateAllWith(midimsg);
         } else if (midimsg.type == MIDIMessageType::PROGRAM_CHANGE) {
             // Channel Pressure
             DEBUGFN(F("Updating Program Change elements with new "
@@ -175,10 +174,12 @@ void Control_Surface_::sinkMIDIfromPipe(RealTimeMessage rtMessage) {
 }
 
 void Control_Surface_::updateInputs() {
-    MIDIInputElementCC::updateAll();
     MIDIInputElementNote::updateAll();
-    MIDIInputElementChannelPressure::updateAll();
+    MIDIInputElementKP::updateAll();
+    MIDIInputElementCC::updateAll();
     MIDIInputElementPC::updateAll();
+    MIDIInputElementCP::updateAll();
+    MIDIInputElementPB::updateAll();
     MIDIInputElementSysEx::updateAll();
 }
 

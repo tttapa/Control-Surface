@@ -93,7 +93,7 @@ TEST(LCD, FillManyBuffersWithOneMIDIMessage) {
     EXPECT_STREQ(lcds[3].getText(), "mnop");
 }
 
-TEST(length, len) {
+TEST(LCDlength, len) {
     auto range = {0, 1, 2, 3, 4, 5, 6, 7};
     for (int a : range) {
         for (int b : range) {
@@ -105,7 +105,7 @@ TEST(length, len) {
                         continue;
                     int l1 = b - a - max(0, c - a) - max(0, b - d);
                     int l2 = d - c - max(0, a - c) - max(0, d - b);
-                    DEBUGVAL(a, b, c, d, l1, l2);
+                    // DEBUGVAL(a, b, c, d, l1, l2);
                     EXPECT_EQ(l1, l2);
                 }
             }

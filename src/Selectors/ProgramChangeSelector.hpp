@@ -1,31 +1,30 @@
 #pragma once
 
-#include <MIDI_Inputs/MIDIInputElementPC.hpp>
+#include <MIDI_Inputs/MIDIInputElement.hpp>
+#include <MIDI_Inputs/MIDIInputElementMatchers.hpp>
 #include <Selectors/Selector.hpp>
 
 BEGIN_CS_NAMESPACE
 
 template <setting_t N, class Callback = EmptySelectorCallback>
-class GenericProgramChangeSelector : public GenericSelector<N, Callback>,
-                                     public MIDIInputElementPC {
+class GenericProgramChangeSelector
+    : public GenericSelector<N, Callback>,
+      public MatchingMIDIInputElement<MIDIMessageType::PROGRAM_CHANGE,
+                                      OneByteMIDIMatcher> {
   public:
     GenericProgramChangeSelector(Selectable<N> &selectable,
                                  const Callback &callback,
-                                 const MIDIChannelCN &address)
+                                 MIDIChannelCN address)
         : GenericSelector<N, Callback>{selectable, callback},
-          MIDIInputElementPC{address} {}
+          MatchingMIDIInputElement<MIDIMessageType::PROGRAM_CHANGE,
+                                   OneByteMIDIMatcher>(address) {}
 
-    void begin() override {
-        MIDIInputElementPC::begin();
-        GenericSelector<N, Callback>::begin();
-    }
+    void begin() override { GenericSelector<N, Callback>::begin(); }
 
     void reset() override { GenericSelector<N, Callback>::reset(); }
 
-    bool updateImpl(const ChannelMessageMatcher &midimsg,
-                    const MIDIAddress &target) override {
-        (void)target;
-        uint8_t program = midimsg.data1;
+    void handleUpdate(OneByteMIDIMatcher::Result match) override {
+        uint8_t program = match.value;
         if (program < N) {
             this->set(program);
         } else {
@@ -34,7 +33,6 @@ class GenericProgramChangeSelector : public GenericSelector<N, Callback>,
                     << F(", which is not smaller than the number of settings (")
                     << N << ')');
         }
-        return true;
     }
 };
 

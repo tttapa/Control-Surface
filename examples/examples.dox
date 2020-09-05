@@ -1094,19 +1094,6 @@
  */
 
 /**
- * @example   "MIDI-Note-Callback-IR.ino"
- * 
- * MIDI-Note-Callback-IR
- * =====================
- *
- * <https://forum.arduino.cc/index.php?topic=653004>
- * 
- * Listen to MIDI notes 0 and 1, and print when Note On events are received.  
- * This was initially intended to send IR remote commands when a note event
- * is received for one of these notes.
- */
-
-/**
  * @example   "Keyboard-Matrix-BCD.ino"
  * 
  * Keyboard-Matrix-BCD
@@ -1699,7 +1686,7 @@
  * An example demonstrating the use of DisplayElement%s to display information
  * from the DAW on two small OLED displays.
  *
- * @boards  Teensy 3.x
+ * @boards  Mega, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -1756,61 +1743,6 @@
  */
 
 /**
- * @example   "MCU-OLED-SSD1306-MEGA.ino"
- * 
- * MCU-OLED-SSD1306-MEGA
- * =====================
- *
- * An example demonstrating the use of DisplayElement%s to display information
- * from the DAW on a small OLED display.
- *
- * @boards  Mega
- * 
- * Connections
- * -----------
- * 
- * - 5:  Push button (to ground)
- * - 6:  Push button (to ground)
- * - 51  OLED Data/D1 (SPI MOSI)
- * - 52: OLED Clock/D0 (SPI SCK)
- * - 49: OLED Data/Command
- * - 53: OLED Cable Select
- * 
- * Add a capacitor between the reset pin of the display and ground, and a 
- * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
- * work fine.  
- * You do need some way to reset the display, without it, it won't work.  
- * Alternatively, you could use an IO pin from the Arduino to reset the 
- * display, but this just "wastes" a pin.
- * 
- * Behavior
- * --------
- * 
- * - The time (bars, beats, fraction), play and record status are shown at the 
- *   top of the display.
- * - For each of the 8 first tracks, a VU level meter with peak indicator and
- *   a V-Pot ring showing the pan are displayed, as well as the the mute, solo 
- *   and record arm status.
- * - Two tracks are displayed at once. By pressing the push buttons connected
- *   to pins 5 and 6, you can cycle through four banks to display all 8 tracks.
- * 
- * Mapping
- * -------
- * 
- * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
- * 
- * @note    There seem to be some differences in the way some applications 
- *          handle VU meters: some expect the hardware to decay automatically,
- *          some don't.  
- *          If you notice that the meters behave strangely, try both 
- *          MCU::VUDecay::Hold and MCU::VUDecay::Default, or try a different 
- *          decay time.
- * 
- * Written by PieterP, 2019-11-12  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
  * @example   "MCU-OLED-SSD1306.ino"
  * 
  * MCU-OLED-SSD1306
@@ -1819,7 +1751,7 @@
  * An example demonstrating the use of DisplayElement%s to display information
  * from the DAW on a small OLED display.
  *
- * @boards  Teensy 3.x
+ * @boards  Mega, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -2025,8 +1957,8 @@
  * Custom-Note-LED-Input-Element-Callback
  * ======================================
  *
- * This example demonstrates how to attach custom callbacks to Note or
- * Control Change MIDI Input Elements.
+ * This example demonstrates how to attach custom actions to incoming Note or
+ * Control Change MIDI events.
  *
  * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x
  *

@@ -153,7 +153,7 @@ MCU::VUDisplay vu_display_R = {display_R, vu_R, {0, 127}, 64, 4, 1, WHITE};
 AudioVU vu_L = {rms_L, MovingCoilBallistics::responsiveVU(1)};
 AudioVU vu_R = {rms_R, MovingCoilBallistics::responsiveVU(1)};
 
-MCU::AnalogVUDisplay vu_display_L = {
+MCU::AnalogVUDisplay<AudioVU> vu_display_L = {
   display_L,       // Display to display on
   vu_L,            // VU meter to display
   {63, 63},        // Location of the needle pivot
@@ -165,7 +165,7 @@ MCU::AnalogVUDisplay vu_display_L = {
 // Note that the y axis points downwards (as is common in computer graphics).
 // This means that a positive angle is clockwise, and -140° lies in the top left
 // quadrant
-MCU::AnalogVUDisplay vu_display_R = {
+MCU::AnalogVUDisplay<AudioVU> vu_display_R = {
   display_R, vu_R, {63, 63}, 63, -140 * PI / 180, 100 * PI / 180, WHITE,
 };
 #endif
@@ -181,9 +181,6 @@ FilteredAnalog<> gainKnob = A1;
 
 void setup() {
   AudioMemory(8);
-  // The default SPI MOSI pin (11) is used for I²S, so we need to use the
-  // alternative MOSI pin (7)
-  SPI.setMOSI(7);
   FilteredAnalog<>::setupADC();
   display_L.begin();
   display_R.begin();
@@ -193,7 +190,7 @@ void setup() {
 // ========================================================================== //
 
 void loop() {
-  const unsigned long frametime = 1000000 / MAX_FPS;
+  const unsigned long frametime = 1'000'000 / MAX_FPS;
   static unsigned long previousFrameTime = micros();
   if (micros() - previousFrameTime >= frametime) {
     previousFrameTime += frametime;

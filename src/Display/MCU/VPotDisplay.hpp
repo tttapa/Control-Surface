@@ -9,14 +9,16 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
+template <class VPot_t>
 class VPotDisplay : public DisplayElement {
 
   public:
-    VPotDisplay(DisplayInterface &display, IVPotRing &vpot, PixelLocation loc,
+    VPotDisplay(DisplayInterface &display, VPot_t &vpot, PixelLocation loc,
                 uint16_t radius, uint16_t innerRadius, uint16_t color)
         : DisplayElement(display), vpot(vpot), x(loc.x + radius),
           y(loc.y + radius), radius(radius), innerRadius(innerRadius),
           color(color) {}
+
     void draw() override {
         display.drawCircle(x, y, radius, color);
         if (vpot.getCenterLed())
@@ -29,13 +31,16 @@ class VPotDisplay : public DisplayElement {
             drawVPotSegment(segment);
     }
 
+    void setAngleSpacing(float spacing) { this->angleSpacing = spacing; }
+    float getAngleSpacing() const { return this->angleSpacing; }
+
   private:
-    IVPotRing &vpot;
+    VPot_t &vpot;
 
     int16_t x, y;
     uint16_t radius, innerRadius, color;
 
-    const static float angleSpacing;
+    float angleSpacing = 0.4887; // 28°
 
   protected:
     void drawVPotSegment(uint8_t segment) {

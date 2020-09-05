@@ -49,6 +49,16 @@ class Cable {
     }
 
     /**
+     * @brief   Check if two cables are the different.
+     * 
+     * @param   rhs
+     *          The other cable to compare this cable to.
+     */
+    constexpr bool operator!=(const Cable &rhs) const {
+        return this->zeroBasedCable != rhs.zeroBasedCable;
+    }
+
+    /**
      * @brief   Add an offset.
      * 
      * @param   rhs

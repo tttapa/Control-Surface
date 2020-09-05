@@ -1,6 +1,6 @@
 /**
- * This example demonstrates how to attach custom callbacks to Note or
- * Control Change MIDI Input Elements.
+ * This example demonstrates how to attach custom actions to incoming Note or
+ * Control Change MIDI events.
  *
  * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x
  *
@@ -34,62 +34,57 @@ USBMIDI_Interface midi;
 
 using namespace MIDI_Notes;
 
-// Callback for Note or CC range or value input that turns on the LED at
-// full brightness if the note or controller value is above the threshold,
+// MIDI Input Element that listens for MIDI Note events that turns on the LED at
+// full brightness if the note value (velocity) is above the threshold,
 // and turns on the LED at a lower brightness if the value is below the
 // threshold.
-class CustomLEDCallback : public SimpleNoteCCValueCallback {
+
+class CustomNoteLED
+  // First, inherit from the MatchingMIDIInputElement base class. Indicate that
+  // you want to listen to MIDI Note events by specifying the MIDI message type,
+  // and use a simple 2-byte message matcher, since MIDI Note events have two
+  // data bytes.
+  : public MatchingMIDIInputElement<MIDIMessageType::NOTE_ON,
+                                    TwoByteMIDIMatcher> {
  public:
   // Constructor
-  CustomLEDCallback(pin_t ledPin, uint8_t lowBrightness)
-    : ledPin(ledPin), lowBrightness(lowBrightness) {}
+  CustomNoteLED(pin_t ledPin, MIDIAddress address, uint8_t lowBrightness)
+    : MatchingMIDIInputElement(address), ledPin(ledPin),
+      lowBrightness(lowBrightness) {}
 
   // Called once upon initialization, set up the pin mode for the LED,
   // and output the initial value.
-  void begin(const INoteCCValue &t) override {
+  void begin() override {
     ExtIO::pinMode(ledPin, OUTPUT);
-    updateAll(t);
+    ExtIO::analogWrite(ledPin, lowBrightness);
   }
 
-  // Called when the value of a note or controller value changes.
-  // A MIDI Input Element can listen to a range of notes or
-  // controllers, that's why the index of the note or controller
-  // that changed is passed as a parameter.
-  // In this example, only a single LED is used, so the index
-  // doesn't really matter, it's used only to get the value of
-  // the note/controller.
-  void update(const INoteCCValue &t, uint8_t index) override {
-    uint8_t value = t.getValue(index);
-    bool state = value > threshold;
-    state ? AH::ExtIO::digitalWrite(ledPin, HIGH)
-          : AH::ExtIO::analogWrite(ledPin, lowBrightness);
+  // Called when an incoming MIDI Note message matches this element's matcher
+  // (i.e. it has the right MIDI address, channel and cable).
+  // The match object that's passed as a parameter contains the velocity value
+  // of the Note message that matched.
+  void handleUpdate(TwoByteMIDIMatcher::Result match) override {
+    if (match.value >= threshold)
+      ExtIO::digitalWrite(ledPin, HIGH);
+    else
+      ExtIO::analogWrite(ledPin, lowBrightness);
   }
 
-  // If you have an action in your custom callback that can be implemented more
-  // efficiently when you need to update all values or outputs, you can override
-  // the `updateAll` method.
-  // It is called upon initialization (see the begin method) and when the bank
-  // of a MIDI Input Element changes.
-  // For example, turning off all LEDs in an LED strip can be done more
-  // efficiently than turning off each LED individually.
+  // Called when the input element is reset (e.g. by an "All notes off" MIDI 
+  // event).
+  void reset() override { ExtIO::analogWrite(ledPin, lowBrightness); }
 
  private:
   pin_t ledPin;
   uint8_t lowBrightness;
-  const static uint8_t threshold = 0x00;
+  const static uint8_t threshold = 0x01;
 };
 
-// Create a type alias fore      the MIDI Note Input Element that uses
-// the custom callback defined above.
-using CustomNoteValueLED =
-  GenericNoteCCRange<MIDIInputElementNote, 1, CustomLEDCallback>;
-
-// Instantiate the LED that will light up when middle C is playing
-CustomNoteValueLED led = {
+// Instantiate the LED that will light up when middle C is playing.
+CustomNoteLED led = {
+  3,                       // Pin with the LED connected (PWM capable)
   {note(C, 4), CHANNEL_1}, // Note C4 on MIDI channel 1
-  {3, 10},                 // CustomLEDCallback constructor
-  //│  └─── intensity when off
-  //└────── pin with the LED connected (PWM capable)
+  10,                      // Intensity when off
 };
 
 void setup() {

@@ -111,18 +111,10 @@ TEST(MCUVPotLEDsBankable, displayOnBankChange) {
     MCU::Bankable::VPotRingLEDs<2> vpot{
         bank, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, track, channel};
 
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(0, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(1, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(4, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(5, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(6, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(7, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(8, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(9, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(10, OUTPUT));
-
+    for (uint8_t i = 0; i <= 10; ++i) {
+        EXPECT_CALL(ArduinoMock::getInstance(), pinMode(i, OUTPUT));
+        EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(i, LOW));
+    }
     MIDIInputElementCC::beginAll();
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 

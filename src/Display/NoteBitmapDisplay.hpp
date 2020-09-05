@@ -2,14 +2,15 @@
 
 #include <Display/Bitmaps/XBitmaps.hpp>
 #include <Display/DisplayElement.hpp>
-#include <MIDI_Inputs/NoteCCRange.hpp>
+#include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
 
 BEGIN_CS_NAMESPACE
 
 /// A class that displays a bitmap depending on the state of a MIDINote.
+template <class NoteValue_t = Interfaces::IValue>
 class NoteBitmapDisplay : public DisplayElement {
   public:
-    NoteBitmapDisplay(DisplayInterface &display, INoteCCKPValue &note,
+    NoteBitmapDisplay(DisplayInterface &display, NoteValue_t &note,
                       const XBitmap &xbm, PixelLocation loc, uint16_t color)
         : DisplayElement(display), note(note), xbm(xbm), x(loc.x), y(loc.y),
           color(color) {}
@@ -20,7 +21,7 @@ class NoteBitmapDisplay : public DisplayElement {
     }
 
   private:
-    INoteCCKPValue &note;
+    NoteValue_t &note;
     const XBitmap &xbm;
     int16_t x, y;
     uint16_t color;
