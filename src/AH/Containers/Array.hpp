@@ -226,6 +226,10 @@ class ArraySlice {
             return Reverse ? rhs.ptr < ptr : ptr < rhs.ptr;
         }
 
+        bool operator<=(Iterator rhs) const {
+            return Reverse ? rhs.ptr <= ptr : ptr <= rhs.ptr;
+        }
+
       private:
         ElementPtrType ptr;
     };
