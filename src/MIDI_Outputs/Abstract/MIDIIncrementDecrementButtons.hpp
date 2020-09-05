@@ -35,10 +35,18 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
     void update() override {
         using IncrDecrButtons = AH::IncrementDecrementButtons;
         switch (buttons.update()) {
-            case IncrDecrButtons::Increment: send(multiplier, address); break;
-            case IncrDecrButtons::Decrement: send(-multiplier, address); break;
-            case IncrDecrButtons::Reset: reset(); break;
             case IncrDecrButtons::Nothing: break;
+            case IncrDecrButtons::IncrementShort: // fallthrough
+            case IncrDecrButtons::IncrementLong:  // fallthrough
+            case IncrDecrButtons::IncrementHold:
+                send(multiplier, address);
+                break;
+            case IncrDecrButtons::DecrementShort: // fallthrough
+            case IncrDecrButtons::DecrementLong:  // fallthrough
+            case IncrDecrButtons::DecrementHold:
+                send(-multiplier, address);
+                break;
+            case IncrDecrButtons::Reset: reset(); break;
             default: break;
         }
     }

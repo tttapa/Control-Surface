@@ -130,13 +130,9 @@ class IncrementSelectorLEDs
     : public GenericIncrementSelector<N, SelectorLEDsCallback<N>> {
   public:
     IncrementSelectorLEDs(Selectable<N> &selectable, const AH::Button &button,
-                          const PinList<N> &ledPins, Wrap wrap = Wrap::Wrap)
+                          const PinList<N> &ledPins)
         : GenericIncrementSelector<N, SelectorLEDsCallback<N>>{
-              selectable,
-              {ledPins},
-              button,
-              wrap,
-          } {}
+              selectable, {ledPins}, button} {}
 };
 
 END_CS_NAMESPACE

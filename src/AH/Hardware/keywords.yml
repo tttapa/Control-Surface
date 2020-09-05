@@ -66,10 +66,16 @@ literal1:
   # IncrementButton.hpp
   - State
   - Nothing
-  - Increment
+  - IncrementShort
+  - IncrementLong
+  - IncrementHold
   # IncrementDecrementButtons.hpp
   - State
   - Nothing
-  - Increment
-  - Decrement
+  - IncrementShort
+  - IncrementLong
+  - IncrementHold
+  - DecrementShort
+  - DecrementLong
+  - DecrementHold
   - Reset

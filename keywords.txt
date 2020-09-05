@@ -65,11 +65,17 @@ NO_PIN	LITERAL1
 PinList	LITERAL1
 State	LITERAL1
 Nothing	LITERAL1
-Increment	LITERAL1
+IncrementShort	LITERAL1
+IncrementLong	LITERAL1
+IncrementHold	LITERAL1
 State	LITERAL1
 Nothing	LITERAL1
-Increment	LITERAL1
-Decrement	LITERAL1
+IncrementShort	LITERAL1
+IncrementLong	LITERAL1
+IncrementHold	LITERAL1
+DecrementShort	LITERAL1
+DecrementLong	LITERAL1
+DecrementHold	LITERAL1
 Reset	LITERAL1
 
 # AH/Hardware/ExtendedInputOutput

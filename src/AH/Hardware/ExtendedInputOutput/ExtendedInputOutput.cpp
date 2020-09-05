@@ -35,7 +35,7 @@ ExtendedIOElement &getIOElementOfPin(pin_t pin) {
 
 void pinMode(pin_t pin, PinMode_t mode) {
     if (pin == NO_PIN)
-        return;
+        return; // LCOV_EXCL_LINE
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::pinMode(pin, mode);
     } else {
@@ -47,7 +47,7 @@ void pinMode(int pin, PinMode_t mode) { pinMode((pin_t)pin, mode); }
 
 void digitalWrite(pin_t pin, PinStatus_t val) {
     if (pin == NO_PIN)
-        return;
+        return; // LCOV_EXCL_LINE
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::digitalWrite(pin, val);
     } else {
@@ -59,7 +59,7 @@ void digitalWrite(int pin, PinStatus_t val) { digitalWrite((pin_t)pin, val); }
 
 int digitalRead(pin_t pin) {
     if (pin == NO_PIN)
-        return 0;
+        return 0; // LCOV_EXCL_LINE
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         return ::digitalRead(pin);
     } else {
@@ -72,7 +72,7 @@ int digitalRead(int pin) { return digitalRead((pin_t)pin); }
 
 analog_t analogRead(pin_t pin) {
     if (pin == NO_PIN)
-        return 0;
+        return 0; // LCOV_EXCL_LINE
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         return ::analogRead(pin);
     } else {
@@ -85,7 +85,7 @@ analog_t analogRead(int pin) { return analogRead((pin_t)pin); }
 
 void analogWrite(pin_t pin, analog_t val) {
     if (pin == NO_PIN)
-        return;
+        return; // LCOV_EXCL_LINE
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
 #ifndef ESP32
         ::analogWrite(pin, val);
@@ -101,7 +101,7 @@ void analogWrite(pin_t pin, int val) { analogWrite(pin, (analog_t)val); }
 
 void pinModeBuffered(pin_t pin, PinMode_t mode) {
     if (pin == NO_PIN)
-        return;
+        return; // LCOV_EXCL_LINE
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::pinMode(pin, mode);
     } else {
@@ -115,7 +115,7 @@ void pinModeBuffered(int pin, PinMode_t mode) {
 
 void digitalWriteBuffered(pin_t pin, PinStatus_t val) {
     if (pin == NO_PIN)
-        return;
+        return; // LCOV_EXCL_LINE
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         ::digitalWrite(pin, val);
     } else {
@@ -129,7 +129,7 @@ void digitalWriteBuffered(int pin, PinStatus_t val) {
 
 int digitalReadBuffered(pin_t pin) {
     if (pin == NO_PIN)
-        return 0;
+        return 0; // LCOV_EXCL_LINE
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         return ::digitalRead(pin);
     } else {
@@ -142,7 +142,7 @@ int digitalReadBuffered(int pin) { return digitalReadBuffered((pin_t)pin); }
 
 analog_t analogReadBuffered(pin_t pin) {
     if (pin == NO_PIN)
-        return 0;
+        return 0; // LCOV_EXCL_LINE
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
         return ::analogRead(pin);
     } else {
@@ -155,7 +155,7 @@ analog_t analogReadBuffered(int pin) { return analogReadBuffered((pin_t)pin); }
 
 void analogWriteBuffered(pin_t pin, analog_t val) {
     if (pin == NO_PIN)
-        return;
+        return; // LCOV_EXCL_LINE
     else if (pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS) {
 #ifndef ESP32
         ::analogWrite(pin, val);
