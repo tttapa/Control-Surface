@@ -82,6 +82,63 @@ TEST(MCUTimeDisplay, getTextLengthTooBig) {
     EXPECT_STREQ(text, "         B");
 }
 
+TEST(MCUTimeDisplay, reset) {
+    constexpr Channel channel = CHANNEL_2;
+    MCU::TimeDisplay tdisp(channel);
+    ChannelMessageMatcher midimsgs[] = {
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, '1'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 8, '2'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 7, '3'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 6, '4'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 5, '5'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 4, '6'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 3, '7'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 2, '8'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 1, '9'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 0, '0'},
+    };
+    for (auto &midimsg : midimsgs)
+        tdisp.updateWith(midimsg);
+    char text[11];
+    tdisp.getText(text);
+    EXPECT_STREQ(text, "1234567890");
+    MIDIInputElementCC::resetAll();
+    tdisp.getText(text);
+    EXPECT_STREQ(text, "1234567890");
+    tdisp.ignoreReset = false;
+    MIDIInputElementCC::resetAll();
+    tdisp.getText(text);
+    EXPECT_STREQ(text, "          ");
+}
+
+TEST(MCUTimeDisplay, printTo) {
+    constexpr Channel channel = CHANNEL_2;
+    MCU::TimeDisplay tdisp(channel);
+    tdisp.ignoreReset = false;
+    ChannelMessageMatcher midimsgs[] = {
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, '1' | 0x40},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 8, '2' | 0x40},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 7, '3'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 6, '4' | 0x40},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 5, '5'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 4, '6'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 3, '7' | 0x40},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 2, '8'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 1, '9'},
+        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 0, '0' | 0x40},
+    };
+    for (auto &midimsg : midimsgs)
+        tdisp.updateWith(midimsg);
+
+    struct TestPrinter : Print {
+        size_t write(uint8_t c) override { return buffer += c, 1; }
+        std::string buffer;
+    } printer;
+
+    printer.print(tdisp);
+    EXPECT_EQ(printer.buffer, "1.2.34.567.890.");
+}
+
 TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames1Digit) {
     constexpr Channel channel = CHANNEL_2;
     MCU::TimeDisplay tdisp(channel);

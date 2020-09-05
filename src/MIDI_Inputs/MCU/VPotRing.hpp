@@ -102,6 +102,8 @@ struct VPotState {
  * - `vvvv` is the VPot value [0, 11]
  * 
  * The display modes are defined in @ref MCU::VPotState::Mode.
+ * 
+ * @ingroup    MIDIInputMatchers
  */
 struct VPotMatcher : public TwoByteMIDIMatcher {
     /**
@@ -109,31 +111,37 @@ struct VPotMatcher : public TwoByteMIDIMatcher {
      * 
      * @param   track
      *          The track of the VPot [1, 8].
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
+     *          [CABLE_1, CABLE_16].
      */
-    VPotMatcher(uint8_t track, MIDIChannelCN channel)
-        : TwoByteMIDIMatcher({track + 0x30 - 1, channel}) {}
+    VPotMatcher(uint8_t track, MIDIChannelCN channelCN)
+        : TwoByteMIDIMatcher({track + 0x30 - 1, channelCN}) {}
 };
-
-namespace Bankable {
 
 /// MIDI Input matcher for Mackie Control Universal VPot LED rings with bank
 /// support.
 /// @see    @ref MCU::VPotMatcher
+/// @ingroup    MIDIInputMatchers
 template <uint8_t BankSize>
-struct VPotMatcher : public BankableTwoByteMIDIMatcher<BankSize> {
+struct BankableVPotMatcher : public BankableTwoByteMIDIMatcher<BankSize> {
     /**
      * @brief   Constructor.
      * 
+     * @param   config
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
      * @param   track
      *          The track of the VPot [1, 8].
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
+     *          [CABLE_1, CABLE_16].
      */
-    VPotMatcher(BankConfig<BankSize> config, uint8_t track,
-                MIDIChannelCN channel)
+    BankableVPotMatcher(BankConfig<BankSize> config, uint8_t track,
+                        MIDIChannelCN channelCN)
         : BankableTwoByteMIDIMatcher<BankSize>(config,
-                                               {track + 0x30 - 1, channel}) {}
+                                               {track + 0x30 - 1, channelCN}) {}
 };
-
-} // namespace Bankable
 
 // -------------------------------------------------------------------------- //
 
@@ -152,14 +160,14 @@ class VPotRing
      * @brief   Constructor.
      * 
      * @param   track
-     *          The track of the VPot. [1, 8]
+     *          The track of the VPot [1, 8].
      * @param   channelCN
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
-     *          Number [CABLE_1, CABLE_16].
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
+     *          [CABLE_1, CABLE_16].
      */
-    VPotRing(uint8_t track, MIDIChannelCN channel = CHANNEL_1)
+    VPotRing(uint8_t track, MIDIChannelCN channelCN = CHANNEL_1)
         : MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
-                                   VPotMatcher>({track, channel}) {}
+                                   VPotMatcher>({track, channelCN}) {}
 
   protected:
     void handleUpdate(VPotMatcher::Result match) override {
@@ -221,28 +229,30 @@ namespace Bankable {
 template <uint8_t BankSize>
 class VPotRing
     : public BankableMatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
-                                              VPotMatcher<BankSize>>,
+                                              BankableVPotMatcher<BankSize>>,
       public Interfaces::MCU::IVPot {
   public:
     /**
      * @brief   Constructor.
      * 
      * @param   config
-     *          The bank configuration to use.
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
      * @param   track
-     *          The track of the VPot. [1, 8]
+     *          The track of the VPot [1, 8].
      * @param   channelCN
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
-     *          Number [CABLE_1, CABLE_16].
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
+     *          [CABLE_1, CABLE_16].
      */
     VPotRing(BankConfig<BankSize> config, uint8_t track,
-             MIDIChannelCN channel = CHANNEL_1)
+             MIDIChannelCN channelCN = CHANNEL_1)
         : BankableMatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
-                                           VPotMatcher<BankSize>>(
-              {config, track, channel}) {}
+                                           BankableVPotMatcher<BankSize>>(
+              {config, track, channelCN}) {}
 
   protected:
-    void handleUpdate(typename VPotMatcher<BankSize>::Result match) override {
+    void handleUpdate(
+        typename BankableVPotMatcher<BankSize>::Result match) override {
         dirty |= states[match.bankIndex].update(match.value) &&
                  match.bankIndex == this->getActiveBank();
         // Only mark dirty if the value of the active bank changed

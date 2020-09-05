@@ -253,7 +253,7 @@ void loop() {
 
 Unlike the MIDI Controller library, the Control Surface library does support
 MIDI input.  
-This example shows how to use the `NoteValueLED` class to turn on and off LEDs
+This example shows how to use the `NoteLED` class to turn on and off LEDs
 when MIDI Note On/Off messages are received.  
 The example shows the use of a shift register to drive the LEDs, but you can of
 course use any pins you want.
@@ -324,8 +324,8 @@ I'll refer to the overview of @ref MIDIInputElements.
 
 Let's define a single LED on pin `13` that listens for MIDI Note events for
 a middle C on channel 1.  
-In the @ref NoteValueLED "documentation",
-you'll find that the first argument for the `NoteValueLED` constructor is the 
+In the @ref NoteLED "documentation",
+you'll find that the first argument for the `NoteLED` constructor is the 
 number of the pin with the LED connected, and the second is the MIDI address.  
 The MIDI address is a structure that consists of an address number, 
 the MIDI channel, and the cable number.  
@@ -340,7 +340,7 @@ or you can just use a number.
 
 ```cpp
 using namespace MIDI_Notes;
-NoteValueLED noteLed = { 13, {note(C, 4), CHANNEL_1} };  // C4 = middle C
+NoteLED noteLed = { 13, {note(C, 4), CHANNEL_1} };  // C4 = middle C
 ```
 
 In our case, we don't want a single LED, we want eight. It's much easier to 
@@ -352,7 +352,7 @@ default channel, `CHANNEL_1`.
 > **Note**: The first pin is `pin(0)`, not `pin(1)`.
 
 ```cpp
-NoteValueLED leds[] = {
+NoteLED leds[] = {
   {sreg.pin(0), note(C, 4)},
   {sreg.pin(1), note(D, 4)},
   {sreg.pin(2), note(E, 4)},
@@ -407,7 +407,7 @@ using namespace MIDI_Notes;
 
 // Create an array of LEDs that listen to MIDI Note messages, turning on and off
 // the LEDs connected to the eight output pins of the shift register
-NoteValueLED leds[] = {
+NoteLED leds[] = {
   {sreg.pin(0), note(C, 4)}, // LED pin, address (note number, channel, cable)
   {sreg.pin(1), note(D, 4)}, //
   {sreg.pin(2), note(E, 4)}, //

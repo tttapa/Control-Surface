@@ -42,18 +42,47 @@ class VULEDsDriver : public AH::DotBarDisplayLEDs<NumLEDs> {
 template <uint8_t NumLEDs>
 class VULEDs : public VU, public VULEDsDriver<NumLEDs> {
   public:
-    /// Constructor.
-    ///
-    /// @param  track
-    ///         The track to listen for [1, 8].
-    VULEDs(const PinList<NumLEDs> &leds, uint8_t track, MIDIChannelCN channel,
+    /** 
+     * Constructor.
+     * 
+     * @param   leds
+     *          The pins with the LEDs connected.
+     * @param   track
+     *          The track of the VU meter. [1, 8]
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+     *          Number [CABLE_1, CABLE_16].
+     * @param   decayTime
+     *          The time in milliseconds it takes for the value to decay one
+     *          step.  
+     *          The MCU protocol uses 300 ms per division, and two steps
+     *          per division, so the default is 150 ms per step.  
+     *          Some software doesn't work if the VU meter decays automatically, 
+     *          in that case, you can set the decay time to zero to disable 
+     *          the decay.
+     *          @see    @ref MCU::VUDecay
+     */
+    VULEDs(const PinList<NumLEDs> &leds, uint8_t track, MIDIChannelCN channelCN,
            unsigned int decayTime = VUDecay::Default)
-        : VU(track, channel, decayTime), VULEDsDriver<NumLEDs>(leds) {}
+        : VU(track, channelCN, decayTime), VULEDsDriver<NumLEDs>(leds) {}
 
-    /// Constructor.
-    ///
-    /// @param  track
-    ///         The track to listen for [1, 8].
+    /** 
+     * Constructor.
+     * 
+     * @param   leds
+     *          The pins with the LEDs connected.
+     * @param   track
+     *          The track of the VU meter. [1, 8]
+     * @param   decayTime
+     *          The time in milliseconds it takes for the value to decay one
+     *          step.  
+     *          The MCU protocol uses 300 ms per division, and two steps
+     *          per division, so the default is 150 ms per step.  
+     *          Some software doesn't work if the VU meter decays automatically, 
+     *          in that case, you can set the decay time to zero to disable 
+     *          the decay.
+     *          @see    @ref MCU::VUDecay
+     */
     VULEDs(const PinList<NumLEDs> &leds, uint8_t track,
            unsigned int decayTime = VUDecay::Default)
         : VU(track, decayTime), VULEDsDriver<NumLEDs>(leds) {}
@@ -113,32 +142,60 @@ namespace Bankable {
 template <uint8_t BankSize, uint8_t NumLEDs>
 class VULEDs : public VU<BankSize>, public VULEDsDriver<NumLEDs> {
   public:
-    /// Constructor.
-    ///
-    /// @param  config
-    ///         The bank configuration to use.
-    /// @param  track
-    ///         The track to listen for [1, 8].
-    /// @param  channel
-    ///         The MIDI channel and cable.
+    /** 
+     * Constructor.
+     * 
+     * @param   config
+     *          The bank configuration to use.
+     * @param   leds
+     *          The pins with the LEDs connected.
+     * @param   track
+     *          The track of the VU meter. [1, 8]
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+     *          Number [CABLE_1, CABLE_16].
+     * @param   decayTime
+     *          The time in milliseconds it takes for the value to decay one
+     *          step.  
+     *          The MCU protocol uses 300 ms per division, and two steps
+     *          per division, so the default is 150 ms per step.  
+     *          Some software doesn't work if the VU meter decays automatically, 
+     *          in that case, you can set the decay time to zero to disable 
+     *          the decay.
+     *          @see    @ref MCU::VUDecay
+     */
     VULEDs(BankConfig<BankSize> config, const PinList<NumLEDs> &leds,
-           uint8_t track, MIDIChannelCN channel,
+           uint8_t track, MIDIChannelCN channelCN,
            unsigned int decayTime = VUDecay::Default)
-        : VU<BankSize>(config, track, channel, decayTime),
+        : VU<BankSize>(config, track, channelCN, decayTime),
           VULEDsDriver<NumLEDs>(leds) {}
 
-    /// Constructor.
-    ///
-    /// @param  config
-    ///         The bank configuration to use.
-    /// @param  track
-    ///         The track to listen for [1, 8].
+    /** 
+     * Constructor.
+     * 
+     * @param   config
+     *          The bank configuration to use.
+     * @param   leds
+     *          The pins with the LEDs connected.
+     * @param   track
+     *          The track of the VU meter. [1, 8]
+     * @param   decayTime
+     *          The time in milliseconds it takes for the value to decay one
+     *          step.  
+     *          The MCU protocol uses 300 ms per division, and two steps
+     *          per division, so the default is 150 ms per step.  
+     *          Some software doesn't work if the VU meter decays automatically, 
+     *          in that case, you can set the decay time to zero to disable 
+     *          the decay.
+     *          @see    @ref MCU::VUDecay
+     */
     VULEDs(BankConfig<BankSize> config, const PinList<NumLEDs> &leds,
            uint8_t track, unsigned int decayTime = VUDecay::Default)
         : VU<BankSize>(config, track, decayTime), VULEDsDriver<NumLEDs>(leds) {}
 
   protected:
-    void handleUpdate(typename VUMatcher<BankSize>::Result match) override {
+    void
+    handleUpdate(typename BankableVUMatcher<BankSize>::Result match) override {
         VU<BankSize>::handleUpdate(match);
         updateDisplay();
     }

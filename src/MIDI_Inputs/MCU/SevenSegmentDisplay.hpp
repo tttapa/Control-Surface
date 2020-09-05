@@ -31,10 +31,10 @@ class SevenSegmentDisplay
     }
 
     void reset() override {
-#ifdef SEVENSEG_RESET
-        fillWithSpaces();
-        dirty = true;
-#endif
+        if (!ignoreReset) {
+            fillWithSpaces();
+            dirty = true;
+        }
     }
 
   protected:
@@ -136,6 +136,12 @@ class SevenSegmentDisplay
   private:
     AH::Array<char, LENGTH> text;
     bool dirty = true;
+
+  public:
+    /// Don't reset the state when calling the `reset` method. This is the
+    /// default, because in the original MCU, displays don't get reset when a
+    /// Reset All Controllers message is received.
+    bool ignoreReset = true;
 };
 
 } // namespace MCU

@@ -37,4 +37,9 @@ struct ChannelMessageMatcher {
     MIDIChannelCN getChannelCN() const { return {channel, cable}; }
 };
 
+inline bool operator==(ChannelMessageMatcher a, ChannelMessageMatcher b) {
+    return a.type == b.type && a.channel == b.channel && a.data1 == b.data1 &&
+           a.data2 == b.data2 && a.cable == b.cable;
+}
+
 END_CS_NAMESPACE

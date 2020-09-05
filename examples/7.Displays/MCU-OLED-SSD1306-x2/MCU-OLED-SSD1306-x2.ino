@@ -8,7 +8,7 @@
  * -----------
  * 
  * - 5:  Push button (to ground)
- * - 7:  OLED Data/D1 (SPI MOSI)
+ * - 11: OLED Data/D1 (SPI MOSI)
  * - 13: OLED Clock/D0 (SPI SCK)
  * - 17: OLED Data/Command
  * - 10: Left OLED Cable Select

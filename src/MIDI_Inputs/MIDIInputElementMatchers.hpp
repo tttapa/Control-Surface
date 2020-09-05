@@ -5,6 +5,9 @@
 
 BEGIN_CS_NAMESPACE
 
+/// @addtogroup MIDIInputMatchers
+/// @{
+
 // -------------------------------------------------------------------------- //
 
 /// Matcher for MIDI messages with 1 data byte, such as Channel Pressure
@@ -74,6 +77,46 @@ struct TwoByteRangeMIDIMatcher {
 
     MIDIAddress address;
     uint8_t length;
+};
+
+// -------------------------------------------------------------------------- //
+
+/// Matcher for MIDI messages with 1 data byte, such as Channel Pressure
+/// and Program Change. Matches a single address over multiple banks.
+template <uint8_t BankSize>
+struct BankableOneByteMIDIMatcher {
+    BankableOneByteMIDIMatcher(
+        BankConfig<BankSize, BankType::CHANGE_CHANNEL> config,
+        MIDIChannelCN address)
+        : config(config), address(address) {}
+
+    struct Result {
+        bool match;
+        uint8_t value;
+        uint8_t bankIndex;
+    };
+
+    Result operator()(ChannelMessageMatcher m) {
+        using BankableMIDIMatcherHelpers::getBankIndex;
+        using BankableMIDIMatcherHelpers::matchBankable;
+        if (!matchBankable(m.getChannelCN(), address, config))
+            return {false, 0, 0};
+        uint8_t value = m.data1;
+        uint8_t bankIndex = getBankIndex(m.getChannelCN(), address, config);
+        return {true, value, bankIndex};
+    }
+
+    Bank<BankSize> &getBank() { return config.bank; }
+    const Bank<BankSize> &getBank() const { return config.bank; }
+    BankType getBankType() const { return config.type; }
+    static constexpr setting_t getBankSize() { return BankSize; }
+
+    /// Get the current bank setting.
+    /// @see    @ref Bank<N>::getSelection()
+    setting_t getSelection() const { return getBank().getSelection(); }
+
+    BaseBankConfig<BankSize> config;
+    MIDIChannelCN address;
 };
 
 // -------------------------------------------------------------------------- //
@@ -181,8 +224,6 @@ struct BankableTwoByteRangeMIDIMatcher {
      *          The address to check.
      * @param   base
      *          The base address (the address of bank setting 0).
-     * @param   length
-     *          The length of the range.
      */
     bool matchBankableAddressInRange(MIDIAddress toMatch,
                                      MIDIAddress base) const {
@@ -246,5 +287,7 @@ struct BankableTwoByteRangeMIDIMatcher {
 };
 
 // -------------------------------------------------------------------------- //
+
+/// @}
 
 END_CS_NAMESPACE

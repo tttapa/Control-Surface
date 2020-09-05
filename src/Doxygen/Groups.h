@@ -48,6 +48,12 @@
  */
 
 /**
+ * @ingroup MIDIInputElements
+ * @defgroup    MIDIInputMatchers    MIDI Input Matchers
+ * @brief   Classes for matching incoming MIDI messages.
+ */
+
+/**
  * @ingroup midi-input-elements-leds
  * @defgroup    BankableMIDIInputElementsLEDs Bankable MIDI Input Elements LEDs
  * @brief   All Bankable MIDIInputElements that visualize their state using 

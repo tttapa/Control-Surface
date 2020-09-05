@@ -32,13 +32,13 @@ class MIDIInputElement
                                   SysExMessage, ChannelMessageMatcher>::type;
 
     /// Initialize the input element.
-    virtual void begin() {}
+    virtual void begin() {} // LCOV_EXCL_LINE
 
     /// Reset the input element to its initial state.
-    virtual void reset() {}
+    virtual void reset() {} // LCOV_EXCL_LINE
 
     /// Update the value of the input element. Used for decaying VU meters etc.
-    virtual void update() {}
+    virtual void update() {} // LCOV_EXCL_LINE
 
     /// Receive a new MIDI message and update the internal state.
     virtual bool updateWith(MessageMatcherType midimsg) = 0;

@@ -26,13 +26,20 @@ class VPotRingLEDsDriver : public AH::LEDs<11> {
  */
 class VPotRingLEDs : public VPotRing, public VPotRingLEDsDriver {
   public:
-    /// Constructor.
-    ///
-    /// @param  track
-    ///         The track to listen for [1, 8].
+    /** 
+     * Constructor.
+     * 
+     * @param   leds
+     *          The pins with LEDs connected.
+     * @param   track
+     *          The track of the VPot. [1, 8]
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+     *          Number [CABLE_1, CABLE_16].
+     */
     VPotRingLEDs(const PinList<11> &leds, uint8_t track,
-                 MIDIChannelCN channel = CHANNEL_1)
-        : VPotRing(track, channel), VPotRingLEDsDriver(leds) {}
+                 MIDIChannelCN channelCN = CHANNEL_1)
+        : VPotRing(track, channelCN), VPotRingLEDsDriver(leds) {}
 
   protected:
     void handleUpdate(VPotMatcher::Result match) override {
@@ -79,17 +86,28 @@ namespace Bankable {
 template <uint8_t BankSize>
 class VPotRingLEDs : public VPotRing<BankSize>, public VPotRingLEDsDriver {
   public:
-    /// Constructor.
-    ///
-    /// @param  track
-    ///         The track to listen for [1, 8].
+    /** 
+     * Constructor.
+     * 
+     * @param   config
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
+     * @param   leds
+     *          The pins with LEDs connected.
+     * @param   track
+     *          The track of the VPot. [1, 8]
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+     *          Number [CABLE_1, CABLE_16].
+     */
     VPotRingLEDs(BankConfig<BankSize> config, const PinList<11> &leds,
-                 uint8_t track, MIDIChannelCN channel = CHANNEL_1)
-        : VPotRing<BankSize>(config, track, channel), VPotRingLEDsDriver(leds) {
-    }
+                 uint8_t track, MIDIChannelCN channelCN = CHANNEL_1)
+        : VPotRing<BankSize>(config, track, channelCN),
+          VPotRingLEDsDriver(leds) {}
 
   protected:
-    void handleUpdate(typename VPotMatcher<BankSize>::Result match) override {
+    void handleUpdate(
+        typename BankableVPotMatcher<BankSize>::Result match) override {
         VPotRing<BankSize>::handleUpdate(match);
         updateDisplay();
     }

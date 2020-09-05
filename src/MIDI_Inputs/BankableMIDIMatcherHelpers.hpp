@@ -29,7 +29,7 @@ uint8_t getBankIndex(MIDIAddress target, MIDIAddress base,
             return (target.getRawChannel() - base.getRawChannel()) / nt;
         case BankType::CHANGE_CABLENB:
             return (target.getRawCableNumber() - base.getRawCableNumber()) / nt;
-        default: return 0;
+        default: return 0; // LCOV_EXCL_LINE
     }
 }
 
@@ -55,6 +55,8 @@ uint8_t getBankIndex(MIDIAddress target, MIDIAddress base,
  *          The address to check.
  * @param   base
  *          The base address (the address of bank setting 0).
+ * @param   bank
+ *          The bank to match the address in.
  * 
  * @note    Equivalent to `matchBankableInRange(toMatch, base, 1)`.
  */
@@ -67,14 +69,16 @@ bool matchBankable(uint8_t toMatch, uint8_t base, const Bank<BankSize> &bank) {
 }
 
 /**
-     * @brief   Check whether a given address is part of the bank relative to
-     *          the base address.
-     * 
-     * @param   toMatch 
-     *          The address to check.
-     * @param   base
-     *          The base address (the address of bank setting 0).
-     */
+ * @brief   Check whether a given address is part of the bank relative to
+ *          the base address.
+ * 
+ * @param   toMatch 
+ *          The address to check.
+ * @param   base
+ *          The base address (the address of bank setting 0).
+ * @param   config
+ *          The bank configuration.
+ */
 template <uint8_t BankSize>
 bool matchBankable(MIDIAddress toMatch, MIDIAddress base,
                    BaseBankConfig<BankSize> config) {
@@ -99,7 +103,7 @@ bool matchBankable(MIDIAddress toMatch, MIDIAddress base,
                    matchBankable(toMatch.getRawCableNumber(),
                                  base.getRawCableNumber(), config.bank);
         }
-        default: return false;
+        default: return false; // LCOV_EXCL_LINE
     }
 }
 

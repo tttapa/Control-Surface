@@ -153,7 +153,7 @@ TEST(MCUVU, reset) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(0));
     MIDIInputElementCP::updateAllWith(midimsg);
     EXPECT_EQ(vu.getValue(), 0xA);
-    vu.reset();
+    MIDIInputElementCP::resetAll();
     EXPECT_EQ(vu.getValue(), 0x0);
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());

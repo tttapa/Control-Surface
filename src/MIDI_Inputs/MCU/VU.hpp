@@ -101,6 +101,8 @@ struct VUState {
  * 100%.  
  * `0xD` is an invalid value.  
  * `0xE` sets the overload indicator, and `0xF` clears the overload indicator.
+ * 
+ * @ingroup    MIDIInputMatchers
  */
 struct VUMatcher {
     /// Constructor.
@@ -124,14 +126,13 @@ struct VUMatcher {
     MIDIAddress address; ///< MIDI address to compare incoming messages with.
 };
 
-namespace Bankable {
-
 /// MIDI Input matcher for Mackie Control Universal VU meters with bank support.
 /// @see    @ref MCU::VUMatcher
+/// @ingroup    MIDIInputMatchers
 template <uint8_t BankSize>
-struct VUMatcher {
+struct BankableVUMatcher {
     /// Constructor.
-    VUMatcher(BankConfig<BankSize> config, MIDIAddress address)
+    BankableVUMatcher(BankConfig<BankSize> config, MIDIAddress address)
         : config(config), address(address) {}
 
     /// Output data of the matcher/parser.
@@ -168,8 +169,6 @@ struct VUMatcher {
     MIDIAddress address; ///< MIDI address to compare incoming messages with.
 };
 
-} // namespace Bankable
-
 // -------------------------------------------------------------------------- //
 
 /// VU Decay time constants.
@@ -196,7 +195,7 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
      * @param   track
      *          The track of the VU meter. [1, 8]
      * @param   channelCN
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
      *          Number [CABLE_1, CABLE_16].
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
@@ -208,10 +207,10 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
      *          the decay.
      *          @see    @ref MCU::VUDecay
      */
-    VU(uint8_t track, MIDIChannelCN channel,
+    VU(uint8_t track, MIDIChannelCN channelCN,
        unsigned int decayTime = VUDecay::Default)
         : MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
-                                   VUMatcher>({{track - 1, channel}}),
+                                   VUMatcher>({{track - 1, channelCN}}),
           IVU(12), decayTimer(decayTime) {}
 
     /**
@@ -262,9 +261,6 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
     /// Get the status of the overload indicator.
     bool getOverload() override { return state.overload; }
 
-    /// Get the most recent VU position as a value between 0 and 1.
-    float getFloatValue() override { return getValue() / 12.f; }
-
     /// @}
 
   private:
@@ -288,7 +284,7 @@ namespace Bankable {
 template <uint8_t BankSize>
 class VU
     : public BankableMatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
-                                              VUMatcher<BankSize>>,
+                                              BankableVUMatcher<BankSize>>,
       public Interfaces::MCU::IVU {
   public:
     /**
@@ -299,7 +295,7 @@ class VU
      * @param   track
      *          The track of the VU meter. [1, 8]
      * @param   channelCN
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
      *          Number [CABLE_1, CABLE_16].
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
@@ -311,11 +307,11 @@ class VU
      *          the decay.
      *          @see    @ref MCU::VUDecay
      */
-    VU(BankConfig<BankSize> config, uint8_t track, MIDIChannelCN channel,
+    VU(BankConfig<BankSize> config, uint8_t track, MIDIChannelCN channelCN,
        unsigned int decayTime = VUDecay::Default)
         : BankableMatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
-                                           VUMatcher<BankSize>>(
-              {config, {track - 1, channel}}),
+                                           BankableVUMatcher<BankSize>>(
+              {config, {track - 1, channelCN}}),
           IVU(12), decayTimer(decayTime) {}
 
     /**
@@ -340,7 +336,8 @@ class VU
         : VU(config, track, CHANNEL_1, decayTime) {}
 
   protected:
-    void handleUpdate(typename VUMatcher<BankSize>::Result match) override {
+    void
+    handleUpdate(typename BankableVUMatcher<BankSize>::Result match) override {
         auto changed = states[match.bankIndex].update(match.data);
         if (changed) {
             if (changed == VUState::ValueChanged &&
