@@ -3,11 +3,6 @@ add_subdirectory(AH)
 if (FAST_COMPILE)
     set(CONTROL_SURFACE_SOURCES
         Def/MIDIAddress.cpp
-        MIDI_Inputs/MIDIInputElementCC.cpp
-        MIDI_Inputs/MIDIInputElementNote.cpp
-        MIDI_Inputs/MIDIInputElementChannelPressure.cpp
-        MIDI_Inputs/MIDIInputElementSysEx.cpp
-        MIDI_Inputs/MIDIInputElementPC.cpp
         MIDI_Inputs/MCU/LCD.cpp
         MIDI_Interfaces/MIDI_Pipes.cpp
         MIDI_Constants/MCUNameFromNoteNumber.cpp
@@ -18,7 +13,6 @@ if (FAST_COMPILE)
         MIDI_Senders/RelativeCCSender.cpp
         Banks/BankAddresses.cpp
         MIDI_Parsers/USBMIDI_Parser.cpp
-        MIDI_Parsers/MIDI_Parser.cpp
         MIDI_Parsers/SerialMIDI_Parser.cpp
         MIDI_Parsers/SysExBuffer.cpp
         MIDI_Interfaces/MIDI_Interface.cpp
