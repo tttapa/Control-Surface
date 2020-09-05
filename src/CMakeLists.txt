@@ -18,7 +18,6 @@ if (FAST_COMPILE)
         MIDI_Senders/RelativeCCSender.cpp
         Banks/BankAddresses.cpp
         MIDI_Parsers/USBMIDI_Parser.cpp
-        MIDI_Parsers/MIDI_Parser.cpp
         MIDI_Parsers/SerialMIDI_Parser.cpp
         MIDI_Parsers/SysExBuffer.cpp
         MIDI_Interfaces/MIDI_Interface.cpp
