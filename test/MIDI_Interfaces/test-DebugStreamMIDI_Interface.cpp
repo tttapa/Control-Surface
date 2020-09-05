@@ -83,6 +83,17 @@ TEST(StreamDebugMIDI_Interface, SysExSend8B) {
     EXPECT_EQ(sentStr, expected);
 }
 
+TEST(StreamDebugMIDI_Interface, RealTimeSend) {
+    TestStream stream;
+    StreamDebugMIDI_Interface midi = stream;
+    Sequence seq;
+    midi.send({0xF8, CABLE_10});
+    std::string expected =
+        "Real-Time: 0xF8\tCable: 10\r\n";
+    std::string sentStr(stream.sent.begin(), stream.sent.end());
+    EXPECT_EQ(sentStr, expected);
+}
+
 TEST(StreamDebugMIDI_Interface, SysExSend0B) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;

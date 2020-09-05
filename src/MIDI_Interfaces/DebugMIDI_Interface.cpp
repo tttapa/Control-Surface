@@ -109,8 +109,8 @@ void StreamDebugMIDI_Interface::sendImpl(const uint8_t *data, size_t length,
 }
 
 void StreamDebugMIDI_Interface::sendImpl(uint8_t rt, uint8_t cn) {
-    stream << F("Real-Time: 0x") << hex << rt << dec << F("\tCable: ") << cn
-           << endl;
+    stream << F("Real-Time: 0x") << hex << uppercase << rt << dec
+           << F("\tCable: ") << (cn + 1) << endl;
     stream.flush();
 }
 
