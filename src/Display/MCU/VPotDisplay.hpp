@@ -29,7 +29,10 @@ class VPotDisplay : public DisplayElement {
         uint8_t startOff = vpot.getStartOff();
         for (uint8_t segment = startOn; segment < startOff; segment++)
             drawVPotSegment(segment);
+        vpot.clearDirty();
     }
+
+    bool getDirty() const override { return vpot.getDirty(); }
 
     void setAngleSpacing(float spacing) { this->angleSpacing = spacing; }
     float getAngleSpacing() const { return this->angleSpacing; }

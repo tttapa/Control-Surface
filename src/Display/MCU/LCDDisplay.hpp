@@ -36,7 +36,7 @@ class LCDDisplay : public DisplayElement {
      * @param   color 
      *          The color of the text to draw.
      */
-    LCDDisplay(DisplayInterface &display, const MCU::LCD<> &lcd,
+    LCDDisplay(DisplayInterface &display, MCU::LCD<> &lcd,
                const OutputBank &bank, uint8_t track, PixelLocation loc,
                uint8_t textSize, uint16_t color)
         : DisplayElement(display), lcd(lcd), bank(bank), offset(track - 1),
@@ -63,7 +63,7 @@ class LCDDisplay : public DisplayElement {
      * @param   color 
      *          The color of the text to draw.
      */
-    LCDDisplay(DisplayInterface &display, const MCU::LCD<> &lcd,
+    LCDDisplay(DisplayInterface &display, MCU::LCD<> &lcd,
                const OutputBank &bank, uint8_t track, uint8_t line,
                PixelLocation loc, uint8_t textSize, uint16_t color)
         : DisplayElement(display), lcd(lcd), bank(bank), offset(track - 1),
@@ -88,7 +88,10 @@ class LCDDisplay : public DisplayElement {
         display.setTextSize(size);
         display.setTextColor(color);
         display.print(buffer);
+        lcd.clearDirty();
     }
+
+    bool getDirty() const override { return lcd.getDirty(); }
 
     /**
      * @brief   Check if the display contains a message for each track 
@@ -119,7 +122,7 @@ class LCDDisplay : public DisplayElement {
     void setLine(uint8_t line) { this->line = line; }
 
   private:
-    const MCU::LCD<> &lcd;
+    MCU::LCD<> &lcd;
     const OutputBank &bank;
     uint8_t offset;
     uint8_t line;

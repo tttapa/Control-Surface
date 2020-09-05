@@ -18,7 +18,10 @@ class NoteBitmapDisplay : public DisplayElement {
     void draw() override {
         if (note.getValue())
             display.drawXBitmap(x, y, xbm.bits, xbm.width, xbm.height, color);
+        note.clearDirty();
     }
+
+    bool getDirty() const override { return note.getDirty(); }
 
   private:
     NoteValue_t &note;

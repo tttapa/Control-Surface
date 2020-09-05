@@ -28,6 +28,11 @@ class VUDisplay : public DisplayElement {
             drawPeak(peak);
             drawBlocks(value);
         }
+        vu.clearDirty();
+    }
+
+    bool getDirty() const override {
+        return vu.getDirty() || shouldStartDecaying() || shouldUpdateDecay();
     }
 
   protected:
@@ -54,16 +59,23 @@ class VUDisplay : public DisplayElement {
             peak = newPeak;
             previousDecay = millis();
             decaying = false;
-        } else if (!decaying &&
-                   (millis() - previousDecay > VU_PEAK_HOLD_TIME)) {
+        } else if (shouldStartDecaying()) {
             decaying = true;
             previousDecay += VU_PEAK_HOLD_TIME - decayTime;
-        } else if (decaying && (millis() - previousDecay > decayTime)) {
-            if (peak > 0) {
-                peak -= VU_PEAK_SMOOTH_DECAY ? 1 : (blockheight + spacing);
-                previousDecay += decayTime;
-            }
+        } else if (shouldUpdateDecay()) {
+            peak -= VU_PEAK_SMOOTH_DECAY ? 1 : (blockheight + spacing);
+            previousDecay += decayTime;
         }
+    }
+
+    bool shouldStartDecaying() const {
+        return !decaying && peak > 0 &&
+               (millis() - previousDecay > VU_PEAK_HOLD_TIME);
+    }
+
+    bool shouldUpdateDecay() const {
+        return decaying && peak > 0 && //
+               (millis() - previousDecay > decayTime);
     }
 
     VU_t &vu;
@@ -92,7 +104,7 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
-template <class VU_t>
+template <class VU_t = Interfaces::MCU::IVU>
 class AnalogVUDisplay : public DisplayElement {
   public:
     AnalogVUDisplay(DisplayInterface &display, VU_t &vu, PixelLocation loc,
@@ -105,6 +117,7 @@ class AnalogVUDisplay : public DisplayElement {
     void draw() override {
         float value = vu.getFloatValue();
         drawNeedle(theta_min + value * theta_diff);
+        vu.clearDirty();
     }
 
     void drawNeedle(float angle) {
@@ -115,6 +128,8 @@ class AnalogVUDisplay : public DisplayElement {
             p = line.next();
         }
     }
+
+    bool getDirty() const override { return vu.getDirty(); }
 
   private:
     VU_t &vu;

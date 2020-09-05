@@ -21,11 +21,16 @@ class SelectorDisplay : public DisplayElement {
         display.setTextColor(color);
         display.setTextSize(size);
         display.setCursor(x, y);
-        display.print(selector.get() * multiplier + offset);
+        setting_t selection = selector.get();
+        display.print(selection * multiplier + offset);
+        previous = selection;
     }
+
+    bool getDirty() const override { return previous != selector.get(); }
 
   private:
     SelectorBase &selector;
+    setting_t previous = NO_SETTING;
     int16_t offset, multiplier, x, y;
     uint8_t size;
     uint16_t color;
@@ -45,11 +50,16 @@ class BankDisplay : public DisplayElement {
         display.setTextColor(color);
         display.setTextSize(size);
         display.setCursor(x, y);
-        display.print(bank.getOffset() + offset);
+        uint8_t bankoffset = bank.getOffset();
+        display.print(bankoffset + offset);
+        previous = bankoffset;
     }
+
+    bool getDirty() const override { return previous != bank.getOffset(); }
 
   private:
     OutputBank &bank;
+    uint8_t previous = 0xFF;
     int16_t offset, x, y;
     uint8_t size;
     uint16_t color;

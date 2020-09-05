@@ -32,6 +32,9 @@ class DisplayElement : public DoublyLinkable<DisplayElement> {
     /// Draw this DisplayElement to the display buffer.
     virtual void draw() = 0;
 
+    /// Check if this DisplayElement has to be redrawn.
+    virtual bool getDirty() const = 0;
+
     /// Get a reference to the display that this element draws to.
     DisplayInterface &getDisplay() { return display; }
     /// Get a const reference to the display that this element draws to.
