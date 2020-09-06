@@ -99,7 +99,8 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midichmsg) {
 
 #ifdef DEBUG_MIDI_PACKETS
     // TODO: print CN
-    if (midimsg.type != PROGRAM_CHANGE && midimsg.type != CHANNEL_PRESSURE)
+    if (midimsg.type != MIDIMessageType::PROGRAM_CHANGE &&
+        midimsg.type != MIDIMessageType::CHANNEL_PRESSURE)
         DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1 << ' '
                      << midimsg.data2 << dec);
     else
@@ -122,27 +123,52 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midichmsg) {
         // All Notes Off
         MIDIInputElementNote::resetAll();
     } else {
-        if (midimsg.type == MIDIMessageType::CONTROL_CHANGE) {
-            // Control Change
-            DEBUGFN(F("Updating CC elements with new MIDI message."));
-            MIDIInputElementCC::updateAllWith(midimsg);
-
-        } else if (midimsg.type == MIDIMessageType::NOTE_OFF ||
-                   midimsg.type == MIDIMessageType::NOTE_ON) {
-            // Note
-            DEBUGFN(F("Updating Note elements with new MIDI message."));
-            MIDIInputElementNote::updateAllWith(midimsg);
-
-        } else if (midimsg.type == MIDIMessageType::CHANNEL_PRESSURE) {
-            // Channel Pressure
-            DEBUGFN(F("Updating Channel Pressure elements with new "
-                      "MIDI message."));
-            MIDIInputElementCP::updateAllWith(midimsg);
-        } else if (midimsg.type == MIDIMessageType::PROGRAM_CHANGE) {
-            // Channel Pressure
-            DEBUGFN(F("Updating Program Change elements with new "
-                      "MIDI message."));
-            MIDIInputElementPC::updateAllWith(midimsg);
+        switch (midimsg.type) {
+            case MIDIMessageType::NOTE_OFF: // fallthrough
+            case MIDIMessageType::NOTE_ON:
+                DEBUGFN(F("Updating Note elements with new MIDI "
+                          "message."));
+                MIDIInputElementNote::updateAllWith(midimsg);
+                break;
+            case MIDIMessageType::KEY_PRESSURE:
+                DEBUGFN(F("Updating Key Pressure elements with new MIDI "
+                          "message."));
+                MIDIInputElementKP::updateAllWith(midimsg);
+                break;
+            case MIDIMessageType::CONTROL_CHANGE:
+                DEBUGFN(F("Updating CC elements with new MIDI "
+                          "message."));
+                MIDIInputElementCC::updateAllWith(midimsg);
+                break;
+            case MIDIMessageType::PROGRAM_CHANGE:
+                DEBUGFN(F("Updating Program Change elements with new MIDI "
+                          "message."));
+                MIDIInputElementPC::updateAllWith(midimsg);
+                break;
+            case MIDIMessageType::CHANNEL_PRESSURE:
+                DEBUGFN(F("Updating Channel Pressure elements with new MIDI "
+                          "message."));
+                MIDIInputElementCP::updateAllWith(midimsg);
+                break;
+            case MIDIMessageType::PITCH_BEND:
+                // Channel Pressure
+                DEBUGFN(F("Updating Pitch Bend elements with new MIDI "
+                          "message."));
+                MIDIInputElementPB::updateAllWith(midimsg);
+                break;
+            // These MIDI types are not channel messages, so aren't handled here
+            case MIDIMessageType::SYSEX_START: break;          // LCOV_EXCL_LINE
+            case MIDIMessageType::SYSEX_END: break;            // LCOV_EXCL_LINE
+            case MIDIMessageType::TUNE_REQUEST: break;         // LCOV_EXCL_LINE
+            case MIDIMessageType::TIMING_CLOCK: break;         // LCOV_EXCL_LINE
+            case MIDIMessageType::UNDEFINED_REALTIME_1: break; // LCOV_EXCL_LINE
+            case MIDIMessageType::START: break;                // LCOV_EXCL_LINE
+            case MIDIMessageType::CONTINUE: break;             // LCOV_EXCL_LINE
+            case MIDIMessageType::STOP: break;                 // LCOV_EXCL_LINE
+            case MIDIMessageType::UNDEFINED_REALTIME_2: break; // LCOV_EXCL_LINE
+            case MIDIMessageType::ACTIVE_SENSING: break;       // LCOV_EXCL_LINE
+            case MIDIMessageType::RESET: break;                // LCOV_EXCL_LINE
+            default: break;                                    // LCOV_EXCL_LINE
         }
     }
 }

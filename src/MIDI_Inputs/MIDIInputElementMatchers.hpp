@@ -54,6 +54,27 @@ struct TwoByteMIDIMatcher {
 
 // -------------------------------------------------------------------------- //
 
+/// Matcher for MIDI Pitch Bend messages. Matches a single address.
+struct PitchBendMIDIMatcher {
+    PitchBendMIDIMatcher(MIDIChannelCN address) : address(address) {}
+
+    struct Result {
+        bool match;
+        uint16_t value;
+    };
+
+    Result operator()(ChannelMessageMatcher m) {
+        if (!MIDIChannelCN::matchSingle(m.getChannelCN(), address))
+            return {false, 0};
+        uint16_t value = (m.data2 << 7) | m.data1;
+        return {true, value};
+    }
+
+    MIDIChannelCN address;
+};
+
+// -------------------------------------------------------------------------- //
+
 /// Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control
 /// Change, Key Pressure. Matches ranges of addresses on a single channel and
 /// cable.
@@ -156,6 +177,46 @@ struct BankableTwoByteMIDIMatcher {
 
     BaseBankConfig<BankSize> config;
     MIDIAddress address;
+};
+
+// -------------------------------------------------------------------------- //
+
+/// Matcher for MIDI Pitch Bend messages. Matches a single address over multiple
+/// banks.
+template <uint8_t BankSize>
+struct BankablePitchBendMIDIMatcher {
+    BankablePitchBendMIDIMatcher(
+        BankConfig<BankSize, BankType::CHANGE_CHANNEL> config,
+        MIDIChannelCN address)
+        : config(config), address(address) {}
+
+    struct Result {
+        bool match;
+        uint16_t value;
+        uint8_t bankIndex;
+    };
+
+    Result operator()(ChannelMessageMatcher m) {
+        using BankableMIDIMatcherHelpers::getBankIndex;
+        using BankableMIDIMatcherHelpers::matchBankable;
+        if (!matchBankable(m.getChannelCN(), address, config))
+            return {false, 0, 0};
+        uint16_t value = (m.data2 << 7) | m.data1;
+        uint8_t bankIndex = getBankIndex(m.getChannelCN(), address, config);
+        return {true, value, bankIndex};
+    }
+
+    Bank<BankSize> &getBank() { return config.bank; }
+    const Bank<BankSize> &getBank() const { return config.bank; }
+    BankType getBankType() const { return config.type; }
+    static constexpr setting_t getBankSize() { return BankSize; }
+
+    /// Get the current bank setting.
+    /// @see    @ref Bank<N>::getSelection()
+    setting_t getSelection() const { return getBank().getSelection(); }
+
+    BaseBankConfig<BankSize> config;
+    MIDIChannelCN address;
 };
 
 // -------------------------------------------------------------------------- //

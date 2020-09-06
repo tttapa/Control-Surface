@@ -91,6 +91,7 @@
 #include <MIDI_Inputs/MCU/VU.hpp>
 #include <MIDI_Inputs/NoteCCKPRange.hpp>
 #include <MIDI_Inputs/NoteCCKPValue.hpp>
+#include <MIDI_Inputs/PBValue.hpp>
 
 #include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
 #include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>

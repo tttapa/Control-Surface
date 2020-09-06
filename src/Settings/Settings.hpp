@@ -18,13 +18,7 @@ BEGIN_CS_NAMESPACE
 // ----------------------------- Debug Settings ----------------------------- //
 // ========================================================================== //
 
-/// The debug output.
-// #define DEBUG_OUT Serial
-
 // #define DEBUG_MIDI_PACKETS
-
-/// Exit when encountering an error, instead of trying to recover (recommended).
-#define FATAL_ERRORS
 
 // ----------------------------- User Settings ------------------------------ //
 // ========================================================================== //

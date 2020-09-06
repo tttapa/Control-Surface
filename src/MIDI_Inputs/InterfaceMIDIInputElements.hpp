@@ -30,6 +30,28 @@ class IValue {
   protected:
     bool dirty = true;
 };
+
+/// Abstract interface for MIDI input elements that receive and store a 14-bit
+/// value.
+class IValue14 {
+  public:
+    /// @name   Detecting changes
+    /// @{
+
+    /// Check if the value was updated since the last time the dirty flag was
+    /// cleared.
+    bool getDirty() const { return dirty; }
+    /// Clear the dirty flag.
+    void clearDirty() { dirty = false; }
+
+    /// @}
+
+    virtual uint16_t getValue() const = 0;
+
+  protected:
+    bool dirty = true;
+};
+
 namespace MCU {
 
 class IVPot {
