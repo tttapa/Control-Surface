@@ -1,9 +1,9 @@
 #pragma once
 
+#include <AH/STL/cstddef> // size_t
+#include <AH/STL/cstdint> // uint8_t
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
-#include <stddef.h> // size_t
-#include <stdint.h> // uint8_t
 
 #ifndef ARDUINO
 #include <vector>
@@ -11,8 +11,8 @@
 
 AH_DIAGNOSTIC_WERROR()
 
-#include <Def/Channel.hpp>
 #include <Def/Cable.hpp>
+#include <Def/Channel.hpp>
 
 BEGIN_CS_NAMESPACE
 

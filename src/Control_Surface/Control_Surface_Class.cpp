@@ -210,50 +210,38 @@ void Control_Surface_::updateInputs() {
 }
 
 void Control_Surface_::updateDisplays() {
-    DisplayInterface *previousDisplay = nullptr;
     auto &allElements = DisplayElement::getAll();
     auto it = allElements.begin();
-    auto prevIt = allElements.begin();
+    auto end = allElements.end();
+    if (it == end)
+        return;
+    auto prevIt = it;
+    auto previousDisplay = &prevIt->getDisplay();
     bool dirty = false;
     // Loop over all display elements
-    while (it != allElements.end()) {
-        DisplayInterface *thisDisplay = &(*it).getDisplay();
-        // Ignore elements on displays that are not enabled.
-        if (!thisDisplay->isEnabled())
-            continue;
-        // Check if this element has to be redrawn.
+    while (true) {
         dirty |= (*it).getDirty();
+        ++it;
         // If this is the first element on another display
-        if (thisDisplay != previousDisplay) {
+        if (it == end || &it->getDisplay() != previousDisplay) {
             // If there was at least one element on the previous display that
             // has to be redrawn
-            if (dirty && previousDisplay) {
+            if (dirty) {
                 // Clear the display
                 previousDisplay->clearAndDrawBackground();
                 // Update all elements on that display
-                for (auto drawit = prevIt; drawit != it; ++drawit)
-                    (*drawit).draw();
+                for (auto drawIt = prevIt; drawIt != it; ++drawIt)
+                    drawIt->draw();
                 // Write the buffer to the display
                 previousDisplay->display();
             }
+            if (it == end)
+                break;
             prevIt = it;
-            previousDisplay = thisDisplay;
+            previousDisplay = &it->getDisplay();
             dirty = false;
         }
-        ++it;
     }
-    // If there was at least one element on the last display that
-    // has to be redrawn
-    if (dirty && previousDisplay) {
-        // Clear the display
-        previousDisplay->clearAndDrawBackground();
-        // Update all elements on that display
-        for (auto drawit = prevIt; drawit != it; ++drawit)
-            (*drawit).draw();
-        // Write the buffer to the display
-        previousDisplay->display();
-    }
-    // TODO: refactor loops for less repetition.
 }
 
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();
