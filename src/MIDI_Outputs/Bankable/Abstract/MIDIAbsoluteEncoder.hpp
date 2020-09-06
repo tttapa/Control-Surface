@@ -2,6 +2,7 @@
 
 #include <AH/STL/type_traits> // std::make_signed
 #include <AH/STL/utility> // std::forward
+#include <Banks/BankableAddresses.hpp>
 #include <Def/Def.hpp>
 #include <Encoder.h>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -10,14 +11,16 @@ AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
 
+namespace Bankable {
+
 /**
  * @brief   An abstract class for rotary encoders that send absolute MIDI 
  *          events.
  */
-template <class Enc, class Sender>
+template <class Enc, uint8_t NumBanks, class BankAddress, class Sender>
 class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
   public:
-    GenericMIDIAbsoluteEncoder(Enc &&encoder, MIDIAddress address,
+    GenericMIDIAbsoluteEncoder(const BankAddress &address, Enc &&encoder,
                                int16_t multiplier, uint8_t pulsesPerStep,
                                const Sender &sender)
         : encoder(std::forward<Enc>(encoder)), address(address),
@@ -35,33 +38,43 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
         int16_t delta = SignedEnc_t(Enc_t(encval - deltaOffset));
         delta = delta * multiplier / pulsesPerStep;
         if (delta) {
-            int16_t oldValue = value;
+            address.lock();
+            int16_t oldValue = values[address.getSelection()];
             int16_t newValue = oldValue + delta;
             newValue = constrain(newValue, 0, maxValue);
             if (oldValue != newValue) {
-                sender.send(newValue, address);
-                value = newValue;
+                sender.send(newValue, address.getActiveAddress());
+                values[address.getSelection()] = newValue;
             }
+            address.unlock();
             deltaOffset += Enc_t(delta * pulsesPerStep / multiplier);
         }
     }
 
     /**
-     * @brief   Get the absolute value of the encoder.
+     * @brief   Get the absolute value of the encoder in the given bank.
      */
-    uint16_t getValue() const { return value; }
+    uint16_t getValue(setting_t bank) const { return values[bank]; }
+    /**
+     * @brief   Get the absolute value of the encoder in the active bank.
+     */
+    uint16_t getValue() const { return getValue(address.getSelection()); }
 
     /**
-     * @brief   Set the absolute value of the encoder.
+     * @brief   Set the absolute value of the encoder in the given bank.
      */
-    void setValue(uint16_t value) { this->value = value; }
+    void setValue(uint16_t value, setting_t bank) { values[bank] = value; }
+    /**
+     * @brief   Set the absolute value of the encoder in the active bank.
+     */
+    void setValue(uint16_t value) { setValue(value, address.getSelection()); }
 
   private:
     Enc encoder;
-    MIDIAddress address;
+    BankAddress address;
     int16_t multiplier;
     uint8_t pulsesPerStep;
-    uint16_t value = 0;
+    Array<uint16_t, NumBanks> values = {{}};
     using Enc_t = decltype(encoder.read());
     using SignedEnc_t = typename std::make_signed<Enc_t>::type;
     Enc_t deltaOffset = 0;
@@ -74,14 +87,17 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
 
 #if defined(Encoder_h_) || not defined(ARDUINO)
 
-template <class Sender>
-using MIDIAbsoluteEncoder = GenericMIDIAbsoluteEncoder<Encoder, Sender>;
+template <uint8_t NumBanks, class BankAddress, class Sender>
+using MIDIAbsoluteEncoder =
+    GenericMIDIAbsoluteEncoder<Encoder, NumBanks, BankAddress, Sender>;
 
-template <class Sender>
+template <uint8_t NumBanks, class BankAddress, class Sender>
 using BorrowedMIDIAbsoluteEncoder =
-    GenericMIDIAbsoluteEncoder<Encoder &, Sender>;
+    GenericMIDIAbsoluteEncoder<Encoder &, NumBanks, BankAddress, Sender>;
 
 #endif
+
+} // namespace Bankable
 
 END_CS_NAMESPACE
 

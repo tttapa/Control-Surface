@@ -57,18 +57,9 @@ class CCRotaryEncoder
      */
     CCRotaryEncoder(const Bank<NumBanks> &bank, const EncoderPinList &pins,
                     const Array<MIDIAddress, NumBanks> &addresses,
-                    int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
+                    int16_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
         : MIDIRotaryEncoder<ManyAddresses<NumBanks>, RelativeCCSender>(
               {bank, addresses}, pins, speedMultiply, pulsesPerStep, {}) {}
-
-// For tests only (PJRC Encoder library's copy constructor doesn't work)
-#ifndef ARDUINO
-    CCRotaryEncoder(const Bank<NumBanks> &bank, const Encoder &encoder,
-                    const Array<MIDIAddress, NumBanks> &addresses,
-                    int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
-        : MIDIRotaryEncoder<ManyAddresses<NumBanks>, RelativeCCSender>(
-              {bank, addresses}, encoder, speedMultiply, pulsesPerStep, {}) {}
-#endif
 };
 
 } // namespace ManyAddresses

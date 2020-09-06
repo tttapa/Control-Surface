@@ -24,9 +24,10 @@ class CCAbsoluteEncoder : public MIDIAbsoluteEncoder<ContinuousCCSender> {
      * @brief   Construct a new CCAbsoluteEncoder object with the given pins, 
      *          address, channel, speed factor, and number of pulses per step.
      * 
-     * @param   pins
-     *          A list of the two pins connected to the A and B outputs of the
-     *          encoder.  
+     * @param   encoder
+     *          The Encoder object to use.  
+     *          Usually passed as a list of the two pins connected to the 
+     *          A and B outputs of the encoder, e.g. `{2, 3}`.  
      *          The internal pull-up resistors will be enabled by the Encoder
      *          library.
      * @param   address
@@ -45,9 +46,10 @@ class CCAbsoluteEncoder : public MIDIAbsoluteEncoder<ContinuousCCSender> {
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    CCAbsoluteEncoder(const EncoderPinList &pins, const MIDIAddress &address,
+    CCAbsoluteEncoder(Encoder &&encoder, MIDIAddress address,
                       int16_t multiplier = 1, uint8_t pulsesPerStep = 4)
-        : MIDIAbsoluteEncoder(pins, address, multiplier, pulsesPerStep, {}) {}
+        : MIDIAbsoluteEncoder<ContinuousCCSender>(
+              std::move(encoder), address, multiplier, pulsesPerStep, {}) {}
 };
 
 END_CS_NAMESPACE

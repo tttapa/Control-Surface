@@ -94,7 +94,7 @@ TEST(Construction, MIDIOutputs) {
 
     CCPotentiometer{pin, address};
 
-    CCRotaryEncoder{EncoderPinList{pin, pin}, address, i8, u8};
+    CCRotaryEncoder{{pin, pin}, address, i8, u8};
 
     // Note --------------------------------------------------------------------
     NoteButton{pin, address};
@@ -121,7 +121,7 @@ TEST(Construction, MIDIOutputs) {
 
     Bankable::CCPotentiometer{bank, pin, address};
 
-    Bankable::CCRotaryEncoder{bank, EncoderPinList{pin, pin}, address, i8, u8};
+    Bankable::CCRotaryEncoder{bank, {pin, pin}, address, i8, u8};
 
     // Bankable::Note ----------------------------------------------------------
     Bankable::NoteButton{bank, pin, address};

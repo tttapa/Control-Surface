@@ -31,22 +31,33 @@ TEST(CCRotaryEncoder, turnFourHalfSteps) {
     EXPECT_CALL(encm, read())
         .WillOnce(Return(2))
         .WillOnce(Return(4))
+        .WillOnce(Return(5))
         .WillOnce(Return(6))
-        .WillOnce(Return(8));
+        .WillOnce(Return(10));
 
-    ccenc.update(); // half a step
-
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 2, 0xC));
-
-    ccenc.update(); // one step
-
+    // 0.5 steps × 2
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 1, 0xC));
+    ccenc.update();
     Mock::VerifyAndClear(&midi);
 
-    ccenc.update(); // one and a half step
+    // 1 step × 2
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 1, 0xC));
+    ccenc.update();
+    Mock::VerifyAndClear(&midi);
 
+    // 1.25 step × 2
+    ccenc.update();
+    Mock::VerifyAndClear(&midi);
+
+    // 1.5 step × 2
+    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 1, 0xC));
+    ccenc.update();
+    Mock::VerifyAndClear(&midi);
+
+    // 2.5 step × 2
     EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 2, 0xC));
-
-    ccenc.update(); // two steps
+    ccenc.update();
+    Mock::VerifyAndClear(&midi);
 }
 
 TEST(CCRotaryEncoder, turnOneStepBackwards) {
