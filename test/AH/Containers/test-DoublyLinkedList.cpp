@@ -38,6 +38,7 @@ TEST(DoublyLinkedList, appendNode) {
     EXPECT_EQ(list.getLast(), &a);
     EXPECT_EQ(a.getPrevious(), nullptr);
     EXPECT_EQ(a.getNext(), nullptr);
+    EXPECT_EQ(list.getFirst()->value, 1);
     TestNode b(2);
     list.append(b);
     EXPECT_EQ(list.getFirst(), &a);
