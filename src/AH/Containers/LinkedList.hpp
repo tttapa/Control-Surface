@@ -43,6 +43,11 @@ class DoublyLinkedList {
             return *node;
         }
 
+        INode *operator->() const {
+            // TODO: check node != nullptr
+            return node;
+        }
+
       protected:
         INode *node;
     };
@@ -259,9 +264,7 @@ class DoublyLinkedList {
      * @param   node
      *          A reference to the node to be moved down.
      */
-    void moveDown(Node &node) {
-        moveDown(&node);
-    }
+    void moveDown(Node &node) { moveDown(&node); }
 
     /** 
      * @brief   Check if the linked list could contain the given node.
@@ -284,9 +287,7 @@ class DoublyLinkedList {
     }
 
     /// @copydoc couldContain(const Node *) const
-    bool couldContain(const Node &node) const {
-        return couldContain(&node);
-    }
+    bool couldContain(const Node &node) const { return couldContain(&node); }
 
     iterator begin() { return {first}; }
     iterator end() { return {nullptr}; }
