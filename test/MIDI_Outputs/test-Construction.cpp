@@ -44,8 +44,6 @@
 #include <MIDI_Outputs/ManyAddresses/PBPotentiometer.hpp>
 #include <MIDI_Outputs/ManyAddresses/PCButton.hpp>
 
-#include <Encoder.h>
-//
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
 

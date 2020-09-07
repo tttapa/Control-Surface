@@ -59,7 +59,6 @@
 #include <Control_Surface.h>
 
 #include <AH/Hardware/MCP23017Encoders.hpp>
-#include <MIDI_Outputs/Abstract/MIDIRotaryEncoder.hpp>
 
 #include <Wire.h>
 

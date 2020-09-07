@@ -2,8 +2,6 @@
  * https://github.com/tttapa/Control-Surface/issues/66
  */
 
-#include <Encoder.h>
-// Encoder must be included before Control Surface
 #include <Control_Surface.h>
 
 // MIDI Interface to use

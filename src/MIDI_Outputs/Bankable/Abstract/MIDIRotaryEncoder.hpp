@@ -4,7 +4,14 @@
 #include <AH/STL/utility>     // std::forward
 #include <Banks/BankableAddresses.hpp>
 #include <Def/Def.hpp>
+#include <Def/TypeTraits.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+
+#ifdef ARDUINO
+#include <Submodules/Encoder/Encoder.h>
+#else
+#include <Encoder.h> // Mock
+#endif
 
 AH_DIAGNOSTIC_WERROR()
 
@@ -32,7 +39,7 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
           sender(sender) {}
 
   public:
-    void begin() override {}
+    void begin() override { begin_if_possible(encoder); }
 
     void update() override {
         Enc_t encval = encoder.read();

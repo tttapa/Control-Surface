@@ -74,7 +74,6 @@
 #include <MIDI_Outputs/ManyAddresses/PBPotentiometer.hpp>
 #include <MIDI_Outputs/ManyAddresses/PCButton.hpp>
 
-#ifdef Encoder_h_
 #include <MIDI_Outputs/Bankable/CCAbsoluteEncoder.hpp>
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/Bankable/PBAbsoluteEncoder.hpp>
@@ -82,7 +81,6 @@
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/ManyAddresses/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/PBAbsoluteEncoder.hpp>
-#endif
 
 // ------------------------------ MIDI Inputs ------------------------------- //
 #include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
@@ -112,10 +110,7 @@
 #include <Selectors/ManyButtonsSelector.hpp>
 #include <Selectors/ProgramChangeSelector.hpp>
 #include <Selectors/SwitchSelector.hpp>
-
-#ifdef Encoder_h_
 #include <Selectors/EncoderSelector.hpp>
-#endif
 
 #include <Selectors/LEDs/SelectorLEDs.hpp>
 

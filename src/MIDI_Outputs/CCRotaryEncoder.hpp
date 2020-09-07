@@ -12,10 +12,6 @@ BEGIN_CS_NAMESPACE
  * 
  * This version cannot be banked.
  *
- * @note    To use this class, include the [PJRC Encoder library]
- *          (https://github.com/PaulStoffregen/Encoder) before the
- *          Control-Surface library.
- *
  * @ingroup MIDIOutputElements
  */
 class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
@@ -60,10 +56,6 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
  *          it, so it can be shared with other classes.
  * 
  * This version cannot be banked.
- *
- * @note    To use this class, include the [PJRC Encoder library]
- *          (https://github.com/PaulStoffregen/Encoder) before the
- *          Control-Surface library.
  *
  * @ingroup MIDIOutputElements
  */

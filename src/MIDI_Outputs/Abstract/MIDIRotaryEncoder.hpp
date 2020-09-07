@@ -1,9 +1,16 @@
 #pragma once
 
 #include <AH/STL/type_traits> // std::make_signed
-#include <AH/STL/utility> // std::forward
+#include <AH/STL/utility>     // std::forward
 #include <Def/Def.hpp>
+#include <Def/TypeTraits.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+
+#ifdef ARDUINO
+#include <Submodules/Encoder/Encoder.h>
+#else 
+#include <Encoder.h> // Mock
+#endif
 
 AH_DIAGNOSTIC_WERROR()
 
@@ -27,7 +34,7 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
           speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
           sender(sender) {}
 
-    void begin() override {}
+    void begin() override { begin_if_possible(encoder); }
 
     void update() override {
         Enc_t encval = encoder.read();
@@ -56,15 +63,11 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
     Sender sender;
 };
 
-#if defined(Encoder_h_) || not defined(ARDUINO)
-
 template <class Sender>
 using MIDIRotaryEncoder = GenericMIDIRotaryEncoder<Encoder, Sender>;
 
 template <class Sender>
 using BorrowedMIDIRotaryEncoder = GenericMIDIRotaryEncoder<Encoder &, Sender>;
-
-#endif
 
 END_CS_NAMESPACE
 

@@ -362,6 +362,12 @@ class MCP23017Encoders {
                 *position = pos;
             }
         }
+
+        #if defined(__GNUC__) && !defined(__clang__) && __GNUC__ < 5
+        // begin_if_possible doesn't work on GCC 4.x and earlier, so provide a
+        // dummy begin method instead.
+        void begin() {}
+        #endif
     };
 
     /**

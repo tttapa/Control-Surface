@@ -48,8 +48,6 @@
  * https://github.com/tttapa/Control-Surface
  */
 
-#include <Encoder.h> // Include the Encoder library.
-// This must be done before the Control Surface library.
 #include <Control_Surface.h> // Include the Control Surface library
 // Include the display interface you'd like to use
 #include <Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp>

@@ -34,8 +34,6 @@
  * https://github.com/tttapa/Control-Surface
  */
 
-#include <Encoder.h>
-// Encoder has to be included before Control_Surface
 #include <Control_Surface.h>
 
 USBMIDI_Interface usbmidi;

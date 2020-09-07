@@ -15,10 +15,6 @@ namespace Bankable {
  * 
  * This version can be banked.
  *
- * @note    To use this class, include the [PJRC Encoder library]
- *          (https://github.com/PaulStoffregen/Encoder) before the
- *          Control-Surface library.
- *
  * @tparam  NumBanks
  *          The number of banks.
  * 

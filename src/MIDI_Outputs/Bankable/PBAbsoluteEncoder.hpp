@@ -1,8 +1,12 @@
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+
 #include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIAbsoluteEncoder.hpp>
 #include <MIDI_Senders/PitchBendSender.hpp>
+
+AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
 
@@ -14,10 +18,6 @@ namespace Bankable {
  *          events.
  * 
  * This version can be banked.
- *
- * @note    To use this class, include the [PJRC Encoder library]
- *          (https://github.com/PaulStoffregen/Encoder) before the
- *          Control-Surface library.
  *
  * @tparam  NumBanks
  *          The number of banks.
@@ -70,3 +70,5 @@ class PBAbsoluteEncoder
 } // namespace Bankable
 
 END_CS_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

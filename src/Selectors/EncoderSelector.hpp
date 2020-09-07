@@ -1,14 +1,14 @@
 #pragma once
 
-#if !defined(Encoder_h_) && !defined(IDE)
-#error                                                                         \
-    "The PJRC Encoder library should be included before the Control-Surface    \
-     library. (#include <Encoder.h>)"
-#endif
-
 #include "Selector.hpp"
 #include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Def/Def.hpp>
+
+#ifdef ARDUINO
+#include <Submodules/Encoder/Encoder.h>
+#else 
+#include <Encoder.h> // Mock
+#endif
 
 BEGIN_CS_NAMESPACE
 

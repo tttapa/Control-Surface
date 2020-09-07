@@ -12,10 +12,6 @@ BEGIN_CS_NAMESPACE
  * 
  * This version cannot be banked.
  *
- * @note    To use this class, include the [PJRC Encoder library]
- *          (https://github.com/PaulStoffregen/Encoder) before the
- *          Control-Surface library.
- *
  * @ingroup MIDIOutputElements
  */
 class CCAbsoluteEncoder : public MIDIAbsoluteEncoder<ContinuousCCSender> {

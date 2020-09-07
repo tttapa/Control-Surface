@@ -1,4 +1,3 @@
-#include <Encoder.h>
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
 #include <MockMIDI_Interface.hpp>
 #include <gtest-wrapper.h>

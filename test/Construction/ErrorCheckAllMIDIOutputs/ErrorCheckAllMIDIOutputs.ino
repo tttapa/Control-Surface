@@ -1,5 +1,3 @@
-#include <Encoder.h>
-
 #include <Control_Surface.h>
 
 void setup() {
