@@ -38,7 +38,7 @@ PROJECT_NAME           = "Control Surface"
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = master
+PROJECT_NUMBER         = 2.0.0
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -821,6 +821,7 @@ INPUT                  = "../examples/examples.dox" \
                          "pages/Debug.md" \
                          "pages/xbm.md" \
                          "pages/Basics.md" \
+                         "pages/FAQ.md" \
                          "../README.md"
 
 # This tag can be used to specify the character encoding of the source files
@@ -1135,7 +1136,7 @@ HTML_FILE_EXTENSION    = .html
 # of the possible markers and block names see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_HEADER            =
+HTML_HEADER            = header.html
 
 # The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each
 # generated HTML page. If the tag is left blank doxygen will generate a standard
