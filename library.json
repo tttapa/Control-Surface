@@ -1,6 +1,6 @@
 {
     "name": "Control Surface",
-    "version": "1.2.0",
+    "version": "1.2.0-4",
     "description": "Easily create a MIDI Control Surface using an Arduino or Teensy board.",
     "keywords": [
         "midi",
@@ -37,10 +37,21 @@
         ]
     },
     "frameworks": "arduino",
+    "platforms": [
+        "atmelavr",
+        "atmelmegaavr",
+        "atmelsam",
+        "espressif32",
+        "espressif8266",
+        "nordicnrf52",
+        "teensy"
+    ],
     "dependencies": [
         {
-            "name": "arduino-libraries/MIDIUSB",
-            "version": "~1.0.4"
+            "name": "MIDIUSB",
+            "authors": "Gary Grewal, Arduino",
+            "version": "~1.0.4",
+            "frameworks": "arduino"
         }
     ]
 }
