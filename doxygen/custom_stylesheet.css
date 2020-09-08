@@ -102,6 +102,9 @@ div.navpath > ul {
 .directory td.desc {
     padding: 0.4em 0.5em 0.4em 0.5em;
 }
+.markdownTable tr:last-child td {
+    border-bottom: 1px solid #334262;
+}
 h2.memtitle, .memproto, .fieldtable th {
     background-color: #dde;
     background-image: none;
