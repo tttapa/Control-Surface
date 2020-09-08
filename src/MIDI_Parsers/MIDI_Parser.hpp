@@ -11,11 +11,12 @@
 
 BEGIN_CS_NAMESPACE
 
+/// Result of the MIDI interface read methods.
 enum class MIDIReadEvent : uint8_t {
-    NO_MESSAGE = 0,
-    CHANNEL_MESSAGE = 1,
-    SYSEX_MESSAGE = 2,
-    REALTIME_MESSAGE = 3,
+    NO_MESSAGE = 0,       ///< No new incoming methods.
+    CHANNEL_MESSAGE = 1,  ///< A MIDI channel message was received.
+    SYSEX_MESSAGE = 2,    ///< A MIDI system exclusive message was received.
+    REALTIME_MESSAGE = 3, ///< A MIDI real-time message was received.
 };
 
 class MIDI_Parser {

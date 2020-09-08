@@ -273,8 +273,8 @@ class Parsing_MIDI_Interface : public MIDI_Interface {
   private:
     /**
      * @brief   Try reading and parsing a single incoming MIDI message.
-     * @return  Returns the type of the read message, or @ref NO_MESSAGE if no
-     *          MIDI message was available.
+     * @return  Returns the type of the read message, or 
+     *          `MIDIReadEvent::NO_MESSAGE` if no MIDI message was available.
      */
     virtual MIDIReadEvent read() = 0;
 

@@ -61,7 +61,7 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
 
     uint8_t connected = 0;
 
-    bool hasSpaceFor(size_t bytes) { return index + bytes < BUFFER_LENGTH; }
+    bool hasSpaceFor(size_t bytes) { return bytes <= BUFFER_LENGTH - index; }
 
   public:
     BluetoothMIDI_Interface() : Parsing_MIDI_Interface(parser) {}
