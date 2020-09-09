@@ -1,0 +1,57 @@
+{
+    "name": "Control Surface",
+    "version": "1.2.0-4",
+    "description": "Easily create a MIDI Control Surface using an Arduino or Teensy board.",
+    "keywords": [
+        "midi",
+        "midi-controller",
+        "midi-over-usb",
+        "bluetooth",
+        "vu-meter",
+        "oled"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tttapa/Control-Surface.git"
+    },
+    "authors": [
+        {
+            "name": "Pieter P",
+            "maintainer": true
+        }
+    ],
+    "license": "GPL-3.0-or-later",
+    "export": {
+        "exclude": [
+            ".github",
+            "build",
+            "docs",
+            "doxygen",
+            "examples.old",
+            "googletest",
+            "gtest-wrappers",
+            "mock",
+            "scripts",
+            "test",
+            "tools"
+        ]
+    },
+    "frameworks": "arduino",
+    "platforms": [
+        "atmelavr",
+        "atmelmegaavr",
+        "atmelsam",
+        "espressif32",
+        "espressif8266",
+        "nordicnrf52",
+        "teensy"
+    ],
+    "dependencies": [
+        {
+            "name": "MIDIUSB",
+            "authors": "Gary Grewal, Arduino",
+            "version": "~1.0.4",
+            "frameworks": "arduino"
+        }
+    ]
+}
