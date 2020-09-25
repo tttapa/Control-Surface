@@ -8,6 +8,8 @@ BEGIN_CS_NAMESPACE
 
 /// A struct for saving a MIDI address consisting of a 7-bit address, a 4-bit
 /// channel, and a 4-bit cable number.
+/// A MIDI address can be marked "invalid". The MIDI sending functions 
+/// (@ref MIDI_Sender) will never send messages addressed to an invalid address.
 struct __attribute__((packed)) RawMIDIAddress {
     bool valid : 1;
     uint8_t address : 7;
@@ -15,7 +17,10 @@ struct __attribute__((packed)) RawMIDIAddress {
     uint8_t cableNumber : 4;
 };
 
-/// A class for saving a MIDI channel and cable number.
+/// A class for saving a MIDI channel and cable number.  
+/// A MIDI channel and cable number can be marked "invalid". 
+/// The MIDI sending functions (@ref MIDI_Sender) will never send messages 
+/// addressed to invalid channels or cables.
 class MIDIChannelCN {
     friend class MIDIAddress;
 
@@ -136,7 +141,12 @@ class RelativeMIDIAddress {
 };
 
 /// A type-safe utility class for saving a MIDI address consisting of a 7-bit
-/// address, a 4-bit channel, and a 4-bit cable number.
+/// address, a 4-bit channel, and a 4-bit cable number.  
+/// A MIDI address can be marked "invalid". The MIDI sending functions 
+/// (@ref MIDI_Sender) will never send messages addressed to invalid addresses.
+///
+/// See @ref md_pages_Basics "this page" for a tutorial on how to use MIDI
+/// addresses.
 class MIDIAddress {
   public:
     /// @name   Constructors

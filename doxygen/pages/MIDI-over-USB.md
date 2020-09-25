@@ -82,7 +82,7 @@ The ESP32 also has Bluetooth support, so you can use MIDI over BLE. This is supp
 
 ## Conclusion
 I strongly recommend getting a Teensy 3.x or 4.x for building a Control Surface. 
-MIDI over USB is supported right of the box, and it's the only platform that 
+MIDI over USB is supported right out of the box, and it's the only platform that 
 currently supports USB audio output. 
 On top of that, it has plenty of memory to create large MIDI Controllers, and 
 drive lots of displays.
@@ -97,7 +97,7 @@ are good choices as well, just keep in mind that they don't have a lot of RAM,
 and are pretty slow compared to Teensy boards, both in terms of CPU power and 
 IO or analog inputs.
 
-The Arduino Uno, Mega, NANO and Nano Every boards are just not fit for MIDI over
+The Arduino Uno, Mega, Nano and Nano Every boards are just not fit for MIDI over
 USB, and I wouldn't recommend them at all for this application. They can of 
 course still be used if you just want 5-pin DIN MIDI instead of MIDI over USB.
 
