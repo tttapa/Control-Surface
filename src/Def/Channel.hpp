@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <stdint.h> // uint8_t
 #include <Settings/NamespaceSettings.hpp>
+#include <stdint.h> // uint8_t
 
 BEGIN_CS_NAMESPACE
 
@@ -48,7 +48,7 @@ class Channel {
         return this->zeroBasedChannel == rhs.zeroBasedChannel;
     }
 
-        /**
+    /**
      * @brief   Check if two channels are the different.
      * 
      * @param   rhs
@@ -108,31 +108,21 @@ class Channel {
     uint8_t zeroBasedChannel : 4;
 };
 
-/** 
- * @brief   A literal operator to create MIDI Channels.
- * 
- * @param   ch
- *          The (one-based) MIDI channel (1 is the first channel).
- */
-constexpr Channel operator"" _ch(unsigned long long ch) {
-    return Channel::createChannel(ch);
-}
-
-constexpr Channel CHANNEL_1 = 1_ch;
-constexpr Channel CHANNEL_2 = 2_ch;
-constexpr Channel CHANNEL_3 = 3_ch;
-constexpr Channel CHANNEL_4 = 4_ch;
-constexpr Channel CHANNEL_5 = 5_ch;
-constexpr Channel CHANNEL_6 = 6_ch;
-constexpr Channel CHANNEL_7 = 7_ch;
-constexpr Channel CHANNEL_8 = 8_ch;
-constexpr Channel CHANNEL_9 = 9_ch;
-constexpr Channel CHANNEL_10 = 10_ch;
-constexpr Channel CHANNEL_11 = 11_ch;
-constexpr Channel CHANNEL_12 = 12_ch;
-constexpr Channel CHANNEL_13 = 13_ch;
-constexpr Channel CHANNEL_14 = 14_ch;
-constexpr Channel CHANNEL_15 = 15_ch;
-constexpr Channel CHANNEL_16 = 16_ch;
+constexpr Channel CHANNEL_1 = Channel::createChannel(1);
+constexpr Channel CHANNEL_2 = Channel::createChannel(2);
+constexpr Channel CHANNEL_3 = Channel::createChannel(3);
+constexpr Channel CHANNEL_4 = Channel::createChannel(4);
+constexpr Channel CHANNEL_5 = Channel::createChannel(5);
+constexpr Channel CHANNEL_6 = Channel::createChannel(6);
+constexpr Channel CHANNEL_7 = Channel::createChannel(7);
+constexpr Channel CHANNEL_8 = Channel::createChannel(8);
+constexpr Channel CHANNEL_9 = Channel::createChannel(9);
+constexpr Channel CHANNEL_10 = Channel::createChannel(10);
+constexpr Channel CHANNEL_11 = Channel::createChannel(11);
+constexpr Channel CHANNEL_12 = Channel::createChannel(12);
+constexpr Channel CHANNEL_13 = Channel::createChannel(13);
+constexpr Channel CHANNEL_14 = Channel::createChannel(14);
+constexpr Channel CHANNEL_15 = Channel::createChannel(15);
+constexpr Channel CHANNEL_16 = Channel::createChannel(16);
 
 END_CS_NAMESPACE

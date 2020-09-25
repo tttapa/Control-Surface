@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <stdint.h> // uint8_t
 #include <Settings/NamespaceSettings.hpp>
+#include <stdint.h> // uint8_t
 
 BEGIN_CS_NAMESPACE
 
@@ -108,31 +108,21 @@ class Cable {
     uint8_t zeroBasedCable : 4;
 };
 
-/** 
- * @brief   A literal operator to create MIDI Cables.
- * 
- * @param   cb
- *          The (one-based) MIDI cable (1 is the first cable).
- */
-constexpr Cable operator"" _cb(unsigned long long cb) {
-    return Cable::createCable(cb);
-}
-
-constexpr Cable CABLE_1 = 1_cb;
-constexpr Cable CABLE_2 = 2_cb;
-constexpr Cable CABLE_3 = 3_cb;
-constexpr Cable CABLE_4 = 4_cb;
-constexpr Cable CABLE_5 = 5_cb;
-constexpr Cable CABLE_6 = 6_cb;
-constexpr Cable CABLE_7 = 7_cb;
-constexpr Cable CABLE_8 = 8_cb;
-constexpr Cable CABLE_9 = 9_cb;
-constexpr Cable CABLE_10 = 10_cb;
-constexpr Cable CABLE_11 = 11_cb;
-constexpr Cable CABLE_12 = 12_cb;
-constexpr Cable CABLE_13 = 13_cb;
-constexpr Cable CABLE_14 = 14_cb;
-constexpr Cable CABLE_15 = 15_cb;
-constexpr Cable CABLE_16 = 16_cb;
+constexpr Cable CABLE_1 = Cable::createCable(1);
+constexpr Cable CABLE_2 = Cable::createCable(2);
+constexpr Cable CABLE_3 = Cable::createCable(3);
+constexpr Cable CABLE_4 = Cable::createCable(4);
+constexpr Cable CABLE_5 = Cable::createCable(5);
+constexpr Cable CABLE_6 = Cable::createCable(6);
+constexpr Cable CABLE_7 = Cable::createCable(7);
+constexpr Cable CABLE_8 = Cable::createCable(8);
+constexpr Cable CABLE_9 = Cable::createCable(9);
+constexpr Cable CABLE_10 = Cable::createCable(10);
+constexpr Cable CABLE_11 = Cable::createCable(11);
+constexpr Cable CABLE_12 = Cable::createCable(12);
+constexpr Cable CABLE_13 = Cable::createCable(13);
+constexpr Cable CABLE_14 = Cable::createCable(14);
+constexpr Cable CABLE_15 = Cable::createCable(15);
+constexpr Cable CABLE_16 = Cable::createCable(16);
 
 END_CS_NAMESPACE
