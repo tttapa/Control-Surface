@@ -13,7 +13,7 @@ BEGIN_CS_NAMESPACE
 /// Matcher for MIDI messages with 1 data byte, such as Channel Pressure
 /// and Program Change.
 struct OneByteMIDIMatcher {
-    OneByteMIDIMatcher(MIDIChannelCN address) : address(address) {}
+    OneByteMIDIMatcher(MIDIChannelCable address) : address(address) {}
 
     struct Result {
         bool match;
@@ -21,13 +21,13 @@ struct OneByteMIDIMatcher {
     };
 
     Result operator()(ChannelMessageMatcher m) {
-        if (!MIDIChannelCN::matchSingle(m.getChannelCN(), address))
+        if (!MIDIChannelCable::matchSingle(m.getChannelCable(), address))
             return {false, 0};
         uint8_t value = m.data1;
         return {true, value};
     }
 
-    MIDIChannelCN address;
+    MIDIChannelCable address;
 };
 
 // -------------------------------------------------------------------------- //
@@ -56,7 +56,7 @@ struct TwoByteMIDIMatcher {
 
 /// Matcher for MIDI Pitch Bend messages. Matches a single address.
 struct PitchBendMIDIMatcher {
-    PitchBendMIDIMatcher(MIDIChannelCN address) : address(address) {}
+    PitchBendMIDIMatcher(MIDIChannelCable address) : address(address) {}
 
     struct Result {
         bool match;
@@ -64,13 +64,13 @@ struct PitchBendMIDIMatcher {
     };
 
     Result operator()(ChannelMessageMatcher m) {
-        if (!MIDIChannelCN::matchSingle(m.getChannelCN(), address))
+        if (!MIDIChannelCable::matchSingle(m.getChannelCable(), address))
             return {false, 0};
         uint16_t value = (m.data2 << 7) | m.data1;
         return {true, value};
     }
 
-    MIDIChannelCN address;
+    MIDIChannelCable address;
 };
 
 // -------------------------------------------------------------------------- //
@@ -108,7 +108,7 @@ template <uint8_t BankSize>
 struct BankableOneByteMIDIMatcher {
     BankableOneByteMIDIMatcher(
         BankConfig<BankSize, BankType::CHANGE_CHANNEL> config,
-        MIDIChannelCN address)
+        MIDIChannelCable address)
         : config(config), address(address) {}
 
     struct Result {
@@ -120,10 +120,10 @@ struct BankableOneByteMIDIMatcher {
     Result operator()(ChannelMessageMatcher m) {
         using BankableMIDIMatcherHelpers::getBankIndex;
         using BankableMIDIMatcherHelpers::matchBankable;
-        if (!matchBankable(m.getChannelCN(), address, config))
+        if (!matchBankable(m.getChannelCable(), address, config))
             return {false, 0, 0};
         uint8_t value = m.data1;
-        uint8_t bankIndex = getBankIndex(m.getChannelCN(), address, config);
+        uint8_t bankIndex = getBankIndex(m.getChannelCable(), address, config);
         return {true, value, bankIndex};
     }
 
@@ -137,7 +137,7 @@ struct BankableOneByteMIDIMatcher {
     setting_t getSelection() const { return getBank().getSelection(); }
 
     BaseBankConfig<BankSize> config;
-    MIDIChannelCN address;
+    MIDIChannelCable address;
 };
 
 // -------------------------------------------------------------------------- //
@@ -187,7 +187,7 @@ template <uint8_t BankSize>
 struct BankablePitchBendMIDIMatcher {
     BankablePitchBendMIDIMatcher(
         BankConfig<BankSize, BankType::CHANGE_CHANNEL> config,
-        MIDIChannelCN address)
+        MIDIChannelCable address)
         : config(config), address(address) {}
 
     struct Result {
@@ -199,10 +199,10 @@ struct BankablePitchBendMIDIMatcher {
     Result operator()(ChannelMessageMatcher m) {
         using BankableMIDIMatcherHelpers::getBankIndex;
         using BankableMIDIMatcherHelpers::matchBankable;
-        if (!matchBankable(m.getChannelCN(), address, config))
+        if (!matchBankable(m.getChannelCable(), address, config))
             return {false, 0, 0};
         uint16_t value = (m.data2 << 7) | m.data1;
-        uint8_t bankIndex = getBankIndex(m.getChannelCN(), address, config);
+        uint8_t bankIndex = getBankIndex(m.getChannelCable(), address, config);
         return {true, value, bankIndex};
     }
 
@@ -216,7 +216,7 @@ struct BankablePitchBendMIDIMatcher {
     setting_t getSelection() const { return getBank().getSelection(); }
 
     BaseBankConfig<BankSize> config;
-    MIDIChannelCN address;
+    MIDIChannelCable address;
 };
 
 // -------------------------------------------------------------------------- //

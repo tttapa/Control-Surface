@@ -14,7 +14,7 @@ class GenericProgramChangeSelector
   public:
     GenericProgramChangeSelector(Selectable<N> &selectable,
                                  const Callback &callback,
-                                 MIDIChannelCN address)
+                                 MIDIChannelCable address)
         : GenericSelector<N, Callback>{selectable, callback},
           MatchingMIDIInputElement<MIDIMessageType::PROGRAM_CHANGE,
                                    OneByteMIDIMatcher>(address) {}
@@ -48,7 +48,7 @@ template <setting_t N>
 class ProgramChangeSelector : public GenericProgramChangeSelector<N> {
   public:
     ProgramChangeSelector(Selectable<N> &selectable,
-                          const MIDIChannelCN &address)
+                          const MIDIChannelCable &address)
         : GenericProgramChangeSelector<N>{selectable, {}, address} {}
 };
 

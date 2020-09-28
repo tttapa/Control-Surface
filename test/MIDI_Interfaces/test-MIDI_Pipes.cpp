@@ -1183,7 +1183,7 @@ TEST(MIDI_Pipes, USBInterface) {
         .WillOnce(Return(Packet_t{}));
     const uint8_t *sysexData =
         midiA[0].getSysExMessage().data + 5 * sizeof(SysExBuffer);
-    //                                    ^~~~ CN
+    //                                    ^~~~ cable
     EXPECT_CALL(midiB[0], sendImpl(sysexData, 8, 5));
     midiA[0].update();
 
@@ -1193,7 +1193,7 @@ TEST(MIDI_Pipes, USBInterface) {
         .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
         .WillOnce(Return(Packet_t{}));
     sysexData = midiA[1].getSysExMessage().data + 9 * sizeof(SysExBuffer);
-    //                                            ^~~~ CN
+    //                                            ^~~~ cable
     EXPECT_CALL(midiB[0], sendImpl(sysexData, 7, 9));
     EXPECT_CALL(midiB[1], sendImpl(sysexData, 7, 9));
     midiA[1].update();
@@ -1229,7 +1229,7 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
     // unlock the pipes
     midiA[0].exclusive(9, false);
 
-    // message is already in buffer, CN is already 9, so getSysExMessage()
+    // message is already in buffer, cable is already 9, so getSysExMessage()
     // returns 9th buffer
     const uint8_t *sysexData = midiA[1].getSysExMessage().data;
     EXPECT_CALL(midiB[0], sendImpl(sysexData, 7, 9));

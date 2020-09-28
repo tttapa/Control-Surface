@@ -54,7 +54,7 @@ TEST(TwoByteMIDIMatcher, ControlChange) {
 TEST(TwoByteMIDIMatcher, ChannelPressure) {
     struct M : MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
                                         OneByteMIDIMatcher> {
-        M(MIDIChannelCN a) : MatchingMIDIInputElement(a) {}
+        M(MIDIChannelCable a) : MatchingMIDIInputElement(a) {}
         MOCK_METHOD(void, handleUpdateHelper, (uint8_t));
         void handleUpdate(OneByteMIDIMatcher::Result m) override {
             handleUpdateHelper(m.value);

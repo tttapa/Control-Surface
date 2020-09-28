@@ -227,7 +227,7 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
 
     Bank<2> bank(4);
 
-    Array<MIDIChannelCN, 2> channels = {{
+    Array<MIDIChannelCable, 2> channels = {{
         {CHANNEL_7, CABLE_13},
         {CHANNEL_2, CABLE_10},
     }};

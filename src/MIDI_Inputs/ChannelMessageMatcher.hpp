@@ -34,7 +34,7 @@ struct ChannelMessageMatcher {
     /// Get the MIDI channel and cable number.
     /// @note   Valid for all MIDI Channel messages, including Channel Pressure
     ///         and Pitch Bend.
-    MIDIChannelCN getChannelCN() const { return {channel, cable}; }
+    MIDIChannelCable getChannelCable() const { return {channel, cable}; }
 };
 
 inline bool operator==(ChannelMessageMatcher a, ChannelMessageMatcher b) {

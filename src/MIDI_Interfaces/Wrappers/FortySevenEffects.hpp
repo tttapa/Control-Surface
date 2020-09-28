@@ -28,7 +28,7 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
         this->midimsg.header = interface.getType() | channel;
         this->midimsg.data1 = interface.getData1();
         this->midimsg.data2 = interface.getData2();
-        this->midimsg.CN = 0;
+        this->midimsg.cable = 0;
     }
 
     /// Get the latest system exclusive message from the given MIDI interface.
@@ -36,14 +36,14 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
     void updateSysExMessage(const MidiInterface &interface) {
         this->sysex.data = interface.getSysExArray();
         this->sysex.length = interface.getSysExArrayLength();
-        this->sysex.CN = 0;
+        this->sysex.cable = 0;
     }
 
     /// Get the latest real-time message from the given MIDI interface.
     template <class MidiInterface>
     void updateRealTimeMessage(const MidiInterface &interface) {
         this->rtmsg.message = interface.getType();
-        this->rtmsg.CN = 0;
+        this->rtmsg.cable = 0;
     }
 
     /// Temporarily saves a pointer to the MIDI parser's SysEx buffer.

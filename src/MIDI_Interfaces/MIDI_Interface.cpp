@@ -65,7 +65,7 @@ bool Parsing_MIDI_Interface::onRealTimeMessage() {
 
 bool Parsing_MIDI_Interface::onChannelMessage() {
     auto message = getChannelMessage();
-    if (!canWrite(message.CN))
+    if (!canWrite(message.cable))
         return false;
     sourceMIDItoPipe(message);
     if (callbacks)
@@ -77,7 +77,7 @@ bool Parsing_MIDI_Interface::onChannelMessage() {
 
 bool Parsing_MIDI_Interface::onSysExMessage() {
     auto message = getSysExMessage();
-    if (!canWrite(message.CN))
+    if (!canWrite(message.cable))
         return false;
     sourceMIDItoPipe(message);
     if (callbacks)

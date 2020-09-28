@@ -134,7 +134,7 @@ TEST(StreamMIDI_Interface, readSysEx) {
         0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7,
     };
     EXPECT_EQ(result, expected);
-    EXPECT_EQ(sysex.CN, 0);
+    EXPECT_EQ(sysex.cable, 0);
 }
 
 TEST(StreamMIDI_Interface, readSysExUpdate) {
@@ -164,5 +164,5 @@ TEST(StreamMIDI_Interface, readSysExUpdate) {
         0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7,
     };
     EXPECT_EQ(result, expected);
-    EXPECT_EQ(sysex.CN, 0);
+    EXPECT_EQ(sysex.cable, 0);
 }

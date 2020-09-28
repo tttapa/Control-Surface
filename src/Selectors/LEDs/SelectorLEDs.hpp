@@ -182,7 +182,7 @@ class ProgramChangeSelectorLEDs
     : public GenericProgramChangeSelector<N, SelectorLEDsCallback<N>> {
   public:
     ProgramChangeSelectorLEDs(Selectable<N> &selectable,
-                              const MIDIChannelCN &address,
+                              const MIDIChannelCable &address,
                               const PinList<N> &ledPins)
         : GenericProgramChangeSelector<N, SelectorLEDsCallback<N>>{
               selectable,

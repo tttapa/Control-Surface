@@ -37,7 +37,7 @@ TEST(USBMIDIParser, noteOnCN) {
     EXPECT_EQ(msg.header, 0x93);
     EXPECT_EQ(msg.data1, 0x2A);
     EXPECT_EQ(msg.data2, 0x7E);
-    EXPECT_EQ(msg.CN, 0x05);
+    EXPECT_EQ(msg.cable, 0x05);
 }
 
 TEST(USBMIDIParser, sysEx2Bytes) {

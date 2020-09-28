@@ -254,7 +254,6 @@ setCallbacks	KEYWORD2
 getParser	KEYWORD2
 getSysExMessage	KEYWORD2
 getChannelMessage	KEYWORD2
-getCN	KEYWORD2
 
 onChannelMessage	KEYWORD2
 onSysExMessage	KEYWORD2
@@ -879,10 +878,9 @@ setCallbacks	KEYWORD2
 getParser	KEYWORD2
 getChannelMessage	KEYWORD2
 getSysExMessage	KEYWORD2
-getCN	KEYWORD2
 onChannelMessage	KEYWORD2
 onSysExMessage	KEYWORD2
 onRealTimeMessage	KEYWORD2
 
-MIDIChannelCN	KEYWORD1
+MIDIChannelCable	KEYWORD1
 MIDIAddress	KEYWORD1

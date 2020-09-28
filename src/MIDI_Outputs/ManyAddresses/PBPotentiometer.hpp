@@ -49,7 +49,7 @@ class PBPotentiometer
      *          Cable Numbers [CABLE_1, CABLE_16].
      */
     PBPotentiometer(const Bank<NumBanks> &bank, pin_t analogPin,
-                    const Array<MIDIChannelCN, NumBanks> &addresses)
+                    const Array<MIDIChannelCable, NumBanks> &addresses)
         : MIDIFilteredAnalog<ManyAddresses<NumBanks>, PitchBendSender<10>>{
               {bank, AH::copyAs<MIDIAddress>(addresses)}, analogPin, {}} {}
 };

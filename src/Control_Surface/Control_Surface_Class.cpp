@@ -98,7 +98,7 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midichmsg) {
     ChannelMessageMatcher midimsg = {midichmsg};
 
 #ifdef DEBUG_MIDI_PACKETS
-    // TODO: print CN
+    // TODO: print cable
     if (midimsg.type != MIDIMessageType::PROGRAM_CHANGE &&
         midimsg.type != MIDIMessageType::CHANNEL_PRESSURE)
         DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1 << ' '
@@ -178,7 +178,7 @@ void Control_Surface_::sinkMIDIfromPipe(SysExMessage msg) {
 #ifdef DEBUG_MIDI_PACKETS
     const uint8_t *data = msg.data;
     size_t len = msg.length;
-    // TODO: print CN
+    // TODO: print cable
     DEBUG_OUT << hex;
     for (size_t i = 0; i < len; i++)
         DEBUG_OUT << data[i] << ' ';

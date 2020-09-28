@@ -78,7 +78,7 @@ class MatrixAddress : public OutputBankableMIDIAddress {
   public:
     MatrixAddress(BaseOutputBankConfig config,
                   const AddressMatrix<nb_rows, nb_cols> &addresses,
-                  MIDIChannelCN channelCN)
+                  MIDIChannelCable channelCN)
         : OutputBankableMIDIAddress{config}, addresses{addresses},
           channelCN{channelCN} {}
 
@@ -93,7 +93,7 @@ class MatrixAddress : public OutputBankableMIDIAddress {
 
   private:
     AddressMatrix<nb_rows, nb_cols> addresses;
-    MIDIChannelCN channelCN;
+    MIDIChannelCable channelCN;
 };
 
 namespace ManyAddresses {
@@ -149,7 +149,7 @@ class ManyMatrixAddresses : public ManyAddresses_Base {
     ManyMatrixAddresses(
         const Bank<NumBanks> &bank,
         const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &addresses,
-        const Array<MIDIChannelCN, NumBanks> &channelCNs)
+        const Array<MIDIChannelCable, NumBanks> &channelCNs)
         : ManyAddresses_Base{bank}, addresses{addresses}, channelCNs{
                                                               channelCNs} {}
 
@@ -160,7 +160,7 @@ class ManyMatrixAddresses : public ManyAddresses_Base {
 
   private:
     Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> addresses;
-    Array<MIDIChannelCN, NumBanks> channelCNs;
+    Array<MIDIChannelCable, NumBanks> channelCNs;
 };
 
 } // namespace ManyAddresses

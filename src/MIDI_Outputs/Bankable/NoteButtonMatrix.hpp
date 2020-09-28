@@ -58,7 +58,7 @@ class NoteButtonMatrix
     NoteButtonMatrix(OutputBankConfig<> config, const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &notes,
-                     MIDIChannelCN channelCN = {CHANNEL_1, CABLE_1},
+                     MIDIChannelCable channelCN = {CHANNEL_1, CABLE_1},
                      uint8_t velocity = 0x7F)
         : MIDIButtonMatrix<MatrixAddress<nb_rows, nb_cols>, DigitalNoteSender,
                            nb_rows, nb_cols>{

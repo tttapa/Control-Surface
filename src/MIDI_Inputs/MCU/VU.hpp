@@ -117,7 +117,7 @@ struct VUMatcher {
     /// Parse and try to match the incoming MIDI message.
     Result operator()(ChannelMessageMatcher m) {
         uint8_t track = m.data1 >> 4;
-        if (!MIDIAddress::matchSingle({track, m.getChannelCN()}, address))
+        if (!MIDIAddress::matchSingle({track, m.getChannelCable()}, address))
             return {false, 0};
         uint8_t data = m.data1 & 0x0F;
         return {true, data};
@@ -147,7 +147,7 @@ struct BankableVUMatcher {
         using BankableMIDIMatcherHelpers::getBankIndex;
         using BankableMIDIMatcherHelpers::matchBankable;
         uint8_t track = m.data1 >> 4;
-        MIDIAddress midiaddr = {track, m.getChannelCN()};
+        MIDIAddress midiaddr = {track, m.getChannelCable()};
         if (!matchBankable(midiaddr, address, config))
             return {false, 0, 0};
         uint8_t data = m.data1 & 0x0F;
@@ -207,7 +207,7 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
      *          the decay.
      *          @see    @ref MCU::VUDecay
      */
-    VU(uint8_t track, MIDIChannelCN channelCN,
+    VU(uint8_t track, MIDIChannelCable channelCN,
        unsigned int decayTime = VUDecay::Default)
         : MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
                                    VUMatcher>({{track - 1, channelCN}}),
@@ -307,7 +307,7 @@ class VU
      *          the decay.
      *          @see    @ref MCU::VUDecay
      */
-    VU(BankConfig<BankSize> config, uint8_t track, MIDIChannelCN channelCN,
+    VU(BankConfig<BankSize> config, uint8_t track, MIDIChannelCable channelCN,
        unsigned int decayTime = VUDecay::Default)
         : BankableMatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
                                            BankableVUMatcher<BankSize>>(

@@ -13,6 +13,7 @@ AH_DIAGNOSTIC_WERROR()
 
 #include <Def/Cable.hpp>
 #include <Def/Channel.hpp>
+#include <Def/MIDIAddress.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -71,8 +72,8 @@ enum class MIDICodeIndexNumber : uint8_t {
 
 struct ChannelMessage {
     /// Constructor.
-    ChannelMessage(uint8_t header, uint8_t data1, uint8_t data2, uint8_t CN)
-        : header(header), data1(data1), data2(data2), CN(CN) {}
+    ChannelMessage(uint8_t header, uint8_t data1, uint8_t data2, uint8_t cable)
+        : header(header), data1(data1), data2(data2), cable(cable) {}
 
     /// Constructor.
     ChannelMessage(MIDIMessageType type, Channel channel, uint8_t data1,
@@ -84,12 +85,12 @@ struct ChannelMessage {
     uint8_t data1;  ///< First MIDI data byte
     uint8_t data2;  ///< First MIDI data byte
 
-    uint8_t CN; ///< USB MIDI cable number;
+    uint8_t cable; ///< USB MIDI cable number;
 
     /// Check for equality.
     bool operator==(ChannelMessage other) const {
         return this->header == other.header && this->data1 == other.data1 &&
-               this->data2 == other.data2 && this->CN == other.CN;
+               this->data2 == other.data2 && this->cable == other.cable;
     }
     /// Check for inequality.
     bool operator!=(ChannelMessage other) const { return !(*this == other); }
@@ -103,9 +104,9 @@ struct ChannelMessage {
     }
 
     /// Get the MIDI USB cable number of the message.
-    Cable getCable() const { return Cable(CN); }
+    Cable getCable() const { return Cable(cable); }
     /// Set the MIDI USB cable number of the message.
-    void setCable(Cable cable) { CN = cable.getRaw(); }
+    void setCable(Cable cable) { this->cable = cable.getRaw(); }
 
     /// Get the MIDI message type.
     MIDIMessageType getMessageType() const {
@@ -115,6 +116,17 @@ struct ChannelMessage {
     void setMessageType(MIDIMessageType type) {
         header &= 0x0F;
         header |= static_cast<uint8_t>(type) & 0xF0;
+    }
+
+    /// Get the MIDI address of this message, using `data1` as the address.
+    /// @note   Don't use this for Channel Pressure or Pitch Bend messages,
+    ///         as `data1` will have a different meaning in those cases.
+    MIDIAddress getAddress() const { return {data1, getChannelCable()}; }
+    /// Get the MIDI channel and cable number.
+    /// @note   Valid for all MIDI Channel messages, including Channel Pressure
+    ///         and Pitch Bend.
+    MIDIChannelCable getChannelCable() const {
+        return {getChannel(), getCable()};
     }
 
     /// Check whether this message has one or two data bytes.
@@ -137,15 +149,15 @@ struct ChannelMessage {
 
 struct SysExMessage {
     /// Constructor.
-    SysExMessage() : data(nullptr), length(0), CN(0) {}
+    SysExMessage() : data(nullptr), length(0), cable(0) {}
 
     /// Constructor.
-    SysExMessage(const uint8_t *data, size_t length, uint8_t CN)
-        : data(data), length(length), CN(CN) {}
+    SysExMessage(const uint8_t *data, size_t length, uint8_t cable)
+        : data(data), length(length), cable(cable) {}
 
     /// Constructor.
     SysExMessage(const uint8_t *data, size_t length, Cable cable = CABLE_1)
-        : data(data), length(length), CN(cable.getRaw()) {}
+        : data(data), length(length), cable(cable.getRaw()) {}
 
 #ifndef ARDUINO
     /// Constructor.
@@ -155,49 +167,50 @@ struct SysExMessage {
 
     const uint8_t *data;
     uint8_t length;
-    uint8_t CN;
+    uint8_t cable;
 
     bool operator==(SysExMessage other) const {
         return this->length == other.length &&
                this->data == other.data && // TODO: compare contents or pointer?
-               this->CN == other.CN;
+               this->cable == other.cable;
     }
     bool operator!=(SysExMessage other) const { return !(*this == other); }
 
     /// Get the MIDI USB cable number of the message.
-    Cable getCable() const { return Cable(CN); }
+    Cable getCable() const { return Cable(cable); }
     /// Set the MIDI USB cable number of the message.
-    void setCable(Cable cable) { CN = cable.getRaw(); }
+    void setCable(Cable cable) { this->cable = cable.getRaw(); }
 };
 
 struct RealTimeMessage {
     /// Constructor.
-    RealTimeMessage(uint8_t message, uint8_t cn) : message(message), CN(cn) {}
+    RealTimeMessage(uint8_t message, uint8_t cable)
+        : message(message), cable(cable) {}
 
     /// Constructor.
-    RealTimeMessage(MIDIMessageType message, uint8_t cn)
-        : message(uint8_t(message)), CN(cn) {}
+    RealTimeMessage(MIDIMessageType message, uint8_t cable)
+        : message(uint8_t(message)), cable(cable) {}
 
     /// Constructor.
     RealTimeMessage(uint8_t message, Cable cable = CABLE_1)
-        : message(message), CN(cable.getRaw()) {}
+        : message(message), cable(cable.getRaw()) {}
 
     /// Constructor.
     RealTimeMessage(MIDIMessageType message, Cable cable = CABLE_1)
-        : message(uint8_t(message)), CN(cable.getRaw()) {}
+        : message(uint8_t(message)), cable(cable.getRaw()) {}
 
     uint8_t message;
-    uint8_t CN;
+    uint8_t cable;
 
     bool operator==(RealTimeMessage other) const {
-        return this->message == other.message && this->CN == other.CN;
+        return this->message == other.message && this->cable == other.cable;
     }
     bool operator!=(RealTimeMessage other) const { return !(*this == other); }
 
     /// Get the MIDI USB cable number of the message.
-    Cable getCable() const { return Cable(CN); }
+    Cable getCable() const { return Cable(cable); }
     /// Set the MIDI USB cable number of the message.
-    void setCable(Cable cable) { CN = cable.getRaw(); }
+    void setCable(Cable cable) { this->cable = cable.getRaw(); }
 };
 
 END_CS_NAMESPACE

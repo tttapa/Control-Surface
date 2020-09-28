@@ -115,7 +115,7 @@ struct VPotMatcher : public TwoByteMIDIMatcher {
      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
      *          [CABLE_1, CABLE_16].
      */
-    VPotMatcher(uint8_t track, MIDIChannelCN channelCN)
+    VPotMatcher(uint8_t track, MIDIChannelCable channelCN)
         : TwoByteMIDIMatcher({track + 0x30 - 1, channelCN}) {}
 };
 
@@ -138,7 +138,7 @@ struct BankableVPotMatcher : public BankableTwoByteMIDIMatcher<BankSize> {
      *          [CABLE_1, CABLE_16].
      */
     BankableVPotMatcher(BankConfig<BankSize> config, uint8_t track,
-                        MIDIChannelCN channelCN)
+                        MIDIChannelCable channelCN)
         : BankableTwoByteMIDIMatcher<BankSize>(config,
                                                {track + 0x30 - 1, channelCN}) {}
 };
@@ -165,7 +165,7 @@ class VPotRing
      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
      *          [CABLE_1, CABLE_16].
      */
-    VPotRing(uint8_t track, MIDIChannelCN channelCN = CHANNEL_1)
+    VPotRing(uint8_t track, MIDIChannelCable channelCN = CHANNEL_1)
         : MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
                                    VPotMatcher>({track, channelCN}) {}
 
@@ -245,7 +245,7 @@ class VPotRing
      *          [CABLE_1, CABLE_16].
      */
     VPotRing(BankConfig<BankSize> config, uint8_t track,
-             MIDIChannelCN channelCN = CHANNEL_1)
+             MIDIChannelCable channelCN = CHANNEL_1)
         : BankableMatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
                                            BankableVPotMatcher<BankSize>>(
               {config, track, channelCN}) {}

@@ -8,7 +8,7 @@ MIDIReadEvent USBMIDI_Parser::parse(uint8_t *packet) {
     DEBUG("MIDIUSB packet:\t" << hex << packet[0] << ' ' << packet[1] << ' '
                               << packet[2] << ' ' << packet[3] << dec);
     // MIDI USB cable number
-    uint8_t CN = packet[0] >> 4;
+    uint8_t cable = packet[0] >> 4;
     // MIDI USB code index number
     MIDICodeIndexNumber CIN = static_cast<MIDICodeIndexNumber>(packet[0] & 0xF);
 
@@ -33,7 +33,7 @@ MIDIReadEvent USBMIDI_Parser::parse(uint8_t *packet) {
         midimsg.header = packet[1];
         midimsg.data1 = packet[2];
         midimsg.data2 = packet[3];
-        midimsg.CN = CN;
+        midimsg.cable = cable;
         return MIDIReadEvent::CHANNEL_MESSAGE;
     }
 
@@ -43,15 +43,15 @@ MIDIReadEvent USBMIDI_Parser::parse(uint8_t *packet) {
     else if (CIN == MIDICodeIndexNumber::SYSEX_START_CONT) {
         // SysEx starts or continues (3 bytes)
         if (packet[1] == SysExStart)
-            startSysEx(CN); // start a new message
+            startSysEx(cable); // start a new message
                             // (overwrite previous unfinished message)
-        else if (!receivingSysEx(CN)) { // If we haven't received a SysExStart
+        else if (!receivingSysEx(cable)) { // If we haven't received a SysExStart
             DEBUGREF(F("Error: No SysExStart received"));
             return MIDIReadEvent::NO_MESSAGE; // ignore the data
         }
-        addSysExByte(CN, packet[1]) &&     // add three data bytes to buffer
-            addSysExByte(CN, packet[2]) && //
-            addSysExByte(CN, packet[3]);
+        addSysExByte(cable, packet[1]) &&     // add three data bytes to buffer
+            addSysExByte(cable, packet[2]) && //
+            addSysExByte(cable, packet[3]);
         return MIDIReadEvent::NO_MESSAGE; // SysEx is not finished yet
     }
 
@@ -63,12 +63,12 @@ MIDIReadEvent USBMIDI_Parser::parse(uint8_t *packet) {
         if (packet[1] != SysExEnd) {
             // System Common (not implemented)
             return MIDIReadEvent::NO_MESSAGE;
-        } else if (!receivingSysEx(CN)) { // If we haven't received a SysExStart
+        } else if (!receivingSysEx(cable)) { // If we haven't received a SysExStart
             DEBUGFN(F("Error: No SysExStart received"));
             return MIDIReadEvent::NO_MESSAGE; // ignore the data
         }
-        if (addSysExByte(CN, packet[1])) {
-            endSysEx(CN);
+        if (addSysExByte(cable, packet[1])) {
+            endSysEx(cable);
             return MIDIReadEvent::SYSEX_MESSAGE;
         } else {
             return MIDIReadEvent::NO_MESSAGE; // Buffer full, ignore message
@@ -80,15 +80,15 @@ MIDIReadEvent USBMIDI_Parser::parse(uint8_t *packet) {
     else if (CIN == MIDICodeIndexNumber::SYSEX_END_2B) {
         // SysEx ends with following two bytes
         if (packet[1] == SysExStart)
-            startSysEx(CN); // start a new message
+            startSysEx(cable); // start a new message
         // (overwrite previous unfinished message)
-        else if (!receivingSysEx(CN)) { // If we haven't received a SysExStart
+        else if (!receivingSysEx(cable)) { // If we haven't received a SysExStart
             DEBUGFN(F("Error: No SysExStart received"));
             return MIDIReadEvent::NO_MESSAGE; // ignore the data
         }
         if ( // add two data bytes to buffer
-            addSysExByte(CN, packet[1]) && addSysExByte(CN, SysExEnd)) {
-            endSysEx(CN);
+            addSysExByte(cable, packet[1]) && addSysExByte(cable, SysExEnd)) {
+            endSysEx(cable);
             return MIDIReadEvent::SYSEX_MESSAGE;
         } else
             return MIDIReadEvent::NO_MESSAGE; // Buffer full, ignore message
@@ -99,17 +99,17 @@ MIDIReadEvent USBMIDI_Parser::parse(uint8_t *packet) {
     else if (CIN == MIDICodeIndexNumber::SYSEX_END_3B) {
         // SysEx ends with following three bytes
         if (packet[1] == SysExStart)
-            startSysEx(CN); // start a new message
+            startSysEx(cable); // start a new message
                             // (overwrite previous unfinished message)
-        else if (!receivingSysEx(CN)) { // If we haven't received a SysExStart
+        else if (!receivingSysEx(cable)) { // If we haven't received a SysExStart
             DEBUGFN(F("Error: No SysExStart received"));
             return MIDIReadEvent::NO_MESSAGE; // ignore the data
         }
         if (                               // add three data bytes to buffer
-            addSysExByte(CN, packet[1]) && //
-            addSysExByte(CN, packet[2]) && //
-            addSysExByte(CN, SysExEnd)) {
-            endSysEx(CN);
+            addSysExByte(cable, packet[1]) && //
+            addSysExByte(cable, packet[2]) && //
+            addSysExByte(cable, SysExEnd)) {
+            endSysEx(cable);
             return MIDIReadEvent::SYSEX_MESSAGE;
         } else {
             return MIDIReadEvent::NO_MESSAGE; // Buffer full, ignore message
@@ -136,7 +136,7 @@ MIDIReadEvent USBMIDI_Parser::parse(uint8_t *packet) {
     else if (CIN == MIDICodeIndexNumber::SINGLE_BYTE) {
         // Single Byte
         rtmsg.message = packet[1];
-        rtmsg.CN = CN;
+        rtmsg.cable = cable;
         return MIDIReadEvent::REALTIME_MESSAGE;
     }
 

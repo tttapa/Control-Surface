@@ -63,7 +63,7 @@ class NoteButtonMatrix
         const Bank<NumBanks> &bank, const PinList<nb_rows> &rowPins,
         const PinList<nb_cols> &colPins,
         const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &notes,
-        const Array<MIDIChannelCN, NumBanks> &channelCNs,
+        const Array<MIDIChannelCable, NumBanks> &channelCNs,
         uint8_t velocity = 0x7F)
         : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, nb_rows, nb_cols>,
                            DigitalNoteSender, nb_rows, nb_cols>{

@@ -19,13 +19,13 @@ BEGIN_CS_NAMESPACE
 template <uint8_t INPUT_PRECISION_BITS>
 class PitchBendSender {
   public:
-    /// Send a MIDI pitch bend message with the given value and channel+CN.
+    /// Send a MIDI pitch bend message with the given value and channel+cable.
     /// address.getAddress() is ignored.
     /// Value should be @p INPUT_PRECISION_BITS wide.
     static void send(uint16_t value, MIDIAddress address) {
         value = AH::increaseBitDepth<14, precision(), uint16_t>(value);
         // ignore address byte, just use channel and cable numbers
-        MIDIChannelCN channelCN = {address.getChannel(),
+        MIDIChannelCable channelCN = {address.getChannel(),
                                    address.getCableNumber()};
         Control_Surface.sendPB(channelCN, value);
     }

@@ -29,16 +29,16 @@ class USBMIDI_Parser : public MIDI_Parser {
 
   protected:
 #if !IGNORE_SYSEX
-    void startSysEx(uint8_t CN) { sysexbuffers[CN].start(); }
-    void endSysEx(uint8_t CN) {
-        sysexbuffers[CN].end();
-        activeSysExCN = CN;
+    void startSysEx(uint8_t cable) { sysexbuffers[cable].start(); }
+    void endSysEx(uint8_t cable) {
+        sysexbuffers[cable].end();
+        activeSysExCN = cable;
     }
-    bool addSysExByte(uint8_t CN, uint8_t data) {
-        return sysexbuffers[CN].add(data);
+    bool addSysExByte(uint8_t cable, uint8_t data) {
+        return sysexbuffers[cable].add(data);
     }
-    bool receivingSysEx(uint8_t CN) const {
-        return sysexbuffers[CN].isReceiving();
+    bool receivingSysEx(uint8_t cable) const {
+        return sysexbuffers[cable].isReceiving();
     }
 #endif
 

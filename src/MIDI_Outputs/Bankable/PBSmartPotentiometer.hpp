@@ -50,7 +50,7 @@ class PBSmartPotentiometer
      *          and optional cable number [CABLE_1, CABLE_16].
      */
     PBSmartPotentiometer(BankConfig<NumBanks> config, pin_t analogPin,
-                         MIDIChannelCN address)
+                         MIDIChannelCable address)
         : SmartMIDIFilteredAnalog<NumBanks, SingleAddress, PitchBendSender<10>>(
               SingleAddress{config, address}, analogPin, {}) {}
 };

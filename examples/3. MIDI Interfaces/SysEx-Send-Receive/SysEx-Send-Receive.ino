@@ -21,7 +21,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
     Serial << F("Received SysEx message: ") << hex;
     for (uint8_t i = 0; i < sysex.length; ++i)
       Serial << sysex.data[i] << ' ';
-    Serial << dec << F("\t on cable ") << sysex.CN << endl;
+    Serial << dec << F("\t on cable ") << sysex.cable << endl;
   }
 } callback = {};
 

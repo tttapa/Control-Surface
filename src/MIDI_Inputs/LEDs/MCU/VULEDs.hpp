@@ -62,7 +62,7 @@ class VULEDs : public VU, public VULEDsDriver<NumLEDs> {
      *          the decay.
      *          @see    @ref MCU::VUDecay
      */
-    VULEDs(const PinList<NumLEDs> &leds, uint8_t track, MIDIChannelCN channelCN,
+    VULEDs(const PinList<NumLEDs> &leds, uint8_t track, MIDIChannelCable channelCN,
            unsigned int decayTime = VUDecay::Default)
         : VU(track, channelCN, decayTime), VULEDsDriver<NumLEDs>(leds) {}
 
@@ -165,7 +165,7 @@ class VULEDs : public VU<BankSize>, public VULEDsDriver<NumLEDs> {
      *          @see    @ref MCU::VUDecay
      */
     VULEDs(BankConfig<BankSize> config, const PinList<NumLEDs> &leds,
-           uint8_t track, MIDIChannelCN channelCN,
+           uint8_t track, MIDIChannelCable channelCN,
            unsigned int decayTime = VUDecay::Default)
         : VU<BankSize>(config, track, channelCN, decayTime),
           VULEDsDriver<NumLEDs>(leds) {}

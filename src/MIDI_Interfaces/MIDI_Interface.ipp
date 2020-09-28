@@ -70,7 +70,7 @@ void MIDI_Sender<Derived>::sendCC(MIDIAddress address, uint8_t value) {
                     address.getAddress(), value, address.getCableNumber());
 }
 template <class Derived>
-void MIDI_Sender<Derived>::sendPC(MIDIChannelCN address, uint8_t value) {
+void MIDI_Sender<Derived>::sendPC(MIDIChannelCable address, uint8_t value) {
     if (address)
         sendOnCable(MIDIMessageType::PROGRAM_CHANGE, address.getChannel(),
                     value, address.getCableNumber());
@@ -82,13 +82,13 @@ void MIDI_Sender<Derived>::sendPC(MIDIAddress address) {
                     address.getAddress(), address.getCableNumber());
 }
 template <class Derived>
-void MIDI_Sender<Derived>::sendCP(MIDIChannelCN address, uint8_t pressure) {
+void MIDI_Sender<Derived>::sendCP(MIDIChannelCable address, uint8_t pressure) {
     if (address)
         sendOnCable(MIDIMessageType::CHANNEL_PRESSURE, address.getChannel(),
                     pressure, address.getCableNumber());
 }
 template <class Derived>
-void MIDI_Sender<Derived>::sendPB(MIDIChannelCN address, uint16_t value) {
+void MIDI_Sender<Derived>::sendPB(MIDIChannelCable address, uint16_t value) {
     if (address)
         sendOnCable(MIDIMessageType::PITCH_BEND, address.getChannel(),
                     value & 0x7F, value >> 7, address.getCableNumber());
@@ -100,7 +100,7 @@ void MIDI_Sender<Derived>::send(SysExMessage message) {
             ERROR(F("Error: invalid SysEx length"), 0x7F7F);
             return;
         }
-        CRTP(Derived).sendImpl(message.data, message.length, message.CN);
+        CRTP(Derived).sendImpl(message.data, message.length, message.cable);
     }
 }
 template <class Derived>
@@ -110,16 +110,16 @@ void MIDI_Sender<Derived>::send(MIDIMessageType rt, Cable cable) {
 
 template <class Derived>
 void MIDI_Sender<Derived>::send(RealTimeMessage message) {
-    CRTP(Derived).sendImpl(message.message, message.CN);
+    CRTP(Derived).sendImpl(message.message, message.cable);
 }
 
 template <class Derived>
 void MIDI_Sender<Derived>::send(ChannelMessage message) {
     if (message.hasTwoDataBytes())
         CRTP(Derived).sendImpl(message.header, message.data1, message.data2,
-                               message.CN);
+                               message.cable);
     else
-        CRTP(Derived).sendImpl(message.header, message.data1, message.CN);
+        CRTP(Derived).sendImpl(message.header, message.data1, message.cable);
 }
 
 END_CS_NAMESPACE

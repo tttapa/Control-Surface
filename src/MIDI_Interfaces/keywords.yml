@@ -33,7 +33,6 @@ keyword2:
  - getParser
  - getChannelMessage
  - getSysExMessage
- - getCN
  - onChannelMessage
  - onSysExMessage
  - onRealTimeMessage

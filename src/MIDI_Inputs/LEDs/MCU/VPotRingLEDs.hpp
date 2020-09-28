@@ -38,7 +38,7 @@ class VPotRingLEDs : public VPotRing, public VPotRingLEDsDriver {
      *          Number [CABLE_1, CABLE_16].
      */
     VPotRingLEDs(const PinList<11> &leds, uint8_t track,
-                 MIDIChannelCN channelCN = CHANNEL_1)
+                 MIDIChannelCable channelCN = CHANNEL_1)
         : VPotRing(track, channelCN), VPotRingLEDsDriver(leds) {}
 
   protected:
@@ -101,7 +101,7 @@ class VPotRingLEDs : public VPotRing<BankSize>, public VPotRingLEDsDriver {
      *          Number [CABLE_1, CABLE_16].
      */
     VPotRingLEDs(BankConfig<BankSize> config, const PinList<11> &leds,
-                 uint8_t track, MIDIChannelCN channelCN = CHANNEL_1)
+                 uint8_t track, MIDIChannelCable channelCN = CHANNEL_1)
         : VPotRing<BankSize>(config, track, channelCN),
           VPotRingLEDsDriver(leds) {}
 

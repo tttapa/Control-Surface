@@ -64,7 +64,7 @@ TEST(Construction, MIDIOutputs) {
     const pin_t pin = 0;
     const MIDIAddress address = {};
     const RelativeMIDIAddress relAddress = {};
-    const MIDIChannelCN cnChannel = {};
+    const MIDIChannelCable cnChannel = {};
     uint8_t u8 = 0;
     int8_t i8 = 0;
     const PinList<3> rowPins3 = {1, 2, 3};
@@ -169,7 +169,7 @@ TEST(Construction, MIDIOutputs) {
 
 TEST(Construction, Selectors) {
     const pin_t pin = 0;
-    const MIDIChannelCN cnChannel = {};
+    const MIDIChannelCable cnChannel = {};
     const Wrap wrap = Wrap::NoWrap;
     Bank<4> bank;
     Bank<2> bank2;

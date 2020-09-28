@@ -18,7 +18,7 @@ class PBValue : public MatchingMIDIInputElement<MIDIMessageType::PITCH_BEND,
     ///
     /// @param  address
     ///         The address to listen to.
-    PBValue(MIDIChannelCN address) : MatchingMIDIInputElement(address) {}
+    PBValue(MIDIChannelCable address) : MatchingMIDIInputElement(address) {}
 
   protected:
     void handleUpdate(typename PitchBendMIDIMatcher::Result match) override {
@@ -72,7 +72,7 @@ class PBValue
     /// @param  address
     ///         The base address to listen to.
     PBValue(BankConfig<BankSize, BankType::CHANGE_CHANNEL> config,
-            MIDIChannelCN address)
+            MIDIChannelCable address)
         : Base({config, address}) {}
 
   protected:

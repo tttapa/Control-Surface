@@ -37,7 +37,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
     ChannelMessage cm = midi.getChannelMessage();
     // Print the message
     Serial << F("Channel message: ") << hex << cm.header << ' ' << cm.data1
-           << ' ' << cm.data2 << dec << F(" on cable ") << cm.CN << endl;
+           << ' ' << cm.data2 << dec << F(" on cable ") << cm.cable << endl;
   }
 
   // Callback for system exclusive messages
@@ -47,7 +47,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
     Serial << F("System Exclusive message: ") << hex;
     for (size_t i = 0; i < se.length; ++i)
       Serial << se.data[i] << ' ';
-    Serial << dec << F("on cable ") << se.CN << endl;
+    Serial << dec << F("on cable ") << se.cable << endl;
   }
 
   // Callback for real-time messages
@@ -55,7 +55,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
     RealTimeMessage rt = midi.getRealTimeMessage();
     // Print the message
     Serial << F("Real-time message: ") << hex << rt.message << dec
-           << F(" on cable ") << rt.CN << endl;
+           << F(" on cable ") << rt.cable << endl;
   }
 
 } callbacks;
