@@ -20,7 +20,7 @@ struct OneByteMIDIMatcher {
         uint8_t value;
     };
 
-    Result operator()(ChannelMessageMatcher m) {
+    Result operator()(ChannelMessage m) {
         if (!MIDIChannelCable::matchSingle(m.getChannelCable(), address))
             return {false, 0};
         uint8_t value = m.data1;
@@ -42,10 +42,11 @@ struct TwoByteMIDIMatcher {
         uint8_t value;
     };
 
-    Result operator()(ChannelMessageMatcher m) {
+    Result operator()(ChannelMessage m) {
         if (!MIDIAddress::matchSingle(m.getAddress(), address))
             return {false, 0};
-        uint8_t value = m.type == MIDIMessageType::NOTE_OFF ? 0 : m.data2;
+        uint8_t value = 
+            m.getMessageType() == MIDIMessageType::NOTE_OFF ? 0 : m.getData2();
         return {true, value};
     }
 
@@ -63,7 +64,7 @@ struct PitchBendMIDIMatcher {
         uint16_t value;
     };
 
-    Result operator()(ChannelMessageMatcher m) {
+    Result operator()(ChannelMessage m) {
         if (!MIDIChannelCable::matchSingle(m.getChannelCable(), address))
             return {false, 0};
         uint16_t value = (m.data2 << 7) | m.data1;
@@ -88,11 +89,12 @@ struct TwoByteRangeMIDIMatcher {
         uint8_t index;
     };
 
-    Result operator()(ChannelMessageMatcher m) {
+    Result operator()(ChannelMessage m) {
         if (!MIDIAddress::matchAddressInRange(m.getAddress(), address, length))
             return {false, 0, 0};
-        uint8_t value = m.type == MIDIMessageType::NOTE_OFF ? 0 : m.data2;
-        uint8_t index = m.data1 - address.getAddress();
+        uint8_t value = 
+            m.getMessageType() == MIDIMessageType::NOTE_OFF ? 0 : m.getData2();
+        uint8_t index = m.getData1() - address.getAddress();
         return {true, value, index};
     }
 
@@ -117,7 +119,7 @@ struct BankableOneByteMIDIMatcher {
         uint8_t bankIndex;
     };
 
-    Result operator()(ChannelMessageMatcher m) {
+    Result operator()(ChannelMessage m) {
         using BankableMIDIMatcherHelpers::getBankIndex;
         using BankableMIDIMatcherHelpers::matchBankable;
         if (!matchBankable(m.getChannelCable(), address, config))
@@ -156,12 +158,13 @@ struct BankableTwoByteMIDIMatcher {
         uint8_t bankIndex;
     };
 
-    Result operator()(ChannelMessageMatcher m) {
+    Result operator()(ChannelMessage m) {
         using BankableMIDIMatcherHelpers::getBankIndex;
         using BankableMIDIMatcherHelpers::matchBankable;
         if (!matchBankable(m.getAddress(), address, config))
             return {false, 0, 0};
-        uint8_t value = m.type == MIDIMessageType::NOTE_OFF ? 0 : m.data2;
+        uint8_t value = 
+            m.getMessageType() == MIDIMessageType::NOTE_OFF ? 0 : m.getData2();
         uint8_t bankIndex = getBankIndex(m.getAddress(), address, config);
         return {true, value, bankIndex};
     }
@@ -196,7 +199,7 @@ struct BankablePitchBendMIDIMatcher {
         uint8_t bankIndex;
     };
 
-    Result operator()(ChannelMessageMatcher m) {
+    Result operator()(ChannelMessage m) {
         using BankableMIDIMatcherHelpers::getBankIndex;
         using BankableMIDIMatcherHelpers::matchBankable;
         if (!matchBankable(m.getChannelCable(), address, config))
@@ -323,11 +326,12 @@ struct BankableTwoByteRangeMIDIMatcher {
         uint8_t index;
     };
 
-    Result operator()(ChannelMessageMatcher m) {
+    Result operator()(ChannelMessage m) {
         using BankableMIDIMatcherHelpers::getBankIndex;
         if (!matchBankableAddressInRange(m.getAddress(), address))
             return {false, 0, 0, 0};
-        uint8_t value = m.type == MIDIMessageType::NOTE_OFF ? 0 : m.data2;
+        uint8_t value = 
+            m.getMessageType() == MIDIMessageType::NOTE_OFF ? 0 : m.getData2();
         uint8_t bankIndex = getBankIndex(m.getAddress(), address, config);
         uint8_t rangeIndex = getRangeIndex(m.getAddress(), address);
         return {true, value, bankIndex, rangeIndex};

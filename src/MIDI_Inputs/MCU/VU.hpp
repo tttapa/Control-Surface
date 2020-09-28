@@ -115,7 +115,7 @@ struct VUMatcher {
     };
 
     /// Parse and try to match the incoming MIDI message.
-    Result operator()(ChannelMessageMatcher m) {
+    Result operator()(ChannelMessage m) {
         uint8_t track = m.data1 >> 4;
         if (!MIDIAddress::matchSingle({track, m.getChannelCable()}, address))
             return {false, 0};
@@ -143,7 +143,7 @@ struct BankableVUMatcher {
     };
 
     /// Parse and try to match the incoming MIDI message.
-    Result operator()(ChannelMessageMatcher m) {
+    Result operator()(ChannelMessage m) {
         using BankableMIDIMatcherHelpers::getBankIndex;
         using BankableMIDIMatcherHelpers::matchBankable;
         uint8_t track = m.data1 >> 4;

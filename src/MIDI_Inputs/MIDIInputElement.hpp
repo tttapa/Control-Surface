@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ChannelMessageMatcher.hpp"
 #include <Def/MIDIAddress.hpp>
+#include <MIDI_Parsers/MIDI_MessageTypes.hpp>
 
 #include <Banks/Bank.hpp> // Bank<N>, BankSettingChangeCallback
 
@@ -27,9 +27,9 @@ class MIDIInputElement
     virtual ~MIDIInputElement() = default;
 
   public:
-    using MessageMatcherType =
+    using MessageType =
         typename std::conditional<Type == MIDIMessageType::SYSEX_START,
-                                  SysExMessage, ChannelMessageMatcher>::type;
+                                  SysExMessage, ChannelMessage>::type;
 
     /// Initialize the input element.
     virtual void begin() {} // LCOV_EXCL_LINE
@@ -41,10 +41,10 @@ class MIDIInputElement
     virtual void update() {} // LCOV_EXCL_LINE
 
     /// Receive a new MIDI message and update the internal state.
-    virtual bool updateWith(MessageMatcherType midimsg) = 0;
+    virtual bool updateWith(MessageType midimsg) = 0;
 
     /// Update all
-    static bool updateAllWith(MessageMatcherType midimsg) {
+    static bool updateAllWith(MessageType midimsg) {
         // MIDI messages can arrive asynchronously, so the linked list must be
         // locked before iterating over it or altering it.
         typename MIDIInputElement::LockGuard lock(MIDIInputElement::getMutex());
@@ -82,10 +82,10 @@ class MatchingMIDIInputElement : public MIDIInputElement<Type> {
     MatchingMIDIInputElement(const Matcher &matcher) : matcher(matcher) {}
 
   public:
-    using MessageMatcherType =
-        typename MIDIInputElement<Type>::MessageMatcherType;
+    using MessageType =
+        typename MIDIInputElement<Type>::MessageType;
 
-    bool updateWith(MessageMatcherType midimsg) override {
+    bool updateWith(MessageType midimsg) override {
         auto match = matcher(midimsg);
         if (match.match)
             handleUpdate(match);

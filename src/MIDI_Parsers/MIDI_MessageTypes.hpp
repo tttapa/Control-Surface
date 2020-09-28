@@ -118,6 +118,15 @@ struct ChannelMessage {
         header |= static_cast<uint8_t>(type) & 0xF0;
     }
 
+    /// Get the first data byte.
+    uint8_t getData1() const { return data1; }
+    /// Get the second data byte.
+    uint8_t getData2() const { return data2; }
+    /// Set the first data byte.
+    void setData1(uint8_t data) { data1 = data; }
+    /// Get the second data byte.
+    void getData2(uint8_t data) { data2 = data; }
+
     /// Get the MIDI address of this message, using `data1` as the address.
     /// @note   Don't use this for Channel Pressure or Pitch Bend messages,
     ///         as `data1` will have a different meaning in those cases.

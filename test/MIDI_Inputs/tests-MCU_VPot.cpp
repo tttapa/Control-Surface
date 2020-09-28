@@ -12,7 +12,7 @@ TEST(MCUVPot, update) {
     constexpr uint8_t track = 5;
     MCU::VPotRing vpot = {track, channel};
 
-    ChannelMessageMatcher midimsg = {
+    ChannelMessage midimsg = {
         MIDIMessageType::CONTROL_CHANGE,
         channel,
         0x34,
@@ -43,7 +43,7 @@ TEST(MCUVPotBankable, setValueBankChangeAddress) {
     constexpr uint8_t track = 5;
     MCU::Bankable::VPotRing<2> vpot = {bank, track, channel};
 
-    ChannelMessageMatcher midimsg = {
+    ChannelMessage midimsg = {
         MIDIMessageType::CONTROL_CHANGE,
         channel,
         0x34 + 4,
@@ -65,7 +65,7 @@ TEST(MCUVPotBankable, setValueBankChangeChannel) {
     constexpr uint8_t track = 5;
     MCU::Bankable::VPotRing<2> vpot = {{bank, CHANGE_CHANNEL}, track, channel};
 
-    ChannelMessageMatcher midimsg = {
+    ChannelMessage midimsg = {
         MIDIMessageType::CONTROL_CHANGE,
         channel + 4,
         0x34,
@@ -87,7 +87,7 @@ TEST(MCUVPotBankable, setValueBankChangeCN) {
     constexpr uint8_t track = 5;
     MCU::Bankable::VPotRing<2> vpot = {{bank, CHANGE_CABLENB}, track, channel};
 
-    ChannelMessageMatcher midimsg = {
+    ChannelMessage midimsg = {
         MIDIMessageType::CONTROL_CHANGE, channel, 0x34, 0x5A, CABLE_5,
     };
     MIDIInputElementCC::updateAllWith(midimsg);
@@ -118,7 +118,7 @@ TEST(MCUVPotLEDsBankable, displayOnBankChange) {
     MIDIInputElementCC::beginAll();
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
-    ChannelMessageMatcher midimsg1 = {
+    ChannelMessage midimsg1 = {
         MIDIMessageType::CONTROL_CHANGE,
         channel,
         0x34 + 4,
@@ -163,7 +163,7 @@ TEST(MCUVPotLEDsBankable, displayOnBankChange) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(9, LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(10, LOW));
 
-    ChannelMessageMatcher midimsg2 = {
+    ChannelMessage midimsg2 = {
         MIDIMessageType::CONTROL_CHANGE,
         channel,
         0x34 + 4,

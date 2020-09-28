@@ -94,36 +94,33 @@ void Control_Surface_::sendImpl(uint8_t rt, uint8_t cn) {
     this->sourceMIDItoPipe(RealTimeMessage{rt, cn});
 }
 
-void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midichmsg) {
-    ChannelMessageMatcher midimsg = {midichmsg};
-
+void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
 #ifdef DEBUG_MIDI_PACKETS
     // TODO: print cable
-    if (midimsg.type != MIDIMessageType::PROGRAM_CHANGE &&
-        midimsg.type != MIDIMessageType::CHANNEL_PRESSURE)
-        DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1 << ' '
+    if (midimsg.hasTwoDataBytes())
+        DEBUG(">>> " << hex << midimsg.header << ' ' << midimsg.data1 << ' '
                      << midimsg.data2 << dec);
     else
-        DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1 << dec);
+        DEBUG(">>> " << hex << midimsg.header << ' ' << midimsg.data1 << dec);
 #endif
 
     // If the Channel Message callback exists, call it to see if we have to
     // continue handling it.
-    if (channelMessageCallback && channelMessageCallback(midichmsg))
+    if (channelMessageCallback && channelMessageCallback(midimsg))
         return;
 
-    if (midimsg.type == MIDIMessageType::CONTROL_CHANGE &&
-        midimsg.data1 == MIDI_CC::Reset_All_Controllers) {
+    if (midimsg.getMessageType() == MIDIMessageType::CONTROL_CHANGE &&
+        midimsg.getData1() == MIDI_CC::Reset_All_Controllers) {
         // Reset All Controllers
         DEBUG(F("Reset All Controllers"));
         MIDIInputElementCC::resetAll();
         MIDIInputElementCP::resetAll();
-    } else if (midimsg.type == MIDIMessageType::CONTROL_CHANGE &&
-               midimsg.data1 == MIDI_CC::All_Notes_Off) {
+    } else if (midimsg.getMessageType() == MIDIMessageType::CONTROL_CHANGE &&
+               midimsg.getData1() == MIDI_CC::All_Notes_Off) {
         // All Notes Off
         MIDIInputElementNote::resetAll();
     } else {
-        switch (midimsg.type) {
+        switch (midimsg.getMessageType()) {
             case MIDIMessageType::NOTE_OFF: // fallthrough
             case MIDIMessageType::NOTE_ON:
                 DEBUGFN(F("Updating Note elements with new MIDI "

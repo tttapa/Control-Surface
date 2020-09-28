@@ -18,7 +18,7 @@ TEST(NoteLEDBar, NoteLEDBar) {
 
     for (int i = 0; i < 8; ++i)
         EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(i, i < 4));
-    ChannelMessageMatcher midimsg1 = {
+    ChannelMessage midimsg1 = {
         MIDIMessageType::NOTE_ON,
         CHANNEL_5,
         0x3C,
@@ -29,7 +29,7 @@ TEST(NoteLEDBar, NoteLEDBar) {
 
     for (int i = 0; i < 8; ++i)
         EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(i, i < 5));
-    ChannelMessageMatcher midimsg2 = {
+    ChannelMessage midimsg2 = {
         MIDIMessageType::NOTE_ON,
         CHANNEL_5,
         0x3C,
