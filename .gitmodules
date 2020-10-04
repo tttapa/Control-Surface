@@ -2,7 +2,3 @@
 	path = googletest
 	url = https://github.com/google/googletest.git
 	shallow = true
-[submodule "src/Submodules/Encoder"]
-	path = src/Submodules/Encoder
-	url = https://github.com/tttapa/Encoder
-	branch = breaking-cleanup
