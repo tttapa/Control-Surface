@@ -5,15 +5,15 @@
 
 #pragma once
 
-#include <AH/Arduino-Wrapper.h>  // __FlashStringHelper
+#include <AH/Arduino-Wrapper.h>  // FlashString_t
 #include <Settings/NamespaceSettings.hpp>
 
 BEGIN_CS_NAMESPACE
 
-/// @addtogroup    MIDIConstants
-/// @{
-
 namespace MCU {
+
+/// @addtogroup    MCU_Notes
+/// @{
 
 /**
  * @brief   Convert a note number to the name of the corresponding Mackie 
@@ -24,8 +24,8 @@ namespace MCU {
  */
 FlashString_t getMCUNameFromNoteNumber(uint8_t note);
 
-} // namespace MCU 
-
 /// @}
+
+} // namespace MCU 
 
 END_CS_NAMESPACE
