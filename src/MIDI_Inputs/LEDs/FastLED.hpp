@@ -18,10 +18,11 @@ struct Color {
 #endif
 };
 
-/// The default mapping from a 7-bit MIDI value to an RGB color.
-/// This uses the Novation Launchpad mapping.
+/// The default mapping from a 7-bit MIDI value to an RGB color, using the
+/// Novation Launchpad mapping.
 struct DefaultColorMapper {
-    /// Map from a 7-bit MIDI value to an RGB color.
+    /// Map from a 7-bit MIDI value to an RGB color, using the Novation
+    /// Launchpad mapping.
     Color operator()(uint8_t value, uint8_t index) const;
 };
 
@@ -107,8 +108,8 @@ class NoteCCKPRangeFastLED
      * 
      * The MIDI index is derived from the note or controller number.
      *
-     * The function should take the (zer-based) MIDI index value as a parameter,
-     * and return the corresponding LED index (zero-based).
+     * The function should take the (zero-based) MIDI index value as a 
+     * parameter, and return the corresponding LED index (zero-based).
      * By default, the LED index is the same as the MIDI index.
      */
     void setLEDIndexPermuter(index_permuter_f permuter) {
@@ -180,34 +181,111 @@ class NoteCCKPRangeFastLED
  * 
  * This class doesn't actually write to the LEDs directly, it writes to a buffer
  * of CRGB values that is sent to the LEDs by the FastLED library in the user
- * code.
+ * code. To know when to update the LEDs, you can use the 
+ * @ref NoteCCKPRangeFastLED::getDirty() and 
+ * @ref NoteCCKPRangeFastLED::clearDirty() methods.
  * 
  * @tparam  RangeLen 
  *          The length of the range of MIDI note numbers to listen for.
- * @tparam  DefaultColorMapper 
- *          The color mapper that defines how each MIDI value should be mapped
- *          to an RGB color for the LEDs.
+ * @tparam  ColorMapper 
+ *          The color mapper that defines how each MIDI velocity value should be
+ *          mapped to an RGB color for the LEDs.
  */
 template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
 using NoteRangeFastLED =
     NoteCCKPRangeFastLED<MIDIMessageType::NOTE_ON, RangeLen, ColorMapper>;
 
+/**
+ * @brief   MIDI Input Element that listens for MIDI Note messages on a specific
+ *          note, and displays its value using a FastLED LED strip.
+ * 
+ * This class doesn't actually write to the LEDs directly, it writes to a buffer
+ * of CRGB values that is sent to the LEDs by the FastLED library in the user
+ * code. To know when to update the LEDs, you can use the 
+ * @ref NoteCCKPRangeFastLED::getDirty() and 
+ * @ref NoteCCKPRangeFastLED::clearDirty() methods.
+ * 
+ * @tparam  ColorMapper 
+ *          The color mapper that defines how each MIDI velocity value should be
+ *          mapped to an RGB color for the LEDs.
+ */
 template <class ColorMapper = DefaultColorMapper>
 using NoteValueFastLED =
     NoteCCKPRangeFastLED<MIDIMessageType::NOTE_ON, 1, ColorMapper>;
 
+/**
+ * @brief   MIDI Input Element that listens for MIDI Control Change messages in
+ *          a given range, and displays their values using a FastLED LED strip.
+ * 
+ * This class doesn't actually write to the LEDs directly, it writes to a buffer
+ * of CRGB values that is sent to the LEDs by the FastLED library in the user
+ * code. To know when to update the LEDs, you can use the 
+ * @ref NoteCCKPRangeFastLED::getDirty() and 
+ * @ref NoteCCKPRangeFastLED::clearDirty() methods.
+ * 
+ * @tparam  RangeLen 
+ *          The length of the range of MIDI note numbers to listen for.
+ * @tparam  ColorMapper 
+ *          The color mapper that defines how each MIDI control change value 
+ *          should be mapped to an RGB color for the LEDs.
+ */
 template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
 using CCRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::CONTROL_CHANGE,
                                             RangeLen, ColorMapper>;
 
+/**
+ * @brief   MIDI Input Element that listens for MIDI Control Change messages on
+ *          a specific controller, and displays its value using a FastLED LED
+ *          strip.
+ * 
+ * This class doesn't actually write to the LEDs directly, it writes to a buffer
+ * of CRGB values that is sent to the LEDs by the FastLED library in the user
+ * code. To know when to update the LEDs, you can use the 
+ * @ref NoteCCKPRangeFastLED::getDirty() and 
+ * @ref NoteCCKPRangeFastLED::clearDirty() methods.
+ * 
+ * @tparam  ColorMapper 
+ *          The color mapper that defines how each MIDI control change value
+ *          should be mapped to an RGB color for the LEDs.
+ */
 template <class ColorMapper = DefaultColorMapper>
 using CCValueFastLED =
     NoteCCKPRangeFastLED<MIDIMessageType::CONTROL_CHANGE, 1, ColorMapper>;
 
+/**
+ * @brief   MIDI Input Element that listens for MIDI Key Pressure messages in a
+ *          given range, and displays their values using a FastLED LED strip.
+ * 
+ * This class doesn't actually write to the LEDs directly, it writes to a buffer
+ * of CRGB values that is sent to the LEDs by the FastLED library in the user
+ * code. To know when to update the LEDs, you can use the 
+ * @ref NoteCCKPRangeFastLED::getDirty() and 
+ * @ref NoteCCKPRangeFastLED::clearDirty() methods.
+ * 
+ * @tparam  RangeLen 
+ *          The length of the range of MIDI note numbers to listen for.
+ * @tparam  ColorMapper 
+ *          The color mapper that defines how each MIDI pressure value should be
+ *          mapped to an RGB color for the LEDs.
+ */
 template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
 using KPRangeFastLED =
     NoteCCKPRangeFastLED<MIDIMessageType::KEY_PRESSURE, RangeLen, ColorMapper>;
 
+/**
+ * @brief   MIDI Input Element that listens for MIDI Key Pressure messages on a
+ *          specific note, and displays its value using a FastLED LED strip.
+ * 
+ * This class doesn't actually write to the LEDs directly, it writes to a buffer
+ * of CRGB values that is sent to the LEDs by the FastLED library in the user
+ * code. To know when to update the LEDs, you can use the 
+ * @ref NoteCCKPRangeFastLED::getDirty() and 
+ * @ref NoteCCKPRangeFastLED::clearDirty() methods.
+ * 
+ * @tparam  ColorMapper 
+ *          The color mapper that defines how each MIDI pressure value should be
+ *          mapped to an RGB color for the LEDs.
+ */
 template <class ColorMapper = DefaultColorMapper>
 using KPValueFastLED =
     NoteCCKPRangeFastLED<MIDIMessageType::KEY_PRESSURE, 1, ColorMapper>;
