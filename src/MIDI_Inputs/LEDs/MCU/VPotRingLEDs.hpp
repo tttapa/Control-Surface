@@ -26,6 +26,9 @@ class VPotRingLEDsDriver : public AH::LEDs<11> {
  */
 class VPotRingLEDs : public VPotRing, public VPotRingLEDsDriver {
   public:
+    using Parent = VPotRing;
+    using Matcher = Parent::Matcher;
+
     /** 
      * Constructor.
      * 
@@ -39,37 +42,31 @@ class VPotRingLEDs : public VPotRing, public VPotRingLEDsDriver {
      */
     VPotRingLEDs(const PinList<11> &leds, uint8_t track,
                  MIDIChannelCable channelCN = CHANNEL_1)
-        : VPotRing(track, channelCN), VPotRingLEDsDriver(leds) {}
+        : Parent(track, channelCN), VPotRingLEDsDriver(leds) {}
 
   protected:
-    void handleUpdate(VPotMatcher::Result match) override {
-        VPotRing::handleUpdate(match);
-        updateDisplay();
+    void handleUpdate(typename Matcher::Result match) override {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
     }
 
-    /// If the state is dirty, update the LEDs
     void updateDisplay() {
-        if (getDirty()) {
-            this->displayVPot(this->getState());
-            clearDirty();
-        }
+        this->displayVPot(this->getState());
     }
 
   public:
     void begin() override {
-        VPotRing::begin();
+        Parent::begin();
         VPotRingLEDsDriver::begin();
         updateDisplay();
     }
 
     void reset() override {
-        VPotRing::reset();
+        Parent::reset();
         updateDisplay();
     }
-
-  protected:
-    using VPotRing::clearDirty;
-    using VPotRing::getDirty;
 };
 
 namespace Bankable {
@@ -86,6 +83,9 @@ namespace Bankable {
 template <uint8_t BankSize>
 class VPotRingLEDs : public VPotRing<BankSize>, public VPotRingLEDsDriver {
   public:
+    using Parent = VPotRing<BankSize>;
+    using Matcher = typename Parent::Matcher;
+
     /** 
      * Constructor.
      * 
@@ -102,43 +102,36 @@ class VPotRingLEDs : public VPotRing<BankSize>, public VPotRingLEDsDriver {
      */
     VPotRingLEDs(BankConfig<BankSize> config, const PinList<11> &leds,
                  uint8_t track, MIDIChannelCable channelCN = CHANNEL_1)
-        : VPotRing<BankSize>(config, track, channelCN),
+        : Parent(config, track, channelCN),
           VPotRingLEDsDriver(leds) {}
 
   protected:
-    void handleUpdate(
-        typename BankableVPotMatcher<BankSize>::Result match) override {
-        VPotRing<BankSize>::handleUpdate(match);
-        updateDisplay();
+    void handleUpdate(typename Matcher::Result match) override {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
     }
 
-    /// If the state is dirty, update the LEDs
     void updateDisplay() {
-        if (getDirty()) {
-            this->displayVPot(this->getState());
-            clearDirty();
-        }
+        this->displayVPot(this->getState());
     }
 
   public:
     void begin() override {
-        VPotRing<BankSize>::begin();
+        Parent::begin();
         VPotRingLEDsDriver::begin();
         updateDisplay();
     }
 
     void reset() override {
-        VPotRing<BankSize>::reset();
+        Parent::reset();
         updateDisplay();
     }
 
   protected:
-    using VPotRing<BankSize>::clearDirty;
-    using VPotRing<BankSize>::getDirty;
-
-  protected:
     void onBankSettingChange() override {
-        VPotRing<BankSize>::onBankSettingChange();
+        Parent::onBankSettingChange();
         updateDisplay();
     }
 };

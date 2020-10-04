@@ -82,8 +82,7 @@ class MatchingMIDIInputElement : public MIDIInputElement<Type> {
     MatchingMIDIInputElement(const Matcher &matcher) : matcher(matcher) {}
 
   public:
-    using MessageType =
-        typename MIDIInputElement<Type>::MessageType;
+    using MessageType = typename MIDIInputElement<Type>::MessageType;
 
     bool updateWith(MessageType midimsg) override {
         auto match = matcher(midimsg);

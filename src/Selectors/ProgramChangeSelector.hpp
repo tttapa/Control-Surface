@@ -12,18 +12,21 @@ class GenericProgramChangeSelector
       public MatchingMIDIInputElement<MIDIMessageType::PROGRAM_CHANGE,
                                       OneByteMIDIMatcher> {
   public:
+    using Matcher = OneByteMIDIMatcher;
+    using Parent = MatchingMIDIInputElement<MIDIMessageType::PROGRAM_CHANGE,
+                                            Matcher>;
+
     GenericProgramChangeSelector(Selectable<N> &selectable,
                                  const Callback &callback,
                                  MIDIChannelCable address)
         : GenericSelector<N, Callback>{selectable, callback},
-          MatchingMIDIInputElement<MIDIMessageType::PROGRAM_CHANGE,
-                                   OneByteMIDIMatcher>(address) {}
+          Parent(address) {}
 
     void begin() override { GenericSelector<N, Callback>::begin(); }
 
     void reset() override { GenericSelector<N, Callback>::reset(); }
 
-    void handleUpdate(OneByteMIDIMatcher::Result match) override {
+    void handleUpdate(typename Matcher::Result match) override {
         uint8_t program = match.value;
         if (program < N) {
             this->set(program);
@@ -48,7 +51,7 @@ template <setting_t N>
 class ProgramChangeSelector : public GenericProgramChangeSelector<N> {
   public:
     ProgramChangeSelector(Selectable<N> &selectable,
-                          const MIDIChannelCable &address)
+                          MIDIChannelCable address)
         : GenericProgramChangeSelector<N>{selectable, {}, address} {}
 };
 

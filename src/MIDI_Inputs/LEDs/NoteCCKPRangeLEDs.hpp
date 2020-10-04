@@ -22,6 +22,9 @@ template <MIDIMessageType Type, uint8_t RangeLen>
 class NoteCCKPRangeLEDs
     : public MatchingMIDIInputElement<Type, TwoByteRangeMIDIMatcher> {
   public:
+    using Matcher = TwoByteRangeMIDIMatcher;
+    using Parent = MatchingMIDIInputElement<Type, Matcher>;
+
     /// Constructor.
     ///
     /// @param  ledPins
@@ -29,12 +32,11 @@ class NoteCCKPRangeLEDs
     /// @param  address
     ///         The first address to listen to.
     NoteCCKPRangeLEDs(AH::PinList<RangeLen> ledPins, MIDIAddress address)
-        : MatchingMIDIInputElement<Type, TwoByteRangeMIDIMatcher>(
-              {address, RangeLen}),
+        : Parent({address, RangeLen}),
           ledPins(ledPins) {}
 
   private:
-    void handleUpdate(typename TwoByteRangeMIDIMatcher::Result match) override {
+    void handleUpdate(typename Matcher::Result match) override {
         PinStatus_t state = match.value >= threshold ? HIGH : LOW;
         AH::ExtIO::digitalWrite(ledPins[match.index], state);
     }
@@ -102,7 +104,8 @@ namespace Bankable {
 template <MIDIMessageType Type, uint8_t BankSize, uint8_t RangeLen>
 class NoteCCKPRangeLEDs : public NoteCCKPRange<Type, BankSize, RangeLen> {
   public:
-    using Matcher = typename NoteCCKPRange<Type, BankSize, RangeLen>::Matcher;
+    using Parent = NoteCCKPRange<Type, BankSize, RangeLen>;
+    using Matcher = typename Parent::Matcher;
 
     /// Constructor.
     ///
@@ -114,16 +117,15 @@ class NoteCCKPRangeLEDs : public NoteCCKPRange<Type, BankSize, RangeLen> {
     ///         The base address to listen to.
     NoteCCKPRangeLEDs(BankConfig<BankSize> config,
                       AH::PinList<RangeLen> ledPins, MIDIAddress address)
-        : NoteCCKPRange<Type, BankSize, RangeLen>(config, address),
+        : Parent(config, address),
           ledPins(ledPins) {}
 
   protected:
     void handleUpdate(typename Matcher::Result match) override {
-        NoteCCKPRange<Type, BankSize, RangeLen>::handleUpdate(match);
-        if (getDirty()) {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty)
             display(match.index);
-            clearDirty();
-        }
+        this->dirty |= newdirty;
     }
 
     void display(uint8_t index) {
@@ -142,10 +144,9 @@ class NoteCCKPRangeLEDs : public NoteCCKPRange<Type, BankSize, RangeLen> {
 
     /// Reset all values to zero and turn off the LEDs.
     void reset() override {
-        NoteCCKPRange<Type, BankSize, RangeLen>::reset();
+        Parent::reset();
         for (pin_t ledPin : ledPins)
             AH::ExtIO::digitalWrite(ledPin, LOW);
-        clearDirty();
     }
 
     using NoteCCKPRange<Type, BankSize, RangeLen>::getValue;
@@ -155,12 +156,9 @@ class NoteCCKPRangeLEDs : public NoteCCKPRange<Type, BankSize, RangeLen> {
     /// Set the LED threshold. LED will be on if `getValue() >= getThreshold()`.
     void setThreshold(uint8_t threshold) { this->threshold = threshold; }
 
-  private: // These methods are used internally, don't allow external use.
-    using NoteCCKPRange<Type, BankSize, RangeLen>::getDirty;
-    using NoteCCKPRange<Type, BankSize, RangeLen>::clearDirty;
-
   protected:
     void onBankSettingChange() override {
+        Parent::onBankSettingChange();
         for (uint8_t index = 0; index < RangeLen; ++index)
             display(index);
     }

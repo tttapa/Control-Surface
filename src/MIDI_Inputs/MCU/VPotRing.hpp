@@ -156,6 +156,10 @@ class VPotRing
                                       VPotMatcher>,
       public Interfaces::MCU::IVPot {
   public:
+    using Matcher = VPotMatcher;
+    using Parent 
+        = MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE, Matcher>;
+
     /**
      * @brief   Constructor.
      * 
@@ -166,12 +170,15 @@ class VPotRing
      *          [CABLE_1, CABLE_16].
      */
     VPotRing(uint8_t track, MIDIChannelCable channelCN = CHANNEL_1)
-        : MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
-                                   VPotMatcher>({track, channelCN}) {}
+        : Parent({track, channelCN}) {}
 
   protected:
-    void handleUpdate(VPotMatcher::Result match) override {
-        dirty |= state.update(match.value);
+    bool handleUpdateImpl(typename Matcher::Result match) {
+        return state.update(match.value);
+    }
+
+    void handleUpdate(typename Matcher::Result match) override {
+        dirty |= handleUpdateImpl(match);
     }
 
   public:
@@ -232,6 +239,10 @@ class VPotRing
                                               BankableVPotMatcher<BankSize>>,
       public Interfaces::MCU::IVPot {
   public:
+    using Matcher = BankableVPotMatcher<BankSize>;
+    using Parent 
+        = BankableMatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
+                                           Matcher>;
     /**
      * @brief   Constructor.
      * 
@@ -246,16 +257,17 @@ class VPotRing
      */
     VPotRing(BankConfig<BankSize> config, uint8_t track,
              MIDIChannelCable channelCN = CHANNEL_1)
-        : BankableMatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
-                                           BankableVPotMatcher<BankSize>>(
-              {config, track, channelCN}) {}
+        : Parent({config, track, channelCN}) {}
 
   protected:
-    void handleUpdate(
-        typename BankableVPotMatcher<BankSize>::Result match) override {
-        dirty |= states[match.bankIndex].update(match.value) &&
-                 match.bankIndex == this->getActiveBank();
+    bool handleUpdateImpl(typename Matcher::Result match) {
+        return states[match.bankIndex].update(match.value) &&
+               match.bankIndex == this->getActiveBank();
         // Only mark dirty if the value of the active bank changed
+    }
+    
+    void handleUpdate(typename Matcher::Result match) override {
+        dirty |= handleUpdateImpl(match);
     }
 
   public:

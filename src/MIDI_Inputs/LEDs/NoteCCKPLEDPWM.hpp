@@ -21,6 +21,9 @@ template <MIDIMessageType Type>
 class NoteCCKPLEDPWM
     : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher> {
   public:
+    using Matcher = TwoByteMIDIMatcher;
+    using Parent = MatchingMIDIInputElement<Type, Matcher>;
+
     /// Constructor.
     ///
     /// @param  ledPin
@@ -28,11 +31,10 @@ class NoteCCKPLEDPWM
     /// @param  address
     ///         The address to listen to.
     NoteCCKPLEDPWM(pin_t ledPin, MIDIAddress address)
-        : MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>(address),
-          ledPin(ledPin) {}
+        : Parent(address), ledPin(ledPin) {}
 
   private:
-    void handleUpdate(typename TwoByteMIDIMatcher::Result match) override {
+    void handleUpdate(typename Matcher::Result match) override {
         auto value = AH::increaseBitDepth<8, 7, uint8_t, uint8_t>(match.value);
         AH::ExtIO::analogWrite(ledPin, value);
     }
@@ -47,14 +49,8 @@ class NoteCCKPLEDPWM
     /// Turn off the LED.
     void reset() override { AH::ExtIO::digitalWrite(ledPin, LOW); }
 
-    /// Get the LED threshold.
-    uint8_t getThreshold() const { return threshold; }
-    /// Set the LED threshold. LED will be on if `getValue() >= getThreshold()`.
-    void setThreshold(uint8_t threshold) { this->threshold = threshold; }
-
   private:
     pin_t ledPin;
-    uint8_t threshold = 0x01;
 };
 
 /// Class that listens for MIDI Note events on a single address and turns
@@ -90,7 +86,8 @@ namespace Bankable {
 template <MIDIMessageType Type, uint8_t BankSize>
 class NoteCCKPLEDPWM : public NoteCCKPValue<Type, BankSize> {
   public:
-    using Matcher = typename NoteCCKPValue<Type, BankSize>::Matcher;
+    using Parent = NoteCCKPValue<Type, BankSize>;
+    using Matcher = typename Parent::Matcher;
 
     /// Constructor.
     ///
@@ -102,15 +99,14 @@ class NoteCCKPLEDPWM : public NoteCCKPValue<Type, BankSize> {
     ///         The base address to listen to.
     NoteCCKPLEDPWM(BankConfig<BankSize> config, pin_t ledPin,
                    MIDIAddress address)
-        : NoteCCKPValue<Type, BankSize>(config, address), ledPin(ledPin) {}
+        : Parent(config, address), ledPin(ledPin) {}
 
   protected:
     void handleUpdate(typename Matcher::Result match) override {
-        NoteCCKPValue<Type, BankSize>::handleUpdate(match);
-        if (getDirty()) {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty) 
             display();
-            clearDirty();
-        }
+        this->dirty |= newdirty;
     }
 
     void display() {
@@ -127,28 +123,20 @@ class NoteCCKPLEDPWM : public NoteCCKPValue<Type, BankSize> {
 
     /// Reset all values to zero and turn off the LED.
     void reset() override {
-        NoteCCKPValue<Type, BankSize>::reset();
+        Parent::reset();
         AH::ExtIO::digitalWrite(ledPin, LOW);
-        clearDirty();
     }
 
-    using NoteCCKPValue<Type, BankSize>::getValue;
-
-    /// Get the LED threshold.
-    uint8_t getThreshold() const { return threshold; }
-    /// Set the LED threshold. LED will be on if `getValue() >= getThreshold()`.
-    void setThreshold(uint8_t threshold) { this->threshold = threshold; }
-
-  private: // These methods are used internally, don't allow external use.
-    using NoteCCKPValue<Type, BankSize>::getDirty;
-    using NoteCCKPValue<Type, BankSize>::clearDirty;
+    using Parent::getValue;
 
   protected:
-    void onBankSettingChange() override { display(); }
+    void onBankSettingChange() override { 
+        Parent::onBankSettingChange();
+        display(); 
+    }
 
   private:
     pin_t ledPin;
-    uint8_t threshold = 0x01;
 };
 
 /// Class that listens for MIDI Note events on a single address and

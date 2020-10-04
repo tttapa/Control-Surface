@@ -42,6 +42,9 @@ class VULEDsDriver : public AH::DotBarDisplayLEDs<NumLEDs> {
 template <uint8_t NumLEDs>
 class VULEDs : public VU, public VULEDsDriver<NumLEDs> {
   public:
+    using Parent = VU;
+    using Matcher = typename Parent::Matcher;
+
     /** 
      * Constructor.
      * 
@@ -64,7 +67,7 @@ class VULEDs : public VU, public VULEDsDriver<NumLEDs> {
      */
     VULEDs(const PinList<NumLEDs> &leds, uint8_t track, MIDIChannelCable channelCN,
            unsigned int decayTime = VUDecay::Default)
-        : VU(track, channelCN, decayTime), VULEDsDriver<NumLEDs>(leds) {}
+        : Parent(track, channelCN, decayTime), VULEDsDriver<NumLEDs>(leds) {}
 
     /** 
      * Constructor.
@@ -85,42 +88,38 @@ class VULEDs : public VU, public VULEDsDriver<NumLEDs> {
      */
     VULEDs(const PinList<NumLEDs> &leds, uint8_t track,
            unsigned int decayTime = VUDecay::Default)
-        : VU(track, decayTime), VULEDsDriver<NumLEDs>(leds) {}
+        : Parent(track, decayTime), VULEDsDriver<NumLEDs>(leds) {}
 
   protected:
-    void handleUpdate(VUMatcher::Result match) override {
-        VU::handleUpdate(match);
-        updateDisplay();
+    void handleUpdate(typename Matcher::Result match) override {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
     }
 
-    /// If the state is dirty, update the LEDs
     void updateDisplay() {
-        if (getDirty()) {
-            this->displayVU(getValue());
-            clearDirty();
-        }
+        this->displayVU(getValue());
     }
 
   public:
     void begin() override {
-        VU::begin();
+        Parent::begin();
         VULEDsDriver<NumLEDs>::begin();
         updateDisplay();
     }
 
     void reset() override {
-        VU::reset();
+        Parent::reset();
         updateDisplay();
     }
 
     void update() override {
-        VU::update();
-        updateDisplay();
+        bool newdirty = Parent::decay();
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
     }
-
-  protected:
-    using VU::clearDirty;
-    using VU::getDirty;
 };
 
 // -------------------------------------------------------------------------- //
@@ -142,6 +141,9 @@ namespace Bankable {
 template <uint8_t BankSize, uint8_t NumLEDs>
 class VULEDs : public VU<BankSize>, public VULEDsDriver<NumLEDs> {
   public:
+    using Parent = VU<BankSize>;
+    using Matcher = typename Parent::Matcher;
+
     /** 
      * Constructor.
      * 
@@ -167,7 +169,7 @@ class VULEDs : public VU<BankSize>, public VULEDsDriver<NumLEDs> {
     VULEDs(BankConfig<BankSize> config, const PinList<NumLEDs> &leds,
            uint8_t track, MIDIChannelCable channelCN,
            unsigned int decayTime = VUDecay::Default)
-        : VU<BankSize>(config, track, channelCN, decayTime),
+        : Parent(config, track, channelCN, decayTime),
           VULEDsDriver<NumLEDs>(leds) {}
 
     /** 
@@ -191,43 +193,44 @@ class VULEDs : public VU<BankSize>, public VULEDsDriver<NumLEDs> {
      */
     VULEDs(BankConfig<BankSize> config, const PinList<NumLEDs> &leds,
            uint8_t track, unsigned int decayTime = VUDecay::Default)
-        : VU<BankSize>(config, track, decayTime), VULEDsDriver<NumLEDs>(leds) {}
+        : Parent(config, track, decayTime), VULEDsDriver<NumLEDs>(leds) {}
 
   protected:
-    void
-    handleUpdate(typename BankableVUMatcher<BankSize>::Result match) override {
-        VU<BankSize>::handleUpdate(match);
-        updateDisplay();
+    void handleUpdate(typename Matcher::Result match) override {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
     }
 
-    /// If the state is dirty, update the LEDs
     void updateDisplay() {
-        if (getDirty()) {
-            this->displayVU(this->getValue());
-            clearDirty();
-        }
+        this->displayVU(this->getValue());
     }
 
   public:
     void begin() override {
-        VU<BankSize>::begin();
+        Parent::begin();
         VULEDsDriver<NumLEDs>::begin();
         updateDisplay();
     }
 
     void reset() override {
-        VU<BankSize>::reset();
+        Parent::reset();
         updateDisplay();
     }
 
     void update() override {
-        VU<BankSize>::update();
-        updateDisplay();
+        bool newdirty = Parent::decay();
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
     }
 
   protected:
-    using VU<BankSize>::clearDirty;
-    using VU<BankSize>::getDirty;
+    void onBankSettingChange() override {
+        Parent::onBankSettingChange();
+        updateDisplay();
+    }
 };
 
 } // namespace Bankable

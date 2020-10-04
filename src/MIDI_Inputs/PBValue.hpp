@@ -14,6 +14,8 @@ class PBValue : public MatchingMIDIInputElement<MIDIMessageType::PITCH_BEND,
                                                 PitchBendMIDIMatcher>,
                 public Interfaces::IValue14 {
   public:
+    using Matcher = PitchBendMIDIMatcher;
+
     /// Constructor.
     ///
     /// @param  address
@@ -21,7 +23,7 @@ class PBValue : public MatchingMIDIInputElement<MIDIMessageType::PITCH_BEND,
     PBValue(MIDIChannelCable address) : MatchingMIDIInputElement(address) {}
 
   protected:
-    void handleUpdate(typename PitchBendMIDIMatcher::Result match) override {
+    void handleUpdate(typename Matcher::Result match) override {
         dirty |= value != match.value;
         value = match.value;
     }
@@ -63,7 +65,7 @@ class PBValue
   public:
     constexpr static auto MessageType = MIDIMessageType::PITCH_BEND;
     using Matcher = BankablePitchBendMIDIMatcher<BankSize>;
-    using Base = BankableMatchingMIDIInputElement<MessageType, Matcher>;
+    using Parent = BankableMatchingMIDIInputElement<MessageType, Matcher>;
 
     /// Constructor.
     ///
@@ -73,7 +75,7 @@ class PBValue
     ///         The base address to listen to.
     PBValue(BankConfig<BankSize, BankType::CHANGE_CHANNEL> config,
             MIDIChannelCable address)
-        : Base({config, address}) {}
+        : Parent({config, address}) {}
 
   protected:
     void handleUpdate(typename Matcher::Result match) override {

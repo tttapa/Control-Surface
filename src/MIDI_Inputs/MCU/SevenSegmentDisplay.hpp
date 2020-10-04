@@ -1,9 +1,9 @@
 #pragma once
 
+#include <AH/STL/algorithm> // std::fill
 #include <MIDI_Inputs/MIDIInputElement.hpp>
 #include <MIDI_Inputs/MIDIInputElementMatchers.hpp>
 #include <Print.h>
-#include <string.h>
 
 BEGIN_CS_NAMESPACE
 
@@ -15,19 +15,21 @@ class SevenSegmentDisplay
                                       TwoByteRangeMIDIMatcher>,
       public Printable {
   public:
+    using Matcher = TwoByteRangeMIDIMatcher;
+    using Parent = MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
+                                            Matcher>;
+
     /**
     * @brief     Constructor.
     * @todo      Documentation.
     */
     SevenSegmentDisplay(const MIDIAddress &address)
-        : MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
-                                   TwoByteRangeMIDIMatcher>({address, LENGTH}) {
+        : Parent({address, LENGTH}) {
         fillWithSpaces();
     }
 
     void fillWithSpaces() {
-        for (char &c : text)
-            c = ' ';
+        std::fill(std::begin(text), std::end(text), ' ');
     }
 
     void reset() override {
@@ -39,7 +41,7 @@ class SevenSegmentDisplay
 
   protected:
     /// Update a single character.
-    void handleUpdate(TwoByteRangeMIDIMatcher::Result match) override {
+    void handleUpdate(typename Matcher::Result match) override {
         uint8_t index = LENGTH - 1 - match.index;
         // MIDI msg: character data → bits 0-5
         // MIDI msg: decimal point → bit 6 set, no decimal point → bit 6 not set

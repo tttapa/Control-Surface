@@ -23,41 +23,28 @@ class NoteCCKPLEDBarDriver : public AH::DotBarDisplayLEDs<NumLEDs> {
 // -------------------------------------------------------------------------- //
 
 template <MIDIMessageType Type, uint8_t NumLEDs>
-class NoteCCKPValueBar : public NoteCCKPValue<Type>,
-                         public NoteCCKPLEDBarDriver<NumLEDs> {
+class NoteCCKPLEDBar : 
+    public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>,
+    public NoteCCKPLEDBarDriver<NumLEDs> {
   public:
-    NoteCCKPValueBar(const AH::PinList<NumLEDs> &leds, MIDIAddress address)
-        : NoteCCKPValue<Type>(address), NoteCCKPLEDBarDriver<NumLEDs>(leds) {}
+    using Matcher = TwoByteMIDIMatcher;
+    using Parent = MatchingMIDIInputElement<Type, Matcher>;
+
+    NoteCCKPLEDBar(const AH::PinList<NumLEDs> &leds, MIDIAddress address)
+        : Parent(address), NoteCCKPLEDBarDriver<NumLEDs>(leds) {}
 
   protected:
-    void handleUpdate(TwoByteMIDIMatcher::Result match) override {
-        NoteCCKPValue<Type>::handleUpdate(match);
-        updateDisplay();
-    }
-
-    /// If the state is dirty, update the LEDs
-    void updateDisplay() {
-        if (getDirty()) {
-            this->displayBar(this->getValue());
-            clearDirty();
-        }
+    void handleUpdate(typename Matcher::Result match) override {
+        this->displayBar(match.value);
     }
 
   public:
     void begin() override {
-        NoteCCKPValue<Type>::begin();
         NoteCCKPLEDBarDriver<NumLEDs>::begin();
-        updateDisplay();
+        this->displayBar(0);
     }
 
-    void reset() override {
-        NoteCCKPValue<Type>::reset();
-        updateDisplay();
-    }
-
-  protected:
-    using NoteCCKPValue<Type>::clearDirty;
-    using NoteCCKPValue<Type>::getDirty;
+    void reset() override { this->displayBar(0); }
 };
 
 // -------------------------------------------------------------------------- //
@@ -68,7 +55,7 @@ class NoteCCKPValueBar : public NoteCCKPValue<Type>,
 ///          The number of LEDs the display has.
 /// @ingroup midi-input-elements-leds
 template <uint8_t NumLEDs>
-using NoteLEDBar = NoteCCKPValueBar<MIDIMessageType::NOTE_ON, NumLEDs>;
+using NoteLEDBar = NoteCCKPLEDBar<MIDIMessageType::NOTE_ON, NumLEDs>;
 
 /// Class that listens for **Control Change** events and displays the
 /// value on an **LED Bar Graph**.
@@ -76,7 +63,7 @@ using NoteLEDBar = NoteCCKPValueBar<MIDIMessageType::NOTE_ON, NumLEDs>;
 ///          The number of LEDs the display has.
 /// @ingroup midi-input-elements-leds
 template <uint8_t NumLEDs>
-using CCLEDBar = NoteCCKPValueBar<MIDIMessageType::CONTROL_CHANGE, NumLEDs>;
+using CCLEDBar = NoteCCKPLEDBar<MIDIMessageType::CONTROL_CHANGE, NumLEDs>;
 
 /// Class that listens for **Key Pressure** events and displays the pressure on
 /// an **LED Bar Graph**.
@@ -84,54 +71,50 @@ using CCLEDBar = NoteCCKPValueBar<MIDIMessageType::CONTROL_CHANGE, NumLEDs>;
 ///          The number of LEDs the display has.
 /// @ingroup midi-input-elements-leds
 template <uint8_t NumLEDs>
-using KPLEDBar = NoteCCKPValueBar<MIDIMessageType::KEY_PRESSURE, NumLEDs>;
+using KPLEDBar = NoteCCKPLEDBar<MIDIMessageType::KEY_PRESSURE, NumLEDs>;
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 namespace Bankable {
 
 template <MIDIMessageType Type, uint8_t BankSize, uint8_t NumLEDs>
-class NoteCCKPValueBar : public NoteCCKPValue<Type, BankSize>,
-                         public NoteCCKPLEDBarDriver<NumLEDs> {
+class NoteCCKPLEDBar : public NoteCCKPValue<Type, BankSize>,
+                       public NoteCCKPLEDBarDriver<NumLEDs> {
   public:
-    NoteCCKPValueBar(const AH::PinList<NumLEDs> &leds, MIDIAddress address)
-        : NoteCCKPValue<Type, BankSize>(address), NoteCCKPLEDBarDriver<NumLEDs>(
+    using Parent = NoteCCKPValue<Type, BankSize>;
+    using Matcher = typename Parent::Matcher;
+
+    NoteCCKPLEDBar(const AH::PinList<NumLEDs> &leds, MIDIAddress address)
+        : Parent(address), NoteCCKPLEDBarDriver<NumLEDs>(
                                                       leds) {}
 
   protected:
-    void handleUpdate(
-        typename BankableTwoByteMIDIMatcher<BankSize>::Result match) override {
-        NoteCCKPValue<Type, BankSize>::handleUpdate(match);
-        updateDisplay();
+    void handleUpdate(typename Matcher::Result match) override {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
     }
 
-    /// If the state is dirty, update the LEDs
     void updateDisplay() {
-        if (getDirty()) {
-            this->displayBar(this->getValue());
-            clearDirty();
-        }
+        this->displayBar(this->getValue());
     }
 
   public:
     void begin() override {
-        NoteCCKPValue<Type, BankSize>::begin();
+        Parent::begin();
         NoteCCKPLEDBarDriver<NumLEDs>::begin();
-        updateDisplay();
+        this->displayBar(0);
     }
 
     void reset() override {
-        NoteCCKPValue<Type, BankSize>::reset();
-        updateDisplay();
+        Parent::reset();
+        this->displayBar(0);
     }
 
   protected:
-    using NoteCCKPValue<Type, BankSize>::clearDirty;
-    using NoteCCKPValue<Type, BankSize>::getDirty;
-
-  protected:
     void onBankSettingChange() override {
-        NoteCCKPValue<Type, BankSize>::onBankSettingChange();
+        Parent::onBankSettingChange();
         updateDisplay();
     }
 };
@@ -148,7 +131,7 @@ class NoteCCKPValueBar : public NoteCCKPValue<Type, BankSize>,
 /// @ingroup BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t NumLEDs>
 using NoteLEDBar =
-    NoteCCKPValueBar<MIDIMessageType::NOTE_ON, BankSize, NumLEDs>;
+    NoteCCKPLEDBar<MIDIMessageType::NOTE_ON, BankSize, NumLEDs>;
 
 /// Class that listens for **Control Change** events and displays the
 /// value on an **LED Bar Graph**.
@@ -160,7 +143,7 @@ using NoteLEDBar =
 /// @ingroup BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t NumLEDs>
 using CCLEDBar =
-    NoteCCKPValueBar<MIDIMessageType::CONTROL_CHANGE, BankSize, NumLEDs>;
+    NoteCCKPLEDBar<MIDIMessageType::CONTROL_CHANGE, BankSize, NumLEDs>;
 
 /// Class that listens for **Key Pressure** events and displays the pressure on
 /// an **LED Bar Graph**.
@@ -172,7 +155,7 @@ using CCLEDBar =
 /// @ingroup BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t NumLEDs>
 using KPLEDBar =
-    NoteCCKPValueBar<MIDIMessageType::KEY_PRESSURE, BankSize, NumLEDs>;
+    NoteCCKPLEDBar<MIDIMessageType::KEY_PRESSURE, BankSize, NumLEDs>;
 
 } // namespace Bankable
 

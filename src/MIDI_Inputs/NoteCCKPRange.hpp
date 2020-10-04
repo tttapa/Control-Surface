@@ -30,9 +30,14 @@ class NoteCCKPRange
         : MatchingMIDIInputElement<Type, Matcher>({address, RangeLen}) {}
 
   private:
-    void handleUpdate(typename Matcher::Result match) override {
-        dirty |= values[match.index] != match.value;
+    bool handleUpdateImpl(typename Matcher::Result match) {
+        bool newdirty = values[match.index] != match.value;
         values[match.index] = match.value;
+        return newdirty;
+    }
+
+    void handleUpdate(typename Matcher::Result match) override {
+        dirty |= handleUpdateImpl(match);
     }
 
   public:
@@ -119,11 +124,16 @@ class NoteCCKPRange : public BankableMatchingMIDIInputElement<
               {config, address, RangeLen}) {}
 
   protected:
-    void handleUpdate(typename Matcher::Result match) override {
-        dirty |= values[match.bankIndex][match.index] != match.value &&
-                 match.bankIndex == this->getActiveBank();
+    bool handleUpdateImpl(typename Matcher::Result match) {
+        bool newdirty = values[match.bankIndex][match.index] != match.value &&
+                        match.bankIndex == this->getActiveBank();
         // Only mark dirty if the value of the active bank changed
         values[match.bankIndex][match.index] = match.value;
+        return newdirty;
+    }
+
+    void handleUpdate(typename Matcher::Result match) override {
+        dirty |= handleUpdateImpl(match);
     }
 
   public:

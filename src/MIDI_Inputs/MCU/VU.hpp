@@ -189,6 +189,9 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
                                            VUMatcher>,
            public Interfaces::MCU::IVU {
   public:
+    using Matcher = VUMatcher;
+    using Parent = MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
+                                            Matcher>;
     /**
      * @brief   Constructor.
      * 
@@ -209,8 +212,7 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
      */
     VU(uint8_t track, MIDIChannelCable channelCN,
        unsigned int decayTime = VUDecay::Default)
-        : MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
-                                   VUMatcher>({{track - 1, channelCN}}),
+        : Parent({{track - 1, channelCN}}),
           IVU(12), decayTimer(decayTime) {}
 
     /**
@@ -232,14 +234,22 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
         : VU(track, CHANNEL_1, decayTime) {}
 
   protected:
-    void handleUpdate(VUMatcher::Result match) override {
+    bool handleUpdateImpl(typename Matcher::Result match) {
         auto changed = state.update(match.data);
-        if (changed) {
-            if (changed == VUState::ValueChanged)
-                // reset the timer and fire after one interval
-                decayTimer.beginNextPeriod();
-            dirty = true;
-        }
+        if (changed == VUState::ValueChanged)
+            // reset the timer and fire after one interval
+            decayTimer.beginNextPeriod();
+        return changed;
+    }
+
+    void handleUpdate(typename Matcher::Result match) override {
+        dirty |= handleUpdateImpl(match);
+    }
+
+    bool decay() {
+        return decayTimer.getInterval() != VUDecay::Hold && 
+               decayTimer &&
+               state.decay();
     }
 
   public:
@@ -248,8 +258,7 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
 
     /// Decay the VU meter.
     void update() override {
-        if (decayTimer.getInterval() != VUDecay::Hold && decayTimer)
-            dirty |= state.decay();
+        dirty |= decay();
     }
 
   public:
@@ -287,6 +296,11 @@ class VU
                                               BankableVUMatcher<BankSize>>,
       public Interfaces::MCU::IVU {
   public:
+    using Matcher = BankableVUMatcher<BankSize>;
+    using Parent
+        = BankableMatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
+                                           Matcher>;
+
     /**
      * @brief   Constructor.
      * 
@@ -309,9 +323,7 @@ class VU
      */
     VU(BankConfig<BankSize> config, uint8_t track, MIDIChannelCable channelCN,
        unsigned int decayTime = VUDecay::Default)
-        : BankableMatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
-                                           BankableVUMatcher<BankSize>>(
-              {config, {track - 1, channelCN}}),
+        : Parent({config, {track - 1, channelCN}}),
           IVU(12), decayTimer(decayTime) {}
 
     /**
@@ -336,19 +348,29 @@ class VU
         : VU(config, track, CHANNEL_1, decayTime) {}
 
   protected:
-    void
-    handleUpdate(typename BankableVUMatcher<BankSize>::Result match) override {
+    bool handleUpdateImpl(typename Matcher::Result match) {
         auto changed = states[match.bankIndex].update(match.data);
-        if (changed) {
-            if (changed == VUState::ValueChanged &&
-                match.bankIndex == this->getActiveBank())
-                // Only care about active bank's decay.
-                // Other banks will decay as well, but not as precisely.
-                // They aren't visible anyway, so it's a good compromise.
-                decayTimer.beginNextPeriod();
-            dirty |= match.bankIndex == this->getActiveBank();
-            // Only mark dirty if the value of the active bank changed
-        }
+        if (changed == VUState::ValueChanged &&
+            match.bankIndex == this->getActiveBank())
+            // Only care about active bank's decay.
+            // Other banks will decay as well, but not as precisely.
+            // They aren't visible anyway, so it's a good compromise.
+            decayTimer.beginNextPeriod();
+        return changed && match.bankIndex == this->getActiveBank();
+        // Only mark dirty if the value of the active bank changed
+    }
+
+    void handleUpdate(typename Matcher::Result match) override {
+        dirty |= handleUpdateImpl(match);
+    }
+
+    bool decay() {
+        bool newdirty = false;
+        if (decayTimer.getInterval() != VUDecay::Hold && decayTimer)
+            for (uint8_t i = 0; i < BankSize; ++i)
+                newdirty |= states[i].decay() && i == this->getActiveBank();
+        // Only mark dirty if the value of the active bank decayed
+        return newdirty;
     }
 
   public:
@@ -360,10 +382,7 @@ class VU
 
     /// Decay the VU meter.
     void update() override {
-        if (decayTimer.getInterval() != VUDecay::Hold && decayTimer)
-            for (uint8_t i = 0; i < BankSize; ++i)
-                dirty |= states[i].decay() && i == this->getActiveBank();
-        // Only mark dirty if the value of the active bank decayed
+        dirty |= decay();
     }
 
   protected:

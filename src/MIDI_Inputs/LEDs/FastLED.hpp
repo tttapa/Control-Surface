@@ -52,6 +52,8 @@ template <MIDIMessageType Type, uint8_t RangeLen, class ColorMapper>
 class NoteCCKPRangeFastLED
     : public MatchingMIDIInputElement<Type, TwoByteRangeMIDIMatcher> {
   public:
+    using Matcher = TwoByteRangeMIDIMatcher;
+    
     NoteCCKPRangeFastLED(CRGB *ledcolors, MIDIAddress address,
                          const ColorMapper &colormapper)
         : MatchingMIDIInputElement<Type, TwoByteRangeMIDIMatcher>(
@@ -115,7 +117,7 @@ class NoteCCKPRangeFastLED
 
     void begin() override { resetLEDs(); }
 
-    void handleUpdate(typename TwoByteRangeMIDIMatcher::Result match) override {
+    void handleUpdate(typename Matcher::Result match) override {
         updateLED(match.index, match.value);
     }
 
@@ -140,7 +142,8 @@ class NoteCCKPRangeFastLED
     }
 
     /// Check if the colors changed since the last time the dirty flag was
-    /// cleared.
+    /// cleared. When it's dirty, you should probably call `FastLED.show()` in 
+    /// the main loop.
     bool getDirty() const { return dirty; }
     /// Clear the dirty flag.
     void clearDirty() { dirty = false; }

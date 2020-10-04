@@ -19,6 +19,9 @@ BEGIN_CS_NAMESPACE
 template <MIDIMessageType Type>
 class NoteCCKPLED : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher> {
   public:
+    using Matcher = TwoByteMIDIMatcher;
+    using Parent = MatchingMIDIInputElement<Type, Matcher>;
+
     /// Constructor.
     ///
     /// @param  ledPin
@@ -26,11 +29,10 @@ class NoteCCKPLED : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher> {
     /// @param  address
     ///         The address to listen to.
     NoteCCKPLED(pin_t ledPin, MIDIAddress address)
-        : MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>(address),
-          ledPin(ledPin) {}
+        : Parent(address), ledPin(ledPin) {}
 
   private:
-    void handleUpdate(typename TwoByteMIDIMatcher::Result match) override {
+    void handleUpdate(typename Matcher::Result match) override {
         PinStatus_t state = match.value >= threshold ? HIGH : LOW;
         AH::ExtIO::digitalWrite(ledPin, state);
     }
@@ -88,7 +90,8 @@ namespace Bankable {
 template <MIDIMessageType Type, uint8_t BankSize>
 class NoteCCKPLED : public NoteCCKPValue<Type, BankSize> {
   public:
-    using Matcher = typename NoteCCKPValue<Type, BankSize>::Matcher;
+    using Parent = NoteCCKPValue<Type, BankSize>;
+    using Matcher = typename Parent::Matcher;
 
     /// Constructor.
     ///
@@ -99,15 +102,14 @@ class NoteCCKPLED : public NoteCCKPValue<Type, BankSize> {
     /// @param  address
     ///         The base address to listen to.
     NoteCCKPLED(BankConfig<BankSize> config, pin_t ledPin, MIDIAddress address)
-        : NoteCCKPValue<Type, BankSize>(config, address), ledPin(ledPin) {}
+        : Parent(config, address), ledPin(ledPin) {}
 
   protected:
     void handleUpdate(typename Matcher::Result match) override {
-        NoteCCKPValue<Type, BankSize>::handleUpdate(match);
-        if (getDirty()) {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty) 
             display();
-            clearDirty();
-        }
+        this->dirty |= newdirty;
     }
 
     void display() {
@@ -124,24 +126,22 @@ class NoteCCKPLED : public NoteCCKPValue<Type, BankSize> {
 
     /// Reset all values to zero and turn off the LED.
     void reset() override {
-        NoteCCKPValue<Type, BankSize>::reset();
+        Parent::reset();
         AH::ExtIO::digitalWrite(ledPin, LOW);
-        clearDirty();
     }
 
-    using NoteCCKPValue<Type, BankSize>::getValue;
+    using Parent::getValue;
 
     /// Get the LED threshold.
     uint8_t getThreshold() const { return threshold; }
     /// Set the LED threshold. LED will be on if `getValue() >= getThreshold()`.
     void setThreshold(uint8_t threshold) { this->threshold = threshold; }
 
-  private: // These methods are used internally, don't allow external use.
-    using NoteCCKPValue<Type, BankSize>::getDirty;
-    using NoteCCKPValue<Type, BankSize>::clearDirty;
-
   protected:
-    void onBankSettingChange() override { display(); }
+    void onBankSettingChange() override { 
+        Parent::onBankSettingChange();
+        display(); 
+    }
 
   private:
     pin_t ledPin;

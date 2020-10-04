@@ -19,6 +19,8 @@ template <MIDIMessageType Type>
 class NoteCCKPValue : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>,
                       public Interfaces::IValue {
   public:
+    using Matcher = TwoByteMIDIMatcher;
+
     /// Constructor.
     ///
     /// @param  address
@@ -27,9 +29,14 @@ class NoteCCKPValue : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>,
         : MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>(address) {}
 
   protected:
-    void handleUpdate(typename TwoByteMIDIMatcher::Result match) override {
-        dirty |= value != match.value;
+    bool handleUpdateImpl(typename Matcher::Result match) {
+        bool newdirty = value != match.value;
         value = match.value;
+        return newdirty;
+    }
+
+    void handleUpdate(typename Matcher::Result match) override {
+        dirty |= handleUpdateImpl(match);
     }
 
   public:
@@ -98,11 +105,16 @@ class NoteCCKPValue : public BankableMatchingMIDIInputElement<
         : BankableMatchingMIDIInputElement<Type, Matcher>({config, address}) {}
 
   protected:
-    void handleUpdate(typename Matcher::Result match) override {
-        dirty |= values[match.bankIndex] != match.value &&
-                 match.bankIndex == this->getActiveBank();
+    bool handleUpdateImpl(typename Matcher::Result match) {
+        bool newdirty = values[match.bankIndex] != match.value &&
+                        match.bankIndex == this->getActiveBank();
         // Only mark dirty if the value of the active bank changed
         values[match.bankIndex] = match.value;
+        return newdirty;
+    }
+
+    void handleUpdate(typename Matcher::Result match) override {
+        dirty |= handleUpdateImpl(match);
     }
 
   public:
