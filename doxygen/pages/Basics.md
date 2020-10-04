@@ -15,7 +15,7 @@ The MIDI addresses used by the library have three different fields:
 - The actual address, like the MIDI note number or the MIDI Control Change 
   controller number, a number between 0 and 127
 - The MIDI Channel, between channel 1 and channel 16
-- The MIDI USB Cable Number, a number between 0 and 15
+- The MIDI USB Cable Number, between cable 1 and cable 16
 
 The MIDI USB Cable Number is only used on boards that have support for multiple 
 virtual MIDI cables over a single USB connection. As far as I know, only 
@@ -34,7 +34,7 @@ This is the most important one:
 ~~~cpp
 MIDIAddress(int address, 
             Channel channel = CHANNEL_1,
-            int cableNumber = 0x0)
+            Cable cableNumber = CABLE_1)
 ~~~
 
 It allows you to specify all three of the fields explained above. The channel 
@@ -44,14 +44,14 @@ channel on the first cable.
 
 For example:
 ~~~cpp
-// Address 16 on channel 1 and cable 0:
+// Address 16 on channel 1 and cable 1:
 MIDIAddress myAddress = 16;
 
-// Address 42 on channel 2 and cable 0:
+// Address 42 on channel 2 and cable 1:
 MIDIAddress myAddress = {42, CHANNEL_2};
 
-// Address 111 on channel 2 and cable 1:
-MIDIAddress myAddress = {111, CHANNEL_2, 1};
+// Address 111 on channel 2 and cable 3:
+MIDIAddress myAddress = {111, CHANNEL_2, CABLE_3};
 ~~~
 
 If you specify just a single argument, as in the first example, you don't have
@@ -90,21 +90,21 @@ around it.
 
 For example:
 ~~~cpp
-// Controller 16 on channel 1 and cable 0:
+// Controller 16 on channel 1 and cable 1:
 CCPotentiometer myPotentiometer = {
     A0, // pin number
     16, // MIDI address
 };
 
-// Controller 42 on channel 2 and cable 0:
+// Controller 42 on channel 2 and cable 1:
 CCPotentiometer myPotentiometer = {
     A0,              // pin number
     {42, CHANNEL_2}, // MIDI address
 };
 
-// Controller 111 on channel 2 and cable 1:
+// Controller 111 on channel 2 and cable 3:
 CCPotentiometer myPotentiometer = {
-    A0,                  // pin number
-    {111, CHANNEL_2, 1}, // MIDI address
+    A0,                        // pin number
+    {111, CHANNEL_2, CABLE_3}, // MIDI address
 };
 ~~~
