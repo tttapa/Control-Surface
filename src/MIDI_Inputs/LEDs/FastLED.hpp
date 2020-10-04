@@ -131,7 +131,7 @@ class NoteCCKPRangeFastLED
         // Map the note index to the LED index
         uint8_t ledIndex = ledIndexPermuter(index);
         // Check if the color changed
-        dirty |= ledcolors[ledIndex] == newColor;
+        dirty |= ledcolors[ledIndex] != newColor;
         // Update the LED color
         ledcolors[ledIndex] = newColor;
     }
