@@ -59,5 +59,8 @@ void setup() {
 
 void loop() {
   Control_Surface.loop();
-  FastLED.show();
+  if (midiled.getDirty()) { // If the colors changed
+    FastLED.show();         // Update the LEDs with the new colors
+    midiled.clearDirty();   // Clear the dirty flag
+  }
 }
