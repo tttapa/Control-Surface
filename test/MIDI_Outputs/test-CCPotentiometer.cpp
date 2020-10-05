@@ -11,6 +11,7 @@ TEST(CCPotentiometer, simple) {
     Control_Surface.connectDefaultMIDI_Interface();
 
     CCPotentiometer pot(2, {0x3C, CHANNEL_7, CABLE_13});
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(2)).WillOnce(Return(0));
     pot.begin();
 
     EXPECT_CALL(ArduinoMock::getInstance(), analogRead(2))
@@ -32,6 +33,7 @@ TEST(CCPotentiometer, mapping) {
     Control_Surface.connectDefaultMIDI_Interface();
 
     CCPotentiometer pot(2, {0x3C, CHANNEL_7, CABLE_13});
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(2)).WillOnce(Return(0));
     pot.begin();
     pot.map([](analog_t x) -> analog_t { return x * 2; });
 
@@ -54,6 +56,7 @@ TEST(CCPotentiometer, invert) {
     Control_Surface.connectDefaultMIDI_Interface();
 
     CCPotentiometer pot(2, {0x3C, CHANNEL_7, CABLE_13});
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(2)).WillOnce(Return(0));
     pot.begin();
     pot.invert();
 

@@ -6,21 +6,19 @@
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 #include <stdint.h>
+#include <AH/STL/limits>
+#include <AH/STL/type_traits>
 
 /**
- * @brief   A class for single-pole infinite impulse response filters
- *          or exponential moving average filters.
- *
- * Optimized implementation of the difference equation with a slight
- * optimization by using a factor of two as the pole location (this means
- * that no division or floating point operations are required).
- *
+ * @brief   Exponential moving average filter.
+ * 
+ * Fast integer EMA implementation where the weight factor is a power of two.
+ * 
  * Difference equation: @f$ y[n] = \alpha·x[n]+(1-\alpha)·y[n-1] @f$
  * where @f$ \alpha = \left(\frac{1}{2}\right)^{K} @f$, @f$ x @f$ is the
  * input sequence, and @f$ y @f$ is the output sequence.
  *
- * [An in-depth explanation of the EMA filter]
- * (https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential%20Moving%20Average/)
+ * [An in-depth explanation of the EMA filter](https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential%20Moving%20Average/)
  *
  * @tparam  K
  *          The amount of bits to shift by. This determines the location
@@ -28,21 +26,38 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
  *          cut-off frequency.  
  *          The higher this number, the more filtering takes place.  
  *          The pole location is @f$ 1 - 2^{-K} @f$.
- * @tparam  uint_t
- *          The (signed) integer type to use for the input, intermediate values
- *          and the output.
- *          Should be at least @f$ M+K @f$ bits wide, where @f$ M @f$
- *          is the maximum number of bits of the input.
- *          In case of the Arduino's built-in ADC,
- *          @f$ M = 10 = \log_2(1024) @f$.
+ * @tparam  input_t
+ *          The integer type to use for the input and output of the filter. 
+ *          Can be signed or unsigned.
+ * @tparam  state_t
+ *          The unsigned integer type to use for the internal state of the
+ *          filter. A fixed-point representation with @f$ K @f$ fractional
+ *          bits is used, so this type should be at least @f$ M + K @f$ bits
+ *          wide, where @f$ M @f$ is the maximum number of bits of the input.
+ *
+ * Some examples of different combinations of template parameters:
  * 
- * @ingroup    AH_Filters
+ * 1. Filtering the result of `analogRead`: analogRead returns an integer
+ *    between 0 and 1023, which can be represented using 10 bits, so 
+ *    @f$ M = 10 @f$. If `input_t` and `output_t` are both `uint16_t`,
+ *    the maximum shift factor `K` is @f$ 16 - M = 6 @f$. If `state_t`
+ *    is increased to `uint32_t`, the maximum shift factor `K` is 
+ *    @f$ 32 - M = 22 @f$.
+ * 2. Filtering a signed integer between -32768 and 32767: this can be 
+ *    represented using a 16-bit signed integer, so `input_t` is `int16_t`,
+ *    and @f$ M = 16 @f$. (2¹⁵ = 32768)
+ *    Let's say the shift factor `K` is 1, then the minimum width of 
+ *    `state_t` should be @f$ M + K = 17 @f$ bits, so `uint32_t` would be 
+ *    a sensible choice.
  */
-template <uint8_t K, class uint_t>
+template <uint8_t K,
+          class input_t = uint_fast16_t,
+          class state_t = typename std::make_unsigned<input_t>::type>
 class EMA {
   public:
-    EMA(uint_t initial = 0)
-     : filtered((initial << K) - initial) {}
+    /// Constructor: initialize filter to zero or optional given value.
+    EMA(input_t initial = input_t(0))
+      : state(zero + (initial << K) - initial) {}
 
     /**
      * @brief   Reset the filter to the given value.
@@ -50,8 +65,8 @@ class EMA {
      * @param   value 
      *          The value to reset the filter state to.
      */
-    void reset(uint_t value = 0) {
-        filtered = (value << K) - value;
+    void reset(input_t value = input_t(0)) {
+        state = zero + (value << K) - value;
     }
 
     /**
@@ -61,30 +76,59 @@ class EMA {
      *          The new raw input value.
      * @return  The new filtered output value.
      */
-    uint_t filter(uint_t input) {
-        filtered += input;
-        uint_t output = (filtered + fixedPointAHalf) >> K;
-        filtered -= output;
-        return output;
+    input_t filter(input_t input) {
+      state         += state_t(input);
+      state_t output = (state + half) >> K;
+      output        -= zero >> K;
+      state         -= output;
+      return input_t(output);
     }
 
-    /**
-     * @brief   Filter the input: Given @f$ x[n] @f$, calculate @f$ y[n] @f$.
-     *
-     * @param   value
-     *          The new raw input value.
-     * @return  The new filtered output value.
-     */
-    uint_t operator()(uint_t value) { return filter(value); }
+    /// @copydoc    filter(input_t)
+    input_t operator()(input_t input) {
+        return filter(input);
+    }
 
-    static_assert(
-        uint_t(0) < uint_t(-1), // Check that `uint_t` is an unsigned type
-        "Error: the uint_t type should be an unsigned integer, otherwise, "
-        "the division using bit shifts is invalid.");
+    constexpr static state_t 
+      max_state  = std::numeric_limits<state_t>::max(),
+      half_state = max_state / 2 + 1,
+      zero       = std::is_unsigned<input_t>::value ? state_t(0) : half_state,
+      half       = K > 0 ? state_t(1) << (K - 1) : state_t(0);
+  
+    static_assert(std::is_unsigned<state_t>::value, 
+                  "state type should be unsigned");
+
+    static_assert(max_state >= std::numeric_limits<input_t>::max(),
+                  "state type cannot be narrower than input type");               
+
+    /// Verify the input range to make sure it's compatible with the shift
+    /// factor and the width of the state type.
+    ///
+    /// Examples:
+    /// ~~~cpp
+    /// EMA<5, int_fast16_t, uint_fast16_t> filter;
+    /// static_assert(filter.supports_range(-1024, 1023),
+    ///               "use a wider state or input type, or a smaller shift factor");
+    /// ~~~
+    /// ~~~cpp
+    /// EMA<5, uint_fast16_t, uint_fast16_t> filter;
+    /// static_assert(filter.supports_range(0u, 2047u),
+    ///               "use a wider state or input type, or a smaller shift factor");
+    /// ~~~
+    template <class T>
+    constexpr static bool supports_range(T min, T max) {
+      using sstate_t = typename std::make_signed<state_t>::type;
+      return min <= max &&
+             min >= std::numeric_limits<input_t>::min() &&
+             max <= std::numeric_limits<input_t>::max() &&
+             (std::is_unsigned<input_t>::value
+               ? state_t(max) <= (max_state >> K)
+               : min >= -sstate_t(max_state >> (K + 1)) - 1 &&  
+                 max <= sstate_t(max_state >> (K + 1)));
+    }
 
   private:
-    uint_t filtered = 0;
-    constexpr static uint_t fixedPointAHalf = K > 0 ? 1 << (K - 1) : 0;
+    state_t state;
 };
 
 // -------------------------------------------------------------------------- //
@@ -129,13 +173,7 @@ class EMA_f {
         return filtered;
     }
 
-    /**
-     * @brief   Filter the input: Given @f$ x[n] @f$, calculate @f$ y[n] @f$.
-     *
-     * @param   value
-     *          The new raw input value.
-     * @return  The new filtered output value.
-     */
+    /// @copydoc    filter(float)
     float operator()(float value) { return filter(value); }
 
   private:
