@@ -16,8 +16,7 @@ BEGIN_CS_NAMESPACE
  *
  * @ingroup MIDIOutputElements
  */
-class CCPotentiometer
-    : public MIDIFilteredAnalogAddressable<ContinuousCCSender> {
+class CCPotentiometer : public MIDIFilteredAnalog<ContinuousCCSender> {
   public:
     /** 
      * @brief   Create a new CCPotentiometer object with the given analog pin, 
@@ -30,8 +29,8 @@ class CCPotentiometer
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
      *          [CABLE_1, CABLE_16].
      */
-    CCPotentiometer(pin_t analogPin, const MIDIAddress &address)
-        : MIDIFilteredAnalogAddressable(analogPin, address, {}) {}
+    CCPotentiometer(pin_t analogPin, MIDIAddress address)
+        : MIDIFilteredAnalog(analogPin, address, {}) {}
 };
 
 END_CS_NAMESPACE

@@ -25,8 +25,8 @@ namespace ManyAddresses {
  */
 template <setting_t NumBanks>
 class CCPotentiometer
-    : public Bankable::MIDIFilteredAnalogAddressable<ManyAddresses<NumBanks>,
-                                                     ContinuousCCSender> {
+    : public Bankable::MIDIFilteredAnalog<ManyAddresses<NumBanks>,
+                                          ContinuousCCSender> {
   public:
     /** 
      * @brief   Create a new CCPotentiometer object with the given 
@@ -45,8 +45,7 @@ class CCPotentiometer
      */
     CCPotentiometer(const Bank<NumBanks> &bank, pin_t analogPin,
                     const Array<MIDIAddress, NumBanks> &addresses)
-        : MIDIFilteredAnalogAddressable<ManyAddresses<NumBanks>,
-                                        ContinuousCCSender>{
+        : MIDIFilteredAnalog<ManyAddresses<NumBanks>, ContinuousCCSender>{
               {bank, addresses}, analogPin, {}} {}
 };
 
