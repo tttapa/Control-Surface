@@ -140,8 +140,12 @@ class GenericFilteredAnalog {
      *          mapping applied, but with its bit depth increased by @c IncRes.
      */
     AnalogType getRawValue() const {
-        return increaseBitDepth<ADC_BITS + IncRes, ADC_BITS, AnalogType,
-                                AnalogType>(ExtIO::analogRead(analogPin));
+        AnalogType value = ExtIO::analogRead(analogPin);
+#ifdef ESP8266
+        if (value > 1023)
+            value = 1023;
+#endif
+        return increaseBitDepth<ADC_BITS + IncRes, ADC_BITS, AnalogType>(value);
     }
 
     /**
