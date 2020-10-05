@@ -160,7 +160,7 @@ class GenericFilteredAnalog {
      * @brief   Get the maximum value that can be returned from @ref getRawValue.
      */
     constexpr static AnalogType getMaxRawValue() {
-        return (1UL << (ADC_BITS + IncRes)) - 1;
+        return (1ul << (ADC_BITS + IncRes)) - 1ul;
     }
 
     /**
@@ -202,6 +202,8 @@ class GenericFilteredAnalog {
     pin_t analogPin;
     MappingFunction mapFn;
 
+    using EMA_t = EMA<FilterShiftFactor, AnalogType, FilterType>;
+
     static_assert(
         ADC_BITS + IncRes + FilterShiftFactor <= sizeof(FilterType) * CHAR_BIT,
         "Error: FilterType is not wide enough to hold the maximum value");
@@ -211,8 +213,11 @@ class GenericFilteredAnalog {
     static_assert(
         Precision <= ADC_BITS + IncRes,
         "Error: Precision is larger than the increased ADC precision");
+    static_assert(
+        EMA_t::supports_range(AnalogType(0), getMaxRawValue()),
+        "Error: EMA filter type doesn't support full ADC range");
 
-    EMA<FilterShiftFactor, FilterType> filter;
+    EMA_t filter;
     Hysteresis<ADC_BITS + IncRes - Precision, AnalogType, AnalogType>
         hysteresis;
 };
