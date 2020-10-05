@@ -25,12 +25,16 @@ keyword2:
   - begin
   - update
   # FilteredAnalog.hpp
+  - reset
+  - resetToCurrentValue
+  - getMappingFunction
   - map
   - invert
   - update
   - getValue
   - getFloatValue
   - getRawValue
+  - getMaxRawValue
   - setupADC
   # IncrementButton.hpp
   - begin

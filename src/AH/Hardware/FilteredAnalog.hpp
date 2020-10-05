@@ -69,6 +69,14 @@ class GenericFilteredAnalog {
     }
 
     /**
+     * @brief   Reset the filtered value to the value that's currently being
+     *          measured at the analog input.
+     * 
+     * This is useful to avoid transient effects upon initialization.
+     */
+    void resetToCurrentValue() { filter.reset(getRawValue()); }
+
+    /**
      * @brief   Specify a mapping function/functor that is applied to the analog
      *          value after filtering and before applying hysteresis.
      *
@@ -140,15 +148,19 @@ class GenericFilteredAnalog {
      *          mapping applied, but with its bit depth increased by @c IncRes.
      */
     AnalogType getRawValue() const {
-        return increaseBitDepth<ADC_BITS + IncRes, ADC_BITS, AnalogType,
-                                AnalogType>(ExtIO::analogRead(analogPin));
+        AnalogType value = ExtIO::analogRead(analogPin);
+#ifdef ESP8266
+        if (value > 1023)
+            value = 1023;
+#endif
+        return increaseBitDepth<ADC_BITS + IncRes, ADC_BITS, AnalogType>(value);
     }
 
     /**
      * @brief   Get the maximum value that can be returned from @ref getRawValue.
      */
     constexpr static AnalogType getMaxRawValue() {
-        return (1UL << (ADC_BITS + IncRes)) - 1;
+        return (1ul << (ADC_BITS + IncRes)) - 1ul;
     }
 
     /**
@@ -190,6 +202,8 @@ class GenericFilteredAnalog {
     pin_t analogPin;
     MappingFunction mapFn;
 
+    using EMA_t = EMA<FilterShiftFactor, AnalogType, FilterType>;
+
     static_assert(
         ADC_BITS + IncRes + FilterShiftFactor <= sizeof(FilterType) * CHAR_BIT,
         "Error: FilterType is not wide enough to hold the maximum value");
@@ -199,8 +213,11 @@ class GenericFilteredAnalog {
     static_assert(
         Precision <= ADC_BITS + IncRes,
         "Error: Precision is larger than the increased ADC precision");
+    static_assert(
+        EMA_t::supports_range(AnalogType(0), getMaxRawValue()),
+        "Error: EMA filter type doesn't support full ADC range");
 
-    EMA<FilterShiftFactor, FilterType> filter;
+    EMA_t filter;
     Hysteresis<ADC_BITS + IncRes - Precision, AnalogType, AnalogType>
         hysteresis;
 };

@@ -59,12 +59,14 @@ FilteredAnalog<> simpleAnalog = A0;
 
 void setup() {
   Serial.begin(115200);
-  while (!Serial)
-    ;
+  while (!Serial);
   // Select the correct ADC resolution
   FilteredAnalog<>::setupADC();
   // If you want, you can add mapping functions to invert the input, for example
   analog.invert();
+  // Initialize the filter to whatever the value on the input is right now
+  // (otherwise, the filter is initialized to zero and you get transients)
+  analog.resetToCurrentValue();
 }
 
 void loop() {

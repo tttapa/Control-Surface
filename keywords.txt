@@ -31,12 +31,16 @@ stableTime	KEYWORD2
 onButtonChanged	KEYWORD2
 begin	KEYWORD2
 update	KEYWORD2
+reset	KEYWORD2
+resetToCurrentValue	KEYWORD2
+getMappingFunction	KEYWORD2
 map	KEYWORD2
 invert	KEYWORD2
 update	KEYWORD2
 getValue	KEYWORD2
 getFloatValue	KEYWORD2
 getRawValue	KEYWORD2
+getMaxRawValue	KEYWORD2
 setupADC	KEYWORD2
 begin	KEYWORD2
 update	KEYWORD2
