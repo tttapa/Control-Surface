@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Arduino Helpers
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">master</span>
    </div>
    <div id="projectbrief">Utility library for Arduino</div>
   </td>
@@ -74,6 +74,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="../../d4/dc1/classGenericFilteredAnalog-members.html">List of all members</a>  </div>
@@ -91,7 +92,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/dab/classGenericFilteredAnalog__coll__graph.svg" width="488" height="595"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/dab/classGenericFilteredAnalog__coll__graph.svg" width="502" height="624"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -102,6 +103,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a674927f3c54db0ef2b817c89c569231d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#a674927f3c54db0ef2b817c89c569231d">reset</a> (AnalogType value=0)</td></tr>
 <tr class="memdesc:a674927f3c54db0ef2b817c89c569231d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the filter to the given value.  <a href="../../dc/d91/classGenericFilteredAnalog.html#a674927f3c54db0ef2b817c89c569231d">More...</a><br /></td></tr>
 <tr class="separator:a674927f3c54db0ef2b817c89c569231d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22ec6f8b6a600fac80d3366840e5c55f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#a22ec6f8b6a600fac80d3366840e5c55f">resetToCurrentValue</a> ()</td></tr>
+<tr class="memdesc:a22ec6f8b6a600fac80d3366840e5c55f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the filtered value to the value that's currently being measured at the analog input.  <a href="../../dc/d91/classGenericFilteredAnalog.html#a22ec6f8b6a600fac80d3366840e5c55f">More...</a><br /></td></tr>
+<tr class="separator:a22ec6f8b6a600fac80d3366840e5c55f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55537d6de64435f495f9eaac3985d7e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#a55537d6de64435f495f9eaac3985d7e8">map</a> (MappingFunction fn)</td></tr>
 <tr class="memdesc:a55537d6de64435f495f9eaac3985d7e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify a mapping function/functor that is applied to the analog value after filtering and before applying hysteresis.  <a href="../../dc/d91/classGenericFilteredAnalog.html#a55537d6de64435f495f9eaac3985d7e8">More...</a><br /></td></tr>
 <tr class="separator:a55537d6de64435f495f9eaac3985d7e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,6 +137,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a3cec68e11b712453289f34d1634f86b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select the configured ADC resolution.  <a href="../../dc/d91/classGenericFilteredAnalog.html#a3cec68e11b712453289f34d1634f86b8">More...</a><br /></td></tr>
 <tr class="separator:a3cec68e11b712453289f34d1634f86b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a4ac3abd6fea63f6ac483d0e8509ebe65"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#a4ac3abd6fea63f6ac483d0e8509ebe65">EMA_t</a> = <a class="el" href="../../d7/d40/classEMA.html">EMA</a>&lt; FilterShiftFactor, AnalogType, FilterType &gt;</td></tr>
+<tr class="separator:a4ac3abd6fea63f6ac483d0e8509ebe65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a032e5fdead076458ef13e77844465b7e"><td class="memTemplParams" colspan="2">template&lt;typename M  = MappingFunction&gt; </td></tr>
@@ -150,8 +159,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a14a694c01cf8f7a34d197120c9cd5906"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0b34350a8c36183ef0611f470c594c0"><td class="memItemLeft" align="right" valign="top">MappingFunction&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#ac0b34350a8c36183ef0611f470c594c0">mapFn</a></td></tr>
 <tr class="separator:ac0b34350a8c36183ef0611f470c594c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8486f5860ef80680c3f712628837609"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d40/classEMA.html">EMA</a>&lt; FilterShiftFactor, FilterType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#ae8486f5860ef80680c3f712628837609">filter</a></td></tr>
-<tr class="separator:ae8486f5860ef80680c3f712628837609"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cbecfb797bcd7b367dc19c47e67b84c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#a4ac3abd6fea63f6ac483d0e8509ebe65">EMA_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#a8cbecfb797bcd7b367dc19c47e67b84c">filter</a></td></tr>
+<tr class="separator:a8cbecfb797bcd7b367dc19c47e67b84c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac59ad53f58c22dda10715b40fcf441dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d2/dcb/classHysteresis.html">Hysteresis</a>&lt; <a class="el" href="../../db/d02/Settings_8hpp.html#a8db0fcdeeb644f813c9b29211ce0a1ae">ADC_BITS</a>+IncRes - Precision, AnalogType, AnalogType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#ac59ad53f58c22dda10715b40fcf441dc">hysteresis</a></td></tr>
 <tr class="separator:ac59ad53f58c22dda10715b40fcf441dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -163,7 +172,32 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="../../da/da7/classFilteredAnalog.html" title="A class that reads and filters an analog input.">FilteredAnalog</a> </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00039">39</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a4ac3abd6fea63f6ac483d0e8509ebe65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ac3abd6fea63f6ac483d0e8509ebe65">&#9670;&nbsp;</a></span>EMA_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#a4ac3abd6fea63f6ac483d0e8509ebe65">EMA_t</a> =  <a class="el" href="../../d7/d40/classEMA.html">EMA</a>&lt;FilterShiftFactor, AnalogType, FilterType&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00205">205</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a185f36ed491dad9a906a5df3192c378d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a185f36ed491dad9a906a5df3192c378d">&#9670;&nbsp;</a></span>GenericFilteredAnalog()</h2>
 
@@ -256,6 +290,36 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 
 </div>
 </div>
+<a id="a22ec6f8b6a600fac80d3366840e5c55f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22ec6f8b6a600fac80d3366840e5c55f">&#9670;&nbsp;</a></span>resetToCurrentValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void resetToCurrentValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reset the filtered value to the value that's currently being measured at the analog input. </p>
+<p>This is useful to avoid transient effects upon initialization. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00077">77</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a55537d6de64435f495f9eaac3985d7e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a55537d6de64435f495f9eaac3985d7e8">&#9670;&nbsp;</a></span>map()</h2>
 
@@ -291,7 +355,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
  Applying it after hysteresis would result in a lower resolution. <br  />
  That's why the mapping function is applied after filtering and before hysteresis. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00087">87</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00095">95</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -320,7 +384,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 
 <p>Get a reference to the mapping function. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00092">92</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00100">100</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -349,7 +413,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 
 <p>Get a reference to the mapping function. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00096">96</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00104">104</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -385,7 +449,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00107">107</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00115">115</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -416,7 +480,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 <dl class="section note"><dt>Note</dt><dd>This function just returns the value from the last call to <a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#aa2aac016e2bf7b5bd2b271786c2791aa">update</a>, it doesn't read the analog input again.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The filtered value of the analog input, as a number of <code>Precision</code> bits wide. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00125">125</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00133">133</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -446,7 +510,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 <p>Get the filtered value of the analog input with the mapping function applied as a floating point number from 0.0 to 1.0. </p>
 <dl class="section return"><dt>Returns</dt><dd>The filtered value of the analog input, as a number from 0.0 to 1.0. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00134">134</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00142">142</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -475,7 +539,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 
 <p>Read the raw value of the analog input without any filtering or mapping applied, but with its bit depth increased by <code>IncRes</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00142">142</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00150">150</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -504,7 +568,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 
 <p>Get the maximum value that can be returned from <a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#a5a3e6c660c868d044afaeaf53e7872b3">getRawValue</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00150">150</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00162">162</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -537,7 +601,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 <dd>
 <a class="el" href="../../d7/d7c/ADCConfig_8hpp.html">ADCConfig.hpp</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00161">161</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00173">173</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -568,7 +632,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 <p>Helper function that applies the mapping function if it's enabled. </p>
 <p>This function is only enabled if MappingFunction is explicitly convertible to bool. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00174">174</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00186">186</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -599,7 +663,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 <p>Helper function that applies the mapping function without checking if it's enabled. </p>
 <p>This function is only enabled if MappingFunction is not convertible to bool. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00185">185</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00197">197</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -624,7 +688,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00190">190</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00202">202</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -648,12 +712,12 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00191">191</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00203">203</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae8486f5860ef80680c3f712628837609"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8486f5860ef80680c3f712628837609">&#9670;&nbsp;</a></span>filter</h2>
+<a id="a8cbecfb797bcd7b367dc19c47e67b84c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cbecfb797bcd7b367dc19c47e67b84c">&#9670;&nbsp;</a></span>filter</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -662,7 +726,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d7/d40/classEMA.html">EMA</a>&lt;FilterShiftFactor, FilterType&gt; filter</td>
+          <td class="memname"><a class="el" href="../../dc/d91/classGenericFilteredAnalog.html#a4ac3abd6fea63f6ac483d0e8509ebe65">EMA_t</a> filter</td>
         </tr>
       </table>
   </td>
@@ -672,7 +736,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00203">203</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00220">220</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -696,7 +760,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00205">205</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00222">222</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -706,9 +770,7 @@ class GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, F
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="../../doxygen.png" alt="doxygen"/>
-</a> 1.8.19
+Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.19
 </small></address>
 </body>
 </html>

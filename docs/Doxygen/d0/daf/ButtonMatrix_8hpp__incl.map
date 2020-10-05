@@ -21,7 +21,7 @@
 <area shape="rect" id="node15" href="$db/d02/Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="602,632,705,659"/>
 <area shape="rect" id="node21" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="347,632,578,659"/>
 <area shape="rect" id="node16" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="493,856,672,883"/>
-<area shape="rect" id="node17" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions. By default, the library automatically selec..." alt="" coords="443,707,653,733"/>
+<area shape="rect" id="node17" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions." alt="" coords="443,707,653,733"/>
 <area shape="rect" id="node18" title=" " alt="" coords="677,707,747,733"/>
 <area shape="rect" id="node25" href="$dd/ddf/ExtendedInputOutput_8hpp.html" title=" " alt="" coords="667,155,903,196"/>
 <area shape="rect" id="node26" title=" " alt="" coords="927,162,998,189"/>

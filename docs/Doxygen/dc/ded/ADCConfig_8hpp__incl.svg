@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title="This file contains the platform&#45;specific ADC resolutions. By default, the library automatically selec...">
+<g id="a_node1"><a xlink:title="This file contains the platform&#45;specific ADC resolutions.">
 <polygon fill="#bfbfbf" stroke="black" points="64,-224.5 64,-243.5 153,-243.5 153,-224.5 64,-224.5"/>
 <text text-anchor="middle" x="108.5" y="-231.5" font-family="Helvetica,sans-Serif" font-size="10.00">ADCConfig.hpp</text>
 </a>

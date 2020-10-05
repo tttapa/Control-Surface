@@ -36,7 +36,7 @@
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
-<g id="a_node5"><a xlink:href="../../d7/d7c/ADCConfig_8hpp.html" target="_top" xlink:title="This file contains the platform&#45;specific ADC resolutions. By default, the library automatically selec...">
+<g id="a_node5"><a xlink:href="../../d7/d7c/ADCConfig_8hpp.html" target="_top" xlink:title="This file contains the platform&#45;specific ADC resolutions.">
 <polygon fill="white" stroke="black" points="95.5,-224.5 95.5,-243.5 252.5,-243.5 252.5,-224.5 95.5,-224.5"/>
 <text text-anchor="middle" x="174" y="-231.5" font-family="Helvetica,sans-Serif" font-size="10.00">AH/Hardware/ADCConfig.hpp</text>
 </a>

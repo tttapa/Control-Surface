@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Arduino Helpers
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">master</span>
    </div>
    <div id="projectbrief">Utility library for Arduino</div>
   </td>
@@ -107,17 +107,19 @@ Behavior</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
 <div class="line">  Serial.begin(115200);</div>
-<div class="line">  <span class="keywordflow">while</span> (!Serial)</div>
-<div class="line">    ;</div>
+<div class="line">  <span class="keywordflow">while</span> (!Serial);</div>
 <div class="line">  <span class="comment">// Select the correct ADC resolution</span></div>
 <div class="line">  analog.<a name="a1"></a><a class="code" href="../../dc/d91/classGenericFilteredAnalog.html#a3cec68e11b712453289f34d1634f86b8">setupADC</a>();</div>
+<div class="line">  <span class="comment">// Initialize the filter to whatever the value on the input is right now</span></div>
+<div class="line">  <span class="comment">// (otherwise, the filter is initialized to zero and you get transients)</span></div>
+<div class="line">  analog.<a name="a2"></a><a class="code" href="../../dc/d91/classGenericFilteredAnalog.html#a22ec6f8b6a600fac80d3366840e5c55f">resetToCurrentValue</a>();</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
 <div class="line">  <span class="comment">// Read the analog input every millisecond, and print if the value has changed</span></div>
-<div class="line">  <span class="keyword">static</span> <a name="_a2"></a><a class="code" href="../../dc/dea/classTimer.html">Timer&lt;millis&gt;</a> timer = 1; <span class="comment">// ms</span></div>
-<div class="line">  <span class="keywordflow">if</span> (timer &amp;&amp; analog.<a name="a3"></a><a class="code" href="../../dc/d91/classGenericFilteredAnalog.html#aa2aac016e2bf7b5bd2b271786c2791aa">update</a>())</div>
-<div class="line">    Serial.println(analog.<a name="a4"></a><a class="code" href="../../dc/d91/classGenericFilteredAnalog.html#a8a4d365b8958084f9cb9176fe638bfae">getValue</a>());</div>
+<div class="line">  <span class="keyword">static</span> <a name="_a3"></a><a class="code" href="../../dc/dea/classTimer.html">Timer&lt;millis&gt;</a> timer = 1; <span class="comment">// ms</span></div>
+<div class="line">  <span class="keywordflow">if</span> (timer &amp;&amp; analog.<a name="a4"></a><a class="code" href="../../dc/d91/classGenericFilteredAnalog.html#aa2aac016e2bf7b5bd2b271786c2791aa">update</a>())</div>
+<div class="line">    Serial.println(analog.<a name="a5"></a><a class="code" href="../../dc/d91/classGenericFilteredAnalog.html#a8a4d365b8958084f9cb9176fe638bfae">getValue</a>());</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Explanation:</span></div>
@@ -130,18 +132,17 @@ Behavior</h2>
 <div class="line"><span class="comment">// every time the specified amount of time has passed.</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 <div class="ttc" id="aMillisMicrosTimer_8hpp_html"><div class="ttname"><a href="../../d1/dd0/MillisMicrosTimer_8hpp.html">MillisMicrosTimer.hpp</a></div></div>
-<div class="ttc" id="aclassGenericFilteredAnalog_html_aa2aac016e2bf7b5bd2b271786c2791aa"><div class="ttname"><a href="../../dc/d91/classGenericFilteredAnalog.html#aa2aac016e2bf7b5bd2b271786c2791aa">GenericFilteredAnalog&lt; analog_t(*)(analog_t), 10, ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t, MaximumFilteredAnalogIncRes&lt; ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t &gt;::value &gt;::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">Read the analog input value, apply the mapping function, and update the average.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00107">FilteredAnalog.hpp:107</a></div></div>
-<div class="ttc" id="aclassFilteredAnalog_html"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html">FilteredAnalog</a></div><div class="ttdoc">A class that reads and filters an analog input.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00246">FilteredAnalog.hpp:249</a></div></div>
+<div class="ttc" id="aclassGenericFilteredAnalog_html_aa2aac016e2bf7b5bd2b271786c2791aa"><div class="ttname"><a href="../../dc/d91/classGenericFilteredAnalog.html#aa2aac016e2bf7b5bd2b271786c2791aa">GenericFilteredAnalog&lt; analog_t(*)(analog_t), 10, ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t, MaximumFilteredAnalogIncRes&lt; ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t &gt;::value &gt;::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">Read the analog input value, apply the mapping function, and update the average.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00115">FilteredAnalog.hpp:115</a></div></div>
+<div class="ttc" id="aclassFilteredAnalog_html"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html">FilteredAnalog</a></div><div class="ttdoc">A class that reads and filters an analog input.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00263">FilteredAnalog.hpp:266</a></div></div>
+<div class="ttc" id="aclassGenericFilteredAnalog_html_a22ec6f8b6a600fac80d3366840e5c55f"><div class="ttname"><a href="../../dc/d91/classGenericFilteredAnalog.html#a22ec6f8b6a600fac80d3366840e5c55f">GenericFilteredAnalog&lt; analog_t(*)(analog_t), 10, ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t, MaximumFilteredAnalogIncRes&lt; ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t &gt;::value &gt;::resetToCurrentValue</a></div><div class="ttdeci">void resetToCurrentValue()</div><div class="ttdoc">Reset the filtered value to the value that's currently being measured at the analog input.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00077">FilteredAnalog.hpp:77</a></div></div>
 <div class="ttc" id="aclassTimer_html"><div class="ttname"><a href="../../dc/dea/classTimer.html">Timer</a></div><div class="ttdoc">A class for easily managing timed events.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dd0/MillisMicrosTimer_8hpp_source.html#l00028">MillisMicrosTimer.hpp:28</a></div></div>
-<div class="ttc" id="aclassGenericFilteredAnalog_html_a8a4d365b8958084f9cb9176fe638bfae"><div class="ttname"><a href="../../dc/d91/classGenericFilteredAnalog.html#a8a4d365b8958084f9cb9176fe638bfae">GenericFilteredAnalog&lt; analog_t(*)(analog_t), 10, ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t, MaximumFilteredAnalogIncRes&lt; ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t &gt;::value &gt;::getValue</a></div><div class="ttdeci">analog_t getValue() const</div><div class="ttdoc">Get the filtered value of the analog input (with the mapping function applied).</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00125">FilteredAnalog.hpp:125</a></div></div>
-<div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder. You have to add this file first, so the other headers are in t...</div></div>
+<div class="ttc" id="aclassGenericFilteredAnalog_html_a8a4d365b8958084f9cb9176fe638bfae"><div class="ttname"><a href="../../dc/d91/classGenericFilteredAnalog.html#a8a4d365b8958084f9cb9176fe638bfae">GenericFilteredAnalog&lt; analog_t(*)(analog_t), 10, ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t, MaximumFilteredAnalogIncRes&lt; ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t &gt;::value &gt;::getValue</a></div><div class="ttdeci">analog_t getValue() const</div><div class="ttdoc">Get the filtered value of the analog input (with the mapping function applied).</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00133">FilteredAnalog.hpp:133</a></div></div>
+<div class="ttc" id="aArduino__Helpers_8h_html"><div class="ttname"><a href="../../dc/de6/Arduino__Helpers_8h.html">Arduino_Helpers.h</a></div><div class="ttdoc">Dummy header file for Arduino builder.</div></div>
 <div class="ttc" id="aFilteredAnalog_8hpp_html"><div class="ttname"><a href="../../d8/df3/FilteredAnalog_8hpp.html">FilteredAnalog.hpp</a></div></div>
-<div class="ttc" id="aclassGenericFilteredAnalog_html_a3cec68e11b712453289f34d1634f86b8"><div class="ttname"><a href="../../dc/d91/classGenericFilteredAnalog.html#a3cec68e11b712453289f34d1634f86b8">GenericFilteredAnalog&lt; analog_t(*)(analog_t), 10, ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t, MaximumFilteredAnalogIncRes&lt; ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t &gt;::value &gt;::setupADC</a></div><div class="ttdeci">static void setupADC()</div><div class="ttdoc">Select the configured ADC resolution.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00161">FilteredAnalog.hpp:161</a></div></div>
+<div class="ttc" id="aclassGenericFilteredAnalog_html_a3cec68e11b712453289f34d1634f86b8"><div class="ttname"><a href="../../dc/d91/classGenericFilteredAnalog.html#a3cec68e11b712453289f34d1634f86b8">GenericFilteredAnalog&lt; analog_t(*)(analog_t), 10, ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t, MaximumFilteredAnalogIncRes&lt; ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE, analog_t &gt;::value &gt;::setupADC</a></div><div class="ttdeci">static void setupADC()</div><div class="ttdoc">Select the configured ADC resolution.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00173">FilteredAnalog.hpp:173</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="../../doxygen.png" alt="doxygen"/>
-</a> 1.8.19
+Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.19
 </small></address>
 </body>
 </html>

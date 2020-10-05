@@ -12,7 +12,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title="Mathematics helper functions. Min/max functions, functions to uniformly increase the effective bid de...">
+<g id="a_node1"><a xlink:title="Mathematics helper functions.">
 <polygon fill="#bfbfbf" stroke="black" points="83,-19 0,-19 0,0 83,0 83,-19"/>
 <text text-anchor="middle" x="41.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Math Utilities</text>
 </a>
