@@ -69,6 +69,14 @@ class GenericFilteredAnalog {
     }
 
     /**
+     * @brief   Reset the filtered value to the value that's currently being
+     *          measured at the analog input.
+     * 
+     * This is useful to avoid transient effects upon initialization.
+     */
+    void resetToCurrentValue() { filter.reset(getRawValue()); }
+
+    /**
      * @brief   Specify a mapping function/functor that is applied to the analog
      *          value after filtering and before applying hysteresis.
      *

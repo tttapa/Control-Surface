@@ -42,10 +42,12 @@ FilteredAnalog<> analog = A0;
 
 void setup() {
   Serial.begin(115200);
-  while (!Serial)
-    ;
+  while (!Serial);
   // Select the correct ADC resolution
   analog.setupADC();
+  // Initialize the filter to whatever the value on the input is right now
+  // (otherwise, the filter is initialized to zero and you get transients)
+  analog.resetToCurrentValue();
 }
 
 void loop() {
