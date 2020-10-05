@@ -53,7 +53,7 @@ class VolumeControl : public AH::Updatable<Potentiometer> {
     /**
      * @brief   Initialize.
      */
-    void begin() override {}
+    void begin() override { filteredAnalog.resetToCurrentValue(); }
 
     /**
      * @brief   Specify a mapping function that is applied to the raw

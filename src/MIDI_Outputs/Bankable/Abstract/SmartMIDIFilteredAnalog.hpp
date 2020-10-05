@@ -59,10 +59,12 @@ class SmartMIDIFilteredAnalog : public MIDIOutputElement {
     };
 
     void begin() override {
+        filteredAnalog.resetToCurrentValue();
         previousBank = address.getSelection();
         std::fill(std::begin(previousValues), std::end(previousValues),
                   initial);
     }
+
     void update() override {
         if (filteredAnalog.update()) {
             address.lock();
