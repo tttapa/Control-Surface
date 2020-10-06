@@ -28,7 +28,7 @@ class CCButtons : public MIDIButtons<DigitalCCSender, NumButtons> {
      *          the given controller number and channel.
      *
      * @param   buttons
-     *          An list of digital input pins with the buttons connected.  
+     *          A list of digital input pins with the buttons connected.  
      *          The internal pull-up resistors will be enabled.
      * @param   baseAddress
      *          The MIDI address of the first button, containing the controller

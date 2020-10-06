@@ -149,9 +149,10 @@ class BLEMIDIPacketBuilder {
      *          Buffer is too full, send the current packet, reset the packet
      *          builder, and try again.
      */   
-    bool add3B(uint8_t header, uint8_t d1, uint8_t d2, uint16_t timestamp) {
+    bool add3B(uint8_t header, uint8_t data1, uint8_t data2, 
+               uint16_t timestamp) {
         constexpr bool ThreeBytes = true;
-        return addImpl<ThreeBytes>(header, d1, d2, timestamp);
+        return addImpl<ThreeBytes>(header, data1, data2, timestamp);
     }
 
     /** 
@@ -170,9 +171,9 @@ class BLEMIDIPacketBuilder {
      *          Buffer is too full, send the current packet, reset the packet
      *          builder, and try again.
      */
-    bool add2B(uint8_t header, uint8_t d1, uint16_t timestamp) {
+    bool add2B(uint8_t header, uint8_t data1, uint16_t timestamp) {
         constexpr bool ThreeBytes = false;
-        return addImpl<ThreeBytes>(header, d1, 0, timestamp);
+        return addImpl<ThreeBytes>(header, data1, 0, timestamp);
     }
 
     /** 
