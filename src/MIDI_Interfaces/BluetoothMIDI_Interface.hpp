@@ -1,6 +1,7 @@
 #pragma once
 
-#include "BLEMIDI.hpp"
+#include "BLEMIDI/BLEMIDI.hpp"
+#include "BLEMIDI/BLEMIDIPacketBuilder.hpp"
 #include "SerialMIDI_Interface.hpp"
 
 #include <AH/Error/Error.hpp>
@@ -16,8 +17,8 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
                                 public BLEServerCallbacks,
                                 public BLECharacteristicCallbacks {
 
+  private:
     // BLE Callbacks
-
     void onConnect(BLEServer *pServer) override {
         (void)pServer;
         DEBUGFN("Connected");
@@ -27,7 +28,7 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
         (void)pServer;
         DEBUGFN("Disonnected");
         if (!connected) {
-            ERROR(F("Error: disconnect event, but was not connected"), 0x7788);
+            DEBUG(F("Warning: disconnect event, but was not connected"));
             return;
         }
         connected--;
@@ -46,22 +47,24 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
         parse(data, len);
     }
 
+  private:
+    /// Number of microseconds to wait before sending the buffered MIDI out data.
     constexpr static unsigned long MAX_MESSAGE_TIME = 10000; // microseconds
 
     unsigned long startTime = 0;
-
-    constexpr static size_t BUFFER_LENGTH = 1024;
-
-    uint8_t buffer[BUFFER_LENGTH] = {};
-    size_t index = 0;
+    
+    BLEMIDIPacketBuilder packetbuilder;
 
     SerialMIDI_Parser parser;
-
     BLEMIDI bleMidi;
 
-    uint8_t connected = 0;
+    uint8_t connected = 0; ///< Number of connected clients
 
-    bool hasSpaceFor(size_t bytes) { return bytes <= BUFFER_LENGTH - index; }
+  private:
+    void resetStartTime() {
+        if (packetbuilder.getSize() == 0)
+            startTime = millis();
+    }
 
   public:
     BluetoothMIDI_Interface() : Parsing_MIDI_Interface(parser) {}
@@ -69,47 +72,17 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
     void begin() override { bleMidi.begin(this, this); }
 
     void publish() {
-        if (index == 0)
+        if (packetbuilder.getSize() == 0)
             return;
-        if (!connected) {
-            DEBUGFN("No connected BLE clients");
-            return;
-        }
-        bleMidi.notifyValue(buffer, index);
-        index = 0;
+        // TODO: file pull request to fix this in espressif/arduino-esp32
+        uint8_t *data = const_cast<uint8_t *>(packetbuilder.getBuffer());
+        bleMidi.notifyValue(data, packetbuilder.getSize());
+        packetbuilder.reset();
     }
 
     MIDIReadEvent read() override {
         update();                         // TODO
         return MIDIReadEvent::NO_MESSAGE; // TODO
-    }
-
-    template <size_t N>
-    void addToBuffer(const uint8_t (&data)[N]) {
-        addToBuffer(&data[0], N);
-    }
-
-    void addToBuffer(const uint8_t *data, size_t len) {
-        bool first = index == 0;
-        if (!hasSpaceFor(len + 1 + first)) { // TODO
-            DEBUGFN("Buffer full");
-            publish();
-            if (!hasSpaceFor(len + 1 + first)) { // TODO
-                DEBUGFN("Message is larger than buffer");
-                return;
-            }
-        }
-
-        if (first)
-            startTime = micros();
-
-        if (first)
-            buffer[index++] = 0x80; // header / timestamp msb
-        buffer[index++] = 0x80;     // timestamp lsb
-        memcpy(&buffer[index], data, len);
-        index += len;
-
-        update();
     }
 
     void update() override {
@@ -119,24 +92,58 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
 
     void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override {
         (void)cn;
-        uint8_t msg[3] = {header, d1, d2};
-        addToBuffer(msg);
+        uint16_t timestamp = millis();
+        resetStartTime();
+        if (packetbuilder.add3B(header, d1, d2, timestamp))
+            return;
+        publish();
+        resetStartTime();
+        packetbuilder.add3B(header, d1, d2, timestamp);
     }
     void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override {
         (void)cn;
-        uint8_t msg[2] = {header, d1};
-        addToBuffer(msg);
+        uint16_t timestamp = millis();
+        resetStartTime();
+        if (packetbuilder.add2B(header, d1, timestamp))
+            return;
+        publish();
+        resetStartTime();
+        packetbuilder.add2B(header, d1, timestamp);
     }
 
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        (void)data;
-        (void)length;
-        (void)cn; // TODO
+        (void)cn;
+        if (length < 2)
+            return;
+
+        // Length of SysEx data without SysEx start/end
+        length -= 2;
+        // Data without SysEx start
+        data += 1;
+
+        resetStartTime();
+
+        // BLE MIDI timestamp
+        uint16_t timestamp = millis();
+
+        const uint8_t *cont; // data continuation
+        length = packetbuilder.addSysEx(data, length, cont, timestamp);
+        while (cont != nullptr) {
+            publish();
+            resetStartTime();
+            length = packetbuilder.continueSysEx(cont, length, cont, timestamp);
+        }
     }
 
     void sendImpl(uint8_t rt, uint8_t cn) override {
-        (void)rt;
-        (void)cn; // TODO
+        (void)cn;
+        uint16_t timestamp = millis();
+        resetStartTime();
+        if (packetbuilder.addRealTime(rt, timestamp))
+            return;
+        publish();
+        resetStartTime();
+        packetbuilder.addRealTime(rt, timestamp);
     }
 
     void parse(const uint8_t *const data, const size_t len) {

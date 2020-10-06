@@ -5,6 +5,7 @@ keyword1:
  - HardwareSerialMIDI_Interface
  - USBSerialMIDI_Interface
  - USBMIDI_Interface
+ - BluetoothMIDI_Interface
  - StreamDebugMIDI_Interface
  - SerialDebugMIDI_Interface
  - HardwareSerialDebugMIDI_Interface

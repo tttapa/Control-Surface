@@ -263,3 +263,63 @@ TEST(BluetoothMIDIInterface, receiveSysExAndRealTime) {
     std::vector<ChannelMessage> expectedChannelMessages = {};
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
+
+using namespace ::testing;
+
+static uint16_t timestamp(uint8_t msb, uint8_t lsb) {
+    return (uint16_t(msb) << 7) | lsb;
+}
+
+TEST(BluetoothMIDIInterface, sendOneNoteMessage) {
+    BluetoothMIDI_Interface midi;
+    BLEMIDI &ble = midi.getBLEMIDI();
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    midi.begin();
+
+    std::vector<uint8_t> expected = {0x81, 0x82, 0x92, 0x12, 0x34};
+    EXPECT_CALL(ArduinoMock::getInstance(), millis())
+        .Times(2) // Once for flush timer, once for time stamp
+        .WillRepeatedly(Return(timestamp(0x01, 0x02)));
+    EXPECT_CALL(ble, notifyValue(expected));
+
+    midi.sendNoteOn({0x12, CHANNEL_3}, 0x34);
+    midi.publish();
+}
+
+TEST(BluetoothMIDIInterface, sendTwoNoteMessages) {
+    BluetoothMIDI_Interface midi;
+    BLEMIDI &ble = midi.getBLEMIDI();
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    midi.begin();
+
+    std::vector<uint8_t> expected = {
+        0x81, 0x82, 0x92, 0x12, 0x34, 0x82, 0x99, 0x56, 0x78,
+    };
+    EXPECT_CALL(ArduinoMock::getInstance(), millis())
+        .Times(3) // Once for flush timer, twice for time stamp
+        .WillRepeatedly(Return(timestamp(0x01, 0x02)));
+    EXPECT_CALL(ble, notifyValue(expected));
+
+    midi.sendNoteOn({0x12, CHANNEL_3}, 0x34);
+    midi.sendNoteOn({0x56, CHANNEL_10}, 0x78);
+    midi.publish();
+}
+
+TEST(BluetoothMIDIInterface, sendTwoNoteMessagesRunningStatus) {
+    BluetoothMIDI_Interface midi;
+    BLEMIDI &ble = midi.getBLEMIDI();
+    EXPECT_CALL(ble, begin(&midi, &midi));
+    midi.begin();
+
+    std::vector<uint8_t> expected = {
+        0x81, 0x82, 0x92, 0x12, 0x34, 0x56, 0x78,
+    };
+    EXPECT_CALL(ArduinoMock::getInstance(), millis())
+        .Times(3) // Once for flush timer, twice for time stamp
+        .WillRepeatedly(Return(timestamp(0x01, 0x02)));
+    EXPECT_CALL(ble, notifyValue(expected));
+
+    midi.sendNoteOn({0x12, CHANNEL_3}, 0x34);
+    midi.sendNoteOn({0x56, CHANNEL_3}, 0x78);
+    midi.publish();
+}
