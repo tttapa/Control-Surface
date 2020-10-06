@@ -234,6 +234,15 @@ Print &printIntegral(Print &printer, T i) {
     return printer;
 }
 
+Print &operator<<(Print &p, HexDump h) {
+    while (h.length-- > 1) {
+        printHex(p, *h.data++);
+        p.print(' ');
+    }
+    printHex(p, *h.data++);
+    return p;
+}
+
 END_AH_NAMESPACE
 
 // LCOV_EXCL_STOP

@@ -71,6 +71,15 @@ struct Setbytesep {
 Setbytesep setbytesep(char bytesep);
 Print &operator<<(Print &printer, Setbytesep f);
 
+struct HexDump {
+    HexDump(const uint8_t *data, size_t length)
+     : data(data), length(length) {}
+    const uint8_t *data;
+    size_t length;
+};
+
+Print &operator<<(Print &p, HexDump h);
+
 /// @}
 
 #ifndef ARDUINO
