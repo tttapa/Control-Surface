@@ -243,6 +243,27 @@ Print &operator<<(Print &p, HexDump h) {
     return p;
 }
 
+#ifndef ARDUINO
+
+std::ostream &operator<<(std::ostream &p, HexDump h) {
+    auto hex_nibble_to_char = [](uint8_t nibble) -> char {
+        nibble &= 0xF;
+        return nibble > 9 ? nibble - 10 + 'a' : nibble + '0';
+    };
+    auto printHex = [&](std::ostream &p, uint8_t b) {
+        p << hex_nibble_to_char(b >> 4) << hex_nibble_to_char(b);
+    };
+
+    while (h.length-- > 1) {
+        printHex(p, *h.data++);
+        p << ' ';
+    }
+    printHex(p, *h.data++);
+    return p;
+}
+
+#endif
+
 END_AH_NAMESPACE
 
 // LCOV_EXCL_STOP
