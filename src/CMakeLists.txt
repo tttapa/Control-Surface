@@ -15,6 +15,7 @@ if (FAST_COMPILE)
         MIDI_Parsers/USBMIDI_Parser.cpp
         MIDI_Parsers/SerialMIDI_Parser.cpp
         MIDI_Parsers/SysExBuffer.cpp
+        MIDI_Interfaces/BLEMIDI/BLEMIDIPacketBuilder.cpp
         MIDI_Interfaces/MIDI_Interface.cpp
         MIDI_Interfaces/DebugMIDI_Interface.cpp)
 else ()
