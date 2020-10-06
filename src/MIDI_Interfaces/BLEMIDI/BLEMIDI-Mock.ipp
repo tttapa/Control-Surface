@@ -45,6 +45,7 @@ class BLEMIDI {
     void notifyValue(const uint8_t * data, size_t len) {
         notifyValue(std::vector<uint8_t>(data, data + len));
     }
+    uint16_t get_min_mtu() const { return 23; }
 };
 
 END_CS_NAMESPACE

@@ -22,10 +22,12 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
     void onConnect(BLEServer *pServer) override {
         (void)pServer;
         DEBUGFN("Connected");
+        updateMTU();
     };
     void onDisconnect(BLEServer *pServer) override {
         (void)pServer;
         DEBUGFN("Disonnected");
+        updateMTU();
     }
 
     void onRead(BLECharacteristic *pCharacteristic) override {
@@ -49,6 +51,7 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
     unsigned long startTime = 0;
     
     BLEMIDIPacketBuilder packetbuilder;
+    uint16_t min_mtu = 23;
 
     SerialMIDI_Parser parser;
     BLEMIDI bleMidi;
@@ -57,6 +60,13 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
     void resetStartTime() {
         if (packetbuilder.getSize() == 0)
             startTime = millis();
+    }
+
+    /// Find the smallest MTU of all clients. Used to compute the MIDI BLE 
+    /// packet size.
+    void updateMTU() {
+        min_mtu = bleMidi.get_min_mtu();
+        DEBUGFN(NAMEDVALUE(min_mtu));
     }
 
   public:
@@ -69,6 +79,7 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
             return;
         bleMidi.notifyValue(packetbuilder.getBuffer(), packetbuilder.getSize());
         packetbuilder.reset();
+        packetbuilder.setCapacity(min_mtu - 3);
     }
 
     MIDIReadEvent read() override {
