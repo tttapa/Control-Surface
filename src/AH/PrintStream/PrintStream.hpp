@@ -112,6 +112,8 @@ inline std::ostream &operator<<(std::ostream &os,
     return os << reinterpret_cast<const char *>(s);
 }
 
+std::ostream &operator<<(std::ostream &p, HexDump h);
+
 #endif
 
 END_AH_NAMESPACE

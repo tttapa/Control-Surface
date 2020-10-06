@@ -335,6 +335,11 @@ TEST(Array, reverseSlice) {
     Array<int, 5> b = {5, 4, 3, 2, 1};
     auto s1 = a.slice<4, 0>();
     auto s2 = s1.slice<4, 0>();
+    EXPECT_EQ(s1[0], 5);
+    EXPECT_EQ(s1[1], 4);
+    EXPECT_EQ(s1[2], 3);
+    EXPECT_EQ(s1[3], 2);
+    EXPECT_EQ(s1[4], 1);
     EXPECT_EQ(s1, b);
     EXPECT_EQ(s2, a);
 }
