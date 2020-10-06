@@ -96,12 +96,12 @@ void Control_Surface_::sendImpl(uint8_t rt, uint8_t cn) {
 
 void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
 #ifdef DEBUG_MIDI_PACKETS
-    // TODO: print cable
     if (midimsg.hasTwoDataBytes())
         DEBUG(">>> " << hex << midimsg.header << ' ' << midimsg.data1 << ' '
-                     << midimsg.data2 << dec);
+                     << midimsg.data2 << " (" << midimsg.cable << ')' << dec);
     else
-        DEBUG(">>> " << hex << midimsg.header << ' ' << midimsg.data1 << dec);
+        DEBUG(">>> " << hex << midimsg.header << ' ' << midimsg.data1 << " (" 
+                     << midimsg.cable << ')' << dec);
 #endif
 
     // If the Channel Message callback exists, call it to see if we have to
@@ -153,6 +153,7 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
                           "message."));
                 MIDIInputElementPB::updateAllWith(midimsg);
                 break;
+
             // These MIDI types are not channel messages, so aren't handled here
             case MIDIMessageType::SYSEX_START: break;          // LCOV_EXCL_LINE
             case MIDIMessageType::SYSEX_END: break;            // LCOV_EXCL_LINE
@@ -171,15 +172,13 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
 }
 
 void Control_Surface_::sinkMIDIfromPipe(SysExMessage msg) {
-    // System Exclusive
 #ifdef DEBUG_MIDI_PACKETS
     const uint8_t *data = msg.data;
     size_t len = msg.length;
-    // TODO: print cable
-    DEBUG_OUT << hex;
+    DEBUG_OUT << ">>> " << hex;
     for (size_t i = 0; i < len; i++)
         DEBUG_OUT << data[i] << ' ';
-    DEBUG_OUT << dec << endl;
+    DEBUG_OUT << " (" << msg.cable << ')' << dec << endl;
 #endif
     // If the SysEx Message callback exists, call it to see if we have to
     // continue handling it.
@@ -189,11 +188,15 @@ void Control_Surface_::sinkMIDIfromPipe(SysExMessage msg) {
 }
 
 void Control_Surface_::sinkMIDIfromPipe(RealTimeMessage rtMessage) {
+#ifdef DEBUG_MIDI_PACKETS
+    DEBUG(">>> " << hex << rtMessage.message << " (" << rtMessage.cable << ')' 
+                 << dec);
+#endif
+
     // If the Real-Time Message callback exists, call it to see if we have to
     // continue handling it.
     if (realTimeMessageCallback && realTimeMessageCallback(rtMessage))
         return;
-    // TODO: handle Real-Time input
 }
 
 void Control_Surface_::updateInputs() {
@@ -217,7 +220,7 @@ void Control_Surface_::updateDisplays() {
     bool dirty = false;
     // Loop over all display elements
     while (true) {
-        dirty |= (*it).getDirty();
+        dirty |= it->getDirty();
         ++it;
         // If this is the first element on another display
         if (it == end || &it->getDisplay() != previousDisplay) {
