@@ -26,6 +26,19 @@ TEST(BLEMIDIPacketBuilder, oneNoteMessage) {
     EXPECT_EQ(b.asVector(), expected);
 }
 
+TEST(BLEMIDIPacketBuilder, oneProgramChangeMessage) {
+    BLEMIDIPacketBuilder b;
+    EXPECT_TRUE(b.add2B(0xC2, 0x12, timestamp(0x01, 0x02)));
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0xC2,        // status
+        0x12,        // d1
+    };
+    EXPECT_EQ(b.asVector(), expected);
+}
+
 // Corresponds to spec "BLE Packet with Two MIDI Messages" figure
 TEST(BLEMIDIPacketBuilder, twoNoteMessages) {
     BLEMIDIPacketBuilder b;
@@ -221,12 +234,69 @@ TEST(BLEMIDIPacketBuilder, noteMessageBufferAlmostFullDifferentTimestamp) {
     EXPECT_EQ(b.asVector(), expected);
 }
 
+TEST(BLEMIDIPacketBuilder, realTimeMessageBufferAlmostFull) {
+    BLEMIDIPacketBuilder b;
+    b.setCapacity(7); // Two bytes left after note
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+        0x80 | 0x03, //          timestamp lsb
+        0xF8,        // real-time
+    };
+
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+    EXPECT_TRUE(b.addRealTime(0xF8, timestamp(0x01, 0x03)));
+    
+    EXPECT_EQ(b.asVector(), expected);
+}
+
+TEST(BLEMIDIPacketBuilder, realTimeMessageBufferFull1) {
+    BLEMIDIPacketBuilder b;
+    b.setCapacity(6); // One byte left after note
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+    };
+
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+    EXPECT_FALSE(b.addRealTime(0xF8, timestamp(0x01, 0x03)));
+    
+    EXPECT_EQ(b.asVector(), expected);
+}
+
+TEST(BLEMIDIPacketBuilder, realTimeMessageBufferFull2) {
+    BLEMIDIPacketBuilder b;
+    b.setCapacity(5); // No space left after note
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+    };
+
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+    EXPECT_FALSE(b.addRealTime(0xF8, timestamp(0x01, 0x03)));
+    
+    EXPECT_EQ(b.asVector(), expected);
+}
+
 // Corresponds to spec "System Exclusive Start & End in 1 Packet" figure
 TEST(BLEMIDIPacketBuilder, sysExSinglePacket) {
     BLEMIDIPacketBuilder b;
     b.setCapacity(10); // Exact fit
     bvec data = {0x10, 0x11, 0x12, 0x13, 0x14};
-    const uint8_t *cont;
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
     uint16_t ts = timestamp(0x01, 0x02);
 
     bvec expected = {
@@ -242,10 +312,58 @@ TEST(BLEMIDIPacketBuilder, sysExSinglePacket) {
         0xF7,        // SysEx end
     };
 
-    size_t s = b.addSysEx(data.data(), data.size(), cont, ts);
+    EXPECT_TRUE(b.addSysEx(dataptr, length, ts));
 
-    EXPECT_EQ(s, 0);
-    EXPECT_EQ(cont, nullptr);
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, nullptr);
+    EXPECT_EQ(b.asVector(), expected);
+}
+
+TEST(BLEMIDIPacketBuilder, sysExFirstPacketFull1) {
+    BLEMIDIPacketBuilder b;
+    b.setCapacity(6); // One byte left after note
+    bvec data = {0x10, 0x11, 0x12, 0x13, 0x14};
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
+    uint16_t ts = timestamp(0x01, 0x02);
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+    };
+
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+    EXPECT_FALSE(b.addSysEx(dataptr, length, ts));
+
+    EXPECT_EQ(length, data.size());
+    EXPECT_EQ(dataptr, data.data());
+    EXPECT_EQ(b.asVector(), expected);
+}
+
+TEST(BLEMIDIPacketBuilder, sysExFirstPacketFull2) {
+    BLEMIDIPacketBuilder b;
+    b.setCapacity(5); // No bytes left after note
+    bvec data = {0x10, 0x11, 0x12, 0x13, 0x14};
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
+    uint16_t ts = timestamp(0x01, 0x02);
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+    };
+
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+    EXPECT_FALSE(b.addSysEx(dataptr, length, ts));
+
+    EXPECT_EQ(length, data.size());
+    EXPECT_EQ(dataptr, data.data());
     EXPECT_EQ(b.asVector(), expected);
 }
 
@@ -253,7 +371,8 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket1) {
     BLEMIDIPacketBuilder b;
     b.setCapacity(9); // One byte too short
     bvec data = {0x10, 0x11, 0x12, 0x13, 0x14};
-    const uint8_t *cont;
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
     uint16_t ts = timestamp(0x01, 0x02);
 
     bvec expected = {
@@ -267,10 +386,10 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket1) {
         0x14,        // data
     };
 
-    size_t s = b.addSysEx(data.data(), data.size(), cont, ts);
+    EXPECT_TRUE(b.addSysEx(dataptr, length, ts));
 
-    EXPECT_EQ(s, 0);
-    EXPECT_EQ(cont, data.data() + data.size());
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, data.data() + data.size());
     EXPECT_EQ(b.asVector(), expected);
 
     expected = {
@@ -280,10 +399,10 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket1) {
     };
 
     b.reset();
-    s = b.continueSysEx(cont, s, cont, ts);
+    b.continueSysEx(dataptr, length, ts);
 
-    EXPECT_EQ(s, 0);
-    EXPECT_EQ(cont, nullptr);
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, nullptr);
     EXPECT_EQ(b.asVector(), expected);
 }
 
@@ -291,7 +410,8 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket2) {
     BLEMIDIPacketBuilder b;
     b.setCapacity(8); // Two bytes too short
     bvec data = {0x10, 0x11, 0x12, 0x13, 0x14};
-    const uint8_t *cont;
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
     uint16_t ts = timestamp(0x01, 0x02);
 
     bvec expected = {
@@ -305,10 +425,10 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket2) {
         0x14,        // data
     };
 
-    size_t s = b.addSysEx(data.data(), data.size(), cont, ts);
+    EXPECT_TRUE(b.addSysEx(dataptr, length, ts));
 
-    EXPECT_EQ(s, 0);
-    EXPECT_EQ(cont, data.data() + data.size());
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, data.data() + data.size());
     EXPECT_EQ(b.asVector(), expected);
 
     expected = {
@@ -318,10 +438,10 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket2) {
     };
 
     b.reset();
-    s = b.continueSysEx(cont, s, cont, ts);
+    b.continueSysEx(dataptr, length, ts);
 
-    EXPECT_EQ(s, 0);
-    EXPECT_EQ(cont, nullptr);
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, nullptr);
     EXPECT_EQ(b.asVector(), expected);
 }
 
@@ -329,7 +449,8 @@ TEST(BLEMIDIPacketBuilder, sysExTwoPackets) {
     BLEMIDIPacketBuilder b;
     b.setCapacity(7); // Three bytes too short
     bvec data = {0x10, 0x11, 0x12, 0x13, 0x14};
-    const uint8_t *cont;
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
     uint16_t ts = timestamp(0x01, 0x02);
 
     bvec expected = {
@@ -342,10 +463,10 @@ TEST(BLEMIDIPacketBuilder, sysExTwoPackets) {
         0x13,        // data
     };
 
-    size_t s = b.addSysEx(data.data(), data.size(), cont, ts);
+    EXPECT_TRUE(b.addSysEx(dataptr, length, ts));
 
-    EXPECT_EQ(s, 1);
-    EXPECT_EQ(cont, data.data() + data.size() - s);
+    EXPECT_EQ(length, 1);
+    EXPECT_EQ(dataptr, data.data() + data.size() - length);
     EXPECT_EQ(b.asVector(), expected);
 
     expected = {
@@ -356,10 +477,10 @@ TEST(BLEMIDIPacketBuilder, sysExTwoPackets) {
     };
 
     b.reset();
-    s = b.continueSysEx(cont, s, cont, ts);
+    b.continueSysEx(dataptr, length, ts);
 
-    EXPECT_EQ(s, 0);
-    EXPECT_EQ(cont, nullptr);
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, nullptr);
     EXPECT_EQ(b.asVector(), expected);
 }
 
@@ -367,7 +488,8 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets1) {
     BLEMIDIPacketBuilder b;
     b.setCapacity(5);
     bvec data = {0x10, 0x11, 0x12, 0x13, 0x14};
-    const uint8_t *cont;
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
     uint16_t ts = timestamp(0x01, 0x02);
 
     bvec expected = {
@@ -378,10 +500,10 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets1) {
         0x11,        // data
     };
 
-    size_t s = b.addSysEx(data.data(), data.size(), cont, ts);
+    EXPECT_TRUE(b.addSysEx(dataptr, length, ts));
 
-    EXPECT_EQ(s, 3);
-    EXPECT_EQ(cont, data.data() + data.size() - s);
+    EXPECT_EQ(length, 3);
+    EXPECT_EQ(dataptr, data.data() + data.size() - length);
     EXPECT_EQ(b.asVector(), expected);
 
     expected = {
@@ -392,10 +514,10 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets1) {
     };
 
     b.reset();
-    s = b.continueSysEx(cont, s, cont, ts);
+    b.continueSysEx(dataptr, length, ts);
 
-    EXPECT_EQ(s, 0);
-    EXPECT_EQ(cont, data.data() + data.size() - s);
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, data.data() + data.size() - length);
     EXPECT_EQ(b.asVector(), expected);
 
     expected = {
@@ -405,10 +527,10 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets1) {
     };
 
     b.reset();
-    s = b.continueSysEx(cont, s, cont, ts);
+    b.continueSysEx(dataptr, length, ts);
 
-    EXPECT_EQ(s, 0);
-    EXPECT_EQ(cont, nullptr);
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, nullptr);
     EXPECT_EQ(b.asVector(), expected);
 }
 
@@ -416,7 +538,8 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets2) {
     BLEMIDIPacketBuilder b;
     b.setCapacity(5);
     bvec data = {0x10, 0x11, 0x12, 0x13, 0x14, 0x15};
-    const uint8_t *cont;
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
     uint16_t ts = timestamp(0x01, 0x02);
 
     bvec expected = {
@@ -427,10 +550,10 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets2) {
         0x11,        // data
     };
 
-    size_t s = b.addSysEx(data.data(), data.size(), cont, ts);
+    EXPECT_TRUE(b.addSysEx(dataptr, length, ts));
 
-    EXPECT_EQ(s, 4);
-    EXPECT_EQ(cont, data.data() + data.size() - s);
+    EXPECT_EQ(length, 4);
+    EXPECT_EQ(dataptr, data.data() + data.size() - length);
     EXPECT_EQ(b.asVector(), expected);
 
     expected = {
@@ -442,10 +565,10 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets2) {
     };
 
     b.reset();
-    s = b.continueSysEx(cont, s, cont, ts);
+    b.continueSysEx(dataptr, length, ts);
 
-    EXPECT_EQ(s, 0);
-    EXPECT_EQ(cont, data.data() + data.size() - s);
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, data.data() + data.size() - length);
     EXPECT_EQ(b.asVector(), expected);
 
     expected = {
@@ -455,10 +578,10 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets2) {
     };
 
     b.reset();
-    s = b.continueSysEx(cont, s, cont, ts);
+    b.continueSysEx(dataptr, length, ts);
 
-    EXPECT_EQ(s, 0);
-    EXPECT_EQ(cont, nullptr);
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, nullptr);
     EXPECT_EQ(b.asVector(), expected);
 }
 
@@ -466,7 +589,8 @@ TEST(BLEMIDIPacketBuilder, sysExThreePackets) {
     BLEMIDIPacketBuilder b;
     b.setCapacity(5);
     bvec data = {0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16};
-    const uint8_t *cont;
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
     uint16_t ts = timestamp(0x01, 0x02);
 
     bvec expected = {
@@ -477,10 +601,10 @@ TEST(BLEMIDIPacketBuilder, sysExThreePackets) {
         0x11,        // data
     };
 
-    size_t s = b.addSysEx(data.data(), data.size(), cont, ts);
+    EXPECT_TRUE(b.addSysEx(dataptr, length, ts));
 
-    EXPECT_EQ(s, 5);
-    EXPECT_EQ(cont, data.data() + data.size() - s);
+    EXPECT_EQ(length, 5);
+    EXPECT_EQ(dataptr, data.data() + data.size() - length);
     EXPECT_EQ(b.asVector(), expected);
 
     expected = {
@@ -492,10 +616,10 @@ TEST(BLEMIDIPacketBuilder, sysExThreePackets) {
     };
 
     b.reset();
-    s = b.continueSysEx(cont, s, cont, ts);
+    b.continueSysEx(dataptr, length, ts);
 
-    EXPECT_EQ(s, 1);
-    EXPECT_EQ(cont, data.data() + data.size() - s);
+    EXPECT_EQ(length, 1);
+    EXPECT_EQ(dataptr, data.data() + data.size() - length);
     EXPECT_EQ(b.asVector(), expected);
 
     expected = {
@@ -506,9 +630,41 @@ TEST(BLEMIDIPacketBuilder, sysExThreePackets) {
     };
 
     b.reset();
-    s = b.continueSysEx(cont, s, cont, ts);
+    b.continueSysEx(dataptr, length, ts);
 
-    EXPECT_EQ(s, 0);
-    EXPECT_EQ(cont, nullptr);
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, nullptr);
+    EXPECT_EQ(b.asVector(), expected);
+}
+
+TEST(BLEMIDIPacketBuilder, sysExContinueInNonEmptyPacket) {
+    BLEMIDIPacketBuilder b;
+    bvec data = {0x10, 0x11, 0x12, 0x13, 0x14};
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
+    uint16_t ts = timestamp(0x01, 0x02);
+
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+        // No SysEx
+    };
+
+    // No addSysEx()
+
+    try {
+        b.continueSysEx(dataptr, length, ts);
+        FAIL();
+    } catch (AH::ErrorException &e) {
+        EXPECT_EQ(e.getErrorCode(), 0x2324);
+    }
+
+    EXPECT_EQ(length, data.size());
+    EXPECT_EQ(dataptr, data.data());
     EXPECT_EQ(b.asVector(), expected);
 }

@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+// LCOV_EXCL_START
+
 class BLECharacteristic {
   public:
     MOCK_METHOD(std::string, getValue, ());
@@ -46,3 +48,5 @@ class BLEMIDI {
 };
 
 END_CS_NAMESPACE
+
+// LCOV_EXCL_STOP

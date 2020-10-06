@@ -112,7 +112,7 @@ class BLEMIDIPacketBuilder {
     }
 
     /// Set the maximum capacity of the buffer. Set this to the MTU of the BLE
-    /// link.
+    /// link minus three bytes (for notify overhead).
     void setCapacity(uint8_t capacity) { 
         if (capacity > MAX_CAPACITY)
             throw std::out_of_range("capacity larger than maximum capacity");
@@ -204,43 +204,56 @@ class BLEMIDIPacketBuilder {
     }
 
     /**
-     * @brief   Try adding a SysEx message to the packet.
+     * @brief   Try adding (part of) a SysEx message to the packet.
      * 
-     * @param[in]   data 
-     *              Pointer to the first data byte of the SysEx message. 
-     *              (Not the SysExStart byte!)
-     * @param[in]   length 
-     *              The number of data bytes in the SysEx message. 
-     *              (Not including the SysExStart and SysExEnd bytes!)
-     * @param[out]  cont 
-     *              Pointer to the first data byte to send in the next packet.
-     *              `nullptr` if message was finished.
-     * @param[in]   timestamp 
-     *              13-bit BLE-MIDI timestamp.
+     * @param[in,out]   data 
+     *                  Pointer to the first data byte of the SysEx message. 
+     *                  (Not the SysExStart byte!)
+     *                  At the end, this will point to the first data byte to 
+     *                  send in the next packet, or `nullptr` if the message was
+     *                  finished.
+     * @param[in,out]   length 
+     *                  The number of data bytes in the SysEx message. 
+     *                  (Not including the SysExStart and SysExEnd bytes!)
+     *                  At the end, this will be set to remaining number of data
+     *                  bytes to send in the next packet.
+     * @param[in]       timestamp 
+     *                  13-bit BLE-MIDI timestamp.
      * 
-     * @return  The remaining number of data bytes to send in the next packet.
+     * @retval  true
+     *          Successfully added (part of) the message to the packet.
+     * @retval  false 
+     *          Buffer is too full, send the current packet, reset the packet
+     *          builder, and try again.
      * 
-     * If the message fits in a single packet, `0` is returned (no remaining
-     * data bytes) and `cont == nullptr`.
+     * If the message fits in a single packet, `length` is set to `0` (no
+     * remaining data bytes) and `data` is set to `nullptr`.
      * 
      * For example:
      * ~~~cpp
+     * BLEMIDIPacketBuilder packetbuilder;
+     * 
      * const uint8_t *data = (...);
      * size_t length = (...);
+     * uint16_t timestamp = (...);
      * 
-     * BLEMIDIPacketBuilder packetbuilder;
-     * const uint8_t *cont; // data continuation
-     * length = packetbuilder.addSysEx(data, length, cont, timestamp);
-     * while (cont != nullptr) {
+     * if (!packetbuilder.addSysEx(data, length, timestamp)) {
      *     sendnow(packetbuilder.getBuffer(), packetbuilder.getSize());
      *     packetbuilder.reset();
-     *     length = packetbuilder.continueSysEx(cont, length, cont, timestamp);
+     *     packetbuilder.addSysEx(data, length, timestamp)
+     * }
+     * while (data) {
+     *     sendnow(packetbuilder.getBuffer(), packetbuilder.getSize());
+     *     packetbuilder.reset();
+     *     packetbuilder.continueSysEx(data, length, timestamp);
      * }
      * ~~~
      */
-    size_t addSysEx(const uint8_t *data, size_t length, const uint8_t *&cont,
-                    uint16_t timestamp) {
+    bool addSysEx(const uint8_t *&data, size_t &length, uint16_t timestamp) {
         initBuffer(timestamp);
+
+        if (!hasSpaceFor(2))
+            return false; // Buffer full
 
         // Normal running status is interrupted by SysEx
         runningHeader = 0;
@@ -262,7 +275,7 @@ class BLEMIDIPacketBuilder {
             buffer[index++] = timestampLSB;
             buffer[index++] = SysExEnd;
             // Message was finished, no continuation
-            cont = nullptr;
+            data = nullptr;
         }
         // Message doesn't fit this packet:
         // Start the message, and write until the packet is full
@@ -271,56 +284,60 @@ class BLEMIDIPacketBuilder {
             while (length-- > 0 && index < capacity)
                 buffer[index++] = *data++;
             ++length;
-            // Tell caller where to start sending the next continuation packet
-            cont = data;
+            // data is not set to nullptr to let the caller know where to start
+            // sending the next continuation packet,
         }
-        // Return remaining number of data bytes to send
-        return length;
+        return true;
     }
 
     /**
      * @brief   Add a SysEx continuation to the packet.
      * 
-     * @param[in]   data 
-     *              Pointer to the first data byte of the SysEx message to send
-     *              in this continuation packet.
-     * @param[in]   length 
-     *              The number of remaining data bytes in the SysEx message. 
-     *              (Not including the SysExEnd byte!)
-     * @param[out]  cont 
-     *              Pointer to the first data byte to send in the next packet.
-     *              `nullptr` if message was finished.
-     * @param[in]   timestamp 
-     *              13-bit BLE-MIDI timestamp.
+     * @param[in,out]   data 
+     *                  Pointer to the first data byte of the SysEx message to 
+     *                  send in this continuation packet.
+     *                  At the end, this will point to the first data byte to 
+     *                  send in the next packet, or `nullptr` if the message was
+     *                  finished.
+     * @param[in,out]   length 
+     *                  The number of remaining data bytes in the SysEx message. 
+     *                  (Not including the SysExEnd byte!)
+     *                  At the end, this will be set to remaining number of data
+     *                  bytes to send in the next packet.
+     * @param[in]       timestamp 
+     *                  13-bit BLE-MIDI timestamp.
      * 
-     * @return  The remaining number of data bytes to send in the next packet.
-     * 
-     * If the message can be completed in a single packet, `0` is returned (no
-     * remaining data bytes) and `cont == nullptr`.
+     * If the message can be completed in a single packet, `length` is set to 
+     * `0` (no remaining data bytes) and `data` is set to `nullptr`.
      * 
      * @see @ref addSysEx()
      */
-    size_t continueSysEx(const uint8_t *data, size_t length, 
-                         const uint8_t *&cont, uint16_t timestamp) {
+    void continueSysEx(const uint8_t *&data, size_t &length, 
+                       uint16_t timestamp) {
         if (index != 0) {
             ERROR(F("Error: SysEx should continue in new packet"), 0x2324);
-            reset();
-        }
+            reset(); // LCOV_EXCL_LINE
+        }            // LCOV_EXCL_LINE
 
         initBuffer(timestamp);
 
+        // Copy as much data as possible
         while (length-- > 0 && index < capacity)
             buffer[index++] = *data++;
         ++length;
+
+        // If the entire message fits in this packet (including SysEx end
+        // and timestamps)
         if (length == 0 && hasSpaceFor(2)) {
+            // End of SysEx
             buffer[index++] = getTimestampLSB(timestamp);
             buffer[index++] = SysExEnd;
-            cont = nullptr;
+            // Message was finished, no continuation
+            data = nullptr;
         } else {
-            cont = data;
+            // data is not set to nullptr to let the caller know where to start
+            // sending the next continuation packet,
         }
-
-        return length;
     }
 };
 

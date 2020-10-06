@@ -22,28 +22,23 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
     void onConnect(BLEServer *pServer) override {
         (void)pServer;
         DEBUGFN("Connected");
-        connected++;
     };
     void onDisconnect(BLEServer *pServer) override {
         (void)pServer;
         DEBUGFN("Disonnected");
-        if (!connected) {
-            DEBUG(F("Warning: disconnect event, but was not connected"));
-            return;
-        }
-        connected--;
     }
 
     void onRead(BLECharacteristic *pCharacteristic) override {
         DEBUGFN("Read");
+        // respond with no payload
         pCharacteristic->setValue(nullptr, 0);
     }
     void onWrite(BLECharacteristic *pCharacteristic) override {
-        DEBUGFN("Write: ");
         std::string value = pCharacteristic->getValue();
-        const uint8_t *const data =
+        const uint8_t *data =
             reinterpret_cast<const uint8_t *>(value.data());
         size_t len = value.size();
+        DEBUGFN("Write [" << len << "] " << AH::HexDump(data, len));
         parse(data, len);
     }
 
@@ -57,8 +52,6 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
 
     SerialMIDI_Parser parser;
     BLEMIDI bleMidi;
-
-    uint8_t connected = 0; ///< Number of connected clients
 
   private:
     void resetStartTime() {
@@ -74,9 +67,7 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
     void publish() {
         if (packetbuilder.getSize() == 0)
             return;
-        // TODO: file pull request to fix this in espressif/arduino-esp32
-        uint8_t *data = const_cast<uint8_t *>(packetbuilder.getBuffer());
-        bleMidi.notifyValue(data, packetbuilder.getSize());
+        bleMidi.notifyValue(packetbuilder.getBuffer(), packetbuilder.getSize());
         packetbuilder.reset();
     }
 
@@ -126,12 +117,15 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
         // BLE MIDI timestamp
         uint16_t timestamp = millis();
 
-        const uint8_t *cont; // data continuation
-        length = packetbuilder.addSysEx(data, length, cont, timestamp);
-        while (cont != nullptr) {
+        if (!packetbuilder.addSysEx(data, length, timestamp)) {
             publish();
             resetStartTime();
-            length = packetbuilder.continueSysEx(cont, length, cont, timestamp);
+            packetbuilder.addSysEx(data, length, timestamp);
+        }
+        while (data) {
+            publish();
+            resetStartTime();
+            packetbuilder.continueSysEx(data, length, timestamp);
         }
     }
 
