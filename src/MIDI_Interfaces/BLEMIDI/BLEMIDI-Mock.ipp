@@ -33,20 +33,22 @@ class BLEServerCallbacks {
 
 BEGIN_CS_NAMESPACE
 
-class BLEMIDI {
+class BLEMIDI_Mock {
   public:
-    MOCK_METHOD(void, setServerCallbacks, (BLEServerCallbacks *));
-    MOCK_METHOD(void, setCharacteristicsCallbacks,
-                (BLECharacteristicCallbacks *));
-    MOCK_METHOD(void, begin,
-                (BLEServerCallbacks *, BLECharacteristicCallbacks *));
+    virtual void setServerCallbacks(BLEServerCallbacks *) {}
+    virtual void setCharacteristicsCallbacks(BLECharacteristicCallbacks *) {}
+    virtual void begin(BLEServerCallbacks *, BLECharacteristicCallbacks *) {}
+
     MOCK_METHOD(void, notifyValue, (std::vector<uint8_t>));
     MOCK_METHOD(std::string, getValue, ());
     void notifyValue(const uint8_t * data, size_t len) {
-        notifyValue(std::vector<uint8_t>(data, data + len));
+        if (len >= 2)
+            notifyValue(std::vector<uint8_t>(data, data + len));
     }
     uint16_t get_min_mtu() const { return 23; }
 };
+
+using BLEMIDI = testing::StrictMock<BLEMIDI_Mock>;
 
 END_CS_NAMESPACE
 

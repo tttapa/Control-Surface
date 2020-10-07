@@ -79,6 +79,8 @@ class BLEMIDIPacketBuilder {
     uint8_t getSize() const { return index; }
     /// Get a pointer to the packet data buffer.
     const uint8_t *getBuffer() const { return buffer; }
+    /// Check if the packet buffer is empty.
+    bool empty() const { return index == 0; }
 
     /// Return the packet as a vector of bytes (used for testing).
     std::vector<uint8_t> asVector() const {

@@ -121,6 +121,8 @@ void BLEMIDI::begin(BLEServerCallbacks *serverCallbacks,
 }
 
 void BLEMIDI::notifyValue(const uint8_t *data, size_t len) {
+    if (len < 2)
+        return;
     if (pCharacteristic == nullptr) {
         ERROR(F("Error: Characteristic has not been initialized"), 0x2023);
         return;
