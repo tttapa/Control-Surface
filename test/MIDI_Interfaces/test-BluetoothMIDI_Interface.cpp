@@ -30,6 +30,11 @@ TEST(BluetoothMIDIInterface, initializeBegin) {
     midi.begin();
 }
 
+TEST(BluetoothMIDIInterface, notInitialized) {
+    BluetoothMIDI_Interface midi;
+    // Destructor shouldn't fail if thread wasn't started
+}
+
 TEST(BluetoothMIDIInterface, receiveChannelMessage) {
     MockMIDI_Callbacks cb;
 

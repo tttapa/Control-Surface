@@ -60,7 +60,7 @@ class BLEMIDI {
     /**
      * @brief   Get the minimum MTU of all connected clients.
      */
-    uint16_t get_min_mtu() const;
+    uint16_t getMinMTU() const;
 
   private:
     BLECharacteristic *pCharacteristic = nullptr;

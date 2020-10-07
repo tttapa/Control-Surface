@@ -17,6 +17,7 @@ if (FAST_COMPILE)
         MIDI_Parsers/SysExBuffer.cpp
         MIDI_Interfaces/BLEMIDI/BLEMIDIPacketBuilder.cpp
         MIDI_Interfaces/MIDI_Interface.cpp
+        MIDI_Interfaces/BluetoothMIDI_Interface.cpp
         MIDI_Interfaces/DebugMIDI_Interface.cpp)
 else ()
     file(GLOB_RECURSE

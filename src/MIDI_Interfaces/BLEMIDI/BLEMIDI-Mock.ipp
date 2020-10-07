@@ -45,7 +45,7 @@ class BLEMIDI_Mock {
         if (len >= 2)
             notifyValue(std::vector<uint8_t>(data, data + len));
     }
-    uint16_t get_min_mtu() const { return 23; }
+    uint16_t getMinMTU() const { return 23; }
 };
 
 using BLEMIDI = testing::StrictMock<BLEMIDI_Mock>;

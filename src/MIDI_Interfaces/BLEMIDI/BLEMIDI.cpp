@@ -153,7 +153,7 @@ void BLEMIDI::cleanup() {
     delete pServer;
 }
 
-uint16_t BLEMIDI::get_min_mtu() const {
+uint16_t BLEMIDI::getMinMTU() const {
     if (pServer == nullptr) {
         ERROR(F("Error: Server has not been initialized"), 0x2320);
         return 23; // Set to maximum and hope for the best
