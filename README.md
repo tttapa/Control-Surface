@@ -229,6 +229,11 @@ tests and generating documentation, a style guide, etc.
 
 ## Recent Breaking Changes
 
+ - 1a21d1344f57066fa1eda3819eaf89cbbc79c14e  
+   The line numbers of `LCDDisplay` are now one-based: `1` is the first line and
+   `2` is the second line. This is more consistent with the track parameter and
+   the API of the rest of the library. (Before, the first line was `0` and the
+   second line was `1`.)
  - 8a3b1b314cf5b4aedf3ad60cbbc492fbcbb25c73  
    Before, `Control_Surface.MIDI()` was used to get the MIDI interface used by
    Control Surface. This method was removed, because you can now connect 
