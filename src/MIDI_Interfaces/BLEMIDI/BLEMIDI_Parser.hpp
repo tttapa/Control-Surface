@@ -6,6 +6,9 @@
 
 BEGIN_CS_NAMESPACE
 
+/// Class for parsing BLE-MIDI packets. It doesn't parse the actual MIDI 
+/// messages, it just extracts the relevant MIDI data from the BLE packets
+/// and forwards them to a MIDI parser (@ref SerialMIDI_Parser).
 template <class MIDIParser>
 class BLEMIDI_Parser_ {
   public:
@@ -17,7 +20,7 @@ class BLEMIDI_Parser_ {
         // Usually, we have header, timestamp and at least one MIDI byte, 
         // but a SysEx continuation could perhaps have only a header and a 
         // single data byte (this is not explicitly allowed by the spec, but
-        // handling takes no extra effort)
+        // handling this case requires no extra effort)
         if (len < 2)
             return false;
         // First byte should be a header. If it's a data byte, discard packet.
@@ -30,8 +33,8 @@ class BLEMIDI_Parser_ {
         // Otherwise, it's the LSB of the timestamp (ignored)
         else {}
 
-        // Timestamp bytes are always followed by a MIDI status byte.
-        // In this simple parser, time stamps are ignored.
+        // MIDI status bytes are always preceeded by a timestamp byte.
+        // In this simple parser, timestamps are ignored.
         bool prevWasTimestamp = true;
         for (const uint8_t *d = data + 2; d < data + len; d++) {
             // Simply pass on all normal data bytes to the MIDI parser.
@@ -62,6 +65,8 @@ class BLEMIDI_Parser_ {
     MIDIParser midiparser;
 };
 
+/// Create a BLE-MIDI packet parser that sends the MIDI data to the given
+/// MIDI parser or callback.
 template <class MIDIParser>
 auto BLEMIDI_Parser(MIDIParser &&midiparser) -> BLEMIDI_Parser_<MIDIParser> {
     return BLEMIDI_Parser_<MIDIParser>(std::forward<MIDIParser>(midiparser));
