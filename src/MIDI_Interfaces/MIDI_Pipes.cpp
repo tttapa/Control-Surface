@@ -120,22 +120,15 @@ MIDI_Source &MIDI_Source::operator=(MIDI_Source &&other) {
 
 MIDI_Source::~MIDI_Source() { disconnectSinkPipes(); }
 
-void MIDI_Source::exclusive(cn_t cn, bool exclusive) {
-    if (hasSinkPipe())
-        sinkPipe->exclusive(cn, exclusive);
-}
-
-bool MIDI_Source::canWrite(cn_t cn) const {
-    return !hasSinkPipe() || sinkPipe->isAvailableForWrite(cn);
-}
-
 void MIDI_Source::sourceMIDItoPipe(ChannelMessage msg) {
     if (sinkPipe != nullptr) {
+        assertNotStalled();
         sinkPipe->pipeMIDI(msg);
     }
 }
 void MIDI_Source::sourceMIDItoPipe(SysExMessage msg) {
     if (sinkPipe != nullptr) {
+        assertNotStalled();
         sinkPipe->pipeMIDI(msg);
     }
 }
@@ -143,6 +136,41 @@ void MIDI_Source::sourceMIDItoPipe(RealTimeMessage msg) {
     if (sinkPipe != nullptr) {
         sinkPipe->pipeMIDI(msg);
     }
+}
+
+void MIDI_Source::stall(MIDIStaller *cause) {
+    if (hasSinkPipe())
+        sinkPipe->stallDownstream(cause, this);
+}
+
+void MIDI_Source::unstall(MIDIStaller *cause) {
+    if (hasSinkPipe())
+        sinkPipe->unstallDownstream(cause, this);
+}
+
+bool MIDI_Source::isStalled() const {
+    if (hasSinkPipe())
+        return sinkPipe->isStalled();
+    return false;
+}
+
+MIDIStaller *MIDI_Source::getStaller() const {
+    if (hasSinkPipe())
+        return sinkPipe->getStaller();
+    return nullptr;
+}
+
+void MIDI_Source::assertNotStalled() const {
+    if (isStalled()) {
+        auto stallername = MIDIStaller::getNameNull(sinkPipe->staller);
+        FATAL_ERROR(F("MIDI source stalled by ") << stallername, 0x7281);
+        (void)stallername;
+    }
+}
+
+void MIDI_Source::handleStaller() const {
+    if (hasSinkPipe())
+        sinkPipe->handleStaller();
 }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -194,18 +222,90 @@ void MIDI_Pipe::disconnect() {
 
 MIDI_Pipe::~MIDI_Pipe() { disconnect(); }
 
-#if defined(ESP32) || !defined(ARDUINO)
-static std::mutex pipe_exclusive_mutex;
-#endif
-
-void MIDI_Pipe::exclusive(cn_t cn, bool exclusive) {
-#if defined(ESP32) || !defined(ARDUINO)
-    std::lock_guard<std::mutex> lock_guard(pipe_exclusive_mutex);
-#endif
+void MIDI_Pipe::stallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
+    if (!isUnstalledOrStalledBy(cause)) {
+        FATAL_ERROR(F("Cannot stall pipe from ")
+                        << MIDIStaller::getNameNull(cause)
+                        << F(" because pipe is already stalled by ")
+                        << MIDIStaller::getNameNull(staller),
+                    0x6665);
+    }
+    this->staller = cause;
+    if (hasThroughOut() && stallsrc == source)
+        throughOut->stallDownstream(cause, this);
     if (hasSink())
-        sink->lockDownstream(cn, exclusive);
-    if (hasThroughIn())
-        throughIn->lockUpstream(cn, exclusive);
+        sink->stallDownstream(cause, this);
+    if (hasSource() && source != stallsrc)
+        source->stallUpstream(cause, this);
+    if (hasThroughIn() && throughIn != stallsrc)
+        throughIn->stallUpstream(cause, this);
+}
+
+void MIDI_Pipe::stallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) {
+    if (!isUnstalledOrStalledBy(cause)) {
+        FATAL_ERROR(F("Cannot stall pipe from ")
+                        << MIDIStaller::getNameNull(cause)
+                        << F(" because pipe is already stalled by ")
+                        << MIDIStaller::getNameNull(staller),
+                    0x6666);
+    }
+    this->staller = cause;
+    if (hasSource())
+        source->stallUpstream(cause, this);
+    if (hasThroughIn() && stallsrc == sink)
+        throughIn->stallUpstream(cause, this);
+}
+
+void MIDI_Pipe::unstallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
+    if (!isUnstalledOrStalledBy(cause)) {
+        FATAL_ERROR(F("Cannot unstall pipe from ")
+                        << MIDIStaller::getNameNull(cause)
+                        << F(" because pipe is stalled by ")
+                        << MIDIStaller::getNameNull(staller),
+                    0x6655);
+    }
+    this->staller = nullptr;
+    if (hasThroughOut() && stallsrc == source)
+        throughOut->unstallDownstream(cause, this);
+    if (hasSink())
+        sink->unstallDownstream(cause, this);
+    if (hasSource() && source != stallsrc)
+        source->unstallUpstream(cause, this);
+    if (hasThroughIn() && throughIn != stallsrc)
+        throughIn->unstallUpstream(cause, this);
+}
+
+void MIDI_Pipe::unstallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) {
+    if (!isUnstalledOrStalledBy(cause)) {
+        FATAL_ERROR(F("Cannot unstall pipe from ")
+                        << MIDIStaller::getNameNull(cause)
+                        << F(" because pipe is stalled by ")
+                        << MIDIStaller::getNameNull(staller),
+                    0x6656);
+    }
+    this->staller = nullptr;
+    if (hasSource())
+        source->unstallUpstream(cause, this);
+    if (hasThroughIn() && stallsrc == sink)
+        throughIn->unstallUpstream(cause, this);
+}
+
+void MIDI_Pipe::handleStaller() const {
+    if (staller == nullptr)
+        return;
+    if (staller == eternal_stall)
+        FATAL_ERROR(F("Unable to unstall pipe (eternal stall)"), 0x4827);
+    staller->handleStall();
+}
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
+const char *MIDIStaller::getNameNull(MIDIStaller *s) {
+    if (s == nullptr)
+        return "(null)";
+    if (s == eternal_stall)
+        return "(eternal stall)";
+    return s->getName();
 }
 
 END_CS_NAMESPACE

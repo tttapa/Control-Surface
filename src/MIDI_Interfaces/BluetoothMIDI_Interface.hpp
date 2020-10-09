@@ -22,12 +22,12 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup MIDIInterfaces
  */
-class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
+class BluetoothMIDI_Interface : public MIDI_Interface,
                                 public BLEServerCallbacks,
                                 public BLECharacteristicCallbacks {
 
   public:
-    BluetoothMIDI_Interface() : Parsing_MIDI_Interface(parser) {}
+    BluetoothMIDI_Interface() = default;
     ~BluetoothMIDI_Interface() { stopSendingThread(); }
 
   private:
@@ -103,12 +103,8 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
         startSendingThread();
     }
 
-    MIDIReadEvent read() override {
-        return MIDIReadEvent::NO_MESSAGE; // TODO
-    }
-
     void update() override {
-        // TODO
+        // TODO: dispatch MIDI events in main thread
     }
 
   protected:
@@ -118,15 +114,33 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override;
     void sendImpl(uint8_t rt, uint8_t cn) override;
 
+  private:
+    void handleStall() override {
+        auto stallername = MIDIStaller::getNameNull(getStaller());
+        ERROR(F("Not implemented (stalled by ") << stallername << ')', 0x1349);
+        (void)stallername;
+    }
+
   public:
     void parse(const uint8_t *const data, const size_t len) {
         auto midiparser = [this](uint8_t databyte) { parse(databyte); };
         BLEMIDI_Parser(midiparser)(data, len);
     }
 
+    /// Return the received channel message.
+    ChannelMessage getChannelMessage() const {
+        return parser.getChannelMessage();
+    }
+    /// Return the received real-time message.
+    RealTimeMessage getRealTimeMessage() const {
+        return parser.getRealTimeMessage();
+    }
+    /// Return the received system exclusive message.
+    SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
+
   private:
     void parse(uint8_t data) {
-        event = parser.parse(data);
+        MIDIReadEvent event = parser.parse(data);
         // Best we can do is just retry until the pipe is no longer in exclusive
         // mode.
         // Keep in mind that this is executed in the callback of the BLE stack,
@@ -143,6 +157,21 @@ class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
 #endif
 
         // TODO: use a queue to the main thread
+    }
+
+    bool dispatchMIDIEvent(MIDIReadEvent event) {
+        switch (event) {
+            case MIDIReadEvent::NO_MESSAGE: 
+                return true;
+            case MIDIReadEvent::CHANNEL_MESSAGE:
+                return onChannelMessage(getChannelMessage());
+            case MIDIReadEvent::SYSEX_MESSAGE: 
+                return onSysExMessage(getSysExMessage());
+            case MIDIReadEvent::REALTIME_MESSAGE: 
+                return onRealTimeMessage(getRealTimeMessage());
+            default: 
+                return true;
+        }
     }
 
   private:

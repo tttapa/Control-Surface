@@ -3,7 +3,7 @@
 BEGIN_CS_NAMESPACE
 
 MIDIReadEvent SerialMIDI_Parser::parse(uint8_t midiByte) {
-    DEBUGFN(hex << NAMEDVALUE(midiByte) << dec);
+    // DEBUGFN(hex << NAMEDVALUE(midiByte) << dec);
 #if !IGNORE_SYSEX
     // SysEx constants
     constexpr uint8_t SysExStart =

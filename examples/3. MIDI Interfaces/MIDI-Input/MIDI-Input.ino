@@ -33,28 +33,26 @@ USBMIDI_Interface midi;
 struct MyMIDI_Callbacks : MIDI_Callbacks {
 
   // Callback for channel messages (notes, control change, pitch bend, etc.).
-  void onChannelMessage(Parsing_MIDI_Interface &midi) override {
-    ChannelMessage cm = midi.getChannelMessage();
+  void onChannelMessage(MIDI_Interface &, ChannelMessage cm) override {
     // Print the message
-    Serial << F("Channel message: ") << hex << cm.header << ' ' << cm.data1
-           << ' ' << cm.data2 << dec << F(" on cable ") << cm.cable << endl;
+    Serial << F("Channel message: ")                                        //
+           << hex << cm.header << ' ' << cm.data1 << ' ' << cm.data2 << dec //
+           << F(" on cable ") << cm.cable << endl;
   }
 
   // Callback for system exclusive messages
-  void onSysExMessage(Parsing_MIDI_Interface &midi) override {
-    SysExMessage se = midi.getSysExMessage();
+  void onSysExMessage(MIDI_Interface &, SysExMessage se) override {
     // Print the message
-    Serial << F("System Exclusive message: ") << hex;
-    for (size_t i = 0; i < se.length; ++i)
-      Serial << se.data[i] << ' ';
-    Serial << dec << F("on cable ") << se.cable << endl;
+    Serial << F("System Exclusive message: ") //
+           << AH::HexDump(se.data, se.length) //
+           << F(" on cable ") << se.cable << endl;
   }
 
   // Callback for real-time messages
-  void onRealTimeMessage(Parsing_MIDI_Interface &midi) override {
-    RealTimeMessage rt = midi.getRealTimeMessage();
+  void onRealTimeMessage(MIDI_Interface &, RealTimeMessage rt) override {
     // Print the message
-    Serial << F("Real-time message: ") << hex << rt.message << dec
+    Serial << F("Real-time message: ") //
+           << hex << rt.message << dec //
            << F(" on cable ") << rt.cable << endl;
   }
 

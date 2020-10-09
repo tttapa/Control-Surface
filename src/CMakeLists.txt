@@ -4,7 +4,6 @@ if (FAST_COMPILE)
     set(CONTROL_SURFACE_SOURCES
         Def/MIDIAddress.cpp
         MIDI_Inputs/MCU/LCD.cpp
-        MIDI_Interfaces/MIDI_Pipes.cpp
         MIDI_Constants/MCUNameFromNoteNumber.cpp
         Display/DisplayInterface.cpp
         Display/DisplayElement.cpp
@@ -15,10 +14,13 @@ if (FAST_COMPILE)
         MIDI_Parsers/USBMIDI_Parser.cpp
         MIDI_Parsers/SerialMIDI_Parser.cpp
         MIDI_Parsers/SysExBuffer.cpp
-        MIDI_Interfaces/BLEMIDI/BLEMIDIPacketBuilder.cpp
+        MIDI_Interfaces/MIDI_Pipes.cpp
         MIDI_Interfaces/MIDI_Interface.cpp
+        MIDI_Interfaces/USBMIDI_Interface.cpp
+        MIDI_Interfaces/SerialMIDI_Interface.cpp
+        MIDI_Interfaces/DebugMIDI_Interface.cpp
         MIDI_Interfaces/BluetoothMIDI_Interface.cpp
-        MIDI_Interfaces/DebugMIDI_Interface.cpp)
+        MIDI_Interfaces/BLEMIDI/BLEMIDIPacketBuilder.cpp)
 else ()
     file(GLOB_RECURSE
         CONTROL_SURFACE_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)

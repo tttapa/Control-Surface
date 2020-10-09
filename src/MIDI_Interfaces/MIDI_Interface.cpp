@@ -1,13 +1,16 @@
 #include "MIDI_Interface.hpp"
+#include "MIDI_Callbacks.hpp"
 
 BEGIN_CS_NAMESPACE
+
+// -------------------------------------------------------------------------- //
+
+// Managing the default MIDI interface
 
 MIDI_Interface::~MIDI_Interface() {
     if (getDefault() == this)
         DefaultMIDI_Interface = nullptr;
 }
-
-MIDI_Interface *MIDI_Interface::DefaultMIDI_Interface = nullptr;
 
 void MIDI_Interface::setAsDefault() { DefaultMIDI_Interface = this; }
 
@@ -23,65 +26,33 @@ MIDI_Interface *MIDI_Interface::getDefault() {
 #endif
 }
 
-// -------------------------------- SENDING --------------------------------- //
+MIDI_Interface *MIDI_Interface::DefaultMIDI_Interface = nullptr;
 
-void MIDI_Interface::sinkMIDIfromPipe(ChannelMessage msg) { send(msg); }
-void MIDI_Interface::sinkMIDIfromPipe(SysExMessage msg) { send(msg); }
-void MIDI_Interface::sinkMIDIfromPipe(RealTimeMessage msg) { send(msg); }
+// -------------------------------------------------------------------------- //
 
-// -------------------------------- READING --------------------------------- //
+// Handling incoming MIDI events
 
-void Parsing_MIDI_Interface::update() {
-    if (event == MIDIReadEvent::NO_MESSAGE) // If previous event was handled
-        event = read();                     // Read the next incoming message
-    while (event != MIDIReadEvent::NO_MESSAGE) { // As long as there are
-                                                 // incoming messages
-        if (dispatchMIDIEvent(event)) // If event was handled successfully
-            event = read();           // Read the next incoming message
-        else                          // If pipe is locked
-            break;                    // Try sending again next time
-    }
-    // TODO: maximum number of iterations? Timeout?
-}
-
-bool Parsing_MIDI_Interface::dispatchMIDIEvent(MIDIReadEvent event) {
-    switch (event) {
-        case MIDIReadEvent::NO_MESSAGE: return true;
-        case MIDIReadEvent::CHANNEL_MESSAGE: return onChannelMessage();
-        case MIDIReadEvent::SYSEX_MESSAGE: return onSysExMessage();
-        case MIDIReadEvent::REALTIME_MESSAGE: return onRealTimeMessage();
-        default: return true;
-    }
-}
-
-bool Parsing_MIDI_Interface::onRealTimeMessage() {
-    // Always send write to pipe, don't check if it's in exclusive mode or not
-    auto message = getRealTimeMessage();
+bool MIDI_Interface::onChannelMessage(ChannelMessage message) {
+    handleStaller();
     sourceMIDItoPipe(message);
     if (callbacks)
-        callbacks->onRealTimeMessage(*this);
+        callbacks->onChannelMessage(*this, message);
     return true;
 }
 
-bool Parsing_MIDI_Interface::onChannelMessage() {
-    auto message = getChannelMessage();
-    if (!canWrite(message.cable))
-        return false;
+bool MIDI_Interface::onSysExMessage(SysExMessage message) {
+    handleStaller();
     sourceMIDItoPipe(message);
     if (callbacks)
-        callbacks->onChannelMessage(*this);
-    // TODO: we have the message already, should we just pass it to the
-    //       callback as a parameter? (idem for SysEx and RT)
+        callbacks->onSysExMessage(*this, message);
     return true;
 }
 
-bool Parsing_MIDI_Interface::onSysExMessage() {
-    auto message = getSysExMessage();
-    if (!canWrite(message.cable))
-        return false;
+bool MIDI_Interface::onRealTimeMessage(RealTimeMessage message) {
+    // Always send write to pipe, don't check if it's stalled or not
     sourceMIDItoPipe(message);
     if (callbacks)
-        callbacks->onSysExMessage(*this);
+        callbacks->onRealTimeMessage(*this, message);
     return true;
 }
 

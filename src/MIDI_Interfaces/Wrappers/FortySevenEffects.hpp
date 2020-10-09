@@ -74,15 +74,14 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
  * @ingroup MIDIInterfaces
  */
 template <class MidiInterface>
-class FortySevenEffectsMIDI_Interface : public Parsing_MIDI_Interface {
+class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
   public:
     FortySevenEffectsMIDI_Interface(MidiInterface &&midi)
-        : Parsing_MIDI_Interface(parser),
-          midi(std::forward<MidiInterface>(midi)) {}
+        : midi(std::forward<MidiInterface>(midi)) {}
 
     void begin() override { midi.begin(MIDI_CHANNEL_OMNI); }
 
-    MIDIReadEvent read() override {
+    MIDIReadEvent read() {
         if (!midi.read())      // Update the MIDI input and check if there's
             return MIDIReadEvent::NO_MESSAGE; // a new message available
         auto type = midi.getType();
@@ -99,6 +98,43 @@ class FortySevenEffectsMIDI_Interface : public Parsing_MIDI_Interface {
             return MIDIReadEvent::REALTIME_MESSAGE;
         }
         return MIDIReadEvent::NO_MESSAGE;
+    }
+
+    /// Return the received channel message.
+    ChannelMessage getChannelMessage() const {
+        return parser.getChannelMessage();
+    }
+    /// Return the received real-time message.
+    RealTimeMessage getRealTimeMessage() const {
+        return parser.getRealTimeMessage();
+    }
+    /// Return the received system exclusive message.
+    SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
+
+    void update() override {
+        MIDIReadEvent event = read();
+        while (event != MIDIReadEvent::NO_MESSAGE) { // As long as there are
+                                                    // incoming messages
+            dispatchMIDIEvent(event);
+            event = read();
+        }
+        // TODO: check if we should block the pipe
+    }
+
+  protected:
+    bool dispatchMIDIEvent(MIDIReadEvent event) {
+        switch (event) {
+            case MIDIReadEvent::NO_MESSAGE: 
+                return true;
+            case MIDIReadEvent::CHANNEL_MESSAGE:
+                return onChannelMessage(getChannelMessage());
+            case MIDIReadEvent::SYSEX_MESSAGE: 
+                return onSysExMessage(getSysExMessage());
+            case MIDIReadEvent::REALTIME_MESSAGE: 
+                return onRealTimeMessage(getRealTimeMessage());
+            default: 
+                return true;
+        }
     }
 
   protected:
@@ -125,6 +161,13 @@ class FortySevenEffectsMIDI_Interface : public Parsing_MIDI_Interface {
     void sendImpl(uint8_t rt, uint8_t cn) override {
         midi.sendRealTime(static_cast<MIDI_NAMESPACE::MidiType>(rt));
         (void)cn;
+    }
+
+  private:
+    void handleStall() override {
+        auto stallername = MIDIStaller::getNameNull(getStaller());
+        ERROR(F("Not implemented (stalled by ") << stallername << ')', 0x1349);
+        (void)stallername;
     }
 
   private:

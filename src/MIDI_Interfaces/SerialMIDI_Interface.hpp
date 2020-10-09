@@ -7,10 +7,6 @@
 #include <MIDI_Parsers/SerialMIDI_Parser.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
-#if defined(ESP32) || !defined(ARDUINO)
-#include <mutex>
-#endif
-
 BEGIN_CS_NAMESPACE
 
 /**
@@ -19,84 +15,58 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup MIDIInterfaces
  */
-class StreamMIDI_Interface : public Parsing_MIDI_Interface {
+class StreamMIDI_Interface : public MIDI_Interface {
   public:
-    /**
-     * @brief   Construct a StreamMIDI_Interface on the given Stream.
-     *
-     * @param   stream
-     *          The Stream interface.
-     */
-    StreamMIDI_Interface(Stream &stream)
-        : Parsing_MIDI_Interface(parser), stream(stream) {}
+    /// Constructor.
+    /// @param   stream
+    ///          Reference to the Stream interface to read and send MIDI data
+    ///          from/to.
+    StreamMIDI_Interface(Stream &stream) : stream(stream) {}
 
-    StreamMIDI_Interface(StreamMIDI_Interface &&other)
-        : Parsing_MIDI_Interface(std::move(other)), stream(other.stream) {}
-    // TODO: should I move the mutex too?
+    /// Try reading and parsing a single incoming MIDI message.
+    /// @return  Returns the type of the read message, or 
+    ///          `MIDIReadEvent::NO_MESSAGE` if no MIDI message was available.
+    virtual MIDIReadEvent read();
 
-    MIDIReadEvent read() override {
-        while (stream.available() > 0) {
-            uint8_t midiByte = stream.read();
-            MIDIReadEvent parseResult = parser.parse(midiByte);
-            if (parseResult != MIDIReadEvent::NO_MESSAGE)
-                return parseResult;
-        }
-        return MIDIReadEvent::NO_MESSAGE;
+    /// Return the received channel message.
+    ChannelMessage getChannelMessage() const {
+        return parser.getChannelMessage();
     }
+    /// Return the received real-time message.
+    RealTimeMessage getRealTimeMessage() const {
+        return parser.getRealTimeMessage();
+    }
+    /// Return the received system exclusive message.
+    SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
+
+    void update() override;
 
   protected:
-    SerialMIDI_Parser parser;
+    bool dispatchMIDIEvent(MIDIReadEvent event);
 
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
-                  uint8_t cn) override {
-#if defined(ESP32) || !defined(ARDUINO)
-        std::lock_guard<std::mutex> lock(mutex);
-#endif
-        (void)cn;
-        stream.write(header); // Send the MIDI message over the stream
-        stream.write(d1);
-        stream.write(d2);
-        // stream.flush(); // TODO
-    }
+  protected:
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override;
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override;
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override;
+    void sendImpl(uint8_t rt, uint8_t cn) override;
 
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override {
-#if defined(ESP32) || !defined(ARDUINO)
-        std::lock_guard<std::mutex> lock(mutex);
-#endif
-        (void)cn;
-        stream.write(header); // Send the MIDI message over the stream
-        stream.write(d1);
-        // stream.flush(); // TODO
-    }
-
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-#if defined(ESP32) || !defined(ARDUINO)
-        std::lock_guard<std::mutex> lock(mutex);
-#endif
-        (void)cn;
-        stream.write(data, length);
-        // stream.flush(); // TODO
-    }
-
-    void sendImpl(uint8_t rt, uint8_t cn) override {
-#if defined(ESP32) || !defined(ARDUINO)
-        std::lock_guard<std::mutex> lock(mutex);
-#endif
-        (void)cn;
-        stream.write(rt); // Send the MIDI message over the stream
-        // stream.flush(); // TODO
+  private:
+    void handleStall() override {
+        auto stallername = MIDIStaller::getNameNull(getStaller());
+        ERROR(F("Not implemented (stalled by ") << stallername << ')', 0x1349);
+        (void)stallername;
     }
 
   protected:
     Stream &stream;
-#if defined(ESP32) || !defined(ARDUINO)
-    std::mutex mutex;
-#endif
+    SerialMIDI_Parser parser;
 };
+
+// -------------------------------------------------------------------------- //
 
 /**
  * @brief   A wrapper class for MIDI interfaces sending and receiving
- *          MIDI messages over a Serial port of generic class T.
+ *          MIDI messages over a Serial port of generic class S.
  *
  * @note    This is a template class because the type of the Serial object
  *          is completely different on different architectures, and they
@@ -104,7 +74,7 @@ class StreamMIDI_Interface : public Parsing_MIDI_Interface {
  * 
  * @ingroup MIDIInterfaces
  */
-template <class T>
+template <class S>
 class SerialMIDI_Interface : public StreamMIDI_Interface {
   public:
     /**
@@ -116,17 +86,19 @@ class SerialMIDI_Interface : public StreamMIDI_Interface {
      * @param   baud
      *          The baud rate for the Serial interface.
      */
-    SerialMIDI_Interface(T &serial, unsigned long baud = MIDI_BAUD)
+    SerialMIDI_Interface(S &serial, unsigned long baud = MIDI_BAUD)
         : StreamMIDI_Interface(serial), baud(baud) {}
 
     /**
      * @brief   Start the Serial interface at the predefined baud rate.
      */
-    void begin() override { static_cast<T &>(stream).begin(baud); }
+    void begin() override { static_cast<S &>(stream).begin(baud); }
 
   private:
     const unsigned long baud;
 };
+
+// -------------------------------------------------------------------------- //
 
 /**
  * @brief   A class for MIDI interfaces sending and receiving
@@ -151,6 +123,8 @@ class HardwareSerialMIDI_Interface
         : SerialMIDI_Interface(serial, baud) {}
 };
 
+// -------------------------------------------------------------------------- //
+
 /**
  * @brief   A class for MIDI interfaces sending and receiving
  *          MIDI messages over the Serial port of the USB connection.
@@ -168,6 +142,8 @@ class USBSerialMIDI_Interface : public SerialMIDI_Interface<decltype(Serial)> {
     USBSerialMIDI_Interface(unsigned long baud)
         : SerialMIDI_Interface(Serial, baud) {}
 };
+
+// -------------------------------------------------------------------------- //
 
 #if !defined(TEENSYDUINO) ||                                                   \
     (defined(TEENSYDUINO) && defined(TEENSY_SERIALUSB_ENABLED))
@@ -187,11 +163,14 @@ class HairlessMIDI_Interface : public USBSerialMIDI_Interface {
      * The default Hairless baud rate of 115200 baud is used.
      * This can be changed in the Settings.hpp file.
      */
-    HairlessMIDI_Interface() : USBSerialMIDI_Interface(HAIRLESS_BAUD){};
+    HairlessMIDI_Interface(unsigned long baud = HAIRLESS_BAUD)
+        : USBSerialMIDI_Interface(baud){};
 };
 #endif
 
 END_CS_NAMESPACE
+
+// -------------------------------------------------------------------------- //
 
 // TODO: Teensy 4.0 SoftwareSerial bug
 #if defined(__AVR__) || (defined(TEENSYDUINO) && TEENSYDUINO != 147) ||        \

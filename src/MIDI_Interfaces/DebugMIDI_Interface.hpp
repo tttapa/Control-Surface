@@ -25,11 +25,8 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
 
   protected:
     void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override;
-
     void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override;
-
     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override;
-
     void sendImpl(uint8_t rt, uint8_t cn) override;
 
   private:

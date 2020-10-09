@@ -14,14 +14,14 @@ class EmptyParser : public CS::MIDI_Parser {
     }
 };
 
-class MockMIDI_Interface : public CS::Parsing_MIDI_Interface {
+class MockMIDI_Interface : public CS::MIDI_Interface {
   public:
-    MockMIDI_Interface()
-        : CS::Parsing_MIDI_Interface(EmptyParser::getInstance()) {}
-    MOCK_METHOD(CS::MIDIReadEvent, read, (), (override));
+    MOCK_METHOD(CS::MIDIReadEvent, read, ());
     MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t, uint8_t, uint8_t),
                 (override));
     MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t, uint8_t), (override));
     MOCK_METHOD(void, sendImpl, (const uint8_t *, size_t, uint8_t), (override));
     MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t), (override));
+    MOCK_METHOD(void, handleStall, (), (override));
+    void update() override {}
 };

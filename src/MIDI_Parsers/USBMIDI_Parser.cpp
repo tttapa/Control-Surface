@@ -5,8 +5,9 @@ BEGIN_CS_NAMESPACE
 
 // https://usb.org/sites/default/files/midi10.pdf
 MIDIReadEvent USBMIDI_Parser::parse(uint8_t *packet) {
-    DEBUG("MIDIUSB packet:\t" << hex << packet[0] << ' ' << packet[1] << ' '
-                              << packet[2] << ' ' << packet[3] << dec);
+    // DEBUG("MIDIUSB packet:\t" << hex << packet[0] << ' ' << packet[1] << ' '
+    //                           << packet[2] << ' ' << packet[3] << dec);
+
     // MIDI USB cable number
     uint8_t cable = packet[0] >> 4;
     // MIDI USB code index number

@@ -103,10 +103,6 @@ void MIDI_Sender<Derived>::send(SysExMessage message) {
         CRTP(Derived).sendImpl(message.data, message.length, message.cable);
     }
 }
-template <class Derived>
-void MIDI_Sender<Derived>::send(MIDIMessageType rt, Cable cable) {
-    CRTP(Derived).sendImpl(rt, cable.getRaw());
-}
 
 template <class Derived>
 void MIDI_Sender<Derived>::send(RealTimeMessage message) {

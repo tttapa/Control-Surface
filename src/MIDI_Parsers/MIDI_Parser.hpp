@@ -22,9 +22,9 @@ enum class MIDIReadEvent : uint8_t {
 class MIDI_Parser {
   public:
     /** Get the latest MIDI channel message. */
-    ChannelMessage getChannelMessage() { return midimsg; }
+    ChannelMessage getChannelMessage() const { return midimsg; }
     /** Get the latest MIDI real-time message. */
-    RealTimeMessage getRealTimeMessage() { return rtmsg; }
+    RealTimeMessage getRealTimeMessage() const { return rtmsg; }
 #if !IGNORE_SYSEX
     /** Get the latest SysEx message. */
     virtual SysExMessage getSysExMessage() const = 0;

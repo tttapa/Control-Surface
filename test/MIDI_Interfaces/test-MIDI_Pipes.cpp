@@ -1048,7 +1048,15 @@ TEST(MIDI_Pipes, checkConnectionsSwapSource) {
     EXPECT_FALSE(pipe2.hasThroughOut());
 }
 
-TEST(MIDI_Pipes, exclusive) {
+
+struct MockMIDIStaller : MIDIStaller {
+    MockMIDIStaller(std::string name) : name(name) {}
+    MOCK_METHOD(void, handleStall, (), (override));
+    const char *getName() const override { return name.c_str(); }
+    std::string name;
+};
+
+TEST(MIDI_Pipes, stall) {
     StrictMock<MockMIDI_Sink> sinks[2];
     MIDI_PipeFactory<6> pipes;
     TrueMIDI_Source sources[4];
@@ -1061,58 +1069,162 @@ TEST(MIDI_Pipes, exclusive) {
     sources[2] >> pipes >> sinks[1];
     sources[3] >> pipes >> sinks[1];
 
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    // Sources                  Pipes                   Sinks
+    //
+    //   [0]   ────────────────────[2]────────────┐
+    //                    ┌────────────[1]────────┴───   [0]
+    //   [1]   ───────────┴────────[0]────────┬───────   [1]
+    //   [2]   ────────────────[3]────────┬───┘
+    //   [3]   ────────────[4]────────────┘
 
-    sources[3].exclusive(0xC);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_FALSE(sources[1].canWrite(0xC));
-    ASSERT_FALSE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
 
-    sources[3].exclusive(0xC, false);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    MockMIDIStaller staller("staller");
 
-    sources[2].exclusive(0xC);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_FALSE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_FALSE(sources[3].canWrite(0xC));
+    EXPECT_FALSE(sources[0].isStalled());
+    EXPECT_FALSE(sources[1].isStalled());
+    EXPECT_FALSE(sources[2].isStalled());
+    EXPECT_FALSE(sources[3].isStalled());
 
-    sources[2].exclusive(0xC, false);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    sources[3].stall(&staller);
+    EXPECT_FALSE(sources[0].isStalled());
+    EXPECT_TRUE(sources[1].isStalled());
+    EXPECT_TRUE(sources[2].isStalled());
+    EXPECT_TRUE(sources[3].isStalled());
 
-    sources[1].exclusive(0xC);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_FALSE(sources[2].canWrite(0xC));
-    ASSERT_FALSE(sources[3].canWrite(0xC));
+    sources[3].unstall(&staller);
+    EXPECT_FALSE(sources[0].isStalled());
+    EXPECT_FALSE(sources[1].isStalled());
+    EXPECT_FALSE(sources[2].isStalled());
+    EXPECT_FALSE(sources[3].isStalled());
 
-    sources[1].exclusive(0xC, false);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    sources[2].stall(&staller);
+    EXPECT_FALSE(sources[0].isStalled());
+    EXPECT_TRUE(sources[1].isStalled());
+    EXPECT_TRUE(sources[2].isStalled());
+    EXPECT_TRUE(sources[3].isStalled());
 
-    sources[0].exclusive(0xC);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_FALSE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    sources[2].unstall(&staller);
+    EXPECT_FALSE(sources[0].isStalled());
+    EXPECT_FALSE(sources[1].isStalled());
+    EXPECT_FALSE(sources[2].isStalled());
+    EXPECT_FALSE(sources[3].isStalled());
 
-    sources[0].exclusive(0xC, false);
-    ASSERT_TRUE(sources[0].canWrite(0xC));
-    ASSERT_TRUE(sources[1].canWrite(0xC));
-    ASSERT_TRUE(sources[2].canWrite(0xC));
-    ASSERT_TRUE(sources[3].canWrite(0xC));
+    sources[1].stall(&staller);
+    EXPECT_TRUE(sources[0].isStalled());
+    EXPECT_TRUE(sources[1].isStalled());
+    EXPECT_TRUE(sources[2].isStalled());
+    EXPECT_TRUE(sources[3].isStalled());
+
+    sources[1].unstall(&staller);
+    EXPECT_FALSE(sources[0].isStalled());
+    EXPECT_FALSE(sources[1].isStalled());
+    EXPECT_FALSE(sources[2].isStalled());
+    EXPECT_FALSE(sources[3].isStalled());
+
+    sources[0].stall(&staller);
+    EXPECT_TRUE(sources[0].isStalled());
+    EXPECT_TRUE(sources[1].isStalled());
+    EXPECT_FALSE(sources[2].isStalled());
+    EXPECT_FALSE(sources[3].isStalled());
+
+    sources[0].unstall(&staller);
+    EXPECT_FALSE(sources[0].isStalled());
+    EXPECT_FALSE(sources[1].isStalled());
+    EXPECT_FALSE(sources[2].isStalled());
+    EXPECT_FALSE(sources[3].isStalled());
+}
+
+TEST(MIDI_Pipes, stallHandleStaller) {
+    StrictMock<MockMIDI_Sink> sinks[2];
+    MIDI_PipeFactory<6> pipes;
+    TrueMIDI_Source sources[4];
+
+    sources[1] >> pipes >> sinks[1];
+    sources[1] >> pipes >> sinks[0];
+
+    sources[0] >> pipes >> sinks[0];
+
+    sources[2] >> pipes >> sinks[1];
+    sources[3] >> pipes >> sinks[1];
+
+    MockMIDIStaller staller("staller");
+
+    sources[1].stall(&staller);
+    EXPECT_CALL(staller, handleStall());
+    sources[3].handleStaller();
+}
+
+TEST(MIDI_Pipes, stallTwiceSameCause) {
+    StrictMock<MockMIDI_Sink> sinks[2];
+    MIDI_PipeFactory<6> pipes;
+    TrueMIDI_Source sources[4];
+
+    sources[1] >> pipes >> sinks[1];
+    sources[1] >> pipes >> sinks[0];
+
+    sources[0] >> pipes >> sinks[0];
+
+    sources[2] >> pipes >> sinks[1];
+    sources[3] >> pipes >> sinks[1];
+
+    MockMIDIStaller staller_A("staller_A"), staller_B("staller_B");
+
+    sources[3].stall(&staller_A);
+    try {
+        sources[3].stall(&staller_A);
+    } catch (AH::ErrorException &e) {
+        FAIL() << e.what() << std::endl;
+    }
+}
+
+TEST(MIDI_Pipes, stallTwiceDifferentCause) {
+    StrictMock<MockMIDI_Sink> sinks[2];
+    MIDI_PipeFactory<6> pipes;
+    TrueMIDI_Source sources[4];
+
+    sources[1] >> pipes >> sinks[1];
+    sources[1] >> pipes >> sinks[0];
+
+    sources[0] >> pipes >> sinks[0];
+
+    sources[2] >> pipes >> sinks[1];
+    sources[3] >> pipes >> sinks[1];
+
+    MockMIDIStaller staller_A("staller_A"), staller_B("staller_B");
+
+    sources[3].stall(&staller_A);
+    try {
+        sources[3].stall(&staller_B);
+        FAIL();
+    } catch (AH::ErrorException &e) {
+        std::cerr << e.what() << std::endl;
+        EXPECT_EQ(e.getErrorCode(), 0x6665);
+    }
+}
+
+TEST(MIDI_Pipes, stallUnstallDifferentCause) {
+    StrictMock<MockMIDI_Sink> sinks[2];
+    MIDI_PipeFactory<6> pipes;
+    TrueMIDI_Source sources[4];
+
+    sources[1] >> pipes >> sinks[1];
+    sources[1] >> pipes >> sinks[0];
+
+    sources[0] >> pipes >> sinks[0];
+
+    sources[2] >> pipes >> sinks[1];
+    sources[3] >> pipes >> sinks[1];
+
+    MockMIDIStaller staller_A("staller_A"), staller_B("staller_B");
+
+    sources[3].stall(&staller_A);
+    try {
+        sources[3].unstall(&staller_B);
+        FAIL();
+    } catch (AH::ErrorException &e) {
+        std::cerr << e.what() << std::endl;
+        EXPECT_EQ(e.getErrorCode(), 0x6655);
+    }
 }
 
 TEST(MIDI_PipeFactory, notEnoughPipes) {
@@ -1199,6 +1311,8 @@ TEST(MIDI_Pipes, USBInterface) {
     midiA[1].update();
 }
 
+#if 0 // TODO: new locking system
+
 TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
     StrictMock<USBMIDI_Interface> midiA[2];
     StrictMock<MockMIDI_Interface> midiB[2];
@@ -1270,21 +1384,6 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
     midiA[1].update(); // should send old message now
 }
 
-TEST(MIDI_Pipes, USBInterfaceLoopBack) {
-    StrictMock<USBMIDI_Interface> midi;
-
-    MIDI_Pipe pipe;
-
-    midi >> pipe >> midi;
-
-    using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
-    EXPECT_CALL(midi, readUSBPacket())
-        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}))
-        .WillOnce(Return(Packet_t{}));
-
-    EXPECT_CALL(midi, writeUSBPacket(0x9, 0x9, 0x95, 0x55, 0x66));
-    midi.update();
-}
 
 TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
     StrictMock<USBMIDI_Interface> midiA[2];
@@ -1317,6 +1416,24 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
     // unlock the pipes
     midiA[0].exclusive(9, false);
     midiA[1].update(); // shouldn't send anything
+}
+
+#endif
+
+TEST(MIDI_Pipes, USBInterfaceLoopBack) {
+    StrictMock<USBMIDI_Interface> midi;
+
+    MIDI_Pipe pipe;
+
+    midi >> pipe >> midi;
+
+    using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
+    EXPECT_CALL(midi, readUSBPacket())
+        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t{}));
+
+    EXPECT_CALL(midi, writeUSBPacket(0x9, 0x9, 0x95, 0x55, 0x66));
+    midi.update();
 }
 
 TEST(MIDI_Pipes, disconnectSourceFromSink) {

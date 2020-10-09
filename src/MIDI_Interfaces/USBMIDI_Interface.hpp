@@ -38,17 +38,14 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup MIDIInterfaces
  */
-class USBMIDI_Interface : public Parsing_MIDI_Interface {
+class USBMIDI_Interface : public MIDI_Interface {
   public:
     /**
      * @brief   Construct a new USBMIDI_Interface.
      */
-    USBMIDI_Interface() : Parsing_MIDI_Interface(parser) {}
+    USBMIDI_Interface() = default;
 
     using MIDIUSBPacket_t = USBMIDI::MIDIUSBPacket_t;
-
-  private:
-    USBMIDI_Parser parser;
 
 #ifndef ARDUINO
   public:
@@ -67,55 +64,45 @@ class USBMIDI_Interface : public Parsing_MIDI_Interface {
     void flushUSB() { USBMIDI::flush(); }
 #endif
 
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override {
-        writeUSBPacket(cn, header >> 4, // CN|CIN
-                       header,          // status
-                       d1,              // data 1
-                       d2);             // data 2
-        flushUSB();
-    }
-
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override {
-        sendImpl(header, d1, 0, cn);
-    }
-
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        while (length > 3) {
-            writeUSBPacket(cn, 0x4, data[0], data[1], data[2]);
-            data += 3;
-            length -= 3;
-        }
-        switch (length) {
-            case 3: writeUSBPacket(cn, 0x7, data[0], data[1], data[2]); break;
-            case 2: writeUSBPacket(cn, 0x6, data[0], data[1], 0); break;
-            case 1: writeUSBPacket(cn, 0x5, data[0], 0, 0); break;
-            default: break;
-        }
-        flushUSB();
-    }
-
-    void sendImpl(uint8_t rt, uint8_t cn) override {
-        writeUSBPacket(cn, 0xF, // CN|CIN
-                       rt,      // single byte
-                       0,       // no data
-                       0);      // no data
-        flushUSB();
-    }
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override;
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override;
+    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override;
+    void sendImpl(uint8_t rt, uint8_t cn) override;
 
   public:
-    MIDIReadEvent read() override {
-        for (uint8_t i = 0; i < (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {
-            MIDIUSBPacket_t midi_packet = readUSBPacket();
-            if (midi_packet.data[0] == 0)
-                return MIDIReadEvent::NO_MESSAGE;
+    /**
+     * @brief   Try reading and parsing a single incoming MIDI message.
+     * @return  Returns the type of the read message, or 
+     *          `MIDIReadEvent::NO_MESSAGE` if no MIDI message was available.
+     */
+    MIDIReadEvent read();
 
-            MIDIReadEvent parseResult = parser.parse(midi_packet.data);
+    void update() override;
 
-            if (parseResult != MIDIReadEvent::NO_MESSAGE)
-                return parseResult;
-        }
-        return MIDIReadEvent::NO_MESSAGE;
+  protected:
+    bool dispatchMIDIEvent(MIDIReadEvent event);
+
+  public:
+    /// Return the received channel message.
+    ChannelMessage getChannelMessage() const {
+        return parser.getChannelMessage();
     }
+    /// Return the received real-time message.
+    RealTimeMessage getRealTimeMessage() const {
+        return parser.getRealTimeMessage();
+    }
+    /// Return the received system exclusive message.
+    SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
+
+  private:
+    void handleStall() override {
+        auto stallername = MIDIStaller::getNameNull(getStaller());
+        ERROR(F("Not implemented (stalled by ") << stallername << ')', 0x1349);
+        (void)stallername;
+    }
+
+  private:
+    USBMIDI_Parser parser;
 };
 
 END_CS_NAMESPACE

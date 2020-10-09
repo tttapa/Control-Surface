@@ -33,7 +33,7 @@ TEST(USBMIDI_Interface, SysExSend3B) {
     Sequence seq;
     EXPECT_CALL(midi, writeUSBPacket(8, 0x7, 0xF0, 0x55, 0xF7)).InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0xF7};
-    midi.send(sysex, CABLE_9);
+    midi.sendSysEx(sysex, CABLE_9);
 }
 
 TEST(USBMIDI_Interface, SysExSend4B) {
@@ -42,7 +42,7 @@ TEST(USBMIDI_Interface, SysExSend4B) {
     EXPECT_CALL(midi, writeUSBPacket(9, 0x4, 0xF0, 0x55, 0x66)).InSequence(seq);
     EXPECT_CALL(midi, writeUSBPacket(9, 0x5, 0xF7, 0x00, 0x00)).InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0xF7};
-    midi.send(sysex, CABLE_10);
+    midi.sendSysEx(sysex, CABLE_10);
 }
 
 TEST(USBMIDI_Interface, SysExSend5B) {
@@ -51,7 +51,7 @@ TEST(USBMIDI_Interface, SysExSend5B) {
     EXPECT_CALL(midi, writeUSBPacket(9, 0x4, 0xF0, 0x55, 0x66)).InSequence(seq);
     EXPECT_CALL(midi, writeUSBPacket(9, 0x6, 0x77, 0xF7, 0x00)).InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0xF7};
-    midi.send(sysex, CABLE_10);
+    midi.sendSysEx(sysex, CABLE_10);
 }
 
 TEST(USBMIDI_Interface, SysExSend6B) {
@@ -60,7 +60,7 @@ TEST(USBMIDI_Interface, SysExSend6B) {
     EXPECT_CALL(midi, writeUSBPacket(9, 0x4, 0xF0, 0x55, 0x66)).InSequence(seq);
     EXPECT_CALL(midi, writeUSBPacket(9, 0x7, 0x77, 0x11, 0xF7)).InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0xF7};
-    midi.send(sysex, CABLE_10);
+    midi.sendSysEx(sysex, CABLE_10);
 }
 
 TEST(USBMIDI_Interface, SysExSend7B) {
@@ -70,7 +70,7 @@ TEST(USBMIDI_Interface, SysExSend7B) {
     EXPECT_CALL(midi, writeUSBPacket(9, 0x4, 0x77, 0x11, 0x22)).InSequence(seq);
     EXPECT_CALL(midi, writeUSBPacket(9, 0x5, 0xF7, 0x00, 0x00)).InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0xF7};
-    midi.send(sysex, CABLE_10);
+    midi.sendSysEx(sysex, CABLE_10);
 }
 
 TEST(USBMIDI_Interface, SysExSend8B) {
@@ -80,7 +80,7 @@ TEST(USBMIDI_Interface, SysExSend8B) {
     EXPECT_CALL(midi, writeUSBPacket(9, 0x4, 0x77, 0x11, 0x22)).InSequence(seq);
     EXPECT_CALL(midi, writeUSBPacket(9, 0x6, 0x33, 0xF7, 0x00)).InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7};
-    midi.send(sysex, CABLE_10);
+    midi.sendSysEx(sysex, CABLE_10);
 }
 
 TEST(USBMIDI_Interface, SysExSend9B) {
@@ -90,7 +90,7 @@ TEST(USBMIDI_Interface, SysExSend9B) {
     EXPECT_CALL(midi, writeUSBPacket(9, 0x4, 0x77, 0x11, 0x22)).InSequence(seq);
     EXPECT_CALL(midi, writeUSBPacket(9, 0x7, 0x33, 0x44, 0xF7)).InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0x44, 0xF7};
-    midi.send(sysex, CABLE_10);
+    midi.sendSysEx(sysex, CABLE_10);
 }
 
 TEST(USBMIDI_Interface, SysExSend0B) {
@@ -103,14 +103,14 @@ TEST(USBMIDI_Interface, SysExSend2B) {
     Sequence seq;
     EXPECT_CALL(midi, writeUSBPacket(9, 0x6, 0xF0, 0xF7, 0x00)).InSequence(seq);
     uint8_t sysex[] = {0xF0, 0xF7};
-    midi.send(sysex, CABLE_10);
+    midi.sendSysEx(sysex, CABLE_10);
 }
 
 TEST(USBMIDI_Interface, SysExSend1B) {
     StrictMock<USBMIDI_Interface> midi;
     uint8_t sysex[] = {0xF0};
     try {
-        midi.send(sysex);
+        midi.sendSysEx(sysex);
         FAIL();
     } catch (ErrorException &e) {
         EXPECT_EQ(e.getErrorCode(), 0x7F7F);

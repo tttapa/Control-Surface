@@ -2,6 +2,7 @@
 
 #include <AH/Containers/BitArray.hpp>
 #include <AH/STL/utility>
+#include <AH/STL/limits>
 #include <AH/Settings/Warnings.hpp>
 #include <MIDI_Parsers/MIDI_MessageTypes.hpp>
 #include <Settings/NamespaceSettings.hpp>
@@ -10,8 +11,9 @@ AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
 
-/// Data type for cable numbers.
-using cn_t = uint8_t;
+struct MIDIStaller;
+MIDIStaller *const eternal_stall 
+    = reinterpret_cast<MIDIStaller *>(std::numeric_limits<std::uintptr_t>::max());
 
 /**
  * @addtogroup MIDI_Routing MIDI Routing
@@ -44,6 +46,8 @@ using cn_t = uint8_t;
  */
 
 class MIDI_Pipe;
+class MIDI_Source;
+class MIDI_Sink;
 struct TrueMIDI_Sink;
 struct TrueMIDI_Source;
 
@@ -100,9 +104,10 @@ class MIDI_Sink {
     /// @}
 
   private:
-    /// Base case for recursive lock function.
-    /// @see    MIDI_Pipe::lockDownstream
-    virtual void lockDownstream(cn_t cn, bool lock) { (void)cn, (void)lock; }
+    /// Base case for recursive stall function.
+    /// @see    MIDI_Pipe::stallDownstream
+    virtual void stallDownstream(MIDIStaller *, MIDI_Source *) {}
+    virtual void unstallDownstream(MIDIStaller *, MIDI_Source *) {}
     /// Base case for recursive function.
     /// @see    MIDI_Pipe::getFinalSink
     virtual MIDI_Sink *getFinalSink() { return this; }
@@ -135,25 +140,32 @@ class MIDI_Source {
     void sourceMIDItoPipe(RealTimeMessage);
 
     /** 
-     * @brief   Enter or exit exclusive mode for the given cable number.
+     * @brief   Stall this MIDI source.
      *          This means that this becomes the only source that can sink to 
      *          the sinks connected to this source. Other sources have to wait
      *          until this source exits exclusive mode until they can send 
      *          again.
-     * @param   cn
-     *          Cable number to set the exclusive mode for [0, 15].
-     * @param   exclusive
-     *          True to enable exclusive mode, false to disable.
+     * @param   cause
+     *          Pointer to the reason for this stall, can be called to try and
+     *          un-stall.
      */
-    void exclusive(cn_t cn, bool exclusive = true);
+    void stall(MIDIStaller *cause = eternal_stall);
+    void unstall(MIDIStaller *cause = eternal_stall);
     /** 
      * @brief   Check if this source can write to the sinks it connects to.
-     *          Returns false if any of the sinks have another source that is
-     *          in exclusive mode.
-     * @param   cn
-     *          Cable number to check [0, 15].
+     * @todo    Document stalling more accurately.
      */
-    bool canWrite(cn_t cn) const;
+    bool isStalled() const;
+
+    /// Get a pointer to whatever is stalling this MIDI source.
+    MIDIStaller *getStaller() const;
+
+    /// Raise an error if the MIDI sink pipe is stalled.
+    void assertNotStalled() const;
+
+    /// Give the code that is stalling the MIDI sink pipe the opportunity to do 
+    /// its job and unstall the pipe.
+    void handleStaller() const;
 
     /// @}
 
@@ -195,6 +207,10 @@ class MIDI_Source {
     /// @}
 
   private:
+    /// Base case for recursive stall function.
+    /// @see    MIDI_Pipe::stallUpstream
+    virtual void stallUpstream(MIDIStaller *, MIDI_Sink *) {}
+    virtual void unstallUpstream(MIDIStaller *, MIDI_Sink *) {}
     /// Base case for recursive function.
     /// @see    MIDI_Pipe::getInitialSource
     virtual MIDI_Source *getInitialSource() { return this; }
@@ -393,23 +409,26 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     /// Lock this pipe and all other pipes further downstream (following the
     /// path of the sink). Operates recursively until the end of the
     /// chain is reached.
-    void lockDownstream(cn_t cn, bool lock) override {
-        lockSelf(cn, lock);
-        if (hasSink())
-            sink->lockDownstream(cn, lock);
-    }
+    void stallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) override;
+    void unstallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) override;
 
     /// Lock this pipe and all other pipes further upstream (following the
     /// path of the "trough" input). Operates recursively until the end of the
     /// chain is reached.
-    void lockUpstream(cn_t cn, bool lock) {
-        lockSelf(cn, lock);
-        if (hasThroughIn())
-            throughIn->lockUpstream(cn, lock);
+    void stallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) override;
+    void unstallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) override;
+
+    
+  public:
+    bool isStalled() const { return staller != nullptr; }
+    MIDIStaller *getStaller() const { return staller; }
+    bool isUnstalledOrStalledBy(MIDIStaller *cause) {
+        return staller == nullptr || staller == cause;
     }
 
-    /// Lock this pipe, so sources cannot send messages through it.
-    void lockSelf(cn_t cn, bool lock) { locks.set(cn, lock); }
+    /// Give the code that is stalling the MIDI pipe the opportunity to do 
+    /// its job and unstall the pipe.
+    void handleStaller() const;
 
   public:
     /// Disconnect this pipe from all other pipes, sources and sinks. If the
@@ -466,33 +485,25 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     MIDI_Source *getSource() { return source; }
     MIDI_Sink *getSink() { return sink; }
 
-  public:
-    /// @copydoc    MIDI_Source::exclusive
-    void exclusive(cn_t cn, bool exclusive = true);
-
-    /// Check if this pipe is locked for a given cable number.
-    bool isLocked(cn_t cn) const { return locks.get(cn); }
-
-    /** 
-     * @brief   Check if any of the sinks or outputs of this chain of pipes are
-     *          locked for the given cable number.
-     * @param   cn
-     *          The cable number to check.
-     */
-    bool isAvailableForWrite(cn_t cn) const {
-        return !isLocked(cn) &&
-               (!hasThroughOut() || throughOut->isAvailableForWrite(cn));
-    }
-
   private:
     MIDI_Sink *sink = nullptr;
     MIDI_Source *source = nullptr;
     MIDI_Pipe *&throughOut = MIDI_Source::sinkPipe;
     MIDI_Pipe *&throughIn = MIDI_Sink::sourcePipe;
-    AH::BitArray<16> locks;
+    MIDIStaller *staller = nullptr;
 
     friend class MIDI_Sink;
     friend class MIDI_Source;
+};
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
+struct MIDIStaller {
+    virtual ~MIDIStaller() = default;
+    virtual const char *getName() const { return "nameless staller"; };
+    virtual void handleStall() = 0;
+
+    static const char *getNameNull(MIDIStaller *s);
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //

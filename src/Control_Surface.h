@@ -124,6 +124,7 @@
 #ifdef ESP32
 #include <MIDI_Interfaces/BluetoothMIDI_Interface.hpp>
 #endif
+#include <MIDI_Interfaces/MIDI_Callbacks.hpp>
 
 // ------------------------- Extended Input Output -------------------------- //
 #include <AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>

@@ -1,22 +1,21 @@
 #include <MIDI_Interfaces/BluetoothMIDI_Interface.hpp>
+#include <MIDI_Interfaces/MIDI_Callbacks.hpp>
 
 using namespace CS;
 using testing::Mock;
 
 class MockMIDI_Callbacks : public MIDI_Callbacks {
   public:
-    void onChannelMessage(Parsing_MIDI_Interface &midi) override {
-        channelMessages.push_back(midi.getChannelMessage());
+    void onChannelMessage(MIDI_Interface &, ChannelMessage msg) override {
+        channelMessages.push_back(msg);
     }
-    void onSysExMessage(Parsing_MIDI_Interface &midi) override {
-        SysExMessage msg = midi.getSysExMessage();
+    void onSysExMessage(MIDI_Interface &, SysExMessage msg) override {
         sysExMessages.insert(sysExMessages.end(), msg.data,
                              msg.data + msg.length);
         sysExCounter++;
     }
-    void onRealTimeMessage(Parsing_MIDI_Interface &midi) override {
-        (void)midi;
-        realtimeMessages.push_back(midi.getRealTimeMessage());
+    void onRealTimeMessage(MIDI_Interface &, RealTimeMessage msg) override {
+        realtimeMessages.push_back(msg);
     }
 
     std::vector<ChannelMessage> channelMessages;

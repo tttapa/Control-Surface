@@ -106,7 +106,7 @@ TEST(StreamDebugMIDI_Interface, SysExSend1B) {
     StreamDebugMIDI_Interface midi = stream;
     uint8_t sysex[] = {0xF0};
     try {
-        midi.send(sysex);
+        midi.sendSysEx(sysex);
         FAIL();
     } catch (ErrorException &e) {
         EXPECT_EQ(e.getErrorCode(), 0x7F7F);
@@ -127,6 +127,26 @@ TEST(StreamDebugMIDI_Interface, readNoteOn) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
     for (auto v : "93 3C 60 ")
+        stream.toRead.push(v);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    ChannelMessage expectedMsg = {0x93, 0x3C, 0x60, 0x00};
+    EXPECT_EQ(midi.getChannelMessage(), expectedMsg);
+}
+
+TEST(StreamDebugMIDI_Interface, readNoteOnSingleDigit) {
+    TestStream stream;
+    StreamDebugMIDI_Interface midi = stream;
+    for (auto v : "93 3 60 ")
+        stream.toRead.push(v);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    ChannelMessage expectedMsg = {0x93, 0x3, 0x60, 0x00};
+    EXPECT_EQ(midi.getChannelMessage(), expectedMsg);
+}
+
+TEST(StreamDebugMIDI_Interface, readNoteOnNoSpaces) {
+    TestStream stream;
+    StreamDebugMIDI_Interface midi = stream;
+    for (auto v : "933C60")
         stream.toRead.push(v);
     EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage expectedMsg = {0x93, 0x3C, 0x60, 0x00};
