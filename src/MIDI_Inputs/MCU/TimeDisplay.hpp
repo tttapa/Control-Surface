@@ -20,8 +20,8 @@ class TimeDisplay : public SevenSegmentDisplay<TimeDisplayLength> {
         getBars(barStr);
         getBeats(beatStr);
         getFrames(frameStr);
-        DEBUG("Bar: " << barStr << "\tBeat: " << beatStr
-                      << "\tFrame: " << frameStr);
+        DEBUG(F("Bar: ") << barStr << F("\tBeat: ") << beatStr
+                      << F("\tFrame: ") << frameStr);
     }
     void getBars(char *buff) const {
         if (getCharacterAt(5) == ' ') {

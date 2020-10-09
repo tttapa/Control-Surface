@@ -5,12 +5,12 @@ BEGIN_CS_NAMESPACE
 void SysExBuffer::start() {
     SysExLength = 0; // if the previous message wasn't finished, overwrite it
     receiving = true;
-    DEBUG("Start SysEx");
+    DEBUG(F("Start SysEx"));
 }
 
 void SysExBuffer::end() {
     receiving = false;
-    DEBUG("End SysEx");
+    DEBUG(F("End SysEx"));
 }
 
 bool SysExBuffer::add(uint8_t data) {
@@ -24,7 +24,7 @@ bool SysExBuffer::add(uint8_t data) {
 bool SysExBuffer::hasSpaceLeft() const {
     bool avail = SysExLength < SYSEX_BUFFER_SIZE;
     if (!avail)
-        DEBUG("SysEx buffer full");
+        DEBUG(F("SysEx buffer full"));
     return avail;
 }
 

@@ -52,9 +52,9 @@ void BLEMIDIPacketBuilder::reset() {
 
 void BLEMIDIPacketBuilder::setCapacity(uint8_t capacity) {
     if (capacity > MAX_CAPACITY)
-        ERROR("capacity larger than maximum capacity", 0x2020);
+        ERROR(F("capacity larger than maximum capacity"), 0x2020);
     if (capacity < 5)
-        ERROR("capacity less than 5 bytes", 0x2005);
+        ERROR(F("capacity less than 5 bytes"), 0x2005);
     this->capacity = capacity;
 }
 

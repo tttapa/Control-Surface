@@ -67,7 +67,7 @@ MIDIReadEvent SerialMIDI_Parser::parse(uint8_t midiByte) {
     // If it's a data byte
     else {
         if (midimsg.header == 0) {
-            DEBUGFN("Warning: No header");
+            DEBUGFN(F("Warning: No header"));
             ; // Ignore
         }
         // Third byte of three (data 2)
@@ -96,7 +96,7 @@ MIDIReadEvent SerialMIDI_Parser::parse(uint8_t midiByte) {
             }
 #endif // IGNORE_SYSEX
             else {
-                DEBUGFN("Data byte ignored");
+                DEBUGFN(F("Data byte ignored"));
             }
         }
     }

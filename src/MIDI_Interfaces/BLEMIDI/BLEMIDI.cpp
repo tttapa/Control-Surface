@@ -16,10 +16,10 @@ void BLEMIDI::notifyValue(const uint8_t *data, size_t len) {
         return;
     }
 
-    DEBUGFN("Notify [" << length << "] " << AH::HexDump(data, len));
+    DEBUGFN(F("Notify [") << length << "] " << AH::HexDump(data, len));
 
     if (pServer->getConnectedCount() == 0) {
-        DEBUGFN("Notify: No connected clients");
+        DEBUGFN(F("Notify: No connected clients"));
         return;
     }
 
@@ -27,14 +27,14 @@ void BLEMIDI::notifyValue(const uint8_t *data, size_t len) {
     // If we do, then check to see if notification is enabled and, if not, 
     // prevent the notification.
     if (pDescriptor != nullptr && !pDescriptor->getNotifications()) {
-        DEBUGFN("Notify: Notifications disabled, ignoring");
+        DEBUGFN(F("Notify: Notifications disabled, ignoring"));
         return;
     }
     
     for (auto &peer : pServer->getPeerDevices(false)) {
         uint16_t mtu = peer.second.mtu;
         if (len > mtu - 3) {
-            DEBUGFN("Message longer than MTU, dropped");
+            DEBUGFN(F("Message longer than MTU, dropped"));
             continue;
         }
         
@@ -45,7 +45,7 @@ void BLEMIDI::notifyValue(const uint8_t *data, size_t len) {
                 len, data, 
                 false); // The need_confirm = false makes this a notify.
         if (errRc != ESP_OK) {
-            DEBUGFN("Error: esp_ble_gatts_send_indicate (" << errRc << ") "
+            DEBUGFN(F("Error: esp_ble_gatts_send_indicate (") << errRc << ") "
                         << GeneralUtils::errorToString(errRc));
             return;
         }
@@ -72,7 +72,7 @@ void BLEMIDI::setCharacteristicsCallbacks(BLECharacteristicCallbacks *cb) {
 void BLEMIDI::begin(BLEServerCallbacks *serverCallbacks,
             BLECharacteristicCallbacks *midiCallbacks) {
 
-    DEBUGFN("Initializing BLE MIDI Interface");
+    DEBUGFN(F("Initializing BLE MIDI Interface"));
     if (BLEDevice::getInitialized()) {
         ERROR(F("Error: BLEDevice was initialized already"), 0x2022);
         BLEDevice::deinit();
@@ -128,7 +128,7 @@ void BLEMIDI::notifyValue(const uint8_t *data, size_t len) {
         return;
     }
     // TODO: file pull request to add const (espressif/arduino-esp32)
-    DEBUGFN("Notify [" << len << "] " << AH::HexDump(data, len));
+    DEBUGFN(F("Notify [") << len << "] " << AH::HexDump(data, len));
     pCharacteristic->setValue(const_cast<uint8_t *>(data), len);
     pCharacteristic->notify();
 }

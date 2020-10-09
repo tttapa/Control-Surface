@@ -163,7 +163,7 @@ void BluetoothMIDI_Interface::onConnect(BLEServer *pServer) {
     // When a new client connects to our server, check all MTUs to know if
     // we have to shrink our packet size.-
     (void)pServer;
-    DEBUGFN("Connected");
+    DEBUGFN(F("Connected"));
     updateMTU();
 }
 
@@ -171,14 +171,14 @@ void BluetoothMIDI_Interface::onDisconnect(BLEServer *pServer) {
     // When a client disconnects, check all MTUs to see if we can grow our
     // packet size.
     (void)pServer;
-    DEBUGFN("Disonnected");
+    DEBUGFN(F("Disonnected"));
     updateMTU();
 }
 
 void BluetoothMIDI_Interface::onRead(BLECharacteristic *pCharacteristic) {
     // According to the BLE-MIDI standard, we should respond to read requests
     // with no payload.
-    DEBUGFN("Read");
+    DEBUGFN(F("Read"));
     pCharacteristic->setValue(nullptr, 0);
 }
 
@@ -189,7 +189,7 @@ void BluetoothMIDI_Interface::onWrite(BLECharacteristic *pCharacteristic) {
     std::string value = pCharacteristic->getValue();
     const uint8_t *data = reinterpret_cast<const uint8_t *>(value.data());
     size_t len = value.size();
-    DEBUGFN("Write [" << len << "] " << AH::HexDump(data, len));
+    DEBUGFN(F("Write [") << len << "] " << AH::HexDump(data, len));
     parse(data, len);
 }
 
