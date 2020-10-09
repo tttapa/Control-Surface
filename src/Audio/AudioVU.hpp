@@ -80,7 +80,7 @@ class AudioVU : public Interfaces::MCU::IVU {
     }
 
     /** @note   This function will always return false for an AudioVU. */
-    bool getOverload() override { return false; } // TODO
+    bool getOverload() override { return false; }
 
     /** 
      * @brief   Set the gain for the VU meter.

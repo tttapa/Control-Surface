@@ -39,8 +39,8 @@ class LCDDisplay : public DisplayElement {
     LCDDisplay(DisplayInterface &display, MCU::LCD<> &lcd,
                const OutputBank &bank, uint8_t track, PixelLocation loc,
                uint8_t textSize, uint16_t color)
-        : DisplayElement(display), lcd(lcd), bank(bank), offset(track - 1),
-          line(0), x(loc.x), y(loc.y), size(textSize), color(color) {}
+        : DisplayElement(display), lcd(lcd), bank(&bank), track(track - 1),
+          line(1), x(loc.x), y(loc.y), size(textSize), color(color) {}
 
     /**
      * @brief   Constructor.
@@ -50,12 +50,8 @@ class LCDDisplay : public DisplayElement {
      * @param   lcd 
      *          A reference to the MCU LCD MIDI input element that listens for
      *          incoming MIDI display data.
-     * @param   bank 
-     *          The bank that determines the active track to be displayed.
      * @param   track 
      *          The track number to display [1, 8].
-     * @param   line
-     *          The line of the MCU display to display [0, 1].
      * @param   loc 
      *          The location on the display where to start drawing the text.
      * @param   textSize 
@@ -63,23 +59,50 @@ class LCDDisplay : public DisplayElement {
      * @param   color 
      *          The color of the text to draw.
      */
-    LCDDisplay(DisplayInterface &display, MCU::LCD<> &lcd,
-               const OutputBank &bank, uint8_t track, uint8_t line,
+    LCDDisplay(DisplayInterface &display, MCU::LCD<> &lcd, uint8_t track,
                PixelLocation loc, uint8_t textSize, uint16_t color)
-        : DisplayElement(display), lcd(lcd), bank(bank), offset(track - 1),
-          line(line), x(loc.x), y(loc.y), size(textSize), color(color) {}
+        : DisplayElement(display), lcd(lcd), track(track - 1),
+          line(1), x(loc.x), y(loc.y), size(textSize), color(color) {}
+
+    /**
+     * @brief   Constructor.
+     * 
+     * @param   display 
+     *          A reference to the display that this element will be drawn to.
+     * @param   lcd 
+     *          A reference to the MCU LCD MIDI input element that listens for
+     *          incoming MIDI display data.
+     * @param   track 
+     *          The track number to display [1, 8].
+     * @param   line
+     *          The line of the MCU display to display [1, 2].
+     * @param   loc 
+     *          The location on the display where to start drawing the text.
+     * @param   textSize 
+     *          The font size to use for drawing the text.
+     * @param   color 
+     *          The color of the text to draw.
+     */
+    LCDDisplay(DisplayInterface &display, MCU::LCD<> &lcd, uint8_t track,
+               uint8_t line, PixelLocation loc, uint8_t textSize, 
+               uint16_t color)
+        : DisplayElement(display), lcd(lcd), track(track - 1),
+          line(line - 1), x(loc.x), y(loc.y), size(textSize), color(color) {}
 
     void draw() override {
         // If it's a message across all tracks, don't display anything.
         if (!separateTracks())
             return;
+        
+        // Determine the track and line to display
+        uint8_t offset = bank ? bank->getOffset() + track : track;
+        if (offset > 7)
+            ERROR(F("Track number out of bounds (") << offset << ')', 0xBA41);
+        if (line > 1) 
+            ERROR(F("Line number out of bounds (") << line << ')', 0xBA42);
+
         // Extract the six-character substring for this track.
-        uint8_t trackoffset = bank.getOffset() + offset;
-        if (trackoffset > 7) // TODO
-            trackoffset = 7;
-        if (line > 1) // TODO
-            line = 1;
-        const char *text = lcd.getText() + 7 * trackoffset + 56 * line;
+        const char *text = lcd.getText() + 7 * offset + 56 * line;
         char buffer[7];
         strncpy(buffer, text, 6);
         buffer[6] = '\0';
@@ -123,8 +146,8 @@ class LCDDisplay : public DisplayElement {
 
   private:
     MCU::LCD<> &lcd;
-    const OutputBank &bank;
-    uint8_t offset;
+    const OutputBank *bank = nullptr;
+    uint8_t track;
     uint8_t line;
     int16_t x, y;
     uint8_t size;

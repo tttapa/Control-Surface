@@ -47,10 +47,8 @@ class VPotDisplay : public DisplayElement {
 
   protected:
     void drawVPotSegment(uint8_t segment) {
-        // segment 5 (i.e. the sixth segment) = 0° (i.e. 12 o'clock)
+        // Segment 5 (i.e. the sixth segment) = 0° (i.e. 12 o'clock, the middle)
         float angle = angleSpacing * (segment - 5);
-
-        // TODO: use Bresenham directly
 
         uint16_t x_start = x + round((float)innerRadius * sin(angle) / 2);
         uint16_t y_start = y - round((float)innerRadius * cos(angle) / 2);
