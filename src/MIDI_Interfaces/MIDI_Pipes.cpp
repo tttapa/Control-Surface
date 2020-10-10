@@ -122,18 +122,19 @@ MIDI_Source::~MIDI_Source() { disconnectSinkPipes(); }
 
 void MIDI_Source::sourceMIDItoPipe(ChannelMessage msg) {
     if (sinkPipe != nullptr) {
-        assertNotStalled();
+        handleStallers();
         sinkPipe->pipeMIDI(msg);
     }
 }
 void MIDI_Source::sourceMIDItoPipe(SysExMessage msg) {
     if (sinkPipe != nullptr) {
-        assertNotStalled();
+        handleStallers();
         sinkPipe->pipeMIDI(msg);
     }
 }
 void MIDI_Source::sourceMIDItoPipe(RealTimeMessage msg) {
     if (sinkPipe != nullptr) {
+        // Always send write to pipe, don't check if it's stalled or not
         sinkPipe->pipeMIDI(msg);
     }
 }

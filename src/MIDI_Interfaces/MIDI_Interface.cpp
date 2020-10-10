@@ -33,7 +33,6 @@ MIDI_Interface *MIDI_Interface::DefaultMIDI_Interface = nullptr;
 // Handling incoming MIDI events
 
 bool MIDI_Interface::onChannelMessage(ChannelMessage message) {
-    handleStallers();
     sourceMIDItoPipe(message);
     if (callbacks)
         callbacks->onChannelMessage(*this, message);
@@ -41,7 +40,6 @@ bool MIDI_Interface::onChannelMessage(ChannelMessage message) {
 }
 
 bool MIDI_Interface::onSysExMessage(SysExMessage message) {
-    handleStallers();
     sourceMIDItoPipe(message);
     if (callbacks)
         callbacks->onSysExMessage(*this, message);
@@ -49,7 +47,6 @@ bool MIDI_Interface::onSysExMessage(SysExMessage message) {
 }
 
 bool MIDI_Interface::onRealTimeMessage(RealTimeMessage message) {
-    // Always send write to pipe, don't check if it's stalled or not
     sourceMIDItoPipe(message);
     if (callbacks)
         callbacks->onRealTimeMessage(*this, message);
