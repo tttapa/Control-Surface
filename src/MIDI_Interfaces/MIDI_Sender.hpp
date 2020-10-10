@@ -116,8 +116,12 @@ class MIDI_Sender {
     }
     /// Send a MIDI Real-Time message.
     void send(RealTimeMessage message);
-    /// Send a single-byte MIDI message.
+    /// Send a MIDI Real-Time message.
     void sendRealTime(MIDIMessageType rt, Cable cable = CABLE_1) {
+        send(RealTimeMessage{rt, cable});
+    }
+    /// Send a MIDI Real-Time message.
+    void sendRealTime(uint8_t rt, Cable cable = CABLE_1) {
         send(RealTimeMessage{rt, cable});
     }
 
