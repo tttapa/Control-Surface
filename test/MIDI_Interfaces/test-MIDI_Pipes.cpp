@@ -1050,10 +1050,18 @@ TEST(MIDI_Pipes, checkConnectionsSwapSource) {
 
 
 struct MockMIDIStaller : MIDIStaller {
-    MockMIDIStaller(std::string name) : name(name) {}
-    MOCK_METHOD(void, handleStall, (), (override));
+    MockMIDIStaller(const char *name, MIDI_Source *stalled = nullptr)
+        : name(name), stalled(stalled) {}
+    MOCK_METHOD(void, stallHandled, ());
+    void handleStall() override {
+        if (!stalled)
+            throw std::runtime_error("Not stalling any sources");
+        stallHandled();
+        stalled->unstall(this);
+    }
     const char *getName() const override { return name.c_str(); }
     std::string name;
+    MIDI_Source *stalled;
 };
 
 TEST(MIDI_Pipes, stall) {
@@ -1147,11 +1155,11 @@ TEST(MIDI_Pipes, stallHandleStaller) {
     sources[2] >> pipes >> sinks[1];
     sources[3] >> pipes >> sinks[1];
 
-    MockMIDIStaller staller("staller");
+    MockMIDIStaller staller("staller", &sources[1]);
 
     sources[1].stall(&staller);
-    EXPECT_CALL(staller, handleStall());
-    sources[3].handleStaller();
+    EXPECT_CALL(staller, stallHandled());
+    sources[3].handleStallers();
 }
 
 TEST(MIDI_Pipes, stallTwiceSameCause) {
@@ -1225,6 +1233,277 @@ TEST(MIDI_Pipes, stallUnstallDifferentCause) {
         std::cerr << e.what() << std::endl;
         EXPECT_EQ(e.getErrorCode(), 0x6655);
     }
+}
+
+TEST(MIDI_Pipes, stallFromThroughInAndThroughOut) {
+    StrictMock<MockMIDI_Sink> sinks[3];
+    MIDI_Pipe pipes[6];
+    TrueMIDI_Source sources[4];
+
+    sources[0] >> pipes[0] >> sinks[0];
+    sources[0] >> pipes[1] >> sinks[1];
+    sources[0] >> pipes[2] >> sinks[2];
+
+    sources[1] >> pipes[3] >> sinks[0];
+    sources[2] >> pipes[4] >> sinks[1];
+    sources[3] >> pipes[5] >> sinks[2];
+
+    MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
+    
+    sources[1].stall(&stallers[0]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[0].getThroughStaller(), nullptr);
+    EXPECT_FALSE(pipes[1].isStalled());
+    EXPECT_FALSE(pipes[2].isStalled());
+    EXPECT_FALSE(pipes[4].isStalled());
+    EXPECT_FALSE(pipes[5].isStalled());
+
+    sources[2].stall(&stallers[1]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[4].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[1].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[4].getThroughStaller(), nullptr);
+    EXPECT_FALSE(pipes[2].isStalled());
+    EXPECT_FALSE(pipes[5].isStalled());
+
+    sources[3].stall(&stallers[2]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[4].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[5].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[1].getThroughStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[4].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+}
+
+TEST(MIDI_Pipes, stallFromThroughInAndThroughOutUnlockMiddle) {
+    StrictMock<MockMIDI_Sink> sinks[3];
+    MIDI_Pipe pipes[6];
+    TrueMIDI_Source sources[4];
+
+    sources[0] >> pipes[0] >> sinks[0];
+    sources[0] >> pipes[1] >> sinks[1];
+    sources[0] >> pipes[2] >> sinks[2];
+
+    sources[1] >> pipes[3] >> sinks[0];
+    sources[2] >> pipes[4] >> sinks[1];
+    sources[3] >> pipes[5] >> sinks[2];
+
+    MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
+    
+    // Same as test above
+    sources[1].stall(&stallers[0]);
+    sources[2].stall(&stallers[1]);
+    sources[3].stall(&stallers[2]);
+
+    sources[2].unstall(&stallers[1]);
+    // Should unlock pipe[4] sink,
+    //        unlock pipe[1] sink
+    //        change pipe[0] staller from staller[1] to staller[2]
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[5].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[1].getThroughStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), nullptr);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+    EXPECT_FALSE(pipes[4].isStalled());
+
+    // Unstalling should be idempotent
+    sources[2].unstall(&stallers[1]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[5].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[1].getThroughStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), nullptr);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+    EXPECT_FALSE(pipes[4].isStalled());
+
+    // Lock it again to make sure unlocking was reversible
+    sources[2].stall(&stallers[1]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[4].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[5].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[1].getThroughStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[4].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+
+    // Stalling should be idempotent
+    sources[2].stall(&stallers[1]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[4].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[5].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[1].getThroughStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[4].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+
+    sources[2].unstall(&stallers[1]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[5].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[1].getThroughStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), nullptr);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+    EXPECT_FALSE(pipes[4].isStalled());
+
+    sources[3].unstall(&stallers[2]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[0].getThroughStaller(), nullptr);
+    EXPECT_FALSE(pipes[1].isStalled());
+    EXPECT_FALSE(pipes[2].isStalled());
+    EXPECT_FALSE(pipes[4].isStalled());
+    EXPECT_FALSE(pipes[5].isStalled());
+
+    sources[1].unstall(&stallers[0]);
+    EXPECT_FALSE(pipes[0].isStalled());
+    EXPECT_FALSE(pipes[1].isStalled());
+    EXPECT_FALSE(pipes[2].isStalled());
+    EXPECT_FALSE(pipes[3].isStalled());
+    EXPECT_FALSE(pipes[4].isStalled());
+    EXPECT_FALSE(pipes[5].isStalled());
+}
+
+TEST(MIDI_Pipes, stallFromThroughInAndThroughOutUnlockLast) {
+    StrictMock<MockMIDI_Sink> sinks[3];
+    MIDI_Pipe pipes[6];
+    TrueMIDI_Source sources[4];
+
+    sources[0] >> pipes[0] >> sinks[0];
+    sources[0] >> pipes[1] >> sinks[1];
+    sources[0] >> pipes[2] >> sinks[2];
+
+    sources[1] >> pipes[3] >> sinks[0];
+    sources[2] >> pipes[4] >> sinks[1];
+    sources[3] >> pipes[5] >> sinks[2];
+
+    MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
+    
+    // Same as test above
+    sources[1].stall(&stallers[0]);
+    sources[2].stall(&stallers[1]);
+    sources[3].stall(&stallers[2]);
+
+    sources[3].unstall(&stallers[2]);
+    // Should unlock pipe[5] sink,
+    //        unlock pipe[2] sink
+    //        unlock pipe[1] through
+    //        keep pipe[0] through
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[4].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), nullptr);
+    EXPECT_EQ(pipes[1].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[4].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+    EXPECT_FALSE(pipes[5].isStalled());
+
+    // Unstalling should be idempotent
+    sources[3].unstall(&stallers[2]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[4].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), nullptr);
+    EXPECT_EQ(pipes[1].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[4].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+    EXPECT_FALSE(pipes[5].isStalled());
+
+    // Lock it again to make sure unlocking was reversible
+    sources[3].stall(&stallers[2]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[4].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[5].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[1].getThroughStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[4].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+
+    // Stalling should be idempotent
+    sources[3].stall(&stallers[2]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[4].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[5].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[1].getThroughStaller(), &stallers[2]);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[4].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+
+    sources[3].unstall(&stallers[2]);
+    EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
+    EXPECT_EQ(pipes[4].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), nullptr);
+    EXPECT_EQ(pipes[1].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[3].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[4].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+    EXPECT_FALSE(pipes[5].isStalled());
+
+    sources[1].unstall(&stallers[0]);
+    EXPECT_EQ(pipes[0].getSinkStaller(), nullptr);
+    EXPECT_EQ(pipes[4].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[1].getSinkStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[0].getThroughStaller(), &stallers[1]);
+    EXPECT_EQ(pipes[2].getSinkStaller(), nullptr);
+    EXPECT_EQ(pipes[1].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[4].getThroughStaller(), nullptr);
+    EXPECT_EQ(pipes[2].getThroughStaller(), nullptr);
+    EXPECT_FALSE(pipes[3].isStalled());
+    EXPECT_FALSE(pipes[5].isStalled());
+
+    sources[2].unstall(&stallers[1]);
+    EXPECT_FALSE(pipes[0].isStalled());
+    EXPECT_FALSE(pipes[1].isStalled());
+    EXPECT_FALSE(pipes[2].isStalled());
+    EXPECT_FALSE(pipes[3].isStalled());
+    EXPECT_FALSE(pipes[4].isStalled());
+    EXPECT_FALSE(pipes[5].isStalled());
 }
 
 TEST(MIDI_PipeFactory, notEnoughPipes) {

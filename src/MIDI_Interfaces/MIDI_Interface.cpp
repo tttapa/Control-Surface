@@ -33,7 +33,7 @@ MIDI_Interface *MIDI_Interface::DefaultMIDI_Interface = nullptr;
 // Handling incoming MIDI events
 
 bool MIDI_Interface::onChannelMessage(ChannelMessage message) {
-    handleStaller();
+    handleStallers();
     sourceMIDItoPipe(message);
     if (callbacks)
         callbacks->onChannelMessage(*this, message);
@@ -41,7 +41,7 @@ bool MIDI_Interface::onChannelMessage(ChannelMessage message) {
 }
 
 bool MIDI_Interface::onSysExMessage(SysExMessage message) {
-    handleStaller();
+    handleStallers();
     sourceMIDItoPipe(message);
     if (callbacks)
         callbacks->onSysExMessage(*this, message);

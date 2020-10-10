@@ -162,15 +162,17 @@ MIDIStaller *MIDI_Source::getStaller() const {
 
 void MIDI_Source::assertNotStalled() const {
     if (isStalled()) {
-        auto stallername = MIDIStaller::getNameNull(sinkPipe->staller);
+        auto staller = sinkPipe->sink_staller ? sinkPipe->sink_staller
+                                              : sinkPipe->through_staller;
+        auto stallername = MIDIStaller::getNameNull(staller);
         FATAL_ERROR(F("MIDI source stalled by ") << stallername, 0x7281);
         (void)stallername;
     }
 }
 
-void MIDI_Source::handleStaller() const {
+void MIDI_Source::handleStallers() const {
     if (hasSinkPipe())
-        sinkPipe->handleStaller();
+        sinkPipe->handleStallers();
 }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -223,79 +225,111 @@ void MIDI_Pipe::disconnect() {
 MIDI_Pipe::~MIDI_Pipe() { disconnect(); }
 
 void MIDI_Pipe::stallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
-    if (!isUnstalledOrStalledBy(cause)) {
+    if (!sinkIsUnstalledOrStalledBy(cause)) {
         FATAL_ERROR(F("Cannot stall pipe from ")
                         << MIDIStaller::getNameNull(cause)
                         << F(" because pipe is already stalled by ")
-                        << MIDIStaller::getNameNull(staller),
+                        << MIDIStaller::getNameNull(sink_staller),
                     0x6665);
     }
-    this->staller = cause;
+    sink_staller = cause;
     if (hasThroughOut() && stallsrc == source)
         throughOut->stallDownstream(cause, this);
     if (hasSink())
         sink->stallDownstream(cause, this);
-    if (hasSource() && source != stallsrc)
+    if (hasSource() && source != stallsrc) {
+        // If our through output is stalled, that means our upstream is stalled
+        // as well by this staller. Unstall it first, and replace it by the new
+        // staller
+        if (through_staller != nullptr)
+            source->unstallUpstream(through_staller, this);
         source->stallUpstream(cause, this);
+    }
     if (hasThroughIn() && throughIn != stallsrc)
         throughIn->stallUpstream(cause, this);
 }
 
 void MIDI_Pipe::stallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) {
-    if (!isUnstalledOrStalledBy(cause)) {
-        FATAL_ERROR(F("Cannot stall pipe from ")
-                        << MIDIStaller::getNameNull(cause)
-                        << F(" because pipe is already stalled by ")
-                        << MIDIStaller::getNameNull(staller),
-                    0x6666);
+    if (stallsrc == sink) {
+        if (!sinkIsUnstalledOrStalledBy(cause)) {
+            FATAL_ERROR(F("Cannot stall pipe from ")
+                            << MIDIStaller::getNameNull(cause)
+                            << F(" because pipe is already stalled by ")
+                            << MIDIStaller::getNameNull(sink_staller),
+                        0x6666);
+        }
+        sink_staller = cause;
+        if (hasSource())
+            source->stallUpstream(cause, this);
+        if (hasThroughIn())
+            throughIn->stallUpstream(cause, this);
+    } else {
+        if (through_staller == nullptr) {
+            through_staller = cause;
+            if (hasSource())
+                source->stallUpstream(cause, this);
+        }
     }
-    this->staller = cause;
-    if (hasSource())
-        source->stallUpstream(cause, this);
-    if (hasThroughIn() && stallsrc == sink)
-        throughIn->stallUpstream(cause, this);
 }
 
 void MIDI_Pipe::unstallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
-    if (!isUnstalledOrStalledBy(cause)) {
+    if (!sinkIsUnstalledOrStalledBy(cause)) {
         FATAL_ERROR(F("Cannot unstall pipe from ")
                         << MIDIStaller::getNameNull(cause)
                         << F(" because pipe is stalled by ")
-                        << MIDIStaller::getNameNull(staller),
+                        << MIDIStaller::getNameNull(sink_staller),
                     0x6655);
     }
-    this->staller = nullptr;
+    this->sink_staller = nullptr;
     if (hasThroughOut() && stallsrc == source)
         throughOut->unstallDownstream(cause, this);
     if (hasSink())
         sink->unstallDownstream(cause, this);
-    if (hasSource() && source != stallsrc)
+    if (hasSource() && source != stallsrc) {
         source->unstallUpstream(cause, this);
+        // If the through output of this pipe is stalled, we cannot just unstall
+        // our upstream, we have to update it our through output staller
+        if (through_staller != nullptr)
+            source->stallUpstream(through_staller, this);
+    }
     if (hasThroughIn() && throughIn != stallsrc)
         throughIn->unstallUpstream(cause, this);
 }
 
 void MIDI_Pipe::unstallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) {
-    if (!isUnstalledOrStalledBy(cause)) {
-        FATAL_ERROR(F("Cannot unstall pipe from ")
-                        << MIDIStaller::getNameNull(cause)
-                        << F(" because pipe is stalled by ")
-                        << MIDIStaller::getNameNull(staller),
-                    0x6656);
+    if (stallsrc == sink) {
+        if (cause != sink_staller) {
+            FATAL_ERROR(F("Cannot unstall pipe from ")
+                            << MIDIStaller::getNameNull(cause)
+                            << F(" because pipe is stalled by ")
+                            << MIDIStaller::getNameNull(sink_staller),
+                        0x6656);
+        }
+        sink_staller = nullptr;
+        if (hasSource())
+            source->unstallUpstream(cause, this);
+        if (hasThroughIn())
+            throughIn->unstallUpstream(cause, this);
+    } else {
+        if (cause == through_staller) {
+            through_staller = nullptr;
+            if (hasSource())
+                source->unstallUpstream(cause, this);
+        }
     }
-    this->staller = nullptr;
-    if (hasSource())
-        source->unstallUpstream(cause, this);
-    if (hasThroughIn() && stallsrc == sink)
-        throughIn->unstallUpstream(cause, this);
 }
 
-void MIDI_Pipe::handleStaller() const {
-    if (staller == nullptr)
+void MIDI_Pipe::handleStallers() const {
+    if (!isStalled())
         return;
-    if (staller == eternal_stall)
+    if (sink_staller == eternal_stall || through_staller == eternal_stall)
         FATAL_ERROR(F("Unable to unstall pipe (eternal stall)"), 0x4827);
-    staller->handleStall();
+    while(isStalled()) {
+        if (sink_staller)
+            sink_staller->handleStall();
+        if (through_staller)
+            through_staller->handleStall();
+    }
 }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //

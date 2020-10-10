@@ -165,7 +165,7 @@ class MIDI_Source {
 
     /// Give the code that is stalling the MIDI sink pipe the opportunity to do 
     /// its job and unstall the pipe.
-    void handleStaller() const;
+    void handleStallers() const;
 
     /// @}
 
@@ -420,15 +420,21 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
 
     
   public:
-    bool isStalled() const { return staller != nullptr; }
-    MIDIStaller *getStaller() const { return staller; }
-    bool isUnstalledOrStalledBy(MIDIStaller *cause) {
-        return staller == nullptr || staller == cause;
+    bool isStalled() const { 
+        return sink_staller != nullptr || through_staller != nullptr; 
+    }
+    MIDIStaller *getSinkStaller() const { return sink_staller; }
+    MIDIStaller *getThroughStaller() const { return through_staller; }
+    bool sinkIsUnstalledOrStalledBy(MIDIStaller *cause) {
+        return sink_staller == nullptr || sink_staller == cause;
+    }
+    bool throughIsUnstalledOrStalledBy(MIDIStaller *cause) {
+        return through_staller == nullptr || through_staller == cause;
     }
 
     /// Give the code that is stalling the MIDI pipe the opportunity to do 
     /// its job and unstall the pipe.
-    void handleStaller() const;
+    void handleStallers() const;
 
   public:
     /// Disconnect this pipe from all other pipes, sources and sinks. If the
@@ -490,7 +496,8 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     MIDI_Source *source = nullptr;
     MIDI_Pipe *&throughOut = MIDI_Source::sinkPipe;
     MIDI_Pipe *&throughIn = MIDI_Sink::sourcePipe;
-    MIDIStaller *staller = nullptr;
+    MIDIStaller *sink_staller = nullptr;
+    MIDIStaller *through_staller = nullptr;
 
     friend class MIDI_Sink;
     friend class MIDI_Source;
