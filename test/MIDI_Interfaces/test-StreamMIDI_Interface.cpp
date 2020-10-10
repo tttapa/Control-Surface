@@ -1,5 +1,5 @@
-#include <MIDI_Interfaces/SerialMIDI_Interface.hpp>
 #include <MIDI_Interfaces/MIDI_Callbacks.hpp>
+#include <MIDI_Interfaces/SerialMIDI_Interface.hpp>
 #include <gmock-wrapper.h>
 #include <gtest-wrapper.h>
 #include <queue>
@@ -71,6 +71,14 @@ TEST(StreamMIDI_Interface, send2B) {
     EXPECT_EQ(stream.sent, expected);
 }
 
+TEST(StreamMIDI_Interface, sendRealTime) {
+    TestStream stream;
+    StreamMIDI_Interface midi = stream;
+    midi.sendRealTime(MIDIMessageType::TIMING_CLOCK);
+    u8vec expected = {0xF8};
+    EXPECT_EQ(stream.sent, expected);
+}
+
 TEST(StreamMIDI_Interface, SysExSend8B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
@@ -123,7 +131,7 @@ using SysExVector = std::vector<uint8_t>;
 TEST(StreamMIDI_Interface, readSysEx) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
-    for (auto v : {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7, 0x00})
+    for (auto v : {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7})
         stream.toRead.push(v);
     EXPECT_EQ(midi.read(), MIDIReadEvent::SYSEX_MESSAGE);
     SysExMessage sysex = midi.getSysExMessage();
@@ -138,33 +146,77 @@ TEST(StreamMIDI_Interface, readSysEx) {
     EXPECT_EQ(sysex.cable, 0);
 }
 
-TEST(StreamMIDI_Interface, readSysExUpdate) {
+TEST(StreamMIDI_Interface, readNoteUpdate) {
     class MockMIDI_Callbacks : public MIDI_Callbacks {
       public:
-        MOCK_METHOD(void, onChannelMessage, (MIDI_Interface &, ChannelMessage),
-                    (override));
+        MOCK_METHOD(void, onChannelMessage, (MIDI_Interface *, ChannelMessage),
+                    ());
         MOCK_METHOD(void, onSysExMessage, (MIDI_Interface &, SysExMessage),
                     (override));
-        MOCK_METHOD(void, onRealTimeMessage, (MIDI_Interface &, RealTimeMessage),
-                    (override));
+        MOCK_METHOD(void, onRealTimeMessage,
+                    (MIDI_Interface &, RealTimeMessage), (override));
+        void onChannelMessage(MIDI_Interface &midi, ChannelMessage m) override {
+            onChannelMessage(&midi, m);
+        }
     };
     MockMIDI_Callbacks callbacks;
     TestStream stream;
     StreamMIDI_Interface midi = stream;
     midi.setCallbacks(callbacks);
     midi.begin();
-    for (auto v : {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7, 0x00})
+    for (auto v : {0x94, 0x12, 0x34})
         stream.toRead.push(v);
-    EXPECT_CALL(callbacks, onSysExMessage(testing::_, testing::_));
+    ChannelMessage expected = {0x94, 0x12, 0x34, 0};
+    EXPECT_CALL(callbacks, onChannelMessage(&midi, expected));
     midi.update();
-    SysExMessage sysex = midi.getSysExMessage();
-    const SysExVector result = {
-        sysex.data,
-        sysex.data + sysex.length,
+}
+
+TEST(StreamMIDI_Interface, readSysExUpdate) {
+    class MockMIDI_Callbacks : public MIDI_Callbacks {
+      public:
+        MOCK_METHOD(void, onChannelMessage, (MIDI_Interface &, ChannelMessage),
+                    (override));
+        MOCK_METHOD(void, onSysExMessage, (MIDI_Interface *, SysExMessage), ());
+        MOCK_METHOD(void, onRealTimeMessage,
+                    (MIDI_Interface &, RealTimeMessage), (override));
+        void onSysExMessage(MIDI_Interface &midi, SysExMessage m) override {
+            onSysExMessage(&midi, m);
+        }
     };
-    const SysExVector expected = {
-        0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7,
+    MockMIDI_Callbacks callbacks;
+    TestStream stream;
+    StreamMIDI_Interface midi = stream;
+    midi.setCallbacks(callbacks);
+    midi.begin();
+    uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7};
+    for (auto v : sysex)
+        stream.toRead.push(v);
+    SysExMessage expected = {sysex, 8, 0};
+    EXPECT_CALL(callbacks, onSysExMessage(&midi, expected));
+    midi.update();
+}
+
+TEST(StreamMIDI_Interface, readRealTimeUpdate) {
+    class MockMIDI_Callbacks : public MIDI_Callbacks {
+      public:
+        MOCK_METHOD(void, onChannelMessage, (MIDI_Interface &, ChannelMessage),
+                    (override));
+        MOCK_METHOD(void, onSysExMessage, (MIDI_Interface &, SysExMessage),
+                    (override));
+        MOCK_METHOD(void, onRealTimeMessage,
+                    (MIDI_Interface *, RealTimeMessage), ());
+        void onRealTimeMessage(MIDI_Interface &midi,
+                               RealTimeMessage m) override {
+            onRealTimeMessage(&midi, m);
+        }
     };
-    EXPECT_EQ(result, expected);
-    EXPECT_EQ(sysex.cable, 0);
+    MockMIDI_Callbacks callbacks;
+    TestStream stream;
+    StreamMIDI_Interface midi = stream;
+    midi.setCallbacks(callbacks);
+    midi.begin();
+    stream.toRead.push(0xF8);
+    RealTimeMessage expected = {0xF8, 0};
+    EXPECT_CALL(callbacks, onRealTimeMessage(&midi, expected));
+    midi.update();
 }

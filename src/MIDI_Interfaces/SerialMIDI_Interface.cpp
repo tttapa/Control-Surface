@@ -32,7 +32,7 @@ void StreamMIDI_Interface::update() {
 bool StreamMIDI_Interface::dispatchMIDIEvent(MIDIReadEvent event) {
     switch (event) {
         case MIDIReadEvent::NO_MESSAGE: 
-            return true;
+            return true; // LCOV_EXCL_LINE
         case MIDIReadEvent::CHANNEL_MESSAGE:
             return onChannelMessage(getChannelMessage());
         case MIDIReadEvent::SYSEX_MESSAGE: 
@@ -40,7 +40,7 @@ bool StreamMIDI_Interface::dispatchMIDIEvent(MIDIReadEvent event) {
         case MIDIReadEvent::REALTIME_MESSAGE: 
             return onRealTimeMessage(getRealTimeMessage());
         default: 
-            return true;
+            return true; // LCOV_EXCL_LINE
     }
 }
 

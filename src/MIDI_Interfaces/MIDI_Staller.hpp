@@ -24,15 +24,20 @@ struct MIDIStaller {
 
 /// Allocate a MIDIStaller executes the given callback and deletes itself when 
 /// @ref MIDIStaller::handleStall is called.
+/// @note   Don't lose the pointer! If you never call `handleStall`, the memory
+///         won't be deallocated.
 template <class Callback>
 auto makeMIDIStaller(Callback &&callback) -> MIDIStaller * {
+
     struct AutoCleanupMIDIStaller : MIDIStaller {
         AutoCleanupMIDIStaller(Callback &&callback) 
             : callback(std::forward<Callback>(callback)) {}
+
         void handleStall() override {
             callback(this);
             delete this;
         }
+
         Callback callback;
     };
     return new AutoCleanupMIDIStaller(std::forward<Callback>(callback));

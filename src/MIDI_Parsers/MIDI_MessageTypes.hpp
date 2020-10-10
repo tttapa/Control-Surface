@@ -180,8 +180,8 @@ struct SysExMessage {
 
     bool operator==(SysExMessage other) const {
         return this->length == other.length &&
-               this->data == other.data && // TODO: compare contents or pointer?
-               this->cable == other.cable;
+               this->cable == other.cable && 
+               memcmp(this->data, other.data, length) == 0;
     }
     bool operator!=(SysExMessage other) const { return !(*this == other); }
 
