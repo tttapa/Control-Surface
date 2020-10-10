@@ -2,6 +2,7 @@
 
 #include <AH/Filters/EMA.hpp>
 #include <algorithm>
+#include <array>
 #include <cmath>
 
 TEST(EMA, EMA) {

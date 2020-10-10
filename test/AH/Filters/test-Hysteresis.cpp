@@ -2,6 +2,7 @@
 
 #include <AH/Filters/Hysteresis.hpp>
 #include <algorithm>
+#include <array>
 
 TEST(Hysteresis, increasing) {
     using namespace std;

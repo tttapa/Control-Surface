@@ -195,10 +195,13 @@ class ArraySlice {
         using reference = ElementRefType;
         using iterator_category = std::random_access_iterator_tag;
 
-        bool operator!=(Iterator rhs) const { return ptr != rhs.ptr; }
         bool operator==(Iterator rhs) const { return ptr == rhs.ptr; }
+        bool operator!=(Iterator rhs) const { return ptr != rhs.ptr; }
 
         reference operator*() const { return *ptr; }
+        pointer operator->() const { return ptr; }
+
+        reference operator[](difference_type n) const { return ptr[n]; }
 
         Iterator &operator++() {
             Reverse ? --ptr : ++ptr;
@@ -207,6 +210,28 @@ class ArraySlice {
 
         Iterator &operator--() {
             Reverse ? ++ptr : --ptr;
+            return *this;
+        }
+
+        Iterator operator++(int) {
+            Iterator ret = *this;
+            ++(*this);
+            return ret;
+        }
+
+        Iterator operator--(int) {
+            Iterator ret = *this;
+            --(*this);
+            return ret;
+        }
+
+        Iterator &operator+=(difference_type n) {
+            Reverse ? (ptr -= n) : (ptr += n);
+            return *this;
+        }
+
+        Iterator &operator-=(difference_type n) {
+            Reverse ? (ptr += n) : (ptr -= n);
             return *this;
         }
 
@@ -226,8 +251,16 @@ class ArraySlice {
             return Reverse ? rhs.ptr < ptr : ptr < rhs.ptr;
         }
 
+        bool operator>(Iterator rhs) const {
+            return rhs < *this;
+        }
+
         bool operator<=(Iterator rhs) const {
-            return Reverse ? rhs.ptr <= ptr : ptr <= rhs.ptr;
+            return !(*this > rhs);
+        }
+
+        bool operator>=(Iterator rhs) const {
+            return !(*this < rhs);
         }
 
       private:
@@ -301,6 +334,13 @@ ArraySlice<T, N, Reverse, Const>::slice() const {
     static_assert(Start < N, "");
     static_assert(End < N, "");
     return &(*this)[Start];
+}
+
+template <class T, size_t N, bool Reverse, bool Const>
+typename ArraySlice<T, N, Reverse, Const>::Iterator
+operator+(typename ArraySlice<T, N, Reverse, Const>::Iterator::difference_type n,
+          typename ArraySlice<T, N, Reverse, Const>::Iterator a) {
+    return a + n;
 }
 
 // Equality ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
