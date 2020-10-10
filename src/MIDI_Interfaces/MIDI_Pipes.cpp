@@ -1,4 +1,5 @@
 #include "MIDI_Pipes.hpp"
+#include "MIDI_Staller.hpp"
 #include <AH/Error/Error.hpp>
 #include <AH/STL/utility>
 
@@ -52,16 +53,20 @@ MIDI_Sink::MIDI_Sink(MIDI_Sink &&other)
     }
 }
 
+void MIDI_Sink::swap(MIDI_Sink &a, MIDI_Sink &b) {
+    std::swap(a.sourcePipe, b.sourcePipe);
+    if (a.hasSourcePipe()) {
+        a.sourcePipe->disconnectSink();
+        a.sourcePipe->connectSink(&a);
+    }
+    if (b.hasSourcePipe()) {
+        b.sourcePipe->disconnectSink();
+        b.sourcePipe->connectSink(&b);
+    }
+}
+
 MIDI_Sink &MIDI_Sink::operator=(MIDI_Sink &&other) {
-    std::swap(this->sourcePipe, other.sourcePipe);
-    if (this->hasSourcePipe()) {
-        this->sourcePipe->disconnectSink();
-        this->sourcePipe->connectSink(this);
-    }
-    if (other.hasSourcePipe()) {
-        other.sourcePipe->disconnectSink();
-        other.sourcePipe->connectSink(this);
-    }
+    swap(*this, other);
     return *this;
 }
 
@@ -105,16 +110,20 @@ MIDI_Source::MIDI_Source(MIDI_Source &&other)
     }
 }
 
+void MIDI_Source::swap(MIDI_Source &a, MIDI_Source &b) {
+    std::swap(a.sinkPipe, b.sinkPipe);
+    if (a.hasSinkPipe()) {
+        a.sinkPipe->disconnectSource();
+        a.sinkPipe->connectSource(&a);
+    }
+    if (b.hasSinkPipe()) {
+        b.sinkPipe->disconnectSource();
+        b.sinkPipe->connectSource(&b);
+    }
+}
+
 MIDI_Source &MIDI_Source::operator=(MIDI_Source &&other) {
-    std::swap(this->sinkPipe, other.sinkPipe);
-    if (this->hasSinkPipe()) {
-        this->sinkPipe->disconnectSource();
-        this->sinkPipe->connectSource(this);
-    }
-    if (other.hasSinkPipe()) {
-        other.sinkPipe->disconnectSource();
-        other.sinkPipe->connectSource(this);
-    }
+    swap(*this, other);
     return *this;
 }
 
@@ -123,19 +132,19 @@ MIDI_Source::~MIDI_Source() { disconnectSinkPipes(); }
 void MIDI_Source::sourceMIDItoPipe(ChannelMessage msg) {
     if (sinkPipe != nullptr) {
         handleStallers();
-        sinkPipe->pipeMIDI(msg);
+        sinkPipe->acceptMIDIfromSource(msg);
     }
 }
 void MIDI_Source::sourceMIDItoPipe(SysExMessage msg) {
     if (sinkPipe != nullptr) {
         handleStallers();
-        sinkPipe->pipeMIDI(msg);
+        sinkPipe->acceptMIDIfromSource(msg);
     }
 }
 void MIDI_Source::sourceMIDItoPipe(RealTimeMessage msg) {
     if (sinkPipe != nullptr) {
         // Always send write to pipe, don't check if it's stalled or not
-        sinkPipe->pipeMIDI(msg);
+        sinkPipe->acceptMIDIfromSource(msg);
     }
 }
 
@@ -161,14 +170,8 @@ MIDIStaller *MIDI_Source::getStaller() const {
     return nullptr;
 }
 
-void MIDI_Source::assertNotStalled() const {
-    if (isStalled()) {
-        auto staller = sinkPipe->sink_staller ? sinkPipe->sink_staller
-                                              : sinkPipe->through_staller;
-        auto stallername = MIDIStaller::getNameNull(staller);
-        FATAL_ERROR(F("MIDI source stalled by ") << stallername, 0x7281);
-        (void)stallername;
-    }
+const char *MIDI_Source::getStallerName() const {
+    return MIDIStaller::getNameNull(getStaller());
 }
 
 void MIDI_Source::handleStallers() const {
@@ -232,7 +235,7 @@ void MIDI_Pipe::stallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
                         << F(" because pipe is already stalled by ")
                         << MIDIStaller::getNameNull(sink_staller),
                     0x6665);
-    }
+    } // LCOV_EXCL_LINE
     sink_staller = cause;
     if (hasThroughOut() && stallsrc == source)
         throughOut->stallDownstream(cause, this);
@@ -252,13 +255,8 @@ void MIDI_Pipe::stallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
 
 void MIDI_Pipe::stallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) {
     if (stallsrc == sink) {
-        if (!sinkIsUnstalledOrStalledBy(cause)) {
-            FATAL_ERROR(F("Cannot stall pipe from ")
-                            << MIDIStaller::getNameNull(cause)
-                            << F(" because pipe is already stalled by ")
-                            << MIDIStaller::getNameNull(sink_staller),
-                        0x6666);
-        }
+        // This cannot be a different cause, because then our sink would
+        // already have caught it in stallDownstream().
         sink_staller = cause;
         if (hasSource())
             source->stallUpstream(cause, this);
@@ -279,8 +277,8 @@ void MIDI_Pipe::unstallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
                         << MIDIStaller::getNameNull(cause)
                         << F(" because pipe is stalled by ")
                         << MIDIStaller::getNameNull(sink_staller),
-                    0x6655);
-    }
+                    0x6666);
+    } // LCOV_EXCL_LINE
     this->sink_staller = nullptr;
     if (hasThroughOut() && stallsrc == source)
         throughOut->unstallDownstream(cause, this);
@@ -299,13 +297,8 @@ void MIDI_Pipe::unstallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
 
 void MIDI_Pipe::unstallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) {
     if (stallsrc == sink) {
-        if (cause != sink_staller) {
-            FATAL_ERROR(F("Cannot unstall pipe from ")
-                            << MIDIStaller::getNameNull(cause)
-                            << F(" because pipe is stalled by ")
-                            << MIDIStaller::getNameNull(sink_staller),
-                        0x6656);
-        }
+        // This cannot be a different cause, because then our sink would
+        // already have caught it in unstallDownstream().
         sink_staller = nullptr;
         if (hasSource())
             source->unstallUpstream(cause, this);
@@ -320,12 +313,29 @@ void MIDI_Pipe::unstallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) {
     }
 }
 
+const char *MIDI_Pipe::getSinkStallerName() const {
+    return MIDIStaller::getNameNull(sink_staller);
+}
+
+const char *MIDI_Pipe::getThroughStallerName() const {
+    return MIDIStaller::getNameNull(through_staller);
+}
+
+MIDIStaller *MIDI_Pipe::getStaller() const {
+    return sink_staller ? sink_staller : through_staller;
+}
+
+const char *MIDI_Pipe::getStallerName() const {
+    return MIDIStaller::getNameNull(getStaller());
+}
+
 void MIDI_Pipe::handleStallers() const {
     if (!isStalled())
         return;
     if (sink_staller == eternal_stall || through_staller == eternal_stall)
         FATAL_ERROR(F("Unable to unstall pipe (eternal stall)"), 0x4827);
-    while(isStalled()) {
+    uint8_t iterations = 10;
+    while(isStalled() && iterations-- > 0) {
         if (sink_staller)
             sink_staller->handleStall();
         if (through_staller)

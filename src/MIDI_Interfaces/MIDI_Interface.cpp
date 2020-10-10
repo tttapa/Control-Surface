@@ -14,16 +14,16 @@ MIDI_Interface::~MIDI_Interface() {
 
 void MIDI_Interface::setAsDefault() { DefaultMIDI_Interface = this; }
 
-MIDI_Interface *MIDI_Interface::getDefault() {
 #ifndef ARDUINO
-    return DefaultMIDI_Interface == nullptr
-               ? dynamic_cast<MIDI_Interface *>(updatables.getLast())
-               : DefaultMIDI_Interface;
+#define DOWN_CAST dynamic_cast
 #else
-    return DefaultMIDI_Interface == nullptr
-               ? static_cast<MIDI_Interface *>(updatables.getLast())
-               : DefaultMIDI_Interface;
+#define DOWN_CAST static_cast
 #endif
+
+MIDI_Interface *MIDI_Interface::getDefault() {
+    return DefaultMIDI_Interface == nullptr
+               ? DOWN_CAST<MIDI_Interface *>(updatables.getLast())
+               : DefaultMIDI_Interface;
 }
 
 MIDI_Interface *MIDI_Interface::DefaultMIDI_Interface = nullptr;

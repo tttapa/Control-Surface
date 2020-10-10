@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MIDI_Pipes.hpp"
+#include "MIDI_Staller.hpp"
 #include "MIDI_Sender.hpp"
 #include <AH/Containers/Updatable.hpp>
 #include <Def/Def.hpp>
