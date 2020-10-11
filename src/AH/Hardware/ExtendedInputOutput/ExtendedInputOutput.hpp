@@ -75,6 +75,10 @@ class ExtendedIOElement;
  *          that can be used with extended IO pin numbers.
  */
 namespace ExtIO {
+
+/// @addtogroup AH_ExtIO
+/// @{
+
 /**
  * @brief   Find the IO element of a given extended IO pin number. 
  * 
@@ -163,6 +167,8 @@ void analogWriteBuffered(int pin, int val);
 /// A buffered ExtIO version of the Arduino function
 /// @see   ExtendedIOElement::analogWriteBuffered
 void analogWriteBuffered(pin_t pin, int val);
+
+/// @}
 
 } // namespace ExtIO
 
