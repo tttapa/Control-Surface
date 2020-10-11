@@ -1,3 +1,16 @@
+/**
+ * @file
+ * @brief	Definition of Vec2f and Vec3f.
+ * 
+ * Vec2fs can be added, subtracted, multiplied (dot product) and normalized.
+ * It also has an implementation of the following operators:
+ *      "+", "+=", "-", "-=", "*" (vector-vector);
+ *      "*", "*=", "/", "/=" (vector-scalar);
+ *      "==", "!=" (equality);
+ *      "*" (scalar-vector);
+ *      "<<" (printing).
+ * The same applies for Vec3fs.
+ */
 #pragma once
 
 #include <AH/Settings/Warnings.hpp>
@@ -14,20 +27,6 @@ BEGIN_AH_NAMESPACE
 
 /// @addtogroup  math-types
 /// @{
-
-/**
- * @file
- * @brief	Definition of Vec2f and Vec3f.
- * 
- * Vec2fs can be added, subtracted, multiplied (dot product) and normalized.
- * It also has an implementation of the following operators:
- *      "+", "+=", "-", "-=", "*" (vector-vector);
- *      "*", "*=", "/", "/=" (vector-scalar);
- *      "==", "!=" (equality);
- *      "*" (scalar-vector);
- *      "<<" (printing).
- * The same applies for Vec3fs.
- */
 
 /**
  * @brief   Type for 2D vectors of floating point numbers.

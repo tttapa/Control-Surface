@@ -11,11 +11,11 @@ AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE
 
-/// A function type that returns a time value.
-using timefunction = unsigned long (*)();
-
 /// @addtogroup    AH_Timing
 /// @{
+
+/// A function type that returns a time value.
+using timefunction = unsigned long (*)();
 
 /**
  * @brief   A class for easily managing timed events. A wrapper for "Blink 

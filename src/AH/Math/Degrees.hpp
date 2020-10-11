@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief	Conversions between radians and degrees.
+ */
 #pragma once
 
 #include <AH/Settings/Warnings.hpp>
@@ -9,11 +13,6 @@ BEGIN_AH_NAMESPACE
 
 /// @addtogroup AH_Math
 /// @{
-
-/**
- * @file
- * @brief	Conversions between radians and degrees.
- */
 
 /// Convert radians to degrees.
 template <class T>
