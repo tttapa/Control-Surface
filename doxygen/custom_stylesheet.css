@@ -102,6 +102,10 @@ div.navpath > ul {
 .directory td.desc {
     padding: 0.4em 0.5em 0.4em 0.5em;
 }
+/* Hide the "Detailed description" header */
+div.contents a#details + h2.groupheader {
+    display: none;
+}
 h2.memtitle, .memproto, .fieldtable th {
     background-color: #dde;
     background-image: none;
