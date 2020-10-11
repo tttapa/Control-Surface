@@ -6,7 +6,7 @@
 /**
  * @defgroup    AH_Math   Math Utilities
  * @brief   Mathematics helper functions. Min/max functions, functions to 
- *          uniformly increase the effective bid depth, etc.
+ *          uniformly increase the effective bit depth, etc.
  */
 /// @{
 
