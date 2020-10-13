@@ -5,6 +5,8 @@
 #include <AH/Math/FixArduinoMacros.hpp>
 
 #ifdef __AVR__
+#include <AH/Arduino-Wrapper.h>
+
 #include "Fallback/complex"
 #else
 #include <complex>
@@ -14,5 +16,6 @@
 
 template <typename Tp>
 Print &operator<<(Print &os, const std::complex<Tp> &x) {
+    USING_AH_NAMESPACE;
     return os << '(' << x.real() << ',' << x.imag() << ')';
 }

@@ -3,6 +3,8 @@
 #include <AH/Settings/NamespaceSettings.hpp>
 
 #ifdef __AVR__
+#include <AH/Arduino-Wrapper.h>
+
 #include "Fallback/memory"
 #else
 #include <memory>
