@@ -235,11 +235,14 @@ Print &printIntegral(Print &printer, T i) {
 }
 
 Print &operator<<(Print &p, HexDump h) {
+    auto temp_case = casePrintStream;
+    casePrintStream = UPPERCASE;
     while (h.length-- > 1) {
         printHex(p, *h.data++);
         p.print(' ');
     }
     printHex(p, *h.data++);
+    casePrintStream = temp_case;
     return p;
 }
 
@@ -248,7 +251,7 @@ Print &operator<<(Print &p, HexDump h) {
 std::ostream &operator<<(std::ostream &p, HexDump h) {
     auto hex_nibble_to_char = [](uint8_t nibble) -> char {
         nibble &= 0xF;
-        return nibble > 9 ? nibble - 10 + 'a' : nibble + '0';
+        return nibble > 9 ? nibble - 10 + 'A' : nibble + '0';
     };
     auto printHex = [&](std::ostream &p, uint8_t b) {
         p << hex_nibble_to_char(b >> 4) << hex_nibble_to_char(b);
