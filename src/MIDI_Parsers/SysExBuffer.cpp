@@ -1,37 +1,38 @@
 #include "SysExBuffer.hpp"
+#include <string.h>
 
 BEGIN_CS_NAMESPACE
 
 void SysExBuffer::start() {
-    SysExLength = 0; // if the previous message wasn't finished, overwrite it
+    length = 0; // if the previous message wasn't finished, overwrite it
     receiving = true;
-    DEBUG(F("Start SysEx"));
 }
 
 void SysExBuffer::end() {
     receiving = false;
-    DEBUG(F("End SysEx"));
 }
 
-bool SysExBuffer::add(uint8_t data) {
-    if (!hasSpaceLeft()) // if the buffer is full
-        return false;
-    SysExBuffer[SysExLength] = data; // add the data to the buffer
-    ++SysExLength;
-    return true;
+void SysExBuffer::add(uint8_t data) {
+    buffer[length] = data;
+    ++length;
 }
 
-bool SysExBuffer::hasSpaceLeft() const {
-    bool avail = SysExLength < SYSEX_BUFFER_SIZE;
+void SysExBuffer::add(const uint8_t *data, uint8_t len) {
+    memcpy(buffer + length, data, len);
+    length += len;
+}
+
+bool SysExBuffer::hasSpaceLeft(uint8_t amount) const {
+    bool avail = length <= SYSEX_BUFFER_SIZE - amount;
     if (!avail)
-        DEBUG(F("SysEx buffer full"));
+        DEBUG(F("SysEx: Buffer full (") << amount << ')');
     return avail;
 }
 
 bool SysExBuffer::isReceiving() const { return receiving; }
 
-const uint8_t *SysExBuffer::getBuffer() const { return SysExBuffer; }
+const uint8_t *SysExBuffer::getBuffer() const { return buffer; }
 
-size_t SysExBuffer::getLength() const { return SysExLength; }
+size_t SysExBuffer::getLength() const { return length; }
 
 END_CS_NAMESPACE

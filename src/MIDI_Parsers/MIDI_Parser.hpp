@@ -17,33 +17,29 @@ enum class MIDIReadEvent : uint8_t {
     CHANNEL_MESSAGE = 1,  ///< A MIDI Channel message was received.
     SYSEX_MESSAGE = 2,    ///< A MIDI System Exclusive message was received.
     REALTIME_MESSAGE = 3, ///< A MIDI Real-Time message was received.
+    SYSEX_CHUNK = 4,      ///< An incomplete System Exclusive message.
 };
 
+/// Base class for MIDI parsers.
 class MIDI_Parser {
   public:
-    /** Get the latest MIDI channel message. */
+    /// Get the latest MIDI channel message.
     ChannelMessage getChannelMessage() const { return midimsg; }
-    /** Get the latest MIDI real-time message. */
+    /// Get the latest MIDI real-time message.
     RealTimeMessage getRealTimeMessage() const { return rtmsg; }
-#if !IGNORE_SYSEX
-    /** Get the latest SysEx message. */
-    virtual SysExMessage getSysExMessage() const = 0;
-#else
+#if IGNORE_SYSEX
+    /// Get the latest SysEx message.
     SysExMessage getSysExMessage() const { return {nullptr, 0, 0}; }
 #endif
-    /** Get the pointer to the SysEx data. */
-    const uint8_t *getSysExBuffer() const { return getSysExMessage().data; }
-    /** Get the length of the SysEx message. */
-    size_t getSysExLength() const { return getSysExMessage().length; }
 
   protected:
     ChannelMessage midimsg = {0xFF, 0x00, 0x00, 0x0};
     RealTimeMessage rtmsg = {0xFF, 0x0};
 
   public:
-    /** Check if the given byte is a MIDI header byte. */
+    /// Check if the given byte is a MIDI header/status byte.
     static bool isStatus(uint8_t data) { return data & (1 << 7); }
-    /** Check if the given byte is a MIDI data byte. */
+    /// Check if the given byte is a MIDI data byte.
     static bool isData(uint8_t data) { return (data & (1 << 7)) == 0; }
 };
 

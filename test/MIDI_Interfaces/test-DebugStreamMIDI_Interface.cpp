@@ -78,7 +78,7 @@ TEST(StreamDebugMIDI_Interface, SysExSend8B) {
     u8vec sysex = {0xF0, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0xF7};
     midi.send({sysex.data(), sysex.size(), CABLE_10});
     std::string expected =
-        "SysEx           \tF0 11 22 33 44 55 66 F7 \tCable: 10\r\n";
+        "SysEx           \tF0 11 22 33 44 55 66 F7\tCable: 10\r\n";
     std::string sentStr(stream.sent.begin(), stream.sent.end());
     EXPECT_EQ(sentStr, expected);
 }
@@ -88,8 +88,7 @@ TEST(StreamDebugMIDI_Interface, RealTimeSend) {
     StreamDebugMIDI_Interface midi = stream;
     Sequence seq;
     midi.send({0xF8, CABLE_10});
-    std::string expected =
-        "Real-Time: 0xF8\tCable: 10\r\n";
+    std::string expected = "Real-Time: 0xF8\tCable: 10\r\n";
     std::string sentStr(stream.sent.begin(), stream.sent.end());
     EXPECT_EQ(sentStr, expected);
 }

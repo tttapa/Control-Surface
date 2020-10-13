@@ -38,40 +38,33 @@ const static char *MIDIStatusTypeNames[] = {
 } // namespace DebugMIDIMessageNames
 
 MIDIReadEvent StreamDebugMIDI_Interface::read() {
-    while (stream.available() > 0) {
-        char data = stream.read();
+    return parser.pull(hexstream);
+}
 
-        if (isxdigit(data)) {
-            // if we receive a hexadecimal digit
-            data = tolower(data);
-            if (firstChar == '\0') {
-                firstChar = data;
-            } else if (secondChar == '\0') {
-                secondChar = data;
-            }
-        }
-        if (firstChar && secondChar) {
-            // if we received two hex characters
-            uint8_t midiByte =
-                hexCharToNibble(firstChar) << 4 | hexCharToNibble(secondChar);
-            firstChar = '\0';
-            secondChar = '\0';
-            MIDIReadEvent parseResult = parser.parse(midiByte);
-            if (parseResult != MIDIReadEvent::NO_MESSAGE)
-                return parseResult;
-        } else if (!isxdigit(data) && firstChar) {
-            // if we received one hex character followed by whitespace/other
-            uint8_t midiByte = hexCharToNibble(firstChar);
-            firstChar = '\0';
-            MIDIReadEvent parseResult = parser.parse(midiByte);
-            if (parseResult != MIDIReadEvent::NO_MESSAGE)
-                return parseResult;
-        } else {
-            // Ignore any characters other than whitespace and hexadecimal
-            // digits
-        }
+void StreamDebugMIDI_Interface::update() {
+    MIDIReadEvent event = read();
+    while (event != MIDIReadEvent::NO_MESSAGE) {
+        dispatchMIDIEvent(event);
+        event = read();
     }
-    return MIDIReadEvent::NO_MESSAGE;
+    // TODO: add logic to detect MIDI messages such as (N)RPN that span over
+    // multiple channel messages and that shouldn't be interrupted.
+    // For short messages such as (N)RPN, I suggest waiting with a timeout,
+    // for chunked SysEx, it's probably best to stall the pipe and return.
+}
+
+bool StreamDebugMIDI_Interface::dispatchMIDIEvent(MIDIReadEvent event) {
+    switch (event) {
+        case MIDIReadEvent::NO_MESSAGE: return true; // LCOV_EXCL_LINE
+        case MIDIReadEvent::CHANNEL_MESSAGE:
+            return onChannelMessage(getChannelMessage());
+        case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
+        case MIDIReadEvent::SYSEX_MESSAGE:
+            return onSysExMessage(getSysExMessage());
+        case MIDIReadEvent::REALTIME_MESSAGE:
+            return onRealTimeMessage(getRealTimeMessage());
+        default: return true; // LCOV_EXCL_LINE
+    }
 }
 
 void StreamDebugMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
@@ -80,11 +73,10 @@ void StreamDebugMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
     if (messageType >= 7)
         return;
     uint8_t c = header & 0x0F;
-    stream << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
-           << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
-           << F("\tData 2: 0x") << d2 << dec << F("\tCable: ") << (cn + 1)
-           << endl;
-    stream.flush();
+    getStream() << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
+                << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
+                << F("\tData 2: 0x") << d2 << dec << F("\tCable: ") << (cn + 1)
+                << endl;
 }
 
 void StreamDebugMIDI_Interface::sendImpl(uint8_t header, uint8_t d1,
@@ -93,25 +85,20 @@ void StreamDebugMIDI_Interface::sendImpl(uint8_t header, uint8_t d1,
     if (messageType >= 7)
         return;
     uint8_t c = header & 0x0F;
-    stream << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
-           << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
-           << dec << F("\tCable: ") << (cn + 1) << endl;
-    stream.flush();
+    getStream() << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
+                << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
+                << dec << F("\tCable: ") << (cn + 1) << endl;
 }
 
 void StreamDebugMIDI_Interface::sendImpl(const uint8_t *data, size_t length,
                                          uint8_t cn) {
-    stream << F("SysEx           \t") << hex << uppercase;
-    while (length-- > 0)
-        stream << (*data++) << ' ';
-    stream << dec << F("\tCable: ") << (cn + 1) << "\r\n";
-    stream.flush();
+    getStream() << F("SysEx           \t") << AH::HexDump(data, length)
+                << F("\tCable: ") << (cn + 1) << "\r\n";
 }
 
 void StreamDebugMIDI_Interface::sendImpl(uint8_t rt, uint8_t cn) {
-    stream << F("Real-Time: 0x") << hex << uppercase << rt << dec
-           << F("\tCable: ") << (cn + 1) << endl;
-    stream.flush();
+    getStream() << F("Real-Time: 0x") << hex << uppercase << rt << dec
+                << F("\tCable: ") << (cn + 1) << endl;
 }
 
 END_CS_NAMESPACE

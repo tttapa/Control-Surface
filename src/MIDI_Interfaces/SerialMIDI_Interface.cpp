@@ -1,4 +1,5 @@
 #include "SerialMIDI_Interface.hpp"
+#include <MIDI_Parsers/StreamPuller.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -7,14 +8,7 @@ BEGIN_CS_NAMESPACE
 // Reading MIDI
 
 MIDIReadEvent StreamMIDI_Interface::read() {
-    // TODO: prevent hanging up on very long SysEx messages
-    while (stream.available() > 0) {
-        uint8_t midiByte = stream.read();
-        MIDIReadEvent parseResult = parser.parse(midiByte);
-        if (parseResult != MIDIReadEvent::NO_MESSAGE)
-            return parseResult;
-    }
-    return MIDIReadEvent::NO_MESSAGE;
+    return parser.pull(StreamPuller(stream));
 }
 
 void StreamMIDI_Interface::update() {
@@ -35,6 +29,7 @@ bool StreamMIDI_Interface::dispatchMIDIEvent(MIDIReadEvent event) {
             return true; // LCOV_EXCL_LINE
         case MIDIReadEvent::CHANNEL_MESSAGE:
             return onChannelMessage(getChannelMessage());
+        case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
         case MIDIReadEvent::SYSEX_MESSAGE: 
             return onSysExMessage(getSysExMessage());
         case MIDIReadEvent::REALTIME_MESSAGE: 

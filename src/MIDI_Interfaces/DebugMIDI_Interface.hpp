@@ -1,7 +1,11 @@
 #pragma once
 
-#include "SerialMIDI_Interface.hpp"
-#include <ctype.h>
+#include "MIDI_Interface.hpp"
+#include <AH/Teensy/TeensyUSBTypes.hpp>
+#include <MIDI_Parsers/SerialMIDI_Parser.hpp>
+#include <MIDI_Parsers/HexPuller.hpp>
+#include <MIDI_Parsers/StreamPuller.hpp>
+#include <Settings/SettingsWrapper.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -11,7 +15,7 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup MIDIInterfaces
  */
-class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
+class StreamDebugMIDI_Interface : public MIDI_Interface {
   public:
     /**
      * @brief   Construct a debug MIDI interface on the given Stream.
@@ -19,9 +23,30 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
      * @param   stream
      *          The Stream interface.
      */
-    StreamDebugMIDI_Interface(Stream &stream) : StreamMIDI_Interface(stream) {}
+    StreamDebugMIDI_Interface(Stream &stream) : hexstream(stream) {}
 
-    MIDIReadEvent read() override;
+    Stream &getStream() const { return hexstream.puller.stream; }
+
+    /// Try reading and parsing a single incoming MIDI message.
+    /// @return  Returns the type of the read message, or
+    ///          `MIDIReadEvent::NO_MESSAGE` if no MIDI message was available.
+    MIDIReadEvent read();
+
+    /// Return the received channel message.
+    ChannelMessage getChannelMessage() const {
+        return parser.getChannelMessage();
+    }
+    /// Return the received real-time message.
+    RealTimeMessage getRealTimeMessage() const {
+        return parser.getRealTimeMessage();
+    }
+    /// Return the received system exclusive message.
+    SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
+
+    void update() override;
+
+  protected:
+    bool dispatchMIDIEvent(MIDIReadEvent event);
 
   protected:
     void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override;
@@ -30,15 +55,15 @@ class StreamDebugMIDI_Interface : public StreamMIDI_Interface {
     void sendImpl(uint8_t rt, uint8_t cn) override;
 
   private:
-    char firstChar = '\0';
-    char secondChar = '\0';
-
-    /**
-     * @brief   Convert a hexadecimal character to a 4-bit nibble.
-     */
-    static uint8_t hexCharToNibble(char hex) {
-        return hex < 'a' ? hex - '0' : hex - 'a' + 10;
+    void handleStall() override {
+        auto stallername = MIDIStaller::getNameNull(getStaller());
+        ERROR(F("Not implemented (stalled by ") << stallername << ')', 0x1349);
+        (void)stallername;
     }
+
+  private:
+    HexPuller<StreamPuller> hexstream;
+    SerialMIDI_Parser parser;
 };
 
 /**
@@ -65,14 +90,14 @@ class SerialDebugMIDI_Interface : public StreamDebugMIDI_Interface {
      */
     SerialDebugMIDI_Interface(T &serial,
                               unsigned long baud = AH::defaultBaudRate)
-        : StreamDebugMIDI_Interface(serial), serial(serial), baud(baud) {}
+        : StreamDebugMIDI_Interface(serial), baud(baud) {}
+
     /**
      * @brief   Start the Serial interface at the predefined baud rate.
      */
-    void begin() override { serial.begin(baud); }
+    void begin() override { static_cast<T &>(getStream()).begin(baud); }
 
   private:
-    T &serial;
     const unsigned long baud;
 };
 

@@ -111,8 +111,8 @@ class MIDI_Sender {
         send(SysExMessage{sysexdata, N, cable});
     }
     /// Send a MIDI System Exclusive message.
-    void sendSysEx(const uint8_t *data, size_t length) {
-        send(SysExMessage{data, length});
+    void sendSysEx(const uint8_t *data, size_t length, Cable cable = CABLE_1) {
+        send(SysExMessage{data, length, cable});
     }
     /// Send a MIDI Real-Time message.
     void send(RealTimeMessage message);

@@ -1,5 +1,6 @@
 #include <gtest-wrapper.h>
 
+#include <MIDI_Parsers/BufferPuller.hpp>
 #include <MIDI_Parsers/SerialMIDI_Parser.hpp>
 #include <MIDI_Parsers/USBMIDI_Parser.hpp>
 
@@ -44,22 +45,14 @@ TEST(USBMIDIParser, sysEx2Bytes) {
     USBMIDI_Parser uparser;
     uint8_t packet[4] = {0x06, 0xF0, 0xF7, 0x00};
     EXPECT_EQ(uparser.parse(packet), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(uparser.getSysExLength(), 2);
-    const SysExVector result(uparser.getSysExBuffer(),
-                             uparser.getSysExBuffer() + 2);
-    const SysExVector expected = {0xF0, 0xF7};
-    EXPECT_EQ(result, expected);
+    EXPECT_EQ(uparser.getSysExMessage(), SysExMessage({0xF0, 0xF7}));
 }
 
 TEST(USBMIDIParser, sysEx3Bytes) {
     USBMIDI_Parser uparser;
     uint8_t packet[4] = {0x07, 0xF0, 0x10, 0xF7};
     EXPECT_EQ(uparser.parse(packet), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(uparser.getSysExLength(), 3);
-    const SysExVector result(uparser.getSysExBuffer(),
-                             uparser.getSysExBuffer() + 3);
-    const SysExVector expected = {0xF0, 0x10, 0xF7};
-    EXPECT_EQ(result, expected);
+    EXPECT_EQ(uparser.getSysExMessage(), SysExMessage({0xF0, 0x10, 0xF7}));
 }
 
 TEST(USBMIDIParser, sysEx4Bytes) {
@@ -68,11 +61,8 @@ TEST(USBMIDIParser, sysEx4Bytes) {
     EXPECT_EQ(uparser.parse(packet1), MIDIReadEvent::NO_MESSAGE);
     uint8_t packet2[4] = {0x05, 0xF7, 0x00, 0x00};
     EXPECT_EQ(uparser.parse(packet2), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(uparser.getSysExLength(), 4);
-    const SysExVector result(uparser.getSysExBuffer(),
-                             uparser.getSysExBuffer() + 4);
-    const SysExVector expected = {0xF0, 0x11, 0x12, 0xF7};
-    EXPECT_EQ(result, expected);
+    EXPECT_EQ(uparser.getSysExMessage(),
+              SysExMessage({0xF0, 0x11, 0x12, 0xF7}));
 }
 
 TEST(USBMIDIParser, sysEx5Bytes) {
@@ -81,11 +71,8 @@ TEST(USBMIDIParser, sysEx5Bytes) {
     EXPECT_EQ(uparser.parse(packet1), MIDIReadEvent::NO_MESSAGE);
     uint8_t packet2[4] = {0x06, 0x23, 0xF7, 0x00};
     EXPECT_EQ(uparser.parse(packet2), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(uparser.getSysExLength(), 5);
-    const SysExVector result(uparser.getSysExBuffer(),
-                             uparser.getSysExBuffer() + 5);
-    const SysExVector expected = {0xF0, 0x21, 0x22, 0x23, 0xF7};
-    EXPECT_EQ(result, expected);
+    EXPECT_EQ(uparser.getSysExMessage(),
+              SysExMessage({0xF0, 0x21, 0x22, 0x23, 0xF7}));
 }
 
 TEST(USBMIDIParser, sysEx6Bytes) {
@@ -94,11 +81,8 @@ TEST(USBMIDIParser, sysEx6Bytes) {
     EXPECT_EQ(uparser.parse(packet1), MIDIReadEvent::NO_MESSAGE);
     uint8_t packet2[4] = {0x07, 0x33, 0x34, 0xF7};
     EXPECT_EQ(uparser.parse(packet2), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(uparser.getSysExLength(), 6);
-    const SysExVector result(uparser.getSysExBuffer(),
-                             uparser.getSysExBuffer() + 6);
-    const SysExVector expected = {0xF0, 0x31, 0x32, 0x33, 0x34, 0xF7};
-    EXPECT_EQ(result, expected);
+    EXPECT_EQ(uparser.getSysExMessage(),
+              SysExMessage({0xF0, 0x31, 0x32, 0x33, 0x34, 0xF7}));
 }
 
 TEST(USBMIDIParser, sysEx7Bytes) {
@@ -109,11 +93,8 @@ TEST(USBMIDIParser, sysEx7Bytes) {
     EXPECT_EQ(uparser.parse(packet2), MIDIReadEvent::NO_MESSAGE);
     uint8_t packet3[4] = {0x05, 0xF7, 0x00, 0x00};
     EXPECT_EQ(uparser.parse(packet3), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(uparser.getSysExLength(), 7);
-    const SysExVector result(uparser.getSysExBuffer(),
-                             uparser.getSysExBuffer() + 7);
-    const SysExVector expected = {0xF0, 0x41, 0x42, 0x43, 0x44, 0x45, 0xF7};
-    EXPECT_EQ(result, expected);
+    EXPECT_EQ(uparser.getSysExMessage(),
+              SysExMessage({0xF0, 0x41, 0x42, 0x43, 0x44, 0x45, 0xF7}));
 }
 
 TEST(USBMIDIParser, sysEx12Bytes) {
@@ -126,12 +107,9 @@ TEST(USBMIDIParser, sysEx12Bytes) {
     EXPECT_EQ(uparser.parse(packet3), MIDIReadEvent::NO_MESSAGE);
     uint8_t packet4[4] = {0x07, 0x59, 0x5A, 0xF7};
     EXPECT_EQ(uparser.parse(packet4), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(uparser.getSysExLength(), 12);
-    const SysExVector result(uparser.getSysExBuffer(),
-                             uparser.getSysExBuffer() + 12);
-    const SysExVector expected = {0xF0, 0x51, 0x52, 0x53, 0x54, 0x55,
-                                  0x56, 0x57, 0x58, 0x59, 0x5A, 0xF7};
-    EXPECT_EQ(result, expected);
+    EXPECT_EQ(uparser.getSysExMessage(),
+              SysExMessage({0xF0, 0x51, 0x52, 0x53, 0x54, 0x55,
+                                  0x56, 0x57, 0x58, 0x59, 0x5A, 0xF7}));
 }
 
 TEST(USBMIDIParser, Realtime) {
@@ -170,406 +148,333 @@ TEST(USBMIDIParser, sysExEndsWithoutStarting3Bytes) {
 
 TEST(SerialMIDIParser, noteOff) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0x82), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x20), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x7F), MIDIReadEvent::CHANNEL_MESSAGE);
+    uint8_t data[] = {0x82, 0x20, 0x7F};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0x82);
     EXPECT_EQ(msg.data1, 0x20);
     EXPECT_EQ(msg.data2, 0x7F);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, noteOn) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0x93), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x2A), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x7E), MIDIReadEvent::CHANNEL_MESSAGE);
+    uint8_t data[] = {0x93, 0x2A, 0x7E};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0x93);
     EXPECT_EQ(msg.data1, 0x2A);
     EXPECT_EQ(msg.data2, 0x7E);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, noteOnRunningStatus) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0x9A), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x10), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x11), MIDIReadEvent::CHANNEL_MESSAGE);
+    uint8_t data[] = {0x9A, 0x10, 0x11, 0x12, 0x13};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg1 = sparser.getChannelMessage();
     EXPECT_EQ(msg1.header, 0x9A);
     EXPECT_EQ(msg1.data1, 0x10);
     EXPECT_EQ(msg1.data2, 0x11);
 
-    EXPECT_EQ(sparser.parse(0x12), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x13), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg2 = sparser.getChannelMessage();
     EXPECT_EQ(msg2.header, 0x9A);
     EXPECT_EQ(msg2.data1, 0x12);
     EXPECT_EQ(msg2.data2, 0x13);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, afterTouch) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xA1), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x01), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x02), MIDIReadEvent::CHANNEL_MESSAGE);
+    uint8_t data[] = {0xA1, 0x01, 0x02};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0xA1);
     EXPECT_EQ(msg.data1, 0x01);
     EXPECT_EQ(msg.data2, 0x02);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, controlChange) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xBB), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x03), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x04), MIDIReadEvent::CHANNEL_MESSAGE);
+    uint8_t data[] = {0xBB, 0x03, 0x04};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0xBB);
     EXPECT_EQ(msg.data1, 0x03);
     EXPECT_EQ(msg.data2, 0x04);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, programChange) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xC6), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x7A), MIDIReadEvent::CHANNEL_MESSAGE);
+    uint8_t data[] = {0xC6, 0x7A};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0xC6);
     EXPECT_EQ(msg.data1, 0x7A);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, programChangeRunningStatus) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xC6), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x7B), MIDIReadEvent::CHANNEL_MESSAGE);
+    uint8_t data[] = {0xC6, 0x7B, 0x7C};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg1 = sparser.getChannelMessage();
     EXPECT_EQ(msg1.header, 0xC6);
     EXPECT_EQ(msg1.data1, 0x7B);
 
-    EXPECT_EQ(sparser.parse(0x7C), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg2 = sparser.getChannelMessage();
     EXPECT_EQ(msg2.header, 0xC6);
     EXPECT_EQ(msg2.data1, 0x7C);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, channelPressure) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xD7), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x16), MIDIReadEvent::CHANNEL_MESSAGE);
+    uint8_t data[] = {0xD7, 0x16};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0xD7);
     EXPECT_EQ(msg.data1, 0x16);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, pitchBend) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xE0), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x55), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x66), MIDIReadEvent::CHANNEL_MESSAGE);
+    uint8_t data[] = {0xE0, 0x55, 0x66};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0xE0);
     EXPECT_EQ(msg.data1, 0x55);
     EXPECT_EQ(msg.data2, 0x66);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysEx2Bytes) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(sparser.getSysExLength(), 2);
-    const SysExVector result(sparser.getSysExBuffer(),
-                             sparser.getSysExBuffer() + 2);
-    const SysExVector expected = {0xF0, 0xF7};
-    EXPECT_EQ(result, expected);
+    uint8_t data[] = {0xF0, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(), SysExMessage(data));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysEx3Bytes) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x10), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(sparser.getSysExLength(), 3);
-    const SysExVector result(sparser.getSysExBuffer(),
-                             sparser.getSysExBuffer() + 3);
+    uint8_t data[] = {0xF0, 0x10, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
     const SysExVector expected = {0xF0, 0x10, 0xF7};
-    EXPECT_EQ(result, expected);
+    EXPECT_EQ(sparser.getSysExMessage(), SysExMessage(data));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysEx7Bytes) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x41), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x42), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x43), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x44), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x45), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(sparser.getSysExLength(), 7);
-    const SysExVector result(sparser.getSysExBuffer(),
-                             sparser.getSysExBuffer() + 7);
-    const SysExVector expected = {0xF0, 0x41, 0x42, 0x43, 0x44, 0x45, 0xF7};
-    EXPECT_EQ(result, expected);
+    uint8_t data[] = {0xF0, 0x41, 0x42, 0x43, 0x44, 0x45, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(), SysExMessage(data));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysEx2BytesBeforeOther) {
     SerialMIDI_Parser sparser;
-    {
-        EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-        EXPECT_EQ(sparser.getSysExLength(), 2);
-        const SysExVector result(sparser.getSysExBuffer(),
-                                 sparser.getSysExBuffer() + 2);
-        const SysExVector expected = {0xF0, 0xF7};
-        EXPECT_EQ(result, expected);
-    }
-    {
-        EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x12), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-        EXPECT_EQ(sparser.getSysExLength(), 3);
-        const SysExVector result(sparser.getSysExBuffer(),
-                                 sparser.getSysExBuffer() + 3);
-        const SysExVector expected = {0xF0, 0x12, 0xF7};
-        EXPECT_EQ(result, expected);
-    }
+    uint8_t data[] = {0xF0, 0xF7, 0xF0, 0x12, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(), SysExMessage({0xF0, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(), SysExMessage({0xF0, 0x12, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+}
+
+TEST(SerialMIDIParser, sysEx2BytesBeforeOtherNoSysExEnd) {
+    SerialMIDI_Parser sparser;
+    uint8_t data[] = {0xF0, 0xF0, 0x12, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(), SysExMessage({0xF0, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(), SysExMessage({0xF0, 0x12, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysExDataAfterEnd) {
     SerialMIDI_Parser sparser;
-    {
-        EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-        EXPECT_EQ(sparser.getSysExLength(), 2);
-        const SysExVector result(sparser.getSysExBuffer(),
-                                 sparser.getSysExBuffer() + 2);
-        const SysExVector expected = {0xF0, 0xF7};
-        EXPECT_EQ(result, expected);
-    }
-    {
-        EXPECT_EQ(sparser.parse(0x12), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x13), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x14), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x15), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-        EXPECT_EQ(sparser.getSysExLength(), 4);
-        const SysExVector result(sparser.getSysExBuffer(),
-                                 sparser.getSysExBuffer() + 4);
-        const SysExVector expected = {0xF0, 0x14, 0x15, 0xF7};
-        EXPECT_EQ(result, expected);
-    }
-    {
-        EXPECT_EQ(sparser.parse(0x16), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x17), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x18), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x19), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-        EXPECT_EQ(sparser.getSysExLength(), 4);
-        const SysExVector result(sparser.getSysExBuffer(),
-                                 sparser.getSysExBuffer() + 4);
-        const SysExVector expected = {0xF0, 0x18, 0x19, 0xF7};
-        EXPECT_EQ(result, expected);
-    }
+    uint8_t data[] = {0xF0, 0xF7, 0x12, 0x13, 0xF0, 0x14, 0x15, 0xF7,
+                      0x16, 0x17, 0xF0, 0x18, 0x19, 0xF7, 0x1A};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(), SysExMessage({0xF0, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(),
+              SysExMessage({0xF0, 0x14, 0x15, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(),
+              SysExMessage({0xF0, 0x18, 0x19, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, RealTime) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xF8), MIDIReadEvent::REALTIME_MESSAGE);
-    RealTimeMessage expected = {MIDIMessageType::TIMING_CLOCK, 0};
-    EXPECT_EQ(sparser.getRealTimeMessage(), expected);
+    uint8_t data[] = {0xF8};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::REALTIME_MESSAGE);
+    EXPECT_EQ(sparser.getRealTimeMessage(),
+              RealTimeMessage(MIDIMessageType::TIMING_CLOCK, CABLE_1));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, noteOffInterruptedByRealTime) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0x82), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF8), MIDIReadEvent::REALTIME_MESSAGE);
+    uint8_t data[] = {0x82, 0xF8, 0x20, 0xF9, 0x7F};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::REALTIME_MESSAGE);
     RealTimeMessage rt1 = {MIDIMessageType::TIMING_CLOCK, 0};
     EXPECT_EQ(sparser.getRealTimeMessage(), rt1);
-    EXPECT_EQ(sparser.parse(0x20), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF9), MIDIReadEvent::REALTIME_MESSAGE);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::REALTIME_MESSAGE);
     RealTimeMessage rt2 = {MIDIMessageType::UNDEFINED_REALTIME_1, 0};
     EXPECT_EQ(sparser.getRealTimeMessage(), rt2);
-    EXPECT_EQ(sparser.parse(0x7F), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0x82);
     EXPECT_EQ(msg.data1, 0x20);
     EXPECT_EQ(msg.data2, 0x7F);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysExInterruptedByRealTime) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x01), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x02), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF8), MIDIReadEvent::REALTIME_MESSAGE);
+    uint8_t data[] = {0xF0, 0x01, 0x02, 0xF8, 0x03, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::REALTIME_MESSAGE);
     RealTimeMessage rt1 = {MIDIMessageType::TIMING_CLOCK, 0};
     EXPECT_EQ(sparser.getRealTimeMessage(), rt1);
-    EXPECT_EQ(sparser.parse(0x03), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(sparser.getSysExLength(), 5);
-    const SysExVector result(sparser.getSysExBuffer(),
-                             sparser.getSysExBuffer() + 5);
-    const SysExVector expected = {0xF0, 0x01, 0x02, 0x03, 0xF7};
-    EXPECT_EQ(result, expected);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(),
+              SysExMessage({0xF0, 0x01, 0x02, 0x03, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysExEndsByChannelMessage) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x01), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x02), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x03), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x8F), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(sparser.getSysExLength(), 5);
-    const SysExVector result(sparser.getSysExBuffer(),
-                             sparser.getSysExBuffer() + 5);
-    const SysExVector expected = {0xF0, 0x01, 0x02, 0x03, 0xF7};
-    EXPECT_EQ(result, expected);
-    EXPECT_EQ(sparser.parse(0x10), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x12), MIDIReadEvent::CHANNEL_MESSAGE);
+    uint8_t data[] = {0xF0, 0x01, 0x02, 0x03, 0x8F, 0x10, 0x12};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(),
+              SysExMessage({0xF0, 0x01, 0x02, 0x03, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg = sparser.getChannelMessage();
     EXPECT_EQ(msg.header, 0x8F);
     EXPECT_EQ(msg.data1, 0x10);
     EXPECT_EQ(msg.data2, 0x12);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysExEndsWithoutStarting1Byte) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::NO_MESSAGE);
+    uint8_t data[] = {0xF7, 0xF7, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysExEndsWithoutStarting2Bytes) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0x51), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::NO_MESSAGE);
+    uint8_t data[] = {0x51, 0xF7, 0xF7, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysExEndsWithoutStarting3Bytes) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0x52), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x53), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::NO_MESSAGE);
+    uint8_t data[] = {0x52, 0x53, 0xF7, 0xF7, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysExEndsMultipleTimesWithoutStarting) {
     SerialMIDI_Parser sparser;
-    EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x10), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(sparser.parse(0x20), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::NO_MESSAGE);
+    uint8_t data[] = {0xF0, 0x10, 0xF7, 0x20, 0xF7, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysExStartsTwice) {
     SerialMIDI_Parser sparser;
-    {
-        EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::SYSEX_MESSAGE);
-        EXPECT_EQ(sparser.getSysExLength(), 2);
-        const SysExVector result(sparser.getSysExBuffer(),
-                                 sparser.getSysExBuffer() + 2);
-        const SysExVector expected = {0xF0, 0xF7};
-        EXPECT_EQ(result, expected);
-    }
-    {
-        EXPECT_EQ(sparser.parse(0x20), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x30), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-        EXPECT_EQ(sparser.getSysExLength(), 4);
-        const SysExVector result(sparser.getSysExBuffer(),
-                                 sparser.getSysExBuffer() + 4);
-        const SysExVector expected = {0xF0, 0x20, 0x30, 0xF7};
-        EXPECT_EQ(result, expected);
-    }
+    uint8_t data[] = {0xF0, 0xF0, 0x20, 0x30, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(), SysExMessage({0xF0, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(),
+              SysExMessage({0xF0, 0x20, 0x30, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, sysExEndsWithSysExStart) {
     SerialMIDI_Parser sparser;
-    {
-        EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x10), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::SYSEX_MESSAGE);
-        EXPECT_EQ(sparser.getSysExLength(), 3);
-        const SysExVector result(sparser.getSysExBuffer(),
-                                 sparser.getSysExBuffer() + 3);
-        const SysExVector expected = {0xF0, 0x10, 0xF7};
-        EXPECT_EQ(result, expected);
-    }
-    {
-        EXPECT_EQ(sparser.parse(0x20), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x30), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-        EXPECT_EQ(sparser.getSysExLength(), 4);
-        const SysExVector result(sparser.getSysExBuffer(),
-                                 sparser.getSysExBuffer() + 4);
-        const SysExVector expected = {0xF0, 0x20, 0x30, 0xF7};
-        EXPECT_EQ(result, expected);
-    }
+    uint8_t data[] = {0xF0, 0x10, 0xF0, 0x20, 0x30, 0xF7};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(), SysExMessage({0xF0, 0x10, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(),
+              SysExMessage({0xF0, 0x20, 0x30, 0xF7}));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
-TEST(SerialMIDIParser, sysExRecoverAfterBufferOverflow) {
+#include <random>
+
+TEST(SerialMIDIParser, sysExMultipleChunks) {
     SerialMIDI_Parser sparser;
-    {
-        EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-        SysExVector expected = {0xF0};
-        expected.resize(SYSEX_BUFFER_SIZE);
-        for (size_t i = 1; i < SYSEX_BUFFER_SIZE; ++i) {
-            EXPECT_EQ(sparser.parse(i / 2), MIDIReadEvent::NO_MESSAGE);
-            expected[i] = i / 2;
-        }
-        EXPECT_EQ(sparser.parse(0x7F), MIDIReadEvent::NO_MESSAGE); // Overflow
-        EXPECT_EQ(sparser.parse(0x7F), MIDIReadEvent::NO_MESSAGE); // Overflow
-        EXPECT_EQ(sparser.parse(0x7F), MIDIReadEvent::NO_MESSAGE); // Overflow
-        EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-        EXPECT_EQ(sparser.getSysExLength(), SYSEX_BUFFER_SIZE);
-        const SysExVector result(sparser.getSysExBuffer(),
-                                 sparser.getSysExBuffer() + SYSEX_BUFFER_SIZE);
-        EXPECT_EQ(result, expected);
-    }
-    {
-        EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x20), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0x30), MIDIReadEvent::NO_MESSAGE);
-        EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-        EXPECT_EQ(sparser.getSysExLength(), 4);
-        const SysExVector result(sparser.getSysExBuffer(),
-                                 sparser.getSysExBuffer() + 4);
-        const SysExVector expected = {0xF0, 0x20, 0x30, 0xF7};
-        EXPECT_EQ(result, expected);
-    }
+    std::vector<uint8_t> data(2 * SYSEX_BUFFER_SIZE + 1);
+    data.front() = 0xF0;
+    data.back() = 0xF7;
+    std::mt19937 rnd(0);
+    std::uniform_int_distribution<uint8_t> dist(0, 127);
+    std::generate(data.begin() + 1, data.end() - 1, std::bind(dist, rnd));
+    auto puller = BufferPuller(data);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_CHUNK);
+    EXPECT_EQ(sparser.getSysExMessage(),
+              SysExMessage(data.data(), SYSEX_BUFFER_SIZE));
+    EXPECT_TRUE(sparser.getSysExMessage().isFirstChunk());
+    EXPECT_FALSE(sparser.getSysExMessage().isLastChunk());
+    EXPECT_FALSE(sparser.getSysExMessage().isCompleteMessage());
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_CHUNK);
+    EXPECT_EQ(sparser.getSysExMessage(),
+              SysExMessage(data.data() + SYSEX_BUFFER_SIZE, SYSEX_BUFFER_SIZE));
+    EXPECT_FALSE(sparser.getSysExMessage().isFirstChunk());
+    EXPECT_FALSE(sparser.getSysExMessage().isLastChunk());
+    EXPECT_FALSE(sparser.getSysExMessage().isCompleteMessage());
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(),
+              SysExMessage(data.data() + 2 * SYSEX_BUFFER_SIZE, 1));
+    EXPECT_FALSE(sparser.getSysExMessage().isFirstChunk());
+    EXPECT_TRUE(sparser.getSysExMessage().isLastChunk());
+    EXPECT_FALSE(sparser.getSysExMessage().isCompleteMessage());
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
 TEST(SerialMIDIParser, realSysEx) {
     SerialMIDI_Parser sparser;
-    SysExVector data = {
-        0x0,  0x0,  0x66, 0x14, 0x12, 0x0,  0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
-        0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x2d, 0x20, 0x4d, 0x61, 0x63,
-        0x6b, 0x69, 0x65, 0x20, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x20,
-        0x55, 0x6e, 0x69, 0x76, 0x65, 0x72, 0x73, 0x61, 0x6c, 0x20, 0x2d, 0x20,
-        0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
-        0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
-        0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
-        0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
-        0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
-        0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
-    };
-    EXPECT_EQ(sparser.parse(0xF0), MIDIReadEvent::NO_MESSAGE);
-    for (uint8_t d : data)
-        EXPECT_EQ(sparser.parse(d), MIDIReadEvent::NO_MESSAGE);
-    EXPECT_EQ(sparser.parse(0xF7), MIDIReadEvent::SYSEX_MESSAGE);
-    EXPECT_EQ(sparser.getSysExLength(), 120);
-    const SysExVector result(sparser.getSysExBuffer(),
-                             sparser.getSysExBuffer() + 120);
-    const SysExVector expected = {
+    uint8_t data[] = {
         0xF0, 0x0,  0x0,  0x66, 0x14, 0x12, 0x0,  0x20, 0x20, 0x20, 0x20, 0x20,
         0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x2d, 0x20, 0x4d, 0x61,
         0x63, 0x6b, 0x69, 0x65, 0x20, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c,
@@ -581,5 +486,8 @@ TEST(SerialMIDIParser, realSysEx) {
         0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
         0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0xF7,
     };
-    EXPECT_EQ(result, expected);
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    EXPECT_EQ(sparser.getSysExMessage(), SysExMessage(data));
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }

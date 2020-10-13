@@ -9,9 +9,7 @@ class EmptyParser : public CS::MIDI_Parser {
         static EmptyParser instance;
         return instance;
     }
-    CS::SysExMessage getSysExMessage() const override {
-        return {nullptr, 0, 0};
-    }
+    CS::SysExMessage getSysExMessage() const { return {nullptr, 0, 0}; }
 };
 
 class MockMIDI_Interface : public CS::MIDI_Interface {

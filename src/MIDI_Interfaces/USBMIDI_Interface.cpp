@@ -39,6 +39,7 @@ bool USBMIDI_Interface::dispatchMIDIEvent(MIDIReadEvent event) {
             return true; // LCOV_EXCL_LINE
         case MIDIReadEvent::CHANNEL_MESSAGE:
             return onChannelMessage(getChannelMessage());
+        case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
         case MIDIReadEvent::SYSEX_MESSAGE: 
             return onSysExMessage(getSysExMessage());
         case MIDIReadEvent::REALTIME_MESSAGE: 

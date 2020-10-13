@@ -2,11 +2,12 @@
 
 #include <AH/STL/cstddef> // size_t
 #include <AH/STL/cstdint> // uint8_t
+#include <AH/STL/vector>
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
 
 #ifndef ARDUINO
-#include <vector>
+#include <iostream>
 #endif
 
 AH_DIAGNOSTIC_WERROR()
@@ -19,6 +20,7 @@ BEGIN_CS_NAMESPACE
 
 // -------------------------------------------------------------------------- //
 
+/// All possible MIDI status byte values (without channel).
 enum class MIDIMessageType : uint8_t {
     NOTE_OFF = 0x80,         // 3B
     NOTE_ON = 0x90,          // 3B
@@ -45,7 +47,9 @@ enum class MIDIMessageType : uint8_t {
     RESET = 0xFF,
 };
 
-/// See table 4-1 in <https://usb.org/sites/default/files/midi10.pdf>.
+/// MIDI USB Code Index Numbers.
+///
+/// @see    Table 4-1 in <https://usb.org/sites/default/files/midi10.pdf>.
 enum class MIDICodeIndexNumber : uint8_t {
     MISC_FUNCTION_CODES = 0x0,
     CABLE_EVENTS = 0x1,
@@ -142,6 +146,8 @@ struct ChannelMessage {
     ///
     /// - 2 data bytes: Note On/Off, Aftertouch, Control Change or Pitch Bend
     /// - 1 data byte: Program Change or Channel Pressure
+    ///
+    /// Returns false if the header is a SysEx, Real-Time or System Common byte.
     bool hasTwoDataBytes() const {
         auto type = getMessageType();
         return type <= MIDIMessageType::CONTROL_CHANGE ||
@@ -168,19 +174,21 @@ struct SysExMessage {
     SysExMessage(const uint8_t *data, size_t length, Cable cable = CABLE_1)
         : data(data), length(length), cable(cable.getRaw()) {}
 
-#ifndef ARDUINO
     /// Constructor.
     SysExMessage(const std::vector<uint8_t> &vec, Cable cable = CABLE_1)
         : SysExMessage(vec.data(), vec.size(), cable) {}
-#endif
+
+    /// Constructor.
+    template <size_t N>
+    SysExMessage(const uint8_t (&array)[N], Cable cable = CABLE_1)
+        : SysExMessage(array, N, cable) {}
 
     const uint8_t *data;
     uint8_t length;
     uint8_t cable;
 
     bool operator==(SysExMessage other) const {
-        return this->length == other.length &&
-               this->cable == other.cable && 
+        return this->length == other.length && this->cable == other.cable &&
                memcmp(this->data, other.data, length) == 0;
     }
     bool operator!=(SysExMessage other) const { return !(*this == other); }
@@ -189,6 +197,17 @@ struct SysExMessage {
     Cable getCable() const { return Cable(cable); }
     /// Set the MIDI USB cable number of the message.
     void setCable(Cable cable) { this->cable = cable.getRaw(); }
+
+    bool isFirstChunk() const {
+        return length >= 1 && data[0] == uint8_t(MIDIMessageType::SYSEX_START);
+    }
+
+    bool isLastChunk() const {
+        return length >= 1 &&
+               data[length - 1] == uint8_t(MIDIMessageType::SYSEX_END);
+    }
+
+    bool isCompleteMessage() const { return isFirstChunk() && isLastChunk(); }
 };
 
 struct RealTimeMessage {
@@ -221,6 +240,13 @@ struct RealTimeMessage {
     /// Set the MIDI USB cable number of the message.
     void setCable(Cable cable) { this->cable = cable.getRaw(); }
 };
+
+#ifndef ARDUINO
+inline std::ostream &operator<<(std::ostream &os, SysExMessage m) {
+    os << "SysExMessage [" << m.length << "] " << AH::HexDump(m.data, m.length);
+    return os;
+}
+#endif
 
 END_CS_NAMESPACE
 

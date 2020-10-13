@@ -26,7 +26,7 @@ class StreamMIDI_Interface : public MIDI_Interface {
     /// Try reading and parsing a single incoming MIDI message.
     /// @return  Returns the type of the read message, or 
     ///          `MIDIReadEvent::NO_MESSAGE` if no MIDI message was available.
-    virtual MIDIReadEvent read();
+    MIDIReadEvent read();
 
     /// Return the received channel message.
     ChannelMessage getChannelMessage() const {

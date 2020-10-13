@@ -3,11 +3,11 @@
 #include <AH/Error/Error.hpp>
 
 #include "BLEMIDI/BLEMIDI.hpp"
-#include "BLEMIDI/BLEMIDI_Parser.hpp"
 #include "BLEMIDI/BLEMIDIPacketBuilder.hpp"
 #include "MIDI_Interface.hpp"
-#include <MIDI_Parsers/SerialMIDI_Parser.hpp>
 #include "Util/ESP32Threads.hpp"
+#include <MIDI_Parsers/BLEMIDIParser.hpp>
+#include <MIDI_Parsers/SerialMIDI_Parser.hpp>
 
 #include <atomic>
 #include <chrono>
@@ -73,9 +73,9 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     void handleSendEvents();
 
     /// Tell the background BLE sender thread to send the current packet.
-    /// Blocks until the packet is sent. 
+    /// Blocks until the packet is sent.
     ///
-    /// @param  lock 
+    /// @param  lock
     ///         Lock should be locked at entry, will still be locked on exit.
     void flushImpl(lock_t &lock);
 
@@ -90,7 +90,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     }
 
     /// Set the timeout, the number of milliseconds to buffer the outgoing MIDI
-    /// messages. A shorter timeout usually results in lower latency, but also 
+    /// messages. A shorter timeout usually results in lower latency, but also
     /// causes more overhead, because more packets might be required.
     void setTimeout(std::chrono::milliseconds timeout) {
         lock_t lock(mtx);
@@ -123,8 +123,12 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
 
   public:
     void parse(const uint8_t *const data, const size_t len) {
-        auto midiparser = [this](uint8_t databyte) { parse(databyte); };
-        BLEMIDI_Parser(midiparser)(data, len);
+        auto mididata = BLEMIDIParser(data, len);
+        MIDIReadEvent event = parser.pull(mididata);
+        while (event != MIDIReadEvent::NO_MESSAGE) {
+            dispatchMIDIEvent(event);
+            event = parser.pull(mididata);
+        }
     }
 
     /// Return the received channel message.
@@ -139,38 +143,17 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
 
   private:
-    void parse(uint8_t data) {
-        MIDIReadEvent event = parser.parse(data);
-        // Best we can do is just retry until the pipe is no longer in exclusive
-        // mode.
-        // Keep in mind that this is executed in the callback of the BLE stack,
-        // I don't know what happens to the Bluetooth connection if we let it
-        // wait for longer than the communication interval.
-        //
-        // TODO: If this causes problems, we could buffer the data until the
-        //       pipe is available for writing again.
-        while (!dispatchMIDIEvent(event))
-#ifdef ARDUINO
-            delay(1);
-#else
-            usleep(1e3);
-#endif
-
-        // TODO: use a queue to the main thread
-    }
-
     bool dispatchMIDIEvent(MIDIReadEvent event) {
         switch (event) {
-            case MIDIReadEvent::NO_MESSAGE: 
-                return true;
+            case MIDIReadEvent::NO_MESSAGE: return true;
             case MIDIReadEvent::CHANNEL_MESSAGE:
                 return onChannelMessage(getChannelMessage());
-            case MIDIReadEvent::SYSEX_MESSAGE: 
+            case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
+            case MIDIReadEvent::SYSEX_MESSAGE:
                 return onSysExMessage(getSysExMessage());
-            case MIDIReadEvent::REALTIME_MESSAGE: 
+            case MIDIReadEvent::REALTIME_MESSAGE:
                 return onRealTimeMessage(getRealTimeMessage());
-            default: 
-                return true;
+            default: return true;
         }
     }
 
@@ -182,7 +165,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     /// @see    @ref forceMinMTU()
     std::atomic_uint_fast16_t force_min_mtu{0};
 
-    /// Find the smallest MTU of all clients. Used to compute the MIDI BLE 
+    /// Find the smallest MTU of all clients. Used to compute the MIDI BLE
     /// packet size.
     void updateMTU();
 

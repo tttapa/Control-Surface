@@ -194,8 +194,8 @@ TEST(BluetoothMIDIInterface, receiveSysExSplitAcrossPackets) {
     midi.begin();
     midi.setCallbacks(&cb);
 
-    uint8_t data1[] = {0x80, 0x80, 0xF0, 0x01, 0x02};
-    uint8_t data2[] = {0x80, 0x03, 0x04, 0x80, 0xF7};
+    uint8_t data1[] = {0x81, 0x82, 0xF0, 0x01, 0x02};
+    uint8_t data2[] = {0x83, 0x03, 0x04, 0x84, 0xF7};
     midi.parse(data1, sizeof(data1));
     midi.parse(data2, sizeof(data2));
 
@@ -215,9 +215,9 @@ TEST(BluetoothMIDIInterface, receiveSysExAndRealTime) {
     midi.begin();
     midi.setCallbacks(&cb);
 
-    uint8_t data[] = {0x80, 0x80, 0xF0, 0x01, 0x02,
-                      0x80, 0xF8, 0x80, // this is a system real time message
-                      0x03, 0x04, 0x80, 0xF7};
+    uint8_t data[] = {0x81, 0x82, 0xF0, 0x01, 0x02,
+                      0x83, 0xF8, 0x84, // this is a system real time message
+                      0x03, 0x04, 0x85, 0xF7};
     midi.parse(data, sizeof(data));
 
     std::vector<uint8_t> expectedSysExMessages = {0xF0, 0x01, 0x02,
