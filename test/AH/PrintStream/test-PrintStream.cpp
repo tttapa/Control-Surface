@@ -9,5 +9,5 @@ TEST(Debug, HexDump) {
     std::stringstream s;
     uint8_t d[] = {0x11, 0x23, 0xF7, 0xFF, 0x00};
     s << HexDump(d, sizeof(d));
-    EXPECT_EQ(s.str(), "11 23 f7 ff 00");
+    EXPECT_EQ(s.str(), "11 23 F7 FF 00");
 }
