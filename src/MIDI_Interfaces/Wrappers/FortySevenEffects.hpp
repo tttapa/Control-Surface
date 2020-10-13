@@ -50,7 +50,8 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
     SysExMessage sysex = {nullptr, 0, 0};
 
   public:
-    SysExMessage getSysExMessage() const override { return sysex; }
+    /// Get the latest SysEx message.
+    SysExMessage getSysExMessage() const { return sysex; }
 };
 
 /**
