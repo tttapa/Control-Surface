@@ -1,6 +1,8 @@
 #pragma once
 
 #ifdef __AVR__
+#include <AH/Arduino-Wrapper.h>
+
 #include "Fallback/cstdint"
 #else
 #include <cstdint>
