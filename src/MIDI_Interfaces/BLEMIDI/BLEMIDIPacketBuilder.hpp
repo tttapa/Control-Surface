@@ -16,14 +16,14 @@ class BLEMIDIPacketBuilder {
     uint8_t runningTimestamp = 0;
     uint8_t buffer[MAX_CAPACITY] = {};
 
-    constexpr static uint8_t SysExStart 
-        = static_cast<uint8_t>(MIDIMessageType::SYSEX_START);
-    constexpr static uint8_t SysExEnd 
-        = static_cast<uint8_t>(MIDIMessageType::SYSEX_END);
+    constexpr static uint8_t SysExStart =
+        static_cast<uint8_t>(MIDIMessageType::SYSEX_START);
+    constexpr static uint8_t SysExEnd =
+        static_cast<uint8_t>(MIDIMessageType::SYSEX_END);
 
     /// Check if the buffer has space left.
     constexpr bool hasSpaceFor(size_t bytes) const {
-        return index < capacity && bytes <= size_t(capacity - index); 
+        return index < capacity && bytes <= size_t(capacity - index);
     }
 
     /// Timestamp[0]: 0b10hh hhhh
@@ -35,7 +35,7 @@ class BLEMIDIPacketBuilder {
         return timestamp | 0x80;
     }
 
-    /// If this is the first byte/message in the packet, add the header 
+    /// If this is the first byte/message in the packet, add the header
     /// containing the 6 most significant bits of the timestamp
     void initBuffer(uint16_t timestamp) {
         if (index == 0)
@@ -62,9 +62,9 @@ class BLEMIDIPacketBuilder {
      * @retval  false 
      *          Buffer is too full, send the current packet, reset the packet
      *          builder, and try again.
-     */    
+     */
     template <bool ThreeBytes>
-    bool addImpl(uint8_t header, uint8_t data1, uint8_t data2, 
+    bool addImpl(uint8_t header, uint8_t data1, uint8_t data2,
                  uint16_t timestamp);
 
   public:
@@ -104,8 +104,8 @@ class BLEMIDIPacketBuilder {
      * @retval  false 
      *          Buffer is too full, send the current packet, reset the packet
      *          builder, and try again.
-     */   
-    bool add3B(uint8_t header, uint8_t data1, uint8_t data2, 
+     */
+    bool add3B(uint8_t header, uint8_t data1, uint8_t data2,
                uint16_t timestamp);
 
     /** 
@@ -139,7 +139,7 @@ class BLEMIDIPacketBuilder {
      * @retval  false 
      *          Buffer is too full, send the current packet, reset the packet
      *          builder, and try again.
-     */  
+     */
     bool addRealTime(uint8_t rt, uint16_t timestamp);
 
     /**
@@ -212,7 +212,7 @@ class BLEMIDIPacketBuilder {
      * 
      * @see @ref addSysEx()
      */
-    void continueSysEx(const uint8_t *&data, size_t &length, 
+    void continueSysEx(const uint8_t *&data, size_t &length,
                        uint16_t timestamp);
 };
 

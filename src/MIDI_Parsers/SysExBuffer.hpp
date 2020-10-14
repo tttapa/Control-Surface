@@ -4,7 +4,13 @@
 
 BEGIN_CS_NAMESPACE
 
-class SysExBuffer {
+/**
+ * @brief   Helper for storing the System Exclusive messages being received by
+ *          a MIDI parser.
+ * 
+ * @ingroup MIDIParsers
+ */
+class SysExBuffer { 
   private:
     uint8_t buffer[SYSEX_BUFFER_SIZE];
     size_t length = 0;

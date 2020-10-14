@@ -10,17 +10,31 @@
     defined(USB_MIDI16)
 // TODO: || defined(USB_EVERYTHING)
 #define USB_MIDI_NUMBER_OF_CABLES 16
+#elif !defined(ARDUINO) || defined(DOXYGEN)
+#define USB_MIDI_NUMBER_OF_CABLES 16
 #else
 #define USB_MIDI_NUMBER_OF_CABLES 1
 #endif
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   Parser for MIDI over USB packets.
+ * 
+ * @ingroup MIDIParsers
+ */
 class USBMIDI_Parser : public MIDI_Parser {
   public:
-    MIDIReadEvent parse(uint8_t *packet);
+    /**
+     * @brief   Parse the given MIDI over USB packet.
+     * 
+     * @param   packet
+     *          Pointer to the 4-byte USB packet.
+     */
+    MIDIReadEvent parse(const uint8_t *packet);
 
 #if !IGNORE_SYSEX
+    /// Get the latest SysEx message.
     SysExMessage getSysExMessage() const {
         return {sysexbuffers[activeSysExCN].getBuffer(),
                 sysexbuffers[activeSysExCN].getLength(), activeSysExCN};

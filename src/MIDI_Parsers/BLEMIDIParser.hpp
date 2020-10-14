@@ -6,8 +6,13 @@
 
 BEGIN_CS_NAMESPACE
 
-/// Class for parsing BLE-MIDI packets. It doesn't parse the actual MIDI
-/// messages, it just extracts the relevant MIDI data from the BLE packets.
+/** 
+ * @brief   Class for parsing BLE-MIDI packets. It doesn't parse the actual MIDI
+ *          messages, it just extracts the relevant MIDI data from the BLE 
+ *          packets.
+ * 
+ * @ingroup MIDIParsers
+ */
 class BLEMIDIParser {
   public:
     BLEMIDIParser(const uint8_t *data, uint8_t length)

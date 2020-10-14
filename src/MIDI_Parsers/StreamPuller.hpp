@@ -5,6 +5,11 @@
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   Helper that pulls bytes out of an Arduino stream.
+ * 
+ * @ingroup MIDIParsers
+ */
 class StreamPuller {
   public:
     StreamPuller(Stream &stream) : stream(stream) {}

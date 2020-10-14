@@ -91,6 +91,13 @@
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 /** 
+ * @defgroup    MIDIParsers MIDI Parsers
+ * @brief   Utilities for parsing all kinds of MIDI streams.
+ */
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
+
+/** 
  * @defgroup    DisplayElements Display Elements
  * @brief   All Elements that can be used to show the state of the Control 
  *          Surface on the display.

@@ -5,7 +5,10 @@
 
 BEGIN_CS_NAMESPACE
 
-/// Helper to pull bytes out of a buffer.
+/**
+ * @brief   Helper to pull bytes out of a buffer.
+ * @ingroup MIDIParsers
+ */
 class BufferPuller {
   public:
     BufferPuller(const uint8_t *buffer, size_t length)

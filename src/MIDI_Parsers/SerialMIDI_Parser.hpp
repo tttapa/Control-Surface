@@ -5,7 +5,11 @@
 
 BEGIN_CS_NAMESPACE
 
-/// Parser for Serial MIDI interfaces.
+/**
+ * @brief   Parser for Serial MIDI streams.
+ * 
+ * @ingroup MIDIParsers
+ */
 class SerialMIDI_Parser : public MIDI_Parser {
   public:
     /**

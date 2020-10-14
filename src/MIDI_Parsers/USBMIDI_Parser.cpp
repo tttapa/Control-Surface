@@ -104,7 +104,7 @@ MIDIReadEvent USBMIDI_Parser::handleSingleByte(const uint8_t *packet,
 }
 
 // https://usb.org/sites/default/files/midi10.pdf
-MIDIReadEvent USBMIDI_Parser::parse(uint8_t *packet) {
+MIDIReadEvent USBMIDI_Parser::parse(const uint8_t *packet) {
     // DEBUG("MIDIUSB packet:\t" << hex << packet[0] << ' ' << packet[1] << ' '
     //                           << packet[2] << ' ' << packet[3] << dec);
 

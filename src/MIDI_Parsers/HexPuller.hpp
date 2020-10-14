@@ -18,6 +18,8 @@ BEGIN_CS_NAMESPACE
  *
  * @see     @ref BufferPuller
  * @see     @ref StreamPuller
+ * 
+ * @ingroup MIDIParsers
  */
 template <class CharPuller>
 class HexPuller {
