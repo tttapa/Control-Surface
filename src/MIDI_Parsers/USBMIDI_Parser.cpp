@@ -3,8 +3,8 @@
 
 BEGIN_CS_NAMESPACE
 
-MIDIReadEvent USBMIDI_Parser::handleChannelMessage(const uint8_t *packet,
-                                                   uint8_t cable) {
+MIDIReadEvent USBMIDI_Parser::handleChannelMessage(MIDIUSBPacket_t packet,
+                                                   Cable cable) {
     midimsg.header = packet[1];
     midimsg.data1 = packet[2];
     midimsg.data2 = packet[3];
@@ -12,8 +12,8 @@ MIDIReadEvent USBMIDI_Parser::handleChannelMessage(const uint8_t *packet,
     return MIDIReadEvent::CHANNEL_MESSAGE;
 }
 
-MIDIReadEvent USBMIDI_Parser::handleSysExStartContinue(const uint8_t *packet,
-                                                       uint8_t cable) {
+MIDIReadEvent USBMIDI_Parser::handleSysExStartContinue(MIDIUSBPacket_t packet,
+                                                       Cable cable) {
     // If this is a SysEx start packet
     if (packet[1] == uint8_t(MIDIMessageType::SYSEX_START)) {
         startSysEx(cable); // start a new message
@@ -21,13 +21,14 @@ MIDIReadEvent USBMIDI_Parser::handleSysExStartContinue(const uint8_t *packet,
     }
     // If we haven't received a SysExStart
     else if (!receivingSysEx(cable)) {
-        DEBUGREF(F("Error: No SysExStart received"));
+        DEBUGREF(F("No SysExStart received"));
         return MIDIReadEvent::NO_MESSAGE; // ignore the data
     }
 
     // Check if the SysEx buffer has enough space to store the data
     if (!hasSysExSpace(cable, 3)) {
         storePacket(packet);
+        endSysExChunk(cable);
         return MIDIReadEvent::SYSEX_CHUNK;
     }
 
@@ -36,25 +37,28 @@ MIDIReadEvent USBMIDI_Parser::handleSysExStartContinue(const uint8_t *packet,
     return MIDIReadEvent::NO_MESSAGE; // SysEx is not finished yet
 }
 
-MIDIReadEvent USBMIDI_Parser::handleSysExEnd1B(const uint8_t *packet,
-                                               uint8_t cable) {
-    // Single-byte System Common Message (not implemented)
+MIDIReadEvent USBMIDI_Parser::handleSysExEnd1B(MIDIUSBPacket_t packet,
+                                               Cable cable) {
+    // Single-byte System Common Message
     if (packet[1] != uint8_t(MIDIMessageType::SYSEX_END)) {
-        // System Common (not implemented)
-        return MIDIReadEvent::NO_MESSAGE;
+        // System Common (1 byte)
+        midimsg.header = packet[1];
+        midimsg.cable = cable;
+        return MIDIReadEvent::SYSCOMMON_MESSAGE;
     }
 
     // SysEx ends with following single byte
     else {
         // If we haven't received a SysExStart
         if (!receivingSysEx(cable)) {
-            DEBUGFN(F("Error: No SysExStart received"));
+            DEBUGREF(F("No SysExStart received"));
             return MIDIReadEvent::NO_MESSAGE; // ignore the data
         }
 
         // Check if the SysEx buffer has enough space to store the end byte
         if (!hasSysExSpace(cable, 1)) {
             storePacket(packet);
+            endSysExChunk(cable);
             return MIDIReadEvent::SYSEX_CHUNK;
         }
 
@@ -66,8 +70,8 @@ MIDIReadEvent USBMIDI_Parser::handleSysExEnd1B(const uint8_t *packet,
 }
 
 template <uint8_t NumBytes>
-MIDIReadEvent USBMIDI_Parser::handleSysExEnd(const uint8_t *packet,
-                                             uint8_t cable) {
+MIDIReadEvent USBMIDI_Parser::handleSysExEnd(MIDIUSBPacket_t packet,
+                                             Cable cable) {
     static_assert(NumBytes == 2 || NumBytes == 3,
                   "Only 2- or 3-byte SysEx packets are supported");
 
@@ -86,6 +90,7 @@ MIDIReadEvent USBMIDI_Parser::handleSysExEnd(const uint8_t *packet,
     // Check if the SysEx buffer has enough space to store the end byte
     if (!hasSysExSpace(cable, NumBytes)) {
         storePacket(packet);
+        endSysExChunk(cable);
         return MIDIReadEvent::SYSEX_CHUNK; // Buffer full
     }
 
@@ -95,29 +100,43 @@ MIDIReadEvent USBMIDI_Parser::handleSysExEnd(const uint8_t *packet,
     return MIDIReadEvent::SYSEX_MESSAGE;
 }
 
+MIDIReadEvent USBMIDI_Parser::handleSysCommon(MIDIUSBPacket_t packet,
+                                              Cable cable) {
+    midimsg.header = packet[1];
+    midimsg.data1 = packet[2];
+    midimsg.data2 = packet[3];
+    midimsg.cable = cable;
+    return MIDIReadEvent::SYSCOMMON_MESSAGE;
+}
+
 // Single Byte
-MIDIReadEvent USBMIDI_Parser::handleSingleByte(const uint8_t *packet,
-                                               uint8_t cable) {
+MIDIReadEvent USBMIDI_Parser::handleSingleByte(MIDIUSBPacket_t packet,
+                                               Cable cable) {
     rtmsg.message = packet[1];
     rtmsg.cable = cable;
     return MIDIReadEvent::REALTIME_MESSAGE;
 }
 
 // https://usb.org/sites/default/files/midi10.pdf
-MIDIReadEvent USBMIDI_Parser::parse(const uint8_t *packet) {
+MIDIReadEvent USBMIDI_Parser::feed(MIDIUSBPacket_t packet) {
     // DEBUG("MIDIUSB packet:\t" << hex << packet[0] << ' ' << packet[1] << ' '
     //                           << packet[2] << ' ' << packet[3] << dec);
 
-    // MIDI USB cable number
-    uint8_t cable = packet[0] >> 4;
-    // MIDI USB code index number
-    MIDICodeIndexNumber CIN = static_cast<MIDICodeIndexNumber>(packet[0] & 0xF);
+    // MIDI USB cable number and code index number
+    Cable cable = Cable(packet[0] >> 4);
+    MIDICodeIndexNumber CIN = MIDICodeIndexNumber(packet[0] & 0xF);
+
+    // Ignore all messages for cables that we don't have
+    if (cable.getRaw() >= USB_MIDI_NUMBER_OF_CABLES)
+        return MIDIReadEvent::NO_MESSAGE; // LCOV_EXCL_LINE
 
     switch (CIN) {
-        case MIDICodeIndexNumber::MISC_FUNCTION_CODES: break;
-        case MIDICodeIndexNumber::CABLE_EVENTS: break;
-        case MIDICodeIndexNumber::SYSTEM_COMMON_2B: break;
-        case MIDICodeIndexNumber::SYSTEM_COMMON_3B: break;
+        case MIDICodeIndexNumber::MISC_FUNCTION_CODES: break; // LCOV_EXCL_LINE
+        case MIDICodeIndexNumber::CABLE_EVENTS: break;        // LCOV_EXCL_LINE
+
+        case MIDICodeIndexNumber::SYSTEM_COMMON_2B: // fallthrough
+        case MIDICodeIndexNumber::SYSTEM_COMMON_3B:
+            return handleSysCommon(packet, cable);
 
         case MIDICodeIndexNumber::SYSEX_START_CONT:
             return handleSysExStartContinue(packet, cable);
@@ -141,10 +160,25 @@ MIDIReadEvent USBMIDI_Parser::parse(const uint8_t *packet) {
         case MIDICodeIndexNumber::SINGLE_BYTE:
             return handleSingleByte(packet, cable);
 
-        default: break;
+        default: break; // LCOV_EXCL_LINE
     }
 
-    return MIDIReadEvent::NO_MESSAGE;
+    return MIDIReadEvent::NO_MESSAGE; // LCOV_EXCL_LINE
+}
+
+MIDIReadEvent USBMIDI_Parser::resume() {
+    if (!hasStoredPacket())
+        return MIDIReadEvent::NO_MESSAGE;
+
+    MIDIUSBPacket_t packet = popStoredPacket();
+
+    // If a SysEx message was in progress
+    if (receivingSysEx(activeSysExCN)) {
+        // Reset the buffer for the next chunk
+        startSysEx(activeSysExCN);
+    }
+
+    return feed(packet);
 }
 
 END_CS_NAMESPACE

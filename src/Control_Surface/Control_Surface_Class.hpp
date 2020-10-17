@@ -104,21 +104,21 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     /**
      * @brief   Low-level function for sending a 3-byte MIDI message.
      */
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn);
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, Cable cn);
     /**
      * @brief   Low-level function for sending a 2-byte MIDI message.
      */
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn);
+    void sendImpl(uint8_t header, uint8_t d1, Cable cn);
 
     /**
      * @brief   Low-level function for sending a system exclusive MIDI message.
      */
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn);
+    void sendImpl(const uint8_t *data, size_t length, Cable cn);
 
     /** 
      * @brief   Low-level function for sending a single-byte MIDI message.
      */
-    void sendImpl(uint8_t rt, uint8_t cn);
+    void sendImpl(uint8_t rt, Cable cn);
 
   private:
     void sinkMIDIfromPipe(ChannelMessage msg) override;

@@ -117,7 +117,7 @@ TEST(StreamDebugMIDI_Interface, readRealTime) {
     StreamDebugMIDI_Interface midi = stream;
     for (auto v : "F8 ")
         stream.toRead.push(v);
-    RealTimeMessage expectedMsg = {MIDIMessageType::TIMING_CLOCK, 0};
+    RealTimeMessage expectedMsg = {MIDIMessageType::TIMING_CLOCK};
     EXPECT_EQ(midi.read(), MIDIReadEvent::REALTIME_MESSAGE);
     EXPECT_EQ(midi.getRealTimeMessage(), expectedMsg);
 }
@@ -128,7 +128,7 @@ TEST(StreamDebugMIDI_Interface, readNoteOn) {
     for (auto v : "93 3C 60 ")
         stream.toRead.push(v);
     EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
-    ChannelMessage expectedMsg = {0x93, 0x3C, 0x60, 0x00};
+    ChannelMessage expectedMsg = {0x93, 0x3C, 0x60};
     EXPECT_EQ(midi.getChannelMessage(), expectedMsg);
 }
 
@@ -138,7 +138,7 @@ TEST(StreamDebugMIDI_Interface, readNoteOnSingleDigit) {
     for (auto v : "93 3 60 ")
         stream.toRead.push(v);
     EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
-    ChannelMessage expectedMsg = {0x93, 0x3, 0x60, 0x00};
+    ChannelMessage expectedMsg = {0x93, 0x3, 0x60};
     EXPECT_EQ(midi.getChannelMessage(), expectedMsg);
 }
 
@@ -148,7 +148,7 @@ TEST(StreamDebugMIDI_Interface, readNoteOnNoSpaces) {
     for (auto v : "933C60")
         stream.toRead.push(v);
     EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
-    ChannelMessage expectedMsg = {0x93, 0x3C, 0x60, 0x00};
+    ChannelMessage expectedMsg = {0x93, 0x3C, 0x60};
     EXPECT_EQ(midi.getChannelMessage(), expectedMsg);
 }
 
@@ -158,7 +158,7 @@ TEST(StreamDebugMIDI_Interface, readNoteOnSingleChar) {
     for (auto v : "93 C 60 ")
         stream.toRead.push(v);
     EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
-    ChannelMessage expectedMsg = {0x93, 0x0C, 0x60, 0x00};
+    ChannelMessage expectedMsg = {0x93, 0x0C, 0x60};
     EXPECT_EQ(midi.getChannelMessage(), expectedMsg);
 }
 
@@ -179,5 +179,5 @@ TEST(StreamDebugMIDI_Interface, readSysEx) {
         0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7,
     };
     EXPECT_EQ(result, expected);
-    EXPECT_EQ(sysex.cable, 0);
+    EXPECT_EQ(sysex.cable, CABLE_1);
 }

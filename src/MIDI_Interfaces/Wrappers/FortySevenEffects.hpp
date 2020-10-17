@@ -83,7 +83,7 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
     void begin() override { midi.begin(MIDI_CHANNEL_OMNI); }
 
     MIDIReadEvent read() {
-        if (!midi.read())      // Update the MIDI input and check if there's
+        if (!midi.read()) // Update the MIDI input and check if there's
             return MIDIReadEvent::NO_MESSAGE; // a new message available
         auto type = midi.getType();
         if (midi.isChannelMessage(type)) { // Channel
@@ -115,7 +115,7 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
     void update() override {
         MIDIReadEvent event = read();
         while (event != MIDIReadEvent::NO_MESSAGE) { // As long as there are
-                                                    // incoming messages
+                                                     // incoming messages
             dispatchMIDIEvent(event);
             event = read();
         }
@@ -125,28 +125,26 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
   protected:
     bool dispatchMIDIEvent(MIDIReadEvent event) {
         switch (event) {
-            case MIDIReadEvent::NO_MESSAGE: 
-                return true;
+            case MIDIReadEvent::NO_MESSAGE: return true;
             case MIDIReadEvent::CHANNEL_MESSAGE:
                 return onChannelMessage(getChannelMessage());
-            case MIDIReadEvent::SYSEX_MESSAGE: 
+            case MIDIReadEvent::SYSEX_MESSAGE:
                 return onSysExMessage(getSysExMessage());
-            case MIDIReadEvent::REALTIME_MESSAGE: 
+            case MIDIReadEvent::REALTIME_MESSAGE:
                 return onRealTimeMessage(getRealTimeMessage());
-            default: 
-                return true;
+            default: return true;
         }
     }
 
   protected:
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override {
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, Cable cn) override {
         uint8_t m = header & 0xF0;
         uint8_t c = header & 0x0F;
         // channel is zero-based in Control Surface, one-based in MIDI 47 Fx
         midi.send(static_cast<MIDI_NAMESPACE::MidiType>(m), d1, d2, c + 1);
         (void)cn;
     }
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override {
+    void sendImpl(uint8_t header, uint8_t d1, Cable cn) override {
         uint8_t m = header & 0xF0;
         uint8_t c = header & 0x0F;
         // channel is zero-based in Control Surface, one-based in MIDI 47 Fx
@@ -154,12 +152,12 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
         // MIDI 47 Fx checks message type to handle 2-byte messages separately
         (void)cn;
     }
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) {
+    void sendImpl(const uint8_t *data, size_t length, Cable cn) {
         midi.sendSysEx(length, data, true);
         // true indicates that the array contains the SysEx start and stop bytes
         (void)cn;
     }
-    void sendImpl(uint8_t rt, uint8_t cn) override {
+    void sendImpl(uint8_t rt, Cable cn) override {
         midi.sendRealTime(static_cast<MIDI_NAMESPACE::MidiType>(rt));
         (void)cn;
     }

@@ -1,6 +1,6 @@
+#include <AH/Error/Error.hpp>
 #include <MIDI_Interfaces/MIDI_Pipes.hpp>
 #include <MIDI_Interfaces/MIDI_Staller.hpp>
-#include <AH/Error/Error.hpp>
 
 #include <gmock-wrapper.h>
 #include <gtest-wrapper.h>
@@ -34,19 +34,19 @@ TEST(MIDI_Pipes, sourcePipeSink) {
     source >> pipe >> sink;
 
     {
-        RealTimeMessage msg = {0xFF, 3};
+        RealTimeMessage msg = {0xFF, CABLE_4};
         EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
         ::testing::Mock::VerifyAndClear(&sink);
     }
     {
-        ChannelMessage msg{0x93, 0x10, 0x7F, 5};
+        ChannelMessage msg{0x93, 0x10, 0x7F, CABLE_6};
         EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
         ::testing::Mock::VerifyAndClear(&sink);
     }
     {
-        SysExMessage msg = {nullptr, 0, 10};
+        SysExMessage msg = {nullptr, 0, CABLE_11};
         EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
         ::testing::Mock::VerifyAndClear(&sink);
@@ -59,9 +59,9 @@ TEST(MIDI_Pipes, sourcePipeSinkMap) {
     TrueMIDI_Source source;
 
     struct CustomPipe : MIDI_Pipe {
-        void mapForwardMIDI(ChannelMessage msg) override { 
+        void mapForwardMIDI(ChannelMessage msg) override {
             msg.setChannel(CHANNEL_8);
-            sourceMIDItoSink(msg); 
+            sourceMIDItoSink(msg);
         }
     } pipe2;
 
@@ -69,7 +69,7 @@ TEST(MIDI_Pipes, sourcePipeSinkMap) {
     source >> pipe2 >> sink2;
 
     {
-        RealTimeMessage msg = {0xFF, 3};
+        RealTimeMessage msg = {0xFF, CABLE_4};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
@@ -77,8 +77,8 @@ TEST(MIDI_Pipes, sourcePipeSinkMap) {
         ::testing::Mock::VerifyAndClear(&sink2);
     }
     {
-        ChannelMessage msg{0x93, 0x10, 0x7F, 5};
-        ChannelMessage msg2{0x97, 0x10, 0x7F, 5};
+        ChannelMessage msg{0x93, 0x10, 0x7F, CABLE_6};
+        ChannelMessage msg2{0x97, 0x10, 0x7F, CABLE_6};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg2));
         source.sourceMIDItoPipe(msg);
@@ -86,7 +86,7 @@ TEST(MIDI_Pipes, sourcePipeSinkMap) {
         ::testing::Mock::VerifyAndClear(&sink2);
     }
     {
-        SysExMessage msg = {nullptr, 0, 10};
+        SysExMessage msg = {nullptr, 0, CABLE_11};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
@@ -101,7 +101,7 @@ TEST(MIDI_Pipes, sourcePipeSinkFilter) {
     TrueMIDI_Source source;
 
     struct CustomPipe : MIDI_Pipe {
-        void mapForwardMIDI(ChannelMessage msg) override { 
+        void mapForwardMIDI(ChannelMessage msg) override {
             if (msg.getChannel() == CHANNEL_7)
                 return;
             sourceMIDItoSink(msg);
@@ -112,7 +112,7 @@ TEST(MIDI_Pipes, sourcePipeSinkFilter) {
     source >> pipe2 >> sink2;
 
     {
-        RealTimeMessage msg = {0xFF, 3};
+        RealTimeMessage msg = {0xFF, CABLE_4};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
@@ -120,7 +120,7 @@ TEST(MIDI_Pipes, sourcePipeSinkFilter) {
         ::testing::Mock::VerifyAndClear(&sink2);
     }
     {
-        ChannelMessage msg{0x93, 0x10, 0x7F, 5};
+        ChannelMessage msg{0x93, 0x10, 0x7F, CABLE_6};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
@@ -128,7 +128,7 @@ TEST(MIDI_Pipes, sourcePipeSinkFilter) {
         ::testing::Mock::VerifyAndClear(&sink2);
     }
     {
-        ChannelMessage msg{0x96, 0x10, 0x7F, 5};
+        ChannelMessage msg{0x96, 0x10, 0x7F, CABLE_6};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         // sink2 shouldn't receive it
         source.sourceMIDItoPipe(msg);
@@ -136,7 +136,7 @@ TEST(MIDI_Pipes, sourcePipeSinkFilter) {
         ::testing::Mock::VerifyAndClear(&sink2);
     }
     {
-        SysExMessage msg = {nullptr, 0, 10};
+        SysExMessage msg = {nullptr, 0, CABLE_11};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
@@ -153,7 +153,7 @@ TEST(MIDI_Pipes, sourceX2PipeSink) {
     source1 >> pipe1 >> sink;
     source2 >> pipe2 >> sink;
 
-    RealTimeMessage msg = {0xFF, 3};
+    RealTimeMessage msg = {0xFF, CABLE_4};
     EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
     source1.sourceMIDItoPipe(msg);
     ::testing::Mock::VerifyAndClear(&sink);
@@ -171,7 +171,7 @@ TEST(MIDI_Pipes, sourceX2PipeSinkDisconnectPipe) {
     source1 >> pipe1 >> sink;
     source2 >> pipe2 >> sink;
 
-    RealTimeMessage msg = {0xFF, 3};
+    RealTimeMessage msg = {0xFF, CABLE_4};
 
     pipe1.disconnect();
 
@@ -192,7 +192,7 @@ TEST(MIDI_Pipes, sourcePipeSinkX2) {
     source >> pipe2 >> sink2;
 
     {
-        RealTimeMessage msg = {0xFF, 3};
+        RealTimeMessage msg = {0xFF, CABLE_4};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
@@ -200,7 +200,7 @@ TEST(MIDI_Pipes, sourcePipeSinkX2) {
         ::testing::Mock::VerifyAndClear(&sink2);
     }
     {
-        ChannelMessage msg{0x93, 0x10, 0x7F, 5};
+        ChannelMessage msg{0x93, 0x10, 0x7F, CABLE_6};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
@@ -208,7 +208,7 @@ TEST(MIDI_Pipes, sourcePipeSinkX2) {
         ::testing::Mock::VerifyAndClear(&sink2);
     }
     {
-        SysExMessage msg = {nullptr, 0, 10};
+        SysExMessage msg = {nullptr, 0, CABLE_11};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
@@ -225,7 +225,7 @@ TEST(MIDI_Pipes, sourcePipeSinkX2DisconnectPipe) {
     source >> pipe1 >> sink1;
     source >> pipe2 >> sink2;
 
-    RealTimeMessage msg = {0xFF, 3};
+    RealTimeMessage msg = {0xFF, CABLE_4};
 
     pipe1.disconnect();
 
@@ -245,7 +245,7 @@ TEST(MIDI_Pipes, sourceX2PipeSinkX2) {
     source2 >> pipe3 >> sink1;
     source2 >> pipe4 >> sink2;
 
-    RealTimeMessage msg = {0xFF, 3};
+    RealTimeMessage msg = {0xFF, CABLE_4};
     EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
     EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
     source1.sourceMIDItoPipe(msg);
@@ -268,7 +268,7 @@ TEST(MIDI_Pipes, sourcePipeSinkBidirectional) {
     A >> pipe1 >> B;
     A << pipe2 << B;
 
-    RealTimeMessage msg = {0xFF, 3};
+    RealTimeMessage msg = {0xFF, CABLE_4};
 
     EXPECT_CALL(B, sinkMIDIfromPipe(msg));
     A.sourceMIDItoPipe(msg);
@@ -287,7 +287,7 @@ TEST(MIDI_Pipes, sourcePipeSinkBidirectionalBidirectional) {
 
     A | pipe | B;
 
-    RealTimeMessage msg = {0xFF, 3};
+    RealTimeMessage msg = {0xFF, CABLE_4};
 
     EXPECT_CALL(B, sinkMIDIfromPipe(msg));
     A.sourceMIDItoPipe(msg);
@@ -1109,7 +1109,6 @@ TEST(MIDI_Pipes, checkConnectionsSwapSource) {
     EXPECT_FALSE(pipe2.hasThroughOut());
 }
 
-
 struct MockMIDIStaller : MIDIStaller {
     MockMIDIStaller(const char *name, MIDI_Source *stalled = nullptr)
         : name(name), stalled(stalled) {}
@@ -1150,7 +1149,6 @@ TEST(MIDI_Pipes, stall) {
     //   [1]   ───────────┴────────[0]────────┬───────   [1]
     //   [2]   ────────────────[3]────────┬───┘
     //   [3]   ────────────[4]────────────┘
-
 
     MockMIDIStaller staller("staller");
 
@@ -1289,7 +1287,7 @@ TEST(MIDI_Pipes, stallHandleStallerEternal) {
     try {
         sources[1].handleStallers();
         FAIL();
-    } catch(AH::ErrorException &e) {
+    } catch (AH::ErrorException &e) {
         std::cerr << e.what() << std::endl;
         EXPECT_EQ(e.getErrorCode(), 0x4827);
     }
@@ -1382,7 +1380,7 @@ TEST(MIDI_Pipes, stallNames) {
     sources[3] >> pipes[5] >> sinks[2];
 
     MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
-    
+
     sources[1].stall(&stallers[0]);
     EXPECT_STREQ(pipes[0].getSinkStallerName(), "staller_1");
     EXPECT_STREQ(pipes[0].getThroughStallerName(), "(null)");
@@ -1414,18 +1412,18 @@ TEST(MIDI_Pipes, getStaller) {
     sources[3] >> pipes[5] >> sinks[2];
 
     MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
-    
+
     EXPECT_EQ(pipes[0].getStaller(), nullptr);
     EXPECT_EQ(sources[0].getStaller(), nullptr);
     EXPECT_STREQ(pipes[0].getStallerName(), "(null)");
     EXPECT_STREQ(sources[0].getStallerName(), "(null)");
     sources[3].stall(&stallers[2]);
-    EXPECT_EQ(pipes[0].getStaller(), &stallers[2]); // through staller
+    EXPECT_EQ(pipes[0].getStaller(), &stallers[2]);   // through staller
     EXPECT_EQ(sources[0].getStaller(), &stallers[2]); // through staller
     EXPECT_STREQ(pipes[0].getStallerName(), "staller_3");
     EXPECT_STREQ(sources[0].getStallerName(), "staller_3");
     sources[1].stall(&stallers[0]);
-    EXPECT_EQ(pipes[0].getStaller(), &stallers[0]); // sink staller
+    EXPECT_EQ(pipes[0].getStaller(), &stallers[0]);   // sink staller
     EXPECT_EQ(sources[0].getStaller(), &stallers[0]); // sink staller
     EXPECT_STREQ(pipes[0].getStallerName(), "staller_1");
     EXPECT_STREQ(sources[0].getStallerName(), "staller_1");
@@ -1449,7 +1447,7 @@ TEST(MIDI_Pipes, stallFromThroughInAndThroughOut) {
     sources[3] >> pipes[5] >> sinks[2];
 
     MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
-    
+
     sources[1].stall(&stallers[0]);
     EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
     EXPECT_EQ(pipes[0].getSinkStaller(), &stallers[0]);
@@ -1500,7 +1498,7 @@ TEST(MIDI_Pipes, stallFromThroughInAndThroughOutUnlockMiddle) {
     sources[3] >> pipes[5] >> sinks[2];
 
     MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
-    
+
     // Same as test above
     sources[1].stall(&stallers[0]);
     sources[2].stall(&stallers[1]);
@@ -1607,7 +1605,7 @@ TEST(MIDI_Pipes, stallFromThroughInAndThroughOutUnlockLast) {
     sources[3] >> pipes[5] >> sinks[2];
 
     MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
-    
+
     // Same as test above
     sources[1].stall(&stallers[0]);
     sources[2].stall(&stallers[1]);
@@ -1770,10 +1768,8 @@ TEST(MIDI_Pipes, USBInterface) {
         .WillOnce(Return(Packet_t{0x54, 0x77, 0x11, 0x22}))
         .WillOnce(Return(Packet_t{0x56, 0x33, 0xF7, 0x00}))
         .WillOnce(Return(Packet_t{}));
-    const uint8_t *sysexData =
-        midiA[0].getSysExMessage().data + 5 * sizeof(SysExBuffer);
-    //                                    ^~~~ cable
-    EXPECT_CALL(midiB[0], sendImpl(sysexData, 8, 5));
+    testing::Matcher<const uint8_t *> &&sysex_ptr = testing::Pointee(0xF0);
+    EXPECT_CALL(midiB[0], sendImpl(sysex_ptr, 8, CABLE_6));
     midiA[0].update();
 
     EXPECT_CALL(midiA[1], readUSBPacket())
@@ -1781,10 +1777,8 @@ TEST(MIDI_Pipes, USBInterface) {
         .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
         .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
         .WillOnce(Return(Packet_t{}));
-    sysexData = midiA[1].getSysExMessage().data + 9 * sizeof(SysExBuffer);
-    //                                            ^~~~ cable
-    EXPECT_CALL(midiB[0], sendImpl(sysexData, 7, 9));
-    EXPECT_CALL(midiB[1], sendImpl(sysexData, 7, 9));
+    EXPECT_CALL(midiB[0], sendImpl(sysex_ptr, 7, CABLE_10));
+    EXPECT_CALL(midiB[1], sendImpl(sysex_ptr, 7, CABLE_10));
     midiA[1].update();
 }
 
@@ -1806,7 +1800,7 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
         .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
         .WillOnce(Return(Packet_t{}));
 
-    auto unstall = [&] (MIDIStaller *staller) { 
+    auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
         ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
         midiA[0].sourceMIDItoPipe(msg);
@@ -1819,12 +1813,12 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
     // a Note On message first, and then un-stalls the pipe, allowing the SysEx
     // message to be sent.
     testing::Sequence s1, s2;
-    testing::Matcher<const uint8_t*> &&sysex_ptr = testing::Pointee(0xF0);
-    EXPECT_CALL(midiB[0], sendImpl(0x90, 0x12, 0x34, 0)) //
+    testing::Matcher<const uint8_t *> &&sysex_ptr = testing::Pointee(0xF0);
+    EXPECT_CALL(midiB[0], sendImpl(0x90, 0x12, 0x34, CABLE_1)) //
         .InSequence(s1, s2);
-    EXPECT_CALL(midiB[0], sendImpl(sysex_ptr, 7, 9))
+    EXPECT_CALL(midiB[0], sendImpl(sysex_ptr, 7, CABLE_10)) //
         .InSequence(s2);
-    EXPECT_CALL(midiB[1], sendImpl(sysex_ptr, 7, 9))
+    EXPECT_CALL(midiB[1], sendImpl(sysex_ptr, 7, CABLE_10)) //
         .InSequence(s1);
     midiA[1].update();
 }
@@ -1845,7 +1839,7 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
         .WillOnce(Return(Packet_t{0x98, 0x83, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{}));
 
-    auto unstall = [&] (MIDIStaller *staller) { 
+    auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
         ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
         midiA[0].sourceMIDItoPipe(msg);
@@ -1858,11 +1852,11 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
     // a Note On message first, and then un-stalls the pipe, allowing the
     // Note Off message to be sent.
     testing::Sequence s1, s2;
-    EXPECT_CALL(midiB[0], sendImpl(0x90, 0x12, 0x34, 0)) //
+    EXPECT_CALL(midiB[0], sendImpl(0x90, 0x12, 0x34, CABLE_1)) //
         .InSequence(s1, s2);
-    EXPECT_CALL(midiB[0], sendImpl(0x83, 0x55, 0x66, 9))
+    EXPECT_CALL(midiB[0], sendImpl(0x83, 0x55, 0x66, CABLE_10)) //
         .InSequence(s2);
-    EXPECT_CALL(midiB[1], sendImpl(0x83, 0x55, 0x66, 9))
+    EXPECT_CALL(midiB[1], sendImpl(0x83, 0x55, 0x66, CABLE_10)) //
         .InSequence(s1);
     midiA[1].update();
 }
@@ -1883,7 +1877,7 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
         .WillOnce(Return(Packet_t{0x9F, 0xF8, 0x00, 0x00}))
         .WillOnce(Return(Packet_t{}));
 
-    auto unstall = [&] (MIDIStaller *staller) { 
+    auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
         ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
         midiA[0].sourceMIDItoPipe(msg);
@@ -1893,13 +1887,13 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
 
     // When updating midiA[1], it sends the Real-Time message immediately,
     // even though the pipe is stalled.
-    EXPECT_CALL(midiB[0], sendImpl(0xF8, 9));
-    EXPECT_CALL(midiB[1], sendImpl(0xF8, 9));
+    EXPECT_CALL(midiB[0], sendImpl(0xF8, CABLE_10));
+    EXPECT_CALL(midiB[1], sendImpl(0xF8, CABLE_10));
     midiA[1].update();
 
     testing::Mock::VerifyAndClear(&midiB[0]);
     testing::Mock::VerifyAndClear(&midiB[1]);
-    EXPECT_CALL(midiB[0], sendImpl(0x90, 0x12, 0x34, 0));
+    EXPECT_CALL(midiB[0], sendImpl(0x90, 0x12, 0x34, CABLE_1));
     midiA[0].handleStallers();
 }
 
@@ -1915,7 +1909,7 @@ TEST(MIDI_Pipes, USBInterfaceLoopBack) {
         .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{}));
 
-    EXPECT_CALL(midi, writeUSBPacket(0x9, 0x9, 0x95, 0x55, 0x66));
+    EXPECT_CALL(midi, writeUSBPacket(CABLE_10, 0x9, 0x95, 0x55, 0x66));
     midi.update();
 }
 

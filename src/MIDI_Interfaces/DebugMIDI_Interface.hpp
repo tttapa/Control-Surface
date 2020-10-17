@@ -49,10 +49,10 @@ class StreamDebugMIDI_Interface : public MIDI_Interface {
     bool dispatchMIDIEvent(MIDIReadEvent event);
 
   protected:
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override;
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override;
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override;
-    void sendImpl(uint8_t rt, uint8_t cn) override;
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, Cable cn) override;
+    void sendImpl(uint8_t header, uint8_t d1, Cable cn) override;
+    void sendImpl(const uint8_t *data, size_t length, Cable cn) override;
+    void sendImpl(uint8_t rt, Cable cn) override;
 
   private:
     void handleStall() override {

@@ -1,40 +1,48 @@
 #pragma once
 
-#include <AH/STL/vector>        // std::vector
+#include <AH/STL/vector> // std::vector
 #include <Settings/NamespaceSettings.hpp>
 
 BEGIN_CS_NAMESPACE
 
 /**
- * @brief   Helper to pull bytes out of a buffer.
+ * @brief   Helper to pull bytes or other objects out of a buffer.
  * @ingroup MIDIParsers
  */
-class BufferPuller {
+template <class T = uint8_t>
+class BufferPuller_ {
   public:
-    BufferPuller(const uint8_t *buffer, size_t length)
+    BufferPuller_(const T *buffer, size_t length)
         : buffer(buffer), end(buffer + length) {}
 
-    BufferPuller(const std::vector<uint8_t> &buffer)
-        : BufferPuller(buffer.data(), buffer.size()) {}
-
-    template <size_t N>
-    BufferPuller(const uint8_t (&buffer)[N]) : BufferPuller(buffer, N) {}
-
-    /// Pull a byte out of the buffer.
-    /// @param[out] c
-    ///             A new byte from the buffer (if available).
-    /// @return True if a byte was available, false otherwise.
-    bool pull(uint8_t &c) {
+    /// Pull a value out of the buffer.
+    /// @param[out] output
+    ///             A new value from the buffer (if available).
+    /// @return True if a value was available, false otherwise.
+    bool pull(T &output) {
         if (buffer != end) {
-            c = *buffer++;
+            output = *buffer++;
             return true;
         }
         return false;
     }
 
   private:
-    const uint8_t *buffer;
-    const uint8_t *const end;
+    const T *buffer;
+    const T *const end;
 };
+
+template <class T>
+BufferPuller_<T> BufferPuller(const T *buffer, size_t length) {
+    return {buffer, length};
+}
+template <class T>
+BufferPuller_<T> BufferPuller(const std::vector<T> &buffer) {
+    return {buffer.data(), buffer.size()};
+}
+template <class T, size_t N>
+BufferPuller_<T> BufferPuller(const T (&buffer)[N]) {
+    return {buffer, N};
+}
 
 END_CS_NAMESPACE

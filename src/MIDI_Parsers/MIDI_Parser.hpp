@@ -13,18 +13,23 @@ BEGIN_CS_NAMESPACE
 
 /// Values returned by the MIDI reading functions.
 enum class MIDIReadEvent : uint8_t {
-    NO_MESSAGE = 0,       ///< No new messages were received.
-    CHANNEL_MESSAGE = 1,  ///< A MIDI Channel message was received.
-    SYSEX_MESSAGE = 2,    ///< A MIDI System Exclusive message was received.
-    REALTIME_MESSAGE = 3, ///< A MIDI Real-Time message was received.
-    SYSEX_CHUNK = 4,      ///< An incomplete System Exclusive message.
+    NO_MESSAGE = 0,        ///< No new messages were received.
+    CHANNEL_MESSAGE = 1,   ///< A MIDI Channel message was received.
+    SYSEX_MESSAGE = 2,     ///< A MIDI System Exclusive message was received.
+    REALTIME_MESSAGE = 3,  ///< A MIDI Real-Time message was received.
+    SYSEX_CHUNK = 4,       ///< An incomplete System Exclusive message.
+    SYSCOMMON_MESSAGE = 5, ///< A MIDI System Common message was received.
 };
 
 /// Base class for MIDI parsers.
 class MIDI_Parser {
   public:
     /// Get the latest MIDI channel message.
-    ChannelMessage getChannelMessage() const { return midimsg; }
+    ChannelMessage getChannelMessage() const { return ChannelMessage(midimsg); }
+    /// Get the latest MIDI system common message.
+    SysCommonMessage getSysCommonMessage() const {
+        return SysCommonMessage(midimsg);
+    }
     /// Get the latest MIDI real-time message.
     RealTimeMessage getRealTimeMessage() const { return rtmsg; }
 #if IGNORE_SYSEX
@@ -33,8 +38,8 @@ class MIDI_Parser {
 #endif
 
   protected:
-    ChannelMessage midimsg = {0xFF, 0x00, 0x00, 0x0};
-    RealTimeMessage rtmsg = {0xFF, 0x0};
+    MIDIMessage midimsg = {0xFF, 0x00, 0x00};
+    RealTimeMessage rtmsg = {0xFF};
 
   public:
     /// Check if the given byte is a MIDI header/status byte.

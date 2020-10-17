@@ -84,7 +84,7 @@ TEST(StreamMIDI_Interface, SysExSend8B) {
     StreamMIDI_Interface midi = stream;
     Sequence seq;
     u8vec sysex = {0xF0, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0xF7};
-    midi.send({sysex.data(), sysex.size(), 10});
+    midi.send({sysex.data(), sysex.size(), CABLE_1});
     EXPECT_EQ(stream.sent, sysex);
 }
 
@@ -111,7 +111,7 @@ TEST(StreamMIDI_Interface, readRealTime) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
     stream.toRead.push(0xF8);
-    RealTimeMessage expectedMsg = {MIDIMessageType::TIMING_CLOCK, 0};
+    RealTimeMessage expectedMsg = {MIDIMessageType::TIMING_CLOCK};
     EXPECT_EQ(midi.read(), MIDIReadEvent::REALTIME_MESSAGE);
     EXPECT_EQ(midi.getRealTimeMessage(), expectedMsg);
 }
@@ -122,7 +122,7 @@ TEST(StreamMIDI_Interface, readNoteOn) {
     for (auto v : {0x93, 0x3C, 0x60})
         stream.toRead.push(v);
     EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
-    ChannelMessage expectedMsg = {0x93, 0x3C, 0x60, 0x00};
+    ChannelMessage expectedMsg = {0x93, 0x3C, 0x60};
     EXPECT_EQ(midi.getChannelMessage(), expectedMsg);
 }
 
@@ -143,7 +143,7 @@ TEST(StreamMIDI_Interface, readSysEx) {
         0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7,
     };
     EXPECT_EQ(result, expected);
-    EXPECT_EQ(sysex.cable, 0);
+    EXPECT_EQ(sysex.cable, CABLE_1);
 }
 
 TEST(StreamMIDI_Interface, readNoteUpdate) {
@@ -166,7 +166,7 @@ TEST(StreamMIDI_Interface, readNoteUpdate) {
     midi.begin();
     for (auto v : {0x94, 0x12, 0x34})
         stream.toRead.push(v);
-    ChannelMessage expected = {0x94, 0x12, 0x34, 0};
+    ChannelMessage expected = {0x94, 0x12, 0x34};
     EXPECT_CALL(callbacks, onChannelMessage(&midi, expected));
     midi.update();
 }
@@ -191,7 +191,7 @@ TEST(StreamMIDI_Interface, readSysExUpdate) {
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7};
     for (auto v : sysex)
         stream.toRead.push(v);
-    SysExMessage expected = {sysex, 8, 0};
+    SysExMessage expected = {sysex, 8};
     EXPECT_CALL(callbacks, onSysExMessage(&midi, expected));
     midi.update();
 }
@@ -216,7 +216,7 @@ TEST(StreamMIDI_Interface, readRealTimeUpdate) {
     midi.setCallbacks(callbacks);
     midi.begin();
     stream.toRead.push(0xF8);
-    RealTimeMessage expected = {0xF8, 0};
+    RealTimeMessage expected = {0xF8};
     EXPECT_CALL(callbacks, onRealTimeMessage(&midi, expected));
     midi.update();
 }

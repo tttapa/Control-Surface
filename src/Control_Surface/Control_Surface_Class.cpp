@@ -80,17 +80,16 @@ void Control_Surface_::updateMidiInput() {
 }
 
 void Control_Surface_::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
-                                uint8_t cn) {
+                                Cable cn) {
     this->sourceMIDItoPipe(ChannelMessage{header, d1, d2, cn});
 }
-void Control_Surface_::sendImpl(uint8_t header, uint8_t d1, uint8_t cn) {
+void Control_Surface_::sendImpl(uint8_t header, uint8_t d1, Cable cn) {
     this->sourceMIDItoPipe(ChannelMessage{header, d1, 0x00, cn});
 }
-void Control_Surface_::sendImpl(const uint8_t *data, size_t length,
-                                uint8_t cn) {
+void Control_Surface_::sendImpl(const uint8_t *data, size_t length, Cable cn) {
     this->sourceMIDItoPipe(SysExMessage{data, length, cn});
 }
-void Control_Surface_::sendImpl(uint8_t rt, uint8_t cn) {
+void Control_Surface_::sendImpl(uint8_t rt, Cable cn) {
     this->sourceMIDItoPipe(RealTimeMessage{rt, cn});
 }
 
@@ -98,10 +97,11 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
 #ifdef DEBUG_MIDI_PACKETS
     if (midimsg.hasTwoDataBytes())
         DEBUG(">>> " << hex << midimsg.header << ' ' << midimsg.data1 << ' '
-                     << midimsg.data2 << " (" << midimsg.cable << ')' << dec);
+                     << midimsg.data2 << " (" << midimsg.cable.getOneBased()
+                     << ')' << dec);
     else
-        DEBUG(">>> " << hex << midimsg.header << ' ' << midimsg.data1 << " (" 
-                     << midimsg.cable << ')' << dec);
+        DEBUG(">>> " << hex << midimsg.header << ' ' << midimsg.data1 << " ("
+                     << midimsg.cable.getOneBased() << ')' << dec);
 #endif
 
     // If the Channel Message callback exists, call it to see if we have to
@@ -155,18 +155,26 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
                 break;
 
             // These MIDI types are not channel messages, so aren't handled here
-            case MIDIMessageType::SYSEX_START: break;          // LCOV_EXCL_LINE
-            case MIDIMessageType::SYSEX_END: break;            // LCOV_EXCL_LINE
-            case MIDIMessageType::TUNE_REQUEST: break;         // LCOV_EXCL_LINE
-            case MIDIMessageType::TIMING_CLOCK: break;         // LCOV_EXCL_LINE
-            case MIDIMessageType::UNDEFINED_REALTIME_1: break; // LCOV_EXCL_LINE
-            case MIDIMessageType::START: break;                // LCOV_EXCL_LINE
-            case MIDIMessageType::CONTINUE: break;             // LCOV_EXCL_LINE
-            case MIDIMessageType::STOP: break;                 // LCOV_EXCL_LINE
-            case MIDIMessageType::UNDEFINED_REALTIME_2: break; // LCOV_EXCL_LINE
-            case MIDIMessageType::ACTIVE_SENSING: break;       // LCOV_EXCL_LINE
-            case MIDIMessageType::RESET: break;                // LCOV_EXCL_LINE
-            default: break;                                    // LCOV_EXCL_LINE
+            // LCOV_EXCL_START
+            case MIDIMessageType::SYSEX_START: break;
+            case MIDIMessageType::MTC_QUARTER_FRAME: break;
+            case MIDIMessageType::SONG_POSITION_POINTER: break;
+            case MIDIMessageType::SONG_SELECT: break;
+            case MIDIMessageType::UNDEFINED_SYSCOMMON_1: break;
+            case MIDIMessageType::UNDEFINED_SYSCOMMON_2: break;
+            case MIDIMessageType::TUNE_REQUEST: break;
+            case MIDIMessageType::SYSEX_END: break;
+            case MIDIMessageType::TIMING_CLOCK: break;
+            case MIDIMessageType::UNDEFINED_REALTIME_1: break;
+            case MIDIMessageType::START: break;
+            case MIDIMessageType::CONTINUE: break;
+            case MIDIMessageType::STOP: break;
+            case MIDIMessageType::UNDEFINED_REALTIME_2: break;
+            case MIDIMessageType::ACTIVE_SENSING: break;
+            case MIDIMessageType::RESET: break;
+            default:
+                break;
+                // LCOV_EXCL_STOP
         }
     }
 }
@@ -189,8 +197,8 @@ void Control_Surface_::sinkMIDIfromPipe(SysExMessage msg) {
 
 void Control_Surface_::sinkMIDIfromPipe(RealTimeMessage rtMessage) {
 #ifdef DEBUG_MIDI_PACKETS
-    DEBUG(">>> " << hex << rtMessage.message << " (" << rtMessage.cable << ')' 
-                 << dec);
+    DEBUG(">>> " << hex << rtMessage.message << " ("
+                 << rtMessage.cable.getOneBased() << ')' << dec);
 #endif
 
     // If the Real-Time Message callback exists, call it to see if we have to

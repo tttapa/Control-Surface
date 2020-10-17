@@ -63,42 +63,42 @@ bool StreamDebugMIDI_Interface::dispatchMIDIEvent(MIDIReadEvent event) {
             return onSysExMessage(getSysExMessage());
         case MIDIReadEvent::REALTIME_MESSAGE:
             return onRealTimeMessage(getRealTimeMessage());
-        default: return true; // LCOV_EXCL_LINE
+        case MIDIReadEvent::SYSCOMMON_MESSAGE: return true; // TODO
+        default: return true;                               // LCOV_EXCL_LINE
     }
 }
 
 void StreamDebugMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
-                                         uint8_t cn) {
+                                         Cable cn) {
     uint8_t messageType = (header >> 4) - 8;
     if (messageType >= 7)
         return;
     uint8_t c = header & 0x0F;
     getStream() << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
                 << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
-                << F("\tData 2: 0x") << d2 << dec << F("\tCable: ") << (cn + 1)
-                << endl;
+                << F("\tData 2: 0x") << d2 << dec << F("\tCable: ")
+                << cn.getOneBased() << endl;
 }
 
-void StreamDebugMIDI_Interface::sendImpl(uint8_t header, uint8_t d1,
-                                         uint8_t cn) {
+void StreamDebugMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, Cable cn) {
     uint8_t messageType = (header >> 4) - 8;
     if (messageType >= 7)
         return;
     uint8_t c = header & 0x0F;
     getStream() << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
                 << F("\tChannel: ") << (c + 1) << F("\tData 1: 0x") << hex << d1
-                << dec << F("\tCable: ") << (cn + 1) << endl;
+                << dec << F("\tCable: ") << cn.getOneBased() << endl;
 }
 
 void StreamDebugMIDI_Interface::sendImpl(const uint8_t *data, size_t length,
-                                         uint8_t cn) {
+                                         Cable cn) {
     getStream() << F("SysEx           \t") << AH::HexDump(data, length)
-                << F("\tCable: ") << (cn + 1) << "\r\n";
+                << F("\tCable: ") << cn.getOneBased() << "\r\n";
 }
 
-void StreamDebugMIDI_Interface::sendImpl(uint8_t rt, uint8_t cn) {
+void StreamDebugMIDI_Interface::sendImpl(uint8_t rt, Cable cn) {
     getStream() << F("Real-Time: 0x") << hex << uppercase << rt << dec
-                << F("\tCable: ") << (cn + 1) << endl;
+                << F("\tCable: ") << cn.getOneBased() << endl;
 }
 
 END_CS_NAMESPACE

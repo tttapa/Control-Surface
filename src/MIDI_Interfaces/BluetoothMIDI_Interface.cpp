@@ -79,7 +79,7 @@ void BluetoothMIDI_Interface::stopSendingThread() {
 // The following section implements the MIDI sending functions.
 
 void BluetoothMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
-                                       uint8_t) {
+                                       Cable) {
     // BLE packets are sent asynchronously, so we need a lock to access the
     // packet buffer
     lock_t lock(mtx);
@@ -97,9 +97,9 @@ void BluetoothMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
     cv.notify_one();
 }
 
-void BluetoothMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, uint8_t) {
+void BluetoothMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, Cable) {
     // For comments, see
-    //   sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t) above
+    //   sendImpl(uint8_t header, uint8_t d1, uint8_t d2, Cable) above
     lock_t lock(mtx);
     uint16_t timestamp = millis();
     if (!packetbuilder.add2B(header, d1, timestamp)) {
@@ -110,9 +110,9 @@ void BluetoothMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, uint8_t) {
     cv.notify_one();
 }
 
-void BluetoothMIDI_Interface::sendImpl(uint8_t rt, uint8_t) {
+void BluetoothMIDI_Interface::sendImpl(uint8_t rt, Cable) {
     // For comments, see
-    //   sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t) above
+    //   sendImpl(uint8_t header, uint8_t d1, uint8_t d2, Cable) above
     lock_t lock(mtx);
     uint16_t timestamp = millis();
     if (!packetbuilder.addRealTime(rt, timestamp)) {
@@ -124,7 +124,7 @@ void BluetoothMIDI_Interface::sendImpl(uint8_t rt, uint8_t) {
 }
 
 void BluetoothMIDI_Interface::sendImpl(const uint8_t *data, size_t length,
-                                       uint8_t) {
+                                       Cable) {
     // SysEx is always at least a SysExStart plus a SysExEnd, so >= 2 bytes
     if (length < 2)
         return;

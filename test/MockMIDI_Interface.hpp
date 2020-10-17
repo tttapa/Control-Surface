@@ -9,17 +9,18 @@ class EmptyParser : public CS::MIDI_Parser {
         static EmptyParser instance;
         return instance;
     }
-    CS::SysExMessage getSysExMessage() const { return {nullptr, 0, 0}; }
+    CS::SysExMessage getSysExMessage() const { return {nullptr, 0}; }
 };
 
 class MockMIDI_Interface : public CS::MIDI_Interface {
+    using Cable = CS::Cable;
+
   public:
     MOCK_METHOD(CS::MIDIReadEvent, read, ());
-    MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t, uint8_t, uint8_t),
-                (override));
-    MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t, uint8_t), (override));
-    MOCK_METHOD(void, sendImpl, (const uint8_t *, size_t, uint8_t), (override));
-    MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t), (override));
+    MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t, uint8_t, Cable), (override));
+    MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t, Cable), (override));
+    MOCK_METHOD(void, sendImpl, (const uint8_t *, size_t, Cable), (override));
+    MOCK_METHOD(void, sendImpl, (uint8_t, Cable), (override));
     MOCK_METHOD(void, handleStall, (), (override));
     void update() override {}
 };

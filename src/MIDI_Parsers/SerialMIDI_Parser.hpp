@@ -33,7 +33,7 @@ class SerialMIDI_Parser : public MIDI_Parser {
   public:
     /// Get the latest SysEx message.
     SysExMessage getSysExMessage() const {
-        return {sysexbuffer.getBuffer(), sysexbuffer.getLength(), 0};
+        return {sysexbuffer.getBuffer(), sysexbuffer.getLength()};
     }
 
   protected:

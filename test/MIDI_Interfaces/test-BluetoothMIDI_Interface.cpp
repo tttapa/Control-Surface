@@ -49,7 +49,7 @@ TEST(BluetoothMIDIInterface, receiveChannelMessage) {
     EXPECT_EQ(cb.sysExCounter, 0);
 
     std::vector<ChannelMessage> expectedChannelMessages = {
-        {0x90, 0x3C, 0x7F, 0x00},
+        {0x90, 0x3C, 0x7F},
     };
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
@@ -70,9 +70,9 @@ TEST(BluetoothMIDIInterface, receiveMultipleChannelMessage) {
     EXPECT_EQ(cb.sysExCounter, 0);
 
     std::vector<ChannelMessage> expectedChannelMessages = {
-        {0x90, 0x3C, 0x7F, 0x00},
-        {0x80, 0x3D, 0x7E, 0x00},
-        {0xB1, 0x10, 0x40, 0x00},
+        {0x90, 0x3C, 0x7F},
+        {0x80, 0x3D, 0x7E},
+        {0xB1, 0x10, 0x40},
     };
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
@@ -93,9 +93,9 @@ TEST(BluetoothMIDIInterface, receiveMultipleChannelMessageRunningStatus) {
     EXPECT_EQ(cb.sysExCounter, 0);
 
     std::vector<ChannelMessage> expectedChannelMessages = {
-        {0x90, 0x3C, 0x7F, 0x00},
-        {0x90, 0x3D, 0x7E, 0x00},
-        {0xB1, 0x10, 0x40, 0x00},
+        {0x90, 0x3C, 0x7F},
+        {0x90, 0x3D, 0x7E},
+        {0xB1, 0x10, 0x40},
     };
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
@@ -119,9 +119,9 @@ TEST(BluetoothMIDIInterface,
     EXPECT_EQ(cb.sysExCounter, 0);
 
     std::vector<ChannelMessage> expectedChannelMessages = {
-        {0x90, 0x3C, 0x7F, 0x00},
-        {0x90, 0x3D, 0x7E, 0x00},
-        {0xB1, 0x10, 0x40, 0x00},
+        {0x90, 0x3C, 0x7F},
+        {0x90, 0x3D, 0x7E},
+        {0xB1, 0x10, 0x40},
     };
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
@@ -142,9 +142,9 @@ TEST(BluetoothMIDIInterface, receiveMultipleTwoByteChannelMessage) {
     EXPECT_EQ(cb.sysExCounter, 0);
 
     std::vector<ChannelMessage> expectedChannelMessages = {
-        {0xD0, 0x3C, 0x00, 0x00},
-        {0xC0, 0x3D, 0x00, 0x00},
-        {0xB1, 0x10, 0x40, 0x00},
+        {0xD0, 0x3C, 0x00},
+        {0xC0, 0x3D, 0x00},
+        {0xB1, 0x10, 0x40},
     };
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }

@@ -35,9 +35,8 @@ MIDIReadEvent SerialMIDI_Parser::handleStatus(uint8_t midiByte) {
                 // at the same time, so store the Tune Request for later.
                 storeByte(midiByte);
             } else {
-                // TODO: store SysCommon byte
-                // return MIDIReadEvent::SYSTEM_COMMON_MESSAGE;
-                return MIDIReadEvent::NO_MESSAGE;
+                midimsg.header = midiByte;
+                return MIDIReadEvent::SYSCOMMON_MESSAGE;
             }
         }
 
@@ -96,30 +95,69 @@ MIDIReadEvent SerialMIDI_Parser::handleStatus(uint8_t midiByte) {
 MIDIReadEvent SerialMIDI_Parser::handleData(uint8_t midiByte) {
     // If this is the third byte of three (second data byte)
     if (thirdByte) {
-        midimsg.data2 = midiByte;
-        // Next byte is either a header or the first data byte of the next
-        // message, so clear the thirdByte flag
-        thirdByte = false;
-        return MIDIReadEvent::CHANNEL_MESSAGE;
+        // If it's a channel message
+        if (midimsg.hasValidChannelMessageHeader()) {
+            midimsg.data2 = midiByte;
+            // Next byte is either a header or the first data byte of the next
+            // message, so clear the thirdByte flag
+            thirdByte = false;
+            return MIDIReadEvent::CHANNEL_MESSAGE;
+        }
+        // If it's a system common message
+        else if (midimsg.hasValidSystemCommonHeader()) {
+            midimsg.data2 = midiByte;
+            thirdByte = false;
+            return MIDIReadEvent::SYSCOMMON_MESSAGE;
+        } else {
+            ERROR(F("Unexpected third byte"), 0x3333); // LCOV_EXCL_LINE
+            return MIDIReadEvent::NO_MESSAGE;          // LCOV_EXCL_LINE
+        }
     }
 
     // If this is not the third byte of three, it's either the second byte
     // (first data byte) of a channel message, or a SysEx data byte
 
-    // If it's a channel message with two data bytes
-    else if (midimsg.hasTwoDataBytes()) {
-        midimsg.data1 = midiByte;
-        // We've received the second byte, expect the third byte next
-        thirdByte = true;
+    // If the previous SysEx was complete, but no other headers were received
+    else if (midimsg.header == uint8_t(MIDIMessageType::SYSEX_END)) {
+        DEBUGREF(F("Unexpected data after SysExEnd"));
         return MIDIReadEvent::NO_MESSAGE;
     }
 
-    // If it's a channel message with one data byte
-    // (if it has a valid channel message header)
-    else if (midimsg.hasValidHeader()) {
-        midimsg.data1 = midiByte;
-        // The message is finished
-        return MIDIReadEvent::CHANNEL_MESSAGE;
+    // If it's a channel message
+    else if (midimsg.hasValidChannelMessageHeader()) {
+        // If it's a channel message with two data bytes
+        if (ChannelMessage(midimsg).hasTwoDataBytes()) {
+            midimsg.data1 = midiByte;
+            // We've received the second byte, expect the third byte next
+            thirdByte = true;
+            return MIDIReadEvent::NO_MESSAGE;
+        }
+        // If it's a channel message with one data byte
+        else {
+            midimsg.data1 = midiByte;
+            // The message is finished
+            return MIDIReadEvent::CHANNEL_MESSAGE;
+        }
+    }
+
+    // If it's a system common message
+    else if (midimsg.hasValidSystemCommonHeader()) {
+        // If it's a channel message with two data bytes
+        if (SysCommonMessage(midimsg).getNumberOfDataBytes() == 2) {
+            midimsg.data1 = midiByte;
+            // We've received the second byte, expect the third byte next
+            thirdByte = true;
+            return MIDIReadEvent::NO_MESSAGE;
+        }
+        // If it's a channel message with one data byte
+        else if (SysCommonMessage(midimsg).getNumberOfDataBytes() == 1) {
+            midimsg.data1 = midiByte;
+            // The message is finished
+            return MIDIReadEvent::SYSCOMMON_MESSAGE;
+        } else {
+            DEBUGREF(F("Unexpected data byte"));
+            return MIDIReadEvent::NO_MESSAGE;
+        }
     }
 
     // Otherwise, it's not a channel message

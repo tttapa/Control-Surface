@@ -29,6 +29,13 @@ class Cable {
     constexpr uint8_t getRaw() const { return zeroBasedCable; }
 
     /**
+     * @brief   Get the cable as an integer.
+     * 
+     * @return  The one-based cable (1 is the first cable).
+     */
+    constexpr uint8_t getOneBased() const { return zeroBasedCable + 1; }
+
+    /**
      * @brief   Create a cable.
      * 
      * @param   oneBasedCable

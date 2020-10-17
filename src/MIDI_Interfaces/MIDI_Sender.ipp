@@ -24,7 +24,7 @@ void MIDI_Sender<Derived>::sendOnCable(MIDIMessageType m, Channel c, uint8_t d1,
     mm |= 0b10000000; // set msb
     d1 &= 0x7F;       // clear msb
     d2 &= 0x7F;       // clear msb
-    CRTP(Derived).sendImpl(mm | cc, d1, d2, cable.getRaw());
+    CRTP(Derived).sendImpl(mm | cc, d1, d2, cable);
 }
 
 template <class Derived>
@@ -35,14 +35,14 @@ void MIDI_Sender<Derived>::sendOnCable(MIDIMessageType m, Channel c, uint8_t d1,
     mm &= 0xF0;       // bitmask high nibble
     mm |= 0b10000000; // set msb
     d1 &= 0x7F;       // clear msb
-    CRTP(Derived).sendImpl(mm | cc, d1, cable.getRaw());
+    CRTP(Derived).sendImpl(mm | cc, d1, cable);
 }
 
 template <class Derived>
 void MIDI_Sender<Derived>::sendOnCable(MIDIMessageType r, Cable cable) {
     uint8_t rr = static_cast<uint8_t>(r);
     rr |= 0b10000000; // set msb
-    CRTP(Derived).sendImpl(rr, cable.getRaw());
+    CRTP(Derived).sendImpl(rr, cable);
 }
 
 template <class Derived>

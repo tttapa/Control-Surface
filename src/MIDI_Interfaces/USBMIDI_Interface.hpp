@@ -50,24 +50,25 @@ class USBMIDI_Interface : public MIDI_Interface {
 #ifndef ARDUINO
   public:
     MOCK_METHOD(void, writeUSBPacket,
-                (uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));
+                (Cable, uint8_t, uint8_t, uint8_t, uint8_t));
     MOCK_METHOD(MIDIUSBPacket_t, readUSBPacket, ());
     void flushUSB() {}
 
-  private:
 #else
-    void writeUSBPacket(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1,
+  private:
+    void writeUSBPacket(Cable cn, uint8_t cin, uint8_t d0, uint8_t d1,
                         uint8_t d2) {
-        USBMIDI::write(cn, cin, d0, d1, d2);
+        USBMIDI::write(cn.getRaw(), cin, d0, d1, d2);
     }
     MIDIUSBPacket_t readUSBPacket() { return USBMIDI::read(); }
     void flushUSB() { USBMIDI::flush(); }
 #endif
 
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override;
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override;
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override;
-    void sendImpl(uint8_t rt, uint8_t cn) override;
+  private:
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, Cable cn) override;
+    void sendImpl(uint8_t header, uint8_t d1, Cable cn) override;
+    void sendImpl(const uint8_t *data, size_t length, Cable cn) override;
+    void sendImpl(uint8_t rt, Cable cn) override;
 
   public:
     /**

@@ -24,7 +24,7 @@ class StreamMIDI_Interface : public MIDI_Interface {
     StreamMIDI_Interface(Stream &stream) : stream(stream) {}
 
     /// Try reading and parsing a single incoming MIDI message.
-    /// @return  Returns the type of the read message, or 
+    /// @return  Returns the type of the read message, or
     ///          `MIDIReadEvent::NO_MESSAGE` if no MIDI message was available.
     MIDIReadEvent read();
 
@@ -45,10 +45,10 @@ class StreamMIDI_Interface : public MIDI_Interface {
     bool dispatchMIDIEvent(MIDIReadEvent event);
 
   protected:
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override;
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override;
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override;
-    void sendImpl(uint8_t rt, uint8_t cn) override;
+    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, Cable cn) override;
+    void sendImpl(uint8_t header, uint8_t d1, Cable cn) override;
+    void sendImpl(const uint8_t *data, size_t length, Cable cn) override;
+    void sendImpl(uint8_t rt, Cable cn) override;
 
   private:
     void handleStall() override {
