@@ -47,6 +47,9 @@ constexpr uint8_t NOTE_VELOCITY_THRESHOLD = 1;
  */
 constexpr size_t SYSEX_BUFFER_SIZE = 128;
 
+/// Timeout in milliseconds to wait for a SysEx chunk to complete.
+constexpr unsigned long SYSEX_CHUNK_TIMEOUT = 500;
+
 /// The baud rate to use for Hairless MIDI.
 constexpr unsigned long HAIRLESS_BAUD = 115200;
 

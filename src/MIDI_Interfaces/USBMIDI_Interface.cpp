@@ -18,30 +18,9 @@ MIDIReadEvent USBMIDI_Interface::read() {
     return parser.pull(LambdaPuller(std::move(pullpacket)));
 }
 
-void USBMIDI_Interface::update() {
-    MIDIReadEvent event = read();
-    while (event != MIDIReadEvent::NO_MESSAGE) { // As long as there are
-                                                 // incoming messages
-        dispatchMIDIEvent(event);
-        event = read();
-    }
-    // TODO: check if we should block the pipe
-}
+void USBMIDI_Interface::update() { MIDI_Interface::updateIncoming(this); }
 
-bool USBMIDI_Interface::dispatchMIDIEvent(MIDIReadEvent event) {
-    switch (event) {
-        case MIDIReadEvent::NO_MESSAGE: return true; // LCOV_EXCL_LINE
-        case MIDIReadEvent::CHANNEL_MESSAGE:
-            return onChannelMessage(getChannelMessage());
-        case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
-        case MIDIReadEvent::SYSEX_MESSAGE:
-            return onSysExMessage(getSysExMessage());
-        case MIDIReadEvent::REALTIME_MESSAGE:
-            return onRealTimeMessage(getRealTimeMessage());
-        case MIDIReadEvent::SYSCOMMON_MESSAGE: return true; // TODO
-        default: return true;                               // LCOV_EXCL_LINE
-    }
-}
+void USBMIDI_Interface::handleStall() { MIDI_Interface::handleStall(this); }
 
 // -------------------------------------------------------------------------- //
 
@@ -93,7 +72,7 @@ void USBMIDI_Interface::sendSysExEnd(const uint8_t *data, uint16_t length,
         case 3: writeUSBPacket(cable, 0x7, data[0], data[1], data[2]); break;
         case 2: writeUSBPacket(cable, 0x6, data[0], data[1], 0); break;
         case 1: writeUSBPacket(cable, 0x5, data[0], 0, 0); break;
-        default: break;
+        default: break; // LCOV_EXCL_LINE
     }
 }
 

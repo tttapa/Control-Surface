@@ -51,11 +51,7 @@ class StreamMIDI_Interface : public MIDI_Interface {
     void sendRealTimeImpl(RealTimeMessage) override;
 
   private:
-    void handleStall() override {
-        auto stallername = MIDIStaller::getNameNull(getStaller());
-        ERROR(F("Not implemented (stalled by ") << stallername << ')', 0x1349);
-        (void)stallername;
-    }
+    void handleStall() override;
 
   protected:
     Stream &stream;

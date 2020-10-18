@@ -95,9 +95,6 @@ class USBMIDI_Interface : public MIDI_Interface {
 
     void update() override;
 
-  protected:
-    bool dispatchMIDIEvent(MIDIReadEvent event);
-
   public:
     /// Return the received channel message.
     ChannelMessage getChannelMessage() const {
@@ -111,11 +108,7 @@ class USBMIDI_Interface : public MIDI_Interface {
     SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
 
   private:
-    void handleStall() override {
-        auto stallername = MIDIStaller::getNameNull(getStaller());
-        ERROR(F("Not implemented (stalled by ") << stallername << ')', 0x1349);
-        (void)stallername;
-    }
+    void handleStall() override;
 
   private:
     USBMIDI_Parser parser;

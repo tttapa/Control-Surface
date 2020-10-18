@@ -146,18 +146,21 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
 
   private:
-    bool dispatchMIDIEvent(MIDIReadEvent event) {
+    void dispatchMIDIEvent(MIDIReadEvent event) {
         switch (event) {
-            case MIDIReadEvent::NO_MESSAGE: return true;
             case MIDIReadEvent::CHANNEL_MESSAGE:
-                return onChannelMessage(getChannelMessage());
+                onChannelMessage(getChannelMessage());
+                break;
             case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
             case MIDIReadEvent::SYSEX_MESSAGE:
-                return onSysExMessage(getSysExMessage());
+                onSysExMessage(getSysExMessage());
+                break;
             case MIDIReadEvent::REALTIME_MESSAGE:
-                return onRealTimeMessage(getRealTimeMessage());
-            case MIDIReadEvent::SYSCOMMON_MESSAGE: return true; // TODO
-            default: return true;
+                onRealTimeMessage(getRealTimeMessage());
+                break;
+            case MIDIReadEvent::SYSCOMMON_MESSAGE: break; // TODO
+            case MIDIReadEvent::NO_MESSAGE: break;        // LCOV_EXCL_LINE
+            default: break;                               // LCOV_EXCL_LINE
         }
     }
 

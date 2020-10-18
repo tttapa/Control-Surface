@@ -11,32 +11,9 @@ MIDIReadEvent StreamMIDI_Interface::read() {
     return parser.pull(StreamPuller(stream));
 }
 
-void StreamMIDI_Interface::update() {
-    MIDIReadEvent event = read();
-    while (event != MIDIReadEvent::NO_MESSAGE) {
-        dispatchMIDIEvent(event);
-        event = read();
-    }
-    // TODO: add logic to detect MIDI messages such as (N)RPN that span over
-    // multiple channel messages and that shouldn't be interrupted.
-    // For short messages such as (N)RPN, I suggest waiting with a timeout,
-    // for chunked SysEx, it's probably best to stall the pipe and return.
-}
+void StreamMIDI_Interface::update() { MIDI_Interface::updateIncoming(this); }
 
-bool StreamMIDI_Interface::dispatchMIDIEvent(MIDIReadEvent event) {
-    switch (event) {
-        case MIDIReadEvent::NO_MESSAGE: return true; // LCOV_EXCL_LINE
-        case MIDIReadEvent::CHANNEL_MESSAGE:
-            return onChannelMessage(getChannelMessage());
-        case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
-        case MIDIReadEvent::SYSEX_MESSAGE:
-            return onSysExMessage(getSysExMessage());
-        case MIDIReadEvent::REALTIME_MESSAGE:
-            return onRealTimeMessage(getRealTimeMessage());
-        case MIDIReadEvent::SYSCOMMON_MESSAGE: return true; // TODO
-        default: return true;                               // LCOV_EXCL_LINE
-    }
-}
+void StreamMIDI_Interface::handleStall() { MIDI_Interface::handleStall(this); }
 
 // -------------------------------------------------------------------------- //
 

@@ -2208,3 +2208,62 @@ TEST(MIDI_Pipes, disconnectSinkFromSource) {
                   nullptr);
     }
 }
+
+#include <MIDI_Interfaces/SerialMIDI_Interface.hpp>
+#include <TestStream.hpp>
+#include <random>
+
+TEST(MIDI_Pipes, StreamMIDIInterfaceSysExChunks) {
+    StrictMock<TestStream> streams[2];
+    StreamMIDI_Interface midiA[2] = {streams[0], streams[1]};
+    StrictMock<MockMIDI_Interface> midiB;
+
+    MIDI_Pipe pipe1, pipe2;
+
+    midiA[0] >> pipe1 >> midiB;
+    midiA[1] >> pipe2 >> midiB;
+
+    std::vector<uint8_t> sysex(2 * SYSEX_BUFFER_SIZE + 10);
+    sysex.front() = 0xF0;
+    sysex.back() = 0xF7;
+    std::mt19937 rnd(0);
+    std::uniform_int_distribution<uint8_t> dist(0, 127);
+    std::generate(sysex.begin() + 1, sysex.end() - 1, std::bind(dist, rnd));
+
+    // Enough for one chunk, should stall the pipe
+    streams[0].toRead = std::queue<uint8_t>(std::deque<uint8_t>(
+        sysex.begin(), sysex.begin() + SYSEX_BUFFER_SIZE + 1));
+
+    SysExMessage chunk1 = SysExMessage(sysex.data(), SYSEX_BUFFER_SIZE);
+    EXPECT_CALL(midiB, sendSysExImpl(chunk1));
+    midiA[0].update();
+    testing::Mock::VerifyAndClear(&midiB);
+
+    EXPECT_TRUE(pipe1.isStalled());
+    EXPECT_TRUE(pipe2.isStalled());
+
+    streams[0].toRead = std::queue<uint8_t>(std::deque<uint8_t>(
+        sysex.begin() + SYSEX_BUFFER_SIZE + 1, sysex.end()));
+
+    std::vector<uint8_t> noteMsg = {0x92, 0x12, 0x13};
+    streams[1].toRead = std::queue<uint8_t>(
+        std::deque<uint8_t>(noteMsg.begin(), noteMsg.end()));
+
+    SysExMessage chunk2 =
+        SysExMessage(sysex.data() + SYSEX_BUFFER_SIZE, SYSEX_BUFFER_SIZE);
+    SysExMessage chunk3 =
+        SysExMessage(sysex.data() + 2 * SYSEX_BUFFER_SIZE, 10);
+    ChannelMessage noteMsg1 = {MIDIMessageType::NOTE_ON, CHANNEL_3, 0x12, 0x13};
+    testing::Sequence s;
+    EXPECT_CALL(midiB, sendSysExImpl(chunk2)).InSequence(s);
+    EXPECT_CALL(midiB, sendSysExImpl(chunk3)).InSequence(s);
+    EXPECT_CALL(midiB, sendChannelMessageImpl(noteMsg1)).InSequence(s);
+    EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillRepeatedly(Return(0));
+    // midiA[1] parses a message and tries to send it over the pipe, but it's
+    // stalled by midiA[0], so it calls back to midiA[0], which reads and parses
+    // the rest of the SysEx message and un-stalls the pipe, so midiA[1] can
+    // send its message
+    midiA[1].update();
+    testing::Mock::VerifyAndClear(&midiB);
+    testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}

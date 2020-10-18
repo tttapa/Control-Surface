@@ -32,25 +32,22 @@ MIDI_Interface *MIDI_Interface::DefaultMIDI_Interface = nullptr;
 
 // Handling incoming MIDI events
 
-bool MIDI_Interface::onChannelMessage(ChannelMessage message) {
+void MIDI_Interface::onChannelMessage(ChannelMessage message) {
     sourceMIDItoPipe(message);
     if (callbacks)
         callbacks->onChannelMessage(*this, message);
-    return true;
 }
 
-bool MIDI_Interface::onSysExMessage(SysExMessage message) {
+void MIDI_Interface::onSysExMessage(SysExMessage message) {
     sourceMIDItoPipe(message);
     if (callbacks)
         callbacks->onSysExMessage(*this, message);
-    return true;
 }
 
-bool MIDI_Interface::onRealTimeMessage(RealTimeMessage message) {
+void MIDI_Interface::onRealTimeMessage(RealTimeMessage message) {
     sourceMIDItoPipe(message);
     if (callbacks)
         callbacks->onRealTimeMessage(*this, message);
-    return true;
 }
 
 END_CS_NAMESPACE

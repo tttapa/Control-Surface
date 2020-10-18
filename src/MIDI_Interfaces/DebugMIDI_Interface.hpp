@@ -46,9 +46,6 @@ class StreamDebugMIDI_Interface : public MIDI_Interface {
     void update() override;
 
   protected:
-    bool dispatchMIDIEvent(MIDIReadEvent event);
-
-  protected:
     // MIDI send implementations
     void sendChannelMessageImpl(ChannelMessage) override;
     void sendSysCommonImpl(SysCommonMessage) override { /* TODO */ }
@@ -56,11 +53,7 @@ class StreamDebugMIDI_Interface : public MIDI_Interface {
     void sendRealTimeImpl(RealTimeMessage) override;
 
   private:
-    void handleStall() override {
-        auto stallername = MIDIStaller::getNameNull(getStaller());
-        ERROR(F("Not implemented (stalled by ") << stallername << ')', 0x1349);
-        (void)stallername;
-    }
+    void handleStall() override;
 
   private:
     HexPuller<StreamPuller> hexstream;
