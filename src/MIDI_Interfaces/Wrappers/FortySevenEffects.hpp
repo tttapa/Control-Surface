@@ -123,16 +123,19 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
     }
 
   protected:
-    bool dispatchMIDIEvent(MIDIReadEvent event) {
+    void dispatchMIDIEvent(MIDIReadEvent event) {
         switch (event) {
-            case MIDIReadEvent::NO_MESSAGE: return true;
+            case MIDIReadEvent::NO_MESSAGE: break;
             case MIDIReadEvent::CHANNEL_MESSAGE:
-                return onChannelMessage(getChannelMessage());
+                onChannelMessage(getChannelMessage());
+                break;
             case MIDIReadEvent::SYSEX_MESSAGE:
-                return onSysExMessage(getSysExMessage());
+                onSysExMessage(getSysExMessage());
+                break;
             case MIDIReadEvent::REALTIME_MESSAGE:
-                return onRealTimeMessage(getRealTimeMessage());
-            default: return true;
+                onRealTimeMessage(getRealTimeMessage());
+                break;
+            default: break;
         }
     }
 
