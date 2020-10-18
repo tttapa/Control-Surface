@@ -37,15 +37,15 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
     // Print the message
     Serial << F("Channel message: ")                                        //
            << hex << cm.header << ' ' << cm.data1 << ' ' << cm.data2 << dec //
-           << F(" on cable ") << cm.cable << endl;
+           << F(" on cable ") << cm.cable.getOneBased() << endl;
   }
 
   // Callback for system exclusive messages
   void onSysExMessage(MIDI_Interface &, SysExMessage se) override {
     // Print the message
-    Serial << F("System Exclusive message: ") //
-           << AH::HexDump(se.data, se.length) //
-           << F(" on cable ") << se.cable << endl;
+    Serial << F("System Exclusive message: [") << se.length << "] " //
+           << AH::HexDump(se.data, se.length)                       //
+           << F(" on cable ") << se.cable.getOneBased() << endl;
   }
 
   // Callback for real-time messages
@@ -53,7 +53,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
     // Print the message
     Serial << F("Real-time message: ") //
            << hex << rt.message << dec //
-           << F(" on cable ") << rt.cable << endl;
+           << F(" on cable ") << rt.cable.getOneBased() << endl;
   }
 
 } callbacks;

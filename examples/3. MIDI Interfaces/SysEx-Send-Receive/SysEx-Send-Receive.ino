@@ -17,7 +17,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
     // Print the message
     Serial << F("Received SysEx message: ")         //
            << AH::HexDump(sysex.data, sysex.length) //
-           << F(" on cable ") << sysex.cable << endl;
+           << F(" on cable ") << sysex.cable.getOneBased() << endl;
   }
 
 } callback = {};

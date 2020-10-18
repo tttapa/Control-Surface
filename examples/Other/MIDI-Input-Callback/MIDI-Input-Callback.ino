@@ -29,8 +29,9 @@
 USBMIDI_Interface midi;
 
 bool channelMessageCallback(ChannelMessage cm) {
-  Serial << F("Channel message: ") << hex << cm.header << ' ' << cm.data1 << ' '
-         << cm.data2 << dec << F(" on cable ") << cm.cable << endl;
+  Serial << F("Channel message: ") << hex                   //
+         << cm.header << ' ' << cm.data1 << ' ' << cm.data2 //
+         << dec << F(" on cable ") << cm.cable.getOneBased() << endl;
   return true; // Return true to indicate that handling is done,
                // and Control_Surface shouldn't handle it anymore.
                // If you want Control_Surface to handle it as well,
@@ -38,10 +39,9 @@ bool channelMessageCallback(ChannelMessage cm) {
 }
 
 bool sysExMessageCallback(SysExMessage se) {
-  Serial << F("System Exclusive message: ") << hex;
-  for (size_t i = 0; i < se.length; ++i)
-    Serial << se.data[i] << ' ';
-  Serial << dec << F("on cable ") << se.cable << endl;
+  Serial << F("System Exclusive message: [") << se.length << "] " //
+         << AH::HexDump(se.data, se.length)                       //
+         << F(" on cable ") << se.cable.getOneBased() << endl;
   return true; // Return true to indicate that handling is done,
                // and Control_Surface shouldn't handle it anymore.
                // If you want Control_Surface to handle it as well,
@@ -49,8 +49,9 @@ bool sysExMessageCallback(SysExMessage se) {
 }
 
 bool realTimeMessageCallback(RealTimeMessage rt) {
-  Serial << F("Real-Time message: ") << hex << rt.message << dec
-         << F(" on cable ") << rt.cable << endl;
+  Serial << F("Real-time message: ") //
+         << hex << rt.message << dec //
+         << F(" on cable ") << rt.cable.getOneBased() << endl;
   return true; // Return true to indicate that handling is done,
                // and Control_Surface shouldn't handle it anymore.
                // If you want Control_Surface to handle it as well,
@@ -63,7 +64,8 @@ void setup() {
   Control_Surface.setMIDIInputCallbacks(channelMessageCallback,   //
                                         sysExMessageCallback,     //
                                         realTimeMessageCallback); //
-  // If you don't need all three callbacks, pass `nullptr` instead of a function
+  // If you don't need all three callbacks, you can pass `nullptr` instead of a
+  // function pointer
 }
 
 void loop() {
