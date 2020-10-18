@@ -323,7 +323,8 @@ struct RealTimeMessage {
 
 #ifndef ARDUINO
 inline std::ostream &operator<<(std::ostream &os, SysExMessage m) {
-    os << "SysExMessage [" << m.length << "] " << AH::HexDump(m.data, m.length);
+    os << "SysExMessage [" << m.length << "] " << AH::HexDump(m.data, m.length)
+       << " (cable " << m.cable.getOneBased() << ")";
     return os;
 }
 #endif

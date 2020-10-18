@@ -28,7 +28,7 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
         this->midimsg.header = interface.getType() | channel;
         this->midimsg.data1 = interface.getData1();
         this->midimsg.data2 = interface.getData2();
-        this->midimsg.cable = 0;
+        this->midimsg.cable = CABLE_1;
     }
 
     /// Get the latest system exclusive message from the given MIDI interface.
@@ -36,18 +36,18 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
     void updateSysExMessage(const MidiInterface &interface) {
         this->sysex.data = interface.getSysExArray();
         this->sysex.length = interface.getSysExArrayLength();
-        this->sysex.cable = 0;
+        this->sysex.cable = CABLE_1;
     }
 
     /// Get the latest real-time message from the given MIDI interface.
     template <class MidiInterface>
     void updateRealTimeMessage(const MidiInterface &interface) {
         this->rtmsg.message = interface.getType();
-        this->rtmsg.cable = 0;
+        this->rtmsg.cable = CABLE_1;
     }
 
     /// Temporarily saves a pointer to the MIDI parser's SysEx buffer.
-    SysExMessage sysex = {nullptr, 0, 0};
+    SysExMessage sysex = {nullptr, 0, CABLE_1};
 
   public:
     /// Get the latest SysEx message.
@@ -137,30 +137,20 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
     }
 
   protected:
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, Cable cn) override {
-        uint8_t m = header & 0xF0;
-        uint8_t c = header & 0x0F;
+    void sendChannelMessageImpl(ChannelMessage msg) override {
+        midi.send(static_cast<MIDI_NAMESPACE::MidiType>(msg.getMessageType()),
+                  msg.getData1(), msg.getData2(),
+                  msg.getChannel().getOneBased());
         // channel is zero-based in Control Surface, one-based in MIDI 47 Fx
-        midi.send(static_cast<MIDI_NAMESPACE::MidiType>(m), d1, d2, c + 1);
-        (void)cn;
     }
-    void sendImpl(uint8_t header, uint8_t d1, Cable cn) override {
-        uint8_t m = header & 0xF0;
-        uint8_t c = header & 0x0F;
-        // channel is zero-based in Control Surface, one-based in MIDI 47 Fx
-        midi.send(static_cast<MIDI_NAMESPACE::MidiType>(m), d1, 0, c + 1);
-        // MIDI 47 Fx checks message type to handle 2-byte messages separately
-        (void)cn;
-    }
-    void sendImpl(const uint8_t *data, size_t length, Cable cn) {
-        midi.sendSysEx(length, data, true);
+    void sendSysExImpl(SysExMessage msg) {
+        midi.sendSysEx(msg.length, msg.data, true);
         // true indicates that the array contains the SysEx start and stop bytes
-        (void)cn;
     }
-    void sendImpl(uint8_t rt, Cable cn) override {
-        midi.sendRealTime(static_cast<MIDI_NAMESPACE::MidiType>(rt));
-        (void)cn;
+    void sendRealTimeImpl(RealTimeMessage msg) override {
+        midi.sendRealTime(static_cast<MIDI_NAMESPACE::MidiType>(msg.message));
     }
+    void sendSysCommonImpl(SysCommonMessage) { /* TODO */ }
 
   private:
     void handleStall() override {
