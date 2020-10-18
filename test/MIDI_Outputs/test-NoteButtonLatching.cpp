@@ -24,8 +24,10 @@ TEST(NoteButtonLatching, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(0x96, 0x3C, 0x7F, CABLE_13));
-    EXPECT_CALL(midi, sendImpl(0x86, 0x3C, 0x7F, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x96, 0x3C, 0x7F, CABLE_13)));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x86, 0x3C, 0x7F, CABLE_13)));
     button.update();
 
     // Still pressed
@@ -38,8 +40,10 @@ TEST(NoteButtonLatching, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(0x96, 0x3C, 0x7F, CABLE_13));
-    EXPECT_CALL(midi, sendImpl(0x86, 0x3C, 0x7F, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x96, 0x3C, 0x7F, CABLE_13)));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x86, 0x3C, 0x7F, CABLE_13)));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -67,8 +71,10 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(0x96, 0x3C, 0x7F, CABLE_13));
-    EXPECT_CALL(midi, sendImpl(0x86, 0x3C, 0x7F, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x96, 0x3C, 0x7F, CABLE_13)));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x86, 0x3C, 0x7F, CABLE_13)));
     button.update();
 
     // Still pressed
@@ -81,8 +87,10 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(0x96, 0x3C, 0x7F, CABLE_13));
-    EXPECT_CALL(midi, sendImpl(0x86, 0x3C, 0x7F, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x96, 0x3C, 0x7F, CABLE_13)));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x86, 0x3C, 0x7F, CABLE_13)));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -111,8 +119,10 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(0x96, 0x3C + 4, 0x7F, CABLE_13));
-    EXPECT_CALL(midi, sendImpl(0x86, 0x3C + 4, 0x7F, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x96, 0x3C + 4, 0x7F, CABLE_13)));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x86, 0x3C + 4, 0x7F, CABLE_13)));
     button.update();
 
     // Still pressed
@@ -125,8 +135,10 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(0x96, 0x3C + 4, 0x7F, CABLE_13));
-    EXPECT_CALL(midi, sendImpl(0x86, 0x3C + 4, 0x7F, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x96, 0x3C + 4, 0x7F, CABLE_13)));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x86, 0x3C + 4, 0x7F, CABLE_13)));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -152,8 +164,10 @@ TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
-    EXPECT_CALL(midi, sendImpl(0x96, 0x3C, 0x7F, CABLE_13));
-    EXPECT_CALL(midi, sendImpl(0x86, 0x3C, 0x7F, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x96, 0x3C, 0x7F, CABLE_13)));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x86, 0x3C, 0x7F, CABLE_13)));
     button.update();
 
     // Change bank setting
@@ -169,8 +183,10 @@ TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillOnce(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
-    EXPECT_CALL(midi, sendImpl(0x96, 0x3C + 4, 0x7F, CABLE_13));
-    EXPECT_CALL(midi, sendImpl(0x86, 0x3C + 4, 0x7F, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x96, 0x3C + 4, 0x7F, CABLE_13)));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0x86, 0x3C + 4, 0x7F, CABLE_13)));
     button.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());

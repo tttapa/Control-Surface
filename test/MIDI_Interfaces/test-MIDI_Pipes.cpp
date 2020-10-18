@@ -1768,8 +1768,8 @@ TEST(MIDI_Pipes, USBInterface) {
         .WillOnce(Return(Packet_t{0x54, 0x77, 0x11, 0x22}))
         .WillOnce(Return(Packet_t{0x56, 0x33, 0xF7, 0x00}))
         .WillOnce(Return(Packet_t{}));
-    testing::Matcher<const uint8_t *> &&sysex_ptr = testing::Pointee(0xF0);
-    EXPECT_CALL(midiB[0], sendImpl(sysex_ptr, 8, CABLE_6));
+    uint8_t data1[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7};
+    EXPECT_CALL(midiB[0], sendSysExImpl(SysExMessage(data1, CABLE_6)));
     midiA[0].update();
 
     EXPECT_CALL(midiA[1], readUSBPacket())
@@ -1777,8 +1777,9 @@ TEST(MIDI_Pipes, USBInterface) {
         .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
         .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
         .WillOnce(Return(Packet_t{}));
-    EXPECT_CALL(midiB[0], sendImpl(sysex_ptr, 7, CABLE_10));
-    EXPECT_CALL(midiB[1], sendImpl(sysex_ptr, 7, CABLE_10));
+    uint8_t data2[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0xF7};
+    EXPECT_CALL(midiB[0], sendSysExImpl(SysExMessage(data2, CABLE_10)));
+    EXPECT_CALL(midiB[1], sendSysExImpl(SysExMessage(data2, CABLE_10)));
     midiA[1].update();
 }
 
@@ -1799,10 +1800,11 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
         .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
         .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
         .WillOnce(Return(Packet_t{}));
+    uint8_t data[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0xF7};
 
+    ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
     auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
-        ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
         midiA[0].sourceMIDItoPipe(msg);
     };
     auto staller = makeMIDIStaller(unstall);
@@ -1813,12 +1815,11 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
     // a Note On message first, and then un-stalls the pipe, allowing the SysEx
     // message to be sent.
     testing::Sequence s1, s2;
-    testing::Matcher<const uint8_t *> &&sysex_ptr = testing::Pointee(0xF0);
-    EXPECT_CALL(midiB[0], sendImpl(0x90, 0x12, 0x34, CABLE_1)) //
+    EXPECT_CALL(midiB[0], sendChannelMessageImpl(msg)) //
         .InSequence(s1, s2);
-    EXPECT_CALL(midiB[0], sendImpl(sysex_ptr, 7, CABLE_10)) //
+    EXPECT_CALL(midiB[0], sendSysExImpl(SysExMessage(data, CABLE_10)))
         .InSequence(s2);
-    EXPECT_CALL(midiB[1], sendImpl(sysex_ptr, 7, CABLE_10)) //
+    EXPECT_CALL(midiB[1], sendSysExImpl(SysExMessage(data, CABLE_10)))
         .InSequence(s1);
     midiA[1].update();
 }
@@ -1839,9 +1840,9 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
         .WillOnce(Return(Packet_t{0x98, 0x83, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{}));
 
+    ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
     auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
-        ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
         midiA[0].sourceMIDItoPipe(msg);
     };
     auto staller = makeMIDIStaller(unstall);
@@ -1852,12 +1853,10 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
     // a Note On message first, and then un-stalls the pipe, allowing the
     // Note Off message to be sent.
     testing::Sequence s1, s2;
-    EXPECT_CALL(midiB[0], sendImpl(0x90, 0x12, 0x34, CABLE_1)) //
-        .InSequence(s1, s2);
-    EXPECT_CALL(midiB[0], sendImpl(0x83, 0x55, 0x66, CABLE_10)) //
-        .InSequence(s2);
-    EXPECT_CALL(midiB[1], sendImpl(0x83, 0x55, 0x66, CABLE_10)) //
-        .InSequence(s1);
+    ChannelMessage msg2 = {0x83, 0x55, 0x66, CABLE_10};
+    EXPECT_CALL(midiB[0], sendChannelMessageImpl(msg)).InSequence(s1, s2);
+    EXPECT_CALL(midiB[0], sendChannelMessageImpl(msg2)).InSequence(s2);
+    EXPECT_CALL(midiB[1], sendChannelMessageImpl(msg2)).InSequence(s1);
     midiA[1].update();
 }
 
@@ -1877,9 +1876,9 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
         .WillOnce(Return(Packet_t{0x9F, 0xF8, 0x00, 0x00}))
         .WillOnce(Return(Packet_t{}));
 
+    ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
     auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
-        ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
         midiA[0].sourceMIDItoPipe(msg);
     };
     auto staller = makeMIDIStaller(unstall);
@@ -1887,13 +1886,13 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
 
     // When updating midiA[1], it sends the Real-Time message immediately,
     // even though the pipe is stalled.
-    EXPECT_CALL(midiB[0], sendImpl(0xF8, CABLE_10));
-    EXPECT_CALL(midiB[1], sendImpl(0xF8, CABLE_10));
+    EXPECT_CALL(midiB[0], sendRealTimeImpl(RealTimeMessage(0xF8, CABLE_10)));
+    EXPECT_CALL(midiB[1], sendRealTimeImpl(RealTimeMessage(0xF8, CABLE_10)));
     midiA[1].update();
 
     testing::Mock::VerifyAndClear(&midiB[0]);
     testing::Mock::VerifyAndClear(&midiB[1]);
-    EXPECT_CALL(midiB[0], sendImpl(0x90, 0x12, 0x34, CABLE_1));
+    EXPECT_CALL(midiB[0], sendChannelMessageImpl(msg));
     midiA[0].handleStallers();
 }
 

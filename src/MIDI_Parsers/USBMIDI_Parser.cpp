@@ -173,9 +173,9 @@ MIDIReadEvent USBMIDI_Parser::resume() {
     MIDIUSBPacket_t packet = popStoredPacket();
 
     // If a SysEx message was in progress
-    if (receivingSysEx(activeSysExCN)) {
+    if (receivingSysEx(activeCable)) {
         // Reset the buffer for the next chunk
-        startSysEx(activeSysExCN);
+        startSysEx(activeCable);
     }
 
     return feed(packet);

@@ -87,69 +87,74 @@ bool BLEMIDIPacketBuilder::addSysEx(const uint8_t *&data, size_t &length,
                                     uint16_t timestamp) {
     initBuffer(timestamp);
 
-    if (!hasSpaceFor(2))
-        return false; // Buffer full
+    // We can't do anything with an empty message
+    if (length == 0)
+        return true;
 
-    // Normal running status is interrupted by SysEx
-    runningHeader = 0;
+    // If the first byte is a SysExStart byte we first have to write a
+    // timestamp + SysExStart.
+    if (*data == SysExStart) {
+        // We need space for at least the timestamp and a SysExStart
+        if (!hasSpaceFor(2))
+            return false; // Buffer full
 
-    const uint8_t timestampLSB = getTimestampLSB(timestamp);
+        // Normal running status is interrupted by SysEx
+        runningHeader = 0;
 
-    // Start of SysEx
-    buffer[index++] = timestampLSB;
-    buffer[index++] = SysExStart;
+        const uint8_t timestampLSB = getTimestampLSB(timestamp);
 
-    // If the entire message fits in this packet (including SysEx start/end
-    // and timestamps)
-    if (hasSpaceFor(length + 2)) {
-        // Copy data
-        while (length-- > 0)
-            buffer[index++] = *data++;
-        ++length;
-        // End of SysEx
+        // Start of SysEx
         buffer[index++] = timestampLSB;
-        buffer[index++] = SysExEnd;
-        // Message was finished, no continuation
-        data = nullptr;
+        buffer[index++] = SysExStart;
+        ++data; // First byte was added
+        --length;
     }
-    // Message doesn't fit this packet:
-    // Start the message, and write until the packet is full
-    else {
-        // Copy as much data as possible
-        while (length-- > 0 && index < capacity)
-            buffer[index++] = *data++;
-        ++length;
-        // data is not set to nullptr to let the caller know where to start
-        // sending the next continuation packet,
-    }
+
+    // Copy the rest of the data, and terminate the message if necessary
+    continueSysEx(data, length, timestamp);
     return true;
 }
 
 void BLEMIDIPacketBuilder::continueSysEx(const uint8_t *&data, size_t &length,
                                          uint16_t timestamp) {
-    if (index != 0) {
-        ERROR(F("Error: SysEx should continue in new packet"), 0x2324);
-        reset(); // LCOV_EXCL_LINE
-    }            // LCOV_EXCL_LINE
-
     initBuffer(timestamp);
 
-    // Copy as much data as possible
-    while (length-- > 0 && index < capacity)
+    // Copy as much data as possible, but stop before the last byte, which
+    // could be a SysExEnd (and should be handled differently than data bytes)
+    while (length-- > 1 && index < capacity)
         buffer[index++] = *data++;
-    ++length;
 
-    // If the entire message fits in this packet (including SysEx end
-    // and timestamps)
-    if (length == 0 && hasSpaceFor(2)) {
+    // If everything fit into the buffer
+    if (length == 0) {
         // End of SysEx
-        buffer[index++] = getTimestampLSB(timestamp);
-        buffer[index++] = SysExEnd;
-        // Message was finished, no continuation
-        data = nullptr;
-    } else {
+        if (*data == SysExEnd) {
+            if (hasSpaceFor(2)) {
+                buffer[index++] = getTimestampLSB(timestamp);
+                buffer[index++] = SysExEnd;
+                // Message was finished, no continuation
+                data = nullptr;
+            } else {
+                // Send the SysExEnd byte next time
+                ++length;
+            }
+        }
+        // End of chunk but not end of SysEx
+        else {
+            if (hasSpaceFor(1)) {
+                buffer[index++] = *data;
+                // Message was finished, no continuation
+                data = nullptr;
+            } else {
+                // Send the last byte next time
+                ++length;
+            }
+        }
+    }
+    // If the while loop stopped because the buffer was full
+    else {
         // data is not set to nullptr to let the caller know where to start
         // sending the next continuation packet,
+        ++length;
     }
 }
 

@@ -42,29 +42,19 @@ bool StreamMIDI_Interface::dispatchMIDIEvent(MIDIReadEvent event) {
 
 // Sending MIDI
 
-void StreamMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
-                                    Cable cn) {
-    (void)cn;
-    stream.write(header); // Send the MIDI message over the stream
-    stream.write(d1);
-    stream.write(d2);
+void StreamMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
+    stream.write(msg.header);
+    stream.write(msg.data1);
+    if (msg.hasTwoDataBytes())
+        stream.write(msg.data2);
 }
 
-void StreamMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, Cable cn) {
-    (void)cn;
-    stream.write(header); // Send the MIDI message over the stream
-    stream.write(d1);
+void StreamMIDI_Interface::sendSysExImpl(SysExMessage msg) {
+    stream.write(msg.data, msg.length);
 }
 
-void StreamMIDI_Interface::sendImpl(const uint8_t *data, size_t length,
-                                    Cable cn) {
-    (void)cn;
-    stream.write(data, length);
-}
-
-void StreamMIDI_Interface::sendImpl(uint8_t rt, Cable cn) {
-    (void)cn;
-    stream.write(rt); // Send the MIDI message over the stream
+void StreamMIDI_Interface::sendRealTimeImpl(RealTimeMessage msg) {
+    stream.write(msg.message);
 }
 
 END_CS_NAMESPACE

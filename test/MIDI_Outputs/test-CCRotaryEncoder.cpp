@@ -14,7 +14,8 @@ TEST(CCRotaryEncoder, turnOneStep) {
     CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     EXPECT_CALL(encm, read()).WillOnce(Return(4));
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 2, CABLE_13));
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 2, CABLE_13)));
 
     ccenc.update();
 }
@@ -35,12 +36,14 @@ TEST(CCRotaryEncoder, turnFourHalfSteps) {
         .WillOnce(Return(10));
 
     // 0.5 steps × 2
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 1, CABLE_13));
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 1, CABLE_13)));
     ccenc.update();
     Mock::VerifyAndClear(&midi);
 
     // 1 step × 2
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 1, CABLE_13));
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 1, CABLE_13)));
     ccenc.update();
     Mock::VerifyAndClear(&midi);
 
@@ -49,12 +52,14 @@ TEST(CCRotaryEncoder, turnFourHalfSteps) {
     Mock::VerifyAndClear(&midi);
 
     // 1.5 step × 2
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 1, CABLE_13));
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 1, CABLE_13)));
     ccenc.update();
     Mock::VerifyAndClear(&midi);
 
     // 2.5 step × 2
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 2, CABLE_13));
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 2, CABLE_13)));
     ccenc.update();
     Mock::VerifyAndClear(&midi);
 }
@@ -68,7 +73,8 @@ TEST(CCRotaryEncoder, turnOneStepBackwards) {
     CCRotaryEncoder ccenc = {encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     EXPECT_CALL(encm, read()).WillOnce(Return(-4));
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, (-2) & 0x7F, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x20, (-2) & 0x7F, CABLE_13)));
 
     ccenc.update();
 }
@@ -83,8 +89,12 @@ TEST(CCRotaryEncoder, turnSixteenSteps) {
 
     // Should be sent in packets of value 15 max
     EXPECT_CALL(encm, read()).WillOnce(Return(4 * 16));
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 15, CABLE_13)).Times(2);
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 2, CABLE_13)).Times(1);
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 15, CABLE_13)))
+        .Times(2);
+    EXPECT_CALL(midi,
+                sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 2, CABLE_13)))
+        .Times(1);
 
     ccenc.update();
 }
@@ -99,8 +109,12 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwards) {
 
     // Should be sent in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, (-15) & 0x7F, CABLE_13)).Times(2);
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, (-2) & 0x7F, CABLE_13)).Times(1);
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x20, (-15) & 0x7F, CABLE_13)))
+        .Times(2);
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x20, (-2) & 0x7F, CABLE_13)))
+        .Times(1);
 
     ccenc.update();
 }
@@ -116,8 +130,12 @@ TEST(CCRotaryEncoder, turnSixteenStepsForwardsSignMagnitude) {
 
     // Should be sent in packets of value 15 maximum
     EXPECT_CALL(encm, read()).WillOnce(Return(4 * 16));
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 15, CABLE_13)).Times(2);
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 2, CABLE_13)).Times(1);
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 15, CABLE_13)))
+        .Times(2);
+    EXPECT_CALL(midi,
+                sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 2, CABLE_13)))
+        .Times(1);
 
     ccenc.update();
 }
@@ -133,8 +151,12 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwardsSignMagnitude) {
 
     // Should be sent in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 15 | 0x40, CABLE_13)).Times(2);
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 2 | 0x40, CABLE_13)).Times(1);
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x20, 15 | 0x40, CABLE_13)))
+        .Times(2);
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x20, 2 | 0x40, CABLE_13)))
+        .Times(1);
 
     ccenc.update();
 }
@@ -150,8 +172,12 @@ TEST(CCRotaryEncoder, turnSixteenStepsForwardsNextAddress) {
 
     // Should be sent in packets of value 15 maximum
     EXPECT_CALL(encm, read()).WillOnce(Return(4 * 16));
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 15, CABLE_13)).Times(2);
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 2, CABLE_13)).Times(1);
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 15, CABLE_13)))
+        .Times(2);
+    EXPECT_CALL(midi,
+                sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 2, CABLE_13)))
+        .Times(1);
 
     ccenc.update();
 }
@@ -167,8 +193,12 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwardsNextAddress) {
 
     // Should be sent in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x21, 15, CABLE_13)).Times(2);
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x21, 2, CABLE_13)).Times(1);
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x21, 15, CABLE_13)))
+        .Times(2);
+    EXPECT_CALL(midi,
+                sendChannelMessageImpl(ChannelMessage(0xB6, 0x21, 2, CABLE_13)))
+        .Times(1);
 
     ccenc.update();
 }
@@ -184,8 +214,12 @@ TEST(CCRotaryEncoder, turnSixteenStepsBackwardsBinaryOffset) {
 
     // Should be sent in packets of value -15 minimum
     EXPECT_CALL(encm, read()).WillOnce(Return(-4 * 16));
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 0x40 - 15, CABLE_13)).Times(2);
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 0x40 - 2, CABLE_13)).Times(1);
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x20, 0x40 - 15, CABLE_13)))
+        .Times(2);
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x20, 0x40 - 2, CABLE_13)))
+        .Times(1);
 
     ccenc.update();
 }
@@ -206,14 +240,16 @@ TEST(CCRotaryEncoderBankable, turnOneStepChangeSettingTurnOneStep) {
         bank, encm, {0x20, CHANNEL_7, CABLE_13}, 2, 4};
 
     EXPECT_CALL(encm, read()).WillOnce(Return(4));
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20, 2, CABLE_13));
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x20, 2, CABLE_13)));
 
     ccenc.update();
 
     bank.select(1);
 
     EXPECT_CALL(encm, read()).WillOnce(Return(8));
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x20 + 4, 2, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x20 + 4, 2, CABLE_13)));
 
     ccenc.update();
 }

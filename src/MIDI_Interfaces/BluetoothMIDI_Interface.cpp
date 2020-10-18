@@ -78,61 +78,60 @@ void BluetoothMIDI_Interface::stopSendingThread() {
 
 // The following section implements the MIDI sending functions.
 
-void BluetoothMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
-                                       Cable) {
+void BluetoothMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
+    msg.hasTwoDataBytes() ? sendChannelMessageImpl3Bytes(msg)
+                          : sendChannelMessageImpl2Bytes(msg);
+}
+
+void BluetoothMIDI_Interface::sendChannelMessageImpl3Bytes(ChannelMessage msg) {
     // BLE packets are sent asynchronously, so we need a lock to access the
     // packet buffer
     lock_t lock(mtx);
     uint16_t timestamp = millis();
     // Try adding the message to the current packet
-    if (!packetbuilder.add3B(header, d1, d2, timestamp)) {
+    if (!packetbuilder.add3B(msg.header, msg.data1, msg.data2, timestamp)) {
         // If that doesn't work, flush the packet (send it now and wait until
         // it is sent)
         flushImpl(lock);
         // And then add it to the (now emtpy) buffer
-        packetbuilder.add3B(header, d1, d2, timestamp);
+        packetbuilder.add3B(msg.header, msg.data1, msg.data2, timestamp);
     }
     // Notify the packet sender that data has been added to the buffer
     lock.unlock();
     cv.notify_one();
 }
 
-void BluetoothMIDI_Interface::sendImpl(uint8_t header, uint8_t d1, Cable) {
+void BluetoothMIDI_Interface::sendChannelMessageImpl2Bytes(ChannelMessage msg) {
     // For comments, see
-    //   sendImpl(uint8_t header, uint8_t d1, uint8_t d2, Cable) above
+    //   sendChannelMessageImpl3Bytes() above
     lock_t lock(mtx);
     uint16_t timestamp = millis();
-    if (!packetbuilder.add2B(header, d1, timestamp)) {
+    if (!packetbuilder.add2B(msg.header, msg.data1, timestamp)) {
         flushImpl(lock);
-        packetbuilder.add2B(header, d1, timestamp);
+        packetbuilder.add2B(msg.header, msg.data1, timestamp);
     }
     lock.unlock();
     cv.notify_one();
 }
 
-void BluetoothMIDI_Interface::sendImpl(uint8_t rt, Cable) {
+void BluetoothMIDI_Interface::sendRealTimeImpl(RealTimeMessage msg) {
     // For comments, see
-    //   sendImpl(uint8_t header, uint8_t d1, uint8_t d2, Cable) above
+    //   sendChannelMessageImpl3Bytes() above
     lock_t lock(mtx);
     uint16_t timestamp = millis();
-    if (!packetbuilder.addRealTime(rt, timestamp)) {
+    if (!packetbuilder.addRealTime(msg.message, timestamp)) {
         flushImpl(lock);
-        packetbuilder.addRealTime(rt, timestamp);
+        packetbuilder.addRealTime(msg.message, timestamp);
     }
     lock.unlock();
     cv.notify_one();
 }
 
-void BluetoothMIDI_Interface::sendImpl(const uint8_t *data, size_t length,
-                                       Cable) {
-    // SysEx is always at least a SysExStart plus a SysExEnd, so >= 2 bytes
-    if (length < 2)
-        return;
-
+void BluetoothMIDI_Interface::sendSysExImpl(SysExMessage msg) {
     lock_t lock(mtx);
 
-    length -= 2; // Length of SysEx data without SysEx start/end
-    data += 1;   // Data without SysEx start
+    size_t length = msg.length;
+    const uint8_t *data = msg.data;
     uint16_t timestamp = millis(); // BLE MIDI timestamp
 
     // Try adding at least the SysExStart header to the current packet

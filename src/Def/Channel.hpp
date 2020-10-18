@@ -29,6 +29,13 @@ class Channel {
     constexpr uint8_t getRaw() const { return zeroBasedChannel; }
 
     /**
+     * @brief   Get the channel as an integer.
+     * 
+     * @return  The one-based channel (1 is the first channel).
+     */
+    constexpr uint8_t getOneBased() const { return zeroBasedChannel + 1; }
+
+    /**
      * @brief   Create a channel.
      * 
      * @param   oneBasedChannel

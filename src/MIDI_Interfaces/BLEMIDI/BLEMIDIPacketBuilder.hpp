@@ -146,15 +146,13 @@ class BLEMIDIPacketBuilder {
      * @brief   Try adding (part of) a SysEx message to the packet.
      * 
      * @param[in,out]   data 
-     *                  Pointer to the first data byte of the SysEx message. 
-     *                  (Not the SysExStart byte!)
-     *                  At the end, this will point to the first data byte to 
+     *                  Pointer to the first byte of the SysEx message. 
+     *                  At the end, this will point to the first byte to 
      *                  send in the next packet, or `nullptr` if the message was
      *                  finished.
      * @param[in,out]   length 
-     *                  The number of data bytes in the SysEx message. 
-     *                  (Not including the SysExStart and SysExEnd bytes!)
-     *                  At the end, this will be set to remaining number of data
+     *                  The number of bytes in the SysEx message. 
+     *                  At the end, this will be set to remaining number of
      *                  bytes to send in the next packet.
      * @param[in]       timestamp 
      *                  13-bit BLE-MIDI timestamp.
@@ -194,15 +192,14 @@ class BLEMIDIPacketBuilder {
      * @brief   Add a SysEx continuation to the packet.
      * 
      * @param[in,out]   data 
-     *                  Pointer to the first data byte of the SysEx message to 
-     *                  send in this continuation packet.
-     *                  At the end, this will point to the first data byte to 
-     *                  send in the next packet, or `nullptr` if the message was
+     *                  Pointer to the first byte of the SysEx message to send
+     *                  in this continuation packet.
+     *                  At the end, this will point to the first byte to send in
+     *                  the next packet, or `nullptr` if the message was
      *                  finished.
      * @param[in,out]   length 
-     *                  The number of remaining data bytes in the SysEx message. 
-     *                  (Not including the SysExEnd byte!)
-     *                  At the end, this will be set to remaining number of data
+     *                  The number of remaining bytes in the SysEx message. 
+     *                  At the end, this will be set to remaining number of
      *                  bytes to send in the next packet.
      * @param[in]       timestamp 
      *                  13-bit BLE-MIDI timestamp.

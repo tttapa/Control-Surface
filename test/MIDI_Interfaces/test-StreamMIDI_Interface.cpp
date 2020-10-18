@@ -35,14 +35,12 @@ TEST(StreamMIDI_Interface, send3B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
     midi.send(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66);
-    midi.sendOnCable(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66, CABLE_1);
     midi.sendNoteOn({0x55, CHANNEL_4}, 0x66);
     midi.sendNoteOff({0x55, CHANNEL_4}, 0x66);
     midi.sendCC({0x55, CHANNEL_4}, 0x66);
     midi.sendKP({0x55, CHANNEL_4}, 0x66);
     midi.sendPB(CHANNEL_4, 0x3355);
     u8vec expected = {
-        0x93, 0x55, 0x66, //
         0x93, 0x55, 0x66, //
         0x93, 0x55, 0x66, //
         0x83, 0x55, 0x66, //
@@ -57,12 +55,10 @@ TEST(StreamMIDI_Interface, send2B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
     midi.send(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66);
-    midi.sendOnCable(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66, CABLE_1);
     midi.sendPC({CHANNEL_4}, 0x66);
     midi.sendPC({0x66, CHANNEL_4});
     midi.sendCP(CHANNEL_4, 0x66);
     u8vec expected = {
-        0xC3, 0x66, //
         0xC3, 0x66, //
         0xC3, 0x66, //
         0xC3, 0x66, //
@@ -84,7 +80,7 @@ TEST(StreamMIDI_Interface, SysExSend8B) {
     StreamMIDI_Interface midi = stream;
     Sequence seq;
     u8vec sysex = {0xF0, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0xF7};
-    midi.send({sysex.data(), sysex.size(), CABLE_1});
+    midi.send({sysex, CABLE_1});
     EXPECT_EQ(stream.sent, sysex);
 }
 
@@ -93,18 +89,6 @@ TEST(StreamMIDI_Interface, SysExSend0B) {
     StreamMIDI_Interface midi = stream;
     midi.send(SysExMessage{});
     EXPECT_TRUE(stream.sent.empty());
-}
-
-TEST(StreamMIDI_Interface, SysExSend1B) {
-    TestStream stream;
-    StreamMIDI_Interface midi = stream;
-    uint8_t sysex[] = {0xF0};
-    try {
-        midi.sendSysEx(sysex);
-        FAIL();
-    } catch (ErrorException &e) {
-        EXPECT_EQ(e.getErrorCode(), 0x7F7F);
-    }
 }
 
 TEST(StreamMIDI_Interface, readRealTime) {

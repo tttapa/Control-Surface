@@ -36,7 +36,10 @@ MIDIReadEvent SerialMIDI_Parser::handleStatus(uint8_t midiByte) {
                 storeByte(midiByte);
             } else {
                 midimsg.header = midiByte;
+                midimsg.data1 = 0;
+                midimsg.data2 = 0;
                 return MIDIReadEvent::SYSCOMMON_MESSAGE;
+                // TODO: clear running status
             }
         }
 
@@ -135,6 +138,7 @@ MIDIReadEvent SerialMIDI_Parser::handleData(uint8_t midiByte) {
         // If it's a channel message with one data byte
         else {
             midimsg.data1 = midiByte;
+            midimsg.data2 = 0;
             // The message is finished
             return MIDIReadEvent::CHANNEL_MESSAGE;
         }
@@ -152,12 +156,14 @@ MIDIReadEvent SerialMIDI_Parser::handleData(uint8_t midiByte) {
         // If it's a channel message with one data byte
         else if (SysCommonMessage(midimsg).getNumberOfDataBytes() == 1) {
             midimsg.data1 = midiByte;
+            midimsg.data2 = 0;
             // The message is finished
             return MIDIReadEvent::SYSCOMMON_MESSAGE;
         } else {
             DEBUGREF(F("Unexpected data byte"));
             return MIDIReadEvent::NO_MESSAGE;
         }
+        // TODO: clear running status
     }
 
     // Otherwise, it's not a channel message

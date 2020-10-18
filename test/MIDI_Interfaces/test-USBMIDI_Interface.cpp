@@ -26,7 +26,7 @@ TEST(USBMIDI_Interface, RealTime) {
     Sequence seq;
     EXPECT_CALL(midi, writeUSBPacket(CABLE_9, 0xF, 0xF8, 0x00, 0x00))
         .InSequence(seq);
-    midi.sendOnCable(MIDIMessageType::TIMING_CLOCK, CABLE_9);
+    midi.sendRealTime(MIDIMessageType::TIMING_CLOCK, CABLE_9);
 }
 
 TEST(USBMIDI_Interface, SysExSend3B) {
@@ -112,7 +112,13 @@ TEST(USBMIDI_Interface, SysExSend9B) {
 
 TEST(USBMIDI_Interface, SysExSend0B) {
     StrictMock<USBMIDI_Interface> midi;
-    midi.send(SysExMessage{});
+    midi.sendSysEx(nullptr, 0, CABLE_10);
+}
+
+TEST(USBMIDI_Interface, SysExSend1B) {
+    StrictMock<USBMIDI_Interface> midi;
+    uint8_t sysex[] = {0xF0};
+    midi.sendSysEx(sysex, CABLE_10);
 }
 
 TEST(USBMIDI_Interface, SysExSend2B) {
@@ -124,16 +130,40 @@ TEST(USBMIDI_Interface, SysExSend2B) {
     midi.sendSysEx(sysex, CABLE_10);
 }
 
-TEST(USBMIDI_Interface, SysExSend1B) {
+TEST(USBMIDI_Interface, SysExSendChunks) {
     StrictMock<USBMIDI_Interface> midi;
-    uint8_t sysex[] = {0xF0};
-    try {
-        midi.sendSysEx(sysex);
-        FAIL();
-    } catch (ErrorException &e) {
-        EXPECT_EQ(e.getErrorCode(), 0x7F7F);
-    }
+    Sequence seq;
+    EXPECT_CALL(midi, writeUSBPacket(CABLE_10, 0x4, 0xF0, 0x55, 0x66))
+        .InSequence(seq);
+    EXPECT_CALL(midi, writeUSBPacket(CABLE_10, 0x4, 0x77, 0x11, 0x22))
+        .InSequence(seq);
+    EXPECT_CALL(midi, writeUSBPacket(CABLE_10, 0x4, 0x23, 0x24, 0x25))
+        .InSequence(seq);
+    EXPECT_CALL(midi, writeUSBPacket(CABLE_10, 0x4, 0x26, 0x27, 0x28))
+        .InSequence(seq);
+    EXPECT_CALL(midi, writeUSBPacket(CABLE_10, 0x4, 0x29, 0x2A, 0x2B))
+        .InSequence(seq);
+    EXPECT_CALL(midi, writeUSBPacket(CABLE_10, 0x4, 0x2C, 0x2D, 0x2E))
+        .InSequence(seq);
+    EXPECT_CALL(midi, writeUSBPacket(CABLE_10, 0x7, 0x33, 0x44, 0xF7))
+        .InSequence(seq);
+    std::vector<uint8_t> chunks[] = {
+        {0xF0, 0x55, 0x66},
+        {0x77, 0x11},
+        {0x22},
+        {0x23},
+        {0x24},
+        {0x25, 0x26},
+        {0x27, 0x28},
+        {0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E},
+        {0x33},
+        {0x44, 0xF7},
+    };
+    for (const auto &chunk : chunks)
+        midi.send(SysExMessage(chunk, CABLE_10));
 }
+
+// -------------------------------------------------------------------------- //
 
 TEST(USBMIDI_Interface, readRealTime) {
     StrictMock<USBMIDI_Interface> midi;

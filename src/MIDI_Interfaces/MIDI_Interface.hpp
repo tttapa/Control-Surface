@@ -65,15 +65,14 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
 
   protected:
     friend class MIDI_Sender<MIDI_Interface>;
-    /// Low-level function for sending a 3-byte MIDI message.
-    virtual void sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
-                          Cable cn) = 0;
-    /// Low-level function for sending a 2-byte MIDI message.
-    virtual void sendImpl(uint8_t header, uint8_t d1, Cable cn) = 0;
+    /// Low-level function for sending a MIDI channel message.
+    virtual void sendChannelMessageImpl(ChannelMessage) = 0;
+    /// Low-level function for sending a MIDI system common message.
+    virtual void sendSysCommonImpl(SysCommonMessage) = 0;
     /// Low-level function for sending a system exclusive MIDI message.
-    virtual void sendImpl(const uint8_t *data, size_t length, Cable cn) = 0;
-    /// Low-level function for sending a single-byte MIDI message.
-    virtual void sendImpl(uint8_t rt, Cable cn) = 0;
+    virtual void sendSysExImpl(SysExMessage) = 0;
+    /// Low-level function for sending a MIDI real-time message.
+    virtual void sendRealTimeImpl(RealTimeMessage) = 0;
 
   protected:
     /// Accept an incoming MIDI Channel message from the source pipe.

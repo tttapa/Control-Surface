@@ -79,18 +79,14 @@ void Control_Surface_::updateMidiInput() {
     Updatable<MIDI_Interface>::updateAll();
 }
 
-void Control_Surface_::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
-                                Cable cn) {
-    this->sourceMIDItoPipe(ChannelMessage{header, d1, d2, cn});
+void Control_Surface_::sendChannelMessageImpl(ChannelMessage msg) {
+    this->sourceMIDItoPipe(msg);
 }
-void Control_Surface_::sendImpl(uint8_t header, uint8_t d1, Cable cn) {
-    this->sourceMIDItoPipe(ChannelMessage{header, d1, 0x00, cn});
+void Control_Surface_::sendSysExImpl(SysExMessage msg) {
+    this->sourceMIDItoPipe(msg);
 }
-void Control_Surface_::sendImpl(const uint8_t *data, size_t length, Cable cn) {
-    this->sourceMIDItoPipe(SysExMessage{data, length, cn});
-}
-void Control_Surface_::sendImpl(uint8_t rt, Cable cn) {
-    this->sourceMIDItoPipe(RealTimeMessage{rt, cn});
+void Control_Surface_::sendRealTimeImpl(RealTimeMessage msg) {
+    this->sourceMIDItoPipe(msg);
 }
 
 void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {

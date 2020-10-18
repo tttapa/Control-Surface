@@ -18,11 +18,14 @@ TEST(CCPotentiometer, simple) {
         .Times(3)
         .WillRepeatedly(Return(512));
     InSequence s;
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 16, CABLE_13));
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x3C, 16, CABLE_13)));
     pot.update();
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 28, CABLE_13));
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x3C, 28, CABLE_13)));
     pot.update();
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 37, CABLE_13));
+    EXPECT_CALL(
+        midi, sendChannelMessageImpl(ChannelMessage(0xB6, 0x3C, 37, CABLE_13)));
     pot.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -41,11 +44,14 @@ TEST(CCPotentiometer, mapping) {
         .Times(3)
         .WillRepeatedly(Return(512));
     InSequence s;
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 16 * 2, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x3C, 16 * 2, CABLE_13)));
     pot.update();
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 28 * 2, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x3C, 28 * 2, CABLE_13)));
     pot.update();
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 37 * 2, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x3C, 37 * 2, CABLE_13)));
     pot.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -64,11 +70,14 @@ TEST(CCPotentiometer, invert) {
         .Times(3)
         .WillRepeatedly(Return(512));
     InSequence s;
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 127 - 16, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x3C, 127 - 16, CABLE_13)));
     pot.update();
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 127 - 28, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x3C, 127 - 28, CABLE_13)));
     pot.update();
-    EXPECT_CALL(midi, sendImpl(0xB6, 0x3C, 127 - 37, CABLE_13));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x3C, 127 - 37, CABLE_13)));
     pot.update();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());

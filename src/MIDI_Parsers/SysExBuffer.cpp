@@ -33,6 +33,6 @@ bool SysExBuffer::isReceiving() const { return receiving; }
 
 const uint8_t *SysExBuffer::getBuffer() const { return buffer; }
 
-size_t SysExBuffer::getLength() const { return length; }
+uint16_t SysExBuffer::getLength() const { return length; }
 
 END_CS_NAMESPACE

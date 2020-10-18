@@ -17,10 +17,10 @@ class MockMIDI_Interface : public CS::MIDI_Interface {
 
   public:
     MOCK_METHOD(CS::MIDIReadEvent, read, ());
-    MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t, uint8_t, Cable), (override));
-    MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t, Cable), (override));
-    MOCK_METHOD(void, sendImpl, (const uint8_t *, size_t, Cable), (override));
-    MOCK_METHOD(void, sendImpl, (uint8_t, Cable), (override));
+    MOCK_METHOD(void, sendChannelMessageImpl, (CS::ChannelMessage), (override));
+    MOCK_METHOD(void, sendSysCommonImpl, (CS::SysCommonMessage), (override));
+    MOCK_METHOD(void, sendSysExImpl, (CS::SysExMessage), (override));
+    MOCK_METHOD(void, sendRealTimeImpl, (CS::RealTimeMessage), (override));
     MOCK_METHOD(void, handleStall, (), (override));
     void update() override {}
 };

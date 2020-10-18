@@ -868,7 +868,6 @@ FortySevenEffectsMIDI_Interface	KEYWORD1
 begin	KEYWORD2
 update	KEYWORD2
 send	KEYWORD2
-sendOnCable	KEYWORD2
 sendNoteOn	KEYWORD2
 sendNoteOff	KEYWORD2
 sendKP	KEYWORD2

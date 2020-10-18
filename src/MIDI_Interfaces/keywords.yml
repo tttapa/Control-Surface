@@ -20,7 +20,6 @@ keyword2:
  - begin
  - update
  - send
- - sendOnCable
  - sendNoteOn
  - sendNoteOff
  - sendKP
@@ -28,6 +27,8 @@ keyword2:
  - sendPC
  - sendCP
  - sendPB
+ - sendRealTime
+ - sendSysEx
  - getDefault
  - setAsDefault
  - setCallbacks

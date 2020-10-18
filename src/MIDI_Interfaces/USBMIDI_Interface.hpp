@@ -65,10 +65,25 @@ class USBMIDI_Interface : public MIDI_Interface {
 #endif
 
   private:
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, Cable cn) override;
-    void sendImpl(uint8_t header, uint8_t d1, Cable cn) override;
-    void sendImpl(const uint8_t *data, size_t length, Cable cn) override;
-    void sendImpl(uint8_t rt, Cable cn) override;
+    // MIDI send implementations
+    void sendChannelMessageImpl(ChannelMessage) override;
+    void sendSysCommonImpl(SysCommonMessage) override { /* TODO */ }
+    void sendSysExImpl(SysExMessage) override;
+    void sendRealTimeImpl(RealTimeMessage) override;
+
+    /// Send a single SysEx starts or continues USB packet. Exactly 3 bytes are
+    /// sent. The `data` pointer is not incremented.
+    void sendSysExStartCont1(const uint8_t *data, Cable cable);
+    /// Send as many SysEx starts or continues USB packets, such that the 
+    /// remaining length is 3, 2 or 1 byte. The `data` pointer is incremented,
+    /// and the `length` is decremented.
+    /// The reason for leaving 3, 2 or 1 bytes remaining is so the message can 
+    /// be finished using a SysExEnd USB packet, which has to have 3, 2 or 1
+    /// bytes.
+    void sendSysExStartCont(const uint8_t *&data, uint16_t &length, Cable cable);
+    /// Send a SysExEnd USB packet. The `length` should be either 3, 2 or 1
+    /// bytes, and the last byte of `data` should be a SysExEnd byte.
+    void sendSysExEnd(const uint8_t *data, uint16_t length, Cable cable);
 
   public:
     /**
@@ -104,6 +119,8 @@ class USBMIDI_Interface : public MIDI_Interface {
 
   private:
     USBMIDI_Parser parser;
+    uint8_t storedSysExData[3];
+    uint8_t storedSysExLength = 0;
 };
 
 END_CS_NAMESPACE

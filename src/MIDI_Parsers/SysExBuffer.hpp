@@ -13,7 +13,7 @@ BEGIN_CS_NAMESPACE
 class SysExBuffer { 
   private:
     uint8_t buffer[SYSEX_BUFFER_SIZE];
-    size_t length = 0;
+    uint16_t length = 0;
     bool receiving = false;
 
   public:
@@ -32,7 +32,7 @@ class SysExBuffer {
     /// Get a pointer to the buffer.
     const uint8_t *getBuffer() const;
     /// Get the length of the SysEx message in the buffer.
-    size_t getLength() const;
+    uint16_t getLength() const;
 };
 
 END_CS_NAMESPACE

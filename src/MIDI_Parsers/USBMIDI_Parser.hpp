@@ -49,9 +49,9 @@ class USBMIDI_Parser : public MIDI_Parser {
     /// Get the latest SysEx message.
     SysExMessage getSysExMessage() const {
         return {
-            sysexbuffers[activeSysExCN.getRaw()].getBuffer(),
-            sysexbuffers[activeSysExCN.getRaw()].getLength(),
-            activeSysExCN,
+            sysexbuffers[activeCable.getRaw()].getBuffer(),
+            sysexbuffers[activeCable.getRaw()].getLength(),
+            activeCable,
         };
     }
 #endif
@@ -70,9 +70,9 @@ class USBMIDI_Parser : public MIDI_Parser {
     void startSysEx(Cable cable) { sysexbuffers[cable.getRaw()].start(); }
     void endSysEx(Cable cable) {
         sysexbuffers[cable.getRaw()].end();
-        activeSysExCN = cable;
+        activeCable = cable;
     }
-    void endSysExChunk(Cable cable) { activeSysExCN = cable; }
+    void endSysExChunk(Cable cable) { activeCable = cable; }
     bool hasSysExSpace(Cable cable, uint8_t amount) const {
         return sysexbuffers[cable.getRaw()].hasSpaceLeft(amount);
     }
@@ -94,7 +94,7 @@ class USBMIDI_Parser : public MIDI_Parser {
         return t;
     }
 
-    Cable activeSysExCN = CABLE_1;
+    Cable activeCable = CABLE_1;
 
   private:
     SysExBuffer sysexbuffers[USB_MIDI_NUMBER_OF_CABLES] = {};

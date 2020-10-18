@@ -155,6 +155,14 @@ struct MIDIMessage {
     uint16_t getValue14bit() const {
         return data1 | (uint16_t(data2) << uint16_t(7));
     }
+
+    /// Make sure that the status byte has the most significant bit set and
+    /// the data bytes have the most significant bits cleared.
+    void sanitize() {
+        header |= 0x80;
+        data1 &= 0x7F;
+        data2 &= 0x7F;
+    }
 };
 
 struct ChannelMessage : MIDIMessage {
@@ -238,7 +246,7 @@ struct SysExMessage {
     SysExMessage() : data(nullptr), length(0), cable(CABLE_1) {}
 
     /// Constructor.
-    SysExMessage(const uint8_t *data, size_t length, Cable cable = CABLE_1)
+    SysExMessage(const uint8_t *data, uint16_t length, Cable cable = CABLE_1)
         : data(data), length(length), cable(cable.getRaw()) {}
 
     /// Constructor.
@@ -246,12 +254,12 @@ struct SysExMessage {
         : SysExMessage(vec.data(), vec.size(), cable) {}
 
     /// Constructor.
-    template <size_t N>
+    template <uint16_t N>
     SysExMessage(const uint8_t (&array)[N], Cable cable = CABLE_1)
         : SysExMessage(array, N, cable) {}
 
     const uint8_t *data;
-    uint8_t length;
+    uint16_t length;
 
     Cable cable;
 
