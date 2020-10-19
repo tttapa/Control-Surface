@@ -43,7 +43,8 @@ class BLEMIDIPacketBuilder {
     }
 
     /** 
-     * @brief   Try adding a 2-byte or 3-byte MIDI channel message to the packet.
+     * @brief   Try adding a 2-byte or 3-byte MIDI channel voice message to the
+     *          packet.
      * 
      * @tparam  ThreeBytes 
      *          Set to `true` for a 3-byte message, `false` for a 2-byte message.
@@ -88,7 +89,7 @@ class BLEMIDIPacketBuilder {
     }
 
     /** 
-     * @brief   Try adding a 3-byte MIDI channel message to the packet.
+     * @brief   Try adding a 3-byte MIDI channel voice message to the packet.
      * 
      * @param   header 
      *          MIDI status byte.
@@ -109,7 +110,7 @@ class BLEMIDIPacketBuilder {
                uint16_t timestamp);
 
     /** 
-     * @brief   Try adding a 2-byte MIDI channel message to the packet.
+     * @brief   Try adding a 2-byte MIDI channel voice message to the packet.
      * 
      * @param   header 
      *          MIDI status byte.

@@ -68,23 +68,21 @@ class MIDI_Sender {
     void send(SysExMessage message);
     /// Send a MIDI System Exclusive message.
     template <uint16_t N>
-    void sendSysEx(const uint8_t (&sysexdata)[N], Cable cable = CABLE_1) {
-        send(SysExMessage(sysexdata, N, cable));
-    }
+    void sendSysEx(const uint8_t (&sysexdata)[N], Cable cable = CABLE_1);
     /// Send a MIDI System Exclusive message.
-    void sendSysEx(const uint8_t *data, uint16_t length, Cable cable = CABLE_1) {
-        send(SysExMessage(data, length, cable));
-    }
+    void sendSysEx(const uint8_t *data, uint16_t length, Cable cable = CABLE_1);
     /// Send a MIDI Real-Time message.
     void send(RealTimeMessage message);
     /// Send a MIDI Real-Time message.
-    void sendRealTime(MIDIMessageType rt, Cable cable = CABLE_1) {
-        send(RealTimeMessage(rt, cable));
-    }
+    void sendRealTime(MIDIMessageType rt, Cable cable = CABLE_1);
     /// Send a MIDI Real-Time message.
-    void sendRealTime(uint8_t rt, Cable cable = CABLE_1) {
-        send(RealTimeMessage(rt, cable));
-    }
+    void sendRealTime(uint8_t rt, Cable cable = CABLE_1);
+
+    /// Causes all buffered messages to be sent immediately.
+    /// @note   Doesn't necessarily wait until all data has been sent, it just 
+    ///         triggers the transmission, so everything will be transmitted as 
+    ///         soon as possible.
+    void sendNow();
 
     /// @}
 };

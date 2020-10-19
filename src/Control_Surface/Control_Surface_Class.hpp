@@ -101,7 +101,7 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     void updateDisplays();
 
   private:
-    /// Low-level function for sending a MIDI channel message.
+    /// Low-level function for sending a MIDI channel voice message.
     void sendChannelMessageImpl(ChannelMessage);
     /// Low-level function for sending a MIDI system common message.
     void sendSysCommonImpl(SysCommonMessage) { /* TODO */ }
@@ -109,6 +109,8 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     void sendSysExImpl(SysExMessage);
     /// Low-level function for sending a MIDI real-time message.
     void sendRealTimeImpl(RealTimeMessage);
+    /// Low-level function for sending any buffered outgoing MIDI messages.
+    void sendNowImpl() { /* TODO */ }
 
   private:
     void sinkMIDIfromPipe(ChannelMessage msg) override;

@@ -8,6 +8,15 @@ BEGIN_CS_NAMESPACE
 
 // -------------------------------------------------------------------------- //
 
+#ifdef ARDUINO
+USBMIDI_Interface::USBMIDI_Interface()
+    : alwaysSendImmediately_(USBMIDI::preferImmediateSend()) {}
+#else
+USBMIDI_Interface::USBMIDI_Interface() = default;
+#endif
+
+// -------------------------------------------------------------------------- //
+
 // Reading MIDI
 
 MIDIReadEvent USBMIDI_Interface::read() {
@@ -31,6 +40,8 @@ void USBMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
                    msg.header,                 // status
                    msg.data1,                  // data 1
                    msg.data2);                 // data 2
+    if (alwaysSendImmediately_)
+        sendUSBNow();
 }
 
 // This is the readable documentation version for sending full SysEx messages
@@ -50,6 +61,8 @@ void USBMIDI_Interface::sendFullSysEx(SysExMessage msg) {
         case 1: writeUSBPacket(cable, 0x5, data[0], 0, 0); break;
         default: break;
     }
+    if (alwaysSendImmediately_)
+        sendUSBNow();
 }
 #endif // 0
 
@@ -142,6 +155,8 @@ void USBMIDI_Interface::sendSysExImpl(const SysExMessage msg) {
             memcpy(storedSysExData, data, length);
         }
     }
+    if (alwaysSendImmediately_)
+        sendUSBNow();
 }
 
 void USBMIDI_Interface::sendRealTimeImpl(RealTimeMessage msg) {
@@ -149,6 +164,8 @@ void USBMIDI_Interface::sendRealTimeImpl(RealTimeMessage msg) {
                    msg.message,    // single byte
                    0,              // no data
                    0);             // no data
+    if (alwaysSendImmediately_)
+        sendUSBNow();
 }
 
 END_CS_NAMESPACE

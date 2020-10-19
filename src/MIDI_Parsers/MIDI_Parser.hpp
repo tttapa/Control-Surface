@@ -24,7 +24,7 @@ enum class MIDIReadEvent : uint8_t {
 /// Base class for MIDI parsers.
 class MIDI_Parser {
   public:
-    /// Get the latest MIDI channel message.
+    /// Get the latest MIDI channel voice message.
     ChannelMessage getChannelMessage() const { return ChannelMessage(midimsg); }
     /// Get the latest MIDI system common message.
     SysCommonMessage getSysCommonMessage() const {

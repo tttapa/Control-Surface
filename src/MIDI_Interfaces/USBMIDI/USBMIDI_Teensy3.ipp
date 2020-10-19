@@ -26,7 +26,11 @@ void write(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1, uint8_t d2) {
                           (d2 << 24));      // data 2
 }
 
-void flush() {}
+void sendNow() {
+    usb_midi_flush_output();
+}
+
+bool preferImmediateSend() { return false; }
 
 } // namespace USBMIDI
 

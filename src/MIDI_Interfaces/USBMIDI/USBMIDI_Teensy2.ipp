@@ -74,10 +74,12 @@ void write(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1, uint8_t d2) {
     SREG = intr_state;
 }
 
-void flush() {
+void sendNow() {
     // TODO: I think the UEINTX = 0x3A actually sends/flushes the data, but I'm
     //       not sure, and I don't have the right hardware to test it.
 }
+
+bool preferImmediateSend() { return false; }
 
 } // namespace USBMIDI
 

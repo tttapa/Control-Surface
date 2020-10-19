@@ -101,7 +101,7 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
         return MIDIReadEvent::NO_MESSAGE;
     }
 
-    /// Return the received channel message.
+    /// Return the received channel voice message.
     ChannelMessage getChannelMessage() const {
         return parser.getChannelMessage();
     }
@@ -146,6 +146,7 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
                   msg.getChannel().getOneBased());
         // channel is zero-based in Control Surface, one-based in MIDI 47 Fx
     }
+    void sendSysCommonImpl(SysCommonMessage) override { /* TODO */ }
     void sendSysExImpl(SysExMessage msg) {
         midi.sendSysEx(msg.length, msg.data, true);
         // true indicates that the array contains the SysEx start and stop bytes
@@ -153,7 +154,7 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
     void sendRealTimeImpl(RealTimeMessage msg) override {
         midi.sendRealTime(static_cast<MIDI_NAMESPACE::MidiType>(msg.message));
     }
-    void sendSysCommonImpl(SysCommonMessage) { /* TODO */ }
+    void sendNowImpl() override { /* TODO */ }
 
   private:
     void handleStall() override {

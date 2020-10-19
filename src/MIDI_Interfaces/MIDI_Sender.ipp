@@ -131,4 +131,30 @@ void MIDI_Sender<Derived>::send(SysCommonMessage message) {
     }
 }
 
+template <class Derived>
+template <uint16_t N>
+void MIDI_Sender<Derived>::sendSysEx(const uint8_t (&sysexdata)[N],
+                                     Cable cable) {
+    send(SysExMessage(sysexdata, N, cable));
+}
+template <class Derived>
+void MIDI_Sender<Derived>::sendSysEx(const uint8_t *data, uint16_t length,
+                                     Cable cable) {
+    send(SysExMessage(data, length, cable));
+}
+
+template <class Derived>
+void MIDI_Sender<Derived>::sendRealTime(MIDIMessageType rt, Cable cable) {
+    send(RealTimeMessage(rt, cable));
+}
+template <class Derived>
+void MIDI_Sender<Derived>::sendRealTime(uint8_t rt, Cable cable) {
+    send(RealTimeMessage(rt, cable));
+}
+
+template <class Derived>
+void MIDI_Sender<Derived>::sendNow() {
+    CRTP(Derived).sendNowImpl();
+}
+
 END_CS_NAMESPACE

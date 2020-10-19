@@ -43,26 +43,7 @@ class USBMIDI_Interface : public MIDI_Interface {
     /**
      * @brief   Construct a new USBMIDI_Interface.
      */
-    USBMIDI_Interface() = default;
-
-    using MIDIUSBPacket_t = USBMIDI::MIDIUSBPacket_t;
-
-#ifndef ARDUINO
-  public:
-    MOCK_METHOD(void, writeUSBPacket,
-                (Cable, uint8_t, uint8_t, uint8_t, uint8_t));
-    MOCK_METHOD(MIDIUSBPacket_t, readUSBPacket, ());
-    void flushUSB() {}
-
-#else
-  private:
-    void writeUSBPacket(Cable cn, uint8_t cin, uint8_t d0, uint8_t d1,
-                        uint8_t d2) {
-        USBMIDI::write(cn.getRaw(), cin, d0, d1, d2);
-    }
-    MIDIUSBPacket_t readUSBPacket() { return USBMIDI::read(); }
-    void flushUSB() { USBMIDI::flush(); }
-#endif
+    USBMIDI_Interface();
 
   private:
     // MIDI send implementations
@@ -70,35 +51,45 @@ class USBMIDI_Interface : public MIDI_Interface {
     void sendSysCommonImpl(SysCommonMessage) override { /* TODO */ }
     void sendSysExImpl(SysExMessage) override;
     void sendRealTimeImpl(RealTimeMessage) override;
+    void sendNowImpl() override { sendUSBNow(); }
 
     /// Send a single SysEx starts or continues USB packet. Exactly 3 bytes are
     /// sent. The `data` pointer is not incremented.
     void sendSysExStartCont1(const uint8_t *data, Cable cable);
-    /// Send as many SysEx starts or continues USB packets, such that the 
+    /// Send as many SysEx starts or continues USB packets, such that the
     /// remaining length is 3, 2 or 1 byte. The `data` pointer is incremented,
     /// and the `length` is decremented.
-    /// The reason for leaving 3, 2 or 1 bytes remaining is so the message can 
+    /// The reason for leaving 3, 2 or 1 bytes remaining is so the message can
     /// be finished using a SysExEnd USB packet, which has to have 3, 2 or 1
     /// bytes.
-    void sendSysExStartCont(const uint8_t *&data, uint16_t &length, Cable cable);
+    void sendSysExStartCont(const uint8_t *&data, uint16_t &length,
+                            Cable cable);
     /// Send a SysExEnd USB packet. The `length` should be either 3, 2 or 1
     /// bytes, and the last byte of `data` should be a SysExEnd byte.
     void sendSysExEnd(const uint8_t *data, uint16_t length, Cable cable);
 
-  public:
-    /**
-     * @brief   Try reading and parsing a single incoming MIDI message.
-     * @return  Returns the type of the read message, or 
-     *          `MIDIReadEvent::NO_MESSAGE` if no MIDI message was available.
-     */
-    MIDIReadEvent read();
+  private:
+    void handleStall() override;
 
+  public:
     void update() override;
 
   public:
-    /// Return the received channel message.
+    /// @name   Reading incoming MIDI messages
+    /// @{
+
+    /// Try reading and parsing a single incoming MIDI message.
+    /// @return Returns the type of the read message, or
+    ///         `MIDIReadEvent::NO_MESSAGE` if no MIDI message was available.
+    MIDIReadEvent read();
+    
+    /// Return the received channel voice message.
     ChannelMessage getChannelMessage() const {
         return parser.getChannelMessage();
+    }
+    /// Return the received system common message.
+    SysCommonMessage getSysCommonMessage() const {
+        return parser.getSysCommonMessage();
     }
     /// Return the received real-time message.
     RealTimeMessage getRealTimeMessage() const {
@@ -107,13 +98,59 @@ class USBMIDI_Interface : public MIDI_Interface {
     /// Return the received system exclusive message.
     SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
 
-  private:
-    void handleStall() override;
+    /// @}
 
   private:
     USBMIDI_Parser parser;
     uint8_t storedSysExData[3];
     uint8_t storedSysExLength = 0;
+    bool alwaysSendImmediately_ = true;
+
+  public:
+    /// @name   Buffering USB packets
+
+    /// Check if this USB interface always sends its USB packets immediately
+    /// after sending a MIDI message. The default value depends on the MIDI USB
+    /// backend being used: `true` for the `MIDIUSB` library, and `false` for 
+    /// the Teensy Core USB MIDI functions (because they have a short timeout).
+    bool alwaysSendsImmediately() const { return alwaysSendImmediately_; }
+    /// Don't send the USB packets immediately after sending a MIDI message.
+    /// By disabling immediate transmission, packets are buffered until you
+    /// call @ref sendNow() or until a timeout is reached, so multiple MIDI
+    /// messages can be transmitted in a single USB packet. This is more 
+    /// efficient and results in a higher maximum bandwidth, but it could 
+    /// increase latency when used incorrectly.
+    void neverSendImmediately() { alwaysSendImmediately_ = false; }
+    /// Send the USB packets immediately after sending a MIDI message.
+    /// @see disableSendImmediately
+    void alwaysSendImmediately() { alwaysSendImmediately_ = true; }
+
+    /// @}
+
+  public:
+    /// @name Underlying USB communication
+    /// @{
+
+    using MIDIUSBPacket_t = USBMIDI::MIDIUSBPacket_t;
+
+#ifndef ARDUINO
+  public:
+    MOCK_METHOD(void, writeUSBPacket,
+                (Cable, uint8_t, uint8_t, uint8_t, uint8_t));
+    MOCK_METHOD(MIDIUSBPacket_t, readUSBPacket, ());
+    void sendUSBNow() {}
+
+#else
+  private:
+    void writeUSBPacket(Cable cn, uint8_t cin, uint8_t d0, uint8_t d1,
+                        uint8_t d2) {
+        USBMIDI::write(cn.getRaw(), cin, d0, d1, d2);
+    }
+    MIDIUSBPacket_t readUSBPacket() { return USBMIDI::read(); }
+    void sendUSBNow() { USBMIDI::sendNow(); }
+#endif
+
+    /// @}
 };
 
 END_CS_NAMESPACE

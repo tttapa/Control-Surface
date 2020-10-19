@@ -21,7 +21,9 @@ void write(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1, uint8_t d2) {
     MidiUSB.sendMIDI(msg);
 }
 
-void flush() { MidiUSB.flush(); }
+void sendNow() { MidiUSB.flush(); }
+
+bool preferImmediateSend() { return true; }
 
 } // namespace USBMIDI
 

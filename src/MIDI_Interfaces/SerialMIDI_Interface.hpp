@@ -28,9 +28,13 @@ class StreamMIDI_Interface : public MIDI_Interface {
     ///          `MIDIReadEvent::NO_MESSAGE` if no MIDI message was available.
     MIDIReadEvent read();
 
-    /// Return the received channel message.
+    /// Return the received channel voice message.
     ChannelMessage getChannelMessage() const {
         return parser.getChannelMessage();
+    }
+    /// Return the received system common message.
+    SysCommonMessage getSysCommonMessage() const {
+        return parser.getSysCommonMessage();
     }
     /// Return the received real-time message.
     RealTimeMessage getRealTimeMessage() const {
@@ -49,6 +53,7 @@ class StreamMIDI_Interface : public MIDI_Interface {
     void sendSysCommonImpl(SysCommonMessage) override { /* TODO */ }
     void sendSysExImpl(SysExMessage) override;
     void sendRealTimeImpl(RealTimeMessage) override;
+    void sendNowImpl() override {}
 
   private:
     void handleStall() override;

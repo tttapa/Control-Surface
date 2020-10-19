@@ -23,4 +23,5 @@ class MockMIDI_Interface : public CS::MIDI_Interface {
     MOCK_METHOD(void, sendRealTimeImpl, (CS::RealTimeMessage), (override));
     MOCK_METHOD(void, handleStall, (), (override));
     void update() override {}
+    void sendNowImpl() override {}
 };

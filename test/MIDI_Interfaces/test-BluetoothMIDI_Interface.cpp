@@ -229,6 +229,40 @@ TEST(BluetoothMIDIInterface, receiveSysExAndRealTime) {
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
 
+TEST(BluetoothMIDIInterface, emptyPacket) {
+    MockMIDI_Callbacks cb;
+
+    BluetoothMIDI_Interface midi;
+    midi.begin();
+    midi.setCallbacks(&cb);
+
+    uint8_t data[] = {0x81}; // Just a header and nothing else
+    midi.parse(data, sizeof(data));
+    
+    EXPECT_TRUE(cb.sysExMessages.empty());
+    EXPECT_EQ(cb.sysExCounter, 0);
+
+    std::vector<ChannelMessage> expectedChannelMessages = {};
+    EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
+}
+
+TEST(BluetoothMIDIInterface, invalidPacket) {
+    MockMIDI_Callbacks cb;
+
+    BluetoothMIDI_Interface midi;
+    midi.begin();
+    midi.setCallbacks(&cb);
+
+    uint8_t data[] = {0x12, 0x13, 0x14}; // First byte is not a header
+    midi.parse(data, sizeof(data));
+    
+    EXPECT_TRUE(cb.sysExMessages.empty());
+    EXPECT_EQ(cb.sysExCounter, 0);
+
+    std::vector<ChannelMessage> expectedChannelMessages = {};
+    EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
+}
+
 using namespace ::testing;
 
 static uint16_t timestamp(uint8_t msb, uint8_t lsb) {

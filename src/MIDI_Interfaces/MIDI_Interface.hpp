@@ -65,7 +65,7 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
 
   protected:
     friend class MIDI_Sender<MIDI_Interface>;
-    /// Low-level function for sending a MIDI channel message.
+    /// Low-level function for sending a MIDI channel voice message.
     virtual void sendChannelMessageImpl(ChannelMessage) = 0;
     /// Low-level function for sending a MIDI system common message.
     virtual void sendSysCommonImpl(SysCommonMessage) = 0;
@@ -73,6 +73,8 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     virtual void sendSysExImpl(SysExMessage) = 0;
     /// Low-level function for sending a MIDI real-time message.
     virtual void sendRealTimeImpl(RealTimeMessage) = 0;
+    /// Low-level function for sending any buffered outgoing MIDI messages.
+    virtual void sendNowImpl() = 0;
 
   protected:
     /// Accept an incoming MIDI Channel message from the source pipe.
@@ -92,10 +94,14 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     void onRealTimeMessage(RealTimeMessage message);
 
   protected:
+    /// Read, parse and dispatch incoming MIDI messages on the given interface.
     template <class MIDIInterface_t>
     static void updateIncoming(MIDIInterface_t *iface);
+    /// Dispatch the given type of MIDI message from the given interface.
     template <class MIDIInterface_t>
     static void dispatchIncoming(MIDIInterface_t *iface, MIDIReadEvent event);
+    /// Un-stall the given MIDI interface. Assumes the interface has been 
+    /// stalled because of a chunked SysEx messages. Waits 
     template <class MIDIInterface_t>
     static void handleStall(MIDIInterface_t *iface);
 
@@ -121,7 +127,7 @@ void MIDI_Interface::updateIncoming(MIDIInterface_t *iface) {
     if (chunked)
         iface->stall(iface);
     // TODO: add logic to detect MIDI messages such as (N)RPN that span over
-    // multiple channel messages and that shouldn't be interrupted.
+    // multiple channel voice messages and that shouldn't be interrupted.
     // For short messages such as (N)RPN, I suggest waiting with a timeout.
 }
 
