@@ -10,10 +10,10 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #include <AH/Settings/NamespaceSettings.hpp>
 #include <stdint.h>
 
+BEGIN_AH_NAMESPACE
+
 /// @addtogroup AH_Containers
 /// @{
-
-BEGIN_AH_NAMESPACE
 
 /**
  * @brief   A class for arrays of bits.
@@ -119,8 +119,8 @@ class BitArray {
     uint8_t buffer[bufferLength] = {};
 };
 
-END_AH_NAMESPACE
-
 /// @}
+
+END_AH_NAMESPACE
 
 AH_DIAGNOSTIC_POP()

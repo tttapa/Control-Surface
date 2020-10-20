@@ -1,3 +1,24 @@
+/**
+ * @file
+ * @brief	Definition of Quaternion and EulerAngles.
+ * 
+ * Quaternions can be multiplied (Hamiltonian product), normalized and can
+ * perform rotations of vectors. Quaternion also has an implementation of the
+ * following operators:
+ * 
+ *  - `-` (conjugate)
+ *  - `+`, `+=`, `-`, `-=` (Hamiltonian product of quaternions, adds and 
+ *    subtracts angles)
+ *  - `*`, `*=`, `/`, `/=` (multiplication and division by scalars)
+ *  - `==`, `!=` (equality)
+ *  - `<<` (printing)
+ * 
+ * EulerAngles provides the conversions between Euler angles and quaternions.
+ * It also has an implementation of the following operators:
+ * 
+ *  - `==`, `!=` (equality)
+ *  - `<<` (printing)
+ */
 #pragma once
 
 #include <AH/Settings/Warnings.hpp>
@@ -20,28 +41,6 @@ BEGIN_AH_NAMESPACE
  *              Vector and Quaternion types with the necessary operators and 
  *              functions.
  * @{
- */
-
-/**
- * @file
- * @brief	Definition of Quaternion and EulerAngles.
- * 
- * Quaternions can be multiplied (Hamiltonian product), normalized and can
- * perform rotations of vectors. Quaternion also has an implementation of the
- * following operators:
- * 
- *  - `-` (conjugate)
- *  - `+`, `+=`, `-`, `-=` (Hamiltonian product of quaternions, adds and 
- *    subtracts angles)
- *  - `*`, `*=`, `/`, `/=` (multiplication and division by scalars)
- *  - `==`, `!=` (equality)
- *  - `<<` (printing)
- * 
- * EulerAngles provides the conversions between Euler angles and quaternions.
- * It also has an implementation of the following operators:
- * 
- *  - `==`, `!=` (equality)
- *  - `<<` (printing)
  */
 
 /**

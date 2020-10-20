@@ -71,6 +71,15 @@ struct Setbytesep {
 Setbytesep setbytesep(char bytesep);
 Print &operator<<(Print &printer, Setbytesep f);
 
+struct HexDump {
+    HexDump(const uint8_t *data, size_t length)
+     : data(data), length(length) {}
+    const uint8_t *data;
+    size_t length;
+};
+
+Print &operator<<(Print &p, HexDump h);
+
 /// @}
 
 #ifndef ARDUINO
@@ -102,6 +111,8 @@ inline std::ostream &operator<<(std::ostream &os,
                                 const __FlashStringHelper *s) {
     return os << reinterpret_cast<const char *>(s);
 }
+
+std::ostream &operator<<(std::ostream &p, HexDump h);
 
 #endif
 

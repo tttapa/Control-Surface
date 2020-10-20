@@ -49,6 +49,8 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
  *    Let's say the shift factor `K` is 1, then the minimum width of 
  *    `state_t` should be @f$ M + K = 17 @f$ bits, so `uint32_t` would be 
  *    a sensible choice.
+ * 
+ * @ingroup    AH_Filters
  */
 template <uint8_t K,
           class input_t = uint_fast16_t,

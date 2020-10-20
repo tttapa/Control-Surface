@@ -5,12 +5,14 @@
 #include <AH/Math/FixArduinoMacros.hpp>
 
 #ifdef __AVR__
+#include <AH/Arduino-Wrapper.h>
+
 #include "Fallback/cmath"
 #else
 
 #include <cmath>
 
-#ifndef _GLIBCXX_USE_C99_MATH_TR1
+#if !defined(__clang__) && !defined(_GLIBCXX_USE_C99_MATH_TR1)
 #pragma message("FMA math fix")
 namespace std {
   constexpr double

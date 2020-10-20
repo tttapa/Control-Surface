@@ -46,11 +46,8 @@ class Incrementor {
 
 } // namespace detail
 
-END_AH_NAMESPACE
 /// @addtogroup AH_Containers
 /// @{
-
-BEGIN_AH_NAMESPACE
 
 /**
  * @brief   Generate an array using the given generator.
@@ -244,9 +241,9 @@ distribute(const Array<T1, N1> &a, const Array<T2, N2> &b) {
     return distribute(a.slice(), b.slice());
 }
 
-END_AH_NAMESPACE
-
 /// @}
+
+END_AH_NAMESPACE
 
 #ifndef ARDUINO
 
