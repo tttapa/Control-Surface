@@ -91,8 +91,8 @@ CD74HC4051 mux = {
   {3, 4, 5} // Address pins S0, S1, S2
 };
  
-// Create an array of potentiometers that send out MIDI Control Change messages 
-// when you turn the potentiometers connected to the 8 input pins of the mux.
+// Create an array of CCPotentiometer objects that send out MIDI Control Change 
+// messages when you turn the potentiometers connected to the 8 inputs of the mux.
 CCPotentiometer volumePotentiometers[] = {
   { mux.pin(0), { MIDI_CC::Channel_Volume, CHANNEL_1 } },
   { mux.pin(1), { MIDI_CC::Channel_Volume, CHANNEL_2 } },
@@ -149,50 +149,12 @@ You can find an answer to some frequently asked questions on the
 [**FAQ**](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/df5/md_pages_FAQ.html)
 page.
 
-## The Control Surface library vs. The MIDI Controller library
-
-You might already have found my other Arduino MIDI library, [MIDI Controller](https://github.com/tttapa/MIDI_Controller), 
-and are wondering which one you should use for your project.
-
-First, some background:  
-I first started working on the MIDI Controller library way back in 2015, and it
-evolved a lot early on. The library seemed to be pretty popular, and it worked
-pretty well, so I couldn't just push breaking changes every couple of months.  
-Many people requested support for MIDI input, and I liked experimenting with it
-as well. The main problem was that the overall architecture of the library 
-needed a complete overhaul in order to add MIDI input support. Since I didn't 
-know if the MIDI input was going to work out, and I didn't want to break 
-compatibility with older versions of the library, I decided to fork it: Control
-Surface was born.  
-At the moment, I consider the MIDI Controller library "complete". I won't be 
-adding any groundbreaking new features, but I will still be fixing bugs and 
-providing support.  
-Control Surface, on the other hand, is where the active development takes place.
-
-The main difference between the two libraries is that Control Surface has much
-more features. MIDI Controller has everything you need for a working MIDI 
-controller with potentiometers, push buttons, rotary encoders, etc., while 
-Control Surface supports all of that, plus MIDI input, LEDs, VU meters, OLED 
-displays, MIDI over Bluetooth, Audio over USB, etc.  
-Another major difference is the documentation and tests. Control Surface tries
-to provide better documentation using Doxygen, and it has many unit tests to 
-make sure I don't introduce any bugs.
-
-For a new project, I would recommend Control Surface, because I think it has 
-some great features compared to MIDI Controller.  
-The only caveat is that this library is still under development. Master should 
-always be relatively stable, but I might change the API of some parts of the 
-library for future releases if necessary.  
-Another thing is that not everything is implemented yet, and many features are 
-not yet fully documented. If you have a specific feature request that is not yet
-fully implemented, feel free to open an issue, so I know where to focus on first.
-
 ## Work in progress
 
 - Adding support for motorized faders
 - Cleaning up the display code
 - Cleaning up the MIDI over Bluetooth LE code
-- Adding more tests (currently at over 440 unit tests)
+- Adding more tests (currently at over 525 unit tests)
 - Adding more examples and adding comments to existing examples
 - Finishing the documentation
 

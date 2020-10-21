@@ -19,6 +19,11 @@ MIDIStaller *const eternal_stall
  * @addtogroup MIDI_Routing MIDI Routing
  * @brief   Operators and utilities for MIDI routing.
  * 
+ * Two or more MIDI interfaces can be connected
+ * using @ref MIDI_Pipe "MIDI Pipes". The simplest pipe just carries messages 
+ * from the input interface to the output interface, but you can write rules for 
+ * filtering out certain messages, changing the channel of some messages, etc.
+ * 
  * Allows you to use syntax like:
  * 
  * ~~~cpp
@@ -41,6 +46,14 @@ MIDIStaller *const eternal_stall
  * midiA | pipes | midiB;
  * midiA | pipes | midiC;
  * ~~~
+ * 
+ * Have a look at the following examples on MIDI routing:
+ * 
+ *  - @ref MIDI_Pipes-Routing.ino
+ *  - @ref Dual-MIDI-Interface.ino
+ * 
+ * If you're interested how the pipes work, see the documentation for 
+ * @ref MIDI_Pipe.
  * 
  * @{ 
  */
@@ -119,7 +132,7 @@ class MIDI_Sink {
     /// other pipes connected to the original pipe, which doesn't have a sink
     /// anymore when this function finishes.
     /// Used to disconnect a MIDI_Pipe while preserving the connections of its
-    /// "through" inputs.
+    /// “through” inputs.
     void disconnectSourcePipesShallow();
 
   protected:
@@ -231,7 +244,7 @@ class MIDI_Source {
     /// other pipes connected to the original pipe, which doesn't have a source
     /// anymore when this function finishes.
     /// Used to disconnect a @ref MIDI_Pipe while preserving the connections of
-    /// its "through" outputs.
+    /// its “through” outputs.
     void disconnectSinkPipesShallow();
 
   protected:
@@ -250,24 +263,25 @@ class MIDI_Source {
  * @brief   Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink.
  * 
  * A pipe has at least two, at most four connections. In the simplest case, a 
- * pipe just has a sourca and a sink. The source sends data down the pipe, and
- * the pipe sends it to the sink. A mapping or filter can be applied to the 
- * data traveling down the pipe.
+ * pipe just has a source and a sink. The source sends MIDI messages down the 
+ * pipe, and the pipe sends them to the sink. A mapping or filter can be applied
+ * to the messages traveling down the pipe.
  * 
  * To be able to connect multiple pipes to a single sink or source, a pipe also
- * has a "through" output and a "through" input, both are pipes, not sinks or 
- * sources. All data that comes from the source is sent to the "through" output
- * as well, and all input that comes in from the "through" input is sent to the
+ * has a “through” output and a “through” input. Both are pipes, not sinks or 
+ * sources. All data that comes from the source is sent to the “through” output
+ * as well, and all input that comes in from the “through” input is sent to the
  * sink as well. The mapping or filter is not applied to the data going from/to
- * the "through" connections.
+ * the “through” connections.
  * 
  * Merging data from multiple sources into a single sink can cause problems
- * because messages can be interleaved (e.g. RPN/NRPN messages). To circumvent
- * this issue, a source can request exclusive access to the pipe it's connected
- * to. This locks all other pipes that sink into the same sinks as the exclusive
- * source.  
- * Other sources must then query its pipe before sending, to make sure it's not
- * locked by another source that has exclusive access.
+ * because messages can be interleaved (e.g. RPN/NRPN or chunked system 
+ * exclusive messages). To circumvent this issue, a source can request exclusive
+ * access to the pipe it's connected to. This stalls all other pipes that sink
+ * into the same sinks as the exclusive source.  
+ * When other sources try to send to a stalled pipe, this will automatically 
+ * call back the source that originally stalled the pipes, so it can finish its
+ * message, and then un-stall the pipes so the other pipe can send its data.
  * 
  * **Pipe model**
  * 
@@ -290,8 +304,19 @@ class MIDI_Source {
  *                    └────────┘ ×
  * ~~~
  * 
+ * If you have two sources that should connect to the same sink, a possible
+ * configuration is:
+ * 
+ * ~~~
+ *                                          × ┌────────┐
+ *   source 1  >━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━┥ pipe 1 ┝━┯━━━>  sink
+ *                  × ┌────────┐              └────────┘ │
+ *   source 2  >━━━━┷━┥ pipe 2 ┝━┯━━━> >─────────────────╯
+ *                    └────────┘ ×
+ * ~~~
+ * 
  * Each connection between a source and a sink has its own pipe, and no two 
- * pipes are connected in series.
+ * pipes are connected in series (only through the “through“ inputs/outputs).
  */
 class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
   public:
@@ -344,13 +369,13 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     /// Get the name of the staller (cause of the stall) that causes the sink
     /// of this pipe to be stalled.
     const char *getSinkStallerName() const;
-    /// Get the staller (cause of the stall) that causes the "through" output
+    /// Get the staller (cause of the stall) that causes the “through” output
     /// of this pipe to be stalled.
-    /// The "through" output of this pipe could sink to more than one stalled 
+    /// The “through” output of this pipe could sink to more than one stalled 
     /// sink, this function just returns one of the causes.
     MIDIStaller *getThroughStaller() const { return through_staller; }
     /// Get the name of the staller (cause of the stall) that causes the 
-    /// "through" output of this pipe to be stalled.
+    /// “through” output of this pipe to be stalled.
     const char *getThroughStallerName() const;
     /// Get any staller: returns @ref getSinkStaller() if it's not null,
     /// @ref getThroughStaller() otherwise.
@@ -385,10 +410,10 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     bool hasSink() const { return sink != nullptr; }
     /// Check if this pipe is connected to a source.
     bool hasSource() const { return source != nullptr; }
-    /// Check if this pipe has a "through" output that sends all incoming
+    /// Check if this pipe has a “through” output that sends all incoming
     /// messages from the input (source) to another pipe.
     bool hasThroughOut() const { return throughOut != nullptr; }
-    /// Check if this pipe has a "through" input that merges all messages from
+    /// Check if this pipe has a “through” input that merges all messages from
     /// another pipe into the output (sink).
     bool hasThroughIn() const { return throughIn != nullptr; }
 
@@ -399,11 +424,11 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     /// @{
 
     /// Disconnect this pipe from all other pipes, sources and sinks. If the
-    /// "through" input and/or output were in use, they are reconnected to their
+    /// “through” input and/or output were in use, they are reconnected to their
     /// original sink and/or source respectively, their behavior doesn't change.
     void disconnect();
     /// Disconnect the given sink from this pipe. The sink can be connected
-    /// directly, or via the "through" output.
+    /// directly, or via the “through” output.
     /// Returns true if the sink was found and disconnected, false if the given
     /// sink was not a direct or indirect sink of this pipe.
     bool disconnect(TrueMIDI_Sink &sink) {
@@ -417,7 +442,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
         return false;
     }
     /// Disconnect the given source from this pipe. The source can be connected
-    /// directly, or via the "through" input.
+    /// directly, or via the “through” input.
     /// Returns true if the source was found and disconnected, false if the
     /// given source was not a direct or indirect source to this pipe.
     bool disconnect(TrueMIDI_Source &source) {
@@ -436,9 +461,9 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     MIDI_Source *getSource() { return source; }
     /// Get the immediate sink of this pipe.
     MIDI_Sink *getSink() { return sink; }
-    /// Get the pipe connected to the "through" output of this pipe.
+    /// Get the pipe connected to the “through” output of this pipe.
     MIDI_Pipe *getThroughOut() { return throughOut; }
-    /// Get the pipe connected to the "through" input of this pipe.
+    /// Get the pipe connected to the “through” input of this pipe.
     MIDI_Pipe *getThroughIn() { return throughIn; }
 
     /// Get the sink this pipe eventually sinks to, following the chain
@@ -483,7 +508,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     }
 
   protected:
-    /// Accept a MIDI message from the source, forward it to the "through"
+    /// Accept a MIDI message from the source, forward it to the “through”
     /// output if necessary, map or filter the MIDI message if necessary,
     /// and send it to the sink. This function transfers messages from a 
     /// @ref MIDI_Source to its @ref MIDI_Pipe.
@@ -496,7 +521,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
 
   private:
     /// Called when data arrives from an upstream pipe connected to our 
-    /// "through" input, this function forwards it to the sink.
+    /// “through” input, this function forwards it to the sink.
     void sinkMIDIfromPipe(ChannelMessage msg) override {
         sourceMIDItoSink(msg);
     }
@@ -514,10 +539,10 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     /// @{
 
     /// Stall this pipe and all other pipes further downstream (following the
-    /// path of the sink and the "through" output). Operates recursively until
+    /// path of the sink and the “through” output). Operates recursively until
     /// the end of the chain is reached, and then continues upstream (using
     /// @ref stallUpstream) to stall all pipes that connect to sources that 
-    /// sink to the same sink as this pipe and its "through" output.
+    /// sink to the same sink as this pipe and its “through” output.
     /// In short: stall all pipes that sink to the same sink as this pipe, and
     /// then stall all pipes that source to this first set of pipes.
     void stallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) override;

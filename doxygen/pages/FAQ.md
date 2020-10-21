@@ -15,6 +15,79 @@ Elements. It usually refers to both the actual hardware (e.g. a push button) and
 the software object that reads the hardware and sends or receives the MIDI 
 messages (e.g. a `NoteButton` object or variable in the Arduino code).
 
+## Can I use Control Surface as a general purpose MIDI library?
+
+Absolutely! Even though Control Surface has many high-level utilities for 
+building MIDI controllers, at its core is a solid MIDI input/output system with
+well-tested MIDI interfaces and MIDI parsers for many different transports, such
+as the classic 4-pin DIN MIDI, MIDI over USB and MIDI over Bluetooth Low Energy. 
+There's also a Debug MIDI interface that prints the MIDI messages to the serial
+monitor, and there are wrappers for using third-party libraries such as 
+AppleMIDI. See the @ref MIDIInterfaces module for a complete overview of the 
+available MIDI interfaces.
+
+### Sending MIDI
+
+You can use the functions defined by the @ref MIDI_Sender class to send all 
+kinds of MIDI messages. These functions can be used on all 
+@ref MIDIInterfaces "MIDI interfaces" and on the main `Control_Surface` class.
+
+Here's a basic MIDI output example:
+```cpp
+USBMIDI_Interface midi; // Instantiate the MIDI over USB interface
+
+using namespace MIDI_Notes;
+const MIDIAddress noteAddress = {note(C, 4), CHANNEL_1};
+const uint8_t velocity = 0x7F;
+
+void setup() {
+  midi.begin();       // initialize the MIDI interface
+}
+
+void loop() {
+  midi.sendNoteOn(noteAddress, velocity);         // send a note on event
+  delay(1000);
+  midi.sendNoteOff(noteAddress, velocity);        // send a note off event
+  delay(1000);
+}
+```
+
+### Receiving MIDI
+
+For MIDI input, a class with callback functions for the different messages is
+used. When an incoming MIDI message is available, `midi.update()` will call the
+callbacks for you. See the @ref MIDI_Callbacks class and the examples listed
+below.
+
+### Routing MIDI
+
+Apart from low-level MIDI input/output, you can also set up advanced MIDI 
+routing rules between different interfaces. Two or more interfaces are connected
+through @ref MIDI_Pipe "MIDI Pipes". The simplest pipe just carries messages 
+from the input interface to the output interface, but you can write rules for 
+filtering out certain messages, changing the channel of some messages, etc.  
+For more information, see the @ref MIDI_Routing module.
+
+### MIDI examples
+
+ - @ref MIDI-Output.ino
+ - @ref MIDI-Input.ino
+ - @ref Send-MIDI-Notes.ino
+ - @ref SysEx-Send-Receive.ino
+ - @ref MIDI_Pipes-Routing.ino
+
+### Combining low-level MIDI code and high-level “Control Surface” code
+
+If need access to the incoming MIDI messages while also using the high-level
+`Control_Surface` class, you can also add callbacks to `Control_Surface` itself.
+You can then decide whether or not you want to pass on the the message to 
+`Control_Surface` when you're done with it. See the @ref MIDI-Input-Callback.ino
+example for more details.  
+If you just want to use the low-level sending functions, you can either use the
+member functions of `Control_Surface`, like 
+`Control_Surface.sendNoteOn(note, velocity)`, or you can use the MIDI interfaces
+directly.
+
 ## Can I use multiplexers for reading rotary encoders? {#faq-mux-encoder}
 
 No, rotary encoders either need interrupts or have to be polled at a 
@@ -113,3 +186,37 @@ allow you to specify an arbitrary list of alternative addresses. The formula for
 the address is simply a table lookup in that list of addresses, based on the 
 active bank:
 @f[ y = \text{list of addresses}[x] @f].
+
+## What's the difference between the Control Surface and MIDI Controller libraries?
+
+You might already have found my other Arduino MIDI library, [MIDI Controller](https://github.com/tttapa/MIDI_Controller), 
+and are wondering which one you should use for your project.
+
+Short answer: Use Control Surface. MIDI Controller is no longer supported and 
+Control Surface completely replaces every aspect of it.
+
+For the long answer, first, some background:  
+I first started working on the MIDI Controller library way back in 2015, and it
+evolved a lot early on. The library seemed to be pretty popular, and it worked
+pretty well, so I couldn't just push breaking changes every couple of months.  
+Many people requested support for MIDI input, and I liked experimenting with it
+as well. The main problem was that the overall architecture of the library 
+needed a complete overhaul in order to add MIDI input support. Since I didn't 
+know if the MIDI input was going to work out, and I didn't want to break 
+compatibility with older versions of the library, I decided to fork it: Control
+Surface was born.
+
+I consider the MIDI Controller library "complete". I won't be 
+adding any new features, and I no longer offer support for it.  
+For new projects, you should always use Control Surface, it is actively being 
+developed, features are added, bugs are fixed, and I offer support for it on
+the Arduino forum and in the GitHub issues.
+
+The main difference between the two libraries is that Control Surface has much
+more features. MIDI Controller has everything you need for a working MIDI 
+controller with potentiometers, push buttons, rotary encoders, etc., while 
+Control Surface supports all of that, plus MIDI input, LEDs, VU meters, OLED 
+displays, MIDI over Bluetooth, Audio over USB, etc.  
+Another major difference is the documentation and tests. Control Surface tries
+to provide better documentation using Doxygen, and it has many unit tests to 
+make sure I don't introduce any bugs.
