@@ -49,6 +49,9 @@
  * that gets called when the setting changes. The latter is demonstrated in the
  * @ref Custom-Selector-Callback.ino example.
  * 
+ * For more information about banks, have a look at the 
+ * @ref faq-banks "“How do banks work?”" FAQ page, it includes a nice animation.
+ * 
  * Connections
  * -----------
  * 

@@ -145,6 +145,10 @@ Have a look at the [**modules**](https://tttapa.github.io/Control-Surface-doc/Do
 for an overview of the features of the library, it's the best entry point for 
 the documentation.
 
+You can find an answer to some frequently asked questions on the 
+[**FAQ**](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/df5/md_pages_FAQ.html)
+page.
+
 ## The Control Surface library vs. The MIDI Controller library
 
 You might already have found my other Arduino MIDI library, [MIDI Controller](https://github.com/tttapa/MIDI_Controller), 

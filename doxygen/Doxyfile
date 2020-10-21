@@ -1184,7 +1184,8 @@ HTML_EXTRA_STYLESHEET  = "custom_stylesheet.css"
 HTML_EXTRA_FILES       = "svg/selector-multiple-momentary-switches-LED.svg" \
                          "svg/selector-increment-decrement-LED.svg" \
                          "svg/selector-one-toggle-switch-LED.svg" \
-                         "svg/selector-increment-LED.svg"
+                         "svg/selector-increment-LED.svg" \
+                         "svg/bank-bankable.svg"
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to

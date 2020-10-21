@@ -3,7 +3,8 @@
 - ✔ ~~Change template structure for senders~~
 - More examples with better structure
 - ✔ ~~Move Wikis to tttapa.github.io~~
-- Add FAQ and Troubleshooting pages
+- ✔ ~~Add FAQ page~~
+- Add Troubleshooting page
 - ✔ ~~Add a getter for the button state, and rename `getState()` → update()~~
 - Cleanup structure of display elements.
 - Flashing LEDs
@@ -20,7 +21,7 @@
 - ✔ ~~GitHub template~~
 - ✔ ~~Fix firmware link DFU scripts~~
 - ✔ ~~Move DFU scripts → scripts~~
-- Find and list all TODO's throughout the source code.
+- List all TODO's throughout the source code and solve them
 
 ## Specific elements
 
@@ -94,8 +95,8 @@
 - ✔ VU
 - ✔ LED Bitmap
 - ✔ Timedisplay
-- Assignment display
-- LCD
+- ✔ Assignment display
+- ✔ LCD
 
 
 ### Selectors

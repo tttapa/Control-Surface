@@ -5,7 +5,10 @@ the necessary hardware support packages, such as Teensyduino or the ESP32 Core,
 if you're not using a standard board.  
 Here are some links to installation instructions for the Arduino IDE on
 [**Linux**](https://tttapa.github.io/Pages/Ubuntu/Software-Installation/Arduino/Arduino-IDE.html), on [**Windows**](https://www.arduino.cc/en/guide/windows), 
-and on [**OSX**](https://www.arduino.cc/en/guide/macOSX).
+and on [**OSX**](https://www.arduino.cc/en/guide/macOSX).  
+If you're using an AVR board (e.g. Arduino Uno, Mega, Nano, Leonardo), you need
+at least version 1.8.1 of the Arduino AVR Core 
+(see Tools > Board > Boards Manager).
 
 You have to install the Control Surface library itself, as well as some 
 dependencies.
