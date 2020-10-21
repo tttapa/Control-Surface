@@ -20,7 +20,7 @@ messages (e.g. a `NoteButton` object or variable in the Arduino code).
 Absolutely! Even though Control Surface has many high-level utilities for 
 building MIDI controllers, at its core is a solid MIDI input/output system with
 well-tested MIDI interfaces and MIDI parsers for many different transports, such
-as the classic 4-pin DIN MIDI, MIDI over USB and MIDI over Bluetooth Low Energy. 
+as the classic 5-pin DIN MIDI, MIDI over USB and MIDI over Bluetooth Low Energy. 
 There's also a Debug MIDI interface that prints the MIDI messages to the serial
 monitor, and there are wrappers for using third-party libraries such as 
 AppleMIDI. See the @ref MIDIInterfaces module for a complete overview of the 
@@ -206,7 +206,7 @@ know if the MIDI input was going to work out, and I didn't want to break
 compatibility with older versions of the library, I decided to fork it: Control
 Surface was born.
 
-I consider the MIDI Controller library "complete". I won't be 
+I consider the MIDI Controller library obsolete. I won't be 
 adding any new features, and I no longer offer support for it.  
 For new projects, you should always use Control Surface, it is actively being 
 developed, features are added, bugs are fixed, and I offer support for it on
