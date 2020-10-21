@@ -148,6 +148,9 @@ div.navpath > ul {
 .directory td.desc {
     padding: 0.6em 0.5em 0.6em 0.8em;
 }
+.markdownTable tr:last-child td {
+    border-bottom: 1px solid #334262;
+}
 /* Hide the "Detailed description" header */
 div.contents a#details + h2.groupheader {
     display: none;

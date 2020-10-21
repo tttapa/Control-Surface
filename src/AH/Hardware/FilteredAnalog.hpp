@@ -278,6 +278,16 @@ class FilteredAnalog
                                 FilterShiftFactor, FilterType, AnalogType,
                                 IncRes>(analogPin, nullptr, initial) {}
 
+    /**
+     * @brief   Construct a new FilteredAnalog object.
+     * 
+     * **This constructor should not be used.**  
+     * It is just a way to easily create arrays of FilteredAnalog objects, and
+     * initializing them later. Trying to update a default-constructed or 
+     * uninitialized FilteredAnalog object will result in a fatal runtime error.
+     */
+    FilteredAnalog() : FilteredAnalog(NO_PIN) {}
+
     /// A function pointer to a mapping function to map analog values.
     /// @see    map()
     using MappingFunction = AnalogType (*)(AnalogType);
