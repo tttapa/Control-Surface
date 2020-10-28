@@ -10,7 +10,7 @@ class ManyAddressBank {
  public:
   ManyAddressBank(const ManyAddresses<NumAddr> &manyaddresses,
                   BaseOutputBankConfig bank)
-    : manyaddresses{manyaddresses}, bank{bank} {}
+    : manyaddresses(manyaddresses), bank(bank) {}
 
   void lock() { manyaddresses.lock(), bank.lock(); }
   void unlock() { manyaddresses.unlock(), bank.unlock(); }
@@ -31,11 +31,8 @@ class ManyAddressBankNoteButton
   ManyAddressBankNoteButton(const ManyAddresses<NumAddr> &manyaddresses,
                             OutputBankConfig<> bank, pin_t pin,
                             const DigitalNoteSender &sender = {})
-    : MIDIButton<ManyAddressBank<NumAddr>, DigitalNoteSender>{
-        {manyaddresses, bank},
-        pin,
-        sender,
-      } {}
+    : MIDIButton<ManyAddressBank<NumAddr>, DigitalNoteSender>(
+        {manyaddresses, bank}, pin, sender) {}
 };
 
 } // namespace ManyAddresses

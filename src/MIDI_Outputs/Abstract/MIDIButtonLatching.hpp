@@ -29,7 +29,7 @@ class MIDIButtonLatching : public MIDIOutputElement {
      */
     MIDIButtonLatching(pin_t pin, const MIDIAddress &address,
                        const Sender &sender)
-        : button{pin}, address(address), sender{sender} {}
+        : button(pin), address(address), sender(sender) {}
 
   public:
     void begin() override { button.begin(); }

@@ -27,21 +27,19 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
      *
      * @todo    Documentation
      */
-    MIDIRotaryEncoder(BankAddress bankAddress,
-                      const EncoderPinList &pins,
+    MIDIRotaryEncoder(BankAddress bankAddress, const EncoderPinList &pins,
                       uint8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
-        : address(bankAddress), encoder{pins.A, pins.B}, 
-          speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
+        : address(bankAddress), encoder{pins.A, pins.B},
+          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
+          sender(sender) {}
 
 // For tests only
 #ifndef ARDUINO
     MIDIRotaryEncoder(BankAddress bankAddress, const Encoder &encoder,
                       uint8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
-        : address(bankAddress), encoder{encoder}, 
-          speedMultiply(speedMultiply),
+        : address(bankAddress), encoder(encoder), speedMultiply(speedMultiply),
           pulsesPerStep(pulsesPerStep), sender(sender) {}
 #endif
 

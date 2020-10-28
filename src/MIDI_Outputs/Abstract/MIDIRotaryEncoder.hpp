@@ -23,21 +23,19 @@ class MIDIRotaryEncoder : public MIDIOutputElement {
      *
      * @todo    Documentation
      */
-    MIDIRotaryEncoder(const EncoderPinList &pins,
-                      const MIDIAddress &address,
+    MIDIRotaryEncoder(EncoderPinList pins, MIDIAddress address,
                       int8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
         : encoder{pins.A, pins.B}, address(address),
-          speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
+          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
+          sender(sender) {}
 
 // For tests only
 #ifndef ARDUINO
-    MIDIRotaryEncoder(const Encoder &encoder,
-                      const MIDIAddress &address,
+    MIDIRotaryEncoder(const Encoder &encoder, MIDIAddress address,
                       int8_t speedMultiply, uint8_t pulsesPerStep,
                       const Sender &sender)
-        : encoder{encoder}, address(address), speedMultiply(speedMultiply),
+        : encoder(encoder), address(address), speedMultiply(speedMultiply),
           pulsesPerStep(pulsesPerStep), sender(sender) {}
 #endif
 

@@ -30,7 +30,7 @@ class AudioVU : public IVU {
      */
     template <class T>
     AudioVU(T &level, float gain = 1.0, uint8_t max = 255)
-        : IVU(max), level{level}, gain(gain) {}
+        : IVU(max), level(level), gain(gain) {}
 
     /** 
      * @brief   Create a new AudioVU object.

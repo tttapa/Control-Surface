@@ -13,7 +13,7 @@ class GenericProgramChangeSelector : public GenericSelector<N, Callback>,
                                  const Callback &callback,
                                  const MIDIChannelCN &address)
         : GenericSelector<N, Callback>{selectable, callback},
-          MIDIInputElementPC{address} {}
+          MIDIInputElementPC(address) {}
 
     void begin() override {
         MIDIInputElementPC::begin();

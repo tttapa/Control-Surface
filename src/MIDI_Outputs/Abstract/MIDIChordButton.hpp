@@ -40,8 +40,8 @@ class MIDIChordButton : public MIDIOutputElement {
     template <uint8_t N>
     MIDIChordButton(pin_t pin, const MIDIAddress &address,
                     const Chord<N> &chord, const Sender &sender)
-        : button{pin}, address(address),
-          newChord(AH::MakeUnique<Chord<N>>(chord)), sender{sender} {}
+        : button(pin), address(address),
+          newChord(AH::MakeUnique<Chord<N>>(chord)), sender(sender) {}
     // TODO: can I somehow get rid of the dynamic memory allocation here?
 
     void begin() final override { button.begin(); }

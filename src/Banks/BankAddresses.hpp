@@ -9,7 +9,7 @@ namespace Bankable {
 class SingleAddress : public OutputBankableMIDIAddress {
   public:
     SingleAddress(BaseOutputBankConfig config, MIDIAddress address)
-        : OutputBankableMIDIAddress{config}, address{address} {}
+        : OutputBankableMIDIAddress(config), address(address) {}
 
     MIDIAddress getBaseAddress() const { return address; }
 
@@ -26,7 +26,7 @@ class SingleAddressMultipleBanks {
   public:
     SingleAddressMultipleBanks(const Array<OutputBankableMIDIAddress, N> &banks,
                                MIDIAddress address)
-        : banks{banks}, address{address} {}
+        : banks(banks), address(address) {}
 
     MIDIAddress getBaseAddress() const { return address; }
 
@@ -56,7 +56,7 @@ class DualAddresses : public OutputBankableMIDIAddress {
   public:
     DualAddresses(BaseOutputBankConfig config,
                   const Array<MIDIAddress, 2> &addresses)
-        : OutputBankableMIDIAddress{config}, first(addresses[0]),
+        : OutputBankableMIDIAddress(config), first(addresses[0]),
           second(addresses[1]) {}
 
     MIDIAddress getFirstBaseAddress() const { return first; }
@@ -79,8 +79,8 @@ class MatrixAddress : public OutputBankableMIDIAddress {
     MatrixAddress(BaseOutputBankConfig config,
                   const AddressMatrix<nb_rows, nb_cols> &addresses,
                   MIDIChannelCN channelCN)
-        : OutputBankableMIDIAddress{config}, addresses{addresses},
-          channelCN{channelCN} {}
+        : OutputBankableMIDIAddress(config), addresses(addresses),
+          channelCN(channelCN) {}
 
     uint8_t getBaseAddress(uint8_t row, uint8_t col) const {
         return addresses[row][col];
@@ -115,7 +115,7 @@ class ManyAddresses : public ManyAddresses_Base {
      */
     ManyAddresses(const Bank<NumBanks> &bank,
                   const Array<MIDIAddress, NumBanks> &addresses)
-        : ManyAddresses_Base{bank}, addresses{addresses} {}
+        : ManyAddresses_Base(bank), addresses(addresses) {}
 
     MIDIAddress getActiveAddress() const { return addresses[getSelection()]; }
 
@@ -132,7 +132,7 @@ class DualManyAddresses : public ManyAddresses_Base {
   public:
     DualManyAddresses(const Bank<NumBanks> &bank,
                       const Array2D<MIDIAddress, 2, NumBanks> &addresses)
-        : ManyAddresses_Base{bank}, first{addresses[0]}, second{addresses[1]} {}
+        : ManyAddresses_Base(bank), first{addresses[0]}, second{addresses[1]} {}
 
     MIDIAddress getFirstActiveAddress() const { return first[getSelection()]; }
     MIDIAddress getSecondActiveAddress() const {
@@ -150,8 +150,8 @@ class ManyMatrixAddresses : public ManyAddresses_Base {
         const Bank<NumBanks> &bank,
         const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &addresses,
         const Array<MIDIChannelCN, NumBanks> &channelCNs)
-        : ManyAddresses_Base{bank}, addresses{addresses}, channelCNs{
-                                                              channelCNs} {}
+        : ManyAddresses_Base(bank), addresses(addresses),
+          channelCNs(channelCNs) {}
 
     MIDIAddress getActiveAddress(uint8_t row, uint8_t col) const {
         return {addresses[getSelection()][row][col],

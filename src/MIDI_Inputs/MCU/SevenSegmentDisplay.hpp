@@ -16,7 +16,7 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
     * @todo      Documentation.
     */
     SevenSegmentDisplay(const MIDIAddress &address)
-        : MIDIInputElementCC{address} {
+        : MIDIInputElementCC(address) {
         fillWithSpaces();
     }
 
@@ -52,8 +52,7 @@ class SevenSegmentDisplay : public MIDIInputElementCC, public Printable {
     /// Check if the address of the incoming MIDI message is within the range
     /// of addresses of this element.
     bool match(const MIDIAddress &target) const override {
-        return MIDIAddress::matchAddressInRange(target, address,
-                                                         LENGTH);
+        return MIDIAddress::matchAddressInRange(target, address, LENGTH);
     }
 
     /// @todo

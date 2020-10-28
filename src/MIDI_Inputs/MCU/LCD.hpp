@@ -31,7 +31,7 @@ template <uint8_t BufferSize = 120>
 class LCD : public MIDIInputElementSysEx, private LCDCounter {
   public:
     LCD(uint8_t offset = 0, uint8_t CN = 0)
-        : MIDIInputElementSysEx{CN}, offset{offset} {
+        : MIDIInputElementSysEx(CN), offset(offset) {
         buffer[BufferSize] = '\0';
         for (uint8_t i = 0; i < BufferSize; i++)
             buffer[i] = ' ';

@@ -12,7 +12,7 @@ BEGIN_CS_NAMESPACE
  */
 class INoteCCValue {
   protected:
-    INoteCCValue(uint8_t rangeLength) : rangeLength{rangeLength} {}
+    INoteCCValue(uint8_t rangeLength) : rangeLength(rangeLength) {}
 
   public:
     /// Get the length of the range of note/CC addresses.
@@ -73,7 +73,7 @@ template <class MIDIInput_t, uint8_t RangeLen, uint8_t NumBanks, class Callback>
 class NoteCCRange : public MIDIInput_t, public INoteCCValue {
   public:
     NoteCCRange(MIDIAddress address, const Callback &callback)
-        : MIDIInput_t{address}, INoteCCValue{RangeLen}, callback(callback) {}
+        : MIDIInput_t(address), INoteCCValue(RangeLen), callback(callback) {}
 
     /// @todo   check index bounds
     uint8_t getValue(uint8_t index) const final override {

@@ -22,7 +22,7 @@ class GenericEncoderSelector : public GenericSelector<N, Callback> {
                            int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
         : GenericSelector<N, Callback>{selectable, callback}, encoder{pins.A,
                                                                       pins.B},
-          switchPin{pins.switchPin}, pulsesPerStep{pulsesPerStep}, wrap{wrap} {}
+          switchPin(pins.switchPin), pulsesPerStep(pulsesPerStep), wrap(wrap) {}
 
     void begin() override {
         Parent::begin();

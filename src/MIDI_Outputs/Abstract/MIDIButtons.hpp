@@ -25,8 +25,8 @@ class MIDIButtons : public MIDIOutputElement {
                 const MIDIAddress &baseAddress,
                 const RelativeMIDIAddress &incrementAddress,
                 const Sender &sender)
-        : buttons{buttons}, baseAddress(baseAddress),
-          incrementAddress(incrementAddress), sender{sender} {}
+        : buttons(buttons), baseAddress(baseAddress),
+          incrementAddress(incrementAddress), sender(sender) {}
 
   public:
     void begin() final override {

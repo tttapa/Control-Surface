@@ -11,7 +11,7 @@ template <setting_t N> // TODO: check bounds here?
 class Selectable {
   protected:
     Selectable(setting_t initialSelection = 0)
-        : initialSelection{initialSelection} {}
+        : initialSelection(initialSelection) {}
 
   public:
     virtual void select(setting_t setting) = 0;

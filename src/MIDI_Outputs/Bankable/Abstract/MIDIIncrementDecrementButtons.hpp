@@ -28,7 +28,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
                                   uint8_t multiplier,
                                   const RelativeSender &relativeSender,
                                   const ResetSender &resetSender)
-        : addresses{addresses}, buttons{buttons}, multiplier{multiplier},
+        : addresses(addresses), buttons(buttons), multiplier(multiplier),
           relativeSender(relativeSender), resetSender(resetSender) {}
 
   public:

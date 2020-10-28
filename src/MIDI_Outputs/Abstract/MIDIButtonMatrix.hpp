@@ -40,7 +40,7 @@ class MIDIButtonMatrix : public MIDIOutputElement,
                      const AddressMatrix<nb_rows, nb_cols> &addresses,
                      MIDIChannelCN channelCN, const Sender &sender)
         : AH::ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
-          addresses(addresses), baseChannelCN(channelCN), sender{sender} {}
+          addresses(addresses), baseChannelCN(channelCN), sender(sender) {}
 
   public:
     void begin() final override { AH::ButtonMatrix<nb_rows, nb_cols>::begin(); }

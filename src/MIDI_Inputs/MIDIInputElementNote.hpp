@@ -26,7 +26,7 @@ class MIDIInputElementNote : public MIDIInputElement,
      * @todo    Documentation.
      */
     MIDIInputElementNote(const MIDIAddress &address)
-        : MIDIInputElement{address} {
+        : MIDIInputElement(address) {
         GUARD_LIST_LOCK;
         elements.append(this);
     }

@@ -31,9 +31,9 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIFilteredAnalogAddressable(BankAddress bankAddress,
-                                  pin_t analogPin, const Sender &sender)
-        : address{bankAddress}, filteredAnalog{analogPin}, sender(sender) {}
+    MIDIFilteredAnalogAddressable(BankAddress bankAddress, pin_t analogPin,
+                                  const Sender &sender)
+        : address(bankAddress), filteredAnalog(analogPin), sender(sender) {}
 
   public:
     void begin() override { filteredAnalog.resetToCurrentValue(); }

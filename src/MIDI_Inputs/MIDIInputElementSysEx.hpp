@@ -23,8 +23,7 @@ class MIDIInputElementSysEx : public DoublyLinkable<MIDIInputElementSysEx> {
      * @brief   Constructor.
      * @todo    Documentation.
      */
-    MIDIInputElementSysEx(uint8_t CN = 0)
-        : CN{CN} {
+    MIDIInputElementSysEx(uint8_t CN = 0) : CN(CN) {
         GUARD_LIST_LOCK;
         elements.append(this);
     }

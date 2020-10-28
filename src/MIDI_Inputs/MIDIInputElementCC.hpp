@@ -36,7 +36,7 @@ class MIDIInputElementCC : public MIDIInputElement,
      *          Channel [1, 16], Cable Number [CABLE_1, CABLE_16].)
      */
     MIDIInputElementCC(const MIDIAddress &address)
-        : MIDIInputElement{address} {
+        : MIDIInputElement(address) {
         GUARD_LIST_LOCK;
         elements.append(this);
     }

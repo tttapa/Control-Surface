@@ -27,9 +27,9 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIFilteredAnalogAddressable(pin_t analogPin, const MIDIAddress &address,
+    MIDIFilteredAnalogAddressable(pin_t analogPin, MIDIAddress address,
                                   const Sender &sender)
-        : filteredAnalog{analogPin}, address{address}, sender(sender) {}
+        : filteredAnalog(analogPin), address(address), sender(sender) {}
 
   public:
     void begin() override { filteredAnalog.resetToCurrentValue(); }
@@ -100,9 +100,9 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIFilteredAnalog(pin_t analogPin, const MIDIAddress &address,
+    MIDIFilteredAnalog(pin_t analogPin, MIDIAddress address,
                        const Sender &sender)
-        : filteredAnalog{analogPin}, address(address), sender(sender) {}
+        : filteredAnalog(analogPin), address(address), sender(sender) {}
 
   public:
     void begin() final override { filteredAnalog.resetToCurrentValue(); }
