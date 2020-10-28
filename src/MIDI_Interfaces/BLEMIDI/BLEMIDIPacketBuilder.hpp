@@ -9,21 +9,18 @@ BEGIN_CS_NAMESPACE
 /// Class for building MIDI over Bluetooth Low Energy packets.
 class BLEMIDIPacketBuilder {
   private:
-    constexpr static uint8_t MAX_CAPACITY = 20;
-    uint8_t capacity = MAX_CAPACITY;
-    uint8_t index = 0;
     uint8_t runningHeader = 0;
     uint8_t runningTimestamp = 0;
-    uint8_t buffer[MAX_CAPACITY] = {};
+    std::vector<uint8_t> buffer = std::vector<uint8_t>(0);
 
-    constexpr static uint8_t SysExStart =
+    constexpr static const uint8_t SysExStart =
         static_cast<uint8_t>(MIDIMessageType::SYSEX_START);
-    constexpr static uint8_t SysExEnd =
+    constexpr static const uint8_t SysExEnd =
         static_cast<uint8_t>(MIDIMessageType::SYSEX_END);
 
     /// Check if the buffer has space left.
-    constexpr bool hasSpaceFor(size_t bytes) const {
-        return index < capacity && bytes <= size_t(capacity - index);
+    bool hasSpaceFor(size_t bytes) const {
+        return bytes <= size_t(buffer.capacity() - buffer.size());
     }
 
     /// Timestamp[0]: 0b10hh hhhh
@@ -38,8 +35,8 @@ class BLEMIDIPacketBuilder {
     /// If this is the first byte/message in the packet, add the header
     /// containing the 6 most significant bits of the timestamp
     void initBuffer(uint16_t timestamp) {
-        if (index == 0)
-            buffer[index++] = getTimestampMSB(timestamp);
+        if (buffer.empty())
+            buffer.push_back(getTimestampMSB(timestamp));
     }
 
     /** 
@@ -69,24 +66,24 @@ class BLEMIDIPacketBuilder {
                  uint16_t timestamp);
 
   public:
+    BLEMIDIPacketBuilder(size_t capacity = 20) { buffer.reserve(capacity); }
+
     /// Reset the builder to start a new packet.
     void reset();
 
     /// Set the maximum capacity of the buffer. Set this to the MTU of the BLE
     /// link minus three bytes (for notify overhead).
-    void setCapacity(uint8_t capacity);
+    void setCapacity(uint16_t capacity);
 
     /// Get the size of the current packet.
-    uint8_t getSize() const { return index; }
+    uint16_t getSize() const { return buffer.size(); }
     /// Get a pointer to the packet data buffer.
-    const uint8_t *getBuffer() const { return buffer; }
+    const uint8_t *getBuffer() const { return buffer.data(); }
     /// Check if the packet buffer is empty.
-    bool empty() const { return index == 0; }
+    bool empty() const { return buffer.empty(); }
 
-    /// Return the packet as a vector of bytes (used for testing).
-    std::vector<uint8_t> asVector() const {
-        return std::vector<uint8_t>(buffer, buffer + index);
-    }
+    /// Return the packet as a vector of bytes.
+    const std::vector<uint8_t> &getPacket() const { return buffer; }
 
     /** 
      * @brief   Try adding a 3-byte MIDI channel voice message to the packet.

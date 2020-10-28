@@ -15,7 +15,7 @@ BEGIN_CS_NAMESPACE
  */
 class BLEMIDIParser {
   public:
-    BLEMIDIParser(const uint8_t *data, uint8_t length)
+    BLEMIDIParser(const uint8_t *data, size_t length)
         : data(data), end(data + length) {
         // Need at least two bytes to be useful.
         // Usually, we have header, timestamp and at least one MIDI byte,

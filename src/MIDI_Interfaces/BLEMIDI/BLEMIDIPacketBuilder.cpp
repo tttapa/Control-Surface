@@ -15,19 +15,19 @@ bool BLEMIDIPacketBuilder::addImpl(uint8_t header, uint8_t data1, uint8_t data2,
         if (timestampLSB == runningTimestamp) {
             if (!hasSpaceFor(1 + ThreeBytes))
                 return false; // Buffer full
-            buffer[index++] = data1;
+            buffer.push_back(data1);
             if (ThreeBytes)
-                buffer[index++] = data2;
+                buffer.push_back(data2);
         }
         // Timestamp is different, send again
         else {
             if (!hasSpaceFor(2 + ThreeBytes))
                 return false; // Buffer full
             runningTimestamp = timestampLSB;
-            buffer[index++] = timestampLSB;
-            buffer[index++] = data1;
+            buffer.push_back(timestampLSB);
+            buffer.push_back(data1);
             if (ThreeBytes)
-                buffer[index++] = data2;
+                buffer.push_back(data2);
         }
     }
     // If the header is different, running status is not possible, send all
@@ -36,26 +36,25 @@ bool BLEMIDIPacketBuilder::addImpl(uint8_t header, uint8_t data1, uint8_t data2,
             return false; // Buffer full
         runningHeader = header;
         runningTimestamp = timestampLSB;
-        buffer[index++] = timestampLSB;
-        buffer[index++] = header;
-        buffer[index++] = data1;
+        buffer.push_back(timestampLSB);
+        buffer.push_back(header);
+        buffer.push_back(data1);
         if (ThreeBytes)
-            buffer[index++] = data2;
+            buffer.push_back(data2);
     }
     return true;
 }
 
 void BLEMIDIPacketBuilder::reset() {
-    index = 0;
+    buffer.resize(0);
     runningHeader = 0;
 }
 
-void BLEMIDIPacketBuilder::setCapacity(uint8_t capacity) {
-    if (capacity > MAX_CAPACITY)
-        ERROR(F("capacity larger than maximum capacity"), 0x2020);
+void BLEMIDIPacketBuilder::setCapacity(uint16_t capacity) {
     if (capacity < 5)
         ERROR(F("capacity less than 5 bytes"), 0x2005);
-    this->capacity = capacity;
+    buffer.shrink_to_fit();
+    buffer.reserve(capacity);
 }
 
 bool BLEMIDIPacketBuilder::add3B(uint8_t header, uint8_t data1, uint8_t data2,
@@ -76,8 +75,8 @@ bool BLEMIDIPacketBuilder::addRealTime(uint8_t rt, uint16_t timestamp) {
     if (!hasSpaceFor(2))
         return false; // Buffer full
 
-    buffer[index++] = getTimestampLSB(timestamp);
-    buffer[index++] = rt;
+    buffer.push_back(getTimestampLSB(timestamp));
+    buffer.push_back(rt);
     runningTimestamp = 0; // Re-send the timestamp next time
 
     return true;
@@ -104,8 +103,8 @@ bool BLEMIDIPacketBuilder::addSysEx(const uint8_t *&data, size_t &length,
         const uint8_t timestampLSB = getTimestampLSB(timestamp);
 
         // Start of SysEx
-        buffer[index++] = timestampLSB;
-        buffer[index++] = SysExStart;
+        buffer.push_back(timestampLSB);
+        buffer.push_back(SysExStart);
         ++data; // First byte was added
         --length;
     }
@@ -121,16 +120,16 @@ void BLEMIDIPacketBuilder::continueSysEx(const uint8_t *&data, size_t &length,
 
     // Copy as much data as possible, but stop before the last byte, which
     // could be a SysExEnd (and should be handled differently than data bytes)
-    while (length-- > 1 && index < capacity)
-        buffer[index++] = *data++;
+    while (length-- > 1 && buffer.size() < buffer.capacity())
+        buffer.push_back(*data++);
 
     // If everything fit into the buffer
     if (length == 0) {
         // End of SysEx
         if (*data == SysExEnd) {
             if (hasSpaceFor(2)) {
-                buffer[index++] = getTimestampLSB(timestamp);
-                buffer[index++] = SysExEnd;
+                buffer.push_back(getTimestampLSB(timestamp));
+                buffer.push_back(SysExEnd);
                 // Message was finished, no continuation
                 data = nullptr;
             } else {
@@ -141,7 +140,7 @@ void BLEMIDIPacketBuilder::continueSysEx(const uint8_t *&data, size_t &length,
         // End of chunk but not end of SysEx
         else {
             if (hasSpaceFor(1)) {
-                buffer[index++] = *data;
+                buffer.push_back(*data);
                 // Message was finished, no continuation
                 data = nullptr;
             } else {
@@ -157,5 +156,8 @@ void BLEMIDIPacketBuilder::continueSysEx(const uint8_t *&data, size_t &length,
         ++length;
     }
 }
+
+constexpr const uint8_t BLEMIDIPacketBuilder::SysExStart;
+constexpr const uint8_t BLEMIDIPacketBuilder::SysExEnd;
 
 END_CS_NAMESPACE

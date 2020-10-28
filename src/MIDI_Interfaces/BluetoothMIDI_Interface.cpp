@@ -1,6 +1,7 @@
 #if !defined(ARDUINO) || defined(ARDUINO_ARCH_ESP32)
 
 #include "BluetoothMIDI_Interface.hpp"
+#include "BLEMIDI/ESP32/midi.h"
 
 BEGIN_CS_NAMESPACE
 
@@ -31,7 +32,8 @@ void BluetoothMIDI_Interface::handleSendEvents() {
 
     // Send the packet over BLE, empty the buffer, and update the buffer size
     // based on the MTU of the connected clients.
-    bleMidi.notifyValue(packetbuilder.getBuffer(), packetbuilder.getSize());
+    if (!packetbuilder.empty())
+        notifyMIDIBLE(packetbuilder.getPacket());
     packetbuilder.reset();
     packetbuilder.setCapacity(min_mtu - 3);
 
@@ -57,6 +59,7 @@ void BluetoothMIDI_Interface::flushImpl(lock_t &lock) {
     // Wait for flush to complete (when the sender clears the flushnow flag)
     lock.lock();
     cv.wait(lock, [this] { return !flushnow; });
+    assert(lock.owns_lock());
 }
 
 void BluetoothMIDI_Interface::stopSendingThread() {
@@ -73,6 +76,15 @@ void BluetoothMIDI_Interface::stopSendingThread() {
     if (send_thread.joinable())
         send_thread.join();
 }
+
+// -------------------------------------------------------------------------- //
+
+#ifdef ARDUINO
+void BluetoothMIDI_Interface::notifyMIDIBLE(
+    const std::vector<uint8_t> &packet) {
+    midi_notify(packet.data(), packet.size());
+}
+#endif
 
 // -------------------------------------------------------------------------- //
 
@@ -133,6 +145,10 @@ void BluetoothMIDI_Interface::sendSysExImpl(SysExMessage msg) {
     size_t length = msg.length;
     const uint8_t *data = msg.data;
     uint16_t timestamp = millis(); // BLE MIDI timestamp
+    // TODO: I have no idea why, but the last byte gets cut off when the LSB
+    // of the timestamp is 0x77 ... (Problem is probably in the BlueZ parser)
+    if ((timestamp & 0x77) == 0x77)
+        timestamp &= 0xFFFE;
 
     // Try adding at least the SysExStart header to the current packet
     if (!packetbuilder.addSysEx(data, length, timestamp)) {
@@ -155,62 +171,129 @@ void BluetoothMIDI_Interface::sendSysExImpl(SysExMessage msg) {
 
 // -------------------------------------------------------------------------- //
 
-// The following section defines callback functions from the Bluetooth LE
-// connection manager.
-
-void BluetoothMIDI_Interface::onConnect(BLEServer *pServer) {
-    // When a new client connects to our server, check all MTUs to know if
-    // we have to shrink our packet size.-
-    (void)pServer;
-    DEBUGFN(F("Connected"));
-    updateMTU();
+void BluetoothMIDI_Interface::parse(const uint8_t *const data,
+                                    const size_t len) {
+    auto mididata = BLEMIDIParser(data, len);
+    MIDIReadEvent event = parser.pull(mididata);
+    // TODO: add a timeout instead of busy waiting?
+    while (event != MIDIReadEvent::NO_MESSAGE) {
+        DEBUGFN(event);
+        switch (event) {
+            case MIDIReadEvent::CHANNEL_MESSAGE:
+                while (!queue.push(parser.getChannelMessage()))
+                    std::this_thread::yield();
+                break;
+            case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
+            case MIDIReadEvent::SYSEX_MESSAGE:
+                while (!queue.push(parser.getSysExMessage()))
+                    std::this_thread::yield();
+                break;
+            case MIDIReadEvent::REALTIME_MESSAGE:
+                while (!queue.push(parser.getRealTimeMessage()))
+                    std::this_thread::yield();
+                break;
+            case MIDIReadEvent::SYSCOMMON_MESSAGE:
+                while (!queue.push(parser.getSysCommonMessage()))
+                    std::this_thread::yield();
+                break;
+            case MIDIReadEvent::NO_MESSAGE: break; // LCOV_EXCL_LINE
+            default: break;                        // LCOV_EXCL_LINE
+        }
+        event = parser.pull(mididata);
+    }
 }
 
-void BluetoothMIDI_Interface::onDisconnect(BLEServer *pServer) {
-    // When a client disconnects, check all MTUs to see if we can grow our
-    // packet size.
-    (void)pServer;
-    DEBUGFN(F("Disonnected"));
-    updateMTU();
+MIDIReadEvent BluetoothMIDI_Interface::read() {
+    // Pop a new message from the queue
+    if (!queue.pop(incomingMessage))
+        return MIDIReadEvent::NO_MESSAGE;
+    return incomingMessage.eventType;
 }
 
-void BluetoothMIDI_Interface::onRead(BLECharacteristic *pCharacteristic) {
-    // According to the BLE-MIDI standard, we should respond to read requests
-    // with no payload.
-    DEBUGFN(F("Read"));
-    pCharacteristic->setValue(nullptr, 0);
+ChannelMessage BluetoothMIDI_Interface::getChannelMessage() const {
+    return incomingMessage.eventType == MIDIReadEvent::CHANNEL_MESSAGE
+               ? incomingMessage.message.channelmessage
+               : ChannelMessage(0, 0, 0);
 }
 
-void BluetoothMIDI_Interface::onWrite(BLECharacteristic *pCharacteristic) {
-    // Clients write to our server to send us MIDI data, just parse the packet.
-    // Note: this is called from a Bluetooth task, which runs asynchronously,
-    // independently from the main code (maybe even in parallel).
-    std::string value = pCharacteristic->getValue();
-    const uint8_t *data = reinterpret_cast<const uint8_t *>(value.data());
-    size_t len = value.size();
-    DEBUGFN(F("Write [") << len << "] " << AH::HexDump(data, len));
-    parse(data, len);
+SysCommonMessage BluetoothMIDI_Interface::getSysCommonMessage() const {
+    return incomingMessage.eventType == MIDIReadEvent::SYSCOMMON_MESSAGE
+               ? incomingMessage.message.syscommonmessage
+               : SysCommonMessage(0, 0, 0);
+}
+
+RealTimeMessage BluetoothMIDI_Interface::getRealTimeMessage() const {
+    return incomingMessage.eventType == MIDIReadEvent::REALTIME_MESSAGE
+               ? incomingMessage.message.realtimemessage
+               : RealTimeMessage(0);
+}
+
+SysExMessage BluetoothMIDI_Interface::getSysExMessage() const {
+    auto evt = incomingMessage.eventType;
+    bool hasSysEx = evt == MIDIReadEvent::SYSEX_MESSAGE ||
+                    evt == MIDIReadEvent::SYSEX_CHUNK;
+    return hasSysEx ? incomingMessage.message.sysexmessage
+                    : SysExMessage(nullptr, 0);
 }
 
 // -------------------------------------------------------------------------- //
 
-void BluetoothMIDI_Interface::updateMTU() {
+void BluetoothMIDI_Interface::updateMTU(uint16_t mtu) {
     uint16_t force_min_mtu_c = force_min_mtu;
-    uint16_t ble_min_mtu = bleMidi.getMinMTU();
     if (force_min_mtu_c == 0)
-        min_mtu = ble_min_mtu;
+        min_mtu = mtu;
     else
-        min_mtu = std::min(force_min_mtu_c, ble_min_mtu);
+        min_mtu = std::min(force_min_mtu_c, mtu);
     DEBUGFN(NAMEDVALUE(min_mtu));
-}
-
-void BluetoothMIDI_Interface::forceMinMTU(uint16_t mtu) {
     lock_t lock(mtx);
-    force_min_mtu = mtu;
-    updateMTU();
     if (packetbuilder.getSize() == 0)
         packetbuilder.setCapacity(min_mtu - 3);
 }
+
+void BluetoothMIDI_Interface::forceMinMTU(uint16_t mtu) {
+    force_min_mtu = mtu;
+    updateMTU(min_mtu);
+}
+
+// -------------------------------------------------------------------------- //
+
+extern "C" void BluetoothMIDI_Interface_midi_mtu_callback(uint16_t mtu) {
+    BluetoothMIDI_Interface::midi_mtu_callback(mtu);
+}
+
+extern "C" void BluetoothMIDI_Interface_midi_write_callback(const uint8_t *data,
+                                                            size_t length) {
+    BluetoothMIDI_Interface::midi_write_callback(data, length);
+}
+
+// -------------------------------------------------------------------------- //
+
+void BluetoothMIDI_Interface::begin() {
+#ifdef ARDUINO
+    midi_set_mtu_callback(BluetoothMIDI_Interface_midi_mtu_callback);
+    midi_set_write_callback(BluetoothMIDI_Interface_midi_write_callback);
+    DEBUGFN(F("Initializing BLE MIDI Interface"));
+    if (!midi_init()) {
+        ERROR(F("Error initializing BLE MIDI interface"), 0x2022);
+        return;
+    }
+#endif
+    startSendingThread();
+}
+
+void BluetoothMIDI_Interface::end() {
+#ifdef ARDUINO
+    DEBUGFN(F("Deinitializing BLE MIDI Interface"));
+    if (!midi_deinit()) {
+        ERROR(F("Error deinitializing BLE MIDI interface"), 0x2023);
+        return;
+    }
+#endif
+}
+
+// -------------------------------------------------------------------------- //
+
+BluetoothMIDI_Interface *BluetoothMIDI_Interface::instance = nullptr;
 
 END_CS_NAMESPACE
 

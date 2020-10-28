@@ -2,8 +2,8 @@
 
 #include <AH/Error/Error.hpp>
 
-#include "BLEMIDI/BLEMIDI.hpp"
 #include "BLEMIDI/BLEMIDIPacketBuilder.hpp"
+#include "BLEMIDI/MIDIMessageQueue.hpp"
 #include "MIDI_Interface.hpp"
 #include "Util/ESP32Threads.hpp"
 #include <MIDI_Parsers/BLEMIDIParser.hpp>
@@ -15,6 +15,10 @@
 #include <mutex>
 #include <thread>
 
+#ifndef ARDUINO
+#include <gmock-wrapper.h>
+#endif
+
 BEGIN_CS_NAMESPACE
 
 /**
@@ -22,13 +26,19 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup MIDIInterfaces
  */
-class BluetoothMIDI_Interface : public MIDI_Interface,
-                                public BLEServerCallbacks,
-                                public BLECharacteristicCallbacks {
+class BluetoothMIDI_Interface : public MIDI_Interface {
 
   public:
-    BluetoothMIDI_Interface() = default;
-    ~BluetoothMIDI_Interface() { stopSendingThread(); }
+    BluetoothMIDI_Interface() {
+        if (instance)
+            FATAL_ERROR(F("Only one instance is supported"), 0x1345);
+        instance = this;
+    };
+    ~BluetoothMIDI_Interface() {
+        instance = nullptr;
+        stopSendingThread();
+        end();
+    }
 
   public:
     /// Send the buffered MIDI BLE packet immediately.
@@ -46,35 +56,31 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     }
 
   public:
-    void begin() override {
-        bleMidi.begin(this, this);
-        startSendingThread();
-    }
+    void begin() override;
+    void end();
 
-    void update() override {
-        // TODO: dispatch MIDI events in main thread
-    }
+    MIDIReadEvent read();
+
+    void update() override { MIDI_Interface::updateIncoming(this); }
+
+  private:
+    void handleStall() override { MIDI_Interface::handleStall(this); }
 
   public:
     /// Return the received channel voice message.
-    ChannelMessage getChannelMessage() const {
-        return parser.getChannelMessage();
-    }
+    ChannelMessage getChannelMessage() const;
     /// Return the received system common message.
-    SysCommonMessage getSysCommonMessage() const {
-        return parser.getSysCommonMessage();
-    }
+    SysCommonMessage getSysCommonMessage() const;
     /// Return the received real-time message.
-    RealTimeMessage getRealTimeMessage() const {
-        return parser.getRealTimeMessage();
-    }
+    RealTimeMessage getRealTimeMessage() const;
     /// Return the received system exclusive message.
-    SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
+    SysExMessage getSysExMessage() const;
 
   protected:
     // MIDI send implementations
     void sendChannelMessageImpl(ChannelMessage) override;
-    void sendSysCommonImpl(SysCommonMessage) override { /* TODO */ }
+    void sendSysCommonImpl(SysCommonMessage) override { /* TODO */
+    }
     void sendSysExImpl(SysExMessage) override;
     void sendRealTimeImpl(RealTimeMessage) override;
     void sendNowImpl() override { flush(); }
@@ -82,41 +88,8 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     void sendChannelMessageImpl3Bytes(ChannelMessage);
     void sendChannelMessageImpl2Bytes(ChannelMessage);
 
-  private:
-    void handleStall() override {
-        auto stallername = MIDIStaller::getNameNull(getStaller());
-        ERROR(F("Not implemented (stalled by ") << stallername << ')', 0x1349);
-        (void)stallername;
-    }
-
   public:
-    void parse(const uint8_t *const data, const size_t len) {
-        auto mididata = BLEMIDIParser(data, len);
-        MIDIReadEvent event = parser.pull(mididata);
-        while (event != MIDIReadEvent::NO_MESSAGE) {
-            dispatchMIDIEvent(event);
-            event = parser.pull(mididata);
-        }
-    }
-
-  private:
-    void dispatchMIDIEvent(MIDIReadEvent event) {
-        switch (event) {
-            case MIDIReadEvent::CHANNEL_MESSAGE:
-                onChannelMessage(getChannelMessage());
-                break;
-            case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
-            case MIDIReadEvent::SYSEX_MESSAGE:
-                onSysExMessage(getSysExMessage());
-                break;
-            case MIDIReadEvent::REALTIME_MESSAGE:
-                onRealTimeMessage(getRealTimeMessage());
-                break;
-            case MIDIReadEvent::SYSCOMMON_MESSAGE: break; // TODO
-            case MIDIReadEvent::NO_MESSAGE: break;        // LCOV_EXCL_LINE
-            default: break;                               // LCOV_EXCL_LINE
-        }
-    }
+    void parse(const uint8_t *const data, const size_t len);
 
   private:
     /// The minimum MTU of all connected clients.
@@ -126,9 +99,9 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     /// @see    @ref forceMinMTU()
     std::atomic_uint_fast16_t force_min_mtu{0};
 
-    /// Find the smallest MTU of all clients. Used to compute the MIDI BLE
-    /// packet size.
-    void updateMTU();
+    /// Set the maximum transmission unit of the Bluetooth link. Used to compute
+    /// the MIDI BLE packet size.
+    void updateMTU(uint16_t mtu);
 
   public:
     /// Get the minimum MTU of all connected clients.
@@ -138,25 +111,18 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
     void forceMinMTU(uint16_t mtu);
 
   private:
-    // BLE Server Callbacks
-    void onConnect(BLEServer *pServer) override;
-    void onDisconnect(BLEServer *pServer) override;
-
-    // BLE Characteristic Callbacks
-    void onRead(BLECharacteristic *pCharacteristic) override;
-    void onWrite(BLECharacteristic *pCharacteristic) override;
-
-  private:
-    /// BLE connection manager.
-    BLEMIDI bleMidi;
+    /// Only one active instance.
+    static BluetoothMIDI_Interface *instance;
     /// MIDI Parser for incoming data.
     SerialMIDI_Parser parser;
     /// Builds outgoing MIDI BLE packets.
     BLEMIDIPacketBuilder packetbuilder;
-
-  public:
-    /// For tests.
-    BLEMIDI &getBLEMIDI() { return bleMidi; }
+    /// Queue for incoming MIDI messages.
+    MIDIMessageQueue queue{64};
+    /// Incoming message that can be from retrieved using the
+    /// `getChannelMessage()`, `getSysCommonMessage()`, `getRealTimeMessage()`
+    /// and `getSysExMessage()` methods.
+    MIDIMessageQueue::MIDIMessageQueueElement incomingMessage;
 
   private:
     // Synchronization for asynchronous BLE sending
@@ -198,6 +164,25 @@ class BluetoothMIDI_Interface : public MIDI_Interface,
 
     /// Tell the background BLE sender thread to stop gracefully, and join it.
     void stopSendingThread();
+
+  public:
+    static void midi_write_callback(const uint8_t *data, size_t length) {
+        if (instance)
+            instance->parse(data, length);
+    }
+
+    static void midi_mtu_callback(uint16_t mtu) {
+        if (instance)
+            instance->updateMTU(mtu);
+    }
+
+#ifdef ARDUINO
+  private:
+    void notifyMIDIBLE(const std::vector<uint8_t> &packet);
+#else
+  public:
+    MOCK_METHOD(void, notifyMIDIBLE, (const std::vector<uint8_t> &), ());
+#endif
 };
 
 END_CS_NAMESPACE

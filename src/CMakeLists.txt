@@ -20,7 +20,8 @@ if (FAST_COMPILE)
         MIDI_Interfaces/SerialMIDI_Interface.cpp
         MIDI_Interfaces/DebugMIDI_Interface.cpp
         MIDI_Interfaces/BluetoothMIDI_Interface.cpp
-        MIDI_Interfaces/BLEMIDI/BLEMIDIPacketBuilder.cpp)
+        MIDI_Interfaces/BLEMIDI/BLEMIDIPacketBuilder.cpp
+        MIDI_Interfaces/BLEMIDI/MIDIMessageQueue.cpp)
 else ()
     file(GLOB_RECURSE
         CONTROL_SURFACE_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)

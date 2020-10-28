@@ -23,7 +23,7 @@ TEST(BLEMIDIPacketBuilder, oneNoteMessage) {
         0x12,        // d1
         0x34,        // d2
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, oneProgramChangeMessage) {
@@ -36,7 +36,7 @@ TEST(BLEMIDIPacketBuilder, oneProgramChangeMessage) {
         0xC2,        // status
         0x12,        // d1
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 // Corresponds to spec "BLE Packet with Two MIDI Messages" figure
@@ -56,7 +56,7 @@ TEST(BLEMIDIPacketBuilder, twoNoteMessages) {
         0x56,        // d1
         0x78,        // d2
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 // Corresponds to spec "2 MIDI Messages with Running Status" figure
@@ -74,7 +74,7 @@ TEST(BLEMIDIPacketBuilder, twoNoteMessagesRunningStatus) {
         0x56,        // d1
         0x78,        // d2
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, twoNoteMessagesRunningStatusDifferentTimestamp) {
@@ -92,7 +92,7 @@ TEST(BLEMIDIPacketBuilder, twoNoteMessagesRunningStatusDifferentTimestamp) {
         0x56,        // d1
         0x78,        // d2
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 // Corresponds to spec "System Messages Do Not Cancel Running Status" figure
@@ -117,7 +117,7 @@ TEST(BLEMIDIPacketBuilder, realTimeBetweenRunningStatus) {
         0x11,        // d1
         0x22,        // d2
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 // Corresponds to spec "System Messages Do Not Cancel Running Status" figure
@@ -142,7 +142,7 @@ TEST(BLEMIDIPacketBuilder, realTimeBetweenRunningStatusDifferentTimestamp) {
         0x11,        // d1
         0x22,        // d2
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, noteMessageBufferFull) {
@@ -156,7 +156,7 @@ TEST(BLEMIDIPacketBuilder, noteMessageBufferFull) {
         0x80 | 0x02, //          timestamp lsb
         0x92,        0x12, 0x34,
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, noteMessageBufferAlmostFull) {
@@ -172,7 +172,7 @@ TEST(BLEMIDIPacketBuilder, noteMessageBufferAlmostFull) {
         0x80 | 0x02, //          timestamp lsb
         0x99,        0x12, 0x34,
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, noteMessageBufferFullRunningStatus) {
@@ -186,7 +186,7 @@ TEST(BLEMIDIPacketBuilder, noteMessageBufferFullRunningStatus) {
         0x80 | 0x02, //          timestamp lsb
         0x92,        0x12, 0x34,
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, noteMessageBufferAlmostFullRunningStatus) {
@@ -200,7 +200,7 @@ TEST(BLEMIDIPacketBuilder, noteMessageBufferAlmostFullRunningStatus) {
         0x80 | 0x02, //          timestamp lsb
         0x92,        0x12, 0x34, 0x12, 0x34,
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, noteMessageBufferFullDifferentTimestamp) {
@@ -214,7 +214,7 @@ TEST(BLEMIDIPacketBuilder, noteMessageBufferFullDifferentTimestamp) {
         0x80 | 0x02, //          timestamp lsb
         0x92,        0x12, 0x34,
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, noteMessageBufferAlmostFullDifferentTimestamp) {
@@ -230,7 +230,7 @@ TEST(BLEMIDIPacketBuilder, noteMessageBufferAlmostFullDifferentTimestamp) {
         0x80 | 0x03, //          timestamp lsb
         0x12,        0x34,
     };
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, realTimeMessageBufferAlmostFull) {
@@ -250,7 +250,7 @@ TEST(BLEMIDIPacketBuilder, realTimeMessageBufferAlmostFull) {
     EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
     EXPECT_TRUE(b.addRealTime(0xF8, timestamp(0x01, 0x03)));
 
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, realTimeMessageBufferFull1) {
@@ -268,7 +268,7 @@ TEST(BLEMIDIPacketBuilder, realTimeMessageBufferFull1) {
     EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
     EXPECT_FALSE(b.addRealTime(0xF8, timestamp(0x01, 0x03)));
 
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, realTimeMessageBufferFull2) {
@@ -286,7 +286,7 @@ TEST(BLEMIDIPacketBuilder, realTimeMessageBufferFull2) {
     EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
     EXPECT_FALSE(b.addRealTime(0xF8, timestamp(0x01, 0x03)));
 
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 // Corresponds to spec "System Exclusive Start & End in 1 Packet" figure
@@ -315,7 +315,7 @@ TEST(BLEMIDIPacketBuilder, sysExSinglePacket) {
 
     EXPECT_EQ(length, 0);
     EXPECT_EQ(dataptr, nullptr);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExFirstPacketFull1) {
@@ -339,7 +339,7 @@ TEST(BLEMIDIPacketBuilder, sysExFirstPacketFull1) {
 
     EXPECT_EQ(length, data.size());
     EXPECT_EQ(dataptr, data.data());
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExFirstPacketFull2) {
@@ -363,7 +363,7 @@ TEST(BLEMIDIPacketBuilder, sysExFirstPacketFull2) {
 
     EXPECT_EQ(length, data.size());
     EXPECT_EQ(dataptr, data.data());
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket1) {
@@ -389,7 +389,7 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket1) {
 
     EXPECT_EQ(length, 1);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -402,7 +402,7 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket1) {
 
     EXPECT_EQ(length, 0);
     EXPECT_EQ(dataptr, nullptr);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket2) {
@@ -428,7 +428,7 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket2) {
 
     EXPECT_EQ(length, 1);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -441,7 +441,7 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostSinglePacket2) {
 
     EXPECT_EQ(length, 0);
     EXPECT_EQ(dataptr, nullptr);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExTwoPackets) {
@@ -466,7 +466,7 @@ TEST(BLEMIDIPacketBuilder, sysExTwoPackets) {
 
     EXPECT_EQ(length, 2);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -480,7 +480,7 @@ TEST(BLEMIDIPacketBuilder, sysExTwoPackets) {
 
     EXPECT_EQ(length, 0);
     EXPECT_EQ(dataptr, nullptr);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets1) {
@@ -503,7 +503,7 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets1) {
 
     EXPECT_EQ(length, 4);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -517,7 +517,7 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets1) {
 
     EXPECT_EQ(length, 1);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -530,7 +530,7 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets1) {
 
     EXPECT_EQ(length, 0);
     EXPECT_EQ(dataptr, nullptr);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets2) {
@@ -553,7 +553,7 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets2) {
 
     EXPECT_EQ(length, 5);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -568,7 +568,7 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets2) {
 
     EXPECT_EQ(length, 1);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -581,7 +581,7 @@ TEST(BLEMIDIPacketBuilder, sysExAlmostTwoPackets2) {
 
     EXPECT_EQ(length, 0);
     EXPECT_EQ(dataptr, nullptr);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExThreePackets) {
@@ -604,7 +604,7 @@ TEST(BLEMIDIPacketBuilder, sysExThreePackets) {
 
     EXPECT_EQ(length, 6);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -619,7 +619,7 @@ TEST(BLEMIDIPacketBuilder, sysExThreePackets) {
 
     EXPECT_EQ(length, 2);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -633,7 +633,7 @@ TEST(BLEMIDIPacketBuilder, sysExThreePackets) {
 
     EXPECT_EQ(length, 0);
     EXPECT_EQ(dataptr, nullptr);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExAddChunk) {
@@ -657,7 +657,7 @@ TEST(BLEMIDIPacketBuilder, sysExAddChunk) {
 
     EXPECT_EQ(length, 0);
     EXPECT_EQ(dataptr, nullptr);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExAddChunkTwoPackets) {
@@ -681,7 +681,7 @@ TEST(BLEMIDIPacketBuilder, sysExAddChunkTwoPackets) {
 
     EXPECT_EQ(length, 2);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -694,7 +694,7 @@ TEST(BLEMIDIPacketBuilder, sysExAddChunkTwoPackets) {
 
     EXPECT_EQ(length, 0);
     EXPECT_EQ(dataptr, nullptr);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExAddChunkTwoPackets1ByteLeft) {
@@ -718,7 +718,7 @@ TEST(BLEMIDIPacketBuilder, sysExAddChunkTwoPackets1ByteLeft) {
 
     EXPECT_EQ(length, 1);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -730,7 +730,7 @@ TEST(BLEMIDIPacketBuilder, sysExAddChunkTwoPackets1ByteLeft) {
 
     EXPECT_EQ(length, 0);
     EXPECT_EQ(dataptr, nullptr);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
 
 TEST(BLEMIDIPacketBuilder, sysExAddChunkEndTwoPackets) {
@@ -754,7 +754,7 @@ TEST(BLEMIDIPacketBuilder, sysExAddChunkEndTwoPackets) {
 
     EXPECT_EQ(length, 1);
     EXPECT_EQ(dataptr, data.data() + data.size() - length);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 
     expected = {
         0x80 | 0x01, // header + timestamp msb
@@ -767,5 +767,5 @@ TEST(BLEMIDIPacketBuilder, sysExAddChunkEndTwoPackets) {
 
     EXPECT_EQ(length, 0);
     EXPECT_EQ(dataptr, nullptr);
-    EXPECT_EQ(b.asVector(), expected);
+    EXPECT_EQ(b.getPacket(), expected);
 }
