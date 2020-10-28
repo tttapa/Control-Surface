@@ -114,6 +114,8 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
 
 template <class MIDIInterface_t>
 void MIDI_Interface::updateIncoming(MIDIInterface_t *iface) {
+    if (iface->getStaller() == iface)
+        iface->unstall(iface);
     bool chunked = false;
     MIDIReadEvent event = iface->read();
     while (event != MIDIReadEvent::NO_MESSAGE) {
