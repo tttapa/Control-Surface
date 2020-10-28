@@ -40,20 +40,20 @@ class SmartMIDIFilteredAnalog : public MIDIOutputElement {
      */
     SmartMIDIFilteredAnalog(BankAddress bankAddress, pin_t analogPin,
                             const Sender &sender)
-        : address{bankAddress}, filteredAnalog{analogPin}, sender(sender) {}
+        : address(bankAddress), filteredAnalog(analogPin), sender(sender) {}
 
   public:
     /// State of the smart potentiometer.
     enum State {
         /// The potentiometer is active, the position changes will be sent over
         /// MIDI.
-        Active, 
+        Active,
         /// The value of the potentiometer is lower than the previously recorded
         /// value for the current bank. In order to activate the potentiometer,
         /// you have to move it up.
         Lower,
         /// The value of the potentiometer is higher than the previously
-        /// recorded value for the current bank. In order to activate the 
+        /// recorded value for the current bank. In order to activate the
         /// potentiometer, you have to move it down.
         Higher,
     };

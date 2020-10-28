@@ -27,9 +27,8 @@ class MIDIButton : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIButton(pin_t pin, const MIDIAddress &address,
-               const Sender &sender)
-        : button{pin}, address{address}, sender(sender) {}
+    MIDIButton(pin_t pin, MIDIAddress address, const Sender &sender)
+        : button(pin), address(address), sender(sender) {}
 
     void begin() override { button.begin(); }
     void update() override {

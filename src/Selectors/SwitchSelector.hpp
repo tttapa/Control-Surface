@@ -12,7 +12,7 @@ class GenericSwitchSelector : public GenericSelector<2, Callback> {
   public:
     GenericSwitchSelector(Selectable<2> &selectable, const Callback &callback,
                           const AH::Button &button)
-        : GenericSelector<2, Callback>{selectable, callback}, button{button} {}
+        : GenericSelector<2, Callback>(selectable, callback), button(button) {}
 
     void begin() override {
         Parent::begin();

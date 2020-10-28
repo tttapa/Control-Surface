@@ -13,7 +13,7 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
     GenericIncrementSelector(Selectable<N> &selectable,
                              const Callback &callback,
                              const AH::IncrementButton &button)
-        : GenericSelector<N, Callback>{selectable, callback}, button{button} {}
+        : GenericSelector<N, Callback>{selectable, callback}, button(button) {}
 
     void begin() override {
         Parent::begin();

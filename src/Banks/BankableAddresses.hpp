@@ -89,7 +89,7 @@ class OutputBankableMIDIAddress : public OutputBankableMIDIAddress_Base {
      *          What address type to change (address, channel or cable number).
      */
     OutputBankableMIDIAddress(const OutputBank &bank, BankType type)
-        : OutputBankableMIDIAddress_Base{bank}, type(type) {}
+        : OutputBankableMIDIAddress_Base(bank), type(type) {}
 
     /**
      * @brief   Create a new OutputBankableMIDIAddress object.
@@ -149,7 +149,7 @@ class ManyAddresses_Base : public OutputBankableMIDIAddress_Base {
      */
     template <uint8_t NumBanks>
     ManyAddresses_Base(const Bank<NumBanks> &bank)
-        : OutputBankableMIDIAddress_Base{bank} {}
+        : OutputBankableMIDIAddress_Base(bank) {}
 };
 
 END_CS_NAMESPACE

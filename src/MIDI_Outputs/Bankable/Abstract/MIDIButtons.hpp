@@ -31,8 +31,8 @@ class MIDIButtons : public MIDIOutputElement {
                 const Array<AH::Button, NumButtons> &buttons,
                 const RelativeMIDIAddress &incrementAddress,
                 const Sender &sender)
-        : address(bankAddress), buttons{buttons},
-          incrementAddress(incrementAddress), sender{sender} {}
+        : address(bankAddress), buttons(buttons),
+          incrementAddress(incrementAddress), sender(sender) {}
 
   public:
     void begin() final override {

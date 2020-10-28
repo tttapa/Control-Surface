@@ -13,7 +13,7 @@ BEGIN_CS_NAMESPACE
 class DigitalCCSender {
   public:
     DigitalCCSender(uint8_t onValue = 0x7F, uint8_t offValue = 0x00)
-        : onValue{onValue}, offValue{offValue} {}
+        : onValue(onValue), offValue(offValue) {}
 
     /// Send a control change message to the given address, with @p onValue as
     /// value.

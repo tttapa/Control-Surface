@@ -69,7 +69,7 @@ class MyNoteButton : public MIDIOutputElement {
    */
   MyNoteButton(OutputBankConfig<> bankConfig, pin_t pin, 
                MIDIAddress baseAddress, uint8_t velocity)
-    : address{bankConfig, baseAddress}, button{pin}, velocity{velocity} {}
+    : address(bankConfig, baseAddress), button(pin), velocity(velocity) {}
 
  public:
   // Initialize: enable the pull-up resistor for the button.

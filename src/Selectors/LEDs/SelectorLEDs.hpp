@@ -9,7 +9,7 @@ BEGIN_CS_NAMESPACE
 template <setting_t N>
 class SelectorLEDsCallback {
   public:
-    SelectorLEDsCallback(const PinList<N> &ledPins) : ledPins{ledPins} {}
+    SelectorLEDsCallback(const PinList<N> &ledPins) : ledPins(ledPins) {}
 
     /// Initialize.
     void begin() {
@@ -34,7 +34,7 @@ class SelectorLEDsCallback {
 
 class SelectorSingleLEDCallback {
   public:
-    SelectorSingleLEDCallback(pin_t ledPin) : ledPin{ledPin} {}
+    SelectorSingleLEDCallback(pin_t ledPin) : ledPin(ledPin) {}
 
     /// Initialize.
     void begin() { AH::ExtIO::pinMode(ledPin, OUTPUT); }

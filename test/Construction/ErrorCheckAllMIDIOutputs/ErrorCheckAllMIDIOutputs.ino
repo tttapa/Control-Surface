@@ -6,6 +6,7 @@ void setup() {
     const RelativeMIDIAddress relAddress = {};
     const MIDIChannelCable cnChannel = {};
     uint8_t u8 = 0;
+    int8_t i8 = 0;
     const PinList<3> rowPins3 = {1, 2, 3};
     const PinList<4> colPins4 = {4, 5, 6, 7};
     const AddressMatrix<3, 4> addressMatrix34 = {{
@@ -31,7 +32,7 @@ void setup() {
 
     CCPotentiometer{pin, address};
 
-    CCRotaryEncoder{EncoderPinList{pin, pin}, address, u8, u8};
+    CCRotaryEncoder{EncoderPinList{pin, pin}, address, i8, u8};
 
     // Note --------------------------------------------------------------------
     NoteButton{pin, address};
@@ -45,7 +46,7 @@ void setup() {
 
     // Bankable::CC ------------------------------------------------------------
     Bankable::CCButton{bank, pin, address};
-    Bankable::CCButtonLatched{bank, pin, address};
+    Bankable::CCButtonLatched<4>{bank, pin, address};
     Bankable::CCButtonLatching{bank, pin, address};
     Bankable::CCButtonMatrix<3, 4>{bank, rowPins3, colPins4, addressMatrix34,
                                    cnChannel};
@@ -55,11 +56,11 @@ void setup() {
 
     Bankable::CCPotentiometer{bank, pin, address};
 
-    Bankable::CCRotaryEncoder{bank, EncoderPinList{pin, pin}, address, u8, u8};
+    Bankable::CCRotaryEncoder{bank, EncoderPinList{pin, pin}, address, i8, u8};
 
     // Bankable::Note ----------------------------------------------------------
     Bankable::NoteButton{bank, pin, address};
-    Bankable::NoteButtonLatched{bank, pin, address};
+    Bankable::NoteButtonLatched<4>{bank, pin, address};
     Bankable::NoteButtonLatching{bank, pin, address};
     Bankable::NoteButtonMatrix<3, 4>{bank, rowPins3, colPins4, addressMatrix34,
                                      cnChannel};

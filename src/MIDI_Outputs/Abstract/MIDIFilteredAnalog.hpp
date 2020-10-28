@@ -29,7 +29,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      */
     MIDIFilteredAnalog(pin_t analogPin, MIDIAddress address,
                        const Sender &sender)
-        : filteredAnalog{analogPin}, address(address), sender(sender) {}
+        : filteredAnalog(analogPin), address(address), sender(sender) {}
 
   public:
     void begin() final override { filteredAnalog.resetToCurrentValue(); }

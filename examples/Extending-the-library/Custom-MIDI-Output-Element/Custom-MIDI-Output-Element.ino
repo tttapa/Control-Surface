@@ -57,7 +57,7 @@ class MyNoteButton : public MIDIOutputElement {
    *          The MIDI note velocity [0, 127].
    */
   MyNoteButton(pin_t pin, const MIDIAddress &address, uint8_t velocity)
-    : button{pin}, address{address}, velocity{velocity} {}
+    : button(pin), address(address), velocity(velocity) {}
 
  public:
   // Initialize: enable the pull-up resistor for the button
