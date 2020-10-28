@@ -1,5 +1,12 @@
 #ifdef ESP32
 
+/**
+ * @file
+ * 
+ * Handling MTU (maximum transmission unit) negotiation events for MIDI over 
+ * BLE.
+ */
+
 #include "midi-private.h"
 #include "logging.h"
 

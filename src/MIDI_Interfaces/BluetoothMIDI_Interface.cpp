@@ -1,4 +1,4 @@
-#if !defined(ARDUINO) || defined(ARDUINO_ARCH_ESP32)
+#if !defined(ARDUINO) || defined(ESP32) || defined(DOXYGEN)
 
 #include "BluetoothMIDI_Interface.hpp"
 #include "BLEMIDI/ESP32/midi.h"

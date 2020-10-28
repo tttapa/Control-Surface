@@ -7,6 +7,8 @@
 
 void ble2902_handle_write(esp_gatt_if_t gatts_if,
                           esp_ble_gatts_cb_param_t *param) {
+    // The actual writing of data and sending a response is already handled
+    // by Bluedroid.
     uint16_t handle = param->write.handle;
     if (ble2902_get_value(handle) == 0x0001) {
         ESP_LOGI("MIDIBLE", "notify enable");

@@ -1,5 +1,14 @@
 #ifdef ESP32
 
+/** 
+ * @file
+ * 
+ * Handler for MIDI BLE read events.
+ * 
+ * @note    This doesn't read MIDI data, it always responds with no payload, 
+ *          as mandated by the MIDI BLE spec.
+ */
+
 #include "midi-private.h"
 
 #include <string.h> // memset

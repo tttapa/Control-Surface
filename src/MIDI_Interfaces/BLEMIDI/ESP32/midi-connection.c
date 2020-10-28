@@ -1,5 +1,11 @@
 #ifdef ESP32
 
+/**
+ * @file
+ * 
+ * Handling of Bluetooth Low Energy connect and disconnect events.
+ */
+
 #include "logging.h"
 #include "midi-private.h"
 #include "advertising.h"

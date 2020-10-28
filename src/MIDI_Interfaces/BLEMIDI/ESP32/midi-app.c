@@ -1,5 +1,13 @@
 #ifdef ESP32
 
+/** 
+ * @file
+ * 
+ * Definition of the MIDI Bluetooth Low Energy UUIDs, services, characteristics,
+ * descriptors ... Handles app registration events, keeps track of the BLE 
+ * handles, connection ID, application ID, GATT server interface ID ...
+ */
+
 #include "advertising.h"
 #include "logging.h"
 #include "midi-private.h"

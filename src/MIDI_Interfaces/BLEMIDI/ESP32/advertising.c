@@ -57,24 +57,23 @@ uint8_t adv_config_done = 0;
 const uint8_t adv_config_flag = 1 << 0;
 const uint8_t scan_rsp_config_flag = 1 << 1;
 
-// UUID should persist, captures pointer, doesn't copy data
 void advertising_set_service_uuid(const uint8_t uuid[], uint16_t length) {
-    ESP_LOGI(GATTS_TAG, "advertising_set_service_uuid");
+    ESP_LOGI("MIDIBLE", "advertising_set_service_uuid");
     adv_data.p_service_uuid = (uint8_t *)uuid;
     adv_data.service_uuid_len = length;
 }
 
 bool advertising_config(void) {
-    ESP_LOGI(GATTS_TAG, "advertising_config");
+    ESP_LOGI("MIDIBLE", "advertising_config");
     esp_err_t ret = esp_ble_gap_config_adv_data(&adv_data);
     if (ret) {
-        ESP_LOGE(GATTS_TAG, "config adv data failed, error code = %x", ret);
+        ESP_LOGE("MIDIBLE", "config adv data failed, error code = %x", ret);
         return false;
     }
     adv_config_done |= adv_config_flag;
     ret = esp_ble_gap_config_adv_data(&adv_data_rsp);
     if (ret) {
-        ESP_LOGE(GATTS_TAG, "config adv rsp data failed, error code = %x", ret);
+        ESP_LOGE("MIDIBLE", "config adv rsp data failed, error code = %x", ret);
         return false;
     }
     adv_config_done |= scan_rsp_config_flag;
@@ -83,12 +82,12 @@ bool advertising_config(void) {
 
 bool advertising_handle_config_complete_event(esp_ble_gap_cb_param_t *param) {
     if (param->adv_data_cmpl.status != ESP_BT_STATUS_SUCCESS) {
-        ESP_LOGE(GATTS_TAG, "esp_ble_gap_config_adv_data failed: %d",
+        ESP_LOGE("MIDIBLE", "esp_ble_gap_config_adv_data failed: %d",
                  param->adv_data_cmpl.status);
         return false;
     }
     // If this completes the config, start advertising (could be before or
-    // after the rsp config)
+    // after the response config)
     adv_config_done &= (~adv_config_flag);
     if (adv_config_done == 0) {
         esp_ble_gap_start_advertising(&adv_params);
@@ -99,7 +98,7 @@ bool advertising_handle_config_complete_event(esp_ble_gap_cb_param_t *param) {
 bool advertising_handle_config_response_complete_event(
     esp_ble_gap_cb_param_t *param) {
     if (param->scan_rsp_data_cmpl.status != ESP_BT_STATUS_SUCCESS) {
-        ESP_LOGE(GATTS_TAG, "esp_ble_gap_config_adv_data response failed: %d",
+        ESP_LOGE("MIDIBLE", "esp_ble_gap_config_adv_data response failed: %d",
                  param->scan_rsp_data_cmpl.status);
         return false;
     }

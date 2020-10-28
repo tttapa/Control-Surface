@@ -1,5 +1,16 @@
 #ifdef ESP32
 
+/**
+ * @file 
+ * 
+ * Handler for BLE MIDI write events. These events occur when the client sends
+ * us MIDI data.
+ * 
+ * @todo    This file also implements long writes (prepare write/execute write)
+ *          events. This hasn't been tested, since it seems like most MIDI BLE
+ *          clients use normal write packets only.
+ */
+
 #include "logging.h"
 #include "midi-private.h"
 

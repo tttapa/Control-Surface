@@ -1,5 +1,11 @@
 #pragma once
 
+/**
+ * @file 
+ * 
+ * Helpers for printing Bluetooth events and status.
+ */
+
 #include <esp_gap_ble_api.h>
 #include <esp_gatt_defs.h>
 #include <esp_gatts_api.h>

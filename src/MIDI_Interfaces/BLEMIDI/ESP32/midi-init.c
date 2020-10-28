@@ -1,5 +1,14 @@
 #ifdef ESP32
 
+/**
+ * @file
+ * 
+ * Initialization of the Bluetooth stack and registration of the MIDI BLE
+ * application.
+ * 
+ * @todo   Implement de-initialization, cleaning up everything we've configured.
+ */
+
 #include "events.h"
 #include "midi-private.h"
 

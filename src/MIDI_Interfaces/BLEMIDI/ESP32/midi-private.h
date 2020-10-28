@@ -1,5 +1,12 @@
 #pragma once
 
+/**
+ * @file 
+ * 
+ * Declarations of internal functions for the MIDI over BLE system, used in the
+ * midi-*.c files.
+ */
+
 #include "midi.h"
 #include <esp_gatt_defs.h>
 #include <esp_gatts_api.h>

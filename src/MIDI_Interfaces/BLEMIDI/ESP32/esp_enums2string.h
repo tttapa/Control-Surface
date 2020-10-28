@@ -1,5 +1,11 @@
 #pragma once
 
+/**
+ * @file 
+ * 
+ * Helpers for printing the names of enum values of the ESP32 Bluetooth API.
+ */
+
 #include <esp_gap_ble_api.h>
 #include <esp_gatts_api.h>
 

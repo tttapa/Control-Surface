@@ -1,5 +1,11 @@
 #pragma once
 
+/**
+ * @file
+ * 
+ * Handlers for Bluetooth and BLE events.
+ */
+
 #include <esp_gap_ble_api.h>
 #include <esp_gatt_defs.h>
 #include <esp_gatts_api.h>

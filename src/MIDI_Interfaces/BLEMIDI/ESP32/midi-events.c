@@ -1,5 +1,13 @@
 #ifdef ESP32
 
+/**
+ * @file
+ * 
+ * Event handler of Bluetooth Low Energy, such as read, write, app registration,
+ * connect/disconnect, MTU negotiations ... dispatching them to the right
+ * functions for the MIDI application.
+ */
+
 #include "ble2902.h"
 #include "logging.h"
 #include "midi-private.h"
