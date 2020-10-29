@@ -26,6 +26,10 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #endif
 #endif
 
+#ifdef ESP32
+#include <mutex>
+#endif
+
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 #ifdef ARDUINO
@@ -63,6 +67,17 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+#ifdef ESP32
+#define DEBUG_LOCK_MUTEX std::lock_guard<std::mutex> lock(AH::debugmutex);
+BEGIN_AH_NAMESPACE
+extern std::mutex debugmutex;
+END_AH_NAMESPACE
+#else
+#define DEBUG_LOCK_MUTEX
+#endif
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 /// Macro for printing an expression as a string, followed by its value.
 /// The expression string is saved in PROGMEM using the `F(...)` macro.
 /// @ingroup    AH_Debug
@@ -74,6 +89,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 /// @ingroup    AH_Debug
 #define DEBUG(x)                                                               \
     do {                                                                       \
+        DEBUG_LOCK_MUTEX                                                       \
         DEBUG_OUT << x << DEBUG_ENDL;                                          \
     } while (0)
 
@@ -83,6 +99,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 /// @ingroup    AH_Debug
 #define DEBUGREF(x)                                                            \
     do {                                                                       \
+        DEBUG_LOCK_MUTEX                                                       \
         DEBUG_OUT << F(DEBUG_LOCATION) << x << DEBUG_ENDL;                     \
     } while (0)
 
@@ -92,6 +109,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 /// @ingroup    AH_Debug
 #define DEBUGFN(x)                                                             \
     do {                                                                       \
+        DEBUG_LOCK_MUTEX                                                       \
         DEBUG_OUT << DEBUG_FUNC_LOCATION << x << DEBUG_ENDL;                   \
     } while (0)
 
@@ -103,6 +121,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 /// @ingroup    AH_Debug
 #define DEBUGTIME(x)                                                           \
     do {                                                                       \
+        DEBUG_LOCK_MUTEX                                                       \
         unsigned long t = millis();                                            \
         unsigned long h = t / (60UL * 60 * 1000);                              \
         unsigned long m = (t / (60UL * 1000)) % 60;                            \
