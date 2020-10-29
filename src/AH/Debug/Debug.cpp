@@ -11,3 +11,9 @@ END_AH_NAMESPACE
 #endif
 
 #endif
+
+#ifdef ESP32
+BEGIN_AH_NAMESPACE
+std::mutex debugmutex;
+END_AH_NAMESPACE
+#endif
