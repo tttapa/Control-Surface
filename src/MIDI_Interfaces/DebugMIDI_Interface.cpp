@@ -54,6 +54,7 @@ void StreamDebugMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
     if (messageType >= 7)
         return;
 
+    DEBUG_LOCK_MUTEX
     if (msg.hasTwoDataBytes())
         getStream() << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
                     << F("\tChannel: ") << msg.getChannel().getOneBased()
@@ -68,11 +69,14 @@ void StreamDebugMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
 }
 
 void StreamDebugMIDI_Interface::sendSysExImpl(SysExMessage msg) {
-    getStream() << F("SysEx           \t") << AH::HexDump(msg.data, msg.length)
-                << F("\tCable: ") << msg.getCable().getOneBased() << "\r\n";
+    DEBUG_LOCK_MUTEX
+    getStream() << F("SysEx           \t[") << msg.length << "] "
+                << AH::HexDump(msg.data, msg.length) << F("\tCable: ")
+                << msg.getCable().getOneBased() << "\r\n";
 }
 
 void StreamDebugMIDI_Interface::sendRealTimeImpl(RealTimeMessage msg) {
+    DEBUG_LOCK_MUTEX
     getStream() << F("Real-Time: 0x") << hex << uppercase << msg.message << dec
                 << F("\tCable: ") << msg.getCable().getOneBased() << endl;
 }
