@@ -265,7 +265,8 @@ struct SysExMessage {
 
     bool operator==(SysExMessage other) const {
         return this->length == other.length && this->cable == other.cable &&
-               memcmp(this->data, other.data, length) == 0;
+               (this->length == 0 ||
+                memcmp(this->data, other.data, length) == 0);
     }
     bool operator!=(SysExMessage other) const { return !(*this == other); }
 
