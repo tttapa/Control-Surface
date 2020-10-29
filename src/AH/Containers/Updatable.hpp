@@ -82,16 +82,16 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
     /// @{
 
     template <class... Args>
-    static void applyToAll(const LockGuard &,
-                           void (Derived::*method)(Args &&...),
-                           Args &&... args) {
+    static void __attribute__((always_inline))
+    applyToAll(const LockGuard &, void (Derived::*method)(Args &&...),
+               Args &&... args) {
         for (auto &el : updatables)
             (el.*method)(std::forward<Args>(args)...);
     }
 
     template <class... Args>
-    static void applyToAll(void (Derived::*method)(Args &&...),
-                           Args &&... args) {
+    static void __attribute__((always_inline))
+    applyToAll(void (Derived::*method)(Args &&...), Args &&... args) {
         applyToAll(LockGuard(mutex), method, std::forward<Args>(args)...);
     }
 
