@@ -69,6 +69,8 @@ class SerialMIDI_Parser : public MIDI_Parser {
     /// Flag that remembers that the next data byte will be the third byte of
     /// a message.
     bool thirdByte = false;
+    /// Running status header.
+    uint8_t runningHeader = 0;
     /// @see @ref storeByte
     uint8_t storedByte = 0xFF;
 };

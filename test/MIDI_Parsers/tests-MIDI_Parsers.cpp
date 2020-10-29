@@ -414,9 +414,32 @@ TEST(SerialMIDIParser, songPositionCode) {
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
+TEST(SerialMIDIParser, dataAfterSongPositionCode) {
+    SerialMIDI_Parser sparser;
+    uint8_t data[] = {0xF2, 0x45, 0x67, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
+    SysCommonMessage msg = sparser.getSysCommonMessage();
+    EXPECT_EQ(msg.header, 0xF2);
+    EXPECT_EQ(msg.data1, 0x45);
+    EXPECT_EQ(msg.data2, 0x67);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+}
+
 TEST(SerialMIDIParser, songSelect) {
     SerialMIDI_Parser sparser;
     uint8_t data[] = {0xF3, 0x38};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
+    SysCommonMessage msg = sparser.getSysCommonMessage();
+    EXPECT_EQ(msg.header, 0xF3);
+    EXPECT_EQ(msg.data1, 0x38);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+}
+
+TEST(SerialMIDIParser, dataAfterSongSelect) {
+    SerialMIDI_Parser sparser;
+    uint8_t data[] = {0xF3, 0x38, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     auto puller = BufferPuller(data);
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
     SysCommonMessage msg = sparser.getSysCommonMessage();
