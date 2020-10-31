@@ -59,3 +59,25 @@ TEST(EMA, EMA_f) {
     for (size_t i = 0; i < signal.size(); ++i)
         ASSERT_FLOAT_EQ(signal[i], expected[i]);
 }
+
+TEST(EMA, EMA_overflow_init) {
+    using namespace std;
+    constexpr uint16_t maximum = (1 << 16) - 1;
+    EMA<6, uint16_t, uint32_t> ema(maximum);
+    EXPECT_EQ(ema(maximum), maximum);
+    EXPECT_EQ(ema(maximum), maximum);
+    EXPECT_EQ(ema(maximum), maximum);
+}
+
+TEST(EMA, EMA_overflow_reset) {
+    using namespace std;
+    constexpr uint16_t maximum = (1 << 16) - 1;
+    EMA<6, uint16_t, uint32_t> ema;
+    EXPECT_EQ(ema(0), 0);
+    EXPECT_EQ(ema(0), 0);
+    EXPECT_EQ(ema(0), 0);
+    ema.reset(maximum);
+    EXPECT_EQ(ema(maximum), maximum);
+    EXPECT_EQ(ema(maximum), maximum);
+    EXPECT_EQ(ema(maximum), maximum);
+}
