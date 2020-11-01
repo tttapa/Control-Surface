@@ -46,16 +46,13 @@ class StreamMIDI_Interface : public MIDI_Interface {
     void update() override;
 
   protected:
-    bool dispatchMIDIEvent(MIDIReadEvent event);
-
-  protected:
     void sendChannelMessageImpl(ChannelMessage) override;
     void sendSysCommonImpl(SysCommonMessage) override { /* TODO */ }
     void sendSysExImpl(SysExMessage) override;
     void sendRealTimeImpl(RealTimeMessage) override;
     void sendNowImpl() override {}
 
-  private:
+  protected:
     void handleStall() override;
 
   protected:
