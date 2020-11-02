@@ -148,7 +148,7 @@ MCU::VUDisplay<> vuDisp[8] = {
   {display, VUMeters[7], {2 + 16 * 7, 50}, 12, 3, 1, WHITE},
 };
 
-NoteBitmapDisplay<> muteDisp[8] = {
+BitmapDisplay<> muteDisp[8] = {
   // Draw the first mute indicator to the display, at position (4, 54),
   // using bitmap icon mute_7 with a white foreground color.
   {display, mute[0], XBM::mute_7, {4 + 16 * 0, 54}, WHITE},
@@ -161,7 +161,7 @@ NoteBitmapDisplay<> muteDisp[8] = {
   {display, mute[7], XBM::mute_7, {4 + 16 * 7, 54}, WHITE},
 };
 
-NoteBitmapDisplay<> soloDisp[8] = {
+BitmapDisplay<> soloDisp[8] = {
   // Draw the first solo indicator to the display, at position (4, 54),
   // using bitmap icon solo_7 with a white foreground color.
   {display, solo[0], XBM::solo_7, {4 + 16 * 0, 54}, WHITE},

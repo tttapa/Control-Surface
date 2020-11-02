@@ -224,15 +224,15 @@ MCU::TimeDisplayDisplay timedisplaydisplay = {
 };
 
 // Play / Record
-NoteBitmapDisplay<> playDisp = {
+BitmapDisplay<> playDisp = {
   display_L, play, XBM::play_7, {16 + 64, 0}, WHITE,
 };
-NoteBitmapDisplay<> recordDisp = {
+BitmapDisplay<> recordDisp = {
   display_L, record, XBM::record_7, {26 + 64, 0}, WHITE,
 };
 
 // Mute
-NoteBitmapDisplay<> muteDisp[] = {
+BitmapDisplay<> muteDisp[] = {
   {display_L, mute[0], XBM::mute_10B, {14, 50}, WHITE},
   {display_L, mute[1], XBM::mute_10B, {14 + 64, 50}, WHITE},
   {display_R, mute[2], XBM::mute_10B, {14, 50}, WHITE},
@@ -240,18 +240,18 @@ NoteBitmapDisplay<> muteDisp[] = {
 };
 
 // Solo
-NoteBitmapDisplay<> soloDisp[] = {
+BitmapDisplay<> soloDisp[] = {
   {display_L, solo[0], XBM::solo_10B, {14, 50}, WHITE},
   {display_L, solo[1], XBM::solo_10B, {14 + 64, 50}, WHITE},
   {display_R, solo[2], XBM::solo_10B, {14, 50}, WHITE},
   {display_R, solo[3], XBM::solo_10B, {14 + 64, 50}, WHITE},
 };
 
-NoteBitmapDisplay<> rudeSoloDisp = {
+BitmapDisplay<> rudeSoloDisp = {
   display_L, rudeSolo, XBM::solo_7, {36 + 64, 0}, WHITE};
 
 // Record arm / ready
-NoteBitmapDisplay<> recrdyDisp[] = {
+BitmapDisplay<> recrdyDisp[] = {
   {display_L, recrdy[0], XBM::rec_rdy_10B, {14 + 14, 50}, WHITE},
   {display_L, recrdy[1], XBM::rec_rdy_10B, {14 + 14 + 64, 50}, WHITE},
   {display_R, recrdy[2], XBM::rec_rdy_10B, {14 + 14, 50}, WHITE},

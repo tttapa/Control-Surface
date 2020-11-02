@@ -22,7 +22,7 @@
 #include <Display/MCU/TimeDisplayDisplay.hpp>
 #include <Display/MCU/VPotDisplay.hpp>
 #include <Display/MCU/VUDisplay.hpp>
-#include <Display/NoteBitmapDisplay.hpp>
+#include <Display/BitmapDisplay.hpp>
 #include <Display/SelectorDisplay.hpp>
 
 // ------------------------------ MIDI Outputs ------------------------------ //
