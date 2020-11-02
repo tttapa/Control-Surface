@@ -13,18 +13,11 @@ struct Color {
     uint8_t r;
     uint8_t g;
     uint8_t b;
-#ifdef FASTLED_VERSION
-    explicit operator CRGB() const { return CRGB{r, g, b}; }
-#endif
 };
 
 /// The default mapping from a 7-bit MIDI value to an RGB color, using the
 /// Novation Launchpad mapping.
-struct DefaultColorMapper {
-    /// Map from a 7-bit MIDI value to an RGB color, using the Novation
-    /// Launchpad mapping.
-    Color operator()(uint8_t value, uint8_t index) const;
-};
+Color velocityToNovationColor(uint8_t value);
 
 END_CS_NAMESPACE
 
@@ -33,6 +26,18 @@ END_CS_NAMESPACE
 #include <MIDI_Inputs/MIDIInputElement.hpp>
 
 BEGIN_CS_NAMESPACE
+
+/// The default mapping from a 7-bit MIDI value to an RGB color, using the
+/// Novation Launchpad mapping.
+struct DefaultColorMapper {
+    /// Map from a 7-bit MIDI value to an RGB color, using the Novation
+    /// Launchpad mapping.
+    CRGB operator()(uint8_t value, uint8_t index) const {
+        (void)index;
+        Color c = velocityToNovationColor(value);
+        return CRGB{c.r, c.g, c.b};
+    }
+};
 
 /// Function pointer type to permute indices.
 using index_permuter_f = uint8_t (*)(uint8_t);
@@ -54,7 +59,7 @@ class NoteCCKPRangeFastLED
     : public MatchingMIDIInputElement<Type, TwoByteRangeMIDIMatcher> {
   public:
     using Matcher = TwoByteRangeMIDIMatcher;
-    
+
     NoteCCKPRangeFastLED(CRGB *ledcolors, MIDIAddress address,
                          const ColorMapper &colormapper)
         : MatchingMIDIInputElement<Type, TwoByteRangeMIDIMatcher>(
@@ -143,7 +148,7 @@ class NoteCCKPRangeFastLED
     }
 
     /// Check if the colors changed since the last time the dirty flag was
-    /// cleared. When it's dirty, you should probably call `FastLED.show()` in 
+    /// cleared. When it's dirty, you should probably call `FastLED.show()` in
     /// the main loop.
     bool getDirty() const { return dirty; }
     /// Clear the dirty flag.
@@ -166,7 +171,7 @@ class NoteCCKPRangeFastLED
 // easier to use.
 //
 // It defines MIDI elements that listen to (a single, a range of)
-// (MIDI Note, MIDI Control Change, MIDI Key Pressure) message(s) that display 
+// (MIDI Note, MIDI Control Change, MIDI Key Pressure) message(s) that display
 // the values of these messages using FastLED LEDs or LED strips.
 // An optional color mapper can be supplied that defines the mapping from a
 // MIDI value [0, 127] to an RGB color.

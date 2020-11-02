@@ -101,7 +101,7 @@
 #include <MIDI_Inputs/LEDs/NoteCCKPRangeLEDs.hpp>
 
 #ifdef FASTLED_VERSION
-#include <MIDI_Inputs/LEDs/FastLED.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCKPRangeFastLED.hpp>
 #endif
 
 // ------------------------------- Selectors -------------------------------- //
