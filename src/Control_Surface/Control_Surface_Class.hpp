@@ -37,40 +37,27 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     /// Copying is not allowed
     Control_Surface_ &operator=(Control_Surface_ const &) = delete;
 
-    /**
-     * @brief   Return the static Control_Surface_ instance.
-     *          (Control_Surface_ is a singleton.)
-     */
+    /// Return the static Control_Surface_ instance (Control_Surface_ is a 
+    /// singleton.)
     static Control_Surface_ &getInstance();
 
   private:
-    /**
-     * @brief   Control_Surface_ is a singleton, so the constructor is private.
-     */
+    /// Control_Surface_ is a singleton, so the constructor is private.
     Control_Surface_() = default;
 
     /// @}
 
   public:
-    /**
-     * @brief   Initialize the Control_Surface.
-     */
+    /// Initialize the Control_Surface.
     void begin();
 
-    /**
-     * @brief   Update all MIDI elements, send MIDI events and read MIDI input.
-     */
+    /// Update all MIDI elements, send MIDI events and read MIDI input.
     void loop();
 
-    /**
-     * @brief   Connect Control Surface to the default MIDI interface.
-     */
+    /// Connect Control Surface to the default MIDI interface.
     bool connectDefaultMIDI_Interface();
 
-    /**
-     * @brief   Disconnect Control Surface from the MIDI interfaces it's 
-     *          connected to.
-     */
+    /// Disconnect Control Surface from the MIDI interfaces it's connected to.
     void disconnectMIDI_Interfaces();
 
     /**
@@ -85,19 +72,15 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     MIDI() {
         return *this;
     }
-    /** 
-     * @brief   Update all MIDI interfaces to receive new MIDI events.
-     */
+
+    /// Update all MIDI interfaces to receive new MIDI events.
     void updateMidiInput();
-
-    /**
-     * @brief   Update all MIDIInputElement%s.
-     */
+    /// Update all MIDIInputElement%s.
     void updateInputs();
-
-    /** 
-     * @brief   Clear, draw and display all displays.
-     */
+    /// Initialize all displays that have at least one display element.
+    void beginDisplays();
+    /// Clear, draw and display all displays that contain display elements that
+    /// have changed.
     void updateDisplays();
 
   private:

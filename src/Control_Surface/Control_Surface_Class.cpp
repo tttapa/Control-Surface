@@ -29,7 +29,7 @@ void Control_Surface_::begin() {
     FilteredAnalog<>::setupADC();
     ExtendedIOElement::beginAll();
     Updatable<MIDI_Interface>::beginAll();
-    DisplayInterface::beginAll(); // initialize all displays
+    beginDisplays();
     MIDIInputElementNote::beginAll();
     MIDIInputElementKP::beginAll();
     MIDIInputElementCC::beginAll();
@@ -211,6 +211,27 @@ void Control_Surface_::updateInputs() {
     MIDIInputElementCP::updateAll();
     MIDIInputElementPB::updateAll();
     MIDIInputElementSysEx::updateAll();
+}
+
+void Control_Surface_::beginDisplays() {
+    auto &allElements = DisplayElement::getAll();
+    auto it = allElements.begin();
+    auto end = allElements.end();
+    if (it == end)
+        return;
+    auto previousDisplay = &it->getDisplay();
+    // Loop over all display elements
+    while (true) {
+        ++it;
+        // If this is the first element on another display
+        if (it == end || &it->getDisplay() != previousDisplay) {
+            // Initialize the display
+            previousDisplay->begin();
+            if (it == end)
+                break;
+            previousDisplay = &it->getDisplay();
+        }
+    }
 }
 
 void Control_Surface_::updateDisplays() {
