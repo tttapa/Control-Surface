@@ -8,7 +8,7 @@ BEGIN_CS_NAMESPACE
 
 /// A struct for saving a MIDI address consisting of a 7-bit address, a 4-bit
 /// channel, and a 4-bit cable number.
-/// A MIDI address can be marked "invalid". The MIDI sending functions 
+/// A MIDI address can be marked "invalid". The MIDI sending functions
 /// (@ref MIDI_Sender) will never send messages addressed to an invalid address.
 struct __attribute__((packed)) RawMIDIAddress {
     bool valid : 1;
@@ -17,9 +17,9 @@ struct __attribute__((packed)) RawMIDIAddress {
     uint8_t cableNumber : 4;
 };
 
-/// A class for saving a MIDI channel and cable number.  
-/// A MIDI channel and cable number can be marked "invalid". 
-/// The MIDI sending functions (@ref MIDI_Sender) will never send messages 
+/// A class for saving a MIDI channel and cable number.
+/// A MIDI channel and cable number can be marked "invalid".
+/// The MIDI sending functions (@ref MIDI_Sender) will never send messages
 /// addressed to invalid channels or cables.
 class MIDIChannelCable {
     friend class MIDIAddress;
@@ -30,12 +30,7 @@ class MIDIChannelCable {
 
     constexpr MIDIChannelCable() : addresses{0, 0, 0, 0} {}
     constexpr MIDIChannelCable(Channel channel, Cable cableNumber = CABLE_1)
-        : addresses{
-              1,
-              0,
-              channel.getRaw(),
-              cableNumber.getRaw(),
-          } {}
+        : addresses{1, 0, channel.getRaw(), cableNumber.getRaw()} {}
 
     constexpr static MIDIChannelCable invalid() { return {}; }
 
@@ -110,9 +105,6 @@ class MIDIChannelCable {
     RawMIDIAddress addresses;
 };
 
-/// @deprecated
-using MIDICNChannel [[deprecated("Use MIDIChannelCable instead")]] = MIDIChannelCable;
-
 /// A class for saving an offset to a MIDI address.
 /// It can be added to a MIDIAddress.
 class RelativeMIDIAddress {
@@ -141,8 +133,8 @@ class RelativeMIDIAddress {
 };
 
 /// A type-safe utility class for saving a MIDI address consisting of a 7-bit
-/// address, a 4-bit channel, and a 4-bit cable number.  
-/// A MIDI address can be marked "invalid". The MIDI sending functions 
+/// address, a 4-bit channel, and a 4-bit cable number.
+/// A MIDI address can be marked "invalid". The MIDI sending functions
 /// (@ref MIDI_Sender) will never send messages addressed to invalid addresses.
 ///
 /// See @ref md_pages_Basics "this page" for a tutorial on how to use MIDI
@@ -358,9 +350,5 @@ class MIDIAddress {
   private:
     RawMIDIAddress addresses;
 };
-
-/// @deprecated
-using MIDICNChannelAddress [[deprecated("Use MIDIAddress instead")]] =
-    MIDIAddress;
 
 END_CS_NAMESPACE

@@ -60,19 +60,6 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     /// Disconnect Control Surface from the MIDI interfaces it's connected to.
     void disconnectMIDI_Interfaces();
 
-    /**
-     * @brief   Get a reference to the MIDI sender.
-     * 
-     * @deprecated  Use `Control_Surface.send(...)` directly instead of 
-     *              `Control_Surface.MIDI().send(...)`.
-     */
-    [[deprecated("Use Control_Surface.send(...) directly, instead of "
-                 "Control_Surface.MIDI().send(...)")]] //
-    MIDI_Sender<Control_Surface_> &
-    MIDI() {
-        return *this;
-    }
-
     /// Update all MIDI interfaces to receive new MIDI events.
     void updateMidiInput();
     /// Update all MIDIInputElement%s.
