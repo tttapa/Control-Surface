@@ -187,6 +187,24 @@ the address is simply a table lookup in that list of addresses, based on the
 active bank:
 @f[ y = \text{list of addresses}[x] @f].
 
+## How can I add support for different kinds of displays?
+
+Out of the box, the library supports SSD1306 OLED displays. Adding support for
+other types of displays is relatively easy, by implementing the 
+`DisplayInterface` API.
+
+`DisplayInterface` is an abstract interface: it declares a set of abstract (pure
+virtual) drawing functions for displays. Control Surface uses these functions to
+draw to the displays, but Control Surface doesn't know how these functions are
+implemented, the implementation depends on the display library you're using, and
+it's up to the user to create an adapter between Control Surface and the display
+library by implementing the pure virtual functions of `DisplayInterface`.
+
+As an example, you could have a look at the
+[`DisplayInterfaceSSD1306`](https://github.com/tttapa/Control-Surface/blob/master/src/Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp),
+it should be almost identical for other Adafruit libraries, and writing adapters
+for other types of display libraries.
+
 ## What's the difference between the Control Surface and MIDI Controller libraries?
 
 You might already have found my other Arduino MIDI library, [MIDI Controller](https://github.com/tttapa/MIDI_Controller), 
@@ -210,7 +228,7 @@ I consider the MIDI Controller library obsolete. I won't be
 adding any new features, and I no longer offer support for it.  
 For new projects, you should always use Control Surface, it is actively being 
 developed, features are added, bugs are fixed, and I offer support for it on
-the Arduino forum and in the GitHub issues.
+the Arduino forum and on GitHub.
 
 The main difference between the two libraries is that Control Surface has much
 more features. MIDI Controller has everything you need for a working MIDI 
