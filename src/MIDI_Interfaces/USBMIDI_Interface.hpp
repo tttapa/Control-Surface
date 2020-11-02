@@ -84,19 +84,13 @@ class USBMIDI_Interface : public MIDI_Interface {
     MIDIReadEvent read();
     
     /// Return the received channel voice message.
-    ChannelMessage getChannelMessage() const {
-        return parser.getChannelMessage();
-    }
+    ChannelMessage getChannelMessage() const;
     /// Return the received system common message.
-    SysCommonMessage getSysCommonMessage() const {
-        return parser.getSysCommonMessage();
-    }
+    SysCommonMessage getSysCommonMessage() const;
     /// Return the received real-time message.
-    RealTimeMessage getRealTimeMessage() const {
-        return parser.getRealTimeMessage();
-    }
+    RealTimeMessage getRealTimeMessage() const;
     /// Return the received system exclusive message.
-    SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
+    SysExMessage getSysExMessage() const;
 
     /// @}
 

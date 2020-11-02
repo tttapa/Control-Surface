@@ -17,6 +17,26 @@ void StreamMIDI_Interface::handleStall() { MIDI_Interface::handleStall(this); }
 
 // -------------------------------------------------------------------------- //
 
+// Retrieving the received messages
+
+ChannelMessage StreamMIDI_Interface::getChannelMessage() const {
+    return parser.getChannelMessage();
+}
+
+SysCommonMessage StreamMIDI_Interface::getSysCommonMessage() const {
+    return parser.getSysCommonMessage();
+}
+
+RealTimeMessage StreamMIDI_Interface::getRealTimeMessage() const {
+    return parser.getRealTimeMessage();
+}
+
+SysExMessage StreamMIDI_Interface::getSysExMessage() const {
+    return parser.getSysExMessage();
+}
+
+// -------------------------------------------------------------------------- //
+
 // Sending MIDI
 
 void StreamMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {

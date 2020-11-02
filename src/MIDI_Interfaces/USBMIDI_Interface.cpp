@@ -33,6 +33,26 @@ void USBMIDI_Interface::handleStall() { MIDI_Interface::handleStall(this); }
 
 // -------------------------------------------------------------------------- //
 
+// Retrieving the received messages
+
+ChannelMessage USBMIDI_Interface::getChannelMessage() const {
+    return parser.getChannelMessage();
+}
+
+SysCommonMessage USBMIDI_Interface::getSysCommonMessage() const {
+    return parser.getSysCommonMessage();
+}
+
+RealTimeMessage USBMIDI_Interface::getRealTimeMessage() const {
+    return parser.getRealTimeMessage();
+}
+
+SysExMessage USBMIDI_Interface::getSysExMessage() const {
+    return parser.getSysExMessage();
+}
+
+// -------------------------------------------------------------------------- //
+
 // Sending MIDI
 
 void USBMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
