@@ -142,7 +142,10 @@ class LCDDisplay : public DisplayElement {
         return true;
     }
 
-    void setLine(uint8_t line) { this->line = line; }
+    /// Set the line number of the LCD to display.
+    /// @param  line
+    ///         Either 1 or 2.
+    void setLine(uint8_t line) { this->line = line - 1; }
 
   private:
     MCU::LCD<> &lcd;
