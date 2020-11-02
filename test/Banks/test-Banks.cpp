@@ -58,30 +58,3 @@ TEST(Bank, selectOutOfBounds) {
         EXPECT_EQ(e.getErrorCode(), 0xFFFE);
     }
 }
-
-template <uint8_t N>
-class TestInputBankable : public BankableMIDIInput<N> {
-  public:
-    TestInputBankable(Bank<N> &bank, BankType type)
-        : BankableMIDIInput<N>(bank, type) {}
-
-    MOCK_METHOD(void, onBankSettingChange, (), (override));
-};
-
-TEST(Bank, onBankSettingChange) {
-    Bank<10> bank = {4};
-    TestInputBankable<10> ib1 = {bank, CHANGE_ADDRESS};
-    EXPECT_CALL(ib1, onBankSettingChange());
-    bank.select(6);
-    {
-        TestInputBankable<10> ib2 = {bank, CHANGE_ADDRESS};
-        EXPECT_CALL(ib1, onBankSettingChange());
-        EXPECT_CALL(ib2, onBankSettingChange());
-        bank.select(5);
-    }
-    TestInputBankable<10> ib3 = {bank, CHANGE_ADDRESS};
-    // Check that destructor correctly removed ib2 from bank
-    EXPECT_CALL(ib1, onBankSettingChange());
-    EXPECT_CALL(ib3, onBankSettingChange());
-    bank.select(4);
-}

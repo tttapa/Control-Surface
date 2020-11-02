@@ -85,16 +85,15 @@ class BankSettingChangeCallback
 };
 
 /**
- * @brief   A class that groups Bankable BankableMIDIOutput%s and 
- *          BankableMIDIInput%s, and allows the user to change the addresses 
- *          of these elements.
+ * @brief   A class that groups Bankable MIDI Output Elements and 
+ *          Bankable MIDI Input Elements, and allows the user to change the
+ *          addresses of these elements.
  * 
  * @tparam  N 
  *          The number of banks.
  */
 template <setting_t N>
 class Bank : public Selectable<N>, public OutputBank {
-    friend class BankableMIDIInput<N>;
 
   public:
     /**
@@ -113,7 +112,8 @@ class Bank : public Selectable<N>, public OutputBank {
     /**
      * @brief   Select the given bank setting.
      * 
-     * All BankableMIDIInput%s will be updated.
+     * All Bankable MIDI Input elements that were added to this bank will be
+     * updated.
      *
      * @param   bankSetting
      *          The new setting to select.
@@ -127,28 +127,28 @@ class Bank : public Selectable<N>, public OutputBank {
 
   public:
     /**
-     * @brief   Add a BankableMIDIInput to the bank.
+     * @brief   Add a Bankable MIDI Input Element to the bank.
      * 
      * @param   bankable
-     *          The BankableMIDIInput to be added.
+     *          The MIDI Input Element to be added.
      */
     void add(BankSettingChangeCallback *bankable);
 
     /**
-     * @brief   Remove a BankableMIDIInput from the bank.
+     * @brief   Remove a Bankable MIDI Input Element from the bank.
      * 
      * @param   bankable
-     *          The BankableMIDIInput to be removed.
+     *          The MIDI Input Element to be removed.
      */
     void remove(BankSettingChangeCallback *bankable);
 
   private:
     /**
-     * @brief   A linked list of all BankableMIDIInput elements that have been
+     * @brief   A linked list of all Bankable MIDI Input Elements that have been
      *          added to this bank, and that should be updated when the bank
      *          setting changes.
      * 
-     * The list is updated automatically when BankableMIDIInput elements are
+     * The list is updated automatically when Bankable MIDI Input Elements are
      * created or destroyed.
      */
     DoublyLinkedList<BankSettingChangeCallback> inputBankables;
@@ -157,8 +157,6 @@ class Bank : public Selectable<N>, public OutputBank {
 END_CS_NAMESPACE
 
 // ---------------------------- Implementations ----------------------------- //
-
-#include <Banks/BankableMIDIInput.hpp>
 
 BEGIN_CS_NAMESPACE
 

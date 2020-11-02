@@ -2,6 +2,7 @@
 
 #include <Banks/Bank.hpp>
 #include <Banks/BankConfig.hpp>
+#include <Def/MIDIAddress.hpp>
 
 BEGIN_CS_NAMESPACE
 

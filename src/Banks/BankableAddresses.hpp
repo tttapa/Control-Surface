@@ -8,6 +8,10 @@
 
 BEGIN_CS_NAMESPACE
 
+/// Class for keeping track of the active bank, and allows locking of the
+/// bank setting.
+///
+/// @see @ref OutputBankableMIDIAddress
 class OutputBankableMIDIAddress_Base {
   protected:
     /**
