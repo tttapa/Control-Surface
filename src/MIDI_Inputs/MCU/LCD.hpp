@@ -50,6 +50,15 @@ class LCDCounter {
 template <uint8_t BufferSize = 120>
 class LCD : public MIDIInputElementSysEx, private LCDCounter {
   public:
+    /// @param  offset
+    ///         The text sent over MIDI is 120 characters long, by changing the
+    ///         offset within this text and the length of the text, we can 
+    ///         listen to just a section of the text. E.g. `offset = 60` and 
+    ///         `BufferSize = 60` will listen to just the second line of the 
+    ///         LCD display. The default is `offset = 0` and `BufferSize = 120`,
+    ///         i.e. listening to the entire display.
+    /// @param  cable
+    ///         The MIDI USB cable number to listen for.
     LCD(uint8_t offset = 0, Cable cable = CABLE_1)
         : offset(offset), cable(cable) {
         // Null-terminate the buffer
@@ -61,7 +70,14 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
 
   protected:
     bool updateWith(SysExMessage midimsg) override {
+        // If this message is meant for a different cable than ours, return:
         if (midimsg.getCable() != this->cable)
+            return false;
+
+        // We can't handle chunked SysEx data (yet), and it wouldn't make a ton
+        // of sense, since the default SysEx buffer size is the same size as the 
+        // SysEx message we expect, so it shouldn't arrive in chunks.
+        if (!midimsg.isCompleteMessage()) 
             return false;
 
         // Format:
@@ -80,7 +96,8 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
 
         const uint8_t bufferEnd = this->offset + BufferSize;
 
-        // No overlap between incoming range and this range
+        // If there's no overlap between incoming range and the range that we're
+        // listening for, return:
         if (midiOffset >= bufferEnd || this->offset >= midiBufferEnd)
             // If there are other instances, maybe it'll match one of those,
             // otherwise, stop handling this message:
@@ -93,10 +110,6 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
         uint8_t length = midiBufferEnd - midiOffset -
                          max(0, this->offset - midiOffset) -
                          max(0, midiBufferEnd - bufferEnd);
-        // uint8_t length =
-        //     BufferSize -                                                   //
-        //     max(0, midiOffset - this->offset) -                            //
-        //     max(0, BufferSize - midiLength - (midiOffset - this->offset)); //
 
         // Copy the interesting part to our buffer:
 #ifdef ARDUINO

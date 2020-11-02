@@ -22,8 +22,6 @@ class NoteCCKPRange
   public:
     using Matcher = TwoByteRangeMIDIMatcher;
 
-    /// Constructor.
-    ///
     /// @param  address
     ///         The first address of the range to listen to.
     NoteCCKPRange(MIDIAddress address)
@@ -113,8 +111,6 @@ class NoteCCKPRange : public BankableMatchingMIDIInputElement<
   public:
     using Matcher = BankableTwoByteRangeMIDIMatcher<BankSize>;
 
-    /// Constructor.
-    ///
     /// @param  config
     ///         The bank configuration to use.
     /// @param  address

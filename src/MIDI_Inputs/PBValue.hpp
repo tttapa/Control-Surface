@@ -16,8 +16,6 @@ class PBValue : public MatchingMIDIInputElement<MIDIMessageType::PITCH_BEND,
   public:
     using Matcher = PitchBendMIDIMatcher;
 
-    /// Constructor.
-    ///
     /// @param  address
     ///         The address to listen to.
     PBValue(MIDIChannelCable address) : MatchingMIDIInputElement(address) {}
@@ -67,8 +65,6 @@ class PBValue
     using Matcher = BankablePitchBendMIDIMatcher<BankSize>;
     using Parent = BankableMatchingMIDIInputElement<MessageType, Matcher>;
 
-    /// Constructor.
-    ///
     /// @param  config
     ///         The bank configuration to use.
     /// @param  address

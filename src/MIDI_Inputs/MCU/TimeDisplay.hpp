@@ -9,6 +9,10 @@ namespace MCU {
 constexpr static uint8_t TimeDisplayLength = 10;
 constexpr static uint8_t TimeDisplayAddress = 0x40;
 
+/// Class that receives and stores the text of the Mackie Control Universal
+/// 7-segment time display.
+///
+/// @ingroup MIDIInputElements
 class TimeDisplay : public SevenSegmentDisplay<TimeDisplayLength> {
   public:
     TimeDisplay(Channel channel = CHANNEL_1)

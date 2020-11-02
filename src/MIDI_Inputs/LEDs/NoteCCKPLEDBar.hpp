@@ -22,14 +22,22 @@ class NoteCCKPLEDBarDriver : public AH::DotBarDisplayLEDs<NumLEDs> {
 
 // -------------------------------------------------------------------------- //
 
+/// Class that turns on a different number of LEDs depending on the received
+/// MIDI velocity, key pressure or Control Change value. Similar to a digital
+/// LED VU meter.
+/// Can be configured in either bar or dot mode.
 template <MIDIMessageType Type, uint8_t NumLEDs>
-class NoteCCKPLEDBar : 
-    public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>,
-    public NoteCCKPLEDBarDriver<NumLEDs> {
+class NoteCCKPLEDBar
+    : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>,
+      public NoteCCKPLEDBarDriver<NumLEDs> {
   public:
     using Matcher = TwoByteMIDIMatcher;
     using Parent = MatchingMIDIInputElement<Type, Matcher>;
 
+    /// @param  leds
+    ///         A list of LED pins.
+    /// @param  address
+    ///         The MIDI address to listen to.
     NoteCCKPLEDBar(const AH::PinList<NumLEDs> &leds, MIDIAddress address)
         : Parent(address), NoteCCKPLEDBarDriver<NumLEDs>(leds) {}
 
@@ -50,7 +58,9 @@ class NoteCCKPLEDBar :
 // -------------------------------------------------------------------------- //
 
 /// Class that listens for **Note** events and displays the velocity on an
-/// **LED Bar Graph**.
+/// **LED Bar Graph**, turning on a different number of LEDs depending on the
+/// velocity. Similar to a digital LED VU meter.
+/// Can be configured in either bar or dot mode.
 /// @tparam  NumLEDs
 ///          The number of LEDs the display has.
 /// @ingroup midi-input-elements-leds
@@ -58,7 +68,9 @@ template <uint8_t NumLEDs>
 using NoteLEDBar = NoteCCKPLEDBar<MIDIMessageType::NOTE_ON, NumLEDs>;
 
 /// Class that listens for **Control Change** events and displays the
-/// value on an **LED Bar Graph**.
+/// value on an **LED Bar Graph**, turning on a different number of LEDs
+/// depending on the value. Similar to a digital LED VU meter.
+/// Can be configured in either bar or dot mode.
 /// @tparam  NumLEDs
 ///          The number of LEDs the display has.
 /// @ingroup midi-input-elements-leds
@@ -66,7 +78,9 @@ template <uint8_t NumLEDs>
 using CCLEDBar = NoteCCKPLEDBar<MIDIMessageType::CONTROL_CHANGE, NumLEDs>;
 
 /// Class that listens for **Key Pressure** events and displays the pressure on
-/// an **LED Bar Graph**.
+/// an **LED Bar Graph**, turning on a different number of LEDs
+/// depending on the value. Similar to a digital LED VU meter.
+/// Can be configured in either bar or dot mode.
 /// @tparam  NumLEDs
 ///          The number of LEDs the display has.
 /// @ingroup midi-input-elements-leds
@@ -77,6 +91,11 @@ using KPLEDBar = NoteCCKPLEDBar<MIDIMessageType::KEY_PRESSURE, NumLEDs>;
 
 namespace Bankable {
 
+/// Class that turns on a different number of LEDs depending on the received
+/// MIDI velocity, key pressure or Control Change value. Similar to a digital
+/// LED VU meter.
+/// Can be configured in either bar or dot mode.
+/// This version can be banked.
 template <MIDIMessageType Type, uint8_t BankSize, uint8_t NumLEDs>
 class NoteCCKPLEDBar : public NoteCCKPValue<Type, BankSize>,
                        public NoteCCKPLEDBarDriver<NumLEDs> {
@@ -84,9 +103,15 @@ class NoteCCKPLEDBar : public NoteCCKPValue<Type, BankSize>,
     using Parent = NoteCCKPValue<Type, BankSize>;
     using Matcher = typename Parent::Matcher;
 
-    NoteCCKPLEDBar(const AH::PinList<NumLEDs> &leds, MIDIAddress address)
-        : Parent(address), NoteCCKPLEDBarDriver<NumLEDs>(
-                                                      leds) {}
+    /// @param  config
+    ///         The bank configuration to use.
+    /// @param  leds
+    ///         A list of LED pins.
+    /// @param  address
+    ///         The MIDI address to listen to.
+    NoteCCKPLEDBar(BankConfig<BankSize> config,
+                   const AH::PinList<NumLEDs> &leds, MIDIAddress address)
+        : Parent(config, address), NoteCCKPLEDBarDriver<NumLEDs>(leds) {}
 
   protected:
     void handleUpdate(typename Matcher::Result match) override {
@@ -96,9 +121,7 @@ class NoteCCKPLEDBar : public NoteCCKPValue<Type, BankSize>,
         this->dirty |= newdirty;
     }
 
-    void updateDisplay() {
-        this->displayBar(this->getValue());
-    }
+    void updateDisplay() { this->displayBar(this->getValue()); }
 
   public:
     void begin() override {
@@ -122,7 +145,9 @@ class NoteCCKPLEDBar : public NoteCCKPValue<Type, BankSize>,
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 /// Class that listens for **Note** events and displays the velocity on an
-/// **LED Bar Graph**.
+/// **LED Bar Graph**, turning on a different number of LEDs
+/// depending on the velocity. Similar to a digital LED VU meter.
+/// Can be configured in either bar or dot mode.
 /// This version can be banked.
 /// @tparam BankSize
 ///         The number of banks.
@@ -130,11 +155,12 @@ class NoteCCKPLEDBar : public NoteCCKPValue<Type, BankSize>,
 ///          The number of LEDs the display has.
 /// @ingroup BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t NumLEDs>
-using NoteLEDBar =
-    NoteCCKPLEDBar<MIDIMessageType::NOTE_ON, BankSize, NumLEDs>;
+using NoteLEDBar = NoteCCKPLEDBar<MIDIMessageType::NOTE_ON, BankSize, NumLEDs>;
 
 /// Class that listens for **Control Change** events and displays the
-/// value on an **LED Bar Graph**.
+/// value on an **LED Bar Graph**, turning on a different number of LEDs
+/// depending on the value. Similar to a digital LED VU meter.
+/// Can be configured in either bar or dot mode.
 /// This version can be banked.
 /// @tparam BankSize
 ///         The number of banks.
@@ -146,7 +172,9 @@ using CCLEDBar =
     NoteCCKPLEDBar<MIDIMessageType::CONTROL_CHANGE, BankSize, NumLEDs>;
 
 /// Class that listens for **Key Pressure** events and displays the pressure on
-/// an **LED Bar Graph**.
+/// an **LED Bar Graph**, turning on a different number of LEDs
+/// depending on the value. Similar to a digital LED VU meter.
+/// Can be configured in either bar or dot mode.
 /// This version can be banked.
 /// @tparam BankSize
 ///         The number of banks.

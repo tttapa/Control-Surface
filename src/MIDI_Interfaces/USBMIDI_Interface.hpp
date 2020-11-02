@@ -82,7 +82,7 @@ class USBMIDI_Interface : public MIDI_Interface {
     /// @return Returns the type of the read message, or
     ///         `MIDIReadEvent::NO_MESSAGE` if no MIDI message was available.
     MIDIReadEvent read();
-    
+
     /// Return the received channel voice message.
     ChannelMessage getChannelMessage() const;
     /// Return the received system common message.
@@ -95,28 +95,36 @@ class USBMIDI_Interface : public MIDI_Interface {
     /// @}
 
   private:
+    /// Parses USB packets into MIDI messages.
     USBMIDI_Parser parser;
-    uint8_t storedSysExData[3];
-    uint8_t storedSysExLength = 0;
-    bool alwaysSendImmediately_ = true;
+    /// @see neverSendImmediately()
+    bool alwaysSendImmediately_ = true; 
+    /// Stores remainder of outgoing SysEx chunks. Each USB packet (except the
+    /// last one) should contain a multiple of 3 SysEx bytes. If the SysEx chunk
+    /// size is not a multiple of 3, there will be remaining bytes that can't be
+    /// sent yet, until the next chunk arrives. See the comments in the 
+    /// @ref sendSysExImpl() implementation for more details.
+    uint8_t storedSysExData[3]; 
+    /// Number of remaining SysEx bytes stored.
+    uint8_t storedSysExLength = 0; 
 
   public:
     /// @name   Buffering USB packets
 
     /// Check if this USB interface always sends its USB packets immediately
     /// after sending a MIDI message. The default value depends on the MIDI USB
-    /// backend being used: `true` for the `MIDIUSB` library, and `false` for 
+    /// backend being used: `true` for the `MIDIUSB` library, and `false` for
     /// the Teensy Core USB MIDI functions (because they have a short timeout).
     bool alwaysSendsImmediately() const { return alwaysSendImmediately_; }
     /// Don't send the USB packets immediately after sending a MIDI message.
     /// By disabling immediate transmission, packets are buffered until you
     /// call @ref sendNow() or until a timeout is reached, so multiple MIDI
-    /// messages can be transmitted in a single USB packet. This is more 
-    /// efficient and results in a higher maximum bandwidth, but it could 
+    /// messages can be transmitted in a single USB packet. This is more
+    /// efficient and results in a higher maximum bandwidth, but it could
     /// increase latency when used incorrectly.
     void neverSendImmediately() { alwaysSendImmediately_ = false; }
     /// Send the USB packets immediately after sending a MIDI message.
-    /// @see disableSendImmediately
+    /// @see @ref neverSendImmediately()
     void alwaysSendImmediately() { alwaysSendImmediately_ = true; }
 
     /// @}

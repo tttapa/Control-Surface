@@ -9,6 +9,12 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
+/// Class that receives and saves the text of a Mackie Control Universal
+/// 7-segment display like the assignment display and the time display.
+///
+/// @note   Implements Control Change updates only, not System Exclusive.
+///
+/// @ingroup MIDIInputElements
 template <uint8_t LENGTH>
 class SevenSegmentDisplay
     : public MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
@@ -16,20 +22,11 @@ class SevenSegmentDisplay
       public Printable {
   public:
     using Matcher = TwoByteRangeMIDIMatcher;
-    using Parent = MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
-                                            Matcher>;
+    using Parent =
+        MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE, Matcher>;
 
-    /**
-    * @brief     Constructor.
-    * @todo      Documentation.
-    */
-    SevenSegmentDisplay(const MIDIAddress &address)
-        : Parent({address, LENGTH}) {
+    SevenSegmentDisplay(MIDIAddress address) : Parent({address, LENGTH}) {
         fillWithSpaces();
-    }
-
-    void fillWithSpaces() {
-        std::fill(std::begin(text), std::end(text), ' ');
     }
 
     void reset() override {
@@ -53,6 +50,8 @@ class SevenSegmentDisplay
         dirty |= text[index] != character;
         text[index] = character;
     }
+
+    void fillWithSpaces() { std::fill(std::begin(text), std::end(text), ' '); }
 
   public:
     /// @name Data access
@@ -136,7 +135,7 @@ class SevenSegmentDisplay
     /// @}
 
   private:
-    AH::Array<char, LENGTH> text;
+    AH::Array<char, LENGTH> text; ///< Non-ASCII and not null-terminated.
     bool dirty = true;
 
   public:

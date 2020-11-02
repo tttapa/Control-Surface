@@ -21,8 +21,6 @@ class NoteCCKPValue : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>,
   public:
     using Matcher = TwoByteMIDIMatcher;
 
-    /// Constructor.
-    ///
     /// @param  address
     ///         The address to listen to.
     NoteCCKPValue(MIDIAddress address)
@@ -95,8 +93,6 @@ class NoteCCKPValue : public BankableMatchingMIDIInputElement<
   public:
     using Matcher = BankableTwoByteMIDIMatcher<BankSize>;
 
-    /// Constructor.
-    ///
     /// @param  config
     ///         The bank configuration to use.
     /// @param  address

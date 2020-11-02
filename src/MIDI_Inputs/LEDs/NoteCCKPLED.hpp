@@ -22,8 +22,6 @@ class NoteCCKPLED : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher> {
     using Matcher = TwoByteMIDIMatcher;
     using Parent = MatchingMIDIInputElement<Type, Matcher>;
 
-    /// Constructor.
-    ///
     /// @param  ledPin
     ///         The output pin with the LED connected.
     /// @param  address
@@ -93,8 +91,6 @@ class NoteCCKPLED : public NoteCCKPValue<Type, BankSize> {
     using Parent = NoteCCKPValue<Type, BankSize>;
     using Matcher = typename Parent::Matcher;
 
-    /// Constructor.
-    ///
     /// @param  config
     ///         The bank configuration to use.
     /// @param  ledPin

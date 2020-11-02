@@ -9,7 +9,7 @@ BEGIN_CS_NAMESPACE
 // -------------------------------------------------------------------------- //
 
 /// Generic base class for classes that listen for MIDI Note, Control Change and
-/// Key Pressure events on a single address and turns on an LED with a
+/// Key Pressure events on a single address and turn on an LED with a
 /// brightness/duty cycle proportional to the MIDI value.
 ///
 /// @tparam Type
@@ -24,8 +24,6 @@ class NoteCCKPLEDPWM
     using Matcher = TwoByteMIDIMatcher;
     using Parent = MatchingMIDIInputElement<Type, Matcher>;
 
-    /// Constructor.
-    ///
     /// @param  ledPin
     ///         The PWM pin with the LED connected.
     /// @param  address
@@ -54,17 +52,17 @@ class NoteCCKPLEDPWM
 };
 
 /// Class that listens for MIDI Note events on a single address and turns
-/// on an LED when the value is higher than a threshold.
+/// on an LED with a brightness/duty cycle proportional to the velocity.
 /// @ingroup    midi-input-elements-leds
 using NoteLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::NOTE_ON>;
 
 /// Class that listens for MIDI Control Change events on a single address and
-/// turns on an LED when the value is higher than a threshold.
+/// turns on an LED with a brightness/duty cycle proportional to the value.
 /// @ingroup    midi-input-elements-leds
 using CCLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::CONTROL_CHANGE>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
-/// turns on an LED when the value is higher than a threshold.
+/// turns on an LED with a brightness/duty cycle proportional to the pressure.
 /// @ingroup    midi-input-elements-leds
 using KPLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::KEY_PRESSURE>;
 
@@ -73,8 +71,8 @@ using KPLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::KEY_PRESSURE>;
 namespace Bankable {
 
 /// Generic base class for classes that listen for MIDI Note, Control Change and
-/// Key Pressure events on a single address and save their value. This version
-/// listens accross multiple banks.
+/// Key Pressure events on a single address and turn on an LED with a
+/// brightness/duty cycle proportional to the MIDI value.
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
@@ -140,21 +138,21 @@ class NoteCCKPLEDPWM : public NoteCCKPValue<Type, BankSize> {
 };
 
 /// Class that listens for MIDI Note events on a single address and
-/// turns on an LED when the value is higher than a threshold.
+/// turns on an LED with a brightness/duty cycle proportional to the velocity.
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize>
 using NoteLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::NOTE_ON, BankSize>;
 
 /// Class that listens for MIDI Control Change events on a single address and
-/// turns on an LED when the value is higher than a threshold.
+/// turns on an LED with a brightness/duty cycle proportional to the value.
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize>
 using CCLEDPWM = NoteCCKPLEDPWM<MIDIMessageType::CONTROL_CHANGE, BankSize>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
-/// turns on an LED when the value is higher than a threshold.
+/// turns on an LED with a brightness/duty cycle proportional to the pressure.
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize>

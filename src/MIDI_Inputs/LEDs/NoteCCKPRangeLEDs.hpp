@@ -8,7 +8,7 @@ BEGIN_CS_NAMESPACE
 // -------------------------------------------------------------------------- //
 
 /// Generic base class for classes that listen for MIDI Note, Control Change and
-/// Key Pressure events on a range of addresses and turns on the corresponding
+/// Key Pressure events on a range of addresses and turn on the corresponding
 /// LED when the value is higher than a threshold.
 ///
 /// @tparam Type
@@ -25,8 +25,6 @@ class NoteCCKPRangeLEDs
     using Matcher = TwoByteRangeMIDIMatcher;
     using Parent = MatchingMIDIInputElement<Type, Matcher>;
 
-    /// Constructor.
-    ///
     /// @param  ledPins
     ///         The output pins with the LEDs connected.
     /// @param  address
@@ -67,7 +65,7 @@ class NoteCCKPRangeLEDs
 };
 
 /// Class that listens for MIDI Note events on a range of addresses and turns
-/// on the corresponding LED when the value is higher than a threshold.
+/// on the corresponding LED when the velocity is higher than a threshold.
 /// @ingroup    midi-input-elements-leds
 template <uint8_t RangeLen>
 using NoteRangeLEDs = NoteCCKPRangeLEDs<MIDIMessageType::NOTE_ON, RangeLen>;
@@ -79,7 +77,7 @@ template <uint8_t RangeLen>
 using CCRangeLEDs = NoteCCKPRangeLEDs<MIDIMessageType::CONTROL_CHANGE, RangeLen>;
 
 /// Class that listens for MIDI Key Pressure events on a range of addresses and
-/// turns on the corresponding LED when the value is higher than a threshold.
+/// turns on the corresponding LED when the pressure is higher than a threshold.
 /// @ingroup    midi-input-elements-leds
 template <uint8_t RangeLen>
 using KPRangeLEDs = NoteCCKPRangeLEDs<MIDIMessageType::KEY_PRESSURE, RangeLen>;
@@ -89,8 +87,9 @@ using KPRangeLEDs = NoteCCKPRangeLEDs<MIDIMessageType::KEY_PRESSURE, RangeLen>;
 namespace Bankable {
 
 /// Generic base class for classes that listen for MIDI Note, Control Change and
-/// Key Pressure events on a range of addresses and save their values. This
-/// version listens accross multiple banks.
+/// Key Pressure events on a range of addresses and turn on the corresponding
+/// LED when the value is higher than a threshold.
+/// This version listens accross multiple banks.
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
@@ -107,8 +106,6 @@ class NoteCCKPRangeLEDs : public NoteCCKPRange<Type, BankSize, RangeLen> {
     using Parent = NoteCCKPRange<Type, BankSize, RangeLen>;
     using Matcher = typename Parent::Matcher;
 
-    /// Constructor.
-    ///
     /// @param  config
     ///         The bank configuration to use.
     /// @param  ledPins
@@ -169,7 +166,7 @@ class NoteCCKPRangeLEDs : public NoteCCKPRange<Type, BankSize, RangeLen> {
 };
 
 /// Class that listens for MIDI Note events on a single address and
-/// turns on an LED when the value is higher than a threshold.
+/// turns on the corresponding LED when the velocity is higher than a threshold.
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t RangeLen>
@@ -177,7 +174,7 @@ using NoteRangeLEDs =
     NoteCCKPRangeLEDs<MIDIMessageType::NOTE_ON, BankSize, RangeLen>;
 
 /// Class that listens for MIDI Control Change events on a single address and
-/// turns on an LED when the value is higher than a threshold.
+/// turns on the corresponding LED when the value is higher than a threshold.
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t RangeLen>
@@ -185,7 +182,7 @@ using CCRangeLEDs =
     NoteCCKPRangeLEDs<MIDIMessageType::CONTROL_CHANGE, BankSize, RangeLen>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
-/// turns on an LED when the value is higher than a threshold.
+/// turns on the corresponding LED when the pressure is higher than a threshold.
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t RangeLen>

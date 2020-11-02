@@ -16,6 +16,11 @@ BEGIN_CS_NAMESPACE
  * @brief   A class for objects that listen for incoming MIDI events.
  * 
  * They can either update some kind of display, or they can just save the state.
+ * 
+ * @todo    Get rid of thread-safe updatable. All MIDI messages have been 
+ *          synchronized, so they can only arrive from the main thread.
+ *          Keeping thread-safe data structures wastes resources and is just
+ *          more complicated than necessary.
  */
 template <MIDIMessageType Type>
 class MIDIInputElement
@@ -76,6 +81,19 @@ class MIDIInputElement
 
 // -------------------------------------------------------------------------- //
 
+/// The @ref MIDIInputElement base class is very general: you give it a MIDI 
+/// message, and it calls the `updateWith()` method with that message. Each
+/// instance must then determine whether the message is meant for them or not.
+/// This is often a very repetitive task, so that logic is best isolated in a 
+/// so-called “Matcher”. The Matcher looks at the MIDI message, checks if it
+/// matches its MIDI address, for example, and if so, it extracts some data 
+/// (such as the MIDI velocity value from the message). Then it returns whether
+/// it matched and the extra data as a “Matcher::Result” object. If the message 
+/// matched, that Result object is passed to the 
+/// @ref MatchingMIDIInputElement::handleUpdate() method, so it can be handled 
+/// there.
+///
+/// @todo   Pass the MIDI message to the @ref handleUpdate() method.
 template <MIDIMessageType Type, class Matcher>
 class MatchingMIDIInputElement : public MIDIInputElement<Type> {
   protected:
@@ -99,6 +117,8 @@ class MatchingMIDIInputElement : public MIDIInputElement<Type> {
 
 // -------------------------------------------------------------------------- //
 
+/// Similar to @ref MatchingMIDIInputElement, but for Bankable MIDI Input 
+/// Elements.
 template <MIDIMessageType Type, class Matcher>
 class BankableMatchingMIDIInputElement
     : public MatchingMIDIInputElement<Type, Matcher>,
@@ -124,12 +144,19 @@ class BankableMatchingMIDIInputElement
 
 // -------------------------------------------------------------------------- //
 
+/// MIDI Input Element that listens for MIDI Note On/Off messages.
 using MIDIInputElementNote = MIDIInputElement<MIDIMessageType::NOTE_ON>;
+/// MIDI Input Element that listens for MIDI Key Pressure messages.
 using MIDIInputElementKP = MIDIInputElement<MIDIMessageType::KEY_PRESSURE>;
+/// MIDI Input Element that listens for MIDI Control Change messages.
 using MIDIInputElementCC = MIDIInputElement<MIDIMessageType::CONTROL_CHANGE>;
+/// MIDI Input Element that listens for MIDI Program Change messages.
 using MIDIInputElementPC = MIDIInputElement<MIDIMessageType::PROGRAM_CHANGE>;
+/// MIDI Input Element that listens for MIDI Channel Pressure messages.
 using MIDIInputElementCP = MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>;
+/// MIDI Input Element that listens for MIDI Pitch Bend messages.
 using MIDIInputElementPB = MIDIInputElement<MIDIMessageType::PITCH_BEND>;
+/// MIDI Input Element that listens for MIDI System Exclusive messages.
 using MIDIInputElementSysEx = MIDIInputElement<MIDIMessageType::SYSEX_START>;
 
 END_CS_NAMESPACE

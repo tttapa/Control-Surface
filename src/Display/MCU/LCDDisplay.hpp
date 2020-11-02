@@ -36,9 +36,9 @@ class LCDDisplay : public DisplayElement {
      * @param   color 
      *          The color of the text to draw.
      */
-    LCDDisplay(DisplayInterface &display, MCU::LCD<> &lcd,
-               const OutputBank &bank, uint8_t track, PixelLocation loc,
-               uint8_t textSize, uint16_t color)
+    LCDDisplay(DisplayInterface &display, LCD<> &lcd, const OutputBank &bank,
+               uint8_t track, PixelLocation loc, uint8_t textSize,
+               uint16_t color)
         : DisplayElement(display), lcd(lcd), bank(&bank), track(track - 1),
           line(1), x(loc.x), y(loc.y), size(textSize), color(color) {}
 
@@ -59,10 +59,10 @@ class LCDDisplay : public DisplayElement {
      * @param   color 
      *          The color of the text to draw.
      */
-    LCDDisplay(DisplayInterface &display, MCU::LCD<> &lcd, uint8_t track,
+    LCDDisplay(DisplayInterface &display, LCD<> &lcd, uint8_t track,
                PixelLocation loc, uint8_t textSize, uint16_t color)
-        : DisplayElement(display), lcd(lcd), track(track - 1),
-          line(1), x(loc.x), y(loc.y), size(textSize), color(color) {}
+        : DisplayElement(display), lcd(lcd), track(track - 1), line(1),
+          x(loc.x), y(loc.y), size(textSize), color(color) {}
 
     /**
      * @brief   Constructor.
@@ -83,22 +83,22 @@ class LCDDisplay : public DisplayElement {
      * @param   color 
      *          The color of the text to draw.
      */
-    LCDDisplay(DisplayInterface &display, MCU::LCD<> &lcd, uint8_t track,
-               uint8_t line, PixelLocation loc, uint8_t textSize, 
+    LCDDisplay(DisplayInterface &display, LCD<> &lcd, uint8_t track,
+               uint8_t line, PixelLocation loc, uint8_t textSize,
                uint16_t color)
-        : DisplayElement(display), lcd(lcd), track(track - 1),
-          line(line - 1), x(loc.x), y(loc.y), size(textSize), color(color) {}
+        : DisplayElement(display), lcd(lcd), track(track - 1), line(line - 1),
+          x(loc.x), y(loc.y), size(textSize), color(color) {}
 
     void draw() override {
         // If it's a message across all tracks, don't display anything.
         if (!separateTracks())
             return;
-        
+
         // Determine the track and line to display
         uint8_t offset = bank ? bank->getOffset() + track : track;
         if (offset > 7)
             ERROR(F("Track number out of bounds (") << offset << ')', 0xBA41);
-        if (line > 1) 
+        if (line > 1)
             ERROR(F("Line number out of bounds (") << line << ')', 0xBA42);
 
         // Extract the six-character substring for this track.
@@ -148,7 +148,7 @@ class LCDDisplay : public DisplayElement {
     void setLine(uint8_t line) { this->line = line - 1; }
 
   private:
-    MCU::LCD<> &lcd;
+    LCD<> &lcd;
     const OutputBank *bank = nullptr;
     uint8_t track;
     uint8_t line;

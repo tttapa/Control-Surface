@@ -100,13 +100,13 @@ class IVU {
 
     /// @}
 
-    /** Return the VU meter value as an integer. */
+    /// Return the VU meter value as an integer.
     virtual uint8_t getValue() = 0;
-    /** Return the overload status. */
+    /// Return the overload status.
     virtual bool getOverload() = 0;
-    /** Get the VU meter value as a floating point number. */
+    /// Get the VU meter value as a floating point number.
     virtual float getFloatValue() { return (float)getValue() / getMax(); }
-    /** Get the maximum value that this VU meter can return. */
+    /// Get the maximum value that this VU meter can return.
     uint8_t getMax() const { return max; }
 
   protected:

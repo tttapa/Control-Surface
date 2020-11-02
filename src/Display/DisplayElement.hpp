@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Display/DisplayInterface.hpp>
 #include <AH/Containers/LinkedList.hpp>
+#include <Display/DisplayInterface.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -10,16 +10,15 @@ BEGIN_CS_NAMESPACE
  */
 class DisplayElement : public DoublyLinkable<DisplayElement> {
   protected:
-    /**
-     * @brief   Create a new DisplayElement.
-     * 
-     * @param   display
-     *          The display that this display element draws to.
-     */
+    /// @brief  Create a new DisplayElement.
+    ///
+    /// @param  display
+    ///         The display that this display element draws to.
     DisplayElement(DisplayInterface &display) : display(display) {
         // The elements are sorted by the address of their displays.
         // This way, all display elements that draw to the same display are next
-        // to each other. This means that the display buffer can be reused.
+        // to each other. This means that the display buffer can be reused, and
+        // makes it easier to iterate over the displays and draw to them.
         elements.insertSorted(
             this, [](const DisplayElement &lhs, const DisplayElement &rhs) {
                 return &lhs.getDisplay() < &rhs.getDisplay();
@@ -32,7 +31,7 @@ class DisplayElement : public DoublyLinkable<DisplayElement> {
     /// Draw this DisplayElement to the display buffer.
     virtual void draw() = 0;
 
-    /// Check if this DisplayElement has to be redrawn.
+    /// Check if this DisplayElement has to be re-drawn.
     virtual bool getDirty() const = 0;
 
     /// Get a reference to the display that this element draws to.
