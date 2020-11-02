@@ -1,5 +1,6 @@
 #pragma once
 
+#include <AH/STL/utility> // std::forward
 #include <Display/DisplayElement.hpp>
 #include <Display/DisplayInterface.hpp>
 #include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
@@ -9,15 +10,15 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
-template <class VPot_t = Interfaces::MCU::IVPot>
+template <class VPot_t = Interfaces::MCU::IVPot &>
 class VPotDisplay : public DisplayElement {
 
   public:
-    VPotDisplay(DisplayInterface &display, VPot_t &vpot, PixelLocation loc,
+    VPotDisplay(DisplayInterface &display, VPot_t &&vpot, PixelLocation loc,
                 uint16_t radius, uint16_t innerRadius, uint16_t color)
-        : DisplayElement(display), vpot(vpot), x(loc.x + radius),
-          y(loc.y + radius), radius(radius), innerRadius(innerRadius),
-          color(color) {}
+        : DisplayElement(display), vpot(std::forward<VPot_t>(vpot)),
+          x(loc.x + radius), y(loc.y + radius), radius(radius),
+          innerRadius(innerRadius), color(color) {}
 
     void draw() override {
         display.drawCircle(x, y, radius, color);
@@ -38,7 +39,7 @@ class VPotDisplay : public DisplayElement {
     float getAngleSpacing() const { return this->angleSpacing; }
 
   private:
-    VPot_t &vpot;
+    VPot_t vpot;
 
     int16_t x, y;
     uint16_t radius, innerRadius, color;

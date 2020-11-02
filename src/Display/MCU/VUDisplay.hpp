@@ -1,5 +1,6 @@
 #pragma once
 
+#include <AH/STL/utility> // std::forward
 #include <Display/DisplayElement.hpp>
 #include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
 #include <Settings/SettingsWrapper.hpp>
@@ -8,15 +9,15 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
-template <class VU_t = Interfaces::MCU::IVU>
+template <class VU_t = Interfaces::MCU::IVU &>
 class VUDisplay : public DisplayElement {
   public:
-    VUDisplay(DisplayInterface &display, VU_t &vu, PixelLocation loc,
+    VUDisplay(DisplayInterface &display, VU_t &&vu, PixelLocation loc,
               uint16_t width, uint8_t blockheight, uint8_t spacing,
               uint16_t color)
-        : DisplayElement(display), vu(vu), x(loc.x), y(loc.y - blockheight + 1),
-          width(width), blockheight(blockheight), spacing(spacing),
-          color(color),
+        : DisplayElement(display), vu(std::forward<VU_t>(vu)), x(loc.x),
+          y(loc.y - blockheight + 1), width(width), blockheight(blockheight),
+          spacing(spacing), color(color),
           decayTime(VU_PEAK_SMOOTH_DECAY
                         ? VU_PEAK_DECAY_TIME / (blockheight + spacing)
                         : VU_PEAK_DECAY_TIME) {}
@@ -78,7 +79,7 @@ class VUDisplay : public DisplayElement {
                (millis() - previousDecay > decayTime);
     }
 
-    VU_t &vu;
+    VU_t vu;
 
     int16_t x;
     int16_t y;
