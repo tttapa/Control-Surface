@@ -608,8 +608,8 @@ Array<decltype(-T{}), N> operator-(const Array<T, N> &a) {
 // Type aliases ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 /// An easy alias for two-dimensional Arrays.
-template <class T, size_t nb_rows, size_t nb_cols>
-using Array2D = Array<Array<T, nb_cols>, nb_rows>;
+template <class T, size_t NumRows, size_t NumCols>
+using Array2D = Array<Array<T, NumCols>, NumRows>;
 
 /// @}
 
