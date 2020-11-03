@@ -56,6 +56,14 @@ class ButtonMatrix {
      */
     bool getPrevState(uint8_t col, uint8_t row);
 
+    /// Configure the debounce time interval. Only one button can change in each
+    /// debounce interval. Time in milliseconds.
+    void setDebounceTime(unsigned long debounceTime) {
+        this->debounceTime = debounceTime;
+    }
+    /// Get the debounce time.
+    unsigned long getDebounceTime() const { return debounceTime; }
+
   protected:
     /**
      * @brief   The callback function that is called whenever a button changes
@@ -70,7 +78,7 @@ class ButtonMatrix {
      */
     void onButtonChanged(uint8_t row, uint8_t col, bool state) = delete;
 
-private:
+  private:
     static inline uint8_t positionToBits(uint8_t col, uint8_t row);
     static inline uint8_t bitsToIndex(uint8_t bits);
     static inline uint8_t bitsToBitmask(uint8_t bits);
