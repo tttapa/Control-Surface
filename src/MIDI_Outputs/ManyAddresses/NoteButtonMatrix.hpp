@@ -22,17 +22,17 @@ namespace ManyAddresses {
  *          
  * @tparam  NumBanks
  *          The number of variants/alternative addresses the element has.
- * @tparam  nb_rows
+ * @tparam  NumRows
  *          The number of rows of the matrix.
- * @tparam  nb_cols
+ * @tparam  NumCols
  *          The number of columns of the matrix.
  * 
  * @ingroup ManyAddressesMIDIOutputElements
  */
-template <setting_t NumBanks, uint8_t nb_rows, uint8_t nb_cols>
+template <setting_t NumBanks, uint8_t NumRows, uint8_t NumCols>
 class NoteButtonMatrix
-    : public MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, nb_rows, nb_cols>,
-                              DigitalNoteSender, nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, NumRows, NumCols>,
+                              DigitalNoteSender, NumRows, NumCols> {
   public:
     /**
      * @brief   Create a new Bankable NoteButtonMatrix object with the given 
@@ -60,13 +60,13 @@ class NoteButtonMatrix
      *          The velocity of the MIDI Note events.
      */
     NoteButtonMatrix(
-        const Bank<NumBanks> &bank, const PinList<nb_rows> &rowPins,
-        const PinList<nb_cols> &colPins,
-        const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &notes,
+        const Bank<NumBanks> &bank, const PinList<NumRows> &rowPins,
+        const PinList<NumCols> &colPins,
+        const Array<AddressMatrix<NumRows, NumCols>, NumBanks> &notes,
         const Array<MIDIChannelCable, NumBanks> &channelCNs,
         uint8_t velocity = 0x7F)
-        : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, nb_rows, nb_cols>,
-                           DigitalNoteSender, nb_rows, nb_cols>{
+        : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, NumRows, NumCols>,
+                           DigitalNoteSender, NumRows, NumCols>{
               {bank, notes, channelCNs},
               rowPins,
               colPins,

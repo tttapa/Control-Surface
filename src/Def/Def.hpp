@@ -23,8 +23,8 @@ using AH::Array;
 using AH::Array2D;
 
 /// @todo   This should be an array of type MIDIAddress.
-template <uint8_t nb_rows, uint8_t nb_cols>
-using AddressMatrix = Array2D<uint8_t, nb_rows, nb_cols>;
+template <uint8_t NumRows, uint8_t NumCols>
+using AddressMatrix = Array2D<uint8_t, NumRows, NumCols>;
 
 /// A struct for the pins of a rotary (quadrature) encoder with a switch.
 struct EncoderSwitchPinList {

@@ -18,17 +18,17 @@ namespace Bankable {
  * Crude software debouncing is implemented by limiting the refresh rate.  
  * This version can be banked.
  *
- * @tparam  nb_rows
+ * @tparam  NumRows
  *          The number of rows of the matrix.
- * @tparam  nb_cols
+ * @tparam  NumCols
  *          The number of columns of the matrix.
  *
  * @ingroup BankableMIDIOutputElements
  */
-template <uint8_t nb_rows, uint8_t nb_cols>
+template <uint8_t NumRows, uint8_t NumCols>
 class CCButtonMatrix
-    : public MIDIButtonMatrix<MatrixAddress<nb_rows, nb_cols>, DigitalCCSender,
-                              nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<MatrixAddress<NumRows, NumCols>, DigitalCCSender,
+                              NumRows, NumCols> {
   public:
     /**
      * @brief   Create a new Bankable CCButtonMatrix object with the given pins,
@@ -56,12 +56,12 @@ class CCButtonMatrix
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButtonMatrix(OutputBankConfig<> config, const PinList<nb_rows> &rowPins,
-                   const PinList<nb_cols> &colPins,
-                   const AddressMatrix<nb_rows, nb_cols> &controllers,
+    CCButtonMatrix(OutputBankConfig<> config, const PinList<NumRows> &rowPins,
+                   const PinList<NumCols> &colPins,
+                   const AddressMatrix<NumRows, NumCols> &controllers,
                    MIDIChannelCable channelCN, const DigitalCCSender &sender = {})
-        : MIDIButtonMatrix<MatrixAddress<nb_rows, nb_cols>, DigitalCCSender,
-                           nb_rows, nb_cols>{
+        : MIDIButtonMatrix<MatrixAddress<NumRows, NumCols>, DigitalCCSender,
+                           NumRows, NumCols>{
               {config, controllers, channelCN}, rowPins, colPins, sender} {}
 };
 

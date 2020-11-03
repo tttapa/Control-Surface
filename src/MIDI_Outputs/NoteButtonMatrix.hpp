@@ -17,14 +17,14 @@ BEGIN_CS_NAMESPACE
  *
  * @ingroup MIDIOutputElements
  * 
- * @tparam  nb_rows
+ * @tparam  NumRows
  *          The number of rows of the matrix.
- * @tparam  nb_cols
+ * @tparam  NumCols
  *          The number of columns of the matrix.
  */
-template <uint8_t nb_rows, uint8_t nb_cols>
+template <uint8_t NumRows, uint8_t NumCols>
 class NoteButtonMatrix
-    : public MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<DigitalNoteSender, NumRows, NumCols> {
   public:
     /**
      * @brief   Create a new NoteButtonMatrix object with the given pins,
@@ -47,12 +47,12 @@ class NoteButtonMatrix
      * @param   velocity
      *          The velocity of the MIDI Note events.
      */
-    NoteButtonMatrix(const PinList<nb_rows> &rowPins,
-                     const PinList<nb_cols> &colPins,
-                     const AddressMatrix<nb_rows, nb_cols> &notes,
+    NoteButtonMatrix(const PinList<NumRows> &rowPins,
+                     const PinList<NumCols> &colPins,
+                     const AddressMatrix<NumRows, NumCols> &notes,
                      MIDIChannelCable channelCN = {CHANNEL_1, CABLE_1},
                      uint8_t velocity = 0x7F)
-        : MIDIButtonMatrix<DigitalNoteSender, nb_rows, nb_cols>{
+        : MIDIButtonMatrix<DigitalNoteSender, NumRows, NumCols>{
               rowPins, colPins, notes, channelCN, {velocity},
           } {}
 

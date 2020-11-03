@@ -18,17 +18,17 @@ namespace Bankable {
  * Crude software debouncing is implemented by limiting the refresh rate.  
  * This version can be banked.  
  * 
- * @tparam  nb_rows
+ * @tparam  NumRows
  *          The number of rows of the matrix.
- * @tparam  nb_cols
+ * @tparam  NumCols
  *          The number of columns of the matrix.
  *
  * @ingroup BankableMIDIOutputElements
  */
-template <uint8_t nb_rows, uint8_t nb_cols>
+template <uint8_t NumRows, uint8_t NumCols>
 class NoteButtonMatrix
-    : public MIDIButtonMatrix<MatrixAddress<nb_rows, nb_cols>,
-                              DigitalNoteSender, nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<MatrixAddress<NumRows, NumCols>,
+                              DigitalNoteSender, NumRows, NumCols> {
   public:
     /**
      * @brief   Create a new Bankable NoteButtonMatrix object with the given 
@@ -55,13 +55,13 @@ class NoteButtonMatrix
      * @param   velocity
      *          The velocity of the MIDI Note events.
      */
-    NoteButtonMatrix(OutputBankConfig<> config, const PinList<nb_rows> &rowPins,
-                     const PinList<nb_cols> &colPins,
-                     const AddressMatrix<nb_rows, nb_cols> &notes,
+    NoteButtonMatrix(OutputBankConfig<> config, const PinList<NumRows> &rowPins,
+                     const PinList<NumCols> &colPins,
+                     const AddressMatrix<NumRows, NumCols> &notes,
                      MIDIChannelCable channelCN = {CHANNEL_1, CABLE_1},
                      uint8_t velocity = 0x7F)
-        : MIDIButtonMatrix<MatrixAddress<nb_rows, nb_cols>, DigitalNoteSender,
-                           nb_rows, nb_cols>{
+        : MIDIButtonMatrix<MatrixAddress<NumRows, NumCols>, DigitalNoteSender,
+                           NumRows, NumCols>{
               {config, notes, channelCN},
               rowPins,
               colPins,

@@ -23,17 +23,17 @@ namespace ManyAddresses {
  *          
  * @tparam  NumBanks
  *          The number of variants/alternative addresses the element has.
- * @tparam  nb_rows
+ * @tparam  NumRows
  *          The number of rows of the matrix.
- * @tparam  nb_cols
+ * @tparam  NumCols
  *          The number of columns of the matrix.
  * 
  * @ingroup ManyAddressesMIDIOutputElements
  */
-template <setting_t NumBanks, uint8_t nb_rows, uint8_t nb_cols>
+template <setting_t NumBanks, uint8_t NumRows, uint8_t NumCols>
 class CCButtonMatrix
-    : public MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, nb_rows, nb_cols>,
-                              DigitalCCSender, nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, NumRows, NumCols>,
+                              DigitalCCSender, NumRows, NumCols> {
   public:
     /**
      * @brief   Create a new Bankable CCButtonMatrix object with the given pins,
@@ -62,13 +62,13 @@ class CCButtonMatrix
      *          The MIDI sender to use.
      */
     CCButtonMatrix(
-        const Bank<NumBanks> &bank, const PinList<nb_rows> &rowPins,
-        const PinList<nb_cols> &colPins,
-        const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &controllers,
+        const Bank<NumBanks> &bank, const PinList<NumRows> &rowPins,
+        const PinList<NumCols> &colPins,
+        const Array<AddressMatrix<NumRows, NumCols>, NumBanks> &controllers,
         const Array<MIDIChannelCable, NumBanks> &channelCNs,
         const DigitalCCSender &sender = {})
-        : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, nb_rows, nb_cols>,
-                           DigitalCCSender, nb_rows, nb_cols>{
+        : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, NumRows, NumCols>,
+                           DigitalCCSender, NumRows, NumCols>{
               {bank, controllers, channelCNs}, rowPins, colPins, sender} {}
 };
 
