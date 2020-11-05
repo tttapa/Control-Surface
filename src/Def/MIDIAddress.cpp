@@ -10,7 +10,7 @@ RelativeMIDIAddress &RelativeMIDIAddress::operator+=(RelativeMIDIAddress that) {
     return *this;
 }
 
-MIDIAddress &MIDIAddress::operator+=(const RelativeMIDIAddress &rhs) {
+MIDIAddress &MIDIAddress::operator+=(RelativeMIDIAddress rhs) {
     this->addresses.valid &= rhs.addresses.valid;
     this->addresses.address += rhs.addresses.address;
     this->addresses.channel += rhs.addresses.channel;
@@ -18,7 +18,7 @@ MIDIAddress &MIDIAddress::operator+=(const RelativeMIDIAddress &rhs) {
     return *this;
 }
 
-MIDIAddress &MIDIAddress::operator-=(const RelativeMIDIAddress &rhs) {
+MIDIAddress &MIDIAddress::operator-=(RelativeMIDIAddress rhs) {
     this->addresses.valid &= rhs.addresses.valid;
     this->addresses.address -= rhs.addresses.address;
     this->addresses.channel -= rhs.addresses.channel;
@@ -26,13 +26,13 @@ MIDIAddress &MIDIAddress::operator-=(const RelativeMIDIAddress &rhs) {
     return *this;
 }
 
-MIDIAddress MIDIAddress::operator+(const RelativeMIDIAddress &rhs) const {
+MIDIAddress MIDIAddress::operator+(RelativeMIDIAddress rhs) const {
     MIDIAddress copy = *this;
     copy += rhs;
     return copy;
 }
 
-MIDIAddress MIDIAddress::operator-(const RelativeMIDIAddress &rhs) const {
+MIDIAddress MIDIAddress::operator-(RelativeMIDIAddress rhs) const {
     MIDIAddress copy = *this;
     copy -= rhs;
     return copy;

@@ -60,7 +60,7 @@ class PBAbsoluteEncoder
      *          lower speed.
      */
     PBAbsoluteEncoder(const BankConfig<NumBanks> &config, Encoder &&encoder,
-                      const MIDIAddress &address, int16_t speedMultiply = 1,
+                      MIDIAddress address, int16_t speedMultiply = 1,
                       uint8_t pulsesPerStep = 4)
         : MIDIAbsoluteEncoder<NumBanks, SingleAddress, PitchBendSender<14>>(
               {config, address}, std::move(encoder), speedMultiply,

@@ -43,8 +43,7 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NumButtons> {
      *          The velocity of the MIDI Note events.
      */
     NoteButtons(const Array<AH::Button, NumButtons> &buttons,
-                const MIDIAddress &baseAddress,
-                const RelativeMIDIAddress &incrementAddress,
+                MIDIAddress baseAddress, RelativeMIDIAddress incrementAddress,
                 uint8_t velocity = 0x7F)
         : MIDIButtons<DigitalNoteSender, NumButtons>{
               buttons,

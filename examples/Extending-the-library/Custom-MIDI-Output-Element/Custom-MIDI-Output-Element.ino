@@ -56,7 +56,7 @@ class MyNoteButton : public MIDIOutputElement {
    * @param   velocity
    *          The MIDI note velocity [0, 127].
    */
-  MyNoteButton(pin_t pin, const MIDIAddress &address, uint8_t velocity)
+  MyNoteButton(pin_t pin, MIDIAddress address, uint8_t velocity)
     : button(pin), address(address), velocity(velocity) {}
 
  public:

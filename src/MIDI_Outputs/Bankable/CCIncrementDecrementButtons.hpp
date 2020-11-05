@@ -52,7 +52,7 @@ class CCIncrementDecrementButtons
     CCIncrementDecrementButtons(OutputBankConfig<> config,
                                 AH::IncrementDecrementButtons buttons,
                                 MIDIAddress address, uint8_t multiplier = 1,
-                                MIDIAddress resetNote = {},
+                                MIDIAddress resetNote = MIDIAddress::invalid(),
                                 const RelativeCCSender &relativeSender = {},
                                 const DigitalNoteSender &resetSender = {})
         : MIDIIncrementDecrementButtons<DualAddresses, RelativeCCSender,

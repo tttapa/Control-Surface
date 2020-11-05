@@ -64,7 +64,7 @@ class MIDIChannelCable {
     /// valid addresses and the MIDI channel and MIDI USB cable number are
     /// equal.
     /// @note   Invalid addresses are not equal nor inequal.
-    constexpr bool operator==(const MIDIChannelCable &rhs) const {
+    constexpr bool operator==(MIDIChannelCable rhs) const {
         return this->addresses.valid && rhs.addresses.valid &&
                this->addresses.channel == rhs.addresses.channel &&
                this->addresses.cableNumber == rhs.addresses.cableNumber;
@@ -74,7 +74,7 @@ class MIDIChannelCable {
     /// are both valid addresses and have a MIDI channel or MIDI USB cable
     /// number that differs.
     /// @note   Invalid addresses are not equal nor inequal.
-    constexpr bool operator!=(const MIDIChannelCable &rhs) const {
+    constexpr bool operator!=(MIDIChannelCable rhs) const {
         return this->addresses.valid && rhs.addresses.valid &&
                !(this->addresses.channel == rhs.addresses.channel &&
                  this->addresses.cableNumber == rhs.addresses.cableNumber);
@@ -94,8 +94,7 @@ class MIDIChannelCable {
     /// @{
 
     /// Check if two addresses match (are equal).
-    static bool matchSingle(const MIDIChannelCable &toMatch,
-                            const MIDIChannelCable &base) {
+    static bool matchSingle(MIDIChannelCable toMatch, MIDIChannelCable base) {
         return base == toMatch;
     }
 
@@ -240,7 +239,7 @@ class MIDIAddress {
      * @param   address 
      *          The MIDI Channel and the MIDI USB cable number.  
      */
-    constexpr MIDIAddress(const MIDIChannelCable &address)
+    constexpr MIDIAddress(MIDIChannelCable address)
         : addresses(address.addresses) {}
 
     /// Return an invalid address.
@@ -253,16 +252,16 @@ class MIDIAddress {
     /// @{
 
     /// Add a relative offset to this address.
-    MIDIAddress &operator+=(const RelativeMIDIAddress &rhs);
+    MIDIAddress &operator+=(RelativeMIDIAddress rhs);
 
     /// Subtract a relative offset from this address.
-    MIDIAddress &operator-=(const RelativeMIDIAddress &rhs);
+    MIDIAddress &operator-=(RelativeMIDIAddress rhs);
 
     /// Add a relative offset.
-    MIDIAddress operator+(const RelativeMIDIAddress &rhs) const;
+    MIDIAddress operator+(RelativeMIDIAddress rhs) const;
 
     /// Subtract a relative offset.
-    MIDIAddress operator-(const RelativeMIDIAddress &rhs) const;
+    MIDIAddress operator-(RelativeMIDIAddress rhs) const;
 
     /// @}
 
@@ -297,7 +296,7 @@ class MIDIAddress {
     /// valid addresses and the MIDI address, MIDI channel and MIDI USB cable
     /// number are equal.
     /// @note   Invalid addresses are not equal nor inequal.
-    constexpr bool operator==(const MIDIAddress &rhs) const {
+    constexpr bool operator==(MIDIAddress rhs) const {
         return this->addresses.valid && rhs.addresses.valid &&
                this->addresses.address == rhs.addresses.address &&
                this->addresses.channel == rhs.addresses.channel &&
@@ -308,7 +307,7 @@ class MIDIAddress {
     /// are both valid addresses and have a MIDI address, MIDI channel or MIDI
     /// USB cable number that differs.
     /// @note   Invalid addresses are not equal nor inequal.
-    constexpr bool operator!=(const MIDIAddress &rhs) const {
+    constexpr bool operator!=(MIDIAddress rhs) const {
         return this->addresses.valid && rhs.addresses.valid &&
                !(this->addresses.address == rhs.addresses.address &&
                  this->addresses.channel == rhs.addresses.channel &&
@@ -329,8 +328,7 @@ class MIDIAddress {
     /// @{
 
     /// Check if two addresses match (are equal).
-    static bool matchSingle(const MIDIAddress &toMatch,
-                            const MIDIAddress &base) {
+    static bool matchSingle(MIDIAddress toMatch, MIDIAddress base) {
         return base == toMatch;
     }
 
