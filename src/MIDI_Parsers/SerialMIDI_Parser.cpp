@@ -21,7 +21,7 @@ MIDIReadEvent SerialMIDI_Parser::parse(uint8_t midiByte) {
         startSysEx();
         addSysExByte(SysExStart);
     }
-#endif
+#endif // IGNORE_SYSEX
 
     // If it's a status byte (first byte of a message)
     if (isStatus(midiByte)) {
@@ -32,11 +32,12 @@ MIDIReadEvent SerialMIDI_Parser::parse(uint8_t midiByte) {
         }
         // Normal header (channel message, system exclusive, system common)
         else {
+#if !IGNORE_SYSEX
             // If a SysEx message was being received, and now we receive
             // another status byte, remember to correctly terminate the SysEx
             // message later
             bool unterminatedSysEx = midimsg.header == SysExStart;
-
+#endif // IGNORE_SYSEX
             // Save the newly received status byte
             midimsg.header = midiByte;
             // A new message starts, so we haven't received the second byte yet
@@ -58,8 +59,6 @@ MIDIReadEvent SerialMIDI_Parser::parse(uint8_t midiByte) {
                 endSysEx();
                 return MIDIReadEvent::SYSEX_MESSAGE;
             }
-#else
-            (void)unterminatedSysEx;
 #endif // IGNORE_SYSEX
         }
     }
