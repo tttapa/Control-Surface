@@ -14,6 +14,7 @@ MIDIReadEvent USBMIDI_Parser::handleChannelMessage(MIDIUSBPacket_t packet,
 
 MIDIReadEvent USBMIDI_Parser::handleSysExStartContinue(MIDIUSBPacket_t packet,
                                                        Cable cable) {
+#if !IGNORE_SYSEX
     // If this is a SysEx start packet
     if (packet[1] == uint8_t(MIDIMessageType::SYSEX_START)) {
         startSysEx(cable); // start a new message
@@ -34,6 +35,10 @@ MIDIReadEvent USBMIDI_Parser::handleSysExStartContinue(MIDIUSBPacket_t packet,
 
     // Enough space available in buffer, store the data
     addSysExBytes(cable, &packet[1], 3);
+#else
+    (void)packet;
+    (void)cable;
+#endif
     return MIDIReadEvent::NO_MESSAGE; // SysEx is not finished yet
 }
 
@@ -47,6 +52,7 @@ MIDIReadEvent USBMIDI_Parser::handleSysExEnd1B(MIDIUSBPacket_t packet,
         return MIDIReadEvent::SYSCOMMON_MESSAGE;
     }
 
+#if !IGNORE_SYSEX
     // SysEx ends with following single byte
     else {
         // If we haven't received a SysExStart
@@ -67,6 +73,11 @@ MIDIReadEvent USBMIDI_Parser::handleSysExEnd1B(MIDIUSBPacket_t packet,
         endSysEx(cable);
         return MIDIReadEvent::SYSEX_MESSAGE;
     }
+#else
+    (void)packet;
+    (void)cable;
+    return MIDIReadEvent::NO_MESSAGE;
+#endif
 }
 
 template <uint8_t NumBytes>
@@ -75,6 +86,7 @@ MIDIReadEvent USBMIDI_Parser::handleSysExEnd(MIDIUSBPacket_t packet,
     static_assert(NumBytes == 2 || NumBytes == 3,
                   "Only 2- or 3-byte SysEx packets are supported");
 
+#if !IGNORE_SYSEX
     // This could be the a very short SysEx message that starts and ends with
     // this packet
     if (packet[1] == uint8_t(MIDIMessageType::SYSEX_START)) {
@@ -98,6 +110,11 @@ MIDIReadEvent USBMIDI_Parser::handleSysExEnd(MIDIUSBPacket_t packet,
     addSysExBytes(cable, &packet[1], NumBytes);
     endSysEx(cable);
     return MIDIReadEvent::SYSEX_MESSAGE;
+#else
+    (void)packet;
+    (void)cable;
+    return MIDIReadEvent::NO_MESSAGE;
+#endif
 }
 
 MIDIReadEvent USBMIDI_Parser::handleSysCommon(MIDIUSBPacket_t packet,
@@ -167,6 +184,7 @@ MIDIReadEvent USBMIDI_Parser::feed(MIDIUSBPacket_t packet) {
 }
 
 MIDIReadEvent USBMIDI_Parser::resume() {
+#if !IGNORE_SYSEX
     if (!hasStoredPacket())
         return MIDIReadEvent::NO_MESSAGE;
 
@@ -179,6 +197,9 @@ MIDIReadEvent USBMIDI_Parser::resume() {
     }
 
     return feed(packet);
+#else
+    return MIDIReadEvent::NO_MESSAGE;
+#endif
 }
 
 END_CS_NAMESPACE

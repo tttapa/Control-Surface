@@ -208,6 +208,7 @@ MIDIReadEvent SerialMIDI_Parser::resume() {
 
     uint8_t midiByte = popStoredByte();
 
+#if !IGNORE_SYSEX
     // If a SysEx message was in progress
     bool receivingSysEx =
         runningHeader == uint8_t(MIDIMessageType::SYSEX_START);
@@ -216,6 +217,7 @@ MIDIReadEvent SerialMIDI_Parser::resume() {
         // Reset the buffer for the next chunk
         startSysEx();
     }
+#endif
 
     return feed(midiByte);
 }
