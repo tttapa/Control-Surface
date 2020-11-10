@@ -16,44 +16,69 @@ This library turns your Arduino-compatible board into a MIDI control surface.
 Just connect up some push buttons, potentiometers, LEDs ... and declare them in
 your code.
 
-Multiple different MIDI interfaces are supported: **MIDI over USB**, Serial MIDI 
-(e.g. **5-pin DIN MIDI**), **Debug MIDI** (prints out the messages in a readable
-format, and allows you to input text based messages), **AppleMIDI** over WiFi or
-Ethernet, **MIDI over Bluetooth LE** (experimental).
+### MIDI Interfaces
 
-For MIDI output, you can use **push buttons**, toggle switches, 
-**potentiometers**, faders, **rotary encoders**, etc.
+ - **MIDI over USB**
+ - **Serial MIDI** (e.g. 5-pin DIN MIDI)
+ - **Debug MIDI** (prints out the messages in a readable format, and allows you
+                   to input text based messages, like a MIDI monitor)
+ - **MIDI over Bluetooth LE**
+ - **AppleMIDI** over WiFi or Ethernet
 
-All digital inputs are **debounced**, and all analog inputs are filtered using 
+### MIDI Control Output
+
+ - **Push buttons** and **toggle switches**
+ - **Potentiometers**, **faders** and other analog sensors
+ - **Rotary encoders**
+ - **Scanning keyboard matrices**
+
+Digital inputs are **debounced**, and analog inputs are filtered using 
 **digital filters and hysteresis**. This results in high accuracy without noise,
 without introducing latency.
 
-These can be used to send MIDI notes, Control Changes, Pitch Bends, 
-Program/Patch changes, etc.
+These MIDI control outputs can be used to send MIDI notes, Control Change,
+Pitch Bend, Program/Patch change, etc.
 
-For MIDI input, you can use **LEDs** to display the state of different settings, 
-to display the audio level of each channel (**VU meters**), the positions of knobs 
-(V-Pot **LED rings**), etc.  
-You can also add an **OLED display** (e.g. SSD1306) to display a nice overview 
-of which channels are set to mute or solo, display the time cursor, VU meters,
-etc. Bitmaps with play, mute, solo, record buttons, and others are included.  
+### MIDI Control Input
 
-A large portion of the **Mackie Control Universal** protocol is implemented.
+ - **LEDs** (e.g. to indicate whether a track is muted/armed/soloed)
+ - **LED rings** (e.g. to indicate the position of a pan knob)
+ - **LED strips** (using the [FastLED](https://github.com/FastLED/FastLED) 
+                   library)
+ - **VU meters**
+ - **OLED displays**
+ - **7-segment displays**
 
-All controls can be arranged in **banks**: e.g. if you have only 4 physical 
-volume faders, you can add them to a bank, and then you can control 8 channels 
-(or more) by changing the bank setting.
+A large portion of the **Mackie Control Universal** (MCU) protocol is 
+implemented.
+
+### Bank support
+
+All controls can be arranged in **banks**: for example, if you have only 4 
+physical faders, you can make them bankable, so they can be used to control 
+the volume of many different tracks, by selecting the corresponding bank.
+
+Selecting a bank can be done using push buttons, rotary encoders, etc.
 
 Apart from banks and bank selectors, you can also add **transposers** to change 
 the key of your notes, for example.
 
-In order to save some IO pins, the library natively supports **Shift Registers** 
-(e.g. 74HC595) and **multiplexers** (e.g. 74HC4051 or 74HC4067).
+### Extended input/output
 
-If you are using a Teensy 3.x, you can use it as a **USB audio interface**. Just
-add an I²S DAC (e.g. PCM5102) and 5 lines of code, and you can start playing 
-audio through your Teensy.  
+In order to save some IO pins, the library natively supports **multiplexers** 
+(e.g. 74HC4051 or 74HC4067) to read many switches or potentiometers, 
+**Shift Registers** (e.g. 74HC595) to drive many LEDs, **MAX7219 LED drivers**,
+etc.
+
+### Audio
+
+If you are using a Teensy 3.x or 4.x, you can use it as a 
+**USB audio interface**. Just add an I²S DAC (e.g. PCM5102) and 5 lines of code,
+and you can start playing audio through your Teensy, by combining Control 
+Surface with the Teensy Audio library.  
 You can also add volume controls and VU meters for these audio connections.
+
+### Modular and extensible
 
 Thanks to the structure of the library, you can easily add your own MIDI or 
 display elements, using some minimal, high level code. All low level stuff is
@@ -129,13 +154,14 @@ void loop() { Control_Surface.loop(); }
 ## Getting Started
 
 See the [**Getting Started**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d5/d7d/md_pages_Getting-Started.html)
-page to get started using the library.
+page to get started using the library.  
+It'll also point you to the [**Installation Instructions**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d8/da8/md_pages_Installation.html).
 
 ## Documentation
 
 The automatically generated Doxygen documentation for this library can be found 
 here:  
-[**Documentation**](https://tttapa.github.io/Control-Surface-doc/Doxygen/index.html)  
+    [**Documentation**](https://tttapa.github.io/Control-Surface-doc/Doxygen/index.html)  
 Test coverage information can be found here:  
 [**Code Coverage**](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)  
 Arduino examples can be found here:  
@@ -152,8 +178,6 @@ page.
 ## Work in progress
 
 - Adding support for motorized faders
-- Cleaning up the display code
-- Cleaning up the MIDI over Bluetooth LE code
 - Adding more tests (currently at over 525 unit tests)
 - Adding more examples and adding comments to existing examples
 - Finishing the documentation
@@ -167,12 +191,14 @@ following boards:
 - Arduino Leonardo
 - Teensy 3.2
 - Arduino Due
+- Arduino Nano Every
 - Arduino Nano 33 IoT
 - ESP8266
 - ESP32
 
 This covers a very large part of the Arduino platform, and similar boards will
-also work (e.g. Arduino Nano, Arduino Mega, etc.).
+also work. For example, the Arduino Nano, Mega, Micro, Pro Micro, Teensy 2.0,
+Teensy LC, Teensy 3.x, Teensy 4.x are all known to work.
 
 If you have a board that's not supported, please 
 [open an issue](https://github.com/tttapa/Control-Surface/issues/new)
@@ -227,6 +253,7 @@ tests and generating documentation, a style guide, etc.
    The **mapping function** is now applied before applying hysteresis.  
    This means that the input and output values of the function should be 
    16 - `ANALOG_FILTER_SHIFT_FACTOR` bits wide instead of 7. By default this is
-   **14 bits**.  
+   **14 bits**. You can get the maximum value in a portable way by using the
+   `FilteredAnalog<>::getMaxRawValue()` function.  
    The signature of the mapping function is now `analog_t f(analog_t raw)`, 
-   where the return value and raw are both numbers in [0, 16383].
+   where the return value and raw are both numbers in [0, 16383] by default.
