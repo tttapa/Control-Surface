@@ -110,6 +110,7 @@ class USBMIDI_Interface : public MIDI_Interface {
 
   public:
     /// @name   Buffering USB packets
+    /// @{
 
     /// Check if this USB interface always sends its USB packets immediately
     /// after sending a MIDI message. The default value depends on the MIDI USB
