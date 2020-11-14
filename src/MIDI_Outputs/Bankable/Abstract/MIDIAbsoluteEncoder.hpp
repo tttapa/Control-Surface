@@ -9,7 +9,7 @@
 
 #ifdef ARDUINO
 #include <Submodules/Encoder/Encoder.h>
-#else 
+#else
 #include <Encoder.h> // Mock
 #endif
 
@@ -27,11 +27,11 @@ template <class Enc, uint8_t NumBanks, class BankAddress, class Sender>
 class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
   public:
     GenericMIDIAbsoluteEncoder(const BankAddress &address, Enc &&encoder,
-                               int16_t multiplier, uint8_t pulsesPerStep,
+                               int16_t speedMultiply, uint8_t pulsesPerStep,
                                const Sender &sender)
         : encoder(std::forward<Enc>(encoder)), address(address),
-          multiplier(multiplier), pulsesPerStep(pulsesPerStep), sender(sender) {
-    }
+          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
+          sender(sender) {}
 
     void begin() override { begin_if_possible(encoder); }
 
@@ -39,21 +39,28 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
         Enc_t encval = encoder.read();
         // If Enc_t is an unsigned type, integer overflow is well-defined, which
         // is what we want when Enc_t is small and expected to overflow.
-        // However, we need it to be signed because we're interested  in the
+        // However, we need it to be signed because we're interested in the
         // delta.
-        int16_t delta = SignedEnc_t(Enc_t(encval - deltaOffset));
-        delta = delta * multiplier / pulsesPerStep;
-        if (delta) {
+        Enc_t uDelta = encval - deltaOffset;
+        if (uDelta) {
+            int16_t delta = SignedEnc_t(uDelta);
+            // Assumption: delta and speedMultiply are relatively small, so
+            // multiplication probably won't overflow.
+            int16_t multipliedDelta = delta * speedMultiply + remainder;
+            int16_t scaledDelta = multipliedDelta / pulsesPerStep;
+            remainder = multipliedDelta % pulsesPerStep;
+
             address.lock();
             int16_t oldValue = values[address.getSelection()];
-            int16_t newValue = oldValue + delta;
+            int16_t newValue = oldValue + scaledDelta;
             newValue = constrain(newValue, 0, maxValue);
             if (oldValue != newValue) {
                 sender.send(newValue, address.getActiveAddress());
                 values[address.getSelection()] = newValue;
             }
             address.unlock();
-            deltaOffset += Enc_t(delta * pulsesPerStep / multiplier);
+
+            deltaOffset += uDelta;
         }
     }
 
@@ -78,9 +85,10 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
   private:
     Enc encoder;
     BankAddress address;
-    int16_t multiplier;
+    int16_t speedMultiply;
     uint8_t pulsesPerStep;
-    Array<uint16_t, NumBanks> values = {{}};
+    Array<int16_t, NumBanks> values = {{}};
+    int16_t remainder = 0;
     using Enc_t = decltype(encoder.read());
     using SignedEnc_t = typename std::make_signed<Enc_t>::type;
     Enc_t deltaOffset = 0;

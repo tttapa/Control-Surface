@@ -8,7 +8,7 @@
 
 #ifdef ARDUINO
 #include <Submodules/Encoder/Encoder.h>
-#else 
+#else
 #include <Encoder.h> // Mock
 #endif
 
@@ -40,13 +40,20 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
         Enc_t encval = encoder.read();
         // If Enc_t is an unsigned type, integer overflow is well-defined, which
         // is what we want when Enc_t is small and expected to overflow.
-        // However, we need it to be signed because we're interested  in the
+        // However, we need it to be signed because we're interested in the
         // delta.
-        int16_t delta = SignedEnc_t(Enc_t(encval - deltaOffset));
-        delta = delta * speedMultiply / pulsesPerStep;
-        if (delta) {
-            sender.send(delta, address);
-            deltaOffset += Enc_t(delta * pulsesPerStep / speedMultiply);
+        Enc_t uDelta = encval - deltaOffset;
+        if (uDelta) {
+            int16_t delta = SignedEnc_t(uDelta);
+            // Assumption: delta and speedMultiply are relatively small, so
+            // multiplication probably won't overflow.
+            int16_t multipliedDelta = delta * speedMultiply + remainder;
+            int16_t scaledDelta = multipliedDelta / pulsesPerStep;
+            remainder = multipliedDelta % pulsesPerStep;
+
+            if (scaledDelta)
+                sender.send(scaledDelta, address);
+            deltaOffset += uDelta;
         }
     }
 
@@ -55,6 +62,7 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
     MIDIAddress address;
     int16_t speedMultiply;
     uint8_t pulsesPerStep;
+    int16_t remainder = 0;
     using Enc_t = decltype(encoder.read());
     using SignedEnc_t = typename std::make_signed<Enc_t>::type;
     Enc_t deltaOffset = 0;
