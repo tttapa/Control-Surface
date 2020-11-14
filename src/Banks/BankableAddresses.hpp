@@ -99,7 +99,7 @@ class OutputBankableMIDIAddress : public OutputBankableMIDIAddress_Base {
      * 
      * @see     OutputBankableMIDIAddress::OutputBankableMIDIAddress(Bank<N> &, BankType)
      */
-    OutputBankableMIDIAddress(const OutputBankConfig &config)
+    OutputBankableMIDIAddress(BaseOutputBankConfig config)
         : OutputBankableMIDIAddress(config.bank, config.type) {}
 
     /** 

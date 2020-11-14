@@ -55,8 +55,7 @@ class NoteButtonMatrix
      * @param   velocity
      *          The velocity of the MIDI Note events.
      */
-    NoteButtonMatrix(const OutputBankConfig &config,
-                     const PinList<nb_rows> &rowPins,
+    NoteButtonMatrix(OutputBankConfig<> config, const PinList<nb_rows> &rowPins,
                      const PinList<nb_cols> &colPins,
                      const AddressMatrix<nb_rows, nb_cols> &notes,
                      MIDIChannelCN channelCN = {CHANNEL_1, 0},

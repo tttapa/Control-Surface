@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Arduino.h>
+#include <AH/Arduino-Wrapper.h>
 #include <stdint.h>
 #include <Settings/SettingsWrapper.hpp>
 

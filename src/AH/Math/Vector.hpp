@@ -3,13 +3,12 @@
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
-#include <AH/STL/cmath> // std::sqrt
+#include <AH/Arduino-Wrapper.h> // Print
+#include <AH/STL/cmath>         // std::sqrt
 
 #ifndef ARDUINO
 #include <iosfwd> // std::ostream
 #endif
-
-class Print;
 
 BEGIN_AH_NAMESPACE
 

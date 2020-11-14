@@ -9,7 +9,7 @@ template <uint8_t NumAddr>
 class ManyAddressBank {
  public:
   ManyAddressBank(const ManyAddresses<NumAddr> &manyaddresses,
-                  OutputBankConfig bank)
+                  BaseOutputBankConfig bank)
     : manyaddresses{manyaddresses}, bank{bank} {}
 
   void lock() { manyaddresses.lock(), bank.lock(); }
@@ -29,7 +29,7 @@ class ManyAddressBankNoteButton
   : public MIDIButton<ManyAddressBank<NumAddr>, DigitalNoteSender> {
  public:
   ManyAddressBankNoteButton(const ManyAddresses<NumAddr> &manyaddresses,
-                            OutputBankConfig bank, pin_t pin,
+                            OutputBankConfig<> bank, pin_t pin,
                             const DigitalNoteSender &sender = {})
     : MIDIButton<ManyAddressBank<NumAddr>, DigitalNoteSender>{
         {manyaddresses, bank},

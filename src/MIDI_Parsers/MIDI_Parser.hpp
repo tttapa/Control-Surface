@@ -60,7 +60,7 @@ class MIDI_Parser {
     virtual uint8_t getCN() const { return 0; };
 
   protected:
-    ChannelMessage midimsg = {};
+    ChannelMessage midimsg = {0xFF, 0x00, 0x00, 0x0};
 
   public:
     /** Check if the given byte is a MIDI header byte. */

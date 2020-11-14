@@ -9,6 +9,8 @@
 #define FLUSH
 #endif
 
+BEGIN_AH_NAMESPACE
+
 /* #define OCT 8 */
 
 uint8_t formatPrintStream = DEC;
@@ -142,20 +144,6 @@ Print &operator<<(Print &printer, bool b) {
     return printer;
 }
 
-template <class T>
-Print &printIntegral(Print &printer, T i) {
-    switch (formatPrintStream) {
-        case DEC: printer.print(i); break;
-        case HEX: printHex(printer, i); break;
-        case BIN: printBin(printer, i); break;
-        /* case OCT:
-        printOct(printer, i);  
-        break; */
-        default: break;
-    }
-    return printer;
-}
-
 Print &operator<<(Print &printer, manipulator pf) { return pf(printer); }
 
 Setbase setbase(uint8_t base) { return {base}; }
@@ -230,5 +218,22 @@ void printOct(Print &printer, T val)
 {
     ; // TODO
 } */
+
+
+template <class T>
+Print &printIntegral(Print &printer, T i) {
+    switch (formatPrintStream) {
+        case DEC: printer.print(i); break;
+        case HEX: printHex(printer, i); break;
+        case BIN: printBin(printer, i); break;
+        /* case OCT:
+        printOct(printer, i);  
+        break; */
+        default: break;
+    }
+    return printer;
+}
+
+END_AH_NAMESPACE
 
 // LCOV_EXCL_STOP

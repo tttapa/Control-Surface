@@ -4,12 +4,20 @@
 
 BEGIN_CS_NAMESPACE
 
+/**
+ * @brief   Class that sends MIDI note on and off messages.
+ * 
+ * @ingroup MIDI_Senders
+ */
 class DigitalNoteSender {
   public:
     DigitalNoteSender(uint8_t velocity = 0x7F) : velocity(velocity) {}
+    /// Send a note on message to the given address with this object's velocity
+    /// as velocity.
     void sendOn(MIDIAddress address) {
         Control_Surface.sendNoteOn(address, getVelocity());
     }
+    /// Send a note off message to the given address with 0x7F as velocity.
     void sendOff(MIDIAddress address) {
         Control_Surface.sendNoteOff(address, 0x7F);
     }

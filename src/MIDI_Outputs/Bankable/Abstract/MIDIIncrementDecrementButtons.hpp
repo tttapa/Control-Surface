@@ -23,7 +23,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
      *
      * @todo    Documentation
      */
-    MIDIIncrementDecrementButtons(const BankAddress &addresses,
+    MIDIIncrementDecrementButtons(BankAddress addresses,
                                   const AH::IncrementDecrementButtons &buttons,
                                   uint8_t multiplier,
                                   const RelativeSender &relativeSender,

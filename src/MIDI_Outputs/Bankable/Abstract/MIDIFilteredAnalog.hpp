@@ -31,7 +31,7 @@ class MIDIFilteredAnalogAddressable : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIFilteredAnalogAddressable(const BankAddress &bankAddress,
+    MIDIFilteredAnalogAddressable(BankAddress bankAddress,
                                   pin_t analogPin, const Sender &sender)
         : address{bankAddress}, filteredAnalog{analogPin}, sender(sender) {}
 
@@ -103,7 +103,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIFilteredAnalog(const BankAddress &bankAddress, pin_t analogPin,
+    MIDIFilteredAnalog(BankAddress bankAddress, pin_t analogPin,
                        const Sender &sender)
         : address(bankAddress), filteredAnalog(analogPin), sender(sender) {}
 

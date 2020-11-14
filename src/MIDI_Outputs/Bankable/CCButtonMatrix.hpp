@@ -56,8 +56,7 @@ class CCButtonMatrix
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButtonMatrix(const OutputBankConfig &config,
-                   const PinList<nb_rows> &rowPins,
+    CCButtonMatrix(OutputBankConfig<> config, const PinList<nb_rows> &rowPins,
                    const PinList<nb_cols> &colPins,
                    const AddressMatrix<nb_rows, nb_cols> &controllers,
                    MIDIChannelCN channelCN, const DigitalCCSender &sender = {})

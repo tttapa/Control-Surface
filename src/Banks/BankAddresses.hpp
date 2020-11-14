@@ -8,7 +8,7 @@ namespace Bankable {
 
 class SingleAddress : public OutputBankableMIDIAddress {
   public:
-    SingleAddress(OutputBankConfig config, MIDIAddress address)
+    SingleAddress(BaseOutputBankConfig config, MIDIAddress address)
         : OutputBankableMIDIAddress{config}, address{address} {}
 
     MIDIAddress getBaseAddress() const { return address; }
@@ -54,7 +54,7 @@ class SingleAddressMultipleBanks {
 
 class DualAddresses : public OutputBankableMIDIAddress {
   public:
-    DualAddresses(OutputBankConfig config,
+    DualAddresses(BaseOutputBankConfig config,
                   const Array<MIDIAddress, 2> &addresses)
         : OutputBankableMIDIAddress{config}, first(addresses[0]),
           second(addresses[1]) {}
@@ -76,7 +76,7 @@ class DualAddresses : public OutputBankableMIDIAddress {
 template <uint8_t nb_rows, uint8_t nb_cols>
 class MatrixAddress : public OutputBankableMIDIAddress {
   public:
-    MatrixAddress(OutputBankConfig config,
+    MatrixAddress(BaseOutputBankConfig config,
                   const AddressMatrix<nb_rows, nb_cols> &addresses,
                   MIDIChannelCN channelCN)
         : OutputBankableMIDIAddress{config}, addresses{addresses},

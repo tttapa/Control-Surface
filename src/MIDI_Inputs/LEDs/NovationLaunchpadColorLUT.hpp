@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Arduino.h>
+#include <AH/Arduino-Wrapper.h>
 
 /// Lookup table for the colors of the LEDs used by Novation Launchpad control
 /// surfaces. Indexed by velocity value [0, 0x7F], byte order BGR.
