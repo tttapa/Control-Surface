@@ -25,6 +25,8 @@ your code.
  - **MIDI over Bluetooth LE**
  - **AppleMIDI** over WiFi or Ethernet
 
+<sub>→ [_MIDI Interfaces documentation_](https://tttapa.github.io/Control-Surface-doc/Doxygen/dc/df0/group__MIDIInterfaces.html)</sub>
+
 ### MIDI Control Output
 
  - **Push buttons** and **toggle switches**
@@ -39,6 +41,8 @@ without introducing latency.
 These MIDI control outputs can be used to send MIDI notes, Control Change,
 Pitch Bend, Program/Patch change, etc.
 
+<sub>→ [_MIDI Output Elements documentation_](https://tttapa.github.io/Control-Surface-doc/Doxygen/d7/dcd/group__MIDIOutputElements.html)</sub>
+
 ### MIDI Control Input
 
  - **LEDs** (e.g. to indicate whether a track is muted/armed/soloed)
@@ -51,6 +55,8 @@ Pitch Bend, Program/Patch change, etc.
 
 A large portion of the **Mackie Control Universal** (MCU) protocol is 
 implemented.
+
+<sub>→ [_MIDI Input Elements documentation_](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/d8b/group__MIDIInputElements.html)</sub>
 
 ### Bank support
 
@@ -70,6 +76,8 @@ In order to save some IO pins, the library natively supports **multiplexers**
 **Shift Registers** (e.g. 74HC595) to drive many LEDs, **MAX7219 LED drivers**,
 etc.
 
+<sub>→ [_Extended IO documentation_](https://tttapa.github.io/Control-Surface-doc/Doxygen/db/dd3/group__AH__ExtIO.html)</sub>
+
 ### Audio
 
 If you are using a Teensy 3.x or 4.x, you can use it as a 
@@ -77,6 +85,8 @@ If you are using a Teensy 3.x or 4.x, you can use it as a
 and you can start playing audio through your Teensy, by combining Control 
 Surface with the Teensy Audio library.  
 You can also add volume controls and VU meters for these audio connections.
+
+<sub>→ [_Teensy Audio documentation_](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/d5c/group__Audio.html)</sub>
 
 ### Modular and extensible
 
@@ -151,6 +161,7 @@ NoteLED led = { LED_BUILTIN, note(C, 4) };
 void setup() { Control_Surface.begin(); }
 void loop() { Control_Surface.loop(); }
 ```
+
 ## Getting Started
 
 See the [**Getting Started**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d5/d7d/md_pages_Getting-Started.html)
