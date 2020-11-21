@@ -1,52 +1,48 @@
 #include <gmock-wrapper.h>
 
-#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <AH/Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
+#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <type_traits>
 
 using namespace ::testing;
 USING_AH_NAMESPACE;
 using namespace ExtIO;
 
-W_SUGGEST_OVERRIDE_OFF
-
 class MockExtIOElement : public ExtendedIOElement {
   public:
     MockExtIOElement(pin_t length) : ExtendedIOElement(length) {}
 
-    MOCK_METHOD2(pinMode, void(pin_t, uint8_t));
-    MOCK_METHOD2(digitalWrite, void(pin_t, uint8_t));
-    MOCK_METHOD1(digitalRead, PinStatus_t(pin_t));
-    MOCK_METHOD1(analogRead, analog_t(pin_t));
-    MOCK_METHOD2(analogWrite, void(pin_t, analog_t));
+    MOCK_METHOD(void, pinMode, (pin_t, uint8_t), (override));
+    MOCK_METHOD(void, digitalWrite, (pin_t, uint8_t), (override));
+    MOCK_METHOD(PinStatus_t, digitalRead, (pin_t), (override));
+    MOCK_METHOD(analog_t, analogRead, (pin_t), (override));
+    MOCK_METHOD(void, analogWrite, (pin_t, analog_t), (override));
 
-    MOCK_METHOD2(pinModeBuffered, void(pin_t, uint8_t));
-    MOCK_METHOD2(digitalWriteBuffered, void(pin_t, uint8_t));
-    MOCK_METHOD1(digitalReadBuffered, PinStatus_t(pin_t));
-    MOCK_METHOD1(analogReadBuffered, analog_t(pin_t));
-    MOCK_METHOD2(analogWriteBuffered, void(pin_t, analog_t));
+    MOCK_METHOD(void, pinModeBuffered, (pin_t, uint8_t), (override));
+    MOCK_METHOD(void, digitalWriteBuffered, (pin_t, uint8_t), (override));
+    MOCK_METHOD(PinStatus_t, digitalReadBuffered, (pin_t), (override));
+    MOCK_METHOD(analog_t, analogReadBuffered, (pin_t), (override));
+    MOCK_METHOD(void, analogWriteBuffered, (pin_t, analog_t), (override));
 
-    MOCK_METHOD0(begin, void());
-    MOCK_METHOD0(updateBufferedOutputs, void());
-    MOCK_METHOD0(updateBufferedInputs, void());
+    MOCK_METHOD(void, begin, (), (override));
+    MOCK_METHOD(void, updateBufferedOutputs, (), (override));
+    MOCK_METHOD(void, updateBufferedInputs, (), (override));
 };
 
 class MinimalMockExtIOElement : public ExtendedIOElement {
   public:
     MinimalMockExtIOElement(pin_t length) : ExtendedIOElement(length) {}
 
-    MOCK_METHOD2(pinModeBuffered, void(pin_t, uint8_t));
-    MOCK_METHOD2(digitalWriteBuffered, void(pin_t, uint8_t));
-    MOCK_METHOD1(digitalReadBuffered, PinStatus_t(pin_t));
-    MOCK_METHOD1(analogReadBuffered, analog_t(pin_t));
-    MOCK_METHOD2(analogWriteBuffered, void(pin_t, analog_t));
+    MOCK_METHOD(void, pinModeBuffered, (pin_t, uint8_t), (override));
+    MOCK_METHOD(void, digitalWriteBuffered, (pin_t, uint8_t), (override));
+    MOCK_METHOD(PinStatus_t, digitalReadBuffered, (pin_t), (override));
+    MOCK_METHOD(analog_t, analogReadBuffered, (pin_t), (override));
+    MOCK_METHOD(void, analogWriteBuffered, (pin_t, analog_t), (override));
 
-    MOCK_METHOD0(begin, void());
-    MOCK_METHOD0(updateBufferedOutputs, void());
-    MOCK_METHOD0(updateBufferedInputs, void());
+    MOCK_METHOD(void, begin, (), (override));
+    MOCK_METHOD(void, updateBufferedOutputs, (), (override));
+    MOCK_METHOD(void, updateBufferedInputs, (), (override));
 };
-
-W_SUGGEST_OVERRIDE_ON
 
 TEST(ExtendedInputOutput, ExtendedIOElement) {
     MockExtIOElement el_1 = {10};
@@ -323,7 +319,6 @@ TEST(ExtendedIOElement, bufferedMinimal) {
     ExtIO::analogWrite(e.pin(0), 511);
     Mock::VerifyAndClear(&e);
 }
-
 
 TEST(ExtendedIOElement, bufferedGlobal) {
     MinimalMockExtIOElement e(8);
