@@ -30,6 +30,11 @@ void analogWrite(uint8_t pin, int value) {
     ArduinoMock::getInstance().analogWrite(pin, value);
 }
 
+void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder,
+              uint8_t val) {
+    ArduinoMock::getInstance().shiftOut(dataPin, clockPin, bitOrder, val);
+}
+
 unsigned long millis() { return ArduinoMock::getInstance().millis(); }
 
 unsigned long micros() { return ArduinoMock::getInstance().micros(); }

@@ -23,8 +23,8 @@ void ShiftRegisterOutBase<N>::digitalWriteBuffered(pin_t pin, PinStatus_t val) {
 }
 
 template <uint8_t N>
-int ShiftRegisterOutBase<N>::digitalRead(pin_t pin) {
-    return buffer.get(pin);
+PinStatus_t ShiftRegisterOutBase<N>::digitalRead(pin_t pin) {
+    return buffer.get(pin) ? HIGH : LOW;
 }
 
 template <uint8_t N>

@@ -324,6 +324,22 @@ class DoublyLinkable {
     Node *next = nullptr;
     Node *previous = nullptr;
     virtual ~DoublyLinkable() = default;
+
+    DoublyLinkable() = default;
+    DoublyLinkable(const DoublyLinkable &) {
+        // Don't copy the pointers
+    }
+    DoublyLinkable &operator=(const DoublyLinkable &) {
+        // Don't copy the pointers
+        return *this;
+    }
+    DoublyLinkable(DoublyLinkable &&) {
+        // Don't swap the pointers
+    }
+    DoublyLinkable &operator=(DoublyLinkable &&) {
+        // Don't swap the pointers
+        return *this;
+    }
 };
 
 /// @}

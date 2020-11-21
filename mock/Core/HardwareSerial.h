@@ -37,9 +37,11 @@ class SerialHelper {
   public:
     MOCK_METHOD(void, begin, (unsigned long));
     MOCK_METHOD(void, end, ());
+
     MOCK_METHOD(int, available, ());
     MOCK_METHOD(int, read, ());
     MOCK_METHOD(int, peek, ());
+
     MOCK_METHOD(size_t, write, (uint8_t));
     MOCK_METHOD(size_t, write, (const uint8_t *, size_t));
 

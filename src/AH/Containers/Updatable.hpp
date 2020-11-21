@@ -63,6 +63,19 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
         updatables.append(CRTP(Derived));
     }
 
+    UpdatableCRTP(const UpdatableCRTP &)
+        __attribute__((no_sanitize("undefined"))) {
+        LockGuard lock(mutex);
+        updatables.append(CRTP(Derived));
+    }
+    UpdatableCRTP &operator=(const UpdatableCRTP &) { return *this; }
+
+    UpdatableCRTP(UpdatableCRTP &&) __attribute__((no_sanitize("undefined"))) {
+        LockGuard lock(mutex);
+        updatables.append(CRTP(Derived));
+    }
+    UpdatableCRTP &operator=(UpdatableCRTP &&) { return *this; }
+
   public:
     /// Destructor: remove the updatable from the linked list of instances.
     virtual ~UpdatableCRTP() __attribute__((no_sanitize("undefined"))) {
