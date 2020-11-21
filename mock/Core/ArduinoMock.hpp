@@ -20,6 +20,7 @@ class ArduinoMock {
     MOCK_METHOD1(analogRead, int(uint8_t));
     MOCK_METHOD1(analogReadResolution, void(uint8_t));
     MOCK_METHOD2(analogWrite, void(uint8_t, int));
+    MOCK_METHOD4(shiftOut, void(uint8_t, uint8_t, uint8_t, uint8_t));
 
     MOCK_METHOD0(millis, unsigned long());
     MOCK_METHOD0(micros, unsigned long());

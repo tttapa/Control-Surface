@@ -87,12 +87,12 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      * @param   pin
      *          The multiplexer's pin number to read from.
      */
-    int digitalRead(pin_t pin) override;
+    PinStatus_t digitalRead(pin_t pin) override;
 
     /**
      * @copydoc digitalRead
      */
-    int digitalReadBuffered(pin_t pin) override;
+    PinStatus_t digitalReadBuffered(pin_t pin) override;
 
     /**
      * @brief   Read the analog value of the given input.
@@ -199,15 +199,15 @@ void AnalogMultiplex<N>::pinModeBuffered(pin_t, PinMode_t mode) {
 }
 
 template <uint8_t N>
-int AnalogMultiplex<N>::digitalRead(pin_t pin) {
+PinStatus_t AnalogMultiplex<N>::digitalRead(pin_t pin) {
     prepareReading(pin);
-    int result = ExtIO::digitalRead(analogPin);
+    PinStatus_t result = ExtIO::digitalRead(analogPin);
     afterReading();
     return result;
 }
 
 template <uint8_t N>
-int AnalogMultiplex<N>::digitalReadBuffered(pin_t pin) {
+PinStatus_t AnalogMultiplex<N>::digitalReadBuffered(pin_t pin) {
     return AnalogMultiplex<N>::digitalRead(pin);
 }
 

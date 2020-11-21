@@ -114,17 +114,17 @@ class MAX7219 : public MAX7219_Base,
      * @retval  1
      *          The state of the output is `HIGH`.
      */
-    int digitalRead(pin_t pin) override {
+    PinStatus_t digitalRead(pin_t pin) override {
         IndexMask i = pin2index(pin);
-        return bool(buffer[i.row] & i.colmask);
+        return bool(buffer[i.row] & i.colmask) ? HIGH : LOW;
     }
 
     /**
      * @copydoc digitalRead
      */
-    int digitalReadBuffered(pin_t pin) override {
+    PinStatus_t digitalReadBuffered(pin_t pin) override {
         IndexMask i = pin2index(pin);
-        return bool(buffer[i.row] & i.colmask);
+        return bool(buffer[i.row] & i.colmask) ? HIGH : LOW;
     }
 
     /**
