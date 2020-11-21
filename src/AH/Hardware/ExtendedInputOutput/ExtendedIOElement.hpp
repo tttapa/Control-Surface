@@ -78,7 +78,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
     /// Move constructor.
     ExtendedIOElement(ExtendedIOElement &&) = default;
     /// Move assignment.
-    ExtendedIOElement &operator=(ExtendedIOElement &&) = default;
+    ExtendedIOElement &operator=(ExtendedIOElement &&) = delete;
 
   public:
     /** 
