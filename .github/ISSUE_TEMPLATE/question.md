@@ -7,9 +7,4 @@ assignees: ''
 
 ---
 
-**Post your code**
-Please post the full code required to answer your question. Post the code even if it doesn't work. In that case, also include a description of what you want the code it to do.
-
-```cpp
-// Your code here
-```
+For questions that are not bug reports or feature requests, please use the [Discussions](https://github.com/tttapa/Control-Surface/discussions) section.
