@@ -70,6 +70,16 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      */
     ExtendedIOElement(pin_t length);
 
+    /// Copying not allowed.
+    ExtendedIOElement(const ExtendedIOElement &) = delete;
+    /// Copying not allowed.
+    ExtendedIOElement &operator=(const ExtendedIOElement &) = delete;
+
+    /// Move constructor.
+    ExtendedIOElement(ExtendedIOElement &&) = default;
+    /// Move assignment.
+    ExtendedIOElement &operator=(ExtendedIOElement &&) = delete;
+
   public:
     /** 
      * @brief   Set the mode of a given pin.
@@ -128,7 +138,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      *          The (zero-based) pin of this IO element.
      * @return  The state of the given pin.
      */
-    virtual int digitalRead(pin_t pin) {
+    virtual PinStatus_t digitalRead(pin_t pin) {
         updateBufferedInputs();
         return digitalReadBuffered(pin);
     }
@@ -138,7 +148,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      * To update the buffer, you have to call @ref updateBufferedInputs first.
      * @copydetails digitalRead
      */
-    virtual int digitalReadBuffered(pin_t pin) = 0;
+    virtual PinStatus_t digitalReadBuffered(pin_t pin) = 0;
 
     /**
      * @brief   Write an analog (or PWM) value to the given pin.

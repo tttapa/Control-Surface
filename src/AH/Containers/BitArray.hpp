@@ -96,9 +96,26 @@ class BitArray {
      * @param   byteIndex
      *          The index of the byte within the array. 
      */
-    uint8_t getByte(uint8_t byteIndex) const {
+    const uint8_t &getByte(uint8_t byteIndex) const {
         return buffer[byteIndex];
         // return buffer[safeIndex(byteIndex)];
+    }
+
+    /**
+     * @brief   Set the byte at the given index.
+     * 
+     * This function can be used to quickly write all of the bits, when reading
+     * them in from an I/O expander, for example.
+     * 
+     * @note    No bounds checking is performed.
+     * 
+     * @param   byteIndex
+     *          The index of the byte within the array. 
+     * @param   value
+     *          The byte to write.
+     */
+    void setByte(uint8_t byteIndex, uint8_t value) {
+        buffer[byteIndex] = value;
     }
 
     /**

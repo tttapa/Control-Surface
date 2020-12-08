@@ -50,6 +50,33 @@ class LCDDisplay : public DisplayElement {
      * @param   lcd 
      *          A reference to the MCU LCD MIDI input element that listens for
      *          incoming MIDI display data.
+     * @param   bank 
+     *          The bank that determines the active track to be displayed.
+     * @param   track 
+     *          The track number to display [1, 8].
+     * @param   line
+     *          The line of the MCU display to display [1, 2].
+     * @param   loc 
+     *          The location on the display where to start drawing the text.
+     * @param   textSize 
+     *          The font size to use for drawing the text.
+     * @param   color 
+     *          The color of the text to draw.
+     */
+    LCDDisplay(DisplayInterface &display, LCD<> &lcd, const OutputBank &bank,
+               uint8_t track, uint8_t line, PixelLocation loc, uint8_t textSize,
+               uint16_t color)
+        : DisplayElement(display), lcd(lcd), bank(&bank), track(track - 1),
+          line(line - 1), x(loc.x), y(loc.y), size(textSize), color(color) {}
+
+    /**
+     * @brief   Constructor.
+     * 
+     * @param   display 
+     *          A reference to the display that this element will be drawn to.
+     * @param   lcd 
+     *          A reference to the MCU LCD MIDI input element that listens for
+     *          incoming MIDI display data.
      * @param   track 
      *          The track number to display [1, 8].
      * @param   loc 
