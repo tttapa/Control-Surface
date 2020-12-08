@@ -232,11 +232,28 @@ tests and generating documentation, a style guide, etc.
 
 ## Recent Breaking Changes
 
+### 2.0-alpha
+
+ - c6e35b960ac15bc1b5cf5c588139d437ccd9cb68  
+   The `NoteBitmapDisplay` class has been renamed to `BitmapDisplay`.
+ - 37b6901cbe56babc47c297a132381d53deaa45e8  
+   The `NoteValueLED` and `CCValueLED` classes (and similar) have been replaced
+   by `NoteLED` and `CCLED` respectively.  
+   The display elements `BitmapDisplay`, `VPotDisplay`, `VUDisplay` etc. are 
+   now generic in the type of value that they display. In most cases, you should
+   be able to update your sketch by adding `<>` after the type names, e.g. 
+   `BitmapDisplay<>`, `VPotDisplay<>`, etc.
  - 1a21d1344f57066fa1eda3819eaf89cbbc79c14e  
    The line numbers of `LCDDisplay` are now one-based: `1` is the first line and
    `2` is the second line. This is more consistent with the track parameter and
    the API of the rest of the library. (Before, the first line was `0` and the
    second line was `1`.)
+ - 40e3d7a4377b281e58dd7725f1bb8c6198855ce6  
+   Control Surface now comes with an Encoder library out of the box. You no 
+   longer have to install or include `Encoder.h` in your sketches.
+
+### 1.x
+
  - 8a3b1b314cf5b4aedf3ad60cbbc492fbcbb25c73  
    Before, `Control_Surface.MIDI()` was used to get the MIDI interface used by
    Control Surface. This method was removed, because you can now connect 
