@@ -64,7 +64,8 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
     }
 
     UpdatableCRTP(const UpdatableCRTP &)
-        __attribute__((no_sanitize("undefined"))) {
+        __attribute__((no_sanitize("undefined")))
+        : DoublyLinkable<Derived>() {
         LockGuard lock(mutex);
         updatables.append(CRTP(Derived));
     }
