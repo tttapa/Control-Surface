@@ -5,7 +5,7 @@
 // LCOV_EXCL_START
 
 #if not defined(ARDUINO_ARCH_ESP32) && not defined(ARDUINO_ARCH_SAM) &&        \
-    not defined(ARDUINO_API_VERSION)
+    not defined(ARDUINO_API_VERSION) && not defined(ARDUINO_ARCH_STM32)
 #define FLUSH
 #endif
 
@@ -129,7 +129,7 @@ Print &operator<<(Print &printer, unsigned long i) {
     return printIntegral(printer, i);
 }
 Print &operator<<(Print &printer, double d) {
-    printer.print(d, precisionPrintStream);
+    printer.print(d, +precisionPrintStream);
     return printer;
 }
 Print &operator<<(Print &printer, float f) {
