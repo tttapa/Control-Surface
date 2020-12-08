@@ -99,8 +99,6 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     Sender sender;
 };
 
-#if defined(Encoder_h_) || not defined(ARDUINO)
-
 template <uint8_t NumBanks, class BankAddress, class Sender>
 using MIDIAbsoluteEncoder =
     GenericMIDIAbsoluteEncoder<Encoder, NumBanks, BankAddress, Sender>;
@@ -108,8 +106,6 @@ using MIDIAbsoluteEncoder =
 template <uint8_t NumBanks, class BankAddress, class Sender>
 using BorrowedMIDIAbsoluteEncoder =
     GenericMIDIAbsoluteEncoder<Encoder &, NumBanks, BankAddress, Sender>;
-
-#endif
 
 } // namespace Bankable
 

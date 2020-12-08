@@ -86,16 +86,12 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     Sender sender;
 };
 
-#if defined(Encoder_h_) || not defined(ARDUINO)
-
 template <class Sender>
 using MIDIAbsoluteEncoder = GenericMIDIAbsoluteEncoder<Encoder, Sender>;
 
 template <class Sender>
 using BorrowedMIDIAbsoluteEncoder =
     GenericMIDIAbsoluteEncoder<Encoder &, Sender>;
-
-#endif
 
 END_CS_NAMESPACE
 

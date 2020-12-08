@@ -77,8 +77,6 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
     Sender sender;
 };
 
-#if defined(Encoder_h_) || not defined(ARDUINO)
-
 template <class BankAddress, class Sender>
 using MIDIRotaryEncoder =
     GenericMIDIRotaryEncoder<Encoder, BankAddress, Sender>;
@@ -86,8 +84,6 @@ using MIDIRotaryEncoder =
 template <class BankAddress, class Sender>
 using BorrowedMIDIRotaryEncoder =
     GenericMIDIRotaryEncoder<Encoder &, BankAddress, Sender>;
-
-#endif
 
 } // namespace Bankable
 

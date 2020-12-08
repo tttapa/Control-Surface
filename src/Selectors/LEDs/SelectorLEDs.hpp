@@ -56,7 +56,6 @@ END_CS_NAMESPACE
 
 // -------------------------------------------------------------------------- //
 
-#if defined(Encoder_h_) || defined(IDE)
 #include <Selectors/EncoderSelector.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -81,7 +80,6 @@ class EncoderSelectorLEDs
 };
 
 END_CS_NAMESPACE
-#endif
 
 // -------------------------------------------------------------------------- //
 

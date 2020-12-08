@@ -28,8 +28,7 @@
  * THE SOFTWARE.
  */
 
-#ifndef Encoder_h_
-#define Encoder_h_
+#pragma once 
 
 #include <AH/Arduino-Wrapper.h>
 #include <Settings/NamespaceSettings.hpp>
@@ -55,6 +54,8 @@ struct Encoder_internal_state_t {
     int32_t position;
 };
 
+/// Class for reading quadrature encoders, based on 
+/// http://www.pjrc.com/teensy/td_libs_Encoder.html
 class Encoder {
   public:
     /**
@@ -124,5 +125,3 @@ class Encoder {
 END_CS_NAMESPACE
 
 #include "Encoder.ipp"
-
-#endif
