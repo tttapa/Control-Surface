@@ -75,6 +75,7 @@
 #include <MIDI_Outputs/ManyAddresses/PCButton.hpp>
 
 #ifdef Encoder_h_
+#include <MIDI_Outputs/Bankable/CCAbsoluteEncoder.hpp>
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/CCAbsoluteEncoder.hpp>
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
