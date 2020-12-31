@@ -154,7 +154,7 @@ struct SysExMessage {
 #endif
 
     const uint8_t *data;
-    uint8_t length;
+    size_t length;
     uint8_t CN;
 
     bool operator==(SysExMessage other) const {
