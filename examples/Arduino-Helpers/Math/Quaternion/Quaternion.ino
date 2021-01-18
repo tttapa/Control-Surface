@@ -1,7 +1,7 @@
 /**
  * Simple Quaternion test.
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  *
  * Written by PieterP, 2020-03-24  
  * https://github.com/tttapa/Arduino-Helpers

@@ -6,5 +6,6 @@ avr usb=arduino:avr:leonardo
 mega=arduino:avr:mega:cpu=atmega2560
 leonardo=arduino:avr:leonardo
 due=arduino:sam:arduino_due_x_dbg
-nano 33=arduino:samd:nano_33_iot
+nano 33 iot=arduino:samd:nano_33_iot
+nano 33 ble=arduino:mbed:nano33ble
 nano every=arduino:megaavr:nona4809:mode=off

@@ -29,6 +29,7 @@ else
     arduino --install-boards "arduino:sam"
     arduino --install-boards "arduino:samd"
     arduino --install-boards "arduino:megaavr"
+    arduino --install-boards "arduino:mbed"
 
     cd /tmp
     wget https://www.pjrc.com/teensy/td_148/TeensyduinoInstall.linux64
