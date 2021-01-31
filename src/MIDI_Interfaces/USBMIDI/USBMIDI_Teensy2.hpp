@@ -1,5 +1,19 @@
-#include "USBMIDI.hpp"
 #include <AH/Teensy/TeensyUSBTypes.hpp>
+
+#include <AH/Containers/Array.hpp>
+#include <Settings/NamespaceSettings.hpp>
+
+BEGIN_CS_NAMESPACE
+
+struct USBDeviceMIDIBackend {
+    using MIDIUSBPacket_t = AH::Array<uint8_t, 4>;
+    MIDIUSBPacket_t read();
+    void write(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1, uint8_t d2);
+    void sendNow();
+    bool preferImmediateSend();
+};
+
+END_CS_NAMESPACE
 
 #ifdef TEENSY_MIDIUSB_ENABLED
 
@@ -7,10 +21,7 @@
 
 BEGIN_CS_NAMESPACE
 
-namespace USBMIDI {
-
-MIDIUSBPacket_t read() {
-
+inline USBDeviceMIDIBackend::MIDIUSBPacket_t USBDeviceMIDIBackend::read() {
     // https://github.com/PaulStoffregen/cores/blob/73ea157600a7082686d9cc48786a73caa7567da9/usb_midi/usb_api.cpp#L195
     uint8_t c, intr_state;
 
@@ -43,7 +54,8 @@ retry:
     return packet;
 }
 
-void write(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1, uint8_t d2) {
+inline void USBDeviceMIDIBackend::write(uint8_t cn, uint8_t cin, uint8_t d0,
+                                        uint8_t d1, uint8_t d2) {
     uint8_t intr_state, timeout;
 
     if (!usb_configuration)
@@ -74,14 +86,12 @@ void write(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1, uint8_t d2) {
     SREG = intr_state;
 }
 
-void sendNow() {
+inline void USBDeviceMIDIBackend::sendNow() {
     // TODO: I think the UEINTX = 0x3A actually sends/flushes the data, but I'm
     //       not sure, and I don't have the right hardware to test it.
 }
 
-bool preferImmediateSend() { return false; }
-
-} // namespace USBMIDI
+inline bool USBDeviceMIDIBackend::preferImmediateSend() { return false; }
 
 END_CS_NAMESPACE
 

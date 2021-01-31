@@ -16,7 +16,6 @@ if (FAST_COMPILE)
         MIDI_Parsers/SysExBuffer.cpp
         MIDI_Interfaces/MIDI_Pipes.cpp
         MIDI_Interfaces/MIDI_Interface.cpp
-        MIDI_Interfaces/USBMIDI_Interface.cpp
         MIDI_Interfaces/SerialMIDI_Interface.cpp
         MIDI_Interfaces/DebugMIDI_Interface.cpp
         MIDI_Interfaces/BluetoothMIDI_Interface.cpp
@@ -32,11 +31,10 @@ add_library(Control_Surface ${CONTROL_SURFACE_SOURCES})
 target_include_directories(Control_Surface PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 if (FAST_COMPILE)
-target_compile_definitions(Control_Surface 
-    PUBLIC 
-        -DNO_DEBUG_PRINTS 
-        # -DTEST_COMPILE_ALL_HEADERS_SEPARATELY
-        -DANALOG_FILTER_SHIFT_FACTOR_OVERRIDE=2)
+    target_compile_definitions(Control_Surface 
+        PUBLIC 
+            -DNO_DEBUG_PRINTS 
+            -DANALOG_FILTER_SHIFT_FACTOR_OVERRIDE=2)
 else ()
         target_compile_definitions(Control_Surface 
         PUBLIC 

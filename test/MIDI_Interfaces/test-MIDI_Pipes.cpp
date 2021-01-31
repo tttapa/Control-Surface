@@ -1763,7 +1763,7 @@ TEST(MIDI_Pipes, USBInterface) {
     midiA[1] >> pipe3 >> midiB[1];
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
-    EXPECT_CALL(midiA[0], readUSBPacket())
+    EXPECT_CALL(midiA[0].backend, read())
         .WillOnce(Return(Packet_t{0x54, 0xF0, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{0x54, 0x77, 0x11, 0x22}))
         .WillOnce(Return(Packet_t{0x56, 0x33, 0xF7, 0x00}))
@@ -1772,7 +1772,7 @@ TEST(MIDI_Pipes, USBInterface) {
     EXPECT_CALL(midiB[0], sendSysExImpl(SysExMessage(data1, CABLE_6)));
     midiA[0].update();
 
-    EXPECT_CALL(midiA[1], readUSBPacket())
+    EXPECT_CALL(midiA[1].backend, read())
         .WillOnce(Return(Packet_t{0x94, 0xF0, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
         .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
@@ -1795,7 +1795,7 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
     midiA[1] >> pipe3 >> midiB[1];
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
-    EXPECT_CALL(midiA[1], readUSBPacket())
+    EXPECT_CALL(midiA[1].backend, read())
         .WillOnce(Return(Packet_t{0x94, 0xF0, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
         .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
@@ -1836,7 +1836,7 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
     midiA[1] >> pipe3 >> midiB[1];
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
-    EXPECT_CALL(midiA[1], readUSBPacket())
+    EXPECT_CALL(midiA[1].backend, read())
         .WillOnce(Return(Packet_t{0x98, 0x83, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{}));
 
@@ -1872,7 +1872,7 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
     midiA[1] >> pipe3 >> midiB[1];
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
-    EXPECT_CALL(midiA[1], readUSBPacket())
+    EXPECT_CALL(midiA[1].backend, read())
         .WillOnce(Return(Packet_t{0x9F, 0xF8, 0x00, 0x00}))
         .WillOnce(Return(Packet_t{}));
 
@@ -1904,11 +1904,11 @@ TEST(MIDI_Pipes, USBInterfaceLoopBack) {
     midi >> pipe >> midi;
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
-    EXPECT_CALL(midi, readUSBPacket())
+    EXPECT_CALL(midi.backend, read())
         .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{}));
 
-    EXPECT_CALL(midi, writeUSBPacket(CABLE_10, 0x9, 0x95, 0x55, 0x66));
+    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x9, 0x95, 0x55, 0x66));
     midi.update();
 }
 
