@@ -57,14 +57,13 @@ void digitalWrite(int pin, PinStatus_t val) { ::digitalWrite(pin, val); }
 
 PinStatus_t digitalRead(pin_t pin) {
     if (pin == NO_PIN)
-        return 0; // LCOV_EXCL_LINE
+        return LOW; // LCOV_EXCL_LINE
     else if (isNativePin(pin)) {
         return ::digitalRead(pin);
     } else {
         auto el = getIOElementOfPin(pin);
         return el->digitalRead(pin - el->getStart());
     }
-    return 0;
 }
 PinStatus_t digitalRead(int pin) { return ::digitalRead(pin); }
 
@@ -77,7 +76,6 @@ analog_t analogRead(pin_t pin) {
         auto el = getIOElementOfPin(pin);
         return el->analogRead(pin - el->getStart());
     }
-    return 0;
 }
 analog_t analogRead(int pin) { return ::analogRead(pin); }
 
@@ -123,14 +121,13 @@ void digitalWriteBuffered(pin_t pin, PinStatus_t val) {
 
 PinStatus_t digitalReadBuffered(pin_t pin) {
     if (pin == NO_PIN)
-        return 0; // LCOV_EXCL_LINE
+        return LOW; // LCOV_EXCL_LINE
     else if (isNativePin(pin)) {
         return ::digitalRead(pin);
     } else {
         auto el = getIOElementOfPin(pin);
         return el->digitalReadBuffered(pin - el->getStart());
     }
-    return 0;
 }
 
 analog_t analogReadBuffered(pin_t pin) {
