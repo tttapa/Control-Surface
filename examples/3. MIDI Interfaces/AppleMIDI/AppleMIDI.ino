@@ -106,6 +106,7 @@
  * https://github.com/tttapa/Control-Surface
  */
 
+#define USE_EXT_CALLBACKS
 #include <AppleMIDI.h>
 USING_NAMESPACE_APPLEMIDI
 
@@ -135,10 +136,12 @@ FortySevenEffectsMIDI_Interface<decltype(MIDI) &> AppleMIDI_interface = MIDI;
 // Add some MIDI elements for testing
 using namespace MIDI_Notes;
 NoteButton button = {
-    0, note(C, 4),  // GPIO0 has a push button connected on most boards
+  0, note(C, 4), // GPIO0 has a push button connected on most boards
 };
+
 NoteLED led = {
-    LED_BUILTIN, note(C, 4),
+  LED_BUILTIN,
+  note(C, 4),
 };
 
 // --------------------------- AppleMIDI callbacks -------------------------- //
@@ -149,10 +152,8 @@ void onAppleMidiConnected(const ssrc_t &ssrc, const char *name) {
 void onAppleMidiDisconnected(const ssrc_t &ssrc) {
   Serial << F("Disconnected") << endl;
 }
-void onAppleMidiError(const ssrc_t &ssrc, int32_t err) {
-  Serial << F("Exception ") << err << F(" from ssrc 0x") << hex << ssrc << dec
-         << endl;
-}
+void onAppleMidiException(const ssrc_t &ssrc, const Exception &e,
+                          int32_t value);
 
 // ---------------------------------- Setup --------------------------------- //
 
@@ -171,14 +172,14 @@ void setup() {
   // Set up mDNS responder:
   if (!MDNS.begin(AppleMIDI.getName()))
     FATAL_ERROR(F("Error setting up MDNS responder!"), 0x0032);
-  Serial << F("mDNS responder started (") << AppleMIDI.getName() << ".local)" 
+  Serial << F("mDNS responder started (") << AppleMIDI.getName() << ".local)"
          << endl;
   MDNS.addService("apple-midi", "udp", AppleMIDI.getPort());
 
   // Set up some AppleMIDI callback handles
   AppleMIDI.setHandleConnected(onAppleMidiConnected);
   AppleMIDI.setHandleDisconnected(onAppleMidiDisconnected);
-  AppleMIDI.setHandleError(onAppleMidiError);
+  AppleMIDI.setHandleException(onAppleMidiException);
 
   // Initialize Control Surface (also calls MIDI.begin())
   Control_Surface.begin();
@@ -189,4 +190,54 @@ void setup() {
 void loop() {
   // Update all MIDI elements and handle incoming MIDI
   Control_Surface.loop();
+}
+
+// ----------------------------- Error handling ----------------------------- //
+
+void onAppleMidiException(const ssrc_t &ssrc, const Exception &e,
+                          int32_t value) {
+  switch (e) {
+    case Exception::BufferFullException:
+      Serial << F("*** BufferFullException") << endl;
+      break;
+    case Exception::ParseException:
+      Serial << F("*** ParseException") << endl;
+      break;
+    case Exception::TooManyParticipantsException:
+      Serial << F("*** TooManyParticipantsException") << endl;
+      break;
+    case Exception::UnexpectedInviteException:
+      Serial << F("*** UnexpectedInviteException") << endl;
+      break;
+    case Exception::ParticipantNotFoundException:
+      Serial << F("*** ParticipantNotFoundException: ") << value << endl;
+      break;
+    case Exception::ComputerNotInDirectory:
+      Serial << F("*** ComputerNotInDirectory: ") << value << endl;
+      break;
+    case Exception::NotAcceptingAnyone:
+      Serial << F("*** NotAcceptingAnyone: ") << value << endl;
+      break;
+    case Exception::ListenerTimeOutException:
+      Serial << F("*** ListenerTimeOutException") << endl;
+      break;
+    case Exception::MaxAttemptsException:
+      Serial << F("*** MaxAttemptsException") << endl;
+      break;
+    case Exception::NoResponseFromConnectionRequestException:
+      Serial
+        << F("*** No response to the connection request. Check the address and "
+             "port, and any firewall or router settings. (time)")
+        << endl;
+      break;
+    case Exception::SendPacketsDropped:
+      Serial << F("*** SendPacketsDropped: ") << value << endl;
+      break;
+    case Exception::ReceivedPacketsDropped:
+      Serial << F("*** ReceivedPacketsDropped: ") << value << endl;
+      break;
+    case Exception::UnexpectedParseException:
+      Serial << F("*** UnexpectedParseException") << endl;
+      break;
+  }
 }
