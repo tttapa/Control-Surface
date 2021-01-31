@@ -1908,7 +1908,7 @@ TEST(MIDI_Pipes, USBInterfaceLoopBack) {
         .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{}));
 
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x9, 0x95, 0x55, 0x66));
+    EXPECT_CALL(midi.backend, write(0x99, 0x95, 0x55, 0x66));
     midi.update();
 }
 

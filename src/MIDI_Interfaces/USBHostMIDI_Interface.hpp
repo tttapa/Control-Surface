@@ -7,7 +7,7 @@ AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
 
-/// MIDI over USB backend for the Teensy 
+/// MIDI over USB backend for the Teensy
 /// [USBHost_t36](https://github.com/PaulStoffregen/USBHost_t36) library.
 template <size_t MaxPacketSize = 512, size_t RXQueueSize = 400>
 class USBHostMIDIBackend : public LowLevelMIDIDeviceBase {
@@ -18,19 +18,9 @@ class USBHostMIDIBackend : public LowLevelMIDIDeviceBase {
 
   public:
     using MIDIUSBPacket_t = AH::Array<uint8_t, 4>;
-    MIDIUSBPacket_t read() {
-        MIDIUSBPacket_t packet;
-        uint32_t msg = read_packed();
-        static_assert(sizeof(msg) == sizeof(packet.data),
-                      "incorrect packet size");
-        memcpy(packet.data, &msg, sizeof(packet.data));
-        return packet;
-    }
-    void write(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1, uint8_t d2) {
-        write_packed((cn << 4) | cin | // CN|CIN
-                     (d0 << 8) |       // status
-                     (d1 << 16) |      // data 1
-                     (d2 << 24));      // data 2
+    MIDIUSBPacket_t read() { return u32_to_bytes(read_packed()); }
+    void write(uint8_t cn_cin, uint8_t midi_0, uint8_t midi_1, uint8_t midi_2) {
+        write_packed(bytes_to_u32(cn_cin, midi_0, midi_1, midi_2));
     }
     void sendNow() { send_now(); }
     bool preferImmediateSend() { return false; }

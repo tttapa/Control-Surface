@@ -9,11 +9,6 @@
 
 AH_DIAGNOSTIC_WERROR()
 
-#if defined(TEENSYDUINO) && !defined(TEENSY_MIDIUSB_ENABLED)
-#warning                                                                       \
-    "Teensy: USB MIDI not enabled. Enable it from the Tools > USB Type menu."
-#endif
-
 BEGIN_CS_NAMESPACE
 
 /**
@@ -78,7 +73,8 @@ class GenericUSBMIDI_Interface : public MIDI_Interface {
         GenericUSBMIDI_Interface *iface;
         void operator()(Cable cn, MIDICodeIndexNumber cin, uint8_t d0,
                         uint8_t d1, uint8_t d2) {
-            iface->backend.write(cn.getRaw(), uint8_t(cin), d0, d1, d2);
+            uint8_t cn_cin = (cn.getRaw() << 4) | uint8_t(cin);
+            iface->backend.write(cn_cin, d0, d1, d2);
         }
     };
     /// @}
@@ -118,8 +114,15 @@ END_CS_NAMESPACE
 
 #include "USBMIDI_Interface.ipp"
 
+#if defined(TEENSYDUINO) && !defined(TEENSY_MIDIUSB_ENABLED)
+#warning                                                                       \
+    "Teensy: USB MIDI not enabled. Enable it from the Tools > USB Type menu."
+#define CS_USB_MIDI_DISABLED
+#endif
+
 // If MIDI over USB is supported
-#if !defined(CS_USB_MIDI_NOT_SUPPORTED) || !defined(ARDUINO)
+#if (!defined(CS_USB_MIDI_NOT_SUPPORTED) && !defined(CS_USB_MIDI_DISABLED)) || \
+    !defined(ARDUINO)
 
 BEGIN_CS_NAMESPACE
 
@@ -151,7 +154,7 @@ END_CS_NAMESPACE
 // If the main MCU doesn't have a USB connection:
 // Fall back on Serial connection at the hardware MIDI baud rate.
 // (Can be used with HIDUINO or USBMidiKliK.)
-#else
+#elif !defined(CS_USB_MIDI_DISABLED)
 
 #include "SerialMIDI_Interface.hpp"
 

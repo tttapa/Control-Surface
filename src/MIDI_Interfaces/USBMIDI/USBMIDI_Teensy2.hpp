@@ -8,7 +8,7 @@ BEGIN_CS_NAMESPACE
 struct USBDeviceMIDIBackend {
     using MIDIUSBPacket_t = AH::Array<uint8_t, 4>;
     MIDIUSBPacket_t read();
-    void write(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1, uint8_t d2);
+    void write(uint8_t cn_cin, uint8_t midi_0, uint8_t midi_1, uint8_t midi_2);
     void sendNow();
     bool preferImmediateSend();
 };
@@ -54,8 +54,8 @@ retry:
     return packet;
 }
 
-inline void USBDeviceMIDIBackend::write(uint8_t cn, uint8_t cin, uint8_t d0,
-                                        uint8_t d1, uint8_t d2) {
+inline void USBDeviceMIDIBackend::write(uint8_t cn_cin, uint8_t midi_0,
+                                        uint8_t midi_1, uint8_t midi_2) {
     uint8_t intr_state, timeout;
 
     if (!usb_configuration)
@@ -77,10 +77,10 @@ inline void USBDeviceMIDIBackend::write(uint8_t cn, uint8_t cin, uint8_t d0,
         cli();
         UENUM = MIDI_TX_ENDPOINT;
     }
-    UEDATX = (cn << 4) | cin;
-    UEDATX = d0;
-    UEDATX = d1;
-    UEDATX = d2;
+    UEDATX = cn_cin;
+    UEDATX = midi_0;
+    UEDATX = midi_1;
+    UEDATX = midi_2;
     if (!(UEINTX & (1 << RWAL)))
         UEINTX = 0x3A;
     SREG = intr_state;

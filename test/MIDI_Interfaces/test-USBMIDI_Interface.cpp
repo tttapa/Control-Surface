@@ -11,20 +11,20 @@ using AH::ErrorException;
 
 TEST(USBMIDI_Interface, send3B) {
     StrictMock<USBMIDI_Interface> midi;
-    EXPECT_CALL(midi.backend, write(CABLE_9.getRaw(), 0x9, 0x93, 0x55, 0x66));
+    EXPECT_CALL(midi.backend, write(0x89, 0x93, 0x55, 0x66));
     midi.sendNoteOn({0x55, CHANNEL_4, CABLE_9}, 0x66);
 }
 
 TEST(USBMIDI_Interface, send2B) {
     StrictMock<USBMIDI_Interface> midi;
-    EXPECT_CALL(midi.backend, write(CABLE_9.getRaw(), 0xC, 0xC3, 0x66, 0x00));
+    EXPECT_CALL(midi.backend, write(0x8C, 0xC3, 0x66, 0x00));
     midi.sendPC({CHANNEL_4, CABLE_9}, 0x66);
 }
 
 TEST(USBMIDI_Interface, RealTime) {
     StrictMock<USBMIDI_Interface> midi;
     Sequence seq;
-    EXPECT_CALL(midi.backend, write(CABLE_9.getRaw(), 0xF, 0xF8, 0x00, 0x00))
+    EXPECT_CALL(midi.backend, write(0x8F, 0xF8, 0x00, 0x00))
         .InSequence(seq);
     midi.sendRealTime(MIDIMessageType::TIMING_CLOCK, CABLE_9);
 }
@@ -32,7 +32,7 @@ TEST(USBMIDI_Interface, RealTime) {
 TEST(USBMIDI_Interface, SysExSend3B) {
     StrictMock<USBMIDI_Interface> midi;
     Sequence seq;
-    EXPECT_CALL(midi.backend, write(CABLE_9.getRaw(), 0x7, 0xF0, 0x55, 0xF7))
+    EXPECT_CALL(midi.backend, write(0x87, 0xF0, 0x55, 0xF7))
         .InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0xF7};
     midi.sendSysEx(sysex, CABLE_9);
@@ -41,9 +41,9 @@ TEST(USBMIDI_Interface, SysExSend3B) {
 TEST(USBMIDI_Interface, SysExSend4B) {
     StrictMock<USBMIDI_Interface> midi;
     Sequence seq;
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0xF0, 0x55, 0x66))
+    EXPECT_CALL(midi.backend, write(0x94, 0xF0, 0x55, 0x66))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x5, 0xF7, 0x00, 0x00))
+    EXPECT_CALL(midi.backend, write(0x95, 0xF7, 0x00, 0x00))
         .InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0xF7};
     midi.sendSysEx(sysex, CABLE_10);
@@ -52,9 +52,9 @@ TEST(USBMIDI_Interface, SysExSend4B) {
 TEST(USBMIDI_Interface, SysExSend5B) {
     StrictMock<USBMIDI_Interface> midi;
     Sequence seq;
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0xF0, 0x55, 0x66))
+    EXPECT_CALL(midi.backend, write(0x94, 0xF0, 0x55, 0x66))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x6, 0x77, 0xF7, 0x00))
+    EXPECT_CALL(midi.backend, write(0x96, 0x77, 0xF7, 0x00))
         .InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0xF7};
     midi.sendSysEx(sysex, CABLE_10);
@@ -63,9 +63,9 @@ TEST(USBMIDI_Interface, SysExSend5B) {
 TEST(USBMIDI_Interface, SysExSend6B) {
     StrictMock<USBMIDI_Interface> midi;
     Sequence seq;
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0xF0, 0x55, 0x66))
+    EXPECT_CALL(midi.backend, write(0x94, 0xF0, 0x55, 0x66))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x7, 0x77, 0x11, 0xF7))
+    EXPECT_CALL(midi.backend, write(0x97, 0x77, 0x11, 0xF7))
         .InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0xF7};
     midi.sendSysEx(sysex, CABLE_10);
@@ -74,11 +74,11 @@ TEST(USBMIDI_Interface, SysExSend6B) {
 TEST(USBMIDI_Interface, SysExSend7B) {
     StrictMock<USBMIDI_Interface> midi;
     Sequence seq;
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0xF0, 0x55, 0x66))
+    EXPECT_CALL(midi.backend, write(0x94, 0xF0, 0x55, 0x66))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0x77, 0x11, 0x22))
+    EXPECT_CALL(midi.backend, write(0x94, 0x77, 0x11, 0x22))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x5, 0xF7, 0x00, 0x00))
+    EXPECT_CALL(midi.backend, write(0x95, 0xF7, 0x00, 0x00))
         .InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0xF7};
     midi.sendSysEx(sysex, CABLE_10);
@@ -87,11 +87,11 @@ TEST(USBMIDI_Interface, SysExSend7B) {
 TEST(USBMIDI_Interface, SysExSend8B) {
     StrictMock<USBMIDI_Interface> midi;
     Sequence seq;
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0xF0, 0x55, 0x66))
+    EXPECT_CALL(midi.backend, write(0x94, 0xF0, 0x55, 0x66))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0x77, 0x11, 0x22))
+    EXPECT_CALL(midi.backend, write(0x94, 0x77, 0x11, 0x22))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x6, 0x33, 0xF7, 0x00))
+    EXPECT_CALL(midi.backend, write(0x96, 0x33, 0xF7, 0x00))
         .InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7};
     midi.sendSysEx(sysex, CABLE_10);
@@ -100,11 +100,11 @@ TEST(USBMIDI_Interface, SysExSend8B) {
 TEST(USBMIDI_Interface, SysExSend9B) {
     StrictMock<USBMIDI_Interface> midi;
     Sequence seq;
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0xF0, 0x55, 0x66))
+    EXPECT_CALL(midi.backend, write(0x94, 0xF0, 0x55, 0x66))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0x77, 0x11, 0x22))
+    EXPECT_CALL(midi.backend, write(0x94, 0x77, 0x11, 0x22))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x7, 0x33, 0x44, 0xF7))
+    EXPECT_CALL(midi.backend, write(0x97, 0x33, 0x44, 0xF7))
         .InSequence(seq);
     uint8_t sysex[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0x44, 0xF7};
     midi.sendSysEx(sysex, CABLE_10);
@@ -124,7 +124,7 @@ TEST(USBMIDI_Interface, SysExSend1B) {
 TEST(USBMIDI_Interface, SysExSend2B) {
     StrictMock<USBMIDI_Interface> midi;
     Sequence seq;
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x6, 0xF0, 0xF7, 0x00))
+    EXPECT_CALL(midi.backend, write(0x96, 0xF0, 0xF7, 0x00))
         .InSequence(seq);
     uint8_t sysex[] = {0xF0, 0xF7};
     midi.sendSysEx(sysex, CABLE_10);
@@ -133,19 +133,19 @@ TEST(USBMIDI_Interface, SysExSend2B) {
 TEST(USBMIDI_Interface, SysExSendChunks) {
     StrictMock<USBMIDI_Interface> midi;
     Sequence seq;
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0xF0, 0x55, 0x66))
+    EXPECT_CALL(midi.backend, write(0x94, 0xF0, 0x55, 0x66))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0x77, 0x11, 0x22))
+    EXPECT_CALL(midi.backend, write(0x94, 0x77, 0x11, 0x22))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0x23, 0x24, 0x25))
+    EXPECT_CALL(midi.backend, write(0x94, 0x23, 0x24, 0x25))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0x26, 0x27, 0x28))
+    EXPECT_CALL(midi.backend, write(0x94, 0x26, 0x27, 0x28))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0x29, 0x2A, 0x2B))
+    EXPECT_CALL(midi.backend, write(0x94, 0x29, 0x2A, 0x2B))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x4, 0x2C, 0x2D, 0x2E))
+    EXPECT_CALL(midi.backend, write(0x94, 0x2C, 0x2D, 0x2E))
         .InSequence(seq);
-    EXPECT_CALL(midi.backend, write(CABLE_10.getRaw(), 0x7, 0x33, 0x44, 0xF7))
+    EXPECT_CALL(midi.backend, write(0x97, 0x33, 0x44, 0xF7))
         .InSequence(seq);
     std::vector<uint8_t> chunks[] = {
         {0xF0, 0x55, 0x66},

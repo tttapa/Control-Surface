@@ -1,5 +1,29 @@
 #pragma once
 
+#include <AH/Containers/Array.hpp>
+#include <AH/STL/cstdint>
+#include <Settings/NamespaceSettings.hpp>
+
+BEGIN_CS_NAMESPACE
+
+inline AH::Array<uint8_t, 4> u32_to_bytes(uint32_t u) {
+    return {{
+        uint8_t((u >> 0) & 0xFF),
+        uint8_t((u >> 8) & 0xFF),
+        uint8_t((u >> 16) & 0xFF),
+        uint8_t((u >> 24) & 0xFF),
+    }};
+}
+
+inline uint32_t bytes_to_u32(uint8_t b0, uint8_t b1, uint8_t b2, uint8_t b3) {
+    return (uint32_t(b0) << 4) |  //
+           (uint32_t(b1) << 8) |  //
+           (uint32_t(b2) << 16) | //
+           (uint32_t(b3) << 24);  //
+}
+
+END_CS_NAMESPACE
+
 #ifdef ARDUINO
 
 #if defined(TEENSYDUINO)
