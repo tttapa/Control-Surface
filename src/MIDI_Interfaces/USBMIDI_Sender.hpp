@@ -55,7 +55,7 @@ class USBMIDI_Sender {
     /// last one) should contain a multiple of 3 SysEx bytes. If the SysEx chunk
     /// size is not a multiple of 3, there will be remaining bytes that can't be
     /// sent yet, until the next chunk arrives. See the comments in the
-    /// @ref sendSysExImpl() implementation for more details.
+    /// @ref USBMIDI_Sender::sendSysEx() implementation for more details.
     uint8_t storedSysExData[16][3];
     /// Number of remaining SysEx bytes stored.
     uint8_t storedSysExLength[16] = {};
