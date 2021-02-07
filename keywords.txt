@@ -139,6 +139,8 @@ SerialMIDI_Interface	KEYWORD1
 HardwareSerialMIDI_Interface	KEYWORD1
 USBSerialMIDI_Interface	KEYWORD1
 USBMIDI_Interface	KEYWORD1
+USBHostMIDI_Interface	KEYWORD1
+USBHostMIDI_Interface_BigBuffer	KEYWORD1
 StreamDebugMIDI_Interface	KEYWORD1
 SerialDebugMIDI_Interface	KEYWORD1
 HardwareSerialDebugMIDI_Interface	KEYWORD1
