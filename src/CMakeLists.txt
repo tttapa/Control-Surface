@@ -1,5 +1,7 @@
 add_subdirectory(AH)
-
+option(FAST_COMPILE "Compile only the necessary files without compiling the \
+                     header-only components in isolation to check the include \
+                     hierarchy" OFF)
 if (FAST_COMPILE)
     set(CONTROL_SURFACE_SOURCES
         Def/MIDIAddress.cpp
