@@ -65,7 +65,7 @@ CD74HC4067 mux = {
 
 // Instantiate a shift register with the SPI slave select pin as latch pin, most
 // significant bit first, and a total of 16 outputs.
-SPIShiftRegisterOut<mux.length()> sreg = {SS, MSBFIRST};
+SPIShiftRegisterOut<mux.length()> sreg = {SPI, SS, MSBFIRST};
 
 // Instantiate an array of momentary push buttons.
 // It generates an array of Buttons on pins:

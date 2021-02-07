@@ -44,20 +44,28 @@ static constexpr const uint8_t *NumericChars = &SevenSegmentCharacters[0x30];
 /**
  * @brief   A class for 8-digit 7-segment displays with a MAX7219 driver.
  * 
+ * @tparam  SPIDriver
+ *          The SPI class to use. Usually, the default is fine.
+ * 
  * @ingroup AH_HardwareUtils
  */
-class MAX7219SevenSegmentDisplay : public MAX7219_Base {
+template <class SPIDriver = decltype(SPI) &>
+class MAX7219SevenSegmentDisplay : public MAX7219_Base<SPIDriver> {
   public:
     /**
      * @brief   Create a MAX7219SevenSegmentDisplay.
      * 
+     * @param   spi
+     *          The SPI interface to use.
      * @param   loadPin
      *          The pin connected to the load pin (C̄S̄) of the MAX7219.
      * @param   chainlength
      *          The number of daisy-chained MAX7219 chips.
      */
-    MAX7219SevenSegmentDisplay(pin_t loadPin, uint8_t chainlength = 1)
-        : MAX7219_Base(loadPin, chainlength) {}
+    MAX7219SevenSegmentDisplay(SPIDriver spi, pin_t loadPin,
+                               uint8_t chainlength = 1)
+        : MAX7219_Base<SPIDriver>(std::forward<SPIDriver>(spi), loadPin,
+                                  chainlength) {}
 
     /// Initialize.
     /// @see    MAX7219#init
@@ -118,7 +126,7 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base {
         } while (anumber && i <= endDigit);
         if (number < 0 && i <= endDigit) {
             sendDigit(i++, 0b00000001); // minus sign
-        } 
+        }
         if (anumber != 0) {
             for (int16_t i = startDigit; i <= endDigit;)
                 sendDigit(i++, 0b00000001);

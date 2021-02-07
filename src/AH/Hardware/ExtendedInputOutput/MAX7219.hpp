@@ -20,18 +20,24 @@ BEGIN_AH_NAMESPACE
  * 
  * @tparam  NumChips
  *          The number of daisy-chained MAX7219 chips.
+ * @tparam  SPIDriver
+ *          The SPI class to use. Usually, the default is fine.
  */
-template <uint8_t NumChips = 1>
-class MAX7219 : public MAX7219_Base,
+template <uint8_t NumChips = 1, class SPIDriver = decltype(SPI) &>
+class MAX7219 : public MAX7219_Base<SPIDriver>,
                 public StaticSizeExtendedIOElement<8 * 8 * NumChips> {
   public:
     /**
      * @brief   Create a MAX7219 ExtendedIOElement.
      * 
+     * @param   spi
+     *          The SPI interface to use.
      * @param   loadPin
      *          The pin connected to the load pin (C̄S̄) of the MAX7219.
      */
-    MAX7219(pin_t loadPin) : MAX7219_Base(loadPin, NumChips) {}
+    MAX7219(SPIDriver spi, pin_t loadPin)
+        : MAX7219_Base<SPIDriver>(std::forward<SPIDriver>(spi), loadPin,
+                                  NumChips) {}
 
     /// Initialize.
     /// @see    MAX7219#init
@@ -176,7 +182,7 @@ class MAX7219 : public MAX7219_Base,
     }
 
     void updateBufferedOutputRow(IndexMask i) {
-        sendRowAll(i.rowgrp, buffer.data + i.rowgrp, 8);
+        this->sendRowAll(i.rowgrp, buffer.data + i.rowgrp, 8);
         dirty_rows &= ~i.rowmask;
     }
 
@@ -187,7 +193,7 @@ class MAX7219 : public MAX7219_Base,
         do {
             --row;
             if (dirty_rows & 0x80)
-                sendRowAll(row, buffer.data + row, 8);
+                this->sendRowAll(row, buffer.data + row, 8);
             dirty_rows <<= 1;
         } while (row);
     }
