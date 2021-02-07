@@ -129,6 +129,7 @@
 #include <AH/Hardware/ExtendedInputOutput/MAX7219.hpp>
 #include <AH/Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
 #include <AH/Hardware/ExtendedInputOutput/ShiftRegisterOut.hpp>
+#include <AH/Hardware/ExtendedInputOutput/ShiftRegisterIn.hpp>
 
 // ----------------------------- MIDI Constants ----------------------------- //
 #include <MIDI_Constants/Chords/Chords.hpp>
