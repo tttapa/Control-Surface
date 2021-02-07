@@ -208,23 +208,33 @@ void shiftOut(int dataPin, int clockPin, BitOrder_t bitOrder, uint8_t val) {
                val);
 }
 
-void pinMode(ArduinoPin_t pin, PinMode_t mode) { ::pinMode(pin, mode); }
-void digitalWrite(ArduinoPin_t pin, PinStatus_t val) {
-    ::digitalWrite(pin, val);
+#if UINT16_MAX != UINT_MAX
+void pinMode(unsigned int pin, PinMode_t mode) {
+    ::pinMode(arduino_pin_cast(pin), mode);
 }
-
-PinStatus_t digitalRead(ArduinoPin_t pin) { return ::digitalRead(pin); }
-
-analog_t analogRead(ArduinoPin_t pin) { return ::analogRead(pin); }
-
+void digitalWrite(unsigned int pin, PinStatus_t val) {
+    ::digitalWrite(arduino_pin_cast(pin), val);
+}
+PinStatus_t digitalRead(unsigned int pin) {
+    return ::digitalRead(arduino_pin_cast(pin));
+}
+analog_t analogRead(unsigned int pin) {
+    return ::analogRead(arduino_pin_cast(pin));
+}
 #ifndef ESP32
-void analogWrite(ArduinoPin_t pin, analog_t val) { ::analogWrite(pin, val); }
-void analogWrite(ArduinoPin_t pin, int val) { ::analogWrite(pin, val); }
-#endif
-void shiftOut(ArduinoPin_t dataPin, ArduinoPin_t clockPin, BitOrder_t bitOrder,
-              uint8_t val) {
-    ::shiftOut(dataPin, clockPin, bitOrder, val);
+void analogWrite(unsigned int pin, analog_t val) {
+    ::analogWrite(arduino_pin_cast(pin), val);
 }
+void analogWrite(unsigned int pin, int val) {
+    ::analogWrite(arduino_pin_cast(pin), val);
+}
+#endif
+void shiftOut(unsigned int dataPin, unsigned int clockPin, BitOrder_t bitOrder,
+              uint8_t val) {
+    ::shiftOut(arduino_pin_cast(dataPin), arduino_pin_cast(clockPin), bitOrder,
+               val);
+}
+#endif
 
 } // namespace ExtIO
 

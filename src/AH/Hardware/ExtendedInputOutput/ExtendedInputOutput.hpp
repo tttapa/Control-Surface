@@ -2,9 +2,10 @@
 
 #pragma once
 
+#include <AH/Hardware/Arduino-Hardware-Types.hpp>
+#include <AH/STL/climits>
 #include <AH/Settings/NamespaceSettings.hpp>
 #include <AH/Settings/Warnings.hpp>
-#include <AH/Hardware/Arduino-Hardware-Types.hpp>
 
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
@@ -88,24 +89,27 @@ void analogWriteBuffered(pin_t pin, analog_t val);
 /// @see   ExtendedIOElement::analogWriteBuffered
 void analogWriteBuffered(pin_t pin, int val);
 
+#if UINT16_MAX != UINT_MAX
 /// Overload to Arduino pinMode function.
-void pinMode(ArduinoPin_t pin, PinMode_t mode);
+void pinMode(unsigned int pin, PinMode_t mode);
 /// Overload to Arduino digitalWrite function.
-void digitalWrite(ArduinoPin_t pin, PinStatus_t val);
+void digitalWrite(unsigned int pin, PinStatus_t val);
 /// Overload to Arduino digitalRead function.
-PinStatus_t digitalRead(ArduinoPin_t pin);
+PinStatus_t digitalRead(unsigned int pin);
 
 /// Overload to Arduino analogRead function.
-analog_t analogRead(ArduinoPin_t pin);
+analog_t analogRead(unsigned int pin);
 #ifndef ESP32
 /// Overload to Arduino analogWrite function.
-void analogWrite(ArduinoPin_t pin, analog_t val);
+void analogWrite(unsigned int pin, analog_t val);
 /// Overload to Arduino analogWrite function.
-void analogWrite(ArduinoPin_t pin, int val);
+void analogWrite(unsigned int pin, int val);
 #endif
 
 /// Overload to Arduino shiftOut function
-void shiftOut(ArduinoPin_t dataPin, ArduinoPin_t clockPin, BitOrder_t bitOrder, uint8_t val);
+void shiftOut(unsigned int dataPin, unsigned int clockPin, BitOrder_t bitOrder,
+              uint8_t val);
+#endif
 
 /// @}
 
