@@ -73,6 +73,13 @@
 #define PIN_TO_BITMASK(pin)             (pin)
 #define DIRECT_PIN_READ(base, pin)      nrf_gpio_pin_read(pin)
 
+#elif defined(ARDUINO_ARCH_MBED)
+
+#define IO_REG_TYPE                     std::unique_ptr<mbed::DigitalIn>
+#define PIN_TO_BASEREG(pin)             (nullptr)
+#define PIN_TO_BITMASK(pin)             std::make_unique<mbed::DigitalIn>(digitalPinToPinName(pin), PullUp)
+#define DIRECT_PIN_READ(base, pin)      (pin)->read()
+
 #elif defined(__arc__) /* Arduino101/Genuino101 specifics */
 
 #include "scss_registers.h"

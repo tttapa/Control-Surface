@@ -1,4 +1,5 @@
 // interrupt pins for known boards
+#include <AH/Arduino-Wrapper.h>
 
 // Teensy (and maybe others) define these automatically
 #if !defined(CORE_NUM_INTERRUPT)
@@ -319,6 +320,10 @@
   #define CORE_INT12_PIN	12
   #define CORE_INT13_PIN	13
 
+// Arduino Nano BLE
+#elif defined(ARDUINO_ARCH_NRF52840)
+  #define CORE_NUM_INTERRUPT	NUM_DIGITAL_PINS
+
 #endif
 #endif
 
@@ -329,4 +334,3 @@
 #error "Encoder requires interrupt pins, but this board does not have any :("
 #error "You could try defining ENCODER_DO_NOT_USE_INTERRUPTS as a kludge."
 #endif
-
