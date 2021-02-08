@@ -16,7 +16,7 @@ inline AH::Array<uint8_t, 4> u32_to_bytes(uint32_t u) {
 }
 
 inline uint32_t bytes_to_u32(uint8_t b0, uint8_t b1, uint8_t b2, uint8_t b3) {
-    return (uint32_t(b0) << 4) |  //
+    return (uint32_t(b0) << 0) |  //
            (uint32_t(b1) << 8) |  //
            (uint32_t(b2) << 16) | //
            (uint32_t(b3) << 24);  //
