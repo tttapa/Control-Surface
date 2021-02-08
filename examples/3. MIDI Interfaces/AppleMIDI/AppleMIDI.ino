@@ -239,5 +239,11 @@ void onAppleMidiException(const ssrc_t &ssrc, const Exception &e,
     case Exception::UnexpectedParseException:
       Serial << F("*** UnexpectedParseException") << endl;
       break;
+    // case Exception::UdpBeginPacketFailed:
+    //   Serial << F("*** UdpBeginPacketFailed: ") << value << endl;
+    //   break;
+    default:
+      Serial << F("*** Unknown exception ") << +e << ": " << value << endl;
+      break;
   }
 }
