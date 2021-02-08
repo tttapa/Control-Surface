@@ -107,10 +107,10 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule {
 
   protected:
     static constexpr uint32_t SizeReserved = PacketSize + 1;
-    static constexpr uint32_t NumRxPackets = 6;
+    static constexpr uint32_t NumRxPackets = 2;
 
     /// State for reading incoming USB-MIDI data.
-    struct {
+    struct Reading {
         struct Buffer {
             uint32_t size = 0;
             uint32_t index = 0;
@@ -124,7 +124,7 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule {
     using rbuffer_t = std::remove_reference_t<decltype(reading.buffers[0])>;
 
     /// State for writing outgoing USB-MIDI data.
-    struct {
+    struct Writing {
         struct Buffer {
             std::atomic<uint32_t> size{0};
             std::atomic<bool> ready_to_send{false};
