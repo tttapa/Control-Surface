@@ -39,7 +39,7 @@ using namespace MIDI_Notes;
 // Instantiate a MAX7219 with the SPI slave select pin as latch pin
 // There's just 1 MAX7219 in the chain, if you have more of them daisy-chained
 // together, you can increase the template argument (between angled brackets)
-MAX7219<1> max7219 = SS;
+MAX7219<1> max7219 = {SPI, SS};
 
 // Instantiate the LED that will light up when middle C is playing
 NoteLED led = {

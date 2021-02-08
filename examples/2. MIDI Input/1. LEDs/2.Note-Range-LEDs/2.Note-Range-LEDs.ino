@@ -46,6 +46,7 @@ USBMIDI_Interface midi;
 
 // Instantiate a shift register as output for the LEDs
 SPIShiftRegisterOut<8> sreg = {
+  SPI,      // SPI interface to use
   10,       // Latch pin (ST_CP)
   MSBFIRST, // Byte order
 };

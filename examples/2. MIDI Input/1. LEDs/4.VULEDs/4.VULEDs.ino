@@ -42,7 +42,7 @@ USBMIDI_Interface midi;
 
 // Instantiate two daisy-chained shift register with the SPI slave select pin as
 // latch pin, most significant bit first, and a total of 16 outputs.
-SPIShiftRegisterOut<16> sreg = {SS, MSBFIRST};
+SPIShiftRegisterOut<16> sreg = {SPI, SS, MSBFIRST};
 
 // Instantiate a VULEDs object with 12 LEDs.
 MCU::VULEDs<12> vu = {

@@ -204,6 +204,7 @@ following boards:
 - Arduino Due
 - Arduino Nano Every
 - Arduino Nano 33 IoT
+- Arduino Nano 33 BLE
 - ESP8266
 - ESP32
 
@@ -234,6 +235,10 @@ tests and generating documentation, a style guide, etc.
 
 ### 2.0-alpha
 
+ - a81bd1927298decc2ea3852fd2f00e8028c14b81  
+   Classes that make use of the SPI interface now require you to pass the `SPI`
+   object as a constructor argument. This allows you to use `SPI1` or `SPI2`
+   (if available for your hardware).
  - c6e35b960ac15bc1b5cf5c588139d437ccd9cb68  
    The `NoteBitmapDisplay` class has been renamed to `BitmapDisplay`.
  - 37b6901cbe56babc47c297a132381d53deaa45e8  
