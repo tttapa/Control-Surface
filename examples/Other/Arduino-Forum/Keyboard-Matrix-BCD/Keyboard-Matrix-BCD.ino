@@ -3,7 +3,7 @@
  * a BD to decimal decoder.  
  * https://forum.arduino.cc/index.php?topic=651047
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Written by Pieter P, 2019-12-01  
  * https://github.com/tttapa/Control-Surface
@@ -34,10 +34,10 @@ const AddressMatrix<rows, columns> notes = {{
 const Channel channel = CHANNEL_1;
 
 // Address pins A, B, C & D of TC4028
-const PinList<4> addressPins = {{2, 3, 4, 5}};
+const AH::PinList<4> addressPins = {{2, 3, 4, 5}};
 // The pins connected to the columns of the keyboard matrix (with external
 // pull-down resistors)
-const PinList<columns> columnPins = {{6, 7, 8, 9, 10, 11, 12, 13}};
+const AH::PinList<columns> columnPins = {{6, 7, 8, 9, 10, 11, 12, 13}};
 
 // Make the given line [0, 9] of the TC4028 high, the nine others low
 void selectLine(uint8_t line) {

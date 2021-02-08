@@ -2,7 +2,7 @@
  * This example demonstrates how to attach custom callbacks to Note or
  * Control Change MIDI Input Elements.
  *
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Nano 33 IoT, Teensy 3.x, ESP32
  *
  * Connections
  * -----------
