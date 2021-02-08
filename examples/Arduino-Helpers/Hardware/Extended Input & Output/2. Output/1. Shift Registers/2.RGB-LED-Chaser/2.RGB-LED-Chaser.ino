@@ -3,7 +3,7 @@
  * library. It creates light effects using three 8-bit shift registers and some
  * RGB LEDs.
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  *
  * Connections
  * -----------
@@ -73,7 +73,7 @@ const uint8_t ShiftRegisterOutRGB::blueBit = 2;
 // Create a new shift register output connected to pins 11, 13 and 10,
 // shift the data out with the most significant bit first.
 // There are 24 (= 3×8) outputs in total.
-SPIShiftRegisterOut<24> sreg = {SS, MSBFIRST};
+SPIShiftRegisterOut<24> sreg = {SPI, SS, MSBFIRST};
 
 void setup() {
   // Initialize the shift registers

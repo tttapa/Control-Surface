@@ -2231,7 +2231,7 @@
  * STL-test
  * ========
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP8266, ESP32
  */
 
 /**
@@ -2242,7 +2242,7 @@
  *
  * Example of using the standard library algorithms and the Button class.
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * This sketch reads a number of push buttons or switches, and uses the standard
  * library algorithms to count how many of them are pressed.
@@ -2261,7 +2261,7 @@
  *
  * Example of using the standard library numeric functions.
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  *
  * This sketch creates an incremental array using the iota function, then
  * computes the inner product of the vector with itself, and uses that to
@@ -2286,7 +2286,7 @@
  *
  * Example of using the standard library algorithms.
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  *
  * This sketch creates an array with an unordered sequence of 10 numbers.
  * It prints the array, and then creates a reverse view on the 6 elements in the 
@@ -2315,7 +2315,7 @@
  *
  * Example of using the standard library complex numbers.
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  *
  * **Output**
  * ~~~
@@ -2335,7 +2335,7 @@
  * This examples shows how to filter an analog input, so you can get the 
  * position of a knob or fader without noise.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2372,7 +2372,7 @@
  * This examples shows how to filter an analog input, so you can get the 
  * position of a knob or fader without noise.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2409,7 +2409,7 @@
  *
  * This examples shows how to use the debounced Button class to toggle an LED.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2437,7 +2437,7 @@
  * This examples shows how to use two push buttons to set the frequency at which
  * an LED blinks.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2470,7 +2470,7 @@
  * This example demonstrates the use of MCP23017 IO expanders as if they were 
  * just normal IO pins.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2503,7 +2503,7 @@
  * This example demonstrates the use of push buttons and LEDs and how to use
  * shift registers and analog multiplexers to save pins.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2552,7 +2552,7 @@
  * This is an example of the AnalogMultiplex class. It prints the states of all
  * 16 switches connected to a multiplexers to the serial monitor.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2595,7 +2595,7 @@
  * This is an example of the AnalogMultiplex class. It prints the values of all
  * 16 inputs of a multiplexers to the serial monitor.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2637,7 +2637,7 @@
  * It prints the filtered values of all 16 inputs of a multiplexers to the 
  * serial monitor.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2678,7 +2678,7 @@
  * This example demonstrates the use of MAX7219 LED outputs as if they were just
  * normal IO pins, using `digitalWrite`.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2706,7 +2706,7 @@
  * This example demonstrates the use of shift registers as if they were just
  * normal IO pins. The SPI interface is used because it's easy and fast.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2740,7 +2740,7 @@
  * normal IO pins. This version uses bit-banging to drive the  shift register. 
  * You should probably be using the SPI version instead.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2774,7 +2774,7 @@
  * library. It creates light effects using three 8-bit shift registers and some
  * RGB LEDs.
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  *
  * Connections
  * -----------
@@ -2835,7 +2835,7 @@
  * This example demonstrates the use of MCP23017 I²C port expanders with rotary
  * encoders.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -2945,7 +2945,7 @@
  * This examples shows how use the debug macros for printing different kinds of
  * debugging information
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Behavior
  * --------
@@ -2982,7 +2982,7 @@
  *
  * Simple Quaternion test.
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  *
  * Written by PieterP, 2020-03-24  
  * https://github.com/tttapa/Arduino-Helpers
@@ -2997,7 +2997,7 @@
  * This examples shows how use the Timer class to blink an LED every
  * second, in a non-blocking fashion (without using delay).
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Behavior
  * --------
@@ -3007,4 +3007,3 @@
  * Written by PieterP, 2019-12-06  
  * https://github.com/tttapa/Arduino-Helpers
  */
-

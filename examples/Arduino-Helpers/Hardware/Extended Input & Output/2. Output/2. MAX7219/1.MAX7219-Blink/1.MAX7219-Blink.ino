@@ -2,7 +2,7 @@
  * This example demonstrates the use of MAX7219 LED outputs as if they were just
  * normal IO pins, using `digitalWrite`.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -29,7 +29,7 @@ using namespace ExtIO; // Bring the ExtIO pin functions into your sketch
 // Instantiate a MAX7219 with the SPI slave select pin as latch pin
 // There's just 1 MAX7219 in the chain, if you have more of them daisy-chained
 // together, you can increase the template argument (between angled brackets)
-MAX7219<1> max7219 = SS;
+MAX7219<1> max7219 = {SPI, SS};
 
 const pin_t ledPin1 = max7219.pin(0);  // first LED of the MAX7219
 const pin_t ledPin2 = max7219.pin(63); // last LED of the MAX7219

@@ -2,69 +2,12 @@
 
 #pragma once
 
+#include <AH/Hardware/Arduino-Hardware-Types.hpp>
+#include <AH/STL/climits>
 #include <AH/Settings/NamespaceSettings.hpp>
 #include <AH/Settings/Warnings.hpp>
 
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
-AH_DIAGNOSTIC_EXTERNAL_HEADER()
-#include <AH/Arduino-Wrapper.h> // pin functions and constants
-AH_DIAGNOSTIC_POP()
-
-#include <AH/Hardware/Hardware-Types.hpp>
-
-BEGIN_AH_NAMESPACE
-
-#define AH_EXT_PIN(x) (x + NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS)
-
-namespace detail {
-constexpr static auto tmp_HIGH = HIGH;
-constexpr static auto tmp_LOW = LOW;
-constexpr static auto tmp_INPUT = INPUT;
-constexpr static auto tmp_OUTPUT = OUTPUT;
-constexpr static auto tmp_INPUT_PULLUP = INPUT_PULLUP;
-} // namespace detail
-
-END_AH_NAMESPACE
-
-#ifndef ARDUINO_API_VERSION
-#ifdef HIGH
-#undef HIGH
-#endif
-#ifdef LOW
-#undef LOW
-#endif
-
-#ifdef INPUT
-#undef INPUT
-#endif
-#ifdef OUTPUT
-#undef OUTPUT
-#endif
-#ifdef INPUT_PULLUP
-#undef INPUT_PULLUP
-#endif
-
-using PinStatus_t = uint8_t;
-using PinMode_t = uint8_t;
-#if defined(SAMD_SERIES) /* Nano 33 */ || defined(_LIB_SAM_) /* Due */
-using BitOrder_t = BitOrder;
-#else
-using BitOrder_t = uint8_t;
-#endif
-
-const PinStatus_t HIGH = AH::detail::tmp_HIGH;
-const PinStatus_t LOW = AH::detail::tmp_LOW;
-
-const PinMode_t INPUT = AH::detail::tmp_INPUT;
-const PinMode_t OUTPUT = AH::detail::tmp_OUTPUT;
-const PinMode_t INPUT_PULLUP = AH::detail::tmp_INPUT_PULLUP;
-
-#else
-using PinStatus_t = PinStatus;
-using PinMode_t = PinMode;
-using BitOrder_t = BitOrder;
-#endif
 
 BEGIN_AH_NAMESPACE
 
@@ -145,6 +88,28 @@ void analogWriteBuffered(pin_t pin, analog_t val);
 /// A buffered ExtIO version of the Arduino function
 /// @see   ExtendedIOElement::analogWriteBuffered
 void analogWriteBuffered(pin_t pin, int val);
+
+#if UINT16_MAX != UINT_MAX
+/// Overload to Arduino pinMode function.
+void pinMode(unsigned int pin, PinMode_t mode);
+/// Overload to Arduino digitalWrite function.
+void digitalWrite(unsigned int pin, PinStatus_t val);
+/// Overload to Arduino digitalRead function.
+PinStatus_t digitalRead(unsigned int pin);
+
+/// Overload to Arduino analogRead function.
+analog_t analogRead(unsigned int pin);
+#ifndef ESP32
+/// Overload to Arduino analogWrite function.
+void analogWrite(unsigned int pin, analog_t val);
+/// Overload to Arduino analogWrite function.
+void analogWrite(unsigned int pin, int val);
+#endif
+
+/// Overload to Arduino shiftOut function
+void shiftOut(unsigned int dataPin, unsigned int clockPin, BitOrder_t bitOrder,
+              uint8_t val);
+#endif
 
 /// @}
 

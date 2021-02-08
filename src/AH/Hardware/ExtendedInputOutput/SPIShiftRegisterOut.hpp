@@ -10,6 +10,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <AH/Arduino-Wrapper.h> // MSBFIRST, SS
+#include <SPI.h>
 AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE
@@ -22,10 +23,12 @@ BEGIN_AH_NAMESPACE
  *          The number of bits in total. Usually, shift registers (e.g. the
  *          74HC595) have eight bits per chip, so `length = 8 * k` where `k`
  *          is the number of cascaded chips.
+ * @tparam  SPIDriver
+ *          The SPI class to use. Usually, the default is fine.
  * 
  * @ingroup AH_ExtIO
  */
-template <uint8_t N>
+template <uint8_t N, class SPIDriver = decltype(SPI) &>
 class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
   public:
     /**
@@ -52,7 +55,8 @@ class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
      *          Either `MSBFIRST` (most significant bit first) or `LSBFIRST`
      *          (least significant bit first).
      */
-    SPIShiftRegisterOut(pin_t latchPin = SS, BitOrder_t bitOrder = MSBFIRST);
+    SPIShiftRegisterOut(SPIDriver spi, pin_t latchPin = SS,
+                        BitOrder_t bitOrder = MSBFIRST);
 
     /**
      * @brief   Initialize the shift register.  
@@ -65,6 +69,12 @@ class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
      * @brief   Write the state buffer to the physical outputs.
      */
     void updateBufferedOutputs() override;
+
+  private:
+    SPIDriver spi;
+
+  public:
+    SPISettings settings{SPI_MAX_SPEED, this->bitOrder, SPI_MODE0};
 };
 
 END_AH_NAMESPACE
