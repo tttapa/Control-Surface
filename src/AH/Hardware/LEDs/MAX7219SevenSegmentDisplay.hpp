@@ -83,14 +83,14 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base<SPIDriver> {
      *          The value/bit pattern to set the digit to.
      */
     void sendDigit(uint16_t digit, uint8_t value) {
-        sendRaw((digit % 8) + 1, value, digit / 8);
+        this->sendRaw((digit % 8) + 1, value, digit / 8);
     }
 
     /**
      * @brief   Get the total number of digits in this chain of displays, i.e. 
      *          eight times the number of chips.
      */
-    uint8_t getNumberOfDigits() const { return 8 * getChainLength(); }
+    uint8_t getNumberOfDigits() const { return 8 * this->getChainLength(); }
 
     /**
      * @brief   Display a long integer to the display.
