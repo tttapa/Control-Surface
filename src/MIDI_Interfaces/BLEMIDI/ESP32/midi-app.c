@@ -144,9 +144,10 @@ void midi_handle_register_app_event(esp_gatt_if_t gatts_if,
     esp_err_t ret = esp_ble_gatts_create_attr_tab(
         midi_attribute_table, gatts_if, MIDI_ATTRIBUTE_TABLE_SIZE,
         MIDI_SERVICE_INSTANCE_ID);
-    if (ret)
+    if (ret) {
         ESP_LOGE("MIDIBLE", "Create attribute table failed, error code: %d",
                  ret);
+    }
 }
 
 void midi_handle_create_attribute_table_event(esp_gatt_if_t gatts_if,

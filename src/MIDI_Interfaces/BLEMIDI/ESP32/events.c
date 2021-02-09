@@ -38,12 +38,14 @@ void gap_event_handler(esp_gap_ble_cb_event_t event,
             advertising_handle_config_response_complete_event(param);
             break;
         case ESP_GAP_BLE_ADV_START_COMPLETE_EVT:
-            if (param->adv_start_cmpl.status != ESP_BT_STATUS_SUCCESS)
+            if (param->adv_start_cmpl.status != ESP_BT_STATUS_SUCCESS) {
                 ESP_LOGE("MIDIBLE", "Advertising start failed");
+            }
             break;
         case ESP_GAP_BLE_ADV_STOP_COMPLETE_EVT:
-            if (param->adv_stop_cmpl.status != ESP_BT_STATUS_SUCCESS)
+            if (param->adv_stop_cmpl.status != ESP_BT_STATUS_SUCCESS) {
                 ESP_LOGE("MIDIBLE", "Advertising stop failed");
+            }
             break;
 
         case ESP_GAP_BLE_UPDATE_CONN_PARAMS_EVT: break;
