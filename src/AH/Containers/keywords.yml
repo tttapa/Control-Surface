@@ -45,11 +45,6 @@ keyword2:
   - remove
   - moveDown
   - couldContain
-  # UniquePtr.hpp
-  - reset
-  - get
-  - release
-  - MakeUnique
   # Updatable.hpp
   - update
   - begin

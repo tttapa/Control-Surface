@@ -187,10 +187,6 @@ insertSorted	KEYWORD2
 remove	KEYWORD2
 moveDown	KEYWORD2
 couldContain	KEYWORD2
-reset	KEYWORD2
-get	KEYWORD2
-release	KEYWORD2
-MakeUnique	KEYWORD2
 update	KEYWORD2
 begin	KEYWORD2
 enable	KEYWORD2
@@ -260,3 +256,4 @@ Hysteresis	KEYWORD1
 filter	KEYWORD2
 update	KEYWORD2
 getValue	KEYWORD2
+
