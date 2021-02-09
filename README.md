@@ -73,3 +73,12 @@ The Arduino Due toolchain provided by Arduino is very old, and has some
 configuration problems. As a result, some math functions are not available.  
 There is nothing I can do about it in this library, it's a bug in the Arduino 
 Due Core.
+
+## Recent Breaking Changes
+
+### 2.0-alpha
+
+ - a81bd1927298decc2ea3852fd2f00e8028c14b81  
+   Classes that make use of the SPI interface now require you to pass the `SPI`
+   object as a constructor argument. This allows you to use `SPI1` or `SPI2`
+   (if available for your hardware).
