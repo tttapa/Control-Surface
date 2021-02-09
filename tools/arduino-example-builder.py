@@ -49,25 +49,29 @@ def get_boards(path):
         return list(map(str.lower, map(str.strip, sboards.split(','))))
 
 def build_example(path, board, fqbn, include_unlabeled_examples):
-    example_boards = get_boards(path)
-    if len(example_boards) > 0 and not board.lower() in example_boards:
-        return None
-    elif len(example_boards) == 0 and not include_unlabeled_examples:
-        return None
-    name = path.stem
-    cwd = path.parent
-    cmd = ['arduino-cli', 'compile', 
-           '--format', 'json', 
-           '--build-cache-path', '/tmp/core-' + board,
-           '-b', fqbn,
-           '--warnings', 'all',
-           name]
-    # TODO: libraries path?
-    start = time.time()
-    result = run(cmd, cwd=cwd, stdout=PIPE, stderr=STDOUT)
-    end = time.time()
-    output = json.loads(result.stdout.decode('utf-8'))
-    return output, result.returncode, end - start
+    try:
+        example_boards = get_boards(path)
+        if len(example_boards) > 0 and not board.lower() in example_boards:
+            return None
+        elif len(example_boards) == 0 and not include_unlabeled_examples:
+            return None
+        name = path.stem
+        cwd = path.parent
+        cmd = ['arduino-cli', 'compile', 
+            '--format', 'json', 
+            '--build-cache-path', '/tmp/core-' + board,
+            '-b', fqbn,
+            '--warnings', 'all',
+            name]
+        # TODO: libraries path?
+        start = time.time()
+        result = run(cmd, cwd=cwd, stdout=PIPE, stderr=STDOUT)
+        end = time.time()
+        output = json.loads(result.stdout.decode('utf-8'))
+        return output, result.returncode, end - start
+    except Exception as e:
+        output = {"success": False, "compiler_err": str(e) + '\r\n'}
+        return output, 1, 0
 
 def compile_core(board, fqbn):
     os.makedirs('/tmp/arduino-builder-empty-sketch', exist_ok=True)
