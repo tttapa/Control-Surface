@@ -21,6 +21,7 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
     }
 
     void update() override {
+        Parent::update();
         switch (button.update()) {
             case AH::IncrementButton::Nothing: break;
             case AH::IncrementButton::IncrementShort: // fallthrough
