@@ -1,10 +1,10 @@
-name: Compile Examples
+name: Examples
 
 on: push
 
 jobs:
   compile-examples:
-    name: Compile Examples
+    name: Examples
     runs-on: ubuntu-20.04
     strategy:
       matrix:
