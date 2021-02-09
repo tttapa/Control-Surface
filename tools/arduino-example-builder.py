@@ -35,7 +35,6 @@ with open(args.fqbn_file, "r") as f:
 examples = Path(args.examples_dir).rglob('*.ino')
 # Only keep those that match the name of the folder they're in
 examples = filter(lambda p: p.parts[-2] == p.stem, examples)
-examples = list(examples)[0:4]
 
 def get_boards(path):
     with open(path, 'rb', 0) as f:
