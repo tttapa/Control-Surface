@@ -34,6 +34,15 @@ jobs:
           key: ${{ runner.os }}-arduino-${{ github.sha }}
           restore-keys: ${{ runner.os }}-arduino-
 
+      - name: Cache Compiled Arduino Cores and Sketches
+        uses: actions/cache@v2.1.4
+        with:
+          path: |
+            /tmp/arduino-sketch-*
+            /tmp/core-*
+          key: ${{ runner.os }}-arduino-compiled-${{ matrix.board }}-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-arduino-compiled-${{ matrix.board }}-
+
       - name: Update $PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
