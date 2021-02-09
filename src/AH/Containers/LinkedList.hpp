@@ -286,7 +286,7 @@ class DoublyLinkedList {
                         node->previous != nullptr);
     }
 
-    /// @copydoc couldContain(const Node *) const
+    /// @copydoc DoublyLinkedList::couldContain(const Node *) const
     bool couldContain(const Node &node) const { return couldContain(&node); }
 
     iterator begin() { return {first}; }

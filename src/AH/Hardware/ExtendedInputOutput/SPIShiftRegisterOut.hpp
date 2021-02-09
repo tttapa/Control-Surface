@@ -48,6 +48,8 @@ class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
      * CS    >───────────┴──────────────────────┴───────── ⋯
      * ```
      * 
+     * @param   spi
+     *          The SPI interface to use.
      * @param   latchPin
      *          The digital output pin connected to the latch pin (ST_CP or 
      *          RCLK) of the shift register.

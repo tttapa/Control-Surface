@@ -86,7 +86,7 @@ class EMA {
       return input_t(output);
     }
 
-    /// @copydoc    filter(input_t)
+    /// @copydoc    EMA::filter(input_t)
     input_t operator()(input_t input) {
         return filter(input);
     }
