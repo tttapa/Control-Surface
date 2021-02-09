@@ -1,0 +1,4 @@
+23c23
+< #if !defined(Arduino_h) && !defined(ARDUINO_LIB_DISCOVERY_PHASE)
+---
+> #if !defined(Arduino_h)
