@@ -34,9 +34,9 @@ increaseBitDepthImpl(T_in in) {
 
 /**
  * @brief   Increase the bit depth of the given value from `Bits_in` bits wide
- *          to `Bits_out` bits wide, evenly distributing the error across the 
- *          entire range, such that the error for each element is between -0.5
- *          and +0.5.
+ *          to `Bits_out` bits wide, (approximately) evenly distributing the 
+ *          error across the entire range, such that the error for each element
+ *          is between -1 and +1.
  * 
  * For example, converting 3-bit numbers to 7-bit numbers would result in the
  * following:
