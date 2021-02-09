@@ -52,10 +52,10 @@
         {
             "type": "shell",
             "label": "Make & Test & Build examples",
-            "command": "./build-arduino-examples.sh $[$(nproc) * 2]",
+            "command": "python3 arduino-example-builder.py 'AVR USB'",
             "problemMatcher": "$gcc",
             "options": {
-                "cwd": "${workspaceFolder}/scripts",
+                "cwd": "${workspaceFolder}/tools",
             },
             "dependsOn": "Make Test",
             "group": "test",
@@ -76,15 +76,6 @@
             "command": "make coverage",
             "options": {
                 "cwd": "${workspaceFolder}/build/coverage",
-            },
-            "problemMatcher": [],
-        },
-        {
-            "type": "shell",
-            "label": "Export Documentation",
-            "command": "make export_documentation",
-            "options": {
-                "cwd": "${workspaceFolder}/build",
             },
             "problemMatcher": [],
         },

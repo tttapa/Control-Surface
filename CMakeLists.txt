@@ -121,9 +121,6 @@ add_subdirectory(test)
 # Custom targets for documentation 
 ################################################################################
 
-add_custom_target(export_documentation ./export.sh
-WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen/scripts)
-
 # Add XBM target
 add_custom_target(xbm 
     python3 ${CMAKE_CURRENT_LIST_DIR}/src/Display/Bitmaps/Scripts/XBM-export.py
@@ -146,9 +143,3 @@ endif()
 add_custom_target(check tests
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin/
     DEPENDS tests)
-
-add_custom_target(arduino ./build-arduino-examples.sh
-    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/scripts)
-
-add_custom_target(arduino_ci ./build-arduino-examples-ci.sh
-    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/scripts)
