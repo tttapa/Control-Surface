@@ -27,6 +27,8 @@ class MAX7219_Base {
     /**
      * @brief   Create a MAX7219_Base object.
      * 
+     * @param   spi
+     *          The SPI interface to use.
      * @param   loadPin
      *          The pin connected to the load pin (C̄S̄) of the MAX7219.
      * @param   chainlength
