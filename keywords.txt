@@ -160,7 +160,6 @@ const_iterator	KEYWORD1
 reverse_iterator	KEYWORD1
 const_reverse_iterator	KEYWORD1
 DoublyLinkable	KEYWORD1
-UniquePtr	KEYWORD1
 NormalUpdatable	KEYWORD1
 Updatable	KEYWORD1
 
@@ -261,4 +260,3 @@ Hysteresis	KEYWORD1
 filter	KEYWORD2
 update	KEYWORD2
 getValue	KEYWORD2
-
