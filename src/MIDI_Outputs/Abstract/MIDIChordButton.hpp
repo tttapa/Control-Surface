@@ -1,7 +1,7 @@
 #pragma once
 
-#include <AH/Containers/UniquePtr.hpp>
 #include <AH/Hardware/Button.hpp>
+#include <AH/STL/memory> // std::unique_ptr
 #include <Def/Def.hpp>
 #include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -41,8 +41,8 @@ class MIDIChordButton : public MIDIOutputElement {
     MIDIChordButton(pin_t pin, MIDIAddress address, Chord<N> chord,
                     const Sender &sender)
         : button(pin), address(address),
-          newChord(AH::MakeUnique<Chord<N>>(std::move(chord))), sender(sender) {
-    }
+          newChord(AH::make_unique<Chord<N>>(std::move(chord))),
+          sender(sender) {}
     // TODO: can I somehow get rid of the dynamic memory allocation here?
 
     void begin() final override { button.begin(); }
@@ -70,14 +70,14 @@ class MIDIChordButton : public MIDIOutputElement {
 
     template <uint8_t N>
     void setChord(Chord<N> chord) {
-        newChord = AH::MakeUnique<Chord<N>>(std::move(chord));
+        newChord = AH::make_unique<Chord<N>>(std::move(chord));
     }
 
   private:
     AH::Button button;
     const MIDIAddress address;
-    AH::UniquePtr<const IChord> chord;
-    AH::UniquePtr<const IChord> newChord;
+    std::unique_ptr<const IChord> chord;
+    std::unique_ptr<const IChord> newChord;
 
   public:
     Sender sender;
