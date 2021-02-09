@@ -65,12 +65,17 @@ def build_example(path, board, fqbn, include_unlabeled_examples):
             name]
         # TODO: libraries path?
         start = time.time()
-        result = run(cmd, cwd=cwd, stdout=PIPE, stderr=STDOUT)
+        result = run(cmd, cwd=cwd, stdout=PIPE, stderr=PIPE)
         end = time.time()
-        output = json.loads(result.stdout.decode('utf-8'))
+        out_str = result.stdout.decode('utf-8')
+        err_str = result.stderr.decode('utf-8')
+        output = json.loads(out_str)
+        output["stderr"] = err_str
         return output, result.returncode, end - start
     except Exception as e:
-        output = {"success": False, "compiler_err": str(e) + '\r\n'}
+        output = {"success": False,
+                  "compiler_err": str(e) + '\r\n' + out_str + '\r\n',
+                  "stderr": err_str}
         return output, 1, 0
 
 def compile_core(board, fqbn):
@@ -86,12 +91,17 @@ def compile_core(board, fqbn):
            'arduino-builder-empty-sketch']
     print("Building core ...")
     start = time.time()
-    result = run(cmd, cwd=cwd, stdout=PIPE, stderr=STDOUT)
+    result = run(cmd, cwd=cwd, stdout=PIPE, stderr=PIPE)
     end = time.time()
-    output = json.loads(result.stdout.decode('utf-8'))
+    out_str = result.stdout.decode('utf-8')
+    err_str = result.stderr.decode('utf-8')
+    output = json.loads(out_str)
     if output["success"]:
         print(f"Done in {end - start:.3f}s")
     else:
+        print(cmd)
+        print(out_str)
+        print(err_str)
         print(output["compiler_err"])
         raise RuntimeError("Failed to compile core")
 
@@ -102,6 +112,7 @@ yellow = "\033[1;33m"
 reset = "\033[0m"
 
 failures = 0
+total_count = 0
 board = args.board
 fqbn = board_fqbns[board.lower()]
 include_unlabeled_examples = args.include_unlabeled_examples
@@ -127,10 +138,17 @@ with ThreadPoolExecutor(max_workers=args.jobs) as executor:
         print(f"""
 {bold}{board}{reset}: {color}"{example_rel}"{reset}
 ----- {output[2]:.3f}s ----- 
-{sizes}\
+{sizes}
 {output[0]["compiler_err"]}
+{output[0]["stderr"]}
 {"success" if success else "fail"}
 """)
         failures += success == False
+        total_count += 1
+
+if failures == 0:
+    print(f'\r\n-----\r\n\r\nSuccessfully compiled {total_count} examples\r\n')
+else:
+    print(f'\r\n-----\r\n\r\nFailed to compile {failures} of {total_count} examples\r\n')
 
 exit(failures)

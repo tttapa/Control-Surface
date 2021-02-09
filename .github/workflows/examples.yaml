@@ -62,6 +62,7 @@ jobs:
           [ -d Arduino-AppleMIDI-Library ] || git clone https://github.com/lathoub/Arduino-AppleMIDI-Library.git --depth=1 &
           [ -d arduino_midi_library ] || git clone https://github.com/FortySevenEffects/arduino_midi_library.git --depth=1 &
           ln -snf "$GITHUB_WORKSPACE" "$HOME/Arduino/libraries/Control-Surface"
+          cp "$GITHUB_WORKSPACE/examples/3. MIDI Interfaces/AppleMIDI/WiFi-Credentials.example.h" "$GITHUB_WORKSPACE/examples/3. MIDI Interfaces/AppleMIDI/WiFi-Credentials.h"
 
       - name: Cache Python Packages 
         uses: actions/cache@v2.1.4
