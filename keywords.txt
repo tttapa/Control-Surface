@@ -370,7 +370,6 @@ const_iterator	KEYWORD1
 reverse_iterator	KEYWORD1
 const_reverse_iterator	KEYWORD1
 DoublyLinkable	KEYWORD1
-UniquePtr	KEYWORD1
 NormalUpdatable	KEYWORD1
 Updatable	KEYWORD1
 
@@ -398,10 +397,6 @@ insertSorted	KEYWORD2
 remove	KEYWORD2
 moveDown	KEYWORD2
 couldContain	KEYWORD2
-reset	KEYWORD2
-get	KEYWORD2
-release	KEYWORD2
-MakeUnique	KEYWORD2
 update	KEYWORD2
 begin	KEYWORD2
 enable	KEYWORD2
