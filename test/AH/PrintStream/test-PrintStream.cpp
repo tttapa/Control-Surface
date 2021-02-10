@@ -1,6 +1,6 @@
 #include <AH/PrintStream/PrintStream.hpp>
-#include <gmock-wrapper.h>
-#include <gtest-wrapper.h>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 using namespace ::testing;
 USING_AH_NAMESPACE;

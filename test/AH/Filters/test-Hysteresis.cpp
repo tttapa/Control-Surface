@@ -1,4 +1,4 @@
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 #include <AH/Filters/Hysteresis.hpp>
 #include <algorithm>

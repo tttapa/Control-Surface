@@ -1,6 +1,6 @@
 #pragma once
 
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 class EncoderMock {
   public:

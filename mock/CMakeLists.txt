@@ -7,4 +7,4 @@ target_include_directories(ArduinoMock PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/Adafruit_GFX
     ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/Adafruit_SSD1306
     ${CMAKE_CURRENT_SOURCE_DIR}/Libraries/Encoder)
-target_link_libraries(ArduinoMock PUBLIC googletest_wrappers)
+target_link_libraries(ArduinoMock PUBLIC gtest gmock)
