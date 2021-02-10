@@ -138,7 +138,7 @@ BEGIN_CS_NAMESPACE
  * connected to the Serial to USB chip. This can be used with custom 
  * MIDI over USB firmware for the Serial to USB chip.
  * 
- * @note    See @ref md_pages_MIDI-over-USB for more information.
+ * @note    See @ref md_pages_MIDI_over_USB for more information.
  * 
  * @ingroup MIDIInterfaces
  */
