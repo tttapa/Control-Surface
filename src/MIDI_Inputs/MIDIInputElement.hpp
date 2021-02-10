@@ -23,8 +23,7 @@ BEGIN_CS_NAMESPACE
  *          more complicated than necessary.
  */
 template <MIDIMessageType Type>
-class MIDIInputElement
-    : public AH::UpdatableCRTP<MIDIInputElement<Type>, true> {
+class MIDIInputElement : public AH::UpdatableCRTP<MIDIInputElement<Type>> {
   protected:
     MIDIInputElement() = default;
 
@@ -50,13 +49,9 @@ class MIDIInputElement
 
     /// Update all
     static bool updateAllWith(MessageType midimsg) {
-        // MIDI messages can arrive asynchronously, so the linked list must be
-        // locked before iterating over it or altering it.
-        typename MIDIInputElement::LockGuard lock(MIDIInputElement::getMutex());
-
         for (auto &el : MIDIInputElement::updatables) {
             if (el.updateWith(midimsg)) {
-                el.moveDown(lock);
+                el.moveDown();
                 return true;
             }
         }
@@ -81,16 +76,16 @@ class MIDIInputElement
 
 // -------------------------------------------------------------------------- //
 
-/// The @ref MIDIInputElement base class is very general: you give it a MIDI 
+/// The @ref MIDIInputElement base class is very general: you give it a MIDI
 /// message, and it calls the `updateWith()` method with that message. Each
 /// instance must then determine whether the message is meant for them or not.
-/// This is often a very repetitive task, so that logic is best isolated in a 
+/// This is often a very repetitive task, so that logic is best isolated in a
 /// so-called “Matcher”. The Matcher looks at the MIDI message, checks if it
-/// matches its MIDI address, for example, and if so, it extracts some data 
+/// matches its MIDI address, for example, and if so, it extracts some data
 /// (such as the MIDI velocity value from the message). Then it returns whether
-/// it matched and the extra data as a “Matcher::Result” object. If the message 
-/// matched, that Result object is passed to the 
-/// @ref MatchingMIDIInputElement::handleUpdate() method, so it can be handled 
+/// it matched and the extra data as a “Matcher::Result” object. If the message
+/// matched, that Result object is passed to the
+/// @ref MatchingMIDIInputElement::handleUpdate() method, so it can be handled
 /// there.
 ///
 /// @todo   Pass the MIDI message to the @ref handleUpdate() method.
@@ -117,7 +112,7 @@ class MatchingMIDIInputElement : public MIDIInputElement<Type> {
 
 // -------------------------------------------------------------------------- //
 
-/// Similar to @ref MatchingMIDIInputElement, but for Bankable MIDI Input 
+/// Similar to @ref MatchingMIDIInputElement, but for Bankable MIDI Input
 /// Elements.
 template <MIDIMessageType Type, class Matcher>
 class BankableMatchingMIDIInputElement
