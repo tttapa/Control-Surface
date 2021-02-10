@@ -1,7 +1,7 @@
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
 #include <MIDI_Outputs/PBPotentiometer.hpp>
 #include <MockMIDI_Interface.hpp>
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 using namespace ::testing;
 using namespace CS;

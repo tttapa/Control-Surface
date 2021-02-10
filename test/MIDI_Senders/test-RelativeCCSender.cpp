@@ -1,4 +1,4 @@
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 #include <MIDI_Senders/RelativeCCSender.hpp>
 

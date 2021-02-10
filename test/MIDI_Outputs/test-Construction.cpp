@@ -56,7 +56,7 @@
 
 #include <Selectors/LEDs/SelectorLEDs.hpp>
 
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 using namespace CS;
 

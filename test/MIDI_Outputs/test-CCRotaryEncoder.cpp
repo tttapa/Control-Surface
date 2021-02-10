@@ -1,6 +1,6 @@
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
 #include <MockMIDI_Interface.hpp>
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 using namespace ::testing;
 using namespace CS;

@@ -3,7 +3,7 @@
 #include <MIDI_Outputs/CCButton.hpp>
 #include <MIDI_Outputs/CCButtons.hpp>
 #include <MockMIDI_Interface.hpp>
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 using namespace ::testing;
 using namespace CS;

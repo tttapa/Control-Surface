@@ -1,6 +1,6 @@
 #include <Banks/Bank.hpp>
 #include <MIDI_Inputs/MCU/TimeDisplay.hpp>
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 using namespace ::testing;
 using namespace CS;

@@ -2,8 +2,8 @@
 #include <MIDI_Interfaces/MIDI_Pipes.hpp>
 #include <MIDI_Interfaces/MIDI_Staller.hpp>
 
-#include <gmock-wrapper.h>
-#include <gtest-wrapper.h>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 USING_CS_NAMESPACE;
 using ::testing::StrictMock;

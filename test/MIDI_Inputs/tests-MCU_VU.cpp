@@ -1,6 +1,6 @@
 #include <Banks/Bank.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 using ::testing::Mock;
 using ::testing::Return;

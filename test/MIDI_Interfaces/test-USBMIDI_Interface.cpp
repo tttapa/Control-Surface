@@ -1,6 +1,6 @@
 #include <MIDI_Interfaces/USBMIDI_Interface.hpp>
-#include <gmock-wrapper.h>
-#include <gtest-wrapper.h>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 USING_CS_NAMESPACE;
 using ::testing::Return;

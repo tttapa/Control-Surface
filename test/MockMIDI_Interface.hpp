@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MIDI_Interfaces/MIDI_Interface.hpp>
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 class EmptyParser : public CS::MIDI_Parser {
   public:

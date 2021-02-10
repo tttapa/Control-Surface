@@ -1,4 +1,4 @@
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 #include <MIDI_Inputs/NoteCCKPRange.hpp>
 #include <MIDI_Inputs/NoteCCKPValue.hpp>

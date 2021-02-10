@@ -16,7 +16,7 @@
 #include <thread>
 
 #ifndef ARDUINO
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 #endif
 
 BEGIN_CS_NAMESPACE

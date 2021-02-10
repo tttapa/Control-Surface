@@ -1,6 +1,6 @@
 #include <MIDI_Outputs/NoteButtonMatrix.hpp>
 #include <MockMIDI_Interface.hpp>
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 using namespace ::testing;
 using namespace CS;

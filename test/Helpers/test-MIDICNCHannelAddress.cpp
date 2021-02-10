@@ -1,5 +1,5 @@
 #include <Def/MIDIAddress.hpp>
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 using namespace CS;
 

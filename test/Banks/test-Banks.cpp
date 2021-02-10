@@ -1,4 +1,4 @@
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 #include <Banks/Bank.hpp>
 

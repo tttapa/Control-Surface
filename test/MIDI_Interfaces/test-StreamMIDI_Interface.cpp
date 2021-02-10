@@ -1,7 +1,7 @@
 #include <MIDI_Interfaces/MIDI_Callbacks.hpp>
 #include <MIDI_Interfaces/SerialMIDI_Interface.hpp>
-#include <gmock-wrapper.h>
-#include <gtest-wrapper.h>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 #include <TestStream.hpp>
 
 USING_CS_NAMESPACE;

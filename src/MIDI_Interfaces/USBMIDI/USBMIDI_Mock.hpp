@@ -1,7 +1,7 @@
 #include <AH/Containers/Array.hpp>
 #include <Settings/NamespaceSettings.hpp>
 
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 BEGIN_CS_NAMESPACE
 
