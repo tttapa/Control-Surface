@@ -16,7 +16,6 @@
                 "${workspaceFolder}/test",
                 "${workspaceFolder}/googletest/googlemock/include",
                 "${workspaceFolder}/googletest/googletest/include",
-                "${workspaceFolder}/gtest-wrappers",
                 "${env:HOME}/Arduino/libraries/FastLED",
                 "${env:HOME}/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino5/avr/include"
             ],
