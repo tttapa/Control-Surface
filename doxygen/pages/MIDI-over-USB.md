@@ -1,4 +1,4 @@
-# MIDI over USB
+# MIDI over USB {#md_pages_MIDI-over-USB}
 There are some differences in MIDI over USB implementation between different types of Arduino-compatible boards. This page provides an overview and some board recommendations if you're planning to build an Arduino MIDI device with MIDI over USB support.
  
 ## Arduino boards with native USB support
