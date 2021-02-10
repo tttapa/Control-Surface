@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include <gmock-wrapper.h>
-#include <gtest-wrapper.h>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 using namespace ::testing;
 

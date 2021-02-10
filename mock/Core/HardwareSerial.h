@@ -31,7 +31,7 @@
 #undef F
 #endif
 
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 class SerialHelper {
   public:

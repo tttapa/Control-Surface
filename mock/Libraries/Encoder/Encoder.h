@@ -1,7 +1,7 @@
 #ifndef Encoder_h_
 #define Encoder_h_
 
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 class EncoderMock {
   public:
