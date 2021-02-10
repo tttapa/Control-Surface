@@ -25,6 +25,63 @@ class DisplayElement : public DoublyLinkable<DisplayElement> {
             });
     }
 
+    /// @name Enabling and disabling display elements
+    /// @{
+
+    /// Enable this display element: insert it into the linked list of 
+    /// instances, so it gets drawn to the display
+    void enable() {
+        if (isEnabled()) {
+            ERROR(F("Error: This element is already enabled."), 0x9212);
+            return;
+        }
+        elements.append(this);
+    }
+
+    /// Disable this display element: remove it from the linked list of
+    /// instances, so it no longer gets drawn to the display
+    void disable() {
+        if (!isEnabled()) {
+            ERROR(F("Error: This element is already disabled."), 0x9213);
+            return;
+        }
+        elements.remove(this);
+    }
+
+    /**
+     * @brief   Check if this display element is enabled.
+     * 
+     * @note    Assumes that the element is not added to a different linked 
+     *          list by the user.
+     */
+    bool isEnabled() const {
+        return elements.couldContain(this);
+    }
+
+    /// @copydoc DisplayElement::enable
+    static void enable(DisplayElement *element) { element->enable(); }
+    /// @copydoc DisplayElement::enable
+    static void enable(DisplayElement &element) { element.enable(); }
+    /// @copydoc DisplayElement::enable
+    template <class U, size_t N>
+    static void enable(U (&array)[N]) {
+        for (U &el : array)
+            enable(el);
+    }
+
+    /// @copydoc DisplayElement::disable
+    static void disable(DisplayElement *element) { element->disable(); }
+    /// @copydoc DisplayElement::disable
+    static void disable(DisplayElement &element) { element.disable(); }
+    /// @copydoc DisplayElement::disable
+    template <class U, size_t N>
+    static void disable(U (&array)[N]) {
+        for (U &el : array)
+            disable(el);
+    }
+
+    /// @}
+
   public:
     virtual ~DisplayElement() { elements.remove(this); }
 
