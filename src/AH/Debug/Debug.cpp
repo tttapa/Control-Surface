@@ -12,8 +12,12 @@ END_AH_NAMESPACE
 
 #endif
 
-#ifdef ESP32
+#if defined(ESP32)
 BEGIN_AH_NAMESPACE
 std::mutex debugmutex;
+END_AH_NAMESPACE
+#elif defined(ARDUINO_ARCH_MBED)
+BEGIN_AH_NAMESPACE
+rtos::Mutex debugmutex;
 END_AH_NAMESPACE
 #endif

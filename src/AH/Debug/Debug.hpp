@@ -26,8 +26,11 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #endif
 #endif
 
-#ifdef ESP32
+#if defined(ESP32)
 #include <mutex>
+#elif defined(ARDUINO_ARCH_MBED)
+#include <mutex>
+#include <mbed/rtos/Mutex.h>
 #endif
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -67,10 +70,15 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-#ifdef ESP32
+#if defined(ESP32)
 #define DEBUG_LOCK_MUTEX std::lock_guard<std::mutex> lock(AH::debugmutex);
 BEGIN_AH_NAMESPACE
 extern std::mutex debugmutex;
+END_AH_NAMESPACE
+#elif defined(ARDUINO_ARCH_MBED)
+#define DEBUG_LOCK_MUTEX std::lock_guard<rtos::Mutex> lock(AH::debugmutex);
+BEGIN_AH_NAMESPACE
+extern rtos::Mutex debugmutex;
 END_AH_NAMESPACE
 #else
 #define DEBUG_LOCK_MUTEX
