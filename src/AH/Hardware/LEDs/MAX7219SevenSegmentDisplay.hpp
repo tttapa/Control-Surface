@@ -68,8 +68,8 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base<SPIDriver> {
                                   chainlength) {}
 
     /// Initialize.
-    /// @see    MAX7219#init
-    void begin() { init(); }
+    /// @see    @ref MAX7219_Base::begin
+    void begin() { MAX7219_Base<SPIDriver>::begin(); }
 
     /**
      * @brief   Set the value of a single digit.
