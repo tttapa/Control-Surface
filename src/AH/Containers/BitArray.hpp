@@ -21,7 +21,7 @@ BEGIN_AH_NAMESPACE
  * @tparam  N
  *          The number of bits.
  */
-template <uint8_t N>
+template <uint16_t N>
 class BitArray {
   public:
     /**
@@ -30,7 +30,7 @@ class BitArray {
      * @param   bitIndex
      *          The (zero-based) index of the bit to read.
      */
-    bool get(uint8_t bitIndex) const {
+    bool get(uint16_t bitIndex) const {
         return buffer[getBufferIndex(bitIndex)] & getBufferMask(bitIndex);
     }
 
@@ -40,7 +40,7 @@ class BitArray {
      * @param   bitIndex
      *          The (zero-based) index of the bit to set.
      */
-    void set(uint8_t bitIndex) {
+    void set(uint16_t bitIndex) {
         buffer[getBufferIndex(bitIndex)] |= getBufferMask(bitIndex);
     }
 
@@ -50,7 +50,7 @@ class BitArray {
      * @param   bitIndex
      *          The (zero-based) index of the bit to clear.
      */
-    void clear(uint8_t bitIndex) {
+    void clear(uint16_t bitIndex) {
         buffer[getBufferIndex(bitIndex)] &= ~getBufferMask(bitIndex);
     }
 
@@ -62,7 +62,7 @@ class BitArray {
      * @param   state
      *          The value to set the bit to.
      */
-    void set(uint8_t bitIndex, bool state) {
+    void set(uint16_t bitIndex, bool state) {
         state ? set(bitIndex) : clear(bitIndex);
     }
 
@@ -74,7 +74,7 @@ class BitArray {
      * @param   byteIndex 
      *          The index to check.
      */
-    uint8_t safeIndex(uint8_t byteIndex) const {
+    uint16_t safeIndex(uint16_t byteIndex) const {
         if (byteIndex >= getBufferLength()) {
             ERROR(F("Error: index out of bounds (")
                       << byteIndex << F(", length is ") << getBufferLength()
@@ -96,7 +96,12 @@ class BitArray {
      * @param   byteIndex
      *          The index of the byte within the array. 
      */
-    const uint8_t &getByte(uint8_t byteIndex) const {
+    const uint8_t &getByte(uint16_t byteIndex) const {
+        return buffer[byteIndex];
+        // return buffer[safeIndex(byteIndex)];
+    }
+    /// @copydoc BitArray::getByte
+    uint8_t &getByte(uint16_t byteIndex) {
         return buffer[byteIndex];
         // return buffer[safeIndex(byteIndex)];
     }
@@ -114,25 +119,25 @@ class BitArray {
      * @param   value
      *          The byte to write.
      */
-    void setByte(uint8_t byteIndex, uint8_t value) {
+    void setByte(uint16_t byteIndex, uint8_t value) {
         buffer[byteIndex] = value;
     }
 
     /**
      * @brief   Get the buffer length in bytes.
      */
-    uint8_t getBufferLength() const { return bufferLength; }
+    uint16_t getBufferLength() const { return bufferLength; }
 
   private:
-    uint8_t getBufferIndex(uint8_t bitIndex) const {
+    uint16_t getBufferIndex(uint16_t bitIndex) const {
         return safeIndex(bitIndex / 8);
     }
-    uint8_t getBufferBit(uint8_t bitIndex) const { return bitIndex % 8; }
-    uint8_t getBufferMask(uint8_t bitIndex) const {
+    uint8_t getBufferBit(uint16_t bitIndex) const { return bitIndex % 8; }
+    uint8_t getBufferMask(uint16_t bitIndex) const {
         return 1 << getBufferBit(bitIndex);
     }
 
-    constexpr static uint8_t bufferLength = (uint8_t)((N + 7) / 8);
+    constexpr static uint16_t bufferLength = (uint16_t)((N + 7) / 8);
     uint8_t buffer[bufferLength] = {};
 };
 

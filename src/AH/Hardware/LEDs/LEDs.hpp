@@ -17,7 +17,7 @@ BEGIN_AH_NAMESPACE
  * 
  * @ingroup AH_HardwareUtils
  */
-template <uint8_t N>
+template <uint16_t N>
 class LEDs {
   public:
     /**
@@ -45,23 +45,23 @@ class LEDs {
      * @param   startOff
      *          The first LED after the range to turn off.
      */
-    void displayRange(uint8_t startOn, uint8_t startOff) const {
-        for (uint8_t pin = 0; pin < startOn; pin++)
+    void displayRange(uint16_t startOn, uint16_t startOff) const {
+        for (uint16_t pin = 0; pin < startOn; pin++)
             clear(pin);
-        for (uint8_t pin = startOn; pin < startOff; pin++)
+        for (uint16_t pin = startOn; pin < startOff; pin++)
             set(pin);
-        for (uint8_t pin = startOff; pin < N; pin++)
+        for (uint16_t pin = startOff; pin < N; pin++)
             clear(pin);
     }
 
     /// Turn on the given LED.
-    void set(uint8_t index) const {
+    void set(uint16_t index) const {
         // TODO: bounds check?
         ExtIO::digitalWrite(ledPins[index], HIGH);
     }
 
     /// Turn off the given LED.
-    void clear(uint8_t index) const {
+    void clear(uint16_t index) const {
         // TODO: bounds check?
         ExtIO::digitalWrite(ledPins[index], LOW);
     }
@@ -72,7 +72,7 @@ class LEDs {
      * @param   led
      *          The LED to turn on.
      */
-    void displayDot(uint8_t led) const { displayRange(led, led + 1); }
+    void displayDot(uint16_t led) const { displayRange(led, led + 1); }
 
     /**
      * @brief   Turn off all LEDs.

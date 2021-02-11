@@ -9,32 +9,32 @@ AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE
 
-template <uint8_t N, class SPIDriver>
+template <uint16_t N, class SPIDriver>
 SPIShiftRegisterOut<N, SPIDriver>::SPIShiftRegisterOut(SPIDriver spi,
                                                        pin_t latchPin,
                                                        BitOrder_t bitOrder)
     : ShiftRegisterOutBase<N>(latchPin, bitOrder),
       spi(std::forward<SPIDriver>(spi)) {}
 
-template <uint8_t N, class SPIDriver>
+template <uint16_t N, class SPIDriver>
 void SPIShiftRegisterOut<N, SPIDriver>::begin() {
     ExtIO::pinMode(this->latchPin, OUTPUT);
     spi.begin();
     updateBufferedOutputs();
 }
 
-template <uint8_t N, class SPIDriver>
+template <uint16_t N, class SPIDriver>
 void SPIShiftRegisterOut<N, SPIDriver>::updateBufferedOutputs() {
     if (!this->dirty)
         return;
     spi.beginTransaction(settings);
     ExtIO::digitalWrite(this->latchPin, LOW);
-    const uint8_t bufferLength = this->buffer.getBufferLength();
+    const uint16_t bufferLength = this->buffer.getBufferLength();
     if (this->bitOrder == LSBFIRST)
-        for (uint8_t i = 0; i < bufferLength; i++)
+        for (uint16_t i = 0; i < bufferLength; i++)
             spi.transfer(this->buffer.getByte(i));
     else
-        for (int8_t i = bufferLength - 1; i >= 0; i--)
+        for (uint16_t i = bufferLength; i-->0;)
             spi.transfer(this->buffer.getByte(i));
     ExtIO::digitalWrite(this->latchPin, HIGH);
     spi.endTransaction();
