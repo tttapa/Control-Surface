@@ -8,7 +8,7 @@ BEGIN_CS_NAMESPACE
 namespace MCU {
 
 /// Small helper to display the VU meters on an LED bar display.
-template <uint8_t NumLEDs>
+template <uint16_t NumLEDs>
 class VULEDsDriver : public AH::DotBarDisplayLEDs<NumLEDs> {
   public:
     /// Constructor
@@ -17,7 +17,7 @@ class VULEDsDriver : public AH::DotBarDisplayLEDs<NumLEDs> {
 
     /// @param  value
     ///         [0, 12]
-    void displayVU(uint8_t value) {
+    void displayVU(uint16_t value) {
         value = (value * NumLEDs + FLOOR_CORRECTION) / 12; // [0, N]
         this->display(value);
     }
