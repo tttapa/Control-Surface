@@ -6,7 +6,6 @@
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 #include "ShiftRegisterOutBase.hpp"
-#include <AH/Containers/BitArray.hpp>
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <AH/Arduino-Wrapper.h> // MSBFIRST, SS
@@ -28,7 +27,7 @@ BEGIN_AH_NAMESPACE
  * 
  * @ingroup AH_ExtIO
  */
-template <uint8_t N, class SPIDriver = decltype(SPI) &>
+template <uint16_t N, class SPIDriver = decltype(SPI) &>
 class SPIShiftRegisterOut : public ShiftRegisterOutBase<N> {
   public:
     /**

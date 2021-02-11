@@ -22,7 +22,7 @@ BEGIN_AH_NAMESPACE
  * 
  * @ingroup AH_ExtIO
  */
-template <uint8_t N>
+template <uint16_t N>
 class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
   protected:
     /**

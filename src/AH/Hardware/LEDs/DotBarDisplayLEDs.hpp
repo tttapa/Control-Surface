@@ -25,7 +25,7 @@ enum class DotBarMode : bool {
  * 
  * @ingroup AH_HardwareUtils
  */
-template <uint8_t N>
+template <uint16_t N>
 class DotBarDisplayLEDs : public LEDs<N> {
   public:
     /// Constructor from list of pins.
@@ -37,7 +37,7 @@ class DotBarDisplayLEDs : public LEDs<N> {
      * @param   value
      *          The number of the LED to activate.
      */
-    void display(uint8_t value) const {
+    void display(uint16_t value) const {
         if (value == 0)
             this->clear();
         else if (mode == DotBarMode::Bar)
@@ -52,7 +52,7 @@ class DotBarDisplayLEDs : public LEDs<N> {
      * @param   value 
      *          The fraction of the LED bar to display.
      */
-    void display(float value) const { display(uint8_t(value * (N + 1))); }
+    void display(float value) const { display(uint16_t(value * (N + 1))); }
 
     /// Get the dot/bar mode.
     DotBarMode getMode() const { return mode; }

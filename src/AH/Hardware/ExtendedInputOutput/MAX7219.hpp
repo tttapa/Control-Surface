@@ -40,8 +40,8 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
                                   NumChips) {}
 
     /// Initialize.
-    /// @see    MAX7219#init
-    void begin() override { init(); }
+    /// @see    @ref MAX7219::begin
+    void begin() override { MAX7219_Base<SPIDriver>::begin(); }
 
   private:
     struct IndexMask {

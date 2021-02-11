@@ -4,8 +4,6 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 BEGIN_AH_NAMESPACE
 
-using namespace ExtIO;
-
 Button::Button(pin_t pin) : pin(pin) {}
 
 void Button::begin() { ExtIO::pinMode(pin, INPUT_PULLUP); }

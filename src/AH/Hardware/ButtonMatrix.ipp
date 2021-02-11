@@ -5,8 +5,6 @@
 
 BEGIN_AH_NAMESPACE
 
-using namespace ExtIO;
-
 template <class Derived, uint8_t NumRows, uint8_t NumCols>
 ButtonMatrix<Derived, NumRows, NumCols>::ButtonMatrix(
     const PinList<NumRows> &rowPins, const PinList<NumCols> &colPins)

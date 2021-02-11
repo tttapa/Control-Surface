@@ -46,9 +46,8 @@ class MAX7219_Base {
 
     /**
      * @brief   Initialize the Arduino pins, SPI, and the MAX7219.
-     * @todo    Rename to `begin`.
      */
-    void init() {
+    void begin() {
         ExtIO::digitalWrite(loadPin, HIGH);
         ExtIO::pinMode(loadPin, OUTPUT);
         spi.begin();
