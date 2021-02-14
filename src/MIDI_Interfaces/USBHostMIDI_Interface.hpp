@@ -1,7 +1,7 @@
 #pragma once
 
+#include "USBMIDI/Teensy-host/TeensyHostMIDI.hpp"
 #include "USBMIDI_Interface.hpp"
-#include <USBHost_t36.h>
 
 AH_DIAGNOSTIC_WERROR()
 
@@ -9,29 +9,22 @@ BEGIN_CS_NAMESPACE
 
 /// MIDI over USB backend for the Teensy
 /// [USBHost_t36](https://github.com/PaulStoffregen/USBHost_t36) library.
-template <size_t MaxPacketSize = 512, size_t RXQueueSize = 400>
-class USBHostMIDIBackend : public LowLevelMIDIDeviceBase {
+template <size_t MaxPacketSize = 512>
+class USBHostMIDIBackend {
   public:
-    USBHostMIDIBackend(USBHost &host)
-        : LowLevelMIDIDeviceBase(host, rx, tx1, tx2, MaxPacketSize, queue,
-                                 RXQueueSize) {}
+    USBHostMIDIBackend(USBHost &host) : backend(host) {}
 
   public:
     using MIDIUSBPacket_t = AH::Array<uint8_t, 4>;
-    MIDIUSBPacket_t read() { return u32_to_bytes(read_packed()); }
+    MIDIUSBPacket_t read() { return u32_to_bytes(backend.read()); }
     void write(uint8_t cn_cin, uint8_t midi_0, uint8_t midi_1, uint8_t midi_2) {
-        write_packed(bytes_to_u32(cn_cin, midi_0, midi_1, midi_2));
+        backend.write(bytes_to_u32(cn_cin, midi_0, midi_1, midi_2));
     }
-    void sendNow() { send_now(); }
+    void sendNow() { backend.send_now(); }
     bool preferImmediateSend() { return false; }
 
-  private:
-    static_assert(RXQueueSize > MaxPacketSize / 4,
-                  "RXQueueSize must be more than MaxPacketSize/4");
-    uint32_t rx[MaxPacketSize / 4];
-    uint32_t tx1[MaxPacketSize / 4];
-    uint32_t tx2[MaxPacketSize / 4];
-    uint32_t queue[RXQueueSize];
+  public:
+    TeensyHostMIDI<MaxPacketSize> backend;
 };
 
 /**
@@ -49,7 +42,7 @@ class USBHostMIDIBackend : public LowLevelMIDIDeviceBase {
  * @ingroup MIDIInterfaces
  */
 class USBHostMIDI_Interface
-    : public GenericUSBMIDI_Interface<USBHostMIDIBackend<64, 80>> {
+    : public GenericUSBMIDI_Interface<USBHostMIDIBackend<64>> {
   public:
     USBHostMIDI_Interface(USBHost &host) : GenericUSBMIDI_Interface(host) {}
 };
@@ -69,7 +62,7 @@ class USBHostMIDI_Interface
  * @ingroup MIDIInterfaces
  */
 class USBHostMIDI_Interface_BigBuffer
-    : public GenericUSBMIDI_Interface<USBHostMIDIBackend<512, 400>> {
+    : public GenericUSBMIDI_Interface<USBHostMIDIBackend<512>> {
   public:
     USBHostMIDI_Interface_BigBuffer(USBHost &host)
         : GenericUSBMIDI_Interface(host) {}
