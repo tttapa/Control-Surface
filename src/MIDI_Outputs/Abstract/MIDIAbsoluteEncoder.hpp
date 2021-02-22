@@ -69,6 +69,13 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
      */
     void setValue(uint16_t value) { this->value = value; }
 
+    void setSpeedMultiply(int16_t speedMultiply) {
+        // TODO: Is this correct? Is it necessary? What with negative speedMult?
+        remainder = remainder * speedMultiply / this->speedMultiply;
+        this->speedMultiply = speedMultiply;
+    }
+    int16_t getSpeedMultiply() const { return this->speedMultiply; }
+
   private:
     Enc encoder;
     MIDIAddress address;

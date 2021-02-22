@@ -82,6 +82,13 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
      */
     void setValue(uint16_t value) { setValue(value, address.getSelection()); }
 
+    void setSpeedMultiply(int16_t speedMultiply) {
+        // TODO: Is this correct? Is it necessary? What with negative speedMult?
+        remainder = remainder * speedMultiply / this->speedMultiply;
+        this->speedMultiply = speedMultiply;
+    }
+    int16_t getSpeedMultiply() const { return this->speedMultiply; }
+
   private:
     Enc encoder;
     BankAddress address;
