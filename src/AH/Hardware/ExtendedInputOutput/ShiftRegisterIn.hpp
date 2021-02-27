@@ -192,7 +192,7 @@ int ShiftRegisterIn<N>::digitalReadBuffered(pin_t pin) {
 }
 
 template <uint8_t N>
-analog_t ShiftRegisterIn<N>::analogRead(pin_t pin) {
+analog_t ShiftRegisterIn<N>::analogRead(__attribute__((unused)) pin_t pin) {
     // shift registers do not have analog inputs, so always return 0
     return 0;
 }
