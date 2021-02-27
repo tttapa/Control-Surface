@@ -186,6 +186,8 @@ int ShiftRegisterIn<N>::digitalRead(pin_t pin) {
 
 template <uint8_t N>
 int ShiftRegisterIn<N>::digitalReadBuffered(pin_t pin) {
+    // ISSUE: bitRead is available when building for Arduino but not when 
+    // running tests
     return bitRead(buffer, pin);
 }
 
@@ -215,6 +217,8 @@ template <uint8_t N>
 void ShiftRegisterIn<N>::updateBufferedInputs() {
     prepareReading();
     
+    // ISSUE: shiftIn is available when building for Arduino but not when
+    // running tests
     buffer = shiftIn(dataPin, clockPin, LSBFIRST);
 
     afterReading();
