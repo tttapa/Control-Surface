@@ -17,6 +17,9 @@ keyword1:
 
   - StaticSizeExtendedIOElement
 
+  - ShiftRegisterIn
+  - CD74HC165
+
 keyword2:
   - begin
   - update
