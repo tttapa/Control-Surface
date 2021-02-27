@@ -13,11 +13,8 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 BEGIN_AH_NAMESPACE
 
 /**
- * @brief   A class for reading multiplexed analog inputs.
- *          Supports 74HC4067, 74HC4051, etc.
- * 
- * You can use many multiplexers on the same address lines if each of the 
- * multiplexers has a different enable line.
+ * @brief   A class for reading multiplexed digital inputs.
+ *          Supports CD74HC165
  * 
  * @tparam  N 
  *          The number of addressable pins.
@@ -31,15 +28,14 @@ class ShiftRegisterIn : public StaticSizeExtendedIOElement<N> {
      * @brief   Create a new ShiftRegisterIn object on the given pins.
      * 
      * @param   dataPin
-     *          The analog input pin connected to the output of the multiplexer.
-     * @param   addressPins
-     *          An array of the pins connected to the address lines of the
-     *          multiplexer. (Labeled S0, S1, S2 ... in the datasheet.)
-     * @param   enablePin
-     *          The digital output pin connected to the enable pin of the
-     *          multiplexer. (Labeled Ē in the datasheet.)  
-     *          If you don't need the enable pin, you can use NO_PIN, which is 
-     *          the default.
+     *          The pin used to read data from the shift register.
+     * @param   clockPin
+     *          The pin that send clock pules to the shift register.
+     * @param   clockEnablePin
+     *          The pin that enables the clock on the shift register.
+     * @param   loadPin
+     *          The pin that loads inputs from devices connected to the shift
+     *          register.
      */
     ShiftRegisterIn(pin_t dataPin, pin_t clockPin, pin_t clockEnablePin, 
                     pin_t loadPin)
@@ -49,18 +45,16 @@ class ShiftRegisterIn : public StaticSizeExtendedIOElement<N> {
          }
 
     /**
-     * @brief   Set the pin mode of the analog input pin.  
-     *          This allows you to enable the internal pull-up resistor, for
-     *          use with buttons or open-collector outputs.
+     * @brief   Set the pin mode of the data pin.
      * 
-     * @note    This applies to all pins of this multiplexer.  
-     *          This affects all pins of the multiplexer, because it has only
-     *          a single common pin.  
+     * @note    This method should not be called because you cannot
+     *          effectively set the pin mode of the inputs to the shift
+     *          register.
      * 
      * @param   pin
      *          (Unused)
      * @param   mode
-     *          The new mode of the input pin: 
+     *          The new mode of the data pin: 
      *          either INPUT or INPUT_PULLUP.
      */
     void pinMode(pin_t pin, PinMode_t mode) override;
@@ -72,7 +66,7 @@ class ShiftRegisterIn : public StaticSizeExtendedIOElement<N> {
 
     /**
      * @brief   The digitalWrite function is not implemented because writing an
-     *          output to a multiplexer is not useful.
+     *          output to a shift-in register is not useful.
      */
     void digitalWrite(pin_t, PinStatus_t) override // LCOV_EXCL_LINE
         __attribute__((deprecated)) {}             // LCOV_EXCL_LINE
@@ -87,7 +81,7 @@ class ShiftRegisterIn : public StaticSizeExtendedIOElement<N> {
      * @brief   Read the digital state of the given input.
      * 
      * @param   pin
-     *          The multiplexer's pin number to read from.
+     *          The shift register's pin number to read from.
      */
     int digitalRead(pin_t pin) override;
 
@@ -99,8 +93,11 @@ class ShiftRegisterIn : public StaticSizeExtendedIOElement<N> {
     /**
      * @brief   Read the analog value of the given input.
      * 
+     * @note    This method should not be called because shift
+     *          registers do not have analog inputs.
+     * 
      * @param   pin
-     *          The multiplexer's pin number to read from.
+     *          The shift register's pin number to read from.
      */
     analog_t analogRead(pin_t pin) override;
 
@@ -111,7 +108,7 @@ class ShiftRegisterIn : public StaticSizeExtendedIOElement<N> {
 
     /**
      * @brief   The analogWrite function is not implemented because writing an
-     *          output to a multiplexer is not useful.
+     *          output to a shift register is not useful.
      */
     void analogWrite(pin_t, analog_t) override // LCOV_EXCL_LINE
         __attribute__((deprecated)) {}         // LCOV_EXCL_LINE
@@ -123,7 +120,7 @@ class ShiftRegisterIn : public StaticSizeExtendedIOElement<N> {
         __attribute__((deprecated)) {}                 // LCOV_EXCL_LINE
 
     /**
-     * @brief   Initialize the multiplexer: set the pin mode of the address pins
+     * @brief   Initialize the shift register: set the pin mode of the address pins
      *          and the enable pin to output mode.
      */
     void begin() override;
@@ -136,6 +133,11 @@ class ShiftRegisterIn : public StaticSizeExtendedIOElement<N> {
      */
     void updateBufferedOutputs() override {} // LCOV_EXCL_LINE
 
+    /**
+     * @brief   Reads the current values of the inputs connected to the shift
+     *          register and stores them for retrieval via digitalRead.
+     * 
+     */
     void updateBufferedInputs() override;
 
   private:
@@ -158,7 +160,7 @@ class ShiftRegisterIn : public StaticSizeExtendedIOElement<N> {
 };
 
 /**
- * @brief   An alias for ShiftRegisterIn<3> to use with CD74HC165 shift 
+ * @brief   An alias for ShiftRegisterIn<8> to use with CD74HC165 shift 
  *          registers.
  * 
  * @ingroup AH_ExtIO
@@ -189,7 +191,8 @@ int ShiftRegisterIn<N>::digitalReadBuffered(pin_t pin) {
 
 template <uint8_t N>
 analog_t ShiftRegisterIn<N>::analogRead(pin_t pin) {
-    return pin;
+    // shift registers do not have analog inputs, so always return 0
+    return 0;
 }
 
 template <uint8_t N>
