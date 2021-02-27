@@ -19,6 +19,19 @@
         },
         {
             "type": "shell",
+            "label": "Make All (Mac)",
+            "command": "make -j$[$(sysctl -n hw.logicalcpu) * 2]",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "problemMatcher": "$gcc",
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
+        },
+        {
+            "type": "shell",
             "label": "Clear Build Directory and Run CMake",
             "command": "./setup-build.sh \"${workspaceFolder}\"",
             "options": {
@@ -35,6 +48,17 @@
                 "cwd": "${workspaceFolder}/build",
             },
             "dependsOn": "Make All",
+            "problemMatcher": "$gcc",
+            "group": "test",
+        },
+        {
+            "type": "shell",
+            "label": "Make Test (Mac)",
+            "command": "make test",
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "dependsOn": "Make All (Mac)",
             "problemMatcher": "$gcc",
             "group": "test",
         },
@@ -58,6 +82,17 @@
                 "cwd": "${workspaceFolder}/scripts",
             },
             "dependsOn": "Make Test",
+            "group": "test",
+        },
+        {
+            "type": "shell",
+            "label": "Make & Test & Build examples (Mac)",
+            "command": "./build-arduino-examples.sh $[$(sysctl -n hw.logicalcpu) * 2]",
+            "problemMatcher": "$gcc",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts",
+            },
+            "dependsOn": "Make Test (Mac)",
             "group": "test",
         },
         // Documentation & Coverage ::::::::::::::::::::::::::::::::::::::::::::
