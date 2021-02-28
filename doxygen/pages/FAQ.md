@@ -15,7 +15,7 @@ Elements. It usually refers to both the actual hardware (e.g. a push button) and
 the software object that reads the hardware and sends or receives the MIDI 
 messages (e.g. a `NoteButton` object or variable in the Arduino code).
 
-## Can I use Control Surface as a general purpose MIDI library?
+## Can I use Control Surface as a general purpose MIDI library? {#faq-midi}
 
 Absolutely! Even though Control Surface has many high-level utilities for 
 building MIDI controllers, at its core is a solid MIDI input/output system with
@@ -26,7 +26,7 @@ monitor, and there are wrappers for using third-party libraries such as
 AppleMIDI. See the @ref MIDIInterfaces module for a complete overview of the 
 available MIDI interfaces.
 
-### Sending MIDI
+### Sending MIDI {#faq-send-midi}
 
 You can use the functions defined by the @ref MIDI_Sender class to send all 
 kinds of MIDI messages. These functions can be used on all 
@@ -52,14 +52,14 @@ void loop() {
 }
 ```
 
-### Receiving MIDI
+### Receiving MIDI {#faq-recv-midi}
 
 For MIDI input, a class with callback functions for the different messages is
 used. When an incoming MIDI message is available, `midi.update()` will call the
 callbacks for you. See the @ref MIDI_Callbacks class and the examples listed
 below.
 
-### Routing MIDI
+### Routing MIDI {#faq-route-midi}
 
 Apart from low-level MIDI input/output, you can also set up advanced MIDI 
 routing rules between different interfaces. Two or more interfaces are connected
@@ -68,7 +68,7 @@ from the input interface to the output interface, but you can write rules for
 filtering out certain messages, changing the channel of some messages, etc.  
 For more information, see the @ref MIDI_Routing module.
 
-### MIDI examples
+### MIDI examples {#faq-midi-examples}
 
  - @ref MIDI-Output.ino
  - @ref MIDI-Input.ino
@@ -76,7 +76,7 @@ For more information, see the @ref MIDI_Routing module.
  - @ref SysEx-Send-Receive.ino
  - @ref MIDI_Pipes-Routing.ino
 
-### Combining low-level MIDI code and high-level “Control Surface” code
+### Combining low-level MIDI code and high-level “Control Surface” code {#fac-midi-combine-control-surface}
 
 If need access to the incoming MIDI messages while also using the high-level
 `Control_Surface` class, you can also add callbacks to `Control_Surface` itself.
@@ -132,7 +132,7 @@ they don't need to have a fixed offset between them.
 There are two kinds of “Bankable” MIDI Elements: the standard `Bankable` 
 elements and the `Bankable::ManyAddresses` elements.
 
-### Normal banks
+### Normal banks {#faq-normal-banks}
 
 Normal `Bankable` elements allow you to change the address of the element by
 multiples of a fixed offset. You can change the MIDI address (such as controller
@@ -178,7 +178,7 @@ Bankable::NoteButton muteButtons[] {
 };
 ```
 
-### Many addresses
+### Many addresses {#faq-banks-many-addresses}
 
 In most cases, the standard `Bankable` elements are sufficient, but sometimes, 
 you might need a more flexible solution. The `Bankable::ManyAddresses` elements
@@ -187,7 +187,7 @@ the address is simply a table lookup in that list of addresses, based on the
 active bank:
 @f[ y = \text{list of addresses}[x] @f].
 
-## How can I add support for different kinds of displays?
+## How can I add support for different kinds of displays? {#faq-add-display-support}
 
 Out of the box, the library supports SSD1306 OLED displays. Adding support for
 other types of displays is relatively easy, by implementing the 
@@ -205,7 +205,41 @@ As an example, you could have a look at the
 it should be almost identical for other Adafruit libraries, and writing adapters
 for other types of display libraries.
 
-## What's the difference between the Control Surface and MIDI Controller libraries?
+## How can I save memory when running out of RAM? {#faq-save-memory}
+
+### Reducing the number of individual MIDI elements {#faq-save-memory-number-of-individual-elements}
+
+Each individual MIDI element you create has some extra overhead to allow 
+Control Surface to do its thing, such as automatically initializing and updating
+the element, notifying it of bank changes, etc.  
+When you instantiate dozens or even hundreds of these elements, the overhead 
+adds up, and you might find that your board doesn't have enough memory available
+to run your program.
+
+To get around this problem, the first step would be to combine many elements
+into one. For example, if you have an array of 32 `CCButton` elements, replace
+it with a single `CCButtons<32>` element. If you have 32 `NoteLED` elements, 
+replace it with a single `NoteRangeLEDs<32>` element.
+
+Not all MIDI elements have an alternative that can handle many inputs or outputs
+at once. If the one for your particular use case is missing, feel free to open
+an issue with a feature request. You can also try to add it yourself by 
+implementing a custom MIDI element as shown in 
+@ref Custom-MIDI-Output-Element.ino
+
+### Disabling memory-hungry components {#faq-save-memory-disable-components}
+
+If that's not enough, you could try disabling some of the features of the 
+library that you don't need. For example, if you don't need to be able to 
+receive MIDI System Exclusive messages, you can turn on the @ref IGNORE_SYSEX 
+setting in @ref src/Settings/Settings.hpp. If you do need SysEx support but 
+still want to save some memory, you can try decreasing the 
+@ref SYSEX_BUFFER_SIZE.
+
+If you have many buttons, it might be useful to turn off the 
+@ref AH_INDIVIDUAL_BUTTON_INVERT setting in @ref src/AH/Settings/Settings.hpp.
+
+## What's the difference between the Control Surface and MIDI Controller libraries? {#faq-control-surface-vs-midi-controller}
 
 You might already have found my other Arduino MIDI library, [MIDI Controller](https://github.com/tttapa/MIDI_Controller), 
 and are wondering which one you should use for your project.
