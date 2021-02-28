@@ -59,6 +59,7 @@ jobs:
           arduino-cli core upgrade
           arduino-cli cache clean
           patch "$HOME/.arduino15/packages/arduino/hardware/mbed/1.3.2/cores/arduino/Arduino.h" -i "$GITHUB_WORKSPACE/scripts/patches/ARDUINO_LIB_DISCOVERY_PHASE.patch" ||:
+          patch "$HOME/.arduino15/packages/esp32/hardware/esp32/1.0.5/platform.txt" -i "$GITHUB_WORKSPACE/scripts/patches/ESP32-quote-spaces-path.patch" ||:
 
       - name: Install Arduino Libraries
         run: |

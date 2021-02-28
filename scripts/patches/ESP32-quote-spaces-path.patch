@@ -1,0 +1,4 @@
+70c70
+< recipe.hooks.prebuild.1.pattern=bash -c "[ ! -f {build.source.path}/partitions.csv ] || cp -f {build.source.path}/partitions.csv {build.path}/partitions.csv"
+---
+> recipe.hooks.prebuild.1.pattern=bash -c "[ ! -f "{build.source.path}"/partitions.csv ] || cp -f "{build.source.path}"/partitions.csv {build.path}/partitions.csv"
