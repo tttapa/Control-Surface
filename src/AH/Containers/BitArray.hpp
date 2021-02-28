@@ -100,7 +100,7 @@ class BitArray {
         return buffer[byteIndex];
         // return buffer[safeIndex(byteIndex)];
     }
-    /// @copydoc BitArray::getByte
+    /// @copydoc AH::BitArray::getByte(uint16_t) const
     uint8_t &getByte(uint16_t byteIndex) {
         return buffer[byteIndex];
         // return buffer[safeIndex(byteIndex)];

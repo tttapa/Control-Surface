@@ -1,3 +1,5 @@
+#pragma once
+
 #include <AH/Arduino-Wrapper.h>
 
 #include <atomic>
