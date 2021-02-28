@@ -23,7 +23,7 @@ jobs:
         with:
           path: |
             ~/.local/bin
-          key: ${{ runner.os }}-local-bin
+          key: ${{ runner.os }}-local-bin-v1
           
       - name: Cache Arduino Cores and Libraries
         uses: actions/cache@v2.1.4
@@ -31,8 +31,8 @@ jobs:
           path: |
             ~/.arduino15
             ~/Arduino/libraries
-          key: ${{ runner.os }}-arduino-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-arduino-
+          key: ${{ runner.os }}-arduino-v1-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-arduino-v1-
 
       - name: Cache Compiled Arduino Cores and Sketches
         uses: actions/cache@v2.1.4
@@ -40,8 +40,8 @@ jobs:
           path: |
             /tmp/arduino-sketch-*
             /tmp/core-*
-          key: ${{ runner.os }}-arduino-compiled-${{ matrix.board }}-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-arduino-compiled-${{ matrix.board }}-
+          key: ${{ runner.os }}-arduino-compiled-v1-${{ matrix.board }}-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-arduino-compiled-v1-${{ matrix.board }}-
 
       - name: Update $PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
@@ -77,8 +77,8 @@ jobs:
         uses: actions/cache@v2.1.4
         with:
           path: ~/.venv
-          key: ${{ runner.os }}-python-venv-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-python-venv-
+          key: ${{ runner.os }}-python-venv-v1-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-python-venv-v1-
 
       - name: Install Python Packages
         run: |

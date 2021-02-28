@@ -217,9 +217,10 @@ adds up, and you might find that your board doesn't have enough memory available
 to run your program.
 
 To get around this problem, the first step would be to combine many elements
-into one. For example, if you have an array of 32 `CCButton` elements, replace
-it with a single `CCButtons<32>` element. If you have 32 `NoteLED` elements, 
-replace it with a single `NoteRangeLEDs<32>` element.
+into one. For example, if you have an array of 32 @ref CCButton elements, replace
+it with a single @ref CCButtons<32> element. 
+If you have 32 @ref NoteLED elements, 
+replace it with a single @ref NoteRangeLEDs<32> element.
 
 Not all MIDI elements have an alternative that can handle many inputs or outputs
 at once. If the one for your particular use case is missing, feel free to open
