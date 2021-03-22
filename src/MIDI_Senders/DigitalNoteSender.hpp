@@ -17,6 +17,10 @@ class DigitalNoteSender {
     void sendOn(MIDIAddress address) {
         Control_Surface.sendNoteOn(address, getVelocity());
     }
+    // Send a note and velocity on message to the given address
+    void sendOn(MIDIAddress address,  uint8_t velocity) {
+        Control_Surface.sendNoteOn(address, velocity);
+    }
     /// Send a note off message to the given address with 0x7F as velocity.
     void sendOff(MIDIAddress address) {
         Control_Surface.sendNoteOff(address, 0x7F);

@@ -42,6 +42,8 @@
 #include <MIDI_Outputs/NoteButtons.hpp>
 #include <MIDI_Outputs/NoteChordButton.hpp>
 
+#include <MIDI_Outputs/NotePiezo.hpp>
+
 #include <MIDI_Outputs/PBPotentiometer.hpp>
 #include <MIDI_Outputs/PCButton.hpp>
 
