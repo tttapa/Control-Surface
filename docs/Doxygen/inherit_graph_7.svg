@@ -12,10 +12,10 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:href="d9/d1a/classArraySlice_1_1Iterator.html" target="_top" xlink:title=" ">
+<g id="a_node1"><a xlink:href="df/de0/classArraySlice.html" target="_top" xlink:title="Class for a view on a slice of an array.">
 <polygon fill="white" stroke="black" points="0,-0.5 0,-30.5 146,-30.5 146,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">ArraySlice&lt; T, N, Reverse,</text>
-<text text-anchor="middle" x="73" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00"> Const &gt;::Iterator</text>
+<text text-anchor="middle" x="73" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00"> Const &gt;</text>
 </a>
 </g>
 </g>

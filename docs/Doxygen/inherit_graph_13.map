@@ -1,5 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,13,228,54"/>
-<area shape="rect" id="node2" href="$d2/dfb/classUpdatableCRTP.html" title=" " alt="" coords="276,5,480,61"/>
-<area shape="rect" id="node3" href="$d5/de0/classUpdatable.html" title="A super class for object that have to be updated regularly." alt="" coords="528,20,737,47"/>
+<area shape="rect" id="node1" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,208,32"/>
+<area shape="rect" id="node2" href="$d2/dfb/classUpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="256,5,459,32"/>
 </map>
