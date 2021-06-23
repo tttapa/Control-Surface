@@ -45,5 +45,4 @@ else ()
             -DANALOG_FILTER_SHIFT_FACTOR_OVERRIDE=2)
 endif ()
 
-target_link_libraries(Control_Surface PUBLIC ArduinoMock)
 target_link_libraries(Control_Surface PUBLIC Arduino_Helpers)

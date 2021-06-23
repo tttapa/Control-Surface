@@ -23,10 +23,7 @@ project(Control_Surface)
 # Add Google Test
 ################################################################################
 
-add_subdirectory(googletest)
-include_directories(${gmock_SOURCE_DIR}/include)
-include_directories(${gtest_SOURCE_DIR}/include)
-
+find_package(GTest REQUIRED NO_CMAKE_SYSTEM_PATH)
 include(GoogleTest)
 enable_testing()
 
