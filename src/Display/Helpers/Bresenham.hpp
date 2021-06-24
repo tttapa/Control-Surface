@@ -3,9 +3,9 @@
 #include <AH/Arduino-Wrapper.h>
 
 #include <AH/STL/cmath>
+#include <AH/STL/limits>
 #include <Printable.h>
 #include <Settings/SettingsWrapper.hpp>
-#include <limits>
 
 BEGIN_CS_NAMESPACE
 
