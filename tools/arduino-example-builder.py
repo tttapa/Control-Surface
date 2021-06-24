@@ -111,7 +111,7 @@ green = "\033[0;32m"
 yellow = "\033[1;33m"
 reset = "\033[0m"
 
-failures = 0
+failures = []
 total_count = 0
 board = args.board
 fqbn = board_fqbns[board.lower()]
@@ -128,12 +128,16 @@ with ThreadPoolExecutor(max_workers=args.jobs) as executor:
         success = output[0]["success"]
         sizes = ""
         if "builder_result" in output[0] and "executable_sections_size" in output[0]["builder_result"]:
-            for section in output[0]["builder_result"]["executable_sections_size"]:
-                name = section["name"]
-                sz = section["size"]
-                max_sz = section["maxSize"]
-                perc = 100. * sz / max_sz
-                sizes += f'{name}: {sz:,} / {max_sz:,} = {perc:.2f}%\n'
+            try:
+                for section in output[0]["builder_result"]["executable_sections_size"]:
+                    name = section["name"]
+                    sz = section["size"]
+                    max_sz = section.get("maxSize", section.get("max_size", 0.))
+                    perc = 100. * sz / max_sz if max_sz > 0 else 0
+                    sizes += f'{name}: {sz:,} / {max_sz:,} = {perc:.2f}%\n'
+            except KeyError as e:
+                print(e)
+                sizes = str(output[0]["builder_result"]["executable_sections_size"])
         color = green if success else red
         print(f"""
 {bold}{board}{reset}: {color}"{example_rel}"{reset}
@@ -143,12 +147,14 @@ with ThreadPoolExecutor(max_workers=args.jobs) as executor:
 {output[0]["stderr"]}
 {"success" if success else "fail"}
 """)
-        failures += success == False
+        if not success:
+            failures.append((board, example_rel))
         total_count += 1
 
-if failures == 0:
+if len(failures) == 0:
     print(f'\r\n-----\r\n\r\nSuccessfully compiled {total_count} examples\r\n')
 else:
-    print(f'\r\n-----\r\n\r\nFailed to compile {failures} of {total_count} examples\r\n')
+    print(f'\r\n-----\r\n\r\nFailed to compile {len(failures)} of {total_count} examples:\r\n')
+    print('\n'.join(map(lambda x: f' - {bold}{x[0]}{reset}: {red}"{x[1]}"{reset}', failures)), '\n')
 
-exit(failures)
+exit(len(failures))
