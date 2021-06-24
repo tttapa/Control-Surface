@@ -26,7 +26,7 @@
 #include <AH/Hardware/Button.hpp>
 
 // Create a Button object that reads a push button connected to pin 2:
-Button pushbutton = {2};
+Button pushbutton {2};
 
 // The pin with the LED connected:
 const pin_t ledPin = LED_BUILTIN;

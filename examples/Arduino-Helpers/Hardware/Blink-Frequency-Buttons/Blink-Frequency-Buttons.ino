@@ -36,7 +36,7 @@ const unsigned long minInterval = 100;     // ms
 const unsigned long defaultInterval = 500; // ms
 const int intervalDelta = 100;             // ms
 
-IncrementDecrementButtons buttons = {2, 3};
+IncrementDecrementButtons buttons {2, 3};
 Timer<millis> timer = defaultInterval;
 
 void setup() {

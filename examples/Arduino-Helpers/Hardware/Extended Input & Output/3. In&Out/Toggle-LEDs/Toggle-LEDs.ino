@@ -50,14 +50,14 @@
 #include <AH/Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
 
 // Instantiate a multiplexer
-CD74HC4067 mux = {
+CD74HC4067 mux {
   2,            // input pin
   {3, 4, 5, 6}, // Address pins S0, S1, S2, S3
   // 7, // Optionally, specify the enable pin
 };
 
 // Alternatively, if you have a 3-bit mux:
-// CD74HC4051 mux = {
+// CD74HC4051 mux {
 //   2,
 //   {3, 4, 5},
 //   // 7, // Optional
@@ -65,7 +65,7 @@ CD74HC4067 mux = {
 
 // Instantiate a shift register with the SPI slave select pin as latch pin, most
 // significant bit first, and a total of 16 outputs.
-SPIShiftRegisterOut<mux.length()> sreg = {SPI, SS, MSBFIRST};
+SPIShiftRegisterOut<mux.length()> sreg {SPI, SS, MSBFIRST};
 
 // Instantiate an array of momentary push buttons.
 // It generates an array of Buttons on pins:
