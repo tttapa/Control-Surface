@@ -23,7 +23,7 @@ jobs:
         with:
           path: |
             ~/.local/bin
-          key: ${{ runner.os }}-local-bin-v1
+          key: ${{ runner.os }}-local-bin-v2
           
       - name: Cache Arduino Cores and Libraries
         uses: actions/cache@v2.1.4
@@ -31,8 +31,8 @@ jobs:
           path: |
             ~/.arduino15
             ~/Arduino/libraries
-          key: ${{ runner.os }}-arduino-v1-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-arduino-v1-
+          key: ${{ runner.os }}-arduino-v2-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-arduino-v2-
 
       - name: Cache Compiled Arduino Cores and Sketches
         uses: actions/cache@v2.1.4
@@ -40,8 +40,8 @@ jobs:
           path: |
             /tmp/arduino-sketch-*
             /tmp/core-*
-          key: ${{ runner.os }}-arduino-compiled-v1-${{ matrix.board }}-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-arduino-compiled-v1-${{ matrix.board }}-
+          key: ${{ runner.os }}-arduino-compiled-v2-${{ matrix.board }}-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-arduino-compiled-v2-${{ matrix.board }}-
 
       - name: Update $PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
@@ -55,11 +55,10 @@ jobs:
 
       - name: Install Arduino Boards
         run: |
-          arduino-cli core install arduino:avr arduino:mbed arduino:samd esp32:esp32 esp8266:esp8266 arduino:sam arduino:megaavr
+          arduino-cli core install arduino:avr arduino:mbed_nano arduino:samd esp32:esp32 esp8266:esp8266 arduino:sam arduino:megaavr
           arduino-cli core upgrade
           arduino-cli cache clean
           patch "$HOME/.arduino15/packages/arduino/hardware/mbed/1.3.2/cores/arduino/Arduino.h" -i "$GITHUB_WORKSPACE/scripts/patches/ARDUINO_LIB_DISCOVERY_PHASE.patch" ||:
-          patch "$HOME/.arduino15/packages/esp32/hardware/esp32/1.0.5/platform.txt" -i "$GITHUB_WORKSPACE/scripts/patches/ESP32-quote-spaces-path.patch" ||:
 
       - name: Install Arduino Libraries
         run: |
@@ -78,8 +77,8 @@ jobs:
         uses: actions/cache@v2.1.4
         with:
           path: ~/.venv
-          key: ${{ runner.os }}-python-venv-v1-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-python-venv-v1-
+          key: ${{ runner.os }}-python-venv-v2-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-python-venv-v2-
 
       - name: Install Python Packages
         run: |
