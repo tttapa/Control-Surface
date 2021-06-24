@@ -58,7 +58,7 @@ jobs:
           arduino-cli core install arduino:avr arduino:mbed_nano arduino:samd esp32:esp32 esp8266:esp8266 arduino:sam arduino:megaavr
           arduino-cli core upgrade
           arduino-cli cache clean
-          patch "$HOME/.arduino15/packages/arduino/hardware/mbed/1.3.2/cores/arduino/Arduino.h" -i "$GITHUB_WORKSPACE/scripts/patches/ARDUINO_LIB_DISCOVERY_PHASE.patch" ||:
+          patch "$HOME/.arduino15/packages/arduino/hardware/mbed_nano/*.*.*/cores/arduino/Arduino.h" -i "$GITHUB_WORKSPACE/scripts/patches/ARDUINO_LIB_DISCOVERY_PHASE.patch" ||:
 
       - name: Install Arduino Libraries
         run: |
