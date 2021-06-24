@@ -32,8 +32,6 @@
 // Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
-using namespace MIDI_Notes;
-
 // MIDI Input Element that listens for MIDI Note events that turns on the LED at
 // full brightness if the note value (velocity) is above the threshold,
 // and turns on the LED at a lower brightness if the value is below the
@@ -70,7 +68,7 @@ class CustomNoteLED
       ExtIO::analogWrite(ledPin, lowBrightness);
   }
 
-  // Called when the input element is reset (e.g. by an "All notes off" MIDI 
+  // Called when the input element is reset (e.g. by an "All notes off" MIDI
   // event).
   void reset() override { ExtIO::analogWrite(ledPin, lowBrightness); }
 
@@ -82,9 +80,9 @@ class CustomNoteLED
 
 // Instantiate the LED that will light up when middle C is playing.
 CustomNoteLED led = {
-  3,                       // Pin with the LED connected (PWM capable)
-  {note(C, 4), CHANNEL_1}, // Note C4 on MIDI channel 1
-  10,                      // Intensity when off
+  3,                           // Pin with the LED connected (PWM capable)
+  {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
+  10,                          // Intensity when off
 };
 
 void setup() {

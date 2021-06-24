@@ -37,8 +37,6 @@
 // Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
-using namespace MIDI_Notes;
-
 // Custom MIDI Input Element to handle incoming note events and control the LEDs.
 template <uint8_t RangeLen>
 class CustomNoteLED : public MatchingMIDIInputElement<MIDIMessageType::NOTE_ON,
@@ -93,7 +91,7 @@ constexpr uint8_t ledpin = 2;
 // Note C#4 is the green channel of the first LED,
 // Note D4 is the blue channel of the first LED,
 // Note D#4 is the red channel of the second LED, etc.
-CustomNoteLED<leds.length * 3> midiled = {leds.data, note(C, 4)};
+CustomNoteLED<leds.length * 3> midiled = {leds.data, MIDI_Notes::C(4)};
 
 void setup() {
   // See FastLED examples and documentation for more information.

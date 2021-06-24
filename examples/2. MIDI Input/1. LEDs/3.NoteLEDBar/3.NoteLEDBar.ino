@@ -47,11 +47,9 @@ SPIShiftRegisterOut<8> sreg = {
   MSBFIRST, // Byte order
 };
 
-using namespace MIDI_Notes;
-
 // Create a LED bar driver that listens for MIDI Note C4 that drives
 // the LEDs connected to the eight output pins of the shift register
-NoteLEDBar<8> leds = { sreg.pins(), note(C, 4) };
+NoteLEDBar<8> leds = { sreg.pins(), MIDI_Notes::C(4) };
 
 // Initialize the Control Surface
 void setup() {
@@ -76,7 +74,7 @@ void loop() {
  *    
  *      NoteLEDBar<8> leds = { 
  *          {{2, 3, 4, 5, 6, 7, 8, 9}}, 
- *          note(C, 4), 
+ *          MIDI_Notes::C(4), 
  *      };
  *    
  *    Note the use of double braces for the list of numbers.
@@ -85,6 +83,6 @@ void loop() {
  *    
  *      NoteLEDBar<8> leds = { 
  *          {{2, 3, 4, 5, 6, 7, sreg.pin(0), sreg.pin(1) }},
- *          note(C, 4), 
+ *          MIDI_Notes::C(4), 
  *      };
  */

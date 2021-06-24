@@ -43,47 +43,45 @@ USBMIDI_Interface midi;
 // For example, a continuous CC sender just has a send(value, address)
 // method.
 class CustomNoteSender {
-  public:
-    CustomNoteSender(uint8_t onVelocity, uint8_t offVelocity)
-      : onVelocity(onVelocity), offVelocity(offVelocity) {}
+ public:
+  CustomNoteSender(uint8_t onVelocity, uint8_t offVelocity)
+    : onVelocity(onVelocity), offVelocity(offVelocity) {}
 
-    void sendOn(MIDIAddress address) {
-      Control_Surface.sendNoteOn(address, onVelocity);
-    }
+  void sendOn(MIDIAddress address) {
+    Control_Surface.sendNoteOn(address, onVelocity);
+  }
 
-    void sendOff(MIDIAddress address) {
-      Control_Surface.sendNoteOff(address, offVelocity);
-    }
+  void sendOff(MIDIAddress address) {
+    Control_Surface.sendNoteOff(address, offVelocity);
+  }
 
-  private:
-    uint8_t onVelocity, offVelocity;
+ private:
+  uint8_t onVelocity, offVelocity;
 };
 
 // Now tell the MIDIButton class template (included with the Control
 // Surface library) that it has to use your custom sender class.
 //
-// We wrap it in another class so we can easily construct it later, 
+// We wrap it in another class so we can easily construct it later,
 // without having to write `MIDIButton<CustomNoteSender>` all the time,
 // and so we have more control over the constructor arguments.
 // The colon (:) indicates inheritance.
 struct CustomNoteButton : MIDIButton<CustomNoteSender> {
   // Constructor
-  CustomNoteButton(pin_t pin, MIDIAddress address, 
-                   uint8_t onVelocity, uint8_t offVelocity)
+  CustomNoteButton(pin_t pin, MIDIAddress address, uint8_t onVelocity,
+                   uint8_t offVelocity)
     : MIDIButton(pin, address, {onVelocity, offVelocity}) {}
   //  ^~~~~~~~~~ Initialization of the base class MIDIButton
 };
-
-using namespace MIDI_Notes;
 
 // Now we can instantiate an object of our custom class.
 // The four arguments match the ones of the CustomNoteButton
 // constructor we wrote a couple of lines back.
 CustomNoteButton button = {
-  5,            // button pin
-  note(C, 4),   // MIDI address
-  0x40,         // on velocity
-  0x10,         // off velocity
+  5,              // button pin
+  MIDI_Notes::C(4), // MIDI address
+  0x40,           // on velocity
+  0x10,           // off velocity
 };
 
 void setup() {

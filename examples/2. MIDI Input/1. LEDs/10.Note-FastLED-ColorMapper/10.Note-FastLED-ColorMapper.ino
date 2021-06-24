@@ -50,9 +50,11 @@ struct RainbowColorMapper {
     return CHSV(255 * index / leds.length, 255, 255u * velocity / 127u);
   }
 };
- 
-using namespace MIDI_Notes;
-NoteRangeFastLED<leds.length, RainbowColorMapper> midiled = {leds, note(C, 4)};
+
+NoteRangeFastLED<leds.length, RainbowColorMapper> midiled = {
+  leds,
+  MIDI_Notes::C(4),
+};
 
 void setup() {
   // See FastLED examples and documentation for more information.

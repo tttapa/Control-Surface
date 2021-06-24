@@ -33,27 +33,25 @@ auto &serial = Serial;
 SerialMIDI_Interface<decltype(serial)> midi = {serial, MIDI_BAUD};
 
 // You can also use the following serial MIDI interfaces:
-// 
+//
 // The Serial port that is connected to your computer over USB:
 //
 //    USBSerialMIDI_Interface midi = 115200;
 //
 // A hardware serial port:
-// 
+//
 //    HardwareSerialMIDI_Interface midi = {Serial1, MIDI_BAUD};
-
-using namespace MIDI_Notes;
 
 // Instantiate a NoteButton object
 NoteButton button = {
-  5,                       // Push button on pin 5
-  {note(C, 4), CHANNEL_1}, // Note C4 on MIDI channel 1
+  5,                           // Push button on pin 5
+  {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
 };
 
 // Instantiate the LED that will light up when middle C is playing
 NoteLED led = {
-  LED_BUILTIN,             // Pin of built-in LED
-  {note(C, 4), CHANNEL_1}, // Note C4 on MIDI channel 1
+  LED_BUILTIN,                 // Pin of built-in LED
+  {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
 };
 
 void setup() {

@@ -43,11 +43,9 @@ constexpr uint8_t ledpin = 2;
 
 USBMIDI_Interface midi;
 
-using namespace MIDI_Notes;
-
 // Create a MIDI input element that listens to all notes in the range C4 - G4
 // (the range starts at C4 and has a length equal to `leds.length` == 8).
-NoteRangeFastLED<leds.length> midiled = {leds, note(C, 4)};
+NoteRangeFastLED<leds.length> midiled = {leds, MIDI_Notes::C(4)};
 
 void setup() {
   // See FastLED examples and documentation for more information.

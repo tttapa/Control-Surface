@@ -18,21 +18,19 @@ IncrementDecrementSelector<2> scaleSelector = {
   Wrap::Clamp,
 };
 
-using namespace MIDI_Notes;
-
 Bankable::ManyAddresses::ManyAddressBankNoteButton<2> buttons[] = {
   {
-    {scaleBank, {note(F, 4), note(Gb, 4)}},
+    {scaleBank, {MIDI_Notes::F_(4), note(nt::Gb, 4)}},
     transposer,
     2, // pin
   },
   {
-    {scaleBank, {note(C, 4), note(Db, 4)}},
+    {scaleBank, {MIDI_Notes::C(4), note(nt::Db, 4)}},
     transposer,
     3, // pin
   },
   {
-    {scaleBank, {note(G, 4), note(Ab, 4)}},
+    {scaleBank, {MIDI_Notes::G(4), note(nt::Ab, 4)}},
     transposer,
     4, // pin
   },

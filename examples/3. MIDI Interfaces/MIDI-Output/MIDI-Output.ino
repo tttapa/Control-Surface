@@ -33,9 +33,8 @@ void setup() {
   midi.begin(); // Initialize the MIDI interface
 }
 
-using namespace MIDI_Notes;
 // MIDI note number, channel, and velocity to use
-const MIDIAddress address = {note(C, 4), CHANNEL_1};
+const MIDIAddress address = {MIDI_Notes::C(4), CHANNEL_1};
 const uint8_t velocity = 0x7F;
 
 void loop() {
