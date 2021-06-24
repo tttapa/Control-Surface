@@ -17,12 +17,12 @@ BEGIN_AH_NAMESPACE
 /// Convert radians to degrees.
 template <class T>
 constexpr inline double rad2deg(T r) {
-    return r * M_1_PI * 180;
+    return static_cast<double>(r) * M_1_PI * 180;
 }
 /// Convert degrees to radians.
 template <class T>
 constexpr inline double deg2rad(T d) {
-    return d * M_PI / 180;
+    return static_cast<double>(d) * M_PI / 180;
 }
 
 /// Convert degrees to radians, e.g. 10_deg.

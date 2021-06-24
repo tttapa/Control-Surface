@@ -48,7 +48,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
     -Wdouble-promotion \
     -Wswitch-default -Wswitch-enum -Wimplicit-fallthrough \
     -Wuninitialized \
-    -Wno-double-promotion \
     -Wno-missing-braces \
     -pedantic -pedantic-errors")
     
