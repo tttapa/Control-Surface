@@ -30,7 +30,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #include <mutex>
 #elif defined(ARDUINO_ARCH_MBED)
 #include <mutex>
-#include <mbed/rtos/Mutex.h>
+#include <rtos/Mutex.h>
 #endif
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
