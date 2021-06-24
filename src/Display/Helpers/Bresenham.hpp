@@ -2,10 +2,10 @@
 
 #include <AH/Arduino-Wrapper.h>
 
+#include <AH/STL/cmath>
 #include <Printable.h>
 #include <Settings/SettingsWrapper.hpp>
-#include <limits.h>
-#include <stdint.h>
+#include <limits>
 
 BEGIN_CS_NAMESPACE
 
@@ -73,16 +73,18 @@ class BresenhamLine {
         return result;
     }
 
-    static int cos(double angle) {
-        return round(errorScalingFactor * ::cos(angle));
+    static int cos(float angle) {
+        return std::round(static_cast<float>(errorScalingFactor) *
+                          std::cos(angle));
     }
 
-    static int sin(double angle) {
-        return round(errorScalingFactor * ::sin(angle));
+    static int sin(float angle) {
+        return std::round(static_cast<float>(errorScalingFactor) *
+                          std::sin(angle));
     }
 
   private:
-    const static int errorScalingFactor = INT_MAX / 2;
+    const static int errorScalingFactor = std::numeric_limits<int>::max() / 2;
     Pixel px;
     int dx, dy;
     int adx, ady;
