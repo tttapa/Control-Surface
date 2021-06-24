@@ -36,8 +36,7 @@ Here's a basic MIDI output example:
 ```cpp
 USBMIDI_Interface midi; // Instantiate the MIDI over USB interface
 
-using namespace MIDI_Notes;
-const MIDIAddress noteAddress = {note(C, 4), CHANNEL_1};
+const MIDIAddress noteAddress = {MIDI_Notes::C(4), CHANNEL_1};
 const uint8_t velocity = 0x7F;
 
 void setup() {
@@ -239,6 +238,26 @@ still want to save some memory, you can try decreasing the
 
 If you have many buttons, it might be useful to turn off the 
 @ref AH_INDIVIDUAL_BUTTON_INVERT setting in @ref src/AH/Settings/Settings.hpp.
+
+## Why do I get a compiler error when using the note F?
+
+The Arduino core defines a global preprocessor macro `F(...)` which places
+string literals in flash memory. Unfortunately, macros do not follow the C++ 
+syntax and scoping rules, so it means that it is impossible to create a constant 
+or function with the name `F`, even in a separate namespace. Therefore, the note
+F can be referenced using the name `F_` (F underscore) instead of `F`.
+
+If you get this wrong, you might get an error saying the following:
+```
+In file included from /home/user/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/Arduino.h:232:0,
+                 from /tmp/arduino-sketch-XXXXX/sketch/sketch.ino.cpp:1:
+/home/user/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/WString.h:38:27: error: expected unqualified-id before '(' token
+ #define F(string_literal) (reinterpret_cast<const __FlashStringHelper *>(PSTR(string_literal)))
+                           ^
+sketch.ino: note: in expansion of macro 'F'
+   { pin, MIDI_Notes::F(4) }
+                      ^
+```
 
 ## What's the difference between the Control Surface and MIDI Controller libraries? {#faq-control-surface-vs-midi-controller}
 

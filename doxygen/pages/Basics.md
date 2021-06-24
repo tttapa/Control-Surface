@@ -71,12 +71,11 @@ MIDIAddress myAddress = {MIDI_CC::General_Purpose_Controller_1, CHANNEL_2};
 #### MIDI Note Numbers
 
 For entering MIDI note numbers, you can use the note names in the 
-@ref MIDI_Notes namespace and the @ref MIDI_Notes::note function:
+@ref MIDI_Notes namespace:
 
 ~~~cpp
-using namespace MIDI_Notes;
 // MIDI Note middle C (C in the fourth octave) on MIDI Channel 16:
-MIDIAddress myAddress = {note(C, 4), CHANNEL_16};
+MIDIAddress myAddress = {MIDI_Notes::C(4), CHANNEL_16};
 ~~~
 
 ### Passing MIDI Addresses to MIDI Elements
