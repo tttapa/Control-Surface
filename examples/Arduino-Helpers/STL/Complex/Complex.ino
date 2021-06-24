@@ -15,6 +15,7 @@
 #include <Arduino_Helpers.h>
 
 #include <AH/STL/complex>
+using namespace std::complex_literals;
 
 void setup() {
   Serial.begin(115200);
