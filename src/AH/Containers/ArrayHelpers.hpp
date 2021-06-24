@@ -266,9 +266,13 @@ operator<<(std::ostream &os, const AH::Array<T, N> &a) {
     return os << a.slice();
 }
 
+END_AH_NAMESPACE
+
 #endif
 
 #include <AH/PrintStream/PrintStream.hpp>
+
+BEGIN_AH_NAMESPACE
 
 template <class T, size_t N, bool Reverse, bool Const>
 std::enable_if_t<std::is_arithmetic<T>::value, Print &>
