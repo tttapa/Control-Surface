@@ -7,8 +7,8 @@
 #include <tuple>
 
 #include <USB/PluggableUSBDevice.h>
-#include <mbed/drivers/Timeout.h>
-#include <mbed/platform/Callback.h>
+#include <drivers/Timeout.h>
+#include <platform/Callback.h>
 
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>

@@ -75,6 +75,8 @@
 
 #elif defined(ARDUINO_ARCH_MBED)
 
+#include <drivers/DigitalIn.h>
+#include <memory>
 #define IO_REG_TYPE                     std::unique_ptr<mbed::DigitalIn>
 #define PIN_TO_BASEREG(pin)             (nullptr)
 #define PIN_TO_BITMASK(pin)             std::make_unique<mbed::DigitalIn>(digitalPinToPinName(pin), PullUp)
