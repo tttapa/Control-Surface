@@ -22,7 +22,7 @@ void setup() {
     ;
 
   // Create a complex number
-  std::complex<double> c = 2i;
+  std::complex<double> c{0, 2};
 
   // Print the square root
   Serial << "√(2i) = " << std::sqrt(c) << endl;
