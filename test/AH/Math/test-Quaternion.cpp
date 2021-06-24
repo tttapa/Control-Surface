@@ -4,7 +4,7 @@
 
 #include <random>
 
-static constexpr float eps = 1e2 * std::numeric_limits<float>::epsilon();
+static constexpr float eps = 1e2f * std::numeric_limits<float>::epsilon();
 
 // -------------------------------------------------------------------------- //
 //                                 QUATERNION                                 //

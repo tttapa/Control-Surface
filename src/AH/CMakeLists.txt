@@ -22,10 +22,10 @@ target_include_directories(Arduino_Helpers
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 if (FAST_COMPILE)
-target_compile_definitions(Arduino_Helpers 
-    PUBLIC 
-        -DNO_DEBUG_PRINTS 
-        -DANALOG_FILTER_SHIFT_FACTOR_OVERRIDE=2)
+    target_compile_definitions(Arduino_Helpers 
+        PUBLIC 
+            -DNO_DEBUG_PRINTS 
+            -DANALOG_FILTER_SHIFT_FACTOR_OVERRIDE=2)
 else ()
         target_compile_definitions(Arduino_Helpers 
         PUBLIC 
