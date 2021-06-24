@@ -132,6 +132,9 @@ Print &operator<<(Print &printer, double d) {
     printer.print(d, precisionPrintStream);
     return printer;
 }
+Print &operator<<(Print &printer, float f) {
+    return printer << static_cast<double>(f);
+}
 Print &operator<<(Print &printer, const Printable &p) {
     printer.print(p);
     return printer;
