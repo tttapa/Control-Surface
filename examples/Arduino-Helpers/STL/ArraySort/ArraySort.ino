@@ -33,7 +33,7 @@ void setup() {
   while (!Serial)
     ;
 
-  Array<int, 10> array = {3, 5, 9, 2, 1, 8, 6, 4, 7, 0};
+  Array<int, 10> array {3, 5, 9, 2, 1, 8, 6, 4, 7, 0};
 
   Serial << "Before sorting: " << array << endl;
 

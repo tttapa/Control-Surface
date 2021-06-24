@@ -58,10 +58,10 @@ using WireType = decltype(Wire);     // The type of I²C driver to use
 using EncoderPositionType = int32_t; // The type for saving encoder positions
 using MCPEncoderType = MCP23017Encoders<WireType, EncoderPositionType>;
 
-MCPEncoderType enc = {Wire, 0x0, 12};
-//                    │     │    └─ Interrupt pin
-//                    │     └────── Address offset
-//                    └──────────── I²C interface
+MCPEncoderType enc {Wire, 0x0, 12};
+//                  │     │    └─ Interrupt pin
+//                  │     └────── Address offset
+//                  └──────────── I²C interface
 
 void setup() {
   Serial.begin(115200);
@@ -72,9 +72,9 @@ void setup() {
 
 void loop() {
   enc.update(); // Read the state of the encoders and update the positions
-  
+
   // Save the previous positions
-  static EncoderPositionType prevPositions[8] = {};
+  static EncoderPositionType prevPositions[8] {};
   // Check if an encoder position changed and print it
   for (uint8_t i = 0; i < 8; ++i) {
     if (enc.read(i) != prevPositions[i]) {

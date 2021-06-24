@@ -73,7 +73,7 @@ const uint8_t ShiftRegisterOutRGB::blueBit = 2;
 // Create a new shift register output connected to pins 11, 13 and 10,
 // shift the data out with the most significant bit first.
 // There are 24 (= 3×8) outputs in total.
-SPIShiftRegisterOut<24> sreg = {SPI, SS, MSBFIRST};
+SPIShiftRegisterOut<24> sreg {SPI, SS, MSBFIRST};
 
 void setup() {
   // Initialize the shift registers

@@ -63,10 +63,10 @@ using MCPEncoderType = MCP23017Encoders<WireType, EncoderPositionType, IntSafe>;
 
 const uint8_t interrupt_pin = 12;
 
-MCPEncoderType enc = {Wire, 0x0, interrupt_pin};
-//                    │     │    └─ Interrupt pin
-//                    │     └────── Address offset
-//                    └──────────── I²C interface
+MCPEncoderType enc {Wire, 0x0, interrupt_pin};
+//                  │     │    └─ Interrupt pin
+//                  │     └────── Address offset
+//                  └──────────── I²C interface
 
 void isr() {
   enc.update(); // Read the state of the encoders and update the positions
@@ -84,7 +84,7 @@ void loop() {
   // No `enc.update()` here, everything happens inside of the ISR
   
   // Save the previous positions
-  static EncoderPositionType prevPositions[8] = {};
+  static EncoderPositionType prevPositions[8] {};
   // Check if an encoder position changed and print it
   for (uint8_t i = 0; i < 8; ++i) {
     auto newPosition = enc.read(i);

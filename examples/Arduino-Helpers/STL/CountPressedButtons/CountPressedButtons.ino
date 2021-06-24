@@ -17,7 +17,7 @@
 #include <AH/STL/numeric>         // std::accumulate
 
 // An array of debounced buttons connected to the given pins
-Button buttons[] = {
+Button buttons[] {
   2, 3, 4, 5, 6, 7, 8, 9,
 };
 

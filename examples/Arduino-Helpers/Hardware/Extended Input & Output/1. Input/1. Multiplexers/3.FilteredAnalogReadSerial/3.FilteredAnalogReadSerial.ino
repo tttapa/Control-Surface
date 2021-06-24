@@ -42,14 +42,14 @@
 #include <AH/Containers/ArrayHelpers.hpp> // copyAs<>
 
 // Instantiate a multiplexer
-CD74HC4067 mux = {
+CD74HC4067 mux {
   A0,           // analog pin
   {3, 4, 5, 6}, // Address pins S0, S1, S2, S3
   // 7, // Optionally, specify the enable pin
 };
 
 // Alternatively, if you have a 3-bit mux:
-// CD74HC4051 mux = {
+// CD74HC4051 mux {
 //   A0,
 //   {3, 4, 5},
 //   // 7, // Optional
