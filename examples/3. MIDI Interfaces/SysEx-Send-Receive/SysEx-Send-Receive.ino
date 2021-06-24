@@ -20,11 +20,11 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
            << F(" on cable ") << sysex.cable.getOneBased() << endl;
   }
 
-} callback = {};
+} callback {};
 
 // Push button connected between pin 2 and ground.
 // SysEx message is sent when pressed.
-Button pushbutton = {2};
+Button pushbutton {2};
 
 void setup() {
   Serial.begin(115200);
@@ -35,7 +35,7 @@ void setup() {
 
 void loop() {
   // Send a SysEx message when the push button is pressed
-  uint8_t sysex[] = {0xF0, 0x11, 0x22, 0x33, 0xF7};
+  uint8_t sysex[] {0xF0, 0x11, 0x22, 0x33, 0xF7};
   if (pushbutton.update() == Button::Falling)
     midi.sendSysEx(sysex);
 

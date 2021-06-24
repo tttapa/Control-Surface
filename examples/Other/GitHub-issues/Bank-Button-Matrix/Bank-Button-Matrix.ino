@@ -6,15 +6,15 @@
 
 USBMIDI_Interface midi;
 
-Bank<4> bank = {6}; // 4 banks, 6 addresse per banks
-IncrementDecrementSelector<4> selector = {bank, {A0, A1}, Wrap::Wrap};
+Bank<4> bank {6}; // 4 banks, 6 addresse per banks
+IncrementDecrementSelector<4> selector {bank, {A0, A1}, Wrap::Wrap};
 
-AddressMatrix<2, 3> notes = {{
+AddressMatrix<2, 3> notes {{
   {0, 1, 2},
   {3, 4, 5},
 }};
 
-Bankable::NoteButtonMatrix<2, 3> buttons = {
+Bankable::NoteButtonMatrix<2, 3> buttons {
   bank,      //
   {2, 3},    // row pins (outputs, driven low-Z low !)
   {4, 5, 6}, // column pins (inputs, hi-Z)
@@ -22,7 +22,7 @@ Bankable::NoteButtonMatrix<2, 3> buttons = {
   CHANNEL_1, //
 };
 
-Bankable::NoteLED<4> leds[] = {
+Bankable::NoteLED<4> leds[] {
   {bank, 7, {notes[0][0], CHANNEL_1}},  //
   {bank, 8, {notes[0][1], CHANNEL_1}},  //
   {bank, 9, {notes[0][2], CHANNEL_1}},  //

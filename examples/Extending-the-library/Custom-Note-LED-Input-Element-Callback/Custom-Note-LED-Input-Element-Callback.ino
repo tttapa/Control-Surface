@@ -79,7 +79,7 @@ class CustomNoteLED
 };
 
 // Instantiate the LED that will light up when middle C is playing.
-CustomNoteLED led = {
+CustomNoteLED led {
   3,                           // Pin with the LED connected (PWM capable)
   {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
   10,                          // Intensity when off

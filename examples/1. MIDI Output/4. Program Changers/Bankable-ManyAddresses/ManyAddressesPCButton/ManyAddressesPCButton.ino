@@ -7,11 +7,11 @@
 USBMIDI_Interface midi;
 
 Bank<3> bank(4);
-IncrementDecrementSelector<3> bankSelector = {bank, {A0, A1}, Wrap::Clamp};
+IncrementDecrementSelector<3> bankSelector {bank, {A0, A1}, Wrap::Clamp};
 
 using namespace MIDI_PC;
 
-Bankable::ManyAddresses::PCButton<3> pcbuttons[] = {
+Bankable::ManyAddresses::PCButton<3> pcbuttons[] {
   {bank,
    2, // pin
    {

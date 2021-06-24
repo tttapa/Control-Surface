@@ -52,7 +52,7 @@ USBMIDI_Interface midi;
 // Create a new instance of the class `CCPotentiometer`, called `potentiometer`,
 // on pin A0, that sends MIDI messages with controller 7 (channel volume)
 // on channel 1.
-CCPotentiometer potentiometer = {
+CCPotentiometer potentiometer {
   A0, {MIDI_CC::Channel_Volume, CHANNEL_1}
 };
 

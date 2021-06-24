@@ -38,13 +38,13 @@
 USBDebugMIDI_Interface midi = 115200;
 
 // Instantiate a NoteButton object
-NoteButton button = {
+NoteButton button {
   5,                           // Push button on pin 5
   {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
 };
 
 // Instantiate the LED that will light up when middle C is playing
-NoteLED led = {
+NoteLED led {
   LED_BUILTIN,                 // Pin of built-in LED
   {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
 };

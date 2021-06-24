@@ -82,13 +82,13 @@ USBDebugMIDI_Interface midi;
 const uint8_t interrupt_pin = 12;
 
 // Create an object that manages the 8 encoders connected to the MCP23017.
-MCPEncoderType enc = {Wire, 0x0, interrupt_pin};
+MCPEncoderType enc {Wire, 0x0, interrupt_pin};
 //                    │     │    └─ Interrupt pin
 //                    │     └────── Address offset
 //                    └──────────── I²C interface
 
 // Instantiate 8 MIDI rotary encoders.
-CCMCPEncoder ccencoders[] = {
+CCMCPEncoder ccencoders[] {
   {
     enc[0],       // The encoder to use
     MCU::V_POT_1, // The MIDI address

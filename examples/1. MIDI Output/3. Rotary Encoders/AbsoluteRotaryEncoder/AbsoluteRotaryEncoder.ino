@@ -44,14 +44,14 @@
 USBMIDI_Interface midi;
 
 // Instantiate a CCAbsoluteEncoder object
-CCAbsoluteEncoder enc = {
+CCAbsoluteEncoder enc {
   {2, 3},       // pins
   MIDI_CC::Pan, // MIDI address (CC number + optional channel)
   1,            // optional multiplier if the control isn't fast enough
 };
 
 // Similarly, for Pitch Bend
-//    PBAbsoluteEncoder enc = {
+//    PBAbsoluteEncoder enc {
 //      {2, 3},    // pins
 //      CHANNEL_1, // MIDI channel
 //      127,       // large multiplier because Pitch Bend has high resolution

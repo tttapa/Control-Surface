@@ -87,7 +87,7 @@ Bank<4> bank(2);
 //   └───────────── number of banks
 
 // Instantiate a Bank selector to control which one of the four Banks is active.
-IncrementDecrementSelector<4> selector = {
+IncrementDecrementSelector<4> selector {
     bank,       // Bank to manage
     {2, 3},     // push button pins (increment, decrement)
     Wrap::Wrap, // Wrap around
@@ -102,12 +102,12 @@ IncrementDecrementSelector<4> selector = {
 // Bank 1.
 
 // Instantiate two potentiometers for the volume controls.
-Bankable::CCPotentiometer potentiometer1 = {
+Bankable::CCPotentiometer potentiometer1 {
   {bank, BankType::CHANGE_CHANNEL},     // bank configuration
   A0,                                   // analog pin
   {MIDI_CC::Channel_Volume, CHANNEL_1}, // address
 };
-Bankable::CCPotentiometer potentiometer2 = {
+Bankable::CCPotentiometer potentiometer2 {
   {bank, BankType::CHANGE_CHANNEL},     // bank configuration
   A1,                                   // analog pin
   {MIDI_CC::Channel_Volume, CHANNEL_2}, // address

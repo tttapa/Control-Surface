@@ -78,13 +78,13 @@ struct CCMCPEncoder : GenericMIDIRotaryEncoder<MCPEncoderType::MCP23017Encoder,
 USBDebugMIDI_Interface midi;
 
 // Create an object that manages the 8 encoders connected to the MCP23017.
-MCPEncoderType enc = {Wire, 0x0, 12};
+MCPEncoderType enc {Wire, 0x0, 12};
 //                    │     │    └─ Interrupt pin
 //                    │     └────── Address offset
 //                    └──────────── I²C interface
 
 // Instantiate 8 MIDI rotary encoders.
-CCMCPEncoder ccencoders[] = {
+CCMCPEncoder ccencoders[] {
   {
     enc[0],       // The encoder to use
     MCU::V_POT_1, // The MIDI address

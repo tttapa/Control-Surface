@@ -78,12 +78,12 @@ constexpr int8_t OLED_CS_R = 18;  // Chip Select pin of the right display
 constexpr uint32_t SPI_Frequency = SPI_MAX_SPEED;
 
 // Instantiate the displays
-Adafruit_SSD1306 ssd1306Display_L = {
+Adafruit_SSD1306 ssd1306Display_L {
   SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,          OLED_DC,
   OLED_reset,   OLED_CS_L,     SPI_Frequency,
 };
 // Instantiate the displays
-Adafruit_SSD1306 ssd1306Display_R = {
+Adafruit_SSD1306 ssd1306Display_R {
   SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,          OLED_DC,
   OLED_reset,   OLED_CS_R,     SPI_Frequency,
 };
@@ -138,22 +138,22 @@ AudioConnection patchCord6(mixer_R, 0, audioOutputI2S, 1);
 // ----------------------------- Volume control ----------------------------- //
 // ========================================================================== //
 
-VolumeControl<2> volume = {{&mixer_L, &mixer_R}, A0, 1.0};
+VolumeControl<2> volume {{&mixer_L, &mixer_R}, A0, 1.0};
 
 // ------------------------------- VU Meters -------------------------------- //
 // ========================================================================== //
 
 #ifdef DIGITAL_VU
-AudioVU vu_L = {rms_L, MovingCoilBallistics::noOvershoot(), 1, 25};
-AudioVU vu_R = {rms_R, MovingCoilBallistics::noOvershoot(), 1, 25};
+AudioVU vu_L {rms_L, MovingCoilBallistics::noOvershoot(), 1, 25};
+AudioVU vu_R {rms_R, MovingCoilBallistics::noOvershoot(), 1, 25};
 
-MCU::VUDisplay<> vu_display_L = {display_L, vu_L, {0, 127}, 64, 4, 1, WHITE};
-MCU::VUDisplay<> vu_display_R = {display_R, vu_R, {0, 127}, 64, 4, 1, WHITE};
+MCU::VUDisplay<> vu_display_L {display_L, vu_L, {0, 127}, 64, 4, 1, WHITE};
+MCU::VUDisplay<> vu_display_R {display_R, vu_R, {0, 127}, 64, 4, 1, WHITE};
 #else
-AudioVU vu_L = {rms_L, MovingCoilBallistics::responsiveVU(1)};
-AudioVU vu_R = {rms_R, MovingCoilBallistics::responsiveVU(1)};
+AudioVU vu_L {rms_L, MovingCoilBallistics::responsiveVU(1)};
+AudioVU vu_R {rms_R, MovingCoilBallistics::responsiveVU(1)};
 
-MCU::AnalogVUDisplay<> vu_display_L = {
+MCU::AnalogVUDisplay<> vu_display_L {
   display_L,       // Display to display on
   vu_L,            // VU meter to display
   {63, 63},        // Location of the needle pivot
@@ -165,7 +165,7 @@ MCU::AnalogVUDisplay<> vu_display_L = {
 // Note that the y axis points downwards (as is common in computer graphics).
 // This means that a positive angle is clockwise, and -140° lies in the top left
 // quadrant
-MCU::AnalogVUDisplay<> vu_display_R = {
+MCU::AnalogVUDisplay<> vu_display_R {
   display_R, vu_R, {63, 63}, 63, -140 * PI / 180, 100 * PI / 180, WHITE,
 };
 #endif

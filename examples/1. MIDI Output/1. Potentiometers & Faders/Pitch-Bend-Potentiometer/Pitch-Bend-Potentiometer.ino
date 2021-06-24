@@ -38,7 +38,7 @@
 USBMIDI_Interface midi;
 
 // Instantiate a PBPotentiometer object
-PBPotentiometer potentiometer = {
+PBPotentiometer potentiometer {
   A0,        // Analog pin connected to potentiometer
   CHANNEL_1, // MIDI Channel 1
 };

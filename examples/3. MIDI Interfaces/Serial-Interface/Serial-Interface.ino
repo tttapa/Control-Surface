@@ -30,7 +30,7 @@
 // Select the serial port to use.
 auto &serial = Serial;
 // Instantiate a Serial MIDI interface at the default MIDI baud rate.
-SerialMIDI_Interface<decltype(serial)> midi = {serial, MIDI_BAUD};
+SerialMIDI_Interface<decltype(serial)> midi {serial, MIDI_BAUD};
 
 // You can also use the following serial MIDI interfaces:
 //
@@ -40,16 +40,16 @@ SerialMIDI_Interface<decltype(serial)> midi = {serial, MIDI_BAUD};
 //
 // A hardware serial port:
 //
-//    HardwareSerialMIDI_Interface midi = {Serial1, MIDI_BAUD};
+//    HardwareSerialMIDI_Interface midi {Serial1, MIDI_BAUD};
 
 // Instantiate a NoteButton object
-NoteButton button = {
+NoteButton button {
   5,                           // Push button on pin 5
   {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
 };
 
 // Instantiate the LED that will light up when middle C is playing
-NoteLED led = {
+NoteLED led {
   LED_BUILTIN,                 // Pin of built-in LED
   {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
 };

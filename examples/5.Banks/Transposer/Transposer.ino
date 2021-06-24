@@ -44,14 +44,14 @@ USBMIDI_Interface midi;
 Transposer<-12, +12> transposer;
 
 // Instantiate a Selector to change the transposition
-IncrementDecrementSelector<transposer.getNumberOfBanks()> selector = {
+IncrementDecrementSelector<transposer.getNumberOfBanks()> selector {
   transposer,
   {10, 11},
   Wrap::Clamp,
 };
 
 // Instantiate an array of NoteButton objects
-Bankable::NoteButton buttons[] = {
+Bankable::NoteButton buttons[] {
   {transposer, 2, MIDI_Notes::C(4)}, {transposer, 3, MIDI_Notes::D(4)},
   {transposer, 4, MIDI_Notes::E(4)}, {transposer, 5, MIDI_Notes::F_(4)},
   {transposer, 6, MIDI_Notes::G(4)}, {transposer, 7, MIDI_Notes::A(4)},

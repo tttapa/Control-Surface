@@ -134,12 +134,12 @@ FortySevenEffectsMIDI_Interface<decltype(MIDI) &> AppleMIDI_interface = MIDI;
 // ------------------------------ MIDI Elements ----------------------------- //
 
 // Add some MIDI elements for testing
-NoteButton button = {
+NoteButton button {
   0, // GPIO0 has a push button connected on most boards
   MIDI_Notes::C(4), 
 };
 
-NoteLED led = {
+NoteLED led {
   LED_BUILTIN, // If your board has one, otherwise, specify a pin number here
   MIDI_Notes::C(4),
 };

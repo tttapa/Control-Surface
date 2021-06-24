@@ -77,7 +77,7 @@ constexpr int8_t OLED_CS = 2;     // Chip Select pin of the display
 constexpr uint32_t SPI_Frequency = SPI_MAX_SPEED;
 
 // Instantiate the displays
-Adafruit_SSD1306 ssd1306Display = {SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,
+Adafruit_SSD1306 ssd1306Display {SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,
                                    OLED_DC,      OLED_reset,    OLED_CS,
                                    SPI_Frequency};
 
@@ -108,13 +108,13 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
 // -------------------------- MIDI Input Elements --------------------------- //
 // ========================================================================== //
 
-NoteValue mute[8] = {
+NoteValue mute[8] {
   {MCU::MUTE_1}, // The mute status of the first track
   {MCU::MUTE_2}, {MCU::MUTE_3}, {MCU::MUTE_4}, {MCU::MUTE_5},
   {MCU::MUTE_6}, {MCU::MUTE_7}, {MCU::MUTE_8},
 };
 
-NoteValue solo[8] = {
+NoteValue solo[8] {
   {MCU::SOLO_1}, // The solo status of the first track
   {MCU::SOLO_2}, {MCU::SOLO_3}, {MCU::SOLO_4}, {MCU::SOLO_5},
   {MCU::SOLO_6}, {MCU::SOLO_7}, {MCU::SOLO_8},
@@ -125,7 +125,7 @@ constexpr unsigned int decay = MCU::VUDecay::Hold;
 //   constexpr unsigned int decay = 60; // milliseconds to decay one block
 
 // VU meters
-MCU::VU VUMeters[8] = {
+MCU::VU VUMeters[8] {
   {1, decay}, // The VU meter for the first track, decay time as specified above
   {2, decay}, {3, decay}, {4, decay}, {5, decay},
   {6, decay}, {7, decay}, {8, decay},
@@ -134,7 +134,7 @@ MCU::VU VUMeters[8] = {
 // ---------------------------- Display Elements ---------------------------- //
 // ========================================================================== //
 
-MCU::VUDisplay<> vuDisp[8] = {
+MCU::VUDisplay<> vuDisp[8] {
   // Draw the first VU meter to the display, at position (2, 50),
   // (12) pixels wide, blocks of (3) pixels high, a spacing between
   // blocks of (1) pixel, and draw in white.
@@ -148,7 +148,7 @@ MCU::VUDisplay<> vuDisp[8] = {
   {display, VUMeters[7], {2 + 16 * 7, 50}, 12, 3, 1, WHITE},
 };
 
-BitmapDisplay<> muteDisp[8] = {
+BitmapDisplay<> muteDisp[8] {
   // Draw the first mute indicator to the display, at position (4, 54),
   // using bitmap icon mute_7 with a white foreground color.
   {display, mute[0], XBM::mute_7, {4 + 16 * 0, 54}, WHITE},
@@ -161,7 +161,7 @@ BitmapDisplay<> muteDisp[8] = {
   {display, mute[7], XBM::mute_7, {4 + 16 * 7, 54}, WHITE},
 };
 
-BitmapDisplay<> soloDisp[8] = {
+BitmapDisplay<> soloDisp[8] {
   // Draw the first solo indicator to the display, at position (4, 54),
   // using bitmap icon solo_7 with a white foreground color.
   {display, solo[0], XBM::solo_7, {4 + 16 * 0, 54}, WHITE},

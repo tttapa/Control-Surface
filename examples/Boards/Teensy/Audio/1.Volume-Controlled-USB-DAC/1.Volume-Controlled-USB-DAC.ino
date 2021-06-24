@@ -52,7 +52,7 @@ AudioConnection patchCord6(mixer_R, 0, audioOutputI2S, 0); // to the output
 
 // Instantiate a VolumeControl object with a potentiometer on pin A0 and a
 // maximum gain of 1.0
-VolumeControl<2> volume = {{&mixer_L, &mixer_R}, A0, 1.0};
+VolumeControl<2> volume {{&mixer_L, &mixer_R}, A0, 1.0};
 
 void setup() {
   volume.begin();

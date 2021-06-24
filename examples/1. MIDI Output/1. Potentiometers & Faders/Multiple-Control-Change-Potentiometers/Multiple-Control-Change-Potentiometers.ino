@@ -42,7 +42,7 @@
 USBMIDI_Interface midi;
 
 // Instantiate an array of CCPotentiometer objects
-CCPotentiometer potentiometers[] = {
+CCPotentiometer potentiometers[] {
   {A0,        // Analog pin connected to potentiometer 1
    0x10},     // Controller number of the first potentiometer
   {A1,        // Analog pin connected to potentiometer 2

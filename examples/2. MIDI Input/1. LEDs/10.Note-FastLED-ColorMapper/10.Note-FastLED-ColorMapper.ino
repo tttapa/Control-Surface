@@ -38,7 +38,7 @@
 #include <Control_Surface.h>
 
 // Define the array of leds.
-Array<CRGB, 8> leds = {};
+Array<CRGB, 8> leds {};
 // The data pin with the strip connected.
 constexpr uint8_t ledpin = 2;
 
@@ -51,7 +51,7 @@ struct RainbowColorMapper {
   }
 };
 
-NoteRangeFastLED<leds.length, RainbowColorMapper> midiled = {
+NoteRangeFastLED<leds.length, RainbowColorMapper> midiled {
   leds,
   MIDI_Notes::C(4),
 };

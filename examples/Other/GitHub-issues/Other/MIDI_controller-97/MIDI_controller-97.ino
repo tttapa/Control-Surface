@@ -21,14 +21,14 @@ Bank<4> bank(16);
 // It has push buttons connected to pins 21 and 20 that increment or decrement
 // the bank setting, and 4 LEDs to pins 46, 48, 50, 52 that display the current
 // bank setting.
-IncrementDecrementSelectorLEDs<4> bankSelector = {
+IncrementDecrementSelectorLEDs<4> bankSelector {
   bank,
   {21, 20},         // button pins
   {46, 48, 50, 52}, // LED pins
 };
 
 using namespace MIDI_CC;
-Bankable::CCPotentiometer potentiometers[] = {
+Bankable::CCPotentiometer potentiometers[] {
   {{bank, BankType::CHANGE_CHANNEL}, A0, {Channel_Volume, CHANNEL_1}},
   {{bank, BankType::CHANGE_CHANNEL}, A1, {Channel_Volume, CHANNEL_2}},
   {{bank, BankType::CHANGE_CHANNEL}, A2, {Sound_Controller_3, CHANNEL_3}},
@@ -43,7 +43,7 @@ Bankable::CCPotentiometer potentiometers[] = {
   {{bank, BankType::CHANGE_CHANNEL}, A11, {Effect_Control_2, CHANNEL_12}},
 };
 
-Bankable::NoteButton muteButtons[] = {
+Bankable::NoteButton muteButtons[] {
   {bank, 13, 0x14},
   {bank, 12, 0x15},
   {bank, 11, 0x16},

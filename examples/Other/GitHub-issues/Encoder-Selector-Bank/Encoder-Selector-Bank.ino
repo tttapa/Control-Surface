@@ -8,10 +8,10 @@
 USBMIDI_Interface midi;
 
 // Bank with 120 settings in total, increments of 1 address at a time
-Bank<120> bank = {1};
+Bank<120> bank {1};
 
 // A rotary encoder to select one of the 120 bank settings
-EncoderSelector<120> selector = {
+EncoderSelector<120> selector {
   bank,        // bank to manage
   {2, 3},      // encoder pins
   4,           // encoder pulses per step
@@ -20,7 +20,7 @@ EncoderSelector<120> selector = {
 
 // The potentiometer that sends MIDI messages
 // the address (controller number) depends on the bank setting
-Bankable::CCPotentiometer potentiometer = {
+Bankable::CCPotentiometer potentiometer {
   {bank, BankType::CHANGE_ADDRESS}, // Bank configuration
   A0,                               // Analog pin for potentiometer
   {0x00, CHANNEL_1},                // Base CC address

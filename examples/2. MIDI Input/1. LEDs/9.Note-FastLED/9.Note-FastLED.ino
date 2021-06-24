@@ -37,7 +37,7 @@
 #include <Control_Surface.h>
 
 // Define the array of leds.
-Array<CRGB, 8> leds = {};
+Array<CRGB, 8> leds {};
 // The data pin with the strip connected.
 constexpr uint8_t ledpin = 2;
 
@@ -45,7 +45,7 @@ USBMIDI_Interface midi;
 
 // Create a MIDI input element that listens to all notes in the range C4 - G4
 // (the range starts at C4 and has a length equal to `leds.length` == 8).
-NoteRangeFastLED<leds.length> midiled = {leds, MIDI_Notes::C(4)};
+NoteRangeFastLED<leds.length> midiled {leds, MIDI_Notes::C(4)};
 
 void setup() {
   // See FastLED examples and documentation for more information.

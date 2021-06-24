@@ -81,7 +81,7 @@ class CustomNoteLED : public MatchingMIDIInputElement<MIDIMessageType::NOTE_ON,
 };
 
 // Define the array of leds.
-Array<CRGB, 8> leds = {};
+Array<CRGB, 8> leds {};
 // The data pin with the strip connected.
 constexpr uint8_t ledpin = 2;
 
@@ -91,7 +91,7 @@ constexpr uint8_t ledpin = 2;
 // Note C#4 is the green channel of the first LED,
 // Note D4 is the blue channel of the first LED,
 // Note D#4 is the red channel of the second LED, etc.
-CustomNoteLED<leds.length * 3> midiled = {leds.data, MIDI_Notes::C(4)};
+CustomNoteLED<leds.length * 3> midiled {leds.data, MIDI_Notes::C(4)};
 
 void setup() {
   // See FastLED examples and documentation for more information.

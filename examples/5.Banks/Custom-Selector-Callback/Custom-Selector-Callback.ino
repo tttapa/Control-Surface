@@ -106,7 +106,7 @@ USBMIDI_Interface midi;
 Bank<6> bank = 1;
 
 // Create a selector that uses our custom callback, to control the bank.
-GenericIncrementDecrementSelector<6, MySelectorCallback> selector = {
+GenericIncrementDecrementSelector<6, MySelectorCallback> selector {
   bank,         // bank to manage
   {10, 11, 12}, // red, green, blue LED pins 
                 // (this is the MySelectorCallback constructor defined above)

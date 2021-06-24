@@ -42,10 +42,10 @@ USBMIDI_Interface midi;
 
 // Instantiate two daisy-chained shift register with the SPI slave select pin as
 // latch pin, most significant bit first, and a total of 16 outputs.
-SPIShiftRegisterOut<16> sreg = {SPI, SS, MSBFIRST};
+SPIShiftRegisterOut<16> sreg {SPI, SS, MSBFIRST};
 
 // Instantiate a VULEDs object with 12 LEDs.
-MCU::VULEDs<12> vu = {
+MCU::VULEDs<12> vu {
   sreg.pins().slice<0, 11>(), // first 12 pins of the shift registers
   1,                          // track number [1, 8]
   MCU::VUDecay::Default,      // how long does it take for the meter to decay
@@ -54,7 +54,7 @@ MCU::VULEDs<12> vu = {
 // If you don't want to use shift registers, you can just specify a list of pin
 // numbers:
 //
-//   MCU::VULEDs<12> vu = {
+//   MCU::VULEDs<12> vu {
 //     {{2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}}, // Arduino pin numbers
 //     1,                      // track number [1, 8]
 //     MCU::VUDecay::Default,  // how long does it take for the meter to decay

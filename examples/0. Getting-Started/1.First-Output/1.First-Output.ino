@@ -15,7 +15,7 @@
 USBMIDI_Interface midi;
 
 // Instantiate an analog multiplexer
-CD74HC4051 mux = {
+CD74HC4051 mux {
   A0,       // Analog input pin
   {3, 4, 5} // Address pins S0, S1, S2
 };
@@ -24,7 +24,7 @@ CD74HC4051 mux = {
 // MIDI Control Change messages when you turn the
 // potentiometers connected to the eight input pins of
 // the multiplexer
-CCPotentiometer volumePotentiometers[] = {
+CCPotentiometer volumePotentiometers[] {
   {mux.pin(0), {MIDI_CC::Channel_Volume, CHANNEL_1}},
   {mux.pin(1), {MIDI_CC::Channel_Volume, CHANNEL_2}},
   {mux.pin(2), {MIDI_CC::Channel_Volume, CHANNEL_3}},

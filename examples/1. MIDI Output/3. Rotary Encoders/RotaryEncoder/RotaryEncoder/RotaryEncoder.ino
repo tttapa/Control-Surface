@@ -40,7 +40,7 @@
 USBMIDI_Interface midi;
 
 // Instantiate a CCRotaryEncoder object
-CCRotaryEncoder enc = {
+CCRotaryEncoder enc {
   {2, 3},       // pins
   MCU::V_POT_1, // MIDI address (CC number + optional channel)
   1,            // optional multiplier if the control isn't fast enough

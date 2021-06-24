@@ -36,7 +36,7 @@
 USBMIDI_Interface midi;
 
 // Instantiate a NoteButton object
-NoteButton button = {
+NoteButton button {
   5,                       // Push button on pin 5
   {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
 };

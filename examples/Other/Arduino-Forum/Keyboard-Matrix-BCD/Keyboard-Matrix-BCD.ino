@@ -25,7 +25,7 @@ constexpr uint8_t columns = 8;
 static_assert(rows <= 10, "Error: TC4028 only has 10 outputs");
 
 // The note numbers corresponding to the buttons in the matrix
-const AddressMatrix<rows, columns> notes = {{
+const AddressMatrix<rows, columns> notes {{
   {1, 2, 3, 4, 5, 6, 7, 8},        //
   {9, 10, 11, 12, 13, 14, 15, 16}, //
   // 8 more rows ...
@@ -34,10 +34,10 @@ const AddressMatrix<rows, columns> notes = {{
 const Channel channel = CHANNEL_1;
 
 // Address pins A, B, C & D of TC4028
-const AH::PinList<4> addressPins = {{2, 3, 4, 5}};
+const AH::PinList<4> addressPins {{2, 3, 4, 5}};
 // The pins connected to the columns of the keyboard matrix (with external
 // pull-down resistors)
-const AH::PinList<columns> columnPins = {{6, 7, 8, 9, 10, 11, 12, 13}};
+const AH::PinList<columns> columnPins {{6, 7, 8, 9, 10, 11, 12, 13}};
 
 // Make the given line [0, 9] of the TC4028 high, the nine others low
 void selectLine(uint8_t line) {

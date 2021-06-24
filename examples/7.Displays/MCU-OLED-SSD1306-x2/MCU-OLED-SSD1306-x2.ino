@@ -89,11 +89,11 @@ constexpr int8_t OLED_CS_R = 18;  // Chip Select pin of the right display
 constexpr uint32_t SPI_Frequency = SPI_MAX_SPEED;
 
 // Instantiate the displays
-Adafruit_SSD1306 ssd1306Display_L = {
+Adafruit_SSD1306 ssd1306Display_L {
   SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,          OLED_DC,
   OLED_reset,   OLED_CS_L,     SPI_Frequency,
 };
-Adafruit_SSD1306 ssd1306Display_R = {
+Adafruit_SSD1306 ssd1306Display_R {
   SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,          OLED_DC,
   OLED_reset,   OLED_CS_R,     SPI_Frequency,
 };
@@ -140,7 +140,7 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
 Bank<2> bank(4); // Create a new bank with four tracks per bank
 
 // Create a new bank selector to control the bank using a push button
-IncrementSelector<2> bankselector = {bank, 5};
+IncrementSelector<2> bankselector {bank, 5};
 
 // -------------------------- MIDI Input Elements --------------------------- //
 // ========================================================================== //
@@ -150,17 +150,17 @@ IncrementSelector<2> bankselector = {bank, 5};
  */
 
 // Main MCU LCD screen, used to get track names
-MCU::LCD<> lcd = {};
+MCU::LCD<> lcd {};
 
 // Time display_L keeps track of the bar counter
-MCU::TimeDisplay timedisplay = {};
+MCU::TimeDisplay timedisplay {};
 
 // Play / Record
-NoteValue play = {MCU::PLAY};
-NoteValue record = {MCU::RECORD};
+NoteValue play {MCU::PLAY};
+NoteValue record {MCU::RECORD};
 
 // Mute
-Bankable::NoteValue<2> mute[] = {
+Bankable::NoteValue<2> mute[] {
   {bank, MCU::MUTE_1},
   {bank, MCU::MUTE_2},
   {bank, MCU::MUTE_3},
@@ -168,17 +168,17 @@ Bankable::NoteValue<2> mute[] = {
 };
 
 // Solo
-Bankable::NoteValue<2> solo[] = {
+Bankable::NoteValue<2> solo[] {
   {bank, MCU::SOLO_1},
   {bank, MCU::SOLO_2},
   {bank, MCU::SOLO_3},
   {bank, MCU::SOLO_4},
 };
 
-NoteValue rudeSolo = {MCU::RUDE_SOLO};
+NoteValue rudeSolo {MCU::RUDE_SOLO};
 
 // Record arm / ready
-Bankable::NoteValue<2> recrdy[] = {
+Bankable::NoteValue<2> recrdy[] {
   {bank, MCU::REC_RDY_1},
   {bank, MCU::REC_RDY_2},
   {bank, MCU::REC_RDY_3},
@@ -186,7 +186,7 @@ Bankable::NoteValue<2> recrdy[] = {
 };
 
 // VU meters
-MCU::Bankable::VU<2> vu[] = {
+MCU::Bankable::VU<2> vu[] {
   {bank, 1, MCU::VUDecay::Hold},
   {bank, 2, MCU::VUDecay::Hold},
   {bank, 3, MCU::VUDecay::Hold},
@@ -194,7 +194,7 @@ MCU::Bankable::VU<2> vu[] = {
 };
 
 // VPot rings
-MCU::Bankable::VPotRing<2> vpot[] = {
+MCU::Bankable::VPotRing<2> vpot[] {
   {bank, 1},
   {bank, 2},
   {bank, 3},
@@ -209,7 +209,7 @@ MCU::Bankable::VPotRing<2> vpot[] = {
  */
 
 // Track names
-MCU::LCDDisplay lcddisps[] = {
+MCU::LCDDisplay lcddisps[] {
   // track (1), position (0, 40), font size (1)
   {display_L, lcd, bank, 1, {0, 40}, 1, WHITE},
   {display_L, lcd, bank, 2, {64, 40}, 1, WHITE},
@@ -218,21 +218,21 @@ MCU::LCDDisplay lcddisps[] = {
 };
 
 // Time display
-MCU::TimeDisplayDisplay timedisplaydisplay = {
+MCU::TimeDisplayDisplay timedisplaydisplay {
   // position (0, 0), font size (1)
   display_L, timedisplay, {0, 0}, 1, WHITE,
 };
 
 // Play / Record
-BitmapDisplay<> playDisp = {
+BitmapDisplay<> playDisp {
   display_L, play, XBM::play_7, {16 + 64, 0}, WHITE,
 };
-BitmapDisplay<> recordDisp = {
+BitmapDisplay<> recordDisp {
   display_L, record, XBM::record_7, {26 + 64, 0}, WHITE,
 };
 
 // Mute
-BitmapDisplay<> muteDisp[] = {
+BitmapDisplay<> muteDisp[] {
   {display_L, mute[0], XBM::mute_10B, {14, 50}, WHITE},
   {display_L, mute[1], XBM::mute_10B, {14 + 64, 50}, WHITE},
   {display_R, mute[2], XBM::mute_10B, {14, 50}, WHITE},
@@ -240,18 +240,18 @@ BitmapDisplay<> muteDisp[] = {
 };
 
 // Solo
-BitmapDisplay<> soloDisp[] = {
+BitmapDisplay<> soloDisp[] {
   {display_L, solo[0], XBM::solo_10B, {14, 50}, WHITE},
   {display_L, solo[1], XBM::solo_10B, {14 + 64, 50}, WHITE},
   {display_R, solo[2], XBM::solo_10B, {14, 50}, WHITE},
   {display_R, solo[3], XBM::solo_10B, {14 + 64, 50}, WHITE},
 };
 
-BitmapDisplay<> rudeSoloDisp = {
+BitmapDisplay<> rudeSoloDisp {
   display_L, rudeSolo, XBM::solo_7, {36 + 64, 0}, WHITE};
 
 // Record arm / ready
-BitmapDisplay<> recrdyDisp[] = {
+BitmapDisplay<> recrdyDisp[] {
   {display_L, recrdy[0], XBM::rec_rdy_10B, {14 + 14, 50}, WHITE},
   {display_L, recrdy[1], XBM::rec_rdy_10B, {14 + 14 + 64, 50}, WHITE},
   {display_R, recrdy[2], XBM::rec_rdy_10B, {14 + 14, 50}, WHITE},
@@ -259,7 +259,7 @@ BitmapDisplay<> recrdyDisp[] = {
 };
 
 // VU meters
-MCU::VUDisplay<> vuDisp[] = {
+MCU::VUDisplay<> vuDisp[] {
   // position (32+11, 60), width (16), bar height (3) px, bar spacing (1) px
   {display_L, vu[0], {32 + 11, 60}, 16, 3, 1, WHITE},
   {display_L, vu[1], {32 + 11 + 64, 60}, 16, 3, 1, WHITE},
@@ -268,7 +268,7 @@ MCU::VUDisplay<> vuDisp[] = {
 };
 
 // VPot rings
-MCU::VPotDisplay<> vpotDisp[] = {
+MCU::VPotDisplay<> vpotDisp[] {
   // position (0, 10), outer radius (14) px, inner radius (12) px
   {display_L, vpot[0], {0, 10}, 14, 12, WHITE},
   {display_L, vpot[1], {64, 10}, 14, 12, WHITE},
@@ -277,7 +277,7 @@ MCU::VPotDisplay<> vpotDisp[] = {
 };
 
 // Bank seting
-BankDisplay bankDisp[] = {
+BankDisplay bankDisp[] {
   // first track of the bank (1), position (0, 50), font size (2)
   {display_L, bank, 1, {0, 50}, 2, WHITE},
   {display_L, bank, 2, {64, 50}, 2, WHITE},

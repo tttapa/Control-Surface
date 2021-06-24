@@ -77,7 +77,7 @@ struct CustomNoteButton : MIDIButton<CustomNoteSender> {
 // Now we can instantiate an object of our custom class.
 // The four arguments match the ones of the CustomNoteButton
 // constructor we wrote a couple of lines back.
-CustomNoteButton button = {
+CustomNoteButton button {
   5,              // button pin
   MIDI_Notes::C(4), // MIDI address
   0x40,           // on velocity

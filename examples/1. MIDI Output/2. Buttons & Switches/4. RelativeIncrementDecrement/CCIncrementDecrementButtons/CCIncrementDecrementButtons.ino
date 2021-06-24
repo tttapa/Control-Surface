@@ -49,7 +49,7 @@
 USBMIDI_Interface midi;
 
 // Instantiate a CCIncrementDecrementButtons object
-CCIncrementDecrementButtons buttons = {
+CCIncrementDecrementButtons buttons {
   {5, 6},              // Button pins: 5 increments, 6 decrements
   MCU::V_POT_1,        // Increment/Decrement CC address
   1,                   // Multiplier

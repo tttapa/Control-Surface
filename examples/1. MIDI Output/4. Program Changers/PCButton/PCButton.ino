@@ -27,7 +27,7 @@ USBMIDI_Interface midi;
 
 // Instantiate a PCButton that reads the input from a push button and sends out
 // a MIDI Program Change message when it's pressed.
-PCButton pcBtn = {
+PCButton pcBtn {
   2,                                 // pin
   {MIDI_PC::Steel_Drums, CHANNEL_1}, // address
 };
