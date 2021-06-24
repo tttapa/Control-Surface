@@ -15,7 +15,6 @@
 #include <Arduino_Helpers.h>
 
 #include <AH/STL/complex>
-using namespace std::complex_literals;
 
 void setup() {
   Serial.begin(115200);
@@ -23,7 +22,7 @@ void setup() {
     ;
 
   // Create a complex number
-  std::complex<double> c = 2i;
+  std::complex<double> c{0, 2};
 
   // Print the square root
   Serial << "√(2i) = " << std::sqrt(c) << endl;
