@@ -5,9 +5,11 @@
 
 # Control Surface
 
-An Arduino library for MIDI control surfaces (input and output).  
+An Arduino library for MIDI controllers and control surfaces. 
 It includes a general-purpose MIDI abstraction layer as well, which can be useful
-for any MIDI-related project.
+for any MIDI-related project.  
+Control surfaces with both MIDI outputs (potentiometers, buttons, etc.) and
+MIDI inputs (LEDs, displays, etc.) are supported.
 
 ## Overview
 
@@ -234,6 +236,9 @@ tests and generating documentation, a style guide, etc.
 
 ### 2.0-alpha
 
+ - cf32e7e72d81269e97f18ba51c42ba10715d1852  
+   `Control_Surface.setMIDIInputCallbacks()` now takes four arguments instead of
+   three, because a System Common callback was added.
  - b727931a44cb1e262ac32901f1e307583da90624  
    The MIDI note name for the note F has been changed from `F` to `F_` in order
    to avoid conflicts with the `F()` macro and its functional equivalent 
