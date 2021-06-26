@@ -1,8 +1,9 @@
 #pragma once
 
 #include <AH/Containers/BitArray.hpp>
-#include <AH/STL/utility>
+#include <AH/STL/cstdint>
 #include <AH/STL/limits>
+#include <AH/STL/utility>
 #include <AH/Settings/Warnings.hpp>
 #include <MIDI_Parsers/MIDI_MessageTypes.hpp>
 #include <Settings/NamespaceSettings.hpp>
@@ -12,8 +13,8 @@ AH_DIAGNOSTIC_WERROR()
 BEGIN_CS_NAMESPACE
 
 struct MIDIStaller;
-MIDIStaller *const eternal_stall 
-    = reinterpret_cast<MIDIStaller *>(std::numeric_limits<std::uintptr_t>::max());
+MIDIStaller *const eternal_stall =
+    reinterpret_cast<MIDIStaller *>(std::numeric_limits<std::uintptr_t>::max());
 
 /**
  * @addtogroup MIDI_Routing MIDI Routing
@@ -114,7 +115,7 @@ class MIDI_Sink {
     bool disconnect(MIDI_Pipe &) = delete;
     /// Check if this sink is connected to a source pipe.
     bool hasSourcePipe() const { return sourcePipe != nullptr; }
-    /// Get a pointer to the pipe this sink is connected to, or `nullptr` if 
+    /// Get a pointer to the pipe this sink is connected to, or `nullptr` if
     /// not connected.
     MIDI_Pipe *getSourcePipe() { return sourcePipe; }
 
@@ -195,7 +196,7 @@ class MIDI_Source {
     void stall(MIDIStaller *cause = eternal_stall);
     /// Un-stall the pipes connected to this source, so other sources
     /// are allowed to send again.
-    /// @param  cause 
+    /// @param  cause
     ///         Pointer to the reason for the stall (this has to be the same one
     ///         that was used to stall).
     void unstall(MIDIStaller *cause = eternal_stall);
@@ -207,7 +208,7 @@ class MIDI_Source {
     /// Get the name of whatever is causing this MIDI source to be stalled.
     /// There could be multiple stallers, this function just returns one.
     const char *getStallerName() const;
-    /// Give the code that is stalling the MIDI sink pipes the opportunity to do 
+    /// Give the code that is stalling the MIDI sink pipes the opportunity to do
     /// its job and un-stall the pipes.
     void handleStallers() const;
 
@@ -228,7 +229,7 @@ class MIDI_Source {
     bool disconnect(MIDI_Pipe &) = delete;
     /// Check if this source is connected to a sink pipe.
     bool hasSinkPipe() const { return sinkPipe != nullptr; }
-    /// Get a pointer to the pipe this source is connected to, or `nullptr` if 
+    /// Get a pointer to the pipe this source is connected to, or `nullptr` if
     /// not connected.
     MIDI_Pipe *getSinkPipe() { return sinkPipe; }
 
@@ -346,10 +347,10 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     /// @name Mapping and filtering
     /// @{
 
-    /// Function that maps, edits or filters MIDI messages, and then forwards 
+    /// Function that maps, edits or filters MIDI messages, and then forwards
     /// them to the sink of the pipe.
-    /// The MIDI_Pipe base class just forwards the messages to the sink, but 
-    /// you can override this method to create pipes that filter out some 
+    /// The MIDI_Pipe base class just forwards the messages to the sink, but
+    /// you can override this method to create pipes that filter out some
     /// messages, transposes notes, changes the channel, etc.
     virtual void mapForwardMIDI(ChannelMessage msg) { sourceMIDItoSink(msg); }
     /// @copydoc    mapForwardMIDI
@@ -360,7 +361,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     virtual void mapForwardMIDI(RealTimeMessage msg) { sourceMIDItoSink(msg); }
 
     /// @}
-    
+
   public:
     /// @name Dealing with stalled pipes
     /// @{
@@ -377,10 +378,10 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     const char *getSinkStallerName() const;
     /// Get the staller (cause of the stall) that causes the “through” output
     /// of this pipe to be stalled.
-    /// The “through” output of this pipe could sink to more than one stalled 
+    /// The “through” output of this pipe could sink to more than one stalled
     /// sink, this function just returns one of the causes.
     MIDIStaller *getThroughStaller() const { return through_staller; }
-    /// Get the name of the staller (cause of the stall) that causes the 
+    /// Get the name of the staller (cause of the stall) that causes the
     /// “through” output of this pipe to be stalled.
     const char *getThroughStallerName() const;
     /// Get any staller: returns @ref getSinkStaller() if it's not null,
@@ -402,7 +403,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
         return through_staller == nullptr || through_staller == cause;
     }
 
-    /// Give the code that is stalling the MIDI pipe the opportunity to do 
+    /// Give the code that is stalling the MIDI pipe the opportunity to do
     /// its job and unstall the pipe.
     void handleStallers() const;
 
@@ -505,7 +506,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     /// @}
 
   protected:
-    /// Send the given MIDI message to the sink of this pipe. 
+    /// Send the given MIDI message to the sink of this pipe.
     /// Useful when overriding @ref mapForwardMIDI.
     template <class Message>
     void sourceMIDItoSink(Message msg) {
@@ -516,7 +517,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
   protected:
     /// Accept a MIDI message from the source, forward it to the “through”
     /// output if necessary, map or filter the MIDI message if necessary,
-    /// and send it to the sink. This function transfers messages from a 
+    /// and send it to the sink. This function transfers messages from a
     /// @ref MIDI_Source to its @ref MIDI_Pipe.
     template <class Message>
     void acceptMIDIfromSource(Message msg) {
@@ -526,15 +527,13 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     }
 
   private:
-    /// Called when data arrives from an upstream pipe connected to our 
+    /// Called when data arrives from an upstream pipe connected to our
     /// “through” input, this function forwards it to the sink.
     void sinkMIDIfromPipe(ChannelMessage msg) override {
         sourceMIDItoSink(msg);
     }
     /// @copydoc sinkMIDIfromPipe
-    void sinkMIDIfromPipe(SysExMessage msg) override {
-        sourceMIDItoSink(msg);
-    }
+    void sinkMIDIfromPipe(SysExMessage msg) override { sourceMIDItoSink(msg); }
     /// @copydoc sinkMIDIfromPipe
     void sinkMIDIfromPipe(SysCommonMessage msg) override {
         sourceMIDItoSink(msg);
@@ -551,7 +550,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     /// Stall this pipe and all other pipes further downstream (following the
     /// path of the sink and the “through” output). Operates recursively until
     /// the end of the chain is reached, and then continues upstream (using
-    /// @ref stallUpstream) to stall all pipes that connect to sources that 
+    /// @ref stallUpstream) to stall all pipes that connect to sources that
     /// sink to the same sink as this pipe and its “through” output.
     /// In short: stall all pipes that sink to the same sink as this pipe, and
     /// then stall all pipes that source to this first set of pipes.
@@ -561,7 +560,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
 
     /// Stall this pipe and all other pipes further upstream (following the
     /// path of the "trough" input). Operates recursively until the end of the
-    /// chain is reached. This function is called in the second stage of 
+    /// chain is reached. This function is called in the second stage of
     /// @ref stallDownstream.
     void stallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) override;
     /// Undoes the stalling by @ref stallUpstream.
