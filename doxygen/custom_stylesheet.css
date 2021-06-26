@@ -91,9 +91,6 @@ a.el {
 iframe {
     max-width: initial;
 }
-#MSearchField {
-    max-width: initial;
-}
 body > div.header, div.PageDoc > div.header {
     max-width: 1100px;
     box-sizing: border-box;
@@ -139,10 +136,27 @@ body > div.header {
     left: 0;
     width: 100%;
 }
-ul.sm-dox {
+.sm-dox {
     background-color: #dde;
     background-image: none;
     box-shadow: 0px 1px 2px #458;
+}
+.sm-dox a, .sm-dox a:focus, .sm-dox a:active, .sm-dox a:hover, .sm-dox a.highlighted {
+    background-image: none;
+    border-right: 0.5px solid #78A;
+    border-bottom: 0.5px solid #78A;
+    margin-bottom: -1px;
+    /* box-shadow: 0px 1px 2px #458; */
+}
+.sm-dox>li:first-child>a, .sm-dox>li:first-child>:not(ul) a {
+    border-radius: 0;
+}
+.sm-dox a:hover {
+    color: #283a5d;
+    text-shadow: 0 3px 6px white;
+}
+li#searchBoxPos2 {
+    margin-left: 1em;
 }
 div.navpath > ul {
     background-color: #dde;
@@ -151,6 +165,9 @@ div.navpath > ul {
     margin-bottom: -3px;
     z-index: 101;
     position: relative;
+}
+#main-nav ul {
+    padding-left: 0;
 }
 .directory td {
     vertical-align: text-bottom;
@@ -190,9 +207,6 @@ span.mlabel {
 .memdoc {
     border-radius: 0 0 0.4em 0.4em;
 }
-#MSearchResultsWindow {
-    margin-top: 8px;
-}
 code {
     background-color: #f4f4ff;
     border-radius: 6px;
@@ -209,7 +223,7 @@ div#powerTip {
 /* --------------------- */
 
 /* Portrait and Landscape */
-@media only screen and (max-width: 900px) /* and (orientation : portrait) */ {
+@media only screen and (max-width: 768px) /* and (orientation : portrait) */ {
     div#top {
         position: relative;
     }
@@ -227,31 +241,26 @@ div#powerTip {
       padding: 0.6em;
       margin-bottom: 0;
     }
-    #MSearchResultsWindow {
-        display: none;
-        position: initial;
-        left: 0; 
-        top: 0;
-        bottom: 0;
-        border: 1px solid #ddd;
-        z-index: 9999;
-    }
-    .sm-dox a, .sm-dox a:focus, .sm-dox a:hover, .sm-dox a:active {
-        line-height: 2.4;
-    }
     .sm-dox a:hover {
-        background-image: url(tab_a.png);
+        /* background-image: url(tab_a.png); */
         background-repeat: repeat-x;
         color: white;
         text-shadow: initial;
+    }
+    .sm-dox>li:first-child>a, .sm-dox>li:first-child>:not(ul) a {
+        border-top: 0.5px solid #78A;
     }
     .sm-dox li>a span.sub-arrow:before {
         display: block;
         content: '+';
     }
-    .sm-dox li {
-        border-bottom: 1px solid #ccd;
+    .sm-dox a, .sm-dox a:focus, .sm-dox a:active, .sm-dox a:hover,
+    .sm-dox a.highlighted {
+        border-right: none;
     }
+    /* .sm-dox li {
+        border-bottom: 1px solid #ccd;
+    } */
 
     /*
     address.footer {
@@ -309,7 +318,31 @@ div#powerTip {
 
 /* ---- Start search box ---- */
 
+iframe#MSearchResults {
+    height: auto;
+    width: 100%;
+    max-width: 25em;
+    margin-left: auto;
+    margin-right: 0;
+    display: block;
+    resize: vertical;
+}
 #MSearchResultsWindow {
+    position: relative;
+    border: none;
+    z-index: 10000;
+    width: 100% !important;
+    top: 0 !important; 
+    left: 0 !important; 
+    box-shadow: inset #778 1px 0px 4px 0px;
+}
+.SRResult {
+    margin-left: auto;
+    margin-right: 0;
+    max-width: 25em;
+}
+
+/* #MSearchResultsWindow {
     border: 1px solid #96A7C8;
     background-color: #F9FAFC;
     border-radius: 0 0 4px 4px;
@@ -318,11 +351,11 @@ div#powerTip {
     box-shadow: 1px 1px 2px 0px #777;
 }
 
-@media only screen and (max-width: 767px) /* and (orientation : portrait) */ {
+@media only screen and (max-width: 767px) {
     #MSearchResultsWindow {
         border-radius: 0;
         margin-top: 0;
     }
-}
+} */
 
 /* ---- End search box ---- */
