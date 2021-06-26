@@ -38,6 +38,19 @@ bool sysExMessageCallback(SysExMessage se) {
                 // return false.
 }
 
+bool sysCommonMessageCallback(SysCommonMessage sc) {
+  Serial << F("System Common message: ") << hex << sc.getMessageType();
+  if (sc.getNumberOfDataBytes() >= 1)
+    Serial << sc.getData1();
+  if (sc.getNumberOfDataBytes() >= 2)
+    Serial << sc.getData2();
+  Serial << dec << F(" on cable ") << sc.cable.getOneBased() << endl;
+  return false; // Return true to indicate that handling is done,
+                // and Control_Surface shouldn't handle it anymore.
+                // If you want Control_Surface to handle it as well,
+                // return false.
+}
+
 bool realTimeMessageCallback(RealTimeMessage rt) {
   Serial << F("Real-Time: ") << hex << rt.message << dec << F(" on cable ")
          << rt.cable.getOneBased() << endl;
@@ -54,6 +67,7 @@ void setup() {
   Control_Surface.begin();
   Control_Surface.setMIDIInputCallbacks(channelMessageCallback,   //
                                         sysExMessageCallback,     //
+                                        sysCommonMessageCallback, //
                                         realTimeMessageCallback); //
 }
 

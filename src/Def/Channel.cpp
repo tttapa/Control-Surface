@@ -1,3 +1,10 @@
-#ifdef TEST_COMPILE_ALL_HEADERS_SEPARATELY
 #include "Channel.hpp"
-#endif
+#include <AH/PrintStream/PrintStream.hpp>
+
+BEGIN_CS_NAMESPACE
+
+Print &operator<<(Print &os, Channel c) {
+    return os << F("Channel ") << c.getOneBased();
+}
+
+END_CS_NAMESPACE

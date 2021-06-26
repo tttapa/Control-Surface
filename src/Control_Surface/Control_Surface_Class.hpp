@@ -37,7 +37,7 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     /// Copying is not allowed
     Control_Surface_ &operator=(Control_Surface_ const &) = delete;
 
-    /// Return the static Control_Surface_ instance (Control_Surface_ is a 
+    /// Return the static Control_Surface_ instance (Control_Surface_ is a
     /// singleton.)
     static Control_Surface_ &getInstance();
 
@@ -74,17 +74,19 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     /// Low-level function for sending a MIDI channel voice message.
     void sendChannelMessageImpl(ChannelMessage);
     /// Low-level function for sending a MIDI system common message.
-    void sendSysCommonImpl(SysCommonMessage) { /* TODO */ }
+    void sendSysCommonImpl(SysCommonMessage);
     /// Low-level function for sending a system exclusive MIDI message.
     void sendSysExImpl(SysExMessage);
     /// Low-level function for sending a MIDI real-time message.
     void sendRealTimeImpl(RealTimeMessage);
     /// Low-level function for sending any buffered outgoing MIDI messages.
+    /// @todo Implement this in MIDI_Pipe
     void sendNowImpl() { /* TODO */ }
 
   private:
     void sinkMIDIfromPipe(ChannelMessage msg) override;
     void sinkMIDIfromPipe(SysExMessage msg) override;
+    void sinkMIDIfromPipe(SysCommonMessage msg) override;
     void sinkMIDIfromPipe(RealTimeMessage msg) override;
 
   private:
@@ -105,6 +107,10 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     /// done in the user-provided callback, false if `Control_Surface`
     /// should handle the message.
     using SysExMessageCallback = bool (*)(SysExMessage);
+    /// Callback function type for System Common messages. Return true if
+    /// handling is done in the user-provided callback, false if
+    /// `Control_Surface` should handle the message.
+    using SysCommonMessageCallback = bool (*)(SysCommonMessage);
     /// Callback function type for Real-Time messages. Return true if handling
     /// is done in the user-provided callback, false if `Control_Surface`
     /// should handle the message.
@@ -114,9 +120,11 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     void
     setMIDIInputCallbacks(ChannelMessageCallback channelMessageCallback,
                           SysExMessageCallback sysExMessageCallback,
+                          SysCommonMessageCallback sysCommonMessageCallback,
                           RealTimeMessageCallback realTimeMessageCallback) {
         this->channelMessageCallback = channelMessageCallback;
         this->sysExMessageCallback = sysExMessageCallback;
+        this->sysCommonMessageCallback = sysCommonMessageCallback;
         this->realTimeMessageCallback = realTimeMessageCallback;
     }
 
@@ -125,6 +133,7 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
   private:
     ChannelMessageCallback channelMessageCallback = nullptr;
     SysExMessageCallback sysExMessageCallback = nullptr;
+    SysCommonMessageCallback sysCommonMessageCallback = nullptr;
     RealTimeMessageCallback realTimeMessageCallback = nullptr;
     MIDI_Pipe inpipe, outpipe;
 };

@@ -169,6 +169,10 @@ void BluetoothMIDI_Interface::sendSysExImpl(SysExMessage msg) {
     cv.notify_one();
 }
 
+void BluetoothMIDI_Interface::sendSysCommonImpl(SysCommonMessage) {
+    // TODO
+}
+
 // -------------------------------------------------------------------------- //
 
 void BluetoothMIDI_Interface::parse(const uint8_t *const data,

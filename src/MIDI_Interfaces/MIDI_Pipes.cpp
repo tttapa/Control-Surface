@@ -141,6 +141,12 @@ void MIDI_Source::sourceMIDItoPipe(SysExMessage msg) {
         sinkPipe->acceptMIDIfromSource(msg);
     }
 }
+void MIDI_Source::sourceMIDItoPipe(SysCommonMessage msg) {
+    if (sinkPipe != nullptr) {
+        handleStallers();
+        sinkPipe->acceptMIDIfromSource(msg);
+    }
+}
 void MIDI_Source::sourceMIDItoPipe(RealTimeMessage msg) {
     if (sinkPipe != nullptr) {
         // Always send write to pipe, don't check if it's stalled or not

@@ -11,18 +11,21 @@ using ::testing::StrictMock;
 struct MockMIDI_Sink : TrueMIDI_Sink {
     MOCK_METHOD(void, sinkMIDIfromPipe, (ChannelMessage), (override));
     MOCK_METHOD(void, sinkMIDIfromPipe, (SysExMessage), (override));
+    MOCK_METHOD(void, sinkMIDIfromPipe, (SysCommonMessage), (override));
     MOCK_METHOD(void, sinkMIDIfromPipe, (RealTimeMessage), (override));
 };
 
 struct MockMIDI_SinkSource : TrueMIDI_SinkSource {
     MOCK_METHOD(void, sinkMIDIfromPipe, (ChannelMessage), (override));
     MOCK_METHOD(void, sinkMIDIfromPipe, (SysExMessage), (override));
+    MOCK_METHOD(void, sinkMIDIfromPipe, (SysCommonMessage), (override));
     MOCK_METHOD(void, sinkMIDIfromPipe, (RealTimeMessage), (override));
 };
 
 struct DummyMIDI_Sink : TrueMIDI_Sink {
     void sinkMIDIfromPipe(ChannelMessage) override {}
     void sinkMIDIfromPipe(SysExMessage) override {}
+    void sinkMIDIfromPipe(SysCommonMessage) override {}
     void sinkMIDIfromPipe(RealTimeMessage) override {}
 };
 

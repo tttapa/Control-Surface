@@ -39,6 +39,15 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
         this->sysex.cable = CABLE_1;
     }
 
+    /// Get the latest system common message from the given MIDI interface.
+    template <class MidiInterface>
+    void updateSysCommonMessage(const MidiInterface &interface) {
+        this->midimsg.header = interface.getType();
+        this->midimsg.data1 = interface.getData1();
+        this->midimsg.data2 = interface.getData2();
+        this->midimsg.cable = CABLE_1;
+    }
+
     /// Get the latest real-time message from the given MIDI interface.
     template <class MidiInterface>
     void updateRealTimeMessage(const MidiInterface &interface) {
@@ -86,15 +95,18 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
         if (!midi.read()) // Update the MIDI input and check if there's
             return MIDIReadEvent::NO_MESSAGE; // a new message available
         auto type = midi.getType();
-        if (midi.isChannelMessage(type)) { // Channel
+        if (type <= uint8_t(MIDIMessageType::PITCH_BEND)) { // Channel
             parser.updateChannelMessage(midi);
             return MIDIReadEvent::CHANNEL_MESSAGE;
-        }
-        if (type == uint8_t(MIDIMessageType::SYSEX_START)) { // SysEx
+        } else if (type == uint8_t(MIDIMessageType::SYSEX_START)) { // SysEx
             parser.updateSysExMessage(midi);
             return MIDIReadEvent::SYSEX_MESSAGE;
-        }
-        if (type >= uint8_t(MIDIMessageType::TIMING_CLOCK)) { // Real-Time
+        } else if (type <= uint8_t(MIDIMessageType::TUNE_REQUEST)) { // SysComm
+            parser.updateSysCommonMessage(midi);
+            return MIDIReadEvent::SYSCOMMON_MESSAGE;
+        } else if (type == uint8_t(MIDIMessageType::SYSEX_END)) { // SysEx
+            // ignore
+        } else { // Real-Time
             parser.updateRealTimeMessage(midi);
             return MIDIReadEvent::REALTIME_MESSAGE;
         }
@@ -108,6 +120,10 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
     /// Return the received real-time message.
     RealTimeMessage getRealTimeMessage() const {
         return parser.getRealTimeMessage();
+    }
+    /// Return the received system common message.
+    SysCommonMessage getSysCommonMessage() const {
+        return parser.getSysCommonMessage();
     }
     /// Return the received system exclusive message.
     SysExMessage getSysExMessage() const { return parser.getSysExMessage(); }
@@ -135,6 +151,9 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
             case MIDIReadEvent::REALTIME_MESSAGE:
                 onRealTimeMessage(getRealTimeMessage());
                 break;
+            case MIDIReadEvent::SYSCOMMON_MESSAGE:
+                onSysCommonMessage(getSysCommonMessage());
+                break;
             default: break;
         }
     }
@@ -146,7 +165,8 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
                   msg.getChannel().getOneBased());
         // channel is zero-based in Control Surface, one-based in MIDI 47 Fx
     }
-    void sendSysCommonImpl(SysCommonMessage) override { /* TODO */ }
+    void sendSysCommonImpl(SysCommonMessage) override { /* TODO */
+    }
     void sendSysExImpl(SysExMessage msg) {
         midi.sendSysEx(msg.length, msg.data, true);
         // true indicates that the array contains the SysEx start and stop bytes
@@ -154,7 +174,8 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
     void sendRealTimeImpl(RealTimeMessage msg) override {
         midi.sendRealTime(static_cast<MIDI_NAMESPACE::MidiType>(msg.message));
     }
-    void sendNowImpl() override { /* TODO */ }
+    void sendNowImpl() override { /* TODO */
+    }
 
   private:
     void handleStall() override {

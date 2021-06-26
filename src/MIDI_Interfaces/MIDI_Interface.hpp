@@ -81,6 +81,8 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     void sinkMIDIfromPipe(ChannelMessage msg) override { send(msg); }
     /// Accept an incoming MIDI System Exclusive message from the source pipe.
     void sinkMIDIfromPipe(SysExMessage msg) override { send(msg); }
+    /// Accept an incoming MIDI System Common message from the source pipe.
+    void sinkMIDIfromPipe(SysCommonMessage msg) override { send(msg); }
     /// Accept an incoming MIDI Real-Time message from the source pipe.
     void sinkMIDIfromPipe(RealTimeMessage msg) override { send(msg); }
 
@@ -89,6 +91,9 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     void onChannelMessage(ChannelMessage message);
     /// Call the SysEx message callback and send the message to the sink pipe.
     void onSysExMessage(SysExMessage message);
+    /// Call the System Common message callback and send the message to the sink
+    /// pipe.
+    void onSysCommonMessage(SysCommonMessage message);
     /// Call the real-time message callback and send the message to the sink
     /// pipe.
     void onRealTimeMessage(RealTimeMessage message);
@@ -100,8 +105,9 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     /// Dispatch the given type of MIDI message from the given interface.
     template <class MIDIInterface_t>
     static void dispatchIncoming(MIDIInterface_t *iface, MIDIReadEvent event);
-    /// Un-stall the given MIDI interface. Assumes the interface has been 
-    /// stalled because of a chunked SysEx messages. Waits 
+    /// Un-stall the given MIDI interface. Assumes the interface has been
+    /// stalled because of a chunked SysEx messages. Waits untill that message 
+    /// is finished.
     template <class MIDIInterface_t>
     static void handleStall(MIDIInterface_t *iface);
 
@@ -144,12 +150,14 @@ void MIDI_Interface::dispatchIncoming(MIDIInterface_t *iface,
         case MIDIReadEvent::SYSEX_MESSAGE:
             iface->onSysExMessage(iface->getSysExMessage());
             break;
+        case MIDIReadEvent::SYSCOMMON_MESSAGE:
+            iface->onSysCommonMessage(iface->getSysCommonMessage());
+            break;
         case MIDIReadEvent::REALTIME_MESSAGE:
             iface->onRealTimeMessage(iface->getRealTimeMessage());
             break;
-        case MIDIReadEvent::SYSCOMMON_MESSAGE: break; // TODO
-        case MIDIReadEvent::NO_MESSAGE: break;        // LCOV_EXCL_LINE
-        default: break;                               // LCOV_EXCL_LINE
+        case MIDIReadEvent::NO_MESSAGE: break; // LCOV_EXCL_LINE
+        default: break;                        // LCOV_EXCL_LINE
     }
 }
 

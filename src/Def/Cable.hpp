@@ -2,8 +2,8 @@
 
 #pragma once
 
+#include <AH/Arduino-Wrapper.h> // Print
 #include <Settings/NamespaceSettings.hpp>
-#include <stdint.h> // uint8_t
 
 BEGIN_CS_NAMESPACE
 
@@ -131,5 +131,7 @@ constexpr Cable CABLE_13 = Cable::createCable(13);
 constexpr Cable CABLE_14 = Cable::createCable(14);
 constexpr Cable CABLE_15 = Cable::createCable(15);
 constexpr Cable CABLE_16 = Cable::createCable(16);
+
+Print &operator<<(Print &, Cable);
 
 END_CS_NAMESPACE

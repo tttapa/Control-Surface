@@ -85,6 +85,9 @@ void Control_Surface_::sendChannelMessageImpl(ChannelMessage msg) {
 void Control_Surface_::sendSysExImpl(SysExMessage msg) {
     this->sourceMIDItoPipe(msg);
 }
+void Control_Surface_::sendSysCommonImpl(SysCommonMessage msg) {
+    this->sourceMIDItoPipe(msg);
+}
 void Control_Surface_::sendRealTimeImpl(RealTimeMessage msg) {
     this->sourceMIDItoPipe(msg);
 }
@@ -189,6 +192,18 @@ void Control_Surface_::sinkMIDIfromPipe(SysExMessage msg) {
     if (sysExMessageCallback && sysExMessageCallback(msg))
         return;
     MIDIInputElementSysEx::updateAllWith(msg);
+}
+
+void Control_Surface_::sinkMIDIfromPipe(SysCommonMessage msg) {
+#ifdef DEBUG_MIDI_PACKETS
+    DEBUG_OUT << ">>> " << hex << msg.getMessageType() << ' ' << msg.getData1()
+              << ' ' << msg.getData2() << " (" << msg.cable << ')' << dec
+              << endl;
+#endif
+    // If the SysEx Message callback exists, call it to see if we have to
+    // continue handling it.
+    if (sysCommonMessageCallback && sysCommonMessageCallback(msg))
+        return;
 }
 
 void Control_Surface_::sinkMIDIfromPipe(RealTimeMessage rtMessage) {

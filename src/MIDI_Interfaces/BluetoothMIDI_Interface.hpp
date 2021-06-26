@@ -79,8 +79,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface {
   protected:
     // MIDI send implementations
     void sendChannelMessageImpl(ChannelMessage) override;
-    void sendSysCommonImpl(SysCommonMessage) override { /* TODO */
-    }
+    void sendSysCommonImpl(SysCommonMessage) override;
     void sendSysExImpl(SysExMessage) override;
     void sendRealTimeImpl(RealTimeMessage) override;
     void sendNowImpl() override { flush(); }

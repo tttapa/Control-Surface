@@ -44,6 +44,12 @@ void MIDI_Interface::onSysExMessage(SysExMessage message) {
         callbacks->onSysExMessage(*this, message);
 }
 
+void MIDI_Interface::onSysCommonMessage(SysCommonMessage message) {
+    sourceMIDItoPipe(message);
+    if (callbacks)
+        callbacks->onSysCommonMessage(*this, message);
+}
+
 void MIDI_Interface::onRealTimeMessage(RealTimeMessage message) {
     sourceMIDItoPipe(message);
     if (callbacks)

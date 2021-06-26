@@ -2,8 +2,8 @@
 
 #pragma once
 
+#include <AH/Arduino-Wrapper.h> // Print
 #include <Settings/NamespaceSettings.hpp>
-#include <stdint.h> // uint8_t
 
 BEGIN_CS_NAMESPACE
 
@@ -131,5 +131,7 @@ constexpr Channel CHANNEL_13 = Channel::createChannel(13);
 constexpr Channel CHANNEL_14 = Channel::createChannel(14);
 constexpr Channel CHANNEL_15 = Channel::createChannel(15);
 constexpr Channel CHANNEL_16 = Channel::createChannel(16);
+
+Print &operator<<(Print &, Channel);
 
 END_CS_NAMESPACE

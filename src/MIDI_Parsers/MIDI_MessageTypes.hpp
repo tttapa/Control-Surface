@@ -1,7 +1,7 @@
 #pragma once
 
+#include <AH/Arduino-Wrapper.h> // Print
 #include <AH/STL/cstddef> // size_t
-#include <AH/STL/cstdint> // uint8_t
 #include <AH/STL/vector>
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
@@ -152,7 +152,7 @@ struct MIDIMessage {
 
     /// If Data 1 and Data 2 represent a single 14-bit number, you can use this
     /// method to retrieve that number.
-    uint16_t getValue14bit() const {
+    uint16_t getData14bit() const {
         return data1 | (uint16_t(data2) << uint16_t(7));
     }
 
@@ -213,6 +213,15 @@ struct ChannelMessage : MIDIMessage {
         return type <= MIDIMessageType::CONTROL_CHANGE ||
                type == MIDIMessageType::PITCH_BEND;
     }
+
+    constexpr static auto NOTE_OFF = MIDIMessageType::NOTE_OFF;
+    constexpr static auto NOTE_ON = MIDIMessageType::NOTE_ON;
+    constexpr static auto KEY_PRESSURE = MIDIMessageType::KEY_PRESSURE;
+    constexpr static auto CC = MIDIMessageType::CC;
+    constexpr static auto CONTROL_CHANGE = MIDIMessageType::CONTROL_CHANGE;
+    constexpr static auto PROGRAM_CHANGE = MIDIMessageType::PROGRAM_CHANGE;
+    constexpr static auto CHANNEL_PRESSURE = MIDIMessageType::CHANNEL_PRESSURE;
+    constexpr static auto PITCH_BEND = MIDIMessageType::PITCH_BEND;
 };
 
 struct SysCommonMessage : MIDIMessage {
@@ -239,6 +248,13 @@ struct SysCommonMessage : MIDIMessage {
         else
             return 0;
     }
+
+    constexpr static auto MTC_QUARTER_FRAME = MIDIMessageType::MTC_QUARTER_FRAME;
+    constexpr static auto SONG_POSITION_POINTER = MIDIMessageType::SONG_POSITION_POINTER;
+    constexpr static auto SONG_SELECT = MIDIMessageType::SONG_SELECT;
+    constexpr static auto UNDEFINED_SYSCOMMON_1 = MIDIMessageType::UNDEFINED_SYSCOMMON_1;
+    constexpr static auto UNDEFINED_SYSCOMMON_2 = MIDIMessageType::UNDEFINED_SYSCOMMON_2;
+    constexpr static auto TUNE_REQUEST = MIDIMessageType::TUNE_REQUEST;
 };
 
 struct SysExMessage {
@@ -285,6 +301,9 @@ struct SysExMessage {
     }
 
     bool isCompleteMessage() const { return isFirstChunk() && isLastChunk(); }
+
+    constexpr static auto SYSEX_START = MIDIMessageType::SYSEX_START;
+    constexpr static auto SYSEX_END = MIDIMessageType::SYSEX_END;
 };
 
 struct RealTimeMessage {
@@ -320,6 +339,15 @@ struct RealTimeMessage {
 
     /// Check whether the header is a valid header for a Real-Time message.
     bool isValid() const { return message >= 0xF8; }
+
+    constexpr static auto TIMING_CLOCK = MIDIMessageType::TIMING_CLOCK;
+    constexpr static auto UNDEFINED_REALTIME_1 = MIDIMessageType::UNDEFINED_REALTIME_1;
+    constexpr static auto START = MIDIMessageType::START;
+    constexpr static auto CONTINUE = MIDIMessageType::CONTINUE;
+    constexpr static auto STOP = MIDIMessageType::STOP;
+    constexpr static auto UNDEFINED_REALTIME_2 = MIDIMessageType::UNDEFINED_REALTIME_2;
+    constexpr static auto ACTIVE_SENSING = MIDIMessageType::ACTIVE_SENSING;
+    constexpr static auto RESET = MIDIMessageType::RESET;
 };
 
 #ifndef ARDUINO
@@ -334,6 +362,11 @@ inline Print &operator<<(Print &os, SysExMessage m) {
     os << "SysExMessage [" << m.length << "] " << AH::HexDump(m.data, m.length)
        << " (cable " << m.cable.getOneBased() << ")";
     return os;
+}
+
+FlashString_t enum_to_string(MIDIMessageType);
+inline Print &operator<<(Print &os, MIDIMessageType m) {
+    return os << enum_to_string(m);
 }
 
 END_CS_NAMESPACE

@@ -92,6 +92,8 @@ class MIDI_Sink {
     virtual void sinkMIDIfromPipe(ChannelMessage) = 0;
     /// Accept an incoming MIDI System Exclusive message.
     virtual void sinkMIDIfromPipe(SysExMessage) = 0;
+    /// Accept an incoming MIDI System Common message.
+    virtual void sinkMIDIfromPipe(SysCommonMessage) = 0;
     /// Accept an incoming MIDI Real-Time message.
     virtual void sinkMIDIfromPipe(RealTimeMessage) = 0;
 
@@ -173,6 +175,8 @@ class MIDI_Source {
     void sourceMIDItoPipe(ChannelMessage);
     /// Send a MIDI System Exclusive message down the pipe.
     void sourceMIDItoPipe(SysExMessage);
+    /// Send a MIDI System Common message down the pipe.
+    void sourceMIDItoPipe(SysCommonMessage);
     /// Send a MIDI Real-Time message down the pipe.
     void sourceMIDItoPipe(RealTimeMessage);
 
@@ -351,6 +355,8 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     /// @copydoc    mapForwardMIDI
     virtual void mapForwardMIDI(SysExMessage msg) { sourceMIDItoSink(msg); }
     /// @copydoc    mapForwardMIDI
+    virtual void mapForwardMIDI(SysCommonMessage msg) { sourceMIDItoSink(msg); }
+    /// @copydoc    mapForwardMIDI
     virtual void mapForwardMIDI(RealTimeMessage msg) { sourceMIDItoSink(msg); }
 
     /// @}
@@ -527,6 +533,10 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     }
     /// @copydoc sinkMIDIfromPipe
     void sinkMIDIfromPipe(SysExMessage msg) override {
+        sourceMIDItoSink(msg);
+    }
+    /// @copydoc sinkMIDIfromPipe
+    void sinkMIDIfromPipe(SysCommonMessage msg) override {
         sourceMIDItoSink(msg);
     }
     /// @copydoc sinkMIDIfromPipe

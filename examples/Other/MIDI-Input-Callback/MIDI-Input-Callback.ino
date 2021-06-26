@@ -48,6 +48,16 @@ bool sysExMessageCallback(SysExMessage se) {
                // return false.
 }
 
+bool sysCommonMessageCallback(SysCommonMessage sc) {
+  Serial << F("System Common message: ") << hex                   //
+         << sc.header << ' ' << sc.data1 << ' ' << sc.data2 //
+         << dec << F(" on cable ") << sc.cable.getOneBased() << endl;
+  return true; // Return true to indicate that handling is done,
+               // and Control_Surface shouldn't handle it anymore.
+               // If you want Control_Surface to handle it as well,
+               // return false.
+}
+
 bool realTimeMessageCallback(RealTimeMessage rt) {
   Serial << F("Real-time message: ") //
          << hex << rt.message << dec //
@@ -63,8 +73,9 @@ void setup() {
   Control_Surface.begin();
   Control_Surface.setMIDIInputCallbacks(channelMessageCallback,   //
                                         sysExMessageCallback,     //
+                                        sysCommonMessageCallback, //
                                         realTimeMessageCallback); //
-  // If you don't need all three callbacks, you can pass `nullptr` instead of a
+  // If you don't need all four callbacks, you can pass `nullptr` instead of a
   // function pointer
 }
 
