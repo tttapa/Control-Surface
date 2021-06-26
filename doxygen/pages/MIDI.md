@@ -284,6 +284,12 @@ all General MIDI program numbers in the @ref MIDI_PC namespace:
 MIDIAddress myAddress = {MIDI_PC::Harpsichord, CHANNEL_9};
 ~~~
 
+### More examples {#midi_md-sending-more-examples}
+
+- @ref MIDI-Output.ino
+- @ref Send-MIDI-Notes.ino
+- @ref SysEx-Send-Receive.ino
+
 ## Receiving MIDI messages {#midi_md-receiving}
 
 MIDI input is usually handled using callback functions. First, an example:
@@ -497,10 +503,25 @@ struct MyMIDI_Callbacks : FineGrainedMIDI_Callbacks<MyMIDI_Callbacks> {
             << velocity << ", " << cable << endl;
     }
 
-} callback;
+} callback; // Instantiate a callback
 ```
 This approach is used in the @ref MIDI-Input-Fine-Grained.ino example. You can
 find the full list of available callbacks and their arguments in the 
 documentation for @ref FineGrainedMIDI_Callbacks, under 
 @ref FineGrainedMIDI_Callbacks_MIDI_Callback_Functions "MIDI Callback Functions",
 and in the @ref MIDI-Input-Fine-Grained-All-Callbacks.ino example.
+
+### More examples {#midi_md-receiving-more-examples}
+
+- @ref MIDI-Input.ino
+- @ref MIDI-Input-Fine-Grained.ino
+- @ref MIDI-Input-Fine-Grained-All-Callbacks.ino
+- @ref SysEx-Send-Receive.ino
+
+## Routing MIDI messages {#midi_md-routing}
+
+==TODO==
+
+### More examples {#midi_md-routing-more-examples}
+
+- @ref MIDI_Pipes-Routing.ino
