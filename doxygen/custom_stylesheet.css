@@ -32,12 +32,21 @@ body {
     background-color: #DDD;
     width: 100%;
     font-family: 'Roboto', 'sans-serif';
-    font-weight: 400;
+    font-weight: 300;
+}
+body, table, div, p, dl {
+    font-weight: 300;
 }
 h1, h2, h3, h4, h5,
 h2.groupheader, .title, #projectname {
     font-family: 'Roboto', 'sans-serif';
     font-weight: 300;
+}
+h2, h2.groupheader, .title, #projectname {
+    font-weight: 400;
+}
+h3, h4, h5 {
+    font-weight: 400;
 }
 div.contents > div.textblock > h1 {
     border-bottom: 1px solid #c8d0e2;
@@ -75,6 +84,10 @@ a.el {
 .memtitle:hover span.permalink {
     opacity: 1;
 } */
+.compoundTemplParams {
+    color: inherit;
+    font-size: inherit;
+}
 iframe {
     max-width: initial;
 }
