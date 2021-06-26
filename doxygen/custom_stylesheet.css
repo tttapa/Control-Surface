@@ -216,6 +216,9 @@ div.fragment {
     padding: 0.6em;
     border-radius: 0.6em;
 }
+div.line {
+    line-height: 1.25;
+}
 div#powerTip {
     margin-top: 0.5em;
 }
