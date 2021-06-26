@@ -1,4 +1,4 @@
-# Frequently Asked Questions
+# Frequently Asked Questions {#FAQ}
 
 [TOC]
 
@@ -239,7 +239,7 @@ still want to save some memory, you can try decreasing the
 If you have many buttons, it might be useful to turn off the 
 @ref AH_INDIVIDUAL_BUTTON_INVERT setting in @ref src/AH/Settings/Settings.hpp.
 
-## Why do I get a compiler error when using the note F?
+## Why do I get a compiler error when using the note F? {#faq-midi-note-f}
 
 The Arduino core defines a global preprocessor macro `F(...)` which places
 string literals in flash memory. Unfortunately, macros do not follow the C++ 
