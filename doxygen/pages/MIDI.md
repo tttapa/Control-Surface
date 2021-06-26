@@ -292,9 +292,88 @@ MIDIAddress myAddress = {MIDI_PC::Harpsichord, CHANNEL_9};
 
 ## Receiving MIDI messages {#midi_md-receiving}
 
-MIDI input is usually handled using callback functions. First, an example:
+MIDI input is usually handled using callback functions. Whenever the MIDI 
+interface receives a MIDI message, it calls the respective callback function
+that was specified by the user.
+
+You can either use a callback for each specific message type (Note On, Note Off,
+Control Change ...), or a callback for each category of messages (%Channel
+messages, System Exclusive message, System Common messages, Real-Time messages).
+
+A third way is to poll the MIDI input manually, but this is not covered in this 
+guide.
 
 ### Simple example {#midi_md-receiving-simple-example}
+
+The @ref FineGrainedMIDI_Callbacks class allows you to associate a callback
+function with each specific MIDI message type. The contents of the MIDI message
+(such as the channel, note number, velocity, etc.) are passed to the callback
+as arguments.
+For example:
+```cpp
+#include <Control_Surface.h>
+ 
+// Instantiate a MIDI over USB interface
+USBMIDI_Interface midi;
+
+// Custom MIDI callback that prints incoming MIDI note messages.
+struct MyMIDI_Callbacks : FineGrainedMIDI_Callbacks<MyMIDI_Callbacks> {
+
+    // Function that is called whenever a MIDI Note Off message is received.
+    void onNoteOff(Channel channel, uint8_t note, uint8_t velocity, Cable cable) {
+        Serial << "Note Off: " << channel << ", note " << note << ", velocity "
+               << velocity << ", " << cable << endl;
+    }
+
+    // Function that is called whenever a MIDI Note On message is received.
+    void onNoteOn(Channel channel, uint8_t note, uint8_t velocity, Cable cable) {
+        Serial << "Note On: " << channel << ", note " << note << ", velocity "
+               << velocity << ", " << cable << endl;
+    }
+
+} callback; // Instantiate a callback
+ 
+void setup() {
+    Serial.begin(115200);        // For printing the messages
+    midi.begin();                // Initialize the MIDI interface
+    midi.setCallbacks(callback); // Attach the custom callback
+}
+ 
+void loop() {
+    midi.update(); // Continuously dispatch incoming MIDI input to the callbacks
+}
+```
+
+The instantiation, initialization, and updating of the MIDI interface is the 
+same as before. The first new component is the `MyMIDI_Callbacks` class: this 
+class inherits from the @ref FineGrainedMIDI_Callbacks class that is provided by
+the library, and then implements two of the callback functions, 
+@ref FineGrainedMIDI_Callbacks::onNoteOff() and 
+@ref FineGrainedMIDI_Callbacks::onNoteOn().  
+An instance of the `MyMIDI_Callbacks` class is created, and then this callback 
+is attached to the MIDI interface in the `setup` function using 
+@ref MIDI_Interface::setCallbacks().
+
+After the callback has been attached, every time you call `midi.update()` in the 
+`loop`, the MIDI interface will check if any new messages have arrived, and if
+that's the case, it will call the corresponding callback function. For example,
+whenever a MIDI channel message (such as Note On/Off, Control Change, etc.)
+arrives, the `onChannelMessage()` function of the callback is called.
+
+The example above is similar to the @ref MIDI-Input-Fine-Grained.ino example. 
+You can find the full list of available callbacks and their arguments in the 
+documentation for @ref FineGrainedMIDI_Callbacks, under 
+@ref FineGrainedMIDI_Callbacks_MIDI_Callback_Functions "MIDI Callback Functions",
+and in the @ref MIDI-Input-Fine-Grained-All-Callbacks.ino example.
+
+### Customizable callbacks {#midi_md-receiving-customizable-callbacks}
+
+While the fine-grained callbacks can be useful to easily handle most incoming
+MIDI messages, sometimes you need more flexibility. It's not always desirable
+to have an individual callback for each message type. The @ref MIDI_Callbacks
+class allows you to specify a callback for each category of MIDI messages:
+%Channel messages, System Exclusive messages, 
+System Common messages and Real-Time messages. For example:
 
 ```cpp
 #include <Control_Surface.h>
@@ -319,24 +398,9 @@ void setup() {
 }
  
 void loop() {
-    midi.update(); // Continuously handle MIDI input
+    midi.update(); // Continuously dispatch incoming MIDI input to the callbacks
 }
 ```
-
-The instantiation, initialization, and updating of the MIDI interface is the 
-same as before. The first new component is the `MyMIDI_Callbacks` class: this 
-class inherits from the @ref MIDI_Callbacks class that is provided by the 
-library, and then implements one of the callback functions, 
-@ref MIDI_Callbacks::onChannelMessage().  
-An instance of the `MyMIDI_Callbacks` class is created, and then this callback 
-is attached to the MIDI interface in the `setup` function using 
-@ref MIDI_Interface::setCallbacks().
-
-After the callback is attached, every time you call `midi.update()` in the 
-`loop`, the MIDI interface will check if any new messages have arrived, and if
-that's the case, it will call the corresponding callback function. For example,
-whenever a MIDI channel message (such as Note On/Off, Control Change, etc.)
-arrives, the `onChannelMessage()` function of the callback is called.
 
 The first argument of the callback function is a reference to the MIDI interface
 that received the message (this is not used in this simple example), and the 
@@ -345,8 +409,9 @@ second argument is the message itself.
 ### Accessing the contents of the message {#midi_md-accessing-the-contents-of-the-message}
 
 The previous example simply printed “Channel message received” whenever it 
-received a channel message. In most cases, this is not really that useful, so we
-can improve upon it by inspecting the contents of the messages.
+received a channel message. This is not really that useful, so in this section
+we'll improve upon it by inspecting the contents of the messages and extracting
+the different components such as the channel, note number, velocity, and so on.
 
 Have a look at the documentation for @ref ChannelMessage.
 You'll notice that the message contains four fields: 
@@ -360,7 +425,7 @@ message contains two data bytes (such as Note and Control Change messages) or
 just a single data byte (such as Program Change).
 
 The following callback example simply checks how many bytes the message has, and
-then prints them to the serial port in hexadecimal.
+then prints the contents to the serial port in hexadecimal.
 
 ```cpp
 // Custom MIDI callback that prints incoming MIDI channel messages.
@@ -378,7 +443,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
 } callback; // Instantiate a callback
 ```
 
-If you send a Note On message on MIDI Channel 4 for 
+If you send a Note On message on MIDI %Channel 4 for 
 note number 60 = 0x3C (middle C) with a velocity of 
 127 = 0x7F to the Arduino, you should see the following in the Serial monitor:
 ```text
@@ -477,39 +542,6 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
  
 } callback; // Instantiate a callback
 ```
-
-### Fine-grained callbacks {#midi_md-fine-grained-callbacks}
-
-The callbacks we wrote in the previous section are very flexible and allow you 
-to access all fields of the MIDI message and the MIDI interface. In some cases
-though, that's overkill, and you might want to avoid the boilerplate of having
-to check the message type each time.
-
-In that case, you can use the @ref FineGrainedMIDI_Callbacks class, which allows
-you to write a callback for each specific MIDI message type. For example:
-```cpp
-// Custom MIDI callback that prints incoming MIDI note messages.
-struct MyMIDI_Callbacks : FineGrainedMIDI_Callbacks<MyMIDI_Callbacks> {
-
-    // Function that is called whenever a MIDI Note Off message is received.
-    void onNoteOff(Channel channel, uint8_t note, uint8_t velocity, Cable cable) {
-        Serial << "Note Off: " << channel << ", note " << note << ", velocity "
-            << velocity << ", " << cable << endl;
-    }
-
-    // Function that is called whenever a MIDI Note On message is received.
-    void onNoteOn(Channel channel, uint8_t note, uint8_t velocity, Cable cable) {
-        Serial << "Note On: " << channel << ", note " << note << ", velocity "
-            << velocity << ", " << cable << endl;
-    }
-
-} callback; // Instantiate a callback
-```
-This approach is used in the @ref MIDI-Input-Fine-Grained.ino example. You can
-find the full list of available callbacks and their arguments in the 
-documentation for @ref FineGrainedMIDI_Callbacks, under 
-@ref FineGrainedMIDI_Callbacks_MIDI_Callback_Functions "MIDI Callback Functions",
-and in the @ref MIDI-Input-Fine-Grained-All-Callbacks.ino example.
 
 ### More examples {#midi_md-receiving-more-examples}
 
