@@ -859,6 +859,7 @@ INPUT                  = "../examples/examples.dox" \
                          "pages/Getting-Started.md" \
                          "pages/Installation.md" \
                          "pages/MIDI-over-USB.md" \
+                         "pages/MIDI.md" \
                          "pages/Debug.md" \
                          "pages/xbm.md" \
                          "pages/Basics.md" \

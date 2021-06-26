@@ -20,6 +20,9 @@
  * 
  * None.
  * 
+ * @see @ref MIDI-Input-Fine-Grained.ino
+ * @see @ref MIDI-Input-Fine-Grained-All-Callbacks.ino
+ *
  * Written by PieterP, 2020-06-11  
  * https://github.com/tttapa/Control-Surface
  */
@@ -56,12 +59,12 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
            << F(" on cable ") << rt.cable.getOneBased() << endl;
   }
 
-} callbacks;
+} callback;
 
 void setup() {
-  Serial.begin(115200);         // For printing the messages
-  midi.begin();                 // Initialize the MIDI interface
-  midi.setCallbacks(callbacks); // Attach the custom callback
+  Serial.begin(115200);        // For printing the messages
+  midi.begin();                // Initialize the MIDI interface
+  midi.setCallbacks(callback); // Attach the custom callback
 }
 
 void loop() {
