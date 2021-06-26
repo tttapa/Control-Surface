@@ -11,7 +11,11 @@ BEGIN_AH_NAMESPACE
 
 template <size_t Bits_out, size_t Bits_in, class T_out, class T_in>
 std::enable_if_t<(Bits_out <= 2 * Bits_in), T_out>
-increaseBitDepthImpl(T_in in);
+increaseBitDepthImpl(T_in in) {
+    constexpr size_t leftShift = Bits_out - Bits_in;
+    constexpr size_t rightShift = Bits_in - leftShift;
+    return (T_out(in) << leftShift) | (in >> rightShift);
+}
 
 template <size_t Bits_out, size_t Bits_in, class T_out, class T_in>
 std::enable_if_t<(Bits_out > 2 * Bits_in), T_out>
@@ -19,14 +23,6 @@ increaseBitDepthImpl(T_in in) {
     constexpr size_t leftShift = Bits_out - Bits_in;
     return (T_out(in) << leftShift) |
            increaseBitDepthImpl<leftShift, Bits_in, T_out>(in);
-}
-
-template <size_t Bits_out, size_t Bits_in, class T_out, class T_in>
-std::enable_if_t<(Bits_out <= 2 * Bits_in), T_out>
-increaseBitDepthImpl(T_in in) {
-    constexpr size_t leftShift = Bits_out - Bits_in;
-    constexpr size_t rightShift = Bits_in - leftShift;
-    return (T_out(in) << leftShift) | (in >> rightShift);
 }
 
 /// @addtogroup    AH_Math
