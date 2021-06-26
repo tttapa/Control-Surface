@@ -46,6 +46,14 @@ void StreamMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
         stream.write(msg.data2);
 }
 
+void StreamMIDI_Interface::sendSysCommonImpl(SysCommonMessage msg) {
+    stream.write(msg.header);
+    if (msg.getNumberOfDataBytes() >= 1)
+        stream.write(msg.data1);
+    if (msg.getNumberOfDataBytes() >= 2)
+        stream.write(msg.data2);
+}
+
 void StreamMIDI_Interface::sendSysExImpl(SysExMessage msg) {
     stream.write(msg.data, msg.length);
 }

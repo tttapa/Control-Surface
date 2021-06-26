@@ -7,13 +7,13 @@ namespace DebugMIDIMessageNames {
 
 #ifdef PROGMEM
 
-const static char NoteOff[] PROGMEM = "Note Off        ";
-const static char NoteOn[] PROGMEM = "Note On         ";
-const static char KeyPressure[] PROGMEM = "Key Pressure    ";
-const static char ControlChange[] PROGMEM = "Control Change  ";
-const static char ProgramChange[] PROGMEM = "Program Change  ";
-const static char ChannelPressure[] PROGMEM = "Channel Pressure";
-const static char PitchBend[] PROGMEM = "Pitch Bend      ";
+const static char NoteOff[] PROGMEM = "Note Off         ";
+const static char NoteOn[] PROGMEM = "Note On          ";
+const static char KeyPressure[] PROGMEM = "Key Pressure     ";
+const static char ControlChange[] PROGMEM = "Control Change   ";
+const static char ProgramChange[] PROGMEM = "Program Change   ";
+const static char ChannelPressure[] PROGMEM = "Channel Pressure ";
+const static char PitchBend[] PROGMEM = "Pitch Bend       ";
 
 const static FlashString_t MIDIStatusTypeNames[] = {
     reinterpret_cast<FlashString_t>(NoteOff),
@@ -28,9 +28,9 @@ const static FlashString_t MIDIStatusTypeNames[] = {
 #else
 
 const static char *MIDIStatusTypeNames[] = {
-    "Note Off\t",       "Note On\t\t",      "Key Pressure\t",
-    "Control Change\t", "Program Change\t", "Channel Pressure",
-    "Pitch Bend\t",
+    "Note Off         ", "Note On          ", "Key Pressure     ",
+    "Control Change   ", "Program Change   ", "Channel Pressure ",
+    "Pitch Bend       ",
 };
 
 #endif
@@ -55,30 +55,54 @@ void StreamDebugMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
         return;
 
     DEBUG_LOCK_MUTEX
+    auto &stream = getStream();
+    if (prefix != nullptr)
+        stream << prefix << ' ';
     if (msg.hasTwoDataBytes())
-        getStream() << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
-                    << F("\tChannel: ") << msg.getChannel().getOneBased()
-                    << F("\tData 1: 0x") << hex << msg.getData1()
-                    << F("\tData 2: 0x") << msg.getData2() << dec
-                    << F("\tCable: ") << msg.getCable().getOneBased() << endl;
+        stream << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
+               << F("Channel: ") << msg.getChannel().getOneBased()
+               << F("\tData 1: 0x") << hex << msg.getData1()
+               << F("\tData 2: 0x") << msg.getData2() << dec;
     else
-        getStream() << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
-                    << F("\tChannel: ") << msg.getChannel().getOneBased()
-                    << F("\tData 1: 0x") << hex << msg.getData1() << dec
-                    << F("\tCable: ") << msg.getCable().getOneBased() << endl;
+        stream << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
+               << F("Channel: ") << msg.getChannel().getOneBased()
+               << F("\tData 1: 0x") << hex << msg.getData1() << dec;
+    if (msg.getMessageType() == msg.PITCH_BEND)
+        stream << " (" << msg.getData14bit() << ')';
+    stream << F("\tCable: ") << msg.getCable().getOneBased() << endl;
 }
 
 void StreamDebugMIDI_Interface::sendSysExImpl(SysExMessage msg) {
     DEBUG_LOCK_MUTEX
-    getStream() << F("SysEx           \t[") << msg.length << "] "
-                << AH::HexDump(msg.data, msg.length) << F("\tCable: ")
-                << msg.getCable().getOneBased() << "\r\n";
+    auto &stream = getStream();
+    if (prefix != nullptr)
+        stream << prefix << ' ';
+    stream << F("System Exclusive [") << msg.length << "] "
+           << AH::HexDump(msg.data, msg.length) << F("\tCable: ")
+           << msg.getCable().getOneBased() << "\r\n";
+}
+
+void StreamDebugMIDI_Interface::sendSysCommonImpl(SysCommonMessage msg) {
+    DEBUG_LOCK_MUTEX
+    auto &stream = getStream();
+    if (prefix != nullptr)
+        stream << prefix << ' ';
+    stream << F("System Common    ") << msg.getMessageType() << hex;
+    if (msg.getNumberOfDataBytes() >= 1)
+        stream << F("\tData 1: 0x") << msg.getData1();
+    if (msg.getNumberOfDataBytes() >= 2)
+        stream << F("\tData 2: 0x") << msg.getData2() << dec << " ("
+               << msg.getData14bit() << ')';
+    stream << dec << F("\tCable: ") << msg.getCable().getOneBased() << "\r\n";
 }
 
 void StreamDebugMIDI_Interface::sendRealTimeImpl(RealTimeMessage msg) {
     DEBUG_LOCK_MUTEX
-    getStream() << F("Real-Time: 0x") << hex << uppercase << msg.message << dec
-                << F("\tCable: ") << msg.getCable().getOneBased() << endl;
+    auto &stream = getStream();
+    if (prefix != nullptr)
+        stream << prefix << ' ';
+    stream << F("Real-Time        ") << msg.getMessageType() << F("\tCable: ")
+           << msg.getCable().getOneBased() << endl;
 }
 
 END_CS_NAMESPACE

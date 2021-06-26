@@ -49,10 +49,14 @@ class StreamDebugMIDI_Interface : public MIDI_Interface {
 
     void update() override;
 
+    /// Set the prefix to be printed before each message.
+    void setPrefix(const char *prefix) { this->prefix = prefix; }
+    const char *getPrefix() const { return prefix; } 
+
   protected:
     // MIDI send implementations
     void sendChannelMessageImpl(ChannelMessage) override;
-    void sendSysCommonImpl(SysCommonMessage) override { /* TODO */ }
+    void sendSysCommonImpl(SysCommonMessage) override;
     void sendSysExImpl(SysExMessage) override;
     void sendRealTimeImpl(RealTimeMessage) override;
     void sendNowImpl() override {}
@@ -63,6 +67,7 @@ class StreamDebugMIDI_Interface : public MIDI_Interface {
   private:
     HexPuller<StreamPuller> hexstream;
     SerialMIDI_Parser parser;
+    const char *prefix = nullptr;
 };
 
 /**

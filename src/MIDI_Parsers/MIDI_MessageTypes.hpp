@@ -231,6 +231,12 @@ struct SysCommonMessage : MIDIMessage {
     SysCommonMessage(MIDIMessageType type, uint8_t data1 = 0x00,
                      uint8_t data2 = 0x00, Cable cable = CABLE_1)
         : MIDIMessage(type, data1, data2, cable) {}
+    /// Constructor.
+    SysCommonMessage(MIDIMessageType type, uint8_t data1, Cable cable)
+        : SysCommonMessage(type, data1, 0x00, cable) {}
+    /// Constructor.
+    SysCommonMessage(MIDIMessageType type, Cable cable)
+        : SysCommonMessage(type, 0x00, 0x00, cable) {}
 
     explicit SysCommonMessage(const MIDIMessage &msg) : MIDIMessage(msg) {}
 

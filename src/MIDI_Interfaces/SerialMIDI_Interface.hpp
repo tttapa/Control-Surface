@@ -41,7 +41,7 @@ class StreamMIDI_Interface : public MIDI_Interface {
 
   protected:
     void sendChannelMessageImpl(ChannelMessage) override;
-    void sendSysCommonImpl(SysCommonMessage) override { /* TODO */ }
+    void sendSysCommonImpl(SysCommonMessage) override;
     void sendSysExImpl(SysExMessage) override;
     void sendRealTimeImpl(RealTimeMessage) override;
     void sendNowImpl() override {}

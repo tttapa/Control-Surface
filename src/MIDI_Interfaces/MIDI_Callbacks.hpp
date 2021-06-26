@@ -202,6 +202,7 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
   public:
     FineGrainedMIDI_Callbacks() {
         // clang-format off
+        static_assert(std::is_base_of<FineGrainedMIDI_Callbacks, Derived>::value, "Invalid CRTP");
         static_assert(same_return_type_and_arguments(&Derived::onNoteOff, &FineGrainedMIDI_Callbacks::onNoteOff), "Incorrect signature for onNoteOff");
         static_assert(same_return_type_and_arguments(&Derived::onNoteOn, &FineGrainedMIDI_Callbacks::onNoteOn), "Incorrect signature for onNoteOn");
         static_assert(same_return_type_and_arguments(&Derived::onKeyPressure, &FineGrainedMIDI_Callbacks::onKeyPressure), "Incorrect signature for onKeyPressure");
