@@ -86,6 +86,7 @@
 /** 
  * @defgroup    MIDIInterfaces MIDI Interfaces
  * @brief   All MIDI Interfaces that can send and receive MIDI events.
+ * @see     @ref midi-tutorial
  */
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
