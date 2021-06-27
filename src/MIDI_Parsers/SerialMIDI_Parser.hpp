@@ -6,7 +6,7 @@
 BEGIN_CS_NAMESPACE
 
 /**
- * @brief   Parser for Serial MIDI streams.
+ * @brief   Parser for Serial MIDI streams (and BLE-MIDI).
  * 
  * @ingroup MIDIParsers
  */
@@ -58,8 +58,8 @@ class SerialMIDI_Parser : public MIDI_Parser {
     /// for example. The byte cannot be added to the buffer now, so store it to
     /// add it the next time the parser is updated.
     void storeByte(uint8_t midiByte) { storedByte = midiByte; }
-    /// If a byte was been stored previously. If this is the case, you should
-    /// parse this byte first before reading a new byte.
+    /// Check whether there's a stored byte. If this is the case, this byte 
+    /// should be parsed before reading a new byte.
     bool hasStoredByte() const { return storedByte != 0xFF; }
     /// Get the stored byte. Afterwards, @ref hasStoredByte will return false.
     uint8_t popStoredByte() {
@@ -69,11 +69,12 @@ class SerialMIDI_Parser : public MIDI_Parser {
     }
 
   public:
-    /// Clear the running status header for MIDI Channel messages.
+    /// Clear the running status header for MIDI Channel messages. 
+    /// Internal method.
     void cancelRunningStatus() { runningHeader = 0; }
 
   private:
-    /// Accounts for running status differences between MIDI 1.0 and MIDI BLE.
+    /// Accounts for running status differences between MIDI 1.0 and BLE-MIDI.
     bool sysCommonCancelsRunningStatus;
     /// Flag that remembers that the next data byte will be the third byte of
     /// a message.
