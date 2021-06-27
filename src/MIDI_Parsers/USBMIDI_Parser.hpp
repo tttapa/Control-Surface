@@ -59,8 +59,7 @@ class USBMIDI_Parser : public MIDI_Parser {
   protected:
     MIDIReadEvent handleChannelMessage(MIDIUSBPacket_t packet, Cable cable);
     MIDIReadEvent handleSingleByte(MIDIUSBPacket_t packet, Cable cable);
-    MIDIReadEvent handleSysExStartContinue(MIDIUSBPacket_t packet, Cable cable);
-    MIDIReadEvent handleSysExEnd1B(MIDIUSBPacket_t packet, Cable cable);
+    MIDIReadEvent handleSysExStartCont(MIDIUSBPacket_t packet, Cable cable);
     template <uint8_t NumBytes>
     MIDIReadEvent handleSysExEnd(MIDIUSBPacket_t packet, Cable cable);
     MIDIReadEvent handleSysCommon(MIDIUSBPacket_t packet, Cable cable);
@@ -98,7 +97,7 @@ class USBMIDI_Parser : public MIDI_Parser {
 
   private:
     SysExBuffer sysexbuffers[USB_MIDI_NUMBER_OF_CABLES] = {};
-    MIDIUSBPacket_t storedPacket = {{0x00}};
+    MIDIUSBPacket_t storedPacket = {{ 0x00 }};
 #endif
 };
 

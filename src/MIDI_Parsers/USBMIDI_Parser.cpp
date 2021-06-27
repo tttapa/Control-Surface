@@ -12,8 +12,8 @@ MIDIReadEvent USBMIDI_Parser::handleChannelMessage(MIDIUSBPacket_t packet,
     return MIDIReadEvent::CHANNEL_MESSAGE;
 }
 
-MIDIReadEvent USBMIDI_Parser::handleSysExStartContinue(MIDIUSBPacket_t packet,
-                                                       Cable cable) {
+MIDIReadEvent USBMIDI_Parser::handleSysExStartCont(MIDIUSBPacket_t packet,
+                                                   Cable cable) {
 #if !IGNORE_SYSEX
     // If this is a SysEx start packet
     if (packet[1] == uint8_t(MIDIMessageType::SYSEX_START)) {
@@ -40,44 +40,6 @@ MIDIReadEvent USBMIDI_Parser::handleSysExStartContinue(MIDIUSBPacket_t packet,
     (void)cable;
 #endif
     return MIDIReadEvent::NO_MESSAGE; // SysEx is not finished yet
-}
-
-MIDIReadEvent USBMIDI_Parser::handleSysExEnd1B(MIDIUSBPacket_t packet,
-                                               Cable cable) {
-    // Single-byte System Common Message
-    if (packet[1] != uint8_t(MIDIMessageType::SYSEX_END)) {
-        // System Common (1 byte)
-        midimsg.header = packet[1];
-        midimsg.cable = cable;
-        return MIDIReadEvent::SYSCOMMON_MESSAGE;
-    }
-
-#if !IGNORE_SYSEX
-    // SysEx ends with following single byte
-    else {
-        // If we haven't received a SysExStart
-        if (!receivingSysEx(cable)) {
-            DEBUGREF(F("No SysExStart received"));
-            return MIDIReadEvent::NO_MESSAGE; // ignore the data
-        }
-
-        // Check if the SysEx buffer has enough space to store the end byte
-        if (!hasSysExSpace(cable, 1)) {
-            storePacket(packet);
-            endSysExChunk(cable);
-            return MIDIReadEvent::SYSEX_CHUNK;
-        }
-
-        // Enough space available in buffer, finish the message
-        addSysExByte(cable, packet[1]);
-        endSysEx(cable);
-        return MIDIReadEvent::SYSEX_MESSAGE;
-    }
-#else
-    (void)packet;
-    (void)cable;
-    return MIDIReadEvent::NO_MESSAGE;
-#endif
 }
 
 template <uint8_t NumBytes>
@@ -117,6 +79,45 @@ MIDIReadEvent USBMIDI_Parser::handleSysExEnd(MIDIUSBPacket_t packet,
 #endif
 }
 
+template <>
+MIDIReadEvent USBMIDI_Parser::handleSysExEnd<1>(MIDIUSBPacket_t packet,
+                                                Cable cable) {
+    // Single-byte System Common Message
+    if (packet[1] != uint8_t(MIDIMessageType::SYSEX_END)) {
+        // System Common (1 byte)
+        midimsg.header = packet[1];
+        midimsg.cable = cable;
+        return MIDIReadEvent::SYSCOMMON_MESSAGE;
+    }
+
+#if !IGNORE_SYSEX
+    // SysEx ends with following single byte
+    else {
+        // If we haven't received a SysExStart
+        if (!receivingSysEx(cable)) {
+            DEBUGREF(F("No SysExStart received"));
+            return MIDIReadEvent::NO_MESSAGE; // ignore the data
+        }
+
+        // Check if the SysEx buffer has enough space to store the end byte
+        if (!hasSysExSpace(cable, 1)) {
+            storePacket(packet);
+            endSysExChunk(cable);
+            return MIDIReadEvent::SYSEX_CHUNK;
+        }
+
+        // Enough space available in buffer, finish the message
+        addSysExByte(cable, packet[1]);
+        endSysEx(cable);
+        return MIDIReadEvent::SYSEX_MESSAGE;
+    }
+#else
+    (void)packet;
+    (void)cable;
+    return MIDIReadEvent::NO_MESSAGE;
+#endif
+}
+
 MIDIReadEvent USBMIDI_Parser::handleSysCommon(MIDIUSBPacket_t packet,
                                               Cable cable) {
     midimsg.header = packet[1];
@@ -147,35 +148,29 @@ MIDIReadEvent USBMIDI_Parser::feed(MIDIUSBPacket_t packet) {
     if (cable.getRaw() >= USB_MIDI_NUMBER_OF_CABLES)
         return MIDIReadEvent::NO_MESSAGE; // LCOV_EXCL_LINE
 
+    using M = MIDICodeIndexNumber;
     switch (CIN) {
-        case MIDICodeIndexNumber::MISC_FUNCTION_CODES: break; // LCOV_EXCL_LINE
-        case MIDICodeIndexNumber::CABLE_EVENTS: break;        // LCOV_EXCL_LINE
+        case M::MISC_FUNCTION_CODES: break; // LCOV_EXCL_LINE
+        case M::CABLE_EVENTS: break;        // LCOV_EXCL_LINE
 
-        case MIDICodeIndexNumber::SYSTEM_COMMON_2B: // fallthrough
-        case MIDICodeIndexNumber::SYSTEM_COMMON_3B:
-            return handleSysCommon(packet, cable);
+        case M::SYSTEM_COMMON_2B: // fallthrough
+        case M::SYSTEM_COMMON_3B: return handleSysCommon(packet, cable);
 
-        case MIDICodeIndexNumber::SYSEX_START_CONT:
-            return handleSysExStartContinue(packet, cable);
+        case M::SYSEX_START_CONT: return handleSysExStartCont(packet, cable);
 
-        case MIDICodeIndexNumber::SYSEX_END_1B:
-            return handleSysExEnd1B(packet, cable);
-        case MIDICodeIndexNumber::SYSEX_END_2B:
-            return handleSysExEnd<2>(packet, cable);
-        case MIDICodeIndexNumber::SYSEX_END_3B:
-            return handleSysExEnd<3>(packet, cable);
+        case M::SYSEX_END_1B: return handleSysExEnd<1>(packet, cable);
+        case M::SYSEX_END_2B: return handleSysExEnd<2>(packet, cable);
+        case M::SYSEX_END_3B: return handleSysExEnd<3>(packet, cable);
 
-        case MIDICodeIndexNumber::NOTE_OFF:         // fallthrough
-        case MIDICodeIndexNumber::NOTE_ON:          // fallthrough
-        case MIDICodeIndexNumber::KEY_PRESSURE:     // fallthrough
-        case MIDICodeIndexNumber::CONTROL_CHANGE:   // fallthrough
-        case MIDICodeIndexNumber::PROGRAM_CHANGE:   // fallthrough
-        case MIDICodeIndexNumber::CHANNEL_PRESSURE: // fallthrough
-        case MIDICodeIndexNumber::PITCH_BEND:
-            return handleChannelMessage(packet, cable);
+        case M::NOTE_OFF:         // fallthrough
+        case M::NOTE_ON:          // fallthrough
+        case M::KEY_PRESSURE:     // fallthrough
+        case M::CONTROL_CHANGE:   // fallthrough
+        case M::PROGRAM_CHANGE:   // fallthrough
+        case M::CHANNEL_PRESSURE: // fallthrough
+        case M::PITCH_BEND: return handleChannelMessage(packet, cable);
 
-        case MIDICodeIndexNumber::SINGLE_BYTE:
-            return handleSingleByte(packet, cable);
+        case M::SINGLE_BYTE: return handleSingleByte(packet, cable);
 
         default: break; // LCOV_EXCL_LINE
     }
