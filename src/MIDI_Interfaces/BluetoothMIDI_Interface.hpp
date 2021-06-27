@@ -113,7 +113,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface {
     /// Only one active instance.
     static BluetoothMIDI_Interface *instance;
     /// MIDI Parser for incoming data.
-    SerialMIDI_Parser parser;
+    SerialMIDI_Parser parser{false};
     /// Builds outgoing MIDI BLE packets.
     BLEMIDIPacketBuilder packetbuilder;
     /// Queue for incoming MIDI messages.

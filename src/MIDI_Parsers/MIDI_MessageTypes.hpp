@@ -22,6 +22,7 @@ BEGIN_CS_NAMESPACE
 
 /// All possible MIDI status byte values (without channel).
 enum class MIDIMessageType : uint8_t {
+    NONE = 0x00,
     /* Channel Voice Messages */
     NOTE_OFF = 0x80,         // 3B
     NOTE_ON = 0x90,          // 3B

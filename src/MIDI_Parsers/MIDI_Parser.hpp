@@ -29,8 +29,8 @@ class MIDI_Parser {
 #endif
 
   protected:
-    MIDIMessage midimsg = {0xFF, 0x00, 0x00};
-    RealTimeMessage rtmsg = {0xFF};
+    MIDIMessage midimsg = {0x00, 0x00, 0x00};
+    RealTimeMessage rtmsg = {0x00};
 
   public:
     /// Check if the given byte is a MIDI header/status byte.

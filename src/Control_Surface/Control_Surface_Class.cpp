@@ -120,6 +120,7 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
         MIDIInputElementNote::resetAll();
     } else {
         switch (midimsg.getMessageType()) {
+            case MIDIMessageType::NONE: break;
             case MIDIMessageType::NOTE_OFF: // fallthrough
             case MIDIMessageType::NOTE_ON:
                 DEBUGFN(F("Updating Note elements with new MIDI "

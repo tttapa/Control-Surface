@@ -12,6 +12,9 @@ BEGIN_CS_NAMESPACE
  */
 class SerialMIDI_Parser : public MIDI_Parser {
   public:
+    SerialMIDI_Parser(bool sysCommonCancelsRunningStatus = true)
+        : sysCommonCancelsRunningStatus(sysCommonCancelsRunningStatus) {}
+    
     /**
      * @brief   Parse one incoming MIDI message.
      * @param   puller
@@ -65,10 +68,20 @@ class SerialMIDI_Parser : public MIDI_Parser {
         return t;
     }
 
+  public:
+    /// Clear the running status header for MIDI Channel messages.
+    void cancelRunningStatus() { runningHeader = 0; }
+
   private:
+    /// Accounts for running status differences between MIDI 1.0 and MIDI BLE.
+    bool sysCommonCancelsRunningStatus;
     /// Flag that remembers that the next data byte will be the third byte of
     /// a message.
     bool thirdByte = false;
+    /// Current header (not necessarily running), contains the header of the
+    /// message that's currently being received. As soon as the message is 
+    /// complete, it is set to zero.
+    uint8_t currentHeader = 0;
     /// Running status header.
     uint8_t runningHeader = 0;
     /// @see @ref storeByte

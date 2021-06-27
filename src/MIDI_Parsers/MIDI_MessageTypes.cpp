@@ -6,6 +6,7 @@ BEGIN_CS_NAMESPACE
 FlashString_t enum_to_string(MIDIMessageType m) {
     using M = MIDIMessageType;
     switch (m) {
+        case M::NONE: return F("NONE");
         case M::NOTE_OFF: return F("NOTE_OFF");
         case M::NOTE_ON: return F("NOTE_ON");
         case M::KEY_PRESSURE: return F("KEY_PRESSURE");

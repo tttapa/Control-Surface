@@ -240,6 +240,144 @@ TEST(SerialMIDIParser, noteOnRunningStatus) {
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
+TEST(SerialMIDIParser, noteOnRunningStatusSysCommon1) {
+    SerialMIDI_Parser sparser;
+    uint8_t data[] = {0x9A, 0x10, 0x11, //
+                      0xF6,             //
+                      0x12, 0x13};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
+    ChannelMessage msg1 = sparser.getChannelMessage();
+    EXPECT_EQ(msg1.header, 0x9A);
+    EXPECT_EQ(msg1.data1, 0x10);
+    EXPECT_EQ(msg1.data2, 0x11);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
+    SysCommonMessage msg2 = sparser.getSysCommonMessage();
+    EXPECT_EQ(msg2.header, 0xF6);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+}
+
+TEST(SerialMIDIParser, noteOnRunningStatusSysCommon2) {
+    SerialMIDI_Parser sparser;
+    uint8_t data[] = {0x9A, 0x10, 0x11, //
+                      0xF1, 0x55,       //
+                      0x12, 0x13};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
+    ChannelMessage msg1 = sparser.getChannelMessage();
+    EXPECT_EQ(msg1.header, 0x9A);
+    EXPECT_EQ(msg1.data1, 0x10);
+    EXPECT_EQ(msg1.data2, 0x11);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
+    SysCommonMessage msg2 = sparser.getSysCommonMessage();
+    EXPECT_EQ(msg2.header, 0xF1);
+    EXPECT_EQ(msg2.data1, 0x55);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+}
+
+TEST(SerialMIDIParser, noteOnRunningStatusSysCommon3) {
+    SerialMIDI_Parser sparser;
+    uint8_t data[] = {0x9A, 0x10, 0x11, //
+                      0xF2, 0x55, 0x66, //
+                      0x12, 0x13};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
+    ChannelMessage msg1 = sparser.getChannelMessage();
+    EXPECT_EQ(msg1.header, 0x9A);
+    EXPECT_EQ(msg1.data1, 0x10);
+    EXPECT_EQ(msg1.data2, 0x11);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
+    SysCommonMessage msg2 = sparser.getSysCommonMessage();
+    EXPECT_EQ(msg2.header, 0xF2);
+    EXPECT_EQ(msg2.data1, 0x55);
+    EXPECT_EQ(msg2.data2, 0x66);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+}
+
+TEST(SerialMIDIParser, noteOnRunningStatusSysCommon1BLE) {
+    SerialMIDI_Parser sparser{false};
+    uint8_t data[] = {0x9A, 0x10, 0x11, //
+                      0xF6,             //
+                      0x12, 0x13};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
+    ChannelMessage msg1 = sparser.getChannelMessage();
+    EXPECT_EQ(msg1.header, 0x9A);
+    EXPECT_EQ(msg1.data1, 0x10);
+    EXPECT_EQ(msg1.data2, 0x11);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
+    SysCommonMessage msg2 = sparser.getSysCommonMessage();
+    EXPECT_EQ(msg2.header, 0xF6);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
+    ChannelMessage msg3 = sparser.getChannelMessage();
+    EXPECT_EQ(msg3.header, 0x9A);
+    EXPECT_EQ(msg3.data1, 0x12);
+    EXPECT_EQ(msg3.data2, 0x13);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+}
+
+TEST(SerialMIDIParser, noteOnRunningStatusSysCommon2BLE) {
+    SerialMIDI_Parser sparser{false};
+    uint8_t data[] = {0x9A, 0x10, 0x11, //
+                      0xF1, 0x55,       //
+                      0x12, 0x13};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
+    ChannelMessage msg1 = sparser.getChannelMessage();
+    EXPECT_EQ(msg1.header, 0x9A);
+    EXPECT_EQ(msg1.data1, 0x10);
+    EXPECT_EQ(msg1.data2, 0x11);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
+    SysCommonMessage msg2 = sparser.getSysCommonMessage();
+    EXPECT_EQ(msg2.header, 0xF1);
+    EXPECT_EQ(msg2.data1, 0x55);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
+    ChannelMessage msg3 = sparser.getChannelMessage();
+    EXPECT_EQ(msg3.header, 0x9A);
+    EXPECT_EQ(msg3.data1, 0x12);
+    EXPECT_EQ(msg3.data2, 0x13);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+}
+
+TEST(SerialMIDIParser, noteOnRunningStatusSysCommon3BLE) {
+    SerialMIDI_Parser sparser{false};
+    uint8_t data[] = {0x9A, 0x10, 0x11, //
+                      0xF2, 0x55, 0x66, //
+                      0x12, 0x13};
+    auto puller = BufferPuller(data);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
+    ChannelMessage msg1 = sparser.getChannelMessage();
+    EXPECT_EQ(msg1.header, 0x9A);
+    EXPECT_EQ(msg1.data1, 0x10);
+    EXPECT_EQ(msg1.data2, 0x11);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
+    SysCommonMessage msg2 = sparser.getSysCommonMessage();
+    EXPECT_EQ(msg2.header, 0xF2);
+    EXPECT_EQ(msg2.data1, 0x55);
+    EXPECT_EQ(msg2.data2, 0x66);
+
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
+    ChannelMessage msg3 = sparser.getChannelMessage();
+    EXPECT_EQ(msg3.header, 0x9A);
+    EXPECT_EQ(msg3.data1, 0x12);
+    EXPECT_EQ(msg3.data2, 0x13);
+    EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
+}
+
 TEST(SerialMIDIParser, afterTouch) {
     SerialMIDI_Parser sparser;
     uint8_t data[] = {0xA1, 0x01, 0x02};
