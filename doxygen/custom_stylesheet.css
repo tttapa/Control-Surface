@@ -91,7 +91,7 @@ a.el {
 iframe {
     max-width: initial;
 }
-body > div.header, div.PageDoc > div.header {
+body > div.header, div > div.header {
     max-width: 1100px;
     box-sizing: border-box;
     margin: auto;
