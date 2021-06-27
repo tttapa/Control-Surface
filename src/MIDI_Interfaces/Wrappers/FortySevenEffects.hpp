@@ -165,7 +165,10 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
                   msg.getChannel().getOneBased());
         // channel is zero-based in Control Surface, one-based in MIDI 47 Fx
     }
-    void sendSysCommonImpl(SysCommonMessage) override { /* TODO */
+    void sendSysCommonImpl(SysCommonMessage msg) override {
+        midi.sendCommon(
+            static_cast<MIDI_NAMESPACE::MidiType>(msg.getMessageType()),
+            msg.getData14bit());
     }
     void sendSysExImpl(SysExMessage msg) {
         midi.sendSysEx(msg.length, msg.data, true);
