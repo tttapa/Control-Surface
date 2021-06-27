@@ -169,6 +169,10 @@ See the [**Getting Started**](https://tttapa.github.io/Control-Surface-doc/Doxyg
 page to get started using the library.  
 It'll also point you to the [**Installation Instructions**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d8/da8/md_pages_Installation.html).
 
+If you want to use Control Surface as a regular MIDI library, for sending and 
+receiving MIDI messages, have a look at the 
+[**MIDI tutorial**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/df7/midi-tutorial.html).
+
 ## Documentation
 
 The automatically generated Doxygen documentation for this library can be found 
