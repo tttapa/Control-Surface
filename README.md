@@ -240,54 +240,54 @@ tests and generating documentation, a style guide, etc.
 
 ### 2.0-alpha
 
- - cf32e7e72d81269e97f18ba51c42ba10715d1852  
+- ([cf32e7e](https://github.com/tttapa/Control-Surface/commit/cf32e7e72d81269e97f18ba51c42ba10715d1852))  
    `Control_Surface.setMIDIInputCallbacks()` now takes four arguments instead of
    three, because a System Common callback was added.
- - b727931a44cb1e262ac32901f1e307583da90624  
+- ([b727931](https://github.com/tttapa/Control-Surface/commit/b727931a44cb1e262ac32901f1e307583da90624))  
    The MIDI note name for the note F has been changed from `F` to `F_` in order
    to avoid conflicts with the `F()` macro and its functional equivalent 
    introduced here: 
    https://github.com/arduino/ArduinoCore-mbed/blob/7a8d3ee46262d943f7cc1158f8bce06f61c3ddb2/cores/arduino/Arduino.h#L35-L41  
    It is now recommended to use `MIDI_Notes::C(4)` instead of `note(C, 4)`.
- - a81bd1927298decc2ea3852fd2f00e8028c14b81  
+- ([a81bd19](https://github.com/tttapa/Control-Surface/commit/a81bd1927298decc2ea3852fd2f00e8028c14b81))  
    Classes that make use of the SPI interface now require you to pass the `SPI`
    object as a constructor argument. This allows you to use `SPI1` or `SPI2`
    (if available for your hardware).
- - c6e35b960ac15bc1b5cf5c588139d437ccd9cb68  
+- ([c6e35b9](https://github.com/tttapa/Control-Surface/commit/c6e35b960ac15bc1b5cf5c588139d437ccd9cb68))  
    The `NoteBitmapDisplay` class has been renamed to `BitmapDisplay`.
- - 37b6901cbe56babc47c297a132381d53deaa45e8  
+- ([37b6901](https://github.com/tttapa/Control-Surface/commit/37b6901cbe56babc47c297a132381d53deaa45e8))  
    The `NoteValueLED` and `CCValueLED` classes (and similar) have been replaced
    by `NoteLED` and `CCLED` respectively.  
    The display elements `BitmapDisplay`, `VPotDisplay`, `VUDisplay` etc. are 
    now generic in the type of value that they display. In most cases, you should
    be able to update your sketch by adding `<>` after the type names, e.g. 
    `BitmapDisplay<>`, `VPotDisplay<>`, etc.
- - 1a21d1344f57066fa1eda3819eaf89cbbc79c14e  
+- ([1a21d13](https://github.com/tttapa/Control-Surface/commit/1a21d1344f57066fa1eda3819eaf89cbbc79c14e))  
    The line numbers of `LCDDisplay` are now one-based: `1` is the first line and
    `2` is the second line. This is more consistent with the track parameter and
    the API of the rest of the library. (Before, the first line was `0` and the
    second line was `1`.)
- - 40e3d7a4377b281e58dd7725f1bb8c6198855ce6  
+- ([40e3d7a](https://github.com/tttapa/Control-Surface/commit/40e3d7a4377b281e58dd7725f1bb8c6198855ce6))  
    Control Surface now comes with an Encoder library out of the box. You no 
    longer have to install or include `Encoder.h` in your sketches.
 
 ### 1.x
 
- - 8a3b1b314cf5b4aedf3ad60cbbc492fbcbb25c73  
+- ([8a3b1b3](https://github.com/tttapa/Control-Surface/commit/8a3b1b314cf5b4aedf3ad60cbbc492fbcbb25c73))  
    Before, `Control_Surface.MIDI()` was used to get the MIDI interface used by
    Control Surface. This method was removed, because you can now connect 
    multiple interfaces to Control Surface, using the 
    [MIDI Pipe routing system](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/d72/classMIDI__Pipe.html#details).
    To send MIDI using Control Surface, you can now use 
    `Control_Surface.sendCC(...)` and the other similar methods directly.
- - 8a3b1b314cf5b4aedf3ad60cbbc492fbcbb25c73  
+- ([8a3b1b3](https://github.com/tttapa/Control-Surface/commit/8a3b1b314cf5b4aedf3ad60cbbc492fbcbb25c73))  
    For the same reason as the bullet above, the `MultiMIDI_Interface` was
    removed, and has been replaced by the
    [MIDI Pipe routing system](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/d72/classMIDI__Pipe.html#details).
- - bca6e11b2b3e02df5f600f65c81676708a81155b  
+- ([bca6e11](https://github.com/tttapa/Control-Surface/commit/bca6e11b2b3e02df5f600f65c81676708a81155b))  
    The color mapper for `NoteRangeFastLED` and the like now takes a second 
    parameter that represents the index of the LED within the LED strip.
- - 3c01c7d5eb60e59720540d5a77095468e6984a58  
+- ([3c01c7d](https://github.com/tttapa/Control-Surface/commit/3c01c7d5eb60e59720540d5a77095468e6984a58))  
    The **maximum supported ADC resolution is now used by default** (e.g. 13 bits
    on Teensy 3.x, 12 bits on ESP32).  
    This increases the accuracy of analog inputs and controls for the Control 
@@ -296,7 +296,7 @@ tests and generating documentation, a style guide, etc.
    You can change the default resolution to 10 bits in 
    [`src/AH/Settings/Settings.hpp`](https://tttapa.github.io/Control-Surface-doc/Doxygen/dc/d69/namespaceAH.html#a4f2ec536d7413c6969f44d63ba14ce55)
    if you have to.
- - 31edaa6b76477fdf152c19fd34f7e4e8506561e6  
+- ([31edaa6](https://github.com/tttapa/Control-Surface/commit/31edaa6b76477fdf152c19fd34f7e4e8506561e6))  
    The **mapping function** is now applied before applying hysteresis.  
    This means that the input and output values of the function should be 
    16 - `ANALOG_FILTER_SHIFT_FACTOR` bits wide instead of 7. By default this is
