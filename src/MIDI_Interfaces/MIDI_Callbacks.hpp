@@ -61,6 +61,7 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
     void onChannelMessage(MIDI_Interface &, ChannelMessage msg) override {
         using MMT = MIDIMessageType;
         switch (msg.getMessageType()) {
+            case MMT::NONE: break;
             case MMT::NOTE_OFF:
                 CRTP(Derived).onNoteOff(msg.getChannel(), msg.getData1(),
                                         msg.getData2(), msg.getCable());
@@ -116,6 +117,7 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
     void onSysCommonMessage(MIDI_Interface &, SysCommonMessage msg) override {
         using MMT = MIDIMessageType;
         switch (msg.getMessageType()) {
+            case MMT::NONE: break;
             case MMT::NOTE_OFF:
             case MMT::NOTE_ON:
             case MMT::KEY_PRESSURE:
@@ -156,6 +158,7 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
     void onRealTimeMessage(MIDI_Interface &, RealTimeMessage msg) override {
         using MMT = MIDIMessageType;
         switch (msg.getMessageType()) {
+            case MMT::NONE: break;
             case MMT::NOTE_OFF:
             case MMT::NOTE_ON:
             case MMT::KEY_PRESSURE:
