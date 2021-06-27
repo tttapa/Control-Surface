@@ -169,15 +169,15 @@ See the [**Getting Started**](https://tttapa.github.io/Control-Surface-doc/Doxyg
 page to get started using the library.  
 It'll also point you to the [**Installation Instructions**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d8/da8/md_pages_Installation.html).
 
-If you want to use Control Surface as a regular MIDI library, for sending and 
-receiving MIDI messages, have a look at the 
-[**MIDI tutorial**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/df7/midi-tutorial.html).
+The [**MIDI tutorial**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/df7/midi-tutorial.html)
+might be useful if you want to use Control Surface as a regular MIDI library,
+for sending and receiving MIDI messages.
 
 ## Documentation
 
 The automatically generated Doxygen documentation for this library can be found 
 here:  
-    [**Documentation**](https://tttapa.github.io/Control-Surface-doc/Doxygen/index.html)  
+[**Documentation**](https://tttapa.github.io/Control-Surface-doc/Doxygen/index.html)  
 Test coverage information can be found here:  
 [**Code Coverage**](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)  
 Arduino examples can be found here:  
@@ -188,7 +188,7 @@ for an overview of the features of the library, it's the best entry point for
 the documentation.
 
 You can find an answer to some frequently asked questions on the 
-[**FAQ**](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/df5/md_pages_FAQ.html)
+[**FAQ**](https://tttapa.github.io/Control-Surface-doc/Doxygen/da/dc1/FAQ.html)
 page.
 
 ## Work in progress
