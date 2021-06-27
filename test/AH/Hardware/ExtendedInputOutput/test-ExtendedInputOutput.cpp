@@ -289,6 +289,78 @@ TEST(ExtendedInputOutput, shiftOutLSBFIRST) {
     shiftOut(el.pin(data), el.pin(clck), LSBFIRST, 0b00111001);
 }
 
+TEST(ExtendedInputOutput, shiftOutMSBFIRSTMixed) {
+    MockExtIOElement el = {10};
+
+    testing::InSequence s;
+    uint8_t data = 0;
+    uint8_t clck = 1;
+
+    EXPECT_CALL(el, digitalWrite(data, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+
+    shiftOut(el.pin(data), pin_t(clck), MSBFIRST, 0b10011100);
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
+TEST(ExtendedInputOutput, shiftOutLSBFIRSTMixed) {
+    MockExtIOElement el = {10};
+
+    testing::InSequence s;
+    uint8_t data = 0;
+    uint8_t clck = 1;
+
+    EXPECT_CALL(el, digitalWrite(data, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+    EXPECT_CALL(el, digitalWrite(data, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(clck, 0));
+
+    shiftOut(el.pin(data), pin_t(clck), LSBFIRST, 0b00111001);
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
 TEST(ExtendedIOElement, bufferedMinimal) {
     MinimalMockExtIOElement e(8);
 
