@@ -181,7 +181,6 @@ void BluetoothMIDI_Interface::parse(const uint8_t *const data,
     MIDIReadEvent event = parser.pull(mididata);
     // TODO: add a timeout instead of busy waiting?
     while (event != MIDIReadEvent::NO_MESSAGE) {
-        DEBUGFN(event);
         switch (event) {
             case MIDIReadEvent::CHANNEL_MESSAGE:
                 while (!queue.push(parser.getChannelMessage()))
@@ -205,6 +204,7 @@ void BluetoothMIDI_Interface::parse(const uint8_t *const data,
         }
         event = parser.pull(mididata);
     }
+    parser.cancelRunningStatus();
 }
 
 MIDIReadEvent BluetoothMIDI_Interface::read() {
