@@ -247,6 +247,7 @@ buttonType	KEYWORD1
 #####################
 
 MCU	KEYWORD1
+MIDI_Notes	KEYWORD1
 MIDI_CC	KEYWORD1
 MIDI_PC	KEYWORD1
 

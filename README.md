@@ -106,7 +106,7 @@ Control Change message can be written in just five lines of code:
 #include <Control_Surface.h>
 
 USBMIDI_Interface midi;
-CCPotentiometer pot = { A0, MIDI_CC::General_Purpose_Controller_1 };
+CCPotentiometer pot { A0, MIDI_CC::General_Purpose_Controller_1 };
 
 void setup() { Control_Surface.begin(); }
 void loop() { Control_Surface.loop(); }
@@ -123,14 +123,14 @@ multiplexer) that send out MIDI Control Change messages over USB.
 USBMIDI_Interface midi;  // Instantiate a MIDI Interface to use
  
 // Instantiate an analog multiplexer
-CD74HC4051 mux = {
+CD74HC4051 mux {
   A0,       // Analog input pin
   {3, 4, 5} // Address pins S0, S1, S2
 };
  
 // Create an array of CCPotentiometer objects that send out MIDI Control Change 
 // messages when you turn the potentiometers connected to the 8 inputs of the mux.
-CCPotentiometer volumePotentiometers[] = {
+CCPotentiometer volumePotentiometers[] {
   { mux.pin(0), { MIDI_CC::Channel_Volume, CHANNEL_1 } },
   { mux.pin(1), { MIDI_CC::Channel_Volume, CHANNEL_2 } },
   { mux.pin(2), { MIDI_CC::Channel_Volume, CHANNEL_3 } },
@@ -157,7 +157,7 @@ received:
 #include <Control_Surface.h>
 
 USBMIDI_Interface midi;
-NoteLED led = { LED_BUILTIN, MIDI_Notes::C(4) };
+NoteLED led { LED_BUILTIN, MIDI_Notes::C(4) };
 
 void setup() { Control_Surface.begin(); }
 void loop() { Control_Surface.loop(); }
