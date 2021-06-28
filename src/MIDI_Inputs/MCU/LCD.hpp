@@ -47,15 +47,15 @@ class LCDCounter {
  * 
  * @ingroup MIDIInputElements
  */
-template <uint8_t BufferSize = 120>
+template <uint8_t BufferSize = 112>
 class LCD : public MIDIInputElementSysEx, private LCDCounter {
   public:
     /// @param  offset
-    ///         The text sent over MIDI is 120 characters long, by changing the
+    ///         The text sent over MIDI is 112 characters long, by changing the
     ///         offset within this text and the length of the text, we can 
-    ///         listen to just a section of the text. E.g. `offset = 60` and 
-    ///         `BufferSize = 60` will listen to just the second line of the 
-    ///         LCD display. The default is `offset = 0` and `BufferSize = 120`,
+    ///         listen to just a section of the text. E.g. `offset = 56` and 
+    ///         `BufferSize = 56` will listen to just the second line of the 
+    ///         LCD display. The default is `offset = 0` and `BufferSize = 112`,
     ///         i.e. listening to the entire display.
     /// @param  cable
     ///         The MIDI USB cable number to listen for.
