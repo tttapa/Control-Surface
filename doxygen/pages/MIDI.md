@@ -288,6 +288,7 @@ MIDIAddress myAddress = {MIDI_PC::Harpsichord, CHANNEL_9};
 
 - @ref MIDI-Output.ino
 - @ref Send-MIDI-Notes.ino
+- @ref Send-All-MIDI-Messages.ino
 - @ref SysEx-Send-Receive.ino
 
 ## Receiving MIDI messages {#midi_md-receiving}

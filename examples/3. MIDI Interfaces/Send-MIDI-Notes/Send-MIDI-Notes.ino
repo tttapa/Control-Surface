@@ -2,6 +2,9 @@
  * Example showing how to send MIDI Note messages.
  * 
  * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
+ * 
+ * @see @ref midi_md-sending "MIDI Tutorial: Sending MIDI messages"
+ * @see @ref Send-All-MIDI-Messages.ino
  */
 
 #include <Control_Surface.h>
