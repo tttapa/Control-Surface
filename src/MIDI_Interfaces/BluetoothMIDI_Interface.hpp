@@ -155,7 +155,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface {
     /// It either sends them after a timeout (a given number of milliseconds
     /// after the first data was added to the packet), or immediately when it
     /// receives a flush signal from the main thread.
-    void handleSendEvents();
+    bool handleSendEvents();
 
     /// Tell the background BLE sender thread to send the current packet.
     /// Blocks until the packet is sent.
@@ -164,6 +164,9 @@ class BluetoothMIDI_Interface : public MIDI_Interface {
     ///         Lock should be locked at entry, will still be locked on exit.
     void flushImpl(lock_t &lock);
 
+#if !defined(ARDUINO) && !defined(DOXYGEN)
+    public:
+#endif
     /// Tell the background BLE sender thread to stop gracefully, and join it.
     void stopSendingThread();
 

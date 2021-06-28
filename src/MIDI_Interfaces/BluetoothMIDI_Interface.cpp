@@ -13,8 +13,8 @@ BEGIN_CS_NAMESPACE
 void BluetoothMIDI_Interface::startSendingThread() {
     // As long as you didn't get the stop signal, wait for data to send
     auto send_loop = [this] {
-        while (!stop_sending)
-            handleSendEvents();
+        while (handleSendEvents())
+            ; // loop
     };
     // Need larger stack than default
     ScopedThreadConfig(4096, 3, true, "SendBLEMIDI");
@@ -22,11 +22,12 @@ void BluetoothMIDI_Interface::startSendingThread() {
     send_thread = std::thread(send_loop);
 }
 
-void BluetoothMIDI_Interface::handleSendEvents() {
+bool BluetoothMIDI_Interface::handleSendEvents() {
     lock_t lock(mtx);
 
     // Wait for a packet to be started (or for a stop signal)
     cv.wait(lock, [this] { return !packetbuilder.empty() || stop_sending; });
+    bool keep_going = !stop_sending;
     // Wait for flush signal or timeout
     bool flushing = cv.wait_for(lock, timeout, [this] { return flushnow; });
 
@@ -43,6 +44,7 @@ void BluetoothMIDI_Interface::handleSendEvents() {
         lock.unlock();
         cv.notify_one();
     }
+    return keep_going;
 }
 
 void BluetoothMIDI_Interface::flushImpl(lock_t &lock) {

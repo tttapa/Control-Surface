@@ -474,7 +474,7 @@ TEST(BluetoothMIDIInterface, sendSysCommon) {
     BluetoothMIDI_Interface midi;
     midi.begin();
 
-    std::vector<uint8_t> expected = {0x81, 0x82, 0xF2, 0x12 ,0x34};
+    std::vector<uint8_t> expected = {0x81, 0x82, 0xF2, 0x12, 0x34};
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(1) // For time stamp
         .WillOnce(Return(timestamp(0x01, 0x02)));
@@ -491,7 +491,7 @@ TEST(BluetoothMIDIInterface, sendSysCommonMessageBufferFull) {
     midi.begin();
     midi.forceMinMTU(5 + 3);
 
-    std::vector<uint8_t> expected1 = {0x81, 0x82, 0xF2, 0x12 ,0x34};
+    std::vector<uint8_t> expected1 = {0x81, 0x82, 0xF2, 0x12, 0x34};
     std::vector<uint8_t> expected2 = {0x81, 0x83, 0xF1, 0x56};
     EXPECT_CALL(ArduinoMock::getInstance(), millis())
         .Times(2) // For time stamp
@@ -659,7 +659,7 @@ TEST(BluetoothMIDIInterface, sendLongSysExFlush) {
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
-TEST(BluetoothMIDIInterface, sendLongSysExFlushDestructor) {
+TEST(BluetoothMIDIInterface, sendLongSysExFlushStopSendingThread) {
     std::chrono::milliseconds timeout{100};
     auto midi = std::make_unique<BluetoothMIDI_Interface>();
     midi->begin();
@@ -700,14 +700,13 @@ TEST(BluetoothMIDIInterface, sendLongSysExFlushDestructor) {
     InSequence seq;
     EXPECT_CALL(*midi, notifyMIDIBLE(expected[0]));
     EXPECT_CALL(*midi, notifyMIDIBLE(expected[1]));
+    EXPECT_CALL(*midi, notifyMIDIBLE(expected[2]));
 
     midi->send(SysExMessage(sysex));
     // First two packets should be sent immediately
-    Mock::VerifyAndClear(&*midi);
-
     // Third packet is sent when the MIDI interface is destroyed
-    EXPECT_CALL(*midi, notifyMIDIBLE(expected[2]));
-    midi.reset();
+    midi->stopSendingThread();
+    Mock::VerifyAndClear(midi.get());
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
