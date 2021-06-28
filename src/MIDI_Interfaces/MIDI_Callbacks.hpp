@@ -54,7 +54,7 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
     void onContinue(Cable cable);
     void onStop(Cable cable);
     void onActiveSensing(Cable cable);
-    void onReset(Cable cable);
+    void onSystemReset(Cable cable);
     // clang-format on
     /// @}
 
@@ -105,7 +105,7 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
             case MMT::STOP:
             case MMT::UNDEFINED_REALTIME_2:
             case MMT::ACTIVE_SENSING:
-            case MMT::RESET:
+            case MMT::SYSTEM_RESET:
             default: break;
         }
     }
@@ -150,7 +150,7 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
             case MMT::STOP:
             case MMT::UNDEFINED_REALTIME_2:
             case MMT::ACTIVE_SENSING:
-            case MMT::RESET:
+            case MMT::SYSTEM_RESET:
             default: break;
         }
     }
@@ -185,7 +185,7 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
             case MMT::ACTIVE_SENSING:
                 CRTP(Derived).onActiveSensing(msg.getCable());
                 break;
-            case MMT::RESET: CRTP(Derived).onReset(msg.getCable()); break;
+            case MMT::SYSTEM_RESET: CRTP(Derived).onSystemReset(msg.getCable()); break;
             default: break;
         }
     }
@@ -223,7 +223,7 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
         static_assert(same_return_type_and_arguments(&Derived::onContinue, &FineGrainedMIDI_Callbacks::onContinue), "Incorrect signature for onContinue");
         static_assert(same_return_type_and_arguments(&Derived::onStop, &FineGrainedMIDI_Callbacks::onStop), "Incorrect signature for onStop");
         static_assert(same_return_type_and_arguments(&Derived::onActiveSensing, &FineGrainedMIDI_Callbacks::onActiveSensing), "Incorrect signature for onActiveSensing");
-        static_assert(same_return_type_and_arguments(&Derived::onReset, &FineGrainedMIDI_Callbacks::onReset), "Incorrect signature for onReset");
+        static_assert(same_return_type_and_arguments(&Derived::onSystemReset, &FineGrainedMIDI_Callbacks::onSystemReset), "Incorrect signature for onSystemReset");
         // clang-format on
     }
 
@@ -248,7 +248,7 @@ template <class Derived> inline void FineGrainedMIDI_Callbacks<Derived>::onStart
 template <class Derived> inline void FineGrainedMIDI_Callbacks<Derived>::onContinue(Cable) {}
 template <class Derived> inline void FineGrainedMIDI_Callbacks<Derived>::onStop(Cable) {}
 template <class Derived> inline void FineGrainedMIDI_Callbacks<Derived>::onActiveSensing(Cable) {}
-template <class Derived> inline void FineGrainedMIDI_Callbacks<Derived>::onReset(Cable) {}
+template <class Derived> inline void FineGrainedMIDI_Callbacks<Derived>::onSystemReset(Cable) {}
 // clang-format on
 
 END_CS_NAMESPACE

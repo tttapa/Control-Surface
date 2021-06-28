@@ -1,7 +1,7 @@
 #pragma once
 
 #include <AH/Arduino-Wrapper.h> // Print
-#include <AH/STL/cstddef> // size_t
+#include <AH/STL/cstddef>       // size_t
 #include <AH/STL/vector>
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
@@ -52,7 +52,7 @@ enum class MIDIMessageType : uint8_t {
     STOP = 0xFC,
     UNDEFINED_REALTIME_2 = 0xFD,
     ACTIVE_SENSING = 0xFE,
-    RESET = 0xFF,
+    SYSTEM_RESET = 0xFF,
 };
 
 /// MIDI USB Code Index Numbers.
@@ -156,6 +156,12 @@ struct MIDIMessage {
     uint16_t getData14bit() const {
         return data1 | (uint16_t(data2) << uint16_t(7));
     }
+    /// If Data 1 and Data 2 represent a single 14-bit number, you can use this
+    /// method to set that number.
+    void setData14bit(uint16_t data) {
+        data1 = (data >> 0) & 0x7F;
+        data2 = (data >> 7) & 0x7F;
+    }
 
     /// Make sure that the status byte has the most significant bit set and
     /// the data bytes have the most significant bits cleared.
@@ -256,11 +262,15 @@ struct SysCommonMessage : MIDIMessage {
             return 0;
     }
 
-    constexpr static auto MTC_QUARTER_FRAME = MIDIMessageType::MTC_QUARTER_FRAME;
-    constexpr static auto SONG_POSITION_POINTER = MIDIMessageType::SONG_POSITION_POINTER;
+    constexpr static auto MTC_QUARTER_FRAME =
+        MIDIMessageType::MTC_QUARTER_FRAME;
+    constexpr static auto SONG_POSITION_POINTER =
+        MIDIMessageType::SONG_POSITION_POINTER;
     constexpr static auto SONG_SELECT = MIDIMessageType::SONG_SELECT;
-    constexpr static auto UNDEFINED_SYSCOMMON_1 = MIDIMessageType::UNDEFINED_SYSCOMMON_1;
-    constexpr static auto UNDEFINED_SYSCOMMON_2 = MIDIMessageType::UNDEFINED_SYSCOMMON_2;
+    constexpr static auto UNDEFINED_SYSCOMMON_1 =
+        MIDIMessageType::UNDEFINED_SYSCOMMON_1;
+    constexpr static auto UNDEFINED_SYSCOMMON_2 =
+        MIDIMessageType::UNDEFINED_SYSCOMMON_2;
     constexpr static auto TUNE_REQUEST = MIDIMessageType::TUNE_REQUEST;
 };
 
@@ -348,13 +358,15 @@ struct RealTimeMessage {
     bool isValid() const { return message >= 0xF8; }
 
     constexpr static auto TIMING_CLOCK = MIDIMessageType::TIMING_CLOCK;
-    constexpr static auto UNDEFINED_REALTIME_1 = MIDIMessageType::UNDEFINED_REALTIME_1;
+    constexpr static auto UNDEFINED_REALTIME_1 =
+        MIDIMessageType::UNDEFINED_REALTIME_1;
     constexpr static auto START = MIDIMessageType::START;
     constexpr static auto CONTINUE = MIDIMessageType::CONTINUE;
     constexpr static auto STOP = MIDIMessageType::STOP;
-    constexpr static auto UNDEFINED_REALTIME_2 = MIDIMessageType::UNDEFINED_REALTIME_2;
+    constexpr static auto UNDEFINED_REALTIME_2 =
+        MIDIMessageType::UNDEFINED_REALTIME_2;
     constexpr static auto ACTIVE_SENSING = MIDIMessageType::ACTIVE_SENSING;
-    constexpr static auto RESET = MIDIMessageType::RESET;
+    constexpr static auto RESET = MIDIMessageType::SYSTEM_RESET;
 };
 
 #ifndef ARDUINO

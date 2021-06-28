@@ -90,7 +90,9 @@ struct MyMIDI_Callbacks : FineGrainedMIDI_Callbacks<MyMIDI_Callbacks> {
   void onActiveSensing(Cable cable) {
     Serial << "Active Sensing: " << cable << endl;
   }
-  void onReset(Cable cable) { Serial << "Reset: " << cable << endl; }
+  void onSystemReset(Cable cable) {
+    Serial << "System Reset: " << cable << endl;
+  }
 
 } callback;
 

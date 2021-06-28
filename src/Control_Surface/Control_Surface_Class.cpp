@@ -171,7 +171,7 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
             case MIDIMessageType::STOP: break;
             case MIDIMessageType::UNDEFINED_REALTIME_2: break;
             case MIDIMessageType::ACTIVE_SENSING: break;
-            case MIDIMessageType::RESET: break;
+            case MIDIMessageType::SYSTEM_RESET: break;
             default:
                 break;
                 // LCOV_EXCL_STOP

@@ -29,7 +29,7 @@ FlashString_t enum_to_string(MIDIMessageType m) {
         case M::STOP: return F("STOP");
         case M::UNDEFINED_REALTIME_2: return F("UNDEFINED_REALTIME_2");
         case M::ACTIVE_SENSING: return F("ACTIVE_SENSING");
-        case M::RESET: return F("RESET");
+        case M::SYSTEM_RESET: return F("SYSTEM_RESET");
         default: return F("<invalid>");
     }
 }

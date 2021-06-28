@@ -1,8 +1,8 @@
 #include <MIDI_Interfaces/MIDI_Callbacks.hpp>
 #include <MIDI_Interfaces/SerialMIDI_Interface.hpp>
+#include <TestStream.hpp>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <TestStream.hpp>
 
 USING_CS_NAMESPACE;
 using ::testing::Return;
@@ -15,12 +15,12 @@ using u8vec = std::vector<uint8_t>;
 TEST(StreamMIDI_Interface, send3B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
-    midi.send(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66);
+    midi.sendChannelMessage(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66);
     midi.sendNoteOn({0x55, CHANNEL_4}, 0x66);
     midi.sendNoteOff({0x55, CHANNEL_4}, 0x66);
-    midi.sendCC({0x55, CHANNEL_4}, 0x66);
-    midi.sendKP({0x55, CHANNEL_4}, 0x66);
-    midi.sendPB(CHANNEL_4, 0x3355);
+    midi.sendControlChange({0x55, CHANNEL_4}, 0x66);
+    midi.sendKeyPressure({0x55, CHANNEL_4}, 0x66);
+    midi.sendPitchBend(CHANNEL_4, 0x3355);
     u8vec expected = {
         0x93, 0x55, 0x66, //
         0x93, 0x55, 0x66, //
@@ -35,10 +35,10 @@ TEST(StreamMIDI_Interface, send3B) {
 TEST(StreamMIDI_Interface, send2B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
-    midi.send(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66);
-    midi.sendPC({CHANNEL_4}, 0x66);
-    midi.sendPC({0x66, CHANNEL_4});
-    midi.sendCP(CHANNEL_4, 0x66);
+    midi.sendChannelMessage(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66);
+    midi.sendProgramChange({CHANNEL_4}, 0x66);
+    midi.sendProgramChange({0x66, CHANNEL_4});
+    midi.sendChannelPressure(CHANNEL_4, 0x66);
     u8vec expected = {
         0xC3, 0x66, //
         0xC3, 0x66, //

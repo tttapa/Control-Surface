@@ -366,7 +366,7 @@ TEST(BluetoothMIDIInterface, sendOneProgramChangeMessage) {
         .WillRepeatedly(Return(timestamp(0x01, 0x02)));
     EXPECT_CALL(midi, notifyMIDIBLE(expected));
 
-    midi.sendPC(CHANNEL_6, 0x78);
+    midi.sendProgramChange(CHANNEL_6, 0x78);
     midi.flush();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -387,8 +387,8 @@ TEST(BluetoothMIDIInterface, sendProgramChangeMessageBufferFull) {
     EXPECT_CALL(midi, notifyMIDIBLE(expected1)).InSequence(s);
     EXPECT_CALL(midi, notifyMIDIBLE(expected2)).InSequence(s);
 
-    midi.sendPC(CHANNEL_6, 0x78);
-    midi.sendPC(CHANNEL_7, 0x79);
+    midi.sendProgramChange(CHANNEL_6, 0x78);
+    midi.sendProgramChange(CHANNEL_7, 0x79);
     midi.flush();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());

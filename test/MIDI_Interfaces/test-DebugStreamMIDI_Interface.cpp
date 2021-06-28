@@ -14,12 +14,12 @@ using u8vec = std::vector<uint8_t>;
 TEST(StreamDebugMIDI_Interface, send3B) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
-    midi.send(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66);
+    midi.sendChannelMessage(MIDIMessageType::NOTE_ON, CHANNEL_4, 0x55, 0x66);
     midi.sendNoteOn({0x55, CHANNEL_4, CABLE_9}, 0x66);
     midi.sendNoteOff({0x55, CHANNEL_4, CABLE_9}, 0x66);
-    midi.sendCC({0x55, CHANNEL_4, CABLE_9}, 0x66);
-    midi.sendKP({0x55, CHANNEL_4, CABLE_9}, 0x66);
-    midi.sendPB({CHANNEL_4, CABLE_9}, 0x3355);
+    midi.sendControlChange({0x55, CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendKeyPressure({0x55, CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendPitchBend({CHANNEL_4, CABLE_9}, 0x3355);
     std::string expected = "Note On          Channel: 4\tData 1: 0x55\tData "
                            "2: 0x66\tCable: 1\r\n"
                            "Note On          Channel: 4\tData 1: 0x55\tData "
@@ -40,10 +40,10 @@ TEST(StreamDebugMIDI_Interface, send3B) {
 TEST(StreamDebugMIDI_Interface, send2B) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
-    midi.send(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66);
-    midi.sendPC({CHANNEL_4, CABLE_9}, 0x66);
-    midi.sendPC({0x66, CHANNEL_4, CABLE_9});
-    midi.sendCP({CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendChannelMessage(MIDIMessageType::PROGRAM_CHANGE, CHANNEL_4, 0x66);
+    midi.sendProgramChange({CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendProgramChange({0x66, CHANNEL_4, CABLE_9});
+    midi.sendChannelPressure({CHANNEL_4, CABLE_9}, 0x66);
     std::string expected =
         "Program Change   Channel: 4\tData 1: 0x66\tCable: 1\r\n"
         "Program Change   Channel: 4\tData 1: 0x66\tCable: 9\r\n"

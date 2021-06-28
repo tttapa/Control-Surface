@@ -124,7 +124,7 @@ class RelativeCCSender {
             long thisDelta = constrain(delta, -15, 15);
             uint8_t msgVal = mapRelativeCC(thisDelta);
             // send a Control Change MIDI event
-            Control_Surface.sendCC(address, msgVal);
+            Control_Surface.sendControlChange(address, msgVal);
             delta -= thisDelta;
         }
     }

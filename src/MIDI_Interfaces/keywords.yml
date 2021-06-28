@@ -13,6 +13,7 @@ keyword1:
  - SoftwareSerialDebugMIDI_Interface
  - HairlessMIDI_Interface
  - MIDI_Callbacks
+ - FineGrainedMIDI_Callbacks
  - SysExMessage
  - FortySevenEffectsMIDI_Interface
 
@@ -20,15 +21,28 @@ keyword2:
  - begin
  - update
  - send
+ - sendChannelMessage
  - sendNoteOn
  - sendNoteOff
- - sendKP
- - sendCC
- - sendPC
- - sendCP
- - sendPB
- - sendRealTime
+ - sendKeyPressure
+ - sendControlChange
+ - sendProgramChange
+ - sendChannelPressure
+ - sendPitchBend
+ - sendSysCommon
+ - sendMTCQuarterFrame
+ - sendSongPositionPointer
+ - sendSongSelect
+ - sendTuneRequest
  - sendSysEx
+ - sendRealTime
+ - sendTimingClock
+ - sendStart
+ - sendContinue
+ - sendStop
+ - sendActiveSensing
+ - sendSystemReset
+ - sendNow
  - getDefault
  - setAsDefault
  - setCallbacks
@@ -38,3 +52,21 @@ keyword2:
  - onChannelMessage
  - onSysExMessage
  - onRealTimeMessage
+ - onNoteOff
+ - onNoteOn
+ - onKeyPressure
+ - onControlChange
+ - onProgramChange
+ - onChannelPressure
+ - onPitchBend
+ - onSystemExclusive
+ - onTimeCodeQuarterFrame
+ - onSongPosition
+ - onSongSelect
+ - onTuneRequest
+ - onClock
+ - onStart
+ - onContinue
+ - onStop
+ - onActiveSensing
+ - onSystemReset
