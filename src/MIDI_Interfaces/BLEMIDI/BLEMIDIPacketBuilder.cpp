@@ -82,6 +82,26 @@ bool BLEMIDIPacketBuilder::addRealTime(uint8_t rt, uint16_t timestamp) {
     return true;
 }
 
+bool BLEMIDIPacketBuilder::addSysCommon(uint8_t num_data, uint8_t header,
+                                        uint8_t data1, uint8_t data2,
+                                        uint16_t timestamp) {
+    initBuffer(timestamp);
+
+    uint8_t timestampLSB = getTimestampLSB(timestamp);
+
+    if (!hasSpaceFor(2 + num_data))
+        return false; // Buffer full
+    buffer.push_back(timestampLSB);
+    buffer.push_back(header);
+    if (num_data >= 1)
+        buffer.push_back(data1);
+    if (num_data >= 2)
+        buffer.push_back(data2);
+    runningTimestamp = 0; // Re-send the timestamp next time
+
+    return true;
+}
+
 bool BLEMIDIPacketBuilder::addSysEx(const uint8_t *&data, size_t &length,
                                     uint16_t timestamp) {
     initBuffer(timestamp);

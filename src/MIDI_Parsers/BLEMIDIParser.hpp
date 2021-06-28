@@ -32,10 +32,15 @@ class BLEMIDIParser {
         // If the second byte is a data byte, this is a SysEx continuation
         // packet
         else if (isData(data[1])) {
+            this->timestamp = data[0] & 0x7F;
+            this->timestamp <<= 7;
             this->data += 1;
         }
         // Otherwise, the second byte is a timestamp, so skip it
         else {
+            this->timestamp = data[0] & 0x7F;
+            this->timestamp <<= 7;
+            this->timestamp |= data[1] & 0x7F;
             this->data += 2;
         }
     }
@@ -61,15 +66,22 @@ class BLEMIDIParser {
                     output = *data++;
                     return true;
                 }
+                // Otherwise it's a time stamp
+                else {
+                    timestamp = (timestamp & 0x3F80) | (*data++ & 0x7F);
+                }
             }
-            ++data;
         }
         return false;
     }
 
+    uint16_t getTimestamp() const { return timestamp; }
+
+  private:
     const uint8_t *data;
     const uint8_t *const end;
     bool prevWasTimestamp = true;
+    uint16_t timestamp = 0;
 
   private:
     /// Check if the given byte is a data byte (and not a header, timestamp or

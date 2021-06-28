@@ -238,6 +238,46 @@ TEST(BluetoothMIDIInterface, receiveSysExAndRealTime) {
     EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
 }
 
+static uint16_t timestamp(uint8_t msb, uint8_t lsb) {
+    return (uint16_t(msb) << 7) | lsb;
+}
+
+TEST(BluetoothMIDIInterface, receiveSysCommonRunningStatusChannelMessage) {
+    BluetoothMIDI_Interface midi;
+    midi.begin();
+
+    uint8_t data[] = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+        0x56,        // d1
+        0x78,        // d2
+        0x80 | 0x03, //          timestamp lsb
+        0xF2,        // syscom
+        0x41,        // d1
+        0x74,        // d2
+        0x80 | 0x04, //          timestamp lsb
+        0x11,        // d1
+        0x22,        // d2
+    };
+
+    midi.parse(data, sizeof(data));
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), ChannelMessage(0x92, 0x12, 0x34));
+    EXPECT_EQ(midi.getTimestamp(), timestamp(0x01, 0x02));
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), ChannelMessage(0x92, 0x56, 0x78));
+    EXPECT_EQ(midi.getTimestamp(), timestamp(0x01, 0x02));
+    EXPECT_EQ(midi.read(), MIDIReadEvent::SYSCOMMON_MESSAGE);
+    EXPECT_EQ(midi.getSysCommonMessage(), SysCommonMessage(0xF2, 0x41, 0x74));
+    EXPECT_EQ(midi.getTimestamp(), timestamp(0x01, 0x03));
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), ChannelMessage(0x92, 0x11, 0x22));
+    EXPECT_EQ(midi.getTimestamp(), timestamp(0x01, 0x04));
+}
+
 TEST(BluetoothMIDIInterface, emptyPacket) {
     MockMIDI_Callbacks cb;
 
@@ -275,10 +315,6 @@ TEST(BluetoothMIDIInterface, invalidPacket) {
 }
 
 using namespace ::testing;
-
-static uint16_t timestamp(uint8_t msb, uint8_t lsb) {
-    return (uint16_t(msb) << 7) | lsb;
-}
 
 TEST(BluetoothMIDIInterface, sendOneNoteMessage) {
     BluetoothMIDI_Interface midi;
@@ -429,6 +465,44 @@ TEST(BluetoothMIDIInterface, sendRealTimeMessageBufferFull) {
     midi.sendRealTime(0xF8);
     midi.sendRealTime(0xF9);
     midi.sendRealTime(0xFA);
+    midi.flush();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
+TEST(BluetoothMIDIInterface, sendSysCommon) {
+    BluetoothMIDI_Interface midi;
+    midi.begin();
+
+    std::vector<uint8_t> expected = {0x81, 0x82, 0xF2, 0x12 ,0x34};
+    EXPECT_CALL(ArduinoMock::getInstance(), millis())
+        .Times(1) // For time stamp
+        .WillOnce(Return(timestamp(0x01, 0x02)));
+    EXPECT_CALL(midi, notifyMIDIBLE(expected));
+
+    midi.sendSysCommon(MIDIMessageType::SONG_POSITION_POINTER, 0x12, 0x34);
+    midi.flush();
+
+    Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
+TEST(BluetoothMIDIInterface, sendSysCommonMessageBufferFull) {
+    BluetoothMIDI_Interface midi;
+    midi.begin();
+    midi.forceMinMTU(5 + 3);
+
+    std::vector<uint8_t> expected1 = {0x81, 0x82, 0xF2, 0x12 ,0x34};
+    std::vector<uint8_t> expected2 = {0x81, 0x83, 0xF1, 0x56};
+    EXPECT_CALL(ArduinoMock::getInstance(), millis())
+        .Times(2) // For time stamp
+        .WillOnce(Return(timestamp(0x01, 0x02)))
+        .WillOnce(Return(timestamp(0x01, 0x03)));
+    testing::Sequence s;
+    EXPECT_CALL(midi, notifyMIDIBLE(expected1)).InSequence(s);
+    EXPECT_CALL(midi, notifyMIDIBLE(expected2)).InSequence(s);
+
+    midi.sendSysCommon(MIDIMessageType::SONG_POSITION_POINTER, 0x12, 0x34);
+    midi.sendSysCommon(MIDIMessageType::MTC_QUARTER_FRAME, 0x56);
     midi.flush();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -634,7 +708,6 @@ TEST(BluetoothMIDIInterface, sendLongSysExFlushDestructor) {
     // Third packet is sent when the MIDI interface is destroyed
     EXPECT_CALL(*midi, notifyMIDIBLE(expected[2]));
     midi.reset();
-    Mock::VerifyAndClear(&*midi);
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }

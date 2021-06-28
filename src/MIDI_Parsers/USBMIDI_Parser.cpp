@@ -152,16 +152,12 @@ MIDIReadEvent USBMIDI_Parser::feed(MIDIUSBPacket_t packet) {
     switch (CIN) {
         case M::MISC_FUNCTION_CODES: break; // LCOV_EXCL_LINE
         case M::CABLE_EVENTS: break;        // LCOV_EXCL_LINE
-
-        case M::SYSTEM_COMMON_2B: // fallthrough
+        case M::SYSTEM_COMMON_2B:           // fallthrough
         case M::SYSTEM_COMMON_3B: return handleSysCommon(packet, cable);
-
         case M::SYSEX_START_CONT: return handleSysExStartCont(packet, cable);
-
         case M::SYSEX_END_1B: return handleSysExEnd<1>(packet, cable);
         case M::SYSEX_END_2B: return handleSysExEnd<2>(packet, cable);
         case M::SYSEX_END_3B: return handleSysExEnd<3>(packet, cable);
-
         case M::NOTE_OFF:         // fallthrough
         case M::NOTE_ON:          // fallthrough
         case M::KEY_PRESSURE:     // fallthrough
@@ -169,9 +165,7 @@ MIDIReadEvent USBMIDI_Parser::feed(MIDIUSBPacket_t packet) {
         case M::PROGRAM_CHANGE:   // fallthrough
         case M::CHANNEL_PRESSURE: // fallthrough
         case M::PITCH_BEND: return handleChannelMessage(packet, cable);
-
         case M::SINGLE_BYTE: return handleSingleByte(packet, cable);
-
         default: break; // LCOV_EXCL_LINE
     }
 

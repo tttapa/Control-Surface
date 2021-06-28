@@ -1,14 +1,14 @@
-#if defined(ESP32) || !defined(ARDUINO) 
+#if defined(ESP32) || !defined(ARDUINO)
 
 #include "MIDIMessageQueue.hpp"
 
 BEGIN_CS_NAMESPACE
 
 MIDIMessageQueue::MIDIMessageQueueElement::MIDIMessageQueueElement(
-    SysExMessage message)
+    SysExMessage message, uint16_t timestamp)
     : eventType(message.isLastChunk() ? MIDIReadEvent::SYSEX_MESSAGE
                                       : MIDIReadEvent::SYSEX_CHUNK),
-      message(message) {
+      message(message), timestamp(timestamp) {
     // SysEx data is copied, not stored by pointer, so allocate new
     // storage for the SysEx data, and copy it if allocation was
     // successful.
@@ -35,6 +35,7 @@ MIDIMessageQueue::MIDIMessageQueueElement::operator=(
     MIDIMessageQueue::MIDIMessageQueueElement &&that) {
     std::swap(this->eventType, that.eventType);
     std::swap(this->message, that.message);
+    std::swap(this->timestamp, that.timestamp);
     return *this;
 }
 
@@ -42,29 +43,31 @@ void MIDIMessageQueue::MIDIMessageQueueElement::release() {
     if (eventType == MIDIReadEvent::SYSEX_CHUNK ||
         eventType == MIDIReadEvent::SYSEX_MESSAGE) {
         delete[] message.sysexmessage.data;
+        message.sysexmessage.data = nullptr;
+        message.sysexmessage.length = 0;
         eventType = MIDIReadEvent::NO_MESSAGE;
         message.realtimemessage = 0x00;
     }
 }
 
-bool MIDIMessageQueue::push(ChannelMessage message) {
-    return push(MIDIMessageQueueElement(message));
+bool MIDIMessageQueue::push(ChannelMessage message, uint16_t timestamp) {
+    return push(MIDIMessageQueueElement(message, timestamp));
 }
 
-bool MIDIMessageQueue::push(SysCommonMessage message) {
-    return push(MIDIMessageQueueElement(message));
+bool MIDIMessageQueue::push(SysCommonMessage message, uint16_t timestamp) {
+    return push(MIDIMessageQueueElement(message, timestamp));
 }
 
-bool MIDIMessageQueue::push(RealTimeMessage message) {
-    return push(MIDIMessageQueueElement(message));
+bool MIDIMessageQueue::push(RealTimeMessage message, uint16_t timestamp) {
+    return push(MIDIMessageQueueElement(message, timestamp));
 }
 
-bool MIDIMessageQueue::push(SysExMessage message) {
+bool MIDIMessageQueue::push(SysExMessage message, uint16_t timestamp) {
     if (storage.size() == size.load(std::memory_order_acquire))
         return false;
 
     // Allocate storage for the actual SysEx data and copy the data
-    MIDIMessageQueueElement el(message);
+    MIDIMessageQueueElement el(message, timestamp);
     // Check if allocation failed
     if (el.eventType == MIDIReadEvent::NO_MESSAGE)
         return true; // TODO: should we try again later?

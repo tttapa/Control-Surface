@@ -25,15 +25,19 @@ class MIDIMessageQueue {
             Message(RealTimeMessage msg) : realtimemessage(msg) {}
             Message(SysExMessage msg) : sysexmessage(msg) {}
         } message;
+        uint16_t timestamp = 0xFFFF;
 
         MIDIMessageQueueElement() = default;
-        MIDIMessageQueueElement(ChannelMessage message)
-            : eventType(MIDIReadEvent::CHANNEL_MESSAGE), message(message) {}
-        MIDIMessageQueueElement(SysCommonMessage message)
-            : eventType(MIDIReadEvent::SYSCOMMON_MESSAGE), message(message) {}
-        MIDIMessageQueueElement(RealTimeMessage message)
-            : eventType(MIDIReadEvent::REALTIME_MESSAGE), message(message) {}
-        MIDIMessageQueueElement(SysExMessage message);
+        MIDIMessageQueueElement(ChannelMessage message, uint16_t timestamp)
+            : eventType(MIDIReadEvent::CHANNEL_MESSAGE), message(message),
+              timestamp(timestamp) {}
+        MIDIMessageQueueElement(SysCommonMessage message, uint16_t timestamp)
+            : eventType(MIDIReadEvent::SYSCOMMON_MESSAGE), message(message),
+              timestamp(timestamp) {}
+        MIDIMessageQueueElement(RealTimeMessage message, uint16_t timestamp)
+            : eventType(MIDIReadEvent::REALTIME_MESSAGE), message(message),
+              timestamp(timestamp) {}
+        MIDIMessageQueueElement(SysExMessage message, uint16_t timestamp);
 
         /// No copy constructor.
         MIDIMessageQueueElement(const MIDIMessageQueueElement &) = delete;
@@ -55,10 +59,10 @@ class MIDIMessageQueue {
     using iter_t = storage_t::iterator;
 
   public:
-    bool push(ChannelMessage message);
-    bool push(SysCommonMessage message);
-    bool push(RealTimeMessage message);
-    bool push(SysExMessage message);
+    bool push(ChannelMessage message, uint16_t timestamp);
+    bool push(SysCommonMessage message, uint16_t timestamp);
+    bool push(RealTimeMessage message, uint16_t timestamp);
+    bool push(SysExMessage message, uint16_t timestamp);
 
     bool pop(MIDIMessageQueueElement &message);
 

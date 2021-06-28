@@ -75,6 +75,9 @@ class BluetoothMIDI_Interface : public MIDI_Interface {
     RealTimeMessage getRealTimeMessage() const;
     /// Return the received system exclusive message.
     SysExMessage getSysExMessage() const;
+    /// Get the BLE-MIDI timestamp of the latest MIDI message.
+    /// @note Invalid for SysEx chunks (except the last chunk of a message).
+    uint16_t getTimestamp() const;
 
   protected:
     // MIDI send implementations

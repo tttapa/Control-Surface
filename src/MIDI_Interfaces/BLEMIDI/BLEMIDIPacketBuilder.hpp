@@ -140,6 +140,29 @@ class BLEMIDIPacketBuilder {
      */
     bool addRealTime(uint8_t rt, uint16_t timestamp);
 
+    /** 
+     * @brief   Try adding a MIDI system common message to the packet.
+     * 
+     * @param   num_data 
+     *          The number of data bytes (0, 1 or 2).
+     * @param   header
+     *          System common status byte.
+     * @param   data1 
+     *          MIDI data byte 1.
+     * @param   data2 
+     *          MIDI data byte 2.
+     * @param   timestamp 
+     *          13-bit BLE-MIDI timestamp.
+     * 
+     * @retval  true
+     *          Successfully added message to the packet.
+     * @retval  false 
+     *          Buffer is too full, send the current packet, reset the packet
+     *          builder, and try again.
+     */
+    bool addSysCommon(uint8_t num_data, uint8_t header, uint8_t data1,
+                      uint8_t data2, uint16_t timestamp);
+
     /**
      * @brief   Try adding (part of) a SysEx message to the packet.
      * 

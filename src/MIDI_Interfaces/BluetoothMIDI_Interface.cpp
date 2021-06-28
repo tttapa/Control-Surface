@@ -139,6 +139,22 @@ void BluetoothMIDI_Interface::sendRealTimeImpl(RealTimeMessage msg) {
     cv.notify_one();
 }
 
+void BluetoothMIDI_Interface::sendSysCommonImpl(SysCommonMessage msg) {
+    // For comments, see
+    //   sendChannelMessageImpl3Bytes() above
+    lock_t lock(mtx);
+    uint16_t timestamp = millis();
+    uint8_t num_data = msg.getNumberOfDataBytes();
+    if (!packetbuilder.addSysCommon(num_data, msg.header, msg.data1, msg.data2,
+                                    timestamp)) {
+        flushImpl(lock);
+        packetbuilder.addSysCommon(num_data, msg.header, msg.data1, msg.data2,
+                                   timestamp);
+    }
+    lock.unlock();
+    cv.notify_one();
+}
+
 void BluetoothMIDI_Interface::sendSysExImpl(SysExMessage msg) {
     lock_t lock(mtx);
 
@@ -169,10 +185,6 @@ void BluetoothMIDI_Interface::sendSysExImpl(SysExMessage msg) {
     cv.notify_one();
 }
 
-void BluetoothMIDI_Interface::sendSysCommonImpl(SysCommonMessage) {
-    // TODO
-}
-
 // -------------------------------------------------------------------------- //
 
 void BluetoothMIDI_Interface::parse(const uint8_t *const data,
@@ -183,20 +195,24 @@ void BluetoothMIDI_Interface::parse(const uint8_t *const data,
     while (event != MIDIReadEvent::NO_MESSAGE) {
         switch (event) {
             case MIDIReadEvent::CHANNEL_MESSAGE:
-                while (!queue.push(parser.getChannelMessage()))
+                while (!queue.push(parser.getChannelMessage(),
+                                   mididata.getTimestamp()))
                     std::this_thread::yield();
                 break;
             case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
             case MIDIReadEvent::SYSEX_MESSAGE:
-                while (!queue.push(parser.getSysExMessage()))
+                while (!queue.push(parser.getSysExMessage(),
+                                   mididata.getTimestamp()))
                     std::this_thread::yield();
                 break;
             case MIDIReadEvent::REALTIME_MESSAGE:
-                while (!queue.push(parser.getRealTimeMessage()))
+                while (!queue.push(parser.getRealTimeMessage(),
+                                   mididata.getTimestamp()))
                     std::this_thread::yield();
                 break;
             case MIDIReadEvent::SYSCOMMON_MESSAGE:
-                while (!queue.push(parser.getSysCommonMessage()))
+                while (!queue.push(parser.getSysCommonMessage(),
+                                   mididata.getTimestamp()))
                     std::this_thread::yield();
                 break;
             case MIDIReadEvent::NO_MESSAGE: break; // LCOV_EXCL_LINE
@@ -238,6 +254,10 @@ SysExMessage BluetoothMIDI_Interface::getSysExMessage() const {
                     evt == MIDIReadEvent::SYSEX_CHUNK;
     return hasSysEx ? incomingMessage.message.sysexmessage
                     : SysExMessage(nullptr, 0);
+}
+
+uint16_t BluetoothMIDI_Interface::getTimestamp() const {
+    return incomingMessage.timestamp;
 }
 
 // -------------------------------------------------------------------------- //

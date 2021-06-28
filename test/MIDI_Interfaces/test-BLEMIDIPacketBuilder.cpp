@@ -145,6 +145,81 @@ TEST(BLEMIDIPacketBuilder, realTimeBetweenRunningStatusDifferentTimestamp) {
     EXPECT_EQ(b.getPacket(), expected);
 }
 
+TEST(BLEMIDIPacketBuilder, sysCommon1BetweenRunningStatusDifferentTimestamp) {
+    BLEMIDIPacketBuilder b;
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+    EXPECT_TRUE(b.add3B(0x92, 0x56, 0x78, timestamp(0x01, 0x02)));
+    EXPECT_TRUE(b.addSysCommon(0, 0xF6, 0x00, 0x00, timestamp(0x01, 0x03)));
+    EXPECT_TRUE(b.add3B(0x92, 0x11, 0x22, timestamp(0x01, 0x04)));
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+        0x56,        // d1
+        0x78,        // d2
+        0x80 | 0x03, //          timestamp lsb
+        0xF6,        // syscom
+        0x80 | 0x04, //          timestamp lsb
+        0x11,        // d1
+        0x22,        // d2
+    };
+    EXPECT_EQ(b.getPacket(), expected);
+}
+
+TEST(BLEMIDIPacketBuilder, sysCommon2BetweenRunningStatusDifferentTimestamp) {
+    BLEMIDIPacketBuilder b;
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+    EXPECT_TRUE(b.add3B(0x92, 0x56, 0x78, timestamp(0x01, 0x02)));
+    EXPECT_TRUE(b.addSysCommon(1, 0xF1, 0x31, 0x00, timestamp(0x01, 0x03)));
+    EXPECT_TRUE(b.add3B(0x92, 0x11, 0x22, timestamp(0x01, 0x04)));
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+        0x56,        // d1
+        0x78,        // d2
+        0x80 | 0x03, //          timestamp lsb
+        0xF1,        // syscom
+        0x31,        // d1
+        0x80 | 0x04, //          timestamp lsb
+        0x11,        // d1
+        0x22,        // d2
+    };
+    EXPECT_EQ(b.getPacket(), expected);
+}
+
+TEST(BLEMIDIPacketBuilder, sysCommon3BetweenRunningStatusDifferentTimestamp) {
+    BLEMIDIPacketBuilder b;
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+    EXPECT_TRUE(b.add3B(0x92, 0x56, 0x78, timestamp(0x01, 0x02)));
+    EXPECT_TRUE(b.addSysCommon(2, 0xF2, 0x41, 0x74, timestamp(0x01, 0x03)));
+    EXPECT_TRUE(b.add3B(0x92, 0x11, 0x22, timestamp(0x01, 0x04)));
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+        0x56,        // d1
+        0x78,        // d2
+        0x80 | 0x03, //          timestamp lsb
+        0xF2,        // syscom
+        0x41,        // d1
+        0x74,        // d2
+        0x80 | 0x04, //          timestamp lsb
+        0x11,        // d1
+        0x22,        // d2
+    };
+    EXPECT_EQ(b.getPacket(), expected);
+}
+
 TEST(BLEMIDIPacketBuilder, noteMessageBufferFull) {
     BLEMIDIPacketBuilder b;
     b.setCapacity(5 + 3);
@@ -285,6 +360,62 @@ TEST(BLEMIDIPacketBuilder, realTimeMessageBufferFull2) {
 
     EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
     EXPECT_FALSE(b.addRealTime(0xF8, timestamp(0x01, 0x03)));
+
+    EXPECT_EQ(b.getPacket(), expected);
+}
+
+TEST(BLEMIDIPacketBuilder, sysCommon1MessageBufferAlmostFull) {
+    BLEMIDIPacketBuilder b;
+    b.setCapacity(7); // Two bytes left after note
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+        0x80 | 0x03, //          timestamp lsb
+        0xF6,        // syscom
+    };
+
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+    EXPECT_TRUE(b.addSysCommon(0, 0xF6, 0x00, 0x00, timestamp(0x01, 0x03)));
+
+    EXPECT_EQ(b.getPacket(), expected);
+}
+
+TEST(BLEMIDIPacketBuilder, sysCommon1MessageBufferFull1) {
+    BLEMIDIPacketBuilder b;
+    b.setCapacity(6); // One byte left after note
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+    };
+
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+    EXPECT_FALSE(b.addSysCommon(0, 0xF6, 0x00, 0x00, timestamp(0x01, 0x03)));
+
+    EXPECT_EQ(b.getPacket(), expected);
+}
+
+TEST(BLEMIDIPacketBuilder, sysCommon1MessageBufferFull2) {
+    BLEMIDIPacketBuilder b;
+    b.setCapacity(5); // No space left after note
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0x92,        // status
+        0x12,        // d1
+        0x34,        // d2
+    };
+
+    EXPECT_TRUE(b.add3B(0x92, 0x12, 0x34, timestamp(0x01, 0x02)));
+    EXPECT_FALSE(b.addSysCommon(0, 0xF6, 0x00, 0x00, timestamp(0x01, 0x03)));
 
     EXPECT_EQ(b.getPacket(), expected);
 }
