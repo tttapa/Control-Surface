@@ -240,6 +240,11 @@ tests and generating documentation, a style guide, etc.
 
 ### 2.0-alpha
 
+- ([bf8fb66](https://github.com/tttapa/Control-Surface/commit/bf8fb661fa97fb6420584362bfcee7ce67939f59))  
+   The abbreviated MIDI send functions (such as `sendCC()`) have been deprecated
+   in favor of the full names (e.g. `sendControlChange()`). See the 
+   [MIDI_Sender documentation](https://tttapa.github.io/Control-Surface-doc/Doxygen/d6/d72/classMIDI__Sender.html)
+   for a full overview.
 - ([cf32e7e](https://github.com/tttapa/Control-Surface/commit/cf32e7e72d81269e97f18ba51c42ba10715d1852))  
    `Control_Surface.setMIDIInputCallbacks()` now takes four arguments instead of
    three, because a System Common callback was added.
