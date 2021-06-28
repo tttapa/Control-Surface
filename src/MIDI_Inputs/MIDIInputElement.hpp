@@ -16,11 +16,6 @@ BEGIN_CS_NAMESPACE
  * @brief   A class for objects that listen for incoming MIDI events.
  * 
  * They can either update some kind of display, or they can just save the state.
- * 
- * @todo    Get rid of thread-safe updatable. All MIDI messages have been 
- *          synchronized, so they can only arrive from the main thread.
- *          Keeping thread-safe data structures wastes resources and is just
- *          more complicated than necessary.
  */
 template <MIDIMessageType Type>
 class MIDIInputElement : public AH::UpdatableCRTP<MIDIInputElement<Type>> {

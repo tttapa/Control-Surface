@@ -14,7 +14,6 @@ BEGIN_CS_NAMESPACE
 enum class Wrap : bool {
     Clamp = false, ///< When the maximum (minimum) setting is reached,
                    ///< clamp to the maximum (minimum) setting.
-                   ///< @todo  Rename to `Clamp`?
     Wrap = true,   ///< When the maximum (minimum) setting is reached,
                    ///< wrap around to the minimum (maximum) setting.
     NoWrap = false,
