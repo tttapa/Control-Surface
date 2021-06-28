@@ -69,7 +69,9 @@ void StreamDebugMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
                << F("\tData 1: 0x") << hex << msg.getData1() << dec;
     if (msg.getMessageType() == msg.PITCH_BEND)
         stream << " (" << msg.getData14bit() << ')';
-    stream << F("\tCable: ") << msg.getCable().getOneBased() << endl;
+    if (msg.getCable() != CABLE_1)
+        stream << F("\tCable: ") << msg.getCable().getOneBased();
+    stream << "\r\n";
 }
 
 void StreamDebugMIDI_Interface::sendSysExImpl(SysExMessage msg) {
@@ -77,9 +79,12 @@ void StreamDebugMIDI_Interface::sendSysExImpl(SysExMessage msg) {
     auto &stream = getStream();
     if (prefix != nullptr)
         stream << prefix << ' ';
-    stream << F("System Exclusive [") << msg.length << "] "
-           << AH::HexDump(msg.data, msg.length) << F("\tCable: ")
-           << msg.getCable().getOneBased() << "\r\n";
+    stream << F("System Exclusive [") << msg.length
+           << (msg.isLastChunk() ? "]\t" : "+]\t")
+           << AH::HexDump(msg.data, msg.length);
+    if (msg.getCable() != CABLE_1)
+        stream << F("\tCable: ") << msg.getCable().getOneBased();
+    stream << "\r\n";
 }
 
 void StreamDebugMIDI_Interface::sendSysCommonImpl(SysCommonMessage msg) {
@@ -93,7 +98,11 @@ void StreamDebugMIDI_Interface::sendSysCommonImpl(SysCommonMessage msg) {
     if (msg.getNumberOfDataBytes() >= 2)
         stream << F("\tData 2: 0x") << msg.getData2() << dec << " ("
                << msg.getData14bit() << ')';
-    stream << dec << F("\tCable: ") << msg.getCable().getOneBased() << "\r\n";
+    else
+        stream << dec;
+    if (msg.getCable() != CABLE_1)
+        stream << F("\tCable: ") << msg.getCable().getOneBased();
+    stream << "\r\n";
 }
 
 void StreamDebugMIDI_Interface::sendRealTimeImpl(RealTimeMessage msg) {
@@ -101,8 +110,10 @@ void StreamDebugMIDI_Interface::sendRealTimeImpl(RealTimeMessage msg) {
     auto &stream = getStream();
     if (prefix != nullptr)
         stream << prefix << ' ';
-    stream << F("Real-Time        ") << msg.getMessageType() << F("\tCable: ")
-           << msg.getCable().getOneBased() << endl;
+    stream << F("Real-Time        ") << msg.getMessageType();
+    if (msg.getCable() != CABLE_1)
+        stream << F("\tCable: ") << msg.getCable().getOneBased();
+    stream << "\r\n";
 }
 
 END_CS_NAMESPACE
