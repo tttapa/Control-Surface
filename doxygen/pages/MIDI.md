@@ -357,8 +357,8 @@ is attached to the MIDI interface in the `setup` function using
 After the callback has been attached, every time you call `midi.update()` in the 
 `loop`, the MIDI interface will check if any new messages have arrived, and if
 that's the case, it will call the corresponding callback function. For example,
-whenever a MIDI channel message (such as Note On/Off, Control Change, etc.)
-arrives, the `onChannelMessage()` function of the callback is called.
+whenever a MIDI Note On message arrives, the `onNoteOn()` function of the
+callback object is called.
 
 The example above is similar to the @ref MIDI-Input-Fine-Grained.ino example. 
 You can find the full list of available callbacks and their arguments in the 
