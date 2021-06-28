@@ -70,6 +70,9 @@ using CCLED = NoteCCKPLED<MIDIMessageType::CONTROL_CHANGE>;
 /// @ingroup    midi-input-elements-leds
 using KPLED = NoteCCKPLED<MIDIMessageType::KEY_PRESSURE>;
 
+using NoteValueLED [[deprecated("Use NoteLED instead")]] = NoteLED;
+using CCValueLED [[deprecated("Use CCLED instead")]] = CCLED;
+
 // -------------------------------------------------------------------------- //
 
 namespace Bankable {
@@ -103,7 +106,7 @@ class NoteCCKPLED : public NoteCCKPValue<Type, BankSize> {
   protected:
     void handleUpdate(typename Matcher::Result match) override {
         bool newdirty = Parent::handleUpdateImpl(match);
-        if (newdirty) 
+        if (newdirty)
             display();
         this->dirty |= newdirty;
     }
@@ -134,9 +137,9 @@ class NoteCCKPLED : public NoteCCKPValue<Type, BankSize> {
     void setThreshold(uint8_t threshold) { this->threshold = threshold; }
 
   protected:
-    void onBankSettingChange() override { 
+    void onBankSettingChange() override {
         Parent::onBankSettingChange();
-        display(); 
+        display();
     }
 
   private:
@@ -164,6 +167,11 @@ using CCLED = NoteCCKPLED<MIDIMessageType::CONTROL_CHANGE, BankSize>;
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize>
 using KPLED = NoteCCKPLED<MIDIMessageType::KEY_PRESSURE, BankSize>;
+
+template <uint8_t BankSize>
+using NoteValueLED [[deprecated("Use NoteLED instead")]] = NoteLED<BankSize>;
+template <uint8_t BankSize>
+using CCValueLED [[deprecated("Use CCLED instead")]] = CCLED<BankSize>;
 
 } // namespace Bankable
 
