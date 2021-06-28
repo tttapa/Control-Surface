@@ -558,3 +558,4 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
 ### More examples {#midi_md-routing-more-examples}
 
 - @ref MIDI_Pipes-Routing.ino
+- @ref MIDI-Monitor.ino
