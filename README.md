@@ -11,12 +11,25 @@ for any MIDI-related project.
 Control surfaces with both MIDI outputs (potentiometers, buttons, etc.) and
 MIDI inputs (LEDs, displays, etc.) are supported.
 
+> Table of contents  
+> <span class="mono">¶</span>&emsp;[Overview](#overview)  
+> <span class="mono">¶</span>&emsp;[Example usage](#example-usage)  
+> <span class="mono">¶</span>&emsp;[Getting started](#getting-started)  
+> <span class="mono">¶</span>&emsp;[Documentation](#documentation)  
+> <span class="mono">¶</span>&emsp;[Work in progress](#work-in-progress)  
+> <span class="mono">¶</span>&emsp;[Supported boards](#supported-boards)  
+> <span class="mono">¶</span>&emsp;[Information for developers](#information-for-developers)  
+> <span class="mono">¶</span>&emsp;[Change log and updating](#change-log-and-updating)  
+
+<a name="overview"></a>
+
 ## Overview
 
 This library turns your Arduino-compatible board into a MIDI control surface.  
-
-Just connect up some push buttons, potentiometers, LEDs ... and declare them in
+Just connect some push buttons, potentiometers, LEDs ... and declare them in
 your code.
+
+The following sections give a brief overview of the features of the library.
 
 ### MIDI Interfaces
 
@@ -97,6 +110,8 @@ display elements, using some minimal, high level code. All low level stuff is
 completely **reusable** (e.g. all MIDI operations, debouncing switches, 
 filtering analog inputs, and so on).
 
+<a name="example-usage"></a>
+
 ## Example usage
 
 A complete sketch for a MIDI controller with a potentiometer that sends out MIDI
@@ -163,7 +178,9 @@ void setup() { Control_Surface.begin(); }
 void loop() { Control_Surface.loop(); }
 ```
 
-## Getting Started
+<a name="getting-started"></a>
+
+## Getting started
 
 See the [**Getting Started**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d5/d7d/md_pages_Getting-Started.html)
 page to get started using the library.  
@@ -172,6 +189,8 @@ It'll also point you to the [**Installation Instructions**](https://tttapa.githu
 The [**MIDI tutorial**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/df7/midi-tutorial.html)
 might be useful if you want to use Control Surface as a regular MIDI library,
 for sending and receiving MIDI messages.
+
+<a name="documentation"></a>
 
 ## Documentation
 
@@ -191,12 +210,16 @@ You can find an answer to some frequently asked questions on the
 [**FAQ**](https://tttapa.github.io/Control-Surface-doc/Doxygen/da/dc1/FAQ.html)
 page.
 
+<a name="work-in-progress"></a>
+
 ## Work in progress
 
 - Adding support for motorized faders
-- Adding more tests (currently at over 525 unit tests)
+- Adding more tests (currently at over 560 unit tests)
 - Adding more examples and adding comments to existing examples
 - Finishing the documentation
+
+<a name="supported-boards"></a>
 
 ## Supported boards
 
@@ -228,6 +251,8 @@ the [MIDIUSB library](https://github.com/arduino-libraries/MIDIUSB) or if it's
 a Teensy, MIDI over USB should be supported.  
 MIDI over BLE is currently only supported on ESP32.
 
+<a name="information-for-developers"></a>
+
 ## Information for developers
 
 Information for people that would like to help improve the Control Surface 
@@ -236,9 +261,11 @@ library can be found here:
 It covers installation instructions for developers, instructions for running the
 tests and generating documentation, a style guide, etc.
 
-## Recent Breaking Changes
+<a name="change-log-and-updating"></a>
 
-### 2.0-alpha
+## Change log and updating
+
+### 2.x
 
 - ([bf8fb66](https://github.com/tttapa/Control-Surface/commit/bf8fb661fa97fb6420584362bfcee7ce67939f59))  
    The abbreviated MIDI send functions (such as `sendCC()`) have been deprecated
