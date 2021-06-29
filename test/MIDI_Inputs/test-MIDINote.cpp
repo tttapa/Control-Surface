@@ -375,6 +375,304 @@ TEST(NoteRange, bankableNotInRange) {
     bank.select(0);
 }
 
+TEST(NoteRange, bankableInRangeOffset) {
+    Bank<2> bank(4, 0, -1);
+    Bankable::NoteRange<2, 3> mn = {bank, {0x10 + 4, CHANNEL_5}};
+    mn.begin();
+
+    EXPECT_TRUE(mn.getDirty());
+    mn.clearDirty();
+    EXPECT_FALSE(mn.getDirty());
+
+    EXPECT_EQ(mn.getValue(0, 0), 0x00);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x00);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x00);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+
+    // First bank, first address
+    ChannelMessage midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10,
+        0x20,
+    };
+    EXPECT_TRUE(mn.updateWith(midimsg1));
+    EXPECT_EQ(mn.getValue(0), 0x20);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    EXPECT_EQ(mn.getValue(0, 0), 0x20);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x00);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x00);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+    EXPECT_TRUE(mn.getDirty());
+    mn.clearDirty();
+    EXPECT_FALSE(mn.getDirty());
+
+    // First bank, third address
+    ChannelMessage midimsg2 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 + 2,
+        0x21,
+    };
+    EXPECT_TRUE(mn.updateWith(midimsg2));
+    EXPECT_EQ(mn.getValue(0), 0x20);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x21);
+    EXPECT_EQ(mn.getValue(0, 0), 0x20);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x21);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x00);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+    EXPECT_TRUE(mn.getDirty());
+    mn.clearDirty();
+    EXPECT_FALSE(mn.getDirty());
+
+    // Second bank, second address
+    ChannelMessage midimsg3 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 + 4 + 1,
+        0x22,
+    };
+    EXPECT_TRUE(mn.updateWith(midimsg3));
+    EXPECT_EQ(mn.getValue(0), 0x20);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x21);
+    EXPECT_EQ(mn.getValue(0, 0), 0x20);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x21);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x22);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+    EXPECT_FALSE(mn.getDirty());
+
+    bank.select(1);
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x22);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    EXPECT_EQ(mn.getValue(0, 0), 0x20);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x21);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x22);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+    EXPECT_TRUE(mn.getDirty());
+    mn.clearDirty();
+    EXPECT_FALSE(mn.getDirty());
+
+    // First bank, first address
+    ChannelMessage midimsg4 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10,
+        0x23,
+    };
+    EXPECT_TRUE(mn.updateWith(midimsg4));
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x22);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    EXPECT_EQ(mn.getValue(0, 0), 0x23);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x21);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x22);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+    EXPECT_FALSE(mn.getDirty());
+
+    bank.select(0);
+    EXPECT_EQ(mn.getValue(0), 0x23);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x21);
+    EXPECT_EQ(mn.getValue(0, 0), 0x23);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x21);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x22);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+    EXPECT_TRUE(mn.getDirty());
+    mn.clearDirty();
+    EXPECT_FALSE(mn.getDirty());
+
+    bank.select(1);
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x22);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    EXPECT_TRUE(mn.getDirty());
+}
+
+TEST(NoteRange, bankableNotInRangeOffset) {
+    Bank<2> bank(4, 0, -1);
+    Bankable::NoteRange<2, 3> mn = {bank, {0x10 + 4, CHANNEL_5}};
+    mn.begin();
+
+    EXPECT_TRUE(mn.getDirty());
+    mn.clearDirty();
+    EXPECT_FALSE(mn.getDirty());
+
+    // Before first bank
+    ChannelMessage midimsg1 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 - 1,
+        0x20,
+    };
+    EXPECT_FALSE(mn.updateWith(midimsg1));
+    EXPECT_FALSE(mn.getDirty());
+
+    EXPECT_EQ(mn.getValue(0, 0), 0x00);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x00);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x00);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(1);
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(0);
+
+    // First bank, fourth address
+    ChannelMessage midimsg2 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 + 3,
+        0x20,
+    };
+    mn.clearDirty();
+    EXPECT_FALSE(mn.updateWith(midimsg2));
+    EXPECT_FALSE(mn.getDirty());
+
+    EXPECT_EQ(mn.getValue(0, 0), 0x00);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x00);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x00);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(1);
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(0);
+
+    // Second bank, fourth address
+    ChannelMessage midimsg3 = {MIDIMessageType::NOTE_ON, CHANNEL_5,
+                                      0x10 + 4 + 3, 0x20};
+    mn.clearDirty();
+    EXPECT_FALSE(mn.updateWith(midimsg3));
+    EXPECT_FALSE(mn.getDirty());
+
+    EXPECT_EQ(mn.getValue(0, 0), 0x00);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x00);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x00);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(1);
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(0);
+
+    // Before first bank, first address
+    ChannelMessage midimsg4 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 - 4,
+        0x20,
+    };
+    mn.clearDirty();
+    EXPECT_FALSE(mn.updateWith(midimsg4));
+    EXPECT_FALSE(mn.getDirty());
+
+    EXPECT_EQ(mn.getValue(0, 0), 0x00);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x00);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x00);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(1);
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(0);
+
+    // After last bank, first address
+    ChannelMessage midimsg5 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5,
+        0x10 + 8,
+        0x20,
+    };
+    mn.clearDirty();
+    EXPECT_FALSE(mn.updateWith(midimsg5));
+    EXPECT_FALSE(mn.getDirty());
+
+    EXPECT_EQ(mn.getValue(0, 0), 0x00);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x00);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x00);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(1);
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(0);
+
+    // Different channel
+    ChannelMessage midimsg6 = {
+        MIDIMessageType::NOTE_ON,
+        CHANNEL_5 + 1,
+        0x10,
+        0x20,
+    };
+    mn.clearDirty();
+    EXPECT_FALSE(mn.updateWith(midimsg6));
+    EXPECT_FALSE(mn.getDirty());
+
+    EXPECT_EQ(mn.getValue(0, 0), 0x00);
+    EXPECT_EQ(mn.getValue(0, 1), 0x00);
+    EXPECT_EQ(mn.getValue(0, 2), 0x00);
+    EXPECT_EQ(mn.getValue(1, 0), 0x00);
+    EXPECT_EQ(mn.getValue(1, 1), 0x00);
+    EXPECT_EQ(mn.getValue(1, 2), 0x00);
+
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(1);
+    EXPECT_EQ(mn.getValue(0), 0x00);
+    EXPECT_EQ(mn.getValue(1), 0x00);
+    EXPECT_EQ(mn.getValue(2), 0x00);
+    bank.select(0);
+}
+
 TEST(NoteRange, bankableInRangeChangeChannel) {
     Bank<2> bank(4);
     Bankable::NoteRange<2, 3> mn = {{bank, CHANGE_CHANNEL}, {0x10, CHANNEL_5}};

@@ -115,7 +115,7 @@
 #include <Selectors/LEDs/SelectorLEDs.hpp>
 
 #include <Selectors/ProgramChanger.hpp>
-#include <Selectors/Transposer.hpp>
+#include <Banks/Transposer.hpp>
 
 // ---------------------------- MIDI Interfaces ----------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.hpp>

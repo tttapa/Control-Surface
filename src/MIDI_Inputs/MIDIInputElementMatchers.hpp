@@ -232,89 +232,6 @@ struct BankableTwoByteRangeMIDIMatcher {
                                     MIDIAddress address, uint8_t length)
         : config(config), address(address), length(length) {}
 
-    /**
-     * @brief   Check if the given address is part of the bank relative to the
-     *          base address.
-     * 
-     * @todo    This is very hard to explain without a specific example ...
-     * 
-     * @param   toMatch 
-     *          The address to check.
-     * @param   base
-     *          The base address (the address of bank setting 0).
-     * @param   length
-     *          The length of the range.
-     */
-    bool matchBankableInRange(uint8_t toMatch, uint8_t base,
-                              uint8_t length) const {
-        uint8_t diff = toMatch - base;
-        return toMatch >= base &&
-               diff < BankSize * getBank().getTracksPerBank() &&
-               diff % getBank().getTracksPerBank() < length;
-    }
-
-    /**
-     * @brief   If matchBankableAddressInRange returned true, get the index of
-     *          the message in the range.
-     */
-    uint8_t getRangeIndex(MIDIAddress target, MIDIAddress base) const {
-        uint8_t diff = target.getAddress() - base.getAddress();
-        if (getBankType() == CHANGE_ADDRESS)
-            diff %= getBank().getTracksPerBank();
-        return diff;
-    }
-
-    /**
-     * @brief   Check whether a given address is within a range of given length
-     *          starting from the given base address.
-     * 
-     * @param   toMatch
-     *          The address to check
-     * @param   base
-     *          The base address, start of the range.
-     * @param   length
-     *          The length of the range.
-     */
-    static bool inRange(uint8_t toMatch, uint8_t base, uint8_t length) {
-        return (base <= toMatch) && (toMatch - base < length);
-    }
-
-    /**
-     * @brief   Check whether a given address is part of the bank relative to
-     *          the base address and within a range with a given length.
-     * 
-     * @param   toMatch 
-     *          The address to check.
-     * @param   base
-     *          The base address (the address of bank setting 0).
-     */
-    bool matchBankableAddressInRange(MIDIAddress toMatch,
-                                     MIDIAddress base) const {
-        using BankableMIDIMatcherHelpers::matchBankable;
-        if (!toMatch.isValid() || !base.isValid())
-            return false;
-        switch (getBankType()) {
-            case CHANGE_ADDRESS:
-                return toMatch.getChannel() == base.getChannel() &&
-                       toMatch.getCableNumber() == base.getCableNumber() &&
-                       matchBankableInRange(toMatch.getAddress(),
-                                            base.getAddress(), length);
-            case CHANGE_CHANNEL:
-                return inRange(toMatch.getAddress(), base.getAddress(),
-                               length) &&
-                       toMatch.getCableNumber() == base.getCableNumber() &&
-                       matchBankable(toMatch.getRawChannel(),
-                                     base.getRawChannel(), getBank());
-            case CHANGE_CABLENB:
-                return inRange(toMatch.getAddress(), base.getAddress(),
-                               length) &&
-                       toMatch.getChannel() == base.getChannel() &&
-                       matchBankable(toMatch.getRawCableNumber(),
-                                     base.getRawCableNumber(), getBank());
-            default: return false;
-        }
-    }
-
     struct Result {
         bool match;
         uint8_t value;
@@ -324,23 +241,23 @@ struct BankableTwoByteRangeMIDIMatcher {
 
     Result operator()(ChannelMessage m) {
         using BankableMIDIMatcherHelpers::getBankIndex;
-        if (!matchBankableAddressInRange(m.getAddress(), address))
+        using BankableMIDIMatcherHelpers::getRangeIndex;
+        using BankableMIDIMatcherHelpers::matchBankableInRange;
+        if (!matchBankableInRange(m.getAddress(), address, config, length))
             return {false, 0, 0, 0};
-        uint8_t value =
-            m.getMessageType() == MIDIMessageType::NOTE_OFF ? 0 : m.getData2();
+        uint8_t value = m.getMessageType() == m.NOTE_OFF ? 0 : m.getData2();
         uint8_t bankIndex = getBankIndex(m.getAddress(), address, config);
-        uint8_t rangeIndex = getRangeIndex(m.getAddress(), address);
+        uint8_t rangeIndex = getRangeIndex(m.getAddress(), address, config);
         return {true, value, bankIndex, rangeIndex};
     }
 
     Bank<BankSize> &getBank() { return config.bank; }
     const Bank<BankSize> &getBank() const { return config.bank; }
-    BankType getBankType() const { return config.type; }
     static constexpr setting_t getBankSize() { return BankSize; }
 
     /// Get the current bank setting.
     /// @see    @ref Bank<N>::getSelection()
-    setting_t getSelection() const { return getBank().getSelection(); }
+    setting_t getSelection() const { return config.bank.getSelection(); }
 
     BaseBankConfig<BankSize> config;
     MIDIAddress address;

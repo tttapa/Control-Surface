@@ -2,10 +2,11 @@
 
 #pragma once
 
-#include "Channel.hpp"
 #include "Cable.hpp"
+#include "Channel.hpp"
 #include <AH/Containers/Array.hpp>
 #include <AH/Hardware/Hardware-Types.hpp>
+#include <AH/STL/limits>
 #include <Settings/NamespaceSettings.hpp>
 #include <stddef.h> // size_t
 #include <stdint.h> // uint8_t
@@ -49,7 +50,8 @@ struct EncoderPinList {
 /// The type used for Selector%s.
 using setting_t = uint8_t;
 /// A special setting that indicates an unused or invalid setting.
-constexpr setting_t NO_SETTING = 1 << (8 * sizeof(setting_t) - 1);
+constexpr setting_t NO_SETTING =
+    (std::numeric_limits<setting_t>::max() >> 1) + 1;
 
 // Updatable types:
 struct Potentiometer {};

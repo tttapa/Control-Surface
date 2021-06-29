@@ -58,3 +58,57 @@ TEST(Bank, selectOutOfBounds) {
         EXPECT_EQ(e.getErrorCode(), 0xFFFE);
     }
 }
+
+// -------------------------------------------------------------------------- //
+
+#include <Banks/Transposer.hpp>
+
+TEST(Transposer, select) {
+    Transposer<-12, +12> t(1);
+
+    EXPECT_EQ(t.getOffset(), 0);
+    t.select(0);
+    EXPECT_EQ(t.getOffset(), -12);
+    t.select(1);
+    EXPECT_EQ(t.getOffset(), -11);
+    t.select(t.N - 1);
+    EXPECT_EQ(t.getOffset(), +12);
+}
+
+TEST(Transposer, select12) {
+    Transposer<-1, +1> t(12);
+
+    EXPECT_EQ(t.getOffset(), 0);
+    t.select(0);
+    EXPECT_EQ(t.getOffset(), -12);
+    t.select(1);
+    EXPECT_EQ(t.getOffset(), 0);
+    t.select(2);
+    EXPECT_EQ(t.getOffset(), +12);
+}
+
+TEST(Transposer, setTransposition) {
+    Transposer<-12, +12> t(1);
+
+    t.setTransposition(0);
+    EXPECT_EQ(t.getOffset(), 0);
+    t.setTransposition(-12);
+    EXPECT_EQ(t.getOffset(), -12);
+    t.setTransposition(-11);
+    EXPECT_EQ(t.getOffset(), -11);
+    t.setTransposition(+1);
+    EXPECT_EQ(t.getOffset(), +1);
+    t.setTransposition(+12);
+    EXPECT_EQ(t.getOffset(), +12);
+}
+
+TEST(Transposer, setTransposition12) {
+    Transposer<-1, +1> t(12);
+
+    t.setTransposition(0);
+    EXPECT_EQ(t.getOffset(), 0);
+    t.setTransposition(-1);
+    EXPECT_EQ(t.getOffset(), -12);
+    t.setTransposition(+1);
+    EXPECT_EQ(t.getOffset(), +12);
+}
