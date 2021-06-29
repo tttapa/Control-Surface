@@ -188,7 +188,7 @@ In the loop function, the `note` and `velocity` constants are then used to
 actually send the MIDI messages. This is done by calling the `sendNoteOn()` and
 `sendNoteOff()` member functions of the MIDI interface. You can find the 
 documentation in the @ref MIDI_Sender class mentioned earlier, or you can click
-the blue links in the code snippet.
+the brown links in the code snippet.
 
 ### MIDI addresses {#midi_md-midi-addresses}
 
@@ -765,7 +765,7 @@ void loop() {
 }
 ```
 
-The number of pipes that the factory can produce is specified between angled 
+The number of pipes that the factory can produce is specified between angle
 brackets (`<>`). If you try to use more pipes than specified, you will get an
 error at run time, which is indicated by a blinking on-board LED.
 

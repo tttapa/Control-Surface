@@ -207,6 +207,12 @@ span.mlabel {
 .memdoc {
     border-radius: 0 0 0.4em 0.4em;
 }
+
+/* A bit more space in lists on related pages */
+div.textblock li {
+    margin: 0.5em 0;
+}
+
 code {
     background-color: #f4f4ff;
     border-radius: 6px;
