@@ -78,7 +78,8 @@ void loop() {
 }
 ```
 Note how the words `%USBMIDI_Interface`, `begin` and `update` in the previous
-snippet are shown in blue: these are links to the documentation for the relevant
+snippet are shown in blue and brown: 
+these are links to the documentation for the relevant
 classes and functions. If you hover over them with your mouse pointer, you'll 
 see a short description, and if you click on the link, it will take you to the 
 detailed documentation.

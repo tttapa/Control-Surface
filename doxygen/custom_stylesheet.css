@@ -223,6 +223,42 @@ div#powerTip {
     margin-top: 0.5em;
 }
 
+span.preprocessor {
+    color: #af00db;
+    color: #a31515;
+}
+span.comment {
+    color: #008000;
+}
+span.stringliteral {
+    color: #a31515;
+}
+span.keywordflow {
+    color: #0000ff;
+}
+span.keywordtype {
+    color: #2b91af;
+}
+span.keyword {
+    color: #0000ff;
+}
+div.line a.code.highlightmember {
+    color: #795e26;
+}
+div.line a.code.highlightclass {
+    color: #2b91af;
+}
+div.line a.code.highlightfile {
+    color: #a31515;
+    text-decoration: underline;
+}
+div.line a.code.highlightnamespace {
+    color: #af00db;
+}
+div.line a.code:hover {
+    filter: brightness(120%);
+}
+
 /* --------------------- */
 
 /* Portrait and Landscape */
