@@ -67,11 +67,11 @@ using EncoderPositionType = uint8_t; // The type for saving encoder positions
 using MCPEncoderType = MCP23017Encoders<WireType, EncoderPositionType>;
 
 // Type for the MIDI encoders (translates position to MIDI messages)
-struct CCMCPEncoder : GenericMIDIRotaryEncoder<MCPEncoderType::MCP23017Encoder, 
+struct CCMCPEncoder : GenericMIDIRotaryEncoder<MCPEncoderType::MCP23017Encoder,
                                                RelativeCCSender> {
-  CCMCPEncoder(MCPEncoderType::MCP23017Encoder enc, MIDIAddress address, 
+  CCMCPEncoder(MCPEncoderType::MCP23017Encoder enc, MIDIAddress address,
                int16_t multiplier = 1, uint8_t pulsesPerStep = 4)
-    : GenericMIDIRotaryEncoder(std::move(enc), address, multiplier, 
+    : GenericMIDIRotaryEncoder(std::move(enc), address, multiplier,
                                pulsesPerStep, {}) {}
 };
 
@@ -79,9 +79,9 @@ USBDebugMIDI_Interface midi;
 
 // Create an object that manages the 8 encoders connected to the MCP23017.
 MCPEncoderType enc {Wire, 0x0, 12};
-//                    │     │    └─ Interrupt pin
-//                    │     └────── Address offset
-//                    └──────────── I²C interface
+//                  │     │    └─ Interrupt pin
+//                  │     └────── Address offset
+//                  └──────────── I²C interface
 
 // Instantiate 8 MIDI rotary encoders.
 CCMCPEncoder ccencoders[] {

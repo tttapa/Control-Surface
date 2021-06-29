@@ -50,6 +50,7 @@ ConstructorInitializerAllOnOneLineOrOnePerLine: false
 ConstructorInitializerIndentWidth: 2
 ContinuationIndentWidth: 2
 Cpp11BracedListStyle: true
+SpaceBeforeCpp11BracedList: true
 DerivePointerAlignment: false
 DisableFormat:   false
 ExperimentalAutoDetectBinPacking: false

@@ -69,11 +69,11 @@ constexpr bool IntSafe = true;       // Make it safe to call `update` in an ISR
 using MCPEncoderType = MCP23017Encoders<WireType, EncoderPositionType, IntSafe>;
 
 // Type for the MIDI encoders (translates position to MIDI messages)
-struct CCMCPEncoder : GenericMIDIRotaryEncoder<MCPEncoderType::MCP23017Encoder, 
+struct CCMCPEncoder : GenericMIDIRotaryEncoder<MCPEncoderType::MCP23017Encoder,
                                                RelativeCCSender> {
-  CCMCPEncoder(MCPEncoderType::MCP23017Encoder enc, MIDIAddress address, 
+  CCMCPEncoder(MCPEncoderType::MCP23017Encoder enc, MIDIAddress address,
                int16_t multiplier = 1, uint8_t pulsesPerStep = 4)
-    : GenericMIDIRotaryEncoder(std::move(enc), address, multiplier, 
+    : GenericMIDIRotaryEncoder(std::move(enc), address, multiplier,
                                pulsesPerStep, {}) {}
 };
 
@@ -83,9 +83,9 @@ const uint8_t interrupt_pin = 12;
 
 // Create an object that manages the 8 encoders connected to the MCP23017.
 MCPEncoderType enc {Wire, 0x0, interrupt_pin};
-//                    │     │    └─ Interrupt pin
-//                    │     └────── Address offset
-//                    └──────────── I²C interface
+//                  │     │    └─ Interrupt pin
+//                  │     └────── Address offset
+//                  └──────────── I²C interface
 
 // Instantiate 8 MIDI rotary encoders.
 CCMCPEncoder ccencoders[] {
