@@ -22,6 +22,11 @@
 - ✔ ~~Fix firmware link DFU scripts~~
 - ✔ ~~Move DFU scripts → scripts~~
 - List all TODO's throughout the source code and solve them
+- ✔ ~~Full MIDI system common support (BLE)~~
+- ✔ ~~Fix MCU LCD length~~
+- ✔ ~~Return type transposers~~
+- ✔ ~~Selection transposers~~
+- optimized ExtIO for boards with tons of RAM?
 
 ## Specific elements
 
