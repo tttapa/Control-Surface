@@ -9,7 +9,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #include <AH/Error/Error.hpp>
 #include <AH/STL/iterator>
 #include <AH/STL/type_traits> // conditional
-#include <stddef.h>           // size_t
+#include <stddef.h> // size_t
 
 BEGIN_AH_NAMESPACE
 
@@ -251,17 +251,11 @@ class ArraySlice {
             return Reverse ? rhs.ptr < ptr : ptr < rhs.ptr;
         }
 
-        bool operator>(Iterator rhs) const {
-            return rhs < *this;
-        }
+        bool operator>(Iterator rhs) const { return rhs < *this; }
 
-        bool operator<=(Iterator rhs) const {
-            return !(*this > rhs);
-        }
+        bool operator<=(Iterator rhs) const { return !(*this > rhs); }
 
-        bool operator>=(Iterator rhs) const {
-            return !(*this < rhs);
-        }
+        bool operator>=(Iterator rhs) const { return !(*this < rhs); }
 
       private:
         ElementPtrType ptr;
@@ -282,9 +276,9 @@ class ArraySlice {
             index = N - 1; // LCOV_EXCL_LINE
         }                  // LCOV_EXCL_LINE
         if (Reverse)
-            return array[-index];
+            return *(array - index);
         else
-            return array[index];
+            return *(array + index);
     }
 
     Iterator begin() const {
@@ -338,9 +332,9 @@ ArraySlice<T, N, Reverse, Const>::slice() const {
 
 /// @related ArraySlice::Iterator
 template <class T, size_t N, bool Reverse, bool Const>
-typename ArraySlice<T, N, Reverse, Const>::Iterator
-operator+(typename ArraySlice<T, N, Reverse, Const>::Iterator::difference_type n,
-          typename ArraySlice<T, N, Reverse, Const>::Iterator a) {
+typename ArraySlice<T, N, Reverse, Const>::Iterator operator+(
+    typename ArraySlice<T, N, Reverse, Const>::Iterator::difference_type n,
+    typename ArraySlice<T, N, Reverse, Const>::Iterator a) {
     return a + n;
 }
 
