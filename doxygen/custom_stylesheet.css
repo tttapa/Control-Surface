@@ -235,9 +235,11 @@ span.stringliteral {
 }
 span.keywordflow {
     color: #0000ff;
+    color: #af00db;
 }
 span.keywordtype {
     color: #2b91af;
+    color: #0000ff;
 }
 span.keyword {
     color: #0000ff;

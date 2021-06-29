@@ -4,8 +4,11 @@
 
 ## The MIDI protocol
 
-See <https://www.midi.org/>, specifically the 
-[summary of MIDI messages](https://www.midi.org/specifications-old/item/table-1-summary-of-midi-message).
+This guide expects basic familiarity with the MIDI protocol and the different 
+types of MIDI messages.
+You can find more information about MIDI on <https://www.midi.org/>, 
+the [summary of MIDI messages](https://www.midi.org/specifications-old/item/table-1-summary-of-midi-message)
+can be especially handy.
 
 ## MIDI interfaces {#midi_md-midi-interfaces}
 
@@ -61,7 +64,7 @@ update a MIDI over USB interface. By “instantiate”, we mean that a variable 
 created that is an _instance_ of the `USBMIDI_Interface` type.
 
 ```cpp
-#include <Control_Surface.hpp>
+#include <Control_Surface.h>
 
 // Instantiate a MIDI over USB interface with the name `midi`
 USBMIDI_Interface midi;
@@ -349,7 +352,7 @@ void loop() {
 The instantiation, initialization, and updating of the MIDI interface is the 
 same as before. The first new component is the `MyMIDI_Callbacks` class: this 
 class inherits from the @ref FineGrainedMIDI_Callbacks class that is provided by
-the library, and then implements two of the callback functions, 
+the library, and implements two of the callback functions, 
 @ref FineGrainedMIDI_Callbacks::onNoteOff() and 
 @ref FineGrainedMIDI_Callbacks::onNoteOn().  
 An instance of the `MyMIDI_Callbacks` class is created, and then this callback 
@@ -489,7 +492,7 @@ NOTE_ON: Channel 1, Note 18, Velocity 112
 NOTE_OFF: Channel 1, Note 18, Velocity 127
 ```
 
-You can even go further, for example, matching only a specific note on a 
+You can go even further, for example, matching only a specific note on a 
 specific MIDI channel:
 ```cpp
 // Custom MIDI callback that prints incoming MIDI note messages.
@@ -554,9 +557,276 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
 
 ## Routing MIDI messages {#midi_md-routing}
 
-==TODO==
+### Default routing {#midi_md-default-routing}
+
+Let's start with a very simple example:
+
+```cpp
+#include <Control_Surface.h>
+
+// Instantiate a MIDI over USB interface with the name `midi_usb`
+USBMIDI_Interface midi_usb;
+
+NoteButton button {2, MIDI_Notes::C(4)};
+NoteLED led {13, MIDI_Notes::C(4)};
+
+void setup() {
+    // Initialize everything, including MIDI interfaces and default routes
+    Control_Surface.begin(); 
+}
+
+void loop() {
+    Control_Surface.loop();
+}
+```
+When you call `Control_Surface.begin()`, it will automatically create a default
+route for you, which is shown in the following figure.
+
+<img style="margin: 0 auto; display: block; width: 38em" src="midi-pipes-default.svg"/>
+
+Two pipes are created, one for MIDI output (`pipe_tx` in the figure), and one 
+for MIDI input (`pipe_rx`). These pipes are used to connect the 
+`Control_Surface` part of the code to the MIDI interface defined on line 4
+(`midi_usb`).
+
+In the main loop of the program, `Control_Surface` checks if the button was 
+pressed, and if that's the case, a MIDI message is sent by `Control_Surface`:
+The message travels over the MIDI output pipe (`pipe_tx`) to the MIDI interface
+(`midi_usb`), which will then send it to the computer over the USB connection.
+
+Similarly, when a MIDI message from the computer arrives on the USB connection,
+the MIDI interface (`midi_usb`) will send it over the MIDI input pipe 
+(`pipe_rx`) to the `Control_Surface` code, which will then check whether it's a
+MIDI Note On/Off message that matches the address of the LED, and turn on/off
+the LED accordingly.
+
+### Manual routing
+
+As a first exercise, we'll define the same pipes and routing ourselves, without 
+relying on `Control_Surface.begin()` to do it automagically.
+
+```cpp
+#include <Control_Surface.h>
+
+// Instantiate a MIDI over USB interface
+USBMIDI_Interface midi_usb;
+// Instantiate the two pipes to connect the interface to Control_Surface
+MIDI_Pipe pipe_tx, pipe_rx;
+
+NoteButton button {2, MIDI_Notes::C(4)};
+NoteLED led {13, MIDI_Notes::C(4)};
+
+void setup() {
+    // Manually route MIDI output from Control_Surface to the MIDI interface
+    Control_Surface >> pipe_tx >> midi_usb;
+    // Manually route MIDI output from the MIDI interface to Control_Surface
+    Control_Surface << pipe_rx << midi_usb;
+    // Initialize everything
+    Control_Surface.begin();
+}
+
+void loop() {
+    Control_Surface.loop();
+}
+```
+As you can see, the shift operators `>>` and `<<` are used to define the routes
+between Control Surface and the MIDI interface. Note how they correspond to the
+arrows in the figure above.
+
+You can specify the two endpoints in any order you like (left-to-right or
+right-to-left). For example, the following two lines of code are equivalent and 
+define the same connection: 
+```cpp
+Control_Surface << pipe_rx << midi_usb;
+midi_usb >> pipe_rx >> Control_Surface;
+```
+
+It is important to specify the routing _before_ you call 
+`Control_Surface.begin()`. In that case, Control Surface detects that it is 
+already connected to a MIDI interface, so it won't change anything to the manual
+routing we specified earlier.  
+If you call `Control_Surface.begin()` first, it will create its default routing
+as discussed earlier, and if you then later add your manual connections on top
+of that, your code might not work as expected.
+
+### Bidirectional MIDI pipes
+
+There are many situations where you want to connect both the MIDI input and 
+output of two endpoints together. It's a bit cumbersome to have to define a 
+separate connection for each of the two directions. Luckily, the library 
+includes bidirectional MIDI pipes, which makes this process a bit more terse.
+
+The following sketch does exactly the same as the previous two, just using a
+bidirectional pipe as a shorthand.
+
+```cpp
+#include <Control_Surface.h>
+
+// Instantiate a MIDI over USB interface
+USBMIDI_Interface midi_usb;
+// Instantiate the pipe to connect the interface to Control_Surface
+BidirectionalMIDI_Pipe pipe_txrx;
+
+NoteButton button {2, MIDI_Notes::C(4)};
+NoteLED led {13, MIDI_Notes::C(4)};
+
+void setup() {
+    // Manually route MIDI output from Control_Surface to the MIDI interface,
+    // and the MIDI output from the MIDI interface to Control_Surface
+    Control_Surface | pipe_txrx | midi_usb;
+    // Initialize everything
+    Control_Surface.begin();
+}
+
+void loop() {
+    Control_Surface.loop();
+}
+```
+Connections to bidirectional pipes are made using the “vertical pipe” operator
+(`|`).
+
+### Multiple MIDI interfaces
+
+If you only have a single MIDI interface, you don't really need to worry about
+pipes, as you saw in the @ref midi_md-default-routing section, you can just
+call `Control_Surface.begin()` and it will automatically set everything up for
+you. 
+
+MIDI pipes really shine in scenarios where you have multiple MIDI interfaces in 
+a single program, they allow you to fully customize the routes between them. 
+In the following example, we'll add an extra serial MIDI interface, and route 
+it as follows:
+
+<img style="margin: 0 auto; display: block; width: 38em" src="midi-pipes-2.svg"/>
+
+```cpp
+#include <Control_Surface.h>
+
+// Instantiate a MIDI over USB interface
+USBMIDI_Interface midi_usb;
+// Instantiate a MIDI over Serial interface using `Serial1`
+HardwareSerialMIDI_Interface midi_ser = Serial1;
+// Instantiate the three pipes to connect the interfaces to Control_Surface
+MIDI_Pipe pipe_tx_u, pipe_rx_u, pipe_tx_s;
+
+NoteButton button {2, MIDI_Notes::C(4)};
+NoteLED led {13, MIDI_Notes::C(4)};
+
+void setup() {
+    // Manually route MIDI output from Control_Surface to the USB MIDI interface
+    Control_Surface >> pipe_tx_u >> midi_usb;
+    // Manually route MIDI output from the USB MIDI interface to Control_Surface
+    Control_Surface << pipe_rx_u << midi_usb;
+    // Manually route MIDI output from Control_Surface to the Serial MIDI interface
+    Control_Surface >> pipe_tx_s >> midi_ser;
+    // Initialize everything
+    Control_Surface.begin();
+}
+
+void loop() {
+    Control_Surface.loop();
+}
+```
+
+### MIDI pipe factories
+
+If you want to keep adding new connections, you need a new pipe for each one.
+For large numbers of pipes this is cumbersome, so the library includes a pipe
+factory that gives you a new pipe every time you use it.
+
+Using the factory, the previous example can be simplified as follows:
+
+```cpp
+#include <Control_Surface.h>
+
+// Instantiate a MIDI over USB interface
+USBMIDI_Interface midi_usb;
+// Instantiate a MIDI over Serial interface using `Serial1`
+HardwareSerialMIDI_Interface midi_ser = Serial1;
+// Instantiate a factory that can produce three pipes
+MIDI_PipeFactory<3> pipes;
+
+NoteButton button {2, MIDI_Notes::C(4)};
+NoteLED led {13, MIDI_Notes::C(4)};
+
+void setup() {
+    // Manually route MIDI output from Control_Surface to the USB MIDI interface
+    Control_Surface >> pipes >> midi_usb;
+    // Manually route MIDI output from the USB MIDI interface to Control_Surface
+    Control_Surface << pipes << midi_usb;
+    // Manually route MIDI output from Control_Surface to the Serial MIDI interface
+    Control_Surface >> pipes >> midi_ser;
+    // Initialize everything
+    Control_Surface.begin();
+}
+
+void loop() {
+    Control_Surface.loop();
+}
+```
+
+The number of pipes that the factory can produce is specified between angled 
+brackets (`<>`). If you try to use more pipes than specified, you will get an
+error at run time, which is indicated by a blinking on-board LED.
+
+Instead of specifying a specific pipe when doing the routing in the `setup`
+function, you can now just use the `pipes` factory, it will give you a new pipe
+each time you use it.
+
+If you need bidirectional pipes, you can use the 
+@ref BidirectionalMIDI_PipeFactory class instead.
+
+### Routing between MIDI interfaces
+
+Up to now, we've only created connections between `Control_Surface` itself and
+a MIDI interface, but you can also create routes between MIDI interfaces. 
+This is demonstrated in the following example, where we connect a debug MIDI
+interface to a MIDI over USB interface.
+
+<img style="margin: 0 auto; display: block; width: 38em" src="midi-pipes-interfaces.svg"/>
+
+In this case, all messages that arrive on the `midi_dbg` interface are sent to 
+the `midi_usb` interface, and all messages that arrive on `midi_usb` are sent to
+`midi_dbg`.
+
+Now that we're no longer using `Control_Surface.begin()` and 
+`Control_Surface.loop()`, we have to take care of initializing and updating the 
+MIDI interfaces ourselves.
+
+```cpp
+#include <Control_Surface.h>
+
+// Instantiate a MIDI over USB interface
+USBMIDI_Interface midi_usb;
+// Instantiate a debug MIDI interface for debugging in the Serial Monitor
+USBDebugMIDI_Interface midi_dbg;
+// Instantiate the pipe to connect the two interfaces
+BidirectionalMIDI_Pipe pipes;
+
+void setup() {
+    // Manually route MIDI output from Control_Surface to the MIDI interface,
+    // and the MIDI output from the MIDI interface to Control_Surface
+    midi_dbg | pipes | midi_usb;
+    // Initialize the MIDI interfaces
+    MIDI_Interface::beginAll();
+}
+
+void loop() {
+    MIDI_Interface::updateAll();
+}
+```
+
+If you have an Arduino with native MIDI over USB support, you can try out this
+example yourself:  
+Open your favorite MIDI monitor and select the MIDI over USB port of the Arduino.
+Then open the Serial Monitor, set the line ending to “Newline”, and then enter a
+MIDI message, e.g. `90 3C 7F`. You should see the message arrive in the MIDI
+monitor as a Note On message for note C4 on channel 1 with a velocity of 127. 
+Similarly, if you send a message to the Arduino using the MIDI monitor, it will
+be printed in the Serial Monitor, because we used a bidirectional pipe.
 
 ### More examples {#midi_md-routing-more-examples}
 
 - @ref MIDI_Pipes-Routing.ino
+- @ref Dual-MIDI-Interface.ino
 - @ref MIDI-Monitor.ino
