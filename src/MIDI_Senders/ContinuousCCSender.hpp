@@ -41,7 +41,7 @@ class ContinuousCCSender14 {
     /// @p address + 0x20 (LSB).
     void send(uint16_t value, MIDIAddress address) {
         value = AH::increaseBitDepth<14, precision(), uint16_t>(value);
-        Control_Surface.sendControlChange(address + 0x00, (value >> 7) & 0x7f);
+        Control_Surface.sendControlChange(address + 0x00, (value >> 7) & 0x7F);
         Control_Surface.sendControlChange(address + 0x20, (value >> 0) & 0x7F);
     }
 

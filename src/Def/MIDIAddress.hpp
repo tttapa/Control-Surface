@@ -136,8 +136,8 @@ class RelativeMIDIAddress {
 /// A MIDI address can be marked "invalid". The MIDI sending functions
 /// (@ref MIDI_Sender) will never send messages addressed to invalid addresses.
 ///
-/// See @ref md_pages_Basics "this page" for a tutorial on how to use MIDI
-/// addresses.
+/// See @ref midi_md-midi-addresses "MIDI Tutorial: MIDI addresses" for a
+/// tutorial on how to use MIDI addresses.
 class MIDIAddress {
   public:
     /// @name   Constructors

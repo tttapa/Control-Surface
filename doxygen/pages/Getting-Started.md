@@ -11,7 +11,8 @@ on the page [Installation](@ref pages/Installation.md).
 
 ### 1. Include the library
 
-Include the library so that you have access to all the classes and functions.
+Include the library so that you have access to all the classes and functions it
+provides.
 
 ```cpp
 #include <Control_Surface.h>
@@ -54,7 +55,8 @@ A complete overview of the available MIDI interfaces can be found in the
 @ref MIDIInterfaces module.
 
 For now, we'll use the `USBMIDI_Interface` because it's probably the one you'll
-use in your final program.
+use in your final program. Do keep in mind that not all boards support MIDI over
+USB natively, for more details, see the @ref md_pages_MIDI-over-USB page.
 
 You can give the interface any name you want. I'll be very original and
 choose `midi`. It doesn't matter, and you don't need to use it afterwards, 
@@ -68,7 +70,10 @@ USBMIDI_Interface midi;
 > **Note**: some interfaces require additional parameters, for example, 
 > the `USBDebugMIDI_Interface` needs to know the baud rate.  
 > In that case, you can instantiate it as follows:  
-> `USBDebugMIDI_Interface midi = {115200};`
+> `USBDebugMIDI_Interface midi {115200};`
+
+For a more detailed overview of MIDI interfaces and using them to send and 
+receive MIDI message, have a look at the @ref midi-tutorial.
 
 ### 3. Add Extended Input/Output elements (optional)       {#first-output-extio}
 
@@ -80,7 +85,7 @@ to support other types of IO expanders in the future.
 An overview of Extended Input/Output elements can be found in the @ref AH_ExtIO
 module.
 
-In this example, we'll use an 8-channel CD74HC4051 analog multiplexer. This
+In this example, we'll use an 8-channel 74HC4051 analog multiplexer. This
 allows us to read eight analog inputs using just one analog pin on the Arduino,
 at the cost of only three digital output pins.
 
@@ -92,7 +97,7 @@ to digital pins `3`, `4` and `5`. The output of the multiplexer goes to
 analog pin `A0`. Connect the enable pin (`Ē`) to ground.
 
 ```cpp
-CD74HC4051 mux = { A0, {3, 4, 5} };
+CD74HC4051 mux { A0, {3, 4, 5} };
 ```
 
 ### 4. Add MIDI Control Elements
@@ -113,16 +118,17 @@ In this case, the address number is the controller number, which is a number
 from 0 to 119. The MIDI channel is a channel from `CHANNEL_1` until 
 `CHANNEL_16`. We'll ignore the cable number for now, if you don't specifically
 set it, it'll just use the default cable.  
-You can find more information about MIDI addresses @ref md_pages_Basics "here". 
+You can find more information about MIDI addresses in the
+@ref midi_md-midi-addresses "MIDI Tutorial: MIDI addresses". 
 
 For the MIDI controller numbers, you can use the 
 @ref MIDI_CC "predefined constants", or you can just use a number.
 
 ```cpp
-CCPotentiometer potentiometer = { A1, {MIDI_CC::Channel_Volume, CHANNEL_1} };
+CCPotentiometer potentiometer { A1, {MIDI_CC::Channel_Volume, CHANNEL_1} };
 ```
 ```cpp
-CCPotentiometer potentiometer = { A1, {7, CHANNEL_1} };
+CCPotentiometer potentiometer { A1, {7, CHANNEL_1} };
 ```
 
 In our case, we don't want a single potentiometer, we want eight. It's much
@@ -140,12 +146,15 @@ you use `int ii[] = {42, 43, ...};`.
 Analogously, to initialize a single potentiometer object, you use 
 `CCPotentiometer pot = {pin, address};` and to initialize an array of 
 potentiometers, you use 
-`CCPotentiometer pots[] = { {pin, address}, {pin, address}, ... };`.
+`CCPotentiometer pots[] = { {pin, address}, {pin, address}, ... };`. 
+It is recommended to leave out the equal sign (`=`), because this will result
+in more meaningful error messages if you get any of the arguments wrong:
+`CCPotentiometer pots[] { {pin, address}, {pin, address}, ... };`. 
 
 > **Note**: The first pin is of the multiplexer is `pin(0)`, not `pin(1)`.
 
 ```cpp
-CCPotentiometer volumePotentiometers[] = {
+CCPotentiometer volumePotentiometers[] {
     { mux.pin(0), {MIDI_CC::Channel_Volume, CHANNEL_1} },
     { mux.pin(1), {MIDI_CC::Channel_Volume, CHANNEL_2} },
     { mux.pin(2), {MIDI_CC::Channel_Volume, CHANNEL_3} },
@@ -163,7 +172,7 @@ CCPotentiometer volumePotentiometers[] = {
 > For example, a `PBPotentiometer` doesn't need an address number, just a 
 > channel, so you can instantiate it as follows:
 > ```cpp
-> PBPotentiometer potentiometer = { A1, CHANNEL_9 };
+> PBPotentiometer potentiometer { A1, CHANNEL_9 };
 > ```
 
 ### 5. Initialize the Control Surface                       {#first-output-init}
@@ -218,7 +227,7 @@ software, map the potentiometers, and start playing!
 USBMIDI_Interface midi;
 
 // Instantiate an analog multiplexer
-CD74HC4051 mux = {
+CD74HC4051 mux {
   A0,       // Analog input pin
   {3, 4, 5} // Address pins S0, S1, S2
 };
@@ -227,7 +236,7 @@ CD74HC4051 mux = {
 // MIDI Control Change messages when you turn the
 // potentiometers connected to the eight input pins of
 // the multiplexer
-CCPotentiometer volumePotentiometers[] = {
+CCPotentiometer volumePotentiometers[] {
   {mux.pin(0), {MIDI_CC::Channel_Volume, CHANNEL_1}},
   {mux.pin(1), {MIDI_CC::Channel_Volume, CHANNEL_2}},
   {mux.pin(2), {MIDI_CC::Channel_Volume, CHANNEL_3}},
@@ -301,7 +310,7 @@ register to ground, and the Master Reset (MR) pin of the shift register to Vcc
 to enable it.
 
 ```cpp
-SPIShiftRegisterOut<8> sreg = {
+SPIShiftRegisterOut<8> sreg {
   SPI,      // SPI interface to use
   10,       // Latch pin (ST_CP)
   MSBFIRST, // Bit order
@@ -340,7 +349,7 @@ function in the @ref MIDI_Notes namespace,
 or you can just use a number.
 
 ```cpp
-NoteLED noteLed = { 13, {MIDI_Notes::C(4), CHANNEL_1} };  // C4 = middle C
+NoteLED noteLed { 13, {MIDI_Notes::C(4), CHANNEL_1} };  // C4 = middle C
 ```
 
 In our case, we don't want a single LED, we want eight. It's much easier to 
@@ -352,7 +361,7 @@ default channel, `CHANNEL_1`.
 > **Note**: The first pin is `pin(0)`, not `pin(1)`.
 
 ```cpp
-NoteLED leds[] = {
+NoteLED leds[] {
   {sreg.pin(0), MIDI_Notes::C(4)},
   {sreg.pin(1), MIDI_Notes::D(4)},
   {sreg.pin(2), MIDI_Notes::E(4)},
@@ -398,7 +407,7 @@ software, redirect the MIDI output to the Arduino, and start playing!
 USBMIDI_Interface midi;
 
 // Instantiate a shift register as output for the LEDs
-SPIShiftRegisterOut<8> sreg = {
+SPIShiftRegisterOut<8> sreg {
   SPI,      // SPI interface to use
   10,       // Latch pin (ST_CP)
   MSBFIRST, // Byte order
@@ -427,3 +436,51 @@ void loop() {
   Control_Surface.loop();
 }
 ```
+
+## Troubleshooting {#getting-started_md-troubleshooting}
+
+If something goes wrong at run time, Control Surface will start blinking the 
+on-board LED, with a pattern of two short flashes, followed by a longer pause, 
+and a period of one second. You can enable debug output by defining the 
+`DEBUG_OUT` macro in
+`~Arduino/libraries/Control-Surface/src/AH/Settings/Settings.hpp` as `Serial`,
+for example. This requires quite a bit of extra memory, so that might not be 
+feasible on all boards, or you might have to simplify your sketch a bit.
+
+If your sketch produces an error as soon as you call `Control_Surface.begin()`,
+you might not be able to open the Serial Monitor quickly enough to catch the
+error message, in that case, you can wait for the Serial connection to be opened
+before initializing Control Surface. For example:
+
+```cpp
+#include <Control_Surface.h>
+ 
+// Oops! We forgot to instantiate a MIDI interface!
+ 
+NoteButton button {2, MIDI_Notes::C(4)};
+NoteLED led {13, MIDI_Notes::C(4)};
+ 
+void setup() {
+#ifdef DEBUG_OUT
+    DEBUG_OUT.begin(115200); // Initialize the debug output
+    while (!DEBUG_OUT);      // and wait for it to become available
+#endif
+    Control_Surface.begin(); 
+}
+ 
+void loop() {
+    Control_Surface.loop();
+}
+```
+If you enable debug output, you'll get a handy error message as soon as you open
+the Serial Monitor:
+```text
+[bool CS::Control_Surface_::connectDefaultMIDI_Interface() @ line 53]:	Fatal Error: No default MIDI Interface (0xF123)
+```
+The error code at the end can be used to easily locate the source of the error 
+in the library source code, and in this case the message also includes the name
+of the function and the line number where the error occurred.
+
+> **Note**: Since the built-in LED will be configured as an output when an error
+> occurs, you should not use it as an input (e.g. to connect a switch), because
+> this will cause a short circuit that might destroy the pin.

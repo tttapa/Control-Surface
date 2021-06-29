@@ -175,7 +175,7 @@ div.navpath > ul {
 .directory td > .el {
     display: inline-block;
 }
-.directory td.desc {
+.directory td.desc, .directory td.entry {
     padding: 0.6em 0.5em 0.6em 0.8em;
 }
 .markdownTable tr:last-child td {
@@ -259,6 +259,18 @@ div.line a.code.highlightnamespace {
 }
 div.line a.code:hover {
     filter: brightness(120%);
+}
+
+blockquote.doxtable {
+    padding: 0.5em 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+blockquote.doxtable > p:first-child {
+    margin-top: 0;
+}
+blockquote.doxtable > p:last-child {
+    margin-bottom: 0;
 }
 
 /* --------------------- */
