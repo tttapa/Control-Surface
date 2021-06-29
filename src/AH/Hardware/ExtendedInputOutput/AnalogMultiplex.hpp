@@ -138,10 +138,19 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      */
     void updateBufferedInputs() override {} // LCOV_EXCL_LINE
 
+    /**
+     * @brief   Specify whether to discard the first analog reading after 
+     *          changing the address lines (enabled by default).
+     */
+    void discardFirstReading(bool discardFirstReading_) {
+        this->discardFirstReading_ = discardFirstReading_;
+    }
+
   private:
     const pin_t analogPin;
     const Array<pin_t, N> addressPins;
     const pin_t enablePin;
+    bool discardFirstReading_ = true;
 
     /**
      * @brief   Write the pin number/address to the address pins of the 
@@ -214,7 +223,8 @@ PinStatus_t AnalogMultiplex<N>::digitalReadBuffered(pin_t pin) {
 template <uint8_t N>
 analog_t AnalogMultiplex<N>::analogRead(pin_t pin) {
     prepareReading(pin);
-    ExtIO::analogRead(analogPin); // Discard first reading
+    if (discardFirstReading_)
+        (void)ExtIO::analogRead(analogPin); // Discard first reading
     analog_t result = ExtIO::analogRead(analogPin);
     afterReading();
     return result;

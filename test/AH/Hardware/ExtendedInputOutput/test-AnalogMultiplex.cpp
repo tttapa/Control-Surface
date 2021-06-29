@@ -47,6 +47,48 @@ TEST(AnalogMultiplex, analogReadNoEnable) {
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
+TEST(AnalogMultiplex, analogReadNoEnableNoDummyRead) {
+    AnalogMultiplex<4> mux = {A0, {2, 3, 4, 5}};
+    mux.discardFirstReading(false);
+    DEBUGFN(mux.getStart());
+    DEBUGFN(mux.getEnd());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(4, OUTPUT));
+    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(5, OUTPUT));
+    ExtendedIOElement::beginAll();
+
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(3, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(4, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(5, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(A0)).Times(1);
+    ExtIO::analogRead(mux.pin(0b0000));
+
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(3, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(4, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(5, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(A0)).Times(1);
+    ExtIO::analogRead(mux.pin(0b1111));
+
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(3, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(4, 0));
+    EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(5, 1));
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(A0)).Times(1);
+    ExtIO::analogRead(mux.pin(0b1010));
+
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
 TEST(AnalogMultiplex, digitalReadNoEnable) {
     AnalogMultiplex<4> mux = {A0, {2, 3, 4, 5}};
 
