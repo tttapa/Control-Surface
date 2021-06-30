@@ -278,8 +278,7 @@ tests and generating documentation, a style guide, etc.
 - ([b727931](https://github.com/tttapa/Control-Surface/commit/b727931a44cb1e262ac32901f1e307583da90624))  
    The MIDI note name for the note F has been changed from `F` to `F_` in order
    to avoid conflicts with the `F()` macro and its functional equivalent 
-   introduced here: 
-   https://github.com/arduino/ArduinoCore-mbed/blob/7a8d3ee46262d943f7cc1158f8bce06f61c3ddb2/cores/arduino/Arduino.h#L35-L41  
+   introduced [here](https://github.com/arduino/ArduinoCore-mbed/blob/7a8d3ee46262d943f7cc1158f8bce06f61c3ddb2/cores/arduino/Arduino.h#L35-L41).  
    It is now recommended to use `MIDI_Notes::C(4)` instead of `note(C, 4)`.
 - ([a81bd19](https://github.com/tttapa/Control-Surface/commit/a81bd1927298decc2ea3852fd2f00e8028c14b81))  
    Classes that make use of the SPI interface now require you to pass the `SPI`
