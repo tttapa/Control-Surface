@@ -26,6 +26,14 @@ class Transposer : public Bank<MaxTransposition - MinTransposition + 1> {
     ///         which is cumbersome if the minimum transposition is nonzero.
     void setTransposition(int8_t tp) { this->select(tp - MinTransposition); }
 
+    /// Get the transposition.
+    int8_t getTransposition() const {
+        return this->getSelection() + MinTransposition;
+    }
+
+    /// Get the transposition as a number of semitones.
+    int8_t getTranspositionSemitones() const { return this->getOffset(); }
+
     static constexpr setting_t N = MaxTransposition - MinTransposition + 1;
     static constexpr setting_t NumBanks = N;
 };

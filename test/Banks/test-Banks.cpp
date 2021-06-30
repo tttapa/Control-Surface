@@ -92,14 +92,24 @@ TEST(Transposer, setTransposition) {
 
     t.setTransposition(0);
     EXPECT_EQ(t.getOffset(), 0);
+    EXPECT_EQ(t.getTransposition(), 0);
+    EXPECT_EQ(t.getTranspositionSemitones(), 0);
     t.setTransposition(-12);
     EXPECT_EQ(t.getOffset(), -12);
+    EXPECT_EQ(t.getTransposition(), -12);
+    EXPECT_EQ(t.getTranspositionSemitones(), -12);
     t.setTransposition(-11);
     EXPECT_EQ(t.getOffset(), -11);
+    EXPECT_EQ(t.getTransposition(), -11);
+    EXPECT_EQ(t.getTranspositionSemitones(), -11);
     t.setTransposition(+1);
     EXPECT_EQ(t.getOffset(), +1);
+    EXPECT_EQ(t.getTransposition(), +1);
+    EXPECT_EQ(t.getTranspositionSemitones(), +1);
     t.setTransposition(+12);
     EXPECT_EQ(t.getOffset(), +12);
+    EXPECT_EQ(t.getTransposition(), +12);
+    EXPECT_EQ(t.getTranspositionSemitones(), +12);
 }
 
 TEST(Transposer, setTransposition12) {
@@ -107,8 +117,14 @@ TEST(Transposer, setTransposition12) {
 
     t.setTransposition(0);
     EXPECT_EQ(t.getOffset(), 0);
+    EXPECT_EQ(t.getTransposition(), 0);
+    EXPECT_EQ(t.getTranspositionSemitones(), 0);
     t.setTransposition(-1);
     EXPECT_EQ(t.getOffset(), -12);
+    EXPECT_EQ(t.getTransposition(), -1);
+    EXPECT_EQ(t.getTranspositionSemitones(), -12);
     t.setTransposition(+1);
     EXPECT_EQ(t.getOffset(), +12);
+    EXPECT_EQ(t.getTransposition(), +1);
+    EXPECT_EQ(t.getTranspositionSemitones(), +12);
 }

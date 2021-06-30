@@ -271,12 +271,19 @@ map	KEYWORD2
 invert	KEYWORD2
 
 send	KEYWORD2
+forcedUpdate	KEYWORD2
+getValue	KEYWORD2
+setValue	KEYWORD2
+setSpeedMultiply	KEYWORD2
+getSpeedMultiply	KEYWORD2
 
 add	KEYWORD2
 select	KEYWORD2
 getSelection	KEYWORD2
 getTracksPerBank	KEYWORD2
 getTransposition	KEYWORD2
+getTranspositionSemitones	KEYWORD2
+setTransposition	KEYWORD2
 
 getMCUNameFromNoteNumber	KEYWORD2
 

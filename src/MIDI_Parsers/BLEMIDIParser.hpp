@@ -1,8 +1,8 @@
 #pragma once
 
-#include <AH/Error/Error.hpp>
-
-#include <AH/STL/utility> // std::forward
+#include <Settings/NamespaceSettings.hpp>
+#include <stddef.h>
+#include <stdint.h>
 
 BEGIN_CS_NAMESPACE
 
