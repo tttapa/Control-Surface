@@ -10,7 +10,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #include <AH/Math/IncreaseBitDepth.hpp>
 #include <AH/Math/MinMaxFix.hpp>
 #include <AH/STL/type_traits> // std::enable_if, std::is_constructible
-#include <AH/STL/utility>     // std::forward
+#include <AH/STL/utility> // std::forward
 #include <AH/Settings/SettingsWrapper.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -64,8 +64,10 @@ class GenericFilteredAnalog {
      *          instead of to zero? This would require adding a `begin` method.
      */
     void reset(AnalogType value = 0) {
-        filter.reset(increaseBitDepth<ADC_BITS + IncRes, Precision, AnalogType,
-                                      AnalogType>(value));
+        AnalogType widevalue = increaseBitDepth<ADC_BITS + IncRes, Precision,
+                                                AnalogType, AnalogType>(value);
+        filter.reset(widevalue);
+        hysteresis.setValue(widevalue);
     }
 
     /**
@@ -74,7 +76,11 @@ class GenericFilteredAnalog {
      * 
      * This is useful to avoid transient effects upon initialization.
      */
-    void resetToCurrentValue() { filter.reset(getRawValue()); }
+    void resetToCurrentValue() {
+        AnalogType widevalue = getRawValue();
+        filter.reset(widevalue);
+        hysteresis.setValue(widevalue);
+    }
 
     /**
      * @brief   Specify a mapping function/functor that is applied to the analog
@@ -213,9 +219,8 @@ class GenericFilteredAnalog {
     static_assert(
         Precision <= ADC_BITS + IncRes,
         "Error: Precision is larger than the increased ADC precision");
-    static_assert(
-        EMA_t::supports_range(AnalogType(0), getMaxRawValue()),
-        "Error: EMA filter type doesn't support full ADC range");
+    static_assert(EMA_t::supports_range(AnalogType(0), getMaxRawValue()),
+                  "Error: EMA filter type doesn't support full ADC range");
 
     EMA_t filter;
     Hysteresis<ADC_BITS + IncRes - Precision, AnalogType, AnalogType>

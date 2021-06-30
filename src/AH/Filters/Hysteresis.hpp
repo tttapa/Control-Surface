@@ -50,7 +50,7 @@ class Hysteresis {
         T_in lowerbound = prevLevel > 0 ? prevLevelFull - margin : 0;
         T_in upperbound = prevLevel < max_out ? prevLevelFull + margin : max_in;
         if (inputLevel < lowerbound || inputLevel > upperbound) {
-            prevLevel = inputLevel >> BITS;
+            setValue(inputLevel);
             return true;
         }
         return false;
@@ -62,6 +62,11 @@ class Hysteresis {
      * @return  The output level.
      */
     T_out getValue() const { return prevLevel; }
+
+    /** 
+     * @brief   Forcefully update the internal state to the given level.
+     */
+    void setValue(T_in inputLevel) { prevLevel = inputLevel >> BITS; }
 
   private:
     T_out prevLevel = 0;
