@@ -3,7 +3,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc. It can control almost any knob in your DAW software.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -38,7 +38,7 @@
 USBMIDI_Interface midi;
 
 // Instantiate a PBPotentiometer object
-PBPotentiometer potentiometer = {
+PBPotentiometer potentiometer {
   A0,        // Analog pin connected to potentiometer
   CHANNEL_1, // MIDI Channel 1
 };

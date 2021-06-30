@@ -7,42 +7,133 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
-class VPotRingLEDsCallback {
+class VPotRingLEDsDriver : public AH::LEDs<11> {
   public:
-    VPotRingLEDsCallback(const AH::LEDs<11> &leds) : leds(leds) {}
+    VPotRingLEDsDriver(const AH::LEDs<11> &leds) : AH::LEDs<11>(leds) {}
 
-    template <class T>
-    void begin(const T &) {
-        leds.begin();
+    void displayVPot(VPotState v) {
+        this->displayRange(v.getStartOn(), v.getStartOff());
     }
-
-    template <class T>
-    void update(const T &t) {
-        leds.displayRange(t.getStartOn(), t.getStartOff());
-    }
-
-  private:
-    const AH::LEDs<11> leds;
 };
 
 // -------------------------------------------------------------------------- //
 
-class VPotRingLEDs : public GenericVPotRing<VPotRingLEDsCallback> {
+/**
+ * @brief   A MIDI input element that represents a Mackie Control Universal VPot
+ *          ring and displays it using LEDs.
+ * 
+ * @ingroup midi-input-elements-leds
+ */
+class VPotRingLEDs : public VPotRing, public VPotRingLEDsDriver {
   public:
-    VPotRingLEDs(const PinList<11> &ledPins, uint8_t track,
-                 MIDIChannelCN channelCN = CHANNEL_1)
-        : GenericVPotRing<VPotRingLEDsCallback>{track, channelCN, {ledPins}} {}
+    using Parent = VPotRing;
+    using Matcher = Parent::Matcher;
+
+    /** 
+     * Constructor.
+     * 
+     * @param   leds
+     *          The pins with LEDs connected.
+     * @param   track
+     *          The track of the VPot. [1, 8]
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+     *          Number [CABLE_1, CABLE_16].
+     */
+    VPotRingLEDs(const PinList<11> &leds, uint8_t track,
+                 MIDIChannelCable channelCN = CHANNEL_1)
+        : Parent(track, channelCN), VPotRingLEDsDriver(leds) {}
+
+  protected:
+    void handleUpdate(typename Matcher::Result match) override {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
+    }
+
+    void updateDisplay() {
+        this->displayVPot(this->getState());
+    }
+
+  public:
+    void begin() override {
+        Parent::begin();
+        VPotRingLEDsDriver::begin();
+        updateDisplay();
+    }
+
+    void reset() override {
+        Parent::reset();
+        updateDisplay();
+    }
 };
 
 namespace Bankable {
 
-template <setting_t NumBanks>
-class VPotRingLEDs : public GenericVPotRing<NumBanks, VPotRingLEDsCallback> {
+/**
+ * @brief   A MIDI input element that represents a Mackie Control Universal VPot
+ *          ring and displays its value using LEDs. This version can be banked.
+ * 
+ * @tparam  BankSize
+ *          The number of banks.
+ * 
+ * @ingroup BankableMIDIInputElementsLEDs
+ */
+template <uint8_t BankSize>
+class VPotRingLEDs : public VPotRing<BankSize>, public VPotRingLEDsDriver {
   public:
-    VPotRingLEDs(BankConfig<NumBanks> config, const PinList<11> &ledPins,
-                 uint8_t track, MIDIChannelCN channelCN = CHANNEL_1)
-        : GenericVPotRing<NumBanks, VPotRingLEDsCallback>{
-              config, track, channelCN, {ledPins}} {}
+    using Parent = VPotRing<BankSize>;
+    using Matcher = typename Parent::Matcher;
+
+    /** 
+     * Constructor.
+     * 
+     * @param   config
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
+     * @param   leds
+     *          The pins with LEDs connected.
+     * @param   track
+     *          The track of the VPot. [1, 8]
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+     *          Number [CABLE_1, CABLE_16].
+     */
+    VPotRingLEDs(BankConfig<BankSize> config, const PinList<11> &leds,
+                 uint8_t track, MIDIChannelCable channelCN = CHANNEL_1)
+        : Parent(config, track, channelCN),
+          VPotRingLEDsDriver(leds) {}
+
+  protected:
+    void handleUpdate(typename Matcher::Result match) override {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
+    }
+
+    void updateDisplay() {
+        this->displayVPot(this->getState());
+    }
+
+  public:
+    void begin() override {
+        Parent::begin();
+        VPotRingLEDsDriver::begin();
+        updateDisplay();
+    }
+
+    void reset() override {
+        Parent::reset();
+        updateDisplay();
+    }
+
+  protected:
+    void onBankSettingChange() override {
+        Parent::onBankSettingChange();
+        updateDisplay();
+    }
 };
 
 } // namespace Bankable

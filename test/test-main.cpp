@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 class MyEnv : public ::testing::Environment {
   public:

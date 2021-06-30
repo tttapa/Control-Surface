@@ -11,27 +11,23 @@ BEGIN_CS_NAMESPACE
  * 
  * Inspired by the Adafruit GFX library for easy compatibility.
  */
-class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
+class DisplayInterface : public Print {
   protected:
-    /// @todo   Do I need to keep a list now that I have sorted all
-    ///         DisplayElement%s?
-    DisplayInterface() { elements.append(this); }
+    DisplayInterface() = default;
 
   public:
-    /// @todo   Do I need to keep a list now that I have sorted all
-    ///         DisplayElement%s?
-    // Note to self:    don't forget to make destructor = default
-    //                  instead of deleting it altogether
-    virtual ~DisplayInterface() { elements.remove(this); }
+    virtual ~DisplayInterface() = default;
 
     /// Initialize the display.
     virtual void begin();
 
-    /// Clear the frame buffer or display.
+    /// Clear the frame buffer or clear the display.
     virtual void clear() = 0;
     /// Draw a custom background.
     virtual void drawBackground(){};
-    /// Write the frame buffer to the display.
+    /// Write the frame buffer to the display. If your display library writes to
+    /// the display directly, without a display buffer in RAM, you can leave 
+    /// this function empty.
     virtual void display() = 0;
 
     /// Paint a single pixel with the given color.
@@ -77,38 +73,6 @@ class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
     /// Draw a disk (filled circle).
     virtual void fillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color);
 
-    /// Initialize all displays.
-    /// @see    begin
-    static void beginAll();
-
-    /// Enable this display: insert it into the linked list of instances,
-    /// so it gets updated automatically
-    void enable() {
-        if (isEnabled()) {
-            ERROR(F("Error: This display is already enabled."), 0x1214);
-            return;
-        }
-        elements.append(this);
-    }
-
-    /// Disable this display: remove it from the linked list of instances,
-    /// so it no longer gets updated automatically
-    void disable() {
-        if (!isEnabled()) {
-            ERROR(F("Error: This display is already disabled."), 0x1215);
-            return;
-        }
-        elements.remove(this);
-    }
-
-    /**
-     * @brief   Check if this display is enabled.
-     * 
-     * @note    Assumes that the display is not added to a different linked 
-     *          list by the user.
-     */
-    bool isEnabled() { return elements.couldContain(this); }
-
     /**
      * @brief   Clear the frame buffer, and draw the custom background.
      * @see    clear
@@ -118,9 +82,6 @@ class DisplayInterface : public Print, public DoublyLinkable<DisplayInterface> {
         clear();
         drawBackground();
     }
-
-  private:
-    static DoublyLinkedList<DisplayInterface> elements;
 };
 
 END_CS_NAMESPACE

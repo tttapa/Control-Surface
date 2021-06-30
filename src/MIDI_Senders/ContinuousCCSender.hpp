@@ -15,7 +15,7 @@ class ContinuousCCSender {
   public:
     /// Send a 7-bit CC message to the given address.
     void send(uint8_t value, MIDIAddress address) {
-        Control_Surface.sendCC(address, value);
+        Control_Surface.sendControlChange(address, value);
     }
 
     /// Get the resolution of the sender in bits (always returns 7).
@@ -37,12 +37,12 @@ template <uint8_t INPUT_PRECISION_BITS>
 class ContinuousCCSender14 {
   public:
     /// Send a 14-bit CC message to the given address.
-    /// Sends two 7-bit CC packets, one for @p address (MSB), and one for 
+    /// Sends two 7-bit CC packets, one for @p address (MSB), and one for
     /// @p address + 0x20 (LSB).
     void send(uint16_t value, MIDIAddress address) {
         value = AH::increaseBitDepth<14, precision(), uint16_t>(value);
-        Control_Surface.sendCC(address + 0x00, (value >> 7) & 0x7f);
-        Control_Surface.sendCC(address + 0x20, (value >> 0) & 0x7F);
+        Control_Surface.sendControlChange(address + 0x00, (value >> 7) & 0x7F);
+        Control_Surface.sendControlChange(address + 0x20, (value >> 0) & 0x7F);
     }
 
     /// Get this sender's precision.

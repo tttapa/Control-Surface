@@ -28,7 +28,7 @@ class CCButtons : public MIDIButtons<DigitalCCSender, NumButtons> {
      *          the given controller number and channel.
      *
      * @param   buttons
-     *          An list of digital input pins with the buttons connected.  
+     *          A list of digital input pins with the buttons connected.  
      *          The internal pull-up resistors will be enabled.
      * @param   baseAddress
      *          The MIDI address of the first button, containing the controller
@@ -43,11 +43,10 @@ class CCButtons : public MIDIButtons<DigitalCCSender, NumButtons> {
      *          The MIDI sender to use.
      */
     CCButtons(const Array<AH::Button, NumButtons> &buttons,
-              const MIDIAddress &baseAddress,
-              const RelativeMIDIAddress &incrementAddress,
+              MIDIAddress baseAddress, RelativeMIDIAddress incrementAddress,
               const DigitalCCSender &sender = {})
-        : MIDIButtons<DigitalCCSender, NumButtons>(
-              buttons, baseAddress, incrementAddress, sender) {}
+        : MIDIButtons<DigitalCCSender, NumButtons>(buttons, baseAddress,
+                                                   incrementAddress, sender) {}
 };
 
 END_CS_NAMESPACE

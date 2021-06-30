@@ -5,6 +5,7 @@ keyword1:
  - HardwareSerialMIDI_Interface
  - USBSerialMIDI_Interface
  - USBMIDI_Interface
+ - BluetoothMIDI_Interface
  - StreamDebugMIDI_Interface
  - SerialDebugMIDI_Interface
  - HardwareSerialDebugMIDI_Interface
@@ -12,6 +13,7 @@ keyword1:
  - SoftwareSerialDebugMIDI_Interface
  - HairlessMIDI_Interface
  - MIDI_Callbacks
+ - FineGrainedMIDI_Callbacks
  - SysExMessage
  - FortySevenEffectsMIDI_Interface
 
@@ -19,21 +21,52 @@ keyword2:
  - begin
  - update
  - send
- - sendOnCable
+ - sendChannelMessage
  - sendNoteOn
  - sendNoteOff
- - sendKP
- - sendCC
- - sendPC
- - sendCP
- - sendPB
+ - sendKeyPressure
+ - sendControlChange
+ - sendProgramChange
+ - sendChannelPressure
+ - sendPitchBend
+ - sendSysCommon
+ - sendMTCQuarterFrame
+ - sendSongPositionPointer
+ - sendSongSelect
+ - sendTuneRequest
+ - sendSysEx
+ - sendRealTime
+ - sendTimingClock
+ - sendStart
+ - sendContinue
+ - sendStop
+ - sendActiveSensing
+ - sendSystemReset
+ - sendNow
  - getDefault
  - setAsDefault
  - setCallbacks
  - getParser
  - getChannelMessage
  - getSysExMessage
- - getCN
  - onChannelMessage
  - onSysExMessage
  - onRealTimeMessage
+ - onNoteOff
+ - onNoteOn
+ - onKeyPressure
+ - onControlChange
+ - onProgramChange
+ - onChannelPressure
+ - onPitchBend
+ - onSystemExclusive
+ - onTimeCodeQuarterFrame
+ - onSongPosition
+ - onSongSelect
+ - onTuneRequest
+ - onClock
+ - onStart
+ - onContinue
+ - onStop
+ - onActiveSensing
+ - onSystemReset

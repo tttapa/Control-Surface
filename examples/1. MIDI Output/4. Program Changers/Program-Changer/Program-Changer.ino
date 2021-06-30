@@ -1,7 +1,7 @@
 /** 
  * This is an example that demonstrates the use of MIDI Program Changers.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -32,7 +32,7 @@
 USBMIDI_Interface midi;
 
 // Instantiate a program changer with 3 programs
-ProgramChanger<3> programChanger = {
+ProgramChanger<3> programChanger {
   {
     MIDI_PC::Acoustic_Grand_Piano, // list of programs
     MIDI_PC::Rock_Organ,
@@ -43,7 +43,7 @@ ProgramChanger<3> programChanger = {
 
 // Instantiate a selector that reads three buttons and controls the program
 // changer
-ManyButtonsSelector<3> programSelector = {
+ManyButtonsSelector<3> programSelector {
   programChanger,
   {{2, 3, 4}},
 };

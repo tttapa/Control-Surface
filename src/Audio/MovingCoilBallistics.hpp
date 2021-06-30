@@ -25,10 +25,10 @@ class MovingCoilBallistics {
 
         if (x >= 1) {
             x = 1;
-            x_dot = x_dot > 0 ? -1.0 * x_dot : x_dot;
+            x_dot = x_dot > 0 ? -1 * x_dot : x_dot;
         } else if (x < 0) {
             x = 0;
-            x_dot = x_dot < 0 ? -1.0 * x_dot : x_dot;
+            x_dot = x_dot < 0 ? -1 * x_dot : x_dot;
         }
         return x;
     }

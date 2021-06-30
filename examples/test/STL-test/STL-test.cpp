@@ -113,7 +113,7 @@ void setup() {
   TEST_CMATH_FUNCTION2(std::hypot);
   TEST_CMATH_FUNCTION3(std::fma);
 
-  std::vector<int> vec = {1, 2, 3, 4};
+  std::vector<int> vec {1, 2, 3, 4};
   vec.reserve(100);
   vec.resize(50);
   vec[1] = -2;

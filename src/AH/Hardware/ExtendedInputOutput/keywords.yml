@@ -9,6 +9,8 @@ keyword1:
 
   - MAX7219
 
+  - MCP23017
+
   - ShiftRegisterOut
 
   - ShiftRegisterOutRGB
@@ -40,5 +42,8 @@ keyword2:
   - blueBit
 
   - pins
+
+  - pinA
+  - pinB
 
 literal1:

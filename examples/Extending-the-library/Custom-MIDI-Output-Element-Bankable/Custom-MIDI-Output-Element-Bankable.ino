@@ -8,7 +8,7 @@
  * To understand this example, you need to understand the @ref Bank.ino and the
  * @ref Custom-MIDI-Output-Element.ino examples first.
  *
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -67,7 +67,7 @@ class MyNoteButton : public MIDIOutputElement {
    * @param   velocity
    *          The MIDI note velocity [0, 127].
    */
-  MyNoteButton(OutputBankConfig<> bankConfig, pin_t pin, 
+  MyNoteButton(OutputBankConfig<> bankConfig, pin_t pin,
                MIDIAddress baseAddress, uint8_t velocity)
     : address(bankConfig, baseAddress), button(pin), velocity(velocity) {}
 
@@ -79,12 +79,12 @@ class MyNoteButton : public MIDIOutputElement {
   // Update: read the button and send MIDI messages when appropriate.
   // This method is called continuously by `Control_Surface.loop()`.
   void update() final override {
-    AH::Button::State state = button.update();               // Read the button
-    if (state == AH::Button::Falling) {                      // if pressed
+    AH::Button::State state = button.update(); // Read the button
+    if (state == AH::Button::Falling) {        // if pressed
       // Don't allow changing the bank setting as long as the button is pressed:
       address.lock();
       Control_Surface.sendNoteOn(address.getActiveAddress(), velocity);
-    } else if (state == AH::Button::Rising) {                // if released
+    } else if (state == AH::Button::Rising) { // if released
       Control_Surface.sendNoteOff(address.getActiveAddress(), velocity);
       // Button is released, so the bank setting can be changed again.
       address.unlock();
@@ -142,21 +142,19 @@ END_CS_NAMESPACE
 // Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
-// Instantiate four Banks, with twelve tracks per bank (12 semitones = 1 octave). 
+// Instantiate four Banks, with twelve tracks per bank (12 semitones = 1 octave).
 Bank<4> bank(12);
 // Instantiate a Bank selector to control which one of the four Banks is active.
-IncrementSelector<4> selector = {
+IncrementSelector<4> selector {
   bank, // Bank to manage
   6,    // push button pin
 };
 
-using namespace MIDI_Notes;
-
 // Instantiate a MyNoteButton object
-MyNoteButton button = {
+MyNoteButton button {
   {bank, BankType::CHANGE_ADDRESS}, // bank changes the note number (address)
   5,                                // Push button on pin 5
-  {note(C, 2), CHANNEL_1},          // Base address: Note C2 on MIDI channel 1
+  {MIDI_Notes::C(2), CHANNEL_1},      // Base address: Note C2 on MIDI channel 1
   0x7F,                             // Maximum velocity
 };
 

@@ -44,8 +44,6 @@
 #include <MIDI_Outputs/ManyAddresses/PBPotentiometer.hpp>
 #include <MIDI_Outputs/ManyAddresses/PCButton.hpp>
 
-#include <Encoder.h>
-//
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
 
@@ -58,7 +56,7 @@
 
 #include <Selectors/LEDs/SelectorLEDs.hpp>
 
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 using namespace CS;
 
@@ -66,7 +64,7 @@ TEST(Construction, MIDIOutputs) {
     const pin_t pin = 0;
     const MIDIAddress address = {};
     const RelativeMIDIAddress relAddress = {};
-    const MIDIChannelCN cnChannel = {};
+    const MIDIChannelCable cnChannel = {};
     uint8_t u8 = 0;
     int8_t i8 = 0;
     const PinList<3> rowPins3 = {1, 2, 3};
@@ -94,7 +92,7 @@ TEST(Construction, MIDIOutputs) {
 
     CCPotentiometer{pin, address};
 
-    CCRotaryEncoder{EncoderPinList{pin, pin}, address, i8, u8};
+    CCRotaryEncoder{{pin, pin}, address, i8, u8};
 
     // Note --------------------------------------------------------------------
     NoteButton{pin, address};
@@ -121,7 +119,7 @@ TEST(Construction, MIDIOutputs) {
 
     Bankable::CCPotentiometer{bank, pin, address};
 
-    Bankable::CCRotaryEncoder{bank, EncoderPinList{pin, pin}, address, i8, u8};
+    Bankable::CCRotaryEncoder{bank, {pin, pin}, address, i8, u8};
 
     // Bankable::Note ----------------------------------------------------------
     Bankable::NoteButton{bank, pin, address};
@@ -171,7 +169,7 @@ TEST(Construction, MIDIOutputs) {
 
 TEST(Construction, Selectors) {
     const pin_t pin = 0;
-    const MIDIChannelCN cnChannel = {};
+    const MIDIChannelCable cnChannel = {};
     const Wrap wrap = Wrap::NoWrap;
     Bank<4> bank;
     Bank<2> bank2;

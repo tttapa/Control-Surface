@@ -2,7 +2,7 @@
  * An example demonstrating the use of DisplayElement%s to display information
  * from the DAW on a small OLED display.
  *
- * @boards  Teensy 3.x
+ * @boards  Mega, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -48,8 +48,6 @@
  * https://github.com/tttapa/Control-Surface
  */
 
-#include <Encoder.h> // Include the Encoder library.
-// This must be done before the Control Surface library.
 #include <Control_Surface.h> // Include the Control Surface library
 // Include the display interface you'd like to use
 #include <Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp>
@@ -81,7 +79,7 @@ constexpr int8_t OLED_CS = 10;    // Chip Select pin of the display
 constexpr uint32_t SPI_Frequency = SPI_MAX_SPEED;
 
 // Instantiate the displays
-Adafruit_SSD1306 ssd1306Display = {
+Adafruit_SSD1306 ssd1306Display {
   SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,          OLED_DC,
   OLED_reset,   OLED_CS,       SPI_Frequency,
 };
@@ -119,7 +117,7 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
 Bank<4> bank(2); // Create a new bank with two tracks per bank
 
 // Create a new bank selector to control the bank using two push buttons
-IncrementDecrementSelector<4> bankselector = {bank, {5, 6}, Wrap::Wrap};
+IncrementDecrementSelector<4> bankselector {bank, {5, 6}, Wrap::Wrap};
 
 // -------------------------- MIDI Input Elements --------------------------- //
 // ========================================================================== //
@@ -129,40 +127,40 @@ IncrementDecrementSelector<4> bankselector = {bank, {5, 6}, Wrap::Wrap};
 */
 
 // Time display keeps track of the bar counter
-MCU::TimeDisplay timedisplay = {};
+MCU::TimeDisplay timedisplay {};
 
 // Play / Record
-NoteValue play = {MCU::PLAY};
-NoteValue record = {MCU::RECORD};
+NoteValue play {MCU::PLAY};
+NoteValue record {MCU::RECORD};
 
 // Mute
-Bankable::NoteValue<4> mute[] = {
+Bankable::NoteValue<4> mute[] {
   {bank, MCU::MUTE_1},
   {bank, MCU::MUTE_2},
 };
 
 // Solo
-Bankable::NoteValue<4> solo[] = {
+Bankable::NoteValue<4> solo[] {
   {bank, MCU::SOLO_1},
   {bank, MCU::SOLO_2},
 };
 
-NoteValue rudeSolo = {MCU::RUDE_SOLO};
+NoteValue rudeSolo {MCU::RUDE_SOLO};
 
 // Record arm / ready
-Bankable::NoteValue<4> recrdy[] = {
+Bankable::NoteValue<4> recrdy[] {
   {bank, MCU::REC_RDY_1},
   {bank, MCU::REC_RDY_2},
 };
 
 // VU meters
-MCU::Bankable::VU<4> vu[] = {
+MCU::Bankable::VU<4> vu[] {
   {bank, 1, MCU::VUDecay::Hold},
   {bank, 2, MCU::VUDecay::Hold},
 };
 
 // VPot rings
-MCU::Bankable::VPotRing<4> vpot[] = {
+MCU::Bankable::VPotRing<4> vpot[] {
   {bank, 1},
   {bank, 2},
 };
@@ -175,56 +173,56 @@ MCU::Bankable::VPotRing<4> vpot[] = {
 */
 
 // Time display
-MCU::TimeDisplayDisplay timedisplaydisplay = {
+MCU::TimeDisplayDisplay timedisplaydisplay {
   // position (0, 0), font size (1)
   display, timedisplay, {0, 0}, 1, WHITE,
 };
 
 // Play / Record
-NoteBitmapDisplay playDisp = {
+BitmapDisplay<> playDisp {
   display, play, XBM::play_7, {16 + 64, 0}, WHITE,
 };
-NoteBitmapDisplay recordDisp = {
+BitmapDisplay<> recordDisp {
   display, record, XBM::record_7, {26 + 64, 0}, WHITE,
 };
 
 // Mute
-NoteBitmapDisplay muteDisp[] = {
+BitmapDisplay<> muteDisp[] {
   {display, mute[0], XBM::mute_10B, {14, 50}, WHITE},
   {display, mute[1], XBM::mute_10B, {14 + 64, 50}, WHITE},
 };
 
 // Solo
-NoteBitmapDisplay soloDisp[] = {
+BitmapDisplay<> soloDisp[] {
   {display, solo[0], XBM::solo_10B, {14, 50}, WHITE},
   {display, solo[1], XBM::solo_10B, {14 + 64, 50}, WHITE},
 };
 
-NoteBitmapDisplay rudeSoloDisp = {
+BitmapDisplay<> rudeSoloDisp {
   display, rudeSolo, XBM::solo_7, {36 + 64, 0}, WHITE};
 
 // Record arm / ready
-NoteBitmapDisplay recrdyDisp[] = {
+BitmapDisplay<> recrdyDisp[] {
   {display, recrdy[0], XBM::rec_rdy_10B, {14 + 14, 50}, WHITE},
   {display, recrdy[1], XBM::rec_rdy_10B, {14 + 14 + 64, 50}, WHITE},
 };
 
 // VU meters
-MCU::VUDisplay vuDisp[] = {
+MCU::VUDisplay<> vuDisp[] {
   // position (32+11, 60), width (16), bar height (3) px, bar spacing (1) px
   {display, vu[0], {32 + 11, 60}, 16, 3, 1, WHITE},
   {display, vu[1], {32 + 11 + 64, 60}, 16, 3, 1, WHITE},
 };
 
 // VPot rings
-MCU::VPotDisplay vpotDisp[] = {
+MCU::VPotDisplay<> vpotDisp[] {
   // position (0, 10), outer radius (16) px, inner radius (13) px
   {display, vpot[0], {0, 10}, 16, 13, WHITE},
   {display, vpot[1], {64, 10}, 16, 13, WHITE},
 };
 
 // Bank seting
-BankDisplay bankDisp[] = {
+BankDisplay bankDisp[] {
   // first track of the bank (1), position (0, 50), font size (2)
   {display, bank, 1, {0, 50}, 2, WHITE},
   {display, bank, 2, {64, 50}, 2, WHITE},
@@ -234,9 +232,6 @@ BankDisplay bankDisp[] = {
 // ========================================================================== //
 
 void setup() {
-  // The default SPI MOSI pin (11) is used for I²S, so we need to use the
-  // alternative MOSI pin (7)
-  SPI.setMOSI(7);
   // Correct relative mode for MCU rotary encoders
   RelativeCCSender::setMode(MACKIE_CONTROL_RELATIVE);
   Control_Surface.begin(); // Initialize Control Surface

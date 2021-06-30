@@ -5,7 +5,7 @@
 
 /** 
  * @defgroup    AH_Containers Containers
- * @brief   Containers like Array, BitArray, DoublyLinkedList and UniquePtr.
+ * @brief   Containers like Array, BitArray, DoublyLinkedList.
  */
 
 /// @cond   !AH_MAIN_LIBRARY

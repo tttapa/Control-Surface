@@ -64,6 +64,7 @@ lcov \
     '/usr/include/*' '/usr/lib/*' \
     '*/ArduinoMock/*' '*/mock/*' \
     '*/googletest/*' \
+    '*/gtest/*' '*/gmock/*' \
     '*/test/*' \
     --output-file "$dest"/coverage_filtered.info \
     --gcov-tool "$gcov_bin" \

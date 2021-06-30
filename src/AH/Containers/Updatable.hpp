@@ -8,7 +8,6 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 #include <AH/Containers/CRTP.hpp>
 #include <AH/Containers/LinkedList.hpp>
-#include <AH/Containers/Mutex.hpp>
 #include <AH/Error/Error.hpp>
 #include <AH/STL/type_traits>
 #include <AH/STL/utility> // std::forward
@@ -29,16 +28,10 @@ BEGIN_AH_NAMESPACE
  * 
  * @nosubgrouping
  */
-template <class Derived, bool ThreadSafe = false>
+template <class Derived>
 class UpdatableCRTP : public DoublyLinkable<Derived> {
 
   public:
-    using Mutex =
-        typename std::conditional<ThreadSafe, DefaultMutEx, EmptyMutex>::type;
-    using LockGuard =
-        typename std::conditional<ThreadSafe, DefaultLockGuard<Mutex>,
-                                  EmptyLockGuard<Mutex>>::type;
-
 #if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wattributes"
@@ -59,14 +52,24 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
     /// Constructor: create an Updatable and add it to the linked list of
     /// instances.
     UpdatableCRTP() __attribute__((no_sanitize("undefined"))) {
-        LockGuard lock(mutex);
         updatables.append(CRTP(Derived));
     }
+
+    UpdatableCRTP(const UpdatableCRTP &)
+        __attribute__((no_sanitize("undefined")))
+        : DoublyLinkable<Derived>() {
+        updatables.append(CRTP(Derived));
+    }
+    UpdatableCRTP &operator=(const UpdatableCRTP &) { return *this; }
+
+    UpdatableCRTP(UpdatableCRTP &&) __attribute__((no_sanitize("undefined"))) {
+        updatables.append(CRTP(Derived));
+    }
+    UpdatableCRTP &operator=(UpdatableCRTP &&) { return *this; }
 
   public:
     /// Destructor: remove the updatable from the linked list of instances.
     virtual ~UpdatableCRTP() __attribute__((no_sanitize("undefined"))) {
-        LockGuard lock(mutex);
         if (updatables.couldContain(CRTP(Derived)))
             updatables.remove(CRTP(Derived));
     }
@@ -76,23 +79,14 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
 #endif
 
   public:
-    static Mutex &getMutex() { return mutex; }
-
     /// @name Main initialization and updating methods
     /// @{
 
     template <class... Args>
-    static void applyToAll(const LockGuard &,
-                           void (Derived::*method)(Args &&...),
-                           Args &&... args) {
+    static void __attribute__((always_inline))
+    applyToAll(void (Derived::*method)(Args...), Args... args) {
         for (auto &el : updatables)
-            (el.*method)(std::forward<Args>(args)...);
-    }
-
-    template <class... Args>
-    static void applyToAll(void (Derived::*method)(Args &&...),
-                           Args &&... args) {
-        applyToAll(LockGuard(mutex), method, std::forward<Args>(args)...);
+            (el.*method)(args...);
     }
 
     /// @}
@@ -103,29 +97,23 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
 
     /// Enable this updatable: insert it into the linked list of instances,
     /// so it gets updated automatically
-    void enable(const LockGuard &lock) {
-        if (isEnabled(lock)) {
+    void enable() {
+        if (isEnabled()) {
             ERROR(F("Error: This element is already enabled."), 0x1212);
             return;
         }
         updatables.append(CRTP(Derived));
     }
 
-    /// @copydoc enable
-    void enable() { enable(LockGuard(mutex)); }
-
     /// Disable this updatable: remove it from the linked list of instances,
     /// so it no longer gets updated automatically
-    void disable(const LockGuard &lock) {
-        if (!isEnabled(lock)) {
+    void disable() {
+        if (!isEnabled()) {
             ERROR(F("Error: This element is already disabled."), 0x1213);
             return;
         }
         updatables.remove(CRTP(Derived));
     }
-
-    /// @copydoc disable
-    void disable() { disable(LockGuard(mutex)); }
 
     /**
      * @brief   Check if this updatable is enabled.
@@ -133,12 +121,9 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
      * @note    Assumes that the updatable is not added to a different linked 
      *          list by the user.
      */
-    bool isEnabled(const LockGuard &) const {
+    bool isEnabled() const {
         return updatables.couldContain(CRTP(const Derived));
     }
-
-    /// @copydoc isEnabled
-    bool isEnabled() { return isEnabled(LockGuard(mutex)); }
 
     /// @copydoc enable
     static void enable(UpdatableCRTP *element) { element->enable(); }
@@ -163,23 +148,16 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
     }
 
     /// Move down this element in the list.
-    void moveDown(const LockGuard &) { updatables.moveDown(CRTP(Derived)); }
-    /// Move down this element in the list.
-    void moveDown() { moveDown(LockGuard(mutex)); }
+    void moveDown() { updatables.moveDown(CRTP(Derived)); }
 
     /// @}
 
   protected:
     static DoublyLinkedList<Derived> updatables;
-    static Mutex mutex;
 };
 
-template <class Derived, bool ThreadSafe>
-DoublyLinkedList<Derived> UpdatableCRTP<Derived, ThreadSafe>::updatables;
-
-template <class Derived, bool ThreadSafe>
-typename UpdatableCRTP<Derived, ThreadSafe>::Mutex
-    UpdatableCRTP<Derived, ThreadSafe>::mutex;
+template <class Derived>
+DoublyLinkedList<Derived> UpdatableCRTP<Derived>::updatables;
 
 struct NormalUpdatable {};
 
@@ -191,8 +169,8 @@ struct NormalUpdatable {};
  * 
  * @nosubgrouping
  */
-template <class T = NormalUpdatable, bool ThreadSafe = false>
-class Updatable : public UpdatableCRTP<Updatable<T, ThreadSafe>, ThreadSafe> {
+template <class T = NormalUpdatable>
+class Updatable : public UpdatableCRTP<Updatable<T>> {
   public:
     /// @name Main initialization and updating methods
     /// @{

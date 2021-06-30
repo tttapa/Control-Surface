@@ -29,8 +29,7 @@ class MIDIButtons : public MIDIOutputElement {
      */
     MIDIButtons(BankAddress bankAddress,
                 const Array<AH::Button, NumButtons> &buttons,
-                const RelativeMIDIAddress &incrementAddress,
-                const Sender &sender)
+                RelativeMIDIAddress incrementAddress, const Sender &sender)
         : address(bankAddress), buttons(buttons),
           incrementAddress(incrementAddress), sender(sender) {}
 

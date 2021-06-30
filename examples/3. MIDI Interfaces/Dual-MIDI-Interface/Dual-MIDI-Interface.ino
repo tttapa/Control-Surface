@@ -45,14 +45,14 @@
 
 // Create two MIDI interfaces
 USBMIDI_Interface usbmidi;
-HardwareSerialMIDI_Interface serialmidi = {Serial1, MIDI_BAUD};
+HardwareSerialMIDI_Interface serialmidi {Serial1, MIDI_BAUD};
 
 // Create a MIDI pipe factory to connect the MIDI interfaces to Control Surface
 BidirectionalMIDI_PipeFactory<2> pipes;
 
 // Add some MIDI elements to show that the MIDI interfaces actually work
-CCPotentiometer pot = {A0, MIDI_CC::General_Purpose_Controller_1};
-NoteValueLED led = {LED_BUILTIN, 0x3C};
+CCPotentiometer pot {A0, MIDI_CC::General_Purpose_Controller_1};
+NoteLED led {LED_BUILTIN, 0x3C};
 
 void setup() {
   // Manually connect the MIDI interfaces to Control Surface

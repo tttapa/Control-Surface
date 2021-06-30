@@ -4,9 +4,12 @@ cmake_minimum_required(VERSION 3.10)
 # Enable ccache if available
 ################################################################################
 
-find_program(CCACHE_PROGRAM ccache)
-if(CCACHE_PROGRAM)
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+option(DISABLE_CCACHE Off)
+if (NOT DISABLE_CCACHE)
+    find_program(CCACHE_PROGRAM ccache)
+    if(CCACHE_PROGRAM)
+        set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+    endif()
 endif()
 
 ################################################################################
@@ -20,10 +23,7 @@ project(Control_Surface)
 # Add Google Test
 ################################################################################
 
-add_subdirectory(googletest)
-include_directories(${gmock_SOURCE_DIR}/include)
-include_directories(${gtest_SOURCE_DIR}/include)
-
+find_package(GTest REQUIRED NO_CMAKE_SYSTEM_PATH)
 include(GoogleTest)
 enable_testing()
 
@@ -48,7 +48,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
     -Wdouble-promotion \
     -Wswitch-default -Wswitch-enum -Wimplicit-fallthrough \
     -Wuninitialized \
-    -Wno-double-promotion \
     -Wno-missing-braces \
     -pedantic -pedantic-errors")
     
@@ -63,6 +62,11 @@ set(CMAKE_CXX_FLAGS_ASAN "-g3 -O0 \
 set(CMAKE_C_FLAGS_ASAN   "-g3 -O0 \
     -fsanitize=address,leak,undefined,pointer-compare,pointer-subtract")
 
+set(CMAKE_CXX_FLAGS_TSAN "-g3 -O0 \
+    -fsanitize=thread,undefined")
+set(CMAKE_C_FLAGS_TSAN   "-g3 -O0 \
+    -fsanitize=thread,undefined")
+
 set(CMAKE_CXX_FLAGS_RELEASE "-Os")
 set(CMAKE_C_FLAGS_RELEASE   "-Os")
 
@@ -72,7 +76,10 @@ set(CMAKE_C_FLAGS_RELWITHDEBINFO   "-Os -ggdb3")
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
         -Winconsistent-missing-override \
-        -Wno-gnu-zero-variadic-macro-arguments")
+        -Wno-gnu-zero-variadic-macro-arguments \
+        -Wdocumentation \
+        -Wno-error=unknown-attributes \
+        -Wno-error=documentation")
 else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
         -Wsuggest-override \
@@ -99,7 +106,6 @@ set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 # Build the source files and tests
 ################################################################################
 
-add_subdirectory(gtest-wrappers)
 add_subdirectory(mock)
 add_subdirectory(src)
 add_subdirectory(test)
@@ -108,9 +114,6 @@ add_subdirectory(test)
 # Custom targets for documentation 
 ################################################################################
 
-add_custom_target(export_documentation ./export.sh
-WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen/scripts)
-
 # Add XBM target
 add_custom_target(xbm 
     python3 ${CMAKE_CURRENT_LIST_DIR}/src/Display/Bitmaps/Scripts/XBM-export.py
@@ -118,7 +121,7 @@ add_custom_target(xbm
 
 # Add export documentation target
 add_custom_target(documentation 
-    rm -rf html && ./scripts/examples.py && doxygen
+    ./scripts/examples.py && doxygen
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen
     DEPENDS xbm)
 
@@ -133,9 +136,3 @@ endif()
 add_custom_target(check tests
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin/
     DEPENDS tests)
-
-add_custom_target(arduino ./build-arduino-examples.sh
-    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/scripts)
-
-add_custom_target(arduino_ci ./build-arduino-examples-ci.sh
-    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/scripts)

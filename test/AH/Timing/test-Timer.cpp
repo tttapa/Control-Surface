@@ -1,4 +1,4 @@
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 #include <AH/Timing/MillisMicrosTimer.hpp>
 

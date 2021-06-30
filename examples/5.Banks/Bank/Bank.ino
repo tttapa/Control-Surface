@@ -1,7 +1,7 @@
 /** 
  * This is an example that demonstrates the use of Banks.
  *
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x
+ * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x
  * 
  * Banks allow you to use a single control for many different actions. 
  * By changing the bank setting, you can change the address of a MIDI Element.
@@ -49,6 +49,9 @@
  * that gets called when the setting changes. The latter is demonstrated in the
  * @ref Custom-Selector-Callback.ino example.
  * 
+ * For more information about banks, have a look at the 
+ * @ref faq-banks "“How do banks work?”" FAQ page, it includes a nice animation.
+ * 
  * Connections
  * -----------
  * 
@@ -84,7 +87,7 @@ Bank<4> bank(2);
 //   └───────────── number of banks
 
 // Instantiate a Bank selector to control which one of the four Banks is active.
-IncrementDecrementSelector<4> selector = {
+IncrementDecrementSelector<4> selector {
     bank,       // Bank to manage
     {2, 3},     // push button pins (increment, decrement)
     Wrap::Wrap, // Wrap around
@@ -99,12 +102,12 @@ IncrementDecrementSelector<4> selector = {
 // Bank 1.
 
 // Instantiate two potentiometers for the volume controls.
-Bankable::CCPotentiometer potentiometer1 = {
+Bankable::CCPotentiometer potentiometer1 {
   {bank, BankType::CHANGE_CHANNEL},     // bank configuration
   A0,                                   // analog pin
   {MIDI_CC::Channel_Volume, CHANNEL_1}, // address
 };
-Bankable::CCPotentiometer potentiometer2 = {
+Bankable::CCPotentiometer potentiometer2 {
   {bank, BankType::CHANGE_CHANNEL},     // bank configuration
   A1,                                   // analog pin
   {MIDI_CC::Channel_Volume, CHANNEL_2}, // address

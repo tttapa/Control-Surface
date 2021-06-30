@@ -7,102 +7,212 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
-template <uint8_t NumLEDs>
-class VULEDsCallback {
+/// Small helper to display the VU meters on an LED bar display.
+template <uint16_t NumLEDs>
+class VULEDsDriver : public AH::DotBarDisplayLEDs<NumLEDs> {
   public:
-    VULEDsCallback(const AH::DotBarDisplayLEDs<NumLEDs> &leds) : leds(leds) {}
+    /// Constructor
+    VULEDsDriver(const PinList<NumLEDs> &leds)
+        : AH::DotBarDisplayLEDs<NumLEDs>(leds) {}
 
-    template <class T>
-    void begin(T &) {
-        leds.begin();
+    /// @param  value
+    ///         [0, 12]
+    void displayVU(uint16_t value) {
+        value = (value * NumLEDs + FLOOR_CORRECTION) / 12; // [0, N]
+        this->display(value);
     }
-
-    template <class T>
-    void update(T &t) {
-        uint8_t value = t.getValue();                      // value in [0, 12]
-        value = (value * NumLEDs + FLOOR_CORRECTION) / 12; // value in [0, N]
-        leds.display(value);
-    }
-
-    /// @copydoc    AH::DotBarDisplayLEDs::getMode
-    AH::DotBarMode getMode() const { return this->leds.getMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::setMode
-    void setMode(AH::DotBarMode mode) { this->leds.setMode(mode); }
-    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
-    void dotMode() { this->leds.dotMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::barMode
-    void barMode() { this->leds.barMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::toggleMode
-    void toggleMode() { this->leds.toggleMode(); }
 
   private:
-    AH::DotBarDisplayLEDs<NumLEDs> leds;
-
     /// @see    doc/VU-LED-mapping.ods
     constexpr static uint8_t FLOOR_CORRECTION = 5;
 };
 
+// -------------------------------------------------------------------------- //
+
+/** 
+ * @brief   A MIDI input element that represents a Mackie Control Universal VU
+ *          meter and displays its value using LEDs.
+ * 
+ * @tparam  NumLEDs
+ *          The number of LEDs for the VU meter display. Recommended value is 
+ *          12, because this is the range that's sent over MIDI.
+ * 
+ * @ingroup midi-input-elements-leds
+ */
 template <uint8_t NumLEDs>
-class VULEDs : public GenericVU<VULEDsCallback<NumLEDs>> {
+class VULEDs : public VU, public VULEDsDriver<NumLEDs> {
   public:
-    VULEDs(const PinList<NumLEDs> &ledPins, uint8_t track,
+    using Parent = VU;
+    using Matcher = typename Parent::Matcher;
+
+    /// @param  leds
+    ///         The pins with the LEDs connected.
+    /// @param  track
+    ///         The track of the VU meter. [1, 8]
+    /// @param  channelCN
+    ///         The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+    ///         Number [CABLE_1, CABLE_16].
+    /// @param  decayTime
+    ///         The time in milliseconds it takes for the value to decay one
+    ///         step.  
+    ///         The MCU protocol uses 300 ms per division, and two steps
+    ///         per division, so the default is 150 ms per step.  
+    ///         Some software doesn't work if the VU meter decays automatically, 
+    ///         in that case, you can set the decay time to zero to disable 
+    ///         the decay.
+    ///         @see    @ref MCU::VUDecay
+    VULEDs(const PinList<NumLEDs> &leds, uint8_t track,
+           MIDIChannelCable channelCN,
            unsigned int decayTime = VUDecay::Default)
-        : GenericVU<VULEDsCallback<NumLEDs>>{
-              track,
-              CHANNEL_1,
-              decayTime,
-              {ledPins},
-          } {}
+        : Parent(track, channelCN, decayTime), VULEDsDriver<NumLEDs>(leds) {}
 
-    VULEDs(const PinList<NumLEDs> &ledPins, uint8_t track,
-           MIDIChannelCN channelCN, unsigned int decayTime = VUDecay::Default)
-        : GenericVU<VULEDsCallback<NumLEDs>>{
-              track,
-              channelCN,
-              decayTime,
-              {ledPins},
-          } {}
+    /// @param  leds
+    ///         The pins with the LEDs connected.
+    /// @param  track
+    ///         The track of the VU meter. [1, 8]
+    /// @param  decayTime
+    ///         The time in milliseconds it takes for the value to decay one
+    ///         step.  
+    ///         The MCU protocol uses 300 ms per division, and two steps
+    ///         per division, so the default is 150 ms per step.  
+    ///         Some software doesn't work if the VU meter decays automatically, 
+    ///         in that case, you can set the decay time to zero to disable 
+    ///         the decay.
+    ///         @see    @ref MCU::VUDecay
+    VULEDs(const PinList<NumLEDs> &leds, uint8_t track,
+           unsigned int decayTime = VUDecay::Default)
+        : Parent(track, decayTime), VULEDsDriver<NumLEDs>(leds) {}
 
-    /// @copydoc    AH::DotBarDisplayLEDs::getMode
-    AH::DotBarMode getMode() const { return this->callback.getMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::setMode
-    void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
-    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
-    void dotMode() { this->callback.dotMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::barMode
-    void barMode() { this->callback.barMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::toggleMode
-    void toggleMode() { this->callback.toggleMode(); }
+  protected:
+    void handleUpdate(typename Matcher::Result match) override {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
+    }
+
+    void updateDisplay() { this->displayVU(getValue()); }
+
+  public:
+    void begin() override {
+        Parent::begin();
+        VULEDsDriver<NumLEDs>::begin();
+        updateDisplay();
+    }
+
+    void reset() override {
+        Parent::reset();
+        updateDisplay();
+    }
+
+    void update() override {
+        bool newdirty = Parent::decay();
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
+    }
 };
+
+// -------------------------------------------------------------------------- //
 
 namespace Bankable {
 
-template <uint8_t NumBanks, uint8_t NumLEDs>
-class VULEDs : public GenericVU<NumBanks, VULEDsCallback<NumLEDs>> {
+/** 
+ * @brief   A MIDI input element that represents a Mackie Control Universal VU
+ *          meter and displays its value using LEDs.
+ *          This version can be banked.
+ * 
+ * @tparam  BankSize
+ *          The number of banks.
+ * @tparam  NumLEDs
+ *          The number of LEDs for the VU meter display. Recommended value is 
+ *          12, because this is the range that's sent over MIDI.
+ * 
+ * @ingroup BankableMIDIInputElementsLEDs
+ */
+template <uint8_t BankSize, uint8_t NumLEDs>
+class VULEDs : public VU<BankSize>, public VULEDsDriver<NumLEDs> {
   public:
-    VULEDs(BankConfig<NumBanks> config, const PinList<NumLEDs> &ledPins,
-           uint8_t track, unsigned int decayTime = VUDecay::Default)
-        : GenericVU<NumBanks, VULEDsCallback<NumLEDs>>{
-              config, track, CHANNEL_1, decayTime, {ledPins},
-          } {}
+    using Parent = VU<BankSize>;
+    using Matcher = typename Parent::Matcher;
 
-    VULEDs(BankConfig<NumBanks> config, const PinList<NumLEDs> &ledPins,
-           uint8_t track, MIDIChannelCN channelCN,
+    /// @param  config
+    ///         The bank configuration to use.
+    /// @param  leds
+    ///         The pins with the LEDs connected.
+    /// @param  track
+    ///         The track of the VU meter. [1, 8]
+    /// @param  channelCN
+    ///         The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+    ///         Number [CABLE_1, CABLE_16].
+    /// @param  decayTime
+    ///         The time in milliseconds it takes for the value to decay one
+    ///         step.  
+    ///         The MCU protocol uses 300 ms per division, and two steps
+    ///         per division, so the default is 150 ms per step.  
+    ///         Some software doesn't work if the VU meter decays automatically, 
+    ///         in that case, you can set the decay time to zero to disable 
+    ///         the decay.
+    ///         @see    @ref MCU::VUDecay
+    VULEDs(BankConfig<BankSize> config, const PinList<NumLEDs> &leds,
+           uint8_t track, MIDIChannelCable channelCN,
            unsigned int decayTime = VUDecay::Default)
-        : GenericVU<NumBanks, VULEDsCallback<NumLEDs>>{
-              config, track, channelCN, decayTime, {ledPins},
-          } {}
+        : Parent(config, track, channelCN, decayTime), VULEDsDriver<NumLEDs>(
+                                                           leds) {}
 
-    /// @copydoc    AH::DotBarDisplayLEDs::getMode
-    AH::DotBarMode getMode() const { return this->callback.getMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::setMode
-    void setMode(AH::DotBarMode mode) { this->callback.setMode(mode); }
-    /// @copydoc    AH::DotBarDisplayLEDs::dotMode
-    void dotMode() { this->callback.dotMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::barMode
-    void barMode() { this->callback.barMode(); }
-    /// @copydoc    AH::DotBarDisplayLEDs::toggleMode
-    void toggleMode() { this->callback.toggleMode(); }
+    /// @param  config
+    ///         The bank configuration to use.
+    /// @param  leds
+    ///         The pins with the LEDs connected.
+    /// @param  track
+    ///         The track of the VU meter. [1, 8]
+    /// @param  decayTime
+    ///         The time in milliseconds it takes for the value to decay one
+    ///         step.  
+    ///         The MCU protocol uses 300 ms per division, and two steps
+    ///         per division, so the default is 150 ms per step.  
+    ///         Some software doesn't work if the VU meter decays automatically, 
+    ///         in that case, you can set the decay time to zero to disable 
+    ///         the decay.
+    ///         @see    @ref MCU::VUDecay
+    VULEDs(BankConfig<BankSize> config, const PinList<NumLEDs> &leds,
+           uint8_t track, unsigned int decayTime = VUDecay::Default)
+        : Parent(config, track, decayTime), VULEDsDriver<NumLEDs>(leds) {}
+
+  protected:
+    void handleUpdate(typename Matcher::Result match) override {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
+    }
+
+    void updateDisplay() { this->displayVU(this->getValue()); }
+
+  public:
+    void begin() override {
+        Parent::begin();
+        VULEDsDriver<NumLEDs>::begin();
+        updateDisplay();
+    }
+
+    void reset() override {
+        Parent::reset();
+        updateDisplay();
+    }
+
+    void update() override {
+        bool newdirty = Parent::decay();
+        if (newdirty)
+            updateDisplay();
+        this->dirty |= newdirty;
+    }
+
+  protected:
+    void onBankSettingChange() override {
+        Parent::onBankSettingChange();
+        updateDisplay();
+    }
 };
 
 } // namespace Bankable

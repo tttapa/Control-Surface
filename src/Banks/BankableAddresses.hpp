@@ -8,6 +8,10 @@
 
 BEGIN_CS_NAMESPACE
 
+/// Class for keeping track of the active bank, and allows locking of the
+/// bank setting.
+///
+/// @see @ref OutputBankableMIDIAddress
 class OutputBankableMIDIAddress_Base {
   protected:
     /**
@@ -106,7 +110,7 @@ class OutputBankableMIDIAddress : public OutputBankableMIDIAddress_Base {
      * @brief   Get the offset relative to the base address.
      */
     RelativeMIDIAddress getAddressOffset() const {
-        int8_t offset = getSelection() * bank.getTracksPerBank();
+        int8_t offset = bank.getOffsetOfSetting(getSelection());
         switch (type) {
             case CHANGE_ADDRESS: return {offset, 0, 0};
             case CHANGE_CHANNEL: return {0, offset, 0};

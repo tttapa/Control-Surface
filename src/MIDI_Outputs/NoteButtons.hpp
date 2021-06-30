@@ -28,7 +28,7 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NumButtons> {
      *          the given controller number and channel.
      *
      * @param   buttons
-     *          An list of digital input pins with the buttons connected.  
+     *          A list of digital input pins with the buttons connected.  
      *          The internal pull-up resistors will be enabled.
      * @param   baseAddress
      *          The MIDI address of the first button, containing the note
@@ -43,8 +43,7 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NumButtons> {
      *          The velocity of the MIDI Note events.
      */
     NoteButtons(const Array<AH::Button, NumButtons> &buttons,
-                const MIDIAddress &baseAddress,
-                const RelativeMIDIAddress &incrementAddress,
+                MIDIAddress baseAddress, RelativeMIDIAddress incrementAddress,
                 uint8_t velocity = 0x7F)
         : MIDIButtons<DigitalNoteSender, NumButtons>{
               buttons,

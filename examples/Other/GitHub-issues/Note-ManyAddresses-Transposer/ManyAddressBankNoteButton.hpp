@@ -30,7 +30,7 @@ class ManyAddressBankNoteButton
  public:
   ManyAddressBankNoteButton(const ManyAddresses<NumAddr> &manyaddresses,
                             OutputBankConfig<> bank, pin_t pin,
-                            const DigitalNoteSender &sender = {})
+                            const DigitalNoteSender &sender {})
     : MIDIButton<ManyAddressBank<NumAddr>, DigitalNoteSender>(
         {manyaddresses, bank}, pin, sender) {}
 };

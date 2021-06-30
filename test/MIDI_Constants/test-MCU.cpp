@@ -1,5 +1,5 @@
 #include <MIDI_Constants/MCUNameFromNoteNumber.hpp>
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 USING_CS_NAMESPACE;
 

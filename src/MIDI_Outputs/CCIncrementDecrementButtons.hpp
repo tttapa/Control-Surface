@@ -45,9 +45,8 @@ class CCIncrementDecrementButtons
      *          The MIDI sender to use for reset events.
      */
     CCIncrementDecrementButtons(const AH::IncrementDecrementButtons &buttons,
-                                const MIDIAddress &address,
-                                uint8_t multiplier = 1,
-                                const MIDIAddress &resetNote = {},
+                                MIDIAddress address, uint8_t multiplier = 1,
+                                MIDIAddress resetNote = MIDIAddress::invalid(),
                                 const RelativeCCSender &relativeSender = {},
                                 const DigitalNoteSender &resetSender = {})
         : MIDIIncrementDecrementButtons(buttons, address, multiplier, resetNote,

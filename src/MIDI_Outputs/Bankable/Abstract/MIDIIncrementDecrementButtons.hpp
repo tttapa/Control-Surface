@@ -54,7 +54,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         }
     }
 
-    void send(long delta, const MIDIAddress &address) {
+    void send(long delta, MIDIAddress address) {
         relativeSender.send(delta, address);
     }
 

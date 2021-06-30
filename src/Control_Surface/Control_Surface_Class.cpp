@@ -3,11 +3,7 @@
 #include <AH/Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
 #include <AH/Hardware/FilteredAnalog.hpp>
 #include <MIDI_Constants/Control_Change.hpp>
-#include <MIDI_Inputs/MIDIInputElementCC.hpp>
-#include <MIDI_Inputs/MIDIInputElementChannelPressure.hpp>
-#include <MIDI_Inputs/MIDIInputElementNote.hpp>
-#include <MIDI_Inputs/MIDIInputElementPC.hpp>
-#include <MIDI_Inputs/MIDIInputElementSysEx.hpp>
+#include <MIDI_Inputs/MIDIInputElement.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Selectors/Selector.hpp>
 
@@ -33,11 +29,13 @@ void Control_Surface_::begin() {
     FilteredAnalog<>::setupADC();
     ExtendedIOElement::beginAll();
     Updatable<MIDI_Interface>::beginAll();
-    DisplayInterface::beginAll(); // initialize all displays
+    beginDisplays();
+    MIDIInputElementNote::beginAll();
+    MIDIInputElementKP::beginAll();
     MIDIInputElementCC::beginAll();
     MIDIInputElementPC::beginAll();
-    MIDIInputElementChannelPressure::beginAll();
-    MIDIInputElementNote::beginAll();
+    MIDIInputElementCP::beginAll();
+    MIDIInputElementPB::beginAll();
     MIDIInputElementSysEx::beginAll();
     Updatable<>::beginAll();
     Updatable<Potentiometer>::beginAll();
@@ -81,83 +79,114 @@ void Control_Surface_::updateMidiInput() {
     Updatable<MIDI_Interface>::updateAll();
 }
 
-void Control_Surface_::sendImpl(uint8_t header, uint8_t d1, uint8_t d2,
-                                uint8_t cn) {
-    this->sourceMIDItoPipe(ChannelMessage{header, d1, d2, cn});
+void Control_Surface_::sendChannelMessageImpl(ChannelMessage msg) {
+    this->sourceMIDItoPipe(msg);
 }
-void Control_Surface_::sendImpl(uint8_t header, uint8_t d1, uint8_t cn) {
-    this->sourceMIDItoPipe(ChannelMessage{header, d1, 0x00, cn});
+void Control_Surface_::sendSysExImpl(SysExMessage msg) {
+    this->sourceMIDItoPipe(msg);
 }
-void Control_Surface_::sendImpl(const uint8_t *data, size_t length,
-                                uint8_t cn) {
-    this->sourceMIDItoPipe(SysExMessage{data, length, cn});
+void Control_Surface_::sendSysCommonImpl(SysCommonMessage msg) {
+    this->sourceMIDItoPipe(msg);
 }
-void Control_Surface_::sendImpl(uint8_t rt, uint8_t cn) {
-    this->sourceMIDItoPipe(RealTimeMessage{rt, cn});
+void Control_Surface_::sendRealTimeImpl(RealTimeMessage msg) {
+    this->sourceMIDItoPipe(msg);
 }
 
-void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midichmsg) {
-    ChannelMessageMatcher midimsg = {midichmsg};
-
+void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
 #ifdef DEBUG_MIDI_PACKETS
-    // TODO: print CN
-    if (midimsg.type != PROGRAM_CHANGE && midimsg.type != CHANNEL_PRESSURE)
-        DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1 << ' '
-                     << midimsg.data2 << dec);
+    if (midimsg.hasTwoDataBytes())
+        DEBUG(">>> " << hex << midimsg.header << ' ' << midimsg.data1 << ' '
+                     << midimsg.data2 << " (" << midimsg.cable.getOneBased()
+                     << ')' << dec);
     else
-        DEBUG(">>> " << hex << midichmsg.header << ' ' << midimsg.data1 << dec);
+        DEBUG(">>> " << hex << midimsg.header << ' ' << midimsg.data1 << " ("
+                     << midimsg.cable.getOneBased() << ')' << dec);
 #endif
 
     // If the Channel Message callback exists, call it to see if we have to
     // continue handling it.
-    if (channelMessageCallback && channelMessageCallback(midichmsg))
+    if (channelMessageCallback && channelMessageCallback(midimsg))
         return;
 
-    if (midimsg.type == MIDIMessageType::CONTROL_CHANGE &&
-        midimsg.data1 == MIDI_CC::Reset_All_Controllers) {
+    if (midimsg.getMessageType() == MIDIMessageType::CONTROL_CHANGE &&
+        midimsg.getData1() == MIDI_CC::Reset_All_Controllers) {
         // Reset All Controllers
         DEBUG(F("Reset All Controllers"));
         MIDIInputElementCC::resetAll();
-        MIDIInputElementChannelPressure::resetAll();
-    } else if (midimsg.type == MIDIMessageType::CONTROL_CHANGE &&
-               midimsg.data1 == MIDI_CC::All_Notes_Off) {
+        MIDIInputElementCP::resetAll();
+    } else if (midimsg.getMessageType() == MIDIMessageType::CONTROL_CHANGE &&
+               midimsg.getData1() == MIDI_CC::All_Notes_Off) {
+        // All Notes Off
         MIDIInputElementNote::resetAll();
     } else {
-        if (midimsg.type == MIDIMessageType::CONTROL_CHANGE) {
-            // Control Change
-            DEBUGFN(F("Updating CC elements with new MIDI message."));
-            MIDIInputElementCC::updateAllWith(midimsg);
+        switch (midimsg.getMessageType()) {
+            case MIDIMessageType::NONE: break;
+            case MIDIMessageType::NOTE_OFF: // fallthrough
+            case MIDIMessageType::NOTE_ON:
+                DEBUGFN(F("Updating Note elements with new MIDI "
+                          "message."));
+                MIDIInputElementNote::updateAllWith(midimsg);
+                break;
+            case MIDIMessageType::KEY_PRESSURE:
+                DEBUGFN(F("Updating Key Pressure elements with new MIDI "
+                          "message."));
+                MIDIInputElementKP::updateAllWith(midimsg);
+                break;
+            case MIDIMessageType::CONTROL_CHANGE:
+                DEBUGFN(F("Updating CC elements with new MIDI "
+                          "message."));
+                MIDIInputElementCC::updateAllWith(midimsg);
+                break;
+            case MIDIMessageType::PROGRAM_CHANGE:
+                DEBUGFN(F("Updating Program Change elements with new MIDI "
+                          "message."));
+                MIDIInputElementPC::updateAllWith(midimsg);
+                break;
+            case MIDIMessageType::CHANNEL_PRESSURE:
+                DEBUGFN(F("Updating Channel Pressure elements with new MIDI "
+                          "message."));
+                MIDIInputElementCP::updateAllWith(midimsg);
+                break;
+            case MIDIMessageType::PITCH_BEND:
+                // Channel Pressure
+                DEBUGFN(F("Updating Pitch Bend elements with new MIDI "
+                          "message."));
+                MIDIInputElementPB::updateAllWith(midimsg);
+                break;
 
-        } else if (midimsg.type == MIDIMessageType::NOTE_OFF ||
-                   midimsg.type == MIDIMessageType::NOTE_ON) {
-            // Note
-            DEBUGFN(F("Updating Note elements with new MIDI message."));
-            MIDIInputElementNote::updateAllWith(midimsg);
-
-        } else if (midimsg.type == MIDIMessageType::CHANNEL_PRESSURE) {
-            // Channel Pressure
-            DEBUGFN(F("Updating Channel Pressure elements with new "
-                      "MIDI message."));
-            MIDIInputElementChannelPressure::updateAllWith(midimsg);
-        } else if (midimsg.type == MIDIMessageType::PROGRAM_CHANGE) {
-            // Channel Pressure
-            DEBUGFN(F("Updating Program Change elements with new "
-                      "MIDI message."));
-            MIDIInputElementPC::updateAllWith(midimsg);
+            // These MIDI types are not channel messages, so aren't handled here
+            // LCOV_EXCL_START
+            case MIDIMessageType::SYSEX_START: break;
+            case MIDIMessageType::MTC_QUARTER_FRAME: break;
+            case MIDIMessageType::SONG_POSITION_POINTER: break;
+            case MIDIMessageType::SONG_SELECT: break;
+            case MIDIMessageType::UNDEFINED_SYSCOMMON_1: break;
+            case MIDIMessageType::UNDEFINED_SYSCOMMON_2: break;
+            case MIDIMessageType::TUNE_REQUEST: break;
+            case MIDIMessageType::SYSEX_END: break;
+            case MIDIMessageType::TIMING_CLOCK: break;
+            case MIDIMessageType::UNDEFINED_REALTIME_1: break;
+            case MIDIMessageType::START: break;
+            case MIDIMessageType::CONTINUE: break;
+            case MIDIMessageType::STOP: break;
+            case MIDIMessageType::UNDEFINED_REALTIME_2: break;
+            case MIDIMessageType::ACTIVE_SENSING: break;
+            case MIDIMessageType::SYSTEM_RESET: break;
+            default:
+                break;
+                // LCOV_EXCL_STOP
         }
     }
 }
 
 void Control_Surface_::sinkMIDIfromPipe(SysExMessage msg) {
-    // System Exclusive
 #ifdef DEBUG_MIDI_PACKETS
     const uint8_t *data = msg.data;
     size_t len = msg.length;
-    // TODO: print CN
-    DEBUG_OUT << hex;
+    DEBUG_OUT << ">>> " << hex;
     for (size_t i = 0; i < len; i++)
         DEBUG_OUT << data[i] << ' ';
-    DEBUG_OUT << dec << endl;
+    DEBUG_OUT << " (" << msg.cable << ')' << dec << endl;
 #endif
     // If the SysEx Message callback exists, call it to see if we have to
     // continue handling it.
@@ -166,38 +195,94 @@ void Control_Surface_::sinkMIDIfromPipe(SysExMessage msg) {
     MIDIInputElementSysEx::updateAllWith(msg);
 }
 
+void Control_Surface_::sinkMIDIfromPipe(SysCommonMessage msg) {
+#ifdef DEBUG_MIDI_PACKETS
+    DEBUG_OUT << ">>> " << hex << msg.getMessageType() << ' ' << msg.getData1()
+              << ' ' << msg.getData2() << " (" << msg.cable << ')' << dec
+              << endl;
+#endif
+    // If the SysEx Message callback exists, call it to see if we have to
+    // continue handling it.
+    if (sysCommonMessageCallback && sysCommonMessageCallback(msg))
+        return;
+}
+
 void Control_Surface_::sinkMIDIfromPipe(RealTimeMessage rtMessage) {
+#ifdef DEBUG_MIDI_PACKETS
+    DEBUG(">>> " << hex << rtMessage.message << " ("
+                 << rtMessage.cable.getOneBased() << ')' << dec);
+#endif
+
     // If the Real-Time Message callback exists, call it to see if we have to
     // continue handling it.
     if (realTimeMessageCallback && realTimeMessageCallback(rtMessage))
         return;
-    // TODO: handle Real-Time input
 }
 
 void Control_Surface_::updateInputs() {
-    MIDIInputElementCC::updateAll();
     MIDIInputElementNote::updateAll();
-    MIDIInputElementChannelPressure::updateAll();
+    MIDIInputElementKP::updateAll();
+    MIDIInputElementCC::updateAll();
     MIDIInputElementPC::updateAll();
+    MIDIInputElementCP::updateAll();
+    MIDIInputElementPB::updateAll();
     MIDIInputElementSysEx::updateAll();
 }
 
-void Control_Surface_::updateDisplays() {
-    DisplayInterface *previousDisplay = nullptr;
-    for (DisplayElement &displayElement : DisplayElement::getAll()) {
-        DisplayInterface *thisDisplay = &displayElement.getDisplay();
-        if (!thisDisplay->isEnabled())
-            continue;
-        if (thisDisplay != previousDisplay) {
-            if (previousDisplay)
-                previousDisplay->display();
-            previousDisplay = thisDisplay;
-            thisDisplay->clearAndDrawBackground();
+void Control_Surface_::beginDisplays() {
+    auto &allElements = DisplayElement::getAll();
+    auto it = allElements.begin();
+    auto end = allElements.end();
+    if (it == end)
+        return;
+    auto previousDisplay = &it->getDisplay();
+    // Loop over all display elements
+    while (true) {
+        ++it;
+        // If this is the first element on another display
+        if (it == end || &it->getDisplay() != previousDisplay) {
+            // Initialize the display
+            previousDisplay->begin();
+            if (it == end)
+                break;
+            previousDisplay = &it->getDisplay();
         }
-        displayElement.draw();
     }
-    if (previousDisplay)
-        previousDisplay->display();
+}
+
+void Control_Surface_::updateDisplays() {
+    auto &allElements = DisplayElement::getAll();
+    auto it = allElements.begin();
+    auto end = allElements.end();
+    if (it == end)
+        return;
+    auto prevIt = it;
+    auto previousDisplay = &prevIt->getDisplay();
+    bool dirty = false;
+    // Loop over all display elements
+    while (true) {
+        dirty |= it->getDirty();
+        ++it;
+        // If this is the first element on another display
+        if (it == end || &it->getDisplay() != previousDisplay) {
+            // If there was at least one element on the previous display that
+            // has to be redrawn
+            if (dirty) {
+                // Clear the display
+                previousDisplay->clearAndDrawBackground();
+                // Update all elements on that display
+                for (auto drawIt = prevIt; drawIt != it; ++drawIt)
+                    drawIt->draw();
+                // Write the buffer to the display
+                previousDisplay->display();
+            }
+            if (it == end)
+                break;
+            prevIt = it;
+            previousDisplay = &it->getDisplay();
+            dirty = false;
+        }
+    }
 }
 
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();

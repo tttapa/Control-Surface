@@ -11,13 +11,12 @@ USBMIDI_Interface midi;
 Transposer<0, +1> transposer(12);
 
 // Push button on pin 2 to transpose.
-IncrementSelector<2> selector = {transposer, 2};
+IncrementSelector<2> selector {transposer, 2};
 
-using namespace MIDI_Notes;
-Bankable::NoteButton notebutton = {
-  transposer, // bank/transposer
-  3,          // pin
-  note(C, 4), // address/note
+Bankable::NoteButton notebutton {
+  transposer,     // bank/transposer
+  3,              // pin
+  MIDI_Notes::C(4), // address/note
 };
 
 void setup() {

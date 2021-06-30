@@ -3,13 +3,13 @@
 
 BEGIN_AH_NAMESPACE
 
-template <uint8_t N>
+template <uint16_t N>
 ShiftRegisterOut<N>::ShiftRegisterOut(pin_t dataPin, pin_t clockPin,
                                       pin_t latchPin, BitOrder_t bitOrder)
     : ShiftRegisterOutBase<N>(latchPin, bitOrder), dataPin(dataPin),
       clockPin(clockPin) {}
 
-template <uint8_t N>
+template <uint16_t N>
 void ShiftRegisterOut<N>::begin() {
     ExtIO::pinMode(dataPin, OUTPUT);
     ExtIO::pinMode(clockPin, OUTPUT);
@@ -17,7 +17,7 @@ void ShiftRegisterOut<N>::begin() {
     updateBufferedOutputs();
 }
 
-template <uint8_t N>
+template <uint16_t N>
 void ShiftRegisterOut<N>::updateBufferedOutputs() {
     if (!this->dirty)
         return;

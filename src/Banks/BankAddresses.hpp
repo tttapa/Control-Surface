@@ -73,12 +73,12 @@ class DualAddresses : public OutputBankableMIDIAddress {
     MIDIAddress first, second;
 };
 
-template <uint8_t nb_rows, uint8_t nb_cols>
+template <uint8_t NumRows, uint8_t NumCols>
 class MatrixAddress : public OutputBankableMIDIAddress {
   public:
     MatrixAddress(BaseOutputBankConfig config,
-                  const AddressMatrix<nb_rows, nb_cols> &addresses,
-                  MIDIChannelCN channelCN)
+                  const AddressMatrix<NumRows, NumCols> &addresses,
+                  MIDIChannelCable channelCN)
         : OutputBankableMIDIAddress(config), addresses(addresses),
           channelCN(channelCN) {}
 
@@ -92,8 +92,8 @@ class MatrixAddress : public OutputBankableMIDIAddress {
     }
 
   private:
-    AddressMatrix<nb_rows, nb_cols> addresses;
-    MIDIChannelCN channelCN;
+    AddressMatrix<NumRows, NumCols> addresses;
+    MIDIChannelCable channelCN;
 };
 
 namespace ManyAddresses {
@@ -143,14 +143,14 @@ class DualManyAddresses : public ManyAddresses_Base {
     Array<MIDIAddress, NumBanks> first, second;
 };
 
-template <uint8_t NumBanks, uint8_t nb_rows, uint8_t nb_cols>
+template <uint8_t NumBanks, uint8_t NumRows, uint8_t NumCols>
 class ManyMatrixAddresses : public ManyAddresses_Base {
   public:
     ManyMatrixAddresses(
         const Bank<NumBanks> &bank,
-        const Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> &addresses,
-        const Array<MIDIChannelCN, NumBanks> &channelCNs)
-        : ManyAddresses_Base(bank), addresses(addresses),
+        const Array<AddressMatrix<NumRows, NumCols>, NumBanks> &addresses,
+        const Array<MIDIChannelCable, NumBanks> &channelCNs)
+        : ManyAddresses_Base(bank), addresses(addresses), 
           channelCNs(channelCNs) {}
 
     MIDIAddress getActiveAddress(uint8_t row, uint8_t col) const {
@@ -159,8 +159,8 @@ class ManyMatrixAddresses : public ManyAddresses_Base {
     }
 
   private:
-    Array<AddressMatrix<nb_rows, nb_cols>, NumBanks> addresses;
-    Array<MIDIChannelCN, NumBanks> channelCNs;
+    Array<AddressMatrix<NumRows, NumCols>, NumBanks> addresses;
+    Array<MIDIChannelCable, NumBanks> channelCNs;
 };
 
 } // namespace ManyAddresses

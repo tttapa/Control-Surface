@@ -1,22 +1,25 @@
 #pragma once
 
+#include <AH/STL/utility> // std::forward
 #include <Display/DisplayElement.hpp>
 #include <Display/DisplayInterface.hpp>
-#include <MIDI_Inputs/MCU/VPotRing.hpp>
+#include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
 #include <math.h>
 
 BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
+template <class VPot_t = Interfaces::MCU::IVPot &>
 class VPotDisplay : public DisplayElement {
 
   public:
-    VPotDisplay(DisplayInterface &display, IVPotRing &vpot, PixelLocation loc,
+    VPotDisplay(DisplayInterface &display, VPot_t &&vpot, PixelLocation loc,
                 uint16_t radius, uint16_t innerRadius, uint16_t color)
-        : DisplayElement(display), vpot(vpot), x(loc.x + radius),
-          y(loc.y + radius), radius(radius), innerRadius(innerRadius),
-          color(color) {}
+        : DisplayElement(display), vpot(std::forward<VPot_t>(vpot)),
+          x(loc.x + radius), y(loc.y + radius), radius(radius),
+          innerRadius(innerRadius), color(color) {}
+
     void draw() override {
         display.drawCircle(x, y, radius, color);
         if (vpot.getCenterLed())
@@ -27,22 +30,26 @@ class VPotDisplay : public DisplayElement {
         uint8_t startOff = vpot.getStartOff();
         for (uint8_t segment = startOn; segment < startOff; segment++)
             drawVPotSegment(segment);
+        vpot.clearDirty();
     }
 
+    bool getDirty() const override { return vpot.getDirty(); }
+
+    void setAngleSpacing(float spacing) { this->angleSpacing = spacing; }
+    float getAngleSpacing() const { return this->angleSpacing; }
+
   private:
-    IVPotRing &vpot;
+    VPot_t vpot;
 
     int16_t x, y;
     uint16_t radius, innerRadius, color;
 
-    const static float angleSpacing;
+    float angleSpacing = 0.4887; // 28°
 
   protected:
     void drawVPotSegment(uint8_t segment) {
-        // segment 5 (i.e. the sixth segment) = 0° (i.e. 12 o'clock)
+        // Segment 5 (i.e. the sixth segment) = 0° (i.e. 12 o'clock, the middle)
         float angle = angleSpacing * (segment - 5);
-
-        // TODO: use Bresenham directly
 
         uint16_t x_start = x + round((float)innerRadius * sin(angle) / 2);
         uint16_t y_start = y - round((float)innerRadius * cos(angle) / 2);

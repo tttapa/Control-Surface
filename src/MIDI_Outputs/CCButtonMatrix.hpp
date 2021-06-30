@@ -15,16 +15,16 @@ BEGIN_CS_NAMESPACE
  * Crude software debouncing is implemented by limiting the refresh rate.  
  * This version cannot be banked.
  *
- * @tparam  nb_rows
+ * @tparam  NumRows
  *          The number of rows of the matrix.
- * @tparam  nb_cols
+ * @tparam  NumCols
  *          The number of columns of the matrix.
  *
  * @ingroup MIDIOutputElements
  */
-template <uint8_t nb_rows, uint8_t nb_cols>
+template <uint8_t NumRows, uint8_t NumCols>
 class CCButtonMatrix
-    : public MIDIButtonMatrix<DigitalCCSender, nb_rows, nb_cols> {
+    : public MIDIButtonMatrix<DigitalCCSender, NumRows, NumCols> {
   public:
     /**
      * @brief   Create a new CCButtonMatrix object with the given pins,
@@ -49,11 +49,11 @@ class CCButtonMatrix
      * @param   sender
      *          The MIDI sender to use.
      */
-    CCButtonMatrix(const PinList<nb_rows> &rowPins,
-                   const PinList<nb_cols> &colPins,
-                   const AddressMatrix<nb_rows, nb_cols> &controllers,
-                   MIDIChannelCN channelCN, const DigitalCCSender &sender = {})
-        : MIDIButtonMatrix<DigitalCCSender, nb_rows, nb_cols>(
+    CCButtonMatrix(const PinList<NumRows> &rowPins,
+                   const PinList<NumCols> &colPins,
+                   const AddressMatrix<NumRows, NumCols> &controllers,
+                   MIDIChannelCable channelCN, const DigitalCCSender &sender = {})
+        : MIDIButtonMatrix<DigitalCCSender, NumRows, NumCols>(
               rowPins, colPins, controllers, channelCN, sender) {}
 };
 

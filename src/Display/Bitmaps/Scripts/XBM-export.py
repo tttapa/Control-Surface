@@ -20,7 +20,12 @@ The PNG images are exported to the current working directory.
 
 import os
 import re
-import png
+try:
+    import png
+except ImportError as e:
+    png = None 
+    print("png not found, not exporting PNG images:", e)
+    print("(See requirements.txt)")
 
 bitmaps = []
 
@@ -100,11 +105,13 @@ for filename in sorted(os.listdir(inputdir)):
         data = m.group(1)
         data = re.sub(r'[\r\n\s]|(?:0x)', '', data)
         data = re.sub(r',', ' ', data)
-        bytedata = bytearray.fromhex(data)
-        # and then to a byte array that can be converted to PNG
-        PNG = XBM2PNG(bytedata, width, height)
-        # Save the PNG image for the documentation pages (browsers don't do XBM)
-        PNG.save(os.path.join(pngoutputdir, identifier+'.png'))
+        if png is not None:
+            bytedata = bytearray.fromhex(data)
+            # and then to a byte array that can be converted to PNG
+            PNG = XBM2PNG(bytedata, width, height)
+            # Save the PNG image for the documentation pages 
+            # (browsers don't do XBM)
+            PNG.save(os.path.join(pngoutputdir, identifier+'.png'))
 
         # Save the name, width and height of the bitmap
         bitmaps.append((identifier, width, height))

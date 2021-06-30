@@ -1,7 +1,7 @@
 /**
  * Example of using the standard library complex numbers.
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  *
  * **Output**
  * ~~~
@@ -22,7 +22,7 @@ void setup() {
     ;
 
   // Create a complex number
-  std::complex<double> c = 2i;
+  std::complex<double> c{0, 2};
 
   // Print the square root
   Serial << "√(2i) = " << std::sqrt(c) << endl;

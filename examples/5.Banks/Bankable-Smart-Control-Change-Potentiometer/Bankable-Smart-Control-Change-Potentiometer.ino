@@ -2,7 +2,7 @@
  * This example introduces smart bankable potentiometers to prevent
  * values jumping around when changing banks.
  *  
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -50,13 +50,13 @@ USBDebugMIDI_Interface midi;
 Bank<4> bank;
 
 // Selector to change banks
-IncrementDecrementSelector<4> selector = {bank, {2, 3}};
+IncrementDecrementSelector<4> selector {bank, {2, 3}};
 
 // Handy type alias
 using  CCSmartPot = Bankable::CCSmartPotentiometer<4>;
 
 // Instantiate a CCPotentiometer object
-CCSmartPot potentiometer = {
+CCSmartPot potentiometer {
   {bank, BankType::CHANGE_CHANNEL},     // Bank configuration
   A0,                                   // Analog pin connected to potentiometer
   {MIDI_CC::Channel_Volume, CHANNEL_1}, // Channel volume of channel 1
@@ -69,7 +69,7 @@ CCSmartPot potentiometer = {
  * using  PBSmartPot = Bankable::PBSmartPotentiometer<4>;
  *
  * // Instantiate a CCPotentiometer object
- * PBSmartPot potentiometer = {
+ * PBSmartPot potentiometer {
  *   {bank, BankType::CHANGE_CHANNEL},     // Bank configuration
  *   A0,                                   // Analog pin connected to potentiometer
  *   CHANNEL_1,                            // Channel 1

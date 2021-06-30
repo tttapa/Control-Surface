@@ -18,13 +18,7 @@ BEGIN_CS_NAMESPACE
 // ----------------------------- Debug Settings ----------------------------- //
 // ========================================================================== //
 
-/// The debug output.
-// #define DEBUG_OUT Serial
-
 // #define DEBUG_MIDI_PACKETS
-
-/// Exit when encountering an error, instead of trying to recover (recommended).
-#define FATAL_ERRORS
 
 // ----------------------------- User Settings ------------------------------ //
 // ========================================================================== //
@@ -52,6 +46,9 @@ constexpr uint8_t NOTE_VELOCITY_THRESHOLD = 1;
  *  the MCU protocol is 120 bytes.
  */
 constexpr size_t SYSEX_BUFFER_SIZE = 128;
+
+/// Timeout in milliseconds to wait for a SysEx chunk to complete.
+constexpr unsigned long SYSEX_CHUNK_TIMEOUT = 500;
 
 /// The baud rate to use for Hairless MIDI.
 constexpr unsigned long HAIRLESS_BAUD = 115200;

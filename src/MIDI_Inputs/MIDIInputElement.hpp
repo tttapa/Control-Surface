@@ -1,86 +1,152 @@
-/* ✔ */
-
 #pragma once
 
-#include "ChannelMessageMatcher.hpp"
 #include <Def/MIDIAddress.hpp>
+#include <MIDI_Parsers/MIDI_MessageTypes.hpp>
+
+#include <Banks/Bank.hpp> // Bank<N>, BankSettingChangeCallback
+
+#include <AH/Containers/Updatable.hpp>
+#include <AH/STL/type_traits>
 
 BEGIN_CS_NAMESPACE
+
+// -------------------------------------------------------------------------- //
 
 /**
  * @brief   A class for objects that listen for incoming MIDI events.
  * 
  * They can either update some kind of display, or they can just save the state.
  */
-class MIDIInputElement {
+template <MIDIMessageType Type>
+class MIDIInputElement : public AH::UpdatableCRTP<MIDIInputElement<Type>> {
   protected:
-    MIDIInputElement() {} // not used, only for virtual inheritance
-    /**
-     * @brief   Create a new MIDIInputElement that listens on the given address.
-     * 
-     * @param   address
-     *          The MIDI address to listen to.
-     */
-    MIDIInputElement(const MIDIAddress &address) : address(address) {}
+    MIDIInputElement() = default;
 
   public:
     virtual ~MIDIInputElement() = default;
 
+  public:
+    using MessageType =
+        typename std::conditional<Type == MIDIMessageType::SYSEX_START,
+                                  SysExMessage, ChannelMessage>::type;
+
     /// Initialize the input element.
-    virtual void begin() {}
+    virtual void begin() {} // LCOV_EXCL_LINE
 
     /// Reset the input element to its initial state.
-    virtual void reset() {}
+    virtual void reset() {} // LCOV_EXCL_LINE
 
     /// Update the value of the input element. Used for decaying VU meters etc.
-    virtual void update() {}
+    virtual void update() {} // LCOV_EXCL_LINE
 
     /// Receive a new MIDI message and update the internal state.
-    bool updateWith(const ChannelMessageMatcher &midimsg) {
-        MIDIAddress target = getTarget(midimsg);
-        if (!this->match(target))
-            return false;
-        DEBUGFN(F("MIDI message matches"));
-        if (!updateImpl(midimsg, target))
-            return false;
-        DEBUGFN(F("Updated"));
-        return true;
+    virtual bool updateWith(MessageType midimsg) = 0;
+
+    /// Update all
+    static bool updateAllWith(MessageType midimsg) {
+        for (auto &el : MIDIInputElement::updatables) {
+            if (el.updateWith(midimsg)) {
+                el.moveDown();
+                return true;
+            }
+        }
+        return false;
     }
 
-  private:
-    /// Update the internal state with the new MIDI message.
-    virtual bool updateImpl(const ChannelMessageMatcher &midimsg,
-                            const MIDIAddress &target) = 0;
-
-    /**
-     * @brief   Extract the target address from a MIDI message.
-     * @note    This base version of the function is only valid for messages 
-     *          that use data1 as an address (i.e. Note On, Note Off, Polyphonic
-     *          Key Pressure and Control Change), because it assumes that the
-     *          target address consists of the address (data 1), the MIDI 
-     *          channel and the cable number.
-     */
-    virtual MIDIAddress getTarget(const ChannelMessageMatcher &midimsg) const {
-        return {
-            int8_t(midimsg.data1),
-            Channel(midimsg.channel),
-            Cable(midimsg.CN),
-        };
+    /// Update all
+    static void updateAll() {
+        MIDIInputElement::applyToAll(&MIDIInputElement::update);
     }
 
-    /**
-     * @brief   Check if the address of the incoming MIDI message matches an 
-     *          address of this element.
-     * @note    This base version of the function is only valid for non-Bankable
-     *          MIDI input elements, it only matches if the address is equal to 
-     *          the address of this element.
-     */
-    virtual bool match(const MIDIAddress &target) const {
-        return MIDIAddress::matchSingle(this->address, target);
+    /// Begin all
+    static void beginAll() {
+        MIDIInputElement::applyToAll(&MIDIInputElement::begin);
     }
+
+    /// Reset all
+    static void resetAll() {
+        MIDIInputElement::applyToAll(&MIDIInputElement::reset);
+    }
+};
+
+// -------------------------------------------------------------------------- //
+
+/// The @ref MIDIInputElement base class is very general: you give it a MIDI
+/// message, and it calls the `updateWith()` method with that message. Each
+/// instance must then determine whether the message is meant for them or not.
+/// This is often a very repetitive task, so that logic is best isolated in a
+/// so-called “Matcher”. The Matcher looks at the MIDI message, checks if it
+/// matches its MIDI address, for example, and if so, it extracts some data
+/// (such as the MIDI velocity value from the message). Then it returns whether
+/// it matched and the extra data as a “Matcher::Result” object. If the message
+/// matched, that Result object is passed to the
+/// @ref MatchingMIDIInputElement::handleUpdate() method, so it can be handled
+/// there.
+///
+/// @todo   Pass the MIDI message to the @ref handleUpdate() method.
+template <MIDIMessageType Type, class Matcher>
+class MatchingMIDIInputElement : public MIDIInputElement<Type> {
+  protected:
+    MatchingMIDIInputElement(const Matcher &matcher) : matcher(matcher) {}
+
+  public:
+    using MessageType = typename MIDIInputElement<Type>::MessageType;
+
+    bool updateWith(MessageType midimsg) override {
+        auto match = matcher(midimsg);
+        if (match.match)
+            handleUpdate(match);
+        return match.match;
+    }
+
+    virtual void handleUpdate(typename Matcher::Result match) = 0;
 
   protected:
-    const MIDIAddress address;
+    Matcher matcher;
 };
+
+// -------------------------------------------------------------------------- //
+
+/// Similar to @ref MatchingMIDIInputElement, but for Bankable MIDI Input
+/// Elements.
+template <MIDIMessageType Type, class Matcher>
+class BankableMatchingMIDIInputElement
+    : public MatchingMIDIInputElement<Type, Matcher>,
+      public BankSettingChangeCallback {
+    friend class Bank<Matcher::getBankSize()>;
+
+  protected:
+    /// Create a new BankableMatchingMIDIInputElement object, and add it to the
+    /// bank.
+    BankableMatchingMIDIInputElement(const Matcher &matcher)
+        : MatchingMIDIInputElement<Type, Matcher>(matcher) {
+        this->matcher.getBank().add(this);
+    }
+
+    uint8_t getActiveBank() const { return this->matcher.getSelection(); }
+
+  public:
+    /// Destructor: remove element from the bank.
+    virtual ~BankableMatchingMIDIInputElement() {
+        this->matcher.getBank().remove(this);
+    }
+};
+
+// -------------------------------------------------------------------------- //
+
+/// MIDI Input Element that listens for MIDI Note On/Off messages.
+using MIDIInputElementNote = MIDIInputElement<MIDIMessageType::NOTE_ON>;
+/// MIDI Input Element that listens for MIDI Key Pressure messages.
+using MIDIInputElementKP = MIDIInputElement<MIDIMessageType::KEY_PRESSURE>;
+/// MIDI Input Element that listens for MIDI Control Change messages.
+using MIDIInputElementCC = MIDIInputElement<MIDIMessageType::CONTROL_CHANGE>;
+/// MIDI Input Element that listens for MIDI Program Change messages.
+using MIDIInputElementPC = MIDIInputElement<MIDIMessageType::PROGRAM_CHANGE>;
+/// MIDI Input Element that listens for MIDI Channel Pressure messages.
+using MIDIInputElementCP = MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>;
+/// MIDI Input Element that listens for MIDI Pitch Bend messages.
+using MIDIInputElementPB = MIDIInputElement<MIDIMessageType::PITCH_BEND>;
+/// MIDI Input Element that listens for MIDI System Exclusive messages.
+using MIDIInputElementSysEx = MIDIInputElement<MIDIMessageType::SYSEX_START>;
 
 END_CS_NAMESPACE

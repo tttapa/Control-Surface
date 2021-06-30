@@ -2,6 +2,7 @@
 .vscode/tags
 *.pc
 .vscode/ipch
+.cache
 
 .~lock*
 __pycache__/

@@ -13,6 +13,10 @@ buildType:
         short: Asan
         long: Address Sanitizer
         buildType: Asan
+      tsan:
+        short: Tsan
+        long: Thread Sanitizer
+        buildType: Tsan
       relwithdebinfo:
         short: RelWithDebInfo 
         long: Release with Debug Information

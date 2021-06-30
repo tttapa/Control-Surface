@@ -1,7 +1,7 @@
 /**
  * Simple Quaternion test.
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  *
  * Written by PieterP, 2020-03-24  
  * https://github.com/tttapa/Arduino-Helpers
@@ -19,9 +19,9 @@ bool close(float actual, float expected, float atol) {
 void setup() {
     Serial.begin(115200);
 
-    Vec3f vector = {-0.414578098794425, 0.829156197588850, 0.375000000000000};
+    Vec3f vector {-0.414578098794425, 0.829156197588850, 0.375000000000000};
     Quaternion result   = Quaternion::fromDirection(vector);
-    Quaternion expected = {0.829156197588850, -0.5, -0.25, 0.0};
+    Quaternion expected {0.829156197588850, -0.5, -0.25, 0.0};
     float atol = 1e-7;
 
     Serial << setprecision(7) << "Result = " << result << endl;

@@ -2,7 +2,7 @@
  * This is an example on how to attach your own callbacks for receiving MIDI 
  * input.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -20,6 +20,9 @@
  * 
  * None.
  * 
+ * @see @ref MIDI-Input-Fine-Grained.ino
+ * @see @ref MIDI-Input-Fine-Grained-All-Callbacks.ino
+ *
  * Written by PieterP, 2020-06-11  
  * https://github.com/tttapa/Control-Surface
  */
@@ -33,37 +36,35 @@ USBMIDI_Interface midi;
 struct MyMIDI_Callbacks : MIDI_Callbacks {
 
   // Callback for channel messages (notes, control change, pitch bend, etc.).
-  void onChannelMessage(Parsing_MIDI_Interface &midi) override {
-    ChannelMessage cm = midi.getChannelMessage();
+  void onChannelMessage(MIDI_Interface &, ChannelMessage cm) override {
     // Print the message
-    Serial << F("Channel message: ") << hex << cm.header << ' ' << cm.data1
-           << ' ' << cm.data2 << dec << F(" on cable ") << cm.CN << endl;
+    Serial << F("Channel message: ")                                        //
+           << hex << cm.header << ' ' << cm.data1 << ' ' << cm.data2 << dec //
+           << F(" on cable ") << cm.cable.getOneBased() << endl;
   }
 
   // Callback for system exclusive messages
-  void onSysExMessage(Parsing_MIDI_Interface &midi) override {
-    SysExMessage se = midi.getSysExMessage();
+  void onSysExMessage(MIDI_Interface &, SysExMessage se) override {
     // Print the message
-    Serial << F("System Exclusive message: ") << hex;
-    for (size_t i = 0; i < se.length; ++i)
-      Serial << se.data[i] << ' ';
-    Serial << dec << F("on cable ") << se.CN << endl;
+    Serial << F("System Exclusive message: [") << se.length << "] " //
+           << AH::HexDump(se.data, se.length)                       //
+           << F(" on cable ") << se.cable.getOneBased() << endl;
   }
 
   // Callback for real-time messages
-  void onRealTimeMessage(Parsing_MIDI_Interface &midi) override {
-    RealTimeMessage rt = midi.getRealTimeMessage();
+  void onRealTimeMessage(MIDI_Interface &, RealTimeMessage rt) override {
     // Print the message
-    Serial << F("Real-time message: ") << hex << rt.message << dec
-           << F(" on cable ") << rt.CN << endl;
+    Serial << F("Real-time message: ") //
+           << hex << rt.message << dec //
+           << F(" on cable ") << rt.cable.getOneBased() << endl;
   }
 
-} callbacks;
+} callback;
 
 void setup() {
-  Serial.begin(115200);         // For printing the messages
-  midi.begin();                 // Initialize the MIDI interface
-  midi.setCallbacks(callbacks); // Attach the custom callback
+  Serial.begin(115200);        // For printing the messages
+  midi.begin();                // Initialize the MIDI interface
+  midi.setCallbacks(callback); // Attach the custom callback
 }
 
 void loop() {

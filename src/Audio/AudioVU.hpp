@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Audio.h>
-#include <MIDI_Inputs/MCU/VU.hpp>
+#include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
 
 #include "MovingCoilBallistics.hpp"
 
@@ -13,7 +13,7 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup Audio
  */
-class AudioVU : public IVU {
+class AudioVU : public Interfaces::MCU::IVU {
   public:
     /** 
      * @brief   Create a new AudioVU object.
@@ -30,7 +30,7 @@ class AudioVU : public IVU {
      */
     template <class T>
     AudioVU(T &level, float gain = 1.0, uint8_t max = 255)
-        : IVU(max), level(level), gain(gain) {}
+        : IVU(max, true), level(level), gain(gain) {}
 
     /** 
      * @brief   Create a new AudioVU object.
@@ -50,12 +50,12 @@ class AudioVU : public IVU {
     template <class T>
     AudioVU(T &level, MovingCoilBallistics ballistics, float gain = 1.0,
             uint8_t max = 255)
-        : IVU(max), ballistics(ballistics), level(level), gain(gain) {}
+        : IVU(max, true), ballistics(ballistics), level(level), gain(gain) {}
 
     /** 
      * @brief   Get the value of the VU meter.
      * 
-     * @return  A value in [0, max]
+     * @return  A value in [0, getMax()]
      */
     uint8_t getValue() override {
         uint16_t value = getFloatValue() * max;
@@ -80,7 +80,8 @@ class AudioVU : public IVU {
     }
 
     /** @note   This function will always return false for an AudioVU. */
-    bool getOverload() override { return false; } // TODO
+    bool getOverload() override { return false; }
+
     /** 
      * @brief   Set the gain for the VU meter.
      * 

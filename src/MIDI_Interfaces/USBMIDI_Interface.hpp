@@ -2,23 +2,127 @@
 
 #include "MIDI_Interface.hpp"
 #include "USBMIDI/USBMIDI.hpp"
+#include "USBMIDI_Sender.hpp"
 #include <AH/Error/Error.hpp>
 #include <AH/Teensy/TeensyUSBTypes.hpp>
 #include <MIDI_Parsers/USBMIDI_Parser.hpp>
 
 AH_DIAGNOSTIC_WERROR()
 
+BEGIN_CS_NAMESPACE
+
+/**
+ * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI
+ *          connection.
+ */
+template <class Backend>
+class GenericUSBMIDI_Interface : public MIDI_Interface {
+  public:
+    /**
+     * @brief   Construct a new GenericUSBMIDI_Interface.
+     */
+    template <class... Args>
+    GenericUSBMIDI_Interface(Args &&...args)
+        : backend(std::forward<Args>(args)...),
+          alwaysSendImmediately_(backend.preferImmediateSend()) {}
+
+  private:
+    // MIDI send implementations
+    void sendChannelMessageImpl(ChannelMessage) override;
+    void sendSysCommonImpl(SysCommonMessage) override;
+    void sendSysExImpl(SysExMessage) override;
+    void sendRealTimeImpl(RealTimeMessage) override;
+    void sendNowImpl() override { backend.sendNow(); }
+
+  private:
+    void handleStall() override;
+
+  public:
+    void update() override;
+
+  public:
+    /// @name   Reading incoming MIDI messages
+    /// @{
+
+    /// Try reading and parsing a single incoming MIDI message.
+    /// @return Returns the type of the read message, or
+    ///         `MIDIReadEvent::NO_MESSAGE` if no MIDI message was available.
+    MIDIReadEvent read();
+
+    /// Return the received channel voice message.
+    ChannelMessage getChannelMessage() const;
+    /// Return the received system common message.
+    SysCommonMessage getSysCommonMessage() const;
+    /// Return the received real-time message.
+    RealTimeMessage getRealTimeMessage() const;
+    /// Return the received system exclusive message.
+    SysExMessage getSysExMessage() const;
+
+    /// @}
+
+  public:
+    /// @name Underlying USB communication
+    /// @{
+
+    /// The (platform-specific) backend used for MIDI over USB communication.
+    Backend backend;
+
+  private:
+    /// Functor to send USB MIDI packets.
+    struct Sender {
+        GenericUSBMIDI_Interface *iface;
+        void operator()(Cable cn, MIDICodeIndexNumber cin, uint8_t d0,
+                        uint8_t d1, uint8_t d2) {
+            uint8_t cn_cin = (cn.getRaw() << 4) | uint8_t(cin);
+            iface->backend.write(cn_cin, d0, d1, d2);
+        }
+    };
+    /// @}
+
+  private:
+    /// Parses USB packets into MIDI messages.
+    USBMIDI_Parser parser;
+    /// Sends USB MIDI messages.
+    USBMIDI_Sender sender;
+    /// @see neverSendImmediately()
+    bool alwaysSendImmediately_ = true;
+
+  public:
+    /// @name   Buffering USB packets
+    /// @{
+
+    /// Check if this USB interface always sends its USB packets immediately
+    /// after sending a MIDI message. The default value depends on the MIDI USB
+    /// backend being used: `true` for the `MIDIUSB` library, and `false` for
+    /// the Teensy Core USB MIDI functions (because they have a short timeout).
+    bool alwaysSendsImmediately() const { return alwaysSendImmediately_; }
+    /// Don't send the USB packets immediately after sending a MIDI message.
+    /// By disabling immediate transmission, packets are buffered until you
+    /// call @ref sendNow() or until a timeout is reached, so multiple MIDI
+    /// messages can be transmitted in a single USB packet. This is more
+    /// efficient and results in a higher maximum bandwidth, but it could
+    /// increase latency when used incorrectly.
+    void neverSendImmediately() { alwaysSendImmediately_ = false; }
+    /// Send the USB packets immediately after sending a MIDI message.
+    /// @see @ref neverSendImmediately()
+    void alwaysSendImmediately() { alwaysSendImmediately_ = true; }
+
+    /// @}
+};
+
+END_CS_NAMESPACE
+
+#include "USBMIDI_Interface.ipp"
+
 #if defined(TEENSYDUINO) && !defined(TEENSY_MIDIUSB_ENABLED)
 #warning                                                                       \
     "Teensy: USB MIDI not enabled. Enable it from the Tools > USB Type menu."
+#define CS_USB_MIDI_DISABLED
 #endif
 
-#ifndef ARDUINO
-#include <gmock-wrapper.h>
-#endif
-
-// If the main MCU has a USB connection or is a Teensy with MIDI USB type
-#if defined(USBCON) || defined(TEENSY_MIDIUSB_ENABLED) || !defined(ARDUINO)
+// If MIDI over USB is supported
+#if (!defined(CS_USB_MIDI_NOT_SUPPORTED) && !defined(CS_USB_MIDI_DISABLED)) || \
+    !defined(ARDUINO)
 
 BEGIN_CS_NAMESPACE
 
@@ -38,84 +142,11 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup MIDIInterfaces
  */
-class USBMIDI_Interface : public Parsing_MIDI_Interface {
+class USBMIDI_Interface
+    : public GenericUSBMIDI_Interface<USBDeviceMIDIBackend> {
   public:
-    /**
-     * @brief   Construct a new USBMIDI_Interface.
-     */
-    USBMIDI_Interface() : Parsing_MIDI_Interface(parser) {}
-
-    using MIDIUSBPacket_t = USBMIDI::MIDIUSBPacket_t;
-
-  private:
-    USBMIDI_Parser parser;
-
-#ifndef ARDUINO
-  public:
-    MOCK_METHOD(void, writeUSBPacket,
-                (uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));
-    MOCK_METHOD(MIDIUSBPacket_t, readUSBPacket, ());
-    void flushUSB() {}
-
-  private:
-#else
-    void writeUSBPacket(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1,
-                        uint8_t d2) {
-        USBMIDI::write(cn, cin, d0, d1, d2);
-    }
-    MIDIUSBPacket_t readUSBPacket() { return USBMIDI::read(); }
-    void flushUSB() { USBMIDI::flush(); }
-#endif
-
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override {
-        writeUSBPacket(cn, header >> 4, // CN|CIN
-                       header,          // status
-                       d1,              // data 1
-                       d2);             // data 2
-        flushUSB();
-    }
-
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override {
-        sendImpl(header, d1, 0, cn);
-    }
-
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        while (length > 3) {
-            writeUSBPacket(cn, 0x4, data[0], data[1], data[2]);
-            data += 3;
-            length -= 3;
-        }
-        switch (length) {
-            case 3: writeUSBPacket(cn, 0x7, data[0], data[1], data[2]); break;
-            case 2: writeUSBPacket(cn, 0x6, data[0], data[1], 0); break;
-            case 1: writeUSBPacket(cn, 0x5, data[0], 0, 0); break;
-            default: break;
-        }
-        flushUSB();
-    }
-
-    void sendImpl(uint8_t rt, uint8_t cn) override {
-        writeUSBPacket(cn, 0xF, // CN|CIN
-                       rt,      // single byte
-                       0,       // no data
-                       0);      // no data
-        flushUSB();
-    }
-
-  public:
-    MIDIReadEvent read() override {
-        for (uint8_t i = 0; i < (SYSEX_BUFFER_SIZE + 2) / 3; ++i) {
-            MIDIUSBPacket_t midi_packet = readUSBPacket();
-            if (midi_packet.data[0] == 0)
-                return MIDIReadEvent::NO_MESSAGE;
-
-            MIDIReadEvent parseResult = parser.parse(midi_packet.data);
-
-            if (parseResult != MIDIReadEvent::NO_MESSAGE)
-                return parseResult;
-        }
-        return MIDIReadEvent::NO_MESSAGE;
-    }
+    USBMIDI_Interface() = default;
+    using MIDIUSBPacket_t = USBDeviceMIDIBackend::MIDIUSBPacket_t;
 };
 
 END_CS_NAMESPACE
@@ -123,7 +154,7 @@ END_CS_NAMESPACE
 // If the main MCU doesn't have a USB connection:
 // Fall back on Serial connection at the hardware MIDI baud rate.
 // (Can be used with HIDUINO or USBMidiKliK.)
-#else
+#elif !defined(CS_USB_MIDI_DISABLED)
 
 #include "SerialMIDI_Interface.hpp"
 

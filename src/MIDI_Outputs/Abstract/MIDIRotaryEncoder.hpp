@@ -1,64 +1,89 @@
 #pragma once
 
-#if not defined(Encoder_h_) && not defined(IDE)
-#error                                                                         \
-    "The PJRC Encoder library should be included before the Control-Surface "  \
-    "library. (#include <Encoder.h>)"
+#include <AH/STL/type_traits> // std::make_signed
+#include <AH/STL/utility>     // std::forward
+#include <Def/Def.hpp>
+#include <Def/TypeTraits.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+
+#ifdef ARDUINO
+#include <Submodules/Encoder/Encoder.h>
+#else
+#include <Encoder.h> // Mock
 #endif
 
-#include <Def/Def.hpp>
-#include <Encoder.h>
-#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
 
 /**
  * @brief   An abstract class for rotary encoders that send MIDI events.
  */
-template <class Sender>
-class MIDIRotaryEncoder : public MIDIOutputElement {
-  protected:
+template <class Enc, class Sender>
+class GenericMIDIRotaryEncoder : public MIDIOutputElement {
+  public:
     /**
      * @brief   Construct a new MIDIRotaryEncoder.
      *
      * @todo    Documentation
      */
-    MIDIRotaryEncoder(EncoderPinList pins, MIDIAddress address,
-                      int8_t speedMultiply, uint8_t pulsesPerStep,
-                      const Sender &sender)
-        : encoder{pins.A, pins.B}, address(address),
+    GenericMIDIRotaryEncoder(Enc &&encoder, MIDIAddress address,
+                             int16_t speedMultiply, uint8_t pulsesPerStep,
+                             const Sender &sender)
+        : encoder(std::forward<Enc>(encoder)), address(address),
           speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
           sender(sender) {}
 
-// For tests only
-#ifndef ARDUINO
-    MIDIRotaryEncoder(const Encoder &encoder, MIDIAddress address,
-                      int8_t speedMultiply, uint8_t pulsesPerStep,
-                      const Sender &sender)
-        : encoder(encoder), address(address), speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
-#endif
+    void begin() override { begin_if_possible(encoder); }
 
-  public:
-    void begin() final override {}
-    void update() final override {
-        long currentPosition = encoder.read();
-        long difference = (currentPosition - previousPosition) / pulsesPerStep;
-        if (difference) {
-            sender.send(difference * speedMultiply, address);
-            previousPosition += difference * pulsesPerStep;
+    void update() override {
+        Enc_t encval = encoder.read();
+        // If Enc_t is an unsigned type, integer overflow is well-defined, which
+        // is what we want when Enc_t is small and expected to overflow.
+        // However, we need it to be signed because we're interested in the
+        // delta.
+        Enc_t uDelta = encval - deltaOffset;
+        if (uDelta) {
+            int16_t delta = SignedEnc_t(uDelta);
+            // Assumption: delta and speedMultiply are relatively small, so
+            // multiplication probably won't overflow.
+            int16_t multipliedDelta = delta * speedMultiply + remainder;
+            int16_t scaledDelta = multipliedDelta / pulsesPerStep;
+            remainder = multipliedDelta % pulsesPerStep;
+
+            if (scaledDelta)
+                sender.send(scaledDelta, address);
+            deltaOffset += uDelta;
         }
     }
 
+    void setSpeedMultiply(int16_t speedMultiply) {
+        // TODO: Is this correct? Is it necessary? What with negative speedMult?
+        remainder = remainder * speedMultiply / this->speedMultiply;
+        this->speedMultiply = speedMultiply;
+    }
+    int16_t getSpeedMultiply() const { return this->speedMultiply; }
+
   private:
-    Encoder encoder;
-    const MIDIAddress address;
-    const int8_t speedMultiply;
-    const uint8_t pulsesPerStep;
-    long previousPosition = 0;
+    Enc encoder;
+    MIDIAddress address;
+    int16_t speedMultiply;
+    uint8_t pulsesPerStep;
+    int16_t remainder = 0;
+    using Enc_t = decltype(encoder.read());
+    using SignedEnc_t = typename std::make_signed<Enc_t>::type;
+    Enc_t deltaOffset = 0;
 
   public:
     Sender sender;
 };
 
+template <class Sender>
+using MIDIRotaryEncoder = GenericMIDIRotaryEncoder<Encoder, Sender>;
+
+template <class Sender>
+using BorrowedMIDIRotaryEncoder = GenericMIDIRotaryEncoder<Encoder &, Sender>;
+
 END_CS_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

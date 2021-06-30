@@ -1,7 +1,7 @@
 /**
  * This examples shows how to use a button matrix to read many switches.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -36,14 +36,14 @@
 USBMIDI_Interface midi;
 
 // The note numbers corresponding to the buttons in the matrix
-const AddressMatrix<4, 3> addresses = {{
+const AddressMatrix<4, 3> addresses {{
   {1, 2, 3},
   {4, 5, 6},
   {7, 8, 9},
   {10, 11, 12},
 }};
 
-NoteButtonMatrix<4, 3> buttonmatrix = {
+NoteButtonMatrix<4, 3> buttonmatrix {
   {2, 3, 4, 5}, // row pins
   {6, 7, 8},    // column pins
   addresses,    // address matrix

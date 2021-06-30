@@ -1,4 +1,4 @@
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 #include <Banks/Bank.hpp>
 
@@ -59,29 +59,56 @@ TEST(Bank, selectOutOfBounds) {
     }
 }
 
-template <uint8_t N>
-class TestInputBankable : public BankableMIDIInput<N> {
-  public:
-    TestInputBankable(Bank<N> &bank, BankType type)
-        : BankableMIDIInput<N>(bank, type) {}
+// -------------------------------------------------------------------------- //
 
-    MOCK_METHOD(void, onBankSettingChange, (), (override));
-};
+#include <Banks/Transposer.hpp>
 
-TEST(Bank, onBankSettingChange) {
-    Bank<10> bank = {4};
-    TestInputBankable<10> ib1 = {bank, CHANGE_ADDRESS};
-    EXPECT_CALL(ib1, onBankSettingChange());
-    bank.select(6);
-    {
-        TestInputBankable<10> ib2 = {bank, CHANGE_ADDRESS};
-        EXPECT_CALL(ib1, onBankSettingChange());
-        EXPECT_CALL(ib2, onBankSettingChange());
-        bank.select(5);
-    }
-    TestInputBankable<10> ib3 = {bank, CHANGE_ADDRESS};
-    // Check that destructor correctly removed ib2 from bank
-    EXPECT_CALL(ib1, onBankSettingChange());
-    EXPECT_CALL(ib3, onBankSettingChange());
-    bank.select(4);
+TEST(Transposer, select) {
+    Transposer<-12, +12> t(1);
+
+    EXPECT_EQ(t.getOffset(), 0);
+    t.select(0);
+    EXPECT_EQ(t.getOffset(), -12);
+    t.select(1);
+    EXPECT_EQ(t.getOffset(), -11);
+    t.select(t.N - 1);
+    EXPECT_EQ(t.getOffset(), +12);
+}
+
+TEST(Transposer, select12) {
+    Transposer<-1, +1> t(12);
+
+    EXPECT_EQ(t.getOffset(), 0);
+    t.select(0);
+    EXPECT_EQ(t.getOffset(), -12);
+    t.select(1);
+    EXPECT_EQ(t.getOffset(), 0);
+    t.select(2);
+    EXPECT_EQ(t.getOffset(), +12);
+}
+
+TEST(Transposer, setTransposition) {
+    Transposer<-12, +12> t(1);
+
+    t.setTransposition(0);
+    EXPECT_EQ(t.getOffset(), 0);
+    t.setTransposition(-12);
+    EXPECT_EQ(t.getOffset(), -12);
+    t.setTransposition(-11);
+    EXPECT_EQ(t.getOffset(), -11);
+    t.setTransposition(+1);
+    EXPECT_EQ(t.getOffset(), +1);
+    t.setTransposition(+12);
+    EXPECT_EQ(t.getOffset(), +12);
+}
+
+TEST(Transposer, setTransposition12) {
+    Transposer<-1, +1> t(12);
+
+    t.setTransposition(0);
+    EXPECT_EQ(t.getOffset(), 0);
+    t.setTransposition(-1);
+    EXPECT_EQ(t.getOffset(), -12);
+    t.setTransposition(+1);
+    EXPECT_EQ(t.getOffset(), +12);
 }

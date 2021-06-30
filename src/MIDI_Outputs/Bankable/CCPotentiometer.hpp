@@ -20,7 +20,7 @@ namespace Bankable {
  * @ingroup BankableMIDIOutputElements
  */
 class CCPotentiometer
-    : public MIDIFilteredAnalogAddressable<SingleAddress, ContinuousCCSender> {
+    : public MIDIFilteredAnalog<SingleAddress, ContinuousCCSender> {
   public:
     /** 
      * @brief   Create a new Bankable CCPotentiometer object with the given 
@@ -38,8 +38,7 @@ class CCPotentiometer
      */
     CCPotentiometer(OutputBankConfig<> config, pin_t analogPin,
                     MIDIAddress address)
-        : MIDIFilteredAnalogAddressable(SingleAddress{config, address},
-                                        analogPin, {}) {}
+        : MIDIFilteredAnalog(SingleAddress{config, address}, analogPin, {}) {}
 };
 
 } // namespace Bankable

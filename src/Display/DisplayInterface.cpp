@@ -2,8 +2,6 @@
 
 BEGIN_CS_NAMESPACE
 
-DoublyLinkedList<DisplayInterface> DisplayInterface::elements;
-
 void DisplayInterface::begin() {
     clear();
     drawBackground();
@@ -56,11 +54,6 @@ void DisplayInterface::fillCircle(int16_t x0, int16_t y0, int16_t r,
         else
             err -= 2 * --x + 1;
     }
-}
-
-void DisplayInterface::beginAll() {
-    for (DisplayInterface &el : elements)
-        el.begin();
 }
 
 END_CS_NAMESPACE

@@ -34,8 +34,6 @@
  * https://github.com/tttapa/Control-Surface
  */
 
-#include <Encoder.h>
-// Encoder has to be included before Control_Surface
 #include <Control_Surface.h>
 
 USBMIDI_Interface usbmidi;
@@ -48,42 +46,42 @@ const int speedMultiplier = 1;
 
 Bank<2> bank(4); // A bank with four channels, and 2 bank settings
 
-Bankable::CCPotentiometer faders[] = {
+Bankable::CCPotentiometer faders[] {
   {{bank, BankType::CHANGE_CHANNEL}, A0, {MIDI_CC::Channel_Volume, CHANNEL_1}},
   {{bank, BankType::CHANGE_CHANNEL}, A1, {MIDI_CC::Channel_Volume, CHANNEL_2}},
   {{bank, BankType::CHANGE_CHANNEL}, A2, {MIDI_CC::Channel_Volume, CHANNEL_3}},
   {{bank, BankType::CHANGE_CHANNEL}, A3, {MIDI_CC::Channel_Volume, CHANNEL_4}},
 };
 
-CCPotentiometer knobsTop[] = {
+CCPotentiometer knobsTop[] {
   {A4, MIDI_CC::General_Purpose_Controller_1},
   {A5, MIDI_CC::General_Purpose_Controller_2},
   {A6, MIDI_CC::General_Purpose_Controller_3},
   {A7, MIDI_CC::General_Purpose_Controller_4},
 };
 
-Bankable::CCPotentiometer knobsSide[] = {
+Bankable::CCPotentiometer knobsSide[] {
   {{bank, BankType::CHANGE_CHANNEL}, A8, {MIDI_CC::Pan, CHANNEL_1}},
   {{bank, BankType::CHANGE_CHANNEL}, A9, {MIDI_CC::Pan, CHANNEL_2}},
   {{bank, BankType::CHANGE_CHANNEL}, A10, {MIDI_CC::Pan, CHANNEL_3}},
   {{bank, BankType::CHANGE_CHANNEL}, A11, {MIDI_CC::Pan, CHANNEL_4}},
 };
 
-Bankable::NoteButtonLatching switches[] = {
+Bankable::NoteButtonLatching switches[] {
   {{bank, BankType::CHANGE_ADDRESS}, 2, MCU::MUTE_1},
   {{bank, BankType::CHANGE_ADDRESS}, 3, MCU::MUTE_2},
   {{bank, BankType::CHANGE_ADDRESS}, 5, MCU::MUTE_3},
   {{bank, BankType::CHANGE_ADDRESS}, 7, MCU::MUTE_4},
 };
 
-CCRotaryEncoder enc = {
+CCRotaryEncoder enc {
   {1, 0},                                // pins
   MIDI_CC::General_Purpose_Controller_5, // address
   speedMultiplier,                       // multiplier
   4,                                     // pulses per click
 };
 
-SwitchSelector selector = {bank, 11};
+SwitchSelector selector {bank, 11};
 
 void setup() {
   Control_Surface.begin();

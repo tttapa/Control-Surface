@@ -1,7 +1,6 @@
-#ifndef Encoder_h_
-#define Encoder_h_
+#pragma once
 
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 class EncoderMock {
   public:
@@ -18,5 +17,3 @@ class Encoder {
   private:
     const EncoderMock *mock;
 };
-
-#endif

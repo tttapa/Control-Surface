@@ -1,7 +1,7 @@
 /**
  * This examples shows how to use the debounced Button class to toggle an LED.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -26,7 +26,7 @@
 #include <AH/Hardware/Button.hpp>
 
 // Create a Button object that reads a push button connected to pin 2:
-Button pushbutton = {2};
+Button pushbutton {2};
 
 // The pin with the LED connected:
 const pin_t ledPin = LED_BUILTIN;

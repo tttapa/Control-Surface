@@ -42,7 +42,7 @@ class PBPotentiometer
      *          Number [CABLE_1, CABLE_16].
      */
     PBPotentiometer(OutputBankConfig<BankType::CHANGE_CHANNEL> config,
-                    pin_t analogPin, MIDIChannelCN address)
+                    pin_t analogPin, MIDIChannelCable address)
         : MIDIFilteredAnalog{{config, address}, analogPin, {}} {}
 };
 
