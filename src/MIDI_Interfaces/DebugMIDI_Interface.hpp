@@ -182,6 +182,7 @@ class SoftwareSerialDebugMIDI_Interface
                                       unsigned long baud)
         : SerialDebugMIDI_Interface(serial, baud) {}
 };
-#endif
 
 END_CS_NAMESPACE
+
+#endif
