@@ -472,8 +472,8 @@ void loop() {
     Control_Surface.loop();
 }
 ```
-If you enable debug output, you'll get a handy error message as soon as you open
-the Serial Monitor:
+If you enable debug output, you'll get a helpful error message as soon as you 
+open the Serial Monitor:
 ```text
 [bool CS::Control_Surface_::connectDefaultMIDI_Interface() @ line 53]:	Fatal Error: No default MIDI Interface (0xF123)
 ```
