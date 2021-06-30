@@ -71,10 +71,14 @@ For more information, see the @ref MIDI_Routing module.
 ### MIDI examples {#faq-midi-examples}
 
  - @ref MIDI-Output.ino
- - @ref MIDI-Input.ino
  - @ref Send-MIDI-Notes.ino
+ - @ref Send-All-MIDI-Messages.ino
  - @ref SysEx-Send-Receive.ino
+ - @ref MIDI-Input.ino
+ - @ref MIDI-Input-Fine-Grained.ino
+ - @ref MIDI-Input-Fine-Grained-All-Callbacks.ino
  - @ref MIDI_Pipes-Routing.ino
+ - @ref MIDI-Monitor.ino
 
 ### Combining low-level MIDI code and high-level “Control Surface” code {#fac-midi-combine-control-surface}
 

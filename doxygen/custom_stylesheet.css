@@ -242,6 +242,9 @@ span.comment {
 span.stringliteral {
     color: #a31515;
 }
+span.charliteral {
+    color: #a31515;
+}
 span.keywordflow {
     color: #0000ff;
     color: #af00db;
