@@ -51,12 +51,18 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
             int16_t newValue = oldValue + scaledDelta;
             newValue = constrain(newValue, 0, maxValue);
             if (oldValue != newValue) {
-                sender.send(newValue, address);
                 value = newValue;
+                forcedUpdate();
             }
 
             deltaOffset += uDelta;
         }
+    }
+
+    /// Send the current value over MIDI, even if the position of the encoder
+    /// didn't change.
+    void forcedUpdate() {
+        sender.send(value, address);
     }
 
     /**

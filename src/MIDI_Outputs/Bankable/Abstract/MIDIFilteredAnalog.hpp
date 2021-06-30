@@ -40,7 +40,13 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
 
     void update() final override {
         if (filteredAnalog.update())
-            sender.send(filteredAnalog.getValue(), address.getActiveAddress());
+            forcedUpdate();
+    }
+
+    /// Send the value of the analog input over MIDI, even if the value didn't
+    /// change.
+    void forcedUpdate() {
+        sender.send(filteredAnalog.getValue(), address.getActiveAddress());
     }
 
     /**
