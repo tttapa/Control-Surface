@@ -109,14 +109,18 @@ class OutputBankableMIDIAddress : public OutputBankableMIDIAddress_Base {
     /** 
      * @brief   Get the offset relative to the base address.
      */
-    RelativeMIDIAddress getAddressOffset() const {
-        int8_t offset = bank.getOffsetOfSetting(getSelection());
+    RelativeMIDIAddress getAddressOffset(setting_t bankindex) const {
+        int8_t offset = bank.getOffsetOfSetting(bankindex);
         switch (type) {
             case CHANGE_ADDRESS: return {offset, 0, 0};
             case CHANGE_CHANNEL: return {0, offset, 0};
             case CHANGE_CABLENB: return {0, 0, offset};
             default: return {};
         }
+    }
+    /// @copydoc getAddressOffset(setting_t)
+    RelativeMIDIAddress getAddressOffset() const {
+        return getAddressOffset(getSelection());
     }
 
   private:

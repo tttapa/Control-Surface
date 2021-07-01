@@ -401,3 +401,25 @@ TEST(CCRotaryEncoderBankable, turnOneStepChangeSettingTurnOneStep) {
 
     ccenc.update();
 }
+
+// -------------------------------------------------------------------------- //
+
+#include <MIDI_Outputs/CCAbsoluteEncoder.hpp>
+
+TEST(CCAbsoluteEncoder, simple) {
+    MockMIDI_Interface midi;
+    Control_Surface.connectDefaultMIDI_Interface();
+    RelativeCCSender::setMode(relativeCCmode::TWOS_COMPLEMENT);
+
+    EncoderMock encm;
+    CCAbsoluteEncoder ccenc {encm, {0x20, CHANNEL_7, CABLE_13}, 3, 4};
+
+    ccenc.setValue(0x40);
+    EXPECT_CALL(encm, read()).WillOnce(Return(4));
+    EXPECT_CALL(midi, sendChannelMessageImpl(
+                          ChannelMessage(0xB6, 0x20, 0x43, CABLE_13)));
+
+    ccenc.update();
+
+    EXPECT_EQ(ccenc.getValue(), 0x43);
+}
