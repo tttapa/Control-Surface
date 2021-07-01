@@ -31,6 +31,8 @@ class Button {
      *          will be enabled when `begin` is called.
      */
     Button(pin_t pin);
+    /// @copydoc Button(pin_t)
+    Button(ArduinoPin_t pin) : Button(pin_t(pin)) {}
 
     /// @brief   Initialize (enable the internal pull-up resistor).
     void begin();

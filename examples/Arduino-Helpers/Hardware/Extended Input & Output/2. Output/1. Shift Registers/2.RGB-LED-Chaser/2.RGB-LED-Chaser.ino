@@ -58,8 +58,6 @@
 #include <Arduino_Helpers.h> // Include the Arduino Helpers library.
 #include <AH/Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
 
-using namespace ExtIO; // Bring the ExtIO pin functions into your sketch
-
 // If you wired your LEDs as RGB
 const uint8_t ShiftRegisterOutRGB::redBit = 0;
 const uint8_t ShiftRegisterOutRGB::greenBit = 1;

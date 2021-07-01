@@ -6,7 +6,7 @@ BEGIN_AH_NAMESPACE
 
 ExtendedIOElement::ExtendedIOElement(pin_t length)
     : length(length), start(offset), end(offset + length) {
-    if (end < start)
+    if (end > NO_PIN)
         FATAL_ERROR(F("ExtIO ran out of pin numbers. "
                       "Dynamically creating new ExtendedIOElements is not "
                       "recommended."),
@@ -28,7 +28,8 @@ void ExtendedIOElement::updateAllBufferedInputs() {
 
 pin_t ExtendedIOElement::pin(pin_t p) const {
     if (p >= length) {
-        static_assert(std::is_unsigned<pin_t>::value,
+        static_assert(!std::is_integral<pin_t>::value ||
+                          std::is_unsigned<pin_t>::value,
                       "Error: pin_t should be an unsigned integer type");
         ERROR(F("Error: the pin number (")
                   << p

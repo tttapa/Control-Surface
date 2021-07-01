@@ -56,8 +56,8 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
     };
 
     static IndexMask pin2index(pin_t pin) {
-        uint8_t row = pin / 8;
-        uint8_t col = pin % 8;
+        uint8_t row = pin.pin / 8;
+        uint8_t col = pin.pin % 8;
         uint8_t rowgrp = row % 8;
         uint8_t rowmask = 1 << rowgrp;
         uint8_t colmask = 1 << col;

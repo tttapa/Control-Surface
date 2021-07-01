@@ -11,20 +11,20 @@ ShiftRegisterOutBase<N>::ShiftRegisterOutBase(pin_t latchPin,
 
 template <uint16_t N>
 void ShiftRegisterOutBase<N>::digitalWrite(pin_t pin, PinStatus_t val) {
-    buffer.set(pin, val);
+    buffer.set(pin.pin, val);
     dirty = true;
     this->updateBufferedOutputs(); // TODO: should I always update?
 }
 
 template <uint16_t N>
 void ShiftRegisterOutBase<N>::digitalWriteBuffered(pin_t pin, PinStatus_t val) {
-    buffer.set(pin, val);
+    buffer.set(pin.pin, val);
     dirty = true;
 }
 
 template <uint16_t N>
 PinStatus_t ShiftRegisterOutBase<N>::digitalRead(pin_t pin) {
-    return buffer.get(pin) ? HIGH : LOW;
+    return buffer.get(pin.pin) ? HIGH : LOW;
 }
 
 template <uint16_t N>

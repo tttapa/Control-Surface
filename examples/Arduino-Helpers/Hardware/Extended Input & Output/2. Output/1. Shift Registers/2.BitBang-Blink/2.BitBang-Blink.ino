@@ -30,8 +30,6 @@
 #include <Arduino_Helpers.h> // Include the Arduino Helpers library.
 #include <AH/Hardware/ExtendedInputOutput/ShiftRegisterOut.hpp>
 
-using namespace ExtIO; // Bring the ExtIO pin functions into your sketch
-
 const pin_t latchPin = 10; // Pin connected to ST_CP of 74HC595
 const pin_t dataPin = 11;  // Pin connected to DS of 74HC595
 const pin_t clockPin = 13; // Pin connected to SH_CP of 74HC595

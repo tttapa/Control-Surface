@@ -12,17 +12,39 @@ class MockExtIOElement : public ExtendedIOElement {
   public:
     MockExtIOElement(pin_t length) : ExtendedIOElement(length) {}
 
-    MOCK_METHOD(void, pinMode, (pin_t, uint8_t), (override));
-    MOCK_METHOD(void, digitalWrite, (pin_t, uint8_t), (override));
-    MOCK_METHOD(PinStatus_t, digitalRead, (pin_t), (override));
-    MOCK_METHOD(analog_t, analogRead, (pin_t), (override));
-    MOCK_METHOD(void, analogWrite, (pin_t, analog_t), (override));
+    void pinMode(pin_t p, uint8_t m) override { pinMode(+p.pin, m); };
+    void digitalWrite(pin_t p, uint8_t v) override { digitalWrite(+p.pin, v); };
+    PinStatus_t digitalRead(pin_t p) override { return digitalRead(+p.pin); };
+    analog_t analogRead(pin_t p) override { return analogRead(+p.pin); };
+    void analogWrite(pin_t p, analog_t v) override { analogWrite(+p.pin, v); };
 
-    MOCK_METHOD(void, pinModeBuffered, (pin_t, uint8_t), (override));
-    MOCK_METHOD(void, digitalWriteBuffered, (pin_t, uint8_t), (override));
-    MOCK_METHOD(PinStatus_t, digitalReadBuffered, (pin_t), (override));
-    MOCK_METHOD(analog_t, analogReadBuffered, (pin_t), (override));
-    MOCK_METHOD(void, analogWriteBuffered, (pin_t, analog_t), (override));
+    MOCK_METHOD(void, pinMode, (int, uint8_t), ());
+    MOCK_METHOD(void, digitalWrite, (int, uint8_t), ());
+    MOCK_METHOD(PinStatus_t, digitalRead, (int), ());
+    MOCK_METHOD(analog_t, analogRead, (int), ());
+    MOCK_METHOD(void, analogWrite, (int, analog_t), ());
+
+    void pinModeBuffered(pin_t p, uint8_t m) override {
+        pinModeBuffered(+p.pin, m);
+    };
+    void digitalWriteBuffered(pin_t p, uint8_t v) override {
+        digitalWriteBuffered(+p.pin, v);
+    };
+    PinStatus_t digitalReadBuffered(pin_t p) override {
+        return digitalReadBuffered(+p.pin);
+    };
+    analog_t analogReadBuffered(pin_t p) override {
+        return analogReadBuffered(+p.pin);
+    };
+    void analogWriteBuffered(pin_t p, analog_t v) override {
+        analogWriteBuffered(+p.pin, v);
+    };
+
+    MOCK_METHOD(void, pinModeBuffered, (int, uint8_t), ());
+    MOCK_METHOD(void, digitalWriteBuffered, (int, uint8_t), ());
+    MOCK_METHOD(PinStatus_t, digitalReadBuffered, (int), ());
+    MOCK_METHOD(analog_t, analogReadBuffered, (int), ());
+    MOCK_METHOD(void, analogWriteBuffered, (int, analog_t), ());
 
     MOCK_METHOD(void, begin, (), (override));
     MOCK_METHOD(void, updateBufferedOutputs, (), (override));
@@ -33,11 +55,27 @@ class MinimalMockExtIOElement : public ExtendedIOElement {
   public:
     MinimalMockExtIOElement(pin_t length) : ExtendedIOElement(length) {}
 
-    MOCK_METHOD(void, pinModeBuffered, (pin_t, uint8_t), (override));
-    MOCK_METHOD(void, digitalWriteBuffered, (pin_t, uint8_t), (override));
-    MOCK_METHOD(PinStatus_t, digitalReadBuffered, (pin_t), (override));
-    MOCK_METHOD(analog_t, analogReadBuffered, (pin_t), (override));
-    MOCK_METHOD(void, analogWriteBuffered, (pin_t, analog_t), (override));
+    void pinModeBuffered(pin_t p, uint8_t m) override {
+        pinModeBuffered(+p.pin, m);
+    };
+    void digitalWriteBuffered(pin_t p, uint8_t v) override {
+        digitalWriteBuffered(+p.pin, v);
+    };
+    PinStatus_t digitalReadBuffered(pin_t p) override {
+        return digitalReadBuffered(+p.pin);
+    };
+    analog_t analogReadBuffered(pin_t p) override {
+        return analogReadBuffered(+p.pin);
+    };
+    void analogWriteBuffered(pin_t p, analog_t v) override {
+        analogWriteBuffered(+p.pin, v);
+    };
+
+    MOCK_METHOD(void, pinModeBuffered, (int, uint8_t), ());
+    MOCK_METHOD(void, digitalWriteBuffered, (int, uint8_t), ());
+    MOCK_METHOD(PinStatus_t, digitalReadBuffered, (int), ());
+    MOCK_METHOD(analog_t, analogReadBuffered, (int), ());
+    MOCK_METHOD(void, analogWriteBuffered, (int, analog_t), ());
 
     MOCK_METHOD(void, begin, (), (override));
     MOCK_METHOD(void, updateBufferedOutputs, (), (override));
