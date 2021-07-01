@@ -51,6 +51,13 @@ class GenericFilteredAnalog {
           filter(increaseBitDepth<ADC_BITS + IncRes, Precision, AnalogType,
                                   AnalogType>(initial)) {}
 
+    /// @copydoc GenericFilteredAnalog(pin_t,MappingFunction,AnalogType)
+    GenericFilteredAnalog(ArduinoPin_t analogPin, MappingFunction mapFn,
+                          AnalogType initial = 0)
+        : GenericFilteredAnalog(pin_t(analogPin),
+                                std::forward<MappingFunction>(mapFn), initial) {
+    }
+
     /**
      * @brief   Reset the filter to the given value.
      * 
@@ -279,6 +286,10 @@ class FilteredAnalog
         : GenericFilteredAnalog<AnalogType (*)(AnalogType), Precision,
                                 FilterShiftFactor, FilterType, AnalogType,
                                 IncRes>(analogPin, nullptr, initial) {}
+
+    /// @copydoc FilteredAnalog(pin_t,AnalogType)
+    FilteredAnalog(ArduinoPin_t analogPin, AnalogType initial = 0)
+        : FilteredAnalog(pin_t(analogPin), initial) {}
 
     /**
      * @brief   Construct a new FilteredAnalog object.

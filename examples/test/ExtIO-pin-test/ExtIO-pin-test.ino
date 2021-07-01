@@ -9,11 +9,13 @@
 
 #include <AH/Hardware/ExtendedInputOutput/ExtendedIOElement.hpp>
 
-using namespace ExtIO;
-
 void setup() {
+  using namespace ExtIO;
   pinMode(13, OUTPUT);
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
-void loop() {}
+void loop() {
+  pinMode(13, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
+}

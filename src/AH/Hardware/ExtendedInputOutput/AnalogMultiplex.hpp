@@ -206,7 +206,7 @@ void AnalogMultiplex<N>::pinModeBuffered(pin_t, PinMode_t mode) {
 
 template <uint8_t N>
 PinStatus_t AnalogMultiplex<N>::digitalRead(pin_t pin) {
-    prepareReading(pin);
+    prepareReading(pin.pin);
     PinStatus_t result = ExtIO::digitalRead(analogPin);
     afterReading();
     return result;
@@ -219,7 +219,7 @@ PinStatus_t AnalogMultiplex<N>::digitalReadBuffered(pin_t pin) {
 
 template <uint8_t N>
 analog_t AnalogMultiplex<N>::analogRead(pin_t pin) {
-    prepareReading(pin);
+    prepareReading(pin.pin);
     if (discardFirstReading_)
         (void)ExtIO::analogRead(analogPin); // Discard first reading
     analog_t result = ExtIO::analogRead(analogPin);

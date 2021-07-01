@@ -15,43 +15,43 @@ TEST(FilteredAnalog, Hysteresis) {
     FilteredAnalog<9, 0>::setupADC();
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1023));
     EXPECT_TRUE(analog.update());
     EXPECT_EQ(analog.getValue(), 511);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 511. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1022));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 511);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 511. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1021));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 511);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 511. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1020));
     EXPECT_TRUE(analog.update());
     EXPECT_EQ(analog.getValue(), 510);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 510. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1021));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 510);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 510. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1022));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 510);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 510. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1023));
     EXPECT_TRUE(analog.update());
     EXPECT_EQ(analog.getValue(), 511);
@@ -68,11 +68,11 @@ TEST(FilteredAnalog, resetToCurrentValue) {
     FilteredAnalog<>::setupADC();
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(2 * 193));
     analog.resetToCurrentValue();
     EXPECT_EQ(analog.getValue(), 193);
-    
+
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
@@ -86,7 +86,7 @@ TEST(FilteredAnalog, reset) {
 
     analog.reset(503);
     EXPECT_EQ(analog.getValue(), 503);
-    
+
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
@@ -99,43 +99,43 @@ TEST(FilteredAnalog, map) {
     FilteredAnalog<9, 0>::setupADC();
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1023));
     EXPECT_TRUE(analog.update());
     EXPECT_EQ(analog.getValue(), 511 - 256);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), (511 - 256.) / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1022));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 511 - 256);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), (511 - 256.) / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1021));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 511 - 256);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), (511 - 256.) / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1020));
     EXPECT_TRUE(analog.update());
     EXPECT_EQ(analog.getValue(), 510 - 256);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), (510 - 256.) / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1021));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 510 - 256);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), (510 - 256.) / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1022));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 510 - 256);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), (510 - 256.) / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1023));
     EXPECT_TRUE(analog.update());
     EXPECT_EQ(analog.getValue(), 511 - 256);
@@ -153,43 +153,43 @@ TEST(FilteredAnalog, invert) {
     FilteredAnalog<9, 0>::setupADC();
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(0));
     EXPECT_TRUE(analog.update());
     EXPECT_EQ(analog.getValue(), 511);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 511. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 511);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 511. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(2));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 511);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 511. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(3));
     EXPECT_TRUE(analog.update());
     EXPECT_EQ(analog.getValue(), 510);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 510. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(2));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 510);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 510. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1));
     EXPECT_FALSE(analog.update());
     EXPECT_EQ(analog.getValue(), 510);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 510. / 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(0));
     EXPECT_TRUE(analog.update());
     EXPECT_EQ(analog.getValue(), 511);
@@ -217,13 +217,13 @@ TEST(GenericFilteredAnalog, MappingFunction) {
     FilteredAnalog<9, 0>::setupADC();
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1023));
     EXPECT_CALL(map, enabled()).WillOnce(Return(false));
     EXPECT_TRUE(analog.update());
     EXPECT_EQ(analog.getValue(), 511);
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1023));
     EXPECT_CALL(map, enabled()).WillOnce(Return(true));
     EXPECT_CALL(map, map(65535)).WillOnce(Return(32767));
@@ -250,7 +250,7 @@ TEST(GenericFilteredAnalog, MappingFunctionNoBool) {
     FilteredAnalog<9, 0>::setupADC();
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
-    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin.pin))
         .WillOnce(Return(1023));
     EXPECT_CALL(map, map(65535)).WillOnce(Return(32767));
     EXPECT_TRUE(analog.update());

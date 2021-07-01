@@ -39,36 +39,36 @@ MCP23017<WireType>::MCP23017(WireType &wire, uint8_t addressOffset,
 template <class WireType>
 void MCP23017<WireType>::pinModeBuffered(pin_t pin, PinMode_t mode) {
     if (mode == INPUT) {
-        pinModesDirty |= bufferedPinModes.get(pin) == 0;
-        pullupsDirty |= bufferedPullups.get(pin) == 1;
-        bufferedPinModes.set(pin);
-        bufferedPullups.clear(pin);
+        pinModesDirty |= bufferedPinModes.get(pin.pin) == 0;
+        pullupsDirty |= bufferedPullups.get(pin.pin) == 1;
+        bufferedPinModes.set(pin.pin);
+        bufferedPullups.clear(pin.pin);
     } else if (mode == OUTPUT) {
-        pinModesDirty |= bufferedPinModes.get(pin) == 1;
-        bufferedPinModes.clear(pin);
+        pinModesDirty |= bufferedPinModes.get(pin.pin) == 1;
+        bufferedPinModes.clear(pin.pin);
     } else if (mode == INPUT_PULLUP) {
-        pinModesDirty |= bufferedPinModes.get(pin) == 0;
-        pullupsDirty |= bufferedPullups.get(pin) == 0;
-        bufferedPinModes.set(pin);
-        bufferedPullups.set(pin);
+        pinModesDirty |= bufferedPinModes.get(pin.pin) == 0;
+        pullupsDirty |= bufferedPullups.get(pin.pin) == 0;
+        bufferedPinModes.set(pin.pin);
+        bufferedPullups.set(pin.pin);
     }
 }
 
 template <class WireType>
 void MCP23017<WireType>::digitalWriteBuffered(pin_t pin, PinStatus_t status) {
     bool boolstate = status == HIGH;
-    outputsDirty |= bufferedOutputs.get(pin) != boolstate;
-    bufferedOutputs.set(pin, boolstate);
+    outputsDirty |= bufferedOutputs.get(pin.pin) != boolstate;
+    bufferedOutputs.set(pin.pin, boolstate);
 }
 
 template <class WireType>
 PinStatus_t MCP23017<WireType>::digitalReadBuffered(pin_t pin) {
-    return bufferedInputs.get(pin) ? HIGH : LOW;
+    return bufferedInputs.get(pin.pin) ? HIGH : LOW;
 }
 
 template <class WireType>
 analog_t MCP23017<WireType>::analogReadBuffered(pin_t pin) {
-    return bufferedInputs.get(pin) ? 1023 : 0;
+    return bufferedInputs.get(pin.pin) ? 1023 : 0;
 }
 
 template <class WireType>

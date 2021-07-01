@@ -29,8 +29,6 @@
 #include <Arduino_Helpers.h> // Include the Arduino Helpers library.
 #include <AH/Hardware/ExtendedInputOutput/SPIShiftRegisterOut.hpp>
 
-using namespace ExtIO; // Bring the ExtIO pin functions into your sketch
-
 // Instantiate a shift register with the SPI slave select pin as latch pin, most
 // significant bit first, and a total of 8 outputs.
 SPIShiftRegisterOut<8> sreg {SPI, SS, MSBFIRST};

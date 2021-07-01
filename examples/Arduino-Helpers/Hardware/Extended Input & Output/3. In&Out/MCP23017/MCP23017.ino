@@ -32,8 +32,6 @@
 
 #include <AH/Hardware/ExtendedInputOutput/MCP23017.hpp>
 
-using namespace ExtIO; // Use the extended input/output functions
-
 using WireType = decltype(Wire); // The type of the I²C driver to use
 MCP23017<WireType> mcp {
   Wire, // The I²C driver to use

@@ -24,8 +24,6 @@
 #include <Arduino_Helpers.h> // Include the Arduino Helpers library.
 #include <AH/Hardware/ExtendedInputOutput/MAX7219.hpp>
 
-using namespace ExtIO; // Bring the ExtIO pin functions into your sketch
-
 // Instantiate a MAX7219 with the SPI slave select pin as latch pin
 // There's just 1 MAX7219 in the chain, if you have more of them daisy-chained
 // together, you can increase the template argument (between angled brackets)

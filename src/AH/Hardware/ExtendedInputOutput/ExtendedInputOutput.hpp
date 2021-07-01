@@ -22,7 +22,7 @@ namespace ExtIO {
 /// Check if the given pin number is a real Arduino pin number, and not an ExtIO 
 /// pin number.
 inline bool isNativePin(pin_t pin) {
-    return pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS;
+    return pin.pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS;
 }
 
 /**
