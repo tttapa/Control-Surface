@@ -45,8 +45,8 @@ struct MyMIDI_Callbacks : FineGrainedMIDI_Callbacks<MyMIDI_Callbacks> {
     Serial << "Note On: " << channel << ", note " << note << ", velocity "
            << velocity << ", " << cable << endl;
   }
-  void onAfterTouchPoly(Channel channel, uint8_t note, uint8_t pressure,
-                        Cable cable) {
+  void onKeyPressure(Channel channel, uint8_t note, uint8_t pressure,
+                     Cable cable) {
     Serial << "Key Pressure: " << channel << ", note " << note << ", pressure "
            << pressure << ", " << cable << endl;
   }
@@ -59,7 +59,7 @@ struct MyMIDI_Callbacks : FineGrainedMIDI_Callbacks<MyMIDI_Callbacks> {
     Serial << "Program Change: " << channel << ", program " << program << ", "
            << cable << endl;
   }
-  void onAfterTouchChannel(Channel channel, uint8_t pressure, Cable cable) {
+  void onChannelPressure(Channel channel, uint8_t pressure, Cable cable) {
     Serial << "Channel Pressure: " << channel << ", pressure " << pressure
            << ", " << cable << endl;
   }
