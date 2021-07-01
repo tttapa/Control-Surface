@@ -118,7 +118,7 @@ class OutputBankableMIDIAddress : public OutputBankableMIDIAddress_Base {
             default: return {};
         }
     }
-    /// @copydoc getAddressOffset(setting_t)
+    /// @copydoc getAddressOffset(setting_t) const
     RelativeMIDIAddress getAddressOffset() const {
         return getAddressOffset(getSelection());
     }
