@@ -4,6 +4,7 @@ if (FAST_COMPILE)
         Debug/Debug.cpp
         Hardware/IncrementDecrementButtons.cpp
         Hardware/Button.cpp
+        Hardware/Piezo.cpp
         Hardware/IncrementButton.cpp
         Hardware/ExtendedInputOutput/ShiftRegisterOutRGB.cpp
         Hardware/ExtendedInputOutput/ExtendedIOElement.cpp
