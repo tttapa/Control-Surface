@@ -100,7 +100,7 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
     void enable() {
         if (isEnabled()) {
             ERROR(F("Error: This element is already enabled."), 0x1212);
-            return;
+            return; // LCOV_EXCL_LINE
         }
         updatables.append(CRTP(Derived));
     }
@@ -110,7 +110,7 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
     void disable() {
         if (!isEnabled()) {
             ERROR(F("Error: This element is already disabled."), 0x1213);
-            return;
+            return; // LCOV_EXCL_LINE
         }
         updatables.remove(CRTP(Derived));
     }

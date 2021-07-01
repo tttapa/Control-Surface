@@ -262,6 +262,13 @@ TEST(Quaternion, fromDirectionHard) {
     ASSERT_LT(diff, eps);
 }
 
+TEST(Quaternion, fromDirectionInvalid) {
+    Vec3f vector = {0, 0, 0};
+    Quaternion result = Quaternion::fromDirection(vector);
+    Quaternion expected = {0, 0, 0, 0};
+    EXPECT_EQ(result, expected);
+}
+
 TEST(Quaternion, fromDirectionRandom) {
     std::mt19937_64 generator(0);
     std::uniform_real_distribution<float> distribution(0.0, M_PI);
