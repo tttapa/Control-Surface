@@ -9,26 +9,27 @@ BEGIN_AH_NAMESPACE
 
 namespace ExtIO {
 
-bool isNativePin(pin_t pin) {
-    return pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS;
-}
-
 template <class T>
-bool inRange(T target, T start, T end) {
+static bool inRange(T target, T start, T end) {
     return target >= start && target < end;
 }
 
-ExtendedIOElement *getIOElementOfPin(pin_t pin) {
+ExtendedIOElement *getIOElementOfPinOrNull(pin_t pin) {
     for (auto &el : ExtendedIOElement::getAll())
         if (pin < el.getStart())
             break;
         else if (inRange(pin, el.getStart(), el.getEnd()))
             return &el;
-
-    FATAL_ERROR(
-        F("The given pin does not correspond to an Extended IO element."),
-        0x8888);
     return nullptr;
+}
+
+ExtendedIOElement *getIOElementOfPin(pin_t pin) {
+    auto *el = getIOElementOfPinOrNull(pin);
+    if (el == nullptr)
+        FATAL_ERROR(
+            F("The given pin does not correspond to an Extended IO element."),
+            0x8888);
+    return el;
 }
 
 template <class T>
@@ -174,6 +175,8 @@ void analogWriteBuffered(pin_t pin, int val) {
 }
 
 void shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder, uint8_t val) {
+    if (dataPin == NO_PIN || clockPin == NO_PIN)
+        return;
     // Native version
     if (isNativePin(dataPin) && isNativePin(clockPin)) {
         ::shiftOut((int)dataPin, (int)clockPin, bitOrder, val);
@@ -184,7 +187,6 @@ void shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder, uint8_t val) {
         auto dataPinN = dataPin - dataEl->getStart();
         auto clockEl = getIOElementOfPin(clockPin);
         auto clockPinN = clockPin - clockEl->getStart();
-
         for (uint8_t i = 0; i < 8; i++) {
             uint8_t mask = bitOrder == LSBFIRST ? (1 << i) : (1 << (7 - i));
             dataEl->digitalWrite(dataPinN, (val & mask) ? HIGH : LOW);
@@ -197,7 +199,6 @@ void shiftOut(pin_t dataPin, pin_t clockPin, BitOrder_t bitOrder, uint8_t val) {
         for (uint8_t i = 0; i < 8; i++) {
             uint8_t mask = bitOrder == LSBFIRST ? (1 << i) : (1 << (7 - i));
             digitalWrite(dataPin, (val & mask) ? HIGH : LOW);
-
             digitalWrite(clockPin, HIGH);
             digitalWrite(clockPin, LOW);
         }
