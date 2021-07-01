@@ -287,7 +287,7 @@ struct CachedExtIOPin {
         if (element != nullptr)
             return (element->*func)(elementPin, args...);
         else if (elementPin != NO_PIN)
-            return fallback(elementPin, args...);
+            return fallback(arduino_pin_cast(elementPin), args...);
         else
             return static_cast<FRet>(0);
     }
@@ -299,32 +299,41 @@ struct CachedExtIOPin {
 /// An ExtIO version of the Arduino function
 /// @see    ExtendedIOElement::pinMode
 inline void pinMode(CachedExtIOPin pin, PinMode_t mode) {
-    pin.apply(&ExtendedIOElement::pinMode, ::pinMode, mode);
+    pin.apply(
+        &ExtendedIOElement::pinMode, //
+        [](ArduinoPin_t p, PinMode_t m) { ::pinMode(p, m); }, mode);
 }
 /// An ExtIO version of the Arduino function
 /// @see    ExtendedIOElement::digitalWrite
 inline void digitalWrite(CachedExtIOPin pin, PinStatus_t val) {
-    pin.apply(&ExtendedIOElement::digitalWrite, ::digitalWrite, val);
+    pin.apply(
+        &ExtendedIOElement::digitalWrite, //
+        [](ArduinoPin_t p, PinStatus_t v) { ::digitalWrite(p, v); }, val);
 }
 /// An ExtIO version of the Arduino function
 /// @see    ExtendedIOElement::digitalRead
 inline PinStatus_t digitalRead(CachedExtIOPin pin) {
-    return pin.apply(&ExtendedIOElement::digitalRead, ::digitalRead);
+    return pin.apply(&ExtendedIOElement::digitalRead, //
+                     [](ArduinoPin_t p) { return ::digitalRead(p); });
 }
 
 /// An ExtIO version of the Arduino function
 /// @see    ExtendedIOElement::analogRead
 inline analog_t analogRead(CachedExtIOPin pin) {
-    return pin.apply(&ExtendedIOElement::analogRead, ::analogRead);
+    return pin.apply(&ExtendedIOElement::analogRead, //
+                     [](ArduinoPin_t p) { return ::analogRead(p); });
 }
 /// An ExtIO version of the Arduino function
 /// @see    ExtendedIOElement::analogWrite
 inline void analogWrite(CachedExtIOPin pin, analog_t val) {
 #ifndef ESP32
-    pin.apply(&ExtendedIOElement::analogWrite, ::analogWrite, val);
+    pin.apply(
+        &ExtendedIOElement::analogWrite, //
+        [](ArduinoPin_t p, analog_t v) { ::analogWrite(p, v); }, val);
 #else
     pin.apply(
-        &ExtendedIOElement::analogWrite, [](ArduinoPin_t, analog_t) {}, val);
+        &ExtendedIOElement::analogWrite, //
+        [](ArduinoPin_t, analog_t) {}, val);
 #endif
 }
 /// An ExtIO version of the Arduino function
@@ -340,7 +349,8 @@ inline void shiftOut(CachedExtIOPin dataPin, CachedExtIOPin clockPin,
         return;
     // Native version
     if (dataPin.element == nullptr && clockPin.element == nullptr) {
-        ::shiftOut(dataPin.elementPin, clockPin.elementPin, bitOrder, val);
+        ::shiftOut(arduino_pin_cast(dataPin.elementPin),
+                   arduino_pin_cast(clockPin.elementPin), bitOrder, val);
     }
     // ExtIO version
     else if (dataPin.element != nullptr && clockPin.element != nullptr) {
@@ -369,33 +379,41 @@ inline void shiftOut(CachedExtIOPin dataPin, CachedExtIOPin clockPin,
 /// A buffered ExtIO version of the Arduino function
 /// @see    ExtendedIOElement::pinModeBuffered
 inline void pinModeBuffered(CachedExtIOPin pin, PinMode_t mode) {
-    pin.apply(&ExtendedIOElement::pinModeBuffered, ::pinMode, mode);
+    pin.apply(
+        &ExtendedIOElement::pinModeBuffered, //
+        [](ArduinoPin_t p, PinMode_t m) { ::pinMode(p, m); }, mode);
 }
 /// A buffered ExtIO version of the Arduino function
 /// @see    ExtendedIOElement::digitalWriteBuffered
 inline void digitalWriteBuffered(CachedExtIOPin pin, PinStatus_t val) {
-    pin.apply(&ExtendedIOElement::digitalWriteBuffered, ::digitalWrite, val);
+    pin.apply(
+        &ExtendedIOElement::digitalWriteBuffered, //
+        [](ArduinoPin_t p, PinStatus_t v) { ::digitalWrite(p, v); }, val);
 }
 /// A buffered ExtIO version of the Arduino function
 /// @see    ExtendedIOElement::digitalReadBuffered
 inline PinStatus_t digitalReadBuffered(CachedExtIOPin pin) {
-    return pin.apply(&ExtendedIOElement::digitalReadBuffered, ::digitalRead);
+    return pin.apply(&ExtendedIOElement::digitalReadBuffered, //
+                     [](ArduinoPin_t p) { return ::digitalRead(p); });
 }
 
 /// A buffered ExtIO version of the Arduino function
 /// @see    ExtendedIOElement::analogReadBuffered
 inline analog_t analogReadBuffered(CachedExtIOPin pin) {
-    return pin.apply(&ExtendedIOElement::analogReadBuffered, ::analogRead);
+    return pin.apply(&ExtendedIOElement::analogReadBuffered, //
+                     [](ArduinoPin_t p) { return ::analogRead(p); });
 }
 /// A buffered ExtIO version of the Arduino function
 /// @see    ExtendedIOElement::analogWriteBuffered
 inline void analogWriteBuffered(CachedExtIOPin pin, analog_t val) {
 #ifndef ESP32
-    pin.apply(&ExtendedIOElement::analogWriteBuffered, ::analogWrite, val);
+    pin.apply(
+        &ExtendedIOElement::analogWriteBuffered, //
+        [](ArduinoPin_t p, analog_t v) { ::analogWrite(p, v); }, val);
 #else
     pin.apply(
-        &ExtendedIOElement::analogWriteBuffered, [](ArduinoPin_t, analog_t) {},
-        val);
+        &ExtendedIOElement::analogWriteBuffered, //
+        [](ArduinoPin_t, analog_t) {}, val);
 #endif
 }
 /// A buffered ExtIO version of the Arduino function
