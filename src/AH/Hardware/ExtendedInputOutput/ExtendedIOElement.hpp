@@ -324,7 +324,7 @@ inline void analogWrite(CachedExtIOPin pin, analog_t val) {
     pin.apply(&ExtendedIOElement::analogWrite, ::analogWrite, val);
 #else
     pin.apply(
-        &ExtendedIOElement::analogWrite, [](analog_t) {}, val);
+        &ExtendedIOElement::analogWrite, [](ArduinoPin_t, analog_t) {}, val);
 #endif
 }
 /// An ExtIO version of the Arduino function
@@ -394,7 +394,8 @@ inline void analogWriteBuffered(CachedExtIOPin pin, analog_t val) {
     pin.apply(&ExtendedIOElement::analogWriteBuffered, ::analogWrite, val);
 #else
     pin.apply(
-        &ExtendedIOElement::analogWriteBuffered, [](analog_t) {}, val);
+        &ExtendedIOElement::analogWriteBuffered, [](ArduinoPin_t, analog_t) {},
+        val);
 #endif
 }
 /// A buffered ExtIO version of the Arduino function
