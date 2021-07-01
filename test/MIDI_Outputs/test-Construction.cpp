@@ -116,7 +116,7 @@ TEST(Construction, MIDIOutputs) {
 
     CCPotentiometer {pin, address};
 
-    CCRotaryEncoder {{pin, pin}, address, i8, u8};
+    CCRotaryEncoder {{u8, u8}, address, i8, u8};
 
     // Note --------------------------------------------------------------------
     NoteButton {pin, address};
@@ -144,8 +144,8 @@ TEST(Construction, MIDIOutputs) {
 
     Bankable::CCPotentiometer {bank, pin, address};
 
-    Bankable::CCRotaryEncoder {bank, {pin, pin}, address, i8, u8};
-    Bankable::CCAbsoluteEncoder<4> {bank, {pin, pin}, address, i8, u8};
+    Bankable::CCRotaryEncoder {bank, {u8, u8}, address, i8, u8};
+    Bankable::CCAbsoluteEncoder<4> {bank, {u8, u8}, address, i8, u8};
 
     // Bankable::Note ----------------------------------------------------------
     Bankable::NoteButton {bank, pin, address};
@@ -158,7 +158,7 @@ TEST(Construction, MIDIOutputs) {
     // Bankable::PB ------------------------------------------------------------
     Bankable::PBPotentiometer {bank, pin, cnChannel};
 
-    Bankable::PBAbsoluteEncoder<4> {bank, {pin, pin}, cnChannel, i8, u8};
+    Bankable::PBAbsoluteEncoder<4> {bank, {u8, u8}, cnChannel, i8, u8};
 
     // Bankable::PC ------------------------------------------------------------
     Bankable::PCButton {bank, pin, address};
@@ -188,17 +188,17 @@ TEST(Construction, MIDIOutputs) {
     Bankable::ManyAddresses::CCPotentiometer<4> {bank, pin, addresses};
 
     Bankable::ManyAddresses::CCRotaryEncoder<4> {
-        bank, {pin, pin}, addresses, i8, u8};
+        bank, {u8, u8}, addresses, i8, u8};
 
     Bankable::ManyAddresses::CCAbsoluteEncoder<4> {
-        bank, {pin, pin}, addresses, i8, u8};
+        bank, {u8, u8}, addresses, i8, u8};
 
     // ManyAddresses::PB -------------------------------------------------------
     Bankable::ManyAddresses::PBPotentiometer<4> {
         bank, pin, {cnChannel, cnChannel, cnChannel, cnChannel}};
 
     Bankable::ManyAddresses::PBAbsoluteEncoder<4> {
-        bank, {pin, pin}, cnChannels, i8, u8};
+        bank, {u8, u8}, cnChannels, i8, u8};
 
     // ManyAddresses::PC -------------------------------------------------------
     Bankable::ManyAddresses::PCButton<4> {bank, pin, addresses};
@@ -206,21 +206,21 @@ TEST(Construction, MIDIOutputs) {
 }
 
 TEST(Construction, Selectors) {
+    uint8_t u8 = 0;
     const pin_t pin = 0;
     const MIDIChannelCable cnChannel = {};
     const Wrap wrap = Wrap::NoWrap;
     Bank<4> bank;
     Bank<2> bank2;
 
-    EncoderSelector<4> {bank, {pin, pin, pin}, 4, wrap};
+    EncoderSelector<4> {bank, {u8, u8, pin}, 4, wrap};
     IncrementDecrementSelector<4> {bank, {pin, pin}, wrap};
     IncrementSelector<4> {bank, pin};
     ManyButtonsSelector<4> {bank, {pin, pin, pin, pin}};
     ProgramChangeSelector<4> {bank, cnChannel};
     SwitchSelector {bank2, pin};
 
-    EncoderSelectorLEDs<4> {
-        bank, {pin, pin, pin}, {pin, pin, pin, pin}, 4, wrap};
+    EncoderSelectorLEDs<4> {bank, {u8, u8, pin}, {pin, pin, pin, pin}, 4, wrap};
     IncrementDecrementSelectorLEDs<4> {
         bank, {pin, pin}, {pin, pin, pin, pin}, wrap};
     IncrementSelectorLEDs<4> {bank, pin, {pin, pin, pin, pin}};
