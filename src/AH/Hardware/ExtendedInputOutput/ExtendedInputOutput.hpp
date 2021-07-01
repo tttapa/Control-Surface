@@ -22,6 +22,12 @@ namespace ExtIO {
 /// @addtogroup AH_ExtIO
 /// @{
 
+/// Check if the given pin number is a real Arduino pin number, and not an ExtIO 
+/// pin number.
+inline bool isNativePin(pin_t pin) {
+    return pin < NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS;
+}
+
 /**
  * @brief   Find the IO element of a given extended IO pin number. 
  * 
@@ -29,7 +35,11 @@ namespace ExtIO {
  *          The extended IO pin number to find the IO element of.
  * @return  A pointer to the extended IO element that the given pin belongs to.
  */
+ExtendedIOElement *getIOElementOfPinOrNull(pin_t pin);
+/// @copydoc getIOElementOfPinOrNull
+/// Throws an error if the element was not found.
 ExtendedIOElement *getIOElementOfPin(pin_t pin);
+
 /// An ExtIO version of the Arduino function
 /// @see    ExtendedIOElement::pinMode
 void pinMode(pin_t pin, PinMode_t mode);
