@@ -404,6 +404,8 @@ inline void analogWriteBuffered(CachedExtIOPin pin, int val) {
 }
 } // namespace ExtIO
 
+using ExtIO::CachedExtIOPin;
+
 END_AH_NAMESPACE
 
 AH_DIAGNOSTIC_POP()
