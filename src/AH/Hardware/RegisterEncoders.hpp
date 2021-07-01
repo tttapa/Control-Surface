@@ -69,18 +69,18 @@ class RegisterEncoders {
                                   RegisterType>::type;
 
     StateStorageType state = std::numeric_limits<RegisterType>::max();
-    Array<EncoderPositionStorageType, NumEnc> positions {};
+    Array<EncoderPositionStorageType, NumEnc> positions {{}};
 
   public:
     /// Reset the positions to zero and the state to 0xFF...FF.
     void reset() {
-        positions = {};
+        positions = {{}};
         state = std::numeric_limits<RegisterType>::max();
     }
 
     /// Reset the positions to zero and the state to the given value.
     void reset(RegisterType resetstate) {
-        positions = {};
+        positions = {{}};
         state = resetstate;
     }
 
