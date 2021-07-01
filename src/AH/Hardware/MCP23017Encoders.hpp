@@ -10,28 +10,9 @@ AH_DIAGNOSTIC_EXTERNAL_HEADER()
 AH_DIAGNOSTIC_POP()
 
 #include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
-#include <AH/STL/type_traits> // std::conditional
+#include <AH/Hardware/RegisterEncoders.hpp>
 
 BEGIN_AH_NAMESPACE
-
-constexpr static int8_t MCP23017Encoders_lut[16] = {
-    0,  // 0 0 0 0
-    +1, // 0 0 0 1
-    -1, // 0 0 1 0
-    +2, // 0 0 1 1
-    -1, // 0 1 0 0
-    0,  // 0 1 0 1
-    -2, // 0 1 1 0
-    +1, // 0 1 1 1
-    +1, // 1 0 0 0
-    -2, // 1 0 0 1
-    0,  // 1 0 1 0
-    -1, // 1 0 1 1
-    +2, // 1 1 0 0
-    -1, // 1 1 0 1
-    +1, // 1 1 1 0
-    0,  // 1 1 1 1
-};
 
 /**
  * @brief   Class for reading 8 rotary encoders using a MCP23017 I²C port 
@@ -57,21 +38,16 @@ template <class WireType, class EncoderPositionType = int32_t,
           bool InterruptSafe = false>
 class MCP23017Encoders {
   private:
-    using EncoderPositionStorageType =
-        typename std::conditional<InterruptSafe, volatile EncoderPositionType,
-                                  EncoderPositionType>::type;
-    using StateStorageType =
-        typename std::conditional<InterruptSafe, volatile uint16_t,
-                                  uint16_t>::type;
-
     constexpr static uint8_t I2C_BASE_ADDRESS = 0x20;
 
     WireType *wire;
     uint8_t address;
     pin_t interrupt_pin;
 
-    StateStorageType state;
-    EncoderPositionStorageType positions[8];
+    using RegisterEncoderType =
+        RegisterEncoders<uint16_t, 8, EncoderPositionType, InterruptSafe>;
+
+    RegisterEncoderType encs;
 
   protected:
     /// Write any data to the MCP23017.
@@ -193,7 +169,7 @@ class MCP23017Encoders {
         writeI2C(0x12); // GPIOA
 
         /// Initialize the state
-        state = readGPIO();
+        encs.reset(readGPIO());
     }
 
     /**
@@ -213,33 +189,7 @@ class MCP23017Encoders {
             return;
         // Read both GPIO A and B
         uint16_t newstate = readGPIO();
-        uint16_t oldstate = state;
-
-        // If the state didn't change, do nothing
-        if (newstate == oldstate)
-            return;
-
-        // Save the new state
-        state = newstate;
-
-        // For each encoder, compare the new state of its two pins
-        // to the old state. Combine the four states into a 4-bit
-        // number and use a lookup table to determine the delta between
-        // the two encoder positions.
-        for (uint8_t i = 0; i < 8; ++i) {
-            uint8_t change =
-                uint8_t(newstate) & 0b11; // Top two bits are new pin states
-            change <<= 2;
-            change |=
-                uint8_t(oldstate) & 0b11; // Bottom two bits are old pin states
-            auto delta =
-                static_cast<EncoderPositionType>(MCP23017Encoders_lut[change]);
-            if (delta != 0) { // small speedup on AVR
-                positions[i] += delta;
-            }
-            oldstate >>= 2;
-            newstate >>= 2;
-        }
+        encs.update(newstate);
     }
 
     /**
@@ -252,16 +202,7 @@ class MCP23017Encoders {
      * @param   idx
      *          The index of the encoder to read [0, 7].
      */
-    EncoderPositionType read(uint8_t idx) const {
-        if (InterruptSafe) {
-            noInterrupts();
-            EncoderPositionType ret = positions[idx];
-            interrupts();
-            return ret;
-        } else {
-            return positions[idx];
-        }
-    }
+    EncoderPositionType read(uint8_t idx) const { return encs.read(idx); }
 
     /**
      * @brief   Read the position of the given encoder and reset it to zero.
@@ -274,17 +215,7 @@ class MCP23017Encoders {
      *          The index of the encoder to read [0, 7].
      */
     EncoderPositionType readAndReset(uint8_t idx) {
-        if (InterruptSafe) {
-            noInterrupts();
-            EncoderPositionType ret = positions[idx];
-            positions[idx] = 0;
-            interrupts();
-            return ret;
-        } else {
-            EncoderPositionType ret = positions[idx];
-            positions[idx] = 0;
-            return ret;
-        }
+        return encs.readAndReset(idx);
     }
 
     /**
@@ -297,72 +228,13 @@ class MCP23017Encoders {
      * @param   pos
      *          The position value to write.
      */
-    void write(uint8_t idx, EncoderPositionType pos) {
-        if (InterruptSafe) {
-            noInterrupts();
-            positions[idx] = pos;
-            interrupts();
-        } else {
-            positions[idx] = pos;
-        }
-    }
+    void write(uint8_t idx, EncoderPositionType pos) { encs.write(idx, pos); }
 
     /**
      * @brief   Proxy to access a single encoder of the 8 encoders managed by
      *          MCP23017Encoders.
      */
-    class MCP23017Encoder {
-      private:
-        friend class MCP23017Encoders;
-
-        /// A pointer to the position value inside of the MCP23017Encoders class.
-        EncoderPositionStorageType *position;
-
-        MCP23017Encoder(EncoderPositionStorageType *position)
-            : position(position) {}
-
-      public:
-        /// Read the position of the encoder.
-        /// @see MCP23017Encoders::read
-        EncoderPositionType read() const {
-            if (InterruptSafe) {
-                noInterrupts();
-                EncoderPositionType ret = *position;
-                interrupts();
-                return ret;
-            } else {
-                return *position;
-            }
-        }
-
-        /// Read the position of the encoder and reset it to zero.
-        /// @see MCP23017Encoders::readAndReset
-        EncoderPositionType readAndReset() {
-            if (InterruptSafe) {
-                noInterrupts();
-                EncoderPositionType ret = *position;
-                *position = 0;
-                interrupts();
-                return ret;
-            } else {
-                EncoderPositionType ret = *position;
-                *position = 0;
-                return ret;
-            }
-        }
-
-        /// Set the position of the encoder.
-        /// @see MCP23017Encoders::write
-        void write(EncoderPositionType pos) {
-            if (InterruptSafe) {
-                noInterrupts();
-                *position = pos;
-                interrupts();
-            } else {
-                *position = pos;
-            }
-        }
-    };
+    using MCP23017Encoder = typename RegisterEncoderType::Encoder;
 
     /**
      * @brief   Get a proxy to one of the encoders managed by this 
@@ -371,11 +243,7 @@ class MCP23017Encoders {
      * @param   index
      *          The index of the encoder to access.
      */
-    MCP23017Encoder operator[](uint8_t index) {
-        if (index >= 8)
-            index = 7;
-        return &positions[index];
-    }
+    MCP23017Encoder operator[](uint8_t index) { return encs[index]; }
 };
 
 END_AH_NAMESPACE
