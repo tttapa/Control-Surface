@@ -31,23 +31,75 @@ div.memproto, div.memdoc, div.directory, div.dyncontent {
 body {
     background-color: #DDD;
     width: 100%;
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: 300;
+}
+body, table, div, p, dl {
+    font-weight: 300;
+}
+h1, h2, h3, h4, h5,
+h2.groupheader, .title, #projectname {
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: 300;
+}
+h2, h2.groupheader, .title, #projectname {
+    font-weight: 400;
+}
+h3, h4, h5 {
+    font-weight: 400;
+}
+div.contents > div.textblock > h1 {
+    border-bottom: 1px solid #c8d0e2;
+    padding-bottom: 5px;
+    margin-top: 1em;
+}
+div.contents > div.textblock > hr {
+    margin-right: 15px; /* To match width of doxygen headers and code blocks */
+}
+.title {
+    font-size: 2em;
 }
 * {
     max-width: 100%;
 }
+span.mono {
+    font-family: monospace;
+}
+/* These were originally "bold" which is too bold */
+b, dt, caption, div.groupHeader, td.indexkey, th.dirtab,
+.memproto, dl.reflist dt,
+.params .paramname, .retval .paramname, .tparams .paramname, .exception .paramname,
+.icon, dl.citelist dt, .inherit_header,
+#powerTip div.ttname a, #powerTip div.ttname {
+    font-weight: 500;
+}
+a.el {
+    font-weight: 500;
+}
+.mdescLeft, .mdescRight {
+    color: #444;
+}
+/* span.permalink {
+    padding: 0 0.4em;
+    opacity: 0.6;
+    transition: opacity 0.15s;
+}
+.memtitle:hover span.permalink {
+    opacity: 1;
+} */
+.compoundTemplParams {
+    color: #3C4F74;
+    font-size: inherit;
+}
 iframe {
     max-width: initial;
 }
-#MSearchField {
-    max-width: initial;
-}
-body > div.header, div.PageDoc > div.header {
+body > div.header, div > div.header {
     max-width: 1100px;
     box-sizing: border-box;
     margin: auto;
     padding: 0.8em 2.5em 0.6em 2.5em;
     box-shadow: 1px 0px 5px #555;
-    border-bottom: solid white 5px;
 }
 div.ingroups {
     font-size: initial;
@@ -68,6 +120,11 @@ address.footer * {
 address.footer > small {
     padding: 0.6em;
 }
+address.footer img.footer {
+    height: 2em;
+    vertical-align: middle;
+    padding-bottom: 0.25em;
+}
 div#top {
     /* position: sticky; */
     top: 0;
@@ -82,10 +139,27 @@ body > div.header {
     left: 0;
     width: 100%;
 }
-ul.sm-dox {
+.sm-dox {
     background-color: #dde;
     background-image: none;
     box-shadow: 0px 1px 2px #458;
+}
+.sm-dox a, .sm-dox a:focus, .sm-dox a:active, .sm-dox a:hover, .sm-dox a.highlighted {
+    background-image: none;
+    border-right: 0.5px solid #78A;
+    border-bottom: 0.5px solid #78A;
+    margin-bottom: -1px;
+    /* box-shadow: 0px 1px 2px #458; */
+}
+.sm-dox>li:first-child>a, .sm-dox>li:first-child>:not(ul) a {
+    border-radius: 0;
+}
+.sm-dox a:hover {
+    color: #283a5d;
+    text-shadow: 0 3px 6px white;
+}
+li#searchBoxPos2 {
+    margin-left: 1em;
 }
 div.navpath > ul {
     background-color: #dde;
@@ -95,12 +169,20 @@ div.navpath > ul {
     z-index: 101;
     position: relative;
 }
+#main-nav ul {
+    padding-left: 0;
+}
+.directory td {
+    vertical-align: text-bottom;
+}
 .directory td > .el {
     display: inline-block;
-    padding: 0.4em 0.5em 0.4em 0;
 }
-.directory td.desc {
-    padding: 0.4em 0.5em 0.4em 0.5em;
+.directory td.desc, .directory td.entry {
+    padding: 0.6em 0.5em 0.6em 0.8em;
+}
+.markdownTable tr:last-child td {
+    border-bottom: 1px solid #334262;
 }
 /* Hide the "Detailed description" header */
 div.contents a#details + h2.groupheader {
@@ -109,10 +191,15 @@ div.contents a#details + h2.groupheader {
 h2.memtitle, .memproto, .fieldtable th {
     background-color: #dde;
     background-image: none;
-    border-radius: 0;
+}
+h2.memtitle {
+    border-radius: 0.4em 0.4em 0 0;
+}
+.memproto {
+    border-radius: 0 0.4em 0 0;
 }
 table.fieldtable {
-    border-radius: 0;
+    border-radius: 0.4em;
 }
 .fieldtable th {
     font-size: 1.1em;
@@ -121,20 +208,87 @@ span.mlabel {
     font-size: 0.9em;
 }
 .memdoc {
-    border-radius: 0;
+    border-radius: 0 0 0.4em 0.4em;
 }
-#MSearchResultsWindow {
-    margin-top: 8px;
+
+/* A bit more space in lists on related pages */
+div.textblock li {
+    margin: 0.4em 0;
 }
+
 code {
     background-color: #f4f4ff;
-    padding: 0 1px;
+    border-radius: 6px;
+    padding: .1em .3em;
+}
+div.fragment {
+    padding: 0.6em;
+    border-radius: 0.6em;
+}
+div.line {
+    line-height: 1.25;
+}
+div#powerTip {
+    margin-top: 0.5em;
+}
+
+span.preprocessor {
+    color: #af00db;
+    color: #a31515;
+}
+span.comment {
+    color: #008000;
+}
+span.stringliteral {
+    color: #a31515;
+}
+span.charliteral {
+    color: #a31515;
+}
+span.keywordflow {
+    color: #0000ff;
+    color: #af00db;
+}
+span.keywordtype {
+    color: #2b91af;
+    color: #0000ff;
+}
+span.keyword {
+    color: #0000ff;
+}
+div.line a.code.highlightmember {
+    color: #795e26;
+}
+div.line a.code.highlightclass {
+    color: #2b91af;
+}
+div.line a.code.highlightfile {
+    color: #a31515;
+    text-decoration: underline;
+}
+div.line a.code.highlightnamespace {
+    color: #af00db;
+}
+div.line a.code:hover {
+    filter: brightness(120%);
+}
+
+blockquote.doxtable {
+    padding: 0.5em 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+blockquote.doxtable > p:first-child {
+    margin-top: 0;
+}
+blockquote.doxtable > p:last-child {
+    margin-bottom: 0;
 }
 
 /* --------------------- */
 
 /* Portrait and Landscape */
-@media only screen and (max-width: 900px) /* and (orientation : portrait) */ {
+@media only screen and (max-width: 768px) /* and (orientation : portrait) */ {
     div#top {
         position: relative;
     }
@@ -152,31 +306,26 @@ code {
       padding: 0.6em;
       margin-bottom: 0;
     }
-    #MSearchResultsWindow {
-        display: none;
-        position: initial;
-        left: 0; 
-        top: 0;
-        bottom: 0;
-        border: 1px solid #ddd;
-        z-index: 9999;
-    }
-    .sm-dox a, .sm-dox a:focus, .sm-dox a:hover, .sm-dox a:active {
-        line-height: 2.4;
-    }
     .sm-dox a:hover {
-        background-image: url(tab_a.png);
+        /* background-image: url(tab_a.png); */
         background-repeat: repeat-x;
         color: white;
         text-shadow: initial;
+    }
+    .sm-dox>li:first-child>a, .sm-dox>li:first-child>:not(ul) a {
+        border-top: 0.5px solid #78A;
     }
     .sm-dox li>a span.sub-arrow:before {
         display: block;
         content: '+';
     }
-    .sm-dox li {
-        border-bottom: 1px solid #ccd;
+    .sm-dox a, .sm-dox a:focus, .sm-dox a:active, .sm-dox a:hover,
+    .sm-dox a.highlighted {
+        border-right: none;
     }
+    /* .sm-dox li {
+        border-bottom: 1px solid #ccd;
+    } */
 
     /*
     address.footer {
@@ -231,3 +380,47 @@ code {
         line-height: 1px;
     }
 }
+
+/* ---- Start search box ---- */
+
+iframe#MSearchResults {
+    height: auto;
+    width: 100%;
+    max-width: 25em;
+    margin-left: auto;
+    margin-right: 0;
+    display: block;
+    resize: vertical;
+}
+#MSearchResultsWindow {
+    position: relative;
+    border: none;
+    z-index: 10000;
+    width: 100% !important;
+    top: 0 !important; 
+    left: 0 !important; 
+    box-shadow: inset #778 1px 0px 4px 0px;
+}
+.SRResult {
+    margin-left: auto;
+    margin-right: 0;
+    max-width: 25em;
+}
+
+/* #MSearchResultsWindow {
+    border: 1px solid #96A7C8;
+    background-color: #F9FAFC;
+    border-radius: 0 0 4px 4px;
+    border-top: none;
+    margin-top: 7px;
+    box-shadow: 1px 1px 2px 0px #777;
+}
+
+@media only screen and (max-width: 767px) {
+    #MSearchResultsWindow {
+        border-radius: 0;
+        margin-top: 0;
+    }
+} */
+
+/* ---- End search box ---- */
