@@ -19,12 +19,14 @@ BEGIN_AH_NAMESPACE
 // ----------------------------- Debug Settings ----------------------------- //
 // ========================================================================== //
 
+#ifndef DEBUG_OUT
 /// The debug output.  
 /// Use `#define DEBUG_OUT Serial` to print debugging information to the serial
 /// monitor.  
 /// @note   Printing debug information can slow down the program dramatically.
 #define DEBUG_OUT
 // #define DEBUG_OUT Serial
+#endif
 
 /// Exit when encountering an error, instead of trying to recover (recommended).
 #define FATAL_ERRORS

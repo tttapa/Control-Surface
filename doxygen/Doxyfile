@@ -2231,7 +2231,6 @@ INCLUDE_FILE_PATTERNS  = *.h \
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
 PREDEFINED             = ARDUINO \
-                         DEBUG_OUT=Serial \
                          CORE_TEENSY \
                          TEENSYDUINO \
                          USE_MIDI_USB_INTERFACE \
