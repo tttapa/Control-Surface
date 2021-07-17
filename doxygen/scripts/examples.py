@@ -8,7 +8,7 @@ from pathlib import Path
 dirnm = os.path.dirname(os.path.realpath(__file__))
 doxydir = join(dirnm, '..')
 # exclude = re.compile(r'(examples/Arduino-Helpers/)|(examples/test/)')
-exclude = None
+exclude = re.compile(r'examples/test/')
 
 template = """\
 /**
