@@ -252,8 +252,8 @@ void AnalogMultiplex<N>::setMuxAddress(uint8_t address) {
         ExtIO::digitalWrite(addressPin, (address & mask) != 0 ? HIGH : LOW);
         mask <<= 1;
     }
-#if !defined(__AVR__) && defined(ARDUINO)
-    delayMicroseconds(5);
+#if !defined(__AVR__) && !defined(__x86_64__)
+    delayMicroseconds(1);
 #endif
 }
 
