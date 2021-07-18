@@ -4,6 +4,7 @@
 #include <AH/Hardware/FilteredAnalog.hpp>
 #include <MIDI_Constants/Control_Change.hpp>
 #include <MIDI_Inputs/MIDIInputElement.hpp>
+#include <MIDI_Interfaces/DebugMIDI_Interface.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 #include <Selectors/Selector.hpp>
 
@@ -29,6 +30,7 @@ void Control_Surface_::begin() {
     FilteredAnalog<>::setupADC();
     ExtendedIOElement::beginAll();
     Updatable<MIDI_Interface>::beginAll();
+    MIDIOutputOnly::beginAll();
     beginDisplays();
     MIDIInputElementNote::beginAll();
     MIDIInputElementKP::beginAll();
@@ -38,10 +40,7 @@ void Control_Surface_::begin() {
     MIDIInputElementPB::beginAll();
     MIDIInputElementSysEx::beginAll();
     Updatable<>::beginAll();
-    Updatable<Potentiometer>::beginAll();
-    Updatable<MotorFader>::beginAll();
     Updatable<Display>::beginAll();
-    potentiometerTimer.begin();
     displayTimer.begin();
 }
 
@@ -66,8 +65,6 @@ void Control_Surface_::disconnectMIDI_Interfaces() {
 void Control_Surface_::loop() {
     ExtendedIOElement::updateAllBufferedInputs();
     Updatable<>::updateAll();
-    if (potentiometerTimer)
-        Updatable<Potentiometer>::updateAll();
     updateMidiInput();
     updateInputs();
     if (displayTimer)

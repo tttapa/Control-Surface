@@ -90,8 +90,6 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     void sinkMIDIfromPipe(RealTimeMessage msg) override;
 
   private:
-    /// A timer to know when to update the analog inputs.
-    Timer<micros> potentiometerTimer = {AH::FILTERED_INPUT_UPDATE_INTERVAL};
     /// A timer to know when to refresh the displays.
     Timer<micros> displayTimer = {1000000UL / MAX_FPS};
 

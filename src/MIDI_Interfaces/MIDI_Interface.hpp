@@ -98,7 +98,7 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     /// pipe.
     void onRealTimeMessage(RealTimeMessage message);
 
-  protected:
+  public:
     /// Read, parse and dispatch incoming MIDI messages on the given interface.
     template <class MIDIInterface_t>
     static void updateIncoming(MIDIInterface_t *iface);

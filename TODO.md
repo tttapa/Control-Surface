@@ -8,7 +8,7 @@
 - ✔ ~~Add a getter for the button state, and rename `getState()` → update()~~
 - Cleanup structure of display elements.
 - Flashing LEDs
-- Motorized faders
+- ✔ ~~Motorized faders~~
 - Keywords
 - Make many protected functions private if 1) they are not needed in tests 2) 
   they should not be called from within subclasses.
@@ -27,6 +27,8 @@
 - ✔ ~~Return type transposers~~
 - ✔ ~~Selection transposers~~
 - optimized ExtIO for boards with tons of RAM?
+- ✔ ~~Output only MIDI debug interface~~
+- Bankable FastLED
 
 ## Specific elements
 
