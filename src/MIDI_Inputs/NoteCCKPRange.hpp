@@ -169,6 +169,8 @@ class NoteCCKPRange : public BankableMatchingMIDIInputElement<
 
   private:
     AH::Array2D<uint8_t, BankSize, RangeLen> values = {{{}}};
+
+  protected:
     bool dirty = true;
 };
 
