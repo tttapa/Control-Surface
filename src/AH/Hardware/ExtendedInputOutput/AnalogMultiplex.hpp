@@ -253,7 +253,7 @@ void AnalogMultiplex<N>::setMuxAddress(uint8_t address) {
         mask <<= 1;
     }
 #if !defined(__AVR__) && !defined(__x86_64__)
-    delayMicroseconds(5);
+    delayMicroseconds(1);
 #endif
 }
 
