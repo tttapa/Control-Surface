@@ -35,7 +35,7 @@ struct DefaultColorMapper {
     CRGB operator()(uint8_t value, uint8_t index) const {
         (void)index;
         Color c = velocityToNovationColor(value);
-        return CRGB{c.r, c.g, c.b};
+        return CRGB {c.r, c.g, c.b};
     }
 };
 
@@ -54,6 +54,9 @@ using index_permuter_f = uint8_t (*)(uint8_t);
 ///         - MIDIMessageType::KEY_PRESSURE
 /// @tparam RangeLen
 ///         The length of the range of addresses to listen to.
+/// @tparam ColorMapper
+///         A callable that maps a 7-bit MIDI value and the index in the range
+///         to a FastLED CRGB color, see @ref DefaultColorMapper for an example.
 template <MIDIMessageType Type, uint8_t RangeLen, class ColorMapper>
 class NoteCCKPRangeFastLED
     : public MatchingMIDIInputElement<Type, TwoByteRangeMIDIMatcher> {
@@ -299,12 +302,178 @@ using KPValueFastLED =
 
 namespace Bankable {
 
-/// @addtogroup midi-input-elements-leds
+/// The default mapping from a 7-bit MIDI value to an RGB color, using the
+/// Novation Launchpad mapping.
+struct DefaultColorMapper {
+    /// Map from a 7-bit MIDI value to an RGB color, using the Novation
+    /// Launchpad mapping.
+    CRGB operator()(uint8_t value, uint8_t bankIndex, uint8_t index) const {
+        (void)bankIndex;
+        (void)index;
+        Color c = velocityToNovationColor(value);
+        return CRGB {c.r, c.g, c.b};
+    }
+};
+
+/// Generic base class for classes that listen for MIDI Note, Control Change and
+/// Key Pressure events on a range of addresses and turns on the corresponding
+/// LED in a FastLED strip with a color that depends both on the active bank,
+/// the index in the range, and the value of the incoming MIDI message.
+///
+/// @tparam Type
+///         The type of MIDI messages to listen for:
+///         - MIDIMessageType::NOTE_ON
+///         - MIDIMessageType::CONTROL_CHANGE
+///         - MIDIMessageType::KEY_PRESSURE
+/// @tparam BankSize
+///         The number of banks.
+/// @tparam RangeLen
+///         The length of the range of addresses to listen to.
+/// @tparam ColorMapper
+///         A callable that maps a 7-bit MIDI value, the bank index and the 
+///         index in the range to a FastLED CRGB color, see 
+///         @ref Bankable::DefaultColorMapper for an example.
+template <MIDIMessageType Type, uint8_t BankSize, uint8_t RangeLen,
+          class ColorMapper>
+class NoteCCKPRangeFastLED : public NoteCCKPRange<Type, BankSize, RangeLen> {
+  public:
+    using Parent = NoteCCKPRange<Type, BankSize, RangeLen>;
+    using Matcher = typename Parent::Matcher;
+
+    NoteCCKPRangeFastLED(BankConfig<BankSize> config, CRGB *ledcolors,
+                         MIDIAddress address, const ColorMapper &colormapper)
+        : Parent(config, address), ledcolors(ledcolors),
+          colormapper(colormapper) {}
+
+    NoteCCKPRangeFastLED(BankConfig<BankSize> config,
+                         AH::Array<CRGB, RangeLen> &ledcolors,
+                         MIDIAddress address, const ColorMapper &colormapper)
+        : NoteCCKPRangeFastLED(config, ledcolors.data, address, colormapper) {}
+
+    NoteCCKPRangeFastLED(BankConfig<BankSize> config, CRGB *ledcolors,
+                         MIDIAddress address, const ColorMapper &colormapper,
+                         index_permuter_f index_permuter)
+        : Parent(config, address), ledcolors(ledcolors),
+          colormapper(colormapper), ledIndexPermuter(index_permuter) {}
+
+    NoteCCKPRangeFastLED(BankConfig<BankSize> config,
+                         AH::Array<CRGB, RangeLen> &ledcolors,
+                         MIDIAddress address, const ColorMapper &colormapper,
+                         index_permuter_f index_permuter)
+        : NoteCCKPRangeFastLED(config, ledcolors.data, address, colormapper,
+                               index_permuter) {}
+
+    template <class ColorMapper_ = ColorMapper>
+    NoteCCKPRangeFastLED(BankConfig<BankSize> config, CRGB *ledcolors,
+                         MIDIAddress address,
+                         typename std::enable_if<std::is_default_constructible<
+                             ColorMapper_>::value>::type * = nullptr)
+        : Parent(config, address), ledcolors(ledcolors) {}
+
+    template <class ColorMapper_ = ColorMapper>
+    NoteCCKPRangeFastLED(BankConfig<BankSize> config,
+                         AH::Array<CRGB, RangeLen> &ledcolors,
+                         MIDIAddress address,
+                         typename std::enable_if<std::is_default_constructible<
+                             ColorMapper_>::value>::type * = nullptr)
+        : NoteCCKPRangeFastLED(config, ledcolors.data, address) {}
+
+    /** 
+     * @brief   Set the maximum brightness of the LEDs.
+     * @param   brightness
+     *          The maximum brightness [0, 255]
+     */
+    void setBrightness(uint8_t brightness) { this->brightness = brightness; }
+    /// Get the maximum brightness of the LEDs.
+    uint8_t getBrightness() const { return this->brightness; }
+
+    /**
+     * @brief   Change the mapping from the MIDI index to the LED index.
+     * 
+     * The MIDI index is derived from the note or controller number.
+     *
+     * The function should take the (zero-based) MIDI index value as a 
+     * parameter, and return the corresponding LED index (zero-based).
+     * By default, the LED index is the same as the MIDI index.
+     */
+    void setLEDIndexPermuter(index_permuter_f permuter) {
+        this->ledIndexPermuter = permuter ? permuter : identityPermuter;
+    }
+
+    void begin() override { updateLEDs(); }
+
+    void handleUpdate(typename Matcher::Result match) override {
+        bool newdirty = Parent::handleUpdateImpl(match);
+        if (newdirty)
+            updateLED(match.bankIndex, match.index, match.value);
+        this->dirty |= newdirty;
+    }
+
+    void reset() override {
+        Parent::reset();
+        updateLEDs();
+    }
+
+    void updateLED(uint8_t bankIndex, uint8_t index, uint8_t value) {
+        // Apply the color mapper to convert the value and index to a color
+        CRGB newColor = CRGB(colormapper(value, bankIndex, index));
+        // Apply the brightness to the color
+        newColor = newColor.nscale8_video(brightness);
+        // Map the note index to the LED index
+        uint8_t ledIndex = ledIndexPermuter(index);
+        // Update the LED color
+        ledcolors[ledIndex] = newColor;
+    }
+
+    void updateLEDs() {
+        const auto bankIndex = this->getActiveBank();
+        for (uint8_t index = 0; index < RangeLen; ++index)
+            updateLED(bankIndex, index, this->getValue(bankIndex, index));
+    }
+
+  protected:
+    void onBankSettingChange() override {
+        Parent::onBankSettingChange();
+        updateLEDs();
+    }
+
+  private:
+    CRGB *ledcolors;
+    uint8_t brightness = 255;
+    index_permuter_f ledIndexPermuter = identityPermuter;
+
+    static uint8_t identityPermuter(uint8_t i) { return i; }
+
+  public:
+    ColorMapper colormapper;
+};
+
+/// @addtogroup BankableMIDIInputElementsLEDs
 /// @{
 
-/// @todo   Implement.
-template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
-using NoteRangeFastLED = void;
+/**
+ * @brief   MIDI Input Element that listens across banks for MIDI Note messages
+ *          in a given range, and displays their values using a FastLED LED 
+ *          strip.
+ * 
+ * This class doesn't actually write to the LEDs directly, it writes to a buffer
+ * of CRGB values that is sent to the LEDs by the FastLED library in the user
+ * code. To know when to update the LEDs, you can use the 
+ * @ref Bankable::NoteCCKPRangeFastLED::getDirty() and 
+ * @ref Bankable::NoteCCKPRangeFastLED::clearDirty() methods.
+ * 
+ * @tparam  BankSize
+ *          The number of banks.
+ * @tparam  RangeLen 
+ *          The length of the range of MIDI note numbers to listen for.
+ * @tparam  ColorMapper 
+ *          The color mapper that defines how each MIDI velocity value should be
+ *          mapped to an RGB color for the LEDs.
+ */
+template <uint8_t BankSize, uint8_t RangeLen,
+          class ColorMapper = DefaultColorMapper>
+using NoteRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::NOTE_ON,
+                                              BankSize, RangeLen, ColorMapper>;
 
 /// @todo   Implement.
 template <class ColorMapper = DefaultColorMapper>
