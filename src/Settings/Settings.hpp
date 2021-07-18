@@ -56,6 +56,10 @@ constexpr unsigned long HAIRLESS_BAUD = 115200;
 /// The maximum frame rate of the displays.
 constexpr uint8_t MAX_FPS = 60;
 
+/// Define the global instance `Control_Surface` as a true global variable.
+/// Otherwise it is defined as a macro.
+#define CS_TRUE_CONTROL_SURFACE_INSTANCE 1
+
 // ========================================================================== //
 
 END_CS_NAMESPACE

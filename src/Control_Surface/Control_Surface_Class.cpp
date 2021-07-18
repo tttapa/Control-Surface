@@ -285,6 +285,8 @@ void Control_Surface_::updateDisplays() {
     }
 }
 
+#if CS_TRUE_CONTROL_SURFACE_INSTANCE || defined(DOXYGEN)
 Control_Surface_ &Control_Surface = Control_Surface_::getInstance();
+#endif
 
 END_CS_NAMESPACE

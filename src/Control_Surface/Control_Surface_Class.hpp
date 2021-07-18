@@ -138,7 +138,19 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     MIDI_Pipe inpipe, outpipe;
 };
 
+#if CS_TRUE_CONTROL_SURFACE_INSTANCE || defined(DOXYGEN)
 /// A predefined instance of the Control Surface to use in the Arduino sketches.
 extern Control_Surface_ &Control_Surface;
+#else
+// This is not a clean solution, but it's the only way to get the linker to 
+// optimize away all Control Surface-related code if the `Control_Surface` 
+// instance is never used.
+// Even if it isn't used, and even though it's a global, the compiler has to 
+// generate the constructor and destructor, which pulls in variables and vtables
+// from throughout the library, using a significant amount of memory.
+// By using a macro here, Control_Surface is only constructed (and destructed)
+// if it is used in user code.
+#define Control_Surface (Control_Surface_::getInstance())
+#endif
 
 END_CS_NAMESPACE
