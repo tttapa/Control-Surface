@@ -1,7 +1,7 @@
 #pragma once
 
 #include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
-#include <MIDI_Inputs/NoteCCKPValue.hpp>
+#include <MIDI_Inputs/NoteCCKPRange.hpp>
 
 BEGIN_CS_NAMESPACE
 
