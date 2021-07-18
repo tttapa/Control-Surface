@@ -22,7 +22,7 @@ void ButtonMatrix<Derived, NumRows, NumCols>::update() {
 
     for (size_t row = 0; row < NumRows; row++) { // scan through all rows
         pinMode(rowPins[row], OUTPUT);           // make the current row Lo-Z 0V
-#if !defined(__AVR__) && !defined(__x86_64__)
+#if !defined(__AVR__) && defined(ARDUINO)
         delayMicroseconds(1);
 #endif
         for (size_t col = 0; col < NumCols; col++) { // scan through all columns
