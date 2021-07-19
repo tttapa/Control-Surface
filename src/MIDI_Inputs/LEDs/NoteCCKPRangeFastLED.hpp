@@ -330,8 +330,8 @@ struct DefaultColorMapper {
 /// @tparam RangeLen
 ///         The length of the range of addresses to listen to.
 /// @tparam ColorMapper
-///         A callable that maps a 7-bit MIDI value, the bank index and the 
-///         index in the range to a FastLED CRGB color, see 
+///         A callable that maps a 7-bit MIDI value, the bank index and the
+///         index in the range to a FastLED CRGB color, see
 ///         @ref Bankable::DefaultColorMapper for an example.
 template <MIDIMessageType Type, uint8_t BankSize, uint8_t RangeLen,
           class ColorMapper>
@@ -475,25 +475,29 @@ template <uint8_t BankSize, uint8_t RangeLen,
 using NoteRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::NOTE_ON,
                                               BankSize, RangeLen, ColorMapper>;
 
-/// @todo   Implement.
-template <class ColorMapper = DefaultColorMapper>
-using NoteValueFastLED = void;
+/// @see @ref Bankable::NoteRangeFastLED
+template <uint8_t BankSize, class ColorMapper = DefaultColorMapper>
+using NoteValueFastLED = NoteRangeFastLED<BankSize, 1, ColorMapper>;
 
-/// @todo   Implement.
-template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
-using CCRangeFastLED = void;
+/// @see @ref Bankable::NoteCCKPRangeFastLED
+template <uint8_t BankSize, uint8_t RangeLen,
+          class ColorMapper = DefaultColorMapper>
+using CCRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::CONTROL_CHANGE,
+                                            BankSize, RangeLen, ColorMapper>;
 
-/// @todo   Implement.
-template <class ColorMapper = DefaultColorMapper>
-using CCValueFastLED = void;
+/// @see @ref Bankable::NoteCCKPRangeFastLED
+template <uint8_t BankSize, class ColorMapper = DefaultColorMapper>
+using CCValueFastLED = CCRangeFastLED<BankSize, 1, ColorMapper>;
 
-/// @todo   Implement.
-template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
-using KPRangeFastLED = void;
+/// @see @ref Bankable::NoteCCKPRangeFastLED
+template <uint8_t BankSize, uint8_t RangeLen,
+          class ColorMapper = DefaultColorMapper>
+using KPRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::KEY_PRESSURE,
+                                            BankSize, RangeLen, ColorMapper>;
 
-/// @todo   Implement.
-template <class ColorMapper = DefaultColorMapper>
-using KPValueFastLED = void;
+/// @see @ref Bankable::NoteCCKPRangeFastLED
+template <uint8_t BankSize, class ColorMapper = DefaultColorMapper>
+using KPValueFastLED = KPRangeFastLED<BankSize, 1, ColorMapper>;
 
 /// @}
 
