@@ -66,6 +66,7 @@
 #include <MIDI_Outputs/Bankable/NoteButtons.hpp>
 #include <MIDI_Outputs/Bankable/NoteChordButton.hpp>
 #include <MIDI_Outputs/ManyAddresses/NoteButton.hpp>
+#include <MIDI_Outputs/ManyAddresses/NoteButtonLatched.hpp>
 #include <MIDI_Outputs/ManyAddresses/NoteButtonMatrix.hpp>
 
 #include <MIDI_Outputs/Bankable/PBPotentiometer.hpp>
