@@ -73,13 +73,11 @@ class IncrementDecrementButtons {
      */
     State getState() const { return state; }
 
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT
     /// @see    Button::invert
     void invert() {
         incrementButton.invert();
         decrementButton.invert();
     }
-#endif
 
   protected:
     State updateImplementation();

@@ -86,10 +86,6 @@ constexpr unsigned long FILTERED_INPUT_UPDATE_INTERVAL = 1000; // microseconds
 
 constexpr static Frequency SPI_MAX_SPEED = 8_MHz;
 
-/// Make it possible to invert individual push buttons.
-/// Enabling this will increase memory usage.
-#define AH_INDIVIDUAL_BUTTON_INVERT
-
 // ========================================================================== //
 
 END_AH_NAMESPACE

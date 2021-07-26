@@ -25,12 +25,6 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #endif
 #endif
 
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT
-#define AH_INDIVIDUAL_BUTTON_INVERT_STATIC
-#else
-#define AH_INDIVIDUAL_BUTTON_INVERT_STATIC static
-#endif
-
 #ifdef TEENSYDUINO
 #include <AH/Teensy/TeensyUSBTypes.hpp>
 #if defined(DEBUG_OUT) && (DEBUG_OUT == Serial) &&                             \

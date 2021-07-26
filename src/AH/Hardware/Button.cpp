@@ -8,30 +8,32 @@ Button::Button(pin_t pin) : pin(pin) {}
 
 void Button::begin() { ExtIO::pinMode(pin, INPUT_PULLUP); }
 
-void Button::invert() { invertState = true; }
-
-#ifndef AH_INDIVIDUAL_BUTTON_INVERT
-bool Button::invertState = false;
-#endif
+void Button::invert() { state.invert = true; }
 
 Button::State Button::update() {
-    // read the button state and invert it if "invertState" is true
-    bool input = ExtIO::digitalRead(pin) ^ invertState;
-    bool prevState = debouncedState & 0b01;
+    // Read pin state and current time
+    bool input = ExtIO::digitalRead(pin) ^ state.invert;
     unsigned long now = millis();
-    if (now - prevBounceTime > debounceTime) { // wait for state to stabilize
-        debouncedState = static_cast<State>((prevState << 1) | input);
-    } else {
-        debouncedState = static_cast<State>((prevState << 1) | prevState);
+    // Check if enough time has elapsed after last bounce
+    if (state.bouncing)
+        state.bouncing = now - state.prevBounceTime <= debounceTime;
+    // Shift the debounced state one bit to the left, either appending the
+    // new input state if not bouncing, or repeat the old state if bouncing
+    bool prevState = state.debounced & 0b01;
+    bool newState = state.bouncing ? prevState : input;
+    state.debounced = (prevState << 1) | newState;
+    // Check if the input changed state (button pressed, released or bouncing)
+    if (input != state.prevInput) {
+        state.bouncing = true;
+        state.prevInput = input;
+        state.prevBounceTime = now;
     }
-    if (input != prevInput) { // Button is pressed, released or bounces
-        prevBounceTime = now;
-        prevInput = input;
-    }
-    return debouncedState;
+    return getState();
 }
 
-Button::State Button::getState() const { return debouncedState; }
+Button::State Button::getState() const {
+    return static_cast<State>(state.debounced);
+}
 
 FlashString_t Button::getName(Button::State state) {
     switch (state) {
@@ -43,7 +45,9 @@ FlashString_t Button::getName(Button::State state) {
     }
 }
 
-unsigned long Button::previousBounceTime() const { return prevBounceTime; }
+unsigned long Button::previousBounceTime() const {
+    return state.prevBounceTime;
+}
 
 unsigned long Button::stableTime(unsigned long now) const {
     return now - previousBounceTime();
