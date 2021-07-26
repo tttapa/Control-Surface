@@ -45,9 +45,8 @@ class MIDIButton : public MIDIOutputElement {
         }
     }
 
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT
+    /// @see @ref Button::invert
     void invert() { button.invert(); }
-#endif
 
     AH::Button::State getButtonState() const { return button.getState(); }
 

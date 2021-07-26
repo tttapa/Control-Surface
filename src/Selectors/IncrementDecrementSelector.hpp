@@ -37,9 +37,8 @@ class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
         }
     }
 
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT
+    /// @see @ref Button::invert
     void invert() { buttons.invert(); }
-#endif
 
     AH::IncrementDecrementButtons::State getButtonsState() const {
         return buttons.getState();
