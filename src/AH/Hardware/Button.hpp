@@ -39,15 +39,10 @@ class Button {
     void begin();
 
     /**
-     * @brief   Invert the state of all buttons, or of this specific button 
+     * @brief   Invert the input state of this button
      *          (button pressed is `HIGH` instead of `LOW`).
-     *
-     * @note    This affects **all** Button objects if 
-     *          `AH_INDIVIDUAL_BUTTON_INVERT` is not defined.
-     * 
-     * @see     AH_INDIVIDUAL_BUTTON_INVERT
      */
-    AH_INDIVIDUAL_BUTTON_INVERT_STATIC void invert();
+    void invert();
 
     /// @brief   An enumeration of the different states a button can be in.
     enum State {
@@ -129,15 +124,16 @@ class Button {
   private:
     pin_t pin;
 
-    bool prevInput = HIGH;
-    State debouncedState = Released;
-    unsigned long prevBounceTime = 0;
-
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT // Edit this in Settings/Settings.hpp
-    bool invertState = false;
-#else
-    static bool invertState;
-#endif
+    struct InternalState {
+        InternalState()
+            : debounced(0b11), bouncing(true), prevInput(HIGH), invert(false),
+              prevBounceTime(0) {}
+        uint8_t debounced : 2;
+        bool bouncing : 1;
+        bool prevInput : 1;
+        bool invert : 1;
+        unsigned long prevBounceTime;
+    } state;
 
     /// Edit this in Settings.hpp
     /// @see    BUTTON_DEBOUNCE_TIME
