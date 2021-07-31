@@ -36,7 +36,7 @@ lcov \
     --directory "$build_dir"
 
 cmake -S "$proj_dir" -B "$build_dir"
-make -C "$build_dir" -j$((`nproc` * 2))
+cmake --build "$build_dir" -j$(nproc)
 
 lcov \
     --capture --initial --directory "$build_dir" \
@@ -44,7 +44,7 @@ lcov \
     --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches
 
-make -C "$build_dir" check
+cmake --build "$build_dir" -j$(nproc) --target check
 
 lcov \
     --capture --directory "$build_dir" \
