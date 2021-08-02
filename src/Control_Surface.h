@@ -17,12 +17,12 @@
 
 // -------------------------------- Display --------------------------------- //
 #include <AH/Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
+#include <Display/BitmapDisplay.hpp>
 #include <Display/Bitmaps/XBitmaps.hpp>
 #include <Display/MCU/LCDDisplay.hpp>
 #include <Display/MCU/TimeDisplayDisplay.hpp>
 #include <Display/MCU/VPotDisplay.hpp>
 #include <Display/MCU/VUDisplay.hpp>
-#include <Display/BitmapDisplay.hpp>
 #include <Display/SelectorDisplay.hpp>
 
 // ------------------------------ MIDI Outputs ------------------------------ //
@@ -44,6 +44,10 @@
 
 #include <MIDI_Outputs/PBPotentiometer.hpp>
 #include <MIDI_Outputs/PCButton.hpp>
+
+#include <MIDI_Outputs/CCAbsoluteEncoder.hpp>
+#include <MIDI_Outputs/CCRotaryEncoder.hpp>
+#include <MIDI_Outputs/PBAbsoluteEncoder.hpp>
 
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatched.hpp>
@@ -77,10 +81,9 @@
 #include <MIDI_Outputs/Bankable/CCAbsoluteEncoder.hpp>
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/Bankable/PBAbsoluteEncoder.hpp>
-#include <MIDI_Outputs/CCAbsoluteEncoder.hpp>
-#include <MIDI_Outputs/CCRotaryEncoder.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCAbsoluteEncoder.hpp>
 #include <MIDI_Outputs/ManyAddresses/CCRotaryEncoder.hpp>
-#include <MIDI_Outputs/PBAbsoluteEncoder.hpp>
+#include <MIDI_Outputs/ManyAddresses/PBAbsoluteEncoder.hpp>
 
 // ------------------------------ MIDI Inputs ------------------------------- //
 #include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
@@ -105,17 +108,17 @@
 #endif
 
 // ------------------------------- Selectors -------------------------------- //
+#include <Selectors/EncoderSelector.hpp>
 #include <Selectors/IncrementDecrementSelector.hpp>
 #include <Selectors/IncrementSelector.hpp>
 #include <Selectors/ManyButtonsSelector.hpp>
 #include <Selectors/ProgramChangeSelector.hpp>
 #include <Selectors/SwitchSelector.hpp>
-#include <Selectors/EncoderSelector.hpp>
 
 #include <Selectors/LEDs/SelectorLEDs.hpp>
 
-#include <Selectors/ProgramChanger.hpp>
 #include <Banks/Transposer.hpp>
+#include <Selectors/ProgramChanger.hpp>
 
 // ---------------------------- MIDI Interfaces ----------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.hpp>

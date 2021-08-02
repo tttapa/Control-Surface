@@ -43,7 +43,7 @@ class PBAbsoluteEncoder : public MIDIAbsoluteEncoder<PitchBendSender<14>> {
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    PBAbsoluteEncoder(Encoder &&encoder, MIDIAddress address,
+    PBAbsoluteEncoder(Encoder &&encoder, MIDIChannelCable address,
                       int16_t multiplier = 1, uint8_t pulsesPerStep = 4)
         : MIDIAbsoluteEncoder<PitchBendSender<14>>(
               std::move(encoder), address, multiplier, pulsesPerStep, {}) {}
