@@ -5,6 +5,8 @@
 #include <MIDI_Outputs/Bankable/Abstract/MIDIAbsoluteEncoder.hpp>
 #include <MIDI_Senders/PitchBendSender.hpp>
 
+AH_DIAGNOSTIC_WERROR()
+
 BEGIN_CS_NAMESPACE
 
 namespace Bankable {
@@ -69,3 +71,5 @@ class PBAbsoluteEncoder
 } // namespace Bankable
 
 END_CS_NAMESPACE
+
+AH_DIAGNOSTIC_POP()
