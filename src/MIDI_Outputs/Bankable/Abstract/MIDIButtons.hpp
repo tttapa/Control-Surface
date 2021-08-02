@@ -59,7 +59,7 @@ class MIDIButtons : public MIDIOutputElement {
         }
     }
 
-    /// @see @ref Button::invert
+    /// @see @ref AH::Button::invert()
     void invert() {
         for (auto &button : buttons)
             button.invert();

@@ -59,7 +59,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
         state ? sender.sendOn(address) : sender.sendOff(address);
     }
 
-    /// @see @ref Button::invert
+    /// @see @ref AH::Button::invert()
     void invert() { button.invert(); }
 
     /// Get the state of the underlying button.

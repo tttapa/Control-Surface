@@ -61,7 +61,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         }
     }
 
-    /// @see @ref Button::invert
+    /// @see @ref AH::Button::invert()
     void invert() { buttons.invert(); }
 
     AH::IncrementDecrementButtons::State getButtonsState() const {

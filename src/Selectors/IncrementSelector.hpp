@@ -39,7 +39,7 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
         return button.getState();
     }
 
-    /// @see @ref Button::invert
+    /// @see @ref AH::Button::invert()
     void invert() { button.invert(); }
 
   private:

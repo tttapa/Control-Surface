@@ -30,7 +30,7 @@ class GenericSwitchSelector : public GenericSelector<2, Callback> {
 
     AH::Button::State getButtonState() const { return button.getState(); }
 
-    /// @see @ref Button::invert
+    /// @see @ref AH::Button::invert()
     void invert() { button.invert(); }
 
   private:

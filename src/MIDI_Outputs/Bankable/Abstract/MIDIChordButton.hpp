@@ -67,7 +67,7 @@ class MIDIChordButton : public MIDIOutputElement {
         }
     }
 
-    /// @see @ref Button::invert
+    /// @see @ref AH::Button::invert()
     void invert() { button.invert(); }
 
     AH::Button::State getButtonState() const { return button.getState(); }
