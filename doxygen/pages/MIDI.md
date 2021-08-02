@@ -825,6 +825,12 @@ monitor as a Note On message for note C4 on channel 1 with a velocity of 127.
 Similarly, if you send a message to the Arduino using the MIDI monitor, it will
 be printed in the Serial Monitor, because we used a bidirectional pipe.
 
+If you only want to print MIDI messages, you can use the 
+@ref USBDebugMIDI_Output class instead of @ref USBDebugMIDI_Interface. 
+USBDebugMIDI_Output uses less memory, and one of the issues of having multiple
+USBDebugMIDI_Interfaces is that input cannot work (some of the characters you 
+type in are sent to one of the interfaces, some to the others).
+
 ### More examples {#midi_md-routing-more-examples}
 
 - @ref MIDI_Pipes-Routing.ino
