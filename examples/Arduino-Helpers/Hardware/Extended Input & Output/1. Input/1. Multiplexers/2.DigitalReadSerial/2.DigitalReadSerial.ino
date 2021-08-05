@@ -68,7 +68,7 @@ void loop() {
   Serial.println();
 }
 
-// Or if you're a cool kid, use a range-based for loop
+// A more fancy approach could be to use a range-based for loop
 void loop2() {
   for (pin_t pin : mux.pins()) {
     Serial.print(digitalRead(pin));
