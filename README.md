@@ -267,6 +267,13 @@ tests and generating documentation, a style guide, etc.
 
 ### 2.x
 
+- ([c35f29c](https://github.com/tttapa/Control-Surface/commit/c35f29ced7f3e491467bd61c1c71013099c01091))  
+   The SoftwareSerial MIDI interfaces are now in separate header files that have
+   to be included explicitly if you want to use them. The headers in question 
+   are [`SoftwareSerialMIDI_Interface.hpp`](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/df2/SoftwareSerialMIDI__Interface_8hpp.html)
+   and [`SoftwareSerialDebugMIDI_Interface.hpp`](https://tttapa.github.io/Control-Surface-doc/Doxygen/de/d83/SoftwareSerialDebugMIDI__Interface_8hpp.html).
+   This prevents redefinition errors of pin change interrupt vectors even if
+   SoftwareSerial is not used.
 - ([bf8fb66](https://github.com/tttapa/Control-Surface/commit/bf8fb661fa97fb6420584362bfcee7ce67939f59))  
    The abbreviated MIDI send functions (such as `sendCC()`) have been deprecated
    in favor of the full names (e.g. `sendControlChange()`). See the 
