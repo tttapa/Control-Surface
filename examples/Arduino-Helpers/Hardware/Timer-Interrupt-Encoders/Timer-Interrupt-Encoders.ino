@@ -1,5 +1,5 @@
 /**
- * This example reads multiple encoders using pin change interrupts, on an 
+ * This example reads multiple encoders using a timer interrupt, on an 
  * Arduino Uno or Nano.
  * 
  * @boards AVR
@@ -7,9 +7,9 @@
  * The ATmega328P microcontroller only has two interrupt pins (2 and 3), so if
  * you want to use more than two interrupt-driven encoders, you'll either have 
  * to use a timer interrupt to continuously poll the encoders, or use the chip's
- * pin change interrupts. This example demonstrates the latter.
- *
- * @see @ref Timer-Interrupt-Encoders.ino
+ * pin change interrupts. This example demonstrates the former.
+ * 
+ * @see @ref Pin-Change-Interrupt-Encoders.ino
  *
  * Familiarity with [direct port manipulation](https://www.arduino.cc/en/Reference/PortManipulation)
  * is assumed.
@@ -19,12 +19,12 @@
  *
  * Connect three encoders to the pins of port C as follows:
  * 
- *   - A0: pin A of encoder #0
- *   - A1: pin B of encoder #0
- *   - A2: pin A of encoder #1
- *   - A3: pin B of encoder #1
- *   - A4: pin A of encoder #2
- *   - A5: pin B of encoder #2
+ *    - A0: pin A of encoder #0
+ *    - A1: pin B of encoder #0
+ *    - A2: pin A of encoder #1
+ *    - A3: pin B of encoder #1
+ *    - A4: pin A of encoder #2
+ *    - A5: pin B of encoder #2
  *
  * Connect the common pins to ground, the internal pull-up resistors will be 
  * enabled.
@@ -41,6 +41,7 @@
 
 #include <Arduino_Helpers.h>
 #include <AH/Hardware/RegisterEncoders.hpp>
+#include "TimerHelpers.hpp"
 
 // The number of encoders to read:
 constexpr uint8_t num_enc = 3;
@@ -55,14 +56,16 @@ RegisterEncoders<uint8_t, num_enc, int32_t, true> encoders;
 // be calling `encoders.update()` in an interrupt handler, it is 
 // important that this is set to true.
 
-// Pin change interrupt handler that reads the pins and updates the state:
-ISR (PCINT1_vect) { encoders.update(PINC & pin_mask); } // read port C
+// Timer interrupt handler that reads the pins and updates the state:
+ISR (TIMER2_COMPA_vect) { encoders.update(PINC & pin_mask); } // read port C
 
 void setup() {
-  PCMSK1 |= pin_mask; // enable pin change interrupt for given pins in port C
-  DDRC &= ~pin_mask;  // input mode for port C
-  PORTC |= pin_mask;  // enable pull-up resistors for port C
-  PCICR |= 1 << 1;    // enable pin change interrupt for port C
+  DDRC &= ~pin_mask; // input mode for port C
+  PORTC |= pin_mask; // enable pull-up resistors for port C
+  setTimer2Prescaler(Timer2Prescaler::S8);
+  setTimer2WGMode(Timer2WGMode::CTC);
+  OCR2A = 250 - 1; // 8 kHz poll rate (if FCPU = 16'000'000)
+  bitSet(TIMSK2, OCIE2A); // Timer2 Compare A Match Interrupt Enable
   Serial.begin(115200);
 }
 
