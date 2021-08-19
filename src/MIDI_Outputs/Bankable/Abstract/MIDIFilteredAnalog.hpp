@@ -78,7 +78,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      */
     analog_t getValue() const { return filteredAnalog.getValue(); }
 
-  private:
+  protected:
     BankAddress address;
     AH::FilteredAnalog<Sender::precision()> filteredAnalog;
 

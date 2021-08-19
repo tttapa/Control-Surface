@@ -69,7 +69,7 @@ class MIDIButtons : public MIDIOutputElement {
         return buttons[index].getState();
     }
 
-  private:
+  protected:
     BankAddress address;
     Array<AH::Button, NumButtons> buttons;
     RelativeMIDIAddress incrementAddress;

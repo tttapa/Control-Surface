@@ -81,7 +81,7 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     }
     int16_t getSpeedMultiply() const { return encstate.getSpeedMultiply(); }
 
-  private:
+  protected:
     Enc encoder;
     BankAddress address;
     Array<int16_t, NumBanks> values = {{}};

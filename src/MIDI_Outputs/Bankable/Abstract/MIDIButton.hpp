@@ -50,7 +50,7 @@ class MIDIButton : public MIDIOutputElement {
 
     AH::Button::State getButtonState() const { return button.getState(); }
 
-  private:
+  protected:
     BankAddress address;
     AH::Button button;
 

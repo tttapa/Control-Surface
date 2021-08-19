@@ -73,7 +73,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         return buttons.getState();
     }
 
-  private:
+  protected:
     BankAddress addresses;
     AH::IncrementDecrementButtons buttons;
     const uint8_t multiplier;

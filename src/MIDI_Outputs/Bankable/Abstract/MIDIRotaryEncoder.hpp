@@ -52,7 +52,7 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
     }
     int16_t getSpeedMultiply() const { return encstate.getSpeedMultiply(); }
 
-  private:
+  protected:
     BankAddress address;
     Enc encoder;
     EncoderState<decltype(encoder.read())> encstate;

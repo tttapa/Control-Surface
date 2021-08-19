@@ -1,7 +1,7 @@
 #pragma once
 
 #include <AH/Containers/BitArray.hpp>
-#include <AH/Hardware/Button.hpp>
+#include <AH/Hardware/FilteredAnalog.hpp>
 #include <AH/STL/algorithm> // std::fill
 #include <Banks/BankableAddresses.hpp>
 #include <Def/Def.hpp>
@@ -147,7 +147,7 @@ class SmartMIDIFilteredAnalog : public MIDIOutputElement {
         return getPreviousValue(address.getSelection());
     }
 
-  private:
+  protected:
     BankAddress address;
     AH::FilteredAnalog<Sender::precision()> filteredAnalog;
     static_assert(

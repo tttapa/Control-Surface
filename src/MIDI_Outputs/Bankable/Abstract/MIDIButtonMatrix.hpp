@@ -77,6 +77,7 @@ class MIDIButtonMatrix
         }
     }
 
+  protected:
     BankAddress address;
     uint16_t activeButtons = 0;
 
