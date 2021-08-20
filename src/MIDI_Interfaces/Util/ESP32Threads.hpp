@@ -13,13 +13,14 @@ struct ScopedThreadConfig {
     ScopedThreadConfig(size_t stack_size, size_t priority, bool inherit_cfg, 
                        const char *thread_name, 
                        int pin_to_core = tskNO_AFFINITY) {
+        memset(&previousConfig, 0, sizeof(previousConfig));
         hadPreviousConfig = esp_pthread_get_cfg(&previousConfig) == ESP_OK;
-        esp_pthread_cfg_t cfg;
+        esp_pthread_cfg_t cfg = previousConfig;
         cfg.stack_size = stack_size;
         cfg.prio = priority;
         cfg.inherit_cfg = inherit_cfg;
-        (void)thread_name;
-        (void)pin_to_core;
+        cfg.thread_name = thread_name;
+        cfg.pin_to_core = pin_to_core;
         esp_pthread_set_cfg(&cfg);
     }
 
