@@ -328,10 +328,31 @@
   #define CORE_INT12_PIN	12
   #define CORE_INT13_PIN	13
 
-// Arduino Nano BLE
+// Arduino Nano 33 BLE
 #elif defined(ARDUINO_ARCH_NRF52840)
-  #define CORE_NUM_INTERRUPT	NUM_DIGITAL_PINS
-
+  #define CORE_NUM_INTERRUPT	22
+  #define CORE_INT0_PIN		0
+  #define CORE_INT1_PIN		1
+  #define CORE_INT2_PIN		2
+  #define CORE_INT3_PIN		3
+  #define CORE_INT4_PIN		4
+  #define CORE_INT5_PIN		5
+  #define CORE_INT6_PIN		6
+  #define CORE_INT7_PIN		7
+  #define CORE_INT8_PIN		8
+  #define CORE_INT9_PIN		9
+  #define CORE_INT10_PIN	10
+  #define CORE_INT11_PIN	11
+  #define CORE_INT12_PIN	12
+  #define CORE_INT13_PIN	13
+  #define CORE_INT14_PIN	A0
+  #define CORE_INT15_PIN	A1
+  #define CORE_INT16_PIN	A2
+  #define CORE_INT17_PIN	A3
+  #define CORE_INT18_PIN	A4
+  #define CORE_INT19_PIN	A5
+  #define CORE_INT20_PIN	A6
+  #define CORE_INT21_PIN	A7
 #endif
 #endif
 
