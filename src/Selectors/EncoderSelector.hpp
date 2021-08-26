@@ -3,10 +3,11 @@
 #include "Selector.hpp"
 #include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Def/Def.hpp>
+#include <Def/TypeTraits.hpp>
 
 #ifdef ARDUINO
 #include <Submodules/Encoder/Encoder.h>
-#else 
+#else
 #include <Encoder.h> // Mock
 #endif
 
@@ -20,18 +21,20 @@ class GenericEncoderSelector : public GenericSelector<N, Callback> {
     GenericEncoderSelector(Selectable<N> &selectable, const Callback &callback,
                            const EncoderSwitchPinList &pins,
                            int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
-        : GenericSelector<N, Callback>{selectable, callback}, encoder{pins.A,
-                                                                      pins.B},
+        : GenericSelector<N, Callback> {selectable, callback}, encoder {pins.A,
+                                                                        pins.B},
           switchPin(pins.switchPin), pulsesPerStep(pulsesPerStep), wrap(wrap) {}
 
     void begin() override {
         Parent::begin();
         if (switchPin != NO_PIN)
             AH::ExtIO::pinMode(switchPin, INPUT_PULLUP);
+        begin_if_possible(encoder);
     }
 
     void update() override {
         Parent::update();
+        // TODO: use EncoderState
         long currentPosition = encoder.read();
         long difference = (currentPosition - previousPosition) / pulsesPerStep;
         if (difference) {
@@ -79,7 +82,7 @@ class EncoderSelector : public GenericEncoderSelector<N> {
   public:
     EncoderSelector(Selectable<N> &selectable, const EncoderSwitchPinList &pins,
                     int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
-        : GenericEncoderSelector<N>{
+        : GenericEncoderSelector<N> {
               selectable, {}, pins, pulsesPerStep, wrap,
           } {}
 };
