@@ -76,6 +76,9 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
      */
     void setValue(uint16_t value) { setValue(value, address.getSelection()); }
 
+    /// Get the maximum possible value that can be returned by @ref getValue.
+    static int16_t getMaxValue() { return maxValue; }
+
     void setSpeedMultiply(int16_t speedMultiply) {
         encstate.setSpeedMultiply(speedMultiply);
     }
