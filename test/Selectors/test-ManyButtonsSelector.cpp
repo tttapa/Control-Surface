@@ -21,6 +21,8 @@ TEST(ManyButtonsSelector, press) {
 
     Updatable<>::beginAll();
 
+    EXPECT_CALL(ArduinoMock::getInstance(), millis())
+        .WillRepeatedly(Return(1000));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(2))
         .WillRepeatedly(Return(HIGH));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalRead(3))
