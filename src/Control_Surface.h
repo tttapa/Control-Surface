@@ -49,6 +49,8 @@
 #include <MIDI_Outputs/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/PBAbsoluteEncoder.hpp>
 
+#include <MIDI_Outputs/ProgramChanger.hpp>
+
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatched.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatching.hpp>
@@ -85,6 +87,8 @@
 #include <MIDI_Outputs/ManyAddresses/CCRotaryEncoder.hpp>
 #include <MIDI_Outputs/ManyAddresses/PBAbsoluteEncoder.hpp>
 
+#include <MIDI_Outputs/Bankable/ProgramChanger.hpp>
+
 // ------------------------------ MIDI Inputs ------------------------------- //
 #include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
 #include <MIDI_Inputs/MCU/LCD.hpp>
@@ -118,7 +122,6 @@
 #include <Selectors/LEDs/SelectorLEDs.hpp>
 
 #include <Banks/Transposer.hpp>
-#include <Selectors/ProgramChanger.hpp>
 
 // ---------------------------- MIDI Interfaces ----------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.hpp>

@@ -17,6 +17,8 @@
 #include <MIDI_Outputs/PBPotentiometer.hpp>
 #include <MIDI_Outputs/PCButton.hpp>
 
+#include <MIDI_Outputs/ProgramChanger.hpp>
+
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatched.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatching.hpp>
@@ -55,6 +57,8 @@
 #include <MIDI_Outputs/ManyAddresses/PBAbsoluteEncoder.hpp>
 #include <MIDI_Outputs/PBAbsoluteEncoder.hpp>
 
+#include <MIDI_Outputs/Bankable/ProgramChanger.hpp>
+
 #include <Selectors/EncoderSelector.hpp>
 #include <Selectors/IncrementDecrementSelector.hpp>
 #include <Selectors/IncrementSelector.hpp>
@@ -83,6 +87,12 @@ TEST(Construction, MIDIOutputs) {
         {31, 32, 33, 34},
     }};
     const Array<MIDIAddress, 4> addresses = {{
+        1,
+        2,
+        3,
+        4,
+    }};
+    const Array<uint8_t, 4> u8addresses = {{
         1,
         2,
         3,
@@ -120,6 +130,7 @@ TEST(Construction, MIDIOutputs) {
 
     // PC ----------------------------------------------------------------------
     PCButton {pin, address};
+    ProgramChanger<4> {u8addresses, cnChannel};
 
     // Bankable::CC ------------------------------------------------------------
     Bankable::CCButton {bank, pin, address};
@@ -191,6 +202,7 @@ TEST(Construction, MIDIOutputs) {
 
     // ManyAddresses::PC -------------------------------------------------------
     Bankable::ManyAddresses::PCButton<4> {bank, pin, addresses};
+    Bankable::ProgramChanger<4> {bank, u8addresses, cnChannel};
 }
 
 TEST(Construction, Selectors) {
