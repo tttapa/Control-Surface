@@ -600,7 +600,7 @@ the MIDI interface (`midi_usb`) will send it over the MIDI input pipe
 MIDI Note On/Off message that matches the address of the LED, and turn on/off
 the LED accordingly.
 
-### Manual routing
+### Manual routing {#midi_md-manual-routing}
 
 As a first exercise, we'll define the same pipes and routing ourselves, without 
 relying on `Control_Surface.begin()` to do it automagically.
@@ -649,7 +649,7 @@ If you call `Control_Surface.begin()` first, it will create its default routing
 as discussed earlier, and if you then later add your manual connections on top
 of that, your code might not work as expected.
 
-### Bidirectional MIDI pipes
+### Bidirectional MIDI pipes {#midi_md-bidir-pipes}
 
 There are many situations where you want to connect both the MIDI input and 
 output of two endpoints together. It's a bit cumbersome to have to define a 
@@ -685,7 +685,7 @@ void loop() {
 Connections to bidirectional pipes are made using the “vertical pipe” operator
 (`|`).
 
-### Multiple MIDI interfaces
+### Multiple MIDI interfaces {#midi_md-multiple-interfaces-routing}
 
 If you only have a single MIDI interface, you don't really need to worry about
 pipes, as you saw in the @ref midi_md-default-routing section, you can just
@@ -728,7 +728,7 @@ void loop() {
 }
 ```
 
-### MIDI pipe factories
+### MIDI pipe factories {#midi_md-pipe-factories}
 
 If you want to keep adding new connections, you need a new pipe for each one.
 For large numbers of pipes this is cumbersome, so the library includes a pipe
@@ -776,7 +776,7 @@ each time you use it.
 If you need bidirectional pipes, you can use the 
 @ref BidirectionalMIDI_PipeFactory class instead.
 
-### Routing between MIDI interfaces
+### Routing between MIDI interfaces {#midi_md-routing-between-interfaces}
 
 Up to now, we've only created connections between `Control_Surface` itself and
 a MIDI interface, but you can also create routes between MIDI interfaces. 
