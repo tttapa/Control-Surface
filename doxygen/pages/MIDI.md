@@ -829,7 +829,44 @@ If you only want to print MIDI messages, you can use the
 @ref USBDebugMIDI_Output class instead of @ref USBDebugMIDI_Interface. 
 USBDebugMIDI_Output uses less memory, and one of the issues of having multiple
 USBDebugMIDI_Interfaces is that input cannot work (some of the characters you 
-type in are sent to one of the interfaces, some to the others).
+type in are sent to one of the interfaces, some to the others), 
+@ref USBDebugMIDI_Output doesn't have this issue.
+
+In the following example, Control Surface works normally, using the USB MIDI
+interface: you can try sending note on/off messages for note C4 and it'll turn
+on/off the on-board LED, and if you press/release the button on pin 2 you'll 
+receive note on/off messages.  
+Additionally, all MIDI input that arrives on the MIDI over USB interface is 
+routed to a secondary MIDI debug output, allowing you to use the Serial Monitor
+to inspect the messages being sent to the Arduino.
+
+<img style="margin: 0 auto; display: block; width: 38em" src="midi-pipes-mon.svg"/>
+
+```cpp
+#include <Control_Surface.h>
+
+// The primary MIDI interface used by Control Surface.
+USBMIDI_Interface midi;
+// A secondary interface to print incoming messages
+// on the primary interface to the serial monitor.
+USBDebugMIDI_Output midimon { 115200 };
+// Pipe to route messages from midi to midimon.
+MIDI_Pipe mpipe;
+
+// You can add normal Control Surface MIDI elements:
+NoteButton btn {  2, MIDI_Notes::C(4) };
+NoteLED    led { 13, MIDI_Notes::C(4) };
+
+void setup() {
+    midi.setAsDefault(); // Make this the primary interface.
+    midi >> mpipe >> midimon; // Route messages from midi to midimon.
+    Control_Surface.begin();
+}
+
+void loop() {
+    Control_Surface.loop();
+}
+```
 
 ### More examples {#midi_md-routing-more-examples}
 
