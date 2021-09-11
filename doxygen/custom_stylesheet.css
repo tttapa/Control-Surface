@@ -9,6 +9,9 @@ img.xbm {
     -ms-interpolation-mode:nearest-neighbor;   /* IE8+           */
     border: 1px solid #CCC;
 }
+img.inline {
+    vertical-align: text-bottom;
+}
 div.image {
     text-align: initial;
 }
@@ -188,7 +191,7 @@ div.navpath > ul {
 div.contents a#details + h2.groupheader {
     display: none;
 }
-h2.memtitle, .memproto, .fieldtable th {
+h2.memtitle, .memproto, .fieldtable th, .reflist dt {
     background-color: #dde;
     background-image: none;
 }
@@ -209,6 +212,9 @@ span.mlabel {
 }
 .memdoc {
     border-radius: 0 0 0.4em 0.4em;
+}
+.reflist dt {
+    border-radius: 0.4em 0.4em 0 0;
 }
 
 /* A bit more space in lists on related pages */
@@ -256,21 +262,42 @@ span.keywordtype {
 span.keyword {
     color: #0000ff;
 }
-div.line a.code.highlightmember {
+div.line a.code.hl_function {
     color: #795e26;
 }
-div.line a.code.highlightclass {
+div.line a.code.hl_define {
+    color: #0000ff;
+}
+div.line a.code.hl_class,
+div.line a.code.hl_union,
+div.line a.code.hl_struct,
+div.line a.code.hl_enumeration {
     color: #2b91af;
 }
-div.line a.code.highlightfile {
+div.line a.code.hl_enumvalue {
+    color: #1C71BE;
+}
+span.preprocessor a,
+span.preprocessor a.code {
     color: #a31515;
     text-decoration: underline;
 }
-div.line a.code.highlightnamespace {
+div.line a.code.hl_namespace {
     color: #af00db;
+}
+div.line a.code.hl_variable {
+    color: #001080;
 }
 div.line a.code:hover {
     filter: brightness(120%);
+}
+span.lineno {
+    background-color: inherit;
+    color: #626670;
+    border-right: 1px solid #777;
+}
+span.lineno a {
+    background-color: #F4F4F4;
 }
 
 blockquote.doxtable {
