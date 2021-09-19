@@ -271,6 +271,7 @@ div.line a.code.hl_define {
 div.line a.code.hl_class,
 div.line a.code.hl_union,
 div.line a.code.hl_struct,
+div.line a.code.hl_typedef,
 div.line a.code.hl_enumeration {
     color: #2b91af;
 }
