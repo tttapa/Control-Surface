@@ -52,7 +52,7 @@ void BLEMIDIPacketBuilder::reset() {
 
 void BLEMIDIPacketBuilder::setCapacity(uint16_t capacity) {
     if (capacity < 5)
-        ERROR(F("capacity less than 5 bytes"), 0x2005);
+        ERROR(F("capacity less than 5 bytes"), 0x2005); // LCOV_EXCL_LINE
     buffer.shrink_to_fit();
     buffer.reserve(capacity);
 }
@@ -137,6 +137,12 @@ bool BLEMIDIPacketBuilder::addSysEx(const uint8_t *&data, size_t &length,
 void BLEMIDIPacketBuilder::continueSysEx(const uint8_t *&data, size_t &length,
                                          uint16_t timestamp) {
     initBuffer(timestamp);
+
+    if (length == 0) {
+        // Message was finished, no continuation
+        data = nullptr;
+        return;
+    }
 
     // Copy as much data as possible, but stop before the last byte, which
     // could be a SysExEnd (and should be handled differently than data bytes)

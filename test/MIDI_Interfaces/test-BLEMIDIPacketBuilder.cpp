@@ -791,6 +791,65 @@ TEST(BLEMIDIPacketBuilder, sysExAddChunk) {
     EXPECT_EQ(b.getPacket(), expected);
 }
 
+TEST(BLEMIDIPacketBuilder, sysExAddChunk0B) {
+    BLEMIDIPacketBuilder b;
+    b.setCapacity(50);
+    bvec data = {};
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
+    uint16_t ts = timestamp(0x01, 0x02);
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+    };
+
+    b.addSysEx(dataptr, length, ts);
+
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, nullptr);
+    EXPECT_EQ(b.getPacket(), expected);
+}
+
+TEST(BLEMIDIPacketBuilder, sysExAddChunk1B) {
+    BLEMIDIPacketBuilder b;
+    b.setCapacity(50);
+    bvec data = {0xF0};
+    const uint8_t *dataptr = data.data();
+    size_t length = data.size();
+    uint16_t ts = timestamp(0x01, 0x02);
+
+    bvec expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0xF0,        // SysEx start
+    };
+
+    b.addSysEx(dataptr, length, ts);
+
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, nullptr);
+    EXPECT_EQ(b.getPacket(), expected);
+
+    data = {0xF7};
+    dataptr = data.data();
+    length = data.size();
+    ts = timestamp(0x01, 0x03);
+
+    expected = {
+        0x80 | 0x01, // header + timestamp msb
+        0x80 | 0x02, //          timestamp lsb
+        0xF0,        // SysEx start
+        0x80 | 0x03, //          timestamp lsb
+        0xF7,        // SysEx end
+    };
+
+    b.addSysEx(dataptr, length, ts);
+
+    EXPECT_EQ(length, 0);
+    EXPECT_EQ(dataptr, nullptr);
+    EXPECT_EQ(b.getPacket(), expected);
+}
+
 TEST(BLEMIDIPacketBuilder, sysExAddChunkTwoPackets) {
     BLEMIDIPacketBuilder b;
     b.setCapacity(6);
