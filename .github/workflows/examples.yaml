@@ -50,6 +50,7 @@ jobs:
         run: |
           mkdir -p "$HOME/.local/bin"
           which arduino-cli || { curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR="$HOME/.local/bin" sh; }
+          mkdir -p "$HOME/.arduino15"
           cp "$GITHUB_WORKSPACE/tools/arduino-cli.yaml" "$HOME/.arduino15"
           arduino-cli core update-index
 
