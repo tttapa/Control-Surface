@@ -1,5 +1,8 @@
 // interrupt pins for known boards
 #include <AH/Arduino-Wrapper.h>
+#ifdef ARDUINO_ARCH_NRF52840
+#include <pins_arduino.h>
+#endif
 
 // Teensy (and maybe others) define these automatically
 #if !defined(CORE_NUM_INTERRUPT)
