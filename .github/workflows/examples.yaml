@@ -31,8 +31,8 @@ jobs:
           path: |
             ~/.arduino15
             ~/Arduino/libraries
-          key: ${{ runner.os }}-arduino-v2-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-arduino-v2-
+          key: ${{ runner.os }}-arduino-v3-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-arduino-v3-
 
       - name: Cache Compiled Arduino Cores and Sketches
         uses: actions/cache@v2.1.4
@@ -40,8 +40,8 @@ jobs:
           path: |
             /tmp/arduino-sketch-*
             /tmp/core-*
-          key: ${{ runner.os }}-arduino-compiled-v2-${{ matrix.board }}-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-arduino-compiled-v2-${{ matrix.board }}-
+          key: ${{ runner.os }}-arduino-compiled-v3-${{ matrix.board }}-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-arduino-compiled-v3-${{ matrix.board }}-
 
       - name: Update $PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
@@ -68,7 +68,7 @@ jobs:
           [ -d Adafruit_BusIO ] || git clone https://github.com/adafruit/Adafruit_BusIO.git --depth=1 &
           [ -d FastLED ] || git clone https://github.com/FastLED/FastLED.git --depth=1 &
           [ -d MIDIUSB ] || git clone https://github.com/arduino-libraries/MIDIUSB.git --depth=1 &
-          [ -d Arduino-AppleMIDI-Library ] || git clone https://github.com/lathoub/Arduino-AppleMIDI-Library.git --depth=1 &
+          [ -d Arduino-AppleMIDI-Library ] || git clone https://github.com/lathoub/Arduino-AppleMIDI-Library.git --depth=1 --branch v3.1.2 &
           [ -d arduino_midi_library ] || git clone https://github.com/FortySevenEffects/arduino_midi_library.git --depth=1 &
           ln -snf "$GITHUB_WORKSPACE" "$HOME/Arduino/libraries/Control-Surface"
           cp "$GITHUB_WORKSPACE/examples/3. MIDI Interfaces/AppleMIDI/WiFi-Credentials.example.h" "$GITHUB_WORKSPACE/examples/3. MIDI Interfaces/AppleMIDI/WiFi-Credentials.h"
