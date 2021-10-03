@@ -5,11 +5,18 @@
 
 # Control Surface
 
-An Arduino library for MIDI controllers and control surfaces. 
-It includes a general-purpose MIDI abstraction layer as well, which can be useful
-for any MIDI-related project.  
-Control surfaces with both MIDI outputs (potentiometers, buttons, etc.) and
-MIDI inputs (LEDs, displays, etc.) are supported.
+Control Surface is an Arduino library for building MIDI controllers and control
+surfaces.
+At its core is a
+[general-purpose MIDI abstraction layer](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/df7/midi-tutorial.html)
+with support for serial MIDI, MIDI over USB, MIDI over BLE, etc., which can be
+useful for any MIDI-related project.  
+Besides MIDI input/output, Control Surface also includes easy-to-use utilities
+specifically for building MIDI controllers, supporting controls that send MIDI
+─ like potentiometers, push buttons, rotary encoders, etc. ─
+and controls that react to incoming MIDI ─ LEDs, displays, and so on.
+They can also be combined into controls that use both MIDI input and output, 
+such as motorized faders.
 
 > Table of contents  
 > <span class="mono">¶</span>&emsp;[Overview](#overview)  
@@ -72,6 +79,12 @@ A large portion of the **Mackie Control Universal** (MCU) protocol is
 implemented.
 
 <sub>→ [_MIDI Input Elements documentation_](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/d8b/group__MIDIInputElements.html)</sub>
+
+### Motorized faders
+
+- **Motorized faders** are supported through the [tttapa/Control-Surface-Motor-Fader](https://github.com/tttapa/Control-Surface-Motor-Fader) repository.
+
+<sub>→ [_Control Surface Motor Fader documentation_](https://tttapa.github.io/Pages/Arduino/Control-Theory/Motor-Fader/)</sub>
 
 ### Bank support
 
@@ -214,7 +227,6 @@ page.
 
 ## Work in progress
 
-- Adding support for motorized faders
 - Adding more tests (currently at over 560 unit tests)
 - Adding more examples and adding comments to existing examples
 - Finishing the documentation
