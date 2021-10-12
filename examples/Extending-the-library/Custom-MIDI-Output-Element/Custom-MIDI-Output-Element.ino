@@ -4,7 +4,7 @@
  * MIDI Note events when a push button is pressed or released. It's a simplified
  * version of the @ref NoteButton class.
  *
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -56,7 +56,7 @@ class MyNoteButton : public MIDIOutputElement {
    * @param   velocity
    *          The MIDI note velocity [0, 127].
    */
-  MyNoteButton(pin_t pin, const MIDIAddress &address, uint8_t velocity)
+  MyNoteButton(pin_t pin, MIDIAddress address, uint8_t velocity)
     : button(pin), address(address), velocity(velocity) {}
 
  public:
@@ -67,11 +67,11 @@ class MyNoteButton : public MIDIOutputElement {
   // Update: read the button and send MIDI messages when appropriate.
   // This method is called continuously by `Control_Surface.loop()`.
   void update() final override {
-    AH::Button::State state = button.update();               // Read the button
-    if (state == AH::Button::Falling) {                      // if pressed
-      Control_Surface.sendNoteOn(address, velocity);  // → note on
-    } else if (state == AH::Button::Rising) {                // if released
-      Control_Surface.sendNoteOff(address, velocity); // → note off
+    AH::Button::State state = button.update();        // Read the button
+    if (state == AH::Button::Falling) {               // if pressed
+      Control_Surface.sendNoteOn(address, velocity);  //   → note on
+    } else if (state == AH::Button::Rising) {         // if released
+      Control_Surface.sendNoteOff(address, velocity); //   → note off
     }
   }
 
@@ -88,13 +88,11 @@ END_CS_NAMESPACE
 // Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
-using namespace MIDI_Notes;
-
 // Instantiate a MyNoteButton object
-MyNoteButton button = {
-  5,                       // Push button on pin 5
-  {note(C, 4), CHANNEL_1}, // Note C4 on MIDI channel 1
-  0x7F,                    // Maximum velocity
+MyNoteButton button {
+  5,                           // Push button on pin 5
+  {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
+  0x7F,                        // Maximum velocity
 };
 
 void setup() {

@@ -2,7 +2,7 @@
  * This is an example that demonstrates the use a Transposer to transpose the
  * note events sent out by NoteButton%s.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -39,25 +39,23 @@
 // Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
-using namespace MIDI_Notes;
-
 // Instantiate a Transposer that can transpose from one octave down to one
 // octave up
 Transposer<-12, +12> transposer;
 
 // Instantiate a Selector to change the transposition
-IncrementDecrementSelector<transposer.getNumberOfBanks()> selector = {
+IncrementDecrementSelector<transposer.getNumberOfBanks()> selector {
   transposer,
   {10, 11},
   Wrap::Clamp,
 };
 
 // Instantiate an array of NoteButton objects
-Bankable::NoteButton buttons[] = {
-  {transposer, 2, note(C, 4)}, {transposer, 3, note(D, 4)},
-  {transposer, 4, note(E, 4)}, {transposer, 5, note(F, 4)},
-  {transposer, 6, note(G, 4)}, {transposer, 7, note(A, 4)},
-  {transposer, 8, note(B, 4)}, {transposer, 9, note(C, 5)},
+Bankable::NoteButton buttons[] {
+  {transposer, 2, MIDI_Notes::C(4)}, {transposer, 3, MIDI_Notes::D(4)},
+  {transposer, 4, MIDI_Notes::E(4)}, {transposer, 5, MIDI_Notes::F_(4)},
+  {transposer, 6, MIDI_Notes::G(4)}, {transposer, 7, MIDI_Notes::A(4)},
+  {transposer, 8, MIDI_Notes::B(4)}, {transposer, 9, MIDI_Notes::C(5)},
 };
 
 void setup() {

@@ -1,9 +1,23 @@
 #pragma once
 
-#include "BLEMIDI.hpp"
-#include "SerialMIDI_Interface.hpp"
-
 #include <AH/Error/Error.hpp>
+
+#include "BLEMIDI/BLEMIDIPacketBuilder.hpp"
+#include "BLEMIDI/MIDIMessageQueue.hpp"
+#include "MIDI_Interface.hpp"
+#include "Util/ESP32Threads.hpp"
+#include <MIDI_Parsers/BLEMIDIParser.hpp>
+#include <MIDI_Parsers/SerialMIDI_Parser.hpp>
+
+#include <atomic>
+#include <chrono>
+#include <condition_variable>
+#include <mutex>
+#include <thread>
+
+#ifndef ARDUINO
+#include <gmock/gmock.h>
+#endif
 
 BEGIN_CS_NAMESPACE
 
@@ -12,173 +26,168 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup MIDIInterfaces
  */
-class BluetoothMIDI_Interface : public Parsing_MIDI_Interface,
-                                public BLEServerCallbacks,
-                                public BLECharacteristicCallbacks {
-
-    // BLE Callbacks
-
-    void onConnect(BLEServer *pServer) override {
-        (void)pServer;
-        DEBUGFN("Connected");
-        connected++;
-    };
-    void onDisconnect(BLEServer *pServer) override {
-        (void)pServer;
-        DEBUGFN("Disonnected");
-        if (!connected) {
-            ERROR(F("Error: disconnect event, but was not connected"), 0x7788);
-            return;
-        }
-        connected--;
-    }
-
-    void onRead(BLECharacteristic *pCharacteristic) override {
-        DEBUGFN("Read");
-        pCharacteristic->setValue(nullptr, 0);
-    }
-    void onWrite(BLECharacteristic *pCharacteristic) override {
-        DEBUGFN("Write: ");
-        std::string value = pCharacteristic->getValue();
-        const uint8_t *const data =
-            reinterpret_cast<const uint8_t *>(value.data());
-        size_t len = value.size();
-        parse(data, len);
-    }
-
-    constexpr static unsigned long MAX_MESSAGE_TIME = 10000; // microseconds
-
-    unsigned long startTime = 0;
-
-    constexpr static size_t BUFFER_LENGTH = 1024;
-
-    uint8_t buffer[BUFFER_LENGTH] = {};
-    size_t index = 0;
-
-    SerialMIDI_Parser parser;
-
-    BLEMIDI bleMidi;
-
-    uint8_t connected = 0;
-
-    bool hasSpaceFor(size_t bytes) { return bytes <= BUFFER_LENGTH - index; }
+class BluetoothMIDI_Interface : public MIDI_Interface {
 
   public:
-    BluetoothMIDI_Interface() : Parsing_MIDI_Interface(parser) {}
-
-    void begin() override { bleMidi.begin(this, this); }
-
-    void publish() {
-        if (index == 0)
-            return;
-        if (!connected) {
-            DEBUGFN("No connected BLE clients");
-            return;
-        }
-        bleMidi.notifyValue(buffer, index);
-        index = 0;
+    BluetoothMIDI_Interface() {
+        if (instance)
+            FATAL_ERROR(F("Only one instance is supported"), 0x1345);
+        instance = this;
+    };
+    ~BluetoothMIDI_Interface() {
+        instance = nullptr;
+        stopSendingThread();
+        end();
     }
 
-    MIDIReadEvent read() override {
-        update();                         // TODO
-        return MIDIReadEvent::NO_MESSAGE; // TODO
+  public:
+    /// Send the buffered MIDI BLE packet immediately.
+    void flush() {
+        lock_t lock(mtx);
+        flushImpl(lock);
     }
 
-    template <size_t N>
-    void addToBuffer(const uint8_t (&data)[N]) {
-        addToBuffer(&data[0], N);
+    /// Set the timeout, the number of milliseconds to buffer the outgoing MIDI
+    /// messages. A shorter timeout usually results in lower latency, but also
+    /// causes more overhead, because more packets might be required.
+    void setTimeout(std::chrono::milliseconds timeout) {
+        lock_t lock(mtx);
+        this->timeout = timeout;
     }
 
-    void addToBuffer(const uint8_t *data, size_t len) {
-        bool first = index == 0;
-        if (!hasSpaceFor(len + 1 + first)) { // TODO
-            DEBUGFN("Buffer full");
-            publish();
-            if (!hasSpaceFor(len + 1 + first)) { // TODO
-                DEBUGFN("Message is larger than buffer");
-                return;
-            }
-        }
+  public:
+    void begin() override;
+    void end();
 
-        if (first)
-            startTime = micros();
+    MIDIReadEvent read();
 
-        if (first)
-            buffer[index++] = 0x80; // header / timestamp msb
-        buffer[index++] = 0x80;     // timestamp lsb
-        memcpy(&buffer[index], data, len);
-        index += len;
+    void update() override { MIDI_Interface::updateIncoming(this); }
 
-        update();
-    }
+  private:
+    void handleStall() override { MIDI_Interface::handleStall(this); }
 
-    void update() override {
-        if (micros() - startTime >= MAX_MESSAGE_TIME)
-            publish();
-    }
+  public:
+    /// Return the received channel voice message.
+    ChannelMessage getChannelMessage() const;
+    /// Return the received system common message.
+    SysCommonMessage getSysCommonMessage() const;
+    /// Return the received real-time message.
+    RealTimeMessage getRealTimeMessage() const;
+    /// Return the received system exclusive message.
+    SysExMessage getSysExMessage() const;
+    /// Get the BLE-MIDI timestamp of the latest MIDI message.
+    /// @note Invalid for SysEx chunks (except the last chunk of a message).
+    uint16_t getTimestamp() const;
 
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn) override {
-        (void)cn;
-        uint8_t msg[3] = {header, d1, d2};
-        addToBuffer(msg);
-    }
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn) override {
-        (void)cn;
-        uint8_t msg[2] = {header, d1};
-        addToBuffer(msg);
-    }
+  protected:
+    // MIDI send implementations
+    void sendChannelMessageImpl(ChannelMessage) override;
+    void sendSysCommonImpl(SysCommonMessage) override;
+    void sendSysExImpl(SysExMessage) override;
+    void sendRealTimeImpl(RealTimeMessage) override;
+    void sendNowImpl() override { flush(); }
 
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {
-        (void)data;
-        (void)length;
-        (void)cn; // TODO
-    }
+    void sendChannelMessageImpl3Bytes(ChannelMessage);
+    void sendChannelMessageImpl2Bytes(ChannelMessage);
 
-    void sendImpl(uint8_t rt, uint8_t cn) override {
-        (void)rt;
-        (void)cn; // TODO
-    }
+  public:
+    void parse(const uint8_t *const data, const size_t len);
 
-    void parse(const uint8_t *const data, const size_t len) {
-        // TODO: documentation and link to BLE MIDI spec
-        if (len <= 1)
-            return;
-        if (MIDI_Parser::isData(data[0]))
-            return;
-        if (MIDI_Parser::isData(data[1]))
-            parse(data[1]);
-        bool prevWasTimestamp = true;
-        for (const uint8_t *d = data + 2; d < data + len; d++) {
-            if (MIDI_Parser::isData(*d)) {
-                parse(*d);
-                prevWasTimestamp = false;
-            } else {
-                if (prevWasTimestamp)
-                    parse(*d);
-                prevWasTimestamp = !prevWasTimestamp;
-            }
-        }
-    }
+  private:
+    /// The minimum MTU of all connected clients.
+    std::atomic_uint_fast16_t min_mtu{23};
+    /// Override the minimum MTU (0 means don't override, nonzero overrides if
+    /// it's smaller than the minimum MTU of the clients).
+    /// @see    @ref forceMinMTU()
+    std::atomic_uint_fast16_t force_min_mtu{0};
 
-    void parse(uint8_t data) {
-        event = parser.parse(data);
-        // Best we can do is just retry until the pipe is no longer in exclusive
-        // mode.
-        // Keep in mind that this is executed in the callback of the BLE stack,
-        // I don't know what happens to the Bluetooth connection if we let it
-        // wait for longer than the communication interval.
-        //
-        // TODO: If this causes problems, we could buffer the data until the
-        //       pipe is available for writing again.
-        while (!dispatchMIDIEvent(event))
-#ifdef ARDUINO
-            delay(1);
-#else
-            usleep(1e3);
+    /// Set the maximum transmission unit of the Bluetooth link. Used to compute
+    /// the MIDI BLE packet size.
+    void updateMTU(uint16_t mtu);
+
+  public:
+    /// Get the minimum MTU of all connected clients.
+    uint16_t getMinMTU() const { return min_mtu; }
+
+    /// Force the MTU to an artificially small value (used for testing).
+    void forceMinMTU(uint16_t mtu);
+
+  private:
+    /// Only one active instance.
+    static BluetoothMIDI_Interface *instance;
+    /// MIDI Parser for incoming data.
+    SerialMIDI_Parser parser{false};
+    /// Builds outgoing MIDI BLE packets.
+    BLEMIDIPacketBuilder packetbuilder;
+    /// Queue for incoming MIDI messages.
+    MIDIMessageQueue queue{64};
+    /// Incoming message that can be from retrieved using the
+    /// `getChannelMessage()`, `getSysCommonMessage()`, `getRealTimeMessage()`
+    /// and `getSysExMessage()` methods.
+    MIDIMessageQueue::MIDIMessageQueueElement incomingMessage;
+
+  private:
+    // Synchronization for asynchronous BLE sending
+
+    /// Lock type used to lock the mutex
+    using lock_t = std::unique_lock<std::mutex>;
+    /// Mutex to lock the MIDI BLE packet builder and the flush flag.
+    std::mutex mtx;
+    /// Condition variable used by the background sender thread to wait for
+    /// data to send, and for the main thread to wait for the data to be flushed
+    /// by the sender thread.
+    std::condition_variable cv;
+    /// Background thread that sends the actual MIDI BLE packets.
+    std::thread send_thread;
+    /// Flag to stop the background thread.
+    std::atomic_bool stop_sending{false};
+    /// Flag to tell the sender thread to send the packet immediately.
+    bool flushnow = false;
+    /// Timeout before the sender thread sends a packet.
+    /// @see    @ref setTimeout()
+    std::chrono::milliseconds timeout{10};
+
+  private:
+    /// Launch a thread that sends the BLE packets in the background.
+    void startSendingThread();
+
+    /// Function that waits for BLE packets and sends them in the background.
+    /// It either sends them after a timeout (a given number of milliseconds
+    /// after the first data was added to the packet), or immediately when it
+    /// receives a flush signal from the main thread.
+    bool handleSendEvents();
+
+    /// Tell the background BLE sender thread to send the current packet.
+    /// Blocks until the packet is sent.
+    ///
+    /// @param  lock
+    ///         Lock should be locked at entry, will still be locked on exit.
+    void flushImpl(lock_t &lock);
+
+#if !defined(ARDUINO) && !defined(DOXYGEN)
+    public:
 #endif
+    /// Tell the background BLE sender thread to stop gracefully, and join it.
+    void stopSendingThread();
+
+  public:
+    static void midi_write_callback(const uint8_t *data, size_t length) {
+        if (instance)
+            instance->parse(data, length);
     }
 
-    BLEMIDI &getBLEMIDI() { return bleMidi; }
+    static void midi_mtu_callback(uint16_t mtu) {
+        if (instance)
+            instance->updateMTU(mtu);
+    }
+
+#ifdef ARDUINO
+  private:
+    void notifyMIDIBLE(const std::vector<uint8_t> &packet);
+#else
+  public:
+    MOCK_METHOD(void, notifyMIDIBLE, (const std::vector<uint8_t> &), ());
+#endif
 };
 
 END_CS_NAMESPACE

@@ -3,11 +3,12 @@
 - ✔ ~~Change template structure for senders~~
 - More examples with better structure
 - ✔ ~~Move Wikis to tttapa.github.io~~
-- Add FAQ and Troubleshooting pages
+- ✔ ~~Add FAQ page~~
+- Add Troubleshooting page
 - ✔ ~~Add a getter for the button state, and rename `getState()` → update()~~
 - Cleanup structure of display elements.
 - Flashing LEDs
-- Motorized faders
+- ✔ ~~Motorized faders~~
 - Keywords
 - Make many protected functions private if 1) they are not needed in tests 2) 
   they should not be called from within subclasses.
@@ -20,7 +21,14 @@
 - ✔ ~~GitHub template~~
 - ✔ ~~Fix firmware link DFU scripts~~
 - ✔ ~~Move DFU scripts → scripts~~
-- Find and list all TODO's throughout the source code.
+- List all TODO's throughout the source code and solve them
+- ✔ ~~Full MIDI system common support (BLE)~~
+- ✔ ~~Fix MCU LCD length~~
+- ✔ ~~Return type transposers~~
+- ✔ ~~Selection transposers~~
+- optimized ExtIO for boards with tons of RAM?
+- ✔ ~~Output only MIDI debug interface~~
+- Bankable FastLED
 
 ## Specific elements
 
@@ -94,8 +102,8 @@
 - ✔ VU
 - ✔ LED Bitmap
 - ✔ Timedisplay
-- Assignment display
-- LCD
+- ✔ Assignment display
+- ✔ LCD
 
 
 ### Selectors

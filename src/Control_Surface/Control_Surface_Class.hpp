@@ -37,97 +37,59 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     /// Copying is not allowed
     Control_Surface_ &operator=(Control_Surface_ const &) = delete;
 
-    /**
-     * @brief   Return the static Control_Surface_ instance.
-     *          (Control_Surface_ is a singleton.)
-     */
+    /// Return the static Control_Surface_ instance (Control_Surface_ is a
+    /// singleton.)
     static Control_Surface_ &getInstance();
 
   private:
-    /**
-     * @brief   Control_Surface_ is a singleton, so the constructor is private.
-     */
+    /// Control_Surface_ is a singleton, so the constructor is private.
     Control_Surface_() = default;
 
     /// @}
 
   public:
-    /**
-     * @brief   Initialize the Control_Surface.
-     */
+    /// Initialize the Control_Surface.
     void begin();
 
-    /**
-     * @brief   Update all MIDI elements, send MIDI events and read MIDI input.
-     */
+    /// Update all MIDI elements, send MIDI events and read MIDI input.
     void loop();
 
-    /**
-     * @brief   Connect Control Surface to the default MIDI interface.
-     */
+    /// Connect Control Surface to the default MIDI interface.
     bool connectDefaultMIDI_Interface();
 
-    /**
-     * @brief   Disconnect Control Surface from the MIDI interfaces it's 
-     *          connected to.
-     */
+    /// Disconnect Control Surface from the MIDI interfaces it's connected to.
     void disconnectMIDI_Interfaces();
 
-    /**
-     * @brief   Get a reference to the MIDI sender.
-     * 
-     * @deprecated  Use `Control_Surface.send(...)` directly instead of 
-     *              `Control_Surface.MIDI().send(...)`.
-     */
-    [[deprecated("Use Control_Surface.send(...) directly, instead of "
-                 "Control_Surface.MIDI().send(...)")]] //
-    MIDI_Sender<Control_Surface_> &
-    MIDI() {
-        return *this;
-    }
-    /** 
-     * @brief   Update all MIDI interfaces to receive new MIDI events.
-     */
+    /// Update all MIDI interfaces to receive new MIDI events.
     void updateMidiInput();
-
-    /**
-     * @brief   Update all MIDIInputElement%s.
-     */
+    /// Update all MIDIInputElement%s.
     void updateInputs();
-
-    /** 
-     * @brief   Clear, draw and display all displays.
-     */
+    /// Initialize all displays that have at least one display element.
+    void beginDisplays();
+    /// Clear, draw and display all displays that contain display elements that
+    /// have changed.
     void updateDisplays();
 
   private:
-    /**
-     * @brief   Low-level function for sending a 3-byte MIDI message.
-     */
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t d2, uint8_t cn);
-    /**
-     * @brief   Low-level function for sending a 2-byte MIDI message.
-     */
-    void sendImpl(uint8_t header, uint8_t d1, uint8_t cn);
-
-    /**
-     * @brief   Low-level function for sending a system exclusive MIDI message.
-     */
-    void sendImpl(const uint8_t *data, size_t length, uint8_t cn);
-
-    /** 
-     * @brief   Low-level function for sending a single-byte MIDI message.
-     */
-    void sendImpl(uint8_t rt, uint8_t cn);
+    /// Low-level function for sending a MIDI channel voice message.
+    void sendChannelMessageImpl(ChannelMessage);
+    /// Low-level function for sending a MIDI system common message.
+    void sendSysCommonImpl(SysCommonMessage);
+    /// Low-level function for sending a system exclusive MIDI message.
+    void sendSysExImpl(SysExMessage);
+    /// Low-level function for sending a MIDI real-time message.
+    void sendRealTimeImpl(RealTimeMessage);
+    /// Low-level function for sending any buffered outgoing MIDI messages.
+    /// @todo Implement this in MIDI_Pipe
+    void sendNowImpl() { /* TODO */ }
 
   private:
     void sinkMIDIfromPipe(ChannelMessage msg) override;
     void sinkMIDIfromPipe(SysExMessage msg) override;
+    void sinkMIDIfromPipe(SysCommonMessage msg) override;
     void sinkMIDIfromPipe(RealTimeMessage msg) override;
 
   private:
-    /// A timer to know when to update the analog inputs.
-    Timer<micros> potentiometerTimer = {AH::FILTERED_INPUT_UPDATE_INTERVAL};
     /// A timer to know when to refresh the displays.
     Timer<micros> displayTimer = {1000000UL / MAX_FPS};
 
@@ -143,6 +105,10 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     /// done in the user-provided callback, false if `Control_Surface`
     /// should handle the message.
     using SysExMessageCallback = bool (*)(SysExMessage);
+    /// Callback function type for System Common messages. Return true if
+    /// handling is done in the user-provided callback, false if
+    /// `Control_Surface` should handle the message.
+    using SysCommonMessageCallback = bool (*)(SysCommonMessage);
     /// Callback function type for Real-Time messages. Return true if handling
     /// is done in the user-provided callback, false if `Control_Surface`
     /// should handle the message.
@@ -152,9 +118,11 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     void
     setMIDIInputCallbacks(ChannelMessageCallback channelMessageCallback,
                           SysExMessageCallback sysExMessageCallback,
+                          SysCommonMessageCallback sysCommonMessageCallback,
                           RealTimeMessageCallback realTimeMessageCallback) {
         this->channelMessageCallback = channelMessageCallback;
         this->sysExMessageCallback = sysExMessageCallback;
+        this->sysCommonMessageCallback = sysCommonMessageCallback;
         this->realTimeMessageCallback = realTimeMessageCallback;
     }
 
@@ -163,11 +131,24 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
   private:
     ChannelMessageCallback channelMessageCallback = nullptr;
     SysExMessageCallback sysExMessageCallback = nullptr;
+    SysCommonMessageCallback sysCommonMessageCallback = nullptr;
     RealTimeMessageCallback realTimeMessageCallback = nullptr;
     MIDI_Pipe inpipe, outpipe;
 };
 
+#if CS_TRUE_CONTROL_SURFACE_INSTANCE || defined(DOXYGEN)
 /// A predefined instance of the Control Surface to use in the Arduino sketches.
 extern Control_Surface_ &Control_Surface;
+#else
+// This is not a clean solution, but it's the only way to get the linker to 
+// optimize away all Control Surface-related code if the `Control_Surface` 
+// instance is never used.
+// Even if it isn't used, and even though it's a global, the compiler has to 
+// generate the constructor and destructor, which pulls in variables and vtables
+// from throughout the library, using a significant amount of memory.
+// By using a macro here, Control_Surface is only constructed (and destructed)
+// if it is used in user code.
+#define Control_Surface (Control_Surface_::getInstance())
+#endif
 
 END_CS_NAMESPACE

@@ -132,6 +132,9 @@ Print &operator<<(Print &printer, double d) {
     printer.print(d, precisionPrintStream);
     return printer;
 }
+Print &operator<<(Print &printer, float f) {
+    return printer << static_cast<double>(f);
+}
 Print &operator<<(Print &printer, const Printable &p) {
     printer.print(p);
     return printer;
@@ -219,7 +222,6 @@ void printOct(Print &printer, T val)
     ; // TODO
 } */
 
-
 template <class T>
 Print &printIntegral(Print &printer, T i) {
     switch (formatPrintStream) {
@@ -235,6 +237,9 @@ Print &printIntegral(Print &printer, T i) {
 }
 
 Print &operator<<(Print &p, HexDump h) {
+    if (h.length == 0)
+        return p;
+
     auto temp_case = casePrintStream;
     casePrintStream = UPPERCASE;
     while (h.length-- > 1) {
@@ -249,6 +254,9 @@ Print &operator<<(Print &p, HexDump h) {
 #ifndef ARDUINO
 
 std::ostream &operator<<(std::ostream &p, HexDump h) {
+    if (h.length == 0)
+        return p;
+
     auto hex_nibble_to_char = [](uint8_t nibble) -> char {
         nibble &= 0xF;
         return nibble > 9 ? nibble - 10 + 'A' : nibble + '0';

@@ -1,6 +1,6 @@
 #include <Banks/Bank.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 using namespace ::testing;
 using namespace CS;
@@ -12,7 +12,7 @@ TEST(MCUVPot, update) {
     constexpr uint8_t track = 5;
     MCU::VPotRing vpot = {track, channel};
 
-    ChannelMessageMatcher midimsg = {
+    ChannelMessage midimsg = {
         MIDIMessageType::CONTROL_CHANGE,
         channel,
         0x34,
@@ -43,7 +43,7 @@ TEST(MCUVPotBankable, setValueBankChangeAddress) {
     constexpr uint8_t track = 5;
     MCU::Bankable::VPotRing<2> vpot = {bank, track, channel};
 
-    ChannelMessageMatcher midimsg = {
+    ChannelMessage midimsg = {
         MIDIMessageType::CONTROL_CHANGE,
         channel,
         0x34 + 4,
@@ -65,7 +65,7 @@ TEST(MCUVPotBankable, setValueBankChangeChannel) {
     constexpr uint8_t track = 5;
     MCU::Bankable::VPotRing<2> vpot = {{bank, CHANGE_CHANNEL}, track, channel};
 
-    ChannelMessageMatcher midimsg = {
+    ChannelMessage midimsg = {
         MIDIMessageType::CONTROL_CHANGE,
         channel + 4,
         0x34,
@@ -87,8 +87,8 @@ TEST(MCUVPotBankable, setValueBankChangeCN) {
     constexpr uint8_t track = 5;
     MCU::Bankable::VPotRing<2> vpot = {{bank, CHANGE_CABLENB}, track, channel};
 
-    ChannelMessageMatcher midimsg = {
-        MIDIMessageType::CONTROL_CHANGE, channel, 0x34, 0x5A, 4,
+    ChannelMessage midimsg = {
+        MIDIMessageType::CONTROL_CHANGE, channel, 0x34, 0x5A, CABLE_5,
     };
     MIDIInputElementCC::updateAllWith(midimsg);
     EXPECT_EQ(vpot.getPosition(), 0x0);
@@ -111,22 +111,14 @@ TEST(MCUVPotLEDsBankable, displayOnBankChange) {
     MCU::Bankable::VPotRingLEDs<2> vpot{
         bank, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, track, channel};
 
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(0, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(1, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(3, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(4, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(5, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(6, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(7, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(8, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(9, OUTPUT));
-    EXPECT_CALL(ArduinoMock::getInstance(), pinMode(10, OUTPUT));
-
+    for (uint8_t i = 0; i <= 10; ++i) {
+        EXPECT_CALL(ArduinoMock::getInstance(), pinMode(i, OUTPUT));
+        EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(i, LOW));
+    }
     MIDIInputElementCC::beginAll();
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
-    ChannelMessageMatcher midimsg1 = {
+    ChannelMessage midimsg1 = {
         MIDIMessageType::CONTROL_CHANGE,
         channel,
         0x34 + 4,
@@ -171,7 +163,7 @@ TEST(MCUVPotLEDsBankable, displayOnBankChange) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(9, LOW));
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(10, LOW));
 
-    ChannelMessageMatcher midimsg2 = {
+    ChannelMessage midimsg2 = {
         MIDIMessageType::CONTROL_CHANGE,
         channel,
         0x34 + 4,

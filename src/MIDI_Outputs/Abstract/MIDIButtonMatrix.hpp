@@ -11,9 +11,13 @@ BEGIN_CS_NAMESPACE
  * @todo    Documentation.
  * @see     AH::ButtonMatrix
  */
-template <class Sender, uint8_t nb_rows, uint8_t nb_cols>
-class MIDIButtonMatrix : public MIDIOutputElement,
-                         public AH::ButtonMatrix<nb_rows, nb_cols> {
+template <class Sender, uint8_t NumRows, uint8_t NumCols>
+class MIDIButtonMatrix
+    : public MIDIOutputElement,
+      public AH::ButtonMatrix<MIDIButtonMatrix<Sender, NumRows, NumCols>,
+                              NumRows, NumCols> {
+    using ButtonMatrix = AH::ButtonMatrix<MIDIButtonMatrix, NumRows, NumCols>;
+    friend class AH::ButtonMatrix<MIDIButtonMatrix, NumRows, NumCols>;
 
   protected:
     /**
@@ -35,22 +39,20 @@ class MIDIButtonMatrix : public MIDIOutputElement,
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIButtonMatrix(const PinList<nb_rows> &rowPins,
-                     const PinList<nb_cols> &colPins,
-                     const AddressMatrix<nb_rows, nb_cols> &addresses,
-                     MIDIChannelCN channelCN, const Sender &sender)
-        : AH::ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
-          addresses(addresses), baseChannelCN(channelCN), sender(sender) {}
+    MIDIButtonMatrix(const PinList<NumRows> &rowPins,
+                     const PinList<NumCols> &colPins,
+                     const AddressMatrix<NumRows, NumCols> &addresses,
+                     MIDIChannelCable channelCN, const Sender &sender)
+        : ButtonMatrix(rowPins, colPins), addresses(addresses),
+          baseChannelCN(channelCN), sender(sender) {}
 
   public:
-    void begin() final override { AH::ButtonMatrix<nb_rows, nb_cols>::begin(); }
+    void begin() final override { ButtonMatrix::begin(); }
 
-    void update() final override {
-        AH::ButtonMatrix<nb_rows, nb_cols>::update();
-    }
+    void update() final override { ButtonMatrix::update(); }
 
   private:
-    void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
+    void onButtonChanged(uint8_t row, uint8_t col, bool state) {
         int8_t address = addresses[row][col];
         if (state == LOW)
             sender.sendOn({address, baseChannelCN});
@@ -58,8 +60,8 @@ class MIDIButtonMatrix : public MIDIOutputElement,
             sender.sendOff({address, baseChannelCN});
     }
 
-    AddressMatrix<nb_rows, nb_cols> addresses;
-    MIDIChannelCN baseChannelCN;
+    AddressMatrix<NumRows, NumCols> addresses;
+    MIDIChannelCable baseChannelCN;
 
   public:
     Sender sender;

@@ -5,7 +5,10 @@ the necessary hardware support packages, such as Teensyduino or the ESP32 Core,
 if you're not using a standard board.  
 Here are some links to installation instructions for the Arduino IDE on
 [**Linux**](https://tttapa.github.io/Pages/Ubuntu/Software-Installation/Arduino/Arduino-IDE.html), on [**Windows**](https://www.arduino.cc/en/guide/windows), 
-and on [**OSX**](https://www.arduino.cc/en/guide/macOSX).
+and on [**OSX**](https://www.arduino.cc/en/guide/macOSX).  
+If you're using an AVR board (e.g. Arduino Uno, Mega, Nano, Leonardo), you need
+at least version 1.8.1 of the Arduino AVR Core 
+(see Tools > Board > Boards Manager).
 
 You have to install the Control Surface library itself, as well as some 
 dependencies.
@@ -75,14 +78,7 @@ git pull
 
 If you are using an Arduino board with on-board USB capabilities, you need the
 [**MIDIUSB library**](https://github.com/arduino-libraries/MIDIUSB). 
-Install it as explained before, or by using the [Library Manager](
-https://www.arduino.cc/en/Guide/Libraries#toc3).
-
-The Control Surface Library depends on the [**PJRC Encoder library**](
-https://www.pjrc.com/teensy/td_libs_Encoder.html) for reading the
-input from rotary encoders. Download and install it if you plan on using those.
-
-If you are using a Teensy, you don't need the MIDIUSB library, and the Encoder
-library should already be installed by default.
+Install it as explained before, or by using the 
+[Library Manager](https://www.arduino.cc/en/Guide/Libraries#toc3).
 
 To use AppleMIDI, you also need the [AppleMIDI](https://github.com/lathoub/Arduino-AppleMIDI-Library) library and its dependencies.

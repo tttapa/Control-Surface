@@ -29,7 +29,6 @@
             "doxygen",
             "examples.old",
             "googletest",
-            "gtest-wrappers",
             "mock",
             "scripts",
             "test",

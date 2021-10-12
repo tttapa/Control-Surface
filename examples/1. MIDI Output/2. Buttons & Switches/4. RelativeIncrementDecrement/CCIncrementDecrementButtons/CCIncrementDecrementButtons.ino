@@ -5,7 +5,7 @@
  * You can compare it to a rotary encoder, but with two buttons instead of an 
  * encoder.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  *
  * Connections
  * -----------
@@ -49,7 +49,7 @@
 USBMIDI_Interface midi;
 
 // Instantiate a CCIncrementDecrementButtons object
-CCIncrementDecrementButtons buttons = {
+CCIncrementDecrementButtons buttons {
   {5, 6},              // Button pins: 5 increments, 6 decrements
   MCU::V_POT_1,        // Increment/Decrement CC address
   1,                   // Multiplier

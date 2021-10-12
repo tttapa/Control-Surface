@@ -10,9 +10,8 @@ namespace MCU {
 
 class TimeDisplayDisplay : public DisplayElement {
   public:
-    TimeDisplayDisplay(DisplayInterface &display,
-                       const TimeDisplay &timedisplay, PixelLocation loc,
-                       uint8_t size, uint16_t color)
+    TimeDisplayDisplay(DisplayInterface &display, TimeDisplay &timedisplay,
+                       PixelLocation loc, uint8_t size, uint16_t color)
         : DisplayElement(display), timedisplay(timedisplay), x(loc.x), y(loc.y),
           size(size), color(color) {}
 
@@ -30,7 +29,10 @@ class TimeDisplayDisplay : public DisplayElement {
         display.print(beatStr);
         display.print(' ');
         display.print(frameStr);
+        timedisplay.clearDirty();
     }
+
+    bool getDirty() const override { return timedisplay.getDirty(); }
 
     int16_t getX() const { return x; }
     int16_t getY() const { return y; }
@@ -43,7 +45,7 @@ class TimeDisplayDisplay : public DisplayElement {
     void setColor(uint16_t color) { this->color = color; }
 
   private:
-    const TimeDisplay &timedisplay;
+    TimeDisplay &timedisplay;
     int16_t x, y;
     uint8_t size;
     uint16_t color;

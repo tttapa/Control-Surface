@@ -3,7 +3,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x
  * 
  * Connections
  * -----------
@@ -34,15 +34,13 @@
  * https://github.com/tttapa/Control-Surface
  */
 
-#include <Encoder.h> // Include the Encoder library.
-// This must be done before the Control Surface library.
 #include <Control_Surface.h> // Include the Control Surface library
 
 // Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
 // Instantiate a CCRotaryEncoder object
-CCRotaryEncoder enc = {
+CCRotaryEncoder enc {
   {2, 3},       // pins
   MCU::V_POT_1, // MIDI address (CC number + optional channel)
   1,            // optional multiplier if the control isn't fast enough

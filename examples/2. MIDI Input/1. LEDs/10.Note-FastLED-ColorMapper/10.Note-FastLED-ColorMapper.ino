@@ -3,7 +3,7 @@
  * incoming  MIDI note events. This example uses a custom color mapper to
  * get a rainbow effect across the LED strip.
  * 
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Nano 33 IoT, Teensy 3.x, ESP32
  * 
  * @note    You might lose incoming MIDI data while the LED strip is being 
  *          updated. To avoid this, don't use an Arduino UNO.  
@@ -38,7 +38,7 @@
 #include <Control_Surface.h>
 
 // Define the array of leds.
-Array<CRGB, 8> leds = {};
+Array<CRGB, 8> leds {};
 // The data pin with the strip connected.
 constexpr uint8_t ledpin = 2;
 
@@ -47,12 +47,14 @@ USBMIDI_Interface midi;
 // Create a functor that maps the velocity and the index of a note to a color.
 struct RainbowColorMapper {
   CHSV operator()(uint8_t velocity, uint8_t index) const {
-    return CHSV(255 * index / leds.length, 255, 2 * velocity);
+    return CHSV(255 * index / leds.length, 255, 255u * velocity / 127u);
   }
 };
- 
-using namespace MIDI_Notes;
-NoteRangeFastLED<leds.length, RainbowColorMapper> midiled = {leds, note(C, 4)};
+
+NoteRangeFastLED<leds.length, RainbowColorMapper> midiled {
+  leds,
+  MIDI_Notes::C(4),
+};
 
 void setup() {
   // See FastLED examples and documentation for more information.
@@ -64,5 +66,8 @@ void setup() {
 
 void loop() {
   Control_Surface.loop();
-  FastLED.show();
+  if (midiled.getDirty()) { // If the colors changed
+    FastLED.show();         // Update the LEDs with the new colors
+    midiled.clearDirty();   // Clear the dirty flag
+  }
 }

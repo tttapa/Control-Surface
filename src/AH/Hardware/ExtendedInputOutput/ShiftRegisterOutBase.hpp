@@ -22,7 +22,7 @@ BEGIN_AH_NAMESPACE
  * 
  * @ingroup AH_ExtIO
  */
-template <uint8_t N>
+template <uint16_t N>
 class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
   protected:
     /**
@@ -87,12 +87,12 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      * @retval  1
      *          The state of the pin is `HIGH`.
      */
-    int digitalRead(pin_t pin) override;
+    PinStatus_t digitalRead(pin_t pin) override;
 
     /** 
      * @copydoc digitalRead
      */
-    int digitalReadBuffered(pin_t pin) override {
+    PinStatus_t digitalReadBuffered(pin_t pin) override {
         return digitalRead(pin);
     }
 

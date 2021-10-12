@@ -2,7 +2,7 @@
  * This example demonstrates the use of LEDs that respond to incoming  MIDI
  * note events by changing the brightness of an LED using PWM.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x
  * 
  * Connections
  * -----------
@@ -35,12 +35,10 @@ USBMIDI_Interface midi;
 
 const pin_t ledPin = LED_BUILTIN; // Change this to your PWM pin <------
 
-using namespace MIDI_Notes;
-
 // Instantiate the LED that will light up when middle C is playing
-NoteValueLEDPWM led = {
-  ledPin,                  // Pin of the LED, must be PWM pin
-  {note(C, 4), CHANNEL_1}, // Note C4 on MIDI channel 1
+NoteLEDPWM led {
+  ledPin,                      // Pin of the LED, must be PWM pin
+  {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
 };
 
 void setup() {

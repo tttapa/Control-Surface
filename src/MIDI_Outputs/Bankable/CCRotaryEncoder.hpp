@@ -15,10 +15,6 @@ namespace Bankable {
  * 
  * This version can be banked.
  *
- * @note    To use this class, include the [PJRC Encoder library]
- *          (https://github.com/PaulStoffregen/Encoder) before the
- *          Control-Surface library.
- *
  * @ingroup BankableMIDIOutputElements
  */
 class CCRotaryEncoder
@@ -32,9 +28,10 @@ class CCRotaryEncoder
      * @param   config
      *          The bank configuration to use: the bank to add this element to,
      *          and whether to change the address, channel or cable number.
-     * @param   pins
-     *          A list of the two pins connected to the A and B outputs of the
-     *          encoder.  
+     * @param   encoder
+     *          The Encoder object to use.  
+     *          Usually passed as a list of the two pins connected to the 
+     *          A and B outputs of the encoder, e.g. `{2, 3}`.  
      *          The internal pull-up resistors will be enabled by the Encoder
      *          library.
      * @param   address
@@ -54,20 +51,12 @@ class CCRotaryEncoder
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    CCRotaryEncoder(OutputBankConfig<> config, EncoderPinList pins,
-                    MIDIAddress address, int8_t speedMultiply = 1,
+    CCRotaryEncoder(OutputBankConfig<> config, Encoder &&encoder,
+                    MIDIAddress address, int16_t speedMultiply = 1,
                     uint8_t pulsesPerStep = 4)
-        : MIDIRotaryEncoder({config, address}, pins, speedMultiply,
-                            pulsesPerStep, {}) {}
-
-// For tests only (PJRC Encoder library's copy constructor doesn't work)
-#ifndef ARDUINO
-    CCRotaryEncoder(OutputBankConfig<> config, const Encoder &encoder,
-                    MIDIAddress address, int8_t speedMultiply = 1,
-                    uint8_t pulsesPerStep = 4)
-        : MIDIRotaryEncoder({config, address}, encoder, speedMultiply,
-                            pulsesPerStep, {}) {}
-#endif
+        : MIDIRotaryEncoder<SingleAddress, RelativeCCSender>(
+              {config, address}, std::move(encoder), speedMultiply,
+              pulsesPerStep, {}) {}
 };
 
 } // namespace Bankable

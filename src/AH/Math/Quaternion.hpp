@@ -25,10 +25,10 @@
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 #include <AH/Arduino-Wrapper.h> // Print
-#include <AH/Math/Degrees.hpp>  // rad2deg()
-#include <AH/Math/Vector.hpp>   // Vec3f
-#include <AH/STL/cmath>         // std::sqrt
-#include <AH/STL/limits>        // std::numeric_limits
+#include <AH/Math/Degrees.hpp> // rad2deg()
+#include <AH/Math/Vector.hpp> // Vec3f
+#include <AH/STL/cmath> // std::sqrt
+#include <AH/STL/limits> // std::numeric_limits
 
 #ifndef ARDUINO
 #include <iosfwd> // std::ostream
@@ -158,15 +158,15 @@ struct Quaternion {
         Quaternion q = normalized();
 
         // Rotation matrix.
-        float M11 = 1.0 - 2.0 * q.y * q.y - 2.0 * q.z * q.z;
-        float M12 = 2.0 * (q.x * q.y - q.w * q.z);
-        float M13 = 2.0 * (q.x * q.z + q.w * q.y);
-        float M21 = 2.0 * (q.x * q.y + q.w * q.z);
-        float M22 = 1.0 - 2.0 * q.x * q.x - 2.0 * q.z * q.z;
-        float M23 = 2.0 * (q.y * q.z - q.w * q.x);
-        float M31 = 2.0 * (q.x * q.z - q.w * q.y);
-        float M32 = 2.0 * (q.y * q.z + q.w * q.x);
-        float M33 = 1.0 - 2.0 * q.x * q.x - 2.0 * q.y * q.y;
+        float M11 = 1 - 2 * q.y * q.y - 2 * q.z * q.z;
+        float M12 = 2 * (q.x * q.y - q.w * q.z);
+        float M13 = 2 * (q.x * q.z + q.w * q.y);
+        float M21 = 2 * (q.x * q.y + q.w * q.z);
+        float M22 = 1 - 2 * q.x * q.x - 2 * q.z * q.z;
+        float M23 = 2 * (q.y * q.z - q.w * q.x);
+        float M31 = 2 * (q.x * q.z - q.w * q.y);
+        float M32 = 2 * (q.y * q.z + q.w * q.x);
+        float M33 = 1 - 2 * q.x * q.x - 2 * q.y * q.y;
 
         return Vec3f{
             M11 * v.x + M12 * v.y + M13 * v.z,
@@ -229,7 +229,7 @@ struct Quaternion {
         // Calculate the angle ϑ.
         float angle = std::asin(crossNorm);
         if (v.z < 0)
-            angle = M_PI - angle;
+            angle = float(M_PI) - angle;
 
         // Calculate the resulting quaternion.
         return {
@@ -319,11 +319,11 @@ struct EulerAngles {
         // Normalize quaternion (q is passed by value, so this is a copy of q).
         q.normalize();
 
-        float phi = std::atan2(2.0 * (q.w * q.x + q.y * q.z),
-                               1.0 - 2.0 * (q.x * q.x + q.y * q.y));
-        float theta = std::asin(2.0 * (q.w * q.y - q.z * q.x));
-        float psi = std::atan2(2.0 * (q.w * q.z + q.x * q.y),
-                               1.0 - 2.0 * (q.y * q.y + q.z * q.z));
+        float phi = std::atan2(2 * (q.w * q.x + q.y * q.z),
+                               1 - 2 * (q.x * q.x + q.y * q.y));
+        float theta = std::asin(2 * (q.w * q.y - q.z * q.x));
+        float psi = std::atan2(2 * (q.w * q.z + q.x * q.y),
+                               1 - 2 * (q.y * q.y + q.z * q.z));
         return {psi, theta, phi};
     }
 

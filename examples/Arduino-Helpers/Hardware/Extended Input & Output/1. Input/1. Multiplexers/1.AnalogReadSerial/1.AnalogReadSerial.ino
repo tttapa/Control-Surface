@@ -2,7 +2,7 @@
  * This is an example of the AnalogMultiplex class. It prints the values of all
  * 16 inputs of a multiplexers to the serial monitor.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -38,14 +38,14 @@
 #include <AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
 
 // Instantiate a multiplexer
-CD74HC4067 mux = {
+CD74HC4067 mux {
   A0,              // analog pin
   {3, 4, 5, 6}, // Address pins S0, S1, S2, S3
   // 7, // Optionally, specify the enable pin
 };
 
 // Alternatively, if you have a 3-bit mux:
-// CD74HC4051 mux = {
+// CD74HC4051 mux {
 //   A0,
 //   {3, 4, 5},
 //   // 7, // Optional
@@ -64,7 +64,7 @@ void loop() {
   Serial.println();
 }
 
-// Or if you're a cool kid, use a range-based for loop
+// A more fancy approach could be to use a range-based for loop
 void loop2() {
   for (pin_t pin : mux.pins()) {
     Serial.print(analogRead(pin));

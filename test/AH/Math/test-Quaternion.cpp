@@ -4,7 +4,7 @@
 
 #include <random>
 
-static constexpr float eps = 1e2 * std::numeric_limits<float>::epsilon();
+static constexpr float eps = 1e2f * std::numeric_limits<float>::epsilon();
 
 // -------------------------------------------------------------------------- //
 //                                 QUATERNION                                 //
@@ -260,6 +260,13 @@ TEST(Quaternion, fromDirectionHard) {
     // Make sure it satisfies the definition of `fromDirection()`.
     float diff = (result.rotate({0, 0, 1}) - vector.normalized()).norm();
     ASSERT_LT(diff, eps);
+}
+
+TEST(Quaternion, fromDirectionInvalid) {
+    Vec3f vector = {0, 0, 0};
+    Quaternion result = Quaternion::fromDirection(vector);
+    Quaternion expected = {0, 0, 0, 0};
+    EXPECT_EQ(result, expected);
 }
 
 TEST(Quaternion, fromDirectionRandom) {

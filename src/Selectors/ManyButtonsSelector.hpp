@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Selector.hpp"
-#include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
+#include <AH/Containers/ArrayHelpers.hpp>
+#include <AH/Hardware/Button.hpp>
 #include <Def/Def.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -14,29 +15,30 @@ class GenericManyButtonsSelector : public GenericSelector<N, Callback> {
     GenericManyButtonsSelector(Selectable<N> &selectable,
                                const Callback &callback,
                                const PinList<N> &buttonPins)
-        : GenericSelector<N, Callback>{selectable, callback},
-          buttonPins(buttonPins) {}
+        : GenericSelector<N, Callback> {selectable, callback},
+          buttons(AH::copyAs<AH::Button>(buttonPins)) {}
 
     void begin() override {
         Parent::begin();
-        for (const pin_t &pin : buttonPins)
-            AH::ExtIO::pinMode(pin, INPUT_PULLUP);
+        for (auto &btn : buttons)
+            btn.begin();
     }
 
     void update() override {
         Parent::update();
         for (setting_t i = 0; i < N; i++)
-            // TODO: invert?
-            if (AH::ExtIO::digitalRead(buttonPins[i]) == LOW) {
-                if (this->get() != i &&
-                    AH::ExtIO::digitalRead(buttonPins[this->get()]) != LOW)
-                    this->set(i);
-                break;
-            }
+            if (buttons[i].update() == AH::Button::Falling &&
+                buttons[this->get()].getState() != AH::Button::Pressed)
+                this->set(i);
+    }
+
+    void invert() {
+        for (auto &btn : buttons)
+            btn.invert();
     }
 
   private:
-    PinList<N> buttonPins;
+    AH::Array<AH::Button, N> buttons;
 };
 
 // -------------------------------------------------------------------------- //
@@ -59,7 +61,7 @@ template <setting_t N>
 class ManyButtonsSelector : public GenericManyButtonsSelector<N> {
   public:
     ManyButtonsSelector(Selectable<N> &selectable, const PinList<N> &buttonPins)
-        : GenericManyButtonsSelector<N>{
+        : GenericManyButtonsSelector<N> {
               selectable,
               {},
               buttonPins,

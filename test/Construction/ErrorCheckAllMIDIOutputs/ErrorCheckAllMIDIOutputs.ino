@@ -1,12 +1,10 @@
-#include <Encoder.h>
-
 #include <Control_Surface.h>
 
 void setup() {
     const pin_t pin = 0;
     const MIDIAddress address = {};
     const RelativeMIDIAddress relAddress = {};
-    const MIDIChannelCN cnChannel = {};
+    const MIDIChannelCable cnChannel = {};
     uint8_t u8 = 0;
     int8_t i8 = 0;
     const PinList<3> rowPins3 = {1, 2, 3};

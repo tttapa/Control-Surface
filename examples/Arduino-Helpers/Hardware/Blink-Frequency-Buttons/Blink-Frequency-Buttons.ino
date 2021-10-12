@@ -2,7 +2,7 @@
  * This examples shows how to use two push buttons to set the frequency at which
  * an LED blinks.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -36,7 +36,7 @@ const unsigned long minInterval = 100;     // ms
 const unsigned long defaultInterval = 500; // ms
 const int intervalDelta = 100;             // ms
 
-IncrementDecrementButtons buttons = {2, 3};
+IncrementDecrementButtons buttons {2, 3};
 Timer<millis> timer = defaultInterval;
 
 void setup() {

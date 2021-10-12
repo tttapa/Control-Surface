@@ -30,8 +30,7 @@ class PCButton : public MIDIButton<ProgramChangeSender> {
      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
      *          [CABLE_1, CABLE_16].
      */
-    PCButton(pin_t pin, const MIDIAddress &address)
-        : MIDIButton(pin, address, {}) {}
+    PCButton(pin_t pin, MIDIAddress address) : MIDIButton(pin, address, {}) {}
 };
 
 END_CS_NAMESPACE

@@ -1,7 +1,7 @@
 /** 
  * This is an example that demonstrates the use of MIDI Program Change buttons.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -27,7 +27,7 @@ USBMIDI_Interface midi;
 
 // Instantiate a PCButton that reads the input from a push button and sends out
 // a MIDI Program Change message when it's pressed.
-PCButton pcBtn = {
+PCButton pcBtn {
   2,                                 // pin
   {MIDI_PC::Steel_Drums, CHANNEL_1}, // address
 };

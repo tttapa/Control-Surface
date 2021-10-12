@@ -1,64 +1,67 @@
 #pragma once
 
-#if not defined(Encoder_h_) && not defined(IDE)
-#error                                                                         \
-    "The PJRC Encoder library should be included before the Control-Surface "  \
-    "library. (#include <Encoder.h>)"
+#include <AH/STL/utility> // std::forward
+#include <Def/Def.hpp>
+#include <Def/TypeTraits.hpp>
+#include <MIDI_Outputs/Abstract/EncoderState.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+
+#ifdef ARDUINO
+#include <Submodules/Encoder/Encoder.h>
+#else
+#include <Encoder.h> // Mock
 #endif
 
-#include <Def/Def.hpp>
-#include <Encoder.h>
-#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
 
 /**
  * @brief   An abstract class for rotary encoders that send MIDI events.
  */
-template <class Sender>
-class MIDIRotaryEncoder : public MIDIOutputElement {
-  protected:
+template <class Enc, class Sender>
+class GenericMIDIRotaryEncoder : public MIDIOutputElement {
+  public:
     /**
      * @brief   Construct a new MIDIRotaryEncoder.
      *
      * @todo    Documentation
      */
-    MIDIRotaryEncoder(EncoderPinList pins, MIDIAddress address,
-                      int8_t speedMultiply, uint8_t pulsesPerStep,
-                      const Sender &sender)
-        : encoder{pins.A, pins.B}, address(address),
-          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
-          sender(sender) {}
+    GenericMIDIRotaryEncoder(Enc &&encoder, MIDIAddress address,
+                             int16_t speedMultiply, uint8_t pulsesPerStep,
+                             const Sender &sender)
+        : encoder(std::forward<Enc>(encoder)), address(address),
+          encstate(speedMultiply, pulsesPerStep), sender(sender) {}
 
-// For tests only
-#ifndef ARDUINO
-    MIDIRotaryEncoder(const Encoder &encoder, MIDIAddress address,
-                      int8_t speedMultiply, uint8_t pulsesPerStep,
-                      const Sender &sender)
-        : encoder(encoder), address(address), speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
-#endif
+    void begin() override { begin_if_possible(encoder); }
 
-  public:
-    void begin() final override {}
-    void update() final override {
-        long currentPosition = encoder.read();
-        long difference = (currentPosition - previousPosition) / pulsesPerStep;
-        if (difference) {
-            sender.send(difference * speedMultiply, address);
-            previousPosition += difference * pulsesPerStep;
+    void update() override {
+        auto encval = encoder.read();
+        if (int16_t delta = encstate.update(encval)) {
+            sender.send(delta, address);
         }
     }
 
+    void setSpeedMultiply(int16_t speedMultiply) {
+        encstate.setSpeedMultiply(speedMultiply);
+    }
+    int16_t getSpeedMultiply() const { return encstate.getSpeedMultiply(); }
+
   private:
-    Encoder encoder;
-    const MIDIAddress address;
-    const int8_t speedMultiply;
-    const uint8_t pulsesPerStep;
-    long previousPosition = 0;
+    Enc encoder;
+    MIDIAddress address;
+    EncoderState<decltype(encoder.read())> encstate;
 
   public:
     Sender sender;
 };
 
+template <class Sender>
+using MIDIRotaryEncoder = GenericMIDIRotaryEncoder<Encoder, Sender>;
+
+template <class Sender>
+using BorrowedMIDIRotaryEncoder = GenericMIDIRotaryEncoder<Encoder &, Sender>;
+
 END_CS_NAMESPACE
+
+AH_DIAGNOSTIC_POP()

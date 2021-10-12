@@ -19,12 +19,14 @@ BEGIN_AH_NAMESPACE
 // ----------------------------- Debug Settings ----------------------------- //
 // ========================================================================== //
 
+#ifndef DEBUG_OUT
 /// The debug output.  
 /// Use `#define DEBUG_OUT Serial` to print debugging information to the serial
 /// monitor.  
 /// @note   Printing debug information can slow down the program dramatically.
 #define DEBUG_OUT
 // #define DEBUG_OUT Serial
+#endif
 
 /// Exit when encountering an error, instead of trying to recover (recommended).
 #define FATAL_ERRORS
@@ -83,10 +85,6 @@ constexpr unsigned long LONG_PRESS_REPEAT_DELAY = 200; // milliseconds
 constexpr unsigned long FILTERED_INPUT_UPDATE_INTERVAL = 1000; // microseconds
 
 constexpr static Frequency SPI_MAX_SPEED = 8_MHz;
-
-/// Make it possible to invert individual push buttons.
-/// Enabling this will increase memory usage.
-#define AH_INDIVIDUAL_BUTTON_INVERT
 
 // ========================================================================== //
 

@@ -249,6 +249,8 @@ END_AH_NAMESPACE
 
 #include <ostream>
 
+BEGIN_AH_NAMESPACE
+
 template <class T, size_t N, bool Reverse, bool Const>
 std::enable_if_t<std::is_arithmetic<T>::value, std::ostream &>
 operator<<(std::ostream &os, const AH::ArraySlice<T, N, Reverse, Const> &a) {
@@ -264,9 +266,13 @@ operator<<(std::ostream &os, const AH::Array<T, N> &a) {
     return os << a.slice();
 }
 
+END_AH_NAMESPACE
+
 #endif
 
 #include <AH/PrintStream/PrintStream.hpp>
+
+BEGIN_AH_NAMESPACE
 
 template <class T, size_t N, bool Reverse, bool Const>
 std::enable_if_t<std::is_arithmetic<T>::value, Print &>
@@ -282,5 +288,7 @@ std::enable_if_t<std::is_arithmetic<T>::value, Print &>
 operator<<(Print &os, const AH::Array<T, N> &a) {
     return os << a.slice();
 }
+
+END_AH_NAMESPACE
 
 AH_DIAGNOSTIC_POP()

@@ -12,8 +12,6 @@ keyword1:
   - reverse_iterator
   - const_reverse_iterator
   - DoublyLinkable
-  # UniquePtr.hpp
-  - UniquePtr
   # Updatable.hpp
   - NormalUpdatable
   - Updatable
@@ -47,11 +45,6 @@ keyword2:
   - remove
   - moveDown
   - couldContain
-  # UniquePtr.hpp
-  - reset
-  - get
-  - release
-  - MakeUnique
   # Updatable.hpp
   - update
   - begin

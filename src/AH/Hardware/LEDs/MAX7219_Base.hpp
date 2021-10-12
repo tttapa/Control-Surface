@@ -16,22 +16,27 @@ BEGIN_AH_NAMESPACE
 /**
  * @brief   A base class for classes that control MAX7219 LED drivers.
  * 
- * The SPI interface is used.
+ * @tparam  SPIDriver
+ *          The SPI class to use. Usually, the default is fine.
  * 
  * @todo    Wiring diagram for SPI connection.
  */
+template <class SPIDriver = decltype(SPI) &>
 class MAX7219_Base {
   public:
     /**
      * @brief   Create a MAX7219_Base object.
      * 
+     * @param   spi
+     *          The SPI interface to use.
      * @param   loadPin
      *          The pin connected to the load pin (C̄S̄) of the MAX7219.
      * @param   chainlength
      *          The number of daisy-chained MAX7219 chips.
      */
-    MAX7219_Base(pin_t loadPin, uint8_t chainlength = 1)
-        : loadPin(loadPin), chainlength(chainlength) {}
+    MAX7219_Base(SPIDriver spi, pin_t loadPin, uint8_t chainlength = 1)
+        : spi(std::forward<SPIDriver>(spi)), loadPin(loadPin),
+          chainlength(chainlength) {}
 
     static constexpr uint8_t DECODEMODE = 9;
     static constexpr uint8_t INTENSITY = 10;
@@ -41,12 +46,11 @@ class MAX7219_Base {
 
     /**
      * @brief   Initialize the Arduino pins, SPI, and the MAX7219.
-     * @todo    Rename to `begin`.
      */
-    void init() {
+    void begin() {
         ExtIO::digitalWrite(loadPin, HIGH);
         ExtIO::pinMode(loadPin, OUTPUT);
-        SPI.begin();
+        spi.begin();
         sendRawAll(DISPLAYTEST, 0); // Normal operation, no test mode
         sendRawAll(SCANLIMIT, 7);   // Scan all 8 digits
         sendRawAll(DECODEMODE, 0);  // Raw LED addressing
@@ -112,13 +116,13 @@ class MAX7219_Base {
                     uint8_t leading_dim = 1) {
         uint8_t opcode = (digit & 0x7) + 1;
         ExtIO::digitalWrite(loadPin, LOW);
-        SPI.beginTransaction(settings);
+        spi.beginTransaction(settings);
         for (uint8_t i = 0; i < chainlength; ++i) {
-            SPI.transfer(opcode);
-            SPI.transfer(values[uint16_t(i) * leading_dim]);
+            spi.transfer(opcode);
+            spi.transfer(values[uint16_t(i) * leading_dim]);
         }
         ExtIO::digitalWrite(loadPin, HIGH);
-        SPI.endTransaction();
+        spi.endTransaction();
     }
 
     /**
@@ -154,13 +158,13 @@ class MAX7219_Base {
      */
     void sendRawAll(uint8_t opcode, uint8_t value) {
         ExtIO::digitalWrite(loadPin, LOW);
-        SPI.beginTransaction(settings);
+        spi.beginTransaction(settings);
         for (uint8_t i = 0; i < chainlength; ++i) {
-            SPI.transfer(opcode);
-            SPI.transfer(value);
+            spi.transfer(opcode);
+            spi.transfer(value);
         }
         ExtIO::digitalWrite(loadPin, HIGH);
-        SPI.endTransaction();
+        spi.endTransaction();
     }
 
     /**
@@ -177,20 +181,20 @@ class MAX7219_Base {
         if (chip >= chainlength)
             return; // Should I throw an error?
         ExtIO::digitalWrite(loadPin, LOW);
-        SPI.beginTransaction(settings);
+        spi.beginTransaction(settings);
         uint8_t c = 0;
         for (; c < chip; c++) {
-            SPI.transfer(0x00); // No-Op
-            SPI.transfer(0x00);
+            spi.transfer(0x00); // No-Op
+            spi.transfer(0x00);
         }
-        SPI.transfer(opcode);
-        SPI.transfer(value);
+        spi.transfer(opcode);
+        spi.transfer(value);
         for (c++; c < chainlength; c++) {
-            SPI.transfer(0x00); // No-Op
-            SPI.transfer(0x00);
+            spi.transfer(0x00); // No-Op
+            spi.transfer(0x00);
         }
         ExtIO::digitalWrite(loadPin, HIGH);
-        SPI.endTransaction();
+        spi.endTransaction();
     }
 
     /**
@@ -218,14 +222,15 @@ class MAX7219_Base {
     /**
      * @brief   Get the number of daisy-chained chips.
      */
-    uint8_t getChainLength() const {
-        return chainlength;
-    }
+    uint8_t getChainLength() const { return chainlength; }
 
   private:
+    SPIDriver spi;
     pin_t loadPin;
     uint8_t chainlength;
-    SPISettings settings = {SPI_MAX_SPEED, MSBFIRST, SPI_MODE0};
+
+  public:
+    SPISettings settings{SPI_MAX_SPEED, MSBFIRST, SPI_MODE0};
 };
 
 END_AH_NAMESPACE

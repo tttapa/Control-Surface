@@ -33,11 +33,8 @@ class CCRotaryEncoder
      * 
      * @param   bank
      *          The bank that selects the address to use.
-     * @param   pins
-     *          A list of the two pins connected to the A and B outputs of the
-     *          encoder.  
-     *          The internal pull-up resistors will be enabled by the Encoder
-     *          library.
+     * @param   encoder
+     *          The rotary encoder object to read from.
      * @param   addresses
      *          The list of MIDI addresses containing the controller number 
      *          [0, 119], channel [CHANNEL_1, CHANNEL_16], and optional cable 
@@ -55,20 +52,12 @@ class CCRotaryEncoder
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    CCRotaryEncoder(const Bank<NumBanks> &bank, const EncoderPinList &pins,
+    CCRotaryEncoder(const Bank<NumBanks> &bank, Encoder &&encoder,
                     const Array<MIDIAddress, NumBanks> &addresses,
-                    int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
+                    int16_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
         : MIDIRotaryEncoder<ManyAddresses<NumBanks>, RelativeCCSender>(
-              {bank, addresses}, pins, speedMultiply, pulsesPerStep, {}) {}
-
-// For tests only (PJRC Encoder library's copy constructor doesn't work)
-#ifndef ARDUINO
-    CCRotaryEncoder(const Bank<NumBanks> &bank, const Encoder &encoder,
-                    const Array<MIDIAddress, NumBanks> &addresses,
-                    int8_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
-        : MIDIRotaryEncoder<ManyAddresses<NumBanks>, RelativeCCSender>(
-              {bank, addresses}, encoder, speedMultiply, pulsesPerStep, {}) {}
-#endif
+              {bank, addresses}, std::move(encoder), speedMultiply,
+              pulsesPerStep, {}) {}
 };
 
 } // namespace ManyAddresses

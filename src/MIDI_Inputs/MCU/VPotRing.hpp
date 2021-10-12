@@ -1,40 +1,46 @@
 #pragma once
 
-#include <Banks/BankableMIDIInput.hpp>
-#include <MIDI_Inputs/MIDIInputElementCC.hpp>
+#include <AH/STL/algorithm>
+#include <AH/Timing/MillisMicrosTimer.hpp>
+#include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
+#include <MIDI_Inputs/MIDIInputElementMatchers.hpp>
 
 BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
-constexpr static uint8_t VPotRingAddress = 0x30;
+/// Struct that keeps track of the value and overload indicator of a Mackie
+/// Control Universal VPot LED ring.
+struct VPotState {
+    /// Constructor.
+    VPotState(uint8_t value = 0) : value(value) {}
 
-inline int8_t minimum(int8_t a, int8_t b) { return a > b ? b : a; }
-inline int8_t maximum(int8_t a, int8_t b) { return a < b ? b : a; }
+    uint8_t value; ///< The value representing the VPot position, mode and LED.
 
-struct VPotEmptyCallback {
-    VPotEmptyCallback() = default;
-    template <class T>
-    void begin(const T &) {}
-    template <class T>
-    void update(const T &) {}
-};
+    bool update(uint8_t data) {
+        data = sanitizeData(data);
+        bool changed = data != this->value;
+        this->value = data;
+        return changed;
+    }
 
-/**
- * @todo    I'm terrible at naming things.
- */
-class IVPotRing {
-  protected:
-    IVPotRing() = default;
+    /// Determines how the VPot value is displayed using the LEDs.
+    enum Mode {
+        SingleDot = 0, ///< Single dot.
+        BoostCut = 1,  ///< Boost/Cut.
+        Wrap = 2,      ///< Wrap.
+        Spread = 3,    ///< Spread.
+    };
 
-  public:
+    /// @name Data access
+    /// @{
+
     /// Return the position of the V-Pot ring. [0, 11]
-    uint8_t getPosition() const { return getPosition(getValue()); }
+    uint8_t getPosition() const { return value & 0x0F; }
     /// Return the status of the center LED of the V-Pot ring.
-    bool getCenterLed() const { return getCenterLed(getValue()); }
-    /// Return the mode of the V-Pot ring: 0 = single dot, 1 = boost/cut,
-    /// 2 = wrap, 3 = spread
-    uint8_t getMode() const { return getMode(getValue()); }
+    bool getCenterLed() const { return value & 0x40; }
+    /// Return the mode of the V-Pot ring.
+    Mode getMode() const { return static_cast<Mode>((value & 0x30) >> 4); }
 
     /// Get the first segment that should be on.
     uint8_t getStartOn() const {
@@ -43,11 +49,10 @@ class IVPotRing {
             return 0;
         int8_t value = position - 1;
         switch (getMode()) {
-            case 0: return value;
-            case 1: return minimum(value, 5);
-            case 2: return 0;
-            case 3: return maximum(5 - value, 0);
-            // Shouldn't happen, just keeps the compiler happy:
+            case SingleDot: return value;
+            case BoostCut: return std::min(+value, 5);
+            case Wrap: return 0;
+            case Spread: return std::max(5 - value, 0);
             default: return 0;
         }
     }
@@ -56,110 +61,163 @@ class IVPotRing {
     uint8_t getStartOff() const {
         uint8_t value = getPosition();
         switch (getMode()) {
-            case 0: return value;
-            case 1: return maximum(value, 6);
-            case 2: return value;
-            case 3: return minimum(5 + value, 11);
-            // Shouldn't happen, just keeps the compiler happy:
+            case SingleDot: return value;
+            case BoostCut: return std::max(+value, 6);
+            case Wrap: return value;
+            case Spread: return std::min(5 + value, 11);
             default: return 0;
         }
     }
 
-  private:
-    virtual uint8_t getValue() const = 0;
+    /// @}
 
-    /// Extract the position from the raw value.
-    static uint8_t getPosition(uint8_t value) {
-        uint8_t position = value & 0x0F;
-        return position < 0x0C ? position : 0x0B;
+    /// Make sure that the received value is valid and will not result in array
+    /// out of bounds conditions.
+    static uint8_t sanitizeData(uint8_t data) {
+        // Maximum valid position value is 0xB.
+        return (data & 0x0F) <= 0x0B ? data : ((data & 0xF0) | 0x0B);
     }
-    /// Extract the center LED state from the raw value.
-    static bool getCenterLed(uint8_t value) { return value & 0x40; }
-    /// Extract the mode from the raw value.
-    static uint8_t getMode(uint8_t value) { return (value & 0x30) >> 4; }
 };
 
-template <uint8_t NumValues, class Callback>
-class VPotRing_Base : public MIDIInputElementCC, public IVPotRing {
-  protected:
-    VPotRing_Base(uint8_t track, const MIDIChannelCN &channelCN,
-                  const Callback &callback)
-        : MIDIInputElementCC{{track + VPotRingAddress - 1, channelCN}},
-          callback(callback) {}
+// -------------------------------------------------------------------------- //
 
-  public:
-    /// Initialize
-    void begin() override { callback.begin(*this); }
+/**
+ * @brief   MIDI Input matcher for Mackie Control Universal VPot LED rings.
+ *
+ * In the Mackie Control Universal protocol, the VPot LED rings are updated 
+ * using Control Change events.  
+ * Each device (cable number) has eight VPots for the eight tracks. Only
+ * MIDI channel 1 is used in the original protocol.
+ * 
+ * The format of the MIDI message is as follows:
+ * | Status      | Data 1      | Data 2      |
+ * |:-----------:|:-----------:|:-----------:|
+ * | `1011 cccc` | `0011 0ttt` | `0pxx vvvv` |
+ * 
+ * - `1011` (or `0xB`) is the status for Control Change events
+ * - `cccc` is the MIDI channel [0-15]
+ * - `ttt` is the track index [0-7]
+ * - `p` is the state of the center LED
+ * - `xx` is the display mode
+ * - `vvvv` is the VPot value [0, 11]
+ * 
+ * The display modes are defined in @ref MCU::VPotState::Mode.
+ * 
+ * @ingroup    MIDIInputMatchers
+ */
+struct VPotMatcher : public TwoByteMIDIMatcher {
+    /**
+     * @brief   Constructor.
+     * 
+     * @param   track
+     *          The track of the VPot [1, 8].
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
+     *          [CABLE_1, CABLE_16].
+     */
+    VPotMatcher(uint8_t track, MIDIChannelCable channelCN)
+        : TwoByteMIDIMatcher({track + 0x30 - 1, channelCN}) {}
+};
 
-    /// Reset all values to zero
-    void reset() override {
-#ifdef VPOTRING_RESET
-        values = {{}};
-        callback.update(*this);
-#endif
-    }
-
-  protected:
-    /** Make sure that the received value is valid and will not result in array
-     * out of bounds conditions. */
-    static uint8_t sanitizeValue(uint8_t value) {
-        return (value & 0x0F) < 0x0C ? value : ((value & 0xF0) | 0xB);
-    }
-
-  private:
-    bool updateImpl(const ChannelMessageMatcher &midimsg,
-                    const MIDIAddress &target) override {
-        uint8_t index = getBankIndex(target);
-        uint8_t value = sanitizeValue(midimsg.data2);
-        values[index] = value;
-        if (getSelection() == index)
-            callback.update(*this);
-        return true;
-    }
-
-    uint8_t getValue() const override { return values[getSelection()]; }
-
-    /// Get the active bank selection
-    virtual uint8_t getSelection() const { return 0; }
-
-    /// Get the bank index from a MIDI address
-    virtual setting_t getBankIndex(const MIDIAddress &target) const {
-        (void)target;
-        return 0;
-    }
-
-    Array<uint8_t, NumValues> values = {{}};
-
-  public:
-    Callback callback;
+/// MIDI Input matcher for Mackie Control Universal VPot LED rings with bank
+/// support.
+/// @see    @ref MCU::VPotMatcher
+/// @ingroup    MIDIInputMatchers
+template <uint8_t BankSize>
+struct BankableVPotMatcher : public BankableTwoByteMIDIMatcher<BankSize> {
+    /**
+     * @brief   Constructor.
+     * 
+     * @param   config
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
+     * @param   track
+     *          The track of the VPot [1, 8].
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
+     *          [CABLE_1, CABLE_16].
+     */
+    BankableVPotMatcher(BankConfig<BankSize> config, uint8_t track,
+                        MIDIChannelCable channelCN)
+        : BankableTwoByteMIDIMatcher<BankSize>(config,
+                                               {track + 0x30 - 1, channelCN}) {}
 };
 
 // -------------------------------------------------------------------------- //
 
 /** 
- * @brief   A class for MIDI input elements that represent Mackie Control
- *          Universal V-Pots. This version is generic to allow for custom 
- *          callbacks.  
- *          This version cannot be banked.
- */
-template <class Callback = VPotEmptyCallback>
-class GenericVPotRing : public VPotRing_Base<1, Callback> {
-  public:
-    GenericVPotRing(uint8_t track, const MIDIChannelCN &channelCN,
-                    const Callback &callback)
-        : VPotRing_Base<1, Callback>{track, channelCN, callback} {}
-};
-
-/**
- * @brief   A class for MIDI input elements that represent Mackie Control
- *          Universal V-Pots.  
- *          This version cannot be banked.
+ * @brief   A MIDI input element that represents a Mackie Control Universal VPot
+ *          ring.
+ * 
  * @ingroup MIDIInputElements
  */
-class VPotRing : public GenericVPotRing<> {
+class VPotRing
+    : public MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
+                                      VPotMatcher>,
+      public Interfaces::MCU::IVPot {
   public:
-    VPotRing(uint8_t track, const MIDIChannelCN &channelCN = CHANNEL_1)
-        : GenericVPotRing{track, channelCN, {}} {}
+    using Matcher = VPotMatcher;
+    using Parent 
+        = MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE, Matcher>;
+
+    /**
+     * @brief   Constructor.
+     * 
+     * @param   track
+     *          The track of the VPot [1, 8].
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
+     *          [CABLE_1, CABLE_16].
+     */
+    VPotRing(uint8_t track, MIDIChannelCable channelCN = CHANNEL_1)
+        : Parent({track, channelCN}) {}
+
+  protected:
+    bool handleUpdateImpl(typename Matcher::Result match) {
+        return state.update(match.value);
+    }
+
+    void handleUpdate(typename Matcher::Result match) override {
+        dirty |= handleUpdateImpl(match);
+    }
+
+  public:
+    /// @name Data access
+    /// @{
+
+    /// Get the full state of the VPot ring.
+    VPotState getState() const { return state; }
+
+    /// @copydoc    VPotState::getPosition
+    uint8_t getPosition() const { return state.getPosition(); }
+    /// @copydoc    VPotState::getCenterLed
+    bool getCenterLed() const override { return state.getCenterLed(); }
+    /// @copydoc    VPotState::getMode
+    VPotState::Mode getMode() const { return state.getMode(); }
+
+    /// @copydoc    VPotState::getStartOn
+    uint8_t getStartOn() const override { return state.getStartOn(); }
+    /// @copydoc    VPotState::getStartOff
+    uint8_t getStartOff() const override { return state.getStartOff(); }
+
+    /// @}
+
+    /// Reset the state to zero.
+    void reset() override {
+        if (!ignoreReset) {
+            state = {};
+            dirty = true;
+        }
+    }
+
+  private:
+    VPotState state = {};
+
+  public:
+    /// Don't reset the state when calling the `reset` method. This is the
+    /// default, because in the original MCU, VPots don't get reset when a
+    /// Reset All Controllers message is received.
+    bool ignoreReset = true;
 };
 
 // -------------------------------------------------------------------------- //
@@ -167,56 +225,132 @@ class VPotRing : public GenericVPotRing<> {
 namespace Bankable {
 
 /** 
- * @brief   A class for MIDI input elements that represent Mackie Control
- *          Universal V-Pots. This version is generic to allow for custom 
- *          callbacks.  
- *          This version can be banked.
- * 
- * @tparam  NumBanks 
+ * @brief   A MIDI input element that represents a Mackie Control Universal VPot
+ *          ring. This version can be banked.
+ *
+ * @tparam  BankSize
  *          The number of banks.
+ * 
+ * @ingroup BankableMIDIInputElements
  */
-template <uint8_t NumBanks, class Callback = VPotEmptyCallback>
-class GenericVPotRing : public VPotRing_Base<NumBanks, Callback>,
-                        public BankableMIDIInput<NumBanks> {
+template <uint8_t BankSize>
+class VPotRing
+    : public BankableMatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
+                                              BankableVPotMatcher<BankSize>>,
+      public Interfaces::MCU::IVPot {
   public:
-    GenericVPotRing(BankConfig<NumBanks> config, uint8_t track,
-                    const MIDIChannelCN &channelCN, const Callback &callback)
-        : VPotRing_Base<NumBanks, Callback>{track, channelCN, callback},
-          BankableMIDIInput<NumBanks>{config} {}
+    using Matcher = BankableVPotMatcher<BankSize>;
+    using Parent 
+        = BankableMatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
+                                           Matcher>;
+    /**
+     * @brief   Constructor.
+     * 
+     * @param   config
+     *          The bank configuration to use: the bank to add this element to,
+     *          and whether to change the address, channel or cable number.
+     * @param   track
+     *          The track of the VPot [1, 8].
+     * @param   channelCN
+     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable Number 
+     *          [CABLE_1, CABLE_16].
+     */
+    VPotRing(BankConfig<BankSize> config, uint8_t track,
+             MIDIChannelCable channelCN = CHANNEL_1)
+        : Parent({config, track, channelCN}) {}
+
+  protected:
+    bool handleUpdateImpl(typename Matcher::Result match) {
+        return states[match.bankIndex].update(match.value) &&
+               match.bankIndex == this->getActiveBank();
+        // Only mark dirty if the value of the active bank changed
+    }
+    
+    void handleUpdate(typename Matcher::Result match) override {
+        dirty |= handleUpdateImpl(match);
+    }
+
+  public:
+    /// @name Data access
+    /// @{
+
+    /// Get the full state of the VPot ring. (For the given bank.)
+    VPotState getState(uint8_t bank) const { return states[bank]; }
+
+    /// @copydoc    VPotState::getPosition
+    /// (For the given bank.)
+    uint8_t getPosition(uint8_t bank) const {
+        return getState(bank).getPosition();
+    }
+    /// @copydoc    VPotState::getCenterLed
+    /// (For the given bank.)
+    bool getCenterLed(uint8_t bank) const {
+        return getState(bank).getCenterLed();
+    }
+    /// @copydoc    VPotState::getMode
+    /// (For the given bank.)
+    VPotState::Mode getMode(uint8_t bank) const {
+        return getState(bank).getMode();
+    }
+
+    /// @copydoc    VPotState::getStartOn
+    /// (For the given bank.)
+    uint8_t getStartOn(uint8_t bank) const {
+        return getState(bank).getStartOn();
+    }
+    /// @copydoc    VPotState::getStartOff
+    /// (For the given bank.)
+    uint8_t getStartOff(uint8_t bank) const {
+        return getState(bank).getStartOff();
+    }
+
+    /// Get the full state of the VPot ring. (For the active bank.)
+    VPotState getState() const { return getState(this->getActiveBank()); }
+
+    /// @copydoc    VPotState::getPosition
+    /// (For the active bank.)
+    uint8_t getPosition() const { return getPosition(this->getActiveBank()); }
+    /// @copydoc    VPotState::getCenterLed
+    /// (For the active bank.)
+    bool getCenterLed() const override {
+        return getCenterLed(this->getActiveBank());
+    }
+    /// @copydoc    VPotState::getMode
+    /// (For the active bank.)
+    VPotState::Mode getMode() const { return getMode(this->getActiveBank()); }
+
+    /// @copydoc    VPotState::getStartOn
+    /// (For the active bank.)
+    uint8_t getStartOn() const override {
+        return getStartOn(this->getActiveBank());
+    }
+    /// @copydoc    VPotState::getStartOff
+    /// (For the active bank.)
+    uint8_t getStartOff() const override {
+        return getStartOff(this->getActiveBank());
+    }
+
+    /// @}
+
+    /// Reset all states to zero.
+    void reset() override {
+        if (!ignoreReset) {
+            states = {{}};
+            dirty = true;
+        }
+    }
+
+  protected:
+    void onBankSettingChange() override { dirty = true; }
 
   private:
-    setting_t getSelection() const override {
-        return BankableMIDIInput<NumBanks>::getSelection();
-    };
+    AH::Array<VPotState, BankSize> states = {{}};
 
-    uint8_t getBankIndex(const MIDIAddress &target) const override {
-        return BankableMIDIInput<NumBanks>::getBankIndex(target, this->address);
-    }
-
-    /// Check if the address of the incoming MIDI message is in one of the banks
-    /// of this element.
-    bool match(const MIDIAddress &target) const override {
-        return BankableMIDIInput<NumBanks>::matchBankable(target,
-                                                          this->address);
-    }
-
-    void onBankSettingChange() override { this->callback.update(*this); }
-};
-
-/** 
- * @brief   A class for MIDI input elements that represent Mackie Control
- *          Universal V-Pots.  
- *          This version can be banked.
- * 
- * @tparam  NumBanks 
- *          The number of banks.
- */
-template <uint8_t NumBanks>
-class VPotRing : public GenericVPotRing<NumBanks> {
   public:
-    VPotRing(BankConfig<NumBanks> config, uint8_t track,
-             MIDIChannelCN channelCN = CHANNEL_1)
-        : GenericVPotRing<NumBanks>{config, track, channelCN, {}} {}
+    /// Don't reset the state when calling the `reset` method. This is the
+    /// default, because in the original MCU, VPots don't get reset when a
+    /// Reset All Controllers message is received.
+    bool ignoreReset = true;
 };
 
 } // namespace Bankable

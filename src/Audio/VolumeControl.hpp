@@ -20,7 +20,7 @@ BEGIN_CS_NAMESPACE
  * @ingroup Audio
  */
 template <uint8_t N>
-class VolumeControl : public AH::Updatable<Potentiometer> {
+class VolumeControl : public AH::Updatable<> {
   public:
     /**
      * @brief   Create a new VolumeControl object.

@@ -2,7 +2,7 @@
  * This example demonstrates the use of LEDs that respond to incoming  MIDI
  * note events.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -32,12 +32,10 @@
 // Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
-using namespace MIDI_Notes;
-
 // Instantiate the LED that will light up when middle C is playing
-NoteValueLED led = {
-  LED_BUILTIN,             // Pin of built-in LED
-  {note(C, 4), CHANNEL_1}, // Note C4 on MIDI channel 1
+NoteLED led {
+  LED_BUILTIN,                 // Pin of built-in LED
+  {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
 };
 
 void setup() {

@@ -1,20 +1,23 @@
 #pragma once
 
+#include <AH/STL/utility> // std::forward
 #include <Display/DisplayElement.hpp>
-#include <MIDI_Inputs/MCU/VU.hpp>
+#include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
+#include <Settings/SettingsWrapper.hpp>
 
 BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
+template <class VU_t = Interfaces::MCU::IVU &>
 class VUDisplay : public DisplayElement {
   public:
-    VUDisplay(DisplayInterface &display, IVU &vu, PixelLocation loc,
+    VUDisplay(DisplayInterface &display, VU_t &&vu, PixelLocation loc,
               uint16_t width, uint8_t blockheight, uint8_t spacing,
               uint16_t color)
-        : DisplayElement(display), vu(vu), x(loc.x), y(loc.y - blockheight + 1),
-          width(width), blockheight(blockheight), spacing(spacing),
-          color(color),
+        : DisplayElement(display), vu(std::forward<VU_t>(vu)), x(loc.x),
+          y(loc.y - blockheight + 1), width(width), blockheight(blockheight),
+          spacing(spacing), color(color),
           decayTime(VU_PEAK_SMOOTH_DECAY
                         ? VU_PEAK_DECAY_TIME / (blockheight + spacing)
                         : VU_PEAK_DECAY_TIME) {}
@@ -26,6 +29,11 @@ class VUDisplay : public DisplayElement {
             drawPeak(peak);
             drawBlocks(value);
         }
+        vu.clearDirty();
+    }
+
+    bool getDirty() const override {
+        return vu.getDirty() || shouldStartDecaying() || shouldUpdateDecay();
     }
 
   protected:
@@ -52,19 +60,26 @@ class VUDisplay : public DisplayElement {
             peak = newPeak;
             previousDecay = millis();
             decaying = false;
-        } else if (!decaying &&
-                   (millis() - previousDecay > VU_PEAK_HOLD_TIME)) {
+        } else if (shouldStartDecaying()) {
             decaying = true;
             previousDecay += VU_PEAK_HOLD_TIME - decayTime;
-        } else if (decaying && (millis() - previousDecay > decayTime)) {
-            if (peak > 0) {
-                peak -= VU_PEAK_SMOOTH_DECAY ? 1 : (blockheight + spacing);
-                previousDecay += decayTime;
-            }
+        } else if (shouldUpdateDecay()) {
+            peak -= VU_PEAK_SMOOTH_DECAY ? 1 : (blockheight + spacing);
+            previousDecay += decayTime;
         }
     }
 
-    IVU &vu;
+    bool shouldStartDecaying() const {
+        return !decaying && peak > 0 &&
+               (millis() - previousDecay > VU_PEAK_HOLD_TIME);
+    }
+
+    bool shouldUpdateDecay() const {
+        return decaying && peak > 0 && //
+               (millis() - previousDecay > decayTime);
+    }
+
+    VU_t vu;
 
     int16_t x;
     int16_t y;
@@ -90,9 +105,10 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
+template <class VU_t = Interfaces::MCU::IVU>
 class AnalogVUDisplay : public DisplayElement {
   public:
-    AnalogVUDisplay(DisplayInterface &display, IVU &vu, PixelLocation loc,
+    AnalogVUDisplay(DisplayInterface &display, VU_t &vu, PixelLocation loc,
                     uint16_t radius, float theta_min, float theta_diff,
                     uint16_t color)
         : DisplayElement(display), vu(vu), x(loc.x), y(loc.y),
@@ -102,6 +118,7 @@ class AnalogVUDisplay : public DisplayElement {
     void draw() override {
         float value = vu.getFloatValue();
         drawNeedle(theta_min + value * theta_diff);
+        vu.clearDirty();
     }
 
     void drawNeedle(float angle) {
@@ -113,8 +130,10 @@ class AnalogVUDisplay : public DisplayElement {
         }
     }
 
+    bool getDirty() const override { return vu.getDirty(); }
+
   private:
-    IVU &vu;
+    VU_t &vu;
 
     int16_t x;
     int16_t y;

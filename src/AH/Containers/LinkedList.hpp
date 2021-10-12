@@ -286,7 +286,7 @@ class DoublyLinkedList {
                         node->previous != nullptr);
     }
 
-    /// @copydoc couldContain(const Node *) const
+    /// @copydoc DoublyLinkedList::couldContain(const Node *) const
     bool couldContain(const Node &node) const { return couldContain(&node); }
 
     iterator begin() { return {first}; }
@@ -324,6 +324,22 @@ class DoublyLinkable {
     Node *next = nullptr;
     Node *previous = nullptr;
     virtual ~DoublyLinkable() = default;
+
+    DoublyLinkable() = default;
+    DoublyLinkable(const DoublyLinkable &) {
+        // Don't copy the pointers
+    }
+    DoublyLinkable &operator=(const DoublyLinkable &) {
+        // Don't copy the pointers
+        return *this;
+    }
+    DoublyLinkable(DoublyLinkable &&) {
+        // Don't swap the pointers
+    }
+    DoublyLinkable &operator=(DoublyLinkable &&) {
+        // Don't swap the pointers
+        return *this;
+    }
 };
 
 /// @}

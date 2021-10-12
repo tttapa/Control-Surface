@@ -20,9 +20,8 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
      * @todo    Documentation
      */
     MIDIIncrementDecrementButtons(const AH::IncrementDecrementButtons &buttons,
-                                  const MIDIAddress &address,
-                                  uint8_t multiplier,
-                                  const MIDIAddress &resetAddress,
+                                  MIDIAddress address, uint8_t multiplier,
+                                  MIDIAddress resetAddress,
                                   const RelativeSender &relativeSender,
                                   const ResetSender &resetSender)
         : buttons(buttons), address(address), multiplier(multiplier),
@@ -51,7 +50,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         }
     }
 
-    void send(long delta, const MIDIAddress &address) {
+    void send(long delta, MIDIAddress address) {
         relativeSender.send(delta, address);
     }
 
@@ -62,9 +61,8 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         }
     }
 
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT
+    /// @see @ref AH::Button::invert()
     void invert() { buttons.invert(); }
-#endif
 
     AH::IncrementDecrementButtons::State getButtonsState() const {
         return buttons.getState();

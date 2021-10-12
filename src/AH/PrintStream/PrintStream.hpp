@@ -47,6 +47,7 @@ Print &operator<<(Print &printer, unsigned int i);
 Print &operator<<(Print &printer, int8_t i);
 Print &operator<<(Print &printer, long i);
 Print &operator<<(Print &printer, unsigned long i);
+Print &operator<<(Print &printer, float f);
 Print &operator<<(Print &printer, double d);
 Print &operator<<(Print &printer, const Printable &p);
 Print &operator<<(Print &printer, bool b);

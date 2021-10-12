@@ -12,14 +12,14 @@ BEGIN_AH_NAMESPACE
 /**
  * @brief   A class that reads the states of a button matrix.
  *
- * @tparam  nb_rows
+ * @tparam  NumRows
  *          The number of rows in the button matrix.
- * @tparam  nb_cols
+ * @tparam  NumCols
  *          The number of columns in the button matrix.
  * 
  * @ingroup AH_HardwareUtils
  */
-template <uint8_t nb_rows, uint8_t nb_cols>
+template <class Derived, uint8_t NumRows, uint8_t NumCols>
 class ButtonMatrix {
   public:
     /**
@@ -35,12 +35,8 @@ class ButtonMatrix {
      *          These pins will be used as inputs (Hi-Z), and the internal 
      *          pull-up resistor will be enabled.
      */
-    ButtonMatrix(const PinList<nb_rows> &rowPins,
-                 const PinList<nb_cols> &colPins);
-    /**
-     * @brief   Destructor.
-     */
-    virtual ~ButtonMatrix() = default;
+    ButtonMatrix(const PinList<NumRows> &rowPins,
+                 const PinList<NumCols> &colPins);
 
     /**
      * @brief   Initialize (enable internal pull-up resistors on column pins).
@@ -60,10 +56,18 @@ class ButtonMatrix {
      */
     bool getPrevState(uint8_t col, uint8_t row);
 
-  private:
+    /// Configure the debounce time interval. Only one button can change in each
+    /// debounce interval. Time in milliseconds.
+    void setDebounceTime(unsigned long debounceTime) {
+        this->debounceTime = debounceTime;
+    }
+    /// Get the debounce time.
+    unsigned long getDebounceTime() const { return debounceTime; }
+
+  protected:
     /**
      * @brief   The callback function that is called whenever a button changes
-     *          state.
+     *          state. Implement this in the derived class.
      * 
      * @param   row
      *          The row of the button that changed state.
@@ -72,18 +76,20 @@ class ButtonMatrix {
      * @param   state
      *          The new state of the button.
      */
-    virtual void onButtonChanged(uint8_t row, uint8_t col, bool state) = 0;
+    void onButtonChanged(uint8_t row, uint8_t col, bool state) = delete;
 
+  private:
     static inline uint8_t positionToBits(uint8_t col, uint8_t row);
     static inline uint8_t bitsToIndex(uint8_t bits);
     static inline uint8_t bitsToBitmask(uint8_t bits);
     void setPrevState(uint8_t col, uint8_t row, bool state);
 
+    unsigned long debounceTime = BUTTON_DEBOUNCE_TIME;
     unsigned long prevRefresh = 0;
-    uint8_t prevStates[(nb_cols * nb_rows + 7) / 8];
+    uint8_t prevStates[(NumCols * NumRows + 7) / 8];
 
-    const PinList<nb_rows> rowPins;
-    const PinList<nb_cols> colPins;
+    const PinList<NumRows> rowPins;
+    const PinList<NumCols> colPins;
 };
 
 END_AH_NAMESPACE

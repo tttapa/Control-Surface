@@ -17,12 +17,12 @@
 
 // -------------------------------- Display --------------------------------- //
 #include <AH/Hardware/LEDs/MAX7219SevenSegmentDisplay.hpp>
+#include <Display/BitmapDisplay.hpp>
 #include <Display/Bitmaps/XBitmaps.hpp>
 #include <Display/MCU/LCDDisplay.hpp>
 #include <Display/MCU/TimeDisplayDisplay.hpp>
 #include <Display/MCU/VPotDisplay.hpp>
 #include <Display/MCU/VUDisplay.hpp>
-#include <Display/NoteBitmapDisplay.hpp>
 #include <Display/SelectorDisplay.hpp>
 
 // ------------------------------ MIDI Outputs ------------------------------ //
@@ -46,6 +46,12 @@
 
 #include <MIDI_Outputs/PBPotentiometer.hpp>
 #include <MIDI_Outputs/PCButton.hpp>
+
+#include <MIDI_Outputs/CCAbsoluteEncoder.hpp>
+#include <MIDI_Outputs/CCRotaryEncoder.hpp>
+#include <MIDI_Outputs/PBAbsoluteEncoder.hpp>
+
+#include <MIDI_Outputs/ProgramChanger.hpp>
 
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatched.hpp>
@@ -76,46 +82,48 @@
 #include <MIDI_Outputs/ManyAddresses/PBPotentiometer.hpp>
 #include <MIDI_Outputs/ManyAddresses/PCButton.hpp>
 
-#ifdef Encoder_h_
+#include <MIDI_Outputs/Bankable/CCAbsoluteEncoder.hpp>
 #include <MIDI_Outputs/Bankable/CCRotaryEncoder.hpp>
-#include <MIDI_Outputs/CCAbsoluteEncoder.hpp>
-#include <MIDI_Outputs/CCRotaryEncoder.hpp>
+#include <MIDI_Outputs/Bankable/PBAbsoluteEncoder.hpp>
+#include <MIDI_Outputs/ManyAddresses/CCAbsoluteEncoder.hpp>
 #include <MIDI_Outputs/ManyAddresses/CCRotaryEncoder.hpp>
-#include <MIDI_Outputs/PBAbsoluteEncoder.hpp>
-#endif
+#include <MIDI_Outputs/ManyAddresses/PBAbsoluteEncoder.hpp>
+
+#include <MIDI_Outputs/Bankable/ProgramChanger.hpp>
 
 // ------------------------------ MIDI Inputs ------------------------------- //
-// #include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
-// #include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
+#include <MIDI_Inputs/MCU/AssignmentDisplay.hpp>
 #include <MIDI_Inputs/MCU/LCD.hpp>
+#include <MIDI_Inputs/MCU/SevenSegmentDisplay.hpp>
+#include <MIDI_Inputs/MCU/TimeDisplay.hpp>
 #include <MIDI_Inputs/MCU/VPotRing.hpp>
 #include <MIDI_Inputs/MCU/VU.hpp>
-#include <MIDI_Inputs/NoteCCRange.hpp>
+#include <MIDI_Inputs/NoteCCKPRange.hpp>
+#include <MIDI_Inputs/NoteCCKPValue.hpp>
+#include <MIDI_Inputs/PBValue.hpp>
 
 #include <MIDI_Inputs/LEDs/MCU/VPotRingLEDs.hpp>
 #include <MIDI_Inputs/LEDs/MCU/VULEDs.hpp>
-#include <MIDI_Inputs/LEDs/NoteCCRangeLEDBar.hpp>
-#include <MIDI_Inputs/LEDs/NoteCCRangeLEDs.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCKPLED.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCKPLEDBar.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCKPLEDPWM.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCKPRangeLEDs.hpp>
 
 #ifdef FASTLED_VERSION
-#include <MIDI_Inputs/LEDs/FastLED.hpp>
+#include <MIDI_Inputs/LEDs/NoteCCKPRangeFastLED.hpp>
 #endif
 
 // ------------------------------- Selectors -------------------------------- //
+#include <Selectors/EncoderSelector.hpp>
 #include <Selectors/IncrementDecrementSelector.hpp>
 #include <Selectors/IncrementSelector.hpp>
 #include <Selectors/ManyButtonsSelector.hpp>
 #include <Selectors/ProgramChangeSelector.hpp>
 #include <Selectors/SwitchSelector.hpp>
 
-#ifdef Encoder_h_
-#include <Selectors/EncoderSelector.hpp>
-#endif
-
 #include <Selectors/LEDs/SelectorLEDs.hpp>
 
-#include <Selectors/ProgramChanger.hpp>
-#include <Selectors/Transposer.hpp>
+#include <Banks/Transposer.hpp>
 
 // ---------------------------- MIDI Interfaces ----------------------------- //
 #include <MIDI_Interfaces/DebugMIDI_Interface.hpp>
@@ -124,6 +132,7 @@
 #ifdef ESP32
 #include <MIDI_Interfaces/BluetoothMIDI_Interface.hpp>
 #endif
+#include <MIDI_Interfaces/MIDI_Callbacks.hpp>
 
 // ------------------------- Extended Input Output -------------------------- //
 #include <AH/Hardware/ExtendedInputOutput/AnalogMultiplex.hpp>
@@ -159,4 +168,4 @@ END_CS_NAMESPACE
 USING_CS_NAMESPACE;
 #endif
 
-#define CONTROL_SURFACE_VERSION 10200
+#define CONTROL_SURFACE_VERSION 20000

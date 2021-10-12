@@ -29,8 +29,7 @@ class MIDIButtons : public MIDIOutputElement {
      */
     MIDIButtons(BankAddress bankAddress,
                 const Array<AH::Button, NumButtons> &buttons,
-                const RelativeMIDIAddress &incrementAddress,
-                const Sender &sender)
+                RelativeMIDIAddress incrementAddress, const Sender &sender)
         : address(bankAddress), buttons(buttons),
           incrementAddress(incrementAddress), sender(sender) {}
 
@@ -60,18 +59,17 @@ class MIDIButtons : public MIDIOutputElement {
         }
     }
 
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT
+    /// @see @ref AH::Button::invert()
     void invert() {
         for (auto &button : buttons)
             button.invert();
     }
-#endif
 
     AH::Button::State getButtonState(size_t index) const {
         return buttons[index].getState();
     }
 
-  private:
+  protected:
     BankAddress address;
     Array<AH::Button, NumButtons> buttons;
     RelativeMIDIAddress incrementAddress;

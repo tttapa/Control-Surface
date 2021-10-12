@@ -11,6 +11,7 @@
 
 Arduino_Helpers	KEYWORD1
 AH	KEYWORD1
+decltype	LITERAL1
 
 # AH/Hardware
 #############
@@ -90,6 +91,7 @@ CD74HC4051	KEYWORD1
 ExtIO	KEYWORD1
 ExtendedIOElement	KEYWORD1
 MAX7219	KEYWORD1
+MCP23017	KEYWORD1
 ShiftRegisterOut	KEYWORD1
 ShiftRegisterOutRGB	KEYWORD1
 SPIShiftRegisterOut	KEYWORD1
@@ -137,6 +139,8 @@ SerialMIDI_Interface	KEYWORD1
 HardwareSerialMIDI_Interface	KEYWORD1
 USBSerialMIDI_Interface	KEYWORD1
 USBMIDI_Interface	KEYWORD1
+USBHostMIDI_Interface	KEYWORD1
+USBHostMIDI_Interface_BigBuffer	KEYWORD1
 StreamDebugMIDI_Interface	KEYWORD1
 SerialDebugMIDI_Interface	KEYWORD1
 HardwareSerialDebugMIDI_Interface	KEYWORD1
@@ -182,15 +186,19 @@ CCValue	KEYWORD1
 NoteRange	KEYWORD1
 CCRange	KEYWORD1
 
-NoteValueLED	KEYWORD1
-CCValueLED	KEYWORD1
+NoteLED	KEYWORD1
+CCLED	KEYWORD1
+KPLED	KEYWORD1
 NoteRangeLEDs	KEYWORD1
 CCRangeLEDs	KEYWORD1
+KPRangeLEDs	KEYWORD1
 
-NoteValueLEDPWM	KEYWORD1
-CCValueLEDPWM	KEYWORD1
+NoteLEDPWM	KEYWORD1
+CCLEDPWM	KEYWORD1
+KPLEDPWM	KEYWORD1
 NoteRangeLEDsPWM	KEYWORD1
 CCRangeLEDsPWM	KEYWORD1
+KPRangeLEDsPWM	KEYWORD1
 
 MAX7219SevenSegmentDisplay	KEYWORD1
 
@@ -239,6 +247,7 @@ buttonType	KEYWORD1
 #####################
 
 MCU	KEYWORD1
+MIDI_Notes	KEYWORD1
 MIDI_CC	KEYWORD1
 MIDI_PC	KEYWORD1
 
@@ -253,7 +262,6 @@ setCallbacks	KEYWORD2
 getParser	KEYWORD2
 getSysExMessage	KEYWORD2
 getChannelMessage	KEYWORD2
-getCN	KEYWORD2
 
 onChannelMessage	KEYWORD2
 onSysExMessage	KEYWORD2
@@ -263,12 +271,19 @@ map	KEYWORD2
 invert	KEYWORD2
 
 send	KEYWORD2
+forcedUpdate	KEYWORD2
+getValue	KEYWORD2
+setValue	KEYWORD2
+setSpeedMultiply	KEYWORD2
+getSpeedMultiply	KEYWORD2
 
 add	KEYWORD2
 select	KEYWORD2
 getSelection	KEYWORD2
 getTracksPerBank	KEYWORD2
 getTransposition	KEYWORD2
+getTranspositionSemitones	KEYWORD2
+setTransposition	KEYWORD2
 
 getMCUNameFromNoteNumber	KEYWORD2
 
@@ -317,6 +332,8 @@ redBit	KEYWORD2
 greenBit	KEYWORD2
 blueBit	KEYWORD2
 pins	KEYWORD2
+pinA	KEYWORD2
+pinB	KEYWORD2
 
 # AH/Hardware/LEDs
 ##################
@@ -361,7 +378,6 @@ const_iterator	KEYWORD1
 reverse_iterator	KEYWORD1
 const_reverse_iterator	KEYWORD1
 DoublyLinkable	KEYWORD1
-UniquePtr	KEYWORD1
 NormalUpdatable	KEYWORD1
 Updatable	KEYWORD1
 
@@ -389,10 +405,6 @@ insertSorted	KEYWORD2
 remove	KEYWORD2
 moveDown	KEYWORD2
 couldContain	KEYWORD2
-reset	KEYWORD2
-get	KEYWORD2
-release	KEYWORD2
-MakeUnique	KEYWORD2
 update	KEYWORD2
 begin	KEYWORD2
 enable	KEYWORD2
@@ -827,14 +839,12 @@ Helicopter	LITERAL1
 Applause	LITERAL1
 Gunshot	LITERAL1
 
-note	KEYWORD2
-
 C	LITERAL1
 Db	LITERAL1
 D	LITERAL1
 Eb	LITERAL1
 E	LITERAL1
-F	LITERAL1
+F_	LITERAL1
 Gb	LITERAL1
 G	LITERAL1
 Ab	LITERAL1
@@ -858,30 +868,62 @@ USBDebugMIDI_Interface	KEYWORD1
 SoftwareSerialDebugMIDI_Interface	KEYWORD1
 HairlessMIDI_Interface	KEYWORD1
 MIDI_Callbacks	KEYWORD1
+FineGrainedMIDI_Callbacks	KEYWORD1
 SysExMessage	KEYWORD1
 FortySevenEffectsMIDI_Interface	KEYWORD1
 
 begin	KEYWORD2
 update	KEYWORD2
 send	KEYWORD2
-sendOnCable	KEYWORD2
+sendChannelMessage	KEYWORD2
 sendNoteOn	KEYWORD2
 sendNoteOff	KEYWORD2
-sendKP	KEYWORD2
-sendCC	KEYWORD2
-sendPC	KEYWORD2
-sendCP	KEYWORD2
-sendPB	KEYWORD2
+sendKeyPressure	KEYWORD2
+sendControlChange	KEYWORD2
+sendProgramChange	KEYWORD2
+sendChannelPressure	KEYWORD2
+sendPitchBend	KEYWORD2
+sendSysCommon	KEYWORD2
+sendMTCQuarterFrame	KEYWORD2
+sendSongPositionPointer	KEYWORD2
+sendSongSelect	KEYWORD2
+sendTuneRequest	KEYWORD2
+sendSysEx	KEYWORD2
+sendRealTime	KEYWORD2
+sendTimingClock	KEYWORD2
+sendStart	KEYWORD2
+sendContinue	KEYWORD2
+sendStop	KEYWORD2
+sendActiveSensing	KEYWORD2
+sendSystemReset	KEYWORD2
+sendNow	KEYWORD2
 getDefault	KEYWORD2
 setAsDefault	KEYWORD2
 setCallbacks	KEYWORD2
 getParser	KEYWORD2
 getChannelMessage	KEYWORD2
 getSysExMessage	KEYWORD2
-getCN	KEYWORD2
 onChannelMessage	KEYWORD2
 onSysExMessage	KEYWORD2
 onRealTimeMessage	KEYWORD2
+onNoteOff	KEYWORD2
+onNoteOn	KEYWORD2
+onKeyPressure	KEYWORD2
+onControlChange	KEYWORD2
+onProgramChange	KEYWORD2
+onChannelPressure	KEYWORD2
+onPitchBend	KEYWORD2
+onSystemExclusive	KEYWORD2
+onTimeCodeQuarterFrame	KEYWORD2
+onSongPosition	KEYWORD2
+onSongSelect	KEYWORD2
+onTuneRequest	KEYWORD2
+onClock	KEYWORD2
+onStart	KEYWORD2
+onContinue	KEYWORD2
+onStop	KEYWORD2
+onActiveSensing	KEYWORD2
+onSystemReset	KEYWORD2
 
-MIDIChannelCN	KEYWORD1
+MIDIChannelCable	KEYWORD1
 MIDIAddress	KEYWORD1

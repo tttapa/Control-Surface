@@ -103,14 +103,14 @@ strings = [
     ('SCRUB', 0x65),  # In Out
     ('USER_SWITCH_A', 0x66),  #    Out
     ('USER_SWITCH_B', 0x67),  #    Out
-    ('FADER_TOUCH', 0x68),  #    Out
-    ('0x69', 0x69),  #
-    ('0x6A', 0x6A),  #
-    ('0x6B', 0x6B),  #
-    ('0x6C', 0x6C),  #
-    ('0x6D', 0x6D),  #
-    ('0x6E', 0x6E),  #
-    ('0x6F', 0x6F),  #
+    ('FADER_TOUCH_1', 0x68),  #    Out
+    ('FADER_TOUCH_2', 0x69),  #    Out
+    ('FADER_TOUCH_3', 0x6A),  #    Out
+    ('FADER_TOUCH_4', 0x6B),  #    Out
+    ('FADER_TOUCH_5', 0x6C),  #    Out
+    ('FADER_TOUCH_6', 0x6D),  #    Out
+    ('FADER_TOUCH_7', 0x6E),  #    Out
+    ('FADER_TOUCH_8', 0x6F),  #    Out
     ('FADER_TOUCH_MASTER', 0x70),  #    Out
     ('SMPTE', 0x71),  # In
     ('BEATS', 0x72),  # In
@@ -140,7 +140,7 @@ warning = """
 hpp = warning + """
 #pragma once
 
-#include <AH/Arduino-Wrapper.h>  // __FlashStringHelper
+#include <AH/Arduino-Wrapper.h>  // FlashString_t
 #include <Settings/NamespaceSettings.hpp>
 
 """
@@ -171,10 +171,10 @@ cpp += '\n'
 hpp += """\
 BEGIN_CS_NAMESPACE
 
-/// @addtogroup    MIDIConstants
-/// @{{
-
 namespace MCU {{
+
+/// @addtogroup    MCU_Notes
+/// @{{
 
 /**
  * @brief   Convert a note number to the name of the corresponding Mackie 
@@ -185,9 +185,9 @@ namespace MCU {{
  */
 FlashString_t {functionname}(uint8_t note);
 
-}} // namespace MCU 
-
 /// @}}
+
+}} // namespace MCU 
 
 END_CS_NAMESPACE
 """.format(functionname=functionname)

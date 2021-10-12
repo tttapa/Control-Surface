@@ -1,5 +1,5 @@
 #include <AH/Containers/BitArray.hpp>
-#include <gtest-wrapper.h>
+#include <gtest/gtest.h>
 
 USING_AH_NAMESPACE;
 

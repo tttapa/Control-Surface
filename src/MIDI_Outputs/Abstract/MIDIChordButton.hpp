@@ -1,7 +1,7 @@
 #pragma once
 
-#include <AH/Containers/UniquePtr.hpp>
 #include <AH/Hardware/Button.hpp>
+#include <AH/STL/memory> // std::unique_ptr
 #include <Def/Def.hpp>
 #include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
@@ -38,10 +38,11 @@ class MIDIChordButton : public MIDIOutputElement {
      *          The number of notes in the chord.
      */
     template <uint8_t N>
-    MIDIChordButton(pin_t pin, const MIDIAddress &address,
-                    const Chord<N> &chord, const Sender &sender)
+    MIDIChordButton(pin_t pin, MIDIAddress address, Chord<N> chord,
+                    const Sender &sender)
         : button(pin), address(address),
-          newChord(AH::MakeUnique<Chord<N>>(chord)), sender(sender) {}
+          newChord(AH::make_unique<Chord<N>>(std::move(chord))),
+          sender(sender) {}
     // TODO: can I somehow get rid of the dynamic memory allocation here?
 
     void begin() final override { button.begin(); }
@@ -61,22 +62,21 @@ class MIDIChordButton : public MIDIOutputElement {
         }
     }
 
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT
+    /// @see @ref AH::Button::invert()
     void invert() { button.invert(); }
-#endif
 
     AH::Button::State getButtonState() const { return button.getState(); }
 
     template <uint8_t N>
-    void setChord(const Chord<N> &chord) {
-        newChord = new Chord<N>(chord);
+    void setChord(Chord<N> chord) {
+        newChord = AH::make_unique<Chord<N>>(std::move(chord));
     }
 
   private:
     AH::Button button;
     const MIDIAddress address;
-    AH::UniquePtr<const IChord> chord;
-    AH::UniquePtr<const IChord> newChord;
+    std::unique_ptr<const IChord> chord;
+    std::unique_ptr<const IChord> newChord;
 
   public:
     Sender sender;

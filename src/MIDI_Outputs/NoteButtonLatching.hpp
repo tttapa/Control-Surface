@@ -32,8 +32,7 @@ class NoteButtonLatching : public MIDIButtonLatching<DigitalNoteSender> {
      * @param   velocity
      *          The velocity of the MIDI Note events.
      */
-    NoteButtonLatching(pin_t pin, const MIDIAddress &address,
-                       uint8_t velocity = 0x7F)
+    NoteButtonLatching(pin_t pin, MIDIAddress address, uint8_t velocity = 0x7F)
         : MIDIButtonLatching{
               pin,
               address,

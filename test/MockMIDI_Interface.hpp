@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MIDI_Interfaces/MIDI_Interface.hpp>
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 class EmptyParser : public CS::MIDI_Parser {
   public:
@@ -9,19 +9,19 @@ class EmptyParser : public CS::MIDI_Parser {
         static EmptyParser instance;
         return instance;
     }
-    CS::SysExMessage getSysExMessage() const override {
-        return {nullptr, 0, 0};
-    }
+    CS::SysExMessage getSysExMessage() const { return {nullptr, 0}; }
 };
 
-class MockMIDI_Interface : public CS::Parsing_MIDI_Interface {
+class MockMIDI_Interface : public CS::MIDI_Interface {
+    using Cable = CS::Cable;
+
   public:
-    MockMIDI_Interface()
-        : CS::Parsing_MIDI_Interface(EmptyParser::getInstance()) {}
-    MOCK_METHOD(CS::MIDIReadEvent, read, (), (override));
-    MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t, uint8_t, uint8_t),
-                (override));
-    MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t, uint8_t), (override));
-    MOCK_METHOD(void, sendImpl, (const uint8_t *, size_t, uint8_t), (override));
-    MOCK_METHOD(void, sendImpl, (uint8_t, uint8_t), (override));
+    MOCK_METHOD(CS::MIDIReadEvent, read, ());
+    MOCK_METHOD(void, sendChannelMessageImpl, (CS::ChannelMessage), (override));
+    MOCK_METHOD(void, sendSysCommonImpl, (CS::SysCommonMessage), (override));
+    MOCK_METHOD(void, sendSysExImpl, (CS::SysExMessage), (override));
+    MOCK_METHOD(void, sendRealTimeImpl, (CS::RealTimeMessage), (override));
+    MOCK_METHOD(void, handleStall, (), (override));
+    void update() override {}
+    void sendNowImpl() override {}
 };

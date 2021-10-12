@@ -1,7 +1,7 @@
 /** 
  * This is an example on how to send MIDI messages.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * For a full list of available MIDI send functions, see @ref MIDI_Sender.
  * 
@@ -33,9 +33,8 @@ void setup() {
   midi.begin(); // Initialize the MIDI interface
 }
 
-using namespace MIDI_Notes;
 // MIDI note number, channel, and velocity to use
-const MIDIAddress address = {note(C, 4), CHANNEL_1};
+const MIDIAddress address {MIDI_Notes::C(4), CHANNEL_1};
 const uint8_t velocity = 0x7F;
 
 void loop() {

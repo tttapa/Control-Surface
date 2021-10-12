@@ -35,7 +35,7 @@ class NoteButtons
      *          The bank configuration to use: the bank to add this element to,
      *          and whether to change the address, channel or cable number.
      * @param   buttons
-     *          An list of digital input pins with the buttons connected.  
+     *          A list of digital input pins with the buttons connected.  
      *          The internal pull-up resistors will be enabled.
      * @param   baseAddress
      *          The MIDI address of the first button, containing the note

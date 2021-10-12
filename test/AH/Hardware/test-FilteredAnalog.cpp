@@ -1,4 +1,4 @@
-#include <gmock-wrapper.h>
+#include <gmock/gmock.h>
 
 #include <AH/Hardware/FilteredAnalog.hpp>
 
@@ -57,6 +57,36 @@ TEST(FilteredAnalog, Hysteresis) {
     EXPECT_EQ(analog.getValue(), 511);
     EXPECT_FLOAT_EQ(analog.getFloatValue(), 511. / 511);
 
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
+TEST(FilteredAnalog, resetToCurrentValue) {
+    pin_t pin = A0;
+    FilteredAnalog<9, 2> analog = pin;
+
+    EXPECT_CALL(ArduinoMock::getInstance(), analogReadResolution(10));
+    FilteredAnalog<>::setupADC();
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    EXPECT_CALL(ArduinoMock::getInstance(), analogRead(pin))
+        .WillOnce(Return(2 * 193));
+    analog.resetToCurrentValue();
+    EXPECT_EQ(analog.getValue(), 193);
+    
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+}
+
+TEST(FilteredAnalog, reset) {
+    pin_t pin = A0;
+    FilteredAnalog<9, 2> analog = pin;
+
+    EXPECT_CALL(ArduinoMock::getInstance(), analogReadResolution(10));
+    FilteredAnalog<>::setupADC();
+    ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
+
+    analog.reset(503);
+    EXPECT_EQ(analog.getValue(), 503);
+    
     ::testing::Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 

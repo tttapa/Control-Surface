@@ -38,14 +38,10 @@ class NoteChordButton : public MIDIChordButton<DigitalNoteSender> {
      *          The number of notes in the chord.
      */
     template <uint8_t N>
-    NoteChordButton(pin_t pin, const MIDIAddress &address,
-                    const Chord<N> &chord, uint8_t velocity = 0x7F)
-        : MIDIChordButton<DigitalNoteSender>{
-              pin,
-              address,
-              chord,
-              {velocity},
-          } {}
+    NoteChordButton(pin_t pin, MIDIAddress address, Chord<N> chord,
+                    uint8_t velocity = 0x7F)
+        : MIDIChordButton<DigitalNoteSender>(pin, address, std::move(chord),
+                                             {velocity}) {}
 
     /// Set the velocity of the MIDI Note events.
     void setVelocity(uint8_t velocity) { this->sender.setVelocity(velocity); }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <AH/Containers/BitArray.hpp>
-#include <AH/Hardware/Button.hpp>
+#include <AH/Hardware/FilteredAnalog.hpp>
 #include <AH/STL/algorithm> // std::fill
 #include <Banks/BankableAddresses.hpp>
 #include <Def/Def.hpp>
@@ -66,9 +66,8 @@ class SmartMIDIFilteredAnalog : public MIDIOutputElement {
     }
 
     void update() override {
-        if (filteredAnalog.update()) {
-            address.lock();
-            auto activeBank = address.getSelection();
+        auto activeBank = address.getSelection();
+        if (filteredAnalog.update() || activeBank != previousBank) {
             auto previousValue = previousValues[activeBank];
             auto value = filteredAnalog.getValue();
             if (activeBank == previousBank && state == Higher) {
@@ -90,7 +89,6 @@ class SmartMIDIFilteredAnalog : public MIDIOutputElement {
                 sender.send(value, address.getActiveAddress());
                 previousValues[activeBank] = value;
             }
-            address.unlock();
         }
     }
 
@@ -135,7 +133,21 @@ class SmartMIDIFilteredAnalog : public MIDIOutputElement {
      */
     analog_t getValue() const { return filteredAnalog.getValue(); }
 
-  private:
+    /**
+     * @brief  Get the previous value of the analog input of the given bank.
+     */
+    analog_t getPreviousValue(setting_t bank) const {
+        return previousValues[bank];
+    }
+
+    /**
+     * @brief  Get the previous value of the analog input of the active bank.
+     */
+    analog_t getPreviousValue() const {
+        return getPreviousValue(address.getSelection());
+    }
+
+  protected:
     BankAddress address;
     AH::FilteredAnalog<Sender::precision()> filteredAnalog;
     static_assert(

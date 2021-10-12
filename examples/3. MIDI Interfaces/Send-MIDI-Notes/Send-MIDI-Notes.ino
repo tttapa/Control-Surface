@@ -1,7 +1,10 @@
 /**
  * Example showing how to send MIDI Note messages.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
+ * 
+ * @see @ref midi_md-sending "MIDI Tutorial: Sending MIDI messages"
+ * @see @ref Send-All-MIDI-Messages.ino
  */
 
 #include <Control_Surface.h>
@@ -11,12 +14,10 @@ USBMIDI_Interface midi;
 
 // Push button connected between pin 2 and ground.
 // Note message is sent when pressed.
-Button pushbutton = {2};
-
-using namespace MIDI_Notes;
+Button pushbutton {2};
 
 // MIDI address of the note to send
-const MIDIAddress noteAddress = {note(C, 4), CHANNEL_1};
+const MIDIAddress noteAddress {MIDI_Notes::C(4), CHANNEL_1};
 // The velocity of the note events
 const uint8_t velocity = 0x7F;
 

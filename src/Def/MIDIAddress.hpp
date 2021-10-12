@@ -8,6 +8,8 @@ BEGIN_CS_NAMESPACE
 
 /// A struct for saving a MIDI address consisting of a 7-bit address, a 4-bit
 /// channel, and a 4-bit cable number.
+/// A MIDI address can be marked "invalid". The MIDI sending functions
+/// (@ref MIDI_Sender) will never send messages addressed to an invalid address.
 struct __attribute__((packed)) RawMIDIAddress {
     bool valid : 1;
     uint8_t address : 7;
@@ -16,18 +18,27 @@ struct __attribute__((packed)) RawMIDIAddress {
 };
 
 /// A class for saving a MIDI channel and cable number.
-class MIDIChannelCN {
+/// A MIDI channel and cable number can be marked "invalid".
+/// The MIDI sending functions (@ref MIDI_Sender) will never send messages
+/// addressed to invalid channels or cables.
+class MIDIChannelCable {
     friend class MIDIAddress;
 
   public:
-    constexpr MIDIChannelCN() : addresses{0, 0, 0, 0} {}
-    constexpr MIDIChannelCN(Channel channel, Cable cableNumber = CABLE_1)
-        : addresses{
-              1,
-              0,
-              channel.getRaw(),
-              cableNumber.getRaw(),
-          } {}
+    /// @name   Constructors
+    /// @{
+
+    constexpr MIDIChannelCable() : addresses{0, 0, 0, 0} {}
+    constexpr MIDIChannelCable(Channel channel, Cable cableNumber = CABLE_1)
+        : addresses{1, 0, channel.getRaw(), cableNumber.getRaw()} {}
+
+    constexpr static MIDIChannelCable invalid() { return {}; }
+
+    /// @}
+
+  public:
+    /// @name   Member access
+    /// @{
 
     /// Get the channel [1, 16].
     constexpr Channel getChannel() const { return Channel{addresses.channel}; }
@@ -43,6 +54,32 @@ class MIDIChannelCN {
         return addresses.cableNumber;
     }
 
+    /// @}
+
+  public:
+    /// @name   Checks
+    /// @{
+
+    /// Check for equality: two addresses are equal if and only if they are both
+    /// valid addresses and the MIDI channel and MIDI USB cable number are
+    /// equal.
+    /// @note   Invalid addresses are not equal nor inequal.
+    constexpr bool operator==(MIDIChannelCable rhs) const {
+        return this->addresses.valid && rhs.addresses.valid &&
+               this->addresses.channel == rhs.addresses.channel &&
+               this->addresses.cableNumber == rhs.addresses.cableNumber;
+    }
+
+    /// Check for inequality: two addresses are not equal if and only if they
+    /// are both valid addresses and have a MIDI channel or MIDI USB cable
+    /// number that differs.
+    /// @note   Invalid addresses are not equal nor inequal.
+    constexpr bool operator!=(MIDIChannelCable rhs) const {
+        return this->addresses.valid && rhs.addresses.valid &&
+               !(this->addresses.channel == rhs.addresses.channel &&
+                 this->addresses.cableNumber == rhs.addresses.cableNumber);
+    }
+
     /// Check if the MIDI address is valid.
     constexpr bool isValid() const { return addresses.valid; }
 
@@ -50,14 +87,22 @@ class MIDIChannelCN {
     /// @see    isValid
     constexpr explicit operator bool() const { return isValid(); }
 
-    constexpr static MIDIChannelCN invalid() { return {}; }
+    /// @}
+
+  public:
+    /// @name   Base functions for address pattern matching.
+    /// @{
+
+    /// Check if two addresses match (are equal).
+    static bool matchSingle(MIDIChannelCable toMatch, MIDIChannelCable base) {
+        return base == toMatch;
+    }
+
+    /// @}
 
   private:
     RawMIDIAddress addresses;
 };
-
-/// @deprecated
-using MIDICNChannel [[deprecated("Use MIDIChannelCN instead")]] = MIDIChannelCN;
 
 /// A class for saving an offset to a MIDI address.
 /// It can be added to a MIDIAddress.
@@ -88,6 +133,11 @@ class RelativeMIDIAddress {
 
 /// A type-safe utility class for saving a MIDI address consisting of a 7-bit
 /// address, a 4-bit channel, and a 4-bit cable number.
+/// A MIDI address can be marked "invalid". The MIDI sending functions
+/// (@ref MIDI_Sender) will never send messages addressed to invalid addresses.
+///
+/// See @ref midi_md-midi-addresses "MIDI Tutorial: MIDI addresses" for a
+/// tutorial on how to use MIDI addresses.
 class MIDIAddress {
   public:
     /// @name   Constructors
@@ -113,7 +163,7 @@ class MIDIAddress {
      * @param   channelCN 
      *          The MIDI Channel and the MIDI USB cable number.
      */
-    constexpr MIDIAddress(int address, MIDIChannelCN channelCN)
+    constexpr MIDIAddress(int address, MIDIChannelCable channelCN)
         : addresses{
               1,
               (uint8_t)address,
@@ -189,7 +239,7 @@ class MIDIAddress {
      * @param   address 
      *          The MIDI Channel and the MIDI USB cable number.  
      */
-    constexpr MIDIAddress(const MIDIChannelCN &address)
+    constexpr MIDIAddress(MIDIChannelCable address)
         : addresses(address.addresses) {}
 
     /// Return an invalid address.
@@ -202,16 +252,16 @@ class MIDIAddress {
     /// @{
 
     /// Add a relative offset to this address.
-    MIDIAddress &operator+=(const RelativeMIDIAddress &rhs);
+    MIDIAddress &operator+=(RelativeMIDIAddress rhs);
 
     /// Subtract a relative offset from this address.
-    MIDIAddress &operator-=(const RelativeMIDIAddress &rhs);
+    MIDIAddress &operator-=(RelativeMIDIAddress rhs);
 
     /// Add a relative offset.
-    MIDIAddress operator+(const RelativeMIDIAddress &rhs) const;
+    MIDIAddress operator+(RelativeMIDIAddress rhs) const;
 
     /// Subtract a relative offset.
-    MIDIAddress operator-(const RelativeMIDIAddress &rhs) const;
+    MIDIAddress operator-(RelativeMIDIAddress rhs) const;
 
     /// @}
 
@@ -246,7 +296,7 @@ class MIDIAddress {
     /// valid addresses and the MIDI address, MIDI channel and MIDI USB cable
     /// number are equal.
     /// @note   Invalid addresses are not equal nor inequal.
-    constexpr bool operator==(const MIDIAddress &rhs) const {
+    constexpr bool operator==(MIDIAddress rhs) const {
         return this->addresses.valid && rhs.addresses.valid &&
                this->addresses.address == rhs.addresses.address &&
                this->addresses.channel == rhs.addresses.channel &&
@@ -257,7 +307,7 @@ class MIDIAddress {
     /// are both valid addresses and have a MIDI address, MIDI channel or MIDI
     /// USB cable number that differs.
     /// @note   Invalid addresses are not equal nor inequal.
-    constexpr bool operator!=(const MIDIAddress &rhs) const {
+    constexpr bool operator!=(MIDIAddress rhs) const {
         return this->addresses.valid && rhs.addresses.valid &&
                !(this->addresses.address == rhs.addresses.address &&
                  this->addresses.channel == rhs.addresses.channel &&
@@ -274,12 +324,13 @@ class MIDIAddress {
     /// @}
 
   public:
-    /// @name   Base functions for address pattern matching
+    /// @name   Base functions for address pattern matching.
     /// @{
 
     /// Check if two addresses match (are equal).
-    static bool matchSingle(const MIDIAddress &toMatch,
-                            const MIDIAddress &base);
+    static bool matchSingle(MIDIAddress toMatch, MIDIAddress base) {
+        return base == toMatch;
+    }
 
     /// Check if an address falls within a range of MIDI addresses, starting
     /// with address `base`, with a given length.
@@ -289,17 +340,13 @@ class MIDIAddress {
     ///         and MIDI USB Cable Number of `toMatch` and `base` are the same.
     /// @retval false
     ///         Otherwise.
-    static bool matchAddressInRange(const MIDIAddress &toMatch,
-                                    const MIDIAddress &base, uint8_t length);
+    static bool matchAddressInRange(MIDIAddress toMatch, MIDIAddress base,
+                                    uint8_t length);
 
     /// @}
 
   private:
     RawMIDIAddress addresses;
 };
-
-/// @deprecated
-using MIDICNChannelAddress [[deprecated("Use MIDIAddress instead")]] =
-    MIDIAddress;
 
 END_CS_NAMESPACE

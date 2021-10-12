@@ -2,7 +2,7 @@
  * This is an example on how to attach your own callbacks for receiving MIDI 
  * input data.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
@@ -29,8 +29,9 @@
 USBMIDI_Interface midi;
 
 bool channelMessageCallback(ChannelMessage cm) {
-  Serial << F("Channel message: ") << hex << cm.header << ' ' << cm.data1 << ' '
-         << cm.data2 << dec << F(" on cable ") << cm.CN << endl;
+  Serial << F("Channel message: ") << hex                   //
+         << cm.header << ' ' << cm.data1 << ' ' << cm.data2 //
+         << dec << F(" on cable ") << cm.cable.getOneBased() << endl;
   return true; // Return true to indicate that handling is done,
                // and Control_Surface shouldn't handle it anymore.
                // If you want Control_Surface to handle it as well,
@@ -38,10 +39,19 @@ bool channelMessageCallback(ChannelMessage cm) {
 }
 
 bool sysExMessageCallback(SysExMessage se) {
-  Serial << F("System Exclusive message: ") << hex;
-  for (size_t i = 0; i < se.length; ++i)
-    Serial << se.data[i] << ' ';
-  Serial << dec << F("on cable ") << se.CN << endl;
+  Serial << F("System Exclusive message: [") << se.length << "] " //
+         << AH::HexDump(se.data, se.length)                       //
+         << F(" on cable ") << se.cable.getOneBased() << endl;
+  return true; // Return true to indicate that handling is done,
+               // and Control_Surface shouldn't handle it anymore.
+               // If you want Control_Surface to handle it as well,
+               // return false.
+}
+
+bool sysCommonMessageCallback(SysCommonMessage sc) {
+  Serial << F("System Common message: ") << hex                   //
+         << sc.header << ' ' << sc.data1 << ' ' << sc.data2 //
+         << dec << F(" on cable ") << sc.cable.getOneBased() << endl;
   return true; // Return true to indicate that handling is done,
                // and Control_Surface shouldn't handle it anymore.
                // If you want Control_Surface to handle it as well,
@@ -49,8 +59,9 @@ bool sysExMessageCallback(SysExMessage se) {
 }
 
 bool realTimeMessageCallback(RealTimeMessage rt) {
-  Serial << F("Real-Time message: ") << hex << rt.message << dec
-         << F(" on cable ") << rt.CN << endl;
+  Serial << F("Real-time message: ") //
+         << hex << rt.message << dec //
+         << F(" on cable ") << rt.cable.getOneBased() << endl;
   return true; // Return true to indicate that handling is done,
                // and Control_Surface shouldn't handle it anymore.
                // If you want Control_Surface to handle it as well,
@@ -62,8 +73,10 @@ void setup() {
   Control_Surface.begin();
   Control_Surface.setMIDIInputCallbacks(channelMessageCallback,   //
                                         sysExMessageCallback,     //
+                                        sysCommonMessageCallback, //
                                         realTimeMessageCallback); //
-  // If you don't need all three callbacks, pass `nullptr` instead of a function
+  // If you don't need all four callbacks, you can pass `nullptr` instead of a
+  // function pointer
 }
 
 void loop() {

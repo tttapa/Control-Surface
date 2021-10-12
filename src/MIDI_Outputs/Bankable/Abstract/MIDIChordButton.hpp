@@ -1,7 +1,7 @@
 #pragma once
 
-#include <AH/Containers/UniquePtr.hpp>
 #include <AH/Hardware/Button.hpp>
+#include <AH/STL/memory> // std::unique_ptr
 #include <Banks/BankAddresses.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Constants/Chords/Chords.hpp>
@@ -42,9 +42,10 @@ class MIDIChordButton : public MIDIOutputElement {
      */
     template <uint8_t N>
     MIDIChordButton(OutputBankConfig<> config, pin_t pin, MIDIAddress address,
-                    const Chord<N> &chord, const Sender &sender)
+                    Chord<N> chord, const Sender &sender)
         : address{config, address}, button(pin),
-          newChord(AH::MakeUnique<Chord<N>>(chord)), sender(sender) {}
+          newChord(AH::make_unique<Chord<N>>(std::move(chord))),
+          sender(sender) {}
 
     void begin() override { button.begin(); }
     void update() override {
@@ -66,22 +67,21 @@ class MIDIChordButton : public MIDIOutputElement {
         }
     }
 
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT
+    /// @see @ref AH::Button::invert()
     void invert() { button.invert(); }
-#endif
 
     AH::Button::State getButtonState() const { return button.getState(); }
 
     template <uint8_t N>
-    void setChord(const Chord<N> &chord) {
-        newChord = new Chord<N>(chord);
+    void setChord(Chord<N> chord) {
+        newChord = AH::make_unique<Chord<N>>(std::move(chord));
     }
 
   private:
     SingleAddress address;
     AH::Button button;
-    AH::UniquePtr<const IChord> chord;
-    AH::UniquePtr<const IChord> newChord;
+    std::unique_ptr<const IChord> chord;
+    std::unique_ptr<const IChord> newChord;
 
   public:
     Sender sender;

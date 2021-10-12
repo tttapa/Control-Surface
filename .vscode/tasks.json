@@ -6,8 +6,8 @@
         // Build tasks :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         {
             "type": "shell",
-            "label": "Make All",
-            "command": "make -j$[$(nproc) * 2]",
+            "label": "Build All",
+            "command": "cmake --build . -j$(nproc)",
             "options": {
                 "cwd": "${workspaceFolder}/build",
             },
@@ -29,42 +29,41 @@
         // Tests :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         {
             "type": "shell",
-            "label": "Make Test",
-            "command": "make test",
+            "label": "Run Tests",
+            "command": "ctest",
             "options": {
                 "cwd": "${workspaceFolder}/build",
             },
-            "dependsOn": "Make All",
+            "dependsOn": "Build All",
             "problemMatcher": "$gcc",
             "group": "test",
         },
         {
             "type": "shell",
-            "label": "Make Check",
-            "command": "make check",
+            "label": "Run Tests (gtest)",
+            "command": "cmake --build . --target check -j$(nproc)",
             "options": {
                 "cwd": "${workspaceFolder}/build",
             },
-            "dependsOn": "Make All",
             "problemMatcher": "$gcc",
             "group": "test",
         },
         {
             "type": "shell",
-            "label": "Make & Test & Build examples",
-            "command": "./build-arduino-examples.sh $[$(nproc) * 2]",
+            "label": "Build & Check & Build examples",
+            "command": "python3 arduino-example-builder.py 'AVR USB'",
             "problemMatcher": "$gcc",
             "options": {
-                "cwd": "${workspaceFolder}/scripts",
+                "cwd": "${workspaceFolder}/tools",
             },
-            "dependsOn": "Make Test",
+            "dependsOn": "Run Tests (gtest)",
             "group": "test",
         },
         // Documentation & Coverage ::::::::::::::::::::::::::::::::::::::::::::
         {
             "type": "shell",
             "label": "Generate Documentation",
-            "command": "make documentation",
+            "command": "cmake --build . --target documentation",
             "options": {
                 "cwd": "${workspaceFolder}/build",
             },
@@ -73,18 +72,9 @@
         {
             "type": "shell",
             "label": "Generate Coverage Information",
-            "command": "make coverage",
+            "command": "cmake --build . --target coverage",
             "options": {
                 "cwd": "${workspaceFolder}/build/coverage",
-            },
-            "problemMatcher": [],
-        },
-        {
-            "type": "shell",
-            "label": "Export Documentation",
-            "command": "make export_documentation",
-            "options": {
-                "cwd": "${workspaceFolder}/build",
             },
             "problemMatcher": [],
         },

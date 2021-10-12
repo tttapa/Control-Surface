@@ -2,7 +2,7 @@
  * This example demonstrates how to attach custom callbacks to Note or
  * Control Change MIDI Input Elements.
  *
- * @boards  AVR, AVR USB, Due, Nano 33, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Nano 33 IoT, Teensy 3.x, ESP32
  *
  * Connections
  * -----------
@@ -31,52 +31,57 @@
  */
 
 #include <FastLED.h>
+// Include FastLED before Control Surface
 #include <Control_Surface.h> // Include the Control Surface library
 
 // Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
-using namespace MIDI_Notes;
+// Custom MIDI Input Element to handle incoming note events and control the LEDs.
+template <uint8_t RangeLen>
+class CustomNoteLED : public MatchingMIDIInputElement<MIDIMessageType::NOTE_ON,
+                                                      TwoByteRangeMIDIMatcher> {
+ public:
+  // Constructor
+  CustomNoteLED(CRGB *ledcolors, MIDIAddress address)
+    : MatchingMIDIInputElement<MIDIMessageType::NOTE_ON,
+                               TwoByteRangeMIDIMatcher>({address, RangeLen}),
+      ledcolors(ledcolors) {}
 
-// Custom callback to handle incoming note events and control the LEDs
-class NoteCCFastLEDCallbackRGB : public SimpleNoteCCValueCallback {
-  public:
-    NoteCCFastLEDCallbackRGB(CRGB *ledcolors)
-        : ledcolors(ledcolors) {}
+  // Called once upon initialization.
+  void begin() override {}
 
-    // Called once upon initialization.
-    void begin(const INoteCCValue &input) override { updateAll(input); }
+  // Called when an incoming MIDI Note message matches this element's matcher
+  // (i.e. it has the right MIDI address, channel and cable).
+  // The match object that's passed as a parameter contains the velocity value
+  // of the Note message that matched.
+  void handleUpdate(typename TwoByteRangeMIDIMatcher::Result match) override {
+    updateLED(match.index, match.value);
+  }
 
-    // Called each time a MIDI message is received and an LED has to be updated.
-    // @param   input
-    //          The NoteCCRange or NoteCCValue object this callback belongs to.
-    //          This is the object that actually receives and stores the MIDI
-    //          values.
-    // @param   index
-    //          The index of the value that changed. (zero-based)
-    void update(const INoteCCValue &input, uint8_t index) override {
-        // Get the MIDI value that changed [0, 127]
-        uint8_t value      = input.getValue(index);
-        uint8_t ledIndex   = index / 3;
-        uint8_t colorIndex = index % 3;
-        // Update the LED color
-        ledcolors[ledIndex][colorIndex] = value;
-    }
+  // Called each time a MIDI message is received and an LED has to be updated.
+  void updateLED(uint8_t index, uint8_t value) {
+    uint8_t ledIndex = index / 3;
+    uint8_t colorIndex = index % 3; // 0 = R, 1 = G, 2 = B
+    // Update the LED color
+    ledcolors[ledIndex][colorIndex] = value;
+    dirty = true;
+  }
 
-  private:
-    // Pointer to array of FastLED color values for the LEDs
-    CRGB *ledcolors;
+  // Check if the colors changed since the last time the dirty flag was cleared.
+  bool getDirty() const { return dirty; }
+  // Clear the dirty flag.
+  void clearDirty() { dirty = false; }
+
+ private:
+  // Pointer to array of FastLED color values for the LEDs
+  CRGB *ledcolors;
+  // Should the LEDs be updated by FastLED?
+  bool dirty = true;
 };
 
-// Create a type alias for the MIDI Note Input Element that uses
-// the custom callback defined above.
-template <uint8_t RangeLen>
-using CustomNoteValueLED = GenericNoteCCRange<MIDIInputElementNote, 
-                                              RangeLen, 
-                                              NoteCCFastLEDCallbackRGB>;
-
 // Define the array of leds.
-Array<CRGB, 8> leds = {};
+Array<CRGB, 8> leds {};
 // The data pin with the strip connected.
 constexpr uint8_t ledpin = 2;
 
@@ -86,7 +91,7 @@ constexpr uint8_t ledpin = 2;
 // Note C#4 is the green channel of the first LED,
 // Note D4 is the blue channel of the first LED,
 // Note D#4 is the red channel of the second LED, etc.
-CustomNoteValueLED<leds.length * 3> midiled = {note(C, 4), leds.data};
+CustomNoteLED<leds.length * 3> midiled {leds.data, MIDI_Notes::C(4)};
 
 void setup() {
   // See FastLED examples and documentation for more information.
@@ -98,5 +103,8 @@ void setup() {
 
 void loop() {
   Control_Surface.loop();
-  FastLED.show();
+  if (midiled.getDirty()) {
+    FastLED.show();
+    midiled.clearDirty();
+  }
 }

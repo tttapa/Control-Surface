@@ -1,14 +1,17 @@
 #pragma once
 
-#if not defined(Encoder_h_) && not defined(IDE)
-#error                                                                         \
-    "The PJRC Encoder library should be included before the Control-Surface "  \
-    "library. (#include <Encoder.h>)"
-#endif
-
+#include <AH/STL/type_traits> // std::make_signed
+#include <AH/STL/utility>     // std::forward
 #include <Def/Def.hpp>
-#include <Encoder.h>
+#include <Def/TypeTraits.hpp>
+#include <MIDI_Outputs/Abstract/EncoderState.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+
+#ifdef ARDUINO
+#include <Submodules/Encoder/Encoder.h>
+#else
+#include <Encoder.h> // Mock
+#endif
 
 AH_DIAGNOSTIC_WERROR()
 
@@ -18,49 +21,70 @@ BEGIN_CS_NAMESPACE
  * @brief   An abstract class for rotary encoders that send absolute MIDI 
  *          events.
  */
-template <class Sender>
-class MIDIAbsoluteEncoder : public MIDIOutputElement {
-  protected:
-        MIDIAbsoluteEncoder(const EncoderPinList &pins,
-                            const MIDIAddress &address,
-                            int16_t multiplier, uint8_t pulsesPerStep,
-                            const Sender &sender)
-        : encoder{pins.A, pins.B}, address(address),
-          multiplier(multiplier),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
-          
+template <class Enc, class Sender>
+class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
   public:
-    void begin() override {}
+    GenericMIDIAbsoluteEncoder(Enc &&encoder, MIDIAddress address,
+                               int16_t speedMultiply, uint8_t pulsesPerStep,
+                               const Sender &sender)
+        : encoder(std::forward<Enc>(encoder)), address(address),
+          encstate(speedMultiply, pulsesPerStep), sender(sender) {}
+
+    void begin() override { begin_if_possible(encoder); }
+
     void update() override {
-        long currentPosition = getValue();
-        if (currentPosition != previousPosition) {
-            sender.send(currentPosition, address);
-            previousPosition = currentPosition;
+        auto encval = encoder.read();
+        if (int16_t delta = encstate.update(encval)) {
+            int16_t oldValue = value;
+            int16_t newValue = oldValue + delta;
+            newValue = constrain(newValue, 0, maxValue);
+            if (oldValue != newValue) {
+                value = newValue;
+                forcedUpdate();
+            }
         }
     }
 
-    analog_t getValue() { 
-      auto maxval = (1 << Sender::precision()) - 1;
-      noInterrupts();
-      auto rawval = encoder.read() * multiplier / pulsesPerStep;
-      noInterrupts(); // encoder.read() enables interrupts :(
-      auto val = constrain(rawval, 0, maxval);
-      if (val != rawval)
-        encoder.write(val * pulsesPerStep / multiplier);
-      interrupts();
-      return val;
+    /// Send the current value over MIDI, even if the position of the encoder
+    /// didn't change.
+    void forcedUpdate() { sender.send(value, address); }
+
+    /**
+     * @brief   Get the absolute value of the encoder.
+     */
+    uint16_t getValue() const { return value; }
+
+    /**
+     * @brief   Set the absolute value of the encoder.
+     */
+    void setValue(uint16_t value) { this->value = value; }
+
+    /// Get the maximum possible value that can be returned by @ref getValue.
+    static int16_t getMaxValue() { return maxValue; }
+
+    void setSpeedMultiply(int16_t speedMultiply) {
+        encstate.setSpeedMultiply(speedMultiply);
     }
+    int16_t getSpeedMultiply() const { return encstate.getSpeedMultiply(); }
 
   private:
-    Encoder encoder;
-    const MIDIAddress address;
-    const int16_t multiplier;
-    const uint8_t pulsesPerStep;
-    long previousPosition = 0;
+    Enc encoder;
+    MIDIAddress address;
+    int16_t value = 0;
+    EncoderState<decltype(encoder.read())> encstate;
+
+    constexpr static int16_t maxValue = uint16_t(1u << Sender::precision()) - 1;
 
   public:
     Sender sender;
 };
+
+template <class Sender>
+using MIDIAbsoluteEncoder = GenericMIDIAbsoluteEncoder<Encoder, Sender>;
+
+template <class Sender>
+using BorrowedMIDIAbsoluteEncoder =
+    GenericMIDIAbsoluteEncoder<Encoder &, Sender>;
 
 END_CS_NAMESPACE
 

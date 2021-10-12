@@ -2,12 +2,14 @@
  * This examples shows how use the debug macros for printing different kinds of
  * debugging information
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Behavior
  * --------
  * 
- * - Enable debugging in `src/AH/Settings/Settings.hpp`.
+ * - Enable debugging by defining the @ref DEBUG_OUT macro in 
+ *   `src/AH/Settings/Settings.hpp` or enable debugging globally as explained
+ *   [here](@ref md_pages_Debug)
  * - Upload the sketch to the Arduino, and open the Serial Monitor 
  *   (`CTRL+Shift+M`)
  * - Every five seconds, debugging information is printed, for example:
@@ -25,7 +27,8 @@
  * ~~~
  * 
  * @see @ref md_pages_Debug for instructions on how to add an option in the 
- *      Arduino IDE to easily enable and disable debugging.
+ *      Arduino IDE to easily enable and disable debugging globally without 
+ *      editing the settings file.
  * 
  * Written by PieterP, 2018-07-31  
  * https://github.com/tttapa/Arduino-Helpers

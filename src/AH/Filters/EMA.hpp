@@ -59,7 +59,7 @@ class EMA {
   public:
     /// Constructor: initialize filter to zero or optional given value.
     EMA(input_t initial = input_t(0))
-      : state(zero + (initial << K) - initial) {}
+      : state(zero + (state_t(initial) << K) - initial) {}
 
     /**
      * @brief   Reset the filter to the given value.
@@ -68,7 +68,7 @@ class EMA {
      *          The value to reset the filter state to.
      */
     void reset(input_t value = input_t(0)) {
-        state = zero + (value << K) - value;
+        state = zero + (state_t(value) << K) - value;
     }
 
     /**
@@ -86,7 +86,7 @@ class EMA {
       return input_t(output);
     }
 
-    /// @copydoc    filter(input_t)
+    /// @copydoc    EMA::filter(input_t)
     input_t operator()(input_t input) {
         return filter(input);
     }

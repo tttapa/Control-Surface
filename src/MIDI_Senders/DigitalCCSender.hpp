@@ -18,12 +18,12 @@ class DigitalCCSender {
     /// Send a control change message to the given address, with @p onValue as
     /// value.
     void sendOn(MIDIAddress address) {
-        Control_Surface.sendCC(address, onValue);
+        Control_Surface.sendControlChange(address, onValue);
     }
     /// Send a control change message to the given address, with @p offValue as
     /// value.
     void sendOff(MIDIAddress address) {
-        Control_Surface.sendCC(address, offValue);
+        Control_Surface.sendControlChange(address, offValue);
     }
 
     uint8_t getOnValue() const { return this->onValue; }

@@ -31,8 +31,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIButtonLatched(pin_t pin, const MIDIAddress &address,
-                      const Sender &sender)
+    MIDIButtonLatched(pin_t pin, MIDIAddress address, const Sender &sender)
         : button(pin), address(address), sender(sender) {}
 
   public:
@@ -60,9 +59,8 @@ class MIDIButtonLatched : public MIDIOutputElement {
         state ? sender.sendOn(address) : sender.sendOff(address);
     }
 
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT
+    /// @see @ref AH::Button::invert()
     void invert() { button.invert(); }
-#endif
 
     /// Get the state of the underlying button.
     AH::Button::State getButtonState() const { return button.getState(); }

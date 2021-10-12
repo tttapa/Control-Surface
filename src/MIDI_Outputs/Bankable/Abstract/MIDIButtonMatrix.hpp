@@ -20,14 +20,19 @@ namespace Bankable {
  *          as well as a reference to the bank this element belongs to.
  * @tparam  Sender
  *          The MIDI Sender class.
- * @tparam  nb_rows 
+ * @tparam  NumRows 
  *          The number of rows of the button matrix.
- * @tparam  nb_cols
+ * @tparam  NumCols
  *          The number of columns of the button matrix.
  */
-template <class BankAddress, class Sender, uint8_t nb_rows, uint8_t nb_cols>
-class MIDIButtonMatrix : public MIDIOutputElement,
-                         public AH::ButtonMatrix<nb_rows, nb_cols> {
+template <class BankAddress, class Sender, uint8_t NumRows, uint8_t NumCols>
+class MIDIButtonMatrix
+    : public MIDIOutputElement,
+      public AH::ButtonMatrix<
+          MIDIButtonMatrix<BankAddress, Sender, NumRows, NumCols>, NumRows,
+          NumCols> {
+    using ButtonMatrix = AH::ButtonMatrix<MIDIButtonMatrix, NumRows, NumCols>;
+    friend class AH::ButtonMatrix<MIDIButtonMatrix, NumRows, NumCols>;
 
   protected:
     /**
@@ -47,18 +52,18 @@ class MIDIButtonMatrix : public MIDIOutputElement,
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIButtonMatrix(BankAddress bankAddress, const PinList<nb_rows> &rowPins,
-                     const PinList<nb_cols> &colPins, const Sender &sender)
-        : AH::ButtonMatrix<nb_rows, nb_cols>(rowPins, colPins),
-          address(bankAddress), sender(sender) {}
+    MIDIButtonMatrix(BankAddress bankAddress, const PinList<NumRows> &rowPins,
+                     const PinList<NumCols> &colPins, const Sender &sender)
+        : ButtonMatrix(rowPins, colPins), address(bankAddress), sender(sender) {
+    }
 
   public:
-    void begin() override { AH::ButtonMatrix<nb_rows, nb_cols>::begin(); }
+    void begin() override { ButtonMatrix::begin(); }
 
-    void update() override { AH::ButtonMatrix<nb_rows, nb_cols>::update(); }
+    void update() override { ButtonMatrix::update(); }
 
   private:
-    void onButtonChanged(uint8_t row, uint8_t col, bool state) final override {
+    void onButtonChanged(uint8_t row, uint8_t col, bool state) {
         if (state == LOW) {
             if (!activeButtons)
                 address.lock(); // Don't allow changing of the bank setting
@@ -72,6 +77,7 @@ class MIDIButtonMatrix : public MIDIOutputElement,
         }
     }
 
+  protected:
     BankAddress address;
     uint16_t activeButtons = 0;
 

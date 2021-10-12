@@ -54,7 +54,7 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         }
     }
 
-    void send(long delta, const MIDIAddress &address) {
+    void send(long delta, MIDIAddress address) {
         relativeSender.send(delta, address);
     }
 
@@ -66,15 +66,14 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         }
     }
 
-#ifdef AH_INDIVIDUAL_BUTTON_INVERT
+    /// @see @ref AH::Button::invert()
     void invert() { buttons.invert(); }
-#endif
 
     AH::IncrementDecrementButtons::State getButtonsState() const {
         return buttons.getState();
     }
 
-  private:
+  protected:
     BankAddress addresses;
     AH::IncrementDecrementButtons buttons;
     const uint8_t multiplier;

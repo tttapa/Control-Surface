@@ -2,7 +2,7 @@
  * This example demonstrates how to use custom callbacks to display the value
  * of a selector.
  * 
- * @boards  AVR, AVR USB, Nano 33, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -106,7 +106,7 @@ USBMIDI_Interface midi;
 Bank<6> bank = 1;
 
 // Create a selector that uses our custom callback, to control the bank.
-GenericIncrementDecrementSelector<6, MySelectorCallback> selector = {
+GenericIncrementDecrementSelector<6, MySelectorCallback> selector {
   bank,         // bank to manage
   {10, 11, 12}, // red, green, blue LED pins 
                 // (this is the MySelectorCallback constructor defined above)

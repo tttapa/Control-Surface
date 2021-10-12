@@ -7,6 +7,5 @@
 BEGIN_CS_NAMESPACE
 
 using MIDIOutputElement = AH::Updatable<>;
-using MIDIOutputElementPotentiometer = AH::Updatable<Potentiometer>;
 
 END_CS_NAMESPACE

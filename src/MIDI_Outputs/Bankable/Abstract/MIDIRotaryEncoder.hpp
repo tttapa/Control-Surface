@@ -1,15 +1,19 @@
 #pragma once
 
-#if not defined(Encoder_h_) && not defined(IDE)
-#error                                                                         \
-    "The PJRC Encoder library should be included before the Control-Surface "  \
-    "library. (#include <Encoder.h>)"
-#endif
-
+#include <AH/STL/utility> // std::forward
 #include <Banks/BankableAddresses.hpp>
 #include <Def/Def.hpp>
-#include <Encoder.h>
+#include <Def/TypeTraits.hpp>
+#include <MIDI_Outputs/Abstract/EncoderState.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+
+#ifdef ARDUINO
+#include <Submodules/Encoder/Encoder.h>
+#else
+#include <Encoder.h> // Mock
+#endif
+
+AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
 
@@ -19,53 +23,54 @@ namespace Bankable {
  * @brief   An abstract class for rotary encoders that send MIDI events and that
  *          can be added to a Bank.
  */
-template <class BankAddress, class Sender>
-class MIDIRotaryEncoder : public MIDIOutputElement {
+template <class Enc, class BankAddress, class Sender>
+class GenericMIDIRotaryEncoder : public MIDIOutputElement {
   protected:
     /**
-     * @brief   Construct a new MIDIRotaryEncoder.
+     * @brief   Construct a new GenericMIDIRotaryEncoder.
      *
      * @todo    Documentation
      */
-    MIDIRotaryEncoder(BankAddress bankAddress, const EncoderPinList &pins,
-                      uint8_t speedMultiply, uint8_t pulsesPerStep,
-                      const Sender &sender)
-        : address(bankAddress), encoder{pins.A, pins.B},
-          speedMultiply(speedMultiply), pulsesPerStep(pulsesPerStep),
-          sender(sender) {}
-
-// For tests only
-#ifndef ARDUINO
-    MIDIRotaryEncoder(BankAddress bankAddress, const Encoder &encoder,
-                      uint8_t speedMultiply, uint8_t pulsesPerStep,
-                      const Sender &sender)
-        : address(bankAddress), encoder(encoder), speedMultiply(speedMultiply),
-          pulsesPerStep(pulsesPerStep), sender(sender) {}
-#endif
+    GenericMIDIRotaryEncoder(BankAddress bankAddress, Enc &&encoder,
+                             int16_t speedMultiply, uint8_t pulsesPerStep,
+                             const Sender &sender)
+        : address(bankAddress), encoder(std::forward<Enc>(encoder)),
+          encstate(speedMultiply, pulsesPerStep), sender(sender) {}
 
   public:
-    void begin() final override {}
-    void update() final override {
-        long currentPosition = encoder.read();
-        long difference = (currentPosition - previousPosition) / pulsesPerStep;
-        // I could do the division inside of the if statement for performance
-        if (difference) {
-            sender.send(difference * speedMultiply, address.getActiveAddress());
-            previousPosition += difference * pulsesPerStep;
+    void begin() override { begin_if_possible(encoder); }
+
+    void update() override {
+        auto encval = encoder.read();
+        if (int16_t delta = encstate.update(encval)) {
+            sender.send(delta, address.getActiveAddress());
         }
     }
 
-  private:
+    void setSpeedMultiply(int16_t speedMultiply) {
+        encstate.setSpeedMultiply(speedMultiply);
+    }
+    int16_t getSpeedMultiply() const { return encstate.getSpeedMultiply(); }
+
+  protected:
     BankAddress address;
-    Encoder encoder;
-    const uint8_t speedMultiply;
-    const uint8_t pulsesPerStep;
-    long previousPosition = 0;
+    Enc encoder;
+    EncoderState<decltype(encoder.read())> encstate;
 
   public:
     Sender sender;
 };
 
+template <class BankAddress, class Sender>
+using MIDIRotaryEncoder =
+    GenericMIDIRotaryEncoder<Encoder, BankAddress, Sender>;
+
+template <class BankAddress, class Sender>
+using BorrowedMIDIRotaryEncoder =
+    GenericMIDIRotaryEncoder<Encoder &, BankAddress, Sender>;
+
 } // namespace Bankable
 
 END_CS_NAMESPACE
+
+AH_DIAGNOSTIC_POP()
