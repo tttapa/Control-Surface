@@ -6,6 +6,11 @@ BEGIN_AH_NAMESPACE
 
 using namespace ExtIO;
 
+// Helper function - this is built in to the Arduino IDE, but GitHub doesn't build successfully without it.
+long map(long x, long in_min, long in_max, long out_min, long out_max) {
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
 Piezo::Piezo(pin_t pin) : pin(pin) { }
 
 void Piezo::begin() { ExtIO::pinMode(pin, INPUT); }
