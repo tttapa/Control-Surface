@@ -1,4 +1,4 @@
-#if defined(TEENSYDUINO) && !defined(AVR)
+#if defined(TEENSYDUINO) && !defined(AVR) && TEENSYDUINO < 153
 #include "vector"
 #include <AH/Error/Error.hpp>
 
