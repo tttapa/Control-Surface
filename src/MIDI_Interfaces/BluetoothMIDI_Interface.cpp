@@ -294,6 +294,14 @@ extern "C" void BluetoothMIDI_Interface_midi_write_callback(const uint8_t *data,
 
 // -------------------------------------------------------------------------- //
 
+void BluetoothMIDI_Interface::setName(const char *name) {
+#ifdef ARDUINO
+    set_midi_ble_name(name);
+#else
+    (void)name;
+#endif
+}
+
 void BluetoothMIDI_Interface::begin() {
 #ifdef ARDUINO
     midi_set_mtu_callback(BluetoothMIDI_Interface_midi_mtu_callback);

@@ -56,6 +56,9 @@ class BluetoothMIDI_Interface : public MIDI_Interface {
     }
 
   public:
+    /// Set the BLE device name. Must be called before @ref begin().
+    void setName(const char *name);
+
     void begin() override;
     void end();
 
