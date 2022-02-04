@@ -42,6 +42,11 @@ class MIDIButtonLatching : public MIDIOutputElement {
 
     AH::Button::State getButtonState() const { return button.getState(); }
 
+    /// Get the MIDI address.
+    MIDIAddress getAddress() const { return this->address; }
+    /// Set the MIDI address.
+    void setAddress(MIDIAddress address) { this->address = address; }
+
   private:
     AH::Button button;
     const MIDIAddress address;
