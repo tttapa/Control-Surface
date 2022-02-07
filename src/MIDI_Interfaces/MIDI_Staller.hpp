@@ -22,8 +22,8 @@ struct MIDIStaller {
     static const char *getNameNull(MIDIStaller *s);
 };
 
-/// Allocate a MIDIStaller executes the given callback and deletes itself when 
-/// @ref MIDIStaller::handleStall is called.
+/// Allocate a MIDIStaller that executes the given callback and deletes itself
+/// when @ref MIDIStaller::handleStall is called.
 /// @note   Don't lose the pointer! If you never call `handleStall`, the memory
 ///         won't be deallocated.
 template <class Callback>
