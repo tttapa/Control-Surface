@@ -45,6 +45,12 @@ class MIDIButton : public MIDIOutputElement {
 
     AH::Button::State getButtonState() const { return button.getState(); }
 
+    /// Get the MIDI address.
+    MIDIAddress getAddress() const { return this->address; }
+    /// Set the MIDI address. Has unexpected consequences if used while the 
+    /// push button is pressed. Use banks if you need to support that.
+    void setAddressUnsafe(MIDIAddress address) { this->address = address; }
+
   private:
     AH::Button button;
     const MIDIAddress address;

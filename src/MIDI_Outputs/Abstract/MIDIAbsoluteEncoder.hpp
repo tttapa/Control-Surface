@@ -67,6 +67,11 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     }
     int16_t getSpeedMultiply() const { return encstate.getSpeedMultiply(); }
 
+    /// Get the MIDI address.
+    MIDIAddress getAddress() const { return this->address; }
+    /// Set the MIDI address.
+    void setAddress(MIDIAddress address) { this->address = address; }
+
   private:
     Enc encoder;
     MIDIAddress address;

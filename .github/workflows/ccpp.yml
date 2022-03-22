@@ -17,7 +17,7 @@ jobs:
         path: /tmp/gtest 
         key: ${{ runner.os }}-gtest-master-Asan
     - name: Install GoogleTest
-      run: ./scripts/ci/install-gtest.sh master /tmp/gtest Asan
+      run: ./scripts/ci/install-gtest.sh main /tmp/gtest Asan
       if: steps.cache-gtest.outputs.cache-hit != 'true'
     - name: CMake
       run: cmake .. -DCMAKE_BUILD_TYPE=Asan

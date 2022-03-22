@@ -19,6 +19,12 @@
 
 #include <assert.h>
 
+const char *midi_ble_name = "Control Surface (BLE)";
+
+void set_midi_ble_name(const char *name) {
+    midi_ble_name = name;
+}
+
 bool midi_init(void) {
     if (!btStarted() && !btStart())
         return false;
@@ -50,8 +56,7 @@ bool midi_init(void) {
         return false;
     }
 
-    const char *name = "Control Surface (BLE)";
-    ret = esp_ble_gap_set_device_name(name);
+    ret = esp_ble_gap_set_device_name(midi_ble_name);
     if (ret != ESP_OK) {
         ESP_LOGE("MIDIBLE", "set device name failed: %s", esp_err_to_name(ret));
         return false;

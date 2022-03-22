@@ -72,6 +72,11 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      */
     analog_t getValue() const { return filteredAnalog.getValue(); }
 
+    /// Get the MIDI address.
+    MIDIAddress getAddress() const { return this->address; }
+    /// Set the MIDI address.
+    void setAddress(MIDIAddress address) { this->address = address; }
+
   private:
     AH::FilteredAnalog<Sender::precision()> filteredAnalog;
     MIDIAddress address;

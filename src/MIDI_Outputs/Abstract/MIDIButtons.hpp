@@ -49,6 +49,25 @@ class MIDIButtons : public MIDIOutputElement {
         return buttons[index].getState();
     }
 
+    /// Get the MIDI base address.
+    MIDIAddress getBaseAddress() const { return this->baseAddress; }
+    /// Set the MIDI base address.
+    /// Has unexpected consequences if used while a push button is pressed.
+    /// Use banks if you need to support that.
+    void setBaseAddressUnsafe(MIDIAddress address) {
+        this->baseAddress = address;
+    }
+    /// Get the MIDI increment address.
+    RelativeMIDIAddress getIncrementAddress() const {
+        return this->incrementAddress;
+    }
+    /// Set the MIDI increment address.
+    /// Has unexpected consequences if used while a push button is pressed.
+    /// Use banks if you need to support that.
+    void setIncrementAddressUnsafe(RelativeMIDIAddress address) {
+        this->incrementAddress = address;
+    }
+
     /// @see @ref AH::Button::invert()
     void invert() {
         for (auto &button : buttons)

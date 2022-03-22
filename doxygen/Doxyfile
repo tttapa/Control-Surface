@@ -895,6 +895,7 @@ INPUT_ENCODING         = UTF-8
 # *.vhdl, *.ucf, *.qsf and *.ice.
 
 FILE_PATTERNS          = *.cpp \
+                         *.c \
                          *.h \
                          *.hpp \
                          *.ipp \
