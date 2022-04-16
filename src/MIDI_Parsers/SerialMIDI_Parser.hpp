@@ -50,6 +50,7 @@ class SerialMIDI_Parser : public MIDI_Parser {
 
   protected:
     MIDIReadEvent handleRealTime(uint8_t midiByte);
+    MIDIReadEvent handleNonRealTimeStatus(uint8_t midiByte);
     MIDIReadEvent handleStatus(uint8_t midiByte);
     MIDIReadEvent handleData(uint8_t midiByte);
 
