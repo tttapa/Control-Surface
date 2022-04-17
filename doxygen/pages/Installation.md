@@ -26,8 +26,8 @@ Library Manager:
 ### 1. Download
 
 Download the repository as a ZIP archive by going to the [home page of the 
-repository](https://github.com/tttapa/Control-Surface) and click
-the green _Clone or download_ button on the top right.
+repository](https://github.com/tttapa/Control-Surface) and clicking
+the green <kbd>Code</kbd> button in the top right, then choosing “Download ZIP”.
 
 ### 2. Install the Library in the Arduino IDE
 

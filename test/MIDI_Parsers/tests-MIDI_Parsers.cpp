@@ -720,6 +720,10 @@ TEST(SerialMIDIParser, sysExEndsMultipleTimesWithoutStarting) {
     uint8_t data[] = {0xF0, 0x10, 0xF7, 0x20, 0xF7, 0xF7};
     auto puller = BufferPuller(data);
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
+    ASSERT_EQ(sparser.getSysExMessage().length, 3);
+    EXPECT_EQ(sparser.getSysExMessage().data[0], 0xF0);
+    EXPECT_EQ(sparser.getSysExMessage().data[1], 0x10);
+    EXPECT_EQ(sparser.getSysExMessage().data[2], 0xF7);
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 

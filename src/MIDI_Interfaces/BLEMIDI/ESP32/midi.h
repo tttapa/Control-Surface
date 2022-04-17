@@ -36,6 +36,9 @@ void midi_set_write_callback(midi_write_callback_t cb);
 /// Send a MIDI BLE notification to the client.
 bool midi_notify(const uint8_t *data, size_t len);
 
+/// Set the name of the BLE device. Must be set before calling @ref midi_init().
+void set_midi_ble_name(const char *name);
+
 /// Initialize the Bluetooth stack and register the MIDI BLE application with 
 /// the Bluedroid driver.
 bool midi_init();

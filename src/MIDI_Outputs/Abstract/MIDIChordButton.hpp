@@ -67,14 +67,21 @@ class MIDIChordButton : public MIDIOutputElement {
 
     AH::Button::State getButtonState() const { return button.getState(); }
 
+    /// Change the chord. Can be used safely while the push button is pressed.
     template <uint8_t N>
     void setChord(Chord<N> chord) {
         newChord = AH::make_unique<Chord<N>>(std::move(chord));
     }
 
+    /// Get the MIDI address.
+    MIDIAddress getAddress() const { return this->address; }
+    /// Set the MIDI address. Has unexpected consequences if used while the
+    /// push button is pressed. Use banks if you need to support that.
+    void setAddressUnsafe(MIDIAddress address) { this->address = address; }
+
   private:
     AH::Button button;
-    const MIDIAddress address;
+    MIDIAddress address;
     std::unique_ptr<const IChord> chord;
     std::unique_ptr<const IChord> newChord;
 

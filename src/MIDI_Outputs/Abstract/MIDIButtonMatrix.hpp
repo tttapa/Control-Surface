@@ -51,6 +51,25 @@ class MIDIButtonMatrix
 
     void update() final override { ButtonMatrix::update(); }
 
+    /// Get the MIDI address of the button at the given row and column.
+    MIDIAddress getAddress(uint8_t row, uint8_t col) const {
+        return {this->addresses[row][col], baseChannelCN};
+    }
+    /// Set the MIDI address of button at the given row and column.
+    /// Has unexpected consequences if used while the push button is pressed.
+    /// Use banks if you need to support that.
+    void setAddressUnsafe(uint8_t row, uint8_t col, uint8_t address) {
+        this->addresses[row][col] = address;
+    }
+    /// Get the MIDI channel and cable number.
+    MIDIChannelCable getChannelCable() const { return this->baseChannelCN; }
+    /// Set the MIDI channel and cable number of all buttons. Has unexpected
+    /// consequences if used while the push button is pressed.
+    /// Use banks if you need to support that.
+    void setChannelCableUnsafe(MIDIChannelCable bccn) {
+        this->baseChannelCN = bccn;
+    }
+
   private:
     void onButtonChanged(uint8_t row, uint8_t col, bool state) {
         int8_t address = addresses[row][col];

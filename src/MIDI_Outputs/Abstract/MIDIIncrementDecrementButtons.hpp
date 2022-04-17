@@ -68,11 +68,21 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         return buttons.getState();
     }
 
+    /// Get the MIDI address.
+    MIDIAddress getAddress() const { return this->address; }
+    /// Set the MIDI address.
+    void setAddress(MIDIAddress address) { this->address = address; }
+
+    /// Get the MIDI address of the reset action.
+    MIDIAddress getResetAddress() const { return this->resetAddress; }
+    /// Set the MIDI address of the reset action.
+    void setResetAddress(MIDIAddress address) { this->resetAddress = address; }
+
   private:
     AH::IncrementDecrementButtons buttons;
-    const MIDIAddress address;
-    const uint8_t multiplier;
-    const MIDIAddress resetAddress;
+    MIDIAddress address;
+    uint8_t multiplier;
+    MIDIAddress resetAddress;
 
   public:
     RelativeSender relativeSender;
