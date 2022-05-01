@@ -3,6 +3,27 @@
 
 USING_AH_NAMESPACE;
 
+template <class T, size_t N>
+std::ostream &operator<<(std::ostream &os, const AH::Array<T, N> &a) {
+    if (N < 1)
+        return os << "{}";
+    os << '{';
+    for (size_t i = 0; i < N - 1; ++i)
+        os << a[i] << ", ";
+    return os << a[N - 1] << '}';
+}
+
+template <class T, size_t N, bool Reverse, bool Const>
+std::ostream &operator<<(std::ostream &os,
+                         const AH::ArraySlice<T, N, Reverse, Const> &a) {
+    if (N < 1)
+        return os << "{}";
+    os << '{';
+    for (size_t i = 0; i < N - 1; ++i)
+        os << a[i] << ", ";
+    return os << a[N - 1] << '}';
+}
+
 TEST(Array, initializeAndRetrieve) {
     Array<int, 6> arr = {0, 1, 2, 3, 4, 5};
     for (int i = 0; i < 6; i++)
@@ -266,12 +287,16 @@ TEST(generateArray, simpleNoType) {
     EXPECT_EQ(x, y);
 }
 
+struct S {
+    int i;
+    float f;
+    bool operator!=(S o) const { return this->i != o.i || this->f != o.f; }
+    friend std::ostream &operator<<(std::ostream &os, S s) {
+        return os << "S{" << s.i << ", " << s.f << "}";
+    }
+};
+
 TEST(fillArray, simple) {
-    struct S {
-        int i;
-        float f;
-        bool operator!=(S o) const { return this->i != o.i || this->f != o.f; }
-    };
     auto x = fillArray<S, 4>(2, 3.14f);
     Array<S, 4> y = {{{2, 3.14f}, {2, 3.14f}, {2, 3.14f}, {2, 3.14f}}};
     EXPECT_EQ(x, y);
