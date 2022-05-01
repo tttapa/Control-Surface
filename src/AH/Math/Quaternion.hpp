@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief	Definition of Quaternion and EulerAngles.
+ * @brief    Definition of Quaternion and EulerAngles.
  * 
  * Quaternions can be multiplied (Hamiltonian product), normalized and can
  * perform rotations of vectors. Quaternion also has an implementation of the
@@ -25,10 +25,10 @@
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 #include <AH/Arduino-Wrapper.h> // Print
-#include <AH/Math/Degrees.hpp> // rad2deg()
-#include <AH/Math/Vector.hpp> // Vec3f
-#include <AH/STL/cmath> // std::sqrt
-#include <AH/STL/limits> // std::numeric_limits
+#include <AH/Math/Degrees.hpp>  // rad2deg()
+#include <AH/Math/Vector.hpp>   // Vec3f
+#include <AH/STL/cmath>         // std::sqrt
+#include <AH/STL/limits>        // std::numeric_limits
 
 #ifndef ARDUINO
 #include <iosfwd> // std::ostream
@@ -193,17 +193,17 @@ struct Quaternion {
     static Quaternion fromDirection(Vec3f v) {
         /*
          * Formula:
-    	 * q = cos(ϑ / 2) + sin(ϑ / 2)·(x·i + y·j + z·k)
-    	 * where (x y z) is a unit vector representing the axis about which
-    	 * the body is rotated; ϑ is the angle by which it is rotated.
-    	 * 
+         * q = cos(ϑ / 2) + sin(ϑ / 2)·(x·i + y·j + z·k)
+         * where (x y z) is a unit vector representing the axis about which
+         * the body is rotated; ϑ is the angle by which it is rotated.
+         * 
          * Source: 
          * https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation#Using_quaternion_as_rotations
          * 
-    	 * The rotational axis (x y z) can be calcuated by taking the normalized
+         * The rotational axis (x y z) can be calcuated by taking the normalized
          * cross product of (0 0 1) and the given vector. The angle of rotation
          * ϑ can be found using |A×B| = |A||B|·sin(ϑ).
-    	 */
+         */
 
         float eps = std::numeric_limits<float>::epsilon();
 
@@ -229,7 +229,7 @@ struct Quaternion {
         // Calculate the angle ϑ.
         float angle = std::asin(crossNorm);
         if (v.z < 0)
-            angle = float(M_PI) - angle;
+            angle = 180_deg - angle;
 
         // Calculate the resulting quaternion.
         return {

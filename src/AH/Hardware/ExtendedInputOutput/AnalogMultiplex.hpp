@@ -146,7 +146,7 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
         this->discardFirstReading_ = discardFirstReading_;
     }
 
-  private:
+  protected:
     const pin_t analogPin;
     const Array<pin_t, N> addressPins;
     const pin_t enablePin;
