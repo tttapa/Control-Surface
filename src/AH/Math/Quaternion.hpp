@@ -229,7 +229,7 @@ struct Quaternion {
         // Calculate the angle ϑ.
         float angle = std::asin(crossNorm);
         if (v.z < 0)
-            angle = 180_deg - angle;
+            angle = float(180_deg) - angle;
 
         // Calculate the resulting quaternion.
         return {
