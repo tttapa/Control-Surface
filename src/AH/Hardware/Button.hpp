@@ -73,11 +73,11 @@ class Button {
      * States:
      *    HIGH  ────────────────┐                  ┌─────────────────
      *    LOW                   └──────────────────┘
-     *            RELEASED   FALLING   PRESSED   RISING
+     *            Released   Falling   Pressed   Rising
      * ```
      *
-     * @return  The state of the button, either Button::PRESSED,
-     *          Button::RELEASED, Button::FALLING or Button::RISING.
+     * @return  The state of the button, either Button::Pressed,
+     *          Button::Released, Button::Falling or Button::Rising.
      */
     State update();
 
@@ -85,8 +85,8 @@ class Button {
      * @brief   Get the state of the button, without updating it.
      *          Returns the same value as the last call to @ref update.
      *
-     * @return  The state of the button, either Button::PRESSED,
-     *          Button::RELEASED, Button::FALLING or Button::RISING.
+     * @return  The state of the button, either Button::Pressed,
+     *          Button::Released, Button::Falling or Button::Rising.
      */
     State getState() const;
 
