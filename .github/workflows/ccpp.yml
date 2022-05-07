@@ -9,17 +9,14 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Git Submodules
-      run: git submodule update --init --recursive --depth 50
-    - name: CMake
-      run: cmake .. -DCMAKE_BUILD_TYPE=Asan
-      working-directory: build
+    - name: Install dependencies
+      run: sudo ./scripts/install-gtest.sh Debug /usr/local
+    - name: Configure
+      run: cmake -S. --preset ci
       env:
         CC: gcc-9
         CXX: g++-9
     - name: Build
-      run: make -j4
-      working-directory: build
-    - name: Run tests
-      run: make check
-      working-directory: build
+      run: cmake --build --preset ci -j
+    - name: Test
+      run: ctest --preset ci

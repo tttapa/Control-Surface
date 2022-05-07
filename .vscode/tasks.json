@@ -3,81 +3,15 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        // Build tasks :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         {
             "type": "shell",
-            "label": "Make All",
-            "command": "make -j$[$(nproc) * 2]",
-            "options": {
-                "cwd": "${workspaceFolder}/build",
-            },
-            "problemMatcher": "$gcc",
-            "group": {
-                "kind": "build",
-                "isDefault": true,
-            },
-        },
-        {
-            "type": "shell",
-            "label": "Clear Build Directory and Run CMake",
-            "command": "./setup-build.sh \"${workspaceFolder}\"",
-            "options": {
-                "cwd": "${workspaceFolder}/scripts",
-            },
-            "problemMatcher": [],
-        },
-        // Tests :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        {
-            "type": "shell",
-            "label": "Make Test",
-            "command": "make test",
-            "options": {
-                "cwd": "${workspaceFolder}/build",
-            },
-            "dependsOn": "Make All",
-            "problemMatcher": "$gcc",
-            "group": "test",
-        },
-        {
-            "type": "shell",
-            "label": "Make Check",
-            "command": "make check",
-            "options": {
-                "cwd": "${workspaceFolder}/build",
-            },
-            "dependsOn": "Make All",
-            "problemMatcher": "$gcc",
-            "group": "test",
-        },
-        {
-            "type": "shell",
-            "label": "Make & Test & Build examples",
-            "command": "./build-arduino-examples.sh $[$(nproc) * 2]",
+            "label": "Build examples",
+            "command": "python3 arduino-example-builder.py 'AVR'",
             "problemMatcher": "$gcc",
             "options": {
-                "cwd": "${workspaceFolder}/scripts",
+                "cwd": "${workspaceFolder}/tools",
             },
-            "dependsOn": "Make Test",
-            "group": "test",
-        },
-        // Documentation & Coverage ::::::::::::::::::::::::::::::::::::::::::::
-        {
-            "type": "shell",
-            "label": "Generate Documentation",
-            "command": "make documentation",
-            "options": {
-                "cwd": "${workspaceFolder}/build",
-            },
-            "problemMatcher": [],
-        },
-        {
-            "type": "shell",
-            "label": "Generate Coverage Information",
-            "command": "make coverage",
-            "options": {
-                "cwd": "${workspaceFolder}/build/coverage",
-            },
-            "problemMatcher": [],
+            "group": "build",
         },
     ]
 }

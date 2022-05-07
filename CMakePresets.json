@@ -1,0 +1,53 @@
+{
+    "version": 4,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 18,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "development-default",
+            "displayName": "Development",
+            "description": "",
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "AH_WARNINGS_AS_ERRORS": true,
+                "AH_WITH_COVERAGE": true,
+                "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+                "CMAKE_CXX_FLAGS": "-fsanitize=address,leak,undefined,pointer-compare,pointer-subtract"
+            }
+        },
+        {
+            "name": "ci",
+            "displayName": "CI",
+            "description": "",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "AH_WARNINGS_AS_ERRORS": true,
+                "AH_WITH_COVERAGE": false,
+                "CMAKE_CXX_FLAGS": "-fsanitize=address,leak,undefined,pointer-compare,pointer-subtract"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "development-default",
+            "configurePreset": "development-default"
+        },
+        {
+            "name": "ci",
+            "configurePreset": "ci"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "ci",
+            "configurePreset": "ci",
+            "output": {
+                "outputOnFailure": true
+            }
+        }
+    ]
+}
