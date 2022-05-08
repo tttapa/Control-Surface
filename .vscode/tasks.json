@@ -3,80 +3,15 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        // Build tasks :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         {
             "type": "shell",
-            "label": "Build All",
-            "command": "cmake --build . -j$(nproc)",
-            "options": {
-                "cwd": "${workspaceFolder}/build",
-            },
-            "problemMatcher": "$gcc",
-            "group": {
-                "kind": "build",
-                "isDefault": true,
-            },
-        },
-        {
-            "type": "shell",
-            "label": "Clear Build Directory and Run CMake",
-            "command": "./setup-build.sh \"${workspaceFolder}\"",
-            "options": {
-                "cwd": "${workspaceFolder}/scripts",
-            },
-            "problemMatcher": [],
-        },
-        // Tests :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        {
-            "type": "shell",
-            "label": "Run Tests",
-            "command": "ctest",
-            "options": {
-                "cwd": "${workspaceFolder}/build",
-            },
-            "dependsOn": "Build All",
-            "problemMatcher": "$gcc",
-            "group": "test",
-        },
-        {
-            "type": "shell",
-            "label": "Run Tests (gtest)",
-            "command": "cmake --build . --target check -j$(nproc)",
-            "options": {
-                "cwd": "${workspaceFolder}/build",
-            },
-            "problemMatcher": "$gcc",
-            "group": "test",
-        },
-        {
-            "type": "shell",
-            "label": "Build & Check & Build examples",
-            "command": "python3 arduino-example-builder.py 'AVR USB'",
+            "label": "Build examples",
+            "command": "python3 arduino-example-builder.py 'AVR'",
             "problemMatcher": "$gcc",
             "options": {
                 "cwd": "${workspaceFolder}/tools",
             },
-            "dependsOn": "Run Tests (gtest)",
-            "group": "test",
-        },
-        // Documentation & Coverage ::::::::::::::::::::::::::::::::::::::::::::
-        {
-            "type": "shell",
-            "label": "Generate Documentation",
-            "command": "cmake --build . --target documentation",
-            "options": {
-                "cwd": "${workspaceFolder}/build",
-            },
-            "problemMatcher": [],
-        },
-        {
-            "type": "shell",
-            "label": "Generate Coverage Information",
-            "command": "cmake --build . --target coverage",
-            "options": {
-                "cwd": "${workspaceFolder}/build/coverage",
-            },
-            "problemMatcher": [],
+            "group": "build",
         },
     ]
 }

@@ -46,24 +46,22 @@ h2.groupheader, .title, #projectname {
     font-weight: 300;
 }
 h2, h2.groupheader, .title, #projectname {
-    font-weight: 400;
+    font-weight: 300;
 }
 h3, h4, h5 {
-    font-weight: 400;
+    font-weight: 300;
 }
 div.contents > div.textblock > h1 {
     border-bottom: 1px solid #c8d0e2;
     padding-bottom: 5px;
     margin-top: 1em;
+    font-size: 1.8em;
 }
 div.contents > div.textblock > hr {
     margin-right: 15px; /* To match width of doxygen headers and code blocks */
 }
 .title {
     font-size: 2em;
-}
-* {
-    max-width: 100%;
 }
 span.mono {
     font-family: monospace;
@@ -95,6 +93,9 @@ a.el {
     font-size: inherit;
 }
 iframe {
+    max-width: initial;
+}
+#MSearchField {
     max-width: initial;
 }
 body > div.header, div > div.header {
@@ -262,7 +263,8 @@ span.keywordtype {
 span.keyword {
     color: #0000ff;
 }
-div.line a.code.hl_function {
+div.line a.code.hl_function,
+div.line a.code.hl_interface {
     color: #795e26;
 }
 div.line a.code.hl_define {
@@ -316,12 +318,12 @@ blockquote.doxtable > p:last-child {
 /* --------------------- */
 
 /* Portrait and Landscape */
-@media only screen and (max-width: 768px) /* and (orientation : portrait) */ {
+@media only screen and (max-width: 767px) /* and (orientation : portrait) */ {
     div#top {
         position: relative;
     }
-    #side-nav { display: none; }
-    #nav-path { display: none; }
+    /* #side-nav { display: none; } */
+    /* #nav-path { display: none; } */
     body { 
         overflow-x: hidden; 
     }
@@ -333,6 +335,18 @@ blockquote.doxtable > p:last-child {
       display: block;
       padding: 0.6em;
       margin-bottom: 0;
+    }
+    #MSearchResultsWindow {
+        display: none;
+        position: initial;
+        left: 0; 
+        top: 0;
+        bottom: 0;
+        border: 1px solid #ddd;
+        z-index: 9999;
+    }
+    .sm-dox a, .sm-dox a:focus, .sm-dox a:hover, .sm-dox a:active {
+        line-height: 2.4;
     }
     .sm-dox a:hover {
         /* background-image: url(tab_a.png); */
@@ -351,9 +365,9 @@ blockquote.doxtable > p:last-child {
     .sm-dox a.highlighted {
         border-right: none;
     }
-    /* .sm-dox li {
+    .sm-dox li {
         border-bottom: 1px solid #ccd;
-    } */
+    }
 
     /*
     address.footer {
@@ -373,12 +387,12 @@ blockquote.doxtable > p:last-child {
         font-size: 11px;
     }
 
-    div.contents p, 
+    div.contents p:not([class]), 
     div.dyncontent, 
     div.textblock, 
     table.memberdecls, 
     div.memitem,
-    div.contents p *, 
+    div.contents p:not([class]) *, 
     div.dyncontent *, 
     table.memberdecls *, 
     div.memitem * {

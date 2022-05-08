@@ -305,7 +305,7 @@ TEST(fillArray, simple) {
 TEST(Array, apply) {
     Array<int, 5> a = {-1, 2, -3, 4, 0};
     Array<int, 5> b = {1, -2, 3, -4, 0};
-    auto c = apply(a, std::negate<>());
+    auto c = AH::apply(a, std::negate<>());
     EXPECT_EQ(c, b);
 }
 

@@ -239,12 +239,15 @@ For each commit, the continuous integration tests compile the examples for the
 following boards:
 
 - Arduino UNO
+- Arduino Mega
 - Arduino Leonardo
 - Teensy 3.2
+- Teensy 4.1
 - Arduino Due
 - Arduino Nano Every
 - Arduino Nano 33 IoT
 - Arduino Nano 33 BLE
+- Arduino Nano Every
 - ESP8266
 - ESP32
 

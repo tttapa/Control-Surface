@@ -10,4 +10,6 @@ __pycache__/
 *.tmp
 *.hex
 
-docs
+build
+docs/Coverage
+docs/Doxygen

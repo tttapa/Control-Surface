@@ -146,7 +146,7 @@ with ThreadPoolExecutor(max_workers=args.jobs) as executor:
 {output[0]["compiler_err"]}
 {output[0]["stderr"]}
 {"success" if success else "fail"}
-""")
+""", flush=True)
         if not success:
             failures.append((board, example_rel))
         total_count += 1

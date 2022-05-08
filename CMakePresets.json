@@ -1,0 +1,89 @@
+{
+    "version": 4,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 18,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "dev",
+            "displayName": "Development",
+            "description": "",
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "AH_WARNINGS_AS_ERRORS": true,
+                "AH_WITH_COVERAGE": true,
+                "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+                "CMAKE_CXX_FLAGS": "-fsanitize=address,leak,undefined,pointer-compare,pointer-subtract",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": true
+            }
+        },
+        {
+            "name": "ci",
+            "displayName": "CI",
+            "description": "",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "AH_WARNINGS_AS_ERRORS": true,
+                "AH_WITH_COVERAGE": false,
+                "CMAKE_CXX_FLAGS": "-fsanitize=address,leak,undefined,pointer-compare,pointer-subtract"
+            }
+        },
+        {
+            "name": "ci-cov",
+            "displayName": "CI + Coverage",
+            "description": "",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "AH_WARNINGS_AS_ERRORS": false,
+                "AH_WITH_COVERAGE": true,
+                "CMAKE_CXX_FLAGS": "-fsanitize=address,leak,undefined,pointer-compare,pointer-subtract"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "dev",
+            "displayName": "Development",
+            "configurePreset": "dev"
+        },
+        {
+            "name": "ci",
+            "displayName": "CI",
+            "configurePreset": "ci"
+        },
+        {
+            "name": "ci-cov",
+            "displayName": "CI + Coverage",
+            "configurePreset": "ci-cov"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "dev",
+            "displayName": "Development",
+            "configurePreset": "dev",
+            "output": {
+                "outputOnFailure": true
+            }
+        },
+        {
+            "name": "ci",
+            "displayName": "CI",
+            "configurePreset": "ci",
+            "output": {
+                "outputOnFailure": true
+            }
+        },
+        {
+            "name": "ci-cov",
+            "displayName": "CI + Coverage",
+            "configurePreset": "ci-cov",
+            "output": {
+                "outputOnFailure": true
+            }
+        }
+    ]
+}
