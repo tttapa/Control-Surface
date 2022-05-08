@@ -34,7 +34,7 @@ set(INTEL_WARNINGS
     -Wall
     -Wextra
 )
-if (WARNINGS_AS_ERRORS)
+if (AH_WARNINGS_AS_ERRORS)
     if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
         list(APPEND MSVC_WARNINGS /WX)
     else()
