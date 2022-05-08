@@ -48,6 +48,8 @@ jobs:
     - uses: actions/setup-python@v2
       with:
         python-version: '3.9.6'
+    - name: Install pypng
+      run: python3 -m pip install "pypng>=0.0.20"
 
     # Create the `gh-pages` branch if it doesn't exist already, check it out, 
     # and copy it to /tmp/staging.

@@ -9,11 +9,16 @@ mkdir -p "$output_folder"
 # coverage information.
 # usage:    run_doxygen_coverage <branch-name> <output-directory>
 function run_doxygen_coverage {
+    repodir=$PWD/../..
     pushd ../../doxygen
     if [ "$1" = "master" ]; then dir="Doxygen"; else dir="$1/Doxygen"; fi
     # Remove the old documentation
     rm -rf "$2/$dir"
     mkdir -p "$2/$dir"
+    pushd "$2/$dir"
+    python3 "${repodir}/src/Display/Bitmaps/Scripts/XBM-export.py"
+    popd
+    python3 ./scripts/examples.py
     # Tweak some Doxyfile verion numbers and output paths
     ( 
         cat Doxyfile;
