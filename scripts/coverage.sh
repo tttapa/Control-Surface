@@ -62,7 +62,7 @@ ctest
 lcov \
     --capture \
     --directory "$build_dir" \
-    --include "$proj_dir"'/AH/**' \
+    --include "$proj_dir"'/src/**' \
     --output-file "$dest"/coverage_test.info \
     --gcov-tool "$gcov_bin" \
     --rc lcov_branch_coverage=$branches
