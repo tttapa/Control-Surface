@@ -16,7 +16,8 @@
                 "AH_WARNINGS_AS_ERRORS": true,
                 "AH_WITH_COVERAGE": true,
                 "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
-                "CMAKE_CXX_FLAGS": "-fsanitize=address,leak,undefined,pointer-compare,pointer-subtract"
+                "CMAKE_CXX_FLAGS": "-fsanitize=address,leak,undefined,pointer-compare,pointer-subtract",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": true
             }
         },
         {

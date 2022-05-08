@@ -23,4 +23,5 @@
         "**/docs/Coverage": true
     },
     "cmake.useCMakePresets": "always",
+    "cmake.copyCompileCommands": "${workspaceFolder}/build/compile_commands.json",
 }
