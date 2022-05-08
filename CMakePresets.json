@@ -52,12 +52,14 @@
         {
             "name": "ci",
             "displayName": "CI",
-            "configurePreset": "ci"
+            "configurePreset": "ci",
+            "jobs": 1
         },
         {
             "name": "ci-cov",
             "displayName": "CI + Coverage",
-            "configurePreset": "ci-cov"
+            "configurePreset": "ci-cov",
+            "jobs": 1
         }
     ],
     "testPresets": [

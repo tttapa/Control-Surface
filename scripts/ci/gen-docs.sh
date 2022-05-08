@@ -37,7 +37,7 @@ function run_doxygen_coverage {
     pushd ../..
     rm -rf docs/Coverage build
     cmake -S. --preset ci-cov
-    cmake --build --preset ci-cov -t coverage -j
+    cmake --build --preset ci-cov -t coverage
     mkdir -p "$2/$dir"
     rm -rf "$2/$dir"
     mv docs/Coverage "$2/$dir"
