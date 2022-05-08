@@ -7,11 +7,12 @@
 ## Features
 
 - **Containers**: Arrays, Bit Arrays, Linked Lists, Smart Pointers.
-- **Extended Input/Output**: Use shift registers (e.g. 74HC595) and multiplexers
-  (e.g. 74HC4051, 74HC4067) as if they were normal Arduino IO pins.
-- **Hardware Utilities**: Debounced buttons, long press buttons, button 
-  matrices, filtered analog inputs, MCP23017 Rotary Encoders, LED ranges, 
-  MAX7219 displays and LED matrices.
+- **Extended Input/Output**: Use shift registers (e.g. 74HC595), multiplexers
+  (e.g. 74HC4051, 74HC4067) and IO expanders as if they were normal Arduino IO
+  pins.
+- **Hardware Utilities**: Debounced buttons, long press buttons, double-click
+  buttons, button matrices, filtered analog inputs, MCP23017 Rotary Encoders,
+  LED ranges, MAX7219 displays and LED matrices.
 - **Filters**: Exponential Moving Average filters, Hysteresis.
 - **Math functions**: `min` and `max` functions instead of macros, functions
   for uniformly increasing the bit depth of signals, all C++ standard library 
@@ -52,10 +53,14 @@ For each commit, the continuous integration tests compile the examples for the
 following boards:
 
 - Arduino UNO
+- Arduino Mega
 - Arduino Leonardo
 - Teensy 3.2
+- Teensy 4.1
 - Arduino Due
 - Arduino Nano 33 IoT
+- Arduino Nano 33 BLE
+- Arduino Nano Every
 - ESP8266
 - ESP32
 
