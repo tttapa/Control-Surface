@@ -26,13 +26,11 @@ if (AH_DOXYGEN)
         WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen)
 endif()
 
+# Compiler warnings
 option(AH_WARNINGS_AS_ERRORS "Enable -Werror" On)
 include(cmake/Warnings.cmake)
 
-################################################################################
 # Build the source files and tests
-################################################################################
-
 add_subdirectory(mock)
 add_subdirectory(src)
 add_subdirectory(test)
