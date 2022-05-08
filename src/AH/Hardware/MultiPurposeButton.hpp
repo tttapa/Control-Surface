@@ -87,13 +87,13 @@ class MultiPurposeButton {
         this->multiPressDelay = multiPressDelay;
     }
 
-    /// @see @ref Button::previousBounceTime()
+    /// @see @ref Button::previousBounceTime() const
     unsigned long previousBounceTime() const {
         return button.previousBounceTime();
     }
-    /// @see @ref Button::stableTime()
+    /// @see @ref Button::stableTime() const
     unsigned long stableTime() const { return button.stableTime(); }
-    /// @see @ref Button::stableTime(unsigned long)
+    /// @see @ref Button::stableTime(unsigned long) const
     unsigned long stableTime(unsigned long now) const {
         return button.stableTime(now);
     }
@@ -113,7 +113,7 @@ class MultiPurposeButton {
     /// Return the name of the event  as a string.
     static FlashString_t getName(Event ev) { return to_string(ev); }
 
-    /// @see @ref Button::getState()
+    /// @see @ref Button::getState() const
     Button::State getButtonState() const { return button.getState(); }
     /// @see @ref Button::invert()
     void invert() { button.invert(); }
