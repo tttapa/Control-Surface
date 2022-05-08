@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        board: [AVR, Nano 33 BLE, Nano 33 IoT, ESP32, ESP8266, AVR USB, Mega, Leonardo, Due, Nano Every]
+        board: [AVR, Nano 33 BLE, Nano 33 IoT, ESP32, ESP8266, AVR USB, Mega, Leonardo, Due, Nano Every, Teensy 3.x, Teensy 4.1]
 
     steps:
       - name: Checkout
@@ -56,9 +56,10 @@ jobs:
 
       - name: Install Arduino Boards
         run: |
-          arduino-cli core install arduino:avr arduino:mbed_nano arduino:samd esp32:esp32 esp8266:esp8266 arduino:sam arduino:megaavr
+          arduino-cli core install arduino:avr arduino:mbed_nano arduino:samd esp32:esp32 esp8266:esp8266 arduino:sam arduino:megaavr teensy:avr
           arduino-cli core upgrade
           arduino-cli cache clean
+          version=$(arduino-cli core list | grep 'teensy:avr' | awk '{print $2}') && { sed -i 's/^recipe.hooks.postbuild/# recipe.hooks.postbuild/g' $HOME/.arduino15/packages/teensy/hardware/avr/$version/platform.txt ||:; }
           version=$(arduino-cli core list | grep 'arduino:mbed_nano' | awk '{print $2}') && { patch "$HOME/.arduino15/packages/arduino/hardware/mbed_nano/$version/cores/arduino/Arduino.h" -i "$GITHUB_WORKSPACE/scripts/patches/ARDUINO_LIB_DISCOVERY_PHASE.patch" ||:; }
 
       - name: Install Arduino Libraries
