@@ -1,9 +1,0 @@
-<map id="StaticSizeExtendedIOElement&lt; N &gt;" name="StaticSizeExtendedIOElement&lt; N &gt;">
-<area shape="rect" id="node1" title="A class for ExtendedIOElements with a fixed size." alt="" coords="88,1115,343,1221"/>
-<area shape="rect" id="node5" href="$d8/db4/classShiftRegisterOutBase.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="115,1269,315,1640"/>
-<area shape="rect" id="node2" href="$de/d4e/classExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="108,564,323,1067"/>
-<area shape="rect" id="node3" href="$d2/dfb/classUpdatableCRTP.html" title=" " alt="" coords="75,219,356,516"/>
-<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="122,5,309,171"/>
-<area shape="rect" id="node6" href="$dd/d81/classSPIShiftRegisterOut.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595 that are connected to the SPI bu..." alt="" coords="5,1688,204,1824"/>
-<area shape="rect" id="node7" href="$d1/d5c/classShiftRegisterOut.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="228,1695,427,1817"/>
-</map>
