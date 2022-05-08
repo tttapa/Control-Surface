@@ -7,7 +7,7 @@
     },
     "configurePresets": [
         {
-            "name": "development-default",
+            "name": "dev",
             "displayName": "Development",
             "description": "",
             "generator": "Ninja Multi-Config",
@@ -45,21 +45,33 @@
     ],
     "buildPresets": [
         {
-            "name": "development-default",
-            "configurePreset": "development-default"
+            "name": "dev",
+            "displayName": "Development",
+            "configurePreset": "dev"
         },
         {
             "name": "ci",
+            "displayName": "CI",
             "configurePreset": "ci"
         },
         {
             "name": "ci-cov",
+            "displayName": "CI + Coverage",
             "configurePreset": "ci-cov"
         }
     ],
     "testPresets": [
         {
+            "name": "dev",
+            "displayName": "Development",
+            "configurePreset": "dev",
+            "output": {
+                "outputOnFailure": true
+            }
+        },
+        {
             "name": "ci",
+            "displayName": "CI",
             "configurePreset": "ci",
             "output": {
                 "outputOnFailure": true
@@ -67,6 +79,7 @@
         },
         {
             "name": "ci-cov",
+            "displayName": "CI + Coverage",
             "configurePreset": "ci-cov",
             "output": {
                 "outputOnFailure": true
