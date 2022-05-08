@@ -1,0 +1,82 @@
+# This action generates the documentation and then deploys it to the `gh-pages` branch.
+
+name: Documentation & Coverage
+
+on:
+  push:
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # Cache the doxygen executable, lcov
+    - uses: actions/cache@v2
+      id: cache-tools
+      with:
+        path: |
+          /tmp/doxygen
+          /tmp/lcov
+          /tmp/gtest
+        key: ${{ runner.os }}-doc-${{ hashFiles('scripts/ci/install-doxygen.sh', 'scripts/ci/install-lcov.sh', 'scripts/install-gtest.sh') }}
+    
+    - name: Install Graphviz/Dot and LCOV Perl dependencies, as well as TeX Live
+      run: |
+        sudo apt-get install \
+          graphviz libjson-perl libperlio-gzip-perl perl \
+          texlive-binaries
+
+    - name: Install LCOV
+      run: |
+        ./scripts/ci/install-lcov.sh /tmp/lcov
+        echo "/tmp/lcov/bin" >> $GITHUB_PATH
+
+    # Download and build doxygen (if not cached already)
+    - name: Install Doxygen
+      run: |
+        ./scripts/ci/install-doxygen.sh /tmp/doxygen
+        echo "/tmp/doxygen/bin" >> $GITHUB_PATH
+
+    - name: Install Google Test
+      if: steps.cache-tools.outputs.cache-hit != 'true'
+      shell: bash
+      run: ./scripts/install-gtest.sh Debug /tmp/gtest
+
+    # Install Python
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.9.6'
+
+    # Create the `gh-pages` branch if it doesn't exist already, check it out, 
+    # and copy it to /tmp/staging.
+    - name: Create staging area
+      run: |
+        rm -rf /tmp/staging
+        git fetch origin gh-pages:gh-pages ||:
+        git checkout gh-pages || \
+        { git checkout --orphan gh-pages && git rm -rf . && git clean -fxd ; }
+        cp -ar $GITHUB_WORKSPACE/ /tmp/staging
+        git checkout ${GITHUB_REF##*/}
+        git submodule update --init --recursive
+
+    # Generate the documentation and save it in /tmp/staging
+    - name: Generate documentation
+      run: ./scripts/ci/gen-docs.sh /tmp/staging
+      env:
+        CC: gcc-10
+        CXX: g++-10
+        CMAKE_PREFIX_PATH: /tmp/gtest
+
+    # Commit the new documentation, squash the commits, and push it to GitHub
+    - name: Commit and push documention
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "actions@github.com"
+        commithash=$(git rev-parse HEAD)
+        cd /tmp/staging
+        git add .
+        git commit -m "Documentation for ${commithash}" && \
+        git reset $(git commit-tree HEAD^{tree} -m "Documentation for ${commithash}") && \
+        git push -f origin gh-pages ||:

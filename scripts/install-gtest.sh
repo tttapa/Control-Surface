@@ -14,7 +14,7 @@ git clone --single-branch --depth=1 --branch main \
     https://github.com/google/googletest.git
 pushd googletest
 cmake -Bbuild -S. \
-    -D CMAKE_INSTALL_PREFIX="$VIRTUAL_ENV" \
+    -D CMAKE_INSTALL_PREFIX="${prefix}" \
     -D CMAKE_BUILD_TYPE="${build_type}"
 cmake --build build -j
 cmake --install build
