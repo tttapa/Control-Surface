@@ -29,6 +29,7 @@ function run_doxygen_coverage {
         echo "GENERATE_LATEX = NO" 
     ) > tmp-Doxyfile
     # Generate the documentation
+    python3 scripts/examples.py
     doxygen tmp-Doxyfile
     rm -rf tmp-Doxyfile
     popd
