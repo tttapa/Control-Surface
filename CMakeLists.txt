@@ -19,11 +19,18 @@ if (AH_WITH_COVERAGE)
 endif()
 
 # Add documentation target
-find_program(AH_DOXYGEN doxygen)
-if (AH_DOXYGEN)
-    add_custom_target(documentation
-        doxygen
+find_package(Doxygen)
+find_package(Python3 COMPONENTS Interpreter)
+if (DOXYGEN_FOUND AND Python3_Interpreter_FOUND)
+    # Add example documentation target
+    add_custom_target(examples-doxygen 
+        Python3::Interpreter ${CMAKE_CURRENT_LIST_DIR}/doxygen/scripts/examples.py
         WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen)
+    # Add documentation target
+    add_custom_target(documentation
+        Doxygen::doxygen
+        WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doxygen
+        DEPENDS examples-doxygen)
 endif()
 
 # Compiler warnings

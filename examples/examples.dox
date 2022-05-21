@@ -1,92 +1,20 @@
 /**
- * @example   "CountPressedButtons.ino"
+ * @example   "BlinkWithoutDelay-Timer.ino"
  * 
- * CountPressedButtons
- * ===================
+ * BlinkWithoutDelay-Timer
+ * =======================
  *
- * Example of using the standard library algorithms and the Button class.
- *
+ * This examples shows how use the Timer class to blink an LED every
+ * second, in a non-blocking fashion (without using delay).
+ * 
  * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
- * This sketch reads a number of push buttons or switches, and uses the standard
- * library algorithms to count how many of them are pressed.
+ * Behavior
+ * --------
  * 
- * The internal pull-up resistors are enabled and the switches are debounced.
- *
- * Written by PieterP, 2019-11-24  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "Numeric.ino"
+ * Blinks the built-in LED every second.
  * 
- * Numeric
- * =======
- *
- * Example of using the standard library numeric functions.
- *
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
- *
- * This sketch creates an incremental array using the iota function, then
- * computes the inner product of the vector with itself, and uses that to
- * calculate the norm of the vector.
- *
- * **Output**
- * ~~~
- * v      = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
- * 〈v, v〉 = 385
- * ‖v‖    = 19.6214160
- * ~~~
- * 
- * Written by PieterP, 2019-11-18  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "ArraySort.ino"
- * 
- * ArraySort
- * =========
- *
- * Example of using the standard library algorithms.
- *
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
- *
- * This sketch creates an array with an unordered sequence of 10 numbers.
- * It prints the array, and then creates a reverse view on the 6 elements in the 
- * middle of the array and sorts it.
- * The resulting array has the same elements in the 4 outermost places, but the
- * 6 elements in the middle have been sorted in reverse order.
- *
- * **Output**
- * ~~~
- * Before sorting: 3, 5, 9, 2, 1, 8, 6, 4, 7, 0
- *   Sorting            ├─────────────────┤      in ascending order
- * After sorting:  3, 5, 1, 2, 4, 6, 8, 9, 7, 0
- *   Sorting            ├─────────────────┤      in descending order
- * After sorting:  3, 5, 9, 8, 6, 4, 2, 1, 7, 0
- * ~~~
- * 
- * Written by PieterP, 2019-11-12
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "Complex.ino"
- * 
- * Complex
- * =======
- *
- * Example of using the standard library complex numbers.
- *
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
- *
- * **Output**
- * ~~~
- * √(2i) = (1.00,1.00)
- * ~~~
- * 
- * Written by PieterP, 2019-11-14
+ * Written by PieterP, 2019-12-06  
  * https://github.com/tttapa/Arduino-Helpers
  */
 
@@ -128,336 +56,158 @@
  */
 
 /**
- * @example   "1.FilteredAnalog.ino"
+ * @example   "MCP23017-Encoders-Interrupts.ino"
  * 
- * 1.FilteredAnalog
- * ================
+ * MCP23017-Encoders-Interrupts
+ * ============================
  *
- * This examples shows how to filter an analog input, so you can get the 
- * position of a knob or fader without noise.
+ * This example demonstrates the use of MCP23017 I²C port expanders with rotary
+ * encoders, using hardware interrupts so you don't miss any pulses.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  Teensy 3.x
+ * 
+ * This only works on Teensy boards, and maybe on other ARM boards.  
+ * I've tested it using a Teensy 3.2 and a Teensy 4.0.
+ * 
+ * AVR boards (Arduino Uno, Mega, etc.) don't support I²C inside of interrupt
+ * service routines, so there's no way to read the state of the MCP23017
+ * inside of an ISR.  
+ * The same goes for ESP32 and ESP8266, although there may be ways around
+ * this by using alternative I²C drivers or by using FreeRTOS features.
  * 
  * Connections
  * -----------
  * 
- * - A0: wiper of a potentiometer
+ *   - SDA:  MCP23017 SDA
+ *   - SCL:  MCP23017 SCL
+ *   - 12:   MCP23017 INTA or INTB
+ *   
+ * Connect up to 8 encoders to the MCP23017's GPIO pins: 
+ * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
+ * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
+ * Connect the "common" pins of the encoders to ground.  
+ * The built-in pull-up resistors of the MCP23017 will be enabled.
  * 
- * Connect the left terminal of the potentiometer to ground, and the right one
- * to V<sub>CC</sub>.
+ * Make sure that the reset and address pins are all configured correctly 
+ * (reset to Vcc; A0, A1 and A2 to ground).
+ * 
+ * If you need more than one MCP23017 with encoders, you can connect their 
+ * interrupt pins together. This does result in higher latency, because on 
+ * average, half of the total number of MCP23017s have to be polled, which is 
+ * relatively slow, and might lead to missed pulses when using a large number
+ * of encoders.
  * 
  * Behavior
  * --------
  * 
- * - Upload the sketch to the Arduino, and open the Serial Monitor 
- *   (`CTRL+Shift+M`)
- * - When you turn the potentiometer, you should see the position of the 
- *   potentiometer being printed as a number between 0 and 1023.
- * - The analog input is filtered, so there shouldn't be any noise on the 
- *   position. If there is, check your wiring, and make sure that the resistance
- *   of the potentiometer isn't too high (10 kΩ is ideal). 
+ * When the position of one of the encoders changes, it is printed to the Serial
+ * monitor.
  * 
- * The example @ref 1.FilteredAnalog-Advanced.ino has more information about the
- * parameters you can pass to the FilteredAnalog class to tweak the filters,
- * increase the resolution, etc.
+ * The interrupt pin of the MCP23017 triggers a hardware interrupt on the
+ * Arduino. This means that you don't have to manually poll the encoders all
+ * the time.
  * 
- * Written by PieterP, 2019-10-10  
+ * Written by PieterP, 2020-04-06  
  * https://github.com/tttapa/Arduino-Helpers
  */
 
 /**
- * @example   "2.Button.ino"
+ * @example   "MCP23017-Encoders-No-Interrupts.ino"
  * 
- * 2.Button
- * ========
+ * MCP23017-Encoders-No-Interrupts
+ * ===============================
  *
- * This examples shows how to use the debounced Button class to toggle an LED.
+ * This example demonstrates the use of MCP23017 I²C port expanders with rotary
+ * encoders.
  * 
  * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
  * 
- * - 2: Momentary push button (other pin to ground)
+ *   - SDA:  MCP23017 SDA
+ *   - SCL:  MCP23017 SCL
+ *   - 12:   MCP23017 INTA or INTB
+ *   
+ * Connect up to 8 encoders to the MCP23017's GPIO pins: 
+ * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
+ * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
+ * Connect the "common" pins of the encoders to ground.  
+ * The built-in pull-up resistors of the MCP23017 will be enabled.
  * 
- * The internal pull-up resistor will be enabled.
+ * Make sure that the reset and address pins are all configured correctly 
+ * (reset to Vcc; A0, A1 and A2 to ground).
+ * 
+ * If you need more than one MCP23017 with encoders, you can connect their 
+ * interrupt pins together. This does result in higher latency, because on 
+ * average, half of the total number of MCP23017s have to be polled, which is 
+ * relatively slow, and might lead to missed pulses when using a large number
+ * of encoders.
  * 
  * Behavior
  * --------
  * 
- * - If you press the push button once, the built-in LED is turned on.
- * - If you press the button again, the LED is turned off again.
+ * When the position of one of the encoders changes, it is printed to the Serial
+ * monitor.
  * 
- * Written by PieterP, 2019-11-22  
+ * Cautions
+ * --------
+ * 
+ * The interrupt pin of the MCP23017 doesn't trigger a hardware interrupt on the
+ * Arduino. It's used only to determine whether the Arduino should read the GPIO
+ * registers from the MCP23017.  
+ * If the update function isn't called often enough, you will miss encoder 
+ * pulses, and the position will be incorrect.  
+ * It's very important to keep your main loop free from any code that blocks for
+ * more than a couple of hundreds of microseconds.
+ * 
+ * Written by PieterP, 2020-04-06  
  * https://github.com/tttapa/Arduino-Helpers
  */
 
 /**
- * @example   "Blink-Frequency-Buttons.ino"
+ * @example   "Pin-Change-Interrupt-Encoders.ino"
  * 
- * Blink-Frequency-Buttons
- * =======================
+ * Pin-Change-Interrupt-Encoders
+ * =============================
  *
- * This examples shows how to use two push buttons to set the frequency at which
- * an LED blinks.
+ * This example reads multiple encoders using pin change interrupts, on an 
+ * Arduino Uno or Nano.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards AVR
  * 
+ * The ATmega328P microcontroller only has two interrupt pins (2 and 3), so if
+ * you want to use more than two interrupt-driven encoders, you'll either have 
+ * to use a timer interrupt to continuously poll the encoders, or use the chip's
+ * pin change interrupts. This example demonstrates the latter.
+ *
+ * @see @ref Timer-Interrupt-Encoders.ino
+ *
+ * Familiarity with [direct port manipulation](https://www.arduino.cc/en/Reference/PortManipulation)
+ * is assumed.
+ *
  * Connections
  * -----------
+ *
+ * Connect three encoders to the pins of port C as follows:
  * 
- * - 2: Momentary push button (other pin to ground)
- * - 3: Momentary push button (other pin to ground)
- * 
- * The internal pull-up resistors will be enabled.
+ *   - A0: pin A of encoder #0
+ *   - A1: pin B of encoder #0
+ *   - A2: pin A of encoder #1
+ *   - A3: pin B of encoder #1
+ *   - A4: pin A of encoder #2
+ *   - A5: pin B of encoder #2
+ *
+ * Connect the common pins to ground, the internal pull-up resistors will be 
+ * enabled.
  * 
  * Behavior
  * --------
- * 
- * - If you press the first push button, the LED blinks faster.
- * - If you press the second push button, the LED blinks slower.
- * - You can press and hold one of the push buttons to change the frequency by
- *   multiple steps.
- * - If you press both buttons at the same time, the frequency is reset to the
- *   initial default frequency.
- * 
- * Written by PieterP, 2019-12-10  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "MCP23017.ino"
- * 
- * MCP23017
- * ========
  *
- * This example demonstrates the use of MCP23017 IO expanders as if they were 
- * just normal IO pins.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *   - SDA: MCP23017 SDA
- *   - SCK: MCP23017 SCK
- *   - 2:   MCP23017 INT A or INT B
- * 
- * Connect an LED (and series resistor) between pin GPA0 of the MCP and ground.
- * Connect a push button between pin GPB0 of the MCP and ground. The internal
- * pull-up resistor will be used.
- * 
- * Tie the three address lines of the MCP to ground.
- * 
- * Behavior
- * --------
- * 
- * When the push button is pressed, the LED turns on.
- * 
- * Written by PieterP, 2020-11-20  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "Toggle-LEDs.ino"
- * 
- * Toggle-LEDs
- * ===========
+ * When the position of one of the encoders changes, it is printed to the Serial
+ * monitor.
  *
- * This example demonstrates the use of push buttons and LEDs and how to use
- * shift registers and analog multiplexers to save pins.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *   - SS:   74HC595 ST_CP
- *   - MOSI: 74HC595 DS
- *   - SCK:  74HC595 SH_CP
- *   - 2: 74HC4067 A (COM OUT/IN)
- *   - 3: 74HC4067 S0
- *   - 4: 74HC4067 S1
- *   - 5: 74HC4067 S2
- *   - 6: 74HC4067 S3
- * 
- * Connect 16 momentary push buttons between the input pins of the 
- * multiplexer and ground.  
- * The internal pull-up resistor for the buttons will be enabled automatically,
- * so no external resistors are necessary.
- * 
- * Connect 16 LEDs (and series resistors) between the eight outputs of the
- * two shift registers and ground. 
- * 
- * Remember to connect the enable pins of both the multiplexer and the shift
- * registers to ground in order to enable them. Also connect the master reset 
- * pin of the shift registers to Vcc.  
- * Connect the serial data output of the first shift register (QH' or Q7S) to
- * the serial input of the second shift register.
- * 
- * Behavior
- * --------
- *  
- * Pressing the first button will turn on the first LED. Pressing it again will
- * turn it off again.
- * Pressing the second button will turn on the second LED. Pressing it again 
- * will turn it off again, and so on.
- * 
- * Written by PieterP, 2018-08-28  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "2.DigitalReadSerial.ino"
- * 
- * 2.DigitalReadSerial
- * ===================
- *
- * This is an example of the AnalogMultiplex class. It prints the states of all
- * 16 switches connected to a multiplexers to the serial monitor.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *  - 2: CD74HC4067 signal pin ("common input/output")
- *  - 3: CD74HC4067 address pin S0
- *  - 4: CD74HC4067 address pin S1
- *  - 5: CD74HC4067 address pin S2
- *  - 6: CD74HC4067 address pin S3
- *  
- * Optionally you can connect the enable pin as well, this is useful
- * if you want to use multiple multiplexers with the same address 
- * lines and the same analog input. Otherwise, just connect the enable
- * pin to ground.
- * 
- * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
- * uncomment the code specific to this multiplexer, and use only three
- * address pins.
- * 
- * Connect a switch or push button between each input pin of the multiplexer and
- * ground. A pull-up resistor is not necessary, because we'll use the internal 
- * one.
- *  
- * Behavior
- * --------
- * 
- * Open the serial monitor (CTRL+SHIFT+M) or the serial plotter (CTRL+SHIFT+L),
- * and press some buttons, you should see all 16 signals printed or plotted.
- * 
- * Written by Pieter P, 2019-08-08   
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "1.AnalogReadSerial.ino"
- * 
- * 1.AnalogReadSerial
- * ==================
- *
- * This is an example of the AnalogMultiplex class. It prints the values of all
- * 16 inputs of a multiplexers to the serial monitor.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *  - A0: CD74HC4067 signal pin ("common input/output")
- *  - 3:  CD74HC4067 address pin S0
- *  - 4:  CD74HC4067 address pin S1
- *  - 5:  CD74HC4067 address pin S2
- *  - 6:  CD74HC4067 address pin S3
- *  
- * Optionally you can connect the enable pin as well, this is useful
- * if you want to use multiple multiplexers with the same address 
- * lines and the same analog input. Otherwise, just connect the enable
- * pin to ground.
- * 
- * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
- * uncomment the code specific to this multiplexer, and use only three
- * address pins.
- *  
- * Behavior
- * --------
- * 
- * Connect some potentiometers or other analog sensors to the 16 inputs
- * of the multiplexer, and open the serial monitor (CTRL+SHIFT+M) or the
- * serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed
- * or plotted.
- * 
- * Written by Pieter P, 31-01-2019  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "3.FilteredAnalogReadSerial.ino"
- * 
- * 3.FilteredAnalogReadSerial
- * ==========================
- *
- * This is an example of the AnalogMultiplex and the FilteredAnalog classes. 
- * It prints the filtered values of all 16 inputs of a multiplexers to the 
- * serial monitor.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *  - A0: CD74HC4067 signal pin ("common input/output")
- *  - 3:  CD74HC4067 address pin S0
- *  - 4:  CD74HC4067 address pin S1
- *  - 5:  CD74HC4067 address pin S2
- *  - 6:  CD74HC4067 address pin S3
- *  
- * Optionally you can connect the enable pin as well, this is useful
- * if you want to use multiple multiplexers with the same address 
- * lines and the same analog input. Otherwise, just connect the enable
- * pin to ground.
- * 
- * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
- * uncomment the code specific to this multiplexer, and use only three
- * address pins.
- *  
- * Behavior
- * --------
- * 
- * Connect some potentiometers or other analog sensors to the 16 inputs
- * of the multiplexer, and open the serial monitor (CTRL+SHIFT+M) or the
- * serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed
- * or plotted.
- * 
- * Written by Pieter P, 09-04-2019  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "1.MAX7219-Blink.ino"
- * 
- * 1.MAX7219-Blink
- * ===============
- *
- * This example demonstrates the use of MAX7219 LED outputs as if they were just
- * normal IO pins, using `digitalWrite`.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *   - SS:   MAX7219 CS
- *   - MOSI: MAX7219 DIN
- *   - SCK:  MAX7219 CLK
- * 
- * Behavior
- * --------
- * 
- * This sketch will blink the first and the last LEDs once a second, in an 
- * alternating pattern.
- * 
- * Written by PieterP, 2020-03-24  
+ * Written by PieterP, 2021-08-11  
  * https://github.com/tttapa/Arduino-Helpers
  */
 
@@ -591,112 +341,516 @@
  */
 
 /**
- * @example   "MCP23017-Encoders-No-Interrupts.ino"
+ * @example   "1.MAX7219-Blink.ino"
  * 
- * MCP23017-Encoders-No-Interrupts
- * ===============================
+ * 1.MAX7219-Blink
+ * ===============
  *
- * This example demonstrates the use of MCP23017 I²C port expanders with rotary
- * encoders.
+ * This example demonstrates the use of MAX7219 LED outputs as if they were just
+ * normal IO pins, using `digitalWrite`.
  * 
  * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
  * 
- *   - SDA:  MCP23017 SDA
- *   - SCL:  MCP23017 SCL
- *   - 12:   MCP23017 INTA or INTB
- *   
- * Connect up to 8 encoders to the MCP23017's GPIO pins: 
- * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
- * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
- * Connect the "common" pins of the encoders to ground.  
- * The built-in pull-up resistors of the MCP23017 will be enabled.
- * 
- * Make sure that the reset and address pins are all configured correctly 
- * (reset to Vcc; A0, A1 and A2 to ground).
- * 
- * If you need more than one MCP23017 with encoders, you can connect their 
- * interrupt pins together. This does result in higher latency, because on 
- * average, half of the total number of MCP23017s have to be polled, which is 
- * relatively slow, and might lead to missed pulses when using a large number
- * of encoders.
+ *   - SS:   MAX7219 CS
+ *   - MOSI: MAX7219 DIN
+ *   - SCK:  MAX7219 CLK
  * 
  * Behavior
  * --------
  * 
- * When the position of one of the encoders changes, it is printed to the Serial
- * monitor.
+ * This sketch will blink the first and the last LEDs once a second, in an 
+ * alternating pattern.
  * 
- * Cautions
- * --------
- * 
- * The interrupt pin of the MCP23017 doesn't trigger a hardware interrupt on the
- * Arduino. It's used only to determine whether the Arduino should read the GPIO
- * registers from the MCP23017.  
- * If the update function isn't called often enough, you will miss encoder 
- * pulses, and the position will be incorrect.  
- * It's very important to keep your main loop free from any code that blocks for
- * more than a couple of hundreds of microseconds.
- * 
- * Written by PieterP, 2020-04-06  
+ * Written by PieterP, 2020-03-24  
  * https://github.com/tttapa/Arduino-Helpers
  */
 
 /**
- * @example   "MCP23017-Encoders-Interrupts.ino"
+ * @example   "Toggle-LEDs.ino"
  * 
- * MCP23017-Encoders-Interrupts
- * ============================
+ * Toggle-LEDs
+ * ===========
  *
- * This example demonstrates the use of MCP23017 I²C port expanders with rotary
- * encoders, using hardware interrupts so you don't miss any pulses.
+ * This example demonstrates the use of push buttons and LEDs and how to use
+ * shift registers and analog multiplexers to save pins.
  * 
- * @boards  Teensy 3.x
- * 
- * This only works on Teensy boards, and maybe on other ARM boards.  
- * I've tested it using a Teensy 3.2 and a Teensy 4.0.
- * 
- * AVR boards (Arduino Uno, Mega, etc.) don't support I²C inside of interrupt
- * service routines, so there's no way to read the state of the MCP23017
- * inside of an ISR.  
- * The same goes for ESP32 and ESP8266, although there may be ways around
- * this by using alternative I²C drivers or by using FreeRTOS features.
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
  * 
- *   - SDA:  MCP23017 SDA
- *   - SCL:  MCP23017 SCL
- *   - 12:   MCP23017 INTA or INTB
- *   
- * Connect up to 8 encoders to the MCP23017's GPIO pins: 
- * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
- * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
- * Connect the "common" pins of the encoders to ground.  
- * The built-in pull-up resistors of the MCP23017 will be enabled.
+ *   - SS:   74HC595 ST_CP
+ *   - MOSI: 74HC595 DS
+ *   - SCK:  74HC595 SH_CP
+ *   - 2: 74HC4067 A (COM OUT/IN)
+ *   - 3: 74HC4067 S0
+ *   - 4: 74HC4067 S1
+ *   - 5: 74HC4067 S2
+ *   - 6: 74HC4067 S3
  * 
- * Make sure that the reset and address pins are all configured correctly 
- * (reset to Vcc; A0, A1 and A2 to ground).
+ * Connect 16 momentary push buttons between the input pins of the 
+ * multiplexer and ground.  
+ * The internal pull-up resistor for the buttons will be enabled automatically,
+ * so no external resistors are necessary.
  * 
- * If you need more than one MCP23017 with encoders, you can connect their 
- * interrupt pins together. This does result in higher latency, because on 
- * average, half of the total number of MCP23017s have to be polled, which is 
- * relatively slow, and might lead to missed pulses when using a large number
- * of encoders.
+ * Connect 16 LEDs (and series resistors) between the eight outputs of the
+ * two shift registers and ground. 
+ * 
+ * Remember to connect the enable pins of both the multiplexer and the shift
+ * registers to ground in order to enable them. Also connect the master reset 
+ * pin of the shift registers to Vcc.  
+ * Connect the serial data output of the first shift register (QH' or Q7S) to
+ * the serial input of the second shift register.
+ * 
+ * Behavior
+ * --------
+ *  
+ * Pressing the first button will turn on the first LED. Pressing it again will
+ * turn it off again.
+ * Pressing the second button will turn on the second LED. Pressing it again 
+ * will turn it off again, and so on.
+ * 
+ * Written by PieterP, 2018-08-28  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "MCP23017.ino"
+ * 
+ * MCP23017
+ * ========
+ *
+ * This example demonstrates the use of MCP23017 IO expanders as if they were 
+ * just normal IO pins.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SDA: MCP23017 SDA
+ *   - SCK: MCP23017 SCK
+ *   - 2:   MCP23017 INT A or INT B
+ * 
+ * Connect an LED (and series resistor) between pin GPA0 of the MCP and ground.
+ * Connect a push button between pin GPB0 of the MCP and ground. The internal
+ * pull-up resistor will be used.
+ * 
+ * Tie the three address lines of the MCP to ground.
  * 
  * Behavior
  * --------
  * 
+ * When the push button is pressed, the LED turns on.
+ * 
+ * Written by PieterP, 2020-11-20  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "3.FilteredAnalogReadSerial.ino"
+ * 
+ * 3.FilteredAnalogReadSerial
+ * ==========================
+ *
+ * This is an example of the AnalogMultiplex and the FilteredAnalog classes. 
+ * It prints the filtered values of all 16 inputs of a multiplexers to the 
+ * serial monitor.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *  - A0: CD74HC4067 signal pin ("common input/output")
+ *  - 3:  CD74HC4067 address pin S0
+ *  - 4:  CD74HC4067 address pin S1
+ *  - 5:  CD74HC4067 address pin S2
+ *  - 6:  CD74HC4067 address pin S3
+ *  
+ * Optionally you can connect the enable pin as well, this is useful
+ * if you want to use multiple multiplexers with the same address 
+ * lines and the same analog input. Otherwise, just connect the enable
+ * pin to ground.
+ * 
+ * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
+ * uncomment the code specific to this multiplexer, and use only three
+ * address pins.
+ *  
+ * Behavior
+ * --------
+ * 
+ * Connect some potentiometers or other analog sensors to the 16 inputs
+ * of the multiplexer, and open the serial monitor (CTRL+SHIFT+M) or the
+ * serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed
+ * or plotted.
+ * 
+ * Written by Pieter P, 09-04-2019  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "2.DigitalReadSerial.ino"
+ * 
+ * 2.DigitalReadSerial
+ * ===================
+ *
+ * This is an example of the AnalogMultiplex class. It prints the states of all
+ * 16 switches connected to a multiplexers to the serial monitor.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *  - 2: CD74HC4067 signal pin ("common input/output")
+ *  - 3: CD74HC4067 address pin S0
+ *  - 4: CD74HC4067 address pin S1
+ *  - 5: CD74HC4067 address pin S2
+ *  - 6: CD74HC4067 address pin S3
+ *  
+ * Optionally you can connect the enable pin as well, this is useful
+ * if you want to use multiple multiplexers with the same address 
+ * lines and the same analog input. Otherwise, just connect the enable
+ * pin to ground.
+ * 
+ * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
+ * uncomment the code specific to this multiplexer, and use only three
+ * address pins.
+ * 
+ * Connect a switch or push button between each input pin of the multiplexer and
+ * ground. A pull-up resistor is not necessary, because we'll use the internal 
+ * one.
+ *  
+ * Behavior
+ * --------
+ * 
+ * Open the serial monitor (CTRL+SHIFT+M) or the serial plotter (CTRL+SHIFT+L),
+ * and press some buttons, you should see all 16 signals printed or plotted.
+ * 
+ * Written by Pieter P, 2019-08-08   
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "1.AnalogReadSerial.ino"
+ * 
+ * 1.AnalogReadSerial
+ * ==================
+ *
+ * This is an example of the AnalogMultiplex class. It prints the values of all
+ * 16 inputs of a multiplexers to the serial monitor.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *  - A0: CD74HC4067 signal pin ("common input/output")
+ *  - 3:  CD74HC4067 address pin S0
+ *  - 4:  CD74HC4067 address pin S1
+ *  - 5:  CD74HC4067 address pin S2
+ *  - 6:  CD74HC4067 address pin S3
+ *  
+ * Optionally you can connect the enable pin as well, this is useful
+ * if you want to use multiple multiplexers with the same address 
+ * lines and the same analog input. Otherwise, just connect the enable
+ * pin to ground.
+ * 
+ * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
+ * uncomment the code specific to this multiplexer, and use only three
+ * address pins.
+ *  
+ * Behavior
+ * --------
+ * 
+ * Connect some potentiometers or other analog sensors to the 16 inputs
+ * of the multiplexer, and open the serial monitor (CTRL+SHIFT+M) or the
+ * serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed
+ * or plotted.
+ * 
+ * Written by Pieter P, 31-01-2019  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Timer-Interrupt-Encoders.ino"
+ * 
+ * Timer-Interrupt-Encoders
+ * ========================
+ *
+ * This example reads multiple encoders using a timer interrupt, on an 
+ * Arduino Uno or Nano.
+ * 
+ * @boards AVR
+ * 
+ * The ATmega328P microcontroller only has two interrupt pins (2 and 3), so if
+ * you want to use more than two interrupt-driven encoders, you'll either have 
+ * to use a timer interrupt to continuously poll the encoders, or use the chip's
+ * pin change interrupts. This example demonstrates the former.
+ * 
+ * @see @ref Pin-Change-Interrupt-Encoders.ino
+ *
+ * Familiarity with [direct port manipulation](https://www.arduino.cc/en/Reference/PortManipulation)
+ * is assumed.
+ *
+ * Connections
+ * -----------
+ *
+ * Connect three encoders to the pins of port C as follows:
+ * 
+ *    - A0: pin A of encoder #0
+ *    - A1: pin B of encoder #0
+ *    - A2: pin A of encoder #1
+ *    - A3: pin B of encoder #1
+ *    - A4: pin A of encoder #2
+ *    - A5: pin B of encoder #2
+ *
+ * Connect the common pins to ground, the internal pull-up resistors will be 
+ * enabled.
+ * 
+ * Behavior
+ * --------
+ *
  * When the position of one of the encoders changes, it is printed to the Serial
  * monitor.
+ *
+ * Written by PieterP, 2021-08-11  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "2.Button.ino"
  * 
- * The interrupt pin of the MCP23017 triggers a hardware interrupt on the
- * Arduino. This means that you don't have to manually poll the encoders all
- * the time.
+ * 2.Button
+ * ========
+ *
+ * This examples shows how to use the debounced Button class to toggle an LED.
  * 
- * Written by PieterP, 2020-04-06  
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 2: Momentary push button (other pin to ground)
+ * 
+ * The internal pull-up resistor will be enabled.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - If you press the push button once, the built-in LED is turned on.
+ * - If you press the button again, the LED is turned off again.
+ * 
+ * Written by PieterP, 2019-11-22  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "1.FilteredAnalog.ino"
+ * 
+ * 1.FilteredAnalog
+ * ================
+ *
+ * This examples shows how to filter an analog input, so you can get the 
+ * position of a knob or fader without noise.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Upload the sketch to the Arduino, and open the Serial Monitor 
+ *   (`CTRL+Shift+M`)
+ * - When you turn the potentiometer, you should see the position of the 
+ *   potentiometer being printed as a number between 0 and 1023.
+ * - The analog input is filtered, so there shouldn't be any noise on the 
+ *   position. If there is, check your wiring, and make sure that the resistance
+ *   of the potentiometer isn't too high (10 kΩ is ideal). 
+ * 
+ * The example @ref 1.FilteredAnalog-Advanced.ino has more information about the
+ * parameters you can pass to the FilteredAnalog class to tweak the filters,
+ * increase the resolution, etc.
+ * 
+ * Written by PieterP, 2019-10-10  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "3.MultiPurposeButton.ino"
+ * 
+ * 3.MultiPurposeButton
+ * ====================
+ *
+ * This examples shows how to use the MultiPurposeButton class to detect 
+ * different kinds of push button events.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 2: Momentary push button (other pin to ground)
+ * 
+ * The internal pull-up resistor will be enabled.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Short presses, long presses, multiple presses, etc. are printed to the 
+ *   Serial monitor.
+ * 
+ * Written by PieterP, 2022-05-07  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Blink-Frequency-Buttons.ino"
+ * 
+ * Blink-Frequency-Buttons
+ * =======================
+ *
+ * This examples shows how to use two push buttons to set the frequency at which
+ * an LED blinks.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 2: Momentary push button (other pin to ground)
+ * - 3: Momentary push button (other pin to ground)
+ * 
+ * The internal pull-up resistors will be enabled.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - If you press the first push button, the LED blinks faster.
+ * - If you press the second push button, the LED blinks slower.
+ * - You can press and hold one of the push buttons to change the frequency by
+ *   multiple steps.
+ * - If you press both buttons at the same time, the frequency is reset to the
+ *   initial default frequency.
+ * 
+ * Written by PieterP, 2019-12-10  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Complex.ino"
+ * 
+ * Complex
+ * =======
+ *
+ * Example of using the standard library complex numbers.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ *
+ * **Output**
+ * ~~~
+ * √(2i) = (1.00,1.00)
+ * ~~~
+ * 
+ * Written by PieterP, 2019-11-14
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Numeric.ino"
+ * 
+ * Numeric
+ * =======
+ *
+ * Example of using the standard library numeric functions.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ *
+ * This sketch creates an incremental array using the iota function, then
+ * computes the inner product of the vector with itself, and uses that to
+ * calculate the norm of the vector.
+ *
+ * **Output**
+ * ~~~
+ * v      = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+ * 〈v, v〉 = 385
+ * ‖v‖    = 19.6214160
+ * ~~~
+ * 
+ * Written by PieterP, 2019-11-18  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "CountPressedButtons.ino"
+ * 
+ * CountPressedButtons
+ * ===================
+ *
+ * Example of using the standard library algorithms and the Button class.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * This sketch reads a number of push buttons or switches, and uses the standard
+ * library algorithms to count how many of them are pressed.
+ * 
+ * The internal pull-up resistors are enabled and the switches are debounced.
+ *
+ * Written by PieterP, 2019-11-24  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "ArraySort.ino"
+ * 
+ * ArraySort
+ * =========
+ *
+ * Example of using the standard library algorithms.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ *
+ * This sketch creates an array with an unordered sequence of 10 numbers.
+ * It prints the array, and then creates a reverse view on the 6 elements in the 
+ * middle of the array and sorts it.
+ * The resulting array has the same elements in the 4 outermost places, but the
+ * 6 elements in the middle have been sorted in reverse order.
+ *
+ * **Output**
+ * ~~~
+ * Before sorting: 3, 5, 9, 2, 1, 8, 6, 4, 7, 0
+ *   Sorting            ├─────────────────┤      in ascending order
+ * After sorting:  3, 5, 1, 2, 4, 6, 8, 9, 7, 0
+ *   Sorting            ├─────────────────┤      in descending order
+ * After sorting:  3, 5, 9, 8, 6, 4, 2, 1, 7, 0
+ * ~~~
+ * 
+ * Written by PieterP, 2019-11-12
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Quaternion.ino"
+ * 
+ * Quaternion
+ * ==========
+ *
+ * Simple Quaternion test.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ *
+ * Written by PieterP, 2020-03-24  
  * https://github.com/tttapa/Arduino-Helpers
  */
 
@@ -738,40 +892,6 @@
  *      editing the settings file.
  * 
  * Written by PieterP, 2018-07-31  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "Quaternion.ino"
- * 
- * Quaternion
- * ==========
- *
- * Simple Quaternion test.
- *
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
- *
- * Written by PieterP, 2020-03-24  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "BlinkWithoutDelay-Timer.ino"
- * 
- * BlinkWithoutDelay-Timer
- * =======================
- *
- * This examples shows how use the Timer class to blink an LED every
- * second, in a non-blocking fashion (without using delay).
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Behavior
- * --------
- * 
- * Blinks the built-in LED every second.
- * 
- * Written by PieterP, 2019-12-06  
  * https://github.com/tttapa/Arduino-Helpers
  */
 
