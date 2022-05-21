@@ -37,7 +37,7 @@ with open(join(doxydir, 'Doxyfile')) as doxy:
     else:
         print('Error: couldn\'t find EXAMPLE_PATH in Doxyfile')
         exit(1)
-    m = re.search(r'INPUT\s*=\s*("[^"]+")', doxy_content)
+    m = re.search(r'INPUT\s*=\s*([./a-zA-Z0-9_-]+)', doxy_content)
     if m:
         lastInclude = m.group(1).split(" ")[-1]
         outputfile = realpath(join(doxydir, stripQuotes(lastInclude)))
