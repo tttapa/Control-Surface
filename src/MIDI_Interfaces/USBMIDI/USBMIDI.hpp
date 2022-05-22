@@ -57,6 +57,10 @@ END_CS_NAMESPACE
 #include "USBMIDI_MIDIUSB.hpp"
 #endif
 
+#elif defined(ARDUINO_ARCH_MBED_RP2040)
+
+#include "USBMIDI_RP2040.hpp"
+
 #elif defined(ARDUINO_ARCH_MBED)
 
 #include "USBMIDI_Arduino_mbed.hpp"

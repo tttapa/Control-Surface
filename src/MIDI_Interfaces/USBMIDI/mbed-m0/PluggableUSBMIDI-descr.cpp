@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-#if defined(ARDUINO_ARCH_MBED) && !defined(ARDUINO_ARCH_MBED_RP2040)
+#ifdef ARDUINO_ARCH_MBED_RP2040
 
 #include "PluggableUSBMIDI.hpp"
 
