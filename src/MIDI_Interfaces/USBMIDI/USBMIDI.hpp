@@ -22,6 +22,13 @@ inline uint32_t bytes_to_u32(uint8_t b0, uint8_t b1, uint8_t b2, uint8_t b3) {
            (uint32_t(b3) << 24);  //
 }
 
+inline uint32_t bytes_to_u32(AH::Array<uint8_t, 4> b) {
+    return (uint32_t(b.data[0]) << 0) |  //
+           (uint32_t(b.data[1]) << 8) |  //
+           (uint32_t(b.data[2]) << 16) | //
+           (uint32_t(b.data[3]) << 24);  //
+}
+
 END_CS_NAMESPACE
 
 #ifdef ARDUINO

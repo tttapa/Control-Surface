@@ -10,8 +10,10 @@ struct USBDeviceMIDIBackend {
 
     MOCK_METHOD(void, write, (uint8_t, uint8_t, uint8_t, uint8_t));
     MOCK_METHOD(MIDIUSBPacket_t, read, ());
-    MOCK_METHOD(void, sendNow,());
-
+    MOCK_METHOD(void, sendNow, ());
+    void write(MIDIUSBPacket_t d) {
+        return write(d.data[0], d.data[1], d.data[2], d.data[3]);
+    }
     static bool preferImmediateSend() { return false; }
 };
 

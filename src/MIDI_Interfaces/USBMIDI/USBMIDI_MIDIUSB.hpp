@@ -12,8 +12,8 @@ struct USBDeviceMIDIBackend {
         return {{midipacket.header, midipacket.byte1, midipacket.byte2,
                  midipacket.byte3}};
     }
-    void write(uint8_t cn_cin, uint8_t midi_0, uint8_t midi_1, uint8_t midi_2) {
-        midiEventPacket_t msg{cn_cin, midi_0, midi_1, midi_2};
+    void write(MIDIUSBPacket_t d) {
+        midiEventPacket_t msg{d.data[0], d.data[1], d.data[2], d.data[3]};
         MidiUSB.sendMIDI(msg);
     }
     void sendNow() { MidiUSB.flush(); }

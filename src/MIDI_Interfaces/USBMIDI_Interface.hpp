@@ -74,7 +74,7 @@ class GenericUSBMIDI_Interface : public MIDI_Interface {
         void operator()(Cable cn, MIDICodeIndexNumber cin, uint8_t d0,
                         uint8_t d1, uint8_t d2) {
             uint8_t cn_cin = (cn.getRaw() << 4) | uint8_t(cin);
-            iface->backend.write(cn_cin, d0, d1, d2);
+            iface->backend.write({cn_cin, d0, d1, d2});
         }
     };
     /// @}
