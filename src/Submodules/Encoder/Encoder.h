@@ -39,7 +39,14 @@
 
 BEGIN_CS_NAMESPACE
 
-#define ENCODER_ARGLIST_SIZE CORE_NUM_INTERRUPT
+// Use IRAM_ATTR for ISRs to prevent ESP8266 resets
+#if defined(ESP8266) || defined(ESP32)
+#define CS_ENCODER_ISR_ATTR IRAM_ATTR
+#else
+#define CS_ENCODER_ISR_ATTR
+#endif
+
+#define CS_ENCODER_ARGLIST_SIZE CORE_NUM_INTERRUPT
 
 /// All the data needed by interrupts is consolidated into this ugly struct
 /// to facilitate assembly language optimizing of the speed critical update.
@@ -116,10 +123,10 @@ class Encoder {
     /// `update()` is not meant to be called from outside Encoder,
     /// but it is public to allow static interrupt routines.
     /// DO NOT call update() directly from sketches.
-    static void update(Encoder_internal_state_t *arg);
+    CS_ENCODER_ISR_ATTR static void update(Encoder_internal_state_t *arg);
     /// Similarly to `update()`, don't use these interrupt handler arguments
     /// from your sketch.
-    static Encoder_internal_state_t *interruptArgs[ENCODER_ARGLIST_SIZE];
+    static Encoder_internal_state_t *interruptArgs[CS_ENCODER_ARGLIST_SIZE];
 };
 
 END_CS_NAMESPACE

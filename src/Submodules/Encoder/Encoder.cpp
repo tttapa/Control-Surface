@@ -79,9 +79,13 @@ void Encoder::begin() {
     if (DIRECT_PIN_READ(encoder.pin2_register, encoder.pin2_bitmask))
         s |= 2;
     encoder.state = s;
-
+    
     attachInterruptCtx(digitalPinToInterrupt(pin1));
     attachInterruptCtx(digitalPinToInterrupt(pin2));
+    #ifdef ARDUINO_ARCH_MBED
+    pinMode(pin1, INPUT_PULLUP);
+    pinMode(pin2, INPUT_PULLUP);
+    #endif
 }
 
 void Encoder::end() {
@@ -107,7 +111,7 @@ void Encoder::detachInterruptCtx(int interrupt) {
     }
 }
 
-Encoder_internal_state_t *Encoder::interruptArgs[ENCODER_ARGLIST_SIZE] = {};
+Encoder_internal_state_t *Encoder::interruptArgs[CS_ENCODER_ARGLIST_SIZE] = {};
 
 END_CS_NAMESPACE
 

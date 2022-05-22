@@ -256,7 +256,7 @@
 
 // Arduino Zero - TODO: interrupts do not seem to work
 //                      please help, contribute a fix!
-#elif defined(__SAMD21G18A__)
+#elif defined(__SAMD21G18A__) || defined(__SAMD21E18A__)
   #define CORE_NUM_INTERRUPT	31
   #define CORE_INT0_PIN		0
   #define CORE_INT1_PIN		1
@@ -333,6 +333,17 @@
 
 // Arduino Nano BLE
 #elif defined(ARDUINO_ARCH_NRF52840)
+  #define CORE_NUM_INTERRUPT	NUM_DIGITAL_PINS
+
+// Arduino Nano RP2040 Connect
+#elif defined(ARDUINO_NANO_RP2040_CONNECT)
+  #define CORE_NUM_INTERRUPT	20
+
+#elif defined(ARDUINO_ARCH_RP2040)
+  #define CORE_NUM_INTERRUPT	26
+
+// mbedOS
+#elif defined(ARDUINO_ARCH_MBED)
   #define CORE_NUM_INTERRUPT	NUM_DIGITAL_PINS
 
 #endif

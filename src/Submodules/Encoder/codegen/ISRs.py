@@ -29,8 +29,8 @@ ISRs = """static ISR_fun_t getISR(uint8_t interrupt) {
   switch (interrupt) {
 """
 for i in range(max_num_interrupts):
-    ISRs += f'    #if {i} < ENCODER_ARGLIST_SIZE\n'
-    ISRs += f'    case {i}: return +[] {{ Encoder::update(Encoder::interruptArgs[{i}]); }};\n'
+    ISRs += f'    #if {i} < CS_ENCODER_ARGLIST_SIZE\n'
+    ISRs += f'    case {i}: return +[]() CS_ENCODER_ISR_ATTR {{ Encoder::update(Encoder::interruptArgs[{i}]); }};\n'
     ISRs += f'    #endif\n'
 ISRs += """    default: return nullptr;
   }
