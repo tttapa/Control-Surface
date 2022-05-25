@@ -279,7 +279,12 @@ bool PluggableUSBMIDI::send_now_impl_nonblock(uint32_t active_idx) {
     CS_MIDI_USB_ASSERT(writing.buffers[!active_idx].size == 0);
     writing.active_writebuffer = !active_idx;
 
-    // Get the size of the buffer to send and atomically set it to reserved
+    // Get the size of the buffer to send and atomically set it to reserved.
+    // This buffer cannot be sent because writing.sending == nullptr, so no 
+    // previous transmission was in progress that could have started sending
+    // this buffer from an ISR.
+    // Similarly, the timeout callback couldn't have started sending it either
+    // because we own the writing.sending lock.
     uint32_t size = std::exchange(writebuffer->size, SizeReserved);
     CS_MIDI_USB_ASSERT(size != SizeReserved);
     CS_MIDI_USB_ASSERT(size != 0);
@@ -309,7 +314,7 @@ void PluggableUSBMIDI::send_in_callback(uint32_t sendbuf_idx) {
 }
 
 void PluggableUSBMIDI::timeout_callback() {
-    this->lock();
+    this->lock(); // Note: we're in an ISR
     std::atomic_signal_fence(std::memory_order_acquire);
     /* ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ [Timeout] ▲ */
 

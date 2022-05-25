@@ -132,6 +132,11 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule {
             uint32_t size{0};
             /// Indicates that this buffer can be sent as soon as the previous
             /// one has been sent.
+            /// This flag is changed from false to true when the buffer is
+            /// scheduled to be sent, either because it is full or because the 
+            /// timeout was triggered. If the flag is true, no further efforts
+            /// should be made to send it. It is cleared in the USB ISR, after
+            /// the buffer has actually been sent.
             bool ready_to_send{false};
             alignas(uint32_t) uint8_t buffer[PacketSize];
         } buffers[2];
