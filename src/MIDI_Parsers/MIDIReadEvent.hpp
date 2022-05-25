@@ -2,8 +2,8 @@
 
 #include <stdint.h>
 
-#include <Settings/NamespaceSettings.hpp>
 #include <AH/PrintStream/PrintStream.hpp>
+#include <Settings/NamespaceSettings.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -17,23 +17,20 @@ enum class MIDIReadEvent : uint8_t {
     SYSCOMMON_MESSAGE = 5, ///< A MIDI System Common message was received.
 };
 
-inline Print &operator<<(Print &p, MIDIReadEvent evt) {
+inline FlashString_t enum_to_string(MIDIReadEvent evt) {
     switch (evt) {
-        case MIDIReadEvent::NO_MESSAGE:
-            return p << F("NO_MESSAGE");
-        case MIDIReadEvent::CHANNEL_MESSAGE:
-            return p << F("CHANNEL_MESSAGE");
-        case MIDIReadEvent::SYSEX_MESSAGE:
-            return p << F("SYSEX_MESSAGE");
-        case MIDIReadEvent::REALTIME_MESSAGE:
-            return p << F("REALTIME_MESSAGE");
-        case MIDIReadEvent::SYSEX_CHUNK:
-            return p << F("SYSEX_CHUNK");
-        case MIDIReadEvent::SYSCOMMON_MESSAGE:
-            return p << F("SYSCOMMON_MESSAGE");
-        default: 
-            return p << F("<Invalid MIDIReadEvent>");
+        case MIDIReadEvent::NO_MESSAGE: return F("NO_MESSAGE");
+        case MIDIReadEvent::CHANNEL_MESSAGE: return F("CHANNEL_MESSAGE");
+        case MIDIReadEvent::SYSEX_MESSAGE: return F("SYSEX_MESSAGE");
+        case MIDIReadEvent::REALTIME_MESSAGE: return F("REALTIME_MESSAGE");
+        case MIDIReadEvent::SYSEX_CHUNK: return F("SYSEX_CHUNK");
+        case MIDIReadEvent::SYSCOMMON_MESSAGE: return F("SYSCOMMON_MESSAGE");
+        default: return F("<invalid>");
     }
+}
+
+inline Print &operator<<(Print &p, MIDIReadEvent evt) {
+    return p << enum_to_string(evt);
 }
 
 END_CS_NAMESPACE
