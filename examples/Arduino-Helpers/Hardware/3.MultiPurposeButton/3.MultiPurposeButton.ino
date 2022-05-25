@@ -2,7 +2,7 @@
  * This examples shows how to use the MultiPurposeButton class to detect 
  * different kinds of push button events.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------

@@ -11,3 +11,4 @@ due: arduino:sam:arduino_due_x_dbg
 nano 33 iot: arduino:samd:nano_33_iot
 nano 33 ble: arduino:mbed_nano:nano33ble
 nano every: arduino:megaavr:nona4809:mode=off
+pi pico: arduino:mbed_rp2040:pico
