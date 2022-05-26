@@ -2,7 +2,7 @@
  * This example demonstrates the use of MAX7219 LED outputs as if they were just
  * normal IO pins, using `digitalWrite`.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
