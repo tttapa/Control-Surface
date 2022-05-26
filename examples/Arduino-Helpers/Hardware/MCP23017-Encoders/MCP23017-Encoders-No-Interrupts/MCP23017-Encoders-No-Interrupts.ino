@@ -47,12 +47,12 @@
  * https://github.com/tttapa/Arduino-Helpers
  */
 
+#include <Wire.h>
+
 #include <Arduino_Helpers.h>
 
 #include <AH/Hardware/MCP23017Encoders.hpp>
 #include <AH/PrintStream/PrintStream.hpp>
-
-#include <Wire.h>
 
 using WireType = decltype(Wire);     // The type of I²C driver to use
 using EncoderPositionType = int32_t; // The type for saving encoder positions
