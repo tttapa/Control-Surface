@@ -63,6 +63,7 @@ following boards:
 - Arduino Nano Every
 - ESP8266
 - ESP32
+- Raspberry Pi Pico
 
 This covers a very large part of the Arduino platform, and similar boards will
 also work (e.g. Arduino Nano, Arduino Mega, etc.).
