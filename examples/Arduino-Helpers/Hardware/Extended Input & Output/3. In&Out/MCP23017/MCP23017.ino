@@ -26,9 +26,11 @@
  * https://github.com/tttapa/Arduino-Helpers
  */
 
-#include <Arduino_Helpers.h>
-#include <AH/Hardware/ExtendedInputOutput/MCP23017.hpp>
 #include <Wire.h>
+
+#include <Arduino_Helpers.h>
+
+#include <AH/Hardware/ExtendedInputOutput/MCP23017.hpp>
 
 using namespace ExtIO; // Use the extended input/output functions
 
@@ -36,7 +38,7 @@ using WireType = decltype(Wire); // The type of the I²C driver to use
 MCP23017<WireType> mcp {
   Wire, // The I²C driver to use
   0x0,  // The I²C address offset (depends on the state of the address pins)
-  2,    // Optional: interrupt pin to detect input changes 
+  2,    // Optional: interrupt pin to detect input changes
 };
 
 pin_t ledPin = mcp.pinA(0);    // GPIOA0
@@ -56,8 +58,8 @@ void loop() {
   digitalWrite(ledPin, buttonState ? LOW : HIGH);
 }
 
-// Note: 
-// The “interrupt” pin is not used to trigger an actual interrupt on the 
+// Note:
+// The “interrupt” pin is not used to trigger an actual interrupt on the
 // microcontroller. It is just used to check whether any of the inputs of
 // the MCP23017 changed without having to do an I²C transaction. Using this
 // pin can speed up your code, but it's not necessary, you can leave it out
