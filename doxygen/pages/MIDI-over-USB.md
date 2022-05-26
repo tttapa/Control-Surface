@@ -2,13 +2,18 @@
 There are some differences in MIDI over USB implementation between different types of Arduino-compatible boards. This page provides an overview and some board recommendations if you're planning to build an Arduino MIDI device with MIDI over USB support.
  
 ## Arduino boards with native USB support
-_Arduino Due, Arduino Leonardo, Arduino Micro, Arduino Nano 33 BLE, Arduino Nano 33 IOT, Arduino Zero, Arduino MKR Zero, Arduino MKR1000 ..._  
+_Arduino Due, Arduino Leonardo, Arduino Micro, Arduino Nano 33 IOT, Arduino Zero, Arduino MKR Zero, Arduino MKR1000 ..._  
 ***
 Some of the newer boards have native USB support (i.e. the USB connection goes directly to the main MCU) this means that they can act as a true USB MIDI device. This is based on PluggableUSB, using the [MIDIUSB](https://github.com/arduino-libraries/MIDIUSB) library.  
 You just have to @ref md_pages_Installation "install the MIDIUSB library", and upload a Control Surface sketch with a @ref USBMIDI_Interface.  
 The computer will then automatically detect the Arduino as a MIDI device.
 
 The MIDIUSB library only supports one MIDI USB virtual cable, while most Teensies support all 16 cables (see below).
+
+## Mbed OS boards with native USB support
+_Arduino Nano 33 BLE, Raspberry Pi Pico_
+***
+While these boards are not supported by the Arduino MIDIUSB library, they still support MIDI over USB through Control Surface's custom `PluggableUSBMIDI` implementation.
 
 ## Teensy
 _Teensy 2.0, Teensy++ 2.0, Teensy LC, Teensy 3.0, Teensy 3.1, Teensy 3.2, Teensy 3.5, Teensy 3.6, Teensy 4.0, Teensy 4.1_  
