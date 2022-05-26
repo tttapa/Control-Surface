@@ -1,0 +1,2 @@
+add_executable(syx2usb syx2usb.cpp)
+target_link_libraries(syx2usb PRIVATE Control_Surface)

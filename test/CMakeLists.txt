@@ -61,3 +61,5 @@ target_link_libraries(tests
 # Add tests
 gtest_discover_tests(tests DISCOVERY_TIMEOUT 60 TIMEOUT 20)
 add_executable(Arduino-Helpers::tests ALIAS tests)
+
+add_subdirectory(tools)
