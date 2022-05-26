@@ -4,7 +4,7 @@
  * you to enter MIDI messages as text in the Serial monitor, and then sends 
  * these messages as MIDI over USB.
  *
- * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x
+ * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x
  *
  * This example requires an Arduino board with native MIDI over USB support.
  *

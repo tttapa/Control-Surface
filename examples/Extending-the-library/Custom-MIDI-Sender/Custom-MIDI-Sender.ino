@@ -6,7 +6,7 @@
  * 
  * @see @ref MIDI_Senders for different kinds of MIDI senders to start from.
  *
- * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------

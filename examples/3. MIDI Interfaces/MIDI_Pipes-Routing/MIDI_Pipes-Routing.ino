@@ -8,7 +8,7 @@
  * Surface itself, not just the input and output of MIDI interfaces. This is
  * demonstrated in the @ref Dual-MIDI-Interface.ino example.
  * 
- * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
+ * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
  */
 
 #include <Control_Surface.h>

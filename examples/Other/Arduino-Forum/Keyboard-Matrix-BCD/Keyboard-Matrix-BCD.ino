@@ -3,7 +3,7 @@
  * a BD to decimal decoder.  
  * https://forum.arduino.cc/index.php?topic=651047
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
  * 
  * Written by Pieter P, 2019-12-01  
  * https://github.com/tttapa/Control-Surface

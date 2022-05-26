@@ -2,7 +2,7 @@
  * This example demonstrates the use of MCP23017 I²C port expanders with rotary
  * encoders that send relative Control Change messages.
  * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
  * 
  * Connections
  * -----------
@@ -55,11 +55,12 @@
  * https://github.com/tttapa/Arduino-Helpers
  */
 
+#include <Wire.h>
+
 #include <Control_Surface.h>
 
 #include <AH/Hardware/MCP23017Encoders.hpp>
 
-#include <Wire.h>
 
 // Type for the MCP23017 encoders (translates encoder pulses to position)
 using WireType = decltype(Wire);     // The type of I²C driver to use

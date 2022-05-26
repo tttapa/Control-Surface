@@ -3,7 +3,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------

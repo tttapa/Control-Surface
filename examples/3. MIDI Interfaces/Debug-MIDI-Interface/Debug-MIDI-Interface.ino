@@ -1,7 +1,7 @@
 /** 
  * This example demonstrates how to use the MIDI interface for debugging.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------

@@ -4,7 +4,7 @@
  * MIDI Note events when a push button is pressed or released. It's a simplified
  * version of the @ref NoteButton class.
  *
- * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------
