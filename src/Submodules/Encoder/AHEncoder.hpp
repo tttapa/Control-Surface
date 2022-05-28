@@ -67,7 +67,13 @@ class AHEncoder {
     void write(int32_t p);
 
   private:
+    using isr_func_t = void (*)(); ///< The type of a handler function.
+    /// Get a pointer to the interrupt handler function for the given interrupt.
+    template <unsigned NumISR = CS_ENCODER_ARGLIST_SIZE>
+    static isr_func_t get_isr(unsigned interrupt);
+    /// Register the interrupt handler for this instance.
     void attachInterruptCtx(int interrupt);
+    /// Un-register the interrupt handler for this instance.
     void detachInterruptCtx(int interrupt);
 
   private:
@@ -77,14 +83,12 @@ class AHEncoder {
     DirectPinRead direct_pins[2];
     AtomicPosition<int32_t> position {0};
 
-  public:
-    /// `update()` is not meant to be called from outside Encoder,
-    /// but it is public to allow static interrupt routines.
-    /// DO NOT call update() directly from sketches.
+  private:
+    /// Private handler function that is called from the ISR.
     CS_ENCODER_ISR_ATTR void update();
-    /// Similarly to `update()`, don't use these interrupt handler arguments
-    /// from your sketch.
-    static AHEncoder *interruptArgs[CS_ENCODER_ARGLIST_SIZE];
+    /// Array of pointers to all instances with active interrupts. Used to look
+    /// up the instance to call the handler for in the ISR.
+    static AHEncoder *instance_table[CS_ENCODER_ARGLIST_SIZE];
 };
 
 END_CS_NAMESPACE

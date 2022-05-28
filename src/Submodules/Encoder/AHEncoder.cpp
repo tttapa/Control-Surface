@@ -6,8 +6,6 @@
 
 BEGIN_CS_NAMESPACE
 
-#include "codegen/ISRs-def.ipp"
-
 AHEncoder::AHEncoder(uint8_t pinA, uint8_t pinB)
     : pins {pinA, pinB}, direct_pins {direct_pin_read(pinA),
                                       direct_pin_read(pinB)} {
@@ -29,7 +27,7 @@ void swap(AHEncoder &a, AHEncoder &b) {
     std::swap(a.interrupts_in_use, b.interrupts_in_use);
     std::swap(a.pins, b.pins);
 
-    // Next, update the pointers in interruptArgs:
+    // Next, update the pointers in instance_table:
     // When interrupts are in use, there is a global interrupt context
     // variable that holds a pointer to the encoders that are being swapped
     // or moved.
@@ -46,18 +44,18 @@ void swap(AHEncoder &a, AHEncoder &b) {
     if (a.interrupts_in_use > 0) {
         int int1 = digitalPinToInterrupt(a.pins[0]);
         if (int1 != NOT_AN_INTERRUPT)
-            AHEncoder::interruptArgs[int1] = &a;
+            AHEncoder::instance_table[int1] = &a;
         int int2 = digitalPinToInterrupt(a.pins[1]);
         if (int2 != NOT_AN_INTERRUPT)
-            AHEncoder::interruptArgs[int2] = &a;
+            AHEncoder::instance_table[int2] = &a;
     }
     if (b.interrupts_in_use > 0) {
         int int1 = digitalPinToInterrupt(b.pins[0]);
         if (int1 != NOT_AN_INTERRUPT)
-            AHEncoder::interruptArgs[int1] = &b;
+            AHEncoder::instance_table[int1] = &b;
         int int2 = digitalPinToInterrupt(b.pins[1]);
         if (int2 != NOT_AN_INTERRUPT)
-            AHEncoder::interruptArgs[int2] = &b;
+            AHEncoder::instance_table[int2] = &b;
     }
     interrupts();
 }
@@ -101,17 +99,21 @@ void AHEncoder::end() {
 
 void AHEncoder::attachInterruptCtx(int interrupt) {
     if (interrupt != NOT_AN_INTERRUPT) {
-        interruptArgs[interrupt] = this;
+        if (instance_table[interrupt] != nullptr) {
+            FATAL_ERROR(F("Multiple encoders on the same pin"), 0x7283);
+            return;
+        }
+        instance_table[interrupt] = this;
         ++interrupts_in_use;
 #ifdef ARDUINO_ARCH_RP2040
         gpio_set_irq_enabled_with_callback(
             interrupt, GPIO_IRQ_EDGE_FALL | GPIO_IRQ_EDGE_RISE, true,
             [](uint gpio, uint32_t) {
-                if (auto arg = interruptArgs[gpio])
+                if (auto arg = instance_table[gpio])
                     arg->update();
             });
 #else
-        attachInterrupt(interrupt, EncoderISRs::getISR(interrupt), CHANGE);
+        attachInterrupt(interrupt, get_isr(interrupt), CHANGE);
 #endif
     }
 }
@@ -125,11 +127,11 @@ void AHEncoder::detachInterruptCtx(int interrupt) {
         detachInterrupt(interrupt);
 #endif
         --interrupts_in_use;
-        interruptArgs[interrupt] = nullptr;
+        instance_table[interrupt] = nullptr;
     }
 }
 
-AHEncoder *AHEncoder::interruptArgs[CS_ENCODER_ARGLIST_SIZE] {};
+AHEncoder *AHEncoder::instance_table[CS_ENCODER_ARGLIST_SIZE] {};
 
 END_CS_NAMESPACE
 

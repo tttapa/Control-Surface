@@ -4,6 +4,18 @@
 
 BEGIN_CS_NAMESPACE
 
+template <unsigned NumISR>
+auto AHEncoder::get_isr(unsigned interrupt) -> isr_func_t {
+    return interrupt == NumISR - 1
+               ? []() CS_ENCODER_ISR_ATTR { AHEncoder::instance_table[NumISR - 1]->update(); }
+               : get_isr<NumISR - 1>(interrupt); // Compile-time tail recursion
+}
+
+template <>
+inline auto AHEncoder::get_isr<0>(unsigned) -> isr_func_t {
+    return nullptr;
+}
+
 inline int32_t AHEncoder::read() {
     if (interrupts_in_use < 2)
         update();
@@ -46,29 +58,6 @@ inline void AHEncoder::write(int32_t p) {
 //        1        1        0        1        -1
 //        1        1        1        0        +1
 //        1        1        1        1        no movement
-
-/*
-        // Simple, easy-to-read "documentation" version :-)
-        //
-        void update(void) {
-            uint8_t s = state & 3;
-            if (digitalRead(pin1)) s |= 4;
-            if (digitalRead(pin2)) s |= 8;
-            switch (s) {
-                case 0: case 5: case 10: case 15:
-                    break;
-                case 1: case 7: case 8: case 14:
-                    position++; break;
-                case 2: case 4: case 11: case 13:
-                    position--; break;
-                case 3: case 12:
-                    position += 2; break;
-                default:
-                    position -= 2; break;
-            }
-            state = (s >> 2);
-        }
-*/
 
 inline void AHEncoder::update() {
     uint8_t s = state & 0b11;

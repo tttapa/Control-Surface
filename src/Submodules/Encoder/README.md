@@ -12,6 +12,4 @@ It includes following changes:
    other classes without having to construct it in-place. This requires 
    functions that can detach and re-attach the interrupts correctly, updating
    the ISR context pointers.
- - Add a code generator to automatically generate the many repetitive ISRs:
-   a Python script generates a huge switch statement that returns the right 
-   lambda function to be called in the ISR.
+ - Use templates to automatically generate the many repetitive ISRs.
