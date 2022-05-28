@@ -2,7 +2,7 @@
  * This example introduces smart bankable potentiometers to prevent
  * values jumping around when changing banks.
  *  
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------

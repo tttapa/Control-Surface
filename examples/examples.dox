@@ -192,6 +192,43 @@
 */
 
 /**
+ * @example   "Custom-USB-MIDI-Backend.ino"
+ * 
+ * Custom-USB-MIDI-Backend
+ * =======================
+ *
+ * This is an example that demonstrates how to extend the library using your own
+ * MIDI USB backend. It defines a class for sending and receiving raw MIDI USB
+ * packets that can be plugged into Control Surface's USBMIDI_Interface class.
+ *
+ * @see @ref src/MIDI_Interfaces/USBMIDI/USBMIDI_Teensy3.hpp
+ * @see @ref src/MIDI_Interfaces/USBMIDI/USBMIDI_MIDIUSB.hpp
+ * @see @ref src/MIDI_Interfaces/USBMIDI/USBMIDI_Adafruit_TinyUSB.hpp
+ * @see @ref src/MIDI_Interfaces/USBHostMIDI_Interface.hpp
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ *
+ * None.
+ *
+ * Behavior
+ * --------
+ *
+ * - Prints the raw MIDI USB packets to the Serial Monitor.
+ * - Receives no MIDI input.
+ *
+ * Mapping
+ * -------
+ *
+ * None.
+ * 
+ * Written by PieterP, 2022-05-28  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "Pitch-Bend-Value.ino"
  * 
  * Pitch-Bend-Value
@@ -199,7 +236,7 @@
  *
  * This example demonstrates how to listen for incoming  MIDI Pitch Bend events.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -231,7 +268,7 @@
  * This example demonstrates the use of LEDs that respond to incoming  MIDI
  * note events.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -340,7 +377,7 @@
  * This example demonstrates the use of LEDs that respond to incoming  MIDI
  * note events. The LEDs are driven by a MAX7219.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -501,7 +538,7 @@
  * This example demonstrates the use of LEDs that respond to incoming  MIDI
  * note events. The LEDs are driven by a 74HC595 (or equivalent) shift register.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -838,7 +875,7 @@
  * input. This example has fine-grained callbacks, i.e. one for each message 
  * type (Note On, Note Off, Control Change, System Exclusive ...).
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -873,7 +910,7 @@
  * This example demonstrates how to use a Serial MIDI Interface, for use with
  * 5-pin DIN connectors, for example.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -953,7 +990,7 @@
  * 
  * This example demonstrates how to use the MIDI interface for debugging.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -1045,7 +1082,7 @@
  *
  * Example showing how to send any MIDI message.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  *
  * See the @ref MIDI_Sender documentation for a full overview of all MIDI 
  * sending functions and their arguments.
@@ -1091,7 +1128,7 @@
  * input. This example has fine-grained callbacks, i.e. one for each message 
  * type (Note On, Note Off, Control Change, System Exclusive ...).
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -1124,7 +1161,7 @@
  * 
  * This is an example on how to send MIDI messages.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * For a full list of available MIDI send functions, see @ref MIDI_Sender.
  * 
@@ -1299,7 +1336,7 @@
  * This is an example on how to attach your own callbacks for receiving MIDI 
  * input.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -1332,7 +1369,7 @@
  *
  * Example showing how to send MIDI Note messages.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * @see @ref midi_md-sending "MIDI Tutorial: Sending MIDI messages"
  * @see @ref Send-All-MIDI-Messages.ino
@@ -1346,7 +1383,7 @@
  *
  * Example showing how to send and receive MIDI System Exclusive messages.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  */
 
 /**
@@ -1358,7 +1395,7 @@
  * This example introduces smart bankable potentiometers to prevent
  * values jumping around when changing banks.
  *  
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -1538,7 +1575,7 @@
  * This is an example that demonstrates the use a Transposer to transpose the
  * note events sent out by NoteButton%s.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -1631,7 +1668,7 @@
  * a BD to decimal decoder.  
  * https://forum.arduino.cc/index.php?topic=651047
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Written by Pieter P, 2019-12-01  
  * https://github.com/tttapa/Control-Surface
@@ -1646,7 +1683,7 @@
  * This is an example on how to attach your own callbacks for receiving MIDI 
  * input data.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -1679,7 +1716,7 @@
  * 
  * This is useful to discover what kinds of messages your DAW is sending.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  */
 
 /**
@@ -1692,7 +1729,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266, ESP8266
  * 
  * Connections
  * -----------
@@ -1905,7 +1942,7 @@
  * You can compare it to a rotary encoder, but with two buttons instead of an 
  * encoder.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  *
  * Connections
  * -----------
@@ -1951,7 +1988,7 @@
  *
  * This examples shows how to use a button matrix to read many switches.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -1991,7 +2028,7 @@
  * used for triggering samples, mute/solo/rec buttons, play/pause/stop buttons, 
  * etc. It can control almost any push button control in your DAW software.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -2026,7 +2063,7 @@
  * 
  * This is an example that demonstrates the use of MIDI Control Change Buttons.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -2064,7 +2101,7 @@
  * controls, etc. It can control almost any knob in your DAW software. 
  * This example shows how to define multiple potentiometers using an array.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x
  * 
  * Connections
  * -----------
@@ -2106,7 +2143,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc. It can control almost any knob in your DAW software.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -2146,7 +2183,7 @@
  * can be used for changing effect parameters, volumes, pan and balance
  * controls, etc. It can control almost any knob in your DAW software.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -2233,7 +2270,7 @@
  * 
  * This is an example that demonstrates the use of MIDI Program Changers.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -2266,7 +2303,7 @@
  * 
  * This is an example that demonstrates the use of MIDI Program Change buttons.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -2344,7 +2381,7 @@
  * This is the second example used in the 'Getting Started' guide:
  * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * @htmlonly
  * <iframe width="560" height="315"
@@ -2366,7 +2403,7 @@
  * This is the first example used in the 'Getting Started' guide:
  * https://tttapa.github.io/Control-Surface/Doc/Doxygen/dd/dcc/md_Getting-Started.html
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  *
  *  Written by PieterP, 2018-08-29  
  *  https://github.com/tttapa/Control-Surface
@@ -2381,7 +2418,7 @@
  * This examples shows how to filter an analog input, so you can get the 
  * position of a knob or fader without noise.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  * 
  * Connections
  * -----------
@@ -3307,3 +3344,4 @@
  * Written by PieterP, 2018-07-31  
  * https://github.com/tttapa/Arduino-Helpers
  */
+

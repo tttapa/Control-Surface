@@ -4,7 +4,7 @@
  * 
  * This is useful to discover what kinds of messages your DAW is sending.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32, ESP8266
  */
 
 #include <Control_Surface.h>
