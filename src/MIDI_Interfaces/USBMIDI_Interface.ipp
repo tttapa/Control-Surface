@@ -1,3 +1,4 @@
+#include <Def/TypeTraits.hpp>
 #include <MIDI_Parsers/LambdaPuller.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -16,7 +17,9 @@ MIDIReadEvent GenericUSBMIDI_Interface<Backend>::read() {
 
 template <class Backend>
 void GenericUSBMIDI_Interface<Backend>::begin() {
+#ifndef __SAM3X8E__ // Due compiler too old, doesn't support begin_if_possible()
     begin_if_possible(backend);
+#endif
 }
 
 template <class Backend>
