@@ -26,7 +26,8 @@
 #define AH_DIAGNOSTIC_EXTERNAL_HEADER()                                        \
     _Pragma("GCC diagnostic push") _Pragma("GCC diagnostic ignored \"-Wall\"") \
         _Pragma("GCC diagnostic ignored \"-Wextra\"")                          \
-            _Pragma("GCC diagnostic ignored \"-Wunused-parameter\"")
+            _Pragma("GCC diagnostic ignored \"-Wregister\"")                   \
+                _Pragma("GCC diagnostic ignored \"-Wunused-parameter\"")
 
 #endif
 
