@@ -12,11 +12,11 @@ header = f"""\
 //                                                                            //
 // ========================================================================== //
 
-// Edit and re-run  {basename(__file__)} instead
+// Edit and re-run {basename(__file__)} instead
 
 namespace EncoderISRs {{
 
-using ISR_fun_t = void (*)(void);
+using ISR_fun_t = void (*)();
 
 """
 
@@ -25,16 +25,19 @@ footer = f"""
 
 """
 
-ISRs = """static ISR_fun_t getISR(uint8_t interrupt) {
+ISRs = """[[maybe_unused]] static ISR_fun_t getISR(int interrupt) {
   switch (interrupt) {
 """
 for i in range(max_num_interrupts):
     ISRs += f'    #if {i} < CS_ENCODER_ARGLIST_SIZE\n'
-    ISRs += f'    case {i}: return +[]() CS_ENCODER_ISR_ATTR {{ Encoder::update(Encoder::interruptArgs[{i}]); }};\n'
+    ISRs += f'    case {i}: return +[]() CS_ENCODER_ISR_ATTR {{ AHEncoder::interruptArgs[{i}]->update(); }};\n'
     ISRs += f'    #endif\n'
-ISRs += """    default: return nullptr;
-  }
-};
+ISRs += f"""    default: return nullptr;
+    static_assert(CS_ENCODER_ARGLIST_SIZE <= {max_num_interrupts},
+                  "Error: more external interrupts than expected. "
+                  "Increase {basename(__file__)}:max_num_interrupts and try again.");
+  }}
+}};
 """
 
 with open(join(dirname(__file__), 'ISRs-def.ipp'), 'w') as f:

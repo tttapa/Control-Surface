@@ -7,7 +7,7 @@
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 #ifdef ARDUINO
-#include <Submodules/Encoder/Encoder.h>
+#include <Submodules/Encoder/AHEncoder.hpp>
 #else
 #include <Encoder.h> // Mock
 #endif
@@ -62,10 +62,10 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
 };
 
 template <class Sender>
-using MIDIRotaryEncoder = GenericMIDIRotaryEncoder<Encoder, Sender>;
+using MIDIRotaryEncoder = GenericMIDIRotaryEncoder<AHEncoder, Sender>;
 
 template <class Sender>
-using BorrowedMIDIRotaryEncoder = GenericMIDIRotaryEncoder<Encoder &, Sender>;
+using BorrowedMIDIRotaryEncoder = GenericMIDIRotaryEncoder<AHEncoder &, Sender>;
 
 END_CS_NAMESPACE
 

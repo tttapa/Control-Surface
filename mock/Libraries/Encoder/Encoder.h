@@ -7,11 +7,12 @@ class EncoderMock {
     MOCK_CONST_METHOD0(read, long());
 };
 
-class Encoder {
+class AHEncoder {
   public:
-    Encoder(int, int) : mock(nullptr) {}
-    Encoder(const EncoderMock &mock) : mock(&mock) {}
-    Encoder(const Encoder &) = default;
+    AHEncoder(int, int) : mock(nullptr) {}
+    AHEncoder(const EncoderMock &mock) : mock(&mock) {}
+    AHEncoder(EncoderMock &&) = delete;
+    AHEncoder(const AHEncoder &) = default;
     long read() const { return mock ? mock->read() : 0; }
 
   private:

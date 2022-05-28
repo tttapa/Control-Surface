@@ -6,7 +6,7 @@
 #include <Def/TypeTraits.hpp>
 
 #ifdef ARDUINO
-#include <Submodules/Encoder/Encoder.h>
+#include <Submodules/Encoder/AHEncoder.hpp>
 #else
 #include <Encoder.h> // Mock
 #endif
@@ -58,7 +58,7 @@ class GenericEncoderSelector : public GenericSelector<N, Callback> {
     }
 
   private:
-    Encoder encoder;
+    AHEncoder encoder;
     pin_t switchPin;
     int8_t pulsesPerStep;
     Wrap wrap;

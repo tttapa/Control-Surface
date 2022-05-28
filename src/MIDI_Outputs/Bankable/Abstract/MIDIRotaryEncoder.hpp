@@ -8,7 +8,7 @@
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
 #ifdef ARDUINO
-#include <Submodules/Encoder/Encoder.h>
+#include <Submodules/Encoder/AHEncoder.hpp>
 #else
 #include <Encoder.h> // Mock
 #endif
@@ -63,11 +63,11 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
 
 template <class BankAddress, class Sender>
 using MIDIRotaryEncoder =
-    GenericMIDIRotaryEncoder<Encoder, BankAddress, Sender>;
+    GenericMIDIRotaryEncoder<AHEncoder, BankAddress, Sender>;
 
 template <class BankAddress, class Sender>
 using BorrowedMIDIRotaryEncoder =
-    GenericMIDIRotaryEncoder<Encoder &, BankAddress, Sender>;
+    GenericMIDIRotaryEncoder<AHEncoder &, BankAddress, Sender>;
 
 } // namespace Bankable
 

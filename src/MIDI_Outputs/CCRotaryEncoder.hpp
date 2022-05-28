@@ -43,7 +43,7 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    CCRotaryEncoder(Encoder &&encoder, MIDIAddress address,
+    CCRotaryEncoder(AHEncoder &&encoder, MIDIAddress address,
                     int16_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
         : MIDIRotaryEncoder<RelativeCCSender>(
               std::move(encoder), address, speedMultiply, pulsesPerStep, {}) {}
@@ -86,7 +86,7 @@ class BorrowedCCRotaryEncoder
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    BorrowedCCRotaryEncoder(Encoder &encoder, MIDIAddress address,
+    BorrowedCCRotaryEncoder(AHEncoder &encoder, MIDIAddress address,
                             int16_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
         : BorrowedMIDIRotaryEncoder<RelativeCCSender>(
               encoder, address, speedMultiply, pulsesPerStep, {}) {}

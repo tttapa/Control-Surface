@@ -55,7 +55,7 @@ class CCAbsoluteEncoder
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    CCAbsoluteEncoder(BankConfig<NumBanks> config, Encoder &&encoder,
+    CCAbsoluteEncoder(BankConfig<NumBanks> config, AHEncoder &&encoder,
                       MIDIAddress address, int16_t speedMultiply = 1,
                       uint8_t pulsesPerStep = 4)
         : MIDIAbsoluteEncoder<NumBanks, SingleAddress, ContinuousCCSender>(

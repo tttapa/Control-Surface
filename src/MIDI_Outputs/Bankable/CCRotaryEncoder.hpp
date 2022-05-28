@@ -51,7 +51,7 @@ class CCRotaryEncoder
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    CCRotaryEncoder(OutputBankConfig<> config, Encoder &&encoder,
+    CCRotaryEncoder(OutputBankConfig<> config, AHEncoder &&encoder,
                     MIDIAddress address, int16_t speedMultiply = 1,
                     uint8_t pulsesPerStep = 4)
         : MIDIRotaryEncoder<SingleAddress, RelativeCCSender>(

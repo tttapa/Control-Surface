@@ -57,7 +57,7 @@ class PBAbsoluteEncoder
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    PBAbsoluteEncoder(const BankConfig<NumBanks> &config, Encoder &&encoder,
+    PBAbsoluteEncoder(const BankConfig<NumBanks> &config, AHEncoder &&encoder,
                       MIDIChannelCable address, int16_t speedMultiply = 1,
                       uint8_t pulsesPerStep = 4)
         : MIDIAbsoluteEncoder<NumBanks, SingleAddress, PitchBendSender<14>>(

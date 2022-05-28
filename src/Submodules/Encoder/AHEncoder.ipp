@@ -1,36 +1,25 @@
-#include "Encoder.h"
+#pragma once
+
+#include "AHEncoder.hpp"
 
 BEGIN_CS_NAMESPACE
 
-inline int32_t Encoder::read() {
-    if (interrupts_in_use < 2) {
-        noInterrupts();
-        update(&encoder);
-    } else {
-        noInterrupts();
-    }
-    int32_t ret = encoder.position;
-    interrupts();
-    return ret;
+inline int32_t AHEncoder::read() {
+    if (interrupts_in_use < 2)
+        update();
+    return position.get();
 }
 
-inline int32_t Encoder::readAndReset() {
-    if (interrupts_in_use < 2) {
-        noInterrupts();
-        update(&encoder);
-    } else {
-        noInterrupts();
-    }
-    int32_t ret = encoder.position;
-    encoder.position = 0;
-    interrupts();
-    return ret;
+inline int32_t AHEncoder::readAndReset(int32_t newpos) {
+    if (interrupts_in_use < 2)
+        update();
+    return position.xchg(newpos);
 }
 
-inline void Encoder::write(int32_t p) {
-    noInterrupts();
-    encoder.position = p;
-    interrupts();
+inline void AHEncoder::write(int32_t p) {
+    if (interrupts_in_use < 2)
+        update();
+    position.set(p);
 }
 
 //                           _______         _______
@@ -81,33 +70,27 @@ inline void Encoder::write(int32_t p) {
         }
 */
 
-#if defined(__AVR__)
-#include "Encoder-AVR.ipp"
-#else
-inline void Encoder::update(Encoder_internal_state_t *arg) {
-    uint8_t p1val = DIRECT_PIN_READ(arg->pin1_register, arg->pin1_bitmask);
-    uint8_t p2val = DIRECT_PIN_READ(arg->pin2_register, arg->pin2_bitmask);
-    uint8_t state = arg->state & 3;
-    if (p1val)
-        state |= 4;
-    if (p2val)
-        state |= 8;
-    arg->state = (state >> 2);
-    switch (state) {
+inline void AHEncoder::update() {
+    uint8_t s = state & 0b11;
+    if (direct_pins[0].read())
+        s |= 4;
+    if (direct_pins[1].read())
+        s |= 8;
+    state = (s >> 2);
+    switch (s) {
         case 1:
         case 7:
         case 8:
-        case 14: arg->position++; return;
+        case 14: position.add_isr(1); return;
         case 2:
         case 4:
         case 11:
-        case 13: arg->position--; return;
+        case 13: position.add_isr(-1); return;
         case 3:
-        case 12: arg->position += 2; return;
+        case 12: position.add_isr(2); return;
         case 6:
-        case 9: arg->position -= 2; return;
+        case 9: position.add_isr(-2); return;
     }
 }
-#endif
 
 END_CS_NAMESPACE

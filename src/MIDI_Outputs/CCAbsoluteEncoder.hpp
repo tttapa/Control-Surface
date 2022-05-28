@@ -42,7 +42,7 @@ class CCAbsoluteEncoder : public MIDIAbsoluteEncoder<ContinuousCCSender> {
      *          speed, increasing the number of pulsesPerStep will result in a 
      *          lower speed.
      */
-    CCAbsoluteEncoder(Encoder &&encoder, MIDIAddress address,
+    CCAbsoluteEncoder(AHEncoder &&encoder, MIDIAddress address,
                       int16_t multiplier = 1, uint8_t pulsesPerStep = 4)
         : MIDIAbsoluteEncoder<ContinuousCCSender>(
               std::move(encoder), address, multiplier, pulsesPerStep, {}) {}
