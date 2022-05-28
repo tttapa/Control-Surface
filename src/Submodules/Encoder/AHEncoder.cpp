@@ -11,7 +11,7 @@ using interrupt_index_t = decltype(digitalPinToInterrupt(0));
 static interrupt_index_t interruptToIndex(interrupt_index_t i) { return i; }
 #endif
 
-AHEncoder::AHEncoder(uint8_t pinA, uint8_t pinB)
+AHEncoder::AHEncoder(ArduinoPin_t pinA, ArduinoPin_t pinB)
     : pins {pinA, pinB},
       direct_pins {direct_pin_read(pinA), direct_pin_read(pinB)} {
     // It's much faster to use the GPIO registers directly, rather than
@@ -21,7 +21,7 @@ AHEncoder::AHEncoder(uint8_t pinA, uint8_t pinB)
 }
 
 AHEncoder::AHEncoder(AHEncoder &&other)
-    : pins (other.pins), direct_pins (std::move(other.direct_pins)) {
+    : pins(other.pins), direct_pins(std::move(other.direct_pins)) {
     if (other.interrupts_in_use)
         FATAL_ERROR(F("Cannot move from initialized AHEncoder."), 0x9311);
 }

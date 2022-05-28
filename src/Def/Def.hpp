@@ -5,6 +5,7 @@
 #include "Cable.hpp"
 #include "Channel.hpp"
 #include <AH/Containers/Array.hpp>
+#include <AH/Hardware/Arduino-Hardware-Types.hpp>
 #include <AH/Hardware/Hardware-Types.hpp>
 #include <AH/STL/limits>
 #include <Settings/NamespaceSettings.hpp>
@@ -13,6 +14,7 @@
 
 BEGIN_CS_NAMESPACE
 
+using ::ArduinoPin_t;
 using AH::analog_t;
 using AH::NO_PIN;
 using AH::pin_t;

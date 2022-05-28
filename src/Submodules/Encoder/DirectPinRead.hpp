@@ -24,7 +24,7 @@ struct DirectPinReadReg {
     (defined(TEENSYDUINO) && (defined(KINETISK) || defined(KINETISL)))
 
 using DirectPinRead = DirectPinReadReg<const volatile uint8_t>;
-inline DirectPinRead direct_pin_read(pin_t pin) {
+inline DirectPinRead direct_pin_read(ArduinoPin_t pin) {
     return {portInputRegister(digitalPinToPort(pin)),
             static_cast<uint8_t>(digitalPinToBitMask(pin))};
 }
@@ -34,7 +34,7 @@ inline DirectPinRead direct_pin_read(pin_t pin) {
     defined(__SAMD51__)
 
 using DirectPinRead = DirectPinReadReg<const volatile uint32_t>;
-inline DirectPinRead direct_pin_read(pin_t pin) {
+inline DirectPinRead direct_pin_read(ArduinoPin_t pin) {
     return {portInputRegister(digitalPinToPort(pin)), digitalPinToBitMask(pin)};
 }
 
@@ -42,7 +42,7 @@ inline DirectPinRead direct_pin_read(pin_t pin) {
 #elif defined(__SAMD21G18A__) || defined(__SAMD21E18A__)
 
 using DirectPinRead = DirectPinReadReg<const volatile uint32_t>;
-inline DirectPinRead direct_pin_read(pin_t pin) {
+inline DirectPinRead direct_pin_read(ArduinoPin_t pin) {
     return {portModeRegister(digitalPinToPort(pin)) + 8,
             static_cast<uint32_t>(digitalPinToBitMask(pin))};
 }
@@ -51,7 +51,7 @@ inline DirectPinRead direct_pin_read(pin_t pin) {
 #elif defined(__IMXRT1052__) || defined(__IMXRT1062__)
 
 using DirectPinRead = DirectPinReadReg<const volatile uint32_t>;
-inline DirectPinRead direct_pin_read(pin_t pin) {
+inline DirectPinRead direct_pin_read(ArduinoPin_t pin) {
     return {portOutputRegister(pin), digitalPinToBitMask(pin)};
 }
 
@@ -62,7 +62,7 @@ struct DirectPinRead {
     uint32_t pin;
     bool read() const { return nrf_gpio_pin_read(pin); }
 };
-inline DirectPinRead direct_pin_read(pin_t pin) {
+inline DirectPinRead direct_pin_read(ArduinoPin_t pin) {
 #if defined(RBL_NRF51822)
     return {static_cast<uint32_t>(pin)};
 #elif defined(ARDUINO_ARCH_NRF52840)
@@ -79,7 +79,7 @@ END_CS_NAMESPACE
 #include <hardware/structs/sio.h>
 BEGIN_CS_NAMESPACE
 using DirectPinRead = DirectPinReadReg<io_ro_32>;
-inline DirectPinRead direct_pin_read(pin_t pin) {
+inline DirectPinRead direct_pin_read(ArduinoPin_t pin) {
     return {&sio_hw->gpio_in, uint32_t(1) << pin};
 }
 
@@ -95,7 +95,7 @@ struct DirectPinRead {
     mbed::DigitalIn pin;
     bool read() { return pin.read(); }
 };
-inline DirectPinRead direct_pin_read(pin_t pin) {
+inline DirectPinRead direct_pin_read(ArduinoPin_t pin) {
     return {mbed::DigitalIn {digitalPinToPinName(pin), PullUp}};
 }
 
@@ -116,10 +116,10 @@ inline DirectPinRead direct_pin_read(pin_t pin) { return {g_pin_cfg[pin].pin}; }
 #warning "Unknown board. Please define the direct_pin_read function."
 
 struct DirectPinRead {
-    uint8_t pin;
+    ArduinoPin_t pin;
     bool read() const { return ::digitalRead(pin) == HIGH; }
 };
-inline DirectPinRead direct_pin_read(uint8_t pin) { return {pin}; }
+inline DirectPinRead direct_pin_read(ArduinoPin_t pin) { return {pin}; }
 
 #endif
 
