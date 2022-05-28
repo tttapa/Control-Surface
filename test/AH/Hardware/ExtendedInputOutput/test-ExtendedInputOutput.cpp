@@ -6,7 +6,6 @@
 
 using namespace ::testing;
 USING_AH_NAMESPACE;
-using namespace ExtIO;
 
 class MockExtIOElement : public ExtendedIOElement {
   public:
