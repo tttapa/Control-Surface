@@ -5,7 +5,7 @@
 #ifndef PrintStream_h
 #define PrintStream_h
 
-#include<AH/Settings/NamespaceSettings.hpp>
+#include <AH/Settings/NamespaceSettings.hpp>
 #include <AH/Settings/Warnings.hpp>
 AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
@@ -73,8 +73,9 @@ Setbytesep setbytesep(char bytesep);
 Print &operator<<(Print &printer, Setbytesep f);
 
 struct HexDump {
-    HexDump(const uint8_t *data, size_t length)
-     : data(data), length(length) {}
+    HexDump(const uint8_t *data, size_t length) : data(data), length(length) {}
+    template <size_t N>
+    explicit HexDump(const uint8_t (&data)[N]) : HexDump {data, N} {}
     const uint8_t *data;
     size_t length;
 };
