@@ -9,3 +9,19 @@
 #else
 #include <utility>
 #endif
+
+namespace std {
+
+#if __cplusplus < 201402L
+
+/// https://en.cppreference.com/w/cpp/utility/exchange
+template <class T, class U = T>
+T exchange(T &obj, U &&new_value) {
+    T old_value = std::move(obj);
+    obj = std::forward<U>(new_value);
+    return old_value;
+}
+
+#endif
+
+} // namespace std
