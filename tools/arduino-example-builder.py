@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import yaml
 from os import path
 from pprint import pprint
