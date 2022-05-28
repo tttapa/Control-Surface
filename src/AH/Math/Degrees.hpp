@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief	Conversions between radians and degrees.
+ * @brief   Conversions between radians and degrees.
  */
 #pragma once
 

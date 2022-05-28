@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief	Definition of Vec2f and Vec3f.
+ * @brief   Definition of Vec2f and Vec3f.
  * 
  * Vec2fs can be added, subtracted, multiplied (dot product) and normalized.
  * It also has an implementation of the following operators:
