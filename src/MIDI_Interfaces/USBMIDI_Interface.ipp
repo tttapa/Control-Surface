@@ -15,6 +15,11 @@ MIDIReadEvent GenericUSBMIDI_Interface<Backend>::read() {
 }
 
 template <class Backend>
+void GenericUSBMIDI_Interface<Backend>::begin() {
+    begin_if_possible(backend);
+}
+
+template <class Backend>
 void GenericUSBMIDI_Interface<Backend>::update() {
     MIDI_Interface::updateIncoming(this);
 }
@@ -54,7 +59,7 @@ SysExMessage GenericUSBMIDI_Interface<Backend>::getSysExMessage() const {
 template <class Backend>
 void GenericUSBMIDI_Interface<Backend>::sendChannelMessageImpl(
     ChannelMessage msg) {
-    sender.sendChannelMessage(msg, Sender{this});
+    sender.sendChannelMessage(msg, Sender {this});
     if (alwaysSendImmediately_)
         backend.sendNow();
 }
@@ -62,21 +67,21 @@ void GenericUSBMIDI_Interface<Backend>::sendChannelMessageImpl(
 template <class Backend>
 void GenericUSBMIDI_Interface<Backend>::sendSysCommonImpl(
     SysCommonMessage msg) {
-    sender.sendSysCommonMessage(msg, Sender{this});
+    sender.sendSysCommonMessage(msg, Sender {this});
     if (alwaysSendImmediately_)
         backend.sendNow();
 }
 
 template <class Backend>
 void GenericUSBMIDI_Interface<Backend>::sendSysExImpl(const SysExMessage msg) {
-    sender.sendSysEx(msg, Sender{this});
+    sender.sendSysEx(msg, Sender {this});
     if (alwaysSendImmediately_)
         backend.sendNow();
 }
 
 template <class Backend>
 void GenericUSBMIDI_Interface<Backend>::sendRealTimeImpl(RealTimeMessage msg) {
-    sender.sendRealTimeMessage(msg, Sender{this});
+    sender.sendRealTimeMessage(msg, Sender {this});
     if (alwaysSendImmediately_)
         backend.sendNow();
 }

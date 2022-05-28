@@ -38,6 +38,7 @@ class GenericUSBMIDI_Interface : public MIDI_Interface {
     void handleStall() override;
 
   public:
+    void begin() override;
     void update() override;
 
   public:

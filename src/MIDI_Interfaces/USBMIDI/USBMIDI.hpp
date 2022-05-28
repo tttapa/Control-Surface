@@ -65,6 +65,10 @@ END_CS_NAMESPACE
 
 #include "USBMIDI_Arduino_mbed.hpp"
 
+#elif defined(ARDUINO_RASPBERRY_PI_PICO) && defined(USE_TINYUSB)
+
+#include "USBMIDI_Adafruit_TinyUSB.hpp"
+
 #else
 
 #include <AH/Arduino-Wrapper.h>
