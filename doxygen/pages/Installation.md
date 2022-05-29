@@ -68,7 +68,7 @@ git clone https://github.com/tttapa/Control-Surface
 
 If you installed the library using Git, you can easily update it when a new 
 version comes out.  
-To update to the latest `master` version:
+To update to the latest `main` version:
 
 ```sh
 git pull

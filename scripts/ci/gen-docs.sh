@@ -11,7 +11,7 @@ mkdir -p "$output_folder"
 function run_doxygen_coverage {
     repodir=$PWD/../..
     pushd ../../doxygen
-    if [ "$1" = "master" ]; then dir="Doxygen"; else dir="$1/Doxygen"; fi
+    if [ "$1" = "main" ]; then dir="Doxygen"; else dir="$1/Doxygen"; fi
     # Remove the old documentation
     rm -rf "$2/$dir"
     mkdir -p "$2/$dir"
@@ -34,7 +34,7 @@ function run_doxygen_coverage {
     rm -rf tmp-Doxyfile
     popd
 
-    if [ "$1" = "master" ]; then dir="Coverage"; else dir="$1/Coverage"; fi
+    if [ "$1" = "main" ]; then dir="Coverage"; else dir="$1/Coverage"; fi
     pushd ../..
     rm -rf docs/Coverage build
     cmake -S. --preset ci-cov
@@ -68,7 +68,7 @@ echo "Documentation for" \
 > "$README"
 # Always have a link to main, it's at the root of the docs folder
 echo -e '\n### Main Branch\n' >> "$README"
-echo "- **master**  " >> "$README"
+echo "- **main**  " >> "$README"
 echo "  [Doxygen](Doxygen/index.html)"\
         "─ [Coverage](Coverage/index.html)" >> "$README"
 # Find all tags with documentation (version numbers)

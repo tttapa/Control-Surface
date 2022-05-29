@@ -4,9 +4,9 @@
 Connect one side of the switch to ground, and the other one to a digital input pin of the Arduino.  
 The Arduino has an internal pull-up resistor (R2), that connects the input to the 5V (3.3V) rail internally.  
 When the switch is open, there's 5V on the input, through the pull-up resistor. The Arduino registers this as a logical '1'. When the switch is closed, the input is connected to ground directly, so the input will be at 0V. This is registered as a logical '0'.  
-![Connecting a switch or a pushbutton to the Arduino](https://raw.githubusercontent.com/tttapa/Control_Surface/master/doc/Images/Switch.jpg)  
+![Connecting a switch or a pushbutton to the Arduino](https://raw.githubusercontent.com/tttapa/Control_Surface/main/doc/Images/Switch.jpg)  
 If you want to add LEDs that light up when a button is pressed, you can simply connect them in series with the switch. Remember to add a series resistor to limit the current.  
-![Switch and LED](https://raw.githubusercontent.com/tttapa/Control_Surface/master/doc/Images/Arduino_button_with_LED.png)
+![Switch and LED](https://raw.githubusercontent.com/tttapa/Control_Surface/main/doc/Images/Arduino_button_with_LED.png)
 
 ## Potentiometers and faders
 Potentiometers and faders are hooked up as simple voltage dividers. You can read more on the [Wikipedia page](https://en.wikipedia.org/wiki/Voltage_divider) if you're not familiar with this principle.  
@@ -18,7 +18,7 @@ To calculate the voltage on the wiper, the following formula is used:
 As R2 varies from 0Ω to 50kΩ, the fraction varies from 0 to 1, and V<sub>out</sub> varies from 0V to V<sub>in</sub>. There's a linear relation between V<sub>out</sub> and the position of the wiper. So by measuring V<sub>out</sub>, the Arduino can determine the wiper position.  
 
 Connect the left pin of the potentiometer to ground, the right pin to 5V (3.3V), and the center pin (wiper) to an analog input on the Arduino:  
-![Analog input](https://raw.githubusercontent.com/tttapa/Control_Surface/master/doc/Images/Analog.jpg)
+![Analog input](https://raw.githubusercontent.com/tttapa/Control_Surface/main/doc/Images/Analog.jpg)
 
 ## Rotary encoders and jog wheels
 First check the datasheet of your specific encoder, to see what the common pin is. If you don't have the datasheet, try connection it to two LEDs (+ series resistor). Connect the anodes of the LEDs to the +5V of an Arduino or other power supply, connect their cathodes via two resistors to two of the pins of the encoder, and connect the third pin to the ground of the Arduino or power supply. Now slowly turn the encoder. LED 1 should light up first, then LED2, then LED1 should go out, and finally LED2 should go out. The order of the LEDs lighting up should be like this: (○ ○) (● ○) (● ●) (○ ●) (○ ○).  
@@ -33,5 +33,5 @@ On an Arduino Due or on a Teensy 3, you can use any two pins.
 
 ## Button matrices
 Connect the push buttons in a matrix as follows:  
-![Button matrix](https://raw.githubusercontent.com/tttapa/Control_Surface/master/doc/Images/Button-matrix.png)  
+![Button matrix](https://raw.githubusercontent.com/tttapa/Control_Surface/main/doc/Images/Button-matrix.png)  
 If you don't need to register multiple key presses at once, you can leave out the diodes.

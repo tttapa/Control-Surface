@@ -205,7 +205,7 @@ it's up to the user to create an adapter between Control Surface and the display
 library by implementing the pure virtual functions of `DisplayInterface`.
 
 As an example, you could have a look at the
-[`DisplayInterfaceSSD1306`](https://github.com/tttapa/Control-Surface/blob/master/src/Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp),
+[`DisplayInterfaceSSD1306`](https://github.com/tttapa/Control-Surface/blob/main/src/Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp),
 it should be almost identical for other Adafruit libraries, and writing adapters
 for other types of display libraries.
 
