@@ -2,6 +2,7 @@
 [![Test Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/tttapa/Control-Surface-doc/master/docs/Coverage/shield.io.coverage.json)](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)
 [![Examples](https://github.com/tttapa/Control-Surface/workflows/Examples/badge.svg?branch=master)](https://github.com/tttapa/Control-Surface/actions?query=workflow%3AExamples)
 [![GitHub](https://img.shields.io/github/stars/tttapa/Control-Surface?label=GitHub&logo=github)](https://github.com/tttapa/Control-Surface)
+[![Documentation](https://img.shields.io/badge/Documentation-master-blue)](https://tttapa.github.io/Control-Surface-doc/Doxygen)
 
 # Control Surface
 
@@ -283,6 +284,10 @@ tests and generating documentation, a style guide, etc.
 
 ### 2.x
 
+- ([47b2d5e](https://github.com/tttapa/Control-Surface/commit/47b2d5e7530da4c940fc99e606cfad0c6a0638a2))  
+   The `Encoder` class has been replaced by [`AHEncoder`](https://tttapa.github.io/Control-Surface-doc/Doxygen/dd/da9/classAHEncoder.html).
+   The code has been cleaned up and support was added for newer boards like the
+   Raspberry Pi Pico.
 - ([c35f29c](https://github.com/tttapa/Control-Surface/commit/c35f29ced7f3e491467bd61c1c71013099c01091))  
    The SoftwareSerial MIDI interfaces are now in separate header files that have
    to be included explicitly if you want to use them. The headers in question 
