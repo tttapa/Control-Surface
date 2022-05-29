@@ -1,6 +1,7 @@
 #pragma once
 
 #include <MIDI_Parsers/MIDI_MessageTypes.hpp>
+#include <Settings/SettingsWrapper.hpp>
 
 AH_DIAGNOSTIC_WERROR()
 
@@ -30,6 +31,12 @@ class USBMIDI_Sender {
     template <class Send>
     void sendSysEx(SysExMessage, Send &&send);
 
+    /// Send a MIDI System Exclusive message using the given sender.
+    /// Message should be complete, i.e. from SysEx Start to SysEx End.
+    template <class Send>
+    void sendFullSysEx(SysExMessage, Send &&send);
+
+#if !NO_SYSEX_OUTPUT
   private:
     /// Send a single SysEx starts or continues USB packet. Exactly 3 bytes are
     /// sent. The `data` pointer is not incremented.
@@ -59,7 +66,9 @@ class USBMIDI_Sender {
     uint8_t storedSysExData[16][3];
     /// Number of remaining SysEx bytes stored.
     uint8_t storedSysExLength[16] = {};
+#endif
 
+  private:
     using CIN = MIDICodeIndexNumber;
 };
 
@@ -93,10 +102,10 @@ void USBMIDI_Sender::sendRealTimeMessage(RealTimeMessage msg, Send &&send) {
     send(msg.cable, CIN::SINGLE_BYTE, msg.message, 0, 0);
 }
 
-// This is the readable documentation version for sending full SysEx messages
-#if 0
+// This is the readable documentation version for sending full SysEx messages,
+// the chunked version below is more complicated, but the principle is similar.
 template <class Send>
-void USBMIDI_Sender::sendFullSysEx(SysExMessage msg, Send &send) {
+void USBMIDI_Sender::sendFullSysEx(SysExMessage msg, Send &&send) {
     size_t length = msg.length;
     const uint8_t *data = msg.data;
     Cable cn = msg.cable;
@@ -112,7 +121,8 @@ void USBMIDI_Sender::sendFullSysEx(SysExMessage msg, Send &send) {
         default: break;
     }
 }
-#endif // 0
+
+#if !NO_SYSEX_OUTPUT
 
 template <class Send>
 void USBMIDI_Sender::sendSysExStartCont1(const uint8_t *data, Cable cable,
@@ -210,6 +220,13 @@ void USBMIDI_Sender::sendSysEx(const SysExMessage msg, Send &&send) {
         }
     }
 }
+
+#else
+
+template <class Send>
+void USBMIDI_Sender::sendSysEx(SysExMessage, Send &&) {}
+
+#endif
 
 END_CS_NAMESPACE
 

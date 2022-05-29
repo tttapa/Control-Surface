@@ -40,12 +40,12 @@ constexpr uint8_t NOTE_VELOCITY_THRESHOLD = 1;
 
 /// Don't parse incoming System Exclusive messages.
 #define IGNORE_SYSEX 0
+/// Don't include code for sending System Exclusive messages.
+#define NO_SYSEX_OUTPUT 0
 
-/** The length of the maximum System Exclusive message
- *  that can be received. The maximum length sent by
- *  the MCU protocol is 120 bytes.
- */
-constexpr size_t SYSEX_BUFFER_SIZE = 128;
+/// The length of the maximum System Exclusive message that can be received.
+/// The maximum length sent by the MCU protocol is 120 bytes.
+constexpr uint16_t SYSEX_BUFFER_SIZE = 128;
 
 /// Timeout in milliseconds to wait for a SysEx chunk to complete.
 constexpr unsigned long SYSEX_CHUNK_TIMEOUT = 500;

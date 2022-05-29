@@ -9,6 +9,8 @@
 #ifndef ARDUINO
 #undef IGNORE_SYSEX
 #define IGNORE_SYSEX 0
+#undef NO_SYSEX_OUTPUT
+#define NO_SYSEX_OUTPUT 0
 #define MIDI_NUM_CABLES 16
 #endif
 
