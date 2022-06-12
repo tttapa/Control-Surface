@@ -17,6 +17,10 @@ BEGIN_CS_NAMESPACE
 #elif defined(WIRING)
 #define CORE_NUM_INTERRUPT NUM_EXTERNAL_INTERRUPTS
 
+// MightyCore, MiniCore, etc.
+#elif defined(EXTERNAL_NUM_INTERRUPTS)
+#define CORE_NUM_INTERRUPT EXTERNAL_NUM_INTERRUPTS
+
 // Arduino Uno, Duemilanove, Diecimila, LilyPad, Mini, Fio, etc...
 #elif defined(__AVR_ATmega328P__) || defined(__AVR_ATmega328PB__) ||           \
     defined(__AVR_ATmega168__) || defined(__AVR_ATmega8__)
