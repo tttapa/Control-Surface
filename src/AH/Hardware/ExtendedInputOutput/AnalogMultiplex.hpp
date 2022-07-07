@@ -253,7 +253,7 @@ void AnalogMultiplex<N>::setMuxAddress(uint8_t address) {
         mask <<= 1;
     }
 #if !defined(__AVR__) && defined(ARDUINO)
-    delayMicroseconds(1);
+    delayMicroseconds(SELECT_LINE_DELAY);
 #endif
 }
 

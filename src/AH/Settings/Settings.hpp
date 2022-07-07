@@ -75,6 +75,11 @@ using ANALOG_FILTER_TYPE = uint16_t;
 /// The debounce time for momentary push buttons in milliseconds.
 constexpr unsigned long BUTTON_DEBOUNCE_TIME = 25; // milliseconds
 
+/// The time in microseconds to wait for lines of multiplexers and scanning
+/// matrices to settle before reading the value.  
+/// Has no effect on AVR.
+constexpr unsigned long SELECT_LINE_DELAY = 10; // microseconds
+
 /// The time in milliseconds before a press is registered as a long press.
 constexpr unsigned long LONG_PRESS_DELAY = 450; // milliseconds
 
