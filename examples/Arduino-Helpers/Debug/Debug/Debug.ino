@@ -51,6 +51,7 @@ void loop() {
   DEBUGTIME("This is the result of `DEBUGTIME`");
   int a = 1, b = 2, c = 3;
   DEBUGVAL(a, b, c);
+  (void)a, (void)b, (void)c;
   DEBUGVAL(log10(1000) - 2);
   DEBUGVAL(millis());
   DEBUGVAL(Serial.read());
