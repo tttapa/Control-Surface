@@ -17,7 +17,7 @@ void BluetoothMIDI_Interface::startSendingThread() {
             ; // loop
     };
     // Need larger stack than default, pin to non-Arduino core
-    ScopedThreadConfig(4096, 3, true, "SendBLEMIDI", 0);
+    ScopedThreadConfig sc {4096, 3, true, "SendBLEMIDI", 0};
     // Launch the thread
     send_thread = std::thread(send_loop);
 }
