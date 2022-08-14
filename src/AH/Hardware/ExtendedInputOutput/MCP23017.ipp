@@ -113,7 +113,7 @@ void MCP23017<WireType>::updateBufferedInputs() {
     if (interruptPin != NO_PIN && ExtIO::digitalRead(interruptPin) == HIGH)
         return;
     writeI2C(GPIOA);
-    wire->requestFrom(address, uint8_t(2));
+    wire->requestFrom(address, size_t(2));
     bufferedInputs.setByte(0, wire->read());
     bufferedInputs.setByte(1, wire->read());
 }

@@ -84,7 +84,7 @@ class MCP23017Encoders {
 
         writeI2C(0x12); // GPIOA
 
-        this->wire->requestFrom(address, uint8_t(2));
+        this->wire->requestFrom(address, size_t(2));
         uint8_t a = this->wire->read();
         uint16_t b = this->wire->read();
         return a | (b << 8);
