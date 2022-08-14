@@ -32,7 +32,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
  *          The number of bits to decrease in resolution.
  *          Increasing this number will result in a decrease in fluctuations.
  */
-template <uint8_t BITS, class T_in = uint16_t, class T_out = uint8_t>
+template <uint8_t Bits, class T_in = uint16_t, class T_out = uint8_t>
 class Hysteresis {
   public:
     /**
@@ -46,7 +46,7 @@ class Hysteresis {
      *          The output level is still the same.
      */
     bool update(T_in inputLevel) {
-        T_in prevLevelFull = (T_in(prevLevel) << BITS) | offset;
+        T_in prevLevelFull = (T_in(prevLevel) << Bits) | offset;
         T_in lowerbound = prevLevel > 0 ? prevLevelFull - margin : 0;
         T_in upperbound = prevLevel < max_out ? prevLevelFull + margin : max_in;
         if (inputLevel < lowerbound || inputLevel > upperbound) {
@@ -66,15 +66,31 @@ class Hysteresis {
     /** 
      * @brief   Forcefully update the internal state to the given level.
      */
-    void setValue(T_in inputLevel) { prevLevel = inputLevel >> BITS; }
+    void setValue(T_in inputLevel) { prevLevel = inputLevel >> Bits; }
 
   private:
     T_out prevLevel = 0;
-    constexpr static T_in margin = (1UL << BITS) - 1;
-    constexpr static T_in offset = 1UL << (BITS - 1);
-    constexpr static T_in max_in = -1;
-    constexpr static T_out max_out = static_cast<T_out>(max_in >> BITS);
+    constexpr static T_in margin = (1ul << Bits) - 1ul;
+    constexpr static T_in offset = Bits >= 1 ? 1ul << (Bits - 1) : 0;
+    constexpr static T_in max_in = static_cast<T_in>(-1);
+    constexpr static T_out max_out = static_cast<T_out>(max_in >> Bits);
     static_assert(max_in > 0, "Error: only unsigned types are supported");
+};
+
+template <class T_in, class T_out>
+class Hysteresis<0, T_in, T_out> {
+  public:
+    bool update(T_in inputLevel) {
+        bool changed = inputLevel != prevLevel;
+        prevLevel = inputLevel;
+        return changed;
+    }
+
+    T_out getValue() const { return prevLevel; }
+    void setValue(T_in inputLevel) const { prevLevel = inputLevel; }
+
+  private:
+    T_in prevLevel = 0;
 };
 
 /// @}
