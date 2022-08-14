@@ -2,12 +2,10 @@
 
 import yaml
 from os import path
-from pprint import pprint
 from pathlib import Path
 import os
 import time
 import json
-import re
 import mmap
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -57,7 +55,7 @@ def build_example(path, board, fqbn, include_unlabeled_examples):
             return None
         elif len(example_boards) == 0 and not include_unlabeled_examples:
             return None
-        name = path.stem
+        name = '.' # path.stem
         cwd = path.parent
         cmd = ['arduino-cli', 'compile', 
             '--format', 'json', 
@@ -90,22 +88,28 @@ def compile_core(board, fqbn):
            '--build-cache-path', '/tmp/core-' + board,
            '-b', fqbn,
            '--warnings', 'all',
-           'arduino-builder-empty-sketch']
+           '.']
     print("Building core ...")
     start = time.time()
     result = run(cmd, cwd=cwd, stdout=PIPE, stderr=PIPE)
     end = time.time()
     out_str = result.stdout.decode('utf-8')
     err_str = result.stderr.decode('utf-8')
-    output = json.loads(out_str)
-    if output["success"]:
-        print(f"Done in {end - start:.3f}s")
-    else:
+    try:
+        output = json.loads(out_str)
+        if output["success"]:
+            print(f"Done in {end - start:.3f}s")
+        else:
+            print(cmd)
+            print(out_str)
+            print(err_str)
+            print(output["compiler_err"])
+            raise RuntimeError("Failed to compile core")
+    except json.decoder.JSONDecodeError as e:
         print(cmd)
         print(out_str)
         print(err_str)
-        print(output["compiler_err"])
-        raise RuntimeError("Failed to compile core")
+        raise
 
 bold = "\033[1m"
 red = "\033[0;31m"
