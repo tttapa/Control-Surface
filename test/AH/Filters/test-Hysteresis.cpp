@@ -143,3 +143,28 @@ TEST(Hysteresis, overflowOut) {
     EXPECT_EQ(changed, changedExpected);
     EXPECT_EQ(values, valuesExpected);
 }
+
+TEST(Hysteresis, zeroBits) {
+    using namespace std;
+    constexpr size_t N = 10;
+    Hysteresis<0> hyst;
+    array<uint16_t, N> signal = {
+        0, 1, 2, 0, 3, 2, 2, 3, 3, 0,
+    };
+    array<bool, N> changedExpected = {
+        0, 1, 1, 1, 1, 1, 0, 1, 0, 1,
+    };
+    array<uint8_t, N> valuesExpected = {
+        0, 1, 2, 0, 3, 2, 2, 3, 3, 0,
+    };
+    array<bool, N> changed;
+    array<uint8_t, N> values;
+    size_t i = 0;
+    for (uint16_t s : signal) {
+        changed[i] = hyst.update(s);
+        values[i] = hyst.getValue();
+        ++i;
+    }
+    EXPECT_EQ(changed, changedExpected);
+    EXPECT_EQ(values, valuesExpected);
+}
