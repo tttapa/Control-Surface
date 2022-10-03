@@ -90,6 +90,24 @@ TEST(Array, sliceEquality) {
     EXPECT_TRUE(a != c);
 }
 
+TEST(Array, csliceEquality) {
+    Array<int, 5> aa = {1, 2, 3, 4, 5};
+    auto a = aa.cslice();
+    Array<int, 5> ba = {1, 2, 3, 4, 5};
+    auto b = ba.cslice();
+    Array<int, 5> ca = {1, 2, 3, 4, 6};
+    auto c = ca.cslice();
+    EXPECT_EQ(a, a);
+    EXPECT_TRUE(a == a);
+    EXPECT_FALSE(a != a);
+    EXPECT_EQ(a, b);
+    EXPECT_TRUE(a == b);
+    EXPECT_FALSE(a != b);
+    EXPECT_NE(a, c);
+    EXPECT_FALSE(a == c);
+    EXPECT_TRUE(a != c);
+}
+
 TEST(Array, outOfBounds) {
     Array<int, 5> a = {};
     EXPECT_THROW(a[5], AH::ErrorException);
@@ -251,6 +269,13 @@ TEST(Array, negate) {
 TEST(Array, sliceToArray) {
     Array<int, 5> a = {2, 4, 6, 8, 10};
     Array<int, 3> b = a.slice<1, 3>().asArray();
+    Array<int, 3> c = {4, 6, 8};
+    EXPECT_EQ(b, c);
+}
+
+TEST(Array, csliceToArray) {
+    Array<int, 5> a = {2, 4, 6, 8, 10};
+    Array<int, 3> b = a.cslice<1, 3>().asArray();
     Array<int, 3> c = {4, 6, 8};
     EXPECT_EQ(b, c);
 }
