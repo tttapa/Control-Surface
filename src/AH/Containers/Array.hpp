@@ -145,7 +145,7 @@ struct Array {
     ArraySlice<T, abs_diff(Start, End) + 1, (End < Start), true>
     cslice() const {
         const Array<T, N> *This = this;
-        return This->slice();
+        return This->template slice<Start, End>();
     }
 };
 
