@@ -2,7 +2,23 @@
 
 #if defined(__GNUC__) && !defined(__clang__)
 
-#if __GNUC__ >= 5
+#if __GNUC__ >= 11
+
+#define AH_DIAGNOSTIC_WERROR()                                                 \
+    _Pragma("GCC diagnostic push") _Pragma("GCC diagnostic error \"-Wall\"")   \
+        _Pragma("GCC diagnostic error \"-Wextra\"")                            \
+            _Pragma("GCC diagnostic ignored \"-Wc++0x-compat\"")
+#define AH_DIAGNOSTIC_POP() _Pragma("GCC diagnostic pop")
+#define AH_DIAGNOSTIC_EXTERNAL_HEADER()                                        \
+    _Pragma("GCC diagnostic push") _Pragma("GCC diagnostic ignored \"-Wall\"") \
+        _Pragma("GCC diagnostic ignored \"-Wextra\"")                          \
+            _Pragma("GCC diagnostic ignored \"-Wsuggest-override\"") _Pragma(  \
+                "GCC diagnostic ignored \"-Wunused-parameter\"")               \
+                _Pragma("GCC diagnostic warning \"-Wcast-function-type\"")     \
+                    _Pragma("GCC diagnostic warning \"-Wdeprecated-copy\"")
+/* For the last two: see https://github.com/PaulStoffregen/cores/issues/660 */
+
+#elif __GNUC__ >= 5
 
 #define AH_DIAGNOSTIC_WERROR()                                                 \
     _Pragma("GCC diagnostic push") _Pragma("GCC diagnostic error \"-Wall\"")   \
