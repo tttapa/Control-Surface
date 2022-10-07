@@ -1,1 +1,0 @@
-../../src/Display/Bitmaps/README.md
