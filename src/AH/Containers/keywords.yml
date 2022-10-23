@@ -2,7 +2,7 @@ keyword1:
   # Array.hpp
   - Array
   - ArraySlice
-  - Iterator
+  - iterator
   # BitArray.hpp
   - BitArray
   # LinkedList.hpp
