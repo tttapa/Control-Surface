@@ -25,7 +25,7 @@ enum BankType {
     CHANGE_CABLENB = 2,
 };
 
-template <setting_t N>
+template <setting_t NumBanks>
 class Bank;
 class OutputBank;
 

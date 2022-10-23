@@ -145,18 +145,18 @@ END_CS_NAMESPACE
 
 BEGIN_CS_NAMESPACE
 
-template <setting_t N>
-void Bank<N>::add(BankSettingChangeCallback *bankable) {
+template <setting_t NumBanks>
+void Bank<NumBanks>::add(BankSettingChangeCallback *bankable) {
     inputBankables.append(bankable);
 }
 
-template <setting_t N>
-void Bank<N>::remove(BankSettingChangeCallback *bankable) {
+template <setting_t NumBanks>
+void Bank<NumBanks>::remove(BankSettingChangeCallback *bankable) {
     inputBankables.remove(bankable);
 }
 
-template <setting_t N>
-void Bank<N>::select(setting_t bankSetting) {
+template <setting_t NumBanks>
+void Bank<NumBanks>::select(setting_t bankSetting) {
     bankSetting = this->validateSetting(bankSetting);
     OutputBank::select(bankSetting);
     for (BankSettingChangeCallback &e : inputBankables)

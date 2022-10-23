@@ -1,3 +1,5 @@
+#include "TeensyHostMIDI.hpp"
+
 #define CS_MIDI_USB_ASSERT(a)                                                  \
     do {                                                                       \
         if (!(a)) {                                                            \

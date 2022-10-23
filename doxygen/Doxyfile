@@ -938,7 +938,6 @@ FILE_PATTERNS          = *.cpp \
                          *.c \
                          *.h \
                          *.hpp \
-                         *.ipp \
                          *.md \
                          *.dox
 
