@@ -257,7 +257,7 @@ ArraySlice<T, N, Reverse, Const>::slice() const {
     return &(*this)[Start];
 }
 
-/// @related ArraySlice::Iterator
+/// @related ArraySlice<T, N, Reverse, Const>::iterator
 template <class T, size_t N, bool Reverse, bool Const>
 typename ArraySlice<T, N, Reverse, Const>::iterator operator+(
     typename ArraySlice<T, N, Reverse, Const>::iterator::difference_type n,

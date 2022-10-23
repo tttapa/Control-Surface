@@ -370,7 +370,7 @@ Bar	LITERAL1
 
 Array	KEYWORD1
 ArraySlice	KEYWORD1
-Iterator	KEYWORD1
+iterator	KEYWORD1
 BitArray	KEYWORD1
 DoublyLinkedList	KEYWORD1
 iterator	KEYWORD1

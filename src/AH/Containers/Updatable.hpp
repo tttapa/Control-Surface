@@ -125,22 +125,22 @@ class UpdatableCRTP : public DoublyLinkable<Derived> {
         return updatables.couldContain(CRTP(const Derived));
     }
 
-    /// @copydoc enable
+    /// @copydoc enable()
     static void enable(UpdatableCRTP *element) { element->enable(); }
-    /// @copydoc enable
+    /// @copydoc enable()
     static void enable(UpdatableCRTP &element) { element.enable(); }
-    /// @copydoc enable
+    /// @copydoc enable()
     template <class U, size_t N>
     static void enable(U (&array)[N]) {
         for (U &el : array)
             enable(el);
     }
 
-    /// @copydoc disable
+    /// @copydoc disable()
     static void disable(UpdatableCRTP *element) { element->disable(); }
-    /// @copydoc disable
+    /// @copydoc disable()
     static void disable(UpdatableCRTP &element) { element.disable(); }
-    /// @copydoc disable
+    /// @copydoc disable()
     template <class U, size_t N>
     static void disable(U (&array)[N]) {
         for (U &el : array)
