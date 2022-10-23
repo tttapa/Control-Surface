@@ -5,7 +5,7 @@
 
 BEGIN_CS_NAMESPACE
 
-struct USBDeviceMIDIBackend {
+struct Adafruit_TinyUSB_USBDeviceMIDIBackend {
     using MIDIUSBPacket_t = AH::Array<uint8_t, 4>;
     void begin() {
 #if defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_ARCH_RP2040)

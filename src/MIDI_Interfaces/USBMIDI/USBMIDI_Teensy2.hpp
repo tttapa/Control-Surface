@@ -5,7 +5,7 @@
 
 BEGIN_CS_NAMESPACE
 
-struct USBDeviceMIDIBackend {
+struct Teensy2_USBDeviceMIDIBackend {
     using MIDIUSBPacket_t = AH::Array<uint8_t, 4>;
     MIDIUSBPacket_t read();
     void write(MIDIUSBPacket_t data);
@@ -21,7 +21,7 @@ END_CS_NAMESPACE
 
 BEGIN_CS_NAMESPACE
 
-inline USBDeviceMIDIBackend::MIDIUSBPacket_t USBDeviceMIDIBackend::read() {
+inline Teensy2_USBDeviceMIDIBackend::MIDIUSBPacket_t Teensy2_USBDeviceMIDIBackend::read() {
     // https://github.com/PaulStoffregen/cores/blob/73ea157600a7082686d9cc48786a73caa7567da9/usb_midi/usb_api.cpp#L195
     uint8_t c, intr_state;
 
@@ -54,7 +54,7 @@ retry:
     return packet;
 }
 
-inline void USBDeviceMIDIBackend::write(MIDIUSBPacket_t data) {
+inline void Teensy2_USBDeviceMIDIBackend::write(MIDIUSBPacket_t data) {
     uint8_t intr_state, timeout;
 
     if (!usb_configuration)
@@ -85,12 +85,12 @@ inline void USBDeviceMIDIBackend::write(MIDIUSBPacket_t data) {
     SREG = intr_state;
 }
 
-inline void USBDeviceMIDIBackend::sendNow() {
+inline void Teensy2_USBDeviceMIDIBackend::sendNow() {
     // TODO: I think the UEINTX = 0x3A actually sends/flushes the data, but I'm
     //       not sure, and I don't have the right hardware to test it.
 }
 
-inline bool USBDeviceMIDIBackend::preferImmediateSend() { return false; }
+inline bool Teensy2_USBDeviceMIDIBackend::preferImmediateSend() { return false; }
 
 END_CS_NAMESPACE
 

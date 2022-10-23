@@ -5,7 +5,7 @@
 
 BEGIN_CS_NAMESPACE
 
-struct USBDeviceMIDIBackend {
+struct MIDIUSB_USBDeviceMIDIBackend {
     using MIDIUSBPacket_t = AH::Array<uint8_t, 4>;
     MIDIUSBPacket_t read() {
         midiEventPacket_t midipacket = MidiUSB.read();
