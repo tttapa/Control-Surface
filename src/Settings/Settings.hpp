@@ -60,6 +60,11 @@ constexpr uint8_t MAX_FPS = 60;
 /// Otherwise it is defined as a macro.
 #define CS_TRUE_CONTROL_SURFACE_INSTANCE 1
 
+/// Disable MIDI pipe support. As a consequence, you won't be able to use
+/// multiple MIDI interfaces with Control_Surface, but you will save a couple
+/// hundred bytes of RAM.
+#define DISABLE_PIPES 0
+
 // ========================================================================== //
 
 END_CS_NAMESPACE

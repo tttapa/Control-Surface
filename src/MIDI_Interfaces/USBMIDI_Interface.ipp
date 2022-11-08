@@ -27,11 +27,6 @@ void GenericUSBMIDI_Interface<Backend>::update() {
     MIDI_Interface::updateIncoming(this);
 }
 
-template <class Backend>
-void GenericUSBMIDI_Interface<Backend>::handleStall() {
-    MIDI_Interface::handleStall(this);
-}
-
 // Retrieving the received messages
 // -----------------------------------------------------------------------------
 

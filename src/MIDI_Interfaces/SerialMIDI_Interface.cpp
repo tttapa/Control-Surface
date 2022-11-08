@@ -13,8 +13,6 @@ MIDIReadEvent StreamMIDI_Interface::read() {
 
 void StreamMIDI_Interface::update() { MIDI_Interface::updateIncoming(this); }
 
-void StreamMIDI_Interface::handleStall() { MIDI_Interface::handleStall(this); }
-
 // -------------------------------------------------------------------------- //
 
 // Retrieving the received messages

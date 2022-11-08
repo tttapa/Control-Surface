@@ -53,10 +53,12 @@ class StreamDebugMIDI_Output : public StreamDebugMIDI_Base,
     void sendRealTimeImpl(RealTimeMessage);
     void sendNowImpl();
 
+#if !DISABLE_PIPES
     void sinkMIDIfromPipe(ChannelMessage m) override { send(m); }
     void sinkMIDIfromPipe(SysExMessage m) override { send(m); }
     void sinkMIDIfromPipe(SysCommonMessage m) override { send(m); }
     void sinkMIDIfromPipe(RealTimeMessage m) override { send(m); }
+#endif
 
     Stream &stream;
 
@@ -220,7 +222,9 @@ class StreamDebugMIDI_Interface : public StreamDebugMIDI_Base,
     void sendNowImpl() override;
 
   private:
-    void handleStall() override;
+#if !DISABLE_PIPES
+    void handleStall() override { MIDI_Interface::handleStall(this); }
+#endif
 
   private:
     HexPuller<StreamPuller> hexstream;

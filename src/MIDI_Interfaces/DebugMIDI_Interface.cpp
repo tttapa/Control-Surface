@@ -45,10 +45,6 @@ void StreamDebugMIDI_Interface::update() {
     MIDI_Interface::updateIncoming(this);
 }
 
-void StreamDebugMIDI_Interface::handleStall() {
-    MIDI_Interface::handleStall(this);
-}
-
 void StreamDebugMIDI_Base::sendChannelMessageImpl(Stream &stream,
                                                   ChannelMessage msg) {
     uint8_t messageType = (msg.header >> 4) - 8;

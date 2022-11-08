@@ -1,5 +1,8 @@
 #pragma once
 
+#include <Settings/SettingsWrapper.hpp>
+#if !DISABLE_PIPES
+
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
 #include <AH/STL/utility> // std::forward
@@ -46,3 +49,13 @@ auto makeMIDIStaller(Callback &&callback) -> MIDIStaller * {
 END_CS_NAMESPACE
 
 AH_DIAGNOSTIC_POP()
+
+#else
+
+BEGIN_CS_NAMESPACE
+
+struct MIDIStaller {};
+
+END_CS_NAMESPACE
+
+#endif

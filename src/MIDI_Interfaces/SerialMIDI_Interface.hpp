@@ -47,7 +47,9 @@ class StreamMIDI_Interface : public MIDI_Interface {
     void sendNowImpl() override {}
 
   protected:
-    void handleStall() override;
+#if !DISABLE_PIPES
+    void handleStall() override { MIDI_Interface::handleStall(this); }
+#endif
 
   protected:
     Stream &stream;

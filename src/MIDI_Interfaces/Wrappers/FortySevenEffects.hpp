@@ -181,11 +181,13 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
     }
 
   private:
+#if !DISABLE_PIPES
     void handleStall() override {
         auto stallername = MIDIStaller::getNameNull(getStaller());
         ERROR(F("Not implemented (stalled by ") << stallername << ')', 0x1349);
         (void)stallername;
     }
+#endif
 
   private:
     FortySevenEffectsMIDI_Parser parser;

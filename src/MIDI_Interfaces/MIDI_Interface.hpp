@@ -76,7 +76,17 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     /// Low-level function for sending any buffered outgoing MIDI messages.
     virtual void sendNowImpl() = 0;
 
+  public:
+#if DISABLE_PIPES
+    virtual MIDIReadEvent read() = 0;
+    virtual ChannelMessage getChannelMessage() const = 0;
+    virtual SysCommonMessage getSysCommonMessage() const = 0;
+    virtual RealTimeMessage getRealTimeMessage() const = 0;
+    virtual SysExMessage getSysExMessage() const = 0;
+#endif
+
   protected:
+#if !DISABLE_PIPES
     /// Accept an incoming MIDI Channel message from the source pipe.
     void sinkMIDIfromPipe(ChannelMessage msg) override { send(msg); }
     /// Accept an incoming MIDI System Exclusive message from the source pipe.
@@ -85,6 +95,7 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     void sinkMIDIfromPipe(SysCommonMessage msg) override { send(msg); }
     /// Accept an incoming MIDI Real-Time message from the source pipe.
     void sinkMIDIfromPipe(RealTimeMessage msg) override { send(msg); }
+#endif
 
   protected:
     /// Call the channel message callback and send the message to the sink pipe.
@@ -120,6 +131,13 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
 
 template <class MIDIInterface_t>
 void MIDI_Interface::updateIncoming(MIDIInterface_t *iface) {
+#if DISABLE_PIPES
+    MIDIReadEvent event = iface->read();
+    while (event != MIDIReadEvent::NO_MESSAGE) {
+        dispatchIncoming(iface, event);
+        event = iface->read();
+    }
+#else
     if (iface->getStaller() == iface)
         iface->unstall(iface);
     bool chunked = false;
@@ -134,6 +152,7 @@ void MIDI_Interface::updateIncoming(MIDIInterface_t *iface) {
     }
     if (chunked)
         iface->stall(iface);
+#endif
     // TODO: add logic to detect MIDI messages such as (N)RPN that span over
     // multiple channel voice messages and that shouldn't be interrupted.
     // For short messages such as (N)RPN, I suggest waiting with a timeout.
@@ -161,6 +180,7 @@ void MIDI_Interface::dispatchIncoming(MIDIInterface_t *iface,
     }
 }
 
+#if !DISABLE_PIPES
 template <class MIDIInterface_t>
 void MIDI_Interface::handleStall(MIDIInterface_t *iface) {
     iface->unstall(iface);
@@ -177,5 +197,6 @@ void MIDI_Interface::handleStall(MIDIInterface_t *iface) {
     DEBUGREF(F("Warning: Unable to un-stall pipes: ")
              << iface->getStallerName());
 }
+#endif
 
 END_CS_NAMESPACE

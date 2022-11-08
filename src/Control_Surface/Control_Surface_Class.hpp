@@ -84,10 +84,17 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     void sendNowImpl() { /* TODO */ }
 
   private:
+#if !DISABLE_PIPES
     void sinkMIDIfromPipe(ChannelMessage msg) override;
     void sinkMIDIfromPipe(SysExMessage msg) override;
     void sinkMIDIfromPipe(SysCommonMessage msg) override;
     void sinkMIDIfromPipe(RealTimeMessage msg) override;
+#else
+    void sinkMIDIfromPipe(ChannelMessage msg);
+    void sinkMIDIfromPipe(SysExMessage msg);
+    void sinkMIDIfromPipe(SysCommonMessage msg);
+    void sinkMIDIfromPipe(RealTimeMessage msg);
+#endif
 
   private:
     /// A timer to know when to refresh the displays.
@@ -133,7 +140,9 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     SysExMessageCallback sysExMessageCallback = nullptr;
     SysCommonMessageCallback sysCommonMessageCallback = nullptr;
     RealTimeMessageCallback realTimeMessageCallback = nullptr;
+#if !DISABLE_PIPES
     MIDI_Pipe inpipe, outpipe;
+#endif
 };
 
 #if CS_TRUE_CONTROL_SURFACE_INSTANCE || defined(DOXYGEN)

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <Settings/SettingsWrapper.hpp>
+#if !DISABLE_PIPES
+
 #include <AH/Containers/BitArray.hpp>
 #include <AH/STL/cstdint>
 #include <AH/STL/limits>
@@ -708,3 +711,18 @@ operator|(TrueMIDI_SinkSource &sinksource,
 END_CS_NAMESPACE
 
 AH_DIAGNOSTIC_POP()
+
+#else
+
+BEGIN_CS_NAMESPACE
+
+struct TrueMIDI_Source {
+    template <class... Args>
+    void sourceMIDItoPipe(Args &&...) {}
+};
+struct TrueMIDI_Sink {};
+struct TrueMIDI_SinkSource : TrueMIDI_Source, TrueMIDI_Sink {};
+
+END_CS_NAMESPACE
+
+#endif

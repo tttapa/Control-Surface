@@ -67,7 +67,9 @@ class BluetoothMIDI_Interface : public MIDI_Interface {
     void update() override { MIDI_Interface::updateIncoming(this); }
 
   private:
+#if !DISABLE_PIPES
     void handleStall() override { MIDI_Interface::handleStall(this); }
+#endif
 
   public:
     /// Return the received channel voice message.
