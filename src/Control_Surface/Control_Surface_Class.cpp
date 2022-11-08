@@ -45,6 +45,7 @@ void Control_Surface_::begin() {
 }
 
 bool Control_Surface_::connectDefaultMIDI_Interface() {
+#if !DISABLE_PIPES
     if (hasSinkPipe() || hasSourcePipe())
         return false;
     auto def = MIDI_Interface::getDefault();
@@ -55,11 +56,16 @@ bool Control_Surface_::connectDefaultMIDI_Interface() {
     *this << inpipe << *def;
     *this >> outpipe >> *def;
     return true;
+#else
+    return MIDI_Interface::getDefault();
+#endif
 }
 
 void Control_Surface_::disconnectMIDI_Interfaces() {
+#if !DISABLE_PIPES
     disconnectSinkPipes();
     disconnectSourcePipes();
+#endif
 }
 
 void Control_Surface_::loop() {
@@ -73,9 +79,37 @@ void Control_Surface_::loop() {
 }
 
 void Control_Surface_::updateMidiInput() {
+#if !DISABLE_PIPES
     Updatable<MIDI_Interface>::updateAll();
+#else
+    if (auto iface = MIDI_Interface::getDefault()) {
+        MIDIReadEvent event = iface->read();
+        while (event != MIDIReadEvent::NO_MESSAGE) {
+            MIDI_Interface::dispatchIncoming(iface, event);
+            switch (event) {
+                case MIDIReadEvent::CHANNEL_MESSAGE:
+                    sinkMIDIfromPipe(iface->getChannelMessage());
+                    break;
+                case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
+                case MIDIReadEvent::SYSEX_MESSAGE:
+                    sinkMIDIfromPipe(iface->getSysExMessage());
+                    break;
+                case MIDIReadEvent::SYSCOMMON_MESSAGE:
+                    sinkMIDIfromPipe(iface->getSysCommonMessage());
+                    break;
+                case MIDIReadEvent::REALTIME_MESSAGE:
+                    sinkMIDIfromPipe(iface->getRealTimeMessage());
+                    break;
+                case MIDIReadEvent::NO_MESSAGE: break; // LCOV_EXCL_LINE
+                default: break;                        // LCOV_EXCL_LINE
+            }
+            event = iface->read();
+        }
+    }
+#endif
 }
 
+#if !DISABLE_PIPES
 void Control_Surface_::sendChannelMessageImpl(ChannelMessage msg) {
     this->sourceMIDItoPipe(msg);
 }
@@ -88,6 +122,24 @@ void Control_Surface_::sendSysCommonImpl(SysCommonMessage msg) {
 void Control_Surface_::sendRealTimeImpl(RealTimeMessage msg) {
     this->sourceMIDItoPipe(msg);
 }
+#else
+void Control_Surface_::sendChannelMessageImpl(ChannelMessage msg) {
+    if (auto def = MIDI_Interface::getDefault())
+        def->send(msg);
+}
+void Control_Surface_::sendSysExImpl(SysExMessage msg) {
+    if (auto def = MIDI_Interface::getDefault())
+        def->send(msg);
+}
+void Control_Surface_::sendSysCommonImpl(SysCommonMessage msg) {
+    if (auto def = MIDI_Interface::getDefault())
+        def->send(msg);
+}
+void Control_Surface_::sendRealTimeImpl(RealTimeMessage msg) {
+    if (auto def = MIDI_Interface::getDefault())
+        def->send(msg);
+}
+#endif
 
 void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
 #ifdef DEBUG_MIDI_PACKETS

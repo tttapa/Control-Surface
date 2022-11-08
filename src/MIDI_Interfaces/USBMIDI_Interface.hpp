@@ -35,7 +35,9 @@ class GenericUSBMIDI_Interface : public MIDI_Interface {
     void sendNowImpl() override { backend.sendNow(); }
 
   private:
-    void handleStall() override;
+#if !DISABLE_PIPES
+    void handleStall() override { MIDI_Interface::handleStall(this); }
+#endif
 
   public:
     void begin() override;

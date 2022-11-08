@@ -1,3 +1,6 @@
+#include <Settings/SettingsWrapper.hpp>
+#if !DISABLE_PIPES
+
 #include "MIDI_Pipes.hpp"
 #include "MIDI_Staller.hpp"
 #include <AH/Error/Error.hpp>
@@ -362,3 +365,5 @@ const char *MIDIStaller::getNameNull(MIDIStaller *s) {
 END_CS_NAMESPACE
 
 AH_DIAGNOSTIC_POP()
+
+#endif
