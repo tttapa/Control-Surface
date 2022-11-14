@@ -16,11 +16,18 @@ struct Adafruit_TinyUSB_USBDeviceMIDIBackend {
     }
     MIDIUSBPacket_t read() {
         MIDIUSBPacket_t packet {};
-        backend.readPacket(packet.data);
+        if (TinyUSBDevice.mounted())
+            backend.readPacket(packet.data);
         return packet;
     }
-    void write(MIDIUSBPacket_t packet) { backend.writePacket(packet.data); }
-    void sendNow() { backend.flush(); }
+    void write(MIDIUSBPacket_t packet) {
+        if (TinyUSBDevice.mounted())
+            backend.writePacket(packet.data);
+    }
+    void sendNow() {
+        if (TinyUSBDevice.mounted())
+            backend.flush();
+    }
     bool preferImmediateSend() { return false; }
 
     Adafruit_USBD_MIDI backend;
