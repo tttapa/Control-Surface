@@ -102,7 +102,7 @@ class MIDIChannelCable {
 
   protected:
     constexpr MIDIChannelCable(RawMIDIAddress addresses)
-        : addresses {addresses} {}
+        : addresses(addresses) {}
 
   private:
     RawMIDIAddress addresses;
