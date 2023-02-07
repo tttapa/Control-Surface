@@ -25,8 +25,7 @@ class PitchBendSender {
     static void send(uint16_t value, MIDIAddress address) {
         value = AH::increaseBitDepth<14, precision(), uint16_t>(value);
         // ignore address byte, just use channel and cable numbers
-        MIDIChannelCable channelCN = {address.getChannel(),
-                                      address.getCableNumber()};
+        MIDIChannelCable channelCN = address.getChannelCable();
         Control_Surface.sendPitchBend(channelCN, value);
     }
 

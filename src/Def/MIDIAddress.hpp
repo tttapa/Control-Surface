@@ -100,6 +100,10 @@ class MIDIChannelCable {
 
     /// @}
 
+  protected:
+    constexpr MIDIChannelCable(RawMIDIAddress addresses)
+        : addresses {addresses} {}
+
   private:
     RawMIDIAddress addresses;
 };
@@ -285,6 +289,8 @@ class MIDIAddress {
     constexpr uint8_t getRawCableNumber() const {
         return addresses.cableNumber;
     }
+    /// Get the channel and cable number.
+    constexpr MIDIChannelCable getChannelCable() const { return {addresses}; }
 
     /// @}
 
