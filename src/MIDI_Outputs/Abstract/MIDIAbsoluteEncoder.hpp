@@ -72,6 +72,11 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     /// Set the MIDI address.
     void setAddress(MIDIAddress address) { this->address = address; }
 
+    int16_t resetPositionOffset() {
+        auto encval = encoder.read();
+        return encstate.update(encval);
+    }
+
   private:
     Enc encoder;
     MIDIAddress address;

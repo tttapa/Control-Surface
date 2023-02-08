@@ -84,6 +84,11 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     }
     int16_t getSpeedMultiply() const { return encstate.getSpeedMultiply(); }
 
+    int16_t resetPositionOffset() {
+        auto encval = encoder.read();
+        return encstate.update(encval);
+    }
+
   protected:
     Enc encoder;
     BankAddress address;
