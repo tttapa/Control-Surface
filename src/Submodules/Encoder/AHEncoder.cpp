@@ -68,6 +68,8 @@ AHEncoder::~AHEncoder() {
 }
 
 void AHEncoder::begin() {
+    if (interrupts_in_use > 0)
+        return;
     pinMode(pins[0], INPUT_PULLUP);
     pinMode(pins[1], INPUT_PULLUP);
     // allow time for a passive R-C filter to charge
