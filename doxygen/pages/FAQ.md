@@ -241,6 +241,17 @@ and @ref NO_SYSEX_OUTPUT settings in @ref src/Settings/Settings.hpp.
 If you do need SysEx support but still want to save some memory, you can try
 decreasing the @ref SYSEX_BUFFER_SIZE.
 
+If you don't need support for multiple MIDI interfaces, you can set
+`DISABLE_PIPES` to `1`. This disables support for MIDI pipe routing, and causes
+Control Surface to use the default interface only.
+
+If you're not using the `Control_Surface` instance, you can save memory by
+setting `CS_TRUE_CONTROL_SURFACE_INSTANCE` to `0`. This replaces
+`Control_Surface` by a macro that expands to a function call, rather than
+defining `Control_Surface` as a global variable. This allows the optimizer and
+the linker to optimize out parts of the library more effectively, but may reduce
+the quality of code completion. It does not affect the behavior of the library.
+
 ## Why do I get a compiler error when using the note F? {#faq-midi-note-f}
 
 The Arduino core defines a global preprocessor macro `F(...)` which places
