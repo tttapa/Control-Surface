@@ -249,6 +249,7 @@ following boards:
 - Arduino Nano 33 IoT
 - Arduino Nano 33 BLE
 - Arduino Nano Every
+- Arduino UNO R4 Minima
 - ESP8266
 - ESP32
 - Raspberry Pi Pico
