@@ -285,6 +285,11 @@ tests and generating documentation, a style guide, etc.
 
 ### 2.x
 
+- ([aaf6eea](https://github.com/tttapa/Control-Surface/commit/aaf6eea2206c6e3b6a2004e0520100342945983f))  
+   The upper case `CHANNEL_x` and `CABLE_x` constants have been deprecated in
+   favor of the title case versions `Channel_x` and `Cable_x`. This was done to
+   avoid conflicts with macros defined by the ArduinoCore-renesas.  
+   For the same reason, the `CS` namespace has been renamed to `cs`.
 - ([47b2d5e](https://github.com/tttapa/Control-Surface/commit/47b2d5e7530da4c940fc99e606cfad0c6a0638a2))  
    The `Encoder` class has been replaced by [`AHEncoder`](https://tttapa.github.io/Control-Surface-doc/Doxygen/dd/da9/classAHEncoder.html).
    The code has been cleaned up and support was added for newer boards like the
