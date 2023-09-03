@@ -7,7 +7,6 @@
 BEGIN_CS_NAMESPACE
 
 #if defined(ARDUINO_UNOR4_MINIMA) || defined(ARDUINO_UNOR4_WIFI)
-#warning "External interrupts only supported on pins 2 and 3 of UNO R4"
 #define NOT_AN_INTERRUPT 255
 pin_size_t digitalPinToInterrupt(pin_size_t pin) {
     if (pin == 2 || pin == 3)
