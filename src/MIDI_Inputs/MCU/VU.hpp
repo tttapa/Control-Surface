@@ -199,7 +199,7 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
      *          The track of the VU meter. [1, 8]
      * @param   channelCN
      *          The MIDI channel [Channel_1, Channel_16] and Cable
-     *          Number [CABLE_1, CABLE_16].
+     *          Number [Cable_1, Cable_16].
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
      *          step.  
@@ -310,7 +310,7 @@ class VU
      *          The track of the VU meter. [1, 8]
      * @param   channelCN
      *          The MIDI channel [Channel_1, Channel_16] and Cable
-     *          Number [CABLE_1, CABLE_16].
+     *          Number [Cable_1, Cable_16].
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
      *          step.  

@@ -113,7 +113,7 @@ struct VPotMatcher : public TwoByteMIDIMatcher {
      *          The track of the VPot [1, 8].
      * @param   channelCN
      *          The MIDI channel [Channel_1, Channel_16] and Cable Number 
-     *          [CABLE_1, CABLE_16].
+     *          [Cable_1, Cable_16].
      */
     VPotMatcher(uint8_t track, MIDIChannelCable channelCN)
         : TwoByteMIDIMatcher({track + 0x30 - 1, channelCN}) {}
@@ -135,7 +135,7 @@ struct BankableVPotMatcher : public BankableTwoByteMIDIMatcher<BankSize> {
      *          The track of the VPot [1, 8].
      * @param   channelCN
      *          The MIDI channel [Channel_1, Channel_16] and Cable Number 
-     *          [CABLE_1, CABLE_16].
+     *          [Cable_1, Cable_16].
      */
     BankableVPotMatcher(BankConfig<BankSize> config, uint8_t track,
                         MIDIChannelCable channelCN)
@@ -167,7 +167,7 @@ class VPotRing
      *          The track of the VPot [1, 8].
      * @param   channelCN
      *          The MIDI channel [Channel_1, Channel_16] and Cable Number 
-     *          [CABLE_1, CABLE_16].
+     *          [Cable_1, Cable_16].
      */
     VPotRing(uint8_t track, MIDIChannelCable channelCN = Channel_1)
         : Parent({track, channelCN}) {}
@@ -253,7 +253,7 @@ class VPotRing
      *          The track of the VPot [1, 8].
      * @param   channelCN
      *          The MIDI channel [Channel_1, Channel_16] and Cable Number 
-     *          [CABLE_1, CABLE_16].
+     *          [Cable_1, Cable_16].
      */
     VPotRing(BankConfig<BankSize> config, uint8_t track,
              MIDIChannelCable channelCN = Channel_1)

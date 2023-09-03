@@ -39,7 +39,7 @@ class CCPotentiometer
      * @param   addresses
      *          The list of MIDI addresses containing the controller number 
      *          [0, 119], channel [Channel_1, Channel_16], and optional cable 
-     *          number [CABLE_1, CABLE_16].
+     *          number [Cable_1, Cable_16].
      * 
      * @ingroup MIDIOutputElementConstructors
      */

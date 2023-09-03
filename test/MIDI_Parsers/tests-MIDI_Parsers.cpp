@@ -42,7 +42,7 @@ TEST(USBMIDIParser, noteOnCN) {
     EXPECT_EQ(msg.header, 0x93);
     EXPECT_EQ(msg.data1, 0x2A);
     EXPECT_EQ(msg.data2, 0x7E);
-    EXPECT_EQ(msg.cable, CABLE_6);
+    EXPECT_EQ(msg.cable, Cable_6);
 }
 
 TEST(USBMIDIParser, sysEx2Bytes) {
@@ -130,7 +130,7 @@ TEST(USBMIDIParser, Realtime) {
     Packet_t packets[] = {0x3F, 0xF8, 0x00, 0x00};
     auto puller = BufferPuller(packets);
     EXPECT_EQ(uparser.pull(puller), MIDIReadEvent::REALTIME_MESSAGE);
-    RealTimeMessage expected = {MIDIMessageType::TIMING_CLOCK, CABLE_4};
+    RealTimeMessage expected = {MIDIMessageType::TIMING_CLOCK, Cable_4};
     EXPECT_EQ(uparser.getRealTimeMessage(), expected);
 }
 
@@ -141,7 +141,7 @@ TEST(USBMIDIParser, tuneRequest) {
     EXPECT_EQ(uparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
     SysCommonMessage msg = uparser.getSysCommonMessage();
     EXPECT_EQ(msg.getMessageType(), MIDIMessageType::TUNE_REQUEST);
-    EXPECT_EQ(msg.cable, CABLE_5);
+    EXPECT_EQ(msg.cable, Cable_5);
 }
 
 TEST(USBMIDIParser, MTCTimeCode) {
@@ -152,7 +152,7 @@ TEST(USBMIDIParser, MTCTimeCode) {
     SysCommonMessage msg = uparser.getSysCommonMessage();
     EXPECT_EQ(msg.getMessageType(), MIDIMessageType::MTC_QUARTER_FRAME);
     EXPECT_EQ(msg.data1, 0x23);
-    EXPECT_EQ(msg.cable, CABLE_5);
+    EXPECT_EQ(msg.cable, Cable_5);
 }
 
 TEST(USBMIDIParser, songPositionPointer) {
@@ -164,7 +164,7 @@ TEST(USBMIDIParser, songPositionPointer) {
     EXPECT_EQ(msg.getMessageType(), MIDIMessageType::SONG_POSITION_POINTER);
     EXPECT_EQ(msg.data1, 0x38);
     EXPECT_EQ(msg.data2, 0x57);
-    EXPECT_EQ(msg.cable, CABLE_5);
+    EXPECT_EQ(msg.cable, Cable_5);
 }
 
 TEST(USBMIDIParser, sysExContinueWithoutStarting) {
@@ -525,7 +525,7 @@ TEST(SerialMIDIParser, RealTime) {
     auto puller = BufferPuller(data);
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::REALTIME_MESSAGE);
     EXPECT_EQ(sparser.getRealTimeMessage(),
-              RealTimeMessage(MIDIMessageType::TIMING_CLOCK, CABLE_1));
+              RealTimeMessage(MIDIMessageType::TIMING_CLOCK, Cable_1));
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
@@ -820,7 +820,7 @@ TEST(USBMIDIParser, sysExMultipleChunks) {
     EXPECT_GE(size1, buffsize3);
     EXPECT_LE(size1, SYSEX_BUFFER_SIZE);
     EXPECT_EQ(uparser.getSysExMessage(),
-              SysExMessage(data.data(), size1, CABLE_6));
+              SysExMessage(data.data(), size1, Cable_6));
     EXPECT_TRUE(uparser.getSysExMessage().isFirstChunk());
     EXPECT_FALSE(uparser.getSysExMessage().isLastChunk());
     EXPECT_FALSE(uparser.getSysExMessage().isCompleteMessage());
@@ -830,7 +830,7 @@ TEST(USBMIDIParser, sysExMultipleChunks) {
     EXPECT_GE(size2, buffsize3);
     EXPECT_LE(size2, SYSEX_BUFFER_SIZE);
     EXPECT_EQ(uparser.getSysExMessage(),
-              SysExMessage(data.data() + size1, size2, CABLE_6));
+              SysExMessage(data.data() + size1, size2, Cable_6));
     EXPECT_FALSE(uparser.getSysExMessage().isFirstChunk());
     EXPECT_FALSE(uparser.getSysExMessage().isFirstChunk());
     EXPECT_FALSE(uparser.getSysExMessage().isLastChunk());
@@ -840,7 +840,7 @@ TEST(USBMIDIParser, sysExMultipleChunks) {
     auto size3 = uparser.getSysExMessage().length;
     EXPECT_EQ(size1 + size2 + size3, size);
     EXPECT_EQ(uparser.getSysExMessage(),
-              SysExMessage(data.data() + size1 + size2, size3, CABLE_6));
+              SysExMessage(data.data() + size1 + size2, size3, Cable_6));
     EXPECT_FALSE(uparser.getSysExMessage().isFirstChunk());
     EXPECT_TRUE(uparser.getSysExMessage().isLastChunk());
     EXPECT_FALSE(uparser.getSysExMessage().isCompleteMessage());

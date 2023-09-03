@@ -46,7 +46,7 @@ class PBPotentiometer
      *          The analog input pin to read from.
      * @param   addresses
      *          The list of MIDI channels [Channel_1, Channel_16] and optional 
-     *          Cable Numbers [CABLE_1, CABLE_16].
+     *          Cable Numbers [Cable_1, Cable_16].
      */
     PBPotentiometer(const Bank<NumBanks> &bank, pin_t analogPin,
                     const Array<MIDIChannelCable, NumBanks> &addresses)

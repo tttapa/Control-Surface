@@ -222,14 +222,14 @@ TEST(MCUVUBankable, setValueBankChangeCN) {
         channel,
         (track - 1) << 4 | 0xA,
         0,
-        CABLE_5,
+        Cable_5,
     };
     ChannelMessage midimsg2 = {
         MIDIMessageType::CHANNEL_PRESSURE,
         channel,
         (track - 1) << 4 | 0xB,
         0,
-        CABLE_9,
+        Cable_9,
     };
     // Active bank is never updated, so decay timer is never reset, and millis
     // shouldn't be called.

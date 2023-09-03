@@ -45,7 +45,7 @@ class CCButtonMatrix
      *          [0, 119]
      * @param   channelCN
      *          The MIDI channel [Channel_1, Channel_16] and Cable Number 
-     *          [CABLE_1, CABLE_16].
+     *          [Cable_1, Cable_16].
      * @param   sender
      *          The MIDI sender to use.
      */

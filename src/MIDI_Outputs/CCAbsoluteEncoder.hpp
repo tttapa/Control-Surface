@@ -29,7 +29,7 @@ class CCAbsoluteEncoder : public MIDIAbsoluteEncoder<ContinuousCCSender> {
      * @param   address
      *          The MIDI address containing the controller number [0, 119], 
      *          channel [Channel_1, Channel_16], and optional cable number 
-     *          [CABLE_1, CABLE_16].
+     *          [Cable_1, Cable_16].
      * @param   multiplier
      *          A constant factor to increase the speed of the rotary encoder.
      *          The position will just be multiplied by this factor. 

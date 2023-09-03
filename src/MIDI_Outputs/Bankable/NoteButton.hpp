@@ -34,7 +34,7 @@ class NoteButton : public MIDIButton<SingleAddress, DigitalNoteSender> {
      * @param   address
      *          The MIDI address containing the note number [0, 127], 
      *          channel [Channel_1, Channel_16], and optional cable number 
-     *          [CABLE_1, CABLE_16].
+     *          [Cable_1, Cable_16].
      * @param   velocity
      *          The velocity of the MIDI Note events.
      */

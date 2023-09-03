@@ -40,7 +40,7 @@ class PCButton : public Bankable::MIDIButton<ManyAddresses<NumBanks>,
      * @param   addresses
      *          The list of MIDI addresses containing the program number 
      *          [0, 127], channel [Channel_1, Channel_16], and optional cable 
-     *          number [CABLE_1, CABLE_16].
+     *          number [Cable_1, Cable_16].
      */
     PCButton(const Bank<NumBanks> &bank, pin_t pin,
              const Array<MIDIAddress, NumBanks> &addresses)

@@ -93,7 +93,7 @@ class USBMIDI_Parser : public MIDI_Parser {
         return t;
     }
 
-    Cable activeCable = CABLE_1;
+    Cable activeCable = Cable_1;
 
   private:
     SysExBuffer sysexbuffers[USB_MIDI_NUMBER_OF_CABLES] = {};

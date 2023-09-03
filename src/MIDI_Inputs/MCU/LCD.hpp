@@ -59,7 +59,7 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
     ///         i.e. listening to the entire display.
     /// @param  cable
     ///         The MIDI USB cable number to listen for.
-    LCD(uint8_t offset = 0, Cable cable = CABLE_1)
+    LCD(uint8_t offset = 0, Cable cable = Cable_1)
         : offset(offset), cable(cable) {
         // Null-terminate the buffer
         buffer[BufferSize] = '\0';

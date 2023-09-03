@@ -33,7 +33,7 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NumButtons> {
      * @param   baseAddress
      *          The MIDI address of the first button, containing the note
      *          number [0, 127], channel [Channel_1, Channel_16], and optional 
-     *          cable number [CABLE_1, CABLE_16].
+     *          cable number [Cable_1, Cable_16].
      * @param   incrementAddress
      *          The number of addresses to increment for each next button.  
      *          E.g. if `baseAddress` is 8, and `incrementAddress` is 2,

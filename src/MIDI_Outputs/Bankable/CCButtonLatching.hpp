@@ -37,7 +37,7 @@ class CCButtonLatching
      * @param   address
      *          The MIDI address containing the controller number [0, 119], 
      *          channel [Channel_1, Channel_16], and optional cable number 
-     *          [CABLE_1, CABLE_16].
+     *          [Cable_1, Cable_16].
      * @param   sender
      *          The MIDI sender to use.
      */

@@ -29,14 +29,14 @@ class CCIncrementDecrementButtons
      * @param   address
      *          The address to use for the relative events, containing the 
      *          controller number [0, 119], channel [Channel_1, Channel_16], and
-     *          optional cable number [CABLE_1, CABLE_16].
+     *          optional cable number [Cable_1, Cable_16].
      * @param   multiplier
      *          The multiplier for the relative events. When setting it to 2,
      *          it will scroll twice as fast, for example.
      * @param   resetNote
      *          The MIDI address to use to reset the setting, containing the 
      *          note number [0, 119], channel [Channel_1, Channel_16], and 
-     *          optional cable number [CABLE_1, CABLE_16]. 
+     *          optional cable number [Cable_1, Cable_16]. 
      *          It will be triggered when the increment and decrement buttons
      *          are pressed simultaneously.
      * @param   relativeSender

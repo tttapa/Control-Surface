@@ -28,7 +28,7 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
         this->midimsg.header = interface.getType() | channel;
         this->midimsg.data1 = interface.getData1();
         this->midimsg.data2 = interface.getData2();
-        this->midimsg.cable = CABLE_1;
+        this->midimsg.cable = Cable_1;
     }
 
     /// Get the latest system exclusive message from the given MIDI interface.
@@ -36,7 +36,7 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
     void updateSysExMessage(const MidiInterface &interface) {
         this->sysex.data = interface.getSysExArray();
         this->sysex.length = interface.getSysExArrayLength();
-        this->sysex.cable = CABLE_1;
+        this->sysex.cable = Cable_1;
     }
 
     /// Get the latest system common message from the given MIDI interface.
@@ -45,18 +45,18 @@ class FortySevenEffectsMIDI_Parser : public MIDI_Parser {
         this->midimsg.header = interface.getType();
         this->midimsg.data1 = interface.getData1();
         this->midimsg.data2 = interface.getData2();
-        this->midimsg.cable = CABLE_1;
+        this->midimsg.cable = Cable_1;
     }
 
     /// Get the latest real-time message from the given MIDI interface.
     template <class MidiInterface>
     void updateRealTimeMessage(const MidiInterface &interface) {
         this->rtmsg.message = interface.getType();
-        this->rtmsg.cable = CABLE_1;
+        this->rtmsg.cable = Cable_1;
     }
 
     /// Temporarily saves a pointer to the MIDI parser's SysEx buffer.
-    SysExMessage sysex = {nullptr, 0, CABLE_1};
+    SysExMessage sysex = {nullptr, 0, Cable_1};
 
   public:
     /// Get the latest SysEx message.

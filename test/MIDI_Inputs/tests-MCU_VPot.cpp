@@ -88,7 +88,7 @@ TEST(MCUVPotBankable, setValueBankChangeCN) {
     MCU::Bankable::VPotRing<2> vpot = {{bank, CHANGE_CABLENB}, track, channel};
 
     ChannelMessage midimsg = {
-        MIDIMessageType::CONTROL_CHANGE, channel, 0x34, 0x5A, CABLE_5,
+        MIDIMessageType::CONTROL_CHANGE, channel, 0x34, 0x5A, Cable_5,
     };
     MIDIInputElementCC::updateAllWith(midimsg);
     EXPECT_EQ(vpot.getPosition(), 0x0);

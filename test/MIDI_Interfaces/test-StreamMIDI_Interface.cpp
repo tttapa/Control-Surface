@@ -61,7 +61,7 @@ TEST(StreamMIDI_Interface, SysExSend8B) {
     StreamMIDI_Interface midi = stream;
     Sequence seq;
     u8vec sysex = {0xF0, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0xF7};
-    midi.send({sysex, CABLE_1});
+    midi.send({sysex, Cable_1});
     EXPECT_EQ(stream.sent, sysex);
 }
 
@@ -108,7 +108,7 @@ TEST(StreamMIDI_Interface, readSysEx) {
         0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7,
     };
     EXPECT_EQ(result, expected);
-    EXPECT_EQ(sysex.cable, CABLE_1);
+    EXPECT_EQ(sysex.cable, Cable_1);
 }
 
 TEST(StreamMIDI_Interface, readNoteUpdate) {

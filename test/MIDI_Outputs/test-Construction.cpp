@@ -99,10 +99,10 @@ TEST(Construction, MIDIOutputs) {
         4,
     }};
     const Array<MIDIChannelCable, 4> cnChannels = {{
-        {Channel_1, CABLE_1},
-        {Channel_2, CABLE_1},
-        {Channel_3, CABLE_1},
-        {Channel_4, CABLE_1},
+        {Channel_1, Cable_1},
+        {Channel_2, Cable_1},
+        {Channel_3, Cable_1},
+        {Channel_4, Cable_1},
     }};
     Bank<4> bank {8};
 

@@ -10,7 +10,7 @@ TEST(NoteButtonMatrix, pressAndRelease) {
     Control_Surface.connectDefaultMIDI_Interface();
 
     constexpr Channel channel = Channel_7;
-    constexpr Cable cn = CABLE_13;
+    constexpr Cable cn = Cable_13;
     AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
     NoteButtonMatrix<3, 2> matrix = {
         {2, 3, 4}, {5, 6}, addresses, {channel, cn}};
@@ -44,7 +44,7 @@ TEST(NoteButtonMatrix, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
 
     EXPECT_CALL(
-        midi, sendChannelMessageImpl(ChannelMessage(0x96, 5, 0x7F, CABLE_13)));
+        midi, sendChannelMessageImpl(ChannelMessage(0x96, 5, 0x7F, Cable_13)));
 
     matrix.update();
 
@@ -70,7 +70,7 @@ TEST(NoteButtonMatrix, pressAndRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
 
     EXPECT_CALL(
-        midi, sendChannelMessageImpl(ChannelMessage(0x86, 5, 0x7F, CABLE_13)));
+        midi, sendChannelMessageImpl(ChannelMessage(0x86, 5, 0x7F, Cable_13)));
 
     matrix.update();
 
@@ -88,7 +88,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     OutputBank bank(4);
 
     constexpr Channel channel = Channel_7;
-    constexpr Cable cn = CABLE_13;
+    constexpr Cable cn = Cable_13;
     AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
 
     Bankable::NoteButtonMatrix<3, 2> matrix = {
@@ -125,7 +125,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
 
     EXPECT_CALL(
-        midi, sendChannelMessageImpl(ChannelMessage(0x96, 5, 0x7F, CABLE_13)));
+        midi, sendChannelMessageImpl(ChannelMessage(0x96, 5, 0x7F, Cable_13)));
 
     matrix.update();
 
@@ -158,7 +158,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
 
     EXPECT_CALL(
-        midi, sendChannelMessageImpl(ChannelMessage(0x86, 5, 0x7F, CABLE_13)));
+        midi, sendChannelMessageImpl(ChannelMessage(0x86, 5, 0x7F, Cable_13)));
 
     matrix.update();
 
@@ -187,7 +187,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(3000));
 
     EXPECT_CALL(midi, sendChannelMessageImpl(
-                          ChannelMessage(0x96, 5 + 4, 0x7F, CABLE_13)));
+                          ChannelMessage(0x96, 5 + 4, 0x7F, Cable_13)));
 
     matrix.update();
 
@@ -216,7 +216,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
 
     EXPECT_CALL(midi, sendChannelMessageImpl(
-                          ChannelMessage(0x86, 5 + 4, 0x7F, CABLE_13)));
+                          ChannelMessage(0x86, 5 + 4, 0x7F, Cable_13)));
 
     matrix.update();
 
@@ -234,8 +234,8 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
     Bank<2> bank(4);
 
     Array<MIDIChannelCable, 2> channels = {{
-        {Channel_7, CABLE_13},
-        {Channel_2, CABLE_10},
+        {Channel_7, Cable_13},
+        {Channel_2, Cable_10},
     }};
     AddressMatrix<3, 2> addresses1 = {{{1, 3}, {5, 7}, {9, 11}}};
     AddressMatrix<3, 2> addresses2 = {{{10, 30}, {50, 70}, {90, 110}}};
@@ -274,7 +274,7 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(1000));
 
     EXPECT_CALL(
-        midi, sendChannelMessageImpl(ChannelMessage(0x96, 5, 0x7F, CABLE_13)));
+        midi, sendChannelMessageImpl(ChannelMessage(0x96, 5, 0x7F, Cable_13)));
 
     matrix.update();
 
@@ -307,7 +307,7 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(2000));
 
     EXPECT_CALL(
-        midi, sendChannelMessageImpl(ChannelMessage(0x86, 5, 0x7F, CABLE_13)));
+        midi, sendChannelMessageImpl(ChannelMessage(0x86, 5, 0x7F, Cable_13)));
 
     matrix.update();
 
@@ -336,7 +336,7 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(3000));
 
     EXPECT_CALL(
-        midi, sendChannelMessageImpl(ChannelMessage(0x91, 50, 0x7F, CABLE_10)));
+        midi, sendChannelMessageImpl(ChannelMessage(0x91, 50, 0x7F, Cable_10)));
 
     matrix.update();
 
@@ -365,7 +365,7 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
     EXPECT_CALL(ArduinoMock::getInstance(), millis()).WillOnce(Return(4000));
 
     EXPECT_CALL(
-        midi, sendChannelMessageImpl(ChannelMessage(0x81, 50, 0x7F, CABLE_10)));
+        midi, sendChannelMessageImpl(ChannelMessage(0x81, 50, 0x7F, Cable_10)));
 
     matrix.update();
 

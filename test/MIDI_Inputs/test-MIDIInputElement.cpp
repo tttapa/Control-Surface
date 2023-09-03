@@ -59,27 +59,27 @@ TEST(TwoByteMIDIMatcher, ChannelPressure) {
         void handleUpdate(OneByteMIDIMatcher::Result m) override {
             handleUpdateHelper(m.value);
         }
-    } mn{{Channel_10, CABLE_7}};
+    } mn{{Channel_10, Cable_7}};
     mn.begin();
 
     EXPECT_CALL(mn, handleUpdateHelper(0x0C));
     MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>::updateAllWith(
-        {MIDIMessageType::CHANNEL_PRESSURE, Channel_10, 0x0C, 0xFF, CABLE_7});
+        {MIDIMessageType::CHANNEL_PRESSURE, Channel_10, 0x0C, 0xFF, Cable_7});
     testing::Mock::VerifyAndClear(&mn);
 
     EXPECT_CALL(mn, handleUpdateHelper(0x00));
     MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>::updateAllWith(
-        {MIDIMessageType::CHANNEL_PRESSURE, Channel_10, 0x00, 0xFF, CABLE_7});
+        {MIDIMessageType::CHANNEL_PRESSURE, Channel_10, 0x00, 0xFF, Cable_7});
     testing::Mock::VerifyAndClear(&mn);
 
     // Wrong channel
     MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>::updateAllWith(
-        {MIDIMessageType::CHANNEL_PRESSURE, Channel_11, 0x00, 0xFF, CABLE_7});
+        {MIDIMessageType::CHANNEL_PRESSURE, Channel_11, 0x00, 0xFF, Cable_7});
     testing::Mock::VerifyAndClear(&mn);
 
     // Wrong cable
     MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>::updateAllWith(
-        {MIDIMessageType::CHANNEL_PRESSURE, Channel_10, 0x00, 0xFF, CABLE_8});
+        {MIDIMessageType::CHANNEL_PRESSURE, Channel_10, 0x00, 0xFF, Cable_8});
     testing::Mock::VerifyAndClear(&mn);
 }
 

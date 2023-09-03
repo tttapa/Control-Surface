@@ -25,7 +25,7 @@ class MIDI_Parser {
     RealTimeMessage getRealTimeMessage() const { return rtmsg; }
 #if IGNORE_SYSEX
     /// Get the latest SysEx message.
-    SysExMessage getSysExMessage() const { return {nullptr, 0, CABLE_1}; }
+    SysExMessage getSysExMessage() const { return {nullptr, 0, Cable_1}; }
 #endif
 
   protected:

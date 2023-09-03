@@ -16,12 +16,12 @@ using MMT = MIDIMessageType;
 TEST(StreamDebugMIDI_Interface, send3B) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
-    midi.sendChannelMessage(MMT::NOTE_ON, Channel_4, 0x55, 0x66, CABLE_5);
-    midi.sendNoteOn({0x55, Channel_4, CABLE_9}, 0x66);
-    midi.sendNoteOff({0x55, Channel_4, CABLE_9}, 0x66);
-    midi.sendControlChange({0x55, Channel_4, CABLE_9}, 0x66);
-    midi.sendKeyPressure({0x55, Channel_4, CABLE_9}, 0x66);
-    midi.sendPitchBend({Channel_4, CABLE_9}, 0x3355);
+    midi.sendChannelMessage(MMT::NOTE_ON, Channel_4, 0x55, 0x66, Cable_5);
+    midi.sendNoteOn({0x55, Channel_4, Cable_9}, 0x66);
+    midi.sendNoteOff({0x55, Channel_4, Cable_9}, 0x66);
+    midi.sendControlChange({0x55, Channel_4, Cable_9}, 0x66);
+    midi.sendKeyPressure({0x55, Channel_4, Cable_9}, 0x66);
+    midi.sendPitchBend({Channel_4, Cable_9}, 0x3355);
     std::string expected = "Note On          Channel: 4\tData 1: 0x55\tData "
                            "2: 0x66\tCable: 5\r\n"
                            "Note On          Channel: 4\tData 1: 0x55\tData "
@@ -42,10 +42,10 @@ TEST(StreamDebugMIDI_Interface, send3B) {
 TEST(StreamDebugMIDI_Interface, send2B) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
-    midi.sendChannelMessage(MMT::PROGRAM_CHANGE, Channel_4, 0x66, CABLE_5);
-    midi.sendProgramChange({Channel_4, CABLE_9}, 0x66);
-    midi.sendProgramChange({0x66, Channel_4, CABLE_9});
-    midi.sendChannelPressure({Channel_4, CABLE_9}, 0x66);
+    midi.sendChannelMessage(MMT::PROGRAM_CHANGE, Channel_4, 0x66, Cable_5);
+    midi.sendProgramChange({Channel_4, Cable_9}, 0x66);
+    midi.sendProgramChange({0x66, Channel_4, Cable_9});
+    midi.sendChannelPressure({Channel_4, Cable_9}, 0x66);
     std::string expected =
         "Program Change   Channel: 4\tData 1: 0x66\tCable: 5\r\n"
         "Program Change   Channel: 4\tData 1: 0x66\tCable: 9\r\n"
@@ -60,7 +60,7 @@ TEST(StreamDebugMIDI_Interface, SysExSend8B) {
     StreamDebugMIDI_Interface midi = stream;
     Sequence seq;
     u8vec sysex = {0xF0, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0xF7};
-    midi.send({sysex, CABLE_10});
+    midi.send({sysex, Cable_10});
     std::string expected =
         "System Exclusive [8]\tF0 11 22 33 44 55 66 F7\tCable: 10\r\n";
     std::string sentStr(stream.sent.begin(), stream.sent.end());
@@ -71,7 +71,7 @@ TEST(StreamDebugMIDI_Interface, SysCommonMTCQF) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
     Sequence seq;
-    SysCommonMessage msg = {MMT::MTC_QUARTER_FRAME, 0x47, CABLE_10};
+    SysCommonMessage msg = {MMT::MTC_QUARTER_FRAME, 0x47, Cable_10};
     midi.send(msg);
     std::string expected = "System Common    MTC_QUARTER_FRAME\tData 1: "
                            "0x47\tCable: 10\r\n";
@@ -83,7 +83,7 @@ TEST(StreamDebugMIDI_Interface, SysCommonSPP) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
     Sequence seq;
-    SysCommonMessage msg = {MMT::SONG_POSITION_POINTER, 0x12, 0x34, CABLE_10};
+    SysCommonMessage msg = {MMT::SONG_POSITION_POINTER, 0x12, 0x34, Cable_10};
     midi.send(msg);
     std::string expected = "System Common    SONG_POSITION_POINTER\tData 1: "
                            "0x12\tData 2: 0x34 (6674)\tCable: 10\r\n";
@@ -95,7 +95,7 @@ TEST(StreamDebugMIDI_Interface, SysCommonSS) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
     Sequence seq;
-    SysCommonMessage msg = {MMT::SONG_SELECT, 0x51, CABLE_10};
+    SysCommonMessage msg = {MMT::SONG_SELECT, 0x51, Cable_10};
     midi.send(msg);
     std::string expected = "System Common    SONG_SELECT\tData 1: "
                            "0x51\tCable: 10\r\n";
@@ -107,7 +107,7 @@ TEST(StreamDebugMIDI_Interface, SysCommonTR) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
     Sequence seq;
-    SysCommonMessage msg = {MMT::TUNE_REQUEST, CABLE_10};
+    SysCommonMessage msg = {MMT::TUNE_REQUEST, Cable_10};
     midi.send(msg);
     std::string expected = "System Common    TUNE_REQUEST\tCable: 10\r\n";
     std::string sentStr(stream.sent.begin(), stream.sent.end());
@@ -118,7 +118,7 @@ TEST(StreamDebugMIDI_Interface, RealTimeSend) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
     Sequence seq;
-    midi.send({0xF8, CABLE_10});
+    midi.send({0xF8, Cable_10});
     std::string expected = "Real-Time        TIMING_CLOCK\tCable: 10\r\n";
     std::string sentStr(stream.sent.begin(), stream.sent.end());
     EXPECT_EQ(sentStr, expected);
@@ -129,7 +129,7 @@ TEST(StreamDebugMIDI_Interface, RealTimeSendPrefix) {
     StreamDebugMIDI_Interface midi = stream;
     midi.setPrefix("<prefix>");
     Sequence seq;
-    midi.send({0xF8, CABLE_10});
+    midi.send({0xF8, Cable_10});
     std::string expected =
         "<prefix> Real-Time        TIMING_CLOCK\tCable: 10\r\n";
     std::string sentStr(stream.sent.begin(), stream.sent.end());
@@ -210,5 +210,5 @@ TEST(StreamDebugMIDI_Interface, readSysEx) {
         0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7,
     };
     EXPECT_EQ(result, expected);
-    EXPECT_EQ(sysex.cable, CABLE_1);
+    EXPECT_EQ(sysex.cable, Cable_1);
 }

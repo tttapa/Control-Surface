@@ -225,7 +225,7 @@ This is the most important one:
 ~~~cpp
 MIDIAddress(int address, 
             Channel channel = Channel_1,
-            Cable cableNumber = CABLE_1)
+            Cable cableNumber = Cable_1)
 ~~~
 
 It allows you to specify all three of the fields explained above. The channel 
@@ -242,7 +242,7 @@ MIDIAddress myAddress = 16;
 MIDIAddress myAddress = {42, Channel_2};
 
 // Address 111 on channel 2 and cable 3:
-MIDIAddress myAddress = {111, Channel_2, CABLE_3};
+MIDIAddress myAddress = {111, Channel_2, Cable_3};
 ~~~
 
 If you specify just a single argument, as in the first example, you don't have

@@ -28,10 +28,10 @@ class MIDI_Sender {
      * @param   d2
      *          The second data byte. [0, 127]
      * @param   cable
-     *          The MIDI Cable Number. [CABLE_1, CABLE_16]
+     *          The MIDI Cable Number. [Cable_1, Cable_16]
      */
     void sendChannelMessage(MIDIMessageType m, Channel c, uint8_t d1,
-                            uint8_t d2, Cable cable = CABLE_1);
+                            uint8_t d2, Cable cable = Cable_1);
 
     /**
      * @brief   Send a 2-byte MIDI %Channel Voice message.
@@ -46,7 +46,7 @@ class MIDI_Sender {
      *          The MIDI Cable Number. [1, 16]
      */
     void sendChannelMessage(MIDIMessageType m, Channel c, uint8_t d1,
-                            Cable cable = CABLE_1);
+                            Cable cable = Cable_1);
 
     /// Send a MIDI Note On event.
     void sendNoteOn(MIDIAddress address, uint8_t velocity);
@@ -73,24 +73,24 @@ class MIDI_Sender {
     /// Send a MIDI System Common message.
     void send(SysCommonMessage message);
     /// Send a MIDI System Common message.
-    void sendSysCommon(MIDIMessageType m, Cable cable = CABLE_1);
+    void sendSysCommon(MIDIMessageType m, Cable cable = Cable_1);
     /// Send a MIDI System Common message.
-    void sendSysCommon(MIDIMessageType m, uint8_t data1, Cable cable = CABLE_1);
+    void sendSysCommon(MIDIMessageType m, uint8_t data1, Cable cable = Cable_1);
     /// Send a MIDI System Common message.
     void sendSysCommon(MIDIMessageType m, uint8_t data1, uint8_t data2,
-                       Cable cable = CABLE_1);
+                       Cable cable = Cable_1);
 
     /// Send a MIDI Time Code Quarter Frame.
-    void sendMTCQuarterFrame(uint8_t data, Cable cable = CABLE_1);
+    void sendMTCQuarterFrame(uint8_t data, Cable cable = Cable_1);
     /// Send a MIDI Time Code Quarter Frame.
     void sendMTCQuarterFrame(uint8_t messageType, uint8_t values,
-                             Cable cable = CABLE_1);
+                             Cable cable = Cable_1);
     /// Send a MIDI Song Position Pointer message.
-    void sendSongPositionPointer(uint16_t spp, Cable cable = CABLE_1);
+    void sendSongPositionPointer(uint16_t spp, Cable cable = Cable_1);
     /// Send a MIDI Song Select message.
-    void sendSongSelect(uint8_t song, Cable cable = CABLE_1);
+    void sendSongSelect(uint8_t song, Cable cable = Cable_1);
     /// Send a MIDI Tune Request.
-    void sendTuneRequest(Cable cable = CABLE_1);
+    void sendTuneRequest(Cable cable = Cable_1);
 
     /// @}
 
@@ -101,9 +101,9 @@ class MIDI_Sender {
     void send(SysExMessage message);
     /// Send a MIDI System Exclusive message.
     template <uint16_t N>
-    void sendSysEx(const uint8_t (&sysexdata)[N], Cable cable = CABLE_1);
+    void sendSysEx(const uint8_t (&sysexdata)[N], Cable cable = Cable_1);
     /// Send a MIDI System Exclusive message.
-    void sendSysEx(const uint8_t *data, uint16_t length, Cable cable = CABLE_1);
+    void sendSysEx(const uint8_t *data, uint16_t length, Cable cable = Cable_1);
 
     /// @}
 
@@ -113,22 +113,22 @@ class MIDI_Sender {
     /// Send a MIDI Real-Time message.
     void send(RealTimeMessage message);
     /// Send a MIDI Real-Time message.
-    void sendRealTime(MIDIMessageType rt, Cable cable = CABLE_1);
+    void sendRealTime(MIDIMessageType rt, Cable cable = Cable_1);
     /// Send a MIDI Real-Time message.
-    void sendRealTime(uint8_t rt, Cable cable = CABLE_1);
+    void sendRealTime(uint8_t rt, Cable cable = Cable_1);
 
     /// Send a MIDI Timing Clock message.
-    void sendTimingClock(Cable cable = CABLE_1);
+    void sendTimingClock(Cable cable = Cable_1);
     /// Send a MIDI Start message.
-    void sendStart(Cable cable = CABLE_1);
+    void sendStart(Cable cable = Cable_1);
     /// Send a MIDI Continue message.
-    void sendContinue(Cable cable = CABLE_1);
+    void sendContinue(Cable cable = Cable_1);
     /// Send a MIDI Stop message.
-    void sendStop(Cable cable = CABLE_1);
+    void sendStop(Cable cable = Cable_1);
     /// Send a MIDI Active Sensing message.
-    void sendActiveSensing(Cable cable = CABLE_1);
+    void sendActiveSensing(Cable cable = Cable_1);
     /// Send a MIDI System Reset message.
-    void sendSystemReset(Cable cable = CABLE_1);
+    void sendSystemReset(Cable cable = Cable_1);
 
     /// @}
 

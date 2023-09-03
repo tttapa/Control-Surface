@@ -30,7 +30,7 @@ class PBAbsoluteEncoder : public MIDIAbsoluteEncoder<PitchBendSender<14>> {
      *          library.
      * @param   address
      *          The MIDI channel [Channel_1, Channel_16] and optional Cable
-     *          Number [CABLE_1, CABLE_16].
+     *          Number [Cable_1, Cable_16].
      * @param   multiplier
      *          A constant factor to increase the speed of the rotary encoder.
      *          The position will just be multiplied by this factor. 

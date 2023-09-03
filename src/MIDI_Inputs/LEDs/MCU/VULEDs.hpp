@@ -51,7 +51,7 @@ class VULEDs : public VU, public VULEDsDriver<NumLEDs> {
     ///         The track of the VU meter. [1, 8]
     /// @param  channelCN
     ///         The MIDI channel [Channel_1, Channel_16] and Cable
-    ///         Number [CABLE_1, CABLE_16].
+    ///         Number [Cable_1, Cable_16].
     /// @param  decayTime
     ///         The time in milliseconds it takes for the value to decay one
     ///         step.  
@@ -144,7 +144,7 @@ class VULEDs : public VU<BankSize>, public VULEDsDriver<NumLEDs> {
     ///         The track of the VU meter. [1, 8]
     /// @param  channelCN
     ///         The MIDI channel [Channel_1, Channel_16] and Cable
-    ///         Number [CABLE_1, CABLE_16].
+    ///         Number [Cable_1, Cable_16].
     /// @param  decayTime
     ///         The time in milliseconds it takes for the value to decay one
     ///         step.  
