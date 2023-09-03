@@ -6,9 +6,19 @@
 
 BEGIN_CS_NAMESPACE
 
+#if defined(ARDUINO_UNOR4_MINIMA) || defined(ARDUINO_UNOR4_WIFI)
+#warning "External interrupts only supported on pins 2 and 3 of UNO R4"
+#define NOT_AN_INTERRUPT 255
+pin_size_t digitalPinToInterrupt(pin_size_t pin) {
+    if (pin == 2 || pin == 3)
+        return ::digitalPinToInterrupt(pin);
+    return NOT_AN_INTERRUPT;
+}
+#endif
+
 AHEncoder::AHEncoder(uint8_t pinA, uint8_t pinB)
-    : pins {pinA, pinB}, direct_pins {direct_pin_read(pinA),
-                                      direct_pin_read(pinB)} {
+    : pins {pinA, pinB},
+      direct_pins {direct_pin_read(pinA), direct_pin_read(pinB)} {
     // It's much faster to use the GPIO registers directly, rather than
     // calling digitalRead every time we need to read a pin.
     // digitalRead looks up the register and bitmasks every time it's called

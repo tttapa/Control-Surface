@@ -93,6 +93,19 @@ inline DirectPinRead direct_pin_read(pin_t pin) {
     return {mbed::DigitalIn {digitalPinToPinName(pin), PullUp}};
 }
 
+// Arduino UNO R4
+#elif defined(ARDUINO_UNOR4_MINIMA) || defined(ARDUINO_UNOR4_WIFI)
+
+struct DirectPinRead {
+    bsp_io_port_pin_t pin;
+    bool read() const {
+        bsp_io_level_t ret;
+        R_IOPORT_PinRead(NULL, pin, &ret);
+        return ret == BSP_IO_LEVEL_LOW;
+    }
+};
+inline DirectPinRead direct_pin_read(pin_t pin) { return {g_pin_cfg[pin].pin}; }
+
 #else
 #warning "Unknown board. Please define the direct_pin_read function."
 

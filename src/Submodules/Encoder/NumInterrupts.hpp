@@ -94,6 +94,10 @@ BEGIN_CS_NAMESPACE
 #elif defined(ARDUINO_ARCH_MBED)
 #define CORE_NUM_INTERRUPT NUM_DIGITAL_PINS
 
+// Arduino UNO R4
+#elif defined(ARDUINO_UNOR4_MINIMA) || defined(ARDUINO_UNOR4_WIFI)
+#define CORE_NUM_INTERRUPT 2
+
 // Others
 #else
 #warning "Unknown board. Please specify the number of external interrupts."
