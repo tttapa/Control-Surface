@@ -3,10 +3,10 @@
 #include <gtest/gtest.h>
 
 using namespace ::testing;
-using namespace CS;
+using namespace cs;
 
 TEST(MCUTimeDisplay, setFirstLetter) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
                                      0x40 + 9, 'A' - 0x40};
@@ -17,7 +17,7 @@ TEST(MCUTimeDisplay, setFirstLetter) {
 }
 
 TEST(MCUTimeDisplay, getTextFull) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
                                      0x40 + 8, 'A' - 0x40};
@@ -28,7 +28,7 @@ TEST(MCUTimeDisplay, getTextFull) {
 }
 
 TEST(MCUTimeDisplay, getTextOffset) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
                                      0x40 + 8, 'A' - 0x40};
@@ -39,7 +39,7 @@ TEST(MCUTimeDisplay, getTextOffset) {
 }
 
 TEST(MCUTimeDisplay, getTextOffsetLength) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
                                      0x40 + 8, 'A' - 0x40};
@@ -50,7 +50,7 @@ TEST(MCUTimeDisplay, getTextOffsetLength) {
 }
 
 TEST(MCUTimeDisplay, getTextOffsetLast) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
                                      0x40 + 0, 'A' - 0x40};
@@ -61,7 +61,7 @@ TEST(MCUTimeDisplay, getTextOffsetLast) {
 }
 
 TEST(MCUTimeDisplay, getTextOffsetTooBig) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
                                      0x40 + 0, 'A' - 0x40};
@@ -72,7 +72,7 @@ TEST(MCUTimeDisplay, getTextOffsetTooBig) {
 }
 
 TEST(MCUTimeDisplay, getTextLengthTooBig) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
                                      0x40 + 0, 'B' - 0x40};
@@ -83,7 +83,7 @@ TEST(MCUTimeDisplay, getTextLengthTooBig) {
 }
 
 TEST(MCUTimeDisplay, reset) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
         {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, '1'},
@@ -112,7 +112,7 @@ TEST(MCUTimeDisplay, reset) {
 }
 
 TEST(MCUTimeDisplay, printTo) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     tdisp.ignoreReset = false;
     ChannelMessage midimsgs[] = {
@@ -140,7 +140,7 @@ TEST(MCUTimeDisplay, printTo) {
 }
 
 TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames1Digit) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
         {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, ' '},
@@ -169,7 +169,7 @@ TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames1Digit) {
 }
 
 TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames2Digits) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
         {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, ' '},
@@ -198,7 +198,7 @@ TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames2Digits) {
 }
 
 TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames3Digits) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
         {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, '1'},
@@ -227,7 +227,7 @@ TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames3Digits) {
 }
 
 TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames4Digits) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
         {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, '2'},
@@ -256,7 +256,7 @@ TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames4Digits) {
 }
 
 TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames5Digits) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
         {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, '4'},
@@ -285,7 +285,7 @@ TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames5Digits) {
 }
 
 TEST(MCUTimeDisplay, getBarsGetBeatsGetFramesSpacesOnly) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
         {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, ' '},

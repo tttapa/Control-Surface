@@ -23,7 +23,7 @@ EncoderSelector<120> selector {
 Bankable::CCPotentiometer potentiometer {
   {bank, BankType::CHANGE_ADDRESS}, // Bank configuration
   A0,                               // Analog pin for potentiometer
-  {0x00, CHANNEL_1},                // Base CC address
+  {0x00, Channel_1},                // Base CC address
 };
 
 void setup() {

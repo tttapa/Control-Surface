@@ -16,12 +16,12 @@ using MMT = MIDIMessageType;
 TEST(StreamDebugMIDI_Interface, send3B) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
-    midi.sendChannelMessage(MMT::NOTE_ON, CHANNEL_4, 0x55, 0x66, CABLE_5);
-    midi.sendNoteOn({0x55, CHANNEL_4, CABLE_9}, 0x66);
-    midi.sendNoteOff({0x55, CHANNEL_4, CABLE_9}, 0x66);
-    midi.sendControlChange({0x55, CHANNEL_4, CABLE_9}, 0x66);
-    midi.sendKeyPressure({0x55, CHANNEL_4, CABLE_9}, 0x66);
-    midi.sendPitchBend({CHANNEL_4, CABLE_9}, 0x3355);
+    midi.sendChannelMessage(MMT::NOTE_ON, Channel_4, 0x55, 0x66, CABLE_5);
+    midi.sendNoteOn({0x55, Channel_4, CABLE_9}, 0x66);
+    midi.sendNoteOff({0x55, Channel_4, CABLE_9}, 0x66);
+    midi.sendControlChange({0x55, Channel_4, CABLE_9}, 0x66);
+    midi.sendKeyPressure({0x55, Channel_4, CABLE_9}, 0x66);
+    midi.sendPitchBend({Channel_4, CABLE_9}, 0x3355);
     std::string expected = "Note On          Channel: 4\tData 1: 0x55\tData "
                            "2: 0x66\tCable: 5\r\n"
                            "Note On          Channel: 4\tData 1: 0x55\tData "
@@ -42,10 +42,10 @@ TEST(StreamDebugMIDI_Interface, send3B) {
 TEST(StreamDebugMIDI_Interface, send2B) {
     TestStream stream;
     StreamDebugMIDI_Interface midi = stream;
-    midi.sendChannelMessage(MMT::PROGRAM_CHANGE, CHANNEL_4, 0x66, CABLE_5);
-    midi.sendProgramChange({CHANNEL_4, CABLE_9}, 0x66);
-    midi.sendProgramChange({0x66, CHANNEL_4, CABLE_9});
-    midi.sendChannelPressure({CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendChannelMessage(MMT::PROGRAM_CHANGE, Channel_4, 0x66, CABLE_5);
+    midi.sendProgramChange({Channel_4, CABLE_9}, 0x66);
+    midi.sendProgramChange({0x66, Channel_4, CABLE_9});
+    midi.sendChannelPressure({Channel_4, CABLE_9}, 0x66);
     std::string expected =
         "Program Change   Channel: 4\tData 1: 0x66\tCable: 5\r\n"
         "Program Change   Channel: 4\tData 1: 0x66\tCable: 9\r\n"

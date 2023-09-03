@@ -34,7 +34,7 @@ class NoteButtonLatching
      *          The internal pull-up resistor will be enabled.
      * @param   address
      *          The MIDI address containing the note number [0, 127], 
-     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          channel [Channel_1, Channel_16], and optional cable number 
      *          [CABLE_1, CABLE_16].
      * @param   velocity
      *          The velocity of the MIDI Note events.

@@ -42,7 +42,7 @@ class Channel {
      *          The channel number (1 is the first channel).
      */
     static constexpr Channel createChannel(uint8_t oneBasedChannel) {
-        return Channel{uint8_t(oneBasedChannel - 1)};
+        return Channel {uint8_t(oneBasedChannel - 1)};
     }
 
     /**
@@ -115,22 +115,49 @@ class Channel {
     uint8_t zeroBasedChannel : 4;
 };
 
-constexpr Channel CHANNEL_1 = Channel::createChannel(1);
-constexpr Channel CHANNEL_2 = Channel::createChannel(2);
-constexpr Channel CHANNEL_3 = Channel::createChannel(3);
-constexpr Channel CHANNEL_4 = Channel::createChannel(4);
-constexpr Channel CHANNEL_5 = Channel::createChannel(5);
-constexpr Channel CHANNEL_6 = Channel::createChannel(6);
-constexpr Channel CHANNEL_7 = Channel::createChannel(7);
-constexpr Channel CHANNEL_8 = Channel::createChannel(8);
-constexpr Channel CHANNEL_9 = Channel::createChannel(9);
-constexpr Channel CHANNEL_10 = Channel::createChannel(10);
-constexpr Channel CHANNEL_11 = Channel::createChannel(11);
-constexpr Channel CHANNEL_12 = Channel::createChannel(12);
-constexpr Channel CHANNEL_13 = Channel::createChannel(13);
-constexpr Channel CHANNEL_14 = Channel::createChannel(14);
-constexpr Channel CHANNEL_15 = Channel::createChannel(15);
-constexpr Channel CHANNEL_16 = Channel::createChannel(16);
+constexpr Channel Channel_1 = Channel::createChannel(1);
+constexpr Channel Channel_2 = Channel::createChannel(2);
+constexpr Channel Channel_3 = Channel::createChannel(3);
+constexpr Channel Channel_4 = Channel::createChannel(4);
+constexpr Channel Channel_5 = Channel::createChannel(5);
+constexpr Channel Channel_6 = Channel::createChannel(6);
+constexpr Channel Channel_7 = Channel::createChannel(7);
+constexpr Channel Channel_8 = Channel::createChannel(8);
+constexpr Channel Channel_9 = Channel::createChannel(9);
+constexpr Channel Channel_10 = Channel::createChannel(10);
+constexpr Channel Channel_11 = Channel::createChannel(11);
+constexpr Channel Channel_12 = Channel::createChannel(12);
+constexpr Channel Channel_13 = Channel::createChannel(13);
+constexpr Channel Channel_14 = Channel::createChannel(14);
+constexpr Channel Channel_15 = Channel::createChannel(15);
+constexpr Channel Channel_16 = Channel::createChannel(16);
+
+#if __cplusplus >= 201402L
+#define CS_DEPREC(msg) [[deprecated(msg)]]
+#else
+#define CS_DEPREC(...)
+#endif
+
+#ifndef CHANNEL_1 // ArduinoCore-renesas defines this
+constexpr Channel CHANNEL_1 CS_DEPREC("Use Channel_1 instead") = Channel_1;
+constexpr Channel CHANNEL_2 CS_DEPREC("Use Channel_2 instead") = Channel_2;
+constexpr Channel CHANNEL_3 CS_DEPREC("Use Channel_3 instead") = Channel_3;
+constexpr Channel CHANNEL_4 CS_DEPREC("Use Channel_4 instead") = Channel_4;
+constexpr Channel CHANNEL_5 CS_DEPREC("Use Channel_5 instead") = Channel_5;
+constexpr Channel CHANNEL_6 CS_DEPREC("Use Channel_6 instead") = Channel_6;
+constexpr Channel CHANNEL_7 CS_DEPREC("Use Channel_7 instead") = Channel_7;
+constexpr Channel CHANNEL_8 CS_DEPREC("Use Channel_8 instead") = Channel_8;
+constexpr Channel CHANNEL_9 CS_DEPREC("Use Channel_9 instead") = Channel_9;
+constexpr Channel CHANNEL_10 CS_DEPREC("Use Channel_10 instead") = Channel_10;
+constexpr Channel CHANNEL_11 CS_DEPREC("Use Channel_11 instead") = Channel_11;
+constexpr Channel CHANNEL_12 CS_DEPREC("Use Channel_12 instead") = Channel_12;
+constexpr Channel CHANNEL_13 CS_DEPREC("Use Channel_13 instead") = Channel_13;
+constexpr Channel CHANNEL_14 CS_DEPREC("Use Channel_14 instead") = Channel_14;
+constexpr Channel CHANNEL_15 CS_DEPREC("Use Channel_15 instead") = Channel_15;
+constexpr Channel CHANNEL_16 CS_DEPREC("Use Channel_16 instead") = Channel_16;
+#endif
+
+#undef CS_DEPREC
 
 Print &operator<<(Print &, Channel);
 

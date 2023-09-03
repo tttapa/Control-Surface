@@ -53,7 +53,7 @@ CCAbsoluteEncoder enc {
 // Similarly, for Pitch Bend
 //    PBAbsoluteEncoder enc {
 //      {2, 3},    // pins
-//      CHANNEL_1, // MIDI channel
+//      Channel_1, // MIDI channel
 //      127,       // large multiplier because Pitch Bend has high resolution
 //    };
 

@@ -47,18 +47,18 @@ void setup() {
     ;
 
   { // Channel voice messages
-    MIDIAddress note = {MIDI_Notes::C(4), CHANNEL_6};
+    MIDIAddress note = {MIDI_Notes::C(4), Channel_6};
     uint8_t velocity = 127;
     midi.sendNoteOff(note, velocity);
     midi.sendNoteOn(note, velocity);
     uint8_t pressure = 64;
     midi.sendKeyPressure(note, pressure);
-    MIDIAddress controller = {MIDI_CC::Channel_Volume, CHANNEL_2};
+    MIDIAddress controller = {MIDI_CC::Channel_Volume, Channel_2};
     uint8_t value = 120;
     midi.sendControlChange(controller, value);
-    MIDIAddress program = {MIDI_PC::Harpsichord, CHANNEL_9};
+    MIDIAddress program = {MIDI_PC::Harpsichord, Channel_9};
     midi.sendProgramChange(program);
-    Channel channel = CHANNEL_3;
+    Channel channel = Channel_3;
     midi.sendChannelPressure(channel, pressure);
     uint16_t bend = 16383;
     midi.sendPitchBend(channel, bend);

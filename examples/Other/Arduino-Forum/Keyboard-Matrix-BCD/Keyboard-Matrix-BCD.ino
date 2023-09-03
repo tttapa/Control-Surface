@@ -31,7 +31,7 @@ const AddressMatrix<rows, columns> notes {{
   // 8 more rows ...
 }};
 // The MIDI channel to use
-const Channel channel = CHANNEL_1;
+const Channel channel = Channel_1;
 
 // Address pins A, B, C & D of TC4028
 const AH::PinList<4> addressPins {{2, 3, 4, 5}};

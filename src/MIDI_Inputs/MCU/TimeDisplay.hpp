@@ -15,7 +15,7 @@ constexpr static uint8_t TimeDisplayAddress = 0x40;
 /// @ingroup MIDIInputElements
 class TimeDisplay : public SevenSegmentDisplay<TimeDisplayLength> {
   public:
-    TimeDisplay(Channel channel = CHANNEL_1)
+    TimeDisplay(Channel channel = Channel_1)
         : SevenSegmentDisplay<TimeDisplayLength>(
               {TimeDisplayAddress, channel}) {}
     // TODO: add support for 5-digit bar counts

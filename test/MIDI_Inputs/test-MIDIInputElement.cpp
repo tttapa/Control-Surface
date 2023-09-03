@@ -5,7 +5,7 @@
 #include <MIDI_Inputs/NoteCCKPRange.hpp>
 #include <MIDI_Inputs/NoteCCKPValue.hpp>
 
-using namespace CS;
+using namespace cs;
 
 TEST(TwoByteMIDIMatcher, NoteOnNoteOff) {
     struct M : MatchingMIDIInputElement<MIDIMessageType::NOTE_ON,
@@ -15,17 +15,17 @@ TEST(TwoByteMIDIMatcher, NoteOnNoteOff) {
         void handleUpdate(TwoByteMIDIMatcher::Result m) override {
             handleUpdateHelper(m.value);
         }
-    } mn{{0x3C, CHANNEL_5}};
+    } mn{{0x3C, Channel_5}};
     mn.begin();
 
     EXPECT_CALL(mn, handleUpdateHelper(0x7E));
     MIDIInputElement<MIDIMessageType::NOTE_ON>::updateAllWith(
-        {MIDIMessageType::NOTE_ON, CHANNEL_5, 0x3C, 0x7E});
+        {MIDIMessageType::NOTE_ON, Channel_5, 0x3C, 0x7E});
     testing::Mock::VerifyAndClear(&mn);
 
     EXPECT_CALL(mn, handleUpdateHelper(0x00));
     MIDIInputElement<MIDIMessageType::NOTE_ON>::updateAllWith(
-        {MIDIMessageType::NOTE_OFF, CHANNEL_5, 0x3C, 0x7E});
+        {MIDIMessageType::NOTE_OFF, Channel_5, 0x3C, 0x7E});
     testing::Mock::VerifyAndClear(&mn);
 }
 
@@ -37,17 +37,17 @@ TEST(TwoByteMIDIMatcher, ControlChange) {
         void handleUpdate(TwoByteMIDIMatcher::Result m) override {
             handleUpdateHelper(m.value);
         }
-    } mn{{0x0C, CHANNEL_10}};
+    } mn{{0x0C, Channel_10}};
     mn.begin();
 
     EXPECT_CALL(mn, handleUpdateHelper(0x40));
     MIDIInputElement<MIDIMessageType::CONTROL_CHANGE>::updateAllWith(
-        {MIDIMessageType::CONTROL_CHANGE, CHANNEL_10, 0x0C, 0x40});
+        {MIDIMessageType::CONTROL_CHANGE, Channel_10, 0x0C, 0x40});
     testing::Mock::VerifyAndClear(&mn);
 
     EXPECT_CALL(mn, handleUpdateHelper(0x00));
     MIDIInputElement<MIDIMessageType::CONTROL_CHANGE>::updateAllWith(
-        {MIDIMessageType::NOTE_OFF, CHANNEL_10, 0x0C, 0x00});
+        {MIDIMessageType::NOTE_OFF, Channel_10, 0x0C, 0x00});
     testing::Mock::VerifyAndClear(&mn);
 }
 
@@ -59,27 +59,27 @@ TEST(TwoByteMIDIMatcher, ChannelPressure) {
         void handleUpdate(OneByteMIDIMatcher::Result m) override {
             handleUpdateHelper(m.value);
         }
-    } mn{{CHANNEL_10, CABLE_7}};
+    } mn{{Channel_10, CABLE_7}};
     mn.begin();
 
     EXPECT_CALL(mn, handleUpdateHelper(0x0C));
     MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>::updateAllWith(
-        {MIDIMessageType::CHANNEL_PRESSURE, CHANNEL_10, 0x0C, 0xFF, CABLE_7});
+        {MIDIMessageType::CHANNEL_PRESSURE, Channel_10, 0x0C, 0xFF, CABLE_7});
     testing::Mock::VerifyAndClear(&mn);
 
     EXPECT_CALL(mn, handleUpdateHelper(0x00));
     MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>::updateAllWith(
-        {MIDIMessageType::CHANNEL_PRESSURE, CHANNEL_10, 0x00, 0xFF, CABLE_7});
+        {MIDIMessageType::CHANNEL_PRESSURE, Channel_10, 0x00, 0xFF, CABLE_7});
     testing::Mock::VerifyAndClear(&mn);
 
     // Wrong channel
     MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>::updateAllWith(
-        {MIDIMessageType::CHANNEL_PRESSURE, CHANNEL_11, 0x00, 0xFF, CABLE_7});
+        {MIDIMessageType::CHANNEL_PRESSURE, Channel_11, 0x00, 0xFF, CABLE_7});
     testing::Mock::VerifyAndClear(&mn);
 
     // Wrong cable
     MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>::updateAllWith(
-        {MIDIMessageType::CHANNEL_PRESSURE, CHANNEL_10, 0x00, 0xFF, CABLE_8});
+        {MIDIMessageType::CHANNEL_PRESSURE, Channel_10, 0x00, 0xFF, CABLE_8});
     testing::Mock::VerifyAndClear(&mn);
 }
 
@@ -91,29 +91,29 @@ TEST(TwoByteRangeMIDIMatcher, ControlChange) {
         void handleUpdate(TwoByteRangeMIDIMatcher::Result m) override {
             handleUpdateHelper(m.value, m.index);
         }
-    } mn{{0x10, CHANNEL_10}};
+    } mn{{0x10, Channel_10}};
     mn.begin();
 
     MIDIInputElement<MIDIMessageType::CONTROL_CHANGE>::updateAllWith(
-        {MIDIMessageType::CONTROL_CHANGE, CHANNEL_10, 0x0F, 0x40});
+        {MIDIMessageType::CONTROL_CHANGE, Channel_10, 0x0F, 0x40});
     testing::Mock::VerifyAndClear(&mn);
 
     EXPECT_CALL(mn, handleUpdateHelper(0x40, 0));
     MIDIInputElement<MIDIMessageType::CONTROL_CHANGE>::updateAllWith(
-        {MIDIMessageType::CONTROL_CHANGE, CHANNEL_10, 0x10, 0x40});
+        {MIDIMessageType::CONTROL_CHANGE, Channel_10, 0x10, 0x40});
     testing::Mock::VerifyAndClear(&mn);
 
     EXPECT_CALL(mn, handleUpdateHelper(0x41, 1));
     MIDIInputElement<MIDIMessageType::CONTROL_CHANGE>::updateAllWith(
-        {MIDIMessageType::CONTROL_CHANGE, CHANNEL_10, 0x11, 0x41});
+        {MIDIMessageType::CONTROL_CHANGE, Channel_10, 0x11, 0x41});
     testing::Mock::VerifyAndClear(&mn);
 
     EXPECT_CALL(mn, handleUpdateHelper(0x42, 7));
     MIDIInputElement<MIDIMessageType::CONTROL_CHANGE>::updateAllWith(
-        {MIDIMessageType::CONTROL_CHANGE, CHANNEL_10, 0x17, 0x42});
+        {MIDIMessageType::CONTROL_CHANGE, Channel_10, 0x17, 0x42});
     testing::Mock::VerifyAndClear(&mn);
 
     MIDIInputElement<MIDIMessageType::CONTROL_CHANGE>::updateAllWith(
-        {MIDIMessageType::CONTROL_CHANGE, CHANNEL_10, 0x18, 0x43});
+        {MIDIMessageType::CONTROL_CHANGE, Channel_10, 0x18, 0x43});
     testing::Mock::VerifyAndClear(&mn);
 }

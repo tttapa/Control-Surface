@@ -53,7 +53,7 @@ USBMIDI_Interface midi;
 // on pin A0, that sends MIDI messages with controller 7 (channel volume)
 // on channel 1.
 CCPotentiometer potentiometer {
-  A0, {MIDI_CC::Channel_Volume, CHANNEL_1}
+  A0, {MIDI_CC::Channel_Volume, Channel_1}
 };
 
 // The filtered value read when potentiometer is at the 0% position

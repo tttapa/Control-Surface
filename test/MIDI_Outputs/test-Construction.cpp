@@ -70,7 +70,7 @@
 
 #include <gtest/gtest.h>
 
-using namespace CS;
+using namespace cs;
 
 TEST(Construction, MIDIOutputs) {
     const pin_t pin = 0;
@@ -99,10 +99,10 @@ TEST(Construction, MIDIOutputs) {
         4,
     }};
     const Array<MIDIChannelCable, 4> cnChannels = {{
-        {CHANNEL_1, CABLE_1},
-        {CHANNEL_2, CABLE_1},
-        {CHANNEL_3, CABLE_1},
-        {CHANNEL_4, CABLE_1},
+        {Channel_1, CABLE_1},
+        {Channel_2, CABLE_1},
+        {Channel_3, CABLE_1},
+        {Channel_4, CABLE_1},
     }};
     Bank<4> bank {8};
 

@@ -32,7 +32,7 @@ class CCButtons : public MIDIButtons<DigitalCCSender, NumButtons> {
      *          The internal pull-up resistors will be enabled.
      * @param   baseAddress
      *          The MIDI address of the first button, containing the controller
-     *          number [0, 119], channel [CHANNEL_1, CHANNEL_16], and optional 
+     *          number [0, 119], channel [Channel_1, Channel_16], and optional 
      *          cable number [CABLE_1, CABLE_16].
      * @param   incrementAddress
      *          The number of addresses to increment for each next button.  

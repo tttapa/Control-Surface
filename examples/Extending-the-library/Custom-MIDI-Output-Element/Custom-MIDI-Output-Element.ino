@@ -91,7 +91,7 @@ USBMIDI_Interface midi;
 // Instantiate a MyNoteButton object
 MyNoteButton button {
   5,                           // Push button on pin 5
-  {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
+  {MIDI_Notes::C(4), Channel_1}, // Note C4 on MIDI channel 1
   0x7F,                        // Maximum velocity
 };
 

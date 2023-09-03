@@ -38,7 +38,7 @@ const pin_t ledPin = LED_BUILTIN; // Change this to your PWM pin <------
 // Instantiate the LED that will light up when middle C is playing
 NoteLEDPWM led {
   ledPin,                      // Pin of the LED, must be PWM pin
-  {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
+  {MIDI_Notes::C(4), Channel_1}, // Note C4 on MIDI channel 1
 };
 
 void setup() {

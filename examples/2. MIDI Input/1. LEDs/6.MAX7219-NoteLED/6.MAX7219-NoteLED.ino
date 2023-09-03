@@ -42,7 +42,7 @@ MAX7219<1> max7219 {SPI, SS};
 // Instantiate the LED that will light up when middle C is playing
 NoteLED led {
   max7219.pin(0),              // First pin of the MAX7219
-  {MIDI_Notes::C(4), CHANNEL_1}, // Note C4 on MIDI channel 1
+  {MIDI_Notes::C(4), Channel_1}, // Note C4 on MIDI channel 1
 };
 
 void setup() {

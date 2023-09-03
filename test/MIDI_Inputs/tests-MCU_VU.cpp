@@ -8,7 +8,7 @@ using ::testing::Return;
 USING_CS_NAMESPACE;
 
 TEST(MCUVU, setValue) {
-    constexpr Channel channel = CHANNEL_3;
+    constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
     MCU::VU vu = {track, channel};
     ChannelMessage midimsg = {
@@ -25,7 +25,7 @@ TEST(MCUVU, setValue) {
 }
 
 TEST(MCUVU, setOverload) {
-    constexpr Channel channel = CHANNEL_2;
+    constexpr Channel channel = Channel_2;
     constexpr uint8_t track = 6;
     MCU::VU vu = {track, channel};
     ChannelMessage midimsg = {
@@ -42,7 +42,7 @@ TEST(MCUVU, setOverload) {
 }
 
 TEST(MCUVU, clearOverload) {
-    constexpr Channel channel = CHANNEL_3;
+    constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
     MCU::VU vu = {track, channel};
     ChannelMessage midimsgSet = {
@@ -66,7 +66,7 @@ TEST(MCUVU, clearOverload) {
 }
 
 TEST(MCUVU, retainValueAfterOverload) {
-    constexpr Channel channel = CHANNEL_3;
+    constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
     MCU::VU vu = {track, channel};
     ChannelMessage midimsg = {
@@ -100,7 +100,7 @@ TEST(MCUVU, retainValueAfterOverload) {
 }
 
 TEST(MCUVU, decay) {
-    constexpr Channel channel = CHANNEL_3;
+    constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
     constexpr unsigned int decayTime = 300;
     MCU::VU vu = {track, channel, decayTime};
@@ -122,7 +122,7 @@ TEST(MCUVU, decay) {
 }
 
 TEST(MCUVU, getFloatValue) {
-    constexpr Channel channel = CHANNEL_3;
+    constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
     constexpr unsigned int decayTime = 300;
     MCU::VU vu = {track, channel, decayTime};
@@ -140,7 +140,7 @@ TEST(MCUVU, getFloatValue) {
 }
 
 TEST(MCUVU, reset) {
-    constexpr Channel channel = CHANNEL_3;
+    constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
     constexpr unsigned int decayTime = 300;
     MCU::VU vu = {track, channel, decayTime};
@@ -163,7 +163,7 @@ TEST(MCUVU, reset) {
 
 TEST(MCUVUBankable, setValueBankChangeAddress) {
     Bank<2> bank(4);
-    constexpr Channel channel = CHANNEL_3;
+    constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
     MCU::Bankable::VU<2> vu = {bank, track, channel};
     ChannelMessage midimsg = {
@@ -184,7 +184,7 @@ TEST(MCUVUBankable, setValueBankChangeAddress) {
 
 TEST(MCUVUBankable, setValueBankChangeChannel) {
     Bank<3> bank(4);
-    constexpr Channel channel = CHANNEL_3;
+    constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
     MCU::Bankable::VU<3> vu = {{bank, CHANGE_CHANNEL}, track, channel};
     ChannelMessage midimsg1 = {
@@ -214,7 +214,7 @@ TEST(MCUVUBankable, setValueBankChangeChannel) {
 
 TEST(MCUVUBankable, setValueBankChangeCN) {
     Bank<3> bank(4);
-    constexpr Channel channel = CHANNEL_3;
+    constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
     MCU::Bankable::VU<3> vu = {{bank, CHANGE_CABLENB}, track, channel};
     ChannelMessage midimsg1 = {
@@ -246,7 +246,7 @@ TEST(MCUVUBankable, setValueBankChangeCN) {
 
 TEST(MCUVUBankable, overloadBankChangeAddress) {
     Bank<2> bank(4);
-    constexpr Channel channel = CHANNEL_3;
+    constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
     MCU::Bankable::VU<2> vu = {bank, track, channel};
     EXPECT_FALSE(vu.getOverload());
@@ -284,7 +284,7 @@ TEST(MCUVUBankable, overloadBankChangeAddress) {
 
 TEST(MCUVULEDsBankable, displayOnBankChange) {
     Bank<2> bank(4);
-    constexpr Channel channel = CHANNEL_3;
+    constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
     constexpr unsigned int decayTime = 150;
     MCU::Bankable::VULEDs<2, 2> vu{bank, {0, 1}, track, channel, decayTime};

@@ -29,7 +29,7 @@ USBMIDI_Interface midi;
 // a MIDI Program Change message when it's pressed.
 PCButton pcBtn {
   2,                                 // pin
-  {MIDI_PC::Steel_Drums, CHANNEL_1}, // address
+  {MIDI_PC::Steel_Drums, Channel_1}, // address
 };
 
 void setup() {

@@ -50,7 +50,7 @@ class NoteButtonMatrix
     NoteButtonMatrix(const PinList<NumRows> &rowPins,
                      const PinList<NumCols> &colPins,
                      const AddressMatrix<NumRows, NumCols> &notes,
-                     MIDIChannelCable channelCN = {CHANNEL_1, CABLE_1},
+                     MIDIChannelCable channelCN = {Channel_1, CABLE_1},
                      uint8_t velocity = 0x7F)
         : MIDIButtonMatrix<DigitalNoteSender, NumRows, NumCols>{
               rowPins, colPins, notes, channelCN, {velocity},

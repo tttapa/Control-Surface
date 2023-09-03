@@ -38,7 +38,7 @@ ProgramChanger<3> programChanger {
     MIDI_PC::Rock_Organ,
     MIDI_PC::Electric_Bass_Pick,
   },
-  CHANNEL_1, // MIDI channel to use
+  Channel_1, // MIDI channel to use
 };
 
 // Instantiate a selector that reads three buttons and controls the program

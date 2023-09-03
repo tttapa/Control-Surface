@@ -29,7 +29,7 @@ class PBAbsoluteEncoder : public MIDIAbsoluteEncoder<PitchBendSender<14>> {
      *          The internal pull-up resistors will be enabled by the Encoder
      *          library.
      * @param   address
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable
+     *          The MIDI channel [Channel_1, Channel_16] and optional Cable
      *          Number [CABLE_1, CABLE_16].
      * @param   multiplier
      *          A constant factor to increase the speed of the rotary encoder.

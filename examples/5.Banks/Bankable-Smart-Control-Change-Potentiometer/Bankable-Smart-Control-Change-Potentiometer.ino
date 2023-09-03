@@ -59,7 +59,7 @@ using  CCSmartPot = Bankable::CCSmartPotentiometer<4>;
 CCSmartPot potentiometer {
   {bank, BankType::CHANGE_CHANNEL},     // Bank configuration
   A0,                                   // Analog pin connected to potentiometer
-  {MIDI_CC::Channel_Volume, CHANNEL_1}, // Channel volume of channel 1
+  {MIDI_CC::Channel_Volume, Channel_1}, // Channel volume of channel 1
 };
 
 /*
@@ -72,7 +72,7 @@ CCSmartPot potentiometer {
  * PBSmartPot potentiometer {
  *   {bank, BankType::CHANGE_CHANNEL},     // Bank configuration
  *   A0,                                   // Analog pin connected to potentiometer
- *   CHANNEL_1,                            // Channel 1
+ *   Channel_1,                            // Channel 1
  * };
  */
 

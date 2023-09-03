@@ -28,7 +28,7 @@ class CCRotaryEncoder : public MIDIRotaryEncoder<RelativeCCSender> {
      *          library.
      * @param   address
      *          The MIDI address containing the controller number [0, 119], 
-     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          channel [Channel_1, Channel_16], and optional cable number 
      *          [CABLE_1, CABLE_16].
      * @param   speedMultiply
      *          A constant factor to increase the speed of the rotary encoder.
@@ -71,7 +71,7 @@ class BorrowedCCRotaryEncoder
      *          out-live this instance.
      * @param   address
      *          The MIDI address containing the controller number [0, 119], 
-     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          channel [Channel_1, Channel_16], and optional cable number 
      *          [0, 15].
      * @param   speedMultiply
      *          A constant factor to increase the speed of the rotary encoder.

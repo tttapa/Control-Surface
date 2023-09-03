@@ -42,7 +42,7 @@ class PBAbsoluteEncoder
      *          The internal pull-up resistors will be enabled by the Encoder
      *          library.
      * @param   address
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16], and optional cable 
+     *          The MIDI channel [Channel_1, Channel_16], and optional cable 
      *          number [0, 15].
      * @param   speedMultiply
      *          A constant factor to increase the speed of the rotary encoder.

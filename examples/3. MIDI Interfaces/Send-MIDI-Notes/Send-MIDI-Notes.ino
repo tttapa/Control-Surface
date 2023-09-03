@@ -17,7 +17,7 @@ USBMIDI_Interface midi;
 Button pushbutton {2};
 
 // MIDI address of the note to send
-const MIDIAddress noteAddress {MIDI_Notes::C(4), CHANNEL_1};
+const MIDIAddress noteAddress {MIDI_Notes::C(4), Channel_1};
 // The velocity of the note events
 const uint8_t velocity = 0x7F;
 

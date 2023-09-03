@@ -6,13 +6,13 @@
 #include <gmock/gmock.h>
 
 using namespace ::testing;
-using namespace CS;
+using namespace cs;
 
 TEST(NoteButton, pressAndRelease) {
     MockMIDI_Interface midi;
     Control_Surface.connectDefaultMIDI_Interface();
 
-    NoteButton button(2, {0x3C, CHANNEL_7, CABLE_13});
+    NoteButton button(2, {0x3C, Channel_7, CABLE_13});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 
@@ -55,7 +55,7 @@ TEST(NoteButtonBankable, pressAndRelease) {
 
     OutputBank bank(4);
 
-    Bankable::NoteButton button(bank, 2, {0x3C, CHANNEL_7, CABLE_13});
+    Bankable::NoteButton button(bank, 2, {0x3C, Channel_7, CABLE_13});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 
@@ -98,7 +98,7 @@ TEST(NoteButtonBankable, changeSettingAndPressAndRelease) {
     // Change bank setting
     bank.select(1);
 
-    Bankable::NoteButton button(bank, 2, {0x3C, CHANNEL_7, CABLE_13});
+    Bankable::NoteButton button(bank, 2, {0x3C, Channel_7, CABLE_13});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 
@@ -139,7 +139,7 @@ TEST(NoteButtonBankable, pressAndChangeSettingAndRelease) {
 
     OutputBank bank(4);
 
-    Bankable::NoteButton button(bank, 2, {0x3C, CHANNEL_7, CABLE_13});
+    Bankable::NoteButton button(bank, 2, {0x3C, Channel_7, CABLE_13});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 

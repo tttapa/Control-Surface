@@ -63,7 +63,7 @@ TEST(MIDI_Pipes, sourcePipeSinkMap) {
 
     struct CustomPipe : MIDI_Pipe {
         void mapForwardMIDI(ChannelMessage msg) override {
-            msg.setChannel(CHANNEL_8);
+            msg.setChannel(Channel_8);
             sourceMIDItoSink(msg);
         }
     } pipe2;
@@ -105,7 +105,7 @@ TEST(MIDI_Pipes, sourcePipeSinkFilter) {
 
     struct CustomPipe : MIDI_Pipe {
         void mapForwardMIDI(ChannelMessage msg) override {
-            if (msg.getChannel() == CHANNEL_7)
+            if (msg.getChannel() == Channel_7)
                 return;
             sourceMIDItoSink(msg);
         }
@@ -1805,7 +1805,7 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
         .WillOnce(Return(Packet_t{}));
     uint8_t data[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0xF7};
 
-    ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
+    ChannelMessage msg = {MIDIMessageType::NOTE_ON, Channel_1, 0x12, 0x34};
     auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
         midiA[0].sourceMIDItoPipe(msg);
@@ -1843,7 +1843,7 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
         .WillOnce(Return(Packet_t{0x98, 0x83, 0x55, 0x66}))
         .WillOnce(Return(Packet_t{}));
 
-    ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
+    ChannelMessage msg = {MIDIMessageType::NOTE_ON, Channel_1, 0x12, 0x34};
     auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
         midiA[0].sourceMIDItoPipe(msg);
@@ -1879,7 +1879,7 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
         .WillOnce(Return(Packet_t{0x9F, 0xF8, 0x00, 0x00}))
         .WillOnce(Return(Packet_t{}));
 
-    ChannelMessage msg = {MIDIMessageType::NOTE_ON, CHANNEL_1, 0x12, 0x34};
+    ChannelMessage msg = {MIDIMessageType::NOTE_ON, Channel_1, 0x12, 0x34};
     auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
         midiA[0].sourceMIDItoPipe(msg);
@@ -2256,7 +2256,7 @@ TEST(MIDI_Pipes, StreamMIDIInterfaceSysExChunks) {
         SysExMessage(sysex.data() + SYSEX_BUFFER_SIZE, SYSEX_BUFFER_SIZE);
     SysExMessage chunk3 =
         SysExMessage(sysex.data() + 2 * SYSEX_BUFFER_SIZE, 10);
-    ChannelMessage noteMsg1 = {MIDIMessageType::NOTE_ON, CHANNEL_3, 0x12, 0x13};
+    ChannelMessage noteMsg1 = {MIDIMessageType::NOTE_ON, Channel_3, 0x12, 0x13};
     testing::Sequence s;
     EXPECT_CALL(midiB, sendSysExImpl(chunk2)).InSequence(s);
     EXPECT_CALL(midiB, sendSysExImpl(chunk3)).InSequence(s);

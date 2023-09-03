@@ -33,7 +33,7 @@ class PCButton : public MIDIButton<SingleAddress, ProgramChangeSender> {
      *          The internal pull-up resistor will be enabled.
      * @param   address
      *          The MIDI address containing the program number [0, 127], 
-     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          channel [Channel_1, Channel_16], and optional cable number 
      *          [CABLE_1, CABLE_16].
      */
     PCButton(OutputBankConfig<> config, pin_t pin, MIDIAddress address)

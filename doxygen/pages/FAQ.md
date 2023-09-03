@@ -37,7 +37,7 @@ Here's a basic MIDI output example:
 ```cpp
 USBMIDI_Interface midi; // Instantiate the MIDI over USB interface
 
-const MIDIAddress noteAddress = {MIDI_Notes::C(4), CHANNEL_1};
+const MIDIAddress noteAddress = {MIDI_Notes::C(4), Channel_1};
 const uint8_t velocity = 0x7F;
 
 void setup() {

@@ -29,18 +29,18 @@ IncrementDecrementSelectorLEDs<4> bankSelector {
 
 using namespace MIDI_CC;
 Bankable::CCPotentiometer potentiometers[] {
-  {{bank, BankType::CHANGE_CHANNEL}, A0, {Channel_Volume, CHANNEL_1}},
-  {{bank, BankType::CHANGE_CHANNEL}, A1, {Channel_Volume, CHANNEL_2}},
-  {{bank, BankType::CHANGE_CHANNEL}, A2, {Sound_Controller_3, CHANNEL_3}},
-  {{bank, BankType::CHANGE_CHANNEL}, A3, {Sound_Controller_4, CHANNEL_4}},
-  {{bank, BankType::CHANGE_CHANNEL}, A4, {Sound_Controller_5, CHANNEL_5}},
-  {{bank, BankType::CHANGE_CHANNEL}, A5, {Sound_Controller_6, CHANNEL_6}},
-  {{bank, BankType::CHANGE_CHANNEL}, A6, {Effects_1, CHANNEL_7}},
-  {{bank, BankType::CHANGE_CHANNEL}, A7, {Effects_2, CHANNEL_8}},
-  {{bank, BankType::CHANGE_CHANNEL}, A8, {Effects_3, CHANNEL_9}},
-  {{bank, BankType::CHANGE_CHANNEL}, A9, {Effects_4, CHANNEL_10}},
-  {{bank, BankType::CHANGE_CHANNEL}, A10, {Effect_Control_1, CHANNEL_11}},
-  {{bank, BankType::CHANGE_CHANNEL}, A11, {Effect_Control_2, CHANNEL_12}},
+  {{bank, BankType::CHANGE_CHANNEL}, A0, {Channel_Volume, Channel_1}},
+  {{bank, BankType::CHANGE_CHANNEL}, A1, {Channel_Volume, Channel_2}},
+  {{bank, BankType::CHANGE_CHANNEL}, A2, {Sound_Controller_3, Channel_3}},
+  {{bank, BankType::CHANGE_CHANNEL}, A3, {Sound_Controller_4, Channel_4}},
+  {{bank, BankType::CHANGE_CHANNEL}, A4, {Sound_Controller_5, Channel_5}},
+  {{bank, BankType::CHANGE_CHANNEL}, A5, {Sound_Controller_6, Channel_6}},
+  {{bank, BankType::CHANGE_CHANNEL}, A6, {Effects_1, Channel_7}},
+  {{bank, BankType::CHANGE_CHANNEL}, A7, {Effects_2, Channel_8}},
+  {{bank, BankType::CHANGE_CHANNEL}, A8, {Effects_3, Channel_9}},
+  {{bank, BankType::CHANGE_CHANNEL}, A9, {Effects_4, Channel_10}},
+  {{bank, BankType::CHANGE_CHANNEL}, A10, {Effect_Control_1, Channel_11}},
+  {{bank, BankType::CHANGE_CHANNEL}, A11, {Effect_Control_2, Channel_12}},
 };
 
 Bankable::NoteButton muteButtons[] {
@@ -60,8 +60,8 @@ Bankable::NoteButton muteButtons[] {
   {bank, 15, 0x21},
   {bank, 16, 0x22},
   {bank, 17, 0x23},
-  {bank, 18, {0x33, CHANNEL_2}},
-  {bank, 19, {0x34, CHANNEL_2}},
+  {bank, 18, {0x33, Channel_2}},
+  {bank, 19, {0x34, Channel_2}},
 };
 
 constexpr pin_t ledPin = 22;

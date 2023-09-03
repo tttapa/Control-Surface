@@ -41,7 +41,7 @@ USBMIDI_Interface midi;
 // Instantiate a CCPotentiometer object
 CCPotentiometer potentiometer {
   A0,                                   // Analog pin connected to potentiometer
-  {MIDI_CC::Channel_Volume, CHANNEL_1}, // Channel volume of channel 1
+  {MIDI_CC::Channel_Volume, Channel_1}, // Channel volume of channel 1
 };
 
 void setup() {

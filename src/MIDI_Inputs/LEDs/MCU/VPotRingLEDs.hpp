@@ -37,11 +37,11 @@ class VPotRingLEDs : public VPotRing, public VPotRingLEDsDriver {
      * @param   track
      *          The track of the VPot. [1, 8]
      * @param   channelCN
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+     *          The MIDI channel [Channel_1, Channel_16] and Cable
      *          Number [CABLE_1, CABLE_16].
      */
     VPotRingLEDs(const PinList<11> &leds, uint8_t track,
-                 MIDIChannelCable channelCN = CHANNEL_1)
+                 MIDIChannelCable channelCN = Channel_1)
         : Parent(track, channelCN), VPotRingLEDsDriver(leds) {}
 
   protected:
@@ -97,11 +97,11 @@ class VPotRingLEDs : public VPotRing<BankSize>, public VPotRingLEDsDriver {
      * @param   track
      *          The track of the VPot. [1, 8]
      * @param   channelCN
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+     *          The MIDI channel [Channel_1, Channel_16] and Cable
      *          Number [CABLE_1, CABLE_16].
      */
     VPotRingLEDs(BankConfig<BankSize> config, const PinList<11> &leds,
-                 uint8_t track, MIDIChannelCable channelCN = CHANNEL_1)
+                 uint8_t track, MIDIChannelCable channelCN = Channel_1)
         : Parent(config, track, channelCN),
           VPotRingLEDsDriver(leds) {}
 

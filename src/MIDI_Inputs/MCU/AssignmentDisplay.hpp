@@ -15,7 +15,7 @@ constexpr static uint8_t AssignmentDisplayAddress = 0x4A;
 /// @ingroup MIDIInputElements
 class AssignmentDisplay : public SevenSegmentDisplay<AssignmentDisplayLength> {
   public:
-    AssignmentDisplay(Channel channel = CHANNEL_1)
+    AssignmentDisplay(Channel channel = Channel_1)
         : SevenSegmentDisplay<AssignmentDisplayLength>(
               {AssignmentDisplayAddress, channel}) {}
 };

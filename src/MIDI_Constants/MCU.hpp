@@ -181,16 +181,16 @@ constexpr uint8_t JOG_WHEEL            = 0x3C; ///< Jog wheel (Relative)   (Out)
 /// @defgroup MCU_PB MCU Pitch Bend controls
 /// @{
 
-constexpr Channel VOLUME_1             = CHANNEL_1; ///< Volume fader 1 (In/Out)
-constexpr Channel VOLUME_2             = CHANNEL_2; ///< Volume fader 2 (In/Out)
-constexpr Channel VOLUME_3             = CHANNEL_3; ///< Volume fader 3 (In/Out)
-constexpr Channel VOLUME_4             = CHANNEL_4; ///< Volume fader 4 (In/Out)
-constexpr Channel VOLUME_5             = CHANNEL_5; ///< Volume fader 5 (In/Out)
-constexpr Channel VOLUME_6             = CHANNEL_6; ///< Volume fader 6 (In/Out)
-constexpr Channel VOLUME_7             = CHANNEL_7; ///< Volume fader 7 (In/Out)
-constexpr Channel VOLUME_8             = CHANNEL_8; ///< Volume fader 8 (In/Out)
+constexpr Channel VOLUME_1             = Channel_1; ///< Volume fader 1 (In/Out)
+constexpr Channel VOLUME_2             = Channel_2; ///< Volume fader 2 (In/Out)
+constexpr Channel VOLUME_3             = Channel_3; ///< Volume fader 3 (In/Out)
+constexpr Channel VOLUME_4             = Channel_4; ///< Volume fader 4 (In/Out)
+constexpr Channel VOLUME_5             = Channel_5; ///< Volume fader 5 (In/Out)
+constexpr Channel VOLUME_6             = Channel_6; ///< Volume fader 6 (In/Out)
+constexpr Channel VOLUME_7             = Channel_7; ///< Volume fader 7 (In/Out)
+constexpr Channel VOLUME_8             = Channel_8; ///< Volume fader 8 (In/Out)
 
-constexpr Channel MASTER_VOLUME        = CHANNEL_9; ///< Master volume  (In/Out)
+constexpr Channel MASTER_VOLUME        = Channel_9; ///< Master volume  (In/Out)
 
 /// @}
 

@@ -18,14 +18,14 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     std::ifstream input(argv[1], std::ios::binary);
-    auto puller = CS::LambdaPuller([&](uint8_t &b) {
+    auto puller = cs::LambdaPuller([&](uint8_t &b) {
         b = input.get();
         return !input.eof();
     });
-    CS::SerialMIDI_Parser parser;
+    cs::SerialMIDI_Parser parser;
 
     std::ofstream output(argv[2]);
-    auto send = [&](CS::Cable cn, CS::MIDICodeIndexNumber cin, uint8_t d0,
+    auto send = [&](cs::Cable cn, cs::MIDICodeIndexNumber cin, uint8_t d0,
                     uint8_t d1, uint8_t d2) {
         uint32_t m = d2;
         m = (m << 8) | d1;
@@ -34,27 +34,27 @@ int main(int argc, char *argv[]) {
         output << "    0x" << std::setw(8) << std::setfill('0') << std::hex << m
                << ",\n";
     };
-    CS::USBMIDI_Sender sender;
+    cs::USBMIDI_Sender sender;
     output << "#include <cstdint>\n"
               "\n"
               "constexpr uint32_t messages[] {\n";
     while (true) {
         auto msg = parser.pull(puller);
-        if (msg == CS::MIDIReadEvent::NO_MESSAGE)
+        if (msg == cs::MIDIReadEvent::NO_MESSAGE)
             break;
         output << "// " << enum_to_string(msg) << "\n";
         switch (msg) {
-            case CS::MIDIReadEvent::CHANNEL_MESSAGE:
+            case cs::MIDIReadEvent::CHANNEL_MESSAGE:
                 sender.sendChannelMessage(parser.getChannelMessage(), send);
                 break;
-            case CS::MIDIReadEvent::REALTIME_MESSAGE:
+            case cs::MIDIReadEvent::REALTIME_MESSAGE:
                 sender.sendRealTimeMessage(parser.getRealTimeMessage(), send);
                 break;
-            case CS::MIDIReadEvent::SYSCOMMON_MESSAGE:
+            case cs::MIDIReadEvent::SYSCOMMON_MESSAGE:
                 sender.sendSysCommonMessage(parser.getSysCommonMessage(), send);
                 break;
-            case CS::MIDIReadEvent::SYSEX_MESSAGE:
-            case CS::MIDIReadEvent::SYSEX_CHUNK:
+            case cs::MIDIReadEvent::SYSEX_MESSAGE:
+            case cs::MIDIReadEvent::SYSEX_CHUNK:
                 sender.sendSysEx(parser.getSysExMessage(), send);
                 break;
             default:;

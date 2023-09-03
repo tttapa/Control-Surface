@@ -22,7 +22,7 @@ Bankable::ManyAddresses::CCPotentiometer<3> ccpots[] {
 Bankable::ManyAddresses::PBPotentiometer<3> pbpot {
   bank,
   A0,
-  {no_channel, CHANNEL_1, no_channel},
+  {no_channel, Channel_1, no_channel},
 };
 
 void setup() {

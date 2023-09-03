@@ -3,13 +3,13 @@
 #include <gmock/gmock.h>
 
 using namespace ::testing;
-using namespace CS;
+using namespace cs;
 
 TEST(NoteButtonMatrix, pressAndRelease) {
     MockMIDI_Interface midi;
     Control_Surface.connectDefaultMIDI_Interface();
 
-    constexpr Channel channel = CHANNEL_7;
+    constexpr Channel channel = Channel_7;
     constexpr Cable cn = CABLE_13;
     AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
     NoteButtonMatrix<3, 2> matrix = {
@@ -87,7 +87,7 @@ TEST(NoteButtonMatrixBankable, pressChangeSettingRelease) {
 
     OutputBank bank(4);
 
-    constexpr Channel channel = CHANNEL_7;
+    constexpr Channel channel = Channel_7;
     constexpr Cable cn = CABLE_13;
     AddressMatrix<3, 2> addresses = {{{1, 3}, {5, 7}, {9, 11}}};
 
@@ -234,8 +234,8 @@ TEST(NoteButtonMatrixManyAddresses, pressChangeSettingRelease) {
     Bank<2> bank(4);
 
     Array<MIDIChannelCable, 2> channels = {{
-        {CHANNEL_7, CABLE_13},
-        {CHANNEL_2, CABLE_10},
+        {Channel_7, CABLE_13},
+        {Channel_2, CABLE_10},
     }};
     AddressMatrix<3, 2> addresses1 = {{{1, 3}, {5, 7}, {9, 11}}};
     AddressMatrix<3, 2> addresses2 = {{{10, 30}, {50, 70}, {90, 110}}};

@@ -26,7 +26,7 @@ class CCPotentiometer : public MIDIFilteredAnalog<ContinuousCCSender> {
      *          The analog input pin to read from.
      * @param   address
      *          The MIDI address containing the controller number [0, 119], 
-     *          channel [CHANNEL_1, CHANNEL_16], and optional cable number 
+     *          channel [Channel_1, Channel_16], and optional cable number 
      *          [CABLE_1, CABLE_16].
      */
     CCPotentiometer(pin_t analogPin, MIDIAddress address)

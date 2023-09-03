@@ -224,7 +224,7 @@ This is the most important one:
 
 ~~~cpp
 MIDIAddress(int address, 
-            Channel channel = CHANNEL_1,
+            Channel channel = Channel_1,
             Cable cableNumber = CABLE_1)
 ~~~
 
@@ -239,10 +239,10 @@ For example:
 MIDIAddress myAddress = 16;
 
 // Address 42 on channel 2 and cable 1:
-MIDIAddress myAddress = {42, CHANNEL_2};
+MIDIAddress myAddress = {42, Channel_2};
 
 // Address 111 on channel 2 and cable 3:
-MIDIAddress myAddress = {111, CHANNEL_2, CABLE_3};
+MIDIAddress myAddress = {111, Channel_2, CABLE_3};
 ~~~
 
 If you specify just a single argument, as in the first example, you don't have
@@ -255,7 +255,7 @@ For entering MIDI note numbers, you can use the note names in the
 @ref MIDI_Notes namespace:
 ~~~cpp
 // MIDI Note middle C (C in the fourth octave) on MIDI Channel 16:
-MIDIAddress myAddress = {MIDI_Notes::C(4), CHANNEL_16};
+MIDIAddress myAddress = {MIDI_Notes::C(4), Channel_16};
 ~~~
 
 For reasons explained [here](@ref faq-midi-note-f), the note F is an exception,
@@ -263,7 +263,7 @@ you have to add a trailing underscore to avoid conflicts with Arduino's `F(...)`
 macro:
 ~~~cpp
 // MIDI Note F in the fourth octave on MIDI Channel 16:
-MIDIAddress myAddress = {MIDI_Notes::F_(4), CHANNEL_16};
+MIDIAddress myAddress = {MIDI_Notes::F_(4), Channel_16};
 //          note the underscore here  ^
 ~~~
 If you look at the full list of note names in the @ref MIDI_Notes namespace, 
@@ -276,7 +276,7 @@ Instead of specifying the controller number (address) as a number, you can also
 use the predefined constants in the @ref MIDI_CC namespace:
 ~~~cpp
 // Control Change General Purpose Controller #1 on MIDI Channel 2:
-MIDIAddress myAddress = {MIDI_CC::General_Purpose_Controller_1, CHANNEL_2};
+MIDIAddress myAddress = {MIDI_CC::General_Purpose_Controller_1, Channel_2};
 ~~~
 
 #### MIDI Program Change names {#midi_md-midi-program-change-names}
@@ -285,7 +285,7 @@ Similar to the constants for controller numbers, you can find the constants for
 all General MIDI program numbers in the @ref MIDI_PC namespace:
 ~~~cpp
 // Harpsichord voice on MIDI Channel 9.
-MIDIAddress myAddress = {MIDI_PC::Harpsichord, CHANNEL_9};
+MIDIAddress myAddress = {MIDI_PC::Harpsichord, Channel_9};
 ~~~
 
 ### More examples {#midi_md-sending-more-examples}
@@ -507,7 +507,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
         // Check if it's a note message:
         bool note_msg = type == msg.NOTE_ON || type == msg.NOTE_OFF;
         // Check if it's the specific note and channel we're looking for
-        bool our_note = channel == CHANNEL_1 && note == MIDI_Notes::C(4);
+        bool our_note = channel == Channel_1 && note == MIDI_Notes::C(4);
         // If both conditions are satisfies, print the message
         if (note_msg && our_note)
             Serial << type << " middle C on Channel 1 with velocity "
@@ -538,7 +538,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
         // Check if it's a note message:
         bool note_msg = type == msg.NOTE_ON || type == msg.NOTE_OFF;
         // Define the address we're interested in
-        const MIDIAddress our_special_note = {MIDI_Notes::C(4), CHANNEL_1};
+        const MIDIAddress our_special_note = {MIDI_Notes::C(4), Channel_1};
         // If it's a note message that matches our specific address, print it
         if (note_msg && msg.getAddress() == our_special_note)
             Serial << type << " middle C on Channel 1 with velocity "

@@ -198,7 +198,7 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
      * @param   track
      *          The track of the VU meter. [1, 8]
      * @param   channelCN
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+     *          The MIDI channel [Channel_1, Channel_16] and Cable
      *          Number [CABLE_1, CABLE_16].
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
@@ -231,7 +231,7 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
      *          @see    @ref MCU::VUDecay
      */
     VU(uint8_t track, unsigned int decayTime = VUDecay::Default)
-        : VU(track, CHANNEL_1, decayTime) {}
+        : VU(track, Channel_1, decayTime) {}
 
   protected:
     bool handleUpdateImpl(typename Matcher::Result match) {
@@ -309,7 +309,7 @@ class VU
      * @param   track
      *          The track of the VU meter. [1, 8]
      * @param   channelCN
-     *          The MIDI channel [CHANNEL_1, CHANNEL_16] and Cable
+     *          The MIDI channel [Channel_1, Channel_16] and Cable
      *          Number [CABLE_1, CABLE_16].
      * @param   decayTime
      *          The time in milliseconds it takes for the value to decay one
@@ -345,7 +345,7 @@ class VU
      */
     VU(BankConfig<BankSize> config, uint8_t track,
        unsigned int decayTime = VUDecay::Default)
-        : VU(config, track, CHANNEL_1, decayTime) {}
+        : VU(config, track, Channel_1, decayTime) {}
 
   protected:
     bool handleUpdateImpl(typename Matcher::Result match) {

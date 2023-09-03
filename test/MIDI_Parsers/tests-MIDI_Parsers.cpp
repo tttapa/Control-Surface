@@ -4,7 +4,7 @@
 #include <MIDI_Parsers/SerialMIDI_Parser.hpp>
 #include <MIDI_Parsers/USBMIDI_Parser.hpp>
 
-using namespace CS;
+using namespace cs;
 
 using SysExVector = std::vector<uint8_t>;
 using Packet_t = USBMIDI_Parser::MIDIUSBPacket_t;

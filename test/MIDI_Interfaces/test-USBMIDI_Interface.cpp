@@ -12,13 +12,13 @@ using AH::ErrorException;
 TEST(USBMIDI_Interface, send3B) {
     StrictMock<USBMIDI_Interface> midi;
     EXPECT_CALL(midi.backend, write(0x89, 0x93, 0x55, 0x66));
-    midi.sendNoteOn({0x55, CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendNoteOn({0x55, Channel_4, CABLE_9}, 0x66);
 }
 
 TEST(USBMIDI_Interface, send2B) {
     StrictMock<USBMIDI_Interface> midi;
     EXPECT_CALL(midi.backend, write(0x8C, 0xC3, 0x66, 0x00));
-    midi.sendProgramChange({CHANNEL_4, CABLE_9}, 0x66);
+    midi.sendProgramChange({Channel_4, CABLE_9}, 0x66);
 }
 
 TEST(USBMIDI_Interface, RealTime) {

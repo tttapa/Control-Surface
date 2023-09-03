@@ -105,12 +105,12 @@ IncrementDecrementSelector<4> selector {
 Bankable::CCPotentiometer potentiometer1 {
   {bank, BankType::CHANGE_CHANNEL},     // bank configuration
   A0,                                   // analog pin
-  {MIDI_CC::Channel_Volume, CHANNEL_1}, // address
+  {MIDI_CC::Channel_Volume, Channel_1}, // address
 };
 Bankable::CCPotentiometer potentiometer2 {
   {bank, BankType::CHANGE_CHANNEL},     // bank configuration
   A1,                                   // analog pin
-  {MIDI_CC::Channel_Volume, CHANNEL_2}, // address
+  {MIDI_CC::Channel_Volume, Channel_2}, // address
 };
 
 // The addresses specified here are the addresses for the first Bank.

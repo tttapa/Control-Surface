@@ -2,7 +2,7 @@
 #include <Selectors/IncrementDecrementSelector.hpp>
 
 using namespace ::testing;
-using namespace CS;
+using namespace cs;
 
 using AH::Updatable;
 

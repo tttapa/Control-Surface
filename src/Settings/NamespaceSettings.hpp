@@ -1,7 +1,7 @@
 #pragma once
 
 #define USE_CS_NAMESPACE
-#define CS_NAMESPACE_NAME CS
+#define CS_NAMESPACE_NAME cs
 
 // ========================================================================== //
 

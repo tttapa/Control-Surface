@@ -39,7 +39,7 @@ class CCButton
      *          The internal pull-up resistor will be enabled.
      * @param   addresses
      *          The list of MIDI addresses containing the controller number 
-     *          [0, 119], channel [CHANNEL_1, CHANNEL_16], and optional cable 
+     *          [0, 119], channel [Channel_1, Channel_16], and optional cable 
      *          number [CABLE_1, CABLE_16].
      * @param   sender
      *          The MIDI sender to use.

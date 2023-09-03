@@ -28,7 +28,7 @@
 USBMIDI_Interface midi;
 
 // Instantiate an object that listens for MIDI Pitch Bend messages on channel 1.
-PBValue pb {CHANNEL_1};
+PBValue pb {Channel_1};
 
 void setup() {
   Control_Surface.begin();

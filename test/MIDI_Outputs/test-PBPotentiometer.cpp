@@ -4,7 +4,7 @@
 #include <gmock/gmock.h>
 
 using namespace ::testing;
-using namespace CS;
+using namespace cs;
 
 auto low = [](uint16_t x) { return (x * 128 & 0x7F) | (x >> 3); };
 auto high = [](uint16_t x) { return x; };
@@ -13,7 +13,7 @@ TEST(PBPotentiometer, simple) {
     MockMIDI_Interface midi;
     Control_Surface.connectDefaultMIDI_Interface();
 
-    PBPotentiometer pot(2, {CHANNEL_7, CABLE_13});
+    PBPotentiometer pot(2, {Channel_7, CABLE_13});
     EXPECT_CALL(ArduinoMock::getInstance(), analogRead(2)).WillOnce(Return(0));
     pot.begin();
 
@@ -38,7 +38,7 @@ TEST(PBPotentiometer, mapping) {
     MockMIDI_Interface midi;
     Control_Surface.connectDefaultMIDI_Interface();
 
-    PBPotentiometer pot(2, {CHANNEL_7, CABLE_13});
+    PBPotentiometer pot(2, {Channel_7, CABLE_13});
     EXPECT_CALL(ArduinoMock::getInstance(), analogRead(2)).WillOnce(Return(0));
     pot.begin();
     pot.map([](analog_t x) -> analog_t { return x * 2; });
@@ -64,7 +64,7 @@ TEST(PBPotentiometer, invert) {
     MockMIDI_Interface midi;
     Control_Surface.connectDefaultMIDI_Interface();
 
-    PBPotentiometer pot(2, {CHANNEL_7, CABLE_13});
+    PBPotentiometer pot(2, {Channel_7, CABLE_13});
     EXPECT_CALL(ArduinoMock::getInstance(), analogRead(2)).WillOnce(Return(0));
     pot.begin();
     pot.invert();

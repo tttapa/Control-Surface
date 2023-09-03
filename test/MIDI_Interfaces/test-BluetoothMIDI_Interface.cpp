@@ -1,7 +1,7 @@
 #include <MIDI_Interfaces/BluetoothMIDI_Interface.hpp>
 #include <MIDI_Interfaces/MIDI_Callbacks.hpp>
 
-using namespace CS;
+using namespace cs;
 using testing::Mock;
 
 class MockMIDI_Callbacks : public MIDI_Callbacks {
@@ -326,7 +326,7 @@ TEST(BluetoothMIDIInterface, sendOneNoteMessage) {
         .WillRepeatedly(Return(timestamp(0x01, 0x02)));
     EXPECT_CALL(midi, notifyMIDIBLE(expected));
 
-    midi.sendNoteOn({0x12, CHANNEL_3}, 0x34);
+    midi.sendNoteOn({0x12, Channel_3}, 0x34);
     midi.flush();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -344,8 +344,8 @@ TEST(BluetoothMIDIInterface, sendTwoNoteMessages) {
         .WillRepeatedly(Return(timestamp(0x01, 0x02)));
     EXPECT_CALL(midi, notifyMIDIBLE(expected));
 
-    midi.sendNoteOn({0x12, CHANNEL_3}, 0x34);
-    midi.sendNoteOn({0x56, CHANNEL_10}, 0x78);
+    midi.sendNoteOn({0x12, Channel_3}, 0x34);
+    midi.sendNoteOn({0x56, Channel_10}, 0x78);
     midi.flush();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -363,8 +363,8 @@ TEST(BluetoothMIDIInterface, sendTwoNoteMessagesRunningStatus) {
         .WillRepeatedly(Return(timestamp(0x01, 0x02)));
     EXPECT_CALL(midi, notifyMIDIBLE(expected));
 
-    midi.sendNoteOn({0x12, CHANNEL_3}, 0x34);
-    midi.sendNoteOn({0x56, CHANNEL_3}, 0x78);
+    midi.sendNoteOn({0x12, Channel_3}, 0x34);
+    midi.sendNoteOn({0x56, Channel_3}, 0x78);
     midi.flush();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -385,8 +385,8 @@ TEST(BluetoothMIDIInterface, sendNoteMessageBufferFull) {
     EXPECT_CALL(midi, notifyMIDIBLE(expected1)).InSequence(s);
     EXPECT_CALL(midi, notifyMIDIBLE(expected2)).InSequence(s);
 
-    midi.sendNoteOff({0x56, CHANNEL_6}, 0x78);
-    midi.sendNoteOff({0x66, CHANNEL_7}, 0x79);
+    midi.sendNoteOff({0x56, Channel_6}, 0x78);
+    midi.sendNoteOff({0x66, Channel_7}, 0x79);
     midi.flush();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -402,7 +402,7 @@ TEST(BluetoothMIDIInterface, sendOneProgramChangeMessage) {
         .WillRepeatedly(Return(timestamp(0x01, 0x02)));
     EXPECT_CALL(midi, notifyMIDIBLE(expected));
 
-    midi.sendProgramChange(CHANNEL_6, 0x78);
+    midi.sendProgramChange(Channel_6, 0x78);
     midi.flush();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -423,8 +423,8 @@ TEST(BluetoothMIDIInterface, sendProgramChangeMessageBufferFull) {
     EXPECT_CALL(midi, notifyMIDIBLE(expected1)).InSequence(s);
     EXPECT_CALL(midi, notifyMIDIBLE(expected2)).InSequence(s);
 
-    midi.sendProgramChange(CHANNEL_6, 0x78);
-    midi.sendProgramChange(CHANNEL_7, 0x79);
+    midi.sendProgramChange(Channel_6, 0x78);
+    midi.sendProgramChange(Channel_7, 0x79);
     midi.flush();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -598,7 +598,7 @@ TEST(BluetoothMIDIInterface, sendSysExBufferFullPacket1) {
     EXPECT_CALL(midi, notifyMIDIBLE(expected[0]));
     EXPECT_CALL(midi, notifyMIDIBLE(expected[1]));
 
-    midi.sendNoteOn({0x14, CHANNEL_2}, 0x15);
+    midi.sendNoteOn({0x14, Channel_2}, 0x15);
     midi.send(SysExMessage(sysex));
     midi.flush();
 

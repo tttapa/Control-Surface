@@ -3,10 +3,10 @@
 #include <MIDI_Inputs/NoteCCKPRange.hpp>
 #include <MIDI_Inputs/NoteCCKPValue.hpp>
 
-using namespace CS;
+using namespace cs;
 
 TEST(NoteValue, NoteOnNoteOff) {
-    NoteValue mn({0x3C, CHANNEL_5});
+    NoteValue mn({0x3C, Channel_5});
     mn.begin();
 
     EXPECT_EQ(mn.getValue(), 0);
@@ -15,26 +15,26 @@ TEST(NoteValue, NoteOnNoteOff) {
     EXPECT_FALSE(mn.getDirty());
 
     MIDIInputElementNote::updateAllWith(
-        {MIDIMessageType::NOTE_ON, CHANNEL_5, 0x3C, 0x7E});
+        {MIDIMessageType::NOTE_ON, Channel_5, 0x3C, 0x7E});
     EXPECT_EQ(mn.getValue(), 0x7E);
     EXPECT_TRUE(mn.getDirty());
     mn.clearDirty();
 
     MIDIInputElementNote::updateAllWith(
-        {MIDIMessageType::NOTE_OFF, CHANNEL_5, 0x3C, 0x7E});
+        {MIDIMessageType::NOTE_OFF, Channel_5, 0x3C, 0x7E});
     EXPECT_EQ(mn.getValue(), 0);
     EXPECT_TRUE(mn.getDirty());
     mn.clearDirty();
 
     // Second note off shouldn't set the dirty flag
     MIDIInputElementNote::updateAllWith(
-        {MIDIMessageType::NOTE_ON, CHANNEL_5, 0x3C, 0x00});
+        {MIDIMessageType::NOTE_ON, Channel_5, 0x3C, 0x00});
     EXPECT_EQ(mn.getValue(), 0);
     EXPECT_FALSE(mn.getDirty());
 }
 
 TEST(NoteRange, NoteOnNoteOff) {
-    NoteRange<2> mn{{0x3C, CHANNEL_5}};
+    NoteRange<2> mn{{0x3C, Channel_5}};
     mn.begin();
 
     EXPECT_EQ(mn.getValue(0), 0x00);
@@ -44,7 +44,7 @@ TEST(NoteRange, NoteOnNoteOff) {
     EXPECT_FALSE(mn.getDirty());
 
     MIDIInputElementNote::updateAllWith(
-        {MIDIMessageType::NOTE_ON, CHANNEL_5, 0x3C, 0x7E});
+        {MIDIMessageType::NOTE_ON, Channel_5, 0x3C, 0x7E});
 
     EXPECT_EQ(mn.getValue(0), 0x7E);
     EXPECT_EQ(mn.getValue(1), 0x00);
@@ -52,7 +52,7 @@ TEST(NoteRange, NoteOnNoteOff) {
     mn.clearDirty();
 
     MIDIInputElementNote::updateAllWith(
-        {MIDIMessageType::NOTE_ON, CHANNEL_5, 0x3D, 0x7D});
+        {MIDIMessageType::NOTE_ON, Channel_5, 0x3D, 0x7D});
 
     EXPECT_EQ(mn.getValue(0), 0x7E);
     EXPECT_EQ(mn.getValue(1), 0x7D);
@@ -60,7 +60,7 @@ TEST(NoteRange, NoteOnNoteOff) {
     mn.clearDirty();
 
     MIDIInputElementNote::updateAllWith(
-        {MIDIMessageType::NOTE_OFF, CHANNEL_5, 0x3C, 0x7E});
+        {MIDIMessageType::NOTE_OFF, Channel_5, 0x3C, 0x7E});
 
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x7D);
@@ -69,7 +69,7 @@ TEST(NoteRange, NoteOnNoteOff) {
 
     // Second note off shouldn't set the dirty flag
     MIDIInputElementNote::updateAllWith(
-        {MIDIMessageType::NOTE_ON, CHANNEL_5, 0x3C, 0x00});
+        {MIDIMessageType::NOTE_ON, Channel_5, 0x3C, 0x00});
     EXPECT_EQ(mn.getValue(0), 0x00);
     EXPECT_EQ(mn.getValue(1), 0x7D);
     EXPECT_FALSE(mn.getDirty());
@@ -79,7 +79,7 @@ TEST(NoteRange, NoteOnNoteOff) {
 
 TEST(NoteRange, bankableInRange) {
     Bank<2> bank(4);
-    Bankable::NoteRange<2, 3> mn = {bank, {0x10, CHANNEL_5}};
+    Bankable::NoteRange<2, 3> mn = {bank, {0x10, Channel_5}};
     mn.begin();
 
     EXPECT_TRUE(mn.getDirty());
@@ -96,7 +96,7 @@ TEST(NoteRange, bankableInRange) {
     // First bank, first address
     ChannelMessage midimsg1 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10,
         0x20,
     };
@@ -117,7 +117,7 @@ TEST(NoteRange, bankableInRange) {
     // First bank, third address
     ChannelMessage midimsg2 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 + 2,
         0x21,
     };
@@ -138,7 +138,7 @@ TEST(NoteRange, bankableInRange) {
     // Second bank, second address
     ChannelMessage midimsg3 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 + 4 + 1,
         0x22,
     };
@@ -171,7 +171,7 @@ TEST(NoteRange, bankableInRange) {
     // First bank, first address
     ChannelMessage midimsg4 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10,
         0x23,
     };
@@ -210,7 +210,7 @@ TEST(NoteRange, bankableInRange) {
 
 TEST(NoteRange, bankableNotInRange) {
     Bank<2> bank(4);
-    Bankable::NoteRange<2, 3> mn = {bank, {0x10, CHANNEL_5}};
+    Bankable::NoteRange<2, 3> mn = {bank, {0x10, Channel_5}};
     mn.begin();
 
     EXPECT_TRUE(mn.getDirty());
@@ -220,7 +220,7 @@ TEST(NoteRange, bankableNotInRange) {
     // Before first bank
     ChannelMessage midimsg1 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 - 1,
         0x20,
     };
@@ -246,7 +246,7 @@ TEST(NoteRange, bankableNotInRange) {
     // First bank, fourth address
     ChannelMessage midimsg2 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 + 3,
         0x20,
     };
@@ -271,7 +271,7 @@ TEST(NoteRange, bankableNotInRange) {
     bank.select(0);
 
     // Second bank, fourth address
-    ChannelMessage midimsg3 = {MIDIMessageType::NOTE_ON, CHANNEL_5,
+    ChannelMessage midimsg3 = {MIDIMessageType::NOTE_ON, Channel_5,
                                       0x10 + 4 + 3, 0x20};
     mn.clearDirty();
     EXPECT_FALSE(mn.updateWith(midimsg3));
@@ -296,7 +296,7 @@ TEST(NoteRange, bankableNotInRange) {
     // Before first bank, first address
     ChannelMessage midimsg4 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 - 4,
         0x20,
     };
@@ -323,7 +323,7 @@ TEST(NoteRange, bankableNotInRange) {
     // After last bank, first address
     ChannelMessage midimsg5 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 + 8,
         0x20,
     };
@@ -350,7 +350,7 @@ TEST(NoteRange, bankableNotInRange) {
     // Different channel
     ChannelMessage midimsg6 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5 + 1,
+        Channel_5 + 1,
         0x10,
         0x20,
     };
@@ -377,7 +377,7 @@ TEST(NoteRange, bankableNotInRange) {
 
 TEST(NoteRange, bankableInRangeOffset) {
     Bank<2> bank(4, 0, -1);
-    Bankable::NoteRange<2, 3> mn = {bank, {0x10 + 4, CHANNEL_5}};
+    Bankable::NoteRange<2, 3> mn = {bank, {0x10 + 4, Channel_5}};
     mn.begin();
 
     EXPECT_TRUE(mn.getDirty());
@@ -394,7 +394,7 @@ TEST(NoteRange, bankableInRangeOffset) {
     // First bank, first address
     ChannelMessage midimsg1 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10,
         0x20,
     };
@@ -415,7 +415,7 @@ TEST(NoteRange, bankableInRangeOffset) {
     // First bank, third address
     ChannelMessage midimsg2 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 + 2,
         0x21,
     };
@@ -436,7 +436,7 @@ TEST(NoteRange, bankableInRangeOffset) {
     // Second bank, second address
     ChannelMessage midimsg3 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 + 4 + 1,
         0x22,
     };
@@ -469,7 +469,7 @@ TEST(NoteRange, bankableInRangeOffset) {
     // First bank, first address
     ChannelMessage midimsg4 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10,
         0x23,
     };
@@ -508,7 +508,7 @@ TEST(NoteRange, bankableInRangeOffset) {
 
 TEST(NoteRange, bankableNotInRangeOffset) {
     Bank<2> bank(4, 0, -1);
-    Bankable::NoteRange<2, 3> mn = {bank, {0x10 + 4, CHANNEL_5}};
+    Bankable::NoteRange<2, 3> mn = {bank, {0x10 + 4, Channel_5}};
     mn.begin();
 
     EXPECT_TRUE(mn.getDirty());
@@ -518,7 +518,7 @@ TEST(NoteRange, bankableNotInRangeOffset) {
     // Before first bank
     ChannelMessage midimsg1 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 - 1,
         0x20,
     };
@@ -544,7 +544,7 @@ TEST(NoteRange, bankableNotInRangeOffset) {
     // First bank, fourth address
     ChannelMessage midimsg2 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 + 3,
         0x20,
     };
@@ -569,7 +569,7 @@ TEST(NoteRange, bankableNotInRangeOffset) {
     bank.select(0);
 
     // Second bank, fourth address
-    ChannelMessage midimsg3 = {MIDIMessageType::NOTE_ON, CHANNEL_5,
+    ChannelMessage midimsg3 = {MIDIMessageType::NOTE_ON, Channel_5,
                                       0x10 + 4 + 3, 0x20};
     mn.clearDirty();
     EXPECT_FALSE(mn.updateWith(midimsg3));
@@ -594,7 +594,7 @@ TEST(NoteRange, bankableNotInRangeOffset) {
     // Before first bank, first address
     ChannelMessage midimsg4 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 - 4,
         0x20,
     };
@@ -621,7 +621,7 @@ TEST(NoteRange, bankableNotInRangeOffset) {
     // After last bank, first address
     ChannelMessage midimsg5 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 + 8,
         0x20,
     };
@@ -648,7 +648,7 @@ TEST(NoteRange, bankableNotInRangeOffset) {
     // Different channel
     ChannelMessage midimsg6 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5 + 1,
+        Channel_5 + 1,
         0x10,
         0x20,
     };
@@ -675,13 +675,13 @@ TEST(NoteRange, bankableNotInRangeOffset) {
 
 TEST(NoteRange, bankableInRangeChangeChannel) {
     Bank<2> bank(4);
-    Bankable::NoteRange<2, 3> mn = {{bank, CHANGE_CHANNEL}, {0x10, CHANNEL_5}};
+    Bankable::NoteRange<2, 3> mn = {{bank, CHANGE_CHANNEL}, {0x10, Channel_5}};
     mn.begin();
 
     // First bank, first address
     ChannelMessage midimsg1 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10,
         0x20,
     };
@@ -693,7 +693,7 @@ TEST(NoteRange, bankableInRangeChangeChannel) {
     // First bank, third address
     ChannelMessage midimsg2 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 + 2,
         0x21,
     };
@@ -705,7 +705,7 @@ TEST(NoteRange, bankableInRangeChangeChannel) {
     // Second bank, second address
     ChannelMessage midimsg3 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5 + 4,
+        Channel_5 + 4,
         0x10 + 1,
         0x22,
     };
@@ -721,7 +721,7 @@ TEST(NoteRange, bankableInRangeChangeChannel) {
     // First bank, first address
     ChannelMessage midimsg4 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10,
         0x23,
     };
@@ -737,13 +737,13 @@ TEST(NoteRange, bankableInRangeChangeChannel) {
 
 TEST(NoteRange, bankableNotInRangeChangeChannel) {
     Bank<2> bank(4);
-    Bankable::NoteRange<2, 3> mn = {{bank, CHANGE_CHANNEL}, {0x10, CHANNEL_5}};
+    Bankable::NoteRange<2, 3> mn = {{bank, CHANGE_CHANNEL}, {0x10, Channel_5}};
     mn.begin();
 
     // Before first bank
     ChannelMessage midimsg1 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 - 1,
         0x20,
     };
@@ -760,7 +760,7 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
     // First bank, fourth address
     ChannelMessage midimsg2 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x10 + 3,
         0x20,
     };
@@ -777,7 +777,7 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
     // Before second bank
     ChannelMessage midimsg3 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5 + 4,
+        Channel_5 + 4,
         0x10 - 1,
         0x20,
     };
@@ -794,7 +794,7 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
     // Second bank, fourth address
     ChannelMessage midimsg4 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5 + 4,
+        Channel_5 + 4,
         0x10 + 3,
         0x20,
     };
@@ -811,7 +811,7 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
     // Before first bank, first address
     ChannelMessage midimsg5 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5 - 4,
+        Channel_5 - 4,
         0x10,
         0x20,
     };
@@ -828,7 +828,7 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
     // After last bank, first address
     ChannelMessage midimsg6 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5 + 8,
+        Channel_5 + 8,
         0x10,
         0x20,
     };
@@ -848,7 +848,7 @@ TEST(NoteRange, bankableNotInRangeChangeChannel) {
 #include <MIDI_Inputs/LEDs/NoteCCKPLED.hpp>
 
 TEST(NoteLED, NoteOnNoteOff) {
-    NoteLED mnl = {2, {0x3C, CHANNEL_5}};
+    NoteLED mnl = {2, {0x3C, Channel_5}};
 
     ::testing::InSequence seq;
 
@@ -859,7 +859,7 @@ TEST(NoteLED, NoteOnNoteOff) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, HIGH));
     ChannelMessage midimsg1 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x3C,
         0x7E,
     };
@@ -868,7 +868,7 @@ TEST(NoteLED, NoteOnNoteOff) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, LOW));
     ChannelMessage midimsg2 = {
         MIDIMessageType::NOTE_OFF,
-        CHANNEL_5,
+        Channel_5,
         0x3C,
         0x7E,
     };
@@ -879,7 +879,7 @@ TEST(NoteLED, NoteOnNoteOff) {
 
 TEST(BankableNoteLED, NoteOnNoteOff) {
     Bank<2> bank;
-    Bankable::NoteLED<2> mnl = {bank, 2, {0x3C, CHANNEL_5}};
+    Bankable::NoteLED<2> mnl = {bank, 2, {0x3C, Channel_5}};
 
     ::testing::InSequence seq;
 
@@ -894,7 +894,7 @@ TEST(BankableNoteLED, NoteOnNoteOff) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, HIGH));
     ChannelMessage midimsg1 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x3C,
         0x7E,
     };
@@ -910,7 +910,7 @@ TEST(BankableNoteLED, NoteOnNoteOff) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(2, LOW));
     ChannelMessage midimsg2 = {
         MIDIMessageType::NOTE_OFF,
-        CHANNEL_5,
+        Channel_5,
         0x3C,
         0x7E,
     };
@@ -925,7 +925,7 @@ TEST(BankableNoteLED, NoteOnNoteOff) {
     // Bank 1 ON
     ChannelMessage midimsg3 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x3D,
         0x7E,
     };
@@ -951,7 +951,7 @@ TEST(BankableNoteLED, NoteOnNoteOff) {
 
 /// @todo TODO
 TEST(NoteLED, PWM) {
-    NoteLEDPWM mnl = {2, {0x3C, CHANNEL_5}};
+    NoteLEDPWM mnl = {2, {0x3C, Channel_5}};
 
     ::testing::InSequence seq;
 
@@ -962,7 +962,7 @@ TEST(NoteLED, PWM) {
     EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 255));
     ChannelMessage midimsg1 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x3C,
         0x7F,
     };
@@ -972,7 +972,7 @@ TEST(NoteLED, PWM) {
     EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 16));
     ChannelMessage midimsg2 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x3C,
         0x08,
     };
@@ -982,7 +982,7 @@ TEST(NoteLED, PWM) {
     EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 0));
     ChannelMessage midimsg3 = {
         MIDIMessageType::NOTE_OFF,
-        CHANNEL_5,
+        Channel_5,
         0x3C,
         0x7F,
     };
@@ -992,7 +992,7 @@ TEST(NoteLED, PWM) {
 
 TEST(BankableNoteLED, PWM) {
     Bank<2> bank;
-    Bankable::NoteLEDPWM<2> mnl = {bank, 2, {0x3C, CHANNEL_5}};
+    Bankable::NoteLEDPWM<2> mnl = {bank, 2, {0x3C, Channel_5}};
 
     ::testing::InSequence seq;
 
@@ -1007,7 +1007,7 @@ TEST(BankableNoteLED, PWM) {
     EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 0x60));
     ChannelMessage midimsg1 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x3C,
         0x30,
     };
@@ -1023,7 +1023,7 @@ TEST(BankableNoteLED, PWM) {
     EXPECT_CALL(ArduinoMock::getInstance(), analogWrite(2, 0));
     ChannelMessage midimsg2 = {
         MIDIMessageType::NOTE_OFF,
-        CHANNEL_5,
+        Channel_5,
         0x3C,
         0x7E,
     };
@@ -1038,7 +1038,7 @@ TEST(BankableNoteLED, PWM) {
     // Bank 1 ON
     ChannelMessage midimsg3 = {
         MIDIMessageType::NOTE_ON,
-        CHANNEL_5,
+        Channel_5,
         0x3D,
         0x31,
     };

@@ -4,13 +4,13 @@
 #include <gmock/gmock.h>
 
 using namespace ::testing;
-using namespace CS;
+using namespace cs;
 
 TEST(NoteButtonLatching, pressAndRelease) {
     MockMIDI_Interface midi;
     Control_Surface.connectDefaultMIDI_Interface();
 
-    NoteButtonLatching button(2, {0x3C, CHANNEL_7, CABLE_13});
+    NoteButtonLatching button(2, {0x3C, Channel_7, CABLE_13});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 
@@ -57,7 +57,7 @@ TEST(NoteButtonLatchingBankable, pressAndRelease) {
 
     OutputBank bank(4);
 
-    Bankable::NoteButtonLatching button(bank, 2, {0x3C, CHANNEL_7, CABLE_13});
+    Bankable::NoteButtonLatching button(bank, 2, {0x3C, Channel_7, CABLE_13});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 
@@ -102,7 +102,7 @@ TEST(NoteButtonLatchingBankable, changeSettingAndPressAndRelease) {
 
     OutputBank bank(4);
 
-    Bankable::NoteButtonLatching button(bank, 2, {0x3C, CHANNEL_7, CABLE_13});
+    Bankable::NoteButtonLatching button(bank, 2, {0x3C, Channel_7, CABLE_13});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 
@@ -150,7 +150,7 @@ TEST(NoteButtonLatchingBankable, pressAndChangeSettingAndRelease) {
 
     OutputBank bank(4);
 
-    Bankable::NoteButtonLatching button(bank, 2, {0x3C, CHANNEL_7, CABLE_13});
+    Bankable::NoteButtonLatching button(bank, 2, {0x3C, Channel_7, CABLE_13});
     EXPECT_CALL(ArduinoMock::getInstance(), pinMode(2, INPUT_PULLUP));
     button.begin();
 

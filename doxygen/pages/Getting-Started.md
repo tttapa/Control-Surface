@@ -115,8 +115,8 @@ analog pin number, and the second is the MIDI address.
 The MIDI address is a structure that consists of an address number, 
 the MIDI channel, and the cable number.  
 In this case, the address number is the controller number, which is a number
-from 0 to 119. The MIDI channel is a channel from `CHANNEL_1` until 
-`CHANNEL_16`. We'll ignore the cable number for now, if you don't specifically
+from 0 to 119. The MIDI channel is a channel from `Channel_1` until 
+`Channel_16`. We'll ignore the cable number for now, if you don't specifically
 set it, it'll just use the default cable.  
 You can find more information about MIDI addresses in the
 @ref midi_md-midi-addresses "MIDI Tutorial: MIDI addresses". 
@@ -125,10 +125,10 @@ For the MIDI controller numbers, you can use the
 @ref MIDI_CC "predefined constants", or you can just use a number.
 
 ```cpp
-CCPotentiometer potentiometer { A1, {MIDI_CC::Channel_Volume, CHANNEL_1} };
+CCPotentiometer potentiometer { A1, {MIDI_CC::Channel_Volume, Channel_1} };
 ```
 ```cpp
-CCPotentiometer potentiometer { A1, {7, CHANNEL_1} };
+CCPotentiometer potentiometer { A1, {7, Channel_1} };
 ```
 
 In our case, we don't want a single potentiometer, we want eight. It's much
@@ -155,14 +155,14 @@ in more meaningful error messages if you get any of the arguments wrong:
 
 ```cpp
 CCPotentiometer volumePotentiometers[] {
-    { mux.pin(0), {MIDI_CC::Channel_Volume, CHANNEL_1} },
-    { mux.pin(1), {MIDI_CC::Channel_Volume, CHANNEL_2} },
-    { mux.pin(2), {MIDI_CC::Channel_Volume, CHANNEL_3} },
-    { mux.pin(3), {MIDI_CC::Channel_Volume, CHANNEL_4} },
-    { mux.pin(4), {MIDI_CC::Channel_Volume, CHANNEL_5} },
-    { mux.pin(5), {MIDI_CC::Channel_Volume, CHANNEL_6} },
-    { mux.pin(6), {MIDI_CC::Channel_Volume, CHANNEL_7} },
-    { mux.pin(7), {MIDI_CC::Channel_Volume, CHANNEL_8} },
+    { mux.pin(0), {MIDI_CC::Channel_Volume, Channel_1} },
+    { mux.pin(1), {MIDI_CC::Channel_Volume, Channel_2} },
+    { mux.pin(2), {MIDI_CC::Channel_Volume, Channel_3} },
+    { mux.pin(3), {MIDI_CC::Channel_Volume, Channel_4} },
+    { mux.pin(4), {MIDI_CC::Channel_Volume, Channel_5} },
+    { mux.pin(5), {MIDI_CC::Channel_Volume, Channel_6} },
+    { mux.pin(6), {MIDI_CC::Channel_Volume, Channel_7} },
+    { mux.pin(7), {MIDI_CC::Channel_Volume, Channel_8} },
 };
 ```
 
@@ -172,7 +172,7 @@ CCPotentiometer volumePotentiometers[] {
 > For example, a `PBPotentiometer` doesn't need an address number, just a 
 > channel, so you can instantiate it as follows:
 > ```cpp
-> PBPotentiometer potentiometer { A1, CHANNEL_9 };
+> PBPotentiometer potentiometer { A1, Channel_9 };
 > ```
 
 ### 5. Initialize the Control Surface                       {#first-output-init}
@@ -237,14 +237,14 @@ CD74HC4051 mux {
 // potentiometers connected to the eight input pins of
 // the multiplexer
 CCPotentiometer volumePotentiometers[] {
-  {mux.pin(0), {MIDI_CC::Channel_Volume, CHANNEL_1}},
-  {mux.pin(1), {MIDI_CC::Channel_Volume, CHANNEL_2}},
-  {mux.pin(2), {MIDI_CC::Channel_Volume, CHANNEL_3}},
-  {mux.pin(3), {MIDI_CC::Channel_Volume, CHANNEL_4}},
-  {mux.pin(4), {MIDI_CC::Channel_Volume, CHANNEL_5}},
-  {mux.pin(5), {MIDI_CC::Channel_Volume, CHANNEL_6}},
-  {mux.pin(6), {MIDI_CC::Channel_Volume, CHANNEL_7}},
-  {mux.pin(7), {MIDI_CC::Channel_Volume, CHANNEL_8}},
+  {mux.pin(0), {MIDI_CC::Channel_Volume, Channel_1}},
+  {mux.pin(1), {MIDI_CC::Channel_Volume, Channel_2}},
+  {mux.pin(2), {MIDI_CC::Channel_Volume, Channel_3}},
+  {mux.pin(3), {MIDI_CC::Channel_Volume, Channel_4}},
+  {mux.pin(4), {MIDI_CC::Channel_Volume, Channel_5}},
+  {mux.pin(5), {MIDI_CC::Channel_Volume, Channel_6}},
+  {mux.pin(6), {MIDI_CC::Channel_Volume, Channel_7}},
+  {mux.pin(7), {MIDI_CC::Channel_Volume, Channel_8}},
 };
 
 // Initialize the Control Surface
@@ -340,8 +340,8 @@ number of the pin with the LED connected, and the second is the MIDI address.
 The MIDI address is a structure that consists of an address number, 
 the MIDI channel, and the cable number.  
 In this case, the address number is the note number, which is a number
-from 0 to 127. The MIDI channel is a channel from `CHANNEL_1` until 
-`CHANNEL_16`. We'll ignore the cable number for now, if you don't specifically
+from 0 to 127. The MIDI channel is a channel from `Channel_1` until 
+`Channel_16`. We'll ignore the cable number for now, if you don't specifically
 set it, it'll just use the default cable.  
 
 For the MIDI note numbers, you can use the note constants and the `note`
@@ -349,14 +349,14 @@ function in the @ref MIDI_Notes namespace,
 or you can just use a number.
 
 ```cpp
-NoteLED noteLed { 13, {MIDI_Notes::C(4), CHANNEL_1} };  // C4 = middle C
+NoteLED noteLed { 13, {MIDI_Notes::C(4), Channel_1} };  // C4 = middle C
 ```
 
 In our case, we don't want a single LED, we want eight. It's much easier to 
 define them in an array.  
 Also note how we state that it should use the pins of the shift register we 
 defined in the previous step. We omit the channel here, so it'll just use the
-default channel, `CHANNEL_1`.
+default channel, `Channel_1`.
 
 > **Note**: The first pin is `pin(0)`, not `pin(1)`.
 
@@ -475,7 +475,7 @@ void loop() {
 If you enable debug output, you'll get a helpful error message as soon as you 
 open the Serial Monitor:
 ```text
-[bool CS::Control_Surface_::connectDefaultMIDI_Interface() @ line 53]:	Fatal Error: No default MIDI Interface (0xF123)
+[bool cs::Control_Surface_::connectDefaultMIDI_Interface() @ line 53]:	Fatal Error: No default MIDI Interface (0xF123)
 ```
 The error code at the end can be used to easily locate the source of the error 
 in the library source code, and in this case the message also includes the name
