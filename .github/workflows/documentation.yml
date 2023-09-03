@@ -7,13 +7,13 @@ on:
 
 jobs:
   deploy-docs:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     # Cache the doxygen executable, lcov
-    - uses: actions/cache@v2
+    - uses: actions/cache@v3
       id: cache-tools
       with:
         path: |
@@ -46,9 +46,9 @@ jobs:
       run: ./scripts/install-gtest.sh Debug /tmp/gtest
 
     # Install Python
-    - uses: actions/setup-python@v2
+    - uses: actions/setup-python@v4
       with:
-        python-version: '3.9.6'
+        python-version: '3.9'
     - name: Install pypng
       run: python3 -m pip install "pypng>=0.0.20"
 
@@ -68,8 +68,6 @@ jobs:
     - name: Generate documentation
       run: ./scripts/ci/gen-docs.sh /tmp/staging
       env:
-        CC: gcc-10
-        CXX: g++-10
         CMAKE_PREFIX_PATH: /tmp/gtest
 
     # Commit the new documentation, squash the commits, and push it to GitHub
