@@ -3,7 +3,7 @@
  * library. It creates light effects using three 8-bit shift registers and some
  * RGB LEDs.
  *
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
  *
  * Connections
  * -----------
