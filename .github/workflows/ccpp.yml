@@ -8,14 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - name: Install dependencies
       run: sudo ./scripts/install-gtest.sh Debug /usr/local
     - name: Configure
       run: cmake -S. --preset ci
-      env:
-        CC: gcc-9
-        CXX: g++-9
     - name: Build
       run: cmake --build --preset ci -j
     - name: Test

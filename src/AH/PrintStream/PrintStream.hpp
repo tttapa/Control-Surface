@@ -84,10 +84,14 @@ Print &operator<<(Print &p, HexDump h);
 
 /// @}
 
+END_AH_NAMESPACE
+
 #ifndef ARDUINO
 
 #include <iomanip>
 #include <iostream>
+
+BEGIN_AH_NAMESPACE
 
 // TODO: check conflicts between Arduino version and C++ STL version
 using std::endl;
@@ -116,9 +120,9 @@ inline std::ostream &operator<<(std::ostream &os,
 
 std::ostream &operator<<(std::ostream &p, HexDump h);
 
-#endif
-
 END_AH_NAMESPACE
+
+#endif
 
 AH_DIAGNOSTIC_POP()
 
