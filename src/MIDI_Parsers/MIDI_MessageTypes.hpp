@@ -1,7 +1,8 @@
 #pragma once
 
-#include <AH/Arduino-Wrapper.h> // Print
-#include <AH/STL/cstddef>       // size_t
+#include <AH/Arduino-Wrapper.h>           // Print
+#include <AH/PrintStream/PrintStream.hpp> // operator<<
+#include <AH/STL/cstddef>                 // size_t
 #include <AH/STL/vector>
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
