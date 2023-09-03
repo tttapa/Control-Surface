@@ -96,7 +96,44 @@ BEGIN_CS_NAMESPACE
 
 // Arduino UNO R4
 #elif defined(ARDUINO_UNOR4_MINIMA) || defined(ARDUINO_UNOR4_WIFI)
-#define CORE_NUM_INTERRUPT 2
+#define CORE_NUM_INTERRUPT 13
+
+#ifdef NOT_AN_INTERRUPT
+#error                                                                         \
+    "This version of the ArduinoCore-renesas is not supported. Please open an issue on GitHub: https://github.com/tttapa/Control-Surface/issues"
+#endif
+#define NOT_AN_INTERRUPT 255
+constexpr pin_size_t pin_to_interrupt_index[] {
+    0,                // GPIO 0  (P301)                          IRQ6
+    1,                // GPIO 1  (P302)                     IRQ5
+    2,                // GPIO 2  (P104)      IRQ1
+    3,                // GPIO 3  (P105) IRQ0
+    NOT_AN_INTERRUPT, // GPIO 4  (P106) -
+    NOT_AN_INTERRUPT, // GPIO 5  (P107) -
+    4,                // GPIO 6  (P111)                IRQ4
+    NOT_AN_INTERRUPT, // GPIO 7  (P112) -
+    5,                // GPIO 8  (P304)                                    IRQ9
+    NOT_AN_INTERRUPT, // GPIO 9  (P303) -
+    NOT_AN_INTERRUPT, // GPIO 10 (P103) -
+    6,                // GPIO 11 (P411)                IRQ4
+    7,                // GPIO 12 (P410)                     IRQ5
+    NOT_AN_INTERRUPT, // GPIO 13 (P102) -
+    NOT_AN_INTERRUPT, // GPIO 14 (P014) -
+    8,                // GPIO 15 (P000)                          IRQ6
+    9,                // GPIO 16 (P001)                               IRQ7
+    10,               // GPIO 17 (P002)           IRQ2
+    11,               // GPIO 18 (P101)      IRQ1
+    12,               // GPIO 19 (P100)           IRQ2
+};
+inline pin_size_t digitalPinToInterrupt(pin_size_t pin) {
+    if (pin_to_interrupt_index[pin] == NOT_AN_INTERRUPT)
+        return NOT_AN_INTERRUPT;
+    return ::digitalPinToInterrupt(pin);
+}
+inline pin_size_t interruptToIndex(pin_size_t interrupt) {
+    return pin_to_interrupt_index[interrupt];
+}
+#define CS_CUSTOM_INTERRUPT_TO_INDEX 1
 
 // Others
 #else
