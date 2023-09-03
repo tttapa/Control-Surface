@@ -4,7 +4,7 @@
  * controls, etc. It can control almost any knob in your DAW software. 
  * This example shows how to define multiple potentiometers using an array.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Teensy 3.x
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Teensy 3.x
  * 
  * Connections
  * -----------

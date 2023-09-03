@@ -1,7 +1,7 @@
 /** 
  * This is an example that demonstrates the use of Banks.
  *
- * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x
+ * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x
  * 
  * Banks allow you to use a single control for many different actions. 
  * By changing the bank setting, you can change the address of a MIDI Element.

@@ -8,7 +8,7 @@
  * @see @ref src/MIDI_Interfaces/USBMIDI/USBMIDI_Adafruit_TinyUSB.hpp
  * @see @ref src/MIDI_Interfaces/USBHostMIDI_Interface.hpp
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x, ESP32
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32
  * 
  * Connections
  * -----------

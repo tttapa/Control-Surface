@@ -2,7 +2,7 @@
  * This example demonstrates the use of LEDs that respond to incoming  MIDI
  * note events by changing the brightness of an LED using PWM.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x
  * 
  * Connections
  * -----------

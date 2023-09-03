@@ -11,7 +11,7 @@
  * Similar to the CCAbsoluteEncoder, there's also PBAbsoluteEncoder that sends
  * absolute MIDI Pitch Bend messages.
  *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, Teensy 3.x
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x
  * 
  * Connections
  * -----------

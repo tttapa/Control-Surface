@@ -10,7 +10,7 @@
  * value when turned all the way to the right, tweak the `maximumValue` 
  * constant.
  * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, ESP32, Teensy 3.x
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, ESP32, Teensy 3.x
  * 
  * Connections
  * -----------
