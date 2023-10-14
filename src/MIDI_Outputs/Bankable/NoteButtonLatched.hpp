@@ -45,7 +45,7 @@ class NoteButtonLatched
      */
     NoteButtonLatched(BankConfig<NumBanks> config, pin_t pin,
                       MIDIAddress address, uint8_t velocity = 0x7F)
-        : MIDIButtonLatched<NumBanks, SingleAddress, DigitalNoteSender>{
+        : MIDIButtonLatched<NumBanks, SingleAddress, DigitalNoteSender> {
               {config, address},
               pin,
               {velocity},

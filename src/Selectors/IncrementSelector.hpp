@@ -13,7 +13,7 @@ class GenericIncrementSelector : public GenericSelector<N, Callback> {
     GenericIncrementSelector(Selectable<N> &selectable,
                              const Callback &callback,
                              const AH::IncrementButton &button)
-        : GenericSelector<N, Callback>{selectable, callback}, button(button) {}
+        : GenericSelector<N, Callback> {selectable, callback}, button(button) {}
 
     void begin() override {
         Parent::begin();
@@ -65,10 +65,10 @@ class IncrementSelector : virtual public GenericIncrementSelector<N> {
   public:
     IncrementSelector(Selectable<N> &selectable,
                       const AH::IncrementButton &button)
-        : GenericIncrementSelector<N>{selectable, {}, button} {}
+        : GenericIncrementSelector<N> {selectable, {}, button} {}
 
     IncrementSelector(Selectable<N> &selectable, const AH::Button &button)
-        : GenericIncrementSelector<N>{selectable, {}, button} {}
+        : GenericIncrementSelector<N> {selectable, {}, button} {}
 };
 
 END_CS_NAMESPACE

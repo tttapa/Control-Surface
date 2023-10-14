@@ -38,7 +38,7 @@ class CCButtonLatched : public MIDIButtonLatched<DigitalCCSender> {
      */
     CCButtonLatched(pin_t pin, MIDIAddress address,
                     const DigitalCCSender &sender = {})
-        : MIDIButtonLatched{pin, address, sender} {}
+        : MIDIButtonLatched {pin, address, sender} {}
 };
 
 END_CS_NAMESPACE

@@ -45,7 +45,7 @@ class CCPotentiometer
      */
     CCPotentiometer(const Bank<NumBanks> &bank, pin_t analogPin,
                     const Array<MIDIAddress, NumBanks> &addresses)
-        : MIDIFilteredAnalog<ManyAddresses<NumBanks>, ContinuousCCSender>{
+        : MIDIFilteredAnalog<ManyAddresses<NumBanks>, ContinuousCCSender> {
               {bank, addresses}, analogPin, {}} {}
 };
 

@@ -44,7 +44,7 @@ class CCButton : public MIDIButton<SingleAddress, DigitalCCSender> {
      */
     CCButton(OutputBankConfig<> config, pin_t pin, MIDIAddress address,
              const DigitalCCSender &sender = {})
-        : MIDIButton{{config, address}, pin, sender} {}
+        : MIDIButton {{config, address}, pin, sender} {}
 };
 
 } // namespace Bankable

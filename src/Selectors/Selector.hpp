@@ -154,7 +154,7 @@ template <setting_t N>
 class Selector : public GenericSelector<N> {
   public:
     /// Constructor
-    Selector(Selectable<N> &selectable) : GenericSelector<N>{selectable, {}} {}
+    Selector(Selectable<N> &selectable) : GenericSelector<N> {selectable, {}} {}
 };
 
 END_CS_NAMESPACE

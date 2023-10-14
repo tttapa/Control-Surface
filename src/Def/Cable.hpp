@@ -42,7 +42,7 @@ class Cable {
      *          The cable number (1 is the first cable).
      */
     static constexpr Cable createCable(uint8_t oneBasedCable) {
-        return Cable{uint8_t(oneBasedCable - 1)};
+        return Cable {static_cast<uint8_t>(oneBasedCable - 1)};
     }
 
     /**

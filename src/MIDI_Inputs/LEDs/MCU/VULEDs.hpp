@@ -57,8 +57,8 @@ class VULEDs : public VU, public VULEDsDriver<NumLEDs> {
     ///         step.  
     ///         The MCU protocol uses 300 ms per division, and two steps
     ///         per division, so the default is 150 ms per step.  
-    ///         Some software doesn't work if the VU meter decays automatically, 
-    ///         in that case, you can set the decay time to zero to disable 
+    ///         Some software doesn't work if the VU meter decays automatically,
+    ///         in that case, you can set the decay time to zero to disable
     ///         the decay.
     ///         @see    @ref MCU::VUDecay
     VULEDs(const PinList<NumLEDs> &leds, uint8_t track,
@@ -75,8 +75,8 @@ class VULEDs : public VU, public VULEDsDriver<NumLEDs> {
     ///         step.  
     ///         The MCU protocol uses 300 ms per division, and two steps
     ///         per division, so the default is 150 ms per step.  
-    ///         Some software doesn't work if the VU meter decays automatically, 
-    ///         in that case, you can set the decay time to zero to disable 
+    ///         Some software doesn't work if the VU meter decays automatically,
+    ///         in that case, you can set the decay time to zero to disable
     ///         the decay.
     ///         @see    @ref MCU::VUDecay
     VULEDs(const PinList<NumLEDs> &leds, uint8_t track,
@@ -150,15 +150,15 @@ class VULEDs : public VU<BankSize>, public VULEDsDriver<NumLEDs> {
     ///         step.  
     ///         The MCU protocol uses 300 ms per division, and two steps
     ///         per division, so the default is 150 ms per step.  
-    ///         Some software doesn't work if the VU meter decays automatically, 
-    ///         in that case, you can set the decay time to zero to disable 
+    ///         Some software doesn't work if the VU meter decays automatically,
+    ///         in that case, you can set the decay time to zero to disable
     ///         the decay.
     ///         @see    @ref MCU::VUDecay
     VULEDs(BankConfig<BankSize> config, const PinList<NumLEDs> &leds,
            uint8_t track, MIDIChannelCable channelCN,
            unsigned int decayTime = VUDecay::Default)
-        : Parent(config, track, channelCN, decayTime), VULEDsDriver<NumLEDs>(
-                                                           leds) {}
+        : Parent(config, track, channelCN, decayTime),
+          VULEDsDriver<NumLEDs>(leds) {}
 
     /// @param  config
     ///         The bank configuration to use.
@@ -171,8 +171,8 @@ class VULEDs : public VU<BankSize>, public VULEDsDriver<NumLEDs> {
     ///         step.  
     ///         The MCU protocol uses 300 ms per division, and two steps
     ///         per division, so the default is 150 ms per step.  
-    ///         Some software doesn't work if the VU meter decays automatically, 
-    ///         in that case, you can set the decay time to zero to disable 
+    ///         Some software doesn't work if the VU meter decays automatically,
+    ///         in that case, you can set the decay time to zero to disable
     ///         the decay.
     ///         @see    @ref MCU::VUDecay
     VULEDs(BankConfig<BankSize> config, const PinList<NumLEDs> &leds,

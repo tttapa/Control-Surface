@@ -52,7 +52,8 @@ class CCButtonMatrix
     CCButtonMatrix(const PinList<NumRows> &rowPins,
                    const PinList<NumCols> &colPins,
                    const AddressMatrix<NumRows, NumCols> &controllers,
-                   MIDIChannelCable channelCN, const DigitalCCSender &sender = {})
+                   MIDIChannelCable channelCN,
+                   const DigitalCCSender &sender = {})
         : MIDIButtonMatrix<DigitalCCSender, NumRows, NumCols>(
               rowPins, colPins, controllers, channelCN, sender) {}
 };

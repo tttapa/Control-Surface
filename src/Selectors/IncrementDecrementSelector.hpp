@@ -13,7 +13,7 @@ class GenericIncrementDecrementSelector : public GenericSelector<N, Callback> {
     GenericIncrementDecrementSelector(
         Selectable<N> &selectable, const Callback &callback,
         const AH::IncrementDecrementButtons &buttons, Wrap wrap = Wrap::Wrap)
-        : GenericSelector<N, Callback>{selectable, callback}, buttons(buttons),
+        : GenericSelector<N, Callback> {selectable, callback}, buttons(buttons),
           wrap(wrap) {}
 
     void begin() override {
@@ -71,7 +71,7 @@ class IncrementDecrementSelector : public GenericIncrementDecrementSelector<N> {
     IncrementDecrementSelector(Selectable<N> &selectable,
                                const AH::IncrementDecrementButtons &buttons,
                                Wrap wrap = Wrap::Wrap)
-        : GenericIncrementDecrementSelector<N>{
+        : GenericIncrementDecrementSelector<N> {
               selectable,
               {},
               buttons,

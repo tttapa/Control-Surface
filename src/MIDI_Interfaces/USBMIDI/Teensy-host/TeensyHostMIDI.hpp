@@ -126,29 +126,29 @@ class TeensyHostMIDI : public USBDriver {
             uint32_t index = 0;
             alignas(uint32_t) uint8_t buffer[PacketSize];
         } buffers[NumRxPackets];
-        std::atomic<uint32_t> available{0};
-        std::atomic<uint32_t> read_idx{0};
-        std::atomic<uint32_t> write_idx{0};
-        std::atomic<bool> reading{false};
+        std::atomic<uint32_t> available {0};
+        std::atomic<uint32_t> read_idx {0};
+        std::atomic<uint32_t> write_idx {0};
+        std::atomic<bool> reading {false};
     } reading;
     using rbuffer_t = typename Reading::Buffer;
 
     /// State for writing outgoing USB-MIDI data.
     struct Writing {
         struct Buffer {
-            std::atomic<uint32_t> size{0};
-            std::atomic<bool> ready_to_send{false};
+            std::atomic<uint32_t> size {0};
+            std::atomic<bool> ready_to_send {false};
             alignas(uint32_t) uint8_t buffer[PacketSize];
         } buffers[2];
-        std::atomic<uint32_t> active_writebuffer{0};
-        std::atomic<Buffer *> sending{nullptr};
-        std::atomic<Buffer *> send_timeout{nullptr};
-        microseconds timeout_duration{1'000};
-        microseconds error_timeout_duration{40'000};
-        uint32_t errors{0};
+        std::atomic<uint32_t> active_writebuffer {0};
+        std::atomic<Buffer *> sending {nullptr};
+        std::atomic<Buffer *> send_timeout {nullptr};
+        microseconds timeout_duration {1'000};
+        microseconds error_timeout_duration {40'000};
+        uint32_t errors {0};
     } writing;
     using wbuffer_t = typename Writing::Buffer;
-    USBDriverTimer write_timeout{this};
+    USBDriverTimer write_timeout {this};
 
   protected:
     uint32_t write_impl(const uint32_t *msgs, uint32_t num_msgs,

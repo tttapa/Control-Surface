@@ -52,7 +52,7 @@ class PBSmartPotentiometer
     PBSmartPotentiometer(BankConfig<NumBanks> config, pin_t analogPin,
                          MIDIChannelCable address)
         : SmartMIDIFilteredAnalog<NumBanks, SingleAddress, PitchBendSender<10>>(
-              SingleAddress{config, address}, analogPin, {}) {}
+              SingleAddress {config, address}, analogPin, {}) {}
 };
 
 } // namespace Bankable

@@ -14,7 +14,7 @@ class SerialMIDI_Parser : public MIDI_Parser {
   public:
     SerialMIDI_Parser(bool sysCommonCancelsRunningStatus = true)
         : sysCommonCancelsRunningStatus(sysCommonCancelsRunningStatus) {}
-    
+
     /**
      * @brief   Parse one incoming MIDI message.
      * @param   puller
@@ -59,7 +59,7 @@ class SerialMIDI_Parser : public MIDI_Parser {
     /// for example. The byte cannot be added to the buffer now, so store it to
     /// add it the next time the parser is updated.
     void storeByte(uint8_t midiByte) { storedByte = midiByte; }
-    /// Check whether there's a stored byte. If this is the case, this byte 
+    /// Check whether there's a stored byte. If this is the case, this byte
     /// should be parsed before reading a new byte.
     bool hasStoredByte() const { return storedByte != 0xFF; }
     /// Get the stored byte. Afterwards, @ref hasStoredByte will return false.
@@ -70,7 +70,7 @@ class SerialMIDI_Parser : public MIDI_Parser {
     }
 
   public:
-    /// Clear the running status header for MIDI Channel messages. 
+    /// Clear the running status header for MIDI Channel messages.
     /// Internal method.
     void cancelRunningStatus() { runningHeader = 0; }
 
@@ -81,7 +81,7 @@ class SerialMIDI_Parser : public MIDI_Parser {
     /// a message.
     bool thirdByte = false;
     /// Current header (not necessarily running), contains the header of the
-    /// message that's currently being received. As soon as the message is 
+    /// message that's currently being received. As soon as the message is
     /// complete, it is set to zero.
     uint8_t currentHeader = 0;
     /// Running status header.

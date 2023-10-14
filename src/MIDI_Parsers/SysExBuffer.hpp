@@ -10,7 +10,7 @@ BEGIN_CS_NAMESPACE
  * 
  * @ingroup MIDIParsers
  */
-class SysExBuffer { 
+class SysExBuffer {
   private:
     uint8_t buffer[SYSEX_BUFFER_SIZE];
     uint16_t length = 0;

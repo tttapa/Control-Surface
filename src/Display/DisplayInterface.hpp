@@ -24,9 +24,9 @@ class DisplayInterface : public Print {
     /// Clear the frame buffer or clear the display.
     virtual void clear() = 0;
     /// Draw a custom background.
-    virtual void drawBackground(){};
+    virtual void drawBackground() {}
     /// Write the frame buffer to the display. If your display library writes to
-    /// the display directly, without a display buffer in RAM, you can leave 
+    /// the display directly, without a display buffer in RAM, you can leave
     /// this function empty.
     virtual void display() = 0;
 

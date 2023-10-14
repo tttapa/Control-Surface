@@ -81,7 +81,8 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
     void sendRealTimeImpl(RealTimeMessage);
     /// Low-level function for sending any buffered outgoing MIDI messages.
     /// @todo Implement this in MIDI_Pipe
-    void sendNowImpl() { /* TODO */ }
+    void sendNowImpl() { /* TODO */
+    }
 
   private:
 #if !DISABLE_PIPES
@@ -149,10 +150,10 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
 /// A predefined instance of the Control Surface to use in the Arduino sketches.
 extern Control_Surface_ &Control_Surface;
 #else
-// This is not a clean solution, but it's the only way to get the linker to 
-// optimize away all Control Surface-related code if the `Control_Surface` 
+// This is not a clean solution, but it's the only way to get the linker to
+// optimize away all Control Surface-related code if the `Control_Surface`
 // instance is never used.
-// Even if it isn't used, and even though it's a global, the compiler has to 
+// Even if it isn't used, and even though it's a global, the compiler has to
 // generate the constructor and destructor, which pulls in variables and vtables
 // from throughout the library, using a significant amount of memory.
 // By using a macro here, Control_Surface is only constructed (and destructed)

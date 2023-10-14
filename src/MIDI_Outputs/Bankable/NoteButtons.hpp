@@ -53,7 +53,7 @@ class NoteButtons
                 const Array<AH::Button, NumButtons> &buttons,
                 MIDIAddress baseAddress, RelativeMIDIAddress incrementAddress,
                 uint8_t velocity = 0x7F)
-        : MIDIButtons<SingleAddress, DigitalNoteSender, NumButtons>{
+        : MIDIButtons<SingleAddress, DigitalNoteSender, NumButtons> {
               {config, baseAddress},
               buttons,
               incrementAddress,

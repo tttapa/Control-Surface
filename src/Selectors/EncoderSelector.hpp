@@ -21,9 +21,9 @@ class GenericEncoderSelector : public GenericSelector<N, Callback> {
     GenericEncoderSelector(Selectable<N> &selectable, const Callback &callback,
                            const EncoderSwitchPinList &pins,
                            int8_t pulsesPerStep = 4, Wrap wrap = Wrap::Wrap)
-        : GenericSelector<N, Callback> {selectable, callback}, encoder {pins.A,
-                                                                        pins.B},
-          switchPin(pins.switchPin), pulsesPerStep(pulsesPerStep), wrap(wrap) {}
+        : GenericSelector<N, Callback> {selectable, callback},
+          encoder {pins.A, pins.B}, switchPin(pins.switchPin),
+          pulsesPerStep(pulsesPerStep), wrap(wrap) {}
 
     void begin() override {
         Parent::begin();

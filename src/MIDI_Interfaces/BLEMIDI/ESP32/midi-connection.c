@@ -6,9 +6,9 @@
  * Handling of Bluetooth Low Energy connect and disconnect events.
  */
 
+#include "advertising.h"
 #include "logging.h"
 #include "midi-private.h"
-#include "advertising.h"
 
 #include <string.h> // memcpy
 

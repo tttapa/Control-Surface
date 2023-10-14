@@ -61,7 +61,7 @@ class NoteButtonMatrix
                      MIDIChannelCable channelCN = {Channel_1, Cable_1},
                      uint8_t velocity = 0x7F)
         : MIDIButtonMatrix<MatrixAddress<NumRows, NumCols>, DigitalNoteSender,
-                           NumRows, NumCols>{
+                           NumRows, NumCols> {
               {config, notes, channelCN},
               rowPins,
               colPins,

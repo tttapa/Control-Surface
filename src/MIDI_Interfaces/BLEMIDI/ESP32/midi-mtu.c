@@ -7,8 +7,8 @@
  * BLE.
  */
 
-#include "midi-private.h"
 #include "logging.h"
+#include "midi-private.h"
 
 static midi_mtu_callback_t midi_mtu_callback = NULL;
 static uint16_t midi_mtu = 0;

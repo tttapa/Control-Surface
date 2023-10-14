@@ -6,8 +6,8 @@
  * Sending BLE MIDI notify packets to send MIDI data to the client.
  */
 
-#include "midi-private.h"
 #include "ble2902.h"
+#include "midi-private.h"
 
 bool midi_notify(const uint8_t *data, size_t length) {
     if (midi_get_gatts_if() == ESP_GATT_IF_NONE)

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <stdint.h>
 #include <Settings/NamespaceSettings.hpp>
+#include <stdint.h>
 
 BEGIN_CS_NAMESPACE
 
@@ -110,7 +110,7 @@ constexpr uint8_t Omni_Mode_On                      = 0x7D;
 constexpr uint8_t Mono_Mode_On                      = 0x7E;
 constexpr uint8_t Poly_Mode_On                      = 0x7F;
 
-}
+} // namespace MIDI_CC
 
 /// @}
 

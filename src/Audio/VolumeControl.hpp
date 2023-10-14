@@ -2,9 +2,9 @@
 
 #pragma once
 
+#include <AH/Arduino-Wrapper.h>
 #include <AH/Containers/Updatable.hpp>
 #include <AH/Hardware/FilteredAnalog.hpp>
-#include <AH/Arduino-Wrapper.h>
 #include <Audio.h>
 #include <Def/Def.hpp>
 

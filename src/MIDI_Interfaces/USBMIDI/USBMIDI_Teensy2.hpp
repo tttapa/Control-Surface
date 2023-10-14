@@ -21,7 +21,8 @@ END_CS_NAMESPACE
 
 BEGIN_CS_NAMESPACE
 
-inline Teensy2_USBDeviceMIDIBackend::MIDIUSBPacket_t Teensy2_USBDeviceMIDIBackend::read() {
+inline Teensy2_USBDeviceMIDIBackend::MIDIUSBPacket_t
+Teensy2_USBDeviceMIDIBackend::read() {
     // https://github.com/PaulStoffregen/cores/blob/73ea157600a7082686d9cc48786a73caa7567da9/usb_midi/usb_api.cpp#L195
     uint8_t c, intr_state;
 
@@ -29,7 +30,7 @@ inline Teensy2_USBDeviceMIDIBackend::MIDIUSBPacket_t Teensy2_USBDeviceMIDIBacken
     cli();
     if (!usb_configuration) {
         SREG = intr_state;
-        return MIDIUSBPacket_t{0};
+        return MIDIUSBPacket_t {0};
     }
     UENUM = MIDI_RX_ENDPOINT;
 retry:
@@ -40,7 +41,7 @@ retry:
             goto retry;
         }
         SREG = intr_state;
-        return MIDIUSBPacket_t{0};
+        return MIDIUSBPacket_t {0};
     }
     MIDIUSBPacket_t packet;
     packet.data[0] = UEDATX;
@@ -90,7 +91,9 @@ inline void Teensy2_USBDeviceMIDIBackend::sendNow() {
     //       not sure, and I don't have the right hardware to test it.
 }
 
-inline bool Teensy2_USBDeviceMIDIBackend::preferImmediateSend() { return false; }
+inline bool Teensy2_USBDeviceMIDIBackend::preferImmediateSend() {
+    return false;
+}
 
 END_CS_NAMESPACE
 

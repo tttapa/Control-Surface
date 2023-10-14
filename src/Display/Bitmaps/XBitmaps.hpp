@@ -1,8 +1,8 @@
 #pragma once
 
 #include <AH/Arduino-Wrapper.h>
-#include <stdint.h>
 #include <Settings/SettingsWrapper.hpp>
+#include <stdint.h>
 
 BEGIN_CS_NAMESPACE
 
@@ -10,11 +10,11 @@ BEGIN_CS_NAMESPACE
  * @brief A struct containing X Bitmap width, height and data.
  */
 struct XBitmap {
-  XBitmap(uint16_t width, uint16_t height, const uint8_t bits[])
-      : width(width), height(height), bits(bits) {}
-  uint16_t width;
-  uint16_t height;
-  const uint8_t *bits;
+    XBitmap(uint16_t width, uint16_t height, const uint8_t bits[])
+        : width(width), height(height), bits(bits) {}
+    uint16_t width;
+    uint16_t height;
+    const uint8_t *bits;
 };
 
 /**
@@ -24,8 +24,7 @@ struct XBitmap {
  *          `XBM` folder, and run the python script in `Scripts`.
  * @see     @ref md_pages_xbm
  */
-namespace XBM
-{
+namespace XBM {
 
 // ========================================================================== //
 

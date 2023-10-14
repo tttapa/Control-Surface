@@ -38,7 +38,7 @@ class CCPotentiometer
      */
     CCPotentiometer(OutputBankConfig<> config, pin_t analogPin,
                     MIDIAddress address)
-        : MIDIFilteredAnalog(SingleAddress{config, address}, analogPin, {}) {}
+        : MIDIFilteredAnalog(SingleAddress {config, address}, analogPin, {}) {}
 };
 
 } // namespace Bankable

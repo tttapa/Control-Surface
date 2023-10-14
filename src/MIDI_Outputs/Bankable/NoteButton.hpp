@@ -40,7 +40,7 @@ class NoteButton : public MIDIButton<SingleAddress, DigitalNoteSender> {
      */
     NoteButton(OutputBankConfig<> config, pin_t pin, MIDIAddress address,
                uint8_t velocity = 0x7F)
-        : MIDIButton<SingleAddress, DigitalNoteSender>{
+        : MIDIButton<SingleAddress, DigitalNoteSender> {
               {config, address},
               pin,
               {velocity},

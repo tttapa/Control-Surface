@@ -132,7 +132,8 @@ class DualManyAddresses : public ManyAddresses_Base {
   public:
     DualManyAddresses(const Bank<NumBanks> &bank,
                       const Array2D<MIDIAddress, 2, NumBanks> &addresses)
-        : ManyAddresses_Base(bank), first{addresses[0]}, second{addresses[1]} {}
+        : ManyAddresses_Base(bank), first {addresses[0]},
+          second {addresses[1]} {}
 
     MIDIAddress getFirstActiveAddress() const { return first[getSelection()]; }
     MIDIAddress getSecondActiveAddress() const {
@@ -150,7 +151,7 @@ class ManyMatrixAddresses : public ManyAddresses_Base {
         const Bank<NumBanks> &bank,
         const Array<AddressMatrix<NumRows, NumCols>, NumBanks> &addresses,
         const Array<MIDIChannelCable, NumBanks> &channelCNs)
-        : ManyAddresses_Base(bank), addresses(addresses), 
+        : ManyAddresses_Base(bank), addresses(addresses),
           channelCNs(channelCNs) {}
 
     MIDIAddress getActiveAddress(uint8_t row, uint8_t col) const {

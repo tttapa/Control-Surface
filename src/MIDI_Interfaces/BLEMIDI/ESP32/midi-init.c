@@ -21,9 +21,7 @@
 
 const char *midi_ble_name = "Control Surface (BLE)";
 
-void set_midi_ble_name(const char *name) {
-    midi_ble_name = name;
-}
+void set_midi_ble_name(const char *name) { midi_ble_name = name; }
 
 bool midi_init(void) {
     if (!btStarted() && !btStart())

@@ -66,7 +66,7 @@ class NoteButtonMatrix
         const Array<MIDIChannelCable, NumBanks> &channelCNs,
         uint8_t velocity = 0x7F)
         : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, NumRows, NumCols>,
-                           DigitalNoteSender, NumRows, NumCols>{
+                           DigitalNoteSender, NumRows, NumCols> {
               {bank, notes, channelCNs},
               rowPins,
               colPins,

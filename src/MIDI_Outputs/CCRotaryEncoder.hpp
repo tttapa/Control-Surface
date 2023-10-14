@@ -87,7 +87,8 @@ class BorrowedCCRotaryEncoder
      *          lower speed.
      */
     BorrowedCCRotaryEncoder(AHEncoder &encoder, MIDIAddress address,
-                            int16_t speedMultiply = 1, uint8_t pulsesPerStep = 4)
+                            int16_t speedMultiply = 1,
+                            uint8_t pulsesPerStep = 4)
         : BorrowedMIDIRotaryEncoder<RelativeCCSender>(
               encoder, address, speedMultiply, pulsesPerStep, {}) {}
 };

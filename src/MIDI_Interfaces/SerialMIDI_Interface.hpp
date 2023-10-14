@@ -158,7 +158,7 @@ class HairlessMIDI_Interface : public USBSerialMIDI_Interface {
      * This can be changed in the Settings.hpp file.
      */
     HairlessMIDI_Interface(unsigned long baud = HAIRLESS_BAUD)
-        : USBSerialMIDI_Interface(baud){};
+        : USBSerialMIDI_Interface(baud) {}
 };
 #endif
 

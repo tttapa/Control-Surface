@@ -41,7 +41,7 @@ class NoteButtonLatching
      */
     NoteButtonLatching(OutputBankConfig<> config, pin_t pin,
                        MIDIAddress address, uint8_t velocity = 0x7F)
-        : MIDIButtonLatching<SingleAddress, DigitalNoteSender>{
+        : MIDIButtonLatching<SingleAddress, DigitalNoteSender> {
               {config, address},
               pin,
               {velocity},

@@ -13,7 +13,7 @@ struct MIDIUSB_USBDeviceMIDIBackend {
                  midipacket.byte3}};
     }
     void write(MIDIUSBPacket_t d) {
-        midiEventPacket_t msg{d.data[0], d.data[1], d.data[2], d.data[3]};
+        midiEventPacket_t msg {d.data[0], d.data[1], d.data[2], d.data[3]};
         MidiUSB.sendMIDI(msg);
     }
     void sendNow() { MidiUSB.flush(); }

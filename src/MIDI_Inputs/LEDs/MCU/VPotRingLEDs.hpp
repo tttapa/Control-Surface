@@ -52,9 +52,7 @@ class VPotRingLEDs : public VPotRing, public VPotRingLEDsDriver {
         this->dirty |= newdirty;
     }
 
-    void updateDisplay() {
-        this->displayVPot(this->getState());
-    }
+    void updateDisplay() { this->displayVPot(this->getState()); }
 
   public:
     void begin() override {
@@ -102,8 +100,7 @@ class VPotRingLEDs : public VPotRing<BankSize>, public VPotRingLEDsDriver {
      */
     VPotRingLEDs(BankConfig<BankSize> config, const PinList<11> &leds,
                  uint8_t track, MIDIChannelCable channelCN = Channel_1)
-        : Parent(config, track, channelCN),
-          VPotRingLEDsDriver(leds) {}
+        : Parent(config, track, channelCN), VPotRingLEDsDriver(leds) {}
 
   protected:
     void handleUpdate(typename Matcher::Result match) override {
@@ -113,9 +110,7 @@ class VPotRingLEDs : public VPotRing<BankSize>, public VPotRingLEDsDriver {
         this->dirty |= newdirty;
     }
 
-    void updateDisplay() {
-        this->displayVPot(this->getState());
-    }
+    void updateDisplay() { this->displayVPot(this->getState()); }
 
   public:
     void begin() override {

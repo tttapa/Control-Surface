@@ -68,7 +68,7 @@ class CCButtonMatrix
         const Array<MIDIChannelCable, NumBanks> &channelCNs,
         const DigitalCCSender &sender = {})
         : MIDIButtonMatrix<ManyMatrixAddresses<NumBanks, NumRows, NumCols>,
-                           DigitalCCSender, NumRows, NumCols>{
+                           DigitalCCSender, NumRows, NumCols> {
               {bank, controllers, channelCNs}, rowPins, colPins, sender} {}
 };
 

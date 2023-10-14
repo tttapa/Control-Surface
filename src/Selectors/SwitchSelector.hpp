@@ -50,7 +50,7 @@ class GenericSwitchSelector : public GenericSelector<2, Callback> {
 class SwitchSelector : public GenericSwitchSelector<> {
   public:
     SwitchSelector(Selectable<2> &selectable, const AH::Button &button)
-        : GenericSwitchSelector<>{
+        : GenericSwitchSelector<> {
               selectable,
               {},
               button,

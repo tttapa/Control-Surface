@@ -70,7 +70,7 @@ class MIDIMessageQueue {
     storage_t storage = storage_t(64);
     iter_t write_p = storage.begin();
     iter_t read_p = storage.begin();
-    std::atomic_size_t size{0};
+    std::atomic_size_t size {0};
 
     bool push(MIDIMessageQueueElement &&message);
 

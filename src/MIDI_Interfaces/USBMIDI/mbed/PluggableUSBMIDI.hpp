@@ -100,7 +100,7 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule {
     uint8_t getProductVersion() override { return 16; }
 
   protected:
-    std::atomic<bool> usb_connected{false};
+    std::atomic<bool> usb_connected {false};
 
   public:
     /// USB packet size. Must be a power of two.
@@ -118,27 +118,27 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule {
             uint32_t index = 0;
             alignas(uint32_t) uint8_t buffer[PacketSize];
         } buffers[NumRxPackets];
-        std::atomic<uint32_t> available{0};
-        std::atomic<uint32_t> read_idx{0};
-        std::atomic<uint32_t> write_idx{0};
-        std::atomic<bool> reading{false};
+        std::atomic<uint32_t> available {0};
+        std::atomic<uint32_t> read_idx {0};
+        std::atomic<uint32_t> write_idx {0};
+        std::atomic<bool> reading {false};
     } reading;
     using rbuffer_t = std::remove_reference_t<decltype(reading.buffers[0])>;
 
     /// State for writing outgoing USB-MIDI data.
     struct Writing {
         struct Buffer {
-            std::atomic<uint32_t> size{0};
-            std::atomic<bool> ready_to_send{false};
+            std::atomic<uint32_t> size {0};
+            std::atomic<bool> ready_to_send {false};
             alignas(uint32_t) uint8_t buffer[PacketSize];
         } buffers[2];
-        std::atomic<uint32_t> active_writebuffer{0};
-        std::atomic<Buffer *> sending{nullptr};
-        std::atomic<Buffer *> send_timeout{nullptr};
-        microseconds timeout_duration{1'000};
-        microseconds error_timeout_duration{40'000};
+        std::atomic<uint32_t> active_writebuffer {0};
+        std::atomic<Buffer *> sending {nullptr};
+        std::atomic<Buffer *> send_timeout {nullptr};
+        microseconds timeout_duration {1'000};
+        microseconds error_timeout_duration {40'000};
         mbed::Timeout timeout;
-        uint32_t errors{0};
+        uint32_t errors {0};
     } writing;
     using wbuffer_t = std::remove_reference_t<decltype(writing.buffers[0])>;
 

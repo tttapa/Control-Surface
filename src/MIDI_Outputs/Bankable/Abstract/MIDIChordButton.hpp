@@ -43,7 +43,7 @@ class MIDIChordButton : public MIDIOutputElement {
     template <uint8_t N>
     MIDIChordButton(OutputBankConfig<> config, pin_t pin, MIDIAddress address,
                     Chord<N> chord, const Sender &sender)
-        : address{config, address}, button(pin),
+        : address {config, address}, button(pin),
           newChord(AH::make_unique<Chord<N>>(std::move(chord))),
           sender(sender) {}
 

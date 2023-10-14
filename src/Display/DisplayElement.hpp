@@ -28,7 +28,7 @@ class DisplayElement : public DoublyLinkable<DisplayElement> {
     /// @name Enabling and disabling display elements
     /// @{
 
-    /// Enable this display element: insert it into the linked list of 
+    /// Enable this display element: insert it into the linked list of
     /// instances, so it gets drawn to the display
     void enable() {
         if (isEnabled()) {
@@ -54,9 +54,7 @@ class DisplayElement : public DoublyLinkable<DisplayElement> {
      * @note    Assumes that the element is not added to a different linked 
      *          list by the user.
      */
-    bool isEnabled() const {
-        return elements.couldContain(this);
-    }
+    bool isEnabled() const { return elements.couldContain(this); }
 
     /// @copydoc DisplayElement::enable
     static void enable(DisplayElement *element) { element->enable(); }

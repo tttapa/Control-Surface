@@ -280,7 +280,7 @@ bool PluggableUSBMIDI::send_now_impl_nonblock(uint32_t active_idx) {
     writing.active_writebuffer = !active_idx;
 
     // Get the size of the buffer to send and atomically set it to reserved.
-    // This buffer cannot be sent because writing.sending == nullptr, so no 
+    // This buffer cannot be sent because writing.sending == nullptr, so no
     // previous transmission was in progress that could have started sending
     // this buffer from an ISR.
     // Similarly, the timeout callback couldn't have started sending it either

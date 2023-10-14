@@ -7,8 +7,8 @@
 #include <Def/Def.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
-#include "MIDI_MessageTypes.hpp"
 #include "MIDIReadEvent.hpp"
+#include "MIDI_MessageTypes.hpp"
 
 BEGIN_CS_NAMESPACE
 

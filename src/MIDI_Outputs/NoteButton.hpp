@@ -33,7 +33,7 @@ class NoteButton : public MIDIButton<DigitalNoteSender> {
      *          The velocity of the MIDI Note events.
      */
     NoteButton(pin_t pin, MIDIAddress address, uint8_t velocity = 0x7F)
-        : MIDIButton{
+        : MIDIButton {
               pin,
               address,
               {velocity},

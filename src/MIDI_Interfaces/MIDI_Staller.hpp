@@ -3,9 +3,9 @@
 #include <Settings/SettingsWrapper.hpp>
 #if !DISABLE_PIPES
 
+#include <AH/STL/utility> // std::forward
 #include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
-#include <AH/STL/utility> // std::forward
 
 AH_DIAGNOSTIC_WERROR()
 
@@ -33,7 +33,7 @@ template <class Callback>
 auto makeMIDIStaller(Callback &&callback) -> MIDIStaller * {
 
     struct AutoCleanupMIDIStaller : MIDIStaller {
-        AutoCleanupMIDIStaller(Callback &&callback) 
+        AutoCleanupMIDIStaller(Callback &&callback)
             : callback(std::forward<Callback>(callback)) {}
 
         void handleStall() override {

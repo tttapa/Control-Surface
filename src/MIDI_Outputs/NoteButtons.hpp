@@ -45,7 +45,7 @@ class NoteButtons : public MIDIButtons<DigitalNoteSender, NumButtons> {
     NoteButtons(const Array<AH::Button, NumButtons> &buttons,
                 MIDIAddress baseAddress, RelativeMIDIAddress incrementAddress,
                 uint8_t velocity = 0x7F)
-        : MIDIButtons<DigitalNoteSender, NumButtons>{
+        : MIDIButtons<DigitalNoteSender, NumButtons> {
               buttons,
               baseAddress,
               incrementAddress,

@@ -52,9 +52,9 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
   public:
     /// @param  offset
     ///         The text sent over MIDI is 112 characters long, by changing the
-    ///         offset within this text and the length of the text, we can 
-    ///         listen to just a section of the text. E.g. `offset = 56` and 
-    ///         `BufferSize = 56` will listen to just the second line of the 
+    ///         offset within this text and the length of the text, we can
+    ///         listen to just a section of the text. E.g. `offset = 56` and
+    ///         `BufferSize = 56` will listen to just the second line of the
     ///         LCD display. The default is `offset = 0` and `BufferSize = 112`,
     ///         i.e. listening to the entire display.
     /// @param  cable
@@ -75,9 +75,9 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
             return false;
 
         // We can't handle chunked SysEx data (yet), and it wouldn't make a ton
-        // of sense, since the default SysEx buffer size is the same size as the 
+        // of sense, since the default SysEx buffer size is the same size as the
         // SysEx message we expect, so it shouldn't arrive in chunks.
-        if (!midimsg.isCompleteMessage()) 
+        if (!midimsg.isCompleteMessage())
             return false;
 
         // Format:

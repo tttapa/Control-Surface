@@ -24,7 +24,9 @@ class Chord : public IChord {
         return {cat(this->getOffsets(), rhs.getOffsets())};
     }
 
-    Chord<N + 1> operator+(int8_t rhs) const { return *this + Chord<1>{{rhs}}; }
+    Chord<N + 1> operator+(int8_t rhs) const {
+        return *this + Chord<1> {{rhs}};
+    }
 
     const Array<int8_t, N> getOffsets() const { return offsets; }
 

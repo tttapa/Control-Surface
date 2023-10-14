@@ -6,9 +6,9 @@
  * Public MIDI over Bluetooth Low Energy API.
  */
 
-#include <stdint.h>
-#include <stddef.h>
 #include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -39,7 +39,7 @@ bool midi_notify(const uint8_t *data, size_t len);
 /// Set the name of the BLE device. Must be set before calling @ref midi_init().
 void set_midi_ble_name(const char *name);
 
-/// Initialize the Bluetooth stack and register the MIDI BLE application with 
+/// Initialize the Bluetooth stack and register the MIDI BLE application with
 /// the Bluedroid driver.
 bool midi_init();
 /// Cleanup the MIDI BLE application and de-initialize the Bluetooth stack.

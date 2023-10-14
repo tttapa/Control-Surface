@@ -44,7 +44,7 @@ class BresenhamLine {
     }
 
     BresenhamLine(Pixel start, float angle)
-        : BresenhamLine{
+        : BresenhamLine {
               start,
               BresenhamLine::cos(angle),
               BresenhamLine::sin(angle),

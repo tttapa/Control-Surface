@@ -33,8 +33,7 @@ class MIDIButtonLatched : public MIDIOutputElement {
      * @param   sender
      *          The MIDI sender to use.
      */
-    MIDIButtonLatched(BankAddress bankAddress, pin_t pin,
-                      const Sender &sender)
+    MIDIButtonLatched(BankAddress bankAddress, pin_t pin, const Sender &sender)
         : address(bankAddress), button(pin), sender(sender) {}
 
   public:

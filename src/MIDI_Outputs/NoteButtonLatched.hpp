@@ -36,7 +36,7 @@ class NoteButtonLatched : public MIDIButtonLatched<DigitalNoteSender> {
      *          The velocity of the MIDI Note events.
      */
     NoteButtonLatched(pin_t pin, MIDIAddress address, uint8_t velocity = 0x7F)
-        : MIDIButtonLatched{
+        : MIDIButtonLatched {
               pin,
               address,
               {velocity},

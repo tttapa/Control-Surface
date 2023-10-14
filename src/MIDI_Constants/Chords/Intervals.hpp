@@ -18,4 +18,4 @@ constexpr int8_t m7 = 10; ///< Minor seventh
 constexpr int8_t M7 = 11; ///< Major seventh
 constexpr int8_t P8 = 12; ///< Perfect octave
 
-}
+} // namespace Intervals

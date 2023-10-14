@@ -100,11 +100,11 @@ class BluetoothMIDI_Interface : public MIDI_Interface {
 
   private:
     /// The minimum MTU of all connected clients.
-    std::atomic_uint_fast16_t min_mtu{23};
+    std::atomic_uint_fast16_t min_mtu {23};
     /// Override the minimum MTU (0 means don't override, nonzero overrides if
     /// it's smaller than the minimum MTU of the clients).
     /// @see    @ref forceMinMTU()
-    std::atomic_uint_fast16_t force_min_mtu{0};
+    std::atomic_uint_fast16_t force_min_mtu {0};
 
     /// Set the maximum transmission unit of the Bluetooth link. Used to compute
     /// the MIDI BLE packet size.
@@ -121,11 +121,11 @@ class BluetoothMIDI_Interface : public MIDI_Interface {
     /// Only one active instance.
     static BluetoothMIDI_Interface *instance;
     /// MIDI Parser for incoming data.
-    SerialMIDI_Parser parser{false};
+    SerialMIDI_Parser parser {false};
     /// Builds outgoing MIDI BLE packets.
     BLEMIDIPacketBuilder packetbuilder;
     /// Queue for incoming MIDI messages.
-    MIDIMessageQueue queue{64};
+    MIDIMessageQueue queue {64};
     /// Incoming message that can be from retrieved using the
     /// `getChannelMessage()`, `getSysCommonMessage()`, `getRealTimeMessage()`
     /// and `getSysExMessage()` methods.
@@ -145,12 +145,12 @@ class BluetoothMIDI_Interface : public MIDI_Interface {
     /// Background thread that sends the actual MIDI BLE packets.
     std::thread send_thread;
     /// Flag to stop the background thread.
-    std::atomic_bool stop_sending{false};
+    std::atomic_bool stop_sending {false};
     /// Flag to tell the sender thread to send the packet immediately.
     bool flushnow = false;
     /// Timeout before the sender thread sends a packet.
     /// @see    @ref setTimeout()
-    std::chrono::milliseconds timeout{10};
+    std::chrono::milliseconds timeout {10};
 
   private:
     /// Launch a thread that sends the BLE packets in the background.
@@ -170,7 +170,7 @@ class BluetoothMIDI_Interface : public MIDI_Interface {
     void flushImpl(lock_t &lock);
 
 #if !defined(ARDUINO) && !defined(DOXYGEN)
-    public:
+  public:
 #endif
     /// Tell the background BLE sender thread to stop gracefully, and join it.
     void stopSendingThread();

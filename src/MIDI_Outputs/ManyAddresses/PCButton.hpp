@@ -44,7 +44,7 @@ class PCButton : public Bankable::MIDIButton<ManyAddresses<NumBanks>,
      */
     PCButton(const Bank<NumBanks> &bank, pin_t pin,
              const Array<MIDIAddress, NumBanks> &addresses)
-        : MIDIButton<ManyAddresses<NumBanks>, ProgramChangeSender>{
+        : MIDIButton<ManyAddresses<NumBanks>, ProgramChangeSender> {
               {bank, addresses}, pin, {}} {}
 };
 

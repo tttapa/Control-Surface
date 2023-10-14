@@ -50,7 +50,7 @@ class CCSmartPotentiometer
     CCSmartPotentiometer(BankConfig<NumBanks> config, pin_t analogPin,
                          MIDIAddress address)
         : SmartMIDIFilteredAnalog<NumBanks, SingleAddress, ContinuousCCSender>(
-              SingleAddress{config, address}, analogPin, {}) {}
+              SingleAddress {config, address}, analogPin, {}) {}
 };
 
 } // namespace Bankable

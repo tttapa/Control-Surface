@@ -74,7 +74,7 @@ class EncoderSelectorLEDs
                         const EncoderSwitchPinList &pins,
                         const PinList<N> &ledPins, int8_t pulsesPerStep = 4,
                         Wrap wrap = Wrap::Wrap)
-        : GenericEncoderSelector<N, SelectorLEDsCallback<N>>{
+        : GenericEncoderSelector<N, SelectorLEDsCallback<N>> {
               selectable, {ledPins}, pins, pulsesPerStep, wrap,
           } {}
 };
@@ -101,7 +101,7 @@ class IncrementDecrementSelectorLEDs
                                    const AH::IncrementDecrementButtons &buttons,
                                    const PinList<N> &ledPins,
                                    Wrap wrap = Wrap::Wrap)
-        : GenericIncrementDecrementSelector<N, SelectorLEDsCallback<N>>{
+        : GenericIncrementDecrementSelector<N, SelectorLEDsCallback<N>> {
               selectable,
               {ledPins},
               buttons,
@@ -129,7 +129,7 @@ class IncrementSelectorLEDs
   public:
     IncrementSelectorLEDs(Selectable<N> &selectable, const AH::Button &button,
                           const PinList<N> &ledPins)
-        : GenericIncrementSelector<N, SelectorLEDsCallback<N>>{
+        : GenericIncrementSelector<N, SelectorLEDsCallback<N>> {
               selectable, {ledPins}, button} {}
 };
 
@@ -154,7 +154,7 @@ class ManyButtonsSelectorLEDs
     ManyButtonsSelectorLEDs(Selectable<N> &selectable,
                             const PinList<N> &buttonPins,
                             const PinList<N> &ledPins)
-        : GenericManyButtonsSelector<N, SelectorLEDsCallback<N>>{
+        : GenericManyButtonsSelector<N, SelectorLEDsCallback<N>> {
               selectable,
               {ledPins},
               buttonPins,
@@ -182,7 +182,7 @@ class ProgramChangeSelectorLEDs
     ProgramChangeSelectorLEDs(Selectable<N> &selectable,
                               MIDIChannelCable address,
                               const PinList<N> &ledPins)
-        : GenericProgramChangeSelector<N, SelectorLEDsCallback<N>>{
+        : GenericProgramChangeSelector<N, SelectorLEDsCallback<N>> {
               selectable,
               {ledPins},
               address,
@@ -208,7 +208,7 @@ class SwitchSelectorLED
   public:
     SwitchSelectorLED(Selectable<2> &selectable, const AH::Button &button,
                       pin_t ledPin)
-        : GenericSwitchSelector<SelectorSingleLEDCallback>{
+        : GenericSwitchSelector<SelectorSingleLEDCallback> {
               selectable,
               {ledPin},
               button,

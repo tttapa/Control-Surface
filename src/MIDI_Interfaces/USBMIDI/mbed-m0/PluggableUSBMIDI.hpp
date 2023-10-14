@@ -100,7 +100,7 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule {
     uint8_t getProductVersion() override { return 16; }
 
   protected:
-    std::atomic<bool> usb_connected{false};
+    std::atomic<bool> usb_connected {false};
 
   public:
     /// USB packet size. Must be a power of two.
@@ -118,10 +118,10 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule {
             uint32_t index = 0;
             alignas(uint32_t) uint8_t buffer[PacketSize];
         } buffers[NumRxPackets];
-        uint32_t available{0};
-        uint32_t read_idx{0};
-        uint32_t write_idx{0};
-        bool reading{false};
+        uint32_t available {0};
+        uint32_t read_idx {0};
+        uint32_t write_idx {0};
+        bool reading {false};
     } reading;
     using rbuffer_t = Reading::Buffer;
 
@@ -129,27 +129,27 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule {
     struct Writing {
         struct Buffer {
             /// How many bytes are in the buffer.
-            uint32_t size{0};
+            uint32_t size {0};
             /// Indicates that this buffer can be sent as soon as the previous
             /// one has been sent.
             /// This flag is changed from false to true when the buffer is
-            /// scheduled to be sent, either because it is full or because the 
+            /// scheduled to be sent, either because it is full or because the
             /// timeout was triggered. If the flag is true, no further efforts
             /// should be made to send it. It is cleared in the USB ISR, after
             /// the buffer has actually been sent.
-            bool ready_to_send{false};
+            bool ready_to_send {false};
             alignas(uint32_t) uint8_t buffer[PacketSize];
         } buffers[2];
         /// The index of the buffer that is currently being written to.
-        uint32_t active_writebuffer{0};
+        uint32_t active_writebuffer {0};
         /// Buffer that is being sent.
-        Buffer *sending{nullptr};
+        Buffer *sending {nullptr};
         /// Buffer to be sent in the timeout callback
-        Buffer *send_timeout{nullptr};
-        microseconds timeout_duration{1'000};
-        microseconds error_timeout_duration{40'000};
+        Buffer *send_timeout {nullptr};
+        microseconds timeout_duration {1'000};
+        microseconds error_timeout_duration {40'000};
         mbed::Timeout timeout;
-        uint32_t errors{0};
+        uint32_t errors {0};
     } writing;
     using wbuffer_t = Writing::Buffer;
 

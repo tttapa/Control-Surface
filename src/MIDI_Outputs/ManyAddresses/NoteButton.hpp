@@ -48,7 +48,7 @@ class NoteButton
     NoteButton(const Bank<NumBanks> &bank, pin_t pin,
                const Array<MIDIAddress, NumBanks> &addresses,
                uint8_t velocity = 0x7F)
-        : MIDIButton<ManyAddresses<NumBanks>, DigitalNoteSender>{
+        : MIDIButton<ManyAddresses<NumBanks>, DigitalNoteSender> {
               {bank, addresses}, pin, {velocity}} {}
 };
 

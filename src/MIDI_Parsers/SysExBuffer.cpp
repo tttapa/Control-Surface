@@ -8,9 +8,7 @@ void SysExBuffer::start() {
     receiving = true;
 }
 
-void SysExBuffer::end() {
-    receiving = false;
-}
+void SysExBuffer::end() { receiving = false; }
 
 void SysExBuffer::add(uint8_t data) {
     buffer[length] = data;

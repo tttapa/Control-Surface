@@ -49,7 +49,7 @@ class CCButton
     CCButton(const Bank<NumBanks> &bank, pin_t pin,
              const Array<MIDIAddress, NumBanks> &addresses,
              const DigitalCCSender &sender = {})
-        : MIDIButton<ManyAddresses<NumBanks>, DigitalCCSender>{
+        : MIDIButton<ManyAddresses<NumBanks>, DigitalCCSender> {
               {bank, addresses}, pin, sender} {}
 };
 

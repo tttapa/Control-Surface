@@ -344,7 +344,7 @@ void MIDI_Pipe::handleStallers() const {
     if (sink_staller == eternal_stall || through_staller == eternal_stall)
         FATAL_ERROR(F("Unable to unstall pipe (eternal stall)"), 0x4827);
     uint8_t iterations = 10;
-    while(isStalled() && iterations-- > 0) {
+    while (isStalled() && iterations-- > 0) {
         if (sink_staller)
             sink_staller->handleStall();
         if (through_staller)
