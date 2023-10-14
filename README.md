@@ -24,7 +24,6 @@ such as motorized faders.
 > <span class="mono">¶</span>&emsp;[Example usage](#example-usage)  
 > <span class="mono">¶</span>&emsp;[Getting started](#getting-started)  
 > <span class="mono">¶</span>&emsp;[Documentation](#documentation)  
-> <span class="mono">¶</span>&emsp;[Work in progress](#work-in-progress)  
 > <span class="mono">¶</span>&emsp;[Supported boards](#supported-boards)  
 > <span class="mono">¶</span>&emsp;[Information for developers](#information-for-developers)  
 > <span class="mono">¶</span>&emsp;[Change log and updating](#change-log-and-updating)  
@@ -89,12 +88,10 @@ implemented.
 
 ### Bank support
 
-All controls can be arranged in **banks**: for example, if you have only 4 
-physical faders, you can make them bankable, so they can be used to control 
-the volume of many different tracks, by selecting the corresponding bank.
-
-Selecting a bank can be done using push buttons, rotary encoders, etc.
-
+All controls can be arranged in **banks**: for example, if you have only 4
+physical faders, you can make them bankable, so they can be used to control
+the volume of many more different tracks. Changing banks can be done using push
+buttons, rotary encoders, etc.  
 Apart from banks and bank selectors, you can also add **transposers** to change 
 the key of your notes, for example.
 
@@ -224,14 +221,6 @@ You can find an answer to some frequently asked questions on the
 [**FAQ**](https://tttapa.github.io/Control-Surface-doc/Doxygen/da/dc1/FAQ.html)
 page.
 
-<a name="work-in-progress"></a>
-
-## Work in progress
-
-- Adding more tests (currently at over 560 unit tests)
-- Adding more examples and adding comments to existing examples
-- Finishing the documentation
-
 <a name="supported-boards"></a>
 
 ## Supported boards
@@ -285,6 +274,11 @@ tests and generating documentation, a style guide, etc.
 
 ### 2.x
 
+- ([ba7f42e](https://github.com/tttapa/Control-Surface/commit/9c4cdd452990c470ee429b3121bdeb178ba7f42e))  
+   More upper case constants and enumerators have been deprecated. For example,
+   `ControlChange` should be used instead of `CONTROL_CHANGE`. If you continue
+   using the old versions, you will get a compiler warning. These old versions
+   will be removed in a future version of Control Surface.
 - ([aaf6eea](https://github.com/tttapa/Control-Surface/commit/aaf6eea2206c6e3b6a2004e0520100342945983f))  
    The upper case `CHANNEL_x` and `CABLE_x` constants have been deprecated in
    favor of the title case versions `Channel_x` and `Cable_x`. This was done to
