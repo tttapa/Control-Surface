@@ -57,7 +57,6 @@ CCAbsoluteEncoder enc {
 //      127,       // large multiplier because Pitch Bend has high resolution
 //    };
 
-
 void setup() {
   Control_Surface.begin(); // Initialize Control Surface
 }

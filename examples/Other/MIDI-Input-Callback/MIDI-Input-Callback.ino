@@ -49,7 +49,7 @@ bool sysExMessageCallback(SysExMessage se) {
 }
 
 bool sysCommonMessageCallback(SysCommonMessage sc) {
-  Serial << F("System Common message: ") << hex                   //
+  Serial << F("System Common message: ") << hex             //
          << sc.header << ' ' << sc.data1 << ' ' << sc.data2 //
          << dec << F(" on cable ") << sc.cable.getOneBased() << endl;
   return true; // Return true to indicate that handling is done,

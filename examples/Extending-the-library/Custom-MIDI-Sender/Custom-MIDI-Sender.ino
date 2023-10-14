@@ -78,10 +78,10 @@ struct CustomNoteButton : MIDIButton<CustomNoteSender> {
 // The four arguments match the ones of the CustomNoteButton
 // constructor we wrote a couple of lines back.
 CustomNoteButton button {
-  5,              // button pin
+  5,                // button pin
   MIDI_Notes::C(4), // MIDI address
-  0x40,           // on velocity
-  0x10,           // off velocity
+  0x40,             // on velocity
+  0x10,             // off velocity
 };
 
 void setup() {

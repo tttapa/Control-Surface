@@ -61,7 +61,6 @@
 
 #include <AH/Hardware/MCP23017Encoders.hpp>
 
-
 // Type for the MCP23017 encoders (translates encoder pulses to position)
 using WireType = decltype(Wire);     // The type of I²C driver to use
 using EncoderPositionType = uint8_t; // The type for saving encoder positions

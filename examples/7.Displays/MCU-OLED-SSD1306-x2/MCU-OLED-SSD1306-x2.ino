@@ -102,9 +102,9 @@ Adafruit_SSD1306 ssd1306Display_R {
 // ========================================================================== //
 
 #if defined(ADAFRUIT_SSD1306_HAS_SETBUFFER) && ADAFRUIT_SSD1306_HAS_SETBUFFER
-  // We'll use a static buffer to avoid dynamic memory usage, and to allow
-  // multiple displays to reuse one single buffer.
-  static uint8_t buffer[(SCREEN_WIDTH * SCREEN_HEIGHT + 7) / 8];
+// We'll use a static buffer to avoid dynamic memory usage, and to allow
+// multiple displays to reuse one single buffer.
+static uint8_t buffer[(SCREEN_WIDTH * SCREEN_HEIGHT + 7) / 8];
 #endif
 
 // Implement the display interface, specifically, the begin and drawBackground

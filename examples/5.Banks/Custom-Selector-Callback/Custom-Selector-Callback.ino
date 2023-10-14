@@ -45,57 +45,57 @@
 
 // Custom callback to handle output for a selector.
 class MySelectorCallback {
-  public:
-    // Constructor
-    MySelectorCallback(pin_t redLED, pin_t greenLED, pin_t blueLED)
-      : redLED(redLED), greenLED(greenLED), blueLED(blueLED) {}
+ public:
+  // Constructor
+  MySelectorCallback(pin_t redLED, pin_t greenLED, pin_t blueLED)
+    : redLED(redLED), greenLED(greenLED), blueLED(blueLED) {}
 
-    // Begin function is called once by Control Surface.
-    // Use it to initialize everything.
-    void begin() {
-      pinMode(redLED, OUTPUT);
-      pinMode(greenLED, OUTPUT);
-      pinMode(blueLED, OUTPUT);
-      show(0);
+  // Begin function is called once by Control Surface.
+  // Use it to initialize everything.
+  void begin() {
+    pinMode(redLED, OUTPUT);
+    pinMode(greenLED, OUTPUT);
+    pinMode(blueLED, OUTPUT);
+    show(0);
+  }
+
+  // Update function is called continuously by Control Surface.
+  // Use it to implement things like fading, blinking ...
+  void update() {}
+
+  // Update function with arguments is called when the setting
+  // changes.
+  // Use it to update the LEDs.
+  void update(setting_t oldSetting, setting_t newSetting) {
+    (void)oldSetting; // unused in this example
+    show(newSetting);
+  }
+
+ private:
+  // Show the color of the given setting.
+  void show(setting_t setting) {
+    uint8_t color = getColor(setting);
+    digitalWrite(redLED, color & 0b001 ? HIGH : LOW);
+    digitalWrite(greenLED, color & 0b010 ? HIGH : LOW);
+    digitalWrite(blueLED, color & 0b100 ? HIGH : LOW);
+  }
+
+  // Convert the given setting to a 3-bit RGB color value.
+  static uint8_t getColor(setting_t setting) {
+    switch (setting) {
+      case 0: return 0b001;
+      case 1: return 0b011;
+      case 2: return 0b010;
+      case 3: return 0b110;
+      case 4: return 0b100;
+      case 5: return 0b101;
+      default: return 0b000;
     }
+  }
 
-    // Update function is called continuously by Control Surface.
-    // Use it to implement things like fading, blinking ...
-    void update() {}
-
-    // Update function with arguments is called when the setting
-    // changes.
-    // Use it to update the LEDs.
-    void update(setting_t oldSetting, setting_t newSetting) {
-      (void) oldSetting; // unused in this example
-      show(newSetting);
-    }
-
-  private:
-    // Show the color of the given setting.
-    void show(setting_t setting) {
-      uint8_t color = getColor(setting);
-      digitalWrite(redLED, color & 0b001 ? HIGH : LOW);
-      digitalWrite(greenLED, color & 0b010 ? HIGH : LOW);
-      digitalWrite(blueLED, color & 0b100 ? HIGH : LOW);
-    }
-
-    // Convert the given setting to a 3-bit RGB color value.
-    static uint8_t getColor(setting_t setting) {
-      switch (setting) {
-        case 0: return 0b001;
-        case 1: return 0b011;
-        case 2: return 0b010;
-        case 3: return 0b110;
-        case 4: return 0b100;
-        case 5: return 0b101;
-        default: return 0b000;
-      }
-    }
-
-  private:
-    // Member variables to remember the pin numbers of the LEDs.
-    pin_t redLED, greenLED, blueLED;
+ private:
+  // Member variables to remember the pin numbers of the LEDs.
+  pin_t redLED, greenLED, blueLED;
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -108,7 +108,7 @@ Bank<6> bank = 1;
 // Create a selector that uses our custom callback, to control the bank.
 GenericIncrementDecrementSelector<6, MySelectorCallback> selector {
   bank,         // bank to manage
-  {10, 11, 12}, // red, green, blue LED pins 
+  {10, 11, 12}, // red, green, blue LED pins
                 // (this is the MySelectorCallback constructor defined above)
   {2, 3},       // incr/decr button pins
   Wrap::Wrap,   // wrap around when reaching setting 6

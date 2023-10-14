@@ -30,6 +30,7 @@ using std::is_same;
 using AH::operator<<;
 using AH::endl;
 
+// clang-format off
 #define TEST_CMATH_FUNCTION(Fun)                                               \
   static_assert(is_same<decltype(Fun((float)1)), float>::value,                \
                 "cmath error " #Fun "(float)");                                \
@@ -74,6 +75,7 @@ using AH::endl;
   Serial.println(Fun((float)f(), (float)f()));                                 \
   Serial.println(Fun((double)f(), (double)f()));                               \
   Serial.println((double)Fun((long double)f(), (long double)f()));
+// clang-format on
 
 void setup() {
   Serial.begin(115200);

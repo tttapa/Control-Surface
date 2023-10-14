@@ -33,7 +33,7 @@ USBDebugMIDI_Interface mididbg;
 BidirectionalMIDI_Pipe mpipe;
 
 void setup() {
-  // Create a bidirectional route between the interfaces: 
+  // Create a bidirectional route between the interfaces:
   // all input to one interface is sent to the output of the other
   midiusb | mpipe | mididbg;
   // Initialize all MIDI interfaces

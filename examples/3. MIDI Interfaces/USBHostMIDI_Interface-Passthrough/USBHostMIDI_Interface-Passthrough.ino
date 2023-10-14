@@ -32,12 +32,12 @@
 
 // Create the ports for USB devices plugged into Teensy's 2nd USB port (via hubs)
 USBHost usb;
-USBHub hub{usb};
+USBHub hub {usb};
 
 // USB Device MIDI (primary USB port)
 USBMIDI_Interface devicemidi;
 // USB Host MIDI (second USB port)
-USBHostMIDI_Interface hostmidi{usb};
+USBHostMIDI_Interface hostmidi {usb};
 // Alternatively, use `USBHostMIDI_Interface_BigBuffer`
 
 // Pipe to route MIDI data between two USB ports

@@ -78,8 +78,8 @@ constexpr uint32_t SPI_Frequency = SPI_MAX_SPEED;
 
 // Instantiate the displays
 Adafruit_SSD1306 ssd1306Display {SCREEN_WIDTH, SCREEN_HEIGHT, &SPI,
-                                   OLED_DC,      OLED_reset,    OLED_CS,
-                                   SPI_Frequency};
+                                 OLED_DC,      OLED_reset,    OLED_CS,
+                                 SPI_Frequency};
 
 // --------------------------- Display interface ---------------------------- //
 // ========================================================================== //
