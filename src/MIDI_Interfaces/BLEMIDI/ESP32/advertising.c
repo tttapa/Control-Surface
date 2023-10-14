@@ -1,4 +1,6 @@
 #ifdef ESP32
+#include <sdkconfig.h>
+#if CONFIG_BT_BLE_ENABLED
 
 #include "logging.h"
 #include <esp_gap_ble_api.h>
@@ -111,4 +113,5 @@ bool advertising_handle_config_response_complete_event(
     return true;
 }
 
+#endif
 #endif

@@ -1,4 +1,6 @@
 #ifdef ESP32
+#include <sdkconfig.h>
+#if CONFIG_BT_BLE_ENABLED
 
 #include "advertising.h"
 #include "esp_enums2string.h"
@@ -80,4 +82,5 @@ void gap_event_handler(esp_gap_ble_cb_event_t event,
     }
 }
 
+#endif
 #endif

@@ -1,4 +1,6 @@
 #ifdef ESP32
+#include <sdkconfig.h>
+#if CONFIG_BT_BLE_ENABLED
 
 #include "esp_enums2string.h"
 
@@ -122,4 +124,5 @@ const char *esp_gap_ble_cb_event_to_string(esp_gap_ble_cb_event_t event) {
     }
 }
 
+#endif
 #endif

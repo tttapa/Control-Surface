@@ -1,4 +1,6 @@
 #ifdef ESP32
+#include <sdkconfig.h>
+#if CONFIG_BT_BLE_ENABLED
 
 /** 
  * @file
@@ -22,4 +24,5 @@ bool midi_notify(const uint8_t *data, size_t length) {
     return ret == ESP_OK;
 }
 
+#endif
 #endif

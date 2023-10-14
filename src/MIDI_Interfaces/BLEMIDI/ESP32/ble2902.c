@@ -1,4 +1,6 @@
 #ifdef ESP32
+#include <sdkconfig.h>
+#if CONFIG_BT_BLE_ENABLED
 
 #include "ble2902.h"
 #include "logging.h"
@@ -45,4 +47,5 @@ bool ble2902_indications_enabled(uint16_t handle) {
     return ble2902_get_value(handle) & 0x0002;
 }
 
+#endif
 #endif

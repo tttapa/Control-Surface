@@ -1,4 +1,6 @@
 #ifdef ESP32
+#include <sdkconfig.h>
+#if CONFIG_BT_BLE_ENABLED
 
 /** 
  * @file
@@ -26,4 +28,5 @@ void midi_handle_read_event(esp_gatt_if_t gatts_if,
                                 param->read.trans_id, ESP_GATT_OK, &rsp);
 }
 
+#endif
 #endif

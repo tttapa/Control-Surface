@@ -1,4 +1,6 @@
 #ifdef ESP32
+#include <sdkconfig.h>
+#if CONFIG_BT_BLE_ENABLED
 
 /**
  * @file
@@ -53,4 +55,5 @@ void midi_handle_disconnect_event(esp_gatt_if_t gatts_if,
     advertising_config();
 }
 
+#endif
 #endif

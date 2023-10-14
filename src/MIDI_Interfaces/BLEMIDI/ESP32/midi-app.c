@@ -1,4 +1,6 @@
 #ifdef ESP32
+#include <sdkconfig.h>
+#if CONFIG_BT_BLE_ENABLED
 
 /** 
  * @file
@@ -186,4 +188,5 @@ uint16_t midi_get_descriptor_handle(void) {
 uint16_t midi_get_app_id(void) { return 0x55; }
 uint16_t midi_get_gatts_if(void) { return midi_gatts_if; }
 
+#endif
 #endif

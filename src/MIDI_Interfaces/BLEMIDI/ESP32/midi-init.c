@@ -1,4 +1,6 @@
 #ifdef ESP32
+#include <sdkconfig.h>
+#if CONFIG_BT_BLE_ENABLED
 
 /**
  * @file
@@ -120,4 +122,5 @@ bool midi_init(void) {
 
 bool midi_deinit(void) { assert(!"Not implemented"); }
 
+#endif
 #endif
