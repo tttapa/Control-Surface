@@ -151,14 +151,13 @@ struct BankableVPotMatcher : public BankableTwoByteMIDIMatcher<BankSize> {
  * 
  * @ingroup MIDIInputElements
  */
-class VPotRing
-    : public MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
-                                      VPotMatcher>,
-      public Interfaces::MCU::IVPot {
+class VPotRing : public MatchingMIDIInputElement<MIDIMessageType::ControlChange,
+                                                 VPotMatcher>,
+                 public Interfaces::MCU::IVPot {
   public:
     using Matcher = VPotMatcher;
-    using Parent 
-        = MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE, Matcher>;
+    using Parent =
+        MatchingMIDIInputElement<MIDIMessageType::ControlChange, Matcher>;
 
     /**
      * @brief   Constructor.
@@ -235,14 +234,14 @@ namespace Bankable {
  */
 template <uint8_t BankSize>
 class VPotRing
-    : public BankableMatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
+    : public BankableMatchingMIDIInputElement<MIDIMessageType::ControlChange,
                                               BankableVPotMatcher<BankSize>>,
       public Interfaces::MCU::IVPot {
   public:
     using Matcher = BankableVPotMatcher<BankSize>;
-    using Parent 
-        = BankableMatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
-                                           Matcher>;
+    using Parent =
+        BankableMatchingMIDIInputElement<MIDIMessageType::ControlChange,
+                                         Matcher>;
     /**
      * @brief   Constructor.
      * 
@@ -265,7 +264,7 @@ class VPotRing
                match.bankIndex == this->getActiveBank();
         // Only mark dirty if the value of the active bank changed
     }
-    
+
     void handleUpdate(typename Matcher::Result match) override {
         dirty |= handleUpdateImpl(match);
     }

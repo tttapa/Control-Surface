@@ -16,7 +16,7 @@ MIDIReadEvent USBMIDI_Parser::handleSysExStartCont(MIDIUSBPacket_t packet,
                                                    Cable cable) {
 #if !IGNORE_SYSEX
     // If this is a SysEx start packet
-    if (packet[1] == uint8_t(MIDIMessageType::SYSEX_START)) {
+    if (packet[1] == uint8_t(MIDIMessageType::SysExStart)) {
         startSysEx(cable); // start a new message
                            // (overwrites previous unfinished message)
     }
@@ -51,7 +51,7 @@ MIDIReadEvent USBMIDI_Parser::handleSysExEnd(MIDIUSBPacket_t packet,
 #if !IGNORE_SYSEX
     // This could be the a very short SysEx message that starts and ends with
     // this packet
-    if (packet[1] == uint8_t(MIDIMessageType::SYSEX_START)) {
+    if (packet[1] == uint8_t(MIDIMessageType::SysExStart)) {
         startSysEx(cable); // start a new message
                            // (overwrites previous unfinished message)
     }
@@ -83,7 +83,7 @@ template <>
 MIDIReadEvent USBMIDI_Parser::handleSysExEnd<1>(MIDIUSBPacket_t packet,
                                                 Cable cable) {
     // Single-byte System Common Message
-    if (packet[1] != uint8_t(MIDIMessageType::SYSEX_END)) {
+    if (packet[1] != uint8_t(MIDIMessageType::SysExEnd)) {
         // System Common (1 byte)
         midimsg.header = packet[1];
         midimsg.cable = cable;
@@ -150,22 +150,22 @@ MIDIReadEvent USBMIDI_Parser::feed(MIDIUSBPacket_t packet) {
 
     using M = MIDICodeIndexNumber;
     switch (CIN) {
-        case M::MISC_FUNCTION_CODES: break; // LCOV_EXCL_LINE
-        case M::CABLE_EVENTS: break;        // LCOV_EXCL_LINE
-        case M::SYSTEM_COMMON_2B:           // fallthrough
-        case M::SYSTEM_COMMON_3B: return handleSysCommon(packet, cable);
-        case M::SYSEX_START_CONT: return handleSysExStartCont(packet, cable);
-        case M::SYSEX_END_1B: return handleSysExEnd<1>(packet, cable);
-        case M::SYSEX_END_2B: return handleSysExEnd<2>(packet, cable);
-        case M::SYSEX_END_3B: return handleSysExEnd<3>(packet, cable);
-        case M::NOTE_OFF:         // fallthrough
-        case M::NOTE_ON:          // fallthrough
-        case M::KEY_PRESSURE:     // fallthrough
-        case M::CONTROL_CHANGE:   // fallthrough
-        case M::PROGRAM_CHANGE:   // fallthrough
-        case M::CHANNEL_PRESSURE: // fallthrough
-        case M::PITCH_BEND: return handleChannelMessage(packet, cable);
-        case M::SINGLE_BYTE: return handleSingleByte(packet, cable);
+        case M::MiscFunctionCodes: break; // LCOV_EXCL_LINE
+        case M::CableEvents: break;       // LCOV_EXCL_LINE
+        case M::SystemCommon2B:           // fallthrough
+        case M::SystemCommon3B: return handleSysCommon(packet, cable);
+        case M::SysExStartCont: return handleSysExStartCont(packet, cable);
+        case M::SysExEnd1B: return handleSysExEnd<1>(packet, cable);
+        case M::SysExEnd2B: return handleSysExEnd<2>(packet, cable);
+        case M::SysExEnd3B: return handleSysExEnd<3>(packet, cable);
+        case M::NoteOff:         // fallthrough
+        case M::NoteOn:          // fallthrough
+        case M::KeyPressure:     // fallthrough
+        case M::ControlChange:   // fallthrough
+        case M::ProgramChange:   // fallthrough
+        case M::ChannelPressure: // fallthrough
+        case M::PitchBend: return handleChannelMessage(packet, cable);
+        case M::SingleByte: return handleSingleByte(packet, cable);
         default: break; // LCOV_EXCL_LINE
     }
 

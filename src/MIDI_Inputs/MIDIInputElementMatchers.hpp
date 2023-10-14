@@ -46,7 +46,7 @@ struct TwoByteMIDIMatcher {
         if (!MIDIAddress::matchSingle(m.getAddress(), address))
             return {false, 0};
         uint8_t value =
-            m.getMessageType() == MIDIMessageType::NOTE_OFF ? 0 : m.getData2();
+            m.getMessageType() == MIDIMessageType::NoteOff ? 0 : m.getData2();
         return {true, value};
     }
 
@@ -93,7 +93,7 @@ struct TwoByteRangeMIDIMatcher {
         if (!MIDIAddress::matchAddressInRange(m.getAddress(), address, length))
             return {false, 0, 0};
         uint8_t value =
-            m.getMessageType() == MIDIMessageType::NOTE_OFF ? 0 : m.getData2();
+            m.getMessageType() == MIDIMessageType::NoteOff ? 0 : m.getData2();
         uint8_t index = m.getData1() - address.getAddress();
         return {true, value, index};
     }
@@ -109,7 +109,7 @@ struct TwoByteRangeMIDIMatcher {
 template <uint8_t BankSize>
 struct BankableOneByteMIDIMatcher {
     BankableOneByteMIDIMatcher(
-        BankConfig<BankSize, BankType::CHANGE_CHANNEL> config,
+        BankConfig<BankSize, BankType::ChangeChannel> config,
         MIDIChannelCable address)
         : config(config), address(address) {}
 
@@ -163,7 +163,7 @@ struct BankableTwoByteMIDIMatcher {
         if (!matchBankable(m.getAddress(), address, config))
             return {false, 0, 0};
         uint8_t value =
-            m.getMessageType() == MIDIMessageType::NOTE_OFF ? 0 : m.getData2();
+            m.getMessageType() == MIDIMessageType::NoteOff ? 0 : m.getData2();
         uint8_t bankIndex = getBankIndex(m.getAddress(), address, config);
         return {true, value, bankIndex};
     }
@@ -188,7 +188,7 @@ struct BankableTwoByteMIDIMatcher {
 template <uint8_t BankSize>
 struct BankablePitchBendMIDIMatcher {
     BankablePitchBendMIDIMatcher(
-        BankConfig<BankSize, BankType::CHANGE_CHANNEL> config,
+        BankConfig<BankSize, BankType::ChangeChannel> config,
         MIDIChannelCable address)
         : config(config), address(address) {}
 
@@ -245,7 +245,7 @@ struct BankableTwoByteRangeMIDIMatcher {
         using BankableMIDIMatcherHelpers::matchBankableInRange;
         if (!matchBankableInRange(m.getAddress(), address, config, length))
             return {false, 0, 0, 0};
-        uint8_t value = m.getMessageType() == m.NOTE_OFF ? 0 : m.getData2();
+        uint8_t value = m.getMessageType() == m.NoteOff ? 0 : m.getData2();
         uint8_t bankIndex = getBankIndex(m.getAddress(), address, config);
         uint8_t rangeIndex = getRangeIndex(m.getAddress(), address, config);
         return {true, value, bankIndex, rangeIndex};

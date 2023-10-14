@@ -36,7 +36,7 @@ class OutputBankableMIDIAddress_Base {
      * is returned.
      */
     setting_t getSelection() const {
-        return lockedSetting == UNLOCKED ? getRawBankSetting() : lockedSetting;
+        return lockedSetting == Unlocked ? getRawBankSetting() : lockedSetting;
     }
 
     /**
@@ -46,7 +46,7 @@ class OutputBankableMIDIAddress_Base {
      * independent from the actual bank setting.
      */
     void lock() {
-        if (lockedSetting == UNLOCKED)
+        if (lockedSetting == Unlocked)
             lockedSetting = getRawBankSetting();
     }
 
@@ -56,14 +56,14 @@ class OutputBankableMIDIAddress_Base {
      * After unlocking, @ref getSelection will return the actual bank setting 
      * again.
      */
-    void unlock() { lockedSetting = UNLOCKED; }
+    void unlock() { lockedSetting = Unlocked; }
 
   protected:
     const OutputBank &bank;
 
   private:
-    constexpr static setting_t UNLOCKED = NO_SETTING;
-    setting_t lockedSetting = UNLOCKED;
+    constexpr static setting_t Unlocked = NoSetting;
+    setting_t lockedSetting = Unlocked;
 };
 
 /**
@@ -112,9 +112,9 @@ class OutputBankableMIDIAddress : public OutputBankableMIDIAddress_Base {
     RelativeMIDIAddress getAddressOffset(setting_t bankindex) const {
         int8_t offset = bank.getOffsetOfSetting(bankindex);
         switch (type) {
-            case CHANGE_ADDRESS: return {offset, 0, 0};
-            case CHANGE_CHANNEL: return {0, offset, 0};
-            case CHANGE_CABLENB: return {0, 0, offset};
+            case ChangeAddress: return {offset, 0, 0};
+            case ChangeChannel: return {0, offset, 0};
+            case ChangeCable: return {0, 0, offset};
             default: return {};
         }
     }

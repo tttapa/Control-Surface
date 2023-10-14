@@ -39,12 +39,12 @@ USBMIDI_Interface midi;
 
 // Custom MIDI Input Element to handle incoming note events and control the LEDs.
 template <uint8_t RangeLen>
-class CustomNoteLED : public MatchingMIDIInputElement<MIDIMessageType::NOTE_ON,
+class CustomNoteLED : public MatchingMIDIInputElement<MIDIMessageType::NoteOn,
                                                       TwoByteRangeMIDIMatcher> {
  public:
   // Constructor
   CustomNoteLED(CRGB *ledcolors, MIDIAddress address)
-    : MatchingMIDIInputElement<MIDIMessageType::NOTE_ON,
+    : MatchingMIDIInputElement<MIDIMessageType::NoteOn,
                                TwoByteRangeMIDIMatcher>({address, RangeLen}),
       ledcolors(ledcolors) {}
 

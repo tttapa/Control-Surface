@@ -8,8 +8,8 @@ using namespace cs;
 TEST(MCUTimeDisplay, setFirstLetter) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
-    ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
-                                     0x40 + 9, 'A' - 0x40};
+    ChannelMessage midimsg = {MIDIMessageType::ControlChange, channel, 0x40 + 9,
+                              'A' - 0x40};
     tdisp.updateWith(midimsg);
     EXPECT_EQ(tdisp.getCharacterAt(0), 'A');
     for (uint8_t i = 1; i < 10; i++)
@@ -19,8 +19,8 @@ TEST(MCUTimeDisplay, setFirstLetter) {
 TEST(MCUTimeDisplay, getTextFull) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
-    ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
-                                     0x40 + 8, 'A' - 0x40};
+    ChannelMessage midimsg = {MIDIMessageType::ControlChange, channel, 0x40 + 8,
+                              'A' - 0x40};
     tdisp.updateWith(midimsg);
     char text[11];
     tdisp.getText(text);
@@ -30,8 +30,8 @@ TEST(MCUTimeDisplay, getTextFull) {
 TEST(MCUTimeDisplay, getTextOffset) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
-    ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
-                                     0x40 + 8, 'A' - 0x40};
+    ChannelMessage midimsg = {MIDIMessageType::ControlChange, channel, 0x40 + 8,
+                              'A' - 0x40};
     tdisp.updateWith(midimsg);
     char text[10];
     tdisp.getText(text, 1);
@@ -41,8 +41,8 @@ TEST(MCUTimeDisplay, getTextOffset) {
 TEST(MCUTimeDisplay, getTextOffsetLength) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
-    ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
-                                     0x40 + 8, 'A' - 0x40};
+    ChannelMessage midimsg = {MIDIMessageType::ControlChange, channel, 0x40 + 8,
+                              'A' - 0x40};
     tdisp.updateWith(midimsg);
     char text[4];
     tdisp.getText(text, 1, 3);
@@ -52,8 +52,8 @@ TEST(MCUTimeDisplay, getTextOffsetLength) {
 TEST(MCUTimeDisplay, getTextOffsetLast) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
-    ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
-                                     0x40 + 0, 'A' - 0x40};
+    ChannelMessage midimsg = {MIDIMessageType::ControlChange, channel, 0x40 + 0,
+                              'A' - 0x40};
     tdisp.updateWith(midimsg);
     char text[2];
     tdisp.getText(text, 9);
@@ -63,8 +63,8 @@ TEST(MCUTimeDisplay, getTextOffsetLast) {
 TEST(MCUTimeDisplay, getTextOffsetTooBig) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
-    ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
-                                     0x40 + 0, 'A' - 0x40};
+    ChannelMessage midimsg = {MIDIMessageType::ControlChange, channel, 0x40 + 0,
+                              'A' - 0x40};
     tdisp.updateWith(midimsg);
     char text[2];
     tdisp.getText(text, 10);
@@ -74,8 +74,8 @@ TEST(MCUTimeDisplay, getTextOffsetTooBig) {
 TEST(MCUTimeDisplay, getTextLengthTooBig) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
-    ChannelMessage midimsg = {MIDIMessageType::CONTROL_CHANGE, channel,
-                                     0x40 + 0, 'B' - 0x40};
+    ChannelMessage midimsg = {MIDIMessageType::ControlChange, channel, 0x40 + 0,
+                              'B' - 0x40};
     tdisp.updateWith(midimsg);
     char text[11];
     tdisp.getText(text, 0, 100);
@@ -86,16 +86,16 @@ TEST(MCUTimeDisplay, reset) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, '1'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 8, '2'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 7, '3'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 6, '4'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 5, '5'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 4, '6'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 3, '7'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 2, '8'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 1, '9'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 0, '0'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 9, '1'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 8, '2'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 7, '3'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 6, '4'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 5, '5'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 4, '6'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 3, '7'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 2, '8'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 1, '9'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 0, '0'},
     };
     for (auto &midimsg : midimsgs)
         tdisp.updateWith(midimsg);
@@ -116,16 +116,16 @@ TEST(MCUTimeDisplay, printTo) {
     MCU::TimeDisplay tdisp(channel);
     tdisp.ignoreReset = false;
     ChannelMessage midimsgs[] = {
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, '1' | 0x40},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 8, '2' | 0x40},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 7, '3'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 6, '4' | 0x40},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 5, '5'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 4, '6'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 3, '7' | 0x40},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 2, '8'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 1, '9'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 0, '0' | 0x40},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 9, '1' | 0x40},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 8, '2' | 0x40},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 7, '3'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 6, '4' | 0x40},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 5, '5'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 4, '6'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 3, '7' | 0x40},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 2, '8'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 1, '9'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 0, '0' | 0x40},
     };
     for (auto &midimsg : midimsgs)
         tdisp.updateWith(midimsg);
@@ -143,16 +143,16 @@ TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames1Digit) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 8, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 7, '9'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 6, '0'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 5, '3'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 4, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 3, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 2, '5'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 1, '6'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 0, '7'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 9, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 8, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 7, '9'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 6, '0'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 5, '3'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 4, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 3, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 2, '5'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 1, '6'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 0, '7'},
     };
     for (auto &midimsg : midimsgs)
         tdisp.updateWith(midimsg);
@@ -172,16 +172,16 @@ TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames2Digits) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 8, '8'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 7, '9'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 6, '0'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 5, '3'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 4, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 3, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 2, '5'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 1, '6'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 0, '7'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 9, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 8, '8'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 7, '9'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 6, '0'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 5, '3'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 4, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 3, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 2, '5'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 1, '6'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 0, '7'},
     };
     for (auto &midimsg : midimsgs)
         tdisp.updateWith(midimsg);
@@ -201,16 +201,16 @@ TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames3Digits) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, '1'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 8, '8'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 7, '9'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 6, '0'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 5, '3'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 4, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 3, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 2, '5'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 1, '6'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 0, '7'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 9, '1'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 8, '8'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 7, '9'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 6, '0'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 5, '3'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 4, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 3, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 2, '5'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 1, '6'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 0, '7'},
     };
     for (auto &midimsg : midimsgs)
         tdisp.updateWith(midimsg);
@@ -230,16 +230,16 @@ TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames4Digits) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, '2'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 8, '5'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 7, '9'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 6, '3'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 5, '0'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 4, '1'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 3, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 2, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 1, '7'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 0, '6'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 9, '2'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 8, '5'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 7, '9'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 6, '3'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 5, '0'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 4, '1'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 3, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 2, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 1, '7'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 0, '6'},
     };
     for (auto &midimsg : midimsgs)
         tdisp.updateWith(midimsg);
@@ -259,16 +259,16 @@ TEST(MCUTimeDisplay, getBarsGetBeatsGetFrames5Digits) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, '4'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 8, '5'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 7, '8'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 6, '2'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 5, '6'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 4, '0'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 3, '2'},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 2, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 1, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 0, '9'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 9, '4'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 8, '5'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 7, '8'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 6, '2'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 5, '6'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 4, '0'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 3, '2'},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 2, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 1, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 0, '9'},
     };
     for (auto &midimsg : midimsgs)
         tdisp.updateWith(midimsg);
@@ -288,16 +288,16 @@ TEST(MCUTimeDisplay, getBarsGetBeatsGetFramesSpacesOnly) {
     constexpr Channel channel = Channel_2;
     MCU::TimeDisplay tdisp(channel);
     ChannelMessage midimsgs[] = {
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 9, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 8, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 7, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 6, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 5, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 4, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 3, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 2, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 1, ' '},
-        {MIDIMessageType::CONTROL_CHANGE, channel, 0x40 + 0, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 9, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 8, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 7, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 6, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 5, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 4, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 3, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 2, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 1, ' '},
+        {MIDIMessageType::ControlChange, channel, 0x40 + 0, ' '},
     };
     for (auto &midimsg : midimsgs)
         tdisp.updateWith(midimsg);

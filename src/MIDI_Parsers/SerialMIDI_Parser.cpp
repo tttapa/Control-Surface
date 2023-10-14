@@ -12,11 +12,11 @@ MIDIReadEvent SerialMIDI_Parser::handleNonRealTimeStatus(uint8_t midiByte) {
     // If a SysEx message was being received, and now we receive another
     // status byte, the status byte should terminate the SysEx message
     // first, and then we can handle the new status byte later.
-    bool untermSysEx = currentHeader == uint8_t(MIDIMessageType::SYSEX_START);
+    bool untermSysEx = currentHeader == uint8_t(MIDIMessageType::SysExStart);
     if (untermSysEx) {
         // Handle this new status byte later (unless it's just a SysEx End
         // byte, in which case we can just terminate it now).
-        if (midiByte != uint8_t(MIDIMessageType::SYSEX_END))
+        if (midiByte != uint8_t(MIDIMessageType::SysExEnd))
             storeByte(midiByte);
         // Terminate the SysEx message.
         // Check if the SysEx buffer has enough space to store the end byte.
@@ -28,7 +28,7 @@ MIDIReadEvent SerialMIDI_Parser::handleNonRealTimeStatus(uint8_t midiByte) {
         }
         // Enough space is available in buffer, store the end byte and
         // terminate the message.
-        addSysExByte(uint8_t(MIDIMessageType::SYSEX_END));
+        addSysExByte(uint8_t(MIDIMessageType::SysExEnd));
         endSysEx();
         currentHeader = 0;
         runningHeader = 0;
@@ -37,7 +37,7 @@ MIDIReadEvent SerialMIDI_Parser::handleNonRealTimeStatus(uint8_t midiByte) {
 #endif
     {
         // Tune Request is a special System Common message of 1 byte.
-        if (midiByte == uint8_t(MIDIMessageType::TUNE_REQUEST)) {
+        if (midiByte == uint8_t(MIDIMessageType::TuneRequest)) {
             midimsg.header = midiByte;
             midimsg.data1 = 0;
             midimsg.data2 = 0;
@@ -49,15 +49,15 @@ MIDIReadEvent SerialMIDI_Parser::handleNonRealTimeStatus(uint8_t midiByte) {
 #if !IGNORE_SYSEX
         // If the new status byte is a SysExStart, reset the SysEx buffer
         // and store the start byte.
-        else if (midiByte == uint8_t(MIDIMessageType::SYSEX_START)) {
+        else if (midiByte == uint8_t(MIDIMessageType::SysExStart)) {
             startSysEx();
-            addSysExByte(uint8_t(MIDIMessageType::SYSEX_START));
+            addSysExByte(uint8_t(MIDIMessageType::SysExStart));
             runningHeader = 0;
             currentHeader = midiByte;
             return MIDIReadEvent::NO_MESSAGE;
         }
         // This should already have been handled by the if (untermSysEx) above.
-        else if (midiByte == uint8_t(MIDIMessageType::SYSEX_END)) {
+        else if (midiByte == uint8_t(MIDIMessageType::SysExEnd)) {
             DEBUGREF(F("Unexpected SysEx End"));
             return MIDIReadEvent::NO_MESSAGE;
         }
@@ -84,7 +84,7 @@ MIDIReadEvent SerialMIDI_Parser::handleNonRealTimeStatus(uint8_t midiByte) {
 
 MIDIReadEvent SerialMIDI_Parser::handleStatus(uint8_t midiByte) {
     // If it's a Real-Time message
-    if (midiByte >= uint8_t(MIDIMessageType::TIMING_CLOCK)) {
+    if (midiByte >= uint8_t(MIDIMessageType::TimingClock)) {
         return handleRealTime(midiByte);
     }
     // Normal header (channel message, system exclusive, system common):
@@ -178,7 +178,7 @@ MIDIReadEvent SerialMIDI_Parser::handleData(uint8_t midiByte) {
 
 #if !IGNORE_SYSEX
     // If we're receiving a SysEx message, it's a SysEx data byte
-    else if (currentHeader == uint8_t(MIDIMessageType::SYSEX_START)) {
+    else if (currentHeader == uint8_t(MIDIMessageType::SysExStart)) {
         // Check if the SysEx buffer has enough space to store the data
         if (!hasSysExSpace()) {
             storeByte(midiByte); // Remember to add it next time
@@ -217,7 +217,7 @@ MIDIReadEvent SerialMIDI_Parser::resume() {
 
 #if !IGNORE_SYSEX
     // If a SysEx message was in progress
-    if (currentHeader == uint8_t(MIDIMessageType::SYSEX_START)) {
+    if (currentHeader == uint8_t(MIDIMessageType::SysExStart)) {
         // Reset the buffer for the next chunk
         startSysEx();
     }

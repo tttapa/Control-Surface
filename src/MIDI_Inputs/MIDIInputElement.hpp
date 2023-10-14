@@ -27,7 +27,7 @@ class MIDIInputElement : public AH::UpdatableCRTP<MIDIInputElement<Type>> {
 
   public:
     using MessageType =
-        typename std::conditional<Type == MIDIMessageType::SYSEX_START,
+        typename std::conditional<Type == MIDIMessageType::SysExStart,
                                   SysExMessage, ChannelMessage>::type;
 
     /// Initialize the input element.
@@ -135,18 +135,18 @@ class BankableMatchingMIDIInputElement
 // -------------------------------------------------------------------------- //
 
 /// MIDI Input Element that listens for MIDI Note On/Off messages.
-using MIDIInputElementNote = MIDIInputElement<MIDIMessageType::NOTE_ON>;
+using MIDIInputElementNote = MIDIInputElement<MIDIMessageType::NoteOn>;
 /// MIDI Input Element that listens for MIDI Key Pressure messages.
-using MIDIInputElementKP = MIDIInputElement<MIDIMessageType::KEY_PRESSURE>;
+using MIDIInputElementKP = MIDIInputElement<MIDIMessageType::KeyPressure>;
 /// MIDI Input Element that listens for MIDI Control Change messages.
-using MIDIInputElementCC = MIDIInputElement<MIDIMessageType::CONTROL_CHANGE>;
+using MIDIInputElementCC = MIDIInputElement<MIDIMessageType::ControlChange>;
 /// MIDI Input Element that listens for MIDI Program Change messages.
-using MIDIInputElementPC = MIDIInputElement<MIDIMessageType::PROGRAM_CHANGE>;
+using MIDIInputElementPC = MIDIInputElement<MIDIMessageType::ProgramChange>;
 /// MIDI Input Element that listens for MIDI Channel Pressure messages.
-using MIDIInputElementCP = MIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE>;
+using MIDIInputElementCP = MIDIInputElement<MIDIMessageType::ChannelPressure>;
 /// MIDI Input Element that listens for MIDI Pitch Bend messages.
-using MIDIInputElementPB = MIDIInputElement<MIDIMessageType::PITCH_BEND>;
+using MIDIInputElementPB = MIDIInputElement<MIDIMessageType::PitchBend>;
 /// MIDI Input Element that listens for MIDI System Exclusive messages.
-using MIDIInputElementSysEx = MIDIInputElement<MIDIMessageType::SYSEX_START>;
+using MIDIInputElementSysEx = MIDIInputElement<MIDIMessageType::SysExStart>;
 
 END_CS_NAMESPACE

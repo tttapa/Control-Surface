@@ -42,7 +42,7 @@ class CustomNoteLED
   // you want to listen to MIDI Note events by specifying the MIDI message type,
   // and use a simple 2-byte message matcher, since MIDI Note events have two
   // data bytes.
-  : public MatchingMIDIInputElement<MIDIMessageType::NOTE_ON,
+  : public MatchingMIDIInputElement<MIDIMessageType::NoteOn,
                                     TwoByteMIDIMatcher> {
  public:
   // Constructor
@@ -80,9 +80,9 @@ class CustomNoteLED
 
 // Instantiate the LED that will light up when middle C is playing.
 CustomNoteLED led {
-  3,                           // Pin with the LED connected (PWM capable)
+  3,                             // Pin with the LED connected (PWM capable)
   {MIDI_Notes::C(4), Channel_1}, // Note C4 on MIDI channel 1
-  10,                          // Intensity when off
+  10,                            // Intensity when off
 };
 
 void setup() {

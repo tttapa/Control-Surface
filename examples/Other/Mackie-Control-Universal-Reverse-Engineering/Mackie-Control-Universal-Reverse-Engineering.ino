@@ -14,7 +14,7 @@ USBMIDI_Interface midi;
 
 bool channelMessageCallback(ChannelMessage cm) {
   MIDIMessageType type = cm.getMessageType();
-  if (type == MIDIMessageType::NOTE_ON || type == MIDIMessageType::NOTE_OFF) {
+  if (type == MIDIMessageType::NoteOn || type == MIDIMessageType::NoteOff) {
     Serial << hex << cm.header << ' ' << cm.data1 << ' ' << cm.data2 << dec
            << "\t(" << MCU::getMCUNameFromNoteNumber(cm.data1) << ")"
            << F(" on cable ") << cm.cable.getOneBased() << endl;

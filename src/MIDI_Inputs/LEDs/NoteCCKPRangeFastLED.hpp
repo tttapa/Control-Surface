@@ -49,9 +49,9 @@ using index_permuter_f = uint8_t (*)(uint8_t);
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
-///         - MIDIMessageType::NOTE_ON
-///         - MIDIMessageType::CONTROL_CHANGE
-///         - MIDIMessageType::KEY_PRESSURE
+///         - @ref MIDIMessageType::NoteOn
+///         - @ref MIDIMessageType::ControlChange
+///         - @ref MIDIMessageType::KeyPressure
 /// @tparam RangeLen
 ///         The length of the range of addresses to listen to.
 /// @tparam ColorMapper
@@ -201,7 +201,7 @@ class NoteCCKPRangeFastLED
  */
 template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
 using NoteRangeFastLED =
-    NoteCCKPRangeFastLED<MIDIMessageType::NOTE_ON, RangeLen, ColorMapper>;
+    NoteCCKPRangeFastLED<MIDIMessageType::NoteOn, RangeLen, ColorMapper>;
 
 /**
  * @brief   MIDI Input Element that listens for MIDI Note messages on a specific
@@ -219,7 +219,7 @@ using NoteRangeFastLED =
  */
 template <class ColorMapper = DefaultColorMapper>
 using NoteValueFastLED =
-    NoteCCKPRangeFastLED<MIDIMessageType::NOTE_ON, 1, ColorMapper>;
+    NoteCCKPRangeFastLED<MIDIMessageType::NoteOn, 1, ColorMapper>;
 
 /**
  * @brief   MIDI Input Element that listens for MIDI Control Change messages in
@@ -238,8 +238,8 @@ using NoteValueFastLED =
  *          should be mapped to an RGB color for the LEDs.
  */
 template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
-using CCRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::CONTROL_CHANGE,
-                                            RangeLen, ColorMapper>;
+using CCRangeFastLED =
+    NoteCCKPRangeFastLED<MIDIMessageType::ControlChange, RangeLen, ColorMapper>;
 
 /**
  * @brief   MIDI Input Element that listens for MIDI Control Change messages on
@@ -258,7 +258,7 @@ using CCRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::CONTROL_CHANGE,
  */
 template <class ColorMapper = DefaultColorMapper>
 using CCValueFastLED =
-    NoteCCKPRangeFastLED<MIDIMessageType::CONTROL_CHANGE, 1, ColorMapper>;
+    NoteCCKPRangeFastLED<MIDIMessageType::ControlChange, 1, ColorMapper>;
 
 /**
  * @brief   MIDI Input Element that listens for MIDI Key Pressure messages in a
@@ -278,7 +278,7 @@ using CCValueFastLED =
  */
 template <uint8_t RangeLen, class ColorMapper = DefaultColorMapper>
 using KPRangeFastLED =
-    NoteCCKPRangeFastLED<MIDIMessageType::KEY_PRESSURE, RangeLen, ColorMapper>;
+    NoteCCKPRangeFastLED<MIDIMessageType::KeyPressure, RangeLen, ColorMapper>;
 
 /**
  * @brief   MIDI Input Element that listens for MIDI Key Pressure messages on a
@@ -296,7 +296,7 @@ using KPRangeFastLED =
  */
 template <class ColorMapper = DefaultColorMapper>
 using KPValueFastLED =
-    NoteCCKPRangeFastLED<MIDIMessageType::KEY_PRESSURE, 1, ColorMapper>;
+    NoteCCKPRangeFastLED<MIDIMessageType::KeyPressure, 1, ColorMapper>;
 
 /// @}
 
@@ -322,9 +322,9 @@ struct DefaultColorMapper {
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
-///         - MIDIMessageType::NOTE_ON
-///         - MIDIMessageType::CONTROL_CHANGE
-///         - MIDIMessageType::KEY_PRESSURE
+///         - @ref MIDIMessageType::NoteOn
+///         - @ref MIDIMessageType::ControlChange
+///         - @ref MIDIMessageType::KeyPressure
 /// @tparam BankSize
 ///         The number of banks.
 /// @tparam RangeLen
@@ -472,8 +472,8 @@ class NoteCCKPRangeFastLED : public NoteCCKPRange<Type, BankSize, RangeLen> {
  */
 template <uint8_t BankSize, uint8_t RangeLen,
           class ColorMapper = DefaultColorMapper>
-using NoteRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::NOTE_ON,
-                                              BankSize, RangeLen, ColorMapper>;
+using NoteRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::NoteOn, BankSize,
+                                              RangeLen, ColorMapper>;
 
 /// @see @ref Bankable::NoteRangeFastLED
 template <uint8_t BankSize, class ColorMapper = DefaultColorMapper>
@@ -482,7 +482,7 @@ using NoteValueFastLED = NoteRangeFastLED<BankSize, 1, ColorMapper>;
 /// @see @ref Bankable::NoteCCKPRangeFastLED
 template <uint8_t BankSize, uint8_t RangeLen,
           class ColorMapper = DefaultColorMapper>
-using CCRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::CONTROL_CHANGE,
+using CCRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::ControlChange,
                                             BankSize, RangeLen, ColorMapper>;
 
 /// @see @ref Bankable::NoteCCKPRangeFastLED
@@ -492,7 +492,7 @@ using CCValueFastLED = CCRangeFastLED<BankSize, 1, ColorMapper>;
 /// @see @ref Bankable::NoteCCKPRangeFastLED
 template <uint8_t BankSize, uint8_t RangeLen,
           class ColorMapper = DefaultColorMapper>
-using KPRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::KEY_PRESSURE,
+using KPRangeFastLED = NoteCCKPRangeFastLED<MIDIMessageType::KeyPressure,
                                             BankSize, RangeLen, ColorMapper>;
 
 /// @see @ref Bankable::NoteCCKPRangeFastLED

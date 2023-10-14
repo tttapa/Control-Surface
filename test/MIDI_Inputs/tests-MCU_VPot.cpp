@@ -13,7 +13,7 @@ TEST(MCUVPot, update) {
     MCU::VPotRing vpot = {track, channel};
 
     ChannelMessage midimsg = {
-        MIDIMessageType::CONTROL_CHANGE,
+        MIDIMessageType::ControlChange,
         channel,
         0x34,
         0x2A,
@@ -24,7 +24,7 @@ TEST(MCUVPot, update) {
     EXPECT_EQ(vpot.getCenterLed(), false);
 
     midimsg = {
-        MIDIMessageType::CONTROL_CHANGE,
+        MIDIMessageType::ControlChange,
         channel,
         0x34,
         0x58,
@@ -44,7 +44,7 @@ TEST(MCUVPotBankable, setValueBankChangeAddress) {
     MCU::Bankable::VPotRing<2> vpot = {bank, track, channel};
 
     ChannelMessage midimsg = {
-        MIDIMessageType::CONTROL_CHANGE,
+        MIDIMessageType::ControlChange,
         channel,
         0x34 + 4,
         0x5A,
@@ -63,10 +63,10 @@ TEST(MCUVPotBankable, setValueBankChangeChannel) {
     Bank<2> bank(4);
     constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
-    MCU::Bankable::VPotRing<2> vpot = {{bank, CHANGE_CHANNEL}, track, channel};
+    MCU::Bankable::VPotRing<2> vpot = {{bank, ChangeChannel}, track, channel};
 
     ChannelMessage midimsg = {
-        MIDIMessageType::CONTROL_CHANGE,
+        MIDIMessageType::ControlChange,
         channel + 4,
         0x34,
         0x5A,
@@ -85,10 +85,10 @@ TEST(MCUVPotBankable, setValueBankChangeCN) {
     Bank<2> bank(4);
     constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
-    MCU::Bankable::VPotRing<2> vpot = {{bank, CHANGE_CABLENB}, track, channel};
+    MCU::Bankable::VPotRing<2> vpot = {{bank, ChangeCable}, track, channel};
 
     ChannelMessage midimsg = {
-        MIDIMessageType::CONTROL_CHANGE, channel, 0x34, 0x5A, Cable_5,
+        MIDIMessageType::ControlChange, channel, 0x34, 0x5A, Cable_5,
     };
     MIDIInputElementCC::updateAllWith(midimsg);
     EXPECT_EQ(vpot.getPosition(), 0x0);
@@ -108,7 +108,7 @@ TEST(MCUVPotLEDsBankable, displayOnBankChange) {
     Bank<2> bank(4);
     constexpr Channel channel = Channel_3;
     constexpr uint8_t track = 5;
-    MCU::Bankable::VPotRingLEDs<2> vpot{
+    MCU::Bankable::VPotRingLEDs<2> vpot {
         bank, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, track, channel};
 
     for (uint8_t i = 0; i <= 10; ++i) {
@@ -119,7 +119,7 @@ TEST(MCUVPotLEDsBankable, displayOnBankChange) {
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 
     ChannelMessage midimsg1 = {
-        MIDIMessageType::CONTROL_CHANGE,
+        MIDIMessageType::ControlChange,
         channel,
         0x34 + 4,
         0x59,
@@ -164,7 +164,7 @@ TEST(MCUVPotLEDsBankable, displayOnBankChange) {
     EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(10, LOW));
 
     ChannelMessage midimsg2 = {
-        MIDIMessageType::CONTROL_CHANGE,
+        MIDIMessageType::ControlChange,
         channel,
         0x34 + 4,
         0x12,

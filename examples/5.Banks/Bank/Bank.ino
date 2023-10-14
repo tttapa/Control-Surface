@@ -80,7 +80,7 @@
 // Instantiate a MIDI over USB interface
 USBMIDI_Interface midi;
 
-// Instantiate four Banks, with two tracks per bank. 
+// Instantiate four Banks, with two tracks per bank.
 // Compare these numbers to the diagram above.
 Bank<4> bank(2);
 //   │       └───── number of tracks per bank
@@ -88,27 +88,27 @@ Bank<4> bank(2);
 
 // Instantiate a Bank selector to control which one of the four Banks is active.
 IncrementDecrementSelector<4> selector {
-    bank,       // Bank to manage
-    {2, 3},     // push button pins (increment, decrement)
-    Wrap::Wrap, // Wrap around
+  bank,       // Bank to manage
+  {2, 3},     // push button pins (increment, decrement)
+  Wrap::Wrap, // Wrap around
 };
 
-// Wrapping around means that if you're in Bank 4 and you press the increment 
+// Wrapping around means that if you're in Bank 4 and you press the increment
 // button, you wrap back around to Bank 1. Similarly, if you're in Bank 1 and
 // you press the decrement button, you wrap back around to Bank 4.
-// The alternative to Wrap::Wrap is Wrap::Clamp. In that case, pressing the 
-// increment button when you're in Bank 4 won't do anything, you'll stay in 
-// Bank 4. If you're in Bank 1 and press the decrement button, you'll stay in 
+// The alternative to Wrap::Wrap is Wrap::Clamp. In that case, pressing the
+// increment button when you're in Bank 4 won't do anything, you'll stay in
+// Bank 4. If you're in Bank 1 and press the decrement button, you'll stay in
 // Bank 1.
 
 // Instantiate two potentiometers for the volume controls.
 Bankable::CCPotentiometer potentiometer1 {
-  {bank, BankType::CHANGE_CHANNEL},     // bank configuration
+  {bank, BankType::ChangeChannel},      // bank configuration
   A0,                                   // analog pin
   {MIDI_CC::Channel_Volume, Channel_1}, // address
 };
 Bankable::CCPotentiometer potentiometer2 {
-  {bank, BankType::CHANGE_CHANNEL},     // bank configuration
+  {bank, BankType::ChangeChannel},      // bank configuration
   A1,                                   // analog pin
   {MIDI_CC::Channel_Volume, Channel_2}, // address
 };
@@ -116,14 +116,14 @@ Bankable::CCPotentiometer potentiometer2 {
 // The addresses specified here are the addresses for the first Bank.
 // The addresses used in the other Banks are derived from these base addresses
 // by adding the number of tracks of the bank to the base address.
-// For example, in Bank 1, the first potentiometer will send on Channel 1, 
-// in Bank 2, the first potentiometer will send on Channel 1 + 2 = Channel 3, 
+// For example, in Bank 1, the first potentiometer will send on Channel 1,
+// in Bank 2, the first potentiometer will send on Channel 1 + 2 = Channel 3,
 // because 2 is the number of tracks in the Bank.
-// 
+//
 // The bank setting can affect the Channel (as in this example), the address, or
-// the MIDI USB Cable Number. You can change this behavior by changing the 
-// BankType in the bank configuration above to `BankType::CHANGE_ADDRESS` or 
-// `BankType::CHANGE_CABLENB`.
+// the MIDI USB Cable Number. You can change this behavior by changing the
+// BankType in the bank configuration above to `BankType::ChangeAddress` or
+// `BankType::ChangeCable`.
 
 void setup() {
   Control_Surface.begin(); // Initialize Control Surface

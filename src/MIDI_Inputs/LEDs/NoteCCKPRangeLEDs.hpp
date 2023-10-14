@@ -13,9 +13,9 @@ BEGIN_CS_NAMESPACE
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
-///         - MIDIMessageType::NOTE_ON
-///         - MIDIMessageType::CONTROL_CHANGE
-///         - MIDIMessageType::KEY_PRESSURE
+///         - @ref MIDIMessageType::NoteOn
+///         - @ref MIDIMessageType::ControlChange
+///         - @ref MIDIMessageType::KeyPressure
 /// @tparam RangeLen
 ///         The length of the range of addresses to listen to.
 template <MIDIMessageType Type, uint8_t RangeLen>
@@ -30,8 +30,7 @@ class NoteCCKPRangeLEDs
     /// @param  address
     ///         The first address to listen to.
     NoteCCKPRangeLEDs(AH::PinList<RangeLen> ledPins, MIDIAddress address)
-        : Parent({address, RangeLen}),
-          ledPins(ledPins) {}
+        : Parent({address, RangeLen}), ledPins(ledPins) {}
 
   private:
     void handleUpdate(typename Matcher::Result match) override {
@@ -68,19 +67,19 @@ class NoteCCKPRangeLEDs
 /// on the corresponding LED when the velocity is higher than a threshold.
 /// @ingroup    midi-input-elements-leds
 template <uint8_t RangeLen>
-using NoteRangeLEDs = NoteCCKPRangeLEDs<MIDIMessageType::NOTE_ON, RangeLen>;
+using NoteRangeLEDs = NoteCCKPRangeLEDs<MIDIMessageType::NoteOn, RangeLen>;
 
 /// Class that listens for MIDI Control Change events on a range of addresses
 /// and turns on the corresponding LED when the value is higher than a threshold.
 /// @ingroup    midi-input-elements-leds
 template <uint8_t RangeLen>
-using CCRangeLEDs = NoteCCKPRangeLEDs<MIDIMessageType::CONTROL_CHANGE, RangeLen>;
+using CCRangeLEDs = NoteCCKPRangeLEDs<MIDIMessageType::ControlChange, RangeLen>;
 
 /// Class that listens for MIDI Key Pressure events on a range of addresses and
 /// turns on the corresponding LED when the pressure is higher than a threshold.
 /// @ingroup    midi-input-elements-leds
 template <uint8_t RangeLen>
-using KPRangeLEDs = NoteCCKPRangeLEDs<MIDIMessageType::KEY_PRESSURE, RangeLen>;
+using KPRangeLEDs = NoteCCKPRangeLEDs<MIDIMessageType::KeyPressure, RangeLen>;
 
 // -------------------------------------------------------------------------- //
 
@@ -93,9 +92,9 @@ namespace Bankable {
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
-///         - MIDIMessageType::NOTE_ON
-///         - MIDIMessageType::CONTROL_CHANGE
-///         - MIDIMessageType::KEY_PRESSURE
+///         - @ref MIDIMessageType::NoteOn
+///         - @ref MIDIMessageType::ControlChange
+///         - @ref MIDIMessageType::KeyPressure
 /// @tparam BankSize
 ///         The number of banks.
 /// @tparam RangeLen
@@ -114,8 +113,7 @@ class NoteCCKPRangeLEDs : public NoteCCKPRange<Type, BankSize, RangeLen> {
     ///         The base address to listen to.
     NoteCCKPRangeLEDs(BankConfig<BankSize> config,
                       AH::PinList<RangeLen> ledPins, MIDIAddress address)
-        : Parent(config, address),
-          ledPins(ledPins) {}
+        : Parent(config, address), ledPins(ledPins) {}
 
   protected:
     void handleUpdate(typename Matcher::Result match) override {
@@ -171,7 +169,7 @@ class NoteCCKPRangeLEDs : public NoteCCKPRange<Type, BankSize, RangeLen> {
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t RangeLen>
 using NoteRangeLEDs =
-    NoteCCKPRangeLEDs<MIDIMessageType::NOTE_ON, BankSize, RangeLen>;
+    NoteCCKPRangeLEDs<MIDIMessageType::NoteOn, BankSize, RangeLen>;
 
 /// Class that listens for MIDI Control Change events on a single address and
 /// turns on the corresponding LED when the value is higher than a threshold.
@@ -179,7 +177,7 @@ using NoteRangeLEDs =
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t RangeLen>
 using CCRangeLEDs =
-    NoteCCKPRangeLEDs<MIDIMessageType::CONTROL_CHANGE, BankSize, RangeLen>;
+    NoteCCKPRangeLEDs<MIDIMessageType::ControlChange, BankSize, RangeLen>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
 /// turns on the corresponding LED when the pressure is higher than a threshold.
@@ -187,7 +185,7 @@ using CCRangeLEDs =
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t RangeLen>
 using KPRangeLEDs =
-    NoteCCKPRangeLEDs<MIDIMessageType::KEY_PRESSURE, BankSize, RangeLen>;
+    NoteCCKPRangeLEDs<MIDIMessageType::KeyPressure, BankSize, RangeLen>;
 
 } // namespace Bankable
 

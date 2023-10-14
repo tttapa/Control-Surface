@@ -47,10 +47,10 @@ const int speedMultiplier = 1;
 Bank<2> bank(4); // A bank with four channels, and 2 bank settings
 
 Bankable::CCPotentiometer faders[] {
-  {{bank, BankType::CHANGE_CHANNEL}, A0, {MIDI_CC::Channel_Volume, Channel_1}},
-  {{bank, BankType::CHANGE_CHANNEL}, A1, {MIDI_CC::Channel_Volume, Channel_2}},
-  {{bank, BankType::CHANGE_CHANNEL}, A2, {MIDI_CC::Channel_Volume, Channel_3}},
-  {{bank, BankType::CHANGE_CHANNEL}, A3, {MIDI_CC::Channel_Volume, Channel_4}},
+  {{bank, BankType::ChangeChannel}, A0, {MIDI_CC::Channel_Volume, Channel_1}},
+  {{bank, BankType::ChangeChannel}, A1, {MIDI_CC::Channel_Volume, Channel_2}},
+  {{bank, BankType::ChangeChannel}, A2, {MIDI_CC::Channel_Volume, Channel_3}},
+  {{bank, BankType::ChangeChannel}, A3, {MIDI_CC::Channel_Volume, Channel_4}},
 };
 
 CCPotentiometer knobsTop[] {
@@ -61,17 +61,17 @@ CCPotentiometer knobsTop[] {
 };
 
 Bankable::CCPotentiometer knobsSide[] {
-  {{bank, BankType::CHANGE_CHANNEL}, A8, {MIDI_CC::Pan, Channel_1}},
-  {{bank, BankType::CHANGE_CHANNEL}, A9, {MIDI_CC::Pan, Channel_2}},
-  {{bank, BankType::CHANGE_CHANNEL}, A10, {MIDI_CC::Pan, Channel_3}},
-  {{bank, BankType::CHANGE_CHANNEL}, A11, {MIDI_CC::Pan, Channel_4}},
+  {{bank, BankType::ChangeChannel}, A8, {MIDI_CC::Pan, Channel_1}},
+  {{bank, BankType::ChangeChannel}, A9, {MIDI_CC::Pan, Channel_2}},
+  {{bank, BankType::ChangeChannel}, A10, {MIDI_CC::Pan, Channel_3}},
+  {{bank, BankType::ChangeChannel}, A11, {MIDI_CC::Pan, Channel_4}},
 };
 
 Bankable::NoteButtonLatching switches[] {
-  {{bank, BankType::CHANGE_ADDRESS}, 2, MCU::MUTE_1},
-  {{bank, BankType::CHANGE_ADDRESS}, 3, MCU::MUTE_2},
-  {{bank, BankType::CHANGE_ADDRESS}, 5, MCU::MUTE_3},
-  {{bank, BankType::CHANGE_ADDRESS}, 7, MCU::MUTE_4},
+  {{bank, BankType::ChangeAddress}, 2, MCU::MUTE_1},
+  {{bank, BankType::ChangeAddress}, 3, MCU::MUTE_2},
+  {{bank, BankType::ChangeAddress}, 5, MCU::MUTE_3},
+  {{bank, BankType::ChangeAddress}, 7, MCU::MUTE_4},
 };
 
 CCRotaryEncoder enc {

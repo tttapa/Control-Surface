@@ -10,7 +10,7 @@ BEGIN_CS_NAMESPACE
 /// Class that listens for MIDI Pitch Bend events on a single address and saves
 /// their value.
 /// @ingroup    MIDIInputElements
-class PBValue : public MatchingMIDIInputElement<MIDIMessageType::PITCH_BEND,
+class PBValue : public MatchingMIDIInputElement<MIDIMessageType::PitchBend,
                                                 PitchBendMIDIMatcher>,
                 public Interfaces::IValue14 {
   public:
@@ -58,10 +58,10 @@ namespace Bankable {
 template <uint8_t BankSize>
 class PBValue
     : public BankableMatchingMIDIInputElement<
-          MIDIMessageType::PITCH_BEND, BankablePitchBendMIDIMatcher<BankSize>>,
+          MIDIMessageType::PitchBend, BankablePitchBendMIDIMatcher<BankSize>>,
       public Interfaces::IValue14 {
   public:
-    constexpr static auto MessageType = MIDIMessageType::PITCH_BEND;
+    constexpr static auto MessageType = MIDIMessageType::PitchBend;
     using Matcher = BankablePitchBendMIDIMatcher<BankSize>;
     using Parent = BankableMatchingMIDIInputElement<MessageType, Matcher>;
 
@@ -69,7 +69,7 @@ class PBValue
     ///         The bank configuration to use.
     /// @param  address
     ///         The base address to listen to.
-    PBValue(BankConfig<BankSize, BankType::CHANGE_CHANNEL> config,
+    PBValue(BankConfig<BankSize, BankType::ChangeChannel> config,
             MIDIChannelCable address)
         : Parent({config, address}) {}
 

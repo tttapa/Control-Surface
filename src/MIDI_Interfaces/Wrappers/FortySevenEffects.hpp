@@ -95,16 +95,16 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
         if (!midi.read()) // Update the MIDI input and check if there's
             return MIDIReadEvent::NO_MESSAGE; // a new message available
         auto type = midi.getType();
-        if (type <= uint8_t(MIDIMessageType::PITCH_BEND)) { // Channel
+        if (type <= uint8_t(MIDIMessageType::PitchBend)) { // Channel
             parser.updateChannelMessage(midi);
             return MIDIReadEvent::CHANNEL_MESSAGE;
-        } else if (type == uint8_t(MIDIMessageType::SYSEX_START)) { // SysEx
+        } else if (type == uint8_t(MIDIMessageType::SysExStart)) { // SysEx
             parser.updateSysExMessage(midi);
             return MIDIReadEvent::SYSEX_MESSAGE;
-        } else if (type <= uint8_t(MIDIMessageType::TUNE_REQUEST)) { // SysComm
+        } else if (type <= uint8_t(MIDIMessageType::TuneRequest)) { // SysComm
             parser.updateSysCommonMessage(midi);
             return MIDIReadEvent::SYSCOMMON_MESSAGE;
-        } else if (type == uint8_t(MIDIMessageType::SYSEX_END)) { // SysEx
+        } else if (type == uint8_t(MIDIMessageType::SysExEnd)) { // SysEx
             // ignore
         } else { // Real-Time
             parser.updateRealTimeMessage(midi);

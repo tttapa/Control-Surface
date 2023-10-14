@@ -65,7 +65,7 @@ class NoteCCKPLEDBar
 ///          The number of LEDs the display has.
 /// @ingroup midi-input-elements-leds
 template <uint8_t NumLEDs>
-using NoteLEDBar = NoteCCKPLEDBar<MIDIMessageType::NOTE_ON, NumLEDs>;
+using NoteLEDBar = NoteCCKPLEDBar<MIDIMessageType::NoteOn, NumLEDs>;
 
 /// Class that listens for **Control Change** events and displays the
 /// value on an **LED Bar Graph**, turning on a different number of LEDs
@@ -75,7 +75,7 @@ using NoteLEDBar = NoteCCKPLEDBar<MIDIMessageType::NOTE_ON, NumLEDs>;
 ///          The number of LEDs the display has.
 /// @ingroup midi-input-elements-leds
 template <uint8_t NumLEDs>
-using CCLEDBar = NoteCCKPLEDBar<MIDIMessageType::CONTROL_CHANGE, NumLEDs>;
+using CCLEDBar = NoteCCKPLEDBar<MIDIMessageType::ControlChange, NumLEDs>;
 
 /// Class that listens for **Key Pressure** events and displays the pressure on
 /// an **LED Bar Graph**, turning on a different number of LEDs
@@ -85,7 +85,7 @@ using CCLEDBar = NoteCCKPLEDBar<MIDIMessageType::CONTROL_CHANGE, NumLEDs>;
 ///          The number of LEDs the display has.
 /// @ingroup midi-input-elements-leds
 template <uint8_t NumLEDs>
-using KPLEDBar = NoteCCKPLEDBar<MIDIMessageType::KEY_PRESSURE, NumLEDs>;
+using KPLEDBar = NoteCCKPLEDBar<MIDIMessageType::KeyPressure, NumLEDs>;
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
@@ -155,7 +155,7 @@ class NoteCCKPLEDBar : public NoteCCKPValue<Type, BankSize>,
 ///          The number of LEDs the display has.
 /// @ingroup BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t NumLEDs>
-using NoteLEDBar = NoteCCKPLEDBar<MIDIMessageType::NOTE_ON, BankSize, NumLEDs>;
+using NoteLEDBar = NoteCCKPLEDBar<MIDIMessageType::NoteOn, BankSize, NumLEDs>;
 
 /// Class that listens for **Control Change** events and displays the
 /// value on an **LED Bar Graph**, turning on a different number of LEDs
@@ -169,7 +169,7 @@ using NoteLEDBar = NoteCCKPLEDBar<MIDIMessageType::NOTE_ON, BankSize, NumLEDs>;
 /// @ingroup BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t NumLEDs>
 using CCLEDBar =
-    NoteCCKPLEDBar<MIDIMessageType::CONTROL_CHANGE, BankSize, NumLEDs>;
+    NoteCCKPLEDBar<MIDIMessageType::ControlChange, BankSize, NumLEDs>;
 
 /// Class that listens for **Key Pressure** events and displays the pressure on
 /// an **LED Bar Graph**, turning on a different number of LEDs
@@ -183,7 +183,7 @@ using CCLEDBar =
 /// @ingroup BankableMIDIInputElementsLEDs
 template <uint8_t BankSize, uint8_t NumLEDs>
 using KPLEDBar =
-    NoteCCKPLEDBar<MIDIMessageType::KEY_PRESSURE, BankSize, NumLEDs>;
+    NoteCCKPLEDBar<MIDIMessageType::KeyPressure, BankSize, NumLEDs>;
 
 } // namespace Bankable
 

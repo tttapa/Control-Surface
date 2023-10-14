@@ -118,19 +118,19 @@ bool matchBankable(MIDIAddress tgt, MIDIAddress base,
     if (!tgt.isValid() || !base.isValid())
         return false;
     switch (config.type) {
-        case BankType::CHANGE_ADDRESS: {
+        case BankType::ChangeAddress: {
             return tgt.getChannel() == base.getChannel() &&
                    tgt.getCableNumber() == base.getCableNumber() &&
                    matchBankable(tgt.getAddress(), base.getAddress(),
                                  config.bank);
         }
-        case BankType::CHANGE_CHANNEL: {
+        case BankType::ChangeChannel: {
             return tgt.getAddress() == base.getAddress() &&
                    tgt.getCableNumber() == base.getCableNumber() &&
                    matchBankable(tgt.getRawChannel(), base.getRawChannel(),
                                  config.bank);
         }
-        case BankType::CHANGE_CABLENB: {
+        case BankType::ChangeCable: {
             return tgt.getAddress() == base.getAddress() &&
                    tgt.getChannel() == base.getChannel() &&
                    matchBankable(tgt.getRawCableNumber(),
@@ -159,17 +159,17 @@ bool matchBankableInRange(MIDIAddress tgt, MIDIAddress base,
     if (!tgt.isValid() || !base.isValid())
         return false;
     switch (config.type) {
-        case CHANGE_ADDRESS:
+        case ChangeAddress:
             return tgt.getChannel() == base.getChannel() &&
                    tgt.getCableNumber() == base.getCableNumber() &&
                    matchBankableInRange(tgt.getAddress(), base.getAddress(),
                                         config.bank, length);
-        case CHANGE_CHANNEL:
+        case ChangeChannel:
             return inRange(tgt.getAddress(), base.getAddress(), length) &&
                    tgt.getCableNumber() == base.getCableNumber() &&
                    matchBankable(tgt.getRawChannel(), base.getRawChannel(),
                                  config.bank);
-        case CHANGE_CABLENB:
+        case ChangeCable:
             return inRange(tgt.getAddress(), base.getAddress(), length) &&
                    tgt.getChannel() == base.getChannel() &&
                    matchBankable(tgt.getRawCableNumber(),
@@ -193,13 +193,13 @@ template <uint8_t BankSize>
 uint8_t getBankIndex(MIDIAddress target, MIDIAddress base,
                      BaseBankConfig<BankSize> config) {
     switch (config.type) {
-        case BankType::CHANGE_ADDRESS:
+        case BankType::ChangeAddress:
             return getBankIndex(target.getAddress(), base.getAddress(),
                                 config.bank);
-        case BankType::CHANGE_CHANNEL:
+        case BankType::ChangeChannel:
             return getBankIndex(target.getRawChannel(), base.getRawChannel(),
                                 config.bank);
-        case BankType::CHANGE_CABLENB:
+        case BankType::ChangeCable:
             return getBankIndex(target.getRawCableNumber(),
                                 base.getRawCableNumber(), config.bank);
         default: return 0; // LCOV_EXCL_LINE
@@ -221,7 +221,7 @@ uint8_t getBankIndex(MIDIAddress target, MIDIAddress base,
 template <uint8_t BankSize>
 uint8_t getRangeIndex(MIDIAddress tgt, MIDIAddress base,
                       BaseBankConfig<BankSize> config) {
-    return config.type == BankType::CHANGE_ADDRESS
+    return config.type == BankType::ChangeAddress
                ? getRangeIndex(tgt.getAddress(), base.getAddress(), config.bank)
                : tgt.getAddress() - base.getAddress();
 }

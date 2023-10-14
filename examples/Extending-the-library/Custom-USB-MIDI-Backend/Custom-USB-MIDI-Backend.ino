@@ -68,6 +68,6 @@ void loop() {
   static Timer<millis> timer {1000};
   if (timer)
     // As an example, send a MIDI timing clock message every second.
-    Control_Surface.sendRealTime(MIDIMessageType::TIMING_CLOCK);
+    Control_Surface.sendRealTime(MIDIMessageType::TimingClock);
   Control_Surface.loop();
 }

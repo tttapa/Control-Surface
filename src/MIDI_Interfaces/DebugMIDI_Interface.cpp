@@ -63,7 +63,7 @@ void StreamDebugMIDI_Base::sendChannelMessageImpl(Stream &stream,
         stream << DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]
                << F("Channel: ") << msg.getChannel().getOneBased()
                << F("\tData 1: 0x") << hex << msg.getData1() << dec;
-    if (msg.getMessageType() == msg.PITCH_BEND)
+    if (msg.getMessageType() == msg.PitchBend)
         stream << " (" << msg.getData14bit() << ')';
     if (msg.getCable() != Cable_1)
         stream << F("\tCable: ") << msg.getCable().getOneBased();

@@ -17,13 +17,13 @@ namespace MCU {
 /// @ingroup MIDIInputElements
 template <uint8_t LENGTH>
 class SevenSegmentDisplay
-    : public MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE,
+    : public MatchingMIDIInputElement<MIDIMessageType::ControlChange,
                                       TwoByteRangeMIDIMatcher>,
       public Printable {
   public:
     using Matcher = TwoByteRangeMIDIMatcher;
     using Parent =
-        MatchingMIDIInputElement<MIDIMessageType::CONTROL_CHANGE, Matcher>;
+        MatchingMIDIInputElement<MIDIMessageType::ControlChange, Matcher>;
 
     SevenSegmentDisplay(MIDIAddress address) : Parent({address, LENGTH}) {
         fillWithSpaces();

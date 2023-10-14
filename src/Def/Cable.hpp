@@ -132,12 +132,6 @@ constexpr Cable Cable_14 = Cable::createCable(14);
 constexpr Cable Cable_15 = Cable::createCable(15);
 constexpr Cable Cable_16 = Cable::createCable(16);
 
-#if __cplusplus >= 201402L
-#define CS_DEPREC(msg) [[deprecated(msg)]]
-#else
-#define CS_DEPREC(...)
-#endif
-
 constexpr Cable CABLE_1 CS_DEPREC("Use Cable_1 instead") = Cable_1;
 constexpr Cable CABLE_2 CS_DEPREC("Use Cable_2 instead") = Cable_2;
 constexpr Cable CABLE_3 CS_DEPREC("Use Cable_3 instead") = Cable_3;
@@ -154,8 +148,6 @@ constexpr Cable CABLE_13 CS_DEPREC("Use Cable_13 instead") = Cable_13;
 constexpr Cable CABLE_14 CS_DEPREC("Use Cable_14 instead") = Cable_14;
 constexpr Cable CABLE_15 CS_DEPREC("Use Cable_15 instead") = Cable_15;
 constexpr Cable CABLE_16 CS_DEPREC("Use Cable_16 instead") = Cable_16;
-
-#undef CS_DEPREC
 
 Print &operator<<(Print &, Cable);
 

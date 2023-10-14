@@ -61,51 +61,51 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
     void onChannelMessage(MIDI_Interface &, ChannelMessage msg) override {
         using MMT = MIDIMessageType;
         switch (msg.getMessageType()) {
-            case MMT::NONE: break;
-            case MMT::NOTE_OFF:
+            case MMT::None: break;
+            case MMT::NoteOff:
                 CRTP(Derived).onNoteOff(msg.getChannel(), msg.getData1(),
                                         msg.getData2(), msg.getCable());
                 break;
-            case MMT::NOTE_ON:
+            case MMT::NoteOn:
                 CRTP(Derived).onNoteOn(msg.getChannel(), msg.getData1(),
                                        msg.getData2(), msg.getCable());
                 break;
-            case MMT::KEY_PRESSURE:
+            case MMT::KeyPressure:
                 CRTP(Derived).onKeyPressure(msg.getChannel(), msg.getData1(),
                                             msg.getData2(), msg.getCable());
                 break;
-            case MMT::CONTROL_CHANGE:
+            case MMT::ControlChange:
                 CRTP(Derived).onControlChange(msg.getChannel(), msg.getData1(),
                                               msg.getData2(), msg.getCable());
                 break;
-            case MMT::PROGRAM_CHANGE:
+            case MMT::ProgramChange:
                 CRTP(Derived).onProgramChange(msg.getChannel(), msg.getData1(),
                                               msg.getCable());
                 break;
-            case MMT::CHANNEL_PRESSURE:
+            case MMT::ChannelPressure:
                 CRTP(Derived).onChannelPressure(msg.getChannel(),
                                                 msg.getData1(), msg.getCable());
                 break;
-            case MMT::PITCH_BEND:
+            case MMT::PitchBend:
                 CRTP(Derived).onPitchBend(msg.getChannel(), msg.getData14bit(),
                                           msg.getCable());
                 break;
-            case MMT::SYSEX_START:
-            case MMT::MTC_QUARTER_FRAME:
-            case MMT::SONG_POSITION_POINTER:
-            case MMT::SONG_SELECT:
-            case MMT::UNDEFINED_SYSCOMMON_1:
-            case MMT::UNDEFINED_SYSCOMMON_2:
-            case MMT::TUNE_REQUEST:
-            case MMT::SYSEX_END:
-            case MMT::TIMING_CLOCK:
-            case MMT::UNDEFINED_REALTIME_1:
-            case MMT::START:
-            case MMT::CONTINUE:
-            case MMT::STOP:
-            case MMT::UNDEFINED_REALTIME_2:
-            case MMT::ACTIVE_SENSING:
-            case MMT::SYSTEM_RESET:
+            case MMT::SysExStart:
+            case MMT::MTCQuarterFrame:
+            case MMT::SongPositionPointer:
+            case MMT::SongSelect:
+            case MMT::UndefinedSysCommon1:
+            case MMT::UndefinedSysCommon2:
+            case MMT::TuneRequest:
+            case MMT::SysExEnd:
+            case MMT::TimingClock:
+            case MMT::UndefinedRealTime1:
+            case MMT::Start:
+            case MMT::Continue:
+            case MMT::Stop:
+            case MMT::UndefinedRealTime2:
+            case MMT::ActiveSensing:
+            case MMT::SystemReset:
             default: break;
         }
     }
@@ -117,40 +117,40 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
     void onSysCommonMessage(MIDI_Interface &, SysCommonMessage msg) override {
         using MMT = MIDIMessageType;
         switch (msg.getMessageType()) {
-            case MMT::NONE: break;
-            case MMT::NOTE_OFF:
-            case MMT::NOTE_ON:
-            case MMT::KEY_PRESSURE:
-            case MMT::CONTROL_CHANGE:
-            case MMT::PROGRAM_CHANGE:
-            case MMT::CHANNEL_PRESSURE:
-            case MMT::PITCH_BEND:
-            case MMT::SYSEX_START: break;
-            case MMT::MTC_QUARTER_FRAME:
+            case MMT::None: break;
+            case MMT::NoteOff:
+            case MMT::NoteOn:
+            case MMT::KeyPressure:
+            case MMT::ControlChange:
+            case MMT::ProgramChange:
+            case MMT::ChannelPressure:
+            case MMT::PitchBend:
+            case MMT::SysExStart: break;
+            case MMT::MTCQuarterFrame:
                 CRTP(Derived).onTimeCodeQuarterFrame(msg.getData1(),
                                                      msg.getCable());
                 break;
-            case MMT::SONG_POSITION_POINTER:
+            case MMT::SongPositionPointer:
                 CRTP(Derived).onSongPosition(msg.getData14bit(),
                                              msg.getCable());
                 break;
-            case MMT::SONG_SELECT:
+            case MMT::SongSelect:
                 CRTP(Derived).onSongSelect(msg.getData1(), msg.getCable());
                 break;
-            case MMT::UNDEFINED_SYSCOMMON_1: break;
-            case MMT::UNDEFINED_SYSCOMMON_2: break;
-            case MMT::TUNE_REQUEST:
+            case MMT::UndefinedSysCommon1: break;
+            case MMT::UndefinedSysCommon2: break;
+            case MMT::TuneRequest:
                 CRTP(Derived).onTuneRequest(msg.getCable());
                 break;
-            case MMT::SYSEX_END:
-            case MMT::TIMING_CLOCK:
-            case MMT::UNDEFINED_REALTIME_1:
-            case MMT::START:
-            case MMT::CONTINUE:
-            case MMT::STOP:
-            case MMT::UNDEFINED_REALTIME_2:
-            case MMT::ACTIVE_SENSING:
-            case MMT::SYSTEM_RESET:
+            case MMT::SysExEnd:
+            case MMT::TimingClock:
+            case MMT::UndefinedRealTime1:
+            case MMT::Start:
+            case MMT::Continue:
+            case MMT::Stop:
+            case MMT::UndefinedRealTime2:
+            case MMT::ActiveSensing:
+            case MMT::SystemReset:
             default: break;
         }
     }
@@ -158,34 +158,34 @@ class FineGrainedMIDI_Callbacks : public MIDI_Callbacks {
     void onRealTimeMessage(MIDI_Interface &, RealTimeMessage msg) override {
         using MMT = MIDIMessageType;
         switch (msg.getMessageType()) {
-            case MMT::NONE: break;
-            case MMT::NOTE_OFF:
-            case MMT::NOTE_ON:
-            case MMT::KEY_PRESSURE:
-            case MMT::CONTROL_CHANGE:
-            case MMT::PROGRAM_CHANGE:
-            case MMT::CHANNEL_PRESSURE:
-            case MMT::PITCH_BEND:
-            case MMT::SYSEX_START:
-            case MMT::MTC_QUARTER_FRAME:
-            case MMT::SONG_POSITION_POINTER:
-            case MMT::SONG_SELECT:
-            case MMT::UNDEFINED_SYSCOMMON_1:
-            case MMT::UNDEFINED_SYSCOMMON_2:
-            case MMT::TUNE_REQUEST:
-            case MMT::SYSEX_END: break;
-            case MMT::TIMING_CLOCK:
-                CRTP(Derived).onClock(msg.getCable());
-                break;
-            case MMT::UNDEFINED_REALTIME_1: break;
-            case MMT::START: CRTP(Derived).onStart(msg.getCable()); break;
-            case MMT::CONTINUE: CRTP(Derived).onContinue(msg.getCable()); break;
-            case MMT::STOP: CRTP(Derived).onStop(msg.getCable()); break;
-            case MMT::UNDEFINED_REALTIME_2: break;
-            case MMT::ACTIVE_SENSING:
+            case MMT::None: break;
+            case MMT::NoteOff:
+            case MMT::NoteOn:
+            case MMT::KeyPressure:
+            case MMT::ControlChange:
+            case MMT::ProgramChange:
+            case MMT::ChannelPressure:
+            case MMT::PitchBend:
+            case MMT::SysExStart:
+            case MMT::MTCQuarterFrame:
+            case MMT::SongPositionPointer:
+            case MMT::SongSelect:
+            case MMT::UndefinedSysCommon1:
+            case MMT::UndefinedSysCommon2:
+            case MMT::TuneRequest:
+            case MMT::SysExEnd: break;
+            case MMT::TimingClock: CRTP(Derived).onClock(msg.getCable()); break;
+            case MMT::UndefinedRealTime1: break;
+            case MMT::Start: CRTP(Derived).onStart(msg.getCable()); break;
+            case MMT::Continue: CRTP(Derived).onContinue(msg.getCable()); break;
+            case MMT::Stop: CRTP(Derived).onStop(msg.getCable()); break;
+            case MMT::UndefinedRealTime2: break;
+            case MMT::ActiveSensing:
                 CRTP(Derived).onActiveSensing(msg.getCable());
                 break;
-            case MMT::SYSTEM_RESET: CRTP(Derived).onSystemReset(msg.getCable()); break;
+            case MMT::SystemReset:
+                CRTP(Derived).onSystemReset(msg.getCable());
+                break;
             default: break;
         }
     }

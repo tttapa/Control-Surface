@@ -12,9 +12,9 @@ BEGIN_CS_NAMESPACE
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
-///         - MIDIMessageType::NOTE_ON
-///         - MIDIMessageType::CONTROL_CHANGE
-///         - MIDIMessageType::KEY_PRESSURE
+///         - @ref MIDIMessageType::NoteOn
+///         - @ref MIDIMessageType::ControlChange
+///         - @ref MIDIMessageType::KeyPressure
 template <MIDIMessageType Type>
 class NoteCCKPValue : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>,
                       public Interfaces::IValue {
@@ -59,17 +59,17 @@ class NoteCCKPValue : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher>,
 /// Class that listens for MIDI Note events on a single address and saves their
 /// value.
 /// @ingroup    MIDIInputElements
-using NoteValue = NoteCCKPValue<MIDIMessageType::NOTE_ON>;
+using NoteValue = NoteCCKPValue<MIDIMessageType::NoteOn>;
 
 /// Class that listens for MIDI Control Change events on a single address and
 /// saves their value.
 /// @ingroup    MIDIInputElements
-using CCValue = NoteCCKPValue<MIDIMessageType::CONTROL_CHANGE>;
+using CCValue = NoteCCKPValue<MIDIMessageType::ControlChange>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
 /// saves their value.
 /// @ingroup    MIDIInputElements
-using KPValue = NoteCCKPValue<MIDIMessageType::KEY_PRESSURE>;
+using KPValue = NoteCCKPValue<MIDIMessageType::KeyPressure>;
 
 // -------------------------------------------------------------------------- //
 
@@ -81,9 +81,9 @@ namespace Bankable {
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
-///         - MIDIMessageType::NOTE_ON
-///         - MIDIMessageType::CONTROL_CHANGE
-///         - MIDIMessageType::KEY_PRESSURE
+///         - @ref MIDIMessageType::NoteOn
+///         - @ref MIDIMessageType::ControlChange
+///         - @ref MIDIMessageType::KeyPressure
 /// @tparam BankSize
 ///         The number of banks.
 template <MIDIMessageType Type, uint8_t BankSize>
@@ -141,19 +141,19 @@ class NoteCCKPValue : public BankableMatchingMIDIInputElement<
 /// saves their value. This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElements
 template <uint8_t BankSize>
-using NoteValue = NoteCCKPValue<MIDIMessageType::NOTE_ON, BankSize>;
+using NoteValue = NoteCCKPValue<MIDIMessageType::NoteOn, BankSize>;
 
 /// Class that listens for MIDI Control Change events on a single address and
 /// saves their value. This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElements
 template <uint8_t BankSize>
-using CCValue = NoteCCKPValue<MIDIMessageType::CONTROL_CHANGE, BankSize>;
+using CCValue = NoteCCKPValue<MIDIMessageType::ControlChange, BankSize>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
 /// saves their value. This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElements
 template <uint8_t BankSize>
-using KPValue = NoteCCKPValue<MIDIMessageType::KEY_PRESSURE, BankSize>;
+using KPValue = NoteCCKPValue<MIDIMessageType::KeyPressure, BankSize>;
 
 } // namespace Bankable
 

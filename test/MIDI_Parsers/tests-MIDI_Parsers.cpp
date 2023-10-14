@@ -130,7 +130,7 @@ TEST(USBMIDIParser, Realtime) {
     Packet_t packets[] = {0x3F, 0xF8, 0x00, 0x00};
     auto puller = BufferPuller(packets);
     EXPECT_EQ(uparser.pull(puller), MIDIReadEvent::REALTIME_MESSAGE);
-    RealTimeMessage expected = {MIDIMessageType::TIMING_CLOCK, Cable_4};
+    RealTimeMessage expected = {MIDIMessageType::TimingClock, Cable_4};
     EXPECT_EQ(uparser.getRealTimeMessage(), expected);
 }
 
@@ -140,7 +140,7 @@ TEST(USBMIDIParser, tuneRequest) {
     auto puller = BufferPuller(packets);
     EXPECT_EQ(uparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
     SysCommonMessage msg = uparser.getSysCommonMessage();
-    EXPECT_EQ(msg.getMessageType(), MIDIMessageType::TUNE_REQUEST);
+    EXPECT_EQ(msg.getMessageType(), MIDIMessageType::TuneRequest);
     EXPECT_EQ(msg.cable, Cable_5);
 }
 
@@ -150,7 +150,7 @@ TEST(USBMIDIParser, MTCTimeCode) {
     auto puller = BufferPuller(packets);
     EXPECT_EQ(uparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
     SysCommonMessage msg = uparser.getSysCommonMessage();
-    EXPECT_EQ(msg.getMessageType(), MIDIMessageType::MTC_QUARTER_FRAME);
+    EXPECT_EQ(msg.getMessageType(), MIDIMessageType::MTCQuarterFrame);
     EXPECT_EQ(msg.data1, 0x23);
     EXPECT_EQ(msg.cable, Cable_5);
 }
@@ -161,7 +161,7 @@ TEST(USBMIDIParser, songPositionPointer) {
     auto puller = BufferPuller(packets);
     EXPECT_EQ(uparser.pull(puller), MIDIReadEvent::SYSCOMMON_MESSAGE);
     SysCommonMessage msg = uparser.getSysCommonMessage();
-    EXPECT_EQ(msg.getMessageType(), MIDIMessageType::SONG_POSITION_POINTER);
+    EXPECT_EQ(msg.getMessageType(), MIDIMessageType::SongPositionPointer);
     EXPECT_EQ(msg.data1, 0x38);
     EXPECT_EQ(msg.data2, 0x57);
     EXPECT_EQ(msg.cable, Cable_5);
@@ -304,7 +304,7 @@ TEST(SerialMIDIParser, noteOnRunningStatusSysCommon3) {
 }
 
 TEST(SerialMIDIParser, noteOnRunningStatusSysCommon1BLE) {
-    SerialMIDI_Parser sparser{false};
+    SerialMIDI_Parser sparser {false};
     uint8_t data[] = {0x9A, 0x10, 0x11, //
                       0xF6,             //
                       0x12, 0x13};
@@ -328,7 +328,7 @@ TEST(SerialMIDIParser, noteOnRunningStatusSysCommon1BLE) {
 }
 
 TEST(SerialMIDIParser, noteOnRunningStatusSysCommon2BLE) {
-    SerialMIDI_Parser sparser{false};
+    SerialMIDI_Parser sparser {false};
     uint8_t data[] = {0x9A, 0x10, 0x11, //
                       0xF1, 0x55,       //
                       0x12, 0x13};
@@ -353,7 +353,7 @@ TEST(SerialMIDIParser, noteOnRunningStatusSysCommon2BLE) {
 }
 
 TEST(SerialMIDIParser, noteOnRunningStatusSysCommon3BLE) {
-    SerialMIDI_Parser sparser{false};
+    SerialMIDI_Parser sparser {false};
     uint8_t data[] = {0x9A, 0x10, 0x11, //
                       0xF2, 0x55, 0x66, //
                       0x12, 0x13};
@@ -525,7 +525,7 @@ TEST(SerialMIDIParser, RealTime) {
     auto puller = BufferPuller(data);
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::REALTIME_MESSAGE);
     EXPECT_EQ(sparser.getRealTimeMessage(),
-              RealTimeMessage(MIDIMessageType::TIMING_CLOCK, Cable_1));
+              RealTimeMessage(MIDIMessageType::TimingClock, Cable_1));
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::NO_MESSAGE);
 }
 
@@ -611,10 +611,10 @@ TEST(SerialMIDIParser, noteOffInterruptedByRealTime) {
     uint8_t data[] = {0x82, 0xF8, 0x20, 0xF9, 0x7F};
     auto puller = BufferPuller(data);
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::REALTIME_MESSAGE);
-    RealTimeMessage rt1 = {MIDIMessageType::TIMING_CLOCK};
+    RealTimeMessage rt1 = {MIDIMessageType::TimingClock};
     EXPECT_EQ(sparser.getRealTimeMessage(), rt1);
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::REALTIME_MESSAGE);
-    RealTimeMessage rt2 = {MIDIMessageType::UNDEFINED_REALTIME_1};
+    RealTimeMessage rt2 = {MIDIMessageType::UndefinedRealTime1};
     EXPECT_EQ(sparser.getRealTimeMessage(), rt2);
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage msg = sparser.getChannelMessage();
@@ -629,7 +629,7 @@ TEST(SerialMIDIParser, sysExInterruptedByRealTime) {
     uint8_t data[] = {0xF0, 0x01, 0x02, 0xF8, 0x03, 0xF7};
     auto puller = BufferPuller(data);
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::REALTIME_MESSAGE);
-    RealTimeMessage rt1 = {MIDIMessageType::TIMING_CLOCK};
+    RealTimeMessage rt1 = {MIDIMessageType::TimingClock};
     EXPECT_EQ(sparser.getRealTimeMessage(), rt1);
     EXPECT_EQ(sparser.pull(puller), MIDIReadEvent::SYSEX_MESSAGE);
     EXPECT_EQ(sparser.getSysExMessage(),

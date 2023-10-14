@@ -53,11 +53,11 @@ Bank<4> bank;
 IncrementDecrementSelector<4> selector {bank, {2, 3}};
 
 // Handy type alias
-using  CCSmartPot = Bankable::CCSmartPotentiometer<4>;
+using CCSmartPot = Bankable::CCSmartPotentiometer<4>;
 
 // Instantiate a CCPotentiometer object
 CCSmartPot potentiometer {
-  {bank, BankType::CHANGE_CHANNEL},     // Bank configuration
+  {bank, BankType::ChangeChannel},      // Bank configuration
   A0,                                   // Analog pin connected to potentiometer
   {MIDI_CC::Channel_Volume, Channel_1}, // Channel volume of channel 1
 };
@@ -70,7 +70,7 @@ CCSmartPot potentiometer {
  *
  * // Instantiate a CCPotentiometer object
  * PBSmartPot potentiometer {
- *   {bank, BankType::CHANGE_CHANNEL},     // Bank configuration
+ *   {bank, BankType::ChangeChannel},     // Bank configuration
  *   A0,                                   // Analog pin connected to potentiometer
  *   Channel_1,                            // Channel 1
  * };
@@ -88,7 +88,7 @@ void loop() {
     // Turn on an LED to indicate that the potentiometer
     // value is too low to be active
   } else if (potentiometer.getState() == CCSmartPot::Higher) {
-    // Turn on an LED to indicate that the potentiometer 
+    // Turn on an LED to indicate that the potentiometer
     // value is too high to be active
   }
 }

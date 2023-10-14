@@ -5,7 +5,7 @@
 USING_CS_NAMESPACE;
 
 TEST(NoteLEDBar, NoteLEDBar) {
-    NoteLEDBar<8> mn{
+    NoteLEDBar<8> mn {
         {{0, 1, 2, 3, 4, 5, 6, 7}},
         {0x3C, Channel_5},
     };
@@ -19,7 +19,7 @@ TEST(NoteLEDBar, NoteLEDBar) {
     for (int i = 0; i < 8; ++i)
         EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(i, i < 4));
     ChannelMessage midimsg1 = {
-        MIDIMessageType::NOTE_ON,
+        MIDIMessageType::NoteOn,
         Channel_5,
         0x3C,
         0x47,
@@ -30,7 +30,7 @@ TEST(NoteLEDBar, NoteLEDBar) {
     for (int i = 0; i < 8; ++i)
         EXPECT_CALL(ArduinoMock::getInstance(), digitalWrite(i, i < 5));
     ChannelMessage midimsg2 = {
-        MIDIMessageType::NOTE_ON,
+        MIDIMessageType::NoteOn,
         Channel_5,
         0x3C,
         0x48,

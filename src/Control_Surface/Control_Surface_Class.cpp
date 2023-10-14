@@ -157,46 +157,46 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
     if (channelMessageCallback && channelMessageCallback(midimsg))
         return;
 
-    if (midimsg.getMessageType() == MIDIMessageType::CONTROL_CHANGE &&
+    if (midimsg.getMessageType() == MIDIMessageType::ControlChange &&
         midimsg.getData1() == MIDI_CC::Reset_All_Controllers) {
         // Reset All Controllers
         DEBUG(F("Reset All Controllers"));
         MIDIInputElementCC::resetAll();
         MIDIInputElementCP::resetAll();
-    } else if (midimsg.getMessageType() == MIDIMessageType::CONTROL_CHANGE &&
+    } else if (midimsg.getMessageType() == MIDIMessageType::ControlChange &&
                midimsg.getData1() == MIDI_CC::All_Notes_Off) {
         // All Notes Off
         MIDIInputElementNote::resetAll();
     } else {
         switch (midimsg.getMessageType()) {
-            case MIDIMessageType::NONE: break;
-            case MIDIMessageType::NOTE_OFF: // fallthrough
-            case MIDIMessageType::NOTE_ON:
+            case MIDIMessageType::None: break;
+            case MIDIMessageType::NoteOff: // fallthrough
+            case MIDIMessageType::NoteOn:
                 DEBUGFN(F("Updating Note elements with new MIDI "
                           "message."));
                 MIDIInputElementNote::updateAllWith(midimsg);
                 break;
-            case MIDIMessageType::KEY_PRESSURE:
+            case MIDIMessageType::KeyPressure:
                 DEBUGFN(F("Updating Key Pressure elements with new MIDI "
                           "message."));
                 MIDIInputElementKP::updateAllWith(midimsg);
                 break;
-            case MIDIMessageType::CONTROL_CHANGE:
+            case MIDIMessageType::ControlChange:
                 DEBUGFN(F("Updating CC elements with new MIDI "
                           "message."));
                 MIDIInputElementCC::updateAllWith(midimsg);
                 break;
-            case MIDIMessageType::PROGRAM_CHANGE:
+            case MIDIMessageType::ProgramChange:
                 DEBUGFN(F("Updating Program Change elements with new MIDI "
                           "message."));
                 MIDIInputElementPC::updateAllWith(midimsg);
                 break;
-            case MIDIMessageType::CHANNEL_PRESSURE:
+            case MIDIMessageType::ChannelPressure:
                 DEBUGFN(F("Updating Channel Pressure elements with new MIDI "
                           "message."));
                 MIDIInputElementCP::updateAllWith(midimsg);
                 break;
-            case MIDIMessageType::PITCH_BEND:
+            case MIDIMessageType::PitchBend:
                 // Channel Pressure
                 DEBUGFN(F("Updating Pitch Bend elements with new MIDI "
                           "message."));
@@ -205,22 +205,22 @@ void Control_Surface_::sinkMIDIfromPipe(ChannelMessage midimsg) {
 
             // These MIDI types are not channel messages, so aren't handled here
             // LCOV_EXCL_START
-            case MIDIMessageType::SYSEX_START: break;
-            case MIDIMessageType::MTC_QUARTER_FRAME: break;
-            case MIDIMessageType::SONG_POSITION_POINTER: break;
-            case MIDIMessageType::SONG_SELECT: break;
-            case MIDIMessageType::UNDEFINED_SYSCOMMON_1: break;
-            case MIDIMessageType::UNDEFINED_SYSCOMMON_2: break;
-            case MIDIMessageType::TUNE_REQUEST: break;
-            case MIDIMessageType::SYSEX_END: break;
-            case MIDIMessageType::TIMING_CLOCK: break;
-            case MIDIMessageType::UNDEFINED_REALTIME_1: break;
-            case MIDIMessageType::START: break;
-            case MIDIMessageType::CONTINUE: break;
-            case MIDIMessageType::STOP: break;
-            case MIDIMessageType::UNDEFINED_REALTIME_2: break;
-            case MIDIMessageType::ACTIVE_SENSING: break;
-            case MIDIMessageType::SYSTEM_RESET: break;
+            case MIDIMessageType::SysExStart: break;
+            case MIDIMessageType::MTCQuarterFrame: break;
+            case MIDIMessageType::SongPositionPointer: break;
+            case MIDIMessageType::SongSelect: break;
+            case MIDIMessageType::UndefinedSysCommon1: break;
+            case MIDIMessageType::UndefinedSysCommon2: break;
+            case MIDIMessageType::TuneRequest: break;
+            case MIDIMessageType::SysExEnd: break;
+            case MIDIMessageType::TimingClock: break;
+            case MIDIMessageType::UndefinedRealTime1: break;
+            case MIDIMessageType::Start: break;
+            case MIDIMessageType::Continue: break;
+            case MIDIMessageType::Stop: break;
+            case MIDIMessageType::UndefinedRealTime2: break;
+            case MIDIMessageType::ActiveSensing: break;
+            case MIDIMessageType::SystemReset: break;
             default:
                 break;
                 // LCOV_EXCL_STOP

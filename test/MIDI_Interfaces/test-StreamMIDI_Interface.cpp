@@ -15,7 +15,7 @@ using u8vec = std::vector<uint8_t>;
 TEST(StreamMIDI_Interface, send3B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
-    midi.sendChannelMessage(MIDIMessageType::NOTE_ON, Channel_4, 0x55, 0x66);
+    midi.sendChannelMessage(MIDIMessageType::NoteOn, Channel_4, 0x55, 0x66);
     midi.sendNoteOn({0x55, Channel_4}, 0x66);
     midi.sendNoteOff({0x55, Channel_4}, 0x66);
     midi.sendControlChange({0x55, Channel_4}, 0x66);
@@ -35,7 +35,7 @@ TEST(StreamMIDI_Interface, send3B) {
 TEST(StreamMIDI_Interface, send2B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
-    midi.sendChannelMessage(MIDIMessageType::PROGRAM_CHANGE, Channel_4, 0x66);
+    midi.sendChannelMessage(MIDIMessageType::ProgramChange, Channel_4, 0x66);
     midi.sendProgramChange({Channel_4}, 0x66);
     midi.sendProgramChange({0x66, Channel_4});
     midi.sendChannelPressure(Channel_4, 0x66);
@@ -51,7 +51,7 @@ TEST(StreamMIDI_Interface, send2B) {
 TEST(StreamMIDI_Interface, sendRealTime) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
-    midi.sendRealTime(MIDIMessageType::TIMING_CLOCK);
+    midi.sendRealTime(MIDIMessageType::TimingClock);
     u8vec expected = {0xF8};
     EXPECT_EQ(stream.sent, expected);
 }
@@ -68,7 +68,7 @@ TEST(StreamMIDI_Interface, SysExSend8B) {
 TEST(StreamMIDI_Interface, SysExSend0B) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
-    midi.send(SysExMessage{});
+    midi.send(SysExMessage {});
     EXPECT_TRUE(stream.sent.empty());
 }
 
@@ -76,7 +76,7 @@ TEST(StreamMIDI_Interface, readRealTime) {
     TestStream stream;
     StreamMIDI_Interface midi = stream;
     stream.toRead.push(0xF8);
-    RealTimeMessage expectedMsg = {MIDIMessageType::TIMING_CLOCK};
+    RealTimeMessage expectedMsg = {MIDIMessageType::TimingClock};
     EXPECT_EQ(midi.read(), MIDIReadEvent::REALTIME_MESSAGE);
     EXPECT_EQ(midi.getRealTimeMessage(), expectedMsg);
 }

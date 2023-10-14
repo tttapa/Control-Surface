@@ -15,20 +15,20 @@
  * Program Change   Channel: 9 Data 1: 0x06
  * Channel Pressure Channel: 3 Data 1: 0x40
  * Pitch Bend       Channel: 3 Data 1: 0x7f  Data 2: 0x7f (16383)
- * System Common    MTC_QUARTER_FRAME  Data 1: 0x2f
- * System Common    SONG_POSITION_POINTER  Data 1: 0x10  Data 2: 0x4e (10000)
- * System Common    SONG_SELECT  Data 1: 0x46
- * System Common    TUNE_REQUEST
+ * System Common    MTCQuarterFrame    Data 1: 0x2f
+ * System Common    SongPositionPointer    Data 1: 0x10  Data 2: 0x4e (10000)
+ * System Common    SongSelect Data 1: 0x46
+ * System Common    TuneRequest
  * System Exclusive [10] F0 00 01 02 03 04 05 06 07 F7
  * System Exclusive [6+] F0 10 11 12 13 14
  * System Exclusive [6+] 15 16 17 18 19 1A
  * System Exclusive [6]  1B 1C 1D 1E 1F F7
- * Real-Time        TIMING_CLOCK
- * Real-Time        START
- * Real-Time        CONTINUE
- * Real-Time        STOP
- * Real-Time        ACTIVE_SENSING
- * Real-Time        SYSTEM_RESET
+ * Real-Time        TimingClock
+ * Real-Time        Start
+ * Real-Time        Continue
+ * Real-Time        Stop
+ * Real-Time        ActiveSensing
+ * Real-Time        SystemReset
  * ~~~
  *
  * @see @ref midi_md-sending "MIDI Tutorial: Sending MIDI messages"

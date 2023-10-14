@@ -9,18 +9,18 @@ BEGIN_CS_NAMESPACE
 template <setting_t N, class Callback = EmptySelectorCallback>
 class GenericProgramChangeSelector
     : public GenericSelector<N, Callback>,
-      public MatchingMIDIInputElement<MIDIMessageType::PROGRAM_CHANGE,
+      public MatchingMIDIInputElement<MIDIMessageType::ProgramChange,
                                       OneByteMIDIMatcher> {
   public:
     using Matcher = OneByteMIDIMatcher;
-    using Parent = MatchingMIDIInputElement<MIDIMessageType::PROGRAM_CHANGE,
-                                            Matcher>;
+    using Parent =
+        MatchingMIDIInputElement<MIDIMessageType::ProgramChange, Matcher>;
 
     GenericProgramChangeSelector(Selectable<N> &selectable,
                                  const Callback &callback,
                                  MIDIChannelCable address)
-        : GenericSelector<N, Callback>{selectable, callback},
-          Parent(address) {}
+        : GenericSelector<N, Callback> {selectable, callback}, Parent(address) {
+    }
 
     void begin() override { GenericSelector<N, Callback>::begin(); }
 
@@ -50,9 +50,8 @@ class GenericProgramChangeSelector
 template <setting_t N>
 class ProgramChangeSelector : public GenericProgramChangeSelector<N> {
   public:
-    ProgramChangeSelector(Selectable<N> &selectable,
-                          MIDIChannelCable address)
-        : GenericProgramChangeSelector<N>{selectable, {}, address} {}
+    ProgramChangeSelector(Selectable<N> &selectable, MIDIChannelCable address)
+        : GenericProgramChangeSelector<N> {selectable, {}, address} {}
 };
 
 END_CS_NAMESPACE

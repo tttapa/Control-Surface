@@ -13,9 +13,9 @@ BEGIN_CS_NAMESPACE
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
-///         - MIDIMessageType::NOTE_ON
-///         - MIDIMessageType::CONTROL_CHANGE
-///         - MIDIMessageType::KEY_PRESSURE
+///         - @ref MIDIMessageType::NoteOn
+///         - @ref MIDIMessageType::ControlChange
+///         - @ref MIDIMessageType::KeyPressure
 template <MIDIMessageType Type>
 class NoteCCKPLED : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher> {
   public:
@@ -58,17 +58,17 @@ class NoteCCKPLED : public MatchingMIDIInputElement<Type, TwoByteMIDIMatcher> {
 /// Class that listens for MIDI Note events on a single address and turns
 /// on an LED when the value is higher than a threshold.
 /// @ingroup    midi-input-elements-leds
-using NoteLED = NoteCCKPLED<MIDIMessageType::NOTE_ON>;
+using NoteLED = NoteCCKPLED<MIDIMessageType::NoteOn>;
 
 /// Class that listens for MIDI Control Change events on a single address and
 /// turns on an LED when the value is higher than a threshold.
 /// @ingroup    midi-input-elements-leds
-using CCLED = NoteCCKPLED<MIDIMessageType::CONTROL_CHANGE>;
+using CCLED = NoteCCKPLED<MIDIMessageType::ControlChange>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
 /// turns on an LED when the value is higher than a threshold.
 /// @ingroup    midi-input-elements-leds
-using KPLED = NoteCCKPLED<MIDIMessageType::KEY_PRESSURE>;
+using KPLED = NoteCCKPLED<MIDIMessageType::KeyPressure>;
 
 using NoteValueLED [[deprecated("Use NoteLED instead")]] = NoteLED;
 using CCValueLED [[deprecated("Use CCLED instead")]] = CCLED;
@@ -83,9 +83,9 @@ namespace Bankable {
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
-///         - MIDIMessageType::NOTE_ON
-///         - MIDIMessageType::CONTROL_CHANGE
-///         - MIDIMessageType::KEY_PRESSURE
+///         - @ref MIDIMessageType::NoteOn
+///         - @ref MIDIMessageType::ControlChange
+///         - @ref MIDIMessageType::KeyPressure
 /// @tparam BankSize
 ///         The number of banks.
 template <MIDIMessageType Type, uint8_t BankSize>
@@ -152,21 +152,21 @@ class NoteCCKPLED : public NoteCCKPValue<Type, BankSize> {
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize>
-using NoteLED = NoteCCKPLED<MIDIMessageType::NOTE_ON, BankSize>;
+using NoteLED = NoteCCKPLED<MIDIMessageType::NoteOn, BankSize>;
 
 /// Class that listens for MIDI Control Change events on a single address and
 /// turns on an LED when the value is higher than a threshold.
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize>
-using CCLED = NoteCCKPLED<MIDIMessageType::CONTROL_CHANGE, BankSize>;
+using CCLED = NoteCCKPLED<MIDIMessageType::ControlChange, BankSize>;
 
 /// Class that listens for MIDI Key Pressure events on a single address and
 /// turns on an LED when the value is higher than a threshold.
 /// This version listens accross multiple banks.
 /// @ingroup    BankableMIDIInputElementsLEDs
 template <uint8_t BankSize>
-using KPLED = NoteCCKPLED<MIDIMessageType::KEY_PRESSURE, BankSize>;
+using KPLED = NoteCCKPLED<MIDIMessageType::KeyPressure, BankSize>;
 
 template <uint8_t BankSize>
 using NoteValueLED [[deprecated("Use NoteLED instead")]] = NoteLED<BankSize>;

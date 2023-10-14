@@ -20,7 +20,7 @@ template <class Derived>
 void MIDI_Sender<Derived>::sendNoteOn(MIDIAddress address, uint8_t velocity) {
     if (address)
         CRTP(Derived).sendChannelMessageImpl({
-            MIDIMessageType::NOTE_ON,
+            MIDIMessageType::NoteOn,
             address.getChannel(),
             address.getAddress(),
             uint8_t(velocity & 0x7F),
@@ -31,7 +31,7 @@ template <class Derived>
 void MIDI_Sender<Derived>::sendNoteOff(MIDIAddress address, uint8_t velocity) {
     if (address)
         CRTP(Derived).sendChannelMessageImpl({
-            MIDIMessageType::NOTE_OFF,
+            MIDIMessageType::NoteOff,
             address.getChannel(),
             address.getAddress(),
             uint8_t(velocity & 0x7F),
@@ -43,7 +43,7 @@ void MIDI_Sender<Derived>::sendKeyPressure(MIDIAddress address,
                                            uint8_t pressure) {
     if (address)
         CRTP(Derived).sendChannelMessageImpl({
-            MIDIMessageType::KEY_PRESSURE,
+            MIDIMessageType::KeyPressure,
             address.getChannel(),
             address.getAddress(),
             uint8_t(pressure & 0x7F),
@@ -55,7 +55,7 @@ void MIDI_Sender<Derived>::sendControlChange(MIDIAddress address,
                                              uint8_t value) {
     if (address)
         CRTP(Derived).sendChannelMessageImpl({
-            MIDIMessageType::CONTROL_CHANGE,
+            MIDIMessageType::ControlChange,
             address.getChannel(),
             address.getAddress(),
             uint8_t(value & 0x7F),
@@ -67,7 +67,7 @@ void MIDI_Sender<Derived>::sendProgramChange(MIDIChannelCable address,
                                              uint8_t value) {
     if (address)
         CRTP(Derived).sendChannelMessageImpl({
-            MIDIMessageType::PROGRAM_CHANGE,
+            MIDIMessageType::ProgramChange,
             address.getChannel(),
             uint8_t(value & 0x7F),
             uint8_t(0x00),
@@ -78,7 +78,7 @@ template <class Derived>
 void MIDI_Sender<Derived>::sendProgramChange(MIDIAddress address) {
     if (address)
         CRTP(Derived).sendChannelMessageImpl({
-            MIDIMessageType::PROGRAM_CHANGE,
+            MIDIMessageType::ProgramChange,
             address.getChannel(),
             address.getAddress(),
             uint8_t(0x00),
@@ -90,7 +90,7 @@ void MIDI_Sender<Derived>::sendChannelPressure(MIDIChannelCable address,
                                                uint8_t pressure) {
     if (address)
         CRTP(Derived).sendChannelMessageImpl({
-            MIDIMessageType::CHANNEL_PRESSURE,
+            MIDIMessageType::ChannelPressure,
             address.getChannel(),
             uint8_t(pressure & 0x7F),
             uint8_t(0x00),
@@ -102,7 +102,7 @@ void MIDI_Sender<Derived>::sendPitchBend(MIDIChannelCable address,
                                          uint16_t value) {
     if (address)
         CRTP(Derived).sendChannelMessageImpl({
-            MIDIMessageType::PITCH_BEND,
+            MIDIMessageType::PitchBend,
             address.getChannel(),
             uint8_t((value >> 0) & 0x7F),
             uint8_t((value >> 7) & 0x7F),
@@ -166,7 +166,7 @@ void MIDI_Sender<Derived>::sendSysCommon(MIDIMessageType m, uint8_t data1,
 
 template <class Derived>
 void MIDI_Sender<Derived>::sendMTCQuarterFrame(uint8_t data, Cable cable) {
-    send(SysCommonMessage(MIDIMessageType::MTC_QUARTER_FRAME, data, cable));
+    send(SysCommonMessage(MIDIMessageType::MTCQuarterFrame, data, cable));
 }
 template <class Derived>
 void MIDI_Sender<Derived>::sendMTCQuarterFrame(uint8_t messageType,
@@ -175,17 +175,17 @@ void MIDI_Sender<Derived>::sendMTCQuarterFrame(uint8_t messageType,
 }
 template <class Derived>
 void MIDI_Sender<Derived>::sendSongPositionPointer(uint16_t spp, Cable cable) {
-    SysCommonMessage msg(MIDIMessageType::SONG_POSITION_POINTER, cable);
+    SysCommonMessage msg(MIDIMessageType::SongPositionPointer, cable);
     msg.setData14bit(spp);
     send(msg);
 }
 template <class Derived>
 void MIDI_Sender<Derived>::sendSongSelect(uint8_t song, Cable cable) {
-    send(SysCommonMessage(MIDIMessageType::SONG_SELECT, song, cable));
+    send(SysCommonMessage(MIDIMessageType::SongSelect, song, cable));
 }
 template <class Derived>
 void MIDI_Sender<Derived>::sendTuneRequest(Cable cable) {
-    send(SysCommonMessage(MIDIMessageType::TUNE_REQUEST, cable));
+    send(SysCommonMessage(MIDIMessageType::TuneRequest, cable));
 }
 
 template <class Derived>
@@ -199,27 +199,27 @@ void MIDI_Sender<Derived>::sendRealTime(uint8_t rt, Cable cable) {
 
 template <class Derived>
 void MIDI_Sender<Derived>::sendTimingClock(Cable cable) {
-    sendRealTime(MIDIMessageType::TIMING_CLOCK, cable);
+    sendRealTime(MIDIMessageType::TimingClock, cable);
 }
 template <class Derived>
 void MIDI_Sender<Derived>::sendStart(Cable cable) {
-    sendRealTime(MIDIMessageType::START, cable);
+    sendRealTime(MIDIMessageType::Start, cable);
 }
 template <class Derived>
 void MIDI_Sender<Derived>::sendContinue(Cable cable) {
-    sendRealTime(MIDIMessageType::CONTINUE, cable);
+    sendRealTime(MIDIMessageType::Continue, cable);
 }
 template <class Derived>
 void MIDI_Sender<Derived>::sendStop(Cable cable) {
-    sendRealTime(MIDIMessageType::STOP, cable);
+    sendRealTime(MIDIMessageType::Stop, cable);
 }
 template <class Derived>
 void MIDI_Sender<Derived>::sendActiveSensing(Cable cable) {
-    sendRealTime(MIDIMessageType::ACTIVE_SENSING, cable);
+    sendRealTime(MIDIMessageType::ActiveSensing, cable);
 }
 template <class Derived>
 void MIDI_Sender<Derived>::sendSystemReset(Cable cable) {
-    sendRealTime(MIDIMessageType::SYSTEM_RESET, cable);
+    sendRealTime(MIDIMessageType::SystemReset, cable);
 }
 
 template <class Derived>

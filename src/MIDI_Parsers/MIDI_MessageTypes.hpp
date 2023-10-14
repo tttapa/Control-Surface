@@ -23,62 +23,89 @@ BEGIN_CS_NAMESPACE
 
 /// All possible MIDI status byte values (without channel).
 enum class MIDIMessageType : uint8_t {
-    NONE = 0x00,
+    None = 0x00,
     /* Channel Voice Messages */
-    NOTE_OFF = 0x80,         // 3B
-    NOTE_ON = 0x90,          // 3B
-    KEY_PRESSURE = 0xA0,     // 3B
-    CC = 0xB0,               // 3B
-    CONTROL_CHANGE = CC,     // 3B
-    PROGRAM_CHANGE = 0xC0,   // 2B
-    CHANNEL_PRESSURE = 0xD0, // 2B
-    PITCH_BEND = 0xE0,       // 3B
+    NoteOff = 0x80,         // 3B
+    NoteOn = 0x90,          // 3B
+    KeyPressure = 0xA0,     // 3B
+    ControlChange = 0xB0,   // 3B
+    ProgramChange = 0xC0,   // 2B
+    ChannelPressure = 0xD0, // 2B
+    PitchBend = 0xE0,       // 3B
 
-    SYSEX_START = 0xF0,
+    SysExStart = 0xF0,
 
     /* System Common messages */
-    MTC_QUARTER_FRAME = 0xF1,
-    SONG_POSITION_POINTER = 0xF2,
-    SONG_SELECT = 0xF3,
-    UNDEFINED_SYSCOMMON_1 = 0xF4,
-    UNDEFINED_SYSCOMMON_2 = 0xF5,
-    TUNE_REQUEST = 0xF6,
-    SYSEX_END = 0xF7,
+    MTCQuarterFrame = 0xF1,
+    SongPositionPointer = 0xF2,
+    SongSelect = 0xF3,
+    UndefinedSysCommon1 = 0xF4,
+    UndefinedSysCommon2 = 0xF5,
+    TuneRequest = 0xF6,
+    SysExEnd = 0xF7,
 
     /* System Real-Time messages */
-    TIMING_CLOCK = 0xF8,
-    UNDEFINED_REALTIME_1 = 0xF9,
-    START = 0xFA,
-    CONTINUE = 0xFB,
-    STOP = 0xFC,
-    UNDEFINED_REALTIME_2 = 0xFD,
-    ACTIVE_SENSING = 0xFE,
-    SYSTEM_RESET = 0xFF,
+    TimingClock = 0xF8,
+    UndefinedRealTime1 = 0xF9,
+    Start = 0xFA,
+    Continue = 0xFB,
+    Stop = 0xFC,
+    UndefinedRealTime2 = 0xFD,
+    ActiveSensing = 0xFE,
+    SystemReset = 0xFF,
+
+    // clang-format off
+    NONE CS_DEPREC("Use None instead") = None,
+    NOTE_OFF CS_DEPREC("Use NoteOff instead") = NoteOff,
+    NOTE_ON CS_DEPREC("Use NoteOn instead") = NoteOn,
+    KEY_PRESSURE CS_DEPREC("Use KeyPressure instead") = KeyPressure,
+    CC CS_DEPREC("Use ControlChange instead") = ControlChange,
+    CONTROL_CHANGE CS_DEPREC("Use ControlChange instead") = ControlChange,
+    PROGRAM_CHANGE CS_DEPREC("Use ProgramChange instead") = ProgramChange,
+    CHANNEL_PRESSURE CS_DEPREC("Use ChannelPressure instead") = ChannelPressure,
+    PITCH_BEND CS_DEPREC("Use PitchBend instead") = PitchBend,
+    SYSEX_START CS_DEPREC("Use SysExStart instead") = SysExStart,
+    MTC_QUARTER_FRAME CS_DEPREC("Use MTCQuarterFrame instead") = MTCQuarterFrame,
+    SONG_POSITION_POINTER CS_DEPREC("Use SongPositionPointer instead") = SongPositionPointer,
+    SONG_SELECT CS_DEPREC("Use SongSelect instead") = SongSelect,
+    UNDEFINED_SYSCOMMON_1 CS_DEPREC("Use UndefinedSysCommon1 instead") = UndefinedSysCommon1,
+    UNDEFINED_SYSCOMMON_2 CS_DEPREC("Use UndefinedSysCommon2 instead") = UndefinedSysCommon2,
+    TUNE_REQUEST CS_DEPREC("Use TuneRequest instead") = TuneRequest,
+    SYSEX_END CS_DEPREC("Use SysExEnd instead") = SysExEnd,
+    TIMING_CLOCK CS_DEPREC("Use TimingClock instead") = TimingClock,
+    UNDEFINED_REALTIME_1 CS_DEPREC("Use UndefinedRealTime1 instead") = UndefinedRealTime1,
+    START CS_DEPREC("Use Start instead") = Start,
+    CONTINUE CS_DEPREC("Use Continue instead") = Continue,
+    STOP CS_DEPREC("Use Stop instead") = Stop,
+    UNDEFINED_REALTIME_2 CS_DEPREC("Use UndefinedRealTime2 instead") = UndefinedRealTime2,
+    ACTIVE_SENSING CS_DEPREC("Use ActiveSensing instead") = ActiveSensing,
+    SYSTEM_RESET CS_DEPREC("Use SystemReset instead") = SystemReset,
+    // clang-format on
 };
 
 /// MIDI USB Code Index Numbers.
 ///
 /// @see    Table 4-1 in <https://usb.org/sites/default/files/midi10.pdf>.
 enum class MIDICodeIndexNumber : uint8_t {
-    MISC_FUNCTION_CODES = 0x0,
-    CABLE_EVENTS = 0x1,
-    SYSTEM_COMMON_2B = 0x2,
-    SYSTEM_COMMON_3B = 0x3,
-    SYSEX_START_CONT = 0x4,
-    SYSTEM_COMMON_1B = 0x5,
-    SYSEX_END_1B = 0x5,
-    SYSEX_END_2B = 0x6,
-    SYSEX_END_3B = 0x7,
+    MiscFunctionCodes = 0x0,
+    CableEvents = 0x1,
+    SystemCommon2B = 0x2,
+    SystemCommon3B = 0x3,
+    SysExStartCont = 0x4,
+    SystemCommon1B = 0x5,
+    SysExEnd1B = 0x5,
+    SysExEnd2B = 0x6,
+    SysExEnd3B = 0x7,
 
-    NOTE_OFF = 0x8,
-    NOTE_ON = 0x9,
-    KEY_PRESSURE = 0xA,
-    CONTROL_CHANGE = 0xB,
-    PROGRAM_CHANGE = 0xC,
-    CHANNEL_PRESSURE = 0xD,
-    PITCH_BEND = 0xE,
+    NoteOff = 0x8,
+    NoteOn = 0x9,
+    KeyPressure = 0xA,
+    ControlChange = 0xB,
+    ProgramChange = 0xC,
+    ChannelPressure = 0xD,
+    PitchBend = 0xE,
 
-    SINGLE_BYTE = 0xF,
+    SingleByte = 0xF,
 };
 
 // -------------------------------------------------------------------------- //
@@ -139,8 +166,8 @@ struct MIDIMessage {
 
     /// Check whether the header is a valid header for a channel message.
     bool hasValidChannelMessageHeader() const {
-        return header >= (uint8_t(MIDIMessageType::NOTE_OFF) | 0x00) &&
-               header <= (uint8_t(MIDIMessageType::PITCH_BEND) | 0x0F);
+        return header >= (uint8_t(MIDIMessageType::NoteOff) | 0x00) &&
+               header <= (uint8_t(MIDIMessageType::PitchBend) | 0x0F);
     }
 
     /// Check whether the header is a valid header for a System Common message.
@@ -218,18 +245,17 @@ struct ChannelMessage : MIDIMessage {
     /// Returns false if the header is a SysEx, Real-Time or System Common byte.
     bool hasTwoDataBytes() const {
         auto type = getMessageType();
-        return type <= MIDIMessageType::CONTROL_CHANGE ||
-               type == MIDIMessageType::PITCH_BEND;
+        return type <= MIDIMessageType::ControlChange ||
+               type == MIDIMessageType::PitchBend;
     }
 
-    constexpr static auto NOTE_OFF = MIDIMessageType::NOTE_OFF;
-    constexpr static auto NOTE_ON = MIDIMessageType::NOTE_ON;
-    constexpr static auto KEY_PRESSURE = MIDIMessageType::KEY_PRESSURE;
-    constexpr static auto CC = MIDIMessageType::CC;
-    constexpr static auto CONTROL_CHANGE = MIDIMessageType::CONTROL_CHANGE;
-    constexpr static auto PROGRAM_CHANGE = MIDIMessageType::PROGRAM_CHANGE;
-    constexpr static auto CHANNEL_PRESSURE = MIDIMessageType::CHANNEL_PRESSURE;
-    constexpr static auto PITCH_BEND = MIDIMessageType::PITCH_BEND;
+    constexpr static auto NoteOff = MIDIMessageType::NoteOff;
+    constexpr static auto NoteOn = MIDIMessageType::NoteOn;
+    constexpr static auto KeyPressure = MIDIMessageType::KeyPressure;
+    constexpr static auto ControlChange = MIDIMessageType::ControlChange;
+    constexpr static auto ProgramChange = MIDIMessageType::ProgramChange;
+    constexpr static auto ChannelPressure = MIDIMessageType::ChannelPressure;
+    constexpr static auto PitchBend = MIDIMessageType::PitchBend;
 };
 
 struct SysCommonMessage : MIDIMessage {
@@ -255,24 +281,23 @@ struct SysCommonMessage : MIDIMessage {
 
     /// Get the number of data bytes of this type of System Common message.
     uint8_t getNumberOfDataBytes() const {
-        if (getMessageType() == MIDIMessageType::SONG_POSITION_POINTER)
+        if (getMessageType() == MIDIMessageType::SongPositionPointer)
             return 2;
-        else if (getMessageType() <= MIDIMessageType::SONG_SELECT)
+        else if (getMessageType() <= MIDIMessageType::SongSelect)
             return 1;
         else
             return 0;
     }
 
-    constexpr static auto MTC_QUARTER_FRAME =
-        MIDIMessageType::MTC_QUARTER_FRAME;
-    constexpr static auto SONG_POSITION_POINTER =
-        MIDIMessageType::SONG_POSITION_POINTER;
-    constexpr static auto SONG_SELECT = MIDIMessageType::SONG_SELECT;
-    constexpr static auto UNDEFINED_SYSCOMMON_1 =
-        MIDIMessageType::UNDEFINED_SYSCOMMON_1;
-    constexpr static auto UNDEFINED_SYSCOMMON_2 =
-        MIDIMessageType::UNDEFINED_SYSCOMMON_2;
-    constexpr static auto TUNE_REQUEST = MIDIMessageType::TUNE_REQUEST;
+    constexpr static auto MTCQuarterFrame = MIDIMessageType::MTCQuarterFrame;
+    constexpr static auto SongPositionPointer =
+        MIDIMessageType::SongPositionPointer;
+    constexpr static auto SongSelect = MIDIMessageType::SongSelect;
+    constexpr static auto UndefinedSysCommon1 =
+        MIDIMessageType::UndefinedSysCommon1;
+    constexpr static auto UndefinedSysCommon2 =
+        MIDIMessageType::UndefinedSysCommon2;
+    constexpr static auto TuneRequest = MIDIMessageType::TuneRequest;
 };
 
 struct SysExMessage {
@@ -310,18 +335,18 @@ struct SysExMessage {
     void setCable(Cable cable) { this->cable = cable; }
 
     bool isFirstChunk() const {
-        return length >= 1 && data[0] == uint8_t(MIDIMessageType::SYSEX_START);
+        return length >= 1 && data[0] == uint8_t(MIDIMessageType::SysExStart);
     }
 
     bool isLastChunk() const {
         return length >= 1 &&
-               data[length - 1] == uint8_t(MIDIMessageType::SYSEX_END);
+               data[length - 1] == uint8_t(MIDIMessageType::SysExEnd);
     }
 
     bool isCompleteMessage() const { return isFirstChunk() && isLastChunk(); }
 
-    constexpr static auto SYSEX_START = MIDIMessageType::SYSEX_START;
-    constexpr static auto SYSEX_END = MIDIMessageType::SYSEX_END;
+    constexpr static auto SysExStart = MIDIMessageType::SysExStart;
+    constexpr static auto SysExEnd = MIDIMessageType::SysExEnd;
 };
 
 struct RealTimeMessage {
@@ -358,16 +383,16 @@ struct RealTimeMessage {
     /// Check whether the header is a valid header for a Real-Time message.
     bool isValid() const { return message >= 0xF8; }
 
-    constexpr static auto TIMING_CLOCK = MIDIMessageType::TIMING_CLOCK;
-    constexpr static auto UNDEFINED_REALTIME_1 =
-        MIDIMessageType::UNDEFINED_REALTIME_1;
-    constexpr static auto START = MIDIMessageType::START;
-    constexpr static auto CONTINUE = MIDIMessageType::CONTINUE;
-    constexpr static auto STOP = MIDIMessageType::STOP;
-    constexpr static auto UNDEFINED_REALTIME_2 =
-        MIDIMessageType::UNDEFINED_REALTIME_2;
-    constexpr static auto ACTIVE_SENSING = MIDIMessageType::ACTIVE_SENSING;
-    constexpr static auto RESET = MIDIMessageType::SYSTEM_RESET;
+    constexpr static auto TimingClock = MIDIMessageType::TimingClock;
+    constexpr static auto UndefinedRealTime1 =
+        MIDIMessageType::UndefinedRealTime1;
+    constexpr static auto Start = MIDIMessageType::Start;
+    constexpr static auto Continue = MIDIMessageType::Continue;
+    constexpr static auto Stop = MIDIMessageType::Stop;
+    constexpr static auto UndefinedRealTime2 =
+        MIDIMessageType::UndefinedRealTime2;
+    constexpr static auto ActiveSensing = MIDIMessageType::ActiveSensing;
+    constexpr static auto RESET = MIDIMessageType::SystemReset;
 };
 
 #ifndef ARDUINO

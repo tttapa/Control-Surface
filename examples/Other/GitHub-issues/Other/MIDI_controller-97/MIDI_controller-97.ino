@@ -29,18 +29,18 @@ IncrementDecrementSelectorLEDs<4> bankSelector {
 
 using namespace MIDI_CC;
 Bankable::CCPotentiometer potentiometers[] {
-  {{bank, BankType::CHANGE_CHANNEL}, A0, {Channel_Volume, Channel_1}},
-  {{bank, BankType::CHANGE_CHANNEL}, A1, {Channel_Volume, Channel_2}},
-  {{bank, BankType::CHANGE_CHANNEL}, A2, {Sound_Controller_3, Channel_3}},
-  {{bank, BankType::CHANGE_CHANNEL}, A3, {Sound_Controller_4, Channel_4}},
-  {{bank, BankType::CHANGE_CHANNEL}, A4, {Sound_Controller_5, Channel_5}},
-  {{bank, BankType::CHANGE_CHANNEL}, A5, {Sound_Controller_6, Channel_6}},
-  {{bank, BankType::CHANGE_CHANNEL}, A6, {Effects_1, Channel_7}},
-  {{bank, BankType::CHANGE_CHANNEL}, A7, {Effects_2, Channel_8}},
-  {{bank, BankType::CHANGE_CHANNEL}, A8, {Effects_3, Channel_9}},
-  {{bank, BankType::CHANGE_CHANNEL}, A9, {Effects_4, Channel_10}},
-  {{bank, BankType::CHANGE_CHANNEL}, A10, {Effect_Control_1, Channel_11}},
-  {{bank, BankType::CHANGE_CHANNEL}, A11, {Effect_Control_2, Channel_12}},
+  {{bank, BankType::ChangeChannel}, A0, {Channel_Volume, Channel_1}},
+  {{bank, BankType::ChangeChannel}, A1, {Channel_Volume, Channel_2}},
+  {{bank, BankType::ChangeChannel}, A2, {Sound_Controller_3, Channel_3}},
+  {{bank, BankType::ChangeChannel}, A3, {Sound_Controller_4, Channel_4}},
+  {{bank, BankType::ChangeChannel}, A4, {Sound_Controller_5, Channel_5}},
+  {{bank, BankType::ChangeChannel}, A5, {Sound_Controller_6, Channel_6}},
+  {{bank, BankType::ChangeChannel}, A6, {Effects_1, Channel_7}},
+  {{bank, BankType::ChangeChannel}, A7, {Effects_2, Channel_8}},
+  {{bank, BankType::ChangeChannel}, A8, {Effects_3, Channel_9}},
+  {{bank, BankType::ChangeChannel}, A9, {Effects_4, Channel_10}},
+  {{bank, BankType::ChangeChannel}, A10, {Effect_Control_1, Channel_11}},
+  {{bank, BankType::ChangeChannel}, A11, {Effect_Control_2, Channel_12}},
 };
 
 Bankable::NoteButton muteButtons[] {

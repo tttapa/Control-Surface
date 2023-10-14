@@ -25,7 +25,7 @@ TEST(USBMIDI_Interface, RealTime) {
     StrictMock<USBMIDI_Interface> midi;
     Sequence seq;
     EXPECT_CALL(midi.backend, write(0x8F, 0xF8, 0x00, 0x00)).InSequence(seq);
-    midi.sendRealTime(MIDIMessageType::TIMING_CLOCK, Cable_9);
+    midi.sendRealTime(MIDIMessageType::TimingClock, Cable_9);
 }
 
 TEST(USBMIDI_Interface, SysExSend3B) {
@@ -143,8 +143,9 @@ TEST(USBMIDI_Interface, SysExSendChunks) {
 TEST(USBMIDI_Interface, readRealTime) {
     StrictMock<USBMIDI_Interface> midi;
     EXPECT_CALL(midi.backend, read())
-        .WillOnce(Return(USBMIDI_Interface::MIDIUSBPacket_t{0x3F, 0xF8, 0, 0}));
-    RealTimeMessage expectedMsg = {MIDIMessageType::TIMING_CLOCK, Cable_4};
+        .WillOnce(
+            Return(USBMIDI_Interface::MIDIUSBPacket_t {0x3F, 0xF8, 0, 0}));
+    RealTimeMessage expectedMsg = {MIDIMessageType::TimingClock, Cable_4};
     EXPECT_EQ(midi.read(), MIDIReadEvent::REALTIME_MESSAGE);
     EXPECT_EQ(midi.getRealTimeMessage(), expectedMsg);
 }
@@ -152,8 +153,8 @@ TEST(USBMIDI_Interface, readRealTime) {
 TEST(USBMIDI_Interface, readNoteOn) {
     StrictMock<USBMIDI_Interface> midi;
     EXPECT_CALL(midi.backend, read())
-        .WillOnce(
-            Return(USBMIDI_Interface::MIDIUSBPacket_t{0x59, 0x93, 0x3C, 0x60}));
+        .WillOnce(Return(
+            USBMIDI_Interface::MIDIUSBPacket_t {0x59, 0x93, 0x3C, 0x60}));
     EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
     ChannelMessage expectedMsg = {0x93, 0x3C, 0x60, Cable_6};
     EXPECT_EQ(midi.getChannelMessage(), expectedMsg);
@@ -162,8 +163,8 @@ TEST(USBMIDI_Interface, readNoteOn) {
 TEST(USBMIDI_Interface, readSysCommon2) {
     StrictMock<USBMIDI_Interface> midi;
     EXPECT_CALL(midi.backend, read())
-        .WillOnce(
-            Return(USBMIDI_Interface::MIDIUSBPacket_t{0x53, 0xF2, 0x12, 0x34}));
+        .WillOnce(Return(
+            USBMIDI_Interface::MIDIUSBPacket_t {0x53, 0xF2, 0x12, 0x34}));
     EXPECT_EQ(midi.read(), MIDIReadEvent::SYSCOMMON_MESSAGE);
     SysCommonMessage expectedMsg = {0xF2, 0x12, 0x34, Cable_6};
     EXPECT_EQ(midi.getSysCommonMessage(), expectedMsg);
@@ -172,8 +173,8 @@ TEST(USBMIDI_Interface, readSysCommon2) {
 TEST(USBMIDI_Interface, readSysCommon1) {
     StrictMock<USBMIDI_Interface> midi;
     EXPECT_CALL(midi.backend, read())
-        .WillOnce(
-            Return(USBMIDI_Interface::MIDIUSBPacket_t{0x52, 0xF3, 0x56, 0x00}));
+        .WillOnce(Return(
+            USBMIDI_Interface::MIDIUSBPacket_t {0x52, 0xF3, 0x56, 0x00}));
     EXPECT_EQ(midi.read(), MIDIReadEvent::SYSCOMMON_MESSAGE);
     SysCommonMessage expectedMsg = {0xF3, 0x56, 0x00, Cable_6};
     EXPECT_EQ(midi.getSysCommonMessage(), expectedMsg);
@@ -182,8 +183,8 @@ TEST(USBMIDI_Interface, readSysCommon1) {
 TEST(USBMIDI_Interface, readSysCommon0) {
     StrictMock<USBMIDI_Interface> midi;
     EXPECT_CALL(midi.backend, read())
-        .WillOnce(
-            Return(USBMIDI_Interface::MIDIUSBPacket_t{0x55, 0xF6, 0x00, 0x00}));
+        .WillOnce(Return(
+            USBMIDI_Interface::MIDIUSBPacket_t {0x55, 0xF6, 0x00, 0x00}));
     EXPECT_EQ(midi.read(), MIDIReadEvent::SYSCOMMON_MESSAGE);
     SysCommonMessage expectedMsg = {0xF6, 0x00, 0x00, Cable_6};
     EXPECT_EQ(midi.getSysCommonMessage(), expectedMsg);
@@ -195,9 +196,9 @@ TEST(USBMIDI_Interface, readSysEx) {
     StrictMock<USBMIDI_Interface> midi;
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midi.backend, read())
-        .WillOnce(Return(Packet_t{{0x54, 0xF0, 0x55, 0x66}}))
-        .WillOnce(Return(Packet_t{{0x54, 0x77, 0x11, 0x22}}))
-        .WillOnce(Return(Packet_t{{0x56, 0x33, 0xF7, 0x00}}));
+        .WillOnce(Return(Packet_t {{0x54, 0xF0, 0x55, 0x66}}))
+        .WillOnce(Return(Packet_t {{0x54, 0x77, 0x11, 0x22}}))
+        .WillOnce(Return(Packet_t {{0x56, 0x33, 0xF7, 0x00}}));
     EXPECT_EQ(midi.read(), MIDIReadEvent::SYSEX_MESSAGE);
     SysExMessage sysex = midi.getSysExMessage();
     const SysExVector result = {

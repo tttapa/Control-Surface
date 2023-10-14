@@ -11,9 +11,9 @@ BEGIN_CS_NAMESPACE
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
-///         - MIDIMessageType::NOTE_ON
-///         - MIDIMessageType::CONTROL_CHANGE
-///         - MIDIMessageType::KEY_PRESSURE
+///         - @ref MIDIMessageType::NoteOn
+///         - @ref MIDIMessageType::ControlChange
+///         - @ref MIDIMessageType::KeyPressure
 /// @tparam RangeLen
 ///         The length of the range of addresses to listen to.
 template <MIDIMessageType Type, uint8_t RangeLen>
@@ -74,19 +74,19 @@ class NoteCCKPRange
 /// saves their values.
 /// @ingroup    MIDIInputElements
 template <uint8_t RangeLen>
-using NoteRange = NoteCCKPRange<MIDIMessageType::NOTE_ON, RangeLen>;
+using NoteRange = NoteCCKPRange<MIDIMessageType::NoteOn, RangeLen>;
 
 /// Class that listen for MIDI Control Change events on a range of addresses and
 /// saves their values.
 /// @ingroup    MIDIInputElements
 template <uint8_t RangeLen>
-using CCRange = NoteCCKPRange<MIDIMessageType::CONTROL_CHANGE, RangeLen>;
+using CCRange = NoteCCKPRange<MIDIMessageType::ControlChange, RangeLen>;
 
 /// Class that listen for MIDI Key Pressure events on a range of addresses and
 /// saves their values.
 /// @ingroup    MIDIInputElements
 template <uint8_t RangeLen>
-using KPRange = NoteCCKPRange<MIDIMessageType::KEY_PRESSURE, RangeLen>;
+using KPRange = NoteCCKPRange<MIDIMessageType::KeyPressure, RangeLen>;
 
 // -------------------------------------------------------------------------- //
 
@@ -98,9 +98,9 @@ namespace Bankable {
 ///
 /// @tparam Type
 ///         The type of MIDI messages to listen for:
-///         - MIDIMessageType::NOTE_ON
-///         - MIDIMessageType::CONTROL_CHANGE
-///         - MIDIMessageType::KEY_PRESSURE
+///         - @ref MIDIMessageType::NoteOn
+///         - @ref MIDIMessageType::ControlChange
+///         - @ref MIDIMessageType::KeyPressure
 /// @tparam BankSize
 ///         The number of banks.
 /// @tparam RangeLen
@@ -178,7 +178,7 @@ class NoteCCKPRange : public BankableMatchingMIDIInputElement<
 /// saves their values. This version listens for the range over different banks.
 /// @ingroup    BankableMIDIInputElements
 template <uint8_t BankSize, uint8_t RangeLen>
-using NoteRange = NoteCCKPRange<MIDIMessageType::NOTE_ON, BankSize, RangeLen>;
+using NoteRange = NoteCCKPRange<MIDIMessageType::NoteOn, BankSize, RangeLen>;
 
 /// Class that listens for MIDI Control Change events on a range of addresses
 /// and saves their values. This version listens for the range over different
@@ -186,14 +186,13 @@ using NoteRange = NoteCCKPRange<MIDIMessageType::NOTE_ON, BankSize, RangeLen>;
 /// @ingroup    BankableMIDIInputElements
 template <uint8_t BankSize, uint8_t RangeLen>
 using CCRange =
-    NoteCCKPRange<MIDIMessageType::CONTROL_CHANGE, BankSize, RangeLen>;
+    NoteCCKPRange<MIDIMessageType::ControlChange, BankSize, RangeLen>;
 
 /// Class that listens for MIDI Key Pressure events on a range of addresses and
 /// saves their values. This version listens for the range over different banks.
 /// @ingroup    BankableMIDIInputElements
 template <uint8_t BankSize, uint8_t RangeLen>
-using KPRange =
-    NoteCCKPRange<MIDIMessageType::KEY_PRESSURE, BankSize, RangeLen>;
+using KPRange = NoteCCKPRange<MIDIMessageType::KeyPressure, BankSize, RangeLen>;
 
 } // namespace Bankable
 

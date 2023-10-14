@@ -480,7 +480,7 @@ TEST(BluetoothMIDIInterface, sendSysCommon) {
         .WillOnce(Return(timestamp(0x01, 0x02)));
     EXPECT_CALL(midi, notifyMIDIBLE(expected));
 
-    midi.sendSysCommon(MIDIMessageType::SONG_POSITION_POINTER, 0x12, 0x34);
+    midi.sendSysCommon(MIDIMessageType::SongPositionPointer, 0x12, 0x34);
     midi.flush();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
@@ -501,15 +501,15 @@ TEST(BluetoothMIDIInterface, sendSysCommonMessageBufferFull) {
     EXPECT_CALL(midi, notifyMIDIBLE(expected1)).InSequence(s);
     EXPECT_CALL(midi, notifyMIDIBLE(expected2)).InSequence(s);
 
-    midi.sendSysCommon(MIDIMessageType::SONG_POSITION_POINTER, 0x12, 0x34);
-    midi.sendSysCommon(MIDIMessageType::MTC_QUARTER_FRAME, 0x56);
+    midi.sendSysCommon(MIDIMessageType::SongPositionPointer, 0x12, 0x34);
+    midi.sendSysCommon(MIDIMessageType::MTCQuarterFrame, 0x56);
     midi.flush();
 
     Mock::VerifyAndClear(&ArduinoMock::getInstance());
 }
 
 TEST(BluetoothMIDIInterface, sendLongSysEx) {
-    std::chrono::milliseconds timeout{100};
+    std::chrono::milliseconds timeout {100};
     BluetoothMIDI_Interface midi;
     midi.begin();
     midi.forceMinMTU(5 + 3);
@@ -564,7 +564,7 @@ TEST(BluetoothMIDIInterface, sendLongSysEx) {
 }
 
 TEST(BluetoothMIDIInterface, sendSysExBufferFullPacket1) {
-    std::chrono::milliseconds timeout{100};
+    std::chrono::milliseconds timeout {100};
     BluetoothMIDI_Interface midi;
     midi.begin();
     midi.forceMinMTU(5 + 3);
@@ -606,7 +606,7 @@ TEST(BluetoothMIDIInterface, sendSysExBufferFullPacket1) {
 }
 
 TEST(BluetoothMIDIInterface, sendLongSysExFlush) {
-    std::chrono::milliseconds timeout{100};
+    std::chrono::milliseconds timeout {100};
     BluetoothMIDI_Interface midi;
     midi.begin();
     midi.forceMinMTU(5 + 3);
@@ -660,7 +660,7 @@ TEST(BluetoothMIDIInterface, sendLongSysExFlush) {
 }
 
 TEST(BluetoothMIDIInterface, sendLongSysExFlushStopSendingThread) {
-    std::chrono::milliseconds timeout{100};
+    std::chrono::milliseconds timeout {100};
     auto midi = std::make_unique<BluetoothMIDI_Interface>();
     midi->begin();
     midi->forceMinMTU(5 + 3);

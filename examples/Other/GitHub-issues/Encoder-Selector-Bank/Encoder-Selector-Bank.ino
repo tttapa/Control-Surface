@@ -21,9 +21,9 @@ EncoderSelector<120> selector {
 // The potentiometer that sends MIDI messages
 // the address (controller number) depends on the bank setting
 Bankable::CCPotentiometer potentiometer {
-  {bank, BankType::CHANGE_ADDRESS}, // Bank configuration
-  A0,                               // Analog pin for potentiometer
-  {0x00, Channel_1},                // Base CC address
+  {bank, BankType::ChangeAddress}, // Bank configuration
+  A0,                              // Analog pin for potentiometer
+  {0x00, Channel_1},               // Base CC address
 };
 
 void setup() {

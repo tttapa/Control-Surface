@@ -14,9 +14,9 @@ class BLEMIDIPacketBuilder {
     std::vector<uint8_t> buffer = std::vector<uint8_t>(0);
 
     constexpr static const uint8_t SysExStart =
-        static_cast<uint8_t>(MIDIMessageType::SYSEX_START);
+        static_cast<uint8_t>(MIDIMessageType::SysExStart);
     constexpr static const uint8_t SysExEnd =
-        static_cast<uint8_t>(MIDIMessageType::SYSEX_END);
+        static_cast<uint8_t>(MIDIMessageType::SysExEnd);
 
     /// Check if the buffer has space left.
     bool hasSpaceFor(size_t bytes) const {

@@ -14,15 +14,18 @@ enum BankType {
      * @brief   Change the offset of the address (i.e. Controller number or
      *          Note number) of the element.
      */
-    CHANGE_ADDRESS = 0,
+    ChangeAddress = 0,
+    CHANGE_ADDRESS CS_DEPREC("Use ChangeAddress instead") = ChangeAddress,
     /**
      * @brief   Change the offset of the channel number of the element.
      */
-    CHANGE_CHANNEL = 1,
+    ChangeChannel = 1,
+    CHANGE_CHANNEL CS_DEPREC("Use ChangeChannel instead") = ChangeChannel,
     /**
      * @brief   Change the offset of the cable number of the element.
      */
-    CHANGE_CABLENB = 2,
+    ChangeCable = 2,
+    CHANGE_CABLENB CS_DEPREC("Use ChangeCable instead") = ChangeCable,
 };
 
 template <setting_t NumBanks>
@@ -47,7 +50,7 @@ class BaseBankConfig {
 };
 
 /// @copydoc BaseBankConfig
-template <setting_t N, BankType DefaultBankType = BankType::CHANGE_ADDRESS>
+template <setting_t N, BankType DefaultBankType = BankType::ChangeAddress>
 struct BankConfig : BaseBankConfig<N> {
     BankConfig(Bank<N> &bank, BankType type = DefaultBankType)
         : BaseBankConfig<N>(bank, type) {}
@@ -72,7 +75,7 @@ class BaseOutputBankConfig {
 };
 
 /// @copydoc BaseOutputBankConfig
-template <BankType DefaultBankType = BankType::CHANGE_ADDRESS>
+template <BankType DefaultBankType = BankType::ChangeAddress>
 struct OutputBankConfig : BaseOutputBankConfig {
     OutputBankConfig(OutputBank &bank, BankType type = DefaultBankType)
         : BaseOutputBankConfig(bank, type) {}

@@ -43,7 +43,7 @@ TEST(MIDI_Pipes, sourcePipeSink) {
         ::testing::Mock::VerifyAndClear(&sink);
     }
     {
-        ChannelMessage msg{0x93, 0x10, 0x7F, Cable_6};
+        ChannelMessage msg {0x93, 0x10, 0x7F, Cable_6};
         EXPECT_CALL(sink, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
         ::testing::Mock::VerifyAndClear(&sink);
@@ -80,8 +80,8 @@ TEST(MIDI_Pipes, sourcePipeSinkMap) {
         ::testing::Mock::VerifyAndClear(&sink2);
     }
     {
-        ChannelMessage msg{0x93, 0x10, 0x7F, Cable_6};
-        ChannelMessage msg2{0x97, 0x10, 0x7F, Cable_6};
+        ChannelMessage msg {0x93, 0x10, 0x7F, Cable_6};
+        ChannelMessage msg2 {0x97, 0x10, 0x7F, Cable_6};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg2));
         source.sourceMIDItoPipe(msg);
@@ -123,7 +123,7 @@ TEST(MIDI_Pipes, sourcePipeSinkFilter) {
         ::testing::Mock::VerifyAndClear(&sink2);
     }
     {
-        ChannelMessage msg{0x93, 0x10, 0x7F, Cable_6};
+        ChannelMessage msg {0x93, 0x10, 0x7F, Cable_6};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
@@ -131,7 +131,7 @@ TEST(MIDI_Pipes, sourcePipeSinkFilter) {
         ::testing::Mock::VerifyAndClear(&sink2);
     }
     {
-        ChannelMessage msg{0x96, 0x10, 0x7F, Cable_6};
+        ChannelMessage msg {0x96, 0x10, 0x7F, Cable_6};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         // sink2 shouldn't receive it
         source.sourceMIDItoPipe(msg);
@@ -203,7 +203,7 @@ TEST(MIDI_Pipes, sourcePipeSinkX2) {
         ::testing::Mock::VerifyAndClear(&sink2);
     }
     {
-        ChannelMessage msg{0x93, 0x10, 0x7F, Cable_6};
+        ChannelMessage msg {0x93, 0x10, 0x7F, Cable_6};
         EXPECT_CALL(sink1, sinkMIDIfromPipe(msg));
         EXPECT_CALL(sink2, sinkMIDIfromPipe(msg));
         source.sourceMIDItoPipe(msg);
@@ -1382,7 +1382,7 @@ TEST(MIDI_Pipes, stallNames) {
     sources[2] >> pipes[4] >> sinks[1];
     sources[3] >> pipes[5] >> sinks[2];
 
-    MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
+    MockMIDIStaller stallers[] {{"staller_1"}, {"staller_2"}, {"staller_3"}};
 
     sources[1].stall(&stallers[0]);
     EXPECT_STREQ(pipes[0].getSinkStallerName(), "staller_1");
@@ -1414,7 +1414,7 @@ TEST(MIDI_Pipes, getStaller) {
     sources[2] >> pipes[4] >> sinks[1];
     sources[3] >> pipes[5] >> sinks[2];
 
-    MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
+    MockMIDIStaller stallers[] {{"staller_1"}, {"staller_2"}, {"staller_3"}};
 
     EXPECT_EQ(pipes[0].getStaller(), nullptr);
     EXPECT_EQ(sources[0].getStaller(), nullptr);
@@ -1449,7 +1449,7 @@ TEST(MIDI_Pipes, stallFromThroughInAndThroughOut) {
     sources[2] >> pipes[4] >> sinks[1];
     sources[3] >> pipes[5] >> sinks[2];
 
-    MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
+    MockMIDIStaller stallers[] {{"staller_1"}, {"staller_2"}, {"staller_3"}};
 
     sources[1].stall(&stallers[0]);
     EXPECT_EQ(pipes[3].getSinkStaller(), &stallers[0]);
@@ -1500,7 +1500,7 @@ TEST(MIDI_Pipes, stallFromThroughInAndThroughOutUnlockMiddle) {
     sources[2] >> pipes[4] >> sinks[1];
     sources[3] >> pipes[5] >> sinks[2];
 
-    MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
+    MockMIDIStaller stallers[] {{"staller_1"}, {"staller_2"}, {"staller_3"}};
 
     // Same as test above
     sources[1].stall(&stallers[0]);
@@ -1607,7 +1607,7 @@ TEST(MIDI_Pipes, stallFromThroughInAndThroughOutUnlockLast) {
     sources[2] >> pipes[4] >> sinks[1];
     sources[3] >> pipes[5] >> sinks[2];
 
-    MockMIDIStaller stallers[]{{"staller_1"}, {"staller_2"}, {"staller_3"}};
+    MockMIDIStaller stallers[] {{"staller_1"}, {"staller_2"}, {"staller_3"}};
 
     // Same as test above
     sources[1].stall(&stallers[0]);
@@ -1767,19 +1767,19 @@ TEST(MIDI_Pipes, USBInterface) {
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midiA[0].backend, read())
-        .WillOnce(Return(Packet_t{0x54, 0xF0, 0x55, 0x66}))
-        .WillOnce(Return(Packet_t{0x54, 0x77, 0x11, 0x22}))
-        .WillOnce(Return(Packet_t{0x56, 0x33, 0xF7, 0x00}))
-        .WillOnce(Return(Packet_t{}));
+        .WillOnce(Return(Packet_t {0x54, 0xF0, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t {0x54, 0x77, 0x11, 0x22}))
+        .WillOnce(Return(Packet_t {0x56, 0x33, 0xF7, 0x00}))
+        .WillOnce(Return(Packet_t {}));
     uint8_t data1[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0x33, 0xF7};
     EXPECT_CALL(midiB[0], sendSysExImpl(SysExMessage(data1, Cable_6)));
     midiA[0].update();
 
     EXPECT_CALL(midiA[1].backend, read())
-        .WillOnce(Return(Packet_t{0x94, 0xF0, 0x55, 0x66}))
-        .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
-        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
-        .WillOnce(Return(Packet_t{}));
+        .WillOnce(Return(Packet_t {0x94, 0xF0, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t {0x94, 0x77, 0x11, 0x22}))
+        .WillOnce(Return(Packet_t {0x95, 0xF7, 0x00, 0x00}))
+        .WillOnce(Return(Packet_t {}));
     uint8_t data2[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0xF7};
     EXPECT_CALL(midiB[0], sendSysExImpl(SysExMessage(data2, Cable_10)));
     EXPECT_CALL(midiB[1], sendSysExImpl(SysExMessage(data2, Cable_10)));
@@ -1799,13 +1799,13 @@ TEST(MIDI_Pipes, USBInterfaceLockSysEx) {
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midiA[1].backend, read())
-        .WillOnce(Return(Packet_t{0x94, 0xF0, 0x55, 0x66}))
-        .WillOnce(Return(Packet_t{0x94, 0x77, 0x11, 0x22}))
-        .WillOnce(Return(Packet_t{0x95, 0xF7, 0x00, 0x00}))
-        .WillOnce(Return(Packet_t{}));
+        .WillOnce(Return(Packet_t {0x94, 0xF0, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t {0x94, 0x77, 0x11, 0x22}))
+        .WillOnce(Return(Packet_t {0x95, 0xF7, 0x00, 0x00}))
+        .WillOnce(Return(Packet_t {}));
     uint8_t data[] = {0xF0, 0x55, 0x66, 0x77, 0x11, 0x22, 0xF7};
 
-    ChannelMessage msg = {MIDIMessageType::NOTE_ON, Channel_1, 0x12, 0x34};
+    ChannelMessage msg = {MIDIMessageType::NoteOn, Channel_1, 0x12, 0x34};
     auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
         midiA[0].sourceMIDItoPipe(msg);
@@ -1840,10 +1840,10 @@ TEST(MIDI_Pipes, USBInterfaceLockChannelMessage) {
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midiA[1].backend, read())
-        .WillOnce(Return(Packet_t{0x98, 0x83, 0x55, 0x66}))
-        .WillOnce(Return(Packet_t{}));
+        .WillOnce(Return(Packet_t {0x98, 0x83, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t {}));
 
-    ChannelMessage msg = {MIDIMessageType::NOTE_ON, Channel_1, 0x12, 0x34};
+    ChannelMessage msg = {MIDIMessageType::NoteOn, Channel_1, 0x12, 0x34};
     auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
         midiA[0].sourceMIDItoPipe(msg);
@@ -1876,10 +1876,10 @@ TEST(MIDI_Pipes, USBInterfaceLockRealTime) {
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midiA[1].backend, read())
-        .WillOnce(Return(Packet_t{0x9F, 0xF8, 0x00, 0x00}))
-        .WillOnce(Return(Packet_t{}));
+        .WillOnce(Return(Packet_t {0x9F, 0xF8, 0x00, 0x00}))
+        .WillOnce(Return(Packet_t {}));
 
-    ChannelMessage msg = {MIDIMessageType::NOTE_ON, Channel_1, 0x12, 0x34};
+    ChannelMessage msg = {MIDIMessageType::NoteOn, Channel_1, 0x12, 0x34};
     auto unstall = [&](MIDIStaller *staller) {
         midiA[0].unstall(staller);
         midiA[0].sourceMIDItoPipe(msg);
@@ -1908,8 +1908,8 @@ TEST(MIDI_Pipes, USBInterfaceLoopBack) {
 
     using Packet_t = USBMIDI_Interface::MIDIUSBPacket_t;
     EXPECT_CALL(midi.backend, read())
-        .WillOnce(Return(Packet_t{0x99, 0x95, 0x55, 0x66}))
-        .WillOnce(Return(Packet_t{}));
+        .WillOnce(Return(Packet_t {0x99, 0x95, 0x55, 0x66}))
+        .WillOnce(Return(Packet_t {}));
 
     EXPECT_CALL(midi.backend, write(0x99, 0x95, 0x55, 0x66));
     midi.update();
@@ -2256,7 +2256,7 @@ TEST(MIDI_Pipes, StreamMIDIInterfaceSysExChunks) {
         SysExMessage(sysex.data() + SYSEX_BUFFER_SIZE, SYSEX_BUFFER_SIZE);
     SysExMessage chunk3 =
         SysExMessage(sysex.data() + 2 * SYSEX_BUFFER_SIZE, 10);
-    ChannelMessage noteMsg1 = {MIDIMessageType::NOTE_ON, Channel_3, 0x12, 0x13};
+    ChannelMessage noteMsg1 = {MIDIMessageType::NoteOn, Channel_3, 0x12, 0x13};
     testing::Sequence s;
     EXPECT_CALL(midiB, sendSysExImpl(chunk2)).InSequence(s);
     EXPECT_CALL(midiB, sendSysExImpl(chunk3)).InSequence(s);

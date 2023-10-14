@@ -85,13 +85,13 @@ void USBMIDI_Sender::sendSysCommonMessage(SysCommonMessage msg, Send &&send) {
     auto cn = msg.cable;
     switch (msg.getNumberOfDataBytes()) {
         case 2: // 3B
-            send(cn, CIN::SYSTEM_COMMON_3B, msg.header, msg.data1, msg.data2);
+            send(cn, CIN::SystemCommon3B, msg.header, msg.data1, msg.data2);
             break;
         case 1: // 2B
-            send(cn, CIN::SYSTEM_COMMON_2B, msg.header, msg.data1, 0);
+            send(cn, CIN::SystemCommon2B, msg.header, msg.data1, 0);
             break;
         case 0: // 1B
-            send(cn, CIN::SYSTEM_COMMON_1B, msg.header, 0, 0);
+            send(cn, CIN::SystemCommon1B, msg.header, 0, 0);
             break;
         default: break;
     }
@@ -99,7 +99,7 @@ void USBMIDI_Sender::sendSysCommonMessage(SysCommonMessage msg, Send &&send) {
 
 template <class Send>
 void USBMIDI_Sender::sendRealTimeMessage(RealTimeMessage msg, Send &&send) {
-    send(msg.cable, CIN::SINGLE_BYTE, msg.message, 0, 0);
+    send(msg.cable, CIN::SingleByte, msg.message, 0, 0);
 }
 
 // This is the readable documentation version for sending full SysEx messages,
@@ -110,14 +110,14 @@ void USBMIDI_Sender::sendFullSysEx(SysExMessage msg, Send &&send) {
     const uint8_t *data = msg.data;
     Cable cn = msg.cable;
     while (length > 3) {
-        send(cn, CIN::SYSEX_START_CONT, data[0], data[1], data[2]);
+        send(cn, CIN::SysExStartCont, data[0], data[1], data[2]);
         data += 3;
         length -= 3;
     }
     switch (length) {
-        case 3: send(cn, CIN::SYSEX_END_3B, data[0], data[1], data[2]); break;
-        case 2: send(cn, CIN::SYSEX_END_2B, data[0], data[1], 0); break;
-        case 1: send(cn, CIN::SYSEX_END_1B, data[0], 0, 0); break;
+        case 3: send(cn, CIN::SysExEnd3B, data[0], data[1], data[2]); break;
+        case 2: send(cn, CIN::SysExEnd2B, data[0], data[1], 0); break;
+        case 1: send(cn, CIN::SysExEnd1B, data[0], 0, 0); break;
         default: break;
     }
 }
@@ -127,7 +127,7 @@ void USBMIDI_Sender::sendFullSysEx(SysExMessage msg, Send &&send) {
 template <class Send>
 void USBMIDI_Sender::sendSysExStartCont1(const uint8_t *data, Cable cable,
                                          Send &send) {
-    send(cable, CIN::SYSEX_START_CONT, data[0], data[1], data[2]);
+    send(cable, CIN::SysExStartCont, data[0], data[1], data[2]);
 }
 
 template <class Send>
@@ -144,9 +144,9 @@ template <class Send>
 void USBMIDI_Sender::sendSysExEnd(const uint8_t *data, uint16_t length,
                                   Cable cn, Send &send) {
     switch (length) {
-        case 3: send(cn, CIN::SYSEX_END_3B, data[0], data[1], data[2]); break;
-        case 2: send(cn, CIN::SYSEX_END_2B, data[0], data[1], 0); break;
-        case 1: send(cn, CIN::SYSEX_END_1B, data[0], 0, 0); break;
+        case 3: send(cn, CIN::SysExEnd3B, data[0], data[1], data[2]); break;
+        case 2: send(cn, CIN::SysExEnd2B, data[0], data[1], 0); break;
+        case 1: send(cn, CIN::SysExEnd1B, data[0], 0, 0); break;
         default: break; // LCOV_EXCL_LINE
     }
 }

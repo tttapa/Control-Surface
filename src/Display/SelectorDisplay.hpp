@@ -30,7 +30,7 @@ class SelectorDisplay : public DisplayElement {
 
   private:
     SelectorBase &selector;
-    setting_t previous = NO_SETTING;
+    setting_t previous = NoSetting;
     int16_t offset, multiplier, x, y;
     uint8_t size;
     uint16_t color;

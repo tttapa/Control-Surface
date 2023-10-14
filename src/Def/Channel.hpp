@@ -132,12 +132,6 @@ constexpr Channel Channel_14 = Channel::createChannel(14);
 constexpr Channel Channel_15 = Channel::createChannel(15);
 constexpr Channel Channel_16 = Channel::createChannel(16);
 
-#if __cplusplus >= 201402L
-#define CS_DEPREC(msg) [[deprecated(msg)]]
-#else
-#define CS_DEPREC(...)
-#endif
-
 #ifndef CHANNEL_1 // ArduinoCore-renesas defines this
 constexpr Channel CHANNEL_1 CS_DEPREC("Use Channel_1 instead") = Channel_1;
 constexpr Channel CHANNEL_2 CS_DEPREC("Use Channel_2 instead") = Channel_2;
@@ -156,8 +150,6 @@ constexpr Channel CHANNEL_14 CS_DEPREC("Use Channel_14 instead") = Channel_14;
 constexpr Channel CHANNEL_15 CS_DEPREC("Use Channel_15 instead") = Channel_15;
 constexpr Channel CHANNEL_16 CS_DEPREC("Use Channel_16 instead") = Channel_16;
 #endif
-
-#undef CS_DEPREC
 
 Print &operator<<(Print &, Channel);
 

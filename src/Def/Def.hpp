@@ -50,7 +50,7 @@ struct EncoderPinList {
 /// The type used for Selector%s.
 using setting_t = uint8_t;
 /// A special setting that indicates an unused or invalid setting.
-constexpr setting_t NO_SETTING =
+constexpr setting_t NoSetting =
     (std::numeric_limits<setting_t>::max() >> 1) + 1;
 
 // Updatable types:

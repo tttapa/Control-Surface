@@ -185,13 +185,13 @@ constexpr unsigned int Default = 150;
  * 
  * @ingroup MIDIInputElements
  */
-class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
+class VU : public MatchingMIDIInputElement<MIDIMessageType::ChannelPressure,
                                            VUMatcher>,
            public Interfaces::MCU::IVU {
   public:
     using Matcher = VUMatcher;
-    using Parent = MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
-                                            Matcher>;
+    using Parent =
+        MatchingMIDIInputElement<MIDIMessageType::ChannelPressure, Matcher>;
     /**
      * @brief   Constructor.
      * 
@@ -212,8 +212,7 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
      */
     VU(uint8_t track, MIDIChannelCable channelCN,
        unsigned int decayTime = VUDecay::Default)
-        : Parent({{track - 1, channelCN}}),
-          IVU(12), decayTimer(decayTime) {}
+        : Parent({{track - 1, channelCN}}), IVU(12), decayTimer(decayTime) {}
 
     /**
      * @brief   Constructor.
@@ -247,8 +246,7 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
     }
 
     bool decay() {
-        return decayTimer.getInterval() != VUDecay::Hold && 
-               decayTimer &&
+        return decayTimer.getInterval() != VUDecay::Hold && decayTimer &&
                state.decay();
     }
 
@@ -257,9 +255,7 @@ class VU : public MatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
     void reset() override { state = {}; }
 
     /// Decay the VU meter.
-    void update() override {
-        dirty |= decay();
-    }
+    void update() override { dirty |= decay(); }
 
   public:
     /// @name Data access
@@ -292,14 +288,14 @@ namespace Bankable {
  */
 template <uint8_t BankSize>
 class VU
-    : public BankableMatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
+    : public BankableMatchingMIDIInputElement<MIDIMessageType::ChannelPressure,
                                               BankableVUMatcher<BankSize>>,
       public Interfaces::MCU::IVU {
   public:
     using Matcher = BankableVUMatcher<BankSize>;
-    using Parent
-        = BankableMatchingMIDIInputElement<MIDIMessageType::CHANNEL_PRESSURE,
-                                           Matcher>;
+    using Parent =
+        BankableMatchingMIDIInputElement<MIDIMessageType::ChannelPressure,
+                                         Matcher>;
 
     /**
      * @brief   Constructor.
@@ -323,8 +319,8 @@ class VU
      */
     VU(BankConfig<BankSize> config, uint8_t track, MIDIChannelCable channelCN,
        unsigned int decayTime = VUDecay::Default)
-        : Parent({config, {track - 1, channelCN}}),
-          IVU(12), decayTimer(decayTime) {}
+        : Parent({config, {track - 1, channelCN}}), IVU(12),
+          decayTimer(decayTime) {}
 
     /**
      * @brief   Constructor.
@@ -381,9 +377,7 @@ class VU
     }
 
     /// Decay the VU meter.
-    void update() override {
-        dirty |= decay();
-    }
+    void update() override { dirty |= decay(); }
 
   protected:
     void onBankSettingChange() override { dirty = true; }
