@@ -17,7 +17,7 @@
 
 #if __cplusplus >= 201402L
 #define CS_DEPREC(msg) [[deprecated(msg)]]
-#elif defined(__GNUC__)
+#elif (defined(__GNUC__) && __GNUC__ > 6) || defined(__clang__)
 #define CS_DEPREC(msg) __attribute__((deprecated(msg)))
 #else
 #define CS_DEPREC(...)
