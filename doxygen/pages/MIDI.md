@@ -868,8 +868,17 @@ void loop() {
 }
 ```
 
+### Filtering or modifying messages passing through a pipe {#midi_md-pipes-filtering}
+
+It is possible to create custom MIDI pipes that can filter out certain MIDI
+messages, or even modify the MIDI messages that pass through them (for instance,
+to change the channel of certain messages). This is done by inheriting from
+the @ref MIDI_Pipe class and overriding the @ref MIDI_Pipe::mapForwardMIDI
+functions. See @ref MIDI_Pipes-Filter.ino for more details.
+
 ### More examples {#midi_md-routing-more-examples}
 
 - @ref MIDI_Pipes-Routing.ino
 - @ref Dual-MIDI-Interface.ino
 - @ref MIDI-Monitor.ino
+- @ref MIDI_Pipes-Filter.ino
