@@ -1,4 +1,4 @@
-# Installation
+# Installation {#md_pages_Installation}
 
 This document assumes that the **Arduino IDE** is already installed, as well as 
 the necessary hardware support packages, such as Teensyduino or the ESP32 Core, 

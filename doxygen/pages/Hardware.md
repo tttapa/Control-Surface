@@ -1,4 +1,4 @@
-# Hardware
+# Hardware {#md_pages_Hardware}
 
 ## Pushbuttons and switches
 Connect one side of the switch to ground, and the other one to a digital input pin of the Arduino.  
