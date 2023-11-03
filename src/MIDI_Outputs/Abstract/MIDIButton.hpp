@@ -1,8 +1,10 @@
 #pragma once
 
+#include "MIDIOutputElement.hpp"
 #include <AH/Hardware/Button.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <MIDI_Outputs/Abstract/MIDIAddressableUnsafe.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -14,7 +16,7 @@ BEGIN_CS_NAMESPACE
  * @see     Button
  */
 template <class Sender>
-class MIDIButton : public MIDIOutputElement {
+class MIDIButton : public MIDIOutputElement, public MIDIAddressableUnsafe {
   public:
     /**
      * @brief   Construct a new MIDIButton.
@@ -28,7 +30,7 @@ class MIDIButton : public MIDIOutputElement {
      *          The MIDI sender to use.
      */
     MIDIButton(pin_t pin, MIDIAddress address, const Sender &sender)
-        : button(pin), address(address), sender(sender) {}
+        : MIDIAddressableUnsafe(address), button(pin), sender(sender) {}
 
     void begin() override { button.begin(); }
     void update() override {
@@ -45,15 +47,8 @@ class MIDIButton : public MIDIOutputElement {
 
     AH::Button::State getButtonState() const { return button.getState(); }
 
-    /// Get the MIDI address.
-    MIDIAddress getAddress() const { return this->address; }
-    /// Set the MIDI address. Has unexpected consequences if used while the
-    /// push button is pressed. Use banks if you need to support that.
-    void setAddressUnsafe(MIDIAddress address) { this->address = address; }
-
   private:
     AH::Button button;
-    const MIDIAddress address;
 
   public:
     Sender sender;

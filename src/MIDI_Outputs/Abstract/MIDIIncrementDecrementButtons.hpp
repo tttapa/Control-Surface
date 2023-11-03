@@ -3,6 +3,7 @@
 #include <AH/Hardware/IncrementDecrementButtons.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <MIDI_Outputs/Abstract/MIDIAddressable.hpp>
 
 #include <MIDI_Senders/DigitalNoteSender.hpp>
 
@@ -12,7 +13,7 @@ BEGIN_CS_NAMESPACE
  * @brief   An abstract class for two buttons that send incremental MIDI events.
  */
 template <class RelativeSender, class ResetSender>
-class MIDIIncrementDecrementButtons : public MIDIOutputElement {
+class MIDIIncrementDecrementButtons : public MIDIOutputElement, public MIDIAddressable {
   protected:
     /**
      * @brief   Construct a new MIDIIncrementDecrementButtons.
@@ -24,9 +25,10 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
                                   MIDIAddress resetAddress,
                                   const RelativeSender &relativeSender,
                                   const ResetSender &resetSender)
-        : buttons(buttons), address(address), multiplier(multiplier),
-          resetAddress(resetAddress), relativeSender(relativeSender),
-          resetSender(resetSender) {}
+        : MIDIAddressable(address),
+            buttons(buttons), multiplier(multiplier),
+            resetAddress(resetAddress), relativeSender(relativeSender),
+            resetSender(resetSender) {}
 
   public:
     void begin() override { buttons.begin(); }
@@ -68,11 +70,6 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
         return buttons.getState();
     }
 
-    /// Get the MIDI address.
-    MIDIAddress getAddress() const { return this->address; }
-    /// Set the MIDI address.
-    void setAddress(MIDIAddress address) { this->address = address; }
-
     /// Get the MIDI address of the reset action.
     MIDIAddress getResetAddress() const { return this->resetAddress; }
     /// Set the MIDI address of the reset action.
@@ -80,7 +77,6 @@ class MIDIIncrementDecrementButtons : public MIDIOutputElement {
 
   private:
     AH::IncrementDecrementButtons buttons;
-    MIDIAddress address;
     uint8_t multiplier;
     MIDIAddress resetAddress;
 

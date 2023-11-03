@@ -4,8 +4,7 @@
 
 #include <AH/Hardware/Button.hpp>
 #include <Def/Def.hpp>
-#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
-#include <MIDI_Outputs/Abstract/MIDIAddressableUnsafe.hpp>
+#include <MIDI_Outputs/Abstract/MIDIOutputElementUnsafe.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -18,7 +17,7 @@ BEGIN_CS_NAMESPACE
  * @see     Button
  */
 template <class Sender>
-class MIDIButtonLatched : public MIDIOutputElement, public MIDIAddressableUnsafe {
+class MIDIButtonLatchable : public MIDIOutputElementUnsafe {
   protected:
     /**
      * @brief   Create a new MIDIButtonLatched object on the given pin and 
@@ -33,7 +32,7 @@ class MIDIButtonLatched : public MIDIOutputElement, public MIDIAddressableUnsafe
      *          The MIDI sender to use.
      */
     MIDIButtonLatched(pin_t pin, MIDIAddress address, const Sender &sender)
-        : MIDIAddressableUnsafe(address), button(pin), sender(sender) {}
+        : button(pin), address(address), sender(sender) {}
 
   public:
     void begin() final override { button.begin(); }

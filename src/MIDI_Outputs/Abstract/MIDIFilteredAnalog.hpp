@@ -3,6 +3,7 @@
 #include <AH/Hardware/FilteredAnalog.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <MIDI_Outputs/Abstract/MIDIAddressable.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -14,7 +15,7 @@ BEGIN_CS_NAMESPACE
  * @see     FilteredAnalog
  */
 template <class Sender>
-class MIDIFilteredAnalog : public MIDIOutputElement {
+class MIDIFilteredAnalog : public MIDIOutputElement, public MIDIAddressable {
   protected:
     /**
      * @brief   Construct a new MIDIFilteredAnalog.
@@ -29,7 +30,7 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      */
     MIDIFilteredAnalog(pin_t analogPin, MIDIAddress address,
                        const Sender &sender)
-        : filteredAnalog(analogPin), address(address), sender(sender) {}
+        : MIDIAddressable(address), filteredAnalog(analogPin), sender(sender) {}
 
   public:
     void begin() final override { filteredAnalog.resetToCurrentValue(); }
@@ -72,14 +73,8 @@ class MIDIFilteredAnalog : public MIDIOutputElement {
      */
     analog_t getValue() const { return filteredAnalog.getValue(); }
 
-    /// Get the MIDI address.
-    MIDIAddress getAddress() const { return this->address; }
-    /// Set the MIDI address.
-    void setAddress(MIDIAddress address) { this->address = address; }
-
   private:
     AH::FilteredAnalog<Sender::precision()> filteredAnalog;
-    MIDIAddress address;
 
   public:
     Sender sender;

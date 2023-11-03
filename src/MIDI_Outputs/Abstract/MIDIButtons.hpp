@@ -1,8 +1,9 @@
 #pragma once
 
 #include <AH/Hardware/Button.hpp>
+#include <AH/Containers/Updatable.hpp>
 #include <Def/Def.hpp>
-#include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <Def/MIDIAddress.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -14,7 +15,7 @@ BEGIN_CS_NAMESPACE
  * @see     Button
  */
 template <class Sender, uint8_t NumButtons>
-class MIDIButtons : public MIDIOutputElement {
+class MIDIButtons : public AH::Updatable<> {
   protected:
     /**
      * @brief   Construct a new MIDIButtons.
