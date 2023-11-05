@@ -34,6 +34,7 @@ add_executable(tests
     "MIDI_Senders/test-RelativeCCSender.cpp"
     "MIDI_Parsers/tests-MIDI_Parsers.cpp"
     "MIDI_Constants/test-MCU.cpp"
+    "MIDI_Constants/test-Notes.cpp"
     "MIDI_Outputs/test-PBPotentiometer.cpp"
     "MIDI_Outputs/test-NoteButtonMatrix.cpp"
     "MIDI_Outputs/test-NoteButtonLatching.cpp"

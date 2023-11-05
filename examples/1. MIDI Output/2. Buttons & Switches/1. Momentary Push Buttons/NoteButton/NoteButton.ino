@@ -19,6 +19,10 @@
  *   note C4.
  * - When the button on pin 5 is released, a MIDI Note Off message is sent for 
  *   note C4.
+ *
+ * Note numbers use the [Scientific Pitch Notation system](https://en.wikipedia.org/wiki/Scientific_pitch_notation),
+ * where <b>A<sub>4</sub></b> is 440 Hz, and <b>C<sub>-1</sub></b> is 8.1758 Hz.
+ * See @ref MIDI_Notes for a table of MIDI note numbers.
  * 
  * Mapping
  * -------
