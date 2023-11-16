@@ -51,6 +51,8 @@
 
 #include <MIDI_Outputs/ProgramChanger.hpp>
 
+#include <MIDI_Outputs/TouchpadPiano.hpp>
+
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatched.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatching.hpp>

@@ -19,6 +19,8 @@
 
 #include <MIDI_Outputs/ProgramChanger.hpp>
 
+#include <MIDI_Outputs/TouchpadPiano.hpp>
+
 #include <MIDI_Outputs/Bankable/CCButton.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatched.hpp>
 #include <MIDI_Outputs/Bankable/CCButtonLatching.hpp>
@@ -124,6 +126,7 @@ TEST(Construction, MIDIOutputs) {
     NoteButtonLatching {pin, address};
     NoteButtonMatrix<3, 4> {rowPins3, colPins4, addressMatrix34, cnChannel};
     NoteButtons<3> {{pin, pin, pin}, address, relAddress};
+    TouchpadPiano {2, 3, address};
 
     // PB ----------------------------------------------------------------------
     PBPotentiometer {pin, cnChannel};

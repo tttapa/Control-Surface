@@ -43,6 +43,7 @@ add_executable(tests
     "MIDI_Outputs/test-NoteButton.cpp"
     "MIDI_Outputs/test-Construction.cpp"
     "MIDI_Outputs/test-CCRotaryEncoder.cpp"
+    "MIDI_Outputs/test-TouchpadPiano.cpp"
     "MIDI_Interfaces/test-DebugStreamMIDI_Interface.cpp"
     "MIDI_Interfaces/test-USBMIDI_Interface.cpp"
     "MIDI_Interfaces/test-StreamMIDI_Interface.cpp"
