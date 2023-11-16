@@ -137,6 +137,12 @@ public:
     /// Get the velocity of the MIDI Note events.
     uint8_t getVelocity() const { return this->sender.getVelocity(); }
 
+    /// Get the MIDI address.
+    MIDIAddress getBaseAddress() const { return this->baseAddress; }
+    /// Set the MIDI address. Has unexpected consequences if used while the
+    /// touchpad is playing notes.
+    void setBaseAddressUnsafe(MIDIAddress address){ this->baseAddress=address; }
+
 private:
     void readData(uint8_t newKeysState[NB_NOTES], int8_t* newMonodicNote)
     {
