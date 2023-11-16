@@ -126,7 +126,7 @@ TEST(Construction, MIDIOutputs) {
     NoteButtonLatching {pin, address};
     NoteButtonMatrix<3, 4> {rowPins3, colPins4, addressMatrix34, cnChannel};
     NoteButtons<3> {{pin, pin, pin}, address, relAddress};
-    TouchpadPiano {2, 3, address};
+    TouchpadPiano {2, 3, address, PianoMode::Standard, u8};
 
     // PB ----------------------------------------------------------------------
     PBPotentiometer {pin, cnChannel};

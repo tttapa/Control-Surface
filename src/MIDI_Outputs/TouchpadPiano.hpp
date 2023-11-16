@@ -68,12 +68,16 @@ public:
      *          cable number [Cable_1, Cable_16].
      * @param   mode
      *          The behaviour of the piano. Values are in PianoMode::Mode enum.
+     * @param   velocity
+     *          The velocity of the MIDI Note events.
      */
     TouchpadPiano(const pin_t sclPin, const pin_t sdaPin,
-                      MIDIAddress baseAddress,
-                      PianoMode::Mode mode = PianoMode::Standard)
+                    MIDIAddress baseAddress,
+                    PianoMode::Mode mode = PianoMode::Standard,
+                    uint8_t velocity = 0x7F)
         : sclPin(sclPin), sdaPin(sdaPin), baseAddress(baseAddress),
-          updateTimer(UPDATE_RATE), mode(mode), monodicNote(-1) {}
+          updateTimer(UPDATE_RATE), mode(mode), monodicNote(-1),
+          sender(velocity) {}
 
 public:
     void begin() final override {
@@ -108,6 +112,7 @@ public:
         updateTimer.beginNextPeriod();
     }
 
+    /// Set the piano mode
     void setMode(PianoMode::Mode mode) {
         // Leaving Hold mode requires to stop notes.
         if (this->mode == PianoMode::Hold)
@@ -124,7 +129,13 @@ public:
         this->mode = mode;
     }
 
+    /// Get the piano mode
     PianoMode::Mode getMode() { return mode; }
+
+    /// Set the velocity of the MIDI Note events.
+    void setVelocity(uint8_t velocity) { this->sender.setVelocity(velocity); }
+    /// Get the velocity of the MIDI Note events.
+    uint8_t getVelocity() const { return this->sender.getVelocity(); }
 
 private:
     void readData(uint8_t newKeysState[NB_NOTES], int8_t* newMonodicNote)
