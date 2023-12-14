@@ -132,7 +132,7 @@ class MIDI_Sender {
 
     /// @}
 
-    /// @name Flusing the MIDI send buffer
+    /// @name Flushing the MIDI send buffer
     /// @{
 
     /// Causes all buffered messages to be sent immediately.
