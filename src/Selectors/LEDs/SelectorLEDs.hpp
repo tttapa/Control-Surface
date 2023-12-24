@@ -1,5 +1,9 @@
 #pragma once
 
+#include <AH/Settings/Warnings.hpp>
+
+AH_DIAGNOSTIC_WERROR()
+
 #include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <Def/Def.hpp>
 #include <Selectors/Selector.hpp>
@@ -216,3 +220,5 @@ class SwitchSelectorLED
 };
 
 END_CS_NAMESPACE
+
+AH_DIAGNOSTIC_POP()
