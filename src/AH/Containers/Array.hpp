@@ -228,8 +228,8 @@ class ArraySlice {
 
 template <class T, size_t N>
 template <size_t Start, size_t End>
-inline ArraySlice<T, abs_diff(Start, End) + 1, (End < Start), false>
-Array<T, N>::slice() {
+auto Array<T, N>::slice()
+    -> ArraySlice<T, abs_diff(Start, End) + 1, (End < Start), false> {
     static_assert(Start < N, "");
     static_assert(End < N, "");
     return &(*this)[Start];
@@ -237,8 +237,8 @@ Array<T, N>::slice() {
 
 template <class T, size_t N>
 template <size_t Start, size_t End>
-inline ArraySlice<T, abs_diff(Start, End) + 1, (End < Start), true>
-Array<T, N>::slice() const {
+auto Array<T, N>::slice() const
+    -> ArraySlice<T, abs_diff(Start, End) + 1, (End < Start), true> {
     static_assert(Start < N, "");
     static_assert(End < N, "");
     return &(*this)[Start];
@@ -246,8 +246,8 @@ Array<T, N>::slice() const {
 
 template <class T, size_t N, bool Reverse, bool Const>
 template <size_t Start, size_t End>
-ArraySlice<T, abs_diff(End, Start) + 1, Reverse ^ (End < Start), Const>
-ArraySlice<T, N, Reverse, Const>::slice() const {
+auto ArraySlice<T, N, Reverse, Const>::slice() const
+    -> ArraySlice<T, abs_diff(End, Start) + 1, Reverse ^ (End < Start), Const> {
     static_assert(Start < N, "");
     static_assert(End < N, "");
     return &(*this)[Start];
