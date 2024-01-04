@@ -118,8 +118,8 @@ END_CS_NAMESPACE
 #include "USBMIDI_Interface.ipp"
 
 #if defined(TEENSYDUINO) && !defined(TEENSY_MIDIUSB_ENABLED)
-#warning                                                                       \
-    "Teensy: USB MIDI not enabled. Enable it from the Tools > USB Type menu."
+#pragma message(                                                               \
+    "Teensy: USB MIDI not enabled. Enable it from the Tools > USB Type menu.")
 #define CS_USB_MIDI_DISABLED
 #endif
 

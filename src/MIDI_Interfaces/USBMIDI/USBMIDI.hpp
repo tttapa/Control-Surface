@@ -4,6 +4,11 @@
 #include <AH/STL/cstdint>
 #include <Settings/NamespaceSettings.hpp>
 
+#ifdef ARDUINO_ARCH_ESP32
+#include <esp_arduino_version.h>
+#include <sdkconfig.h>
+#endif
+
 BEGIN_CS_NAMESPACE
 
 inline AH::Array<uint8_t, 4> u32_to_bytes(uint32_t u) {
@@ -70,6 +75,23 @@ END_CS_NAMESPACE
 BEGIN_CS_NAMESPACE
 using USBDeviceMIDIBackend = MIDIUSB_USBDeviceMIDIBackend;
 END_CS_NAMESPACE
+#endif
+
+#elif defined(ARDUINO_ARCH_ESP32) && (ESP_ARDUINO_VERSION_MAJOR >= 3) &&       \
+    CONFIG_IDF_TARGET_ESP32S3
+
+#ifndef ARDUINO_USB_MODE
+#error "ESP32S3 expects ARDUINO_USB_MODE to be set"
+#endif
+#if ARDUINO_USB_MODE != 1
+#include "USBMIDI_ESP32.hpp"
+BEGIN_CS_NAMESPACE
+using USBDeviceMIDIBackend = ESP32_USBDeviceMIDIBackend;
+END_CS_NAMESPACE
+#else
+#define CS_USB_MIDI_NOT_SUPPORTED
+#pragma message(                                                               \
+    "ESP32S3: USB MIDI not enabled. Set the Tools > USB Type setting to \"USB-OTG\" to enable it.")
 #endif
 
 #elif defined(ARDUINO_ARCH_MBED_RP2040)
