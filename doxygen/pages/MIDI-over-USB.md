@@ -1,5 +1,42 @@
 # MIDI over USB {#md_pages_MIDI-over-USB}
 There are some differences in MIDI over USB implementation between different types of Arduino-compatible boards. This page provides an overview and some board recommendations if you're planning to build an Arduino MIDI device with MIDI over USB support.
+
+✅ = supported  
+🔼 = implemented but not tested (if you try it out, please let me know by [opening a discussion](https://github.com/tttapa/Control-Surface/discussions)!)  
+❓ = supported by hardware but not implemented  
+❌ = unsupported by hardware  
+
+| Board                               | MIDI over Serial | MIDI over USB (device) | MIDI over USB (host) | MIDI over BLE |
+|:------------------------------------|:---:|:---:|:---:|:---:|
+| Arduino UNO R3                      | ✅  | &emsp;❌⁽¹⁾ | ❌  | ❌  |
+| Arduino Nano                        | ✅  | ❌  | ❌  | ❌  |
+| Arduino Nano 33 IoT                 | ✅  | 🔼  | ❌  | ❌  |
+| Arduino Nano RP2040                 | ✅  | 🔼  | ❓  | ❓  |
+| Arduino Nano ESP32                  | ✅  | 🔼  | ❓  | 🔼  |
+| Arduino Nano 33 BLE                 | ✅  | ✅  | ❌  | ❓  |
+| Arduino Nano Every                  | ✅  | &emsp;❌⁽²⁾ | ❌  | ❌  |
+| Arduino MKR 1000                    | ✅  | 🔼  | ❓  | ❓  |
+| Arduino UNO R4 Minima               | ✅  | ❓  | ❓  | ❌  |
+| Arduino UNO R4 WiFi                 | ✅  | ❓  | ❓  | ❓  |
+| Arduino Leonardo                    | ✅  | ✅  | ❌  | ❌  |
+| Arduino Micro                       | ✅  | ✅  | ❌  | ❌  |
+| Arduino Zero                        | ✅  | 🔼  | ❌  | ❌  |
+| Arduino Mega 2560                   | ✅  | &emsp;❌⁽¹⁾ | ❌  | ❌  |
+| Arduino Due                         | ✅  | ✅  | ❓  | ❌  |
+| Arduino GIGA R1 WiFi                | ✅  | ❓  | ❓  | ❌  |
+| Teensy 2.0, Teensy++ 2.0            | ✅  | 🔼  | ❌  | ❌  |
+| Teensy LC, 3.0, 3.1, 3.2, 3.5, 4.0  | ✅  | ✅  | ❓  | ❌  |
+| Teensy 3.6, 4.1                     | ✅  | ✅  | ✅  | ❌  |
+| Raspberry Pi Pico (RP2040)          | ✅  | ✅  | ❓  | ❌  |
+| Raspberry Pi Pico W (RP2040)        | ✅  | ✅  | ❓  | ❓  |
+| ESP8266                             | ✅  | ❌  | ❌  | ❌  |
+| ESP32                               | ✅  | ❌  | ❌  | ✅  |
+| ESP32-S2                            | ✅  | 🔼  | ❓  | ❌  |
+| ESP32-S3                            | ✅  | ✅  | ❓  | ✅  |
+| ESP32-C3, ESP32-C6, ESP32-H2        | ✅  | ❌  | ❌  | 🔼  |
+
+<small>(1) Secondary microcontroller can be flashed with custom MIDI firmware.</small>  
+<small>(2) Secondary microcontroller could _in theory_ be flashed with custom MIDI firmware.</small>  
  
 ## Arduino boards with native USB support
 _Arduino Due, Arduino Leonardo, Arduino Micro, Arduino Nano 33 IOT, Arduino Zero, Arduino MKR Zero, Arduino MKR1000 ..._  
@@ -65,6 +102,12 @@ This [forum thread](https://forum.arduino.cc/index.php?topic=677150.msg4562019#m
 Once you have working SAMD11 MIDI over USB firmware, the usage is the same as the previous section about the ATmega16U2.  
 I wouldn't recommend this approach.
 
+## Newer, not yet supported Arduino boards
+_Arduino UNO R4_
+***
+MIDI over USB is not yet supported on these boards, although the hardware may support it.
+Apart from MIDI over USB, the Control Surface library works as expected. Other features (like MIDI over Serial) are supported.
+
 ## Boards with a single-purpose USB-to-TTL chip  
 _Arduino Nano, Arduino Duemilanove, Chinese Uno & Mega clones ..._
 ***
@@ -72,15 +115,23 @@ Whereas the ATmega16U2 chip is programmable, most other USB-to-TTL chips are sin
 These chips include FTDI chips (Nano and Duemilanove) and the CH340G or CP2102 (both popular on Chinese "Arduino" clones).  
 While MIDI over USB is not supported on these boards, you can still use Hairless. Just instantiate a `HairlessMIDI_Interface` at the top of your sketch.  
 
-## Espressif boards
-_ESP8266, ESP32_
+## Espressif ESP32 boards with USB support
+_ESP32-S2 and ESP32-S3_
 ***
-The ESP8266 and ESP32 microcontrollers don't have native USB support, and all development boards I've come across use a single-purpose USB-to-TTL chip, which means that they fall into the same category as the Arduino Nano when it comes to MIDI over USB.
+The ESP32-S2 and ESP32-S3 chips have native USB support, and MIDI over USB is supported by Control Surface when using version 3.0.0 or later of the `arduino-esp32` core.  
+At the time of writing, this version has not yet been officially released, and you may need to add the development release link to the boards manager URLs to install it (see https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html for more information).
 
-That being said, both the ESP8266 and the ESP32 have built-in WiFi, so you can use rtpMIDI, using the [AppleMIDI library](https://github.com/lathoub/Arduino-AppleMIDI-Library), for example.  
-An alternative is to use Open Sound Control (OSC). This is not MIDI, it's an entirely different protocol, built on top of UDP. It can be used for bidirectional communication between audio software and control surfaces. I've successfully used this to build a control surface for Reaper.
+To enable MIDI over USB support, select the `"USB-OTG"` mode in the Tools > USB Type menu.
 
-Control Surface supports AppleMIDI if you install the AppleMIDI library. See the @ref AppleMIDI.ino example for details.  
+## Other Espressif boards
+_ESP8266, ESP32, ESP32-C3, ESP32-C6, ESP32-H2_
+***
+These ESP8266 and ESP32 microcontrollers don't have native USB support, and all development boards I've come across use a single-purpose USB-to-TTL chip, which means that they fall into the same category as the Arduino Nano when it comes to MIDI over USB.
+
+That being said, some of these chips have built-in WiFi, so you can use rtpMIDI, using the [AppleMIDI library](https://github.com/lathoub/Arduino-AppleMIDI-Library), for example.  
+This is supported by Control Surface after installing the necessary libraries. See the @ref AppleMIDI.ino example for details.
+
+An alternative is to use Open Sound Control (OSC). This is not MIDI, it's an entirely different protocol, built on top of UDP. It can be used for bidirectional communication between audio software and control surfaces.
 OSC is not directly supported by the Control Surface library, but they can be integrated relatively easily.
 
 The ESP32 also has Bluetooth support, so you can use MIDI over BLE. This is supported by the Control Surface library using the @ref BluetoothMIDI_Interface.
