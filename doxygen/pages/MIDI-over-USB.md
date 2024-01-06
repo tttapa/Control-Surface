@@ -4,26 +4,26 @@ There are some differences in MIDI over USB implementation between different typ
 ✅ = supported  
 🔼 = implemented but not tested (if you try it out, please let me know by [opening a discussion](https://github.com/tttapa/Control-Surface/discussions)!)  
 ❓ = supported by hardware but not implemented  
-❌ = unsupported by hardware  
+❌ = unsupported by hardware or Arduino core  
 
 | Board                               | MIDI over Serial | MIDI over USB (device) | MIDI over USB (host) | MIDI over BLE |
 |:------------------------------------|:---:|:---:|:---:|:---:|
 | Arduino UNO R3                      | ✅  | &emsp;❌⁽¹⁾ | ❌  | ❌  |
 | Arduino Nano                        | ✅  | ❌  | ❌  | ❌  |
-| Arduino Nano 33 IoT                 | ✅  | 🔼  | ❌  | ❌  |
+| Arduino Nano 33 IoT                 | ✅  | 🔼  | ❓  | ❌  |
 | Arduino Nano RP2040                 | ✅  | 🔼  | ❓  | ❓  |
 | Arduino Nano ESP32                  | ✅  | 🔼  | ❓  | 🔼  |
-| Arduino Nano 33 BLE                 | ✅  | ✅  | ❌  | ❓  |
+| Arduino Nano 33 BLE                 | ✅  | ✅  | &emsp;❌⁽⁴⁾  | ❓  |
 | Arduino Nano Every                  | ✅  | &emsp;❌⁽²⁾ | ❌  | ❌  |
 | Arduino MKR 1000                    | ✅  | 🔼  | ❓  | ❓  |
-| Arduino UNO R4 Minima               | ✅  | ❓  | ❓  | ❌  |
-| Arduino UNO R4 WiFi                 | ✅  | ❓  | ❓  | ❓  |
+| Arduino UNO R4 Minima               | ✅  | &emsp;❌⁽³⁾  | &emsp;❌⁽⁴⁾  | ❌  |
+| Arduino UNO R4 WiFi                 | ✅  | &emsp;❌⁽³⁾  | &emsp;❌⁽⁴⁾  | ❓  |
 | Arduino Leonardo                    | ✅  | ✅  | ❌  | ❌  |
 | Arduino Micro                       | ✅  | ✅  | ❌  | ❌  |
-| Arduino Zero                        | ✅  | 🔼  | ❌  | ❌  |
+| Arduino Zero                        | ✅  | 🔼  | ❓  | ❌  |
 | Arduino Mega 2560                   | ✅  | &emsp;❌⁽¹⁾ | ❌  | ❌  |
 | Arduino Due                         | ✅  | ✅  | ❓  | ❌  |
-| Arduino GIGA R1 WiFi                | ✅  | ❓  | ❓  | ❌  |
+| Arduino GIGA R1 WiFi                | ✅  | ❓  | &emsp;❌⁽⁴⁾  | ❌  |
 | Teensy 2.0, Teensy++ 2.0            | ✅  | 🔼  | ❌  | ❌  |
 | Teensy LC, 3.0, 3.1, 3.2, 3.5, 4.0  | ✅  | ✅  | ❓  | ❌  |
 | Teensy 3.6, 4.1                     | ✅  | ✅  | ✅  | ❌  |
@@ -37,6 +37,8 @@ There are some differences in MIDI over USB implementation between different typ
 
 <small>(1) Secondary microcontroller can be flashed with custom MIDI firmware.</small>  
 <small>(2) Secondary microcontroller could _in theory_ be flashed with custom MIDI firmware.</small>  
+<small>(3) Hardware supports it, but the Arduino core explicitly disables MIDI over USB support by setting `CFG_TUD_MIDI=0` in [their TinyUSB config](https://github.com/arduino/ArduinoCore-renesas/blob/6ee152ff2a9c00c8ab2ccff4f1eaee7e1f3388c1/variants/MINIMA/tusb_config.h#L81).</small>  
+<small>(4) Hardware supports it, but the Arduino core does not support it.</small>  
  
 ## Arduino boards with native USB support
 _Arduino Due, Arduino Leonardo, Arduino Micro, Arduino Nano 33 IOT, Arduino Zero, Arduino MKR Zero, Arduino MKR1000 ..._  
