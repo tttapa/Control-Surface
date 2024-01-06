@@ -1456,10 +1456,10 @@
  * MIDI-Monitor
  * ============
  * 
- * This example shows prints all MIDI messages that arrive over USB to the 
- * Serial monitor so you can use the Arduino as a MIDI monitor. It also allows 
- * you to enter MIDI messages as text in the Serial monitor, and then sends 
- * these messages as MIDI over USB.
+ * This example prints all MIDI messages that arrive over USB to the Serial
+ * monitor so you can use the Arduino as a MIDI monitor. It also allows you to
+ * enter MIDI messages as text in the Serial monitor, and then sends these
+ * messages as MIDI over USB.
  *
  * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x
  *
@@ -1586,6 +1586,65 @@
  * no response, because the code filtered it out.
  * 
  * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, ESP32, Teensy 3.x
+ */
+
+/**
+ * @example   "MIDI-Monitor-OLED.ino"
+ * 
+ * MIDI-Monitor-OLED
+ * =================
+ * 
+ * This example shows all incoming and outgoing MIDI messages on an SSD1306
+ * OLED display. This can be handy for debugging purposes when you don't have
+ * access to the Serial Monitor.
+ *
+ * @boards  AVR, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Teensy 3.x, ESP32, ESP8266
+ *
+ * Connections
+ * -----------
+ * 
+ * - 5:  Push button (to ground)
+ * - MOSI: OLED Data/D1 (SPI)
+ * - SCK:  OLED Clock/D0 (SPI)
+ * - 8:  OLED Reset
+ * - 9:  OLED Data/Command
+ * - 10: OLED %Cable Select
+ *
+ * Behavior
+ * --------
+ * 
+ * - When sending MIDI messages to the Arduino using the USB interface, these
+ *   messages are printed on the OLED display, prefixed by a right arrow (→).
+ * - If any MIDI messages are sent by Control Surface (e.g. by pressing the push
+ *   button), these messages are printed on the OLED display, prefixed
+ *   by a left arrow (←).  
+ *   @image html midi-monitor-oled.gif
+ * 
+ * Explanation
+ * -----------
+ * 
+ * The code below defines the `OLEDDebugMIDI_Output` class, which implements the
+ * @ref MIDI_Sink and @ref MIDI_Sender interfaces. This means that it can accept
+ * MIDI messages coming from @ref MIDI_Pipe%s, and it provides all of the usual
+ * functions for sending MIDI messages.
+ *
+ * The MIDI over USB interface (`midi`) will be used as the primary MIDI
+ * interface (as in the other Control Surface examples).  
+ * Two instances of our `OLEDDebugMIDI_Output` class are created: one for
+ * printing messages that are received by the primary MIDI interface, and one
+ * for printing messages that are sent by Control Surface.  
+ * The MIDI interfaces and Control Surface itself are connected appropriately
+ * using some pipes.
+ *
+ * <img style="margin: 0 auto; display: block; width: 38em" src="midi-pipes-mon-oled.svg"/>
+ *
+ * @see @ref MIDI_Pipes-Routing.ino
+ * @see @ref Debug-MIDI-Interface.ino
+ * @see @ref midi_md-routing "MIDI Tutorial: Routing MIDI messages"
+ * @see @ref MIDI-Monitor.ino
+ * 
+ * Written by PieterP, 2024-01-05  
+ * https://github.com/tttapa/Control-Surface
  */
 
 /**
@@ -1863,11 +1922,11 @@
  * -----------
  * 
  * - 5:  Push button (to ground)
- * - 11: OLED Data/D1 (SPI MOSI)
- * - 13: OLED Clock/D0 (SPI SCK)
+ * - MOSI: OLED Data/D1 (SPI)
+ * - SCK: OLED Clock/D0 (SPI)
  * - 17: OLED Data/Command
- * - 10: Left OLED Cable Select
- * - 18: Right OLED Cable Select
+ * - 10: Left OLED %Cable Select
+ * - 18: Right OLED %Cable Select
  * 
  * Add a capacitor between the reset pins of the displays and ground, and a 
  * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
@@ -1929,10 +1988,10 @@
  * 
  * - 5:  Push button (to ground)
  * - 6:  Push button (to ground)
- * - 7:  OLED Data/D1 (SPI MOSI)
- * - 13: OLED Clock/D0 (SPI SCK)
+ * - MOSI: OLED Data/D1 (SPI)
+ * - SCK:  OLED Clock/D0 (SPI)
  * - 17: OLED Data/Command
- * - 10: OLED Cable Select
+ * - 10: OLED %Cable Select
  * 
  * Add a capacitor between the reset pin of the display and ground, and a 
  * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
@@ -3001,8 +3060,8 @@
  * - 7:  OLED Data/D1 (SPI MOSI)
  * - 13: OLED Clock/D0 (SPI SCK)
  * - 17: OLED Data/Command
- * - 10: Left OLED Cable Select
- * - 18: Right OLED Cable Select
+ * - 10: Left OLED %Cable Select
+ * - 18: Right OLED %Cable Select
  * 
  * Add a capacitor between the reset pin of the displays and ground, and a 
  * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 

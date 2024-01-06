@@ -23,8 +23,8 @@
  * - 7:  OLED Data/D1 (SPI MOSI)
  * - 13: OLED Clock/D0 (SPI SCK)
  * - 17: OLED Data/Command
- * - 10: Left OLED Cable Select
- * - 18: Right OLED Cable Select
+ * - 10: Left OLED %Cable Select
+ * - 18: Right OLED %Cable Select
  * 
  * Add a capacitor between the reset pin of the displays and ground, and a 
  * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 

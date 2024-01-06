@@ -1,8 +1,8 @@
 /** 
- * This example shows prints all MIDI messages that arrive over USB to the 
- * Serial monitor so you can use the Arduino as a MIDI monitor. It also allows 
- * you to enter MIDI messages as text in the Serial monitor, and then sends 
- * these messages as MIDI over USB.
+ * This example prints all MIDI messages that arrive over USB to the Serial
+ * monitor so you can use the Arduino as a MIDI monitor. It also allows you to
+ * enter MIDI messages as text in the Serial monitor, and then sends these
+ * messages as MIDI over USB.
  *
  * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x
  *

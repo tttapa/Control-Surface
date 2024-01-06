@@ -9,10 +9,10 @@
  * 
  * - 5:  Push button (to ground)
  * - 6:  Push button (to ground)
- * - 7:  OLED Data/D1 (SPI MOSI)
- * - 13: OLED Clock/D0 (SPI SCK)
+ * - MOSI: OLED Data/D1 (SPI)
+ * - SCK:  OLED Clock/D0 (SPI)
  * - 17: OLED Data/Command
- * - 10: OLED Cable Select
+ * - 10: OLED %Cable Select
  * 
  * Add a capacitor between the reset pin of the display and ground, and a 
  * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
