@@ -16,12 +16,18 @@ BEGIN_AH_NAMESPACE
  * 
  * The SPI interface is used.
  * 
- * @todo    Wiring diagram for SPI connection.
- * 
+ * **Wiring**
+ *
+ * - SPI MOSI: MAX7219 DIN (1)
+ * - SPI SCK: MAX7219 CLK (13)
+ * - Any GPIO pin: MAX7219 LOAD/C̄S̄ (12)
+ *
  * @tparam  NumChips
  *          The number of daisy-chained MAX7219 chips.
  * @tparam  SPIDriver
  *          The SPI class to use. Usually, the default is fine.
+ *
+ * @ingroup AH_ExtIO
  */
 template <uint8_t NumChips = 1, class SPIDriver = decltype(SPI) &>
 class MAX7219 : public MAX7219_Base<SPIDriver>,
