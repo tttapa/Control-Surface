@@ -6,7 +6,9 @@
 /**
  * @defgroup    AH_ExtIO Extended Input/Output
  * @brief   All Elements that extend the number of IO pins of the Arduino: 
- *          Currently only shift registers and multiplexers.
+ *          Includes shift registers (e.g. 74HC595), multiplexers (e.g. 74HC4067,
+ *          74HC4051), port expanders (e.g. MCP23017), LED drivers (e.g.
+ *          MAX7219), etc.
  */
 
 /// @cond   !AH_MAIN_LIBRARY

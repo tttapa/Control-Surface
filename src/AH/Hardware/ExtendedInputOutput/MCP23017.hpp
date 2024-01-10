@@ -14,6 +14,8 @@ BEGIN_AH_NAMESPACE
  * 
  * @tparam  WireType 
  *          The type of the I²C driver to use.
+ *
+ * @ingroup AH_ExtIO
  */
 template <class WireType>
 class MCP23017 : public StaticSizeExtendedIOElement<16> {
