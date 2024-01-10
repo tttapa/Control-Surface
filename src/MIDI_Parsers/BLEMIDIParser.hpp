@@ -45,6 +45,16 @@ class BLEMIDIParser {
         }
     }
 
+    /// Extend the BLE packet with the given buffer.
+    /// @pre    The previous buffer was fully consumed (@ref pull returned false).
+    /// @note   This function should only be used for a single packet that spans
+    ///         multiple buffers. If you want to parse a new packet, you should
+    ///         create a new BLEMIDIParser instance.
+    void extend(const uint8_t *data, size_t length) {
+        this->data = data;
+        this->end = data + length;
+    }
+
     /// Get the next MIDI byte from the BLE packet (if available).
     /// @return True if a byte was available, false otherwise.
     bool pull(uint8_t &output) {
@@ -68,7 +78,18 @@ class BLEMIDIParser {
                 }
                 // Otherwise it's a time stamp
                 else {
-                    timestamp = (timestamp & 0x3F80) | (*data++ & 0x7F);
+                    uint16_t timestampLow = *data++ & 0x7F;
+                    // The BLE MIDI spec has the following to say about overflow:
+                    // > Should the timestamp value of a subsequent MIDI message
+                    // > in the same packet overflow/wrap (i.e., the
+                    // > timestampLow is smaller than a preceding timestampLow),
+                    // > the receiver is responsible for tracking this by
+                    // > incrementing the timestampHigh by one (the incremented
+                    // > value is not transmitted, only understood as a result
+                    // > of the overflow condition).
+                    if (timestampLow < (timestamp & 0x7F)) // overflow
+                        timestamp += 0x80;
+                    timestamp = (timestamp & 0x3F80) | timestampLow;
                 }
             }
         }
@@ -79,7 +100,7 @@ class BLEMIDIParser {
 
   private:
     const uint8_t *data;
-    const uint8_t *const end;
+    const uint8_t *end;
     bool prevWasTimestamp = true;
     uint16_t timestamp = 0;
 

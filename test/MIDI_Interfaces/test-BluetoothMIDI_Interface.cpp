@@ -104,6 +104,96 @@ TEST(BluetoothMIDIInterface, receiveMultipleChannelMessageRunningStatus) {
 }
 
 TEST(BluetoothMIDIInterface,
+     receiveMultipleChannelMessageRunningStatusTimestamp) {
+    MockMIDI_Callbacks cb;
+
+    BluetoothMIDI_Interface midi;
+    midi.begin();
+    midi.setCallbacks(&cb);
+
+    uint8_t data[] = {
+        0x84, 0x83, 0x90, // note on
+        0x3C, 0x7F,       //
+        0x3D, 0x7E,       //
+        0x85, 0xB1,       // control change
+        0x10, 0x40,       //
+        0x11, 0x41,       //
+        0x87,             // low timestamp byte
+        0x12, 0x42,       //
+        0x13, 0x43,       //
+        0x89, 0xD9,       // channel pressure
+        0x14,             //
+        0x15,             //
+    };
+    midi.parse(data, sizeof(data));
+    midi.update();
+
+    std::vector<uint8_t> expectedSysExMessages = {};
+    EXPECT_EQ(cb.sysExMessages, expectedSysExMessages);
+    EXPECT_EQ(cb.sysExCounter, 0);
+
+    std::vector<ChannelMessage> expectedChannelMessages = {
+        {0x90, 0x3C, 0x7F}, {0x90, 0x3D, 0x7E}, {0xB1, 0x10, 0x40},
+        {0xB1, 0x11, 0x41}, {0xB1, 0x12, 0x42}, {0xB1, 0x13, 0x43},
+        {0xD9, 0x14, 0x00}, {0xD9, 0x15, 0x00},
+    };
+    EXPECT_EQ(cb.channelMessages, expectedChannelMessages);
+}
+
+// This test is basically the same as the previous one, but it also checks the
+// timestamp values.
+TEST(BluetoothMIDIInterface,
+     receiveMultipleChannelMessageRunningStatusTimestampChecked) {
+    BluetoothMIDI_Interface midi;
+    midi.begin();
+
+    uint8_t data[] = {
+        0x84, 0x83, 0x90, // note on
+        0x3C, 0x7F,       //
+        0x3D, 0x7E,       //
+        0x85, 0xB1,       // control change
+        0x10, 0x40,       //
+        0x11, 0x41,       //
+        0x87,             // low timestamp byte
+        0x12, 0x42,       //
+        0x13, 0x43,       //
+        0x89, 0xD9,       // channel pressure
+        0x14,             //
+        0x15,             //
+        0x82,             // low timestamp byte (overflow)
+        0x16,             //
+    };
+    midi.parse(data, sizeof(data));
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), (ChannelMessage {0x90, 0x3C, 0x7F}));
+    EXPECT_EQ(midi.getTimestamp(), 0x0203);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), (ChannelMessage {0x90, 0x3D, 0x7E}));
+    EXPECT_EQ(midi.getTimestamp(), 0x0203);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), (ChannelMessage {0xB1, 0x10, 0x40}));
+    EXPECT_EQ(midi.getTimestamp(), 0x0205);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), (ChannelMessage {0xB1, 0x11, 0x41}));
+    EXPECT_EQ(midi.getTimestamp(), 0x0205);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), (ChannelMessage {0xB1, 0x12, 0x42}));
+    EXPECT_EQ(midi.getTimestamp(), 0x0207);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), (ChannelMessage {0xB1, 0x13, 0x43}));
+    EXPECT_EQ(midi.getTimestamp(), 0x0207);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), (ChannelMessage {0xD9, 0x14, 0x00}));
+    EXPECT_EQ(midi.getTimestamp(), 0x0209);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), (ChannelMessage {0xD9, 0x15, 0x00}));
+    EXPECT_EQ(midi.getTimestamp(), 0x0209);
+    EXPECT_EQ(midi.read(), MIDIReadEvent::CHANNEL_MESSAGE);
+    EXPECT_EQ(midi.getChannelMessage(), (ChannelMessage {0xD9, 0x16, 0x00}));
+    EXPECT_EQ(midi.getTimestamp(), 0x0282);
+}
+
+TEST(BluetoothMIDIInterface,
      receiveMultipleChannelMessageRunningStatusRealTime) {
     MockMIDI_Callbacks cb;
 
