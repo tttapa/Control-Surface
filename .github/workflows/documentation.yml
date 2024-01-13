@@ -34,11 +34,11 @@ jobs:
         ./scripts/ci/install-lcov.sh /tmp/lcov
         echo "/tmp/lcov/bin" >> $GITHUB_PATH
 
-    # Download and build doxygen (if not cached already)
+    # Download and install doxygen
     - name: Install Doxygen
-      run: |
-        ./scripts/ci/install-doxygen.sh /tmp/doxygen
-        echo "/tmp/doxygen/bin" >> $GITHUB_PATH
+      run: >
+        wget -O- https://github.com/doxygen/doxygen/releases/download/Release_1_9_8/doxygen-1.9.8.linux.bin.tar.gz | 
+        tar xz -C /usr/local/bin doxygen-1.9.8/bin/doxygen --strip-components=2
 
     - name: Install Google Test
       if: steps.cache-tools.outputs.cache-hit != 'true'
