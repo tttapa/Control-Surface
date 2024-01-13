@@ -42,8 +42,6 @@ class NoteButton
      *          number [Cable_1, Cable_16].
      * @param   velocity
      *          The velocity of the MIDI Note events.
-     * 
-     * @ingroup MIDIOutputElementConstructors
      */
     NoteButton(const Bank<NumBanks> &bank, pin_t pin,
                const Array<MIDIAddress, NumBanks> &addresses,

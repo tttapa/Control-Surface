@@ -43,8 +43,6 @@ class CCButton
      *          number [Cable_1, Cable_16].
      * @param   sender
      *          The MIDI sender to use.
-     * 
-     * @ingroup MIDIOutputElementConstructors
      */
     CCButton(const Bank<NumBanks> &bank, pin_t pin,
              const Array<MIDIAddress, NumBanks> &addresses,
