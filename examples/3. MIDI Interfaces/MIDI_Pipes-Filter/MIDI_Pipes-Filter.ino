@@ -1,5 +1,5 @@
 /**
- * @brief Filtering and modifying MIDI messages that travel through a MIDI_Pipe.
+ * Filtering and modifying MIDI messages that travel through a MIDI_Pipe.
  * 
  * This example demonstrates how to create custom MIDI pipes that can filter out
  * and modify the messages that travel through it. It uses a debug MIDI 

@@ -1,7 +1,7 @@
 /**
- * @brief   This is an example of the `CCPotentiometer` class of the 
- *          Control_Surface library, and specifically, how to use the `map`
- *          function to account for non-linearities of the potentiometer.
+ * This is an example of the `CCPotentiometer` class of the Control_Surface
+ * library, and specifically, how to use the `map` function to account for
+ * non-linearities of the potentiometer.
  * 
  * The map function in this example corrects for potentiometers that don't go
  * all the way to the extreme values. Some potentiometers still read a value
