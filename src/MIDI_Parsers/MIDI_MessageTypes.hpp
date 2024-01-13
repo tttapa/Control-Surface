@@ -23,38 +23,42 @@ BEGIN_CS_NAMESPACE
 
 /// All possible MIDI status byte values (without channel).
 enum class MIDIMessageType : uint8_t {
-    None = 0x00,
+    None = 0x00, ///< Special value that does not correspond to an actual
+                 ///< message type.
     /* Channel Voice Messages */
-    NoteOff = 0x80,         // 3B
-    NoteOn = 0x90,          // 3B
-    KeyPressure = 0xA0,     // 3B
-    ControlChange = 0xB0,   // 3B
-    ProgramChange = 0xC0,   // 2B
-    ChannelPressure = 0xD0, // 2B
-    PitchBend = 0xE0,       // 3B
+    NoteOff = 0x80,         ///< Note Off Channel Voice message (3B).
+    NoteOn = 0x90,          ///< Note On Channel Voice message (3B).
+    KeyPressure = 0xA0,     ///< Key Pressure Channel Voice message (3B).
+    ControlChange = 0xB0,   ///< Control Change Channel Voice message (3B).
+    ProgramChange = 0xC0,   ///< Program Change Channel Voice message (2B).
+    ChannelPressure = 0xD0, ///< Channel Pressure Channel Voice message (2B).
+    PitchBend = 0xE0,       ///< Pitch Bend Channel Voice message (3B).
 
-    SysExStart = 0xF0,
+    SysExStart = 0xF0, ///< Start of System Exclusive.
 
     /* System Common messages */
-    MTCQuarterFrame = 0xF1,
-    SongPositionPointer = 0xF2,
-    SongSelect = 0xF3,
-    UndefinedSysCommon1 = 0xF4,
-    UndefinedSysCommon2 = 0xF5,
-    TuneRequest = 0xF6,
-    SysExEnd = 0xF7,
+    MTCQuarterFrame = 0xF1,     ///< MIDI Time Code Quarter Frame System Common
+                                ///< message (2B).
+    SongPositionPointer = 0xF2, ///< Song Position Pointer System Common
+                                ///< message (3B).
+    SongSelect = 0xF3,          ///< Song Select System Common message (2B).
+    UndefinedSysCommon1 = 0xF4, ///< Undefined System Common message 0xF4 (1B).
+    UndefinedSysCommon2 = 0xF5, ///< Undefined System Common message 0xF5 (1B).
+    TuneRequest = 0xF6,         ///< Tune Request System Common message (1B).
+    SysExEnd = 0xF7,            ///< End of System Exclusive.
 
     /* System Real-Time messages */
-    TimingClock = 0xF8,
-    UndefinedRealTime1 = 0xF9,
-    Start = 0xFA,
-    Continue = 0xFB,
-    Stop = 0xFC,
-    UndefinedRealTime2 = 0xFD,
-    ActiveSensing = 0xFE,
-    SystemReset = 0xFF,
+    TimingClock = 0xF8,        ///< Timing Clock System Real-Time message.
+    UndefinedRealTime1 = 0xF9, ///< Undefined System Real-Time message 0xF9.
+    Start = 0xFA,              ///< Start System Real-Time message.
+    Continue = 0xFB,           ///< Continue System Real-Time message.
+    Stop = 0xFC,               ///< Stop System Real-Time message.
+    UndefinedRealTime2 = 0xFD, ///< Undefined System Real-Time message 0xFD.
+    ActiveSensing = 0xFE,      ///< Active Sensing System Real-Time message.
+    SystemReset = 0xFF,        ///< Reset System Real-Time message.
 
-    // clang-format off
+// clang-format off
+#ifndef DOXYGEN
     NONE CS_DEPREC("Use None instead") = None,
     NOTE_OFF CS_DEPREC("Use NoteOff instead") = NoteOff,
     NOTE_ON CS_DEPREC("Use NoteOn instead") = NoteOn,
@@ -80,6 +84,7 @@ enum class MIDIMessageType : uint8_t {
     UNDEFINED_REALTIME_2 CS_DEPREC("Use UndefinedRealTime2 instead") = UndefinedRealTime2,
     ACTIVE_SENSING CS_DEPREC("Use ActiveSensing instead") = ActiveSensing,
     SYSTEM_RESET CS_DEPREC("Use SystemReset instead") = SystemReset,
+#endif // DOXYGEN
     // clang-format on
 };
 
