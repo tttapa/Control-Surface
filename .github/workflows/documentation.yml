@@ -37,8 +37,8 @@ jobs:
     # Download and install doxygen
     - name: Install Doxygen
       run: >
-        wget -O- https://github.com/doxygen/doxygen/releases/download/Release_1_9_8/doxygen-1.9.8.linux.bin.tar.gz | 
-        tar xz -C /usr/local/bin doxygen-1.9.8/bin/doxygen --strip-components=2
+        wget -O- https://github.com/doxygen/doxygen/releases/download/Release_1_10_0/doxygen-1.10.0.linux.bin.tar.gz | 
+        tar xz -C /usr/local/bin doxygen-1.10.0/bin/doxygen --strip-components=2
 
     - name: Install Google Test
       if: steps.cache-tools.outputs.cache-hit != 'true'
