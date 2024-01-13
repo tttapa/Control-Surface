@@ -161,6 +161,9 @@ address.footer img.footer {
     vertical-align: middle;
     padding-bottom: 0.25em;
 }
+b.boards-info {
+    cursor: help;
+}
 /* Fonts */
 body, table, div, p, dl {
     font-family: 'Roboto', 'sans-serif';

@@ -279,8 +279,8 @@ TAB_SIZE               = 4
 # with the commands \{ and \} for these it is advised to use the version @{ and
 # @} or use a double escape (\\{ and \\})
 
-ALIASES                = "boardsinfo=<b title=\"Control Surface's automated continuous integration workflows regularly verify that this example compiles successfully for the following boards. The list is not exhaustive, and the example will most likely work on other boards as well (perhaps requiring slight modifications).\">🛈</b>" \
-                         "boards=@par Boards: @boardsinfo ^^"
+ALIASES                = "boardsinfo=<b class=\"boards-info\" title=\"Control Surface's automated continuous integration workflows regularly verify that this example compiles successfully for the following boards. The list is not exhaustive, and the example will most likely work on other boards as well (perhaps requiring slight modifications).\">🛈</b>" \
+                         "boards=@par Boards: @boardsinfo ^^ &emsp;"
 
 # Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your project consists of C sources
 # only. Doxygen will then generate output that is more tailored for C. For
