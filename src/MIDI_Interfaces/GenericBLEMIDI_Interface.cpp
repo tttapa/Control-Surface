@@ -88,54 +88,16 @@ void GenericBLEMIDI_Interface::sendSysExImpl(SysExMessage msg) {
     backend.releasePacketAndNotify(lck);
 }
 
-// -------------------------------------------------------------------------- //
-
-void GenericBLEMIDI_Interface::parseNowThreadSafe(BLEDataGenerator ble_data) {
-    auto chunk = ble_data();
-    if (chunk.length == 0)
-        return;
-    ble_parser = {chunk.data, chunk.length};
-    while (true) {
-        MIDIReadEvent event = parser.pull(ble_parser);
-        while (event != MIDIReadEvent::NO_MESSAGE) {
-            switch (event) {
-                case MIDIReadEvent::CHANNEL_MESSAGE:
-                    if (!queue.push(parser.getChannelMessage(),
-                                    ble_parser.getTimestamp()))
-                        queueFull();
-                    break;
-                case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
-                case MIDIReadEvent::SYSEX_MESSAGE:
-                    if (!queue.push(parser.getSysExMessage(),
-                                    ble_parser.getTimestamp()))
-                        queueFull();
-                    break;
-                case MIDIReadEvent::REALTIME_MESSAGE:
-                    if (!queue.push(parser.getRealTimeMessage(),
-                                    ble_parser.getTimestamp()))
-                        queueFull();
-                    break;
-                case MIDIReadEvent::SYSCOMMON_MESSAGE:
-                    if (!queue.push(parser.getSysCommonMessage(),
-                                    ble_parser.getTimestamp()))
-                        queueFull();
-                    break;
-                case MIDIReadEvent::NO_MESSAGE: break; // LCOV_EXCL_LINE
-                default: break;                        // LCOV_EXCL_LINE
-            }
-            event = parser.pull(ble_parser);
-        }
-        chunk = ble_data();
-        if (chunk.length == 0)
-            break;
-        ble_parser.extend(chunk.data, chunk.length);
-    }
-    parser.cancelRunningStatus();
+void GenericBLEMIDI_Interface::sendNowImpl() {
+    auto lck = backend.acquirePacket();
+    backend.sendNow(lck);
 }
+
+// -------------------------------------------------------------------------- //
 
 MIDIReadEvent GenericBLEMIDI_Interface::read() {
     // Pop a new message from the queue
-    if (!queue.pop(incomingMessage))
+    if (!backend.popMessage(incomingMessage))
         return MIDIReadEvent::NO_MESSAGE;
     return incomingMessage.eventType;
 }
