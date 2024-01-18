@@ -12,7 +12,7 @@ MIDIMessageQueue::MIDIMessageQueueElement::MIDIMessageQueueElement(
     // SysEx data is copied, not stored by pointer, so allocate new
     // storage for the SysEx data, and copy it if allocation was
     // successful.
-    uint8_t *newBuffer = new uint8_t[message.length];
+    uint8_t *newBuffer = new (std::nothrow) uint8_t[message.length];
     // Make sure that allocation was successful.
     if (newBuffer == nullptr) {
         DEBUGREF(F("SysEx buffer allocation failed"));
