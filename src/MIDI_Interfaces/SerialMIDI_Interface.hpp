@@ -144,8 +144,7 @@ class USBSerialMIDI_Interface : public SerialMIDI_Interface<decltype(Serial)> {
 /**
  * @brief   A class for MIDI Interfaces sending and receiving
  *          data over the USB Serial CDC connection for the use
- *          with the [Hairless MIDI<->Serial Bridge]
- *          (http://projectgus.github.io/hairless-midiserial/).
+ *          with the [Hairless MIDI<->Serial Bridge](http://projectgus.github.io/hairless-midiserial/).
  * 
  * @ingroup MIDIInterfaces
  */
