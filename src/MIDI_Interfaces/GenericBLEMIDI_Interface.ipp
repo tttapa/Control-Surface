@@ -1,5 +1,3 @@
-#if !defined(ARDUINO) || defined(ESP32) || defined(DOXYGEN)
-
 #include "GenericBLEMIDI_Interface.hpp"
 
 BEGIN_CS_NAMESPACE
@@ -8,8 +6,9 @@ BEGIN_CS_NAMESPACE
 
 // The following section implements the MIDI sending functions.
 
+template <class BackendT>
 template <class L, class F>
-void GenericBLEMIDI_Interface::sendImpl(L &lck, F add_to_buffer) {
+void GenericBLEMIDI_Interface<BackendT>::sendImpl(L &lck, F add_to_buffer) {
     // BLE packets are sent asynchronously, so we need a lock to access the
     // packet buffer
     assert(lck.lck.owns_lock());
@@ -25,7 +24,9 @@ void GenericBLEMIDI_Interface::sendImpl(L &lck, F add_to_buffer) {
     backend.releasePacketAndNotify(lck);
 }
 
-void GenericBLEMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
+template <class BackendT>
+void GenericBLEMIDI_Interface<BackendT>::sendChannelMessageImpl(
+    ChannelMessage msg) {
     uint16_t timestamp = millis(); // BLE MIDI timestamp
     auto lck = backend.acquirePacket();
     if (msg.hasTwoDataBytes()) {
@@ -40,14 +41,17 @@ void GenericBLEMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
     }
 }
 
-void GenericBLEMIDI_Interface::sendRealTimeImpl(RealTimeMessage msg) {
+template <class BackendT>
+void GenericBLEMIDI_Interface<BackendT>::sendRealTimeImpl(RealTimeMessage msg) {
     uint16_t timestamp = millis(); // BLE MIDI timestamp
     auto lck = backend.acquirePacket();
     sendImpl(lck,
              [&] { return lck.packet->addRealTime(msg.message, timestamp); });
 }
 
-void GenericBLEMIDI_Interface::sendSysCommonImpl(SysCommonMessage msg) {
+template <class BackendT>
+void GenericBLEMIDI_Interface<BackendT>::sendSysCommonImpl(
+    SysCommonMessage msg) {
     uint16_t timestamp = millis(); // BLE MIDI timestamp
     auto lck = backend.acquirePacket();
     sendImpl(lck, [&] {
@@ -56,7 +60,8 @@ void GenericBLEMIDI_Interface::sendSysCommonImpl(SysCommonMessage msg) {
     });
 }
 
-void GenericBLEMIDI_Interface::sendSysExImpl(SysExMessage msg) {
+template <class BackendT>
+void GenericBLEMIDI_Interface<BackendT>::sendSysExImpl(SysExMessage msg) {
     uint16_t timestamp = millis(); // BLE MIDI timestamp
     size_t length = msg.length;
     const uint8_t *data = msg.data;
@@ -88,39 +93,46 @@ void GenericBLEMIDI_Interface::sendSysExImpl(SysExMessage msg) {
     backend.releasePacketAndNotify(lck);
 }
 
-void GenericBLEMIDI_Interface::sendNowImpl() {
+template <class BackendT>
+void GenericBLEMIDI_Interface<BackendT>::sendNowImpl() {
     auto lck = backend.acquirePacket();
     backend.sendNow(lck);
 }
 
 // -------------------------------------------------------------------------- //
 
-MIDIReadEvent GenericBLEMIDI_Interface::read() {
+template <class BackendT>
+MIDIReadEvent GenericBLEMIDI_Interface<BackendT>::read() {
     // Pop a new message from the queue
     if (!backend.popMessage(incomingMessage))
         return MIDIReadEvent::NO_MESSAGE;
     return incomingMessage.eventType;
 }
 
-ChannelMessage GenericBLEMIDI_Interface::getChannelMessage() const {
+template <class BackendT>
+ChannelMessage GenericBLEMIDI_Interface<BackendT>::getChannelMessage() const {
     return incomingMessage.eventType == MIDIReadEvent::CHANNEL_MESSAGE
                ? incomingMessage.message.channelmessage
                : ChannelMessage(0, 0, 0);
 }
 
-SysCommonMessage GenericBLEMIDI_Interface::getSysCommonMessage() const {
+template <class BackendT>
+SysCommonMessage
+GenericBLEMIDI_Interface<BackendT>::getSysCommonMessage() const {
     return incomingMessage.eventType == MIDIReadEvent::SYSCOMMON_MESSAGE
                ? incomingMessage.message.syscommonmessage
                : SysCommonMessage(0, 0, 0);
 }
 
-RealTimeMessage GenericBLEMIDI_Interface::getRealTimeMessage() const {
+template <class BackendT>
+RealTimeMessage GenericBLEMIDI_Interface<BackendT>::getRealTimeMessage() const {
     return incomingMessage.eventType == MIDIReadEvent::REALTIME_MESSAGE
                ? incomingMessage.message.realtimemessage
                : RealTimeMessage(0);
 }
 
-SysExMessage GenericBLEMIDI_Interface::getSysExMessage() const {
+template <class BackendT>
+SysExMessage GenericBLEMIDI_Interface<BackendT>::getSysExMessage() const {
     auto evt = incomingMessage.eventType;
     bool hasSysEx = evt == MIDIReadEvent::SYSEX_MESSAGE ||
                     evt == MIDIReadEvent::SYSEX_CHUNK;
@@ -128,24 +140,28 @@ SysExMessage GenericBLEMIDI_Interface::getSysExMessage() const {
                     : SysExMessage(nullptr, 0);
 }
 
-uint16_t GenericBLEMIDI_Interface::getTimestamp() const {
+template <class BackendT>
+uint16_t GenericBLEMIDI_Interface<BackendT>::getTimestamp() const {
     return incomingMessage.timestamp;
 }
 
 // -------------------------------------------------------------------------- //
 
-void GenericBLEMIDI_Interface::setName(const char *name) {
+template <class BackendT>
+void GenericBLEMIDI_Interface<BackendT>::setName(const char *name) {
     ble_settings.device_name = name;
 }
 
-void GenericBLEMIDI_Interface::begin() { backend.begin(ble_settings); }
+template <class BackendT>
+void GenericBLEMIDI_Interface<BackendT>::begin() {
+    backend.begin(ble_settings);
+}
 
-void GenericBLEMIDI_Interface::end() {
-    // TODO
+template <class BackendT>
+void GenericBLEMIDI_Interface<BackendT>::end() {
+    backend.end();
 }
 
 // -------------------------------------------------------------------------- //
 
 END_CS_NAMESPACE
-
-#endif
