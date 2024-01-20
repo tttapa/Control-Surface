@@ -10,20 +10,21 @@ There are some differences in MIDI over USB implementation between different typ
 |:------------------------------------|:---:|:---:|:---:|:---:|
 | Arduino UNO R3                      | ✅  | &emsp;❌⁽¹⁾ | ❌  | ❌  |
 | Arduino Nano                        | ✅  | ❌  | ❌  | ❌  |
-| Arduino Nano 33 IoT                 | ✅  | 🔼  | ❓  | ❌  |
-| Arduino Nano RP2040                 | ✅  | 🔼  | ❓  | ❓  |
+| Arduino Nano 33 IoT                 | ✅  | 🔼  | ❓  | 🔼  |
+| Arduino Nano RP2040                 | ✅  | 🔼  | ❓  | 🔼  |
 | Arduino Nano ESP32                  | ✅  | 🔼  | ❓  | 🔼  |
-| Arduino Nano 33 BLE                 | ✅  | ✅  | &emsp;❌⁽⁴⁾  | ❓  |
+| Arduino Nano 33 BLE                 | ✅  | ✅  | &emsp;❌⁽⁴⁾  | ✅  |
 | Arduino Nano Every                  | ✅  | &emsp;❌⁽²⁾ | ❌  | ❌  |
-| Arduino MKR 1000                    | ✅  | 🔼  | ❓  | ❓  |
+| Arduino MKR 1000                    | ✅  | 🔼  | ❓  | ❌  |
+| Arduino MKR 1010 WiFi               | ✅  | 🔼  | ❓  | 🔼  |
 | Arduino UNO R4 Minima               | ✅  | &emsp;❌⁽³⁾  | &emsp;❌⁽⁴⁾  | ❌  |
-| Arduino UNO R4 WiFi                 | ✅  | &emsp;❌⁽³⁾  | &emsp;❌⁽⁴⁾  | ❓  |
+| Arduino UNO R4 WiFi                 | ✅  | &emsp;❌⁽³⁾  | &emsp;❌⁽⁴⁾  | 🔼  |
 | Arduino Leonardo                    | ✅  | ✅  | ❌  | ❌  |
 | Arduino Micro                       | ✅  | ✅  | ❌  | ❌  |
 | Arduino Zero                        | ✅  | 🔼  | ❓  | ❌  |
 | Arduino Mega 2560                   | ✅  | &emsp;❌⁽¹⁾ | ❌  | ❌  |
 | Arduino Due                         | ✅  | ✅  | ❓  | ❌  |
-| Arduino GIGA R1 WiFi                | ✅  | ❓  | &emsp;❌⁽⁴⁾  | ❌  |
+| Arduino GIGA R1 WiFi                | ✅  | ❓  | &emsp;❌⁽⁴⁾  | 🔼  |
 | Teensy 2.0, Teensy++ 2.0            | ✅  | 🔼  | ❌  | ❌  |
 | Teensy LC, 3.0, 3.1, 3.2, 3.5, 4.0  | ✅  | ✅  | ❓  | ❌  |
 | Teensy 3.6, 4.1                     | ✅  | ✅  | ✅  | ❌  |
