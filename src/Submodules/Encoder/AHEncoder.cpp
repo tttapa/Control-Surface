@@ -20,7 +20,11 @@ AHEncoder::AHEncoder(uint8_t pinA, uint8_t pinB)
     // but here, we look them up once in the constructor.
 }
 
-AHEncoder::AHEncoder(AHEncoder &&other) { swap(*this, other); }
+AHEncoder::AHEncoder(AHEncoder &&other)
+    : pins {other.pins}, direct_pins {std::move(other.direct_pins)} {
+    if (other.interrupts_in_use)
+        FATAL_ERROR(F("Cannot move from initialized AHEncoder."), 0x9311);
+}
 
 AHEncoder &AHEncoder::operator=(AHEncoder &&other) {
     swap(*this, other);
