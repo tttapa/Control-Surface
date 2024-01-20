@@ -77,6 +77,7 @@ class ThreadSafeMIDIBLEParser {
     /// May contain incoming data to be parsed.
     BLEDataGenerator ble_data {};
     /// Parses the (chunked) BLE packet obtained from @ref readdata.
+    /// @todo   Could be made local.
     BLEMIDIParser ble_parser {nullptr, 0};
     /// MIDI Parser for incoming data.
     SerialMIDI_Parser parser {false};
