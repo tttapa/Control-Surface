@@ -29,7 +29,7 @@ bool is_midi_char(const BLECharacteristic &characteristic) {
 // Here I assume that all callbacks and handlers execute in the same task/thread
 // as the main program.
 
-void on_connect(BLEDevice central) {
+void on_connect([[maybe_unused]] BLEDevice central) {
     DEBUGREF("CS-BLEMIDI connected, central: " << central.address());
     if (midi_instance) {
         midi_instance->handleConnect(BLEConnectionHandle {0});
@@ -38,13 +38,14 @@ void on_connect(BLEDevice central) {
     }
 }
 
-void on_disconnect(BLEDevice central) {
+void on_disconnect([[maybe_unused]] BLEDevice central) {
     DEBUGREF("CS-BLEMIDI disconnected, central: " << central.address());
     if (midi_instance)
         midi_instance->handleDisconnect(BLEConnectionHandle {});
 }
 
-void on_write(BLEDevice central, BLECharacteristic characteristic) {
+void on_write([[maybe_unused]] BLEDevice central,
+              BLECharacteristic characteristic) {
     DEBUGREF(
         "CS-BLEMIDI write, central: "
         << central.address() << ", char: " << characteristic.uuid()
@@ -63,7 +64,8 @@ void on_write(BLEDevice central, BLECharacteristic characteristic) {
         BLEDataLifetime::ConsumeImmediately);
 }
 
-void on_read(BLEDevice central, BLECharacteristic characteristic) {
+void on_read([[maybe_unused]] BLEDevice central,
+             BLECharacteristic characteristic) {
     DEBUGREF("CS-BLEMIDI read, central: " << central.address() << ", char: "
                                           << characteristic.uuid());
     if (!is_midi_char(characteristic))
