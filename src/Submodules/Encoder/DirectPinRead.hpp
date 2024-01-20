@@ -75,7 +75,9 @@ inline DirectPinRead direct_pin_read(pin_t pin) {
 // Raspberry Pi RP2040
 #elif defined(ARDUINO_ARCH_RP2040)
 
+END_CS_NAMESPACE
 #include <hardware/structs/sio.h>
+BEGIN_CS_NAMESPACE
 using DirectPinRead = DirectPinReadReg<io_ro_32>;
 inline DirectPinRead direct_pin_read(pin_t pin) {
     return {&sio_hw->gpio_in, uint32_t(1) << pin};
@@ -84,10 +86,14 @@ inline DirectPinRead direct_pin_read(pin_t pin) {
 // ARM mbed OS
 #elif defined(ARDUINO_ARCH_MBED)
 
+END_CS_NAMESPACE
+#include <mbed.h>
+// ↑ Must be first
 #include <drivers/DigitalIn.h>
+BEGIN_CS_NAMESPACE
 struct DirectPinRead {
     mbed::DigitalIn pin;
-    bool read() const { return pin.read(); }
+    bool read() { return pin.read(); }
 };
 inline DirectPinRead direct_pin_read(pin_t pin) {
     return {mbed::DigitalIn {digitalPinToPinName(pin), PullUp}};

@@ -3,6 +3,7 @@
 #include "AtomicPosition.hpp"
 #include "DirectPinRead.hpp"
 #include "NumInterrupts.hpp"
+#include <AH/Containers/Array.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -77,10 +78,10 @@ class AHEncoder {
     void detachInterruptCtx(int interrupt);
 
   private:
-    uint8_t pins[2];
+    AH::Array<uint8_t, 2> pins;
     uint8_t interrupts_in_use = 0;
     uint8_t state = 0;
-    DirectPinRead direct_pins[2];
+    AH::Array<DirectPinRead, 2> direct_pins;
     AtomicPosition<int32_t> position {0};
 
   private:
