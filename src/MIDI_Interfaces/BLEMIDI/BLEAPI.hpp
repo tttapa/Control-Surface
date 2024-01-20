@@ -12,18 +12,35 @@ BEGIN_CS_NAMESPACE
 struct BLEConnectionHandle {
     uint16_t conn = 0xFFFF;
     explicit operator bool() const { return conn != 0xFFFF; }
+
+#if __cplusplus < 201402L
+    BLEConnectionHandle() = default;
+    BLEConnectionHandle(uint16_t conn) : conn {conn} {}
+#endif
 };
 
 /// Represents a handle to a local GATT characteristic.
 struct BLECharacteristicHandle {
     uint16_t characteristic = 0xFFFF;
     explicit operator bool() const { return characteristic != 0xFFFF; }
+
+#if __cplusplus < 201402L
+    BLECharacteristicHandle() = default;
+    BLECharacteristicHandle(uint16_t characteristic)
+        : characteristic {characteristic} {}
+#endif
 };
 
 /// Non-owning, std::span-style read-only view of BLE data.
 struct BLEDataView {
     const uint8_t *data = nullptr;
     uint16_t length = 0;
+
+#if __cplusplus < 201402L
+    BLEDataView() = default;
+    BLEDataView(const uint8_t *data, uint16_t length)
+        : data {data}, length {length} {}
+#endif
 };
 
 /// Describes a byte buffer containing (part of) a BLE packet.
@@ -60,6 +77,24 @@ struct in_place_type_t {
 template <class T>
 static in_place_type_t<T> in_place_type {};
 enum class byte : unsigned char {};
+} // namespace compat
+
+#endif
+
+#if __cplusplus >= 202002L
+
+namespace compat {
+using std::remove_cvref;
+} // namespace compat
+
+#else
+
+namespace compat {
+template <class T>
+struct remove_cvref {
+    using type =
+        typename std::remove_cv<typename std::remove_reference<T>::type>::type;
+};
 } // namespace compat
 
 #endif

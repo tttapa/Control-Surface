@@ -24,14 +24,6 @@ extern "C" {
 /// debug information or error messages.
 void ble2902_handle_write(esp_gatt_if_t gatts_if,
                           esp_ble_gatts_cb_param_t *param);
-/// Check if notifications are enabled by the client.
-/// @param  handle
-///         The handle of the CCC descriptor.
-bool ble2902_notifications_enabled(uint16_t handle);
-/// Check if indications are enabled by the client.
-/// @param  handle
-///         The handle of the CCC descriptor.
-bool ble2902_indications_enabled(uint16_t handle);
 /// Get the value of the descriptor.
 /// @param  handle
 ///         The handle of the CCC descriptor.

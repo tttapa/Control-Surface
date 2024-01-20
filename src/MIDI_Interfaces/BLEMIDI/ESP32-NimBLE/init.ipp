@@ -18,7 +18,7 @@
 #include "ble-macro-fix.h"
 #include "util.hpp"
 
-namespace cs::midi_ble {
+namespace cs::midi_ble_nimble {
 
 inline bool init_hardware() {
 #ifdef ESP_PLATFORM
@@ -54,7 +54,7 @@ inline bool init_hardware() {
     return true;
 }
 
-} // namespace cs::midi_ble
+} // namespace cs::midi_ble_nimble
 
 #endif // CONFIG_BT_BLE_ENABLED
 #endif // ESP32

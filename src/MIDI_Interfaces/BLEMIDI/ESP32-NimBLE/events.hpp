@@ -14,7 +14,7 @@
 
 #include "../BLEAPI.hpp"
 
-namespace cs::midi_ble {
+namespace cs::midi_ble_nimble {
 
 struct MIDIBLEState {
     constexpr static uint16_t invalid_handle = 0xFFFF;
@@ -25,6 +25,6 @@ struct MIDIBLEState {
 
 extern MIDIBLEState *state;
 
-} // namespace cs::midi_ble
+} // namespace cs::midi_ble_nimble
 
 #include "events.ipp"

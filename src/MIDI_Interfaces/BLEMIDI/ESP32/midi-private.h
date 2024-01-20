@@ -37,6 +37,4 @@ uint16_t midi_get_descriptor_handle(void);
 
 void midi_register_interface(esp_gatt_if_t gatts_if);
 uint16_t midi_get_app_id(void);
-void midi_set_connection_id(uint16_t conn_id);
-uint16_t midi_get_connection_id(void);
 uint16_t midi_get_gatts_if(void);

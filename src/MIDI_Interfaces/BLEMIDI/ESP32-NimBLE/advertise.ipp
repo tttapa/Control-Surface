@@ -20,7 +20,7 @@
 #include "gatt.h"
 #include "util.hpp"
 
-namespace cs::midi_ble {
+namespace cs::midi_ble_nimble {
 
 inline uint8_t slave_itvl_range[4] {0xFF, 0xFF, 0xFF, 0xFF};
 
@@ -78,7 +78,7 @@ inline void set_advertise_connection_interval(uint16_t min_itvl,
     slave_itvl_range[3] = (max_itvl >> 8) & 0xFF;
 }
 
-} // namespace cs::midi_ble
+} // namespace cs::midi_ble_nimble
 
 #endif // CONFIG_BT_BLE_ENABLED
 #endif // ESP32
