@@ -20,7 +20,7 @@
 
 namespace cs::midi_ble {
 
-bool init_hardware() {
+inline bool init_hardware() {
 #ifdef ESP_PLATFORM
 #ifdef CONFIG_ENABLE_ARDUINO_DEPENDS
     // make sure the linker includes esp32-hal-bt.c so Arduino init doesn't release BLE memory.

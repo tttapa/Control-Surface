@@ -17,7 +17,7 @@
 // This should really be done in C, but we have to compile only if the user
 // includes these files explicitly, so we rely on some GCC C++ extensions here.
 
-const ble_uuid128_t midi_ble_service_uuid {
+inline const ble_uuid128_t midi_ble_service_uuid {
     .u {.type = BLE_UUID_TYPE_128},
     .value {0x00, 0xc7, 0xc4, 0x4e, 0xe3, 0x6c, //
             0x51, 0xa7,                         //
@@ -25,7 +25,7 @@ const ble_uuid128_t midi_ble_service_uuid {
             0xe8, 0xed,                         //
             0x5a, 0x0e, 0xb8, 0x03},
 };
-const ble_uuid128_t midi_ble_characteristic_uuid {
+inline const ble_uuid128_t midi_ble_characteristic_uuid {
     .u {.type = BLE_UUID_TYPE_128},
     .value {0xf3, 0x6b, 0x10, 0x9d, 0x66, 0xf2, //
             0xa9, 0xa1,                         //
@@ -34,7 +34,7 @@ const ble_uuid128_t midi_ble_characteristic_uuid {
             0xdb, 0xe5, 0x72, 0x77},
 };
 
-static const struct ble_gatt_chr_def midi_ble_characteristic[] = {
+inline const struct ble_gatt_chr_def midi_ble_characteristic[] = {
     {.uuid = &midi_ble_characteristic_uuid.u,
      .access_cb = cs_midi_ble_characteristic_callback,
      .arg = nullptr,
@@ -47,7 +47,7 @@ static const struct ble_gatt_chr_def midi_ble_characteristic[] = {
     {}, // sentinel
 };
 
-static const struct ble_gatt_svc_def midi_ble_service[] = {
+inline const struct ble_gatt_svc_def midi_ble_service[] = {
     {.type = BLE_GATT_SVC_TYPE_PRIMARY,
      .uuid = &midi_ble_service_uuid.u,
      .includes = nullptr,
@@ -88,7 +88,7 @@ static const struct ble_gatt_svc_def midi_ble_service[] = {
 
 #endif
 
-const struct ble_gatt_svc_def *midi_ble_get_service(void) {
+inline const struct ble_gatt_svc_def *midi_ble_get_service(void) {
     return midi_ble_service;
 }
 

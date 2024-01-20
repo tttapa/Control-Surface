@@ -9,7 +9,7 @@
 #include "util.hpp"
 
 namespace cs::midi_ble {
-MIDIBLEState *state;
+inline MIDIBLEState *state;
 
 namespace {
 
@@ -47,7 +47,7 @@ void print_conn_desc(struct ble_gap_conn_desc *desc) {
 
 /// Called when the host and controller become synced (i.e. after successful
 /// startup).
-void cs_midi_ble_on_sync() {
+inline void cs_midi_ble_on_sync() {
     ESP_LOGD("CS-BLEMIDI", "sync");
     CS_CHECK_ZERO_V(
         ble_hs_id_infer_auto(0, &cs::midi_ble::state->address_type));
@@ -60,15 +60,14 @@ void cs_midi_ble_on_sync() {
 }
 
 /// Called when the stack is reset.
-void cs_midi_ble_on_reset(int reason) {
+inline void cs_midi_ble_on_reset(int reason) {
     ESP_LOGE("CS-BLEMIDI", "Resetting state; reason=%d", reason);
 }
 
 /// Called when any GATT characteristic (or descriptor) is accessed.
-int cs_midi_ble_characteristic_callback(uint16_t conn_handle,
-                                        uint16_t attr_handle,
-                                        struct ble_gatt_access_ctxt *ctxt,
-                                        void *) {
+inline int
+cs_midi_ble_characteristic_callback(uint16_t conn_handle, uint16_t attr_handle,
+                                    struct ble_gatt_access_ctxt *ctxt, void *) {
     ESP_LOGD("CS-BLEMIDI", "gatt callback %d", ctxt->op);
     switch (ctxt->op) {
         // READ: BLE MIDI should respond with no payload
@@ -102,8 +101,9 @@ int cs_midi_ble_characteristic_callback(uint16_t conn_handle,
 
 /// Called during GATT initialization, for each service, characteristic and
 /// descriptor that is registered.
-void cs_midi_ble_service_register_callback(struct ble_gatt_register_ctxt *ctxt,
-                                           void *) {
+inline void
+cs_midi_ble_service_register_callback(struct ble_gatt_register_ctxt *ctxt,
+                                      void *) {
     ESP_LOGI("CS-BLEMIDI", "service event %d", ctxt->op);
     char buf[BLE_UUID_STR_LEN] {};
 
@@ -140,7 +140,7 @@ void cs_midi_ble_service_register_callback(struct ble_gatt_register_ctxt *ctxt,
 }
 
 /// Called for GAP events like (dis)connection, MTU updates, etc.
-int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
+inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
     ESP_LOGI("CS-BLEMIDI", "gap event %d", +event->type);
     switch (event->type) {
         // A new connection was established or a connection attempt failed
