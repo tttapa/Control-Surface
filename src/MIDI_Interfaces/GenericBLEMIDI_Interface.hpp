@@ -30,6 +30,7 @@ class GenericBLEMIDI_Interface : public MIDI_Interface {
 
     void begin() override;
     void end();
+    bool isConnected() const { return backend.isConnected(); }
 
     MIDIReadEvent read();
 

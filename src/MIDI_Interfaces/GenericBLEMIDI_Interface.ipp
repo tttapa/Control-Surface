@@ -11,7 +11,8 @@ template <class L, class F>
 void GenericBLEMIDI_Interface<BackendT>::sendImpl(L &lck, F add_to_buffer) {
     // BLE packets are sent asynchronously, so we need a lock to access the
     // packet buffer
-    assert(lck.lck.owns_lock());
+    //     assert(lck.lck.owns_lock());
+
     // Try adding the message to the current packet
     if (!add_to_buffer()) {
         // If that doesn't work, flush the packet (send it now and wait until

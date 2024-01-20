@@ -28,7 +28,11 @@ struct BLEDataGenerator::Impl : Iface {
     T inst;
     template <class... Args>
     Impl(Args &&...args) : inst {std::forward<Args>(args)...} {}
+#if __cplusplus >= 201703L
     BLEDataView next() override { return std::invoke(inst); }
+#else
+    BLEDataView next() override { return inst(); }
+#endif
     Iface *move_into(void *storage) noexcept override {
         return new (storage) Impl {std::move(*this)};
     }
@@ -44,6 +48,7 @@ inline void BLEDataGenerator::clear() {
         inst->~Iface();
 }
 
+#if __cplusplus >= 201703L
 template <class T, class... Args>
 BLEDataGenerator::BLEDataGenerator(std::in_place_type_t<T>, Args &&...args) {
     static_assert(sizeof(Impl<T>) <= sizeof(storage));
@@ -56,6 +61,20 @@ BLEDataGenerator::BLEDataGenerator(std::in_place_t, T &&t)
     : BLEDataGenerator(
           std::in_place_type<std::remove_cv_t<std::remove_reference_t<T>>>,
           std::forward<T>(t)) {}
+#else
+template <class T, class... Args>
+BLEDataGenerator::BLEDataGenerator(compat::in_place_type_t<T>, Args &&...args) {
+    static_assert(sizeof(Impl<T>) <= sizeof(storage), "");
+    static_assert(alignof(Impl<T>) <= alignof(buffer_align_t), "");
+    instance = new (storage) Impl<T> {std::forward<Args>(args)...};
+}
+
+template <class T>
+BLEDataGenerator::BLEDataGenerator(compat::in_place_t, T &&t)
+    : BLEDataGenerator(
+          compat::in_place_type<std::remove_cv_t<std::remove_reference_t<T>>>,
+          std::forward<T>(t)) {}
+#endif
 
 inline BLEDataGenerator::BLEDataGenerator(BLEDataGenerator &&other) noexcept {
     if (other.instance) {

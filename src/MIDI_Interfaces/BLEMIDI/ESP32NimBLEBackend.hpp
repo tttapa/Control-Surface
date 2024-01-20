@@ -80,6 +80,9 @@ class ESP32NimBLEBackend : private FreeRTOSBLEMIDISender<ESP32NimBLEBackend>,
     void end() {
         // TODO
     }
+    bool isConnected() const {
+        return connection.load(std::memory_order_relaxed).conn != 0xFFFF;
+    }
     using Sender::acquirePacket;
     using Sender::forceMinMTU;
     using Sender::getMinMTU;
