@@ -44,24 +44,16 @@ inline BLEDataView BLEDataGenerator::operator()() {
 }
 
 inline void BLEDataGenerator::clear() {
+#if __cplusplus >= 201402
     if (auto *inst = std::exchange(instance, nullptr))
         inst->~Iface();
-}
-
-#if __cplusplus >= 201703L
-template <class T, class... Args>
-BLEDataGenerator::BLEDataGenerator(std::in_place_type_t<T>, Args &&...args) {
-    static_assert(sizeof(Impl<T>) <= sizeof(storage));
-    static_assert(alignof(Impl<T>) <= alignof(buffer_align_t));
-    instance = new (storage) Impl<T> {std::forward<Args>(args)...};
-}
-
-template <class T>
-BLEDataGenerator::BLEDataGenerator(std::in_place_t, T &&t)
-    : BLEDataGenerator(
-          std::in_place_type<std::remove_cv_t<std::remove_reference_t<T>>>,
-          std::forward<T>(t)) {}
 #else
+    if (instance)
+        instance->~Iface();
+    instance = nullptr;
+#endif
+}
+
 template <class T, class... Args>
 BLEDataGenerator::BLEDataGenerator(compat::in_place_type_t<T>, Args &&...args) {
     static_assert(sizeof(Impl<T>) <= sizeof(storage), "");
@@ -72,9 +64,8 @@ BLEDataGenerator::BLEDataGenerator(compat::in_place_type_t<T>, Args &&...args) {
 template <class T>
 BLEDataGenerator::BLEDataGenerator(compat::in_place_t, T &&t)
     : BLEDataGenerator(
-          compat::in_place_type<std::remove_cv_t<std::remove_reference_t<T>>>,
+          compat::in_place_type<typename compat::remove_cvref<T>::type>,
           std::forward<T>(t)) {}
-#endif
 
 inline BLEDataGenerator::BLEDataGenerator(BLEDataGenerator &&other) noexcept {
     if (other.instance) {

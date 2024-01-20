@@ -125,14 +125,10 @@ static const esp_gatts_attr_db_t
 static uint16_t MIDI_handle_table[MIDI_ATTRIBUTE_TABLE_SIZE] = {};
 
 static uint16_t midi_gatts_if = ESP_GATT_IF_NONE;
-static uint16_t midi_conn_id = 0;
 
 void midi_register_interface(esp_gatt_if_t gatts_if) {
     midi_gatts_if = gatts_if;
 }
-
-void midi_set_connection_id(uint16_t conn_id) { midi_conn_id = conn_id; }
-uint16_t midi_get_connection_id(void) { return midi_conn_id; }
 
 void midi_handle_register_app_event(esp_gatt_if_t gatts_if,
                                     esp_ble_gatts_cb_param_t *param) {

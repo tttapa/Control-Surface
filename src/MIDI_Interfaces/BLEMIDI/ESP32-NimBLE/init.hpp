@@ -1,6 +1,6 @@
 #pragma once
 
-namespace cs::midi_ble {
+namespace cs::midi_ble_nimble {
 
 bool init_hardware();
 

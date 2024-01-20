@@ -29,11 +29,11 @@
 #include "init.hpp"
 #include "util.hpp"
 
-inline cs::midi_ble::MIDIBLEState cs_midi_ble_state;
+inline cs::midi_ble_nimble::MIDIBLEState cs_midi_ble_state;
 
 extern "C" void ble_store_config_init(void);
 
-namespace cs::midi_ble {
+namespace cs::midi_ble_nimble {
 
 inline bool init(MIDIBLEInstance &instance, BLESettings ble_settings) {
     // Configure the hardware to support BLE using NimBLE.
@@ -67,7 +67,7 @@ inline bool init(MIDIBLEInstance &instance, BLESettings ble_settings) {
 
     // Initialize the MIDI service and characteristic
     cs_midi_ble_state.instance = &instance;
-    cs::midi_ble::state = &cs_midi_ble_state;
+    cs::midi_ble_nimble::state = &cs_midi_ble_state;
     const auto *gatt_server_services = midi_ble_get_service();
     CS_CHECK_ZERO(ble_gatts_count_cfg(gatt_server_services));
     CS_CHECK_ZERO(ble_gatts_add_svcs(gatt_server_services));
@@ -96,7 +96,7 @@ inline bool notify(BLEConnectionHandle conn_handle,
     return true;
 }
 
-} // namespace cs::midi_ble
+} // namespace cs::midi_ble_nimble
 
 #endif // CONFIG_BT_BLE_ENABLED
 #endif // ESP32

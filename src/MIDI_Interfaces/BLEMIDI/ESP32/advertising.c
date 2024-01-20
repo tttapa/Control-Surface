@@ -10,7 +10,7 @@
 static esp_ble_adv_data_t adv_data = {
     .set_scan_rsp = false,
     .include_name = false,
-    .include_txpower = false,
+    .include_txpower = true,
     // Intervals as multiples of 1.25 milliseconds (e.g.0x000C = 15 ms)
     .min_interval = 0x000C,
     .max_interval = 0x000C,
@@ -28,16 +28,15 @@ static esp_ble_adv_data_t adv_data = {
 static esp_ble_adv_data_t adv_data_rsp = {
     .set_scan_rsp = true,
     .include_name = true,
-    .include_txpower = true,
-    // Intervals as multiples of 1.25 milliseconds (e.g.0x000C = 15 ms)
-    .min_interval = 0x000C,
-    .max_interval = 0x000C,
+    .include_txpower = false,
+    // Zero means not included
+    .min_interval = 0x0000,
+    .max_interval = 0x0000,
     .appearance = 0x00,
     .manufacturer_len = 0,
     .p_manufacturer_data = NULL,
     .service_data_len = 0,
     .p_service_data = NULL,
-    // Service advertisement will be set later:
     .service_uuid_len = 0,
     .p_service_uuid = NULL,
     .flag = ESP_BLE_ADV_FLAG_GEN_DISC | ESP_BLE_ADV_FLAG_BREDR_NOT_SPT,
@@ -63,6 +62,17 @@ void advertising_set_service_uuid(const uint8_t uuid[], uint16_t length) {
     ESP_LOGI("MIDIBLE", "advertising_set_service_uuid");
     adv_data.p_service_uuid = (uint8_t *)uuid;
     adv_data.service_uuid_len = length;
+}
+
+void advertising_set_connection_interval(uint16_t itvl_min, uint16_t itvl_max) {
+    adv_data.min_interval = itvl_min;
+    adv_data.max_interval = itvl_max;
+}
+
+void advertising_get_connection_interval(uint16_t *itvl_min,
+                                         uint16_t *itvl_max) {
+    *itvl_min = adv_data.min_interval;
+    *itvl_max = adv_data.max_interval;
 }
 
 bool advertising_config(void) {

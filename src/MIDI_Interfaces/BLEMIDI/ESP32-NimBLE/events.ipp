@@ -8,12 +8,12 @@
 #include "gatt.h"
 #include "util.hpp"
 
-namespace cs::midi_ble {
+namespace cs::midi_ble_nimble {
 inline MIDIBLEState *state;
 
 namespace {
 
-std::string fmt_address(const void *addr) {
+[[maybe_unused]] std::string fmt_address(const void *addr) {
     std::string str {"XX:XX:XX:XX:XX:XX"};
     auto *u8p = reinterpret_cast<const uint8_t *>(addr);
     snprintf(str.data(), str.size() + 1, "%02x:%02x:%02x:%02x:%02x:%02x",
@@ -43,20 +43,20 @@ void print_conn_desc(struct ble_gap_conn_desc *desc) {
 
 } // namespace
 
-} // namespace cs::midi_ble
+} // namespace cs::midi_ble_nimble
 
 /// Called when the host and controller become synced (i.e. after successful
 /// startup).
 inline void cs_midi_ble_on_sync() {
     ESP_LOGD("CS-BLEMIDI", "sync");
     CS_CHECK_ZERO_V(
-        ble_hs_id_infer_auto(0, &cs::midi_ble::state->address_type));
+        ble_hs_id_infer_auto(0, &cs::midi_ble_nimble::state->address_type));
     uint8_t addr_val[6] = {0};
-    CS_CHECK_ZERO_V(
-        ble_hs_id_copy_addr(cs::midi_ble::state->address_type, addr_val, NULL));
+    CS_CHECK_ZERO_V(ble_hs_id_copy_addr(
+        cs::midi_ble_nimble::state->address_type, addr_val, NULL));
     ESP_LOGD("CS-BLEMIDI", "address=%s",
-             cs::midi_ble::fmt_address(addr_val).c_str());
-    cs::midi_ble::advertise(cs::midi_ble::state->address_type);
+             cs::midi_ble_nimble::fmt_address(addr_val).c_str());
+    cs::midi_ble_nimble::advertise(cs::midi_ble_nimble::state->address_type);
 }
 
 /// Called when the stack is reset.
@@ -88,7 +88,7 @@ cs_midi_ble_characteristic_callback(uint16_t conn_handle, uint16_t attr_handle,
                 om = om->om_next.sle_next;
                 return data;
             };
-            if (auto *inst = cs::midi_ble::state->instance)
+            if (auto *inst = cs::midi_ble_nimble::state->instance)
                 inst->handleData(cs::BLEConnectionHandle {conn_handle},
                                  cs::BLEDataGenerator {std::in_place, data_gen},
                                  cs::BLEDataLifetime::ConsumeImmediately);
@@ -105,7 +105,7 @@ inline void
 cs_midi_ble_service_register_callback(struct ble_gatt_register_ctxt *ctxt,
                                       void *) {
     ESP_LOGI("CS-BLEMIDI", "service event %d", ctxt->op);
-    char buf[BLE_UUID_STR_LEN] {};
+    [[maybe_unused]] char buf[BLE_UUID_STR_LEN] {};
 
     switch (ctxt->op) {
         case BLE_GATT_REGISTER_OP_SVC:
@@ -124,7 +124,7 @@ cs_midi_ble_service_register_callback(struct ble_gatt_register_ctxt *ctxt,
             if (ble_uuid_cmp(ctxt->chr.chr_def->uuid,
                              &midi_ble_characteristic_uuid.u) == 0) {
                 ESP_LOGI("CS-BLEMIDI", "MIDI char: %d", ctxt->chr.val_handle);
-                cs::midi_ble::state->midi_characteristic_handle =
+                cs::midi_ble_nimble::state->midi_characteristic_handle =
                     ctxt->chr.val_handle;
             }
             break;
@@ -158,13 +158,14 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
                 struct ble_gap_conn_desc desc;
                 auto rc = ble_gap_conn_find(event->connect.conn_handle, &desc);
                 assert(rc == 0);
-                cs::midi_ble::print_conn_desc(&desc);
-                if (auto *inst = cs::midi_ble::state->instance)
+                cs::midi_ble_nimble::print_conn_desc(&desc);
+                if (auto *inst = cs::midi_ble_nimble::state->instance)
                     inst->handleConnect(
                         cs::BLEConnectionHandle {event->connect.conn_handle});
             } else {
                 // Connection failed; resume advertising
-                cs::midi_ble::advertise(cs::midi_ble::state->address_type);
+                cs::midi_ble_nimble::advertise(
+                    cs::midi_ble_nimble::state->address_type);
             }
         } break;
 
@@ -172,13 +173,14 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
         case BLE_GAP_EVENT_DISCONNECT: {
             ESP_LOGI("CS-BLEMIDI", "disconnect; reason=%d",
                      event->disconnect.reason);
-            cs::midi_ble::print_conn_desc(&event->disconnect.conn);
+            cs::midi_ble_nimble::print_conn_desc(&event->disconnect.conn);
 
-            if (auto *inst = cs::midi_ble::state->instance)
+            if (auto *inst = cs::midi_ble_nimble::state->instance)
                 inst->handleDisconnect(cs::BLEConnectionHandle {
                     event->disconnect.conn.conn_handle});
             // Connection terminated; resume advertising
-            cs::midi_ble::advertise(cs::midi_ble::state->address_type);
+            cs::midi_ble_nimble::advertise(
+                cs::midi_ble_nimble::state->address_type);
         } break;
 
         // Central has updated the connection parameters
@@ -188,13 +190,14 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
             struct ble_gap_conn_desc desc;
             auto rc = ble_gap_conn_find(event->conn_update.conn_handle, &desc);
             assert(rc == 0);
-            cs::midi_ble::print_conn_desc(&desc);
+            cs::midi_ble_nimble::print_conn_desc(&desc);
         } break;
 
         // Advertising done (e.g. after reaching the specified timeout)
         case BLE_GAP_EVENT_ADV_COMPLETE: {
             ESP_LOGI("CS-BLEMIDI", "adv complete");
-            cs::midi_ble::advertise(cs::midi_ble::state->address_type);
+            cs::midi_ble_nimble::advertise(
+                cs::midi_ble_nimble::state->address_type);
         } break;
 
         // Encryption has been enabled or disabled for this connection
@@ -204,7 +207,7 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
             struct ble_gap_conn_desc desc;
             auto rc = ble_gap_conn_find(event->enc_change.conn_handle, &desc);
             assert(rc == 0);
-            cs::midi_ble::print_conn_desc(&desc);
+            cs::midi_ble_nimble::print_conn_desc(&desc);
         } break;
 
         // Subscription (e.g. when a CCCD is updated)
@@ -213,8 +216,8 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
                      "subscribe event; cur_notify=%d val_handle=%d",
                      event->subscribe.cur_notify, event->subscribe.attr_handle);
             if (event->subscribe.attr_handle ==
-                cs::midi_ble::state->midi_characteristic_handle)
-                if (auto *inst = cs::midi_ble::state->instance)
+                cs::midi_ble_nimble::state->midi_characteristic_handle)
+                if (auto *inst = cs::midi_ble_nimble::state->instance)
                     inst->handleSubscribe(
                         cs::BLEConnectionHandle {event->subscribe.conn_handle},
                         cs::BLECharacteristicHandle {
@@ -226,7 +229,7 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
         case BLE_GAP_EVENT_MTU: {
             ESP_LOGI("CS-BLEMIDI", "mtu update event; conn_handle=%d mtu=%d",
                      event->mtu.conn_handle, event->mtu.value);
-            if (auto *inst = cs::midi_ble::state->instance)
+            if (auto *inst = cs::midi_ble_nimble::state->instance)
                 inst->handleMTU(
                     cs::BLEConnectionHandle {event->mtu.conn_handle},
                     event->mtu.value);

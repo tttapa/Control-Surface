@@ -15,6 +15,11 @@ extern "C" {
 /// Set the UUID of the service to be advertised.
 /// @note   UUID should persist, captures pointer, doesn't copy data.
 void advertising_set_service_uuid(const uint8_t uuid[], uint16_t length);
+/// Set the connection interval range in the advertising data.
+void advertising_set_connection_interval(uint16_t itvl_min, uint16_t itvl_max);
+/// Get the connection interval range from the advertising data.
+void advertising_get_connection_interval(uint16_t *itvl_min,
+                                         uint16_t *itvl_max);
 /// Configure the advertising data, register with the Bluetooth driver. Will
 /// eventually trigger the callbacks to start advertising.
 bool advertising_config(void);

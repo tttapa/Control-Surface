@@ -6,14 +6,14 @@
 BEGIN_CS_NAMESPACE
 
 namespace detail {
-struct ESP32NimBLE {
+struct ESP32BluedroidBLE {
     static constexpr auto notify = midi_ble_bluedroid::notify;
     static constexpr auto init = midi_ble_bluedroid::init;
 };
 } // namespace detail
 
-/// ESP32 NimBLE backend intended to be plugged into
+/// ESP32 Bluedroid backend intended to be plugged into
 /// @ref GenericBLEMIDI_Interface.
-using ESP32NimBLEBackend = ESP32BLEBackend<detail::ESP32NimBLE>;
+using ESP32BluedroidBackend = ESP32BLEBackend<detail::ESP32BluedroidBLE>;
 
 END_CS_NAMESPACE
