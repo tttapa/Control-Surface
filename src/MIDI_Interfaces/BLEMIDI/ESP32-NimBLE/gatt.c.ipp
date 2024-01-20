@@ -39,8 +39,8 @@ inline const struct ble_gatt_chr_def midi_ble_characteristic[] = {
      .access_cb = cs_midi_ble_characteristic_callback,
      .arg = nullptr,
      .descriptors = nullptr,
-     .flags = BLE_GATT_CHR_F_READ | BLE_GATT_CHR_F_READ_ENC |
-              BLE_GATT_CHR_F_WRITE_NO_RSP | BLE_GATT_CHR_F_WRITE_ENC |
+     .flags = BLE_GATT_CHR_F_READ |         // BLE_GATT_CHR_F_READ_ENC |
+              BLE_GATT_CHR_F_WRITE_NO_RSP | // BLE_GATT_CHR_F_WRITE_ENC |
               BLE_GATT_CHR_F_NOTIFY,
      .min_key_size = 0,
      .val_handle = nullptr},
@@ -73,8 +73,8 @@ const ble_uuid128_t midi_ble_characteristic_uuid =
 static const struct ble_gatt_chr_def midi_ble_characteristic[] = {
     {.uuid = &midi_ble_characteristic_uuid.u,
      .access_cb = cs_midi_ble_characteristic_callback,
-     .flags = BLE_GATT_CHR_F_READ | BLE_GATT_CHR_F_READ_ENC |
-              BLE_GATT_CHR_F_WRITE_NO_RSP | BLE_GATT_CHR_F_WRITE_ENC |
+     .flags = BLE_GATT_CHR_F_READ |         // BLE_GATT_CHR_F_READ_ENC |
+              BLE_GATT_CHR_F_WRITE_NO_RSP | // BLE_GATT_CHR_F_WRITE_ENC |
               BLE_GATT_CHR_F_NOTIFY},
     {0}, // sentinel
 };
