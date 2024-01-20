@@ -35,6 +35,7 @@ extern "C" void ble_store_config_init(void);
 namespace cs::midi_ble {
 
 bool init_hardware();
+void set_advertise_connection_interval(uint16_t min_itvl, uint16_t max_itvl);
 
 bool init(MIDIBLEInstance &instance, BLESettings ble_settings) {
     // Configure the hardware to support BLE using NimBLE.
@@ -75,6 +76,8 @@ bool init(MIDIBLEInstance &instance, BLESettings ble_settings) {
 
     // Set the default device name
     CS_CHECK_ZERO(ble_svc_gap_device_name_set(ble_settings.device_name));
+    set_advertise_connection_interval(ble_settings.connection_interval.minimum,
+                                      ble_settings.connection_interval.maximum);
 
     // Start the FreeRTOS task that runs the NimBLE stack
     nimble_port_freertos_init([](void *) {

@@ -22,6 +22,8 @@
 
 namespace cs::midi_ble {
 
+static uint8_t slave_itvl_range[4] {0xFF, 0xFF, 0xFF, 0xFF};
+
 /// Begin advertising, including the MIDI service UUID and the device name.
 /// Attaches the @ref cs_midi_ble_gap_callback.
 void advertise(uint8_t addr_type) {
@@ -45,6 +47,8 @@ void advertise(uint8_t addr_type) {
     fields.uuids128 = &midi_ble_service_uuid;
     fields.num_uuids128 = 1;
     fields.uuids128_is_complete = 1;
+    // Specify the desired connection interval
+    fields.slave_itvl_range = slave_itvl_range;
 
     // Respond with the device name (it may be too long to fit in the
     // first advertisement packet, since it already contains a 16-byte UUID).
@@ -64,6 +68,13 @@ void advertise(uint8_t addr_type) {
     CS_CHECK_ZERO_V(ble_gap_adv_start(addr_type, NULL, BLE_HS_FOREVER,
                                       &adv_params, cs_midi_ble_gap_callback,
                                       NULL));
+}
+
+void set_advertise_connection_interval(uint16_t min_itvl, uint16_t max_itvl) {
+    slave_itvl_range[0] = (min_itvl >> 0) & 0xFF;
+    slave_itvl_range[1] = (min_itvl >> 8) & 0xFF;
+    slave_itvl_range[2] = (max_itvl >> 0) & 0xFF;
+    slave_itvl_range[3] = (max_itvl >> 8) & 0xFF;
 }
 
 } // namespace cs::midi_ble

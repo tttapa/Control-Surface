@@ -10,13 +10,40 @@
 namespace cs::midi_ble {
 void advertise(uint8_t addr_type);
 MIDIBLEState *state;
-} // namespace cs::midi_ble
 
-static void print_addr(const void *addr) {
+namespace {
+
+std::string fmt_address(const void *addr) {
+    std::string str {"XX:XX:XX:XX:XX:XX"};
     auto *u8p = reinterpret_cast<const uint8_t *>(addr);
-    ESP_LOGI("CS-BLEMIDI", "address: %02x:%02x:%02x:%02x:%02x:%02x", u8p[5],
-             u8p[4], u8p[3], u8p[2], u8p[1], u8p[0]);
+    snprintf(str.data(), str.size() + 1, "%02x:%02x:%02x:%02x:%02x:%02x",
+             u8p[5], u8p[4], u8p[3], u8p[2], u8p[1], u8p[0]);
+    return str;
 }
+
+void print_conn_desc(struct ble_gap_conn_desc *desc) {
+    ESP_LOGI(
+        "CS-BLEMIDI",
+        "connection info: handle=%d\n"
+        "    our_ota_addr_type=%d our_ota_addr=%s\n"
+        "    our_id_addr_type=%d our_id_addr=%s\n"
+        "    peer_ota_addr_type=%d peer_ota_addr=%s\n"
+        "    peer_id_addr_type=%d peer_id_addr=%s\n"
+        "    conn_itvl=%d conn_latency=%d supervision_timeout=%d\n"
+        "    encrypted=%d authenticated=%d bonded=%d",
+        desc->conn_handle, desc->our_ota_addr.type,
+        fmt_address(desc->our_ota_addr.val).c_str(), desc->our_id_addr.type,
+        fmt_address(desc->our_id_addr.val).c_str(), desc->peer_ota_addr.type,
+        fmt_address(desc->peer_ota_addr.val).c_str(), desc->peer_id_addr.type,
+        fmt_address(desc->peer_id_addr.val).c_str(), desc->conn_itvl,
+        desc->conn_latency, desc->supervision_timeout,
+        desc->sec_state.encrypted, desc->sec_state.authenticated,
+        desc->sec_state.bonded);
+}
+
+} // namespace
+
+} // namespace cs::midi_ble
 
 /// Called when the host and controller become synced (i.e. after successful
 /// startup).
@@ -27,7 +54,8 @@ void cs_midi_ble_on_sync() {
     uint8_t addr_val[6] = {0};
     CS_CHECK_ZERO_V(
         ble_hs_id_copy_addr(cs::midi_ble::state->address_type, addr_val, NULL));
-    print_addr(addr_val);
+    ESP_LOGD("CS-BLEMIDI", "address=%s",
+             cs::midi_ble::fmt_address(addr_val).c_str());
     cs::midi_ble::advertise(cs::midi_ble::state->address_type);
 }
 
@@ -116,7 +144,7 @@ int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
     ESP_LOGI("CS-BLEMIDI", "gap event %d", +event->type);
     switch (event->type) {
         // A new connection was established or a connection attempt failed
-        case BLE_GAP_EVENT_CONNECT:
+        case BLE_GAP_EVENT_CONNECT: {
             ESP_LOGI("CS-BLEMIDI", "connection %s; status=%d",
                      event->connect.status == 0 ? "established" : "failed",
                      event->connect.status);
@@ -127,6 +155,10 @@ int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
             }
 
             if (event->connect.status == 0) {
+                struct ble_gap_conn_desc desc;
+                auto rc = ble_gap_conn_find(event->connect.conn_handle, &desc);
+                assert(rc == 0);
+                cs::midi_ble::print_conn_desc(&desc);
                 if (auto *inst = cs::midi_ble::state->instance)
                     inst->handleConnect(
                         cs::BLEConnectionHandle {event->connect.conn_handle});
@@ -134,28 +166,49 @@ int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
                 // Connection failed; resume advertising
                 cs::midi_ble::advertise(cs::midi_ble::state->address_type);
             }
-            break;
+        } break;
 
         // Disconnected
-        case BLE_GAP_EVENT_DISCONNECT:
+        case BLE_GAP_EVENT_DISCONNECT: {
             ESP_LOGI("CS-BLEMIDI", "disconnect; reason=%d",
                      event->disconnect.reason);
+            cs::midi_ble::print_conn_desc(&event->disconnect.conn);
 
             if (auto *inst = cs::midi_ble::state->instance)
                 inst->handleDisconnect(cs::BLEConnectionHandle {
                     event->disconnect.conn.conn_handle});
             // Connection terminated; resume advertising
             cs::midi_ble::advertise(cs::midi_ble::state->address_type);
-            break;
+        } break;
+
+        // Central has updated the connection parameters
+        case BLE_GAP_EVENT_CONN_UPDATE: {
+            ESP_LOGI("CS-BLEMIDI", "connection updated; status=%d ",
+                     event->conn_update.status);
+            struct ble_gap_conn_desc desc;
+            auto rc = ble_gap_conn_find(event->conn_update.conn_handle, &desc);
+            assert(rc == 0);
+            cs::midi_ble::print_conn_desc(&desc);
+        } break;
 
         // Advertising done (e.g. after reaching the specified timeout)
-        case BLE_GAP_EVENT_ADV_COMPLETE:
+        case BLE_GAP_EVENT_ADV_COMPLETE: {
             ESP_LOGI("CS-BLEMIDI", "adv complete");
             cs::midi_ble::advertise(cs::midi_ble::state->address_type);
-            break;
+        } break;
+
+        // Encryption has been enabled or disabled for this connection
+        case BLE_GAP_EVENT_ENC_CHANGE: {
+            ESP_LOGI("CS-BLEMIDI", "encryption change event; status=%d ",
+                     event->enc_change.status);
+            struct ble_gap_conn_desc desc;
+            auto rc = ble_gap_conn_find(event->enc_change.conn_handle, &desc);
+            assert(rc == 0);
+            cs::midi_ble::print_conn_desc(&desc);
+        } break;
 
         // Subscription (e.g. when a CCCD is updated)
-        case BLE_GAP_EVENT_SUBSCRIBE:
+        case BLE_GAP_EVENT_SUBSCRIBE: {
             ESP_LOGI("CS-BLEMIDI",
                      "subscribe event; cur_notify=%d val_handle=%d",
                      event->subscribe.cur_notify, event->subscribe.attr_handle);
@@ -167,17 +220,35 @@ int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
                         cs::BLECharacteristicHandle {
                             event->subscribe.attr_handle},
                         event->subscribe.cur_notify);
-            break;
+        } break;
 
         // MTU updated (used to update the packet/buffer size)
-        case BLE_GAP_EVENT_MTU:
+        case BLE_GAP_EVENT_MTU: {
             ESP_LOGI("CS-BLEMIDI", "mtu update event; conn_handle=%d mtu=%d",
                      event->mtu.conn_handle, event->mtu.value);
             if (auto *inst = cs::midi_ble::state->instance)
                 inst->handleMTU(
                     cs::BLEConnectionHandle {event->mtu.conn_handle},
                     event->mtu.value);
-            break;
+        } break;
+
+        // Repeat pairing
+        case BLE_GAP_EVENT_REPEAT_PAIRING: {
+            // We already have a bond with the peer, but it is attempting to
+            // establish a new secure link.  This app sacrifices security for
+            // convenience: just throw away the old bond and accept the new link.
+
+            // Delete the old bond.
+            struct ble_gap_conn_desc desc;
+            auto rc =
+                ble_gap_conn_find(event->repeat_pairing.conn_handle, &desc);
+            assert(rc == 0);
+            ble_store_util_delete_peer(&desc.peer_id_addr);
+
+            // Return BLE_GAP_REPEAT_PAIRING_RETRY to indicate that the host should
+            // continue with the pairing operation.
+            return BLE_GAP_REPEAT_PAIRING_RETRY;
+        }
     }
 
     return 0;
