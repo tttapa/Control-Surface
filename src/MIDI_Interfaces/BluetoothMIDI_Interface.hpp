@@ -22,7 +22,9 @@ END_CS_NAMESPACE
 #endif
 #elif (defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_ARDUINO_NANO33BLE)) ||    \
     (defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_ARCH_RP2040)) ||            \
-    defined(ARDUINO_UNOR4_WIFI) || defined(ARDUINO_SAMD_NANO_33_IOT)
+    (defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_GIGA)) ||                   \
+    defined(ARDUINO_UNOR4_WIFI) || defined(ARDUINO_SAMD_NANO_33_IOT) ||        \
+    defined(ARDUINO_SAMD_MKRWIFI1010)
 // Arduino Nano 33 BLE, RP2040, Arduino UNO R4 WiFi, Arduino Nano 33 IoT
 #include "BLEMIDI/ArduinoBLEBackend.hpp"
 BEGIN_CS_NAMESPACE
