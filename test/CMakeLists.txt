@@ -50,6 +50,7 @@ add_executable(tests
     "MIDI_Interfaces/test-BluetoothMIDI_Interface.cpp"
     "MIDI_Interfaces/test-MIDI_Pipes.cpp"
     "MIDI_Interfaces/test-BLEMIDIPacketBuilder.cpp"
+    "MIDI_Interfaces/test-BLEAPI.cpp"
     "Banks/test-Banks.cpp"
     "Selectors/test-ManyButtonsSelector.cpp"
     "Selectors/test-IncrementDecrementSelector.cpp"
