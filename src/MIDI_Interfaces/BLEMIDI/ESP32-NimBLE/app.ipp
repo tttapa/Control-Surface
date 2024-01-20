@@ -29,13 +29,13 @@
 #include "init.hpp"
 #include "util.hpp"
 
-static cs::midi_ble::MIDIBLEState cs_midi_ble_state;
+inline cs::midi_ble::MIDIBLEState cs_midi_ble_state;
 
 extern "C" void ble_store_config_init(void);
 
 namespace cs::midi_ble {
 
-bool init(MIDIBLEInstance &instance, BLESettings ble_settings) {
+inline bool init(MIDIBLEInstance &instance, BLESettings ble_settings) {
     // Configure the hardware to support BLE using NimBLE.
     if (!init_hardware())
         return false;
@@ -88,8 +88,8 @@ bool init(MIDIBLEInstance &instance, BLESettings ble_settings) {
     return true;
 }
 
-bool notify(BLEConnectionHandle conn_handle,
-            BLECharacteristicHandle char_handle, BLEDataView data) {
+inline bool notify(BLEConnectionHandle conn_handle,
+                   BLECharacteristicHandle char_handle, BLEDataView data) {
     auto om = ble_hs_mbuf_from_flat(data.data, data.length);
     CS_CHECK_ZERO(ble_gattc_notify_custom(conn_handle.conn,
                                           char_handle.characteristic, om));
