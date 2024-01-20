@@ -22,3 +22,5 @@ const struct ble_gatt_svc_def *midi_ble_get_service(void);
 #ifdef __cplusplus
 }
 #endif
+
+#include "gatt.c.ipp"
