@@ -2,13 +2,13 @@
 #include <sdkconfig.h>
 #if CONFIG_BT_BLE_ENABLED
 
+#include "advertise.hpp"
 #include "callbacks.h"
 #include "events.hpp"
 #include "gatt.h"
 #include "util.hpp"
 
 namespace cs::midi_ble {
-void advertise(uint8_t addr_type);
 MIDIBLEState *state;
 
 namespace {

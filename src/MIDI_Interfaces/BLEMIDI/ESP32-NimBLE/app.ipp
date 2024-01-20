@@ -26,6 +26,7 @@
 #include "callbacks.h"
 #include "events.hpp"
 #include "gatt.h"
+#include "init.hpp"
 #include "util.hpp"
 
 static cs::midi_ble::MIDIBLEState cs_midi_ble_state;
@@ -33,9 +34,6 @@ static cs::midi_ble::MIDIBLEState cs_midi_ble_state;
 extern "C" void ble_store_config_init(void);
 
 namespace cs::midi_ble {
-
-bool init_hardware();
-void set_advertise_connection_interval(uint16_t min_itvl, uint16_t max_itvl);
 
 bool init(MIDIBLEInstance &instance, BLESettings ble_settings) {
     // Configure the hardware to support BLE using NimBLE.

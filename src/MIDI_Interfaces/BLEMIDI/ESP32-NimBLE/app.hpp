@@ -9,3 +9,5 @@ bool notify(BLEConnectionHandle conn_handle,
             BLECharacteristicHandle char_handle, BLEDataView data);
 
 } // namespace cs::midi_ble
+
+#include "app.ipp"

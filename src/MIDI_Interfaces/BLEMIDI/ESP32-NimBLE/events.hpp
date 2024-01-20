@@ -26,3 +26,5 @@ struct MIDIBLEState {
 extern MIDIBLEState *state;
 
 } // namespace cs::midi_ble
+
+#include "events.ipp"
