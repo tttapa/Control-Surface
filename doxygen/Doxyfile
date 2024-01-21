@@ -280,7 +280,7 @@ TAB_SIZE               = 4
 # @} or use a double escape (\\{ and \\})
 
 ALIASES                = "boardsinfo=<b class=\"boards-info\" title=\"Control Surface's automated continuous integration workflows regularly verify that this example compiles successfully for the following boards. The list is not exhaustive, and the example will most likely work on other boards as well (perhaps requiring slight modifications).\">🛈</b>" \
-                         "boards=@par Boards: @boardsinfo ^^ &emsp;"
+                         "boards=@par Boards: @boardsinfo ^^"
 
 # Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your project consists of C sources
 # only. Doxygen will then generate output that is more tailored for C. For
@@ -369,7 +369,7 @@ TOC_INCLUDE_HEADINGS   = 3
 # The default value is: DOXYGEN.
 # This tag requires that the tag MARKDOWN_SUPPORT is set to YES.
 
-MARKDOWN_ID_STYLE      = DOXYGEN
+MARKDOWN_ID_STYLE      = GITHUB
 
 # When enabled doxygen tries to link words that correspond to documented
 # classes, or namespaces to their corresponding documentation. Such a link can
@@ -456,7 +456,7 @@ INLINE_GROUPED_CLASSES = NO
 # Man pages) or section (for LaTeX and RTF).
 # The default value is: NO.
 
-INLINE_SIMPLE_STRUCTS  = YES
+INLINE_SIMPLE_STRUCTS  = NO
 
 # When TYPEDEF_HIDES_STRUCT tag is enabled, a typedef of a struct, union, or
 # enum is documented as struct, union, or enum with the name of the typedef. So
@@ -945,6 +945,7 @@ INPUT                  = ../examples/examples.dox \
                          pages/Getting-Started.md \
                          pages/Installation.md \
                          pages/MIDI-over-USB.md \
+                         pages/MIDI-over-BLE.md \
                          pages/MIDI.md \
                          pages/Debug.md \
                          pages/Basics.md \

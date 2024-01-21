@@ -40,6 +40,8 @@ There are some differences in MIDI over USB implementation between different typ
 <small>(2) Secondary microcontroller could _in theory_ be flashed with custom MIDI firmware.</small>  
 <small>(3) Hardware supports it, but the Arduino core explicitly disables MIDI over USB support by setting `CFG_TUD_MIDI=0` in [their TinyUSB config](https://github.com/arduino/ArduinoCore-renesas/blob/6ee152ff2a9c00c8ab2ccff4f1eaee7e1f3388c1/variants/MINIMA/tusb_config.h#L81).</small>  
 <small>(4) Hardware supports it, but the Arduino core does not support it.</small>  
+
+See the @ref md_pages_MIDI-over-BLE page for more information about Bluetooth Low Energy support.
  
 ## Arduino boards with native USB support
 _Arduino Due, Arduino Leonardo, Arduino Micro, Arduino Nano 33 IOT, Arduino Zero, Arduino MKR Zero, Arduino MKR1000 ..._  

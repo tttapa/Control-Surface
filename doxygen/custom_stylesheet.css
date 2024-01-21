@@ -35,6 +35,14 @@ html.dark-mode {
     --header-background-color: var(--nav-background-color);
     --search-box-shadow: inset 0.5px 0.5px 3px 0px #444a6d;
     --footer-logo-width: 80px;
+
+    --warning-color-text: white;
+    --note-color-text: white;
+    --todo-color-text: white;
+    --test-color-text: white;
+    --deprecated-color-text: white;
+    --bug-color-text: white;
+    --invariant-color-text: white;
 }
 html.dark-mode img.footer {
     filter: brightness(0.666);
@@ -195,6 +203,10 @@ b, dt, caption, div.groupHeader, td.indexkey, th.dirtab,
 }
 a.el {
     font-weight: 500;
+}
+/* Paragraph indentation */
+dl.section dd, dl.bug dd, dl.deprecated dd, dl.todo dd, dl.test dd {
+    margin-inline-start: 1.6em;
 }
 /* Size of titles and headings */
 div.contents > div.textblock > h1 {
