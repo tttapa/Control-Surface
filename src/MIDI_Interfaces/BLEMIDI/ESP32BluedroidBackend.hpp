@@ -14,7 +14,6 @@ struct ESP32BluedroidBLE {
 
 /// ESP32 Bluedroid backend intended to be plugged into
 /// @ref GenericBLEMIDI_Interface.
-/// @related GenericBLEMIDI_Interface
 using ESP32BluedroidBackend = ESP32BLEBackend<ble_backend::ESP32BluedroidBLE>;
 
 END_CS_NAMESPACE
