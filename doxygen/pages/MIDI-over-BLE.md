@@ -2,8 +2,9 @@
 Control Surface has different MIDI over BLE backends for different
 Arduino-compatible boards.
 
-To use MIDI over USB in your code, you usually don't have to worry about these
-backends, and you can simply instantiate a @ref BluetoothMIDI_Interface.
+To use MIDI over Bluetooth Low Energy in your code, you usually don't have to
+worry about these backends, and you can simply instantiate a
+@ref BluetoothMIDI_Interface. For an example, see @ref BLEMIDI-Adapter.ino.
 
 ## BLE Backends
 
