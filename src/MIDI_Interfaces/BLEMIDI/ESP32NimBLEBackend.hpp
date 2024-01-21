@@ -14,7 +14,6 @@ struct ESP32NimBLE {
 
 /// ESP32 NimBLE backend intended to be plugged into
 /// @ref GenericBLEMIDI_Interface.
-/// @related GenericBLEMIDI_Interface
 using ESP32NimBLEBackend = ESP32BLEBackend<ble_backend::ESP32NimBLE>;
 
 END_CS_NAMESPACE

@@ -11,7 +11,6 @@ BEGIN_CS_NAMESPACE
 
 /// ArduinoBLE backend intended to be plugged into
 /// @ref GenericBLEMIDI_Interface.
-/// @related GenericBLEMIDI_Interface
 class ArduinoBLEBackend : private PollingBLEMIDISender<ArduinoBLEBackend>,
                           private MIDIBLEInstance {
   private:

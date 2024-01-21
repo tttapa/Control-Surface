@@ -1,6 +1,22 @@
 #pragma once
 
-#ifdef ESP32
+#include <Settings/NamespaceSettings.hpp>
+
+#ifdef DOXYGEN
+BEGIN_CS_NAMESPACE
+/// Default backend for the @ref BluetoothMIDI_Interface class.
+/// @see @ref md_pages_MIDI-over-BLE
+struct BLEMIDIBackend {};
+END_BEGIN_CS_NAMESPACE
+/// Indicates whether @ref BLEMIDIBackend and @ref BluetoothMIDI_Interface are
+/// defined for this board.
+#define CS_BLEMIDI_SUPPORTED 1
+/// On ESP32, changes the default MIDI over BLE backend from Bluedroid to NimBLE.
+/// This macro should be defined before including any Control Surface headers.
+/// Requires the [NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino) library.
+#define CS_USE_NIMBLE
+
+#elif defined(ESP32)
 #include <sdkconfig.h>
 #if CONFIG_BT_BLE_ENABLED
 // ESP32 with BLE support
@@ -20,6 +36,7 @@ END_CS_NAMESPACE
 #define CS_BLEMIDI_SUPPORTED 1
 #endif
 #endif
+
 #elif (defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_ARDUINO_NANO33BLE)) ||    \
     (defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_ARCH_RP2040)) ||            \
     (defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_GIGA)) ||                   \
@@ -36,6 +53,14 @@ END_CS_NAMESPACE
 #ifdef CS_BLEMIDI_SUPPORTED
 #include "GenericBLEMIDI_Interface.hpp"
 BEGIN_CS_NAMESPACE
-using BluetoothMIDI_Interface = GenericBLEMIDI_Interface<BLEMIDIBackend>;
+/// @brief   A class for MIDI interfaces sending MIDI messages over a Bluetooth
+///          Low Energy (BLE) connection.
+///
+/// Configures the Arduino as a BLE peripheral.
+///
+/// @see @ref md_pages_MIDI-over-USB for a list of supported boards
+/// @see @ref md_pages_MIDI-over-BLE for more information and a list of backends
+/// @ingroup MIDIInterfaces
+struct BluetoothMIDI_Interface : GenericBLEMIDI_Interface<BLEMIDIBackend> {};
 END_CS_NAMESPACE
 #endif
