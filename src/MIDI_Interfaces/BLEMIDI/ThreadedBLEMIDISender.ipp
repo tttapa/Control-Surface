@@ -1,11 +1,11 @@
-#include "FreeRTOSBLEMIDISender.hpp"
+#include "ThreadedBLEMIDISender.hpp"
 
 #include <AH/Containers/CRTP.hpp>
 
 BEGIN_CS_NAMESPACE
 
 template <class Derived>
-FreeRTOSBLEMIDISender<Derived>::~FreeRTOSBLEMIDISender() {
+ThreadedBLEMIDISender<Derived>::~ThreadedBLEMIDISender() {
     lock_t lck(shared.mtx);
     // Tell the sender that this is the last packet
     shared.stop = true;
@@ -19,7 +19,7 @@ FreeRTOSBLEMIDISender<Derived>::~FreeRTOSBLEMIDISender() {
 }
 
 template <class Derived>
-void FreeRTOSBLEMIDISender<Derived>::begin() {
+void ThreadedBLEMIDISender<Derived>::begin() {
     send_thread = std::thread([this] {
         // As long as you didn't get the stop signal, wait for data to send
         while (handleSendEvents())
@@ -28,19 +28,19 @@ void FreeRTOSBLEMIDISender<Derived>::begin() {
 }
 
 template <class Derived>
-auto FreeRTOSBLEMIDISender<Derived>::acquirePacket() -> ProtectedBuilder {
+auto ThreadedBLEMIDISender<Derived>::acquirePacket() -> ProtectedBuilder {
     return {&shared.packet, lock_t {shared.mtx}};
 }
 
 template <class Derived>
-void FreeRTOSBLEMIDISender<Derived>::releasePacketAndNotify(
+void ThreadedBLEMIDISender<Derived>::releasePacketAndNotify(
     ProtectedBuilder &lck) {
     lck.lck.unlock();
     cv.notify_one();
 }
 
 template <class Derived>
-void FreeRTOSBLEMIDISender<Derived>::sendNow(ProtectedBuilder &lck) {
+void ThreadedBLEMIDISender<Derived>::sendNow(ProtectedBuilder &lck) {
     assert(lck.lck.owns_lock());
     // No need to send empty packets
     if (shared.packet.empty())
@@ -57,7 +57,7 @@ void FreeRTOSBLEMIDISender<Derived>::sendNow(ProtectedBuilder &lck) {
 }
 
 template <class Derived>
-void FreeRTOSBLEMIDISender<Derived>::updateMTU(uint16_t mtu) {
+void ThreadedBLEMIDISender<Derived>::updateMTU(uint16_t mtu) {
     uint16_t force_min_mtu_c = force_min_mtu;
     if (force_min_mtu_c == 0)
         min_mtu = mtu;
@@ -70,20 +70,20 @@ void FreeRTOSBLEMIDISender<Derived>::updateMTU(uint16_t mtu) {
 }
 
 template <class Derived>
-void FreeRTOSBLEMIDISender<Derived>::forceMinMTU(uint16_t mtu) {
+void ThreadedBLEMIDISender<Derived>::forceMinMTU(uint16_t mtu) {
     force_min_mtu = mtu;
     updateMTU(min_mtu);
 }
 
 template <class Derived>
-void FreeRTOSBLEMIDISender<Derived>::setTimeout(
+void ThreadedBLEMIDISender<Derived>::setTimeout(
     std::chrono::milliseconds timeout) {
     lock_t lck(shared.mtx);
     shared.timeout = timeout;
 }
 
 template <class Derived>
-bool FreeRTOSBLEMIDISender<Derived>::handleSendEvents() {
+bool ThreadedBLEMIDISender<Derived>::handleSendEvents() {
     lock_t lck(shared.mtx);
 
     // Wait for a packet to be started (or for a stop signal)

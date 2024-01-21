@@ -1,30 +1,30 @@
-#include "PollingMIDISender.hpp"
+#include "PollingBLEMIDISender.hpp"
 
 #include <AH/Containers/CRTP.hpp>
 
 BEGIN_CS_NAMESPACE
 
 template <class Derived>
-PollingMIDISender<Derived>::~PollingMIDISender() = default;
+PollingBLEMIDISender<Derived>::~PollingBLEMIDISender() = default;
 
 template <class Derived>
-void PollingMIDISender<Derived>::begin() {}
+void PollingBLEMIDISender<Derived>::begin() {}
 
 template <class Derived>
-auto PollingMIDISender<Derived>::acquirePacket() -> ProtectedBuilder {
+auto PollingBLEMIDISender<Derived>::acquirePacket() -> ProtectedBuilder {
     if (packet.getSize() == 0)
         packet_start_time = millis();
     return {&packet};
 }
 
 template <class Derived>
-void PollingMIDISender<Derived>::releasePacketAndNotify(ProtectedBuilder &lck) {
+void PollingBLEMIDISender<Derived>::releasePacketAndNotify(ProtectedBuilder &lck) {
     if (lck.packet->getSize() > 0 && millis() - packet_start_time > timeout)
         sendNow(lck);
 }
 
 template <class Derived>
-void PollingMIDISender<Derived>::sendNow(ProtectedBuilder &lck) {
+void PollingBLEMIDISender<Derived>::sendNow(ProtectedBuilder &lck) {
     BLEDataView data {lck.packet->getBuffer(), lck.packet->getSize()};
     if (data.length > 0) {
         CRTP(Derived).sendData(data);
@@ -34,7 +34,7 @@ void PollingMIDISender<Derived>::sendNow(ProtectedBuilder &lck) {
 }
 
 template <class Derived>
-void PollingMIDISender<Derived>::updateMTU(uint16_t mtu) {
+void PollingBLEMIDISender<Derived>::updateMTU(uint16_t mtu) {
     if (force_min_mtu == 0)
         min_mtu = mtu;
     else
@@ -46,13 +46,13 @@ void PollingMIDISender<Derived>::updateMTU(uint16_t mtu) {
 }
 
 template <class Derived>
-void PollingMIDISender<Derived>::forceMinMTU(uint16_t mtu) {
+void PollingBLEMIDISender<Derived>::forceMinMTU(uint16_t mtu) {
     force_min_mtu = mtu;
     updateMTU(min_mtu);
 }
 
 template <class Derived>
-void PollingMIDISender<Derived>::setTimeout(std::chrono::milliseconds timeout) {
+void PollingBLEMIDISender<Derived>::setTimeout(std::chrono::milliseconds timeout) {
     this->timeout = timeout.count();
 }
 

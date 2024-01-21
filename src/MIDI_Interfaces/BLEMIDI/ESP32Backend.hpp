@@ -3,8 +3,8 @@
 #include <AH/Error/Error.hpp>
 
 #include "BLEAPI.hpp"
-#include "BufferedBLEParser.hpp"
-#include "FreeRTOSBLEMIDISender.hpp"
+#include "BufferedBLEMIDIParser.hpp"
+#include "ThreadedBLEMIDISender.hpp"
 #include "Util/ESP32Threads.hpp"
 
 #include <atomic>
@@ -19,11 +19,11 @@ BEGIN_CS_NAMESPACE
 
 /// ESP32 backend intended to be plugged into @ref GenericBLEMIDI_Interface.
 template <class Impl>
-class ESP32BLEBackend : private FreeRTOSBLEMIDISender<ESP32BLEBackend<Impl>>,
+class ESP32BLEBackend : private ThreadedBLEMIDISender<ESP32BLEBackend<Impl>>,
                         private MIDIBLEInstance {
   protected:
     [[no_unique_address]] Impl impl;
-    using Sender = FreeRTOSBLEMIDISender<ESP32BLEBackend>;
+    using Sender = ThreadedBLEMIDISender<ESP32BLEBackend>;
     friend Sender;
     void sendData(BLEDataView data) {
         auto chr = characteristic.load();
@@ -107,7 +107,7 @@ class ESP32BLEBackend : private FreeRTOSBLEMIDISender<ESP32BLEBackend<Impl>>,
         }
     };
     /// Contains incoming BLE MIDI data to be parsed.
-    BufferedBLEParser<4096, AtomicSize> parser;
+    BufferedBLEMIDIParser<4096, AtomicSize> parser;
 
   public:
     using IncomingMIDIMessage = AnyMIDIMessage;

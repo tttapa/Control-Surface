@@ -14,12 +14,12 @@ BEGIN_CS_NAMESPACE
 
 /// Class that manages a background thread that sends BLE packets asynchronously.
 template <class Derived>
-class FreeRTOSBLEMIDISender {
+class ThreadedBLEMIDISender {
   public:
-    FreeRTOSBLEMIDISender() = default;
-    FreeRTOSBLEMIDISender(const FreeRTOSBLEMIDISender &) = delete;
-    FreeRTOSBLEMIDISender &operator=(const FreeRTOSBLEMIDISender &) = delete;
-    ~FreeRTOSBLEMIDISender();
+    ThreadedBLEMIDISender() = default;
+    ThreadedBLEMIDISender(const ThreadedBLEMIDISender &) = delete;
+    ThreadedBLEMIDISender &operator=(const ThreadedBLEMIDISender &) = delete;
+    ~ThreadedBLEMIDISender();
 
     /// Start the background thread.
     void begin();
@@ -100,4 +100,4 @@ class FreeRTOSBLEMIDISender {
 
 END_CS_NAMESPACE
 
-#include "FreeRTOSBLEMIDISender.ipp"
+#include "ThreadedBLEMIDISender.ipp"

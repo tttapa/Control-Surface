@@ -11,12 +11,12 @@ BEGIN_CS_NAMESPACE
 
 /// Class that buffers MIDI BLE packets.
 template <class Derived>
-class PollingMIDISender {
+class PollingBLEMIDISender {
   public:
-    PollingMIDISender() = default;
-    PollingMIDISender(const PollingMIDISender &) = delete;
-    PollingMIDISender &operator=(const PollingMIDISender &) = delete;
-    ~PollingMIDISender();
+    PollingBLEMIDISender() = default;
+    PollingBLEMIDISender(const PollingBLEMIDISender &) = delete;
+    PollingBLEMIDISender &operator=(const PollingBLEMIDISender &) = delete;
+    ~PollingBLEMIDISender();
 
     /// Initialize.
     void begin();
@@ -76,4 +76,4 @@ class PollingMIDISender {
 
 END_CS_NAMESPACE
 
-#include "PollingMIDISender.ipp"
+#include "PollingBLEMIDISender.ipp"

@@ -4,14 +4,15 @@
 
 #include "ArduinoBLE/midi.hpp"
 #include "BLEAPI.hpp"
-#include "BufferedBLEParser.hpp"
-#include "PollingMIDISender.hpp"
+#include "BufferedBLEMIDIParser.hpp"
+#include "PollingBLEMIDISender.hpp"
 
 BEGIN_CS_NAMESPACE
 
 /// ArduinoBLE backend intended to be plugged into
 /// @ref GenericBLEMIDI_Interface.
-class ArduinoBLEBackend : private PollingMIDISender<ArduinoBLEBackend>,
+/// @related GenericBLEMIDI_Interface
+class ArduinoBLEBackend : private PollingBLEMIDISender<ArduinoBLEBackend>,
                           private MIDIBLEInstance {
   private:
     // Callbacks from the ArduinoBLE stack.
@@ -45,7 +46,7 @@ class ArduinoBLEBackend : private PollingMIDISender<ArduinoBLEBackend>,
     /// Did the BLE Central subscribe to be notified for the MIDI characteristic?
     bool subscribed = false;
     /// Contains incoming BLE MIDI data to be parsed.
-    BufferedBLEParser<1024> parser;
+    BufferedBLEMIDIParser<1024> parser;
 
   public:
     using IncomingMIDIMessage = AnyMIDIMessage;
@@ -76,7 +77,7 @@ class ArduinoBLEBackend : private PollingMIDISender<ArduinoBLEBackend>,
 
   private:
     // Implement the interface for the BLE sender.
-    using Sender = PollingMIDISender<ArduinoBLEBackend>;
+    using Sender = PollingBLEMIDISender<ArduinoBLEBackend>;
     friend Sender;
     /// Send the given MIDI BLE packet.
     void sendData(BLEDataView data) {
