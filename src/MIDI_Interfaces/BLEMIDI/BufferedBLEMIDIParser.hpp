@@ -10,6 +10,8 @@
 BEGIN_CS_NAMESPACE
 
 /// FIFO buffer that you can push BLE packets into, and pop MIDI messages out of.
+/// If @p SizeT is chosen to be atomic, one thread can push packets, and another
+/// thread can pop MIDI messages, without additional synchronization.
 template <uint16_t Capacity, class SizeT = NonatomicBLERingBufSize<uint16_t>>
 class BufferedBLEMIDIParser {
   private:
