@@ -9,8 +9,9 @@
 
 BEGIN_CS_NAMESPACE
 
+/// FIFO buffer that you can push BLE packets into, and pop MIDI messages out of.
 template <uint16_t Capacity, class SizeT = NonatomicBLERingBufSize<uint16_t>>
-class BufferedBLEParser {
+class BufferedBLEMIDIParser {
   private:
     /// Contains incoming data to be parsed.
     BLERingBuf<Capacity, SizeT> ble_buffer {};
