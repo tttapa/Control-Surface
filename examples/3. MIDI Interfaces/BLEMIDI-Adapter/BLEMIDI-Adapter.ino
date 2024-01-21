@@ -34,6 +34,7 @@
  */
 
 #include <Control_Surface.h>
+#include <MIDI_Interfaces/BluetoothMIDI_Interface.hpp>
 
 // Instantiate a MIDI over BLE interface
 BluetoothMIDI_Interface midi_ble;
