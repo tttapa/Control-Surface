@@ -1,10 +1,17 @@
 #pragma once
 
+/**
+ * @file
+ * Type definitions and callback interfaces for communication between the
+ * low-level BLE stacks and higher-level MIDI BLE backends.
+ */
+
 #include <Settings/NamespaceSettings.hpp>
+
+#include "Util/compat.hpp"
 
 #include <cstddef>
 #include <cstdint>
-#include <utility>
 
 BEGIN_CS_NAMESPACE
 
@@ -54,52 +61,6 @@ enum class BLEDataType : uint8_t {
     Continuation, ///< Buffer contains a chunk of a BLE packet.
 };
 
-#if __cplusplus >= 201703L
-
-namespace compat {
-using std::byte;
-using std::in_place;
-using std::in_place_t;
-using std::in_place_type;
-using std::in_place_type_t;
-} // namespace compat
-
-#else
-
-namespace compat {
-struct in_place_t {
-    explicit in_place_t() = default;
-};
-static in_place_t in_place {};
-template <class T>
-struct in_place_type_t {
-    explicit in_place_type_t() = default;
-};
-template <class T>
-static in_place_type_t<T> in_place_type {};
-enum class byte : unsigned char {};
-} // namespace compat
-
-#endif
-
-#if __cplusplus >= 202002L
-
-namespace compat {
-using std::remove_cvref;
-} // namespace compat
-
-#else
-
-namespace compat {
-template <class T>
-struct remove_cvref {
-    using type =
-        typename std::remove_cv<typename std::remove_reference<T>::type>::type;
-};
-} // namespace compat
-
-#endif
-
 /// Callable that returns the next chunk of data from a BLE packet when called.
 /// Uses type erasure with a static buffer (no dynamic memory allocations).
 class BLEDataGenerator {
@@ -117,8 +78,11 @@ class BLEDataGenerator {
 
     /// Create an empty BLEDataGenerator.
     BLEDataGenerator() = default;
+    /// Store a callable of type @p T and initialize it by @p args.
     template <class T, class... Args>
     BLEDataGenerator(compat::in_place_type_t<T>, Args &&...args);
+    /// Store a callable of type @p T (with cv qualifiers and references
+    /// removed) and initialize it by forwarding @p t.
     template <class T>
     BLEDataGenerator(compat::in_place_t, T &&t);
     BLEDataGenerator(const BLEDataGenerator &) = delete;
@@ -137,10 +101,10 @@ class BLEDataGenerator {
     /// Alignment of the buffer to allocate the underlying data generator.
     using buffer_align_t = max_align_t;
     /// Size of the buffer to allocate the underlying data generator.
-    static constexpr size_t buffer_size = 15 * sizeof(void *);
+    static constexpr size_t capacity = 4 * sizeof(void *) - sizeof(Iface *);
     /// Buffer used for allocation of the underlying data generator.
-    alignas(buffer_align_t) compat::byte storage[buffer_size];
-    //// Type-erased pointer to the underlying data generator.
+    alignas(buffer_align_t) compat::byte storage[capacity];
+    //// Type-erased pointer to the underlying data generator in @ref storage.
     Iface *instance = nullptr;
 };
 
@@ -156,15 +120,27 @@ enum class BLEDataLifetime {
 
 /// Defines the interface for callback functions registered by the low-level
 /// BLE code.
+/// @warning    These functions may be called from different tasks/threads or
+///             low-priority interrupt handlers. You cannot take locks, and you
+///             need to synchronize appropriately (e.g. using `std::atomic` or
+///             by using critical sections).
 class MIDIBLEInstance {
   public:
     virtual ~MIDIBLEInstance() = default;
+    /// Called by the BLE stack when a connection is established.
     virtual void handleConnect(BLEConnectionHandle conn_handle) = 0;
+    /// Called by the BLE stack when a connection is terminated.
     virtual void handleDisconnect(BLEConnectionHandle conn_handle) = 0;
+    /// Called by the BLE stack when the maximum transmission unit for the
+    /// connection changes.
     virtual void handleMTU(BLEConnectionHandle conn_handle, uint16_t mtu) = 0;
+    /// Called by the BLE stack when the central subscribes to receive
+    /// notifications for the MIDI GATT characteristic.
     virtual void handleSubscribe(BLEConnectionHandle conn_handle,
                                  BLECharacteristicHandle char_handle,
                                  bool notify) = 0;
+    /// Called by the BLE stack when the central writes data to the MIDI GATT
+    /// characteristic.
     virtual void handleData(BLEConnectionHandle conn_handle,
                             BLEDataGenerator &&data,
                             BLEDataLifetime lifetime) = 0;

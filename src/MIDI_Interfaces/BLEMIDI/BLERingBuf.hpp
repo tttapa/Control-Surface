@@ -27,7 +27,7 @@ struct NonatomicBLERingBufSize {
 ///         up to 6 bytes less because of data structure overhead.
 /// @tparam SizeT
 ///         The type to use for the size of tbe buffer. Should be atomic if this
-///         buffer is to be used as a SPSQ queue between two threads.
+///         buffer is to be used as a SPSC queue between two threads.
 ///         See @ref NonatomicBLERingBufSize for an example.
 template <uint_fast16_t Capacity,
           class SizeT = NonatomicBLERingBufSize<uint_fast16_t>>

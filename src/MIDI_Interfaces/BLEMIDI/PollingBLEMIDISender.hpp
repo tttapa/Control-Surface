@@ -21,8 +21,8 @@ class PollingBLEMIDISender {
     /// Initialize.
     void begin();
 
+    /// RAII lock for access to the packet builder.
     struct ProtectedBuilder;
-
     /// Acquire exclusive access to the buffer.
     /// @return A RAII wrapper that automatically releases the buffer upon
     ///         destruction. Just make sure you don't keep any pointers to the

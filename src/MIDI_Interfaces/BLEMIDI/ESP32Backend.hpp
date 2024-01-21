@@ -18,6 +18,7 @@
 BEGIN_CS_NAMESPACE
 
 /// ESP32 backend intended to be plugged into @ref GenericBLEMIDI_Interface.
+/// @p Impl can be used to select different low-level BLE stacks.
 template <class Impl>
 class ESP32BLEBackend : private ThreadedBLEMIDISender<ESP32BLEBackend<Impl>>,
                         private MIDIBLEInstance {
