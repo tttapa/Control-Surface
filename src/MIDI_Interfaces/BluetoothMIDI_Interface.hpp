@@ -42,7 +42,8 @@ END_CS_NAMESPACE
     (defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_GIGA)) ||                   \
     defined(ARDUINO_UNOR4_WIFI) || defined(ARDUINO_SAMD_NANO_33_IOT) ||        \
     defined(ARDUINO_SAMD_MKRWIFI1010)
-// Arduino Nano 33 BLE, RP2040, Arduino UNO R4 WiFi, Arduino Nano 33 IoT
+// Arduino Nano 33 BLE, RP2040, Arduino GIGA, Arduino UNO R4 WiFi,
+// Arduino Nano 33 IoT, Arduino MKR 1010 WiFi
 #include "BLEMIDI/ArduinoBLEBackend.hpp"
 BEGIN_CS_NAMESPACE
 using BLEMIDIBackend = ArduinoBLEBackend;
