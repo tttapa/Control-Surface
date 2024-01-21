@@ -35,6 +35,7 @@ struct BLECharacteristicHandle {
 struct BLEDataView {
     const uint8_t *data = nullptr;
     uint16_t length = 0;
+    explicit operator bool() const { return length > 0; }
 
 #if __cplusplus < 201402L
     BLEDataView() = default;
@@ -157,6 +158,7 @@ enum class BLEDataLifetime {
 /// BLE code.
 class MIDIBLEInstance {
   public:
+    virtual ~MIDIBLEInstance() = default;
     virtual void handleConnect(BLEConnectionHandle conn_handle) = 0;
     virtual void handleDisconnect(BLEConnectionHandle conn_handle) = 0;
     virtual void handleMTU(BLEConnectionHandle conn_handle, uint16_t mtu) = 0;
