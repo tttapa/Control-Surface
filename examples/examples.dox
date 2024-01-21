@@ -1648,6 +1648,83 @@
  */
 
 /**
+ * @example   "USBMIDI-Adapter.ino"
+ * 
+ * USBMIDI-Adapter
+ * ===============
+ *
+ * Turns an Arduino into a USB to 5-pin DIN MIDI adapter.
+ * 
+ * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, ESP32-S3, Teensy 3.x
+ *
+ * Connections
+ * -----------
+ * 
+ * - TXD: connected to a MIDI 5-pin DIN output connector
+ *     (with series resistor, possibly through a buffer)
+ * - RXD: connected to a MIDI 5-pin DIN input connector
+ *     (with an optocoupler)
+ *
+ * See https://midi.org/specifications/midi-transports-specifications/5-pin-din-electrical-specs
+ * for the schematic, optocoupler models and resistor values.
+ *
+ * Behavior
+ * --------
+ *
+ * - The Arduino will show up as a USB MIDI device.
+ * - Any MIDI messages sent to the Arduino over USB are sent out to the 5-pin
+ *     DIN output connector.
+ * - Any MIDI messages sent to the Arduino through the 5-pin DIN input connector
+ *     are sent over USB.
+ *
+ * @see @ref md_pages_MIDI-over-USB
+ * @see @ref midi-tutorial
+ * 
+ * Written by PieterP, 2024-01-21  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "BLEMIDI-Adapter.ino"
+ * 
+ * BLEMIDI-Adapter
+ * ===============
+ *
+ * Turns an Arduino into a Bluetooth Low Energy (BLE) to 5-pin DIN MIDI adapter.
+ * 
+ * @boards  Nano 33 IoT, Nano 33 BLE, ESP32, ESP32-S3
+ *
+ * Connections
+ * -----------
+ * 
+ * - TXD: connected to a MIDI 5-pin DIN output connector
+ *     (with series resistor, possibly through a buffer)
+ * - RXD: connected to a MIDI 5-pin DIN input connector
+ *     (with an optocoupler)
+ *
+ * See https://midi.org/specifications/midi-transports-specifications/5-pin-din-electrical-specs
+ * for the schematic, optocoupler models and resistor values.
+ *
+ * Behavior
+ * --------
+ *
+ * - The Arduino will advertise itself as a Bluetooth Low Energy MIDI device
+ *     with the name `MIDI Adapter`.
+ * - When you connect to the Arduino using your phone or computer, the built-in
+ *     LED turns on to indicate that the connection was successful.
+ * - Any MIDI messages sent to the Arduino over BLE are sent out to the 5-pin
+ *     DIN output connector.
+ * - Any MIDI messages sent to the Arduino through the 5-pin DIN input connector
+ *     are sent over BLE.
+ *
+ * @see @ref md_pages_MIDI-over-BLE
+ * @see @ref midi-tutorial
+ * 
+ * Written by PieterP, 2024-01-21  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "Bank.ino"
  * 
  * Bank

@@ -804,14 +804,15 @@ USBDebugMIDI_Interface midi_dbg;
 BidirectionalMIDI_Pipe pipes;
 
 void setup() {
-    // Manually route MIDI output from Control_Surface to the MIDI interface,
-    // and the MIDI output from the MIDI interface to Control_Surface
+    // Manually route MIDI input from the debug interface to the USB interface,
+    // and the MIDI input from the USB interface to the debug interface
     midi_dbg | pipes | midi_usb;
     // Initialize the MIDI interfaces
     MIDI_Interface::beginAll();
 }
 
 void loop() {
+    // Continuously poll all interfaces and route the traffic between them
     MIDI_Interface::updateAll();
 }
 ```
@@ -882,3 +883,5 @@ functions. See @ref MIDI_Pipes-Filter.ino for more details.
 - @ref Dual-MIDI-Interface.ino
 - @ref MIDI-Monitor.ino
 - @ref MIDI_Pipes-Filter.ino
+- @ref USBMIDI-Adapter.ino
+- @ref BLEMIDI-Adapter.ino

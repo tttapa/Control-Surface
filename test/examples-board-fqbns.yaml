@@ -1,4 +1,5 @@
 esp32: esp32:esp32:esp32thing:FlashFreq=80,PartitionScheme=default,UploadSpeed=921600,DebugLevel=none
+esp32-s3: esp32:esp32:esp32s3
 esp8266: esp8266:esp8266:d1_mini:xtal=80,vt=flash,exception=disabled,stacksmash=disabled,ssl=all,mmu=3232,non32xfer=fast,eesz=4M2M,ip=lm2f,dbg=Disabled,lvl=None____,wipe=none,baud=921600
 teensy 3.x: teensy:avr:teensy31:speed=96,usb=serialmidiaudio,opt=o2std,keys=en-us
 teensy 3.6: teensy:avr:teensy36:speed=180,usb=serialmidiaudio,opt=o2std,keys=en-us
