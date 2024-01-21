@@ -90,7 +90,8 @@ cs_midi_ble_characteristic_callback(uint16_t conn_handle, uint16_t attr_handle,
             };
             if (auto *inst = cs::midi_ble_nimble::state->instance)
                 inst->handleData(cs::BLEConnectionHandle {conn_handle},
-                                 cs::BLEDataGenerator {std::in_place, data_gen},
+                                 cs::BLEDataGenerator {compat::in_place,
+                                                       std::move(data_gen)},
                                  cs::BLEDataLifetime::ConsumeImmediately);
             return 0;
         } break;
