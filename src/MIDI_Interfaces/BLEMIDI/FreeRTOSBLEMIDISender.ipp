@@ -9,7 +9,7 @@ FreeRTOSBLEMIDISender<Derived>::~FreeRTOSBLEMIDISender() {
     lock_t lck(shared.mtx);
     // Tell the sender that this is the last packet
     shared.stop = true;
-    // Tell it to send the packet right now (flush)
+    // Tell the sender to not to wait for the timeout
     shared.flush = true;
     lck.unlock();
     cv.notify_one();
@@ -79,7 +79,7 @@ template <class Derived>
 void FreeRTOSBLEMIDISender<Derived>::setTimeout(
     std::chrono::milliseconds timeout) {
     lock_t lck(shared.mtx);
-    this->shared.timeout = timeout;
+    shared.timeout = timeout;
 }
 
 template <class Derived>
@@ -88,13 +88,19 @@ bool FreeRTOSBLEMIDISender<Derived>::handleSendEvents() {
 
     // Wait for a packet to be started (or for a stop signal)
     cv.wait(lck, [this] { return !shared.packet.empty() || shared.stop; });
-    bool keep_going = !shared.stop;
     // Wait for flush signal or timeout.
     auto timeout = shared.timeout;
-    bool flushing = cv.wait_for(lck, timeout, [this] { return shared.flush; });
+    cv.wait_for(lck, timeout, [this] { return shared.flush; });
 
-    // Send the packet over BLE, empty the buffer, and update the buffer size
-    // based on the MTU of the connected clients.
+    // Stop this thread
+    if (shared.stop)
+        return false;
+    // Note: do not send anything in this case, because we might be in the base
+    // class destructor, and the subclass implementing the sendData function
+    // might already be destroyed.
+
+    // Send the packet over BLE, empty the buffer, and update the buffer
+    // size based on the MTU of the connected clients.
     BLEDataView data {shared.packet.getBuffer(), shared.packet.getSize()};
     if (data.length > 0)
         CRTP(Derived).sendData(data);
@@ -107,12 +113,12 @@ bool FreeRTOSBLEMIDISender<Derived>::handleSendEvents() {
     // buffer into two or more packets.
 
     // Notify the main thread that the flush was done.
-    if (flushing) {
+    if (shared.flush) {
         shared.flush = false;
         lck.unlock();
         cv.notify_one();
     }
-    return keep_going;
+    return true;
 }
 
 END_CS_NAMESPACE
