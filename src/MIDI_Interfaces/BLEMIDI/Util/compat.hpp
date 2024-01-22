@@ -2,6 +2,7 @@
 
 #include <Settings/NamespaceSettings.hpp>
 
+#include <cstddef>
 #include <type_traits>
 #include <utility>
 
