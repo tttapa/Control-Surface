@@ -160,9 +160,11 @@ void MIDI_Source::sourceMIDItoPipe(RealTimeMessage msg) {
 void MIDI_Source::stall(MIDIStaller *cause) {
     if (hasSinkPipe())
         sinkPipe->stallDownstream(cause, this);
+    DEBUGFN(F("Stalled MIDI source. Cause: ") << getStallerName());
 }
 
 void MIDI_Source::unstall(MIDIStaller *cause) {
+    DEBUGFN(F("Un-stalling MIDI source. Cause: ") << getStallerName());
     if (hasSinkPipe())
         sinkPipe->unstallDownstream(cause, this);
 }

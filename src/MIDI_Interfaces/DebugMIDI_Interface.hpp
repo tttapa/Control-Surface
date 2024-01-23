@@ -224,6 +224,9 @@ class StreamDebugMIDI_Interface : public PrintDebugMIDI_Base,
   private:
 #if !DISABLE_PIPES
     void handleStall() override { MIDI_Interface::handleStall(this); }
+#ifdef DEBUG_OUT
+    const char *getName() const override { return "dbg"; }
+#endif
 #endif
 
   private:

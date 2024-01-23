@@ -117,10 +117,10 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     template <class MIDIInterface_t>
     static void dispatchIncoming(MIDIInterface_t *iface, MIDIReadEvent event);
     /// Un-stall the given MIDI interface. Assumes the interface has been
-    /// stalled because of a chunked SysEx messages. Waits untill that message
+    /// stalled because of a chunked SysEx messages. Waits until that message
     /// is finished.
     template <class MIDIInterface_t>
-    static void handleStall(MIDIInterface_t *iface);
+    static void handleStall(MIDIInterface_t *self);
 
   private:
     MIDI_Callbacks *callbacks = nullptr;
@@ -130,28 +130,30 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
 };
 
 template <class MIDIInterface_t>
-void MIDI_Interface::updateIncoming(MIDIInterface_t *iface) {
+void MIDI_Interface::updateIncoming(MIDIInterface_t *self) {
 #if DISABLE_PIPES
-    MIDIReadEvent event = iface->read();
+    MIDIReadEvent event = self->read();
     while (event != MIDIReadEvent::NO_MESSAGE) {
-        dispatchIncoming(iface, event);
-        event = iface->read();
+        dispatchIncoming(self, event);
+        event = self->read();
     }
 #else
-    if (iface->getStaller() == iface)
-        iface->unstall(iface);
+    MIDIReadEvent event = self->read();
+    if (event == MIDIReadEvent::NO_MESSAGE)
+        return;
+    if (self->getStaller() == self)
+        self->unstall(self);
     bool chunked = false;
-    MIDIReadEvent event = iface->read();
     while (event != MIDIReadEvent::NO_MESSAGE) {
-        dispatchIncoming(iface, event);
+        dispatchIncoming(self, event);
         if (event == MIDIReadEvent::SYSEX_CHUNK)
             chunked = true;
         if (event == MIDIReadEvent::SYSEX_MESSAGE)
             chunked = false;
-        event = iface->read();
+        event = self->read();
     }
     if (chunked)
-        iface->stall(iface);
+        self->stall(self);
 #endif
     // TODO: add logic to detect MIDI messages such as (N)RPN that span over
     // multiple channel voice messages and that shouldn't be interrupted.
@@ -159,21 +161,21 @@ void MIDI_Interface::updateIncoming(MIDIInterface_t *iface) {
 }
 
 template <class MIDIInterface_t>
-void MIDI_Interface::dispatchIncoming(MIDIInterface_t *iface,
+void MIDI_Interface::dispatchIncoming(MIDIInterface_t *self,
                                       MIDIReadEvent event) {
     switch (event) {
         case MIDIReadEvent::CHANNEL_MESSAGE:
-            iface->onChannelMessage(iface->getChannelMessage());
+            self->onChannelMessage(self->getChannelMessage());
             break;
         case MIDIReadEvent::SYSEX_CHUNK: // fallthrough
         case MIDIReadEvent::SYSEX_MESSAGE:
-            iface->onSysExMessage(iface->getSysExMessage());
+            self->onSysExMessage(self->getSysExMessage());
             break;
         case MIDIReadEvent::SYSCOMMON_MESSAGE:
-            iface->onSysCommonMessage(iface->getSysCommonMessage());
+            self->onSysCommonMessage(self->getSysCommonMessage());
             break;
         case MIDIReadEvent::REALTIME_MESSAGE:
-            iface->onRealTimeMessage(iface->getRealTimeMessage());
+            self->onRealTimeMessage(self->getRealTimeMessage());
             break;
         case MIDIReadEvent::NO_MESSAGE: break; // LCOV_EXCL_LINE
         default: break;                        // LCOV_EXCL_LINE
@@ -182,20 +184,22 @@ void MIDI_Interface::dispatchIncoming(MIDIInterface_t *iface,
 
 #if !DISABLE_PIPES
 template <class MIDIInterface_t>
-void MIDI_Interface::handleStall(MIDIInterface_t *iface) {
-    iface->unstall(iface);
+void MIDI_Interface::handleStall(MIDIInterface_t *self) {
+    const char *staller_name = self->getStallerName();
+    DEBUGFN(F("Handling stall. Cause: ") << staller_name);
+    self->unstall(self);
 
     unsigned long startTime = millis();
     while (millis() - startTime < SYSEX_CHUNK_TIMEOUT) {
-        MIDIReadEvent event = iface->read();
-        dispatchIncoming(iface, event);
+        MIDIReadEvent event = self->read();
+        dispatchIncoming(self, event);
         if (event == MIDIReadEvent::SYSEX_CHUNK)
             startTime = millis(); // reset timeout
         else if (event == MIDIReadEvent::SYSEX_MESSAGE)
             return;
     }
-    DEBUGREF(F("Warning: Unable to un-stall pipes: ")
-             << iface->getStallerName());
+    DEBUGFN(F("Warning: Unable to un-stall pipes. Cause: ") << staller_name);
+    static_cast<void>(staller_name);
 }
 #endif
 

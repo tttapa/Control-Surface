@@ -49,6 +49,9 @@ class StreamMIDI_Interface : public MIDI_Interface {
   protected:
 #if !DISABLE_PIPES
     void handleStall() override { MIDI_Interface::handleStall(this); }
+#ifdef DEBUG_OUT
+    const char *getName() const override { return "ser"; }
+#endif
 #endif
 
   protected:

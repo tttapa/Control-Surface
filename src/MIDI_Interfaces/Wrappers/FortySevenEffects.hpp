@@ -187,6 +187,9 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
         ERROR(F("Not implemented (stalled by ") << stallername << ')', 0x1349);
         (void)stallername;
     }
+#ifdef DEBUG_OUT
+    const char *getName() const override { return "47fx"; }
+#endif
 #endif
 
   private:

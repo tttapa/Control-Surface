@@ -37,6 +37,9 @@ class GenericUSBMIDI_Interface : public MIDI_Interface {
   private:
 #if !DISABLE_PIPES
     void handleStall() override { MIDI_Interface::handleStall(this); }
+#ifdef DEBUG_OUT
+    const char *getName() const override { return "usb"; }
+#endif
 #endif
 
   public:

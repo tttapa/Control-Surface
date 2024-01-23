@@ -15,7 +15,7 @@ BEGIN_CS_NAMESPACE
 struct MIDIStaller {
     virtual ~MIDIStaller() = default;
     /// Get the staller's name for debugging purposes.
-    virtual const char *getName() const { return "<?>"; };
+    virtual const char *getName() const { return "<?>"; }
     /// Call back that should finish any MIDI messages that are in progress, and
     /// un-stall the pipe or MIDI source as quickly as possible.
     virtual void handleStall() = 0;
