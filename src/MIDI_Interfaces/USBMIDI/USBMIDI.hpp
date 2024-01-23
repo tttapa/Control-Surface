@@ -108,7 +108,7 @@ BEGIN_CS_NAMESPACE
 using USBDeviceMIDIBackend = Arduino_mbed_USBDeviceMIDIBackend;
 END_CS_NAMESPACE
 
-#elif defined(ARDUINO_RASPBERRY_PI_PICO) && defined(USE_TINYUSB)
+#elif defined(ARDUINO_ARCH_RP2040) && defined(USE_TINYUSB)
 
 #include "USBMIDI_Adafruit_TinyUSB.hpp"
 BEGIN_CS_NAMESPACE
