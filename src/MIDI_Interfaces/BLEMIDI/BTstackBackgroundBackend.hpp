@@ -15,6 +15,8 @@ BEGIN_CS_NAMESPACE
 
 /// Raspberry Pi Pico BTstack background backend intended to be plugged into
 /// @ref GenericBLEMIDI_Interface.
+///
+/// @todo   Implement BTstack timer-based sender timeouts.
 class BTstackBackgroundBackend
     : private PollingBLEMIDISender<BTstackBackgroundBackend>,
       private MIDIBLEInstance {
@@ -48,6 +50,8 @@ class BTstackBackgroundBackend
     }
 
   private:
+    // We cannot use atomics here, because they might not be lock-free on the
+    // Pico's Cortex-M0+ cores.
     static_assert(sizeof(sig_atomic_t) > sizeof(uint16_t));
     /// Are we connected to a BLE Central?
     volatile sig_atomic_t connected = 0xFFFF;
