@@ -10,7 +10,7 @@ struct BLEMIDIBackend {};
 END_BEGIN_CS_NAMESPACE
 /// Indicates whether @ref BLEMIDIBackend and @ref BluetoothMIDI_Interface are
 /// defined for this board.
-#define CS_BLEMIDI_SUPPORTED 1
+#define CS_BLE_MIDI_SUPPORTED 1
 /// On ESP32, changes the default MIDI over BLE backend from Bluedroid to NimBLE.
 /// This macro should be defined before including any Control Surface headers.
 /// Requires the [NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino) library.
@@ -26,15 +26,25 @@ END_BEGIN_CS_NAMESPACE
 BEGIN_CS_NAMESPACE
 using BLEMIDIBackend = ESP32NimBLEBackend;
 END_CS_NAMESPACE
-#define CS_BLEMIDI_SUPPORTED 1
+#define CS_BLE_MIDI_SUPPORTED 1
 #else
 // Bluedroid backend (default)
 #include "BLEMIDI/ESP32BluedroidBackend.hpp"
 BEGIN_CS_NAMESPACE
 using BLEMIDIBackend = ESP32BluedroidBackend;
 END_CS_NAMESPACE
-#define CS_BLEMIDI_SUPPORTED 1
+#define CS_BLE_MIDI_SUPPORTED 1
 #endif
+#endif
+
+#elif defined(ARDUINO_RASPBERRY_PI_PICO_W)
+// Pico W
+#if ENABLE_BLE
+#include "BLEMIDI/BTstackBackgroundBackend.hpp"
+BEGIN_CS_NAMESPACE
+using BLEMIDIBackend = BTstackBackgroundBackend;
+END_CS_NAMESPACE
+#define CS_BLE_MIDI_SUPPORTED 1
 #endif
 
 #elif (defined(ARDUINO_ARCH_MBED) && defined(ARDUINO_ARDUINO_NANO33BLE)) ||    \
@@ -48,10 +58,10 @@ END_CS_NAMESPACE
 BEGIN_CS_NAMESPACE
 using BLEMIDIBackend = ArduinoBLEBackend;
 END_CS_NAMESPACE
-#define CS_BLEMIDI_SUPPORTED 1
+#define CS_BLE_MIDI_SUPPORTED 1
 #endif
 
-#ifdef CS_BLEMIDI_SUPPORTED
+#ifdef CS_BLE_MIDI_SUPPORTED
 #include "GenericBLEMIDI_Interface.hpp"
 BEGIN_CS_NAMESPACE
 /// @brief   A class for MIDI interfaces sending MIDI messages over a Bluetooth
@@ -64,4 +74,8 @@ BEGIN_CS_NAMESPACE
 /// @ingroup MIDIInterfaces
 struct BluetoothMIDI_Interface : GenericBLEMIDI_Interface<BLEMIDIBackend> {};
 END_CS_NAMESPACE
+#endif
+
+#ifndef CS_BLE_MIDI_SUPPORTED
+#define CS_BLE_MIDI_NOT_SUPPORTED
 #endif
