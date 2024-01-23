@@ -24,7 +24,7 @@ backend for the particular board.
 | Arduino MKR 1010 WiFi               | @ref ArduinoBLEBackend     |                          |
 | Arduino UNO R4 WiFi                 | @ref ArduinoBLEBackend     |                          |
 | Arduino GIGA R1 WiFi                | @ref ArduinoBLEBackend     |                          |
-| Raspberry Pi Pico W (RP2040)        | Not yet supported          |                          |
+| Raspberry Pi Pico W (RP2040)        | @ref BTstackBackgroundBackend |                       |
 | ESP32                               | @ref ESP32BluedroidBackend | @ref ESP32NimBLEBackend  |
 | ESP32-S3                            | @ref ESP32BluedroidBackend | @ref ESP32NimBLEBackend  |
 | ESP32-C3, ESP32-C6, ESP32-H2        | @ref ESP32BluedroidBackend | @ref ESP32NimBLEBackend  |
@@ -67,3 +67,16 @@ library in order to use this backend.
 
 Defining @ref CS_USE_NIMBLE before including Control Surface changes the default
 backend for ESP32 to the @ref ESP32NimBLEBackend.
+
+### BTstackBackgroundBackend
+
+This backend uses the [BTstack](https://github.com/bluekitchen/btstack) stack
+that ships with the [pico-sdk](https://github.com/raspberrypi/pico-sdk).
+
+All Bluetooth events are handled asynchronously (using the background
+[`async_context`](https://www.raspberrypi.com/documentation/pico-sdk/networking.html#ga092b97e879be5b9aa9121abda23e1337)).
+Currently, buffering outgoing MIDI messages still requires polling, although
+this could be replaced by a BTstack timer in the future.
+
+To use the @ref BluetoothMIDI_Interface on the Pico W, you have to enable the
+Bluetooth stack in the _Tools > IP/Bluetooth Stack_ menu in the IDE: <https://arduino-pico.readthedocs.io/en/latest/bluetooth.html#enabling-bluetooth>

@@ -1692,7 +1692,18 @@
  *
  * Turns an Arduino into a Bluetooth Low Energy (BLE) to 5-pin DIN MIDI adapter.
  * 
- * @boards  Nano 33 IoT, Nano 33 BLE, ESP32, ESP32-S3
+ * @boards  Nano 33 IoT, Nano 33 BLE, ESP32, ESP32-S3, Pi Pico W
+ *
+ * Configuration
+ * -------------
+ *
+ * - If you're using a Pi Pico W, you'll have to enable the Bluetooth stack
+ *     from the _Tools > IP/Bluetooth Stack_ menu in the IDE.
+ * - If you're using an ESP32, you can optionally switch to the NimBLE backend
+ *     by installing the [h2zero/NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino)
+ *     library, and adding `#define CS_USE_NIMBLE` at the top of this sketch.
+ * - If you're not using a Pico or an ESP32, you'll have to install the
+ *     [ArduinoBLE](https://github.com/arduino-libraries/ArduinoBLE) library.
  *
  * Connections
  * -----------
