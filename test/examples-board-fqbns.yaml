@@ -13,4 +13,5 @@ nano 33 iot: arduino:samd:nano_33_iot
 nano 33 ble: arduino:mbed_nano:nano33ble
 nano every: arduino:megaavr:nona4809:mode=off
 pi pico: arduino:mbed_rp2040:pico
+pi pico w: rp2040:rp2040:rpipicow:ipbtstack=ipv4btcble
 uno r4: arduino:renesas_uno:minima

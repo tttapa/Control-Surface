@@ -29,7 +29,7 @@ There are some differences in MIDI over USB implementation between different typ
 | Teensy LC, 3.0, 3.1, 3.2, 3.5, 4.0  | ✅  | ✅  | ❓  | ❌  |
 | Teensy 3.6, 4.1                     | ✅  | ✅  | ✅  | ❌  |
 | Raspberry Pi Pico (RP2040)          | ✅  | ✅  | ❓  | ❌  |
-| Raspberry Pi Pico W (RP2040)        | ✅  | ✅  | ❓  | ❓  |
+| Raspberry Pi Pico W (RP2040)        | ✅  | ✅  | ❓  | ✅  |
 | ESP8266                             | ✅  | ❌  | ❌  | ❌  |
 | ESP32                               | ✅  | ❌  | ❌  | ✅  |
 | ESP32-S2                            | ✅  | 🔼  | ❓  | ❌  |
