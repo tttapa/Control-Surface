@@ -1,6 +1,8 @@
 #include "SerialMIDI_Interface.hpp"
 #include <MIDI_Parsers/StreamPuller.hpp>
 
+#include "PicoUSBInit.hpp"
+
 BEGIN_CS_NAMESPACE
 
 // -------------------------------------------------------------------------- //
@@ -8,6 +10,8 @@ BEGIN_CS_NAMESPACE
 // Reading MIDI
 
 MIDIReadEvent StreamMIDI_Interface::read() {
+    if (!ensure_usb_init(stream))
+        return MIDIReadEvent::NO_MESSAGE;
     return parser.pull(StreamPuller(stream));
 }
 
@@ -38,6 +42,8 @@ SysExMessage StreamMIDI_Interface::getSysExMessage() const {
 // Sending MIDI
 
 void StreamMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
+    if (!ensure_usb_init(stream))
+        return;
     stream.write(msg.header);
     stream.write(msg.data1);
     if (msg.hasTwoDataBytes())
@@ -45,6 +51,8 @@ void StreamMIDI_Interface::sendChannelMessageImpl(ChannelMessage msg) {
 }
 
 void StreamMIDI_Interface::sendSysCommonImpl(SysCommonMessage msg) {
+    if (!ensure_usb_init(stream))
+        return;
     stream.write(msg.header);
     if (msg.getNumberOfDataBytes() >= 1)
         stream.write(msg.data1);
@@ -53,10 +61,14 @@ void StreamMIDI_Interface::sendSysCommonImpl(SysCommonMessage msg) {
 }
 
 void StreamMIDI_Interface::sendSysExImpl(SysExMessage msg) {
+    if (!ensure_usb_init(stream))
+        return;
     stream.write(msg.data, msg.length);
 }
 
 void StreamMIDI_Interface::sendRealTimeImpl(RealTimeMessage msg) {
+    if (!ensure_usb_init(stream))
+        return;
     stream.write(msg.message);
 }
 

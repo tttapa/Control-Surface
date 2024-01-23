@@ -1,6 +1,8 @@
 #include "DebugMIDI_Interface.hpp"
 #include <AH/PrintStream/PrintStream.hpp>
 
+#include "PicoUSBInit.hpp"
+
 BEGIN_CS_NAMESPACE
 
 namespace DebugMIDIMessageNames {
@@ -38,6 +40,8 @@ const static char *MIDIStatusTypeNames[] = {
 } // namespace DebugMIDIMessageNames
 
 MIDIReadEvent StreamDebugMIDI_Interface::read() {
+    if (!ensure_usb_init(getStream()))
+        return MIDIReadEvent::NO_MESSAGE;
     return parser.pull(hexstream);
 }
 
@@ -47,6 +51,8 @@ void StreamDebugMIDI_Interface::update() {
 
 void PrintDebugMIDI_Base::sendChannelMessageImpl(Print &stream,
                                                  ChannelMessage msg) {
+    if (!ensure_usb_init(stream))
+        return;
     uint8_t messageType = (msg.header >> 4) - 8;
     if (messageType >= 7)
         return;
@@ -71,6 +77,8 @@ void PrintDebugMIDI_Base::sendChannelMessageImpl(Print &stream,
 }
 
 void PrintDebugMIDI_Base::sendSysExImpl(Print &stream, SysExMessage msg) {
+    if (!ensure_usb_init(stream))
+        return;
     DEBUG_LOCK_MUTEX
     if (prefix != nullptr)
         stream << prefix << ' ';
@@ -84,6 +92,8 @@ void PrintDebugMIDI_Base::sendSysExImpl(Print &stream, SysExMessage msg) {
 
 void PrintDebugMIDI_Base::sendSysCommonImpl(Print &stream,
                                             SysCommonMessage msg) {
+    if (!ensure_usb_init(stream))
+        return;
     DEBUG_LOCK_MUTEX
     if (prefix != nullptr)
         stream << prefix << ' ';
@@ -101,6 +111,8 @@ void PrintDebugMIDI_Base::sendSysCommonImpl(Print &stream,
 }
 
 void PrintDebugMIDI_Base::sendRealTimeImpl(Print &stream, RealTimeMessage msg) {
+    if (!ensure_usb_init(stream))
+        return;
     DEBUG_LOCK_MUTEX
     if (prefix != nullptr)
         stream << prefix << ' ';
