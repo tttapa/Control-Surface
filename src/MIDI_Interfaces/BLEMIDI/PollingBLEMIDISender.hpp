@@ -66,7 +66,7 @@ class PollingBLEMIDISender {
     /// Override the minimum MTU (0 means don't override, nonzero overrides if
     /// it's smaller than the minimum MTU of the clients).
     /// @see    @ref forceMinMTU()
-    uint16_t force_min_mtu {0};
+    uint16_t force_min_mtu {515};
 
   public:
     struct ProtectedBuilder {
