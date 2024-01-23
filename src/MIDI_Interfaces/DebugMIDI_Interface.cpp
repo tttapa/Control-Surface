@@ -45,8 +45,8 @@ void StreamDebugMIDI_Interface::update() {
     MIDI_Interface::updateIncoming(this);
 }
 
-void StreamDebugMIDI_Base::sendChannelMessageImpl(Stream &stream,
-                                                  ChannelMessage msg) {
+void PrintDebugMIDI_Base::sendChannelMessageImpl(Print &stream,
+                                                 ChannelMessage msg) {
     uint8_t messageType = (msg.header >> 4) - 8;
     if (messageType >= 7)
         return;
@@ -70,7 +70,7 @@ void StreamDebugMIDI_Base::sendChannelMessageImpl(Stream &stream,
     stream << "\r\n";
 }
 
-void StreamDebugMIDI_Base::sendSysExImpl(Stream &stream, SysExMessage msg) {
+void PrintDebugMIDI_Base::sendSysExImpl(Print &stream, SysExMessage msg) {
     DEBUG_LOCK_MUTEX
     if (prefix != nullptr)
         stream << prefix << ' ';
@@ -82,8 +82,8 @@ void StreamDebugMIDI_Base::sendSysExImpl(Stream &stream, SysExMessage msg) {
     stream << "\r\n";
 }
 
-void StreamDebugMIDI_Base::sendSysCommonImpl(Stream &stream,
-                                             SysCommonMessage msg) {
+void PrintDebugMIDI_Base::sendSysCommonImpl(Print &stream,
+                                            SysCommonMessage msg) {
     DEBUG_LOCK_MUTEX
     if (prefix != nullptr)
         stream << prefix << ' ';
@@ -100,8 +100,7 @@ void StreamDebugMIDI_Base::sendSysCommonImpl(Stream &stream,
     stream << "\r\n";
 }
 
-void StreamDebugMIDI_Base::sendRealTimeImpl(Stream &stream,
-                                            RealTimeMessage msg) {
+void PrintDebugMIDI_Base::sendRealTimeImpl(Print &stream, RealTimeMessage msg) {
     DEBUG_LOCK_MUTEX
     if (prefix != nullptr)
         stream << prefix << ' ';
@@ -112,35 +111,35 @@ void StreamDebugMIDI_Base::sendRealTimeImpl(Stream &stream,
 }
 
 void StreamDebugMIDI_Output::sendChannelMessageImpl(ChannelMessage m) {
-    StreamDebugMIDI_Base::sendChannelMessageImpl(stream, m);
+    PrintDebugMIDI_Base::sendChannelMessageImpl(getStream(), m);
 }
 void StreamDebugMIDI_Output::sendSysCommonImpl(SysCommonMessage m) {
-    StreamDebugMIDI_Base::sendSysCommonImpl(stream, m);
+    PrintDebugMIDI_Base::sendSysCommonImpl(getStream(), m);
 }
 void StreamDebugMIDI_Output::sendSysExImpl(SysExMessage m) {
-    StreamDebugMIDI_Base::sendSysExImpl(stream, m);
+    PrintDebugMIDI_Base::sendSysExImpl(getStream(), m);
 }
 void StreamDebugMIDI_Output::sendRealTimeImpl(RealTimeMessage m) {
-    StreamDebugMIDI_Base::sendRealTimeImpl(stream, m);
+    PrintDebugMIDI_Base::sendRealTimeImpl(getStream(), m);
 }
 void StreamDebugMIDI_Output::sendNowImpl() {
-    StreamDebugMIDI_Base::sendNowImpl(stream);
+    PrintDebugMIDI_Base::sendNowImpl(getStream());
 }
 
 void StreamDebugMIDI_Interface::sendChannelMessageImpl(ChannelMessage m) {
-    StreamDebugMIDI_Base::sendChannelMessageImpl(getStream(), m);
+    PrintDebugMIDI_Base::sendChannelMessageImpl(getStream(), m);
 }
 void StreamDebugMIDI_Interface::sendSysCommonImpl(SysCommonMessage m) {
-    StreamDebugMIDI_Base::sendSysCommonImpl(getStream(), m);
+    PrintDebugMIDI_Base::sendSysCommonImpl(getStream(), m);
 }
 void StreamDebugMIDI_Interface::sendSysExImpl(SysExMessage m) {
-    StreamDebugMIDI_Base::sendSysExImpl(getStream(), m);
+    PrintDebugMIDI_Base::sendSysExImpl(getStream(), m);
 }
 void StreamDebugMIDI_Interface::sendRealTimeImpl(RealTimeMessage m) {
-    StreamDebugMIDI_Base::sendRealTimeImpl(getStream(), m);
+    PrintDebugMIDI_Base::sendRealTimeImpl(getStream(), m);
 }
 void StreamDebugMIDI_Interface::sendNowImpl() {
-    StreamDebugMIDI_Base::sendNowImpl(getStream());
+    PrintDebugMIDI_Base::sendNowImpl(getStream());
 }
 
 END_CS_NAMESPACE
