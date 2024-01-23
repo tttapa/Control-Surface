@@ -120,7 +120,7 @@ class MIDI_Sink {
     bool hasSourcePipe() const { return sourcePipe != nullptr; }
     /// Get a pointer to the pipe this sink is connected to, or `nullptr` if
     /// not connected.
-    MIDI_Pipe *getSourcePipe() { return sourcePipe; }
+    MIDI_Pipe *getSourcePipe() const { return sourcePipe; }
 
     /// @}
 
@@ -422,10 +422,10 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     bool hasSource() const { return source != nullptr; }
     /// Check if this pipe has a “through” output that sends all incoming
     /// messages from the input (source) to another pipe.
-    bool hasThroughOut() const { return throughOut != nullptr; }
+    bool hasThroughOut() const { return getThroughOut() != nullptr; }
     /// Check if this pipe has a “through” input that merges all messages from
     /// another pipe into the output (sink).
-    bool hasThroughIn() const { return throughIn != nullptr; }
+    bool hasThroughIn() const { return getThroughIn() != nullptr; }
 
     /// @}
 
@@ -447,7 +447,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
             return true;
         }
         if (hasThroughOut()) {
-            return throughOut->disconnect(sink);
+            return getThroughOut()->disconnect(sink);
         }
         return false;
     }
@@ -461,20 +461,20 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
             return true;
         }
         if (hasThroughIn()) {
-            return throughIn->disconnect(source);
+            return getThroughIn()->disconnect(source);
         }
         return false;
     }
     bool disconnect(MIDI_Pipe &) = delete;
 
     /// Get the immediate source of this pipe.
-    MIDI_Source *getSource() { return source; }
+    MIDI_Source *getSource() const { return source; }
     /// Get the immediate sink of this pipe.
-    MIDI_Sink *getSink() { return sink; }
+    MIDI_Sink *getSink() const { return sink; }
     /// Get the pipe connected to the “through” output of this pipe.
-    MIDI_Pipe *getThroughOut() { return throughOut; }
+    MIDI_Pipe *getThroughOut() const { return MIDI_Source::sinkPipe; }
     /// Get the pipe connected to the “through” input of this pipe.
-    MIDI_Pipe *getThroughIn() { return throughIn; }
+    MIDI_Pipe *getThroughIn() const { return MIDI_Sink::sourcePipe; }
 
     /// Get the sink this pipe eventually sinks to, following the chain
     /// recursively.
@@ -525,7 +525,7 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
     template <class Message>
     void acceptMIDIfromSource(Message msg) {
         if (hasThroughOut())
-            throughOut->acceptMIDIfromSource(msg);
+            getThroughOut()->acceptMIDIfromSource(msg);
         mapForwardMIDI(msg);
     }
 
@@ -574,8 +574,6 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
   private:
     MIDI_Sink *sink = nullptr;
     MIDI_Source *source = nullptr;
-    MIDI_Pipe *&throughOut = MIDI_Source::sinkPipe;
-    MIDI_Pipe *&throughIn = MIDI_Sink::sourcePipe;
     MIDIStaller *sink_staller = nullptr;
     MIDIStaller *through_staller = nullptr;
 

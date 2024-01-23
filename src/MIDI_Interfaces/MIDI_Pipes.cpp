@@ -213,14 +213,14 @@ void MIDI_Pipe::disconnectSource() { this->source = nullptr; }
 void MIDI_Pipe::disconnect() {
     if (hasSink() && hasThroughIn()) {
         auto oldSink = sink;
-        auto oldThroughIn = throughIn;
+        auto oldThroughIn = getThroughIn();
         sink->disconnectSourcePipesShallow();
         this->disconnectSourcePipesShallow(); // disconnect throughIn
         oldSink->connectSourcePipe(oldThroughIn);
     }
     if (hasSource() && hasThroughOut()) {
         auto oldSource = source;
-        auto oldThroughOut = throughOut;
+        auto oldThroughOut = getThroughOut();
         source->disconnectSinkPipesShallow();
         this->disconnectSinkPipesShallow(); // disconnect throughOut
         oldSource->connectSinkPipe(oldThroughOut);
@@ -247,7 +247,7 @@ void MIDI_Pipe::stallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
     } // LCOV_EXCL_LINE
     sink_staller = cause;
     if (hasThroughOut() && stallsrc == source)
-        throughOut->stallDownstream(cause, this);
+        getThroughOut()->stallDownstream(cause, this);
     if (hasSink())
         sink->stallDownstream(cause, this);
     if (hasSource() && source != stallsrc) {
@@ -258,8 +258,8 @@ void MIDI_Pipe::stallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
             source->unstallUpstream(through_staller, this);
         source->stallUpstream(cause, this);
     }
-    if (hasThroughIn() && throughIn != stallsrc)
-        throughIn->stallUpstream(cause, this);
+    if (hasThroughIn() && getThroughIn() != stallsrc)
+        getThroughIn()->stallUpstream(cause, this);
 }
 
 void MIDI_Pipe::stallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) {
@@ -270,7 +270,7 @@ void MIDI_Pipe::stallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) {
         if (hasSource())
             source->stallUpstream(cause, this);
         if (hasThroughIn())
-            throughIn->stallUpstream(cause, this);
+            getThroughIn()->stallUpstream(cause, this);
     } else {
         if (through_staller == nullptr) {
             through_staller = cause;
@@ -290,7 +290,7 @@ void MIDI_Pipe::unstallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
     } // LCOV_EXCL_LINE
     this->sink_staller = nullptr;
     if (hasThroughOut() && stallsrc == source)
-        throughOut->unstallDownstream(cause, this);
+        getThroughOut()->unstallDownstream(cause, this);
     if (hasSink())
         sink->unstallDownstream(cause, this);
     if (hasSource() && source != stallsrc) {
@@ -300,8 +300,8 @@ void MIDI_Pipe::unstallDownstream(MIDIStaller *cause, MIDI_Source *stallsrc) {
         if (through_staller != nullptr)
             source->stallUpstream(through_staller, this);
     }
-    if (hasThroughIn() && throughIn != stallsrc)
-        throughIn->unstallUpstream(cause, this);
+    if (hasThroughIn() && getThroughIn() != stallsrc)
+        getThroughIn()->unstallUpstream(cause, this);
 }
 
 void MIDI_Pipe::unstallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) {
@@ -312,7 +312,7 @@ void MIDI_Pipe::unstallUpstream(MIDIStaller *cause, MIDI_Sink *stallsrc) {
         if (hasSource())
             source->unstallUpstream(cause, this);
         if (hasThroughIn())
-            throughIn->unstallUpstream(cause, this);
+            getThroughIn()->unstallUpstream(cause, this);
     } else {
         if (cause == through_staller) {
             through_staller = nullptr;
