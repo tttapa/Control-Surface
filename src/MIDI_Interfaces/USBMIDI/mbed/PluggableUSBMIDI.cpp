@@ -13,6 +13,7 @@ BEGIN_CS_NAMESPACE
 #define CS_MIDI_USB_ASSERT(a) (void)(a)
 #endif
 
+constexpr static auto mo_seq = std::memory_order_seq_cst;
 constexpr static auto mo_rel = std::memory_order_release;
 constexpr static auto mo_acq = std::memory_order_acquire;
 constexpr static auto mo_rlx = std::memory_order_relaxed;
@@ -70,13 +71,12 @@ bool PluggableUSBMIDI::callback_set_configuration(uint8_t configuration) {
         bulk_out_ep, PacketSize, USB_EP_TYPE_BULK,
         mbed::callback(this, &PluggableUSBMIDI::out_callback));
 
-    writing.send_timeout.store(nullptr, mo_rlx);
     writing.timeout.detach();
     writing.buffers[0].size.store(0, mo_rlx);
-    writing.buffers[0].ready_to_send.store(false, mo_rlx);
     writing.buffers[1].size.store(0, mo_rlx);
-    writing.buffers[1].ready_to_send.store(false, mo_rlx);
-    writing.active_writebuffer.store(0, mo_rlx);
+    writing.active_writebuffer.store(&writing.buffers[0], mo_rlx);
+    writing.send_later.store(nullptr, mo_rlx);
+    writing.send_now.store(nullptr, mo_rlx);
     writing.sending.store(nullptr, mo_rlx);
 
     reading.available.store(0, mo_rlx);
@@ -101,8 +101,7 @@ void PluggableUSBMIDI::write(uint32_t msg) {
 
 void PluggableUSBMIDI::write(const uint32_t *msgs, uint32_t num_msgs) {
     const uint32_t *end = msgs + num_msgs;
-    while (msgs != end)
-        msgs += write_impl(msgs, end - msgs, false); // blocking
+    while (msgs != end) msgs += write_impl(msgs, end - msgs, false); // blocking
 }
 
 uint32_t PluggableUSBMIDI::write_nonblock(const uint32_t *msgs,
@@ -116,11 +115,11 @@ uint32_t PluggableUSBMIDI::write_nonblock(const uint32_t *msgs,
 }
 
 void PluggableUSBMIDI::send_now() {
-    uint32_t active_idx, size;
+    uint32_t size;
     wbuffer_t *writebuf;
-    tie(active_idx, writebuf, size) = read_writebuf_size();
+    tie(writebuf, size) = read_writebuf_size();
     if (size > 0)
-        send_now_impl_nonblock(active_idx);
+        send_now_impl_nonblock(writebuf);
 }
 
 /*
@@ -148,8 +147,8 @@ void PluggableUSBMIDI::send_now() {
 
 /*
  * - Both send buffers start out empty (size = 0), the first buffer is active 
- *   (`writebuffer = 0`, which means that the first buffer is the one being 
- *   filled with the outgoing data).
+ *   (`active_writebuffer = buffers[0]`, which means that the first buffer is
+ *   the one being filled with the outgoing data).
  * - The `write()` function is called.
  * - The message is added to the active buffer and the size is incremented. 
  *   (Writing the data happens inside of an atomic compare-and-swap loop, if in
@@ -174,39 +173,83 @@ void PluggableUSBMIDI::send_now() {
  *   sending this packet, immediately send the next one.
  */
 
-std::tuple<uint32_t, PluggableUSBMIDI::wbuffer_t *, uint32_t>
-PluggableUSBMIDI::read_writebuf_size() {
-    uint32_t active_idx;
+/*
+ * `active_writebuffer` points to the buffer that the main program should write
+ * to. It is possible that while writing data, the active buffer is sent from an
+ * interrupt handler. This is not an issue, because the data is only published
+ * by store-releasing the `size` of the buffer. This happens in a compare-
+ * exchange loop: before sending a buffer, the sender sets the size to
+ * `Reserved`, which will cause the compare-exchange in the `write_impl`
+ * function to fail, so it can then write the data again to the new active
+ * buffer.
+ * 
+ * `active_writebuffer` is only written to while holding the `sending` lock,
+ * during the preparation of actually sending the previously active buffer.
+ * After writing `active_writebuffer`, the size of the previously active buffer
+ * is updated: first it is set to `Reserved`, and later, it is set to `0` (after
+ * the buffer has been sent), using a store-release to `size`.
+ * 
+ * Therefore, the main program should first do a relaxed load of
+ * `active_writebuffer`, and then a load-acquire of `active_writebuffer->size`.
+ * If this size is either `Reserved` or `0`, it should load `active_writebuffer`
+ * again, and then load-acquire the size again. This newly read size is then
+ * guaranteed to be zero, and `active_writebuffer` points to an empty buffer
+ * that is not yet scheduled to be sent. Because of the load-acquire of the
+ * `size`, it automatically synchronizes with the sending of the data, ensuring
+ * that the buffer is ready to use.
+ * 
+ * When the first data is added to an empty buffer, a pointer to it is stored in
+ * `send_later`, and a timeout is started.
+ * 
+ * There are two events that can cause the `send_later` buffer to be sent:
+ * 1. The main program calls `send_now_impl_nonblock` (either because the user
+ *   called `send_now`, or because the user called `write` and the buffer was
+ * full);
+ * 2. The timeout fires.
+ * 
+ * Only one of the two can actually send it, because they both try to acquire
+ * the `send_later` buffer. The other one gives up, so they don't run
+ * concurrently.
+ * If `send_now_impl_nonblock` acquires the `send_later` buffer, it cancels the
+ * timer because it is no longer necessary.
+ * 
+ * Whichever function acquires the `send_later` buffer, it makes sure that makes
+ * progress is made: either it sends the buffer immediately, or if the previous
+ * transfer is still in progress, it schedules it to be sent as soon as that one
+ * finishes.  
+ * This is done by first setting the `send_now` buffer to the one it acquired
+ * from `send_later`. Then, it tries to acquire the `sending` lock. If this
+ * fails, it returns, because the `in_handler` is guaranteed to send the
+ * `send_later` buffer.
+ * If acquiring the `sending` lock succeeds, `send_now` is acquired and cleared,
+ * and if it is not null, the active buffer is swapped, the old buffer's size is
+ * set to `Reserved`, and a USB transfer is started.
+ */
+
+auto PluggableUSBMIDI::read_writebuf_size()
+    -> std::tuple<wbuffer_t *, uint32_t> {
     wbuffer_t *writebuffer;
     uint32_t size;
-    // active_idx must be newer than active size.
-    active_idx = writing.active_writebuffer.load(mo_rlx);
-    writebuffer = &writing.buffers[active_idx];
+    writebuffer = writing.active_writebuffer.load(mo_rlx);
     size = writebuffer->size.load(mo_acq);
-    // If the size was set to reserved, the active buffer must have been
-    // swapped as well. If both buffers are empty, the active buffer might have
-    // been swapped as well (but not necessarily).
+    // If the size was set to reserved, the active buffer must have been swapped.
     if (size == SizeReserved || size == 0) {
-        uint32_t old_idx = active_idx;
-        active_idx = writing.active_writebuffer.load(mo_rlx);
-        if (old_idx != active_idx) {
-            writebuffer = &writing.buffers[active_idx];
-            size = writebuffer->size.load(mo_acq);
-        }
+        [[maybe_unused]] wbuffer_t *old_buffer = writebuffer;
+        writebuffer = writing.active_writebuffer.load(mo_rlx);
+        CS_MIDI_USB_ASSERT(size == 0 || old_buffer != writebuffer);
+        size = writebuffer->size.load(mo_acq);
     }
     CS_MIDI_USB_ASSERT(size != SizeReserved);
-    return std::make_tuple(active_idx, writebuffer, size);
+    return std::make_tuple(writebuffer, size);
 }
 
 uint32_t PluggableUSBMIDI::write_impl(const uint32_t *msgs, uint32_t num_msgs,
                                       bool nonblocking) {
-    uint32_t active_idx; // Index of the buffer currently being written to.
     wbuffer_t *writebuf; // Pointer to buffer currently being written to.
     uint32_t size;       // Current size of that buffer (i.e. the first index we
                          // can write to).
-
     // Read the active write buffer and its current size
-    tie(active_idx, writebuf, size) = read_writebuf_size();
+    tie(writebuf, size) = read_writebuf_size();
     // Make sure that there's space in the buffer for us to write data
     if (size >= PacketSize) {
         // If there's no space
@@ -215,12 +258,12 @@ uint32_t PluggableUSBMIDI::write_impl(const uint32_t *msgs, uint32_t num_msgs,
             return 0;
         } else {
             // Or wait until the active writing buffer changes to an empty one
-            auto old_idx = active_idx;
+            [[maybe_unused]] wbuffer_t *old_buffer = writebuf;
             do {
                 yield(); // spin
-                tie(active_idx, writebuf, size) = read_writebuf_size();
+                tie(writebuf, size) = read_writebuf_size();
             } while (size >= PacketSize);
-            CS_MIDI_USB_ASSERT(old_idx != active_idx);
+            CS_MIDI_USB_ASSERT(old_buffer != writebuf);
             CS_MIDI_USB_ASSERT(size == 0);
         }
     }
@@ -239,7 +282,9 @@ uint32_t PluggableUSBMIDI::write_impl(const uint32_t *msgs, uint32_t num_msgs,
         // buffer (so it is no longer the active buffer).
 
         // Read the new write buffer and its size.
-        tie(active_idx, writebuf, size) = read_writebuf_size();
+        // The cmp_xchg does not perform an acquire, because we'll/ acquire the
+        // size here:
+        tie(writebuf, size) = read_writebuf_size();
         // CS_MIDI_USB_ASSERT(size == 0); // Only true with cmp_xchg_strong
 
         // Copy the data into the new buffer
@@ -248,15 +293,20 @@ uint32_t PluggableUSBMIDI::write_impl(const uint32_t *msgs, uint32_t num_msgs,
         newsize = size + free_size;
     }
 
+    // If this is the first data that's added to the buffer, indicate that it
+    // can be sent later
+    if (size == 0) {
+        [[maybe_unused]] wbuffer_t *old =
+            writing.send_later.exchange(writebuf, mo_rel);
+        CS_MIDI_USB_ASSERT(old == nullptr);
+    }
     // If the buffer is now full, send it immediately (but don't block)
     if (newsize == PacketSize) {
-        send_now_impl_nonblock(active_idx);
+        send_now_impl_nonblock(writebuf);
     }
     // If this is the first data in the buffer, start a timer that will send
     // the buffer after a given timeout
     else if (size == 0) {
-        wbuffer_t *old = writing.send_timeout.exchange(writebuf, mo_rel);
-        CS_MIDI_USB_ASSERT(old == nullptr);
         std::atomic_signal_fence(mo_rel);
         /* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ [Timeout] ▼ */
         auto cb = mbed::callback(this, &PluggableUSBMIDI::timeout_callback);
@@ -267,88 +317,108 @@ uint32_t PluggableUSBMIDI::write_impl(const uint32_t *msgs, uint32_t num_msgs,
     return free_size / 4u;
 }
 
-bool PluggableUSBMIDI::send_now_impl_nonblock(uint32_t active_idx) {
+bool PluggableUSBMIDI::send_now_impl_nonblock(wbuffer_t *write_buffer) {
     // Disable the timeout
-    auto old_timeout = writing.send_timeout.exchange(nullptr, mo_acq);
-    if (old_timeout != nullptr)
-        writing.timeout.detach();
-
-    wbuffer_t *writebuffer = &writing.buffers[active_idx];
-
-    // Schedule the active buffer to be sent immediately after the previous one
-    bool old_ready = writebuffer->ready_to_send.exchange(true, mo_rlx);
-    if (old_ready)
-        // If the send flag was already set, there's nothing left for us to do
+    auto old = writing.send_later.exchange(nullptr, mo_acq);
+    if (old == nullptr)
+        // If the timeout was not active, the buffer has already been sent.
         return true;
 
-    // If we were the ones who set the send flag, try to send the packet now
+    // Cancel the timeout
+    CS_MIDI_USB_ASSERT(old == write_buffer);
+    writing.timeout.detach();
+    // Since we've cleared send_later, we can be sure that we're not racing
+    // with the timeout handler
+
+    // Schedule the active buffer to be sent immediately after the previous one
+    auto old_ready = writing.send_now.exchange(write_buffer, mo_seq);
+    // The send_later buffer can only be acquired once, so the send_now flag
+    // cannot still be set
+    CS_MIDI_USB_ASSERT(old_ready == nullptr);
 
     // Try to acquire the “sending” lock:
     wbuffer_t *send = nullptr;
-    if (!writing.sending.compare_exchange_strong(send, writebuffer, mo_acq))
+    if (!writing.sending.compare_exchange_strong(send, write_buffer, mo_seq))
         // If we failed to get the lock, he previous transmission is still in
         // progress, so we can't send now, but sending of our buffer is
         // scheduled using the send flag, so we can just return.
         return false;
 
+    // Acquire the send_now lock again (it might have been acquired by the
+    // in_handler in the meantime, in which case our job is done)
+    if (writing.send_now.exchange(nullptr, mo_seq) == nullptr) {
+        // Release the sending lock
+        writing.sending.store(nullptr, mo_seq);
+        return true;
+    }
+
     // Swap the active write buffer
-    CS_MIDI_USB_ASSERT(writing.buffers[!active_idx].size.load(mo_rlx) == 0);
-    writing.active_writebuffer.store(!active_idx, mo_rlx);
+    wbuffer_t *next_buffer = other_buf(write_buffer);
+    // Since we were able to acquire the sending lock, the next buffer must be
+    // empty.
+    CS_MIDI_USB_ASSERT(next_buffer->size.load(mo_rlx) == 0);
+    writing.active_writebuffer.store(next_buffer, mo_rlx);
 
     // Get the size of the buffer to send and atomically set it to reserved
-    uint32_t size = writebuffer->size.exchange(SizeReserved, mo_acq_rel);
+    uint32_t size = write_buffer->size.exchange(SizeReserved, mo_acq_rel);
     CS_MIDI_USB_ASSERT(size != SizeReserved);
     CS_MIDI_USB_ASSERT(size != 0);
 
     // Actually send the buffer
-    write_start_sync(writebuffer->buffer, size);
+    write_start_sync(write_buffer->buffer, size);
     // “sending” lock is released in USB callback
     return true;
 }
 
-void PluggableUSBMIDI::send_in_callback(uint32_t sendbuf_idx) {
-    // Only called in scenarios where we already own “sending” lock
+void PluggableUSBMIDI::timeout_callback() {
+    /* ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ [Timeout] ▲ */
+
+    // Check which buffer (if any) to send
+    wbuffer_t *sendbuffer = writing.send_later.exchange(nullptr, mo_acq);
+    if (!sendbuffer)
+        // If the buffer has been cleared already, this means that the send_now
+        // function was called before the timeout, and the buffer has been sent
+        // (or marked ready), and we don't have to do anything
+        return;
+
+    // Schedule the active buffer to be sent immediately after the previous one
+    auto old_ready = writing.send_now.exchange(sendbuffer, mo_seq);
+    // The send_later buffer can only be acquired once, so the send_now flag
+    // cannot still be set
+    CS_MIDI_USB_ASSERT(old_ready == nullptr);
+
+    // Try to get the send lock
+    wbuffer_t *expected = nullptr;
+    if (!writing.sending.compare_exchange_strong(expected, sendbuffer, mo_seq))
+        // If we failed to get the lock, the previous transmission is still in
+        // progress, so we can't send now, but sending of our buffer is
+        // scheduled using the ready_to_send flag, so we can just return.
+        return;
+
+    // Acquire the send_now lock again (it might have been acquired by the
+    // in_handler in the meantime, in which case our job is done)
+    if (writing.send_now.exchange(nullptr, mo_seq) == nullptr) {
+        // Release the sending lock
+        writing.sending.store(nullptr, mo_seq);
+        return;
+    }
+
+    // Swap the buffers
+    wbuffer_t *next_buffer = other_buf(sendbuffer);
+    // Since we were able to acquire the sending lock, the next buffer must be
+    // empty.
+    CS_MIDI_USB_ASSERT(next_buffer->size.load(mo_rlx) == 0);
+    writing.active_writebuffer.store(next_buffer, mo_rlx);
+
+    // Reserve and send the buffer
 
     // Get the size of the buffer to send and atomically set it to reserved
-    wbuffer_t *sendbuffer = &writing.buffers[sendbuf_idx];
     uint32_t size = sendbuffer->size.exchange(SizeReserved, mo_acq_rel);
     CS_MIDI_USB_ASSERT(size != SizeReserved);
     CS_MIDI_USB_ASSERT(size != 0);
 
     // Actually send the buffer
     write_start_sync(sendbuffer->buffer, size);
-}
-
-void PluggableUSBMIDI::timeout_callback() {
-    std::atomic_signal_fence(mo_acq);
-    /* ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ [Timeout] ▲ */
-
-    // Check which buffer (if any) to send
-    wbuffer_t *sendbuffer = writing.send_timeout.exchange(nullptr, mo_acq);
-    if (!sendbuffer)
-        return;
-
-    // Schedule the active buffer to be sent immediately after the previous one
-    bool old_ready = sendbuffer->ready_to_send.exchange(true, mo_rlx);
-    if (old_ready)
-        // If the send flag was already set, there's nothing left for us to do
-        return;
-
-    // Try to get the send lock
-    wbuffer_t *expected = nullptr;
-    if (!writing.sending.compare_exchange_strong(expected, sendbuffer, mo_acq))
-        // If we failed to get the lock, he previous transmission is still in
-        // progress, so we can't send now, but sending of our buffer is
-        // scheduled using the send flag, so we can just return.
-        return;
-
-    // Swap the buffers
-    uint32_t sendbuf_idx = sendbuffer - writing.buffers;
-    CS_MIDI_USB_ASSERT(writing.buffers[!sendbuf_idx].size.load(mo_rlx) == 0);
-    writing.active_writebuffer.store(!sendbuf_idx, mo_rlx);
-
-    // Reserve and send the buffer
-    send_in_callback(sendbuf_idx);
 }
 
 void PluggableUSBMIDI::write_start_sync(uint8_t *buffer, uint32_t size) {
@@ -367,41 +437,54 @@ void PluggableUSBMIDI::in_callback() {
     // digitalWrite(LED_BUILTIN, LOW);
     write_finish(bulk_in_ep);
 
+    wbuffer_t *sent_buffer = writing.sending.load(mo_acq);
+
+    // The transmission is done, reset the size of the buffer to 0 so the
+    // main thread can write to it again.
+    [[maybe_unused]] uint32_t oldsize = sent_buffer->size.exchange(0, mo_rel);
+    CS_MIDI_USB_ASSERT(oldsize == SizeReserved);
+
     // Release the “sending” lock
-    wbuffer_t *sent = writing.sending.exchange(nullptr, mo_rel);
-    uint32_t sent_idx = sent - writing.buffers;
-    uint32_t next_idx = !sent_idx;
-    wbuffer_t *next = &writing.buffers[next_idx];
+    writing.sending.store(nullptr, mo_seq);
 
     // Check if the other buffer was scheduled to be sent immediately after the
     // one we just sent
-    uint32_t next_ready = next->ready_to_send.load(mo_rlx);
+    wbuffer_t *next_ready = writing.send_now.load(mo_seq);
+
+    // Try to acquire the “sending” lock again
     if (next_ready) {
-        // Acquire the “sending” lock again
-        wbuffer_t *old_sending = writing.sending.exchange(next, mo_rlx);
-        // Since interrupt handlers are atomic blocks, acquiring the lock cannot
-        // fail. If multiple threads are used, an extra flag is needed to
-        // prevent the main thread and the timeout thread from stealing the lock
-        // after we released it.
-        CS_MIDI_USB_ASSERT(old_sending == nullptr);
+        wbuffer_t *expected = nullptr;
+        if (!writing.sending.compare_exchange_strong(expected, next_ready,
+                                                     mo_seq))
+            next_ready = nullptr;
+    }
 
-        // The transmission is done, reset the size of the buffer to 0 so the
-        // main thread can write to it again.
-        sent->ready_to_send.store(false, mo_rlx);
-        uint32_t oldsize = sent->size.exchange(0, mo_rel);
-        CS_MIDI_USB_ASSERT(oldsize == SizeReserved);
+    // Try to acquire the “send_now” buffer
+    if (next_ready) {
+        wbuffer_t *old_ready = writing.send_now.exchange(nullptr, mo_seq);
+        if (old_ready == nullptr) {
+            next_ready = nullptr;
+            writing.sending.store(nullptr, mo_rel);
+        } else {
+            CS_MIDI_USB_ASSERT(old_ready == next_ready);
+        }
+    }
 
+    // Send the next buffer if it was ready and if we were able to acquire the
+    // sending lock
+    if (next_ready) {
         // Swap the buffers
-        writing.active_writebuffer.store(!next_idx, mo_rlx);
-
-        // Send it
-        send_in_callback(next_idx);
-    } else {
-        // The transmission is done, reset the size of the buffer to 0 so the
-        // main thread can write to it again.
-        sent->ready_to_send.store(false, mo_rlx);
-        uint32_t oldsize = sent->size.exchange(0, mo_rel);
-        CS_MIDI_USB_ASSERT(oldsize == SizeReserved);
+        writing.active_writebuffer.store(sent_buffer, mo_rlx);
+        // Get the size of the buffer to send and atomically set it to reserved
+        uint32_t size = next_ready->size.exchange(SizeReserved, mo_acq_rel);
+        CS_MIDI_USB_ASSERT(size != SizeReserved);
+        CS_MIDI_USB_ASSERT(size != 0);
+        // Actually send the buffer
+        write_start_sync(next_ready->buffer, size);
+        // Note that the timeout for this buffer cannot still be running,
+        // because send_now was set, and this can only be done after clearing
+        // the timeout (either in the timeout callback or in the send_now
+        // function)
     }
 }
 
