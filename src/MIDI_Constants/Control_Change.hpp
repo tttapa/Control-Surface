@@ -43,7 +43,9 @@ constexpr uint8_t Breath_Controller_LSB             = 0x20 + 0x02;
 // 23	Undefined
 constexpr uint8_t Foot_Controller_LSB               = 0x20 + 0x04;
 constexpr uint8_t Portamento_Time_LSB               = 0x20 + 0x05;
-constexpr uint8_t Data_Entry_MSB_LSB                = 0x20 + 0x06;
+constexpr uint8_t Data_Entry_MSB_LSB CS_DEPREC("Use Data_Entry_LSB instead")
+                                                    = 0x20 + 0x06;
+constexpr uint8_t Data_Entry_LSB                    = 0x20 + 0x06;
 constexpr uint8_t Channel_Volume_LSB                = 0x20 + 0x07;
 constexpr uint8_t Balance_LSB                       = 0x20 + 0x08;
 // 29	Undefined
