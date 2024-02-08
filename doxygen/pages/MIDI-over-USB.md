@@ -24,7 +24,7 @@ There are some differences in MIDI over USB implementation between different typ
 | Arduino Zero                        | ✅  | 🔼  | ❓  | ❌  |
 | Arduino Mega 2560                   | ✅  | &emsp;❌⁽¹⁾ | ❌  | ❌  |
 | Arduino Due                         | ✅  | ✅  | ❓  | ❌  |
-| Arduino GIGA R1 WiFi                | ✅  | ❓  | &emsp;❌⁽⁴⁾  | 🔼  |
+| Arduino GIGA R1 WiFi                | ✅  | 🔼  | &emsp;❌⁽⁴⁾  | 🔼  |
 | Teensy 2.0, Teensy++ 2.0            | ✅  | 🔼  | ❌  | ❌  |
 | Teensy LC, 3.0, 3.1, 3.2, 3.5, 4.0  | ✅  | ✅  | ❓  | ❌  |
 | Teensy 3.6, 4.1                     | ✅  | ✅  | ✅  | ❌  |
@@ -63,7 +63,7 @@ You can also use the [earlephilhower/arduino-pico](https://github.com/earlephilh
 _Teensy 2.0, Teensy++ 2.0, Teensy LC, Teensy 3.0, Teensy 3.1, Teensy 3.2, Teensy 3.5, Teensy 3.6, Teensy 4.0, Teensy 4.1_  
 ***
 Teensy boards have native USB support as well. You don't even need to install anything, because MIDI over USB is implemented in the Teensy Core.  
-You just need to select the 'MIDI' USB type from Tools > USB Type > MIDI. Other USB types that include MIDI can be used as well.
+You just need to select the `'MIDI'` USB type from <kbd>Tools</kbd> > <kbd>USB Type</kbd>. Other USB types that include MIDI can be used as well.
 
 You can use up to 16 USB MIDI virtual cables over a single USB connection, they will show up as 16 different MIDI devices on your computer. (On a Teensy 2, this number is limited to 4 USB MIDI cables).
 
@@ -126,7 +126,7 @@ _ESP32-S2 and ESP32-S3_
 The ESP32-S2 and ESP32-S3 chips have native USB support, and MIDI over USB is supported by Control Surface when using version 3.0.0 or later of the `arduino-esp32` core.  
 At the time of writing, this version has not yet been officially released, and you may need to add the development release link to the boards manager URLs to install it (see https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html for more information).
 
-To enable MIDI over USB support, select the `"USB-OTG"` mode in the Tools > USB Type menu.
+To enable MIDI over USB support, select the `"USB-OTG (TinyUSB)"` mode in the <kbd>Tools</kbd> > <kbd>USB Mode</kbd> menu.
 
 ## Other Espressif boards
 _ESP8266, ESP32, ESP32-C3, ESP32-C6, ESP32-H2_
