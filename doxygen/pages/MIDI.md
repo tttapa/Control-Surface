@@ -42,8 +42,9 @@ all Arduino boards support MIDI over USB natively. You can find an overview
 of boards that do support it on the @ref md_pages_MIDI-over-USB page.
 USB Host MIDI is currently only supported on the Teensy 3.6 and 4.1 boards.
 
-MIDI over BLE is supported on the ESP32 and on boards supported by the
-ArduinoBLE library. More information can be found on the @ref md_pages_MIDI-over-BLE page.
+MIDI over BLE is supported on the ESP32, the Raspberry Pi Pico W, and on boards
+supported by the ArduinoBLE library. More information can be found on the
+@ref md_pages_MIDI-over-BLE page.
 
 ### Functionality {#midi_md-interfaces-functionality}
 
