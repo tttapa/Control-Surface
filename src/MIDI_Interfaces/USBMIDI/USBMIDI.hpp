@@ -94,13 +94,6 @@ END_CS_NAMESPACE
     "ESP32S3: USB MIDI not enabled. Set the Tools > USB Type setting to \"USB-OTG\" to enable it.")
 #endif
 
-#elif defined(ARDUINO_ARCH_MBED_RP2040)
-
-#include "USBMIDI_RP2040.hpp"
-BEGIN_CS_NAMESPACE
-using USBDeviceMIDIBackend = RP2040_USBDeviceMIDIBackend;
-END_CS_NAMESPACE
-
 #elif defined(ARDUINO_ARCH_MBED)
 
 #include "USBMIDI_Arduino_mbed.hpp"
