@@ -58,8 +58,10 @@ MIDIStaller *const eternal_stall =
  * 
  * If you're interested how the pipes work, see the documentation for 
  * @ref MIDI_Pipe.
- * 
- * @{ 
+ *
+ * @see @ref midi_md-routing (MIDI tutorial)
+ *
+ * @{
  */
 
 class MIDI_Pipe;
@@ -71,6 +73,8 @@ using TrueMIDI_Sink = MIDI_Sink;
 using TrueMIDI_Source = MIDI_Source;
 
 /// Receives MIDI messages from a MIDI pipe.
+/// @see @ref MIDI_Routing
+/// @see @ref midi_md-routing (MIDI tutorial)
 class MIDI_Sink {
   public:
     /// Default constructor.
@@ -154,6 +158,8 @@ class MIDI_Sink {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 /// Class that can send MIDI messages to a MIDI pipe.
+/// @see @ref MIDI_Routing
+/// @see @ref midi_md-routing (MIDI tutorial)
 class MIDI_Source {
   public:
     /// Default constructor.
@@ -325,6 +331,9 @@ class MIDI_Source {
  * 
  * Each connection between a source and a sink has its own pipe, and no two 
  * pipes are connected in series (only through the “through“ inputs/outputs).
+ *
+ * @see @ref MIDI_Routing
+ * @see @ref midi_md-routing (MIDI tutorial)
  */
 class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
   public:
@@ -584,9 +593,13 @@ class MIDI_Pipe : private MIDI_Sink, private MIDI_Source {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
 
 /// A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source.
+/// @see @ref MIDI_Routing
+/// @see @ref midi_md-routing (MIDI tutorial)
 struct TrueMIDI_SinkSource : TrueMIDI_Sink, TrueMIDI_Source {};
 
 /// A bidirectional pipe consists of two unidirectional pipes.
+/// @see @ref MIDI_Routing
+/// @see @ref midi_md-routing (MIDI tutorial)
 using BidirectionalMIDI_Pipe = std::pair<MIDI_Pipe, MIDI_Pipe>;
 
 /// Connect a source to a pipe (`source >> pipe`).
@@ -641,6 +654,9 @@ inline BidirectionalMIDI_Pipe &operator|(TrueMIDI_SinkSource &sinksource,
  *          The maximum number of pipes it can produce.
  * @tparam  Pipe 
  *          The type of pipes to produce.
+ *
+ * @see @ref MIDI_Routing
+ * @see @ref midi_md-routing (MIDI tutorial)
  */
 template <size_t N, class Pipe = MIDI_Pipe>
 struct MIDI_PipeFactory {

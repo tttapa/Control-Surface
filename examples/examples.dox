@@ -1200,6 +1200,8 @@
  * so you can send the MIDI output over both MIDI USB and 5-pin DIN MIDI, for 
  * example. MIDI input is received from all interfaces as well.
  * 
+ * The @ref midi-tutorial has an entire section dedicated to MIDI routing:
+ * @ref midi_md-routing.
  * Also have a look at the @ref MIDI_Pipes-Routing.ino example, the
  * @ref MIDI_Routing module and the @ref MIDI_Pipe documentation for more 
  * information about MIDI routing.  
