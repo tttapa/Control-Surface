@@ -85,13 +85,13 @@ void loop() {
 }
 ```
 Note how the words `%USBMIDI_Interface`, `begin` and `update` in the previous
-snippet are shown in blue and brown: 
+snippet are shown in different colors: 
 these are links to the documentation for the relevant
 classes and functions. If you hover over them with your mouse pointer, you'll 
 see a short description, and if you click on the link, it will take you to the 
 detailed documentation.
 
-The code above doesn't really anything useful yet, it just sets up everything
+The code above doesn't really do anything useful yet, it just sets up everything
 so we can start sending and receiving MIDI messages in the following sections.
 
 You can of course replace `%USBMIDI_Interface` by a different type, such as 
