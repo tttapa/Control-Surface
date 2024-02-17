@@ -85,6 +85,9 @@ class BankSettingChangeCallback
 /// @ref BankableMIDIInputElements, and allows the user to change the addresses
 /// of these elements.
 ///
+/// @see FAQ: @ref faq-change-address-runtime
+/// @see FAQ: @ref faq-banks
+///
 /// @tparam NumBanks
 ///         The number of banks.
 template <setting_t NumBanks>

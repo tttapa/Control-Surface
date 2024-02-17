@@ -1,3 +1,9 @@
+/**
+ * Combining a transposer and a bank to switch between different scales.
+ *
+ * @include Other/GitHub-issues/Note-ManyAddresses-Transposer/ManyAddressBankNoteButton.hpp
+ */
+
 #include "ManyAddressBankNoteButton.hpp"
 
 USBDebugMIDI_Interface midi;

@@ -8,7 +8,10 @@
 BEGIN_CS_NAMESPACE
 
 namespace MCU {
-
+/**
+ * @brief Displays a MCU level meter.
+ * @ingroup DisplayElements
+ */
 template <class VU_t = Interfaces::MCU::IVU &>
 class VUDisplay : public DisplayElement {
   public:

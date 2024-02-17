@@ -10,6 +10,8 @@ BEGIN_CS_NAMESPACE
  * @brief   An interface for displays. 
  * 
  * Inspired by the Adafruit GFX library for easy compatibility.
+ *
+ * @ingroup DisplayElements
  */
 class DisplayInterface : public Print {
   protected:

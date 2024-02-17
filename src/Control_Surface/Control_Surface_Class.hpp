@@ -49,9 +49,11 @@ class Control_Surface_ : public MIDI_Sender<Control_Surface_>,
 
   public:
     /// Initialize the Control_Surface.
+    /// @see @ref control-surface-purpose
     void begin();
 
     /// Update all MIDI elements, send MIDI events and read MIDI input.
+    /// @see @ref control-surface-purpose
     void loop();
 
     /// Connect Control Surface to the default MIDI interface.

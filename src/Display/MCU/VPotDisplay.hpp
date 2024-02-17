@@ -10,6 +10,10 @@ BEGIN_CS_NAMESPACE
 
 namespace MCU {
 
+/**
+ * @brief Displays the position of a MCU V-Pot.
+ * @ingroup DisplayElements
+ */
 template <class VPot_t = Interfaces::MCU::IVPot &>
 class VPotDisplay : public DisplayElement {
 

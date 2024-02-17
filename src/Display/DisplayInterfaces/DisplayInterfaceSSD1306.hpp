@@ -9,6 +9,7 @@ BEGIN_CS_NAMESPACE
  * @brief   This class creates a mapping between the Adafruit_SSD1306 display 
  *          driver and the general display interface used by the Control Surface
  *          library.
+ * @ingroup DisplayElements
  */
 class SSD1306_DisplayInterface : public DisplayInterface {
   protected:

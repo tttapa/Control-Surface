@@ -942,6 +942,8 @@ WARN_LOGFILE           =
 
 INPUT                  = ../examples/examples.dox \
                          ../src/ \
+                         pages/Manual.md \
+                         pages/Control-Surface.md \
                          pages/Getting-Started.md \
                          pages/Installation.md \
                          pages/MIDI-over-USB.md \

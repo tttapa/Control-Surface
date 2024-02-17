@@ -1,4 +1,1600 @@
 /**
+ * @example   "AppleMIDI.ino"
+ * 
+ * AppleMIDI
+ * =========
+ *
+ * This example demonstrates how to use the AppleMIDI library to use Control
+ * Surface over the network.
+ * 
+ * This example requires the 
+ * [AppleMIDI](https://github.com/lathoub/Arduino-AppleMIDI-Library) and 
+ * [MIDI](https://github.com/FortySevenEffects/arduino_midi_library) libraries.
+ * 
+ * @boards  ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * The on-board LED will be used, as well as the push button on GPIO0. These 
+ * should be present on most ESP32 boards, if this is not the case for your 
+ * board, connect an LED (+ series resistor) and a push button to the relevant
+ * pins (in the "MIDI Elements" section below). For more details, see the 
+ * @ref NoteButton.ino and @ref 1.Note-LED.ino examples.
+ * 
+ * WiFi Credentials
+ * ----------------
+ * 
+ * Open the tab `WiFi-Credentials.example.h`, enter your WiFi credentials, and
+ * rename the file to `WiFi-Credentials.h`.
+ * 
+ * Behavior
+ * --------
+ * 
+ * Upload the code to the ESP32, and open the Serial monitor. You should see
+ * output like this
+ * 
+ * ~~~
+ * Connecting to Your WiFi Network ...
+ * Connected!
+ * IP address: 192.168.1.35
+ * mDNS responder started (ESP32.local)
+ * ~~~
+ * 
+ * Next, connect to the device using your DAW or other MIDI software. If the 
+ * software supports mDNS (Apple Bonjour), you can use `ESP32.local`, 
+ * otherwise, you'll have to use the IP address.
+ * 
+ * When the connection is successful, you'll see the following message in the
+ * Serial monitor:
+ * 
+ * ~~~
+ * Connected to session Your Session Name
+ * ~~~
+ * 
+ * When the button is pushed, a MIDI note on message for note C4 (middle C) is
+ * sent.  
+ * When the ESP32 receives a MIDI note message for that note, it turn on/off the
+ * LED accordingly.
+ * 
+ * RTP MIDI Bridge (Linux)
+ * -----------------------
+ * 
+ * If you're on Linux, you can use the rtpmidi-bridge application in the example
+ * folder. You'll need to install Node.js and NPM.
+ * 
+ * First, install the necessary dependencies and build tools:
+ * 
+ * ~~~sh
+ * sudo apt install build-essential libasound2-dev libavahi-compat-libdnssd-dev
+ * ~~~
+ * 
+ * Then install the dependencies using NPM:
+ * 
+ * ~~~sh
+ * npm install
+ * ~~~
+ * You might get a compilation error for the `avahi_pub` module. This is not an
+ * issue, it's an optional dependency of the `rtpmidi` module.
+ * 
+ * Finally, run the application:
+ * 
+ * ~~~sh
+ * node rtpmidi-bridge.js
+ * ~~~
+ * 
+ * The application will initiate a RTP MIDI connection with the ESP32, create
+ * virtual MIDI ports, and bridge the MIDI traffic between the RTP MIDI 
+ * connection and the virtual MIDI ports.  
+ * You can then connect your DAW or other MIDI application to the virtual MIDI 
+ * ports.
+ * 
+ * When the ESP32 is connected, you should see the following in the serial 
+ * monitor and the rtpmidi-bridge output respectively:
+ * 
+ * ~~~
+ * Connected to session Node RTPMidi
+ * ~~~
+ * 
+ * ~~~
+ * 2020-05-06T15:50:42.956Z info:  Invitation accepted by ESP32
+ * 2020-05-06T15:50:42.962Z info:  Data channel to ESP32 established
+ * ~~~
+ * 
+ * Mapping
+ * -------
+ * 
+ * Connect the virtual MIDI ports or the AppleMIDI connection to a device or 
+ * application that can send and receive MIDI notes.
+ * 
+ * Written by PieterP, 2020-05-06  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "BLEMIDI-Adapter.ino"
+ * 
+ * BLEMIDI-Adapter
+ * ===============
+ *
+ * Turns an Arduino into a Bluetooth Low Energy (BLE) to 5-pin DIN MIDI adapter.
+ * 
+ * @boards  Nano 33 IoT, Nano 33 BLE, ESP32, ESP32-S3, Pi Pico W
+ *
+ * Configuration
+ * -------------
+ *
+ * - If you're using a Pi Pico W, you'll have to enable the Bluetooth stack
+ *     from the _Tools > IP/Bluetooth Stack_ menu in the IDE.
+ * - If you're using an ESP32, you can optionally switch to the NimBLE backend
+ *     by installing the [h2zero/NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino)
+ *     library, and adding `#define CS_USE_NIMBLE` at the top of this sketch.
+ * - If you're not using a Pico or an ESP32, you'll have to install the
+ *     [ArduinoBLE](https://github.com/arduino-libraries/ArduinoBLE) library.
+ *
+ * Connections
+ * -----------
+ * 
+ * - TXD: connected to a MIDI 5-pin DIN output connector
+ *     (with series resistor, possibly through a buffer)
+ * - RXD: connected to a MIDI 5-pin DIN input connector
+ *     (with an optocoupler)
+ *
+ * See https://midi.org/specifications/midi-transports-specifications/5-pin-din-electrical-specs
+ * for the schematic, optocoupler models and resistor values.
+ *
+ * Behavior
+ * --------
+ *
+ * - The Arduino will advertise itself as a Bluetooth Low Energy MIDI device
+ *     with the name `MIDI Adapter`.
+ * - When you connect to the Arduino using your phone or computer, the built-in
+ *     LED turns on to indicate that the connection was successful.
+ * - Any MIDI messages sent to the Arduino over BLE are sent out to the 5-pin
+ *     DIN output connector.
+ * - Any MIDI messages sent to the Arduino through the 5-pin DIN input connector
+ *     are sent over BLE.
+ *
+ * @see @ref md_pages_MIDI-over-BLE
+ * @see @ref midi-tutorial
+ * 
+ * Written by PieterP, 2024-01-21  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Debug-MIDI-Interface.ino"
+ * 
+ * Debug-MIDI-Interface
+ * ====================
+ * 
+ * This example demonstrates how to use the MIDI interface for debugging.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Upload the sketch and open the Serial monitor.
+ * - Set the line ending to new line or new line and carriage return.
+ * - When the button on pin 5 is pressed, a MIDI Note On message is sent for
+ *   note C4, and you'll see that event printed in the Serial monitor.
+ * - When the button on pin 5 is released, a MIDI Note Off message is sent for 
+ *   note C4, and you'll also see that in the monitor.
+ * - When you type in "90 3C 7F" (without the quotes), and press enter, the 
+ *   built-in LED will light up.
+ * - When you type in "80 3C 7F", and press enter, the LED will turn off again.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2019-08-07  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Dual-MIDI-Interface.ino"
+ * 
+ * Dual-MIDI-Interface
+ * ===================
+ * 
+ * This example demonstrates how to group together two or more MIDI interfaces,
+ * so you can send the MIDI output over both MIDI USB and 5-pin DIN MIDI, for 
+ * example. MIDI input is received from all interfaces as well.
+ * 
+ * The @ref midi-tutorial has an entire section dedicated to MIDI routing:
+ * @ref midi_md-routing.
+ * Also have a look at the @ref MIDI_Pipes-Routing.ino example, the
+ * @ref MIDI_Routing module and the @ref MIDI_Pipe documentation for more 
+ * information about MIDI routing.  
+ * Control Surface can be used as both a MIDI sink and a MIDI source.
+ * 
+ * When you call `Control_Surface.begin()`, it automatically connects itself to 
+ * the default MIDI interface (@ref MIDI_Interface::getDefault()).  
+ * If you want to route everything manually, you have to connect it before 
+ * calling `Control_Surface.begin()`, or you have to disconnect the default 
+ * pipes before connecting your own, using 
+ * @ref Control_Surface_::disconnectMIDI_Interfaces().
+ *
+ * @boards  AVR USB, Nano Every, Due, Teensy 3.x
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When you turn the potentiometer, you should receive MIDI Control Change
+ *   events on both the Serial MIDI interface and the USB MIDI interface.
+ * - When a MIDI Note event for middle C is received on either MIDI interface,
+ *   the state of the built-in LED will change accordingly.
+ * 
+ * Mapping
+ * -------
+ * 
+ * - None
+ * 
+ * Written by PieterP, 2019-08-22  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "MIDI-Input-Fine-Grained-All-Callbacks.ino"
+ * 
+ * MIDI-Input-Fine-Grained-All-Callbacks
+ * =====================================
+ * 
+ * This is an example on how to attach your own callbacks for receiving MIDI 
+ * input. This example has fine-grained callbacks, i.e. one for each message 
+ * type (Note On, Note Off, Control Change, System Exclusive ...).
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
+ * 
+ * Connections
+ * -----------
+ * 
+ * None.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When MIDI messages are sent to the USB interface, they are printed to the 
+ *   Serial port.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ *
+ * @see @ref MIDI-Input.ino
+ * @see @ref MIDI-Input-Fine-Grained.ino
+ * 
+ * Written by PieterP, 2021-06-26  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "MIDI-Input-Fine-Grained.ino"
+ * 
+ * MIDI-Input-Fine-Grained
+ * =======================
+ * 
+ * This is an example on how to attach your own callbacks for receiving MIDI 
+ * input. This example has fine-grained callbacks, i.e. one for each message 
+ * type (Note On, Note Off, Control Change, System Exclusive ...).
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
+ * 
+ * Connections
+ * -----------
+ * 
+ * None.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When MIDI messages are sent to the USB interface, they are printed to the 
+ *   Serial port.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ *
+ * @see @ref MIDI-Input.ino
+ * @see @ref MIDI-Input-Fine-Grained-All-Callbacks.ino for a list of all 
+ *           callbacks for all message types
+ * 
+ * Written by PieterP, 2021-06-26  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "MIDI-Input.ino"
+ * 
+ * MIDI-Input
+ * ==========
+ * 
+ * This is an example on how to attach your own callbacks for receiving MIDI 
+ * input.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
+ * 
+ * Connections
+ * -----------
+ * 
+ * None.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When MIDI messages are sent to the USB interface, they are printed to the 
+ *   Serial port.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * @see @ref MIDI-Input-Fine-Grained.ino
+ * @see @ref MIDI-Input-Fine-Grained-All-Callbacks.ino
+ *
+ * Written by PieterP, 2020-06-11  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "MIDI-Monitor-OLED.ino"
+ * 
+ * MIDI-Monitor-OLED
+ * =================
+ * 
+ * This example shows all incoming and outgoing MIDI messages on an SSD1306
+ * OLED display. This can be handy for debugging purposes when you don't have
+ * access to the Serial Monitor.
+ *
+ * @boards  AVR, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Teensy 3.x, ESP32, ESP8266
+ *
+ * Connections
+ * -----------
+ * 
+ * - 5:  Push button (to ground)
+ * - MOSI: OLED Data/D1 (SPI)
+ * - SCK:  OLED Clock/D0 (SPI)
+ * - 8:  OLED Reset
+ * - 9:  OLED Data/Command
+ * - 10: OLED %Cable Select
+ *
+ * Behavior
+ * --------
+ * 
+ * - When sending MIDI messages to the Arduino using the USB interface, these
+ *   messages are printed on the OLED display, prefixed by a right arrow (→).
+ * - If any MIDI messages are sent by Control Surface (e.g. by pressing the push
+ *   button), these messages are printed on the OLED display, prefixed
+ *   by a left arrow (←).  
+ *   @image html midi-monitor-oled.gif
+ * 
+ * Explanation
+ * -----------
+ * 
+ * The code below defines the `OLEDDebugMIDI_Output` class, which implements the
+ * @ref MIDI_Sink and @ref MIDI_Sender interfaces. This means that it can accept
+ * MIDI messages coming from @ref MIDI_Pipe%s, and it provides all of the usual
+ * functions for sending MIDI messages.
+ *
+ * The MIDI over USB interface (`midi`) will be used as the primary MIDI
+ * interface (as in the other Control Surface examples).  
+ * Two instances of our `OLEDDebugMIDI_Output` class are created: one for
+ * printing messages that are received by the primary MIDI interface, and one
+ * for printing messages that are sent by Control Surface.  
+ * The MIDI interfaces and Control Surface itself are connected appropriately
+ * using some pipes.
+ *
+ * <img style="margin: 0 auto; display: block; width: 38em" src="midi-pipes-mon-oled.svg"/>
+ *
+ * @see @ref MIDI_Pipes-Routing.ino
+ * @see @ref Debug-MIDI-Interface.ino
+ * @see @ref midi_md-routing "MIDI Tutorial: Routing MIDI messages"
+ * @see @ref MIDI-Monitor.ino
+ * 
+ * Written by PieterP, 2024-01-05  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "MIDI-Monitor.ino"
+ * 
+ * MIDI-Monitor
+ * ============
+ * 
+ * This example prints all MIDI messages that arrive over USB to the Serial
+ * monitor so you can use the Arduino as a MIDI monitor. It also allows you to
+ * enter MIDI messages as text in the Serial monitor, and then sends these
+ * messages as MIDI over USB.
+ *
+ * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x
+ *
+ * This example requires an Arduino board with native MIDI over USB support.
+ *
+ * To send a MIDI message from the Serial monitor, select “Newline” as the line 
+ * ending, enter the MIDI message in hexadecimal, and press enter.  
+ * For example, if you enter `90 3C 7F`, a MIDI Note On message for middle C 
+ * (0x3C) with a velocity of 127 (0x7F) will be sent over USB.  
+ * Spaces between bytes are not required (`903C7F` will be interpreted as 
+ * `90 3C 7F`), but they are recommended to prevent framing errors. 
+ *
+ * @see @ref MIDI_Pipes-Routing.ino
+ * @see @ref Debug-MIDI-Interface.ino
+ * @see @ref midi_md-routing "MIDI Tutorial: Routing MIDI messages"
+ * 
+ * Written by PieterP, 2021-06-28  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "MIDI-Output.ino"
+ * 
+ * MIDI-Output
+ * ===========
+ * 
+ * This is an example on how to send MIDI messages.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
+ * 
+ * For a full list of available MIDI send functions, see @ref MIDI_Sender.
+ * 
+ * Connections
+ * -----------
+ * 
+ * None.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Sends a pair of MIDI note on/off messages every second.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2020-06-11  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "MIDI_Pipes-Filter.ino"
+ * 
+ * MIDI_Pipes-Filter
+ * =================
+ *
+ * Filtering and modifying MIDI messages that travel through a MIDI_Pipe.
+ * 
+ * This example demonstrates how to create custom MIDI pipes that can filter out
+ * and modify the messages that travel through it. It uses a debug MIDI 
+ * interface for demonstration purposes, and loops back only MIDI note and
+ * real-time messages, messages of any other type are dropped. Additionally, all
+ * MIDI note messages are transposed down an octave, and their channel is set
+ * to 5.
+ * 
+ * To try it out, open the Serial monitor (at 115200 baud) and type `98 3C 7F`
+ * (Note On, channel 9, C4, full velocity). When you press enter, you'll get
+ * back the following message (note how the channel and pitch changed):
+ *
+ * ```
+ * Note On    Channel: 5    Data 1: 0x30    Data 2: 0x7F
+ * ```
+ *
+ * If you try to send a Pitch Bend message (for example, `E0 12 34`), you'll get
+ * no response, because the code filtered it out.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, ESP32, Teensy 3.x
+ */
+
+/**
+ * @example   "MIDI_Pipes-Routing.ino"
+ * 
+ * MIDI_Pipes-Routing
+ * ==================
+ *
+ * MIDI routing using MIDI_Pipe%s.
+ * 
+ * Bridges the USB MIDI interface to a Serial MIDI interface, and loops back
+ * anything it receives on the USB interface.
+ * 
+ * You can also use the MIDI pipes to route the input and output of Control 
+ * Surface itself, not just the input and output of MIDI interfaces. This is
+ * demonstrated in the @ref Dual-MIDI-Interface.ino example.
+ * 
+ * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32
+ */
+
+/**
+ * @example   "Send-All-MIDI-Messages.ino"
+ * 
+ * Send-All-MIDI-Messages
+ * ======================
+ *
+ * Example showing how to send any MIDI message.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
+ *
+ * See the @ref MIDI_Sender documentation for a full overview of all MIDI 
+ * sending functions and their arguments.
+ *
+ * **Expected output**
+ * ~~~text
+ * Note Off         Channel: 6 Data 1: 0x3c  Data 2: 0x7f
+ * Note On          Channel: 6 Data 1: 0x3c  Data 2: 0x7f
+ * Key Pressure     Channel: 6 Data 1: 0x3c  Data 2: 0x40
+ * Control Change   Channel: 2 Data 1: 0x07  Data 2: 0x78
+ * Program Change   Channel: 9 Data 1: 0x06
+ * Channel Pressure Channel: 3 Data 1: 0x40
+ * Pitch Bend       Channel: 3 Data 1: 0x7f  Data 2: 0x7f (16383)
+ * System Common    MTCQuarterFrame    Data 1: 0x2f
+ * System Common    SongPositionPointer    Data 1: 0x10  Data 2: 0x4e (10000)
+ * System Common    SongSelect Data 1: 0x46
+ * System Common    TuneRequest
+ * System Exclusive [10] F0 00 01 02 03 04 05 06 07 F7
+ * System Exclusive [6+] F0 10 11 12 13 14
+ * System Exclusive [6+] 15 16 17 18 19 1A
+ * System Exclusive [6]  1B 1C 1D 1E 1F F7
+ * Real-Time        TimingClock
+ * Real-Time        Start
+ * Real-Time        Continue
+ * Real-Time        Stop
+ * Real-Time        ActiveSensing
+ * Real-Time        SystemReset
+ * ~~~
+ *
+ * @see @ref midi_md-sending "MIDI Tutorial: Sending MIDI messages"
+ *
+ * Written by PieterP, 2021-06-28  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Send-MIDI-Notes.ino"
+ * 
+ * Send-MIDI-Notes
+ * ===============
+ *
+ * Example showing how to send MIDI Note messages.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
+ * 
+ * @see @ref midi_md-sending "MIDI Tutorial: Sending MIDI messages"
+ * @see @ref Send-All-MIDI-Messages.ino
+ */
+
+/**
+ * @example   "Serial-Interface.ino"
+ * 
+ * Serial-Interface
+ * ================
+ * 
+ * This example demonstrates how to use a Serial MIDI Interface, for use with
+ * 5-pin DIN connectors, for example.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5: momentary push button (to ground)
+ * 
+ * The internal pull-up resistor for the button will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - This is just a simple MIDI controller with a single note button and an LED.
+ * 
+ * Mapping
+ * -------
+ * 
+ * None.
+ * 
+ * Written by PieterP, 2020-01-09  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "SysEx-Send-Receive.ino"
+ * 
+ * SysEx-Send-Receive
+ * ==================
+ *
+ * Example showing how to send and receive MIDI System Exclusive messages.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
+ */
+
+/**
+ * @example   "USBHostMIDI_Interface-Passthrough.ino"
+ * 
+ * USBHostMIDI_Interface-Passthrough
+ * =================================
+ * 
+ * This example demonstrates how to use the USBHostMIDI_Interface to send and
+ * receive MIDI data to and from USB MIDI devices connected to a Teensy's USB
+ * Host port.
+ *
+ * @boards  Teensy 3.6, Teensy 4.1
+ * 
+ * Connections
+ * -----------
+ * 
+ * - Use a [USB Host cable](https://www.pjrc.com/store/cable_usb_host_t36.html)
+ *   to connect a MIDI USB device to the Teensy. Connect the primary USB port of
+ *   the Teensy to a computer.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - All messages sent from the computer to the Teensy are forwarded to the
+ *   USB MIDI device.
+ * - All messages sent by the USB MIDI device are forwarded to the computer.
+ * 
+ * Mapping
+ * -------
+ * 
+ * - None
+ * 
+ * Written by PieterP, 2021-01-31  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "USBMIDI-Adapter.ino"
+ * 
+ * USBMIDI-Adapter
+ * ===============
+ *
+ * Turns an Arduino into a USB to 5-pin DIN MIDI adapter.
+ * 
+ * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, ESP32-S3, Teensy 3.x
+ *
+ * Connections
+ * -----------
+ * 
+ * - TXD: connected to a MIDI 5-pin DIN output connector
+ *     (with series resistor, possibly through a buffer)
+ * - RXD: connected to a MIDI 5-pin DIN input connector
+ *     (with an optocoupler)
+ *
+ * See https://midi.org/specifications/midi-transports-specifications/5-pin-din-electrical-specs
+ * for the schematic, optocoupler models and resistor values.
+ *
+ * Behavior
+ * --------
+ *
+ * - The Arduino will show up as a USB MIDI device.
+ * - Any MIDI messages sent to the Arduino over USB are sent out to the 5-pin
+ *     DIN output connector.
+ * - Any MIDI messages sent to the Arduino through the 5-pin DIN input connector
+ *     are sent over USB.
+ *
+ * @see @ref md_pages_MIDI-over-USB
+ * @see @ref midi-tutorial
+ * 
+ * Written by PieterP, 2024-01-21  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Debug.ino"
+ * 
+ * Debug
+ * =====
+ *
+ * This examples shows how use the debug macros for printing different kinds of
+ * debugging information
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Enable debugging by defining the @ref DEBUG_OUT macro in 
+ *   `src/AH/Settings/Settings.hpp` or enable debugging globally as explained
+ *   [here](@ref md_pages_Debug)
+ * - Upload the sketch to the Arduino, and open the Serial Monitor 
+ *   (`CTRL+Shift+M`)
+ * - Every five seconds, debugging information is printed, for example:
+ * 
+ * ~~~
+ * This is the result of `DEBUG`
+ * [/home/pieter/GitHub/Arduino-Debugging/Example/Example.ino:12]:	This is the result of `DEBUGREF`
+ * [void loop() @ line 13]:	This is the result of `DEBUGFN`
+ * [0:2:11.085]:	This is the result of `DEBUGTIME`
+ * a = 1, b = 2, c = 3
+ * log10(1000) - 2 = 1.00
+ * millis() = 131085
+ * Serial.read() = -1
+ * [int someFunction(int) @ line 26]:	parameter = 42
+ * ~~~
+ * 
+ * @see @ref md_pages_Debug for instructions on how to add an option in the 
+ *      Arduino IDE to easily enable and disable debugging globally without 
+ *      editing the settings file.
+ * 
+ * Written by PieterP, 2018-07-31  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "1.FilteredAnalog-Advanced.ino"
+ * 
+ * 1.FilteredAnalog-Advanced
+ * =========================
+ *
+ * This examples shows how to filter an analog input, so you can get the 
+ * position of a knob or fader without noise.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Upload the sketch to the Arduino, and open the Serial Monitor 
+ *   (`CTRL+Shift+M`)
+ * - When you turn the potentiometer, you should see the position of the 
+ *   potentiometer being printed as a number between 0 and 1023.
+ * - The analog input is filtered, so there shouldn't be any noise on the 
+ *   position. If there is, check your wiring, and make sure that the resistance
+ *   of the potentiometer isn't too high (10 kΩ is ideal). 
+ * 
+ * A simpler version of this example can be found in 
+ * @ref 1.FilteredAnalog.ino.
+ * 
+ * Written by PieterP, 2019-10-10  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "1.FilteredAnalog.ino"
+ * 
+ * 1.FilteredAnalog
+ * ================
+ *
+ * This examples shows how to filter an analog input, so you can get the 
+ * position of a knob or fader without noise.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - A0: wiper of a potentiometer
+ * 
+ * Connect the left terminal of the potentiometer to ground, and the right one
+ * to V<sub>CC</sub>.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Upload the sketch to the Arduino, and open the Serial Monitor 
+ *   (`CTRL+Shift+M`)
+ * - When you turn the potentiometer, you should see the position of the 
+ *   potentiometer being printed as a number between 0 and 1023.
+ * - The analog input is filtered, so there shouldn't be any noise on the 
+ *   position. If there is, check your wiring, and make sure that the resistance
+ *   of the potentiometer isn't too high (10 kΩ is ideal). 
+ * 
+ * The example @ref 1.FilteredAnalog-Advanced.ino has more information about the
+ * parameters you can pass to the FilteredAnalog class to tweak the filters,
+ * increase the resolution, etc.
+ * 
+ * Written by PieterP, 2019-10-10  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "2.Button.ino"
+ * 
+ * 2.Button
+ * ========
+ *
+ * This examples shows how to use the debounced Button class to toggle an LED.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 2: Momentary push button (other pin to ground)
+ * 
+ * The internal pull-up resistor will be enabled.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - If you press the push button once, the built-in LED is turned on.
+ * - If you press the button again, the LED is turned off again.
+ * 
+ * Written by PieterP, 2019-11-22  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Blink-Frequency-Buttons.ino"
+ * 
+ * Blink-Frequency-Buttons
+ * =======================
+ *
+ * This examples shows how to use two push buttons to set the frequency at which
+ * an LED blinks.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 2: Momentary push button (other pin to ground)
+ * - 3: Momentary push button (other pin to ground)
+ * 
+ * The internal pull-up resistors will be enabled.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - If you press the first push button, the LED blinks faster.
+ * - If you press the second push button, the LED blinks slower.
+ * - You can press and hold one of the push buttons to change the frequency by
+ *   multiple steps.
+ * - If you press both buttons at the same time, the frequency is reset to the
+ *   initial default frequency.
+ * 
+ * Written by PieterP, 2019-12-10  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "1.AnalogReadSerial.ino"
+ * 
+ * 1.AnalogReadSerial
+ * ==================
+ *
+ * This is an example of the AnalogMultiplex class. It prints the values of all
+ * 16 inputs of a multiplexers to the serial monitor.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *  - A0: CD74HC4067 signal pin ("common input/output")
+ *  - 3:  CD74HC4067 address pin S0
+ *  - 4:  CD74HC4067 address pin S1
+ *  - 5:  CD74HC4067 address pin S2
+ *  - 6:  CD74HC4067 address pin S3
+ *  
+ * Optionally you can connect the enable pin as well, this is useful
+ * if you want to use multiple multiplexers with the same address 
+ * lines and the same analog input. Otherwise, just connect the enable
+ * pin to ground.
+ * 
+ * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
+ * uncomment the code specific to this multiplexer, and use only three
+ * address pins.
+ *  
+ * Behavior
+ * --------
+ * 
+ * Connect some potentiometers or other analog sensors to the 16 inputs
+ * of the multiplexer, and open the serial monitor (CTRL+SHIFT+M) or the
+ * serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed
+ * or plotted.
+ * 
+ * Written by Pieter P, 31-01-2019  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "2.DigitalReadSerial.ino"
+ * 
+ * 2.DigitalReadSerial
+ * ===================
+ *
+ * This is an example of the AnalogMultiplex class. It prints the states of all
+ * 16 switches connected to a multiplexers to the serial monitor.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *  - 2: CD74HC4067 signal pin ("common input/output")
+ *  - 3: CD74HC4067 address pin S0
+ *  - 4: CD74HC4067 address pin S1
+ *  - 5: CD74HC4067 address pin S2
+ *  - 6: CD74HC4067 address pin S3
+ *  
+ * Optionally you can connect the enable pin as well, this is useful
+ * if you want to use multiple multiplexers with the same address 
+ * lines and the same analog input. Otherwise, just connect the enable
+ * pin to ground.
+ * 
+ * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
+ * uncomment the code specific to this multiplexer, and use only three
+ * address pins.
+ * 
+ * Connect a switch or push button between each input pin of the multiplexer and
+ * ground. A pull-up resistor is not necessary, because we'll use the internal 
+ * one.
+ *  
+ * Behavior
+ * --------
+ * 
+ * Open the serial monitor (CTRL+SHIFT+M) or the serial plotter (CTRL+SHIFT+L),
+ * and press some buttons, you should see all 16 signals printed or plotted.
+ * 
+ * Written by Pieter P, 2019-08-08   
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "3.FilteredAnalogReadSerial.ino"
+ * 
+ * 3.FilteredAnalogReadSerial
+ * ==========================
+ *
+ * This is an example of the AnalogMultiplex and the FilteredAnalog classes. 
+ * It prints the filtered values of all 16 inputs of a multiplexers to the 
+ * serial monitor.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *  - A0: CD74HC4067 signal pin ("common input/output")
+ *  - 3:  CD74HC4067 address pin S0
+ *  - 4:  CD74HC4067 address pin S1
+ *  - 5:  CD74HC4067 address pin S2
+ *  - 6:  CD74HC4067 address pin S3
+ *  
+ * Optionally you can connect the enable pin as well, this is useful
+ * if you want to use multiple multiplexers with the same address 
+ * lines and the same analog input. Otherwise, just connect the enable
+ * pin to ground.
+ * 
+ * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
+ * uncomment the code specific to this multiplexer, and use only three
+ * address pins.
+ *  
+ * Behavior
+ * --------
+ * 
+ * Connect some potentiometers or other analog sensors to the 16 inputs
+ * of the multiplexer, and open the serial monitor (CTRL+SHIFT+M) or the
+ * serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed
+ * or plotted.
+ * 
+ * Written by Pieter P, 09-04-2019  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "1.SPI-Blink.ino"
+ * 
+ * 1.SPI-Blink
+ * ===========
+ *
+ * This example demonstrates the use of shift registers as if they were just
+ * normal IO pins. The SPI interface is used because it's easy and fast.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SS:   74HC595 ST_CP
+ *   - MOSI: 74HC595 DS
+ *   - SCK:  74HC595 SH_CP
+ * 
+ * Connect an LED (and series resistor) between the first output of the
+ * shift register and ground.
+ * 
+ * Remember to connect the enable pin of the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
+ * 
+ * Behavior
+ * --------
+ * 
+ * This sketch will blink the LED once a second.
+ * 
+ * Written by PieterP, 2018-09-01
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "2.BitBang-Blink.ino"
+ * 
+ * 2.BitBang-Blink
+ * ===============
+ *
+ * This example demonstrates the use of shift registers as if they were just
+ * normal IO pins. This version uses bit-banging to drive the  shift register. 
+ * You should probably be using the SPI version instead.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - 10: 74HC595 ST_CP
+ *   - 11: 74HC595 DS
+ *   - 13: 74HC595 SH_CP
+ * 
+ * Connect an LED (and series resistor) between the first output of the
+ * shift register and ground.
+ * 
+ * Remember to connect the enable pin the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
+ * 
+ * Behavior
+ * --------
+ * 
+ * This sketch will blink the LED once a second.
+ * 
+ * Written by PieterP, 2018-09-01
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "2.RGB-LED-Chaser.ino"
+ * 
+ * 2.RGB-LED-Chaser
+ * ================
+ *
+ * This is an example of the ShiftRegisterOut class of the Control Surface 
+ * library. It creates light effects using three 8-bit shift registers and some
+ * RGB LEDs.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ *
+ * Connections
+ * -----------
+ *
+ * Connect three daisy-chained shift registers to the SPI pins.  
+ * Connect 8 RGB LEDs (+ current limiting resistors) to the outputs of the shift
+ * registers.
+ * 
+ * ```
+ * SCK   >───────────┬──────────────────────┬──────────────────────┐
+ *           ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓
+ *           ┃     SH_CP     ┃      ┃     SH_CP     ┃      ┃     SH_CP     ┃
+ * MOSI  >───┨ DS        Q7S ┠──────┨ DS        Q7S ┠──────┨ DS        Q7S ┃
+ *           ┃     ST_CP     ┃      ┃     ST_CP     ┃      ┃     ST_CP     ┃
+ *           ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛
+ * SS    >───────────┴──────────────────────┴──────────────────────┘
+ * ```
+ * Remember to connect the enable pin of the shift register to ground and the 
+ * master reset pin to Vcc in order to enable it.  
+ * 
+ * The order of the colors doesn't matter. You can change them in software using
+ * the `ShiftRegisterOutRGB::redBit`, `ShiftRegisterOutRGB::greenBit` and 
+ * `ShiftRegisterOutRGB::blueBit` constants.
+ * 
+ * If you wired the LEDs as RGB (red first, then green and then blue), the red 
+ * bit is 0, the green bit is 1 and the blue bit is 2.  
+ * If you wired the LEDs as BGR (blue first, then green and then red), the red
+ * bit is 2, the green bit is 1 and the blue bit is 0.  
+ * Other combinations are possible as well.
+ * 
+ * Behavior
+ * --------
+ * 
+ * This example will turn on all red LEDs one by one, then turn them off one by
+ * one, next, it will turn on and off all green LEDs in the same manner, and
+ * finally the same for the blue LEDs. This is repeated indefinitely.
+ * 
+ * Demo
+ * ----
+ * 
+ * @htmlonly
+ * <iframe width="560" height="315"
+ * src="https://www.youtube.com/embed/7ywcTTdnseU?loop=1" frameborder="0"
+ * allow="accelerometer; autoplay; encrypted-media; gyroscope;
+ * picture-in-picture" allowfullscreen></iframe>
+ * @endhtmlonly
+ * 
+ * Written by Pieter P, 2018-07-13  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "1.MAX7219-Blink.ino"
+ * 
+ * 1.MAX7219-Blink
+ * ===============
+ *
+ * This example demonstrates the use of MAX7219 LED outputs as if they were just
+ * normal IO pins, using `digitalWrite`.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SS:   MAX7219 CS
+ *   - MOSI: MAX7219 DIN
+ *   - SCK:  MAX7219 CLK
+ * 
+ * Behavior
+ * --------
+ * 
+ * This sketch will blink the first and the last LEDs once a second, in an 
+ * alternating pattern.
+ * 
+ * Written by PieterP, 2020-03-24  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Toggle-LEDs.ino"
+ * 
+ * Toggle-LEDs
+ * ===========
+ *
+ * This example demonstrates the use of push buttons and LEDs and how to use
+ * shift registers and analog multiplexers to save pins.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SS:   74HC595 ST_CP
+ *   - MOSI: 74HC595 DS
+ *   - SCK:  74HC595 SH_CP
+ *   - 2: 74HC4067 A (COM OUT/IN)
+ *   - 3: 74HC4067 S0
+ *   - 4: 74HC4067 S1
+ *   - 5: 74HC4067 S2
+ *   - 6: 74HC4067 S3
+ * 
+ * Connect 16 momentary push buttons between the input pins of the 
+ * multiplexer and ground.  
+ * The internal pull-up resistor for the buttons will be enabled automatically,
+ * so no external resistors are necessary.
+ * 
+ * Connect 16 LEDs (and series resistors) between the eight outputs of the
+ * two shift registers and ground. 
+ * 
+ * Remember to connect the enable pins of both the multiplexer and the shift
+ * registers to ground in order to enable them. Also connect the master reset 
+ * pin of the shift registers to Vcc.  
+ * Connect the serial data output of the first shift register (QH' or Q7S) to
+ * the serial input of the second shift register.
+ * 
+ * Behavior
+ * --------
+ *  
+ * Pressing the first button will turn on the first LED. Pressing it again will
+ * turn it off again.
+ * Pressing the second button will turn on the second LED. Pressing it again 
+ * will turn it off again, and so on.
+ * 
+ * Written by PieterP, 2018-08-28  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "MCP23017.ino"
+ * 
+ * MCP23017
+ * ========
+ *
+ * This example demonstrates the use of MCP23017 IO expanders as if they were 
+ * just normal IO pins.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SDA: MCP23017 SDA
+ *   - SCK: MCP23017 SCK
+ *   - 2:   MCP23017 INT A or INT B
+ * 
+ * Connect an LED (and series resistor) between pin GPA0 of the MCP and ground.
+ * Connect a push button between pin GPB0 of the MCP and ground. The internal
+ * pull-up resistor will be used.
+ * 
+ * Tie the three address lines of the MCP to ground.
+ * 
+ * Behavior
+ * --------
+ * 
+ * When the push button is pressed, the LED turns on.
+ * 
+ * Written by PieterP, 2020-11-20  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "MCP23017-Encoders-Interrupts.ino"
+ * 
+ * MCP23017-Encoders-Interrupts
+ * ============================
+ *
+ * This example demonstrates the use of MCP23017 I²C port expanders with rotary
+ * encoders, using hardware interrupts so you don't miss any pulses.
+ * 
+ * @boards  Teensy 3.x
+ * 
+ * This only works on Teensy boards, and maybe on other ARM boards.  
+ * I've tested it using a Teensy 3.2 and a Teensy 4.0.
+ * 
+ * AVR boards (Arduino Uno, Mega, etc.) don't support I²C inside of interrupt
+ * service routines, so there's no way to read the state of the MCP23017
+ * inside of an ISR.  
+ * The same goes for ESP32 and ESP8266, although there may be ways around
+ * this by using alternative I²C drivers or by using FreeRTOS features.
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SDA:  MCP23017 SDA
+ *   - SCL:  MCP23017 SCL
+ *   - 12:   MCP23017 INTA or INTB
+ *   
+ * Connect up to 8 encoders to the MCP23017's GPIO pins: 
+ * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
+ * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
+ * Connect the "common" pins of the encoders to ground.  
+ * The built-in pull-up resistors of the MCP23017 will be enabled.
+ * 
+ * Make sure that the reset and address pins are all configured correctly 
+ * (reset to Vcc; A0, A1 and A2 to ground).
+ * 
+ * If you need more than one MCP23017 with encoders, you can connect their 
+ * interrupt pins together. This does result in higher latency, because on 
+ * average, half of the total number of MCP23017s have to be polled, which is 
+ * relatively slow, and might lead to missed pulses when using a large number
+ * of encoders.
+ * 
+ * Behavior
+ * --------
+ * 
+ * When the position of one of the encoders changes, it is printed to the Serial
+ * monitor.
+ * 
+ * The interrupt pin of the MCP23017 triggers a hardware interrupt on the
+ * Arduino. This means that you don't have to manually poll the encoders all
+ * the time.
+ * 
+ * Written by PieterP, 2020-04-06  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "MCP23017-Encoders-No-Interrupts.ino"
+ * 
+ * MCP23017-Encoders-No-Interrupts
+ * ===============================
+ *
+ * This example demonstrates the use of MCP23017 I²C port expanders with rotary
+ * encoders.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ *   - SDA:  MCP23017 SDA
+ *   - SCL:  MCP23017 SCL
+ *   - 12:   MCP23017 INTA or INTB
+ *   
+ * Connect up to 8 encoders to the MCP23017's GPIO pins: 
+ * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
+ * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
+ * Connect the "common" pins of the encoders to ground.  
+ * The built-in pull-up resistors of the MCP23017 will be enabled.
+ * 
+ * Make sure that the reset and address pins are all configured correctly 
+ * (reset to Vcc; A0, A1 and A2 to ground).
+ * 
+ * If you need more than one MCP23017 with encoders, you can connect their 
+ * interrupt pins together. This does result in higher latency, because on 
+ * average, half of the total number of MCP23017s have to be polled, which is 
+ * relatively slow, and might lead to missed pulses when using a large number
+ * of encoders.
+ * 
+ * Behavior
+ * --------
+ * 
+ * When the position of one of the encoders changes, it is printed to the Serial
+ * monitor.
+ * 
+ * Cautions
+ * --------
+ * 
+ * The interrupt pin of the MCP23017 doesn't trigger a hardware interrupt on the
+ * Arduino. It's used only to determine whether the Arduino should read the GPIO
+ * registers from the MCP23017.  
+ * If the update function isn't called often enough, you will miss encoder 
+ * pulses, and the position will be incorrect.  
+ * It's very important to keep your main loop free from any code that blocks for
+ * more than a couple of hundreds of microseconds.
+ * 
+ * Written by PieterP, 2020-04-06  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "3.MultiPurposeButton.ino"
+ * 
+ * 3.MultiPurposeButton
+ * ====================
+ *
+ * This examples shows how to use the MultiPurposeButton class to detect 
+ * different kinds of push button events.
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 2: Momentary push button (other pin to ground)
+ * 
+ * The internal pull-up resistor will be enabled.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - Short presses, long presses, multiple presses, etc. are printed to the 
+ *   Serial monitor.
+ * 
+ * Written by PieterP, 2022-05-07  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Pin-Change-Interrupt-Encoders.ino"
+ * 
+ * Pin-Change-Interrupt-Encoders
+ * =============================
+ *
+ * This example reads multiple encoders using pin change interrupts, on an 
+ * Arduino Uno or Nano.
+ * 
+ * @boards AVR
+ * 
+ * The ATmega328P microcontroller only has two interrupt pins (2 and 3), so if
+ * you want to use more than two interrupt-driven encoders, you'll either have 
+ * to use a timer interrupt to continuously poll the encoders, or use the chip's
+ * pin change interrupts. This example demonstrates the latter.
+ *
+ * @see @ref Timer-Interrupt-Encoders.ino
+ *
+ * Familiarity with [direct port manipulation](https://www.arduino.cc/en/Reference/PortManipulation)
+ * is assumed.
+ *
+ * Connections
+ * -----------
+ *
+ * Connect three encoders to the pins of port C as follows:
+ * 
+ *   - A0: pin A of encoder #0
+ *   - A1: pin B of encoder #0
+ *   - A2: pin A of encoder #1
+ *   - A3: pin B of encoder #1
+ *   - A4: pin A of encoder #2
+ *   - A5: pin B of encoder #2
+ *
+ * Connect the common pins to ground, the internal pull-up resistors will be 
+ * enabled.
+ * 
+ * Behavior
+ * --------
+ *
+ * When the position of one of the encoders changes, it is printed to the Serial
+ * monitor.
+ *
+ * Written by PieterP, 2021-08-11  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Timer-Interrupt-Encoders.ino"
+ * 
+ * Timer-Interrupt-Encoders
+ * ========================
+ *
+ * This example reads multiple encoders using a timer interrupt, on an 
+ * Arduino Uno or Nano.
+ * 
+ * @boards AVR
+ * 
+ * The ATmega328P microcontroller only has two interrupt pins (2 and 3), so if
+ * you want to use more than two interrupt-driven encoders, you'll either have 
+ * to use a timer interrupt to continuously poll the encoders, or use the chip's
+ * pin change interrupts. This example demonstrates the former.
+ * 
+ * @see @ref Pin-Change-Interrupt-Encoders.ino
+ *
+ * Familiarity with [direct port manipulation](https://www.arduino.cc/en/Reference/PortManipulation)
+ * is assumed.
+ *
+ * Connections
+ * -----------
+ *
+ * Connect three encoders to the pins of port C as follows:
+ * 
+ *    - A0: pin A of encoder #0
+ *    - A1: pin B of encoder #0
+ *    - A2: pin A of encoder #1
+ *    - A3: pin B of encoder #1
+ *    - A4: pin A of encoder #2
+ *    - A5: pin B of encoder #2
+ *
+ * Connect the common pins to ground, the internal pull-up resistors will be 
+ * enabled.
+ * 
+ * Behavior
+ * --------
+ *
+ * When the position of one of the encoders changes, it is printed to the Serial
+ * monitor.
+ *
+ * Written by PieterP, 2021-08-11  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Quaternion.ino"
+ * 
+ * Quaternion
+ * ==========
+ *
+ * Simple Quaternion test.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ *
+ * Written by PieterP, 2020-03-24  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "ArraySort.ino"
+ * 
+ * ArraySort
+ * =========
+ *
+ * Example of using the standard library algorithms.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ *
+ * This sketch creates an array with an unordered sequence of 10 numbers.
+ * It prints the array, and then creates a reverse view on the 6 elements in the 
+ * middle of the array and sorts it.
+ * The resulting array has the same elements in the 4 outermost places, but the
+ * 6 elements in the middle have been sorted in reverse order.
+ *
+ * **Output**
+ * ~~~
+ * Before sorting: 3, 5, 9, 2, 1, 8, 6, 4, 7, 0
+ *   Sorting            ├─────────────────┤      in ascending order
+ * After sorting:  3, 5, 1, 2, 4, 6, 8, 9, 7, 0
+ *   Sorting            ├─────────────────┤      in descending order
+ * After sorting:  3, 5, 9, 8, 6, 4, 2, 1, 7, 0
+ * ~~~
+ * 
+ * Written by PieterP, 2019-11-12
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Complex.ino"
+ * 
+ * Complex
+ * =======
+ *
+ * Example of using the standard library complex numbers.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ *
+ * **Output**
+ * ~~~
+ * √(2i) = (1.00,1.00)
+ * ~~~
+ * 
+ * Written by PieterP, 2019-11-14
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "CountPressedButtons.ino"
+ * 
+ * CountPressedButtons
+ * ===================
+ *
+ * Example of using the standard library algorithms and the Button class.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * This sketch reads a number of push buttons or switches, and uses the standard
+ * library algorithms to count how many of them are pressed.
+ * 
+ * The internal pull-up resistors are enabled and the switches are debounced.
+ *
+ * Written by PieterP, 2019-11-24  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "Numeric.ino"
+ * 
+ * Numeric
+ * =======
+ *
+ * Example of using the standard library numeric functions.
+ *
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ *
+ * This sketch creates an incremental array using the iota function, then
+ * computes the inner product of the vector with itself, and uses that to
+ * calculate the norm of the vector.
+ *
+ * **Output**
+ * ~~~
+ * v      = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+ * 〈v, v〉 = 385
+ * ‖v‖    = 19.6214160
+ * ~~~
+ * 
+ * Written by PieterP, 2019-11-18  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
+ * @example   "BlinkWithoutDelay-Timer.ino"
+ * 
+ * BlinkWithoutDelay-Timer
+ * =======================
+ *
+ * This examples shows how use the Timer class to blink an LED every
+ * second, in a non-blocking fashion (without using delay).
+ * 
+ * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
+ * 
+ * Behavior
+ * --------
+ * 
+ * Blinks the built-in LED every second.
+ * 
+ * Written by PieterP, 2019-12-06  
+ * https://github.com/tttapa/Arduino-Helpers
+ */
+
+/**
  * @example   "1.First-Output.ino"
  * 
  * 1.First-Output
@@ -1039,705 +2635,6 @@
  */
 
 /**
- * @example   "AppleMIDI.ino"
- * 
- * AppleMIDI
- * =========
- *
- * This example demonstrates how to use the AppleMIDI library to use Control
- * Surface over the network.
- * 
- * This example requires the 
- * [AppleMIDI](https://github.com/lathoub/Arduino-AppleMIDI-Library) and 
- * [MIDI](https://github.com/FortySevenEffects/arduino_midi_library) libraries.
- * 
- * @boards  ESP32
- * 
- * Connections
- * -----------
- * 
- * The on-board LED will be used, as well as the push button on GPIO0. These 
- * should be present on most ESP32 boards, if this is not the case for your 
- * board, connect an LED (+ series resistor) and a push button to the relevant
- * pins (in the "MIDI Elements" section below). For more details, see the 
- * @ref NoteButton.ino and @ref 1.Note-LED.ino examples.
- * 
- * WiFi Credentials
- * ----------------
- * 
- * Open the tab `WiFi-Credentials.example.h`, enter your WiFi credentials, and
- * rename the file to `WiFi-Credentials.h`.
- * 
- * Behavior
- * --------
- * 
- * Upload the code to the ESP32, and open the Serial monitor. You should see
- * output like this
- * 
- * ~~~
- * Connecting to Your WiFi Network ...
- * Connected!
- * IP address: 192.168.1.35
- * mDNS responder started (ESP32.local)
- * ~~~
- * 
- * Next, connect to the device using your DAW or other MIDI software. If the 
- * software supports mDNS (Apple Bonjour), you can use `ESP32.local`, 
- * otherwise, you'll have to use the IP address.
- * 
- * When the connection is successful, you'll see the following message in the
- * Serial monitor:
- * 
- * ~~~
- * Connected to session Your Session Name
- * ~~~
- * 
- * When the button is pushed, a MIDI note on message for note C4 (middle C) is
- * sent.  
- * When the ESP32 receives a MIDI note message for that note, it turn on/off the
- * LED accordingly.
- * 
- * RTP MIDI Bridge (Linux)
- * -----------------------
- * 
- * If you're on Linux, you can use the rtpmidi-bridge application in the example
- * folder. You'll need to install Node.js and NPM.
- * 
- * First, install the necessary dependencies and build tools:
- * 
- * ~~~sh
- * sudo apt install build-essential libasound2-dev libavahi-compat-libdnssd-dev
- * ~~~
- * 
- * Then install the dependencies using NPM:
- * 
- * ~~~sh
- * npm install
- * ~~~
- * You might get a compilation error for the `avahi_pub` module. This is not an
- * issue, it's an optional dependency of the `rtpmidi` module.
- * 
- * Finally, run the application:
- * 
- * ~~~sh
- * node rtpmidi-bridge.js
- * ~~~
- * 
- * The application will initiate a RTP MIDI connection with the ESP32, create
- * virtual MIDI ports, and bridge the MIDI traffic between the RTP MIDI 
- * connection and the virtual MIDI ports.  
- * You can then connect your DAW or other MIDI application to the virtual MIDI 
- * ports.
- * 
- * When the ESP32 is connected, you should see the following in the serial 
- * monitor and the rtpmidi-bridge output respectively:
- * 
- * ~~~
- * Connected to session Node RTPMidi
- * ~~~
- * 
- * ~~~
- * 2020-05-06T15:50:42.956Z info:  Invitation accepted by ESP32
- * 2020-05-06T15:50:42.962Z info:  Data channel to ESP32 established
- * ~~~
- * 
- * Mapping
- * -------
- * 
- * Connect the virtual MIDI ports or the AppleMIDI connection to a device or 
- * application that can send and receive MIDI notes.
- * 
- * Written by PieterP, 2020-05-06  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "Debug-MIDI-Interface.ino"
- * 
- * Debug-MIDI-Interface
- * ====================
- * 
- * This example demonstrates how to use the MIDI interface for debugging.
- *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
- * 
- * Connections
- * -----------
- * 
- * - 5: momentary push button (to ground)
- * 
- * The internal pull-up resistor for the button will be enabled automatically.
- * 
- * Behavior
- * --------
- * 
- * - Upload the sketch and open the Serial monitor.
- * - Set the line ending to new line or new line and carriage return.
- * - When the button on pin 5 is pressed, a MIDI Note On message is sent for
- *   note C4, and you'll see that event printed in the Serial monitor.
- * - When the button on pin 5 is released, a MIDI Note Off message is sent for 
- *   note C4, and you'll also see that in the monitor.
- * - When you type in "90 3C 7F" (without the quotes), and press enter, the 
- *   built-in LED will light up.
- * - When you type in "80 3C 7F", and press enter, the LED will turn off again.
- * 
- * Mapping
- * -------
- * 
- * None.
- * 
- * Written by PieterP, 2019-08-07  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "Dual-MIDI-Interface.ino"
- * 
- * Dual-MIDI-Interface
- * ===================
- * 
- * This example demonstrates how to group together two or more MIDI interfaces,
- * so you can send the MIDI output over both MIDI USB and 5-pin DIN MIDI, for 
- * example. MIDI input is received from all interfaces as well.
- * 
- * The @ref midi-tutorial has an entire section dedicated to MIDI routing:
- * @ref midi_md-routing.
- * Also have a look at the @ref MIDI_Pipes-Routing.ino example, the
- * @ref MIDI_Routing module and the @ref MIDI_Pipe documentation for more 
- * information about MIDI routing.  
- * Control Surface can be used as both a MIDI sink and a MIDI source.
- * 
- * When you call `Control_Surface.begin()`, it automatically connects itself to 
- * the default MIDI interface (@ref MIDI_Interface::getDefault()).  
- * If you want to route everything manually, you have to connect it before 
- * calling `Control_Surface.begin()`, or you have to disconnect the default 
- * pipes before connecting your own, using 
- * @ref Control_Surface_::disconnectMIDI_Interfaces().
- *
- * @boards  AVR USB, Nano Every, Due, Teensy 3.x
- * 
- * Connections
- * -----------
- * 
- * - A0: wiper of a potentiometer
- * 
- * Connect the left terminal of the potentiometer to ground, and the right one
- * to V<sub>CC</sub>.
- * 
- * Behavior
- * --------
- * 
- * - When you turn the potentiometer, you should receive MIDI Control Change
- *   events on both the Serial MIDI interface and the USB MIDI interface.
- * - When a MIDI Note event for middle C is received on either MIDI interface,
- *   the state of the built-in LED will change accordingly.
- * 
- * Mapping
- * -------
- * 
- * - None
- * 
- * Written by PieterP, 2019-08-22  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "MIDI-Input.ino"
- * 
- * MIDI-Input
- * ==========
- * 
- * This is an example on how to attach your own callbacks for receiving MIDI 
- * input.
- *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
- * 
- * Connections
- * -----------
- * 
- * None.
- * 
- * Behavior
- * --------
- * 
- * - When MIDI messages are sent to the USB interface, they are printed to the 
- *   Serial port.
- * 
- * Mapping
- * -------
- * 
- * None.
- * 
- * @see @ref MIDI-Input-Fine-Grained.ino
- * @see @ref MIDI-Input-Fine-Grained-All-Callbacks.ino
- *
- * Written by PieterP, 2020-06-11  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "MIDI-Output.ino"
- * 
- * MIDI-Output
- * ===========
- * 
- * This is an example on how to send MIDI messages.
- *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
- * 
- * For a full list of available MIDI send functions, see @ref MIDI_Sender.
- * 
- * Connections
- * -----------
- * 
- * None.
- * 
- * Behavior
- * --------
- * 
- * - Sends a pair of MIDI note on/off messages every second.
- * 
- * Mapping
- * -------
- * 
- * None.
- * 
- * Written by PieterP, 2020-06-11  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "MIDI_Pipes-Routing.ino"
- * 
- * MIDI_Pipes-Routing
- * ==================
- *
- * MIDI routing using MIDI_Pipe%s.
- * 
- * Bridges the USB MIDI interface to a Serial MIDI interface, and loops back
- * anything it receives on the USB interface.
- * 
- * You can also use the MIDI pipes to route the input and output of Control 
- * Surface itself, not just the input and output of MIDI interfaces. This is
- * demonstrated in the @ref Dual-MIDI-Interface.ino example.
- * 
- * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32
- */
-
-/**
- * @example   "Send-MIDI-Notes.ino"
- * 
- * Send-MIDI-Notes
- * ===============
- *
- * Example showing how to send MIDI Note messages.
- * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
- * 
- * @see @ref midi_md-sending "MIDI Tutorial: Sending MIDI messages"
- * @see @ref Send-All-MIDI-Messages.ino
- */
-
-/**
- * @example   "Serial-Interface.ino"
- * 
- * Serial-Interface
- * ================
- * 
- * This example demonstrates how to use a Serial MIDI Interface, for use with
- * 5-pin DIN connectors, for example.
- *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
- * 
- * Connections
- * -----------
- * 
- * - 5: momentary push button (to ground)
- * 
- * The internal pull-up resistor for the button will be enabled automatically.
- * 
- * Behavior
- * --------
- * 
- * - This is just a simple MIDI controller with a single note button and an LED.
- * 
- * Mapping
- * -------
- * 
- * None.
- * 
- * Written by PieterP, 2020-01-09  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "SysEx-Send-Receive.ino"
- * 
- * SysEx-Send-Receive
- * ==================
- *
- * Example showing how to send and receive MIDI System Exclusive messages.
- * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
- */
-
-/**
- * @example   "MIDI-Input-Fine-Grained-All-Callbacks.ino"
- * 
- * MIDI-Input-Fine-Grained-All-Callbacks
- * =====================================
- * 
- * This is an example on how to attach your own callbacks for receiving MIDI 
- * input. This example has fine-grained callbacks, i.e. one for each message 
- * type (Note On, Note Off, Control Change, System Exclusive ...).
- *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
- * 
- * Connections
- * -----------
- * 
- * None.
- * 
- * Behavior
- * --------
- * 
- * - When MIDI messages are sent to the USB interface, they are printed to the 
- *   Serial port.
- * 
- * Mapping
- * -------
- * 
- * None.
- *
- * @see @ref MIDI-Input.ino
- * @see @ref MIDI-Input-Fine-Grained.ino
- * 
- * Written by PieterP, 2021-06-26  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "MIDI-Input-Fine-Grained.ino"
- * 
- * MIDI-Input-Fine-Grained
- * =======================
- * 
- * This is an example on how to attach your own callbacks for receiving MIDI 
- * input. This example has fine-grained callbacks, i.e. one for each message 
- * type (Note On, Note Off, Control Change, System Exclusive ...).
- *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
- * 
- * Connections
- * -----------
- * 
- * None.
- * 
- * Behavior
- * --------
- * 
- * - When MIDI messages are sent to the USB interface, they are printed to the 
- *   Serial port.
- * 
- * Mapping
- * -------
- * 
- * None.
- *
- * @see @ref MIDI-Input.ino
- * @see @ref MIDI-Input-Fine-Grained-All-Callbacks.ino for a list of all 
- *           callbacks for all message types
- * 
- * Written by PieterP, 2021-06-26  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "MIDI-Monitor.ino"
- * 
- * MIDI-Monitor
- * ============
- * 
- * This example prints all MIDI messages that arrive over USB to the Serial
- * monitor so you can use the Arduino as a MIDI monitor. It also allows you to
- * enter MIDI messages as text in the Serial monitor, and then sends these
- * messages as MIDI over USB.
- *
- * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x
- *
- * This example requires an Arduino board with native MIDI over USB support.
- *
- * To send a MIDI message from the Serial monitor, select “Newline” as the line 
- * ending, enter the MIDI message in hexadecimal, and press enter.  
- * For example, if you enter `90 3C 7F`, a MIDI Note On message for middle C 
- * (0x3C) with a velocity of 127 (0x7F) will be sent over USB.  
- * Spaces between bytes are not required (`903C7F` will be interpreted as 
- * `90 3C 7F`), but they are recommended to prevent framing errors. 
- *
- * @see @ref MIDI_Pipes-Routing.ino
- * @see @ref Debug-MIDI-Interface.ino
- * @see @ref midi_md-routing "MIDI Tutorial: Routing MIDI messages"
- * 
- * Written by PieterP, 2021-06-28  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "Send-All-MIDI-Messages.ino"
- * 
- * Send-All-MIDI-Messages
- * ======================
- *
- * Example showing how to send any MIDI message.
- *
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
- *
- * See the @ref MIDI_Sender documentation for a full overview of all MIDI 
- * sending functions and their arguments.
- *
- * **Expected output**
- * ~~~text
- * Note Off         Channel: 6 Data 1: 0x3c  Data 2: 0x7f
- * Note On          Channel: 6 Data 1: 0x3c  Data 2: 0x7f
- * Key Pressure     Channel: 6 Data 1: 0x3c  Data 2: 0x40
- * Control Change   Channel: 2 Data 1: 0x07  Data 2: 0x78
- * Program Change   Channel: 9 Data 1: 0x06
- * Channel Pressure Channel: 3 Data 1: 0x40
- * Pitch Bend       Channel: 3 Data 1: 0x7f  Data 2: 0x7f (16383)
- * System Common    MTCQuarterFrame    Data 1: 0x2f
- * System Common    SongPositionPointer    Data 1: 0x10  Data 2: 0x4e (10000)
- * System Common    SongSelect Data 1: 0x46
- * System Common    TuneRequest
- * System Exclusive [10] F0 00 01 02 03 04 05 06 07 F7
- * System Exclusive [6+] F0 10 11 12 13 14
- * System Exclusive [6+] 15 16 17 18 19 1A
- * System Exclusive [6]  1B 1C 1D 1E 1F F7
- * Real-Time        TimingClock
- * Real-Time        Start
- * Real-Time        Continue
- * Real-Time        Stop
- * Real-Time        ActiveSensing
- * Real-Time        SystemReset
- * ~~~
- *
- * @see @ref midi_md-sending "MIDI Tutorial: Sending MIDI messages"
- *
- * Written by PieterP, 2021-06-28  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "USBHostMIDI_Interface-Passthrough.ino"
- * 
- * USBHostMIDI_Interface-Passthrough
- * =================================
- * 
- * This example demonstrates how to use the USBHostMIDI_Interface to send and
- * receive MIDI data to and from USB MIDI devices connected to a Teensy's USB
- * Host port.
- *
- * @boards  Teensy 3.6, Teensy 4.1
- * 
- * Connections
- * -----------
- * 
- * - Use a [USB Host cable](https://www.pjrc.com/store/cable_usb_host_t36.html)
- *   to connect a MIDI USB device to the Teensy. Connect the primary USB port of
- *   the Teensy to a computer.
- * 
- * Behavior
- * --------
- * 
- * - All messages sent from the computer to the Teensy are forwarded to the
- *   USB MIDI device.
- * - All messages sent by the USB MIDI device are forwarded to the computer.
- * 
- * Mapping
- * -------
- * 
- * - None
- * 
- * Written by PieterP, 2021-01-31  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "MIDI_Pipes-Filter.ino"
- * 
- * MIDI_Pipes-Filter
- * =================
- *
- * Filtering and modifying MIDI messages that travel through a MIDI_Pipe.
- * 
- * This example demonstrates how to create custom MIDI pipes that can filter out
- * and modify the messages that travel through it. It uses a debug MIDI 
- * interface for demonstration purposes, and loops back only MIDI note and
- * real-time messages, messages of any other type are dropped. Additionally, all
- * MIDI note messages are transposed down an octave, and their channel is set
- * to 5.
- * 
- * To try it out, open the Serial monitor (at 115200 baud) and type `98 3C 7F`
- * (Note On, channel 9, C4, full velocity). When you press enter, you'll get
- * back the following message (note how the channel and pitch changed):
- *
- * ```
- * Note On    Channel: 5    Data 1: 0x30    Data 2: 0x7F
- * ```
- *
- * If you try to send a Pitch Bend message (for example, `E0 12 34`), you'll get
- * no response, because the code filtered it out.
- * 
- * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, ESP32, Teensy 3.x
- */
-
-/**
- * @example   "MIDI-Monitor-OLED.ino"
- * 
- * MIDI-Monitor-OLED
- * =================
- * 
- * This example shows all incoming and outgoing MIDI messages on an SSD1306
- * OLED display. This can be handy for debugging purposes when you don't have
- * access to the Serial Monitor.
- *
- * @boards  AVR, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Teensy 3.x, ESP32, ESP8266
- *
- * Connections
- * -----------
- * 
- * - 5:  Push button (to ground)
- * - MOSI: OLED Data/D1 (SPI)
- * - SCK:  OLED Clock/D0 (SPI)
- * - 8:  OLED Reset
- * - 9:  OLED Data/Command
- * - 10: OLED %Cable Select
- *
- * Behavior
- * --------
- * 
- * - When sending MIDI messages to the Arduino using the USB interface, these
- *   messages are printed on the OLED display, prefixed by a right arrow (→).
- * - If any MIDI messages are sent by Control Surface (e.g. by pressing the push
- *   button), these messages are printed on the OLED display, prefixed
- *   by a left arrow (←).  
- *   @image html midi-monitor-oled.gif
- * 
- * Explanation
- * -----------
- * 
- * The code below defines the `OLEDDebugMIDI_Output` class, which implements the
- * @ref MIDI_Sink and @ref MIDI_Sender interfaces. This means that it can accept
- * MIDI messages coming from @ref MIDI_Pipe%s, and it provides all of the usual
- * functions for sending MIDI messages.
- *
- * The MIDI over USB interface (`midi`) will be used as the primary MIDI
- * interface (as in the other Control Surface examples).  
- * Two instances of our `OLEDDebugMIDI_Output` class are created: one for
- * printing messages that are received by the primary MIDI interface, and one
- * for printing messages that are sent by Control Surface.  
- * The MIDI interfaces and Control Surface itself are connected appropriately
- * using some pipes.
- *
- * <img style="margin: 0 auto; display: block; width: 38em" src="midi-pipes-mon-oled.svg"/>
- *
- * @see @ref MIDI_Pipes-Routing.ino
- * @see @ref Debug-MIDI-Interface.ino
- * @see @ref midi_md-routing "MIDI Tutorial: Routing MIDI messages"
- * @see @ref MIDI-Monitor.ino
- * 
- * Written by PieterP, 2024-01-05  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "USBMIDI-Adapter.ino"
- * 
- * USBMIDI-Adapter
- * ===============
- *
- * Turns an Arduino into a USB to 5-pin DIN MIDI adapter.
- * 
- * @boards  AVR USB, Due, Nano 33 IoT, Nano 33 BLE, Pi Pico, ESP32-S3, Teensy 3.x
- *
- * Connections
- * -----------
- * 
- * - TXD: connected to a MIDI 5-pin DIN output connector
- *     (with series resistor, possibly through a buffer)
- * - RXD: connected to a MIDI 5-pin DIN input connector
- *     (with an optocoupler)
- *
- * See https://midi.org/specifications/midi-transports-specifications/5-pin-din-electrical-specs
- * for the schematic, optocoupler models and resistor values.
- *
- * Behavior
- * --------
- *
- * - The Arduino will show up as a USB MIDI device.
- * - Any MIDI messages sent to the Arduino over USB are sent out to the 5-pin
- *     DIN output connector.
- * - Any MIDI messages sent to the Arduino through the 5-pin DIN input connector
- *     are sent over USB.
- *
- * @see @ref md_pages_MIDI-over-USB
- * @see @ref midi-tutorial
- * 
- * Written by PieterP, 2024-01-21  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
- * @example   "BLEMIDI-Adapter.ino"
- * 
- * BLEMIDI-Adapter
- * ===============
- *
- * Turns an Arduino into a Bluetooth Low Energy (BLE) to 5-pin DIN MIDI adapter.
- * 
- * @boards  Nano 33 IoT, Nano 33 BLE, ESP32, ESP32-S3, Pi Pico W
- *
- * Configuration
- * -------------
- *
- * - If you're using a Pi Pico W, you'll have to enable the Bluetooth stack
- *     from the _Tools > IP/Bluetooth Stack_ menu in the IDE.
- * - If you're using an ESP32, you can optionally switch to the NimBLE backend
- *     by installing the [h2zero/NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino)
- *     library, and adding `#define CS_USE_NIMBLE` at the top of this sketch.
- * - If you're not using a Pico or an ESP32, you'll have to install the
- *     [ArduinoBLE](https://github.com/arduino-libraries/ArduinoBLE) library.
- *
- * Connections
- * -----------
- * 
- * - TXD: connected to a MIDI 5-pin DIN output connector
- *     (with series resistor, possibly through a buffer)
- * - RXD: connected to a MIDI 5-pin DIN input connector
- *     (with an optocoupler)
- *
- * See https://midi.org/specifications/midi-transports-specifications/5-pin-din-electrical-specs
- * for the schematic, optocoupler models and resistor values.
- *
- * Behavior
- * --------
- *
- * - The Arduino will advertise itself as a Bluetooth Low Energy MIDI device
- *     with the name `MIDI Adapter`.
- * - When you connect to the Arduino using your phone or computer, the built-in
- *     LED turns on to indicate that the connection was successful.
- * - Any MIDI messages sent to the Arduino over BLE are sent out to the 5-pin
- *     DIN output connector.
- * - Any MIDI messages sent to the Arduino through the 5-pin DIN input connector
- *     are sent over BLE.
- *
- * @see @ref md_pages_MIDI-over-BLE
- * @see @ref midi-tutorial
- * 
- * Written by PieterP, 2024-01-21  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
  * @example   "Bank.ino"
  * 
  * Bank
@@ -2118,903 +3015,6 @@
  */
 
 /**
- * @example   "Debug.ino"
- * 
- * Debug
- * =====
- *
- * This examples shows how use the debug macros for printing different kinds of
- * debugging information
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Behavior
- * --------
- * 
- * - Enable debugging by defining the @ref DEBUG_OUT macro in 
- *   `src/AH/Settings/Settings.hpp` or enable debugging globally as explained
- *   [here](@ref md_pages_Debug)
- * - Upload the sketch to the Arduino, and open the Serial Monitor 
- *   (`CTRL+Shift+M`)
- * - Every five seconds, debugging information is printed, for example:
- * 
- * ~~~
- * This is the result of `DEBUG`
- * [/home/pieter/GitHub/Arduino-Debugging/Example/Example.ino:12]:	This is the result of `DEBUGREF`
- * [void loop() @ line 13]:	This is the result of `DEBUGFN`
- * [0:2:11.085]:	This is the result of `DEBUGTIME`
- * a = 1, b = 2, c = 3
- * log10(1000) - 2 = 1.00
- * millis() = 131085
- * Serial.read() = -1
- * [int someFunction(int) @ line 26]:	parameter = 42
- * ~~~
- * 
- * @see @ref md_pages_Debug for instructions on how to add an option in the 
- *      Arduino IDE to easily enable and disable debugging globally without 
- *      editing the settings file.
- * 
- * Written by PieterP, 2018-07-31  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "1.FilteredAnalog-Advanced.ino"
- * 
- * 1.FilteredAnalog-Advanced
- * =========================
- *
- * This examples shows how to filter an analog input, so you can get the 
- * position of a knob or fader without noise.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- * - A0: wiper of a potentiometer
- * 
- * Connect the left terminal of the potentiometer to ground, and the right one
- * to V<sub>CC</sub>.
- * 
- * Behavior
- * --------
- * 
- * - Upload the sketch to the Arduino, and open the Serial Monitor 
- *   (`CTRL+Shift+M`)
- * - When you turn the potentiometer, you should see the position of the 
- *   potentiometer being printed as a number between 0 and 1023.
- * - The analog input is filtered, so there shouldn't be any noise on the 
- *   position. If there is, check your wiring, and make sure that the resistance
- *   of the potentiometer isn't too high (10 kΩ is ideal). 
- * 
- * A simpler version of this example can be found in 
- * @ref 1.FilteredAnalog.ino.
- * 
- * Written by PieterP, 2019-10-10  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "1.FilteredAnalog.ino"
- * 
- * 1.FilteredAnalog
- * ================
- *
- * This examples shows how to filter an analog input, so you can get the 
- * position of a knob or fader without noise.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- * - A0: wiper of a potentiometer
- * 
- * Connect the left terminal of the potentiometer to ground, and the right one
- * to V<sub>CC</sub>.
- * 
- * Behavior
- * --------
- * 
- * - Upload the sketch to the Arduino, and open the Serial Monitor 
- *   (`CTRL+Shift+M`)
- * - When you turn the potentiometer, you should see the position of the 
- *   potentiometer being printed as a number between 0 and 1023.
- * - The analog input is filtered, so there shouldn't be any noise on the 
- *   position. If there is, check your wiring, and make sure that the resistance
- *   of the potentiometer isn't too high (10 kΩ is ideal). 
- * 
- * The example @ref 1.FilteredAnalog-Advanced.ino has more information about the
- * parameters you can pass to the FilteredAnalog class to tweak the filters,
- * increase the resolution, etc.
- * 
- * Written by PieterP, 2019-10-10  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "2.Button.ino"
- * 
- * 2.Button
- * ========
- *
- * This examples shows how to use the debounced Button class to toggle an LED.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- * - 2: Momentary push button (other pin to ground)
- * 
- * The internal pull-up resistor will be enabled.
- * 
- * Behavior
- * --------
- * 
- * - If you press the push button once, the built-in LED is turned on.
- * - If you press the button again, the LED is turned off again.
- * 
- * Written by PieterP, 2019-11-22  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "Blink-Frequency-Buttons.ino"
- * 
- * Blink-Frequency-Buttons
- * =======================
- *
- * This examples shows how to use two push buttons to set the frequency at which
- * an LED blinks.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- * - 2: Momentary push button (other pin to ground)
- * - 3: Momentary push button (other pin to ground)
- * 
- * The internal pull-up resistors will be enabled.
- * 
- * Behavior
- * --------
- * 
- * - If you press the first push button, the LED blinks faster.
- * - If you press the second push button, the LED blinks slower.
- * - You can press and hold one of the push buttons to change the frequency by
- *   multiple steps.
- * - If you press both buttons at the same time, the frequency is reset to the
- *   initial default frequency.
- * 
- * Written by PieterP, 2019-12-10  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "1.AnalogReadSerial.ino"
- * 
- * 1.AnalogReadSerial
- * ==================
- *
- * This is an example of the AnalogMultiplex class. It prints the values of all
- * 16 inputs of a multiplexers to the serial monitor.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *  - A0: CD74HC4067 signal pin ("common input/output")
- *  - 3:  CD74HC4067 address pin S0
- *  - 4:  CD74HC4067 address pin S1
- *  - 5:  CD74HC4067 address pin S2
- *  - 6:  CD74HC4067 address pin S3
- *  
- * Optionally you can connect the enable pin as well, this is useful
- * if you want to use multiple multiplexers with the same address 
- * lines and the same analog input. Otherwise, just connect the enable
- * pin to ground.
- * 
- * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
- * uncomment the code specific to this multiplexer, and use only three
- * address pins.
- *  
- * Behavior
- * --------
- * 
- * Connect some potentiometers or other analog sensors to the 16 inputs
- * of the multiplexer, and open the serial monitor (CTRL+SHIFT+M) or the
- * serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed
- * or plotted.
- * 
- * Written by Pieter P, 31-01-2019  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "2.DigitalReadSerial.ino"
- * 
- * 2.DigitalReadSerial
- * ===================
- *
- * This is an example of the AnalogMultiplex class. It prints the states of all
- * 16 switches connected to a multiplexers to the serial monitor.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *  - 2: CD74HC4067 signal pin ("common input/output")
- *  - 3: CD74HC4067 address pin S0
- *  - 4: CD74HC4067 address pin S1
- *  - 5: CD74HC4067 address pin S2
- *  - 6: CD74HC4067 address pin S3
- *  
- * Optionally you can connect the enable pin as well, this is useful
- * if you want to use multiple multiplexers with the same address 
- * lines and the same analog input. Otherwise, just connect the enable
- * pin to ground.
- * 
- * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
- * uncomment the code specific to this multiplexer, and use only three
- * address pins.
- * 
- * Connect a switch or push button between each input pin of the multiplexer and
- * ground. A pull-up resistor is not necessary, because we'll use the internal 
- * one.
- *  
- * Behavior
- * --------
- * 
- * Open the serial monitor (CTRL+SHIFT+M) or the serial plotter (CTRL+SHIFT+L),
- * and press some buttons, you should see all 16 signals printed or plotted.
- * 
- * Written by Pieter P, 2019-08-08   
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "3.FilteredAnalogReadSerial.ino"
- * 
- * 3.FilteredAnalogReadSerial
- * ==========================
- *
- * This is an example of the AnalogMultiplex and the FilteredAnalog classes. 
- * It prints the filtered values of all 16 inputs of a multiplexers to the 
- * serial monitor.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *  - A0: CD74HC4067 signal pin ("common input/output")
- *  - 3:  CD74HC4067 address pin S0
- *  - 4:  CD74HC4067 address pin S1
- *  - 5:  CD74HC4067 address pin S2
- *  - 6:  CD74HC4067 address pin S3
- *  
- * Optionally you can connect the enable pin as well, this is useful
- * if you want to use multiple multiplexers with the same address 
- * lines and the same analog input. Otherwise, just connect the enable
- * pin to ground.
- * 
- * If you are using a 3-bit multiplexer, like the CD74HC4051, you can
- * uncomment the code specific to this multiplexer, and use only three
- * address pins.
- *  
- * Behavior
- * --------
- * 
- * Connect some potentiometers or other analog sensors to the 16 inputs
- * of the multiplexer, and open the serial monitor (CTRL+SHIFT+M) or the
- * serial plotter (CTRL+SHIFT+L). You should see all 16 signals printed
- * or plotted.
- * 
- * Written by Pieter P, 09-04-2019  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "1.SPI-Blink.ino"
- * 
- * 1.SPI-Blink
- * ===========
- *
- * This example demonstrates the use of shift registers as if they were just
- * normal IO pins. The SPI interface is used because it's easy and fast.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *   - SS:   74HC595 ST_CP
- *   - MOSI: 74HC595 DS
- *   - SCK:  74HC595 SH_CP
- * 
- * Connect an LED (and series resistor) between the first output of the
- * shift register and ground.
- * 
- * Remember to connect the enable pin of the shift register to ground and the 
- * master reset pin to Vcc in order to enable it.  
- * 
- * Behavior
- * --------
- * 
- * This sketch will blink the LED once a second.
- * 
- * Written by PieterP, 2018-09-01
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "2.BitBang-Blink.ino"
- * 
- * 2.BitBang-Blink
- * ===============
- *
- * This example demonstrates the use of shift registers as if they were just
- * normal IO pins. This version uses bit-banging to drive the  shift register. 
- * You should probably be using the SPI version instead.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *   - 10: 74HC595 ST_CP
- *   - 11: 74HC595 DS
- *   - 13: 74HC595 SH_CP
- * 
- * Connect an LED (and series resistor) between the first output of the
- * shift register and ground.
- * 
- * Remember to connect the enable pin the shift register to ground and the 
- * master reset pin to Vcc in order to enable it.  
- * 
- * Behavior
- * --------
- * 
- * This sketch will blink the LED once a second.
- * 
- * Written by PieterP, 2018-09-01
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "2.RGB-LED-Chaser.ino"
- * 
- * 2.RGB-LED-Chaser
- * ================
- *
- * This is an example of the ShiftRegisterOut class of the Control Surface 
- * library. It creates light effects using three 8-bit shift registers and some
- * RGB LEDs.
- *
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- *
- * Connections
- * -----------
- *
- * Connect three daisy-chained shift registers to the SPI pins.  
- * Connect 8 RGB LEDs (+ current limiting resistors) to the outputs of the shift
- * registers.
- * 
- * ```
- * SCK   >───────────┬──────────────────────┬──────────────────────┐
- *           ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓      ┏━━━━━━━┷━━━━━━━┓
- *           ┃     SH_CP     ┃      ┃     SH_CP     ┃      ┃     SH_CP     ┃
- * MOSI  >───┨ DS        Q7S ┠──────┨ DS        Q7S ┠──────┨ DS        Q7S ┃
- *           ┃     ST_CP     ┃      ┃     ST_CP     ┃      ┃     ST_CP     ┃
- *           ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛      ┗━━━━━━━┯━━━━━━━┛
- * SS    >───────────┴──────────────────────┴──────────────────────┘
- * ```
- * Remember to connect the enable pin of the shift register to ground and the 
- * master reset pin to Vcc in order to enable it.  
- * 
- * The order of the colors doesn't matter. You can change them in software using
- * the `ShiftRegisterOutRGB::redBit`, `ShiftRegisterOutRGB::greenBit` and 
- * `ShiftRegisterOutRGB::blueBit` constants.
- * 
- * If you wired the LEDs as RGB (red first, then green and then blue), the red 
- * bit is 0, the green bit is 1 and the blue bit is 2.  
- * If you wired the LEDs as BGR (blue first, then green and then red), the red
- * bit is 2, the green bit is 1 and the blue bit is 0.  
- * Other combinations are possible as well.
- * 
- * Behavior
- * --------
- * 
- * This example will turn on all red LEDs one by one, then turn them off one by
- * one, next, it will turn on and off all green LEDs in the same manner, and
- * finally the same for the blue LEDs. This is repeated indefinitely.
- * 
- * Demo
- * ----
- * 
- * @htmlonly
- * <iframe width="560" height="315"
- * src="https://www.youtube.com/embed/7ywcTTdnseU?loop=1" frameborder="0"
- * allow="accelerometer; autoplay; encrypted-media; gyroscope;
- * picture-in-picture" allowfullscreen></iframe>
- * @endhtmlonly
- * 
- * Written by Pieter P, 2018-07-13  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "1.MAX7219-Blink.ino"
- * 
- * 1.MAX7219-Blink
- * ===============
- *
- * This example demonstrates the use of MAX7219 LED outputs as if they were just
- * normal IO pins, using `digitalWrite`.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *   - SS:   MAX7219 CS
- *   - MOSI: MAX7219 DIN
- *   - SCK:  MAX7219 CLK
- * 
- * Behavior
- * --------
- * 
- * This sketch will blink the first and the last LEDs once a second, in an 
- * alternating pattern.
- * 
- * Written by PieterP, 2020-03-24  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "Toggle-LEDs.ino"
- * 
- * Toggle-LEDs
- * ===========
- *
- * This example demonstrates the use of push buttons and LEDs and how to use
- * shift registers and analog multiplexers to save pins.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *   - SS:   74HC595 ST_CP
- *   - MOSI: 74HC595 DS
- *   - SCK:  74HC595 SH_CP
- *   - 2: 74HC4067 A (COM OUT/IN)
- *   - 3: 74HC4067 S0
- *   - 4: 74HC4067 S1
- *   - 5: 74HC4067 S2
- *   - 6: 74HC4067 S3
- * 
- * Connect 16 momentary push buttons between the input pins of the 
- * multiplexer and ground.  
- * The internal pull-up resistor for the buttons will be enabled automatically,
- * so no external resistors are necessary.
- * 
- * Connect 16 LEDs (and series resistors) between the eight outputs of the
- * two shift registers and ground. 
- * 
- * Remember to connect the enable pins of both the multiplexer and the shift
- * registers to ground in order to enable them. Also connect the master reset 
- * pin of the shift registers to Vcc.  
- * Connect the serial data output of the first shift register (QH' or Q7S) to
- * the serial input of the second shift register.
- * 
- * Behavior
- * --------
- *  
- * Pressing the first button will turn on the first LED. Pressing it again will
- * turn it off again.
- * Pressing the second button will turn on the second LED. Pressing it again 
- * will turn it off again, and so on.
- * 
- * Written by PieterP, 2018-08-28  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "MCP23017.ino"
- * 
- * MCP23017
- * ========
- *
- * This example demonstrates the use of MCP23017 IO expanders as if they were 
- * just normal IO pins.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *   - SDA: MCP23017 SDA
- *   - SCK: MCP23017 SCK
- *   - 2:   MCP23017 INT A or INT B
- * 
- * Connect an LED (and series resistor) between pin GPA0 of the MCP and ground.
- * Connect a push button between pin GPB0 of the MCP and ground. The internal
- * pull-up resistor will be used.
- * 
- * Tie the three address lines of the MCP to ground.
- * 
- * Behavior
- * --------
- * 
- * When the push button is pressed, the LED turns on.
- * 
- * Written by PieterP, 2020-11-20  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "MCP23017-Encoders-Interrupts.ino"
- * 
- * MCP23017-Encoders-Interrupts
- * ============================
- *
- * This example demonstrates the use of MCP23017 I²C port expanders with rotary
- * encoders, using hardware interrupts so you don't miss any pulses.
- * 
- * @boards  Teensy 3.x
- * 
- * This only works on Teensy boards, and maybe on other ARM boards.  
- * I've tested it using a Teensy 3.2 and a Teensy 4.0.
- * 
- * AVR boards (Arduino Uno, Mega, etc.) don't support I²C inside of interrupt
- * service routines, so there's no way to read the state of the MCP23017
- * inside of an ISR.  
- * The same goes for ESP32 and ESP8266, although there may be ways around
- * this by using alternative I²C drivers or by using FreeRTOS features.
- * 
- * Connections
- * -----------
- * 
- *   - SDA:  MCP23017 SDA
- *   - SCL:  MCP23017 SCL
- *   - 12:   MCP23017 INTA or INTB
- *   
- * Connect up to 8 encoders to the MCP23017's GPIO pins: 
- * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
- * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
- * Connect the "common" pins of the encoders to ground.  
- * The built-in pull-up resistors of the MCP23017 will be enabled.
- * 
- * Make sure that the reset and address pins are all configured correctly 
- * (reset to Vcc; A0, A1 and A2 to ground).
- * 
- * If you need more than one MCP23017 with encoders, you can connect their 
- * interrupt pins together. This does result in higher latency, because on 
- * average, half of the total number of MCP23017s have to be polled, which is 
- * relatively slow, and might lead to missed pulses when using a large number
- * of encoders.
- * 
- * Behavior
- * --------
- * 
- * When the position of one of the encoders changes, it is printed to the Serial
- * monitor.
- * 
- * The interrupt pin of the MCP23017 triggers a hardware interrupt on the
- * Arduino. This means that you don't have to manually poll the encoders all
- * the time.
- * 
- * Written by PieterP, 2020-04-06  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "MCP23017-Encoders-No-Interrupts.ino"
- * 
- * MCP23017-Encoders-No-Interrupts
- * ===============================
- *
- * This example demonstrates the use of MCP23017 I²C port expanders with rotary
- * encoders.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- *   - SDA:  MCP23017 SDA
- *   - SCL:  MCP23017 SCL
- *   - 12:   MCP23017 INTA or INTB
- *   
- * Connect up to 8 encoders to the MCP23017's GPIO pins: 
- * the first encoder connects to GPIO A0 and A1, the second encoder connects to 
- * GPIO A2 and A3, ..., the eighth encoder connects to GPIO B6 and B7.  
- * Connect the "common" pins of the encoders to ground.  
- * The built-in pull-up resistors of the MCP23017 will be enabled.
- * 
- * Make sure that the reset and address pins are all configured correctly 
- * (reset to Vcc; A0, A1 and A2 to ground).
- * 
- * If you need more than one MCP23017 with encoders, you can connect their 
- * interrupt pins together. This does result in higher latency, because on 
- * average, half of the total number of MCP23017s have to be polled, which is 
- * relatively slow, and might lead to missed pulses when using a large number
- * of encoders.
- * 
- * Behavior
- * --------
- * 
- * When the position of one of the encoders changes, it is printed to the Serial
- * monitor.
- * 
- * Cautions
- * --------
- * 
- * The interrupt pin of the MCP23017 doesn't trigger a hardware interrupt on the
- * Arduino. It's used only to determine whether the Arduino should read the GPIO
- * registers from the MCP23017.  
- * If the update function isn't called often enough, you will miss encoder 
- * pulses, and the position will be incorrect.  
- * It's very important to keep your main loop free from any code that blocks for
- * more than a couple of hundreds of microseconds.
- * 
- * Written by PieterP, 2020-04-06  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "3.MultiPurposeButton.ino"
- * 
- * 3.MultiPurposeButton
- * ====================
- *
- * This examples shows how to use the MultiPurposeButton class to detect 
- * different kinds of push button events.
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Connections
- * -----------
- * 
- * - 2: Momentary push button (other pin to ground)
- * 
- * The internal pull-up resistor will be enabled.
- * 
- * Behavior
- * --------
- * 
- * - Short presses, long presses, multiple presses, etc. are printed to the 
- *   Serial monitor.
- * 
- * Written by PieterP, 2022-05-07  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "Pin-Change-Interrupt-Encoders.ino"
- * 
- * Pin-Change-Interrupt-Encoders
- * =============================
- *
- * This example reads multiple encoders using pin change interrupts, on an 
- * Arduino Uno or Nano.
- * 
- * @boards AVR
- * 
- * The ATmega328P microcontroller only has two interrupt pins (2 and 3), so if
- * you want to use more than two interrupt-driven encoders, you'll either have 
- * to use a timer interrupt to continuously poll the encoders, or use the chip's
- * pin change interrupts. This example demonstrates the latter.
- *
- * @see @ref Timer-Interrupt-Encoders.ino
- *
- * Familiarity with [direct port manipulation](https://www.arduino.cc/en/Reference/PortManipulation)
- * is assumed.
- *
- * Connections
- * -----------
- *
- * Connect three encoders to the pins of port C as follows:
- * 
- *   - A0: pin A of encoder #0
- *   - A1: pin B of encoder #0
- *   - A2: pin A of encoder #1
- *   - A3: pin B of encoder #1
- *   - A4: pin A of encoder #2
- *   - A5: pin B of encoder #2
- *
- * Connect the common pins to ground, the internal pull-up resistors will be 
- * enabled.
- * 
- * Behavior
- * --------
- *
- * When the position of one of the encoders changes, it is printed to the Serial
- * monitor.
- *
- * Written by PieterP, 2021-08-11  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "Timer-Interrupt-Encoders.ino"
- * 
- * Timer-Interrupt-Encoders
- * ========================
- *
- * This example reads multiple encoders using a timer interrupt, on an 
- * Arduino Uno or Nano.
- * 
- * @boards AVR
- * 
- * The ATmega328P microcontroller only has two interrupt pins (2 and 3), so if
- * you want to use more than two interrupt-driven encoders, you'll either have 
- * to use a timer interrupt to continuously poll the encoders, or use the chip's
- * pin change interrupts. This example demonstrates the former.
- * 
- * @see @ref Pin-Change-Interrupt-Encoders.ino
- *
- * Familiarity with [direct port manipulation](https://www.arduino.cc/en/Reference/PortManipulation)
- * is assumed.
- *
- * Connections
- * -----------
- *
- * Connect three encoders to the pins of port C as follows:
- * 
- *    - A0: pin A of encoder #0
- *    - A1: pin B of encoder #0
- *    - A2: pin A of encoder #1
- *    - A3: pin B of encoder #1
- *    - A4: pin A of encoder #2
- *    - A5: pin B of encoder #2
- *
- * Connect the common pins to ground, the internal pull-up resistors will be 
- * enabled.
- * 
- * Behavior
- * --------
- *
- * When the position of one of the encoders changes, it is printed to the Serial
- * monitor.
- *
- * Written by PieterP, 2021-08-11  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "Quaternion.ino"
- * 
- * Quaternion
- * ==========
- *
- * Simple Quaternion test.
- *
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- *
- * Written by PieterP, 2020-03-24  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "ArraySort.ino"
- * 
- * ArraySort
- * =========
- *
- * Example of using the standard library algorithms.
- *
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- *
- * This sketch creates an array with an unordered sequence of 10 numbers.
- * It prints the array, and then creates a reverse view on the 6 elements in the 
- * middle of the array and sorts it.
- * The resulting array has the same elements in the 4 outermost places, but the
- * 6 elements in the middle have been sorted in reverse order.
- *
- * **Output**
- * ~~~
- * Before sorting: 3, 5, 9, 2, 1, 8, 6, 4, 7, 0
- *   Sorting            ├─────────────────┤      in ascending order
- * After sorting:  3, 5, 1, 2, 4, 6, 8, 9, 7, 0
- *   Sorting            ├─────────────────┤      in descending order
- * After sorting:  3, 5, 9, 8, 6, 4, 2, 1, 7, 0
- * ~~~
- * 
- * Written by PieterP, 2019-11-12
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "Complex.ino"
- * 
- * Complex
- * =======
- *
- * Example of using the standard library complex numbers.
- *
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- *
- * **Output**
- * ~~~
- * √(2i) = (1.00,1.00)
- * ~~~
- * 
- * Written by PieterP, 2019-11-14
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "CountPressedButtons.ino"
- * 
- * CountPressedButtons
- * ===================
- *
- * Example of using the standard library algorithms and the Button class.
- *
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * This sketch reads a number of push buttons or switches, and uses the standard
- * library algorithms to count how many of them are pressed.
- * 
- * The internal pull-up resistors are enabled and the switches are debounced.
- *
- * Written by PieterP, 2019-11-24  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "Numeric.ino"
- * 
- * Numeric
- * =======
- *
- * Example of using the standard library numeric functions.
- *
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- *
- * This sketch creates an incremental array using the iota function, then
- * computes the inner product of the vector with itself, and uses that to
- * calculate the norm of the vector.
- *
- * **Output**
- * ~~~
- * v      = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
- * 〈v, v〉 = 385
- * ‖v‖    = 19.6214160
- * ~~~
- * 
- * Written by PieterP, 2019-11-18  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
- * @example   "BlinkWithoutDelay-Timer.ino"
- * 
- * BlinkWithoutDelay-Timer
- * =======================
- *
- * This examples shows how use the Timer class to blink an LED every
- * second, in a non-blocking fashion (without using delay).
- * 
- * @boards  AVR, AVR USB, Nano Every, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Due, Teensy 3.x, ESP8266, ESP32
- * 
- * Behavior
- * --------
- * 
- * Blinks the built-in LED every second.
- * 
- * Written by PieterP, 2019-12-06  
- * https://github.com/tttapa/Arduino-Helpers
- */
-
-/**
  * @example   "VU-Meter-Bridge.ino"
  * 
  * VU-Meter-Bridge
@@ -3186,6 +3186,50 @@
  */
 
 /**
+ * @example   "Custom-MIDI-Output-Element-Bankable.ino"
+ * 
+ * Custom-MIDI-Output-Element-Bankable
+ * ===================================
+ * 
+ * This is an example that demonstrates how to extend the library using your own
+ * Bankable MIDI Output Elements. 
+ * The example declares a MIDI Output Element that sends MIDI Note events when a
+ * push button is pressed or released. It can be banked to change the MIDI 
+ * address. It's a simplified version of the @ref Bankable::NoteButton class.
+ * 
+ * To understand this example, you need to understand the @ref Bank.ino and the
+ * @ref Custom-MIDI-Output-Element.ino examples first.
+ *
+ * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32
+ * 
+ * Connections
+ * -----------
+ * 
+ * - 5: momentary push button (to ground) to send MIDI notes
+ * - 6: momentary push button (to ground) to select the next bank
+ * 
+ * The internal pull-up resistors for the buttons will be enabled automatically.
+ * 
+ * Behavior
+ * --------
+ * 
+ * - When the button on pin 5 is pressed, a MIDI Note On message is sent for
+ *   note C in the octave determined by the bank setting.
+ * - When the button on pin 5 is released, a MIDI Note Off message is sent for 
+ *   note C in the octave determined by the bank setting.
+ * - When the button on pin 6 is pressed, the bank setting is incremented.
+ * 
+ * Mapping
+ * -------
+ * 
+ * Select the Arduino as a custom MIDI controller in your DAW, and use the 
+ * MIDI learn option to assign the button to a function.
+ * 
+ * Written by PieterP, 2020-09-29  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
  * @example   "Custom-MIDI-Output-Element.ino"
  * 
  * Custom-MIDI-Output-Element
@@ -3335,50 +3379,6 @@
 */
 
 /**
- * @example   "Custom-MIDI-Output-Element-Bankable.ino"
- * 
- * Custom-MIDI-Output-Element-Bankable
- * ===================================
- * 
- * This is an example that demonstrates how to extend the library using your own
- * Bankable MIDI Output Elements. 
- * The example declares a MIDI Output Element that sends MIDI Note events when a
- * push button is pressed or released. It can be banked to change the MIDI 
- * address. It's a simplified version of the @ref Bankable::NoteButton class.
- * 
- * To understand this example, you need to understand the @ref Bank.ino and the
- * @ref Custom-MIDI-Output-Element.ino examples first.
- *
- * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32
- * 
- * Connections
- * -----------
- * 
- * - 5: momentary push button (to ground) to send MIDI notes
- * - 6: momentary push button (to ground) to select the next bank
- * 
- * The internal pull-up resistors for the buttons will be enabled automatically.
- * 
- * Behavior
- * --------
- * 
- * - When the button on pin 5 is pressed, a MIDI Note On message is sent for
- *   note C in the octave determined by the bank setting.
- * - When the button on pin 5 is released, a MIDI Note Off message is sent for 
- *   note C in the octave determined by the bank setting.
- * - When the button on pin 6 is pressed, the bank setting is incremented.
- * 
- * Mapping
- * -------
- * 
- * Select the Arduino as a custom MIDI controller in your DAW, and use the 
- * MIDI learn option to assign the button to a function.
- * 
- * Written by PieterP, 2020-09-29  
- * https://github.com/tttapa/Control-Surface
- */
-
-/**
  * @example   "Custom-USB-MIDI-Backend.ino"
  * 
  * Custom-USB-MIDI-Backend
@@ -3447,6 +3447,17 @@
  * =====================
  *
  * https://github.com/tttapa/Control-Surface/issues/66
+ */
+
+/**
+ * @example   "Note-ManyAddresses-Transposer.ino"
+ * 
+ * Note-ManyAddresses-Transposer
+ * =============================
+ *
+ * Combining a transposer and a bank to switch between different scales.
+ *
+ * @include Other/GitHub-issues/Note-ManyAddresses-Transposer/ManyAddressBankNoteButton.hpp
  */
 
 /**
@@ -3527,3 +3538,223 @@
  * @boards  AVR, AVR USB, Nano Every, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x, ESP32, ESP8266
  */
 
+/**
+ * @page examples Examples
+ * 
+ * @tableofcontents
+ * 
+ * # Getting started {#examples-getting-started}
+ * - @ref 1.First-Output.ino
+ *   (Multiplexed potentiometers that send MIDI Control Change messages)
+ * - @ref 2.First-Input.ino
+ *   (LEDs driven by a shift register that turn on/off when a MIDI Note On/Off message is received)
+ * 
+ * # MIDI interfaces {#examples-midi-interfaces}
+ * ## Interfaces, transports and routing {#examples-interfaces-transports-and-routing}
+ * - @ref MIDI_Pipes-Routing.ino
+ *   (Setting up automatic routes for MIDI messages between multiple MIDI interfaces, using @ref MIDI_Pipe%s)
+ * - @ref MIDI_Pipes-Filter.ino
+ *   (More complicated MIDI routing rules that also filter and modify MIDI messages that travel through a MIDI_Pipe)
+ * - @ref Serial-Interface.ino
+ *   (Sending and receiving MIDI messages over a serial port (e.g. for 5-pin DIN MIDI))
+ * - @ref BLEMIDI-Adapter.ino
+ *   (Sending and receiving MIDI messages over Bluetooth Low Energy (LE), and relaying them over Serial)
+ * - @ref USBMIDI-Adapter.ino
+ *   (Sending and receiving MIDI messages over USB, and relaying them over Serial)
+ * - @ref USBHostMIDI_Interface-Passthrough.ino
+ *   (Sending and receiving MIDI messages to and from USB MIDI devices connected to a Teensy's USB Host port, and relaying them over the USB Device port)
+ * - @ref AppleMIDI.ino
+ *   (Sending and receiving MIDI messages over the network (WiFi/Ethernet) using RTP-MIDI)
+ * - @ref Debug-MIDI-Interface.ino
+ *   (Printing and reading MIDI messages to/from the Serial monitor for debugging purposes)
+ * - @ref MIDI-Monitor.ino
+ *   (Turns the Arduino into a MIDI monitor by printing all messages it receives to the Serial monitor, and sending messages typed into the Serial monitor over MIDI)
+ * - @ref MIDI-Monitor-OLED.ino
+ *   (Prints all messages that are sent and received to a small OLED display)
+ * - @ref Dual-MIDI-Interface.ino
+ *   (Using multiple MIDI interfaces at the same time)
+ * 
+ * ## Sending and receiving MIDI messages {#examples-sending-and-receiving-midi-messages}
+ * - @ref MIDI-Input.ino
+ *   (Handling incoming MIDI messages using the @ref MIDI_Callbacks class)
+ * - @ref MIDI-Input-Fine-Grained.ino
+ *   (Handling incoming MIDI messages using the @ref FineGrainedMIDI_Callbacks class)
+ * - @ref MIDI-Input-Fine-Grained-All-Callbacks.ino
+ *   (Same as the previous, handles all possible message types)
+ * - @ref MIDI-Output.ino
+ *   (Sends MIDI Note On/Off message every second)
+ * - @ref Send-MIDI-Notes.ino
+ *   (Sends MIDI Note On/Off messages when a push button is pressed/released)
+ * - @ref Send-All-MIDI-Messages.ino
+ *   (Demonstrates how to send all possible MIDI message types)
+ * - @ref SysEx-Send-Receive.ino
+ *   (Sends and receives MIDI System Exclusive messages)
+ * 
+ * # MIDI output elements {#examples-midi-output-elements}
+ * ## Potentiometers & Faders {#examples-potentiometers-faders}
+ * - @ref Control-Change-Potentiometer.ino
+ *   (A single analog input from a potentiometer that sends MIDI Control Change messages)
+ * - @ref Multiple-Control-Change-Potentiometers.ino
+ *   (Multiple analog inputs)
+ * - @ref CCPotentiometer-Map.ino
+ *   (Applying a mapping function to the analog input to account for nonlinearities or calibrate the minimum and maximum values)
+ * - @ref Pitch-Bend-Potentiometer.ino
+ *   (A single analog input from a potentiometer that sends MIDI Pitch Bend messages (higher resolution than Control Change))
+ * 
+ * ## Buttons & Switches {#examples-buttons-switches}
+ * - @ref NoteButton.ino
+ *   (A single digital input from a momentary push button that sends MIDI Note On/Off messages)
+ * - @ref CCButton.ino
+ *   (A single digital input from a momentary push button that sends MIDI Control Change messages)
+ * - @ref NoteButtonMatrix.ino
+ *   (A scanning keyboard matrix for a grid of momentary push buttons that send MIDI Note On/Off messages)
+ * - @ref CCIncrementDecrementButtons.ino
+ *   (Two momentary push buttons that increment/decrement a value by sending relative MIDI Control Change messages)
+ * 
+ * ## Rotary Encoders {#examples-rotary-encoders}
+ * - @ref RotaryEncoder.ino
+ *   (A quadrature encoder that sends position changes using relative MIDI Control Change messages)
+ * - @ref AbsoluteRotaryEncoder.ino
+ *   (A quadrature encoder that sends its absolute position using MIDI Control Change messages)
+ * - @ref MCP23017-RotaryEncoder-No-Interrupts.ino
+ *   (Multiple quadrature encoders connected through a MCP23017 port expander that send position changes using relative MIDI Control Change messages)
+ * - @ref MCP23017-RotaryEncoder-Interrupts.ino
+ *   (Same as previous, but interrupt-driven (Teensy only))
+ * 
+ * ## Program Changers {#examples-program-changers}
+ * - @ref PCButton.ino
+ *   (A single digital input from a momentary push button that sends a MIDI Program Change message when pressed)
+ * - @ref Program-Changer.ino
+ *   (Multiple momentary push buttons (or any other selector) that sends MIDI Program Change messages)
+ * - @ref ManyAddressesPCButton.ino
+ *   (Multiple buttons that send MIDI Program Change messages, and the programs they send are arranged in multiple banks, allowing you to select many programs using a limited number of buttons)
+ * 
+ * ## Other {#examples-other}
+ * - @ref MIDI-Controller-Finished-Example.ino
+ *   (An example MIDI Controller that combines switches, potentiometers, rotary encoders and banks)
+ * 
+ * # MIDI input elements {#examples-midi-input-elements}
+ * ## LEDs {#examples-leds}
+ * - @ref 1.Note-LED.ino
+ *   (An LED that turns on when a MIDI Note On message for a specific note is received, and off when a Note Off message is received)
+ * - @ref 2.Note-Range-LEDs.ino
+ *   (Similar to the previous, but for multiple LEDs and a range of consecutive notes)
+ * - @ref 3.NoteLEDBar.ino
+ *   (An LED bar graph that displays the value of received MIDI Control Change messages)
+ * - @ref 4.VULEDs.ino
+ *   (An LED bar graph that displays a level meter based on Mackie Control Universal MIDI messages sent by a DAW)
+ * - @ref 5.Note-LED-PWM.ino
+ *   (An LED that changes brightness depending on the MIDI velocity value received)
+ * - @ref 6.MAX7219-NoteLED.ino
+ *   (Similar to @ref 1.Note-LED.ino, but using a MAX7219 8×8 LED driver)
+ * - @ref 9.Note-FastLED.ino
+ *   (Similar to @ref 1.Note-LED.ino, but for addressable LEDs using the FastLED library)
+ * - @ref 10.Note-FastLED-ColorMapper.ino
+ *   (Similar to previous, but customizing the colors and intensity based on the note number and the velocity)
+ * 
+ * ## Other {#examples-other}
+ * - @ref Pitch-Bend-Value.ino
+ *   (Keeps track of the value of incoming MIDI Pitch Bend messages)
+ * 
+ * # Banks & Selectors {#examples-banks-selectors}
+ * - @ref Bank.ino
+ *   (Using banks to control the volume of 8 tracks using only 2 physical potentiometers)
+ * - @ref Transposer.ino
+ *   (Using a transposer to change the pitch of some NoteButton%s using two push buttons)
+ * - @ref Custom-Selector-Callback.ino
+ *   (Changing the color of an RGB LED depending on the currently selected bank)
+ * - @ref Bankable-Smart-Control-Change-Potentiometer.ino
+ *   (Using potentiometers in banks can be tricky because they might send messages while cycling between banks, this issue is addressed by the @ref Bankable::CCSmartPotentiometer)
+ * 
+ * # Hardware and Extended Input/Output {#examples-hardware-and-extended-input-output}
+ * - @ref 1.FilteredAnalog.ino
+ *   (Filtering an analog input using a digital low-pass filter and hysteresis)
+ * - @ref 1.FilteredAnalog-Advanced.ino
+ *   (Similar to previous, with more advanced features and options)
+ * - @ref 2.Button.ino
+ *   (Debounce a switch or push button)
+ * - @ref 3.MultiPurposeButton.ino
+ *   (Detect long presses and double presses of a push button)
+ * - @ref 1.AnalogReadSerial.ino
+ *   (Printing the values of all channels of a multiplexer to the serial monitor)
+ * - @ref 2.DigitalReadSerial.ino
+ *   (Similar to previous, but for digital inputs)
+ * - @ref 3.FilteredAnalogReadSerial.ino
+ *   (Similar to @ref 1.AnalogReadSerial.ino, but filters the analog inputs)
+ * - @ref 1.SPI-Blink.ino
+ *   (Blink an LED that's driven by a shift register connected using SPI)
+ * - @ref 2.BitBang-Blink.ino
+ *   (Similar to previous, but using ordinary GPIO pins instead of SPI)
+ * - @ref 2.RGB-LED-Chaser.ino
+ *   (%Display some fancy patterns using a handful of RGB LEDs driven by shift registers)
+ * - @ref 1.MAX7219-Blink.ino
+ *   (Blink an LED that's driven by a MAX7219 8×8 LED driver)
+ * - @ref MCP23017.ino
+ *   (Read input from a push button and turn on/off an LED using a MCP23017 I²C port expander)
+ * - @ref Toggle-LEDs.ino
+ *   (Read digital inputs from 8 push buttons connected through a multiplexer, and use them to toggle 8 LEDs on/off, using a shift register to drive them)
+ * - @ref MCP23017-Encoders-No-Interrupts.ino
+ *   (Read multiple quadrature encoders using a MCP23017 port expander)
+ * - @ref MCP23017-Encoders-Interrupts.ino
+ *   (Same as previous, but interrupt-driven (Teensy only))
+ * - @ref Pin-Change-Interrupt-Encoders.ino
+ *   (Read multiple quadrature encoders using pin change interrupts instead of polling (AVR only))
+ * - @ref Timer-Interrupt-Encoders.ino
+ *   (Use a timer interrupt to poll multiple quadrature encoders at a consistent rate (AVR only))
+ * 
+ * # Displays {#examples-displays}
+ * - @ref MCU-OLED-SSD1306.ino
+ *   (Demonstrates the use of DisplayElement%s to display information from the DAW on a small OLED display)
+ * - @ref MCU-OLED-SSD1306-x2.ino
+ *   (Similar to previous, with two OLED displays instead of one)
+ * 
+ * # Board-specific examples {#examples-board-specific-examples}
+ * ## Teensy {#examples-teensy}
+ * - @ref 1.Volume-Controlled-USB-DAC.ino
+ *   (USB audio interface with a potentiometer to control the volume)
+ * - @ref 2.VU-Meter-OLED-USB-DAC.ino
+ *   (USB audio interface with a VU meter displayed on a small OLED display)
+ * 
+ * ## ESP32 {#examples-esp32}
+ * - @ref VU-Meter-Bridge.ino
+ *   (Mackie Control Universal control surface with an OLED display for real-time level meters and a MIDI over BLE interface)
+ * 
+ * # Extending the library {#examples-extending-the-library}
+ * - @ref Custom-USB-MIDI-Backend.ino
+ *   (Adding support for alternative MIDI over USB libraries (host and device))
+ * - @ref Custom-MIDI-Sender.ino
+ *   (Customize the type of messages sent by the provided MIDI output elements)
+ * - @ref Custom-MIDI-Output-Element.ino
+ *   (Adding your own MIDI output elements, recreating and then customizing the @ref NoteButton class)
+ * - @ref Custom-MIDI-Output-Element-Bankable.ino
+ *   (Same as previous, but for the @ref Bankable::NoteButton class)
+ * - @ref Custom-Note-LED-Input-Element-Callback.ino
+ *   (Adding your own MIDI input elements, recreating and then customizing the @ref NoteLED class)
+ * - @ref Custom-Note-LED-Input-Element-Callback-FastLED.ino
+ *   (Similar to previous, but with support for FastLED addressable LED strips)
+ * 
+ * # Other examples {#examples-other-examples}
+ * - @ref Debug.ino
+ *   (How use the debug macros for printing different kinds of debugging information)
+ * - @ref BlinkWithoutDelay-Timer.ino
+ *   (Non-blocking delay using the Timer class)
+ * - @ref Mackie-Control-Universal-Reverse-Engineering.ino
+ *   (Translates incoming MIDI messages to the corresponding Mackie Control Universal names and prints them to the Serial monitor)
+ * - @ref MIDI-Input-Callback.ino
+ *   (Uses the MIDI input callbacks of the Control_Surface_ class to intercept MIDI input)
+ * - @ref Keyboard-Matrix-BCD.ino
+ * - @ref Bank-Button-Matrix.ino
+ * - @ref Encoder-Selector-Bank.ino
+ * - @ref Note-ManyAddresses-Transposer.ino
+ * - @ref One-Pot-Both-PB-and-CC.ino
+ * - @ref MIDI_controller-97.ino
+ * - @ref Transpose-Octave-NC-Button.ino
+ * - @ref Blink-Frequency-Buttons.ino
+ * - @ref Quaternion.ino
+ * - @ref ArraySort.ino
+ * - @ref Complex.ino
+ * - @ref CountPressedButtons.ino
+ * - @ref Numeric.ino
+ * - @ref FilteredAnalog.ino
+ * 
+ */

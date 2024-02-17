@@ -7,6 +7,7 @@ BEGIN_CS_NAMESPACE
 
 /**
  * @brief   An interface for elements that draw to a display.
+ * @ingroup DisplayElements
  */
 class DisplayElement : public DoublyLinkable<DisplayElement> {
   protected:
@@ -21,7 +22,8 @@ class DisplayElement : public DoublyLinkable<DisplayElement> {
         // makes it easier to iterate over the displays and draw to them.
         elements.insertSorted(
             this, [](const DisplayElement &lhs, const DisplayElement &rhs) {
-                return &lhs.getDisplay() < &rhs.getDisplay();
+                return reinterpret_cast<uintptr_t>(&lhs.getDisplay()) <
+                       reinterpret_cast<uintptr_t>(&rhs.getDisplay());
             });
     }
 

@@ -7,7 +7,10 @@
 BEGIN_CS_NAMESPACE
 
 namespace MCU {
-
+/**
+ * @brief Displays the MCU time code display.
+ * @ingroup DisplayElements
+ */
 class TimeDisplayDisplay : public DisplayElement {
   public:
     TimeDisplayDisplay(DisplayInterface &display, TimeDisplay &timedisplay,

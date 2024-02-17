@@ -15,8 +15,8 @@ can be especially handy.
 Control Surface supports sending and receiving MIDI messages in many different 
 ways: over a standard 5-pin DIN MIDI cable, over USB, over Bluetooth, over WiFi
 ...  
-Each of those methods is available as a “MIDI Interface” class in the code, you 
-can find a full overview in the @ref MIDIInterfaces module.
+Each of those methods of transport is available as a “MIDI Interface” class in
+the code, you can find a full overview in the @ref MIDIInterfaces module.
 
 The interfaces you're most likely to use are:
 - @ref USBMIDI_Interface : the Arduino will be recognized as a MIDI USB device 
@@ -61,7 +61,7 @@ messages as they travel between interfaces.
 In the remainder of this tutorial, one section will be devoted to each of these
 functions.
 
-### Instantiating a MIDI interface {#midi_md-instantiate-a-midi-interface}
+### Instantiating, initializing and updating a MIDI interface {#midi_md-instantiate-a-midi-interface}
 
 The following code snippet demonstrates how to instantiate, initialize, and 
 update a MIDI over USB interface. By “instantiate”, we mean that a variable is 
@@ -595,6 +595,20 @@ the MIDI interface (`midi_usb`) will send it over the MIDI input pipe
 (`pipe_rx`) to the `Control_Surface` code, which will then check whether it's a
 MIDI Note On/Off message that matches the address of the LED, and turn on/off
 the LED accordingly.
+
+If you have multiple MIDI interfaces, you should explicitly set the default
+interface in your `setup` function before calling `Control_Surface.begin()`,
+using the @ref MIDI_Interface::setAsDefault() function:
+
+```cpp
+USBMIDI_Interface midi_usb;
+HardwareSerialMIDI_Interface midi_din {Serial1};
+
+void setup() {
+    midi_usb.setAsDefault();
+    Control_Surface.begin();
+}
+```
 
 ### Manual routing {#midi_md-manual-routing}
 

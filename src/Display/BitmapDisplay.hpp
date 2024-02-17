@@ -12,6 +12,7 @@ BEGIN_CS_NAMESPACE
 /// that evaluates to true) when the bitmap has to be displayed, as wel as a
 /// pair of `getDirty()`/`clearDirty()` methods to determine whether the display
 /// has to be updated.
+/// @ingroup DisplayElements
 template <class Value_t = Interfaces::IValue &>
 class BitmapDisplay : public DisplayElement {
   public:

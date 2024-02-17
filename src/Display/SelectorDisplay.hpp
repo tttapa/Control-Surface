@@ -8,6 +8,7 @@ BEGIN_CS_NAMESPACE
 
 /**
  * @brief   A class for displaying the setting of a Selector object.
+ * @ingroup DisplayElements
  */
 class SelectorDisplay : public DisplayElement {
   public:

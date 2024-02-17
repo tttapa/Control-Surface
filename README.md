@@ -37,7 +37,7 @@ treat them as if they were ordinary GPIO pins.
 
 ## Example usage
 
-An extensive list of examples can be found [in the documentation](https://tttapa.github.io/Control-Surface-doc/Doxygen/examples.html).
+An extensive list of examples can be found [in the documentation](https://tttapa.github.io/Control-Surface-doc/Doxygen/d4/de9/examples.html).
 Below are a handful of simple examples that give an idea of how the Control
 Surface library can be used.
 
@@ -143,21 +143,19 @@ for sending and receiving MIDI messages.
 
 ## Documentation
 
-The automatically generated Doxygen documentation for this library can be found 
-here:  
+Detailed documentation for this library can be found here:  
 [**Documentation**](https://tttapa.github.io/Control-Surface-doc/Doxygen/index.html)  
-Test coverage information can be found here:  
-[**Code Coverage**](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)  
 Arduino examples can be found here:  
-[**Examples**](https://tttapa.github.io/Control-Surface-doc/Doxygen/examples.html)
+[**Examples**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d4/de9/examples.html)
 
-Have a look at the [**Topics**](https://tttapa.github.io/Control-Surface-doc/Doxygen/topics.html) page
-for an overview of the features of the library, it's the best entry point for 
-the documentation.
+The [**User Manual**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/da5/manual.html)
+is the best entry point to the documentation. To get a complete overview of all
+features of the Control Surface library, have a look at the following section
+and at the
+[**Topics**](https://tttapa.github.io/Control-Surface-doc/Doxygen/topics.html) page.
 
 You can find an answer to some frequently asked questions on the 
-[**FAQ**](https://tttapa.github.io/Control-Surface-doc/Doxygen/da/dc1/FAQ.html)
-page.
+[**FAQ**](https://tttapa.github.io/Control-Surface-doc/Doxygen/da/dc1/FAQ.html) page.
 
 ## Feature overview
 
@@ -288,9 +286,19 @@ documentation page for a table with supported features per board.
 
 ### 2.x
 
-- ([fae1933](https://github.com/tttapa/Control-Surface/commit/3ae51946d57e27f0e37d001bb8e0ce418fae1933))  
+- ([b0f4d63](https://github.com/tttapa/Control-Surface/commit/b0f4d636838b12907bea6cf989d20760a8a998bf))  
+   Replace `MIDI_Notes::X(n)` by `MIDI_Notes::X[n]` to avoid issues with the Arduino `F_(...)` macro.
+- ([7b0eee1](https://github.com/tttapa/Control-Surface/commit/7b0eee16f15d730f0d68f6e38e6a60c634d861ad))  
+   Speed up compilation by removing many source files that were only used for testing.
+- ([07b8729](https://github.com/tttapa/Control-Surface/commit/07b8729a29f290b95bc0e68af188a19e829db749))  
+   Improved Mbed OS USB MIDI implementation.
+- ([d7a4e69](https://github.com/tttapa/Control-Surface/commit/d7a4e69c4f7a098fcd932f33f01ffc7870497e64))  
+   Added support for `BluetoothMIDI_Interface` on the Raspberry Pi Pico W.
+- ([196b5fc](https://github.com/tttapa/Control-Surface/commit/196b5fce12b97eaa56c5ad0c45c1a940943f7941))  
+   Added `ArduinoBLE` backend for `BluetoothMIDI_Interface`.
+- ([d4d7435](https://github.com/tttapa/Control-Surface/commit/d4d7435181986e75fd0319a1df184a7f0c182e90))  
    Completely refactored `BluetoothMIDI_Interface`, with support for the NimBLE and ArduinoBLE backends.
-- ([ba7f42e](https://github.com/tttapa/Control-Surface/commit/9c4cdd452990c470ee429b3121bdeb178ba7f42e))  
+- ([9c4cdd4](https://github.com/tttapa/Control-Surface/commit/9c4cdd452990c470ee429b3121bdeb178ba7f42e))  
    More upper case constants and enumerators have been deprecated. For example,
    `ControlChange` should be used instead of `CONTROL_CHANGE`. If you continue
    using the old versions, you will get a compiler warning. These old versions
