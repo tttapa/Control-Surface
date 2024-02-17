@@ -287,7 +287,7 @@ documentation page for a table with supported features per board.
 ### 2.x
 
 - ([b0f4d63](https://github.com/tttapa/Control-Surface/commit/b0f4d636838b12907bea6cf989d20760a8a998bf))  
-   Replace `MIDI_Notes::X(n)` by `MIDI_Notes::X[n]` to avoid issues with the Arduino `F_(...)` macro.
+   Replace `MIDI_Notes::X(n)` by `MIDI_Notes::X[n]` to avoid issues with the Arduino `F(...)` macro.
 - ([7b0eee1](https://github.com/tttapa/Control-Surface/commit/7b0eee16f15d730f0d68f6e38e6a60c634d861ad))  
    Speed up compilation by removing many source files that were only used for testing.
 - ([07b8729](https://github.com/tttapa/Control-Surface/commit/07b8729a29f290b95bc0e68af188a19e829db749))  
