@@ -228,16 +228,17 @@ for root, dirs, files in os.walk(exampledir):
                     print('\t       → "' + str(Path(root) / file) + '"')
 
 
-def add_page(title: str, groups, level=0):
+def add_page(title: str, groups, prefix="", level=0):
     output = ""
     if level > 0:
-        sanitized = re.sub("[^a-z0-9]", "-", title.lower())
+        prefix += "-" + title
+        sanitized = re.sub("[^a-z0-9]", "-", prefix.lower())
         sanitized = re.sub("(-+)", "-", sanitized)
         sanitized = re.sub("-+$|^-+", "", sanitized)
         output += f" * {'#' * level} {title} {{#examples-{sanitized}}}\n"
     if isinstance(groups, dict):
         for title, subgroups in groups.items():
-            output += add_page(title, subgroups, level + 1)
+            output += add_page(title, subgroups, prefix, level + 1)
     else:
         for example, descr in groups:
             output += " * - @ref " + example + ".ino\n"

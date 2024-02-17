@@ -3550,7 +3550,7 @@
  *   (LEDs driven by a shift register that turn on/off when a MIDI Note On/Off message is received)
  * 
  * # MIDI interfaces {#examples-midi-interfaces}
- * ## Interfaces, transports and routing {#examples-interfaces-transports-and-routing}
+ * ## Interfaces, transports and routing {#examples-midi-interfaces-interfaces-transports-and-routing}
  * - @ref MIDI_Pipes-Routing.ino
  *   (Setting up automatic routes for MIDI messages between multiple MIDI interfaces, using @ref MIDI_Pipe%s)
  * - @ref MIDI_Pipes-Filter.ino
@@ -3574,7 +3574,7 @@
  * - @ref Dual-MIDI-Interface.ino
  *   (Using multiple MIDI interfaces at the same time)
  * 
- * ## Sending and receiving MIDI messages {#examples-sending-and-receiving-midi-messages}
+ * ## Sending and receiving MIDI messages {#examples-midi-interfaces-sending-and-receiving-midi-messages}
  * - @ref MIDI-Input.ino
  *   (Handling incoming MIDI messages using the @ref MIDI_Callbacks class)
  * - @ref MIDI-Input-Fine-Grained.ino
@@ -3591,7 +3591,7 @@
  *   (Sends and receives MIDI System Exclusive messages)
  * 
  * # MIDI output elements {#examples-midi-output-elements}
- * ## Potentiometers & Faders {#examples-potentiometers-faders}
+ * ## Potentiometers & Faders {#examples-midi-output-elements-potentiometers-faders}
  * - @ref Control-Change-Potentiometer.ino
  *   (A single analog input from a potentiometer that sends MIDI Control Change messages)
  * - @ref Multiple-Control-Change-Potentiometers.ino
@@ -3601,7 +3601,7 @@
  * - @ref Pitch-Bend-Potentiometer.ino
  *   (A single analog input from a potentiometer that sends MIDI Pitch Bend messages (higher resolution than Control Change))
  * 
- * ## Buttons & Switches {#examples-buttons-switches}
+ * ## Buttons & Switches {#examples-midi-output-elements-buttons-switches}
  * - @ref NoteButton.ino
  *   (A single digital input from a momentary push button that sends MIDI Note On/Off messages)
  * - @ref CCButton.ino
@@ -3611,7 +3611,7 @@
  * - @ref CCIncrementDecrementButtons.ino
  *   (Two momentary push buttons that increment/decrement a value by sending relative MIDI Control Change messages)
  * 
- * ## Rotary Encoders {#examples-rotary-encoders}
+ * ## Rotary Encoders {#examples-midi-output-elements-rotary-encoders}
  * - @ref RotaryEncoder.ino
  *   (A quadrature encoder that sends position changes using relative MIDI Control Change messages)
  * - @ref AbsoluteRotaryEncoder.ino
@@ -3621,7 +3621,7 @@
  * - @ref MCP23017-RotaryEncoder-Interrupts.ino
  *   (Same as previous, but interrupt-driven (Teensy only))
  * 
- * ## Program Changers {#examples-program-changers}
+ * ## Program Changers {#examples-midi-output-elements-program-changers}
  * - @ref PCButton.ino
  *   (A single digital input from a momentary push button that sends a MIDI Program Change message when pressed)
  * - @ref Program-Changer.ino
@@ -3629,12 +3629,12 @@
  * - @ref ManyAddressesPCButton.ino
  *   (Multiple buttons that send MIDI Program Change messages, and the programs they send are arranged in multiple banks, allowing you to select many programs using a limited number of buttons)
  * 
- * ## Other {#examples-other}
+ * ## Other {#examples-midi-output-elements-other}
  * - @ref MIDI-Controller-Finished-Example.ino
  *   (An example MIDI Controller that combines switches, potentiometers, rotary encoders and banks)
  * 
  * # MIDI input elements {#examples-midi-input-elements}
- * ## LEDs {#examples-leds}
+ * ## LEDs {#examples-midi-input-elements-leds}
  * - @ref 1.Note-LED.ino
  *   (An LED that turns on when a MIDI Note On message for a specific note is received, and off when a Note Off message is received)
  * - @ref 2.Note-Range-LEDs.ino
@@ -3652,7 +3652,7 @@
  * - @ref 10.Note-FastLED-ColorMapper.ino
  *   (Similar to previous, but customizing the colors and intensity based on the note number and the velocity)
  * 
- * ## Other {#examples-other}
+ * ## Other {#examples-midi-input-elements-other}
  * - @ref Pitch-Bend-Value.ino
  *   (Keeps track of the value of incoming MIDI Pitch Bend messages)
  * 
@@ -3709,13 +3709,13 @@
  *   (Similar to previous, with two OLED displays instead of one)
  * 
  * # Board-specific examples {#examples-board-specific-examples}
- * ## Teensy {#examples-teensy}
+ * ## Teensy {#examples-board-specific-examples-teensy}
  * - @ref 1.Volume-Controlled-USB-DAC.ino
  *   (USB audio interface with a potentiometer to control the volume)
  * - @ref 2.VU-Meter-OLED-USB-DAC.ino
  *   (USB audio interface with a VU meter displayed on a small OLED display)
  * 
- * ## ESP32 {#examples-esp32}
+ * ## ESP32 {#examples-board-specific-examples-esp32}
  * - @ref VU-Meter-Bridge.ino
  *   (Mackie Control Universal control surface with an OLED display for real-time level meters and a MIDI over BLE interface)
  * 
