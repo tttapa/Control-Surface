@@ -154,7 +154,7 @@ IncrementSelector<4> selector {
 MyNoteButton button {
   {bank, BankType::ChangeAddress}, // bank changes the note number (address)
   5,                               // Push button on pin 5
-  {MIDI_Notes::C(2), Channel_1},   // Base address: Note C2 on MIDI channel 1
+  {MIDI_Notes::C[2], Channel_1},   // Base address: Note C2 on MIDI channel 1
   0x7F,                            // Maximum velocity
 };
 

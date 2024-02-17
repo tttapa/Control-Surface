@@ -47,7 +47,7 @@ void setup() {
     ;
 
   { // Channel voice messages
-    MIDIAddress note = {MIDI_Notes::C(4), Channel_6};
+    MIDIAddress note = {MIDI_Notes::C[4], Channel_6};
     uint8_t velocity = 127;
     midi.sendNoteOff(note, velocity);
     midi.sendNoteOn(note, velocity);

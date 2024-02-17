@@ -53,7 +53,7 @@ struct RainbowColorMapper {
 
 NoteRangeFastLED<leds.length, RainbowColorMapper> midiled {
   leds,
-  MIDI_Notes::C(4),
+  MIDI_Notes::C[4],
 };
 
 void setup() {

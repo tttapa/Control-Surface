@@ -16,7 +16,7 @@ IncrementSelector<2> selector {transposer, 2};
 Bankable::NoteButton notebutton {
   transposer,       // bank/transposer
   3,                // pin
-  MIDI_Notes::C(4), // address/note
+  MIDI_Notes::C[4], // address/note
 };
 
 void setup() {

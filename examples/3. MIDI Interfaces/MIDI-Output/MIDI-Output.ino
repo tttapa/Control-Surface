@@ -34,7 +34,7 @@ void setup() {
 }
 
 // MIDI note number, channel, and velocity to use
-const MIDIAddress address {MIDI_Notes::C(4), Channel_1};
+const MIDIAddress address {MIDI_Notes::C[4], Channel_1};
 const uint8_t velocity = 0x7F;
 
 void loop() {

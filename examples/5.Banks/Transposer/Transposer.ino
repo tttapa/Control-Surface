@@ -52,10 +52,10 @@ IncrementDecrementSelector<transposer.getNumberOfBanks()> selector {
 
 // Instantiate an array of NoteButton objects
 Bankable::NoteButton buttons[] {
-  {transposer, 2, MIDI_Notes::C(4)}, {transposer, 3, MIDI_Notes::D(4)},
-  {transposer, 4, MIDI_Notes::E(4)}, {transposer, 5, MIDI_Notes::F_(4)},
-  {transposer, 6, MIDI_Notes::G(4)}, {transposer, 7, MIDI_Notes::A(4)},
-  {transposer, 8, MIDI_Notes::B(4)}, {transposer, 9, MIDI_Notes::C(5)},
+  {transposer, 2, MIDI_Notes::C[4]}, {transposer, 3, MIDI_Notes::D[4]},
+  {transposer, 4, MIDI_Notes::E[4]}, {transposer, 5, MIDI_Notes::F[4]},
+  {transposer, 6, MIDI_Notes::G[4]}, {transposer, 7, MIDI_Notes::A[4]},
+  {transposer, 8, MIDI_Notes::B[4]}, {transposer, 9, MIDI_Notes::C[5]},
 };
 
 void setup() {

@@ -100,7 +100,7 @@ received:
 #include <Control_Surface.h>
 
 USBMIDI_Interface midi;
-NoteLED led { LED_BUILTIN, MIDI_Notes::C(4) };
+NoteLED led { LED_BUILTIN, MIDI_Notes::C[4] };
 
 void setup() { Control_Surface.begin(); }
 void loop() { Control_Surface.loop(); }

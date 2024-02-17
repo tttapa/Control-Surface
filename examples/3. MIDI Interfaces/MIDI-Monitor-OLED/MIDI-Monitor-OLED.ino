@@ -188,7 +188,7 @@ OLEDDebugMIDI_Output midi_disp_out {"\x1b"}; // prefix="←"
 MIDI_PipeFactory<2> pipes;
 
 // MIDI element to send messages for testing
-NoteButton button {5, MIDI_Notes::C(4)};
+NoteButton button {5, MIDI_Notes::C[4]};
 
 void setup() {
   init_display();

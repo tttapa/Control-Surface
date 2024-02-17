@@ -156,7 +156,7 @@ void setup() {
  
 // Specify the MIDI note number to trigger, and the velocity with which to 
 // trigger it
-const MIDIAddress note = MIDI_Notes::C(4); // C(4) is middle C
+const MIDIAddress note = MIDI_Notes::C[4]; // C4 is middle C
 const uint8_t velocity = 127;              // 127 is maximum velocity
  
 void loop() {
@@ -179,7 +179,7 @@ interface are exactly the same.
 The second thing you'll notice are the two constants, `note` and `velocity`: 
 these define the MIDI note number and the velocity (how hard the key is struck)
 to be used when sending the MIDI messages later.  
-The function `MIDI_Notes::C(4)` gives you the note C in the fourth octave, or 
+The expression `MIDI_Notes::C[4]` gives you the note C in the fourth octave, or 
 middle C. The velocity is a value between 1 and 127, with higher values being
 louder and harder.
 
@@ -259,17 +259,9 @@ For entering MIDI note numbers, you can use the note names in the
 @ref MIDI_Notes namespace:
 ~~~cpp
 // MIDI Note middle C (C in the fourth octave) on MIDI Channel 16:
-MIDIAddress myAddress = {MIDI_Notes::C(4), Channel_16};
+MIDIAddress myAddress = {MIDI_Notes::C[4], Channel_16};
 ~~~
 
-For reasons explained [here](@ref faq-midi-note-f), the note F is an exception,
-you have to add a trailing underscore to avoid conflicts with Arduino's `F(...)`
-macro:
-~~~cpp
-// MIDI Note F in the fourth octave on MIDI Channel 16:
-MIDIAddress myAddress = {MIDI_Notes::F_(4), Channel_16};
-//          note the underscore here  ^
-~~~
 If you look at the full list of note names in the @ref MIDI_Notes namespace, 
 you'll see that the sharps are missing: you can simply use the flats instead 
 (e.g. instead of using G♯, you can use A♭).
@@ -511,7 +503,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
         // Check if it's a note message:
         bool note_msg = type == msg.NOTE_ON || type == msg.NOTE_OFF;
         // Check if it's the specific note and channel we're looking for
-        bool our_note = channel == Channel_1 && note == MIDI_Notes::C(4);
+        bool our_note = channel == Channel_1 && note == MIDI_Notes::C[4];
         // If both conditions are satisfies, print the message
         if (note_msg && our_note)
             Serial << type << " middle C on Channel 1 with velocity "
@@ -542,7 +534,7 @@ struct MyMIDI_Callbacks : MIDI_Callbacks {
         // Check if it's a note message:
         bool note_msg = type == msg.NOTE_ON || type == msg.NOTE_OFF;
         // Define the address we're interested in
-        const MIDIAddress our_special_note = {MIDI_Notes::C(4), Channel_1};
+        const MIDIAddress our_special_note = {MIDI_Notes::C[4], Channel_1};
         // If it's a note message that matches our specific address, print it
         if (note_msg && msg.getAddress() == our_special_note)
             Serial << type << " middle C on Channel 1 with velocity "
@@ -571,8 +563,8 @@ Let's start with a very simple example:
 // Instantiate a MIDI over USB interface with the name `midi_usb`
 USBMIDI_Interface midi_usb;
 
-NoteButton button {2, MIDI_Notes::C(4)};
-NoteLED led {13, MIDI_Notes::C(4)};
+NoteButton button {2, MIDI_Notes::C[4]};
+NoteLED led {13, MIDI_Notes::C[4]};
 
 void setup() {
     // Initialize everything, including MIDI interfaces and default routes
@@ -617,8 +609,8 @@ USBMIDI_Interface midi_usb;
 // Instantiate the two pipes to connect the interface to Control_Surface
 MIDI_Pipe pipe_tx, pipe_rx;
 
-NoteButton button {2, MIDI_Notes::C(4)};
-NoteLED led {13, MIDI_Notes::C(4)};
+NoteButton button {2, MIDI_Notes::C[4]};
+NoteLED led {13, MIDI_Notes::C[4]};
 
 void setup() {
     // Manually route MIDI output from Control_Surface to the MIDI interface
@@ -671,8 +663,8 @@ USBMIDI_Interface midi_usb;
 // Instantiate the pipe to connect the interface to Control_Surface
 BidirectionalMIDI_Pipe pipe_txrx;
 
-NoteButton button {2, MIDI_Notes::C(4)};
-NoteLED led {13, MIDI_Notes::C(4)};
+NoteButton button {2, MIDI_Notes::C[4]};
+NoteLED led {13, MIDI_Notes::C[4]};
 
 void setup() {
     // Manually route MIDI output from Control_Surface to the MIDI interface,
@@ -713,8 +705,8 @@ HardwareSerialMIDI_Interface midi_ser = Serial1;
 // Instantiate the three pipes to connect the interfaces to Control_Surface
 MIDI_Pipe pipe_tx_u, pipe_rx_u, pipe_tx_s;
 
-NoteButton button {2, MIDI_Notes::C(4)};
-NoteLED led {13, MIDI_Notes::C(4)};
+NoteButton button {2, MIDI_Notes::C[4]};
+NoteLED led {13, MIDI_Notes::C[4]};
 
 void setup() {
     // Manually route MIDI output from Control_Surface to the USB MIDI interface
@@ -750,8 +742,8 @@ HardwareSerialMIDI_Interface midi_ser = Serial1;
 // Instantiate a factory that can produce three pipes
 MIDI_PipeFactory<3> pipes;
 
-NoteButton button {2, MIDI_Notes::C(4)};
-NoteLED led {13, MIDI_Notes::C(4)};
+NoteButton button {2, MIDI_Notes::C[4]};
+NoteLED led {13, MIDI_Notes::C[4]};
 
 void setup() {
     // Manually route MIDI output from Control_Surface to the USB MIDI interface
@@ -859,8 +851,8 @@ USBDebugMIDI_Output midimon { 115200 };
 MIDI_Pipe mpipe;
 
 // You can add normal Control Surface MIDI elements:
-NoteButton btn {  2, MIDI_Notes::C(4) };
-NoteLED    led { 13, MIDI_Notes::C(4) };
+NoteButton btn {  2, MIDI_Notes::C[4] };
+NoteLED    led { 13, MIDI_Notes::C[4] };
 
 void setup() {
     midi.setAsDefault(); // Make this the primary interface.

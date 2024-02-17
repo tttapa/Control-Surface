@@ -349,7 +349,7 @@ function in the @ref MIDI_Notes namespace,
 or you can just use a number.
 
 ```cpp
-NoteLED noteLed { 13, {MIDI_Notes::C(4), Channel_1} };  // C4 = middle C
+NoteLED noteLed { 13, {MIDI_Notes::C[4], Channel_1} };  // C4 = middle C
 ```
 
 In our case, we don't want a single LED, we want eight. It's much easier to 
@@ -362,14 +362,14 @@ default channel, `Channel_1`.
 
 ```cpp
 NoteLED leds[] {
-  {sreg.pin(0), MIDI_Notes::C(4)},
-  {sreg.pin(1), MIDI_Notes::D(4)},
-  {sreg.pin(2), MIDI_Notes::E(4)},
-  {sreg.pin(3), MIDI_Notes::F_(4)}, // F is an exception :(
-  {sreg.pin(4), MIDI_Notes::G(4)},
-  {sreg.pin(5), MIDI_Notes::A(4)},
-  {sreg.pin(6), MIDI_Notes::B(4)},
-  {sreg.pin(7), MIDI_Notes::C(5)},
+  {sreg.pin(0), MIDI_Notes::C[4]},
+  {sreg.pin(1), MIDI_Notes::D[4]},
+  {sreg.pin(2), MIDI_Notes::E[4]},
+  {sreg.pin(3), MIDI_Notes::F[4]},
+  {sreg.pin(4), MIDI_Notes::G[4]},
+  {sreg.pin(5), MIDI_Notes::A[4]},
+  {sreg.pin(6), MIDI_Notes::B[4]},
+  {sreg.pin(7), MIDI_Notes::C[5]},
 };
 ```
 
@@ -416,14 +416,14 @@ SPIShiftRegisterOut<8> sreg {
 // Create an array of LEDs that listen to MIDI Note messages, turning on and off
 // the LEDs connected to the eight output pins of the shift register
 NoteLED leds[] {
-  {sreg.pin(0), MIDI_Notes::C(4)},  // LED pin, address (note number, channel, cable)
-  {sreg.pin(1), MIDI_Notes::D(4)},  //
-  {sreg.pin(2), MIDI_Notes::E(4)},  //
-  {sreg.pin(3), MIDI_Notes::F_(4)}, // F is an exception :(
-  {sreg.pin(4), MIDI_Notes::G(4)},  //
-  {sreg.pin(5), MIDI_Notes::A(4)},  //
-  {sreg.pin(6), MIDI_Notes::B(4)},  //
-  {sreg.pin(7), MIDI_Notes::C(5)},  //
+  {sreg.pin(0), MIDI_Notes::C[4]},  // LED pin, address (note number, channel, cable)
+  {sreg.pin(1), MIDI_Notes::D[4]},  //
+  {sreg.pin(2), MIDI_Notes::E[4]},  //
+  {sreg.pin(3), MIDI_Notes::F[4]},  //
+  {sreg.pin(4), MIDI_Notes::G[4]},  //
+  {sreg.pin(5), MIDI_Notes::A[4]},  //
+  {sreg.pin(6), MIDI_Notes::B[4]},  //
+  {sreg.pin(7), MIDI_Notes::C[5]},  //
 };
 
 // Initialize the Control Surface
@@ -457,8 +457,8 @@ before initializing Control Surface. For example:
  
 // Oops! We forgot to instantiate a MIDI interface!
  
-NoteButton button {2, MIDI_Notes::C(4)};
-NoteLED led {13, MIDI_Notes::C(4)};
+NoteButton button {2, MIDI_Notes::C[4]};
+NoteLED led {13, MIDI_Notes::C[4]};
  
 void setup() {
 #ifdef DEBUG_OUT

@@ -53,7 +53,7 @@ SPIShiftRegisterOut<8> sreg {
 
 // Create a range of LEDs that listens for MIDI Note messages, turning on and off
 // the LEDs connected to the eight output pins of the shift register
-NoteRangeLEDs<8> leds {sreg.pins(), MIDI_Notes::C(4)};
+NoteRangeLEDs<8> leds {sreg.pins(), MIDI_Notes::C[4]};
 
 // Initialize the Control Surface
 void setup() {

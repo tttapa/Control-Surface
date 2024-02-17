@@ -35,7 +35,7 @@ USBMIDI_Interface midi;
 // Instantiate the LED that will light up when middle C is playing
 NoteLED led {
   LED_BUILTIN,                   // Pin of built-in LED
-  {MIDI_Notes::C(4), Channel_1}, // Note C4 on MIDI channel 1
+  {MIDI_Notes::C[4], Channel_1}, // Note C4 on MIDI channel 1
 };
 
 void setup() {

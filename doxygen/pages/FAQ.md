@@ -37,7 +37,7 @@ Here's a basic MIDI output example:
 ```cpp
 USBMIDI_Interface midi; // Instantiate the MIDI over USB interface
 
-const MIDIAddress noteAddress = {MIDI_Notes::C(4), Channel_1};
+const MIDIAddress noteAddress = {MIDI_Notes::C[4], Channel_1};
 const uint8_t velocity = 0x7F;
 
 void setup() {
@@ -251,26 +251,6 @@ setting `CS_TRUE_CONTROL_SURFACE_INSTANCE` to `0`. This replaces
 defining `Control_Surface` as a global variable. This allows the optimizer and
 the linker to optimize out parts of the library more effectively, but may reduce
 the quality of code completion. It does not affect the behavior of the library.
-
-## Why do I get a compiler error when using the note F? {#faq-midi-note-f}
-
-The Arduino core defines a global preprocessor macro `F(...)` which places
-string literals in flash memory. Unfortunately, macros do not follow the C++ 
-syntax and scoping rules, so it means that it is impossible to create a constant 
-or function with the name `F`, even in a separate namespace. Therefore, the note
-F can be referenced using the name `F_` (F underscore) instead of `F`.
-
-If you get this wrong, you might get an error saying the following:
-```
-In file included from /home/user/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/Arduino.h:232:0,
-                 from /tmp/arduino-sketch-XXXXX/sketch/sketch.ino.cpp:1:
-/home/user/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/WString.h:38:27: error: expected unqualified-id before '(' token
- #define F(string_literal) (reinterpret_cast<const __FlashStringHelper *>(PSTR(string_literal)))
-                           ^
-sketch.ino: note: in expansion of macro 'F'
-   { pin, MIDI_Notes::F(4) }
-                      ^
-```
 
 ## What's the difference between the Control Surface and MIDI Controller libraries? {#faq-control-surface-vs-midi-controller}
 

@@ -31,14 +31,14 @@ SPIShiftRegisterOut<8> sreg {
 // Create an array of LEDs that listen to MIDI Note messages, turning on and off
 // the LEDs connected to the eight output pins of the shift register
 NoteLED leds[] {
-  {sreg.pin(0), MIDI_Notes::C(4)},  // LED pin, address (note number, channel, cable)
-  {sreg.pin(1), MIDI_Notes::D(4)},  //
-  {sreg.pin(2), MIDI_Notes::E(4)},  //
-  {sreg.pin(3), MIDI_Notes::F_(4)}, // F is an exception :(
-  {sreg.pin(4), MIDI_Notes::G(4)},  //
-  {sreg.pin(5), MIDI_Notes::A(4)},  //
-  {sreg.pin(6), MIDI_Notes::B(4)},  //
-  {sreg.pin(7), MIDI_Notes::C(5)},  //
+  {sreg.pin(0), MIDI_Notes::C[4]},  // LED pin, address (note number, channel, cable)
+  {sreg.pin(1), MIDI_Notes::D[4]},  //
+  {sreg.pin(2), MIDI_Notes::E[4]},  //
+  {sreg.pin(3), MIDI_Notes::F[4]},  //
+  {sreg.pin(4), MIDI_Notes::G[4]},  //
+  {sreg.pin(5), MIDI_Notes::A[4]},  //
+  {sreg.pin(6), MIDI_Notes::B[4]},  //
+  {sreg.pin(7), MIDI_Notes::C[5]},  //
 };
 
 // Initialize the Control Surface
