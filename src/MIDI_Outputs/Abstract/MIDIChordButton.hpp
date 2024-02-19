@@ -9,6 +9,7 @@ AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 #include <Def/Def.hpp>
 #include <MIDI_Constants/Chords/Chords.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <MIDI_Outputs/Abstract/MIDIAddressableUnsafe.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -21,7 +22,7 @@ BEGIN_CS_NAMESPACE
  * @see     AH::Button
  */
 template <class Sender>
-class MIDIChordButton : public MIDIOutputElement {
+class MIDIChordButton : public MIDIOutputElement, public MIDIAddressableUnsafe {
   public:
     /**
      * @brief   Construct a new MIDIChordButton.
@@ -44,7 +45,8 @@ class MIDIChordButton : public MIDIOutputElement {
     template <uint8_t N>
     MIDIChordButton(pin_t pin, MIDIAddress address, Chord<N> chord,
                     const Sender &sender)
-        : button(pin), address(address),
+        : MIDIAddressableUnsafe(address),
+          button(pin),
           newChord(AH::make_unique<Chord<N>>(std::move(chord))),
           sender(sender) {}
     // TODO: can I somehow get rid of the dynamic memory allocation here?
@@ -77,15 +79,8 @@ class MIDIChordButton : public MIDIOutputElement {
         newChord = AH::make_unique<Chord<N>>(std::move(chord));
     }
 
-    /// Get the MIDI address.
-    MIDIAddress getAddress() const { return this->address; }
-    /// Set the MIDI address. Has unexpected consequences if used while the
-    /// push button is pressed. Use banks if you need to support that.
-    void setAddressUnsafe(MIDIAddress address) { this->address = address; }
-
   private:
     AH::Button button;
-    MIDIAddress address;
     std::unique_ptr<const IChord> chord;
     std::unique_ptr<const IChord> newChord;
 

@@ -6,6 +6,7 @@
 #include <Def/TypeTraits.hpp>
 #include <MIDI_Outputs/Abstract/EncoderState.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <MIDI_Outputs/Abstract/MIDIAddressable.hpp>
 
 #ifdef ARDUINO
 #include <Submodules/Encoder/AHEncoder.hpp>
@@ -22,12 +23,13 @@ BEGIN_CS_NAMESPACE
  *          events.
  */
 template <class Enc, class Sender>
-class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
+class GenericMIDIAbsoluteEncoder : public MIDIOutputElement, public MIDIAddressable {
   public:
     GenericMIDIAbsoluteEncoder(Enc &&encoder, MIDIAddress address,
                                int16_t speedMultiply, uint8_t pulsesPerStep,
                                const Sender &sender)
-        : encoder(std::forward<Enc>(encoder)), address(address),
+        : MIDIAddressable(address),
+          encoder(std::forward<Enc>(encoder)),
           encstate(speedMultiply, pulsesPerStep), sender(sender) {}
 
     void begin() override { begin_if_possible(encoder); }
@@ -67,11 +69,6 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
     }
     int16_t getSpeedMultiply() const { return encstate.getSpeedMultiply(); }
 
-    /// Get the MIDI address.
-    MIDIAddress getAddress() const { return this->address; }
-    /// Set the MIDI address.
-    void setAddress(MIDIAddress address) { this->address = address; }
-
     int16_t resetPositionOffset() {
         auto encval = encoder.read();
         return encstate.update(encval);
@@ -79,7 +76,6 @@ class GenericMIDIAbsoluteEncoder : public MIDIOutputElement {
 
   private:
     Enc encoder;
-    MIDIAddress address;
     int16_t value = 0;
     EncoderState<decltype(encoder.read())> encstate;
 

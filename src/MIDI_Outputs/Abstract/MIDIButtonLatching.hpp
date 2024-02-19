@@ -3,6 +3,7 @@
 #include <AH/Hardware/Button.hpp>
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <MIDI_Outputs/Abstract/MIDIAddressable.hpp>
 
 BEGIN_CS_NAMESPACE
 
@@ -14,7 +15,7 @@ BEGIN_CS_NAMESPACE
  * @see     Button
  */
 template <class Sender>
-class MIDIButtonLatching : public MIDIOutputElement {
+class MIDIButtonLatching : public MIDIOutputElement, public MIDIAddressable {
   protected:
     /**
      * @brief   Construct a new MIDIButtonLatching.
@@ -28,7 +29,7 @@ class MIDIButtonLatching : public MIDIOutputElement {
      *          The MIDI sender to use.
      */
     MIDIButtonLatching(pin_t pin, MIDIAddress address, const Sender &sender)
-        : button(pin), address(address), sender(sender) {}
+        : MIDIAddressable(address), button(pin), sender(sender) {}
 
   public:
     void begin() override { button.begin(); }
@@ -42,14 +43,8 @@ class MIDIButtonLatching : public MIDIOutputElement {
 
     AH::Button::State getButtonState() const { return button.getState(); }
 
-    /// Get the MIDI address.
-    MIDIAddress getAddress() const { return this->address; }
-    /// Set the MIDI address.
-    void setAddress(MIDIAddress address) { this->address = address; }
-
   private:
     AH::Button button;
-    const MIDIAddress address;
 
   public:
     Sender sender;

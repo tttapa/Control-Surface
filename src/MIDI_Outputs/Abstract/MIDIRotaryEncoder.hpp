@@ -1,10 +1,12 @@
 #pragma once
 
+#include "MIDI_Outputs/Abstract/MIDIAddressable.hpp"
 #include <AH/STL/utility> // std::forward
 #include <Def/Def.hpp>
 #include <Def/TypeTraits.hpp>
 #include <MIDI_Outputs/Abstract/EncoderState.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
+#include <MIDI_Outputs/Abstract/MIDIAddressable.hpp>
 
 #ifdef ARDUINO
 #include <Submodules/Encoder/AHEncoder.hpp>
@@ -20,7 +22,7 @@ BEGIN_CS_NAMESPACE
  * @brief   An abstract class for rotary encoders that send MIDI events.
  */
 template <class Enc, class Sender>
-class GenericMIDIRotaryEncoder : public MIDIOutputElement {
+class GenericMIDIRotaryEncoder : public MIDIOutputElement, public MIDIAddressable {
   public:
     /**
      * @brief   Construct a new MIDIRotaryEncoder.
@@ -30,7 +32,8 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
     GenericMIDIRotaryEncoder(Enc &&encoder, MIDIAddress address,
                              int16_t speedMultiply, uint8_t pulsesPerStep,
                              const Sender &sender)
-        : encoder(std::forward<Enc>(encoder)), address(address),
+        : MIDIAddressable(address),
+          encoder(std::forward<Enc>(encoder)),
           encstate(speedMultiply, pulsesPerStep), sender(sender) {}
 
     void begin() override { begin_if_possible(encoder); }
@@ -47,11 +50,6 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
     }
     int16_t getSpeedMultiply() const { return encstate.getSpeedMultiply(); }
 
-    /// Get the MIDI address.
-    MIDIAddress getAddress() const { return this->address; }
-    /// Set the MIDI address.
-    void setAddress(MIDIAddress address) { this->address = address; }
-
     int16_t resetPositionOffset() {
         auto encval = encoder.read();
         return encstate.update(encval);
@@ -59,7 +57,6 @@ class GenericMIDIRotaryEncoder : public MIDIOutputElement {
 
   private:
     Enc encoder;
-    MIDIAddress address;
     EncoderState<decltype(encoder.read())> encstate;
 
   public:
