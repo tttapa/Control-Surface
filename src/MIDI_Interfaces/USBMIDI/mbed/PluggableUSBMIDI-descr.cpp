@@ -41,8 +41,8 @@ const uint8_t *PluggableUSBMIDI::configuration_desc(uint8_t index) {
         return nullptr;
     }
 
-    const uint8_t wmaxpkt_L = (PacketSize >> 0) & 0xFF;
-    const uint8_t wmaxpkt_M = (PacketSize >> 8) & 0xFF;
+    const uint8_t wmaxpkt_L = (get_packet_size() >> 0) & 0xFF;
+    const uint8_t wmaxpkt_M = (get_packet_size() >> 8) & 0xFF;
 
     // clang-format off
     uint8_t config_descriptor_temp[] {
