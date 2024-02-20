@@ -1,20 +1,20 @@
 /**
- * This example demonstrates how to attach custom actions to incoming Note or
- * Control Change MIDI events.
+ * This example demonstrates how to create a custom MIDI Input Element similar
+ * to the NoteLED class.
  *
  * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x
  *
  * Connections
  * -----------
  *
- * - Pin 3 (PWM pin): An LED (with current-limiting resistor) to ground.
+ * - None (built-in LED is used)
  *
  * Behavior
  * --------
  *
- * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the LED will
- * light up at full brightness,
- * if a Note Off event for that note is sent, the LED will light dimly.  
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the built-in
+ * LED will light up,
+ * if a Note Off event for that note is sent, the LED will turn off.  
  * (A Note On event with a velocity of zero also counts as a Note Off event.)
  *
  * Mapping
@@ -23,7 +23,10 @@
  * Route the MIDI output of a MIDI keyboard to the Arduino's MIDI input. Then
  * play a middle C on the keyboard.
  *
- * Written by PieterP, 2020-03-10  
+ * Alternatively, replace @ref USBMIDI_Interface by @ref USBDebugMIDI_Interface
+ * and send `90 3C 7F` and/or `80 3C 7F` in the Serial monitor.
+ *
+ * Written by PieterP, 2024-02-20  
  * https://github.com/tttapa/Control-Surface
  */
 
@@ -32,10 +35,9 @@
 // Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
-// MIDI Input Element that listens for MIDI Note events that turns on the LED at
-// full brightness if the note value (velocity) is above the threshold,
-// and turns on the LED at a lower brightness if the value is below the
-// threshold.
+// MIDI Input Element that listens for MIDI Note events and that turns on the
+// LED if the note value (velocity) is above the threshold, and turns off the
+// LED if the value is below the threshold.
 
 class CustomNoteLED
   // First, inherit from the MatchingMIDIInputElement base class. Indicate that
@@ -46,43 +48,33 @@ class CustomNoteLED
                                     TwoByteMIDIMatcher> {
  public:
   // Constructor
-  CustomNoteLED(pin_t ledPin, MIDIAddress address, uint8_t lowBrightness)
-    : MatchingMIDIInputElement(address), ledPin(ledPin),
-      lowBrightness(lowBrightness) {}
+  CustomNoteLED(pin_t ledPin, MIDIAddress address)
+    : MatchingMIDIInputElement(address), ledPin(ledPin) {}
 
-  // Called once upon initialization, set up the pin mode for the LED,
-  // and output the initial value.
-  void begin() override {
-    ExtIO::pinMode(ledPin, OUTPUT);
-    ExtIO::analogWrite(ledPin, lowBrightness);
-  }
+  // Called once upon initialization, set up the pin mode for the LED.
+  void begin() override { ExtIO::pinMode(ledPin, OUTPUT); }
 
   // Called when an incoming MIDI Note message matches this element's matcher
   // (i.e. it has the right MIDI address, channel and cable).
   // The match object that's passed as a parameter contains the velocity value
   // of the Note message that matched.
   void handleUpdate(TwoByteMIDIMatcher::Result match) override {
-    if (match.value >= threshold)
-      ExtIO::digitalWrite(ledPin, HIGH);
-    else
-      ExtIO::analogWrite(ledPin, lowBrightness);
+    ExtIO::digitalWrite(ledPin, match.value >= threshold ? HIGH : LOW);
   }
 
   // Called when the input element is reset (e.g. by an "All notes off" MIDI
   // event).
-  void reset() override { ExtIO::analogWrite(ledPin, lowBrightness); }
+  void reset() override { ExtIO::digitalWrite(ledPin, LOW); }
 
  private:
   pin_t ledPin;
-  uint8_t lowBrightness;
   const static uint8_t threshold = 0x01;
 };
 
 // Instantiate the LED that will light up when middle C is playing.
 CustomNoteLED led {
-  3,                             // Pin with the LED connected (PWM capable)
+  LED_BUILTIN,                   // Pin with the LED connected
   {MIDI_Notes::C[4], Channel_1}, // Note C4 on MIDI channel 1
-  10,                            // Intensity when off
 };
 
 void setup() {

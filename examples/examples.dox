@@ -3363,8 +3363,8 @@
  * Behavior
  * --------
  *
- * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the built-in
- * LED will light up at full brightness,
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the LED will
+ * light up at full brightness,
  * if a Note Off event for that note is sent, the LED will light dimly.  
  * (A Note On event with a velocity of zero also counts as a Note Off event.)
  *
@@ -3376,7 +3376,7 @@
  *
  * Written by PieterP, 2020-03-10  
  * https://github.com/tttapa/Control-Surface
-*/
+ */
 
 /**
  * @example   "Custom-USB-MIDI-Backend.ino"
@@ -3412,6 +3412,43 @@
  * None.
  * 
  * Written by PieterP, 2022-05-28  
+ * https://github.com/tttapa/Control-Surface
+ */
+
+/**
+ * @example   "Custom-MIDI-Input-Element.ino"
+ * 
+ * Custom-MIDI-Input-Element
+ * =========================
+ *
+ * This example demonstrates how to create a custom MIDI Input Element similar
+ * to the NoteLED class.
+ *
+ * @boards  AVR, AVR USB, Due, Nano 33 IoT, Nano 33 BLE, UNO R4, Pi Pico, Teensy 3.x
+ *
+ * Connections
+ * -----------
+ *
+ * - None (built-in LED is used)
+ *
+ * Behavior
+ * --------
+ *
+ * If a MIDI Note On event for note 0x3C (C4 or middle C) is sent, the built-in
+ * LED will light up,
+ * if a Note Off event for that note is sent, the LED will turn off.  
+ * (A Note On event with a velocity of zero also counts as a Note Off event.)
+ *
+ * Mapping
+ * -------
+ *
+ * Route the MIDI output of a MIDI keyboard to the Arduino's MIDI input. Then
+ * play a middle C on the keyboard.
+ *
+ * Alternatively, replace @ref USBMIDI_Interface by @ref USBDebugMIDI_Interface
+ * and send `90 3C 7F` and/or `80 3C 7F` in the Serial monitor.
+ *
+ * Written by PieterP, 2024-02-20  
  * https://github.com/tttapa/Control-Surface
  */
 
@@ -3728,8 +3765,10 @@
  *   (Adding your own MIDI output elements, recreating and then customizing the @ref NoteButton class)
  * - @ref Custom-MIDI-Output-Element-Bankable.ino
  *   (Same as previous, but for the @ref Bankable::NoteButton class)
+ * - @ref Custom-MIDI-Input-Element.ino
+ *   (Adding your own customizable MIDI input elements, recreating the @ref NoteLED class)
  * - @ref Custom-Note-LED-Input-Element-Callback.ino
- *   (Adding your own MIDI input elements, recreating and then customizing the @ref NoteLED class)
+ *   (Similar to previous, but with PWM output)
  * - @ref Custom-Note-LED-Input-Element-Callback-FastLED.ino
  *   (Similar to previous, but with support for FastLED addressable LED strips)
  * 

@@ -135,7 +135,8 @@ groups = {
         ("Custom-MIDI-Sender", "Customize the type of messages sent by the provided MIDI output elements"),
         ("Custom-MIDI-Output-Element", "Adding your own MIDI output elements, recreating and then customizing the @ref NoteButton class"),
         ("Custom-MIDI-Output-Element-Bankable", "Same as previous, but for the @ref Bankable::NoteButton class"),
-        ("Custom-Note-LED-Input-Element-Callback", "Adding your own MIDI input elements, recreating and then customizing the @ref NoteLED class"),
+        ("Custom-MIDI-Input-Element", "Adding your own customizable MIDI input elements, recreating the @ref NoteLED class"),
+        ("Custom-Note-LED-Input-Element-Callback", "Similar to previous, but with PWM output"),
         ("Custom-Note-LED-Input-Element-Callback-FastLED", "Similar to previous, but with support for FastLED addressable LED strips"),
     ],
     "Other examples": [
