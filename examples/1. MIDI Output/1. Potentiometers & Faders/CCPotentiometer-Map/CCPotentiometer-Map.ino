@@ -54,10 +54,12 @@ USBMIDI_Interface midi;
 // on channel 1.
 CCPotentiometer potentiometer {A0, {MIDI_CC::Channel_Volume, Channel_1}};
 
+// The maximum value that can be measured (usually 16383 = 2¹⁴-1)
+constexpr analog_t maxRawValue = CCPotentiometer::getMaxRawValue();
 // The filtered value read when potentiometer is at the 0% position
-constexpr analog_t minimumValue = 255;
+constexpr analog_t minimumValue = maxRawValue / 64;
 // The filtered value read when potentiometer is at the 100% position
-constexpr analog_t maximumValue = 16383 - 255;
+constexpr analog_t maximumValue = maxRawValue - maxRawValue / 64;
 
 // A mapping function to eliminate the dead zones of the potentiometer:
 // Some potentiometers don't output a perfect zero signal when you move them to
@@ -66,10 +68,8 @@ constexpr analog_t maximumValue = 16383 - 255;
 analog_t mappingFunction(analog_t raw) {
   // make sure that the analog value is between the minimum and maximum
   raw = constrain(raw, minimumValue, maximumValue);
-  // map the value from [minimumValue, maximumValue] to [0, 16383]
-  return map(raw, minimumValue, maximumValue, 0, 16383);
-  // Note: 16383 = 2¹⁴ - 1 (the maximum value that can be represented by
-  // a 14-bit unsigned number
+  // map the value from [minimumValue, maximumValue] to [0, maxRawValue]
+  return map(raw, minimumValue, maximumValue, 0, maxRawValue);
 }
 
 void setup() {

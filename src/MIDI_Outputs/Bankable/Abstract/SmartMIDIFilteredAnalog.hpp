@@ -128,6 +128,13 @@ class SmartMIDIFilteredAnalog : public MIDIOutputElement {
     analog_t getRawValue() const { return filteredAnalog.getRawValue(); }
 
     /**
+     * @brief   Get the maximum value that can be returned from @ref getRawValue.
+     */
+    static constexpr analog_t getMaxRawValue() {
+        return FilteredAnalog::getMaxRawValue();
+    }
+
+    /**
      * @brief   Get the value of the analog input (this is the value after first
      *          applying the mapping function).
      */
@@ -149,7 +156,8 @@ class SmartMIDIFilteredAnalog : public MIDIOutputElement {
 
   protected:
     BankAddress address;
-    AH::FilteredAnalog<Sender::precision()> filteredAnalog;
+    using FilteredAnalog = AH::FilteredAnalog<Sender::precision()>;
+    FilteredAnalog filteredAnalog;
     static_assert(
         Sender::precision() <= 14,
         "Sender precision must be 14 or less, because larger values are "
