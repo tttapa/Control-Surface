@@ -48,6 +48,9 @@ struct BulkTX {
     /// yet. If the latest packet is empty, this function has no effect.
     void send_now();
 
+    /// Check if all transfers have completed.
+    bool is_done() const;
+
   protected:
     void reset();
 
@@ -80,7 +83,7 @@ struct BulkTX {
     /// State for writing outgoing USB-MIDI data.
     struct Writing {
         struct Buffer {
-            interrupt_atomic<uint16_t> size {0};
+            uint16_t size {0};
             alignas(MessageType) uint8_t buffer[PacketSize];
         } buffers[2];
         interrupt_atomic<Buffer *> active_writebuffer {&buffers[0]};
@@ -94,11 +97,7 @@ struct BulkTX {
     wbuffer_t *other_buf(wbuffer_t *p) {
         return &writing.buffers[!index_of(p)];
     }
-    uint32_t write_impl(const MessageType *msgs, uint32_t num_msgs,
-                        bool nonblocking);
-    std::tuple<wbuffer_t *, uint16_t> read_writebuf_size();
-    void send_now_impl_nonblock(wbuffer_t *write_buffer);
-    uint16_t prepare_tx(wbuffer_t *send_buffer);
+    uint32_t write_impl(const MessageType *msgs, uint32_t num_msgs);
 
   protected:
     void timeout_callback();

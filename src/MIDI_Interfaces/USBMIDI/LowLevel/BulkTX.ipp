@@ -6,6 +6,7 @@
 #include <algorithm>
 
 #include <cassert>
+#include <cstring>
 
 #ifdef FATAL_ERRORS
 #define CS_MIDI_USB_ASSERT(a) assert((a))
@@ -17,14 +18,14 @@ BEGIN_CS_NAMESPACE
 
 template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
 void BulkTX<Derived, MessageTypeT, PacketSizeV>::write(MessageType msg) {
-    write_impl(&msg, 1, false); // blocking
+    write(&msg, 1);
 }
 
 template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
 void BulkTX<Derived, MessageTypeT, PacketSizeV>::write(const MessageType *msgs,
                                                        uint32_t num_msgs) {
     const uint32_t *end = msgs + num_msgs;
-    while (msgs != end) msgs += write_impl(msgs, end - msgs, false); // blocking
+    while (msgs != end) msgs += write_impl(msgs, end - msgs);
 }
 
 template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
@@ -40,121 +41,59 @@ uint32_t BulkTX<Derived, MessageTypeT, PacketSizeV>::write_nonblock(
 
 template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
 void BulkTX<Derived, MessageTypeT, PacketSizeV>::send_now() {
-    uint32_t size;
-    wbuffer_t *writebuf;
-    std::tie(writebuf, size) = read_writebuf_size();
-    if (size > 0)
-        send_now_impl_nonblock(writebuf);
+    auto buffer = writing.send_later.exchange(nullptr, mo_acq);
+    if (buffer == nullptr)
+        // Either the write function or the timeout_handler already cleared
+        // the send_later flag.
+        return;
+    CRTP(Derived).cancel_timeout();
+
+    // Indicate to any handlers interrupting us that we intend to send a buffer.
+    writing.send_now.store(buffer, mo_seq); //                               (5)
+
+    // Try to acquire the sending lock.
+    wbuffer_t *old = nullptr;
+    if (!writing.sending.compare_exchange_strong(old, buffer, mo_seq)) //    (6)
+        // If we couldn't get the lock, whoever has the lock will send the
+        // data and clear send-now.
+        return;
+
+    // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ acq >>>sending<<<
+    // We now own the sending lock
+
+    // It is possible that the tx_callback ran between (5) and (6), so check
+    // the send-now flag again.
+    auto send_now = writing.send_now.load(mo_seq);
+    if (send_now == nullptr) {
+        // If the buffer was already sent, release the sending lock and return.
+        writing.sending.store(nullptr, mo_seq); // ▲▲▲
+        return;
+    }
+
+    // Us having the sending lock also means that the timeout and the
+    // tx_callback cannot have concurrent access to writing.active_writebuffer
+    // Therefore, acquiring it must succeed.
+    auto send_buffer = writing.active_writebuffer.exchange(nullptr, mo_seq);
+    // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ acq <<<active_writebuffer>>>
+    CS_MIDI_USB_ASSERT(send_buffer == buffer);
+    CS_MIDI_USB_ASSERT(send_now == buffer);
+    // Now that we own both the buffer and the sending lock, we can send it
+    writing.send_now.store(nullptr, mo_rlx);
+    // Prepare the other buffer to be filled
+    auto next_buffer = other_buf(send_buffer);
+    next_buffer->size = 0;
+    // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ rel <<<active_writebuffer>>>
+    writing.active_writebuffer.store(next_buffer, mo_rel);
+    // Send the current buffer
+    CRTP(Derived).tx_start(send_buffer->buffer, send_buffer->size);
+    // ------------------------------------------------------------------------- (sending lock is released by the tx_callback)
+    return;
 }
-
-/*
- * write(...)  
- *  - called by user
- *  - adds data to the transmit buffer
- *  - starts a timeout to send the data (even if the buffer isn't full yet)
- *  - sends the transmit buffer to the USB stack when full
- *  - blocks if there's no space left in the transmit buffers
- * 
- * timeout_callback()  
- *  - called from a timer interrupt, a fixed time after the first write to a
- *    buffer
- *  - sends the transmit buffer even if it isn't full yet
- *  - if a previous transmission is still in progress, schedules it to be sent
- *    immediately after the current transmission finishes.
- * 
- * in_callback()  
- *  - called by the USB stack when a transmission is complete
- *  - finishes the transmission
- *  - releases the “sending” lock
- *  - starts a new transmission if it was scheduled while the previous 
- *    transmission was in progress
- */
-
-/*
- * - Both send buffers start out empty (size = 0), the first buffer is active 
- *   (`active_writebuffer = buffers[0]`, which means that the first buffer is
- *   the one being filled with the outgoing data).
- * - The `write()` function is called.
- * - The message is added to the active buffer and the size is incremented. 
- *   (Writing the data happens inside of an atomic compare-and-swap loop, if in
- *   the meantime an interrupts occurs that sends the buffer we just wrote to,
- *   we write the data again to the new writing buffer.)
- * - If the active buffer is now full, the packet is sent to the USB stack, and
- *   the buffers are swapped. If the previous buffer wasn't completely sent yet,
- *   it is scheduled to be sent when the previous transmission is complete.
- * - If this was the first message in the buffer, a timeout is started.
- * - If the active buffer wasn't full, nothing is actually sent, and the 
- *   `write()` function exits.
- * - When the timeout fires, `timeout_callback()` is called (from a timer
- *   interrupt).
- * - If there is data in the active buffer, it's sent over USB. If the previous
- *   buffer wasn't completely sent yet, it's not possible to send now, and it's
- *   scheduled to be sent later.
- * - When a buffer has been sent, `in_callback()` is called (from a USB 
- *   interrupt).
- * - The write is finished, the “sending” lock is released and the buffer size
- *   is reset to zero to let the main `write()` function know that it can write 
- *   to this buffer. If the other buffer was scheduled to be sent while we were
- *   sending this packet, immediately send the next one.
- */
-
-/*
- * `active_writebuffer` points to the buffer that the main program should write
- * to. It is possible that while writing data, the active buffer is sent from an
- * interrupt handler. This is not an issue, because the data is only published
- * by store-releasing the `size` of the buffer. This happens in a compare-
- * exchange loop: before sending a buffer, the sender sets the size to
- * `Reserved`, which will cause the compare-exchange in the `write_impl`
- * function to fail, so it can then write the data again to the new active
- * buffer.
- * 
- * `active_writebuffer` is only written to while holding the `sending` lock,
- * during the preparation of actually sending the previously active buffer.
- * After writing `active_writebuffer`, the size of the previously active buffer
- * is updated: first it is set to `Reserved`, and later, it is set to `0` (after
- * the buffer has been sent), using a store-release to `size`.
- * 
- * Therefore, the main program should first do a relaxed load of
- * `active_writebuffer`, and then a load-acquire of `active_writebuffer->size`.
- * If this size is either `Reserved` or `0`, it should load `active_writebuffer`
- * again, and then load-acquire the size again. This newly read size is then
- * guaranteed to be zero, and `active_writebuffer` points to an empty buffer
- * that is not yet scheduled to be sent. Because of the load-acquire of the
- * `size`, it automatically synchronizes with the sending of the data, ensuring
- * that the buffer is ready to use.
- * 
- * When the first data is added to an empty buffer, a pointer to it is stored in
- * `send_later`, and a timeout is started.
- * 
- * There are two events that can cause the `send_later` buffer to be sent:
- * 1. The main program calls `send_now_impl_nonblock` (either because the user
- *   called `send_now`, or because the user called `write` and the buffer was
- * full);
- * 2. The timeout fires.
- * 
- * Only one of the two can actually send it, because they both try to acquire
- * the `send_later` buffer. The other one gives up, so they don't run
- * concurrently.
- * If `send_now_impl_nonblock` acquires the `send_later` buffer, it cancels the
- * timer because it is no longer necessary.
- * 
- * Whichever function acquires the `send_later` buffer, it makes sure that makes
- * progress is made: either it sends the buffer immediately, or if the previous
- * transfer is still in progress, it schedules it to be sent as soon as that one
- * finishes.  
- * This is done by first setting the `send_now` buffer to the one it acquired
- * from `send_later`. Then, it tries to acquire the `sending` lock. If this
- * fails, it returns, because the `in_handler` is guaranteed to send the
- * `send_later` buffer.
- * If acquiring the `sending` lock succeeds, `send_now` is acquired and cleared,
- * and if it is not null, the active buffer is swapped, the old buffer's size is
- * set to `Reserved`, and a USB transfer is started.
- */
 
 template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
 void BulkTX<Derived, MessageTypeT, PacketSizeV>::reset() {
-    writing.buffers[0].size.store(0, mo_rlx);
-    writing.buffers[1].size.store(0, mo_rlx);
+    writing.buffers[0].size = 0;
+    writing.buffers[1].size = 0;
     writing.active_writebuffer.store(&writing.buffers[0], mo_rlx);
     writing.send_later.store(nullptr, mo_rlx);
     writing.send_now.store(nullptr, mo_rlx);
@@ -162,237 +101,266 @@ void BulkTX<Derived, MessageTypeT, PacketSizeV>::reset() {
 }
 
 template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-auto BulkTX<Derived, MessageTypeT, PacketSizeV>::read_writebuf_size()
-    -> std::tuple<wbuffer_t *, uint16_t> {
-    wbuffer_t *writebuffer;
-    uint16_t size;
-    writebuffer = writing.active_writebuffer.load(mo_rlx);
-    size = writebuffer->size.load(mo_acq);
-    // If the size was set to reserved, the active buffer must have been swapped.
-    if (size == SizeReserved || size == 0) {
-        [[maybe_unused]] wbuffer_t *old_buffer = writebuffer;
-        writebuffer = writing.active_writebuffer.load(mo_rlx);
-        CS_MIDI_USB_ASSERT(size == 0 || old_buffer != writebuffer);
-        size = writebuffer->size.load(mo_acq);
-    }
-    CS_MIDI_USB_ASSERT(size != SizeReserved);
-    return std::make_tuple(writebuffer, size);
+bool BulkTX<Derived, MessageTypeT, PacketSizeV>::is_done() const {
+    return writing.sending.load(mo_acq) == nullptr &&
+           writing.send_later.load(mo_acq) == nullptr &&
+           writing.send_now.load(mo_acq) == nullptr;
 }
 
 template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-uint32_t BulkTX<Derived, MessageTypeT, PacketSizeV>::write_impl(
-    const MessageType *msgs, uint32_t num_msgs, bool nonblocking) {
-    wbuffer_t *writebuf; // Pointer to buffer currently being written to.
-    uint16_t size;       // Current size of that buffer (i.e. the first index we
-                         // can write to).
-    // TODO: move to wait_for_buffer helper function
-    // Read the active write buffer and its current size
-    std::tie(writebuf, size) = read_writebuf_size();
-    // Make sure that there's space in the buffer for us to write data
-    if (size >= PacketSize) {
-        // If there's no space
-        if (nonblocking) {
-            // either return without blocking
-            return 0;
-        } else {
-            // Or wait until the active writing buffer changes to an empty one
-            [[maybe_unused]] wbuffer_t *old_buffer = writebuf;
-            do {
-                yield(); // spin
-                std::tie(writebuf, size) = read_writebuf_size();
-            } while (size >= PacketSize);
-            CS_MIDI_USB_ASSERT(old_buffer != writebuf);
-            CS_MIDI_USB_ASSERT(size == 0);
+uint32_t
+BulkTX<Derived, MessageTypeT, PacketSizeV>::write_impl(const MessageType *msgs,
+                                                       uint32_t num_msgs) {
+    if (num_msgs == 0)
+        return 0;
+
+    // Try to get access to an available buffer
+    wbuffer_t *buffer = writing.active_writebuffer.exchange(nullptr, mo_acq);
+    // If that failed, return without blocking, caller may retry until we get
+    // a buffer we can use
+    if (buffer == nullptr)
+        return 0;
+
+    // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ acq <<<active_writebuffer>>>
+    // At this point we have a buffer, and we have exclusive access to it,
+    // but it may still be full
+    // CS_MIDI_USB_ASSERT(writing.send_now.load(mo_rlx) == nullptr);
+
+    auto size = buffer->size;
+    CS_MIDI_USB_ASSERT(size != SizeReserved);
+    size_t avail_size = PacketSize - size;
+    auto copy_size_zu = std::min<size_t>(avail_size, num_msgs * sizeof(*msgs));
+    auto copy_size = static_cast<uint16_t>(copy_size_zu);
+    if (copy_size > 0) {
+        std::memcpy(buffer->buffer + size, msgs, copy_size);
+        buffer->size = size + copy_size;
+    }
+    // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ rel <<<active_writebuffer>>>
+    // Release access to the buffer
+    writing.active_writebuffer.store(buffer, mo_seq);
+
+    if (copy_size > 0) {
+        // If we completely filled this buffer in one go, send it now.
+        if (size == 0 && copy_size == PacketSize) {
+            CS_MIDI_USB_ASSERT(writing.send_later.load(mo_rlx) == nullptr);
+            CS_MIDI_USB_ASSERT(writing.send_now.load(mo_rlx) == nullptr);
+            writing.send_now.store(buffer, mo_rel); // TODO: can be relaxed
+        }
+        // If this is the first data in the buffer, schedule it to be sent later.
+        else if (size == 0) {
+            CS_MIDI_USB_ASSERT(writing.send_later.load(mo_rlx) == nullptr);
+            writing.send_later.store(buffer, mo_rel);
+            CRTP(Derived).start_timeout();
+        }
+        // If this buffer was partially filled before and now full, send it now.
+        else if (size + copy_size == PacketSize) {
+            auto send_buffer = writing.send_later.exchange(nullptr, mo_acq);
+            if (send_buffer != nullptr) {
+                CS_MIDI_USB_ASSERT(writing.send_now.load(mo_rlx) == nullptr);
+                CS_MIDI_USB_ASSERT(send_buffer == buffer);
+                CRTP(Derived).cancel_timeout();
+                writing.send_now.store(buffer, mo_rel); // TODO: can be relaxed
+            }
         }
     }
-    CS_MIDI_USB_ASSERT(size < PacketSize);
 
-    // Copy the data into the active buffer
-    constexpr static uint32_t msg_size = sizeof(MessageType);
-    static_assert(PacketSize % msg_size == 0, "");
-    uint16_t free_size =
-        std::min<uint32_t>(PacketSize - size, num_msgs * msg_size);
-    CS_MIDI_USB_ASSERT(free_size % msg_size == 0);
-    memcpy(&writebuf->buffer[size], msgs, free_size);
-    uint16_t newsize = size + free_size;
+    // An interrupt may have attempted to send the buffer while we owned it.
+    if (writing.send_now.load(mo_seq) == nullptr) //                         (1)
+        // If that's not the case, we can safely return.
+        return copy_size / sizeof(*msgs);
 
-    // Update the size of the buffer
-    while (!writebuf->size.compare_exchange_weak(size, newsize, mo_rel)) {
-        // If the size changed while we were writing the data, this means
-        // that a sender in a different thread or ISR was/is sending the active
-        // buffer (so it is no longer the active buffer).
+    // Otherwise, it's our job to send the data that the interrupt failed to
+    // send.
 
-        // Read the new write buffer and its size.
-        // The cmp_xchg does not perform an acquire, because we'll/ acquire the
-        // size here:
-        std::tie(writebuf, size) = read_writebuf_size();
-        // CS_MIDI_USB_ASSERT(size == 0); // Only true with cmp_xchg_strong
+    // Try to acquire the sending lock.
+    wbuffer_t *old = nullptr;
+    if (!writing.sending.compare_exchange_strong(old, buffer, mo_seq)) //    (2)
+        // If we couldn't get the lock, whoever has the lock will send the
+        // data and clear send-now.
+        return copy_size / sizeof(*msgs);
+    // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ acq >>>sending<<<
+    // We now own the sending lock
 
-        // Copy the data into the new buffer
-        free_size = std::min<uint32_t>(PacketSize - size, num_msgs * msg_size);
-        memcpy(&writebuf->buffer[size], msgs, free_size);
-        newsize = size + free_size;
+    // It is possible that the tx_callback ran between (1) and (2), so check
+    // the send-now flag again.
+    auto send_now = writing.send_now.load(mo_seq);
+    if (send_now == nullptr) {
+        // If the buffer was already sent, release the sending lock and return.
+        writing.sending.store(nullptr, mo_seq); // ▲▲▲
+        return copy_size / sizeof(*msgs);
     }
 
-    // If this is the first data that's added to the buffer, indicate that it
-    // can be sent later
-    if (size == 0) {
-        [[maybe_unused]] auto old =
-            writing.send_later.exchange(writebuf, mo_rel);
-        CS_MIDI_USB_ASSERT(old == nullptr);
-    }
-    // If the buffer is now full, send it immediately (but don't block)
-    if (newsize == PacketSize) {
-        send_now_impl_nonblock(writebuf);
-    }
-    // If this is the first data in the buffer, start a timer that will send
-    // the buffer after a given timeout
-    else if (size == 0) {
-        std::atomic_signal_fence(mo_rel);
-        CRTP(Derived).start_timeout();
-    }
+    // Us having the sending lock also means that the timeout and the
+    // tx_callback cannot have concurrent access to writing.active_writebuffer
+    // Therefore, acquiring it must succeed.
+    auto send_buffer = writing.active_writebuffer.exchange(nullptr, mo_seq);
+    // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ acq <<<active_writebuffer>>>
+    CS_MIDI_USB_ASSERT(send_buffer == buffer);
+    CS_MIDI_USB_ASSERT(send_now == buffer);
+    // Now that we own both the buffer and the sending lock, we can send it
+    writing.send_now.store(nullptr, mo_rlx);
+    // Prepare the other buffer to be filled
+    auto next_buffer = other_buf(send_buffer);
+    next_buffer->size = 0;
+    // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ rel <<<active_writebuffer>>>
+    writing.active_writebuffer.store(next_buffer, mo_rel);
+    // Send the current buffer
+    CRTP(Derived).tx_start(send_buffer->buffer, send_buffer->size);
+    // ------------------------------------------------------------------------- (sending lock is released by the tx_callback)
 
-    // How many messages were added to the transmit buffer
-    return free_size / msg_size;
-}
+    // TODO: if copy_size == 0, we could retry here
 
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-void BulkTX<Derived, MessageTypeT, PacketSizeV>::send_now_impl_nonblock(
-    wbuffer_t *send_buffer) {
-    // Disable the timeout
-    auto old = writing.send_later.exchange(nullptr, mo_acq);
-    if (old == nullptr)
-        // If the timeout was not active, the buffer has already been sent.
-        return;
-
-    // Cancel the timeout
-    CS_MIDI_USB_ASSERT(old == send_buffer);
-    CRTP(Derived).cancel_timeout();
-    // Since we've cleared send_later, we can be sure that we're not racing
-    // with the timeout handler
-
-    // Schedule the buffer to be sent and reserve it (acquires the “sending”
-    // lock on success, schedules the buffer to be sent later otherwise)
-    auto size = prepare_tx(send_buffer);
-    if (size == 0)
-        return;
-
-    // Actually send the buffer
-    std::atomic_signal_fence(mo_rel);
-    CRTP(Derived).tx_start(send_buffer->buffer, size);
-    // “sending” lock is released in USB callback
-    return;
+    return copy_size / sizeof(*msgs);
 }
 
 template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
 void BulkTX<Derived, MessageTypeT, PacketSizeV>::timeout_callback() {
-    // Check which buffer (if any) to send
-    wbuffer_t *send_buffer = writing.send_later.exchange(nullptr, mo_acq);
-    if (!send_buffer)
-        // If the buffer has been cleared already, this means that the send_now
-        // function was called before the timeout, and the buffer has been sent
-        // (or marked ready), and we don't have to do anything
+    auto buffer = writing.send_later.exchange(nullptr, mo_acq);
+    if (buffer == nullptr)
+        // Either the write function or the send_now function already cleared
+        // the send_later flag.
         return;
 
-    // Schedule the buffer to be sent and reserve it (acquires the “sending”
-    // lock on success, schedules the buffer to be sent later otherwise)
-    auto size = prepare_tx(send_buffer);
-    if (size == 0)
+    // Indicate to any handlers interrupting us that we intend to send a buffer.
+    writing.send_now.store(buffer, mo_seq); //                               (7)
+
+    // Try to acquire the sending lock.
+    wbuffer_t *old = nullptr;
+    if (!writing.sending.compare_exchange_strong(old, buffer, mo_seq)) //    (8)
+        // If we couldn't get the lock, whoever has the lock will send the
+        // data and clear send-now.
         return;
+    // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ acq >>>sending<<<
+    // We now own the sending lock
 
-    // Actually send the buffer
-    std::atomic_signal_fence(mo_rel);
-    CRTP(Derived).tx_start_timeout(send_buffer->buffer, size);
-}
-
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-uint16_t
-BulkTX<Derived, MessageTypeT, PacketSizeV>::prepare_tx(wbuffer_t *send_buffer) {
-    // Schedule the active buffer to be sent immediately after the previous one
-    [[maybe_unused]] auto old = writing.send_now.exchange(send_buffer, mo_seq);
-    // The send_later buffer can only be acquired once, so the send_now flag
-    // cannot still be set
-    CS_MIDI_USB_ASSERT(old == nullptr);
-
-    // Try to acquire the “sending” lock:
-    wbuffer_t *expected = nullptr;
-    if (!writing.sending.compare_exchange_strong(expected, send_buffer, mo_seq))
-        // If we failed to get the lock, the previous transmission is still in
-        // progress, so we can't send now, but sending of our buffer is
-        // scheduled using the send_now flag, so we can just return.
-        return 0;
-
-    // Acquire the send_now lock again (it might have been acquired by the
-    // tx_callback in the meantime, in which case our job is done)
-    if (writing.send_now.exchange(nullptr, mo_seq) == nullptr) {
-        // Release the sending lock
-        writing.sending.store(nullptr, mo_seq);
-        return 0;
+    // It is possible that the tx_callback ran between (7) and (8), so check
+    // the send-now flag again.
+    auto send_now = writing.send_now.load(mo_seq);
+    if (send_now == nullptr) {
+        // If the buffer was already sent, release the sending lock and return.
+        writing.sending.store(nullptr, mo_seq); // ▲▲▲
+        return;
     }
 
-    // Swap the buffers
-    wbuffer_t *next_buffer = other_buf(send_buffer);
-    // Since we were able to acquire the “sending” lock, the next buffer must be
-    // empty.
-    CS_MIDI_USB_ASSERT(next_buffer->size.load(mo_rlx) == 0);
-    writing.active_writebuffer.store(next_buffer, mo_rlx);
-
-    // Get the size of the buffer to send and atomically set it to reserved
-    auto size = send_buffer->size.exchange(SizeReserved, mo_acq_rel);
-    CS_MIDI_USB_ASSERT(size != SizeReserved);
-    CS_MIDI_USB_ASSERT(size <= PacketSize);
-    CS_MIDI_USB_ASSERT(size != 0);
-
-    // Return the number of bytes that should be sent
-    return size;
+    // Us having the sending lock also means that the timeout and the
+    // tx_callback cannot have concurrent access to writing.active_writebuffer
+    // Therefore, acquiring it must succeed.
+    if (auto act = writing.active_writebuffer.exchange(nullptr, mo_seq)) {
+        // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ acq <<<active_writebuffer>>>
+        CS_MIDI_USB_ASSERT(act == buffer);
+        CS_MIDI_USB_ASSERT(send_now == buffer);
+        // Now that we own both the buffer and the sending lock, we can send it
+        writing.send_now.store(nullptr, mo_rlx);
+        // Prepare the other buffer to be filled
+        auto next_buffer = other_buf(act);
+        next_buffer->size = 0;
+        // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ rel <<<active_writebuffer>>>
+        writing.active_writebuffer.store(next_buffer, mo_rel);
+        // Send the current buffer
+        CRTP(Derived).tx_start_timeout(buffer->buffer, buffer->size);
+        // --------------------------------------------------------------------- (sending lock is released by the tx_callback)
+        return;
+    }
+    // The write function owns the buffer.
+    // TODO: only valid if this is an interrupt handler, see tx_callback comment
+    // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ rel >>>sending<<<
+    writing.sending.store(nullptr, mo_seq);
+    return;
 }
 
 template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
 void BulkTX<Derived, MessageTypeT, PacketSizeV>::tx_callback() {
+    // ------------------------------------------------------------------------- (we still own the sending lock)
     wbuffer_t *sent_buffer = writing.sending.load(mo_acq);
+    CS_MIDI_USB_ASSERT(sent_buffer != nullptr);
 
-    // The transmission is done, reset the size of the buffer to 0 so the
-    // main thread can write to it again.
-    [[maybe_unused]] auto oldsize = sent_buffer->size.exchange(0, mo_rel);
-    CS_MIDI_USB_ASSERT(oldsize == SizeReserved);
+    // Check if anyone tried to send the next buffer while the previous one
+    // was still being sent
+    wbuffer_t *send_next = writing.send_now.load(mo_seq);
+    if (send_next) {
+        CS_MIDI_USB_ASSERT(send_next != sent_buffer);
+        // We already own the sending lock.
+        if (auto act = writing.active_writebuffer.exchange(nullptr, mo_seq)) {
+            // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ acq <<<active_writebuffer>>>
+            CS_MIDI_USB_ASSERT(act == send_next);
+            writing.send_now.store(nullptr, mo_rlx);
+            sent_buffer->size = 0;
+            writing.sending.store(send_next, mo_seq);
+            // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ rel <<<active_writebuffer>>>
+            writing.active_writebuffer.store(sent_buffer, mo_seq);
+            CRTP(Derived).tx_start_isr(send_next->buffer, send_next->size);
+            return;
+            // ----------------------------------------------------------------- (sending lock is released by the next tx_callback)
+        }
+        // Someone else already holds the active_buffer lock.
+        // We own the sending lock, but not the buffer to be sent. Since the
+        // timeout and send_now can only own the buffer if they also own the
+        // sending lock, it must be the write function that owns the buffer.
+        // The write function always checks the send-now flag after releasing
+        // the buffer, so we can safely release our sending lock and return.
+        // In the case of interrupts/signal handlers, our release of the lock
+        // happens-before the release of the release of the active buffer in
+        // the write function, so there would be no need to check send_now
+        // again after releasing. In different threads, we would need to check
+        // again, because the write thread could try to acquire the sending
+        // lock before we released it.
+        // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ rel >>>sending<<<
+        writing.sending.store(nullptr, mo_seq);
+        return;
+
+        // TODO: can we do it for the threaded case? At first sight, we should
+        //       try to acquire the active write buffer first, and then try
+        //       to acquire the sending lock again.
+        //       Alternatively, we could add a “main-should-wait” flag to
+        //       indicate that the write function should do a busy wait because
+        //       we'll release the sending lock soon.
+    }
 
     // Release the “sending” lock
+    // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ rel >>>sending<<<
     writing.sending.store(nullptr, mo_seq);
 
-    // Check if the other buffer was scheduled to be sent immediately after the
-    // one we just sent
-    wbuffer_t *next_ready = writing.send_now.load(mo_seq);
-    if (!next_ready)
+    // Someone may have tried sending the other buffer while we were still
+    // holding the sending lock, so check the send_now flag (again).
+    send_next = writing.send_now.load(mo_seq); //                            (3)
+    if (send_next == nullptr)
+        // No one tried to send before, and if they try to send later, they will
+        // be able to get the lock to do so.
         return;
 
-    // Try to acquire the “sending” lock again
-    wbuffer_t *expected = nullptr;
-    if (!writing.sending.compare_exchange_strong(expected, next_ready, mo_seq))
+    // Someone tried to send. We must try to send now.
+    wbuffer_t *old = nullptr;
+    if (!writing.sending.compare_exchange_strong(old, send_next, mo_seq)) // (4)
+        // If this fails, someone else must have been able to acquire the
+        // sending lock in the meantime, and will be able to make progress.
         return;
 
-    // Try to acquire the “send_now” buffer
-    wbuffer_t *old_ready = writing.send_now.exchange(nullptr, mo_seq);
-    if (!old_ready) {
-        // If that failed, release the “sending” lock
-        writing.sending.store(nullptr, mo_rel);
+    // The send_now flag must still be true: either the timeout fired between
+    // (3) and (4) and clears it, in which case it holds on to the sending lock,
+    // or it failed to get both the sending lock and the buffer, and in that
+    // case it doesn't clear send-now. Similar for the main program.
+    CS_MIDI_USB_ASSERT(writing.send_now.load(mo_seq) == send_next);
+
+    // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ acq >>>sending<<<
+    // We now hold the sending lock (again)
+
+    // This is the same as earlier
+    if (auto act = writing.active_writebuffer.exchange(nullptr, mo_seq)) {
+        // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ acq <<<active_writebuffer>>>
+        CS_MIDI_USB_ASSERT(act == send_next);
+        writing.send_now.store(nullptr, mo_rlx);
+        sent_buffer->size = 0;
+        writing.sending.store(send_next, mo_seq);
+        // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ rel <<<active_writebuffer>>>
+        writing.active_writebuffer.store(sent_buffer, mo_seq);
+        CRTP(Derived).tx_start_isr(send_next->buffer, send_next->size);
         return;
+        // --------------------------------------------------------------------- (sending lock is released by the next tx_callback)
     }
-    CS_MIDI_USB_ASSERT(old_ready == next_ready);
+    // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ rel >>>sending<<<
+    writing.sending.store(nullptr, mo_seq);
 
-    // Send the next buffer if it was ready and if we were able to acquire the
-    // sending lock
-
-    // Swap the buffers
-    writing.active_writebuffer.store(sent_buffer, mo_rlx);
-    // Get the size of the buffer to send and atomically set it to reserved
-    auto size = next_ready->size.exchange(SizeReserved, mo_acq_rel);
-    CS_MIDI_USB_ASSERT(size != SizeReserved);
-    CS_MIDI_USB_ASSERT(size != 0);
-    // Actually send the buffer
-    CRTP(Derived).tx_start_isr(next_ready->buffer, size);
-    // Note that the timeout for this buffer cannot still be running, because
-    // send_now was set, and this can only be done after clearing the timeout
-    // (either in the timeout callback or in the send_now function)
+    // TODO: same as above
 }
 
 END_CS_NAMESPACE

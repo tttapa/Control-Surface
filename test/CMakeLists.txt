@@ -51,6 +51,7 @@ add_executable(tests
     "MIDI_Interfaces/test-MIDI_Pipes.cpp"
     "MIDI_Interfaces/test-BLEMIDIPacketBuilder.cpp"
     "MIDI_Interfaces/test-BLEAPI.cpp"
+    "MIDI_Interfaces/test-USBBulk.cpp"
     "Banks/test-Banks.cpp"
     "Selectors/test-ManyButtonsSelector.cpp"
     "Selectors/test-IncrementDecrementSelector.cpp"

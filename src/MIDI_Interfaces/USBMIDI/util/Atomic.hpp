@@ -12,7 +12,11 @@
 
 BEGIN_CS_NAMESPACE
 
-#if defined(ARDUINO_ARCH_RP2040)
+#ifndef ARDUINO
+
+#define CS_USE_REAL_ATOMIC 1
+
+#elif defined(ARDUINO_ARCH_RP2040)
 
 class ScopedInterruptDisabler {
   public:
