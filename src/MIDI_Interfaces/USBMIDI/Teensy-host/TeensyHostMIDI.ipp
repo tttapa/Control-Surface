@@ -88,10 +88,8 @@ template <uint16_t MaxPacketSize>
 void TeensyHostMIDI<MaxPacketSize>::write_start(uint8_t *buffer,
                                                 uint32_t size) {
     // digitalWrite(3, HIGH);
-    __disable_irq();
     if (txpipe)
         queue_Data_Transfer(txpipe, buffer, size, this);
-    __enable_irq();
 }
 template <uint16_t MaxPacketSize>
 void TeensyHostMIDI<MaxPacketSize>::write_start_isr(uint8_t *buffer,
@@ -110,10 +108,8 @@ TeensyHostMIDI<MaxPacketSize>::write_finish(const Transfer_t *transfer) {
 
 template <uint16_t MaxPacketSize>
 void TeensyHostMIDI<MaxPacketSize>::read_start(uint8_t *buffer, uint32_t size) {
-    __disable_irq();
     if (rxpipe)
         queue_Data_Transfer(rxpipe, buffer, size, this);
-    __enable_irq();
 }
 template <uint16_t MaxPacketSize>
 void TeensyHostMIDI<MaxPacketSize>::read_start_isr(uint8_t *buffer,
