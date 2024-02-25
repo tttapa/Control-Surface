@@ -8,7 +8,7 @@
 BEGIN_CS_NAMESPACE
 
 /// Receives Bulk packets (OUT for device mode, IN for host mode)
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
 struct BulkRX {
   public:
     using MessageType = MessageTypeT;
@@ -18,11 +18,11 @@ struct BulkRX {
     bool read(MessageType &message);
 
   protected:
-    void reset();
+    void reset(uint16_t packet_size = MaxPacketSize);
 
   private:
-    static constexpr uint16_t PacketSize = PacketSizeV;
-    static constexpr uint16_t SizeReserved = PacketSize + 1;
+    static constexpr uint16_t MaxPacketSize = MaxPacketSizeV;
+    static constexpr uint16_t SizeReserved = MaxPacketSize + 1;
     static constexpr uint16_t NumRxPackets = 2;
 
   protected:
@@ -43,14 +43,15 @@ struct BulkRX {
     /// State for reading incoming USB data.
     struct Reading {
         struct Buffer {
-            uint32_t size = 0;
-            uint32_t index = 0;
-            alignas(uint32_t) uint8_t buffer[PacketSize];
+            uint16_t size = 0;
+            uint16_t index = 0;
+            alignas(uint32_t) uint8_t buffer[MaxPacketSize];
         } buffers[NumRxPackets];
         interrupt_atomic<uint32_t> available {0};
         uint32_t read_idx {0};
         interrupt_atomic<uint32_t> write_idx {0};
         interrupt_atomic<bool> reading {false};
+        uint16_t packet_size = MaxPacketSize;
     } reading;
     using rbuffer_t = std::remove_reference_t<decltype(reading.buffers[0])>;
 

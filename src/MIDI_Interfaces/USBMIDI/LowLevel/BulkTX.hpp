@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstddef>
-#include <tuple>
 
 #include <MIDI_Interfaces/USBMIDI/util/Atomic.hpp>
 #include <Settings/NamespaceSettings.hpp>
@@ -9,7 +8,7 @@
 BEGIN_CS_NAMESPACE
 
 /// Sends Bulk packets (IN for device mode, OUT for host mode)
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
 struct BulkTX {
   public:
     using MessageType = MessageTypeT;
@@ -52,11 +51,11 @@ struct BulkTX {
     bool is_done() const;
 
   protected:
-    void reset();
+    void reset(uint16_t packet_size = MaxPacketSize);
 
   private:
-    static constexpr uint16_t PacketSize = PacketSizeV;
-    static constexpr uint16_t SizeReserved = PacketSize + 1;
+    static constexpr uint16_t MaxPacketSize = MaxPacketSizeV;
+    static constexpr uint16_t SizeReserved = MaxPacketSize + 1;
 
   protected:
     // Derived should implement the following methods:
@@ -84,12 +83,13 @@ struct BulkTX {
     struct Writing {
         struct Buffer {
             uint16_t size {0};
-            alignas(MessageType) uint8_t buffer[PacketSize];
+            alignas(MessageType) uint8_t buffer[MaxPacketSize];
         } buffers[2];
         interrupt_atomic<Buffer *> active_writebuffer {&buffers[0]};
         interrupt_atomic<Buffer *> sending {nullptr};
         interrupt_atomic<Buffer *> send_later {nullptr};
         interrupt_atomic<Buffer *> send_now {nullptr};
+        uint16_t packet_size = MaxPacketSize;
     } writing;
     using wbuffer_t = typename Writing::Buffer;
 

@@ -16,20 +16,20 @@
 
 BEGIN_CS_NAMESPACE
 
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-void BulkTX<Derived, MessageTypeT, PacketSizeV>::write(MessageType msg) {
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
+void BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::write(MessageType msg) {
     write(&msg, 1);
 }
 
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-void BulkTX<Derived, MessageTypeT, PacketSizeV>::write(const MessageType *msgs,
-                                                       uint32_t num_msgs) {
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
+void BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::write(
+    const MessageType *msgs, uint32_t num_msgs) {
     const uint32_t *end = msgs + num_msgs;
     while (msgs != end) msgs += write_impl(msgs, end - msgs);
 }
 
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-uint32_t BulkTX<Derived, MessageTypeT, PacketSizeV>::write_nonblock(
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
+uint32_t BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::write_nonblock(
     const MessageType *msgs, uint32_t num_msgs) {
     uint32_t total_sent = 0, sent = 1;
     while (total_sent < num_msgs && sent != 0) {
@@ -39,8 +39,8 @@ uint32_t BulkTX<Derived, MessageTypeT, PacketSizeV>::write_nonblock(
     return total_sent;
 }
 
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-void BulkTX<Derived, MessageTypeT, PacketSizeV>::send_now() {
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
+void BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::send_now() {
     auto buffer = writing.send_later.exchange(nullptr, mo_acq);
     if (buffer == nullptr)
         // Either the write function or the timeout_handler already cleared
@@ -90,8 +90,10 @@ void BulkTX<Derived, MessageTypeT, PacketSizeV>::send_now() {
     return;
 }
 
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-void BulkTX<Derived, MessageTypeT, PacketSizeV>::reset() {
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
+void BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::reset(
+    uint16_t packet_size) {
+    writing.packet_size = packet_size;
     writing.buffers[0].size = 0;
     writing.buffers[1].size = 0;
     writing.active_writebuffer.store(&writing.buffers[0], mo_rlx);
@@ -100,17 +102,16 @@ void BulkTX<Derived, MessageTypeT, PacketSizeV>::reset() {
     writing.sending.store(nullptr, mo_rlx);
 }
 
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-bool BulkTX<Derived, MessageTypeT, PacketSizeV>::is_done() const {
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
+bool BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::is_done() const {
     return writing.sending.load(mo_acq) == nullptr &&
            writing.send_later.load(mo_acq) == nullptr &&
            writing.send_now.load(mo_acq) == nullptr;
 }
 
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-uint32_t
-BulkTX<Derived, MessageTypeT, PacketSizeV>::write_impl(const MessageType *msgs,
-                                                       uint32_t num_msgs) {
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
+uint32_t BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::write_impl(
+    const MessageType *msgs, uint32_t num_msgs) {
     if (num_msgs == 0)
         return 0;
 
@@ -128,7 +129,7 @@ BulkTX<Derived, MessageTypeT, PacketSizeV>::write_impl(const MessageType *msgs,
 
     auto size = buffer->size;
     CS_MIDI_USB_ASSERT(size != SizeReserved);
-    size_t avail_size = PacketSize - size;
+    size_t avail_size = writing.packet_size - size;
     auto copy_size_zu = std::min<size_t>(avail_size, num_msgs * sizeof(*msgs));
     auto copy_size = static_cast<uint16_t>(copy_size_zu);
     if (copy_size > 0) {
@@ -141,7 +142,7 @@ BulkTX<Derived, MessageTypeT, PacketSizeV>::write_impl(const MessageType *msgs,
 
     if (copy_size > 0) {
         // If we completely filled this buffer in one go, send it now.
-        if (size == 0 && copy_size == PacketSize) {
+        if (size == 0 && copy_size == writing.packet_size) {
             CS_MIDI_USB_ASSERT(writing.send_later.load(mo_rlx) == nullptr);
             CS_MIDI_USB_ASSERT(writing.send_now.load(mo_rlx) == nullptr);
             writing.send_now.store(buffer, mo_rel); // TODO: can be relaxed
@@ -153,7 +154,7 @@ BulkTX<Derived, MessageTypeT, PacketSizeV>::write_impl(const MessageType *msgs,
             CRTP(Derived).start_timeout();
         }
         // If this buffer was partially filled before and now full, send it now.
-        else if (size + copy_size == PacketSize) {
+        else if (size + copy_size == writing.packet_size) {
             auto send_buffer = writing.send_later.exchange(nullptr, mo_acq);
             if (send_buffer != nullptr) {
                 CS_MIDI_USB_ASSERT(writing.send_now.load(mo_rlx) == nullptr);
@@ -213,8 +214,8 @@ BulkTX<Derived, MessageTypeT, PacketSizeV>::write_impl(const MessageType *msgs,
     return copy_size / sizeof(*msgs);
 }
 
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-void BulkTX<Derived, MessageTypeT, PacketSizeV>::timeout_callback() {
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
+void BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::timeout_callback() {
     auto buffer = writing.send_later.exchange(nullptr, mo_acq);
     if (buffer == nullptr)
         // Either the write function or the send_now function already cleared
@@ -268,8 +269,8 @@ void BulkTX<Derived, MessageTypeT, PacketSizeV>::timeout_callback() {
     return;
 }
 
-template <class Derived, class MessageTypeT, uint16_t PacketSizeV>
-void BulkTX<Derived, MessageTypeT, PacketSizeV>::tx_callback() {
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
+void BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::tx_callback() {
     // ------------------------------------------------------------------------- (we still own the sending lock)
     wbuffer_t *sent_buffer = writing.sending.load(mo_acq);
     CS_MIDI_USB_ASSERT(sent_buffer != nullptr);
