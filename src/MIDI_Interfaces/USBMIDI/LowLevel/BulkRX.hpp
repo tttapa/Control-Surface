@@ -23,7 +23,7 @@ struct BulkRX {
   private:
     static constexpr uint16_t MaxPacketSize = MaxPacketSizeV;
     static constexpr uint16_t SizeReserved = MaxPacketSize + 1;
-    static constexpr uint16_t NumRxPackets = 2;
+    static constexpr uint16_t NumRxPackets = MaxPacketSize == 64 ? 16 : 4;
 
   protected:
     // Derived should implement the following methods:
