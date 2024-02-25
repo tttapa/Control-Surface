@@ -143,13 +143,21 @@ void MIDI_Interface::updateIncoming(MIDIInterface_t *self) {
         return;
     if (self->getStaller() == self)
         self->unstall(self);
-    bool chunked = false;
+    int16_t size_rem = 512 * 3 / 4; // Don't keep on reading for too long
+    bool chunked = false; // Whether there's an unterminated SysEx chunk
     while (event != MIDIReadEvent::NO_MESSAGE) {
         dispatchIncoming(self, event);
-        if (event == MIDIReadEvent::SYSEX_CHUNK)
+        if (event == MIDIReadEvent::SYSEX_CHUNK) {
+            size_rem -= self->getSysExMessage().length;
             chunked = true;
-        if (event == MIDIReadEvent::SYSEX_MESSAGE)
+        } else if (event == MIDIReadEvent::SYSEX_MESSAGE) {
+            size_rem -= self->getSysExMessage().length;
             chunked = false;
+        } else {
+            size_rem -= 3;
+        }
+        if (size_rem < 0)
+            break;
         event = self->read();
     }
     if (chunked)
