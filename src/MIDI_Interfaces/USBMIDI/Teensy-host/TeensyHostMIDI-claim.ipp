@@ -54,6 +54,8 @@ template <uint16_t MaxPacketSize>
 bool TeensyHostMIDI<MaxPacketSize>::claim_if_midi(Device_t *dev, int type,
                                                   const uint8_t *descriptors,
                                                   uint32_t len) {
+    static_cast<void>(dev);
+    static_cast<void>(type);
     USBHost::println_("MIDIDevice claim this=", (uintptr_t)this, HEX);
     USBHost::println_("len = ", len);
 

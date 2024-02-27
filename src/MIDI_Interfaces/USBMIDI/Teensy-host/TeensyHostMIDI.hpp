@@ -18,7 +18,7 @@ class TeensyHostMIDI
       protected BulkRX<TeensyHostMIDI<MaxPacketSize>, uint32_t, MaxPacketSize>,
       protected BulkTX<TeensyHostMIDI<MaxPacketSize>, uint32_t, MaxPacketSize> {
   public:
-    TeensyHostMIDI(USBHost &host) { init(); }
+    TeensyHostMIDI(USBHost &) { init(); }
 
     using microseconds = std::chrono::microseconds;
 

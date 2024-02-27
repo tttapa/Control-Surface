@@ -150,7 +150,7 @@ void TeensyHostMIDI<MaxPacketSize>::tx_start_timeout(const void *data,
 }
 
 template <uint16_t MaxPacketSize>
-void TeensyHostMIDI<MaxPacketSize>::in_callback(const Transfer_t *transfer) {
+void TeensyHostMIDI<MaxPacketSize>::in_callback(const Transfer_t *) {
     BulkTX<TeensyHostMIDI, uint32_t, MaxPacketSize>::tx_callback();
 }
 
