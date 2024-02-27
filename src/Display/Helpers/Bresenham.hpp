@@ -33,7 +33,8 @@ class BresenhamLine {
     BresenhamLine(Pixel start, int cos, int sin)
         : px(start),        // Starting point
           dx(cos), dy(sin), // cosine and sine of the slope of the line (scaled)
-          adx(abs(dx)), ady(abs(dy)),   // absolute values of cos and sin
+          adx(std::abs(dx)),
+          ady(std::abs(dy)),            // absolute values of cos and sin
           xinc(sgn(dx)), yinc(sgn(dy)), // increment steps for x and y
           steep(ady > adx) // whether to increment x or y on each iteration
     {

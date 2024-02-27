@@ -118,7 +118,7 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base<SPIDriver> {
             startDigit += getNumberOfDigits();
         if (endDigit < 0)
             endDigit += getNumberOfDigits();
-        unsigned long anumber = abs(number);
+        unsigned long anumber = std::abs(number);
         int16_t i = startDigit;
         do {
             sendDigit(i++, NumericChars[anumber % 10]);

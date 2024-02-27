@@ -1,10 +1,10 @@
 #pragma once
 
+#include <AH/STL/cmath>
 #include <AH/STL/utility> // std::forward
 #include <Display/DisplayElement.hpp>
 #include <Display/DisplayInterface.hpp>
 #include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
-#include <math.h>
 
 BEGIN_CS_NAMESPACE
 
@@ -55,11 +55,11 @@ class VPotDisplay : public DisplayElement {
         // Segment 5 (i.e. the sixth segment) = 0° (i.e. 12 o'clock, the middle)
         float angle = angleSpacing * (segment - 5);
 
-        uint16_t x_start = x + round((float)innerRadius * sin(angle) / 2);
-        uint16_t y_start = y - round((float)innerRadius * cos(angle) / 2);
+        uint16_t x_start = x + std::round((float)innerRadius * sin(angle) / 2);
+        uint16_t y_start = y - std::round((float)innerRadius * cos(angle) / 2);
 
-        uint16_t x_end = x + round((float)innerRadius * sin(angle));
-        uint16_t y_end = y - round((float)innerRadius * cos(angle));
+        uint16_t x_end = x + std::round((float)innerRadius * sin(angle));
+        uint16_t y_end = y - std::round((float)innerRadius * cos(angle));
 
         display.drawLine(x_start, y_start, x_end, y_end, color);
     }
