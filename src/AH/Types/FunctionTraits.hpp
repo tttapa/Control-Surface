@@ -3,9 +3,6 @@
 #include <AH/STL/cstddef>
 #include <AH/STL/tuple>
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Settings/NamespaceSettings.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -29,5 +26,3 @@ struct function_traits<Return(Args...)> {
 };
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

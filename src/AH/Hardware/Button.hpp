@@ -2,9 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 #include <AH/Settings/SettingsWrapper.hpp>
 
@@ -141,5 +138,3 @@ class Button {
 };
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

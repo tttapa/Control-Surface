@@ -1,7 +1,5 @@
 #include "Button.hpp"
 
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 BEGIN_AH_NAMESPACE
 
 Button::Button(pin_t pin) : pin(pin) {}
@@ -64,5 +62,3 @@ unsigned long Button::getDebounceTime() { return Button::debounceTime; }
 unsigned long Button::debounceTime = BUTTON_DEBOUNCE_TIME;
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

@@ -2,9 +2,6 @@
 
 /// @file
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/PrintStream/PrintStream.hpp>
 #include <AH/Settings/SettingsWrapper.hpp>
 
@@ -196,5 +193,3 @@ END_AH_NAMESPACE
     } while (0)
 
 #endif
-
-AH_DIAGNOSTIC_POP()

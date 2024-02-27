@@ -2,10 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Error/Error.hpp>
 #include <AH/Settings/NamespaceSettings.hpp>
 #include <stdint.h>
@@ -144,5 +140,3 @@ class BitArray {
 /// @}
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

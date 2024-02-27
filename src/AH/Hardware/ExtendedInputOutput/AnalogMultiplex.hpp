@@ -2,9 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include "ExtendedInputOutput.hpp"
 #include "StaticSizeExtendedIOElement.hpp"
 #include <AH/Containers/Array.hpp>
@@ -271,5 +268,3 @@ void AnalogMultiplex<N>::afterReading() {
 }
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

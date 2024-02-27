@@ -2,9 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include "StaticSizeExtendedIOElement.hpp"
 #include <AH/Containers/BitArray.hpp>
 #include <AH/Hardware/LEDs/MAX7219_Base.hpp>
@@ -212,5 +209,3 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
 };
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

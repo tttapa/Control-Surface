@@ -2,9 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include "ExtendedInputOutput.hpp"
 #include <AH/Containers/Updatable.hpp>
 #include <AH/Hardware/Hardware-Types.hpp>
@@ -426,5 +423,3 @@ inline void analogWriteBuffered(CachedExtIOPin pin, int val) {
 using ExtIO::CachedExtIOPin;
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

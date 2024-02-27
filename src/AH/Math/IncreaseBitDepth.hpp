@@ -1,8 +1,5 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/STL/type_traits> // enable_if
 #include <limits.h>           // CHAR_BIT
 #include <stddef.h>           // size_t
@@ -72,5 +69,3 @@ T_out increaseBitDepth(T_in in) {
 /// @}
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

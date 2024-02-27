@@ -2,11 +2,8 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
-#include <stdint.h>
 #include <AH/Settings/SettingsWrapper.hpp>
+#include <stdint.h>
 
 BEGIN_AH_NAMESPACE
 
@@ -32,5 +29,3 @@ struct ShiftRegisterOutRGB {
 };
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

@@ -5,9 +5,6 @@
 #include <AH/Hardware/Arduino-Hardware-Types.hpp>
 #include <AH/STL/climits>
 #include <AH/Settings/NamespaceSettings.hpp>
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 BEGIN_AH_NAMESPACE
 
@@ -126,5 +123,3 @@ void shiftOut(unsigned int dataPin, unsigned int clockPin, BitOrder_t bitOrder,
 } // namespace ExtIO
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

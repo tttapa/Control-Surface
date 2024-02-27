@@ -1,8 +1,5 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include "ExtendedInputOutput.hpp"
 #include "StaticSizeExtendedIOElement.hpp"
 #include <AH/Containers/BitArray.hpp>
@@ -102,5 +99,3 @@ class MCP23017 : public StaticSizeExtendedIOElement<16> {
 END_AH_NAMESPACE
 
 #include "MCP23017.ipp"
-
-AH_DIAGNOSTIC_POP()
