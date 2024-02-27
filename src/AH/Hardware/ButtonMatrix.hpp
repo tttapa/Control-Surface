@@ -2,9 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Hardware/Hardware-Types.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -95,5 +92,3 @@ class ButtonMatrix {
 END_AH_NAMESPACE
 
 #include "ButtonMatrix.ipp" // Template implementations
-
-AH_DIAGNOSTIC_POP()

@@ -2,9 +2,6 @@
 
 /// @file
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Debug/Debug.hpp>
 
 #ifdef ARDUINO // ------------------------------------------------------ ARDUINO
@@ -103,5 +100,3 @@ END_AH_NAMESPACE
     } while (0)
 
 #endif
-
-AH_DIAGNOSTIC_POP()

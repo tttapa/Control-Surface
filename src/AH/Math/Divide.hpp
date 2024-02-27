@@ -3,10 +3,7 @@
 #include <AH/STL/cstdint>
 #include <AH/STL/type_traits>
 #include <AH/Settings/NamespaceSettings.hpp>
-#include <AH/Settings/Warnings.hpp>
 #include <stddef.h>
-
-AH_DIAGNOSTIC_WERROR()
 
 BEGIN_AH_NAMESPACE
 
@@ -59,5 +56,3 @@ T round_div(T val) {
 }
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

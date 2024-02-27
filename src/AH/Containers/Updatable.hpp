@@ -2,10 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Containers/CRTP.hpp>
 #include <AH/Containers/LinkedList.hpp>
 #include <AH/Error/Error.hpp>
@@ -193,5 +189,3 @@ class Updatable : public UpdatableCRTP<Updatable<T>> {
 };
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

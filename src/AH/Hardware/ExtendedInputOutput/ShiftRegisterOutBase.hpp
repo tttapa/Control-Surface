@@ -2,9 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include "ExtendedInputOutput.hpp"
 #include "StaticSizeExtendedIOElement.hpp"
 #include <AH/Containers/BitArray.hpp>
@@ -196,5 +193,3 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
 END_AH_NAMESPACE
 
 #include "ShiftRegisterOutBase.ipp"
-
-AH_DIAGNOSTIC_POP()

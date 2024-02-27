@@ -2,9 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Hardware/LEDs/LEDs.hpp>
 
 BEGIN_AH_NAMESPACE
@@ -79,5 +76,3 @@ class DotBarDisplayLEDs : public LEDs<N> {
 };
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

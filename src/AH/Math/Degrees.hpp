@@ -6,8 +6,6 @@
 
 #include <AH/STL/type_traits>
 #include <AH/Settings/NamespaceSettings.hpp>
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 BEGIN_AH_NAMESPACE
 
@@ -44,5 +42,3 @@ constexpr long double operator"" _deg(unsigned long long deg) {
 /// @}
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

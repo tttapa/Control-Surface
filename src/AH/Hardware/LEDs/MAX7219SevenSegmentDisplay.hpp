@@ -1,8 +1,5 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include "MAX7219_Base.hpp"
 
 BEGIN_AH_NAMESPACE
@@ -290,5 +287,3 @@ class MAX7219SevenSegmentDisplay : public MAX7219_Base<SPIDriver> {
 };
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

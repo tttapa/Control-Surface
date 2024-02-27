@@ -2,10 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Error/Error.hpp>
 #include <AH/STL/iterator>
 #include <AH/STL/type_traits> // conditional
@@ -535,5 +531,3 @@ using Array2D = Array<Array<T, NumCols>, NumRows>;
 /// @}
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

@@ -21,9 +21,6 @@
  */
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Arduino-Wrapper.h> // Print
 #include <AH/Math/Degrees.hpp>  // rad2deg()
 #include <AH/Math/Vector.hpp>   // Vec3f
@@ -370,5 +367,3 @@ Print &operator<<(Print &os, EulerAngles e);
 /// @}
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

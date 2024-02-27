@@ -1,13 +1,7 @@
 #pragma once
 
-#include <AH/Settings/NamespaceSettings.hpp>
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
-AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <AH/Arduino-Wrapper.h>
-AH_DIAGNOSTIC_POP()
+#include <AH/Settings/NamespaceSettings.hpp>
 
 #include <AH/Containers/Array.hpp>
 #include <AH/STL/limits>
@@ -15,7 +9,7 @@ AH_DIAGNOSTIC_POP()
 
 BEGIN_AH_NAMESPACE
 
-/// Lookup table that maps rotary encoder (2-bit gray code) state changes to 
+/// Lookup table that maps rotary encoder (2-bit gray code) state changes to
 /// position deltas.
 constexpr static int8_t RegisterEncodersLUT[16] = {
     0,  // 0 0 0 0
@@ -270,5 +264,3 @@ class RegisterEncoders {
 };
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

@@ -2,9 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Containers/Array.hpp>
 #include <AH/Settings/NamespaceSettings.hpp>
 #include <stdint.h> // uint8_t
@@ -28,5 +25,3 @@ template <size_t N>
 using PinList = Array<pin_t, N>;
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

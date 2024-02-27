@@ -13,9 +13,6 @@
  */
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Arduino-Wrapper.h> // Print
 #include <AH/STL/cmath>         // std::sqrt
 
@@ -266,5 +263,3 @@ Print &operator<<(Print &os, Vec3f v);
 /// @}
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

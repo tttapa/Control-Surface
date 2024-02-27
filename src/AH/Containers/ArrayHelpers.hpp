@@ -2,10 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include "Array.hpp"
 #include <AH/STL/algorithm>
 
@@ -290,5 +286,3 @@ operator<<(Print &os, const AH::Array<T, N> &a) {
 }
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

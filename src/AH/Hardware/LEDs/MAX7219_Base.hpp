@@ -2,9 +2,6 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Hardware/ExtendedInputOutput/ExtendedInputOutput.hpp>
 
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
@@ -234,5 +231,3 @@ class MAX7219_Base {
 };
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

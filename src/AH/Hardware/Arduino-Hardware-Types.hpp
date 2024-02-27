@@ -1,15 +1,9 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Hardware/Hardware-Types.hpp>
 #include <AH/Types/FunctionTraits.hpp>
 
-AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <AH/Arduino-Wrapper.h> // pin functions and constants
-AH_DIAGNOSTIC_POP()
-
 
 #if defined(ARDUINO_API_VERSION)
 
@@ -73,5 +67,3 @@ inline ArduinoPin_t arduino_pin_cast(T t) {
     return static_cast<ArduinoPin_t>(t);
 }
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

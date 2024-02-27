@@ -1,9 +1,10 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+#include <AH/Settings/NamespaceSettings.hpp>
 
 #include <stdint.h>
+
+BEGIN_AH_NAMESPACE
 
 /// @addtogroup    AH_Filters
 /// @{
@@ -95,4 +96,4 @@ class Hysteresis<0, T_in, T_out> {
 
 /// @}
 
-AH_DIAGNOSTIC_POP()
+END_AH_NAMESPACE

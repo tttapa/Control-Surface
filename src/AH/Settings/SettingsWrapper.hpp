@@ -1,13 +1,13 @@
 #ifndef AH_SETTINGSWRAPPER_HPP
 #define AH_SETTINGSWRAPPER_HPP
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
+#include "NamespaceSettings.hpp"
 
 // ---- User Settings ---- //
 // ======================= //
-#include "NamespaceSettings.hpp"
 #include "Settings.hpp"
+
+AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
 
 #define AH_IS_EMPTY_HELPER(x) x##1
 #define AH_IS_EMPTY(x) AH_IS_EMPTY_HELPER(x) == 1
@@ -43,10 +43,10 @@ static_assert(
     "use a wider type (e.g. uint32_t)");
 END_AH_NAMESPACE
 
+AH_DIAGNOSTIC_POP()
+
 // ------- Debug ------- //
 // ===================== //
 #include <AH/Debug/Debug.hpp>
-
-AH_DIAGNOSTIC_POP()
 
 #endif // AH_SETTINGSWRAPPER_HPP

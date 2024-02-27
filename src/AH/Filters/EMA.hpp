@@ -2,12 +2,13 @@
 
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <stdint.h>
 #include <AH/STL/limits>
 #include <AH/STL/type_traits>
+
+#include <AH/Settings/NamespaceSettings.hpp>
+
+BEGIN_AH_NAMESPACE
 
 /**
  * @brief   Exponential moving average filter.
@@ -183,4 +184,4 @@ class EMA_f {
     float filtered = 0;
 };
 
-AH_DIAGNOSTIC_POP()
+END_AH_NAMESPACE

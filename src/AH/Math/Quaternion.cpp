@@ -1,7 +1,5 @@
 #include "Quaternion.hpp"
 
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/PrintStream/PrintStream.hpp>
 #ifndef ARDUINO
 #include <ostream> // std::ostream, <<
@@ -38,5 +36,3 @@ Print &operator<<(Print &os, EulerAngles e) {
 // LCOV_EXCL_STOP
 
 END_AH_NAMESPACE
-
-AH_DIAGNOSTIC_POP()
