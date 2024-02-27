@@ -5,6 +5,9 @@
 #include <array>
 #include <cmath>
 
+using AH::EMA;
+using AH::EMA_f;
+
 TEST(EMA, EMA) {
     using namespace std;
     EMA<2, uint16_t> ema;
