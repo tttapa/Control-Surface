@@ -4,8 +4,6 @@
 #include <MIDI_Outputs/Bankable/Abstract/SmartMIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/ContinuousCCSender.hpp>
 
-AH_DIAGNOSTIC_WERROR()
-
 BEGIN_CS_NAMESPACE
 
 namespace Bankable {
@@ -56,5 +54,3 @@ class CCSmartPotentiometer
 } // namespace Bankable
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

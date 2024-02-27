@@ -1,9 +1,5 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR()
-
 #include "InterfaceMIDIInputElements.hpp"
 #include "MIDIInputElementMatchers.hpp"
 
@@ -112,5 +108,3 @@ class PBValue
 } // namespace Bankable
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

@@ -10,8 +10,6 @@
 #include <mutex>
 #endif
 
-AH_DIAGNOSTIC_WERROR()
-
 BEGIN_CS_NAMESPACE
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //
@@ -365,7 +363,5 @@ const char *MIDIStaller::getNameNull(MIDIStaller *s) {
 }
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()
 
 #endif

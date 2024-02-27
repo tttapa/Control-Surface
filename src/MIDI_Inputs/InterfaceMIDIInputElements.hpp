@@ -1,10 +1,7 @@
 #pragma once
 
 #include <AH/STL/cstdint>
-#include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
-
-AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
 
@@ -120,5 +117,3 @@ class IVU {
 } // namespace Interfaces
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

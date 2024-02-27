@@ -1,9 +1,5 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/STL/algorithm>
 #include <AH/Timing/MillisMicrosTimer.hpp>
 #include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
@@ -361,5 +357,3 @@ class VPotRing
 } // namespace MCU
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

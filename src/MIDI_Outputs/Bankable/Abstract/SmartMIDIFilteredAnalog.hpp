@@ -7,8 +7,6 @@
 #include <Def/Def.hpp>
 #include <MIDI_Outputs/Abstract/MIDIOutputElement.hpp>
 
-AH_DIAGNOSTIC_WERROR()
-
 BEGIN_CS_NAMESPACE
 
 namespace Bankable {
@@ -174,5 +172,3 @@ class SmartMIDIFilteredAnalog : public MIDIOutputElement {
 } // namespace Bankable
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

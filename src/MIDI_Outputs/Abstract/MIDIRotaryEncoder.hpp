@@ -12,8 +12,6 @@
 #include <Encoder.h> // Mock
 #endif
 
-AH_DIAGNOSTIC_WERROR()
-
 BEGIN_CS_NAMESPACE
 
 /**
@@ -73,5 +71,3 @@ template <class Sender>
 using BorrowedMIDIRotaryEncoder = GenericMIDIRotaryEncoder<AHEncoder &, Sender>;
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

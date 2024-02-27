@@ -1,9 +1,5 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR()
-
 #include <MIDI_Parsers/MIDI_MessageTypes.hpp>
 
 BEGIN_CS_NAMESPACE
@@ -181,5 +177,3 @@ class MIDI_Sender {
 END_CS_NAMESPACE
 
 #include "MIDI_Sender.ipp"
-
-AH_DIAGNOSTIC_POP()

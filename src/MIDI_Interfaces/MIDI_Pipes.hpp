@@ -7,11 +7,8 @@
 #include <AH/STL/cstdint>
 #include <AH/STL/limits>
 #include <AH/STL/utility>
-#include <AH/Settings/Warnings.hpp>
 #include <MIDI_Parsers/MIDI_MessageTypes.hpp>
 #include <Settings/NamespaceSettings.hpp>
-
-AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
 
@@ -723,8 +720,6 @@ operator|(TrueMIDI_SinkSource &sinksource,
 /// @}
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()
 
 #else
 

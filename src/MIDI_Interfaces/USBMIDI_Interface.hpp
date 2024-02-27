@@ -7,8 +7,6 @@
 #include <AH/Teensy/TeensyUSBTypes.hpp>
 #include <MIDI_Parsers/USBMIDI_Parser.hpp>
 
-AH_DIAGNOSTIC_WERROR()
-
 BEGIN_CS_NAMESPACE
 
 /**
@@ -194,5 +192,3 @@ class USBMIDI_Interface : public USBSerialMIDI_Interface {
 END_CS_NAMESPACE
 
 #endif
-
-AH_DIAGNOSTIC_POP()

@@ -1,8 +1,5 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-AH_DIAGNOSTIC_WERROR()
-
 #include <Banks/BankAddresses.hpp>
 #include <MIDI_Outputs/Bankable/Abstract/MIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/PitchBendSender.hpp>
@@ -49,5 +46,3 @@ class PBPotentiometer
 } // namespace Bankable
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

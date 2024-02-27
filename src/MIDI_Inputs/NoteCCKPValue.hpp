@@ -1,9 +1,5 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR()
-
 #include "InterfaceMIDIInputElements.hpp"
 #include "MIDIInputElementMatchers.hpp"
 
@@ -162,5 +158,3 @@ using KPValue = NoteCCKPValue<MIDIMessageType::KeyPressure, BankSize>;
 } // namespace Bankable
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

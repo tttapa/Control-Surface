@@ -1,9 +1,5 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR()
-
 #include <AH/Timing/MillisMicrosTimer.hpp>
 #include <MIDI_Inputs/InterfaceMIDIInputElements.hpp>
 #include <MIDI_Inputs/MIDIInputElementMatchers.hpp>
@@ -418,5 +414,3 @@ class VU
 } // namespace MCU
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

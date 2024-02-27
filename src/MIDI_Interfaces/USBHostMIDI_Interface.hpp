@@ -3,8 +3,6 @@
 #include "USBMIDI/Teensy-host/TeensyHostMIDI.hpp"
 #include "USBMIDI_Interface.hpp"
 
-AH_DIAGNOSTIC_WERROR()
-
 BEGIN_CS_NAMESPACE
 
 /// MIDI over USB backend for the Teensy
@@ -67,5 +65,3 @@ class USBHostMIDI_Interface_BigBuffer
 };
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

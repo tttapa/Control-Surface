@@ -13,8 +13,6 @@
 #include <Encoder.h> // Mock
 #endif
 
-AH_DIAGNOSTIC_WERROR()
-
 BEGIN_CS_NAMESPACE
 
 namespace Bankable {
@@ -77,5 +75,3 @@ using BorrowedMIDIRotaryEncoder =
 } // namespace Bankable
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

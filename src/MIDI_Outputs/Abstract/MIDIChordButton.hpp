@@ -1,9 +1,5 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR() // Enable errors on warnings
-
 #include <AH/Hardware/Button.hpp>
 #include <AH/STL/memory> // std::unique_ptr
 #include <Def/Def.hpp>
@@ -94,5 +90,3 @@ class MIDIChordButton : public MIDIOutputElement {
 };
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

@@ -4,10 +4,7 @@
 #if !DISABLE_PIPES
 
 #include <AH/STL/utility> // std::forward
-#include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
-
-AH_DIAGNOSTIC_WERROR()
 
 BEGIN_CS_NAMESPACE
 
@@ -47,8 +44,6 @@ auto makeMIDIStaller(Callback &&callback) -> MIDIStaller * {
 }
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()
 
 #else
 

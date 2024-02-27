@@ -1,9 +1,5 @@
 #pragma once
 
-#include <AH/Settings/Warnings.hpp>
-
-AH_DIAGNOSTIC_WERROR()
-
 #include "MIDIInputElementMatchers.hpp"
 
 BEGIN_CS_NAMESPACE
@@ -201,5 +197,3 @@ using KPRange = NoteCCKPRange<MIDIMessageType::KeyPressure, BankSize, RangeLen>;
 } // namespace Bankable
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

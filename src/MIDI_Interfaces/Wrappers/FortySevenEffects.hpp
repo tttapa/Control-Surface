@@ -3,8 +3,6 @@
 #include <AH/Error/Error.hpp>
 #include <MIDI_Interfaces/MIDI_Interface.hpp>
 
-AH_DIAGNOSTIC_WERROR()
-
 AH_DIAGNOSTIC_EXTERNAL_HEADER()
 #include <MIDI.h>
 AH_DIAGNOSTIC_POP()
@@ -198,5 +196,3 @@ class FortySevenEffectsMIDI_Interface : public MIDI_Interface {
 };
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

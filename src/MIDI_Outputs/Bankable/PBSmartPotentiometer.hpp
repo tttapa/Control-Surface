@@ -4,8 +4,6 @@
 #include <MIDI_Outputs/Bankable/Abstract/SmartMIDIFilteredAnalog.hpp>
 #include <MIDI_Senders/PitchBendSender.hpp>
 
-AH_DIAGNOSTIC_WERROR()
-
 BEGIN_CS_NAMESPACE
 
 namespace Bankable {
@@ -58,5 +56,3 @@ class PBSmartPotentiometer
 } // namespace Bankable
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

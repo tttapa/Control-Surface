@@ -3,8 +3,6 @@
 #include <MIDI_Parsers/MIDI_MessageTypes.hpp>
 #include <Settings/SettingsWrapper.hpp>
 
-AH_DIAGNOSTIC_WERROR()
-
 BEGIN_CS_NAMESPACE
 
 /**
@@ -229,5 +227,3 @@ void USBMIDI_Sender::sendSysEx(SysExMessage, Send &&) {}
 #endif
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

@@ -13,8 +13,6 @@
 #include <Encoder.h> // Mock
 #endif
 
-AH_DIAGNOSTIC_WERROR()
-
 BEGIN_CS_NAMESPACE
 
 /**
@@ -97,5 +95,3 @@ using BorrowedMIDIAbsoluteEncoder =
     GenericMIDIAbsoluteEncoder<AHEncoder &, Sender>;
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

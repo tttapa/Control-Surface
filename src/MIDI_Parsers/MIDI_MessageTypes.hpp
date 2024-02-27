@@ -4,14 +4,11 @@
 #include <AH/PrintStream/PrintStream.hpp> // operator<<
 #include <AH/STL/cstddef>                 // size_t
 #include <AH/STL/vector>
-#include <AH/Settings/Warnings.hpp>
 #include <Settings/NamespaceSettings.hpp>
 
 #ifndef ARDUINO
 #include <iostream>
 #endif
-
-AH_DIAGNOSTIC_WERROR()
 
 #include <Def/Cable.hpp>
 #include <Def/Channel.hpp>
@@ -420,5 +417,3 @@ inline Print &operator<<(Print &os, MIDIMessageType m) {
 }
 
 END_CS_NAMESPACE
-
-AH_DIAGNOSTIC_POP()

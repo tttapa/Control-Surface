@@ -9,7 +9,6 @@
 #include <drivers/Timeout.h>
 #include <platform/Callback.h>
 
-#include <AH/Settings/Warnings.hpp>
 #include <MIDI_Interfaces/USBMIDI/LowLevel/BulkRX.hpp>
 #include <MIDI_Interfaces/USBMIDI/LowLevel/BulkTX.hpp>
 #include <Settings/NamespaceSettings.hpp>
