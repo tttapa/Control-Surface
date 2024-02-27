@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <array>
 
+using AH::Hysteresis;
+
 TEST(Hysteresis, increasing) {
     using namespace std;
     constexpr size_t N = 18;
