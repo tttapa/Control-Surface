@@ -59,6 +59,11 @@ While these boards are not supported by the Arduino MIDIUSB library, they still 
 
 You can also use the [earlephilhower/arduino-pico](https://github.com/earlephilhower/arduino-pico) core instead of the official one from Arduino, in which case you have to enable the Adafruit TinyUSB library in the `Tools > USB Stack` menu.
 
+Known issues:
+ - [ArduinoCore-mbed/issues#129](https://github.com/arduino/ArduinoCore-mbed/issues/129): Nano 33 BLE unreliable USB communication
+ - [adafruit/Adafruit_TinyUSB_Arduino#400](https://github.com/adafruit/Adafruit_TinyUSB_Arduino/issues/400): USB descriptors not correctly updated if Bluetooth stack is initialized before Adafruit_TinyUSB
+ - [adafruit/Adafruit_TinyUSB_Arduino#238](https://github.com/adafruit/Adafruit_TinyUSB_Arduino/issues/238): TinyUSB MIDI crashes when simultaneously receiving and sending messages
+
 ## Teensy
 _Teensy 2.0, Teensy++ 2.0, Teensy LC, Teensy 3.0, Teensy 3.1, Teensy 3.2, Teensy 3.5, Teensy 3.6, Teensy 4.0, Teensy 4.1_  
 ***
