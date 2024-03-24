@@ -251,10 +251,10 @@ filtering analog inputs, and so on).
 ## Installation
 
 Download the repository as a ZIP archive by going to the [home page of the 
-repository](https://github.com/tttapa/Arduino-Helpers) and clicking
+repository](https://github.com/tttapa/Control-Surface) and clicking
 the green <kbd>Code</kbd> button in the top right, then choosing “Download ZIP”.  
 Alternatively, click the following direct download link:
-<https://github.com/tttapa/Arduino-Helpers/archive/refs/heads/master.zip>
+<https://github.com/tttapa/Control-Surface/archive/refs/heads/main.zip>
 
 Open the Arduino IDE, and go to the _Sketch &gt; Include Library &gt; Add .ZIP
 Library_ menu.  
