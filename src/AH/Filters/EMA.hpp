@@ -59,8 +59,7 @@ template <uint8_t K,
 class EMA {
   public:
     /// Constructor: initialize filter to zero or optional given value.
-    EMA(input_t initial = input_t(0))
-      : state(zero + (state_t(initial) << K) - initial) {}
+    EMA(input_t initial = input_t{0}) { reset(initial); }
 
     /**
      * @brief   Reset the filter to the given value.
@@ -69,7 +68,8 @@ class EMA {
      *          The value to reset the filter state to.
      */
     void reset(input_t value = input_t(0)) {
-        state = zero + (state_t(value) << K) - value;
+        state_t value_s = static_cast<state_t>(value);
+        state = zero + (value_s << K) - value_s;
     }
 
     /**
@@ -80,11 +80,11 @@ class EMA {
      * @return  The new filtered output value.
      */
     input_t filter(input_t input) {
-      state         += state_t(input);
+      state         += static_cast<state_t>(input);
       state_t output = (state + half) >> K;
       output        -= zero >> K;
       state         -= output;
-      return input_t(output);
+      return static_cast<input_t>(output);
     }
 
     /// @copydoc    EMA::filter(input_t)
@@ -95,8 +95,8 @@ class EMA {
     constexpr static state_t 
       max_state  = std::numeric_limits<state_t>::max(),
       half_state = max_state / 2 + 1,
-      zero       = std::is_unsigned<input_t>::value ? state_t(0) : half_state,
-      half       = K > 0 ? state_t(1) << (K - 1) : state_t(0);
+      zero       = std::is_unsigned<input_t>::value ? state_t{0} : half_state,
+      half       = K > 0 ? state_t{1} << (K - 1) : state_t{0};
   
     static_assert(std::is_unsigned<state_t>::value, 
                   "state type should be unsigned");
@@ -126,8 +126,8 @@ class EMA {
              max <= std::numeric_limits<input_t>::max() &&
              (std::is_unsigned<input_t>::value
                ? state_t(max) <= (max_state >> K)
-               : min >= -sstate_t(max_state >> (K + 1)) - 1 &&  
-                 max <= sstate_t(max_state >> (K + 1)));
+               : min >= -static_cast<sstate_t>(max_state >> (K + 1)) - 1 &&  
+                 max <= static_cast<sstate_t>(max_state >> (K + 1)));
     }
 
   private:

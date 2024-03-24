@@ -248,6 +248,20 @@ display elements, using some minimal, high level code. All low level stuff is
 completely **reusable** (e.g. all MIDI operations, debouncing switches, 
 filtering analog inputs, and so on).
 
+## Installation
+
+Download the repository as a ZIP archive by going to the [home page of the 
+repository](https://github.com/tttapa/Arduino-Helpers) and clicking
+the green <kbd>Code</kbd> button in the top right, then choosing “Download ZIP”.  
+Alternatively, click the following direct download link:
+<https://github.com/tttapa/Arduino-Helpers/archive/refs/heads/master.zip>
+
+Open the Arduino IDE, and go to the _Sketch &gt; Include Library &gt; Add .ZIP
+Library_ menu.  
+Then navigate to your downloads directory where you just downloaded the 
+library.  
+Select it, and click _Ok_.
+
 ## Supported boards
 
 For each commit, the continuous integration tests compile the examples for the
