@@ -88,7 +88,7 @@ class Hysteresis<0, T_in, T_out> {
     }
 
     T_out getValue() const { return prevLevel; }
-    void setValue(T_in inputLevel) const { prevLevel = inputLevel; }
+    void setValue(T_in inputLevel) { prevLevel = inputLevel; }
 
   private:
     T_in prevLevel = 0;
