@@ -1,0 +1,5 @@
+<map id="NoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;" name="NoteCCRange&lt; MIDIInput_t, RangeLen, NumBanks, Callback &gt;">
+<area shape="rect" id="node1" title="Base class for all other classes that listen for incoming MIDI Note or Control Change messages and sa..." alt="" coords="15,175,234,457"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,27,103,105"/>
+<area shape="rect" id="node3" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="127,5,263,127"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="VPotRing" name="VPotRing">
+<area shape="rect" id="node1" title="A MIDI input element that represents a Mackie Control Universal VPot ring." alt="" coords="138,1035,305,1259"/>
+<area shape="rect" id="node7" href="$d6/d0d/classMCU_1_1VPotRingLEDs.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring and displays it using LEDs." alt="" coords="151,1307,292,1443"/>
+<area shape="rect" id="node2" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="5,851,232,987"/>
+<area shape="rect" id="node3" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="19,593,218,803"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="19,233,219,545"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="19,5,219,185"/>
+<area shape="rect" id="node6" href="$d2/dde/classInterfaces_1_1MCU_1_1IVPot.html" title=" " alt="" coords="257,851,391,987"/>
+</map>

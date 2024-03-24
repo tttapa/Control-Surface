@@ -1,0 +1,13 @@
+<map id="CCButton&lt; NumBanks &gt;" name="CCButton&lt; NumBanks &gt;">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="655,1160,839,1237"/>
+<area shape="rect" id="node2" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="621,835,873,986"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="496,446,647,567"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="279,5,483,317"/>
+<area shape="rect" id="node6" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="186,446,421,567"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="319,828,523,993"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="5,711,220,1111"/>
+<area shape="rect" id="node8" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="849,380,1033,633"/>
+<area shape="rect" id="node9" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="959,71,1083,251"/>
+<area shape="rect" id="node10" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="787,93,934,229"/>
+<area shape="rect" id="node11" href="$d5/db5/classDigitalCCSender.html" title="Class that sends MIDI control change messages signifying either &quot;on&quot; or &quot;off&quot;." alt="" coords="671,417,824,597"/>
+</map>

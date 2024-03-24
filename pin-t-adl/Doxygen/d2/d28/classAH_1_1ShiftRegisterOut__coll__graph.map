@@ -1,0 +1,10 @@
+<map id="ShiftRegisterOut&lt; N &gt;" name="ShiftRegisterOut&lt; N &gt;">
+<area shape="rect" id="node1" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="5,1696,204,1803"/>
+<area shape="rect" id="node2" href="$dc/d0e/classAH_1_1ShiftRegisterOutBase.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="99,1291,299,1647"/>
+<area shape="rect" id="node3" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title="A class for ExtendedIOElements with a fixed size." alt="" coords="201,975,456,1081"/>
+<area shape="rect" id="node4" href="$d2/dda/classAH_1_1ExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="472,292,687,751"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="480,945,679,1111"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="703,828,912,1228"/>
+<area shape="rect" id="node5" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="667,1320,948,1617"/>
+<area shape="rect" id="node8" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="101,5,225,185"/>
+</map>

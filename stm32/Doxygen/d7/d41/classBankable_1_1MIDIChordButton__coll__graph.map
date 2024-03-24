@@ -1,0 +1,15 @@
+<map id="MIDIChordButton&lt; Sender &gt;" name="MIDIChordButton&lt; Sender &gt;">
+<area shape="rect" id="node1" title="An abstract class for momentary push buttons that send multiple MIDI events." alt="" coords="663,1366,871,1546"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="500,991,651,1113"/>
+<area shape="rect" id="node3" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="201,514,405,826"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="186,991,421,1113"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="319,1373,523,1539"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="5,1256,220,1656"/>
+<area shape="rect" id="node7" href="$df/de5/classBankable_1_1SingleAddress.html" title=" " alt="" coords="687,999,848,1105"/>
+<area shape="rect" id="node8" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="429,609,663,731"/>
+<area shape="rect" id="node9" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="423,263,669,428"/>
+<area shape="rect" id="node10" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="462,5,630,200"/>
+<area shape="rect" id="node11" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="687,477,877,863"/>
+<area shape="rect" id="node12" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="879,925,1063,1179"/>
+<area shape="rect" id="node13" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="901,602,1047,738"/>
+</map>

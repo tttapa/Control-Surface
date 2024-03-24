@@ -1,0 +1,5 @@
+<map id="USBMIDI_Interface" name="USBMIDI_Interface">
+<area shape="rect" id="node1" title="A class for MIDI interfaces sending MIDI messages over a USB MIDI connection." alt="" coords="16,857,173,1052"/>
+<area shape="rect" id="node2" href="$de/d76/classParsing__MIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="5,527,184,809"/>
+<area shape="rect" id="node3" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="15,5,174,479"/>
+</map>

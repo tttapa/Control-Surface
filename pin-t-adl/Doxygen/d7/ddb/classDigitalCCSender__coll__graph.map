@@ -1,0 +1,3 @@
+<map id="DigitalCCSender" name="DigitalCCSender">
+<area shape="rect" id="node1" title="Class that sends MIDI control change messages signifying either &quot;on&quot; or &quot;off&quot;." alt="" coords="5,5,159,185"/>
+</map>

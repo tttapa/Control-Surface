@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - ae75e8c9903d852740cfd410b15b056541c13218 - src/MIDI_Interfaces/BLEMIDI/MIDIMessageQueue.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/MIDI_Interfaces/BLEMIDI</a> - MIDIMessageQueue.cpp<span style="font-size: 80%;"> (source / <a href="MIDIMessageQueue.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">ae75e8c9903d852740cfd410b15b056541c13218</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">51</td>
+            <td class="headerCovTableEntry">60</td>
+            <td class="headerCovTableEntryMed">85.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-05-28 15:38:22</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryHi">90.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #if defined(ESP32) || !defined(ARDUINO)</a>
+<a name="2"><span class="lineNum">       2 </span>            : </a>
+<a name="3"><span class="lineNum">       3 </span>            : #include &quot;MIDIMessageQueue.hpp&quot;</a>
+<a name="4"><span class="lineNum">       4 </span>            : </a>
+<a name="5"><span class="lineNum">       5 </span>            : BEGIN_CS_NAMESPACE</a>
+<a name="6"><span class="lineNum">       6 </span>            : </a>
+<a name="7"><span class="lineNum">       7 </span><span class="lineCov">          4 : MIDIMessageQueue::MIDIMessageQueueElement::MIDIMessageQueueElement(</span></a>
+<a name="8"><span class="lineNum">       8 </span><span class="lineCov">          4 :     SysExMessage message, uint16_t timestamp)</span></a>
+<a name="9"><span class="lineNum">       9 </span><span class="lineCov">          4 :     : eventType(message.isLastChunk() ? MIDIReadEvent::SYSEX_MESSAGE</span></a>
+<a name="10"><span class="lineNum">      10 </span>            :                                       : MIDIReadEvent::SYSEX_CHUNK),</a>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">          4 :       message(message), timestamp(timestamp) {</span></a>
+<a name="12"><span class="lineNum">      12 </span>            :     // SysEx data is copied, not stored by pointer, so allocate new</a>
+<a name="13"><span class="lineNum">      13 </span>            :     // storage for the SysEx data, and copy it if allocation was</a>
+<a name="14"><span class="lineNum">      14 </span>            :     // successful.</a>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          4 :     uint8_t *newBuffer = new uint8_t[message.length];</span></a>
+<a name="16"><span class="lineNum">      16 </span>            :     // Make sure that allocation was successful.</a>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          4 :     if (newBuffer == nullptr) {</span></a>
+<a name="18"><span class="lineNum">      18 </span>            :         DEBUGREF(F(&quot;SysEx buffer allocation failed&quot;));</a>
+<a name="19"><span class="lineNum">      19 </span><span class="lineNoCov">          0 :         this-&gt;eventType = MIDIReadEvent::NO_MESSAGE;</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineNoCov">          0 :         this-&gt;message.realtimemessage = 0x00;</span></a>
+<a name="21"><span class="lineNum">      21 </span>            :     } else {</a>
+<a name="22"><span class="lineNum">      22 </span>            :         // Copy the SysEx data to the newly allocated buffer</a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          4 :         memcpy(newBuffer, message.data, message.length);</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          4 :         this-&gt;message.sysexmessage.data = newBuffer;</span></a>
+<a name="25"><span class="lineNum">      25 </span>            :     }</a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          4 : }</span></a>
+<a name="27"><span class="lineNum">      27 </span>            : </a>
+<a name="28"><span class="lineNum">      28 </span><span class="lineNoCov">          0 : MIDIMessageQueue::MIDIMessageQueueElement::MIDIMessageQueueElement(</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineNoCov">          0 :     MIDIMessageQueue::MIDIMessageQueueElement &amp;&amp;that) {</span></a>
+<a name="30"><span class="lineNum">      30 </span><span class="lineNoCov">          0 :     *this = std::move(that);</span></a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineNoCov">          0 : }</span></a>
+<a name="32"><span class="lineNum">      32 </span>            : </a>
+<a name="33"><span class="lineNum">      33 </span>            : MIDIMessageQueue::MIDIMessageQueueElement &amp;</a>
+<a name="34"><span class="lineNum">      34 </span><span class="lineCov">         46 : MIDIMessageQueue::MIDIMessageQueueElement::operator=(</span></a>
+<a name="35"><span class="lineNum">      35 </span>            :     MIDIMessageQueue::MIDIMessageQueueElement &amp;&amp;that) {</a>
+<a name="36"><span class="lineNum">      36 </span><span class="lineCov">         46 :     std::swap(this-&gt;eventType, that.eventType);</span></a>
+<a name="37"><span class="lineNum">      37 </span><span class="lineCov">         46 :     std::swap(this-&gt;message, that.message);</span></a>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">         46 :     std::swap(this-&gt;timestamp, that.timestamp);</span></a>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">         46 :     return *this;</span></a>
+<a name="40"><span class="lineNum">      40 </span>            : }</a>
+<a name="41"><span class="lineNum">      41 </span>            : </a>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">       1866 : void MIDIMessageQueue::MIDIMessageQueueElement::release() {</span></a>
+<a name="43"><span class="lineNum">      43 </span><span class="lineCov">       1866 :     if (eventType == MIDIReadEvent::SYSEX_CHUNK ||</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">       1866 :         eventType == MIDIReadEvent::SYSEX_MESSAGE) {</span></a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">          4 :         delete[] message.sysexmessage.data;</span></a>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">          4 :         message.sysexmessage.data = nullptr;</span></a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          4 :         message.sysexmessage.length = 0;</span></a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">          4 :         eventType = MIDIReadEvent::NO_MESSAGE;</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">          4 :         message.realtimemessage = 0x00;</span></a>
+<a name="50"><span class="lineNum">      50 </span>            :     }</a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">       1866 : }</span></a>
+<a name="52"><span class="lineNum">      52 </span>            : </a>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">         16 : bool MIDIMessageQueue::push(ChannelMessage message, uint16_t timestamp) {</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">         16 :     return push(MIDIMessageQueueElement(message, timestamp));</span></a>
+<a name="55"><span class="lineNum">      55 </span>            : }</a>
+<a name="56"><span class="lineNum">      56 </span>            : </a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">          1 : bool MIDIMessageQueue::push(SysCommonMessage message, uint16_t timestamp) {</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          1 :     return push(MIDIMessageQueueElement(message, timestamp));</span></a>
+<a name="59"><span class="lineNum">      59 </span>            : }</a>
+<a name="60"><span class="lineNum">      60 </span>            : </a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineCov">          2 : bool MIDIMessageQueue::push(RealTimeMessage message, uint16_t timestamp) {</span></a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">          2 :     return push(MIDIMessageQueueElement(message, timestamp));</span></a>
+<a name="63"><span class="lineNum">      63 </span>            : }</a>
+<a name="64"><span class="lineNum">      64 </span>            : </a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          4 : bool MIDIMessageQueue::push(SysExMessage message, uint16_t timestamp) {</span></a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">          8 :     if (storage.size() == size.load(std::memory_order_acquire))</span></a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineNoCov">          0 :         return false;</span></a>
+<a name="68"><span class="lineNum">      68 </span>            : </a>
+<a name="69"><span class="lineNum">      69 </span>            :     // Allocate storage for the actual SysEx data and copy the data</a>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          8 :     MIDIMessageQueueElement el(message, timestamp);</span></a>
+<a name="71"><span class="lineNum">      71 </span>            :     // Check if allocation failed</a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">          4 :     if (el.eventType == MIDIReadEvent::NO_MESSAGE)</span></a>
+<a name="73"><span class="lineNum">      73 </span><span class="lineNoCov">          0 :         return true; // TODO: should we try again later?</span></a>
+<a name="74"><span class="lineNum">      74 </span>            : </a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          4 :     *write_p = std::move(el);</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">          4 :     inc(write_p);</span></a>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">          4 :     size.fetch_add(1, std::memory_order_release);</span></a>
+<a name="78"><span class="lineNum">      78 </span>            : </a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          4 :     return true;</span></a>
+<a name="80"><span class="lineNum">      80 </span>            : }</a>
+<a name="81"><span class="lineNum">      81 </span>            : </a>
+<a name="82"><span class="lineNum">      82 </span><span class="lineCov">         34 : bool MIDIMessageQueue::pop(MIDIMessageQueueElement &amp;message) {</span></a>
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">         68 :     if (size.load(std::memory_order_acquire) == 0)</span></a>
+<a name="84"><span class="lineNum">      84 </span><span class="lineCov">         11 :         return false;</span></a>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">         23 :     message = std::move(*read_p);</span></a>
+<a name="86"><span class="lineNum">      86 </span><span class="lineCov">         23 :     read_p-&gt;release(); // release memory of old message</span></a>
+<a name="87"><span class="lineNum">      87 </span><span class="lineCov">         23 :     inc(read_p);</span></a>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">         23 :     size.fetch_sub(1, std::memory_order_release);</span></a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">         23 :     return true;</span></a>
+<a name="90"><span class="lineNum">      90 </span>            : }</a>
+<a name="91"><span class="lineNum">      91 </span>            : </a>
+<a name="92"><span class="lineNum">      92 </span><span class="lineCov">         19 : bool MIDIMessageQueue::push(MIDIMessageQueueElement &amp;&amp;message) {</span></a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">         38 :     if (storage.size() == size.load(std::memory_order_acquire))</span></a>
+<a name="94"><span class="lineNum">      94 </span><span class="lineNoCov">          0 :         return false;</span></a>
+<a name="95"><span class="lineNum">      95 </span><span class="lineCov">         19 :     *write_p = std::move(message);</span></a>
+<a name="96"><span class="lineNum">      96 </span><span class="lineCov">         19 :     inc(write_p);</span></a>
+<a name="97"><span class="lineNum">      97 </span><span class="lineCov">         19 :     size.fetch_add(1, std::memory_order_release);</span></a>
+<a name="98"><span class="lineNum">      98 </span><span class="lineCov">         19 :     return true;</span></a>
+<a name="99"><span class="lineNum">      99 </span>            : }</a>
+<a name="100"><span class="lineNum">     100 </span>            : </a>
+<a name="101"><span class="lineNum">     101 </span>            : END_CS_NAMESPACE</a>
+<a name="102"><span class="lineNum">     102 </span>            : </a>
+<a name="103"><span class="lineNum">     103 </span>            : #endif</a>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.15</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

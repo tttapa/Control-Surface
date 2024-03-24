@@ -1,0 +1,53 @@
+<map id="MIDIRotaryEncoder.hpp" name="MIDIRotaryEncoder.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="2187,5,2362,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="2250,647,2361,673"/>
+<area shape="rect" id="node3" href="$d0/dd4/BankableAddresses_8hpp.html" title=" " alt="" coords="1552,80,1773,107"/>
+<area shape="rect" id="node29" href="$d0/d4e/Def_8hpp.html" title=" " alt="" coords="1452,319,1551,345"/>
+<area shape="rect" id="node41" href="$d0/d81/TypeTraits_8hpp.html" title=" " alt="" coords="2313,572,2455,599"/>
+<area shape="rect" id="node42" href="$d6/d03/EncoderState_8hpp.html" title=" " alt="" coords="2249,796,2417,837"/>
+<area shape="rect" id="node43" href="$d1/d41/MIDIOutputElement_8hpp.html" title=" " alt="" coords="1749,155,1931,196"/>
+<area shape="rect" id="node46" href="$d8/ddd/AHEncoder_8hpp.html" title=" " alt="" coords="2441,155,2599,196"/>
+<area shape="rect" id="node4" href="$d4/d57/Bank_8hpp.html" title=" " alt="" coords="631,162,713,189"/>
+<area shape="rect" id="node39" href="$dd/d1f/BankConfig_8hpp.html" title=" " alt="" coords="1537,162,1661,189"/>
+<area shape="rect" id="node40" href="$db/dd6/MIDIAddress_8hpp.html" title=" " alt="" coords="1615,244,1774,271"/>
+<area shape="rect" id="node5" href="$de/dd1/LinkedList_8hpp.html" title=" " alt="" coords="759,647,971,673"/>
+<area shape="rect" id="node7" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="523,721,685,748"/>
+<area shape="rect" id="node27" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="540,647,679,673"/>
+<area shape="rect" id="node28" href="$d9/d46/Selectable_8hpp.html" title=" " alt="" coords="1125,244,1307,271"/>
+<area shape="rect" id="node6" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="427,1259,618,1285"/>
+<area shape="rect" id="node11" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="981,1109,1163,1136"/>
+<area shape="rect" id="node25" title=" " alt="" coords="811,721,882,748"/>
+<area shape="rect" id="node26" title=" " alt="" coords="907,721,1027,748"/>
+<area shape="rect" id="node8" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="795,803,1026,830"/>
+<area shape="rect" id="node16" href="$de/dd1/AH_2Settings_2SettingsWrapper_8hpp.html" title=" " alt="" coords="533,803,771,830"/>
+<area shape="rect" id="node24" href="$d7/d52/DebugVal_8hpp.html" title=" " alt="" coords="397,803,509,830"/>
+<area shape="rect" id="node9" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="722,1184,982,1211"/>
+<area shape="rect" id="node10" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="1747,1035,1912,1061"/>
+<area shape="rect" id="node15" title=" " alt="" coords="1992,885,2229,912"/>
+<area shape="rect" id="node13" title=" " alt="" coords="1555,1259,1639,1285"/>
+<area shape="rect" id="node14" title=" " alt="" coords="2607,1109,2750,1136"/>
+<area shape="rect" id="node12" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="1288,1184,1515,1211"/>
+<area shape="rect" id="node17" href="$d5/d4f/AH_2Settings_2Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="1305,885,1407,912"/>
+<area shape="rect" id="node23" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="627,885,858,912"/>
+<area shape="rect" id="node18" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="779,1109,957,1136"/>
+<area shape="rect" id="node19" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions." alt="" coords="1313,960,1522,987"/>
+<area shape="rect" id="node20" title=" " alt="" coords="1218,960,1289,987"/>
+<area shape="rect" id="node21" title=" " alt="" coords="1597,960,1672,987"/>
+<area shape="rect" id="node22" title=" " alt="" coords="1071,960,1142,987"/>
+<area shape="rect" id="node30" href="$d2/dbc/Cable_8hpp.html" title=" " alt="" coords="1691,803,1778,830"/>
+<area shape="rect" id="node31" href="$d7/d42/Channel_8hpp.html" title=" " alt="" coords="1802,803,1905,830"/>
+<area shape="rect" id="node32" href="$de/d76/Array_8hpp.html" title=" " alt="" coords="998,572,1178,599"/>
+<area shape="rect" id="node33" href="$d2/d3c/Arduino-Hardware-Types_8hpp.html" title=" " alt="" coords="879,393,1041,435"/>
+<area shape="rect" id="node34" href="$d4/d35/Hardware-Types_8hpp.html" title=" " alt="" coords="873,483,1047,524"/>
+<area shape="rect" id="node35" title=" " alt="" coords="1253,572,1363,599"/>
+<area shape="rect" id="node36" href="$d0/db1/FunctionTraits_8hpp.html" title=" " alt="" coords="347,1109,551,1136"/>
+<area shape="rect" id="node37" title=" " alt="" coords="528,1184,648,1211"/>
+<area shape="rect" id="node38" title=" " alt="" coords="398,1184,503,1211"/>
+<area shape="rect" id="node44" href="$d4/d93/Updatable_8hpp.html" title=" " alt="" coords="1539,572,1754,599"/>
+<area shape="rect" id="node45" href="$d4/dba/CRTP_8hpp.html" title=" " alt="" coords="1640,647,1819,673"/>
+<area shape="rect" id="node47" href="$da/dad/AtomicPosition_8hpp.html" title=" " alt="" coords="2442,803,2590,830"/>
+<area shape="rect" id="node49" href="$db/d5c/DirectPinRead_8hpp.html" title=" " alt="" coords="2621,244,2763,271"/>
+<area shape="rect" id="node50" href="$d0/d8c/NumInterrupts_8hpp.html" title=" " alt="" coords="1929,803,2073,830"/>
+<area shape="rect" id="node51" href="$d0/d0e/AHEncoder_8ipp.html" title=" " alt="" coords="2481,244,2597,271"/>
+<area shape="rect" id="node48" title=" " alt="" coords="2473,885,2540,912"/>
+</map>

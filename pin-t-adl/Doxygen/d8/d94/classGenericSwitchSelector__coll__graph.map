@@ -1,0 +1,14 @@
+<map id="GenericSwitchSelector&lt; Callback &gt;" name="GenericSwitchSelector&lt; Callback &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="563,1087,757,1237"/>
+<area shape="rect" id="node2" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="201,734,393,914"/>
+<area shape="rect" id="node3" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="203,411,335,503"/>
+<area shape="rect" id="node4" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="359,396,486,517"/>
+<area shape="rect" id="node5" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="469,5,673,317"/>
+<area shape="rect" id="node7" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="561,396,796,517"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="434,741,638,907"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="674,624,889,1024"/>
+<area shape="rect" id="node9" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="5,403,179,510"/>
+<area shape="rect" id="node10" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="937,697,1121,951"/>
+<area shape="rect" id="node11" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="1127,367,1251,547"/>
+<area shape="rect" id="node12" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="956,389,1103,525"/>
+</map>

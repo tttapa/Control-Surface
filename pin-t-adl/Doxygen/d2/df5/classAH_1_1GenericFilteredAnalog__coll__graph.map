@@ -1,0 +1,7 @@
+<map id="GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, FilterType, AnalogType, IncRes &gt;" name="GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, FilterType, AnalogType, IncRes &gt;">
+<area shape="rect" id="node1" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="145,491,363,817"/>
+<area shape="rect" id="node2" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="5,226,129,406"/>
+<area shape="rect" id="node3" href="$d7/d40/classEMA.html" title=" " alt="" coords="153,204,355,428"/>
+<area shape="rect" id="node4" href="$d2/dcb/classHysteresis.html" title=" " alt="" coords="379,233,644,399"/>
+<area shape="rect" id="node5" title=" " alt="" coords="472,5,551,83"/>
+</map>

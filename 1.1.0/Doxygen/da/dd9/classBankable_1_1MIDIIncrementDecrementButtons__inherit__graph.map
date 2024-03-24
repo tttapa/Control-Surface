@@ -1,0 +1,5 @@
+<map id="Bankable::MIDIIncrementDecrementButtons&lt; BankAddress, RelativeSender, ResetSender &gt;" name="Bankable::MIDIIncrementDecrementButtons&lt; BankAddress, RelativeSender, ResetSender &gt;">
+<area shape="rect" id="node1" title="An abstract class for two buttons that send incremental MIDI events." alt="" coords="5,491,264,729"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="65,160,204,443"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="43,5,226,112"/>
+</map>

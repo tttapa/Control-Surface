@@ -1,0 +1,15 @@
+<map id="SwitchSelectorLED" name="SwitchSelectorLED">
+<area shape="rect" id="node1" title="Selector that selects one of two settings, based on the state of a toggle or momentary switch...." alt="" coords="104,1360,272,1437"/>
+<area shape="rect" id="node2" href="$d2/d1c/classGenericSwitchSelector.html" title=" " alt="" coords="75,1160,301,1311"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="299,821,514,1001"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="214,461,346,553"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="617,446,743,567"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="727,5,931,317"/>
+<area shape="rect" id="node8" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="819,446,1053,567"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="722,828,926,993"/>
+<area shape="rect" id="node9" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="973,711,1187,1111"/>
+<area shape="rect" id="node10" href="$d9/d15/classSelectorSingleLEDCallback.html" title=" " alt="" coords="371,446,592,567"/>
+<area shape="rect" id="node11" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="251,71,375,251"/>
+<area shape="rect" id="node12" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="5,380,189,633"/>
+<area shape="rect" id="node13" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="24,93,171,229"/>
+</map>

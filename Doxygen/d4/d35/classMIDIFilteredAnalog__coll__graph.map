@@ -1,0 +1,21 @@
+<map id="MIDIFilteredAnalog&lt; Sender &gt;" name="MIDIFilteredAnalog&lt; Sender &gt;">
+<area shape="rect" id="Node000001" title="A class for potentiometers and faders that send MIDI events." alt="" coords="465,1580,628,1860"/>
+<area shape="rect" id="Node000002" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="290,1202,433,1327"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="388,1340,453,1516,481,1579,476,1581,448,1518,383,1342"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="229,585,424,951"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="343,964,360,1201,354,1202,338,965"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="150,362,214,510,248,584,243,586,210,512,145,364"/>
+<area shape="rect" id="Node000005" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="330,511,330,568,325,568,325,511"/>
+<area shape="rect" id="Node000006" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="463,1205,631,1325"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="549,1325,549,1563,544,1563,544,1325"/>
+<area shape="rect" id="Node000007" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="448,573,659,963"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="553,977,550,1204,545,1204,548,976"/>
+<area shape="rect" id="Node000008" href="$d9/d74/classAH_1_1EMA.html" title=" " alt="" coords="457,131,650,385"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="556,385,556,557,551,557,551,385"/>
+<area shape="rect" id="Node000009" href="$da/df9/classAH_1_1Hysteresis.html" title=" " alt="" coords="674,136,931,380"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="746,381,658,560,653,557,741,379"/>
+<area shape="rect" id="Node000010" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="655,1012,836,1517"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="673,1519,656,1557,639,1590,634,1587,651,1555,668,1517"/>
+</map>

@@ -1,0 +1,16 @@
+<map id="PBPotentiometer&lt; NumBanks &gt;" name="PBPotentiometer&lt; NumBanks &gt;">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="649,1588,883,1665"/>
+<area shape="rect" id="node2" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="653,1234,879,1443"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="501,933,652,1054"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="204,527,408,839"/>
+<area shape="rect" id="node6" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="106,933,341,1054"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1256,209,1421"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="249,1139,464,1539"/>
+<area shape="rect" id="node8" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="879,925,1055,1061"/>
+<area shape="rect" id="node9" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title=" " alt="" coords="818,491,1117,876"/>
+<area shape="rect" id="node10" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="743,226,867,406"/>
+<area shape="rect" id="node11" title=" " alt="" coords="897,5,976,83"/>
+<area shape="rect" id="node13" href="$d2/dcb/classHysteresis.html" title=" " alt="" coords="994,248,1165,384"/>
+<area shape="rect" id="node12" href="$d7/d40/classEMA.html" title=" " alt="" coords="1189,204,1383,428"/>
+<area shape="rect" id="node14" href="$de/d46/classPitchBendSender.html" title=" " alt="" coords="677,947,855,1039"/>
+</map>
