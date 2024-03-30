@@ -21,8 +21,14 @@ class GenericUSBMIDI_Interface : public MIDI_Interface {
      */
     template <class... Args>
     GenericUSBMIDI_Interface(Args &&...args)
-        : backend(std::forward<Args>(args)...),
+        : backend {std::forward<Args>(args)...},
           alwaysSendImmediately_(backend.preferImmediateSend()) {}
+
+    GenericUSBMIDI_Interface(const GenericUSBMIDI_Interface &) = delete;
+    GenericUSBMIDI_Interface(GenericUSBMIDI_Interface &&) = delete;
+    GenericUSBMIDI_Interface &
+    operator=(const GenericUSBMIDI_Interface &) = delete;
+    GenericUSBMIDI_Interface &operator=(GenericUSBMIDI_Interface &&) = delete;
 
   private:
     // MIDI send implementations
@@ -158,8 +164,9 @@ BEGIN_CS_NAMESPACE
 class USBMIDI_Interface
     : public GenericUSBMIDI_Interface<USBDeviceMIDIBackend> {
   public:
-    USBMIDI_Interface() = default;
-    using MIDIUSBPacket_t = USBDeviceMIDIBackend::MIDIUSBPacket_t;
+    using backend_t = USBDeviceMIDIBackend;
+    using GenericUSBMIDI_Interface<backend_t>::GenericUSBMIDI_Interface;
+    using MIDIUSBPacket_t = backend_t::MIDIUSBPacket_t;
 };
 
 END_CS_NAMESPACE
