@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef CS_USB_MIDI_NOT_SUPPORTED
+
 #include <AH/Containers/Array.hpp>
 #include <AH/STL/cstdint>
 #include <Settings/NamespaceSettings.hpp>
@@ -89,7 +91,7 @@ BEGIN_CS_NAMESPACE
 using USBDeviceMIDIBackend = ESP32_USBDeviceMIDIBackend;
 END_CS_NAMESPACE
 #else
-#define CS_USB_MIDI_NOT_SUPPORTED
+#define CS_USB_MIDI_NOT_SUPPORTED 1
 #pragma message(                                                               \
     "ESP32S3: USB MIDI not enabled. Set the Tools > USB Type setting to \"USB-OTG\" to enable it.")
 #endif
@@ -117,7 +119,7 @@ BEGIN_CS_NAMESPACE
 using USBDeviceMIDIBackend = MIDIUSB_USBDeviceMIDIBackend;
 END_CS_NAMESPACE
 #else
-#define CS_USB_MIDI_NOT_SUPPORTED
+#define CS_USB_MIDI_NOT_SUPPORTED 1
 #endif
 
 #endif
@@ -127,3 +129,5 @@ END_CS_NAMESPACE
 #include "USBMIDI_Mock.hpp"
 
 #endif
+
+#endif // CS_USB_MIDI_NOT_SUPPORTED

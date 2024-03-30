@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef CS_BLE_MIDI_NOT_SUPPORTED
+
 #include <Settings/NamespaceSettings.hpp>
 
 #ifdef DOXYGEN
@@ -77,5 +79,7 @@ END_CS_NAMESPACE
 #endif
 
 #ifndef CS_BLE_MIDI_SUPPORTED
-#define CS_BLE_MIDI_NOT_SUPPORTED
+#define CS_BLE_MIDI_NOT_SUPPORTED 1
 #endif
+
+#endif // CS_BLE_MIDI_NOT_SUPPORTED
