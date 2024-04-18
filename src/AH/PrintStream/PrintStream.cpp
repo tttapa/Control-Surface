@@ -5,7 +5,7 @@
 // LCOV_EXCL_START
 
 #if not defined(ARDUINO_ARCH_ESP32) && not defined(ARDUINO_ARCH_SAM) &&        \
-    not defined(ARDUINO_API_VERSION)
+    not defined(ARDUINO_API_VERSION) && not defined(ArduinoFake)
 #define FLUSH
 #endif
 
