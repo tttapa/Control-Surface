@@ -16,7 +16,7 @@ There are some differences in MIDI over USB implementation between different typ
 | Arduino Nano 33 BLE                 | ✅  | ✅  | &emsp;❌⁽⁴⁾  | ✅  |
 | Arduino Nano Every                  | ✅  | &emsp;❌⁽²⁾ | ❌  | ❌  |
 | Arduino MKR 1000                    | ✅  | 🔼  | ❓  | ❌  |
-| Arduino MKR 1010 WiFi               | ✅  | 🔼  | ❓  | 🔼  |
+| Arduino MKR 1010 WiFi               | ✅  | ✅  | ❓  | 🔼  |
 | Arduino UNO R4 Minima               | ✅  | &emsp;❌⁽³⁾  | &emsp;❌⁽⁴⁾  | ❌  |
 | Arduino UNO R4 WiFi                 | ✅  | &emsp;❌⁽³⁾  | &emsp;❌⁽⁴⁾  | 🔼  |
 | Arduino Leonardo                    | ✅  | ✅  | ❌  | ❌  |
