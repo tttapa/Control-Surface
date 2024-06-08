@@ -30,6 +30,7 @@ constexpr uint16_t midi_cccd_handle =
 
 MIDIBLEInstance *instance = nullptr;
 btstack_packet_callback_registration_t hci_event_callback_registration;
+btstack_packet_callback_registration_t sm_event_callback_registration;
 
 // callback/event functions
 
@@ -145,7 +146,10 @@ void packet_handler(uint8_t packet_type, [[maybe_unused]] uint16_t channel,
         case HCI_EVENT_DISCONNECTION_COMPLETE:
             disconnect_handler(packet, size);
             break;
-        default: break;
+        case SM_EVENT_JUST_WORKS_REQUEST:
+            sm_just_works_confirm(
+                sm_event_just_works_request_get_handle(packet));
+            break;
         case ATT_EVENT_MTU_EXCHANGE_COMPLETE:
             mtu_exchange_complete_handler(packet, size);
             break;
@@ -154,6 +158,7 @@ void packet_handler(uint8_t packet_type, [[maybe_unused]] uint16_t channel,
         case BTSTACK_EVENT_STATE:
             btstack_event_state_handler(packet, size);
             break;
+        default: break;
     }
 }
 
@@ -217,6 +222,9 @@ void le_midi_setup(const BLESettings &ble_settings) {
     l2cap_init();
     // setup SM: no input, no output
     sm_init();
+    sm_set_io_capabilities(IO_CAPABILITY_NO_INPUT_NO_OUTPUT);
+    sm_set_authentication_requirements(SM_AUTHREQ_SECURE_CONNECTION |
+                                       SM_AUTHREQ_BONDING);
     // setup ATT server
     att_server_init(profile_data, att_read_callback, att_write_callback);
     // setup advertisements
@@ -224,8 +232,11 @@ void le_midi_setup(const BLESettings &ble_settings) {
     // register for HCI events
     hci_event_callback_registration.callback = &packet_handler;
     hci_add_event_handler(&hci_event_callback_registration);
-    // register for ATT event
+    // register for ATT events
     att_server_register_packet_handler(packet_handler);
+    // register for SM events
+    sm_event_callback_registration.callback = &packet_handler;
+    sm_add_event_handler(&sm_event_callback_registration);
 }
 
 template <class F>
