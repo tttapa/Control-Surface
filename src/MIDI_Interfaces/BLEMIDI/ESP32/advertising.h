@@ -32,6 +32,8 @@ bool advertising_handle_config_complete_event(esp_ble_gap_cb_param_t *param);
 /// advertising data was complete as well.
 bool advertising_handle_config_response_complete_event(
     esp_ble_gap_cb_param_t *param);
+/// Start advertising, after already being configured.
+void advertising_start(void);
 
 #ifdef __cplusplus
 }

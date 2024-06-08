@@ -35,7 +35,7 @@ void midi_handle_connect_event(esp_gatt_if_t gatts_if,
 
     // For the IOS system, please reference the apple official documents about
     // the ble connection parameters restrictions:
-    // https://developer.apple.com/accessories/Accessory-Design-Guidelines.pdf
+    // https://web.archive.org/web/20240318204212/https://developer.apple.com/accessories/Accessory-Design-Guidelines.pdf
     // https://developer.apple.com/library/archive/qa/qa1931/_index.html
 
     esp_ble_conn_update_params_t conn_params;
@@ -52,7 +52,7 @@ void midi_handle_disconnect_event(esp_gatt_if_t gatts_if,
     ESP_LOGI("MIDIBLE", "Disconnect reason: %d", param->disconnect.reason);
     midi_ble_instance_handle_disconnect(param->disconnect.conn_id);
     // Start advertising again
-    advertising_config();
+    advertising_start();
 }
 
 #endif

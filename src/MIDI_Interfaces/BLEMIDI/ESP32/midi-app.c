@@ -135,8 +135,6 @@ void midi_handle_register_app_event(esp_gatt_if_t gatts_if,
     // Set the Service UUID for advertisement
     advertising_set_service_uuid(MIDI_SERVICE_UUID_128,
                                  sizeof(MIDI_SERVICE_UUID_128));
-    // Configure the advertising data and start advertising when that's done
-    advertising_config();
 
     // Register the GATTS service table
     esp_err_t ret = esp_ble_gatts_create_attr_tab(
