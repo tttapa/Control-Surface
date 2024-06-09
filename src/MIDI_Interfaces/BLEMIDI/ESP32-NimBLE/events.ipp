@@ -8,6 +8,14 @@
 #include "gatt.h"
 #include "util.hpp"
 
+#if CS_MIDI_BLE_ESP_IDF_NIMBLE
+#include <host/ble_hs_pvcy.h>
+#include <host/util/util.h>
+#else
+#include <nimble/nimble/host/include/host/ble_hs_pvcy.h>
+#include <nimble/nimble/host/util/include/host/util/util.h>
+#endif
+
 namespace cs::midi_ble_nimble {
 inline MIDIBLEState *state;
 
@@ -41,6 +49,18 @@ void print_conn_desc(struct ble_gap_conn_desc *desc) {
         desc->sec_state.bonded);
 }
 
+const char *own_address_type_to_string(uint8_t own_addr_type) {
+    switch (own_addr_type) {
+        case BLE_OWN_ADDR_RANDOM: return "BLE_OWN_ADDR_RANDOM";
+        case BLE_OWN_ADDR_RPA_RANDOM_DEFAULT:
+            return "BLE_OWN_ADDR_RPA_RANDOM_DEFAULT";
+        case BLE_OWN_ADDR_PUBLIC: return "BLE_OWN_ADDR_PUBLIC";
+        case BLE_OWN_ADDR_RPA_PUBLIC_DEFAULT:
+            return "BLE_OWN_ADDR_RPA_PUBLIC_DEFAULT";
+        default: return "<invalid>";
+    }
+}
+
 } // namespace
 
 } // namespace cs::midi_ble_nimble
@@ -49,14 +69,32 @@ void print_conn_desc(struct ble_gap_conn_desc *desc) {
 /// startup).
 inline void cs_midi_ble_on_sync() {
     ESP_LOGD("CS-BLEMIDI", "sync");
-    CS_CHECK_ZERO_V(
-        ble_hs_id_infer_auto(0, &cs::midi_ble_nimble::state->address_type));
+    // Enable privacy if supported
+#if MYNEWT_VAL(BLE_HOST_BASED_PRIVACY)
+    int privacy = 1;
+    // Use a resolvable private address
+    CS_CHECK_ZERO_V(ble_hs_pvcy_rpa_config(NIMBLE_HOST_ENABLE_RPA));
+    // Configure the device with at least one address (1=prefer random)
+    CS_CHECK_ZERO_V(ble_hs_util_ensure_addr(1));
+#else
+    int privacy = 0;
+    // Configure the device with at least one address (0=prefer public)
+    CS_CHECK_ZERO_V(ble_hs_util_ensure_addr(0));
+#endif
+    // Determine the best address type to use
+    auto &addr_type = cs::midi_ble_nimble::state->address_type;
+    CS_CHECK_ZERO_V(ble_hs_id_infer_auto(privacy, &addr_type));
+    uint8_t id_addr_type = BLE_ADDR_PUBLIC;
+    if (addr_type & (BLE_OWN_ADDR_RANDOM | BLE_OWN_ADDR_RPA_RANDOM_DEFAULT))
+        id_addr_type = BLE_ADDR_RANDOM;
+    ESP_LOGI("CS-BLEMIDI", "Using address type %s (%d)",
+             cs::midi_ble_nimble::own_address_type_to_string(addr_type),
+             addr_type);
     uint8_t addr_val[6] = {0};
-    CS_CHECK_ZERO_V(ble_hs_id_copy_addr(
-        cs::midi_ble_nimble::state->address_type, addr_val, NULL));
+    CS_CHECK_ZERO_V(ble_hs_id_copy_addr(id_addr_type, addr_val, NULL));
     ESP_LOGD("CS-BLEMIDI", "address=%s",
              cs::midi_ble_nimble::fmt_address(addr_val).c_str());
-    cs::midi_ble_nimble::advertise(cs::midi_ble_nimble::state->address_type);
+    cs::midi_ble_nimble::advertise(addr_type);
 }
 
 /// Called when the stack is reset.
@@ -90,7 +128,7 @@ cs_midi_ble_characteristic_callback(uint16_t conn_handle, uint16_t attr_handle,
             };
             if (auto *inst = cs::midi_ble_nimble::state->instance)
                 inst->handleData(cs::BLEConnectionHandle {conn_handle},
-                                 cs::BLEDataGenerator {compat::in_place,
+                                 cs::BLEDataGenerator {cs::compat::in_place,
                                                        std::move(data_gen)},
                                  cs::BLEDataLifetime::ConsumeImmediately);
             return 0;
@@ -149,20 +187,26 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
             ESP_LOGI("CS-BLEMIDI", "connection %s; status=%d",
                      event->connect.status == 0 ? "established" : "failed",
                      event->connect.status);
-            if (auto rc = ble_att_set_preferred_mtu(512); rc != 0) {
-                ESP_LOGE("CS-BLEMIDI", "failed to set preferred MTU; rc=%d",
-                         rc);
-                return rc;
-            }
-
             if (event->connect.status == 0) {
+                auto conn_handle = event->connect.conn_handle;
                 struct ble_gap_conn_desc desc;
-                auto rc = ble_gap_conn_find(event->connect.conn_handle, &desc);
+                auto rc = ble_gap_conn_find(conn_handle, &desc);
                 assert(rc == 0);
                 cs::midi_ble_nimble::print_conn_desc(&desc);
+#if 0
+                // TODO: is this the correct place?
+                // Without this, Android does not initiate bonding or SC, but
+                // with it, Windows starts a connect/disconnect loop on the
+                // second connection ...
+                if (auto rc = ble_gap_security_initiate(conn_handle); rc != 0) {
+                    ESP_LOGE("CS-BLEMIDI",
+                             "failed to initiate secure connection; rc=%d", rc);
+                    return ble_gap_terminate(conn_handle,
+                                             BLE_ERR_REM_USER_CONN_TERM);
+                }
+#endif
                 if (auto *inst = cs::midi_ble_nimble::state->instance)
-                    inst->handleConnect(
-                        cs::BLEConnectionHandle {event->connect.conn_handle});
+                    inst->handleConnect(cs::BLEConnectionHandle {conn_handle});
             } else {
                 // Connection failed; resume advertising
                 cs::midi_ble_nimble::advertise(
@@ -238,6 +282,8 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
 
         // Repeat pairing
         case BLE_GAP_EVENT_REPEAT_PAIRING: {
+            ESP_LOGI("CS-BLEMIDI", "repeat pairing event; conn_handle=%d",
+                     event->repeat_pairing.conn_handle);
             // We already have a bond with the peer, but it is attempting to
             // establish a new secure link.  This app sacrifices security for
             // convenience: just throw away the old bond and accept the new link.

@@ -64,7 +64,7 @@ inline void advertise(uint8_t addr_type) {
     struct ble_gap_adv_params adv_params {};
     adv_params.conn_mode = BLE_GAP_CONN_MODE_UND;
     adv_params.disc_mode = BLE_GAP_DISC_MODE_GEN;
-    ESP_LOGI("CS-BLEMIDI", "Start advertising");
+    ESP_LOGI("CS-BLEMIDI", "Start advertising (address type=%d)", addr_type);
     CS_CHECK_ZERO_V(ble_gap_adv_start(addr_type, NULL, BLE_HS_FOREVER,
                                       &adv_params, cs_midi_ble_gap_callback,
                                       NULL));

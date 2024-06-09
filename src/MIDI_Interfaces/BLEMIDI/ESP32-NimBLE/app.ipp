@@ -65,6 +65,9 @@ inline bool init(MIDIBLEInstance &instance, BLESettings ble_settings) {
     ble_svc_gap_init();
     ble_svc_gatt_init();
 
+    // Set the maximum transmission unit for better throughput
+    CS_CHECK_ZERO(ble_att_set_preferred_mtu(BLE_ATT_MTU_MAX));
+
     // Initialize the MIDI service and characteristic
     cs_midi_ble_state.instance = &instance;
     cs::midi_ble_nimble::state = &cs_midi_ble_state;
