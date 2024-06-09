@@ -29,6 +29,7 @@ constexpr uint16_t midi_cccd_handle =
     ATT_CHARACTERISTIC_7772E5DB_3868_4112_A1A9_F2669D106BF3_01_CLIENT_CONFIGURATION_HANDLE;
 
 MIDIBLEInstance *instance = nullptr;
+BLESettings settings;
 btstack_packet_callback_registration_t hci_event_callback_registration;
 btstack_packet_callback_registration_t sm_event_callback_registration;
 
@@ -42,6 +43,16 @@ void connection_handler(uint8_t *packet, [[maybe_unused]] uint16_t size) {
         return;
     uint16_t conn_handle =
         hci_subevent_le_connection_complete_get_connection_handle(packet);
+    // Request bonding
+    if (settings.initiate_security)
+        sm_request_pairing(conn_handle);
+    // Update the connection parameters
+    uint16_t conn_latency = 0;
+    uint16_t supervision_timeout = 400;
+    gap_request_connection_parameter_update(
+        conn_handle, settings.connection_interval.minimum,
+        settings.connection_interval.maximum, conn_latency,
+        supervision_timeout);
     instance->handleConnect(BLEConnectionHandle {conn_handle});
 }
 // HCI_SUBEVENT_LE_CONNECTION_UPDATE_COMPLETE
@@ -251,6 +262,7 @@ btstack_context_callback_registration_t create_context_callback(F &f) {
 
 bool init(MIDIBLEInstance &instance, BLESettings settings) {
     cs::midi_ble_btstack::instance = &instance;
+    cs::midi_ble_btstack::settings = settings;
     le_midi_setup(settings);
     hci_power_control(HCI_POWER_ON);
     // btstack_run_loop_execute(); // not necessary in background mode

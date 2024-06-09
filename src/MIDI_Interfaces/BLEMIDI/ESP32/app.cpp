@@ -64,6 +64,7 @@ bool init(MIDIBLEInstance &instance, BLESettings settings) {
     set_midi_ble_name(settings.device_name);
     advertising_set_connection_interval(settings.connection_interval.minimum,
                                         settings.connection_interval.maximum);
+    set_security_initiate_encryption(settings.initiate_security);
     return midi_init();
 }
 

@@ -178,6 +178,23 @@ cs_midi_ble_service_register_callback(struct ble_gatt_register_ctxt *ctxt,
     }
 }
 
+namespace {
+inline void update_connection_params(uint16_t conn_handle,
+                                     const cs::BLESettings &settings) {
+    ble_gap_upd_params params {};
+    params.latency = 0;
+    params.itvl_max = settings.connection_interval.maximum;
+    params.itvl_min = settings.connection_interval.minimum;
+    params.supervision_timeout = 400;
+    // Connection event length
+    params.min_ce_len = BLE_GAP_INITIAL_CONN_MIN_CE_LEN;
+    params.max_ce_len = BLE_GAP_INITIAL_CONN_MAX_CE_LEN;
+    if (auto rc = ble_gap_update_params(conn_handle, &params); rc != 0) {
+        ESP_LOGE("CS-BLEMIDI", "failed to update params; rc=%d", rc);
+    }
+}
+} // namespace
+
 /// Called for GAP events like (dis)connection, MTU updates, etc.
 inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
     ESP_LOGI("CS-BLEMIDI", "gap event %d", +event->type);
@@ -189,22 +206,27 @@ inline int cs_midi_ble_gap_callback(struct ble_gap_event *event, void *) {
                      event->connect.status);
             if (event->connect.status == 0) {
                 auto conn_handle = event->connect.conn_handle;
+                const auto &settings = cs::midi_ble_nimble::state->settings;
                 struct ble_gap_conn_desc desc;
                 auto rc = ble_gap_conn_find(conn_handle, &desc);
                 assert(rc == 0);
                 cs::midi_ble_nimble::print_conn_desc(&desc);
-#if 0
                 // TODO: is this the correct place?
                 // Without this, Android does not initiate bonding or SC, but
                 // with it, Windows starts a connect/disconnect loop on the
                 // second connection ...
-                if (auto rc = ble_gap_security_initiate(conn_handle); rc != 0) {
-                    ESP_LOGE("CS-BLEMIDI",
-                             "failed to initiate secure connection; rc=%d", rc);
-                    return ble_gap_terminate(conn_handle,
-                                             BLE_ERR_REM_USER_CONN_TERM);
+                if (settings.initiate_security) {
+                    if (auto rc = ble_gap_security_initiate(conn_handle);
+                        rc != 0) {
+                        ESP_LOGE("CS-BLEMIDI",
+                                 "failed to initiate secure connection; rc=%d",
+                                 rc);
+                        return ble_gap_terminate(conn_handle,
+                                                 BLE_ERR_REM_USER_CONN_TERM);
+                    }
                 }
-#endif
+                // Update the connection parameters
+                update_connection_params(conn_handle, settings);
                 if (auto *inst = cs::midi_ble_nimble::state->instance)
                     inst->handleConnect(cs::BLEConnectionHandle {conn_handle});
             } else {

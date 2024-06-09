@@ -70,6 +70,7 @@ inline bool init(MIDIBLEInstance &instance, BLESettings ble_settings) {
 
     // Initialize the MIDI service and characteristic
     cs_midi_ble_state.instance = &instance;
+    cs_midi_ble_state.settings = ble_settings;
     cs::midi_ble_nimble::state = &cs_midi_ble_state;
     const auto *gatt_server_services = midi_ble_get_service();
     CS_CHECK_ZERO(ble_gatts_count_cfg(gatt_server_services));

@@ -20,6 +20,8 @@ bool midi_notify(uint16_t conn_handle, uint16_t char_handle,
 
 /// Set the name of the BLE device. Must be set before calling @ref midi_init().
 void set_midi_ble_name(const char *name);
+/// Configure whether the Arduino should initiate the bonding/secure connection.
+void set_security_initiate_encryption(bool security_initiate_encryption_);
 
 /// Initialize the Bluetooth stack and register the MIDI BLE application with
 /// the Bluedroid driver.

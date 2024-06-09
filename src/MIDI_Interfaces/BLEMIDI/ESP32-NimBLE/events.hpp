@@ -21,6 +21,7 @@ struct MIDIBLEState {
     MIDIBLEInstance *instance = nullptr;
     uint16_t midi_characteristic_handle = invalid_handle;
     uint8_t address_type = 0;
+    BLESettings settings;
 };
 
 extern MIDIBLEState *state;
