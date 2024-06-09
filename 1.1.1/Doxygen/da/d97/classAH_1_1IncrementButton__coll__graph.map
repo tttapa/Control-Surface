@@ -1,0 +1,4 @@
+<map id="IncrementButton" name="IncrementButton">
+<area shape="rect" id="node1" title="A class for buttons that increment some counter or setting." alt="" coords="5,380,175,560"/>
+<area shape="rect" id="node2" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="8,5,172,317"/>
+</map>

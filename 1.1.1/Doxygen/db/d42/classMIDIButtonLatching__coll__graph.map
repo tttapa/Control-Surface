@@ -1,0 +1,10 @@
+<map id="MIDIButtonLatching&lt; Sender &gt;" name="MIDIButtonLatching&lt; Sender &gt;">
+<area shape="rect" id="node1" title="A class for latching buttons and switches that send MIDI events." alt="" coords="190,1373,347,1509"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="6,991,145,1274"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,188,112"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="92,161,299,444"/>
+<area shape="rect" id="node4" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="91,521,318,892"/>
+<area shape="rect" id="node6" title=" " alt="" coords="169,1094,232,1171"/>
+<area shape="rect" id="node7" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="256,977,420,1289"/>
+<area shape="rect" id="node8" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="445,955,631,1311"/>
+</map>

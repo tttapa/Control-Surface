@@ -1,0 +1,32 @@
+<map id="USBMIDI_Arduino_mbed.hpp" name="USBMIDI_Arduino_mbed.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="1359,5,1567,32"/>
+<area shape="rect" id="node2" href="$de/d76/Array_8hpp.html" title=" " alt="" coords="1373,80,1553,107"/>
+<area shape="rect" id="node13" title=" " alt="" coords="1708,528,1945,555"/>
+<area shape="rect" id="node24" href="$d4/d0e/mbed_2PluggableUSBMIDI_8hpp.html" title=" " alt="" coords="538,453,750,480"/>
+<area shape="rect" id="node3" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="1455,752,1646,779"/>
+<area shape="rect" id="node4" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="1777,155,1916,181"/>
+<area shape="rect" id="node12" title=" " alt="" coords="879,603,1022,629"/>
+<area shape="rect" id="node19" title=" " alt="" coords="988,453,1063,480"/>
+<area shape="rect" id="node23" title=" " alt="" coords="1403,155,1523,181"/>
+<area shape="rect" id="node5" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="1766,229,1927,256"/>
+<area shape="rect" id="node6" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="1614,453,1845,480"/>
+<area shape="rect" id="node14" href="$de/dd1/AH_2Settings_2SettingsWrapper_8hpp.html" title=" " alt="" coords="1572,304,1809,331"/>
+<area shape="rect" id="node22" href="$d7/d52/DebugVal_8hpp.html" title=" " alt="" coords="1884,304,1996,331"/>
+<area shape="rect" id="node7" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="1421,677,1681,704"/>
+<area shape="rect" id="node8" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="1047,528,1212,555"/>
+<area shape="rect" id="node9" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="1097,603,1279,629"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1015,752,1099,779"/>
+<area shape="rect" id="node10" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="1019,677,1245,704"/>
+<area shape="rect" id="node15" href="$d5/d4f/AH_2Settings_2Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="1319,379,1422,405"/>
+<area shape="rect" id="node21" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="1614,379,1845,405"/>
+<area shape="rect" id="node16" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="1353,603,1532,629"/>
+<area shape="rect" id="node17" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions." alt="" coords="1087,453,1297,480"/>
+<area shape="rect" id="node18" title=" " alt="" coords="1373,453,1443,480"/>
+<area shape="rect" id="node20" title=" " alt="" coords="1467,453,1538,480"/>
+<area shape="rect" id="node25" title=" " alt="" coords="5,528,72,555"/>
+<area shape="rect" id="node26" title=" " alt="" coords="96,528,163,555"/>
+<area shape="rect" id="node27" title=" " alt="" coords="187,528,242,555"/>
+<area shape="rect" id="node28" title=" " alt="" coords="266,528,467,555"/>
+<area shape="rect" id="node29" title=" " alt="" coords="491,528,629,555"/>
+<area shape="rect" id="node30" title=" " alt="" coords="653,528,803,555"/>
+</map>

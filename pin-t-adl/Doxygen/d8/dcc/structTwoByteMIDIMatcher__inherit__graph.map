@@ -1,0 +1,4 @@
+<map id="TwoByteMIDIMatcher" name="TwoByteMIDIMatcher">
+<area shape="rect" id="node1" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure (but n..." alt="" coords="5,5,191,97"/>
+<area shape="rect" id="node2" href="$da/dbd/structMCU_1_1VPotMatcher.html" title="MIDI Input matcher for Mackie Control Universal VPot LED rings." alt="" coords="33,145,163,223"/>
+</map>

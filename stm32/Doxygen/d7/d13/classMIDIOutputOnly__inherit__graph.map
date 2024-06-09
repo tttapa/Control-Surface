@@ -1,0 +1,12 @@
+<map id="MIDIOutputOnly" name="MIDIOutputOnly">
+<area shape="rect" id="node1" title=" " alt="" coords="374,593,537,700"/>
+<area shape="rect" id="node4" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="7,748,213,869"/>
+<area shape="rect" id="node6" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="237,748,444,869"/>
+<area shape="rect" id="node8" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="468,748,675,869"/>
+<area shape="rect" id="node10" href="$d6/db4/classSerialDebugMIDI__Output.html" title="A wrapper class for debug MIDI outputs sending human&#45;readable MIDI messages over a Serial port of cla..." alt="" coords="699,755,919,862"/>
+<area shape="rect" id="node2" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="350,233,561,545"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="350,5,561,185"/>
+<area shape="rect" id="node5" href="$dc/d60/classHardwareSerialDebugMIDI__Output.html" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over a HardwareSerial port." alt="" coords="5,917,215,1053"/>
+<area shape="rect" id="node7" href="$db/d36/classSoftwareSerialDebugMIDI__Output.html" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over a SoftwareSerial interface." alt="" coords="239,932,442,1039"/>
+<area shape="rect" id="node9" href="$d5/dbc/classUSBDebugMIDI__Output.html" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over the USB CDC connection." alt="" coords="473,939,670,1031"/>
+</map>

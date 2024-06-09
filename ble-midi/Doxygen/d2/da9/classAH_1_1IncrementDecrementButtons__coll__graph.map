@@ -1,0 +1,7 @@
+<map id="IncrementDecrementButtons" name="IncrementDecrementButtons">
+<area shape="rect" id="Node000001" title="A class for buttons that increment and decrement some counter or setting." alt="" coords="5,596,232,801"/>
+<area shape="rect" id="Node000002" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="31,213,207,519"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,519,121,580,116,580,116,519"/>
+<area shape="rect" id="Node000003" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="49,5,188,151"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,151,121,197,116,197,116,151"/>
+</map>

@@ -1,0 +1,33 @@
+<map id="CCButtons&lt; NumButtons &gt;" name="CCButtons&lt; NumButtons &gt;">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the input of a collection of momentary push buttons or switch..." alt="" coords="777,2021,970,2087"/>
+<area shape="rect" id="Node000002" href="$dc/d22/classBankable_1_1MIDIButtons.html" title=" " alt="" coords="759,1812,987,1972"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="876,1985,876,2021,871,2021,871,1985"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="395,1527,538,1652"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="526,1660,568,1705,615,1747,686,1796,760,1836,758,1841,684,1800,612,1751,564,1709,522,1664"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="231,931,425,1297"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="388,1309,451,1526,446,1527,382,1310"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,453,200,639"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="147,651,258,930,253,932,142,653"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,293,431,799"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="331,799,331,915,325,915,325,799"/>
+<area shape="rect" id="Node000007" href="$df/de5/classBankable_1_1SingleAddress.html" title=" " alt="" coords="626,1537,779,1642"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="728,1641,762,1711,804,1787,810,1797,805,1799,799,1789,758,1713,723,1643"/>
+<area shape="rect" id="Node000008" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="455,1051,681,1177"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="592,1190,691,1536,685,1537,587,1191"/>
+<area shape="rect" id="Node000009" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="455,456,694,636"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="576,650,571,1051,566,1051,571,650"/>
+<area shape="rect" id="Node000010" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="495,5,655,231"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="577,231,577,440,572,440,572,231"/>
+<area shape="rect" id="Node000011" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="705,861,887,1367"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="749,1367,719,1521,713,1520,744,1366"/>
+<area shape="rect" id="Node000012" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="804,1429,943,1749"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="876,1749,876,1796,871,1796,871,1749"/>
+<area shape="rect" id="Node000013" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="911,961,1087,1267"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="961,1268,922,1414,917,1413,956,1266"/>
+<area shape="rect" id="Node000014" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="929,473,1068,619"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="1001,619,1001,945,996,945,996,619"/>
+<area shape="rect" id="Node000015" href="$d5/d0e/classRelativeMIDIAddress.html" title="A class for saving an offset to a MIDI address." alt="" coords="967,1527,1142,1652"/>
+<area shape="poly" id="edge14_Node000002_Node000015" title=" " alt="" coords="1024,1654,946,1789,940,1799,936,1796,942,1787,1020,1651"/>
+<area shape="rect" id="Node000016" href="$d5/db5/classDigitalCCSender.html" title="Class that sends MIDI control change messages signifying either &quot;on&quot; or &quot;off&quot;." alt="" coords="1166,1487,1311,1692"/>
+<area shape="poly" id="edge15_Node000002_Node000016" title=" " alt="" coords="1198,1693,1179,1724,1157,1751,1122,1782,1084,1809,1004,1850,1001,1845,1081,1804,1119,1778,1153,1747,1175,1721,1194,1691"/>
+</map>

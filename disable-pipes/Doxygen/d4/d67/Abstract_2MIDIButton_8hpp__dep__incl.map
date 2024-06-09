@@ -1,0 +1,7 @@
+<map id="MIDIButton.hpp" name="MIDIButton.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="141,5,263,32"/>
+<area shape="rect" id="node2" href="$d3/dd8/CCButton_8hpp.html" title=" " alt="" coords="5,80,116,107"/>
+<area shape="rect" id="node4" href="$d3/d80/NoteButton_8hpp.html" title=" " alt="" coords="140,80,264,107"/>
+<area shape="rect" id="node5" href="$d2/dbf/PCButton_8hpp.html" title=" " alt="" coords="288,80,399,107"/>
+<area shape="rect" id="node3" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="133,155,271,181"/>
+</map>

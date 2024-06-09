@@ -1,0 +1,35 @@
+<map id="StreamDebugMIDI_Base" name="StreamDebugMIDI_Base">
+<area shape="rect" id="Node000001" title="A class that implements MIDI debug send functions." alt="" coords="834,5,1043,211"/>
+<area shape="rect" id="Node000002" href="$d8/d0b/classStreamDebugMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving human&#45;readable MIDI messages over a Stream." alt="" coords="475,259,698,604"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="825,216,700,330,697,326,822,212"/>
+<area shape="rect" id="Node000010" href="$d0/d9c/classStreamDebugMIDI__Output.html" title="A class for MIDI outputs sending human&#45;readable MIDI messages over a Stream." alt="" coords="1183,281,1398,581"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1055,212,1185,330,1181,334,1052,216"/>
+<area shape="rect" id="Node000003" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="5,652,219,772"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="464,507,214,654,211,650,462,503"/>
+<area shape="rect" id="Node000005" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="243,652,456,772"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="469,575,402,653,398,650,465,572"/>
+<area shape="rect" id="Node000007" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="480,652,693,772"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="589,618,589,651,584,651,584,618"/>
+<area shape="rect" id="Node000009" href="$db/dc4/classSerialDebugMIDI__Interface.html" title="A wrapper class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a S..." alt="" coords="717,659,944,765"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="709,568,788,658,784,661,705,572"/>
+<area shape="rect" id="Node000004" href="$d8/d29/classHardwareSerialDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a HardwareS..." alt="" coords="11,820,213,949"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="115,786,115,820,109,820,109,786"/>
+<area shape="rect" id="Node000006" href="$d3/d54/classSoftwareSerialDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a SoftwareS..." alt="" coords="252,820,447,949"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="352,786,352,820,347,820,347,786"/>
+<area shape="rect" id="Node000008" href="$de/d2d/classUSBDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over the USB CDC..." alt="" coords="485,842,688,927"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="589,786,589,842,584,842,584,786"/>
+<area shape="rect" id="Node000011" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="969,652,1167,772"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="1177,579,1117,653,1113,650,1173,576"/>
+<area shape="rect" id="Node000013" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="1191,652,1390,772"/>
+<area shape="poly" id="edge12_Node000010_Node000013" title=" " alt="" coords="1293,595,1293,651,1288,651,1288,595"/>
+<area shape="rect" id="Node000015" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="1414,652,1613,772"/>
+<area shape="poly" id="edge14_Node000010_Node000015" title=" " alt="" coords="1409,576,1468,650,1464,653,1404,579"/>
+<area shape="rect" id="Node000017" href="$d6/db4/classSerialDebugMIDI__Output.html" title="A wrapper class for debug MIDI outputs sending human&#45;readable MIDI messages over a Serial port of cla..." alt="" coords="1637,659,1849,765"/>
+<area shape="poly" id="edge16_Node000010_Node000017" title=" " alt="" coords="1411,504,1661,657,1658,662,1408,508"/>
+<area shape="rect" id="Node000012" href="$dc/d60/classHardwareSerialDebugMIDI__Output.html" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over a HardwareSerial port." alt="" coords="967,820,1169,949"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="1071,786,1071,820,1065,820,1065,786"/>
+<area shape="rect" id="Node000014" href="$db/d36/classSoftwareSerialDebugMIDI__Output.html" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over a SoftwareSerial interface." alt="" coords="1193,837,1388,932"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="1293,786,1293,837,1288,837,1288,786"/>
+<area shape="rect" id="Node000016" href="$d5/dbc/classUSBDebugMIDI__Output.html" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over the USB CDC connection." alt="" coords="1419,842,1608,927"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="1516,786,1516,842,1511,842,1511,786"/>
+</map>

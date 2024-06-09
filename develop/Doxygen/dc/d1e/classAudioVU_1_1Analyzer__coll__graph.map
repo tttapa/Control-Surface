@@ -1,0 +1,3 @@
+<map id="AudioVU::Analyzer" name="AudioVU::Analyzer">
+<area shape="rect" id="node1" title="The AudioAnalyzePeak and AudioAnalyzeRMS classes don&#39;t implement a common interface,..." alt="" coords="5,5,148,141"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="IVPot" name="IVPot">
+<area shape="rect" id="node1" title=" " alt="" coords="141,5,275,141"/>
+<area shape="rect" id="node2" href="$da/d93/classMCU_1_1Bankable_1_1VPotRing.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring." alt="" coords="11,189,202,516"/>
+<area shape="rect" id="node4" href="$d5/ddb/classMCU_1_1VPotRing.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring." alt="" coords="226,241,393,465"/>
+<area shape="rect" id="node3" href="$d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring and displays its value usin..." alt="" coords="5,564,208,715"/>
+<area shape="rect" id="node5" href="$d6/d0d/classMCU_1_1VPotRingLEDs.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring and displays it using LEDs." alt="" coords="239,571,380,707"/>
+</map>

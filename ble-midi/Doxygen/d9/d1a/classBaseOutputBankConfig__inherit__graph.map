@@ -1,0 +1,5 @@
+<map id="BaseOutputBankConfig" name="BaseOutputBankConfig">
+<area shape="rect" id="Node000001" title="A struct for selecting the bank of BankableMIDIOutputs and the bank type." alt="" coords="8,5,197,111"/>
+<area shape="rect" id="Node000002" href="$d0/d24/structOutputBankConfig.html" title=" " alt="" coords="5,159,200,239"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,124,105,158,100,158,100,124"/>
+</map>

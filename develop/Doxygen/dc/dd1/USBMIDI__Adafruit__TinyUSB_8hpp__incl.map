@@ -1,0 +1,26 @@
+<map id="USBMIDI_Adafruit_TinyUSB.hpp" name="USBMIDI_Adafruit_TinyUSB.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="179,5,407,32"/>
+<area shape="rect" id="node2" href="$de/d76/Array_8hpp.html" title=" " alt="" coords="203,80,383,107"/>
+<area shape="rect" id="node13" title=" " alt="" coords="78,528,315,555"/>
+<area shape="rect" id="node24" title=" " alt="" coords="407,80,555,107"/>
+<area shape="rect" id="node3" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="1004,752,1195,779"/>
+<area shape="rect" id="node4" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="873,155,1011,181"/>
+<area shape="rect" id="node12" title=" " alt="" coords="5,603,148,629"/>
+<area shape="rect" id="node19" title=" " alt="" coords="305,453,379,480"/>
+<area shape="rect" id="node23" title=" " alt="" coords="185,155,305,181"/>
+<area shape="rect" id="node5" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="861,229,1023,256"/>
+<area shape="rect" id="node6" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="404,453,635,480"/>
+<area shape="rect" id="node14" href="$de/dd1/AH_2Settings_2SettingsWrapper_8hpp.html" title=" " alt="" coords="823,304,1061,331"/>
+<area shape="rect" id="node22" href="$d7/d52/DebugVal_8hpp.html" title=" " alt="" coords="1150,304,1262,331"/>
+<area shape="rect" id="node7" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="713,677,973,704"/>
+<area shape="rect" id="node8" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="339,528,505,555"/>
+<area shape="rect" id="node9" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="577,603,758,629"/>
+<area shape="rect" id="node11" title=" " alt="" coords="309,752,393,779"/>
+<area shape="rect" id="node10" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="313,677,539,704"/>
+<area shape="rect" id="node15" href="$d5/d4f/AH_2Settings_2Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="801,379,904,405"/>
+<area shape="rect" id="node21" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="980,379,1211,405"/>
+<area shape="rect" id="node16" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="883,603,1062,629"/>
+<area shape="rect" id="node17" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions." alt="" coords="711,453,920,480"/>
+<area shape="rect" id="node18" title=" " alt="" coords="1039,453,1109,480"/>
+<area shape="rect" id="node20" title=" " alt="" coords="944,453,1015,480"/>
+</map>

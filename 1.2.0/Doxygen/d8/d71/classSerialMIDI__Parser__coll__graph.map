@@ -1,0 +1,7 @@
+<map id="SerialMIDI_Parser" name="SerialMIDI_Parser">
+<area shape="rect" id="node1" title=" " alt="" coords="191,608,356,744"/>
+<area shape="rect" id="node2" href="$df/d0c/classMIDI__Parser.html" title=" " alt="" coords="87,365,275,531"/>
+<area shape="rect" id="node3" href="$d7/d3f/structChannelMessage.html" title=" " alt="" coords="5,5,168,288"/>
+<area shape="rect" id="node4" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="193,49,359,244"/>
+<area shape="rect" id="node5" href="$d1/db1/classSysExBuffer.html" title=" " alt="" coords="300,351,433,545"/>
+</map>

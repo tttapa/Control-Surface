@@ -1,0 +1,14 @@
+<map id="MIDIFilteredAnalog&lt; BankAddress, Sender &gt;" name="MIDIFilteredAnalog&lt; BankAddress, Sender &gt;">
+<area shape="rect" id="node1" title="A class for potentiometers and faders that send MIDI events and can be added to a Bank." alt="" coords="575,1234,765,1443"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="500,933,651,1054"/>
+<area shape="rect" id="node3" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="203,527,407,839"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="105,933,339,1054"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1256,209,1421"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="251,1139,465,1539"/>
+<area shape="rect" id="node7" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="675,925,851,1061"/>
+<area shape="rect" id="node8" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title=" " alt="" coords="614,491,913,876"/>
+<area shape="rect" id="node9" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="539,226,663,406"/>
+<area shape="rect" id="node10" title=" " alt="" coords="693,5,772,83"/>
+<area shape="rect" id="node12" href="$d2/dcb/classHysteresis.html" title=" " alt="" coords="790,248,961,384"/>
+<area shape="rect" id="node11" href="$d7/d40/classEMA.html" title=" " alt="" coords="985,204,1179,428"/>
+</map>
