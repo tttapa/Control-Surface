@@ -1,14 +1,14 @@
 #pragma once
 
-#include "ESP32/app.h"
+#include "ESP32-NimBLE/app.hpp"
 #include "ESP32Backend.hpp"
 
 BEGIN_CS_NAMESPACE
 
 namespace ble_backend {
 struct ESP32NimBLE {
-    static constexpr auto notify = midi_ble_bluedroid::notify;
-    static constexpr auto init = midi_ble_bluedroid::init;
+    static constexpr auto notify = midi_ble_nimble::notify;
+    static constexpr auto init = midi_ble_nimble::init;
 };
 } // namespace ble_backend
 
