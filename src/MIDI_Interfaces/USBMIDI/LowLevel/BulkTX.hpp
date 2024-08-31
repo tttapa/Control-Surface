@@ -50,8 +50,14 @@ struct BulkTX {
     /// Check if all transfers have completed.
     bool is_done() const;
 
+    /// Get the number messages that failed to send.
+    uint32_t getWriteError() const { return writing.error.load(mo_rlx); }
+    /// Get and clear the number messages that failed to send.
+    uint32_t clearWriteError() { return writing.error.exchange(0, mo_rlx); }
+
   protected:
     void reset(uint16_t packet_size = MaxPacketSize);
+    bool wait_connect();
 
   private:
     static constexpr uint16_t MaxPacketSize = MaxPacketSizeV;
@@ -89,9 +95,11 @@ struct BulkTX {
         interrupt_atomic<Buffer *> sending {nullptr};
         interrupt_atomic<Buffer *> send_later {nullptr};
         interrupt_atomic<Buffer *> send_now {nullptr};
+        interrupt_atomic<uint32_t> error {0};
         uint16_t packet_size = MaxPacketSize;
     } writing;
     using wbuffer_t = typename Writing::Buffer;
+    bool disconnected = false;
 
     uint32_t index_of(wbuffer_t *p) const { return p - writing.buffers; }
     wbuffer_t *other_buf(wbuffer_t *p) {
