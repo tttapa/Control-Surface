@@ -51,7 +51,14 @@ void BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::write(
         return;
     }
     const uint32_t *end = msgs + num_msgs;
-    while (msgs != end) msgs += write_impl(msgs, end - msgs);
+    while (msgs != end) {
+        auto sent = write_impl(msgs, end - msgs);
+        if (sent == 0 && !wait_connect()) {
+            writing.error.fetch_add(end - msgs, mo_rlx);
+            return;
+        }
+        msgs += sent;
+    }
 }
 
 template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
