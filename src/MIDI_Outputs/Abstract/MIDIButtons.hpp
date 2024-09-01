@@ -76,8 +76,8 @@ class MIDIButtons : public MIDIOutputElement {
 
   private:
     Array<AH::Button, NumButtons> buttons;
-    const MIDIAddress baseAddress;
-    const RelativeMIDIAddress incrementAddress;
+    MIDIAddress baseAddress;
+    RelativeMIDIAddress incrementAddress;
 
   public:
     Sender sender;

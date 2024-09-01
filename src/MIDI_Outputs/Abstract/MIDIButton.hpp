@@ -53,7 +53,7 @@ class MIDIButton : public MIDIOutputElement {
 
   private:
     AH::Button button;
-    const MIDIAddress address;
+    MIDIAddress address;
 
   public:
     Sender sender;
