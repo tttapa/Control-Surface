@@ -1,0 +1,5 @@
+<map id="AHEncoder" name="AHEncoder">
+<area shape="rect" id="node1" title="Class for reading quadrature encoders, heavily influenced by http://www.pjrc.com/teensy/td_libs_Encod..." alt="" coords="71,277,233,589"/>
+<area shape="rect" id="node2" href="$dc/d9d/structDirectPinRead.html" title=" " alt="" coords="5,71,120,149"/>
+<area shape="rect" id="node3" href="$de/d62/structAtomicPosition.html" title=" " alt="" coords="144,5,339,215"/>
+</map>

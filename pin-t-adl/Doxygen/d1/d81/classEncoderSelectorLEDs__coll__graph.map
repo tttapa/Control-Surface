@@ -1,0 +1,16 @@
+<map id="EncoderSelectorLEDs&lt; N &gt;" name="EncoderSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector that reads from a rotary encoder. This version displays the setting using LEDs." alt="" coords="797,1359,996,1436"/>
+<area shape="rect" id="node2" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="795,1129,998,1309"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="139,762,305,971"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="156,439,288,531"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="5,424,132,545"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="301,5,505,317"/>
+<area shape="rect" id="node8" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="449,424,683,545"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="584,784,788,949"/>
+<area shape="rect" id="node9" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="340,667,555,1067"/>
+<area shape="rect" id="node10" href="$dd/da9/classAHEncoder.html" title="Class for reading quadrature encoders, heavily influenced by http://www.pjrc.com/teensy/td_libs_Encod..." alt="" coords="815,703,978,1030"/>
+<area shape="rect" id="node11" href="$dc/d69/namespaceAH.html#dc/d69/namespaceAH" title=" " alt="" coords="730,115,917,207"/>
+<area shape="rect" id="node12" href="$dc/d9d/structDirectPinRead.html" title=" " alt="" coords="843,446,958,523"/>
+<area shape="rect" id="node13" href="$de/d62/structAtomicPosition.html" title=" " alt="" coords="982,380,1177,589"/>
+<area shape="rect" id="node14" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="1132,777,1256,957"/>
+</map>

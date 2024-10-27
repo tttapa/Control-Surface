@@ -1,0 +1,13 @@
+<map id="NoteCCKPRangeFastLED&lt; Type, BankSize, RangeLen, ColorMapper &gt;" name="NoteCCKPRangeFastLED&lt; Type, BankSize, RangeLen, ColorMapper &gt;">
+<area shape="rect" id="node1" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="399,1891,609,2261"/>
+<area shape="rect" id="node2" href="$d9/dd1/classBankable_1_1NoteCCKPRange.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="409,1632,599,1841"/>
+<area shape="rect" id="node3" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="137,1360,388,1525"/>
+<area shape="rect" id="node4" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="63,1103,377,1239"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="121,844,319,1053"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="120,483,320,795"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,123,205,303"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="229,5,440,420"/>
+<area shape="rect" id="node9" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="402,1132,609,1209"/>
+<area shape="rect" id="node10" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="412,1360,628,1525"/>
+<area shape="rect" id="node11" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="652,1316,841,1569"/>
+</map>

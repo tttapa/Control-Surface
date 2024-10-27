@@ -1,0 +1,37 @@
+<map id="AHEncoder.cpp" name="AHEncoder.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="398,5,517,32"/>
+<area shape="rect" id="node2" href="$d8/ddd/AHEncoder_8hpp.html" title=" " alt="" coords="328,80,448,107"/>
+<area shape="rect" id="node35" title=" " alt="" coords="473,80,583,107"/>
+<area shape="rect" id="node3" href="$da/dad/AtomicPosition_8hpp.html" title=" " alt="" coords="43,617,191,644"/>
+<area shape="rect" id="node13" href="$db/d5c/DirectPinRead_8hpp.html" title=" " alt="" coords="317,155,459,181"/>
+<area shape="rect" id="node33" href="$d0/d8c/NumInterrupts_8hpp.html" title=" " alt="" coords="267,617,411,644"/>
+<area shape="rect" id="node34" href="$d0/d0e/AHEncoder_8ipp.html" title=" " alt="" coords="483,155,599,181"/>
+<area shape="rect" id="node4" href="$d6/ddf/Arduino-Wrapper_8h.html" title=" " alt="" coords="605,841,771,868"/>
+<area shape="rect" id="node11" title=" " alt="" coords="447,692,684,719"/>
+<area shape="rect" id="node12" title=" " alt="" coords="84,692,151,719"/>
+<area shape="rect" id="node5" href="$d7/d79/MinMaxFix_8hpp.html" title=" " alt="" coords="736,916,917,943"/>
+<area shape="rect" id="node8" title=" " alt="" coords="673,1065,757,1092"/>
+<area shape="rect" id="node10" title=" " alt="" coords="158,916,301,943"/>
+<area shape="rect" id="node6" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="1245,1065,1435,1092"/>
+<area shape="rect" id="node7" href="$d6/d3b/FixArduinoMacros_8hpp.html" title=" " alt="" coords="676,991,903,1017"/>
+<area shape="rect" id="node9" href="$d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html" title=" " alt="" coords="1210,991,1470,1017"/>
+<area shape="rect" id="node14" href="$d0/d4e/Def_8hpp.html" title=" " alt="" coords="735,229,833,256"/>
+<area shape="rect" id="node15" href="$d2/dbc/Cable_8hpp.html" title=" " alt="" coords="714,617,801,644"/>
+<area shape="rect" id="node16" href="$d7/d42/Channel_8hpp.html" title=" " alt="" coords="587,617,690,644"/>
+<area shape="rect" id="node17" href="$de/d76/Array_8hpp.html" title=" " alt="" coords="1046,393,1226,420"/>
+<area shape="rect" id="node26" title=" " alt="" coords="828,767,903,793"/>
+<area shape="rect" id="node27" title=" " alt="" coords="1783,767,1854,793"/>
+<area shape="rect" id="node31" href="$d4/d35/Hardware-Types_8hpp.html" title=" " alt="" coords="1658,304,1833,345"/>
+<area shape="rect" id="node32" title=" " alt="" coords="637,311,747,338"/>
+<area shape="rect" id="node18" href="$d1/d93/Error_8hpp.html" title=" " alt="" coords="1368,468,1507,495"/>
+<area shape="rect" id="node30" title=" " alt="" coords="1076,468,1196,495"/>
+<area shape="rect" id="node19" href="$df/dee/Debug_8hpp.html" title=" " alt="" coords="1357,543,1518,569"/>
+<area shape="rect" id="node20" href="$dd/d80/PrintStream_8hpp.html" title=" " alt="" coords="927,617,1158,644"/>
+<area shape="rect" id="node21" href="$de/dd1/AH_2Settings_2SettingsWrapper_8hpp.html" title=" " alt="" coords="1319,617,1556,644"/>
+<area shape="rect" id="node29" href="$d7/d52/DebugVal_8hpp.html" title=" " alt="" coords="1183,617,1295,644"/>
+<area shape="rect" id="node22" href="$d5/d4f/AH_2Settings_2Settings_8hpp.html" title="All user settings and debugging options can be changed here." alt="" coords="1147,692,1250,719"/>
+<area shape="rect" id="node28" href="$d9/d98/TeensyUSBTypes_8hpp.html" title=" " alt="" coords="1274,692,1505,719"/>
+<area shape="rect" id="node23" href="$dc/d50/Frequency_8hpp.html" title=" " alt="" coords="1377,916,1556,943"/>
+<area shape="rect" id="node24" href="$d7/d7c/ADCConfig_8hpp.html" title="This file contains the platform&#45;specific ADC resolutions." alt="" coords="1079,767,1289,793"/>
+<area shape="rect" id="node25" title=" " alt="" coords="1429,767,1499,793"/>
+</map>

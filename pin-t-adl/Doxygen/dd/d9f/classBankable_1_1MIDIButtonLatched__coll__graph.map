@@ -1,0 +1,12 @@
+<map id="MIDIButtonLatched&lt; NumBanks, BankAddress, Sender &gt;" name="MIDIButtonLatched&lt; NumBanks, BankAddress, Sender &gt;">
+<area shape="rect" id="node1" title="A class for momentary buttons and switches that send MIDI events." alt="" coords="662,806,857,1015"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="496,446,647,567"/>
+<area shape="rect" id="node3" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="279,5,483,317"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="186,446,421,567"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="319,828,523,993"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="5,711,220,1111"/>
+<area shape="rect" id="node7" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="871,380,1055,633"/>
+<area shape="rect" id="node8" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="981,71,1105,251"/>
+<area shape="rect" id="node9" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="810,93,957,229"/>
+<area shape="rect" id="node10" href="$d6/da4/classAH_1_1BitArray.html" title=" " alt="" coords="671,380,847,633"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="Bankable::CCButtonMatrix&lt; nb_rows, nb_cols &gt;" name="Bankable::CCButtonMatrix&lt; nb_rows, nb_cols &gt;">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="91,733,270,825"/>
+<area shape="rect" id="node2" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="84,491,277,685"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="27,160,166,443"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,188,112"/>
+<area shape="rect" id="node5" href="$dd/d29/classAH_1_1ButtonMatrix.html" title="A class that reads the states of a button matrix." alt="" coords="190,167,339,435"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="MIDIIncrementDecrementButtons&lt; BankAddress, RelativeSender, ResetSender &gt;" name="MIDIIncrementDecrementButtons&lt; BankAddress, RelativeSender, ResetSender &gt;">
+<area shape="rect" id="node1" title="An abstract class for two buttons that send incremental MIDI events." alt="" coords="422,813,659,1008"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="149,468,287,751"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,145,188,251"/>
+<area shape="rect" id="node4" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="212,5,365,391"/>
+<area shape="rect" id="node5" title=" " alt="" coords="312,571,412,648"/>
+<area shape="rect" id="node6" href="$df/dc6/classAH_1_1IncrementDecrementButtons.html" title="A class for buttons that increment and decrement some counter or setting." alt="" coords="436,519,645,699"/>
+<area shape="rect" id="node7" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="459,42,623,354"/>
+<area shape="rect" id="node8" title=" " alt="" coords="669,571,780,648"/>
+<area shape="rect" id="node9" title=" " alt="" coords="805,571,903,648"/>
+</map>

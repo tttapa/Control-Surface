@@ -1,0 +1,5 @@
+<map id="Bankable::MIDIChordButton&lt; Sender &gt;" name="Bankable::MIDIChordButton&lt; Sender &gt;">
+<area shape="rect" id="node1" title="An abstract class for momentary push buttons that send multiple MIDI events." alt="" coords="5,491,192,700"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="29,160,168,443"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="7,5,190,112"/>
+</map>

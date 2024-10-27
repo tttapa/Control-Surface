@@ -1,0 +1,13 @@
+<map id="MIDIButtons&lt; BankAddress, Sender, NumButtons &gt;" name="MIDIButtons&lt; BankAddress, Sender, NumButtons &gt;">
+<area shape="rect" id="node1" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="664,1049,871,1229"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="501,681,652,803"/>
+<area shape="rect" id="node3" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="204,248,408,560"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="106,681,341,803"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1056,209,1221"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="249,939,464,1339"/>
+<area shape="rect" id="node7" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="883,623,1030,861"/>
+<area shape="rect" id="node8" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="865,277,1049,531"/>
+<area shape="rect" id="node9" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="815,5,939,185"/>
+<area shape="rect" id="node10" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="963,27,1110,163"/>
+<area shape="rect" id="node11" href="$d5/d0e/classRelativeMIDIAddress.html" title="A class for saving an offset to a MIDI address." alt="" coords="676,681,859,803"/>
+</map>
