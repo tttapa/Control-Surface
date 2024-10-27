@@ -54,6 +54,7 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule,
   public:
     /// Check if this class is connected and ready.
     bool connected() const;
+    bool connectedForWrite() const { return connected(); }
 
     /// Try reading a 4-byte MIDI USB message.
     ///
@@ -68,6 +69,8 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule,
     using BulkTX<PluggableUSBMIDI, uint32_t, 64>::write;
     using BulkTX<PluggableUSBMIDI, uint32_t, 64>::write_nonblock;
     using BulkTX<PluggableUSBMIDI, uint32_t, 64>::send_now;
+    using BulkTX<PluggableUSBMIDI, uint32_t, 64>::getWriteError;
+    using BulkTX<PluggableUSBMIDI, uint32_t, 64>::clearWriteError;
 
     /// Set the timeout, the number of microseconds to buffer the outgoing MIDI
     /// messages. A shorter timeout usually results in lower latency, but also
@@ -77,11 +80,6 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule,
     void setErrorTimeout(microseconds timeout) {
         error_timeout_duration = timeout;
     }
-
-    /// Count how many USB packets were dropped.
-    uint32_t getWriteError() const { return write_errors; }
-    /// Clear the counter of how many USB packets were dropped.
-    uint32_t clearWriteError() { return std::exchange(write_errors, 0); }
 
   protected:
     void init(EndpointResolver &resolver) override;
@@ -103,7 +101,6 @@ class PluggableUSBMIDI : protected arduino::internal::PluggableUSBModule,
     microseconds timeout_duration {1'000};
     microseconds error_timeout_duration {40'000};
     mbed::Timeout timeout;
-    uint32_t write_errors {0};
 
     usb_ep_t bulk_in_ep;
     usb_ep_t bulk_out_ep;

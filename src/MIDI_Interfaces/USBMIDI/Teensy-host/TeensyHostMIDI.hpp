@@ -31,49 +31,12 @@ class TeensyHostMIDI
         return packet;
     }
 
-    /// Send a MIDI USB message. May block.
-    ///
-    /// @param  msg
-    ///         The 4-byte MIDI USB message to send.
-    void write(uint32_t msg) {
-        if (txpipe)
-            BulkTX<TeensyHostMIDI, uint32_t, MaxPacketSize>::write(msg);
-    }
-
-    /// Send multiple MIDI USB messages. May block.
-    ///
-    /// @param  msgs
-    ///         An array of 4-byte MIDI USB messages to send.
-    /// @param  num_msgs
-    ///         The number of messages in the array.
-    void write(const uint32_t *msgs, uint32_t num_msgs) {
-        if (txpipe)
-            BulkTX<TeensyHostMIDI, uint32_t, MaxPacketSize>::write(msgs,
-                                                                   num_msgs);
-    }
-
-    /// Send multiple MIDI USB messages. May block.
-    template <size_t N>
-    void write(const uint32_t (&msgs)[N]) {
-        write(msgs, N);
-    }
-
-    /// Send multiple MIDI USB messages without blocking.
-    ///
-    /// @param  msgs
-    ///         An array of 4-byte MIDI USB messages to send.
-    /// @param  num_msgs
-    ///         The number of messages in the array.
-    /// @return The number of messages that were actually sent.
-    uint32_t write_nonblock(const uint32_t *msgs, uint32_t num_msgs) {
-        if (txpipe)
-            return BulkTX<TeensyHostMIDI, uint32_t,
-                          MaxPacketSize>::write_nonblock(msgs, num_msgs);
-        return 0;
-    }
-
-    using BulkTX<TeensyHostMIDI, uint32_t, MaxPacketSize>::send_now;
     using BulkRX<TeensyHostMIDI, uint32_t, MaxPacketSize>::read;
+    using BulkTX<TeensyHostMIDI, uint32_t, MaxPacketSize>::write;
+    using BulkTX<TeensyHostMIDI, uint32_t, MaxPacketSize>::write_nonblock;
+    using BulkTX<TeensyHostMIDI, uint32_t, MaxPacketSize>::send_now;
+    using BulkTX<TeensyHostMIDI, uint32_t, MaxPacketSize>::getWriteError;
+    using BulkTX<TeensyHostMIDI, uint32_t, MaxPacketSize>::clearWriteError;
 
     /// Set the timeout, the number of microseconds to buffer the outgoing MIDI
     /// messages. A shorter timeout usually results in lower latency, but also
@@ -84,14 +47,7 @@ class TeensyHostMIDI
         write_error_timeout_duration = timeout;
     }
 
-    /// Count how many USB packets were dropped.
-    uint32_t getWriteError() const { return write_errors; }
-    /// Clear the counter of how many USB packets were dropped.
-    uint32_t clearWriteError() {
-        auto old = write_errors;
-        write_errors = 0;
-        return old;
-    }
+    bool connectedForWrite() const { return txpipe; }
 
   protected:
     bool claim(Device_t *device, int type, const uint8_t *descriptors,
@@ -139,7 +95,6 @@ class TeensyHostMIDI
     USBDriverTimer write_timeout {this};
     microseconds write_timeout_duration {1'000};
     microseconds write_error_timeout_duration {40'000};
-    uint32_t write_errors {0};
 
   protected:
     friend class BulkRX<TeensyHostMIDI, uint32_t, MaxPacketSize>;

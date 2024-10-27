@@ -21,6 +21,7 @@ struct TestBulkTX : cs::BulkTX<TestBulkTX, uint32_t, PacketSize> {
         tx_start(data, size);
     }
     void tx_start_isr(const void *data, uint32_t size) { tx_start(data, size); }
+    bool connectedForWrite() const { return true; }
 
     timer_t timeout_timerid {}, write_timerid {};
     itimerspec timeout_its {}, write_its {};

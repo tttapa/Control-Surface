@@ -22,8 +22,32 @@ void BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::write(MessageType msg) {
 }
 
 template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
+bool BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::wait_connect() {
+    if (CRTP(Derived).connectedForWrite()) {
+        disconnected = false;
+        return true; // connection is okay
+    } else if (disconnected) {
+        return false; // don't retry
+    }
+    // Wait for up to half a second (or until connected)
+    for (int i = 0; i < 100; ++i) {
+        delay(5);
+        if (CRTP(Derived).connectedForWrite()) {
+            disconnected = false;
+            return true;
+        }
+    }
+    disconnected = true;
+    return false;
+}
+
+template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
 void BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::write(
     const MessageType *msgs, uint32_t num_msgs) {
+    if (!wait_connect()) {
+        writing.error.fetch_add(num_msgs, mo_rlx);
+        return;
+    }
     const uint32_t *end = msgs + num_msgs;
     while (msgs != end) msgs += write_impl(msgs, end - msgs);
 }
@@ -31,6 +55,8 @@ void BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::write(
 template <class Derived, class MessageTypeT, uint16_t MaxPacketSizeV>
 uint32_t BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::write_nonblock(
     const MessageType *msgs, uint32_t num_msgs) {
+    if (!CRTP(Derived).connectedForWrite())
+        return 0;
     uint32_t total_sent = 0, sent = 1;
     while (total_sent < num_msgs && sent != 0) {
         sent = write_impl(msgs + total_sent, num_msgs - total_sent, true);
