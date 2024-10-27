@@ -40,7 +40,9 @@ class LCDDisplay : public DisplayElement {
                uint8_t track, PixelLocation loc, uint8_t textSize,
                uint16_t color)
         : DisplayElement(display), lcd(lcd), bank(&bank), track(track - 1),
-          line(1), x(loc.x), y(loc.y), size(textSize), color(color) {}
+          line(1), x(loc.x), y(loc.y), size(textSize), color(color) {
+        lcd.addSubscriber();
+    }
 
     /**
      * @brief   Constructor.
@@ -67,7 +69,9 @@ class LCDDisplay : public DisplayElement {
                uint8_t track, uint8_t line, PixelLocation loc, uint8_t textSize,
                uint16_t color)
         : DisplayElement(display), lcd(lcd), bank(&bank), track(track - 1),
-          line(line - 1), x(loc.x), y(loc.y), size(textSize), color(color) {}
+          line(line - 1), x(loc.x), y(loc.y), size(textSize), color(color) {
+        lcd.addSubscriber();
+    }
 
     /**
      * @brief   Constructor.
@@ -89,7 +93,9 @@ class LCDDisplay : public DisplayElement {
     LCDDisplay(DisplayInterface &display, LCD<> &lcd, uint8_t track,
                PixelLocation loc, uint8_t textSize, uint16_t color)
         : DisplayElement(display), lcd(lcd), track(track - 1), line(1),
-          x(loc.x), y(loc.y), size(textSize), color(color) {}
+          x(loc.x), y(loc.y), size(textSize), color(color) {
+        lcd.addSubscriber();
+    }
 
     /**
      * @brief   Constructor.
@@ -114,30 +120,34 @@ class LCDDisplay : public DisplayElement {
                uint8_t line, PixelLocation loc, uint8_t textSize,
                uint16_t color)
         : DisplayElement(display), lcd(lcd), track(track - 1), line(line - 1),
-          x(loc.x), y(loc.y), size(textSize), color(color) {}
+          x(loc.x), y(loc.y), size(textSize), color(color) {
+        lcd.addSubscriber();
+    }
+
+    LCDDisplay(const LCDDisplay &) = delete;
+    ~LCDDisplay() { lcd.removeSubscriber(); }
 
     void draw() override {
         // If it's a message across all tracks, don't display anything.
-        if (!separateTracks())
-            return;
+        if (separateTracks()) {
+            // Determine the track and line to display
+            uint8_t offset = bank ? bank->getOffset() + track : track;
+            if (offset > 7)
+                ERROR(F("Track out of bounds (") << offset << ')', 0xBA41);
+            if (line > 1)
+                ERROR(F("Line out of bounds (") << line << ')', 0xBA42);
 
-        // Determine the track and line to display
-        uint8_t offset = bank ? bank->getOffset() + track : track;
-        if (offset > 7)
-            ERROR(F("Track number out of bounds (") << offset << ')', 0xBA41);
-        if (line > 1)
-            ERROR(F("Line number out of bounds (") << line << ')', 0xBA42);
-
-        // Extract the six-character substring for this track.
-        const char *text = lcd.getText() + 7 * offset + 56 * line;
-        char buffer[7];
-        strncpy(buffer, text, 6);
-        buffer[6] = '\0';
-        // Print it to the display
-        display.setCursor(x, y);
-        display.setTextSize(size);
-        display.setTextColor(color);
-        display.print(buffer);
+            // Extract the six-character substring for this track.
+            const char *text = lcd.getText() + 7 * offset + 56 * line;
+            char buffer[7];
+            strncpy(buffer, text, 6);
+            buffer[6] = '\0';
+            // Print it to the display
+            display.setCursor(x, y);
+            display.setTextSize(size);
+            display.setTextColor(color);
+            display.print(buffer);
+        }
         lcd.clearDirty();
     }
 

@@ -64,8 +64,7 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
         // Null-terminate the buffer
         buffer[BufferSize] = '\0';
         // Fill the buffer with spaces
-        for (uint8_t i = 0; i < BufferSize; i++)
-            buffer[i] = ' ';
+        for (uint8_t i = 0; i < BufferSize; i++) buffer[i] = ' ';
     }
 
   protected:
@@ -122,7 +121,7 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
         }
 #endif
 
-        dirty = true;
+        markDirty();
 
         // If this is the only instance, the others don't have to be updated
         // anymore, so we return true to break the loop:
@@ -130,6 +129,8 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
     }
 
   public:
+    void begin() override { markDirty(); }
+
     /// @name   Data access
     /// @{
 
@@ -141,11 +142,19 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
     /// @name   Detecting changes
     /// @{
 
+    ///
     /// Check if the text was updated since the last time the dirty flag was
     /// cleared.
-    bool getDirty() const { return dirty; }
+    bool getDirty() const { return dirty > 0; }
     /// Clear the dirty flag.
-    void clearDirty() { dirty = false; }
+    void clearDirty() {
+        if (dirty > 0)
+            --dirty;
+    }
+    /// Set the dirty counter to the number of subscribers (or one).
+    void markDirty() { dirty = num_subscribers > 0 ? num_subscribers : 1; }
+    void addSubscriber() { ++num_subscribers; }
+    void removeSubscriber() { --num_subscribers; }
 
     /// @}
 
@@ -153,7 +162,8 @@ class LCD : public MIDIInputElementSysEx, private LCDCounter {
     Array<char, BufferSize + 1> buffer;
     uint8_t offset;
     Cable cable;
-    bool dirty = true;
+    uint8_t dirty = 0;
+    uint8_t num_subscribers = 0;
 };
 
 } // namespace MCU

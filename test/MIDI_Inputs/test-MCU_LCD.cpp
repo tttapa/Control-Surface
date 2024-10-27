@@ -1,5 +1,8 @@
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <Display/DisplayInterface.hpp>
+#include <Display/MCU/LCDDisplay.hpp>
 #include <MIDI_Inputs/MCU/LCD.hpp>
 
 USING_CS_NAMESPACE;
@@ -131,4 +134,71 @@ TEST(LCDlength, len) {
             }
         }
     }
+}
+
+struct TestDisplay : DisplayInterface {
+    MOCK_METHOD(void, begin, (), (override));
+    MOCK_METHOD(void, clear, (), (override));
+    MOCK_METHOD(void, drawBackground, (), (override));
+    MOCK_METHOD(void, display, (), (override));
+    MOCK_METHOD(void, drawPixel, (int16_t, int16_t, uint16_t), (override));
+    MOCK_METHOD(void, setTextColor, (uint16_t), (override));
+    MOCK_METHOD(void, setTextSize, (uint8_t), (override));
+    MOCK_METHOD(void, setCursor, (int16_t, int16_t), (override));
+    MOCK_METHOD(size_t, write, (uint8_t), (override));
+    MOCK_METHOD(size_t, print, (std::string_view), ());
+    MOCK_METHOD(void, drawLine, (int16_t, int16_t, int16_t, int16_t, uint16_t),
+                (override));
+    MOCK_METHOD(void, drawFastVLine, (int16_t, int16_t, int16_t, uint16_t),
+                (override));
+    MOCK_METHOD(void, drawFastHLine, (int16_t, int16_t, int16_t, uint16_t),
+                (override));
+    MOCK_METHOD(void, drawXBitmap,
+                (int16_t, int16_t, const uint8_t[], int16_t, int16_t, uint16_t),
+                (override));
+    MOCK_METHOD(void, fillRect, (int16_t, int16_t, int16_t, int16_t, uint16_t),
+                (override));
+    MOCK_METHOD(void, drawCircle, (int16_t, int16_t, int16_t, uint16_t),
+                (override));
+    MOCK_METHOD(void, fillCircle, (int16_t, int16_t, int16_t, uint16_t),
+                (override));
+    size_t print(const char s[]) override {
+        return print(std::string_view {s});
+    }
+};
+
+TEST(LCDDisplay, multiple) {
+    using namespace std::string_view_literals;
+    MCU::LCD<> lcd(0);
+    std::vector<uint8_t> sysex = {
+        0xF0, 0x00, 0x00, 0x66, 0x10, 0x12, 0x00, //
+        'a',  'b',  'c',  'd',  'e',  'f',  ' ',  //
+        'h',  'i',  'j',  'k',  'l',  'm',  ' ',  //
+        0xF7,
+    };
+    lcd.clearDirty();
+    testing::NiceMock<TestDisplay> displays[2];
+    MCU::LCDDisplay lcd_displays[] {
+        {displays[0], lcd, 1, 1, {0, 0}, 2, 0xFFFF},
+        {displays[1], lcd, 2, 1, {0, 0}, 2, 0xFFFF},
+    };
+    lcd.begin();
+    for (auto &lcd_display : lcd_displays) EXPECT_TRUE(lcd_display.getDirty());
+    EXPECT_CALL(displays[0], print("      "sv));
+    lcd_displays[0].draw();
+    EXPECT_TRUE(lcd_displays[1].getDirty());
+    EXPECT_CALL(displays[1], print("      "sv));
+    lcd_displays[1].draw();
+    for (auto &lcd_display : lcd_displays) EXPECT_FALSE(lcd_display.getDirty());
+    MIDIInputElementSysEx::updateAllWith(sysex);
+    std::string_view content {lcd.getText(), 14};
+    EXPECT_EQ(content, "abcdef hijklm "sv);
+    EXPECT_TRUE(lcd.getDirty());
+    for (auto &lcd_display : lcd_displays) EXPECT_TRUE(lcd_display.getDirty());
+    EXPECT_CALL(displays[0], print("abcdef"sv));
+    lcd_displays[0].draw();
+    EXPECT_TRUE(lcd_displays[1].getDirty());
+    EXPECT_CALL(displays[1], print("hijklm"sv));
+    lcd_displays[1].draw();
+    for (auto &lcd_display : lcd_displays) EXPECT_FALSE(lcd_display.getDirty());
 }
