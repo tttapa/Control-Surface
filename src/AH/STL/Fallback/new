@@ -39,6 +39,8 @@
 #include "bits/c++config.h"
 // #include <exception>
 
+#include <new.h> // Arduino's version of the <new> header
+
 #pragma GCC visibility push(default)
 
 extern "C++" {
@@ -86,6 +88,7 @@ namespace std
   enum class align_val_t: size_t {};
 #endif
 
+#ifndef NEW_H // already defined in Arduino's version of <new>
   struct nothrow_t
   {
 #if __cplusplus >= 201103L
@@ -107,9 +110,11 @@ namespace std
   /// Return the current new handler.
   new_handler get_new_handler() noexcept;
 #endif
+#endif // NEW_H
 } // namespace std
 
 //@{
+#ifndef NEW_H // already defined in Arduino's version of <new>
 /** These are replaceable signatures:
  *  - normal single new and delete (no arguments, throw @c bad_alloc on error)
  *  - normal array new and delete (same)
@@ -176,6 +181,7 @@ inline void* operator new[](std::size_t, void* __p) _GLIBCXX_USE_NOEXCEPT
 // Default placement versions of operator delete.
 inline void operator delete  (void*, void*) _GLIBCXX_USE_NOEXCEPT { }
 inline void operator delete[](void*, void*) _GLIBCXX_USE_NOEXCEPT { }
+#endif // NEW_H
 //@}
 } // extern "C++"
 
