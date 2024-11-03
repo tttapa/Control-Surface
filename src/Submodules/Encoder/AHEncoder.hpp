@@ -78,7 +78,7 @@ class AHEncoder {
     void detachInterruptCtx(int interrupt);
 
   private:
-    ArduinoPin_t pins[2];
+    AH::Array<ArduinoPin_t, 2> pins;
     uint8_t interrupts_in_use = 0;
     uint8_t state = 0;
     AH::Array<DirectPinRead, 2> direct_pins;
