@@ -63,8 +63,8 @@ constexpr PinMode_t INPUT_PULLUP = AH_pin_detail::tmp_INPUT_PULLUP;
 
 BEGIN_AH_NAMESPACE
 template <class T>
-inline ArduinoPin_t arduino_pin_cast(T t) {
+constexpr ArduinoPin_t arduino_pin_cast(T t) {
     return static_cast<ArduinoPin_t>(t);
 }
-inline ArduinoPin_t arduino_pin_cast(pin_t t) { return t.pin; }
+constexpr ArduinoPin_t arduino_pin_cast(pin_t t) { return t.pin; }
 END_AH_NAMESPACE

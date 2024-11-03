@@ -38,11 +38,11 @@ class MCP23017 : public StaticSizeExtendedIOElement<16> {
     MCP23017(WireType &wire, uint8_t addressOffset = 0,
              pin_t interruptPin = NO_PIN);
 
-    void pinModeBuffered(pin_t pin, PinMode_t mode) override;
-    void digitalWriteBuffered(pin_t pin, PinStatus_t status) override;
-    PinStatus_t digitalReadBuffered(pin_t pin) override;
-    analog_t analogReadBuffered(pin_t pin) override;
-    void analogWriteBuffered(pin_t, analog_t) override;
+    void pinModeBuffered(pin_int_t pin, PinMode_t mode) override;
+    void digitalWriteBuffered(pin_int_t pin, PinStatus_t status) override;
+    PinStatus_t digitalReadBuffered(pin_int_t pin) override;
+    analog_t analogReadBuffered(pin_int_t pin) override;
+    void analogWriteBuffered(pin_int_t, analog_t) override;
 
     void begin() override;
 
@@ -54,11 +54,11 @@ class MCP23017 : public StaticSizeExtendedIOElement<16> {
     /// Get the identifier of the given pin in register A.
     /// @param  p
     ///         Pin number in [0, 7]
-    pin_t pinA(pin_t p) { return pin(p); }
+    pin_t pinA(pin_int_t p) { return pin(p); }
     /// Get the identifier of the given pin in register B.
     /// @param  p
     ///         Pin number in [0, 7]
-    pin_t pinB(pin_t p) { return pin(p + 8); }
+    pin_t pinB(pin_int_t p) { return pin(p + 8); }
 
   private:
     constexpr static uint8_t I2C_BASE_ADDRESS = 0x20;

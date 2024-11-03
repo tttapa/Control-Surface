@@ -72,7 +72,8 @@ SPIShiftRegisterOut<mux.length()> sreg {SPI, SS, MSBFIRST};
 // { mux.pin(0), mux.pin(1) ... mux.pin(15) }
 // For each button it creates, it increments the pin number by 1,
 // and it starts counting from mux.pin(0)
-auto buttons = generateIncrementalArray<Button, mux.length()>(mux.pin(0));
+auto buttons =
+  generateIncrementalArray<Button, mux.length()>(mux.pin(0), pin_int_t {1});
 
 void setup() { // Initialize everything
   mux.begin();

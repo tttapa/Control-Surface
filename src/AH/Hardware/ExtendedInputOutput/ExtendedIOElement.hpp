@@ -65,7 +65,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      * @param   length
      *          The number of pins this element has.
      */
-    ExtendedIOElement(pin_t length);
+    ExtendedIOElement(pin_int_t length);
 
     /// Copying not allowed.
     ExtendedIOElement(const ExtendedIOElement &) = delete;
@@ -94,7 +94,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      *          The mode to set the pin to (e.g. `INPUT`, `OUTPUT` or 
      *          `INPUT_PULLUP`).
      */
-    virtual void pinMode(pin_t pin, PinMode_t mode) {
+    virtual void pinMode(pin_int_t pin, PinMode_t mode) {
         pinModeBuffered(pin, mode);
         updateBufferedOutputs();
     }
@@ -105,7 +105,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      * is called.
      * @copydetails pinMode
      */
-    virtual void pinModeBuffered(pin_t pin, PinMode_t mode) = 0;
+    virtual void pinModeBuffered(pin_int_t pin, PinMode_t mode) = 0;
 
     /** 
      * @brief   Set the output of the given pin to the given state.
@@ -115,7 +115,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      * @param   state
      *          The new state to set the pin to.
      */
-    virtual void digitalWrite(pin_t pin, PinStatus_t state) {
+    virtual void digitalWrite(pin_int_t pin, PinStatus_t state) {
         digitalWriteBuffered(pin, state);
         updateBufferedOutputs();
     }
@@ -126,7 +126,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      * is called.
      * @copydetails digitalWrite
      */
-    virtual void digitalWriteBuffered(pin_t pin, PinStatus_t state) = 0;
+    virtual void digitalWriteBuffered(pin_int_t pin, PinStatus_t state) = 0;
 
     /** 
      * @brief   Read the state of the given pin.
@@ -135,7 +135,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      *          The (zero-based) pin of this IO element.
      * @return  The state of the given pin.
      */
-    virtual PinStatus_t digitalRead(pin_t pin) {
+    virtual PinStatus_t digitalRead(pin_int_t pin) {
         updateBufferedInputs();
         return digitalReadBuffered(pin);
     }
@@ -145,7 +145,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      * To update the buffer, you have to call @ref updateBufferedInputs first.
      * @copydetails digitalRead
      */
-    virtual PinStatus_t digitalReadBuffered(pin_t pin) = 0;
+    virtual PinStatus_t digitalReadBuffered(pin_int_t pin) = 0;
 
     /**
      * @brief   Write an analog (or PWM) value to the given pin.
@@ -155,7 +155,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      * @param   val 
      *          The new analog value to set the pin to.
      */
-    virtual void analogWrite(pin_t pin, analog_t val) {
+    virtual void analogWrite(pin_int_t pin, analog_t val) {
         analogWriteBuffered(pin, val);
         updateBufferedOutputs();
     }
@@ -166,7 +166,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      * is called.
      * @copydetails analogWrite
      */
-    virtual void analogWriteBuffered(pin_t pin, analog_t val) = 0;
+    virtual void analogWriteBuffered(pin_int_t pin, analog_t val) = 0;
 
     /**
      * @brief   Read the analog value of the given pin.
@@ -175,7 +175,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      *          The (zero-based) pin of this IO element.
      * @return  The new analog value of pin.
      */
-    virtual analog_t analogRead(pin_t pin) {
+    virtual analog_t analogRead(pin_int_t pin) {
         updateBufferedInputs();
         return analogReadBuffered(pin);
     }
@@ -185,7 +185,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      * To update the buffer, you have to call @ref updateBufferedInputs first.
      * @copydetails analogRead
      */
-    virtual analog_t analogReadBuffered(pin_t pin) = 0;
+    virtual analog_t analogReadBuffered(pin_int_t pin) = 0;
 
     /**
      * @brief   Initialize the extended IO element.
@@ -226,7 +226,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      *          The zero-based physical pin number of this IO element.
      * @return  The global, unique extended IO pin number for the given pin.
      */
-    pin_t pin(pin_t pin) const;
+    pin_t pin(pin_int_t pin) const;
 
     /**
      * @brief   Get the extended IO pin number of a given physical pin of this
@@ -236,14 +236,14 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
      *          The zero-based physical pin number of this IO element.
      * @return  The global, unique extended IO pin number for the given pin.
      */
-    pin_t operator[](pin_t pin) const;
+    pin_t operator[](pin_int_t pin) const;
 
     /**
      * @brief Get the number of pins this IO element has.
      * 
      * @return The number of pins this IO element has. 
      */
-    pin_t getLength() const;
+    pin_int_t getLength() const;
 
     /**
      * @brief   Get the largest global extended IO pin number that belongs to
@@ -263,7 +263,7 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
     static DoublyLinkedList<ExtendedIOElement> &getAll();
 
   private:
-    const pin_t length;
+    const pin_int_t length;
     const pin_t start;
     const pin_t end;
     static pin_t offset;
@@ -275,22 +275,22 @@ struct CachedExtIOPin {
     explicit CachedExtIOPin(pin_t pin)
         : element(pin == NO_PIN || isNativePin(pin) ? nullptr
                                                     : getIOElementOfPin(pin)),
-          elementPin(element ? pin - element->getStart() : pin) {}
+          elementPin(element ? pin - element->getStart() : pin.pin) {}
 
     template <class FRet, class... FArgs, class Fallback>
     FRet __attribute__((always_inline))
-    apply(FRet (ExtendedIOElement::*func)(pin_t, FArgs...), Fallback &&fallback,
-          FArgs... args) {
+    apply(FRet (ExtendedIOElement::*func)(pin_int_t, FArgs...),
+          Fallback &&fallback, FArgs... args) {
         if (element != nullptr)
             return (element->*func)(elementPin, args...);
-        else if (elementPin != NO_PIN)
+        else if (elementPin != NO_PIN_INT)
             return fallback(arduino_pin_cast(elementPin), args...);
         else
             return static_cast<FRet>(0);
     }
 
     ExtendedIOElement *element;
-    pin_t elementPin;
+    pin_int_t elementPin;
 };
 
 /// An ExtIO version of the Arduino function
