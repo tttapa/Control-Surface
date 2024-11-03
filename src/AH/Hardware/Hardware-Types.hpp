@@ -15,7 +15,7 @@ using analog_t = uint16_t;
 /// Integer type used internally to store the index of (extended) GPIO pins.
 /// This type is also used to represent _offsets_ of pin
 /// numbers (e.g. the index of a pin within an extended IO element).
-/// In contrast, @ref pin_t represents an _absolute_ pin number.
+/// In contrast, @ref ExtIO::pin_t represents an _absolute_ pin number.
 using pin_int_t = uint_fast16_t;
 constexpr pin_int_t NO_PIN_INT =
     (std::numeric_limits<pin_int_t>::max() >> 1) + 1;

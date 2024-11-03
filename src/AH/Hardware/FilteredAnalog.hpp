@@ -51,7 +51,7 @@ class GenericFilteredAnalog {
           filter(increaseBitDepth<ADC_BITS + IncRes, Precision, AnalogType,
                                   AnalogType>(initial)) {}
 
-    /// @copydoc GenericFilteredAnalog(pin_t,MappingFunction,AnalogType)
+    /// @copydoc GenericFilteredAnalog::GenericFilteredAnalog(pin_t,MappingFunction,AnalogType)
     GenericFilteredAnalog(ArduinoPin_t analogPin, MappingFunction mapFn,
                           AnalogType initial = 0)
         : GenericFilteredAnalog(pin_t(analogPin),

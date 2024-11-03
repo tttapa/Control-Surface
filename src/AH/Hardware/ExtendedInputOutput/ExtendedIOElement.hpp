@@ -16,7 +16,7 @@ BEGIN_AH_NAMESPACE
  * ExtendedIOElement serves as a base class for all these expanders.
  *
  * The pins of each extended IO element are mapped to a pin number greater than
- * the greatest Arduino pin number, represented by the @ref pin_t type.  
+ * the greatest Arduino pin number, represented by the @ref ExtIO::pin_t type.  
  * You can supply this pin number to the IO functions in the @ref ExtIO
  * namespace.  
  * If the pin number corresponds to an actual Arduino pin, the default Arduino
@@ -52,8 +52,8 @@ BEGIN_AH_NAMESPACE
  * microcontrollers.  
  * Another reason to do it this way, is that this approach is still fast enough
  * to make sure it is not noticeable to human users.  
- * If you need faster extended GPIO access, you can use the @ref CachedExtIOPin
- * class.
+ * If you need faster extended GPIO access, you can use the
+ * @ref ExtIO::CachedExtIOPin class.
  */
 class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
   protected:
