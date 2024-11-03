@@ -9,6 +9,13 @@
  *          Includes shift registers (e.g. 74HC595), multiplexers (e.g. 74HC4067,
  *          74HC4051), port expanders (e.g. MCP23017), LED drivers (e.g.
  *          MAX7219), etc.
+ *
+ * GPIO pins of port expanders are represented by the @ref pin_t struct
+ * (internally, this is just an integer). Overloads of the standard Arduino IO
+ * functions such as `pinMode`, `digitalRead`, `digitalWrite` etc. are provided
+ * for @ref pin_t to allow these “extended” pins to be used transparently.
+ *
+ * See @ref ExtendedIOElement for details.
  */
 
 /// @cond   !AH_MAIN_LIBRARY
