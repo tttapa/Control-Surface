@@ -110,7 +110,9 @@ struct DirectPinRead {
         return ret == BSP_IO_LEVEL_LOW;
     }
 };
-inline DirectPinRead direct_pin_read(pin_t pin) { return {g_pin_cfg[pin].pin}; }
+inline DirectPinRead direct_pin_read(ArduinoPin_t pin) {
+    return {g_pin_cfg[pin].pin};
+}
 
 #else
 #warning "Unknown board. Please define the direct_pin_read function."
