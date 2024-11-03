@@ -118,7 +118,9 @@ class OutputBankableMIDIAddress : public OutputBankableMIDIAddress_Base {
             default: return {};
         }
     }
-    /// @copydoc getAddressOffset(setting_t) const
+    /** 
+     * @brief   Get the offset relative to the base address for the active bank.
+     */
     RelativeMIDIAddress getAddressOffset() const {
         return getAddressOffset(getSelection());
     }
