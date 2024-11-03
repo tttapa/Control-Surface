@@ -5,7 +5,12 @@
  * @brief   This file contains the platform-specific ADC resolutions.
  *          By default, the library automatically selects the maximum supported
  *          resolution for known boards, otherwise, it falls back to 10 bits.
+ * @cond    AH_MAIN_LIBRARY
+ * @see     @ref ADC_BITS
+ * @endcond
+ * @cond    !AH_MAIN_LIBRARY
  * @see     @ref AH::ADC_BITS
+ * @endcond
  */
 
 #include <AH/Arduino-Wrapper.h>
