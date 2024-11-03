@@ -15,17 +15,16 @@ BEGIN_AH_NAMESPACE
  * adding multiplexers, shift registers, IO expanders, etc.  
  * ExtendedIOElement serves as a base class for all these expanders.
  *
- * The pins of each extended IO element are mapped to a pin number
- * greater than the greatest Arduino pin number.  
- * You can supply this pin number to the IO functions in the ExtIO
+ * The pins of each extended IO element are mapped to a pin number greater than
+ * the greatest Arduino pin number, represented by the @ref pin_t type.  
+ * You can supply this pin number to the IO functions in the @ref ExtIO
  * namespace.  
- * If the pin number corresponds to an actual Arduino pin,
- * the default Arduino IO function (digitalRead, digitalWrite, ...)
- * will be called.  
- * If the pin is not an Arduino pin, it is an extended IO pin number,
- * so the extended IO element that this pin belongs to is looked up,
- * and the IO function for this element is executed with the correct
- * pin number.
+ * If the pin number corresponds to an actual Arduino pin, the default Arduino
+ * IO function (`digitalRead`, `digitalWrite, ...) will be called.  
+ * If the pin number does not correspond to a valid Arduino pin, it is an
+ * extended IO pin number, so the extended IO element that this pin belongs to
+ * is looked up, and the IO function for this element is executed with the
+ * correct pin number.
  *
  * For example:
  * Imagine an Arduino with 20 pins (e.g. the Arduino UNO).
@@ -35,27 +34,26 @@ BEGIN_AH_NAMESPACE
  * Now, we'll add two 8-channel analog multiplexers, let's call them
  * `mux1` and `mux2`.  
  * The first pin (pin 0) of `mux1` will be extended IO pin number 20,
- * the last pin (pin 7) of `mux1` will be extended IO pin number 27,
- * etc.
- * The first pin of `mux2` will be extended IO pin number 28, you get
- * the idea.
+ * the last pin (pin 7) of `mux1` will be extended IO pin number 27, etc.
+ * The first pin of `mux2` will be extended IO pin number 28, you get the idea.
  * If you now call `ExtIO::digitalRead(mux1.#pin (7))` or
- * `ExtIO::digitalRead(27)`, both will be
- * translated to `mux1.digitalRead(7)`.
+ * `ExtIO::digitalRead(27)`, both will be translated to `mux1.digitalRead(7)`.
  *
  * The number of extended IO elements is limited only by the size of
  * `pin_t`. However, looking up the extended IO element for a given
  * extended IO pin number uses linear search, so that might add
- * some noticable overhead for large pin numbers.  
+ * some noticeable overhead for large pin numbers.  
  * 
  * The design here is a compromise: saving a pointer to each extended IO element
- * to find it directly would be much faster than having to search all elements
- * each time. On the other hand, it would require each `pin_t` variable to be
- * at least one byte larger. Since almost all other classes in this library 
- * store pin variables, the memory penalty would be too large, especially on AVR
+ * to find it directly would be faster than having to search all elements each
+ * time. On the other hand, it would require each `pin_t` variable to be at
+ * least one byte larger. Since almost all other classes in this library store
+ * pin variables, the memory penalty would be too large, especially on AVR
  * microcontrollers.  
  * Another reason to do it this way, is that this approach is still fast enough
- * to make sure it is not noticable to human users.
+ * to make sure it is not noticeable to human users.  
+ * If you need faster extended GPIO access, you can use the @ref CachedExtIOPin
+ * class.
  */
 class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
   protected:
