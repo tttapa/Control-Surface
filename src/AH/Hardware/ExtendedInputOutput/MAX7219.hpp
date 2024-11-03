@@ -69,7 +69,7 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
      * @brief   The pinMode function is not implemented because the mode is
      *          `OUTPUT` by definition.
      */
-    void pinMode(pin_t pin, PinMode_t mode) override
+    void pinMode(pin_int_t pin, PinMode_t mode) override
         __attribute__((deprecated)) {
         (void)pin;
         (void)mode;
@@ -78,7 +78,7 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
     /**
      * @copydoc pinMode
      */
-    void pinModeBuffered(pin_t pin, PinMode_t mode) override
+    void pinModeBuffered(pin_int_t pin, PinMode_t mode) override
         __attribute__((deprecated)) {
         (void)pin;
         (void)mode;
@@ -93,7 +93,7 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
      *          The value to set the output to.
      *          (Either `HIGH` (1) or `LOW` (0))
      */
-    void digitalWrite(pin_t pin, PinStatus_t val) override {
+    void digitalWrite(pin_int_t pin, PinStatus_t val) override {
         IndexMask i = pin2index(pin);
         val ? buffer[i.row] |= i.colmask   // set the pin (high)
             : buffer[i.row] &= ~i.colmask; // clear the pin (low)
@@ -106,7 +106,7 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
      * is called.
      * @copydetails digitalWrite
      */
-    void digitalWriteBuffered(pin_t pin, PinStatus_t val) override {
+    void digitalWriteBuffered(pin_int_t pin, PinStatus_t val) override {
         IndexMask i = pin2index(pin);
         val ? buffer[i.row] |= i.colmask   // set the pin (high)
             : buffer[i.row] &= ~i.colmask; // clear the pin (low)
@@ -123,7 +123,7 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
      * @retval  1
      *          The state of the output is `HIGH`.
      */
-    PinStatus_t digitalRead(pin_t pin) override {
+    PinStatus_t digitalRead(pin_int_t pin) override {
         IndexMask i = pin2index(pin);
         return bool(buffer[i.row] & i.colmask) ? HIGH : LOW;
     }
@@ -131,7 +131,7 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
     /**
      * @copydoc digitalRead
      */
-    PinStatus_t digitalReadBuffered(pin_t pin) override {
+    PinStatus_t digitalReadBuffered(pin_int_t pin) override {
         IndexMask i = pin2index(pin);
         return bool(buffer[i.row] & i.colmask) ? HIGH : LOW;
     }
@@ -146,14 +146,14 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
      * @retval  1023
      *          The state of the output is `HIGH`.
      */
-    analog_t analogRead(pin_t pin) override __attribute__((deprecated)) {
+    analog_t analogRead(pin_int_t pin) override __attribute__((deprecated)) {
         return 1023 * digitalRead(pin);
     }
 
     /**
      * @copydoc analogRead
      */
-    analog_t analogReadBuffered(pin_t pin) override
+    analog_t analogReadBuffered(pin_int_t pin) override
         __attribute__((deprecated)) {
         return 1023 * digitalRead(pin);
     }
@@ -171,7 +171,7 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
      * @note    This function is just implemented for compatibility. Don't use
      *          it in new code.
      */
-    void analogWrite(pin_t pin, analog_t val) override
+    void analogWrite(pin_int_t pin, analog_t val) override
         __attribute__((deprecated)) {
         digitalWrite(pin, val >= 0x80 ? HIGH : LOW);
     }
@@ -179,7 +179,7 @@ class MAX7219 : public MAX7219_Base<SPIDriver>,
     /**
      * @copydoc analogWrite
      */
-    void analogWriteBuffered(pin_t pin, analog_t val) override
+    void analogWriteBuffered(pin_int_t pin, analog_t val) override
         __attribute__((deprecated)) {
         digitalWrite(pin, val >= 0x80 ? HIGH : LOW);
     }

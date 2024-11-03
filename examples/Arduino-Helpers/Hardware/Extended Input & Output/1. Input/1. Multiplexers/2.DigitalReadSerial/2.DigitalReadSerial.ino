@@ -61,7 +61,7 @@ void setup() {
 }
 
 void loop() {
-  for (pin_t pin = 0; pin < mux.getLength(); ++pin) {
+  for (pin_int_t pin = 0; pin < mux.getLength(); ++pin) {
     Serial.print(mux.digitalRead(pin));
     Serial.print('\t');
   }

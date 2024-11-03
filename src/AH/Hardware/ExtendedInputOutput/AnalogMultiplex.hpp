@@ -58,25 +58,25 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      *          The new mode of the input pin: 
      *          either INPUT or INPUT_PULLUP.
      */
-    void pinMode(pin_t pin, PinMode_t mode) override;
+    void pinMode(pin_int_t pin, PinMode_t mode) override;
 
     /**
      * @copydoc pinMode
      */
-    void pinModeBuffered(pin_t pin, PinMode_t mode) override;
+    void pinModeBuffered(pin_int_t pin, PinMode_t mode) override;
 
     /**
      * @brief   The digitalWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
-    void digitalWrite(pin_t, PinStatus_t) override // LCOV_EXCL_LINE
-        __attribute__((deprecated)) {}             // LCOV_EXCL_LINE
+    void digitalWrite(pin_int_t, PinStatus_t) override // LCOV_EXCL_LINE
+        __attribute__((deprecated)) {}                 // LCOV_EXCL_LINE
 
     /**
      * @copydoc digitalWrite
      */
-    void digitalWriteBuffered(pin_t, PinStatus_t) override // LCOV_EXCL_LINE
-        __attribute__((deprecated)) {}                     // LCOV_EXCL_LINE
+    void digitalWriteBuffered(pin_int_t, PinStatus_t) override // LCOV_EXCL_LINE
+        __attribute__((deprecated)) {}                         // LCOV_EXCL_LINE
 
     /**
      * @brief   Read the digital state of the given input.
@@ -84,12 +84,12 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      * @param   pin
      *          The multiplexer's pin number to read from.
      */
-    PinStatus_t digitalRead(pin_t pin) override;
+    PinStatus_t digitalRead(pin_int_t pin) override;
 
     /**
      * @copydoc digitalRead
      */
-    PinStatus_t digitalReadBuffered(pin_t pin) override;
+    PinStatus_t digitalReadBuffered(pin_int_t pin) override;
 
     /**
      * @brief   Read the analog value of the given input.
@@ -97,25 +97,25 @@ class AnalogMultiplex : public StaticSizeExtendedIOElement<1 << N> {
      * @param   pin
      *          The multiplexer's pin number to read from.
      */
-    analog_t analogRead(pin_t pin) override;
+    analog_t analogRead(pin_int_t pin) override;
 
     /**
      * @copydoc analogRead
      */
-    analog_t analogReadBuffered(pin_t pin) override;
+    analog_t analogReadBuffered(pin_int_t pin) override;
 
     /**
      * @brief   The analogWrite function is not implemented because writing an
      *          output to a multiplexer is not useful.
      */
-    void analogWrite(pin_t, analog_t) override // LCOV_EXCL_LINE
-        __attribute__((deprecated)) {}         // LCOV_EXCL_LINE
+    void analogWrite(pin_int_t, analog_t) override // LCOV_EXCL_LINE
+        __attribute__((deprecated)) {}             // LCOV_EXCL_LINE
 
     /**
      * @copydoc analogWrite
      */
-    void analogWriteBuffered(pin_t, analog_t) override // LCOV_EXCL_LINE
-        __attribute__((deprecated)) {}                 // LCOV_EXCL_LINE
+    void analogWriteBuffered(pin_int_t, analog_t) override // LCOV_EXCL_LINE
+        __attribute__((deprecated)) {}                     // LCOV_EXCL_LINE
 
     /**
      * @brief   Initialize the multiplexer: set the pin mode of the address pins
@@ -195,31 +195,31 @@ using CD74HC4051 = AnalogMultiplex<3>;
 // -------------------------------------------------------------------------- //
 
 template <uint8_t N>
-void AnalogMultiplex<N>::pinMode(pin_t, PinMode_t mode) {
+void AnalogMultiplex<N>::pinMode(pin_int_t, PinMode_t mode) {
     ExtIO::pinMode(analogPin, mode);
 }
 
 template <uint8_t N>
-void AnalogMultiplex<N>::pinModeBuffered(pin_t, PinMode_t mode) {
-    AnalogMultiplex<N>::pinMode(analogPin, mode);
+void AnalogMultiplex<N>::pinModeBuffered(pin_int_t p, PinMode_t mode) {
+    AnalogMultiplex<N>::pinMode(p, mode);
 }
 
 template <uint8_t N>
-PinStatus_t AnalogMultiplex<N>::digitalRead(pin_t pin) {
-    prepareReading(pin.pin);
+PinStatus_t AnalogMultiplex<N>::digitalRead(pin_int_t pin) {
+    prepareReading(static_cast<uint8_t>(pin));
     PinStatus_t result = ExtIO::digitalRead(analogPin);
     afterReading();
     return result;
 }
 
 template <uint8_t N>
-PinStatus_t AnalogMultiplex<N>::digitalReadBuffered(pin_t pin) {
+PinStatus_t AnalogMultiplex<N>::digitalReadBuffered(pin_int_t pin) {
     return AnalogMultiplex<N>::digitalRead(pin);
 }
 
 template <uint8_t N>
-analog_t AnalogMultiplex<N>::analogRead(pin_t pin) {
-    prepareReading(pin.pin);
+analog_t AnalogMultiplex<N>::analogRead(pin_int_t pin) {
+    prepareReading(static_cast<uint8_t>(pin));
     if (discardFirstReading_)
         (void)ExtIO::analogRead(analogPin); // Discard first reading
     analog_t result = ExtIO::analogRead(analogPin);
@@ -228,7 +228,7 @@ analog_t AnalogMultiplex<N>::analogRead(pin_t pin) {
 }
 
 template <uint8_t N>
-analog_t AnalogMultiplex<N>::analogReadBuffered(pin_t pin) {
+analog_t AnalogMultiplex<N>::analogReadBuffered(pin_int_t pin) {
     return AnalogMultiplex<N>::analogRead(pin);
 }
 

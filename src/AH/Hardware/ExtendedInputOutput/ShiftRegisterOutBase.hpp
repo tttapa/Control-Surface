@@ -40,7 +40,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      * @brief   The pinMode function is not implemented because the mode is
      *          `OUTPUT` by definition.
      */
-    void pinMode(pin_t pin, PinMode_t mode) override
+    void pinMode(pin_int_t pin, PinMode_t mode) override
         __attribute__((deprecated)) {
         (void)pin;
         (void)mode;
@@ -49,7 +49,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
     /**
      * @copydoc pinMode
      */
-    void pinModeBuffered(pin_t pin, PinMode_t mode) override
+    void pinModeBuffered(pin_int_t pin, PinMode_t mode) override
         __attribute__((deprecated)) {
         (void)pin;
         (void)mode;
@@ -64,7 +64,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      *          The value to set the pin to.
      *          (Either `HIGH` (1) or `LOW` (0))
      */
-    void digitalWrite(pin_t pin, PinStatus_t val) override;
+    void digitalWrite(pin_int_t pin, PinStatus_t val) override;
 
     /**
      * @brief   Set the output of a given pin in the software buffer.
@@ -72,7 +72,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      * is called.
      * @copydetails digitalWrite
      */
-    void digitalWriteBuffered(pin_t pin, PinStatus_t val) override;
+    void digitalWriteBuffered(pin_int_t pin, PinStatus_t val) override;
 
     /**
      * @brief   Get the current state of a given output pin.
@@ -84,12 +84,12 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      * @retval  1
      *          The state of the pin is `HIGH`.
      */
-    PinStatus_t digitalRead(pin_t pin) override;
+    PinStatus_t digitalRead(pin_int_t pin) override;
 
     /** 
      * @copydoc digitalRead
      */
-    PinStatus_t digitalReadBuffered(pin_t pin) override {
+    PinStatus_t digitalReadBuffered(pin_int_t pin) override {
         return digitalRead(pin);
     }
 
@@ -103,14 +103,14 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      * @retval  1023
      *          The state of the pin is `HIGH`.
      */
-    analog_t analogRead(pin_t pin) override __attribute__((deprecated)) {
+    analog_t analogRead(pin_int_t pin) override __attribute__((deprecated)) {
         return 1023 * digitalRead(pin);
     }
 
     /**
      * @copydoc analogRead
      */
-    analog_t analogReadBuffered(pin_t pin) override
+    analog_t analogReadBuffered(pin_int_t pin) override
         __attribute__((deprecated)) {
         return 1023 * digitalRead(pin);
     }
@@ -125,7 +125,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      *          will set the pin to a `HIGH` state, a value less than 0x80 will
      *          set the pin to a `LOW` state.
      */
-    void analogWrite(pin_t pin, analog_t val) override
+    void analogWrite(pin_int_t pin, analog_t val) override
         __attribute__((deprecated)) {
         digitalWrite(pin, val >= 0x80 ? HIGH : LOW);
     }
@@ -133,7 +133,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
     /**
      * @copydoc analogWrite
      */
-    void analogWriteBuffered(pin_t pin, analog_t val) override
+    void analogWriteBuffered(pin_int_t pin, analog_t val) override
         __attribute__((deprecated)) {
         digitalWrite(pin, val >= 0x80 ? HIGH : LOW);
     }
@@ -149,7 +149,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      * @param   id
      *          The zero-based LED number.
      */
-    pin_t red(pin_t id);
+    pin_t red(pin_int_t id);
 
     /**
      * @brief   Get an array containing all pins with red LEDs.
@@ -162,7 +162,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      * @param   id
      *          The zero-based LED number.
      */
-    pin_t green(pin_t id);
+    pin_t green(pin_int_t id);
 
     /**
      * @brief   Get an array containing all pins with green LEDs.
@@ -175,7 +175,7 @@ class ShiftRegisterOutBase : public StaticSizeExtendedIOElement<N> {
      * @param   id
      *          The zero-based LED number.
      */
-    pin_t blue(pin_t id);
+    pin_t blue(pin_int_t id);
 
     /**
      * @brief   Get an array containing all pins with blue LEDs.
