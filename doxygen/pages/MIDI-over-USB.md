@@ -61,7 +61,6 @@ You can also use the [earlephilhower/arduino-pico](https://github.com/earlephilh
 
 Known issues:
  - [ArduinoCore-mbed/issues#129](https://github.com/arduino/ArduinoCore-mbed/issues/129): Nano 33 BLE unreliable USB communication
- - [adafruit/Adafruit_TinyUSB_Arduino#400](https://github.com/adafruit/Adafruit_TinyUSB_Arduino/issues/400): USB descriptors not correctly updated if Bluetooth stack is initialized before Adafruit_TinyUSB
  - [adafruit/Adafruit_TinyUSB_Arduino#238](https://github.com/adafruit/Adafruit_TinyUSB_Arduino/issues/238): TinyUSB MIDI crashes when simultaneously receiving and sending messages
 
 ## Teensy
