@@ -1,5 +1,3 @@
-option(AH_FAST_COMPILE "Compile only necessary files" On)
-
 file(GLOB_RECURSE
     Arduino_Helpers_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 add_library(Arduino_Helpers ${Arduino_Helpers_SOURCES})
