@@ -17,3 +17,10 @@ using enable_if_t = typename enable_if<B, T>::type;
 #endif
 
 } // namespace std
+
+BEGIN_AH_NAMESPACE
+template <class T>
+struct type_identity {
+    using type = T;
+};
+END_AH_NAMESPACE
