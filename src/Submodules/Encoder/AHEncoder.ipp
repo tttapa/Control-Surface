@@ -4,15 +4,15 @@
 
 BEGIN_CS_NAMESPACE
 
-template <unsigned NumISR>
-auto AHEncoder::get_isr(unsigned interrupt) -> isr_func_t {
+template <interrupt_t NumISR>
+auto AHEncoder::get_isr(interrupt_t interrupt) -> isr_func_t {
     return interrupt == NumISR - 1
                ? []() CS_ENCODER_ISR_ATTR { AHEncoder::instance_table[NumISR - 1]->update(); }
                : get_isr<NumISR - 1>(interrupt); // Compile-time tail recursion
 }
 
 template <>
-inline auto AHEncoder::get_isr<0>(unsigned) -> isr_func_t {
+inline auto AHEncoder::get_isr<0>(interrupt_t) -> isr_func_t {
     return nullptr;
 }
 
