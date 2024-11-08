@@ -48,6 +48,11 @@ class NoteButton
                uint8_t velocity = 0x7F)
         : MIDIButton<ManyAddresses<NumBanks>, DigitalNoteSender> {
               {bank, addresses}, pin, {velocity}} {}
+
+    /// Set the velocity of the MIDI Note events.
+    void setVelocity(uint8_t velocity) { this->sender.setVelocity(velocity); }
+    /// Get the velocity of the MIDI Note events.
+    uint8_t getVelocity() const { return this->sender.getVelocity(); }
 };
 
 } // namespace ManyAddresses
