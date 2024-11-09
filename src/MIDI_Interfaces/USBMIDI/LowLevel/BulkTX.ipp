@@ -31,7 +31,9 @@ bool BulkTX<Derived, MessageTypeT, MaxPacketSizeV>::wait_connect() {
     }
     // Wait for up to half a second (or until connected)
     for (int i = 0; i < 100; ++i) {
+#ifdef ARDUINO
         delay(5);
+#endif
         if (CRTP(Derived).connectedForWrite()) {
             disconnected = false;
             return true;
