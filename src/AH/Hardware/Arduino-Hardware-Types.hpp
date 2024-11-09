@@ -69,7 +69,8 @@ constexpr ArduinoPin_t arduino_pin_cast(T t) {
     return static_cast<ArduinoPin_t>(t);
 }
 constexpr ArduinoPin_t arduino_pin_cast(pin_t t) { return t.pin; }
-#ifdef NOT_AN_INTERRUPT
+#if (defined(NOT_AN_INTERRUPT) || defined(ARDUINO_API_VERSION)) &&             \
+    !defined(ARDUINO_ARCH_RENESAS)
 using not_an_interrupt_t = decltype(NOT_AN_INTERRUPT);
 /// Type of interrupt indices (result of digitalPinToInterrupt).
 using interrupt_t =
