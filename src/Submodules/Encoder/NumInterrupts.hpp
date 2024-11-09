@@ -102,9 +102,14 @@ BEGIN_CS_NAMESPACE
 #error                                                                         \
     "This version of the ArduinoCore-renesas is not supported. Please open an issue on GitHub: https://github.com/tttapa/Control-Surface/issues"
 #endif
+END_CS_NAMESPACE
+BEGIN_AH_NAMESPACE
 using not_an_interrupt_t = pin_size_t;
 using interrupt_t = not_an_interrupt_t;
-#define NOT_AN_INTERRUPT ((not_an_interrupt_t)255)
+END_AH_NAMESPACE
+#define NOT_AN_INTERRUPT ((::AH::not_an_interrupt_t)255)
+BEGIN_CS_NAMESPACE
+using AH::interrupt_t;
 constexpr interrupt_t pin_to_interrupt_index[] {
     0,                // GPIO 0  (P301)                          IRQ6
     1,                // GPIO 1  (P302)                     IRQ5
