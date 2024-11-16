@@ -121,6 +121,7 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     /// is finished.
     template <class MIDIInterface_t>
     static void handleStall(MIDIInterface_t *self);
+    using MIDIStaller::handleStall;
 
   private:
     MIDI_Callbacks *callbacks = nullptr;
