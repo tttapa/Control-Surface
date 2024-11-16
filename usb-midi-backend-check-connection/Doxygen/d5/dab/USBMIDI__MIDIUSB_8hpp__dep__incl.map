@@ -1,0 +1,17 @@
+<map id="USBMIDI_MIDIUSB.hpp" name="USBMIDI_MIDIUSB.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="287,5,458,31"/>
+<area shape="rect" id="Node000002" href="$d1/d93/USBMIDI_8hpp.html" title=" " alt="" coords="319,79,426,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="375,44,375,79,370,79,370,44"/>
+<area shape="rect" id="Node000003" href="$d1/d64/USBMIDI__Interface_8hpp.html" title=" " alt="" coords="183,152,355,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="346,114,287,154,284,150,343,110"/>
+<area shape="rect" id="Node000006" href="$d6/d0f/USBMIDI__Teensy3_8hpp.html" title=" " alt="" coords="395,152,561,177"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="403,110,462,150,459,154,400,114"/>
+<area shape="rect" id="Node000004" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="5,225,143,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="226,184,107,228,105,223,224,179"/>
+<area shape="rect" id="Node000005" href="$df/d33/USBHostMIDI__Interface_8hpp.html" title=" " alt="" coords="167,225,370,251"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="271,191,271,225,266,225,266,191"/>
+<area shape="rect" id="Node000007" href="$db/db8/USBMIDI__Teensy4_8hpp.html" title=" " alt="" coords="395,225,561,251"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="481,191,481,225,475,225,475,191"/>
+<area shape="rect" id="Node000008" href="$dd/db3/USBMIDI__TeensyLC_8hpp.html" title=" " alt="" coords="585,225,760,251"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="523,179,642,223,640,228,521,184"/>
+</map>

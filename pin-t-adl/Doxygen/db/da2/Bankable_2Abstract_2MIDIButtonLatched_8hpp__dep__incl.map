@@ -1,0 +1,10 @@
+<map id="MIDIButtonLatched.hpp" name="MIDIButtonLatched.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="95,5,270,31"/>
+<area shape="rect" id="Node000002" href="$db/d53/Bankable_2CCButtonLatched_8hpp.html" title=" " alt="" coords="5,79,168,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,41,104,81,101,76,155,37"/>
+<area shape="rect" id="Node000004" href="$df/de8/Bankable_2NoteButtonLatched_8hpp.html" title=" " alt="" coords="193,79,367,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="211,37,266,76,263,81,208,41"/>
+<area shape="rect" id="Node000003" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="114,152,251,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,110,169,150,165,154,112,114"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="255,114,200,154,197,150,252,110"/>
+</map>

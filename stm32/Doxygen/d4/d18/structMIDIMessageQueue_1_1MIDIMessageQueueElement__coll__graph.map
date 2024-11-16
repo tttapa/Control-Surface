@@ -1,0 +1,10 @@
+<map id="MIDIMessageQueue::MIDIMessageQueueElement" name="MIDIMessageQueue::MIDIMessageQueueElement">
+<area shape="rect" id="node1" title=" " alt="" coords="269,1567,517,1820"/>
+<area shape="rect" id="node2" href="$db/d98/unionMIDIMessageQueue_1_1MIDIMessageQueueElement_1_1Message.html" title=" " alt="" coords="340,1368,445,1504"/>
+<area shape="rect" id="node3" href="$d7/d3f/structChannelMessage.html" title=" " alt="" coords="5,979,180,1305"/>
+<area shape="rect" id="node4" href="$d4/d61/structMIDIMessage.html" title=" " alt="" coords="172,277,432,619"/>
+<area shape="rect" id="node6" href="$d5/dad/structSysCommonMessage.html" title=" " alt="" coords="205,1015,429,1269"/>
+<area shape="rect" id="node5" href="$d2/d75/classCable.html" title="A type&#45;safe class for MIDI USB Cable numbers." alt="" coords="401,5,537,215"/>
+<area shape="rect" id="node7" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="361,643,563,955"/>
+<area shape="rect" id="node8" href="$db/d45/structSysExMessage.html" title=" " alt="" coords="570,665,749,933"/>
+</map>

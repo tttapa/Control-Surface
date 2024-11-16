@@ -1,0 +1,8 @@
+<map id="ManyAddresses&lt; NumBanks &gt;" name="ManyAddresses&lt; NumBanks &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="163,968,389,1060"/>
+<area shape="rect" id="node2" href="$dd/d3a/classManyAddresses__Base.html" title="A base class for all MIDIOutputElements that can have one of many addresses." alt="" coords="83,747,272,825"/>
+<area shape="rect" id="node3" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title=" " alt="" coords="5,336,277,487"/>
+<area shape="rect" id="node4" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="60,5,223,156"/>
+<area shape="rect" id="node5" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="310,667,469,905"/>
+<area shape="rect" id="node6" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="301,219,491,604"/>
+</map>

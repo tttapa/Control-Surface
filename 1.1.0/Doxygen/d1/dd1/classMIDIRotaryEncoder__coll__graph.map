@@ -1,0 +1,9 @@
+<map id="MIDIRotaryEncoder&lt; Sender &gt;" name="MIDIRotaryEncoder&lt; Sender &gt;">
+<area shape="rect" id="node1" title="An abstract class for rotary encoders that send MIDI events." alt="" coords="121,1373,279,1539"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="5,991,144,1274"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="9,5,191,112"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="91,161,325,444"/>
+<area shape="rect" id="node4" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="91,521,317,892"/>
+<area shape="rect" id="node6" title=" " alt="" coords="169,1094,231,1171"/>
+<area shape="rect" id="node7" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="256,955,443,1311"/>
+</map>

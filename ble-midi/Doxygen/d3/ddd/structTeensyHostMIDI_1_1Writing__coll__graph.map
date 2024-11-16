@@ -1,0 +1,5 @@
+<map id="TeensyHostMIDI&lt; MaxPacketSize &gt;::Writing" name="TeensyHostMIDI&lt; MaxPacketSize &gt;::Writing">
+<area shape="rect" id="Node000001" title="State for writing outgoing USB&#45;MIDI data." alt="" coords="5,173,209,353"/>
+<area shape="rect" id="Node000002" href="$d9/dec/structTeensyHostMIDI_1_1Writing_1_1Buffer.html" title=" " alt="" coords="45,5,169,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,111,110,157,105,157,105,111"/>
+</map>

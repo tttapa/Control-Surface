@@ -1,0 +1,3 @@
+<map id="PitchBendSender&lt; INPUT_PRECISION_BITS &gt;" name="PitchBendSender&lt; INPUT_PRECISION_BITS &gt;">
+<area shape="rect" id="node1" title="Class that sends continuous MIDI pitch bend messages with a resolution of 14 bits." alt="" coords="5,5,192,112"/>
+</map>

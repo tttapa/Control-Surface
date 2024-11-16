@@ -1,0 +1,9 @@
+<map id="GenericMIDIRotaryEncoder&lt; Enc, BankAddress, Sender &gt;" name="GenericMIDIRotaryEncoder&lt; Enc, BankAddress, Sender &gt;">
+<area shape="rect" id="node1" title="An abstract class for rotary encoders that send MIDI events and that can be added to a Bank." alt="" coords="71,727,293,921"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="5,396,156,517"/>
+<area shape="rect" id="node3" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="372,5,576,317"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="434,396,669,517"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="337,741,541,907"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="588,624,803,1024"/>
+<area shape="rect" id="node7" href="$db/dd2/classEncoderState.html" title=" " alt="" coords="181,367,359,547"/>
+</map>

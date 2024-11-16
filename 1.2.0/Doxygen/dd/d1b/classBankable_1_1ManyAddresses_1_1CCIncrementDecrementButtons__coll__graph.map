@@ -1,0 +1,12 @@
+<map id="CCIncrementDecrementButtons&lt; NumBanks &gt;" name="CCIncrementDecrementButtons&lt; NumBanks &gt;">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of two momentary push buttons to increment or decre..." alt="" coords="513,1432,766,1524"/>
+<area shape="rect" id="node2" href="$d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html" title=" " alt="" coords="487,1173,791,1383"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="165,960,316,1081"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="137,483,341,853"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,159,228,266"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="252,5,475,420"/>
+<area shape="rect" id="node7" href="$df/dc6/classAH_1_1IncrementDecrementButtons.html" title="A class for buttons that increment and decrement some counter or setting." alt="" coords="341,931,575,1111"/>
+<area shape="rect" id="node8" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="366,512,550,824"/>
+<area shape="rect" id="node9" href="$d3/dd0/classRelativeCCSender.html" title="Class that sends relative/incremental MIDI control change messages." alt="" coords="600,945,801,1096"/>
+<area shape="rect" id="node10" href="$dc/dd4/classDigitalNoteSender.html" title="Class that sends MIDI note on and off messages." alt="" coords="825,953,992,1089"/>
+</map>

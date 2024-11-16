@@ -1,0 +1,9 @@
+<map id="LEDs.hpp" name="LEDs.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="315,5,395,32"/>
+<area shape="rect" id="node2" href="$d6/d3a/DotBarDisplayLEDs_8hpp.html" title=" " alt="" coords="157,80,322,107"/>
+<area shape="rect" id="node7" href="$dc/d48/VPotRingLEDs_8hpp.html" title=" " alt="" coords="403,80,539,107"/>
+<area shape="rect" id="node3" href="$d4/dde/AudioVULEDs_8hpp.html" title=" " alt="" coords="5,155,137,181"/>
+<area shape="rect" id="node5" href="$de/d3d/VULEDs_8hpp.html" title=" " alt="" coords="162,155,261,181"/>
+<area shape="rect" id="node6" href="$d8/ddf/NoteCCRangeLEDBar_8hpp.html" title=" " alt="" coords="285,155,463,181"/>
+<area shape="rect" id="node4" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="229,229,356,256"/>
+</map>

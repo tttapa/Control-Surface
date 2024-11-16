@@ -1,0 +1,13 @@
+<map id="ExtendedIOElement" name="ExtendedIOElement">
+<area shape="rect" id="node1" title="An abstract base class for Extended Input/Output elements." alt="" coords="282,579,497,1081"/>
+<area shape="rect" id="node4" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title=" " alt="" coords="5,1129,245,1251"/>
+<area shape="rect" id="node6" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title=" " alt="" coords="269,1129,509,1251"/>
+<area shape="rect" id="node8" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title="A class for ExtendedIOElements with a fixed size." alt="" coords="534,1137,789,1243"/>
+<area shape="rect" id="node2" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="249,233,530,531"/>
+<area shape="rect" id="node3" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="290,5,489,185"/>
+<area shape="rect" id="node5" href="$de/de9/classAH_1_1MAX7219.html" title="A class for LED outputs using the MAX7219 LED display driver." alt="" coords="16,1350,235,1677"/>
+<area shape="rect" id="node7" href="$d5/dd2/classAH_1_1MCP23017.html" title="Class for MCP23017 I²C I/O expanders." alt="" coords="284,1299,495,1728"/>
+<area shape="rect" id="node9" href="$dc/d0e/classAH_1_1ShiftRegisterOutBase.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="561,1328,761,1699"/>
+<area shape="rect" id="node10" href="$d5/d09/classAH_1_1SPIShiftRegisterOut.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595 that are connected to the SPI bu..." alt="" coords="451,1776,650,1912"/>
+<area shape="rect" id="node11" href="$d0/dca/classAH_1_1ShiftRegisterOut.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="674,1783,873,1905"/>
+</map>

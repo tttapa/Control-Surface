@@ -1,0 +1,8 @@
+<map id="IncrementDecrementSelectorLEDs&lt; N &gt;" name="IncrementDecrementSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector with two buttons (one to increment, one to decrement). This version displays the setting usi..." alt="" coords="22,976,267,1068"/>
+<area shape="rect" id="node2" href="$d3/d78/classGenericIncrementDecrementSelector.html" title=" " alt="" coords="5,748,284,928"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="65,491,224,700"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="16,255,135,347"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="159,160,269,443"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="123,5,305,112"/>
+</map>

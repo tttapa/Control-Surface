@@ -1,0 +1,8 @@
+<map id="ManyButtonsSelector.hpp" name="ManyButtonsSelector.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,193,31"/>
+<area shape="rect" id="Node000002" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="31,152,168,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,44,77,73,75,104,84,129,95,150,90,153,79,131,70,104,71,71,82,42"/>
+<area shape="rect" id="Node000003" href="$d3/dce/SelectorLEDs_8hpp.html" title=" " alt="" coords="85,79,220,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="118,40,146,77,142,80,114,43"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="138,117,110,153,106,150,134,113"/>
+</map>

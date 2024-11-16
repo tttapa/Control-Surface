@@ -1,0 +1,7 @@
+<map id="DualAddresses" name="DualAddresses">
+<area shape="rect" id="node1" title=" " alt="" coords="142,940,350,1076"/>
+<area shape="rect" id="node2" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="12,609,245,731"/>
+<area shape="rect" id="node3" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="5,263,252,428"/>
+<area shape="rect" id="node4" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="45,5,213,200"/>
+<area shape="rect" id="node5" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="270,477,459,863"/>
+</map>

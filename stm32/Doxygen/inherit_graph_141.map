@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="5,199,252,226"/>
+<area shape="rect" id="node2" href="$dd/d3a/classManyAddresses__Base.html" title="A base class for all MIDIOutputElements that can have one of many addresses." alt="" coords="322,105,486,131"/>
+<area shape="rect" id="node6" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="300,231,508,258"/>
+<area shape="rect" id="node3" href="$d1/da6/classBankable_1_1ManyAddresses_1_1DualManyAddresses.html" title=" " alt="" coords="586,5,753,47"/>
+<area shape="rect" id="node4" href="$d8/d58/classBankable_1_1ManyAddresses_1_1ManyAddresses.html" title=" " alt="" coords="556,71,783,98"/>
+<area shape="rect" id="node5" href="$d7/dc9/classBankable_1_1ManyAddresses_1_1ManyMatrixAddresses.html" title=" " alt="" coords="576,122,763,178"/>
+<area shape="rect" id="node7" href="$dc/d06/classBankable_1_1DualAddresses.html" title=" " alt="" coords="610,202,729,229"/>
+<area shape="rect" id="node8" href="$d7/db5/classBankable_1_1MatrixAddress.html" title=" " alt="" coords="569,253,770,295"/>
+<area shape="rect" id="node9" href="$df/de5/classBankable_1_1SingleAddress.html" title=" " alt="" coords="612,319,727,346"/>
+</map>
