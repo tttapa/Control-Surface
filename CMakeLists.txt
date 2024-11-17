@@ -44,4 +44,4 @@ include(cmake/Warnings.cmake)
 # Build the source files and tests
 add_subdirectory(mock)
 add_subdirectory(src)
-add_subdirectory(test)
+add_subdirectory(extras/test)
