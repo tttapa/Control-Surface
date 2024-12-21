@@ -1,6 +1,6 @@
-[![Build Status](https://github.com/tttapa/Control-Surface/workflows/CI%20Tests/badge.svg?branch=main)](https://github.com/tttapa/Control-Surface/actions?query=workflow%3A"CI+Tests")
+[![CI Tests](https://github.com/tttapa/Control-Surface/actions/workflows/ccpp.yml/badge.svg)](https://github.com/tttapa/Control-Surface/actions/workflows/ccpp.yml)
 [![Test Coverage](https://img.shields.io/endpoint?url=https://tttapa.github.io/Control-Surface-doc/Coverage/shield.io.coverage.json)](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)
-[![Examples](https://github.com/tttapa/Control-Surface/workflows/Examples/badge.svg?branch=main)](https://github.com/tttapa/Control-Surface/actions?query=workflow%3AExamples)
+[![Examples](https://github.com/tttapa/Control-Surface/actions/workflows/examples.yaml/badge.svg)](https://github.com/tttapa/Control-Surface/actions/workflows/examples.yaml)
 [![GitHub](https://img.shields.io/github/stars/tttapa/Control-Surface?label=GitHub&logo=github)](https://github.com/tttapa/Control-Surface)
 [![Documentation](https://img.shields.io/badge/Documentation-main-blue)](https://tttapa.github.io/Control-Surface-doc/Doxygen)
 
