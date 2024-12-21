@@ -1,0 +1,17 @@
+<map id="CCButton" name="CCButton">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="792,1720,900,1797"/>
+<area shape="rect" id="node2" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="743,1395,949,1546"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="500,1006,651,1127"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="208,521,412,833"/>
+<area shape="rect" id="node6" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="186,1006,421,1127"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="319,1388,523,1553"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="5,1271,220,1671"/>
+<area shape="rect" id="node8" href="$df/de5/classBankable_1_1SingleAddress.html" title=" " alt="" coords="679,1013,840,1120"/>
+<area shape="rect" id="node9" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="653,617,887,738"/>
+<area shape="rect" id="node10" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="647,263,893,428"/>
+<area shape="rect" id="node11" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="686,5,854,200"/>
+<area shape="rect" id="node12" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="439,477,629,877"/>
+<area shape="rect" id="node13" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="865,940,1049,1193"/>
+<area shape="rect" id="node14" href="$dc/db4/structAH_1_1Button_1_1InternalState.html" title=" " alt="" coords="911,609,1058,745"/>
+<area shape="rect" id="node15" href="$d5/db5/classDigitalCCSender.html" title="Class that sends MIDI control change messages signifying either &quot;on&quot; or &quot;off&quot;." alt="" coords="1073,977,1227,1157"/>
+</map>

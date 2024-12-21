@@ -1,0 +1,3 @@
+<map id="interrupt_atomic&lt; T &gt;" name="interrupt_atomic&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Wrapper that provides atomic access to variables shared between the main program and interrupt handle..." alt="" coords="5,5,219,271"/>
+</map>

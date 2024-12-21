@@ -1,0 +1,8 @@
+<map id="Control_Surface_" name="Control_Surface_">
+<area shape="rect" id="node1" title="This class ensures initialization, updating, and interaction between all other classes,..." alt="" coords="353,233,529,501"/>
+<area shape="rect" id="node2" href="$de/d55/classMIDI__Callbacks.html" title="A class for callbacks from MIDI input." alt="" coords="5,20,167,141"/>
+<area shape="rect" id="node3" href="$d7/d3f/structChannelMessage.html" title=" " alt="" coords="191,13,314,149"/>
+<area shape="rect" id="node4" href="$db/d45/structSysExMessage.html" title=" " alt="" coords="373,20,508,141"/>
+<area shape="rect" id="node5" href="$d2/de5/classAH_1_1Timer.html" title=" " alt="" coords="561,5,680,156"/>
+<area shape="rect" id="node6" href="$d6/d99/structRealTimeMessage.html" title=" " alt="" coords="707,35,838,127"/>
+</map>

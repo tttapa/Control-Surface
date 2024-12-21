@@ -1,0 +1,11 @@
+<map id="CCIncrementDecrementButtons&lt; NumBanks &gt;" name="CCIncrementDecrementButtons&lt; NumBanks &gt;">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the input of two momentary push buttons to increment or decre..." alt="" coords="31,1168,276,1248"/>
+<area shape="rect" id="Node000002" href="$d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html" title=" " alt="" coords="5,825,301,1120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,1133,156,1168,151,1168,151,1133"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="82,652,225,777"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="156,791,156,825,151,825,151,791"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="56,239,251,604"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="156,618,156,652,151,652,151,618"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="56,5,251,191"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="156,204,156,238,151,238,151,204"/>
+</map>

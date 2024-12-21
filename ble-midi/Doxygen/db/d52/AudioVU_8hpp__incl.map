@@ -1,0 +1,17 @@
+<map id="AudioVU.hpp" name="AudioVU.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="253,5,359,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="99,86,169,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="282,33,173,83,170,78,280,28"/>
+<area shape="rect" id="Node000003" href="$d1/d52/InterfaceMIDIInputElements_8hpp.html" title=" " alt="" coords="194,79,418,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="309,31,309,65,303,65,303,31"/>
+<area shape="rect" id="Node000007" href="$d9/d4f/MovingCoilBallistics_8hpp.html" title=" " alt="" coords="573,86,756,111"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="359,28,600,80,599,86,358,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,167,121,192"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="249,121,113,165,111,160,247,116"/>
+<area shape="rect" id="Node000005" href="$d1/d65/Warnings_8hpp.html" title=" " alt="" coords="145,167,336,192"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="292,121,261,158,257,154,288,117"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="361,167,598,192"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="349,116,442,158,440,163,346,121"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="623,167,837,192"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="676,110,714,154,709,158,672,113"/>
+</map>

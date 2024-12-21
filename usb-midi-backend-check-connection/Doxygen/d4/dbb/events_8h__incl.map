@@ -1,0 +1,9 @@
+<map id="events.h" name="events.h">
+<area shape="rect" id="Node000001" title="Handlers for Bluetooth and BLE events." alt="" coords="196,5,275,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,148,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,33,116,75,114,71,209,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="173,79,298,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="238,31,238,65,233,65,233,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="323,79,447,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="260,28,349,70,347,75,258,33"/>
+</map>

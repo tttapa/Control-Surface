@@ -1,0 +1,7 @@
+<map id="MIDIInputElementNote" name="MIDIInputElementNote">
+<area shape="rect" id="node1" title="Class for objects that listen for incoming MIDI Note events." alt="" coords="138,712,345,877"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1109,205,1201"/>
+<area shape="rect" id="node5" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="229,955,440,1355"/>
+<area shape="rect" id="node2" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="154,453,329,663"/>
+<area shape="rect" id="node3" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="147,5,336,391"/>
+</map>

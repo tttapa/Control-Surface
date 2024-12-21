@@ -1,0 +1,8 @@
+<map id="SimpleNoteCCValueCallback" name="SimpleNoteCCValueCallback">
+<area shape="rect" id="node1" title=" " alt="" coords="413,5,626,127"/>
+<area shape="rect" id="node2" href="$d0/d65/classNoteCCFastLED.html" title="Callback for Note or CC range or value input that displays the value to a FastLED strip." alt="" coords="5,175,225,340"/>
+<area shape="rect" id="node3" href="$d5/ddd/classNoteCCLED.html" title=" " alt="" coords="250,182,431,333"/>
+<area shape="rect" id="node4" href="$d5/ddd/classNoteCCLED.html" title=" " alt="" coords="456,182,583,333"/>
+<area shape="rect" id="node5" href="$d5/ddd/classNoteCCLED.html" title=" " alt="" coords="607,182,786,333"/>
+<area shape="rect" id="node6" href="$de/d34/classNoteCCLEDBarCallback.html" title="Callback class that drives a LED dot/bar display based on a note or control change value." alt="" coords="810,175,997,340"/>
+</map>

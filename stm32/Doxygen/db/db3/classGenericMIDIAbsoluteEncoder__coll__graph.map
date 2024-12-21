@@ -1,0 +1,10 @@
+<map id="GenericMIDIAbsoluteEncoder&lt; Enc, Sender &gt;" name="GenericMIDIAbsoluteEncoder&lt; Enc, Sender &gt;">
+<area shape="rect" id="node1" title="An abstract class for rotary encoders that send absolute MIDI events." alt="" coords="157,888,393,1171"/>
+<area shape="rect" id="node2" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="5,499,156,620"/>
+<area shape="rect" id="node3" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="585,5,789,317"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="647,499,882,620"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="563,947,767,1112"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="807,829,1021,1229"/>
+<area shape="rect" id="node7" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="181,367,370,752"/>
+<area shape="rect" id="node8" href="$db/dd2/classEncoderState.html" title=" " alt="" coords="394,469,573,649"/>
+</map>
