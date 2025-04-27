@@ -6,6 +6,11 @@
 #include <AH/Arduino-Wrapper.h> // pin functions and constants
 #include <AH/STL/type_traits>
 
+#if defined(BOARD_HAS_PIN_REMAP) && !defined(BOARD_USES_HW_GPIO_NUMBERS)
+#error                                                                         \
+    "This library is not compatible with pin remapping. Please disable it by choosing "Tools > Pin Numbering > By GPIO number (legacy)" in the Arduino IDE. See https://github.com/espressif/arduino-esp32/issues/9150 for details"
+#endif
+
 #if defined(ARDUINO_API_VERSION)
 
 using ArduinoPin_t = pin_size_t;
