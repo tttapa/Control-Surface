@@ -156,7 +156,10 @@ bool midi_init(void) {
     return true;
 }
 
-bool midi_deinit(void) { assert(!"Not implemented"); }
+bool midi_deinit(void) {
+    assert(!"Not implemented");
+    return false;
+}
 
 #endif
 #endif
