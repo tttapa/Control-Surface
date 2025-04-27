@@ -1,0 +1,16 @@
+<map id="VPotRingLEDs" name="VPotRingLEDs">
+<area shape="rect" id="node1" title=" " alt="" coords="496,1713,627,1791"/>
+<area shape="rect" id="node2" href="$df/dc2/classMCU_1_1GenericVPotRing.html" title=" " alt="" coords="466,1572,657,1664"/>
+<area shape="rect" id="node3" href="$db/dac/classMCU_1_1VPotRing__Base.html" title=" " alt="" coords="462,1240,661,1435"/>
+<area shape="rect" id="node4" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="155,873,331,1038"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1291,187,1383"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="211,1152,403,1523"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="165,564,321,773"/>
+<area shape="rect" id="node6" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="149,145,336,501"/>
+<area shape="rect" id="node9" href="$da/d50/classMCU_1_1IVPotRing.html" title=" " alt="" coords="356,851,476,1060"/>
+<area shape="rect" id="node10" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="500,836,692,1075"/>
+<area shape="rect" id="node11" href="$d2/d4a/classMCU_1_1VPotRingLEDsCallback.html" title=" " alt="" coords="717,902,899,1009"/>
+<area shape="rect" id="node12" href="$df/d06/classAH_1_1LEDs.html" title=" " alt="" coords="747,586,869,751"/>
+<area shape="rect" id="node13" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="755,211,861,435"/>
+<area shape="rect" id="node14" title=" " alt="" coords="789,5,827,83"/>
+</map>

@@ -1,0 +1,603 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$dd/d29/classAH_1_1ButtonMatrix.html" title="A class that reads the states of a button matrix." alt="" coords="625,863,802,903"/>
+<area shape="rect" id="Node000001" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="932,801,1161,871"/>
+<area shape="poly" id="edge16_Node000000_Node000001" title=" " alt="" coords="815,866,931,849,932,855,816,871"/>
+<area shape="rect" id="Node000024" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="920,895,1173,964"/>
+<area shape="poly" id="edge18_Node000000_Node000024" title=" " alt="" coords="816,894,920,909,919,914,815,900"/>
+<area shape="rect" id="Node000026" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="920,988,1173,1057"/>
+<area shape="poly" id="edge20_Node000000_Node000026" title=" " alt="" coords="761,907,821,941,890,974,922,985,920,990,888,978,819,946,758,912"/>
+<area shape="rect" id="Node000028" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title=" " alt="" coords="925,1081,1168,1151"/>
+<area shape="poly" id="edge22_Node000000_Node000028" title=" " alt="" coords="738,912,801,990,843,1032,891,1067,926,1085,924,1090,888,1072,840,1036,797,994,734,916"/>
+<area shape="rect" id="Node000237" href="$d0/d54/classMIDIButtonMatrix.html" title=" " alt="" coords="926,673,1167,713"/>
+<area shape="poly" id="edge24_Node000000_Node000237" title=" " alt="" coords="753,852,796,819,839,781,853,765,861,750,871,736,888,723,925,707,927,711,891,728,875,740,866,753,857,768,843,785,799,823,756,857"/>
+<area shape="rect" id="Node000239" href="$d0/d54/classMIDIButtonMatrix.html" title=" " alt="" coords="919,737,1174,777"/>
+<area shape="poly" id="edge26_Node000000_Node000239" title=" " alt="" coords="756,853,817,819,888,787,928,775,930,780,890,792,820,823,758,858"/>
+<area shape="rect" id="Node000002" href="$db/d2b/classBankable_1_1CCButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="1302,809,1513,849"/>
+<area shape="poly" id="edge17_Node000001_Node000002" title=" " alt="" coords="1176,831,1302,829,1302,834,1176,836"/>
+<area shape="rect" id="Node000025" href="$d7/d2b/classBankable_1_1ManyAddresses_1_1CCButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="1300,873,1515,913"/>
+<area shape="poly" id="edge19_Node000024_Node000025" title=" " alt="" coords="1187,913,1299,901,1300,907,1188,918"/>
+<area shape="rect" id="Node000027" href="$d3/d39/classBankable_1_1ManyAddresses_1_1NoteButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="1293,937,1521,977"/>
+<area shape="poly" id="edge21_Node000026_Node000027" title=" " alt="" coords="1186,995,1296,975,1297,980,1187,1000"/>
+<area shape="rect" id="Node000029" href="$d2/d2b/classBankable_1_1NoteButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="1296,1001,1519,1041"/>
+<area shape="poly" id="edge23_Node000028_Node000029" title=" " alt="" coords="1178,1075,1203,1067,1251,1051,1301,1039,1302,1044,1253,1056,1205,1072,1180,1080"/>
+<area shape="rect" id="Node000238" href="$d3/d2a/classCCButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="1302,681,1513,721"/>
+<area shape="poly" id="edge25_Node000237_Node000238" title=" " alt="" coords="1181,694,1301,696,1301,702,1181,699"/>
+<area shape="rect" id="Node000240" href="$d2/daf/classNoteButtonMatrix.html" title="A class of MIDIOutputElements that read the input from a matrix of momentary push buttons or switches..." alt="" coords="1296,745,1519,785"/>
+<area shape="poly" id="edge27_Node000239_Node000240" title=" " alt="" coords="1188,758,1296,760,1296,766,1188,763"/>
+<area shape="rect" id="Node000263" href="$dd/d29/classAH_1_1ButtonMatrix.html" title=" " alt="" coords="587,1140,839,1209"/>
+<area shape="rect" id="Node000262" href="$d3/d65/classBankable_1_1MIDIButtonMatrix.html" title="MIDIButtonMatrix." alt="" coords="926,1175,1167,1215"/>
+<area shape="poly" id="edge28_Node000263_Node000262" title=" " alt="" coords="853,1180,926,1185,925,1190,853,1186"/>
+<area shape="rect" id="Node000279" href="$dd/d29/classAH_1_1ButtonMatrix.html" title=" " alt="" coords="585,1234,841,1289"/>
+<area shape="rect" id="Node000278" href="$d0/d54/classMIDIButtonMatrix.html" title="MIDIButtonMatrix." alt="" coords="946,1239,1147,1279"/>
+<area shape="poly" id="edge29_Node000279_Node000278" title=" " alt="" coords="855,1258,946,1257,946,1262,855,1263"/>
+<area shape="rect" id="Node000153" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="13,5499,200,5525"/>
+<area shape="rect" id="Node000154" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="256,5707,537,5733"/>
+<area shape="poly" id="edge30_Node000153_Node000154" title=" " alt="" coords="138,5531,379,5705,376,5709,135,5535"/>
+<area shape="rect" id="Node000166" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="295,5217,499,5257"/>
+<area shape="poly" id="edge40_Node000153_Node000166" title=" " alt="" coords="114,5485,132,5438,161,5378,202,5318,227,5291,255,5267,293,5248,296,5253,257,5272,230,5295,206,5321,166,5381,137,5440,119,5487"/>
+<area shape="rect" id="Node000167" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="295,5281,499,5321"/>
+<area shape="poly" id="edge41_Node000153_Node000167" title=" " alt="" coords="119,5486,141,5451,171,5410,210,5368,255,5332,293,5315,295,5320,257,5337,213,5372,175,5413,145,5454,124,5489"/>
+<area shape="rect" id="Node000168" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="297,6175,497,6215"/>
+<area shape="poly" id="edge42_Node000153_Node000168" title=" " alt="" coords="121,5536,389,6173,384,6175,116,5539"/>
+<area shape="rect" id="Node000152" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="291,5524,502,5564"/>
+<area shape="poly" id="edge97_Node000153_Node000152" title=" " alt="" coords="214,5521,292,5530,291,5535,213,5526"/>
+<area shape="rect" id="Node000169" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="295,5460,499,5500"/>
+<area shape="poly" id="edge106_Node000153_Node000169" title=" " alt="" coords="213,5498,294,5489,295,5494,214,5503"/>
+<area shape="rect" id="Node000155" href="$d2/dda/classAH_1_1ExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements." alt="" coords="638,5758,789,5783"/>
+<area shape="poly" id="edge31_Node000154_Node000155" title=" " alt="" coords="491,5732,638,5756,638,5761,490,5738"/>
+<area shape="rect" id="Node000156" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title=" " alt="" coords="939,5656,1154,5696"/>
+<area shape="poly" id="edge32_Node000155_Node000156" title=" " alt="" coords="759,5751,889,5707,942,5693,943,5699,890,5712,761,5756"/>
+<area shape="rect" id="Node000157" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title=" " alt="" coords="939,5800,1154,5840"/>
+<area shape="poly" id="edge33_Node000155_Node000157" title=" " alt="" coords="803,5781,939,5801,938,5807,802,5786"/>
+<area shape="rect" id="Node000159" href="$d6/d57/classAH_1_1StaticSizeExtendedIOElement.html" title="A class for ExtendedIOElements with a fixed size." alt="" coords="919,6178,1174,6203"/>
+<area shape="poly" id="edge35_Node000155_Node000159" title=" " alt="" coords="734,5793,787,5877,817,5932,844,5988,853,6016,856,6041,857,6086,858,6106,863,6126,873,6145,891,6165,921,6182,918,6187,888,6169,869,6148,858,6128,853,6107,852,6086,851,6041,847,6017,839,5990,812,5934,782,5880,729,5796"/>
+<area shape="rect" id="Node000158" href="$d5/dd2/classAH_1_1MCP23017.html" title="Class for MCP23017 I²C I/O expanders." alt="" coords="1317,5797,1498,5822"/>
+<area shape="poly" id="edge34_Node000157_Node000158" title=" " alt="" coords="1168,5814,1316,5809,1316,5815,1168,5819"/>
+<area shape="rect" id="Node000160" href="$de/de9/classAH_1_1MAX7219.html" title="A class for LED outputs using the MAX7219 LED display driver." alt="" coords="1322,6125,1493,6165"/>
+<area shape="poly" id="edge36_Node000159_Node000160" title=" " alt="" coords="1162,6174,1321,6153,1322,6159,1162,6179"/>
+<area shape="rect" id="Node000163" href="$dc/d0e/classAH_1_1ShiftRegisterOutBase.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="1307,6283,1507,6309"/>
+<area shape="poly" id="edge37_Node000159_Node000163" title=" " alt="" coords="1097,6205,1205,6247,1229,6258,1253,6268,1308,6281,1306,6286,1251,6273,1227,6263,1203,6252,1095,6210"/>
+<area shape="rect" id="Node000164" href="$d5/d09/classAH_1_1SPIShiftRegisterOut.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595 that are connected to the SPI bu..." alt="" coords="1663,6291,1811,6331"/>
+<area shape="poly" id="edge38_Node000163_Node000164" title=" " alt="" coords="1522,6298,1663,6305,1663,6310,1521,6304"/>
+<area shape="rect" id="Node000165" href="$d0/dca/classAH_1_1ShiftRegisterOut.html" title="A class for serial&#45;in/parallel&#45;out shift registers, like the 74HC595." alt="" coords="1653,6241,1821,6266"/>
+<area shape="poly" id="edge39_Node000163_Node000165" title=" " alt="" coords="1519,6279,1653,6262,1653,6267,1520,6284"/>
+<area shape="rect" id="Node000072" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="614,6482,813,6507"/>
+<area shape="poly" id="edge43_Node000168_Node000072" title=" " alt="" coords="431,6222,700,6480,697,6484,427,6226"/>
+<area shape="rect" id="Node000073" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="889,6310,1204,6365"/>
+<area shape="poly" id="edge44_Node000072_Node000073" title=" " alt="" coords="739,6471,804,6423,845,6397,888,6375,921,6362,923,6367,890,6380,848,6402,807,6427,742,6475"/>
+<area shape="rect" id="Node000074" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="910,6389,1183,6443"/>
+<area shape="poly" id="edge45_Node000072_Node000074" title=" " alt="" coords="781,6476,930,6441,931,6446,782,6481"/>
+<area shape="rect" id="Node000075" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="905,6467,1188,6522"/>
+<area shape="poly" id="edge46_Node000072_Node000075" title=" " alt="" coords="826,6492,905,6492,905,6497,826,6497"/>
+<area shape="rect" id="Node000069" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="911,3949,1182,4003"/>
+<area shape="poly" id="edge47_Node000072_Node000069" title=" " alt="" coords="734,6470,790,6400,818,6354,839,6305,845,6260,848,6176,851,5910,847,5153,847,4752,851,4399,863,4138,874,4056,880,4030,887,4014,909,3995,913,3999,891,4018,885,4032,879,4057,869,4138,857,4399,852,4752,853,5153,857,5910,854,6176,850,6261,844,6306,823,6356,794,6403,739,6473"/>
+<area shape="rect" id="Node000076" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="915,6899,1178,6954"/>
+<area shape="poly" id="edge52_Node000072_Node000076" title=" " alt="" coords="721,6521,736,6594,766,6693,788,6746,816,6797,850,6845,891,6886,917,6902,914,6907,888,6890,846,6848,812,6800,784,6748,761,6695,731,6595,716,6522"/>
+<area shape="rect" id="Node000084" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="937,6546,1156,6601"/>
+<area shape="poly" id="edge58_Node000072_Node000084" title=" " alt="" coords="782,6508,938,6545,936,6550,781,6513"/>
+<area shape="rect" id="Node000085" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="943,7215,1150,7270"/>
+<area shape="poly" id="edge59_Node000072_Node000085" title=" " alt="" coords="720,6521,739,6662,774,6867,797,6973,825,7069,856,7148,873,7178,891,7201,915,7219,944,7231,942,7236,913,7223,887,7205,869,7181,852,7150,820,7071,792,6974,769,6868,733,6663,715,6522"/>
+<area shape="rect" id="Node000086" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="915,5721,1178,5775"/>
+<area shape="poly" id="edge60_Node000072_Node000086" title=" " alt="" coords="734,6470,789,6399,817,6353,839,6305,849,6255,852,6191,849,6039,849,5962,853,5890,865,5830,875,5806,887,5786,913,5765,917,5769,891,5790,879,5808,870,5832,858,5891,854,5962,854,6039,857,6191,854,6256,844,6306,821,6356,793,6402,738,6473"/>
+<area shape="rect" id="Node000191" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="909,6050,1185,6105"/>
+<area shape="poly" id="edge63_Node000072_Node000191" title=" " alt="" coords="732,6469,785,6398,814,6352,839,6304,848,6277,852,6251,853,6205,854,6183,859,6161,869,6138,887,6115,907,6100,910,6104,891,6119,873,6141,864,6162,859,6183,858,6205,858,6252,854,6278,844,6306,819,6355,790,6401,737,6473"/>
+<area shape="rect" id="Node000105" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="1293,7328,1521,7368"/>
+<area shape="poly" id="edge66_Node000072_Node000105" title=" " alt="" coords="719,6521,734,6677,765,6908,788,7027,817,7135,851,7223,870,7256,891,7281,934,7313,983,7337,1035,7354,1089,7365,1143,7370,1196,7371,1293,7365,1293,7370,1196,7377,1143,7376,1088,7370,1033,7359,981,7342,932,7318,888,7285,866,7259,846,7226,812,7137,783,7028,760,6909,728,6678,714,6521"/>
+<area shape="rect" id="Node000204" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="912,7151,1181,7191"/>
+<area shape="poly" id="edge71_Node000072_Node000204" title=" " alt="" coords="721,6521,741,6651,777,6837,800,6933,828,7020,858,7090,874,7117,891,7137,913,7152,910,7157,888,7141,870,7120,853,7093,823,7021,795,6934,772,6839,735,6652,715,6521"/>
+<area shape="rect" id="Node000199" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="931,7071,1163,7126"/>
+<area shape="poly" id="edge75_Node000072_Node000199" title=" " alt="" coords="717,6521,722,6622,730,6691,744,6767,766,6846,797,6923,838,6995,863,7028,891,7058,910,7072,932,7082,929,7087,907,7077,888,7062,859,7032,833,6998,792,6925,761,6847,739,6768,725,6692,717,6622,712,6521"/>
+<area shape="rect" id="Node000208" href="$d5/d2e/classMCU_1_1LCD.html" title="A class that represents the Mackie Control Universal LCD display and saves the text it receives." alt="" coords="975,6001,1119,6026"/>
+<area shape="poly" id="edge77_Node000072_Node000208" title=" " alt="" coords="733,6470,786,6399,815,6353,839,6304,850,6265,853,6228,847,6162,846,6131,849,6100,862,6068,887,6037,906,6023,928,6013,974,6005,975,6010,930,6018,909,6027,891,6041,867,6071,855,6101,851,6131,853,6162,858,6228,855,6266,844,6306,820,6356,791,6402,737,6473"/>
+<area shape="rect" id="Node000093" href="$d5/dae/classMatchingMIDIInputElement.html" title="The MIDIInputElement base class is very general: you give it a MIDI message, and it calls the updateW..." alt="" coords="947,6625,1146,6665"/>
+<area shape="poly" id="edge78_Node000072_Node000093" title=" " alt="" coords="741,6514,806,6564,847,6589,890,6611,948,6629,946,6634,888,6616,845,6594,803,6568,738,6519"/>
+<area shape="rect" id="Node000067" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="1282,2799,1533,2839"/>
+<area shape="poly" id="edge48_Node000069_Node000067" title=" " alt="" coords="1191,3946,1202,3936,1214,3910,1222,3867,1230,3741,1230,3577,1225,3394,1220,3211,1220,3047,1228,2921,1237,2878,1250,2850,1264,2837,1281,2827,1283,2832,1267,2841,1254,2854,1242,2879,1233,2922,1225,3047,1225,3211,1230,3394,1235,3577,1235,3741,1227,3868,1219,3912,1206,3939,1195,3950"/>
+<area shape="rect" id="Node000070" href="$d1/d0b/classGenericProgramChangeSelector.html" title=" " alt="" coords="1293,3727,1522,3767"/>
+<area shape="poly" id="edge50_Node000069_Node000070" title=" " alt="" coords="1192,3944,1202,3935,1217,3917,1224,3898,1225,3858,1227,3818,1234,3798,1250,3778,1270,3764,1291,3754,1293,3759,1272,3769,1254,3782,1239,3800,1232,3819,1230,3858,1229,3899,1221,3919,1206,3939,1195,3948"/>
+<area shape="rect" id="Node000068" href="$d9/dee/classProgramChangeSelectorLEDs.html" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="1612,2806,1863,2831"/>
+<area shape="poly" id="edge49_Node000067_Node000068" title=" " alt="" coords="1546,2816,1612,2816,1612,2821,1546,2821"/>
+<area shape="rect" id="Node000071" href="$dd/dd4/classProgramChangeSelector.html" title="Selector that listens for MIDI Program Change events on a given MIDI Channel, and uses the program nu..." alt="" coords="1628,3734,1847,3759"/>
+<area shape="poly" id="edge51_Node000070_Node000071" title=" " alt="" coords="1536,3744,1628,3744,1628,3749,1536,3749"/>
+<area shape="rect" id="Node000077" href="$d5/d54/classMCU_1_1SevenSegmentDisplay.html" title=" " alt="" coords="1296,6907,1519,6947"/>
+<area shape="poly" id="edge53_Node000076_Node000077" title=" " alt="" coords="1192,6924,1296,6924,1296,6929,1192,6929"/>
+<area shape="rect" id="Node000080" href="$d5/d54/classMCU_1_1SevenSegmentDisplay.html" title=" " alt="" coords="1318,6971,1497,7011"/>
+<area shape="poly" id="edge55_Node000076_Node000080" title=" " alt="" coords="1192,6950,1318,6972,1317,6978,1191,6955"/>
+<area shape="rect" id="Node000083" href="$d5/d54/classMCU_1_1SevenSegmentDisplay.html" title="Class that receives and saves the text of a Mackie Control Universal 7&#45;segment display like the assig..." alt="" coords="1323,6843,1492,6883"/>
+<area shape="poly" id="edge57_Node000076_Node000083" title=" " alt="" coords="1191,6898,1322,6875,1323,6880,1192,6904"/>
+<area shape="rect" id="Node000078" href="$d1/d08/classMCU_1_1AssignmentDisplay.html" title="Class that receives and stores the text for the Mackie Control Universal 7&#45;segment assignment display..." alt="" coords="1663,6873,1811,6898"/>
+<area shape="poly" id="edge54_Node000077_Node000078" title=" " alt="" coords="1532,6908,1663,6892,1663,6897,1533,6914"/>
+<area shape="rect" id="Node000081" href="$df/d69/classMCU_1_1TimeDisplay.html" title="Class that receives and stores the text of the Mackie Control Universal 7&#45;segment time display." alt="" coords="1685,7021,1789,7046"/>
+<area shape="poly" id="edge56_Node000080_Node000081" title=" " alt="" coords="1510,7001,1685,7024,1685,7029,1510,7007"/>
+<area shape="rect" id="Node000087" href="$d5/ddb/classMCU_1_1VPotRing.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring." alt="" coords="1697,5649,1778,5674"/>
+<area shape="poly" id="edge61_Node000086_Node000087" title=" " alt="" coords="1189,5714,1202,5706,1218,5689,1225,5670,1233,5651,1251,5635,1311,5611,1374,5599,1439,5595,1503,5599,1564,5609,1619,5621,1703,5646,1702,5651,1618,5626,1563,5614,1503,5605,1439,5601,1375,5604,1312,5616,1253,5640,1237,5654,1230,5672,1222,5692,1206,5710,1192,5719"/>
+<area shape="rect" id="Node000088" href="$d6/d0d/classMCU_1_1VPotRingLEDs.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring and displays it using LEDs." alt="" coords="1973,5662,2086,5687"/>
+<area shape="poly" id="edge62_Node000087_Node000088" title=" " alt="" coords="1792,5661,1973,5669,1972,5675,1792,5666"/>
+<area shape="rect" id="Node000189" href="$d8/d4c/classMCU_1_1VU.html" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="1387,5947,1428,5973"/>
+<area shape="poly" id="edge64_Node000191_Node000189" title=" " alt="" coords="1193,6042,1202,6036,1217,6024,1226,6010,1235,5996,1251,5983,1286,5969,1324,5961,1386,5957,1386,5962,1324,5966,1288,5974,1253,5988,1239,6000,1230,6013,1221,6027,1206,6041,1196,6046"/>
+<area shape="rect" id="Node000190" href="$df/d36/classMCU_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="1654,5897,1821,5922"/>
+<area shape="poly" id="edge65_Node000189_Node000190" title=" " alt="" coords="1442,5952,1654,5919,1654,5925,1442,5957"/>
+<area shape="rect" id="Node000106" href="$d9/d55/classNoteCCKPLED.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1651,7359,1824,7385"/>
+<area shape="poly" id="edge67_Node000105_Node000106" title=" " alt="" coords="1535,7355,1650,7363,1650,7368,1535,7360"/>
+<area shape="rect" id="Node000104" href="$d2/daa/classNoteCCKPLEDBar.html" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="1645,6363,1829,6403"/>
+<area shape="poly" id="edge68_Node000105_Node000104" title=" " alt="" coords="1533,7335,1561,7314,1581,7282,1594,7240,1602,7191,1605,7135,1600,7009,1587,6872,1574,6735,1567,6607,1570,6550,1576,6499,1589,6456,1609,6421,1625,6406,1644,6395,1647,6399,1628,6410,1613,6424,1594,6458,1582,6501,1575,6551,1573,6607,1579,6735,1592,6872,1605,7008,1610,7135,1607,7191,1600,7241,1586,7284,1565,7318,1536,7340"/>
+<area shape="rect" id="Node000107" href="$d3/d99/classNoteCCKPLEDPWM.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1634,7310,1841,7335"/>
+<area shape="poly" id="edge69_Node000105_Node000107" title=" " alt="" coords="1535,7336,1634,7328,1634,7333,1535,7341"/>
+<area shape="rect" id="Node000108" href="$d6/d45/classNoteCCKPValue.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1645,6971,1829,6997"/>
+<area shape="poly" id="edge70_Node000105_Node000108" title=" " alt="" coords="1532,7334,1561,7314,1576,7296,1586,7277,1594,7240,1592,7202,1584,7163,1576,7124,1574,7085,1583,7046,1593,7027,1609,7007,1625,6995,1644,6986,1646,6991,1628,6999,1613,7011,1598,7030,1588,7048,1579,7085,1581,7123,1589,7162,1597,7201,1600,7240,1591,7279,1580,7299,1564,7318,1535,7338"/>
+<area shape="rect" id="Node000205" href="$da/def/classNoteCCKPRange.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1318,7200,1497,7240"/>
+<area shape="poly" id="edge72_Node000204_Node000205" title=" " alt="" coords="1196,7188,1318,7205,1318,7211,1195,7194"/>
+<area shape="rect" id="Node000206" href="$d3/d98/classNoteCCKPRangeFastLED.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1285,7264,1530,7304"/>
+<area shape="poly" id="edge73_Node000204_Node000206" title=" " alt="" coords="1188,7193,1205,7202,1221,7214,1230,7226,1239,7239,1253,7250,1286,7263,1284,7268,1251,7254,1235,7242,1226,7230,1217,7217,1203,7206,1185,7198"/>
+<area shape="rect" id="Node000207" href="$d7/d5f/classNoteCCKPRangeLEDs.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1321,7136,1493,7176"/>
+<area shape="poly" id="edge74_Node000204_Node000207" title=" " alt="" coords="1195,7162,1321,7157,1321,7162,1196,7167"/>
+<area shape="rect" id="Node000198" href="$d2/d47/classPBValue.html" title="Class that listens for MIDI Pitch Bend events on a single address and saves their value." alt="" coords="1370,7086,1445,7111"/>
+<area shape="poly" id="edge76_Node000199_Node000198" title=" " alt="" coords="1176,7096,1370,7096,1370,7101,1176,7101"/>
+<area shape="rect" id="Node000094" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="1282,6506,1533,6561"/>
+<area shape="poly" id="edge79_Node000093_Node000094" title=" " alt="" coords="1158,6627,1203,6611,1217,6602,1226,6592,1236,6581,1251,6571,1281,6558,1283,6563,1253,6576,1239,6585,1230,6595,1220,6606,1205,6616,1160,6632"/>
+<area shape="rect" id="Node000099" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="1285,6427,1529,6482"/>
+<area shape="poly" id="edge83_Node000093_Node000099" title=" " alt="" coords="1158,6634,1182,6625,1202,6611,1215,6598,1221,6584,1226,6554,1230,6523,1237,6508,1250,6493,1284,6472,1287,6476,1254,6497,1242,6510,1235,6525,1231,6555,1226,6585,1219,6601,1206,6615,1184,6629,1160,6639"/>
+<area shape="rect" id="Node000195" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="1252,6649,1563,6719"/>
+<area shape="poly" id="edge88_Node000093_Node000195" title=" " alt="" coords="1160,6655,1252,6665,1252,6670,1160,6660"/>
+<area shape="rect" id="Node000092" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="1269,6189,1546,6259"/>
+<area shape="poly" id="edge90_Node000093_Node000092" title=" " alt="" coords="1158,6638,1182,6627,1202,6611,1219,6591,1230,6570,1236,6550,1239,6529,1236,6487,1228,6445,1218,6402,1215,6359,1223,6315,1234,6292,1250,6270,1267,6255,1270,6259,1254,6274,1239,6295,1228,6316,1220,6359,1224,6401,1233,6444,1242,6487,1244,6529,1241,6551,1235,6572,1223,6594,1206,6615,1185,6632,1160,6642"/>
+<area shape="rect" id="Node000114" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="1268,6333,1547,6403"/>
+<area shape="poly" id="edge93_Node000093_Node000114" title=" " alt="" coords="1158,6636,1182,6626,1202,6611,1220,6588,1228,6565,1229,6541,1227,6516,1224,6491,1225,6465,1232,6440,1250,6414,1266,6400,1270,6404,1254,6418,1237,6442,1230,6466,1229,6491,1232,6516,1234,6541,1233,6566,1225,6591,1206,6615,1184,6631,1160,6641"/>
+<area shape="rect" id="Node000200" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title="Similar to MatchingMIDIInputElement, but for Bankable MIDI Input Elements." alt="" coords="1305,6585,1510,6625"/>
+<area shape="poly" id="edge96_Node000093_Node000200" title=" " alt="" coords="1159,6630,1304,6614,1304,6619,1160,6635"/>
+<area shape="rect" id="Node000095" href="$d9/dd1/classBankable_1_1NoteCCKPRange.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1648,6513,1827,6553"/>
+<area shape="poly" id="edge80_Node000094_Node000095" title=" " alt="" coords="1546,6531,1648,6531,1648,6536,1546,6536"/>
+<area shape="rect" id="Node000096" href="$df/ddd/classBankable_1_1NoteCCKPRangeFastLED.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1924,6505,2135,6559"/>
+<area shape="poly" id="edge81_Node000095_Node000096" title=" " alt="" coords="1841,6530,1924,6530,1924,6535,1841,6536"/>
+<area shape="rect" id="Node000097" href="$d6/d56/classBankable_1_1NoteCCKPRangeLEDs.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1924,6584,2135,6624"/>
+<area shape="poly" id="edge82_Node000095_Node000097" title=" " alt="" coords="1835,6554,1946,6581,1945,6586,1833,6559"/>
+<area shape="rect" id="Node000100" href="$d5/dcd/classBankable_1_1NoteCCKPValue.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1651,6435,1824,6475"/>
+<area shape="poly" id="edge84_Node000099_Node000100" title=" " alt="" coords="1543,6452,1650,6452,1650,6457,1543,6457"/>
+<area shape="rect" id="Node000101" href="$d5/d3a/classBankable_1_1NoteCCKPLED.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1948,6373,2111,6413"/>
+<area shape="poly" id="edge85_Node000100_Node000101" title=" " alt="" coords="1837,6431,1947,6408,1948,6413,1838,6436"/>
+<area shape="rect" id="Node000102" href="$d2/d0a/classBankable_1_1NoteCCKPLEDBar.html" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="1937,6153,2121,6193"/>
+<area shape="poly" id="edge86_Node000100_Node000102" title=" " alt="" coords="1836,6428,1862,6413,1899,6373,1943,6310,2014,6192,2019,6195,1947,6313,1903,6376,1866,6417,1838,6433"/>
+<area shape="rect" id="Node000194" href="$df/d8a/classBankable_1_1NoteCCKPLEDPWM.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="1932,6437,2127,6477"/>
+<area shape="poly" id="edge87_Node000100_Node000194" title=" " alt="" coords="1838,6453,1932,6454,1932,6459,1838,6458"/>
+<area shape="rect" id="Node000196" href="$d1/d78/classBankable_1_1PBValue.html" title="Class that listens for MIDI Pitch Bend events on a single address and saves their value." alt="" coords="1655,6922,1820,6947"/>
+<area shape="poly" id="edge89_Node000195_Node000196" title=" " alt="" coords="1560,6726,1565,6730,1581,6753,1588,6777,1588,6823,1587,6845,1588,6867,1596,6888,1612,6909,1632,6922,1655,6930,1653,6935,1630,6927,1609,6913,1591,6891,1583,6868,1581,6845,1583,6822,1583,6777,1576,6756,1561,6734,1556,6730"/>
+<area shape="rect" id="Node000091" href="$da/d93/classMCU_1_1Bankable_1_1VPotRing.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring." alt="" coords="1652,5747,1823,5773"/>
+<area shape="poly" id="edge91_Node000092_Node000091" title=" " alt="" coords="1555,6181,1561,6176,1585,6140,1596,6106,1597,6072,1594,6038,1589,6003,1587,5966,1592,5927,1608,5884,1632,5848,1661,5816,1715,5771,1719,5775,1665,5820,1636,5851,1613,5887,1598,5928,1593,5967,1595,6003,1599,6038,1603,6072,1601,6107,1590,6142,1565,6179,1559,6185"/>
+<area shape="rect" id="Node000090" href="$d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html" title="A MIDI input element that represents a Mackie Control Universal VPot ring and displays its value usin..." alt="" coords="1928,5735,2131,5761"/>
+<area shape="poly" id="edge92_Node000091_Node000090" title=" " alt="" coords="1836,5753,1928,5749,1928,5755,1836,5759"/>
+<area shape="rect" id="Node000113" href="$d0/d43/classMCU_1_1Bankable_1_1VU.html" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="1672,5946,1803,5971"/>
+<area shape="poly" id="edge94_Node000114_Node000113" title=" " alt="" coords="1556,6323,1561,6320,1636,6167,1728,5971,1732,5973,1640,6169,1565,6323,1559,6327"/>
+<area shape="rect" id="Node000112" href="$db/d17/classMCU_1_1Bankable_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="1912,5897,2147,5922"/>
+<area shape="poly" id="edge95_Node000113_Node000112" title=" " alt="" coords="1816,5943,1953,5919,1954,5925,1817,5948"/>
+<area shape="rect" id="Node000146" href="$d5/d12/classMIDIOutputOnly.html" title=" " alt="" coords="650,5433,777,5458"/>
+<area shape="poly" id="edge98_Node000152_Node000146" title=" " alt="" coords="506,5518,537,5509,615,5482,681,5456,683,5461,617,5487,538,5515,507,5523"/>
+<area shape="rect" id="Node000144" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="955,5368,1138,5408"/>
+<area shape="poly" id="edge99_Node000146_Node000144" title=" " alt="" coords="790,5430,955,5401,956,5406,791,5435"/>
+<area shape="rect" id="Node000147" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="955,5483,1138,5523"/>
+<area shape="poly" id="edge101_Node000146_Node000147" title=" " alt="" coords="791,5456,956,5484,955,5490,790,5461"/>
+<area shape="rect" id="Node000149" href="$d6/db4/classSerialDebugMIDI__Output.html" title=" " alt="" coords="955,5304,1138,5344"/>
+<area shape="poly" id="edge103_Node000146_Node000149" title=" " alt="" coords="790,5432,816,5423,840,5411,855,5398,863,5383,872,5368,888,5354,920,5339,955,5329,956,5334,922,5344,891,5358,876,5371,867,5386,859,5401,843,5416,818,5428,791,5437"/>
+<area shape="rect" id="Node000151" href="$d6/db4/classSerialDebugMIDI__Output.html" title="A wrapper class for debug MIDI outputs sending human&#45;readable MIDI messages over a Serial port of cla..." alt="" coords="937,5433,1157,5458"/>
+<area shape="poly" id="edge105_Node000146_Node000151" title=" " alt="" coords="790,5443,937,5443,937,5448,790,5448"/>
+<area shape="rect" id="Node000145" href="$dc/d60/classHardwareSerialDebugMIDI__Output.html" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over a HardwareSerial port." alt="" coords="1310,5419,1505,5459"/>
+<area shape="poly" id="edge100_Node000144_Node000145" title=" " alt="" coords="1152,5400,1310,5422,1309,5428,1152,5405"/>
+<area shape="rect" id="Node000148" href="$db/d36/classSoftwareSerialDebugMIDI__Output.html" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over a SoftwareSerial interface." alt="" coords="1313,5483,1501,5523"/>
+<area shape="poly" id="edge102_Node000147_Node000148" title=" " alt="" coords="1152,5500,1313,5500,1313,5505,1152,5505"/>
+<area shape="rect" id="Node000150" href="$d5/dbc/classUSBDebugMIDI__Output.html" title="A class for debug MIDI outputs sending human&#45;readable MIDI messages over the USB CDC connection." alt="" coords="1321,5369,1493,5394"/>
+<area shape="poly" id="edge104_Node000149_Node000150" title=" " alt="" coords="1152,5338,1327,5366,1326,5371,1151,5343"/>
+<area shape="rect" id="Node000201" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="605,6253,821,6293"/>
+<area shape="rect" id="Node000098" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="943,6261,1150,6286"/>
+<area shape="poly" id="edge107_Node000201_Node000098" title=" " alt="" coords="835,6271,943,6271,943,6276,835,6276"/>
+<area shape="poly" id="edge108_Node000098_Node000094" title=" " alt="" coords="1165,6274,1186,6283,1206,6297,1225,6321,1233,6346,1234,6371,1232,6396,1229,6421,1230,6445,1237,6469,1254,6493,1283,6513,1280,6518,1250,6497,1232,6472,1224,6446,1224,6421,1226,6395,1229,6371,1228,6347,1220,6323,1202,6301,1184,6288,1163,6279"/>
+<area shape="poly" id="edge109_Node000098_Node000099" title=" " alt="" coords="1164,6276,1186,6284,1206,6297,1219,6311,1227,6325,1231,6356,1235,6385,1242,6399,1254,6413,1287,6433,1284,6438,1250,6417,1237,6402,1230,6387,1226,6356,1221,6327,1215,6314,1202,6301,1184,6289,1162,6281"/>
+<area shape="poly" id="edge110_Node000098_Node000195" title=" " alt="" coords="1164,6272,1186,6282,1206,6297,1223,6318,1235,6339,1242,6360,1245,6381,1243,6423,1233,6466,1224,6508,1220,6551,1228,6593,1239,6614,1254,6636,1266,6647,1262,6651,1250,6639,1234,6617,1223,6595,1215,6551,1219,6508,1228,6465,1237,6423,1240,6381,1237,6361,1230,6341,1219,6321,1202,6301,1184,6287,1162,6277"/>
+<area shape="poly" id="edge111_Node000098_Node000092" title=" " alt="" coords="1153,6256,1268,6240,1269,6246,1154,6261"/>
+<area shape="poly" id="edge112_Node000098_Node000114" title=" " alt="" coords="1164,6286,1205,6296,1229,6307,1253,6319,1286,6331,1284,6336,1251,6324,1227,6312,1203,6301,1163,6291"/>
+<area shape="poly" id="edge113_Node000098_Node000200" title=" " alt="" coords="1164,6273,1186,6282,1206,6297,1230,6331,1239,6366,1238,6401,1231,6436,1225,6471,1223,6505,1231,6538,1254,6571,1277,6589,1305,6599,1304,6604,1275,6593,1250,6575,1226,6541,1218,6505,1220,6470,1226,6435,1233,6400,1234,6366,1225,6333,1202,6301,1184,6287,1162,6278"/>
+<area shape="rect" id="Node000188" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,2118,208,2143"/>
+<area shape="rect" id="Node000119" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="295,2118,498,2143"/>
+<area shape="poly" id="edge114_Node000188_Node000119" title=" " alt="" coords="221,2128,295,2128,295,2133,221,2133"/>
+<area shape="rect" id="Node000120" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="596,1317,831,1342"/>
+<area shape="poly" id="edge115_Node000119_Node000120" title=" " alt="" coords="398,2104,417,1951,455,1727,480,1612,510,1506,544,1419,563,1385,584,1359,613,1340,616,1344,587,1363,568,1388,549,1421,515,1507,485,1613,460,1728,423,1952,403,2105"/>
+<area shape="rect" id="Node000118" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="626,5515,801,5541"/>
+<area shape="poly" id="edge116_Node000119_Node000118" title=" " alt="" coords="401,2157,420,2784,460,3874,487,4439,518,4935,535,5137,552,5299,570,5412,579,5448,588,5469,600,5484,616,5496,652,5513,650,5518,613,5500,597,5488,583,5472,574,5450,564,5413,546,5300,529,5137,513,4935,482,4439,455,3874,415,2784,396,2157"/>
+<area shape="rect" id="Node000121" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="606,681,821,706"/>
+<area shape="poly" id="edge118_Node000119_Node000121" title=" " alt="" coords="395,2104,395,1843,401,1644,414,1424,436,1203,451,1097,470,999,492,909,518,830,548,766,583,717,604,701,607,706,587,721,553,768,523,832,497,910,475,1000,457,1098,441,1203,419,1424,406,1644,401,1843,400,2104"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="650,2919,777,2945"/>
+<area shape="poly" id="edge148_Node000119_Node000003" title=" " alt="" coords="411,2156,709,2918,704,2920,406,2157"/>
+<area shape="rect" id="Node000117" href="$d9/dbf/classAudioVULEDs.html" title="A VU meter that reads from an Audio stream using the AudioAnalyzePeak class, and displays it on an LE..." alt="" coords="1662,5573,1813,5598"/>
+<area shape="poly" id="edge117_Node000118_Node000117" title=" " alt="" coords="815,5531,1662,5579,1662,5584,814,5536"/>
+<area shape="rect" id="Node000122" href="$d9/d73/classMIDI__Interface.html" title="An abstract class for MIDI interfaces." alt="" coords="988,497,1105,522"/>
+<area shape="poly" id="edge119_Node000121_Node000122" title=" " alt="" coords="830,672,840,666,857,645,864,623,870,600,887,575,912,556,939,541,993,520,995,525,942,546,915,561,891,579,875,602,869,625,862,648,843,670,833,677"/>
+<area shape="rect" id="Node000123" href="$d0/dea/classGenericBLEMIDI__Interface.html" title=" " alt="" coords="1312,425,1503,465"/>
+<area shape="poly" id="edge120_Node000122_Node000123" title=" " alt="" coords="1118,494,1311,460,1312,465,1119,499"/>
+<area shape="rect" id="Node000125" href="$dd/d0e/classGenericUSBMIDI__Interface.html" title=" " alt="" coords="1287,297,1527,337"/>
+<area shape="poly" id="edge122_Node000122_Node000125" title=" " alt="" coords="1068,485,1144,416,1195,378,1251,347,1286,334,1288,339,1253,352,1198,383,1147,420,1071,489"/>
+<area shape="rect" id="Node000127" href="$dd/d0e/classGenericUSBMIDI__Interface.html" title=" " alt="" coords="1283,361,1531,401"/>
+<area shape="poly" id="edge124_Node000122_Node000127" title=" " alt="" coords="1081,488,1158,449,1251,411,1293,399,1295,404,1253,416,1160,454,1084,492"/>
+<area shape="rect" id="Node000129" href="$dd/d0e/classGenericUSBMIDI__Interface.html" title=" " alt="" coords="1303,233,1512,273"/>
+<area shape="poly" id="edge126_Node000122_Node000129" title=" " alt="" coords="1060,484,1090,440,1133,385,1187,329,1218,304,1251,283,1302,263,1303,268,1253,288,1221,309,1191,333,1137,388,1094,443,1065,487"/>
+<area shape="rect" id="Node000131" href="$dd/dd7/classFortySevenEffectsMIDI__Interface.html" title="Class that wraps the FortySevenEffects MIDI library." alt="" coords="1306,489,1509,529"/>
+<area shape="poly" id="edge128_Node000122_Node000131" title=" " alt="" coords="1119,507,1306,507,1306,512,1119,512"/>
+<area shape="rect" id="Node000132" href="$d0/dea/classGenericBLEMIDI__Interface.html" title="Bluetooth Low Energy MIDI Interface." alt="" coords="1312,553,1503,593"/>
+<area shape="poly" id="edge129_Node000122_Node000132" title=" " alt="" coords="1119,519,1312,554,1311,559,1118,525"/>
+<area shape="rect" id="Node000133" href="$dd/d0e/classGenericUSBMIDI__Interface.html" title="A class for MIDI interfaces sending MIDI messages over a USB MIDI connection." alt="" coords="1310,617,1505,657"/>
+<area shape="poly" id="edge130_Node000122_Node000133" title=" " alt="" coords="1094,525,1205,575,1229,590,1253,603,1310,620,1309,625,1251,608,1226,595,1203,580,1092,530"/>
+<area shape="rect" id="Node000134" href="$d8/d0b/classStreamDebugMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving human&#45;readable MIDI messages over a Stream." alt="" coords="1304,1790,1511,1815"/>
+<area shape="poly" id="edge131_Node000122_Node000134" title=" " alt="" coords="1120,520,1167,541,1189,556,1206,576,1218,607,1227,655,1234,793,1233,972,1228,1170,1223,1368,1223,1546,1232,1682,1241,1729,1254,1757,1277,1777,1305,1790,1303,1795,1274,1781,1250,1760,1236,1730,1227,1683,1218,1546,1218,1368,1223,1170,1228,971,1229,793,1221,655,1213,608,1202,579,1185,560,1165,545,1118,525"/>
+<area shape="rect" id="Node000177" href="$d3/dc3/classStreamMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a Stream." alt="" coords="1325,127,1489,153"/>
+<area shape="poly" id="edge139_Node000122_Node000177" title=" " alt="" coords="1058,483,1087,430,1130,361,1185,287,1250,219,1280,197,1311,178,1370,150,1372,155,1314,183,1283,201,1254,223,1190,290,1135,364,1092,433,1063,485"/>
+<area shape="rect" id="Node000124" href="$df/d43/structBluetoothMIDI__Interface.html" title="A class for MIDI interfaces sending MIDI messages over a Bluetooth Low Energy (BLE) connection." alt="" coords="1647,433,1827,458"/>
+<area shape="poly" id="edge121_Node000123_Node000124" title=" " alt="" coords="1516,443,1647,443,1647,448,1516,448"/>
+<area shape="rect" id="Node000126" href="$d3/d56/classUSBHostMIDI__Interface.html" title="A class for MIDI interfaces sending MIDI messages to a MIDI USB device connected to a Teensy&#39;s USB ho..." alt="" coords="1650,305,1825,330"/>
+<area shape="poly" id="edge123_Node000125_Node000126" title=" " alt="" coords="1541,315,1650,315,1650,320,1541,320"/>
+<area shape="rect" id="Node000128" href="$d5/de5/classUSBHostMIDI__Interface__BigBuffer.html" title="A class for MIDI interfaces sending MIDI messages to a MIDI USB device connected to a Teensy&#39;s USB ho..." alt="" coords="1650,361,1825,401"/>
+<area shape="poly" id="edge125_Node000127_Node000128" title=" " alt="" coords="1545,379,1650,379,1650,384,1545,384"/>
+<area shape="rect" id="Node000130" href="$de/d05/classUSBMIDI__Interface.html" title="A class for MIDI interfaces sending MIDI messages over a USB MIDI connection." alt="" coords="1665,249,1809,274"/>
+<area shape="poly" id="edge127_Node000129_Node000130" title=" " alt="" coords="1526,254,1665,257,1665,262,1526,259"/>
+<area shape="rect" id="Node000135" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="1639,1743,1835,1783"/>
+<area shape="poly" id="edge132_Node000134_Node000135" title=" " alt="" coords="1524,1786,1639,1772,1639,1777,1525,1791"/>
+<area shape="rect" id="Node000137" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="1639,1807,1835,1847"/>
+<area shape="poly" id="edge134_Node000134_Node000137" title=" " alt="" coords="1525,1809,1639,1817,1639,1822,1524,1814"/>
+<area shape="rect" id="Node000139" href="$db/dc4/classSerialDebugMIDI__Interface.html" title=" " alt="" coords="1639,1921,1835,1961"/>
+<area shape="poly" id="edge136_Node000134_Node000139" title=" " alt="" coords="1443,1820,1519,1863,1612,1906,1651,1919,1650,1924,1610,1910,1516,1867,1440,1825"/>
+<area shape="rect" id="Node000141" href="$db/dc4/classSerialDebugMIDI__Interface.html" title="A wrapper class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a S..." alt="" coords="1620,1871,1855,1897"/>
+<area shape="poly" id="edge138_Node000134_Node000141" title=" " alt="" coords="1465,1817,1611,1856,1669,1869,1668,1874,1610,1861,1463,1822"/>
+<area shape="rect" id="Node000136" href="$d8/d29/classHardwareSerialDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a HardwareS..." alt="" coords="1932,1743,2127,1783"/>
+<area shape="poly" id="edge133_Node000135_Node000136" title=" " alt="" coords="1849,1760,1932,1760,1932,1765,1849,1765"/>
+<area shape="rect" id="Node000138" href="$d3/d54/classSoftwareSerialDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over a SoftwareS..." alt="" coords="1935,1807,2123,1847"/>
+<area shape="poly" id="edge135_Node000137_Node000138" title=" " alt="" coords="1849,1824,1935,1824,1935,1829,1849,1829"/>
+<area shape="rect" id="Node000140" href="$de/d2d/classUSBDebugMIDI__Interface.html" title="A class for debug MIDI interfaces sending and receiving human&#45;readable MIDI messages over the USB CDC..." alt="" coords="1936,1929,2123,1954"/>
+<area shape="poly" id="edge137_Node000139_Node000140" title=" " alt="" coords="1849,1939,1936,1939,1936,1944,1849,1944"/>
+<area shape="rect" id="Node000178" href="$d9/db8/classSerialMIDI__Interface.html" title=" " alt="" coords="1660,184,1815,224"/>
+<area shape="poly" id="edge140_Node000177_Node000178" title=" " alt="" coords="1488,153,1660,186,1659,192,1486,158"/>
+<area shape="rect" id="Node000180" href="$d9/db8/classSerialMIDI__Interface.html" title=" " alt="" coords="1660,5,1815,45"/>
+<area shape="poly" id="edge142_Node000177_Node000180" title=" " alt="" coords="1447,119,1522,87,1610,55,1659,40,1661,46,1612,60,1524,92,1450,124"/>
+<area shape="rect" id="Node000182" href="$d9/db8/classSerialMIDI__Interface.html" title=" " alt="" coords="1660,120,1815,160"/>
+<area shape="poly" id="edge144_Node000177_Node000182" title=" " alt="" coords="1503,137,1660,137,1660,143,1503,143"/>
+<area shape="rect" id="Node000185" href="$d9/db8/classSerialMIDI__Interface.html" title="A wrapper class for MIDI interfaces sending and receiving MIDI messages over a Serial port of generic..." alt="" coords="1641,70,1833,95"/>
+<area shape="poly" id="edge147_Node000177_Node000185" title=" " alt="" coords="1494,122,1663,93,1664,98,1495,128"/>
+<area shape="rect" id="Node000179" href="$d9/d78/classHardwareSerialMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a Hardware Serial port." alt="" coords="1953,184,2105,224"/>
+<area shape="poly" id="edge141_Node000178_Node000179" title=" " alt="" coords="1829,201,1953,201,1953,207,1829,207"/>
+<area shape="rect" id="Node000181" href="$d6/d6d/classSoftwareSerialMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over a SoftwareSerial interface." alt="" coords="1956,5,2103,45"/>
+<area shape="poly" id="edge143_Node000180_Node000181" title=" " alt="" coords="1828,23,1956,23,1956,28,1828,28"/>
+<area shape="rect" id="Node000183" href="$d8/d57/classUSBSerialMIDI__Interface.html" title="A class for MIDI interfaces sending and receiving MIDI messages over the Serial port of the USB conne..." alt="" coords="1939,127,2120,153"/>
+<area shape="poly" id="edge145_Node000182_Node000183" title=" " alt="" coords="1828,137,1939,137,1939,143,1828,143"/>
+<area shape="rect" id="Node000184" href="$dc/dff/classHairlessMIDI__Interface.html" title="A class for MIDI Interfaces sending and receiving data over the USB Serial CDC connection for the use..." alt="" coords="2195,127,2365,153"/>
+<area shape="poly" id="edge146_Node000183_Node000184" title=" " alt="" coords="2134,137,2195,137,2195,143,2134,143"/>
+<area shape="poly" id="edge169_Node000003_Node000001" title=" " alt="" coords="715,2905,764,2371,839,1525,848,1198,861,996,872,923,879,897,887,881,907,863,930,850,933,854,910,867,891,884,884,899,877,924,866,997,853,1198,844,1525,770,2372,720,2906"/>
+<area shape="poly" id="edge170_Node000003_Node000024" title=" " alt="" coords="714,2905,839,1525,850,1245,864,1073,874,1010,887,975,902,960,918,949,921,953,905,964,892,977,879,1011,869,1074,856,1246,844,1526,720,2906"/>
+<area shape="poly" id="edge171_Node000003_Node000026" title=" " alt="" coords="714,2906,805,1907,859,1328,887,1068,902,1054,918,1043,921,1047,905,1058,892,1070,865,1329,811,1907,720,2906"/>
+<area shape="poly" id="edge172_Node000003_Node000028" title=" " alt="" coords="714,2905,796,1966,850,1419,872,1238,880,1185,887,1161,904,1145,924,1133,926,1138,907,1149,892,1164,885,1186,877,1239,855,1420,802,1966,720,2906"/>
+<area shape="poly" id="edge214_Node000003_Node000237" title=" " alt="" coords="715,2905,766,2371,804,1956,839,1525,841,1372,843,1117,848,984,856,866,868,775,877,743,887,724,905,708,925,698,927,703,908,713,891,727,882,745,873,776,861,867,853,985,849,1117,846,1372,844,1525,809,1957,772,2372,720,2906"/>
+<area shape="poly" id="edge215_Node000003_Node000239" title=" " alt="" coords="715,2905,766,2371,839,1525,845,1150,849,1028,857,919,869,835,878,806,887,788,902,775,918,765,920,770,905,779,891,791,882,808,875,836,863,919,855,1028,850,1150,844,1525,771,2372,720,2906"/>
+<area shape="poly" id="edge237_Node000003_Node000262" title=" " alt="" coords="714,2905,796,1998,850,1472,872,1299,880,1248,887,1225,905,1210,925,1200,927,1205,908,1215,892,1228,885,1249,877,1300,855,1473,802,1998,720,2906"/>
+<area shape="poly" id="edge276_Node000003_Node000278" title=" " alt="" coords="714,2905,739,2575,785,2044,811,1774,838,1540,864,1369,876,1316,887,1289,914,1269,945,1258,947,1263,916,1274,891,1292,881,1318,869,1370,843,1541,816,1775,790,2044,745,2575,719,2906"/>
+<area shape="rect" id="Node000004" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="943,2784,1150,2824"/>
+<area shape="poly" id="edge149_Node000003_Node000004" title=" " alt="" coords="744,2909,809,2871,888,2834,942,2818,944,2823,890,2838,811,2875,746,2914"/>
+<area shape="rect" id="Node000006" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="921,2848,1173,2888"/>
+<area shape="poly" id="edge151_Node000003_Node000006" title=" " alt="" coords="790,2915,941,2885,942,2891,791,2920"/>
+<area shape="rect" id="Node000008" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="914,2912,1179,2952"/>
+<area shape="poly" id="edge153_Node000003_Node000008" title=" " alt="" coords="790,2929,914,2929,914,2935,790,2935"/>
+<area shape="rect" id="Node000010" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="899,2976,1194,3016"/>
+<area shape="poly" id="edge155_Node000003_Node000010" title=" " alt="" coords="791,2944,942,2973,941,2979,790,2949"/>
+<area shape="rect" id="Node000012" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="943,3040,1150,3080"/>
+<area shape="poly" id="edge157_Node000003_Node000012" title=" " alt="" coords="746,2950,811,2989,890,3026,944,3041,942,3046,888,3030,809,2993,744,2955"/>
+<area shape="rect" id="Node000014" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="943,3104,1150,3144"/>
+<area shape="poly" id="edge159_Node000003_Node000014" title=" " alt="" coords="735,2954,799,3022,842,3059,891,3090,944,3109,942,3114,888,3094,839,3063,795,3026,731,2957"/>
+<area shape="rect" id="Node000016" href="$df/dca/classBankable_1_1MIDIButtonLatched.html" title=" " alt="" coords="946,3169,1147,3223"/>
+<area shape="poly" id="edge161_Node000003_Node000016" title=" " alt="" coords="729,2956,754,2999,790,3053,836,3108,862,3132,891,3154,918,3168,947,3178,945,3183,915,3173,888,3158,859,3137,832,3111,786,3056,749,3002,725,2959"/>
+<area shape="rect" id="Node000018" href="$df/dca/classBankable_1_1MIDIButtonLatched.html" title=" " alt="" coords="946,3247,1147,3302"/>
+<area shape="poly" id="edge163_Node000003_Node000018" title=" " alt="" coords="724,2957,744,3015,778,3090,800,3130,827,3168,857,3203,891,3234,917,3249,947,3260,945,3265,915,3254,888,3238,853,3207,822,3171,796,3133,773,3093,739,3017,719,2959"/>
+<area shape="rect" id="Node000020" href="$d3/d0b/classBankable_1_1MIDIButtonLatching.html" title=" " alt="" coords="917,3327,1176,3367"/>
+<area shape="poly" id="edge165_Node000003_Node000020" title=" " alt="" coords="721,2958,736,3029,766,3126,789,3178,816,3228,850,3273,891,3313,919,3329,916,3333,888,3317,846,3277,812,3230,784,3180,761,3128,731,3031,716,2959"/>
+<area shape="rect" id="Node000022" href="$d3/d0b/classBankable_1_1MIDIButtonLatching.html" title=" " alt="" coords="941,3391,1152,3446"/>
+<area shape="poly" id="edge167_Node000003_Node000022" title=" " alt="" coords="719,2958,731,3040,743,3094,759,3153,782,3214,810,3274,847,3329,891,3377,915,3393,942,3404,940,3409,912,3398,888,3381,842,3332,806,3276,777,3216,754,3155,738,3095,726,3041,714,2959"/>
+<area shape="rect" id="Node000030" href="$dc/d22/classBankable_1_1MIDIButtons.html" title=" " alt="" coords="929,3471,1165,3511"/>
+<area shape="poly" id="edge173_Node000003_Node000030" title=" " alt="" coords="717,2958,724,3053,733,3118,747,3188,769,3262,799,3333,840,3400,864,3430,891,3457,909,3469,930,3479,927,3483,906,3474,888,3461,860,3433,835,3403,795,3336,764,3264,742,3190,727,3119,718,3054,712,2958"/>
+<area shape="rect" id="Node000032" href="$dc/d22/classBankable_1_1MIDIButtons.html" title=" " alt="" coords="922,3535,1171,3575"/>
+<area shape="poly" id="edge175_Node000003_Node000032" title=" " alt="" coords="716,2959,719,3064,726,3136,739,3216,761,3299,792,3380,835,3456,861,3490,891,3521,923,3541,921,3545,888,3525,857,3493,831,3459,787,3383,756,3301,734,3217,721,3137,714,3064,711,2959"/>
+<area shape="rect" id="Node000034" href="$da/d96/classBankable_1_1MIDIChordButton.html" title=" " alt="" coords="951,3599,1142,3639"/>
+<area shape="poly" id="edge177_Node000003_Node000034" title=" " alt="" coords="721,2958,740,3090,776,3280,800,3377,827,3465,858,3537,874,3564,891,3585,919,3603,952,3614,950,3619,917,3608,888,3589,870,3568,853,3540,822,3467,795,3378,771,3281,735,3091,715,2959"/>
+<area shape="rect" id="Node000037" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="941,3663,1152,3718"/>
+<area shape="poly" id="edge180_Node000003_Node000037" title=" " alt="" coords="720,2958,738,3102,773,3310,797,3417,824,3515,856,3595,873,3626,891,3649,915,3666,942,3678,940,3683,912,3671,887,3653,869,3629,851,3598,819,3517,791,3418,768,3311,733,3102,715,2959"/>
+<area shape="rect" id="Node000039" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="933,3742,1160,3797"/>
+<area shape="poly" id="edge182_Node000003_Node000039" title=" " alt="" coords="719,2958,735,3115,768,3348,791,3468,819,3578,853,3669,871,3703,891,3729,911,3744,934,3755,932,3760,908,3749,887,3733,867,3706,848,3671,814,3580,786,3469,762,3349,730,3116,714,2959"/>
+<area shape="rect" id="Node000041" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="933,3821,1160,3875"/>
+<area shape="poly" id="edge184_Node000003_Node000041" title=" " alt="" coords="719,2958,732,3129,745,3252,763,3385,786,3518,815,3640,850,3741,870,3779,891,3807,911,3823,934,3834,932,3839,908,3828,887,3811,865,3782,845,3743,810,3642,781,3519,758,3386,740,3252,727,3129,714,2959"/>
+<area shape="rect" id="Node000043" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title=" " alt="" coords="945,4027,1148,4082"/>
+<area shape="poly" id="edge186_Node000003_Node000043" title=" " alt="" coords="718,2958,725,3164,735,3317,750,3483,772,3650,803,3803,821,3871,842,3929,865,3978,891,4014,916,4033,946,4045,944,4050,914,4038,887,4018,861,3981,837,3931,816,3872,797,3805,767,3651,745,3484,730,3317,720,3165,712,2959"/>
+<area shape="rect" id="Node000045" href="$d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html" title=" " alt="" coords="915,4106,1178,4161"/>
+<area shape="poly" id="edge188_Node000003_Node000045" title=" " alt="" coords="717,2958,723,3178,731,3341,746,3520,767,3700,798,3865,817,3938,839,4001,864,4054,891,4093,917,4113,914,4117,887,4097,859,4056,834,4003,812,3939,793,3866,762,3700,740,3520,726,3341,718,3178,712,2959"/>
+<area shape="rect" id="Node000047" href="$d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html" title=" " alt="" coords="895,4185,1199,4239"/>
+<area shape="poly" id="edge190_Node000003_Node000047" title=" " alt="" coords="717,2958,721,3190,728,3364,741,3556,762,3749,793,3927,813,4005,836,4073,862,4129,891,4172,903,4183,900,4187,887,4175,857,4132,831,4075,808,4006,788,3928,757,3750,736,3557,722,3365,715,3190,712,2958"/>
+<area shape="rect" id="Node000049" href="$d2/db7/classBankable_1_1SmartMIDIFilteredAnalog.html" title=" " alt="" coords="941,4263,1153,4318"/>
+<area shape="poly" id="edge192_Node000003_Node000049" title=" " alt="" coords="717,2958,718,3203,724,3389,737,3593,757,3799,772,3897,789,3988,809,4072,833,4145,860,4205,891,4250,914,4268,942,4280,940,4285,911,4273,887,4254,856,4208,828,4147,804,4073,784,3990,766,3898,752,3799,731,3593,719,3389,713,3203,712,2958"/>
+<area shape="rect" id="Node000051" href="$d2/db7/classBankable_1_1SmartMIDIFilteredAnalog.html" title=" " alt="" coords="941,4342,1153,4397"/>
+<area shape="poly" id="edge194_Node000003_Node000051" title=" " alt="" coords="719,2958,737,3235,774,3673,798,3897,826,4096,858,4248,874,4299,891,4329,914,4347,942,4359,939,4364,911,4352,887,4332,869,4301,852,4249,821,4097,793,3898,768,3673,732,3235,714,2959"/>
+<area shape="rect" id="Node000053" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="963,1610,1130,1665"/>
+<area shape="poly" id="edge196_Node000003_Node000053" title=" " alt="" coords="712,2905,715,2671,722,2494,735,2300,756,2105,787,1924,807,1845,830,1776,857,1718,887,1674,903,1660,922,1650,962,1637,964,1642,924,1654,906,1664,891,1678,862,1721,835,1778,812,1847,793,1926,761,2105,740,2301,727,2494,720,2671,717,2906"/>
+<area shape="rect" id="Node000055" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="951,1417,1143,1457"/>
+<area shape="poly" id="edge197_Node000003_Node000055" title=" " alt="" coords="713,2905,730,2617,766,2158,790,1922,818,1713,834,1626,851,1554,868,1500,887,1468,916,1447,950,1435,951,1441,918,1451,891,1471,873,1503,856,1556,839,1627,823,1714,795,1923,771,2158,736,2617,719,2906"/>
+<area shape="rect" id="Node000056" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="951,1545,1143,1585"/>
+<area shape="poly" id="edge198_Node000003_Node000056" title=" " alt="" coords="714,2905,732,2640,770,2222,794,2008,822,1818,853,1674,870,1625,887,1596,916,1575,950,1564,951,1569,919,1579,891,1599,875,1628,858,1676,827,1819,799,2008,775,2222,738,2640,719,2906"/>
+<area shape="rect" id="Node000057" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="939,1481,1154,1521"/>
+<area shape="poly" id="edge199_Node000003_Node000057" title=" " alt="" coords="713,2905,731,2628,768,2190,792,1965,820,1766,836,1683,852,1614,869,1563,887,1532,911,1513,938,1502,940,1507,913,1518,891,1535,874,1565,857,1616,841,1684,825,1767,797,1966,773,2190,737,2629,719,2906"/>
+<area shape="rect" id="Node000223" href="$d6/d72/classMIDIButton.html" title=" " alt="" coords="931,4421,1162,4446"/>
+<area shape="poly" id="edge200_Node000003_Node000223" title=" " alt="" coords="719,2959,735,3251,769,3715,793,3953,822,4163,838,4251,855,4323,873,4376,891,4408,910,4422,932,4431,930,4436,907,4426,887,4411,868,4378,849,4324,832,4252,816,4164,788,3953,764,3715,729,3251,713,2959"/>
+<area shape="rect" id="Node000225" href="$d6/d72/classMIDIButton.html" title=" " alt="" coords="925,4470,1169,4495"/>
+<area shape="poly" id="edge202_Node000003_Node000225" title=" " alt="" coords="718,2958,734,3259,768,3739,792,3985,820,4203,836,4294,854,4369,872,4424,891,4457,907,4469,926,4478,923,4483,904,4474,887,4460,867,4426,848,4370,831,4295,815,4204,786,3986,762,3739,729,3259,713,2959"/>
+<area shape="rect" id="Node000227" href="$d6/d72/classMIDIButton.html" title=" " alt="" coords="939,4520,1154,4560"/>
+<area shape="poly" id="edge204_Node000003_Node000227" title=" " alt="" coords="718,2959,734,3267,767,3762,791,4017,820,4243,836,4337,853,4414,872,4472,891,4506,913,4523,940,4534,938,4539,911,4528,887,4510,867,4474,848,4416,831,4338,815,4244,786,4018,762,3763,728,3268,713,2959"/>
+<area shape="rect" id="Node000229" href="$d3/d88/classMIDIButtonLatched.html" title=" " alt="" coords="968,4584,1125,4624"/>
+<area shape="poly" id="edge206_Node000003_Node000229" title=" " alt="" coords="718,2958,733,3278,765,3794,789,4059,818,4295,834,4393,852,4474,871,4534,891,4570,907,4584,926,4594,968,4604,967,4609,924,4599,904,4588,887,4574,866,4537,847,4476,829,4394,813,4296,784,4060,760,3794,727,3278,713,2959"/>
+<area shape="rect" id="Node000231" href="$d3/d88/classMIDIButtonLatched.html" title=" " alt="" coords="967,4648,1127,4688"/>
+<area shape="poly" id="edge208_Node000003_Node000231" title=" " alt="" coords="718,2959,732,3290,745,3546,764,3826,787,4103,816,4348,833,4450,851,4534,871,4597,891,4634,907,4648,926,4657,967,4668,966,4673,924,4662,904,4652,887,4638,866,4599,846,4536,828,4451,811,4349,782,4103,758,3827,740,3547,726,3290,713,2959"/>
+<area shape="rect" id="Node000233" href="$d8/de1/classMIDIButtonLatching.html" title=" " alt="" coords="967,4712,1126,4752"/>
+<area shape="poly" id="edge210_Node000003_Node000233" title=" " alt="" coords="718,2959,731,3301,744,3566,762,3857,785,4145,814,4400,831,4507,850,4594,870,4659,891,4698,907,4712,926,4722,968,4732,967,4737,924,4726,904,4716,887,4702,865,4661,844,4596,826,4508,809,4401,780,4145,756,3858,738,3567,725,3301,713,2959"/>
+<area shape="rect" id="Node000235" href="$d8/de1/classMIDIButtonLatching.html" title=" " alt="" coords="961,4776,1132,4816"/>
+<area shape="poly" id="edge212_Node000003_Node000235" title=" " alt="" coords="718,2959,730,3312,742,3588,760,3890,783,4188,812,4453,829,4563,848,4654,869,4722,891,4762,906,4775,923,4784,962,4795,960,4800,921,4789,903,4779,887,4766,864,4724,843,4656,824,4564,807,4453,778,4188,754,3890,737,3588,724,3312,713,2959"/>
+<area shape="rect" id="Node000241" href="$d2/d87/classMIDIButtons.html" title=" " alt="" coords="933,4840,1160,4880"/>
+<area shape="poly" id="edge216_Node000003_Node000241" title=" " alt="" coords="718,2958,729,3322,741,3608,758,3920,781,4230,810,4505,828,4620,847,4714,868,4784,880,4809,891,4826,911,4842,934,4853,932,4858,908,4847,887,4830,875,4812,863,4786,842,4715,822,4620,805,4505,775,4230,752,3921,735,3608,723,3323,713,2959"/>
+<area shape="rect" id="Node000243" href="$d2/d87/classMIDIButtons.html" title=" " alt="" coords="951,4904,1142,4944"/>
+<area shape="poly" id="edge218_Node000003_Node000243" title=" " alt="" coords="718,2959,728,3334,739,3629,756,3952,779,4273,808,4557,826,4676,846,4774,868,4847,879,4872,891,4890,919,4910,952,4921,950,4926,916,4915,887,4894,875,4875,863,4849,841,4775,821,4677,803,4558,773,4273,751,3953,734,3629,723,3334,712,2959"/>
+<area shape="rect" id="Node000245" href="$d5/d8e/classMIDIFilteredAnalog.html" title=" " alt="" coords="953,5032,1141,5072"/>
+<area shape="poly" id="edge220_Node000003_Node000245" title=" " alt="" coords="718,2958,726,3355,736,3669,752,4015,774,4357,804,4662,823,4789,843,4894,866,4972,879,4999,891,5018,919,5039,953,5050,952,5055,917,5044,887,5022,874,5002,861,4974,838,4895,817,4790,799,4662,769,4357,747,4015,731,3669,721,3355,712,2958"/>
+<area shape="rect" id="Node000247" href="$d5/d8e/classMIDIFilteredAnalog.html" title=" " alt="" coords="943,5096,1151,5136"/>
+<area shape="poly" id="edge222_Node000003_Node000247" title=" " alt="" coords="718,2959,725,3367,735,3691,750,4047,772,4400,803,4714,821,4846,842,4954,866,5034,878,5063,891,5082,915,5101,943,5111,941,5116,912,5105,887,5086,873,5065,860,5036,837,4955,816,4846,797,4715,767,4401,745,4047,730,3691,720,3367,712,2959"/>
+<area shape="rect" id="Node000249" href="$dc/dc2/classMIDIIncrementDecrementButtons.html" title=" " alt="" coords="899,5160,1195,5200"/>
+<area shape="poly" id="edge224_Node000003_Node000249" title=" " alt="" coords="718,2958,724,3377,733,3711,748,4078,770,4442,801,4766,819,4902,841,5014,865,5097,878,5126,891,5146,904,5158,900,5162,887,5150,873,5128,860,5098,836,5015,814,4903,795,4767,765,4443,743,4078,728,3711,719,3377,712,2958"/>
+<area shape="rect" id="Node000251" href="$df/db5/classBankable_1_1GenericMIDIAbsoluteEncoder.html" title="An abstract class for rotary encoders that send absolute MIDI events." alt="" coords="929,5225,1165,5279"/>
+<area shape="poly" id="edge226_Node000003_Node000251" title=" " alt="" coords="718,2958,724,3387,733,3730,748,4108,770,4483,801,4817,819,4957,841,5072,865,5159,878,5189,891,5210,909,5226,930,5237,927,5242,906,5230,887,5214,873,5191,860,5160,836,5074,814,4958,795,4818,765,4483,743,4108,728,3730,719,3387,712,2958"/>
+<area shape="rect" id="Node000256" href="$d6/dcd/classBankable_1_1GenericMIDIRotaryEncoder.html" title="An abstract class for rotary encoders that send MIDI events and that can be added to a Bank." alt="" coords="936,2091,1157,2131"/>
+<area shape="poly" id="edge231_Node000003_Node000256" title=" " alt="" coords="714,2906,729,2750,762,2519,785,2400,814,2291,848,2201,867,2167,887,2141,910,2125,935,2114,937,2119,912,2129,891,2145,871,2170,852,2203,819,2292,790,2401,767,2520,735,2750,719,2906"/>
+<area shape="rect" id="Node000259" href="$d9/df9/classBankable_1_1MIDIButton.html" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="947,4968,1146,5008"/>
+<area shape="poly" id="edge234_Node000003_Node000259" title=" " alt="" coords="718,2958,727,3344,738,3648,754,3983,776,4314,806,4609,824,4732,845,4834,867,4909,879,4936,891,4954,917,4974,948,4985,946,4990,914,4978,887,4958,874,4938,862,4911,839,4835,819,4733,801,4610,771,4315,749,3983,732,3648,722,3344,712,2958"/>
+<area shape="rect" id="Node000260" href="$df/dca/classBankable_1_1MIDIButtonLatched.html" title="A class for momentary buttons and switches that send MIDI events." alt="" coords="949,1689,1144,1743"/>
+<area shape="poly" id="edge235_Node000003_Node000260" title=" " alt="" coords="712,2906,717,2685,726,2519,740,2338,762,2156,792,1988,811,1914,834,1849,859,1795,887,1754,915,1733,948,1720,950,1725,918,1737,891,1758,863,1798,839,1851,817,1915,797,1989,767,2157,745,2339,731,2520,723,2685,717,2906"/>
+<area shape="rect" id="Node000261" href="$d3/d0b/classBankable_1_1MIDIButtonLatching.html" title="A class for latching buttons and switches that send MIDI events." alt="" coords="951,1768,1142,1808"/>
+<area shape="poly" id="edge236_Node000003_Node000261" title=" " alt="" coords="712,2906,718,2694,727,2538,742,2366,764,2194,794,2036,813,1967,835,1906,860,1856,887,1818,917,1798,950,1786,952,1792,919,1802,891,1822,864,1859,840,1908,818,1968,799,2037,769,2195,747,2367,733,2538,724,2695,718,2906"/>
+<area shape="rect" id="Node000264" href="$dc/d22/classBankable_1_1MIDIButtons.html" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="943,1832,1150,1872"/>
+<area shape="poly" id="edge238_Node000003_Node000264" title=" " alt="" coords="713,2906,720,2705,730,2558,746,2397,768,2235,798,2087,816,2021,837,1965,861,1918,887,1882,913,1863,942,1852,944,1857,915,1868,891,1886,865,1920,842,1967,822,2023,803,2088,773,2236,751,2397,736,2558,726,2706,718,2906"/>
+<area shape="rect" id="Node000265" href="$da/d96/classBankable_1_1MIDIChordButton.html" title="An abstract class for momentary push buttons that send multiple MIDI events." alt="" coords="943,1897,1151,1922"/>
+<area shape="poly" id="edge239_Node000003_Node000265" title=" " alt="" coords="713,2905,721,2713,732,2572,748,2419,770,2266,800,2125,818,2064,838,2010,862,1966,888,1933,913,1915,942,1905,943,1911,915,1920,891,1937,866,1969,843,2012,823,2065,805,2126,775,2267,753,2420,737,2573,727,2713,718,2906"/>
+<area shape="rect" id="Node000266" href="$db/ddc/classBankable_1_1MIDIFilteredAnalog.html" title="A class for potentiometers and faders that send MIDI events and can be added to a Bank." alt="" coords="951,1947,1142,1987"/>
+<area shape="poly" id="edge240_Node000003_Node000266" title=" " alt="" coords="713,2906,724,2725,736,2593,753,2450,776,2308,805,2177,822,2119,842,2069,863,2028,887,1997,917,1977,950,1966,952,1971,919,1981,891,2001,868,2031,847,2072,827,2121,810,2178,781,2309,758,2451,741,2594,730,2725,718,2906"/>
+<area shape="rect" id="Node000267" href="$d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html" title="An abstract class for two buttons that send incremental MIDI events." alt="" coords="927,2011,1167,2066"/>
+<area shape="poly" id="edge241_Node000003_Node000267" title=" " alt="" coords="714,2905,728,2739,759,2489,782,2360,811,2241,846,2143,866,2106,887,2077,905,2062,925,2051,928,2056,908,2067,891,2081,870,2108,851,2146,816,2243,788,2361,765,2490,733,2739,719,2906"/>
+<area shape="rect" id="Node000268" href="$d2/db7/classBankable_1_1SmartMIDIFilteredAnalog.html" title="A class for potentiometers and faders that send MIDI events." alt="" coords="944,2155,1149,2210"/>
+<area shape="poly" id="edge242_Node000003_Node000268" title=" " alt="" coords="715,2905,733,2763,768,2558,792,2452,820,2355,851,2275,869,2244,887,2221,913,2202,943,2190,945,2195,916,2206,891,2225,873,2247,856,2277,825,2356,797,2453,774,2559,739,2764,720,2906"/>
+<area shape="rect" id="Node000269" href="$df/d5d/classGenericMIDIAbsoluteEncoder.html" title="An abstract class for rotary encoders that send absolute MIDI events." alt="" coords="941,2235,1152,2275"/>
+<area shape="poly" id="edge243_Node000003_Node000269" title=" " alt="" coords="715,2905,735,2774,771,2587,795,2492,823,2404,853,2333,870,2305,888,2285,912,2268,940,2257,942,2262,915,2272,891,2289,874,2309,858,2335,828,2406,800,2493,777,2589,741,2775,721,2906"/>
+<area shape="rect" id="Node000272" href="$d0/d9e/classGenericMIDIRotaryEncoder.html" title="An abstract class for rotary encoders that send MIDI events." alt="" coords="948,2656,1145,2696"/>
+<area shape="poly" id="edge246_Node000003_Node000272" title=" " alt="" coords="724,2906,748,2862,784,2807,831,2752,858,2727,888,2706,916,2692,947,2683,948,2688,918,2697,891,2710,862,2731,835,2755,789,2810,753,2865,729,2908"/>
+<area shape="rect" id="Node000058" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="969,1303,1124,1343"/>
+<area shape="poly" id="edge249_Node000003_Node000058" title=" " alt="" coords="714,2906,733,2609,771,2132,796,1886,824,1667,854,1499,870,1441,887,1404,905,1383,927,1365,975,1340,977,1345,930,1370,909,1387,892,1407,875,1442,860,1500,829,1668,801,1887,777,2133,738,2609,719,2906"/>
+<area shape="rect" id="Node000275" href="$d6/d72/classMIDIButton.html" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="961,2299,1132,2325"/>
+<area shape="poly" id="edge273_Node000003_Node000275" title=" " alt="" coords="716,2905,737,2783,774,2611,798,2523,825,2444,855,2379,871,2354,888,2335,922,2315,960,2306,962,2312,924,2320,891,2339,875,2357,859,2381,830,2446,803,2525,779,2612,742,2784,721,2906"/>
+<area shape="rect" id="Node000276" href="$d3/d88/classMIDIButtonLatched.html" title="A class for momentary buttons and switches that send MIDI events." alt="" coords="968,2349,1125,2389"/>
+<area shape="poly" id="edge274_Node000003_Node000276" title=" " alt="" coords="712,2906,718,2810,727,2744,742,2672,764,2598,794,2525,835,2458,860,2427,888,2399,905,2387,925,2377,967,2367,969,2372,927,2382,908,2391,891,2403,864,2431,839,2461,799,2528,769,2600,747,2674,732,2745,723,2810,717,2906"/>
+<area shape="rect" id="Node000277" href="$d8/de1/classMIDIButtonLatching.html" title="A class for latching buttons and switches that send MIDI events." alt="" coords="971,2413,1122,2453"/>
+<area shape="poly" id="edge275_Node000003_Node000277" title=" " alt="" coords="713,2905,723,2820,734,2762,750,2700,772,2635,802,2572,840,2514,888,2463,906,2450,927,2441,971,2431,972,2436,929,2446,909,2455,891,2467,844,2517,807,2574,777,2637,755,2701,739,2763,729,2820,719,2906"/>
+<area shape="rect" id="Node000280" href="$d2/d87/classMIDIButtons.html" title="An abstract class for momentary push buttons that send MIDI events." alt="" coords="963,2477,1130,2517"/>
+<area shape="poly" id="edge277_Node000003_Node000280" title=" " alt="" coords="715,2905,729,2830,759,2727,781,2672,810,2619,845,2570,888,2527,923,2507,963,2497,964,2502,925,2512,891,2531,849,2573,814,2622,786,2674,764,2729,734,2831,720,2906"/>
+<area shape="rect" id="Node000281" href="$dd/d29/classMIDIChordButton.html" title="An abstract class for momentary push buttons that send multiple MIDI events." alt="" coords="943,2542,1151,2567"/>
+<area shape="poly" id="edge278_Node000003_Node000281" title=" " alt="" coords="717,2905,733,2837,765,2748,787,2701,815,2655,848,2613,888,2578,914,2564,942,2555,943,2560,916,2568,891,2582,852,2617,819,2658,792,2703,770,2750,738,2839,722,2906"/>
+<area shape="rect" id="Node000282" href="$d5/d8e/classMIDIFilteredAnalog.html" title="A class for potentiometers and faders that send MIDI events." alt="" coords="973,2592,1120,2632"/>
+<area shape="poly" id="edge279_Node000003_Node000282" title=" " alt="" coords="720,2905,741,2849,775,2777,797,2740,824,2704,854,2670,888,2642,929,2622,973,2612,974,2617,931,2627,891,2646,857,2674,828,2707,802,2743,779,2780,745,2851,725,2907"/>
+<area shape="rect" id="Node000283" href="$dc/dc2/classMIDIIncrementDecrementButtons.html" title="An abstract class for two buttons that send incremental MIDI events." alt="" coords="926,2720,1167,2760"/>
+<area shape="poly" id="edge280_Node000003_Node000283" title=" " alt="" coords="731,2907,795,2838,839,2801,888,2770,925,2755,927,2760,891,2774,842,2805,799,2842,735,2910"/>
+<area shape="rect" id="Node000284" href="$d4/de3/classVolumeControl.html" title="A class for controlling the volume of AudioMixer4 objects using a potentiometer." alt="" coords="967,3899,1126,3925"/>
+<area shape="poly" id="edge281_Node000003_Node000284" title=" " alt="" coords="718,2958,728,3143,739,3278,755,3425,778,3571,807,3705,825,3763,845,3814,867,3855,891,3886,908,3898,926,3907,968,3915,967,3920,925,3912,905,3903,887,3890,862,3858,840,3816,820,3765,802,3706,772,3572,750,3425,734,3279,723,3144,713,2958"/>
+<area shape="rect" id="Node000005" href="$d1/dd4/classBankable_1_1CCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1366,2749,1449,2774"/>
+<area shape="poly" id="edge150_Node000004_Node000005" title=" " alt="" coords="1163,2788,1365,2763,1366,2769,1164,2793"/>
+<area shape="rect" id="Node000007" href="$d0/de3/classBankable_1_1ManyAddresses_1_1CCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1315,2863,1499,2889"/>
+<area shape="poly" id="edge152_Node000006_Node000007" title=" " alt="" coords="1187,2868,1315,2871,1315,2877,1187,2874"/>
+<area shape="rect" id="Node000009" href="$d2/d33/classBankable_1_1ManyAddresses_1_1NoteButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1309,2919,1506,2945"/>
+<area shape="poly" id="edge154_Node000008_Node000009" title=" " alt="" coords="1193,2929,1309,2929,1309,2935,1193,2935"/>
+<area shape="rect" id="Node000011" href="$da/d97/classBankable_1_1ManyAddresses_1_1PCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1316,2983,1499,3009"/>
+<area shape="poly" id="edge156_Node000010_Node000011" title=" " alt="" coords="1208,2993,1316,2993,1316,2999,1208,2999"/>
+<area shape="rect" id="Node000013" href="$de/d36/classBankable_1_1NoteButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1359,3047,1455,3073"/>
+<area shape="poly" id="edge158_Node000012_Node000013" title=" " alt="" coords="1164,3057,1359,3057,1359,3063,1164,3063"/>
+<area shape="rect" id="Node000015" href="$d6/d5c/classBankable_1_1PCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1366,3111,1449,3137"/>
+<area shape="poly" id="edge160_Node000014_Node000015" title=" " alt="" coords="1164,3121,1366,3121,1366,3127,1164,3127"/>
+<area shape="rect" id="Node000017" href="$d9/d1d/classBankable_1_1CCButtonLatched.html" title="A class of MIDIOutputElements that read the input of a momentary push button, and send out MIDI Contr..." alt="" coords="1290,3183,1525,3209"/>
+<area shape="poly" id="edge162_Node000016_Node000017" title=" " alt="" coords="1161,3193,1290,3193,1290,3199,1161,3199"/>
+<area shape="rect" id="Node000019" href="$d2/dbf/classBankable_1_1NoteButtonLatched.html" title="A class of MIDIOutputElements that read the input of a momentary push button, and send out MIDI Note ..." alt="" coords="1328,3255,1487,3295"/>
+<area shape="poly" id="edge164_Node000018_Node000019" title=" " alt="" coords="1161,3272,1328,3272,1328,3277,1161,3277"/>
+<area shape="rect" id="Node000021" href="$d9/df9/classBankable_1_1CCButtonLatching.html" title="A class of MIDIOutputElements that read the input of a latching push button or toggle switch,..." alt="" coords="1338,3334,1477,3359"/>
+<area shape="poly" id="edge166_Node000020_Node000021" title=" " alt="" coords="1190,3344,1338,3344,1338,3349,1190,3349"/>
+<area shape="rect" id="Node000023" href="$d9/d3f/classBankable_1_1NoteButtonLatching.html" title="A class of MIDIOutputElements that read the input of a latching push button or toggle switch,..." alt="" coords="1332,3406,1483,3431"/>
+<area shape="poly" id="edge168_Node000022_Node000023" title=" " alt="" coords="1165,3416,1332,3416,1332,3421,1165,3421"/>
+<area shape="rect" id="Node000031" href="$d2/def/classBankable_1_1CCButtons.html" title="A class of MIDIOutputElements that read the input of a collection of momentary push buttons or switch..." alt="" coords="1307,3478,1508,3503"/>
+<area shape="poly" id="edge174_Node000030_Node000031" title=" " alt="" coords="1178,3488,1306,3488,1306,3493,1178,3493"/>
+<area shape="rect" id="Node000033" href="$d6/d5b/classBankable_1_1NoteButtons.html" title="A class of MIDIOutputElements that read the input of a collection of momentary push buttons or switch..." alt="" coords="1300,3529,1515,3554"/>
+<area shape="poly" id="edge176_Node000032_Node000033" title=" " alt="" coords="1185,3547,1299,3543,1300,3548,1186,3552"/>
+<area shape="rect" id="Node000035" href="$d8/d9d/classBankable_1_1NoteChordButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1340,3578,1475,3603"/>
+<area shape="poly" id="edge178_Node000034_Node000035" title=" " alt="" coords="1155,3608,1339,3593,1340,3599,1156,3613"/>
+<area shape="rect" id="Node000036" href="$d3/d3b/classNoteChordButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1340,3627,1475,3653"/>
+<area shape="poly" id="edge179_Node000034_Node000036" title=" " alt="" coords="1156,3622,1340,3633,1340,3639,1155,3628"/>
+<area shape="rect" id="Node000038" href="$d7/dc0/classBankable_1_1CCPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="1341,3677,1474,3702"/>
+<area shape="poly" id="edge181_Node000037_Node000038" title=" " alt="" coords="1165,3688,1341,3687,1341,3692,1165,3693"/>
+<area shape="rect" id="Node000040" href="$d5/d71/classBankable_1_1ManyAddresses_1_1CCPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="1290,3791,1525,3817"/>
+<area shape="poly" id="edge183_Node000039_Node000040" title=" " alt="" coords="1174,3779,1290,3790,1290,3795,1174,3784"/>
+<area shape="rect" id="Node000042" href="$d5/d7d/classBankable_1_1ManyAddresses_1_1PBPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="1291,3841,1524,3866"/>
+<area shape="poly" id="edge185_Node000041_Node000042" title=" " alt="" coords="1174,3847,1290,3849,1290,3854,1174,3853"/>
+<area shape="rect" id="Node000044" href="$de/d8c/classBankable_1_1PBPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="1341,4042,1473,4067"/>
+<area shape="poly" id="edge187_Node000043_Node000044" title=" " alt="" coords="1162,4052,1341,4052,1341,4057,1162,4057"/>
+<area shape="rect" id="Node000046" href="$d5/dec/classBankable_1_1CCIncrementDecrementButtons.html" title="A class of MIDIOutputElements that read the input of two momentary push buttons to increment or decre..." alt="" coords="1293,4121,1521,4146"/>
+<area shape="poly" id="edge189_Node000045_Node000046" title=" " alt="" coords="1192,4131,1293,4131,1293,4136,1192,4136"/>
+<area shape="rect" id="Node000048" href="$dc/db3/classBankable_1_1ManyAddresses_1_1CCIncrementDecrementButtons.html" title="A class of MIDIOutputElements that read the input of two momentary push buttons to increment or decre..." alt="" coords="1293,4192,1521,4232"/>
+<area shape="poly" id="edge191_Node000047_Node000048" title=" " alt="" coords="1212,4209,1293,4209,1293,4215,1212,4215"/>
+<area shape="rect" id="Node000050" href="$d3/dfe/classBankable_1_1CCSmartPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="1321,4271,1493,4311"/>
+<area shape="poly" id="edge193_Node000049_Node000050" title=" " alt="" coords="1166,4288,1321,4288,1321,4293,1166,4293"/>
+<area shape="rect" id="Node000052" href="$d7/d22/classBankable_1_1PBSmartPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="1322,4349,1493,4389"/>
+<area shape="poly" id="edge195_Node000051_Node000052" title=" " alt="" coords="1166,4367,1321,4367,1321,4372,1166,4372"/>
+<area shape="rect" id="Node000224" href="$d2/daa/classCCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1366,4421,1449,4446"/>
+<area shape="poly" id="edge201_Node000223_Node000224" title=" " alt="" coords="1176,4431,1366,4431,1366,4436,1176,4436"/>
+<area shape="rect" id="Node000226" href="$d1/d9f/classNoteButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1359,4470,1455,4495"/>
+<area shape="poly" id="edge203_Node000225_Node000226" title=" " alt="" coords="1182,4480,1359,4480,1359,4485,1182,4485"/>
+<area shape="rect" id="Node000228" href="$dd/d3d/classPCButton.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1366,4527,1449,4553"/>
+<area shape="poly" id="edge205_Node000227_Node000228" title=" " alt="" coords="1168,4537,1366,4537,1366,4543,1168,4543"/>
+<area shape="rect" id="Node000230" href="$d5/da6/classCCButtonLatched.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1340,4591,1475,4617"/>
+<area shape="poly" id="edge207_Node000229_Node000230" title=" " alt="" coords="1139,4601,1340,4601,1340,4607,1139,4607"/>
+<area shape="rect" id="Node000232" href="$de/def/classNoteButtonLatched.html" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="1334,4655,1481,4681"/>
+<area shape="poly" id="edge209_Node000231_Node000232" title=" " alt="" coords="1140,4665,1334,4665,1334,4671,1140,4671"/>
+<area shape="rect" id="Node000234" href="$d8/db0/classCCButtonLatching.html" title="A class of MIDIOutputElements that read the input of a latching push button or toggle switch,..." alt="" coords="1338,4719,1477,4745"/>
+<area shape="poly" id="edge211_Node000233_Node000234" title=" " alt="" coords="1140,4729,1338,4729,1338,4735,1140,4735"/>
+<area shape="rect" id="Node000236" href="$d3/d6c/classNoteButtonLatching.html" title="A class of MIDIOutputElements that read the input of a latching push button or toggle switch,..." alt="" coords="1332,4783,1483,4809"/>
+<area shape="poly" id="edge213_Node000235_Node000236" title=" " alt="" coords="1146,4793,1332,4793,1332,4799,1146,4799"/>
+<area shape="rect" id="Node000242" href="$d0/dd3/classCCButtons.html" title="A class of MIDIOutputElements that read the input of a collection of momentary push buttons or switch..." alt="" coords="1307,4847,1508,4873"/>
+<area shape="poly" id="edge217_Node000241_Node000242" title=" " alt="" coords="1174,4857,1306,4857,1306,4863,1174,4863"/>
+<area shape="rect" id="Node000244" href="$d1/dbd/classNoteButtons.html" title="A class of MIDIOutputElements that read the input of a collection of momentary push buttons or switch..." alt="" coords="1300,4911,1515,4937"/>
+<area shape="poly" id="edge219_Node000243_Node000244" title=" " alt="" coords="1156,4921,1300,4921,1300,4927,1156,4927"/>
+<area shape="rect" id="Node000246" href="$db/d32/classCCPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="1341,4963,1474,4989"/>
+<area shape="poly" id="edge221_Node000245_Node000246" title=" " alt="" coords="1154,5030,1203,5017,1251,4999,1340,4981,1341,4986,1253,5004,1205,5023,1155,5035"/>
+<area shape="rect" id="Node000248" href="$da/d6a/classPBPotentiometer.html" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="1341,5013,1473,5038"/>
+<area shape="poly" id="edge223_Node000247_Node000248" title=" " alt="" coords="1163,5095,1203,5082,1217,5074,1226,5065,1236,5056,1251,5048,1296,5035,1341,5027,1341,5032,1297,5040,1253,5053,1239,5061,1230,5069,1220,5078,1205,5086,1165,5100"/>
+<area shape="rect" id="Node000250" href="$d3/d60/classCCIncrementDecrementButtons.html" title="A class of MIDIOutputElements that read the input of two momentary push buttons to increment or decre..." alt="" coords="1293,5062,1521,5087"/>
+<area shape="poly" id="edge225_Node000249_Node000250" title=" " alt="" coords="1188,5153,1203,5146,1217,5135,1226,5122,1235,5109,1251,5098,1292,5082,1294,5087,1253,5102,1239,5113,1230,5125,1221,5138,1205,5150,1191,5157"/>
+<area shape="rect" id="Node000252" href="$d7/d2c/classBankable_1_1CCAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="1327,5304,1487,5344"/>
+<area shape="poly" id="edge227_Node000251_Node000252" title=" " alt="" coords="1179,5276,1328,5306,1327,5311,1177,5281"/>
+<area shape="rect" id="Node000253" href="$da/d5c/classBankable_1_1ManyAddresses_1_1CCAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="1327,5112,1487,5152"/>
+<area shape="poly" id="edge228_Node000251_Node000253" title=" " alt="" coords="1176,5222,1203,5210,1217,5198,1226,5186,1235,5174,1251,5162,1288,5146,1326,5137,1328,5142,1289,5151,1253,5166,1239,5177,1230,5189,1221,5202,1205,5214,1179,5227"/>
+<area shape="rect" id="Node000254" href="$d5/dd6/classBankable_1_1ManyAddresses_1_1PBAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="1328,5176,1487,5216"/>
+<area shape="poly" id="edge229_Node000251_Node000254" title=" " alt="" coords="1178,5229,1327,5206,1328,5211,1178,5234"/>
+<area shape="rect" id="Node000255" href="$d1/d38/classBankable_1_1PBAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="1328,5240,1487,5280"/>
+<area shape="poly" id="edge230_Node000251_Node000255" title=" " alt="" coords="1179,5252,1328,5256,1328,5261,1179,5258"/>
+<area shape="rect" id="Node000257" href="$da/d40/classBankable_1_1CCRotaryEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="1340,2122,1475,2147"/>
+<area shape="poly" id="edge232_Node000256_Node000257" title=" " alt="" coords="1171,2116,1340,2128,1340,2133,1171,2122"/>
+<area shape="rect" id="Node000258" href="$d4/da8/classBankable_1_1ManyAddresses_1_1CCRotaryEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="1289,2073,1525,2098"/>
+<area shape="poly" id="edge233_Node000256_Node000258" title=" " alt="" coords="1171,2099,1289,2091,1289,2096,1171,2105"/>
+<area shape="rect" id="Node000270" href="$d8/d2f/classCCAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="1333,2267,1482,2293"/>
+<area shape="poly" id="edge244_Node000269_Node000270" title=" " alt="" coords="1166,2260,1333,2272,1332,2277,1165,2266"/>
+<area shape="rect" id="Node000271" href="$d7/d70/classPBAbsoluteEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out absol..." alt="" coords="1333,2218,1481,2243"/>
+<area shape="poly" id="edge245_Node000269_Node000271" title=" " alt="" coords="1165,2244,1333,2233,1333,2238,1166,2249"/>
+<area shape="rect" id="Node000273" href="$d5/d7d/classBorrowedCCRotaryEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="1309,2681,1506,2706"/>
+<area shape="poly" id="edge247_Node000272_Node000273" title=" " alt="" coords="1159,2679,1308,2686,1308,2691,1159,2684"/>
+<area shape="rect" id="Node000274" href="$d3/d62/classCCRotaryEncoder.html" title="A class of MIDIOutputElements that read the input of a quadrature (rotary) encoder and send out relat..." alt="" coords="1340,2631,1475,2657"/>
+<area shape="poly" id="edge248_Node000272_Node000274" title=" " alt="" coords="1159,2663,1340,2647,1340,2653,1159,2669"/>
+<area shape="poly" id="edge258_Node000058_Node000067" title=" " alt="" coords="1134,1346,1174,1370,1192,1385,1206,1404,1219,1440,1228,1497,1235,1660,1232,1869,1224,2101,1217,2332,1217,2540,1220,2627,1227,2699,1239,2752,1254,2785,1267,2797,1283,2807,1280,2811,1264,2802,1250,2788,1234,2754,1222,2699,1215,2627,1212,2540,1212,2332,1219,2101,1226,1869,1229,1660,1223,1498,1214,1442,1202,1407,1188,1389,1171,1374,1131,1350"/>
+<area shape="poly" id="edge269_Node000058_Node000070" title=" " alt="" coords="1135,1346,1174,1370,1192,1385,1206,1404,1217,1448,1225,1532,1231,1798,1230,2158,1225,2564,1221,2969,1222,3328,1226,3474,1232,3591,1241,3673,1247,3699,1254,3713,1272,3729,1294,3739,1291,3744,1269,3733,1250,3716,1242,3701,1236,3674,1226,3592,1220,3474,1217,3328,1216,2969,1220,2564,1224,2158,1226,1798,1219,1532,1212,1449,1202,1406,1188,1389,1171,1374,1132,1351"/>
+<area shape="rect" id="Node000059" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="1309,1179,1505,1234"/>
+<area shape="poly" id="edge250_Node000058_Node000059" title=" " alt="" coords="1137,1310,1171,1301,1203,1288,1217,1278,1226,1267,1236,1256,1251,1244,1308,1222,1310,1227,1253,1249,1239,1259,1230,1271,1221,1282,1205,1293,1172,1306,1138,1315"/>
+<area shape="rect" id="Node000061" href="$d3/d78/classGenericIncrementDecrementSelector.html" title=" " alt="" coords="1255,1259,1559,1299"/>
+<area shape="poly" id="edge252_Node000058_Node000061" title=" " alt="" coords="1137,1309,1255,1295,1256,1300,1138,1314"/>
+<area shape="rect" id="Node000063" href="$d1/d94/classGenericIncrementSelector.html" title=" " alt="" coords="1282,1323,1533,1363"/>
+<area shape="poly" id="edge254_Node000058_Node000063" title=" " alt="" coords="1138,1325,1282,1333,1282,1338,1138,1330"/>
+<area shape="rect" id="Node000065" href="$de/d1e/classGenericManyButtonsSelector.html" title=" " alt="" coords="1282,1387,1533,1427"/>
+<area shape="poly" id="edge256_Node000058_Node000065" title=" " alt="" coords="1138,1342,1205,1359,1253,1372,1305,1384,1304,1389,1251,1377,1203,1364,1137,1347"/>
+<area shape="rect" id="Node000210" href="$d2/d1c/classGenericSwitchSelector.html" title=" " alt="" coords="1294,1451,1521,1491"/>
+<area shape="poly" id="edge259_Node000058_Node000210" title=" " alt="" coords="1138,1330,1173,1341,1206,1359,1223,1379,1230,1399,1237,1419,1254,1437,1295,1456,1293,1461,1250,1441,1233,1422,1225,1401,1218,1382,1202,1363,1171,1346,1137,1335"/>
+<area shape="rect" id="Node000212" href="$da/dbf/classGenericEncoderSelector.html" title=" " alt="" coords="1319,1515,1496,1555"/>
+<area shape="poly" id="edge261_Node000058_Node000212" title=" " alt="" coords="1138,1327,1174,1339,1206,1359,1220,1377,1228,1396,1230,1432,1233,1468,1240,1484,1254,1501,1284,1519,1319,1530,1318,1535,1282,1524,1250,1505,1235,1487,1228,1469,1225,1433,1223,1397,1216,1380,1202,1363,1172,1344,1137,1332"/>
+<area shape="rect" id="Node000214" href="$d3/d78/classGenericIncrementDecrementSelector.html" title=" " alt="" coords="1302,1579,1513,1619"/>
+<area shape="poly" id="edge263_Node000058_Node000214" title=" " alt="" coords="1138,1325,1174,1338,1206,1359,1225,1385,1232,1412,1233,1438,1230,1465,1227,1491,1228,1516,1236,1541,1254,1565,1276,1581,1303,1591,1301,1596,1274,1586,1250,1569,1231,1543,1223,1517,1222,1490,1225,1464,1228,1438,1227,1413,1220,1388,1202,1363,1172,1342,1136,1330"/>
+<area shape="rect" id="Node000216" href="$d1/d94/classGenericIncrementSelector.html" title=" " alt="" coords="1312,1643,1503,1683"/>
+<area shape="poly" id="edge265_Node000058_Node000216" title=" " alt="" coords="1138,1325,1175,1337,1206,1359,1229,1394,1237,1428,1236,1463,1230,1497,1224,1531,1223,1564,1231,1597,1254,1629,1281,1648,1313,1658,1311,1663,1278,1652,1250,1633,1227,1599,1218,1565,1219,1530,1225,1496,1231,1462,1232,1429,1224,1396,1202,1363,1172,1342,1137,1330"/>
+<area shape="rect" id="Node000218" href="$de/d1e/classGenericManyButtonsSelector.html" title=" " alt="" coords="1302,1707,1513,1747"/>
+<area shape="poly" id="edge267_Node000058_Node000218" title=" " alt="" coords="1138,1324,1175,1337,1206,1359,1222,1381,1233,1402,1242,1445,1239,1487,1230,1529,1221,1571,1218,1612,1227,1653,1238,1673,1254,1693,1276,1710,1303,1720,1301,1725,1274,1714,1250,1697,1233,1676,1222,1655,1213,1612,1216,1570,1225,1528,1234,1486,1237,1445,1228,1404,1218,1384,1202,1363,1172,1341,1137,1329"/>
+<area shape="rect" id="Node000220" href="$d2/d1c/classGenericSwitchSelector.html" title=" " alt="" coords="1323,1065,1491,1105"/>
+<area shape="poly" id="edge270_Node000058_Node000220" title=" " alt="" coords="1137,1318,1172,1308,1202,1289,1218,1269,1225,1248,1225,1204,1225,1159,1233,1137,1250,1115,1284,1094,1322,1084,1324,1089,1286,1099,1254,1119,1238,1140,1231,1160,1231,1204,1231,1249,1223,1271,1206,1293,1174,1313,1138,1324"/>
+<area shape="rect" id="Node000222" href="$d1/d54/classSelector.html" title="A Selector with an empty callback." alt="" coords="1350,1130,1465,1155"/>
+<area shape="poly" id="edge272_Node000058_Node000222" title=" " alt="" coords="1136,1317,1172,1307,1202,1289,1215,1274,1221,1260,1225,1228,1229,1196,1236,1180,1250,1165,1273,1151,1299,1142,1350,1136,1350,1141,1300,1147,1275,1155,1254,1169,1241,1183,1234,1197,1230,1229,1227,1261,1219,1277,1206,1293,1174,1312,1138,1322"/>
+<area shape="rect" id="Node000060" href="$d8/df7/classEncoderSelectorLEDs.html" title="Selector that reads from a rotary encoder. &#160;&#160;This version displays the setting using LEDs." alt="" coords="1638,1194,1837,1219"/>
+<area shape="poly" id="edge251_Node000059_Node000060" title=" " alt="" coords="1519,1204,1638,1204,1638,1209,1519,1209"/>
+<area shape="rect" id="Node000062" href="$d5/d2d/classIncrementDecrementSelectorLEDs.html" title="Selector with two buttons (one to increment, one to decrement). &#160;&#160;This version displays the setting u..." alt="" coords="1631,1259,1844,1299"/>
+<area shape="poly" id="edge253_Node000061_Node000062" title=" " alt="" coords="1573,1276,1630,1276,1630,1281,1573,1281"/>
+<area shape="rect" id="Node000064" href="$dc/df8/classIncrementSelectorLEDs.html" title="Selector with one button that increments the selection. &#160;&#160;This version displays the setting using LED..." alt="" coords="1631,1330,1844,1355"/>
+<area shape="poly" id="edge255_Node000063_Node000064" title=" " alt="" coords="1547,1340,1631,1340,1631,1345,1547,1345"/>
+<area shape="rect" id="Node000066" href="$d0/d68/classManyButtonsSelectorLEDs.html" title="Selector that reads from &#160;buttons. &#160;&#160;This version displays the setting using LEDs." alt="" coords="1621,1394,1854,1419"/>
+<area shape="poly" id="edge257_Node000065_Node000066" title=" " alt="" coords="1546,1404,1620,1404,1620,1409,1546,1409"/>
+<area shape="rect" id="Node000211" href="$df/d64/classSwitchSelectorLED.html" title="Selector that selects one of two settings, based on the state of a toggle or momentary switch...." alt="" coords="1666,1458,1809,1483"/>
+<area shape="poly" id="edge260_Node000210_Node000211" title=" " alt="" coords="1535,1468,1666,1468,1666,1473,1535,1473"/>
+<area shape="rect" id="Node000213" href="$d3/dc5/classEncoderSelector.html" title="Selector that reads from a rotary encoder." alt="" coords="1654,1522,1821,1547"/>
+<area shape="poly" id="edge262_Node000212_Node000213" title=" " alt="" coords="1510,1532,1654,1532,1654,1537,1510,1537"/>
+<area shape="rect" id="Node000215" href="$d2/deb/classIncrementDecrementSelector.html" title="Selector with two buttons (one to increment, one to decrement)." alt="" coords="1611,1586,1864,1611"/>
+<area shape="poly" id="edge264_Node000214_Node000215" title=" " alt="" coords="1526,1596,1610,1596,1610,1601,1526,1601"/>
+<area shape="rect" id="Node000217" href="$dc/d4c/classIncrementSelector.html" title="Selector with one button that increments the selection." alt="" coords="1647,1643,1828,1669"/>
+<area shape="poly" id="edge266_Node000216_Node000217" title=" " alt="" coords="1516,1658,1646,1655,1646,1660,1516,1663"/>
+<area shape="rect" id="Node000219" href="$d3/d69/classManyButtonsSelector.html" title="Selector that reads from &#160;buttons." alt="" coords="1637,1693,1838,1718"/>
+<area shape="poly" id="edge268_Node000218_Node000219" title=" " alt="" coords="1526,1716,1636,1709,1636,1715,1526,1722"/>
+<area shape="rect" id="Node000221" href="$df/def/classSwitchSelector.html" title="Selector that selects one of two settings, based on the state of a toggle or momentary switch." alt="" coords="1678,1073,1797,1098"/>
+<area shape="poly" id="edge271_Node000220_Node000221" title=" " alt="" coords="1505,1083,1678,1083,1678,1088,1505,1088"/>
+<area shape="rect" id="Node000109" href="$d8/d87/classInterfaces_1_1IValue.html" title="Abstract interface for MIDI input elements that receive and store a 7&#45;bit value." alt="" coords="1376,6743,1439,6769"/>
+<area shape="poly" id="edge283_Node000109_Node000108" title=" " alt="" coords="1452,6749,1480,6749,1510,6753,1539,6763,1564,6779,1582,6801,1590,6824,1591,6847,1590,6871,1588,6893,1589,6916,1596,6937,1613,6958,1628,6969,1646,6977,1644,6982,1626,6974,1609,6962,1591,6940,1584,6917,1582,6893,1584,6870,1586,6847,1585,6825,1577,6804,1561,6783,1537,6768,1509,6758,1479,6754,1452,6754"/>
+<area shape="poly" id="edge282_Node000109_Node000100" title=" " alt="" coords="1453,6758,1480,6758,1509,6754,1537,6745,1561,6729,1581,6702,1590,6675,1590,6647,1587,6619,1583,6590,1582,6560,1590,6530,1609,6500,1627,6483,1649,6471,1652,6476,1630,6487,1613,6503,1595,6532,1588,6561,1588,6589,1592,6618,1596,6647,1595,6676,1586,6705,1564,6733,1539,6750,1510,6759,1480,6763,1453,6764"/>
+<area shape="rect" id="Node000197" href="$dd/d7f/classInterfaces_1_1IValue14.html" title="Abstract interface for MIDI input elements that receive and store a 14&#45;bit value." alt="" coords="1007,7022,1086,7047"/>
+<area shape="poly" id="edge285_Node000197_Node000198" title=" " alt="" coords="1100,7040,1204,7057,1370,7089,1369,7094,1204,7063,1099,7045"/>
+<area shape="poly" id="edge284_Node000197_Node000196" title=" " alt="" coords="1100,7036,1209,7043,1344,7047,1472,7041,1524,7033,1561,7020,1577,7007,1585,6991,1593,6974,1609,6958,1631,6947,1654,6940,1655,6945,1633,6952,1612,6962,1597,6977,1590,6993,1581,7010,1564,7025,1525,7038,1473,7046,1344,7052,1208,7048,1099,7042"/>
+<area shape="rect" id="Node000202" href="$d2/dde/classInterfaces_1_1MCU_1_1IVPot.html" title=" " alt="" coords="1379,5747,1435,5773"/>
+<area shape="poly" id="edge287_Node000202_Node000087" title=" " alt="" coords="1449,5758,1504,5752,1534,5745,1561,5734,1576,5723,1585,5710,1594,5697,1609,5684,1653,5668,1696,5661,1697,5666,1654,5673,1612,5689,1598,5700,1589,5713,1580,5726,1564,5738,1535,5750,1505,5757,1450,5763"/>
+<area shape="poly" id="edge286_Node000202_Node000091" title=" " alt="" coords="1449,5757,1652,5757,1652,5763,1449,5763"/>
+<area shape="rect" id="Node000115" href="$dc/d25/classInterfaces_1_1MCU_1_1IVU.html" title="An abstract interface for VU meters." alt="" coords="1024,5881,1069,5906"/>
+<area shape="poly" id="edge291_Node000115_Node000189" title=" " alt="" coords="1084,5896,1204,5916,1387,5953,1386,5958,1204,5921,1083,5901"/>
+<area shape="poly" id="edge290_Node000115_Node000113" title=" " alt="" coords="1083,5893,1287,5908,1563,5933,1672,5947,1672,5952,1562,5939,1286,5913,1083,5898"/>
+<area shape="rect" id="Node000116" href="$d4/dce/classAudioVU.html" title="A VU meter that reads from an Audio stream using the Analyzer class." alt="" coords="1368,5649,1447,5674"/>
+<area shape="poly" id="edge288_Node000115_Node000116" title=" " alt="" coords="1083,5891,1112,5888,1144,5881,1175,5869,1202,5850,1217,5830,1224,5810,1224,5768,1225,5726,1233,5705,1250,5685,1277,5668,1308,5658,1339,5654,1368,5654,1368,5660,1340,5660,1309,5663,1280,5672,1254,5689,1238,5708,1231,5727,1230,5768,1229,5811,1222,5833,1206,5854,1178,5874,1146,5886,1113,5893,1084,5896"/>
+<area shape="poly" id="edge289_Node000116_Node000117" title=" " alt="" coords="1460,5647,1681,5595,1682,5601,1461,5652"/>
+<area shape="rect" id="Node000209" href="$d5/d37/classMCU_1_1LCDCounter.html" title="Counts the number of instances of the LCD class." alt="" coords="664,6001,763,6026"/>
+<area shape="poly" id="edge292_Node000209_Node000208" title=" " alt="" coords="776,6011,975,6011,975,6016,776,6016"/>
+<area shape="rect" id="Node000192" href="$df/d06/classAH_1_1LEDs.html" title="A class for collections of LEDs that can display ranges." alt="" coords="666,5658,761,5683"/>
+<area shape="rect" id="Node000110" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="967,5931,1126,5971"/>
+<area shape="poly" id="edge293_Node000192_Node000110" title=" " alt="" coords="764,5687,806,5710,826,5726,843,5745,857,5769,864,5792,864,5836,867,5877,875,5897,891,5917,908,5929,927,5938,968,5948,966,5953,925,5943,905,5934,887,5921,870,5900,862,5878,859,5836,858,5793,852,5771,839,5748,823,5730,803,5715,761,5691"/>
+<area shape="rect" id="Node000193" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title="A class for LED bars." alt="" coords="953,5606,1141,5631"/>
+<area shape="poly" id="edge300_Node000192_Node000193" title=" " alt="" coords="774,5659,964,5629,965,5634,775,5664"/>
+<area shape="rect" id="Node000111" href="$d1/d29/classMCU_1_1VULEDsDriver.html" title="Small helper to display the VU meters on an LED bar display." alt="" coords="1304,5846,1511,5871"/>
+<area shape="poly" id="edge294_Node000110_Node000111" title=" " alt="" coords="1139,5931,1203,5916,1366,5869,1368,5874,1205,5921,1140,5936"/>
+<area shape="rect" id="Node000103" href="$d6/d44/classNoteCCKPLEDBarDriver.html" title="Callback class that drives a LED dot/bar display based on a note or control change value." alt="" coords="1320,5997,1495,6037"/>
+<area shape="poly" id="edge297_Node000110_Node000103" title=" " alt="" coords="1140,5965,1320,5999,1319,6004,1139,5970"/>
+<area shape="poly" id="edge296_Node000111_Node000190" title=" " alt="" coords="1505,5871,1654,5894,1653,5899,1504,5876"/>
+<area shape="poly" id="edge295_Node000111_Node000112" title=" " alt="" coords="1525,5860,1686,5868,1864,5883,1951,5894,1951,5899,1864,5888,1686,5874,1525,5865"/>
+<area shape="poly" id="edge299_Node000103_Node000104" title=" " alt="" coords="1509,6018,1539,6029,1565,6047,1590,6084,1599,6121,1598,6158,1591,6195,1584,6231,1582,6268,1590,6304,1613,6341,1628,6355,1646,6365,1644,6369,1625,6359,1609,6344,1585,6306,1577,6268,1579,6231,1586,6194,1593,6157,1594,6122,1585,6086,1561,6051,1536,6033,1507,6023"/>
+<area shape="poly" id="edge298_Node000103_Node000102" title=" " alt="" coords="1509,6035,1563,6047,1780,6102,1958,6151,1957,6156,1778,6107,1562,6052,1507,6040"/>
+<area shape="rect" id="Node000203" href="$df/d06/classAH_1_1LEDs.html" title=" " alt="" coords="1357,5698,1457,5723"/>
+<area shape="rect" id="Node000089" href="$db/d36/classMCU_1_1VPotRingLEDsDriver.html" title=" " alt="" coords="1661,5698,1814,5723"/>
+<area shape="poly" id="edge301_Node000203_Node000089" title=" " alt="" coords="1471,5708,1661,5708,1661,5713,1471,5713"/>
+<area shape="poly" id="edge303_Node000089_Node000088" title=" " alt="" coords="1828,5697,1972,5679,1973,5684,1828,5702"/>
+<area shape="poly" id="edge302_Node000089_Node000090" title=" " alt="" coords="1828,5720,1930,5733,1929,5738,1827,5725"/>
+<area shape="rect" id="Node000161" href="$dd/de5/classAH_1_1MAX7219__Base.html" title="A base class for classes that control MAX7219 LED drivers." alt="" coords="940,6129,1153,6154"/>
+<area shape="poly" id="edge304_Node000161_Node000160" title=" " alt="" coords="1167,6140,1322,6142,1322,6147,1167,6145"/>
+<area shape="rect" id="Node000162" href="$d9/d72/classAH_1_1MAX7219SevenSegmentDisplay.html" title="A class for 8&#45;digit 7&#45;segment displays with a MAX7219 driver." alt="" coords="1292,6061,1523,6101"/>
+<area shape="poly" id="edge305_Node000161_Node000162" title=" " alt="" coords="1146,6124,1204,6115,1296,6099,1296,6104,1204,6120,1147,6129"/>
+<area shape="rect" id="Node000176" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="630,731,797,771"/>
+<area shape="rect" id="Node000175" href="$dc/d45/classControl__Surface__.html" title="This class ensures initialization, updating, and interaction between all other classes,..." alt="" coords="981,590,1113,615"/>
+<area shape="poly" id="edge306_Node000176_Node000175" title=" " alt="" coords="808,730,840,715,855,702,863,688,872,674,888,659,939,631,991,613,993,618,942,636,891,663,876,677,868,691,859,706,843,720,811,735"/>
+<area shape="rect" id="Node000186" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="599,473,828,498"/>
+<area shape="poly" id="edge307_Node000186_Node000122" title=" " alt="" coords="842,492,988,503,988,508,841,497"/>
+<area shape="rect" id="Node000170" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="293,5396,501,5436"/>
+<area shape="rect" id="Node000143" href="$d0/d9c/classStreamDebugMIDI__Output.html" title="A class for MIDI outputs sending human&#45;readable MIDI messages over a Stream." alt="" coords="617,5375,809,5401"/>
+<area shape="poly" id="edge308_Node000170_Node000143" title=" " alt="" coords="514,5403,617,5394,617,5399,514,5408"/>
+<area shape="poly" id="edge309_Node000143_Node000144" title=" " alt="" coords="823,5385,955,5385,955,5391,823,5391"/>
+<area shape="poly" id="edge310_Node000143_Node000147" title=" " alt="" coords="805,5402,843,5419,858,5432,867,5445,876,5457,891,5468,922,5482,956,5491,954,5496,920,5487,888,5473,872,5461,863,5448,854,5435,840,5424,802,5407"/>
+<area shape="poly" id="edge311_Node000143_Node000149" title=" " alt="" coords="793,5370,955,5339,956,5344,794,5375"/>
+<area shape="poly" id="edge312_Node000143_Node000151" title=" " alt="" coords="796,5401,890,5417,966,5430,965,5435,889,5423,795,5406"/>
+<area shape="rect" id="Node000171" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="353,631,440,657"/>
+<area shape="poly" id="edge314_Node000171_Node000143" title=" " alt="" coords="404,670,462,1224,503,1656,540,2105,628,3724,714,5375,709,5375,622,3724,535,2106,497,1657,456,1225,398,671"/>
+<area shape="rect" id="Node000172" href="$df/d72/classMIDI__Pipe.html" title="Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink." alt="" coords="670,631,757,657"/>
+<area shape="poly" id="edge313_Node000171_Node000172" title=" " alt="" coords="454,641,670,641,670,647,454,647"/>
+<area shape="rect" id="Node000174" href="$d0/dc3/structTrueMIDI__SinkSource.html" title="A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source." alt="" coords="634,582,793,607"/>
+<area shape="poly" id="edge315_Node000171_Node000174" title=" " alt="" coords="453,633,633,604,634,610,454,638"/>
+<area shape="poly" id="edge317_Node000174_Node000122" title=" " alt="" coords="776,576,995,520,997,525,777,581"/>
+<area shape="poly" id="edge316_Node000174_Node000175" title=" " alt="" coords="806,594,980,598,980,604,806,600"/>
+<area shape="rect" id="Node000173" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="345,582,448,607"/>
+<area shape="poly" id="edge318_Node000173_Node000172" title=" " alt="" coords="462,602,670,635,669,640,461,607"/>
+<area shape="poly" id="edge319_Node000173_Node000174" title=" " alt="" coords="462,592,634,592,634,597,462,597"/>
+<area shape="rect" id="Node000187" href="$d4/d48/structMIDIStaller.html" title="Struct that can cause a MIDI_Pipe to be stalled." alt="" coords="666,522,761,547"/>
+<area shape="poly" id="edge320_Node000187_Node000122" title=" " alt="" coords="774,527,987,511,988,516,775,533"/>
+<area shape="rect" id="Node000079" title=" " alt="" coords="1007,6850,1087,6875"/>
+<area shape="poly" id="edge321_Node000079_Node000077" title=" " alt="" coords="1101,6868,1204,6885,1305,6904,1304,6909,1204,6891,1100,6873"/>
+<area shape="poly" id="edge322_Node000079_Node000080" title=" " alt="" coords="1101,6858,1153,6865,1180,6873,1206,6886,1223,6903,1231,6922,1238,6940,1254,6957,1285,6972,1319,6982,1317,6987,1283,6977,1250,6961,1233,6943,1226,6924,1218,6906,1202,6890,1178,6878,1152,6870,1100,6864"/>
+<area shape="poly" id="edge324_Node000079_Node000083" title=" " alt="" coords="1101,6860,1322,6860,1322,6865,1101,6865"/>
+<area shape="rect" id="Node000082" href="$d4/d38/structBresenhamLine_1_1Pixel.html" title=" " alt="" coords="1326,6793,1489,6818"/>
+<area shape="poly" id="edge323_Node000079_Node000082" title=" " alt="" coords="1100,6852,1326,6815,1327,6821,1101,6857"/>
+<area shape="rect" id="Node000142" href="$db/d85/classPrintDebugMIDI__Base.html" title="A class that implements MIDI debug send functions." alt="" coords="315,5346,478,5371"/>
+<area shape="poly" id="edge325_Node000142_Node000134" title=" " alt="" coords="491,5357,515,5348,535,5332,547,5307,557,5264,571,5127,579,4931,582,4685,575,4085,560,3406,545,2727,538,2126,540,1880,548,1683,562,1545,571,1500,583,1474,604,1454,631,1436,703,1404,791,1380,888,1363,985,1357,1076,1360,1152,1375,1182,1388,1206,1403,1225,1424,1238,1444,1246,1466,1250,1488,1247,1532,1236,1577,1225,1622,1220,1668,1222,1690,1228,1712,1238,1735,1254,1757,1277,1776,1305,1789,1303,1794,1274,1781,1250,1760,1233,1737,1223,1714,1217,1691,1215,1668,1220,1621,1231,1576,1242,1531,1245,1488,1241,1467,1234,1447,1221,1427,1202,1407,1180,1392,1150,1380,1075,1365,985,1362,888,1369,792,1385,705,1409,634,1441,607,1459,588,1478,576,1502,567,1545,553,1683,546,1880,543,2126,550,2727,566,3406,581,4085,587,4685,584,4931,576,5128,562,5265,552,5309,539,5335,518,5352,493,5362"/>
+<area shape="poly" id="edge326_Node000142_Node000143" title=" " alt="" coords="492,5365,617,5376,617,5382,492,5370"/>
+<area shape="rect" id="Node000054" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="660,1489,767,1514"/>
+<area shape="poly" id="edge327_Node000054_Node000053" title=" " alt="" coords="747,1519,812,1557,890,1595,964,1618,962,1623,888,1600,809,1562,744,1524"/>
+<area shape="poly" id="edge328_Node000054_Node000055" title=" " alt="" coords="779,1486,950,1453,951,1458,780,1491"/>
+<area shape="poly" id="edge329_Node000054_Node000056" title=" " alt="" coords="780,1511,951,1544,950,1550,779,1517"/>
+<area shape="poly" id="edge330_Node000054_Node000057" title=" " alt="" coords="780,1499,939,1499,939,1504,780,1504"/>
+<area shape="poly" id="edge331_Node000054_Node000058" title=" " alt="" coords="748,1480,888,1403,1006,1341,1008,1345,891,1408,751,1484"/>
+</map>

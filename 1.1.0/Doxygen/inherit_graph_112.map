@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$de/d07/structSimpleNoteCCValueCallback.html" title=" " alt="" coords="5,107,200,133"/>
+<area shape="rect" id="node2" href="$d0/d65/classNoteCCFastLED.html" title="Callback for Note or CC range or value input that displays the value to a FastLED strip." alt="" coords="248,5,468,32"/>
+<area shape="rect" id="node3" href="$d5/ddd/classNoteCCLED.html" title=" " alt="" coords="267,56,449,83"/>
+<area shape="rect" id="node4" href="$d5/ddd/classNoteCCLED.html" title=" " alt="" coords="295,107,421,133"/>
+<area shape="rect" id="node5" href="$d5/ddd/classNoteCCLED.html" title=" " alt="" coords="269,157,447,184"/>
+<area shape="rect" id="node6" href="$de/d34/classNoteCCLEDBarCallback.html" title="Callback class that drives a LED dot/bar display based on a note or control change value." alt="" coords="275,209,441,250"/>
+</map>

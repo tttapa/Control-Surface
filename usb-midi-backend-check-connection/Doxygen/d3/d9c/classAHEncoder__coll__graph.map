@@ -1,0 +1,12 @@
+<map id="AHEncoder" name="AHEncoder">
+<area shape="rect" id="Node000001" title="Class for reading quadrature encoders, heavily influenced by http://www.pjrc.com/teensy/td_libs_Encod..." alt="" coords="183,521,344,887"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="346,664,364,678,371,704,368,721,360,734,356,731,363,720,365,704,359,681,342,669"/>
+<area shape="rect" id="Node000002" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="5,133,145,459"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,447,178,512,173,515,143,449"/>
+<area shape="rect" id="Node000003" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="170,143,357,449"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="266,449,266,505,261,505,261,449"/>
+<area shape="rect" id="Node000004" href="$dc/d9d/structDirectPinRead.html" title=" " alt="" coords="210,5,317,71"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="266,71,266,127,261,127,261,71"/>
+<area shape="rect" id="Node000005" href="$de/d62/structAtomicPosition.html" title=" " alt="" coords="381,173,567,419"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="413,420,354,534,349,532,408,418"/>
+</map>

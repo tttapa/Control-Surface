@@ -1,0 +1,15 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="51,46,150,71"/>
+<area shape="rect" id="Node000001" href="$db/dbd/classBank.html" title=" " alt="" coords="244,5,428,45"/>
+<area shape="poly" id="edge359_Node000000_Node000001" title=" " alt="" coords="163,47,243,36,244,41,164,52"/>
+<area shape="rect" id="Node000004" href="$db/dbd/classBank.html" title=" " alt="" coords="289,70,383,95"/>
+<area shape="poly" id="edge361_Node000000_Node000004" title=" " alt="" coords="164,62,289,75,288,81,163,68"/>
+<area shape="rect" id="Node000005" href="$db/dbd/classBank.html" title="A class that groups Bankable MIDI Output Elements and Bankable MIDI Input Elements,..." alt="" coords="258,119,414,145"/>
+<area shape="poly" id="edge362_Node000000_Node000005" title=" " alt="" coords="164,71,197,82,245,106,280,117,279,122,243,110,195,86,163,76"/>
+<area shape="rect" id="Node000002" href="$da/db8/classTransposer.html" title="Class for transposing the address of NoteButton and other MIDI elements." alt="" coords="476,5,697,45"/>
+<area shape="poly" id="edge360_Node000001_Node000002" title=" " alt="" coords="442,23,476,23,476,28,442,28"/>
+<area shape="rect" id="Node000003" href="$de/de7/classSelectable.html" title=" " alt="" coords="5,95,196,121"/>
+<area shape="poly" id="edge363_Node000003_Node000001" title=" " alt="" coords="173,89,195,82,219,69,243,56,276,43,278,48,245,61,221,74,197,86,175,94"/>
+<area shape="poly" id="edge364_Node000003_Node000004" title=" " alt="" coords="210,94,288,85,289,90,210,99"/>
+<area shape="poly" id="edge365_Node000003_Node000005" title=" " alt="" coords="210,116,258,121,257,127,210,122"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="NoteCCFastLED&lt; ColorMapper &gt;" name="NoteCCFastLED&lt; ColorMapper &gt;">
+<area shape="rect" id="node1" title="Callback for Note or CC range or value input that displays the value to a FastLED strip." alt="" coords="5,175,225,340"/>
+<area shape="rect" id="node2" href="$de/d07/structSimpleNoteCCValueCallback.html" title=" " alt="" coords="9,5,222,127"/>
+</map>

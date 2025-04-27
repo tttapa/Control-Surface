@@ -1,0 +1,11 @@
+<map id="ManyButtonsSelector&lt; N &gt;" name="ManyButtonsSelector&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector that reads from &#160;buttons." alt="" coords="113,1685,294,1763"/>
+<area shape="rect" id="node2" href="$de/d1e/classGenericManyButtonsSelector.html" title=" " alt="" coords="90,1529,317,1636"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="116,1300,291,1480"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,1050,124,1142"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="149,955,258,1237"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="133,5,316,112"/>
+<area shape="rect" id="node8" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="220,161,427,444"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="219,521,446,892"/>
+<area shape="rect" id="node9" href="$d3/d8b/structEmptySelectorCallback.html" title="A callback for the GenericSelector class that does nothing." alt="" coords="283,1043,441,1149"/>
+</map>

@@ -1,0 +1,27 @@
+<map id="PBPotentiometer" name="PBPotentiometer">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="640,1909,789,1975"/>
+<area shape="rect" id="Node000002" href="$d5/d8e/classMIDIFilteredAnalog.html" title=" " alt="" coords="615,1580,815,1860"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="717,1874,717,1909,712,1909,712,1874"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="291,1202,434,1327"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="393,1339,433,1427,459,1473,489,1516,550,1584,616,1643,613,1647,546,1587,485,1519,455,1476,429,1430,388,1342"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="231,585,425,951"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="344,964,361,1201,356,1202,339,965"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="150,362,214,510,248,584,243,586,210,512,145,364"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="331,511,331,568,325,568,325,511"/>
+<area shape="rect" id="Node000007" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="499,1195,667,1335"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="592,1334,607,1440,620,1498,636,1555,639,1564,634,1565,631,1557,615,1499,602,1441,586,1335"/>
+<area shape="rect" id="Node000008" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="517,573,728,963"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="609,976,591,1195,586,1194,603,976"/>
+<area shape="rect" id="Node000009" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="455,155,571,361"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="537,360,577,549,579,556,574,558,572,550,532,361"/>
+<area shape="rect" id="Node000010" href="$d9/d74/classAH_1_1EMA.html" title=" " alt="" coords="595,131,789,385"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="677,386,654,557,649,557,672,385"/>
+<area shape="rect" id="Node000011" href="$da/df9/classAH_1_1Hysteresis.html" title=" " alt="" coords="813,136,1070,380"/>
+<area shape="poly" id="edge10_Node000008_Node000011" title=" " alt="" coords="879,382,804,512,740,609,735,606,799,509,875,379"/>
+<area shape="rect" id="Node000012" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="691,1012,872,1517"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="747,1518,740,1564,735,1563,742,1517"/>
+<area shape="rect" id="Node000013" href="$de/d46/classPitchBendSender.html" title=" " alt="" coords="896,1222,1067,1307"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="972,1308,939,1407,915,1464,886,1519,858,1561,827,1602,823,1599,854,1558,882,1516,910,1462,934,1405,967,1307"/>
+</map>

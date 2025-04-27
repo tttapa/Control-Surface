@@ -1,0 +1,13 @@
+<map id="BufferedBLEMIDIParser.hpp" name="BufferedBLEMIDIParser.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="225,5,423,31"/>
+<area shape="rect" id="Node000002" href="$d0/d3e/ArduinoBLEBackend_8hpp.html" title=" " alt="" coords="5,79,184,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="275,37,133,81,131,76,273,32"/>
+<area shape="rect" id="Node000003" href="$d7/d71/BTstackBackgroundBackend_8hpp.html" title=" " alt="" coords="208,79,440,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="327,44,327,79,321,79,321,44"/>
+<area shape="rect" id="Node000004" href="$d8/d26/ESP32Backend_8hpp.html" title=" " alt="" coords="465,79,610,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="372,32,504,76,502,81,370,37"/>
+<area shape="rect" id="Node000005" href="$df/daf/ESP32BluedroidBackend_8hpp.html" title=" " alt="" coords="321,152,527,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="509,114,444,154,441,150,506,109"/>
+<area shape="rect" id="Node000006" href="$d7/da6/ESP32NimBLEBackend_8hpp.html" title=" " alt="" coords="551,152,747,177"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="569,109,632,150,630,154,566,114"/>
+</map>

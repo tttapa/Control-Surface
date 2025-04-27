@@ -1,0 +1,15 @@
+<map id="NoteValueFastLED&lt; ColorMapper &gt;" name="NoteValueFastLED&lt; ColorMapper &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="500,1691,753,1797"/>
+<area shape="rect" id="node2" href="$d5/d80/classGenericNoteCCRange.html" title=" " alt="" coords="527,1505,726,1641"/>
+<area shape="rect" id="node3" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="474,1122,779,1390"/>
+<area shape="rect" id="node4" href="$db/d4b/classMIDIInputElementNote.html" title="Class for objects that listen for incoming MIDI Note events." alt="" coords="161,769,367,935"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1210,205,1302"/>
+<area shape="rect" id="node8" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="229,1056,440,1456"/>
+<area shape="rect" id="node5" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="177,453,351,663"/>
+<area shape="rect" id="node6" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="169,5,359,391"/>
+<area shape="rect" id="node9" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="392,791,528,913"/>
+<area shape="rect" id="node10" href="$d8/d80/classNoteCCFastLEDCallback.html" title=" " alt="" coords="552,740,755,964"/>
+<area shape="rect" id="node11" href="$de/d07/structSimpleNoteCCValueCallback.html" title="A callback for NoteCCRange with an action that can be implemented by the user." alt="" coords="455,497,689,619"/>
+<area shape="rect" id="node12" href="$d8/dc6/structDefaultColorMapper.html" title="The default mapping from a 7&#45;bit MIDI value to an RGB color." alt="" coords="713,519,866,597"/>
+<area shape="rect" id="node13" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="779,725,994,979"/>
+</map>

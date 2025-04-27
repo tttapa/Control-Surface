@@ -1,0 +1,15 @@
+<map id="CCButton" name="CCButton">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the input of a momentary push button or switch,..." alt="" coords="541,1719,649,1796"/>
+<area shape="rect" id="node2" href="$d9/df9/classBankable_1_1MIDIButton.html" title=" " alt="" coords="492,1519,699,1669"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="259,1239,409,1361"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="232,703,436,1074"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,373,228,479"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="252,219,475,633"/>
+<area shape="rect" id="node7" href="$de/d0d/classAH_1_1Button.html" title="A class for reading and debouncing buttons and switches." alt="" coords="434,1144,618,1456"/>
+<area shape="rect" id="node8" href="$df/de5/classBankable_1_1SingleAddress.html" title=" " alt="" coords="643,1247,804,1353"/>
+<area shape="rect" id="node9" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="576,835,809,942"/>
+<area shape="rect" id="node10" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title=" " alt="" coords="557,351,829,501"/>
+<area shape="rect" id="node11" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="611,5,774,156"/>
+<area shape="rect" id="node12" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="834,696,1023,1081"/>
+<area shape="rect" id="node13" href="$d5/db5/classDigitalCCSender.html" title="Class that sends MIDI control change messages signifying either &quot;on&quot; or &quot;off&quot;." alt="" coords="828,1210,981,1390"/>
+</map>

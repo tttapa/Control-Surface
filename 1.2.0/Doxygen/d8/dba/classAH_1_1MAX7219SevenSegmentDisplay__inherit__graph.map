@@ -1,0 +1,4 @@
+<map id="MAX7219SevenSegmentDisplay" name="MAX7219SevenSegmentDisplay">
+<area shape="rect" id="node1" title="A class for 8&#45;digit 7&#45;segment displays with a MAX7219 driver." alt="" coords="5,380,261,604"/>
+<area shape="rect" id="node2" href="$dd/de5/classAH_1_1MAX7219__Base.html" title="A base class for classes that control MAX7219 LED drivers." alt="" coords="59,5,208,332"/>
+</map>

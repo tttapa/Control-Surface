@@ -1,0 +1,12 @@
+<map id="SevenSegmentDisplay&lt; LENGTH &gt;" name="SevenSegmentDisplay&lt; LENGTH &gt;">
+<area shape="rect" id="node1" title="Class that receives and saves the text of a Mackie Control Universal 7&#45;segment display like the assig..." alt="" coords="448,1519,643,1772"/>
+<area shape="rect" id="node2" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="194,1269,481,1405"/>
+<area shape="rect" id="node3" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="121,945,319,1155"/>
+<area shape="rect" id="node4" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="120,527,320,839"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,123,205,303"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="229,5,440,420"/>
+<area shape="rect" id="node7" href="$d1/d7a/structTwoByteRangeMIDIMatcher.html" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure (but n..." alt="" coords="344,1004,571,1096"/>
+<area shape="rect" id="node8" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="363,483,552,883"/>
+<area shape="rect" id="node9" title=" " alt="" coords="505,1298,585,1375"/>
+<area shape="rect" id="node10" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="609,1217,785,1456"/>
+</map>

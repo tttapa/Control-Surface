@@ -1,0 +1,13 @@
+<map id="IValue" name="IValue">
+<area shape="rect" id="Node000001" title="Abstract interface for MIDI input elements that receive and store a 7&#45;bit value." alt="" coords="353,5,456,111"/>
+<area shape="rect" id="Node000002" href="$d5/dcd/classBankable_1_1NoteCCKPValue.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="212,159,395,359"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="375,124,356,160,352,157,370,122"/>
+<area shape="rect" id="Node000006" href="$d6/d45/classNoteCCKPValue.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="419,186,595,331"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="440,122,473,185,468,187,435,124"/>
+<area shape="rect" id="Node000003" href="$d5/d3a/classBankable_1_1NoteCCKPLED.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="5,407,188,687"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="226,372,190,420,186,417,222,368"/>
+<area shape="rect" id="Node000004" href="$d2/d0a/classBankable_1_1NoteCCKPLEDBar.html" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="212,457,395,637"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="306,373,306,457,301,457,301,373"/>
+<area shape="rect" id="Node000005" href="$df/d8a/classBankable_1_1NoteCCKPLEDPWM.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="419,437,606,657"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="386,369,435,435,431,438,382,372"/>
+</map>

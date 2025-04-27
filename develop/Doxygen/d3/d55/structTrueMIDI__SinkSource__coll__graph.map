@@ -1,0 +1,9 @@
+<map id="TrueMIDI_SinkSource" name="TrueMIDI_SinkSource">
+<area shape="rect" id="node1" title="A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source." alt="" coords="432,1541,591,1619"/>
+<area shape="rect" id="node2" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="5,1077,247,1448"/>
+<area shape="rect" id="node3" href="$df/d72/classMIDI__Pipe.html" title="Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink." alt="" coords="379,204,622,971"/>
+<area shape="rect" id="node4" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="271,1077,512,1448"/>
+<area shape="rect" id="node5" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="536,1033,761,1492"/>
+<area shape="rect" id="node7" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="785,1033,1011,1492"/>
+<area shape="rect" id="node6" href="$d4/d48/structMIDIStaller.html" title="Struct that can cause a MIDI_Pipe to be stalled." alt="" coords="434,5,567,127"/>
+</map>
