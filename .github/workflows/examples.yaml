@@ -5,7 +5,7 @@ on: push
 jobs:
   compile-examples:
     name: Examples
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         board: [AVR, Nano 33 BLE, Pi Pico, Pi Pico W, Nano 33 IoT, UNO R4, ESP32, ESP32-S3, ESP8266, AVR USB, Mega, Leonardo, Due, Nano Every, Teensy 3.x, Teensy 4.1]
