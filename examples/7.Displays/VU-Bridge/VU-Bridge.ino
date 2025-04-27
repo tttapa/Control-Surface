@@ -1,47 +1,49 @@
 /**
  * @brief   This is an example on how to use an OLED display to display the 
  *          VU meters and mute/solo states of the eight first tracks, by using 
- *          the Arduino as a Mackie Control Universal. This is an example 
- *          modified to work with the ESP32 only, using MIDI over Bluetooth Low 
- *          Energy.  
+ *          the Arduino as a Mackie Control Universal.  
  * 
- * @boards  ESP32
+ * @boards  Teensy 3.x, Teensy 4.0
+ *
+ * If you want to display more than eight tracks, have a look at the 
+ * @ref VU-Bridge-Dual-Display.ino example, that uses MCU Extenders to display 
+ * up to 32 tracks.
  * 
- * Connections
- * -----------
+ * The OLED display uses a RAM frame buffer of 1 KiB (128×64 pixels / 8 pixels
+ * per byte). This is a significant amount for AVR boards like the Arduino UNO,
+ * Nano, Leonardo, etc. Keep in mind that you might run out of memory, and that
+ * you'll need a more powerful board.
  * 
+ * ### Connections
  * This example drives two SSD1306 OLED displays over SPI
  *  - SCK:  SSD1306 D0
  *  - MOSI: SSD1306 D1
- *  - 15:   SSD1306 DC
- *  - 2:    SSD1306 CS
+ *  - 19:   SSD1306 DC
+ *  - 18:   SSD1306 CS
  * 
  * Add a capacitor between the reset pin of the display and ground, and a 
  * resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ 
  * work fine.  
  * You do need some way to reset the display, without it, it won't work.  
- * Alternatively, you could use an IO pin from the ESP32 to reset the 
+ * Alternatively, you could use an IO pin from the Arduino to reset the 
  * display, but this just "wastes" a pin.
  * 
- * Behavior
- * --------
+ * @note    Don't forget that most OLED displays are 3.3V only, so connecting 
+ *          a display to a 5V Arduino directly will destroy it!
+ * 
+ * ### Behavior
+ * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
  * 
  * The first display should now display the level meters and mute/solo states
  * of the first 8 tracks.
- * 
- * Mapping
- * -------
- * 
- * Map "Control Surface" as a Mackie Control Universal unit in your DAW.
  * 
  * @note    There seem to be some differences in the way some applications 
  *          handle VU meters: some expect the hardware to decay automatically,
  *          some don't.  
  *          If you notice that the meters behave strangely, try both decay 
- *          options of the MCU::VU class, or try a different decay time.
+ *          options of the MCU::VUDecay class, or try a different decay time.
  * 
- * Demo
- * ----
+ * ### Demo
  * 
  * @htmlonly
  * <iframe width="560" height="315"
@@ -54,14 +56,12 @@
 #include <Control_Surface.h> // Include the Control Surface library
 // Include the display interface you'd like to use
 #include <Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp>
-// Include the BLE MIDI interface
-#include <MIDI_Interfaces/BluetoothMIDI_Interface.hpp>
 
 // ----------------------------- MIDI Interface ----------------------------- //
 // ========================================================================== //
 
 // Instantiate a MIDI interface to use for the Control Surface.
-BluetoothMIDI_Interface midi;
+USBMIDI_Interface midi;
 
 // ----------------------------- Display setup ------------------------------ //
 // ========================================================================== //
@@ -69,9 +69,9 @@ BluetoothMIDI_Interface midi;
 constexpr uint8_t SCREEN_WIDTH = 128;
 constexpr uint8_t SCREEN_HEIGHT = 64;
 
-constexpr int8_t OLED_DC = 15;    // Data/Command pin of the display
+constexpr int8_t OLED_DC = 19;    // Data/Command pin of the display
 constexpr int8_t OLED_reset = -1; // Use the external RC circuit for reset
-constexpr int8_t OLED_CS = 2;     // Chip Select pin of the display
+constexpr int8_t OLED_CS = 18;    // Chip Select pin of the display
 
 constexpr uint32_t SPI_Frequency = SPI_MAX_SPEED;
 
@@ -107,7 +107,7 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
 // -------------------------- MIDI Input Elements --------------------------- //
 // ========================================================================== //
 
-MIDINote mute[8] = {
+NoteValue mute[8] = {
   { MCU::MUTE_1 }, // The mute status of the first track
   { MCU::MUTE_2 },
   { MCU::MUTE_3 },
@@ -118,7 +118,7 @@ MIDINote mute[8] = {
   { MCU::MUTE_8 },
 };
 
-MIDINote solo[8] = {
+NoteValue solo[8] = {
   { MCU::SOLO_1 }, // The solo status of the first track
   { MCU::SOLO_2 },
   { MCU::SOLO_3 },
@@ -129,14 +129,13 @@ MIDINote solo[8] = {
   { MCU::SOLO_8 },
 };
 
-const auto decay = MCU::VU::NO_DECAY;
-// Try this option if your DAW doesn't decay the VU meters automatically
-// const auto decay = 60;
+// const auto decay = MCU::VUDecay::Hold;
+const auto decay = MCU::VUDecay::Default;
 
 // VU meters
 MCU::VU VUMeters[8] = {
-  { 1, decay }, // The VU meter for the first track, decay time as specified ↑
-  { 2, decay },
+  { 1, decay }, // The VU meter for the first track,
+  { 2, decay }, // second track, etc.
   { 3, decay },
   { 4, decay },
   { 5, decay },
@@ -148,8 +147,8 @@ MCU::VU VUMeters[8] = {
 // ---------------------------- Display Elements ---------------------------- //
 // ========================================================================== //
 
-MCU::VUDisplay vuDisp[8] = {
-  // Draw the first VU meter to the display, at position (2, 50),
+MCU::VUDisplay<> vuDisp[8] = {
+  // Draw the first VU meter to the display, at position (2, 48),
   // (12) pixels wide, blocks of (3) pixels high, a spacing between 
   // blocks of (1) pixel, and draw in white.
   { display, VUMeters[0], { 2 + 16 * 0, 50 }, 12, 3, 1, WHITE },
@@ -162,7 +161,7 @@ MCU::VUDisplay vuDisp[8] = {
   { display, VUMeters[7], { 2 + 16 * 7, 50 }, 12, 3, 1, WHITE },
 };
 
-NoteBitmapDisplay muteDisp[8] = {
+BitmapDisplay<> muteDisp[8] = {
   // Draw the first mute indicator to the display, at position (4, 54),
   // using bitmap icon mute_7 with a white foreground color. 
   { display, mute[0], XBM::mute_7, { 4 + 16 * 0, 54 }, WHITE },
@@ -175,7 +174,7 @@ NoteBitmapDisplay muteDisp[8] = {
   { display, mute[7], XBM::mute_7, { 4 + 16 * 7, 54 }, WHITE },
 };
 
-NoteBitmapDisplay soloDisp[8] = {
+BitmapDisplay<> soloDisp[8] = {
   // Draw the first solo indicator to the display, at position (4, 54),
   // using bitmap icon solo_7 with a white foreground color.
   { display, solo[0], XBM::solo_7, { 4 + 16 * 0, 54 }, WHITE },

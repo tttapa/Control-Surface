@@ -2,9 +2,11 @@
  * @brief   This is an example on how to use multiple displays to display the 
  *          VU meters of many tracks, by using the Arduino as a Mackie Control
  *          Universal with extenders.  
+ *
+ * @boards  Teensy 3.x, Teensy 4.0
  * 
- * This example is currenty only supported using MIDI over USB on Teensy boards,
- * due to limitations of the MIDIUSB library.
+ * This example is currenty only supported on boards that support multiple
+ * virtual MIDI USB cables (e.g. Teensy).
  * 
  * ### Connections
  * This example drives two SSD1306 OLED displays over SPI
@@ -38,7 +40,7 @@
  *          handle VU meters: some expect the hardware to decay automatically,
  *          some don't.  
  *          If you notice that the meters behave strangely, try both decay 
- *          options of the MCU::VU class, or try a different decay time.
+ *          options of the MCU::VUDecay class, or try a different decay time.
  * 
  * Written by PieterP, 09-02-2019  
  * https://github.com/tttapa/Control-Surface
@@ -103,79 +105,77 @@ class MySSD1306_DisplayInterface : public SSD1306_DisplayInterface {
 // -------------------------- MIDI Input Elements --------------------------- //
 // ========================================================================== //
 
-MIDINote mute[8] = {   // Main unit uses cable number 0x0
-  {{ MCU::MUTE_1, CHANNEL_1, 0x0 }}, // The mute status of the first track
-  {{ MCU::MUTE_2, CHANNEL_1, 0x0 }},
-  {{ MCU::MUTE_3, CHANNEL_1, 0x0 }},
-  {{ MCU::MUTE_4, CHANNEL_1, 0x0 }},
-  {{ MCU::MUTE_5, CHANNEL_1, 0x0 }},
-  {{ MCU::MUTE_6, CHANNEL_1, 0x0 }},
-  {{ MCU::MUTE_7, CHANNEL_1, 0x0 }},
-  {{ MCU::MUTE_8, CHANNEL_1, 0x0 }},
+NoteValue mute[8] = {   // Main unit uses cable number 0x0
+  {{ MCU::MUTE_1, Channel_1, Cable_1 }}, // The mute status of the first track
+  {{ MCU::MUTE_2, Channel_1, Cable_1 }},
+  {{ MCU::MUTE_3, Channel_1, Cable_1 }},
+  {{ MCU::MUTE_4, Channel_1, Cable_1 }},
+  {{ MCU::MUTE_5, Channel_1, Cable_1 }},
+  {{ MCU::MUTE_6, Channel_1, Cable_1 }},
+  {{ MCU::MUTE_7, Channel_1, Cable_1 }},
+  {{ MCU::MUTE_8, Channel_1, Cable_1 }},
 };
-MIDINote muteXT[8] = {   // First extender uses cable number 0x1
-  {{ MCU::MUTE_1, CHANNEL_1, 0x1 }}, // The mute status of the first track
-  {{ MCU::MUTE_2, CHANNEL_1, 0x1 }},
-  {{ MCU::MUTE_3, CHANNEL_1, 0x1 }},
-  {{ MCU::MUTE_4, CHANNEL_1, 0x1 }},
-  {{ MCU::MUTE_5, CHANNEL_1, 0x1 }},
-  {{ MCU::MUTE_6, CHANNEL_1, 0x1 }},
-  {{ MCU::MUTE_7, CHANNEL_1, 0x1 }},
-  {{ MCU::MUTE_8, CHANNEL_1, 0x1 }},
-};
-
-MIDINote solo[8] = {
-  {{ MCU::SOLO_1, CHANNEL_1, 0x0 }}, // The solo status of the first track
-  {{ MCU::SOLO_2, CHANNEL_1, 0x0 }},
-  {{ MCU::SOLO_3, CHANNEL_1, 0x0 }},
-  {{ MCU::SOLO_4, CHANNEL_1, 0x0 }},
-  {{ MCU::SOLO_5, CHANNEL_1, 0x0 }},
-  {{ MCU::SOLO_6, CHANNEL_1, 0x0 }},
-  {{ MCU::SOLO_7, CHANNEL_1, 0x0 }},
-  {{ MCU::SOLO_8, CHANNEL_1, 0x0 }},
-};
-MIDINote soloXT[8] = {
-  {{ MCU::SOLO_1, CHANNEL_1, 0x1 }}, // The solo status of the first track
-  {{ MCU::SOLO_2, CHANNEL_1, 0x1 }},
-  {{ MCU::SOLO_3, CHANNEL_1, 0x1 }},
-  {{ MCU::SOLO_4, CHANNEL_1, 0x1 }},
-  {{ MCU::SOLO_5, CHANNEL_1, 0x1 }},
-  {{ MCU::SOLO_6, CHANNEL_1, 0x1 }},
-  {{ MCU::SOLO_7, CHANNEL_1, 0x1 }},
-  {{ MCU::SOLO_8, CHANNEL_1, 0x1 }},
+NoteValue muteXT[8] = {   // First extender uses cable number 0x1
+  {{ MCU::MUTE_1, Channel_1, Cable_2 }}, // The mute status of the first track
+  {{ MCU::MUTE_2, Channel_1, Cable_2 }},
+  {{ MCU::MUTE_3, Channel_1, Cable_2 }},
+  {{ MCU::MUTE_4, Channel_1, Cable_2 }},
+  {{ MCU::MUTE_5, Channel_1, Cable_2 }},
+  {{ MCU::MUTE_6, Channel_1, Cable_2 }},
+  {{ MCU::MUTE_7, Channel_1, Cable_2 }},
+  {{ MCU::MUTE_8, Channel_1, Cable_2 }},
 };
 
-// const auto decay = MCU::VU::NO_DECAY;
-const auto decay = 60;
+NoteValue solo[8] = {
+  {{ MCU::SOLO_1, Channel_1, Cable_1 }}, // The solo status of the first track
+  {{ MCU::SOLO_2, Channel_1, Cable_1 }},
+  {{ MCU::SOLO_3, Channel_1, Cable_1 }},
+  {{ MCU::SOLO_4, Channel_1, Cable_1 }},
+  {{ MCU::SOLO_5, Channel_1, Cable_1 }},
+  {{ MCU::SOLO_6, Channel_1, Cable_1 }},
+  {{ MCU::SOLO_7, Channel_1, Cable_1 }},
+  {{ MCU::SOLO_8, Channel_1, Cable_1 }},
+};
+NoteValue soloXT[8] = {
+  {{ MCU::SOLO_1, Channel_1, Cable_2 }}, // The solo status of the first track on the extender
+  {{ MCU::SOLO_2, Channel_1, Cable_2 }},
+  {{ MCU::SOLO_3, Channel_1, Cable_2 }},
+  {{ MCU::SOLO_4, Channel_1, Cable_2 }},
+  {{ MCU::SOLO_5, Channel_1, Cable_2 }},
+  {{ MCU::SOLO_6, Channel_1, Cable_2 }},
+  {{ MCU::SOLO_7, Channel_1, Cable_2 }},
+  {{ MCU::SOLO_8, Channel_1, Cable_2 }},
+};
+
+// const auto decay = MCU::VUDecay::Hold;
+const auto decay = MCU::VUDecay::Default;
 
 // VU meters
 MCU::VU VUMeters[8] = {
-  // The VU meter for the first track, don't decay
-  { {1, CHANNEL_1, 0x0}, decay }, 
-  { {2, CHANNEL_1, 0x0}, decay },
-  { {3, CHANNEL_1, 0x0}, decay },
-  { {4, CHANNEL_1, 0x0}, decay },
-  { {5, CHANNEL_1, 0x0}, decay },
-  { {6, CHANNEL_1, 0x0}, decay },
-  { {7, CHANNEL_1, 0x0}, decay },
-  { {8, CHANNEL_1, 0x0}, decay },
+  { 1, {Channel_1, Cable_1}, decay }, // The VU meter for the first track,
+  { 2, {Channel_1, Cable_1}, decay }, // second track, etc.
+  { 3, {Channel_1, Cable_1}, decay },
+  { 4, {Channel_1, Cable_1}, decay },
+  { 5, {Channel_1, Cable_1}, decay },
+  { 6, {Channel_1, Cable_1}, decay },
+  { 7, {Channel_1, Cable_1}, decay },
+  { 8, {Channel_1, Cable_1}, decay },
 };
 MCU::VU VUMetersXT[8] = {
-  // The VU meter for the first track, don't decay
-  { {1, CHANNEL_1, 0x1}, decay }, 
-  { {2, CHANNEL_1, 0x1}, decay },
-  { {3, CHANNEL_1, 0x1}, decay },
-  { {4, CHANNEL_1, 0x1}, decay },
-  { {5, CHANNEL_1, 0x1}, decay },
-  { {6, CHANNEL_1, 0x1}, decay },
-  { {7, CHANNEL_1, 0x1}, decay },
-  { {8, CHANNEL_1, 0x1}, decay },
+  { 1, {Channel_1, Cable_2}, decay }, // The VU meter for the first track on the extender,
+  { 2, {Channel_1, Cable_2}, decay }, // second track, etc.
+  { 3, {Channel_1, Cable_2}, decay },
+  { 4, {Channel_1, Cable_2}, decay },
+  { 5, {Channel_1, Cable_2}, decay },
+  { 6, {Channel_1, Cable_2}, decay },
+  { 7, {Channel_1, Cable_2}, decay },
+  { 8, {Channel_1, Cable_2}, decay },
 };
 
 // ---------------------------- Display Elements ---------------------------- //
 // ========================================================================== //
 
-MCU::VUDisplay vuDisp[8] = {
+MCU::VUDisplay<> vuDisp[8] = {
   // Draw the first VU meter to the display, at position (2, 50),
   // (12) pixels wide, blocks of (3) pixels high, a spacing between
   // blocks of (1) pixel, and draw in white.
@@ -188,7 +188,7 @@ MCU::VUDisplay vuDisp[8] = {
   { displayA, VUMeters[6], { 2 + 16 * 6, 50 }, 12, 3, 1, WHITE },
   { displayA, VUMeters[7], { 2 + 16 * 7, 50 }, 12, 3, 1, WHITE },
 };
-MCU::VUDisplay vuDispXT[8] = {
+MCU::VUDisplay<> vuDispXT[8] = {
   { displayB, VUMetersXT[0], { 2 + 16 * 0, 50 }, 12, 3, 1, WHITE },
   { displayB, VUMetersXT[1], { 2 + 16 * 1, 50 }, 12, 3, 1, WHITE },
   { displayB, VUMetersXT[2], { 2 + 16 * 2, 50 }, 12, 3, 1, WHITE },
@@ -199,7 +199,7 @@ MCU::VUDisplay vuDispXT[8] = {
   { displayB, VUMetersXT[7], { 2 + 16 * 7, 50 }, 12, 3, 1, WHITE },
 };
 
-NoteBitmapDisplay muteDisp[8] = {
+BitmapDisplay<> muteDisp[8] = {
   // Draw the first mute indicator to the display, at position (4, 54),
   // using bitmap icon mute_7 with a white foreground color.
   { displayA, mute[0], XBM::mute_7, { 4 + 16 * 0, 54 }, WHITE },
@@ -211,7 +211,7 @@ NoteBitmapDisplay muteDisp[8] = {
   { displayA, mute[6], XBM::mute_7, { 4 + 16 * 6, 54 }, WHITE },
   { displayA, mute[7], XBM::mute_7, { 4 + 16 * 7, 54 }, WHITE },
 };
-NoteBitmapDisplay muteDispXT[8] = {
+BitmapDisplay<> muteDispXT[8] = {
   { displayB, muteXT[0], XBM::mute_7, { 4 + 16 * 0, 54 }, WHITE },
   { displayB, muteXT[1], XBM::mute_7, { 4 + 16 * 1, 54 }, WHITE },
   { displayB, muteXT[2], XBM::mute_7, { 4 + 16 * 2, 54 }, WHITE },
@@ -222,7 +222,7 @@ NoteBitmapDisplay muteDispXT[8] = {
   { displayB, muteXT[7], XBM::mute_7, { 4 + 16 * 7, 54 }, WHITE },
 };
 
-NoteBitmapDisplay soloDisp[8] = {
+BitmapDisplay<> soloDisp[8] = {
   // Draw the first solo indicator to the display, at position (4, 54),
   // using bitmap icon solo_7 with a white foreground color.
   { displayA, solo[0], XBM::solo_7, { 4 + 16 * 0, 54 }, WHITE },
@@ -234,7 +234,7 @@ NoteBitmapDisplay soloDisp[8] = {
   { displayA, solo[6], XBM::solo_7, { 4 + 16 * 6, 54 }, WHITE },
   { displayA, solo[7], XBM::solo_7, { 4 + 16 * 7, 54 }, WHITE },
 };
-NoteBitmapDisplay soloDispXT[8] = {
+BitmapDisplay<> soloDispXT[8] = {
   { displayB, soloXT[0], XBM::solo_7, { 4 + 16 * 0, 54 }, WHITE },
   { displayB, soloXT[1], XBM::solo_7, { 4 + 16 * 1, 54 }, WHITE },
   { displayB, soloXT[2], XBM::solo_7, { 4 + 16 * 2, 54 }, WHITE },
