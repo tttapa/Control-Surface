@@ -1,0 +1,19 @@
+<map id="NoteCCKPValue&lt; Type &gt;" name="NoteCCKPValue&lt; Type &gt;">
+<area shape="rect" id="Node000001" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="357,1633,533,1779"/>
+<area shape="rect" id="Node000002" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="197,1464,417,1584"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="363,1593,392,1632,388,1635,358,1597"/>
+<area shape="rect" id="Node000003" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="109,1156,299,1401"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="263,1413,284,1462,279,1465,258,1415"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="105,651,297,1031"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="205,1044,206,1156,201,1156,200,1044"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="5,173,184,358"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="117,371,169,650,164,651,112,372"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="208,5,411,525"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="263,526,243,635,237,634,258,525"/>
+<area shape="rect" id="Node000007" href="$d8/d6b/structTwoByteMIDIMatcher.html" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure (but n..." alt="" coords="323,1236,501,1321"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="396,1323,341,1450,336,1448,391,1321"/>
+<area shape="rect" id="Node000008" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="321,588,503,1093"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="415,1093,415,1220,409,1220,409,1093"/>
+<area shape="rect" id="Node000009" href="$d8/d87/classInterfaces_1_1IValue.html" title="Abstract interface for MIDI input elements that receive and store a 7&#45;bit value." alt="" coords="441,1471,543,1577"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="478,1591,467,1634,461,1633,473,1589"/>
+</map>

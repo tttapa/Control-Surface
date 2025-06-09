@@ -1,0 +1,9 @@
+<map id="ManyButtonsSelectorLEDs&lt; N &gt;" name="ManyButtonsSelectorLEDs&lt; N &gt;">
+<area shape="rect" id="node1" title="Selector that reads from &#160;buttons. This version displays the setting using LEDs." alt="" coords="27,1189,260,1267"/>
+<area shape="rect" id="node2" href="$de/d1e/classGenericManyButtonsSelector.html" title=" " alt="" coords="18,1020,269,1141"/>
+<area shape="rect" id="node3" href="$d0/d04/classGenericSelector.html" title=" " alt="" coords="60,763,227,972"/>
+<area shape="rect" id="node4" href="$dc/d77/classSelectorBase.html" title="Base class for all Selectors exposing the get method, so it can be used by display elements etc,..." alt="" coords="5,608,137,700"/>
+<area shape="rect" id="node5" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="161,593,272,715"/>
+<area shape="rect" id="node6" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="115,160,319,545"/>
+<area shape="rect" id="node7" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="105,5,328,112"/>
+</map>

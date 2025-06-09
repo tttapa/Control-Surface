@@ -1,0 +1,13 @@
+<map id="GenericVPotRing&lt; NumBanks, Callback &gt;" name="GenericVPotRing&lt; NumBanks, Callback &gt;">
+<area shape="rect" id="node1" title="A class for MIDI input elements that represent Mackie Control Universal V&#45;Pots." alt="" coords="619,1477,840,1628"/>
+<area shape="rect" id="node2" href="$db/dac/classMCU_1_1VPotRing__Base.html" title=" " alt="" coords="496,1131,707,1325"/>
+<area shape="rect" id="node3" href="$d3/d96/classMIDIInputElementCC.html" title="Class for objects that listen for incoming MIDI Controller Change events." alt="" coords="169,749,362,914"/>
+<area shape="rect" id="node6" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1182,205,1274"/>
+<area shape="rect" id="node7" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="229,1028,440,1428"/>
+<area shape="rect" id="node4" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="178,453,353,663"/>
+<area shape="rect" id="node5" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="171,5,360,391"/>
+<area shape="rect" id="node8" href="$da/d50/classMCU_1_1IVPotRing.html" title=" " alt="" coords="386,727,521,936"/>
+<area shape="rect" id="node9" href="$d3/d81/structMCU_1_1VPotEmptyCallback.html" title=" " alt="" coords="545,778,719,885"/>
+<area shape="rect" id="node10" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="743,712,958,951"/>
+<area shape="rect" id="node11" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="731,1094,984,1362"/>
+</map>

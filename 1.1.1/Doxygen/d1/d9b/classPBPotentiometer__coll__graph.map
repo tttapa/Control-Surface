@@ -1,0 +1,15 @@
+<map id="PBPotentiometer" name="PBPotentiometer">
+<area shape="rect" id="node1" title="A class of MIDIOutputElements that read the analog input from a potentiometer or fader,..." alt="" coords="657,1647,798,1724"/>
+<area shape="rect" id="node2" href="$d5/d8e/classMIDIFilteredAnalog.html" title=" " alt="" coords="635,1417,820,1597"/>
+<area shape="rect" id="node3" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="135,1035,274,1318"/>
+<area shape="rect" id="node4" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,5,188,112"/>
+<area shape="rect" id="node6" href="$d1/d55/classAH_1_1Updatable.html" title=" " alt="" coords="92,161,299,444"/>
+<area shape="rect" id="node5" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="91,565,318,936"/>
+<area shape="rect" id="node7" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="489,1079,670,1274"/>
+<area shape="rect" id="node8" href="$d7/d40/classEMA.html" title=" " alt="" coords="343,683,536,819"/>
+<area shape="rect" id="node9" title=" " alt="" coords="561,712,611,789"/>
+<area shape="rect" id="node10" href="$d2/dcb/classHysteresis.html" title=" " alt="" coords="739,661,993,841"/>
+<area shape="rect" id="node11" title=" " alt="" coords="691,264,761,341"/>
+<area shape="rect" id="node12" href="$d3/d10/classMIDICNChannelAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="694,999,881,1355"/>
+<area shape="rect" id="node13" href="$de/d46/classPitchBendSender.html" title=" " alt="" coords="905,1131,1067,1223"/>
+</map>

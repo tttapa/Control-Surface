@@ -1,0 +1,5 @@
+<map id="BaseBankConfig&lt; N &gt;" name="BaseBankConfig&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A struct for selecting the bank of BankableMIDIInputs and the bank type." alt="" coords="27,5,187,91"/>
+<area shape="rect" id="Node000002" href="$dc/d17/structBankConfig.html" title=" " alt="" coords="5,139,208,219"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,105,109,139,104,139,104,105"/>
+</map>

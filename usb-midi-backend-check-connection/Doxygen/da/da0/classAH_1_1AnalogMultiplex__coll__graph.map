@@ -1,0 +1,7 @@
+<map id="AnalogMultiplex&lt; N &gt;" name="AnalogMultiplex&lt; N &gt;">
+<area shape="rect" id="Node000001" title="A class for reading multiplexed analog inputs." alt="" coords="110,393,299,879"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,128,212,208"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,221,157,392,152,393,117,222"/>
+<area shape="rect" id="Node000003" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="236,5,365,331"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="270,331,260,378,255,377,265,330"/>
+</map>

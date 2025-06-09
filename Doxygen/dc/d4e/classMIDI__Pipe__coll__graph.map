@@ -1,0 +1,13 @@
+<map id="MIDI_Pipe" name="MIDI_Pipe">
+<area shape="rect" id="Node000001" title="Class that routes MIDI messages from a MIDI_Source to a MIDI_Sink." alt="" coords="113,208,352,1213"/>
+<area shape="rect" id="Node000002" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="5,1336,244,1801"/>
+<area shape="poly" id="edge2_Node000002_Node000001" title=" " alt="" coords="116,979,97,1045,83,1114,76,1183,77,1252,84,1319,78,1320,71,1252,71,1183,78,1113,92,1044,111,978"/>
+<area shape="rect" id="Node000003" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="268,1276,491,1861"/>
+<area shape="poly" id="edge4_Node000003_Node000001" title=" " alt="" coords="259,1213,266,1251,268,1260,262,1261,261,1253,253,1214"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,1322,167,1214,172,1214,158,1323"/>
+<area shape="poly" id="edge5_Node000001_Node000002" title=" " alt="" coords="156,1335,167,1252,170,1230,175,1230,173,1252,161,1336"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="341,1263,337,1238,333,1214,338,1213,342,1237,346,1262"/>
+<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="361,1276,355,1238,352,1217,357,1216,361,1237,366,1276"/>
+<area shape="rect" id="Node000004" href="$d4/d48/structMIDIStaller.html" title="Struct that can cause a MIDI_Pipe to be stalled." alt="" coords="170,5,295,131"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="235,131,235,192,230,192,230,131"/>
+</map>

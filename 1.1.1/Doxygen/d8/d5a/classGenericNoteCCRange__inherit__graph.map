@@ -1,0 +1,10 @@
+<map id="GenericNoteCCRange&lt; MIDIInput_t, RangeLen, Callback &gt;" name="GenericNoteCCRange&lt; MIDIInput_t, RangeLen, Callback &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="231,491,406,612"/>
+<area shape="rect" id="node5" href="$d2/daa/classCCRange.html" title="MIDI Input Element that listens to a range of controllers and saves their values." alt="" coords="5,660,168,737"/>
+<area shape="rect" id="node6" href="$d5/d94/classCCValue.html" title="MIDI Input Element that listens to a single controller and saves its value." alt="" coords="193,660,287,737"/>
+<area shape="rect" id="node7" href="$d5/d10/classNoteRange.html" title="MIDI Input Element that listens to a range of notes and saves their velocity values." alt="" coords="312,660,483,737"/>
+<area shape="rect" id="node8" href="$de/ddd/classNoteValue.html" title="MIDI Input Element that listens to a single note and saves its velocity value." alt="" coords="507,660,610,737"/>
+<area shape="rect" id="node2" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="218,175,419,443"/>
+<area shape="rect" id="node3" title=" " alt="" coords="207,27,297,105"/>
+<area shape="rect" id="node4" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="322,5,449,127"/>
+</map>

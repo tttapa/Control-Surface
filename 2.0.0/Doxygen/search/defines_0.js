@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['adc_5fresolution_0',['ADC_RESOLUTION',['../d7/d7c/ADCConfig_8hpp.html#a00978ca9e8220475258dcbbbb7d29129',1,'ADCConfig.hpp']]],
+  ['ah_5fdiagnostic_5fexternal_5fheader_1',['AH_DIAGNOSTIC_EXTERNAL_HEADER',['../d1/d65/Warnings_8hpp.html#a44dd04a1d1f97866e5b01c548f35fe5e',1,'Warnings.hpp']]],
+  ['ah_5fdiagnostic_5fpop_2',['AH_DIAGNOSTIC_POP',['../d1/d65/Warnings_8hpp.html#a4f088fb95f1d6dc4279357ca2a562cbe',1,'Warnings.hpp']]],
+  ['ah_5fdiagnostic_5fwerror_3',['AH_DIAGNOSTIC_WERROR',['../d1/d65/Warnings_8hpp.html#a9f2deeea1dd06b45ebc381da1633c7ee',1,'Warnings.hpp']]],
+  ['ah_5fis_5fempty_4',['AH_IS_EMPTY',['../de/dd1/AH_2Settings_2SettingsWrapper_8hpp.html#a04be36de00cd3bce8a6764d6b5b5f4c6',1,'SettingsWrapper.hpp']]],
+  ['ah_5fis_5fempty_5fhelper_5',['AH_IS_EMPTY_HELPER',['../de/dd1/AH_2Settings_2SettingsWrapper_8hpp.html#a707484720c54a77b6d54a9a78078579a',1,'SettingsWrapper.hpp']]],
+  ['ah_5fnamespace_5fname_6',['AH_NAMESPACE_NAME',['../d6/db0/AH_2Settings_2NamespaceSettings_8hpp.html#a6b56d72e5238e6495c46decbafa0d329',1,'NamespaceSettings.hpp']]],
+  ['att_5fcharacteristic_5f7772e5db_5f3868_5f4112_5fa1a9_5ff2669d106bf3_5f01_5fclient_5fconfiguration_5fhandle_7',['ATT_CHARACTERISTIC_7772E5DB_3868_4112_A1A9_F2669D106BF3_01_CLIENT_CONFIGURATION_HANDLE',['../de/de9/gatt__midi_8h.html#a9968a939e03b65773665e581bd2e5f21',1,'gatt_midi.h']]],
+  ['att_5fcharacteristic_5f7772e5db_5f3868_5f4112_5fa1a9_5ff2669d106bf3_5f01_5fvalue_5fhandle_8',['ATT_CHARACTERISTIC_7772E5DB_3868_4112_A1A9_F2669D106BF3_01_VALUE_HANDLE',['../de/de9/gatt__midi_8h.html#aa25b9984a128a46d9aec3705a8230afc',1,'gatt_midi.h']]],
+  ['att_5fcharacteristic_5fgatt_5fdatabase_5fhash_5f01_5fvalue_5fhandle_9',['ATT_CHARACTERISTIC_GATT_DATABASE_HASH_01_VALUE_HANDLE',['../de/de9/gatt__midi_8h.html#a87bbc7170c14a6cbf0be1451784f400f',1,'gatt_midi.h']]],
+  ['att_5fservice_5f03b80e5a_5fede8_5f4b33_5fa751_5f6ce34ec4c700_5f01_5fend_5fhandle_10',['ATT_SERVICE_03B80E5A_EDE8_4B33_A751_6CE34EC4C700_01_END_HANDLE',['../de/de9/gatt__midi_8h.html#a279004544312e109e8dd3be693e52356',1,'gatt_midi.h']]],
+  ['att_5fservice_5f03b80e5a_5fede8_5f4b33_5fa751_5f6ce34ec4c700_5f01_5fstart_5fhandle_11',['ATT_SERVICE_03B80E5A_EDE8_4B33_A751_6CE34EC4C700_01_START_HANDLE',['../de/de9/gatt__midi_8h.html#a8123592bfafe23e5e48f93878627c084',1,'gatt_midi.h']]],
+  ['att_5fservice_5f03b80e5a_5fede8_5f4b33_5fa751_5f6ce34ec4c700_5fend_5fhandle_12',['ATT_SERVICE_03B80E5A_EDE8_4B33_A751_6CE34EC4C700_END_HANDLE',['../de/de9/gatt__midi_8h.html#a491ef750b9af2034cd541492a4f0e8cb',1,'gatt_midi.h']]],
+  ['att_5fservice_5f03b80e5a_5fede8_5f4b33_5fa751_5f6ce34ec4c700_5fstart_5fhandle_13',['ATT_SERVICE_03B80E5A_EDE8_4B33_A751_6CE34EC4C700_START_HANDLE',['../de/de9/gatt__midi_8h.html#a855dc03bf740026e8cdf7571fafd27ae',1,'gatt_midi.h']]],
+  ['att_5fservice_5fgatt_5fservice_5f01_5fend_5fhandle_14',['ATT_SERVICE_GATT_SERVICE_01_END_HANDLE',['../de/de9/gatt__midi_8h.html#a40fe0203b14e08b079766e912d0e0bc0',1,'gatt_midi.h']]],
+  ['att_5fservice_5fgatt_5fservice_5f01_5fstart_5fhandle_15',['ATT_SERVICE_GATT_SERVICE_01_START_HANDLE',['../de/de9/gatt__midi_8h.html#a5a8b8be5a5ba3cde8e217756ece455a2',1,'gatt_midi.h']]],
+  ['att_5fservice_5fgatt_5fservice_5fend_5fhandle_16',['ATT_SERVICE_GATT_SERVICE_END_HANDLE',['../de/de9/gatt__midi_8h.html#acccf8a79a33335c06cb16ebb08261d9c',1,'gatt_midi.h']]],
+  ['att_5fservice_5fgatt_5fservice_5fstart_5fhandle_17',['ATT_SERVICE_GATT_SERVICE_START_HANDLE',['../de/de9/gatt__midi_8h.html#ad3b9609e1e47bcb1ed68710b6c721b52',1,'gatt_midi.h']]]
+];
