@@ -116,12 +116,14 @@ class MIDI_Interface : public TrueMIDI_SinkSource,
     /// Dispatch the given type of MIDI message from the given interface.
     template <class MIDIInterface_t>
     static void dispatchIncoming(MIDIInterface_t *iface, MIDIReadEvent event);
+#if !DISABLE_PIPES
     /// Un-stall the given MIDI interface. Assumes the interface has been
     /// stalled because of a chunked SysEx messages. Waits until that message
     /// is finished.
     template <class MIDIInterface_t>
     static void handleStall(MIDIInterface_t *self);
     using MIDIStaller::handleStall;
+#endif
 
   private:
     MIDI_Callbacks *callbacks = nullptr;
