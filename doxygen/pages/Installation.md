@@ -50,3 +50,47 @@ To use Control Surface in a PlatformIO project, add the following to your
 lib_deps = https://github.com/tttapa/Control-Surface.git#main
 lib_ignore = MIDIUSB
 ```
+
+With some boards, if you get a compile error mentioning you should set "Tools->Pin Numbering set to "By GPIO number (legacy)", include this line in your `platformio.ini` configuration:
+```ini
+build_unflags = -DBOARD_HAS_PIN_REMAP
+```
+
+This is a full working example for Arduino Nano ESP32 (tested on the compatible Waveshare ESP32-S3-Nano):
+`platformio.ini`:
+```ini
+[env:arduino_nano_esp32]
+platform = espressif32
+board = arduino_nano_esp32
+framework = arduino
+
+build_flags =
+  -D ARDUINO_USB_MODE=1
+  -D ARDUINO_USB_CDC_ON_BOOT=1
+  -D ESP32_REMAP_DISABLED=1
+
+build_unflags = -DBOARD_HAS_PIN_REMAP
+
+lib_deps = https://github.com/tttapa/Control-Surface.git#main
+lib_ignore = MIDIUSB
+```
+
+Example `main.cpp`, led lights up if user plays C4 on a computer connected over bluetooth midi to the microcontroller.
+```c++
+#include <Arduino.h>
+#include <Control_Surface.h>
+#include <MIDI_Interfaces/BluetoothMIDI_Interface.hpp> 
+
+BluetoothMIDI_Interface midi;
+
+NoteLED led { LED_BUILTIN, MIDI_Notes::C[4] };
+
+void setup() {
+  delay(1000); 
+  Control_Surface.begin();
+}
+
+void loop() {
+  Control_Surface.loop();
+}
+```
