@@ -1,6 +1,6 @@
 #ifdef ESP32
 #include <sdkconfig.h>
-#if CONFIG_BT_BLE_ENABLED
+#if CONFIG_BT_BLE_ENABLED || CONFIG_BT_BLUEDROID_ENABLED
 
 #include "app.h"
 #include "ble2902.h"

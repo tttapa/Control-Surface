@@ -20,22 +20,40 @@ END_BEGIN_CS_NAMESPACE
 
 #elif defined(ESP32)
 #include <sdkconfig.h>
+// ESP32 with BLE support (arduino-esp32 < 3.3.0)
 #if CONFIG_BT_BLE_ENABLED
-// ESP32 with BLE support
 #ifdef CS_USE_NIMBLE
+#define CS_BLE_MIDI_BACKEND_NIMBLE 1
+#else
+#define CS_BLE_MIDI_BACKEND_NIMBLE 0
+#endif
+#define CS_BLE_MIDI_SUPPORTED 1
+// ESP32 with native Nimble support (arduino-esp32 >= 3.3.0)
+#elif CONFIG_BT_NIMBLE_ENABLED
+#define CS_BLE_MIDI_BACKEND_NIMBLE 1
+#define CS_BLE_MIDI_SUPPORTED 1
+// ESP32 with native Bluedroid support (arduino-esp32 >= 3.3.0) -- Untested
+#elif CONFIG_BT_BLUEDROID_ENABLED
+#ifdef CS_USE_NIMBLE
+#pragma warning ("CS_USE_NIMBLE ignored (CONFIG_BT_NIMBLE_ENABLED != 1)")
+#endif
+#define CS_BLE_MIDI_BACKEND_NIMBLE 0
+#define CS_BLE_MIDI_SUPPORTED 1
+#endif
+
+#if CS_BLE_MIDI_SUPPORTED
 // NimBLE backend
+#if CS_BLE_MIDI_BACKEND_NIMBLE
 #include "BLEMIDI/ESP32NimBLEBackend.hpp"
 BEGIN_CS_NAMESPACE
 using BLEMIDIBackend = ESP32NimBLEBackend;
 END_CS_NAMESPACE
-#define CS_BLE_MIDI_SUPPORTED 1
 #else
 // Bluedroid backend (default)
 #include "BLEMIDI/ESP32BluedroidBackend.hpp"
 BEGIN_CS_NAMESPACE
 using BLEMIDIBackend = ESP32BluedroidBackend;
 END_CS_NAMESPACE
-#define CS_BLE_MIDI_SUPPORTED 1
 #endif
 #endif
 

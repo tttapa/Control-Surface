@@ -1,6 +1,6 @@
 #ifdef ESP32
 #include <sdkconfig.h>
-#if CONFIG_BT_BLE_ENABLED
+#if CONFIG_BT_BLE_ENABLED || CONFIG_BT_NIMBLE_ENABLED
 
 #include "ble.h"
 
@@ -43,7 +43,9 @@ inline bool init_hardware() {
     ESP_ERROR_CHECK(esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT));
     ESP_ERROR_CHECK(esp_bt_controller_init(&bt_cfg));
     ESP_ERROR_CHECK(esp_bt_controller_enable(ESP_BT_MODE_BLE));
+    #if ESP_ARDUINO_VERSION < ESP_ARDUINO_VERSION_VAL(3, 3, 0)
     ESP_ERROR_CHECK(esp_nimble_hci_init());
+    #endif
 #endif
 
 #if CS_MIDI_BLE_ESP_IDF_NIMBLE
