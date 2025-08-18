@@ -24,8 +24,13 @@ namespace {
 [[maybe_unused]] std::string fmt_address(const void *addr) {
     std::string str {"XX:XX:XX:XX:XX:XX"};
     auto *u8p = reinterpret_cast<const uint8_t *>(addr);
-    snprintf(str.data(), str.size() + 1, "%02x:%02x:%02x:%02x:%02x:%02x",
-             u8p[5], u8p[4], u8p[3], u8p[2], u8p[1], u8p[0]);
+#if __cplusplus >= 201703L
+    auto *buf = str.data();
+#else
+    auto *buf = &str[0];
+#endif
+    snprintf(buf, str.size() + 1, "%02x:%02x:%02x:%02x:%02x:%02x", u8p[5],
+             u8p[4], u8p[3], u8p[2], u8p[1], u8p[0]);
     return str;
 }
 
@@ -49,7 +54,7 @@ void print_conn_desc(struct ble_gap_conn_desc *desc) {
         desc->sec_state.bonded);
 }
 
-const char *own_address_type_to_string(uint8_t own_addr_type) {
+[[maybe_unused]] const char *own_address_type_to_string(uint8_t own_addr_type) {
     switch (own_addr_type) {
         case BLE_OWN_ADDR_RANDOM: return "BLE_OWN_ADDR_RANDOM";
         case BLE_OWN_ADDR_RPA_RANDOM_DEFAULT:

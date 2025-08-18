@@ -11,6 +11,9 @@
  * - If you're using an ESP32, you can optionally switch to the NimBLE backend
  *     by installing the [h2zero/NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino)
  *     library, and adding `#define CS_USE_NIMBLE` at the top of this sketch.
+ * - If you're using a newer ESP32-based chip like the ESP32-S3, with
+ *     arduino-esp32 version 3.3.0 or later, the NimBLE backend is enabled by
+ *     default, without requiring the h2zero/NimBLE-Arduino library.
  * - If you're not using a Pico or an ESP32, you'll have to install the
  *     [ArduinoBLE](https://github.com/arduino-libraries/ArduinoBLE) library.
  *

@@ -26,8 +26,8 @@ backend for the particular board.
 | Arduino GIGA R1 WiFi                | @ref ArduinoBLEBackend     |                          |
 | Raspberry Pi Pico W (RP2040)        | @ref BTstackBackgroundBackend |                       |
 | ESP32                               | @ref ESP32BluedroidBackend | @ref ESP32NimBLEBackend  |
-| ESP32-S3                            | @ref ESP32BluedroidBackend | @ref ESP32NimBLEBackend  |
-| ESP32-C3, ESP32-C6, ESP32-H2        | @ref ESP32BluedroidBackend | @ref ESP32NimBLEBackend  |
+| ESP32-S3                            | @ref ESP32NimBLEBackend | @ref ESP32BluedroidBackend  |
+| ESP32-C3, ESP32-C6, ESP32-H2        | @ref ESP32NimBLEBackend | @ref ESP32BluedroidBackend  |
 
 ### ArduinoBLEBackend
 
@@ -56,13 +56,17 @@ buffer from filling up, since there is no BLE flow control.
 ### ESP32NimBLEBackend
 
 This backend uses the newer [Apache MyNewt NimBLE](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/nimble/index.html)
-stack.
+stack. Starting from version 3.3.0 of the [arduino-esp32](https://github.com/espressif/arduino-esp32) core,
+it is the default for the ESP32-S3 and other ESP32-based boards except the
+original ESP32 (which still uses Bluedroid).
+See https://github.com/espressif/arduino-esp32/discussions/10991 for details.
 
 Like the @ref ESP32BluedroidBackend, the NimBLE backend uses its own threads and
 does not require polling.
 
-The NimBLE ESP-IDF component is disabled by default in the [arduino-esp32](https://github.com/espressif/arduino-esp32)
-core, so you'll need to install the [h2zero/NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino)
+If you're using a version of the arduino-esp32 core that's older than 3.3.0,
+or if you're using an original ESP32, the NimBLE ESP-IDF component is disabled,
+and you'll need to install the [h2zero/NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino)
 library in order to use this backend.
 
 Defining @ref CS_USE_NIMBLE before including Control Surface changes the default

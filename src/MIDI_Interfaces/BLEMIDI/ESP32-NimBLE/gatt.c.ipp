@@ -43,7 +43,11 @@ inline const struct ble_gatt_chr_def midi_ble_characteristic[] = {
               BLE_GATT_CHR_F_WRITE_NO_RSP | // BLE_GATT_CHR_F_WRITE_ENC |
               BLE_GATT_CHR_F_NOTIFY,
      .min_key_size = 0,
-     .val_handle = nullptr},
+     .val_handle = nullptr,
+#ifdef BLE_GATT_DSC_CLT_PRE_FMT16 // https://github.com/apache/mynewt-nimble/pull/1667
+     .cpfd = nullptr
+#endif
+    },
     {}, // sentinel
 };
 
