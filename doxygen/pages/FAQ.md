@@ -237,7 +237,7 @@ implementing a custom MIDI element as shown in
 If that's not enough, you could try disabling some of the features of the 
 library that you don't need. For example, if you don't need to be able to 
 receive MIDI System Exclusive messages, you can turn on the @ref IGNORE_SYSEX
-and @ref NO_SYSEX_OUTPUT settings in @ref src/Settings/Settings.hpp.
+and @ref NO_SYSEX_OUTPUT settings in @ref Settings/Settings.hpp.
 If you do need SysEx support but still want to save some memory, you can try
 decreasing the @ref SYSEX_BUFFER_SIZE.
 

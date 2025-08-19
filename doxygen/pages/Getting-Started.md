@@ -27,10 +27,11 @@ one MIDI interface. If you don't do that, you'll get an error when calling
 There are many different MIDI interfaces to choose from:
 
 - `USBMIDI_Interface`: On boards that support MIDI over USB natively, this will
-  do exactly what you'd expect. You just have to plug it into your computer, and
-  it shows up as a MIDI device. 
+  do exactly what you'd expect: You just have to plug it into your computer, and
+  it shows up as a MIDI device.
   On Arduinos without native USB capabilities (e.g. UNO or MEGA), you have to 
   use custom firmware for the ATmega16U2.
+  See @ref md_pages_MIDI-over-USB for details.
 - `HardwareSerialMIDI_Interface`: This interface will send and receive MIDI 
   messages over a hardware UART. You can use it for MIDI over a 5-pin DIN 
   connector, for example.
@@ -39,15 +40,14 @@ There are many different MIDI interfaces to choose from:
   the [Hairless MIDI<->Serial Bridge](https://projectgus.github.io/hairless-midiserial/).
   In that case, you can use this MIDI interface. The default baud rate is 115200
   symbols per second.
-- `BluetoothMIDI_Interface`: If you have an ESP32, you can send and receive MIDI
-  messages over Bluetooth Low Energy. This interface is still very much
-  experimental, but it's pretty cool. If you know more about the MIDI BLE
-  protocol, feel free to suggest some improvements.
-- `USBDebugMIDI_Interface`: Debugging MIDI Controllers can be very cumbersome. 
+- `BluetoothMIDI_Interface`: If you have a board that supports Bluetooth Low Energy (BLE), 
+  such as an ESP32 or a Raspberry Pi Pico W, you can send and receive MIDI
+  messages over Bluetooth. See @ref md_pages_MIDI-over-BLE for details.
+- `USBDebugMIDI_Interface`: Debugging MIDI Controllers can be very cumbersome.
   There are MIDI monitors available, but you have to reconnect every time you 
   upload a new sketch, and sending MIDI to the Arduino is not always easy.  
-  This interface is designed to help you with that. It prints outgoing MIDI
-  messages to the Serial port in a readable format, and it allows you to enter 
+  This interface is designed to help with that: It prints outgoing MIDI
+  messages to the Serial port in a readable format, and it allows you to enter
   hexadecimal MIDI messages (as text) in the Serial monitor 
   (e.g. `90 3C 7F` to turn on middle C).
 
@@ -58,9 +58,9 @@ For now, we'll use the `USBMIDI_Interface` because it's probably the one you'll
 use in your final program. Do keep in mind that not all boards support MIDI over
 USB natively, for more details, see the @ref md_pages_MIDI-over-USB page.
 
-You can give the interface any name you want. I'll be very original and
-choose `midi`. It doesn't matter, and you don't need to use it afterwards, 
-just defining the interface is enough, the Control Surface library will 
+You can give the interface any name you want. Lacking originality, I'll choose
+`midi`. The name doesn't matter, and you don't need to use it afterwards,
+just defining the interface is enough, the Control Surface library will
 automatically detect and use it.
 
 ```cpp
@@ -72,14 +72,15 @@ USBMIDI_Interface midi;
 > In that case, you can instantiate it as follows:  
 > `USBDebugMIDI_Interface midi {115200};`
 
-For a more detailed overview of MIDI interfaces and using them to send and 
-receive MIDI message, have a look at the @ref midi-tutorial.
+For a more detailed discussion of MIDI interfaces and how to use them to send
+and receive MIDI message, have a look at the @ref midi-tutorial.
 
 ### 3. Add Extended Input/Output elements (optional)       {#first-output-extio}
 
 If your MIDI Controller requires many in- or outputs, you'll run out of IO pins
-really quickly. A solution is to use multiplexers or shift registers.  
-The Control Surface Library supports both of these options, and makes it easy
+quite quickly. A solution is to use multiplexers or shift registers to expand
+the number of usable in- and outputs.  
+The Control Surface library supports both of these options, and makes it easy
 to support other types of IO expanders in the future.
 
 An overview of Extended Input/Output elements can be found in the @ref AH_ExtIO
@@ -105,9 +106,10 @@ CD74HC4051 mux { A0, {3, 4, 5} };
 Now, we can specify the objects that read the input of the potentiometers and
 send out MIDI events accordingly.
 
-Again, I'll refer to the overview of @ref MIDIOutputElements.
+I'll again refer to the documentation for an overview of all supported
+@ref MIDIOutputElements (including potentiometers, switches, rotary encoders, etc.).
 
-Let's define a single potentiometer on pin `A1` that sends out MIDI Control 
+Let's define a single potentiometer on pin `A1` that sends out MIDI Control
 Change events.  
 In the @ref CCPotentiometer::CCPotentiometer "documentation",
 you'll find that the first argument for the `CCPotentiometer` constructor is the 
@@ -132,7 +134,7 @@ CCPotentiometer potentiometer { A1, {7, Channel_1} };
 ```
 
 In our case, we don't want a single potentiometer, we want eight. It's much
-easier to define them in an array.  
+easier to define them in an [array](https://www.learncpp.com/cpp-tutorial/introduction-to-c-style-arrays/).  
 Also note how we declare that the potentiometers are connected to the the pins 
 of the multiplexer we defined in the previous step.
 
@@ -190,12 +192,11 @@ void setup() {
 > **Note**: If you forget to define a MIDI interface, `Control_Surface.begin()`
 > will raise an error and the on-board LED will start blinking.  
 > Other errors will also be indicated this way.  
-> If you don't know why this happens, you should enable debug information in 
-> the `Control_Surface/src/AH/Settings/Settings.h` file, and inspect the output
-> in the Serial Monitor.  
-> Someday, I will add a "Troubleshooting" page. For now, if you have any 
-> problems, just [open an issue on GitHub](https://github.com/tttapa/Control-Surface/issues/new)
-> to remind me.
+> If you don't know why this happens, you should enable debug information as
+> described in the @ref getting-started_md-troubleshooting section below,
+> and inspect the output in the Serial Monitor.  
+> If you cannot fix the issue based on the documentation, source code and
+> @ref FAQ alone, feel free to [start a discussion on GitHub](https://github.com/tttapa/Control-Surface/discussions)
 
 ### 6. Continuously Update the Control Surface              {#first-output-loop}
 
@@ -302,10 +303,10 @@ requiring any more pins.
 Each of the eight outputs of the shift register can be connected to the anode of
 an LED. Connect the cathodes to ground through a current-limiting resistor.
 
-Connect the clock input (SH_CP or SRCLK) of the shift register to the Arduino's 
-SCK pin, the serial data input (DS or SER) of the shift register to the 
-Arduino's MOSI pin, and the latch pin (ST_CP or RCLK) of the shift register to
-digital pin 10 of the Arduino. Connect the Output Enable pin (OE) of the shift
+Connect the clock input (`SH_CP` or `SRCLK`) of the shift register to the Arduino's 
+SCK pin, the serial data input (`DS` or `SER`) of the shift register to the 
+Arduino's MOSI pin, and the latch pin (`ST_CP` or `RCLK`) of the shift register to
+digital pin 10 of the Arduino. Connect the Output Enable pin (`OE`) of the shift
 register to ground, and the Master Reset (MR) pin of the shift register to Vcc
 to enable it.
 
