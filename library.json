@@ -1,11 +1,13 @@
 {
     "name": "Control Surface",
-    "version": "1.2.0-4",
-    "description": "Easily create a MIDI Control Surface using an Arduino or Teensy board.",
+    "version": "2.1.0",
+    "description": "Arduino library for creating MIDI controllers and other MIDI devices.",
     "keywords": [
         "midi",
         "midi-controller",
         "midi-over-usb",
+        "usb",
+        "midi-over-ble",
         "bluetooth",
         "vu-meter",
         "oled"
@@ -27,8 +29,6 @@
             "build",
             "docs",
             "doxygen",
-            "examples.old",
-            "googletest",
             "mock",
             "scripts",
             "test",
@@ -43,14 +43,8 @@
         "espressif32",
         "espressif8266",
         "nordicnrf52",
-        "teensy"
-    ],
-    "dependencies": [
-        {
-            "name": "MIDIUSB",
-            "authors": "Gary Grewal, Arduino",
-            "version": "~1.0.4",
-            "frameworks": "arduino"
-        }
+        "teensy",
+        "renesas-ra",
+        "raspberrypi"
     ]
 }

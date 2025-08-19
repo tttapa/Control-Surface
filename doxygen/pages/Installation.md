@@ -43,10 +43,5 @@ Some of the examples may also depend on any of the following libraries:
 
 # PlatformIO
 
-To use Control Surface in a PlatformIO project, add the following to your
-`platformio.ini` configuration:
-
-```ini
-lib_deps = https://github.com/tttapa/Control-Surface.git#main
-lib_ignore = MIDIUSB
-```
+To use Control Surface in a PlatformIO project, see
+[PlatformIO library registry: **tttapa/Control Surface**](https://registry.platformio.org/libraries/tttapa/Control%20Surface/installation).

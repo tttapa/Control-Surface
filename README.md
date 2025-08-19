@@ -298,7 +298,21 @@ documentation page for a table with supported features per board.
 
 ## Change log and updating
 
-### 2.x
+### 2.1
+
+- ([1e9f5f6](https://github.com/tttapa/Control-Surface/commit/1e9f5f6a2318e04bd02145e12a321a939870281e))  
+   Added support for version 3.3.0 of the [arduino-esp32](https://github.com/espressif/arduino-esp32)
+   core: The Bluedroid-based Bluetooth stacks for all boards except the original
+   ESP32 have been replaced by NimBLE-based stacks[^1]. For these configurations,
+   Control Surface now automatically switches to the `ESP32NimBLEBackend` for
+   [MIDI over BLE](https://tttapa.github.io/Control-Surface/Doxygen/db/d99/md_pages_MIDI-over-BLE.html).
+   The h2zero/NimBLE-Arduino library does not need to be installed in this case
+   (it is necessary for older versions of arduino-esp32 and for the original
+   ESP32 only).
+
+[^1]: More details about this migration can be found in https://github.com/espressif/arduino-esp32/discussions/10991.
+
+### 2.0
 
 - ([7bd5268](https://github.com/tttapa/Control-Surface/commit/7bd5268fe8906ba4fbd01024fbddc8598ffd9eb3))  
    The `pin_t` type is now a distinct type rather than an alias to an integer.
