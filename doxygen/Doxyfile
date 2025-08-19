@@ -2440,7 +2440,7 @@ PREDEFINED             = ARDUINO \
                          PROGMEM \
                          BEGIN_CS_NAMESPACE=; \
                          END_CS_NAMESPACE=; \
-                         "BEGIN_AH_NAMESPACE=namespace AH {" \
+                         "BEGIN_AH_NAMESPACE=inline namespace AH {" \
                          END_AH_NAMESPACE=} \
                          AH_DIAGNOSTIC_WERROR=; \
                          AH_DIAGNOSTIC_POP=; \
