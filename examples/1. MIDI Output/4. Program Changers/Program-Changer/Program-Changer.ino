@@ -51,7 +51,7 @@ ManyButtonsSelector<3> programSelector {
 // The library comes with many different Selectors, like rotary encoders,
 // push buttons that increment or decrement the setting, versions with LEDs
 // to display the current setting, etc.
-// https://tttapa.github.io/Control-Surface-doc/Doxygen/d0/d0c/group__Selectors.html
+// https://tttapa.github.io/Control-Surface/Doxygen/d0/d0c/group__Selectors.html
 
 void setup() {
   Control_Surface.begin(); // Initialize Control Surface

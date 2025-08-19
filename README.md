@@ -1,18 +1,18 @@
 [![CI Tests](https://github.com/tttapa/Control-Surface/actions/workflows/ccpp.yml/badge.svg)](https://github.com/tttapa/Control-Surface/actions/workflows/ccpp.yml)
-[![Test Coverage](https://img.shields.io/endpoint?url=https://tttapa.github.io/Control-Surface-doc/Coverage/shield.io.coverage.json)](https://tttapa.github.io/Control-Surface-doc/Coverage/index.html)
+[![Test Coverage](https://img.shields.io/endpoint?url=https://tttapa.github.io/Control-Surface/Coverage/shield.io.coverage.json)](https://tttapa.github.io/Control-Surface/Coverage/index.html)
 [![Examples](https://github.com/tttapa/Control-Surface/actions/workflows/examples.yaml/badge.svg)](https://github.com/tttapa/Control-Surface/actions/workflows/examples.yaml)
 [![GitHub](https://img.shields.io/github/stars/tttapa/Control-Surface?label=GitHub&logo=github)](https://github.com/tttapa/Control-Surface)
-[![Documentation](https://img.shields.io/badge/Documentation-main-blue)](https://tttapa.github.io/Control-Surface-doc/Doxygen)
+[![Documentation](https://img.shields.io/badge/Documentation-main-blue)](https://tttapa.github.io/Control-Surface/Doxygen)
 
 # Control Surface
 
 Control Surface is an Arduino library for building MIDI controllers and control
 surfaces.
 
-At its core, the library features a flexible [**MIDI abstraction layer**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/df7/midi-tutorial.html)
+At its core, the library features a flexible [**MIDI abstraction layer**](https://tttapa.github.io/Control-Surface/Doxygen/d3/df7/midi-tutorial.html)
 with support for serial **5-pin DIN** MIDI, MIDI over **USB**, MIDI over **BLE**, etc.
 These MIDI interfaces are compatible with a wide range of Arduino boards
-(a full table can be found [here](https://tttapa.github.io/Control-Surface-doc/Doxygen/d8/d4a/md_pages_MIDI-over-USB.html))
+(a full table can be found [here](https://tttapa.github.io/Control-Surface/Doxygen/d8/d4a/md_pages_MIDI-over-USB.html))
 and are useful in any Arduino MIDI project.
 
 In addition to MIDI input/output, Control Surface also provides easy-to-use utilities
@@ -37,7 +37,7 @@ treat them as if they were ordinary GPIO pins.
 
 ## Example usage
 
-An extensive list of examples can be found [in the documentation](https://tttapa.github.io/Control-Surface-doc/Doxygen/d4/de9/examples.html).
+An extensive list of examples can be found [in the documentation](https://tttapa.github.io/Control-Surface/Doxygen/d4/de9/examples.html).
 Below are a handful of simple examples that give an idea of how the Control
 Surface library can be used.
 
@@ -58,7 +58,7 @@ void loop() { Control_Surface.loop(); }
 easy to modify code.
 The following sketch is for 8 potentiometers (connected using an analog
 multiplexer) that send out MIDI Control Change messages over USB. A detailed
-walkthrough of this example can be found on the [Getting Started](https://tttapa.github.io/Control-Surface-doc/Doxygen/d5/d7d/md_pages_Getting-Started.html) page.
+walkthrough of this example can be found on the [Getting Started](https://tttapa.github.io/Control-Surface/Doxygen/d5/d7d/md_pages_Getting-Started.html) page.
 
 ```cpp
 #include <Control_Surface.h>  // Include the library
@@ -133,29 +133,29 @@ void loop() {
 
 ## Getting started
 
-See the [**Getting Started**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d5/d7d/md_pages_Getting-Started.html)
+See the [**Getting Started**](https://tttapa.github.io/Control-Surface/Doxygen/d5/d7d/md_pages_Getting-Started.html)
 page to get started using the library.  
-It'll also point you to the [**Installation Instructions**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d8/da8/md_pages_Installation.html).
+It'll also point you to the [**Installation Instructions**](https://tttapa.github.io/Control-Surface/Doxygen/d8/da8/md_pages_Installation.html).
 
-The [**MIDI tutorial**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/df7/midi-tutorial.html)
+The [**MIDI tutorial**](https://tttapa.github.io/Control-Surface/Doxygen/d3/df7/midi-tutorial.html)
 might be useful if you want to use Control Surface as a regular MIDI library,
 for sending and receiving MIDI messages.
 
 ## Documentation
 
 Detailed documentation for this library can be found here:  
-[**Documentation**](https://tttapa.github.io/Control-Surface-doc/Doxygen/index.html)  
+[**Documentation**](https://tttapa.github.io/Control-Surface/Doxygen/index.html)  
 Arduino examples can be found here:  
-[**Examples**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d4/de9/examples.html)
+[**Examples**](https://tttapa.github.io/Control-Surface/Doxygen/d4/de9/examples.html)
 
-The [**User Manual**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/da5/manual.html)
+The [**User Manual**](https://tttapa.github.io/Control-Surface/Doxygen/d3/da5/manual.html)
 is the best entry point to the documentation. To get a complete overview of all
 features of the Control Surface library, have a look at the following section
 and at the
-[**Topics**](https://tttapa.github.io/Control-Surface-doc/Doxygen/topics.html) page.
+[**Topics**](https://tttapa.github.io/Control-Surface/Doxygen/topics.html) page.
 
 You can find an answer to some frequently asked questions on the 
-[**FAQ**](https://tttapa.github.io/Control-Surface-doc/Doxygen/da/dc1/FAQ.html) page.
+[**FAQ**](https://tttapa.github.io/Control-Surface/Doxygen/da/dc1/FAQ.html) page.
 
 ## Feature overview
 
@@ -174,7 +174,7 @@ The following sections give a brief overview of the features of the library.
  - **MIDI over Bluetooth LE**
  - **AppleMIDI** over WiFi or Ethernet
 
-<sub>→ [_MIDI Interfaces documentation_](https://tttapa.github.io/Control-Surface-doc/Doxygen/dc/df0/group__MIDIInterfaces.html)</sub>
+<sub>→ [_MIDI Interfaces documentation_](https://tttapa.github.io/Control-Surface/Doxygen/dc/df0/group__MIDIInterfaces.html)</sub>
 
 ### MIDI Control Output
 
@@ -190,7 +190,7 @@ without introducing latency.
 These MIDI control outputs can be used to send MIDI notes, Control Change,
 Pitch Bend, Program/Patch change, etc.
 
-<sub>→ [_MIDI Output Elements documentation_](https://tttapa.github.io/Control-Surface-doc/Doxygen/d7/dcd/group__MIDIOutputElements.html)</sub>
+<sub>→ [_MIDI Output Elements documentation_](https://tttapa.github.io/Control-Surface/Doxygen/d7/dcd/group__MIDIOutputElements.html)</sub>
 
 ### MIDI Control Input
 
@@ -205,7 +205,7 @@ Pitch Bend, Program/Patch change, etc.
 A large portion of the **Mackie Control Universal** (MCU) protocol is 
 implemented.
 
-<sub>→ [_MIDI Input Elements documentation_](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/d8b/group__MIDIInputElements.html)</sub>
+<sub>→ [_MIDI Input Elements documentation_](https://tttapa.github.io/Control-Surface/Doxygen/df/d8b/group__MIDIInputElements.html)</sub>
 
 ### Motorized faders
 
@@ -229,7 +229,7 @@ In order to save some IO pins, the library natively supports **multiplexers**
 **Shift Registers** (e.g. 74HC595) to drive many LEDs, **MAX7219 LED drivers**,
 etc.
 
-<sub>→ [_Extended IO documentation_](https://tttapa.github.io/Control-Surface-doc/Doxygen/db/dd3/group__AH__ExtIO.html)</sub>
+<sub>→ [_Extended IO documentation_](https://tttapa.github.io/Control-Surface/Doxygen/db/dd3/group__AH__ExtIO.html)</sub>
 
 ### Audio
 
@@ -239,7 +239,7 @@ and you can start playing audio through your Teensy, by combining Control
 Surface with the Teensy Audio library.  
 You can also add volume controls and VU meters for these audio connections.
 
-<sub>→ [_Teensy Audio documentation_](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/d5c/group__Audio.html)</sub>
+<sub>→ [_Teensy Audio documentation_](https://tttapa.github.io/Control-Surface/Doxygen/d3/d5c/group__Audio.html)</sub>
 
 ### Modular and extensible
 
@@ -293,7 +293,7 @@ If you have a board that's not supported, please
 and let me know!
 
 Note that MIDI over USB and MIDI over Bluetooth are not supported on all boards.
-See the [**MIDI over USB**](https://tttapa.github.io/Control-Surface-doc/Doxygen/d8/d4a/md_pages_MIDI-over-USB.html)
+See the [**MIDI over USB**](https://tttapa.github.io/Control-Surface/Doxygen/d8/d4a/md_pages_MIDI-over-USB.html)
 documentation page for a table with supported features per board.
 
 ## Change log and updating
@@ -334,20 +334,20 @@ documentation page for a table with supported features per board.
    avoid conflicts with macros defined by the ArduinoCore-renesas.  
    For the same reason, the `CS` namespace has been renamed to `cs`.
 - ([47b2d5e](https://github.com/tttapa/Control-Surface/commit/47b2d5e7530da4c940fc99e606cfad0c6a0638a2))  
-   The `Encoder` class has been replaced by [`AHEncoder`](https://tttapa.github.io/Control-Surface-doc/Doxygen/dd/da9/classAHEncoder.html).
+   The `Encoder` class has been replaced by [`AHEncoder`](https://tttapa.github.io/Control-Surface/Doxygen/dd/da9/classAHEncoder.html).
    The code has been cleaned up and support was added for newer boards like the
    Raspberry Pi Pico.
 - ([c35f29c](https://github.com/tttapa/Control-Surface/commit/c35f29ced7f3e491467bd61c1c71013099c01091))  
    The SoftwareSerial MIDI interfaces are now in separate header files that have
    to be included explicitly if you want to use them. The headers in question 
-   are [`SoftwareSerialMIDI_Interface.hpp`](https://tttapa.github.io/Control-Surface-doc/Doxygen/d3/df2/SoftwareSerialMIDI__Interface_8hpp.html)
-   and [`SoftwareSerialDebugMIDI_Interface.hpp`](https://tttapa.github.io/Control-Surface-doc/Doxygen/de/d83/SoftwareSerialDebugMIDI__Interface_8hpp.html).
+   are [`SoftwareSerialMIDI_Interface.hpp`](https://tttapa.github.io/Control-Surface/Doxygen/d3/df2/SoftwareSerialMIDI__Interface_8hpp.html)
+   and [`SoftwareSerialDebugMIDI_Interface.hpp`](https://tttapa.github.io/Control-Surface/Doxygen/de/d83/SoftwareSerialDebugMIDI__Interface_8hpp.html).
    This prevents redefinition errors of pin change interrupt vectors even if
    SoftwareSerial is not used.
 - ([bf8fb66](https://github.com/tttapa/Control-Surface/commit/bf8fb661fa97fb6420584362bfcee7ce67939f59))  
    The abbreviated MIDI send functions (such as `sendCC()`) have been deprecated
    in favor of the full names (e.g. `sendControlChange()`). See the 
-   [MIDI_Sender documentation](https://tttapa.github.io/Control-Surface-doc/Doxygen/d6/d72/classMIDI__Sender.html)
+   [MIDI_Sender documentation](https://tttapa.github.io/Control-Surface/Doxygen/d6/d72/classMIDI__Sender.html)
    for a full overview.
 - ([cf32e7e](https://github.com/tttapa/Control-Surface/commit/cf32e7e72d81269e97f18ba51c42ba10715d1852))  
    `Control_Surface.setMIDIInputCallbacks()` now takes four arguments instead of
@@ -385,13 +385,13 @@ documentation page for a table with supported features per board.
    Before, `Control_Surface.MIDI()` was used to get the MIDI interface used by
    Control Surface. This method was removed, because you can now connect 
    multiple interfaces to Control Surface, using the 
-   [MIDI Pipe routing system](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/d72/classMIDI__Pipe.html#details).
+   [MIDI Pipe routing system](https://tttapa.github.io/Control-Surface/Doxygen/df/d72/classMIDI__Pipe.html).
    To send MIDI using Control Surface, you can now use 
    `Control_Surface.sendCC(...)` and the other similar methods directly.
 - ([8a3b1b3](https://github.com/tttapa/Control-Surface/commit/8a3b1b314cf5b4aedf3ad60cbbc492fbcbb25c73))  
    For the same reason as the bullet above, the `MultiMIDI_Interface` was
    removed, and has been replaced by the
-   [MIDI Pipe routing system](https://tttapa.github.io/Control-Surface-doc/Doxygen/df/d72/classMIDI__Pipe.html#details).
+   [MIDI Pipe routing system](https://tttapa.github.io/Control-Surface/Doxygen/df/d72/classMIDI__Pipe.html).
 - ([bca6e11](https://github.com/tttapa/Control-Surface/commit/bca6e11b2b3e02df5f600f65c81676708a81155b))  
    The color mapper for `NoteRangeFastLED` and the like now takes a second 
    parameter that represents the index of the LED within the LED strip.
@@ -402,7 +402,7 @@ documentation page for a table with supported features per board.
    Surface library, but could cause problems if your code uses other libraries
    that expect the resolution to be 10 bits.  
    You can change the default resolution to 10 bits in 
-   [`src/AH/Settings/Settings.hpp`](https://tttapa.github.io/Control-Surface-doc/Doxygen/dc/d69/namespaceAH.html#a4f2ec536d7413c6969f44d63ba14ce55)
+   [`src/AH/Hardware/ADCConfig.hpp`](https://tttapa.github.io/Control-Surface/Doxygen/d7/d7c/ADCConfig_8hpp_source.html)
    if you have to.
 - ([31edaa6](https://github.com/tttapa/Control-Surface/commit/31edaa6b76477fdf152c19fd34f7e4e8506561e6))  
    The **mapping function** is now applied before applying hysteresis.  
