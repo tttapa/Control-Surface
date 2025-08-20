@@ -1,0 +1,11 @@
+<map id="NoteRange&lt; RangeLen, NumBanks &gt;" name="NoteRange&lt; RangeLen, NumBanks &gt;">
+<area shape="rect" id="node1" title="MIDI Input Element that listens to a range of notes and saves their velocity values." alt="" coords="455,853,617,945"/>
+<area shape="rect" id="node2" href="$da/df0/classBankable_1_1GenericNoteCCRange.html" title=" " alt="" coords="432,639,640,804"/>
+<area shape="rect" id="node3" href="$d2/df4/classNoteCCRange.html" title="Base class for all other classes that listen for incoming MIDI Note or Control Change messages and sa..." alt="" coords="207,321,409,589"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,93,96,171"/>
+<area shape="rect" id="node5" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="121,71,247,193"/>
+<area shape="rect" id="node6" title=" " alt="" coords="271,93,345,171"/>
+<area shape="rect" id="node7" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="369,5,567,259"/>
+<area shape="rect" id="node8" href="$db/d6e/classBankableMIDIInput.html" title=" " alt="" coords="523,321,751,589"/>
+<area shape="rect" id="node9" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="591,79,769,185"/>
+</map>

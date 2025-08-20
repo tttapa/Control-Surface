@@ -1,0 +1,11 @@
+<map id="CCButtonLatching" name="CCButtonLatching">
+<area shape="rect" id="Node000001" title="A class of MIDIOutputElements that read the input of a latching push button or toggle switch,..." alt="" coords="53,1053,208,1119"/>
+<area shape="rect" id="Node000002" href="$d3/d0b/classBankable_1_1MIDIButtonLatching.html" title=" " alt="" coords="5,825,256,1005"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,1019,133,1053,128,1053,128,1019"/>
+<area shape="rect" id="Node000003" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="59,652,202,777"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="133,791,133,825,128,825,128,791"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="33,239,228,604"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="133,618,133,652,128,652,128,618"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="33,5,228,191"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="133,204,133,238,128,238,128,204"/>
+</map>

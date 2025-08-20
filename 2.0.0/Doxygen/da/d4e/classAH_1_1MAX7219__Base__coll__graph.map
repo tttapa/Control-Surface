@@ -1,0 +1,5 @@
+<map id="MAX7219_Base&lt; SPIDriver &gt;" name="MAX7219_Base&lt; SPIDriver &gt;">
+<area shape="rect" id="Node000001" title="A base class for classes that control MAX7219 LED drivers." alt="" coords="5,273,211,679"/>
+<area shape="rect" id="Node000002" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="50,5,166,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,211,111,257,105,257,105,211"/>
+</map>

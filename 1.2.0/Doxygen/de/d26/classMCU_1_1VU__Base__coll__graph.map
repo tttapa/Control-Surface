@@ -1,0 +1,10 @@
+<map id="VU_Base&lt; NumValues, Callback &gt;" name="VU_Base&lt; NumValues, Callback &gt;">
+<area shape="rect" id="node1" title="A MIDI input element that represents a Mackie Control Universal VU meter." alt="" coords="464,1057,637,1399"/>
+<area shape="rect" id="node2" href="$d1/df7/classMIDIInputElementChannelPressure.html" title="Class for objects that listen for incoming MIDI Channel Pressure events." alt="" coords="133,734,406,929"/>
+<area shape="rect" id="node5" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,1182,205,1274"/>
+<area shape="rect" id="node6" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="229,1028,440,1428"/>
+<area shape="rect" id="node3" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="182,453,357,663"/>
+<area shape="rect" id="node4" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="175,5,364,391"/>
+<area shape="rect" id="node7" href="$d2/de9/classIVU.html" title="An abstract interface for VU meters." alt="" coords="455,763,593,899"/>
+<area shape="rect" id="node8" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="617,712,831,951"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="ProgramChanger&lt; N &gt;" name="ProgramChanger&lt; N &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="375,1211,537,1296"/>
+<area shape="rect" id="Node000002" href="$de/de7/classSelectable.html" title=" " alt="" coords="5,763,163,908"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,921,100,977,115,1037,140,1095,157,1122,177,1146,220,1182,271,1209,325,1227,375,1239,374,1244,323,1233,269,1214,217,1187,173,1150,153,1125,136,1098,110,1038,94,978,86,922"/>
+<area shape="rect" id="Node000003" href="$d2/d97/classOutputBankableMIDIAddress.html" title="A base class for all MIDIOutputElements that can be banked." alt="" coords="187,773,413,898"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="319,897,361,1031,390,1109,421,1186,425,1195,421,1197,416,1188,385,1111,356,1033,314,899"/>
+<area shape="rect" id="Node000004" href="$d2/d4e/classOutputBankableMIDIAddress__Base.html" title="Class for keeping track of the active bank, and allows locking of the bank setting." alt="" coords="181,293,419,473"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="303,487,303,772,297,772,297,487"/>
+<area shape="rect" id="Node000005" href="$d9/d36/classOutputBank.html" title="A class for changing the address of BankableMIDIOutputs." alt="" coords="220,5,380,231"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="303,231,303,277,297,277,297,231"/>
+<area shape="rect" id="Node000006" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="437,523,579,1148"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="472,1149,466,1194,461,1194,466,1148"/>
+<area shape="rect" id="Node000007" href="$d7/d46/classMIDIChannelCable.html" title="A class for saving a MIDI channel and cable number." alt="" coords="603,683,781,988"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="664,989,635,1071,615,1112,593,1150,569,1178,541,1203,538,1199,565,1174,588,1146,611,1109,630,1069,659,987"/>
+</map>

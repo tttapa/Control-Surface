@@ -1,0 +1,23 @@
+<map id="VPotRing" name="VPotRing">
+<area shape="rect" id="Node000001" title="A MIDI input element that represents a Mackie Control Universal VPot ring." alt="" coords="561,1593,719,1839"/>
+<area shape="rect" id="Node000002" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="298,1361,553,1495"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="485,1505,563,1608,559,1611,481,1508"/>
+<area shape="rect" id="Node000003" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="241,1017,431,1263"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="381,1275,407,1360,402,1361,376,1277"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="213,588,405,968"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="327,982,330,1017,324,1017,322,982"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="5,173,184,358"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="136,370,198,524,225,587,220,589,194,526,132,372"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="208,5,411,525"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="312,525,312,572,307,572,307,525"/>
+<area shape="rect" id="Node000007" href="$da/dbd/structMCU_1_1VPotMatcher.html" title="MIDI Input matcher for Mackie Control Universal VPot LED rings." alt="" coords="459,1107,581,1173"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="512,1174,455,1346,450,1344,507,1172"/>
+<area shape="rect" id="Node000008" href="$d8/d6b/structTwoByteMIDIMatcher.html" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure (but n..." alt="" coords="435,735,613,821"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="526,834,523,1107,518,1107,521,834"/>
+<area shape="rect" id="Node000009" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="435,13,616,518"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="527,518,527,719,521,719,522,518"/>
+<area shape="rect" id="Node000010" href="$d2/dde/classInterfaces_1_1MCU_1_1IVPot.html" title=" " alt="" coords="577,1355,703,1501"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="643,1514,643,1593,637,1593,637,1514"/>
+<area shape="rect" id="Node000011" href="$d4/de4/structMCU_1_1VPotState.html" title="Struct that keeps track of the value and overload indicator of a Mackie Control Universal VPot LED ri..." alt="" coords="727,1325,852,1531"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="739,1532,713,1580,709,1578,734,1529"/>
+</map>

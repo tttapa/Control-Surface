@@ -1,0 +1,7 @@
+<map id="GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, FilterType, AnalogType, IncRes &gt;" name="GenericFilteredAnalog&lt; MappingFunction, Precision, FilterShiftFactor, FilterType, AnalogType, IncRes &gt;">
+<area shape="rect" id="Node000001" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="87,5,297,455"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="5,510,173,650"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,469,112,510,107,509,120,467"/>
+<area shape="rect" id="Node000003" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title="A class that reads and filters an analog input." alt="" coords="197,503,392,657"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="264,467,275,502,270,503,259,468"/>
+</map>

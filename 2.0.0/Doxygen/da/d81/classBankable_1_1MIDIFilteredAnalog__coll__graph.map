@@ -1,0 +1,21 @@
+<map id="MIDIFilteredAnalog&lt; BankAddress, Sender &gt;" name="MIDIFilteredAnalog&lt; BankAddress, Sender &gt;">
+<area shape="rect" id="Node000001" title="A class for potentiometers and faders that send MIDI events and can be added to a Bank." alt="" coords="361,1215,543,1475"/>
+<area shape="rect" id="Node000002" href="$d1/d55/classAH_1_1Updatable.html" title="A super class for object that have to be updated regularly." alt="" coords="291,1019,434,1145"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="391,1157,410,1214,405,1215,386,1158"/>
+<area shape="rect" id="Node000003" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title="A super class for object that have to be updated regularly." alt="" coords="231,585,425,951"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="352,964,358,1018,353,1019,347,965"/>
+<area shape="rect" id="Node000004" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="5,165,200,351"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="150,362,214,510,248,584,243,586,210,512,145,364"/>
+<area shape="rect" id="Node000005" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="225,5,431,511"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="331,511,331,568,325,568,325,511"/>
+<area shape="rect" id="Node000006" href="$d3/d6e/classAH_1_1FilteredAnalog.html" title=" " alt="" coords="499,1012,667,1152"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="550,1154,526,1201,522,1199,546,1151"/>
+<area shape="rect" id="Node000007" href="$da/d36/classAH_1_1GenericFilteredAnalog.html" title="FilteredAnalog base class with generic MappingFunction." alt="" coords="517,573,728,963"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="599,977,594,1012,589,1012,593,976"/>
+<area shape="rect" id="Node000008" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="455,155,571,361"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="537,360,577,549,579,556,574,558,572,550,532,361"/>
+<area shape="rect" id="Node000009" href="$d9/d74/classAH_1_1EMA.html" title=" " alt="" coords="595,131,789,385"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="677,386,654,557,649,557,672,385"/>
+<area shape="rect" id="Node000010" href="$da/df9/classAH_1_1Hysteresis.html" title=" " alt="" coords="813,136,1070,380"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="879,382,802,512,740,607,735,605,798,509,874,379"/>
+</map>

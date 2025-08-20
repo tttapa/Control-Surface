@@ -1,0 +1,28 @@
+<map id="NoteCCKPLEDPWM&lt; Type, BankSize &gt;" name="NoteCCKPLEDPWM&lt; Type, BankSize &gt;">
+<area shape="rect" id="Node000001" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="676,2165,863,2385"/>
+<area shape="rect" id="Node000002" href="$d5/dcd/classBankable_1_1NoteCCKPValue.html" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="591,1900,774,2100"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="721,2112,737,2164,732,2166,716,2114"/>
+<area shape="rect" id="Node000003" href="$d9/dc0/classBankableMatchingMIDIInputElement.html" title=" " alt="" coords="138,1590,374,1754"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="322,1764,354,1800,388,1833,438,1870,490,1903,592,1957,590,1962,488,1908,435,1874,385,1837,350,1803,318,1767"/>
+<area shape="rect" id="Node000004" href="$d5/dae/classMatchingMIDIInputElement.html" title="The MIDIInputElement base class is very general: you give it a MIDI message, and it calls the updateW..." alt="" coords="93,1312,309,1432"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="217,1445,244,1589,238,1590,212,1446"/>
+<area shape="rect" id="Node000005" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="106,1017,297,1263"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="204,1276,204,1312,199,1312,199,1276"/>
+<area shape="rect" id="Node000006" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="105,588,297,968"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="204,982,204,1017,199,1017,199,982"/>
+<area shape="rect" id="Node000007" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="5,173,184,358"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="119,371,164,587,159,588,114,372"/>
+<area shape="rect" id="Node000008" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="208,5,411,525"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="257,526,247,573,242,571,252,525"/>
+<area shape="rect" id="Node000009" href="$d2/dbf/classBankSettingChangeCallback.html" title="Callback class for Bankable objects that need to be notified when the active setting of their Bank ch..." alt="" coords="334,1339,533,1405"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="410,1418,306,1591,302,1589,405,1415"/>
+<area shape="rect" id="Node000010" href="$d4/d23/classDoublyLinkable.html" title=" " alt="" coords="399,1582,607,1762"/>
+<area shape="poly" id="edge10_Node000010_Node000009" title=" " alt="" coords="427,1405,421,1444,423,1485,434,1526,450,1566,445,1568,429,1528,417,1486,415,1443,421,1405"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="508,1568,504,1512,491,1457,478,1430,461,1407,465,1403,482,1428,496,1455,509,1511,513,1568"/>
+<area shape="rect" id="Node000011" href="$d8/d87/classInterfaces_1_1IValue.html" title="Abstract interface for MIDI input elements that receive and store a 7&#45;bit value." alt="" coords="631,1619,734,1725"/>
+<area shape="poly" id="edge11_Node000002_Node000011" title=" " alt="" coords="685,1739,685,1900,680,1900,680,1739"/>
+<area shape="rect" id="Node000012" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="759,1509,951,1835"/>
+<area shape="poly" id="edge12_Node000002_Node000012" title=" " alt="" coords="772,1836,745,1887,740,1885,767,1834"/>
+<area shape="rect" id="Node000013" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="798,1897,914,2103"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="826,2104,811,2150,806,2149,821,2102"/>
+</map>

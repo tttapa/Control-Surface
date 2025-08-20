@@ -1,0 +1,8 @@
+<map id="GenericNoteCCRange&lt; MIDIInput_t, RangeLen, Callback &gt;" name="GenericNoteCCRange&lt; MIDIInput_t, RangeLen, Callback &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="200,639,388,760"/>
+<area shape="rect" id="node2" href="$d2/df4/classNoteCCRange.html" title=" " alt="" coords="184,321,404,589"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,93,103,171"/>
+<area shape="rect" id="node4" href="$d7/dab/classINoteCCValue.html" title="Interface for NoteCCValue objects: provides getters for the velocity or controller values." alt="" coords="127,71,263,193"/>
+<area shape="rect" id="node5" href="$da/dcc/classNoteCCRangeEmptyCallback.html" title="A callback for NoteCCRange that doesn&#39;t do anything." alt="" coords="287,79,498,185"/>
+<area shape="rect" id="node6" href="$d0/d32/structAH_1_1Array.html" title=" " alt="" coords="523,5,737,259"/>
+</map>

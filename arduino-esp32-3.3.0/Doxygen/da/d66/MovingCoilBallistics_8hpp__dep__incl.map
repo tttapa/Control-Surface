@@ -1,0 +1,10 @@
+<map id="MovingCoilBallistics.hpp" name="MovingCoilBallistics.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="37,5,219,31"/>
+<area shape="rect" id="Node000002" href="$dc/de8/AudioVU_8hpp.html" title=" " alt="" coords="75,79,181,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,44,131,79,125,79,125,44"/>
+<area shape="rect" id="Node000003" href="$d4/dde/AudioVULEDs_8hpp.html" title=" " alt="" coords="5,152,144,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="113,117,85,153,81,150,109,113"/>
+<area shape="rect" id="Node000004" href="$db/dbf/Control__Surface_8h.html" title="The main header file that includes all Control&#45;Surface header files." alt="" coords="59,225,197,251"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="146,115,157,145,160,161,159,178,149,204,138,226,133,224,144,202,153,177,155,161,152,146,141,117"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="94,187,121,224,117,227,89,190"/>
+</map>

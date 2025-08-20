@@ -1,0 +1,19 @@
+<map id="NoteCCKPLED&lt; Type &gt;" name="NoteCCKPLED&lt; Type &gt;">
+<area shape="rect" id="Node000001" title="Generic base class for classes that listen for MIDI Note, Control Change and Key Pressure events on a..." alt="" coords="368,1732,533,1897"/>
+<area shape="rect" id="Node000002" href="$d5/dae/classMatchingMIDIInputElement.html" title=" " alt="" coords="197,1507,417,1627"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="350,1637,405,1731,401,1733,346,1640"/>
+<area shape="rect" id="Node000003" href="$d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events." alt="" coords="109,1156,299,1401"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="255,1413,288,1506,283,1507,250,1415"/>
+<area shape="rect" id="Node000004" href="$d8/d1a/classAH_1_1UpdatableCRTP.html" title=" " alt="" coords="105,651,297,1031"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="205,1044,206,1156,201,1156,200,1044"/>
+<area shape="rect" id="Node000005" href="$d4/d23/classDoublyLinkable.html" title="A class that can be inherited from to allow inserting into a DoublyLinkedList." alt="" coords="5,173,184,358"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="117,371,169,650,164,651,112,372"/>
+<area shape="rect" id="Node000006" href="$dd/d16/classDoublyLinkedList.html" title=" " alt="" coords="208,5,411,525"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="263,526,243,635,237,634,258,525"/>
+<area shape="rect" id="Node000007" href="$d8/d6b/structTwoByteMIDIMatcher.html" title="Matcher for MIDI messages with 2 data bytes, such as Note On/Off, Control Change, Key Pressure (but n..." alt="" coords="323,1236,501,1321"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="399,1322,336,1492,331,1490,394,1321"/>
+<area shape="rect" id="Node000008" href="$d7/d0f/classMIDIAddress.html" title="A type&#45;safe utility class for saving a MIDI address consisting of a 7&#45;bit address,..." alt="" coords="321,588,503,1093"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="415,1093,415,1220,409,1220,409,1093"/>
+<area shape="rect" id="Node000009" href="$d7/de2/structAH_1_1ExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="441,1464,557,1669"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="481,1670,472,1716,467,1715,476,1669"/>
+</map>

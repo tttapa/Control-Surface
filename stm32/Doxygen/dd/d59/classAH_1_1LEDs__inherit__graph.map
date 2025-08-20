@@ -1,0 +1,11 @@
+<map id="LEDs&lt; N &gt;" name="LEDs&lt; N &gt;">
+<area shape="rect" id="node1" title="A class for collections of LEDs that can display ranges." alt="" coords="489,5,623,171"/>
+<area shape="rect" id="node2" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title=" " alt="" coords="367,219,540,413"/>
+<area shape="rect" id="node9" href="$d9/d89/classAH_1_1DotBarDisplayLEDs.html" title="A class for LED bars." alt="" coords="565,226,753,406"/>
+<area shape="rect" id="node3" href="$d1/d29/classMCU_1_1VULEDsDriver.html" title="Small helper to display the VU meters on an LED bar display." alt="" coords="237,469,443,561"/>
+<area shape="rect" id="node6" href="$d6/d44/classNoteCCKPLEDBarDriver.html" title="Callback class that drives a LED dot/bar display based on a note or control change value." alt="" coords="468,461,668,568"/>
+<area shape="rect" id="node4" href="$db/d17/classMCU_1_1Bankable_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="5,616,240,796"/>
+<area shape="rect" id="node5" href="$df/d36/classMCU_1_1VULEDs.html" title="A MIDI input element that represents a Mackie Control Universal VU meter and displays its value using..." alt="" coords="263,623,430,789"/>
+<area shape="rect" id="node7" href="$d2/d0a/classBankable_1_1NoteCCKPLEDBar.html" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="466,623,657,789"/>
+<area shape="rect" id="node8" href="$d2/daa/classNoteCCKPLEDBar.html" title="Class that turns on a different number of LEDs depending on the received MIDI velocity,..." alt="" coords="681,638,865,774"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="NoteCCLEDPWM&lt; NumLEDs &gt;" name="NoteCCLEDPWM&lt; NumLEDs &gt;">
+<area shape="rect" id="node1" title="Callback for Note or CC range or value input that displays the value to a PWM LED." alt="" coords="11,175,233,281"/>
+<area shape="rect" id="node2" href="$de/d07/structSimpleNoteCCValueCallback.html" title="A callback for NoteCCRange with an action that can be implemented by the user." alt="" coords="5,5,239,127"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="Control_Surface_" name="Control_Surface_">
+<area shape="rect" id="Node000001" title="This class ensures initialization, updating, and interaction between all other classes,..." alt="" coords="89,1527,315,2227"/>
+<area shape="rect" id="Node000002" href="$d6/d72/classMIDI__Sender.html" title=" " alt="" coords="5,639,201,1479"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,1492,162,1526,157,1527,153,1493"/>
+<area shape="rect" id="Node000003" href="$d0/dc3/structTrueMIDI__SinkSource.html" title="A struct that is both a TrueMIDI_Sink and a TrueMIDI_Source." alt="" coords="225,1026,376,1091"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="298,1105,247,1527,242,1526,293,1105"/>
+<area shape="rect" id="Node000004" href="$d9/db6/classMIDI__Sink.html" title="Receives MIDI messages from a MIDI pipe." alt="" coords="53,65,292,531"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="217,544,298,1025,293,1026,211,545"/>
+<area shape="rect" id="Node000005" href="$df/d5b/classMIDI__Source.html" title="Class that can send MIDI messages to a MIDI pipe." alt="" coords="316,5,539,591"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="379,605,309,1026,303,1025,374,604"/>
+</map>
