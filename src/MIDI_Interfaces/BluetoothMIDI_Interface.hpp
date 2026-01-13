@@ -57,7 +57,7 @@ END_CS_NAMESPACE
 #endif
 #endif
 
-#elif defined(ARDUINO_RASPBERRY_PI_PICO_W)
+#elif (defined(ARDUINO_RASPBERRY_PI_PICO_W) || defined(ARDUINO_RASPBERRY_PI_PICO_2W))
 // Pico W
 #if ENABLE_BLE
 #include "BLEMIDI/BTstackBackgroundBackend.hpp"

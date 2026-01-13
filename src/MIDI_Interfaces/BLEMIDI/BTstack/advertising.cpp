@@ -1,4 +1,4 @@
-#if defined(ARDUINO_RASPBERRY_PI_PICO_W) && ENABLE_BLE
+#if (defined(ARDUINO_RASPBERRY_PI_PICO_W) || defined(ARDUINO_RASPBERRY_PI_PICO_2W)) && ENABLE_BLE
 
 #include <btstack.h>
 
