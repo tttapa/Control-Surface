@@ -67,7 +67,7 @@ jobs:
           [ -d Adafruit-GFX-Library ] || git clone https://github.com/adafruit/Adafruit-GFX-Library.git --depth=1 &
           [ -d Adafruit_SSD1306 ] || git clone https://github.com/adafruit/Adafruit_SSD1306.git --depth=1 &
           [ -d Adafruit_BusIO ] || git clone https://github.com/adafruit/Adafruit_BusIO.git --depth=1 &
-          [ -d FastLED ] || git clone https://github.com/FastLED/FastLED.git --depth=1 &
+          [ -d FastLED ] || git clone https://github.com/FastLED/FastLED.git --depth=1 --branch 3.10.3 &
           [ -d MIDIUSB ] || git clone https://github.com/arduino-libraries/MIDIUSB.git --depth=1 &
           [ -d Audio ] || git clone https://github.com/PaulStoffregen/Audio.git --depth=1 &
           [ -d ArduinoBLE ] || git clone https://github.com/arduino-libraries/ArduinoBLE.git --depth=1 &
