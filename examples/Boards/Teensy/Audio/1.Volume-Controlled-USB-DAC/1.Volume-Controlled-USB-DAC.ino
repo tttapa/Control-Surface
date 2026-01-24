@@ -38,6 +38,8 @@
  * https://github.com/tttapa/Control-Surface 
  */
 
+#include <Audio.h>
+// Include Audio.h before Control Surface
 #include <Control_Surface.h> // Include the Control Surface library
 
 AudioInputUSB audioInputUSB; // The audio input from the USB connection

@@ -150,7 +150,7 @@
 #include <AH/Containers/ArrayHelpers.hpp>
 
 // --------------------------------- Audio ---------------------------------- //
-#ifdef TEENSY_AUDIOUSB_ENABLED
+#if defined(TEENSY_AUDIOUSB_ENABLED) && defined(AudioInterrupts) // defined by Audio.h
 #include <Audio/AudioVU.hpp>
 #include <Audio/AudioVULEDs.hpp>
 #include <Audio/VolumeControl.hpp>

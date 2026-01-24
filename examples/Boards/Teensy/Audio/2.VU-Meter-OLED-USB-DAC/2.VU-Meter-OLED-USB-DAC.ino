@@ -58,6 +58,8 @@
  * https://github.com/tttapa/Control-Surface
  */
 
+#include <Audio.h>
+// Include Audio.h before Control Surface
 #include <Control_Surface.h> // Include the Control Surface library
 // Include the display interface you'd like to use
 #include <Display/DisplayInterfaces/DisplayInterfaceSSD1306.hpp>
